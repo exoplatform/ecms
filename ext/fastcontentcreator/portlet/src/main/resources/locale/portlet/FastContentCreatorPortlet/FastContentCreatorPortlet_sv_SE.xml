@@ -27,14 +27,12 @@
       <UIFCCWorkspaceFormSelectBox>Välj arbetsyta</UIFCCWorkspaceFormSelectBox>
       <UIFCCTemplateField>Mall optioner</UIFCCTemplateField>
       <UIFCCLocationFormInputAction>Plats att spara</UIFCCLocationFormInputAction>
-      <UIFCCLocationFormStringInput/>
       <UIFCCTemplateFormSelectBox>Välj mall</UIFCCTemplateFormSelectBox>
       <UIFCCSaveFormStringInput>Option Spara knappen</UIFCCSaveFormStringInput>
       <UIFCCMessageFormTextareaInput>Option Spara meddelande</UIFCCMessageFormTextareaInput>
       <UIFCCRedirectFormCheckboxInput>Omdirigering:</UIFCCRedirectFormCheckboxInput>
       <UIFCCRedirectPathFormStringInput>Omdirigering sökväg:</UIFCCRedirectPathFormStringInput>
       <UIFCCActionField>Åtgärder</UIFCCActionField>
-      <UIFCCActionList/>
     </label>
     <msg>
       <save-successfully>Sparats till portlet preferenser.</save-successfully>

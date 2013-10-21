@@ -10,7 +10,6 @@
       <name>Name</name>
       <action>Hinzufügen</action>
     </header>
-    <action/>
     <info>
       <child-not-found>Unterknoten nicht gefunden!</child-not-found>
     </info>

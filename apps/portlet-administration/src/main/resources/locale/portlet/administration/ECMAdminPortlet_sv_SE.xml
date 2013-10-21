@@ -728,6 +728,10 @@
       <label>Namn</label>
 <action>Åtgärder</action>
     </header>
+    <title>
+      <Edit>Redigera</Edit>
+      <Delete>Ta bort</Delete>
+    </title>
     <action>
       <AddAction>Lägg till åtgärdstyp</AddAction>
     </action>
@@ -845,6 +849,10 @@
   </EditPopup>
 
 <UITabList>
+                  <title>
+                    <Edit>Redigera</Edit>
+                    <Delete>Ta bort</Delete>
+                  </title>       
  <header>
   <tabName>Fliken</tabName>
   <localizeButtons>Beskrivning</localizeButtons>
@@ -875,6 +883,9 @@
 </UIViewPermissionList>
 
 <UIViewPermissionList>
+                         <title>
+                           <Delete>Ta bort</Delete>
+                         </title>
  <header>
 <friendlyPermission>Behörighet</friendlyPermission>
      <action>Åtgärd</action>
@@ -1565,6 +1576,10 @@
 </UITabPane>
 
   <UICLVTemplateList>
+    <title>
+      <Edit>Redigera</Edit>
+      <Delete>Ta bort</Delete>
+    </title>
     <header>
       <title>Namn</title>
       <action>Åtgärd</action>
@@ -1589,6 +1604,10 @@
       <action>Åtgärd</action>
       <template>Mall</template>
     </header>
+    <title>
+      <Edit>Redigera</Edit>
+      <Delete>Ta bort</Delete>
+    </title>
     <action>
       <AddTemplate>Lägg till mall</AddTemplate>
 <Edit>Redigera</Edit>
@@ -1962,6 +1981,11 @@
       <tagHTML>Tag stil</tagHTML>
       <action>Åtgärd</action>
     </header>
+    <title>
+      <Edit>Redigera</Edit>
+      <Delete>Ta bort</Delete>
+      <Remove>Ta bort</Remove>
+    </title>
     <action>
       <AddStyle>Lägga till stil</AddStyle>
     </action>
@@ -2431,10 +2455,10 @@
     <title>Lägg till behörighet</title>
     <action>
       <Save>Spara</Save>
+      <Add>Lägg till</Add>
     </action>
     <label>
       <userOrGroup>Medlemskap:</userOrGroup>
-      <permission/>
     </label>
     <msg>
       <userOrGroup-alreadyExists>Detta medlemskap finns redan. Välj en annan.</userOrGroup-alreadyExists>

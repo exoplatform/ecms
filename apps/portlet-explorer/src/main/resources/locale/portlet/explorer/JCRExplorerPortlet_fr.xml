@@ -104,6 +104,24 @@
 
   <!--
   #############################################################################
+  #             org.exoplatform.ecm.webui.component.explorer.UIDrivesArea  #
+  #############################################################################
+  -->
+  <UIDrivesBrowser>
+    <title>
+      <PersonalDrives>Lecteurs personnels</PersonalDrives>
+      <GroupDrives>Lecteurs de vos groupes</GroupDrives>
+      <GeneralDrives>Lecteurs principaux</GeneralDrives>
+    </title>
+    <msg>
+      <no-view-found>Il n'y a pas de vue disponible par rapport à vos droits d'accès sur le lecteur '{0}'.</no-view-found>
+      <access-denied>Accès refusé. Vous n'avez peut-être pas les droits suffisants pour accéder à l'espace de stockage du lecteur '{0}'.</access-denied>
+      <workspace-not-exist>Le lecteur '{0}' a été sauvegardé dans un espace de stockage inconnu. Veuillez reconfigurer le lecteur.</workspace-not-exist>
+    </msg>
+  </UIDrivesBrowser>
+
+  <!--
+  #############################################################################
   #             org.exoplatform.ecm.webui.component.explorer.UITreeExplorer    #
   #############################################################################
   -->
@@ -650,7 +668,6 @@
       <remove-property>Etes-vous sûr de vouloir supprimer cette propriété?</remove-property>
     </confirm>
     <header>
-      <icon />
       <name>Nom</name>
       <multiValue>Multi-valuée</multiValue>
       <value>Valeur</value>
@@ -1457,7 +1474,7 @@
       <filetype-error>Import impossible. Le fichier envoyé est probablement corrompu.</filetype-error>
       <mimetype-invalid>Seuls les fichier xml ou zip sont supportés pour l'import.</mimetype-invalid>
       <access-denied>Accès refusé. Vous n'avez pas les droits suffisants pour importer à cet endroit.</access-denied>
-      <constraint-violation-exception>Impossible d'importer. Le type de noeud '{0}' n'est pas autorisé</constraint-violation-exception>
+      <constraint-violation-exception>Impossible d'importer. Le type de noeud '{0}' n'est pas autorisé.</constraint-violation-exception>
       <item-exists-exception>Un noeud entrant référençable a le même UUID qu'un noeud existant dans l'espace de stockage.</item-exists-exception>
     </msg>
   </UIImportNode>
@@ -3019,7 +3036,6 @@
   </UIJCRExplorerPortlet>
   <UIDrivesArea>
     <DrivesArea>
-      <allDrives>Cliquez sur le bouton "Afficher les Lecteurs" sur la barre d'action pour afficher / cacher la liste des lecteurs.</allDrives>
       <ShowDrives>Afficher les Lecteurs</ShowDrives>
     </DrivesArea>
   </UIDrivesArea>

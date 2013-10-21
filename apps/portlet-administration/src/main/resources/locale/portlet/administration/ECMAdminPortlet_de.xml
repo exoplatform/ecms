@@ -76,7 +76,7 @@
       </info>
     </tab>
     <msg>
-      <not-exist-tree>Der Kategorienbaum ist nicht vorhanden.</not-exist-tree>
+      <not-exist-tree>Der Kategoriebaum ist nicht vorhanden.</not-exist-tree>
     </msg>
   </UITaxonomyTreeContainer>
   
@@ -157,7 +157,7 @@
       <Save>Speichern</Save>
     </action>
     <msg>
-      <name-not-allowed>Leerer Name oder Sonderzeichen sind in den Aktionsnamen nicht zulässig.</name-not-allowed>
+      <name-not-allowed>Ein leerer Name oder Sonderzeichen sind in den Aktionsnamen nicht zulässig.</name-not-allowed>
       <path-invalid>Dieser Pfad ist ungültig.</path-invalid>
       <taxonomy-existed>Der Kategorienbaum ist bereits vorhanden.</taxonomy-existed>
       <taxonomy-node-existed>Der Kategorie-Knoten ist bereits vorhanden.</taxonomy-node-existed>
@@ -220,7 +220,7 @@
   </UINamespaceList>
   <NamespacePopup>
     <title>
-      <UINamespaceForm>Neuen Namensraum-URI registrieren</UINamespaceForm>
+      <UINamespaceForm>Neuen Namensraum registrieren</UINamespaceForm>
     </title>
   </NamespacePopup>
   <!--
@@ -315,7 +315,7 @@
       <name>Elementname</name>
       <type>Typ</type>
       <description>Beschreibung</description>
-      <isMixin>Is Mixin Type</isMixin>
+      <isMixin>Ist vom Typ Mixin</isMixin>
       <orderable>Sortierbare Unterknoten</orderable>
     </header>
     <info>
@@ -397,7 +397,7 @@
       <viewNonDocument>Alle Knotentypen anzeigen:</viewNonDocument>
       <viewSideBar>Seitenleiste anzeigen:</viewSideBar>
       <permissions>Berechtigungen:</permissions>
-      <showHiddenNode>Ausgeblendeten Knoten anzeigen:</showHiddenNode>
+      <showHiddenNode>Ausgeblendete Knoten anzeigen:</showHiddenNode>
       <allowCreateFolders>Ordnererstellung erlauben:</allowCreateFolders>
       <Admin>Admin:</Admin>
       <Categories>Kategorien:</Categories>
@@ -507,7 +507,7 @@
         <childNodeDefinition>Unterknoten</childNodeDefinition>
         <superTypeTab>Supertypen</superTypeTab>
         <DefaultTypeTab>Standard-Primärtyp</DefaultTypeTab>
-        <RequiredTypeTab>Benötigten Primärtyp</RequiredTypeTab>
+        <RequiredTypeTab>Benötigter Primärtyp</RequiredTypeTab>
         <Contraints>Einschränkungen</Contraints>
       </label>
     </tab>
@@ -519,27 +519,27 @@
       <nodeTypeName>Knotentypname</nodeTypeName>
       <mixinType>Mixin</mixinType>
       <hasOrderableChildNodes>Sortierbare Unterknoten</hasOrderableChildNodes>
-      <primaryItemName>Primäre Elementname</primaryItemName>
+      <primaryItemName>Primärer Elementname</primaryItemName>
       <superTypes>Supertypen</superTypes>
       <propertyname>Definitionsname</propertyname>
-      <requiredType>Benötigten Typ</requiredType>
+      <requiredType>Benötigter Typ</requiredType>
       <multiple>Ist mehrwertig</multiple>
       <mandatory>Ist erforderlich</mandatory>
-      <autoCreated>Wird automatisch erstellt</autoCreated>
+      <autoCreated>Ist automatisch erzeugt</autoCreated>
       <parentversion>Auf Vorgängerversion</parentversion>
       <protected>Ist geschützt</protected>
       <constraints>Werte</constraints>
       <UIFormTableInputSet>UIFormTableInputSet</UIFormTableInputSet>
-      <sameNameSiblings>Is same name sibling</sameNameSiblings>
+      <sameNameSiblings>Ist ein Geschwisterobjekt mit gleichem Namen</sameNameSiblings>
       <childNamespace>Namensraum</childNamespace>
       <childMandatory>Ist erforderlich</childMandatory>
-      <childAutocreated>Wird automatisch erstellt</childAutocreated>
+      <childAutocreated>Ist automatisch erzeugt</childAutocreated>
       <childParentversion>Auf Vorgängerversion</childParentversion>
       <childProtected>Ist geschützt</childProtected>
       <childNodename>Definitionsname</childNodename>
       <requiredPrimaryType>Benötigter Primärtyp</requiredPrimaryType>
       <defaultPrimaryType>Standard-Primärtyp</defaultPrimaryType>
-      <valueconstraints>Werteinschrenkungen</valueconstraints>
+      <valueconstraints>Werteinschränkungen</valueconstraints>
     </label>
     <action>
       <Cancel>#{word.cancel}</Cancel>
@@ -561,7 +561,7 @@
     </action>
     <msg>
       <register-successfully>Der Knotentyp "{0}" wurde erfolgreich registriert.</register-successfully>
-      <supertype-is-madatory>Der Supertyp wird benötigt, wenn Sie einen neuen Knotentyp registrieren. Bitte wählen Sie mindestens ein Supertyp aus.</supertype-is-madatory>
+      <supertype-is-madatory>Der Supertyp wird benötigt, wenn Sie einen neuen Knotentyp registrieren. Bitte wählen Sie mindestens einen Supertyp aus.</supertype-is-madatory>
       <register-failed>Die Knotentyp-Registrierung ist fehlgeschlagen. Entweder dieser Knotentyp ist bereits vorhanden oder der Supertyp ist ungültig.</register-failed>
       <nodeType-name>Der Knotentypname wird benötigt.</nodeType-name>
       <fileName-invalid>Der Dateiname enthält ungültigen Zeichen.</fileName-invalid>
@@ -580,8 +580,8 @@
       </label>
     </tab>
     <msg>
-      <property-name>Der Eigenschaftsdefinitionname war ungültig.</property-name>
-      <not-supported-value-constraints>Dieser benötigte Typ unterstützt nicht Werteinschränkungen.</not-supported-value-constraints>
+      <property-name>Der Eigenschaftsdefinitionsname war ungültig.</property-name>
+      <not-supported-value-constraints>Dieser benötigte Typ unterstützt keine Werteinschränkungen.</not-supported-value-constraints>
     </msg>
   </UIPropertyDefinitionForm>
   <UIChildNodeDefinitionForm>
@@ -680,7 +680,7 @@
   <UINodeTypeImport>
     <action>
       <Cancel>#{word.cancel}</Cancel>
-      <Import>Importien</Import>
+      <Import>Importieren</Import>
       <Upload>Erneut Hochladen</Upload>
     </action>
     <header>
@@ -688,7 +688,7 @@
       <label>Knotenname</label>
       <input>Aktion</input>
     </header>
-    <title>zu importierenden Knotentyp auswählen</title>
+    <title>Zu importierenden Knotentyp auswählen</title>
     <msg>
       <no-nodetype-registered>Es gibt keine registrierten Knotentypen.</no-nodetype-registered>
       <nodetype-registered>Registrierung erfolgreich.</nodetype-registered>
@@ -728,6 +728,10 @@
       <label>Name</label>
 <action>Aktionen</action>
     </header>
+    <title>
+      <Edit>Bearbeiten</Edit>
+      <Delete>Löschen</Delete>
+    </title>
     <action>
       <AddAction>Aktionstyp hinzufügen</AddAction>
     </action>
@@ -789,7 +793,7 @@
       <UIOthersTemplateContainer>Andere</UIOthersTemplateContainer>
   <UIActionScriptContainer>Aktion</UIActionScriptContainer>
   <UIWidgetScriptContainer>Widgets</UIWidgetScriptContainer>
-<UIInterceptorScriptContainer>Interceptors</UIInterceptorScriptContainer>
+<UIInterceptorScriptContainer>Abfänger</UIInterceptorScriptContainer>
 
 <nodeTypeDefinition>Knotentyp</nodeTypeDefinition>
       <propertyDefinition>Eigenschaft</propertyDefinition>
@@ -845,6 +849,10 @@
   </EditPopup>
 
 <UITabList>
+                  <title>
+                    <Edit>Bearbeiten</Edit>
+                    <Delete>Löschen</Delete>
+                  </title>       
  <header>
   <tabName>Reiter</tabName>
   <localizeButtons>Beschreibung</localizeButtons>
@@ -875,6 +883,9 @@
 </UIViewPermissionList>
 
 <UIViewPermissionList>
+                         <title>
+                           <Delete>Löschen</Delete>
+                         </title>
  <header>
 <friendlyPermission>Berechtigungen</friendlyPermission>
      <action>Aktion</action>
@@ -954,7 +965,7 @@
       <viewPermissions>Berechtigungen anzeigen</viewPermissions>
       <viewProperties>Eigenschaften anzeigen</viewProperties>
       <manageVersions>Versionen verwalten</manageVersions>
-      <manageAuditing>Audit</manageAuditing>
+      <manageAuditing>Auditierung verwalten</manageAuditing>
       <managePublications>Verwalten der Veröffentlichung</managePublications>
       <manageCategories>Kategorien verwalten</manageCategories>
       <manageRelations>Beziehungen verwalten</manageRelations>
@@ -965,8 +976,8 @@
       <showJCRStructure>JCR Struktur anzeigen</showJCRStructure>
       <watchDocument>Dokument folgen</watchDocument>
       <taggingDocument>Dokument taggen</taggingDocument>
-      <viewMetadatas>Metadaten</viewMetadatas>
-      <overloadThumbnail>Overload Thumbnail</overloadThumbnail>
+      <viewMetadatas>Metadaten anzeigen</viewMetadatas>
+      <overloadThumbnail>Miniaturansicht überladen</overloadThumbnail>
       <manageHidden>Inhalt ein-/ausblenden</manageHidden>
       <comment>Kommentar</comment>
       <vote>Abstimmen</vote>  
@@ -976,7 +987,7 @@
       <publicationApproveContent>Inhalt genehmigen</publicationApproveContent>
       <publicationPublish>Veröffentlichen</publicationPublish>
 <contentNavigation>Inhaltsnavigation</contentNavigation>
-<addSymLink>Add Symlink</addSymLink>
+<addSymLink>Symbolische Verknüpfung hinzufügen</addSymLink>
     </label>
     <action>
       <Save>#{word.save}</Save>      
@@ -1020,7 +1031,7 @@
  <title>
   <SelectUser>Benutzer auswählen</SelectUser>
 <SelectMember>Mitglied auswählen</SelectMember>
-<AddAny>Alle</AddAny>
+<AddAny>Jeder</AddAny>
  </title>
 </tab_permission>
   <!--
@@ -1265,7 +1276,7 @@
       <Cancel>#{word.cancel}</Cancel>
     </action>
     <label>
-      <parentPath>Parent:</parentPath>
+      <parentPath>Übergeordnet:</parentPath>
       <taxonomyName>Kategoriename:</taxonomyName>
     </label>
     <msg>
@@ -1361,7 +1372,7 @@
       <read>Lesen</read>
       <add_node>Knotenrecht hinzufügen</add_node>
       <set_property>Eigenschaftsrecht festlegen</set_property>
-      <remove>Entfernen</remove>
+      <remove>Recht Entfernen</remove>
     </label>
     <title>Eine Berechtigung auf diesen Knoten hinzufügen</title>
     <action>
@@ -1371,7 +1382,7 @@
     </action>
     <msg>
       <checkbox-require>Bitte wählen Sie mindestens eine Berechtigung.</checkbox-require>
-      <userOrGroup-required>Bitte wählen Sie einen Benutzer oder eine Gruppe aus, bevor die Berechtigung zu speichern.</userOrGroup-required>
+      <userOrGroup-required>Bitte wählen Sie einen Benutzer oder eine Gruppe aus, bevor Sie die Berechtigung speichern.</userOrGroup-required>
       <not-change-permission>Ihnen fehlt die Berechtigung, eine Berechtigung hinzuzufügen.</not-change-permission>
       <access-denied>Zugriff verweigert. Diese Berechtigung kann nicht entfernt werden.</access-denied>
     </msg>
@@ -1432,7 +1443,7 @@
   <permission>
     <title>
       <SelectUser>Benutzer auswählen</SelectUser>
-      <SelectMember>Rolle auswählen</SelectMember>
+      <SelectMember>Mitgliedschaft auswählen</SelectMember>
       <AddAny>Jeder</AddAny>
     </title>
   </permission>
@@ -1445,7 +1456,7 @@
     <title>
       <UIGroupSelector>Benutzer auswählen</UIGroupSelector>
       <UIPermissionSelector>Mitglied auswählen</UIPermissionSelector>
-      <UIGroupMemberSelector>Rolle auswählen</UIGroupMemberSelector>
+      <UIGroupMemberSelector>Mitgliedschaft auswählen</UIGroupMemberSelector>
     </title>
   </SelectUserOrGroup>
   <UIGroupSelector>
@@ -1543,7 +1554,7 @@
       <AddNew>Vorlage hinzufügen</AddNew>
     </action>
     <msg>
-      <confirm-delete>Möchten Sie wirklich löschen ?</confirm-delete>
+      <confirm-delete>Möchten Sie das Element wirklich löschen ?</confirm-delete>
       <access-denied>Zugriff verweigert. Ihnen fehlt die Berechtigung, diese Funktion zu verwenden.</access-denied>
       <editing-template>Zugriff verweigert. Sie können diese Vorlage nicht gleichzeitig löschen und bearbeiten.</editing-template>
       <template-not-exist>Die Vorlage, die Sie löschen möchten, existiert nicht.</template-not-exist>
@@ -1560,11 +1571,15 @@
  <title>
  <ContentTemplateContainer>Inhalt</ContentTemplateContainer>
 <CateTemplateContainer>Navigation</CateTemplateContainer>
-<PageTemplateContainer>Paginierung</PageTemplateContainer>
+<PageTemplateContainer>Paginator</PageTemplateContainer>
  </title>
 </UITabPane>
 
   <UICLVTemplateList>
+    <title>
+      <Edit>Bearbeiten</Edit>
+      <Delete>Löschen</Delete>
+    </title>
     <header>
       <title>Name</title>
       <action>Aktion</action>
@@ -1589,6 +1604,10 @@
       <action>Aktion</action>
       <template>Vorlage</template>
     </header>
+    <title>
+      <Edit>Bearbeiten</Edit>
+      <Delete>Löschen</Delete>
+    </title>
     <action>
       <AddTemplate>Vorlage hinzufügen</AddTemplate>
 <Edit>Bearbeiten</Edit>
@@ -1688,7 +1707,7 @@
 </UICLVTemplateForm_CateTemplateContainer>
 <UICLVTemplateForm>
   <label>
-    <paginators>Paginierung</paginators>
+    <paginators>Paginator</paginators>
 <list>Inhalt</list>
 <navigation>Navigation</navigation>
   </label>
@@ -1714,7 +1733,7 @@
   </TemplatePermission>
   <TemplateContainerPopup>
     <title>
-      <UITemplateForm>Formular</UITemplateForm>
+      <UITemplateForm>Vorlagen Formular</UITemplateForm>
     </title>
   </TemplateContainerPopup>
   <ViewForm>
@@ -1801,7 +1820,7 @@
       <action>Aktionen</action>
     </header>
     <msg>
-      <undeletable>Sie können "{0}" nicht löschen, da es die Standardeinstellung ist.</undeletable>
+      <undeletable>Sie können das Element "{0}" nicht löschen, da es die Standardeinstellung ist.</undeletable>
       <confirm-delete>Möchten Sie dieses Dialogfeld wirklich löschen?</confirm-delete>
     </msg>
     <action>
@@ -1824,8 +1843,8 @@
       <action>Aktionen</action>
     </header>
     <msg>
-      <undeletable>"{0}" kann nicht gelöscht werden, da es die Standardeinstellung ist.</undeletable>
-      <confirm-delete>Möchten Sie wirklich löschen?</confirm-delete>
+      <undeletable>Element "{0}" kann nicht gelöscht werden, da es die Standardeinstellung ist.</undeletable>
+      <confirm-delete>Möchten Sie das Element wirklich löschen?</confirm-delete>
     </msg>
     <action>
       <title>
@@ -1891,7 +1910,7 @@
     <header>
       <name>Name</name>
       <type>Typ</type>
-      <statement>Statement</statement>
+      <statement>Aussage/Anweisung</statement>
       <permission>Berechtigungen</permission>
       <action>Aktionen</action>
     </header>
@@ -1912,7 +1931,7 @@
     <label>
       <name>Abfragename</name>
       <type>Abfragetyp</type>
-      <statement>Statement</statement>
+      <statement>Aussage/Anweisung</statement>
       <cache>Cache-Ergebnisse aktivieren</cache>
       <permissions>Berechtigungen</permissions>
       <PermissionButton>UIQueriesForm</PermissionButton>
@@ -1923,10 +1942,10 @@
     </action>
     <msg>
       <permission-require>Berechtigungen auswählen.</permission-require>
-      <name-invalid>The Name field cannot contain special characters.</name-invalid>
-      <name-existing>This query name already exists. Please select another one.</name-existing>
-      <invalid-query>The query is invalid. Please check your query statement.</invalid-query>
-      <access-denied>Access denied. You do not have permission to perform this operation.</access-denied>
+      <name-invalid>Das Feld Name darf keine Sonderzeichen enthalten.</name-invalid>
+      <name-existing>Deiser Abfragename existiert bereits. Bitte einen anderen wählen.</name-existing>
+      <invalid-query>Die Abfrage ist ungültig. Bitte überprüfen Sie Ihre Abfrageanweisung.</invalid-query>
+      <access-denied>Zugriff verweigert. Sie haben für diese Funktion keine Berechtigung.</access-denied>
     </msg>
   </UIQueriesForm>
   <AddQueryForm>
@@ -1962,29 +1981,34 @@
       <tagHTML>Stil des Tags</tagHTML>
       <action>Aktion</action>
     </header>
+    <title>
+      <Edit>Bearbeiten</Edit>
+      <Delete>Löschen</Delete>
+      <Remove>Entfernen</Remove>
+    </title>
     <action>
       <AddStyle>Stil hinzufügen</AddStyle>
     </action>
   </UITagStyleList>
   <UITagStyleForm>
     <label>
-      <styleName>Style Name:</styleName>
+      <styleName>Stil-Name:</styleName>
       <documentRange>Anzahl der Vorkommen:</documentRange>
-      <styleHTML>HTML Style:</styleHTML>
+      <styleHTML>HTML-Stil:</styleHTML>
     </label>
     <action>
       <UpdateStyle>Aktualisieren</UpdateStyle>
       <Cancel>#{word.cancel}</Cancel>
     </action>
     <msg>
-      <range-validator>The range is invalid. The format must be: a..b, among which a, b are positive integers. You can use * instead of b to indicate that the range is unlimited.</range-validator>
+      <range-validator>Der Bereich ist ungültig. Das Format muss wie folgt sein: a...b, wobei a, b positive ganze Zahlen sein müssen. Sie können * anstatt von b verwenden um anzuzeigen das der Bereich endlos ist.</range-validator>
       <error-update>Aktualisierung fehlgeschlagen. Ihre Informationen sind ungültig.</error-update>
       <item-not-existing>Die Änderungen auf diesem Tag können nicht gespeichert werden, da dieser Tag nicht mehr in der Datenbank existiert.</item-not-existing>
     </msg>
   </UITagStyleForm>
   <FolksonomyPopup>
     <title>
-      <UITagStyleForm>Tag-Stil-Konfiguration bearbeiten</UITagStyleForm>
+      <UITagStyleForm>Tag-Stil Konfiguration bearbeiten</UITagStyleForm>
     </title>
   </FolksonomyPopup>
   <!--
@@ -2032,7 +2056,7 @@
   -->
   <UIFormInputSetWithAction>
     <msg>
-      <confirm-delete>Möchten Sie wirklich löschen?</confirm-delete>
+      <confirm-delete>Möchten Sie das Element wirklich löschen?</confirm-delete>
     </msg>
   </UIFormInputSetWithAction>
   <template>
@@ -2103,7 +2127,7 @@
   </step2>
   <step3>
     <title>
-      <SelectQueryHandler>Select Query Handler</SelectQueryHandler>
+      <SelectQueryHandler>Abfrage-Handler wählen</SelectQueryHandler>
     </title>
   </step3>
   <UIDrivePermissionSelector>
@@ -2191,7 +2215,7 @@
   </UITaxonomyTreeMainForm>
   <UITaxonomyWorkingArea>
   <msg>
-  <exist>Dieser Knotenbaum ist bereits vorhanden.</exist>
+  <exist>Dieser Baumknoten ist bereits vorhanden.</exist>
   </msg>
   </UITaxonomyWorkingArea>
 
@@ -2249,7 +2273,7 @@
 </UIECMAdminControlPanel>
 <UIUnLockForm>
     <label>
-      <name>Path Node</name>      
+      <name>Pfad zum Knoten</name>      
       <permissions>Berechtigungen</permissions>
       <PermissionButton>UI Unlock Form</PermissionButton>
     </label>
@@ -2431,10 +2455,10 @@
     <title>Berechtigung hinzufügen</title>
     <action>
       <Save>Speichern</Save>
+      <Add>Hinzufügen</Add>
     </action>
     <label>
-      <userOrGroup>Rollen:</userOrGroup>
-      <permission/>
+      <userOrGroup>Mitgliedschaften:</userOrGroup>
     </label>
     <msg>
       <userOrGroup-alreadyExists>Diese Rolle ist bereits vorhanden. Bitte wählen Sie eine andere.</userOrGroup-alreadyExists>
@@ -2496,7 +2520,7 @@
 
 <UIDriveForm>
 <label>
-<allowNodeTypesOnTree>Allowance nodetype on left tree:</allowNodeTypesOnTree>
+<allowNodeTypesOnTree>Zulässiger Knotentyp auf linkem Baum:</allowNodeTypesOnTree>
 </label>
 </UIDriveForm>
 <DriveInputSet>

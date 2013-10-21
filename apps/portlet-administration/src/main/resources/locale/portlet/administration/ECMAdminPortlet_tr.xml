@@ -8,29 +8,29 @@
   <UIECMAdminControlPanel>
     <tab>
       <label>
-        <Templates>Templates</Templates>
-        <Explorer>Explorer</Explorer>
-        <Repository>Repository</Repository>
-        <Advanced>Advanced</Advanced>
+        <Templates>Şablonlar</Templates>
+        <Explorer>Gezgin</Explorer>
+        <Repository>Depo</Repository>
+        <Advanced>Gelişmiş</Advanced>
       </label>
     </tab>    
     <label>     
       <UITaxonomyManagerTrees>Kategoriler</UITaxonomyManagerTrees>
-      <UIMetadataManager>Metadata</UIMetadataManager>
-      <UINamespaceManager>Namespaces</UINamespaceManager>
-      <UINodeTypeManager>Node Types</UINodeTypeManager>
-      <UITemplatesManager>Documents</UITemplatesManager>
-   <UICLVTemplatesManager>List</UICLVTemplatesManager>
-      <UIViewManager>Views</UIViewManager>
-      <UIDriveManager>Drives</UIDriveManager>
-      <UIQueriesManager>Queries</UIQueriesManager>
+      <UIMetadataManager>Metaveri</UIMetadataManager>
+      <UINamespaceManager>Ad Alanları</UINamespaceManager>
+      <UINodeTypeManager>Düğüm Türleri</UINodeTypeManager>
+      <UITemplatesManager>Belgeler</UITemplatesManager>
+   <UICLVTemplatesManager>Liste</UICLVTemplatesManager>
+      <UIViewManager>Görünümler</UIViewManager>
+      <UIDriveManager>Sürücüler</UIDriveManager>
+      <UIQueriesManager>Sorgular</UIQueriesManager>
       <UIActionManager>Eylemler</UIActionManager>
-      <UIScriptManager>Scripts</UIScriptManager>
-      <UIUnLockManager>Locks</UIUnLockManager>
-      <UIFolksonomyManager>Tags</UIFolksonomyManager>      
+      <UIScriptManager>Scriptler</UIScriptManager>
+      <UIUnLockManager>Kilitler</UIUnLockManager>
+      <UIFolksonomyManager>Etiketler</UIFolksonomyManager>      
     </label>
     <msg>
-      <access-denied>Access denied. You do not have permission to perform this action.</access-denied>
+      <access-denied>Erişim engellendi. Bu eylemi gerçekleştirmek için gerekli izniniz yok.</access-denied>
     </msg>
   </UIECMAdminControlPanel>
   <!--
@@ -40,23 +40,23 @@
   -->
   <UITaxonomyWorkingArea>
     <msg>
-      <referential-integrity>Cannot read from the source file, or the destination category is a sub-category.</referential-integrity>
-      <no-taxonomy-selected>You must copy or cut at least one category.</no-taxonomy-selected>
-      <node-is-cutting>You cannot paste here. The category node '{0}' might be cut.</node-is-cutting>
-      <can-not-paste>There is no data in the clipboard to paste.</can-not-paste>
-      <reference-exception>Cannot delete this category  because it is currently referenced by a content.</reference-exception>
-      <path-error>An error occurred while removing this category node.</path-error>
+      <referential-integrity>Kaynak dosyadan okunamıyor veya hedef katagori bir alt katagori.</referential-integrity>
+      <no-taxonomy-selected>Kopyalama veya kesmek için en az bir kategori gerekir.</no-taxonomy-selected>
+      <node-is-cutting>Buraya yapıştırılamıyor. '{0}' Kategori düğümü kesilmiş olabilir.</node-is-cutting>
+      <can-not-paste>Panoya yapıştırmak için herhangi bir veri yok.</can-not-paste>
+      <reference-exception>Bu katagori silinemiyor çünkü bir içerikte başvuru yapılmış.</reference-exception>
+      <path-error>Bu kategori düğümü kaldırılırken bir hata oluştu.</path-error>
     </msg>
   </UITaxonomyWorkingArea>
   <UITaxonomyManager>
     <msg>
-      <confirm-delete>Are you sure you want to delete this category?</confirm-delete>
+      <confirm-delete>Bu kategoriyi silmek istediğinizden emin misiniz?</confirm-delete>
     </msg>
     <title>
-      <add>Add</add>
-      <paste>Paste</paste>
-      <cut>Cut</cut>
-      <copy>Copy</copy>
+      <add>Ekle</add>
+      <paste>Yapıştır</paste>
+      <cut>Kes</cut>
+      <copy>Kopyala</copy>
       <remove>Sil</remove>
     </title>
   </UITaxonomyManager>
@@ -69,14 +69,14 @@
   <UITaxonomyTreeContainer>
     <tab>
       <info>
-        <UITaxonomyTreeMainForm>Specify the category name, workspace and home path.</UITaxonomyTreeMainForm>
-        <UIPermissionTreeManager>Set permission for the category tree.</UIPermissionTreeManager>
-        <UIActionTaxonomyManager>Add an action to the category tree to complete the creation or update.</UIActionTaxonomyManager>
-        <UITaxonomyTreeCreateChild>Edit the taxonomy tree by adding, copying, cutting and selecting permissions.</UITaxonomyTreeCreateChild>
+        <UITaxonomyTreeMainForm>Kategori adı, çalışma alanı ve anasayfa yolu belirtin.</UITaxonomyTreeMainForm>
+        <UIPermissionTreeManager>Kategori ağacı izni ayarlayın.</UIPermissionTreeManager>
+        <UIActionTaxonomyManager>Kategori ağacına eylem eklemek için oluşturma veya güncelleme işlemini tamamlamanız gerekiyor.</UIActionTaxonomyManager>
+        <UITaxonomyTreeCreateChild>Sınıflandırma ağacını ekleyerek, kopyalayarak, keserek ve izinleri seçerek düzenleyin.</UITaxonomyTreeCreateChild>
       </info>
     </tab>
     <msg>
-      <not-exist-tree>The category tree does not exist.</not-exist-tree>
+      <not-exist-tree>Kategori ağacı yok.</not-exist-tree>
     </msg>
   </UITaxonomyTreeContainer>
   
@@ -87,28 +87,28 @@
 -->
   <UITaxonomyTreeMainForm>
     <action>
-      <Reset>Reset</Reset>
+      <Reset>Sıfırla</Reset>
     </action>
     <msg>
-      <name-not-allowed>Forbidden Name</name-not-allowed>
-      <name-emty>The tree name is required.</name-emty>
-      <homePath-emty>The home path is required.</homePath-emty>
-      <targetPath-emty>The target path is required.</targetPath-emty>
-      <taxonomytree-existed>The category tree name already exists.</taxonomytree-existed>
+      <name-not-allowed>Yasak İsim</name-not-allowed>
+      <name-emty>Ağaç adı gereklidir.</name-emty>
+      <homePath-emty>Ana yolu gereklidir.</homePath-emty>
+      <targetPath-emty>Hedef yol gereklidir.</targetPath-emty>
+      <taxonomytree-existed>Kategori ağacı adı zaten var.</taxonomytree-existed>
     </msg>
   </UITaxonomyTreeMainForm>
 
   <TaxonomyTreeMainForm>
     <label>
-      <TaxoTreeName>Name</TaxoTreeName>
-      <TaxoTreeWorkspace>Workspace</TaxoTreeWorkspace>
-      <TaxoTreeHomePath>Home Path</TaxoTreeHomePath>
+      <TaxoTreeName>Ad</TaxoTreeName>
+      <TaxoTreeWorkspace>Çalışma Alanı</TaxoTreeWorkspace>
+      <TaxoTreeHomePath>Anasayfa Yolu</TaxoTreeHomePath>
     </label>
   </TaxonomyTreeMainForm>
 
   <TaxonomyTreeHomePath>
     <title>
-      <AddPath>Add Path</AddPath>
+      <AddPath>Yol Ekle</AddPath>
     </title>
   </TaxonomyTreeHomePath>
   
@@ -125,10 +125,10 @@
 </title>
 </action>
 <header>
-<usersOrGroups>User or Group</usersOrGroups>
-<read>Read</read>
+<usersOrGroups>Kullanıcı veya Grup</usersOrGroups>
+<read>Oku</read>
 <addNode>Düğüm Ekle</addNode>
-<setProperty>Set Property</setProperty>
+<setProperty>Özellik Ayarla</setProperty>
 <remove>Kaldır</remove>
 <action>Eylem</action>
 </header>
@@ -141,7 +141,7 @@
 -->
   <UIPermissionTreeForm>
     <msg>
-      <have-not-any-permission>Please specify at least one permission for this node.</have-not-any-permission>
+      <have-not-any-permission>Lütfen bu düğüm için en az bir izin belirtin.</have-not-any-permission>
     </msg>
   </UIPermissionTreeForm>
 
@@ -152,17 +152,17 @@
 -->
 
   <UIActionForm>
-    <title>Add an action to the category tree</title>
+    <title>Kategori ağacına eylem ekle</title>
     <action>
       <Save>Kaydet</Save>
     </action>
     <msg>
-      <name-not-allowed>Empty name or special characters are not allowed in the action name.</name-not-allowed>
-      <path-invalid>The path is invalid.</path-invalid>
-      <taxonomy-existed>The category tree already exists.</taxonomy-existed>
-      <taxonomy-node-existed>The category node already exists.</taxonomy-node-existed>
-      <no-permission-add>You do not have the right to add an action.</no-permission-add>
-      <not-created-tree>The category tree has not yet been created.</not-created-tree>
+      <name-not-allowed>Boş ad veya özel karakterler eyleminin adında izin verilmez.</name-not-allowed>
+      <path-invalid>Bu yol geçersiz.</path-invalid>
+      <taxonomy-existed>Kategori ağacı zaten var.</taxonomy-existed>
+      <taxonomy-node-existed>Kategori düğümü zaten var.</taxonomy-node-existed>
+      <no-permission-add>Eylem ekleme hakkına sahip değilsiniz.</no-permission-add>
+      <not-created-tree>Kategori ağacı henüz oluşturulmadı.</not-created-tree>
     </msg>
   </UIActionForm>
 
@@ -173,7 +173,7 @@
   -->
   <UITemplatesList>
     <header>
-      <name>Template Name</name>
+      <name>Şablon Adı</name>
       <action>Eylemler</action>
     </header>
   </UITemplatesList>
@@ -184,13 +184,13 @@
   -->
   <NameSpacePopup>
     <title>
-      <UINamespaceForm>Namespace Form</UINamespaceForm>
+      <UINamespaceForm>Namespace Formu</UINamespaceForm>
     </title>
   </NameSpacePopup>
   <UINamespaceForm>
-    <title>Register New Namespace</title>
+    <title>Yeni Namespace Kayıt Ol</title>
     <label>
-      <namespace>Namespace Prefix</namespace>
+      <namespace>Namespace Öneki</namespace>
       <uri>URI</uri>
     </label>
     <action>
@@ -198,9 +198,9 @@
       <Cancel>#{word.cancel}</Cancel>
     </action>
     <msg>
-      <register-unsuccessfull>Namespace or URI already exists.</register-unsuccessfull>
-      <prefix-null>Please specify the namespace's prefix.</prefix-null>
-      <uri-null>Please specify the namespace's URI.</uri-null>
+      <register-unsuccessfull>Namespace veya URI zaten.</register-unsuccessfull>
+      <prefix-null>Lütfen namespacein önekini belirtin.</prefix-null>
+      <uri-null>Lütfen namespacein URI belirtin.</uri-null>
     </msg>
   </UINamespaceForm>
   <!--
@@ -210,7 +210,7 @@
   -->
   <UINamespaceList>
     <header>
-      <prefix>Prefix</prefix>
+      <prefix>Önek</prefix>
       <uri>Namespace URI</uri>
       <action>Eylem</action>
     </header>
@@ -220,7 +220,7 @@
   </UINamespaceList>
   <NamespacePopup>
     <title>
-      <UINamespaceForm>Register New Namespace</UINamespaceForm>
+      <UINamespaceForm>Yeni Namespace Kayıt Ol</UINamespaceForm>
     </title>
   </NamespacePopup>
   <!--
@@ -230,30 +230,30 @@
   -->
   <UIMetadataList>
     <label>
-      <false>false</false>
-      <true>true</true>
-      <True>true</True>
-      <False>false</False>
+      <false>yanlış</false>
+      <true>doğru</true>
+      <True>doğru</True>
+      <False>yanlış</False>
     </label>
     <title>
-      <view>View</view>
+      <view>Görün</view>
       <edit>Düzenle</edit>
       <delete>Sil</delete>
     </title>
     <header>
       <icon>Simge</icon>
-      <name>Metadata</name>
+      <name>Metaveri</name>
       <type>Türü</type>
-      <internalUse>Internal Use</internalUse>
+      <internalUse>Dahili Kullanım</internalUse>
       <action>Eylemler</action>
     </header>
     <msg>
-      <confirm-delete>Are you sure you want to delete this metadata?</confirm-delete>
-      <delete-successful>The templates of '{0}' were deleted successfully.</delete-successful>
-      <path-not-found-exception>This metadata was deleted or changed. Please click the Refresh button.</path-not-found-exception>
+      <confirm-delete>Bu metaverileri silmek istediğinizden emin misiniz?</confirm-delete>
+      <delete-successful>'{0}' Şablonu başarıyla silindi.</delete-successful>
+      <path-not-found-exception>Bu metaveriler değiştirildi veya silindi. Lütfen Yenile düğmesini tıklatın.</path-not-found-exception>
     </msg>
     <action>
-      <Add>Add Metadata</Add>
+      <Add>Metaveri Ekle</Add>
       <Cancel>#{word.cancel}</Cancel>
     </action>
   </UIMetadataList>
@@ -264,13 +264,13 @@
   </MetadataPopupAddNew>
   <MetadataPopupEdit>
     <title>
-      <UIMetadataForm>Edit Metadata's Template</UIMetadataForm>
+      <UIMetadataForm>Metaverilerin Şablonunu Düzenle</UIMetadataForm>
     </title>
   </MetadataPopupEdit>
   <MetataPermissionPopup>
     <title>
-      <MetadataPermission>Set Permissions</MetadataPermission>
-      <QueriesPermissionBrowse>Add Permissions</QueriesPermissionBrowse>
+      <MetadataPermission>İzinleri Ayarla</MetadataPermission>
+      <QueriesPermissionBrowse>İzinleri Ekle</QueriesPermissionBrowse>
     </title>
   </MetataPermissionPopup>
   <!--
@@ -279,29 +279,29 @@
   ################################################################################
   -->
   <UIMetadataForm>
-    <title>Mapping Metadata</title>
+    <title>Metaveri Eşlemesi</title>
     <action>
       <Cancel>#{word.cancel}</Cancel>
-      <Save>Apply</Save>
+      <Save>Uygula</Save>
     </action>
     <header>
       <icon>Simge</icon>
-      <label>Node name</label>
+      <label>Düğüm adı</label>
       <input>Eylem</input>
     </header>
     <label>
-      <dialogTemplate>Dialog Template:</dialogTemplate>
-      <viewTemplate>View Template:</viewTemplate>
-      <metadataName>Metadata Name:</metadataName>
-      <viewPermission>Permission:</viewPermission>
+      <dialogTemplate>İletişim Şablonu:</dialogTemplate>
+      <viewTemplate>Görünüm Şablonu:</viewTemplate>
+      <metadataName>Metaveri Adı:</metadataName>
+      <viewPermission>İzni:</viewPermission>
       <permission>UIMetadataForm</permission>
-      <metadataLabel>Label:</metadataLabel>
+      <metadataLabel>Etiket:</metadataLabel>
     </label>
     <tab>
       <label>
-        <metadataTypeTab>Metadata Type</metadataTypeTab>
-        <dialogTab>Dialog Template</dialogTab>
-        <viewTab>View Template</viewTab>
+        <metadataTypeTab>Meta veri türü</metadataTypeTab>
+        <dialogTab>İletişim Şablonu</dialogTab>
+        <viewTab>Görünüm Şablonu</viewTab>
       </label>
     </tab>
   </UIMetadataForm>
@@ -312,18 +312,18 @@
   -->
   <UIMetadataView>
     <header>
-      <name>Element Name</name>
+      <name>Öğe Adı</name>
       <type>Türü</type>
       <description>Açıklama</description>
-      <isMixin>Is Mixin Type</isMixin>
-      <orderable>Orderable children</orderable>
+      <isMixin>Türü Mixin</isMixin>
+      <orderable>Sıralanabilir Alt</orderable>
     </header>
     <info>
       <description>Açıklama</description>
     </info>
     <tab>
-      <element>Elements</element>
-      <metadataView>Metadata Information</metadataView>
+      <element>Öğeler</element>
+      <metadataView>Metaveri Bilgileri</metadataView>
     </tab>
     <action>
       <Cancel>Kapat</Cancel>
@@ -332,7 +332,7 @@
   </UIMetadataView>
   <ViewMetadataPopup>
     <title>
-      <UIMetadataView>Metadata Information</UIMetadataView>
+      <UIMetadataView>Metaveri Bilgileri</UIMetadataView>
     </title>
   </ViewMetadataPopup>
   <!--
@@ -343,11 +343,11 @@
   <UIDriveList>
     <header>
       <icon>Simge</icon>
-      <name>Name</name>
-      <workspace>Workspace</workspace>
-      <homePath>Home Path</homePath>
-      <permissions>Permissions</permissions>
-      <views>View</views>
+      <name>Ad</name>
+      <workspace>Çalışma Alanı</workspace>
+      <homePath>Anasayfa Yolu</homePath>
+      <permissions>İzinler</permissions>
+      <views>Görün</views>
       <action>Eylem</action>
     </header>
     <tooltip>
@@ -355,13 +355,13 @@
       <EditInfo>Düzenle</EditInfo>
     </tooltip>
     <msg>
-      <confirm-delete>Are you sure you want to delete this drive?</confirm-delete>
+      <confirm-delete>Bu sürücüyü silmek istediğinizden emin misiniz?</confirm-delete>
     </msg>
     <action>
-      <AddDrive>Add Drive</AddDrive>
+      <AddDrive>Sürücü Ekle</AddDrive>
     </action>
     <label>
-      <permission>{0} in {1}</permission>
+      <permission>{1} içindeki {0}</permission>
     </label>
   </UIDriveList>
   <UIDriveForm>
@@ -372,63 +372,63 @@
       <Refresh>#{word.refresh}</Refresh>
     </action>
     <msg>
-      <drive-exists>The drive already exists.</drive-exists>
-      <workspace-path-invalid>The workspace path is invalid.</workspace-path-invalid>
-      <drive-views-invalid>Please select a view.</drive-views-invalid>
-      <icon-not-found>Icon not found.</icon-not-found>
-      <permission-null>You must set the permission for this drive.</permission-null>
-      <allowCreateFolders>You must select the folder type.</allowCreateFolders>
-      <name-null>Please enter the drive name.</name-null>
-      <fileName-invalid>The drive name has some invalid characters.</fileName-invalid>
+      <drive-exists>Sürücü zaten var.</drive-exists>
+      <workspace-path-invalid>Çalışma alanı yolu geçerli değil.</workspace-path-invalid>
+      <drive-views-invalid>Lütfen bir görünüm seçin.</drive-views-invalid>
+      <icon-not-found>Simge bulunamadı.</icon-not-found>
+      <permission-null>Bu sürücü için izin ayarlamanız gerekir.</permission-null>
+      <allowCreateFolders>Klasör türü seçmeniz gerekir.</allowCreateFolders>
+      <name-null>Lütfen sürücü adını girin.</name-null>
+      <fileName-invalid>Sürücü adında geçersiz bir karakter var.</fileName-invalid>
     </msg>
     <tab>
       <label>
-        <DriveInputSet>Drive</DriveInputSet>
-        <ViewsInputSet>Apply Views</ViewsInputSet>
-        <PermissionInputSet>Set Permissions</PermissionInputSet>
+        <DriveInputSet>Sürücü</DriveInputSet>
+        <ViewsInputSet>Görünümlerde Uygula</ViewsInputSet>
+        <PermissionInputSet>İzinleri Ayarla</PermissionInputSet>
       </label>
     </tab>
     <label>
       <name>Adı:</name>
-      <workspace>Workspace:</workspace>
-      <homePath>Home Path:</homePath>
-      <icon>Workspace Icon:</icon>
-      <viewPreferences>Show Referenced Documents:</viewPreferences>
-      <viewNonDocument>Show Non-document Nodes:</viewNonDocument>
-      <viewSideBar>Show Sidebar:</viewSideBar>
-      <permissions>Permissions:</permissions>
-      <showHiddenNode>Show Hidden Nodes:</showHiddenNode>
-      <allowCreateFolders>Allow Folder Creation:</allowCreateFolders>
+      <workspace>Çalışma Alanı:</workspace>
+      <homePath>Anasayfa Yolu:</homePath>
+      <icon>Çalışma Alanı Simgesi:</icon>
+      <viewPreferences>Başvurulan Belgeleri Görüntüle:</viewPreferences>
+      <viewNonDocument>Belge olmayan düğümleri göster:</viewNonDocument>
+      <viewSideBar>Kenar çubuğunu göster:</viewSideBar>
+      <permissions>İzinler:</permissions>
+      <showHiddenNode>Gizli düğümleri göster:</showHiddenNode>
+      <allowCreateFolders>Klasör Oluşturulmasına Olanak Sağla:</allowCreateFolders>
       <Admin>Admin:</Admin>
-      <Categories>Categories:</Categories>
-      <Icons>Icons:</Icons>
-      <List>List:</List>
+      <Categories>Kategoriler:</Categories>
+      <Icons>Simgeler:</Icons>
+      <List>Liste:</List>
       <Web>Web:</Web>
     </label>
   </UIDriveForm>
   <AddDriveManagerPopup>
     <title>
-      <UIDriveForm>Add Drive</UIDriveForm>
+      <UIDriveForm>Sürücü Ekle</UIDriveForm>
     </title>
   </AddDriveManagerPopup>
   <EditDriveManagerPopup>
     <title>
-      <UIDriveForm>Edit Drive</UIDriveForm>
+      <UIDriveForm>Sürücü Düzenle</UIDriveForm>
     </title>
   </EditDriveManagerPopup>
   <UITreeList>
     <info>
-      <child-not-found>Child node not found.</child-not-found>
+      <child-not-found>Alt düğümü bulunamadı.</child-not-found>
     </info>
     <header>
-      <name>Name</name>
+      <name>Adı</name>
       <action>Eylem</action>
     </header>
   </UITreeList>
   
   <UIRepositoryList>
     <titlebar>
-      <label>Manage ECM Main Functions</label>
+      <label>ECM Ana Fonksiyonlarını Yönet</label>
     </titlebar>
   </UIRepositoryList>
   
@@ -440,7 +440,7 @@
   <UINodeTypeManager>
     <header>
       <icon>Simge</icon>
-      <label>Node Name</label>
+      <label>Düğüm Adı</label>
       <input>Eylem</input>
     </header>
     <action>
@@ -454,28 +454,28 @@
   -->
   <UINodeTypeList>
     <label>
-      <true>True</true>
-      <false>False</false>
+      <true>Doğru</true>
+      <false>Yanlış</false>
     </label>
     <header>
       <icon>Simge</icon>
-      <nodeType>Node Type</nodeType>
-      <mixinType>Mixin Type</mixinType>
-      <orderable>Orderable Child Nodes</orderable>
+      <nodeType>Düğüm Türü</nodeType>
+      <mixinType>Mixin Türü</mixinType>
+      <orderable>Sıralanabilir Alt</orderable>
       <action>Eylem</action>
     </header>
     <action>
-      <Export>Export</Export>
-      <Import>Import</Import>
-      <Add>Add</Add>
+      <Export>Dışa aktar</Export>
+      <Import>İçe Aktar</Import>
+      <Add>Ekle</Add>
     </action>
     <tooltip>
-      <View>View</View>
+      <View>Görün</View>
       <Edit>Düzenle</Edit>
       <Delete>Sil</Delete>
     </tooltip>
     <msg>
-      <confirm-delete>Are you sure you want to delete this node type?</confirm-delete>
+      <confirm-delete>Bu düğüm türünü silmek istediğinizden emin misiniz?</confirm-delete>
     </msg>
   </UINodeTypeList>
   <!--
@@ -486,11 +486,11 @@
   <UINodeTypeOptionList>
     <action>
       <Save>#{word.save}</Save>
-      <Add>Add</Add>
+      <Add>Ekle</Add>
     </action>
     <header>
       <icon>Simge</icon>
-      <label>Node Name</label>
+      <label>Düğüm Adı</label>
       <input>Eylem</input>
     </header>
   </UINodeTypeOptionList>
@@ -502,55 +502,55 @@
   <UINodeTypeForm>
     <tab>
       <label>
-        <nodeTypeDefinition>Node Type</nodeTypeDefinition>
-        <propertyDefinition>Property</propertyDefinition>
-        <childNodeDefinition>Child Node</childNodeDefinition>
-        <superTypeTab>Super Types</superTypeTab>
-        <DefaultTypeTab>Default Primary</DefaultTypeTab>
-        <RequiredTypeTab>Required Primary</RequiredTypeTab>
-        <Contraints>Constraints</Contraints>
+        <nodeTypeDefinition>Düğüm Türü</nodeTypeDefinition>
+        <propertyDefinition>Özelliği</propertyDefinition>
+        <childNodeDefinition>Alt Düğüm</childNodeDefinition>
+        <superTypeTab>Süper Türler</superTypeTab>
+        <DefaultTypeTab>Varsayılan Birincil</DefaultTypeTab>
+        <RequiredTypeTab>Birincil Gerekli</RequiredTypeTab>
+        <Contraints>Kısıtlamalar</Contraints>
       </label>
     </tab>
     <label>
-      <propertiesDefinitions>Property Definitions</propertiesDefinitions>
-      <childDefinitions>Child Node Definitions</childDefinitions>
-      <namespace>Name Space</namespace>
-      <propertyNamespace>Name Space</propertyNamespace>
-      <nodeTypeName>Node Type Name</nodeTypeName>
-      <mixinType>Is Mixin Type</mixinType>
-      <hasOrderableChildNodes>Orderable Child Nodes</hasOrderableChildNodes>
-      <primaryItemName>Primary Item Name</primaryItemName>
-      <superTypes>Super Types</superTypes>
-      <propertyname>Definition Name</propertyname>
-      <requiredType>Required Type</requiredType>
-      <multiple>Is Multiple</multiple>
-      <mandatory>Is Mandatory</mandatory>
-      <autoCreated>Is Auto-created</autoCreated>
-      <parentversion>On parent version</parentversion>
-      <protected>Is Protected</protected>
-      <constraints>Values</constraints>
+      <propertiesDefinitions>Özellik Tanımları</propertiesDefinitions>
+      <childDefinitions>Alt Düğüm Tanımları</childDefinitions>
+      <namespace>İsim Alanı</namespace>
+      <propertyNamespace>İsim Alanı</propertyNamespace>
+      <nodeTypeName>Düğüm Türü Adı</nodeTypeName>
+      <mixinType>Türü Mixin</mixinType>
+      <hasOrderableChildNodes>Sıralanabilir Alt</hasOrderableChildNodes>
+      <primaryItemName>Birincil Öğe Adı</primaryItemName>
+      <superTypes>Süper Türler</superTypes>
+      <propertyname>Tanımı Adı</propertyname>
+      <requiredType>Gerekli Tür</requiredType>
+      <multiple>Birden Fazla</multiple>
+      <mandatory>Zorunlu</mandatory>
+      <autoCreated>Otomatik Oluşturulan</autoCreated>
+      <parentversion>Üst Sürüm</parentversion>
+      <protected>Korumalı</protected>
+      <constraints>Değerler</constraints>
       <UIFormTableInputSet>UIFormTableInputSet</UIFormTableInputSet>
-      <sameNameSiblings>Is same name sibling</sameNameSiblings>
-      <childNamespace>Name Space</childNamespace>
-      <childMandatory>Is Mandatory</childMandatory>
-      <childAutocreated>Is Auto-created</childAutocreated>
-      <childParentversion>On parent version</childParentversion>
-      <childProtected>Is Protected</childProtected>
-      <childNodename>Definition Name</childNodename>
-      <requiredPrimaryType>Required Primary Type</requiredPrimaryType>
-      <defaultPrimaryType>Default Primary Type</defaultPrimaryType>
-      <valueconstraints>Value Constraints</valueconstraints>
+      <sameNameSiblings>Aynı adı olan eş</sameNameSiblings>
+      <childNamespace>Ad Alanı</childNamespace>
+      <childMandatory>Zorunludur</childMandatory>
+      <childAutocreated>Otomatik Oluşturulandır</childAutocreated>
+      <childParentversion>Üst Sürüm</childParentversion>
+      <childProtected>Korumalı</childProtected>
+      <childNodename>Tanımı Adı</childNodename>
+      <requiredPrimaryType>Birincil Türü Gerekli</requiredPrimaryType>
+      <defaultPrimaryType>Varsayılan Birincil Tür</defaultPrimaryType>
+      <valueconstraints>Değer Kısıtlamaları</valueconstraints>
     </label>
     <action>
       <Cancel>#{word.cancel}</Cancel>
       <Save>#{word.save}</Save>
-      <SaveDraft>Save as Draft</SaveDraft>
-      <AddProperty>Add Property</AddProperty>
-      <AddChild>Add Child</AddChild>
-      <AddConstraints>Add Constraints</AddConstraints>
+      <SaveDraft>Taslak Olarak Kaydet</SaveDraft>
+      <AddProperty>Özellik Ekle</AddProperty>
+      <AddChild>Alt Öğe Ekle</AddChild>
+      <AddConstraints>Kısıtlama Ekle</AddConstraints>
       <Back>#{word.back}</Back>
-      <AddType>Add Type</AddType>
-      <AddValue>Add</AddValue>
+      <AddType>Tür Ekle</AddType>
+      <AddValue>Ekle</AddValue>
       <CancelConstraints>#{word.cancel}</CancelConstraints>
       <CancelTab>#{word.cancel}</CancelTab>
       <UpdateChild>#{word.update}</UpdateChild>
@@ -560,62 +560,62 @@
       <Close>#{word.close}</Close>
     </action>
     <msg>
-      <register-successfully>The '{0}' node type was registered successfully.</register-successfully>
-      <supertype-is-madatory>The super type is mandatory when you register a new node type. Please select at least one super type.</supertype-is-madatory>
-      <register-failed>The node type registration was unsuccessful. It either already exists or the super type is invalid.</register-failed>
-      <nodeType-name>The node type name is required.</nodeType-name>
-      <fileName-invalid>The file name has some invalid characters.</fileName-invalid>
-      <node-type-exists>The '{0}' node type already exists.</node-type-exists>
-      <node-type-name>The node type name is invalid.</node-type-name>
-      <values-error>Please select only one node type for the default primary type.</values-error>
-      <confirm-delete-child>Are you sure you want to delete this child node?</confirm-delete-child>
-      <confirm-delete-property>Are you sure you want to delete this property?</confirm-delete-property>
+      <register-successfully>'{0}' Düğüm türü başarıyla kaydedildi.</register-successfully>
+      <supertype-is-madatory>Yeni bir öğe türü kaydettiğinizde süper tür zorunludur.Lütfen en az bir süper tür seçin.</supertype-is-madatory>
+      <register-failed>Düğüm türü kaydı başarısız oldu. Ya zaten var veya süper türü geçersiz.</register-failed>
+      <nodeType-name>Düğüm türü adı gereklidir.</nodeType-name>
+      <fileName-invalid>Dosya adında geçersiz bir karakter var.</fileName-invalid>
+      <node-type-exists>'{0}' Düğüm türü zaten var.</node-type-exists>
+      <node-type-name>Düğüm türü adı geçerli değil.</node-type-name>
+      <values-error>Lütfen varsayılan birincil türü için yalnızca tek bir düğüm türü seçin.</values-error>
+      <confirm-delete-child>Bu alt düğümü silmek istediğinizden emin misiniz?</confirm-delete-child>
+      <confirm-delete-property>Bu özelliği silmek istediğinizden emin misiniz?</confirm-delete-property>
     </msg>
   </UINodeTypeForm>
   <UIPropertyDefinitionForm>
     <tab>
       <label>
-        <constraints>Constraints</constraints>
-        <UIFormMultiValueInputSet>Constraints</UIFormMultiValueInputSet>
+        <constraints>Kısıtlamalar</constraints>
+        <UIFormMultiValueInputSet>Kısıtlamalar</UIFormMultiValueInputSet>
       </label>
     </tab>
     <msg>
-      <property-name>The property definition's name was invalid.</property-name>
-      <not-supported-value-constraints>This required type does not support value constraints.</not-supported-value-constraints>
+      <property-name>Özellik tanımının adı geçersiz.</property-name>
+      <not-supported-value-constraints>Bu gerekli tür değer kısıtlamalarında desteklenmiyor.</not-supported-value-constraints>
     </msg>
   </UIPropertyDefinitionForm>
   <UIChildNodeDefinitionForm>
     <msg>
-      <child-name>The child node name is required.</child-name>
-      <child-invalid>The child node name contains some invalid characters.</child-invalid>
-      <default-node-type-not-found>The default node type is not found.</default-node-type-not-found>
-      <requiredPrimaryType>The required primary type is required.</requiredPrimaryType>
-      <defaultPrimaryType>The default primary type is required.</defaultPrimaryType>
+      <child-name>Alt düğüm adı gereklidir.</child-name>
+      <child-invalid>Alt düğüm adı bazı geçersiz karakterler içeriyor.</child-invalid>
+      <default-node-type-not-found>Varsayılan düğüm türü bulunamadı.</default-node-type-not-found>
+      <requiredPrimaryType>Gerekli birincil türü gereklidir.</requiredPrimaryType>
+      <defaultPrimaryType>Varsayılan birincil türü gereklidir.</defaultPrimaryType>
     </msg>
   </UIChildNodeDefinitionForm>
   <defaultPrimaryTypePopup>
     <title>
-      <FormdefaultPrimaryTypePopup>Select Default Primary Type</FormdefaultPrimaryTypePopup>
+      <FormdefaultPrimaryTypePopup>Varsayılan Birincil Türü Seçin</FormdefaultPrimaryTypePopup>
     </title>
   </defaultPrimaryTypePopup>
   <requiredPrimaryTypePopup>
     <title>
-      <FormrequiredPrimaryTypePopup>Select Required Primary Type</FormrequiredPrimaryTypePopup>
+      <FormrequiredPrimaryTypePopup>Gerekli Birincil Türü Seçin</FormrequiredPrimaryTypePopup>
     </title>
   </requiredPrimaryTypePopup>
   <superTypesPopup>
     <title>
-      <FormsuperTypesPopup>Select Super Types</FormsuperTypesPopup>
+      <FormsuperTypesPopup>Süper Türleri  Seçin</FormsuperTypesPopup>
     </title>
   </superTypesPopup>
   <NodeTypePopup>
     <title>
-      <UINodeTypeForm>Add/Edit Node Type Definitions</UINodeTypeForm>
+      <UINodeTypeForm>Düğüm Türü Tanımları Ekle/Düzenle</UINodeTypeForm>
     </title>
   </NodeTypePopup>
   <ViewNodeTypePopup>
     <title>
-      <UINodeTypeForm>View Node Type Information</UINodeTypeForm>
+      <UINodeTypeForm>Düğüm Türü Bilgilerini Görüntüle</UINodeTypeForm>
     </title>
   </ViewNodeTypePopup>
   <!--
@@ -626,23 +626,23 @@
   <UINodeTypeExport>
     <header>
       <icon>Simge</icon>
-      <label>Node name</label>
+      <label>Düğüm adı</label>
       <input>Eylem</input>
     </header>
     <action>
       <Cancel>#{word.cancel}</Cancel>
-      <Export>Export</Export>
-      <UncheckAll>Uncheck all</UncheckAll>
-      <CheckAll>Check all</CheckAll>
+      <Export>Dışa aktar</Export>
+      <UncheckAll>Tümünü kaldır</UncheckAll>
+      <CheckAll>Tümünü işaretle</CheckAll>
     </action>
-    <title>Export Node Types</title>
+    <title>Düğüm Türlerini Dışa Aktar</title>
     <msg>
-      <item-null>Please select at least one node that you want to export.</item-null>
+      <item-null>Lütfen vermek istediğiniz en az bir düğüm seçin.</item-null>
     </msg>
   </UINodeTypeExport>
   <NodeTypeExportPopup>
     <title>
-      <UINodeTypeExport>Export Node Types</UINodeTypeExport>
+      <UINodeTypeExport>Düğüm Türlerini Dışa Aktar</UINodeTypeExport>
     </title>
   </NodeTypeExportPopup>
   <!--
@@ -657,19 +657,19 @@
   -->
   <UINodeTypeUpload>
     <label>
-      <upload>File Name</upload>
+      <upload>Dosya Adı</upload>
     </label>
     <action>
       <Cancel>#{word.cancel}</Cancel>
-      <Upload>Upload</Upload>
+      <Upload>Yükle</Upload>
     </action>
-    <title>Import Node Type From XML File</title>
+    <title>Düğüm Türünü XML Dosyasından İçe Aktar</title>
     <msg>
-      <filename-error>Browse a node type file to import.</filename-error>
-      <data-file-error>Only .xml or .zip files can be imported.</data-file-error>
-      <data-invalid>The data is invalid. Please check your file type and try again.</data-invalid>
-      <nodetype-exist>The '{0}' node type already exists.</nodetype-exist>
-      <namespace-invalid>The '{0}' namespace is invalid.</namespace-invalid>
+      <filename-error>İçe aktarmak için bir düğüm türü bulun.</filename-error>
+      <data-file-error>Sadece .zip veya .xml dosyaları içe aktarılabilir.</data-file-error>
+      <data-invalid>Verileri geçersiz. Lütfen dosya türünü denetleyin ve yeniden deneyin.</data-invalid>
+      <nodetype-exist>'{0}' Düğüm türü zaten var.</nodetype-exist>
+      <namespace-invalid>'{0}' namespace geçersiz.</namespace-invalid>
     </msg>
   </UINodeTypeUpload>
   <!--
@@ -680,23 +680,23 @@
   <UINodeTypeImport>
     <action>
       <Cancel>#{word.cancel}</Cancel>
-      <Import>Import</Import>
-      <Upload>Re-upload</Upload>
+      <Import>İçe Aktar</Import>
+      <Upload>Yeniden Yükle</Upload>
     </action>
     <header>
       <icon>Simge</icon>
-      <label>Node Name</label>
+      <label>Düğüm Adı</label>
       <input>Eylem</input>
     </header>
-    <title>Select Import Node Type</title>
+    <title>İçe Aktar Düğüm Türü Seçin</title>
     <msg>
-      <no-nodetype-registered>There are no node types registered.</no-nodetype-registered>
-      <nodetype-registered>Registration successful.</nodetype-registered>
+      <no-nodetype-registered>Kayıtlı hiçbir düğüm türü yoktur.</no-nodetype-registered>
+      <nodetype-registered>Kayıt başarılı.</nodetype-registered>
     </msg>
   </UINodeTypeImport>
   <NodeTypeImportPopup>
     <title>
-      <UINodeTypeImportPopup>Import Node Type From XML File</UINodeTypeImportPopup>
+      <UINodeTypeImportPopup>Düğüm türünü XML dosyasından alma</UINodeTypeImportPopup>
     </title>
   </NodeTypeImportPopup>
   <!--
@@ -711,10 +711,10 @@
       <unstructuredFolder>Unstructured Folder</unstructuredFolder>
     </label>
     <title>
-      <AddPermission>Add Permission</AddPermission>
-      <RemovePermission>Remove Permission</RemovePermission>
-      <AddIcon>Add Icon</AddIcon>
-      <AddPath>Add Path</AddPath>
+      <AddPermission>İzin Ekle</AddPermission>
+      <RemovePermission>İznini Kaldırma</RemovePermission>
+      <AddIcon>Simge Ekle</AddIcon>
+      <AddPath>Yol Ekle</AddPath>
     </title>
   </DriveInputSet>
   <!--
@@ -725,15 +725,19 @@
   <UIActionTypeList>
     <header>
       <name>Script</name>
-      <label>Name</label>
+      <label>Adı</label>
 <action>Eylemler</action>
     </header>
+    <title>
+      <Edit>Düzenle</Edit>
+      <Delete>Sil</Delete>
+    </title>
     <action>
-      <AddAction>Add Action Type</AddAction>
+      <AddAction>Eylem Türü Ekle</AddAction>
     </action>
 <msg>
- <confirm-delete>Are you sure you want to delete this action type?</confirm-delete>
-<cannot-delete>You cannot remove this action type because the system is still using it.</cannot-delete>
+ <confirm-delete>Bu eylem türünü silmek istediğinizden emin misiniz?</confirm-delete>
+<cannot-delete>Bu eylem türünü, sistem hala kullandığından kaldıramazsınız.</cannot-delete>
 </msg>
   </UIActionTypeList>
   <!--
@@ -743,19 +747,19 @@
   -->
   <ActionPopup>
     <title>
-      <UIActionTypeForm>Add Action Type</UIActionTypeForm>
+      <UIActionTypeForm>Eylem Türü Ekle</UIActionTypeForm>
     </title>
   </ActionPopup>
   <UIActionTypeForm>
-    <title>Add Action Type</title>
+    <title>Eylem Türü Ekle</title>
     <label>
-      <actionType>Extend Action Type:</actionType>
+      <actionType>Eylem Türünü Genişlet:</actionType>
       <name>Adı:</name>
       <isMove>is Action Move:</isMove>
-      <variables>Variables:</variables>
-      <exo_businessProcessAction>Business Processes:</exo_businessProcessAction>
-      <exo_scriptAction>Groovy Scripts:</exo_scriptAction>
-      <exo_ruleAction>Defined Rules:</exo_ruleAction>
+      <variables>Değişkenler:</variables>
+      <exo_businessProcessAction>İş Süreçleri:</exo_businessProcessAction>
+      <exo_scriptAction>Groovy Scriptler:</exo_scriptAction>
+      <exo_ruleAction>Tanımlanmış Kurallar:</exo_ruleAction>
       <script>Script:</script>
     </label>
     <action>
@@ -763,11 +767,11 @@
       <Cancel>#{word.cancel}</Cancel>
     </action>
     <msg>
-      <action-type-added>The '{0}' action type was added successfully.</action-type-added>
-      <action-type-create-error>An error occurred while creating the action type.</action-type-create-error>
-      <action-name-invalid>'{0}' is invalid. The name must begin with 'exo:'.</action-name-invalid>
-      <action-exist>This action already exists in the ECM system.</action-exist>
-      <fileName-invalid>The action name contains some invalid characters.</fileName-invalid>
+      <action-type-added>'{0}' Eylemi türü başarıyla eklendi.</action-type-added>
+      <action-type-create-error>Eylem türü oluşturulurken bir hata oluştu.</action-type-create-error>
+      <action-name-invalid>'{0}' geçersiz. 'exo:' adı ile başlamalıdır.</action-name-invalid>
+      <action-exist>Bu eylem zaten ECM sistemi bulunmaktadır.</action-exist>
+      <fileName-invalid>Eylem adı bazı geçersiz karakterler içeriyor.</fileName-invalid>
     </msg>
   </UIActionTypeForm>
   <!--
@@ -777,27 +781,27 @@
   -->
   <UITabPane>
     <title>
-      <UIViewContainer>Views</UIViewContainer>
-      <ECMTemplate>Explorer Templates</ECMTemplate>
-      <UIScriptForm>Scripts</UIScriptForm>
-      <UIDialogTab>Dialog</UIDialogTab>
-      <UIViewTab>View</UIViewTab>
-      <UITemplateEditForm>Template</UITemplateEditForm>
-      <UITemplateForm>Template</UITemplateForm>
-      <UITemplateContainer>Documents</UITemplateContainer>
+      <UIViewContainer>Görünümler</UIViewContainer>
+      <ECMTemplate>Gezinti Şablonları</ECMTemplate>
+      <UIScriptForm>Scriptler</UIScriptForm>
+      <UIDialogTab>İletişim</UIDialogTab>
+      <UIViewTab>Görün</UIViewTab>
+      <UITemplateEditForm>Şablon</UITemplateEditForm>
+      <UITemplateForm>Şablon</UITemplateForm>
+      <UITemplateContainer>Belgeler</UITemplateContainer>
       <UIActionsTemplateContainer>Eylemler</UIActionsTemplateContainer>
-      <UIOthersTemplateContainer>Others</UIOthersTemplateContainer>
+      <UIOthersTemplateContainer>Diğerleri</UIOthersTemplateContainer>
   <UIActionScriptContainer>Eylem</UIActionScriptContainer>
-  <UIWidgetScriptContainer>Widgets</UIWidgetScriptContainer>
-<UIInterceptorScriptContainer>Interceptors</UIInterceptorScriptContainer>
+  <UIWidgetScriptContainer>Widgetler</UIWidgetScriptContainer>
+<UIInterceptorScriptContainer>Önleyiciler</UIInterceptorScriptContainer>
 
-<nodeTypeDefinition>Node Type</nodeTypeDefinition>
-      <propertyDefinition>Property</propertyDefinition>
-      <childNodeDefinition>Child Node</childNodeDefinition>
-      <SuperTypeTab>Super Types</SuperTypeTab>
-      <DefaultTypeTab>Default Primary</DefaultTypeTab>
-      <RequiredTypeTab>Required Primary</RequiredTypeTab>
-      <Contraints>Constraints</Contraints>
+<nodeTypeDefinition>Düğüm Türü</nodeTypeDefinition>
+      <propertyDefinition>Özelliği</propertyDefinition>
+      <childNodeDefinition>Alt Düğüm</childNodeDefinition>
+      <SuperTypeTab>Süper Türler</SuperTypeTab>
+      <DefaultTypeTab>Varsayılan Birincil</DefaultTypeTab>
+      <RequiredTypeTab>Birincil Gerekli</RequiredTypeTab>
+      <Contraints>Kısıtlamalar</Contraints>
     </title>
   </UITabPane>
   <!--
@@ -807,76 +811,83 @@
   -->
   <UIViewList>
    <title>
-     <View>View</View>
+     <View>Görün</View>
      <EditInfo>Düzenle</EditInfo>
      <Delete>Sil</Delete>
    </title>
     <header>
-      <name>Name</name>
-      <permissions>Permissions</permissions>
-      <tabList>Action Tab</tabList>
-      <baseVersion>Base Version</baseVersion>
+      <name>Adı</name>
+      <permissions>İzinler</permissions>
+      <tabList>Eylem Sekmesi</tabList>
+      <baseVersion>Temel Sürüm</baseVersion>
       <action>Eylem</action>
     </header>
     <action>
-      <AddView>Add View</AddView>
+      <AddView>Görünüm Ekle</AddView>
     </action>
     <msg>
-      <access-denied>Access denied. You do not have permission to use this function.</access-denied>
-      <template-in-use>Cannot delete {0}. It is currently in use.</template-in-use>
-      <confirm-delete>Are you sure you want to delete this view?</confirm-delete>
+      <access-denied>Erişim engellendi. Bu işlevi kullanmak için izniniz yok.</access-denied>
+      <template-in-use>{0} Silemezsiniz. Şu anda kullanımda.</template-in-use>
+      <confirm-delete>Bu görünümü silmek istediğinizden emin misiniz?</confirm-delete>
     </msg>
   </UIViewList>
   <ViewPopup>
     <title>
-      <UIViewFormTabPane>View</UIViewFormTabPane>
+      <UIViewFormTabPane>Görünüm</UIViewFormTabPane>
     </title>
   </ViewPopup>
   <AddPopup>
     <title>
-      <UIViewFormTabPane>Add View</UIViewFormTabPane>
-      <AddPopup>Add Template</AddPopup>
+      <UIViewFormTabPane>Görünüm Ekle</UIViewFormTabPane>
+      <AddPopup>Şablon Ekle</AddPopup>
     </title>
   </AddPopup>
   <EditPopup>
     <title>
-      <UIViewFormTabPane>Edit View</UIViewFormTabPane>
+      <UIViewFormTabPane>Görünümü Düzenle</UIViewFormTabPane>
     </title>
   </EditPopup>
 
 <UITabList>
+                  <title>
+                    <Edit>Düzenle</Edit>
+                    <Delete>Sil</Delete>
+                  </title>       
  <header>
-  <tabName>Tab</tabName>
+  <tabName>Sekme</tabName>
   <localizeButtons>Açıklama</localizeButtons>
 <action>Eylemler</action>
 </header>
 <action>
- <AddTab>Add</AddTab>
+ <AddTab>Ekle</AddTab>
 </action>
 <msg>
- <confirm-delete>Are you sure you want to delete this tab?</confirm-delete>
+ <confirm-delete>Bu sekmeyi silmek istediğinizden emin misiniz?</confirm-delete>
 </msg>
 <grid>
  <msg>
-  <empty>There is no tab on this view</empty>
+  <empty>Bu görünümde sekme yok</empty>
  </msg>
 </grid>
 </UITabList>
 
 <UIViewPermissionList>
- <title>Select Owner with permissions on this view:</title>
+ <title>Bu görünümün sahibini ve izinlerini seçin:</title>
 <label>
- <permission>{0} in {1}</permission>
+ <permission>{1} içindeki {0}</permission>
 </label>
 <msg>
- <confirm-delete>Are you sure you want to delete this permission?</confirm-delete>
-  <permission-cannot-empty>View permission is required and cannot be empty.</permission-cannot-empty>
+ <confirm-delete>Bu izin silmek istediğinizden emin misiniz?</confirm-delete>
+  <permission-cannot-empty>Görünüm izni gereklidir ve boş olamaz.</permission-cannot-empty>
 </msg>
 </UIViewPermissionList>
 
 <UIViewPermissionList>
+                         <title>
+                           <Delete>Sil</Delete>
+                         </title>
  <header>
-<friendlyPermission>Permissions</friendlyPermission>
+<friendlyPermission>İzinler</friendlyPermission>
      <action>Eylem</action>
  </header>
 <action>
@@ -886,20 +897,20 @@
 </action>
 <grid>
  <msg>
-  <empty>There is no permission on this view</empty>
+  <empty>Bu görünümü hiçbir izni yok</empty>
  </msg>
 </grid>
 </UIViewPermissionList>
 
 <UIViewPermissionForm>
 <action>
- <Add>Add</Add>
+ <Add>Ekle</Add>
 </action>
 <label>
- <userOrGroup>User or Group</userOrGroup>
+ <userOrGroup>Kullanıcı veya Grup</userOrGroup>
 </label>
 <msg>
- <permission-exist>The permission '{0}' already exists in the list.</permission-exist>
+ <permission-exist>'{0}' İzni zaten listede var.</permission-exist>
 </msg>
 </UIViewPermissionForm>
 
@@ -910,73 +921,73 @@
   -->
   <UIViewForm>
     <title>
-      <AddPermission>Add Permission</AddPermission>
-      <RemovePermission>Remove Permission</RemovePermission>
+      <AddPermission>İzin Ekle</AddPermission>
+      <RemovePermission>İznini Kaldır</RemovePermission>
     </title>
     <msg>
-      <view-name-invalid>The view name is required.</view-name-invalid>
-      <fileName-invalid>The view name contains some invalid characters.</fileName-invalid>
-      <permission-not-empty>Please select a permission for the view.</permission-not-empty>      
-      <mustbe-add-tab>Please add a tab.</mustbe-add-tab>
-<mustbe-add-permission>Please select permission for this view</mustbe-add-permission>
-      <view-exist>The view name already exists.</view-exist>
+      <view-name-invalid>Görünüm adı gereklidir.</view-name-invalid>
+      <fileName-invalid>Görünüm adı bazı geçersiz karakterler içeriyor.</fileName-invalid>
+      <permission-not-empty>Lütfen görünüm için bir izin seçin.</permission-not-empty>      
+      <mustbe-add-tab>Lütfen bir sekme ekleyin.</mustbe-add-tab>
+<mustbe-add-permission>Lütfen görünüm için izin seçin</mustbe-add-permission>
+      <view-exist>Görünüm adı zaten var.</view-exist>
     </msg>
     <label>
-      <viewName>Name</viewName>
-      <template>Template</template>
-<version>Restore Version</version>
-      <enableVersion>Enable Version</enableVersion>
-      <hideExplorerPanel>Hide explorer panel in side bar</hideExplorerPanel>
+      <viewName>Adı</viewName>
+      <template>Şablon</template>
+<version>Sürümü geri yükle</version>
+      <enableVersion>Sürüm Kontrolü Etkinleştir</enableVersion>
+      <hideExplorerPanel>Kenar çubuğunda Gezgin panelini gizle</hideExplorerPanel>
     </label>
   </UIViewForm>
   <UITabForm>
     <msg>
-      <button-select-error>Please select at least one function from the list.</button-select-error>
-      <tab-name-error>The tab name is required.</tab-name-error>
-      <fileName-invalid>The tab name contains some invalid characters.</fileName-invalid>
+      <button-select-error>Lütfen en az bir işlev seçin.</button-select-error>
+      <tab-name-error>Sekme adı gereklidir.</tab-name-error>
+      <fileName-invalid>Sekme adı bazı geçersiz karakterler içeriyor.</fileName-invalid>
     </msg>
     <label>
-      <version>Restore Version</version>
-      <viewName>Name</viewName>
-      <tabName>Tab Name</tabName>
-      <permission>Permission</permission>
-      <tabs>Tabs</tabs>
-      <template>Templates</template>
-      <enableVersion>Enable Version</enableVersion>
-      <addFolder>Add Folder</addFolder>
-      <addDocument>Add Document</addDocument>
-      <editDocument>Edit Document</editDocument>
-      <upload>Upload</upload>
-      <paste>Paste</paste>
-      <search>Search</search>
-      <viewReferences>View References</viewReferences>
-      <viewNodeType>View Node Type</viewNodeType>
-      <viewPermissions>View Permissions</viewPermissions>
-      <viewProperties>View Properties</viewProperties>
-      <manageVersions>Manage Versions</manageVersions>
-      <manageAuditing>Manage Auditing</manageAuditing>
-      <managePublications>Manage Publication</managePublications>
-      <manageCategories>Manage Categories</manageCategories>
-      <manageRelations>Manage Relations</manageRelations>
-      <manageActions>Manage Actions</manageActions>
-      <exportNode>Export Node</exportNode>
-      <importNode>Import Node</importNode>
-      <viewRelations>View Relations</viewRelations>
-      <showJCRStructure>Show JCR Structure</showJCRStructure>
-      <watchDocument>Watch Document</watchDocument>
-      <taggingDocument>Tag Document</taggingDocument>
-      <viewMetadatas>View Metadata</viewMetadatas>
-      <overloadThumbnail>Overload Thumbnail</overloadThumbnail>
-      <manageHidden>Hide/Show Content</manageHidden>
+      <version>Sürümü geri yükle</version>
+      <viewName>Adı</viewName>
+      <tabName>Sekme Adı</tabName>
+      <permission>İzin</permission>
+      <tabs>Sekmeler</tabs>
+      <template>Şablonlar</template>
+      <enableVersion>Sürüm Kontrolü Etkinleştir</enableVersion>
+      <addFolder>Klasör Ekle</addFolder>
+      <addDocument>Belge Ekle</addDocument>
+      <editDocument>Belgeyi Düzenle</editDocument>
+      <upload>Yükle</upload>
+      <paste>Yapıştır</paste>
+      <search>Ara</search>
+      <viewReferences>Görünüm Başvuruları</viewReferences>
+      <viewNodeType>Görünüm Düğüm Türü</viewNodeType>
+      <viewPermissions>Görünüm İzinleri</viewPermissions>
+      <viewProperties>Görünüm Özellikleri</viewProperties>
+      <manageVersions>Sürümleri Yönet</manageVersions>
+      <manageAuditing>Denetimini Yönet</manageAuditing>
+      <managePublications>Yayın Yönet</managePublications>
+      <manageCategories>Kategorileri Yönet</manageCategories>
+      <manageRelations>İlişkileri Yönet</manageRelations>
+      <manageActions>Eylemleri Yönet</manageActions>
+      <exportNode>Düğümü dışa aktar</exportNode>
+      <importNode>Düğüm İçe Aktar</importNode>
+      <viewRelations>Görünüm İlişkileri</viewRelations>
+      <showJCRStructure>JCR Yapısını Göster</showJCRStructure>
+      <watchDocument>Belgeyi İzle</watchDocument>
+      <taggingDocument>Etiket Belgesi</taggingDocument>
+      <viewMetadatas>Meta verilerini görüntüle</viewMetadatas>
+      <overloadThumbnail>Çok küçük resim</overloadThumbnail>
+      <manageHidden>İçeriği Gizle/Göster</manageHidden>
       <comment>Yorum</comment>
-      <vote>Vote</vote>  
+      <vote>Oyla</vote>  
       <addCategory>Kategori Ekle</addCategory>
-      <addLocalizationLink>Add Translation</addLocalizationLink>
-      <publicationRequestApproval>Request Approval</publicationRequestApproval>
-      <publicationApproveContent>Approve Content</publicationApproveContent>
-      <publicationPublish>Publish</publicationPublish>
-<contentNavigation>Content Navigation</contentNavigation>
-<addSymLink>Add Symlink</addSymLink>
+      <addLocalizationLink>Çeviri Ekle</addLocalizationLink>
+      <publicationRequestApproval>Onay İste</publicationRequestApproval>
+      <publicationApproveContent>İçeriği Onayla</publicationApproveContent>
+      <publicationPublish>Yayımla</publicationPublish>
+<contentNavigation>İçerik Gezinti</contentNavigation>
+<addSymLink>Sembolik link ekle</addSymLink>
     </label>
     <action>
       <Save>#{word.save}</Save>      
@@ -992,35 +1003,35 @@
     <tab>
       <label>
         <UITabContainer>Eylem</UITabContainer>
-        <UIViewForm>View</UIViewForm>
-        <UIViewPermissionContainer>Permission</UIViewPermissionContainer>    
+        <UIViewForm>Görün</UIViewForm>
+        <UIViewPermissionContainer>İzin</UIViewPermissionContainer>    
       </label>
     </tab>
     <action>
       <Save>#{word.save}</Save>
-      <Reset>Reset</Reset>
+      <Reset>Sıfırla</Reset>
       <Cancel>#{word.cancel}</Cancel>
       <Close>#{word.close}</Close>
-      <Restore>Restore</Restore>
+      <Restore>Geri Yükle</Restore>
     </action>
   </UIViewFormTabPane>
   <PopupViewPermission>
     <title>
-      <UIPermissionSelector>Select Permission</UIPermissionSelector>
+      <UIPermissionSelector>Yetkileri Seç</UIPermissionSelector>
     </title>
   </PopupViewPermission>
 
 <TabForm_Popup>
  <title>
-  <UITabForm>Add/Edit Tab</UITabForm>
+  <UITabForm>Sekme Ekle/Düzenle</UITabForm>
  </title>
 </TabForm_Popup>
 
 <tab_permission>
  <title>
-  <SelectUser>Select User</SelectUser>
-<SelectMember>Select Member</SelectMember>
-<AddAny>Any</AddAny>
+  <SelectUser>Kullanıcı Seçin</SelectUser>
+<SelectMember>Üye Seçin</SelectMember>
+<AddAny>Herhangi bir</AddAny>
  </title>
 </tab_permission>
   <!--
@@ -1030,24 +1041,24 @@
   -->
   <UIECMTemplateList>
     <title>
-      <View>View</View>
+      <View>Görün</View>
       <EditInfo>Düzenle</EditInfo>
       <Delete>Sil</Delete>
     </title>
     <header>
-      <name>Name</name>
+      <name>Adı</name>
       <path>Değer</path>
-      <baseVersion>Base Version</baseVersion>
+      <baseVersion>Temel Sürüm</baseVersion>
       <action>Eylem</action>
     </header>
     <action>
-      <Add>Add</Add>
+      <Add>Ekle</Add>
     </action>
     <msg>
-      <template-in-use>Cannot delete {0}. It is currently in use.</template-in-use>
-      <confirm-delete>Are you sure you want to delete this template?</confirm-delete>
-      <access-denied>Access denied. You do not have permission to use this function.</access-denied>
-      <delete-permission-denied>You do not have permission to delete '{0}' template.</delete-permission-denied>
+      <template-in-use>{0} Silemezsiniz. Şu anda kullanımda.</template-in-use>
+      <confirm-delete>Bu şablonu silmek istediğinizden emin misiniz?</confirm-delete>
+      <access-denied>Erişim engellendi. Bu işlevi kullanmak için izniniz yok.</access-denied>
+      <delete-permission-denied>'{0}' Şablonu silmek için izniniz yok.</delete-permission-denied>
     </msg>
   </UIECMTemplateList>
   <!--
@@ -1059,32 +1070,32 @@
     <action>
       <Save>#{word.save}</Save>
       <Cancel>#{word.cancel}</Cancel>
-      <Reset>Reset</Reset>
-      <Restore>Restore</Restore>
+      <Reset>Sıfırla</Reset>
+      <Restore>Geri Yükle</Restore>
       <Refresh>#{word.refresh}</Refresh>
     </action>
     <msg>
-      <version-restored>Version {0} was restored successfully.</version-restored>
-      <role-require>Please select a permission.</role-require>
-      <template-name-exist>The template name '{0}' already exists.</template-name-exist>
-      <add-permission-denied>You do not have permission to add a new template.</add-permission-denied>
-      <edit-permission-denied>You do not have permission to modify '{0}' template.</edit-permission-denied>
+      <version-restored>Sürüm {0} başarıyla geri yüklendi.</version-restored>
+      <role-require>Lütfen bir izin seçin.</role-require>
+      <template-name-exist>Şablon adı '{0}' zaten var.</template-name-exist>
+      <add-permission-denied>Yeni şablonu eklemek için izniniz yok.</add-permission-denied>
+      <edit-permission-denied>'{0}' Şablonu üzerinde değişiklik yapma izniniz yok.</edit-permission-denied>
     </msg>
     <tab>
       <label>
-        <template>Template</template>
-        <defaultDialog>Dialog</defaultDialog>
-        <defaultView>View</defaultView>
+        <template>Şablon</template>
+        <defaultDialog>İletişim</defaultDialog>
+        <defaultView>Görün</defaultView>
       </label>
     </tab>
     <label>
       <name>Adı:</name>
-      <label>Label:</label>
-      <isDocumentTemplate>is Document Template:</isDocumentTemplate>
-      <dialog>Dialog Content</dialog>
-      <view>View Content</view>
-      <permission>Permission:</permission>
-      <selectPemistion>Permission</selectPemistion>
+      <label>Etiket:</label>
+      <isDocumentTemplate>Belge Şablonu:</isDocumentTemplate>
+      <dialog>İletişim İçeriği</dialog>
+      <view>İçeriği Görüntüle</view>
+      <permission>İzni:</permission>
+      <selectPemistion>İzin</selectPemistion>
     </label>
   </UITemplateForm>
   <!--
@@ -1094,27 +1105,27 @@
   -->
   <ecmTempForm>
     <label>
-      <version>Select Version:</version>
-      <content>Content:</content>
+      <version>Sürümü Seçin:</version>
+      <content>İçerik:</content>
       <name>Adı:</name>
-      <homeTemplate>Template Type:</homeTemplate>
-      <enableVersion>Enabled Version:</enableVersion>
+      <homeTemplate>Şablon Türü:</homeTemplate>
+      <enableVersion>Sürüm Kontrolü Etkinleştir:</enableVersion>
     </label>
   </ecmTempForm>
   <ecmTempFormPopup>
     <title>
-      <ecmTempForm>Add/Edit View Template</ecmTempForm>
+      <ecmTempForm>Görünüm Şablonu Ekle/Düzenle</ecmTempForm>
     </title>
   </ecmTempFormPopup>
   <ecmTempFormAdd>
     <title>
-      <ecmTempForm>Add Explorer Template</ecmTempForm>
-      <ecmTempFormAdd>Add Explorer Template</ecmTempFormAdd>
+      <ecmTempForm>Gezinti Şablonu Ekle</ecmTempForm>
+      <ecmTempFormAdd>Gezinti Şablonu Ekle</ecmTempFormAdd>
     </title>
   </ecmTempFormAdd>
   <ecmTempFormEdit>
     <title>
-      <ecmTempForm>Edit Explorer Template</ecmTempForm>
+      <ecmTempForm>Gezinti Şablonu Düzenle</ecmTempForm>
     </title>
   </ecmTempFormEdit>
 
@@ -1130,7 +1141,7 @@
   -->
   <UIECMFilterForm>
     <label>
-      <selectScript>Select Category</selectScript>
+      <selectScript>Kategori Seçin</selectScript>
     </label>
   </UIECMFilterForm>
   <!--
@@ -1142,15 +1153,15 @@
     <action>
       <Edit>#{word.edit}</Edit>
       <Delete>#{word.delete}</Delete>
-      <AddNew>Add Script</AddNew>
+      <AddNew>Script Ekle</AddNew>
     </action>
     <msg>
-      <confirm-delete>Are you sure you want to delete this script?</confirm-delete>
+      <confirm-delete>Bu scripti silmek istediğinizden emin misiniz?</confirm-delete>
     </msg>
     <header>
-      <scriptName>Name</scriptName>
+      <scriptName>Adı</scriptName>
       <path>Script</path>
-      <baseVersion>Base Version</baseVersion>
+      <baseVersion>Temel Sürüm</baseVersion>
       <action>Eylemler</action>
     </header>
     <tooltip>
@@ -1175,13 +1186,13 @@
       <Restore>#{word.restore}</Restore>
       <Cancel>#{word.cancel}</Cancel>
       <Refresh>#{word.refresh}</Refresh>
-      <Change>Change</Change>
+      <Change>Değiştir</Change>
     </action>
     <msg>
-      <version-restored>Version {0} was restored successfully.</version-restored>
-      <name-null>Please enter the script name.</name-null>
-      <name-exist>The script name '{0}' already exists.</name-exist>
-      <fileName-invalid>The script name has some invalid characters.</fileName-invalid>
+      <version-restored>Sürüm {0} başarıyla geri yüklendi.</version-restored>
+      <name-null>Lütfen script adını girin.</name-null>
+      <name-exist>Script adı '{0}' zaten.</name-exist>
+      <fileName-invalid>Script adında geçersiz bir karakter var.</fileName-invalid>
     </msg>
   </UIScriptForm>
   <!--
@@ -1191,16 +1202,16 @@
   -->
   <ScriptContainerPopup>
     <title>
-      <UIScriptForm>Add/Edit Script</UIScriptForm>
+      <UIScriptForm>Script Ekle/Düzenle</UIScriptForm>
     </title>
   </ScriptContainerPopup>
   <UIScriptForm>
     <label>
-      <selectVersion>Versions</selectVersion>
+      <selectVersion>Sürümler</selectVersion>
       <scriptContent>İçerik</scriptContent>
-      <scriptLabel>Name</scriptLabel>
+      <scriptLabel>Adı</scriptLabel>
       <scriptName>Script</scriptName>
-      <enableVersion>Enable Versioning</enableVersion>
+      <enableVersion>Sürüm Kontrolü Etkinleştir</enableVersion>
     </label>
   </UIScriptForm>
   <!--
@@ -1211,11 +1222,11 @@
  
   <ecmScriptForm>
     <label>
-      <selectVersion>Versions</selectVersion>
+      <selectVersion>Sürümler</selectVersion>
       <scriptContent>İçerik</scriptContent>
-      <scriptLabel>Name</scriptLabel>
+      <scriptLabel>Adı</scriptLabel>
       <scriptName>Script</scriptName>
-      <enableVersion>Enable Versioning</enableVersion>
+      <enableVersion>Sürüm Kontrolü Etkinleştir</enableVersion>
     </label>
   </ecmScriptForm>
   <!--
@@ -1230,32 +1241,32 @@
     </action>
     <title>Kategori Ekle</title>
     <label>
-      <taxonomyName>Category Name</taxonomyName>
-      <parentPath>Parent</parentPath>
+      <taxonomyName>Kategori Adı</taxonomyName>
+      <parentPath>Üst</parentPath>
     </label>
     <msg>
-      <exist>The "{0}" category already exists.</exist>
-      <name-null>Please specify the category name.</name-null>
-      <name-invalid>The category name has some invalid characters.</name-invalid>
-      <name-too-long>The category name must have less than 30 characters.</name-too-long>
+      <exist>"{0}" Kategori zaten var.</exist>
+      <name-null>Lütfen kategori adını belirtin.</name-null>
+      <name-invalid>Kategori adı geçersiz bir karakter var.</name-invalid>
+      <name-too-long>Kategori adında 30'dan az karakter olmalıdır.</name-too-long>
     </msg>
   </UITaxonomyForm>
     
   <EditTaxonomyTreePopup>
     <title>
-      <UITaxonomyTreeContainer>Edit Category Tree</UITaxonomyTreeContainer>
+      <UITaxonomyTreeContainer>Kategori Ağacı Düzenle</UITaxonomyTreeContainer>
     </title>
   </EditTaxonomyTreePopup>
 
   <AddTaxonomyTreePopup>
     <title>
-      <UITaxonomyTreeContainer>Add Category Tree</UITaxonomyTreeContainer>
+      <UITaxonomyTreeContainer>Kategori Ağacı Ekle</UITaxonomyTreeContainer>
     </title>
   </AddTaxonomyTreePopup>
   
   <TaxonomyPopupCreateChild>
     <title>
-      <UITaxonomyTreeCreateChildForm>Edit Category Tree</UITaxonomyTreeCreateChildForm>
+      <UITaxonomyTreeCreateChildForm>Kategori Ağacı Düzenle</UITaxonomyTreeCreateChildForm>
     </title>
   </TaxonomyPopupCreateChild>
 
@@ -1265,47 +1276,47 @@
       <Cancel>#{word.cancel}</Cancel>
     </action>
     <label>
-      <parentPath>Parent:</parentPath>
-      <taxonomyName>Category Name:</taxonomyName>
+      <parentPath>Üst:</parentPath>
+      <taxonomyName>Kategori Adı:</taxonomyName>
     </label>
     <msg>
-      <name-null>The category name is empty.</name-null>
-      <name-invalid>The category name is invalid.</name-invalid>
-      <name-too-long>The category name must not have more than {0} characters.</name-too-long>
-      <exist>The category name already exists.</exist>
+      <name-null>Kategori adı yok.</name-null>
+      <name-invalid>Kategori adı geçerli değil.</name-invalid>
+      <name-too-long>Kategori adı {0} karakterden fazla olmamalıdır.</name-too-long>
+      <exist>Kategori adı zaten var.</exist>
     </msg>
 </UITaxonomyTreeCreateChildForm>
 
   <PopupComponent>
     <title>
-      <UIOneNodePathSelector>Select Path</UIOneNodePathSelector>
+      <UIOneNodePathSelector>Yolu Seçin</UIOneNodePathSelector>
     </title>
   </PopupComponent>
   
   <TaxoPopupUserSelector>
   <title>
-      <TaxoTreeSelectUserOrGroup>Select User</TaxoTreeSelectUserOrGroup>
-      <UIPermissionTreeSelectUser>Select User</UIPermissionTreeSelectUser>
+      <TaxoTreeSelectUserOrGroup>Kullanıcı Seçin</TaxoTreeSelectUserOrGroup>
+      <UIPermissionTreeSelectUser>Kullanıcı Seçin</UIPermissionTreeSelectUser>
     </title>
   </TaxoPopupUserSelector>
 
   <TaxoTreeSelectUserOrGroupPopup>
   <title>
-      <TaxoTreeSelectUserOrGroup>Select Membership</TaxoTreeSelectUserOrGroup>
+      <TaxoTreeSelectUserOrGroup>Üyelik Seçin</TaxoTreeSelectUserOrGroup>
     </title>
   </TaxoTreeSelectUserOrGroupPopup>
   
   <TaxoTreeAnyPermission>
     <label>
-      <any>Any Permission</any>
+      <any>Herhangi bir İzin</any>
       <anyPermission>TaxoTreeAnyPermission</anyPermission>
     </label>
   </TaxoTreeAnyPermission>
   
   <TaxoTreeSelectUserOrGroup>
     <label>
-      <selectGroup>Select Group</selectGroup>
-      <selectMembership>Select Membership</selectMembership>
+      <selectGroup>Grup Seçin</selectGroup>
+      <selectMembership>Üyelik Seçin</selectMembership>
     </label>
   </TaxoTreeSelectUserOrGroup>
   
@@ -1316,23 +1327,23 @@
   -->
   <UITaxonomyTreeList>
     <header>
-      <name>Category Tree</name>
-      <workspace>Workspace</workspace>
-      <homePath>Path</homePath>
+      <name>Kategori Ağacı</name>
+      <workspace>Çalışma Alanı</workspace>
+      <homePath>Yol</homePath>
       <action>Eylem</action>
     </header>
     <action>
-      <AddTaxonomyTree>Add Category Tree</AddTaxonomyTree>
+      <AddTaxonomyTree>Kategori Ağacı Ekle</AddTaxonomyTree>
     </action>
     <tooltip>
-      <EditTaxonomyTree>Edit Category Tree</EditTaxonomyTree>
-      <Delete>Delete Category Tree</Delete>
+      <EditTaxonomyTree>Kategori Ağacı Düzenle</EditTaxonomyTree>
+      <Delete>Kategori Ağacını Sil</Delete>
     </tooltip>
-    <title>Browse Category Tree</title>
+    <title>Kategori Ağacına Gözat</title>
     <msg>
-      <no-list>No category trees have been created.</no-list>
-      <confirm-delete>Are you sure you want to delete the category tree?</confirm-delete>
-      <is-in-trash>This category tree has been moved to the Trash.</is-in-trash>
+      <no-list>Hiçbir kategori ağacı oluşturulamadı.</no-list>
+      <confirm-delete>Kategori ağacı silmek istediğinizden emin misiniz?</confirm-delete>
+      <is-in-trash>Bu kategori ağacı Çöp klasörüne taşındı.</is-in-trash>
     </msg>
   </UITaxonomyTreeList>
   
@@ -1343,68 +1354,68 @@
   -->
   <UITaxonomyTreeForm>
     <label>
-      <name>Name</name>
-      <workspace>Workspace</workspace>
-      <homePath>Path</homePath>
-      <permissions>Permissions</permissions>
+      <name>Adı</name>
+      <workspace>Çalışma Alanı</workspace>
+      <homePath>Yol</homePath>
+      <permissions>İzinler</permissions>
     </label>
     <msg>
-      <homapath-emty>Input Path</homapath-emty>
+      <homapath-emty>Giriş Yolu</homapath-emty>
     </msg>
   </UITaxonomyTreeForm>
   
   <UIPermissionTreeForm>
     <label>
-      <UIPopupWindow>Select</UIPopupWindow>
+      <UIPopupWindow>Seçin</UIPopupWindow>
       <permission>UIPermissionTreeForm</permission>
-      <userOrGroup>User Or Group</userOrGroup>
-      <read>Read Right</read>
-      <add_node>Add Node Right</add_node>
-      <set_property>Set Property Right</set_property>
-      <remove>Remove Right</remove>
+      <userOrGroup>Kullanıcı veya Grup</userOrGroup>
+      <read>Okuma Yetkisi</read>
+      <add_node>Düğüm Ekleme Yetkisi</add_node>
+      <set_property>Özellik Ayarlama Yetkisi</set_property>
+      <remove>Çıkarma Yetkisi</remove>
     </label>
-    <title>Add a permission to that node</title>
+    <title>Düğüme bir izin ekleyin</title>
     <action>
       <Close>#{word.close}</Close>
       <Save>Kaydet</Save>
-      <Reset>Reset</Reset>
+      <Reset>Sıfırla</Reset>
     </action>
     <msg>
-      <checkbox-require>Please select at least one permission.</checkbox-require>
-      <userOrGroup-required>Please select a user or group before saving the permission.</userOrGroup-required>
-      <not-change-permission>You do not have the right to add a permission.</not-change-permission>
-      <access-denied>Access denied. You cannot remove this permission.</access-denied>
+      <checkbox-require>Lütfen en az bir izin seçin.</checkbox-require>
+      <userOrGroup-required>Lütfen izni kaydetmeden önce  bir kullanıcı veya grup seçin.</userOrGroup-required>
+      <not-change-permission>Bir izni ekleme hakkınız yok.</not-change-permission>
+      <access-denied>Erişim engellendi. Bu izini kaldıramazsınız.</access-denied>
     </msg>
   </UIPermissionTreeForm>
   
   <PopupTaxonomyJCRBrowser>
   <title>
-      <UIOneNodePathSelector>Select Home Path</UIOneNodePathSelector>
+      <UIOneNodePathSelector>Anasayfa Yolunu Seçin</UIOneNodePathSelector>
     </title>
   </PopupTaxonomyJCRBrowser>
   
   <PopupTaxonomyTreePermission>
     <title>
-      <UIPermissionSelector>Select Permission</UIPermissionSelector>
+      <UIPermissionSelector>Yetkileri Seç</UIPermissionSelector>
     </title>
    </PopupTaxonomyTreePermission>
    
    <PopupDrivePermission>
     <title>
-      <AddDrivePermissionSelector>Add Permission</AddDrivePermissionSelector>
-      <UIPermissionSelector>Select Permission</UIPermissionSelector>
+      <AddDrivePermissionSelector>İzin Ekle</AddDrivePermissionSelector>
+      <UIPermissionSelector>Yetkileri Seç</UIPermissionSelector>
     </title>
   </PopupDrivePermission>
   
   <UIPopupWindow>
     <title>
-      <UIPermissionManager>Permission Management</UIPermissionManager>
+      <UIPermissionManager>İzin Yönetimi</UIPermissionManager>
     </title>
    </UIPopupWindow>
 
   <PopupUserSelector>
     <title>
-      <UIUserContainer>Permission Management</UIUserContainer>
+      <UIUserContainer>İzin Yönetimi</UIUserContainer>
     </title>
    </PopupUserSelector>
    
@@ -1412,27 +1423,27 @@
     <action>
       <title>
         <Edit>Düzenle</Edit>
-        <Delete>Remove Permission</Delete>
+        <Delete>İznini Kaldırma</Delete>
       </title>
     </action>
     <header>
-      <usersOrGroups>User or Group</usersOrGroups>
-      <read>Read</read>
-      <addNode>Modify Node</addNode>
+      <usersOrGroups>Kullanıcı veya Grup</usersOrGroups>
+      <read>Oku</read>
+      <addNode>Düğümü Değiştir</addNode>
       <remove>Kaldır</remove>
       <action>Eylem</action>
     </header>
     <msg>
-      <confirm-delete-permission>Are you sure you want to remove this permission?</confirm-delete-permission>
-      <no-permission-tochange>You do not have the right to remove this permission.</no-permission-tochange>
-      <no-permission-remove>You cannot remove the owner or the system user.</no-permission-remove>
-      <access-denied>Access denied. You cannot remove this permission.</access-denied>
+      <confirm-delete-permission>Bu izni kaldırmak istediğinizden emin misiniz?</confirm-delete-permission>
+      <no-permission-tochange>Bu izin kaldırma yetkiniz yok.</no-permission-tochange>
+      <no-permission-remove>Sahiplerini veya sistem kullanıcılarını kaldıramazsınız.</no-permission-remove>
+      <access-denied>Erişim engellendi. Bu izini kaldıramazsınız.</access-denied>
     </msg>
   </UIPermissionInfo>
   <permission>
     <title>
-      <SelectUser>Select User</SelectUser>
-      <SelectMember>Select Membership</SelectMember>
+      <SelectUser>Kullanıcı Seçin</SelectUser>
+      <SelectMember>Üyelik Seçin</SelectMember>
       <AddAny>Herkes</AddAny>
     </title>
   </permission>
@@ -1443,40 +1454,40 @@
   -->
   <SelectUserOrGroup>
     <title>
-      <UIGroupSelector>Select User</UIGroupSelector>
-      <UIPermissionSelector>Select Member</UIPermissionSelector>
-      <UIGroupMemberSelector>Select Membership</UIGroupMemberSelector>
+      <UIGroupSelector>Kullanıcı Seçin</UIGroupSelector>
+      <UIPermissionSelector>Üye Seçin</UIPermissionSelector>
+      <UIGroupMemberSelector>Üyelik Seçin</UIGroupMemberSelector>
     </title>
   </SelectUserOrGroup>
   <UIGroupSelector>
     <label>
-      <selectGroup>Select Group</selectGroup>
-      <selectUser>Select User</selectUser>
+      <selectGroup>Grup Seçin</selectGroup>
+      <selectUser>Kullanıcı Seçin</selectUser>
     </label>
     <msg>
-      <not-change-owner>'{0}' is the owner of this node and has full control permission.</not-change-owner>
+      <not-change-owner>'{0}' Bu düğümün sahibidir ve tam kontrol iznine sahiptir.</not-change-owner>
     </msg>
   </UIGroupSelector>
   <UIPermissionForm>
     <label>
-      <UIPopupWindow>Select</UIPopupWindow>
+      <UIPopupWindow>Seçin</UIPopupWindow>
       <permission>UIPermissionForm</permission>
-      <userOrGroup>User or Group</userOrGroup>
-      <read>Read</read>
-      <add_node>Modify</add_node>
+      <userOrGroup>Kullanıcı veya Grup</userOrGroup>
+      <read>Oku</read>
+      <add_node>Değiştir</add_node>
       <remove>Kaldır</remove>
     </label>
-    <title>Add permission to that node</title>
+    <title>Düğüme bir izin ekleyin</title>
     <action>
       <Close>#{word.close}</Close>
       <Save>#{word.save}</Save>
-      <Reset>Reset</Reset>
+      <Reset>Sıfırla</Reset>
     </action>
     <msg>
-      <checkbox-require>Please select at least one permission.</checkbox-require>
-      <userOrGroup-required>Please select a user or group before saving the permission.</userOrGroup-required>
-      <not-change-permission>You do not have the right to add a permission.</not-change-permission>
-      <access-denied>Access denied. You cannot remove this permission.</access-denied>
+      <checkbox-require>Lütfen en az bir izin seçin.</checkbox-require>
+      <userOrGroup-required>Lütfen izni kaydetmeden önce  bir kullanıcı veya grup seçin.</userOrGroup-required>
+      <not-change-permission>Bir izni ekleme hakkınız yok.</not-change-permission>
+      <access-denied>Erişim engellendi. Bu izini kaldıramazsınız.</access-denied>
     </msg>
   </UIPermissionForm>
   
@@ -1488,7 +1499,7 @@
   
   <UITaxonomyManager>
     <title>
-      <permission>Permission Management</permission>
+      <permission>İzin Yönetimi</permission>
     </title>
   </UITaxonomyManager>
   <!--
@@ -1500,17 +1511,17 @@
     <header>
       <name>Türü</name>
       <action>Eylem</action>
-      <label>Template</label>
+      <label>Şablon</label>
       <icon>Simge</icon>
     </header>
     <action>
-      <AddNew>Add Template</AddNew>
+      <AddNew>Şablon Ekle</AddNew>
     </action>
     <msg>
-      <confirm-delete>Do you really want to delete?</confirm-delete>
-      <access-denied>Access denied. You do not have permission to use this function.</access-denied>
-      <editing-template>Access denied. You cannot delete and edit the template simultaneously.</editing-template>
-      <template-not-exist>The template that you are trying to delete doesn't exist.</template-not-exist>
+      <confirm-delete>Gerçekten silmek istiyor musunuz?</confirm-delete>
+      <access-denied>Erişim engellendi. Bu işlevi kullanmak için izniniz yok.</access-denied>
+      <editing-template>Erişim engellendi. Şablonda silme ve düzenleme aynı anda olamaz.</editing-template>
+      <template-not-exist>Silmeye çalıştığınız şablon yok.</template-not-exist>
     </msg>
   </UITemplateList>
   
@@ -1518,35 +1529,35 @@
     <header>
       <name>Türü</name>
       <action>Eylem</action>
-      <label>Template</label>
+      <label>Şablon</label>
       <icon>Simge</icon>
     </header>
     <action>
-      <AddNew>Add Template</AddNew>
+      <AddNew>Şablon Ekle</AddNew>
     </action>
     <msg>
-      <confirm-delete>Do you really want to delete?</confirm-delete>
-      <access-denied>Access denied. You do not have permission to use this function.</access-denied>
-      <editing-template>Access denied. You cannot delete and edit this template simultaneously.</editing-template>
-      <template-not-exist>The template that you are trying to delete doesn't exist.</template-not-exist>
+      <confirm-delete>Gerçekten silmek istiyor musunuz?</confirm-delete>
+      <access-denied>Erişim engellendi. Bu işlevi kullanmak için izniniz yok.</access-denied>
+      <editing-template>Erişim engellendi. Şablonda silme ve düzenleme aynı anda olamaz.</editing-template>
+      <template-not-exist>Silmeye çalıştığınız şablon yok.</template-not-exist>
     </msg>
   </UIActionsTemplateList>
   
   <UIOthersTemplateList>
     <header>
       <name>Türü</name>
-      <label>Template</label>
+      <label>Şablon</label>
       <icon>Simge</icon>
       <action>Eylem</action>
     </header>
     <action>
-      <AddNew>Add Template</AddNew>
+      <AddNew>Şablon Ekle</AddNew>
     </action>
     <msg>
-      <confirm-delete>Do you really want to delete?</confirm-delete>
-      <access-denied>Access denied. You do not have permission to use this function.</access-denied>
-      <editing-template>Access denied. You cannot delete and edit this template simultaneously.</editing-template>
-      <template-not-exist>The template that you are trying to delete doesn't exist.</template-not-exist>
+      <confirm-delete>Gerçekten silmek istiyor musunuz?</confirm-delete>
+      <access-denied>Erişim engellendi. Bu işlevi kullanmak için izniniz yok.</access-denied>
+      <editing-template>Erişim engellendi. Şablonda silme ve düzenleme aynı anda olamaz.</editing-template>
+      <template-not-exist>Silmeye çalıştığınız şablon yok.</template-not-exist>
     </msg>
   </UIOthersTemplateList>
 
@@ -1559,38 +1570,46 @@
 <UITabPane>
  <title>
  <ContentTemplateContainer>İçerik</ContentTemplateContainer>
-<CateTemplateContainer>Navigation</CateTemplateContainer>
-<PageTemplateContainer>Paginator</PageTemplateContainer>
+<CateTemplateContainer>Gezinti</CateTemplateContainer>
+<PageTemplateContainer>Sayfalandırma</PageTemplateContainer>
  </title>
 </UITabPane>
 
   <UICLVTemplateList>
+    <title>
+      <Edit>Düzenle</Edit>
+      <Delete>Sil</Delete>
+    </title>
     <header>
-      <title>Name</title>
+      <title>Adı</title>
       <action>Eylem</action>
-      <template>Template</template>
+      <template>Şablon</template>
     </header>
     <action>
-      <AddTemplate>Add Template</AddTemplate>
+      <AddTemplate>Şablon Ekle</AddTemplate>
 <Edit>Düzenle</Edit>
 <Delete>Sil</Delete>
     </action>
     <msg>
-      <confirm-delete>Are you sure you want to delete this template?</confirm-delete>
-      <access-denied>Access denied. You do not have permission to use this function.</access-denied>
-      <editing-template>Access denied. You cannot delete and edit this template simultaneously.</editing-template>
-      <template-not-exist>The template that you are trying to delete doesn't exist.</template-not-exist>
+      <confirm-delete>Bu şablonu silmek istediğinizden emin misiniz?</confirm-delete>
+      <access-denied>Erişim engellendi. Bu işlevi kullanmak için izniniz yok.</access-denied>
+      <editing-template>Erişim engellendi. Şablonda silme ve düzenleme aynı anda olamaz.</editing-template>
+      <template-not-exist>Silmeye çalıştığınız şablon yok.</template-not-exist>
     </msg>
   </UICLVTemplateList>
 
 <CateTemplateList>
     <header>
-      <title>Name</title>
+      <title>Adı</title>
       <action>Eylem</action>
-      <template>Template</template>
+      <template>Şablon</template>
     </header>
+    <title>
+      <Edit>Düzenle</Edit>
+      <Delete>Sil</Delete>
+    </title>
     <action>
-      <AddTemplate>Add Template</AddTemplate>
+      <AddTemplate>Şablon Ekle</AddTemplate>
 <Edit>Düzenle</Edit>
 <Delete>Sil</Delete>
     </action>
@@ -1598,12 +1617,12 @@
 
 <PageTemplateList>
     <header>
-      <title>Name</title>
+      <title>Adı</title>
       <action>Eylem</action>
-      <template>Template</template>
+      <template>Şablon</template>
     </header>
     <action>
-      <AddTemplate>Add Template</AddTemplate>
+      <AddTemplate>Şablon Ekle</AddTemplate>
 <Edit>Düzenle</Edit>
 <Delete>Sil</Delete>
     </action>
@@ -1611,89 +1630,89 @@
 
 <EditCLVTemplatePopup_ContentTemplateContainer>
  <title>
-   <UICLVTemplateForm_ContentTemplateContainer>Edit List Template</UICLVTemplateForm_ContentTemplateContainer>   
+   <UICLVTemplateForm_ContentTemplateContainer>Liste Şablonu Düzenle</UICLVTemplateForm_ContentTemplateContainer>   
  </title>
 </EditCLVTemplatePopup_ContentTemplateContainer>
 
 <EditCLVTemplatePopup_CateTemplateContainer>
  <title>
-   <UICLVTemplateForm_CateTemplateContainer>Edit List Template</UICLVTemplateForm_CateTemplateContainer>   
+   <UICLVTemplateForm_CateTemplateContainer>Liste Şablonu Düzenle</UICLVTemplateForm_CateTemplateContainer>   
  </title>
 </EditCLVTemplatePopup_CateTemplateContainer>
 
 <EditCLVTemplatePopup_PageTemplateContainer>
  <title>
-   <UICLVTemplateForm_PageTemplateContainer>Edit List Template</UICLVTemplateForm_PageTemplateContainer>   
+   <UICLVTemplateForm_PageTemplateContainer>Liste Şablonu Düzenle</UICLVTemplateForm_PageTemplateContainer>   
  </title>
 </EditCLVTemplatePopup_PageTemplateContainer>
 
 <CLVTemplatePopup_ContentTemplateContainer>
  <title>
-   <UICLVTemplateForm_ContentTemplateContainer>Add List Template</UICLVTemplateForm_ContentTemplateContainer>   
+   <UICLVTemplateForm_ContentTemplateContainer>Liste Şablonu Ekle</UICLVTemplateForm_ContentTemplateContainer>   
  </title>
 </CLVTemplatePopup_ContentTemplateContainer>
 
 <CLVTemplatePopup_CateTemplateContainer>
  <title>
-   <UICLVTemplateForm_CateTemplateContainer>Add List Template</UICLVTemplateForm_CateTemplateContainer>   
+   <UICLVTemplateForm_CateTemplateContainer>Liste Şablonu Ekle</UICLVTemplateForm_CateTemplateContainer>   
  </title>
 </CLVTemplatePopup_CateTemplateContainer>
 
 <CLVTemplatePopup_PageTemplateContainer>
  <title>
-   <UICLVTemplateForm_PageTemplateContainer>Add List Template</UICLVTemplateForm_PageTemplateContainer>   
+   <UICLVTemplateForm_PageTemplateContainer>Liste Şablonu Ekle</UICLVTemplateForm_PageTemplateContainer>   
  </title>
 </CLVTemplatePopup_PageTemplateContainer>
 
 <UICLVTemplateForm_ContentTemplateContainer>
  <action>
   <Save>#{word.save}</Save>
-<Reset>Reset</Reset>
+<Reset>Sıfırla</Reset>
 <Cancel>#{word.cancel}</Cancel>
  </action>
 <label>
- <title>Name</title>
-<template>Template Name</template>
+ <title>Adı</title>
+<template>Şablon Adı</template>
 <content>İçerik</content>
-<type>Template Type</type>
+<type>Şablon Türü</type>
 </label>
 </UICLVTemplateForm_ContentTemplateContainer>
 
 <UICLVTemplateForm_PageTemplateContainer>
  <action>
   <Save>#{word.save}</Save>
-<Reset>Reset</Reset>
+<Reset>Sıfırla</Reset>
 <Cancel>#{word.cancel}</Cancel>
  </action>
 <label>
- <title>Name</title>
-<template>Template Name</template>
+ <title>Adı</title>
+<template>Şablon Adı</template>
 <content>İçerik</content>
-<type>Template Type</type>
+<type>Şablon Türü</type>
 </label>
 </UICLVTemplateForm_PageTemplateContainer>
 
 <UICLVTemplateForm_CateTemplateContainer>
  <action>
   <Save>#{word.save}</Save>
-<Reset>Reset</Reset>
+<Reset>Sıfırla</Reset>
 <Cancel>#{word.cancel}</Cancel>
  </action>
 <label>
- <title>Name</title>
-<template>Template Name</template>
+ <title>Adı</title>
+<template>Şablon Adı</template>
 <content>İçerik</content>
-<type>Template Type</type>
+<type>Şablon Türü</type>
 </label>
 </UICLVTemplateForm_CateTemplateContainer>
 <UICLVTemplateForm>
   <label>
-    <paginators>Paginator</paginators>
+    <paginators>Sayfalandırma</paginators>
 <list>İçerik</list>
-<navigation>Navigation</navigation>
+<navigation>Gezinti</navigation>
   </label>
   <msg>
-  <template-existing>This template name already exists. Please select another one.</template-existing>
+  <template-existing>Bu şablon adı zaten var. Lütfen başka bir tane seçin.</template-existing>
   </msg>
 </UICLVTemplateForm>
 
@@ -1704,53 +1723,53 @@
   -->
   <AddNewTemplatePermission>
     <title>
-      <UIPermissionSelector>Select Permission</UIPermissionSelector>
+      <UIPermissionSelector>Yetkileri Seç</UIPermissionSelector>
     </title>
   </AddNewTemplatePermission>
   <TemplatePermission>
     <title>
-      <UIPermissionSelector>Select Permission</UIPermissionSelector>
+      <UIPermissionSelector>Yetkileri Seç</UIPermissionSelector>
     </title>
   </TemplatePermission>
   <TemplateContainerPopup>
     <title>
-      <UITemplateForm>Template Form</UITemplateForm>
+      <UITemplateForm>Şablonu Formu</UITemplateForm>
     </title>
   </TemplateContainerPopup>
   <ViewForm>
     <label>
       <UITemplateContent>ViewForm</UITemplateContent>
-      <UIPopupWindow>View Permission</UIPopupWindow>
-      <selectVersion>Versions</selectVersion>
-      <content>Content:</content>
+      <UIPopupWindow>Görüntüleme İzni</UIPopupWindow>
+      <selectVersion>Sürümler</selectVersion>
+      <content>İçerik:</content>
       <name>Adı:</name>
-      <isDocumentTemplate>is Document Template</isDocumentTemplate>
-      <viewPermission>Permission:</viewPermission>
-      <enableVersion>Versioning activated</enableVersion>
+      <isDocumentTemplate>Belge Şablonu</isDocumentTemplate>
+      <viewPermission>İzni:</viewPermission>
+      <enableVersion>Sürüm kontrolü etkinleştirildi</enableVersion>
     </label>
-    <title>Add/Edit View</title>
+    <title>Görünüm Ekle/Düzenle</title>
   </ViewForm>
   <DialogForm>
     <label>
       <UITemplateContent>DialogForm</UITemplateContent>
-      <UIPopupWindow>Dialog Permission</UIPopupWindow>
-      <selectVersion>Versions</selectVersion>
-      <content>Content:</content>
+      <UIPopupWindow>İletişim İzni</UIPopupWindow>
+      <selectVersion>Sürümler</selectVersion>
+      <content>İçerik:</content>
       <name>Adı:</name>
-      <isDocumentTemplate>is Document Template</isDocumentTemplate>
-      <viewPermission>Permission:</viewPermission>
-      <enableVersion>Enable Versioning</enableVersion>
+      <isDocumentTemplate>Belge Şablonu</isDocumentTemplate>
+      <viewPermission>İzni:</viewPermission>
+      <enableVersion>Sürüm Kontrolü Etkinleştir</enableVersion>
     </label>
-    <title>Add/Edit Dialog</title>
+    <title>İletişim Ekle/Düzenle</title>
   </DialogForm>
   <DialogFormTemplatePermission>
     <title>
-      <UIPermissionSelector>Select Permission</UIPermissionSelector>
+      <UIPermissionSelector>Yetkileri Seç</UIPermissionSelector>
     </title>
   </DialogFormTemplatePermission>
   <ViewFormTemplatePermission>
     <title>
-      <UIPermissionSelector>Select Permission</UIPermissionSelector>
+      <UIPermissionSelector>Yetkileri Seç</UIPermissionSelector>
     </title>
   </ViewFormTemplatePermission>
   <TemplateContainerPopup>
@@ -1779,8 +1798,8 @@
   <UITemplateEditForm>
     <label>
       <name>Adı:</name>
-      <label>Label:</label>
-      <isDocumentTemplate>is Document Template:</isDocumentTemplate>
+      <label>Etiket:</label>
+      <isDocumentTemplate>Belge Şablonu:</isDocumentTemplate>
     </label>
     <action>
       <Save>#{word.save}</Save>
@@ -1795,14 +1814,14 @@
   -->
   <UIDialogTab>
     <header>
-      <name>Name</name>
-      <roles>Roles</roles>
-      <baseVersion>Version</baseVersion>
+      <name>Adı</name>
+      <roles>Roller</roles>
+      <baseVersion>Sürüm</baseVersion>
       <action>Eylemler</action>
     </header>
     <msg>
-      <undeletable>You cannot delete '{0}' because it is the default one.</undeletable>
-      <confirm-delete>Are you sure you want to delete this dialog?</confirm-delete>
+      <undeletable>'{0}' Varsayılan olduğundan silemezsiniz.</undeletable>
+      <confirm-delete>Bu iletişim kutusunu silmek istediğinizden emin misiniz?</confirm-delete>
     </msg>
     <action>
       <title>
@@ -1818,14 +1837,14 @@
   -->
   <UIViewTab>
     <header>
-      <name>Name</name>
-      <roles>Roles</roles>
-      <baseVersion>Version</baseVersion>
+      <name>Adı</name>
+      <roles>Roller</roles>
+      <baseVersion>Sürüm</baseVersion>
       <action>Eylemler</action>
     </header>
     <msg>
-      <undeletable>'{0}' cannot be deleted, it is the default one.</undeletable>
-      <confirm-delete>Do you really want to delete?</confirm-delete>
+      <undeletable>'{0}' silinemez, o varsayılan.</undeletable>
+      <confirm-delete>Gerçekten silmek istiyor musunuz?</confirm-delete>
     </msg>
     <action>
       <title>
@@ -1847,14 +1866,14 @@
       <Refresh>#{word.refresh}</Refresh>
     </action>
     <msg>
-      <name-invalid>The field name must not contain special characters.</name-invalid>
-      <roles-invalid>The Permission field is required.</roles-invalid>
-      <version-restored>Version {0} was restored successfully.</version-restored>
-      <name-exist>The name '{0}' already exists.</name-exist>
+      <name-invalid>Alan adı özel karakterler içermemelidir.</name-invalid>
+      <roles-invalid>İzni, gerekli bir alandır.</roles-invalid>
+      <version-restored>Sürüm {0} başarıyla geri yüklendi.</version-restored>
+      <name-exist>{0} Adı zaten var.</name-exist>
     </msg>
     <title>
-      <AddPermission>Add Permission</AddPermission>
-      <RemovePermission>Remove Permission</RemovePermission>
+      <AddPermission>İzin Ekle</AddPermission>
+      <RemovePermission>İznini Kaldırma</RemovePermission>
     </title>
   </UITemplateContent>
   <!--
@@ -1874,12 +1893,12 @@
   -->
   <JCRBrowser>
     <title>
-      <UIOneNodePathSelector>Select Home Path</UIOneNodePathSelector>
+      <UIOneNodePathSelector>Anasayfa Yolunu Seçin</UIOneNodePathSelector>
     </title>
   </JCRBrowser>
   <JCRBrowserAssets>
     <title>
-      <UIOneNodePathSelector>Select Icon</UIOneNodePathSelector>
+      <UIOneNodePathSelector>Simge Seçin</UIOneNodePathSelector>
     </title>
   </JCRBrowserAssets>
   <!--
@@ -1889,32 +1908,32 @@
   -->
   <UIQueriesList>
     <header>
-      <name>Name</name>
+      <name>Adı</name>
       <type>Türü</type>
-      <statement>Statement</statement>
-      <permission>Permissions</permission>
+      <statement>Açıklama</statement>
+      <permission>İzinler</permission>
       <action>Eylemler</action>
     </header>
     <action>
-      <AddQuery>Add Query</AddQuery>
+      <AddQuery>Sorgu Ekle</AddQuery>
     </action>
     <tooltip>
-      <Edit>Edit this Query</Edit>
-      <Delete>Delete this Query</Delete>
+      <Edit>Bu Sorguyu Düzenle</Edit>
+      <Delete>Bu Sorguyu Sil</Delete>
     </tooltip>
     <msg>
-      <confirm-delete>Are you sure you want to delete this query?</confirm-delete>
-      <query-not-existed>The query does not exist anymore.</query-not-existed>
-      <can-not-remove>An error occurred while deleting the query. Please contact the administrator for information.</can-not-remove>
+      <confirm-delete>Bu sorguyu silmek istediğinizden emin misiniz?</confirm-delete>
+      <query-not-existed>Sorgu artık mevcut değil.</query-not-existed>
+      <can-not-remove>Sorgu silinirken bir hata oluştu. Bilgi için yöneticinize başvurun.</can-not-remove>
     </msg>
   </UIQueriesList>
   <UIQueriesForm>
     <label>
-      <name>Query Name</name>
-      <type>Query Type</type>
-      <statement>Statement</statement>
-      <cache>Enable Cache Results</cache>
-      <permissions>Permissions</permissions>
+      <name>Sorgu Adı</name>
+      <type>Sorgu Türü</type>
+      <statement>Açıklama</statement>
+      <cache>Önbelleği Etkinleştir</cache>
+      <permissions>İzinler</permissions>
       <PermissionButton>UIQueriesForm</PermissionButton>
     </label>
     <action>
@@ -1922,26 +1941,26 @@
       <Cancel>#{word.cancel}</Cancel>
     </action>
     <msg>
-      <permission-require>Please select permissions.</permission-require>
-      <name-invalid>The Name field cannot contain special characters.</name-invalid>
-      <name-existing>This query name already exists. Please select another one.</name-existing>
-      <invalid-query>The query is invalid. Please check your query statement.</invalid-query>
-      <access-denied>Access denied. You do not have permission to perform this operation.</access-denied>
+      <permission-require>Lütfen izinleri seçin.</permission-require>
+      <name-invalid>Ad alanı, özel karakterler içeremez.</name-invalid>
+      <name-existing>Bu sorgu adı zaten var. Lütfen başka bir tane seçin.</name-existing>
+      <invalid-query>Sorgu geçersiz. Sorgu beyanı gözden geçirin.</invalid-query>
+      <access-denied>Erişim engellendi. Bu işlemi gerçekleştirmek için izniniz yok.</access-denied>
     </msg>
   </UIQueriesForm>
   <AddQueryForm>
     <title>
-      <UIQueriesForm>Add Query</UIQueriesForm>
+      <UIQueriesForm>Sorgu Ekle</UIQueriesForm>
     </title>
   </AddQueryForm>
   <EditQueryForm>
     <title>
-      <UIQueriesForm>Edit Query</UIQueriesForm>
+      <UIQueriesForm>Sorgu Düzenle</UIQueriesForm>
     </title>
   </EditQueryForm>
 <PermissionPopup>
   <title>
-    <UIGroupMemberSelector>Select Permission</UIGroupMemberSelector>
+    <UIGroupMemberSelector>Yetkileri Seç</UIGroupMemberSelector>
   </title>
 </PermissionPopup>
   <!--
@@ -1951,40 +1970,45 @@
   -->
   <UITagManager>
     <title>
-      <EditStyle>Edit Style</EditStyle>
-      <RemoveStyle>Remove Style</RemoveStyle>
+      <EditStyle>Stil Düzenle</EditStyle>
+      <RemoveStyle>Stil Kaldır</RemoveStyle>
     </title>    
   </UITagManager>
   <UITagStyleList>
     <header>
-      <name>Style Name</name>
-      <documentRange>Number of Occurrences</documentRange>
-      <tagHTML>Tag Style</tagHTML>
+      <name>Stil Adı</name>
+      <documentRange>Oluşum Sayısı</documentRange>
+      <tagHTML>Etiket Stili</tagHTML>
       <action>Eylem</action>
     </header>
+    <title>
+      <Edit>Düzenle</Edit>
+      <Delete>Sil</Delete>
+      <Remove>Kaldır</Remove>
+    </title>
     <action>
-      <AddStyle>Add Style</AddStyle>
+      <AddStyle>Stil Ekle</AddStyle>
     </action>
   </UITagStyleList>
   <UITagStyleForm>
     <label>
-      <styleName>Style Name:</styleName>
-      <documentRange>Number of Occurrences:</documentRange>
-      <styleHTML>HTML Style:</styleHTML>
+      <styleName>Stil Adı:</styleName>
+      <documentRange>Oluşum Sayısı:</documentRange>
+      <styleHTML>HTML Stili:</styleHTML>
     </label>
     <action>
-      <UpdateStyle>Güncelleştirme</UpdateStyle>
+      <UpdateStyle>Güncelleştir</UpdateStyle>
       <Cancel>#{word.cancel}</Cancel>
     </action>
     <msg>
-      <range-validator>The range is invalid. The format must be: a..b, among which a, b are positive integers. You can use * instead of b to indicate that the range is unlimited.</range-validator>
-      <error-update>Update failed. Your information is invalid.</error-update>
-      <item-not-existing>You cannot save changes to this tag since it no longer exists in the database.</item-not-existing>
+      <range-validator>Aralık geçersiz. Biçimi: a a..b arasında , b pozitif tamsayılardır. B nin sınırsız olduğunu belirtmek için  * kullanabilirsiniz.</range-validator>
+      <error-update>Güncelleştirme başarısız oldu. Bilgileriniz geçerli değil.</error-update>
+      <item-not-existing>Bu etiket için değişiklikleri kaydedemezsiniz, artık veri tabanında yok.</item-not-existing>
     </msg>
   </UITagStyleForm>
   <FolksonomyPopup>
     <title>
-      <UITagStyleForm>Edit Tag Style Configuration</UITagStyleForm>
+      <UITagStyleForm>Etiket Stili Yapılandırmasını Düzenle</UITagStyleForm>
     </title>
   </FolksonomyPopup>
   <!--
@@ -1994,13 +2018,13 @@
   -->
   <ECMNameValidator>
     <msg>
-      <Invalid-char>The field '{0}' has some invalid characters. Please type another value.</Invalid-char>
-      <empty-input>The value of the field '{0}' is empty.</empty-input>
+      <Invalid-char>'{0}' Alanında geçersiz bir karakter olabilir. Lütfen başka bir değer yazın.</Invalid-char>
+      <empty-input>'{0}' Alanının değeri boş.</empty-input>
     </msg>
   </ECMNameValidator>
   <EmptyFieldValidator>
     <msg>
-      <empty-input>Please enter the value into the field '{0}'.</empty-input>
+      <empty-input>Lütfen '{0}' alana değer girin.</empty-input>
     </msg>
   </EmptyFieldValidator>
   <!--
@@ -2010,7 +2034,7 @@
   -->
   <PermissionValidator>
   <msg>
-      <permission-path-invalid>The permission '{0}' is invalid.</permission-path-invalid>
+      <permission-path-invalid>'{0}' izni geçersiz.</permission-path-invalid>
   </msg>
   </PermissionValidator>
   <!--
@@ -2020,9 +2044,9 @@
   -->
   <UIWorkspaceList>
     <label>
-      <workspaceName>Workspace:</workspaceName>
+      <workspaceName>Çalışma Alanı:</workspaceName>
       <rootNodeInfo>UIWorkspaceList</rootNodeInfo>
-      <rootNodePath>Root Path:</rootNodePath>
+      <rootNodePath>Kök Yolu:</rootNodePath>
     </label>
   </UIWorkspaceList>
   <!--
@@ -2032,43 +2056,43 @@
   -->
   <UIFormInputSetWithAction>
     <msg>
-      <confirm-delete>Are you sure you want to delete?</confirm-delete>
+      <confirm-delete>Silmek istediğinizden emin misiniz?</confirm-delete>
     </msg>
   </UIFormInputSetWithAction>
   <template>
     <title>
-      <AddPermission>Add Permission</AddPermission>
+      <AddPermission>İzin Ekle</AddPermission>
     </title>
   </template>
   <metadataTypeTab>
     <title>
-      <AddPermission>Add Permission</AddPermission>
+      <AddPermission>İzin Ekle</AddPermission>
     </title>
   </metadataTypeTab>
   <PermissionButton>
     <title>
-      <AddPermission>Add Permission</AddPermission>
+      <AddPermission>İzin Ekle</AddPermission>
     </title>
   </PermissionButton>
   <nodeTypeDefinition>
     <title>
-      <AddSuperType>Add Super Type</AddSuperType>
+      <AddSuperType>Süper Türü Ekle</AddSuperType>
     </title>
   </nodeTypeDefinition>
   <childNodeDefinition>
     <title>
-      <AddRequiredType>Add Required Type</AddRequiredType>
-      <AddDefaultType>Add Default Type</AddDefaultType>
+      <AddRequiredType>Gerekli Türü Ekle</AddRequiredType>
+      <AddDefaultType>Varsayılan Türü Ekle</AddDefaultType>
     </title>
   </childNodeDefinition>
   <propertyDefinition>
     <title>
-      <AddConstraints>Add Constraints</AddConstraints>
+      <AddConstraints>Kısıtlama Ekle</AddConstraints>
     </title>
   </propertyDefinition>
   <authInputSet>
     <title>
-      <Select>Select</Select>
+      <Select>Seçin</Select>
     </title>
   </authInputSet>
   <!--
@@ -2076,12 +2100,12 @@
   -->
   <UIViewContainer>
     <title>
-      <View>View</View>
+      <View>Görün</View>
       <EditInfo>Düzenle</EditInfo>
       <Delete>Sil</Delete>
     </title>
 <label>
-  <permission>{0} in {1}</permission>
+  <permission>{1} içindeki {0}</permission>
 </label>
   </UIViewContainer>
   <ECMTemplate>
@@ -2092,67 +2116,67 @@
   </ECMTemplate>
   <step1>
     <title>
-      <AddPermission>Add Permission</AddPermission>
+      <AddPermission>İzin Ekle</AddPermission>
     </title>
   </step1>
   <step2>
     <title>
-      <SelectContainer>Select Container</SelectContainer>
-      <SelectStore>Select Store</SelectStore>
+      <SelectContainer>Konteyner Seçin</SelectContainer>
+      <SelectStore>Depolama Alını Seçin</SelectStore>
     </title>
   </step2>
   <step3>
     <title>
-      <SelectQueryHandler>Select Query Handler</SelectQueryHandler>
+      <SelectQueryHandler>Sorgu İşleyicisi Seçin</SelectQueryHandler>
     </title>
   </step3>
   <UIDrivePermissionSelector>
     <label>
-      <selectGroup>Select Group</selectGroup>
-      <selectUser>Select User</selectUser>
-      <selectMembership>Select Membership</selectMembership>
+      <selectGroup>Grup Seçin</selectGroup>
+      <selectUser>Kullanıcı Seçin</selectUser>
+      <selectMembership>Üyelik Seçin</selectMembership>
     </label>
   </UIDrivePermissionSelector>
   
   <UIPermissionSelector>
     <label>
-      <selectGroup>Select Group</selectGroup>
-      <selectUser>Select User</selectUser>
-      <selectMembership>Select Membership</selectMembership>
+      <selectGroup>Grup Seçin</selectGroup>
+      <selectUser>Kullanıcı Seçin</selectUser>
+      <selectMembership>Üyelik Seçin</selectMembership>
     </label>
   </UIPermissionSelector>
   
   <UIAnyPermission>
     <label>
-      <anyPermission>Any Permission</anyPermission>
+      <anyPermission>Herhangi bir İzin</anyPermission>
     </label>
   </UIAnyPermission>
   
   <UIMDriveAnyPermission>
     <label>
-      <anyPermission>Any Permission</anyPermission>
+      <anyPermission>Herhangi bir İzin</anyPermission>
     </label>
   </UIMDriveAnyPermission>
   
   <UIQueriesAnyPermission>
     <label>
-      <anyPermission>Any Permission</anyPermission>
+      <anyPermission>Herhangi bir İzin</anyPermission>
     </label>
   </UIQueriesAnyPermission>
   
   <MetadataPermission>
     <label>
-      <selectGroup>Select Group</selectGroup>
+      <selectGroup>Grup Seçin</selectGroup>
     </label>
   </MetadataPermission>  
   <MetadataPermission>
     <label>
-      <selectMembership>Select Membership</selectMembership>
+      <selectMembership>Üyelik Seçin</selectMembership>
     </label>
   </MetadataPermission>
   <anyPermission>
     <title>
-      <AddAnyPermission>Set any Permission</AddAnyPermission>
+      <AddAnyPermission>Herhangi bir izni Ayarla</AddAnyPermission>
     </title>
   </anyPermission>
   <!--
@@ -2160,9 +2184,9 @@
   -->
   <QueriesPermissionBrowse>
     <label>
-      <selectGroup>Select Group</selectGroup>
-      <selectUser>Select User</selectUser>
-      <selectMembership>Select Membership</selectMembership>
+      <selectGroup>Grup Seçin</selectGroup>
+      <selectUser>Kullanıcı Seçin</selectUser>
+      <selectMembership>Üyelik Seçin</selectMembership>
     </label>
   </QueriesPermissionBrowse>
   <!--
@@ -2170,7 +2194,7 @@
   -->  
   <UIViewFormTabPane>
     <label>
-      <addSymLink>Add Symlink</addSymLink>
+      <addSymLink>Sembolik link Ekle</addSymLink>
     </label>
   </UIViewFormTabPane>
   <!--
@@ -2179,19 +2203,19 @@
   
   <UIDriveForm>
 <msg>
-  <permission-path-invalid>The permission '{0}' is invalid.</permission-path-invalid>
+  <permission-path-invalid>'{0}' izni geçersiz.</permission-path-invalid>
   </msg>
   </UIDriveForm>
   
   <UITaxonomyTreeMainForm>
     <msg>
-      <homepath-emty>The home path is required.</homepath-emty>
-      <targetpath-emty>The target path is required.</targetpath-emty>
+      <homepath-emty>Ana yolu gereklidir.</homepath-emty>
+      <targetpath-emty>Hedef yol gereklidir.</targetpath-emty>
     </msg>
   </UITaxonomyTreeMainForm>
   <UITaxonomyWorkingArea>
   <msg>
-  <exist>This tree node already exists.</exist>
+  <exist>Bu ağaç düğümü zaten var.</exist>
   </msg>
   </UITaxonomyWorkingArea>
 
@@ -2204,7 +2228,7 @@
         <email>#{word.email}</email>
       </option>
       <group>Grup</group>
-      <searchUser>User</searchUser>
+      <searchUser>Kullanıcı</searchUser>
       <userName>#{word.userName}</userName>
       <lastName>#{word.lastName}</lastName>
       <firstName>#{word.firstName}</firstName>
@@ -2220,37 +2244,37 @@
   -->   
   <DriveInputSet>
     <label>
-      <nt_folder>Document Folder</nt_folder>
-      <nt_unstructured>Content Folder</nt_unstructured>
-      <exo_cssFolder>CSS Folder</exo_cssFolder>
-      <exo_jsFolder>Javascript Folder</exo_jsFolder>
-      <exo_linkFolder>Link Folder</exo_linkFolder>
-      <exo_webFolder>Web Content Folder</exo_webFolder>
+      <nt_folder>Belge Klasörü</nt_folder>
+      <nt_unstructured>İçerik Klasörü</nt_unstructured>
+      <exo_cssFolder>CSS Klasörü</exo_cssFolder>
+      <exo_jsFolder>JavaScript Klasörü</exo_jsFolder>
+      <exo_linkFolder>Link Klasörü</exo_linkFolder>
+      <exo_webFolder>Web İçerik Klasörü</exo_webFolder>
    </label>
   </DriveInputSet>
   <UIPermissionTreeInfo>
   <msg>
-      <confirm-delete-permission>Are you sure you want to delete this permission?</confirm-delete-permission>
-      <no-permission-remove>You cannot remove the owner or the system user.</no-permission-remove>  
+      <confirm-delete-permission>Bu izin silmek istediğinizden emin misiniz?</confirm-delete-permission>
+      <no-permission-remove>Sahiplerini veya sistem kullanıcılarını kaldıramazsınız.</no-permission-remove>  
   </msg>
   </UIPermissionTreeInfo>  
   <UITaxonomyTreeMainForm>
 <msg>
-      <no-right-target-path>Please select another home path.</no-right-target-path>
+      <no-right-target-path>Lütfen başka bir anasayfa yolu seçin.</no-right-target-path>
 </msg>
 </UITaxonomyTreeMainForm>
 
 <UIECMAdminControlPanel>
     <tab>
       <label>        
-        <ManageUnLock>Manage Locks</ManageUnLock>
+        <ManageUnLock>Kilitleri Yönet</ManageUnLock>
       </label>
     </tab>        
 </UIECMAdminControlPanel>
 <UIUnLockForm>
     <label>
-      <name>Path Node</name>      
-      <permissions>Permissions</permissions>
+      <name>Yol Düğümü</name>      
+      <permissions>İzinler</permissions>
       <PermissionButton>UI Unlock Form</PermissionButton>
     </label>
     <action>
@@ -2258,37 +2282,37 @@
       <Cancel>#{word.cancel}</Cancel>
     </action>
     <msg>
-      <permission-require>You must select permissions.</permission-require>      
+      <permission-require>İzinleri seçmeniz gerekir.</permission-require>      
     </msg>
   </UIUnLockForm>
   <UILockHolderList>
   <header>
-  <name>Groups or Users</name>
+  <name>Kullanıcı veya Gruplar</name>
   <action>Eylem</action>
   </header>
   <tooltip>
-<DeleteLock>Delete Group</DeleteLock>
+<DeleteLock>Grubu Sil</DeleteLock>
   </tooltip>
   <msg>
-  <can-not-delete-lock-holder>Cannot delete the group {0}.</can-not-delete-lock-holder>
+  <can-not-delete-lock-holder>{0} Grubu silemezsiniz.</can-not-delete-lock-holder>
   </msg>
   </UILockHolderList>
   <UILockNodeList>
   <header>
   <name>Başlık</name>
-  <hoderLock>Lock Owner</hoderLock>
+  <hoderLock>Kilit Sahibi</hoderLock>
   <action>Eylem</action>
   </header>
   <tooltip>
-<UnLock>UnLock</UnLock>
+<UnLock>Kilidini Aç</UnLock>
   </tooltip>
   <msg>
-  <access-denied-exception>You do not have permission to access the node with the path {0}, or this node is deleted.</access-denied-exception>
+  <access-denied-exception>Düğüm yolu {0} ile erişmek için izniniz yok veya bu düğümde silindi.</access-denied-exception>
   </msg>
   </UILockNodeList>
   <EditUnLockForm>
     <title>
-      <UIUnLockForm>Manage Lock</UIUnLockForm>
+      <UIUnLockForm>Kilit  Yönet</UIUnLockForm>
     </title>
   </EditUnLockForm>  
   <UITabPane>
@@ -2296,14 +2320,14 @@
       <Close>Kapat</Close>
     </action>
     <title>
-    <UILockHolderContainer>Manage Lock</UILockHolderContainer>
-    <UILockNodeList>Locked Node</UILockNodeList>
+    <UILockHolderContainer>Kilit  Yönet</UILockHolderContainer>
+    <UILockNodeList>Kilitli Düğüm</UILockNodeList>
     </title>
   </UITabPane>
   
   <UIViewFormTabPane>
     <action>
-      <AddTabForm>Add Tab</AddTabForm>
+      <AddTabForm>Sekme Ekle</AddTabForm>
       <AddTab>Kaydet</AddTab>
       <BackViewForm>Geri</BackViewForm>
     </action>
@@ -2325,14 +2349,14 @@
   
   <UISkinTab>
     <header>
-      <name>Name</name>
-      <roles>Roles</roles>
-      <baseVersion>Version</baseVersion>
+      <name>Adı</name>
+      <roles>Roller</roles>
+      <baseVersion>Sürüm</baseVersion>
       <action>Eylemler</action>
     </header>
     <msg>
-      <undeletable>You cannot delete '{0}' because it is the default one.</undeletable>
-      <confirm-delete>Are you sure you want to delete this skin?</confirm-delete>
+      <undeletable>Varsayılan olduğundan '{0}' silemezsiniz.</undeletable>
+      <confirm-delete>Bu giydirmeyi silmek istediğinizden emin misiniz?</confirm-delete>
     </msg>
     <action>
       <title>
@@ -2345,26 +2369,26 @@
   <SkinForm>
     <label>
       <UITemplateContent>SkinForm</UITemplateContent>
-      <UIPopupWindow>Skin Permission</UIPopupWindow>
-      <selectVersion>Versions</selectVersion>
-      <content>Content:</content>
+      <UIPopupWindow>Giydirme İzni</UIPopupWindow>
+      <selectVersion>Sürümler</selectVersion>
+      <content>İçerik:</content>
       <name>Adı:</name>
-      <isDocumentTemplate>is Document Template</isDocumentTemplate>
-      <viewPermission>Permission:</viewPermission>
-      <enableVersion>Enable Versioning</enableVersion>
+      <isDocumentTemplate>Belge Şablonu</isDocumentTemplate>
+      <viewPermission>İzni:</viewPermission>
+      <enableVersion>Sürüm Kontrolü Etkinleştir</enableVersion>
     </label>
-    <title>Add/Edit Skin</title>
+    <title>Giydirme Ekle/Düzenle</title>
   </SkinForm>
 
  <UITagManager>
    <action>
      <title>
        <RemoveStyle>Kaldır</RemoveStyle>
-         <AddStyle>Add Style</AddStyle>
+         <AddStyle>Stil Ekle</AddStyle>
      </title>
    </action>
    <msg>
-     <confirm-delete>Are you sure you want to delete this tag style?</confirm-delete>
+     <confirm-delete>Bu etiket stili silmek istediğinizden emin misiniz?</confirm-delete>
    </msg>
  </UITagManager>
 
@@ -2385,37 +2409,37 @@
 <Save>Save</Save>
 <Reset>Reset</Reset>
 <NextAddAction>Sonraki</NextAddAction>
-<Previous>Previous</Previous>
+<Previous>Önceki</Previous>
 </action>
 </UIPermissionTreeForm>
 
 <UIActionForm>
 <action>
-<PreviousViewPermission>Previous</PreviousViewPermission>
+<PreviousViewPermission>Önceki</PreviousViewPermission>
 <NextViewTree>Sonraki</NextViewTree>
 </action>
   <msg>
-    <xss-vulnerability-character>Field '{0}' contains XSS vulnerability characters</xss-vulnerability-character>
-<xss-vulnerability-character-wo-label>Your input may contain XSS vulnerability characters</xss-vulnerability-character-wo-label>
+    <xss-vulnerability-character>'{0}' Alanı XSS açığı karakterler içeriyor</xss-vulnerability-character>
+<xss-vulnerability-character-wo-label>Giridikleriniz XSS açığı karakterler içeriyor olabilir</xss-vulnerability-character-wo-label>
   </msg>
 </UIActionForm>
 
 <UITaxonomyTreeWorkingArea>
 <action>
-<Previous>Previous</Previous>
+<Previous>Önceki</Previous>
 </action>
 </UITaxonomyTreeWorkingArea>
 
   <UITabPane>
     <title>
-      <UITagManager>Tag Manager</UITagManager>
-      <UITagPermissionManager>Tag Permission Manager</UITagPermissionManager>
+      <UITagManager>Etiket Yöneticisi</UITagManager>
+      <UITagPermissionManager>Etiket İzni Yöneticisi</UITagPermissionManager>
     </title>
   </UITabPane>
   
   <UITagPermissionInfo>
     <header>
-      <usersOrGroups>User or Group</usersOrGroups>
+      <usersOrGroups>Kullanıcı veya Grup</usersOrGroups>
       <action>Eylem</action>
     </header>
     <action>
@@ -2424,61 +2448,61 @@
       </title>
     </action>
     <msg>
-      <confirm-delete-permission>Are you sure you want to delete this permission?</confirm-delete-permission>
+      <confirm-delete-permission>Bu izin silmek istediğinizden emin misiniz?</confirm-delete-permission>
     </msg>   
   </UITagPermissionInfo>
   <UITagPermissionForm>
-    <title>Add Permission</title>
+    <title>İzin Ekle</title>
     <action>
       <Save>Kaydet</Save>
+      <Add>Ekle</Add>
     </action>
     <label>
-      <userOrGroup>Memberships:</userOrGroup>
-      <permission/>
+      <userOrGroup>Üyelikler:</userOrGroup>
     </label>
     <msg>
-      <userOrGroup-alreadyExists>This membership already exists. Please select another one.</userOrGroup-alreadyExists>
+      <userOrGroup-alreadyExists>Bu üyelik zaten var. Lütfen başka bir tane seçin.</userOrGroup-alreadyExists>
     </msg>    
   </UITagPermissionForm>
   
   <UIGroupMemberSelector>
     <label>
-      <selectGroup>Select Group</selectGroup>
-      <selectMembership>Select Membership</selectMembership>
+      <selectGroup>Grup Seçin</selectGroup>
+      <selectMembership>Üyelik Seçin</selectMembership>
     </label>
   </UIGroupMemberSelector>
   
   <UIFolksonomyManager>
   <msg>
-      <confirm-delete>Are you sure you want to delete this style?</confirm-delete>
+      <confirm-delete>Bu stili silmek istediğinizden emin misiniz?</confirm-delete>
   </msg>
     <action>
       <title>
-        <AddStyle>Add Style</AddStyle>
+        <AddStyle>Stil Ekle</AddStyle>
       </title>
     </action>
   </UIFolksonomyManager>  
 <UIActionForm>
   <title>
-  <ShowComponent>Open Window</ShowComponent>
+  <ShowComponent>Pencere Aç</ShowComponent>
   <removeReference>Kaldır</removeReference>
   </title>
   </UIActionForm> 
   <NodeTypeNameValidator>
     <msg>
-      <Invalid-char>There are some invalid characters. Please enter another value.</Invalid-char>
-      <empty-input>The value of the field is empty.</empty-input>
+      <Invalid-char>Geçersiz karakterler. Lütfen başka bir değer girin.</Invalid-char>
+      <empty-input>Alanının değeri boş.</empty-input>
     </msg>
   </NodeTypeNameValidator>
   <UIActionForm>
     <msg>
-      <constraint-violation-exception>The node '{0}' cannot be added to '{1}' in the workspace '{2}'.  There is a problem with the permissions or constraints condition.</constraint-violation-exception>
+      <constraint-violation-exception>Düğüm '{0}'  '{2}' çalışma alanındaki '{1}'  eklenemiyor.  İzinler veya kısıtlamalar koşulu ile ilgili bir sorun vardır.</constraint-violation-exception>
     </msg>
   </UIActionForm>
   
   <UIWorkspaceWizard>
     <msg>
-      <name-not-allowed>Forbidden Name</name-not-allowed>
+      <name-not-allowed>Yasak İsim</name-not-allowed>
     </msg>
   </UIWorkspaceWizard>
   <UIRepositoryForm>
@@ -2490,61 +2514,61 @@
   <UIViewFormTabPane>
   <label>
   <addCategory>Kategori Ekle</addCategory>
-          <addLocalizationLink>Add Translation</addLocalizationLink>
+          <addLocalizationLink>Çeviri Ekle</addLocalizationLink>
   </label>
   </UIViewFormTabPane>
 
 <UIDriveForm>
 <label>
-<allowNodeTypesOnTree>Allowance nodetype on left tree:</allowNodeTypesOnTree>
+<allowNodeTypesOnTree>Sol ağaç izin düğüm türü:</allowNodeTypesOnTree>
 </label>
 </UIDriveForm>
 <DriveInputSet>
 <title>
 <RemovePermission>Remove Permission</RemovePermission>
-<ChooseNodeType>Select Node Types</ChooseNodeType>
+<ChooseNodeType>Düğüm Türleri Seçin</ChooseNodeType>
 <RemoveNodeType>Kaldır</RemoveNodeType>
 </title>
 </DriveInputSet>
 <PopupNodeTypeSelector>
 <title>
-<UINodeTypeSelector>Select Node Types</UINodeTypeSelector>
-<PopupNodeTypeSelector>Select Node Types</PopupNodeTypeSelector>
+<UINodeTypeSelector>Düğüm Türleri Seçin</UINodeTypeSelector>
+<PopupNodeTypeSelector>Düğüm Türleri Seçin</PopupNodeTypeSelector>
 </title>
 </PopupNodeTypeSelector>
   <UINodeTypeSelector>
     <label>
-      <selectedAllNodeTypes>Select All Node Types</selectedAllNodeTypes>
+      <selectedAllNodeTypes>Tüm Düğüm Türlerini Seçin</selectedAllNodeTypes>
     </label>
   </UINodeTypeSelector>
   <UIScriptForm>
     <msg>
-      <PathNotFoundException>The script already exists in the '{0}' folder.</PathNotFoundException>      
+      <PathNotFoundException>Bu scirpt '{0}' klasöründe zaten var.</PathNotFoundException>      
     </msg>
   </UIScriptForm>
  <UINodeTypeList>
    <msg>
-   <no-list>There is no node type matching your search.</no-list>
+   <no-list>Aramanızla eşleşen hiçbir düğüm türü yoktur.</no-list>
    </msg>
  </UINodeTypeList>
   <UIActionForm>
     <msg>
-      <canotChangeActionId>You cannot change the Action ID.</canotChangeActionId>
+      <canotChangeActionId>Eylem Kimliği değiştirilemez.</canotChangeActionId>
     </msg>
   </UIActionForm>
   <PopupComponent>
     <title>
-      <UINodeTypeSelector>Node Type Selector</UINodeTypeSelector>
+      <UINodeTypeSelector>Düğüm Türü Seçici</UINodeTypeSelector>
     </title>
   </PopupComponent>
   <UIPageIterator>
     <label>
-      <maxPageSize>Maximum Page Size</maxPageSize>
+      <maxPageSize>En Büyük Sayfa Boyutu</maxPageSize>
     </label>
   </UIPageIterator>
   <UILockNodeList>
     <msg>
-      <can-not-unlock-node>You do not have permission to unlock this node. Please contact the administrator to get the correct right.</can-not-unlock-node>
+      <can-not-unlock-node>Bu düğümün kilidini açmak için izniniz yok. Yetkinizi almak için yöneticinize başvurun.</can-not-unlock-node>
     </msg>
  </UILockNodeList>
 </bundle>

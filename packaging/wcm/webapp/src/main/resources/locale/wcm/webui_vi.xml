@@ -272,7 +272,6 @@
   <UIPermissionManager>
     <label>
       <UIPermissionInputSetWithAction>Quyền</UIPermissionInputSetWithAction>
-      <UIPermissionStringInput/>
       <UIAccessibleCheckboxInput>Quyền Truy cập</UIAccessibleCheckboxInput>
       <UIEditableCheckboxInput>Quỳnh Chỉnh sửa</UIEditableCheckboxInput>
     </label>

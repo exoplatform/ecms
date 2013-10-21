@@ -104,6 +104,24 @@
 
   <!--
   #############################################################################
+  #             org.exoplatform.ecm.webui.component.explorer.UIDrivesArea  #
+  #############################################################################
+  -->
+  <UIDrivesBrowser>
+    <title>
+      <PersonalDrives>Personal drives</PersonalDrives>
+      <GroupDrives>Group drives</GroupDrives>
+      <GeneralDrives>General drives</GeneralDrives>
+    </title>
+    <msg>
+      <no-view-found>There is no view available according to your access permissions in drive '{0}'.</no-view-found>
+      <access-denied>Access denied. You may not have permission in the workspace of drive '{0}'.</access-denied>
+      <workspace-not-exist>Drive '{0}' was stored in one unrecognized workspace. Please reconfigure this drive.</workspace-not-exist>
+    </msg>
+  </UIDrivesBrowser>
+
+  <!--
+  #############################################################################
   #             org.exoplatform.ecm.webui.component.explorer.UITreeExplorer    #
   #############################################################################
   -->
@@ -650,7 +668,6 @@
       <remove-property>Är du säker på att du vill ta bort den här egenskapen?</remove-property>
     </confirm>
     <header>
-      <icon/>
       <name>Namn</name>
       <multiValue>Multi värde</multiValue>
       <value>Värde</value>
@@ -1457,7 +1474,7 @@
       <filetype-error>Kan inte importera den uppladdade filen. XML-filen kan vara ogiltigt.</filetype-error>
       <mimetype-invalid>Du kan bara importera .xml- eller .zip-filer.</mimetype-invalid>
       <access-denied>Åtkomst nekad. Du får inte importera det.</access-denied>
-      <constraint-violation-exception>Du kan inte importera noden, antingen eftersom den importerade informationen är felaktig eller att nodtypen {0} inte får vara undernodens nodtyp {0}.</constraint-violation-exception>
+      <constraint-violation-exception>Impossible to import data. The type '{0}' is not allowed in this location.</constraint-violation-exception>
       <item-exists-exception>En inkommande refererande nod har samma UUID som en befintlig nod i arbetsytan.</item-exists-exception>
     </msg>
   </UIImportNode>
@@ -3019,7 +3036,6 @@
   </UIJCRExplorerPortlet>
   <UIDrivesArea>
     <DrivesArea>
-      <allDrives>Klicka på knappen Visa enheter att visa/dölja en lista över diskar i åtgärdsfältet.</allDrives>
       <ShowDrives>Visa enheter</ShowDrives>
     </DrivesArea>
   </UIDrivesArea>

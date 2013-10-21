@@ -27,14 +27,12 @@
       <UIFCCWorkspaceFormSelectBox>Sélectionner espace de stockage</UIFCCWorkspaceFormSelectBox>
       <UIFCCTemplateField>Options</UIFCCTemplateField>
       <UIFCCLocationFormInputAction>Dossier de Stockage</UIFCCLocationFormInputAction>
-      <UIFCCLocationFormStringInput/>
       <UIFCCTemplateFormSelectBox>Entrez les valeurs pour les métadonnées</UIFCCTemplateFormSelectBox>
       <UIFCCSaveFormStringInput>Personnaliser le bouton Enregistrer</UIFCCSaveFormStringInput>
       <UIFCCMessageFormTextareaInput>Message de remerciement</UIFCCMessageFormTextareaInput>
       <UIFCCRedirectFormCheckboxInput>Redirection:</UIFCCRedirectFormCheckboxInput>
       <UIFCCRedirectPathFormStringInput>URL de redirection:</UIFCCRedirectPathFormStringInput>
       <UIFCCActionField>Actions</UIFCCActionField>
-      <UIFCCActionList/>
     </label>
     <msg>
       <save-successfully>Enregistré avec succès</save-successfully>

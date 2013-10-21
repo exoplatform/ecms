@@ -1,5 +1,6 @@
 <% 
 	import org.exoplatform.webui.form.UIFormInputBase;	
+  import org.exoplatform.wcm.webui.Utils;
 
 	String FIELD_SHORTBY          = "sortBy";
   String FIELD_ORDERBY          = "order";
@@ -47,7 +48,9 @@
 				</div>
 				<div class="row-fluid">
 					<div class="span6"><label class="control-label"><%=_ctx.appRes("UIPreferencesForm.label.showHiddenNode")%></label><% uiform.renderField(FIELD_SHOW_HIDDEN_NODE) %></div>
-					<div class="span6"><label class="control-label"><%=_ctx.appRes("UIPreferencesForm.label.enableStructure")%></label><% uiform.renderField(FIELD_ENABLESTRUCTURE) %></div>
+					<%if(Utils.isAdministratorUser()) {%>
+					  <div class="span6"><label class="control-label"><%=_ctx.appRes("UIPreferencesForm.label.enableStructure")%></label><% uiform.renderField(FIELD_ENABLESTRUCTURE) %></div>
+					<%}%>
 				</div>
 				<div class="row-fluid">
 					<div class="span12"><label class="control-label" for="$FIELD_QUERY_TYPE"><%=_ctx.appRes("UIPreferencesForm.label.queryType")%></label><% uiform.renderField(FIELD_QUERY_TYPE) %></div>

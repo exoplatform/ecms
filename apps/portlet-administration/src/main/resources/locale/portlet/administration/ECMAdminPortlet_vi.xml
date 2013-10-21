@@ -127,7 +127,7 @@
 <header>
 <usersOrGroups>Người dùng hoặc nhóm người dùng</usersOrGroups>
 <read>Đọc</read>
-<addNode>Thêm Node</addNode>
+<addNode>Thêm Nút</addNode>
 <setProperty>Gỡ bỏ</setProperty>
 <remove>Gỡ bỏ</remove>
 <action>Hành động</action>
@@ -161,7 +161,7 @@
       <path-invalid>Đường dẫn không hợp lệ.</path-invalid>
       <taxonomy-existed>Cây danh mục đã tồn tại.</taxonomy-existed>
       <taxonomy-node-existed>Node danh mục đã tồn tại.</taxonomy-node-existed>
-      <no-permission-add>You do not have the right to add an action.</no-permission-add>
+      <no-permission-add>Bạn không có quyền để thêm một hành động.</no-permission-add>
       <not-created-tree>Cây phân loại chưa được khởi  tạo.</not-created-tree>
     </msg>
   </UIActionForm>
@@ -184,23 +184,23 @@
   -->
   <NameSpacePopup>
     <title>
-      <UINamespaceForm>Mẫu Namespace</UINamespaceForm>
+      <UINamespaceForm>Mẫu Định danh</UINamespaceForm>
     </title>
   </NameSpacePopup>
   <UINamespaceForm>
-    <title>Đăng ký Namespace Mới</title>
+    <title>Đăng ký Định danh Mới</title>
     <label>
-      <namespace>Tiền tố Namespace</namespace>
-      <uri>URI</uri>
+      <namespace>Tiền tố</namespace>
+      <uri>Đường dẫn</uri>
     </label>
     <action>
       <Save>Lưu</Save>
       <Cancel>Hủy bỏ</Cancel>
     </action>
     <msg>
-      <register-unsuccessfull>Namespace hoặc URI đã tồn tại.</register-unsuccessfull>
-      <prefix-null>Vui lòng cho biết tiền tố của namespace.</prefix-null>
-      <uri-null>Vui lòng nhập URI của namespace.</uri-null>
+      <register-unsuccessfull>Định danh hoặc đường dẫn đã tồn tại.</register-unsuccessfull>
+      <prefix-null>Vui lòng cho biết tiền tố của định danh.</prefix-null>
+      <uri-null>Vui lòng nhập đường dẫn của định danh.</uri-null>
     </msg>
   </UINamespaceForm>
   <!--
@@ -211,7 +211,7 @@
   <UINamespaceList>
     <header>
       <prefix>Tiền tố</prefix>
-      <uri>URI của namespace</uri>
+      <uri>Đường dẫn của định danh</uri>
       <action>Hành động</action>
     </header>
     <action>
@@ -220,7 +220,7 @@
   </UINamespaceList>
   <NamespacePopup>
     <title>
-      <UINamespaceForm>Đăng ký Namespace Mới</UINamespaceForm>
+      <UINamespaceForm>Đăng ký Định danh Mới</UINamespaceForm>
     </title>
   </NamespacePopup>
   <!--
@@ -728,6 +728,10 @@
       <label>Tên</label>
 <action>Hành động</action>
     </header>
+    <title>
+      <Edit>Chỉnh sửa</Edit>
+      <Delete>Xóa</Delete>
+    </title>
     <action>
       <AddAction>Thêm Kiểu Hành động</AddAction>
     </action>
@@ -845,6 +849,10 @@
   </EditPopup>
 
 <UITabList>
+                  <title>
+                    <Edit>Chỉnh sửa</Edit>
+                    <Delete>Xóa</Delete>
+                  </title>       
  <header>
   <tabName>Tab</tabName>
   <localizeButtons>Mô tả</localizeButtons>
@@ -875,6 +883,9 @@
 </UIViewPermissionList>
 
 <UIViewPermissionList>
+                         <title>
+                           <Delete>Xóa</Delete>
+                         </title>
  <header>
 <friendlyPermission>Quyền truy nhập</friendlyPermission>
      <action>Tác vụ</action>
@@ -1359,11 +1370,11 @@
       <permission>UIPermissionTreeForm</permission>
       <userOrGroup>Người dùng hoặc Nhóm người dùng</userOrGroup>
       <read>Quyền Đọc</read>
-      <add_node>Quyền Thêm Node</add_node>
+      <add_node>Quyền Thêm Nút</add_node>
       <set_property>Quyền Thiết lập Thuộc tính</set_property>
       <remove>Quyền Gỡ bỏ</remove>
     </label>
-    <title>Thêm phân quyền cho Node</title>
+    <title>Thêm phân quyền cho Nút</title>
     <action>
       <Close>#{word.close}</Close>
       <Save>Lưu</Save>
@@ -1466,7 +1477,7 @@
       <add_node>Sửa đổi</add_node>
       <remove>Quyền xóa</remove>
     </label>
-    <title>Thêm phân quyền cho node</title>
+    <title>Thêm quyền cho nút</title>
     <action>
       <Close>#{word.close}</Close>
       <Save>#{word.save}</Save>
@@ -1565,6 +1576,10 @@
 </UITabPane>
 
   <UICLVTemplateList>
+    <title>
+      <Edit>Chỉnh sửa</Edit>
+      <Delete>Xóa</Delete>
+    </title>
     <header>
       <title>Tên</title>
       <action>Tác vụ</action>
@@ -1589,6 +1604,10 @@
       <action>Tác vụ</action>
       <template>Mẫu</template>
     </header>
+    <title>
+      <Edit>Chỉnh sửa</Edit>
+      <Delete>Xóa</Delete>
+    </title>
     <action>
       <AddTemplate>Thêm mẫu</AddTemplate>
 <Edit>Chỉnh sửa</Edit>
@@ -1962,6 +1981,11 @@
       <tagHTML>Định dạng</tagHTML>
       <action>Hành động</action>
     </header>
+    <title>
+      <Edit>Chỉnh sửa</Edit>
+      <Delete>Xóa</Delete>
+      <Remove>Loại bỏ</Remove>
+    </title>
     <action>
       <AddStyle>Thêm Định dạng</AddStyle>
     </action>
@@ -2283,7 +2307,7 @@
 <UnLock>Mở khóa</UnLock>
   </tooltip>
   <msg>
-  <access-denied-exception>Bạn không được phân quyền để truy cập node có đường dẫn {0}, hoặc node này đã bị xóa.</access-denied-exception>
+  <access-denied-exception>Bạn không có quyền truy cập nút có đường dẫn {0}, hoặc nút này đã bị xóa.</access-denied-exception>
   </msg>
   </UILockNodeList>
   <EditUnLockForm>
@@ -2297,7 +2321,7 @@
     </action>
     <title>
     <UILockHolderContainer>Quản lý Khóa</UILockHolderContainer>
-    <UILockNodeList>Node được khóa</UILockNodeList>
+    <UILockNodeList>Nút được khóa</UILockNodeList>
     </title>
   </UITabPane>
   
@@ -2431,10 +2455,10 @@
     <title>Thêm quyền truy cập</title>
     <action>
       <Save>Lưu</Save>
+      <Add>Thêm</Add>
     </action>
     <label>
       <userOrGroup>Kiểu thành viên:</userOrGroup>
-      <permission/>
     </label>
     <msg>
       <userOrGroup-alreadyExists>Kiểu thành viên đã tồn tại, xin chọn lại kiểu khác.</userOrGroup-alreadyExists>
@@ -2472,7 +2496,7 @@
   </NodeTypeNameValidator>
   <UIActionForm>
     <msg>
-      <constraint-violation-exception>Không thể thêm node '{0}' vào '{1}' trong không gian lưu trữ '{2}' vì có vấn đề với phân quyền và điều kiện ràng buộc.</constraint-violation-exception>
+      <constraint-violation-exception>Không thể thêm nút '{0}' vào '{1}' trong không gian lưu trữ '{2}' do phân quyền hoặc điều kiện ràng buộc.</constraint-violation-exception>
     </msg>
   </UIActionForm>
   
@@ -2544,7 +2568,7 @@
   </UIPageIterator>
   <UILockNodeList>
     <msg>
-      <can-not-unlock-node>Bạn không có quyền mở khóa node này. Vui lòng liên hệ với quản trị viên để có quyền thích hợp.</can-not-unlock-node>
+      <can-not-unlock-node>Bạn không có quyền mở khóa nút này. Vui lòng liên hệ với quản trị viên để có quyền thích hợp.</can-not-unlock-node>
     </msg>
  </UILockNodeList>
 </bundle>

@@ -27,14 +27,12 @@
       <UIFCCWorkspaceFormSelectBox>Chọn Không gian lưu trữ</UIFCCWorkspaceFormSelectBox>
       <UIFCCTemplateField>Tùy chọn Mẫu thiết kế</UIFCCTemplateField>
       <UIFCCLocationFormInputAction>Nơi Lưu trữ</UIFCCLocationFormInputAction>
-      <UIFCCLocationFormStringInput/>
       <UIFCCTemplateFormSelectBox>Chọn Mẫu thiết kế</UIFCCTemplateFormSelectBox>
       <UIFCCSaveFormStringInput>Nút Lưu Tùy chỉnh</UIFCCSaveFormStringInput>
       <UIFCCMessageFormTextareaInput>Thông báo Lưu Tùy chỉnh</UIFCCMessageFormTextareaInput>
       <UIFCCRedirectFormCheckboxInput>Chuyển đến:</UIFCCRedirectFormCheckboxInput>
       <UIFCCRedirectPathFormStringInput>Đường dẫn:</UIFCCRedirectPathFormStringInput>
       <UIFCCActionField>Hành động</UIFCCActionField>
-      <UIFCCActionList/>
     </label>
     <msg>
       <save-successfully>Đã lưu thành công vào tùy chọn portlet.</save-successfully>
