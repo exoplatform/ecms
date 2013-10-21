@@ -23,9 +23,9 @@
 }
 
 .UIWCMSearchPortlet .UIPaginatorDefault a.Prev {
-  background: url(icons/prev.gif) no-repeat right;
+  background: url(icons/PrevIcon.gif) no-repeat right;
 }
 
 .UIWCMSearchPortlet .UIPaginatorDefault a.Next {
-  background: url(icons/next.gif) no-repeat right;
+  background: url(icons/NextIcon.gif) no-repeat right;
 }
