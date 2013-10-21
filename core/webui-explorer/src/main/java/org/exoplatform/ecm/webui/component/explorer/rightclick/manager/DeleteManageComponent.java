@@ -124,18 +124,12 @@ public class DeleteManageComponent extends UIAbstractManagerComponent {
   private static final int GENERICS_AND_FILES_AND_FOLDERS = 7; //"111";
 
   private static final List<UIExtensionFilter> FILTERS
-<<<<<<< HEAD
-  = Arrays.asList(new UIExtensionFilter[]{new IsNotLockedFilter(),
-      new CanDeleteNodeFilter(),
-      new IsNotTrashHomeNodeFilter(),
-      new IsNotEditingDocumentFilter()});
-=======
+
       = Arrays.asList(new UIExtensionFilter[]{new IsNotLockedFilter(),
                                               new CanDeleteNodeFilter(),
                                               new IsNotTrashHomeNodeFilter(),
                                               new IsNotEditingDocumentFilter(),
                                               new IsNotMandatoryChildNode()});
->>>>>>> 6e640ca... ECMS-5749: The layout of Site Explorer will be broken when contains a crash file
 
   @UIExtensionFilters
   public List<UIExtensionFilter> getFilters() {
