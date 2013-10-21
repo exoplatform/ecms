@@ -52,6 +52,7 @@ import org.exoplatform.ecm.webui.component.explorer.UIWorkingArea;
 import org.exoplatform.ecm.webui.component.explorer.control.filter.CanDeleteNodeFilter;
 import org.exoplatform.ecm.webui.component.explorer.control.filter.IsNotEditingDocumentFilter;
 import org.exoplatform.ecm.webui.component.explorer.control.filter.IsNotLockedFilter;
+import org.exoplatform.ecm.webui.component.explorer.control.filter.IsNotMandatoryChildNode;
 import org.exoplatform.ecm.webui.component.explorer.control.filter.IsNotTrashHomeNodeFilter;
 import org.exoplatform.ecm.webui.component.explorer.control.listener.UIWorkingAreaActionListener;
 import org.exoplatform.ecm.webui.utils.JCRExceptionManager;
@@ -64,7 +65,6 @@ import org.exoplatform.services.cms.folksonomy.NewFolksonomyService;
 import org.exoplatform.services.cms.jcrext.activity.ActivityCommonService;
 import org.exoplatform.services.cms.link.LinkManager;
 import org.exoplatform.services.cms.link.LinkUtils;
-import org.exoplatform.services.cms.link.impl.LinkManagerImpl;
 import org.exoplatform.services.cms.relations.RelationsService;
 import org.exoplatform.services.cms.taxonomy.TaxonomyService;
 import org.exoplatform.services.cms.templates.TemplateService;
@@ -124,10 +124,12 @@ public class DeleteManageComponent extends UIAbstractManagerComponent {
   private static final int GENERICS_AND_FILES_AND_FOLDERS = 7; //"111";
 
   private static final List<UIExtensionFilter> FILTERS
-  = Arrays.asList(new UIExtensionFilter[]{new IsNotLockedFilter(),
-      new CanDeleteNodeFilter(),
-      new IsNotTrashHomeNodeFilter(),
-      new IsNotEditingDocumentFilter()});
+
+      = Arrays.asList(new UIExtensionFilter[]{new IsNotLockedFilter(),
+                                              new CanDeleteNodeFilter(),
+                                              new IsNotTrashHomeNodeFilter(),
+                                              new IsNotEditingDocumentFilter(),
+                                              new IsNotMandatoryChildNode()});
 
   @UIExtensionFilters
   public List<UIExtensionFilter> getFilters() {

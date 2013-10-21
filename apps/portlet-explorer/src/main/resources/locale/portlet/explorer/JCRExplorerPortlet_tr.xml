@@ -7,9 +7,9 @@
   -->
   <UICommentForm>
     <label>
-      <name>Name</name>
+      <name>Ad</name>
       <email>E-posta</email>
-      <website>Website</website>
+      <website>Web Sitesi</website>
       <comment>Yorum</comment>
     </label>
     <action>
@@ -17,9 +17,9 @@
       <Cancel>#{word.cancel}</Cancel>
     </action>
     <msg>
-      <not-support>You cannot comment on this document type.</not-support>
-      <not-checkedout>You must check out the node before commenting on it.</not-checkedout>
-      <content-null>You cannot post an empty comment.</content-null>
+      <not-support>Bu belge türünde yorum yapamazsınız.</not-support>
+      <not-checkedout>Düğüm üzerinde yorum yapmadan önce kullanıma almanız gerekir.</not-checkedout>
+      <content-null>Boş bir yorum yayınlayamazsınız.</content-null>
     </msg>
   </UICommentForm>
   <!--
@@ -29,25 +29,25 @@
   -->
   <UIVoteForm>
     <title>
-      <normal>Poor</normal>
-      <good>Below average</good>
-      <verygood>Average</verygood>
-      <excellent>Above average</excellent>
-      <best>Good</best>
-      <no-value>no value yet</no-value>
+      <normal>Zayıf</normal>
+      <good>Ortalamanın altında</good>
+      <verygood>Ortalama</verygood>
+      <excellent>Ortalamanın üstünde</excellent>
+      <best>İyi</best>
+      <no-value>Henüz herhangi bir değer yok</no-value>
     </title>
     <label>
-      <my-rating>My Rating:</my-rating>
+      <my-rating>Benim Derecelendirmem:</my-rating>
     </label>
     <button>
       <label>
-        <confirm>OK</confirm>
+        <confirm>Tamam</confirm>
       </label>
     </button>
     <msg>
-      <not-support>You cannot vote for this document type.</not-support>
-      <not-checkedout>You must check out the node before voting.</not-checkedout>
-      <vote-restriction>You cannot vote more than one time.</vote-restriction>
+      <not-support>Bu belge türü için oy kullanamazsınız.</not-support>
+      <not-checkedout>Oylama öncesinde düğümü kontrol etmelisiniz.</not-checkedout>
+      <vote-restriction>Birden çok kez oy kullanamazsınız.</vote-restriction>
     </msg>
   </UIVoteForm>
  
@@ -58,10 +58,10 @@
   -->
   <UIJCRExplorer>
     <msg>
-      <refresh-session-success>The session was refreshed successfully.</refresh-session-success>
-      <no-node-history>You are in the root node.</no-node-history>
-      <save-session-success>All changes have been saved.</save-session-success>
-      <target-path-not-found>You cannot access this node, either because it doesn't exist anymore or because you do not have the right to access it.</target-path-not-found>
+      <refresh-session-success>Oturumu başarıyla yenilenmiştir.</refresh-session-success>
+      <no-node-history>Kök düğümdesiniz.</no-node-history>
+      <save-session-success>Tüm değişiklikler kaydedildi.</save-session-success>
+      <target-path-not-found>Bu düğüme erişemezsiniz, çünkü artık yok veya erişim yetkiniz yok.</target-path-not-found>
     </msg>
   </UIJCRExplorer>
   <!--
@@ -71,16 +71,16 @@
   -->
   <UISideBar>
     <label>
-      <Relation>Relation</Relation>
-      <Explorer>File Explorer</Explorer>
-      <Close>Close Sidebar</Close>
-      <TagExplorer>Tag Cloud</TagExplorer>
-      <Clipboard>Clipboard</Clipboard>
-      <SavedSearches>Saved Searches</SavedSearches>
+      <Relation>İlişki</Relation>
+      <Explorer>Dosya Gezgini</Explorer>
+      <Close>Kenar çubuğunu kapat</Close>
+      <TagExplorer>Etiket bulutu</TagExplorer>
+      <Clipboard>Pano</Clipboard>
+      <SavedSearches>Kayıtlı Aramalar</SavedSearches>
     </label>
     <title>
       <Control>Control Sidebar</Control>
-      <Close>Close Sidebar</Close>
+      <Close>Kenar çubuğunu kapat</Close>
     </title>
   </UISideBar>
   <!--
@@ -90,13 +90,13 @@
   -->
   <UIViewBar>
     <label>
-      <driveWorkspace>Drive Workspace:</driveWorkspace>
-      <backToJCR>Back to JCR Main Drives</backToJCR>
-      <setUpBrowser>Set up your browsing preferences</setUpBrowser>
+      <driveWorkspace>Sürücü çalışma alanı:</driveWorkspace>
+      <backToJCR>JCR ana sürücülerine geri dön</backToJCR>
+      <setUpBrowser>Tarama tercihlerinizi ayarlayın</setUpBrowser>
       <refesh>Yenile</refesh>
-      <currentDrive>Current Drive</currentDrive>
-      <selectView>Select View</selectView>
-      <showSideBar>Show Sidebar</showSideBar>
+      <currentDrive>Geçerli Sürücü</currentDrive>
+      <selectView>Görünüm Seçin</selectView>
+      <showSideBar>Kenar çubuğunu göster</showSideBar>
       <more>Daha</more>
       <backTo>Geri</backTo>
     </label>
@@ -104,17 +104,35 @@
 
   <!--
   #############################################################################
+  #             org.exoplatform.ecm.webui.component.explorer.UIDrivesArea  #
+  #############################################################################
+  -->
+  <UIDrivesBrowser>
+    <title>
+      <PersonalDrives>Kişisel sürücüler</PersonalDrives>
+      <GroupDrives>Grup sürücüler</GroupDrives>
+      <GeneralDrives>Genel sürücüler</GeneralDrives>
+    </title>
+    <msg>
+      <no-view-found>'{0}' sürücüsünde erişim izniniz olmadığı için bir gösterim yapılamadı.</no-view-found>
+      <access-denied>Erişim engellendi. Sürücü '{0}' çalışma alanında izniniz olmayabilir.</access-denied>
+      <workspace-not-exist>'{0}' sürücü tanınmayan bir çalışma alanında depolanmış. Lütfen bu sürücüyü yeniden yapılandırın.</workspace-not-exist>
+    </msg>
+  </UIDrivesBrowser>
+
+  <!--
+  #############################################################################
   #             org.exoplatform.ecm.webui.component.explorer.UITreeExplorer    #
   #############################################################################
   -->
   <UITreeExplorer>
-    <title>Explorer</title>
+    <title>Gezgin</title>
     <label>
-      <Root>Root</Root>
-      <webDavView>Download and allow edition</webDavView>
+      <Root>Kök</Root>
+      <webDavView>İndir ve Değişikliğe İzin Ver</webDavView>
     </label>
     <msg>
-      <path-not-found>This element was deleted or changed. Please click the Refresh button.</path-not-found>
+      <path-not-found>Bu öğe silinmiş veya değişmiş. Lütfen Yenile düğmesini tıklayın.</path-not-found>
     </msg>
   </UITreeExplorer>
   <!--
@@ -124,11 +142,11 @@
   -->
   <UIViewRelationList>
     <label>
-      <languages-list>Translations</languages-list>
-      <relation-list>Relations</relation-list>
-      <references-list>References</references-list>
-      <no-related-document>No Related Document</no-related-document>
-      <related-document>Related Documents</related-document>
+      <languages-list>Çeviriler</languages-list>
+      <relation-list>İlişkiler</relation-list>
+      <references-list>Referanslar</references-list>
+      <no-related-document>İlgili belge yok</no-related-document>
+      <related-document>İlgili belgeler</related-document>
     </label>
   </UIViewRelationList>
   <!--
@@ -137,17 +155,17 @@
   #########################################################################################
   -->
   <UIPreferencesForm>
-    <title>Set up your browsing preferences</title>
+    <title>Tarama tercihlerinizi ayarlayın</title>
     <label>
-      <enableStructure>Enable DMS Structure:</enableStructure>
-      <showSideBar>Show Sidebar:</showSideBar>
-      <showHiddenNode>Show Hidden Nodes:</showHiddenNode>
-      <showNonDocument>Show Non-document Nodes:</showNonDocument>
-      <showRefDocuments>Show Referenced Documents:</showRefDocuments>
-      <enableDragAndDrop>Enable Drag &amp; Drop:</enableDragAndDrop>
-      <sortBy>Sort by:</sortBy>
-      <order>Order by:</order>
-      <nodesPerPage>Nodes Per Page:</nodesPerPage>
+      <enableStructure>DMS yapısı etkinleştir:</enableStructure>
+      <showSideBar>Kenar çubuğunu göster:</showSideBar>
+      <showHiddenNode>Gizli düğümleri göster:</showHiddenNode>
+      <showNonDocument>Belge olmayan düğümleri göster:</showNonDocument>
+      <showRefDocuments>Başvurulan Belgeleri Görüntüle:</showRefDocuments>
+      <enableDragAndDrop>Sürükle &amp; Bırak' ı etkinleştir:</enableDragAndDrop>
+      <sortBy>Sıralama:</sortBy>
+      <order>Tarafından sipariş:</order>
+      <nodesPerPage>Sayfa başına düğüm:</nodesPerPage>
     </label>
     <action>
       <Back>#{word.close}</Back>
@@ -160,7 +178,7 @@
   #########################################################################################
   -->
   <UIAllItemsPreferenceForm>
-    <title>Set Up Filter Preferences</title>
+    <title>Filtre tercihlerini ayarla</title>
     <action>
       <Cancel>#{word.cancel}</Cancel>
       <Save>#{word.save}</Save>
@@ -172,9 +190,9 @@
   #########################################################################################
   -->
   <UIRenameForm>
-    <title>Rename</title>
+    <title>Yeniden Adlandır</title>
     <label>
-      <nameField>Name</nameField>
+      <nameField>Ad</nameField>
       <titleField>Başlık</titleField>
     </label>
     <action>
@@ -183,63 +201,63 @@
       <Back>#{word.back}</Back>
     </action>
     <msg>
-      <rename-successfull>Node '{0}' was renamed to '{1}' successfully.</rename-successfull>
-      <rename-denied>Access denied. You cannot rename this node.</rename-denied>
-      <fileName-invalid>The new name contains some invalid characters.</fileName-invalid>
-      <newName-same-oldName>The new name already exists. Please check again.</newName-same-oldName>
-      <version-exception>This node (or the ancestor of this node) is not checked out.</version-exception>
-      <lock-exception>This node is locked. Please unlock it before renaming.</lock-exception>
-      <constraintViolation-exception>An error occurred while renaming node '{0}'. Please check again.</constraintViolation-exception>
-      <unknown-prefix>Prefix '{0}' has not been registered yet.</unknown-prefix>
-      <rename-error>An error occurred while renaming this node. Please check again.</rename-error>
+      <rename-successfull>Düğüm '{0}' '{1}' olarak başarıyla yeniden adlandırıldı.</rename-successfull>
+      <rename-denied>Erişim engellendi. Bu düğüm adını değiştiremezsiniz.</rename-denied>
+      <fileName-invalid>Yeni adı geçersiz bir karakter içeriyor.</fileName-invalid>
+      <newName-same-oldName>Yeni ad zaten var. Lütfen tekrar kontrol edin.</newName-same-oldName>
+      <version-exception>Bu düğüm (veya bu düğümün atası) kullanıma alınmamış.</version-exception>
+      <lock-exception>Bu düğüm kilitli. Lütfen yeniden adlandırmadan önce kilidi açın.</lock-exception>
+      <constraintViolation-exception>Düğüm '{0}' yeniden adlandırırken bir hata oluştu. Lütfen tekrar kontrol edin.</constraintViolation-exception>
+      <unknown-prefix>'{0}' Öneki henüz kayıtlı değil.</unknown-prefix>
+      <rename-error>Bu düğüm yeniden adlandırırken bir hata oluştu. Lütfen tekrar kontrol edin.</rename-error>
     </msg>
   </UIRenameForm>
   <UIPopupWindow>
     <title>
-      <UIRenameForm>Rename</UIRenameForm>
-      <UIActionContainer>Edit Action</UIActionContainer>
-      <UIFolderForm>New Folder</UIFolderForm>
-      <UIUploadManager>Upload File</UIUploadManager>
-      <UIReferencesList>References List</UIReferencesList>
-      <UIExportNode>Export</UIExportNode>
-      <UINodeTypeInfo>Node Type Information</UINodeTypeInfo>
-      <UIVersionInfo>Version Info</UIVersionInfo>
-      <UIActivateVersion>Activate Version</UIActivateVersion>
-      <UIAuditingInfo>Auditing Information</UIAuditingInfo>
-      <UIActivateAuditing>Activate Auditing</UIActivateAuditing>
-      <UIPermissionManager>Permission Management</UIPermissionManager>
-      <UIPropertiesManager>Properties Management</UIPropertiesManager>
-      <UIECMSearch>Advanced Search</UIECMSearch>
-      <UISavedQuery>Saved Queries List</UISavedQuery>
-      <UIWatchDocumentForm>Watch Document</UIWatchDocumentForm>
-      <UIActionManager>Manage Actions</UIActionManager>
-      <UIDocumentForm>Edit Document</UIDocumentForm>
-      <UIDocumentFormController>Add New Document</UIDocumentFormController>
-      <EditFormController>Edit Document</EditFormController>
-      <UIRelationManager>Add Relation</UIRelationManager>
+      <UIRenameForm>Yeniden Adlandır</UIRenameForm>
+      <UIActionContainer>Eylem Düzenle</UIActionContainer>
+      <UIFolderForm>Yeni Klasör</UIFolderForm>
+      <UIUploadManager>Dosya Yükle</UIUploadManager>
+      <UIReferencesList>Referans Listesi</UIReferencesList>
+      <UIExportNode>Dışa aktar</UIExportNode>
+      <UINodeTypeInfo>Düğüm Türü Bilgileri</UINodeTypeInfo>
+      <UIVersionInfo>Sürüm Bilgisi</UIVersionInfo>
+      <UIActivateVersion>Versiyon etkinleştirme</UIActivateVersion>
+      <UIAuditingInfo>Denetim Bilgileri</UIAuditingInfo>
+      <UIActivateAuditing>Denetimi Etkinleştir</UIActivateAuditing>
+      <UIPermissionManager>İzin Yönetimi</UIPermissionManager>
+      <UIPropertiesManager>Özellik Yönetimi</UIPropertiesManager>
+      <UIECMSearch>Gelişmiş Arama</UIECMSearch>
+      <UISavedQuery>Kaydedilmiş Sorgu Listesi</UISavedQuery>
+      <UIWatchDocumentForm>Belgeyi İzle</UIWatchDocumentForm>
+      <UIActionManager>Eylemleri Yönet</UIActionManager>
+      <UIDocumentForm>Belgeyi Düzenle</UIDocumentForm>
+      <UIDocumentFormController>Yeni Belge Ekle</UIDocumentFormController>
+      <EditFormController>Belgeyi Düzenle</EditFormController>
+      <UIRelationManager>İlişki ekleyin</UIRelationManager>
       <UICategoryManager>Kategori Ekle</UICategoryManager>
-      <UIImportNode>Import</UIImportNode>
-      <UIViewMetadataManager>View Metadata</UIViewMetadataManager>
-      <UIVoteForm>Vote Document</UIVoteForm>
+      <UIImportNode>İçe Aktar</UIImportNode>
+      <UIViewMetadataManager>Meta verilerini görüntüle</UIViewMetadataManager>
+      <UIVoteForm>Oylama belgesi</UIVoteForm>
       <UICommentForm>Yorum</UICommentForm>
-      <UIPreferencesForm>Preferences</UIPreferencesForm>
-      <UIPublicationManager>Manage Publication</UIPublicationManager>
-      <UIConfirmMessage>Delete ?</UIConfirmMessage>
-      <UIDeleteFileConfirmMessage>Delete File ?</UIDeleteFileConfirmMessage>
-      <UIDeleteFolderConfirmMessage>Delete Folder ?</UIDeleteFolderConfirmMessage>
-      <UIDeleteItemsConfirmMessage>Delete Items ?</UIDeleteItemsConfirmMessage>
-      <UIRestoreConfirmMessage>Confirm Restore</UIRestoreConfirmMessage>
-      <UIActivePublication>Enroll to Publication Lifecycle</UIActivePublication>
-      <UITaggingForm>Tag Document</UITaggingForm>
-      <UIThumbnailForm>Add Thumbnail Image</UIThumbnailForm>
-      <UIAllItemsPreferenceForm>Preference Settings</UIAllItemsPreferenceForm>
-      <UISelectRestorePath>Select Restore Path</UISelectRestorePath>
-      <UISEOForm>Manage SEO</UISEOForm>
-      <UISEOToolbarForm>Manage SEO</UISEOToolbarForm>
+      <UIPreferencesForm>Tercihler</UIPreferencesForm>
+      <UIPublicationManager>Yayını Yönet</UIPublicationManager>
+      <UIConfirmMessage>Sil ?</UIConfirmMessage>
+      <UIDeleteFileConfirmMessage>Dosya silinsin mi?</UIDeleteFileConfirmMessage>
+      <UIDeleteFolderConfirmMessage>Klasörü silinsin mi?</UIDeleteFolderConfirmMessage>
+      <UIDeleteItemsConfirmMessage>Öğeler silinsin mi?</UIDeleteItemsConfirmMessage>
+      <UIRestoreConfirmMessage>Geri yüklemeyi onayla</UIRestoreConfirmMessage>
+      <UIActivePublication>Yayın Ömrü İçin Kayıt</UIActivePublication>
+      <UITaggingForm>Etiket Belgesi</UITaggingForm>
+      <UIThumbnailForm>Küçük Resim Ekle</UIThumbnailForm>
+      <UIAllItemsPreferenceForm>Tercih Ayarları</UIAllItemsPreferenceForm>
+      <UISelectRestorePath>Geri yükleme yolunu seçin</UISelectRestorePath>
+      <UISEOForm>SEO' yu yönet</UISEOForm>
+      <UISEOToolbarForm>SEO' yu yönet</UISEOToolbarForm>
     </title>
     <header>
-      <workspace>Workspace</workspace>
-      <path>Path</path>
+      <workspace>Çalışma Alanı</workspace>
+      <path>Yol</path>
     </header>
   </UIPopupWindow>
   <!--
@@ -248,11 +266,11 @@
   #########################################################################################
   -->
   <UIResourceForm>
-    <title>Edit File Content</title>
+    <title>Dosya içeriğini düzenle</title>
     <label>
-      <name>Name</name>
-      <textToModify>Text to modify</textToModify>
-      <fileToUpload>Upload new content for that document (must be the same mime-type)</fileToUpload>
+      <name>Ad</name>
+      <textToModify>Metni değiştir</textToModify>
+      <fileToUpload>Bu belge için yeni içerik yükle (Aynı MIME türü olmalıdır)</fileToUpload>
     </label>
   </UIResourceForm>
   <!--
@@ -262,126 +280,126 @@
   -->
   <UIActionBar>
     <tooltip>
-      <AddFolder>New Folder</AddFolder>
-      <AddDocument>New Content</AddDocument>
+      <AddFolder>Yeni Klasör</AddFolder>
+      <AddDocument>Yeni İçerik</AddDocument>
       <EditDocument>Düzenle</EditDocument>
-      <Upload>Upload</Upload>
-      <Paste>Paste</Paste>
-      <Search>Search</Search>
-      <WatchDocument>Watch/Unwatch</WatchDocument>
-      <TaggingDocument>Tag</TaggingDocument>
-      <Vote>Vote</Vote>
+      <Upload>Yükle</Upload>
+      <Paste>Yapıştır</Paste>
+      <Search>Ara</Search>
+      <WatchDocument>İzle/İzleme</WatchDocument>
+      <TaggingDocument>Etiket</TaggingDocument>
+      <Vote>Oyla</Vote>
       <Comment>Yorum</Comment>
-      <ManageVersions>Versions</ManageVersions>
-      <ManageAuditing>Audit</ManageAuditing>
-      <ManagePublications>Publications</ManagePublications>
+      <ManageVersions>Sürümler</ManageVersions>
+      <ManageAuditing>Denetim</ManageAuditing>
+      <ManagePublications>Yayınlar</ManagePublications>
       <ManageCategories>Kategoriler</ManageCategories>
-      <ManageRelations>Relations</ManageRelations>
+      <ManageRelations>İlişkiler</ManageRelations>
       <ManageActions>Eylemler</ManageActions>
-      <ExportNode>Export</ExportNode>
-      <ImportNode>Import</ImportNode>
-      <OverloadThumbnail>Overload Thumbnail</OverloadThumbnail>
-      <ManageHidden>Show/Hide Content</ManageHidden>
-      <ViewReferences>References</ViewReferences>
-      <ViewNodeType>Types</ViewNodeType>
-      <ViewPermissions>Permissions</ViewPermissions>
-      <ViewProperties>Properties</ViewProperties>
-      <ViewMetadatas>Metadata</ViewMetadatas>
-      <ViewRelations>Show/Hide Relations</ViewRelations>
-      <ShowJCRStructure>Show/Hide Content Structure</ShowJCRStructure>
+      <ExportNode>Dışa Aktar</ExportNode>
+      <ImportNode>İçe aktar</ImportNode>
+      <OverloadThumbnail>Çok küçük resim</OverloadThumbnail>
+      <ManageHidden>İçeriği göster/gizle</ManageHidden>
+      <ViewReferences>Referanslar</ViewReferences>
+      <ViewNodeType>Türler</ViewNodeType>
+      <ViewPermissions>İzinler</ViewPermissions>
+      <ViewProperties>Özellikler</ViewProperties>
+      <ViewMetadatas>Metaveri</ViewMetadatas>
+      <ViewRelations>İlişkileri Göster/Gizle</ViewRelations>
+      <ShowJCRStructure>İçerik Yapısını Göster/Gizle</ShowJCRStructure>
     </tooltip>
     <msg>
-      <cannot-action-in-rootnode>You cannot perform this action in the root node.</cannot-action-in-rootnode>
-      <node-checkedin>You must check out first.</node-checkedin>
-      <cannot-enable-version-rootnode>Cannot enable versioning for the root node.</cannot-enable-version-rootnode>
-      <cannot-enable-publication-rootnode>Cannot enable publication for the root node.</cannot-enable-publication-rootnode>
+      <cannot-action-in-rootnode>Kök düğümde bu eylemi gerçekleştiremezsiniz.</cannot-action-in-rootnode>
+      <node-checkedin>Önce kontrol gerekir.</node-checkedin>
+      <cannot-enable-version-rootnode>Kök düğümü için sürüm oluşturma etkinleştirilemiyor.</cannot-enable-version-rootnode>
+      <cannot-enable-publication-rootnode>Kök düğümünün yayını etkinleştiremiyor.</cannot-enable-publication-rootnode>
       <manage-publication>
-        <not-supported-nodetype>The publication supports the document node only.</not-supported-nodetype>
-        <no-publication-lifecycle>No publication lifecycle is configured.</no-publication-lifecycle>
+        <not-supported-nodetype>Yayın yalnızca belge düğümü destekler.</not-supported-nodetype>
+        <no-publication-lifecycle>Hiçbir yayın ömrü yapılandırılamadı.</no-publication-lifecycle>
       </manage-publication>
-      <unsubcriber-lifecycle>The node was already unsubscribed.</unsubcriber-lifecycle>
-      <not-supported-nodetype>The unsubscriber lifecycle supports the document node only.</not-supported-nodetype>
-      <unsubcriber-lifecycle-finish>The node was unsubscribed successfully.</unsubcriber-lifecycle-finish>
-      <access-false>The node is not an article or checked in.</access-false>
-      <unsupported-action>This action is not supported.</unsupported-action>
-      <not-relationable>This node has not yet had any related links to another node.</not-relationable>
-      <node-pasted>Node '{0}' has been pasted at the location '{1}'. This operation has already been saved.</node-pasted>
-      <no-node-selected>No node copied.</no-node-selected>
-      <unable-edit>Node'{0}' with nodetype '{1}' is not supported to edit.</unable-edit>
-      <not-support>Cannot edit the selected node.</not-support>
-      <template-null>This node has no dialog available.</template-null>
-      <keyword-null>There are no keywords to search.</keyword-null>
-      <not-found>No results found.</not-found>
-      <keyword-not-allow>This keyword is not allowed.</keyword-not-allow>
-      <is-not-referenable>Node '{0}' cannot be referenceable.</is-not-referenable>
-      <access-denied>Access denied. You do not have edit permission in this node.</access-denied>
-      <access-add-denied>Access denied. You do not have add permission in this node.</access-add-denied>
-      <item-existed>This node already exists. It cannot have the same name as its sibling.</item-existed>
-      <removed-hidden-mixin>You removed the hidden mixin successfully.</removed-hidden-mixin>
-      <added-hidden-mixin>You added the hidden mixin successfully.</added-hidden-mixin>
-      <not-supported>This function is supported for the document type only.</not-supported>
-      <empty-file-type>You cannot add a document to this node.</empty-file-type>
-      <unsupported-watch>Only the document node can be watched.</unsupported-watch>
-      <watch-checkedin>You must check out the node before watching.</watch-checkedin>
-      <unsupported-tagging>Only the document node can be tagged.</unsupported-tagging>
-      <tagnode-checkedin>You must check out the node before tagging.</tagnode-checkedin>
+      <unsubcriber-lifecycle>Düğümün aboneliği zaten yok.</unsubcriber-lifecycle>
+      <not-supported-nodetype>Abonelik iptali ömrü sadece belge düğümü desteklenir.</not-supported-nodetype>
+      <unsubcriber-lifecycle-finish>Düğümün aboneliği  başarıyla kaldırıldı.</unsubcriber-lifecycle-finish>
+      <access-false>Düğüm bir makale değil veya kontrol ediliyor.</access-false>
+      <unsupported-action>Bu işlem desteklenmiyor.</unsupported-action>
+      <not-relationable>Bu düğüm, başka bir düğüm için ilgili bağlantıları henüz görmemiştir.</not-relationable>
+      <node-pasted>'{0}' Düğümü '{1}' konumuna yapıştırılmış. Bu işlem zaten kaydedildi.</node-pasted>
+      <no-node-selected>Hiçbir düğüm kopyalanamaz.</no-node-selected>
+      <unable-edit>'{0}' düğümü ile  '{1}' düğüm türü düzenlemek için desteklenmiyor.</unable-edit>
+      <not-support>Seçili düğümün düzenleyemezsiniz.</not-support>
+      <template-null>Bu düğümün kullanılabilir hiçbir iletişim yoktur.</template-null>
+      <keyword-null>Arama için hiçbir anahtar kelime yoktur.</keyword-null>
+      <not-found>Sonuç bulunamadı.</not-found>
+      <keyword-not-allow>Bu anahtar sözcüğe izin verilmez.</keyword-not-allow>
+      <is-not-referenable>Düğüm '{0}' referenceable olamaz.</is-not-referenable>
+      <access-denied>Erişim engellendi. Bu düğüme izin düzenleme yetkiniz bulunmamaktadır.</access-denied>
+      <access-add-denied>Erişim engellendi. Bu düğüme izin ekleme yetkiniz bulunmamaktadır.</access-add-denied>
+      <item-existed>Bu düğümü zaten var. Aynı adı iki kez kullanamazsınız.</item-existed>
+      <removed-hidden-mixin>Gizli mixin başarıyla kaldırıldı.</removed-hidden-mixin>
+      <added-hidden-mixin>Gizli mixin başarıyla eklendi.</added-hidden-mixin>
+      <not-supported>Bu işlev yalnızca bu belge türü için destekleniyor.</not-supported>
+      <empty-file-type>Belgeyi bu düğüme ekleyemezsiniz.</empty-file-type>
+      <unsupported-watch>Yalnızca belge düğümü izlenebilir.</unsupported-watch>
+      <watch-checkedin>İzlemeden önce düğümü kontrol etmelisiniz.</watch-checkedin>
+      <unsupported-tagging>Yalnızca belge düğümü etiketlenebilir.</unsupported-tagging>
+      <tagnode-checkedin>Etiketlemeden önce düğümü kontrol etmelisiniz.</tagnode-checkedin>
     </msg>
     <title>
-      <select-tab>Select Tab</select-tab>
-      <SimpleSearch>Quick Search</SimpleSearch>
-      <AdvanceSearch>Advanced Search</AdvanceSearch>
-      <SavedQueries>Saved Queries</SavedQueries>
-      <ShowAllOwnedByUser>Show All My Items</ShowAllOwnedByUser>
-      <ShowAllFavourite>Show All Favorite Items</ShowAllFavourite>
-      <ShowAllHidden>Show All Hidden Items</ShowAllHidden>
-      <ShowAllFromTrash>Show All Items From Trash</ShowAllFromTrash>
+      <select-tab>Sekmeyi Seçin</select-tab>
+      <SimpleSearch>Hızlı Arama</SimpleSearch>
+      <AdvanceSearch>Gelişmiş Arama</AdvanceSearch>
+      <SavedQueries>Kaydedilen Sorgular</SavedQueries>
+      <ShowAllOwnedByUser>Tüm öğeleri göster</ShowAllOwnedByUser>
+      <ShowAllFavourite>Tüm sık kullanılan öğeleri göster</ShowAllFavourite>
+      <ShowAllHidden>Tüm gizli öğeleri göster</ShowAllHidden>
+      <ShowAllFromTrash>Çöp kutusundaki tüm öğeleri göster</ShowAllFromTrash>
     </title>
   </UIActionBar>
   <UIPopupMenu>
     <msg>
-      <has-not-permission>Access denied. You do not have add permission in this node.</has-not-permission>
-      <has-not-edit-permission>Access denied. You do not have edit permission in this node. Please contact the administrator.</has-not-edit-permission>
-      <cannot-login-node>You cannot access and paste the node here.</cannot-login-node>
-      <cannot-paste-nodetype>You cannot paste the node here.</cannot-paste-nodetype>
-      <has-not-permission-unlok>You do not have permission to unlock this node.</has-not-permission-unlok>
-      <bound-exception>You do not have permission to rename this node. Please contact the administrator.</bound-exception>
-      <bound-move-exception>You cannot move the node to itself or in its sub-node.</bound-move-exception>
-      <does-not-support-auditing>You cannot activate auditing on this node.</does-not-support-auditing>
-      <can-not-rename-node>You do not have permission to rename this node. Please contact the administrator to get the correct right.</can-not-rename-node>
-      <can-not-cut-node>You do not have permission to cut this node. Please contact the administrator.</can-not-cut-node>
-      <can-not-remove-node>You do not have permission to remove this node. Please contact the administrator.</can-not-remove-node>
-      <can-not-lock-node>You do not have permission to lock node {0}. Please contact the administrator.</can-not-lock-node>
-      <can-not-unlock-node>You do not have permission to unlock this node. Please contact the administrator.</can-not-unlock-node>
-      <no-node>Please select at least one node before pasting.</no-node>
-      <can-not-paste-node>You do not have permission to move to this node. Please contact the administrator.</can-not-paste-node>
-      <can-not-move-node>You do not have permission to move this node. Please contact the administrator.</can-not-move-node>
-      <does-not-support-versioning>You do not have permission to move to this node. Please contact the administrator.</does-not-support-versioning>
-      <path-not-found>This element was deleted or changed. Please click the Refresh button.</path-not-found>
-      <paste-lock-exception>You cannot paste '{0}' to this node because the source or the destination node is locked or is related to the locked node.</paste-lock-exception>
-      <can-not-checkin-node>You cannot check in this node. Please check that you have the right permissions.</can-not-checkin-node>
-      <can-not-checkout-node>You cannot check out this node. Please check that you have the right permissions.</can-not-checkout-node>
-      <move-constraint-exception>An error occurred while moving the node.</move-constraint-exception>
-      <not-lock-owner>You cannot unlock this node because you are not the lock owner.</not-lock-owner>
-      <is-checked-in>Please check out this node before renaming.</is-checked-in>
-      <is-checked-in-lock>Please check out this node before locking.</is-checked-in-lock>
-      <cant-lock>You cannot lock this node.</cant-lock>
-      <node-locked>The item with the path {0} or upper level is locked.</node-locked>
-      <can-not-delete>Please close this node before deleting.</can-not-delete>
-      <can-not-delete-version>You cannot delete this node. It is versioning.</can-not-delete-version>
-      <not-support>You cannot delete the selected node. Please select another node.</not-support>
-      <current-node-not-allow-paste>You cannot paste the copied node type on the current node.</current-node-not-allow-paste>
-      <copied-node-in-versioning>You cannot paste the copied node. It is versioning.</copied-node-in-versioning>
-      <parent-node-locked>You do not have permission to unlock node '{0}'.</parent-node-locked>
-      <this-node-locked-by-parent>You cannot unlock this node. It is locked by the parent or ancestor node.</this-node-locked-by-parent>
-      <paste-node-same-name>You cannot paste a node with the same name as a node in the destination folder.</paste-node-same-name>
-      <has-not-add-permission>You do not have permission to add a new node.</has-not-add-permission>
-      <node-cutting>Node is being cut. You cannot paste it here.</node-cutting>
-      <access-denied>Access denied. You may not have permission in this node.</access-denied>
-      <remove-verion-exception>You cannot remove this node because it (or its ancestor) is checked in.</remove-verion-exception>
-      <remove-referentialIntegrityException>You cannot delete this node because it is currently the target of a Reference property.</remove-referentialIntegrityException>
-      <constraintviolation-exception>The mandatory item jcr:uuid was not found. The node may have been deleted or changed. Please click the Refresh button.</constraintviolation-exception>
-      <path-not-found-exception>This node was deleted or changed. Please click the Refresh button.</path-not-found-exception>
-      <not-exist-categories>The category does not exist.</not-exist-categories>
+      <has-not-permission>Erişim engellendi. Bu düğüme izin ekleme yetkiniz bulunmamaktadır.</has-not-permission>
+      <has-not-edit-permission>Erişim engellendi. Bu düğüm üzerinde düzenleme izniniz yok. Lütfen yöneticinize başvurun.</has-not-edit-permission>
+      <cannot-login-node>Düğüme erişemez ve yapıştıramazsınız.</cannot-login-node>
+      <cannot-paste-nodetype>Düğüme yapıştıramazsınız.</cannot-paste-nodetype>
+      <has-not-permission-unlok>Bu düğüm kilidini açmak için izniniz yok.</has-not-permission-unlok>
+      <bound-exception>Bu düğümü yeniden adlandırma izniniz yok. Lütfen yöneticinize başvurun.</bound-exception>
+      <bound-move-exception>Düğümü, alt düğüme taşıyamazsınız.</bound-move-exception>
+      <does-not-support-auditing>Bu düğüm üzerinde Denetimi etkinleştirilemezsiniz.</does-not-support-auditing>
+      <can-not-rename-node>Bu düğüm yeniden adlandırma izniniz yok. Yetki almak için yöneticinize başvurun.</can-not-rename-node>
+      <can-not-cut-node>Bu düğüm kesmek için izniniz yok. Lütfen yöneticinize başvurun.</can-not-cut-node>
+      <can-not-remove-node>Bu düğüm kaldırmak için yeterli izniniz yok. Lütfen yöneticinize başvurun.</can-not-remove-node>
+      <can-not-lock-node>Düğümü {0} kilitlemek için izniniz yok. Lütfen yöneticinize başvurun.</can-not-lock-node>
+      <can-not-unlock-node>Bu düğüm kilidini açmak için izniniz yok. Lütfen yöneticinize başvurun.</can-not-unlock-node>
+      <no-node>Lütfen yapıştırmadan önce en az bir düğüm seçin.</no-node>
+      <can-not-paste-node>Bu düğüm kaldırmak için yeterli izniniz yok. Lütfen yöneticinize başvurun.</can-not-paste-node>
+      <can-not-move-node>Bu düğüme taşımak için gerekli izniniz yok. Lütfen yöneticinize başvurun.</can-not-move-node>
+      <does-not-support-versioning>Bu düğüme taşımak için gerekli izniniz yok. Lütfen yöneticinize başvurun.</does-not-support-versioning>
+      <path-not-found>Bu öğe silinmiş veya değişmiş. Lütfen Yenile düğmesini tıklayın.</path-not-found>
+      <paste-lock-exception>Kaynak veya hedef düğüm kilitli olduğundan, '{0}' bu düğüme yapıştıramazsınız.</paste-lock-exception>
+      <can-not-checkin-node>Bu düğümü kontrol edemezsiniz. Lütfen doğru izinlere sahip olduğunuzu denetleyin.</can-not-checkin-node>
+      <can-not-checkout-node>Bu düğümü kontrol edemezsiniz. Lütfen doğru izinlere sahip olduğunuzu denetleyin.</can-not-checkout-node>
+      <move-constraint-exception>Düğümü taşırken hata oluştu.</move-constraint-exception>
+      <not-lock-owner>Düğümü siz kilitlemediğiniz için kilidi kaldıramazsınız.</not-lock-owner>
+      <is-checked-in>Bu düğümü yeniden adlandırmadan önce kontrol edin.</is-checked-in>
+      <is-checked-in-lock>Bu düğümü kilitlemeden önce kontrol edin.</is-checked-in-lock>
+      <cant-lock>Bu düğümü kilitleyemezsiniz.</cant-lock>
+      <node-locked>Öğe yolu {0} veya üst düzey ile kilitlenir.</node-locked>
+      <can-not-delete>Lütfen bu düğümü silmeden önce kapatın.</can-not-delete>
+      <can-not-delete-version>Bu düğümü silemezsiniz. Sürüm yönetimi çalışmaktadır.</can-not-delete-version>
+      <not-support>Seçili düğümü silemezsiniz. Lütfen başka bir düğüm seçin.</not-support>
+      <current-node-not-allow-paste>Kopyalanan düğüm türünü geçerli düğüme yapıştıramazsınız.</current-node-not-allow-paste>
+      <copied-node-in-versioning>Kopyalanan düğümü yapıştıramazsınız. Sürüm yönetimi çalışmaktadır.</copied-node-in-versioning>
+      <parent-node-locked>Düğüm '{0}' kilidini açmak için izniniz yok.</parent-node-locked>
+      <this-node-locked-by-parent>Bu düğüm kilidi açılamıyor. Üst düğüm tarafından kilitlendi.</this-node-locked-by-parent>
+      <paste-node-same-name>Hedef klasörde aynı adlı bir düğüm yapıştıramazsınız.</paste-node-same-name>
+      <has-not-add-permission>Yeni bir düğüm eklemek için izniniz yok.</has-not-add-permission>
+      <node-cutting>Düğüm kesilmiştir. Buraya yapıştıramazsınız.</node-cutting>
+      <access-denied>Erişim engellendi. Bu düğümde izniniz olmayabilir.</access-denied>
+      <remove-verion-exception>Bu düğümü kaldıramzsınız çünkü düğüm (yada üstü)  kontrol ediliyor.</remove-verion-exception>
+      <remove-referentialIntegrityException>Bu düğümü silemezsiniz çünkü bir başvuru yapılmış.</remove-referentialIntegrityException>
+      <constraintviolation-exception>Zorunlu öğe jcr:uuid bulunamadı. Düğüm silinmiş veya değiştirmiş. Lütfen Yenile düğmesini tıklatın.</constraintviolation-exception>
+      <path-not-found-exception>Bu öğe silinmiş veya değişmiş. Lütfen Yenile düğmesini tıklatın.</path-not-found-exception>
+      <not-exist-categories>Kategori yok.</not-exist-categories>
     </msg>
   </UIPopupMenu>
   <!--
@@ -392,29 +410,29 @@
   <UIFolderForm>
     <action>
       <Cancel>#{word.cancel}</Cancel>
-      <Save>Create Folder</Save>
+      <Save>Klasör Oluştur</Save>
     </action>
     <label>
-      <titleTextBox>Folder Name:</titleTextBox>
-      <customTypeCheckBox>Use a custom type of folder</customTypeCheckBox>
+      <titleTextBox>Klasör Adı:</titleTextBox>
+      <customTypeCheckBox>Klasörün özel tipini kullanın</customTypeCheckBox>
     </label>
-    <title>Add/Edit Folder</title>
+    <title>Klasör Ekle/Düzenle</title>
     <msg>
-      <addFolder-successful>The folder '{0}' was added successfully.</addFolder-successful>
-      <name-invalid>Please enter the folder name.</name-invalid>
-      <title-invalid>Please enter the folder title.</title-invalid>
-      <name-not-allowed>This name is not allowed.</name-not-allowed>
-      <fileName-error>The file name is invalid.</fileName-error>
-      <constraint-violation>The current node does not allow you to add the node type '{0}'.</constraint-violation>
-      <repository-exception>An unexpected error occurred. Please contact your administrator for more details.</repository-exception>
-      <repository-exception-permission>You do not have permission to add a new folder to this node.</repository-exception-permission>
-      <numberformat-exception>You cannot save this folder. The name provided must be in numerical format.</numberformat-exception>
+      <addFolder-successful>'{0}' Klasörü başarıyla eklendi.</addFolder-successful>
+      <name-invalid>Lütfen klasör adını girin.</name-invalid>
+      <title-invalid>Lütfen klasör başlığı girin.</title-invalid>
+      <name-not-allowed>Bu ad geçerli değil.</name-not-allowed>
+      <fileName-error>Dosya adı geçersiz.</fileName-error>
+      <constraint-violation>Geçerli düğüm '{0}' düğüm türünü eklemenize izin vermez.</constraint-violation>
+      <repository-exception>Beklenmeyen bir hata oluştu. Daha fazla ayrıntı için yöneticinize başvurun.</repository-exception>
+      <repository-exception-permission>Bu düğüm için yeni bir klasör ekleme izniniz yok.</repository-exception-permission>
+      <numberformat-exception>Bu eylem kaydedemezsiniz. Verilen adı sayısal biçiminde olması gerekir.</numberformat-exception>
       <!--DMS 2.4.x; ECM-3553-->
-      <not-allow-sameNameSibling>You cannot save the folder. This node does not accept two nodes with the same name.</not-allow-sameNameSibling>
-      <ntFolder-not-avaiable>You must select a custom type of folder</ntFolder-not-avaiable>
+      <not-allow-sameNameSibling>Klasöre kaydedemezsiniz. Bu düğüm, aynı ada sahip iki düğüm kabul etmez.</not-allow-sameNameSibling>
+      <ntFolder-not-avaiable>Özel bir klasör türünü seçmeniz gerekir</ntFolder-not-avaiable>
     </msg>
     <help>
-      <customTypeCheckBoxHelp>Check if you intend to store web contents or custom document types in this folder</customTypeCheckBoxHelp>
+      <customTypeCheckBoxHelp>Web içeriği veya özel belge türleri bu klasörde saklamak niyetinde iseniz kontrol edin</customTypeCheckBoxHelp>
     </help>
   </UIFolderForm>
   <!--
@@ -428,114 +446,114 @@
     </title>
     <msg>
       <!-- Delte one node is not in trash and have no relation -->
-      <confirm-delete>Are you sure you want to delete the item '{0}'?</confirm-delete>
-      <confirm-delete-file>Are you sure you want to delete the file '{0}'?</confirm-delete-file>
-      <confirm-delete-folder>Are you sure you want to delete the folder '{0}' and all subfolders?</confirm-delete-folder>
+      <confirm-delete>'{0}' Öğesini silmek istediğinizden emin misiniz?</confirm-delete>
+      <confirm-delete-file>'{0}' Dosyasını silmek istediğinizden emin misiniz?</confirm-delete-file>
+      <confirm-delete-folder>'{0}' Klasörünü ve tüm alt klasörlerini silmek istediğinizden emin misiniz?</confirm-delete-folder>
       
       <!-- Delte one node is in trash and have no relation -->
-      <confirm-delete-permanently>Are you sure you want to permanently remove the item '{0}'?</confirm-delete-permanently>
-      <confirm-delete-file-permanently>Are you sure you want to permanently remove the file '{0}'?</confirm-delete-file-permanently>
-      <confirm-delete-folder-permanently>Are you sure you want to permanently remove the folder '{0}' and all subfolders?</confirm-delete-folder-permanently>
+      <confirm-delete-permanently>'{0}' Öğeyi kalıcı olarak kaldırmak istediğinizden emin misiniz?</confirm-delete-permanently>
+      <confirm-delete-file-permanently>'{0}' Dosyasını kalıcı olarak kaldırmak istediğinizden emin misiniz?</confirm-delete-file-permanently>
+      <confirm-delete-folder-permanently>'{0}' Klasörünü ve tüm alt klasörleri kalıcı olarak kaldırmak istediğinizden emin misiniz?</confirm-delete-folder-permanently>
       
       <!-- Delte one node is not in trash and have relations -->
-      <confirm-delete-has-relations>Are you sure you want to delete the item '{0}' and its references?</confirm-delete-has-relations>
-      <confirm-delete-file-has-relations>Are you sure you want to delete the file '{0}' and its references?</confirm-delete-file-has-relations>
-      <confirm-delete-folder-has-relations>Are you sure you want to delete the folder '{0}' and its references?</confirm-delete-folder-has-relations>
+      <confirm-delete-has-relations>'{0}' Öğesini  ve onun başvurularını silmek istediğinizden emin misiniz?</confirm-delete-has-relations>
+      <confirm-delete-file-has-relations>'{0}' Dosyasını ve onun başvurularını silmek istediğinizden emin misiniz?</confirm-delete-file-has-relations>
+      <confirm-delete-folder-has-relations>'{0}' Klasörünü ve onun başvurularını silmek istediğinizden emin misiniz?</confirm-delete-folder-has-relations>
       
       <!-- Delte multiple nodes, not in Trash, have no relations -->
-      <confirm-delete-multi-nodes-generic>Are you sure you want to delete the {0} selected items?</confirm-delete-multi-nodes-generic>  
-      <confirm-delete-multi-nodes-file>Are you sure you want to delete the {0} selected files?</confirm-delete-multi-nodes-file>
-      <confirm-delete-multi-nodes-folder>Are you sure you want to delete the {0} selected folders and all subfolders?</confirm-delete-multi-nodes-folder>
-      <confirm-delete-multi-nodes-generic-and-file>Are you sure you want to delete the {0} selected items and files?</confirm-delete-multi-nodes-generic-and-file>
-      <confirm-delete-multi-nodes-generic-and-folder>Are you sure you want to delete the {0} selected items, folders and all subfolders?</confirm-delete-multi-nodes-generic-and-folder>
-      <confirm-delete-multi-nodes-file-and-folder>Are you sure you want to delete the {0} selected files, folders and all subfolders?</confirm-delete-multi-nodes-file-and-folder>
-      <confirm-delete-multi-nodes-generic-and-file-and-folder>Are you sure you want to delete the {0} selected items, files, folders and all subfolders?</confirm-delete-multi-nodes-generic-and-file-and-folder>
+      <confirm-delete-multi-nodes-generic>Seçili {0} öğeyi silmek istediğinizden emin misiniz?</confirm-delete-multi-nodes-generic>  
+      <confirm-delete-multi-nodes-file>Seçili {0} dosyaları silmek istediğinizden emin misiniz?</confirm-delete-multi-nodes-file>
+      <confirm-delete-multi-nodes-folder>Seçili {0} klasör ve tüm alt klasörlerini silmek istediğinizden emin misiniz?</confirm-delete-multi-nodes-folder>
+      <confirm-delete-multi-nodes-generic-and-file>Seçili {0} öğesini ve dosayalarını silmek istediğinizden emin misiniz?</confirm-delete-multi-nodes-generic-and-file>
+      <confirm-delete-multi-nodes-generic-and-folder>Seçili {0} öğe, klasör ve tüm alt klasörlerini silmek istediğinizden emin misiniz?</confirm-delete-multi-nodes-generic-and-folder>
+      <confirm-delete-multi-nodes-file-and-folder>Seçili {0} dosya, klasör ve tüm alt klasörlerini silmek istediğinizden emin misiniz?</confirm-delete-multi-nodes-file-and-folder>
+      <confirm-delete-multi-nodes-generic-and-file-and-folder>Seçili {0} öğe, dosya, klasör ve tüm alt klasörlerini silmek istediğinizden emin misiniz?</confirm-delete-multi-nodes-generic-and-file-and-folder>
       
       <!-- Delte multiple nodes, in Trash -->
-      <confirm-delete-multi-nodes-generic-permanently>Are you sure you want to permanently remove the {0} selected items?</confirm-delete-multi-nodes-generic-permanently>  
-      <confirm-delete-multi-nodes-file-permanently>Are you sure you want to permanently remove the {0} selected files?</confirm-delete-multi-nodes-file-permanently>
-      <confirm-delete-multi-nodes-folder-permanently>Are you sure you want to permanently remove the {0} selected folders and all subfolders?</confirm-delete-multi-nodes-folder-permanently>
-      <confirm-delete-multi-nodes-generic-and-file-permanently>Are you sure you want to permanently remove the {0} selected items and files?</confirm-delete-multi-nodes-generic-and-file-permanently>
-      <confirm-delete-multi-nodes-generic-and-folder-permanently>Are you sure you want to permanently remove the {0} selected items, folders and all subfolders?</confirm-delete-multi-nodes-generic-and-folder-permanently>
-      <confirm-delete-multi-nodes-file-and-folder-permanently>Are you sure you want to permanently remove the {0} selected files, folders and all subfolders?</confirm-delete-multi-nodes-file-and-folder-permanently>
-      <confirm-delete-multi-nodes-generic-and-file-and-folder-permanently>Are you sure you want to permanently remove the {0} selected items, files, folders and all subfolders?</confirm-delete-multi-nodes-generic-and-file-and-folder-permanently>
+      <confirm-delete-multi-nodes-generic-permanently>Seçili {0} öğeleri kalıcı olarak kaldırmak istediğinizden emin misiniz?</confirm-delete-multi-nodes-generic-permanently>  
+      <confirm-delete-multi-nodes-file-permanently>Seçili {0} dosyaları kalıcı olarak kaldırmak istediğinizden emin misiniz?</confirm-delete-multi-nodes-file-permanently>
+      <confirm-delete-multi-nodes-folder-permanently>Seçili {0} klasör ve tüm alt klasörleri kalıcı olarak kaldırmak istediğinizden emin misiniz?</confirm-delete-multi-nodes-folder-permanently>
+      <confirm-delete-multi-nodes-generic-and-file-permanently>Seçili {0} öğesini ve dosyalarını  kalıcı olarak kaldırmak istediğinizden emin misiniz?</confirm-delete-multi-nodes-generic-and-file-permanently>
+      <confirm-delete-multi-nodes-generic-and-folder-permanently>Seçili {0} öğeleri, klasör ve tüm alt klasörleri kalıcı olarak kaldırmak istediğinizden emin misiniz?</confirm-delete-multi-nodes-generic-and-folder-permanently>
+      <confirm-delete-multi-nodes-file-and-folder-permanently>Seçili {0} dosya, klasör ve tüm alt klasörleri kalıcı olarak kaldırmak istediğinizden emin misiniz?</confirm-delete-multi-nodes-file-and-folder-permanently>
+      <confirm-delete-multi-nodes-generic-and-file-and-folder-permanently>Seçili {0} öğe, dosya, klasör ve tüm alt klasörleri kalıcı olarak kaldırmak istediğinizden emin misiniz?</confirm-delete-multi-nodes-generic-and-file-and-folder-permanently>
       
       <!-- Delte multiple nodes, have relations -->
-      <confirm-delete-multi-nodes-generic-have-relations>Are you sure you want to delete the {0} selected items and their references?</confirm-delete-multi-nodes-generic-have-relations>  
-      <confirm-delete-multi-nodes-file-have-relations>Are you sure you want to delete the {0} selected files and their references?</confirm-delete-multi-nodes-file-have-relations>
-      <confirm-delete-multi-nodes-folder-have-relations>Are you sure you want to delete the {0} selected folders, all subfolders and their references?</confirm-delete-multi-nodes-folder-have-relations>
-      <confirm-delete-multi-nodes-generic-and-file-have-relations>Are you sure you want to delete the {0} selected items, files and their references?</confirm-delete-multi-nodes-generic-and-file-have-relations>
-      <confirm-delete-multi-nodes-generic-and-folder-have-relations>Are you sure you want to delete the {0} selected items, their references, folders and all subfolders?</confirm-delete-multi-nodes-generic-and-folder-have-relations>
-      <confirm-delete-multi-nodes-file-and-folder-have-relations>Are you sure you want to delete the {0} selected files, their references, folders and all subfolders?</confirm-delete-multi-nodes-file-and-folder-have-relations>
-      <confirm-delete-multi-nodes-generic-and-file-and-folder-have-relations>Are you sure you want to delete the {0} selected items, files, their references, folders and all subfolders?</confirm-delete-multi-nodes-generic-and-file-and-folder-have-relations>
+      <confirm-delete-multi-nodes-generic-have-relations>Seçili {0} öğelerini ve onların başvuruları silmek istediğinizden emin misiniz?</confirm-delete-multi-nodes-generic-have-relations>  
+      <confirm-delete-multi-nodes-file-have-relations>Seçili {0} dosyaları ve onların başvuruları silmek istediğinizden emin misiniz?</confirm-delete-multi-nodes-file-have-relations>
+      <confirm-delete-multi-nodes-folder-have-relations>Seçili {0} klasörler, tüm alt klasörleri ve onların başvuruları silmek istediğinizden emin misiniz?</confirm-delete-multi-nodes-folder-have-relations>
+      <confirm-delete-multi-nodes-generic-and-file-have-relations>Seçili {0} öğeleri, dosyaları ve onların başvuruları silmek istediğinizden emin misiniz?</confirm-delete-multi-nodes-generic-and-file-have-relations>
+      <confirm-delete-multi-nodes-generic-and-folder-have-relations>Seçili {0} öğe, başvurularını, klasör ve tüm alt klasörlerini silmek istediğinizden emin misiniz?</confirm-delete-multi-nodes-generic-and-folder-have-relations>
+      <confirm-delete-multi-nodes-file-and-folder-have-relations>Seçili {0} öğe, başvurularını, klasör ve tüm alt klasörlerini silmek istediğinizden emin misiniz?</confirm-delete-multi-nodes-file-and-folder-have-relations>
+      <confirm-delete-multi-nodes-generic-and-file-and-folder-have-relations>Seçili {0} öğe, başvurularını, klasör ve tüm alt klasörlerini silmek istediğinizden emin misiniz?</confirm-delete-multi-nodes-generic-and-file-and-folder-have-relations>
       
-      <feedback-delete>'{0}' was deleted succesfully.</feedback-delete>
-      <feedback-delete-multi>{0} items were deleted succesfully.</feedback-delete-multi>      
-      <feedback-delete-permanently>'{0}' was removed permanently.</feedback-delete-permanently>
-      <feedback-delete-permanently-multi>{0} items were removed permanently.</feedback-delete-permanently-multi>
-      <undo-delete>Undo</undo-delete>
-      <feedback-restore>'{0}' was successfully restored.</feedback-restore>
-      <feedback-restore-multi>{0} items were succesfully restored.</feedback-restore-multi>
+      <feedback-delete>'{0}' başarıyla silinmiştir.</feedback-delete>
+      <feedback-delete-multi>{0} öğe başarıyla silinmiştir.</feedback-delete-multi>      
+      <feedback-delete-permanently>'{0}' kalıcı olarak kaldırılmıştır.</feedback-delete-permanently>
+      <feedback-delete-permanently-multi>{0} öğeler kalıcı olarak kaldırılmıştır.</feedback-delete-permanently-multi>
+      <undo-delete>Geri al</undo-delete>
+      <feedback-restore>'{0}' başarıyla geri yüklendi.</feedback-restore>
+      <feedback-restore-multi>{0} öğe başarıyla geri yüklendi.</feedback-restore-multi>
       
-      <confirm-restore>A node with the same name already exists in the old location of node'{0}'. Are you sure you want to restore this node?</confirm-restore>
-      <confirm-move>Are you sure you want to move?</confirm-move>
-      <node-cut>Node '{0}' has been cut.</node-cut>
-      <execute-successfully>The custom action '{0}' has been executed.</execute-successfully>
-      <save-node-success>Node '{0}' has been saved.</save-node-success>
-      <move-problem>You cannot move node '{0}' to '{1}' because there was a problem with permission or constraint conditions.</move-problem>
+      <confirm-restore>Aynı ada sahip bir düğüm '{0}' eski konumda zaten var. Bu düğüm geri yüklemek istediğinizden emin misiniz?</confirm-restore>
+      <confirm-move>Taşımak istediğinizden emin misiniz?</confirm-move>
+      <node-cut>Düğüm '{0}' kesilmiş.</node-cut>
+      <execute-successfully>Özel eylem '{0}' gerçekleştirildi.</execute-successfully>
+      <save-node-success>Düğüm '{0}' kaydedildi.</save-node-success>
+      <move-problem>İzin veya kısıtlama koşulları ile ilgili bir sorun oluştuğundan düğüm '{0}' '{1}' için taşıyamasınız.</move-problem>
     </msg>
   </UIWorkingArea>
   <UIDocumentWorkspace>
     <label>
-      <no-children>This node does not have any child nodes.</no-children>
-      <no-children-but-has-hidden>This node does not have any child nodes, but there are some hidden files.</no-children-but-has-hidden>
+      <no-children>Bu düğüm, alt düğüm içermemektedir.</no-children>
+      <no-children-but-has-hidden>Bu düğümde herhangi bir alt düğüm yoktur ancak bazı gizli dosyalar bulunmaktadır.</no-children-but-has-hidden>
     </label>
     <msg>
-      <unable-save-node>Node '{0}' has been newly created. Please save session before performing this action.</unable-save-node>
-      <save-node-success>Node '{0}' has been saved.</save-node-success>
-      <node-copied>Node '{0}' has been copied.</node-copied>
-      <node-cut>Node '{0}' has been cut.</node-cut>
-      <remove-root>You cannot remove the root node.</remove-root>
-      <node-remove-success>Node '{0}' has been removed.</node-remove-success>
+      <unable-save-node>Düğüm '{0}' yeni oluşturuldu. Bu eylemi gerçekleştirmeden önce oturumu kaydedin.</unable-save-node>
+      <save-node-success>Düğüm '{0}' kaydedildi.</save-node-success>
+      <node-copied>Düğüm '{0}' kopyalandı.</node-copied>
+      <node-cut>Düğüm '{0}' kesildi.</node-cut>
+      <remove-root>Kök düğümü kaldıramazsınız.</remove-root>
+      <node-remove-success>Düğüm '{0}' kaldırıldı.</node-remove-success>
     </msg>
     <tooltip>
-      <Rename>Rename</Rename>
-      <Cut>Cut</Cut>
-      <Copy>Copy</Copy>
+      <Rename>Yeniden Adlandır</Rename>
+      <Cut>Kes</Cut>
+      <Copy>Kopyala</Copy>
       <Save>Kaydet</Save>
       <RemoveNode>Sil</RemoveNode>
-      <Checkin>Checkin</Checkin>
-      <Checkout>Checkout</Checkout>
-      <Lock>Lock</Lock>
-      <Unlock>Unlock</Unlock>
+      <Checkin>Kayıt Yapıldı</Checkin>
+      <Checkout>Kayıt Kapatıldı</Checkout>
+      <Lock>Kilitle</Lock>
+      <Unlock>Kilidi Aç</Unlock>
       <EditDocument>Düzenle</EditDocument>
-      <Paste>Paste</Paste>
-      <LockedBy>Locked by</LockedBy>
+      <Paste>Yapıştır</Paste>
+      <LockedBy>Tarafından kilitlenmiş</LockedBy>
     </tooltip>
   </UIDocumentWorkspace>
   <UIDocumentInfo>
     <msg>
-      <access-denied>Access denied. You cannot access node '{0}'.</access-denied>
-      <null-exception>Item not found. It was either removed or changed, or you do not have permission to access this node.</null-exception>
-      <confirm-deleteattachment>Are you sure you want to remove this attachment file?</confirm-deleteattachment>
-      <confirm-deleteattcomment>Are you sure you want to remove this comment?</confirm-deleteattcomment>
-      <access-denied-exception>Access denied. You may not have reading privileges, or the node may have been removed or changed.</access-denied-exception>
-      <path-not-found>This element was deleted or changed. Please click the Refresh button.</path-not-found>
+      <access-denied>Erişim engellendi. Düğüm '{0}' erişemez.</access-denied>
+      <null-exception>Öğe bulunamadı. Öğe kaldırıldı, değişti ya da  bu düğüme erişmek için izniniz yok.</null-exception>
+      <confirm-deleteattachment>Bu ek dosyasını kaldırmak istediğinizden emin misiniz?</confirm-deleteattachment>
+      <confirm-deleteattcomment>Bu yorumu kaldırmak istediğinizden emin misiniz?</confirm-deleteattcomment>
+      <access-denied-exception>Erişim engellendi. Okuma ayrıcalıklarına sahip olmayabilirsiniz veya düğüm kaldırılmış veya değiştirilmiş olabilir.</access-denied-exception>
+      <path-not-found>Bu öğe silinmiş veya değişmiş. Lütfen Yenile düğmesini tıklayın.</path-not-found>
     </msg>
     <tooltip>
-      <remove-attachment>Remove this attachment file</remove-attachment>
-      <remove-comment>Remove this comment</remove-comment>
+      <remove-attachment>Ek dosyayı kaldır</remove-attachment>
+      <remove-comment>Yorumu Kaldır</remove-comment>
     </tooltip>
   </UIDocumentInfo>
   <ListView>
     <view>
       <label>
-        <name>Name</name>
-        <versionable>Versionable</versionable>
-        <exo_owner>Owner</exo_owner>
-        <auditing>Auditing</auditing>
-        <exo_dateCreated>Date Created</exo_dateCreated>
-        <exo_dateModified>Date Modifed</exo_dateModified>
+        <name>Ad</name>
+        <versionable>Sürümlü</versionable>
+        <exo_owner>Sahibi</exo_owner>
+        <auditing>Denetleme</auditing>
+        <exo_dateCreated>Oluşturma Tarihi</exo_dateCreated>
+        <exo_dateModified>Değiştirme Tarihi</exo_dateModified>
       </label>
     </view>
   </ListView>
@@ -546,34 +564,34 @@
   -->
   <ECMContextMenu>
     <event>
-      <Lock>Lock</Lock>
-      <Unlock>UnLock</Unlock>
+      <Lock>Kilitle</Lock>
+      <Unlock>Kilidini Aç</Unlock>
       <EditDocument>Düzenle</EditDocument>
-      <Copy>Copy</Copy>
-      <Rename>Rename</Rename>
+      <Copy>Kopyala</Copy>
+      <Rename>Yeniden Adlandır</Rename>
       <Delete>Sil</Delete>
       <Save>Kaydet</Save>
-      <Cut>Cut</Cut>
-      <Paste>Paste</Paste>
-      <CheckOut>CheckOut</CheckOut>
-      <CheckIn>CheckIn</CheckIn>
-      <WebDAV>View WebDAV</WebDAV>
-      <autoversion>Auto Versioning</autoversion>
-      <Custom>Custom</Custom>
-      <AddFolder>New Folder</AddFolder>
-      <AddDocument>New Content</AddDocument>
-      <Upload>Upload Files</Upload>
-      <MoveNode>Move</MoveNode>
-      <UnLock>Unlock</UnLock>
-      <ViewProperties>View Properties</ViewProperties>
-      <GetURL>Copy URL To Clipboard</GetURL>
-      <AddThumbnail>Add/Remove Thumbnail</AddThumbnail>
-      <AddToFavourite>Add To Favorite</AddToFavourite>
-      <RemoveFromFavourite>Remove From Favorite</RemoveFromFavourite>
-      <MoveToTrash>Move to Trash</MoveToTrash>
-      <RestoreFromTrash>Restore from Trash</RestoreFromTrash>
-      <EmptyTrash>Empty Trash</EmptyTrash>
-      <WebDavView>Download and Allow Editing</WebDavView>
+      <Cut>Kes</Cut>
+      <Paste>Yapıştır</Paste>
+      <CheckOut>Kaydını Kapat</CheckOut>
+      <CheckIn>Kayda Al</CheckIn>
+      <WebDAV>WebDAV Görüntüle</WebDAV>
+      <autoversion>Otomatik Sürümlü</autoversion>
+      <Custom>Özel</Custom>
+      <AddFolder>Yeni Klasör</AddFolder>
+      <AddDocument>Yeni İçerik</AddDocument>
+      <Upload>Dosyalar Yükle</Upload>
+      <MoveNode>Taşı</MoveNode>
+      <UnLock>Kilidi Aç</UnLock>
+      <ViewProperties>Görünüm Özellikleri</ViewProperties>
+      <GetURL>URL Panoya Kopyala</GetURL>
+      <AddThumbnail>Küçük Resim Ekle/Kaldır</AddThumbnail>
+      <AddToFavourite>Favoriye Ekle</AddToFavourite>
+      <RemoveFromFavourite>Favoriden Kaldır</RemoveFromFavourite>
+      <MoveToTrash>Çöp Kutusu'na Taşıyın</MoveToTrash>
+      <RestoreFromTrash>Çöp kutusundan geri yükleyin</RestoreFromTrash>
+      <EmptyTrash>Çöpü Boşalt</EmptyTrash>
+      <WebDavView>İndir ve Düzenlemeye İzin Ver</WebDavView>
     </event>
   </ECMContextMenu>
  
@@ -584,11 +602,11 @@
   -->
   <UIReferencesList>
     <msg>
-      <no-references>References not found</no-references>
+      <no-references>Başvurular bulunamadı</no-references>
     </msg>
     <header>
-      <workspace>Workspace</workspace>
-      <path>Path</path>
+      <workspace>Çalışma Alanı</workspace>
+      <path>Yol</path>
     </header>
     <action>
       <Close>Kapat</Close>
@@ -602,56 +620,55 @@
   <UITabPane>
     <title>
       <UIPublishingPanel>Publication Pane</UIPublishingPanel>
-      <UIPublicationPanel>Revision</UIPublicationPanel>
-      <UIPublicationSchedule>Scheduled</UIPublicationSchedule>
-      <UIPublicationPagesContainer>Pages</UIPublicationPagesContainer>
-      <UIPublicationHistory>History</UIPublicationHistory>
-      <UIVersionViewer>Version Viewer</UIVersionViewer>
+      <UIPublicationPanel>Gözden Geçirme</UIPublicationPanel>
+      <UIPublicationSchedule>Zamanlandı</UIPublicationSchedule>
+      <UIPublicationPagesContainer>Sayfalar</UIPublicationPagesContainer>
+      <UIPublicationHistory>Geçmiş</UIPublicationHistory>
+      <UIVersionViewer>Sürüm Görüntüleyicisi</UIVersionViewer>
 
-      <UIPropertyTab>Properties</UIPropertyTab>
-      <UIMetadataTab>Metadata</UIMetadataTab>
-      <UIPropertyForm>Add New Property</UIPropertyForm>
-      <UIUploadContent>Information of uploaded file</UIUploadContent>
-      <UIJCRAdvancedSearch>New Query</UIJCRAdvancedSearch>
-      <UISavedQuery>Saved Query</UISavedQuery>
-      <AdvancedSearchResult>Search Results</AdvancedSearchResult>
-      <UISimpleSearch>Simple Search</UISimpleSearch>
-      <UISearchContainer>Advanced Search</UISearchContainer>
-      <UICategoryManagerSearch>Add Category to Search</UICategoryManagerSearch>
-      <UIConstraintsForm>Constraints Form</UIConstraintsForm>
-      <UIViewSearchResult>View Content</UIViewSearchResult>
+      <UIPropertyTab>Özellikler</UIPropertyTab>
+      <UIMetadataTab>Metaveri</UIMetadataTab>
+      <UIPropertyForm>Yeni Özellik Ekle</UIPropertyForm>
+      <UIUploadContent>Yüklenen dosya bilgileri</UIUploadContent>
+      <UIJCRAdvancedSearch>Yeni Sorgu</UIJCRAdvancedSearch>
+      <UISavedQuery>Kaydedilmiş Sorgu</UISavedQuery>
+      <AdvancedSearchResult>Arama Sonuçları</AdvancedSearchResult>
+      <UISimpleSearch>Basit Arama</UISimpleSearch>
+      <UISearchContainer>Gelişmiş Arama</UISearchContainer>
+      <UICategoryManagerSearch>Aramaya Kategori Ekle</UICategoryManagerSearch>
+      <UIConstraintsForm>Sınırlanmış forum</UIConstraintsForm>
+      <UIViewSearchResult>İçeriği Görüntüle</UIViewSearchResult>
       <UIContentNameSearch>İsme göre arama</UIContentNameSearch>
-      <UINodeInfo>Version Info</UINodeInfo>
-      <UINodeProperty>Node Property</UINodeProperty>
-      <UIActionListContainer>Available Actions</UIActionListContainer>
-      <UIActionContainer>Add Action</UIActionContainer>
-      <UIActionViewContainer>Action Info</UIActionViewContainer>
-      <UIMultiLanguageForm>View Language</UIMultiLanguageForm>
-      <UIAddLanguageContainer>Add Language</UIAddLanguageContainer>
-      <UINonPublishedForm>State</UINonPublishedForm>
-      <UIPublishedForm>State</UIPublishedForm>
-      <UIPublicationLogList>History</UIPublicationLogList>
-      <UIDocumentWithTree>File View</UIDocumentWithTree>
-      <UIDocumentInfo>Document View</UIDocumentInfo>
-      <UICategoriesSelectPanel>Select Categories</UICategoriesSelectPanel>
-      <UISelectedCategoriesGrid>Referenced Categories</UISelectedCategoriesGrid>
+      <UINodeInfo>Sürüm Bilgisi</UINodeInfo>
+      <UINodeProperty>Düğüm Özelliği</UINodeProperty>
+      <UIActionListContainer>Kullanılabilir Eylemler</UIActionListContainer>
+      <UIActionContainer>Eylem Ekle</UIActionContainer>
+      <UIActionViewContainer>İşlem Bilgisi</UIActionViewContainer>
+      <UIMultiLanguageForm>Dili Görüntüle</UIMultiLanguageForm>
+      <UIAddLanguageContainer>Dil Ekle</UIAddLanguageContainer>
+      <UINonPublishedForm>Durum</UINonPublishedForm>
+      <UIPublishedForm>Durum</UIPublishedForm>
+      <UIPublicationLogList>Geçmiş</UIPublicationLogList>
+      <UIDocumentWithTree>Dosya Görünümü</UIDocumentWithTree>
+      <UIDocumentInfo>Belge Görünümü</UIDocumentInfo>
+      <UICategoriesSelectPanel>Kategorileri Seçin</UICategoriesSelectPanel>
+      <UISelectedCategoriesGrid>Başvurulan Kategoriler</UISelectedCategoriesGrid>
       <UIWorkflowPublicationActionForm>Workflow Publication Action</UIWorkflowPublicationActionForm>
       <UIWorkflowPublicationViewForm>Workflow Publication View</UIWorkflowPublicationViewForm>
-      <metadatasitemetadata>Site Metadata</metadatasitemetadata>
+      <metadatasitemetadata>Sitenin meta verileri</metadatasitemetadata>
       <dcelementset>Dublin Core</dcelementset>
     </title>
   </UITabPane>
   <UIPropertyTab>
     <title>
-      <edit>Edit this property</edit>
-      <delete>Remove this property</delete>
+      <edit>Bu özelliği düzenle</edit>
+      <delete>Bu özelliği kaldır</delete>
     </title>
     <confirm>
-      <remove-property>Are you sure you want to remove this property?</remove-property>
+      <remove-property>Bu özelliği kaldırmak istediğinizden emin misiniz?</remove-property>
     </confirm>
     <header>
-      <icon/>
-      <name>Name</name>
+      <name>Ad</name>
       <multiValue>Multi Value</multiValue>
       <value>Değer</value>
       <action>Eylem</action>
@@ -689,7 +706,7 @@
     <action>
       <Save>#{word.save}</Save>
       <Cancel>İptal</Cancel>
-      <Reset>Reset</Reset>
+      <Reset>Sıfırla</Reset>
     </action>
     <msg>
       <name-invalid>Please enter the property name.</name-invalid>
@@ -746,15 +763,15 @@
   -->
   <SelectUserOrGroup>
     <title>
-      <UIGroupSelector>Select User</UIGroupSelector>
+      <UIGroupSelector>Kullanıcı Seçin</UIGroupSelector>
       <UIPermissionSelector>Select Member</UIPermissionSelector>
-      <UIGroupMemberSelector>Select Membership</UIGroupMemberSelector>
+      <UIGroupMemberSelector>Üyelik Seçin</UIGroupMemberSelector>
     </title>
   </SelectUserOrGroup>
   <UIGroupSelector>
     <label>
       <selectGroup>Browse and Select a Group</selectGroup>
-      <selectUser>Select User</selectUser>
+      <selectUser>Kullanıcı Seçin</selectUser>
     </label>
     <msg>
       <not-change-owner>'{0}' is the owner of this node and has full control permission.</not-change-owner>
@@ -764,7 +781,7 @@
     <label>
       <UIPopupWindow>Select</UIPopupWindow>
       <permission>UIPermissionForm</permission>
-      <userOrGroup>User or Group</userOrGroup>
+      <userOrGroup>Kullanıcı veya Grup</userOrGroup>
       <read>Read Right</read>
       <add_node>Modify Right</add_node>
       <remove>Remove Right</remove>
@@ -773,13 +790,13 @@
     <action>
       <Close>#{word.close}</Close>
       <Save>#{word.save}</Save>
-      <Reset>Reset</Reset>
+      <Reset>Sıfırla</Reset>
     </action>
     <msg>
       <checkbox-require>Please select at least one permission.</checkbox-require>
       <userOrGroup-required>Please select a user or group before saving this permission.</userOrGroup-required>
       <not-change-permission>You do not have the right to add a permission.</not-change-permission>
-      <access-denied>Access denied. You cannot remove this permission.</access-denied>
+      <access-denied>Erişim engellendi. Bu izini kaldıramazsınız.</access-denied>
     </msg>
   </UIPermissionForm>
 
@@ -791,13 +808,13 @@
   <UINodeTypeInfo>
     <label>
       <node-type>Node Type</node-type>
-      <name>Name</name>
+      <name>Ad</name>
       <item>Primary Item Name</item>
       <super-types>Parent Types</super-types>
       <mixin>Mixin Node Type</mixin>
       <orderable-children>Orderable Children</orderable-children>
       <property-def>Node Property Definition</property-def>
-      <prop-name>Name</prop-name>
+      <prop-name>Ad</prop-name>
       <prop-type>Türü</prop-type>
       <prop-multiple>Mul</prop-multiple>
       <prop-mandatory>Man</prop-mandatory>
@@ -806,7 +823,7 @@
       <prop-default-values><![CDATA[<span title="Default Values">DV</span>]]></prop-default-values>
       <prop-constraints><![CDATA[<span title="Constraints Values">CV</span>]]></prop-constraints>
       <node-def>Child Node Definition</node-def>
-      <node-def-name>Name</node-def-name>
+      <node-def-name>Ad</node-def-name>
       <node-def-opv>OPV</node-def-opv>
       <node-def-ac>AC</node-def-ac>
       <node-def-man>MAN</node-def-man>
@@ -838,17 +855,17 @@
       <location>Search in this location:</location>
     </label>
     <action>
-      <Search>Search</Search>
+      <Search>Ara</Search>
       <Cancel>#{word.cancel}</Cancel>
     </action>
     <msg>
-      <keyword-not-allowed>This keyword is not allowed.</keyword-not-allowed>
+      <keyword-not-allowed>Bu anahtar sözcüğe izin verilmedi.</keyword-not-allowed>
     </msg>
   </UIContentNameSearch>
   <UISimpleSearch>
     <action>
       <MoreConstraints>Show/Hide Constraint Form</MoreConstraints>
-      <Search>Search</Search>
+      <Search>Ara</Search>
       <Save>#{word.save}</Save>
       <Cancel>#{word.cancel}</Cancel>
     </action>
@@ -861,8 +878,8 @@
     </label>
     <msg>
       <keyword-null>Please enter your keyword.</keyword-null>
-      <not-found>No results found.</not-found>
-      <keyword-not-allow>This keyword is not allowed.</keyword-not-allow>
+      <not-found>Sonuç bulunamadı.</not-found>
+      <keyword-not-allow>Bu anahtar sözcüğe izin verilmedi.</keyword-not-allow>
       <value-null>Please enter your keyword or constraints.</value-null>
       <value-save-null>Please enter a keyword or constraints before saving this query.</value-save-null>
       <inputSearch-invalid>There are invalid characters in the search input.</inputSearch-invalid>
@@ -877,17 +894,17 @@
   <UISearchResult>
     <msg>
       <not-support>There is no View template for this node.</not-support>
-      <empty>No results found.</empty>
+      <empty>Sonuç bulunamadı.</empty>
       <access-denied>You cannot open this folder, either because it no longer exists or because you do not have the right to access it.</access-denied>
       <query-invalid>The query is invalid.</query-invalid>
     </msg>
     <header>
       <name>#{word.name}</name>
-      <path>Path</path>
+      <path>Yol</path>
       <action>Eylem</action>
-      <shortcutPath>Path</shortcutPath>
+      <shortcutPath>Yol</shortcutPath>
       <type>Türü</type>
-      <dateCreated>Date Created</dateCreated>
+      <dateCreated>Oluşturma Tarihi</dateCreated>
       <score>Score</score>
     </header>
     <title>
@@ -908,141 +925,141 @@
   <UIShowAllOwnedByUserResult>
     <msg>
       <not-support>There is no View template for this node</not-support>
-      <empty>No results found.</empty>
+      <empty>Sonuç bulunamadı.</empty>
       <access-denied>You cannot view this node, either because this template is not supported or because access is denied.</access-denied>
       <query-invalid>The query is invalid</query-invalid>
     </msg>
     <header>
       <name>#{word.name}</name>
-      <path>Path</path>
+      <path>Yol</path>
       <action>Eylem</action>
-      <shortcutPath>Path</shortcutPath>
+      <shortcutPath>Yol</shortcutPath>
       <type>Türü</type>
-      <dateCreated>Date Created</dateCreated>
-      <score>Score</score>
+      <dateCreated>Oluşturma Tarihi</dateCreated>
+      <score>Puan</score>
     </header>
     <title>
-      <typeASC>Sort by document type in ascending order</typeASC>
-      <typeDESC>Sort by document type in descending order</typeDESC>
-      <scoreASC>Sort by score in ascending order</scoreASC>
-      <scoreDESC>Sort by score in descending order</scoreDESC>
-      <nameASC>Sort by name in ascending order</nameASC>
-      <nameDESC>Sort by name in descending order</nameDESC>
+      <typeASC>Belge türünü artan düzende sırala</typeASC>
+      <typeDESC>Belge türünü azalan düzende sırala</typeDESC>
+      <scoreASC>Puanı artan düzende sırala</scoreASC>
+      <scoreDESC>Puanı azalan düzende sırala</scoreDESC>
+      <nameASC>Adı artan düzende sırala</nameASC>
+      <nameDESC>Adı azalan düzende sırala</nameDESC>
       <datecreatedASC>Sort by Created date in ascending order</datecreatedASC>
       <datecreatedDESC>Sort by Created date in descending order</datecreatedDESC>
     </title>
     <tooltip>
-      <View>View this node</View>
+      <View>Bu düğümü görüntüleyin</View>
       <OpenFolder>Go to Folder</OpenFolder>
     </tooltip>
   </UIShowAllOwnedByUserResult>
   <UIShowAllFavouriteResult>
     <msg>
-      <not-support>There is no View template for this node</not-support>
+      <not-support>Bu düğüm için görünüm şablonu bulunmamaktadır</not-support>
       <empty>No results found</empty>
-      <access-denied>You cannot view this node, either because this template is not supported or because access is denied.</access-denied>
-      <query-invalid>The query is invalid</query-invalid>
+      <access-denied>Bu düğümü, bu şablonu desteklenmediğinden veya erişim engellendiği için görüntüleyemezsiniz.</access-denied>
+      <query-invalid>Sorgu geçersizdir</query-invalid>
     </msg>
     <header>
       <name>#{word.name}</name>
-      <path>Path</path>
+      <path>Yol</path>
       <action>Eylem</action>
-      <shortcutPath>Path</shortcutPath>
+      <shortcutPath>Yol</shortcutPath>
       <type>Türü</type>
-      <dateCreated>Date Created</dateCreated>
-      <score>Score</score>
+      <dateCreated>Oluşturma Tarihi</dateCreated>
+      <score>Puan</score>
     </header>
     <title>
-      <typeASC>Sort by document type in ascending order</typeASC>
-      <typeDESC>Sort by document type in descending order</typeDESC>
-      <scoreASC>Sort by score in ascending order</scoreASC>
-      <scoreDESC>Sort by score in descending order</scoreDESC>
-      <nameASC>Sort by name in ascending order</nameASC>
-      <nameDESC>Sort by name in descending order</nameDESC>
-      <datecreatedASC>Sort by created date in ascending order</datecreatedASC>
-      <datecreatedDESC>Sort by created date in descending order</datecreatedDESC>
+      <typeASC>Belge türünü artan düzende sırala</typeASC>
+      <typeDESC>Belge türünü azalan düzende sırala</typeDESC>
+      <scoreASC>Puanı artan düzende sırala</scoreASC>
+      <scoreDESC>Puanı azalan düzende sırala</scoreDESC>
+      <nameASC>Adı artan düzende sırala</nameASC>
+      <nameDESC>Adı azalan düzende sırala</nameDESC>
+      <datecreatedASC>Oluşturma tarihini artan düzende sırala</datecreatedASC>
+      <datecreatedDESC>Oluşturma tarihini azalan düzende sırala</datecreatedDESC>
     </title>
     <tooltip>
       <View>View this Node</View>
-      <OpenFolder>Go to Folder</OpenFolder>
+      <OpenFolder>Klasöre Git</OpenFolder>
     </tooltip>
   </UIShowAllFavouriteResult>
   <UIShowAllHiddenResult>
     <msg>
-      <not-support>There is no View template for this node.</not-support>
-      <empty>No results found.</empty>
-      <access-denied>You cannot view this node, either because this template is not supported or because access is denied.</access-denied>
-      <query-invalid>The query is invalid.</query-invalid>
+      <not-support>Bu düğüm için görünüm şablonu bulunmamaktadır.</not-support>
+      <empty>Sonuç bulunamadı.</empty>
+      <access-denied>Bu düğüm, bu şablonu desteklenmediğinden veya erişim engellendiği için görüntüleyemezsiniz.</access-denied>
+      <query-invalid>Sorgu geçersizdir.</query-invalid>
     </msg>
     <header>
       <name>#{word.name}</name>
-      <path>Path</path>
+      <path>Yol</path>
       <action>Eylem</action>
-      <shortcutPath>Path</shortcutPath>
+      <shortcutPath>Yol</shortcutPath>
       <type>Türü</type>
-      <dateCreated>Date Created</dateCreated>
-      <score>Score</score>
+      <dateCreated>Oluşturma Tarihi</dateCreated>
+      <score>Puan</score>
       <AddRemoveFavourite>Add/Remove to Favorite</AddRemoveFavourite>
     </header>
     <title>
-      <typeASC>Sort by document type in ascending order</typeASC>
-      <typeDESC>Sort by document type in descending order</typeDESC>
-      <scoreASC>Sort by score in ascending order</scoreASC>
-      <scoreDESC>Sort by score in descending order</scoreDESC>
-      <nameASC>Sort by name in ascending order</nameASC>
-      <nameDESC>Sort by name in descending order</nameDESC>
-      <datecreatedASC>Sort by created date in ascending order</datecreatedASC>
-      <datecreatedDESC>Sort by created date in descending order</datecreatedDESC>
+      <typeASC>Belge türünü artan düzende sırala</typeASC>
+      <typeDESC>Belge türünü azalan düzende sırala</typeDESC>
+      <scoreASC>Puanı artan düzende sırala</scoreASC>
+      <scoreDESC>Puanı azalan düzende sırala</scoreDESC>
+      <nameASC>Adı artan düzende sırala</nameASC>
+      <nameDESC>Adı azalan düzende sırala</nameDESC>
+      <datecreatedASC>Oluşturma tarihini artan düzende sırala</datecreatedASC>
+      <datecreatedDESC>Oluşturma tarihini azalan düzende sırala</datecreatedDESC>
     </title>
     <tooltip>
-      <View>View this Node</View>
-      <OpenFolder>Go to Folder</OpenFolder>
+      <View>Bu düğümü görüntüleyin</View>
+      <OpenFolder>Klasöre git</OpenFolder>
       <RemoveHiddenAttribute>Remove Hidden Attribute</RemoveHiddenAttribute>
     </tooltip>
   </UIShowAllHiddenResult>
   <UIShowAllTrashResult>
     <msg>
-      <not-support>There is no View template for this node.</not-support>
-      <empty>No results found</empty>
-      <access-denied>You cannot view this node, either because this template is not supported or because access is denied.</access-denied>
-      <query-invalid>The query is invalid.</query-invalid>
+      <not-support>Bu düğüm için görünüm şablonu bulunmamaktadır.</not-support>
+      <empty>Sonuç bulunamadı</empty>
+      <access-denied>Bu düğümü, bu şablonu desteklenmediğinden veya erişim engellendiği için görüntüleyemezsiniz.</access-denied>
+      <query-invalid>Sorgu geçersizdir.</query-invalid>
     </msg>
     <header>
       <name>#{word.name}</name>
-      <path>Path</path>
+      <path>Yol</path>
       <action>Eylem</action>
-      <shortcutPath>Path</shortcutPath>
+      <shortcutPath>Yol</shortcutPath>
       <type>Türü</type>
-      <dateCreated>Date Created</dateCreated>
-      <score>Score</score>
+      <dateCreated>Oluşturma Tarihi</dateCreated>
+      <score>Puan</score>
     </header>
     <title>
-      <typeASC>Sort by document type in ascending order</typeASC>
-      <typeDESC>Sort by document type in descending order</typeDESC>
-      <scoreASC>Sort by score in ascending order</scoreASC>
-      <scoreDESC>Sort by score in descending order</scoreDESC>
-      <nameASC>Sort by name in ascending order</nameASC>
-      <nameDESC>Sort by name in descending order</nameDESC>
-      <datecreatedASC>Sort by created date in ascending order</datecreatedASC>
-      <datecreatedDESC>Sort by created date in descending order</datecreatedDESC>
+      <typeASC>Belge türünü artan düzende sırala</typeASC>
+      <typeDESC>Belge türünü azalan düzende sırala</typeDESC>
+      <scoreASC>Puanı artan düzende sırala</scoreASC>
+      <scoreDESC>Puanı azalan düzende sırala</scoreDESC>
+      <nameASC>Adı artan düzende sırala</nameASC>
+      <nameDESC>Adı azalan düzende sırala</nameDESC>
+      <datecreatedASC>Oluşturma tarihini artan düzende sırala</datecreatedASC>
+      <datecreatedDESC>Oluşturma tarihini azalan düzende sırala</datecreatedDESC>
     </title>
     <tooltip>
-      <View>View this Node</View>
-      <OpenFolder>Go to Folder</OpenFolder>
+      <View>Bu düğümü görüntüleyin</View>
+      <OpenFolder>Klasöre git</OpenFolder>
       <DeletePermanently>Delete permanently</DeletePermanently>
-      <RestoreFromTrash>Restore from Trash</RestoreFromTrash>
+      <RestoreFromTrash>Çöp kutusundan geri yükleyin</RestoreFromTrash>
     </tooltip>
   </UIShowAllTrashResult>
   <UIConstraintsForm>
     <label>
       <constraints>UIConstraintsForm</constraints>
-      <metadataProperty>Properties</metadataProperty>
+      <metadataProperty>Özellikler</metadataProperty>
       <operator>Operator</operator>
       <contains>Contain Value</contains>
       <notcontains>Not Contain Value</notcontains>
     </label>
     <action>
-      <Add>Add</Add>
+      <Add>Ekle</Add>
       <Cancel>#{word.cancel}</Cancel>
     </action>
     <msg>
@@ -1057,7 +1074,7 @@
       <toDate-invalid>Invalid type in the 'To' field. Please reselect or type correctly.</toDate-invalid>
     </msg>
     <button>
-      <label-Add>Add</label-Add>
+      <label-Add>Ekle</label-Add>
       <label-Cancel>İptal</label-Cancel>
     </button>
   </UIConstraintsForm>
@@ -1070,37 +1087,37 @@
     </tooltip>
     <label>
       <colon>:</colon>
-      <operator>Operator</operator>
-      <exactlyPro-properties>Property</exactlyPro-properties>
-      <exactlyPro-ContainExactly>Contain Exactly</exactlyPro-ContainExactly>
-      <containPro-properties>Property</containPro-properties>
-      <containPro-Contain>Contain</containPro-Contain>
-      <notContainPro-properties>Property</notContainPro-properties>
-      <notContainPro-notContain>Not Contain</notContainPro-notContain>
-      <ConstraintOption-From>From</ConstraintOption-From>
-      <ConstraintOption-To>To</ConstraintOption-To>
-      <DocumentType-label>Document Type</DocumentType-label>
+      <operator>Operatör</operator>
+      <exactlyPro-properties>Özelliği</exactlyPro-properties>
+      <exactlyPro-ContainExactly>Tam olarak içerir</exactlyPro-ContainExactly>
+      <containPro-properties>Özelliği</containPro-properties>
+      <containPro-Contain>İçeren</containPro-Contain>
+      <notContainPro-properties>Özelliği</notContainPro-properties>
+      <notContainPro-notContain>İçermez</notContainPro-notContain>
+      <ConstraintOption-From>Kimden</ConstraintOption-From>
+      <ConstraintOption-To>Kime</ConstraintOption-To>
+      <DocumentType-label>Belge Türü</DocumentType-label>
       <Category-label>Kategori</Category-label>
-      <created>Created</created>
-      <modified>Modified</modified>
-      <and>And</and>
-      <or>Or</or>
+      <created>Oluşturulma</created>
+      <modified>Değiştirilme</modified>
+      <and>Ve</and>
+      <or>ya da</or>
     </label>
   </UIConstraintForm>
   <NodeTypePopup>
     <title>
-      <UINodeTypeSelectForm>Select Node Type</UINodeTypeSelectForm>
+      <UINodeTypeSelectForm>Düğüm Türü Seçin</UINodeTypeSelectForm>
     </title>
   </NodeTypePopup>
   <CategoryPopup>
     <title>
-      <UICategoryManagerSearch>Add Category to Search</UICategoryManagerSearch>
-      <UIOneNodePathSelector>Select Category</UIOneNodePathSelector>
+      <UICategoryManagerSearch>Aramaya Kategori Ekle</UICategoryManagerSearch>
+      <UIOneNodePathSelector>Kategori Seçin</UIOneNodePathSelector>
     </title>
   </CategoryPopup>
   <SaveQueryPopup>
     <title>
-      <UISaveQueryForm>Query Form</UISaveQueryForm>
+      <UISaveQueryForm>Sorgu Formu</UISaveQueryForm>
     </title>
   </SaveQueryPopup>
   <UINodeTypeSelectForm>
@@ -1112,45 +1129,45 @@
   <UICompareExactlyForm>
     <label>
       <filter>Süz:</filter>
-      <result>Results:</result>
+      <result>Sonuçlar:</result>
     </label>
     <title>
       <result>Süz</result>
     </title>
     <button>
-      <label-Select>Select</label-Select>
+      <label-Select>Seçin</label-Select>
       <label-Cancel>İptal</label-Cancel>
     </button>
     <msg>
-      <not-result-found>No results found.</not-result-found>
+      <not-result-found>Sonuç bulunamadı.</not-result-found>
     </msg>
   </UICompareExactlyForm>
   <UIJCRAdvancedSearch>
     <label>
       <name>Adı:</name>
-      <selectBox>Select Query Style:</selectBox>
-      <query>Query:</query>
+      <selectBox>Sorgu Stili Seçin:</selectBox>
+      <query>Sorgu:</query>
     </label>
     <action>
       <Save>#{word.save}</Save>
       <Cancel>#{word.cancel}</Cancel>
-      <Search>Search</Search>
+      <Search>Ara</Search>
     </action>
     <msg>
       <!--DMS 2.4.x ECM-3566-->
-      <name-invalid>The name is invalid.</name-invalid>
-      <query-added>The query was added successfully.</query-added>
-      <save_unSuccessful>Cannot save the query. The statement may be invalid or the query name may already exist.</save_unSuccessful>
-      <invalid-queryStatement>Invalid query statement.</invalid-queryStatement>
-      <value-save-null>Please enter your query statement.</value-save-null>
-      <query-name-null>Please enter your query name.</query-name-null>
+      <name-invalid>Ad geçerli değil.</name-invalid>
+      <query-added>Sorgu başarıyla eklendi.</query-added>
+      <save_unSuccessful>Sorgu kaydedemiyor. Deyim geçersiz olabilir veya sorgu adı zaten var olabilir.</save_unSuccessful>
+      <invalid-queryStatement>Geçersiz sorgu deyimi.</invalid-queryStatement>
+      <value-save-null>Lütfen sorgu deyimi girin.</value-save-null>
+      <query-name-null>Lütfen sorgu adınızı girin.</query-name-null>
     </msg>
   </UIJCRAdvancedSearch>
   <EditQueryForm>
     <label>
-      <name>Name</name>
-      <selectBox>Select Query Style</selectBox>
-      <query>Query</query>
+      <name>Ad</name>
+      <selectBox>Sorgu Stili Seçin</selectBox>
+      <query>Sorgu</query>
     </label>
     <action>
       <Save>#{word.save}</Save>
@@ -1159,60 +1176,60 @@
   </EditQueryForm>
   <EditSavedQueryForm>
     <title>
-      <EditQueryForm>Edit Query Form</EditQueryForm>
+      <EditQueryForm>Sorgu Formu Düüzenle</EditQueryForm>
     </title>
   </EditSavedQueryForm>
   <UIMetadataSelectForm>
     <label>
-      <metadataType>Metadata type</metadataType>
+      <metadataType>Metaveri Türü</metadataType>
     </label>
     <action>
       <Cancel>#{word.cancel}</Cancel>
-      <Add>Add</Add>
+      <Add>Ekle</Add>
     </action>
   </UIMetadataSelectForm>
   <property1MetadataPopup>
     <title>
-      <UISelectPropertyForm>Select Property</UISelectPropertyForm>
+      <UISelectPropertyForm>Özellik Seçin</UISelectPropertyForm>
     </title>
   </property1MetadataPopup>
   <property2MetadataPopup>
     <title>
-      <UISelectPropertyForm>Select Property</UISelectPropertyForm>
+      <UISelectPropertyForm>Özellik Seçin</UISelectPropertyForm>
     </title>
   </property2MetadataPopup>
   <property3MetadataPopup>
     <title>
-      <UISelectPropertyForm>Select Property</UISelectPropertyForm>
+      <UISelectPropertyForm>Özellik Seçin</UISelectPropertyForm>
     </title>
   </property3MetadataPopup>
   <UISelectPropertyForm>
     <label>
-      <metadataType>Metadata Type</metadataType>
+      <metadataType>Meta veri türü</metadataType>
     </label>
-    <pLabel>Properties:</pLabel>
+    <pLabel>Özellikler:</pLabel>
     <action>
-      <Add>Add</Add>
+      <Add>Ekle</Add>
       <Cancel>İptal</Cancel>
     </action>
   </UISelectPropertyForm>
   <ExactlyFormPopup>
     <title>
-      <UICompareExactlyForm>Filter Form</UICompareExactlyForm>
+      <UICompareExactlyForm>Form Filtresi</UICompareExactlyForm>
     </title>
   </ExactlyFormPopup>
   <UIECMSearch>
     <header>
-      <name>Name</name>
-      <language>Language</language>
-      <query>Query</query>
+      <name>Adı</name>
+      <language>Dil</language>
+      <query>Sorgu</query>
       <action>Eylemler</action>
-      <path>Path</path>
+      <path>Yol</path>
     </header>
   </UIECMSearch>
   <UIResult>
     <msg>
-      <not-found>Data not found.</not-found>
+      <not-found>Veri bulunamadı.</not-found>
     </msg>
     <header>
       <action>Eylem</action>
@@ -1220,12 +1237,12 @@
   </UIResult>
   <UISaveQueryForm>
     <msg>
-      <query-name-null>Please enter query name to save.</query-name-null>
-      <access-denied>Access denied. You do not have the add permission needed to save this query.</access-denied>
-      <save-failed>You cannot save the query, either because the statement is invalid or because the query name already exists.</save-failed>
+      <query-name-null>Lütfen kaydetmek için sorgu adı girin.</query-name-null>
+      <access-denied>Erişim engellendi. Bu sorguyu kaydetmek için gerekli ekleme iznine sahip değilsiniz.</access-denied>
+      <save-failed>Sorgu adı geçersiz olduğundan veya zaten var olduğundan kaydedilemiyor.</save-failed>
     </msg>
     <label>
-      <queryName>Query name</queryName>
+      <queryName>Sorgu adı</queryName>
     </label>
     <action>
       <Save>#{word.save}</Save>
@@ -1234,30 +1251,30 @@
   </UISaveQueryForm>
   <UISavedQuery>
     <header>
-      <name>Name</name>
+      <name>Adı</name>
       <type>Türü</type>
-      <statement>Statement</statement>
-      <permission>Permissions</permission>
+      <statement>Açıklama</statement>
+      <permission>İzinler</permission>
       <action>Eylemler</action>
     </header>
     <tooltip>
-      <Execute>Execute</Execute>
+      <Execute>Yürütmek</Execute>
       <Edit>Düzenle</Edit>
       <Delete>Sil</Delete>
     </tooltip>
     <label>
-      <no-children>No query is saved.</no-children>
+      <no-children>Hiçbir sorgu kaydedilmedi.</no-children>
     </label>
     <msg>
-      <confirm-delete-query>Are you sure you want to delete this query?</confirm-delete-query>
-      <not-result-found>No results found.</not-result-found>
+      <confirm-delete-query>Bu sorguyu silmek istediğinizden emin misiniz?</confirm-delete-query>
+      <not-result-found>Sonuç bulunamadı.</not-result-found>
     </msg>
   </UISavedQuery>
   <UIQueryResultPageIterator>
     <label>
-      <results>Results</results>
-      <of-about>of about</of-about>
-      <of>of</of>
+      <results>Sonuçlar</results>
+      <of-about>yaklaşık</of-about>
+      <of>in</of>
     </label>
   </UIQueryResultPageIterator>
   <!--
@@ -1267,17 +1284,17 @@
   -->
   <UIExportNode>
     <label>
-      <format>Format</format>
-      <nodePath>Path to Export</nodePath>
+      <format>Biçim</format>
+      <nodePath>Dışa aktarma yolu</nodePath>
       <zip>Zip</zip>
-      <systemView>System View</systemView>
-      <documentView>Document View</documentView>
+      <systemView>Sistem görünümü</systemView>
+      <documentView>Belge Görünümü</documentView>
     </label>
     <action>
       <Cancel>#{word.cancel}</Cancel>
-      <Export>Export</Export>
+      <Export>Dışa aktar</Export>
     </action>
-    <title>Export Node</title>
+    <title>Düğümü dışa aktar</title>
   </UIExportNode>
   <!--
   ###############################################################################
@@ -1286,13 +1303,13 @@
   -->
   <PopupUserSelector>
     <title>
-      <UIUserContainer>Select User Permission</UIUserContainer>
+      <UIUserContainer>Kullanıcı İzni Seçin</UIUserContainer>
     </title>
   </PopupUserSelector>
   <UIPopupTaxonomy>
     <title>
-      <UICategoriesSelector>Add Categories</UICategoriesSelector>
-      <UIOneNodePathSelector>Add Categories</UIOneNodePathSelector>
+      <UICategoriesSelector>Kategori Ekle</UICategoriesSelector>
+      <UIOneNodePathSelector>Kategori Ekle</UIOneNodePathSelector>
     </title>
   </UIPopupTaxonomy>
   <!--
@@ -1302,23 +1319,23 @@
   -->
   <UIVersionInfo>
     <tooltip>
-      <addLabel>Add Label</addLabel>
-      <removeLable>Remove Label</removeLable>
-      <restoreVersion>Restore Version</restoreVersion>
-      <viewVersion>View Version Info</viewVersion>
-      <deleteVersion>Delete Version</deleteVersion>
-      <compareVersion>Compare with the  base version</compareVersion>
+      <addLabel>Etiket Ekle</addLabel>
+      <removeLable>Etiketi Kaldır</removeLable>
+      <restoreVersion>Sürümü geri yükle</restoreVersion>
+      <viewVersion>Sürüm bilgilerini görüntüle</viewVersion>
+      <deleteVersion>Sürümü Sil</deleteVersion>
+      <compareVersion>Temel sürüm ile karşılaştır</compareVersion>
     </tooltip>
     <msg>
-      <have-no-view-template>The view template is not supported.</have-no-view-template>
-      <cannot-remove-version>You cannot remove the base version.</cannot-remove-version>
-      <confirm-delete>Are you sure you want to remove this version?</confirm-delete>
-      <not-checked-out>You have to check out this node before restoring.</not-checked-out>
-      <invalid-item-state>You cannot restore this version, either because one or more items were deleted or moved during another session.</invalid-item-state>
+      <have-no-view-template>Görünüm şablonu desteklenmiyor.</have-no-view-template>
+      <cannot-remove-version>Temel sürümü kaldıramazsınız.</cannot-remove-version>
+      <confirm-delete>Bu sürümü kaldırmak istediğinizden emin misiniz?</confirm-delete>
+      <not-checked-out>Geri yüklemeden önce bu düğümü kontrol etmelisiniz.</not-checked-out>
+      <invalid-item-state>Bu sürüm geri yüklenemiyor çünkü ya bir veya daha fazla öğe silinmiş veya başka bir oturum sırasında taşındı.</invalid-item-state>
     </msg>
     <action>
       <close>Kapat</close>
-      <close-view>Close View</close-view>
+      <close-view>Görünümü Kapat</close-view>
     </action>
   </UIVersionInfo>
   <!--
@@ -1328,40 +1345,40 @@
   -->
   <UIAuditingInfo>
     <msg>
-      <noVersion>No Version</noVersion>
+      <noVersion>Sürüm Yok</noVersion>
     </msg>
     <eventName>
-      <e_1>Node Added</e_1>
-      <e_2>Node Removed</e_2>
-      <e_4>Property Added</e_4>
-      <e_16>Property Changed</e_16>
-      <e_8>Property Removed</e_8>
+      <e_1>Düğüm Eklendi</e_1>
+      <e_2>Düğüm Kaldırıldı</e_2>
+      <e_4>Özelliği Eklendi</e_4>
+      <e_16>Özellik Değiştirildi</e_16>
+      <e_8>Özellik Kaldırıldı</e_8>
       <e_32>Kaydet</e_32>
-      <e_64>Move</e_64>
-      <e_128>Copy</e_128>
-      <e_256>Add Mixin</e_256>
-      <e_512>Remove Mixin</e_512>
-      <e_1024>Clone</e_1024>
-      <e_2048>Güncelleştirme</e_2048>
-      <e_4096>Import</e_4096>
-      <e_8192>Check in</e_8192>
-      <e_16384>Check out</e_16384>
-      <e_32768>Restore</e_32768>
-      <e_65536>Merge</e_65536>
-      <e_131072>Cancel Merge</e_131072>
-      <e_262144>Done Merge</e_262144>
-      <e_524288>Add Version Label</e_524288>
-      <e_1048576>Remove Version Label</e_1048576>
-      <e_2097152>Remove Version</e_2097152>
-      <e_4194304>Lock</e_4194304>
-      <e_8388608>Unlock</e_8388608>
-      <e_16777216>Read</e_16777216>
+      <e_64>Taşı</e_64>
+      <e_128>Kopyala</e_128>
+      <e_256>Mixin Ekle</e_256>
+      <e_512>Mixin Kaldır</e_512>
+      <e_1024>Klon</e_1024>
+      <e_2048>Güncelleştir</e_2048>
+      <e_4096>İçe Aktar</e_4096>
+      <e_8192>Kontrol Et</e_8192>
+      <e_16384>Kontrol Etme</e_16384>
+      <e_32768>Geri Yükle</e_32768>
+      <e_65536>Birleştir</e_65536>
+      <e_131072>Birleştirmeyi İptal Et</e_131072>
+      <e_262144>Birleştirme Bitti</e_262144>
+      <e_524288>Sürüm Etiketi Ekle</e_524288>
+      <e_1048576>Sürüm Etiketi Kaldır</e_1048576>
+      <e_2097152>Sürümü Kaldırın</e_2097152>
+      <e_4194304>Kilitle</e_4194304>
+      <e_8388608>Kilidi Aç</e_8388608>
+      <e_16777216>Oku</e_16777216>
     </eventName>
     <label>
-      <operation>Operation</operation>
-      <userName>Username</userName>
-      <date>Date</date>
-      <version>Version</version>
+      <operation>Operasyon</operation>
+      <userName>Kullanıcı Adı</userName>
+      <date>Tarih</date>
+      <version>Sürüm</version>
     </label>
   </UIAuditingInfo>
 
@@ -1372,13 +1389,13 @@
   -->
   <UIActivateVersion>
     <label>
-      <note>Versioning has not been activated for this node.</note>
-      <question>Are you sure you want to activate it?</question>
-      <button-active>Activate</button-active>
+      <note>Bu düğüm için sürümleme etkinleştirilmedi.</note>
+      <question>Etkinleştirmek istediğinizden emin misiniz?</question>
+      <button-active>Etkinleştir</button-active>
       <button-cancel>İptal</button-cancel>
     </label>
     <msg>
-      <access-denied>You do not have permission to activate versioning on this node</access-denied>
+      <access-denied>Sürümü etkinleştirme yetkiniz bulunmamaktadır</access-denied>
     </msg>
   </UIActivateVersion>
   <!--
@@ -1388,7 +1405,7 @@
   -->
   <UIActivePublication>
     <header>
-      <LifecycleName>Name</LifecycleName>
+      <LifecycleName>Ad</LifecycleName>
       <LifecycleDesc>Açıklama</LifecycleDesc>
       <action>Eylem</action>
     </header>
@@ -1397,12 +1414,12 @@
     </action>
     <grid>
       <msg>
-        <empty>No publication plugins found.</empty>
+        <empty>Yayın eklentileri bulunamadı.</empty>
       </msg>
     </grid>
     <msg>
-      <node-type-invalid>Only the document node type can be enrolled.</node-type-invalid>
-      <already-enroled>This document has already been enrolled.</already-enroled>
+      <node-type-invalid>Yalnızca belge düğümü türü kayıtlı.</node-type-invalid>
+      <already-enroled>Bu belge zaten kayıtlı.</already-enroled>
     </msg>
   </UIActivePublication>
   <!--
@@ -1412,11 +1429,11 @@
   -->
   <UIActivateAuditing>
     <label>
-      <note>Auditing has not been activated for this node.</note>
-      <question>Are you sure you want to activate?</question>
+      <note>Bu düğüm için denetim etkinleştirilmedi.</note>
+      <question>Etkinleştirmek istediğinizden emin misiniz?</question>
     </label>
     <action>
-      <activate>Activate</activate>
+      <activate>Etkinleştir</activate>
       <cancel>İptal</cancel>
     </action>
   </UIActivateAuditing>
@@ -1427,11 +1444,11 @@
   -->
   <UIDiff>
     <label>
-      <diffTitle>Compare between two versions</diffTitle>
-      <noChange>No change between two versions</noChange>
-      <baseVerion>Base Version</baseVerion>
-      <compareVerion>Version</compareVerion>
-      <can-not-compare>Failed to compare two versions</can-not-compare>
+      <diffTitle>İki sürüm arasında karşılaştırın</diffTitle>
+      <noChange>İki sürümleri arasında değişiklik yok</noChange>
+      <baseVerion>Temel Sürüm</baseVerion>
+      <compareVerion>Sürüm</compareVerion>
+      <can-not-compare>İki sürümünü karşılaştırmada başarısız oldu</can-not-compare>
     </label>
   </UIDiff>
   <!--
@@ -1441,24 +1458,24 @@
   -->
   <UIImportNode>
     <label>
-      <format>Format</format>
-      <systemView>System View</systemView>
-      <documentView>Document View</documentView>
-      <upload>Upload File</upload>
+      <format>Biçim</format>
+      <systemView>Sistem görünümü</systemView>
+      <documentView>Belge Görünümü</documentView>
+      <upload>Dosya Yükle</upload>
     </label>
     <action>
       <Cancel>#{word.cancel}</Cancel>
-      <Import>Import</Import>
+      <Import>İçe Aktar</Import>
     </action>
-    <title>Import Node</title>
+    <title>Düğüm İçe Aktar</title>
     <msg>
-      <import-successful>Imported successfully.</import-successful>
-      <filename-invalid>Browse an .xml file for the 'Upload File' field to import.</filename-invalid>
-      <filetype-error>Cannot import the uploaded file. The .xml file may be invalid.</filetype-error>
-      <mimetype-invalid>You can only import .xml or .zip files.</mimetype-invalid>
-      <access-denied>Access denied. You are not allowed to import there.</access-denied>
-      <constraint-violation-exception>You cannot import the node, either because the imported data are incorrect or because the node type '{0}' is not allowed to be child's node type'{0}'.</constraint-violation-exception>
-      <item-exists-exception>An incoming referenceable node has the same UUID as an existing node in the workspace.</item-exists-exception>
+      <import-successful>Başarıyla aktarıldı.</import-successful>
+      <filename-invalid>İçe Aktarmak için "Dosya Yükle" alanına bir .xml dosyası gözatın.</filename-invalid>
+      <filetype-error>Yüklenen dosya alınamıyor. .Xml dosyasının geçersiz olabilir.</filetype-error>
+      <mimetype-invalid>Sadece .zip veya .xml dosyaları içe aktarılabilir.</mimetype-invalid>
+      <access-denied>Erişim engellendi. Oraya almak için izin verilmez.</access-denied>
+      <constraint-violation-exception>Verileri içeri aktarmak imkansız. '{0}' Türü, bu konumda kabul edilmiyor.</constraint-violation-exception>
+      <item-exists-exception>Gelen başvurulabilir düğüm Çalışma Alanında mevcut bir düğümle aynı UUID sahip .</item-exists-exception>
     </msg>
   </UIImportNode>
   <!--
@@ -1468,16 +1485,16 @@
   -->
   <UILabelForm>
     <label>
-      <label>Label</label>
+      <label>Etiket</label>
     </label>
     <action>
       <Save>#{word.save}</Save>
       <Cancel>İptal</Cancel>
     </action>
-    <title>Add Label</title>
+    <title>Etiket Ekle</title>
     <msg>
-      <label-invalid>The label contains some invalid characters.</label-invalid>
-      <label-exist>'{0}' already exists.</label-exist>
+      <label-invalid>Etiket bazı geçersiz karakterler içeriyor.</label-invalid>
+      <label-exist>'{0}' zaten var.</label-exist>
     </msg>
   </UILabelForm>
   <!--
@@ -1486,9 +1503,9 @@
   ###############################################################################
   -->
   <UIRemoveLabelForm>
-    <title>Remove Label</title>
+    <title>Etiketi Kaldır</title>
     <label>
-      <label>Select Label</label>
+      <label>Etiket Seçin</label>
     </label>
     <action>
       <Remove>Kaldır</Remove>
@@ -1501,24 +1518,24 @@
   ###############################################################################
   -->
   <UIVersionTree>
-    <title>Children Tree</title>
+    <title>Alt Ağac</title>
   </UIVersionTree>
   <UIViewVersion>
     <label>
-      <nodeType>Node Type</nodeType>
-      <nodeName>Node Name</nodeName>
-      <VersionNumber>Version Number</VersionNumber>
-      <VersionLabels>Version Labels</VersionLabels>
-      <VersionDate>Version Date</VersionDate>
-      <PropertyName>Property Name</PropertyName>
-      <PropertyValue>Property Values</PropertyValue>
+      <nodeType>Düğüm Türü</nodeType>
+      <nodeName>Düğüm Adı</nodeName>
+      <VersionNumber>Sürüm Numarası</VersionNumber>
+      <VersionLabels>Sürüm Etiketleri</VersionLabels>
+      <VersionDate>Sürüm Tarihi</VersionDate>
+      <PropertyName>Özellik Adı</PropertyName>
+      <PropertyValue>Özellik Değerleri</PropertyValue>
     </label>
     <msg>
-      <not-supported>This function is not supported for versioning.</not-supported>
+      <not-supported>Bu işlev için sürümleme desteklemiyor.</not-supported>
     </msg>
   </UIViewVersion>
   <UIVersionList>
-    <title>Children Name</title>
+    <title>Alt Adı</title>
   </UIVersionList>
   <!--
   ################################################################################
@@ -1531,8 +1548,8 @@
     </action>
     <tab>
       <label>
-        <UICategoriesAddedList>Referenced Categories</UICategoriesAddedList>
-        <UIOneNodePathSelector>Select Category</UIOneNodePathSelector>
+        <UICategoriesAddedList>Başvurulan Kategoriler</UICategoriesAddedList>
+        <UIOneNodePathSelector>Kategori Seçin</UIOneNodePathSelector>
       </label>
     </tab>
   </UICategoryManager>
@@ -1542,8 +1559,8 @@
       <action>Eylemler</action>
     </header>
     <msg>
-      <access-denied>Access denied. You do not have access permission in this node.</access-denied>
-      <confirm-delete>Are you sure you want to delete this reference?</confirm-delete>
+      <access-denied>Erişim engellendi. Bu düğümdeki erişim izniniz yok.</access-denied>
+      <confirm-delete>Bu referans silmek istediğinizden emin misiniz?</confirm-delete>
     </msg>
     <action>
       <title>
@@ -1558,11 +1575,11 @@
   </UICategoriesAddedList>
   <UITreeList>
     <header>
-      <name>Name</name>
+      <name>Ad</name>
       <action>Eylem</action>
     </header>
     <info>
-      <child-not-found>This node does not have any child nodes.</child-not-found>
+      <child-not-found>Bu düğüm, alt düğüm içermemektedir.</child-not-found>
     </info>
   </UITreeList>
   <!--
@@ -1576,18 +1593,18 @@
     </action>
     <tab>
       <label>
-        <UIOneNodePathSelector>Select Relation</UIOneNodePathSelector>
+        <UIOneNodePathSelector>İlişki Seçin</UIOneNodePathSelector>
       </label>
     </tab>
     <tab>
       <label>
-        <UIRelationsAddedList>Relation List</UIRelationsAddedList>
+        <UIRelationsAddedList>İlişki Listesi</UIRelationsAddedList>
       </label>
     </tab>
   </UIRelationManager>
   <UIRelationsAddedList>
     <header>
-      <path>Relations</path>
+      <path>İlişkiler</path>
       <action>Eylemler</action>
     </header>
     <action>
@@ -1596,8 +1613,8 @@
       </title>
     </action>
     <msg>
-      <confirm-delete>Are you sure you want to delete this relation?</confirm-delete>
-      <can-not-add-itself>You cannot add a relation to itself.</can-not-add-itself>
+      <confirm-delete>Bu ilişkiyi silmek istediğinizden emin misiniz?</confirm-delete>
+      <can-not-add-itself>Kendisi için bir ilişki ekleyemezsiniz.</can-not-add-itself>
     </msg>
   </UIRelationsAddedList>
   <!--
@@ -1607,19 +1624,19 @@
   -->
   <UIClipboard>
     <header>
-      <path>Path</path>
+      <path>Yol</path>
       <command>Cm</command>
       <action>Eylem</action>
     </header>
     <label>
-      <nocommand>There are no items in the clipboard.</nocommand>
+      <nocommand>Pano'da hiçbir öğe yoktur.</nocommand>
     </label>
     <action>
-      <clearall>Clear All</clearall>
+      <clearall>Tümünü Temizle</clearall>
     </action>
     <msg>
-      <unable-pasted>Cannot paste this node.</unable-pasted>
-      <node-pasted>Node {0} has been pasted at location {1}. This operation has already been saved.</node-pasted>
+      <unable-pasted>Bu düğümü yapıştıramazsınız.</unable-pasted>
+      <node-pasted>'{0}' Düğümü '{1}' konumuna yapıştırılmış. Bu işlem zaten kaydedildi.</node-pasted>
     </msg>
   </UIClipboard>
   <!--
@@ -1634,9 +1651,9 @@
   -->
   <UISelectDocumentForm>
     <label>
-      <selectTemplate>Select your template from the list below</selectTemplate>
-      <ThumbnailView>Thumbnail View</ThumbnailView>
-      <ListView>List View</ListView>
+      <selectTemplate>Şablonunuz aşağıdaki listeden seçin</selectTemplate>
+      <ThumbnailView>Küçük Resim Görünümü</ThumbnailView>
+      <ListView>Liste Görünümü</ListView>
       <Cancel>#{word.cancel}</Cancel>
     </label>
   </UISelectDocumentForm>
@@ -1646,12 +1663,12 @@
   #######################################################################
   -->
   <UIDocumentForm>
-    <title>Add New Document</title>
+    <title>Yeni Belge Ekle</title>
     <action>
       <Save>Kaydet</Save>
-      <SaveAndClose>Save &amp; Close</SaveAndClose>
-      <ChangeType>Change Content Type</ChangeType>
-      <Fullscreen>Fullscreen</Fullscreen>
+      <SaveAndClose>Kaydet &amp; Kapat</SaveAndClose>
+      <ChangeType>İçerik Türünü Değiştir</ChangeType>
+      <Fullscreen>Tam Ekran</Fullscreen>
       <Cancel>#{word.cancel}</Cancel>
       <Close>#{word.close}</Close>
     </action>
@@ -1659,16 +1676,16 @@
 <FullScreen>Maximize/Minimize</FullScreen>
 </tooltip>
     <msg>
-      <cannot-save>An error occurred while saving the document.</cannot-save>
-      <in-versioning>Please check out the current node before adding a new node.</in-versioning>
-      <not-support>Cannot load the template of '{0}'.</not-support>
-      <value-invalid>'{0}' is a needed value.</value-invalid>
-      <repository-exception>An error occurred while saving the document.</repository-exception>
+      <cannot-save>Belge kaydedilirken bir hata oluştu.</cannot-save>
+      <in-versioning>Geçerli düğümü yeni bir düğüm eklemeden önce kontrol edin.</in-versioning>
+      <not-support>'{0}' Şablonu yüklenemiyor.</not-support>
+      <value-invalid>'{0}' gerekli bir değerdir.</value-invalid>
+      <repository-exception>Belge kaydedilirken bir hata oluştu.</repository-exception>
       <!--DMS 2.4.x; ECM-3543-->
-      <repository-exception-permission>You do not have permission to add a new document to this node.</repository-exception-permission>
-      <not-allowed-same-name-sibling>You cannot save this document. It is not allowed to have the same name as its sibling.</not-allowed-same-name-sibling>
-      <numberformat-exception>You cannot save this document. The name provided must be in numerical format.</numberformat-exception>
-      <item-not-found>Item not found. This node (or its ancestor) may have been deleted. Please click the Refresh button.</item-not-found>
+      <repository-exception-permission>Bu düğüm için yeni bir belge ekleme izniniz yok.</repository-exception-permission>
+      <not-allowed-same-name-sibling>Bu belgeyi kaydedemiyor. Aynı adı iki kez kullanamazsınız.</not-allowed-same-name-sibling>
+      <numberformat-exception>Bu eylem kaydedemezsiniz. Verilen adı sayısal biçiminde olması gerekir.</numberformat-exception>
+      <item-not-found>Öğe bulunamadı. Bu düğüm (veya üst) silinmiş olabilir. Lütfen Yenile düğmesini tıklatın.</item-not-found>
     </msg>
   </UIDocumentForm>
   <!--
@@ -1679,7 +1696,7 @@
   <UIViewDocumentController>
     <tab>
       <label>
-        <UIViewDocumentInfo>Information</UIViewDocumentInfo>
+        <UIViewDocumentInfo>Bilgi</UIViewDocumentInfo>
       </label>
     </tab>
     <action>
@@ -1697,10 +1714,10 @@
   #############################################################################
   -->
   <UIQuerySaveForm>
-    <title>Save Query Form</title>
+    <title>Sorgu Formu Kaydet</title>
     <label>
-      <query>Query</query>
-      <name>Query Name</name>
+      <query>Sorgu</query>
+      <name>Sorgu Adı</name>
     </label>
     <action>
       <Save>#{word.save}</Save>
@@ -1714,8 +1731,8 @@
   -->
   <editActionPopup>
     <title>
-      <UIActionForm>Edit Action</UIActionForm>
-      <EditFormAction>Edit Action</EditFormAction>
+      <UIActionForm>Eylem Düzenle</UIActionForm>
+      <EditFormAction>Eylem Düzenle</EditFormAction>
     </title>
   </editActionPopup>
   <UIActionViewContainer>
@@ -1727,21 +1744,21 @@
     <header>
       <name>#{word.name}</name>
       <description>Açıklama</description>
-  <lifecycle>Life Cycle</lifecycle>
-  <triggeredaction>Triggered Action</triggeredaction>
-      <instanceOf>Instance of Action Type</instanceOf>
+  <lifecycle>Yaşam Döngüsü</lifecycle>
+  <triggeredaction>Tetiklenen Eylem</triggeredaction>
+      <instanceOf>Eylem Türünün Örneği</instanceOf>
       <action>Eylem</action>
     </header>
     <msg>
-      <remove-popup-first>You must close the edit pop-up before deleting this node.</remove-popup-first>
-      <confirm-delete-action>Are you sure you want to delete this action?</confirm-delete-action>
-      <template-empty>The '{0}' template is null or empty.</template-empty>
-      <template-null>The template is either null or you do not have permission to access this template.</template-null>
-      <access-denied>Access denied. You do not have permission to perform this action.</access-denied>
+      <remove-popup-first>Bu düğümü silmeden önce Pop-up düzenlemeyi kapatmalısınız.</remove-popup-first>
+      <confirm-delete-action>Bu eylemi silmek istediğinizden emin misiniz?</confirm-delete-action>
+      <template-empty>'{0}' Şablonu null veya boş.</template-empty>
+      <template-null>Şablon nul veya şablona erişmek için izniniz yok.</template-null>
+      <access-denied>Erişim engellendi. Bu eylemi gerçekleştirmek için gerekli izniniz yok.</access-denied>
     </msg>
     <action>
       <Close>#{word.close}</Close>
-      <View>View</View>
+      <View>Görün</View>
       <Edit>Düzenle</Edit>
       <Delete>Sil</Delete>
     </action>
@@ -1752,43 +1769,43 @@
       <Back>#{word.back}</Back>
     </action>
     <label>
-      <name>Action Form</name>
+      <name>Eylem Form</name>
     </label>
     <msg>
-      <repository-exception>You cannot save this action. The name provided has some special characters.</repository-exception>
-      <numberformat-exception>You cannot save this action. The name provided must be in numerical format.</numberformat-exception>
-      <existed-action>The action name '{0}' already exists. Please select another one.</existed-action>
-      <unable-add-action>Cannot add this action.</unable-add-action>
-      <unable-add>Cannot add this action. This node is either root or you do not have permision.</unable-add>
-      <not-support>Dialog '{0}' is not supported.</not-support>
-      <no-permission-add>Access denied. You do not have the right to add an action here.</no-permission-add>
-      <access-denied>Access denied. You do not have permission to access this template.</access-denied>
-      <lifecycle-invalid>You cannot add this action. The lifecycle phase of action is invalid.</lifecycle-invalid>
+      <repository-exception>Bu eylem kaydedemezsiniz. Verilen adında bazı özel karakterleri vardır.</repository-exception>
+      <numberformat-exception>Bu eylem kaydedemezsiniz. Verilen adı sayısal biçiminde olması gerekir.</numberformat-exception>
+      <existed-action>Eylem adı '{0}' zaten var. Lütfen başka bir ad seçin.</existed-action>
+      <unable-add-action>Bu eylem eklenemiyor.</unable-add-action>
+      <unable-add>Bu eylem eklenemiyor. Bu her iki kök düğümdür veya yetkiniz yok.</unable-add>
+      <not-support>İletişim '{0}' desteklenmiyor.</not-support>
+      <no-permission-add>Erişim engellendi. Buraya eylem ekleme hakkınız yok.</no-permission-add>
+      <access-denied>Erişim engellendi. Bu şablonun erişim iznine sahip değilsiniz.</access-denied>
+      <lifecycle-invalid>Bu eylem eklenemiyor. Eylem yaşam döngüsü aşaması geçersiz.</lifecycle-invalid>
     </msg>
-    <title>Add/Edit Action</title>
+    <title>Eylem Ekle/Düzenle</title>
     <validator>
       <validator>Validator</validator>
-      <destPath>With Path</destPath>
+      <destPath>Yolu ile</destPath>
     </validator>
   </UIActionForm>
   <UIActionTypeForm>
     <label>
-      <actionType>Create Action of Type</actionType>
+      <actionType>Eylem Türü Oluşturma</actionType>
     </label>
   </UIActionTypeForm>
   <PopupComponent>
     <title>
-      <UIOneNodePathSelector>Select Location</UIOneNodePathSelector>
+      <UIOneNodePathSelector>Konumu Seçin</UIOneNodePathSelector>
       <UIPermissionSelector>Permission Browser</UIPermissionSelector>
-      <UICategoriesSelector>Add Categories</UICategoriesSelector>
+      <UICategoriesSelector>Kategori Ekle</UICategoriesSelector>
     </title>
   </PopupComponent>
   <EditFormAction>
     <validator>
       <validator>Validator</validator>
-      <destPath>With Path</destPath>
+      <destPath>Yolu ile</destPath>
     </validator>
-    <title>Action Form</title>
+    <title>Eylem Form</title>
   </EditFormAction>
   <!--
   #############################################################################
@@ -1797,19 +1814,19 @@
   -->
   <UIAddressBar>
     <msg>
-      <path-not-found>Path not found.</path-not-found>
-      <access-denied>Access denied. You do not have the right to read the node.</access-denied>
-      <keyword-not-support>The keyword is invalid. Some characters are not supported.</keyword-not-support>
+      <path-not-found>Yolu bulunamadı.</path-not-found>
+      <access-denied>Erişim engellendi. Düğüm okuma hakkı yok.</access-denied>
+      <keyword-not-support>Anahtar geçersiz. Bazı karakterler desteklenmez.</keyword-not-support>
     </msg>
     <label>
-      <exeButton>Go</exeButton>
-      <address>Address:</address>
+      <exeButton>Git</exeButton>
+      <address>Adres:</address>
     </label>
     <title>
-      <exeButton>Go</exeButton>
-      <backButton>Back to the previous node</backButton>
-      <showHistory>Show the history address</showHistory>
-      <changeNode>Change Node</changeNode>
+      <exeButton>Git</exeButton>
+      <backButton>Önceki düğüme geri dön</backButton>
+      <showHistory>Geçmişi adres göster</showHistory>
+      <changeNode>Düğümü Değiştir</changeNode>
     </title>
   </UIAddressBar>
   <!--
@@ -1819,19 +1836,19 @@
   -->
   <UIWatchDocumentForm>
     <action>
-      <Watch>Watch</Watch>
+      <Watch>İzle</Watch>
       <Cancel>#{word.cancel}</Cancel>
-      <Continue>Continue</Continue>
-      <Unwatch>Unwatch</Unwatch>
+      <Continue>Devam</Continue>
+      <Unwatch>İzleme</Unwatch>
     </action>
     <label>
-      <notificationType>Notification Type:</notificationType>
+      <notificationType>Bildirim Türü:</notificationType>
     </label>
     <msg>
-      <not-support>This notification type is not supported. Please select another type.</not-support>
-      <watching-successfully>You are watching this document.</watching-successfully>
-      <unwatching-successfully>You have left the watchers list successfully.</unwatching-successfully>
-      <node-iswatching>This document is watched.</node-iswatching>
+      <not-support>Bu bildirim türü desteklenmiyor. Lütfen başka bir türü seçin.</not-support>
+      <watching-successfully>Bu belgeyi izliyorsunuz.</watching-successfully>
+      <unwatching-successfully>Gözetmenler listesi başarıyla kaldı.</unwatching-successfully>
+      <node-iswatching>Bu belge izlenmektedir.</node-iswatching>
     </msg>
   </UIWatchDocumentForm>
   <!--
@@ -1841,24 +1858,24 @@
   -->
   <UITaggingForm>
     <label>
-      <names>Tag Names:</names>
-      <linked>Linked Tags:</linked>
+      <names>Etiket Adları:</names>
+      <linked>Bağlantılı Etiketler:</linked>
       <tagSet>UITaggingForm</tagSet>
     </label>
     <action>
-      <AddTag>Add</AddTag>
+      <AddTag>Ekle</AddTag>
       <Cancel>#{word.close}</Cancel>
     </action>
     <msg>
-      <name-exist>The tag name '{0}' already exists.</name-exist>
-      <tagName-invalid>The tag name contains some invalid characters.</tagName-invalid>
-      <tag-name-empty>Your tag name is empty</tag-name-empty>
-      <tag-name-duplicate>The input tag names are duplicate.</tag-name-duplicate>
-      <tagName-too-long>One of the tags entered was too long. The tag name must be less than 30 characters.</tagName-too-long>
-      <path-not-found>This tag has been deleted or changed. Please click on the Refresh button.</path-not-found>
+      <name-exist>'{0}' Etiket adı zaten var.</name-exist>
+      <tagName-invalid>Etiket adı bazı geçersiz karakterler içeriyor.</tagName-invalid>
+      <tag-name-empty>Etiket adı yok</tag-name-empty>
+      <tag-name-duplicate>Girilen etiket adı çift.</tag-name-duplicate>
+      <tagName-too-long>Girilen etiketlerden biri çok uzun. Etiket adı 30'dan az karakter olmalıdır.</tagName-too-long>
+      <path-not-found>Bu etiket silinmiş veya değiştirilmiş. Lütfen Yenile düğmesini tıklatın.</path-not-found>
     </msg>
     <introduction>
-      <tagName>Separate multiple tags by commas ","</tagName>
+      <tagName>Birden çok etiketi noktalı virgüllerle ayırın ","</tagName>
     </introduction>
   </UITaggingForm>
 
@@ -1869,7 +1886,7 @@
   -->
   <UIViewMetadataContainer>
     <msg>
-      <path-not-found>Node does not support this view.</path-not-found>
+      <path-not-found>Düğüm bu görünümü desteklemiyor.</path-not-found>
     </msg>
   </UIViewMetadataContainer>
   <!--
@@ -1885,12 +1902,12 @@
   </UIViewMetadataForm>
   <metadataForm>
     <title>
-      <UIViewMetadataForm>Add/Edit Properties</UIViewMetadataForm>
+      <UIViewMetadataForm>Özellikleri Ekle/Düzenle</UIViewMetadataForm>
     </title>
   </metadataForm>
   <UIViewMetadataTemplate>
     <msg>
-      <access-denied>Access denied. You are either not the owner or do not have edit permission in this node.</access-denied>
+      <access-denied>Erişim engellendi. Sahibi veya bu düğümdeki düzenleme iznine sahip değilsiniz.</access-denied>
     </msg>
   </UIViewMetadataTemplate>
   <!--
@@ -1900,26 +1917,26 @@
   -->
   <ECMNameValidator>
     <msg>
-      <Invalid-char>The field '{0}' contains some invalid characters. Please enter another value.</Invalid-char>
-      <empty-input>The value of the field '{0}' is null or empty.</empty-input>
+      <Invalid-char>'{0}' Alanı geçersiz bir karakter içeriyor. Lütfen başka bir değer girin.</Invalid-char>
+      <empty-input>'{0}' Alanının değeri null veya boş.</empty-input>
     </msg>
   </ECMNameValidator>
   <DateTimeValidator>
     <msg>
-      <Invalid-input>Field '{0}' with value '{1}' is invalid.</Invalid-input>
+      <Invalid-input>Değeri '{1}' olan '{0}' alanı geçersiz.</Invalid-input>
     </msg>
   </DateTimeValidator>
   <CronExpressionValidator>
-    <invalid-input>Your cron expression is invalid. Please check the syntax.</invalid-input>
+    <invalid-input>Cron İfadeniz geçersizdir. Lütfen sözdizimini denetleyin.</invalid-input>
   </CronExpressionValidator>
   <EmptyFieldValidator>
     <msg>
-      <empty-input>Please fill in the field '{0}'.</empty-input>
+      <empty-input>Lütfen '{0}' alanı doldurun.</empty-input>
     </msg>
   </EmptyFieldValidator>
   <CategoryValidator>
     <msg>
-      <non-categories>Categories are wrong. Please select good categories.</non-categories>
+      <non-categories>Kategoriler yanlış. Lütfen uygun kategorileri seçin.</non-categories>
     </msg>
   </CategoryValidator>
   <!--
@@ -1928,25 +1945,25 @@
   ###################################################################################
   -->
   <ReferentialIntegrityException>
-    <msg>Action failed. There are still some reference items in the workspace.</msg>
+    <msg>Eylem başarısız oldu. Çalışma alanında hala bazı referans öğeler var.</msg>
   </ReferentialIntegrityException>
   <ItemExistsException>
-    <msg>This item already exists.</msg>
+    <msg>Bu öğe zaten var.</msg>
   </ItemExistsException>
   <AccessControlException>
-    <msg>Access denied. You do not have permission to perform this action.</msg>
+    <msg>Erişim engellendi. Bu eylemi gerçekleştirmek için gerekli izniniz yok.</msg>
   </AccessControlException>
   <AccessDeniedException>
-    <msg>Access denied.</msg>
+    <msg>Erişim Engellendi.</msg>
   </AccessDeniedException>
   <ItemNotFoundException>
-    <msg>Item not found. It may have been removed or changed.</msg>
+    <msg>Öğe bulunamadı.Silinmiş veya değiştirilmiş olabilir.</msg>
   </ItemNotFoundException>
   <PathNotFoundException>
-    <msg>Path not found. It may have been removed or changed.</msg>
+    <msg>Yolu bulunamadı. Kaldırılmış veya değiştirilmiş.</msg>
   </PathNotFoundException>
   <ConstraintViolationException>
-    <msg>You cannot perform this action due to some constraints.</msg>
+    <msg>Bazı kısıtlamalar nedeniyle bu eylem gerçekleştirilemiyor.</msg>
   </ConstraintViolationException>
   <!--
   ###################################################################################
@@ -1955,15 +1972,15 @@
   -->
   <UIPublicationForm>
     <label>
-      <published>Published</published>
-      <non-published>Unpublished</non-published>
+      <published>Yayınlandı</published>
+      <non-published>Yayınlanmamış</non-published>
       <public>Genel</public>
-      <private>Private</private>
-      <state>State</state>
+      <private>Özel</private>
+      <state>Durum</state>
       <visibility>Görünürlük</visibility>
-      <nodeName>Node Name:</nodeName>
-      <lifecycleName>Lifecycle Name</lifecycleName>
-      <stateName>State Name</stateName>
+      <nodeName>Düğüm Adı:</nodeName>
+      <lifecycleName>Yaşam Döngüsü Adı</lifecycleName>
+      <stateName>Durum Adı</stateName>
     </label>
     <action>
       <Save>Kaydet</Save>
@@ -1978,14 +1995,14 @@
   -->
   <UIWorkspaceList>
     <label>
-      <workspaceName>Workspace:</workspaceName>
-      <rootNodeInfo>Root Path:</rootNodeInfo>
-      <rootPath>Root Path:</rootPath>
+      <workspaceName>Çalışma Alanı:</workspaceName>
+      <rootNodeInfo>Kök Yolu:</rootNodeInfo>
+      <rootPath>Kök Yolu:</rootPath>
     </label>
   </UIWorkspaceList>
   <pathSelector>
     <title>
-      <UIOneNodePathSelector>Node Selector</UIOneNodePathSelector>
+      <UIOneNodePathSelector>Düğüm Seçici</UIOneNodePathSelector>
     </title>
   </pathSelector>
   <!--
@@ -1995,29 +2012,29 @@
   -->
   <EmailAddressValidator>
     <msg>
-      <Invalid-input>E-posta adresi geçersizdir.</Invalid-input>
+      <Invalid-input>E-posta adresi geçersiz.</Invalid-input>
     </msg>
   </EmailAddressValidator>
   <UIFormInputSetWithAction>
     <msg>
-      <confirm-delete>Are you sure you want to delete?</confirm-delete>
+      <confirm-delete>Silmek istediğinizden emin misiniz?</confirm-delete>
     </msg>
   </UIFormInputSetWithAction>
   <RepeatCountValidator>
     <msg>
-      <invalid-value>The value in the field 'Repeat Count' is invalid. Only integers or -1 are allowed.</invalid-value>
+      <invalid-value>'Yineleme sayısı' alanı değeri geçersiz. Yalnızca tamsayılara veya -1 izin verilir.</invalid-value>
     </msg>
   </RepeatCountValidator>
   <RepeatIntervalValidator>
     <msg>
-      <invalid-value>The value in the field 'Time Interval' is invalid. Only long types are allowed.</invalid-value>
+      <invalid-value>'Zaman aralığı' alanındaki değeri geçersiz. Sadece uzun türlerine izin verilir.</invalid-value>
     </msg>
   </RepeatIntervalValidator>
   <UIPermissionSelector>
     <label>
-      <selectGroup>Select Group</selectGroup>
-      <selectUser>Select User</selectUser>
-      <selectMembership>Select Membership</selectMembership>
+      <selectGroup>Grup Seçin</selectGroup>
+      <selectUser>Kullanıcı Seçin</selectUser>
+      <selectMembership>Üyelik Seçin</selectMembership>
     </label>
   </UIPermissionSelector>
   <!--
@@ -2027,8 +2044,8 @@
   -->
   <ECMStandardPropertyNameValidator>
     <msg>
-      <empty-input>The value of the field '{0}' is null or empty.</empty-input>
-      <Invalid-char>The field '{0}'contains some invalid characters. Please enter another value.</Invalid-char>
+      <empty-input>'{0}' Alanının değeri null veya boş.</empty-input>
+      <Invalid-char>'{0}' Alanı geçersiz bir karakter içeriyor. Lütfen başka bir değer girin.</Invalid-char>
     </msg>
   </ECMStandardPropertyNameValidator>
   <!--
@@ -2038,13 +2055,13 @@
   -->
   <SearchValidator>
     <msg>
-      <empty-input>The value of this field is null or empty.</empty-input>
-      <Invalid-char>This field contains some invalid characters. Please enter another value.</Invalid-char>
-      <Invalid-char2>The number must be followed by the character '~'.</Invalid-char2>
-      <Invalid-char1>The number following the character '~' must between 0 and 1.</Invalid-char1>
-      <Invalid-char3>The number must be followed by the character '^'.</Invalid-char3>
-      <Invalid-char4>Spaces are not allowed near the character '~'.</Invalid-char4>
-      <Invalid-char5>Spaces are not allowed near the character '^'.</Invalid-char5>
+      <empty-input>Bu alanın değeri, null veya boş.</empty-input>
+      <Invalid-char>'{0}' Alanı geçersiz bir karakter içeriyor. Lütfen başka bir değer girin.</Invalid-char>
+      <Invalid-char2>Sayı '~' tarafından takip edilmelidir.</Invalid-char2>
+      <Invalid-char1>Karakteri aşağıdaki numarayı ' ~' 0 ile 1 arasında olmalıdır.</Invalid-char1>
+      <Invalid-char3>Sayı '^' tarafından takip edilmelidir.</Invalid-char3>
+      <Invalid-char4>' ~' karakteri yanında boşlık karakterine izin verilmez.</Invalid-char4>
+      <Invalid-char5>' ^' karakteri yanında boşlık karakterine izin verilmez.</Invalid-char5>
     </msg>
   </SearchValidator>
   <!--
@@ -2054,11 +2071,11 @@
   -->
   <UIPublicationLogList>
     <header>
-      <date>Date</date>
-      <newState>New State</newState>
-      <user>User</user>
+      <date>Tarih</date>
+      <newState>Yeni Durum</newState>
+      <user>Kullanıcı</user>
       <description>Açıklama</description>
-      <version>Version</version>
+      <version>Sürüm</version>
       <visibility>Görünürlük</visibility>
     </header>
     <action>
@@ -2072,8 +2089,8 @@
   -->
   <UIVersionTreeList>
     <header>
-      <version>Version</version>
-      <state>State</state>
+      <version>Sürüm</version>
+      <state>Durum</state>
     </header>
   </UIVersionTreeList>
   <!--
@@ -2085,21 +2102,21 @@
     <action>
       <Save>#{word.save}</Save>
       <Cancel>#{word.cancel}</Cancel>
-      <RemoveThumbnail>Remove Thumbnail</RemoveThumbnail>
+      <RemoveThumbnail>Küçük Resmi Kaldır</RemoveThumbnail>
     </action>
     <label>
-      <mediumSize>Thumbnail Image</mediumSize>
-      <SelectFile>Choose Thumbnail Image</SelectFile>
+      <mediumSize>Küçük Resim</mediumSize>
+      <SelectFile>Küçük Resmi Seçin</SelectFile>
     </label>
     <msg>
-      <mimetype-incorrect>Incorrect file type. Thumbnails can only be created from .JPG, .PNG or .GIF files.</mimetype-incorrect>
-      <access-denied>Access denied. You do not have permission to add a thumbnail to this node.</access-denied>
-      <confirm-delete>Are you sure you want to remove this thumbnail?</confirm-delete>
-      <is-checked-in>This node is checked in. Please check out before performing any action.</is-checked-in>
-      <fileName-error>Please select a file to upload.</fileName-error>
+      <mimetype-incorrect>Yanlış dosya türü. Küçük resim yalnızca .JPG, PNG veya GIF dosyalarından oluşturulabilir.</mimetype-incorrect>
+      <access-denied>Erişim engellendi. Bu düğüm için küçük resim ekleme izniniz yok.</access-denied>
+      <confirm-delete>Bu küçük resmi kaldırmak istediğinizden emin misiniz?</confirm-delete>
+      <is-checked-in>Bu düğüm kontrol ediliyor. Lütfen herhangi bir eylem gerçekleştirmeden önce bakın.</is-checked-in>
+      <fileName-error>Lütfen yüklemek için bir dosya seçin.</fileName-error>
     </msg>
     <title>
-      <remove-thumbnail>Remove this Thumbnail</remove-thumbnail>
+      <remove-thumbnail>Bu küçük resmi Kaldır</remove-thumbnail>
     </title>
   </UIThumbnailForm>
   <!--
@@ -2109,13 +2126,13 @@
   -->
   <UIAnyPermission>
     <label>
-      <anyPermission>Any Permission</anyPermission>
+      <anyPermission>Herhangi bir İzin</anyPermission>
     </label>
   </UIAnyPermission>
 
   <anyPermission>
     <title>
-      <AddAnyPermission>Set Any Permission</AddAnyPermission>
+      <AddAnyPermission>Herhangi bir izni Ayarla</AddAnyPermission>
     </title>
   </anyPermission>
   <!--
@@ -2135,9 +2152,9 @@
   -->
   <UIGroupMemberSelector>
     <label>
-      <selectGroup>Select Group</selectGroup>
-      <selectUser>Select User</selectUser>
-      <selectMembership>Select Membership</selectMembership>
+      <selectGroup>Grup Seçin</selectGroup>
+      <selectUser>Kullanıcı Seçin</selectUser>
+      <selectMembership>Üyelik Seçin</selectMembership>
     </label>
   </UIGroupMemberSelector>
   <!--
@@ -2149,35 +2166,35 @@
   Access directly a JCR FE drive
   -->
   <UIJCRExplorerPortlet>
-    <nopermission>There is either no drive or you do not have permission to access this drive.</nopermission>
+    <nopermission>Her iki sürücü yok veya bu sürücüye erişmek için izniniz yok.</nopermission>
   </UIJCRExplorerPortlet>
 
   <UIJcrExplorerEditForm>
-    <title>Edit File Explorer</title>
+    <title>Dosya Gezgini Düzenle</title>
     <action>
       <Edit>Düzenle</Edit>
       <Save>Kaydet</Save>
       <Cancel>İptal</Cancel>
     </action>
     <label>
-      <uploadFileSizeLimitMB>The size limit of the uploaded file (MB)</uploadFileSizeLimitMB>
-      <isDirectlyDrive>Direct Drive</isDirectlyDrive>
-      <driveName>Drive Name</driveName>
-      <usecase>Select Type</usecase>
-      <SelectNodePath>Select Path</SelectNodePath>
-      <showTopBar>Show Top Bar</showTopBar>
-      <showActionBar>Show Action Bar</showActionBar>
-      <showSideBar>Show Left Bar</showSideBar>
-      <showFilterBar>Show Filter Bar</showFilterBar>
-      <nodePath>Select Path</nodePath>
+      <uploadFileSizeLimitMB>Yüklenen dosya büyüklüğü sınırı (MB)</uploadFileSizeLimitMB>
+      <isDirectlyDrive>Doğrudan Sürücü</isDirectlyDrive>
+      <driveName>Sürücü Adı</driveName>
+      <usecase>Türü Seçin</usecase>
+      <SelectNodePath>Yolu Seçin</SelectNodePath>
+      <showTopBar>Üst Çubuğunu Göster</showTopBar>
+      <showActionBar>Eylem Çubuğunu Göster</showActionBar>
+      <showSideBar>Sol Çubuğunu Göster</showSideBar>
+      <showFilterBar>Filtre Çubuğunu Göster</showFilterBar>
+      <nodePath>Yolu Seçin</nodePath>
     </label>
   </UIJcrExplorerEditForm>
 
   <UIDriveSelector>
     <label>
-      <driveName>Drive Name</driveName>
+      <driveName>Sürücü Adı</driveName>
       <action>Eylem</action>
-      <adddrives>Add Drives</adddrives>
+      <adddrives>Sürücü Ekle</adddrives>
     </label>
   </UIDriveSelector>
   <UIJcrExplorerEditForm>
@@ -2185,27 +2202,27 @@
       <DriveNameInput>UI JCR Explorer Edit Form</DriveNameInput>
     </label>
     <msg>
-      <personal-usecase>The private drive of the current user will be used when you select the Personal usecase.</personal-usecase>
-      <drive-edit-permission>You cannot edit the drive name. Please click the Edit button.</drive-edit-permission>
-      <path-edit-permission>You cannot edit the path. Please click the Edit button.</path-edit-permission>
+      <personal-usecase>Eğer Kişisel Kullanım seçtiğinizde geçerli kullanıcının özel sürücü kullanılacaktır.</personal-usecase>
+      <drive-edit-permission>Sürücü adını düzenleyemezsiniz. Lütfen Düzenle düğmesini tıklatın.</drive-edit-permission>
+      <path-edit-permission>Yol düzenleyemezsiniz. Lütfen Düzenle düğmesini tıklatın.</path-edit-permission>
     </msg>
   </UIJcrExplorerEditForm>
 
   <PopUpSelectDrive>
     <title>
-      <UIDriveSelector>Select Drive</UIDriveSelector>
+      <UIDriveSelector>Sürücü Seçin</UIDriveSelector>
     </title>
   </PopUpSelectDrive>
 
   <PopupSelectPath>
     <title>
-      <UIOneNodePathSelector>Select Node</UIOneNodePathSelector>
+      <UIOneNodePathSelector>Düğümü Seçin</UIOneNodePathSelector>
     </title>
   </PopupSelectPath>
 
   <DriveNameInput>
     <title>
-      <SelectDrive>Select Drive</SelectDrive>
+      <SelectDrive>Sürücü Seçin</SelectDrive>
     </title>
   </DriveNameInput>
 
@@ -2214,141 +2231,141 @@
   -->
   <UIActionBar>
     <tooltip>
-      <AddSymLink>Add Symlink</AddSymLink>
-      <AddLocalizationLink>Add Translation</AddLocalizationLink>
+      <AddSymLink>Sembolik link ekle</AddSymLink>
+      <AddLocalizationLink>Çeviri Ekle</AddLocalizationLink>
     </tooltip>
   </UIActionBar>
 
   <UIPopupWindow>
     <title>
-      <UISymLinkManager>Symlink Manager</UISymLinkManager>
-      <UIAddTranslationManager>Add Translation</UIAddTranslationManager>
+      <UISymLinkManager>Sembolik Bağ Yöneticisi</UISymLinkManager>
+      <UIAddTranslationManager>Çeviri Ekle</UIAddTranslationManager>
     </title>
   </UIPopupWindow>
 
   <UISymLinkForm>
     <label>
-      <symLinkName>Symlink Name</symLinkName>
-      <pathNode>Path Node</pathNode>
+      <symLinkName>Sembolik Bağ Adı</symLinkName>
+      <pathNode>Yol Düğümü</pathNode>
     </label>
     <action>
       <Save>#{word.save}</Save>
       <Cancel>#{word.cancel}</Cancel>
     </action>
     <msg>
-      <addFolder-successful>The symlink '{0}' was added successfully.</addFolder-successful>
-      <name-invalid>Please enter the symlink name.</name-invalid>
-      <name-not-allowed>This name is not allowed.</name-not-allowed>
-      <fileName-error>The file name is invalid.</fileName-error>
-      <constraint-violation>You cannot add the'{0}' node type to the current node.</constraint-violation>
-      <repository-exception>Access denied. You do not have permission to add symlink to this node.</repository-exception>
-      <numberformat-exception>You cannot save this folder. The name provided must be in numerical format.</numberformat-exception>
-      <path-node-invalid>Please enter the path node.</path-node-invalid>
-      <path-node-not-allowed>This name is not allowed.</path-node-not-allowed>
-      <non-node>Please select the trust target node; you may not have the right to read this node.</non-node>
-      <cannot-save>You cannot add a symlink for this node type.</cannot-save>
-      <item-exists-exception>The node name already exists.</item-exists-exception>
-      <translation-node-same-language-default>The translation node has the same language as the default language of current node.</translation-node-same-language-default>
-      <UnsupportedRepositoryOperationException>This target node is not referred.</UnsupportedRepositoryOperationException>
+      <addFolder-successful>Sembolik bağ '{0}' başarıyla eklendi.</addFolder-successful>
+      <name-invalid>Sembolik bağın adını giriniz.</name-invalid>
+      <name-not-allowed>Bu ad geçerli değil.</name-not-allowed>
+      <fileName-error>Dosya adı geçersiz.</fileName-error>
+      <constraint-violation>Geçerli düğüme '{0}' düğüm türü ekleyemezsiniz.</constraint-violation>
+      <repository-exception>Erişim engellendi. Sembolik bağı bu düğümü ekleme izniniz yok.</repository-exception>
+      <numberformat-exception>Bu klasöre kaydedilemiyor. Verilen ad sayısal biçiminde olması gerekir.</numberformat-exception>
+      <path-node-invalid>Yol düğümü giriniz.</path-node-invalid>
+      <path-node-not-allowed>Bu ad geçerli değil.</path-node-not-allowed>
+      <non-node>Bildiğiniz hedef düğümü seçiniz; Bu düğüme okuma yetkiniz olmayabilir.</non-node>
+      <cannot-save>Bu düğüm türü için bir sembolik bağ ekleyemezsiniz.</cannot-save>
+      <item-exists-exception>Bu düğüm adı zaten var.</item-exists-exception>
+      <translation-node-same-language-default>Çeviri düğümü geçerli düğümün varsayılan dil olarak aynı dili vardır.</translation-node-same-language-default>
+      <UnsupportedRepositoryOperationException>Bu hedef başvurulan düğüm değildir.</UnsupportedRepositoryOperationException>
     </msg>
   </UISymLinkForm>
   
   <UIAddTranslationForm>
     <label>
-      <symLinkName>Symlink Name</symLinkName>
-      <pathNode>Document Path:</pathNode>
-      <note>Select another document that will serve as the translation</note>
+      <symLinkName>Sembolik Bağ Adı</symLinkName>
+      <pathNode>Belge Yolu:</pathNode>
+      <note>Çeviri görevi yapacak başka bir belge seçin</note>
     </label>
     <action>
       <Save>#{word.save}</Save>
       <Cancel>#{word.cancel}</Cancel>
-      <SelectDocument>Select Document</SelectDocument>
+      <SelectDocument>Belge Seçin</SelectDocument>
     </action>
     <msg>
-      <addFolder-successful>The symlink '{0}' is added successfully.</addFolder-successful>
-      <name-invalid>Please enter the symlink name.</name-invalid>
-      <name-not-allowed>This name is not allowed.</name-not-allowed>
-      <fileName-error>The file name is invalid.</fileName-error>
-      <constraint-violation>You cannot add the'{0}' node type to the current node.</constraint-violation>
-      <repository-exception>Access denied. You do not have permission to add symlink to this node.</repository-exception>
-      <numberformat-exception>You cannot save this folder. The name provided must be in numerical format.</numberformat-exception>
-      <path-node-invalid>Please enter the path node.</path-node-invalid>
-      <path-node-not-allowed>This name is not allowed.</path-node-not-allowed>
-      <non-node>Please select the trust target node; you may not have the right to read this node.</non-node>
-      <cannot-save>An error occurred while creating the symlink.</cannot-save>
-      <item-exists-exception>The node name already exists.</item-exists-exception>
-      <translation-node-same-language-default>The translation node has the same language as the default language of current node.</translation-node-same-language-default>
-      <UnsupportedRepositoryOperationException>This target node is not referred.</UnsupportedRepositoryOperationException>
+      <addFolder-successful>Sembolik bağ '{0}' başarıyla eklendi.</addFolder-successful>
+      <name-invalid>Sembolik bağın adını giriniz.</name-invalid>
+      <name-not-allowed>Bu ad geçerli değil.</name-not-allowed>
+      <fileName-error>Dosya adı geçersiz.</fileName-error>
+      <constraint-violation>Geçerli düğüme '{0}' düğüm türü ekleyemezsiniz.</constraint-violation>
+      <repository-exception>Erişim engellendi. Sembolik bağı bu düğümü ekleme izniniz yok.</repository-exception>
+      <numberformat-exception>Bu eylem kaydedemezsiniz. Verilen adı sayısal biçiminde olması gerekir.</numberformat-exception>
+      <path-node-invalid>Yol düğümü giriniz.</path-node-invalid>
+      <path-node-not-allowed>Bu ad geçerli değil.</path-node-not-allowed>
+      <non-node>Bildiğiniz hedef düğümü seçiniz; Bu düğüme okuma yetkiniz olmayabilir.</non-node>
+      <cannot-save>Symlink oluşturulurken bir hata oluştu.</cannot-save>
+      <item-exists-exception>Bu düğüm adı zaten var.</item-exists-exception>
+      <translation-node-same-language-default>Çeviri düğümü geçerli düğümün varsayılan dil olarak aynı dili vardır.</translation-node-same-language-default>
+      <UnsupportedRepositoryOperationException>Bu hedef başvurulan düğüm değildir.</UnsupportedRepositoryOperationException>
     </msg>
   </UIAddTranslationForm>
 
   <UIPopupSymLink>
     <title>
-      <UIOneNodePathSelector>Select Target Node</UIOneNodePathSelector>
+      <UIOneNodePathSelector>Hedef Düğüm Seçin</UIOneNodePathSelector>
     </title>
   </UIPopupSymLink>
   <UIPopupSymLink>
     <title>
-      <UIContentSelectorOne>Select Document</UIContentSelectorOne>
+      <UIContentSelectorOne>Belge Seçin</UIContentSelectorOne>
     </title>
   </UIPopupSymLink>
 
   <ECMContextMenu>
     <event>
-      <AddSymLink>Add Symlink</AddSymLink>
-      <AddLocalizationLink>Add Translation</AddLocalizationLink>
+      <AddSymLink>Sembolik link ekle</AddSymLink>
+      <AddLocalizationLink>Çeviri Ekle</AddLocalizationLink>
     </event>
   </ECMContextMenu>
 
   <UIWorkingArea>
     <msg>
-      <create-link-problem>You cannot create a link for node '{0}' at '{1}'.</create-link-problem>
-      <dest-node-is-link>The destination node '{0}' is already a symlink, so you cannot create a symlink inside it.</dest-node-is-link>
-      <selected-is-link>The selected node '{0}' is already a link, so you cannot create a link point to another link.</selected-is-link>
-      <confirm-create-link>Do you want to create a link to this location?</confirm-create-link>
+      <create-link-problem>Bağlantı düğümü '{0}' için '{1}' oluşturamazsınız.</create-link-problem>
+      <dest-node-is-link>Hedef düğüm '{0}' zaten bir symlink, bu yüzden içinde bir symlink oluşturamazsınız.</dest-node-is-link>
+      <selected-is-link>Seçili düğüm '{0}' zaten bir bağlantı, bu yüzden içinde bir bağlantı oluşturamazsınız.</selected-is-link>
+      <confirm-create-link>Bu konuma bir bağlantı oluşturmak istiyor musunuz?</confirm-create-link>
     </msg>
   </UIWorkingArea>
 
   <ECMContextMenu>
     <event>
-      <CreateLink>Create Link</CreateLink>
+      <CreateLink>Bağlantı Oluştur</CreateLink>
     </event>
   </ECMContextMenu>
 
   <UIWorkspaceList>
     <msg>
-      <AccessDeniedException>Access denied. You do not have read permission in this workspace.</AccessDeniedException>
+      <AccessDeniedException>Erişim engellendi. Bu çalışma alanında okuma izniniz yok.</AccessDeniedException>
     </msg>
     <label>
-      <taxonomyTree>Category Tree</taxonomyTree>
+      <taxonomyTree>Kategori Ağacı</taxonomyTree>
     </label>
   </UIWorkspaceList>
 
   <UIPopupTaxonomy>
     <title>
-      <UIOneTaxonomySelector>Add Categories</UIOneTaxonomySelector>
+      <UIOneTaxonomySelector>Kategori Ekle</UIOneTaxonomySelector>
     </title>
   </UIPopupTaxonomy>
 
   <UITreeTaxonomyList>
     <label>
-      <taxonomyTree>Category Tree:</taxonomyTree>
-      <rootNodePath>Root Tree:</rootNodePath>
+      <taxonomyTree>Kategori Ağacı:</taxonomyTree>
+      <rootNodePath>Kök Ağaç:</rootNodePath>
       <rootNodeInfo>UITreeTaxonomyList</rootNodeInfo>
     </label>
   </UITreeTaxonomyList>
 
   <UIActionBar>
     <tooltip>
-      <ManageSimpleCategories>Manage Simple Categories</ManageSimpleCategories>
+      <ManageSimpleCategories>Basit Kategorileri Yönet</ManageSimpleCategories>
     </tooltip>
   </UIActionBar>
 
   <UISimpleCategoryManager>
     <tab>
       <label>
-        <UICategoriesAddedList>Referenced Categories</UICategoriesAddedList>
-        <UIOneNodePathSelector>Select Category</UIOneNodePathSelector>
+        <UICategoriesAddedList>Başvurulan Kategoriler</UICategoriesAddedList>
+        <UIOneNodePathSelector>Kategori Seçin</UIOneNodePathSelector>
       </label>
     </tab>
   </UISimpleCategoryManager>
@@ -2356,7 +2373,7 @@
   <UICategoryManager>
     <tab>
       <label>
-        <UIOneTaxonomySelector>Select Category</UIOneTaxonomySelector>
+        <UIOneTaxonomySelector>Kategori Seçin</UIOneTaxonomySelector>
       </label>
     </tab>
   </UICategoryManager>
@@ -2373,7 +2390,7 @@
   </UIPopupWindow>
   <UICategoriesAddedList>
     <msg>
-      <ItemExistsException>The category name already exists.</ItemExistsException>
+      <ItemExistsException>Kategori adı zaten var.</ItemExistsException>
     </msg>
   </UICategoriesAddedList>
 
@@ -2381,78 +2398,78 @@
     <label>
       <Close>#{word.cancel}</Close>
       <OK>Sil</OK>
-      <ReplaceData>Replace Data</ReplaceData>
-      <Back>Back to Rename</Back>
-      <Keepfile>Keep both files</Keepfile>
+      <ReplaceData>Verileri Değiştir</ReplaceData>
+      <Back>Yeniden Adlandırma için Geri</Back>
+      <Keepfile>İki dosyayı da tut</Keepfile>
     </label>
   </UIConfirmMessage>
 
   <UIRestoreConfirmMessage>
     <label>
       <Close>#{word.close}</Close>
-      <OK>OK</OK>
-      <ReplaceData>Replace Data</ReplaceData>
-      <Back>Back to Rename</Back>
-      <Keepfile>Keep both files</Keepfile>
+      <OK>Tamam</OK>
+      <ReplaceData>Verileri Değiştir</ReplaceData>
+      <Back>Yeniden Adlandırma için Geri</Back>
+      <Keepfile>İki dosyayı da tut</Keepfile>
     </label>
   </UIRestoreConfirmMessage>
 
 
   <PopupComponent>
     <title>
-      <UIOneTaxonomySelector>Add Categories</UIOneTaxonomySelector>
+      <UIOneTaxonomySelector>Kategori Ekle</UIOneTaxonomySelector>
     </title>
   </PopupComponent>
 
   <UIWorkingArea>
     <msg>
-      <can-not-move-to-itself>You cannot move the file, because the destination folder is the same as the source folder.</can-not-move-to-itself>
-      <is-editing>You cannot move a document while it is being edited. Please close it first.</is-editing>
+      <can-not-move-to-itself>Hedef klasör kaynak klasörle aynı olduğundan dosya taşıyamazsınız.</can-not-move-to-itself>
+      <is-editing>Bir belge düzenlenirken taşıyamazsınız. Lütfen önce kapatın.</is-editing>
     </msg>
   </UIWorkingArea>
 
   <UIImportNode>
     <label>
-      <behavior>UUID Behavior</behavior>
-      <versionHistory>Version History</versionHistory>
+      <behavior>UUID Davranışı</behavior>
+      <versionHistory>Sürüm Geçmişi</versionHistory>
     </label>
     <msg>
-      <history-invalid-type>Invalid file type in the version history. Only .zip files are supported.</history-invalid-type>
-      <history-invalid-content>Invalid content in the version history data. Please select a supported file type to import.</history-invalid-content>
+      <history-invalid-type>Sürümü geçmişinde geçersiz dosya türü . Sadece .zip dosyaları desteklenir.</history-invalid-type>
+      <history-invalid-content>Sürüm geçmişi veri içeriği geçersiz. Lütfen almak için desteklenen bir dosya türü seçin.</history-invalid-content>
     </msg>
   </UIImportNode>
 
   <Import>
     <Behavior>
-      <type0>Create New</type0>
-      <type1>Remove Existing</type1>
-      <type2>Replace Existing</type2>
-      <type3>Throw Exception</type3>
+      <type0>Yeni Oluştur</type0>
+      <type1>Varolanı Kaldır</type1>
+      <type2>Varolanı Değiştir</type2>
+      <type3>Özel Durum</type3>
     </Behavior>
   </Import>
 
   <UIExportNode>
     <action>
-      <ExportHistory>Export Version History</ExportHistory>
+      <ExportHistory>Sürüm Geçmişini Dışa Aktar</ExportHistory>
     </action>
   </UIExportNode>
 
   <UIPopupMenu>
     <msg>
-      <node-locked-other-person>This node or its parent node is being locked by another user, so you cannot delete it.</node-locked-other-person>
+      <node-locked-other-person>Bu öğe veya üst öğesi başka bir kullanıcı tarafından kilitli, o yüzden silemezsiniz.</node-locked-other-person>
     </msg>
   </UIPopupMenu>
 
   <Import>
     <label>
-      <docview>Document View</docview>
-      <sysview>System View</sysview>
+      <docview>Belge Görünümü</docview>
+      <sysview>Sistem görünümü</sysview>
     </label>
   </Import>
 
   <UIDocumentForm>
     <msg>
-      <do-not-permission>You do not have permission to load the template '{0}'.</do-not-permission>
+      <do-not-permission>'{0}' Şablonu yüklemek için izniniz yok.</do-not-permission>
     </msg>
   </UIDocumentForm>
 
@@ -2465,16 +2482,16 @@
   <UIActionBar>
     <obtion>
       <Admin>Admin</Admin>
-      <Info>Info</Info>
+      <Info>Bilgi</Info>
       <Actions>Eylemler</Actions>
-      <Collaboration>Collaboration</Collaboration>
-      <Search>Search</Search>
+      <Collaboration>İşbirliği</Collaboration>
+      <Search>Ara</Search>
     </obtion>
   </UIActionBar>
 
   <UIPopupMenu>
     <msg>
-      <can-not-unlock-node-is-checked-in>You cannot unlock because the node '{0}' (or its ancestor) is checked in.</can-not-unlock-node-is-checked-in>
+      <can-not-unlock-node-is-checked-in>Kilit açılamıyor çünkü düğüm '{0}' (veya üst) kontrol ediliyor.</can-not-unlock-node-is-checked-in>
     </msg>
   </UIPopupMenu>
 
@@ -2483,39 +2500,39 @@
   -->
   <UIActionBar>
     <msg>
-      <cannot-enable-version>Cannot enable versioning node.</cannot-enable-version>
+      <cannot-enable-version>Düğüm için sürümleme etkinleştirilemiyor.</cannot-enable-version>
     </msg>
   </UIActionBar>
   <UIPopupMenu>
     <msg>
-        <cannot-readsource>You cannot read data from the source node.</cannot-readsource>
+        <cannot-readsource>Kaynak düğümden verileri okunamıyor.</cannot-readsource>
     </msg>
   </UIPopupMenu>
   <UIUploadForm>
     <msg>
-      <upload-not-null>Please upload the file before adding a category.</upload-not-null>
+      <upload-not-null>Lütfen bir kategori eklemeden önce dosya yükleyin.</upload-not-null>
     </msg>
   </UIUploadForm>
   <UIActionBar>
     <msg>
-      <allow-setProperty>You must set a property for this group.</allow-setProperty>
+      <allow-setProperty>Bu grup için bir özelliğini ayarlamanız gerekir.</allow-setProperty>
     </msg>
   </UIActionBar>
 
   <UIActionForm>
     <msg>
-      <name-not-allowed>This action name is not allowed.</name-not-allowed>
+      <name-not-allowed>Bu eylem adına izin verilmiyor.</name-not-allowed>
     </msg>
   </UIActionForm>
 
   <UISaveQueryForm>
     <msg>
-      <name-not-allowed>This query name is not allowed.</name-not-allowed>
+      <name-not-allowed>Bu sorgu adına izin verilmiyor.</name-not-allowed>
     </msg>
   </UISaveQueryForm>
   <UISimpleSearch>
     <msg>
-      <name-not-allowed>A word or phrase in the content is not allowed.</name-not-allowed>
+      <name-not-allowed>Bir sözcük veya tümceciğin içeriği izin verilmez.</name-not-allowed>
     </msg>
   </UISimpleSearch>
 
@@ -2525,7 +2542,7 @@
    -->
   <ECMContextMenu>
       <event>
-        <Permlink>View Document</Permlink>
+        <Permlink>Belgeyi Görüntüle</Permlink>
       </event>
   </ECMContextMenu>
   
@@ -2535,19 +2552,19 @@
    -->
   <UIFolderForm>
     <label>
-      <nt_folder>Document Folder</nt_folder>
-      <nt_unstructured>Content Folder</nt_unstructured>
-      <exo_cssFolder>CSS Folder</exo_cssFolder>
-      <exo_jsFolder>Javascript Folder</exo_jsFolder>
+      <nt_folder>Belge Klasörü</nt_folder>
+      <nt_unstructured>İçerik Klasörü</nt_unstructured>
+      <exo_cssFolder>CSS Klasörü</exo_cssFolder>
+      <exo_jsFolder>JavaScript Klasörü</exo_jsFolder>
       <exo_linkFolder>Link Folder</exo_linkFolder>
-      <exo_webFolder>Web Content Folder</exo_webFolder>
+      <exo_webFolder>Web İçerik Klasörü</exo_webFolder>
    </label>
   </UIFolderForm>
 
   <Comments>
     <tooltip>
-      <remove-comment>Remove this comment</remove-comment>
-      <edit-comment>Edit this comment</edit-comment>
+      <remove-comment>Yorumu Kaldır</remove-comment>
+      <edit-comment>Bu yorumu düzenle</edit-comment>
     </tooltip>
   </Comments>
   <UIDocumentInfo>
@@ -2558,82 +2575,82 @@
 
  <UIExportNode>
   <msg>
-    <OutOfMemoryError>You should select System View while exporting large data.</OutOfMemoryError>
+    <OutOfMemoryError>Büyük miktarda veri verilirken, Sistem Görünüm seçmelisiniz.</OutOfMemoryError>
   </msg>
  </UIExportNode>
  <Taxonomy>
     <msg>
-      <AccessDeniedException>You do not have permission to access these category trees.</AccessDeniedException>
+      <AccessDeniedException>Bu kategori ağaçlarına erişim iznine sahip değilsiniz.</AccessDeniedException>
     </msg>
   </Taxonomy>
 
   <UIJcrExplorerEditForm>
     <msg>
-      <notNullDriveName>The Drive Name is null or empty. Please fill out the Drive Name field.</notNullDriveName>
-      <notNullPath>The path is null or empty. Please fill out the path.</notNullPath>
+      <notNullDriveName>Sürücü adı null veya boş. Lütfen sürücü adı alanını doldurun.</notNullDriveName>
+      <notNullPath>Yol null veya boş. Yol doldurunuz.</notNullPath>
     </msg>
   </UIJcrExplorerEditForm>
 
   <UIViewSearchResult>
     <tooltip>
-      <remove-attachment>Are you sure you want to remove this attachment file?</remove-attachment>
+      <remove-attachment>Bu ek dosyasını kaldırmak istediğinizden emin misiniz?</remove-attachment>
     </tooltip>
   </UIViewSearchResult>
 
   <SameNamePopup>
     <title>
-      <UIUploadBehaviorWithSameName>Upload File</UIUploadBehaviorWithSameName>
+      <UIUploadBehaviorWithSameName>Dosya Yükle</UIUploadBehaviorWithSameName>
     </title>
   </SameNamePopup>
 
   <UIAllItems>
     <label>
-      <OwnedByMe>Owned by me</OwnedByMe>
-      <Favourites>Favorites</Favourites>
+      <OwnedByMe>Sahibi benim</OwnedByMe>
+      <Favourites>Sık Kullanılanlar</Favourites>
       <Hidden>Gizli</Hidden>
-      <Trash>Trash</Trash>
-      <Configuration>Set Up Preferences</Configuration>
+      <Trash>Çöp Kutusu</Trash>
+      <Configuration>Tercihleri Ayarla</Configuration>
     </label>
     <title>
-      <allItems>All Items</allItems>
+      <allItems>Tüm öğeler</allItems>
     </title>
   </UIAllItems>
 
   <UIPreferencesForm>
       <label>
-          <Alphabetic>Alphabetical</Alphabetic>
+          <Alphabetic>Alfabetik</Alphabetic>
           <Type>Türü</Type>
-          <CreatedDate>Created Date</CreatedDate>
-          <ModifiedDate>Modified Date</ModifiedDate>
-          <Ascending>Ascending</Ascending>
-          <Descending>Descending</Descending>
+          <CreatedDate>Oluşturma Tarihi</CreatedDate>
+          <ModifiedDate>Değiştirme Tarihi</ModifiedDate>
+          <Ascending>Artan</Ascending>
+          <Descending>Azalan</Descending>
       </label>
   </UIPreferencesForm>
 
   <UISavedSearches>
     <title>
-      <savedSearches>Saved Searches</savedSearches>
+      <savedSearches>Kayıtlı Aramalar</savedSearches>
     </title>
   </UISavedSearches>
   <DocumentType>
     <label>
-       <Images>Image</Images>
+       <Images>Görüntü</Images>
        <Video>Video</Video>
-       <Music>Music</Music>
-       <Documents>Document</Documents>
+       <Music>Müzik</Music>
+       <Documents>Belge</Documents>
        <Content>İçerik</Content>
     </label>
   </DocumentType>
 
   <UIDocumentFilterForm>
     <label>
-      <Images>Image</Images>
+      <Images>Görüntü</Images>
       <Video>Video</Video>
-      <Music>Music</Music>
-      <Documents>Document</Documents>
+      <Music>Müzik</Music>
+      <Documents>Belge</Documents>
       <Content>İçerik</Content>
     </label>
-    <title>Set Up Filter Preferences</title>
+    <title>Filtre tercihlerini ayarla</title>
     <action>
       <Save>#{word.save}</Save>
       <Cancel>#{word.cancel}</Cancel>
@@ -2642,40 +2659,40 @@
 
   <UIAllItemsByType>
     <label>
-    <ByType>Filter by Type</ByType>
-      <DocumentFilterConfiguration>Set Up Filter Preferences</DocumentFilterConfiguration>
+    <ByType>Türüne göre Süz</ByType>
+      <DocumentFilterConfiguration>Filtre tercihlerini ayarla</DocumentFilterConfiguration>
     </label>
     <title>
-      <ShowVideo>Show all video files</ShowVideo>
-      <ShowMusic>Show all music files</ShowMusic>
-      <ShowImages>Show all image files</ShowImages>
-      <ShowDocuments>Show all document files</ShowDocuments>
-      <ShowContent>Show all document types</ShowContent>
+      <ShowVideo>Tüm video dosyaları göster</ShowVideo>
+      <ShowMusic>Tüm müzik dosyalarını göster</ShowMusic>
+      <ShowImages>Tüm resim dosyaları göster</ShowImages>
+      <ShowDocuments>Tüm belge dosyaları göster</ShowDocuments>
+      <ShowContent>Tüm belge tiplerini göster</ShowContent>
     </title>
   </UIAllItemsByType>
 
   <Views>
     <label>
-      <slide-show>Slide Show</slide-show>
+      <slide-show>Slayt Gösterisi</slide-show>
     </label>
   </Views>
   <ECMContextMenu>
     <event>
-      <PlayMedia>Play Media</PlayMedia>
+      <PlayMedia>Medya Oynat</PlayMedia>
     </event>
   </ECMContextMenu>
   <UIPopupWindow>
     <title>
-      <UIDocumentFilterForm>Filter Documents Type</UIDocumentFilterForm>
+      <UIDocumentFilterForm>Süzgeç Belge Türü</UIDocumentFilterForm>
     </title>
   </UIPopupWindow>
 
   <UIAllItemsPreferenceForm>
     <label>
-      <showOwnedByUser>Owned by me</showOwnedByUser>
-      <showFavourites>Favorites</showFavourites>
+      <showOwnedByUser>Sahibi benim</showOwnedByUser>
+      <showFavourites>Sık Kullanılanlar</showFavourites>
       <showHiddens>Gizli</showHiddens>
-      <showTrash>Trash</showTrash>
+      <showTrash>Çöp Kutusu</showTrash>
     </label>
     <action>
       <Save>#{word.save}</Save>
@@ -2685,12 +2702,12 @@
 
   <EmptyTrashManageComponent>
     <msg>
-      <confirm-delete>Are you sure you want to empty all items from trash?</confirm-delete>
+      <confirm-delete>Çöpteki tüm öğeleri boşaltmak istediğinizden emin misiniz?</confirm-delete>
     </msg>
   </EmptyTrashManageComponent>
   <UICategoryForm>
     <label>
-      <name>Category Name</name>
+      <name>Kategori Adı</name>
     </label>
     <action>
       <Save>Kaydet</Save>
@@ -2711,41 +2728,41 @@
    <UITaggingForm>
     <label>
       <Public>Genel</Public>
-      <Private>Private</Private>
-      <tagScopes>Tag Scopes</tagScopes>
+      <Private>Özel</Private>
+      <tagScopes>Etiket Kapsamları</tagScopes>
     </label>
    </UITaggingForm>
 
   <UITagExplorer>
     <title>
-      <PublicTags>Tags</PublicTags>
-      <EditPublicTags>Edit Tags</EditPublicTags>
-      <PrivateTags>Tags</PrivateTags>
+      <PublicTags>Etiketler</PublicTags>
+      <EditPublicTags>Etiketleri Düzenle</EditPublicTags>
+      <PrivateTags>Etiketler</PrivateTags>
     </title>
   </UITagExplorer>
 
   <UIEditingTagsForm>
     <header>
-      <name>Name</name>
-      <relatedDocuments>Related Documents</relatedDocuments>
+      <name>Ad</name>
+      <relatedDocuments>İlgili belgeler</relatedDocuments>
       <action>Eylem</action>
     </header>
     <action>
       <title>
-        <EditTag>Edit Tag</EditTag>
-        <RemoveTag>Remove Tag</RemoveTag>
-        <AddTag>Add Tag</AddTag>
+        <EditTag>Etiketi Düzenle</EditTag>
+        <RemoveTag>Etiketi Kaldır</RemoveTag>
+        <AddTag>Etiket Ekle</AddTag>
       </title>
     </action>
     <msg>
-      <confirm-remove>Are you sure to delete this tag?</confirm-remove>
+      <confirm-remove>Bu etiketi silmek istediğinizden emin misiniz?</confirm-remove>
     </msg>
   </UIEditingTagsForm>
 
 
   <UIPopupWindow>
     <title>
-      <UIEditingTagsForm>Edit Tag</UIEditingTagsForm>
+      <UIEditingTagsForm>Etiketi Düzenle</UIEditingTagsForm>
     </title>
   </UIPopupWindow>
 
@@ -2755,70 +2772,70 @@
       <Cancel>#{word.close}</Cancel>
     </action>
     <label>
-      <tagName>Tag Name:</tagName>
-      <relatedDocuments>Related Documents</relatedDocuments>
+      <tagName>Etiket Adı:</tagName>
+      <relatedDocuments>İlgili belgeler</relatedDocuments>
     </label>
   </UITagForm>
 
   <TagPopup>
     <title>
-      <UITagForm>Tag</UITagForm>
+      <UITagForm>Etiket</UITagForm>
     </title>
   </TagPopup>
 
     <UIPopupMenu>
     <msg>
-      <node-locked-editing>You cannot edit this node with the path {0}. It is being locked by another user.</node-locked-editing>
+      <node-locked-editing>Bu düğümü  {0} yolu ile düzenleyemezsiniz. Başka bir kullanıcı tarafından kilitli.</node-locked-editing>
     </msg>
   </UIPopupMenu>
   <UITagStyleForm>
     <msg>
-      <error-update>An error occurred while updating the tag style.</error-update>
+      <error-update>Etiket stili güncelleştirilirken bir hata oluştu.</error-update>
     </msg>
   </UITagStyleForm>
 
   <UIPopupMenu>
     <msg>
-      <editTagAccessDenied>Access denied.</editTagAccessDenied>
+      <editTagAccessDenied>Erişim Engellendi.</editTagAccessDenied>
     </msg>
   </UIPopupMenu>
 
   <UIPopupWindow>
     <title>
-      <UITaggingFormContainer>Tag Manager</UITaggingFormContainer>
+      <UITaggingFormContainer>Etiket Yöneticisi</UITaggingFormContainer>
     </title>
   </UIPopupWindow>
 
     <PopupComponent>
     <title>
-      <UINodeTypeSelector>Select Node Type</UINodeTypeSelector>
+      <UINodeTypeSelector>Düğüm Türü Seçin</UINodeTypeSelector>
     </title>
   </PopupComponent>
 
     <UIActionForm>
     <title>
-      <ShowComponent>Show Component</ShowComponent>
+      <ShowComponent>Bileşen Göster</ShowComponent>
       <removeReference>Kaldır</removeReference>
     </title>
   </UIActionForm>
 
   <EditFormAction>
     <title>
-      <ShowComponent>Show Component</ShowComponent>
+      <ShowComponent>Bileşen Göster</ShowComponent>
       <removeReference>Kaldır</removeReference>
     </title>
   </EditFormAction>
 
   <NodeTypeNameValidator>
     <msg>
-      <Invalid-char>There are some invalid characters. Please type another value.</Invalid-char>
-      <empty-input>The value of the field is null or empty.</empty-input>
+      <Invalid-char>Geçersiz karakterler. Lütfen başka bir değer yazın.</Invalid-char>
+      <empty-input>Alanın değeri null veya boş.</empty-input>
     </msg>
   </NodeTypeNameValidator>
 
   <UIPreferencesForm>
       <label>
-            <queryType>Query Type:</queryType>
+            <queryType>Sorgu Türü:</queryType>
             <SQL>SQL</SQL>
             <XPATH>XPATH</XPATH>
       </label>
@@ -2826,23 +2843,23 @@
 
   <UIDocumentInfo>
     <msg>
-      <repository-error>An error occurred. The information about the repository was lost.</repository-error>
+      <repository-error>Bir hata oluştu. Depo hakkında bilgi kayıp.</repository-error>
     </msg>
   </UIDocumentInfo>
 
   <UITreeExplorer>
     <msg>
-      <repository-error>An error occurred. The information about the repository was lost.</repository-error>
+      <repository-error>Bir hata oluştu. Depo hakkında bilgi kayıp.</repository-error>
     </msg>
   </UITreeExplorer>
   <UIDocumentForm>
     <msg>
-      <constraintviolation-exception>You cannot save the document. The input data are missing or invalid.</constraintviolation-exception>
+      <constraintviolation-exception>Belgeyi kaydedemiyor. Giriş verileri eksik veya geçersiz.</constraintviolation-exception>
     </msg>
   </UIDocumentForm>
   <UIActionForm>
     <msg>
-      <constraintviolation-exception>You cannot save the document. The input data are missing or invalid.</constraintviolation-exception>
+      <constraintviolation-exception>Belgeyi kaydedemiyor. Giriş verileri eksik veya geçersiz.</constraintviolation-exception>
     </msg>
   </UIActionForm>
 
@@ -2852,34 +2869,34 @@
       <Cancel>İptal</Cancel>
     </action>
     <label>
-      <formInput>The previous path was lost. Please select a new one.</formInput>
+      <formInput>Önceki yolu kaybetti. Lütfen yeni bir tane seçin.</formInput>
     </label>
   </UISelectRestorePath>
   <PathNode>
     <title>
-      <Add>Add</Add>
+      <Add>Ekle</Add>
     </title>
   </PathNode>
   <UIPopupPathFoRestore>
     <title>
-      <UIOneNodePathSelector>Select Parent Node</UIOneNodePathSelector>
+      <UIOneNodePathSelector>Üst Düğüm Seçin</UIOneNodePathSelector>
     </title>
   </UIPopupPathFoRestore>
   <rootNodeInfo>
     <title>
-      <AddRootNode>Add Root Node</AddRootNode>
+      <AddRootNode>Kök Düğümü Ekle</AddRootNode>
     </title>
   </rootNodeInfo>
 
   <UIActionForm>
     <msg>
-      <homePath-emty>The home path is empty.</homePath-emty>
-      <targetPath-emty>The target path is empty.</targetPath-emty>
+      <homePath-emty>Anasayfa yol boştur.</homePath-emty>
+      <targetPath-emty>Hedef yol boştur.</targetPath-emty>
     </msg>
     </UIActionForm>
     <UIActionBar>
       <msg>
-        <not-exist-categories>There are no categories.</not-exist-categories>
+        <not-exist-categories>Hiçbir kategori yoktur.</not-exist-categories>
       </msg>
     </UIActionBar>
 
@@ -2894,99 +2911,99 @@
       <Close>Kapat</Close>
     </button>
     <revisions>
-      <version>Revisions</version>
-      <date>Date</date>
-      <author>Author</author>
-      <status>Status</status>
+      <version>Düzeltmeler</version>
+      <date>Tarih</date>
+      <author>Yazar</author>
+      <status>Durum</status>
       <action>Eylem</action>
-      <label>Revision</label>
-      <none>No revisions</none>
-      <seeall>See all versions</seeall>
-      <currentVersion>Current Revision</currentVersion>
-      <confirm>You will lose your draft work. Are you sure you want to replace the current revision?</confirm>
+      <label>Gözden Geçirme</label>
+      <none>Hiçbir düzeltme</none>
+      <seeall>Tüm sürümleri gör</seeall>
+      <currentVersion>Geçerli Düzeltme</currentVersion>
+      <confirm>Taslak işinizi kaybedersiniz. Geçerli gözden geçirmenizi değiştirmek istediğinizden emin misiniz?</confirm>
     </revisions>
     <status>
-      <version>Revision</version>
-      <title>Status</title>
-      <archived>Archived</archived>
-      <obsolete>Obsolete</obsolete>
-      <unpublished>Unpublished</unpublished>
-      <enrolled>Enrolled</enrolled>
-      <draft>Draft</draft>
+      <version>Gözden Geçirme</version>
+      <title>Durum</title>
+      <archived>Arşivlenmiş</archived>
+      <obsolete>Eskimiş</obsolete>
+      <unpublished>Yayınlanmamış</unpublished>
+      <enrolled>Kayıtlı</enrolled>
+      <draft>Taslak</draft>
       <pending>Bekleyen</pending>
-      <approved>Approved</approved>
-      <inreview>In Review</inreview>
-      <staged>Staged</staged>
-      <published>Published</published>
-      <live>Published</live>
+      <approved>Onaylı</approved>
+      <inreview>İnceleniyor</inreview>
+      <staged>Yayına Hazır</staged>
+      <published>Yayınlandı</published>
+      <live>Yayınlandı</live>
     </status>
     <scheduled>
-      <title>Scheduled</title>
-      <from>From</from>
-      <to>To</to>
+      <title>Zamanlandı</title>
+      <from>Kimden</from>
+      <to>Kime</to>
     </scheduled>
     <title>
-      <preview>Preview</preview>
-      <restore>Restore</restore>
+      <preview>Önizleme</preview>
+      <restore>Geri Yükle</restore>
     </title>
     <msg>
-      <have-no-view-template>The View template is not supported.</have-no-view-template>
-      <restore-complete>Restore completed.</restore-complete>
+      <have-no-view-template>Görünüm şablonu desteklenmiyor.</have-no-view-template>
+      <restore-complete>Geri yükleme tamamlandı.</restore-complete>
     </msg>
   </UIPublicationPanel>
   <UIPublicationHistory>
     <header>
-      <date>Date</date>
-      <versionName>Revision Name</versionName>
-      <currentState>Current State</currentState>
-      <user>Author</user>
+      <date>Tarih</date>
+      <versionName>Düzeltme Adı</versionName>
+      <currentState>Mevcut Durum</currentState>
+      <user>Yazar</user>
       <description>Açıklama</description>
     </header>
   </UIPublicationHistory>
   
   <UIPublicationSchedule>
     <label>
-      <introduction>You can schedule the publication of your document. Select the dates you would like to see your document published</introduction>
-      <no-schedule-info>There is no publication schedule for your document</no-schedule-info>
+      <introduction>Belge yayınını zamanlayabilirsiniz. Yayınlanan belgenizi görmek istiyorsanız tarihleri seçin</introduction>
+      <no-schedule-info>Belgeniz için hiçbir yayın zamanlaması yok</no-schedule-info>
     </label>
     <msg>
-      <save-finished>Your new publication schedule was saved successfully.</save-finished>
+      <save-finished>Senin yeni yayın zamanlaması başarıyla kaydedildi.</save-finished>
     </msg>
     <action>
       <Save>#{word.save}</Save>
-      <Reset>Reset</Reset>
+      <Reset>Sıfırla</Reset>
     </action>
   </UIPublicationSchedule>
 
   <UIPublicationPanel>
     <label>
-      <header>Publication Date</header>
-      <start>Start Publication</start>
-      <end>End Publication</end>
+      <header>Yayın Tarihi</header>
+      <start>Yayını Başlat</start>
+      <end>Yayını Bitir</end>
     </label>
     <msg>
-      <invalid-format>The date format is invalid. Please check again.</invalid-format>
-      <fromDate-after-toDate>The From date has to be earlier than the To date.</fromDate-after-toDate>
+      <invalid-format>Tarih biçimi geçersiz. Lütfen tekrar kontrol edin.</invalid-format>
+      <fromDate-after-toDate>Başlangıç tarihi bitiş tarihinden önce olmalı.</fromDate-after-toDate>
     </msg>
   </UIPublicationPanel>
   <UIPopupWindow>
     <title>
-      <UIPublicationContainer>Manage Publication</UIPublicationContainer>
-      <UIPublishingPanel>Manage Publication</UIPublishingPanel>
+      <UIPublicationContainer>Yayını Yönet</UIPublicationContainer>
+      <UIPublishingPanel>Yayını Yönet</UIPublishingPanel>
     </title>
   </UIPopupWindow>
   <WCMContentView>
     <header>
-      <status>Status</status>
-      <author>Author</author>
-      <date>Created Date</date>
-      <title>Document Title</title>
-      <lastUser>Last User</lastUser>
+      <status>Durum</status>
+      <author>Yazar</author>
+      <date>Oluşturma Tarihi</date>
+      <title>Belge Başlığı</title>
+      <lastUser>Son Kullanıcı</lastUser>
     </header>
   </WCMContentView>
   <UITagForm>
     <msg>
-      <NameAlreadyExist>The tag name already exists.</NameAlreadyExist>
+      <NameAlreadyExist>Etiket adı zaten var.</NameAlreadyExist>
     </msg>
   </UITagForm>
 
@@ -2996,144 +3013,143 @@
   <UICategoryManagerSearch>
     <tab>
       <label>
-        <UIOneTaxonomySelector>Select Category</UIOneTaxonomySelector>
+        <UIOneTaxonomySelector>Kategori Seçin</UIOneTaxonomySelector>
       </label>
     </tab>
   </UICategoryManagerSearch>
 
   <UIPreferencesForm>
    <action>
-     <HideAdvance>Hide Advanced</HideAdvance>
-     <ShowAdvance>Show Advanced</ShowAdvance>
+     <HideAdvance>Gelişmiş Gizle</HideAdvance>
+     <ShowAdvance>Gelişmiş Göster</ShowAdvance>
     </action>
     <label>
-    <Advance>Advanced</Advance>
+    <Advance>Gelişmiş</Advance>
     </label>
   </UIPreferencesForm>
 
   <UIJCRExplorerPortlet>
 <msg>
-  <file-access-denied>File access denied.</file-access-denied>
-  <anonymous-access-denied>Anonymous user does not have permission to use this function.</anonymous-access-denied>
+  <file-access-denied>Dosya erişimi engellendi.</file-access-denied>
+  <anonymous-access-denied>Anonim kullanıcılar, bu işlevi kullanmak için izni yok.</anonymous-access-denied>
 </msg>
   </UIJCRExplorerPortlet>
   <UIDrivesArea>
     <DrivesArea>
-      <allDrives>Click the Show Drives button on the action bar to show/hide a list of drives.</allDrives>
-      <ShowDrives>Show Drives</ShowDrives>
+      <ShowDrives>Sürücüleri Göster</ShowDrives>
     </DrivesArea>
   </UIDrivesArea>
   <UIJcrExplorerEditForm>
     <msg>
-      <fields-saved>All field values saved.</fields-saved>
-      <fields-cancelled>All field values canceled.</fields-cancelled>
+      <fields-saved>Tüm alan değerleri kaydedildi.</fields-saved>
+      <fields-cancelled>Tüm alan değerlerini iptal edildi.</fields-cancelled>
     </msg>
   </UIJcrExplorerEditForm>
   <UIDocumentForm>
   <msg>
-  <confirm-close>The changes you made will be lost if you close this form.</confirm-close>
-  <confirm-changeType>The changes you made will be lost if you change the content type.</confirm-changeType>
-  <confirm-navigate>The changes you made will be lost if you navigate away from this page.</confirm-navigate>
+  <confirm-close>Bu formu kapatırsanız, yaptığınız değişiklikler kaybolacak.</confirm-close>
+  <confirm-changeType>İçerik türünü değiştirirseniz, yaptığınız değişiklikler kaybolacak.</confirm-changeType>
+  <confirm-navigate>Bu sayfadan ayrılırsanız, yaptığınız değişiklikler kaybolacak.</confirm-navigate>
   </msg>
   </UIDocumentForm>
   <UploadFileMimeTypesValidator>
     <msg>
-      <wrong-mimetype>Mime type {0} is not allowed for field {1}. Please upload another file</wrong-mimetype>
+      <wrong-mimetype>{0} MIME türü  {1} alanı için izin verilmez. Lütfen başka bir dosya yükleyin</wrong-mimetype>
     </msg>
   </UploadFileMimeTypesValidator>
   <lifecyclePhase>
     <label>
-    <no>No</no>
-  <yes>Yes</yes>
-  <true>True</true>
-  <false>False</false>
-  <Electronic>Electronic</Electronic>
+    <no>Hayır</no>
+  <yes>Evet</yes>
+  <true>Doğru</true>
+  <false>Yanlış</false>
+  <Electronic>Elektronik</Electronic>
   <Paper>Paper</Paper>
-  <NONE>None</NONE>
+  <NONE>Hiçbiri</NONE>
   <CLASSIFIED>Classified</CLASSIFIED>
-  <UNCLASSIFIED>Unclassified</UNCLASSIFIED>
-  <NOCONTRACT>No Contract</NOCONTRACT>
-  <one-minute>One Minute</one-minute>
-  <hourly>Hourly</hourly>
-  <daily>Daily</daily>
-  <quarterly>Quarterly</quarterly>
-  <yearly>Yearly</yearly>
-  <ten-years>Ten Years</ten-years>
-  <read>User Action</read>
-  <schedule>Scheduler</schedule>
-  <node_added>Content Addition</node_added>
-  <node_removed>Content Removal</node_removed>
-  <property_added>Property Addition</property_added>
-  <property_removed>Property Removal</property_removed>
-  <property_changed>Property Modification</property_changed>
+  <UNCLASSIFIED>Sınıflandırılmamış</UNCLASSIFIED>
+  <NOCONTRACT>Sözleşme Yok</NOCONTRACT>
+  <one-minute>Bir Dakika</one-minute>
+  <hourly>Saatlik</hourly>
+  <daily>Günlük</daily>
+  <quarterly>Üç Aylık</quarterly>
+  <yearly>Yıllık</yearly>
+  <ten-years>On Yıllık</ten-years>
+  <read>Kullanıcı Eylemi</read>
+  <schedule>Zamanlayıcı</schedule>
+  <node_added>İçerik Ekleme</node_added>
+  <node_removed>İçerik Kaldırma</node_removed>
+  <property_added>Özellik Ekleme</property_added>
+  <property_removed>Özellik Kaldırma</property_removed>
+  <property_changed>Özellik Değişikliği</property_changed>
 </label>
   </lifecyclePhase>
   <UIPopupMenu>
   <msg>
-<can-not-remove-locked-node>Node {0} is locked. You cannot move it to the Trash.</can-not-remove-locked-node>
-<can-not-remove-checked-in-node>Node {0} or its parent is checked in. You cannot move it to the Trash.</can-not-remove-checked-in-node>
-<access-denied-to-delete>Access denied. You cannot move node {0} to the Trash.</access-denied-to-delete>
+<can-not-remove-locked-node>{0} Düğümü kilitli. Çöp kutusuna taşıyamazsınız.</can-not-remove-locked-node>
+<can-not-remove-checked-in-node>{0} Düğümü veya üstü kontrol ediliyor. Çöp kutusuna taşıyamazsınız.</can-not-remove-checked-in-node>
+<access-denied-to-delete>Erişim engellendi. {0} Düğümü Çöp Kutusu'na taşınamıyor.</access-denied-to-delete>
   </msg>
   </UIPopupMenu>
   <UIPropertyForm>
   <msg>
-  <unknown-error>An error occurred while editing this property.</unknown-error>
+  <unknown-error>Bu özelliği düzenleme sırasında bir hata oluştu.</unknown-error>
     </msg>
   </UIPropertyForm>
   <UIWatchDocumentForm>
     <msg>
-      <node-is-locked>This node is locked. You cannot watch it.</node-is-locked>
-      <unknown-error>Some errors have occurred. You cannot watch this node.</unknown-error>
+      <node-is-locked>Bu düğüm kilitli. Bunu izleme yapamazsınız.</node-is-locked>
+      <unknown-error>Bazı hatalar oluştu. Bu düğümü izleyemezsiniz.</unknown-error>
     </msg>
   </UIWatchDocumentForm>   
   <UIActionForm>
     <msg>
-      <xss-vulnerability-character>Field '{0}' contains XSS vulnerability characters</xss-vulnerability-character>
+      <xss-vulnerability-character>'{0}' Alanı XSS açığı karakterler içeriyor</xss-vulnerability-character>
     </msg>
   </UIActionForm>
   <UIMultiUpload>
   <label>
-    <AbortAll>Abort all</AbortAll>
-    <AbortAllFiles>Abort all Files</AbortAllFiles>
-    <MaxFileSize>Maximum file size is</MaxFileSize>
-    <InvalidCharacters>Invalid characters will be changed by '-'</InvalidCharacters>
-    <DropFileMessage>Drop your files here in the current folder</DropFileMessage>
+    <AbortAll>Tümünü iptal et</AbortAll>
+    <AbortAllFiles>Tüm dosyaları iptal</AbortAllFiles>
+    <MaxFileSize>En büyük dosya boyutu</MaxFileSize>
+    <InvalidCharacters>Geçersiz karakterler tarafından değiştirildi '-'</InvalidCharacters>
+    <DropFileMessage>Geçerli klasördeki dosyalarınızı buraya bırakın</DropFileMessage>
     <Close>Kapat</Close>
-    <in>in</in>
-    <MaxFileSizeAlert>The file size exceeds the size limit of</MaxFileSizeAlert>
-    <Waiting>Waiting</Waiting>
-    <Error>Error</Error>
-    <or>or</or>
-    <AlreadyInUse>Already in use</AlreadyInUse>
-    <Keep>Keep both</Keep>
-    <Replace>Replace</Replace>
-    <Canceled>Canceled</Canceled>
+    <in>içinde</in>
+    <MaxFileSizeAlert>Dosya boyutu boyut sınırını aşıyor</MaxFileSizeAlert>
+    <Waiting>Bekleyen</Waiting>
+    <Error>Hata</Error>
+    <or>ya da</or>
+    <AlreadyInUse>Zaten kullanımda</AlreadyInUse>
+    <Keep>Her ikisinide koru</Keep>
+    <Replace>Değiştir</Replace>
+    <Canceled>İptal edildi</Canceled>
     <Cancel>İptal</Cancel>
-    <AbortAllConfirmation>Do you want to abort all files in progress?</AbortAllConfirmation>
+    <AbortAllConfirmation>Devam eden tüm dosyaları durdurmak istiyor musunuz?</AbortAllConfirmation>
   </label>
   </UIMultiUpload>
   <UIDocumentNodeList>
   <label>
-  <CreatedOn>Created on</CreatedOn>
-  <Updated>Updated</Updated>
-  <by>by</by>
-  <you>you</you>
+  <CreatedOn>Tarihinde oluşturulmuş</CreatedOn>
+  <Updated>Güncelleme</Updated>
+  <by>tarafından</by>
+  <you>sen</you>
   </label>
   </UIDocumentNodeList>
   <FileView>
     <label>
-      <name>Name</name>
-      <date>Date</date>
-      <size>Size</size>
-      <sortBy>Sort by:</sortBy>
-      <filesAreSelected>Files are selected.</filesAreSelected>
-      <ClearSelection>Clear selection</ClearSelection>
+      <name>Ad</name>
+      <date>Tarih</date>
+      <size>Boyut</size>
+      <sortBy>Sıralama:</sortBy>
+      <filesAreSelected>Dosyalar seçildi.</filesAreSelected>
+      <ClearSelection>Seçimi Temizle</ClearSelection>
       <more>Daha</more>
     </label>
   </FileView>
   <UIPropertyForm>
   <msg>
-  <property-name-incorrect>The property name is incorrect, please enter another value for it!</property-name-incorrect>
+  <property-name-incorrect>Özellik adı yanlıştır, bunun için başka bir değer giriniz!</property-name-incorrect>
     </msg>
   </UIPropertyForm>
   <!--
@@ -3142,6 +3158,6 @@
   ###################################################################################
   -->
   <VersionException>
-  <msg>Cannot modify documents that are being checked in.</msg>  
+  <msg>Kontrol edilen belgeleri değiştiremezsiniz.</msg>  
   </VersionException>
 </bundle>

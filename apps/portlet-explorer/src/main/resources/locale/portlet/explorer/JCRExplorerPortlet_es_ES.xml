@@ -104,6 +104,24 @@
 
   <!--
   #############################################################################
+  #             org.exoplatform.ecm.webui.component.explorer.UIDrivesArea  #
+  #############################################################################
+  -->
+  <UIDrivesBrowser>
+    <title>
+      <PersonalDrives>Personal drives</PersonalDrives>
+      <GroupDrives>Group drives</GroupDrives>
+      <GeneralDrives>General drives</GeneralDrives>
+    </title>
+    <msg>
+      <no-view-found>There is no view available according to your access permissions in drive '{0}'.</no-view-found>
+      <access-denied>Access denied. You may not have permission in the workspace of drive '{0}'.</access-denied>
+      <workspace-not-exist>Drive '{0}' was stored in one unrecognized workspace. Please reconfigure this drive.</workspace-not-exist>
+    </msg>
+  </UIDrivesBrowser>
+
+  <!--
+  #############################################################################
   #             org.exoplatform.ecm.webui.component.explorer.UITreeExplorer    #
   #############################################################################
   -->
@@ -650,7 +668,6 @@
       <remove-property>¿Está seguro de eliminar esta propiedad?</remove-property>
     </confirm>
     <header>
-      <icon/>
       <name>Nombre</name>
       <multiValue>Valor Múltiple</multiValue>
       <value>Valor</value>
@@ -1457,7 +1474,7 @@
       <filetype-error>No se puede importar el archivo cargado. Tal vez, el archivo .xml no es válido.</filetype-error>
       <mimetype-invalid>Sólo los archivos .xml o .zip son compatibles para importar.</mimetype-invalid>
       <access-denied>¡Acceso denegado! No está autorizado a importar allí.</access-denied>
-      <constraint-violation-exception>No se puede importar el nodo. Los datos importados son incorrectos o el tipo de nodo '{0}' no puede ser un subnodo '{0}'.</constraint-violation-exception>
+      <constraint-violation-exception>Impossible to import data. The type '{0}' is not allowed in this location.</constraint-violation-exception>
       <item-exists-exception>Un nodo entrante referenciable tiene el mismo UUID como un nodo existente en el área de trabajo.</item-exists-exception>
     </msg>
   </UIImportNode>
@@ -3019,7 +3036,6 @@
   </UIJCRExplorerPortlet>
   <UIDrivesArea>
     <DrivesArea>
-      <allDrives>Haga clic en el botón para mostrar unidades en la barra de acción para mostrar/ ocultar una lista de unidades.</allDrives>
       <ShowDrives>Mostrar unidades</ShowDrives>
     </DrivesArea>
   </UIDrivesArea>

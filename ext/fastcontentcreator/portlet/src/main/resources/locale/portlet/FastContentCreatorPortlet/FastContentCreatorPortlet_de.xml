@@ -27,14 +27,12 @@
       <UIFCCWorkspaceFormSelectBox>Wählen Sie den Arbeitsbereich</UIFCCWorkspaceFormSelectBox>
       <UIFCCTemplateField>Vorlagenoptionen</UIFCCTemplateField>
       <UIFCCLocationFormInputAction>Zu speichernder Ort</UIFCCLocationFormInputAction>
-      <UIFCCLocationFormStringInput/>
       <UIFCCTemplateFormSelectBox>Vorlage auswählen</UIFCCTemplateFormSelectBox>
       <UIFCCSaveFormStringInput>Die Schaltfläche "Speichern" personalisieren</UIFCCSaveFormStringInput>
       <UIFCCMessageFormTextareaInput>Benutzerdefinierte Nachricht</UIFCCMessageFormTextareaInput>
       <UIFCCRedirectFormCheckboxInput>Umleitung:</UIFCCRedirectFormCheckboxInput>
       <UIFCCRedirectPathFormStringInput>Umleitungspfad:</UIFCCRedirectPathFormStringInput>
       <UIFCCActionField>Aktionen</UIFCCActionField>
-      <UIFCCActionList/>
     </label>
     <msg>
       <save-successfully>Portlet-Einstellungen erfolgreich gespeichert.</save-successfully>

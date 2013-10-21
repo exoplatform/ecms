@@ -61,7 +61,7 @@
 
   <UIPageSelectorPanel>
     <header>
-      <path>Path</path>
+      <path>Yol</path>
       <action>Eylem</action>
     </header>
     <msg>
@@ -100,7 +100,7 @@
       <Media>Medya</Media>
     </selectBoxValues>
     <msg>
-      <node-checkout>The node is checked out. Please check the node before performing this function.</node-checkout>
+      <node-checkout>Düğüm kaydı kapanacak. Bu işlev gerçekleştirmeden önce düğümü kontrol edin.</node-checkout>
     </msg>
   </UIContentBrowsePanelOne>
 
@@ -136,8 +136,8 @@
 
   <UISelectedContentGrid>
     <label>
-      <name>Name</name>
-      <add>Add</add>
+      <name>Adı</name>
+      <add>Ekle</add>
       <delete>Sil</delete>
     </label>
     <msg>
@@ -155,57 +155,57 @@
 
   <UIContentBrowsePathSelector>
     <header>
-      <name>Name</name>
+      <name>Adı</name>
       <publicationstate>Yayın Durumu</publicationstate>
       <action>Eylem</action>
     </header>
     <msg>
-      <child-not-found>No Content Found</child-not-found>
+      <child-not-found>İçerik Bulunamadı</child-not-found>
     </msg>
   </UIContentBrowsePathSelector>
 
   <UIContentBrowsePathSelectorFolder>
     <header>
-      <name>Name</name>
+      <name>Adı</name>
       <publicationstate>Yayın Durumu</publicationstate>
       <action>Eylem</action>
     </header>
     <msg>
-      <child-not-found>No Folder Found</child-not-found>
+      <child-not-found>Klasör bulunamadı</child-not-found>
     </msg>
   </UIContentBrowsePathSelectorFolder>
 
   <UIContentSearchForm>
     <title>
-      <Location>Site Name</Location>
+      <Location>Site Adı</Location>
       <SearchByName>İsme göre arama</SearchByName>
-      <Fulltext>A word or phrase in context</Fulltext>
-      <Property>Property</Property>
-      <Contain>Contain</Contain>
-      <FromDate>From Date</FromDate>
-      <ToDate>To Date</ToDate>
-      <DocumentType>Document Type</DocumentType>
+      <Fulltext>Bir sözcük veya tümce bağlamında</Fulltext>
+      <Property>Özelliği</Property>
+      <Contain>İçeren</Contain>
+      <FromDate>Başlangıç Tarihi</FromDate>
+      <ToDate>Bitiş Tarihi</ToDate>
+      <DocumentType>Belge Türü</DocumentType>
     </title>
     <tooltip>
-      <AddMetadataType>Add Property</AddMetadataType>
-      <AddNodeType>Add Node Type</AddNodeType>
+      <AddMetadataType>Özellik Ekle</AddMetadataType>
+      <AddNodeType>Düğüm Türü Ekle</AddNodeType>
     </tooltip>    
     <label>
       <option>
-        <CREATED>Created</CREATED>
-        <MODIFIED>Modified</MODIFIED>
+        <CREATED>Oluşturma</CREATED>
+        <MODIFIED>Değiştirme</MODIFIED>
       </option>
     </label>
     <action>
-      <SearchWebContent>Search</SearchWebContent>
+      <SearchWebContent>Ara</SearchWebContent>
     </action>
     <msg>
-      <time-to-late>The searching time is too long.</time-to-late>
-      <empty-field>Please input a valid keyword for search.</empty-field>
-      <invalid-format>Invalid date/time format in field '{0}'.</invalid-format>
-      <invalid-date>"To Date" must be later than "From Date"</invalid-date>
-      <invalid-nodeType>The node type "{0}" is invalid. Please check again.</invalid-nodeType>
-      <invalid-keyword>The keyword is invalid. Some characters are not supported.</invalid-keyword>
+      <time-to-late>Arama süresi çok uzun.</time-to-late>
+      <empty-field>Lütfen arama için  geçerli bir anahtar kelime girin.</empty-field>
+      <invalid-format>'{0}' Alanda geçersiz tarih/saat biçimindedir.</invalid-format>
+      <invalid-date>"Bitiş Tarihi" "Başlangıç Tarihinden" sonra olmalıdır</invalid-date>
+      <invalid-nodeType>Düğüm türü "{0}" geçersiz. Lütfen tekrar kontrol edin.</invalid-nodeType>
+      <invalid-keyword>Anahtar geçersiz. Bazı karakterler desteklenmez.</invalid-keyword>
     </msg>
   </UIContentSearchForm>
 
@@ -217,18 +217,18 @@
 
   <UIContentPropertySelector>
     <action>
-      <Add>Add</Add>
+      <Add>Ekle</Add>
       <Cancel>İptal</Cancel>
     </action>
     <label>
-      <metadataType>Metadata Type</metadataType>
-      <property_select>Property</property_select>
+      <metadataType>Meta veri türü</metadataType>
+      <property_select>Özelliği</property_select>
     </label>
   </UIContentPropertySelector>
 
   <WebContentNodeTypePopup>
     <title>
-      <UIContentNodeTypeSelector>Node Type Selector</UIContentNodeTypeSelector>
+      <UIContentNodeTypeSelector>Düğüm Türü Seçici</UIContentNodeTypeSelector>
     </title>
   </WebContentNodeTypePopup>
 
@@ -272,7 +272,6 @@
   <UIPermissionManager>
     <label>
       <UIPermissionInputSetWithAction>İzni</UIPermissionInputSetWithAction>
-      <UIPermissionStringInput/>
       <UIAccessibleCheckboxInput>Erişim Hakları</UIAccessibleCheckboxInput>
       <UIEditableCheckboxInput>Düzenleme Hakları</UIEditableCheckboxInput>
     </label>
@@ -297,10 +296,10 @@
       <confirm-delete-permission>Bu izin silmek istediğinizden emin misiniz?</confirm-delete-permission>
       <no-permission-remove>İzniniz yok.</no-permission-remove>
       <access-denied>Erişim Engellendi.</access-denied>
-      <node-locked>The path element {0} or one of its parents is locked.</node-locked>
+      <node-locked>{0} yolu öğesi yolu veya bunun ana öğelerinden biri kilitli.</node-locked>
       <userOrGroup-required>Bir kullanıcı veya grup seçmeniz gerekir.</userOrGroup-required>
       <checkbox-require>Hakları ayarlamanız gerekir.</checkbox-require>
-      <node-checkedin>You must check out first.</node-checkedin>
+      <node-checkedin>Önce kontrol gerekir.</node-checkedin>
     </msg>
   </UIPermissionManagerGrid>
 
@@ -357,53 +356,53 @@
     <label>
       <SingleContentViewer>Tek içerik Görüntüleyicisi</SingleContentViewer>
       <ContentListViewer>İçerik Listesi Görüntüleyicisi</ContentListViewer>
-      <Search>Search</Search>
-      <Sitemap>Site Map</Sitemap>
-      <TwoColumnsLayout>Two-column Layout</TwoColumnsLayout>
-      <ThreeColumnsLayout>Three-column Layout</ThreeColumnsLayout>
-      <TwoRowsLayout>Two-row Layout</TwoRowsLayout>
-      <ThreeRowsLayout>Three-row Layout</ThreeRowsLayout>
-      <TwoTabsLayout>Two-tab layout</TwoTabsLayout>
-      <ThreeTabsLayout>Three-tab Layout</ThreeTabsLayout>
-      <TwoColumnsOneRowLayout>Two-column &amp; One-row Layout</TwoColumnsOneRowLayout>
-      <OneRowTwoColumnsLayout>One-row &amp; Two-column Layout</OneRowTwoColumnsLayout>
-      <ThreeRowsTwoColumnsLayout>Three-row &amp; Two-column Layout</ThreeRowsTwoColumnsLayout>
+      <Search>Ara</Search>
+      <Sitemap>Site Haritası</Sitemap>
+      <TwoColumnsLayout>İki Sütun Yerleşimi</TwoColumnsLayout>
+      <ThreeColumnsLayout>Üç Sütun Yerleşimi</ThreeColumnsLayout>
+      <TwoRowsLayout>İki Satıra Yerleşimi</TwoRowsLayout>
+      <ThreeRowsLayout>Üç Satır Yerleşimi</ThreeRowsLayout>
+      <TwoTabsLayout>İki Sekme Yerleşimi</TwoTabsLayout>
+      <ThreeTabsLayout>Üç Sekme Yerleşimi</ThreeTabsLayout>
+      <TwoColumnsOneRowLayout>İki Sütunlu &amp; Bir Satır Yerleşimi</TwoColumnsOneRowLayout>
+      <OneRowTwoColumnsLayout>Bir satır &amp; iki sütun yerleşimi</OneRowTwoColumnsLayout>
+      <ThreeRowsTwoColumnsLayout>Üç satırlık &amp; iki sütun yerleşimi</ThreeRowsTwoColumnsLayout>
     </label>
   </UIWizardPageSelectLayoutForm>
 
   <Signin>
     <welcome>Hoş Geldiniz</welcome>
-    <login>Login</login>
-    <logout>Logout</logout>
+    <login>Uturum Aç</login>
+    <logout>Oturumu Kapat</logout>
     <language>Dili Değiştir</language>
     <register>Kayıt Ol</register>
   </Signin>
   <UIDriveForm>
 <label>
-<wcm-category-view>Category View</wcm-category-view>
-<wcm-view>WCM Content View</wcm-view>
+<wcm-category-view>Kategori Görünümü</wcm-category-view>
+<wcm-view>WCM İçerik Görünümü</wcm-view>
 </label>
   </UIDriveForm>
   
   <ContentSelector>
     <title>
-      <PersonalDrives>Personal Drives</PersonalDrives>
-      <GeneralDrives>General Drives</GeneralDrives>
-      <GroupDrives>Group Drives</GroupDrives>
-      <Private>Private</Private>
+      <PersonalDrives>Kişisel Sürücüler</PersonalDrives>
+      <GeneralDrives>Genel Sürücüler</GeneralDrives>
+      <GroupDrives>Grup Sürücüler</GroupDrives>
+      <Private>Özel</Private>
       <Public>Genel</Public>
-      <BackupCenter>Backup Center</BackupCenter>
-      <CategorizedDocumentsCenter>Categorized Documents Center</CategorizedDocumentsCenter>
-      <CollaborationCenter>Collaboration Center</CollaborationCenter>
-      <DigitalAssetsManagementCenter>Digital Assets Management Center</DigitalAssetsManagementCenter>
-      <DMSAdministration>DMS Administration</DMSAdministration>
-      <DocumentsManagementCenter>Documents Management Center</DocumentsManagementCenter>
-      <LiveDocumentsCenter>Live Documents Center</LiveDocumentsCenter>
-      <PendingDocumentsCenter>Pending Documents Center</PendingDocumentsCenter>
-      <RecordsManagementCenter>Records Management Center</RecordsManagementCenter>
-      <SharedUsersSpace>Shared Users Space</SharedUsersSpace>
-      <Systemfiles>System Files</Systemfiles>
-      <ValidationRequestsDocumentsCenter>Validation Requests Documents Center</ValidationRequestsDocumentsCenter>
+      <BackupCenter>Yedek Merkezi</BackupCenter>
+      <CategorizedDocumentsCenter>Kategorilere Ayrılan Belge Merkezi</CategorizedDocumentsCenter>
+      <CollaborationCenter>İşbirliği Merkezi</CollaborationCenter>
+      <DigitalAssetsManagementCenter>Dijital Varlık Yönetimi Merkezi</DigitalAssetsManagementCenter>
+      <DMSAdministration>BYS Yönetimi</DMSAdministration>
+      <DocumentsManagementCenter>Belge Yönetim Merkezi</DocumentsManagementCenter>
+      <LiveDocumentsCenter>Canlı Belge Merkezi</LiveDocumentsCenter>
+      <PendingDocumentsCenter>Bekleyen Belge Merkezi</PendingDocumentsCenter>
+      <RecordsManagementCenter>Kayıt Yönetim Merkezi</RecordsManagementCenter>
+      <SharedUsersSpace>Paylaşılan Kullanıcı Alanı</SharedUsersSpace>
+      <Systemfiles>Sistem Dosyaları</Systemfiles>
+      <ValidationRequestsDocumentsCenter>Doğrulama İstekleri Belge Merkezi</ValidationRequestsDocumentsCenter>
       <ManagedSites>Site Yönetimi</ManagedSites>
       <SharedSite>Paylaşılan Site</SharedSite>
     </title>
@@ -411,30 +410,30 @@
   
   <UICategoryNavigationTargetPathPopupWindow>
     <title>
-      <UIPageSelector>Page Selector</UIPageSelector>
+      <UIPageSelector>Sayfa Seçici</UIPageSelector>
     </title>
   </UICategoryNavigationTargetPathPopupWindow>
   
   <UIDocumentInfo>
     <msg>
-      <access-denied-exception>Access denied. You maybe not have read permission, or the node may have been removed or changed.</access-denied-exception>
+      <access-denied-exception>Erişim engellendi. Belki de okuma izniniz yok veya düğüm kaldırıldı veya değiştirildi.</access-denied-exception>
     </msg>
   </UIDocumentInfo>
   <UIPortalApplication>
     <title>
-      <abort>Abort</abort>
+      <abort>İptal</abort>
     </title>
   </UIPortalApplication>    
   
   <CategoryNavigationTemplate>
   <label>
-  <home>Ana sayfa</home>
+  <home>Ana Sayfa</home>
   </label>
   </CategoryNavigationTemplate>
   
   <Breadcrumb>
   <label>
-  <home>Ana sayfa</home>
+  <home>Ana Sayfa</home>
   </label>  
   </Breadcrumb>
 </bundle>

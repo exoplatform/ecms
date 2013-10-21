@@ -728,6 +728,10 @@
       <label>Name</label>
 <action>Actions</action>
     </header>
+    <title>
+      <Edit>Modifica</Edit>
+      <Delete>Delete</Delete>
+    </title>
     <action>
       <AddAction>Aggiungi</AddAction>
     </action>
@@ -845,6 +849,10 @@
   </EditPopup>
 
 <UITabList>
+                  <title>
+                    <Edit>Modifica</Edit>
+                    <Delete>Delete</Delete>
+                  </title>       
  <header>
   <tabName>Scheda</tabName>
   <localizeButtons>Description</localizeButtons>
@@ -875,6 +883,9 @@
 </UIViewPermissionList>
 
 <UIViewPermissionList>
+                         <title>
+                           <Delete>Delete</Delete>
+                         </title>
  <header>
 <friendlyPermission>Vedi Permessi</friendlyPermission>
      <action>Azione</action>
@@ -1565,6 +1576,10 @@
 </UITabPane>
 
   <UICLVTemplateList>
+    <title>
+      <Edit>Modifica</Edit>
+      <Delete>Delete</Delete>
+    </title>
     <header>
       <title>Name</title>
       <action>Azione</action>
@@ -1589,6 +1604,10 @@
       <action>Azione</action>
       <template>Template</template>
     </header>
+    <title>
+      <Edit>Modifica</Edit>
+      <Delete>Delete</Delete>
+    </title>
     <action>
       <AddTemplate>Aggiungi Template</AddTemplate>
 <Edit>Modifica</Edit>
@@ -1962,6 +1981,11 @@
       <tagHTML>Stile Tag</tagHTML>
       <action>Azione</action>
     </header>
+    <title>
+      <Edit>Modifica</Edit>
+      <Delete>Delete</Delete>
+      <Remove>Remove</Remove>
+    </title>
     <action>
       <AddStyle>Aggiungi Stile</AddStyle>
     </action>
@@ -2431,10 +2455,10 @@
     <title>Aggiungi Permesso</title>
     <action>
       <Save>Salva</Save>
+      <Add>Add</Add>
     </action>
     <label>
       <userOrGroup>Membership:</userOrGroup>
-      <permission/>
     </label>
     <msg>
       <userOrGroup-alreadyExists>La membership esiste già. Selezionane un'altra.</userOrGroup-alreadyExists>

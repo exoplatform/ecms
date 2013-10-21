@@ -104,6 +104,24 @@
 
   <!--
   #############################################################################
+  #             org.exoplatform.ecm.webui.component.explorer.UIDrivesArea  #
+  #############################################################################
+  -->
+  <UIDrivesBrowser>
+    <title>
+      <PersonalDrives>Ổ đĩa Cá nhân</PersonalDrives>
+      <GroupDrives>Ổ đĩa Nhóm</GroupDrives>
+      <GeneralDrives>Ổ đĩa chung</GeneralDrives>
+    </title>
+    <msg>
+      <no-view-found>Bạn không có quyền truy cập bất kì giao diện xem nào của ổ đĩa '{0}'.</no-view-found>
+      <access-denied>Truy cập bị từ chối. Có thể bạn không có quyền trong không gian làm việc của ổ đĩa '{0}'.</access-denied>
+      <workspace-not-exist>Không thể nhận biết được không gian lưu trữ của ổ đĩa '{0}'. Vui lòng cấu hình lại ổ đĩa này.</workspace-not-exist>
+    </msg>
+  </UIDrivesBrowser>
+
+  <!--
+  #############################################################################
   #             org.exoplatform.ecm.webui.component.explorer.UITreeExplorer    #
   #############################################################################
   -->
@@ -650,7 +668,6 @@
       <remove-property>Bạn có chắc chắn muốn gỡ bỏ thuộc tính này không?</remove-property>
     </confirm>
     <header>
-      <icon/>
       <name>Tên</name>
       <multiValue>Đa giá trị</multiValue>
       <value>Giá trị</value>
@@ -1457,7 +1474,7 @@
       <filetype-error>Không thể nhập tệp tin đã tải lên. Tệp tin .xml này có thể không hợp lệ.</filetype-error>
       <mimetype-invalid>Bạn chỉ có thể nhập các tệp tin dạng .xml hoặc .zip.</mimetype-invalid>
       <access-denied>Truy nhập bị từ chối. Bạn không được phép nhập ở đây.</access-denied>
-      <constraint-violation-exception>Không thể nhập nút do dữ liệu không chính xác hoặc do kiểu nút '{0}' không cho phép phép có kiểu con là '{0}'.</constraint-violation-exception>
+      <constraint-violation-exception>Không thể nhập dữ liệu. Loại '{0}' không được cho phép trong vị trí này.</constraint-violation-exception>
       <item-exists-exception>Một nút trong quá trình nhập có UUID trùng với một nút hiện đang tồn tại trong hệ thống.</item-exists-exception>
     </msg>
   </UIImportNode>
@@ -3019,7 +3036,6 @@
   </UIJCRExplorerPortlet>
   <UIDrivesArea>
     <DrivesArea>
-      <allDrives>Nhấp vào nút Hiển thị ổ đĩa trên thanh hành động để hiển thị/ẩn danh sách các ổ đĩa.</allDrives>
       <ShowDrives>Hiển thị các ổ đĩa</ShowDrives>
     </DrivesArea>
   </UIDrivesArea>

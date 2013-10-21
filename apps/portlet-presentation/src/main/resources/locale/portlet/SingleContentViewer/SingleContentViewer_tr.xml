@@ -2,118 +2,118 @@
 <bundle>
   <UIPresentationContainer>
     <title>
-      <QuickEdit>Edit in Content Explorer</QuickEdit>
-      <print>Print This Page</print>
-      <FastPublish>Publish</FastPublish>
+      <QuickEdit>İçerik Gezgini İçinde Düzenle</QuickEdit>
+      <print>Bu sayfayı yazdır</print>
+      <FastPublish>Yayımla</FastPublish>
     </title>
     <label>
-      <draft>Draft</draft>
-      <print>Print</print>
+      <draft>Taslak</draft>
+      <print>Yazdır</print>
     </label>
     <msg>
-      <no-content>No contents found.</no-content>
-      <internal-server-error>An error occurred while requesting the data from the sever.</internal-server-error>
-      <empty-title-error>Please specify the new title.</empty-title-error>
+      <no-content>İçerik Bulunamadı.</no-content>
+      <internal-server-error>Sunucudan veri alışverişi sırasında hata oluştu.</internal-server-error>
+      <empty-title-error>Lütfen yeni başlık belirtin.</empty-title-error>
     </msg>
   </UIPresentationContainer>
   <CorrectContentSelectorPopupWindow>
     <title>
-      <UIContentSelectorOne>Select Content</UIContentSelectorOne>
+      <UIContentSelectorOne>İçeriği Seçin</UIContentSelectorOne>
     </title>
   </CorrectContentSelectorPopupWindow>
   <UISingleContentViewerPortlet>
     <msg>
-      <AccessControlException>You do not have permission to access the Edit mode.</AccessControlException>
+      <AccessControlException>Düzenleme yetkisine sahip değilsiniz.</AccessControlException>
     </msg>
   </UISingleContentViewerPortlet>
   <UISCVContextualRadioBox>
     <label>
-      <Enable>Enabled</Enable>
-      <Disable>Disabled</Disable>
+      <Enable>Etkin</Enable>
+      <Disable>Devre Dışı</Disable>
     </label>
   </UISCVContextualRadioBox>
   <UIPreferencesPopupWindows>
     <title>
-      <UISCVPreferences>Content Detail Preferences</UISCVPreferences>
+      <UISCVPreferences>İçerik Detay Tercihleri</UISCVPreferences>
     </title>
   </UIPreferencesPopupWindows>
   <UISCVPreferences>
     <action>
       <Save>Kaydet</Save>
-      <Abort>Abort</Abort>
+      <Abort>İptal</Abort>
       <Cancel>İptal</Cancel>
-      <Print>Print</Print>
+      <Print>Yazdır</Print>
       <Close>Kapat</Close>
     </action>
-    <title>Content Detail Preferences</title>
+    <title>İçerik Detay Tercihleri</title>
     <label>
-      <Back>Back to previous page</Back>
+      <Back>Önceki sayfaya geri dön</Back>
       <Edit>Düzenle</Edit>
-      <Preferences>Preferences</Preferences>
-      <Title>Content Detail Preferences</Title>
-      <UISCVShowTitleConfigurationCheckBox>Show Title</UISCVShowTitleConfigurationCheckBox>
-      <UISCVShowDateConfigurationCheckBox>Show Date</UISCVShowDateConfigurationCheckBox>
-      <UISCVShowOptionBarConfigurationCheckBox>Show Option Bar</UISCVShowOptionBarConfigurationCheckBox>
-      <DisplaySettingBlock>Display Settings</DisplaySettingBlock>
-      <ContentPathBlock>Content Selection</ContentPathBlock>
-      <UISCVConfigItemPathFormInputSet>Content Path</UISCVConfigItemPathFormInputSet>
-    <UISCVContentPathConfigurationInputBox>Content Path</UISCVContentPathConfigurationInputBox>
-      <Advance>Advanced</Advance>
-      <ContextCaption>Dynamic Navigation</ContextCaption>
-      <UISCVContextualRadioBox>Contextual Content</UISCVContextualRadioBox>
-      <UISCVParameterInputBox>by</UISCVParameterInputBox>
-      <PrintSettingBlock>Print Settings</PrintSettingBlock>
-      <UISCVPrintPageParameter>with</UISCVPrintPageParameter>
-      <UISCVConfigPrintPageFormInputSet>Show in Page</UISCVConfigPrintPageFormInputSet>
-      <LockStatus>Lock</LockStatus>
-      <CacheManagement>Content Visibility</CacheManagement>
-      <UISCVCacheRadioBox>Share Content</UISCVCacheRadioBox>
+      <Preferences>Tercihler</Preferences>
+      <Title>İçerik Detay Tercihleri</Title>
+      <UISCVShowTitleConfigurationCheckBox>Başlığı Göster</UISCVShowTitleConfigurationCheckBox>
+      <UISCVShowDateConfigurationCheckBox>Tarihi Göster</UISCVShowDateConfigurationCheckBox>
+      <UISCVShowOptionBarConfigurationCheckBox>Seçenek Çubuğunu Göster</UISCVShowOptionBarConfigurationCheckBox>
+      <DisplaySettingBlock>Ayarları Görüntüle</DisplaySettingBlock>
+      <ContentPathBlock>İçerik Seçimi</ContentPathBlock>
+      <UISCVConfigItemPathFormInputSet>İçerik Yolu</UISCVConfigItemPathFormInputSet>
+    <UISCVContentPathConfigurationInputBox>İçerik Yolu</UISCVContentPathConfigurationInputBox>
+      <Advance>Gelişmiş</Advance>
+      <ContextCaption>Dinamik Navigasyon</ContextCaption>
+      <UISCVContextualRadioBox>Bağlamsal İçerik</UISCVContextualRadioBox>
+      <UISCVParameterInputBox>tarafından</UISCVParameterInputBox>
+      <PrintSettingBlock>Yazdırma Ayarları</PrintSettingBlock>
+      <UISCVPrintPageParameter>ile</UISCVPrintPageParameter>
+      <UISCVConfigPrintPageFormInputSet>Sayfada Göster</UISCVConfigPrintPageFormInputSet>
+      <LockStatus>Kilitle</LockStatus>
+      <CacheManagement>İçerik Görünürlüğü</CacheManagement>
+      <UISCVCacheRadioBox>İçeriği Paylaş</UISCVCacheRadioBox>
     </label>
     <help>
-      <ContentPathBlock>Select the content you want to show. This default content will be replaced dynamically if you activate the Dynamic Navigation option (see the Advanced mode below).</ContentPathBlock>
-      <DisplaySettingBlock>You can show or hide the Option bar used to show the print link. Title and Date displays are also optional.</DisplaySettingBlock>
-      <ContextualHelp>Activates Dynamic Navigation. The content can be changed dynamically by another URL-based parameter.</ContextualHelp>
-      <ParameterHelp>This parameter will be used to get the content if the Dynamic Navigation is activated.</ParameterHelp>
+      <ContentPathBlock>Göstermek istediğiniz içeriği seçin. Dinamik navigasyon seçeneğini etkinleştirirseniz bu varsayılan içerik dinamik olarak değiştirilir (Gelişmiş mod için aşağıya bakınız).</ContentPathBlock>
+      <DisplaySettingBlock>Yazdırma kısayolunu görüntüleyebilmek için Seçenek çubuğunu gösterebilir yada gizleyebilirsiniz. Başlık ve Tarihi görüntelemek isteğe bağlıdır.</DisplaySettingBlock>
+      <ContextualHelp>Dinamik navigasyonu etkinleştirir. İçerik, başka bir URL'ye bağlı parametre tarafından dinamik olarak değiştirilebilir.</ContextualHelp>
+      <ParameterHelp>Bu parametre, Dinamik navigasyon etkinleştiriliyorsa içeriği almak için kullanılır.</ParameterHelp>
     </help>
     <msg>
-      <not-valid-path>The item path is invalid.</not-valid-path>
+      <not-valid-path>Öğe yolu geçerli değildir.</not-valid-path>
     </msg>
     <tab>
       <label>
-        <UISCVConfigContentFormInputSet>Content Selection</UISCVConfigContentFormInputSet>
-        <UISCVConfigDisplayFormInputSet>Display Settings</UISCVConfigDisplayFormInputSet>
-        <UISCVConfigPrintFormInputSet>Print Settings</UISCVConfigPrintFormInputSet>
-        <UISCVConfigAdvancedFormInputSet>Advanced</UISCVConfigAdvancedFormInputSet>
+        <UISCVConfigContentFormInputSet>İçerik Seçimi</UISCVConfigContentFormInputSet>
+        <UISCVConfigDisplayFormInputSet>Ayarları Görüntüle</UISCVConfigDisplayFormInputSet>
+        <UISCVConfigPrintFormInputSet>Yazdırma Ayarları</UISCVConfigPrintFormInputSet>
+        <UISCVConfigAdvancedFormInputSet>Gelişmiş</UISCVConfigAdvancedFormInputSet>
       </label>
     </tab>
   </UISCVPreferences>
   <UISCVConfigItemPathFormInputSet>
     <title>
-      <SelectFolderPath>Select Folder Path</SelectFolderPath>
-      <AddPath>Add Path</AddPath>
+      <SelectFolderPath>Klasör Yolunu Seçin</SelectFolderPath>
+      <AddPath>Yol ekle</AddPath>
     </title>
   </UISCVConfigItemPathFormInputSet>
   <UISCVConfigPrintPageFormInputSet>
     <title>
-      <SelectTargetPage>Show in Page</SelectTargetPage>
+      <SelectTargetPage>Sayfada Göster</SelectTargetPage>
     </title>
   </UISCVConfigPrintPageFormInputSet>
   <PublicationStates>
-    <archived>Archived</archived>
-    <obsolete>Obsolete</obsolete>
-    <unpublished>Unpublished</unpublished>
-    <enrolled>Enrolled</enrolled>
-    <draft>Draft</draft>
+    <archived>Arşivlenmiş</archived>
+    <obsolete>Eskimiş</obsolete>
+    <unpublished>Yayınlanmamış</unpublished>
+    <enrolled>Kayıtlı</enrolled>
+    <draft>Taslak</draft>
     <pending>Bekleyen</pending>
-    <approved>Approved</approved>
-    <inreview>Under Review</inreview>
-    <staged>Staged</staged>
-    <published>Published</published>
+    <approved>Onaylı</approved>
+    <inreview>İnceleniyor</inreview>
+    <staged>Düzenlendi</staged>
+    <published>Yayınlandı</published>
   </PublicationStates>
   <UISCVCacheRadioBox>
     <label>
-      <Enable>Restricted by Authentication</Enable>
-      <Disable>Restricted by User roles</Disable>
+      <Enable>Kimlik doğrulama tarafından kısıtlanmış</Enable>
+      <Disable>Kullanıcı rolleri kısıtlanmış</Disable>
     </label>
   </UISCVCacheRadioBox>
 </bundle>

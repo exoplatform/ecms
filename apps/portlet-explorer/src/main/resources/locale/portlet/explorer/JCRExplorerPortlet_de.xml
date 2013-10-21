@@ -61,7 +61,7 @@
       <refresh-session-success>Ihre Sitzung wurde erfolgreich aktualisiert.</refresh-session-success>
       <no-node-history>Sie sind im Wurzelknoten.</no-node-history>
       <save-session-success>Alle Änderungen wurden gespeichert.</save-session-success>
-      <target-path-not-found>You cannot access this node, either because it doesn't exist anymore or because you do not have the right to access it.</target-path-not-found>
+      <target-path-not-found>Sie können diesen Knoten nicht einsehen, entweder existiert er nicht mehr oder Sie haben keine Rechte den Knoten einzusehen.</target-path-not-found>
     </msg>
   </UIJCRExplorer>
   <!--
@@ -104,6 +104,24 @@
 
   <!--
   #############################################################################
+  #             org.exoplatform.ecm.webui.component.explorer.UIDrivesArea  #
+  #############################################################################
+  -->
+  <UIDrivesBrowser>
+    <title>
+      <PersonalDrives>Persönliche Laufwerke</PersonalDrives>
+      <GroupDrives>Gruppenlaufwerke</GroupDrives>
+      <GeneralDrives>Allgemeine Laufwerke</GeneralDrives>
+    </title>
+    <msg>
+      <no-view-found>Mit Ihren Berechtigungen ist keine Ansicht in Laufwerk "{0}" verfügbar.</no-view-found>
+      <access-denied>Zugriff verweigert. Sie haben keine Berechtigung in dem Arbeitsbereich des Laufwerks "{0}".</access-denied>
+      <workspace-not-exist>Das Laufwerk "{0}" wurde in einem unbekannten Arbeitsbereich gespeichert. Bitte konfigurieren Sie das Laufwerk neu.</workspace-not-exist>
+    </msg>
+  </UIDrivesBrowser>
+
+  <!--
+  #############################################################################
   #             org.exoplatform.ecm.webui.component.explorer.UITreeExplorer    #
   #############################################################################
   -->
@@ -111,7 +129,7 @@
     <title>Explorer</title>
     <label>
       <Root>Wurzel</Root>
-      <webDavView>Download and allow edition</webDavView>
+      <webDavView>Download und Bearbeitung erlauben</webDavView>
     </label>
     <msg>
       <path-not-found>Dieses Element wurde gelöscht oder geändert. Bitte klicken Sie auf die Schaltfläche "aktualisieren".</path-not-found>
@@ -139,7 +157,7 @@
   <UIPreferencesForm>
     <title>Ihre Browsing-Präferenzen einstellen</title>
     <label>
-      <enableStructure>Enable DMS Structure:</enableStructure>
+      <enableStructure>DMS-Struktur aktivieren</enableStructure>
       <showSideBar>Seitenleiste anzeigen:</showSideBar>
       <showHiddenNode>Ausgeblendeten Knoten anzeigen:</showHiddenNode>
       <showNonDocument>Alle Knotentypen anzeigen:</showNonDocument>
@@ -189,7 +207,7 @@
       <newName-same-oldName>Der neue Name ist bereits vorhanden. Bitte überprüfen Sie erneut.</newName-same-oldName>
       <version-exception>Dieser Knoten (oder der Vorgänger dieses Knotens) wird nicht ausgecheckt.</version-exception>
       <lock-exception>Der Knoten ist gesperrt. Entsperren vor Wiederbenennung.</lock-exception>
-      <constraintViolation-exception>Fehler beim Umbenennen der Knoten "{0}". Bitte überprüfen Sie erneut.</constraintViolation-exception>
+      <constraintViolation-exception>Fehler beim Umbenennen des Knotens "{0}". Bitte überprüfen.</constraintViolation-exception>
       <unknown-prefix>Präfix "{0}" wurde noch nicht registriert.</unknown-prefix>
       <rename-error>Fehler beim Umbenennen dieses Knotens. Bitte überprüfen Sie erneut.</rename-error>
     </msg>
@@ -229,7 +247,7 @@
       <UIDeleteFolderConfirmMessage>Ordner löschen ?</UIDeleteFolderConfirmMessage>
       <UIDeleteItemsConfirmMessage>Elemente löschen ?</UIDeleteItemsConfirmMessage>
       <UIRestoreConfirmMessage>Wiederherstellung bestätigen</UIRestoreConfirmMessage>
-      <UIActivePublication>Enroll to Publication Lifecycle</UIActivePublication>
+      <UIActivePublication>An Veröffentlichungszyklus übergeben.</UIActivePublication>
       <UITaggingForm>Dokument taggen</UITaggingForm>
       <UIThumbnailForm>Miniaturbild hinzufügen</UIThumbnailForm>
       <UIAllItemsPreferenceForm>Präferenzeneinstellungen</UIAllItemsPreferenceForm>
@@ -252,7 +270,7 @@
     <label>
       <name>Name</name>
       <textToModify>Zu modifizierender Text</textToModify>
-      <fileToUpload>Upload new content for that document (must be the same mime-type)</fileToUpload>
+      <fileToUpload>Neuen Inhalt für das Dokument hochladen (muss der gleiche Mime-Typ sein)</fileToUpload>
     </label>
   </UIResourceForm>
   <!--
@@ -280,7 +298,7 @@
       <ManageActions>Aktionen</ManageActions>
       <ExportNode>Exportieren</ExportNode>
       <ImportNode>Importieren</ImportNode>
-      <OverloadThumbnail>Overload Thumbnail</OverloadThumbnail>
+      <OverloadThumbnail>Miniaturansicht überladen</OverloadThumbnail>
       <ManageHidden>Inhalt anzeigen/ausblenden</ManageHidden>
       <ViewReferences>Referenzen</ViewReferences>
       <ViewNodeType>Typen</ViewNodeType>
@@ -293,21 +311,21 @@
     <msg>
       <cannot-action-in-rootnode>Diese Aktion kann nicht im Quellknoten ausgeführt werden.</cannot-action-in-rootnode>
       <node-checkedin>Sie müssen erstmal auschecken.</node-checkedin>
-      <cannot-enable-version-rootnode>Cannot enable versioning for the root node.</cannot-enable-version-rootnode>
-      <cannot-enable-publication-rootnode>Cannot enable publication for the root node.</cannot-enable-publication-rootnode>
+      <cannot-enable-version-rootnode>Konnte Versionierung für Wurzelknoten nicht aktivieren</cannot-enable-version-rootnode>
+      <cannot-enable-publication-rootnode>Konnte Veröffentlichung für Wurzelknoten nicht aktivieren</cannot-enable-publication-rootnode>
       <manage-publication>
-        <not-supported-nodetype>The publication supports the document node only.</not-supported-nodetype>
+        <not-supported-nodetype>Die Veröffentlichung unterstützt nur Dokumentknoten.</not-supported-nodetype>
         <no-publication-lifecycle>Keiner Veröffentlichung-Lebenszyklus wurde konfiguriert.</no-publication-lifecycle>
       </manage-publication>
       <unsubcriber-lifecycle>Der Knoten war bereits nicht mehr abonniert.</unsubcriber-lifecycle>
-      <not-supported-nodetype>The unsubscriber lifecycle supports the document node only.</not-supported-nodetype>
-      <unsubcriber-lifecycle-finish>The node was unsubscribed successfully.</unsubcriber-lifecycle-finish>
-      <access-false>The node is not an article or checked in.</access-false>
+      <not-supported-nodetype>Sie können nur Dokumentknoten kündigen.</not-supported-nodetype>
+      <unsubcriber-lifecycle-finish>Der Knoten wurde erfolgreich gekündigt.</unsubcriber-lifecycle-finish>
+      <access-false>Der Knoten ist kein Artikel oder nicht eingecheckt !</access-false>
       <unsupported-action>Diese Aktion wird nicht unterstützt.</unsupported-action>
-      <not-relationable>This node has not yet had any related links to another node.</not-relationable>
-      <node-pasted>Node '{0}' has been pasted at the location '{1}'. This operation has already been saved.</node-pasted>
+      <not-relationable>Dieser Knoten hatte bis jetzt noch keine verwandten Links zu einem anderen Knoten.</not-relationable>
+      <node-pasted>Der Knoten '{0}' wurde an Ort '{1}' eingefügt. Dieser Vorgang wurde bereits gespeichert.</node-pasted>
       <no-node-selected>Kein Knoten kopiert.</no-node-selected>
-      <unable-edit>Node'{0}' with nodetype '{1}' is not supported to edit.</unable-edit>
+      <unable-edit>Der Knoten: '{0}' mit Knotentyp '{1}' unterstützt keine Änderungsaktion.</unable-edit>
       <not-support>Der ausgewählte Knoten kann nicht bearbeitet werden.</not-support>
       <template-null>Dieser Knoten verfügt über keinen Bearbeitungsdialog.</template-null>
       <keyword-null>Es gibt keinen Suchbegriff.</keyword-null>
@@ -316,10 +334,10 @@
       <is-not-referenable>Knoten '{0}' ist nicht referenzierbar</is-not-referenable>
       <access-denied>Zugang verweigert. Ihnen fehlt die Berechtigung, diesen Knoten zu bearbeiten.</access-denied>
       <access-add-denied>Zugang verweigert. Ihnen fehlt die Berechtigung, in diesem Knoten hinzuzufügen.</access-add-denied>
-      <item-existed>Dieser Knoten ist bereits vorhanden. Es kann nicht den gleichen Namen wie seine Geschwister haben.</item-existed>
-      <removed-hidden-mixin>You removed the hidden mixin successfully.</removed-hidden-mixin>
-      <added-hidden-mixin>You added the hidden mixin successfully.</added-hidden-mixin>
-      <not-supported>This function is supported for the document type only.</not-supported>
+      <item-existed>Es existiert bereits ein Knoten der mit den Namen assoziiert ist.</item-existed>
+      <removed-hidden-mixin>Sie haben den versteckten Mixin erfolgreich entfernt!</removed-hidden-mixin>
+      <added-hidden-mixin>Sie haben den versteckten Mixin erfolgreich hinzugefügt!</added-hidden-mixin>
+      <not-supported>Diese Funktion wird nur für den Dokumenttypen unterstützt.</not-supported>
       <empty-file-type>Kein Dokument kann zu diesem Knoten hinzugefügt werden.</empty-file-type>
       <unsupported-watch>Nur Dokumentknoten können überwacht werden.</unsupported-watch>
       <watch-checkedin>Sie müssen diesen Knoten auschecken, bevor den überwachen zu können.</watch-checkedin>
@@ -339,22 +357,22 @@
   </UIActionBar>
   <UIPopupMenu>
     <msg>
-      <has-not-permission>Access denied. You do not have add permission in this node.</has-not-permission>
-      <has-not-edit-permission>Access denied. You do not have edit permission in this node. Please contact the administrator.</has-not-edit-permission>
-      <cannot-login-node>You cannot access and paste the node here.</cannot-login-node>
+      <has-not-permission>Zugang verweigert. Sie haben keine Berechtigung zum Hinzufügen in diesem Knoten.</has-not-permission>
+      <has-not-edit-permission>Zugang verweigert. Sie haben in diesem Knoten keine Berechtigung zum Bearbeiten. Bitte kontaktieren Sie den Administrator.</has-not-edit-permission>
+      <cannot-login-node>Sie haben keinen Zugriff und können den Knoten hier nicht einfügen.</cannot-login-node>
       <cannot-paste-nodetype>Sie können den Knoten hier nicht einfügen.</cannot-paste-nodetype>
       <has-not-permission-unlok>Ihnen fehlt die Berechtigung, diesen Knoten zu entsperren.</has-not-permission-unlok>
       <bound-exception>Ihnen fehlt die Berechtigung, diesen Knoten umzubenennen. Bitte kontaktieren Sie den Administrator.</bound-exception>
-      <bound-move-exception>You cannot move the node to itself or in its sub-node.</bound-move-exception>
-      <does-not-support-auditing>You cannot activate auditing on this node.</does-not-support-auditing>
-      <can-not-rename-node>You do not have permission to rename this node. Please contact the administrator to get the correct right.</can-not-rename-node>
-      <can-not-cut-node>You do not have permission to cut this node. Please contact the administrator.</can-not-cut-node>
+      <bound-move-exception>Sie können den Knoten nicht in sich selbst verschieben oder in in seinen Unterknoten.</bound-move-exception>
+      <does-not-support-auditing>Sie können das Auditing auf diesem Knoten nicht aktivieren.</does-not-support-auditing>
+      <can-not-rename-node>Sie haben keine Berechtigung diesen Knoten umzubenennen. Bitte kontaktieren Sie den Administrator für die nötigen Rechte.</can-not-rename-node>
+      <can-not-cut-node>Sie haben keine Berechtigung diesen Knoten auszuschneiden. Bitte kontaktieren Sie den Administrator.</can-not-cut-node>
       <can-not-remove-node>Ihnen fehlt die Berechtigung, diesen Knoten zu entfernen. Bitte kontaktieren Sie den Administrator.</can-not-remove-node>
       <can-not-lock-node>Ihnen fehlt die Berechtigung, den Knoten {0} zu sperren. Bitte kontaktieren Sie den Administrator.</can-not-lock-node>
       <can-not-unlock-node>Ihnen fehlt die Berechtigung, diesen Knoten zu entsperren. Bitte kontaktieren Sie den Administrator.</can-not-unlock-node>
       <no-node>Bitte wählen Sie mindestens einen Knoten vor dem Einfügen.</no-node>
       <can-not-paste-node>Ihnen fehlt die Berechtigung, nach diesem Knoten zu verschieben. Bitte kontaktieren Sie den Administrator.</can-not-paste-node>
-      <can-not-move-node>You do not have permission to move this node. Please contact the administrator.</can-not-move-node>
+      <can-not-move-node>Sie haben keine Berechtigung, diesen Knoten zu verschieben. Bitte kontaktieren Sie den Administrator.</can-not-move-node>
       <does-not-support-versioning>Ihnen fehlt die Berechtigung, diesen Knoten zu verschieben. Bitte kontaktieren Sie den Administrator.</does-not-support-versioning>
       <path-not-found>Dieses Element wurde gelöscht oder geändert. Bitte klicken Sie auf die Schaltfläche "aktualisieren".</path-not-found>
       <paste-lock-exception>Sie können nicht '{0}' zu diesem Knoten einfügen, da die Quelle oder den Zielknoten gesperrt ist oder mit dem gesperrten Knoten verwandt ist.</paste-lock-exception>
@@ -362,24 +380,24 @@
       <can-not-checkout-node>Dieser Knoten kann nicht ausgecheckt werden. Überprüfen Sie, ob Sie über die richtigen Berechtigungen verfügen.</can-not-checkout-node>
       <move-constraint-exception>Fehler beim Verschieben des Knotens.</move-constraint-exception>
       <not-lock-owner>Sie können diesen Knoten nicht entsperren, weil Sie nicht Eigentümer der Sperre sind.</not-lock-owner>
-      <is-checked-in>Please check out this node before renaming.</is-checked-in>
-      <is-checked-in-lock>Please check out this node before locking.</is-checked-in-lock>
+      <is-checked-in>Bitte checken Sie den Knoten aus, bevor Sie ihn umbenennen.</is-checked-in>
+      <is-checked-in-lock>Bitte checken Sie den Knoten aus bevor Sie ihn sperren.</is-checked-in-lock>
       <cant-lock>Dieser Knoten kann nicht gesperrt werden.</cant-lock>
-      <node-locked>The item with the path {0} or upper level is locked.</node-locked>
+      <node-locked>Das Element mit dem Pfad {0} oder die übergeordnete Ebene ist gesperrt.</node-locked>
       <can-not-delete>Bitte schließen Sie diesen Knoten vor dem Löschen.</can-not-delete>
       <can-not-delete-version>Dieser Knoten kann nicht gelöscht werden. Er wird versioniert.</can-not-delete-version>
       <not-support>Der ausgewählte Knoten kann nicht gelöscht werden. Bitte wählen Sie einen anderen Knoten.</not-support>
-      <current-node-not-allow-paste>You cannot paste the copied node type on the current node.</current-node-not-allow-paste>
+      <current-node-not-allow-paste>Sie können den kopierten Knotentyp nicht in den aktuellen Knoten einfügen.</current-node-not-allow-paste>
       <copied-node-in-versioning>Sie können nicht den kopierten Knoten einfügen. Er wird versioniert.</copied-node-in-versioning>
       <parent-node-locked>Ihnen fehlt die Berechtigung, den Knoten '{0}' zu entsperren.</parent-node-locked>
       <this-node-locked-by-parent>Sie können diesen Knoten nicht entsperren. Es wird von dem übergeordneten Knoten gesperrt.</this-node-locked-by-parent>
       <paste-node-same-name>Sie können keinen Knoten mit dem gleichen Namen wie ein Knoten im Zielordner einfügen.</paste-node-same-name>
       <has-not-add-permission>Ihnen fehlt die Berechtigung, einen neuen Knoten hinzuzufügen.</has-not-add-permission>
-      <node-cutting>Node is being cut. You cannot paste it here.</node-cutting>
-      <access-denied>Access denied. You may not have permission in this node.</access-denied>
+      <node-cutting>Der Knoten wird gerade ausgeschnitten. Sie können hier nicht einfügen.</node-cutting>
+      <access-denied>Zugriff verweigert. Vielleicht haben Sie für diesen Knoten keine Berechtigung.</access-denied>
       <remove-verion-exception>Sie können diesen Knoten nicht entfernen, weil er (oder sein Vorgänger) eingecheckt wird.</remove-verion-exception>
-      <remove-referentialIntegrityException>You cannot delete this node because it is currently the target of a Reference property.</remove-referentialIntegrityException>
-      <constraintviolation-exception>The mandatory item jcr:uuid was not found. The node may have been deleted or changed. Please click the Refresh button.</constraintviolation-exception>
+      <remove-referentialIntegrityException>Sie können diesen Knoten nicht löschen, weil er aktuell einer  Ziel einer Referenz-Eigenschaft ist.</remove-referentialIntegrityException>
+      <constraintviolation-exception>Das Pflichtelement jcr:uuid wurde nicht gefunden. Vielleicht wurde der Knoten gelöscht oder geändert. Bitte klicken Sie auf Aktualisieren.</constraintviolation-exception>
       <path-not-found-exception>Dieser Knoten wurde gelöscht oder geändert. Bitte klicken Sie auf die Schaltfläche "aktualisieren".</path-not-found-exception>
       <not-exist-categories>Diese Kategorie ist nicht vorhanden.</not-exist-categories>
     </msg>
@@ -405,12 +423,12 @@
       <title-invalid>Bitte geben Sie den Ordnertitel ein.</title-invalid>
       <name-not-allowed>Dieser Name ist nicht erlaubt.</name-not-allowed>
       <fileName-error>Der Dateiname ist ungültig.</fileName-error>
-      <constraint-violation>The current node does not allow you to add the node type '{0}'.</constraint-violation>
+      <constraint-violation>Der aktuelle Knoten erlaubt kein Hinzufügen des Knotentyps '{0}'</constraint-violation>
       <repository-exception>Ein unerwarteter Fehler ist aufgetreten. Kontaktieren Sie bitte Ihren Administrator für weitere Informationen.</repository-exception>
       <repository-exception-permission>Ihnen fehlt die Berechtigung, einen neuen Ordner auf diesem Knoten hinzuzufügen.</repository-exception-permission>
       <numberformat-exception>Dieser Ordner kann nicht gespeichert werden. Der angegebene Name muss im numerischen Format sein.</numberformat-exception>
       <!--DMS 2.4.x; ECM-3553-->
-      <not-allow-sameNameSibling>You cannot save the folder. This node does not accept two nodes with the same name.</not-allow-sameNameSibling>
+      <not-allow-sameNameSibling>Sie können den Ordner nicht speichern. Ein anderer Knoten gleichen namens existiert schon.</not-allow-sameNameSibling>
       <ntFolder-not-avaiable>Sie müssen einen benutzerdefinierten Typ von Ordner auswählen</ntFolder-not-avaiable>
     </msg>
     <help>
@@ -482,20 +500,20 @@
       <node-cut>Der Knoten '{0}' wurde ausgeschnitten.</node-cut>
       <execute-successfully>Die benutzerdefinierte Aktion '{0}' wurde ausgeführt.</execute-successfully>
       <save-node-success>Der Knoten '{0}' wurde gespeichert.</save-node-success>
-      <move-problem>You cannot move node '{0}' to '{1}' because there was a problem with permission or constraint conditions.</move-problem>
+      <move-problem>Sie können den Knoten '{0}' nicht nach '{1}' verschieben, weil ein Problem mit der Berechtigung oder erzwungenen Bedingungen vorliegt.</move-problem>
     </msg>
   </UIWorkingArea>
   <UIDocumentWorkspace>
     <label>
       <no-children>Dieser Knoten enthält keine untergeordneten Knoten.</no-children>
-      <no-children-but-has-hidden>This node does not have any child nodes, but there are some hidden files.</no-children-but-has-hidden>
+      <no-children-but-has-hidden>Dieser Knoten hat keine Unterknoten aber es sind versteckte Dateien vorhanden.</no-children-but-has-hidden>
     </label>
     <msg>
-      <unable-save-node>Node '{0}' has been newly created. Please save session before performing this action.</unable-save-node>
+      <unable-save-node>Der Knoten '{0}' ist neu . Die Sitzung muss gespeichert werden bevor die Aktion durchgeführt werden kann.</unable-save-node>
       <save-node-success>Der Knoten '{0}' wurde gespeichert.</save-node-success>
       <node-copied>Der Knoten '{0}' wurde kopiert.</node-copied>
       <node-cut>Der Knoten '{0}' wurde ausgeschnitten.</node-cut>
-      <remove-root>You cannot remove the root node.</remove-root>
+      <remove-root>Sie können den Wurzelknoten nicht löschen.</remove-root>
       <node-remove-success>Der Knoten '{0}' wurde entfernt.</node-remove-success>
     </msg>
     <tooltip>
@@ -515,11 +533,11 @@
   </UIDocumentWorkspace>
   <UIDocumentInfo>
     <msg>
-      <access-denied>Access denied. You cannot access node '{0}'.</access-denied>
+      <access-denied>Zugriff verweigert! Sie können den Knoten '{0}' nicht einsehen.</access-denied>
       <null-exception>Element nicht gefunden. Es wurde entweder entfernt oder geändert, oder Ihnen fehlt die Berechtigung, auf diesem Knoten zuzugreifen.</null-exception>
       <confirm-deleteattachment>Möchten Sie den Anhang wirklich entfernen?</confirm-deleteattachment>
       <confirm-deleteattcomment>Möchten Sie diesen Kommentar wirklich entfernen?</confirm-deleteattcomment>
-      <access-denied-exception>Access denied. You may not have reading privileges, or the node may have been removed or changed.</access-denied-exception>
+      <access-denied-exception>Zugriff verweigert! Vielleicht haben Sie keine Leseberechtigungen oder der Knoten wurde entfernt oder verändert.</access-denied-exception>
       <path-not-found>Dieses Element wurde gelöscht oder geändert. Bitte klicken Sie auf die Schaltfläche "aktualisieren".</path-not-found>
     </msg>
     <tooltip>
@@ -573,7 +591,7 @@
       <MoveToTrash>In den Papierkorb verschieben</MoveToTrash>
       <RestoreFromTrash>Aus dem Papierkorb wiederherstellen</RestoreFromTrash>
       <EmptyTrash>Papierkorb leeren</EmptyTrash>
-      <WebDavView>Download and Allow Editing</WebDavView>
+      <WebDavView>Herunterladen und Bearbeiten erlauben</WebDavView>
     </event>
   </ECMContextMenu>
  
@@ -618,7 +636,7 @@
       <UISimpleSearch>Einfache Suche</UISimpleSearch>
       <UISearchContainer>Erweiterte Suche</UISearchContainer>
       <UICategoryManagerSearch>eine Kategorie zur Suche hinzufügen</UICategoryManagerSearch>
-      <UIConstraintsForm>Einschränkungen-Formular</UIConstraintsForm>
+      <UIConstraintsForm>Formular für erzwungene Bedingungen</UIConstraintsForm>
       <UIViewSearchResult>Inhalt ansehen</UIViewSearchResult>
       <UIContentNameSearch>Nach Namen suchen</UIContentNameSearch>
       <UINodeInfo>Version Informationen</UINodeInfo>
@@ -637,7 +655,7 @@
       <UISelectedCategoriesGrid>Referenzierte Kategorien</UISelectedCategoriesGrid>
       <UIWorkflowPublicationActionForm>Aktion auf dem Veröffentlichungslebenszyklus</UIWorkflowPublicationActionForm>
       <UIWorkflowPublicationViewForm>Veröffentlichungslebenszyklus-Ansicht</UIWorkflowPublicationViewForm>
-      <metadatasitemetadata>Site Metadata</metadatasitemetadata>
+      <metadatasitemetadata>Seiten Metadaten</metadatasitemetadata>
       <dcelementset>Dublin Core</dcelementset>
     </title>
   </UITabPane>
@@ -650,7 +668,6 @@
       <remove-property>Möchten Sie diese Eigenschaft wirklich entfernen?</remove-property>
     </confirm>
     <header>
-      <icon/>
       <name>Name</name>
       <multiValue>Mehrwertig</multiValue>
       <value>Wert</value>
@@ -727,7 +744,7 @@
     </header>
     <msg>
       <confirm-delete-permission>Möchten Sie diese Berechtigung wirklich entfernen?</confirm-delete-permission>
-      <no-permission-tochange>You do not have the right to remove permission.</no-permission-tochange>
+      <no-permission-tochange>Sie haben kein Recht die Berechtigung zu entfernen</no-permission-tochange>
       <no-permission-remove>Sie können den Eigentümer nicht entfernen.</no-permission-remove>
       <access-denied>Zugriff verweigert. Diese Berechtigung kann nicht entfernt werden.</access-denied>
     </msg>
@@ -736,7 +753,7 @@
     <title>
       <SelectUser>Benutzer auswählen</SelectUser>
       <SelectMember>Rolle auswählen</SelectMember>
-      <AddAny>Select Everyone</AddAny>
+      <AddAny>Wählen Sie jeden aus</AddAny>
     </title>
   </permission>
   <!--
@@ -779,7 +796,7 @@
       <checkbox-require>Bitte wählen Sie mindestens eine Berechtigung aus.</checkbox-require>
       <userOrGroup-required>Bitte wählen Sie einen Benutzer oder eine Gruppe vor dem Speichern dieser Berechtigung aus.</userOrGroup-required>
       <not-change-permission>You do not have the right to add a permission.</not-change-permission>
-      <access-denied>Access denied. You cannot remove this permission.</access-denied>
+      <access-denied>Zugriff verweigert. Sie können diese Berechtigung nicht entfernen.</access-denied>
     </msg>
   </UIPermissionForm>
 
@@ -835,7 +852,7 @@
   <UIContentNameSearch>
     <label>
       <keyword>Inhaltsname:</keyword>
-      <location>Search in this location:</location>
+      <location>An diesem Ort suchen:</location>
     </label>
     <action>
       <Search>Suche</Search>
@@ -855,14 +872,14 @@
     <label>
       <moreConstraints>UISimpleSearch</moreConstraints>
       <firstOperator>Operator:</firstOperator>
-      <input>A word or phrase in content:</input>
+      <input>Ein Wort oder eine Phrase im Inhalt</input>
       <constraints>More Constraints:</constraints>
-      <nodePath>Current Location:</nodePath>
+      <nodePath>Aktueller Ort</nodePath>
     </label>
     <msg>
-      <keyword-null>Please enter your keyword.</keyword-null>
+      <keyword-null>Bitte geben Sie Ihr Schlüsselwort ein.</keyword-null>
       <not-found>Keine Ergebnisse gefunden.</not-found>
-      <keyword-not-allow>This keyword is not allowed.</keyword-not-allow>
+      <keyword-not-allow>Dieses Schlüsselwort ist nicht erlaubt.</keyword-not-allow>
       <value-null>Please enter your keyword or constraints.</value-null>
       <value-save-null>Please enter a keyword or constraints before saving this query.</value-save-null>
       <inputSearch-invalid>There are invalid characters in the search input.</inputSearch-invalid>
@@ -969,7 +986,7 @@
   </UIShowAllFavouriteResult>
   <UIShowAllHiddenResult>
     <msg>
-      <not-support>There is no View template for this node.</not-support>
+      <not-support>Es gibt keine Ansichtsvorlage für diesen Knoten.</not-support>
       <empty>Keine Ergebnisse gefunden.</empty>
       <access-denied>Sie können diesen Knoten nicht anzeigen, weil diese Vorlage nicht unterstützt wird oder weil der Zugriff verweigert wird.</access-denied>
       <query-invalid>Die Abfrage ist ungültig.</query-invalid>
@@ -1002,7 +1019,7 @@
   </UIShowAllHiddenResult>
   <UIShowAllTrashResult>
     <msg>
-      <not-support>There is no View template for this node.</not-support>
+      <not-support>Es gibt keine Ansichtsvorlage für diesen Knoten.</not-support>
       <empty>Keine Ergebnisse gefunden</empty>
       <access-denied>Sie können diesen Knoten nicht anzeigen, weil diese Vorlage nicht unterstützt wird oder weil der Zugriff verweigert wird.</access-denied>
       <query-invalid>Die Abfrage ist ungültig.</query-invalid>
@@ -1140,9 +1157,9 @@
       <!--DMS 2.4.x ECM-3566-->
       <name-invalid>Der Name ist ungültig.</name-invalid>
       <query-added>Die Abfrage wurde erfolgreich hinzugefügt.</query-added>
-      <save_unSuccessful>Cannot save the query. The statement may be invalid or the query name may already exist.</save_unSuccessful>
-      <invalid-queryStatement>Invalid query statement.</invalid-queryStatement>
-      <value-save-null>Please enter your query statement.</value-save-null>
+      <save_unSuccessful>Abfrage konnte nicht gespeichert werden. Die Anweisung ist ungültig oder der Abfragename existiert schon.</save_unSuccessful>
+      <invalid-queryStatement>Ungültige Abfrageanweisung.</invalid-queryStatement>
+      <value-save-null>Bitte geben Sie Ihre Abfragenanweisung ein,</value-save-null>
       <query-name-null>Bitte geben Sie Ihren Abfragenamen ein.</query-name-null>
     </msg>
   </UIJCRAdvancedSearch>
@@ -1221,8 +1238,8 @@
   <UISaveQueryForm>
     <msg>
       <query-name-null>Bitte geben Sie einen Abfragenamen, um zu speichern.</query-name-null>
-      <access-denied>Access denied. You do not have the add permission needed to save this query.</access-denied>
-      <save-failed>You cannot save the query, either because the statement is invalid or because the query name already exists.</save-failed>
+      <access-denied>Zugriff verweigert. Sie haben nicht die Berechtigung zum Hinzufügen die benötigt wird um diese Abfrage zu speichern.</access-denied>
+      <save-failed>Abfrage konnte nicht gespeichert werden. Die Anweisung ist ungültig oder der Abfragename existiert schon.</save-failed>
     </msg>
     <label>
       <queryName>Abfragename</queryName>
@@ -1236,7 +1253,7 @@
     <header>
       <name>Name</name>
       <type>Typ</type>
-      <statement>Statement</statement>
+      <statement>Aussage/Anweisung</statement>
       <permission>Berechtigungen</permission>
       <action>Aktionen</action>
     </header>
@@ -1314,7 +1331,7 @@
       <cannot-remove-version>Sie können die Basisversion nicht entfernen.</cannot-remove-version>
       <confirm-delete>Möchten Sie diese Version wirklich entfernen?</confirm-delete>
       <not-checked-out>Sie müssen diesen Knoten auschecken, bevor den wiederzuherstellen.</not-checked-out>
-      <invalid-item-state>You cannot restore this version, either because one or more items were deleted or moved during another session.</invalid-item-state>
+      <invalid-item-state>Sie können diese Version nicht wiederherstellen. Vermutlich wurden während einer anderen Session ein oder mehrere Elemente gelöscht oder verschoben.</invalid-item-state>
     </msg>
     <action>
       <close>Schließen</close>
@@ -1401,7 +1418,7 @@
       </msg>
     </grid>
     <msg>
-      <node-type-invalid>Only the document node type can be enrolled.</node-type-invalid>
+      <node-type-invalid>Nur der Dokumentknotentyp kann übergeben werden.</node-type-invalid>
       <already-enroled>Dieses Dokument wurde bereits eingeschrieben.</already-enroled>
     </msg>
   </UIActivePublication>
@@ -1428,7 +1445,7 @@
   <UIDiff>
     <label>
       <diffTitle>Zwischen zwei Versionen vergleichen</diffTitle>
-      <noChange>No change between two versions</noChange>
+      <noChange>Keine Veränderung zwischen 2 Versionen</noChange>
       <baseVerion>Basisversion</baseVerion>
       <compareVerion>Version</compareVerion>
       <can-not-compare>Fehler beim Vergleichen von diesen zwei Versionen</can-not-compare>
@@ -1453,12 +1470,12 @@
     <title>Knoten importieren</title>
     <msg>
       <import-successful>Import erfolgreich!</import-successful>
-      <filename-invalid>Browse an .xml file for the 'Upload File' field to import.</filename-invalid>
-      <filetype-error>Cannot import the uploaded file. The .xml file may be invalid.</filetype-error>
-      <mimetype-invalid>You can only import .xml or .zip files.</mimetype-invalid>
-      <access-denied>Access denied. You are not allowed to import there.</access-denied>
-      <constraint-violation-exception>You cannot import the node, either because the imported data are incorrect or because the node type '{0}' is not allowed to be child's node type'{0}'.</constraint-violation-exception>
-      <item-exists-exception>An incoming referenceable node has the same UUID as an existing node in the workspace.</item-exists-exception>
+      <filename-invalid>Wählen Sie eine .xml Datei über das "Datei hochladen" Feld zum importieren aus.</filename-invalid>
+      <filetype-error>Kann die hochgeladene Datei nicht importieren. Die .xml Datei könnte ungültig sein.</filetype-error>
+      <mimetype-invalid>Sie können nur .xml oder .zip Dateien importieren.</mimetype-invalid>
+      <access-denied>Zugriff verweigert. Sie haben kein Recht Elemente hier zu Importieren.</access-denied>
+      <constraint-violation-exception>Daten können nicht importiert werden. Der Knotentyp "{0}" ist nicht erlaubt.</constraint-violation-exception>
+      <item-exists-exception>Der referenzierte Knoten hat dieselbe UUID wie ein im Arbeitsbereich bereits existierender Knoten.</item-exists-exception>
     </msg>
   </UIImportNode>
   <!--
@@ -1476,7 +1493,7 @@
     </action>
     <title>Label hinzufügen</title>
     <msg>
-      <label-invalid>The label contains some invalid characters.</label-invalid>
+      <label-invalid>Die Beschreibung enthält einige ungültige Zeichen.</label-invalid>
       <label-exist>"{0}" ist bereits vorhanden.</label-exist>
     </msg>
   </UILabelForm>
@@ -1501,7 +1518,7 @@
   ###############################################################################
   -->
   <UIVersionTree>
-    <title>Children Tree</title>
+    <title>Unterelementebaum</title>
   </UIVersionTree>
   <UIViewVersion>
     <label>
@@ -1518,7 +1535,7 @@
     </msg>
   </UIViewVersion>
   <UIVersionList>
-    <title>Children Name</title>
+    <title>Unterelementname</title>
   </UIVersionList>
   <!--
   ################################################################################
@@ -1597,7 +1614,7 @@
     </action>
     <msg>
       <confirm-delete>Möchten Sie diese Beziehung wirklich löschen?</confirm-delete>
-      <can-not-add-itself>You cannot add a relation to itself.</can-not-add-itself>
+      <can-not-add-itself>Sie können keine Beziehung von einem Element auf sich selbst hinzufügen.</can-not-add-itself>
     </msg>
   </UIRelationsAddedList>
   <!--
@@ -1612,14 +1629,14 @@
       <action>Aktion</action>
     </header>
     <label>
-      <nocommand>There are no items in the clipboard.</nocommand>
+      <nocommand>Es sind keine Elemente in der Zwischenablage.</nocommand>
     </label>
     <action>
       <clearall>Alles löschen</clearall>
     </action>
     <msg>
       <unable-pasted>Dieser Knoten kann nicht eingefügt werden.</unable-pasted>
-      <node-pasted>Node {0} has been pasted at location {1}. This operation has already been saved.</node-pasted>
+      <node-pasted>Der Knoten {0} wurde an Ort {1} eingefügt. Diese Operation wurde bereits gespeichert.</node-pasted>
     </msg>
   </UIClipboard>
   <!--
@@ -1659,16 +1676,16 @@
 <FullScreen>Maximieren/minimieren</FullScreen>
 </tooltip>
     <msg>
-      <cannot-save>An error occurred while saving the document.</cannot-save>
-      <in-versioning>Please check out the current node before adding a new node.</in-versioning>
+      <cannot-save>Während des Speicherns des Dokuments ist es zu einem Fehler gekommen.</cannot-save>
+      <in-versioning>Bitte checken Sie den aktuellen Knoten aus bevor Sie einen neuen hinzufügen.</in-versioning>
       <not-support>Die Vorlage von "{0}" kann nicht geladen werden.</not-support>
       <value-invalid>'{0}' ist ein benötigter Wert.</value-invalid>
-      <repository-exception>An error occurred while saving the document.</repository-exception>
+      <repository-exception>Während des Speicherns des Dokuments ist es zu einem Fehler gekommen.</repository-exception>
       <!--DMS 2.4.x; ECM-3543-->
       <repository-exception-permission>Ihnen fehlt die Berechtigung, ein neues Dokument auf diesem Knoten hinzuzufügen.</repository-exception-permission>
-      <not-allowed-same-name-sibling>You cannot save this document. It is not allowed to have the same name as its sibling.</not-allowed-same-name-sibling>
-      <numberformat-exception>You cannot save this document. The name provided must be in numerical format.</numberformat-exception>
-      <item-not-found>Item not found. This node (or its ancestor) may have been deleted. Please click the Refresh button.</item-not-found>
+      <not-allowed-same-name-sibling>Sie können dieses Dokument nicht speichern. Ein Element dieses Namens besteht schon.</not-allowed-same-name-sibling>
+      <numberformat-exception>Sie können dieses Dokument nicht speichern. Der übergebene Name muss nummerischen Formats sein.</numberformat-exception>
+      <item-not-found>Element nicht gefunden. Dieser Knoten ( oder sein Vorfahre ) könnte gelöscht worden sein. Bitte aktualisieren Sie die Seite.</item-not-found>
     </msg>
   </UIDocumentForm>
   <!--
@@ -1728,16 +1745,16 @@
       <name>#{word.name}</name>
       <description>Beschreibung</description>
   <lifecycle>Lebenszyklus</lifecycle>
-  <triggeredaction>Triggered Action</triggeredaction>
-      <instanceOf>Instance of Action Type</instanceOf>
+  <triggeredaction>Ausgelöste Aktion</triggeredaction>
+      <instanceOf>Instanz des Aktionstyps</instanceOf>
       <action>Aktion</action>
     </header>
     <msg>
-      <remove-popup-first>You must close the edit pop-up before deleting this node.</remove-popup-first>
-      <confirm-delete-action>Are you sure you want to delete this action?</confirm-delete-action>
+      <remove-popup-first>Sie müssen das Bearbeiten-Popup schliessen bevor Sie den Knoten löschen können.</remove-popup-first>
+      <confirm-delete-action>Wollen Sie diese Aktion wirklich löschen?</confirm-delete-action>
       <template-empty>Die Vorlage '{0}' ist null oder leer.</template-empty>
-      <template-null>The template is either null or you do not have permission to access this template.</template-null>
-      <access-denied>Access denied. You do not have permission to perform this action.</access-denied>
+      <template-null>Die Vorlage ist entweder ungültig oder Sie haben keine Zugriffsberechtigung für diese Vorlage.</template-null>
+      <access-denied>Zugriff verweigert. Sie haben keine Berechtigung für diese Aktion.</access-denied>
     </msg>
     <action>
       <Close>#{word.close}</Close>
@@ -1755,15 +1772,15 @@
       <name>Aktionsformular</name>
     </label>
     <msg>
-      <repository-exception>You cannot save this action. The name provided has some special characters.</repository-exception>
-      <numberformat-exception>You cannot save this action. The name provided must be in numerical format.</numberformat-exception>
+      <repository-exception>Sie können diese Aktion nicht speichern. Der übergebene Name enthält Sonderzeichen.</repository-exception>
+      <numberformat-exception>Sie können diese Aktion nicht speichern. Der übergebene Name muss in nummerischem Format sein.</numberformat-exception>
       <existed-action>Der Aktionsname "{0}" ist bereits vorhanden. Wählen Sie bitte einen anderen Namen.</existed-action>
       <unable-add-action>Diese Aktion kann nicht hinzugefügt werden.</unable-add-action>
-      <unable-add>Cannot add this action. This node is either root or you do not have permision.</unable-add>
-      <not-support>Dialog '{0}' is not supported.</not-support>
-      <no-permission-add>Access denied. You do not have the right to add an action here.</no-permission-add>
-      <access-denied>Access denied. You do not have permission to access this template.</access-denied>
-      <lifecycle-invalid>You cannot add this action. The lifecycle phase of action is invalid.</lifecycle-invalid>
+      <unable-add>Kann diese Aktion nicht hinzufügen. Bei diesem Knoten handelt es sich entweder um den Stammknoten oder Sie haben keine Berechtigung.</unable-add>
+      <not-support>Der Dialog '{0}' wird nicht unterstützt</not-support>
+      <no-permission-add>Zugriff verweigert ! Sie haben kein Recht hier eine Aktion hinzuzufügen.</no-permission-add>
+      <access-denied>Zugriff verweigert. Sie haben keine Zugriffsberechtigung für diese Vorlage.</access-denied>
+      <lifecycle-invalid>Sie können diese Aktion nicht hinzufügen. Die Lebenszyklusphase dieser Aktion ist ungültig.</lifecycle-invalid>
     </msg>
     <title>Aktion hinzufügen/bearbeiten</title>
     <validator>
@@ -1773,12 +1790,12 @@
   </UIActionForm>
   <UIActionTypeForm>
     <label>
-      <actionType>Create Action of Type</actionType>
+      <actionType>Erstellen einer Aktion des Typs</actionType>
     </label>
   </UIActionTypeForm>
   <PopupComponent>
     <title>
-      <UIOneNodePathSelector>Select Location</UIOneNodePathSelector>
+      <UIOneNodePathSelector>Ort auswählen</UIOneNodePathSelector>
       <UIPermissionSelector>Berechtigungsbrowser</UIPermissionSelector>
       <UICategoriesSelector>Kategorien hinzufügen</UICategoriesSelector>
     </title>
@@ -1808,7 +1825,7 @@
     <title>
       <exeButton>Los</exeButton>
       <backButton>Zurück zum vorherigen Knoten</backButton>
-      <showHistory>Show the history address</showHistory>
+      <showHistory>Adresse der Historie anzeigen</showHistory>
       <changeNode>Knoten ändern</changeNode>
     </title>
   </UIAddressBar>
@@ -1828,10 +1845,10 @@
       <notificationType>Benachrichtigungstyp:</notificationType>
     </label>
     <msg>
-      <not-support>This notification type is not supported. Please select another type.</not-support>
+      <not-support>Dieser Benachrichtigungstyp wird nicht unterstützt. Bitte wählen Sie einen anderen Typ.</not-support>
       <watching-successfully>Sie überwachen dieses Dokuments.</watching-successfully>
-      <unwatching-successfully>You have left the watchers list successfully.</unwatching-successfully>
-      <node-iswatching>This document is watched.</node-iswatching>
+      <unwatching-successfully>Sie haben die Liste der Beobachter erfolgreich verlassen.</unwatching-successfully>
+      <node-iswatching>Dieses Dokument wird beobachtet.</node-iswatching>
     </msg>
   </UIWatchDocumentForm>
   <!--
@@ -1842,7 +1859,7 @@
   <UITaggingForm>
     <label>
       <names>Tag Namen:</names>
-      <linked>Linked Tags:</linked>
+      <linked>Verknüpfte Tags</linked>
       <tagSet>UITaggingForm</tagSet>
     </label>
     <action>
@@ -1853,12 +1870,12 @@
       <name-exist>Der Tagname "{0}" ist bereits vorhanden.</name-exist>
       <tagName-invalid>Der Tagname enthält ungültige Zeichen.</tagName-invalid>
       <tag-name-empty>Der Tagname ist leer</tag-name-empty>
-      <tag-name-duplicate>The input tag names are duplicate.</tag-name-duplicate>
-      <tagName-too-long>One of the tags entered was too long. The tag name must be less than 30 characters.</tagName-too-long>
-      <path-not-found>This tag has been deleted or changed. Please click on the Refresh button.</path-not-found>
+      <tag-name-duplicate>Die eingegebenen Tagnamen müssen eindeutig sein.</tag-name-duplicate>
+      <tagName-too-long>Einer der eingegebenen Tags war zu lang. Tagnamen müssen kürzer als 30 Buchstaben sein.</tagName-too-long>
+      <path-not-found>Dieses Tag wurde gelöscht oder geändert. Klicken Sie auf die Schaltfläche "Aktualisieren".</path-not-found>
     </msg>
     <introduction>
-      <tagName>Separate multiple tags by commas ","</tagName>
+      <tagName>Trennen sie verschiedene Tags durch Kommas "," voneinander</tagName>
     </introduction>
   </UITaggingForm>
 
@@ -1869,7 +1886,7 @@
   -->
   <UIViewMetadataContainer>
     <msg>
-      <path-not-found>Node does not support this view.</path-not-found>
+      <path-not-found>Knoten unterstützt diese Ansicht nicht</path-not-found>
     </msg>
   </UIViewMetadataContainer>
   <!--
@@ -1890,7 +1907,7 @@
   </metadataForm>
   <UIViewMetadataTemplate>
     <msg>
-      <access-denied>Access denied. You are either not the owner or do not have edit permission in this node.</access-denied>
+      <access-denied>Zugriff verweigert. Sie sind entweder nicht der Besitzer des Knotens oder haben in diesem keine Bearbeitungsrechte.</access-denied>
     </msg>
   </UIViewMetadataTemplate>
   <!--
@@ -1900,17 +1917,17 @@
   -->
   <ECMNameValidator>
     <msg>
-      <Invalid-char>The field '{0}' contains some invalid characters. Please enter another value.</Invalid-char>
-      <empty-input>The value of the field '{0}' is null or empty.</empty-input>
+      <Invalid-char>Das Feld '{0} enthält ungültige Zeichen. Bitte einen anderen Wert eingeben.</Invalid-char>
+      <empty-input>Der Wert im Feld '{0}' ist nichts oder leer.</empty-input>
     </msg>
   </ECMNameValidator>
   <DateTimeValidator>
     <msg>
-      <Invalid-input>Field '{0}' with value '{1}' is invalid.</Invalid-input>
+      <Invalid-input>Das Feld '{0}' mit dem Wert '{1}' ist ungültig.</Invalid-input>
     </msg>
   </DateTimeValidator>
   <CronExpressionValidator>
-    <invalid-input>Your cron expression is invalid. Please check the syntax.</invalid-input>
+    <invalid-input>Ihr cron Ausdruck ist ungültig. Bitte überprüfen Sie die Syntax.</invalid-input>
   </CronExpressionValidator>
   <EmptyFieldValidator>
     <msg>
@@ -1928,25 +1945,25 @@
   ###################################################################################
   -->
   <ReferentialIntegrityException>
-    <msg>Action failed. There are still some reference items in the workspace.</msg>
+    <msg>Aktion fehlgeschlagen. Es gibt weiterhin einige referenzierte Elemente in dem Arbeitsbereich.</msg>
   </ReferentialIntegrityException>
   <ItemExistsException>
     <msg>Dieses Element ist bereits vorhanden.</msg>
   </ItemExistsException>
   <AccessControlException>
-    <msg>Access denied. You do not have permission to perform this action.</msg>
+    <msg>Zugriff verweigert. Sie haben für diese Aktion nicht die benötigten Rechte.</msg>
   </AccessControlException>
   <AccessDeniedException>
     <msg>Zugriff verweigert.</msg>
   </AccessDeniedException>
   <ItemNotFoundException>
-    <msg>Item not found. It may have been removed or changed.</msg>
+    <msg>Element nicht gefunden. Vielleicht wurde es gelöscht oder geändert.</msg>
   </ItemNotFoundException>
   <PathNotFoundException>
-    <msg>Path not found. It may have been removed or changed.</msg>
+    <msg>Pfad nicht gefunden. Vielleicht wurde er gelöscht oder geändert!</msg>
   </PathNotFoundException>
   <ConstraintViolationException>
-    <msg>You cannot perform this action due to some constraints.</msg>
+    <msg>Sie können diese Aktion bedingt durch einige erzwungene Bedingungen nicht durchführen.</msg>
   </ConstraintViolationException>
   <!--
   ###################################################################################
@@ -1967,7 +1984,7 @@
     </label>
     <action>
       <Save>Speichern</Save>
-      <UnsubcriberLifeCycle>Unsubscriber</UnsubcriberLifeCycle>
+      <UnsubcriberLifeCycle>Abmelder</UnsubcriberLifeCycle>
       <Cancel>Abbrechen</Cancel>
     </action>
   </UIPublicationForm>
@@ -2005,12 +2022,12 @@
   </UIFormInputSetWithAction>
   <RepeatCountValidator>
     <msg>
-      <invalid-value>The value in the field 'Repeat Count' is invalid. Only integers or -1 are allowed.</invalid-value>
+      <invalid-value>Der Wert Im Feld "Anzahl der Wiedeholungen" ist ungültig. Nur Integerzahlen oder -1 sind erlaubt.</invalid-value>
     </msg>
   </RepeatCountValidator>
   <RepeatIntervalValidator>
     <msg>
-      <invalid-value>The value in the field 'Time Interval' is invalid. Only long types are allowed.</invalid-value>
+      <invalid-value>Der Wert im Feld "Zeitintervall" ist ungültig. Es sind nur Werte vom Typ lange Ganzzahlen erlaubt.</invalid-value>
     </msg>
   </RepeatIntervalValidator>
   <UIPermissionSelector>
@@ -2027,8 +2044,8 @@
   -->
   <ECMStandardPropertyNameValidator>
     <msg>
-      <empty-input>The value of the field '{0}' is null or empty.</empty-input>
-      <Invalid-char>The field '{0}'contains some invalid characters. Please enter another value.</Invalid-char>
+      <empty-input>Der Wert im Feld '{0}' ist nichts oder leer.</empty-input>
+      <Invalid-char>Das feld '{0}' enthält ungültige Zeichen. Bitte geben Sie einen anderen Wert ein.</Invalid-char>
     </msg>
   </ECMStandardPropertyNameValidator>
   <!--
@@ -2038,13 +2055,13 @@
   -->
   <SearchValidator>
     <msg>
-      <empty-input>The value of this field is null or empty.</empty-input>
-      <Invalid-char>This field contains some invalid characters. Please enter another value.</Invalid-char>
-      <Invalid-char2>The number must be followed by the character '~'.</Invalid-char2>
-      <Invalid-char1>The number following the character '~' must between 0 and 1.</Invalid-char1>
-      <Invalid-char3>The number must be followed by the character '^'.</Invalid-char3>
-      <Invalid-char4>Spaces are not allowed near the character '~'.</Invalid-char4>
-      <Invalid-char5>Spaces are not allowed near the character '^'.</Invalid-char5>
+      <empty-input>Der Wert dieses Feldes ist ungültig oder leer.</empty-input>
+      <Invalid-char>Das Feld enthält einige ungültige Zeichen. Bitte geben Sie einen anderen Wert ein.</Invalid-char>
+      <Invalid-char2>Der Zahl muss das Zeichen '~' folgen.</Invalid-char2>
+      <Invalid-char1>Die Zahl die dem Zeichen '~' folgt muss zwischen 0 und 1 sein.</Invalid-char1>
+      <Invalid-char3>Der Zahl muss das Zeichen '^' folgen.</Invalid-char3>
+      <Invalid-char4>Leerzeichen sind um das Zeichen '~' nicht erlaubt.</Invalid-char4>
+      <Invalid-char5>Leerzeichen sind neben dem Zeichen '^' nicht erlaubt.</Invalid-char5>
     </msg>
   </SearchValidator>
   <!--
@@ -2092,11 +2109,11 @@
       <SelectFile>Miniaturbild auswählen</SelectFile>
     </label>
     <msg>
-      <mimetype-incorrect>Incorrect file type. Thumbnails can only be created from .JPG, .PNG or .GIF files.</mimetype-incorrect>
-      <access-denied>Access denied. You do not have permission to add a thumbnail to this node.</access-denied>
+      <mimetype-incorrect>Falscher Dateityp. Miniaturbilder können nur aus .jpg-, .png- oder .gif-Dateien erzeugt werden.</mimetype-incorrect>
+      <access-denied>Zugriff verweigert. Sie haben keine Berechtigung ein Miniaturbild zu diesem Knoten hinzuzufügen.</access-denied>
       <confirm-delete>Möchten Sie dieses Miniaturbild wirklich entfernen?</confirm-delete>
-      <is-checked-in>This node is checked in. Please check out before performing any action.</is-checked-in>
-      <fileName-error>Please select a file to upload.</fileName-error>
+      <is-checked-in>Dieser Knoten ist eingecheckt. Bitte checken Sie ihn aus bevor Sie irgendwelche Aktionen durchführen.</is-checked-in>
+      <fileName-error>Bitte wählen Sie eine Datei zum Hochladen aus.</fileName-error>
     </msg>
     <title>
       <remove-thumbnail>Dieses Miniaturbild entfernen</remove-thumbnail>
@@ -2149,7 +2166,7 @@
   Access directly a JCR FE drive
   -->
   <UIJCRExplorerPortlet>
-    <nopermission>There is either no drive or you do not have permission to access this drive.</nopermission>
+    <nopermission>Es gibt entweder kein Laufwerk, oder Sie haben keine Berechtigung für den Zugriff auf dieses Laufwerk.</nopermission>
   </UIJCRExplorerPortlet>
 
   <UIJcrExplorerEditForm>
@@ -2161,11 +2178,11 @@
     </action>
     <label>
       <uploadFileSizeLimitMB>Die Größenbeschränkung der hochgeladenen Datei (MB)</uploadFileSizeLimitMB>
-      <isDirectlyDrive>Direct Drive</isDirectlyDrive>
+      <isDirectlyDrive>Direktes Laufwerk</isDirectlyDrive>
       <driveName>Laufwerkname</driveName>
       <usecase>Typ auswählen</usecase>
       <SelectNodePath>Pfad auswählen</SelectNodePath>
-      <showTopBar>Show Top Bar</showTopBar>
+      <showTopBar>Obere Leiste anzeigen</showTopBar>
       <showActionBar>Aktionsleiste anzeigen</showActionBar>
       <showSideBar>Linke Leiste anzeigen</showSideBar>
       <showFilterBar>Filterleiste anzeigen</showFilterBar>
@@ -2177,7 +2194,7 @@
     <label>
       <driveName>Laufwerkname</driveName>
       <action>Aktion</action>
-      <adddrives>Add Drives</adddrives>
+      <adddrives>Laufwerke hinzufügen</adddrives>
     </label>
   </UIDriveSelector>
   <UIJcrExplorerEditForm>
@@ -2185,9 +2202,9 @@
       <DriveNameInput>UI JCR Explorer Edit Form</DriveNameInput>
     </label>
     <msg>
-      <personal-usecase>The private drive of the current user will be used when you select the Personal usecase.</personal-usecase>
-      <drive-edit-permission>You cannot edit the drive name. Please click the Edit button.</drive-edit-permission>
-      <path-edit-permission>You cannot edit the path. Please click the Edit button.</path-edit-permission>
+      <personal-usecase>Das private Laufwerk des aktuellen Benutzers wird verwendet werden, wenn Sie als Auswahl den persönlichen Anwendungsfall wählen.</personal-usecase>
+      <drive-edit-permission>Sie können den Laufwerksnamen nicht bearbeiten. Bitte klicken Sie den Bearbeiten Knopf an.</drive-edit-permission>
+      <path-edit-permission>Sie können den Pfad nicht bearbeiten. Bitte Klicken Sie den Bearbeiten Knopf</path-edit-permission>
     </msg>
   </UIJcrExplorerEditForm>
 
@@ -2214,50 +2231,50 @@
   -->
   <UIActionBar>
     <tooltip>
-      <AddSymLink>Add Symlink</AddSymLink>
+      <AddSymLink>Symbolische Verknüpfung hinzufügen</AddSymLink>
       <AddLocalizationLink>Übersetzung hinzufügen</AddLocalizationLink>
     </tooltip>
   </UIActionBar>
 
   <UIPopupWindow>
     <title>
-      <UISymLinkManager>Symlink Manager</UISymLinkManager>
+      <UISymLinkManager>Verwaltung von symbolischen Verknüpfungen</UISymLinkManager>
       <UIAddTranslationManager>Übersetzung hinzufügen</UIAddTranslationManager>
     </title>
   </UIPopupWindow>
 
   <UISymLinkForm>
     <label>
-      <symLinkName>Symlink Name</symLinkName>
-      <pathNode>Path Node</pathNode>
+      <symLinkName>Name für symbolische Verknüpfung</symLinkName>
+      <pathNode>Pfad zum Knoten</pathNode>
     </label>
     <action>
       <Save>#{word.save}</Save>
       <Cancel>#{word.cancel}</Cancel>
     </action>
     <msg>
-      <addFolder-successful>The symlink '{0}' was added successfully.</addFolder-successful>
-      <name-invalid>Please enter the symlink name.</name-invalid>
-      <name-not-allowed>This name is not allowed.</name-not-allowed>
+      <addFolder-successful>Die symbolische Verknüpfung '{0}' wurde erfolgreich hinzugefügt.</addFolder-successful>
+      <name-invalid>Bitte geben Sie den Namen der symbolischen Verknüpfung ein.</name-invalid>
+      <name-not-allowed>Dieser Name ist nicht erlaubt.</name-not-allowed>
       <fileName-error>Der Dateiname ist ungültig.</fileName-error>
-      <constraint-violation>You cannot add the'{0}' node type to the current node.</constraint-violation>
-      <repository-exception>Access denied. You do not have permission to add symlink to this node.</repository-exception>
-      <numberformat-exception>You cannot save this folder. The name provided must be in numerical format.</numberformat-exception>
-      <path-node-invalid>Please enter the path node.</path-node-invalid>
-      <path-node-not-allowed>This name is not allowed.</path-node-not-allowed>
-      <non-node>Please select the trust target node; you may not have the right to read this node.</non-node>
-      <cannot-save>You cannot add a symlink for this node type.</cannot-save>
+      <constraint-violation>Sie können den Knotentyp '{0}' nicht zum aktuellen Knoten hinzufügen.</constraint-violation>
+      <repository-exception>Zugriff verweigert! Sie haben nicht die Berechtigung symbolische Verknüfungen zu diesem Knoten hinzuzufügen.</repository-exception>
+      <numberformat-exception>Sie können diesen Ordner nicht speichern. Der übergebene Name muss in nummerischem Format sein.</numberformat-exception>
+      <path-node-invalid>Bitte geben Sie den Pfad zum Knoten ein.</path-node-invalid>
+      <path-node-not-allowed>Dieser Name ist nicht erlaubt.</path-node-not-allowed>
+      <non-node>Sie haben keine Zugriffsrechte auf den Zielknoten.</non-node>
+      <cannot-save>Sie können keine symbolische Verknüpfung für diesen Knotentyp hinzufügen.</cannot-save>
       <item-exists-exception>Der Knotenname ist bereits vorhanden.</item-exists-exception>
-      <translation-node-same-language-default>The translation node has the same language as the default language of current node.</translation-node-same-language-default>
-      <UnsupportedRepositoryOperationException>This target node is not referred.</UnsupportedRepositoryOperationException>
+      <translation-node-same-language-default>Der Übersetzungsknoten hat dieselbe Sprache wie die Standardsprache des aktuellen Knotens.</translation-node-same-language-default>
+      <UnsupportedRepositoryOperationException>Dieser Zielknoten ist nicht referenziert.</UnsupportedRepositoryOperationException>
     </msg>
   </UISymLinkForm>
   
   <UIAddTranslationForm>
     <label>
       <symLinkName>symbolische Verknüpfungsname (Symlink)</symLinkName>
-      <pathNode>Document Path:</pathNode>
-      <note>Select another document that will serve as the translation</note>
+      <pathNode>Dokumentenpfad:</pathNode>
+      <note>Wählen Sie ein weiteres Dokument, das als die Übersetzung dient</note>
     </label>
     <action>
       <Save>#{word.save}</Save>
@@ -2265,20 +2282,20 @@
       <SelectDocument>Dokument auswählen</SelectDocument>
     </action>
     <msg>
-      <addFolder-successful>The symlink '{0}' is added successfully.</addFolder-successful>
+      <addFolder-successful>Symbolische Verknüpfung '{0}' erfolgreich hinzugefügt.</addFolder-successful>
       <name-invalid>Bitte geben Sie den symbolischen Verknüpfungsname (Symlink) ein.</name-invalid>
       <name-not-allowed>Dieser Name ist nicht erlaubt.</name-not-allowed>
       <fileName-error>Der Dateiname ist ungültig.</fileName-error>
       <constraint-violation>Sie können nicht zu dem aktuellen Knoten den Knotentyp "{0}" hinzufügen.</constraint-violation>
-      <repository-exception>Access denied. You do not have permission to add symlink to this node.</repository-exception>
+      <repository-exception>Zugriff verweigert! Sie haben nicht die Berechtigung, einen Symlink zu diesem Knoten hinzuzufügen.</repository-exception>
       <numberformat-exception>Dieser Ordner kann nicht gespeichert werden. Der angegebene Name muss im numerischen Format sein.</numberformat-exception>
-      <path-node-invalid>Please enter the path node.</path-node-invalid>
+      <path-node-invalid>Bitte geben Sie den Pfad zum Knoten ein.</path-node-invalid>
       <path-node-not-allowed>Dieser Name ist nicht erlaubt.</path-node-not-allowed>
-      <non-node>Please select the trust target node; you may not have the right to read this node.</non-node>
-      <cannot-save>An error occurred while creating the symlink.</cannot-save>
+      <non-node>Sie haben keine Zugriffsrechte auf den Zielknoten.</non-node>
+      <cannot-save>Fehler beim Erstellen der symbolischen Verknüpfung.</cannot-save>
       <item-exists-exception>Der Knotenname ist bereits vorhanden.</item-exists-exception>
-      <translation-node-same-language-default>The translation node has the same language as the default language of current node.</translation-node-same-language-default>
-      <UnsupportedRepositoryOperationException>This target node is not referred.</UnsupportedRepositoryOperationException>
+      <translation-node-same-language-default>Der Übersetzungsknoten hat dieselbe Sprache wie die Standardsprache des aktuellen Knotens.</translation-node-same-language-default>
+      <UnsupportedRepositoryOperationException>Dieser Zielknoten ist nicht referenziert.</UnsupportedRepositoryOperationException>
     </msg>
   </UIAddTranslationForm>
 
@@ -2295,29 +2312,29 @@
 
   <ECMContextMenu>
     <event>
-      <AddSymLink>Add Symlink</AddSymLink>
+      <AddSymLink>Symbolische Verknüpfung hinzufügen</AddSymLink>
       <AddLocalizationLink>Übersetzung hinzufügen</AddLocalizationLink>
     </event>
   </ECMContextMenu>
 
   <UIWorkingArea>
     <msg>
-      <create-link-problem>You cannot create a link for node '{0}' at '{1}'.</create-link-problem>
-      <dest-node-is-link>The destination node '{0}' is already a symlink, so you cannot create a symlink inside it.</dest-node-is-link>
-      <selected-is-link>The selected node '{0}' is already a link, so you cannot create a link point to another link.</selected-is-link>
-      <confirm-create-link>Do you want to create a link to this location?</confirm-create-link>
+      <create-link-problem>Sie können keine Verknüpfung für den Knoten '{0}' in  '{1}' erstellen.</create-link-problem>
+      <dest-node-is-link>Der Zielknoten "{0}" ist bereits eine symbolische Verknüpfung, daher können Sie darin keine weitere erstellen.</dest-node-is-link>
+      <selected-is-link>Der ausgewählte Knoten "{0}" ist bereits eine Verknüpfung. Sie können keine Verknüpfung erstellen, die auf eine Verknüpfung verweist.</selected-is-link>
+      <confirm-create-link>Möchten Sie eine Verknüpfung zu diesem Ort erstellen?</confirm-create-link>
     </msg>
   </UIWorkingArea>
 
   <ECMContextMenu>
     <event>
-      <CreateLink>Create Link</CreateLink>
+      <CreateLink>Verknüpfung erstellen</CreateLink>
     </event>
   </ECMContextMenu>
 
   <UIWorkspaceList>
     <msg>
-      <AccessDeniedException>Access denied. You do not have read permission in this workspace.</AccessDeniedException>
+      <AccessDeniedException>Zugriff verweigert. Sie haben keine Leseberechtigung in diesem Arbeitsbereich.</AccessDeniedException>
     </msg>
     <label>
       <taxonomyTree>Kategoriebaum</taxonomyTree>
@@ -2333,14 +2350,14 @@
   <UITreeTaxonomyList>
     <label>
       <taxonomyTree>Kategoriebaum:</taxonomyTree>
-      <rootNodePath>Root Tree:</rootNodePath>
+      <rootNodePath>Ursprungsbaum:</rootNodePath>
       <rootNodeInfo>UITreeTaxonomyList</rootNodeInfo>
     </label>
   </UITreeTaxonomyList>
 
   <UIActionBar>
     <tooltip>
-      <ManageSimpleCategories>Manage Simple Categories</ManageSimpleCategories>
+      <ManageSimpleCategories>Verwaltung einfacher Kategorien</ManageSimpleCategories>
     </tooltip>
   </UIActionBar>
 
@@ -2381,8 +2398,8 @@
     <label>
       <Close>#{word.cancel}</Close>
       <OK>Löschen</OK>
-      <ReplaceData>Replace Data</ReplaceData>
-      <Back>Back to Rename</Back>
+      <ReplaceData>Daten ersetzen</ReplaceData>
+      <Back>Zurück zu Umbenennen</Back>
       <Keepfile>Beide Dateien behalten</Keepfile>
     </label>
   </UIConfirmMessage>
@@ -2391,8 +2408,8 @@
     <label>
       <Close>#{word.close}</Close>
       <OK>Ok</OK>
-      <ReplaceData>Replace Data</ReplaceData>
-      <Back>Back to Rename</Back>
+      <ReplaceData>Daten ersetzen</ReplaceData>
+      <Back>Zurück zu Umbenennen</Back>
       <Keepfile>Beide Dateien behalten</Keepfile>
     </label>
   </UIRestoreConfirmMessage>
@@ -2406,40 +2423,40 @@
 
   <UIWorkingArea>
     <msg>
-      <can-not-move-to-itself>You cannot move the file, because the destination folder is the same as the source folder.</can-not-move-to-itself>
-      <is-editing>You cannot move a document while it is being edited. Please close it first.</is-editing>
+      <can-not-move-to-itself>Die Datei kann nicht verschoben werden, weil Zielordner und Quellordner identisch sind.</can-not-move-to-itself>
+      <is-editing>Sie können das Dokument nicht verschieben, während es bearbeitet wird. Bitte schließen Sie es zuerst.</is-editing>
     </msg>
   </UIWorkingArea>
 
   <UIImportNode>
     <label>
-      <behavior>UUID Behavior</behavior>
-      <versionHistory>Version History</versionHistory>
+      <behavior>UUID Verhalten</behavior>
+      <versionHistory>Versionshistorie</versionHistory>
     </label>
     <msg>
-      <history-invalid-type>Invalid file type in the version history. Only .zip files are supported.</history-invalid-type>
-      <history-invalid-content>Invalid content in the version history data. Please select a supported file type to import.</history-invalid-content>
+      <history-invalid-type>Ungültiger Dateityp im Versionsverlauf. Nur .zip Dateien werden unterstützt.</history-invalid-type>
+      <history-invalid-content>Ungültiger Inhalt  in den Versionhistoriedaten. Bitte wählen Sie einen gültigen Dateityp für den Import aus.</history-invalid-content>
     </msg>
   </UIImportNode>
 
   <Import>
     <Behavior>
-      <type0>Create New</type0>
-      <type1>Remove Existing</type1>
-      <type2>Replace Existing</type2>
-      <type3>Throw Exception</type3>
+      <type0>Neu erstellen</type0>
+      <type1>Bestehende entfernen</type1>
+      <type2>Bestehende ersetzen</type2>
+      <type3>Ausnahmefehler anzeigen</type3>
     </Behavior>
   </Import>
 
   <UIExportNode>
     <action>
-      <ExportHistory>Export Version History</ExportHistory>
+      <ExportHistory>Export der Versionsgeschichte</ExportHistory>
     </action>
   </UIExportNode>
 
   <UIPopupMenu>
     <msg>
-      <node-locked-other-person>This node or its parent node is being locked by another user, so you cannot delete it.</node-locked-other-person>
+      <node-locked-other-person>Dieser Knoten oder sein Elternknoten ist durch einen anderen Benutzer gesperrt, Sie können ihn nicht löschen.</node-locked-other-person>
     </msg>
   </UIPopupMenu>
 
@@ -2452,7 +2469,7 @@
 
   <UIDocumentForm>
     <msg>
-      <do-not-permission>You do not have permission to load the template '{0}'.</do-not-permission>
+      <do-not-permission>Sie haben keine Berechtigung zum Laden der Vorlage '{0}'.</do-not-permission>
     </msg>
   </UIDocumentForm>
 
@@ -2474,7 +2491,7 @@
 
   <UIPopupMenu>
     <msg>
-      <can-not-unlock-node-is-checked-in>You cannot unlock because the node '{0}' (or its ancestor) is checked in.</can-not-unlock-node-is-checked-in>
+      <can-not-unlock-node-is-checked-in>Sie können die Sperre nicht aufheben weil der Knoten '{0}' (oder sein Vorfahre) eingecheckt ist.</can-not-unlock-node-is-checked-in>
     </msg>
   </UIPopupMenu>
 
@@ -2483,22 +2500,22 @@
   -->
   <UIActionBar>
     <msg>
-      <cannot-enable-version>Cannot enable versioning node.</cannot-enable-version>
+      <cannot-enable-version>Kann die Versionierung für Knoten nicht aktivieren.</cannot-enable-version>
     </msg>
   </UIActionBar>
   <UIPopupMenu>
     <msg>
-        <cannot-readsource>You cannot read data from the source node.</cannot-readsource>
+        <cannot-readsource>Kann keine Daten vom Quellknoten lesen.</cannot-readsource>
     </msg>
   </UIPopupMenu>
   <UIUploadForm>
     <msg>
-      <upload-not-null>Please upload the file before adding a category.</upload-not-null>
+      <upload-not-null>Bitte die Datei hochladen bevor Sie eine Kategorie hinzufügen.</upload-not-null>
     </msg>
   </UIUploadForm>
   <UIActionBar>
     <msg>
-      <allow-setProperty>You must set a property for this group.</allow-setProperty>
+      <allow-setProperty>Sie müssen eine Eigenschaft für diese Gruppe setzen.</allow-setProperty>
     </msg>
   </UIActionBar>
 
@@ -2515,7 +2532,7 @@
   </UISaveQueryForm>
   <UISimpleSearch>
     <msg>
-      <name-not-allowed>A word or phrase in the content is not allowed.</name-not-allowed>
+      <name-not-allowed>Ein Wort oder eine Phrase im Inhalt ist nicht erlaubt.</name-not-allowed>
     </msg>
   </UISimpleSearch>
 
@@ -2569,7 +2586,7 @@
 
   <UIJcrExplorerEditForm>
     <msg>
-      <notNullDriveName>The Drive Name is null or empty. Please fill out the Drive Name field.</notNullDriveName>
+      <notNullDriveName>Der Laufwerksname ist nichts oder leer. Bitte füllen das Feld Laufwerksname aus.</notNullDriveName>
       <notNullPath>Der Pfad ist null oder leer. Bitte füllen Sie den Pfad aus.</notNullPath>
     </msg>
   </UIJcrExplorerEditForm>
@@ -2633,7 +2650,7 @@
       <Documents>Documents</Documents>
       <Content>Inhalt</Content>
     </label>
-    <title>Set Up Filter Preferences</title>
+    <title>Filtervoreinstellungen einrichten</title>
     <action>
       <Save>#{word.save}</Save>
       <Cancel>#{word.cancel}</Cancel>
@@ -2650,13 +2667,13 @@
       <ShowMusic>Alle Musikdateien anzeigen</ShowMusic>
       <ShowImages>Alle Bilddateien anzeigen</ShowImages>
       <ShowDocuments>Alle Dokumentdateien anzeigen</ShowDocuments>
-      <ShowContent>Show all document types</ShowContent>
+      <ShowContent>Alle Dokumenttypen anzeigen</ShowContent>
     </title>
   </UIAllItemsByType>
 
   <Views>
     <label>
-      <slide-show>Slide Show</slide-show>
+      <slide-show>Diaschau</slide-show>
     </label>
   </Views>
   <ECMContextMenu>
@@ -2685,7 +2702,7 @@
 
   <EmptyTrashManageComponent>
     <msg>
-      <confirm-delete>Are you sure you want to empty all items from trash?</confirm-delete>
+      <confirm-delete>Sind sie sicher, dass Sie alle Elemente aus dem Müll leeren möchten?</confirm-delete>
     </msg>
   </EmptyTrashManageComponent>
   <UICategoryForm>
@@ -2712,7 +2729,7 @@
     <label>
       <Public>Öffentlich</Public>
       <Private>Privat</Private>
-      <tagScopes>Tag Scopes</tagScopes>
+      <tagScopes>Tag-Gültigkeitsbereiche</tagScopes>
     </label>
    </UITaggingForm>
 
@@ -2768,12 +2785,12 @@
 
     <UIPopupMenu>
     <msg>
-      <node-locked-editing>You cannot edit this node with the path {0}. It is being locked by another user.</node-locked-editing>
+      <node-locked-editing>Sie können den Knoten mit dem Pfad {0}  nicht bearbeiten. Er ist durch einen anderen Benutzer gesperrt.</node-locked-editing>
     </msg>
   </UIPopupMenu>
   <UITagStyleForm>
     <msg>
-      <error-update>An error occurred while updating the tag style.</error-update>
+      <error-update>Beim aktualisieren des Tag-Stils ist ein Fehler aufgetreten</error-update>
     </msg>
   </UITagStyleForm>
 
@@ -2837,12 +2854,12 @@
   </UITreeExplorer>
   <UIDocumentForm>
     <msg>
-      <constraintviolation-exception>You cannot save the document. The input data are missing or invalid.</constraintviolation-exception>
+      <constraintviolation-exception>Sie können das Dokument nicht abspeichern. Die Eingabedaten fehlen oder sind ungültig.</constraintviolation-exception>
     </msg>
   </UIDocumentForm>
   <UIActionForm>
     <msg>
-      <constraintviolation-exception>You cannot save the document. The input data are missing or invalid.</constraintviolation-exception>
+      <constraintviolation-exception>Sie können das Dokument nicht abspeichern. Die Eingabedaten fehlen oder sind ungültig.</constraintviolation-exception>
     </msg>
   </UIActionForm>
 
@@ -2852,7 +2869,7 @@
       <Cancel>Abbrechen</Cancel>
     </action>
     <label>
-      <formInput>The previous path was lost. Please select a new one.</formInput>
+      <formInput>Der alte Pfad ist verlorengegangen. Bitte wählen Sie einen neuen.</formInput>
     </label>
   </UISelectRestorePath>
   <PathNode>
@@ -2862,7 +2879,7 @@
   </PathNode>
   <UIPopupPathFoRestore>
     <title>
-      <UIOneNodePathSelector>Select Parent Node</UIOneNodePathSelector>
+      <UIOneNodePathSelector>Wählen Sie den übergeordneten Knoten</UIOneNodePathSelector>
     </title>
   </UIPopupPathFoRestore>
   <rootNodeInfo>
@@ -2900,10 +2917,10 @@
       <status>Status</status>
       <action>Aktion</action>
       <label>Überarbeitung</label>
-      <none>No revisions</none>
+      <none>Keine Revisionen</none>
       <seeall>Alle Versionen ansehen</seeall>
-      <currentVersion>Current Revision</currentVersion>
-      <confirm>You will lose your draft work. Are you sure you want to replace the current revision?</confirm>
+      <currentVersion>Aktuelle Revision</currentVersion>
+      <confirm>Sie werden Ihre Arbeit an dem Entwurf verlieren. Sind Sie sich sicher, dass Sie die aktuelle Revision ersetzen möchten?</confirm>
     </revisions>
     <status>
       <version>Überarbeitung</version>
@@ -2911,7 +2928,7 @@
       <archived>Archiviert</archived>
       <obsolete>Veraltet</obsolete>
       <unpublished>Unveröffentlicht</unpublished>
-      <enrolled>Enrolled</enrolled>
+      <enrolled>Übergeben</enrolled>
       <draft>Entwurf</draft>
       <pending>Ausstehend</pending>
       <approved>Genehmigt</approved>
@@ -2930,15 +2947,15 @@
       <restore>Wiederherstellen</restore>
     </title>
     <msg>
-      <have-no-view-template>The View template is not supported.</have-no-view-template>
-      <restore-complete>Restore completed.</restore-complete>
+      <have-no-view-template>Die Ansichtsvorlage ist nicht unterstützt.</have-no-view-template>
+      <restore-complete>Wiederherstellung abgeschlossen.</restore-complete>
     </msg>
   </UIPublicationPanel>
   <UIPublicationHistory>
     <header>
       <date>Datum</date>
-      <versionName>Revision Name</versionName>
-      <currentState>Current State</currentState>
+      <versionName>Revisionsname</versionName>
+      <currentState>Aktueller Zustand</currentState>
       <user>Autor</user>
       <description>Beschreibung</description>
     </header>
@@ -2946,11 +2963,11 @@
   
   <UIPublicationSchedule>
     <label>
-      <introduction>You can schedule the publication of your document. Select the dates you would like to see your document published</introduction>
-      <no-schedule-info>There is no publication schedule for your document</no-schedule-info>
+      <introduction>Sie können die Veröffentlichung Ihres Dokuments planen. Wählen Sie die Zeitpunkte an denen Sie Ihr Dokument veröffentlicht sehen möchten</introduction>
+      <no-schedule-info>Es gibt keinen Veröffentlichungszeitplan für Ihr Dokument</no-schedule-info>
     </label>
     <msg>
-      <save-finished>Your new publication schedule was saved successfully.</save-finished>
+      <save-finished>Ihr neuer Veröffentlichungszeitplan wurde erfolgreich gespeichert.</save-finished>
     </msg>
     <action>
       <Save>#{word.save}</Save>
@@ -2960,12 +2977,12 @@
 
   <UIPublicationPanel>
     <label>
-      <header>Publication Date</header>
-      <start>Start Publication</start>
+      <header>Veröffentlichungsdatum</header>
+      <start>Veröffentlichung starten</start>
       <end>Veröffentlichungsende</end>
     </label>
     <msg>
-      <invalid-format>The date format is invalid. Please check again.</invalid-format>
+      <invalid-format>Das Datumsformat ist ungültig. Bitte überprüfen Sie es nocheinmal.</invalid-format>
       <fromDate-after-toDate>Das Anfangsdatum muss vor dem Enddatum liegen.</fromDate-after-toDate>
     </msg>
   </UIPublicationPanel>
@@ -3019,7 +3036,6 @@
   </UIJCRExplorerPortlet>
   <UIDrivesArea>
     <DrivesArea>
-      <allDrives>Klicken Sie auf "Laufwerke anzeigen" auf der Aktionsleiste, um eine Liste der Laufwerke anzuzeigen/auszublenden.</allDrives>
       <ShowDrives>Laufwerke anzeigen</ShowDrives>
     </DrivesArea>
   </UIDrivesArea>
@@ -3071,7 +3087,7 @@
   <UIPopupMenu>
   <msg>
 <can-not-remove-locked-node>Der Knoten {0} ist gesperrt. Sie können den in den Papierkorb nicht verschieben.</can-not-remove-locked-node>
-<can-not-remove-checked-in-node>Node {0} or its parent is checked in. You cannot move it to the Trash.</can-not-remove-checked-in-node>
+<can-not-remove-checked-in-node>Knoten {0} oder der ihm übergeordnete ist eingecheckt. Sie können ihn nicht in den Müll verschieben.</can-not-remove-checked-in-node>
 <access-denied-to-delete>Zugriff verweigert. Der Knoten {0} kann nach dem Papierkorb nicht verschoben werden.</access-denied-to-delete>
   </msg>
   </UIPopupMenu>
@@ -3101,7 +3117,7 @@
     <Close>Schließen</Close>
     <in>in</in>
     <MaxFileSizeAlert>Die Dateigröße überschreitet die maximale Größe von</MaxFileSizeAlert>
-    <Waiting>Waiting</Waiting>
+    <Waiting>Warte</Waiting>
     <Error>Fehler</Error>
     <or>oder</or>
     <AlreadyInUse>Bereits in Benutzung</AlreadyInUse>

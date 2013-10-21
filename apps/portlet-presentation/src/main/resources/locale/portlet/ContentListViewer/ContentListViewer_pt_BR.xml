@@ -40,7 +40,6 @@
       <UICLVConfigHeaderFormStringInput>Cabeçalho</UICLVConfigHeaderFormStringInput>
       <UICLVConfigDisplayTemplateFormSelectBox>Modelo</UICLVConfigDisplayTemplateFormSelectBox>
       <UICLVConfigPaginatorTemplateFormSelectBox>Paginador</UICLVConfigPaginatorTemplateFormSelectBox>
-      <UICLVConfigTargetPageFormStringInput/>
       <UICLVConfigItemsPerPageFormStringInput>Itens por página</UICLVConfigItemsPerPageFormStringInput>
       <UICLVConfigShowIllustrationFormCheckboxInput>Mostrar Imagem</UICLVConfigShowIllustrationFormCheckboxInput>
       <UICLVConfigShowSummaryFormCheckboxInput>Mostrar Sumário</UICLVConfigShowSummaryFormCheckboxInput>

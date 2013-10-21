@@ -10,7 +10,6 @@
       <name>Namn</name>
       <action>Lägg till</action>
     </header>
-    <action/>
     <info>
       <child-not-found>underkategori hittades inte!</child-not-found>
     </info>
