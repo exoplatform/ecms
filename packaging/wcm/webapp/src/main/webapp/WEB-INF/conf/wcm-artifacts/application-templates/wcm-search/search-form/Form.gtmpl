@@ -29,7 +29,7 @@ addScripts('search.SearchPortlet.search("' + uicomponent.id + '");');
 			<%=_ctx.appRes("UIDefaultSearchForm.label.keyword")%>: 
 		</label>
 		<div class="controls">
-			<% uiform.renderField(uiKeywordInput) %> <button onclick="eXo.ecm.SearchPortlet.keepKeywordOnBoxSearch();" class="btn SearchButton">$actionLabel</button>
+			<% uiform.renderField(uiKeywordInput) %> <a href="$link" onclick="eXo.ecm.SearchPortlet.keepKeywordOnBoxSearch();" class="btn SearchButton">$actionLabel</a>
 		</div>
 	  </div>
 	  <div class="control-group">
