@@ -167,8 +167,16 @@
                 setUploadFields(captions, "nt:file", "exo:captions", captions, null);
               }
             %>
-          
-            <i class="uiIconQuestion uiIconLightGray" id="CaptionsHelp" rel="tooltip" data-placement="left" title=" <%= _ctx.appRes("AccessibleMedia.help.CaptionsHelp") %>" > </i>
+            <div style="display:inline-block;" onmouseover="(function(elm) {elm.getElementsByClassName('popover')[0].style.display='block'})(this)"
+            onmouseout="(function(elm) {elm.getElementsByClassName('popover')[0].style.display='none'})(this)">
+              <i class="uiIconQuestion uiIconLightGray"> </i>
+              <div class="gotPosition" style="position: absolute; top: 189px; left: 915px;">
+                <div class="popover left" style="display: none;">
+                  <span class="arrow"></span>
+                  <div class="popover-content"><%= _ctx.appRes("AccessibleMedia.help.CaptionsHelp") %></div>
+                </div>
+              </div>
+            </div>
           </div>
           
         </div>
@@ -204,8 +212,16 @@
               setUploadFields(audioDescription, "nt:file", "exo:audioDescription", audioDescription, "video/x-flv,audio/mp3");
             }
           %>
-        
-					<i class="uiIconQuestion uiIconLightGray" id="AudioDescriptionHelp"  rel="tooltip" data-placement="left" title="<%= _ctx.appRes("AccessibleMedia.help.AudioDescriptionHelp") %>" ></i>
+          <div style="display:inline-block;" onmouseover="(function(elm) {elm.getElementsByClassName('popover')[0].style.display='block'})(this)"
+          onmouseout="(function(elm) {elm.getElementsByClassName('popover')[0].style.display='none'})(this)">
+					  <i class="uiIconQuestion uiIconLightGray"></i>
+					  <div class="gotPosition" style="position: absolute; top: 189px; left: 915px;">
+              <div class="popover left" style="display: none;">
+                <span class="arrow"></span>
+                <div class="popover-content"><%= _ctx.appRes("AccessibleMedia.help.AudioDescriptionHelp") %></div>
+              </div>
+            </div>
+          </div>
         </div>
         
       </div>
@@ -218,7 +234,16 @@
           <% String[] fieldAltText = ["jcrPath=/node/exo:alternativeText", "fillJcrDataOfFile=false"] ;
              uicomponent.addRichtextField("alternativeText", fieldAltText) ;            
           %>
-					<i class="uiIconQuestion uiIconLightGray" id="AlternativeTextHelp" rel="tooltip" data-placement="left" title=" <%= _ctx.appRes("AccessibleMedia.help.AlternativeTextHelp") %>"></i>
+          <div style="display:inline-block;" onmouseover="(function(elm) {elm.getElementsByClassName('popover')[0].style.display='block'})(this)"
+          onmouseout="(function(elm) {elm.getElementsByClassName('popover')[0].style.display='none'})(this)">
+					  <i class="uiIconQuestion uiIconLightGray" id="AlternativeTextHelp"></i>
+					  <div class="gotPosition" style="position: absolute; top: 189px; left: 915px;">
+              <div class="popover left" style="display: none;">
+                <span class="arrow"></span>
+                <div class="popover-content"><%= _ctx.appRes("AccessibleMedia.help.AlternativeTextHelp") %></div>
+              </div>
+            </div>
+          </div>
         </div>
 
       </div>
