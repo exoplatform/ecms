@@ -46,6 +46,7 @@
   <%uicomponent.renderChildren()%>
 </div>
 <%
+if (rcontext.getRemoteUser() != null && WCMComposer.MODE_EDIT.equals(Utils.getCurrentMode())) {
   def jsManager = rcontext.getJavascriptManager(); 
   %>
     <script type="text/javascript">
@@ -58,6 +59,7 @@
         }        
       });
     </script>
-<%
-jsManager.require("SHARED/quick-edit", "quickEdit").addScripts("for(var instanceName in CKEDITOR.instances) { var editor = CKEDITOR.instances[instanceName]; editor.on( 'focus', function( e ) {quickEdit.InlineEditor.removeHoverClass();} ); editor.on('change', function(e) {quickEdit.InlineEditor.modifyInlineContent();}); editor.on('blur', (function(tmp) { return function() {quickEdit.InlineEditor.saveInlineContent(tmp);}})(editor)); }");
+  <%
+  jsManager.require("SHARED/quick-edit", "quickEdit").addScripts("if(CKEDITOR) {for(var instanceName in CKEDITOR.instances) { var editor = CKEDITOR.instances[instanceName]; editor.on( 'focus', function( e ) {quickEdit.InlineEditor.removeHoverClass();} ); editor.on('change', function(e) {quickEdit.InlineEditor.modifyInlineContent();}); editor.on('blur', (function(tmp) { return function() {quickEdit.InlineEditor.saveInlineContent(tmp);}})(editor)); }}");
+}
 %>

@@ -256,14 +256,17 @@
 	};
 
 	WCMUtils.prototype.changeStyleClass = function(element, newStyleClass) {
-            var isFocusOnCKEditor = false;
-            if(CKEDITOR) {
-		    for(name in CKEDITOR.instances)
-		    {
-			var editor = CKEDITOR.instances[name];
-		        if(editor.focusManager.hasFocus) isFocusOnCKEditor = true;
-		    }
-	    }
+		var isFocusOnCKEditor = false;
+		try {
+			if(CKEDITOR) {
+				for(name in CKEDITOR.instances)
+				{
+					var editor = CKEDITOR.instances[name];
+					if(editor.focusManager.hasFocus) isFocusOnCKEditor = true;
+				}
+			}
+		} catch(err) {}
+
 	    if(!isFocusOnCKEditor) {
 	      var elementId = typeof element != 'object' ? element : element.id;
 	      var objElement = document.getElementById(elementId);
