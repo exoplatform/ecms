@@ -135,9 +135,9 @@ public class Utils {
   final public static String EXO_MODIFIED_DATE = "exo:dateModified";
   final public static String EXO_OWNER = "exo:owner";
 
-  final public static String SPECIALCHARACTER[] = { SEMI_COLON, COLON, SLASH,
-    BACKSLASH, "'", "|", ">", "<", "\"", "?", "!", "@", "#", "$", "%", "^",
-    "&", "*", "(", ")", "[", "]", "{", "}" };
+  final public static String SPECIALCHARACTER[] = { SEMI_COLON, SLASH,
+    BACKSLASH, "|", ">", "<", "\"", "?", "!", "#", "$",
+    "&", "*", "(", ")", "{", "}" };
   final public static String REPOSITORY = "repository";
   final public static String VIEWS = "views";
   final public static String DRIVE = "drive";

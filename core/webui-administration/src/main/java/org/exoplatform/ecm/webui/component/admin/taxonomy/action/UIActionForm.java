@@ -351,10 +351,8 @@ public class UIActionForm extends UIDialogForm implements UISelectable {
 
       //Check existend action of node
       if (uiActionForm.nodeTypeName_.equals(taxoTreeData.getTaxoTreeActionTypeName()) && !isChangeLocation)  {
-        String actionNameInput = (String) (sortedInputs.get("/node/exo:name")).getValue();
-        String[] arrFilterChar = {"&", "$", "@", ":", "]", "[", "*", "%", "!", "+", "(", ")",
-            "'", "#", ";", "}", "{", "/", "|", "\""};
-        if (!Utils.isNameValid(actionNameInput, arrFilterChar)) {
+        String actionNameInput = (String) (sortedInputs.get("/node/exo:name")).getValue();       
+        if (!Utils.isNameValid(actionNameInput, Utils.SPECIALCHARACTER)) {
           uiApp.addMessage(new ApplicationMessage("UIActionForm.msg.name-not-allowed", null,
               ApplicationMessage.WARNING));
           
@@ -397,10 +395,8 @@ public class UIActionForm extends UIDialogForm implements UISelectable {
 
         try {
           JcrInputProperty rootProp = sortedInputs.get("/node");
-          String actionName = (String) (sortedInputs.get("/node/exo:name")).getValue();
-          String[] arrFilterChar = {"&", "$", "@", ":", "]", "[", "*", "%", "!", "+", "(", ")",
-              "'", "#", ";", "}", "{", "/", "|", "\""};
-          if (!Utils.isNameValid(actionName,arrFilterChar)) {
+          String actionName = (String) (sortedInputs.get("/node/exo:name")).getValue();         
+          if (!Utils.isNameValid(actionName, Utils.SPECIALCHARACTER)) {
             if (!isEditTree) {
               Node taxonomyTreeNode = taxonomyService.getTaxonomyTree(name, true);
               actionServiceContainer.removeAction(taxonomyTreeNode, repository);

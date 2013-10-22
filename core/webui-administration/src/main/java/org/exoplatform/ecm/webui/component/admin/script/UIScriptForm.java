@@ -18,6 +18,7 @@ package org.exoplatform.ecm.webui.component.admin.script;
 
 import org.exoplatform.ecm.jcr.model.VersionNode;
 import org.exoplatform.ecm.webui.component.admin.script.UIScriptList.ScriptData;
+import org.exoplatform.ecm.webui.form.validator.ECMNameValidator;
 import org.exoplatform.ecm.webui.form.validator.XSSValidator;
 import org.exoplatform.ecm.webui.utils.Utils;
 import org.exoplatform.services.cms.scripts.ScriptService;
@@ -42,8 +43,6 @@ import org.exoplatform.webui.form.UIFormStringInput;
 import org.exoplatform.webui.form.UIFormTextAreaInput;
 import org.exoplatform.webui.form.input.UICheckBoxInput;
 import org.exoplatform.webui.form.validator.MandatoryValidator;
-import org.exoplatform.webui.form.validator.NameValidator;
-
 import javax.jcr.AccessDeniedException;
 import javax.jcr.Node;
 import javax.jcr.PathNotFoundException;
@@ -94,7 +93,7 @@ public class UIScriptForm extends UIForm implements UIPopupComponent {
     UIFormStringInput scriptLabel = new UIFormStringInput(FIELD_SCRIPT_LABEL, FIELD_SCRIPT_LABEL, null) ;
     scriptLabel.addValidator(XSSValidator.class);
     UIFormStringInput scriptName = new UIFormStringInput(FIELD_SCRIPT_NAME, FIELD_SCRIPT_NAME, null) ;
-    scriptName.addValidator(MandatoryValidator.class).addValidator(NameValidator.class).addValidator(XSSValidator.class);
+    scriptName.addValidator(MandatoryValidator.class).addValidator(ECMNameValidator.class).addValidator(XSSValidator.class);
     versions.setOnChange("Change") ;
     versions.setRendered(false) ;
     isVersion.setRendered(false) ;
@@ -191,15 +190,7 @@ public class UIScriptForm extends UIForm implements UIPopupComponent {
       name.append(uiForm.getUIStringInput(FIELD_SCRIPT_NAME).getValue().trim());
       String content = uiForm.getUIFormTextAreaInput(FIELD_SCRIPT_CONTENT).getValue().trim();
       String label = uiForm.getUIStringInput(FIELD_SCRIPT_LABEL).getValue();
-      String[] arrFilterChar = {"&", "$", "@", ":","]", "'", "[", "*", "%", "!", "\""};
-      for(String filterChar : arrFilterChar) {
-        if(name.indexOf(filterChar) > -1) {
-          uiApp.addMessage(new ApplicationMessage("UIScriptForm.msg.fileName-invalid", null,
-                                                  ApplicationMessage.WARNING)) ;
-          
-          return ;
-        }
-      }
+     
       if (name.indexOf(SCRIPT_FILE_TYPE) < 0) {
         name.append(SCRIPT_FILE_TYPE);
       }

@@ -18,6 +18,8 @@ package org.exoplatform.ecm.webui.component.explorer.search;
 
 import org.apache.commons.lang.StringUtils;
 import org.exoplatform.ecm.webui.component.explorer.UIJCRExplorer;
+import org.exoplatform.ecm.webui.form.validator.ECMNameValidator;
+import org.exoplatform.wcm.webui.validator.MandatoryValidator;
 import org.exoplatform.portal.webui.util.Util;
 import org.exoplatform.services.cms.queries.QueryService;
 import org.exoplatform.services.jcr.RepositoryService;
@@ -81,7 +83,8 @@ public class UIJCRAdvancedSearch extends UIForm implements UIPopupComponent {
   private String queryLanguage_;
 
   public UIJCRAdvancedSearch() throws Exception  {
-    addUIFormInput(new UIFormStringInput(FIELD_NAME, FIELD_NAME, null));
+    addUIFormInput(new UIFormStringInput(FIELD_NAME, FIELD_NAME, null).addValidator(ECMNameValidator.class)
+                   .addValidator(MandatoryValidator.class));    
     List<SelectItemOption<String>> ls = new ArrayList<SelectItemOption<String>>() ;
     ls.add(new SelectItemOption<String>("SQL", "sql")) ;
     ls.add(new SelectItemOption<String>("xPath", "xpath")) ;
@@ -222,22 +225,7 @@ public class UIJCRAdvancedSearch extends UIForm implements UIPopupComponent {
 
       if(!uiForm.isEdit_) {
         QueryService queryService = uiForm.getApplicationComponent(QueryService.class) ;
-        String name = uiForm.getUIStringInput(FIELD_NAME).getValue() ;
-        if(name == null || name.trim().length() == 0) {
-          uiApp.addMessage(new ApplicationMessage("UIJCRAdvancedSearch.msg.query-name-null", null, ApplicationMessage.WARNING)) ;
-          event.getRequestContext().addUIComponentToUpdateByAjax(uiForm);
-          return ;
-        }
-        String[] arrFilterChar = { "&", "$", "@", ":", "]", "[", "*", "%", "!", "+", "(", ")", "'",
-            "#", ";", "}", "{", "/", "|", "\\", "\"" };
-        for(String filterChar : arrFilterChar) {
-          if(name.indexOf(filterChar) > -1) {
-            uiApp.addMessage(new ApplicationMessage("UIJCRAdvancedSearch.msg.name-invalid", null,
-                                                    ApplicationMessage.WARNING)) ;
-            event.getRequestContext().addUIComponentToUpdateByAjax(uiForm);
-            return ;
-          }
-        }
+        String name = uiForm.getUIStringInput(FIELD_NAME).getValue() ;       
         String userName = Util.getPortalRequestContext().getRemoteUser() ;
         try {
           queryService.addQuery(name, statement, queryLang, userName) ;

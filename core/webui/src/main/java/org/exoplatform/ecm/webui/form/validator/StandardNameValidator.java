@@ -16,6 +16,7 @@
  */
 package org.exoplatform.ecm.webui.form.validator;
 
+import org.exoplatform.ecm.webui.utils.Utils;
 import org.exoplatform.web.application.ApplicationMessage;
 import org.exoplatform.webui.exception.MessageException;
 import org.exoplatform.webui.form.UIFormInput;
@@ -70,8 +71,7 @@ public class StandardNameValidator implements Validator {
    * @throws MessageException
    */
   private void checkOneChar(String s, UIFormInput uiInput) throws MessageException {
-    String[] arrFilterChars = {".", "/", ":", "[", "]", "*", "'", "|", "\""} ;
-    if (checkArr(s, arrFilterChars)) {
+    if (checkArr(s, Utils.SPECIALCHARACTER)) {
       throwException("ECMStandardPropertyNameValidator.msg.Invalid-char", uiInput);
     }
   }

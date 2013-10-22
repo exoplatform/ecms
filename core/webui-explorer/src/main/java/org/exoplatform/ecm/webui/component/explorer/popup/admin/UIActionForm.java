@@ -278,18 +278,12 @@ public class UIActionForm extends UIDialogForm implements UISelectable {
         }
       }
          
-      String actionName = (String)(sortedInputs.get("/node/exo:name")).getValue();
-      String[] arrFilterChar = { "&", "$", "@", ":", "]", "[", "*", "%", "!", "+", "(", ")", "'",
-          "#", ";", "}", "{", "/", "|", "\"" };
-      for(String filterChar : arrFilterChar) {
-        if(actionName.indexOf(filterChar) > -1) {
-          uiApp.addMessage(new ApplicationMessage("UIActionForm.msg.name-not-allowed", null,
-              ApplicationMessage.WARNING));
-          
-          return;
-        }
+      String actionName = (String)(sortedInputs.get("/node/exo:name")).getValue();      
+      if (!Utils.isNameValid(actionName, Utils.SPECIALCHARACTER)) {
+        uiApp.addMessage(new ApplicationMessage("UIActionForm.msg.name-not-allowed", null, ApplicationMessage.WARNING));                                            
+        return;
       }
-      
+            
       Node parentNode = actionForm.getParentNode();
       if (actionForm.isAddNew_) {
         if (parentNode.hasNode(EXO_ACTIONS)) {
