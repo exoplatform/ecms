@@ -107,6 +107,9 @@
     <depends>
       <module>base</module>
     </depends>
+    <depends>
+      <module>bts_popover</module>
+    </depends>
   </module>
   
   <module>

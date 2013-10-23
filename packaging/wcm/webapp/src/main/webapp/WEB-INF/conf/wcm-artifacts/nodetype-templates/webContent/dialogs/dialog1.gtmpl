@@ -201,15 +201,9 @@
 									String[] fieldContentCSS = ["jcrPath=/node/css/default.css/jcr:content/jcr:data", "options=noSanitization", cssContent] ;
 									uicomponent.addTextAreaField(cssFormId, fieldContentCSS) ;
 								%>
-								<div style="display:inline-block;" onmouseover="(function(elm) {elm.getElementsByClassName('popover')[0].style.display='block'})(this)"
-                onmouseout="(function(elm) {elm.getElementsByClassName('popover')[0].style.display='none'})(this)">
-								  <i class="uiIconQuestion" id="cssContentHelp"></i>
-								  <div class="gotPosition" style="position: absolute; top: 189px; left: 915px;">
-                    <div class="popover left" style="display: none;">
-                      <span class="arrow"></span>
-                      <div class="popover-content"><%=_ctx.appRes("WebContent.dialog.label.hintCSS")%></div>
-                    </div>
-                  </div>
+								<div style="display:inline-block;" onmouseover="(function(elm) {eXo.ecm.WCMUtils.showPopover(elm);})(this)"
+                onmouseout="(function(elm) {eXo.ecm.WCMUtils.hidePopover(elm);})(this)" data-toggle="popover" data-placement="left" data-content="<%=_ctx.appRes("WebContent.dialog.label.hintCSS")%>">
+								  <i class="uiIconQuestion" id="cssContentHelp"></i>								  
                 </div>  
 							</div>
 						</div>
@@ -239,15 +233,9 @@
 									String[] fieldContentJS = ["jcrPath=/node/js/default.js/jcr:content/jcr:data", "options=noSanitization", jsContent];
 									uicomponent.addTextAreaField(jsFormId, fieldContentJS); 								
 								%>
-								<div style="display:inline-block;" onmouseover="(function(elm) {elm.getElementsByClassName('popover')[0].style.display='block'})(this)"
-                onmouseout="(function(elm) {elm.getElementsByClassName('popover')[0].style.display='none'})(this)">
-								  <i class="uiIconQuestion" id="ContentJSHelp"></i>
-								  <div class="gotPosition" style="position: absolute; top: 189px; left: 915px;">
-                    <div class="popover left" style="display: none;">
-                      <span class="arrow"></span>
-                      <div class="popover-content"><%=_ctx.appRes("WebContent.dialog.label.hintJS")%></div>
-                    </div>
-                  </div>
+								<div style="display:inline-block;" onmouseover="(function(elm) {eXo.ecm.WCMUtils.showPopover(elm);})(this)"
+		                onmouseout="(function(elm) {eXo.ecm.WCMUtils.hidePopover(elm);})(this)" data-placement="left" data-content="<%=_ctx.appRes("WebContent.dialog.label.hintJS")%>">
+								  <i class="uiIconQuestion" id="ContentJSHelp"></i>								
                 </div>
 							</div>
 						</div>

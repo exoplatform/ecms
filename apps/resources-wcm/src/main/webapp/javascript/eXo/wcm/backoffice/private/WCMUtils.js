@@ -1,4 +1,4 @@
-(function(gj, base) {
+(function(gj, base, bts_popover) {
 	// WCMUtils
 	function WCMUtils(){
 		this.cmdEcmBundle = "/bundle/";
@@ -375,6 +375,27 @@
       		gj(obj.parentNode).addClass("fileTypeContent");
       		
     	};
+
+	WCMUtils.prototype.getPlacement = function (element) {
+		var offset = gj(element).offset();
+		var height = gj(document).outerHeight();
+		var width = gj(document).outerWidth();
+		var vert = 0.5 * height - offset.top;
+		var vertPlacement = vert > 0 ? 'bottom' : 'top';
+		var horiz = 0.5 * width - offset.left;
+		var horizPlacement = horiz > 0 ? 'right' : 'left';
+		var placement = Math.abs(horiz) > Math.abs(vert) ?  horizPlacement : vertPlacement;
+		return placement;
+	};
+
+    WCMUtils.prototype.showPopover = function (element) {
+		gj(element).popover({template: '<div class="popover"><div class="arrow"></div><div class="inner"><h3 class="popover-title" style="display:none;"></h3><div class="popover-content"><p></p></div></div></div>'});
+		gj(element).popover('show');       		
+	};
+
+    WCMUtils.prototype.hidePopover = function (element) {
+		gj(element).popover('hide');
+	};
 	
 	eXo.ecm.WCMUtils = new WCMUtils();
 	
@@ -913,4 +934,4 @@
 		CKEditor : eXo.ecm.CKEditor,
 		SELocalization : eXo.ecm.SELocalization
 	};
-})(gj, base);
+})(gj, base, bts_popover);
