@@ -257,7 +257,7 @@
 									%>
 									<div style="display:inline-block;" onmouseover="(function(elm) {eXo.ecm.WCMUtils.showPopover(elm);})(this)"
 			                onmouseout="(function(elm) {eXo.ecm.WCMUtils.hidePopover(elm);})(this)" data-toggle="popover" data-placement="left" data-content="<%=_ctx.appRes("WebContent.dialog.label.hintCSS")%>">
-									  <i class="uiIconQuestion" id="cssContentHelp"></i>									  
+									  <i class="uiIconQuestion uiIconLightGray" id="cssContentHelp"></i>									  
                   </div>
 								</div>
 							</div>
@@ -289,7 +289,7 @@
 								%>
 								  <div style="display:inline-block;" onmouseover="(function(elm) {eXo.ecm.WCMUtils.showPopover(elm);})(this)"
 			                onmouseout="(function(elm) {eXo.ecm.WCMUtils.hidePopover(elm);})(this)" data-toggle="popover" data-placement="left" data-content="<%=_ctx.appRes("WebContent.dialog.label.hintJS")%>">
-									  <i class="uiIconQuestion" id="ContentJSHelp"></i>									  
+									  <i class="uiIconQuestion uiIconLightGray" id="ContentJSHelp"></i>									  
 									</div>  
 								</div>
 							</div>
