@@ -55,7 +55,7 @@ public class PublicationPublishAction extends UIComponent {
 
   private static final List<UIExtensionFilter> FILTERS = Arrays.asList(
       new UIExtensionFilter[] {
-          new CanAddNodeFilter(), new IsNotLockedFilter(), new IsCheckedOutFilter(), new CanPublishFilter(), new IsNotIgnoreVersionNodeFilter(), isNotEditingDocumentFilter()});
+          new CanAddNodeFilter(), new IsNotLockedFilter(), new IsCheckedOutFilter(), new CanPublishFilter(), new IsNotIgnoreVersionNodeFilter(), new IsNotEditingDocumentFilter()});
 
   @UIExtensionFilters
   public List<UIExtensionFilter> getFilters() {
