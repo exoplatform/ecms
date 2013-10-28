@@ -156,18 +156,7 @@ public class UIAddTranslationForm extends UIForm implements UIPopupComponent, UI
       }
       String workspaceName = pathNode.substring(0, pathNode.lastIndexOf(":/"));
       pathNode = pathNode.substring(pathNode.lastIndexOf(":/") + 1);
-      /*
-      String[] arrFilterChar = {"&", "$", "@", ":", "]", "[", "*", "%", "!", "+", "(", ")",
-          "'", "#", ";", "}", "{", "/", "|", "\""};
-      for(String filterChar : arrFilterChar) {
-        if(symLinkName.indexOf(filterChar) > -1) {
-          uiApp.addMessage(new ApplicationMessage("UIAddTranslationForm.msg.name-not-allowed", null,
-              ApplicationMessage.WARNING));
-
-          return;
-        }
-      }
-      */
+      
       NodeFinder nodeFinder = uiTranslationForm.getApplicationComponent(NodeFinder.class);
       try {
         nodeFinder.getItem(workspaceName, pathNode);

@@ -417,12 +417,6 @@ public class UIJCRExplorerPortlet extends UIPortletApplication {
     uiActionbar.setRendered(isShowActionBar);
     uiExplorer.setSelectNode(driveData.getWorkspace(), path);
 
-    UISideBar uiSideBar = uiWorkingArea.findFirstComponentOfType(UISideBar.class);
-    if (uiSideBar.isRendered()) {
-      uiSideBar.updateSideBarView();
-      uiSideBar.getChild(UITreeExplorer.class).buildTree();
-    }
-
     UIDocumentWorkspace uiDocWorkspace = uiWorkingArea.getChild(UIDocumentWorkspace.class);
     uiDocWorkspace.setRenderedChild(UIDocumentContainer.class);
     uiDocWorkspace.setRendered(true);

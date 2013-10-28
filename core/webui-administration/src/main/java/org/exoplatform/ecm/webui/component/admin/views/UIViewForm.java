@@ -30,6 +30,7 @@ import javax.jcr.version.VersionHistory;
 
 import org.apache.commons.lang.StringUtils;
 import org.exoplatform.ecm.jcr.model.VersionNode;
+import org.exoplatform.ecm.webui.form.validator.ECMNameValidator;
 import org.exoplatform.ecm.webui.selector.UISelectable;
 import org.exoplatform.ecm.webui.utils.JCRExceptionManager;
 import org.exoplatform.ecm.webui.utils.Utils;
@@ -114,7 +115,8 @@ public class UIViewForm extends UIForm implements UISelectable {
     versions.setOnChange("ChangeVersion");
     versions.setRendered(false) ;
     addUIFormInput(versions) ;
-    addUIFormInput(new UIFormStringInput(FIELD_NAME, FIELD_NAME, null).addValidator(MandatoryValidator.class)) ;
+    addUIFormInput(new UIFormStringInput(FIELD_NAME, FIELD_NAME, null).addValidator(MandatoryValidator.class)
+                   .addValidator(ECMNameValidator.class)) ;
     vservice_ = getApplicationComponent(ManageViewService.class) ;
     Node ecmTemplateHome = vservice_.getTemplateHome(BasePath.ECM_EXPLORER_TEMPLATES, WCMCoreUtils.getUserSessionProvider());
     List<SelectItemOption<String>> temp = new ArrayList<SelectItemOption<String>>() ;
@@ -331,13 +333,7 @@ public class UIViewForm extends UIForm implements UISelectable {
                                                         ApplicationMessage.WARNING)) ;
     }
     viewName = viewName.trim();
-    String[] arrFilterChar = {"&", "$", "@", ",", ":","]", "[", "*", "%", "!", "#", "/", "\\", "\""} ;
-    for(String filterChar : arrFilterChar) {
-      if(viewName.indexOf(filterChar) > -1) {
-        throw new MessageException(new ApplicationMessage("UIViewForm.msg.fileName-invalid", null,
-                                                          ApplicationMessage.WARNING)) ;
-      }
-    }
+    
     boolean isEnableVersioning = getUICheckBoxInput(FIELD_ENABLEVERSION).isChecked() ;
     boolean hideExplorerPanel = getUICheckBoxInput(FIELD_HIDE_EXPLORER_PANEL).isChecked();
     List<ViewConfig> viewList = vservice_.getAllViews() ;

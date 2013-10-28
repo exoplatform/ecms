@@ -8,7 +8,6 @@
   import org.exoplatform.ecm.webui.component.explorer.UIDocumentInfo;
   import org.exoplatform.ecm.utils.text.Text;
   import org.exoplatform.services.cms.link.LinkManager;
-  import org.exoplatform.ecm.webui.component.explorer.DocumentProviderUtils;
   import org.exoplatform.ecm.jcr.model.Preference;
   import org.exoplatform.ecm.webui.component.explorer.UIJCRExplorer;
   import javax.jcr.Value;

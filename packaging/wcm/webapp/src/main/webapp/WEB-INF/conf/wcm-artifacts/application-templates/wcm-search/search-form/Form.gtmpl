@@ -23,25 +23,23 @@ addScripts('search.SearchPortlet.search("' + uicomponent.id + '");');
 <div class="UIForm $uicomponent.id" >
   <%uiform.begin()%>
     <div class="form-horizontal">
-      
-	  <div class="control-group">
-		<label class="control-label" for="<%=uiKeywordInput.getId()%>">
-			<%=_ctx.appRes("UIDefaultSearchForm.label.keyword")%>: 
-		</label>
-		<div class="controls">
-			<% uiform.renderField(uiKeywordInput) %> <button onclick="eXo.ecm.SearchPortlet.keepKeywordOnBoxSearch();" class="btn SearchButton">$actionLabel</button>
-		</div>
-	  </div>
-	  <div class="control-group">
-		<label class="control-label">&nbsp</label>
-		<div class="controls">
-		   <fieldset style="border:none;"><legend> </legend><%uiform.renderField(searchOptionRadioBox)%>
-			 <label for="<%=uiPortalSelectBox.getId()%>"><% uiform.renderField(uiPortalSelectBox) %></label>
-		   </fieldset>
-		</div>
-	  </div>
-        <script type="text/javascript">
-        
+      <div class="control-group">
+        <label class="control-label" for="<%=uiKeywordInput.getId()%>">
+          <%=_ctx.appRes("UIDefaultSearchForm.label.keyword")%>: 
+        </label>
+        <div class="controls">
+          <% uiform.renderField(uiKeywordInput) %> <a href="$link" onclick="eXo.ecm.SearchPortlet.keepKeywordOnBoxSearch();" class="btn SearchButton">$actionLabel</a>
+        </div>
+      </div>
+      <div class="control-group">
+        <label class="control-label">&nbsp</label>
+        <div class="controls">
+           <fieldset style="border:none;"><legend> </legend><%uiform.renderField(searchOptionRadioBox)%>
+             <label for="<%=uiPortalSelectBox.getId()%>"><% uiform.renderField(uiPortalSelectBox) %></label>
+           </fieldset>
+        </div>
+      </div>
+      <script type="text/javascript">
         function toggleSet()
         {
           var searchOption = document.getElementsByName("searchOption");
@@ -65,15 +63,14 @@ addScripts('search.SearchPortlet.search("' + uicomponent.id + '");');
         searchOption[1].onchange = function() { toggleSet(); };
       </script>
     </div>
-    </div>
-    <%uiform.end()%>
-    </div>
+  <%uiform.end()%>
+</div>
 <script type="text/javascript">
-	onload = function() {
-		eXo.ecm.SearchPortlet.keepKeywordOnBoxSearch();
-	}
-	onsubmit = function() {
-		eXo.ecm.SearchPortlet.keepKeywordOnBoxSearch();
-	}
+  onload = function() {
+    eXo.ecm.SearchPortlet.keepKeywordOnBoxSearch();
+  }
+  onsubmit = function() {
+    eXo.ecm.SearchPortlet.keepKeywordOnBoxSearch();
+  }
 </script>
     

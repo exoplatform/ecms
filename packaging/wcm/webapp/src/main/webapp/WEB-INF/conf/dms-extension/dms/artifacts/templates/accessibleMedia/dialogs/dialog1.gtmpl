@@ -167,8 +167,10 @@
                 setUploadFields(captions, "nt:file", "exo:captions", captions, null);
               }
             %>
-          
-            <i class="uiIconQuestion uiIconLightGray" id="CaptionsHelp" rel="tooltip" data-placement="left" title=" <%= _ctx.appRes("AccessibleMedia.help.CaptionsHelp") %>" > </i>
+            <div style="display:inline-block;" onmouseover="(function(elm) {eXo.ecm.WCMUtils.showPopover(elm);})(this)"
+                onmouseout="(function(elm) {eXo.ecm.WCMUtils.hidePopover(elm);})(this)" data-toggle="popover" data-placement="left" data-content="<%= _ctx.appRes("AccessibleMedia.help.CaptionsHelp") %>">
+              <i class="uiIconQuestion uiIconLightGray"> </i>              
+            </div>
           </div>
           
         </div>
@@ -204,8 +206,10 @@
               setUploadFields(audioDescription, "nt:file", "exo:audioDescription", audioDescription, "video/x-flv,audio/mp3");
             }
           %>
-        
-					<i class="uiIconQuestion uiIconLightGray" id="AudioDescriptionHelp"  rel="tooltip" data-placement="left" title="<%= _ctx.appRes("AccessibleMedia.help.AudioDescriptionHelp") %>" ></i>
+          <div style="display:inline-block;" onmouseover="(function(elm) {eXo.ecm.WCMUtils.showPopover(elm);})(this)"
+              onmouseout="(function(elm) {eXo.ecm.WCMUtils.hidePopover(elm);})(this)" data-toggle="popover" data-placement="left" data-content="<%= _ctx.appRes("AccessibleMedia.help.AudioDescriptionHelp") %>">
+					  <i class="uiIconQuestion uiIconLightGray"></i>					  
+          </div>
         </div>
         
       </div>
@@ -218,7 +222,10 @@
           <% String[] fieldAltText = ["jcrPath=/node/exo:alternativeText", "fillJcrDataOfFile=false"] ;
              uicomponent.addRichtextField("alternativeText", fieldAltText) ;            
           %>
-					<i class="uiIconQuestion uiIconLightGray" id="AlternativeTextHelp" rel="tooltip" data-placement="left" title=" <%= _ctx.appRes("AccessibleMedia.help.AlternativeTextHelp") %>"></i>
+          <div style="display:inline-block;" onmouseover="(function(elm) {eXo.ecm.WCMUtils.showPopover(elm);})(this)"
+              onmouseout="(function(elm) {eXo.ecm.WCMUtils.hidePopover(elm);})(this)" data-toggle="popover" data-placement="left" data-content="<%= _ctx.appRes("AccessibleMedia.help.AlternativeTextHelp") %>">
+					  <i class="uiIconQuestion uiIconLightGray" id="AlternativeTextHelp"></i>					  
+          </div>
         </div>
 
       </div>

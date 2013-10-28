@@ -247,8 +247,7 @@ public class UITaggingForm extends UIForm {
           listTagNamesClone.remove(t);
           continue;
         }
-        String[] arrFilterChar = {"&", "'", "$", "@", ":", "]", "[", "*", "%", "!", "/", "\\"};
-        for (String filterChar : arrFilterChar) {
+        for (String filterChar : Utils.SPECIALCHARACTER) {
           if (t.contains(filterChar)) {
             listTagNamesClone.remove(t);
           }
@@ -342,9 +341,8 @@ public class UITaggingForm extends UIForm {
 
       Node currentNode = uiExplorer.getCurrentNode();
       String tagName = event.getRequestContext().getRequestParameter(OBJECTID);
-      String[] arrFilterChar = { "&", "'", "$", "@", ":", "]", "[", "*", "%", "!", "/", "\\" };
       UIApplication uiApp = uiForm.getAncestorOfType(UIApplication.class);
-      if (!Utils.isNameValid(tagName, arrFilterChar)) {
+      if (!Utils.isNameValid(tagName, Utils.SPECIALCHARACTER)) {
         uiApp.addMessage(new ApplicationMessage("UITaggingForm.msg.tagName-invalid",
                                                 null,
                                                 ApplicationMessage.WARNING));

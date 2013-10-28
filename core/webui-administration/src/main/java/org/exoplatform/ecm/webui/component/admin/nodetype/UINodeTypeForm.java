@@ -29,6 +29,7 @@ import javax.jcr.nodetype.NodeTypeManager;
 import javax.jcr.nodetype.PropertyDefinition;
 
 import org.exoplatform.ecm.webui.form.UIFormInputSetWithAction;
+import org.exoplatform.ecm.webui.form.validator.ECMNameValidator;
 import org.exoplatform.services.jcr.RepositoryService;
 import org.exoplatform.services.jcr.core.ManageableRepository;
 import org.exoplatform.services.jcr.core.nodetype.ExtendedNodeTypeManager;
@@ -149,13 +150,15 @@ public class UINodeTypeForm extends UIFormTabPane {
     super("UINodeTypeForm");
     UIFormInputSetWithAction nodeTypeTab = new UIFormInputSetWithAction(NODETYPE_DEFINITION);
     nodeTypeTab.addUIFormInput(new UIFormSelectBox(NAMESPACE, NAMESPACE, null))
-    .addUIFormInput(new UIFormStringInput(NODETYPE_NAME, NODETYPE_NAME, null).addValidator(MandatoryValidator.class))
+    .addUIFormInput(new UIFormStringInput(NODETYPE_NAME, NODETYPE_NAME, null).addValidator(MandatoryValidator.class)
+                    .addValidator(ECMNameValidator.class))
     .addUIFormInput(new UIFormSelectBox(MIXIN_TYPE, MIXIN_TYPE, null))
     .addUIFormInput(new UIFormSelectBox(HAS_ORDERABLE_CHILDNODES,
                                         HAS_ORDERABLE_CHILDNODES,
                                         null))
                                         .addUIFormInput(new UIFormStringInput(PRIMARY_ITEMNAME, PRIMARY_ITEMNAME, null))
-                                        .addUIFormInput(new UIFormStringInput(SUPER_TYPE, SUPER_TYPE, null).addValidator(MandatoryValidator.class))
+                                        .addUIFormInput(new UIFormStringInput(SUPER_TYPE, SUPER_TYPE, null)
+                                        .addValidator(MandatoryValidator.class))
                                         .addUIFormInput(new UIFormInputInfo(PROPERTY_DEFINITIONS, PROPERTY_DEFINITIONS, null))
                                         .addUIFormInput(new UIFormInputInfo(CHILDNODE_DEFINITIONS,
                                                                             CHILDNODE_DEFINITIONS,
@@ -543,25 +546,7 @@ public class UINodeTypeForm extends UIFormTabPane {
         uiForm.setTabRender(NODETYPE_DEFINITION) ;
         return ;
       }
-      if((prefix != null) && (prefix.trim().length() == 0) && (nodeTypeName.trim().length()==1)){
-        String[] arrFilterChar = {"&", "$", "@", "'", ":","]", "[", "%", "!"};
-        for(String filterChar : arrFilterChar) {
-          if(nodeTypeName.indexOf(filterChar) > -1) {
-            uiApp.addMessage(new ApplicationMessage("UINodeTypeForm.msg.fileName-invalid", null,
-                                                    ApplicationMessage.WARNING)) ;
-            return ;
-          }
-        }
-      } else{
-        String[] arrFilterChar = {"&", "$", "@", "'", ":","]", "[", "*", "%", "!"};
-        for(String filterChar : arrFilterChar) {
-          if(nodeTypeName.indexOf(filterChar) > -1) {
-            uiApp.addMessage(new ApplicationMessage("UINodeTypeForm.msg.fileName-invalid", null,
-                                                    ApplicationMessage.WARNING)) ;
-            return ;
-          }
-        }
-      }
+      
       if (prefix != null && prefix.length() > 0) {
         StringBuffer sb = new StringBuffer();
         sb.append(prefix).append(":").append(nodeTypeName);
@@ -642,26 +627,7 @@ public class UINodeTypeForm extends UIFormTabPane {
         uiForm.setTabRender(NODETYPE_DEFINITION) ;
         session.logout();
         return ;
-      }
-      if((prefix != null) && (prefix.trim().length() == 0) && (nodeTypeName.trim().length()==1)){
-        String[] arrFilterChar = {"&", "$", "@", "'", ":","]", "[", "%", "!", "\""};
-        for(String filterChar : arrFilterChar) {
-          if(nodeTypeName.indexOf(filterChar) > -1) {
-            uiApp.addMessage(new ApplicationMessage("UINodeTypeForm.msg.fileName-invalid", null,
-                                                    ApplicationMessage.WARNING)) ;
-            return ;
-          }
-        }
-      } else{
-        String[] arrFilterChar = {"&", "$", "@", "'", ":","]", "[", "*", "%", "!", "\""};
-        for(String filterChar : arrFilterChar) {
-          if(nodeTypeName.indexOf(filterChar) > -1) {
-            uiApp.addMessage(new ApplicationMessage("UINodeTypeForm.msg.fileName-invalid", null,
-                                                    ApplicationMessage.WARNING)) ;
-            return ;
-          }
-        }
-      }
+      }      
       if (prefix != null && prefix.length() > 0) {
         StringBuffer sb = new StringBuffer();
         sb.append(prefix).append(":").append(nodeTypeName);
