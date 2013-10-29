@@ -182,18 +182,7 @@ public class UISymLinkForm extends UIForm implements UIPopupComponent, UISelecta
       }
       String workspaceName = pathNode.substring(0, pathNode.lastIndexOf(":/"));
       pathNode = pathNode.substring(pathNode.lastIndexOf(":/") + 1);
-      /*
-      String[] arrFilterChar = {"&", "$", "@", ":", "]", "[", "*", "%", "!", "+", "(", ")",
-          "'", "#", ";", "}", "{", "/", "|", "\""};
-      for(String filterChar : arrFilterChar) {
-        if(symLinkName.indexOf(filterChar) > -1) {
-          uiApp.addMessage(new ApplicationMessage("UISymLinkForm.msg.name-not-allowed", null,
-              ApplicationMessage.WARNING));
-
-          return;
-        }
-      }
-      */
+     
       NodeFinder nodeFinder = uiSymLinkForm.getApplicationComponent(NodeFinder.class);
       try {
         nodeFinder.getItem(workspaceName, pathNode);

@@ -24,6 +24,7 @@ import java.util.List;
 
 import org.exoplatform.ecm.webui.component.admin.taxonomy.tree.info.UIPermissionTreeManager;
 import org.exoplatform.ecm.webui.form.UIFormInputSetWithAction;
+import org.exoplatform.ecm.webui.form.validator.ECMNameValidator;
 import org.exoplatform.ecm.webui.utils.Utils;
 import org.exoplatform.services.cms.BasePath;
 import org.exoplatform.services.cms.taxonomy.TaxonomyService;
@@ -76,7 +77,7 @@ public class UITaxonomyTreeMainForm extends UIForm {
 
   public UITaxonomyTreeMainForm() throws Exception {
     addUIFormInput(new UIFormStringInput(FIELD_NAME, FIELD_NAME, null)
-    .addValidator(MandatoryValidator.class));
+    .addValidator(MandatoryValidator.class).addValidator(ECMNameValidator.class));
     UIFormSelectBox uiSelectWorkspace = new UIFormSelectBox(FIELD_WORKSPACE, FIELD_WORKSPACE, null);
     addChild(uiSelectWorkspace);
     uiSelectWorkspace.setOnChange("Change");
@@ -210,17 +211,8 @@ public class UITaxonomyTreeMainForm extends UIForm {
         return;
       }
 
-      UIFormInputBase<String> inputName = uiTaxonomyTreeMainForm.findComponentById(FIELD_NAME);
-      String[] arrFilterChar = {"&", "$", "@", ":", "]", "[", "*", "%", "!", "+", "(", ")",
-          "'", "#", ";", "}", "{", "/", "|", "\""};
+      UIFormInputBase<String> inputName = uiTaxonomyTreeMainForm.findComponentById(FIELD_NAME);     
       String name = inputName.getValue().toString().trim();
-
-      if (!Utils.isNameValid(name,arrFilterChar)) {
-        uiApp.addMessage(new ApplicationMessage("UITaxonomyTreeMainForm.msg.name-not-allowed", null,
-                                                ApplicationMessage.WARNING));
-
-        return;
-      }
 
       TaxonomyService taxonomyService = uiTaxonomyTreeMainForm.getApplicationComponent(TaxonomyService.class);
       if (taxonomyService.hasTaxonomyTree(name) && !taxonomyTreeData.isEdit()) {

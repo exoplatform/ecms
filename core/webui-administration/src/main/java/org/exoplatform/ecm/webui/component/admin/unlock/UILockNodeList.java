@@ -51,6 +51,7 @@ import org.exoplatform.services.jcr.core.ManageableRepository;
 import org.exoplatform.services.security.ConversationState;
 import org.exoplatform.services.security.MembershipEntry;
 import org.exoplatform.services.wcm.core.NodeLocation;
+import org.exoplatform.services.wcm.core.NodetypeConstant;
 import org.exoplatform.services.wcm.utils.WCMCoreUtils;
 import org.exoplatform.web.application.ApplicationMessage;
 import org.exoplatform.webui.application.WebuiRequestContext;
@@ -81,7 +82,7 @@ public class UILockNodeList extends UIPagingGridDecorator {
 
   private static final String LOCK_QUERY = "select * from mix:lockable where jcr:lockOwner IS NOT NULL " +
       "order by exo:dateCreated DESC";
-  private String typeSort_ = Preference.SORT_BY_NODETYPE;
+  private String typeSort_ = NodetypeConstant.SORT_BY_NODETYPE;
   private String sortOrder_ = Preference.BLUE_UP_ARROW;
   private String order_ = Preference.ASCENDING_ORDER;
 

@@ -17,6 +17,7 @@
  **************************************************************************/
 package org.exoplatform.ecm.webui.form.validator;
 
+import org.exoplatform.ecm.webui.utils.Utils;
 import org.exoplatform.web.application.ApplicationMessage;
 import org.exoplatform.webui.exception.MessageException;
 import org.exoplatform.webui.form.UIFormInput;
@@ -30,7 +31,6 @@ import org.exoplatform.webui.form.validator.Validator;
  */
 public class NodeTypeNameValidator implements Validator {
 
-  private static final String[] FILTER_CHARS = {"{", "/", "{", "[", "]", "|", "\"", "$", "(", ")", "?", "+", "\\", "^"};
 
   public void validate(UIFormInput uiInput) throws Exception {
     String inputValue = (String) uiInput.getValue();
@@ -72,7 +72,7 @@ public class NodeTypeNameValidator implements Validator {
    * @throws MessageException
    */
   private void checkOneChar(String s, UIFormInput uiInput) throws MessageException {
-    if (checkArr(s, FILTER_CHARS)) {
+    if (checkArr(s, Utils.SPECIALCHARACTER)) {
       throwException("NodeTypeNameValidator.msg.Invalid-char", uiInput);
     }
   }
@@ -94,10 +94,10 @@ public class NodeTypeNameValidator implements Validator {
       String s3 = s.substring(0, 1);
       String s4 = s.substring(1, 2);
 
-      if (checkArr(s3, FILTER_CHARS)) {
+      if (checkArr(s3, Utils.SPECIALCHARACTER)) {
         throwException("NodeTypeNameValidator.msg.Invalid-char", uiInput);
       } else {
-        if (checkArr(s4, FILTER_CHARS)) {
+        if (checkArr(s4, Utils.SPECIALCHARACTER)) {
           throwException("NodeTypeNameValidator.msg.Invalid-char", uiInput);
         }
       }
@@ -113,13 +113,13 @@ public class NodeTypeNameValidator implements Validator {
     //get start and end char
     String s1 = s.substring(0, 1);
     String s2 = s.substring(s.length() - 1, s.length());
-    if (checkArr(s1, FILTER_CHARS)) {
+    if (checkArr(s1, Utils.SPECIALCHARACTER)) {
       throwException("NodeTypeNameValidator.msg.Invalid-char", uiInput);
-    } else if (checkArr(s2, FILTER_CHARS)){
+    } else if (checkArr(s2, Utils.SPECIALCHARACTER)){
       throwException("NodeTypeNameValidator.msg.Invalid-char", uiInput);
     } else {
       String s3 = s.substring(1, s.length() - 1);
-      for(String filterChar : FILTER_CHARS) {
+      for(String filterChar : Utils.SPECIALCHARACTER) {
         if(s3.indexOf(filterChar) > -1) {
           throwException("NodeTypeNameValidator.msg.Invalid-char", uiInput);
         }

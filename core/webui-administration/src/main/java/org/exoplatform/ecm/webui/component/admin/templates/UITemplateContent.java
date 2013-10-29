@@ -26,6 +26,7 @@ import javax.jcr.version.VersionHistory;
 
 import org.exoplatform.ecm.jcr.model.VersionNode;
 import org.exoplatform.ecm.webui.form.UIFormInputSetWithAction;
+import org.exoplatform.ecm.webui.form.validator.ECMNameValidator;
 import org.exoplatform.ecm.webui.selector.UISelectable;
 import org.exoplatform.ecm.webui.utils.Utils;
 import org.exoplatform.services.cms.templates.TemplateService;
@@ -93,7 +94,8 @@ public class UITemplateContent extends UIForm implements UISelectable {
     versions.setRendered(false) ;
     addUIFormInput(versions) ;
     addUIFormInput(new UIFormTextAreaInput(FIELD_CONTENT, FIELD_CONTENT, null).addValidator(MandatoryValidator.class)) ;
-    addUIFormInput(new UIFormStringInput(FIELD_NAME, FIELD_NAME, null).addValidator(MandatoryValidator.class)) ;
+    addUIFormInput(new UIFormStringInput(FIELD_NAME, FIELD_NAME, null).addValidator(MandatoryValidator.class).
+                   addValidator(ECMNameValidator.class)) ;
     UICheckBoxInput isVersion =
       new UICheckBoxInput(FIELD_ENABLE_VERSION , FIELD_ENABLE_VERSION, null) ;
     isVersion.setRendered(false) ;

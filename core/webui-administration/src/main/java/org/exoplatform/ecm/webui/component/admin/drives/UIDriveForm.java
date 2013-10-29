@@ -195,20 +195,7 @@ public class UIDriveForm extends UIFormTabPane implements UISelectable {
       RepositoryService rservice = uiDriveForm.getApplicationComponent(RepositoryService.class);
       UIDriveInputSet driveInputSet = uiDriveForm.getChild(UIDriveInputSet.class);
       UIApplication uiApp = uiDriveForm.getAncestorOfType(UIApplication.class);
-      String name = driveInputSet.getUIStringInput(UIDriveInputSet.FIELD_NAME).getValue().trim();
-      if(name == null || name.trim().length() == 0) {
-        uiApp.addMessage(new ApplicationMessage("UIDriveForm.msg.name-null", null,
-                                                ApplicationMessage.WARNING));
-        return;
-      }
-      String[] arrFilterChar = {"&", "$", "@", "'", ":","]", "[", "*", "%", "!", "\""};
-      for(String filterChar : arrFilterChar) {
-        if(name.indexOf(filterChar) > -1) {
-          uiApp.addMessage(new ApplicationMessage("UIDriveForm.msg.fileName-invalid", null,
-                                                  ApplicationMessage.WARNING));
-          return;
-        }
-      }
+      String name = driveInputSet.getUIStringInput(UIDriveInputSet.FIELD_NAME).getValue().trim();     
       String workspace =
         driveInputSet.getUIFormSelectBox(UIDriveInputSet.FIELD_WORKSPACE).getValue();
       String path = driveInputSet.getUIStringInput(UIDriveInputSet.FIELD_HOMEPATH).getValue();

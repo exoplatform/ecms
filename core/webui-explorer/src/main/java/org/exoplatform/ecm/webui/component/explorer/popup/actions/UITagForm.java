@@ -20,6 +20,7 @@ import org.exoplatform.ecm.jcr.model.Preference;
 import org.exoplatform.ecm.webui.component.explorer.UIJCRExplorer;
 import org.exoplatform.ecm.webui.component.explorer.sidebar.UISideBar;
 import org.exoplatform.ecm.webui.component.explorer.sidebar.UITagExplorer;
+import org.exoplatform.ecm.webui.form.validator.ECMNameValidator;
 import org.exoplatform.services.cms.folksonomy.NewFolksonomyService;
 import org.exoplatform.services.jcr.ext.hierarchy.NodeHierarchyCreator;
 import org.exoplatform.services.wcm.core.NodeLocation;
@@ -65,7 +66,8 @@ public class UITagForm extends UIForm {
   private String oldName_;
 
   public UITagForm() throws Exception {
-    addUIFormInput(new UIFormStringInput(TAG_NAME, TAG_NAME, null).addValidator(MandatoryValidator.class)) ;
+    addUIFormInput(new UIFormStringInput(TAG_NAME, TAG_NAME, null).addValidator(MandatoryValidator.class)
+                   .addValidator(ECMNameValidator.class)) ;
   }
 
   public Node getTag() { 
@@ -101,16 +103,7 @@ public class UITagForm extends UIForm {
                                                 ApplicationMessage.WARNING));
         
         return;
-      }
-      String[] arrFilterChar = {"&", "'", "$", "@", ":","]", "[", "*", "%", "!", "/", "\\"};
-      for(String filterChar : arrFilterChar) {
-        if(tagName.indexOf(filterChar) > -1) {
-          uiApp.addMessage(new ApplicationMessage("UITaggingForm.msg.tagName-invalid", null,
-                                                  ApplicationMessage.WARNING));
-          
-          return;
-        }
-      }
+      }      
       try {
         // add new tag
         if (uiForm.getTag() == null) {

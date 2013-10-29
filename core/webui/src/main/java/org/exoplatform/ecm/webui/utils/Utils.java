@@ -135,9 +135,9 @@ public class Utils {
   final public static String EXO_MODIFIED_DATE = "exo:dateModified";
   final public static String EXO_OWNER = "exo:owner";
 
-  final public static String SPECIALCHARACTER[] = { SEMI_COLON, COLON, SLASH,
-    BACKSLASH, "'", "|", ">", "<", "\"", "?", "!", "@", "#", "$", "%", "^",
-    "&", "*", "(", ")", "[", "]", "{", "}" };
+  final public static String SPECIALCHARACTER[] = { SEMI_COLON, SLASH,
+    BACKSLASH, "|", ">", "<", "\"", "?", "!", "#", "$",
+    "&", "*", "(", ")", "{", "}" };
   final public static String REPOSITORY = "repository";
   final public static String VIEWS = "views";
   final public static String DRIVE = "drive";
@@ -823,21 +823,18 @@ public class Utils {
    */
   public static String getTitle(Node node) throws Exception {
     String title = null;
-    if (node.hasProperty("exo:title")) {
+    try {
       title = node.getProperty("exo:title").getValue().getString();
-    } else if (node.hasNode("jcr:content")) {
-      Node content = node.getNode("jcr:content");
-      if (content.hasProperty("dc:title")) {
-        try {
-          title = content.getProperty("dc:title").getValues()[0].getString();
-        } catch (ValueFormatException e) { title = null;
-        } catch (IllegalStateException e) { title = null;
-        } catch (PathNotFoundException e) { title = null;
-        } catch (RepositoryException e) { title = null;
-        }
+    } catch (PathNotFoundException pnf1) {
+      try {
+        title = node.getNode("jcr:content").getProperty("dc:title").getValues()[0].getString();
+      } catch (PathNotFoundException pnf2) {
+        title = null;
       }
-    }
-    if ((title==null) || ((title!=null) && (title.trim().length()==0))) {
+    } catch (ValueFormatException e) { title = null; 
+    } catch (IllegalStateException e) { title = null;
+    } catch (RepositoryException e) { title = null; }
+    if (StringUtils.isBlank(title)) {
       title = node.getName();
     }
     return ContentReader.getXSSCompatibilityContent(title);

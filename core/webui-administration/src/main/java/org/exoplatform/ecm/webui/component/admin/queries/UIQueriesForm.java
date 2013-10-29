@@ -81,8 +81,7 @@ public class UIQueriesForm extends UIForm implements UISelectable {
 
   public UIQueriesForm() throws Exception {
     addUIFormInput(new UIFormStringInput(QUERY_NAME, QUERY_NAME, null).
-      addValidator(MandatoryValidator.class).
-        addValidator(ECMNameValidator.class)) ;
+      addValidator(MandatoryValidator.class).addValidator(ECMNameValidator.class)) ;
     List<SelectItemOption<String>> ls = new ArrayList<SelectItemOption<String>>() ;
     ls.add(new SelectItemOption<String>("xPath", "xpath")) ;
     ls.add(new SelectItemOption<String>("SQL", "sql")) ;
@@ -171,11 +170,7 @@ public class UIQueriesForm extends UIForm implements UISelectable {
           }
         }
       }
-      if(!Utils.isNameValid(queryName, REG_EXPRESSION)) {
-        uiApp.addMessage(new ApplicationMessage("UIQueriesForm.msg.name-invalid", null,
-                                                ApplicationMessage.WARNING)) ;        
-        return ;
-      }
+     
       String statement = uiForm.getUIFormTextAreaInput(STATEMENT).getValue() ;
       UIFormInputSetWithAction permField = uiForm.getChildById("PermissionButton") ;
       String permissions = permField.getUIStringInput(PERMISSIONS).getValue() ;

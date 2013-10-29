@@ -165,4 +165,10 @@ public class PageListFactory {
     }
     return dataList;
   }
+  
+  public static <E> LazyPageList<E> createLazyPageList(QueryData queryData, int nodePerPage, 
+                                                       SearchDataCreator<E> dataCreator) {
+    return new LazyPageList<E>(queryData, nodePerPage, dataCreator);
+  }
+  
 }

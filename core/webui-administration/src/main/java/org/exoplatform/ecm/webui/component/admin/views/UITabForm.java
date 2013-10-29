@@ -19,8 +19,10 @@ package org.exoplatform.ecm.webui.component.admin.views;
 import java.util.List;
 
 import org.apache.commons.lang.StringUtils;
+import org.exoplatform.ecm.webui.form.validator.ECMNameValidator;
 import org.exoplatform.services.cms.views.ManageViewService;
 import org.exoplatform.services.cms.views.ViewConfig.Tab;
+import org.exoplatform.wcm.webui.validator.MandatoryValidator;
 import org.exoplatform.web.application.ApplicationMessage;
 import org.exoplatform.webui.application.WebuiRequestContext;
 import org.exoplatform.webui.config.annotation.ComponentConfig;
@@ -57,7 +59,8 @@ public class UITabForm extends UIForm {
   
   public UITabForm() throws Exception {
     setComponentConfig(getClass(), null) ;
-    addUIFormInput(new UIFormStringInput(FIELD_NAME, FIELD_NAME, null)) ;
+    addUIFormInput(new UIFormStringInput(FIELD_NAME, FIELD_NAME, null).addValidator(MandatoryValidator.class)
+                   .addValidator(ECMNameValidator.class)) ;
     ManageViewService vservice_ = getApplicationComponent(ManageViewService.class) ;
     buttons_ = vservice_.getButtons();
     for(Object bt : buttons_) {
@@ -106,14 +109,7 @@ public class UITabForm extends UIForm {
         event.getRequestContext().addUIComponentToUpdateByAjax(uiTabForm);
         return ;
       }
-      String[] arrFilterChar = {"&", "$", "@", ",", ":","]", "[", "*", "%", "!"} ;
-      for(String filterChar : arrFilterChar) {
-        if(tabName.indexOf(filterChar) > -1) {
-          uiApp.addMessage(new ApplicationMessage("UITabForm.msg.fileName-invalid", null, ApplicationMessage.WARNING)) ;
-          event.getRequestContext().addUIComponentToUpdateByAjax(uiTabForm);
-          return ;
-        }
-      }
+     
       StringBuilder selectedButton = new StringBuilder() ;
       boolean isSelected = false ;
       for(Object bt : uiTabForm.buttons_ ) {

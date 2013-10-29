@@ -57,18 +57,11 @@
 												<div class="form-horizontal" >  
 													<div class="control-group">  
 													  <label class="control-label"><%=uicomponent.getLabel(uicomponent.DISPLAY_MODE_FORM_RADIO_BOX_INPUT) %>: </label>
+													  <div style="display:inline-block;" class="parentPosition pull-right" onmouseover="(function(elm) {eXo.ecm.WCMUtils.showPopover(elm);})(this)"
+											                onmouseout="(function(elm) {eXo.ecm.WCMUtils.hidePopover(elm);})(this)" data-toggle="popover" data-placement="left" data-content="<%= _ctx.appRes("UICLVConfig.help.ModeSelectionHelp") %>">
+												          <i class="uiIconQuestion uiIconLightGray"></i>          
+												      </div> 
 													  
-													  <div style="display:inline-block;" class="parentPosition pull-right" 
-													   onmouseover="(function(elm) {elm.getElementsByClassName('popover')[0].style.display='block'})(this)"
-														 onmouseout="(function(elm) {elm.getElementsByClassName('popover')[0].style.display='none'})(this)">
-														  <i class="uiIconQuestion uiIconLightGray"></i>
-														  <div class="gotPosition" style="position: absolute; top: 13px; left: 497px;">
-														   <div class="popover left" style="display: none;">
-															<span class="arrow"></span>
-															<div class="popover-content"><%= _ctx.appRes("UICLVConfig.help.ModeSelectionHelp") %></div>
-														   </div>
-														  </div>
-														 </div>
 																	  
 													  
 													  <div class="controls">
@@ -79,18 +72,10 @@
 													  <label class="control-label" for="<%=uicomponent.ITEM_PATH_FORM_INPUT_SET%>">											  
 													    <%=uicomponent.getLabel(uicomponent.ITEM_PATH_FORM_INPUT_SET) %>: 
 													  </label>
-													  
-													  <div style="display:inline-block;" class="parentPosition pull-right" 
-													   onmouseover="(function(elm) {elm.getElementsByClassName('popover')[0].style.display='block'})(this)"
-														 onmouseout="(function(elm) {elm.getElementsByClassName('popover')[0].style.display='none'})(this)">
-														  <i class="uiIconQuestion uiIconLightGray"></i>
-														  <div class="gotPosition" style="position: absolute; top: 58px; left: 497px;">
-														   <div class="popover left" style="display: none;">
-															<span class="arrow"></span>
-															<div class="popover-content"><%= _ctx.appRes("UICLVConfig.help.FolderPathHelp") %></div>
-														   </div>
-														  </div>
-														 </div>
+													  <div style="display:inline-block;" class="parentPosition pull-right" onmouseover="(function(elm) {eXo.ecm.WCMUtils.showPopover(elm);})(this)"
+											                onmouseout="(function(elm) {eXo.ecm.WCMUtils.hidePopover(elm);})(this)" data-toggle="popover" data-placement="left" data-content="<%= _ctx.appRes("UICLVConfig.help.FolderPathHelp") %>">
+												          <i class="uiIconQuestion uiIconLightGray"></i>          
+												      </div> 
 													  
 													  <div class="controls" <% if (uicomponent.getSavedPath() != null) { %>title="<%=uicomponent.getSavedPath()%>" <% }%> >
 													    <% uiform.renderField(uicomponent.ITEM_PATH_FORM_INPUT_SET) %>
@@ -151,18 +136,11 @@
 											  <div class="form-horizontal" >  
 													<div class="control-group">  
 													  <label class="control-label" for="<%=uicomponent.HEADER_FORM_STRING_INPUT%>"><%=uicomponent.getLabel(uicomponent.HEADER_FORM_STRING_INPUT) %>: </label>
-													  
-													  	<div style="display:inline-block;" class="parentPosition pull-right" 
-														   onmouseover="(function(elm) {elm.getElementsByClassName('popover')[0].style.display='block'})(this)"
-															 onmouseout="(function(elm) {elm.getElementsByClassName('popover')[0].style.display='none'})(this)">
-															  <i class="uiIconQuestion uiIconLightGray"></i>
-															  <div class="gotPosition" style="position: absolute; top: 23px; left: 480px;">
-															   <div class="popover left" style="display: none;">
-																<span class="arrow"></span>
-																<div class="popover-content"><%= _ctx.appRes("UICLVConfig.help.HeaderOptionHelp") %></div>
-															   </div>
-															  </div>
-															 </div>
+													  	<div style="display:inline-block;" class="parentPosition pull-right" onmouseover="(function(elm) {eXo.ecm.WCMUtils.showPopover(elm);})(this)"
+											                onmouseout="(function(elm) {eXo.ecm.WCMUtils.hidePopover(elm);})(this)" data-toggle="popover" data-placement="left" data-content="<%= _ctx.appRes("UICLVConfig.help.HeaderOptionHelp") %>">
+												          <i class="uiIconQuestion uiIconLightGray"></i>          
+												      </div> 
+													  	
 													  
 													  <div class="controls clearfix">
 														<div class="pull-left"> <% uiform.renderField(uicomponent.HEADER_FORM_STRING_INPUT) %></div>
@@ -247,18 +225,11 @@
 											  %>
 												<div class="form-horizontal" >  
 													<div class="clearfix"> 
-													
-														<div style="display:inline-block;" class="parentPosition pull-right" 
-														   onmouseover="(function(elm) {elm.getElementsByClassName('popover')[0].style.display='block'})(this)"
-															 onmouseout="(function(elm) {elm.getElementsByClassName('popover')[0].style.display='none'})(this)">
-															  <i class="uiIconQuestion uiIconLightGray"></i>
-															  <div class="gotPosition" style="position: absolute; top: 32px; left: 480px;">
-															   <div class="popover left" style="display: none;">
-																<span class="arrow"></span>
-																<div class="popover-content"><%= _ctx.appRes("UICLVConfig.help.ContextualHelp") %></div>
-															   </div>
-															  </div>
-															 </div>
+														<div style="display:inline-block;" class="parentPosition pull-right" onmouseover="(function(elm) {eXo.ecm.WCMUtils.showPopover(elm);})(this)"
+											                onmouseout="(function(elm) {eXo.ecm.WCMUtils.hidePopover(elm);})(this)" data-toggle="popover" data-placement="left" data-content="<%= _ctx.appRes("UICLVConfig.help.ContextualHelp") %>">
+												          <i class="uiIconQuestion uiIconLightGray"></i>          
+												      </div> 
+														
 														<h6><%=uicomponent.getLabel(uicomponent.DYNAMIC_NAVIGATION_LABEL) %></h6>
 													</div>
 													<div class="control-group">  
@@ -306,17 +277,10 @@
 													</div>
 													<div class="clearfix"> 
 														
-														<div style="display:inline-block;" class="parentPosition pull-right" 
-														   onmouseover="(function(elm) {elm.getElementsByClassName('popover')[0].style.display='block'})(this)"
-															 onmouseout="(function(elm) {elm.getElementsByClassName('popover')[0].style.display='none'})(this)">
-															  <i class="uiIconQuestion uiIconLightGray"></i>
-															  <div class="gotPosition" style="position: absolute; top: 137px; left: 480px;">
-															   <div class="popover left" style="display: none;">
-																<span class="arrow"></span>
-																<div class="popover-content"><%= _ctx.appRes("UICLVConfig.help.ContentsVisibilityHelp") %></div>
-															   </div>
-															  </div>
-															 </div>
+														<div style="display:inline-block;" class="parentPosition pull-right" onmouseover="(function(elm) {eXo.ecm.WCMUtils.showPopover(elm);})(this)"
+											                onmouseout="(function(elm) {eXo.ecm.WCMUtils.hidePopover(elm);})(this)" data-toggle="popover" data-placement="left" data-content='<%= _ctx.appRes("UICLVConfig.help.ContentsVisibilityHelp") %>'>
+												          <i class="uiIconQuestion uiIconLightGray"></i>          
+												      </div> 
 														
 														
 														<h6><%=uicomponent.getLabel(uicomponent.CACHE_MANAGEMENT_LABEL)%></h6>
@@ -326,7 +290,7 @@
 													</div>
 												</div>
 
-											  <%
+											  <% 
 											  } else uicomponent.renderUIComponent(formInput);
 											%>
 										</div>

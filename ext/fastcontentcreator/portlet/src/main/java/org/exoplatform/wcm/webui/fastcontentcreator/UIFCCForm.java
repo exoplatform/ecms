@@ -321,11 +321,10 @@ public class UIFCCForm extends UIDialogForm implements UISelectable {
       List inputs = fastContentCreatorForm.getChildren();
       for (int i = 0; i < inputs.size(); i++) {
         UIFormInput input = (UIFormInput) inputs.get(i);
-        if((input.getName() != null) && input.getName().equals("name")) {
-          String[] arrFilterChar = { "&", "$", "@", ":", "]", "[", "*", "%", "!", "+", "(", ")",
-              "'", "#", ";", "}", "{", "/", "|", "\"" };
+        if((input.getName() != null) && input.getName().equals("name")) {          
           String valueName = input.getValue().toString().trim();
-          if (!org.exoplatform.ecm.webui.utils.Utils.isNameValid(valueName, arrFilterChar)) {
+          if (!org.exoplatform.ecm.webui.utils.Utils.isNameValid(valueName, 
+                                                                 org.exoplatform.ecm.webui.utils.Utils.SPECIALCHARACTER)) {
             uiApp.addMessage(new ApplicationMessage("UIFCCForm.msg.name-not-allowed", null, ApplicationMessage.WARNING));
 
             return;
