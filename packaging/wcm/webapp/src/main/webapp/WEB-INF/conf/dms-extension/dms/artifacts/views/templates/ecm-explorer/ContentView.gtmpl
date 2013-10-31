@@ -12,6 +12,8 @@
   import org.exoplatform.web.application.Parameter ;
   import org.exoplatform.webui.core.UIRightClickPopupMenu ;
   import org.exoplatform.ecm.webui.component.explorer.UIWorkingArea;
+  import org.exoplatform.ecm.webui.component.explorer.UIDocumentInfo.ExplorerTemplateType;
+  import org.exoplatform.ecm.webui.component.explorer.DocumentProviderUtils;
   import org.exoplatform.ecm.jcr.model.Preference;
   import org.exoplatform.ecm.webui.component.explorer.UIJCRExplorer;
   import org.exoplatform.services.jcr.RepositoryService;
@@ -56,7 +58,7 @@
   //Default 
   String[] arrColumns = ["exo:dateCreated;123px", "exo:owner;123px"];
 %>
-<div id="$componentId" >
+<div id="$componentId">
   <div id="${componentId}-$viewComponentId" class="uiListView $componentId">
     <div class="uiListGrid">
 			<div class="uiBox noRounded">
@@ -330,9 +332,8 @@
             lockedLabel  = "("+_ctx.appRes("UIDocumentWorkspace.tooltip.LockedBy")+" "+data.getLock().getLockOwner()+")";
           }
           %>
-            <div <%= uicomponent.getNodeAttributeInView(data) %> class="rowView $oddEvenClassRow clearfix" 
-                  
-                 ondblclick="$actionLink"
+            <div <%= uicomponent.getNodeAttributeInCommon(data) %> class="rowView $oddEvenClassRow clearfix"
+                 ondblclick="$actionLink" rightClickHandler="<%=uicomponent.getRightClickFunction(ExplorerTemplateType.CONTENT, data)%>"
                  >$strActs
               <div class="columnIcon" style="width: 20px;">
                 <div rel="tooltip" data-placement="bottom" title="$name" class="<%=Utils.getNodeTypeIcon(data, "uiIcon16x16")%>">
@@ -369,7 +370,7 @@
               <div class="lineLeftItem"><span></span></div>
 <!-- Status-->
               <div class="columnStatus column" style="width: 93px;">
-                  <div class="nodeLabel" rel="tooltip" data-placement="bottom" title="status"><%=_ctx.appRes("UIPublicationPanel.status." + status) %></div>
+                  <div class="nodeLabel" rel="tooltip" data-placement="bottom" title="<%=_ctx.appRes("UIPublicationPanel.status." + status) %>"><%=_ctx.appRes("UIPublicationPanel.status." + status) %></div>
               </div>
             </div>
           <%
