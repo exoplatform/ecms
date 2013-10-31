@@ -6,12 +6,9 @@
   import org.exoplatform.webui.core.UIRightClickPopupMenu ;
   import org.exoplatform.ecm.webui.component.explorer.UIWorkingArea;
   import org.exoplatform.ecm.webui.component.explorer.UIDocumentInfo;
-  import org.exoplatform.ecm.utils.text.Text;
+  import org.exoplatform.ecm.webui.component.explorer.UIDocumentInfo.ExplorerTemplateType;
   import org.exoplatform.services.cms.link.LinkManager;
-  import org.exoplatform.ecm.webui.component.explorer.DocumentProviderUtils;
-  import org.exoplatform.ecm.jcr.model.Preference;
   import org.exoplatform.ecm.webui.component.explorer.UIJCRExplorer;
-  import javax.jcr.Value;
   import javax.jcr.PathNotFoundException;
   import org.exoplatform.services.wcm.utils.WCMCoreUtils;
   import org.exoplatform.services.jcr.RepositoryService;
@@ -29,16 +26,9 @@
   def pref = uiExplorer.getPreference();
   def enableDragAndDrop = pref.isEnableDragAndDrop();
   def uiCustomActionComponent = uiWorkingArea.getCustomAction();
-  def managersMultiItemContext =  uiWorkingArea.getMultiActionsExtensionList();
-  def managersGroundContext = uiWorkingArea.getGroundActionsExtensionList();
-  def action = "";
-  def permLinkComponent = null;
   UIRightClickPopupMenu contextMenu = uiDocumentInfo.getContextMenu();
   String componentId = uicomponent.getId();
-  java.text.DateFormat dateFormat = uiDocumentInfo.getSimpleDateFormat();
-  def viewComponentId  = new Date().getTime();
   def rcontext = _ctx.getRequestContext() ;
-  def size = uicomponent.getNodeChildrenList().size();
   def jsManager = rcontext.getJavascriptManager();
   def areaId = uiDocumentInfo.getId();
 
@@ -113,8 +103,9 @@ public void writeNodes(level, i, data, uiWorkingArea, linkManager, restContextNa
   def fileSize = uicomponent.getFileSize(data);
   
   String actionLink = uiDocumentInfo.event("ChangeNode",Utils.formatNodeName(data.path), new Parameter("workspaceName", preferenceWS)) ;
+
   //Begin permlink
-  permLinkComponent =  uiWorkingArea.getPermlink(data);
+  def permLinkComponent =  uiWorkingArea.getPermlink(data);
   String strActs = "<li class=\"RightClickCustomItem\" style=\"display: none;\">" ;
   strActs += "<ul>"
   if (permLinkComponent != null) {
@@ -195,7 +186,7 @@ public void writeNodes(level, i, data, uiWorkingArea, linkManager, restContextNa
   }
 %>
   <div class="rowView fileViewRowView Normal clearfix"  
-       <%=uiDocumentInfo.getNodeAttribute(data)%>
+       <%=uiDocumentInfo.getNodeAttributeInCommon(data)%> rightClickHandler="<%=uiDocumentInfo.getRightClickFunction(ExplorerTemplateType.TREELIST, data)%>"
        style="padding-left:<%=uicomponent.getPadding()*40%>px">
     $strActs
     <% def folderIcon = "noArrow";

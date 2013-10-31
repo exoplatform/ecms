@@ -16,21 +16,41 @@
  */
 package org.exoplatform.ecm.webui.component.explorer;
 
-import org.exoplatform.ecm.jcr.model.Preference;
-import org.exoplatform.ecm.webui.utils.Utils;
-import org.exoplatform.services.cms.documents.FavoriteService;
-import org.exoplatform.services.cms.documents.TrashService;
-import org.exoplatform.services.jcr.ext.common.SessionProvider;
-import org.exoplatform.services.wcm.utils.WCMCoreUtils;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Set;
 
 import javax.jcr.Node;
 import javax.jcr.NodeIterator;
+import javax.jcr.PathNotFoundException;
 import javax.jcr.RepositoryException;
 import javax.jcr.Session;
+import javax.jcr.nodetype.NodeType;
+import javax.jcr.nodetype.NodeTypeIterator;
+import javax.jcr.nodetype.NodeTypeManager;
 import javax.jcr.query.Query;
-import javax.jcr.query.QueryManager;
-import javax.jcr.query.QueryResult;
-import java.util.*;
+import javax.jcr.query.Row;
+
+import org.apache.commons.lang.StringUtils;
+import org.exoplatform.ecm.jcr.model.Preference;
+import org.exoplatform.ecm.webui.utils.Utils;
+import org.exoplatform.services.cms.documents.DocumentTypeService;
+import org.exoplatform.services.cms.link.LinkManager;
+import org.exoplatform.services.cms.link.NodeFinder;
+import org.exoplatform.services.cms.link.NodeLinkAware;
+import org.exoplatform.services.cms.templates.TemplateService;
+import org.exoplatform.services.jcr.ext.common.SessionProvider;
+import org.exoplatform.services.jcr.ext.hierarchy.NodeHierarchyCreator;
+import org.exoplatform.services.log.ExoLogger;
+import org.exoplatform.services.log.Log;
+import org.exoplatform.services.security.ConversationState;
+import org.exoplatform.services.wcm.core.NodeLocation;
+import org.exoplatform.services.wcm.core.NodetypeConstant;
+import org.exoplatform.services.wcm.search.base.LazyPageList;
+import org.exoplatform.services.wcm.search.base.PageListFactory;
+import org.exoplatform.services.wcm.search.base.QueryData;
+import org.exoplatform.services.wcm.search.base.SearchDataCreator;
+import org.exoplatform.services.wcm.utils.WCMCoreUtils;
 
 /**
  * Created by The eXo Platform SARL
@@ -41,145 +61,288 @@ import java.util.*;
  */
 public class DocumentProviderUtils {
 
-  public static final int CURRENT_NODE_ITEMS = 0;
-  public static final int FAVOURITE_ITEMS = 1;
-  public static final int TRASH_ITEMS = 2;
-  public static final int OWNED_BY_USER_ITEMS = 3;
-  public static final int HIDDEN_ITEMS = 4;
-
-  public List<Node> getItemsBySourceType(int source, UIJCRExplorer uiExplorer) throws Exception {
-    List<Node> ret = new ArrayList<Node>();
-    switch (source) {
-    case CURRENT_NODE_ITEMS:
-      return getCurrentNodeChildren(uiExplorer);
-    case FAVOURITE_ITEMS:
-      return getFavouriteNodeList(uiExplorer);
-    case TRASH_ITEMS:
-      return getTrashNodeList(uiExplorer);
-    case OWNED_BY_USER_ITEMS:
-      return getOwnedByUserNodeList(uiExplorer);
-    case HIDDEN_ITEMS:
-      return getHiddenNodeList(uiExplorer);
+  private static final String   Contents_Document_Type             = "Content";
+  
+  private static final String FAVORITE_ALIAS = "userPrivateFavorites";
+  
+  private static final Log LOG  = ExoLogger.getLogger(DocumentProviderUtils.class.getName());  
+  
+  private static final String[] prohibitedSortType = {
+                            NodetypeConstant.SORT_BY_NODESIZE,
+                            NodetypeConstant.SORT_BY_NODETYPE, 
+                            NodetypeConstant.SORT_BY_DATE, };
+  
+  private static DocumentProviderUtils docProviderUtil_ = new DocumentProviderUtils();
+  private List<String> folderTypes_;
+  
+  private DocumentProviderUtils() {
+  }
+  
+  public static DocumentProviderUtils getInstance() { return docProviderUtil_; }
+  
+  public boolean canSortType(String sortType) {
+    for (String type : prohibitedSortType) {
+      if (type.equals(sortType)) {
+        return false;
+      }
     }
-    return ret;
+    return true;
   }
 
-  private List<Node> getCurrentNodeChildren(UIJCRExplorer uiExplorer) throws Exception {
-    List<Node> childrenList = new ArrayList<Node>();
-
-    Preference pref = uiExplorer.getPreference();
-    String currentPath = uiExplorer.getCurrentPath();
-    if(!uiExplorer.isViewTag()) {
-      childrenList = uiExplorer.getChildrenList(currentPath, pref.isShowPreferenceDocuments());
-    } else  {
-      childrenList = uiExplorer.getDocumentByTag();
+  public LazyPageList<NodeLinkAware> getPageList(String ws, String path, Preference pref, 
+                          Set<String> allItemFilter, Set<String> allItemByTypeFilter,
+                          NodeLinkAware parent) throws Exception {
+    LinkManager linkManager = WCMCoreUtils.getService(LinkManager.class);
+    NodeFinder nodeFinder = WCMCoreUtils.getService(NodeFinder.class);
+    String statement;
+    try {
+      Node node = (Node)nodeFinder.getItem(ws, path);
+      if (linkManager.isLink(node)) {
+        path = linkManager.getTarget(node).getPath();
+      }
+      statement = getStatement(ws, path, pref, allItemFilter, allItemByTypeFilter);
+    } catch (Exception e) {
+      statement = null;
     }
-
-    return childrenList;
+    QueryData queryData = new QueryData(statement, ws, Query.SQL, 
+                                        WCMCoreUtils.getRemoteUser().equals(WCMCoreUtils.getSuperUser()));
+    return PageListFactory.createLazyPageList(queryData, pref.getNodesPerPage(), new NodeLinkAwareCreator(parent));
+  }
+  
+  private String getStatement(String ws, String path, Preference pref, 
+                             Set<String> allItemsFilterSet, Set<String> allItemsByTypeFilter) 
+                                 throws Exception {
+    StringBuilder buf = new StringBuilder();
+    //path
+    buf = addPathParam(buf, path);
+    //jcrEnable
+    buf = addJcrEnableParam(buf, ws, path, pref);
+    //show non document
+    buf = addShowNonDocumentType(buf, pref, allItemsByTypeFilter);
+    //show hidden node
+    buf = addShowHiddenNodeParam(buf, pref);
+    //owned by me
+    buf = addOwnedByMeParam(buf, allItemsFilterSet); 
+    //favorite
+    buf = addFavoriteParam(buf, ws, allItemsFilterSet);
+    //all items by type
+    buf = addAllItemByType(buf, allItemsByTypeFilter);
+    //sort
+    buf = addSortParam(buf, pref);
+    return (buf == null) ? null : buf.toString();
+  }
+  
+  /**
+   * add path condition to query statement
+   */
+  private StringBuilder addPathParam(StringBuilder buf, String path) {
+    buf.append("SELECT * FROM nt:base ");
+    if (path != null) {
+      if (path.endsWith("/")) {
+        path = path.substring(0, path.length() - 1);
+      }
+      buf.append("WHERE jcr:path LIKE '").append(path)
+        .append("/%' AND NOT jcr:path LIKE '").append(path).append("/%/%' ");
+    }
+    return buf;
   }
 
-  private List<Node> getTrashNodeList(UIJCRExplorer uiExplorer) throws Exception {
-    List<Node> ret = new ArrayList<Node>();
-
-    SessionProvider sessionProvider = uiExplorer.getSessionProvider();
-    boolean byUser = uiExplorer.getPreference().isShowItemsByUser();
-    if (!byUser) {
-      ret = WCMCoreUtils.getService(TrashService.class).getAllNodeInTrash(sessionProvider);
-    } else {
-      ret = WCMCoreUtils.getService(TrashService.class).getAllNodeInTrashByUser(sessionProvider, WCMCoreUtils.getRemoteUser());
+  /**
+   * add is_jcr_enable condition to query statement
+   */
+  private StringBuilder addJcrEnableParam(StringBuilder buf, String ws, String path, Preference pref) 
+      throws Exception {
+    TemplateService templateService = WCMCoreUtils.getService(TemplateService.class);
+    SessionProvider provider = WCMCoreUtils.getUserSessionProvider();
+    Session session = provider.getSession(ws, WCMCoreUtils.getRepository());
+    Node node = (Node)session.getItem(path);
+    if(!pref.isJcrEnable() &&
+        templateService.isManagedNodeType(node.getPrimaryNodeType().getName()) && 
+        !(node.isNodeType(NodetypeConstant.NT_FOLDER) || node.isNodeType(NodetypeConstant.NT_UNSTRUCTURED) )) {
+      return null;
     }
-    return ret;
+    return buf;
+  }
+  
+  /**
+   * add show_non_document_type condition to query statement 
+   */
+  private StringBuilder addShowNonDocumentType(StringBuilder buf, Preference pref, Set<String> allItemsByTypeFilter) 
+      throws Exception {
+    if (buf == null) return null;
+    if (!pref.isShowNonDocumentType() || allItemsByTypeFilter.contains(Contents_Document_Type)) {
+      if (folderTypes_ == null) {
+        folderTypes_ = getFolderTypes();
+      }
+      buf.append(" AND (");
+      //nt:unstructured && nt:folder
+      buf.append("( jcr:primaryType='").append(Utils.NT_UNSTRUCTURED)
+      .append("') OR (exo:primaryType='").append(Utils.NT_UNSTRUCTURED).append("') ");
+      buf.append(" OR ( jcr:primaryType='").append(Utils.NT_FOLDER)
+      .append("') OR (exo:primaryType='").append(Utils.NT_FOLDER).append("') ");
+      //supertype of nt:unstructured or nt:folder
+      for (String fType : folderTypes_) {
+        buf.append(" OR ( jcr:primaryType='").append(fType)
+           .append("') OR (exo:primaryType='").append(fType).append("') ");
+      }
+      //all document type
+      TemplateService templateService = WCMCoreUtils.getService(TemplateService.class);
+      List<String> docTypes = templateService.getDocumentTemplates();
+      for (String docType : docTypes) {
+        buf.append(" OR ( jcr:primaryType='").append(docType)
+           .append("') OR (exo:primaryType='").append(docType).append("') ");
+      }
+      buf.append(" ) ");
+    }
+    return buf;
   }
 
-  private List<Node> getHiddenNodeList(UIJCRExplorer uiExplorer) throws Exception {
-    List<Node> ret = new ArrayList<Node>();
-    boolean byUser = uiExplorer.getPreference().isShowItemsByUser();
-
-    StringBuilder queryString = new StringBuilder("SELECT * FROM " + Utils.EXO_HIDDENABLE);
-
-    if (byUser) {
-      queryString.append(" WHERE CONTAINS(").
-                  append(Utils.EXO_OWNER).
-                  append(",'").
-                  append(WCMCoreUtils.getRemoteUser()).
-                  append("')");
-    }
-    Session session = uiExplorer.getSession();
-    QueryManager queryManager = session.getWorkspace().getQueryManager();
-    Query query = queryManager.createQuery(queryString.toString(), Query.SQL);
-    QueryResult queryResult = query.execute();
-
-    NodeIterator iter = queryResult.getNodes();
-    while (iter.hasNext()) {
-      Node node = iter.nextNode();
-      if (Utils.isInTrash(node)) continue;
-      ret.add(node);
-    }
-    return ret;
-  }
-
-  private List<Node> getFavouriteNodeList(UIJCRExplorer uiExplorer) throws Exception {
-//    boolean byUser = uiExplorer.getPreference().isShowItemsByUser();
-    List<Node> ret = new ArrayList<Node>();
-    List<Node> favoriteList = null;
-
-    favoriteList = WCMCoreUtils.getService(FavoriteService.class).getAllFavoriteNodesByUser(uiExplorer.getCurrentWorkspace(),
-          uiExplorer.getRepositoryName(), WCMCoreUtils.getRemoteUser());
-
-    for (Node node : favoriteList) {
-      if (!Utils.isInTrash(node))
-        ret.add(node);
-    }
-
-    return ret;
-  }
-
-  private List<Node> getOwnedByUserNodeList(UIJCRExplorer uiExplorer) throws Exception {
-    List<Node> ret = new ArrayList<Node>();
-
-    Session session = uiExplorer.getSession();
-    StringBuilder queryString = new StringBuilder("SELECT * FROM ").append(Utils.NT_BASE);
-
-    queryString.append(" WHERE CONTAINS(")
-               .append(Utils.EXO_OWNER)
-               .append(",'")
-               .append(WCMCoreUtils.getRemoteUser())
-               .append("')");
-
-    QueryManager queryManager = session.getWorkspace().getQueryManager();
-    Query query = queryManager.createQuery(queryString.toString(), Query.SQL);
-    QueryResult queryResult = query.execute();
-
-    NodeIterator iter = queryResult.getNodes();
-    Node node = null;
-    Set<Node> set = new TreeSet<Node>(new NodeComparator());
-    while (iter.hasNext()) {
-      node = iter.nextNode();
-      if (node.getName().equals(Utils.JCR_CONTENT))
-        continue;
-      if (Utils.isInTrash(node))
-        continue;
-      if (node.isNodeType(Utils.NT_RESOURCE))
-        node = node.getParent();
-      if (!set.contains(node)) {
-        ret.add(node);
-        set.add(node);
+  private List<String> getFolderTypes() {
+    List<String> ret = new ArrayList<String>();
+    NodeTypeManager nodeTypeManager = WCMCoreUtils.getRepository().getNodeTypeManager();
+    try {
+      for (NodeTypeIterator iter = nodeTypeManager.getAllNodeTypes(); iter.hasNext();) {
+        NodeType type = iter.nextNodeType();
+        if (type.isNodeType(NodetypeConstant.NT_FOLDER) || type.isNodeType(NodetypeConstant.NT_UNSTRUCTURED)) {
+          ret.add(type.getName());
+        }
+      }
+    } catch (RepositoryException e) {
+      if (LOG.isWarnEnabled()) {
+        LOG.warn("Can not get all node types", e.getMessage());
       }
     }
     return ret;
   }
+  
+  /**
+   * add show_hidden_node condition to query statement 
+   */
+  private StringBuilder addShowHiddenNodeParam(StringBuilder buf, Preference pref) {
+    if (buf == null) return null;
+    if (!pref.isShowHiddenNode()) {
+      buf.append(" AND ( NOT jcr:mixinTypes='").append(NodetypeConstant.EXO_HIDDENABLE).append("')");
+    }
+    return buf;
+  }
+  
+  /**
+   * add owned_by_me condition to query statement 
+   */
+  private StringBuilder addOwnedByMeParam(StringBuilder buf, Set<String> allItemsFilterSet) {
+    if (buf == null) return null;
+    if (allItemsFilterSet.contains(NodetypeConstant.OWNED_BY_ME)) {
+      buf.append(" AND ( exo:owner='")
+         .append(ConversationState.getCurrent().getIdentity().getUserId())
+         .append("')");
+    }
+    return buf;
+  }
+  
+  /**
+   * add favorite condition to query statement 
+   * @throws Exception 
+   */
+  private StringBuilder addFavoriteParam(StringBuilder buf, String ws, Set<String> allItemsFilterSet) 
+      throws Exception {
+    if (buf == null) return null;
+    if (allItemsFilterSet.contains(NodetypeConstant.FAVORITE)) {
+      NodeHierarchyCreator nodeHierarchyCreator = WCMCoreUtils.getService(NodeHierarchyCreator.class);
+      Node userNode =
+          nodeHierarchyCreator.getUserNode(WCMCoreUtils.getUserSessionProvider(), 
+                                           ConversationState.getCurrent().getIdentity().getUserId());
+      String favoritePath = nodeHierarchyCreator.getJcrPath(FAVORITE_ALIAS);
+      int count = 0;
+      buf.append(" AND (");
+      for (NodeIterator iter = userNode.getNode(favoritePath).getNodes();iter.hasNext();) {
+        Node node = iter.nextNode();
+        if (node.isNodeType(NodetypeConstant.EXO_SYMLINK) &&
+            node.hasProperty(NodetypeConstant.EXO_WORKSPACE) &&
+            ws.equals(node.getProperty(NodetypeConstant.EXO_WORKSPACE).getString())) {
+          if (count ++ > 0) {
+            buf.append(" OR ");
+          }
+          buf.append(" jcr:uuid='")
+             .append(node.getProperty("exo:uuid").getString())
+             .append("'");
+        }
+      }
+      buf.append(" ) ");
+      if (count == 0) {
+        return null;
+      } 
+    }
+    return buf;
+  }
+  
+  /**
+   * add mimetype condition to query statement 
+   */
+  private StringBuilder addAllItemByType(StringBuilder buf, Set<String> allItemsByTypeFilterSet) {
+    if(allItemsByTypeFilterSet.isEmpty()) {
+      return buf;
+    }
+    DocumentTypeService documentTypeService = WCMCoreUtils.getService(DocumentTypeService.class);
+    StringBuilder buf1 = new StringBuilder(" AND (");
+    int count = 0;
+    for (String documentType : allItemsByTypeFilterSet) {
+      for (String mimeType : documentTypeService.getMimeTypes(documentType)) {
+        if (count++ > 0) {
+          buf1.append(" OR ");
+        }
+        if (mimeType.endsWith("/")) { mimeType = mimeType.substring(0, mimeType.length() - 1); }
+        buf1.append(" 'jcr:content/jcr:mimeType' like '").append(mimeType).append("/%'");
+      }
+    }
+    buf1.append(" )");
+    if (count > 0) {
+      buf.append(buf1);
+    }
+    return buf;
+  }
 
-  private static class NodeComparator implements Comparator<Node> {
-    public int compare(Node o1, Node o2) {
+  /**
+   * adds 'sort by' condition to query statement
+   */
+  private StringBuilder addSortParam(StringBuilder buf, Preference pref) {
+    if (buf == null) return null;
+    String type = "";
+    if (NodetypeConstant.SORT_BY_NODENAME.equals(pref.getSortType())) { type="exo:name"; } 
+    else if (NodetypeConstant.SORT_BY_CREATED_DATE.equals(pref.getSortType())) { 
+      type = NodetypeConstant.EXO_DATE_CREATED;
+    } else if (NodetypeConstant.SORT_BY_MODIFIED_DATE.equals(pref.getSortType())) {
+      type = NodetypeConstant.EXO_LAST_MODIFIED_DATE;
+    } else { type= pref.getSortType(); }
+    buf.append(" ORDER BY ").append(type).append(" ");
+    buf.append("Ascending".equals(pref.getOrder()) ? "ASC" : "DESC");
+    return buf;
+  }
+  
+  /**
+   * Simple data creator, just creates the node result itself
+   */
+  public class NodeLinkAwareCreator implements SearchDataCreator<NodeLinkAware> {
+
+    private NodeLinkAware parent;
+    
+    public NodeLinkAwareCreator(NodeLinkAware parent) {
+      this.parent = parent;
+    }
+    
+    @Override
+    public NodeLinkAware createData(Node node, Row row) {
       try {
-        if (o1.isSame(o2))
-          return 0;
-        int pathComparison = o1.getPath().compareTo(o2.getPath());
-        return (pathComparison == 0) ? 1 : pathComparison;
+        return (NodeLinkAware)parent.getNode(StringUtils.substringAfterLast(node.getPath(), "/"));
+      } catch (PathNotFoundException e) {
+        if (LOG.isWarnEnabled()) {
+          LOG.warn("Can not create NodeLinkAware ", e.getMessage());
+        }
       } catch (RepositoryException e) {
-        return 1;
+        if (LOG.isWarnEnabled()) {
+          LOG.warn("Can not create NodeLinkAware ", e.getMessage());
+        }
       }
+      return null;
     }
   }
-
 }

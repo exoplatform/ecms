@@ -4,8 +4,8 @@
   import org.exoplatform.web.application.Parameter ;
   import org.exoplatform.webui.core.UIRightClickPopupMenu ;
   import org.exoplatform.ecm.webui.component.explorer.UIWorkingArea;
+  import org.exoplatform.ecm.webui.component.explorer.UIDocumentInfo.ExplorerTemplateType;
   import org.exoplatform.ecm.utils.text.Text;
-  import org.exoplatform.ecm.webui.component.explorer.DocumentProviderUtils;
   import org.exoplatform.ecm.jcr.model.Preference;
   import org.exoplatform.ecm.webui.component.explorer.UIJCRExplorer;
   import org.exoplatform.services.cms.link.LinkManager;  
@@ -194,8 +194,8 @@
                 lockedLabel  = "("+_ctx.appRes("UIDocumentWorkspace.tooltip.LockedBy")+" "+data.getLock().getLockOwner()+")";
               }
 		        %>   
-		      <div class="actionIconBox" <%= uicomponent.getNodeAttributeInView(data) %> 
-	       													   ondblclick="$actionLink">
+		      <div class="actionIconBox" <%= uicomponent.getNodeAttributeInCommon(data) %>
+	       													   ondblclick="$actionLink" rightClickHandler="<%=uicomponent.getRightClickFunction(ExplorerTemplateType.THUMBNAILS, data)%>">
 		        <div style="height: auto; width: auto; border: none; -moz-user-select: none;" unselectable="on">
 							<div class="nodeLabel">
 								<div class="thumbnailImage">

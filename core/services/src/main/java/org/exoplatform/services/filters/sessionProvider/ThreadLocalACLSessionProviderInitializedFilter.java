@@ -23,9 +23,9 @@ import javax.servlet.ServletException;
 import javax.servlet.ServletRequest;
 import javax.servlet.ServletResponse;
 
-import org.exoplatform.container.web.AbstractFilter;
 import org.exoplatform.services.jcr.sessions.ACLSessionProviderService;
 import org.exoplatform.services.wcm.utils.WCMCoreUtils;
+import org.exoplatform.web.filter.Filter;
 
 /**
  * Created by The eXo Platform SAS
@@ -33,9 +33,10 @@ import org.exoplatform.services.wcm.utils.WCMCoreUtils;
  *          anhvurz90@gmail.com
  * May 9, 2011  
  */
-public class ThreadLocalACLSessionProviderInitializedFilter extends AbstractFilter {
+public class ThreadLocalACLSessionProviderInitializedFilter implements Filter {
 
   private ACLSessionProviderService aclService;
+  
   @Override
   public void doFilter(ServletRequest request, ServletResponse response, FilterChain chain) throws IOException,
                                                                                            ServletException {
@@ -53,5 +54,4 @@ public class ThreadLocalACLSessionProviderInitializedFilter extends AbstractFilt
    */
   public void destroy() {
   }
-  
 }

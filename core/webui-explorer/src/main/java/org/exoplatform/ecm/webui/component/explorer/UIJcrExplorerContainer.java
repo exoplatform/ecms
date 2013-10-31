@@ -166,7 +166,6 @@ public class UIJcrExplorerContainer extends UIContainer {
       pref.setShowPreferenceDocuments(drive.getViewPreferences());
       pref.setAllowCreateFoder(drive.getAllowCreateFolders());
       pref.setShowHiddenNode(drive.getShowHiddenNode());
-      uiJCRExplorer.refreshExplorer();
       UIControl uiControl = uiJCRExplorer.getChild(UIControl.class);
       UIWorkingArea uiWorkingArea = uiJCRExplorer.getChild(UIWorkingArea.class);
 
