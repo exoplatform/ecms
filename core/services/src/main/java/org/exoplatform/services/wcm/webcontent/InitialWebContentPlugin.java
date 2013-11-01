@@ -19,6 +19,7 @@ package org.exoplatform.services.wcm.webcontent;
 import java.io.InputStream;
 import java.util.Date;
 import java.util.Iterator;
+import java.util.Map;
 
 import javax.jcr.ImportUUIDBehavior;
 import javax.jcr.Node;
@@ -34,6 +35,7 @@ import org.exoplatform.container.xml.InitParams;
 import org.exoplatform.container.xml.ObjectParameter;
 import org.exoplatform.services.cache.CacheService;
 import org.exoplatform.services.cache.ExoCache;
+import org.exoplatform.services.cms.impl.Utils;
 import org.exoplatform.services.deployment.DeploymentDescriptor;
 import org.exoplatform.services.jcr.RepositoryService;
 import org.exoplatform.services.jcr.core.ManageableRepository;
@@ -95,6 +97,8 @@ public class InitialWebContentPlugin extends CreatePortalPlugin {
         deploymentDescriptor = (DeploymentDescriptor) objectParameter.getObject();
         String sourcePath = deploymentDescriptor.getSourcePath();
         // sourcePath should start with: war:/, jar:/, classpath:/, file:/
+        String versionHistoryPath = deploymentDescriptor.getVersionHistoryPath();
+        Boolean cleanupPublication = deploymentDescriptor.getCleanupPublication();
         String xmlData = (String) artifactsCache.get(sourcePath);
         if (xmlData == null) {
           InputStream stream = configurationManager.getInputStream(sourcePath);
@@ -109,6 +113,43 @@ public class InitialWebContentPlugin extends CreatePortalPlugin {
         String realTargetFolder = StringUtils.replace(targetPath, "{portalName}", portalName);
         InputStream inputStream = configurationManager.getInputStream(sourcePath);
         session.importXML(realTargetFolder, inputStream, ImportUUIDBehavior.IMPORT_UUID_CREATE_NEW);
+        if (cleanupPublication) {
+          /**
+           * This code allows to cleanup the publication lifecycle in the target
+           * folder after importing the data. By using this, the publication
+           * live revision property will be re-initialized and the content will
+           * be set as published directly. Thus, the content will be visible in
+           * front side.
+           */
+          QueryManager manager = session.getWorkspace().getQueryManager();
+          String statement = "select * from nt:base where jcr:path LIKE '"+ realTargetFolder+ "/%'";
+          Query query = manager.createQuery(statement.toString(), Query.SQL);
+          NodeIterator iter = query.execute().getNodes();
+          while (iter.hasNext()) {
+            Node node = iter.nextNode();
+            if (node.hasProperty("publication:liveRevision")
+                && node.hasProperty("publication:currentState")) {
+              if (LOG.isInfoEnabled()) {
+                LOG.info("\"" + node.getName() + "\" publication lifecycle has been cleaned up");
+              }
+              node.setProperty("publication:liveRevision", "");
+              node.setProperty("publication:currentState", "published");
+            }
+
+          }
+
+        }
+
+        if (versionHistoryPath != null && versionHistoryPath.length() > 0) {
+          // process import version history
+          Node currentNode = (Node) session.getItem(realTargetFolder);
+
+          Map<String, String> mapHistoryValue =
+            Utils.getMapImportHistory(configurationManager.getInputStream(versionHistoryPath));
+          Utils.processImportHistory(currentNode,
+                                     configurationManager.getInputStream(versionHistoryPath),
+                                     mapHistoryValue);
+        }
         session.save();
       }
       Node portalNode = livePortalManagerService.getLivePortal(sessionProvider, portalName);
