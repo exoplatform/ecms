@@ -155,9 +155,14 @@ public class UICLVFolderMode extends UICLVContainer {
       return new Result(new ArrayList<Node>(), 0, 0, null, null);
     }
     NodeLocation nodeLocation = NodeLocation.getNodeLocationByExpression(folderPath);
-    return wcmComposer.getPaginatedContents(nodeLocation,
-                                            filters,
-                                            WCMCoreUtils.getUserSessionProvider());
+    //check if folder is empty, return empty result
+    if (!NodeLocation.getNodeByLocation(nodeLocation).hasNodes()) {
+      return new Result(new ArrayList<Node>(), 0, 0, nodeLocation, filters);
+    } else {
+      return wcmComposer.getPaginatedContents(nodeLocation,
+                                              filters,
+                                              WCMCoreUtils.getUserSessionProvider());
+    }
   }
   
   /**
