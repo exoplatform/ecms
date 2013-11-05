@@ -22,7 +22,7 @@ import java.util.Map;
 import javax.jcr.Node;
 
 /**
- * This is the CMS Services management to be able to Store and move node based on different criteria.
+ * Stores and moves nodes based on different criteria.
  *
  * @LevelAPI Experimental
  */
@@ -35,21 +35,21 @@ public interface CmsService {
   public final static String PRE_EDIT_CONTENT_EVENT = "CmsService.event.preEdit";
 
   /**
-   * Constant string to refer property of node in Map
-   * For getting properties of specific node in Map,
-   * use key = NODE + propertyName
+   * Constant string to refer to the property of node in Map.
+   * For getting properties of a specific node in Map,
+   * use key = NODE + propertyName.
    */
   public static final String NODE = "/node";
 
   /**
-   * Store node in given workspace and repository with given properties
+   * Stores a node in a given workspace and repository with given properties.
    *
-   * @param workspace Name of workspace
-   * @param nodetypeName NodeType's name
-   * @param storePath Path to store node
-   * @param inputProperties Map of node's property including (property name, value)
+   * @param workspace Name of the workspace.
+   * @param nodetypeName Name of the nodetype.
+   * @param storePath Path of the store node.
+   * @param inputProperties Map of node's properties, including property name and value.
    * @throws Exception The exception
-   * @return path to saved node
+   * @return Path of the saved node.
    */
   public String storeNode(String workspace,
                           String nodetypeName,
@@ -57,12 +57,12 @@ public interface CmsService {
                           Map inputProperties) throws Exception;
   
   /**
-   * Store node in given repository with given properties
-   * @param nodetypeName    NodeType's name
-   * @param storeHomeNode   Parent node, where node is stored
-   * @param inputProperties Map of node's property including (property name, value)
-   * @param isAddNew        Flag to decide whether this situation is adding node or updating node
-   * @return                Return path to saved node
+   * Stores a node in a given repository with given properties.
+   * @param nodetypeName Name of the nodetype.
+   * @param storeHomeNode The parent node where the node is stored.
+   * @param inputProperties Map of node's properties, including property name and value.
+   * @param isAddNew If "true", the new node is added. If "false", the node is updated.
+   * @return Path to the saved node.
    * @throws Exception The exception
    */
   public String storeNode(String nodetypeName,
@@ -71,14 +71,14 @@ public interface CmsService {
                           boolean isAddNew) throws Exception;
   
   /**
-   * Store edited node in given repository with given properties
+   * Stores the edited node in a given repository with given properties
    * used in case that user only has permission to access storeNode but
-   * can't access parent of storeNode (storeHomeNode)
-   * @param nodetypeName    NodeType's name
-   * @param storeNode       Node is stored
-   * @param inputProperties Map of node's property including (property name, value)
-   * @param isAddNew        Flag to decide whether this situation is adding node or updating node
-   * @return                Return path to saved node
+   * cannot access parent of storeNode (storeHomeNode).
+   * @param nodetypeName Name of the nodetype.
+   * @param storeNode The store node.
+   * @param inputProperties Map of node's properties, including property name and value.
+   * @param isAddNew If "true", the new node is added. If "false", the node is updated.
+   * @return Path of the saved node.
    * @throws Exception The exception
    */
   public String storeEditedNode(String nodetypeName,
@@ -88,13 +88,13 @@ public interface CmsService {
   
 
   /**
-   * Store node in given repository with given properties and return UUID of saved node.
+   * Stores a node in a repository with given properties.
    *
-   * @param nodetypeName    NodeType's name
-   * @param storeNode       Node is stored
-   * @param inputProperties Map of node's property including (property name, value)
-   * @param isAddNew        Flag to decide whether this situation is adding node or updating node
-   * @return                Return UUID of saved node
+   * @param nodetypeName Name of the nodetype.
+   * @param storeNode The store node.
+   * @param inputProperties Map of node's properties, including property name and value.
+   * @param isAddNew If "true", the new node is added. If "false", the node is updated.
+   * @return UUID of the saved node.
    * @throws Exception The exception
    */
   public String storeNodeByUUID(String nodetypeName,
@@ -103,17 +103,17 @@ public interface CmsService {
                                 boolean isAddNew) throws Exception;
   
   /**
-   * Move node from one workspace to the other, with the same repository.
+   * Moves a node from one workspace to the other, with the same repository.
    *
-   * @param nodePath      Path to node in source workspace
-   * @param srcWorkspace  Source workspace name
-   * @param destWorkspace Destination of workspace name
-   * @param destPath      Destination of node path
+   * @param nodePath Path to the node in the source workspace.
+   * @param srcWorkspace Name of the source workspace.
+   * @param destWorkspace Name of the destination workspace.
+   * @param destPath Path of the destination node.
    */
   public void moveNode(String nodePath, String srcWorkspace, String destWorkspace, String destPath);
 
   /**
-   * Get all properties of a node.
+   * Gets all properties of a node.
    *
    * @return Map of properties.
    */

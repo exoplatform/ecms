@@ -25,13 +25,13 @@ import org.exoplatform.services.cms.views.PortletTemplatePlugin.PortletTemplateC
 import org.exoplatform.services.jcr.ext.common.SessionProvider;
 
   /**
-   * This class is used to manage dynamic groovy templates for WCM-based products.
-   * All implementation of this service need stored the templates in hierarchical context
-   * For example :
-   * application 1
-   *    /category 1
-   *       /template 1
-   *       /template 2
+   * Manages dynamic Groovy templates for the WCM-based products.
+   * All templates created by this service need to be stored in hierarchical context.<br />
+   * For example:<br />
+   * application 1 <br />
+   *    /category 1 <br />
+   *       /template 1 <br />
+   *       /template 2 <br />
    *    /category 2
    *
    * @LevelAPI Experimental
@@ -47,29 +47,29 @@ public interface ApplicationTemplateManagerService {
   public final static String CLV_TEMPLATE_STORAGE_FOLDER                 = "content-list-viewer";
 
   /**
-   * Add the plugin.
+   * Adds a plugin.
    *
-   * @param portletTemplatePlugin The portlet template plugin
+   * @param portletTemplatePlugin The portlet template plugin to be added.
    * @throws Exception The exception
    */
   public void addPlugin(PortletTemplatePlugin portletTemplatePlugin) throws Exception;
 
   /**
-   * Retrieve all the portlet names that have dynamic groovy templates managed by service.
+   * Gets all portlet names that have dynamic Groovy templates managed by the service.
    *
-   * @param repository The repository
-   * @return All managed portlet name
+   * @param repository Name of the repository.
+   * @return All managed portlet names.
    * @throws Exception The exception
    */
   public List<String> getAllManagedPortletName(String repository) throws Exception;
 
   /**
-   * Retrieve the templates node by category.
+   * Gets templates under a given category.
    *
-   * @param portletName The portlet name
-   * @param category The category
-   * @param sessionProvider The session provider
-   * @return All templates by category
+   * @param portletName Name of the portet that contains the given category.
+   * @param category The given category.
+   * @param sessionProvider The session provider.
+   * @return The templates.
    * @throws Exception The exception
    */
   public List<Node> getTemplatesByCategory(String portletName,
@@ -77,13 +77,13 @@ public interface ApplicationTemplateManagerService {
                                            SessionProvider sessionProvider) throws Exception;
 
   /**
-   * Retrieve the template by name.
+   * Gets a template by its name under a given category.
    *
-   * @param portletName The portlet name
-   * @param category The category
-   * @param templateName The template name
-   * @param sessionProvider The session provider
-   * @return The template
+   * @param portletName Name of the portet that contains the given category.
+   * @param category The given category.
+   * @param templateName Name of the template.
+   * @param sessionProvider The session provider.
+   * @return The template.
    * @throws Exception The exception
    */
   public Node getTemplateByName(String portletName,
@@ -92,31 +92,31 @@ public interface ApplicationTemplateManagerService {
                                 SessionProvider sessionProvider) throws Exception;
 
   /**
-   * Get the template by path.
+   * Gets a template by its path under a given category.
    * 
-   * @param templatePath The template path
-   * @param sessionProvider The session provider
-   * @return The template
+   * @param templatePath Path of the template.
+   * @param sessionProvider The session provider.
+   * @return The template.
    * @throws Exception The exception
    */
   public Node getTemplateByPath(String templatePath, SessionProvider sessionProvider) throws Exception;
 
   /**
-   * Add the template.
+   * Adds a template to the portlet template home.
    *
-   * @param portletTemplateHome The portlet template home
-   * @param config The config
+   * @param portletTemplateHome The portlet template home.
+   * @param config Configuration of the portlet template.
    * @throws Exception The exception
    */
   public void addTemplate(Node portletTemplateHome, PortletTemplateConfig config) throws Exception;
 
   /**
-   * Remove the template.
+   * Removes a template from a given portlet.
    *
-   * @param portletName The portlet name
-   * @param catgory The catgory
-   * @param templateName The template name
-   * @param sessionProvider The session provider
+   * @param portletName Name of the given portlet.
+   * @param catgory Category of the template which needs to be removed.
+   * @param templateName Name of the removed template.
+   * @param sessionProvider The session provider.
    * @throws Exception The exception
    */
   public void removeTemplate(String portletName,
@@ -125,20 +125,20 @@ public interface ApplicationTemplateManagerService {
                              SessionProvider sessionProvider) throws Exception;
   
   /**
-   * Get the application template home.
+   * Gets the application template home.
    *
-   * @param portletName The name of portlet
-   * @param provider The session provider
-   * @return The application template home
+   * @param portletName Name of the portlet.
+   * @param provider The session provider.
+   * @return The application template home.
    * @throws Exception The exception
    */
   public Node getApplicationTemplateHome(String portletName, SessionProvider provider) throws Exception;
   
   /**
-   * Get all configured templates of the portlet.
+   * Gets all configured templates of a given portlet.
    *
-   * @param portletName The name of the portlet
-   * @return Set<String>
+   * @param portletName Name of the given portlet.
+   * @return Set of configured templates.
    */
   public Set<String> getConfiguredAppTemplateMap(String portletName);
 

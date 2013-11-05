@@ -25,8 +25,8 @@ import org.exoplatform.services.jcr.ext.distribution.DataDistributionMode;
 import org.exoplatform.services.jcr.ext.distribution.DataDistributionType;
 
 /**
- * This service is used to manage all tags and their styles.
- * Currently, it just supports adding/editing/removing the Private & Public tags.
+ * Manages all tags and their styles.
+ * Currently, it just supports adding/editing/removing private & public tags.
  *
  * @LevelAPI Experimental
  */
@@ -63,12 +63,12 @@ public interface NewFolksonomyService {
   final static public int    PRIVATE         = 1;
 
   /**
-   * Add a private tag to a document. A folksonomy link will be created in a tag node.
+   * Adds a private tag to a document. A folksonomy link will be created in the tag node.
    *
-   * @param tagsName The array of tag name as the children of tree.
-   * @param documentNode Tag this node by creating a folksonomy link to the node in the tag.
-   * @param workspace The workspace name.
-   * @param userName The user name.
+   * @param tagsName The array of tag names.
+   * @param documentNode The document node to which the private tag is added.
+   * @param workspace Name of the workspace that contains the document node.
+   * @param userName The user who added the private tag.
    * @throws Exception The exception
    */
   public void addPrivateTag(String[] tagsName,
@@ -77,12 +77,12 @@ public interface NewFolksonomyService {
                             String userName) throws Exception;
 
   /**
-   * Add a group tag to a document. A folksonomy link will be created in a tag node.
+   * Adds a group tag to a document. A folksonomy link will be created in the tag node.
    *
-   * @param tagsName The array of tag name as the children of tree.
-   * @param documentNode Tag this node by creating a folksonomy link to the node in tag.
-   * @param workspace The workspace name.
-   * @param roles The user roles.
+   * @param tagsName The array of tag names.
+   * @param documentNode The document node to which the group tag is added.
+   * @param workspace Name of the workspace that contains the document node.
+   * @param roles Roles of the user who added the group tag.
    * @throws Exception The exception
    */
   public void addGroupsTag(String[] tagsName,
@@ -91,12 +91,12 @@ public interface NewFolksonomyService {
                            String[] roles) throws Exception;
 
   /**
-   * Add a public tag to a document. A folksonomy link will be created in a tag node.
+   * Adds a public tag to a document. A folksonomy link will be created in the tag node.
    *
-   * @param treePath The path of folksonomy tree.
-   * @param tagsName The array of the tag name as the children of tree.
-   * @param documentNode Tag this node by creating a folksonomy link to the node in the tag.
-   * @param workspace The workspace name.
+   * @param treePath Path of the folksonomy tree.
+   * @param tagsName The array of the tag names.
+   * @param documentNode The document node to which the public tag is added.
+   * @param workspace Name of the workspace that contains the document node.
    * @throws Exception The exception
    */
   public void addPublicTag(String treePath,
@@ -105,12 +105,12 @@ public interface NewFolksonomyService {
                            String workspace) throws Exception;
 
   /**
-   * Add a site tag to a document. A folksonomy link will be created in a tag node
+   * Adds a site tag to a document. A folksonomy link will be created in the tag node.
    *
-   * @param siteName The portal name.
-   * @param tagsName The array of the tag name as the children of tree.
-   * @param node Tag this node by creating a folksonomy link to the node in tag.
-   * @param workspace The workspace name.
+   * @param siteName The site name.
+   * @param tagsName The array of tag names.
+   * @param node The document node to which the site tag is added.
+   * @param workspace Name of the workspace that contains the document node.
    * @throws Exception The exception
    */
   public void addSiteTag(String siteName,
@@ -119,61 +119,61 @@ public interface NewFolksonomyService {
                          String workspace) throws Exception;
 
   /**
-   * Get all private tags.
+   * Gets all private tags of a given user.
    *
-   * @param userName The user name.
-   * @return List<Node>
+   * @param userName Name of the given user.
+   * @return The list of private tags.
    * @throws Exception The exception
    */
   public List<Node> getAllPrivateTags(String userName) throws Exception;
 
   /**
-   * Get all public tags.
+   * Gets all public tags.
    *
-   * @param treePath The folksonomy tree path.
-   * @param workspace The workspace name.
-   * @return List<Node>
+   * @param treePath Path of the folksonomy tree.
+   * @param workspace Name of the workspace that contains public tags.
+   * @return The list of public tags.
    * @throws Exception The exception
    */
   public List<Node> getAllPublicTags(String treePath, String workspace) throws Exception;
 
   /**
-   * Get all tags by groups
+   * Gets all tags of groups that a given user belongs to.
    *
-   * @param role Roles of user
-   * @param workspace Workspace name
-   * @return List<Node>
+   * @param role Roles of the given user.
+   * @param workspace Name of the workspace that contains tags.
+   * @return The tags of groups.
    * @throws Exception The exception
    */
   public List<Node> getAllGroupTags(String[] role, String workspace) throws Exception;
 
   /**
-   * Get all tags by groups.
+   * Gets all tags of a group that a given user belongs to.
    *
-   * @param role The roles of user.
-   * @param workspace The workspace name.
-   * @return List<Node>
+   * @param role Roles of the given user.
+   * @param workspace Name of the workspace that contains tags.
+   * @return The tags of the given group.
    * @throws Exception The exception
    */
   public List<Node> getAllGroupTags(String role, String workspace) throws Exception;
 
   /**
-   * Get all tags of Site.
+   * Gets all site tags.
    *
-   * @param siteName The portal name.
-   * @param workspace The workspace name.
-   * @return List<Node>
+   * @param siteName The site name.
+   * @param workspace Name of the workspace that contains the site tags.
+   * @return The list of site tags.
    * @throws Exception The exception
    */
   public List<Node> getAllSiteTags(String siteName, String workspace) throws Exception;
 
   /**
-   * Get all documents which are stored in a tag and return a list of documents in a tag.
+   * Gets all documents which are marked with a given tag.
    *
-   * @param tagPath The path of the tag.
-   * @param workspace The workspace name.
-   * @param sessionProvider The sessions provider.
-   * @return List<Node>
+   * @param tagPath Path of the given tag.
+   * @param workspace Name of the workspace that contains the given tag.
+   * @param sessionProvider The session provider.
+   * @return The list of documents.
    * @throws Exception The exception
    */
   public List<Node> getAllDocumentsByTag(String tagPath,
@@ -181,23 +181,22 @@ public interface NewFolksonomyService {
                                          SessionProvider sessionProvider) throws Exception;
 
   /**
-   * Get HTML_STYLE_PROP property in styleName node in the repository.
+   * Gets a tag style.
    *
-   * @param tagPath The path of the tag.
-   * @param workspace The workspace name.
-   * @return The property's value of styleName node
+   * @param tagPath Path to the tag.
+   * @param workspace Name of the workspace that contains the tag.
+   * @return Style values of the tag.
    * @throws Exception The exception
    */
   public String getTagStyle(String tagPath, String workspace) throws Exception;
 
   /**
-   * Update the properties TAG_RATE_PROP and HTML_STYLE_PROP,
-   * following the values tagRate, htmlStyle for a node in tagPath in repository.
+   * Adds a tag style.
    *
-   * @param styleName The style name.
-   * @param tagRange he range of tag numbers.
+   * @param styleName Name of the tag style.
+   * @param tagRange The number of times the tag is used for the tag style.
    * @param htmlStyle The tag style.
-   * @param workspace The workspace name.
+   * @param workspace Name of the workspace that contains the tag style.
    * @throws Exception The exception
    */
   public void addTagStyle(String styleName,
@@ -206,13 +205,12 @@ public interface NewFolksonomyService {
                           String workspace) throws Exception;
 
   /**
-   * Update the properties TAG_RATE_PROP and HTML_STYLE_PROP,
-   * following the value tagRate, htmlStyle for a node in tagPath in repository.
+   * Updates a tag style.
    *
-   * @param styleName The style name.
-   * @param tagRange he range of tag numbers.
+   * @param styleName Name of the tag style.
+   * @param tagRange The number of times the tag is used for the tag style.
    * @param htmlStyle The tag style.
-   * @param workspace The workspace name.
+   * @param workspace Name of the workspace that contains the tag style.
    * @throws Exception The exception
    */
   public void updateTagStyle(String styleName,
@@ -221,68 +219,68 @@ public interface NewFolksonomyService {
                              String workspace) throws Exception;
 
   /**
-   * Get all tag style bases of a folksonomy tree.
+   * Gets all tag styles of a folksonomy tree.
    *
-   * @param workspace The workspace name.
-   * @return List<Node> List of tag styles
+   * @param workspace Name of the workspace that contains the tag styles.
+   * @return The tag styles.
    * @throws Exception The exception
    */
   public List<Node> getAllTagStyle(String workspace) throws Exception;
 
   /**
-   * Initialize all TagStylePlugin with session in repository name.
+   * Initializes all tag style plugins.
    *
    * @throws Exception The exception
    */
   public void init() throws Exception;
 
   /**
-   * Remove a tag of a given document.
+   * Removes tag from a given document.
    *
-   * @param tagPath The path of the tag.
-   * @param document The document which is added a link to tagName.
+   * @param tagPath Path of the tag.
+   * @param document The document from which the tag is removed.
    * @throws Exception The exception
    */
   public void removeTagOfDocument(String tagPath, Node document, String workspace) throws Exception;
 
   /**
-   * Remove a tag.
+   * Removes a tag.
    *
-   * @param tagPath The path of the tag.
-   * @param workspace The workspace name.
+   * @param tagPath Path of the tag.
+   * @param workspace Name of the workspace that contains the removed tag.
    * @throws Exception The exception
    */
   public void removeTag(String tagPath, String workspace) throws Exception;
 
   /**
-   * Modify the tag name.
+   * Renames a tag.
    *
-   * @param tagPath The path of the tag.
-   * @param newTagName The new tag name.
-   * @param workspace The workspace name.
-   * @return Node
+   * @param tagPath Path of the tag.
+   * @param newTagName New name of the tag.
+   * @param workspace Name of the workspace that contains the renamed tag.
+   * @return The renamed tag.
    * @throws Exception The exception
    */
   public Node modifyTagName(String tagPath, String newTagName, String workspace) throws Exception;
   
   /**
-   * Modify the public tag name.
+   * Renames a public tag.
    *
-   * @param tagPath The path of the tag.
-   * @param newTagName The new tag name.
-   * @param workspace The workspace name.
-   * @param treeTagPath The path of the tree tag.
-   * @return Node
+   * @param tagPath Path of the public tag.
+   * @param newTagName New name of the public tag.
+   * @param workspace Name of the workspace that contains the renamed public tag.
+   * @param treeTagPath Path of the folksonomy tree.
+   * @return The renamed public tag.
    * @throws Exception The exception
    */
   public Node modifyPublicTagName(String tagPath, String newTagName, String workspace, String treeTagPath) throws Exception;  
   
   /**
-   * Get all tags linked to a given document.
+   * Gets all tags linked to a given document.
    *
    * @param documentNode The document node.
-   * @param workspace The workspace name.
-   * @return List<Node>
+   * @param workspace Name of the workspace that contains all tags.
+   * @return The list of tags.
    * @throws Exception The exception
    */
   public List<Node> getLinkedTagsOfDocument(Node documentNode, String workspace) throws Exception;
@@ -292,8 +290,8 @@ public interface NewFolksonomyService {
    *
    * @param scope The tag's scope.
    * @param documentNode The document node.
-   * @param workspace The workspace name.
-   * @return List<Node>
+   * @param workspace Name of the workspace that contains all tags.
+   * @return The list of tags.
    * @throws Exception The exception
    */
   public List<Node> getLinkedTagsOfDocumentByScope(int scope,
@@ -302,11 +300,11 @@ public interface NewFolksonomyService {
                                                    String workspace) throws Exception;
 
   /**
-   * Remove all tags linked to the child nodes of a given node.
+   * Removes all tags linked to the child nodes of a given node.
    *
-   * @param node The node.
-   * @param workspace The workspace name.
-   * @param username The user name.
+   * @param node The given node.
+   * @param workspace Name of the workspace that contains all tags.
+   * @param username The user who removed all tags.
    * @throws Exception The exception
    */
   public void removeTagsOfNodeRecursively(Node node,
@@ -315,50 +313,50 @@ public interface NewFolksonomyService {
                                           String groups) throws Exception;
 
   /**
-   * Add given users or groups to tagPermissionList.
+   * Adds a given user or group to the list of tag permissions.
    *
-   * @param usersOrGroups The users or groups name.
+   * @param usersOrGroups Name of the given user or group.
    */
   public void addTagPermission(String usersOrGroups);
 
   /**
-   * Remove given users or groups from tagPermissionList.
+   * Removes a given user or group from the list of tag permissions.
    *
-   * @param usersOrGroups The users or groups name.
+   * @param usersOrGroups Name of the user or group.
    */
   public void removeTagPermission(String usersOrGroups);
 
   /**
-   * Return tagPermissionList.
+   * Gets a list of users and groups who have the tag permission.
    *
-   * @return List<String>
+   * @return The list of users and groups.
    */
   public List<String> getTagPermissionList();
 
   /**
-   * Set the permission to edit a tag for a user.
+   * Checks if a given user has the "edit tag" permission.
    *
    * @param scope The tag's scope.
    * @param memberships The memberships.
-   * @return True if it is possible
+   * @return "True" if the given user has the "edit tag" permission. Otherwise, it returns "false".
    */
   public boolean canEditTag(int scope, List<String> memberships);
 
   /**
-   * Get all tag names which start within a given scope.
+   * Gets names of all tags under a given scope.
    *
-   * @param workspace Workspace
+   * @param workspace Name of the workspace that contains the tags.
    * @param scope The tags' scope.
-   * @param value The value, according to scope, can be understood differently.
-   * @return True if it is possible
+   * @param value Path of the folksonomy tree.
+   * @return The tag names.
    * @throws Exception The exception
    */
   public List<String> getAllTagNames(String workspace, int scope, String value) throws Exception;
   
   /**
-   * Gets DataDistributionType object
+   * Gets a type of data distribution.
    *
-   * @return the DataDistributionType object
+   * @return The type of data distribution.
    */
   public DataDistributionType getDataDistributionType();
     
