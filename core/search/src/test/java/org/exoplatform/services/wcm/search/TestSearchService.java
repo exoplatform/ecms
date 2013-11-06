@@ -654,7 +654,7 @@ public class TestSearchService extends BaseSearchTest {
     queryCriteria.setFulltextSearchProperty(null);
     String author = "root";
     queryCriteria.setAuthors(new String[]{author});
-    assertEquals(6, siteSearchService.searchSiteContents(sessionProvider, queryCriteria, 10, true).getTotalNodes());
+    assertEquals(4, siteSearchService.searchSiteContents(sessionProvider, queryCriteria, 10, true).getTotalNodes());
   }
 
   public void testSearchByMimeTypes()throws Exception{
@@ -667,9 +667,9 @@ public class TestSearchService extends BaseSearchTest {
     queryCriteria.setSearchWebpage(false);
     queryCriteria.setFulltextSearch(true);
     queryCriteria.setFulltextSearchProperty(null);
-    queryCriteria.setMimeTypes(new String[]{"exo:webContent", " exo:siteBreadcrumb"});
+    queryCriteria.setMimeTypes(new String[]{"exo:webContent", "exo:siteBreadcrumb"});
     AbstractPageList<ResultNode> pageList = siteSearchService.searchSiteContents(sessionProvider, queryCriteria, 10, true);
-    assertEquals(6, pageList.getTotalNodes());
+    assertEquals(4, pageList.getTotalNodes());
   }
 
   public void testSearchByTagUUID() throws Exception{
@@ -682,11 +682,11 @@ public class TestSearchService extends BaseSearchTest {
     queryCriteria.setSearchWebpage(false);
     queryCriteria.setFulltextSearch(true);
     queryCriteria.setFulltextSearchProperty(null);
-    queryCriteria.setMimeTypes(new String[]{"exo:webContent", " exo:siteBreadcrumb"});
+    queryCriteria.setMimeTypes(new String[]{"exo:webContent", "exo:siteBreadcrumb"});
     Node node = (Node)session.getItem("/sites content/live/classic/web contents/webcontent0");
     String uuid = node.getUUID();
     queryCriteria.setTagUUIDs(new String[]{uuid});
-    assertEquals(6, siteSearchService.searchSiteContents(sessionProvider, queryCriteria, 10, true).getTotalNodes());
+    assertEquals(4, siteSearchService.searchSiteContents(sessionProvider, queryCriteria, 10, true).getTotalNodes());
   }
 
   public void tearDown() throws Exception {

@@ -79,6 +79,10 @@ public class DocumentSearchServiceConnector extends BaseContentSearchServiceConn
     return docTypes.toArray(new String[]{});
   }
   
+  protected String[] getNodeTypes() {
+    return null;
+  }
+  
   /**
    * {@inheritDoc}
    * @throws RepositoryException 

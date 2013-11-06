@@ -55,6 +55,9 @@ public class QueryCriteria {
 
   /** The content types. */
   private String[] contentTypes = null;
+  
+  /** The excluded content types. */
+  private String[] exculdedContentTypes = null;
 
   /** The mime types. */
   private String[] mimeTypes = null;
@@ -196,6 +199,13 @@ public class QueryCriteria {
    * @return the content types
    */
   public String[] getContentTypes() { return contentTypes; }
+  
+  /**
+   * Gets the excluded content types.
+   *
+   * @return the content types
+   */
+  public String[] getExcludedContentTypes() { return exculdedContentTypes; }
 
   /**
    * Sets the content types.
@@ -203,6 +213,13 @@ public class QueryCriteria {
    * @param contentTypes the new content types
    */
   public void setContentTypes(String[] contentTypes) { this.contentTypes = contentTypes; }
+  
+  /**
+   * Sets the excluded content types.
+   *
+   * @param contentTypes the new content types
+   */
+  public void setExcludedContentTypes(String[] exculdedContentTypes) { this.exculdedContentTypes = exculdedContentTypes; }
 
   /**
    * Gets the mime types.

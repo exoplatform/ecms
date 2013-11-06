@@ -47,6 +47,10 @@ public class FileSearchServiceConnector extends BaseContentSearchServiceConnecto
     return new String[]{NodetypeConstant.NT_FILE};
   }
   
+  protected String[] getNodeTypes() {
+    return new String[]{NodetypeConstant.NT_FILE};
+  }
+  
   /**
    * {@inheritDoc}
    * @throws RepositoryException 
