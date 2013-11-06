@@ -55,6 +55,9 @@ public class QueryCriteria {
 
   /** The content types. */
   private String[] contentTypes = null;
+  
+  /** The excluded content types. */
+  private String[] exculdedContentTypes = null;
 
   /** The mime types. */
   private String[] mimeTypes = null;
@@ -82,6 +85,9 @@ public class QueryCriteria {
 
   /** The fulltext search. */
   private boolean fulltextSearch = true;
+  
+  /** The fuzzy search. */
+  private boolean fuzzySearch = false;
 
   /** The is live mode. */
   private boolean isLiveMode = true;
@@ -196,6 +202,13 @@ public class QueryCriteria {
    * @return the content types
    */
   public String[] getContentTypes() { return contentTypes; }
+  
+  /**
+   * Gets the excluded content types.
+   *
+   * @return the content types
+   */
+  public String[] getExcludedContentTypes() { return exculdedContentTypes; }
 
   /**
    * Sets the content types.
@@ -203,6 +216,13 @@ public class QueryCriteria {
    * @param contentTypes the new content types
    */
   public void setContentTypes(String[] contentTypes) { this.contentTypes = contentTypes; }
+  
+  /**
+   * Sets the excluded content types.
+   *
+   * @param contentTypes the new content types
+   */
+  public void setExcludedContentTypes(String[] exculdedContentTypes) { this.exculdedContentTypes = exculdedContentTypes; }
 
   /**
    * Gets the mime types.
@@ -307,6 +327,15 @@ public class QueryCriteria {
   public boolean isFulltextSearch() {
     return fulltextSearch;
   }
+  
+  /**
+   * Checks if is fuzzy search.
+   *
+   * @return true, if is fuzzy search
+   */
+  public boolean isFuzzySearch() {
+    return fuzzySearch;
+  }
 
 
   /**
@@ -316,6 +345,15 @@ public class QueryCriteria {
    */
   public void setFulltextSearch(boolean fulltextSearch) {
     this.fulltextSearch = fulltextSearch;
+  }
+  
+  /**
+   * Sets the fuzzy search.
+   *
+   * @param fuzzySearch the new fuzzy search
+   */
+  public void setFuzzySearch(boolean fuzzySearch) {
+    this.fuzzySearch = fuzzySearch;
   }
 
   /**

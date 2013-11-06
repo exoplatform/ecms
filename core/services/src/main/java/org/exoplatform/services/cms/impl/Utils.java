@@ -48,6 +48,8 @@ import javax.jcr.PathNotFoundException;
 import javax.jcr.RepositoryException;
 import javax.jcr.Session;
 import javax.jcr.nodetype.NodeType;
+import javax.jcr.nodetype.NodeTypeIterator;
+import javax.jcr.nodetype.NodeTypeManager;
 import javax.jcr.nodetype.PropertyDefinition;
 import javax.ws.rs.core.MediaType;
 
@@ -91,6 +93,8 @@ public class Utils {
   public static final String MAPPING_FILE = "mapping.properties";
 
   public static final String EXO_SYMLINK = "exo:symlink";
+  
+  public static List<String> excluded_nodetypes = new ArrayList<String>();
   
   public static final long KB = 1024L;
   public static final long MB = 1024L*KB;
@@ -780,6 +784,36 @@ public class Utils {
       }
     }
     return thumbnailMimeTypes.contains(mimeType);
+  }
+  
+  public static void updateExcludedNodeTypes() {   
+    excluded_nodetypes.clear();
+    TemplateService templateService = WCMCoreUtils.getService(TemplateService.class);
+    List<String> allDocumentNodeTypes;
+    try {
+      allDocumentNodeTypes = templateService.getAllDocumentNodeTypes();
+      ManageableRepository mRepository = WCMCoreUtils.getRepository();
+      NodeTypeManager ntManager = mRepository.getNodeTypeManager() ;
+      for(NodeTypeIterator iter = ntManager.getAllNodeTypes();iter.hasNext();) {
+        NodeType nt = (NodeType) iter.next();
+        String name = nt.getName();       
+        if(!allDocumentNodeTypes.contains(name)) {
+          NodeType[] superTypes = nt.getSupertypes();
+          for (NodeType superType : superTypes) {
+            if(allDocumentNodeTypes.contains(superType.getName())) {
+              if(!excluded_nodetypes.contains(name)) {
+                excluded_nodetypes.add(name);
+                break;
+              }              
+            }
+          }
+        }     
+      }
+    } catch (Exception e) {
+      if(LOG.isDebugEnabled()) {
+        LOG.debug("Have exception while get excluded nodetypes", e);
+      }
+    }    
   }
   
   /**

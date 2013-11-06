@@ -138,25 +138,28 @@ public class QueryResultPageList<E> extends AbstractPageList<E> {
     Session session = sessionProvider.getSession(queryData_.getWorkSpace(), WCMCoreUtils.getRepository());
     QueryManager queryManager = session.getWorkspace().getQueryManager();
     Query query = queryManager.createQuery(queryData_.getQueryStatement(), queryData_.getLanguage_());
-    ((QueryImpl)query).setOffset(offset_);
+    ((QueryImpl)query).setOffset(offset_);  
     long prevSize = 0;
     int bufSize = bufferSize_;
+    int offset = 0;
+    int count = 0;
+    buffer.clear();
+    dataSet.clear();
     while (true) {
-      ((QueryImpl)query).setLimit(bufSize);
+      ((QueryImpl)query).setOffset(offset);
+      ((QueryImpl)query).setLimit(bufSize);      
       QueryResult queryResult = query.execute();
       NodeIterator iter = queryResult.getNodes();
       RowIterator rowIter = queryResult.getRows();
       long size = iter.getSize();
-      int count = 0;
-      buffer.clear();
-      dataSet.clear();
+      
       while (iter.hasNext() && count < bufferSize_) {
         Node newNode = iter.nextNode();
         if (filter != null) {
           newNode = filter.filterNodeToDisplay(newNode);
-        }
-        Row newRow = rowIter.nextRow();
+        }        
         if (newNode != null && searchDataCreator != null) {
+          Row newRow = rowIter.nextRow();
           E data = searchDataCreator.createData(newNode, newRow);
           if (data != null && !dataSet.contains(data)) {
             buffer.add(data);
@@ -169,7 +172,7 @@ public class QueryResultPageList<E> extends AbstractPageList<E> {
       if (count == bufferSize_) break;
       /* already query all data */
       if (size == prevSize) break;
-      
+      offset = bufSize;
       bufSize = 2 * bufSize;
       prevSize = size;
     }

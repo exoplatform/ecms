@@ -474,4 +474,13 @@
     </component-plugin>
   </external-component-plugins>
   
+  <external-component-plugins>
+	  <target-component>org.exoplatform.services.jcr.core.nodetype.NodeTypeDataManager</target-component>
+		<component-plugin>
+		  <name>listen register/unregister node types events</name>
+		  <set-method>addListener</set-method>
+		  <type>org.exoplatform.services.cms.nodetypes.NodeTypeListener</type>
+	  </component-plugin>
+	</external-component-plugins>
+  
 </configuration>
