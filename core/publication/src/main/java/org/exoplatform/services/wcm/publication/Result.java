@@ -71,4 +71,9 @@ public class Result {
   public long getNumTotal() {
     return numTotal;
   }
+  
+  public void setNumTotal(long value) {
+    numTotal = value;
+  }
+
 }
