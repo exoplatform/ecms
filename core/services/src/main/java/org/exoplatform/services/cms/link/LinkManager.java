@@ -67,8 +67,7 @@ public interface LinkManager {
    */
   public Node createLink(Node parent, String linkType, Node target, String linkName)
       throws RepositoryException;
-  
-  
+
   /**
    * Creates a new link with given type, name and title.
    *
@@ -180,7 +179,7 @@ public interface LinkManager {
   public List<Node> getAllLinks(Node targetNode, String linkType, SessionProvider sessionProvider) throws Exception;
   
   /**
-   * Update information for a symlink, including "exo:title", "exo:dateCreated", "exo:dateModified", "publication:liveDate" and "exo:index".
+   * Updates information for a symlink, including "exo:title", "exo:dateCreated", "exo:dateModified", "publication:liveDate" and "exo:index".
    * @param link The link node.
    * @throws Exception
    */
