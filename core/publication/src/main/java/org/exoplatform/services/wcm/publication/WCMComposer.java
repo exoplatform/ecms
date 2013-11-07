@@ -132,47 +132,19 @@ public interface WCMComposer {
                                 HashMap<String, String> filters,
                                 SessionProvider sessionProvider) throws Exception;
 
- /**
-  * Gets content nodes that are paginated at a specified path based on given filters.
-  *
-  * @param nodeLocation Location of the content nodes.
-  * @param filters The given filters.
-  * @param sessionProvider The session provider.
-  * @return The list of content nodes.
-  * @throws Exception The exception
-  */
+  /**
+   * Gets content nodes that are paginated at a specified path based on given filters.
+   *
+   * @param nodeLocation Location of the content nodes.
+   * @param filters The given filters.
+   * @param sessionProvider The session provider.
+   * @return The list of content nodes.
+   * @throws Exception The exception
+   */
  public Result getPaginatedContents(NodeLocation nodeLocation,
                                                              HashMap<String, String> filters,
                                                              SessionProvider sessionProvider) throws Exception ;
-  
-  /**
-   * Updates a content node at a specified path on given filters.
-   * Deprecated since version 4.0.
-   * 
-   * @param workspace The workspace that includes the content node.
-   * @param nodeIdentifier Identifier of the content node.
-   * @param filters The given filters.
-   * @return "True" if updating the content node is successful.
-   * @throws Exception The exception
-   */
- @Deprecated 
- public boolean updateContent(String workspace,
-                               String nodeIdentifier,
-                               HashMap<String, String> filters) throws Exception;
-
-  /**
-   * Updates content nodes at a specified path based on given filters.
-   * Deprecated since version 4.0.
-   *
-   * @param workspace The workspace that includes the content node.
-   * @param path The path.
-   * @param filters The given filters.
-   * @return "True" if updating the content nodes is successful.
-   * @throws Exception The exception
-   */
- @Deprecated
- public boolean updateContents(String workspace, String path, HashMap<String, String> filters) throws Exception;
-
+															 
   /**
    * Gets the allowed states for a given mode.
    *
@@ -188,16 +160,6 @@ public interface WCMComposer {
    * @throws Exception the exception
    */
   public void cleanTemplates() throws Exception ;
-
-  /**
-   * Checks if the WCMComposer is cached or not.
-   * Deprecated since version 4.0.
-   *
-   * @return "True" if the WCMComposer is cached. Otherwise, it returns "false".
-   * @throws Exception the exception
-   */
-  @Deprecated
-  public boolean isCached() throws Exception;
 
   /**
    * Updates the SQL filter of templates.
