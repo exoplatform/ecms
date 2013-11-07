@@ -284,24 +284,6 @@ public class RenameConnector implements ResourceContainer {
   }
 
   /**
-   * Gets a node by its path.
-   *
-   * @param nodePath The path of a specific node with syntax [workspace:node
-   *          path].
-   * @return Node of specific node path
-   * @throws Exception
-   */
-  private Node getNodeByPath(String nodePath) throws Exception {
-    Matcher matcher = RenameConnector.FILE_EXPLORER_URL_SYNTAX.matcher(nodePath);
-    if (!matcher.find())
-      return null;
-    String wsName = matcher.group(1);
-    nodePath = matcher.group(2);
-    Session session = this.getSession(wsName);
-    return (Node) session.getItem(Text.escapeIllegalJcrChars(nodePath));
-  }
-
-  /**
    * Parse node path with syntax [workspace:node path] to workspace name and path separately
    *
    * @param nodePath node path with syntax [workspace:node path]
