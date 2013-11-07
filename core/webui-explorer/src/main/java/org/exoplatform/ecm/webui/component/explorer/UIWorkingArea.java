@@ -24,6 +24,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.regex.Pattern;
 
+import javax.jcr.ItemNotFoundException;
 import javax.jcr.Node;
 import javax.jcr.PathNotFoundException;
 import javax.jcr.RepositoryException;
@@ -449,11 +450,38 @@ public class UIWorkingArea extends UIContainer {
    */
   public static class RefreshActionListener extends EventListener<UIWorkingArea> {
     public void execute(Event<UIWorkingArea> event) throws Exception {
-      // Get old and new node path after renaming
       UIJCRExplorer uiExplorer = event.getSource().getAncestorOfType(UIJCRExplorer.class);
+
+      // Get path before renaming
       String pathBeforeRename = event.getRequestContext().getRequestParameter("oldPath");
-      String pathAfterRename =
-          uiExplorer.getSession().getNodeByUUID(event.getRequestContext().getRequestParameter("uuid")).getPath();
+
+      // Get path after renaming
+      String renamedNodeUUID = event.getRequestContext().getRequestParameter("uuid");
+      String pathAfterRename = null;
+      Node renamedNode = null;
+      try {
+        renamedNode = uiExplorer.getSession().getNodeByUUID(renamedNodeUUID);
+      } catch (ItemNotFoundException e) {
+        // Try to find node in other workspaces
+        String[] workspaceNames = uiExplorer.getRepository().getWorkspaceNames();
+        String currentWorkSpaceName = uiExplorer.getWorkspaceName();
+        for (String workspaceName : workspaceNames) {
+          if (!workspaceName.equals(currentWorkSpaceName)) {
+            try {
+              renamedNode = uiExplorer.getSessionByWorkspace(workspaceName).getNodeByUUID(renamedNodeUUID);
+              break;
+            } catch (ItemNotFoundException infE) {
+              renamedNode = null;
+            }
+          }
+        }
+      }
+      if (renamedNode != null) {
+        pathAfterRename = renamedNode.getPath();
+      } else {
+        LOG.warn("Can not find renamed node with old path: [%s]", pathBeforeRename);
+        return;
+      }
 
       // Update content explorer
       String currentPath = uiExplorer.getCurrentPath();

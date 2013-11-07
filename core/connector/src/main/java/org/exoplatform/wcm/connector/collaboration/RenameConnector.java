@@ -16,10 +16,22 @@
  */
 package org.exoplatform.wcm.connector.collaboration;
 
-import java.util.ArrayList;
-import java.util.List;
-import java.util.regex.Matcher;
-import java.util.regex.Pattern;
+import org.apache.commons.lang.StringUtils;
+import org.exoplatform.common.http.HTTPStatus;
+import org.exoplatform.ecm.utils.text.Text;
+import org.exoplatform.services.cms.CmsService;
+import org.exoplatform.services.cms.impl.Utils;
+import org.exoplatform.services.cms.link.NodeFinder;
+import org.exoplatform.services.cms.lock.LockService;
+import org.exoplatform.services.cms.relations.RelationsService;
+import org.exoplatform.services.jcr.ext.common.SessionProvider;
+import org.exoplatform.services.listener.ListenerService;
+import org.exoplatform.services.log.ExoLogger;
+import org.exoplatform.services.log.Log;
+import org.exoplatform.services.rest.resource.ResourceContainer;
+import org.exoplatform.services.wcm.core.NodetypeConstant;
+import org.exoplatform.services.wcm.publication.WCMPublicationService;
+import org.exoplatform.services.wcm.utils.WCMCoreUtils;
 
 import javax.annotation.security.RolesAllowed;
 import javax.jcr.Node;
@@ -32,22 +44,10 @@ import javax.ws.rs.Path;
 import javax.ws.rs.QueryParam;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
-
-import org.apache.commons.lang.StringUtils;
-import org.exoplatform.common.http.HTTPStatus;
-import org.exoplatform.ecm.utils.text.Text;
-import org.exoplatform.services.cms.CmsService;
-import org.exoplatform.services.cms.impl.Utils;
-import org.exoplatform.services.cms.lock.LockService;
-import org.exoplatform.services.cms.relations.RelationsService;
-import org.exoplatform.services.jcr.ext.common.SessionProvider;
-import org.exoplatform.services.listener.ListenerService;
-import org.exoplatform.services.log.ExoLogger;
-import org.exoplatform.services.log.Log;
-import org.exoplatform.services.rest.resource.ResourceContainer;
-import org.exoplatform.services.wcm.core.NodetypeConstant;
-import org.exoplatform.services.wcm.publication.WCMPublicationService;
-import org.exoplatform.services.wcm.utils.WCMCoreUtils;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 /**
  * The RenameConnector aims to enhance the use of the _rename_ action on the Sites Explorer.
@@ -113,8 +113,12 @@ public class RenameConnector implements ResourceContainer {
       
       // Set default name if new title contain no valid character
       newName = (StringUtils.isEmpty(newName)) ? DEFAULT_NAME : newName;
-      
-      Node renamedNode = this.getNodeByPath(oldPath);
+
+      // Get renamed node
+      String[] workspaceAndPath = parseWorkSpaceNameAndNodePath(oldPath);
+      Node renamedNode = (Node)WCMCoreUtils.getService(NodeFinder.class)
+              .getItem(this.getSession(workspaceAndPath[0]), workspaceAndPath[1], true);
+
       String oldName = renamedNode.getName();
       if (oldName.indexOf('.') != -1 && renamedNode.isNodeType(NodetypeConstant.NT_FILE)) {
         String ext = oldName.substring(oldName.lastIndexOf('.'));
@@ -280,21 +284,19 @@ public class RenameConnector implements ResourceContainer {
   }
 
   /**
-   * Gets a node by its path.
+   * Parse node path with syntax [workspace:node path] to workspace name and path separately
    *
-   * @param nodePath The path of a specific node with syntax [workspace:node
-   *          path].
-   * @return Node of specific node path
-   * @throws Exception
+   * @param nodePath node path with syntax [workspace:node path]
+   * @return array of String. element with index 0 is workspace name, remaining one is node path
    */
-  private Node getNodeByPath(String nodePath) throws Exception {
+  private String[] parseWorkSpaceNameAndNodePath(String nodePath) {
     Matcher matcher = RenameConnector.FILE_EXPLORER_URL_SYNTAX.matcher(nodePath);
     if (!matcher.find())
       return null;
-    String wsName = matcher.group(1);
-    nodePath = matcher.group(2);
-    Session session = this.getSession(wsName);
-    return (Node) session.getItem(Text.escapeIllegalJcrChars(nodePath));
+    String[] workSpaceNameAndNodePath = new String[2];
+    workSpaceNameAndNodePath[0] = matcher.group(1);
+    workSpaceNameAndNodePath[1] = matcher.group(2);
+    return workSpaceNameAndNodePath;
   }
 
   /**
