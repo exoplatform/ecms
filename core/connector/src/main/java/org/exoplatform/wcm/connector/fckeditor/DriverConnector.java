@@ -41,6 +41,7 @@ import javax.ws.rs.core.CacheControl;
 import javax.ws.rs.core.Context;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
+import javax.ws.rs.core.SecurityContext;
 import javax.xml.parsers.DocumentBuilder;
 import javax.xml.parsers.DocumentBuilderFactory;
 import javax.xml.transform.dom.DOMSource;
@@ -369,7 +370,7 @@ public class DriverConnector extends BaseConnector implements ResourceContainer 
    */
   @GET
   @Path("/uploadFile/control/")
-  public Response processUpload(
+  public Response processUpload( @Context SecurityContext sc,
       @QueryParam("repositoryName") String repositoryName,
       @QueryParam("workspaceName") String workspaceName,
       @QueryParam("driverName") String driverName,
@@ -383,6 +384,7 @@ public class DriverConnector extends BaseConnector implements ResourceContainer 
       @QueryParam("uploadId") String uploadId,
       @QueryParam("existenceAction") String existenceAction) throws Exception {
     try {
+      if (!isAuthenticatedUser(sc)) return forbiddenResponse();
       // Check upload status
       Response msgResponse = fileUploadHandler.checkStatus(uploadId, language);
       if (msgResponse != null) return msgResponse;
