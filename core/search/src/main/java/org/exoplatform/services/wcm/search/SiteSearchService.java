@@ -20,33 +20,33 @@ import org.exoplatform.services.jcr.ext.common.SessionProvider;
 import org.exoplatform.services.wcm.search.base.AbstractPageList;
 
 /**
- * The SiteSearchService component is used in the Search portlet that allows
+ * Is used in the Search portlet that allows
  * users to find all information matching with your given keyword.
- * It is configured in the core/core-configuration/src/main/webapp/WEB-INF/conf/configuration.xml file as follows:
- *
- * {@code <import>war:/conf/wcm-core/core-search-configuration.xml</import>}
- *
+ * <p></p>
+ * It is configured in the core/core-configuration/src/main/webapp/WEB-INF/conf/configuration.xml file as follows:<br />
+ * <import>war:/conf/wcm-core/core-search-configuration.xml</import><br />
+ * <p></p>
  * The component configuration maps the SiteSearchService component with its own implementation: SiteSearchServiceImpl.
- * {@code
- *
- * <component>
- *     <key>org.exoplatform.services.wcm.search.SiteSearchService</key>
- *     <type>org.exoplatform.services.wcm.search.SiteSearchServiceImpl</type>
- *     <component-plugins>
+ * <p></p>
+ * <pre>
+ * &lt;component&gt;
+ *     &lt;key&gt;org.exoplatform.services.wcm.search.SiteSearchService&lt;/key&gt;
+ *     &lt;type&gt;org.exoplatform.services.wcm.search.SiteSearchServiceImpl&lt;/type&gt;
+ *     &lt;component-plugins&gt;
  *         ...
- *     </component-plugins>
- *     <init-params>
- *         <value-param>
- *             <name>isEnabledFuzzySearch</name>
- *             <value>true</value>
- *         </value-param>
- *         <value-param>
- *             <name>fuzzySearchIndex</name>
- *             <value/>
- *         </value-param>
- *     </init-params>
- * </component>
- *}
+ *     &lt;/component-plugins&gt;
+ *     &lt;init-params&gt;
+ *         &lt;value-param&gt;
+ *             &lt;name&gt;isEnabledFuzzySearch&lt;/name&gt;
+ *             &lt;value&gt;true&lt;/value&gt;
+ *         &lt;/value-param&gt;
+ *         &lt;value-param&gt;
+ *             &lt;name&gt;fuzzySearchIndex&lt;/name&gt;
+ *             &lt;value/&gt;
+ *         &lt;/value-param&gt;
+ *     &lt;/init-params&gt;
+ * &lt;/component&gt;
+ * </pre>
  *
  * @LevelAPI Experimental
  */
@@ -57,29 +57,31 @@ public interface SiteSearchService {
   public final static String PAGE_MODE_PAGINATION = "pagination";  
   
   /**
-   * Add the exclude/include data type plugin.
+   * Adds the exclude/include data type plugin.
    *
-   * @param plugin The plugin
+   * @param plugin The plugin to be added.
    */
   public void addExcludeIncludeDataTypePlugin(ExcludeIncludeDataTypePlugin plugin);
 
   /**
-   * Search site contents.
+   * Searches for content nodes of a site.
    *
-   * Fill all child nodes of portal which have node type is document, nt:resource or nt:file and check content of them.
-   * If node's content have key word, it will be put into the list result.
-   * This function have 3 parameters, but the most important is {@link QueryCriteria}. With this parameter you only set
-   * 5 property:
-   * 1. SiteName: name of portal which is searched. If site name is null then search in all portal of system.
-   * 2. Keyword: key work to search.
-   * 3. SearchDocument and SearchWebContent: two parameter must have save value True or False
-   * 4. SearchWebpage: search content of nodes which are added into one or more pages.
+   * This method finds all nodes of a site with nodetype that is document, nt:resource or nt:file, then checks their content.
+   * If the node content has key word, it will be put into the list result.<br />
+   * This function has 3 parameters, but the most important is {@link QueryCriteria}. With this parameter, you only set
+   * 5 properties:<br />
+   * <ul>
+   * <li>SiteName: Name of the site which is searched. If the site name is "null", the search will be performed in all sites of system.</li>
+   * <li>Keyword: The key word to search.</li>
+   * <li>SearchDocument and SearchWebContent: The values of these two parameters must be set to "true" or "false".</li>
+   * <li>SearchWebpage: Searches for content of nodes which are added to one or more pages.</li>
+   * </ul>
    *
-   * @param sessionProvider The session provider
-   * @param queryCriteria The query criteria
-   * @param pageSize The page size
-   * @param isSearchContent
-   * @return The List of content  paginated based on the query.
+   * @param sessionProvider The session provider.
+   * @param queryCriteria The query criteria.
+   * @param pageSize The page size.
+   * @param isSearchContent If "true", search is performed by content. If "false", search is performed by page.
+   * @return The list of paginated content based on the query.
    * @throws Exception The exception
    */
   public AbstractPageList<ResultNode> searchSiteContents(SessionProvider sessionProvider,
@@ -88,22 +90,12 @@ public interface SiteSearchService {
                                                     boolean isSearchContent) throws Exception;
 
   /**
-   * Search site contents.
-   *
-   * Fill all child nodes of portal which have node type is document, nt:resource or nt:file and check content of them.
-   * If node's content have key word, it will be put into the list result.
-   * This function have 3 parameters, but the most important is {@link QueryCriteria}. With this parameter you only set
-   * 5 property:
-   * 1. SiteName: name of portal which is searched. If site name is null then search in all portal of system.
-   * 2. Keyword: key work to search.
-   * 3. SearchDocument and SearchWebContent: two parameter must have save value True or False
-   * 4. SearchWebpage: search content of nodes which are added into one or more pages.
-   *
-   * @param sessionProvider The session provider
-   * @param queryCriteria The query criteria
-   * @param pageSize The page size
-   * @param isSearchContent
-   * @return The List of content  paginated based on the query.
+   * Searches for pages.
+   * 
+   * @param sessionProvider The session provider.
+   * @param queryCriteria The query criteria.
+   * @param pageSize The page size.
+   * @return The list of pages.
    * @throws Exception The exception
    */
   public AbstractPageList<ResultNode> searchPageContents(SessionProvider sessionProvider,

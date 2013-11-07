@@ -21,50 +21,49 @@ import java.util.List;
 import javax.jcr.Node;
 
 /**
- * Manage Favorites for a user and the content.
+ * Manages favorites of users.
  *
  * @LevelAPI Experimental
  */
 public interface FavoriteService {
 
   /**
-   * Add favorite to node
+   * Adds favorite to a node.
    * 
-   * @param node Add favorite to this node
-   * @param userName The user added favorite
+   * @param node The node to which favorite is added.
+   * @param userName The user who added favorite to the node.
    * @throws Exception The exception will be raised if the node can not add
-   *           mixin
+   *           mixin.
    */
  public void addFavorite(Node node, String userName) throws Exception;
 
 
   /**
-   * Remove favorite from node
+   * Removes favorite from a node.
    * 
-   * @param node Remove favourite out of this node
-   * @param userName Remove the name of current user out of property
-   *          exo:favouriter
+   * @param node The node from which favorite is removed.
+   * @param userName The user who removed favorite from the node.
    * @throws Exception
    */
  public void removeFavorite(Node node, String userName) throws Exception;
 
   /**
-   * Get all favourite nodes by user
+   * Gets all favorite nodes by a given user.
    * 
-   * @param workspace Get all favorite nodes from this workspace
-   * @param repository Get all favorite nodes from this repository
-   * @param userName User added favorite to the node
-   * @return List<Node> All favorite node added by user
+   * @param workspace The workspace from which the favorite nodes are got.
+   * @param repository The repository from which the favorite nodes are got.
+   * @param userName The user who added favorite.
+   * @return The favorite node added by the user.
    * @throws Exception
    */
  public List<Node> getAllFavoriteNodesByUser(String workspace, String repository,
      String userName) throws Exception;
 
   /**
-   * Check if user is in favourite list of node
+   * Checks if a node is in favorite list of a given user.
    * 
-   * @param userName The user to check
-   * @param node Node to check
+   * @param userName The given user.
+   * @param node The node to be checked.
    */
  public boolean isFavoriter(String userName, Node node) throws Exception ;
 

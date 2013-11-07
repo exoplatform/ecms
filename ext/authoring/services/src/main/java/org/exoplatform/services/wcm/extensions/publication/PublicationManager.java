@@ -9,88 +9,89 @@ import org.exoplatform.services.wcm.extensions.publication.context.impl.ContextC
 import org.exoplatform.services.wcm.extensions.publication.lifecycle.impl.LifecyclesConfig.Lifecycle;
 
 /**
- * PublicationManager is to manage the publication.
+ * Manages lifecycle and context of the publication.
  *
  * @LevelAPI Platform
  */
 public interface PublicationManager {
 
   /**
-   * Add publication plugin to the publication service.
+   * Adds definitions of a lifecycle to the publication plugin.
    *
-   * @param plugin The Lifecycle as component plugin to add.
+   * @param plugin The component plugin that defines the lifecycle.
    */
   public void addLifecycle(ComponentPlugin plugin);
 
   /**
-   * Remove publication plugin from the publication service.
+   * Removes definitions of a lifecycle from the publication plugin.
    *
-   * @param plugin The Lifecycle as component plugin to remove.
+   * @param plugin The component plugin that defines the lifecycle.
    */
   public void removeLifecycle(ComponentPlugin plugin);
 
   /**
-   * Add publication plugin context to the publication service.
+   * Adds definitions of a context to the publication plugin.
    *
-   * @param plugin The Context as component plugin to add.
+   * @param plugin The component plugin that defines the context.
    */
   public void addContext(ComponentPlugin plugin);
 
   /**
-   * Remove publication plugin context from the publication service.
+   * Removes definitions of a context from the publication plugin.
    *
-   * @param plugin The Context as component plugin to remove.
+   * @param plugin The component plugin that defines the context.
    */
   public void removeContext(ComponentPlugin plugin);
 
   /**
-   * Get all the lifecycles which were added to service instances.
+   * Gets all lifecycles.
    *
-   * @return List<Lifecycle>
+   * @return The list of lifecycles.
    */
   public List<Lifecycle> getLifecycles();
 
   /**
-   * Get all the contexts which were added to service instances.
+   * Gets all contexts.
    *
-   * @return List<Context>
+   * @return The list of contexts.
    */
   public List<Context> getContexts();
 
   /**
-   *  Get a specific context with the given names.
+   * Gets a context by a given name.
    *
-   * @param name The name of the wanted lifecycle.
-   * @return Context
+   * @param name Name of the context.
+   * @return The context.
    */
   public Context getContext(String name);
 
   /**
-   * Get a specific lifecycle with the given name.
+   * Gets a lifecycle by a given name.
    *
-   * @return Lifecycle
+   * @return The lifecycle.
    */
   public Lifecycle getLifecycle(String name);
 
   /**
-   * Get all the Lifecycle of a specific user.
+   * Gets all lifecycles of a user by a specified state.
    *
-   * @param remoteUser The current user of publication service.
-   * @param state The current state of the node.
-   * @return List<Lifecycle>
+   * @param remoteUser The given user.
+   * @param state The specified state by which all lifecycles are got.
+   * @return The list of lifecycles.
    */
   public List<Lifecycle> getLifecyclesFromUser(String remoteUser, String state);
 
   /**
-   * Get all the nodes.
+   * Gets all content nodes.
    *
-   * @param fromstate The current range state of node.
-   * @param tostate The current range state of node.
-   * @param date The date of the node.
-   * @param user The last user of node.
-   * @param lang The node's language.
-   * @param workspace The Workspace of the node's location.
-   * @return List<Node>
+   * @param fromstate The current state of the content.
+   * @param tostate The state by which lifecycles are retrieved from a user.
+   * @param date Any given date.
+   * The publication dates of returned content nodes are smaller than this given date.
+   * @param user The last user who changes the state.
+   * @param lang Language of the content nodes.
+   * @param workspace The workspace where content nodes are got.
+   * @return The list of content nodes.
    * @throws Exception
    */
   public List<Node> getContents(String fromstate,

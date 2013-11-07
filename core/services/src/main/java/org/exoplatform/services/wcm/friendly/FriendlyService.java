@@ -21,16 +21,14 @@ import java.util.Map;
 import org.exoplatform.services.wcm.friendly.impl.FriendlyPlugin;
 
 /**
- * This service provides support for friendly Url in eXo Content.
- * {@code
- * Example :
- * If the url is
+ * Provides support for friendly URL in Content.
+ * <p></p>
+ * For example:
+ * If URL is
  * http://mysite.com/portal/public/acme/detail?path=/repository/collaboration/sites content/live/acme/web contents/news/news1
- * friendly key could be : acme
- * with unfriendly value as : /public/acme/detail?path=/repository/collaboration/sites content/live/acme/web contents
- *
- * friendly Url becomes : http://mysite.com/portal/content/acme/news/news1
- * }
+ * where the friendly key could be: acme
+ * with unfriendly value as: /public/acme/detail?path=/repository/collaboration/sites content/live/acme/web contents,
+ * the friendly URL becomes: http://mysite.com/portal/content/acme/news/news1.
  *
  * @LevelAPI Experimental
  *
@@ -38,73 +36,73 @@ import org.exoplatform.services.wcm.friendly.impl.FriendlyPlugin;
 public interface FriendlyService {
 
   /**
-   * We use a servlet in the portal app to forward the friendly to its corresponding unfriendly one.
-   * By default, the servelt name is "content"
+   * Uses a servlet in the portal app to forward the friendly URL to its corresponding unfriendly one.
+   * By default, the servelt name is "content".
    *
-   * @return The servlet name
+   * @return The servlet name.
    */
   public String getServletName();
 
   /**
-   * Allow to know if service is active and if we should use it.
+   * Checks if the Friendly Service is active.
    *
-   * @return True if service is active.
+   * @return "True" if the Friendly Service is active. Otherwise, it returns "false".
    */
   public boolean isEnabled();
 
   /**
-   * Allows to add configuration in the service after instanciation
+   * Allows to add configuration to the Friendly Service.
    *
-   * @param plugin The plugin to add
+   * @param plugin The Friendly plugin.
    */
   public void addConfiguration(FriendlyPlugin plugin);
 
   /**
-   * Return the friendly uri corresponding to the unfriendly uri.
-   * {@code
-   * Example :
-   * friendly = acme
-   * unfriendly = /public/acme/detail?path=/repository/collaboration/sites content/live/acme/web contents
-   * }
+   * Gets the friendly URI corresponding to an unfriendly URI.
+   * <p></p>
+   * For example:<br />
    *
-   * @param unfriendlyUri Current unfriendly URI.
-   * @return The new friendly uri
+   * friendly = acme<br />
+   * unfriendly = /public/acme/detail?path=/repository/collaboration/sites content/live/acme/web contents<br />
+   *
+   * @param unfriendlyUri The current unfriendly URI.
+   * @return The friendly URI.
    */
   public String getFriendlyUri(String unfriendlyUri);
 
   /**
-   * Return the unfriendly uri corresponding to the friendly uri.
-   * {@code
-   * Example :
-   * friendly = acme
-   * unfriendly = /public/acme/detail?path=/repository/collaboration/sites content/live/acme/web contents
-   * }
+   * Gets the unfriendly URI corresponding to a friendly URI.
+   * <br />
+   * For example:<br />
+   * 
+   * friendly = acme<br />
+   * unfriendly = /public/acme/detail?path=/repository/collaboration/sites content/live/acme/web contents<br />
    *
-   * @param friendlyUri The current friendly uri
-   * @return The previous unfriendly uri
+   * @param friendlyUri The current friendly URI.
+   * @return The unfriendly URI.
    */
   public String getUnfriendlyUri(String friendlyUri);
 
   /**
-   * Add a new <friendly, unfriendly> couple
+   * Adds a new {friendly, unfriendly} couple.
    *
-   * @param friendlyUri The friendly uri
-   * @param unfriendlyUri The unfriendly uri
+   * @param friendlyUri The friendly URI.
+   * @param unfriendlyUri The unfriendly URI.
    */
   public void addFriendly(String friendlyUri, String unfriendlyUri);
 
   /**
-   * Remove a friendly entry based on the friendly key
+   * Removes a friendly entry based on the friendly key.
    *
-   * @param friendlyUri The friendly uri
+   * @param friendlyUri The friendly URI.
    */
   public void removeFriendly(String friendlyUri);
 
 
   /**
-   * Get all the <friendly, unfriendly> entries.
+   * Gets all {friendly, unfriendly} entries.
    *
-   * @return map of entries.
+   * @return The map of entries.
    */
   public Map<String, String> getFriendlies();
 }

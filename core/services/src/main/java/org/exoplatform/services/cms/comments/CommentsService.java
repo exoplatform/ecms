@@ -21,28 +21,26 @@ import java.util.List;
 import javax.jcr.Node;
 
 /**
- * Manage Comments in the contents.
+ * Manages comments related to the content.
  *
  * @LevelAPI Experimental
  */
 public interface CommentsService {
 
   /**
-   * Comment the document is specified by the node by giving the commentor, email, site, comment and
-   * language params
-   * Any language belongs to this document can be commented.
-   * This method uses variables to store values which are commented from user for all kind languages
-   * of this document
-   * @param document        The node document is commented
-   * @param commentor       The name of current user
-   *                        Can be <code>null</code>
-   * @param email           The email of current user
-   *                        Can be <code>null</code>
-   * @param site            The site of current user
-   *                        Can be <code>null</code>
-   * @param comment         The comment's content
-   * @param language        The language of this document is commented
-   * @see                   Node
+   * Adds comment to a document.
+   * This method uses variables to store values which are commented from the current user for all language types
+   * of this document.
+   * @param document The document node that is commented.
+   * @param commentor Name of the current user.
+   * If <code>null</code>, the commentor is considered as "anonymous".
+   * @param email Email of the current user.
+   * This param can be <code>null</code>.
+   * @param site Site of the current user.
+   * This param can be <code>null</code>.
+   * @param comment Content of the comment.
+   * @param language Language of the document that is commented.
+   * @see Node
    * @throws Exception
    */
   public void addComment(Node document,
@@ -53,28 +51,28 @@ public interface CommentsService {
                          String language) throws Exception;
 
   /**
-   * Update comment for document: set new comment for node.
+   * Updates comment for a document.
    *
-   * @param commentNode the node that need to update comment
-   * @param newComment the new comment is set for node
+   * @param commentNode Node of the comment that will be updated.
+   * @param newComment The new comment that is set for the node.
    * @throws Exception
    */
   public void updateComment(Node commentNode, String newComment) throws Exception;
 
   /**
-   * Delete comment of document by given comment node.
+   * Deletes comment of a document by a given comment node.
    *
-   * @param commentNode given comment node
+   * @param commentNode The given comment node.
    * @throws Exception
    */
   public void deleteComment(Node commentNode) throws Exception;
 
   /**
-   * Gets all comments from the specified node.
+   * Gets all comments of a specified document node.
    *
-   * @param document        The node document is commented
-   * @param language        The language of this document is commented
-   * @see                   Node
+   * @param document The document node that is commented.
+   * @param language Language of the document that is commented.
+   * @see Node
    * @throws Exception
    */
   public List<Node> getComments(Node document, String language) throws Exception ;

@@ -1,5 +1,5 @@
 /**
- *  Provide the WCMComposer, one of the core service of the content explorer
- *  It retrieves all content based queries and criteria.
+ *  Provides the WCMComposer, one of the core services of web content management.
+ *  It retrieves all content based on queries and criteria.
  */
 package org.exoplatform.services.wcm.publication;
