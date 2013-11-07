@@ -28,6 +28,7 @@ import javax.jcr.Session;
 import javax.ws.rs.core.CacheControl;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
+import javax.ws.rs.core.SecurityContext;
 import javax.xml.transform.dom.DOMSource;
 
 import org.exoplatform.container.ExoContainer;
@@ -433,6 +434,23 @@ public abstract class BaseConnector {
     } catch (Exception e) {
       return null;
     }
+  }
+  
+  /**
+   * Checks if the user is authenticated
+   * @param sc the security context
+   * @return true if user is authenticated, false if not
+   */
+  protected boolean isAuthenticatedUser(SecurityContext sc) {
+    return sc.getUserPrincipal() != null;
+  }
+  
+  /**
+   * returns the forbidden response
+   * @return the response
+   */
+  protected Response forbiddenResponse() {
+    return Response.status(Response.Status.FORBIDDEN).build();
   }
 
 }

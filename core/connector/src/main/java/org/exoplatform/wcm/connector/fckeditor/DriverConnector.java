@@ -41,6 +41,7 @@ import javax.ws.rs.core.CacheControl;
 import javax.ws.rs.core.Context;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
+import javax.ws.rs.core.SecurityContext;
 import javax.xml.parsers.DocumentBuilder;
 import javax.xml.parsers.DocumentBuilderFactory;
 import javax.xml.transform.dom.DOMSource;
@@ -290,7 +291,7 @@ public class DriverConnector extends BaseConnector implements ResourceContainer 
   @POST
   @Path("/uploadFile/upload/")
 
-  public Response uploadFile(@Context HttpServletRequest servletRequest,
+  public Response uploadFile(@Context HttpServletRequest servletRequest, @Context SecurityContext sc,
       @QueryParam("uploadId") String uploadId) throws Exception {
     //check if number of file uploading is greater than the limit
 //    if (fileUploadHandler.getUploadingFileCount() >= limitCountServer_) {
@@ -302,6 +303,7 @@ public class DriverConnector extends BaseConnector implements ResourceContainer 
 //                      .header(LAST_MODIFIED_PROPERTY, dateFormat.format(new Date()))
 //                      .build();
 //    }
+    if (!isAuthenticatedUser(sc)) return forbiddenResponse();
     return fileUploadHandler.upload(servletRequest, uploadId, limit);
   }
 
