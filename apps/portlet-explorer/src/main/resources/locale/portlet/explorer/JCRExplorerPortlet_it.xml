@@ -41,7 +41,7 @@
     </label>
     <button>
       <label>
-        <confirm>OK</confirm>
+        <confirm>Ok</confirm>
       </label>
     </button>
     <msg>
@@ -2407,7 +2407,7 @@
   <UIRestoreConfirmMessage>
     <label>
       <Close>#{word.close}</Close>
-      <OK>OK</OK>
+      <OK>Ok</OK>
       <ReplaceData>Sostituisci dati</ReplaceData>
       <Back>Torna a rinominare</Back>
       <Keepfile>Mantieni entrambi i file</Keepfile>

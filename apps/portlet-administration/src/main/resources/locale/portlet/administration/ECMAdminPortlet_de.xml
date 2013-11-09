@@ -1512,7 +1512,7 @@
       <name>Typ</name>
       <action>Aktion</action>
       <label>Vorlage</label>
-      <icon>Piktogramm</icon>
+      <icon>Symbol</icon>
     </header>
     <action>
       <AddNew>Vorlage hinzufügen</AddNew>
@@ -1530,7 +1530,7 @@
       <name>Typ</name>
       <action>Aktion</action>
       <label>Vorlage</label>
-      <icon>Piktogramm</icon>
+      <icon>Symbol</icon>
     </header>
     <action>
       <AddNew>Vorlage hinzufügen</AddNew>
@@ -1547,7 +1547,7 @@
     <header>
       <name>Typ</name>
       <label>Vorlage</label>
-      <icon>Piktogramm</icon>
+      <icon>Symbol</icon>
       <action>Aktion</action>
     </header>
     <action>

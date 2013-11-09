@@ -27,7 +27,7 @@
     </header>
     <action>
       <SaveCategories>Save</SaveCategories>
-      <Cancel>Cancel</Cancel>
+      <Cancel>取消</Cancel>
     </action>
     <msg>
       <cannot-save>Categories were not saved.</cannot-save>

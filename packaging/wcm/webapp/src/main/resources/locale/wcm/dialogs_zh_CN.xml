@@ -75,7 +75,7 @@
       <label>
         <name>Name</name>
         <url>URL</url>
-        <description>Description</description>
+        <description>说明</description>
       </label>
     </dialog>
   </WebLink>
