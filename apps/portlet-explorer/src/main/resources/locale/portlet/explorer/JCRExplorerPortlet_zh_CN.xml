@@ -190,7 +190,7 @@
   #########################################################################################
   -->
   <UIRenameForm>
-    <title>Rename</title>
+    <title>重命名</title>
     <label>
       <nameField>Name</nameField>
       <titleField>Title</titleField>
@@ -284,12 +284,12 @@
       <AddDocument>New Content</AddDocument>
       <EditDocument>Edit</EditDocument>
       <Upload>Upload</Upload>
-      <Paste>Paste</Paste>
+      <Paste>粘贴</Paste>
       <Search>Search</Search>
       <WatchDocument>Watch/Unwatch</WatchDocument>
       <TaggingDocument>Tag</TaggingDocument>
       <Vote>Vote</Vote>
-      <Comment>Comment</Comment>
+      <Comment>评论</Comment>
       <ManageVersions>Versions</ManageVersions>
       <ManageAuditing>Audit</ManageAuditing>
       <ManagePublications>Publications</ManagePublications>
@@ -518,8 +518,8 @@
     </msg>
     <tooltip>
       <Rename>Rename</Rename>
-      <Cut>Cut</Cut>
-      <Copy>Copy</Copy>
+      <Cut>剪切</Cut>
+      <Copy>复制</Copy>
       <Save>Save</Save>
       <RemoveNode>Delete</RemoveNode>
       <Checkin>Checkin</Checkin>
@@ -609,7 +609,7 @@
       <path>Path</path>
     </header>
     <action>
-      <Close>Close</Close>
+      <Close>关闭</Close>
     </action>
   </UIReferencesList>
   <!--
@@ -623,7 +623,7 @@
       <UIPublicationPanel>Revision</UIPublicationPanel>
       <UIPublicationSchedule>Scheduled</UIPublicationSchedule>
       <UIPublicationPagesContainer>Pages</UIPublicationPagesContainer>
-      <UIPublicationHistory>History</UIPublicationHistory>
+      <UIPublicationHistory>历史</UIPublicationHistory>
       <UIVersionViewer>Version Viewer</UIVersionViewer>
 
       <UIPropertyTab>Properties</UIPropertyTab>
@@ -648,7 +648,7 @@
       <UIAddLanguageContainer>Add Language</UIAddLanguageContainer>
       <UINonPublishedForm>State</UINonPublishedForm>
       <UIPublishedForm>State</UIPublishedForm>
-      <UIPublicationLogList>History</UIPublicationLogList>
+      <UIPublicationLogList>历史</UIPublicationLogList>
       <UIDocumentWithTree>File View</UIDocumentWithTree>
       <UIDocumentInfo>Document View</UIDocumentInfo>
       <UICategoriesSelectPanel>Select Categories</UICategoriesSelectPanel>
@@ -1210,7 +1210,7 @@
     <pLabel>Properties:</pLabel>
     <action>
       <Add>Add</Add>
-      <Cancel>Cancel</Cancel>
+      <Cancel>取消</Cancel>
     </action>
   </UISelectPropertyForm>
   <ExactlyFormPopup>
@@ -1221,7 +1221,7 @@
   <UIECMSearch>
     <header>
       <name>Name</name>
-      <language>Language</language>
+      <language>语言</language>
       <query>Query</query>
       <action>Actions</action>
       <path>Path</path>
@@ -1260,7 +1260,7 @@
     <tooltip>
       <Execute>Execute</Execute>
       <Edit>Edit</Edit>
-      <Delete>Delete</Delete>
+      <Delete>删除</Delete>
     </tooltip>
     <label>
       <no-children>No query is saved.</no-children>
@@ -1334,7 +1334,7 @@
       <invalid-item-state>You cannot restore this version, either because one or more items were deleted or moved during another session.</invalid-item-state>
     </msg>
     <action>
-      <close>Close</close>
+      <close>关闭</close>
       <close-view>Close View</close-view>
     </action>
   </UIVersionInfo>
@@ -1355,7 +1355,7 @@
       <e_8>Property Removed</e_8>
       <e_32>Save</e_32>
       <e_64>Move</e_64>
-      <e_128>Copy</e_128>
+      <e_128>复制</e_128>
       <e_256>Add Mixin</e_256>
       <e_512>Remove Mixin</e_512>
       <e_1024>Clone</e_1024>
@@ -1392,7 +1392,7 @@
       <note>Versioning has not been activated for this node.</note>
       <question>Are you sure you want to activate it?</question>
       <button-active>Activate</button-active>
-      <button-cancel>Cancel</button-cancel>
+      <button-cancel>取消</button-cancel>
     </label>
     <msg>
       <access-denied>You do not have permission to activate versioning on this node</access-denied>
@@ -1406,11 +1406,11 @@
   <UIActivePublication>
     <header>
       <LifecycleName>Name</LifecycleName>
-      <LifecycleDesc>Description</LifecycleDesc>
+      <LifecycleDesc>说明</LifecycleDesc>
       <action>Action</action>
     </header>
     <action>
-      <Cancel>Close</Cancel>
+      <Cancel>关闭</Cancel>
     </action>
     <grid>
       <msg>
@@ -1434,7 +1434,7 @@
     </label>
     <action>
       <activate>Activate</activate>
-      <cancel>Cancel</cancel>
+      <cancel>取消</cancel>
     </action>
   </UIActivateAuditing>
   <!--
@@ -1489,7 +1489,7 @@
     </label>
     <action>
       <Save>#{word.save}</Save>
-      <Cancel>Cancel</Cancel>
+      <Cancel>取消</Cancel>
     </action>
     <title>Add Label</title>
     <msg>
@@ -1508,7 +1508,7 @@
       <label>Select Label</label>
     </label>
     <action>
-      <Remove>Remove</Remove>
+      <Remove>删除</Remove>
       <Cancel>#{word.cancel}</Cancel>
     </action>
   </UIRemoveLabelForm>
@@ -1544,7 +1544,7 @@
   -->
   <UICategoryManager>
     <action>
-      <Close>Close</Close>
+      <Close>关闭</Close>
     </action>
     <tab>
       <label>
@@ -1564,13 +1564,13 @@
     </msg>
     <action>
       <title>
-        <Delete>Delete</Delete>
+        <Delete>删除</Delete>
       </title>
     </action>
     <label>
       <category>Category</category>
       <actions>Action</actions>
-      <delete>Delete</delete>
+      <delete>删除</delete>
     </label>
   </UICategoriesAddedList>
   <UITreeList>
@@ -1589,7 +1589,7 @@
   -->
   <UIRelationManager>
     <action>
-      <Close>Close</Close>
+      <Close>关闭</Close>
     </action>
     <tab>
       <label>
@@ -1609,7 +1609,7 @@
     </header>
     <action>
       <title>
-        <Delete>Delete</Delete>
+        <Delete>删除</Delete>
       </title>
     </action>
     <msg>
@@ -1743,7 +1743,7 @@
   <UIActionList>
     <header>
       <name>#{word.name}</name>
-      <description>Description</description>
+      <description>说明</description>
   <lifecycle>Life Cycle</lifecycle>
   <triggeredaction>Triggered Action</triggeredaction>
       <instanceOf>Instance of Action Type</instanceOf>
@@ -1760,7 +1760,7 @@
       <Close>#{word.close}</Close>
       <View>View</View>
       <Edit>Edit</Edit>
-      <Delete>Delete</Delete>
+      <Delete>删除</Delete>
     </action>
   </UIActionList>
   <UIActionForm>
@@ -1985,7 +1985,7 @@
     <action>
       <Save>Save</Save>
       <UnsubcriberLifeCycle>Unsubscriber</UnsubcriberLifeCycle>
-      <Cancel>Cancel</Cancel>
+      <Cancel>取消</Cancel>
     </action>
   </UIPublicationForm>
   <!--
@@ -2074,12 +2074,12 @@
       <date>Date</date>
       <newState>New State</newState>
       <user>User</user>
-      <description>Description</description>
+      <description>说明</description>
       <version>Version</version>
       <visibility>Visibility</visibility>
     </header>
     <action>
-      <Close>Close</Close>
+      <Close>关闭</Close>
     </action>
   </UIPublicationLogList>
   <!--
@@ -2142,7 +2142,7 @@
   -->
   <UICategoriesSelector>
     <action>
-      <close>Close</close>
+      <close>关闭</close>
     </action>
   </UICategoriesSelector>
   <!--
@@ -2174,7 +2174,7 @@
     <action>
       <Edit>Edit</Edit>
       <Save>Save</Save>
-      <Cancel>Cancel</Cancel>
+      <Cancel>取消</Cancel>
     </action>
     <label>
       <uploadFileSizeLimitMB>The size limit of the uploaded file (MB)</uploadFileSizeLimitMB>
@@ -2380,7 +2380,7 @@
 
   <UISimpleCategoryManager>
     <action>
-      <Close>Close</Close>
+      <Close>关闭</Close>
     </action>
   </UISimpleCategoryManager>
   <UIPopupWindow>
@@ -2397,7 +2397,7 @@
   <UIConfirmMessage>
     <label>
       <Close>#{word.cancel}</Close>
-      <OK>Delete</OK>
+      <OK>删除</OK>
       <ReplaceData>Replace Data</ReplaceData>
       <Back>Back to Rename</Back>
       <Keepfile>Keep both files</Keepfile>
@@ -2711,7 +2711,7 @@
     </label>
     <action>
       <Save>Save</Save>
-      <Cancel>Cancel</Cancel>
+      <Cancel>取消</Cancel>
     </action>
   </UICategoryForm>
   <UIPopupWindow>
@@ -2815,14 +2815,14 @@
     <UIActionForm>
     <title>
       <ShowComponent>Show Component</ShowComponent>
-      <removeReference>Remove</removeReference>
+      <removeReference>删除</removeReference>
     </title>
   </UIActionForm>
 
   <EditFormAction>
     <title>
       <ShowComponent>Show Component</ShowComponent>
-      <removeReference>Remove</removeReference>
+      <removeReference>删除</removeReference>
     </title>
   </EditFormAction>
 
@@ -2866,7 +2866,7 @@
   <UISelectRestorePath>
     <action>
       <Save>Save</Save>
-      <Cancel>Cancel</Cancel>
+      <Cancel>取消</Cancel>
     </action>
     <label>
       <formInput>The previous path was lost. Please select a new one.</formInput>
@@ -2908,7 +2908,7 @@
 
   <UIPublicationPanel>
     <button>
-      <Close>Close</Close>
+      <Close>关闭</Close>
     </button>
     <revisions>
       <version>Revisions</version>
@@ -2957,7 +2957,7 @@
       <versionName>Revision Name</versionName>
       <currentState>Current State</currentState>
       <user>Author</user>
-      <description>Description</description>
+      <description>说明</description>
     </header>
   </UIPublicationHistory>
   
@@ -3114,7 +3114,7 @@
     <MaxFileSize>Maximum file size is</MaxFileSize>
     <InvalidCharacters>Invalid characters will be changed by '-'</InvalidCharacters>
     <DropFileMessage>Drop your files here in the current folder</DropFileMessage>
-    <Close>Close</Close>
+    <Close>关闭</Close>
     <in>in</in>
     <MaxFileSizeAlert>The file size exceeds the size limit of</MaxFileSizeAlert>
     <Waiting>Waiting</Waiting>
@@ -3124,7 +3124,7 @@
     <Keep>Keep both</Keep>
     <Replace>Replace</Replace>
     <Canceled>Canceled</Canceled>
-    <Cancel>Cancel</Cancel>
+    <Cancel>取消</Cancel>
     <AbortAllConfirmation>Do you want to abort all files in progress?</AbortAllConfirmation>
   </label>
   </UIMultiUpload>

@@ -138,7 +138,7 @@
     <label>
       <name>Name</name>
       <add>Add</add>
-      <delete>Delete</delete>
+      <delete>删除</delete>
     </label>
     <msg>
       <no-content-found>No content found.</no-content-found>
@@ -149,7 +149,7 @@
   <UICLVContentSelectedGrid>
     <action>
       <SaveCategories>Save</SaveCategories>
-      <Cancel>Cancel</Cancel>
+      <Cancel>取消</Cancel>
     </action>
   </UICLVContentSelectedGrid>
 
@@ -218,7 +218,7 @@
   <UIContentPropertySelector>
     <action>
       <Add>Add</Add>
-      <Cancel>Cancel</Cancel>
+      <Cancel>取消</Cancel>
     </action>
     <label>
       <metadataType>Metadata Type</metadataType>
@@ -235,7 +235,7 @@
   <UIContentNodeTypeSelector>
     <action>
       <Save>Save</Save>
-      <Cancel>Cancel</Cancel>
+      <Cancel>取消</Cancel>
     </action>
   </UIContentNodeTypeSelector>
 
@@ -260,7 +260,7 @@
       <SaveDraft>Save Draft</SaveDraft>
       <FastPublish>Fast Publish</FastPublish>
       <Preferences>Preferences</Preferences>
-      <Close>Close</Close>
+      <Close>关闭</Close>
     </action>
     <msg>
       <access-denied>You do not have permission to add categories to this document.</access-denied>
@@ -280,7 +280,7 @@
       <Clear>Clear</Clear>
       <title>
         <Edit>Edit</Edit>
-        <Delete>Delete</Delete>
+        <Delete>删除</Delete>
       </title>
     </action>
   </UIPermissionManager>
@@ -372,7 +372,7 @@
 
   <Signin>
     <welcome>Welcome</welcome>
-    <login>Login</login>
+    <login>登录</login>
     <logout>Logout</logout>
     <language>Change Language</language>
     <register>Register</register>

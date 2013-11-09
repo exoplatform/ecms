@@ -24,7 +24,7 @@
     <view>
       <label>
         <url>URL</url>
-        <description>Description</description>
+        <description>说明</description>
       </label>
     </view>
   </WebLink>
@@ -39,11 +39,11 @@
       </label>
       <tooltip>
         <add-edit>Add/Edit Metadata</add-edit>
-        <cancel>Cancel</cancel>
+        <cancel>取消</cancel>
       </tooltip>
       <action>
         <add-edit>Add/Edit</add-edit>
-        <cancel>Cancel</cancel>
+        <cancel>取消</cancel>
       </action>
     </view>
   </SiteMetadata>

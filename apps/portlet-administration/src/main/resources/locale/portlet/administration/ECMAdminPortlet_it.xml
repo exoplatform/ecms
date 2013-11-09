@@ -24,7 +24,7 @@
       <UIViewManager>Viste</UIViewManager>
       <UIDriveManager>Unità</UIDriveManager>
       <UIQueriesManager>Query</UIQueriesManager>
-      <UIActionManager>Actions</UIActionManager>
+      <UIActionManager>Azioni</UIActionManager>
       <UIScriptManager>Script</UIScriptManager>
       <UIUnLockManager>Gestisci Blocchi</UIUnLockManager>
       <UIFolksonomyManager>Tag Pubblici</UIFolksonomyManager>      
@@ -726,7 +726,7 @@
     <header>
       <name>Nome</name>
       <label>Name</label>
-<action>Actions</action>
+      <action>Azioni</action>
     </header>
     <title>
       <Edit>Modifica</Edit>
@@ -789,7 +789,7 @@
       <UITemplateEditForm>Template</UITemplateEditForm>
       <UITemplateForm>Template</UITemplateForm>
       <UITemplateContainer>Documenti</UITemplateContainer>
-      <UIActionsTemplateContainer>Actions</UIActionsTemplateContainer>
+      <UIActionsTemplateContainer>Azioni</UIActionsTemplateContainer>
       <UIOthersTemplateContainer>Others</UIOthersTemplateContainer>
   <UIActionScriptContainer>Azione</UIActionScriptContainer>
   <UIWidgetScriptContainer>Widgets</UIWidgetScriptContainer>
@@ -856,7 +856,7 @@
  <header>
   <tabName>Scheda</tabName>
   <localizeButtons>Description</localizeButtons>
-<action>Actions</action>
+<action>Azioni</action>
 </header>
 <action>
  <AddTab>Add</AddTab>
@@ -979,7 +979,7 @@
       <viewMetadatas>Visualizza Metadati</viewMetadatas>
       <overloadThumbnail>Carica Anteprima</overloadThumbnail>
       <manageHidden>Hide/Show Content</manageHidden>
-      <comment>Comment</comment>
+      <comment>Commenta</comment>
       <vote>Vota Documento</vote>  
       <addCategory>Aggiungi Categoria</addCategory>
       <addLocalizationLink>Aggiungi Traduzione</addLocalizationLink>
@@ -2132,7 +2132,7 @@
   </step3>
   <UIDrivePermissionSelector>
     <label>
-      <selectGroup>Select Group</selectGroup>
+      <selectGroup>Seleziona il Gruppo</selectGroup>
       <selectUser>Seleziona Utente</selectUser>
       <selectMembership>Seleziona Membership</selectMembership>
     </label>

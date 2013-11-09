@@ -4,8 +4,8 @@
   <View>
     <label>
       <languages>
-        <en>English</en>
-        <fr>French</fr>
+        <en>英文</en>
+        <fr>法语</fr>
         <ru>Russian</ru>
         <vi>Vietnamese</vi>
         <nl>Dutch</nl>
@@ -102,7 +102,7 @@
         <action-name>Action Name</action-name>
         <lifecycle>Lifecycle</lifecycle>
         <metadata>Metadata</metadata>
-        <description>Description</description>
+        <description>说明</description>
       </label>
     </view>
   </AddMetadata>
@@ -115,7 +115,7 @@
       <label>
         <action-name>Action Name</action-name>
         <lifecycle>Lifecycle</lifecycle>
-        <description>Description</description>
+        <description>说明</description>
       </label>
     </view>
   </AutoVersioning>
@@ -127,7 +127,7 @@
       <label>
         <action-name>Name</action-name>
         <lifecycle>Lifecycle</lifecycle>
-        <description>Description</description>
+        <description>说明</description>
       </label>
     </view>
   </EnableVersioning>
@@ -146,20 +146,20 @@
         <resource-type>Resource Type</resource-type>
         <date>Date</date>
         <publisher>Publisher</publisher>
-        <description>Description</description>
+        <description>说明</description>
         <rights>Rights</rights>
         <relation>Relation</relation>
         <format>Format</format>
         <coverage>Coverage</coverage>
         <identifier>Identifier</identifier>
-        <languages>Languages</languages>
+        <languages>语言</languages>
       </label>
       <action>
         <add-edit>Add/Edit</add-edit>
-        <cancel>Cancel</cancel>
+        <cancel>取消</cancel>
       </action>
       <tooltip>
-        <cancel>Cancel</cancel>
+        <cancel>取消</cancel>
         <add-edit>Add/Edit Properties</add-edit>
       </tooltip>
     </view>
