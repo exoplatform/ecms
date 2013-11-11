@@ -1,4 +1,4 @@
 /**
- *  Provide Link Manager to handle, create, updated and delete links related to documents and files.
+ *  Handles links related to documents and files, including creating, updating and deleting.
  */
 package org.exoplatform.services.cms.link;

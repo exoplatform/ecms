@@ -1,4 +1,4 @@
 /**
- *  Provide different Services to handle documents such as a Favorite service.
+ *  Handles actions related to documents.
  */
 package org.exoplatform.services.cms.documents;
