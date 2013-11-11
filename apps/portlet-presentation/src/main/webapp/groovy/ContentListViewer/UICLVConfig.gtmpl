@@ -77,13 +77,13 @@
 												          <i class="uiIconQuestion uiIconLightGray"></i>          
 												      </div> 
 													  
-													  <div class="controls" <% if (uicomponent.getSavedPath() != null) { %>title="<%=uicomponent.getSavedPath()%>" <% }%> >
+													  <div class="controls">
 													    <% uiform.renderField(uicomponent.ITEM_PATH_FORM_INPUT_SET) %>
 													  </div>
 													</div>
 													<div class="control-group">                  
 													  <label class="control-label" for="<%=uicomponent.ORDER_BY_FORM_SELECT_BOX%>"><%=uicomponent.getLabel(uicomponent.ORDER_BY_FORM_SELECT_BOX) %>: </label>
-													  <div class="controls" <% if (uicomponent.getSavedPath() != null) { %>title="<%=uicomponent.getSavedPath()%>" <% }%> >
+													  <div class="controls">
 														<% uiform.renderField(uicomponent.ORDER_BY_FORM_SELECT_BOX) %>
 													  <% uiform.renderField(uicomponent.ORDER_TYPE_FORM_SELECT_BOX) %>
 													  </div>
