@@ -7,8 +7,8 @@
   -->
   <UITreeList>
     <header>
-      <name>Name</name>
-      <action>Add</action>
+      <name>姓名</name>
+      <action>新增</action>
     </header>
     <info>
       <child-not-found>Child not found!</child-not-found>
@@ -23,11 +23,11 @@
     <header>
       <categoryName>Category name</categoryName>
       <categoryPath>Category path</categoryPath>
-      <action>Action</action>
+      <action>#{word.action}</action>
     </header>
     <action>
-      <SaveCategories>Save</SaveCategories>
-      <Cancel>取消</Cancel>
+      <SaveCategories>#{word.save}</SaveCategories>
+      <Cancel>#{word.cancel}</Cancel>
     </action>
     <msg>
       <cannot-save>Categories were not saved.</cannot-save>

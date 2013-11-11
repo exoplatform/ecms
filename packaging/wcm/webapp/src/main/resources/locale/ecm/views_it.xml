@@ -28,7 +28,7 @@
         <show-comments>Mostra commenti</show-comments>
         <hide-comments>Nascondi commenti</hide-comments>
         <comment-by>Commentato da</comment-by>
-        <email>Email</email>
+        <email>E-mail</email>
         <site>Sito</site>
       </label>
     </view>
@@ -41,7 +41,7 @@
     <view>
       <label>
         <not-viewable>Questo contenuto non è visualizabile. Prego lo scarichi o osi WebDAV per accedere al suo contenuto.</not-viewable>
-        <using-webDAV>or use WebDAV to access the content</using-webDAV>
+        <using-webDAV>o utilizzare WebDAV per accedere al contenuto</using-webDAV>
         <file-size-too-big>Il contenuto di questo file è troppo grande. Dovrebbe scaricarlo ed usare un client esterno.</file-size-too-big>
         <webDAV>Vista WebDAV</webDAV>
         <download>Scarica questo File</download>
@@ -156,10 +156,10 @@
       </label>
       <action>
         <add-edit>Aggiungi/Modifica</add-edit>
-        <cancel>Annulla</cancel>
+        <cancel>#{word.cancel}</cancel>
       </action>
       <tooltip>
-        <cancel>Annulla</cancel>
+        <cancel>#{word.cancel}</cancel>
         <add-edit>Proprietà Aggiungi/Modifica</add-edit>
       </tooltip>
     </view>
@@ -212,13 +212,13 @@
    <AccessibleMedia>
     <view>
       <label>
-      <Play-audio-description-of-this-video>Audio description</Play-audio-description-of-this-video>
+      <Play-audio-description-of-this-video>Descrizione audio</Play-audio-description-of-this-video>
       <Read-more>Leggi avanzate</Read-more>
-      <Read-less>Read less</Read-less>
-      <Switch-back-to-original-video>Original video</Switch-back-to-original-video>
+      <Read-less>Leggere meno</Read-less>
+      <Switch-back-to-original-video>Video originale</Switch-back-to-original-video>
       </label>
       <tooltip>
-      <A-second-media-file-is-available-as-audio-description>A second media file is available as an audio description</A-second-media-file-is-available-as-audio-description>
+      <A-second-media-file-is-available-as-audio-description>Un secondo file multimediali è disponibile nella forma di una descrizione audio</A-second-media-file-is-available-as-audio-description>
       </tooltip>
     </view>
   </AccessibleMedia>

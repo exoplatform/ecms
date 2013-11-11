@@ -81,8 +81,8 @@
       <ContentsVisibilityHelp>"Kimlik doğrulama ile sınırlı" temel kimlik doğrulaması üzerinde içerik süzer. Eğer oturmum açmazsanız sadece genel içeriği görebilirsiniz.Oturum açtıysanız, intranet kullanıcılar tarafından görülebilir tüm içeriği görebilirsiniz.(ama herkez tarafından paylaşılan) "Kullanıcı rolleri ile sınırlı" içerik haklarınızı bağlı olarak göreceksiniz anlımana gelir.Çoğu durumda bu seçenek kullanılmamalıdır çünkü genel performansı düşürür.</ContentsVisibilityHelp>
     </help>
     <action>
-      <Save>Kaydet</Save>
-      <Cancel>İptal</Cancel>
+      <Save>#{word.save}</Save>
+      <Cancel>#{word.cancel}</Cancel>
       <delete>Sil</delete>
     </action>
     <msg>

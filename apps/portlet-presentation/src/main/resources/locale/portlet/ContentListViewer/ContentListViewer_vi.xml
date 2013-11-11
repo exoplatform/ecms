@@ -81,8 +81,8 @@
       <ContentsVisibilityHelp>"Giới hạn bằng xác thực" sẽ lọc nội dung dựa trên việc xác thực. Nếu bạn không đăng nhập, bạn sẽ chỉ thấy những nội dung được công khai. Nếu bạn đã đăng nhập, bạn thấy tất cả các nội dung có thể nhìn thấy dành cho người sử dụng mạng nội bộ (nhưng được mọi người chia sẻ). "Giới hạn theo vai trò người dùng" nghĩa là bạn sẽ thấy nội dung tùy thuộc vào quyền hạn của bạn. Trong hầu hết trường hợp, tùy chọn này không nên được dùng, vì nó làm giảm hiệu năng chung của hệ thống.</ContentsVisibilityHelp>
     </help>
     <action>
-      <Save>Lưu</Save>
-      <Cancel>Hủy bỏ</Cancel>
+      <Save>#{word.save}</Save>
+      <Cancel>#{word.cancel}</Cancel>
       <delete>Xóa</delete>
     </action>
     <msg>

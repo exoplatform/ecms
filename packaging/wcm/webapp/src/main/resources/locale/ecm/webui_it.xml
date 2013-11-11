@@ -23,11 +23,11 @@
     <header>
       <categoryName>Nome categoria</categoryName>
       <categoryPath>Path Categoria</categoryPath>
-      <action>Azione</action>
+      <action>#{word.action}</action>
     </header>
     <action>
-      <SaveCategories>Salva</SaveCategories>
-      <Cancel>Annulla</Cancel>
+      <SaveCategories>#{word.save}</SaveCategories>
+      <Cancel>#{word.cancel}</Cancel>
     </action>
     <msg>
       <cannot-save>Categorie non sono state salvate.</cannot-save>

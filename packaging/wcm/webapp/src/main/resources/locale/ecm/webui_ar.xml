@@ -23,11 +23,11 @@
     <header>
       <categoryName>اسم الفئة</categoryName>
       <categoryPath>مسار الفئة</categoryPath>
-      <action>اجراء</action>
+      <action>#{word.action}</action>
     </header>
     <action>
-      <SaveCategories>احفظ</SaveCategories>
-      <Cancel>الغاء</Cancel>
+      <SaveCategories>#{word.save}</SaveCategories>
+      <Cancel>#{word.cancel}</Cancel>
     </action>
     <msg>
       <cannot-save>لم يتمّ حفظ الفئات.</cannot-save>

@@ -16,8 +16,8 @@
       <new-jcr-template>Fehler beim Erstellen einer neuen Vorlage.</new-jcr-template>
     </msg>
     <action>
-      <Save>Speichern</Save>
-      <Cancel>Abbrechen</Cancel>
+      <Save>#{word.save}</Save>
+      <Cancel>#{word.cancel}</Cancel>
     </action>
   </UIFCCForm>
 
@@ -46,7 +46,11 @@
       <do-select>Fehler beim Auswählen des Speicherortes.</do-select>
       </msg>
     <action>
+<<<<<<< HEAD
       <Save>Speichern</Save>
+=======
+      <Save>#{word.save}</Save>
+>>>>>>> c25a09c... de injection on 20131112-051452
     </action>
   </UIFCCConfig>
 
@@ -115,8 +119,13 @@
   <UIFCCActionForm>
     <title>Aktion hinzufügen/bearbeiten</title>
     <action>
+<<<<<<< HEAD
       <Save>Speichern</Save>
       <Close>Schließen</Close>
+=======
+      <Save>#{word.save}</Save>
+      <Close>#{word.close}</Close>
+>>>>>>> c25a09c... de injection on 20131112-051452
     </action>
     <msg>
       <repository-exception>Diese Aktion kann nicht gespeichert werden. Der angegebene Name darf keinen Index als sein letztes Element besitzen.</repository-exception>
@@ -173,7 +182,11 @@
 
   <UICategoriesSelector>
     <action>
+<<<<<<< HEAD
       <close>Schließen</close>
+=======
+      <close>#{word.close}</close>
+>>>>>>> c25a09c... de injection on 20131112-051452
     </action>
   </UICategoriesSelector>
 

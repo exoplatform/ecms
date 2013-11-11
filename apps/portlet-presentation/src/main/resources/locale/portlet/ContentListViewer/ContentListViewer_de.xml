@@ -81,8 +81,8 @@
       <ContentsVisibilityHelp>"Durch Authentifizierung eingeschränkt" filtert den Inhalt basierend auf der Authentifizierung. Wenn Sie sich nicht anmelden, sehen Sie nur öffentliche Inhalte. Wenn Sie eingeloggt sind, sehen Sie alle sichtbaren Inhalt von Intranetbenutzern (geteilt mit allen). "Eingeschränkt durch Benutzerrollen" bedeutet, dass Sie Inhalte entsprechend Ihrer Benutzerrolen sehen werden. In den meisten Fällen sollte diese Option nicht verwendet werden, da sie die Gesamtleistung reduziert.</ContentsVisibilityHelp>
     </help>
     <action>
-      <Save>Speichern</Save>
-      <Cancel>Abbrechen</Cancel>
+      <Save>#{word.save}</Save>
+      <Cancel>#{word.cancel}</Cancel>
       <delete>Löschen</delete>
     </action>
     <msg>

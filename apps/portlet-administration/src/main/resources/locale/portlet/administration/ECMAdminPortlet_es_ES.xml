@@ -154,7 +154,7 @@
   <UIActionForm>
     <title>Agregar una acción al árbol de categorías</title>
     <action>
-      <Save>Guardar</Save>
+      <Save>#{word.save}</Save>
     </action>
     <msg>
       <name-not-allowed>Nombre vacío o caracteres especiales no están permitidos en el nombre de la acción.</name-not-allowed>
@@ -326,7 +326,7 @@
       <metadataView>Información de metadatos</metadataView>
     </tab>
     <action>
-      <Cancel>Cerrar</Cancel>
+      <Cancel>#{word.close}</Cancel>
       <Back>#{palabra.atrás}</Back>
     </action>
   </UIMetadataView>
@@ -2317,7 +2317,7 @@
   </EditUnLockForm>  
   <UITabPane>
     <action>
-      <Close>Cerrar</Close>
+      <Close>#{word.close}</Close>
     </action>
     <title>
     <UILockHolderContainer>Administrar el bloqueo</UILockHolderContainer>
@@ -2328,7 +2328,7 @@
   <UIViewFormTabPane>
     <action>
       <AddTabForm>Añadir Ficha</AddTabForm>
-      <AddTab>Guardar</AddTab>
+      <AddTab>#{word.save}</AddTab>
       <BackViewForm>Atrás</BackViewForm>
     </action>
   </UIViewFormTabPane>
@@ -2394,7 +2394,7 @@
 
 <UITaxonomyTreeContainer>
 <action>
-<Cancel>Cerrar</Cancel>
+<Cancel>#{word.close}</Cancel>
 </action>
 </UITaxonomyTreeContainer>
 <UITaxonomyTreeMainForm>
@@ -2454,7 +2454,7 @@
   <UITagPermissionForm>
     <title>Añadir Permisos</title>
     <action>
-      <Save>Guardar</Save>
+      <Save>#{word.save}</Save>
       <Add>Añadir</Add>
     </action>
     <label>

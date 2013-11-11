@@ -39,11 +39,11 @@
   </UIPreferencesPopupWindows>
   <UISCVPreferences>
     <action>
-      <Save>保存</Save>
+      <Save>#{word.save}</Save>
       <Abort>中断</Abort>
-      <Cancel>キャンセル</Cancel>
+      <Cancel>#{word.cancel}</Cancel>
       <Print>印刷</Print>
-      <Close>閉じる</Close>
+      <Close>#{word.close}</Close>
     </action>
     <title>コンテンツ詳細設定</title>
     <label>

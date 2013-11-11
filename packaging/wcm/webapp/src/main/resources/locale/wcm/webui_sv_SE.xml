@@ -62,7 +62,7 @@
   <UIPageSelectorPanel>
     <header>
       <path>Sökväg</path>
-      <action>Åtgärd</action>
+      <action>#{word.action}</action>
     </header>
     <msg>
       <child-not-found>Hittade ingen sida.</child-not-found>
@@ -136,7 +136,7 @@
 
   <UISelectedContentGrid>
     <label>
-      <name>Namn</name>
+      <name>#{word.name}</name>
       <add>Lägg till</add>
       <delete>Ta bort</delete>
     </label>
@@ -148,14 +148,14 @@
 
   <UICLVContentSelectedGrid>
     <action>
-      <SaveCategories>Spara</SaveCategories>
+      <SaveCategories>#{word.save}</SaveCategories>
       <Cancel>Avbryt</Cancel>
     </action>
   </UICLVContentSelectedGrid>
 
   <UIContentBrowsePathSelector>
     <header>
-      <name>Namn</name>
+      <name>#{word.name}</name>
       <publicationstate>Publiceringsstatus</publicationstate>
       <action>Åtgärd</action>
     </header>
@@ -166,7 +166,7 @@
 
   <UIContentBrowsePathSelectorFolder>
     <header>
-      <name>Namn</name>
+      <name>#{word.name}</name>
       <publicationstate>Publiceringsstatus</publicationstate>
       <action>Åtgärd</action>
     </header>
@@ -234,7 +234,7 @@
 
   <UIContentNodeTypeSelector>
     <action>
-      <Save>Spara</Save>
+      <Save>#{word.save}</Save>
       <Cancel>Avbryt</Cancel>
     </action>
   </UIContentNodeTypeSelector>
@@ -276,7 +276,7 @@
       <UIEditableCheckboxInput>Redigera höger</UIEditableCheckboxInput>
     </label>
     <action>
-      <Save>Spara</Save>
+      <Save>#{word.save}</Save>
       <Clear>Rensa</Clear>
       <title>
         <Edit>Redigera</Edit>

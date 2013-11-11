@@ -39,11 +39,11 @@
   </UIPreferencesPopupWindows>
   <UISCVPreferences>
     <action>
-      <Save>Lưu</Save>
+      <Save>#{word.save}</Save>
       <Abort>Hủy bỏ</Abort>
-      <Cancel>Hủy bỏ</Cancel>
+      <Cancel>#{word.cancel}</Cancel>
       <Print>In</Print>
-      <Close>Đóng</Close>
+      <Close>#{word.close}</Close>
     </action>
     <title>Tùy chọn Nội dung Chi Tiết</title>
     <label>

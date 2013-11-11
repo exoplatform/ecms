@@ -16,8 +16,8 @@
       <new-jcr-template>An error occurred while creating a new template.</new-jcr-template>
     </msg>
     <action>
-      <Save>Save</Save>
-      <Cancel>Cancel</Cancel>
+      <Save>#{word.save}</Save>
+      <Cancel>#{word.cancel}</Cancel>
     </action>
   </UIFCCForm>
 
@@ -46,7 +46,7 @@
       <do-select>An error occurred while selecting the location.</do-select>
       </msg>
     <action>
-      <Save>Save</Save>
+      <Save>#{word.save}</Save>
     </action>
   </UIFCCConfig>
 
@@ -115,8 +115,8 @@
   <UIFCCActionForm>
     <title>Add/Edit Action</title>
     <action>
-      <Save>Save</Save>
-      <Close>Close</Close>
+      <Save>#{word.save}</Save>
+      <Close>#{word.close}</Close>
     </action>
     <msg>
       <repository-exception>Cannot save this action. The name provided must not have an index as its final element.</repository-exception>
@@ -173,7 +173,7 @@
 
   <UICategoriesSelector>
     <action>
-      <close>Close</close>
+      <close>#{word.close}</close>
     </action>
   </UICategoriesSelector>
 

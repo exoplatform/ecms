@@ -27,8 +27,8 @@
   <priority>Giltiga värden finns från 0,0 till 1,0</priority>
   </tip>   
     <action>
-      <Save>Spara</Save>
-      <Cancel>Rensa</Cancel>
+      <Save>#{word.save}</Save>
+      <Cancel>#{word.cancel}</Cancel>
     </action>
     <msg>
       <repository-exception>Ett oväntat fel uppstod när sidans metadata sparades.</repository-exception>

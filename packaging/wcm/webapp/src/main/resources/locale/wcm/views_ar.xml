@@ -39,11 +39,11 @@
       </label>
       <tooltip>
         <add-edit>إضافة/تغيير البيانات الوصفية</add-edit>
-        <cancel>الغاء</cancel>
+        <cancel>#{word.cancel}</cancel>
       </tooltip>
       <action>
         <add-edit>اضافة/تغيير</add-edit>
-        <cancel>الغاء</cancel>
+        <cancel>#{word.cancel}</cancel>
       </action>
     </view>
   </SiteMetadata>

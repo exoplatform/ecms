@@ -27,8 +27,8 @@
   <priority>有効な値の範囲は 0.0 から 1.0 です</priority>
   </tip>   
     <action>
-      <Save>保存</Save>
-      <Cancel>キャンセル</Cancel>
+      <Save>#{word.save}</Save>
+      <Cancel>#{word.cancel}</Cancel>
     </action>
     <msg>
       <repository-exception>ページメタデータの保存中に予期しないエラーが発生しました。</repository-exception>

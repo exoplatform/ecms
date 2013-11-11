@@ -8,7 +8,7 @@
   <RenameConnector>
     <label>
       <rename>Umbenennen</rename>
-      <cancel>Abbrechen</cancel>
+      <cancel>#{word.cancel}</cancel>
     </label>
     <msg>
       <renaming>Umbenennen...</renaming>

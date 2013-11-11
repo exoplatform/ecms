@@ -16,8 +16,8 @@
       <new-jcr-template>Một lỗi đã xảy ra khi đang tạo một mẫu thiết kế mới.</new-jcr-template>
     </msg>
     <action>
-      <Save>Lưu</Save>
-      <Cancel>Hủy bỏ</Cancel>
+      <Save>#{word.save}</Save>
+      <Cancel>#{word.cancel}</Cancel>
     </action>
   </UIFCCForm>
 
@@ -46,7 +46,7 @@
       <do-select>Một lỗi xảy ra trong khi lựa chọn vị trí.</do-select>
       </msg>
     <action>
-      <Save>Lưu</Save>
+      <Save>#{word.save}</Save>
     </action>
   </UIFCCConfig>
 
@@ -115,8 +115,8 @@
   <UIFCCActionForm>
     <title>Thêm/Sửa hành động</title>
     <action>
-      <Save>Lưu</Save>
-      <Close>Đóng</Close>
+      <Save>#{word.save}</Save>
+      <Close>#{word.close}</Close>
     </action>
     <msg>
       <repository-exception>Tên hành động có ký tự đặc biệt.</repository-exception>
@@ -173,7 +173,7 @@
 
   <UICategoriesSelector>
     <action>
-      <close>Đóng</close>
+      <close>#{word.close}</close>
     </action>
   </UICategoriesSelector>
 

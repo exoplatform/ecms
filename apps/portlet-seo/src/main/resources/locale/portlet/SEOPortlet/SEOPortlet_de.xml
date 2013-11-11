@@ -27,8 +27,8 @@
   <priority>Gültige Werte liegen zwischen 0.0 und 1.0</priority>
   </tip>   
     <action>
-      <Save>Speichern</Save>
-      <Cancel>Abbrechen</Cancel>
+      <Save>#{word.save}</Save>
+      <Cancel>#{word.cancel}</Cancel>
     </action>
     <msg>
       <repository-exception>Unerwarteter Fehler beim Speichern der Seitenmetadaten.</repository-exception>

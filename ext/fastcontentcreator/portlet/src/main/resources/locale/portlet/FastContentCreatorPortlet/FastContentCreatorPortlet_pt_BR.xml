@@ -16,8 +16,8 @@
       <new-jcr-template>Um erro ocorreu ao criar um novo modelo.</new-jcr-template>
     </msg>
     <action>
-      <Save>Salvar</Save>
-      <Cancel>Cancelar</Cancel>
+      <Save>#{word.save}</Save>
+      <Cancel>#{word.cancel}</Cancel>
     </action>
   </UIFCCForm>
 
@@ -46,7 +46,7 @@
       <do-select>Um erro ocorreu ao selecionar local.</do-select>
       </msg>
     <action>
-      <Save>Salvar</Save>
+      <Save>#{word.save}</Save>
     </action>
   </UIFCCConfig>
 
@@ -115,8 +115,8 @@
   <UIFCCActionForm>
     <title>Adicionar/Editar uma Ação</title>
     <action>
-      <Save>Salvar</Save>
-      <Close>Fechar</Close>
+      <Save>#{word.save}</Save>
+      <Close>#{word.close}</Close>
     </action>
     <msg>
       <repository-exception>Não foi possível salvar esta ação. O nome fornecido não deve conter um índice em seu elemento final.</repository-exception>
@@ -173,7 +173,7 @@
 
   <UICategoriesSelector>
     <action>
-      <close>Fechar</close>
+      <close>#{word.close}</close>
     </action>
   </UICategoriesSelector>
 

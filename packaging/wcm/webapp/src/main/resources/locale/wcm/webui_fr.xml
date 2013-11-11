@@ -62,7 +62,7 @@
   <UIPageSelectorPanel>
     <header>
       <path>Chemin</path>
-      <action>Action</action>
+      <action>#{word.action}</action>
     </header>
     <msg>
       <child-not-found>Aucune page trouvée</child-not-found>
@@ -136,7 +136,7 @@
 
   <UISelectedContentGrid>
     <label>
-      <name>Nom</name>
+      <name>#{word.name}</name>
       <add>Ajouter</add>
       <delete>Supprimer</delete>
     </label>
@@ -148,14 +148,14 @@
 
   <UICLVContentSelectedGrid>
     <action>
-      <SaveCategories>Enregistrer</SaveCategories>
+      <SaveCategories>#{word.save}</SaveCategories>
       <Cancel>Annuler</Cancel>
     </action>
   </UICLVContentSelectedGrid>
 
   <UIContentBrowsePathSelector>
     <header>
-      <name>Nom</name>
+      <name>#{word.name}</name>
       <publicationstate>Etat de Publication</publicationstate>
       <action>Action</action>
     </header>
@@ -166,7 +166,7 @@
 
   <UIContentBrowsePathSelectorFolder>
     <header>
-      <name>Nom</name>
+      <name>#{word.name}</name>
       <publicationstate>État de Publication</publicationstate>
       <action>Action</action>
     </header>
@@ -234,7 +234,7 @@
 
   <UIContentNodeTypeSelector>
     <action>
-      <Save>Enregistrer</Save>
+      <Save>#{word.save}</Save>
       <Cancel>Annuler</Cancel>
     </action>
   </UIContentNodeTypeSelector>
@@ -276,7 +276,7 @@
       <UIEditableCheckboxInput>Droit de modifier</UIEditableCheckboxInput>
     </label>
     <action>
-      <Save>Enregistrer</Save>
+      <Save>#{word.save}</Save>
       <Clear>Nettoyer</Clear>
       <title>
         <Edit>Modifier</Edit>

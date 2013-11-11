@@ -28,7 +28,7 @@
         <jsFile>デフォルトjS</jsFile>
         <Advanced>詳細</Advanced>
         <Summary>サマリー</Summary>
-        <name>名前</name>
+        <name>#{word.name}</name>
         <title>タイトル</title>
         <ContentCSS>CSS データ</ContentCSS>
         <hintCSS>You can specify the main style sheet for your web content. This style will override the style sheets defined at the site level and at the shared level.</hintCSS>
@@ -51,7 +51,7 @@
   <CSSFile>
     <dialog>
       <label>
-        <name>名前</name>
+        <name>#{word.name}</name>
         <active>アクティブ</active>
         <priority>優先度</priority>
         <content>CSS データ</content>
@@ -62,7 +62,7 @@
   <JSFile>
     <dialog>
       <label>
-        <name>名前</name>
+        <name>#{word.name}</name>
         <active>アクティブ</active>
         <priority>優先度</priority>
         <content>JS データ</content>
@@ -73,7 +73,7 @@
   <WebLink>
     <dialog>
       <label>
-        <name>名前</name>
+        <name>#{word.name}</name>
         <url>URL</url>
         <description>説明</description>
       </label>

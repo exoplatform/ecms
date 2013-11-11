@@ -154,7 +154,7 @@
   <UIActionForm>
     <title>Thêm hành động vào cây danh mục</title>
     <action>
-      <Save>Lưu</Save>
+      <Save>#{word.save}</Save>
     </action>
     <msg>
       <name-not-allowed>Không được để trống tên cũng như không được sử dụng các ký tự đặc biệt trong tên hành động.</name-not-allowed>
@@ -326,7 +326,7 @@
       <metadataView>Thông tin về Siêu dữ liệu</metadataView>
     </tab>
     <action>
-      <Cancel>Đóng</Cancel>
+      <Cancel>#{word.close}</Cancel>
       <Back>Quay lại</Back>
     </action>
   </UIMetadataView>
@@ -2317,7 +2317,7 @@
   </EditUnLockForm>  
   <UITabPane>
     <action>
-      <Close>Đóng</Close>
+      <Close>#{word.close}</Close>
     </action>
     <title>
     <UILockHolderContainer>Quản lý Khóa</UILockHolderContainer>
@@ -2328,7 +2328,7 @@
   <UIViewFormTabPane>
     <action>
       <AddTabForm>Thêm Tab</AddTabForm>
-      <AddTab>Lưu</AddTab>
+      <AddTab>#{word.save}</AddTab>
       <BackViewForm>Quay lại</BackViewForm>
     </action>
   </UIViewFormTabPane>
@@ -2394,7 +2394,7 @@
 
 <UITaxonomyTreeContainer>
 <action>
-<Cancel>Đóng</Cancel>
+<Cancel>#{word.close}</Cancel>
 </action>
 </UITaxonomyTreeContainer>
 <UITaxonomyTreeMainForm>
@@ -2454,7 +2454,7 @@
   <UITagPermissionForm>
     <title>Thêm quyền truy cập</title>
     <action>
-      <Save>Lưu</Save>
+      <Save>#{word.save}</Save>
       <Add>Thêm</Add>
     </action>
     <label>

@@ -62,7 +62,7 @@
   <UIPageSelectorPanel>
     <header>
       <path>Caminho</path>
-      <action>Ação</action>
+      <action>#{word.action}</action>
     </header>
     <msg>
       <child-not-found>Nenhuma página encontrada</child-not-found>
@@ -136,7 +136,7 @@
 
   <UISelectedContentGrid>
     <label>
-      <name>Nome</name>
+      <name>#{word.name}</name>
       <add>Adicionar</add>
       <delete>Excluir</delete>
     </label>
@@ -148,14 +148,14 @@
 
   <UICLVContentSelectedGrid>
     <action>
-      <SaveCategories>Salvar</SaveCategories>
+      <SaveCategories>#{word.save}</SaveCategories>
       <Cancel>Cancelar</Cancel>
     </action>
   </UICLVContentSelectedGrid>
 
   <UIContentBrowsePathSelector>
     <header>
-      <name>Nome</name>
+      <name>#{word.name}</name>
       <publicationstate>Estado de publicação</publicationstate>
       <action>Ação</action>
     </header>
@@ -166,7 +166,7 @@
 
   <UIContentBrowsePathSelectorFolder>
     <header>
-      <name>Nome</name>
+      <name>#{word.name}</name>
       <publicationstate>Estado de publicação</publicationstate>
       <action>Ação</action>
     </header>
@@ -234,7 +234,7 @@
 
   <UIContentNodeTypeSelector>
     <action>
-      <Save>Salvar</Save>
+      <Save>#{word.save}</Save>
       <Cancel>Cancelar</Cancel>
     </action>
   </UIContentNodeTypeSelector>
@@ -277,7 +277,7 @@ Não é possível pré-visualizar este conteúdo. Este modelo não é suportado<
       <UIEditableCheckboxInput>Direito de edição</UIEditableCheckboxInput>
     </label>
     <action>
-      <Save>Salvar</Save>
+      <Save>#{word.save}</Save>
       <Clear>Limpar</Clear>
       <title>
         <Edit>Editar</Edit>

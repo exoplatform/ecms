@@ -28,7 +28,7 @@
         <jsFile>js  الافتراضي</jsFile>
         <Advanced>متطور/ة</Advanced>
         <Summary>الملخص</Summary>
-        <name>الاسم</name>
+        <name>#{word.name}</name>
         <title>عنوان</title>
         <ContentCSS>بيانات الـCSS</ContentCSS>
         <hintCSS>يمكنك تحديد الأنماط الرئيسية لمحتوى الويب الخاص بك. وسوف يتجاوز هذا النمط الأنماط الخاصّة بهذا الموقع، وعلى الصعيد المشترك.</hintCSS>
@@ -51,7 +51,7 @@
   <CSSFile>
     <dialog>
       <label>
-        <name>الاسم</name>
+        <name>#{word.name}</name>
         <active>ناشط</active>
         <priority>الأولوية</priority>
         <content>بيانات الـCSS</content>
@@ -62,7 +62,7 @@
   <JSFile>
     <dialog>
       <label>
-        <name>الاسم</name>
+        <name>#{word.name}</name>
         <active>ناشط</active>
         <priority>الأولوية</priority>
         <content>بيانات الــ JS</content>
@@ -73,7 +73,7 @@
   <WebLink>
     <dialog>
       <label>
-        <name>الاسم</name>
+        <name>#{word.name}</name>
         <url>عنوان الموارد الموحد(URL)</url>
         <description>الوصف</description>
       </label>

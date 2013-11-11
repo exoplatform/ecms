@@ -2,7 +2,7 @@
 <bundle>
   <UIPresentationContainer>
     <title>
-      <QuickEdit>Edit in Content Explorer</QuickEdit>
+      <QuickEdit>在内容资源管理器中编辑</QuickEdit>
       <print>Print This Page</print>
       <FastPublish>Publish</FastPublish>
     </title>
@@ -28,8 +28,8 @@
   </UISingleContentViewerPortlet>
   <UISCVContextualRadioBox>
     <label>
-      <Enable>Enabled</Enable>
-      <Disable>Disabled</Disable>
+      <Enable>已启用</Enable>
+      <Disable>已禁用</Disable>
     </label>
   </UISCVContextualRadioBox>
   <UIPreferencesPopupWindows>
@@ -39,11 +39,11 @@
   </UIPreferencesPopupWindows>
   <UISCVPreferences>
     <action>
-      <Save>Save</Save>
+      <Save>#{word.save}</Save>
       <Abort>Abort</Abort>
-      <Cancel>Cancel</Cancel>
+      <Cancel>#{word.cancel}</Cancel>
       <Print>Print</Print>
-      <Close>Close</Close>
+      <Close>#{word.close}</Close>
     </action>
     <title>Content Detail Preferences</title>
     <label>
@@ -54,8 +54,8 @@
       <UISCVShowTitleConfigurationCheckBox>Show Title</UISCVShowTitleConfigurationCheckBox>
       <UISCVShowDateConfigurationCheckBox>Show Date</UISCVShowDateConfigurationCheckBox>
       <UISCVShowOptionBarConfigurationCheckBox>Show Option Bar</UISCVShowOptionBarConfigurationCheckBox>
-      <DisplaySettingBlock>Display Settings</DisplaySettingBlock>
-      <ContentPathBlock>Content Selection</ContentPathBlock>
+      <DisplaySettingBlock>显示设置</DisplaySettingBlock>
+      <ContentPathBlock>内容选择</ContentPathBlock>
       <UISCVConfigItemPathFormInputSet>Content Path</UISCVConfigItemPathFormInputSet>
     <UISCVContentPathConfigurationInputBox>Content Path</UISCVContentPathConfigurationInputBox>
       <Advance>Advanced</Advance>
@@ -63,7 +63,7 @@
       <UISCVContextualRadioBox>Contextual Content</UISCVContextualRadioBox>
       <UISCVParameterInputBox>by</UISCVParameterInputBox>
       <PrintSettingBlock>Print Settings</PrintSettingBlock>
-      <UISCVPrintPageParameter>with</UISCVPrintPageParameter>
+      <UISCVPrintPageParameter>与</UISCVPrintPageParameter>
       <UISCVConfigPrintPageFormInputSet>Show in Page</UISCVConfigPrintPageFormInputSet>
       <LockStatus>Lock</LockStatus>
       <CacheManagement>Content Visibility</CacheManagement>
@@ -89,7 +89,7 @@
   </UISCVPreferences>
   <UISCVConfigItemPathFormInputSet>
     <title>
-      <SelectFolderPath>Select Folder Path</SelectFolderPath>
+      <SelectFolderPath>选择文件夹路径</SelectFolderPath>
       <AddPath>Add Path</AddPath>
     </title>
   </UISCVConfigItemPathFormInputSet>
@@ -112,7 +112,7 @@
   </PublicationStates>
   <UISCVCacheRadioBox>
     <label>
-      <Enable>Restricted by Authentication</Enable>
+      <Enable>通过身份验证的限制</Enable>
       <Disable>Restricted by User roles</Disable>
     </label>
   </UISCVCacheRadioBox>

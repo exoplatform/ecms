@@ -520,7 +520,7 @@
       <Rename>Ändra Namn</Rename>
       <Cut>Klipp ur</Cut>
       <Copy>Kopiera</Copy>
-      <Save>Spara</Save>
+      <Save>#{word.save}</Save>
       <RemoveNode>Ta bort</RemoveNode>
       <Checkin>Checka in</Checkin>
       <Checkout>Checka ut</Checkout>
@@ -570,7 +570,7 @@
       <Copy>Kopiera</Copy>
       <Rename>Ändra Namn</Rename>
       <Delete>Ta bort</Delete>
-      <Save>Spara</Save>
+      <Save>#{word.save}</Save>
       <Cut>Klipp ur</Cut>
       <Paste>Klistra in</Paste>
       <CheckOut>Checka ut</CheckOut>
@@ -609,7 +609,7 @@
       <path>Sökväg</path>
     </header>
     <action>
-      <Close>Stäng</Close>
+      <Close>#{word.close}</Close>
     </action>
   </UIReferencesList>
   <!--
@@ -705,7 +705,7 @@
     </label>
     <action>
       <Save>#{word.save}</Save>
-      <Cancel>Avbryt</Cancel>
+      <Cancel>#{word.cancel}</Cancel>
       <Reset>Återställ</Reset>
     </action>
     <msg>
@@ -831,7 +831,7 @@
       <node-def-dnt>DNT</node-def-dnt>
     </label>
     <action>
-      <Close>Stäng</Close>
+      <Close>#{word.close}</Close>
     </action>
   </UINodeTypeInfo>
   <!--
@@ -846,7 +846,7 @@
       </label>
     </tab>
     <action>
-      <Close>Stäng</Close>
+      <Close>#{word.close}</Close>
     </action>
   </UICategoryManagerSearch>
   <UIContentNameSearch>
@@ -1075,7 +1075,7 @@
     </msg>
     <button>
       <label-Add>Lägg till</label-Add>
-      <label-Cancel>Avbryt</label-Cancel>
+      <label-Cancel>#{word.cancel}</label-Cancel>
     </button>
   </UIConstraintsForm>
   <UIConstraintForm>
@@ -1122,8 +1122,8 @@
   </SaveQueryPopup>
   <UINodeTypeSelectForm>
     <action>
-      <Cancel>Avbryt</Cancel>
-      <Save>Spara</Save>
+      <Cancel>#{word.cancel}</Cancel>
+      <Save>#{word.save}</Save>
     </action>
   </UINodeTypeSelectForm>
   <UICompareExactlyForm>
@@ -1136,7 +1136,7 @@
     </title>
     <button>
       <label-Select>Välj</label-Select>
-      <label-Cancel>Avbryt</label-Cancel>
+      <label-Cancel>#{word.cancel}</label-Cancel>
     </button>
     <msg>
       <not-result-found>Inga resultat hittades.</not-result-found>
@@ -1210,7 +1210,7 @@
     <pLabel>Egenskaper:</pLabel>
     <action>
       <Add>Lägg till</Add>
-      <Cancel>Avbryt</Cancel>
+      <Cancel>#{word.cancel}</Cancel>
     </action>
   </UISelectPropertyForm>
   <ExactlyFormPopup>
@@ -1334,7 +1334,7 @@
       <invalid-item-state>Du kan inte återställa denna version, antingen eftersom ett eller flera objekt var borttagna eller flyttade under en annan session.</invalid-item-state>
     </msg>
     <action>
-      <close>Stäng</close>
+      <close>#{word.close}</close>
       <close-view>Stäng vy</close-view>
     </action>
   </UIVersionInfo>
@@ -1353,7 +1353,7 @@
       <e_4>Egenskap adderad</e_4>
       <e_16>Egenskapen ändrad</e_16>
       <e_8>Egenskapen borttagen</e_8>
-      <e_32>Spara</e_32>
+      <e_32>#{word.save}</e_32>
       <e_64>Flytta</e_64>
       <e_128>Kopiera</e_128>
       <e_256>Addera Mixin</e_256>
@@ -1392,7 +1392,7 @@
       <note>Versionshantering har inte aktiverats för den här noden.</note>
       <question>Är du säker på att du vill aktivera den?</question>
       <button-active>Aktivera</button-active>
-      <button-cancel>Avbryt</button-cancel>
+      <button-cancel>#{word.cancel}</button-cancel>
     </label>
     <msg>
       <access-denied>Du har inte behörighet att aktivera versionshantering på den här noden</access-denied>
@@ -1410,7 +1410,7 @@
       <action>Åtgärd</action>
     </header>
     <action>
-      <Cancel>Stäng</Cancel>
+      <Cancel>#{word.close}</Cancel>
     </action>
     <grid>
       <msg>
@@ -1434,7 +1434,7 @@
     </label>
     <action>
       <activate>Aktivera</activate>
-      <cancel>Avbryt</cancel>
+      <cancel>#{word.cancel}</cancel>
     </action>
   </UIActivateAuditing>
   <!--
@@ -1489,7 +1489,7 @@
     </label>
     <action>
       <Save>#{word.save}</Save>
-      <Cancel>Avbryt</Cancel>
+      <Cancel>#{word.cancel}</Cancel>
     </action>
     <title>Lägg till etikett</title>
     <msg>
@@ -1544,7 +1544,7 @@
   -->
   <UICategoryManager>
     <action>
-      <Close>Stäng</Close>
+      <Close>#{word.close}</Close>
     </action>
     <tab>
       <label>
@@ -1589,7 +1589,7 @@
   -->
   <UIRelationManager>
     <action>
-      <Close>Stäng</Close>
+      <Close>#{word.close}</Close>
     </action>
     <tab>
       <label>
@@ -1665,7 +1665,7 @@
   <UIDocumentForm>
     <title>Lägg till nytt dokument</title>
     <action>
-      <Save>Spara</Save>
+      <Save>#{word.save}</Save>
       <SaveAndClose>Spara &amp; Stäng</SaveAndClose>
       <ChangeType>Ändra innehållstyp</ChangeType>
       <Fullscreen>Helskärm</Fullscreen>
@@ -1983,9 +1983,9 @@
       <stateName>Läges namn</stateName>
     </label>
     <action>
-      <Save>Spara</Save>
+      <Save>#{word.save}</Save>
       <UnsubcriberLifeCycle>Avsluta prenumeration</UnsubcriberLifeCycle>
-      <Cancel>Avbryt</Cancel>
+      <Cancel>#{word.cancel}</Cancel>
     </action>
   </UIPublicationForm>
   <!--
@@ -2079,7 +2079,7 @@
       <visibility>Synlighet</visibility>
     </header>
     <action>
-      <Close>Stäng</Close>
+      <Close>#{word.close}</Close>
     </action>
   </UIPublicationLogList>
   <!--
@@ -2142,7 +2142,7 @@
   -->
   <UICategoriesSelector>
     <action>
-      <close>Stäng</close>
+      <close>#{word.close}</close>
     </action>
   </UICategoriesSelector>
   <!--
@@ -2173,8 +2173,8 @@
     <title>Redigera fil utforskare</title>
     <action>
       <Edit>Redigera</Edit>
-      <Save>Spara</Save>
-      <Cancel>Avbryt</Cancel>
+      <Save>#{word.save}</Save>
+      <Cancel>#{word.cancel}</Cancel>
     </action>
     <label>
       <uploadFileSizeLimitMB>Storleksgränsen för den överförda filen (MB)</uploadFileSizeLimitMB>
@@ -2380,7 +2380,7 @@
 
   <UISimpleCategoryManager>
     <action>
-      <Close>Stäng</Close>
+      <Close>#{word.close}</Close>
     </action>
   </UISimpleCategoryManager>
   <UIPopupWindow>
@@ -2710,8 +2710,8 @@
       <name>Kategorinamn</name>
     </label>
     <action>
-      <Save>Spara</Save>
-      <Cancel>Avbryt</Cancel>
+      <Save>#{word.save}</Save>
+      <Cancel>#{word.cancel}</Cancel>
     </action>
   </UICategoryForm>
   <UIPopupWindow>
@@ -2865,8 +2865,8 @@
 
   <UISelectRestorePath>
     <action>
-      <Save>Spara</Save>
-      <Cancel>Avbryt</Cancel>
+      <Save>#{word.save}</Save>
+      <Cancel>#{word.cancel}</Cancel>
     </action>
     <label>
       <formInput>Den tidigare sökvägen är borta. Välj en ny.</formInput>
@@ -2908,7 +2908,7 @@
 
 <UIPublicationPanel>
     <button>
-      <Close>Stäng</Close>
+      <Close>#{word.close}</Close>
     </button>
     <revisions>
       <version>Revideringar</version>
@@ -3114,7 +3114,7 @@
     <MaxFileSize>Maximal filstorlek är</MaxFileSize>
     <InvalidCharacters>Ogiltiga tecken kommer att ändras av "-"</InvalidCharacters>
     <DropFileMessage>Släpp dina filer här i den aktuella mappen</DropFileMessage>
-    <Close>Stäng</Close>
+    <Close>#{word.close}</Close>
     <in>in</in>
     <MaxFileSizeAlert>Filstorleken överskrider storleksbegränsningen</MaxFileSizeAlert>
     <Waiting>Väntar på</Waiting>
@@ -3124,7 +3124,7 @@
     <Keep>Behåll båda</Keep>
     <Replace>Ersätt</Replace>
     <Canceled>Avbruten</Canceled>
-    <Cancel>Avbryt</Cancel>
+    <Cancel>#{word.cancel}</Cancel>
     <AbortAllConfirmation>Vill du avbryta alla filer som är i process?</AbortAllConfirmation>
   </label>
   </UIMultiUpload>

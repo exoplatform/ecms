@@ -16,8 +16,8 @@
       <new-jcr-template>新しい newJCRTemplateResourceResolver を作成する際にエラー</new-jcr-template>
     </msg>
     <action>
-      <Save>保存</Save>
-      <Cancel>キャンセル</Cancel>
+      <Save>#{word.save}</Save>
+      <Cancel>#{word.cancel}</Cancel>
     </action>
   </UIFCCForm>
 
@@ -46,7 +46,7 @@
       <do-select>選択の際にエラー</do-select>
       </msg>
     <action>
-      <Save>保存</Save>
+      <Save>#{word.save}</Save>
     </action>
   </UIFCCConfig>
 
@@ -115,8 +115,8 @@
   <UIFCCActionForm>
     <title>アクションの追加/編集</title>
     <action>
-      <Save>保存</Save>
-      <Close>閉じる</Close>
+      <Save>#{word.save}</Save>
+      <Close>#{word.close}</Close>
     </action>
     <msg>
       <repository-exception>アクションを保存できません。名前の最後の要素にインデックスを付けないでください。</repository-exception>
@@ -173,7 +173,7 @@
 
   <UICategoriesSelector>
     <action>
-      <close>閉じる</close>
+      <close>#{word.close}</close>
     </action>
   </UICategoriesSelector>
 

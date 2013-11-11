@@ -27,7 +27,7 @@
       <folder>Cartella</folder>
 </value>
 <action>
-<Close>Chiudi</Close>
+<Close>#{word.close}</Close>
 </action>
 </UIViewInfoContainer>
 </bundle>
