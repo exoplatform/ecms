@@ -22,11 +22,14 @@ import java.security.AccessControlException;
 import java.util.Map;
 
 import javax.jcr.Node;
+import javax.jcr.PathNotFoundException;
 
 import org.exoplatform.ecm.webui.utils.Utils;
 import org.exoplatform.portal.webui.util.Util;
 import org.exoplatform.services.cms.templates.TemplateService;
 import org.exoplatform.services.wcm.utils.WCMCoreUtils;
+import org.exoplatform.services.log.ExoLogger;
+import org.exoplatform.services.log.Log;
 import org.exoplatform.webui.ext.filter.UIExtensionAbstractFilter;
 import org.exoplatform.webui.ext.filter.UIExtensionFilterType;
 
@@ -38,6 +41,7 @@ import org.exoplatform.webui.ext.filter.UIExtensionFilterType;
  * Aug 6, 2009
  */
 public class IsEditableFilter extends UIExtensionAbstractFilter {
+  private static final Log LOG = ExoLogger.getLogger(IsEditableFilter.class.getName());
 
   public IsEditableFilter() {
     this("UIActionBar.msg.not-support");
@@ -64,6 +68,12 @@ public class IsEditableFilter extends UIExtensionAbstractFilter {
       TemplateService templateService = WCMCoreUtils.getService(TemplateService.class);
       templateService.getTemplatePathByUser(true, nodeType, userName);
     }catch(AccessControlException e){
+      return false;
+    }catch(PathNotFoundException e){
+      LOG.warn("Template not found for " + nodeType);
+      return false;
+    }catch(Exception e){
+      LOG.error("Exception when getting " + nodeType, e);
       return false;
     }
     return true;
