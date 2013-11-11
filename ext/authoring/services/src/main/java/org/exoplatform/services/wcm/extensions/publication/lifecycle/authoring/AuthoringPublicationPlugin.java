@@ -187,6 +187,9 @@ public class AuthoringPublicationPlugin extends StageAndVersionPublicationPlugin
       // change base version to unpublished state
       node.setProperty(StageAndVersionPublicationConstant.CURRENT_STATE,
                        PublicationDefaultStates.UNPUBLISHED);
+      if(node.hasProperty("exo:titlePublished")){
+        node.getProperty("exo:titlePublished").remove();
+      }
       addRevisionData(node, revisionsMap.values());
     } else if (PublicationDefaultStates.OBSOLETE.equals(newState)) {
       node.setProperty(StageAndVersionPublicationConstant.CURRENT_STATE, newState);
@@ -202,6 +205,9 @@ public class AuthoringPublicationPlugin extends StageAndVersionPublicationPlugin
         versionData.setState(newState);
       } else {
         versionData = new VersionData(selectedRevision.getUUID(), newState, userId);
+      }
+      if(node.hasProperty("exo:titlePublished")){
+        node.getProperty("exo:titlePublished").remove();
       }
       revisionsMap.put(selectedRevision.getUUID(), versionData);
       addRevisionData(node, revisionsMap.values());
