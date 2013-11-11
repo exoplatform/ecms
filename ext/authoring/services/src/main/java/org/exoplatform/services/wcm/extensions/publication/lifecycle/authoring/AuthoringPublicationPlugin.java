@@ -173,7 +173,18 @@ public class AuthoringPublicationPlugin extends StageAndVersionPublicationPlugin
                                   userId,
                                   new GregorianCalendar(),
                                   AuthoringPublicationConstant.CHANGE_TO_UNPUBLISHED);
-      VersionData versionData = revisionsMap.get(selectedRevision.getUUID());
+      
+      
+      VersionData selectedVersionData = revisionsMap.get(selectedRevision.getUUID());
+      if (selectedVersionData != null) {
+        selectedVersionData.setAuthor(userId);
+        selectedVersionData.setState(PublicationDefaultStates.UNPUBLISHED);
+      } else {
+        selectedVersionData = new VersionData(selectedRevision.getUUID(),
+                                      PublicationDefaultStates.UNPUBLISHED,
+                                      userId);
+      }
+      VersionData versionData = revisionsMap.get(node.getUUID());
       if (versionData != null) {
         versionData.setAuthor(userId);
         versionData.setState(PublicationDefaultStates.UNPUBLISHED);
@@ -182,11 +193,23 @@ public class AuthoringPublicationPlugin extends StageAndVersionPublicationPlugin
                                       PublicationDefaultStates.UNPUBLISHED,
                                       userId);
       }
-      revisionsMap.put(selectedRevision.getUUID(), versionData);
+      revisionsMap.put(node.getUUID(), versionData);
+      revisionsMap.put(selectedRevision.getUUID(), selectedVersionData);
+      
       addLog(node, versionLog);
       // change base version to unpublished state
       node.setProperty(StageAndVersionPublicationConstant.CURRENT_STATE,
                        PublicationDefaultStates.UNPUBLISHED);
+      Value value = valueFactory.createValue(selectedRevision);
+      Value liveRevision = null;
+      if (node.hasProperty(StageAndVersionPublicationConstant.LIVE_REVISION_PROP)) {
+        liveRevision = node.getProperty(StageAndVersionPublicationConstant.LIVE_REVISION_PROP)
+                               .getValue();
+      }
+      if (liveRevision != null && value.getString().equals(liveRevision.getString())) {
+        node.setProperty(StageAndVersionPublicationConstant.LIVE_REVISION_PROP,
+                         valueFactory.createValue(""));
+      }
       addRevisionData(node, revisionsMap.values());
     } else if (PublicationDefaultStates.OBSOLETE.equals(newState)) {
       node.setProperty(StageAndVersionPublicationConstant.CURRENT_STATE, newState);
