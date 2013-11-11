@@ -156,10 +156,10 @@
       </label>
       <action>
         <add-edit>追加/編集</add-edit>
-        <cancel>キャンセル</cancel>
+        <cancel>#{word.cancel}</cancel>
       </action>
       <tooltip>
-        <cancel>キャンセル</cancel>
+        <cancel>#{word.cancel}</cancel>
         <add-edit>プロパティの追加/編集</add-edit>
       </tooltip>
     </view>

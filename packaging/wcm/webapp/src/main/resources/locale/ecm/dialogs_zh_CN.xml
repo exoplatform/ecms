@@ -28,7 +28,7 @@
       <contentHtml>#{word.content}</contentHtml>
       <content>#{word.content}</content>
       <contentPlain>#{word.content}</contentPlain>
-      <name>Name</name>
+      <name>姓名</name>
     <categories>Categories</categories>
     </label>
   </UIDocumentForm>
@@ -39,8 +39,8 @@
   <HtmlFile>
     <dialog>
       <label>
-        <name>Name</name>
-        <content>Content</content>
+        <name>姓名</name>
+        <content>内容</content>
       </label>
     </dialog>
   </HtmlFile>
@@ -214,7 +214,7 @@
   <Relationable>
     <dialog>
       <label>
-        <relation>Relation</relation>
+        <relation>关系</relation>
       </label>
     </dialog>
   </Relationable>
@@ -224,7 +224,7 @@
   <RssEnable>
     <dialog>
       <label>
-        <title>Title</title>
+        <title>标题</title>
         <summary>#{word.summary}</summary>
       </label>
     </dialog>
@@ -252,10 +252,10 @@
   <ResouceContainer>
     <dialog>
       <label>
-        <name>Name</name>
+        <name>姓名</name>
         <autoload>Auto Load</autoload>
         <minetype>MIME Type</minetype>
-        <content>Content</content>
+        <content>内容</content>
       </label>
     </dialog>
   </ResouceContainer>
@@ -286,7 +286,7 @@
     <dialog>
       <label>
         <id>Id</id>
-        <name>Name</name>
+        <name>姓名</name>
         <lifecycle>Lifecycle</lifecycle>
         <homePath>Home Path</homePath>
         <targetWorkspace>Target Workspace</targetWorkspace>

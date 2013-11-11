@@ -62,7 +62,7 @@
   <UIPageSelectorPanel>
     <header>
       <path>Yol</path>
-      <action>Eylem</action>
+      <action>#{word.action}</action>
     </header>
     <msg>
       <child-not-found>Sayfa bulunamadı.</child-not-found>
@@ -136,7 +136,7 @@
 
   <UISelectedContentGrid>
     <label>
-      <name>Adı</name>
+      <name>#{word.name}</name>
       <add>Ekle</add>
       <delete>Sil</delete>
     </label>
@@ -148,14 +148,14 @@
 
   <UICLVContentSelectedGrid>
     <action>
-      <SaveCategories>Kaydet</SaveCategories>
+      <SaveCategories>#{word.save}</SaveCategories>
       <Cancel>İptal</Cancel>
     </action>
   </UICLVContentSelectedGrid>
 
   <UIContentBrowsePathSelector>
     <header>
-      <name>Adı</name>
+      <name>#{word.name}</name>
       <publicationstate>Yayın Durumu</publicationstate>
       <action>Eylem</action>
     </header>
@@ -166,7 +166,7 @@
 
   <UIContentBrowsePathSelectorFolder>
     <header>
-      <name>Adı</name>
+      <name>#{word.name}</name>
       <publicationstate>Yayın Durumu</publicationstate>
       <action>Eylem</action>
     </header>
@@ -234,7 +234,7 @@
 
   <UIContentNodeTypeSelector>
     <action>
-      <Save>Kaydet</Save>
+      <Save>#{word.save}</Save>
       <Cancel>İptal</Cancel>
     </action>
   </UIContentNodeTypeSelector>
@@ -276,7 +276,7 @@
       <UIEditableCheckboxInput>Düzenleme Hakları</UIEditableCheckboxInput>
     </label>
     <action>
-      <Save>Kaydet</Save>
+      <Save>#{word.save}</Save>
       <Clear>Temizle</Clear>
       <title>
         <Edit>Düzenle</Edit>

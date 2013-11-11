@@ -520,7 +520,7 @@
       <Rename>Yeniden Adlandır</Rename>
       <Cut>Kes</Cut>
       <Copy>Kopyala</Copy>
-      <Save>Kaydet</Save>
+      <Save>#{word.save}</Save>
       <RemoveNode>Sil</RemoveNode>
       <Checkin>Kayıt Yapıldı</Checkin>
       <Checkout>Kayıt Kapatıldı</Checkout>
@@ -570,7 +570,7 @@
       <Copy>Kopyala</Copy>
       <Rename>Yeniden Adlandır</Rename>
       <Delete>Sil</Delete>
-      <Save>Kaydet</Save>
+      <Save>#{word.save}</Save>
       <Cut>Kes</Cut>
       <Paste>Yapıştır</Paste>
       <CheckOut>Kaydını Kapat</CheckOut>
@@ -609,7 +609,7 @@
       <path>Yol</path>
     </header>
     <action>
-      <Close>Kapat</Close>
+      <Close>#{word.close}</Close>
     </action>
   </UIReferencesList>
   <!--
@@ -705,7 +705,7 @@
     </label>
     <action>
       <Save>#{word.save}</Save>
-      <Cancel>İptal</Cancel>
+      <Cancel>#{word.cancel}</Cancel>
       <Reset>Sıfırla</Reset>
     </action>
     <msg>
@@ -831,7 +831,7 @@
       <node-def-dnt>DNT</node-def-dnt>
     </label>
     <action>
-      <Close>Kapat</Close>
+      <Close>#{word.close}</Close>
     </action>
   </UINodeTypeInfo>
   <!--
@@ -846,7 +846,7 @@
       </label>
     </tab>
     <action>
-      <Close>Kapat</Close>
+      <Close>#{word.close}</Close>
     </action>
   </UICategoryManagerSearch>
   <UIContentNameSearch>
@@ -1075,7 +1075,7 @@
     </msg>
     <button>
       <label-Add>Ekle</label-Add>
-      <label-Cancel>İptal</label-Cancel>
+      <label-Cancel>#{word.cancel}</label-Cancel>
     </button>
   </UIConstraintsForm>
   <UIConstraintForm>
@@ -1122,8 +1122,8 @@
   </SaveQueryPopup>
   <UINodeTypeSelectForm>
     <action>
-      <Cancel>İptal</Cancel>
-      <Save>Kaydet</Save>
+      <Cancel>#{word.cancel}</Cancel>
+      <Save>#{word.save}</Save>
     </action>
   </UINodeTypeSelectForm>
   <UICompareExactlyForm>
@@ -1136,7 +1136,7 @@
     </title>
     <button>
       <label-Select>Seçin</label-Select>
-      <label-Cancel>İptal</label-Cancel>
+      <label-Cancel>#{word.cancel}</label-Cancel>
     </button>
     <msg>
       <not-result-found>Sonuç bulunamadı.</not-result-found>
@@ -1210,7 +1210,7 @@
     <pLabel>Özellikler:</pLabel>
     <action>
       <Add>Ekle</Add>
-      <Cancel>İptal</Cancel>
+      <Cancel>#{word.cancel}</Cancel>
     </action>
   </UISelectPropertyForm>
   <ExactlyFormPopup>
@@ -1334,7 +1334,7 @@
       <invalid-item-state>Bu sürüm geri yüklenemiyor çünkü ya bir veya daha fazla öğe silinmiş veya başka bir oturum sırasında taşındı.</invalid-item-state>
     </msg>
     <action>
-      <close>Kapat</close>
+      <close>#{word.close}</close>
       <close-view>Görünümü Kapat</close-view>
     </action>
   </UIVersionInfo>
@@ -1353,7 +1353,7 @@
       <e_4>Özelliği Eklendi</e_4>
       <e_16>Özellik Değiştirildi</e_16>
       <e_8>Özellik Kaldırıldı</e_8>
-      <e_32>Kaydet</e_32>
+      <e_32>#{word.save}</e_32>
       <e_64>Taşı</e_64>
       <e_128>Kopyala</e_128>
       <e_256>Mixin Ekle</e_256>
@@ -1392,7 +1392,7 @@
       <note>Bu düğüm için sürümleme etkinleştirilmedi.</note>
       <question>Etkinleştirmek istediğinizden emin misiniz?</question>
       <button-active>Etkinleştir</button-active>
-      <button-cancel>İptal</button-cancel>
+      <button-cancel>#{word.cancel}</button-cancel>
     </label>
     <msg>
       <access-denied>Sürümü etkinleştirme yetkiniz bulunmamaktadır</access-denied>
@@ -1410,7 +1410,7 @@
       <action>Eylem</action>
     </header>
     <action>
-      <Cancel>Kapat</Cancel>
+      <Cancel>#{word.close}</Cancel>
     </action>
     <grid>
       <msg>
@@ -1434,7 +1434,7 @@
     </label>
     <action>
       <activate>Etkinleştir</activate>
-      <cancel>İptal</cancel>
+      <cancel>#{word.cancel}</cancel>
     </action>
   </UIActivateAuditing>
   <!--
@@ -1489,7 +1489,7 @@
     </label>
     <action>
       <Save>#{word.save}</Save>
-      <Cancel>İptal</Cancel>
+      <Cancel>#{word.cancel}</Cancel>
     </action>
     <title>Etiket Ekle</title>
     <msg>
@@ -1544,7 +1544,7 @@
   -->
   <UICategoryManager>
     <action>
-      <Close>Kapat</Close>
+      <Close>#{word.close}</Close>
     </action>
     <tab>
       <label>
@@ -1589,7 +1589,7 @@
   -->
   <UIRelationManager>
     <action>
-      <Close>Kapat</Close>
+      <Close>#{word.close}</Close>
     </action>
     <tab>
       <label>
@@ -1665,7 +1665,7 @@
   <UIDocumentForm>
     <title>Yeni Belge Ekle</title>
     <action>
-      <Save>Kaydet</Save>
+      <Save>#{word.save}</Save>
       <SaveAndClose>Kaydet &amp; Kapat</SaveAndClose>
       <ChangeType>İçerik Türünü Değiştir</ChangeType>
       <Fullscreen>Tam Ekran</Fullscreen>
@@ -1983,9 +1983,9 @@
       <stateName>Durum Adı</stateName>
     </label>
     <action>
-      <Save>Kaydet</Save>
+      <Save>#{word.save}</Save>
       <UnsubcriberLifeCycle>Unsubscriber</UnsubcriberLifeCycle>
-      <Cancel>İptal</Cancel>
+      <Cancel>#{word.cancel}</Cancel>
     </action>
   </UIPublicationForm>
   <!--
@@ -2079,7 +2079,7 @@
       <visibility>Görünürlük</visibility>
     </header>
     <action>
-      <Close>Kapat</Close>
+      <Close>#{word.close}</Close>
     </action>
   </UIPublicationLogList>
   <!--
@@ -2142,7 +2142,7 @@
   -->
   <UICategoriesSelector>
     <action>
-      <close>Kapat</close>
+      <close>#{word.close}</close>
     </action>
   </UICategoriesSelector>
   <!--
@@ -2173,8 +2173,8 @@
     <title>Dosya Gezgini Düzenle</title>
     <action>
       <Edit>Düzenle</Edit>
-      <Save>Kaydet</Save>
-      <Cancel>İptal</Cancel>
+      <Save>#{word.save}</Save>
+      <Cancel>#{word.cancel}</Cancel>
     </action>
     <label>
       <uploadFileSizeLimitMB>Yüklenen dosya büyüklüğü sınırı (MB)</uploadFileSizeLimitMB>
@@ -2380,7 +2380,7 @@
 
   <UISimpleCategoryManager>
     <action>
-      <Close>Kapat</Close>
+      <Close>#{word.close}</Close>
     </action>
   </UISimpleCategoryManager>
   <UIPopupWindow>
@@ -2710,8 +2710,8 @@
       <name>Kategori Adı</name>
     </label>
     <action>
-      <Save>Kaydet</Save>
-      <Cancel>İptal</Cancel>
+      <Save>#{word.save}</Save>
+      <Cancel>#{word.cancel}</Cancel>
     </action>
   </UICategoryForm>
   <UIPopupWindow>
@@ -2865,8 +2865,8 @@
 
   <UISelectRestorePath>
     <action>
-      <Save>Kaydet</Save>
-      <Cancel>İptal</Cancel>
+      <Save>#{word.save}</Save>
+      <Cancel>#{word.cancel}</Cancel>
     </action>
     <label>
       <formInput>Önceki yolu kaybetti. Lütfen yeni bir tane seçin.</formInput>
@@ -2908,7 +2908,7 @@
 
   <UIPublicationPanel>
     <button>
-      <Close>Kapat</Close>
+      <Close>#{word.close}</Close>
     </button>
     <revisions>
       <version>Düzeltmeler</version>
@@ -3114,7 +3114,7 @@
     <MaxFileSize>En büyük dosya boyutu</MaxFileSize>
     <InvalidCharacters>Geçersiz karakterler tarafından değiştirildi '-'</InvalidCharacters>
     <DropFileMessage>Geçerli klasördeki dosyalarınızı buraya bırakın</DropFileMessage>
-    <Close>Kapat</Close>
+    <Close>#{word.close}</Close>
     <in>içinde</in>
     <MaxFileSizeAlert>Dosya boyutu boyut sınırını aşıyor</MaxFileSizeAlert>
     <Waiting>Bekleyen</Waiting>
@@ -3124,7 +3124,7 @@
     <Keep>Her ikisinide koru</Keep>
     <Replace>Değiştir</Replace>
     <Canceled>İptal edildi</Canceled>
-    <Cancel>İptal</Cancel>
+    <Cancel>#{word.cancel}</Cancel>
     <AbortAllConfirmation>Devam eden tüm dosyaları durdurmak istiyor musunuz?</AbortAllConfirmation>
   </label>
   </UIMultiUpload>

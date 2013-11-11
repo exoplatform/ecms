@@ -23,11 +23,11 @@
     <header>
       <categoryName>Tên Danh mục</categoryName>
       <categoryPath>Đường dẫn Danh mục</categoryPath>
-      <action>Hành động</action>
+      <action>#{word.action}</action>
     </header>
     <action>
-      <SaveCategories>Lưu</SaveCategories>
-      <Cancel>Hủy bỏ</Cancel>
+      <SaveCategories>#{word.save}</SaveCategories>
+      <Cancel>#{word.cancel}</Cancel>
     </action>
     <msg>
       <cannot-save>Danh mục không được lưu.</cannot-save>

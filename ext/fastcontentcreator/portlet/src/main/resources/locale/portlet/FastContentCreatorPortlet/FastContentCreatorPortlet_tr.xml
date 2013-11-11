@@ -16,8 +16,8 @@
       <new-jcr-template>Yeni şablon oluştururken bir hata oluştu.</new-jcr-template>
     </msg>
     <action>
-      <Save>Kaydet</Save>
-      <Cancel>İptal</Cancel>
+      <Save>#{word.save}</Save>
+      <Cancel>#{word.cancel}</Cancel>
     </action>
   </UIFCCForm>
 
@@ -46,7 +46,7 @@
       <do-select>Yer seçim sırasında bir hata oluştu.</do-select>
       </msg>
     <action>
-      <Save>Kaydet</Save>
+      <Save>#{word.save}</Save>
     </action>
   </UIFCCConfig>
 
@@ -115,8 +115,8 @@
   <UIFCCActionForm>
     <title>Eylem Ekle/Düzenle</title>
     <action>
-      <Save>Kaydet</Save>
-      <Close>Kapat</Close>
+      <Save>#{word.save}</Save>
+      <Close>#{word.close}</Close>
     </action>
     <msg>
       <repository-exception>Bu eylem kaydedemezsiniz. Verilen adı, onun son öğesi bir dizin olması gerekir.</repository-exception>
@@ -173,7 +173,7 @@
 
   <UICategoriesSelector>
     <action>
-      <close>Kapat</close>
+      <close>#{word.close}</close>
     </action>
   </UICategoriesSelector>
 

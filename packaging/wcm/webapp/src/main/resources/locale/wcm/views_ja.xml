@@ -39,11 +39,11 @@
       </label>
       <tooltip>
         <add-edit>メタデータの追加/編集</add-edit>
-        <cancel>キャンセル</cancel>
+        <cancel>#{word.cancel}</cancel>
       </tooltip>
       <action>
         <add-edit>追加/編集</add-edit>
-        <cancel>キャンセル</cancel>
+        <cancel>#{word.cancel}</cancel>
       </action>
     </view>
   </SiteMetadata>

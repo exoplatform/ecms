@@ -154,7 +154,7 @@
   <UIActionForm>
     <title>分類ツリーの為のアクションの追加</title>
     <action>
-      <Save>保存</Save>
+      <Save>#{word.save}</Save>
     </action>
     <msg>
       <name-not-allowed>名前が見つかりません</name-not-allowed>
@@ -326,7 +326,7 @@
       <metadataView>メタデータ情報</metadataView>
     </tab>
     <action>
-      <Cancel>閉じる</Cancel>
+      <Cancel>#{word.close}</Cancel>
       <Back>#{word.back}</Back>
     </action>
   </UIMetadataView>
@@ -2317,7 +2317,7 @@
   </EditUnLockForm>  
   <UITabPane>
     <action>
-      <Close>閉じる</Close>
+      <Close>#{word.close}</Close>
     </action>
     <title>
     <UILockHolderContainer>管理ロック</UILockHolderContainer>
@@ -2328,7 +2328,7 @@
   <UIViewFormTabPane>
     <action>
       <AddTabForm>タブの追加</AddTabForm>
-      <AddTab>保存</AddTab>
+      <AddTab>#{word.save}</AddTab>
       <BackViewForm>戻る</BackViewForm>
     </action>
   </UIViewFormTabPane>
@@ -2394,7 +2394,7 @@
 
 <UITaxonomyTreeContainer>
 <action>
-<Cancel>閉じる</Cancel>
+<Cancel>#{word.close}</Cancel>
 </action>
 </UITaxonomyTreeContainer>
 <UITaxonomyTreeMainForm>
@@ -2454,7 +2454,7 @@
   <UITagPermissionForm>
     <title>権限の追加</title>
     <action>
-      <Save>保存</Save>
+      <Save>#{word.save}</Save>
       <Add>追加</Add>
     </action>
     <label>

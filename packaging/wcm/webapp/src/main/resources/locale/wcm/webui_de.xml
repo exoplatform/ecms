@@ -62,7 +62,7 @@
   <UIPageSelectorPanel>
     <header>
       <path>Pfad</path>
-      <action>Aktion</action>
+      <action>#{word.action}</action>
     </header>
     <msg>
       <child-not-found>Keine Seite gefunden.</child-not-found>
@@ -136,7 +136,7 @@
 
   <UISelectedContentGrid>
     <label>
-      <name>Name</name>
+      <name>#{word.name}</name>
       <add>Hinzufügen</add>
       <delete>Löschen</delete>
     </label>
@@ -148,14 +148,14 @@
 
   <UICLVContentSelectedGrid>
     <action>
-      <SaveCategories>Speichern</SaveCategories>
+      <SaveCategories>#{word.save}</SaveCategories>
       <Cancel>Abbrechen</Cancel>
     </action>
   </UICLVContentSelectedGrid>
 
   <UIContentBrowsePathSelector>
     <header>
-      <name>Name</name>
+      <name>#{word.name}</name>
       <publicationstate>Veröffentlichungszustand</publicationstate>
       <action>Aktion</action>
     </header>
@@ -166,7 +166,7 @@
 
   <UIContentBrowsePathSelectorFolder>
     <header>
-      <name>Name</name>
+      <name>#{word.name}</name>
       <publicationstate>Veröffentlichungszustand</publicationstate>
       <action>Aktion</action>
     </header>
@@ -234,7 +234,7 @@
 
   <UIContentNodeTypeSelector>
     <action>
-      <Save>Speichern</Save>
+      <Save>#{word.save}</Save>
       <Cancel>Abbrechen</Cancel>
     </action>
   </UIContentNodeTypeSelector>
@@ -276,7 +276,7 @@
       <UIEditableCheckboxInput>Recht bearbeiten</UIEditableCheckboxInput>
     </label>
     <action>
-      <Save>Speichern</Save>
+      <Save>#{word.save}</Save>
       <Clear>Leeren</Clear>
       <title>
         <Edit>Bearbeiten</Edit>
@@ -374,7 +374,7 @@
     <welcome>Willkommen</welcome>
     <login>Anmelden</login>
     <logout>Abmelden</logout>
-    <language>Spracheinstellungen ändern</language>
+    <language>Sprache ändern</language>
     <register>Registrieren</register>
   </Signin>
   <UIDriveForm>

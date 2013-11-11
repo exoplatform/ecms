@@ -154,7 +154,7 @@
   <UIActionForm>
     <title>Kategori ağacına eylem ekle</title>
     <action>
-      <Save>Kaydet</Save>
+      <Save>#{word.save}</Save>
     </action>
     <msg>
       <name-not-allowed>Boş ad veya özel karakterler eyleminin adında izin verilmez.</name-not-allowed>
@@ -326,7 +326,7 @@
       <metadataView>Metaveri Bilgileri</metadataView>
     </tab>
     <action>
-      <Cancel>Kapat</Cancel>
+      <Cancel>#{word.close}</Cancel>
       <Back>#{word.back}</Back>
     </action>
   </UIMetadataView>
@@ -2317,7 +2317,7 @@
   </EditUnLockForm>  
   <UITabPane>
     <action>
-      <Close>Kapat</Close>
+      <Close>#{word.close}</Close>
     </action>
     <title>
     <UILockHolderContainer>Kilit  Yönet</UILockHolderContainer>
@@ -2328,7 +2328,7 @@
   <UIViewFormTabPane>
     <action>
       <AddTabForm>Sekme Ekle</AddTabForm>
-      <AddTab>Kaydet</AddTab>
+      <AddTab>#{word.save}</AddTab>
       <BackViewForm>Geri</BackViewForm>
     </action>
   </UIViewFormTabPane>
@@ -2394,7 +2394,7 @@
 
 <UITaxonomyTreeContainer>
 <action>
-<Cancel>Kapat</Cancel>
+<Cancel>#{word.close}</Cancel>
 </action>
 </UITaxonomyTreeContainer>
 <UITaxonomyTreeMainForm>
@@ -2454,7 +2454,7 @@
   <UITagPermissionForm>
     <title>İzin Ekle</title>
     <action>
-      <Save>Kaydet</Save>
+      <Save>#{word.save}</Save>
       <Add>Ekle</Add>
     </action>
     <label>

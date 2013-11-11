@@ -28,7 +28,7 @@
         <jsFile>default.js</jsFile>
         <Advanced>Avancé</Advanced>
         <Summary>Résumé</Summary>
-        <name>Nom</name>
+        <name>#{word.name}</name>
         <title>Titre</title>
         <ContentCSS>CSS</ContentCSS>
         <hintCSS>Vous pouvez spécifier la feuille de style principale pour votre contenu web. Ce style surchargera celui défini au niveau du site et au niveau partagé.</hintCSS>
@@ -51,7 +51,7 @@
   <CSSFile>
     <dialog>
       <label>
-        <name>Nom</name>
+        <name>#{word.name}</name>
         <active>Actif</active>
         <priority>Priorité</priority>
         <content>CSS</content>
@@ -62,7 +62,7 @@
   <JSFile>
     <dialog>
       <label>
-        <name>Nom</name>
+        <name>#{word.name}</name>
         <active>Actif</active>
         <priority>Priorité</priority>
         <content>JavaScript</content>
@@ -73,7 +73,7 @@
   <WebLink>
     <dialog>
       <label>
-        <name>Nom</name>
+        <name>#{word.name}</name>
         <url>URL</url>
         <description>Description</description>
       </label>

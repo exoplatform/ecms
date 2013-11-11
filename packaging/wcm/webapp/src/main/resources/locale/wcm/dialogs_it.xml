@@ -28,15 +28,15 @@
         <jsFile>default.js</jsFile>
         <Advanced>Avanzato</Advanced>
         <Summary>Sommario</Summary>
-        <name>Nome</name>
+        <name>#{word.name}</name>
         <title>Titolo</title>
         <ContentCSS>Dati CSS</ContentCSS>
-        <hintCSS>You can specify the main style sheet for your web content. This style will override the style sheets defined at the site level and at the shared level.</hintCSS>
+        <hintCSS>In questo panello può specificare i stili principali per il suo contenuto web.                     Questo stile sovrascriverà quelli definiti al livello del sito o a livello del sito condiviso.</hintCSS>
         <ContentJS>Dati JavaScript</ContentJS>
-        <hintJS>You can specify some JavaScript codes that can be executed before your web content is rendered.</hintJS>
+        <hintJS>In questo pannello può specificare codici javascript che saranno eseguiti prima che il contenuto web è renderizzato.</hintJS>
         <WebContentHtml>Contenuto Principale</WebContentHtml>
         <Illustration>Illustrazione</Illustration>
-        <hintIllustration>You can specify an image that will be shown when your web content is displayed in the list. You can also specify some summary texts to go with this image.</hintIllustration>
+        <hintIllustration>In questo pannello può specificare un immagine che sarà usata come un icona durante la visualizzazione di questo contenuto nelle liste.                     In più, può specificare un breve testo descrittivo che accompagnerà l'immagine di cui sopra.</hintIllustration>
         <confirm-delete>È sicuro di voler cancellare questa Illustrazione?</confirm-delete>
         <illustrationImage>Immagine Illustrativa</illustrationImage>
         <imageMimeType>Tipo Immagine</imageMimeType>
@@ -51,7 +51,7 @@
   <CSSFile>
     <dialog>
       <label>
-        <name>Nome</name>
+        <name>#{word.name}</name>
         <active>Attiva</active>
         <priority>Priorità</priority>
         <content>Dati CSS</content>
@@ -62,7 +62,7 @@
   <JSFile>
     <dialog>
       <label>
-        <name>Nome</name>
+        <name>#{word.name}</name>
         <active>Attiva</active>
         <priority>Priorità</priority>
         <content>Dati JavaScript</content>
@@ -73,7 +73,7 @@
   <WebLink>
     <dialog>
       <label>
-        <name>NOme</name>
+        <name>#{word.name}</name>
         <url>URL</url>
         <description>Descrizione</description>
       </label>

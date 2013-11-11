@@ -28,7 +28,7 @@
         <jsFile>default.js</jsFile>
         <Advanced>Erweitert</Advanced>
         <Summary>Zusammenfassung</Summary>
-        <name>Name</name>
+        <name>#{word.name}</name>
         <title>Titel</title>
         <ContentCSS>CSS-Daten</ContentCSS>
         <hintCSS>Sie können den Hauptstylesheet für Ihren Webinhalt angeben. Dieser Stil wird die Angaben in Stylesheets auf Seiten- und geteilter Ebene überschreiben.</hintCSS>
@@ -51,7 +51,7 @@
   <CSSFile>
     <dialog>
       <label>
-        <name>Name</name>
+        <name>#{word.name}</name>
         <active>Aktiv</active>
         <priority>Priorität</priority>
         <content>CSS-Daten</content>
@@ -62,8 +62,13 @@
   <JSFile>
     <dialog>
       <label>
+<<<<<<< HEAD
         <name>Name</name>
         <active>Aktiv</active>
+=======
+        <name>#{word.name}</name>
+        <active>Aktiv</active>
+>>>>>>> c25a09c... de injection on 20131112-051452
         <priority>Priorität</priority>
         <content>JS-Daten</content>
       </label>
@@ -73,7 +78,7 @@
   <WebLink>
     <dialog>
       <label>
-        <name>Name</name>
+        <name>#{word.name}</name>
         <url>URL</url>
         <description>Beschreibung</description>
       </label>

@@ -45,7 +45,7 @@
       <admin-view>Admin</admin-view>
       <icon-view>Icons</icon-view>
       <thumbails-view>Thumbnails</thumbails-view>
-      <list-view>List</list-view>
+      <list-view>列表</list-view>
       <authoring-view>Authoring</authoring-view>
       <wcm-category-view>Categories</wcm-category-view>
       <file-view>File Management View</file-view>
@@ -61,8 +61,8 @@
 
   <UIPageSelectorPanel>
     <header>
-      <path>Path</path>
-      <action>Action</action>
+      <path>路径</path>
+      <action>#{word.action}</action>
     </header>
     <msg>
       <child-not-found>No Page Found.</child-not-found>
@@ -136,8 +136,8 @@
 
   <UISelectedContentGrid>
     <label>
-      <name>Name</name>
-      <add>Add</add>
+      <name>#{word.name}</name>
+      <add>新增</add>
       <delete>删除</delete>
     </label>
     <msg>
@@ -148,16 +148,16 @@
 
   <UICLVContentSelectedGrid>
     <action>
-      <SaveCategories>Save</SaveCategories>
+      <SaveCategories>#{word.save}</SaveCategories>
       <Cancel>取消</Cancel>
     </action>
   </UICLVContentSelectedGrid>
 
   <UIContentBrowsePathSelector>
     <header>
-      <name>Name</name>
+      <name>#{word.name}</name>
       <publicationstate>Publication State</publicationstate>
-      <action>Action</action>
+      <action>操作</action>
     </header>
     <msg>
       <child-not-found>No Content Found</child-not-found>
@@ -166,9 +166,9 @@
 
   <UIContentBrowsePathSelectorFolder>
     <header>
-      <name>Name</name>
+      <name>#{word.name}</name>
       <publicationstate>Publication State</publicationstate>
-      <action>Action</action>
+      <action>操作</action>
     </header>
     <msg>
       <child-not-found>No Folder Found</child-not-found>
@@ -180,11 +180,11 @@
       <Location>Site Name</Location>
       <SearchByName>Search by Name</SearchByName>
       <Fulltext>A word or phrase in context</Fulltext>
-      <Property>Property</Property>
-      <Contain>Contain</Contain>
+      <Property>属性</Property>
+      <Contain>包含</Contain>
       <FromDate>From Date</FromDate>
       <ToDate>To Date</ToDate>
-      <DocumentType>Document Type</DocumentType>
+      <DocumentType>文档类型</DocumentType>
     </title>
     <tooltip>
       <AddMetadataType>Add Property</AddMetadataType>
@@ -192,12 +192,12 @@
     </tooltip>    
     <label>
       <option>
-        <CREATED>Created</CREATED>
-        <MODIFIED>Modified</MODIFIED>
+        <CREATED>创建时间</CREATED>
+        <MODIFIED>修改时间</MODIFIED>
       </option>
     </label>
     <action>
-      <SearchWebContent>Search</SearchWebContent>
+      <SearchWebContent>搜索</SearchWebContent>
     </action>
     <msg>
       <time-to-late>The searching time is too long.</time-to-late>
@@ -217,12 +217,12 @@
 
   <UIContentPropertySelector>
     <action>
-      <Add>Add</Add>
+      <Add>新增</Add>
       <Cancel>取消</Cancel>
     </action>
     <label>
       <metadataType>Metadata Type</metadataType>
-      <property_select>Property</property_select>
+      <property_select>属性</property_select>
     </label>
   </UIContentPropertySelector>
 
@@ -234,17 +234,17 @@
 
   <UIContentNodeTypeSelector>
     <action>
-      <Save>Save</Save>
+      <Save>#{word.save}</Save>
       <Cancel>取消</Cancel>
     </action>
   </UIContentNodeTypeSelector>
 
   <UIContentSearchResult>
     <header>
-      <title>Title</title>
+      <title>标题</title>
       <score>Score</score>
       <publicationstate>Publication State</publicationstate>
-      <action>Action</action>
+      <action>操作</action>
     </header>
     <title>
       <Select>Select</Select>
@@ -271,15 +271,15 @@
 
   <UIPermissionManager>
     <label>
-      <UIPermissionInputSetWithAction>Permission</UIPermissionInputSetWithAction>
+      <UIPermissionInputSetWithAction>权限</UIPermissionInputSetWithAction>
       <UIAccessibleCheckboxInput>Access Right</UIAccessibleCheckboxInput>
       <UIEditableCheckboxInput>Edit Right</UIEditableCheckboxInput>
     </label>
     <action>
-      <Save>Save</Save>
+      <Save>#{word.save}</Save>
       <Clear>Clear</Clear>
       <title>
-        <Edit>Edit</Edit>
+        <Edit>编辑</Edit>
         <Delete>删除</Delete>
       </title>
     </action>
@@ -287,10 +287,10 @@
 
   <UIPermissionManagerGrid>
     <header>
-      <owner>Permission</owner>
+      <owner>权限</owner>
       <accessible>Accessible</accessible>
       <editable>Editable</editable>
-      <action>Action</action>
+      <action>操作</action>
     </header>
     <msg>
       <confirm-delete-permission>Are you sure you want to delete this permission?</confirm-delete-permission>
@@ -332,7 +332,7 @@
 
   <UIContentDialogPreference>
     <action>
-      <Back>Back</Back>
+      <Back>返回</Back>
     </action>
   </UIContentDialogPreference>
 
@@ -356,7 +356,7 @@
     <label>
       <SingleContentViewer>Single Content Viewer</SingleContentViewer>
       <ContentListViewer>Content List Viewer</ContentListViewer>
-      <Search>Search</Search>
+      <Search>搜索</Search>
       <Sitemap>Site Map</Sitemap>
       <TwoColumnsLayout>Two-column Layout</TwoColumnsLayout>
       <ThreeColumnsLayout>Three-column Layout</ThreeColumnsLayout>
@@ -390,7 +390,7 @@
       <GeneralDrives>General Drives</GeneralDrives>
       <GroupDrives>Group Drives</GroupDrives>
       <Private>Private</Private>
-      <Public>Public</Public>
+      <Public>公开</Public>
       <BackupCenter>Backup Center</BackupCenter>
       <CategorizedDocumentsCenter>Categorized Documents Center</CategorizedDocumentsCenter>
       <CollaborationCenter>Collaboration Center</CollaborationCenter>

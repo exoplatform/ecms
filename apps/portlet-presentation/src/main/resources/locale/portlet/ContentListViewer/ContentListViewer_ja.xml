@@ -81,8 +81,8 @@
       <ContentsVisibilityHelp>”権限でフィルター”は、権限レベルに応じてコンテンツをフィルタリングします。サイトにログインしていない時には、一般公開されているコンテンツしか参照することが出来ません。サイトにログインした後は、インターネットユーザに許可されているコンテンツまで参照することができます。”ユーザロールでフォルター”は、コンテンツをユーザが持つ権限毎に参照するものです。システムのパフォーマンスを消費するため、通常は使われません。</ContentsVisibilityHelp>
     </help>
     <action>
-      <Save>保存</Save>
-      <Cancel>キャンセル</Cancel>
+      <Save>#{word.save}</Save>
+      <Cancel>#{word.cancel}</Cancel>
       <delete>削除</delete>
     </action>
     <msg>

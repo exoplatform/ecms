@@ -40,7 +40,7 @@
       <UICLVConfigHeaderFormStringInput>标头</UICLVConfigHeaderFormStringInput>
       <UICLVConfigDisplayTemplateFormSelectBox>模板</UICLVConfigDisplayTemplateFormSelectBox>
       <UICLVConfigPaginatorTemplateFormSelectBox>分页程序</UICLVConfigPaginatorTemplateFormSelectBox>
-      <UICLVConfigItemsPerPageFormStringInput>Items per Page</UICLVConfigItemsPerPageFormStringInput>
+      <UICLVConfigItemsPerPageFormStringInput>每页显示</UICLVConfigItemsPerPageFormStringInput>
       <UICLVConfigShowIllustrationFormCheckboxInput>显示图像</UICLVConfigShowIllustrationFormCheckboxInput>
       <UICLVConfigShowSummaryFormCheckboxInput>显示摘要</UICLVConfigShowSummaryFormCheckboxInput>
       <UICLVConfigShowHeaderFormCheckboxInput>显示页眉</UICLVConfigShowHeaderFormCheckboxInput>
@@ -56,7 +56,7 @@
       <UICLVConfigDynamicNavigationLabel>动态导航</UICLVConfigDynamicNavigationLabel>
       <UICLVConfigContextualFolderRadioBoxInput>背景文件夹</UICLVConfigContextualFolderRadioBoxInput>
       <UICLVConfigShowCLVByStringInput>每页显示</UICLVConfigShowCLVByStringInput>
-      <UICLVConfigshowSCVWithStringInput>with</UICLVConfigshowSCVWithStringInput>
+      <UICLVConfigshowSCVWithStringInput>与</UICLVConfigshowSCVWithStringInput>
       <UICLVConfigTargetPageFormInputSet>在页中显示</UICLVConfigTargetPageFormInputSet>
       <content-not-found>找不到的内容。</content-not-found>
       <ContentPath>内容路径</ContentPath>
@@ -64,7 +64,7 @@
       <Down>向下</Down>
       <UICLVConfigCacheManagementLabel>内容可见性</UICLVConfigCacheManagementLabel>
       <UICLVContentByQueryLabel>Content by Query</UICLVContentByQueryLabel>
-      <UICLVConfigWorkspaceFormSelectBox>Workspace</UICLVConfigWorkspaceFormSelectBox>
+      <UICLVConfigWorkspaceFormSelectBox>工作区</UICLVConfigWorkspaceFormSelectBox>
       <UICLVConfigContentByQueryTextArea>by query</UICLVConfigContentByQueryTextArea>
       <UICLVConfigCacheEnableRadioBoxInput>Share content between users</UICLVConfigCacheEnableRadioBoxInput>
     </label>
@@ -81,8 +81,8 @@
       <ContentsVisibilityHelp>"受限制的身份验证"将筛选的基础进行身份验证的内容。如果你没有登录，您将看到仅公共内容。如果您登录，您看到的所有内容可见的 intranet 用户 （但所有共享）。"受限制的用户角色"意味着你将看到的内容取决于您的权利。在大多数情况下，这应不使用选项，因为它减少了总体性能。</ContentsVisibilityHelp>
     </help>
     <action>
-      <Save>Save</Save>
-      <Cancel>取消</Cancel>
+      <Save>#{word.save}</Save>
+      <Cancel>#{word.cancel}</Cancel>
       <delete>删除</delete>
     </action>
     <msg>
@@ -91,8 +91,8 @@
     </msg>
     <tab>
       <label>
-        <clvContentTab>Content Selection</clvContentTab>
-        <clvDisplayTab>Display Settings</clvDisplayTab>
+        <clvContentTab>内容选择</clvContentTab>
+        <clvDisplayTab>显示设置</clvDisplayTab>
         <clvAdvancedTab>高级设置</clvAdvancedTab>
       </label>
     </tab>
@@ -105,8 +105,8 @@
   </UICLVConfigDisplayModeFormRadioBoxInput>
   <UICLVConfigItemPathFormInputSet>
     <title>
-      <SelectFolderPath>Select Folder Path</SelectFolderPath>
-      <AddPath>Add Path</AddPath>
+      <SelectFolderPath>选择文件夹路径</SelectFolderPath>
+      <AddPath>添加路径</AddPath>
     </title>
   </UICLVConfigItemPathFormInputSet>
   <FolderPathSelectorPopupWindow>
@@ -124,8 +124,8 @@
   </UICLVConfigOrderTypeFormSelectBox>
   <UICLVConfigTargetPageFormInputSet>
     <title>
-      <SelectBasePath>Select Base Path</SelectBasePath>
-      <SelectTargetPage>Select Base Path</SelectTargetPage>
+      <SelectBasePath>选择基路径</SelectBasePath>
+      <SelectTargetPage>选择基路径</SelectTargetPage>
     </title>
   </UICLVConfigTargetPageFormInputSet>
   <UICLVBasePathPopupWindow>
@@ -143,8 +143,8 @@
       <rssFeed>RSS Feed</rssFeed>
     </label>
     <action>
-      <refresh>Refresh</refresh>
-      <edit>Edit in Content Explorer</edit>
+      <refresh>刷新</refresh>
+      <edit>在内容资源管理器中编辑</edit>
       <delete>删除</delete>
       <publish>发布</publish>
     </action>
@@ -164,8 +164,8 @@
   </UIContentDialogFormPopupWindow>
   <UICLVConfigContextualFolderRadioBoxInput>
     <label>
-      <contextualEnable>Enabled</contextualEnable>
-      <contextualDisable>Disabled</contextualDisable>
+      <contextualEnable>已启用</contextualEnable>
+      <contextualDisable>已禁用</contextualDisable>
     </label>
   </UICLVConfigContextualFolderRadioBoxInput>
   <PublicationStates>
@@ -174,7 +174,7 @@
     <unpublished>未发布</unpublished>
     <enrolled>注册</enrolled>
     <draft>草稿</draft>
-    <pending>Pending</pending>
+    <pending>等待中</pending>
     <approved>核准</approved>
     <inreview>在审查中</inreview>
     <staged>上演</staged>
@@ -182,7 +182,7 @@
   </PublicationStates>
   <UICLVConfigCacheEnableRadioBoxInput>
     <label>
-      <ENABLE>Restricted by Authentication</ENABLE>
+      <ENABLE>通过身份验证的限制</ENABLE>
       <DISABLE>Restricted by User Roles</DISABLE>
     </label>
   </UICLVConfigCacheEnableRadioBoxInput>

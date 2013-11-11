@@ -27,7 +27,7 @@
       <folder>Thư mục</folder>
 </value>
 <action>
-<Close>Đóng</Close>
+<Close>#{word.close}</Close>
 </action>
 </UIViewInfoContainer>
 </bundle>

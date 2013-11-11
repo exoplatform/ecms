@@ -28,7 +28,7 @@
         <jsFile>default.js</jsFile>
         <Advanced>Gelişmiş</Advanced>
         <Summary>Özet</Summary>
-        <name>Adı</name>
+        <name>#{word.name}</name>
         <title>Başlık</title>
         <ContentCSS>CSS Veri</ContentCSS>
         <hintCSS>Web içeriği için ana stil sayfası belirtebilirsiniz. Bu tarz site düzeyinde hem de paylaşılan düzeyinde tanımlanan stil sayfaları geçersiz kılar.</hintCSS>
@@ -51,7 +51,7 @@
   <CSSFile>
     <dialog>
       <label>
-        <name>Ad</name>
+        <name>#{word.name}</name>
         <active>Etkin</active>
         <priority>Öncelik</priority>
         <content>CSS Veri</content>
@@ -62,7 +62,7 @@
   <JSFile>
     <dialog>
       <label>
-        <name>Ad</name>
+        <name>#{word.name}</name>
         <active>Etkin</active>
         <priority>Öncelik</priority>
         <content>JS Veri</content>
@@ -73,7 +73,7 @@
   <WebLink>
     <dialog>
       <label>
-        <name>Ad</name>
+        <name>#{word.name}</name>
         <url>URL</url>
         <description>Açıklama</description>
       </label>

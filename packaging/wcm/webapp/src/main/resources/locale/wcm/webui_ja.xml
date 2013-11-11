@@ -62,7 +62,7 @@
   <UIPageSelectorPanel>
     <header>
       <path>パス</path>
-      <action>アクション</action>
+      <action>#{word.action}</action>
     </header>
     <msg>
       <child-not-found>ページがありません</child-not-found>
@@ -136,7 +136,7 @@
 
   <UISelectedContentGrid>
     <label>
-      <name>名前</name>
+      <name>#{word.name}</name>
       <add>追加</add>
       <delete>削除</delete>
     </label>
@@ -148,14 +148,14 @@
 
   <UICLVContentSelectedGrid>
     <action>
-      <SaveCategories>保存</SaveCategories>
+      <SaveCategories>#{word.save}</SaveCategories>
       <Cancel>キャンセル</Cancel>
     </action>
   </UICLVContentSelectedGrid>
 
   <UIContentBrowsePathSelector>
     <header>
-      <name>名前</name>
+      <name>#{word.name}</name>
       <publicationstate>公開ステータス</publicationstate>
       <action>アクション</action>
     </header>
@@ -166,7 +166,7 @@
 
   <UIContentBrowsePathSelectorFolder>
     <header>
-      <name>名前</name>
+      <name>#{word.name}</name>
       <publicationstate>公開ステータス</publicationstate>
       <action>アクション</action>
     </header>
@@ -234,7 +234,7 @@
 
   <UIContentNodeTypeSelector>
     <action>
-      <Save>保存</Save>
+      <Save>#{word.save}</Save>
       <Cancel>キャンセル</Cancel>
     </action>
   </UIContentNodeTypeSelector>
@@ -276,7 +276,7 @@
       <UIEditableCheckboxInput>編集権</UIEditableCheckboxInput>
     </label>
     <action>
-      <Save>保存</Save>
+      <Save>#{word.save}</Save>
       <Clear>クリア</Clear>
       <title>
         <Edit>編集</Edit>

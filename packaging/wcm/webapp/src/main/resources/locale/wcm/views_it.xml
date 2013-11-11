@@ -24,7 +24,7 @@
     <view>
       <label>
         <url>URL</url>
-        <description>Description</description>
+        <description>Descrizione</description>
       </label>
     </view>
   </WebLink>
@@ -32,25 +32,25 @@
   <SiteMetadata>
     <view>
       <label>
-        <title>Site Title</title>
-        <description>Site Description</description>
-        <keywords>Site Keywords</keywords>
-        <robots>Search Engine Behavior</robots>
+        <title>Titolo del sito</title>
+        <description>Descrizione Sito</description>
+        <keywords>Parole chiavi del sito</keywords>
+        <robots>Comportamento del Motore di Ricerca</robots>
       </label>
       <tooltip>
-        <add-edit>Add/Edit Metadata</add-edit>
-        <cancel>Cancel</cancel>
+        <add-edit>Aggiungi/Modifica Metadata</add-edit>
+        <cancel>#{word.cancel}</cancel>
       </tooltip>
       <action>
-        <add-edit>Add/Edit</add-edit>
-        <cancel>Cancel</cancel>
+        <add-edit>Aggiungi/Modifica</add-edit>
+        <cancel>#{word.cancel}</cancel>
       </action>
     </view>
   </SiteMetadata>
 
   <Category>
     <view>
-      <label>Category</label>
+      <label>Categoria</label>
     </view>
   </Category>
 

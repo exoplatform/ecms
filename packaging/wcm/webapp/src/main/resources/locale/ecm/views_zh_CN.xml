@@ -83,12 +83,12 @@
   <ListView>
     <view>
       <label>
-        <name>Name</name>
-        <versionable>Versionable</versionable>
+        <name>姓名</name>
+        <versionable>可版本化</versionable>
         <exo_owner>Owner</exo_owner>
-        <exo_dateCreated>Date Created</exo_dateCreated>
+        <exo_dateCreated>创建日期</exo_dateCreated>
         <exo_dateModified>Date Modified</exo_dateModified>
-        <auditing>Auditing</auditing>
+        <auditing>审核</auditing>
       </label>
     </view>
   </ListView>
@@ -101,7 +101,7 @@
       <label>
         <action-name>Action Name</action-name>
         <lifecycle>Lifecycle</lifecycle>
-        <metadata>Metadata</metadata>
+        <metadata>元数据</metadata>
         <description>说明</description>
       </label>
     </view>
@@ -125,7 +125,7 @@
   <EnableVersioning>
     <view>
       <label>
-        <action-name>Name</action-name>
+        <action-name>姓名</action-name>
         <lifecycle>Lifecycle</lifecycle>
         <description>说明</description>
       </label>
@@ -138,7 +138,7 @@
     <view>
       <label>
         <not-avaliable>N/A</not-avaliable>
-        <title>Title</title>
+        <title>标题</title>
         <creator>Creator</creator>
         <subject>Subject</subject>
         <source>Source</source>
@@ -148,7 +148,7 @@
         <publisher>Publisher</publisher>
         <description>说明</description>
         <rights>Rights</rights>
-        <relation>Relation</relation>
+        <relation>关系</relation>
         <format>Format</format>
         <coverage>Coverage</coverage>
         <identifier>Identifier</identifier>
@@ -156,10 +156,10 @@
       </label>
       <action>
         <add-edit>Add/Edit</add-edit>
-        <cancel>取消</cancel>
+        <cancel>#{word.cancel}</cancel>
       </action>
       <tooltip>
-        <cancel>取消</cancel>
+        <cancel>#{word.cancel}</cancel>
         <add-edit>Add/Edit Properties</add-edit>
       </tooltip>
     </view>
@@ -191,7 +191,7 @@
     <view>
       <label>
         <isDeep>Is Deep</isDeep>
-        <nodetypes>Node Types</nodetypes> 
+        <nodetypes>节点类型</nodetypes> 
         <affectedNodeTypeNames>Affected Node Types</affectedNodeTypeNames>
         <nodeTypeName>Node Type Names</nodeTypeName>
       </label> 
@@ -202,7 +202,7 @@
     <view>
       <label>
         <isDeep>Is Deep</isDeep>
-        <nodetypes>Node Types</nodetypes>
+        <nodetypes>节点类型</nodetypes>
         <affectedNodeTypeNames>Affected Node Types</affectedNodeTypeNames>
         <nodeTypeName>Node Type Names</nodeTypeName>
       </label> 

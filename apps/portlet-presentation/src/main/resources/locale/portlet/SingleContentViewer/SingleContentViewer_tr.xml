@@ -39,11 +39,11 @@
   </UIPreferencesPopupWindows>
   <UISCVPreferences>
     <action>
-      <Save>Kaydet</Save>
+      <Save>#{word.save}</Save>
       <Abort>İptal</Abort>
-      <Cancel>İptal</Cancel>
+      <Cancel>#{word.cancel}</Cancel>
       <Print>Yazdır</Print>
-      <Close>Kapat</Close>
+      <Close>#{word.close}</Close>
     </action>
     <title>İçerik Detay Tercihleri</title>
     <label>

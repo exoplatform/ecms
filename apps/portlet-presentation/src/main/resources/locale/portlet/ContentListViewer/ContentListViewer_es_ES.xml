@@ -81,8 +81,8 @@
       <ContentsVisibilityHelp>"Restringido por autentificación" filtrará el contenido basado en la autentificación. Si no se registra, sólo verá el contenido público. Si está registrado, verá todo el contenido visible por usuarios de la intranet (pero compartidos por todos). "Restringido por roles de usuario" significa que verá el contenido dependiendo de sus derechos. En la mayoría de los casos esta opción no debería ser usada ya que reduce el rendimiento general.</ContentsVisibilityHelp>
     </help>
     <action>
-      <Save>Guardar</Save>
-      <Cancel>Cancelar</Cancel>
+      <Save>#{word.save}</Save>
+      <Cancel>#{word.cancel}</Cancel>
       <delete>Eliminar</delete>
     </action>
     <msg>

@@ -27,8 +27,8 @@
   <priority>Valores válidos de 0.0 a 1.0</priority>
   </tip>   
     <action>
-      <Save>Salvar</Save>
-      <Cancel>Cancelar</Cancel>
+      <Save>#{word.save}</Save>
+      <Cancel>#{word.cancel}</Cancel>
     </action>
     <msg>
       <repository-exception>Ocorreu um erro inesperado enquanto salvava os metadados da página.</repository-exception>
