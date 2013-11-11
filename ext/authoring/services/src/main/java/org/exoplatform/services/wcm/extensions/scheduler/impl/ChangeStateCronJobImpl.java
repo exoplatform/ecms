@@ -192,6 +192,14 @@ public class ChangeStateCronJobImpl implements Job {
           if (LOG.isInfoEnabled()) LOG.info("'" + toState + "' " + node_.getPath());
           publicationPlugin.changeState(node_, toState, context_);
         }
+        if(START_TIME_PROPERTY.equals(property) && node_.hasProperty(START_TIME_PROPERTY)){
+          node_.getProperty(START_TIME_PROPERTY).remove();
+          node_.save();
+        }
+        if(END_TIME_PROPERTY.equals(property) && node_.hasProperty(END_TIME_PROPERTY)){
+          node_.getProperty(END_TIME_PROPERTY).remove();
+          node_.save();
+        }
       }
     }
     
