@@ -376,12 +376,12 @@ public class Utils {
   }
 
   public static String getNodeTypeIcon(Node node, String appended, String mode)
-      throws Exception {
+      throws RepositoryException {
     return org.exoplatform.services.cms.impl.Utils.getNodeTypeIcon(node, appended, mode);
   }
 
   public static String getNodeTypeIcon(Node node, String appended)
-      throws Exception {
+      throws RepositoryException {
     return org.exoplatform.services.cms.impl.Utils.getNodeTypeIcon(node, appended);
   }
 

@@ -552,7 +552,7 @@ public class UICLVPresentation extends UIContainer {
         return org.exoplatform.ecm.webui.utils.Utils.getNodeTypeIcon(originalNode, "uiIcon16x16");
       }
       return org.exoplatform.ecm.webui.utils.Utils.getNodeTypeIcon(node, "uiIcon16x16");
-    } catch (Exception e) {
+    } catch (RepositoryException e) {
       Utils.createPopupMessage(this,
                                "UIMessageBoard.msg.get-content-icon",
                                null,

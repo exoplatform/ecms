@@ -653,7 +653,7 @@ public class Utils {
   }
 
   public static String getNodeTypeIcon(Node node, String appended, String mode)
-      throws Exception {
+      throws RepositoryException {
     if (node == null)
       return "";
 
@@ -726,7 +726,7 @@ public class Utils {
   }
 
   public static String getNodeTypeIcon(Node node, String appended)
-      throws Exception {
+      throws RepositoryException {
     return getNodeTypeIcon(node, appended, null);
   }
 
