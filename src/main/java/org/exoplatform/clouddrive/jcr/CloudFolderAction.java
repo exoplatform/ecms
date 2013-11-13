@@ -56,7 +56,7 @@ public class CloudFolderAction extends AbstractJCRAction {
       if (cloudFolder.isNodeType(JCRLocalCloudDrive.ECD_CLOUDFOLDER)) {
         CloudDriveService drives = drives(context);
         CloudDrive localDrive = drives.findDrive(cloudFolder);
-        if (localDrive != null && accept(localDrive)) {
+        if (accept(localDrive)) {
           try {
             start(localDrive);
             // 3. try to synchronize

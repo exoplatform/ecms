@@ -25,6 +25,7 @@ import com.google.api.services.drive.model.ParentReference;
 
 import org.exoplatform.clouddrive.CloudDriveException;
 import org.exoplatform.clouddrive.CloudFile;
+import org.exoplatform.clouddrive.CloudProviderException;
 import org.exoplatform.clouddrive.CloudUser;
 import org.exoplatform.clouddrive.DriveRemovedException;
 import org.exoplatform.clouddrive.SyncNotSupportedException;
@@ -64,12 +65,12 @@ public class JCRLocalGoogleDrive extends JCRLocalCloudDrive {
     /**
      * Google Drive service API.
      */
-    final GoogleDriveAPI api;
+    final GoogleDriveAPI      api;
 
     /**
      * Actually open child iterators. Used for progress indicator.
      */
-    final List<ChildIterator>            iterators = new ArrayList<GoogleDriveAPI.ChildIterator>();
+    final List<ChildIterator> iterators = new ArrayList<GoogleDriveAPI.ChildIterator>();
 
     /**
      * Create connect to Google Drive command.
@@ -210,7 +211,7 @@ public class JCRLocalGoogleDrive extends JCRLocalCloudDrive {
      */
     final Set<Node>      synced = new HashSet<Node>();
 
-    ChangesIterator                changes;
+    ChangesIterator      changes;
 
     /**
      * Create command for Google Drive synchronization.
@@ -547,6 +548,23 @@ public class JCRLocalGoogleDrive extends JCRLocalCloudDrive {
   @Override
   public GoogleUser getUser() {
     return (GoogleUser) user;
+  }
+
+  /**
+   * {@inheritDoc}
+   */
+  @Override
+  public String getChangesLink() throws DriveRemovedException, RepositoryException {
+    // long-polling of changes not supported by Google as for Nov 10 2013
+    return null;
+  }
+
+  /**
+   * {@inheritDoc}
+   */
+  @Override
+  public void updateChangesLink() throws DriveRemovedException, CloudProviderException, RepositoryException {
+    // do nothing for Google
   }
 
   /**

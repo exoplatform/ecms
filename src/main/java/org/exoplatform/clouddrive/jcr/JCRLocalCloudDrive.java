@@ -48,6 +48,10 @@ import java.util.Map;
 import java.util.NoSuchElementException;
 import java.util.Queue;
 import java.util.concurrent.ConcurrentLinkedQueue;
+import java.util.concurrent.CountDownLatch;
+import java.util.concurrent.atomic.AtomicInteger;
+import java.util.concurrent.atomic.AtomicLong;
+import java.util.concurrent.atomic.AtomicReference;
 
 import javax.jcr.AccessDeniedException;
 import javax.jcr.InvalidItemStateException;
@@ -172,6 +176,14 @@ public abstract class JCRLocalCloudDrive extends CloudDrive {
     @Override
     public long getFinishTime() {
       return time;
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public void await() throws InterruptedException {
+      // already done
     }
   }
 
@@ -599,6 +611,11 @@ public abstract class JCRLocalCloudDrive extends CloudDrive {
      */
     final ConversationState conversation;
 
+    /**
+     * Lock until the command will be done.
+     */
+    final CountDownLatch    lock = new CountDownLatch(1);
+
     CommandRunnable(AbstractCommand command, ConversationState conversation) throws CloudDriveException {
       this.conversation = conversation;
       this.command = command;
@@ -611,6 +628,10 @@ public abstract class JCRLocalCloudDrive extends CloudDrive {
      */
     void start() {
       runner.start();
+    }
+
+    void await() throws InterruptedException {
+      lock.await();
     }
 
     @Override
@@ -631,6 +652,7 @@ public abstract class JCRLocalCloudDrive extends CloudDrive {
         LOG.error("Error to " + command.getCommandVerb() + ": " + e.getMessage(), e);
       } finally {
         sp.close();
+        lock.countDown();
       }
     }
   }
@@ -643,7 +665,7 @@ public abstract class JCRLocalCloudDrive extends CloudDrive {
     /**
      * Local files affected by the command.
      */
-    protected final Queue<CloudFile> result = new ConcurrentLinkedQueue<CloudFile>();
+    protected final Queue<CloudFile> result           = new ConcurrentLinkedQueue<CloudFile>();
 
     /**
      * Target JCR node. Will be initialized in exec() method (in actual runner thread).
@@ -653,17 +675,17 @@ public abstract class JCRLocalCloudDrive extends CloudDrive {
     /**
      * Progress indicator in percents.
      */
-    protected volatile int           progressReported;
+    protected final AtomicInteger    progressReported = new AtomicInteger();
 
     /**
      * Time of command start.
      */
-    protected volatile long          startTime;
+    protected final AtomicLong       startTime        = new AtomicLong();
 
     /**
      * Time of command finish.
      */
-    protected volatile long          finishTime;
+    protected final AtomicLong       finishTime       = new AtomicLong();
 
     /**
      * Asynchronous execution support.
@@ -703,7 +725,7 @@ public abstract class JCRLocalCloudDrive extends CloudDrive {
      * @throws RepositoryException
      */
     void exec() throws CloudDriveException, RepositoryException {
-      startTime = System.currentTimeMillis();
+      startTime.set(System.currentTimeMillis());
       driveRoot = rootNode(); // init in actual runner thread
 
       try {
@@ -749,7 +771,7 @@ public abstract class JCRLocalCloudDrive extends CloudDrive {
         }
       } finally {
         doneAction();
-        finishTime = System.currentTimeMillis();
+        finishTime.set(System.currentTimeMillis());
       }
     }
 
@@ -779,13 +801,15 @@ public abstract class JCRLocalCloudDrive extends CloudDrive {
         return COMPLETE;
       } else {
         int current = Math.round((getComplete() * 100f) / getAvailable());
-        if (current >= progressReported) {
-          progressReported = current;
+        int reported = progressReported.get();
+        if (current >= reported) {
+          reported = current;
         } // else
           // progress cannot be smaller of already reported one
           // do nothing and wait for next portion of work done
 
-        return progressReported;
+        progressReported.set(reported);
+        return reported;
       }
     }
 
@@ -794,7 +818,7 @@ public abstract class JCRLocalCloudDrive extends CloudDrive {
      */
     @Override
     public boolean isDone() {
-      return finishTime > 0;
+      return finishTime.get() > 0;
     }
 
     /**
@@ -802,7 +826,7 @@ public abstract class JCRLocalCloudDrive extends CloudDrive {
      */
     @Override
     public long getStartTime() {
-      return startTime;
+      return startTime.get();
     }
 
     /**
@@ -810,7 +834,7 @@ public abstract class JCRLocalCloudDrive extends CloudDrive {
      */
     @Override
     public long getFinishTime() {
-      return finishTime;
+      return finishTime.get();
     }
 
     /**
@@ -819,6 +843,16 @@ public abstract class JCRLocalCloudDrive extends CloudDrive {
     @Override
     public Collection<CloudFile> getFiles() {
       return Collections.unmodifiableCollection(result);
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public void await() throws InterruptedException {
+      if (async != null) {
+        async.await();
+      } // else do nothing - command already done
     }
   }
 
@@ -905,10 +939,14 @@ public abstract class JCRLocalCloudDrive extends CloudDrive {
     @Override
     protected void process() throws CloudDriveException, RepositoryException {
       // synchronize
-      syncFiles();
+      try {
+        syncFiles();
 
-      // and save the drive node
-      driveRoot.save();
+        // and save the drive node
+        driveRoot.save();
+      } finally {
+        currentSync.set(null);
+      }
 
       // fire listeners
       listeners.fireOnSynchronized(new CloudDriveEvent(getUser(), rootWorkspace, driveRoot.getPath()));
@@ -1044,6 +1082,11 @@ public abstract class JCRLocalCloudDrive extends CloudDrive {
   protected final ThreadLocal<SoftReference<Node>> rootNodeHolder;
 
   protected final NodeRemoveHandler                handler;
+
+  /**
+   * Currently active synchronization command. Used to control concurrency in Cloud Drive.
+   */
+  protected final AtomicReference<SyncCommand>     currentSync = new AtomicReference<SyncCommand>();
 
   /**
    * Title has special care. It used in error logs and an attempt to read <code>exo:title</code> property can
@@ -1392,22 +1435,40 @@ public abstract class JCRLocalCloudDrive extends CloudDrive {
                                            CloudDriveAccessException,
                                            RepositoryException {
     if (isConnected()) {
-      // fetch all files' matadata to local storage
       checkAccess();
-      try {
-        startAction(this);
 
-        SyncCommand sync = getSyncCommand();
-        if (async) {
-          sync.execAsync();
-        } else {
-          sync.exec();
+      SyncCommand sync = currentSync.get();
+      if (sync == null) {
+        synchronized (currentSync) {
+          // check again in synchronized block!
+          sync = currentSync.get();
+          if (sync == null) {
+            try {
+              startAction(this);
+              sync = getSyncCommand();
+              if (async) {
+                currentSync.set(sync);
+                sync.execAsync();
+              } else {
+                sync.exec();
+              }
+            } finally {
+              doneAction();
+            }
+          } else {
+            // sync already active, wait if it's not async request
+            if (!async) {
+              try {
+                sync.await();
+              } catch (InterruptedException e) {
+                LOG.warn("Caller of synchronization command interrupted.", e);
+                Thread.currentThread().interrupt();
+              }
+            }
+          }
         }
-
-        return sync;
-      } finally {
-        doneAction();
-      }
+      } // else, sync already active
+      return sync;
     } else {
       throw new NotConnectedException("Cloud drive '" + title() + "' not connected.");
     }
@@ -1417,9 +1478,7 @@ public abstract class JCRLocalCloudDrive extends CloudDrive {
    * {@inheritDoc}
    */
   @Override
-  public synchronized Command synchronize() throws SyncNotSupportedException,
-                                           CloudDriveException,
-                                           RepositoryException {
+  public Command synchronize() throws SyncNotSupportedException, CloudDriveException, RepositoryException {
 
     return synchronize(false);
   }
@@ -1428,10 +1487,10 @@ public abstract class JCRLocalCloudDrive extends CloudDrive {
    * {@inheritDoc}
    */
   @Override
-  public synchronized Command synchronize(Node file) throws SyncNotSupportedException,
-                                                    NotConnectedException,
-                                                    CloudDriveException,
-                                                    RepositoryException {
+  public Command synchronize(Node file) throws SyncNotSupportedException,
+                                       NotConnectedException,
+                                       CloudDriveException,
+                                       RepositoryException {
     if (isConnected()) {
       final String filePath = file.getPath();
       final String rootPath = rootNode().getPath();
@@ -1440,11 +1499,12 @@ public abstract class JCRLocalCloudDrive extends CloudDrive {
         return synchronize();
       } else if (filePath.startsWith(rootPath)) {
         SyncFileCommand sync = getSyncFileCommand(file);
-        sync.exec();
+        sync.execAsync();
+        // TODO currentSync.set(sync);
         return sync;
       } else {
         throw new SyncNotSupportedException("Synchronization not supported for not cloud drive file: "
-            + file.getPath());
+            + filePath);
       }
     } else {
       throw new NotConnectedException("Cloud drive not connected. Cannot synchronize " + file.getPath());

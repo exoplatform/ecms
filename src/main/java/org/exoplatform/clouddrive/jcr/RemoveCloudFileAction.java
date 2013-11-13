@@ -25,10 +25,10 @@ import org.exoplatform.services.ext.action.InvocationContext;
 import org.exoplatform.services.log.ExoLogger;
 import org.exoplatform.services.log.Log;
 
-
 /**
- * Care about ecd:cloudFile nodes removal. Created by The eXo Platform SAS
- * 
+ * Care about ecd:cloudFile nodes removal - this action should prevent the removal by throwing
+ * {@link IllegalStateException}. <br> Created by The eXo Platform SAS
+  * 
  * @author <a href="mailto:pnedonosko@exoplatform.com">Peter Nedonosko</a>
  * @version $Id: CloudFileAction.java 00000 Oct 5, 2012 pnedonosko $
  */
@@ -44,7 +44,7 @@ public class RemoveCloudFileAction extends AbstractJCRAction {
     Node fileNode = (Node) context.get(InvocationContext.CURRENT_ITEM);
     CloudDriveService drives = drives(context);
     CloudDrive localDrive = drives.findDrive(fileNode);
-    if (localDrive != null && accept(localDrive)) {
+    if (accept(localDrive)) {
       try {
         start(localDrive);
 

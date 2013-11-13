@@ -32,7 +32,9 @@ import org.exoplatform.services.log.Log;
 
 /**
  * Care about property changes on ecd:cloudFileResource nodes, i.e. changes of
- * actual content. Created by The eXo Platform SAS
+ * actual content. <br> Created by The eXo Platform SAS <br> 
+ * 
+ * TODO Not used.
  * 
  * @author <a href="mailto:pnedonosko@exoplatform.com">Peter Nedonosko</a>
  * @version $Id: CloudFileAction.java 00000 Oct 5, 2012 pnedonosko $
@@ -55,7 +57,7 @@ public class CloudFileAction extends AbstractJCRAction {
         Node fileNode = (item.isNode() ? (Node) item : item.getParent());
         CloudDriveService drives = drives(context);
         CloudDrive localDrive = drives.findDrive(fileNode);
-        if (localDrive != null && accept(localDrive)) {
+        if (accept(localDrive)) {
           // it's a node on path of some cloud drive...
           // to avoid updates caused by the synchronization itself we use thread-local flag
           start(localDrive);

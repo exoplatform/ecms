@@ -25,6 +25,7 @@ import com.box.boxjavalibv2.dao.BoxSharedLink;
 
 import org.exoplatform.clouddrive.CloudDriveException;
 import org.exoplatform.clouddrive.CloudFile;
+import org.exoplatform.clouddrive.CloudProviderException;
 import org.exoplatform.clouddrive.CloudUser;
 import org.exoplatform.clouddrive.DriveRemovedException;
 import org.exoplatform.clouddrive.SyncNotSupportedException;
@@ -129,7 +130,7 @@ public class JCRLocalBoxDrive extends JCRLocalCloudDrive implements UserTokenRef
           // add folder
           BoxFolder f = (BoxFolder) item;
           type = f.getType();
-          link = embedLink = downloadLink =api.getLink(f);
+          link = embedLink = downloadLink = api.getLink(f);
           localNode = openFolder(id, name, parent);
           initFolder(localNode, id, name, type, // type=folder
                      link, // gf.getAlternateLink(),
@@ -241,69 +242,81 @@ public class JCRLocalBoxDrive extends JCRLocalCloudDrive implements UserTokenRef
 
     protected void syncChilds(String folderId, Node parent) throws RepositoryException, CloudDriveException {
       ItemsIterator items = api.getFolderItems(folderId);
-      if (!driveRoot.getProperty("box:etag").getString().equals(items.parent.getEtag())) {
-        // need sync
+      iterators.add(items);
 
-        iterators.add(items);
+      // local nodes of this folder, after this sync we'll remove what will lie in this map
+      Map<String, List<Node>> nodes = new LinkedHashMap<String, List<Node>>();
+      readNodes(parent, nodes, false);
 
-        // local nodes of this folder, after this sync we'll remove what will lie in this map
-        Map<String, List<Node>> nodes = new LinkedHashMap<String, List<Node>>();
-        readNodes(parent, nodes, false);
+      while (items.hasNext()) {
+        BoxItem item = items.next();
 
-        while (items.hasNext()) {
-          BoxItem item = items.next();
+        // remove from map of local to mark the item as existing
+        nodes.remove(item.getId());
 
-          // remove from map of local to mark the item as existing
-          nodes.remove(item.getId());
-
-          Calendar created = api.parseDate(item.getCreatedAt());
-          Calendar modified = api.parseDate(item.getModifiedAt());
-          boolean isFolder = item instanceof BoxFolder;
-          boolean synced = false;
-          Node localNode;
-          if (isFolder) {
-            // sync folder
-            BoxFolder f = (BoxFolder) item;
-            localNode = openFolder(f.getId(), f.getName(), parent);
-            if (localNode.isNew() || !localNode.getProperty("box:etag").getString().equals(f.getEtag())) {
-              initFolder(localNode, f.getId(), f.getName(), f.getType(), // mimetype
-                         f.getSharedLink().getUrl(), // gf.getAlternateLink(),
-                         f.getCreatedBy().getLogin(), // gf.getOwnerNames().get(0),
-                         f.getModifiedBy().getLogin(), // gf.getLastModifyingUserName(),
-                         created,
-                         modified);
-              // go recursive
-              syncChilds(f.getId(), localNode);
-              synced = true;
-            }
-          } else {
-            // sync file
-            BoxFile f = (BoxFile) item;
-            localNode = openFile(f.getId(), f.getName(), f.getType(), parent);
-            if (localNode.isNew() || !localNode.getProperty("box:etag").getString().equals(f.getEtag())) {
-              // TODO for thumbnail we can use Thumbnail service
-              // https://api.box.com/2.0/files/FILE_ID/thumbnail.png?min_height=256&min_width=256
-              initFile(localNode, f.getId(), f.getName(), f.getType(), // mimetype
-                       f.getSharedLink().getUrl(), // gf.getAlternateLink(),
-                       f.getSharedLink().getUrl(), // gf.getEmbedLink(),
-                       f.getSharedLink().getDownloadUrl(), // gf.getThumbnailLink(),
+        boolean isFolder = item instanceof BoxFolder;
+        Calendar created = api.parseDate(item.getCreatedAt());
+        Calendar modified = api.parseDate(item.getModifiedAt());
+        String id = item.getId();
+        String name = item.getName();
+        String type, link, embedLink, downloadLink;
+        Node localNode;
+        if (isFolder) {
+          // sync folder
+          BoxFolder f = (BoxFolder) item;
+          type = f.getType();
+          localNode = openFolder(id, name, parent);
+          if (localNode.isNew() || !localNode.hasProperty("box:etag")
+              || !localNode.getProperty("box:etag").getString().equals(f.getEtag())) {
+            link = embedLink = downloadLink = api.getLink(f);
+            initFolder(localNode, id, name, type, // type=folder
+                       link, // gf.getAlternateLink(),
                        f.getCreatedBy().getLogin(), // gf.getOwnerNames().get(0),
                        f.getModifiedBy().getLogin(), // gf.getLastModifyingUserName(),
                        created,
                        modified);
-              initBoxItem(localNode, item);
-              synced = true;
-            }
-          }
-
-          if (synced) {
             result.add(new JCRLocalCloudFile(localNode.getPath(),
-                                             item.getId(),
-                                             item.getName(),
-                                             item.getSharedLink().getUrl(),
-                                             item.getSharedLink().getUrl(),
-                                             item.getSharedLink().getUrl(),
-                                             item.getType(),
+                                             id,
+                                             name,
+                                             link,
+                                             embedLink,
+                                             downloadLink,
+                                             type,
+                                             item.getCreatedBy().getLogin(),
+                                             item.getModifiedBy().getLogin(),
+                                             created,
+                                             modified,
+                                             isFolder));
+          }
+          // go recursive for all sub-folders
+          syncChilds(id, localNode);
+        } else {
+          // sync file
+          BoxFile f = (BoxFile) item;
+          type = mimeTypes.getMimeType(name);
+          localNode = openFile(id, name, type, parent);
+          if (localNode.isNew() || !localNode.hasProperty("box:etag")
+              || !localNode.getProperty("box:etag").getString().equals(f.getEtag())) {
+            // TODO for thumbnail we can use Thumbnail service
+            // https://api.box.com/2.0/files/FILE_ID/thumbnail.png?min_height=256&min_width=256
+            link = downloadLink = api.getLink(f);
+            embedLink = api.getEmbedLink(f);
+            initFile(localNode, id, name, type, // mimetype
+                     link, // gf.getAlternateLink(),
+                     embedLink, // gf.getEmbedLink(),
+                     downloadLink, // gf.getThumbnailLink(), // XXX not used
+                     f.getCreatedBy().getLogin(), // gf.getOwnerNames().get(0),
+                     f.getModifiedBy().getLogin(), // gf.getLastModifyingUserName(),
+                     created,
+                     modified);
+            initBoxItem(localNode, item);
+            result.add(new JCRLocalCloudFile(localNode.getPath(),
+                                             id,
+                                             name,
+                                             link,
+                                             embedLink,
+                                             downloadLink,
+                                             type,
                                              item.getCreatedBy().getLogin(),
                                              item.getModifiedBy().getLogin(),
                                              created,
@@ -311,22 +324,26 @@ public class JCRLocalBoxDrive extends JCRLocalCloudDrive implements UserTokenRef
                                              isFolder));
           }
         }
-
-        // remove local nodes of files not existing remotely
-        for (Iterator<List<Node>> niter = nodes.values().iterator(); niter.hasNext();) {
-          List<Node> nls = niter.next();
-          niter.remove();
-          for (Node n : nls) {
-            n.remove();
-          }
-        }
-
-        initBoxItem(parent, items.parent); // init parent
       }
+
+      // remove local nodes of files not existing remotely
+      for (Iterator<List<Node>> niter = nodes.values().iterator(); niter.hasNext();) {
+        List<Node> nls = niter.next();
+        niter.remove();
+        for (Node n : nls) {
+          n.remove();
+        }
+      }
+
+      initBoxItem(parent, items.parent); // init parent
     }
   }
 
-  private MimeTypeResolver mimeTypes = new MimeTypeResolver();
+  
+  
+  protected final MimeTypeResolver mimeTypes = new MimeTypeResolver();
+  
+ // protected 
 
   /**
    * @param user
@@ -466,6 +483,23 @@ public class JCRLocalBoxDrive extends JCRLocalCloudDrive implements UserTokenRef
     return (BoxUser) user;
   }
 
+  /**
+   * {@inheritDoc}
+   */
+  @Override
+  public String getChangesLink() throws DriveRemovedException, CloudProviderException, RepositoryException {
+    return getUser().api().getChangesLink();
+  }
+  
+
+  /**
+   * {@inheritDoc}
+   */
+  @Override
+  public void updateChangesLink() throws DriveRemovedException, CloudProviderException, RepositoryException {
+    getUser().api().updateChangesLink();
+  }
+  
   /**
    * {@inheritDoc}
    */

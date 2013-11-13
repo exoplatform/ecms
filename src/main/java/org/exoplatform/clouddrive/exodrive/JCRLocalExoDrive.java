@@ -23,6 +23,7 @@ import javax.jcr.RepositoryException;
 
 import org.exoplatform.clouddrive.CloudDriveException;
 import org.exoplatform.clouddrive.CloudFile;
+import org.exoplatform.clouddrive.CloudProviderException;
 import org.exoplatform.clouddrive.CloudUser;
 import org.exoplatform.clouddrive.DriveRemovedException;
 import org.exoplatform.clouddrive.SyncNotSupportedException;
@@ -32,7 +33,6 @@ import org.exoplatform.clouddrive.exodrive.service.FileStore;
 import org.exoplatform.clouddrive.jcr.JCRLocalCloudDrive;
 import org.exoplatform.clouddrive.jcr.JCRLocalCloudFile;
 import org.exoplatform.services.jcr.ext.app.SessionProviderService;
-
 
 /**
  * Exo Drive for internal use.
@@ -233,7 +233,7 @@ public class JCRLocalExoDrive extends JCRLocalCloudDrive {
   @Override
   protected void initDrive(Node driveNode) throws CloudDriveException, RepositoryException {
     super.initDrive(driveNode);
-    
+
     driveNode.setProperty("ecd:id", driveNode.getName());
     driveNode.setProperty("ecd:url", "#");
   }
@@ -262,6 +262,23 @@ public class JCRLocalExoDrive extends JCRLocalCloudDrive {
   @Override
   public ExoDriveUser getUser() {
     return (ExoDriveUser) user;
+  }
+
+  /**
+   * {@inheritDoc}
+   */
+  @Override
+  public String getChangesLink() throws DriveRemovedException, RepositoryException {
+    // not required, changes will be populated to storage automatically by the drive implementation
+    return null;
+  }
+
+  /**
+   * {@inheritDoc}
+   */
+  @Override
+  public void updateChangesLink() throws DriveRemovedException, CloudProviderException, RepositoryException {
+    // do nothing for eXo
   }
 
   // TODO reuse for upload/update algo!

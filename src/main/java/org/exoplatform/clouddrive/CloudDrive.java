@@ -16,6 +16,9 @@
  */
 package org.exoplatform.clouddrive;
 
+import org.exoplatform.services.log.ExoLogger;
+import org.exoplatform.services.log.Log;
+
 import java.util.Calendar;
 import java.util.Collection;
 import java.util.List;
@@ -24,9 +27,6 @@ import java.util.concurrent.ConcurrentLinkedQueue;
 
 import javax.jcr.Node;
 import javax.jcr.RepositoryException;
-
-import org.exoplatform.services.log.ExoLogger;
-import org.exoplatform.services.log.Log;
 
 /**
  * Local mirror of cloud drive to JCR sub-tree. All nodes of this sub-tree contain metadata such as name,
@@ -87,6 +87,13 @@ public abstract class CloudDrive {
      * @return collection of {@link CloudFile} objects
      */
     Collection<CloudFile> getFiles();
+
+    /**
+     * Wait for command will be done.
+     * 
+     * @throws InterruptedException if current thread was interrupted.
+     */
+    void await() throws InterruptedException;
   }
 
   /**
@@ -281,6 +288,28 @@ public abstract class CloudDrive {
    * @return {@link String}
    */
   public abstract String getLink() throws DriveRemovedException, RepositoryException;
+
+  /**
+   * Link to the drive's long-polling changes notification service. This kind of service optional and may not
+   * be supported. If long-polling changes notification not supported then this link will be <code>null</code>
+   * .
+   * 
+   * @return {@link String} a link to long-polling changes notification service or <code>null</code> if such
+   *         service not supported.
+   */
+  public abstract String getChangesLink() throws DriveRemovedException,
+                                         CloudProviderException,
+                                         RepositoryException;
+
+  /**
+   * Update link to the drive's long-polling changes notification service. This kind of service optional and
+   * may not be supported. If long-polling changes notification not supported then this method will do
+   * nothing.
+   * 
+   */
+  public abstract void updateChangesLink() throws DriveRemovedException,
+                                          CloudProviderException,
+                                          RepositoryException;
 
   /**
    * Local user related to this Cloud Drive.

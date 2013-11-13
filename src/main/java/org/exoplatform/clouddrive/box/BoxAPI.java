@@ -18,6 +18,8 @@
  */
 package org.exoplatform.clouddrive.box;
 
+import com.box.boxjavalibv2.dao.BoxTypedObject;
+
 import com.box.boxjavalibv2.BoxClient;
 import com.box.boxjavalibv2.authorization.OAuthRefreshListener;
 import com.box.boxjavalibv2.dao.BoxCollection;
@@ -29,6 +31,7 @@ import com.box.boxjavalibv2.dao.BoxSharedLink;
 import com.box.boxjavalibv2.exceptions.AuthFatalFailureException;
 import com.box.boxjavalibv2.exceptions.BoxServerException;
 import com.box.boxjavalibv2.interfaces.IAuthData;
+import com.box.boxjavalibv2.interfaces.IAuthSecureStorage;
 import com.box.boxjavalibv2.requests.requestobjects.BoxDefaultRequestObject;
 import com.box.boxjavalibv2.requests.requestobjects.BoxFolderRequestObject;
 import com.box.boxjavalibv2.requests.requestobjects.BoxOAuthRequestObject;
@@ -46,7 +49,9 @@ import java.text.ParseException;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
+import java.util.HashMap;
 import java.util.Iterator;
+import java.util.Map;
 import java.util.NoSuchElementException;
 
 /**
@@ -60,7 +65,7 @@ import java.util.NoSuchElementException;
  */
 public class BoxAPI {
 
-  class BoxToken extends UserToken implements OAuthRefreshListener {
+  class BoxToken extends UserToken implements OAuthRefreshListener, IAuthSecureStorage {
 
     void store(BoxOAuthToken btoken) throws CloudDriveException {
       this.store(btoken.getAccessToken(), btoken.getRefreshToken(), btoken.getExpiresIn());
@@ -77,6 +82,31 @@ public class BoxAPI {
       } catch (CloudDriveException e) {
         LOG.error("Error storing refreshed access token", e);
       }
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public void saveAuth(IAuthData auth) {
+      try {
+        store((BoxOAuthToken) auth);
+      } catch (CloudDriveException e) {
+        LOG.error("Error saving access token", e);
+      }
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public IAuthData getAuth() {
+      BoxOAuthToken auth = new BoxOAuthToken();
+      auth.put(BoxOAuthToken.FIELD_ACCESS_TOKEN, getAccessToken());
+      auth.put(BoxOAuthToken.FIELD_REFRESH_TOKEN, getRefreshToken());
+      auth.put(BoxOAuthToken.FIELD_EXPIRES_IN, getExpirationTime());
+      auth.put(BoxOAuthToken.FIELD_TOKEN_TYPE, "bearer");
+      return auth;
     }
   }
 
@@ -218,35 +248,95 @@ public class BoxAPI {
     }
   }
 
-  protected static final Log    LOG            = ExoLogger.getLogger(BoxAPI.class);
+  class ChangesLink {
+    final String type;
 
-  public static final String    NO_STATE       = "__no_state_set__";
+    final String url;
+
+    final long   ttl;
+
+    final long   maxRetries;
+
+    final long   retryTimeout;
+
+    ChangesLink(String type, String url, long ttl, long maxRetries, long retryTimeout) {
+      this.type = type;
+      this.url = url;
+      this.ttl = ttl;
+      this.maxRetries = maxRetries;
+      this.retryTimeout = retryTimeout;
+    }
+
+    /**
+     * @return the type
+     */
+    String getType() {
+      return type;
+    }
+
+    /**
+     * @return the url
+     */
+    String getUrl() {
+      return url;
+    }
+
+    /**
+     * @return the ttl
+     */
+    long getTtl() {
+      return ttl;
+    }
+
+    /**
+     * @return the maxRetries
+     */
+    long getMaxRetries() {
+      return maxRetries;
+    }
+
+    /**
+     * @return the retryTimeout
+     */
+    long getRetryTimeout() {
+      return retryTimeout;
+    }
+  }
+
+  protected static final Log    LOG                 = ExoLogger.getLogger(BoxAPI.class);
+
+  public static final String    NO_STATE            = "__no_state_set__";
 
   /**
    * Id of root folder on Box.
    */
-  public static final String    BOX_ROOT_ID    = "0";
+  public static final String    BOX_ROOT_ID         = "0";
 
   /**
    * Not official part of the path used in file services with Box API.
    */
-  protected static final String BOX_FILES_PATH = "files/0/f/";
+  protected static final String BOX_FILES_PATH      = "files/0/f/";
 
   /**
    * URL prefix for Box files' UI.
    */
-  public static final String    BOX_FILE_URL   = "https://app.box.com/" + BOX_FILES_PATH;
+  public static final String    BOX_FILE_URL        = "https://app.box.com/" + BOX_FILES_PATH;
 
   /**
    * URL patter for Embedded UI of Box file. Based on:<br>
    * http://stackoverflow.com/questions/12816239/box-com-embedded-file-folder-viewer-code-via-api
    * http://developers.box.com/box-embed/
    */
-  public static final String    BOX_EMBED_URL  = "https://app.box.com/embed_widget/000000000000/%s?show_parent_path=no";
+  public static final String    BOX_EMBED_URL       = "https://app.box.com/embed_widget/000000000000/%s?"
+                                                        + "view=list&sort=date&theme=gray&show_parent_path=no&show_item_feed_actions=no&session_expired=true";
 
   private BoxToken              token;
 
   private BoxClient             client;
+
+  private ChangesLink           changesLink;
+
+  private long                  changesLinkConsumed = 0;
 
   /**
    * Create Box API from OAuth2 authentication code.
@@ -279,6 +369,9 @@ public class BoxAPI {
     } catch (AuthFatalFailureException e) {
       throw new BoxException("Authentication code error: " + e.getMessage(), e);
     }
+
+    // finally init changes link
+    updateChangesLink();
   }
 
   /**
@@ -296,6 +389,10 @@ public class BoxAPI {
     this.token = new BoxToken();
     this.token.load(accessToken, refreshToken, expirationTime);
     this.client.addOAuthRefreshListener(token);
+    this.client.authenticateFromSecureStorage(token);
+
+    // finally init changes link
+    updateChangesLink();
   }
 
   /**
@@ -450,5 +547,78 @@ public class BoxAPI {
 
     // TODO this doesn't take in account custom domain for Enterprise on Box
     return String.format(BOX_EMBED_URL, linkValue.toString());
+  }
+
+  String getChangesLink() throws BoxException {
+    if (changesLink != null) {
+      return changesLink.getUrl();
+    } else {
+      return updateChangesLink();
+    }
+  }
+
+  String updateChangesLink() throws BoxException {
+    BoxDefaultRequestObject obj = new BoxDefaultRequestObject();
+    try {
+      BoxCollection changesPoll = client.getEventsManager().getEventOptions(obj);
+      ArrayList<BoxTypedObject> ce = changesPoll.getEntries();
+      if (ce.size() > 0) {
+        BoxTypedObject c = ce.get(0);
+
+        Object urlObj = c.getValue("url");
+        String url = urlObj != null ? urlObj.toString() : null;
+
+        Object typeObj = c.getValue("type");
+        String type = typeObj != null ? typeObj.toString() : null;
+
+        Object ttlObj = c.getValue("ttl");
+        if (ttlObj == null) {
+          ttlObj = c.getExtraData("ttl");
+        }
+        long ttl;
+        try {
+          ttl = ttlObj != null ? Long.parseLong(ttlObj.toString()) : 0;
+        } catch (NumberFormatException e) {
+          LOG.warn("Error parsing ttl value in events response [" + ttlObj + "]: " + e);
+          ttl = 0;
+        }
+
+        Object maxRetriesObj = c.getValue("max_retries");
+        if (maxRetriesObj == null) {
+          maxRetriesObj = c.getExtraData("max_retries");
+        }
+        long maxRetries;
+        try {
+          maxRetries = maxRetriesObj != null ? Long.parseLong(maxRetriesObj.toString()) : 0;
+        } catch (NumberFormatException e) {
+          LOG.warn("Error parsing max_retries value in events response [" + maxRetriesObj + "]: " + e);
+          maxRetries = 0;
+        }
+
+        Object retryTimeoutObj = c.getValue("retry_timeout");
+        if (retryTimeoutObj == null) {
+          retryTimeoutObj = c.getExtraData("retry_timeout");
+        }
+        long retryTimeout;
+        try {
+          retryTimeout = retryTimeoutObj != null ? Long.parseLong(retryTimeoutObj.toString()) : 0;
+        } catch (NumberFormatException e) {
+          LOG.warn("Error parsing retry_timeout value in events response [" + retryTimeoutObj + "]: " + e);
+          retryTimeout = 0;
+        }
+
+        changesLink = new ChangesLink(type, url, ttl, maxRetries, retryTimeout);
+        changesLinkConsumed = 0;
+        return url;
+      } else {
+        throw new BoxException("Empty entries from events service.");
+      }
+    } catch (BoxRestException e) {
+      throw new BoxException("Error requesting changes long poll URL: " + e.getMessage(), e);
+    } catch (BoxServerException e) {
+      throw new BoxException("Error reading changes long poll URL: " + e.getMessage(), e);
+    } catch (AuthFatalFailureException e) {
+      throw new BoxException("Authentication error for changes long poll URL: " + e.getMessage(), e);
+    }
   }
 }

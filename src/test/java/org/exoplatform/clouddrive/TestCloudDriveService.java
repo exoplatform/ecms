@@ -16,27 +16,9 @@
  */
 package org.exoplatform.clouddrive;
 
-import java.io.ByteArrayInputStream;
-import java.io.InputStream;
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.Calendar;
-import java.util.List;
-
-import javax.jcr.Node;
-import javax.jcr.NodeIterator;
-import javax.jcr.Repository;
-import javax.jcr.RepositoryException;
-import javax.jcr.Session;
-
 import junit.framework.TestCase;
 
-import org.exoplatform.clouddrive.CloudDrive;
-import org.exoplatform.clouddrive.CloudDriveException;
-import org.exoplatform.clouddrive.CloudDriveService;
-import org.exoplatform.clouddrive.CloudProvider;
-import org.exoplatform.clouddrive.CloudUser;
-import org.exoplatform.clouddrive.NotConnectedException;
+import org.exoplatform.clouddrive.CloudDrive.Command;
 import org.exoplatform.clouddrive.exodrive.ExoDriveUser;
 import org.exoplatform.clouddrive.exodrive.service.ExoDriveException;
 import org.exoplatform.clouddrive.exodrive.service.ExoDriveRepository;
@@ -54,6 +36,18 @@ import org.exoplatform.services.security.Credential;
 import org.exoplatform.services.security.PasswordCredential;
 import org.exoplatform.services.security.UsernameCredential;
 
+import java.io.ByteArrayInputStream;
+import java.io.InputStream;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Calendar;
+import java.util.List;
+
+import javax.jcr.Node;
+import javax.jcr.NodeIterator;
+import javax.jcr.Repository;
+import javax.jcr.RepositoryException;
+import javax.jcr.Session;
 
 /**
  * Created by The eXo Platform SAS.
@@ -86,16 +80,16 @@ public class TestCloudDriveService extends TestCase {
   private String                 testWorkspace;
 
   private String                 testPath;
-  
-  private Node                 testRoot;
+
+  private Node                   testRoot;
 
   private CloudUser              cloudUser;
 
   private CloudProvider          provider;
 
   private ExoDriveRepository     exoDrives;
-  
-  private CloudDrive drive;
+
+  private CloudDrive             drive;
 
   /**
    * setUp.
@@ -138,7 +132,7 @@ public class TestCloudDriveService extends TestCase {
     testRoot = session.getRootNode().addNode("testCloudDriveService", "nt:folder");
     session.save();
     testWorkspace = session.getWorkspace().getName();
-    testPath = testRoot.getPath(); 
+    testPath = testRoot.getPath();
 
     cdService = (CloudDriveService) container.getComponentInstanceOfType(CloudDriveService.class);
 
@@ -174,7 +168,7 @@ public class TestCloudDriveService extends TestCase {
       if (drive != null) {
         drive.disconnect();
       }
-      //cdService.disconnect(cloudUser);
+      // cdService.disconnect(cloudUser);
     } catch (NotConnectedException e) {
       LOG.warn("tearDown() Drive wasn't connected:" + e.getMessage());
     }
@@ -241,12 +235,12 @@ public class TestCloudDriveService extends TestCase {
     // call cloudDrives
     try {
       drive = cdService.createDrive(cloudUser, testRoot);
-      drive.connect();      
+      drive.connect();
     } catch (CloudDriveException e) {
       LOG.error("testConnect(): ", e);
       fail("Error: " + e);
     }
-    
+
     // test what it did
     String driveName = provider.getName() + " - " + cloudUser.getEmail();
     assertTrue(testRoot.hasNode(driveName));
@@ -286,7 +280,7 @@ public class TestCloudDriveService extends TestCase {
 
     try {
       drive.disconnect();
-      //cdService.disconnect(cloudUser);
+      // cdService.disconnect(cloudUser);
     } catch (CloudDriveException e) {
       LOG.error("testDisconnect(): ", e);
       fail("Error: " + e);
@@ -310,7 +304,7 @@ public class TestCloudDriveService extends TestCase {
       // connect
       drive = cdService.createDrive(cloudUser, testRoot);
       drive.connect();
-      
+
       // Node driveRoot = ((JCRLocalCloudDrive) localDrive).getRoootNode();
       Node driveNode = testRoot.getNode(provider.getName() + " - " + cloudUser.getEmail());
 
@@ -349,12 +343,12 @@ public class TestCloudDriveService extends TestCase {
     }
   }
 
-  public void testSynchronizeNode() throws RepositoryException {
+  public void testSynchronizeNode() throws RepositoryException, InterruptedException {
     try {
       // connect
       drive = cdService.createDrive(cloudUser, testRoot);
       drive.connect();
-      
+
       // Node driveRoot = ((JCRLocalCloudDrive) localDrive).getRoootNode();
       Node driveNode = testRoot.getNode(provider.getName() + " - " + cloudUser.getEmail());
 
@@ -376,7 +370,14 @@ public class TestCloudDriveService extends TestCase {
       driveNode.save();
 
       // synchronize the whole drive
-      drive.synchronize(syncNode2);
+      Command syncCmd = drive.synchronize(syncNode2);
+      // respect async behaviour
+      int i = 0;
+      while (!syncCmd.isDone()) {
+        assertTrue("Sync command not finished in time", i <= 50);
+        Thread.sleep(200);
+        i++;
+      }
 
       // check if file well added to cloud drive
       assertFilesExist(exoDrives.listFiles(cloudUser.getUsername()), "test_to_sync2");
