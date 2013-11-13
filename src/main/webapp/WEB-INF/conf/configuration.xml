@@ -47,6 +47,10 @@
   </component>
 
   <component>
+    <type>org.exoplatform.clouddrive.rest.ChangesService</type>
+  </component>
+  
+  <component>
     <type>org.exoplatform.clouddrive.rest.DriveServiceLocator</type>
   </component>
 
