@@ -19,12 +19,17 @@
 package org.exoplatform.ecms.upgrade.sanitization;
 
 import java.util.ArrayList;
+import java.util.Collection;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import javax.jcr.Node;
 import javax.jcr.NodeIterator;
 import javax.jcr.Session;
 import javax.jcr.Value;
+import javax.jcr.nodetype.NodeType;
+import javax.jcr.nodetype.NodeTypeManager;
 import javax.jcr.query.Query;
 import javax.jcr.query.QueryResult;
 
@@ -33,12 +38,18 @@ import org.exoplatform.commons.upgrade.UpgradeProductPlugin;
 import org.exoplatform.commons.version.util.VersionComparator;
 import org.exoplatform.container.xml.InitParams;
 import org.exoplatform.services.cms.BasePath;
+import org.exoplatform.services.cms.actions.ActionServiceContainer;
 import org.exoplatform.services.cms.impl.DMSConfiguration;
+import org.exoplatform.services.cms.scripts.ScriptService;
 import org.exoplatform.services.cms.views.ManageViewService;
 import org.exoplatform.services.jcr.RepositoryService;
+import org.exoplatform.services.jcr.core.nodetype.ExtendedNodeTypeManager;
+import org.exoplatform.services.jcr.core.nodetype.NodeTypeValue;
+import org.exoplatform.services.jcr.core.nodetype.PropertyDefinitionValue;
 import org.exoplatform.services.jcr.ext.common.SessionProvider;
 import org.exoplatform.services.log.ExoLogger;
 import org.exoplatform.services.log.Log;
+import org.exoplatform.services.wcm.core.NodetypeConstant;
 import org.exoplatform.services.wcm.utils.WCMCoreUtils;
 
 /**
@@ -99,7 +110,6 @@ public class SanitizationUpgradePlugin extends UpgradeProductPlugin {
      * Migrate preference 'Drive name' of site explorer portlet which should be changed to Collaboration instead of collaboration"
      */
     migrateDriveNameOfPortletPreferences();
-
   }
   
   @Override
@@ -469,8 +479,10 @@ public class SanitizationUpgradePlugin extends UpgradeProductPlugin {
     if (LOG.isInfoEnabled()) {
       LOG.info("Start " + this.getClass().getName() + ".............");
     }
+    SessionProvider sessionProvider = null;
     try {
-      Session session = WCMCoreUtils.getSystemSessionProvider().getSession("portal-system",
+      sessionProvider = SessionProvider.createSystemProvider();
+      Session session = sessionProvider.getSession("portal-system",
           repoService_.getCurrentRepository());
       if (LOG.isInfoEnabled()) {
         LOG.info("=====Start migrate portlet preferences drive name=====");
@@ -490,6 +502,11 @@ public class SanitizationUpgradePlugin extends UpgradeProductPlugin {
       if (LOG.isErrorEnabled()) {
         LOG.error("An unexpected error occurs when migrating preferences drive name: ", e);
       }
+    } finally {
+      if (sessionProvider != null) {
+        sessionProvider.close();
+      }
     }
   }  
+  
 }
