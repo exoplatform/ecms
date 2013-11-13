@@ -29,9 +29,6 @@ import org.exoplatform.webui.application.WebuiRequestContext;
  */
 public class CloudDriveContext {
 
-  //protected final static String NAME       = CloudDriveContext.class.getName();
-  //protected final static String PATHS      = "CloudDriveContext_Paths".intern();
-
   protected final static String JAVASCRIPT = "CloudDriveContext_Javascript".intern();
 
   public static boolean init(RequestContext requestContext, String workspace, String nodePath) {
