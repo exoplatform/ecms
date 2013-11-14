@@ -4,8 +4,22 @@
 	width: 16px !important;
 }
 
-.uiIconEcmsOpenCloudFile,.uiIconEcmsRefreshCloudDrive {
+.uiIconEcmsConnectBox {
+	background: url('icons/box-gray-16x16.png') no-repeat scroll left center transparent !important;
+	height: 16px !important;
+	width: 16px !important;
+}
+
+/*.uiIconEcmsOpenCloudFile,.uiIconEcmsRefreshCloudDrive {
 	background: url("icons/googledrive-gray-16x16.png") no-repeat left center transparent !important;
+}*/
+
+.uiIcon16x16CloudFile-gdrive {
+	background: url("icons/googledrive-gray-16x16.png") no-repeat left center transparent !important;
+}
+
+.uiIcon16x16CloudFile-box {
+	background: url("icons/box-gray-16x16.png") no-repeat left center transparent !important;
 }
 
 /*************************** NodeType Icon ***********************/

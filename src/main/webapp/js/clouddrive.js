@@ -595,7 +595,7 @@
 											drive.changesLink = res.changesLink;
 											scheduleSync();
 										});	
-										sync.fail(function(response, status, err) {
+										newLink.fail(function(response, status, err) {
 											utils.log("ERROR: error getting new changes link: " + err + ", " + status + ", " + response);
 										});
 									}
@@ -976,6 +976,11 @@
 			var menuItems = items.split(",");
 			var drive = cloudDrive.getContextDrive();
 			if (drive) {
+			// branded icons in context menu
+				$("i.uiIconEcmsRefreshCloudDrive, i.uiIconEcmsOpenCloudFile").each(function() {
+					$(this).attr("class", $(this).attr("class") + " uiIcon16x16CloudFile-" + drive.provider.id);
+				});
+				
 				// Common context menu: add links to CD actions
 				$("#ECMContextMenu a[exo\\:attr='" + MENU_OPEN_FILE + "']").each(function() {
 					var text = $(this).data("cd_action_prefix");
@@ -1092,13 +1097,7 @@
 				$("#uiActionsBarContainer ul")
 				    .append(
 				        "<li style='display: block;'><a class='actionIcon' style='height: 18px;'><i></i> </a></li>");
-				// TODO filter Context Menu common items: JCRContextMenu located
-				// in action bar
-				// $("#JCRContextMenu li.menuItem a
-				// i").not(allowed).each(function() {
-				// $(this).parent().css("display", "none");
-				// });
-
+				
 				// File Viewer
 				var viewer = $("#CloudFileViewer");
 				if (viewer.size() > 0) {
@@ -1114,7 +1113,8 @@
 
 						// fix Download icon, text and link
 						var i = title.find("i.uiIconDownload");
-						i.attr("class", "uiIconEcmsOpenCloudFile");
+						// TODO cleanup i.attr("class", "uiIconEcmsOpenCloudFile");
+						i.attr("class", "uiIcon16x16CloudFile-" + drive.provider.id);
 						var a = title.find("a");
 						a.text(" " + openOnProvider);
 						a.prepend(i);
