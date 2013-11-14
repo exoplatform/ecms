@@ -43,6 +43,7 @@ import javax.ws.rs.GET;
 import javax.ws.rs.POST;
 import javax.ws.rs.Path;
 import javax.ws.rs.Produces;
+import javax.ws.rs.QueryParam;
 import javax.ws.rs.core.Context;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
@@ -189,8 +190,8 @@ public class ChangesService implements ResourceContainer {
   @Path("/link/")
   @RolesAllowed("users")
   public Response getChangesLink(@Context UriInfo uriInfo,
-                                 @FormParam("workspace") String workspace,
-                                 @FormParam("path") String path) {
+                                 @QueryParam("workspace") String workspace,
+                                 @QueryParam("path") String path) {
 
     if (workspace != null) {
       if (path != null) {
