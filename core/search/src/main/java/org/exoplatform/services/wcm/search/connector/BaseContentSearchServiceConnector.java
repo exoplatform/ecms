@@ -62,6 +62,9 @@ public abstract class BaseContentSearchServiceConnector extends BaseSearchServic
     criteria.setSearchWebpage(false);
     criteria.setSearchDocument(true);
     criteria.setSearchWebContent(true);
+    if(query.contains("~")) {
+      criteria.setFuzzySearch(true);
+    }
     criteria.setLiveMode(true);
     criteria.setOffset(offset);
     criteria.setLimit(limit);

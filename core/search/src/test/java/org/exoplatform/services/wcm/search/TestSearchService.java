@@ -213,6 +213,7 @@ public class TestSearchService extends BaseSearchTest {
     queryCriteria.setSearchWebContent(true);
     queryCriteria.setLiveMode(false);
     queryCriteria.setSearchWebpage(false);
+    queryCriteria.setFuzzySearch(true);
     AbstractPageList<ResultNode> pageList = getSearchResult();
     assertEquals(2, pageList.getPage(1).size());
   }
@@ -235,6 +236,7 @@ public class TestSearchService extends BaseSearchTest {
     queryCriteria.setSearchWebContent(true);
     queryCriteria.setLiveMode(true);
     queryCriteria.setSearchWebpage(false);
+    queryCriteria.setFuzzySearch(true);
     AbstractPageList<ResultNode> pageList = getSearchResult();
     assertEquals(1, pageList.getPage(1).size());
     assertEquals(2, pageList.getTotalNodes());
@@ -258,6 +260,7 @@ public class TestSearchService extends BaseSearchTest {
     queryCriteria.setSearchWebContent(true);
     queryCriteria.setLiveMode(false);
     queryCriteria.setSearchWebpage(false);
+    queryCriteria.setFuzzySearch(true);
     AbstractPageList<ResultNode> pageList = getSearchResult();
     assertEquals(4, pageList.getTotalNodes());
     assertEquals(4, pageList.getPage(1).size());
@@ -281,6 +284,8 @@ public class TestSearchService extends BaseSearchTest {
     queryCriteria.setSearchWebContent(true);
     queryCriteria.setLiveMode(true);
     queryCriteria.setSearchWebpage(false);
+    queryCriteria.setFuzzySearch(true);
+    queryCriteria.setFuzzySearch(true);
     AbstractPageList<ResultNode> pageList = getSearchResult();
     assertEquals(2, pageList.getPage(1).size());
     assertEquals(4, pageList.getTotalNodes());
@@ -303,6 +308,7 @@ public class TestSearchService extends BaseSearchTest {
     queryCriteria.setSearchWebContent(true);
     queryCriteria.setLiveMode(true);
     queryCriteria.setSearchWebpage(false);
+    queryCriteria.setFuzzySearch(true);
     AbstractPageList<ResultNode> pageList = getSearchResult();
     assertEquals(2, pageList.getPage(1).size());
   }
@@ -323,6 +329,7 @@ public class TestSearchService extends BaseSearchTest {
     queryCriteria.setSearchWebContent(true);
     queryCriteria.setLiveMode(false);
     queryCriteria.setSearchWebpage(false);
+    queryCriteria.setFuzzySearch(true);
     AbstractPageList<ResultNode> pageList = getSearchResult();
     assertEquals(4, pageList.getTotalNodes());
   }
@@ -343,6 +350,7 @@ public class TestSearchService extends BaseSearchTest {
     queryCriteria.setSearchWebContent(true);
     queryCriteria.setLiveMode(false);
     queryCriteria.setSearchWebpage(false);
+    queryCriteria.setFuzzySearch(true);
     AbstractPageList<ResultNode> pageList = getSearchResult();
     assertEquals(2, pageList.getTotalNodes());
   }
@@ -363,6 +371,7 @@ public class TestSearchService extends BaseSearchTest {
     queryCriteria.setSearchWebContent(true);
     queryCriteria.setLiveMode(true);
     queryCriteria.setSearchWebpage(false);
+    queryCriteria.setFuzzySearch(true);
     AbstractPageList<ResultNode> pageList = getSearchResult();
     assertEquals(1, pageList.getPage(1).size());
     assertEquals(2, pageList.getTotalNodes());
