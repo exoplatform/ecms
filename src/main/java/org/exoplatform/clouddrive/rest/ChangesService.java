@@ -23,6 +23,7 @@ import org.exoplatform.clouddrive.CloudDrive.Command;
 import org.exoplatform.clouddrive.CloudDriveAccessException;
 import org.exoplatform.clouddrive.CloudDriveException;
 import org.exoplatform.clouddrive.CloudDriveService;
+import org.exoplatform.clouddrive.DriveRemovedException;
 import org.exoplatform.clouddrive.jcr.NodeFinder;
 import org.exoplatform.services.jcr.RepositoryService;
 import org.exoplatform.services.jcr.ext.app.SessionProviderService;
@@ -130,6 +131,12 @@ public class ChangesService implements ResourceContainer {
                   // XXX client should treat this status in special way and obtain new credentials using
                   // given provider
                   return Response.status(Status.FORBIDDEN).entity(local.getUser().getProvider()).build();
+                } catch (DriveRemovedException e) {
+                  LOG.warn("Cannot run asynchronous syncronization on removed drive " + workspace + ":"
+                      + path + ". " + e.getMessage());
+                  return Response.status(Status.NOT_FOUND)
+                                 .entity("Synchronization canceled. " + e.getMessage())
+                                 .build();
                 } catch (CloudDriveException e) {
                   LOG.error("Error starting asynchronous synchronization on drive " + workspace + ":" + path,
                             e);
