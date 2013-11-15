@@ -285,7 +285,6 @@ public class TestSearchService extends BaseSearchTest {
     queryCriteria.setLiveMode(true);
     queryCriteria.setSearchWebpage(false);
     queryCriteria.setFuzzySearch(true);
-    queryCriteria.setFuzzySearch(true);
     AbstractPageList<ResultNode> pageList = getSearchResult();
     assertEquals(2, pageList.getPage(1).size());
     assertEquals(4, pageList.getTotalNodes());

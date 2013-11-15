@@ -463,7 +463,9 @@ public class SiteSearchServiceImpl implements SiteSearchService {
         queryTerm = queryTermHelper.contains(keyword).buildTerm();
       } else if(queryCriteria.isFuzzySearch()) {
         queryTerm = queryTermHelper.contains(keyword).allowFuzzySearch(fuzzySearchIndex).buildTerm();
-      }      
+      } else {
+        queryTerm = queryTermHelper.contains(keyword).buildTerm();
+      }
     } else {
       keyword = keyword.replace("~", "\\~");
       keyword = keyword.replace("*", "\\*");
