@@ -63,8 +63,8 @@
       <artifactId>exo.kernel.container</artifactId>
         <exclusions>
             <exclusion>
-                <groupId>org.gatein.captcha</groupId>
-                <artifactId>simplecaptcha</artifactId>
+                <groupId>javax.servlet</groupId>
+                <artifactId>javax.servlet-api</artifactId>
             </exclusion>
         </exclusions>
     </dependency>
