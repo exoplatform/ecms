@@ -61,6 +61,12 @@
     <dependency>
       <groupId>org.exoplatform.kernel</groupId>
       <artifactId>exo.kernel.container</artifactId>
+        <exclusions>
+            <exclusion>
+                <groupId>org.gatein.captcha</groupId>
+                <artifactId>simplecaptcha</artifactId>
+            </exclusion>
+        </exclusions>
     </dependency>
     <dependency>
       <groupId>org.gatein.portal</groupId>
