@@ -157,7 +157,7 @@ public class UIGroupMemberSelector extends UIContainer implements ComponentSelec
     OrganizationService service = WCMCoreUtils.getService(OrganizationService.class);
     List<String> listGroup = new ArrayList<String>();
     if(getCurrentGroup() == null) return null;
-    Collection<Object> groups = service.getGroupHandler().findGroups(getCurrentGroup());
+    Collection<Group> groups = service.getGroupHandler().findGroups(getCurrentGroup());
     if(groups.size() > 0) {
       for (Object child : groups) {
         Group childGroup = (Group)child;
