@@ -62,13 +62,8 @@
   <JSFile>
     <dialog>
       <label>
-<<<<<<< HEAD
-        <name>Name</name>
-        <active>Aktiv</active>
-=======
         <name>#{word.name}</name>
         <active>Aktiv</active>
->>>>>>> c25a09c... de injection on 20131112-051452
         <priority>Priorität</priority>
         <content>JS-Daten</content>
       </label>

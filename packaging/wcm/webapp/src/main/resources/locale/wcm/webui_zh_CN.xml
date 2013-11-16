@@ -22,40 +22,40 @@
 <bundle>
   <UIExoStart>
     <tooltip>
-      <homepage>Homepage</homepage>
+      <homepage>主页</homepage>
     </tooltip>
   </UIExoStart>
 
   <UIFormInputSetWithAction>
     <msg>
-      <confirm-delete>Are you sure you want to delete this item?</confirm-delete>
+      <confirm-delete>确实要删除此项目吗?</confirm-delete>
     </msg>
   </UIFormInputSetWithAction>
 
   <Drives>
     <label>
-      <ManagedSites>Sites Management</ManagedSites>
-      <SharedSite>Shared Site</SharedSite>
+      <ManagedSites>网站管理</ManagedSites>
+      <SharedSite>共享的网站</SharedSite>
     </label>
   </Drives>
 
   <Views>
     <label>
       <wcm-view>Web</wcm-view>
-      <admin-view>Admin</admin-view>
-      <icon-view>Icons</icon-view>
-      <thumbails-view>Thumbnails</thumbails-view>
+      <admin-view>管理员</admin-view>
+      <icon-view>图标</icon-view>
+      <thumbails-view>缩略图</thumbails-view>
       <list-view>列表</list-view>
-      <authoring-view>Authoring</authoring-view>
-      <wcm-category-view>Categories</wcm-category-view>
-      <file-view>File Management View</file-view>
+      <authoring-view>创作</authoring-view>
+      <wcm-category-view>类别</wcm-category-view>
+      <file-view>文件管理视图</file-view>
     </label>
   </Views>
 
   <UIActionBar>
     <obtion>
-      <Publication>Publication</Publication>
-      <System>System</System>
+      <Publication>出版物</Publication>
+      <System>系统</System>
     </obtion>
   </UIActionBar>
 
@@ -65,72 +65,72 @@
       <action>#{word.action}</action>
     </header>
     <msg>
-      <child-not-found>No Page Found.</child-not-found>
+      <child-not-found>发现没有页面。</child-not-found>
     </msg>
     <title>
-      <select>Select</select>
+      <select>请选择</select>
     </title>
   </UIPageSelectorPanel>
 
   <UIContentDialogFormPopupWindow>
     <title>
-      <UIContentDialogPreference>Web Content Preference</UIContentDialogPreference>
+      <UIContentDialogPreference>Web 内容偏好</UIContentDialogPreference>
     </title>
   </UIContentDialogFormPopupWindow>
 
   <UITabPane>
     <title>
-      <UIContentBrowsePanelOne>Content Browser</UIContentBrowsePanelOne>
-      <UIContentBrowsePanelMulti>Content Browser</UIContentBrowsePanelMulti>
-      <UIContentBrowsePanelFolder>Folder Browser</UIContentBrowsePanelFolder>
-      <UIContentSearchForm>Content Search Form</UIContentSearchForm>
-      <UIContentSearchResult>Search Result</UIContentSearchResult>
-      <UIContentViewer>Preview Content</UIContentViewer>
-      <WebContentMetadataPopup>Property Selector</WebContentMetadataPopup>
-      <WebContentNodeTypePopup>Nodetype Selector</WebContentNodeTypePopup>
-      <UIPermissionManager>Permission Manager</UIPermissionManager>
+      <UIContentBrowsePanelOne>内容浏览器</UIContentBrowsePanelOne>
+      <UIContentBrowsePanelMulti>内容浏览器</UIContentBrowsePanelMulti>
+      <UIContentBrowsePanelFolder>文件夹浏览器</UIContentBrowsePanelFolder>
+      <UIContentSearchForm>内容搜索表单</UIContentSearchForm>
+      <UIContentSearchResult>搜索结果</UIContentSearchResult>
+      <UIContentViewer>预览内容</UIContentViewer>
+      <WebContentMetadataPopup>属性选择器</WebContentMetadataPopup>
+      <WebContentNodeTypePopup>节点类型选择器</WebContentNodeTypePopup>
+      <UIPermissionManager>权限管理器</UIPermissionManager>
     </title>
   </UITabPane>
 
   <UIContentBrowsePanelOne>
     <selectBoxValues>
-      <FilterBy>Filter by</FilterBy>
-      <WebContent>Web Content</WebContent>
-      <DMSDocument>Document</DMSDocument>
-      <Media>Media</Media>
+      <FilterBy>通过筛选</FilterBy>
+      <WebContent>Web 内容</WebContent>
+      <DMSDocument>文档</DMSDocument>
+      <Media>媒体</Media>
     </selectBoxValues>
     <msg>
-      <node-checkout>The node is checked out. Please check the node before performing this function.</node-checkout>
+      <node-checkout>该节点已签出。请执行此功能之前，检查该节点。</node-checkout>
     </msg>
   </UIContentBrowsePanelOne>
 
   <UIContentBrowsePanelMulti>
     <selectBoxValues>
-      <FilterBy>Filter by</FilterBy>
-      <WebContent>Web Content</WebContent>
-      <DMSDocument>Document</DMSDocument>
-      <Media>Media</Media>
+      <FilterBy>通过筛选</FilterBy>
+      <WebContent>Web 内容</WebContent>
+      <DMSDocument>文档</DMSDocument>
+      <Media>媒体</Media>
     </selectBoxValues>
   </UIContentBrowsePanelMulti>
 
   <UIContentBrowsePanelOne>
     <label>
-      <LeftColumn>Select a folder to display its children as content.</LeftColumn>
-      <RightColumn>The content below can be selected.</RightColumn>
+      <LeftColumn>选择要显示其子内容的文件夹。</LeftColumn>
+      <RightColumn>下面的内容，可以选择。</RightColumn>
     </label>
   </UIContentBrowsePanelOne>
 
   <UIContentBrowsePanelMulti>
     <label>
-      <LeftColumn>Select a folder to display its children as content.</LeftColumn>
-      <RightColumn>The content below can be selected.</RightColumn>
+      <LeftColumn>选择要显示其子内容的文件夹。</LeftColumn>
+      <RightColumn>下面的内容，可以选择。</RightColumn>
     </label>
   </UIContentBrowsePanelMulti>
 
   <UIContentBrowsePanelFolder>
     <label>
-      <LeftColumn>Select a folder to display its children as content.</LeftColumn>
-      <RightColumn>The folder below can be selected.</RightColumn>
+      <LeftColumn>选择要显示其子内容的文件夹。</LeftColumn>
+      <RightColumn>可以选择下面的文件夹。</RightColumn>
     </label>
   </UIContentBrowsePanelFolder>
 
@@ -141,8 +141,8 @@
       <delete>删除</delete>
     </label>
     <msg>
-      <no-content-found>No content found.</no-content-found>
-      <non-content>You have not selected any content.</non-content>
+      <no-content-found>没有找到的内容。</no-content-found>
+      <non-content>您没有选择任何内容。</non-content>
     </msg>
   </UISelectedContentGrid>
 
@@ -156,39 +156,39 @@
   <UIContentBrowsePathSelector>
     <header>
       <name>#{word.name}</name>
-      <publicationstate>Publication State</publicationstate>
+      <publicationstate>发布状态</publicationstate>
       <action>操作</action>
     </header>
     <msg>
-      <child-not-found>No Content Found</child-not-found>
+      <child-not-found>没有找到的内容</child-not-found>
     </msg>
   </UIContentBrowsePathSelector>
 
   <UIContentBrowsePathSelectorFolder>
     <header>
       <name>#{word.name}</name>
-      <publicationstate>Publication State</publicationstate>
+      <publicationstate>发布状态</publicationstate>
       <action>操作</action>
     </header>
     <msg>
-      <child-not-found>No Folder Found</child-not-found>
+      <child-not-found>没有找到的文件夹</child-not-found>
     </msg>
   </UIContentBrowsePathSelectorFolder>
 
   <UIContentSearchForm>
     <title>
-      <Location>Site Name</Location>
-      <SearchByName>Search by Name</SearchByName>
-      <Fulltext>A word or phrase in context</Fulltext>
+      <Location>站点名称</Location>
+      <SearchByName>按名字查询</SearchByName>
+      <Fulltext>单词或短语在上下文中</Fulltext>
       <Property>属性</Property>
       <Contain>包含</Contain>
-      <FromDate>From Date</FromDate>
-      <ToDate>To Date</ToDate>
+      <FromDate>从日期</FromDate>
+      <ToDate>到日期</ToDate>
       <DocumentType>文档类型</DocumentType>
     </title>
     <tooltip>
-      <AddMetadataType>Add Property</AddMetadataType>
-      <AddNodeType>Add Node Type</AddNodeType>
+      <AddMetadataType>添加属性</AddMetadataType>
+      <AddNodeType>添加节点类型</AddNodeType>
     </tooltip>    
     <label>
       <option>
@@ -200,18 +200,18 @@
       <SearchWebContent>搜索</SearchWebContent>
     </action>
     <msg>
-      <time-to-late>The searching time is too long.</time-to-late>
-      <empty-field>Please input a valid keyword for search.</empty-field>
-      <invalid-format>Invalid date/time format in field '{0}'.</invalid-format>
-      <invalid-date>"To Date" must be later than "From Date"</invalid-date>
-      <invalid-nodeType>The node type "{0}" is invalid. Please check again.</invalid-nodeType>
-      <invalid-keyword>The keyword is invalid. Some characters are not supported.</invalid-keyword>
+      <time-to-late>搜索时间过长。</time-to-late>
+      <empty-field>请输入有效的关键字进行搜索。</empty-field>
+      <invalid-format>在字段"{0}"无效的日期时间格式。</invalid-format>
+      <invalid-date>"到日期"必须晚于"从日期"</invalid-date>
+      <invalid-nodeType>节点类型"{0}"无效。请再次检查。</invalid-nodeType>
+      <invalid-keyword>关键字是无效的。不支持某些字符。</invalid-keyword>
     </msg>
   </UIContentSearchForm>
 
   <WebContentMetadataPopup>
     <title>
-      <UIContentPropertySelector>Property Selector</UIContentPropertySelector>
+      <UIContentPropertySelector>属性选择器</UIContentPropertySelector>
     </title>
   </WebContentMetadataPopup>
 
@@ -221,14 +221,14 @@
       <Cancel>取消</Cancel>
     </action>
     <label>
-      <metadataType>Metadata Type</metadataType>
+      <metadataType>元数据类型</metadataType>
       <property_select>属性</property_select>
     </label>
   </UIContentPropertySelector>
 
   <WebContentNodeTypePopup>
     <title>
-      <UIContentNodeTypeSelector>Node Type Selector</UIContentNodeTypeSelector>
+      <UIContentNodeTypeSelector>节点类型选择器</UIContentNodeTypeSelector>
     </title>
   </WebContentNodeTypePopup>
 
@@ -242,42 +242,42 @@
   <UIContentSearchResult>
     <header>
       <title>标题</title>
-      <score>Score</score>
-      <publicationstate>Publication State</publicationstate>
+      <score>得分</score>
+      <publicationstate>发布状态</publicationstate>
       <action>操作</action>
     </header>
     <title>
-      <Select>Select</Select>
-      <View>View</View>
+      <Select>请选择</Select>
+      <View>查看</View>
     </title>
     <msg>
-    <template-not-support>Cannot preview this content. The template is not supported</template-not-support>
+    <template-not-support>无法预览此内容。该模板不受支持</template-not-support>
     </msg>
   </UIContentSearchResult>
 
   <UIContentDialogForm>
     <action>
-      <SaveDraft>Save Draft</SaveDraft>
-      <FastPublish>Fast Publish</FastPublish>
-      <Preferences>Preferences</Preferences>
+      <SaveDraft>保存草稿</SaveDraft>
+      <FastPublish>快速发布</FastPublish>
+      <Preferences>首选项</Preferences>
       <Close>关闭</Close>
     </action>
     <msg>
-      <access-denied>You do not have permission to add categories to this document.</access-denied>
-      <exception>An error occurred while adding categories to this document.</exception>
-      <non-categories>Categories are wrong. Please select appropriate categories.</non-categories>
+      <access-denied>你并没有将类别添加到此文档的权限。</access-denied>
+      <exception>将类别添加到此文档时出错。</exception>
+      <non-categories>类别是错误的。请选择适当的类别。</non-categories>
     </msg>
   </UIContentDialogForm>
 
   <UIPermissionManager>
     <label>
       <UIPermissionInputSetWithAction>权限</UIPermissionInputSetWithAction>
-      <UIAccessibleCheckboxInput>Access Right</UIAccessibleCheckboxInput>
-      <UIEditableCheckboxInput>Edit Right</UIEditableCheckboxInput>
+      <UIAccessibleCheckboxInput>访问权限</UIAccessibleCheckboxInput>
+      <UIEditableCheckboxInput>编辑的权利</UIEditableCheckboxInput>
     </label>
     <action>
       <Save>#{word.save}</Save>
-      <Clear>Clear</Clear>
+      <Clear>清除</Clear>
       <title>
         <Edit>编辑</Edit>
         <Delete>删除</Delete>
@@ -288,45 +288,45 @@
   <UIPermissionManagerGrid>
     <header>
       <owner>权限</owner>
-      <accessible>Accessible</accessible>
-      <editable>Editable</editable>
+      <accessible>可访问</accessible>
+      <editable>可编辑</editable>
       <action>操作</action>
     </header>
     <msg>
-      <confirm-delete-permission>Are you sure you want to delete this permission?</confirm-delete-permission>
-      <no-permission-remove>You do not have permission.</no-permission-remove>
-      <access-denied>Access denied.</access-denied>
-      <node-locked>The path element {0} or one of its parents is locked.</node-locked>
-      <userOrGroup-required>You must select a user or group.</userOrGroup-required>
-      <checkbox-require>You must set rights.</checkbox-require>
-      <node-checkedin>You must check out first.</node-checkedin>
+      <confirm-delete-permission>确实要删除此权限吗?</confirm-delete-permission>
+      <no-permission-remove>您没有权限。</no-permission-remove>
+      <access-denied>访问被拒绝。</access-denied>
+      <node-locked>其父母之一或路径元素 {0} 已被锁定。</node-locked>
+      <userOrGroup-required>您必须选择一个用户或组。</userOrGroup-required>
+      <checkbox-require>您必须设置权限。</checkbox-require>
+      <node-checkedin>您必须签出第一次。</node-checkedin>
     </msg>
   </UIPermissionManagerGrid>
 
   <UIPermissionInputSetWithAction>
     <title>
-      <SelectUser>Select User</SelectUser>
-      <SelectMember>Select Member</SelectMember>
-      <AddAny>Add Any Permission</AddAny>
+      <SelectUser>选择用户</SelectUser>
+      <SelectMember>选择成员</SelectMember>
+      <AddAny>添加任何权限</AddAny>
     </title>
   </UIPermissionInputSetWithAction>
 
   <UIUserSelectorPopupWindow>
     <title>
-      <UIUserContainer>User Selector</UIUserContainer>
+      <UIUserContainer>用户选择器</UIUserContainer>
     </title>
   </UIUserSelectorPopupWindow>
 
   <UIGroupSelectorPopupWindow>
     <title>
-      <UIGroupMemberSelector>Group Selector</UIGroupMemberSelector>
+      <UIGroupMemberSelector>组选择器</UIGroupMemberSelector>
     </title>
   </UIGroupSelectorPopupWindow>
 
   <UIGroupMemberSelector>
     <label>
-      <selectGroup>Select Group</selectGroup>
-      <selectMembership>Select Membership</selectMembership>
+      <selectGroup>选择群组</selectGroup>
+      <selectMembership>选择成员身份</selectMembership>
     </label>
   </UIGroupMemberSelector>
 
@@ -338,102 +338,102 @@
 
   <ZeroValidator>
     <msg>
-      <Invalid-number>Zero is not accepted in the field '{0}'.</Invalid-number>
+      <Invalid-number>在字段"{0}"不接受为零。</Invalid-number>
     </msg>
   </ZeroValidator>
 
   <UIDropDownPageTemp>
     <item>
-      <WCMPageConfigs>WCM Page Configurations</WCMPageConfigs>
-      <ColumnPageConfigs>Column Page Configurations</ColumnPageConfigs>
-      <RowPageConfigs>Row Page Configurations</RowPageConfigs>
-      <TabsPageConfigs>Tabs Page Configurations</TabsPageConfigs>
-      <MixPageConfigs>Mix Page Configurations</MixPageConfigs>
+      <WCMPageConfigs>WCM 页面配置</WCMPageConfigs>
+      <ColumnPageConfigs>列页面配置</ColumnPageConfigs>
+      <RowPageConfigs>行页配置</RowPageConfigs>
+      <TabsPageConfigs>选项卡页配置</TabsPageConfigs>
+      <MixPageConfigs>混合页配置</MixPageConfigs>
     </item>
   </UIDropDownPageTemp>
 
   <UIWizardPageSelectLayoutForm>
     <label>
-      <SingleContentViewer>Single Content Viewer</SingleContentViewer>
-      <ContentListViewer>Content List Viewer</ContentListViewer>
+      <SingleContentViewer>单个内容查看器</SingleContentViewer>
+      <ContentListViewer>内容列表查看器</ContentListViewer>
       <Search>搜索</Search>
-      <Sitemap>Site Map</Sitemap>
-      <TwoColumnsLayout>Two-column Layout</TwoColumnsLayout>
-      <ThreeColumnsLayout>Three-column Layout</ThreeColumnsLayout>
-      <TwoRowsLayout>Two-row Layout</TwoRowsLayout>
-      <ThreeRowsLayout>Three-row Layout</ThreeRowsLayout>
-      <TwoTabsLayout>Two-tab layout</TwoTabsLayout>
-      <ThreeTabsLayout>Three-tab Layout</ThreeTabsLayout>
-      <TwoColumnsOneRowLayout>Two-column &amp; One-row Layout</TwoColumnsOneRowLayout>
-      <OneRowTwoColumnsLayout>One-row &amp; Two-column Layout</OneRowTwoColumnsLayout>
-      <ThreeRowsTwoColumnsLayout>Three-row &amp; Two-column Layout</ThreeRowsTwoColumnsLayout>
+      <Sitemap>网站地图</Sitemap>
+      <TwoColumnsLayout>两列布局</TwoColumnsLayout>
+      <ThreeColumnsLayout>三列布局</ThreeColumnsLayout>
+      <TwoRowsLayout>两行布局</TwoRowsLayout>
+      <ThreeRowsLayout>三列布局</ThreeRowsLayout>
+      <TwoTabsLayout>两个选项卡布局</TwoTabsLayout>
+      <ThreeTabsLayout>三个选项卡布局</ThreeTabsLayout>
+      <TwoColumnsOneRowLayout>两列 &amp; 一行布局</TwoColumnsOneRowLayout>
+      <OneRowTwoColumnsLayout>一行 &amp; 两列布局</OneRowTwoColumnsLayout>
+      <ThreeRowsTwoColumnsLayout>三行 &amp; 两列布局</ThreeRowsTwoColumnsLayout>
     </label>
   </UIWizardPageSelectLayoutForm>
 
   <Signin>
-    <welcome>Welcome</welcome>
+    <welcome>欢迎</welcome>
     <login>登录</login>
-    <logout>Logout</logout>
-    <language>Change Language</language>
-    <register>Register</register>
+    <logout>退出</logout>
+    <language>更改语言</language>
+    <register>注册</register>
   </Signin>
   <UIDriveForm>
 <label>
-<wcm-category-view>Category View</wcm-category-view>
-<wcm-view>WCM Content View</wcm-view>
+<wcm-category-view>分类视图</wcm-category-view>
+<wcm-view>WCM 内容视图</wcm-view>
 </label>
   </UIDriveForm>
   
   <ContentSelector>
     <title>
-      <PersonalDrives>Personal Drives</PersonalDrives>
-      <GeneralDrives>General Drives</GeneralDrives>
-      <GroupDrives>Group Drives</GroupDrives>
-      <Private>Private</Private>
+      <PersonalDrives>个人驱动器</PersonalDrives>
+      <GeneralDrives>一般的驱动器</GeneralDrives>
+      <GroupDrives>组驱动器</GroupDrives>
+      <Private>私有</Private>
       <Public>公开</Public>
-      <BackupCenter>Backup Center</BackupCenter>
-      <CategorizedDocumentsCenter>Categorized Documents Center</CategorizedDocumentsCenter>
-      <CollaborationCenter>Collaboration Center</CollaborationCenter>
-      <DigitalAssetsManagementCenter>Digital Assets Management Center</DigitalAssetsManagementCenter>
-      <DMSAdministration>DMS Administration</DMSAdministration>
-      <DocumentsManagementCenter>Documents Management Center</DocumentsManagementCenter>
-      <LiveDocumentsCenter>Live Documents Center</LiveDocumentsCenter>
-      <PendingDocumentsCenter>Pending Documents Center</PendingDocumentsCenter>
-      <RecordsManagementCenter>Records Management Center</RecordsManagementCenter>
-      <SharedUsersSpace>Shared Users Space</SharedUsersSpace>
-      <Systemfiles>System Files</Systemfiles>
-      <ValidationRequestsDocumentsCenter>Validation Requests Documents Center</ValidationRequestsDocumentsCenter>
-      <ManagedSites>Sites Management</ManagedSites>
-      <SharedSite>Shared Site</SharedSite>
+      <BackupCenter>备份中心</BackupCenter>
+      <CategorizedDocumentsCenter>分类的文档中心</CategorizedDocumentsCenter>
+      <CollaborationCenter>协作中心</CollaborationCenter>
+      <DigitalAssetsManagementCenter>数字资产管理中心</DigitalAssetsManagementCenter>
+      <DMSAdministration>DMS 管理</DMSAdministration>
+      <DocumentsManagementCenter>记录管理中心</DocumentsManagementCenter>
+      <LiveDocumentsCenter>生活的文档中心</LiveDocumentsCenter>
+      <PendingDocumentsCenter>挂起的文档中心</PendingDocumentsCenter>
+      <RecordsManagementCenter>记录管理中心</RecordsManagementCenter>
+      <SharedUsersSpace>共享的用户空间</SharedUsersSpace>
+      <Systemfiles>系统文件</Systemfiles>
+      <ValidationRequestsDocumentsCenter>验证请求的文档中心</ValidationRequestsDocumentsCenter>
+      <ManagedSites>网站管理</ManagedSites>
+      <SharedSite>共享的网站</SharedSite>
     </title>
   </ContentSelector>
   
   <UICategoryNavigationTargetPathPopupWindow>
     <title>
-      <UIPageSelector>Page Selector</UIPageSelector>
+      <UIPageSelector>页面选择器</UIPageSelector>
     </title>
   </UICategoryNavigationTargetPathPopupWindow>
   
   <UIDocumentInfo>
     <msg>
-      <access-denied-exception>Access denied. You maybe not have read permission, or the node may have been removed or changed.</access-denied-exception>
+      <access-denied-exception>访问被拒绝。你也许不具有读取权限，或者该节点可能已删除或更改。</access-denied-exception>
     </msg>
   </UIDocumentInfo>
   <UIPortalApplication>
     <title>
-      <abort>Abort</abort>
+      <abort>中止</abort>
     </title>
   </UIPortalApplication>    
   
   <CategoryNavigationTemplate>
   <label>
-  <home>Home</home>
+  <home>首页</home>
   </label>
   </CategoryNavigationTemplate>
   
   <Breadcrumb>
   <label>
-  <home>Home</home>
+  <home>主页</home>
   </label>  
   </Breadcrumb>
 </bundle>

@@ -303,7 +303,7 @@
       <ViewReferences>引用</ViewReferences>
       <ViewNodeType>类型</ViewNodeType>
       <ViewPermissions>权限</ViewPermissions>
-      <ViewProperties>Properties</ViewProperties>
+      <ViewProperties>属性</ViewProperties>
       <ViewMetadatas>元数据</ViewMetadatas>
       <ViewRelations>显示/隐藏关系</ViewRelations>
       <ShowJCRStructure>显示/隐藏内容结构</ShowJCRStructure>
@@ -346,7 +346,7 @@
     </msg>
     <title>
       <select-tab>选择选项卡</select-tab>
-      <SimpleSearch>Quick Search</SimpleSearch>
+      <SimpleSearch>快速搜索</SimpleSearch>
       <AdvanceSearch>高级搜索</AdvanceSearch>
       <SavedQueries>保存的查询</SavedQueries>
       <ShowAllOwnedByUser>显示我的所有项目</ShowAllOwnedByUser>
@@ -626,7 +626,7 @@
       <UIPublicationHistory>历史</UIPublicationHistory>
       <UIVersionViewer>版本查看器</UIVersionViewer>
 
-      <UIPropertyTab>Properties</UIPropertyTab>
+      <UIPropertyTab>属性</UIPropertyTab>
       <UIMetadataTab>元数据</UIMetadataTab>
       <UIPropertyForm>添加新的属性</UIPropertyForm>
       <UIUploadContent>上载的文件信息</UIUploadContent>
@@ -638,7 +638,7 @@
       <UICategoryManagerSearch>将类别添加到搜索</UICategoryManagerSearch>
       <UIConstraintsForm>限制窗体</UIConstraintsForm>
       <UIViewSearchResult>查看内容</UIViewSearchResult>
-      <UIContentNameSearch>Search by Name</UIContentNameSearch>
+      <UIContentNameSearch>按名字查询</UIContentNameSearch>
       <UINodeInfo>版本信息</UINodeInfo>
       <UINodeProperty>节点属性</UINodeProperty>
       <UIActionListContainer>可用的操作</UIActionListContainer>
@@ -1284,7 +1284,7 @@
   -->
   <UIExportNode>
     <label>
-      <format>Format</format>
+      <format>格式</format>
       <nodePath>导出的路径</nodePath>
       <zip>压缩</zip>
       <systemView>系统视图</systemView>
@@ -1377,7 +1377,7 @@
     <label>
       <operation>操作</operation>
       <userName>用户名</userName>
-      <date>Date</date>
+      <date>日期</date>
       <version>版本</version>
     </label>
   </UIAuditingInfo>
@@ -1458,7 +1458,7 @@
   -->
   <UIImportNode>
     <label>
-      <format>Format</format>
+      <format>格式</format>
       <systemView>系统视图</systemView>
       <documentView>文档视图</documentView>
       <upload>上传文件</upload>
@@ -1485,7 +1485,7 @@
   -->
   <UILabelForm>
     <label>
-      <label>Label</label>
+      <label>标签</label>
     </label>
     <action>
       <Save>#{word.save}</Save>
@@ -1555,7 +1555,7 @@
   </UICategoryManager>
   <UICategoriesAddedList>
     <header>
-      <path>Category</path>
+      <path>类别</path>
       <action>操作</action>
     </header>
     <msg>
@@ -1568,7 +1568,7 @@
       </title>
     </action>
     <label>
-      <category>Category</category>
+      <category>类别</category>
       <actions>操作</actions>
       <delete>删除</delete>
     </label>
@@ -1977,7 +1977,7 @@
       <public>公开</public>
       <private>私人</private>
       <state>状态</state>
-      <visibility>Visibility</visibility>
+      <visibility>可见性</visibility>
       <nodeName>节点名称：</nodeName>
       <lifecycleName>生命周期名称</lifecycleName>
       <stateName>状态名称</stateName>
@@ -2071,12 +2071,12 @@
   -->
   <UIPublicationLogList>
     <header>
-      <date>Date</date>
+      <date>日期</date>
       <newState>新的状态</newState>
       <user>用户</user>
       <description>说明</description>
       <version>版本</version>
-      <visibility>Visibility</visibility>
+      <visibility>可见性</visibility>
     </header>
     <action>
       <Close>#{word.close}</Close>
@@ -2912,7 +2912,7 @@
     </button>
     <revisions>
       <version>修订版本</version>
-      <date>Date</date>
+      <date>日期</date>
       <author>作者</author>
       <status>状态</status>
       <action>操作</action>
@@ -2953,7 +2953,7 @@
   </UIPublicationPanel>
   <UIPublicationHistory>
     <header>
-      <date>Date</date>
+      <date>日期</date>
       <versionName>修改名称</versionName>
       <currentState>当前状态</currentState>
       <user>作者</user>
@@ -3059,8 +3059,8 @@
   </UploadFileMimeTypesValidator>
   <lifecyclePhase>
     <label>
-    <no>No</no>
-  <yes>Yes</yes>
+    <no>否</no>
+  <yes>是</yes>
   <true>对</true>
   <false>错</false>
   <Electronic>电子</Electronic>
@@ -3139,7 +3139,7 @@
   <FileView>
     <label>
       <name>姓名</name>
-      <date>Date</date>
+      <date>日期</date>
       <size>大小</size>
       <sortBy>排序依据:</sortBy>
       <filesAreSelected>文件已被选定</filesAreSelected>

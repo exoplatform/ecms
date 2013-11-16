@@ -84,15 +84,9 @@
 
   <UIWorkspaceList>
     <label>
-<<<<<<< HEAD
-      <workspaceName>Workspace</workspaceName>
-      <rootNodePath>Percorso Root</rootNodePath>
-      <rootNodeInfo>Root node</rootNodeInfo>
-=======
       <workspaceName>Workspace</workspaceName>
       <rootNodePath>Percorso Root</rootNodePath>
       <rootNodeInfo>Nodo Root</rootNodeInfo>
->>>>>>> 006e26f... it injection on 20131112-051452
     </label>
   </UIWorkspaceList>
 
@@ -179,11 +173,7 @@
 
   <UICategoriesSelector>
     <action>
-<<<<<<< HEAD
-      <close>Chiuso</close>
-=======
       <close>#{word.close}</close>
->>>>>>> 006e26f... it injection on 20131112-051452
     </action>
   </UICategoriesSelector>
 
