@@ -154,24 +154,15 @@
   <UIActionForm>
     <title>Aggiungi un'azione per l'albero delle categorie</title>
     <action>
-<<<<<<< HEAD
-      <Save>Salva</Save>
-=======
       <Save>#{word.save}</Save>
->>>>>>> 006e26f... it injection on 20131112-051452
     </action>
     <msg>
       <name-not-allowed>Nome vietato.</name-not-allowed>
       <path-invalid>Percorso non valido.</path-invalid>
       <taxonomy-existed>L'albero delle categorie esiste già.</taxonomy-existed>
       <taxonomy-node-existed>Il nodo categoria esiste già.</taxonomy-node-existed>
-<<<<<<< HEAD
-      <no-permission-add>You do not have the right to add an action.</no-permission-add>
-      <not-created-tree>L'albero delle categorie non è ancora stato creato.</not-created-tree>
-=======
       <no-permission-add>Non ha il diritto di aggiungere un'azione.</no-permission-add>
       <not-created-tree>L'albero delle categorie non è ancora stato creato.</not-created-tree>
->>>>>>> 006e26f... it injection on 20131112-051452
     </msg>
   </UIActionForm>
 
@@ -251,13 +242,8 @@
     </title>
     <header>
       <icon>Icona</icon>
-<<<<<<< HEAD
-      <name>Vedi Metadati</name>
-      <type>Type</type>
-=======
       <name>Vedi Metadati</name>
       <type>Tipo</type>
->>>>>>> 006e26f... it injection on 20131112-051452
       <internalUse>Uso interno</internalUse>
       <action>Action</action>
     </header>
@@ -804,13 +790,8 @@
       <UITemplateForm>Template</UITemplateForm>
       <UITemplateContainer>Documenti</UITemplateContainer>
       <UIActionsTemplateContainer>Azioni</UIActionsTemplateContainer>
-<<<<<<< HEAD
-      <UIOthersTemplateContainer>Others</UIOthersTemplateContainer>
-  <UIActionScriptContainer>Azione</UIActionScriptContainer>
-=======
       <UIOthersTemplateContainer>Altri</UIOthersTemplateContainer>
   <UIActionScriptContainer>Azione</UIActionScriptContainer>
->>>>>>> 006e26f... it injection on 20131112-051452
   <UIWidgetScriptContainer>Widgets</UIWidgetScriptContainer>
 <UIInterceptorScriptContainer>Intercettori</UIInterceptorScriptContainer>
 
@@ -830,15 +811,9 @@
   -->
   <UIViewList>
    <title>
-<<<<<<< HEAD
-     <View>View</View>
-     <EditInfo>Modifica</EditInfo>
-     <Delete>Delete</Delete>
-=======
      <View>Vista</View>
      <EditInfo>Modifica</EditInfo>
      <Delete>Cancellare</Delete>
->>>>>>> 006e26f... it injection on 20131112-051452
    </title>
     <header>
       <name>Nome</name>
@@ -935,11 +910,7 @@
  <userOrGroup>Utente O Gruppo</userOrGroup>
 </label>
 <msg>
-<<<<<<< HEAD
- <permission-exist>The permission '{0}' already exists in the list.</permission-exist>
-=======
  <permission-exist>Il permesso '{0}' è già presente nella lista.</permission-exist>
->>>>>>> 006e26f... it injection on 20131112-051452
 </msg>
 </UIViewPermissionForm>
 
@@ -976,13 +947,8 @@
       <fileName-invalid>Il nome tab contiene caratteri non validi.</fileName-invalid>
     </msg>
     <label>
-<<<<<<< HEAD
-      <version>Ripristina Versione</version>
-      <viewName>Name</viewName>
-=======
       <version>Ripristina Versione</version>
       <viewName>nome</viewName>
->>>>>>> 006e26f... it injection on 20131112-051452
       <tabName>Nome della scheda</tabName>
       <permission>Permesso</permission>
       <tabs>Schede</tabs>
@@ -990,45 +956,16 @@
       <enableVersion>Abilita Versione</enableVersion>
       <addFolder>Aggiungi Cartella</addFolder>
       <addDocument>Aggiungi Documento</addDocument>
-<<<<<<< HEAD
-      <editDocument>Modifica Documento</editDocument>
-      <upload>Carica File</upload>
-      <paste>Incolla</paste>
-      <search>Search</search>
-=======
       <editDocument>Modifica Documento</editDocument>
       <upload>Carica File</upload>
       <paste>Incolla</paste>
       <search>Ricerca</search>
->>>>>>> 006e26f... it injection on 20131112-051452
       <viewReferences>Visualizza Referenze</viewReferences>
       <viewNodeType>Visualizza Tipo Nodo</viewNodeType>
       <viewPermissions>Visualizza Permessi</viewPermissions>
       <viewProperties>Visualizza ProprietÃ </viewProperties>
       <manageVersions>Gestisci versioni</manageVersions>
       <manageAuditing>Gestione Revisioni</manageAuditing>
-<<<<<<< HEAD
-      <managePublications>Gestione Pubblicazioni</managePublications>
-      <manageCategories>Manage Categories</manageCategories>
-      <manageRelations>Manage Relations</manageRelations>
-      <manageActions>Gestisci Azioni</manageActions>
-      <exportNode>Esporta Nodo</exportNode>
-      <importNode>Importa Nodo</importNode>
-      <viewRelations>View Relations</viewRelations>
-      <showJCRStructure>Show JCR Structure</showJCRStructure>
-      <watchDocument>Controlla Documento</watchDocument>
-      <taggingDocument>Tagga Documento</taggingDocument>
-      <viewMetadatas>Visualizza Metadati</viewMetadatas>
-      <overloadThumbnail>Carica Anteprima</overloadThumbnail>
-      <manageHidden>Hide/Show Content</manageHidden>
-      <comment>Commenta</comment>
-      <vote>Vota Documento</vote>  
-      <addCategory>Aggiungi Categoria</addCategory>
-      <addLocalizationLink>Aggiungi Traduzione</addLocalizationLink>
-      <publicationRequestApproval>Request Approval</publicationRequestApproval>
-      <publicationApproveContent>Approve Content</publicationApproveContent>
-      <publicationPublish>Publish</publicationPublish>
-=======
       <managePublications>Gestione Pubblicazioni</managePublications>
       <manageCategories>Gestione Categorie</manageCategories>
       <manageRelations>Gestione Relazioni</manageRelations>
@@ -1049,7 +986,6 @@
       <publicationRequestApproval>Richiedere Approvazione</publicationRequestApproval>
       <publicationApproveContent>Approva Contenuto</publicationApproveContent>
       <publicationPublish>Pubblica</publicationPublish>
->>>>>>> 006e26f... it injection on 20131112-051452
 <contentNavigation>Navigazione Contenuti</contentNavigation>
 <addSymLink>Aggiungi Collegamento Simbolico</addSymLink>
     </label>
@@ -1066,15 +1002,9 @@
   <UIViewFormTabPane>
     <tab>
       <label>
-<<<<<<< HEAD
-        <UITabContainer>Azione</UITabContainer>
-        <UIViewForm>View</UIViewForm>
-        <UIViewPermissionContainer>Permission</UIViewPermissionContainer>    
-=======
         <UITabContainer>Azione</UITabContainer>
         <UIViewForm>Vista</UIViewForm>
         <UIViewPermissionContainer>Permesso</UIViewPermissionContainer>    
->>>>>>> 006e26f... it injection on 20131112-051452
       </label>
     </tab>
     <action>
@@ -1111,15 +1041,9 @@
   -->
   <UIECMTemplateList>
     <title>
-<<<<<<< HEAD
-      <View>View</View>
-      <EditInfo>Modifica</EditInfo>
-      <Delete>Delete</Delete>
-=======
       <View>Vista</View>
       <EditInfo>Modifica</EditInfo>
       <Delete>Cancellare</Delete>
->>>>>>> 006e26f... it injection on 20131112-051452
     </title>
     <header>
       <name>Nome</name>
@@ -1134,11 +1058,7 @@
       <template-in-use>Impossibile eliminare {0}. E' in uso.</template-in-use>
       <confirm-delete>Sei sicuro di voler eliminare questo template?</confirm-delete>
       <access-denied>Accesso negato. Non hai il permsso di usare questa funzione.</access-denied>
-<<<<<<< HEAD
-      <delete-permission-denied>You do not have permission to delete '{0}' template.</delete-permission-denied>
-=======
       <delete-permission-denied>Non ha il permesso di cancellare '{0}' Tempate.</delete-permission-denied>
->>>>>>> 006e26f... it injection on 20131112-051452
     </msg>
   </UIECMTemplateList>
   <!--
@@ -1159,11 +1079,7 @@
       <role-require>Seleziona un permesso.</role-require>
       <template-name-exist>Il nome template '{0}' esiste già.</template-name-exist>
       <add-permission-denied>Non hai il permesso di aggiungere un nuovo template.</add-permission-denied>
-<<<<<<< HEAD
-      <edit-permission-denied>You do not have permission to modify '{0}' template.</edit-permission-denied>
-=======
       <edit-permission-denied>Non ha il permesso di modificare '{0}' Template.</edit-permission-denied>
->>>>>>> 006e26f... it injection on 20131112-051452
     </msg>
     <tab>
       <label>
@@ -1291,17 +1207,10 @@
   </ScriptContainerPopup>
   <UIScriptForm>
     <label>
-<<<<<<< HEAD
-      <selectVersion>Gestisci Versioni</selectVersion>
-      <scriptContent>Contenuto</scriptContent>
-      <scriptLabel>Name</scriptLabel>
-      <scriptName>Nome</scriptName>
-=======
       <selectVersion>Gestisci Versioni</selectVersion>
       <scriptContent>Contenuto</scriptContent>
       <scriptLabel>nome</scriptLabel>
       <scriptName>Nome</scriptName>
->>>>>>> 006e26f... it injection on 20131112-051452
       <enableVersion>Abilitare il controllo delle versioni</enableVersion>
     </label>
   </UIScriptForm>
@@ -1367,13 +1276,8 @@
       <Cancel>#{word.cancel}</Cancel>
     </action>
     <label>
-<<<<<<< HEAD
-      <parentPath>Parent:</parentPath>
-      <taxonomyName>Category Name:</taxonomyName>
-=======
       <parentPath>Parente:</parentPath>
       <taxonomyName>Nome categoria:</taxonomyName>
->>>>>>> 006e26f... it injection on 20131112-051452
     </label>
     <msg>
       <name-null>Nome categoria vuoto.</name-null>
@@ -1617,11 +1521,7 @@
       <confirm-delete>Vuoi davvero eliminare?</confirm-delete>
       <access-denied>Accesso negato! Non hai permessi di usare questa funzione.</access-denied>
       <editing-template>Accesso negato! Non puoi eliminare e modificare il template simultaneamente.</editing-template>
-<<<<<<< HEAD
-      <template-not-exist>The template that you are trying to delete doesn't exist.</template-not-exist>
-=======
       <template-not-exist>Il template che sta tentando di cancellare non esiste.</template-not-exist>
->>>>>>> 006e26f... it injection on 20131112-051452
     </msg>
   </UITemplateList>
   
@@ -1669,15 +1569,9 @@
 
 <UITabPane>
  <title>
-<<<<<<< HEAD
- <ContentTemplateContainer>Contenuto</ContentTemplateContainer>
-<CateTemplateContainer>Navigation</CateTemplateContainer>
-<PageTemplateContainer>Paginator</PageTemplateContainer>
-=======
  <ContentTemplateContainer>Contenuto</ContentTemplateContainer>
 <CateTemplateContainer>Navigazione</CateTemplateContainer>
 <PageTemplateContainer>Paginatore</PageTemplateContainer>
->>>>>>> 006e26f... it injection on 20131112-051452
  </title>
 </UITabPane>
 
@@ -1687,22 +1581,6 @@
       <Delete>Cancellare</Delete>
     </title>
     <header>
-<<<<<<< HEAD
-      <title>Name</title>
-      <action>Azione</action>
-      <template>Template</template>
-    </header>
-    <action>
-      <AddTemplate>Aggiungi Template</AddTemplate>
-<Edit>Modifica</Edit>
-<Delete>Delete</Delete>
-    </action>
-    <msg>
-      <confirm-delete>Sei sicuro di voler eliminare questo template?</confirm-delete>
-      <access-denied>Accesso negato. Non hai il permesso di usare questa funzione.</access-denied>
-      <editing-template>Access denied! You can't delete and edit template simultaneously.</editing-template>
-      <template-not-exist>The template that you are trying to delete doesn't exist.</template-not-exist>
-=======
       <title>nome</title>
       <action>Azione</action>
       <template>Template</template>
@@ -1717,19 +1595,13 @@
       <access-denied>Accesso negato. Non hai il permesso di usare questa funzione.</access-denied>
       <editing-template>Access denied! You can't delete and edit template simultaneously.</editing-template>
       <template-not-exist>Il modello che sta tentando di cancellare non esiste.</template-not-exist>
->>>>>>> 006e26f... it injection on 20131112-051452
     </msg>
   </UICLVTemplateList>
 
 <CateTemplateList>
     <header>
-<<<<<<< HEAD
-      <title>Name</title>
-      <action>Azione</action>
-=======
       <title>nome</title>
       <action>Azione</action>
->>>>>>> 006e26f... it injection on 20131112-051452
       <template>Template</template>
     </header>
     <title>
@@ -1737,30 +1609,14 @@
       <Delete>Cancellare</Delete>
     </title>
     <action>
-<<<<<<< HEAD
-      <AddTemplate>Aggiungi Template</AddTemplate>
-<Edit>Modifica</Edit>
-<Delete>Delete</Delete>
-=======
       <AddTemplate>Aggiungi Template</AddTemplate>
 <Edit>Modifica</Edit>
 <Delete>Cancellare</Delete>
->>>>>>> 006e26f... it injection on 20131112-051452
     </action>
 </CateTemplateList>
 
 <PageTemplateList>
     <header>
-<<<<<<< HEAD
-      <title>Name</title>
-      <action>Azione</action>
-      <template>Template</template>
-    </header>
-    <action>
-      <AddTemplate>Aggiungi Template</AddTemplate>
-<Edit>Modifica</Edit>
-<Delete>Delete</Delete>
-=======
       <title>nome</title>
       <action>Azione</action>
       <template>Template</template>
@@ -1769,7 +1625,6 @@
       <AddTemplate>Aggiungi Template</AddTemplate>
 <Edit>Modifica</Edit>
 <Delete>Cancellare</Delete>
->>>>>>> 006e26f... it injection on 20131112-051452
     </action>
 </PageTemplateList>
 
@@ -1816,17 +1671,10 @@
 <Cancel>#{word.cancel}</Cancel>
  </action>
 <label>
-<<<<<<< HEAD
- <title>Name</title>
-<template>Nome Template</template>
-<content>Contenuto</content>
-<type>Template Type</type>
-=======
  <title>nome</title>
 <template>Nome Template</template>
 <content>Contenuto</content>
 <type>Tipo Template</type>
->>>>>>> 006e26f... it injection on 20131112-051452
 </label>
 </UICLVTemplateForm_ContentTemplateContainer>
 
@@ -1837,17 +1685,10 @@
 <Cancel>#{word.cancel}</Cancel>
  </action>
 <label>
-<<<<<<< HEAD
- <title>Name</title>
-<template>Nome Template</template>
-<content>Contenuto</content>
-<type>Template Type</type>
-=======
  <title>nome</title>
 <template>Nome Template</template>
 <content>Contenuto</content>
 <type>Tipo Template</type>
->>>>>>> 006e26f... it injection on 20131112-051452
 </label>
 </UICLVTemplateForm_PageTemplateContainer>
 
@@ -1858,17 +1699,10 @@
 <Cancel>#{word.cancel}</Cancel>
  </action>
 <label>
-<<<<<<< HEAD
- <title>Name</title>
-<template>Nome Template</template>
-<content>Contenuto</content>
-<type>Template Type</type>
-=======
  <title>nome</title>
 <template>Nome Template</template>
 <content>Contenuto</content>
 <type>Tipo Template</type>
->>>>>>> 006e26f... it injection on 20131112-051452
 </label>
 </UICLVTemplateForm_CateTemplateContainer>
 <UICLVTemplateForm>
@@ -2585,13 +2419,8 @@
 <NextViewTree>Prossimo</NextViewTree>
 </action>
   <msg>
-<<<<<<< HEAD
-    <xss-vulnerability-character>Field '{0}' contains XSS vulnerability characters</xss-vulnerability-character>
-<xss-vulnerability-character-wo-label>Your input may contain XSS vulnerability characters</xss-vulnerability-character-wo-label>
-=======
     <xss-vulnerability-character>Campo '{0}' contiene caratteri a vulnerabilità XSS</xss-vulnerability-character>
 <xss-vulnerability-character-wo-label>Il vostro contributo può contenere caratteri di vulnerabilità XSS</xss-vulnerability-character-wo-label>
->>>>>>> 006e26f... it injection on 20131112-051452
   </msg>
 </UIActionForm>
 

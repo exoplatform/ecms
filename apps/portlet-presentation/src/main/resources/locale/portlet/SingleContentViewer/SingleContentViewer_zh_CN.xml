@@ -3,27 +3,27 @@
   <UIPresentationContainer>
     <title>
       <QuickEdit>在内容资源管理器中编辑</QuickEdit>
-      <print>Print This Page</print>
-      <FastPublish>Publish</FastPublish>
+      <print>打印此页</print>
+      <FastPublish>发布</FastPublish>
     </title>
     <label>
-      <draft>Draft</draft>
-      <print>Print</print>
+      <draft>草稿</draft>
+      <print>打印</print>
     </label>
     <msg>
-      <no-content>No contents found.</no-content>
-      <internal-server-error>An error occurred while requesting the data from the sever.</internal-server-error>
-      <empty-title-error>Please specify the new title.</empty-title-error>
+      <no-content>未找到内容。</no-content>
+      <internal-server-error>从服务器请求数据时出错。</internal-server-error>
+      <empty-title-error>请指定新标题。</empty-title-error>
     </msg>
   </UIPresentationContainer>
   <CorrectContentSelectorPopupWindow>
     <title>
-      <UIContentSelectorOne>Select Content</UIContentSelectorOne>
+      <UIContentSelectorOne>选择内容</UIContentSelectorOne>
     </title>
   </CorrectContentSelectorPopupWindow>
   <UISingleContentViewerPortlet>
     <msg>
-      <AccessControlException>You do not have permission to access the Edit mode.</AccessControlException>
+      <AccessControlException>您没有权限访问编辑模式。</AccessControlException>
     </msg>
   </UISingleContentViewerPortlet>
   <UISCVContextualRadioBox>
@@ -34,86 +34,86 @@
   </UISCVContextualRadioBox>
   <UIPreferencesPopupWindows>
     <title>
-      <UISCVPreferences>Content Detail Preferences</UISCVPreferences>
+      <UISCVPreferences>内容明细首选项</UISCVPreferences>
     </title>
   </UIPreferencesPopupWindows>
   <UISCVPreferences>
     <action>
       <Save>#{word.save}</Save>
-      <Abort>Abort</Abort>
+      <Abort>取消</Abort>
       <Cancel>#{word.cancel}</Cancel>
-      <Print>Print</Print>
+      <Print>打印</Print>
       <Close>#{word.close}</Close>
     </action>
-    <title>Content Detail Preferences</title>
+    <title>内容明细首选项</title>
     <label>
-      <Back>Back to previous page</Back>
-      <Edit>Edit</Edit>
-      <Preferences>Preferences</Preferences>
-      <Title>Content Detail Preferences</Title>
-      <UISCVShowTitleConfigurationCheckBox>Show Title</UISCVShowTitleConfigurationCheckBox>
-      <UISCVShowDateConfigurationCheckBox>Show Date</UISCVShowDateConfigurationCheckBox>
-      <UISCVShowOptionBarConfigurationCheckBox>Show Option Bar</UISCVShowOptionBarConfigurationCheckBox>
+      <Back>回上页</Back>
+      <Edit>编辑</Edit>
+      <Preferences>首选项</Preferences>
+      <Title>内容明细首选项</Title>
+      <UISCVShowTitleConfigurationCheckBox>显示标题</UISCVShowTitleConfigurationCheckBox>
+      <UISCVShowDateConfigurationCheckBox>显示日期</UISCVShowDateConfigurationCheckBox>
+      <UISCVShowOptionBarConfigurationCheckBox>显示选项栏</UISCVShowOptionBarConfigurationCheckBox>
       <DisplaySettingBlock>显示设置</DisplaySettingBlock>
       <ContentPathBlock>内容选择</ContentPathBlock>
-      <UISCVConfigItemPathFormInputSet>Content Path</UISCVConfigItemPathFormInputSet>
-    <UISCVContentPathConfigurationInputBox>Content Path</UISCVContentPathConfigurationInputBox>
-      <Advance>Advanced</Advance>
-      <ContextCaption>Dynamic Navigation</ContextCaption>
-      <UISCVContextualRadioBox>Contextual Content</UISCVContextualRadioBox>
-      <UISCVParameterInputBox>by</UISCVParameterInputBox>
-      <PrintSettingBlock>Print Settings</PrintSettingBlock>
+      <UISCVConfigItemPathFormInputSet>内容路径</UISCVConfigItemPathFormInputSet>
+    <UISCVContentPathConfigurationInputBox>内容路径</UISCVContentPathConfigurationInputBox>
+      <Advance>高级</Advance>
+      <ContextCaption>动态导航</ContextCaption>
+      <UISCVContextualRadioBox>上下文相关的内容</UISCVContextualRadioBox>
+      <UISCVParameterInputBox>由</UISCVParameterInputBox>
+      <PrintSettingBlock>打印设置</PrintSettingBlock>
       <UISCVPrintPageParameter>与</UISCVPrintPageParameter>
-      <UISCVConfigPrintPageFormInputSet>Show in Page</UISCVConfigPrintPageFormInputSet>
-      <LockStatus>Lock</LockStatus>
-      <CacheManagement>Content Visibility</CacheManagement>
-      <UISCVCacheRadioBox>Share Content</UISCVCacheRadioBox>
+      <UISCVConfigPrintPageFormInputSet>在页中显示</UISCVConfigPrintPageFormInputSet>
+      <LockStatus>锁</LockStatus>
+      <CacheManagement>内容可见性</CacheManagement>
+      <UISCVCacheRadioBox>共享内容</UISCVCacheRadioBox>
     </label>
     <help>
-      <ContentPathBlock>Select the content you want to show. This default content will be replaced dynamically if you activate the Dynamic Navigation option (see the Advanced mode below).</ContentPathBlock>
-      <DisplaySettingBlock>You can show or hide the Option bar used to show the print link. Title and Date displays are also optional.</DisplaySettingBlock>
-      <ContextualHelp>Activates Dynamic Navigation. The content can be changed dynamically by another URL-based parameter.</ContextualHelp>
-      <ParameterHelp>This parameter will be used to get the content if the Dynamic Navigation is activated.</ParameterHelp>
+      <ContentPathBlock>请选择您想要显示的内容。如果您激活动态导航选项，将动态替换此默认内容 （请参阅下面的高级的模式）。</ContentPathBlock>
+      <DisplaySettingBlock>您可以显示或隐藏用于显示打印链接的选项栏。标题和日期显示也是可选的。</DisplaySettingBlock>
+      <ContextualHelp>激活动态导航。内容可以动态更改的另一个基于 URL 参数。</ContextualHelp>
+      <ParameterHelp>此参数将用于获取内容，如果动态导航处于激活状态。</ParameterHelp>
     </help>
     <msg>
-      <not-valid-path>The item path is invalid.</not-valid-path>
+      <not-valid-path>项目的路径是无效的。</not-valid-path>
     </msg>
     <tab>
       <label>
-        <UISCVConfigContentFormInputSet>Content Selection</UISCVConfigContentFormInputSet>
-        <UISCVConfigDisplayFormInputSet>Display Settings</UISCVConfigDisplayFormInputSet>
-        <UISCVConfigPrintFormInputSet>Print Settings</UISCVConfigPrintFormInputSet>
-        <UISCVConfigAdvancedFormInputSet>Advanced</UISCVConfigAdvancedFormInputSet>
+        <UISCVConfigContentFormInputSet>内容选择</UISCVConfigContentFormInputSet>
+        <UISCVConfigDisplayFormInputSet>显示设置</UISCVConfigDisplayFormInputSet>
+        <UISCVConfigPrintFormInputSet>打印设置</UISCVConfigPrintFormInputSet>
+        <UISCVConfigAdvancedFormInputSet>高级</UISCVConfigAdvancedFormInputSet>
       </label>
     </tab>
   </UISCVPreferences>
   <UISCVConfigItemPathFormInputSet>
     <title>
       <SelectFolderPath>选择文件夹路径</SelectFolderPath>
-      <AddPath>Add Path</AddPath>
+      <AddPath>添加路径</AddPath>
     </title>
   </UISCVConfigItemPathFormInputSet>
   <UISCVConfigPrintPageFormInputSet>
     <title>
-      <SelectTargetPage>Show in Page</SelectTargetPage>
+      <SelectTargetPage>在页中显示</SelectTargetPage>
     </title>
   </UISCVConfigPrintPageFormInputSet>
   <PublicationStates>
-    <archived>Archived</archived>
-    <obsolete>Obsolete</obsolete>
-    <unpublished>Unpublished</unpublished>
-    <enrolled>Enrolled</enrolled>
-    <draft>Draft</draft>
-    <pending>Pending</pending>
-    <approved>Approved</approved>
-    <inreview>Under Review</inreview>
-    <staged>Staged</staged>
-    <published>Published</published>
+    <archived>存档</archived>
+    <obsolete>已过时的</obsolete>
+    <unpublished>未发布</unpublished>
+    <enrolled>在页中显示</enrolled>
+    <draft>草稿</draft>
+    <pending>挂起</pending>
+    <approved>核准</approved>
+    <inreview>在审查</inreview>
+    <staged>上演</staged>
+    <published>出版</published>
   </PublicationStates>
   <UISCVCacheRadioBox>
     <label>
       <Enable>通过身份验证的限制</Enable>
-      <Disable>Restricted by User roles</Disable>
+      <Disable>被限制由用户角色</Disable>
     </label>
   </UISCVCacheRadioBox>
 </bundle>

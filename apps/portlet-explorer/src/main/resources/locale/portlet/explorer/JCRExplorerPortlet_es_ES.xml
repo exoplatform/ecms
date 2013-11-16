@@ -109,14 +109,14 @@
   -->
   <UIDrivesBrowser>
     <title>
-      <PersonalDrives>Personal drives</PersonalDrives>
-      <GroupDrives>Group drives</GroupDrives>
-      <GeneralDrives>General drives</GeneralDrives>
+      <PersonalDrives>Unidades personales</PersonalDrives>
+      <GroupDrives>Unidades  del grupo</GroupDrives>
+      <GeneralDrives>Unidades generales</GeneralDrives>
     </title>
     <msg>
-      <no-view-found>There is no view available according to your access permissions in drive '{0}'.</no-view-found>
-      <access-denied>Access denied. You may not have permission in the workspace of drive '{0}'.</access-denied>
-      <workspace-not-exist>Drive '{0}' was stored in one unrecognized workspace. Please reconfigure this drive.</workspace-not-exist>
+      <no-view-found>No hay ninguna vista disponible para su permiso de acceso en la unidad '{0}'.</no-view-found>
+      <access-denied>Acceso denegado. Tal vez, no tienes permiso en el espacio de trabajo de la unidad '{0}'.</access-denied>
+      <workspace-not-exist>La unidad '{0}' se almacena en un área de trabajo no reconocido. Por favor, vuelva a configurar esta unidad.</workspace-not-exist>
     </msg>
   </UIDrivesBrowser>
 
@@ -1474,7 +1474,7 @@
       <filetype-error>No se puede importar el archivo cargado. Tal vez, el archivo .xml no es válido.</filetype-error>
       <mimetype-invalid>Sólo los archivos .xml o .zip son compatibles para importar.</mimetype-invalid>
       <access-denied>¡Acceso denegado! No está autorizado a importar allí.</access-denied>
-      <constraint-violation-exception>Impossible to import data. The type '{0}' is not allowed in this location.</constraint-violation-exception>
+      <constraint-violation-exception>Es imposible importar datos. El tipo '{0}' no está permitido en este lugar.</constraint-violation-exception>
       <item-exists-exception>Un nodo entrante referenciable tiene el mismo UUID como un nodo existente en el área de trabajo.</item-exists-exception>
     </msg>
   </UIImportNode>
@@ -2113,7 +2113,7 @@
       <access-denied>Acceso denegado.  No tiene permiso para añadir una viñeta a este nodo.</access-denied>
       <confirm-delete>¿Está seguro que desea eliminar esta miniatura?</confirm-delete>
       <is-checked-in>Este nodo está conectado. Por favor consulte antes de realizar cualquier acción.</is-checked-in>
-      <fileName-error>Please select a file to upload.</fileName-error>
+      <fileName-error>Por favor, seleccione un archivo para cargarlo.</fileName-error>
     </msg>
     <title>
       <remove-thumbnail>Remover esta viñeta</remove-thumbnail>

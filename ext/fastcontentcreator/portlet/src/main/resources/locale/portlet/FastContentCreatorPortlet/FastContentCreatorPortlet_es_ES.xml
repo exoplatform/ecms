@@ -46,11 +46,7 @@
       <do-select>Error al seleccionar la ubicación.</do-select>
       </msg>
     <action>
-<<<<<<< HEAD
-      <Save>Guardar</Save>
-=======
       <Save>#{word.save}</Save>
->>>>>>> 9f3972c... es-ES injection on 20131112-051452
     </action>
   </UIFCCConfig>
 
@@ -119,13 +115,8 @@
   <UIFCCActionForm>
     <title>Agregar/ Editar la Acción</title>
     <action>
-<<<<<<< HEAD
-      <Save>Guardar</Save>
-      <Close>Cerrar</Close>
-=======
       <Save>#{word.save}</Save>
       <Close>#{word.close}</Close>
->>>>>>> 9f3972c... es-ES injection on 20131112-051452
     </action>
     <msg>
       <repository-exception>No se puede guardar esta acción  El nombre provisto no puede tener un índice en su elemento final.</repository-exception>
@@ -182,11 +173,7 @@
 
   <UICategoriesSelector>
     <action>
-<<<<<<< HEAD
-      <close>Cerrar</close>
-=======
       <close>#{word.close}</close>
->>>>>>> 9f3972c... es-ES injection on 20131112-051452
     </action>
   </UICategoriesSelector>
 
