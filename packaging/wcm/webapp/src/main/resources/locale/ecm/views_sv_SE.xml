@@ -160,8 +160,6 @@
       </action>
       <tooltip>
         <cancel>#{word.cancel}</cancel>
-      </action>
-      <tooltip>
         <add-edit>Lägg till/redigera egenskaper</add-edit>
       </tooltip>
     </view>
