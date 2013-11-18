@@ -81,7 +81,7 @@ public class UIScriptManager extends UIAbstractManager {
     UIPopupWindow uiPopup = getChildById(POPUP_TEMPLATE_ID);
     uiPopup.setRendered(true);
     uiPopup.setShowMask(true);    
-    uiPopup.setWindowSize(600,260) ;
+    uiPopup.setWindowSize(600,270) ;
     uiPopup.setUIComponent(uiComponent) ;
     uiPopup.setShow(true) ;
     uiPopup.setResizable(true) ;

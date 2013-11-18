@@ -32,6 +32,7 @@ import org.exoplatform.ecm.webui.utils.Utils;
 import org.exoplatform.services.cms.queries.QueryService;
 import org.exoplatform.services.wcm.utils.WCMCoreUtils;
 import org.exoplatform.web.application.ApplicationMessage;
+import org.exoplatform.webui.application.WebuiRequestContext;
 import org.exoplatform.webui.config.annotation.ComponentConfig;
 import org.exoplatform.webui.config.annotation.EventConfig;
 import org.exoplatform.webui.core.UIApplication;
@@ -150,7 +151,10 @@ public class UIQueriesForm extends UIForm implements UISelectable {
       UIQueriesForm uiForm = event.getSource() ;
       UIQueriesManager uiManager = uiForm.getAncestorOfType(UIQueriesManager.class) ;
       uiManager.removeChildById(UIQueriesList.ST_ADD) ;
-      uiManager.removeChildById(UIQueriesList.ST_EDIT) ;
+      uiManager.removeChildById(UIQueriesList.ST_EDIT);
+      event.getRequestContext().getJavascriptManager()
+              .require("SHARED/jquery", "gj")
+              .addScripts("gj(document).ready(function() { gj(\"*[rel='tooltip']\").tooltip();});");
       event.getRequestContext().addUIComponentToUpdateByAjax(uiManager) ;
     }
   }
@@ -208,6 +212,9 @@ public class UIQueriesForm extends UIForm implements UISelectable {
       uiManager.getChild(UIQueriesList.class).refresh(1);
       uiManager.removeChildById(UIQueriesList.ST_ADD) ;
       uiManager.removeChildById(UIQueriesList.ST_EDIT) ;
+      event.getRequestContext().getJavascriptManager()
+              .require("SHARED/jquery", "gj")
+              .addScripts("gj(document).ready(function() { gj(\"*[rel='tooltip']\").tooltip();});");
       event.getRequestContext().addUIComponentToUpdateByAjax(uiManager) ;
     }
   }

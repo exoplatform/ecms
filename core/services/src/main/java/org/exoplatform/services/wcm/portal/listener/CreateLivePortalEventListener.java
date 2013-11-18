@@ -16,11 +16,6 @@
  */
 package org.exoplatform.services.wcm.portal.listener;
 
-import java.util.ArrayList;
-
-import javax.jcr.Node;
-import javax.jcr.Session;
-
 import org.exoplatform.container.xml.InitParams;
 import org.exoplatform.container.xml.ValueParam;
 import org.exoplatform.container.xml.ValuesParam;
@@ -38,6 +33,10 @@ import org.exoplatform.services.wcm.portal.LivePortalManagerService;
 import org.exoplatform.services.wcm.portal.artifacts.CreatePortalArtifactsService;
 import org.exoplatform.services.wcm.utils.WCMCoreUtils;
 
+import javax.jcr.Node;
+import javax.jcr.Session;
+import java.util.List;
+
 /**
  * Created by The eXo Platform SAS
  *
@@ -46,7 +45,7 @@ import org.exoplatform.services.wcm.utils.WCMCoreUtils;
 public class CreateLivePortalEventListener extends Listener<DataStorageImpl, PortalConfig> {
   private static final Log LOG = ExoLogger.getLogger(CreateLivePortalEventListener.class.getName());
   private boolean autoCreatedDrive = true;
-  private ArrayList<String> targetDrives = null;
+  private List<String> targetDrives = null;
   public static String AUTO_CREATE_DRIVE = "autoCreatedDrive";
   public static String TARGET_DRIVES = "targetDrives";
 

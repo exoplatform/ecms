@@ -36,6 +36,16 @@
     </thead>
     <tbody>
       <%
+        if (totalItems < 1) {
+            %>
+            <tr>
+                <td class="empty center" colspan="5">
+                 <%=_ctx.appRes("UIGrid.msg.empty")%>
+                </td>
+            </tr>
+            <%
+        }
+
   	    for (node in sharedQueries) {
       %>
           <tr>
