@@ -35,7 +35,7 @@ import org.exoplatform.services.wcm.utils.WCMCoreUtils;
 
 import javax.jcr.Node;
 import javax.jcr.Session;
-import java.util.List;
+import java.util.ArrayList;
 
 /**
  * Created by The eXo Platform SAS
@@ -45,7 +45,7 @@ import java.util.List;
 public class CreateLivePortalEventListener extends Listener<DataStorageImpl, PortalConfig> {
   private static final Log LOG = ExoLogger.getLogger(CreateLivePortalEventListener.class.getName());
   private boolean autoCreatedDrive = true;
-  private List<String> targetDrives = null;
+  private ArrayList<String> targetDrives = null;
   public static String AUTO_CREATE_DRIVE = "autoCreatedDrive";
   public static String TARGET_DRIVES = "targetDrives";
 
