@@ -87,6 +87,6 @@ public class WhitespaceTokenizerWithDot extends CharTokenizer {
      * {@link Character#isWhitespace(int)}.*/
     @Override
     protected boolean isTokenChar(int c) {
-      return !Character.isWhitespace(c) && c != '\u002e';
+      return !Character.isWhitespace(c) && c != '\u002e' && c!= '\u002d';
     }
   }
