@@ -293,13 +293,13 @@ public class UIDocumentNodeList extends UIContainer {
   
   public String getAuthorName(Node file) throws Exception {
     String userName = getAncestorOfType(UIDocumentInfo.class).getPropertyValue(file, NodetypeConstant.EXO_LAST_MODIFIER);
-    if (IdentityConstants.SYSTEM.equals(userName)) {
-      return "";
+    if (StringUtils.isEmpty(userName) || IdentityConstants.SYSTEM.equals(userName)) {
+      return StringUtils.EMPTY;
     }
-    return getLabel("by") + " " +
-    (userName.equals(ConversationState.getCurrent().getIdentity().getUserId()) ? getLabel("you") : userName);
+    return String.format("%s %s",
+            getLabel("by"),
+            userName.equals(ConversationState.getCurrent().getIdentity().getUserId()) ? getLabel("you") : userName);
   }
-
   public String getFileSize(Node file) throws Exception {
     return org.exoplatform.services.cms.impl.Utils.fileSize(file);
   }
