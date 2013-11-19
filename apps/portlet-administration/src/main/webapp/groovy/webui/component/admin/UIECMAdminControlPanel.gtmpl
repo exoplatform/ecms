@@ -59,7 +59,7 @@
 						if(group.getUIExtensionName().equals(uiWorkingArea.getRenderedCompId()))
 							itemCss = " selected";
 				%>
-					  <a class="functionItem$itemCss" onClick="javascript: eXo.ecm.ECMUtils.setSelecteddItem(this);" href="<%=group.event(group.getUIExtensionName())%>">
+					  <a class="functionItem$itemCss" onClick="javascript: eXo.ecm.ECMUtils.setSelecteddItem(this);<%=group.event(group.getUIExtensionName())%>" href="javascript:void(0);">
 						<i class="<%=cssName%>"></i><%=_ctx.appRes(uicomponent.getName()+".label." + group.getUIExtensionName())%>
 					  </a>
 				<%} %>

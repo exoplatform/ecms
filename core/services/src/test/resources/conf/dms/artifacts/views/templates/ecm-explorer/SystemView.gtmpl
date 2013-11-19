@@ -48,7 +48,7 @@
 			    </div>
 			    
 			    <div class="RightColumn" style="border: none">
-			      <a href="<%=uicomponent.event("Sort", typeActionLink + "Auditing")%>">
+			      <a onclick="<%=uicomponent.event("Sort", typeActionLink + "Auditing")%>">
 			        <%
 			          if (typeSort.equals("Auditing")) {
 			        %>
@@ -62,7 +62,7 @@
 			    </div>
 			    
 			    <div class="RightColumn">
-			      <a href="<%=uicomponent.event("Sort", typeActionLink + "Versionable")%>">
+			      <a onclick="<%=uicomponent.event("Sort", typeActionLink + "Versionable")%>">
 			        <%
 			          if (typeSort.equals("Versionable")) {
 			        %>
@@ -76,7 +76,7 @@
 			    </div>
 			    
 			    <div class="RightColumn" style="width: 90px;">
-			      <a href="<%=uicomponent.event("Sort", typeActionLink + "Owner")%>">
+			      <a onclick="<%=uicomponent.event("Sort", typeActionLink + "Owner")%>">
 			        <%
 			          if (typeSort.equals("Owner")) {
 			        %>
@@ -90,7 +90,7 @@
 			    </div>
 			    
 			    <div class="RightColumn" style="width: 125px;">
-			      <a href="<%=uicomponent.event("Sort", typeActionLink + "ModifiedDate")%>">
+			      <a onclick="<%=uicomponent.event("Sort", typeActionLink + "ModifiedDate")%>">
 			        <%
 			          if (typeSort.equals("ModifiedDate")) {
 			        %>
@@ -104,7 +104,7 @@
 			    </div>
 			    
 			    <div class="RightColumn" style="width: 105px;">
-			      <a href="<%=uicomponent.event("Sort", typeActionLink + "CreatedDate")%>">
+			      <a onclick="<%=uicomponent.event("Sort", typeActionLink + "CreatedDate")%>">
 			        <%
 			          if (typeSort.equals("CreatedDate")) {
 			        %>
@@ -118,7 +118,7 @@
 			    </div>
 			    
 			    <div class="ResizeColumn">
-			      <a href="<%=uicomponent.event("Sort", typeActionLink + "Alphabetic")%>">
+			      <a onclick="<%=uicomponent.event("Sort", typeActionLink + "Alphabetic")%>">
 			        <%
 			          if (typeSort.equals("Alphabetic")) {
 			        %>
