@@ -189,7 +189,7 @@
  <div class="$uicomponent.skin" id="UIPortalApplication" style="!height: 100%;">
      
    <div class="ajaxLoadingMask clearfix" id="AjaxLoadingMask" style="display: none; margin: auto;">
-		<a href="javascript:ajaxAbort();" class="uiIconClose uiIconWhite pull-right"></a>
+		<a onclick="javascript:ajaxAbort();" class="uiIconClose uiIconWhite pull-right"></a>
 		<i class="loadingProgressBar pull-left"></i>
 		<div class="loadingText"><%=_ctx.appRes("UIPortalApplication.label.Loading")%></div>
    </div>
