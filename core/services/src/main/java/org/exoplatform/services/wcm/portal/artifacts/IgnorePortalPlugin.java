@@ -21,7 +21,6 @@ import org.exoplatform.container.xml.InitParams;
 import org.exoplatform.container.xml.ValuesParam;
 
 import java.util.ArrayList;
-import java.util.List;
 
 
 /**
@@ -36,7 +35,7 @@ public class IgnorePortalPlugin implements ComponentPlugin {
 
   private String desciption;
   
-  private List<String> ignorePortals = new ArrayList<String>();
+  private ArrayList<String> ignorePortals = new ArrayList<String>();
 
   public IgnorePortalPlugin(InitParams initParams) {
     ValuesParam valuesParam = initParams.getValuesParam("ignored.portals");
@@ -66,7 +65,7 @@ public class IgnorePortalPlugin implements ComponentPlugin {
 
   }
   
-  public List<String> getIgnorePortals() {
+  public ArrayList<String> getIgnorePortals() {
     return ignorePortals;
   }
 

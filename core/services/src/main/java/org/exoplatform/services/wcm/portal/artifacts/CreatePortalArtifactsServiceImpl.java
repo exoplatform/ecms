@@ -23,7 +23,6 @@ import org.exoplatform.services.listener.ListenerService;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.LinkedHashMap;
-import java.util.List;
 
 /**
  * Created by The eXo Platform SAS
@@ -35,7 +34,7 @@ public class CreatePortalArtifactsServiceImpl implements CreatePortalArtifactsSe
 
   public static final String CREATE_PORTAL_EVENT = "PortalArtifactsInitializerServiceImpl.portal.onCreate";
   private HashMap<String,CreatePortalPlugin> artifactPlugins = new LinkedHashMap<String,CreatePortalPlugin>();
-  private List<String> initialPortals = new ArrayList<String>();
+  private ArrayList<String> initialPortals = new ArrayList<String>();
   private ListenerService listenerService;
 
   public CreatePortalArtifactsServiceImpl(ListenerService listenerService) {
@@ -46,7 +45,7 @@ public class CreatePortalArtifactsServiceImpl implements CreatePortalArtifactsSe
   }
 
   public void addIgnorePortalPlugin(IgnorePortalPlugin ignorePortalPlugin) throws Exception {
-    List<String> ignoredPortals = ignorePortalPlugin.getIgnorePortals();
+    ArrayList<String> ignoredPortals = ignorePortalPlugin.getIgnorePortals();
     if (ignoredPortals != null && !ignoredPortals.isEmpty()) {
       initialPortals.addAll(ignoredPortals);
     }
