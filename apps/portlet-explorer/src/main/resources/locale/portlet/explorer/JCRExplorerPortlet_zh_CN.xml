@@ -2173,7 +2173,7 @@
     <title>编辑文件资源管理器</title>
     <action>
       <Edit>编辑</Edit>
-      <Save># {词.保存}</Save>
+      <Save>#{word.save}</Save>
       <Cancel>#{word.cancel}</Cancel>
     </action>
     <label>

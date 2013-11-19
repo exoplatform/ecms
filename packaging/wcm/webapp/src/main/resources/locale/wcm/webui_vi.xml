@@ -149,7 +149,7 @@
   <UICLVContentSelectedGrid>
     <action>
       <SaveCategories>#{word.save}</SaveCategories>
-      <Cancel>Hủy</Cancel>
+      <Cancel>#{word.cancel}</Cancel>
     </action>
   </UICLVContentSelectedGrid>
 
@@ -218,7 +218,7 @@
   <UIContentPropertySelector>
     <action>
       <Add>Thêm</Add>
-      <Cancel>Hủy</Cancel>
+      <Cancel>Hủy bỏ</Cancel>
     </action>
     <label>
       <metadataType>Kiểu Siêu dữ liệu</metadataType>
