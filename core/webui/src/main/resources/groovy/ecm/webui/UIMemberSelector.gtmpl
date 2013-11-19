@@ -36,7 +36,7 @@
 				  %>
 							<li>
 							  <span class="uiIconMiniArrowRight"></span>
-							  <a lass="ItemIcon" href="<%=uicomponent.event('SelectMembership', user.getUserName())%>"><%=user.getUserName()%></a>	
+							  <a lass="ItemIcon" href="javascript:void(0);" onclick="<%=uicomponent.event('SelectMembership', user.getUserName())%>"><%=user.getUserName()%></a>	
 							</li>
 				  <% 	
 					  }
@@ -46,7 +46,7 @@
 				  %>
 							<li>
 							  <span class="uiIconMiniArrowRight"></span>
-							  <a class="ItemIcon" href="<%=uicomponent.event("SelectMembership", member)%>" rel="tooltip" data-placement="bottom" title="$member">$member</a>
+							  <a class="ItemIcon" href="javascript:void(0);" onclick="<%=uicomponent.event("SelectMembership", member)%>" rel="tooltip" data-placement="bottom" title="$member">$member</a>
 							</li>
 
 				  <%					        
