@@ -1047,7 +1047,7 @@
     </title>
     <header>
       <name>姓名</name>
-      <path>价值</path>
+      <path>值</path>
       <baseVersion>基本版本</baseVersion>
       <action>操作</action>
     </header>
@@ -2394,7 +2394,7 @@
 
 <UITaxonomyTreeContainer>
 <action>
-<Cancel># {词.关闭}</Cancel>
+<Cancel>#{word.close}</Cancel>
 </action>
 </UITaxonomyTreeContainer>
 <UITaxonomyTreeMainForm>
