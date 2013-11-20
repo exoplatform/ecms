@@ -20,6 +20,7 @@ import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
+import javax.annotation.security.RolesAllowed;
 import javax.jcr.Node;
 import javax.jcr.NodeIterator;
 import javax.jcr.Session;
@@ -145,6 +146,7 @@ public class FCKCoreRESTConnector implements ResourceContainer {
    */
   @GET
   @Path("/createFolder/")
+  @RolesAllowed("users")
   //@OutputTransformer(XMLOutputTransformer.class)
   public Response createFolder(
       @QueryParam("repositoryName") String repositoryName,
@@ -166,6 +168,7 @@ public class FCKCoreRESTConnector implements ResourceContainer {
    */
   @POST
   @Path("/uploadFile/upload/")
+  @RolesAllowed("users")
   //@InputTransformer(PassthroughInputTransformer.class)
   //@OutputTransformer(XMLOutputTransformer.class)
   public Response uploadFile(@Context HttpServletRequest servletRequest) throws Exception {
@@ -184,6 +187,7 @@ public class FCKCoreRESTConnector implements ResourceContainer {
    */
   @GET
   @Path("/uploadFile/control/")
+  @RolesAllowed("users")
 //  @OutputTransformer(XMLOutputTransformer.class)
   public Response processUpload(
       @QueryParam("repositoryName") String repositoryName,
