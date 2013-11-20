@@ -397,6 +397,7 @@ public class DriverConnector extends BaseConnector implements ResourceContainer 
         Node currentFolderNode = getParentFolderNode(workspaceName,
                                                      Text.escapeIllegalJcrChars(driverName),
                                                      Text.escapeIllegalJcrChars(currentFolder));
+        fileName = Text.escapeIllegalJcrChars(fileName);
         return createProcessUploadResponse(workspaceName,
                                            currentFolderNode,
                                            currentPortal,

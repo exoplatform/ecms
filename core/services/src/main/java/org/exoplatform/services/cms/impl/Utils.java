@@ -93,6 +93,10 @@ public class Utils {
 
   public static final String EXO_SYMLINK = "exo:symlink";
 
+  public static final String PRIVATE = "Private";
+
+  public static final String PUBLIC = "Public";
+
   public static final long KB = 1024L;
   public static final long MB = 1024L*KB;
   public static final long GB = 1024L*MB;
@@ -650,7 +654,6 @@ public class Utils {
 
   public static String getNodeTypeIcon(Node node, String appended, String mode)
       throws RepositoryException {
-    StringBuilder str = new StringBuilder();
     if (node == null)
       return "";
 
@@ -658,9 +661,8 @@ public class Utils {
     String nodeType = node.getPrimaryNodeType().getName();
 
     // Get real node if node is symlink
-    if (node.isNodeType(EXO_SYMLINK)) {
-      LinkManager linkManager = Util.getUIPortal().getApplicationComponent(
-                                                                           LinkManager.class);
+    LinkManager linkManager = WCMCoreUtils.getService(LinkManager.class);
+    if (linkManager.isLink(node)) {
       try {
         nodeType = node.getProperty(NodetypeConstant.EXO_PRIMARYTYPE).getString();
         node = linkManager.getTarget(node);
@@ -678,10 +680,15 @@ public class Utils {
       nodeType = NodetypeConstant.EXO_FAVOURITE_FOLDER;
     }
     else if (nodeType.equals(NodetypeConstant.NT_UNSTRUCTURED) || nodeType.equals(NodetypeConstant.NT_FOLDER)) {
-      for (String specificFolder : NodetypeConstant.SPECIFIC_FOLDERS) {
-        if (node.isNodeType(specificFolder)) {
-          nodeType = specificFolder;
-          break;
+      if ((PRIVATE.equals(node.getName()) || PUBLIC.equals(node.getName()))
+           && node.getParent().isNodeType("exo:userFolder")) {
+          nodeType = String.format("exo:%sFolder", node.getName().toLowerCase());
+      } else {
+        for (String specificFolder : NodetypeConstant.SPECIFIC_FOLDERS) {
+          if (node.isNodeType(specificFolder)) {
+            nodeType = specificFolder;
+            break;
+          }
         }
       }
     }
@@ -699,6 +706,7 @@ public class Utils {
     }
     defaultCssClass = defaultCssClass.concat("Default");
 
+    StringBuilder str = new StringBuilder();
     str.append(appended);
     str.append(defaultCssClass);
     str.append(" ");

@@ -496,7 +496,6 @@
           <value>org.exoplatform.portal.mop.redirects.Redirectable</value>
           <value>org.exoplatform.portal.mop.redirects.Redirect</value>
           <value>org.exoplatform.portal.mop.redirects.Mappings</value>
-
           <!-- GateIn node types -->
           <value>org.exoplatform.portal.pom.spi.portlet.PortletState</value>
           <value>org.exoplatform.portal.pom.spi.portlet.PreferenceState</value>

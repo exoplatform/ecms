@@ -257,7 +257,6 @@
           <value>org.exoplatform.portal.mop.redirects.Redirect</value>
           <value>org.exoplatform.portal.mop.redirects.Mappings</value>
           <!-- GateIn node types -->
-
           <value>org.exoplatform.portal.pom.spi.portlet.PortletState</value>
           <value>org.exoplatform.portal.pom.spi.portlet.PreferenceState</value>
           <value>org.exoplatform.portal.pom.spi.gadget.GadgetState</value>
@@ -265,7 +264,7 @@
           <value>org.exoplatform.portal.mop.ProtectedResource</value>
           <value>org.exoplatform.portal.mop.Described</value>
           <value>org.exoplatform.portal.mop.Visible</value>
-										<value>org.exoplatform.portal.mop.i18n.I18Nized</value>
+            <value>org.exoplatform.portal.mop.i18n.I18Nized</value>
           <value>org.exoplatform.portal.mop.i18n.LanguageSpace</value>
           <value>org.exoplatform.portal.mop.i18n.Language</value>
           <value>org.exoplatform.portal.mop.importer.Imported</value>

@@ -16,13 +16,13 @@
  */
 package org.exoplatform.services.wcm.portal.artifacts;
 
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.LinkedHashMap;
-
 import org.exoplatform.services.context.DocumentContext;
 import org.exoplatform.services.jcr.ext.common.SessionProvider;
 import org.exoplatform.services.listener.ListenerService;
+
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.LinkedHashMap;
 
 /**
  * Created by The eXo Platform SAS

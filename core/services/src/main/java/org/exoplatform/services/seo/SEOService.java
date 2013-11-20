@@ -7,144 +7,144 @@ import java.util.Locale;
 import javax.jcr.Node;
 
 /**
- * SEOService supplies APIs to manage SEO data of a page or a content.
- * This service includes some major functions which enables you to add, store,
- * get or remove the metadata of a page or a content.
+ * Supplies APIs to manage SEO data of pages or content.
+ * This service includes some major functions that allow you to add, store,
+ * get or remove metadata of pages or content.
  *
  * @LevelAPI Experimental
  */
 public interface SEOService {
  
   /**
-   * Store the metadata of a page/content.
+   * Stores metadata of a given page/content.
    * 
-   * @param metaModel The metadata of a page/content stored.
-   * @param portalName The name of portal.
-   * @param onContent Indicate whether the current page is the content page or the portal page.
+   * @param metaModel Metadata of the page/content.
+   * @param portalName Name of the site that contains the given page/content.
+   * @param onContent Indicates whether the current page is content or portal.
    * @throws Exception The exception
    */
   public void storeMetadata(PageMetadataModel metaModel, String portalName, boolean onContent, String language) throws Exception;
 
   /**
-   * Return the metadata of a portal page or a content page.
+   * Gets metadata of a portal or content page.
    *
    * @param params The parameters list of a content page.
-   * @param pageReference The reference of the page.
-   * @param language The language of the page.
-   * @return PageMetadataModel
+   * @param pageReference Reference of the page.
+   * @param language Language of the page.
+   * @return The page metadata.
    * @throws Exception The exception
    */
   public PageMetadataModel getMetadata(ArrayList<String> params, String pageReference, String language) throws Exception;
 
   /**
-   * Return the metadata of a portal page.
+   * Gets metadata of a portal page.
    *
-   * @param pageReference The reference of the page.
-   * @param language The language of the page.
-   * @return PageMetadataModel
+   * @param pageReference Reference of the page.
+   * @param language Language of the page.
+   * @return The page metadata.
    * @throws Exception The exception
    */
   public PageMetadataModel getPageMetadata(String pageReference, String language) throws Exception;
 
   /**
-   * Return the metadata of a content page.
+   * Gets metadata of a content page.
    * 
    * @param params The parameters list of a content page.
-   * @param language The language of the page.
-   * @return PageMetadataModel
+   * @param language Language of the page.
+   * @return The page metadata.
    * @throws Exception The exception
    */  
   public PageMetadataModel getContentMetadata(ArrayList<String> params, String language) throws Exception;
 
   /**
-   * Remove the metadata of a page.
+   * Removes metadata from a given page.
    *
-   * @param metaModel The metadata of a page/content stored.
-   * @param portalName The name of portal.
-   * @param onContent Indicate whether the current page is the content page or the portal page.
-   * @param language The language of the page.
+   * @param metaModel Metadata of the given page.
+   * @param portalName Name of the site that contains the given page.
+   * @param onContent Indicates whether the current page is content or portal.
+   * @param language Language of the given page.
    * @throws Exception The exception
    */
   public void removePageMetadata(PageMetadataModel metaModel, String portalName, boolean onContent, String language) 
       throws Exception;
 
   /**
-   * Return the content node by the content path.
+   * Gets the content node by a given path.
    * 
-   * @param contentPath The content path.
+   * @param contentPath The given path.
    * @throws Exception The exception
    */
   public Node getContentNode(String contentPath) throws Exception;
 
   /**
-   * Create a key from the page reference or the UUID of the node.
+   * Creates a hash key from the page reference or the UUID of the node.
    *
-   * @param uri The page reference of the UUID of a node.
-   * @return The hash
+   * @param uri The page reference of the node.
+   * @return The hash key.
    * @throws Exception The exception
    */
   public String getHash(String uri) throws Exception ;
 
   /**
-   * Return a sitemap's content of a specific portal.
+   * Gets a sitemap of a given site.
    * 
-   * @param portalName The portal name.
-   * @return The sitemap
+   * @param portalName Name of the given site.
+   * @return The sitemap.
    * @throws Exception The exception
    */
   public String getSitemap(String portalName) throws Exception;
 
   /**
-   * Return Robots' content of a specific portal
+   * Gets robots content of a given site.
    * 
-   * @param portalName The portal name.
-   * @return The robots information
+   * @param portalName Name of the given site.
+   * @return The robots content.
    * @throws Exception The exception
    */
   public String getRobots(String portalName) throws Exception;
 
   /**
-   * Return a list of options (INDEX and NOINDEX) for robots to index.
+   * Gets a list of options (INDEX and NOINDEX) for robots to index.
    * 
-   * @return List<String>
+   * @return The list of options (INDEX and NOINDEX).
    * @throws Exception The exception
    */
   public List<String> getRobotsIndexOptions() throws Exception;
 
   /**
-   * Return a list of options (FOLLOW and NOFOLLOW) for robots to follow.
+   * Gets a list of options (FOLLOW and NOFOLLOW) for robots to follow.
    * 
-   * @return List<String>
+   * @return The list of options (FOLLOW and NOFOLLOW).
    * @throws Exception The exception
    */
   public List<String> getRobotsFollowOptions() throws Exception;
 
   /**
-   * Return a list of options for frequency.
+   * Gets a list of options for frequency.
    *
-   * @return List<String>
+   * @return The list of options.
    * @throws Exception The exception
    */
   public List<String> getFrequencyOptions() throws Exception;
 
   /**
-   * Get the status of a page for its language.
+   * Gets state of a page for its language of a given page.
    *
-   * @param path The path of the page
-   * @param language The page's language
-   * @param onContent True if it concerns the content displayed itself
-   * @return The state
+   * @param path Path of the page.
+   * @param language Language of the page.
+   * @param onContent Indicates whether the given page is content or portal.
+   * @return The page state.
    * @throws Exception The exception
    */
   public String getState(String path, String language, boolean onContent) throws Exception;
 
   /**
-   * Get All SEO Languages.
+   * Gets all SEO languages of a given page.
    *
-   * @param portalName The Portal name
-   * @param seoPath The path of the page
-   * @param onContent True if it concerns the content displayed itself
-   * @return List<Locale> List of Languages
+   * @param portalName Name of the site that contains the given page.
+   * @param seoPath Path of the page.
+   * @param onContent Indicates whether the given page is content or portal.
+   * @return The list of SEO languages.
    * @throws Exception The exception
    */
   public List<Locale> getSEOLanguages(String portalName, String seoPath, boolean onContent) throws Exception;

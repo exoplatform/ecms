@@ -16,11 +16,6 @@
  */
 package org.exoplatform.services.wcm.portal.listener;
 
-import java.util.ArrayList;
-
-import javax.jcr.Node;
-import javax.jcr.Session;
-
 import org.exoplatform.container.xml.InitParams;
 import org.exoplatform.container.xml.ValueParam;
 import org.exoplatform.container.xml.ValuesParam;
@@ -37,6 +32,10 @@ import org.exoplatform.services.wcm.core.WCMConfigurationService;
 import org.exoplatform.services.wcm.portal.LivePortalManagerService;
 import org.exoplatform.services.wcm.portal.artifacts.CreatePortalArtifactsService;
 import org.exoplatform.services.wcm.utils.WCMCoreUtils;
+
+import javax.jcr.Node;
+import javax.jcr.Session;
+import java.util.ArrayList;
 
 /**
  * Created by The eXo Platform SAS

@@ -7,7 +7,10 @@
  * 11:57:24 AM 
  */
 %>
-<% import org.exoplatform.ecm.jcr.model.VersionNode; %>
+<% import org.exoplatform.ecm.jcr.model.VersionNode; 
+   import org.exoplatform.ecm.webui.utils.Utils;
+
+%>
 <%
   VersionNode rootNode = uicomponent.getRootVersionNode() ;  
   public void writeNodes(List nodes, String clazz, int level) {
@@ -75,7 +78,7 @@
 <div class="uiVersionInfo resizable" id="$uicomponent.id">
 	<div class="uiBox noRounded">
 		<h6 class="title">
-			<i class="uiIconFile"></i> <%=uicomponent.getCurrentNode().getName()%>
+			<i class="<%=Utils.getNodeTypeIcon(uicomponent.getCurrentNode(), "uiIcon16x16")%>"></i> <%=uicomponent.getCurrentNode().getName()%>
 		</h6>
 		<table class="uiGrid table no-border-cell table-hover table-striped">
 			<%

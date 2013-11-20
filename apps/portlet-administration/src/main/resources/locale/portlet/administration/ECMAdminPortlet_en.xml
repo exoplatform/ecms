@@ -1222,9 +1222,9 @@
   <UIScriptForm>
     <label>
       <selectVersion>Versions</selectVersion>
-      <scriptContent>Content</scriptContent>
-      <scriptLabel>Name</scriptLabel>
-      <scriptName>Script</scriptName>
+      <scriptContent>Content:</scriptContent>
+      <scriptLabel>Name:</scriptLabel>
+      <scriptName>Script:</scriptName>
       <enableVersion>Enable Versioning</enableVersion>
     </label>
   </UIScriptForm>
@@ -1943,11 +1943,11 @@
   </UIQueriesList>
   <UIQueriesForm>
     <label>
-      <name>Query Name</name>
-      <type>Query Type</type>
-      <statement>Statement</statement>
-      <cache>Enable Cache Results</cache>
-      <permissions>Permissions</permissions>
+      <name>Query Name:</name>
+      <type>Query Type:</type>
+      <statement>Statement:</statement>
+      <cache>Enable Cache Results:</cache>
+      <permissions>Permissions:</permissions>
       <PermissionButton>UIQueriesForm</PermissionButton>
     </label>
     <action>

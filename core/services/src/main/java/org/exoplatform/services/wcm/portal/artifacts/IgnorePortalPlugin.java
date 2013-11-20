@@ -16,11 +16,11 @@
  */
 package org.exoplatform.services.wcm.portal.artifacts;
 
-import java.util.ArrayList;
-
 import org.exoplatform.container.component.ComponentPlugin;
 import org.exoplatform.container.xml.InitParams;
 import org.exoplatform.container.xml.ValuesParam;
+
+import java.util.ArrayList;
 
 
 /**
@@ -35,7 +35,7 @@ public class IgnorePortalPlugin implements ComponentPlugin {
 
   private String desciption;
   
-  private ArrayList<String> ignorePortals = new ArrayList<String>();  
+  private ArrayList<String> ignorePortals = new ArrayList<String>();
 
   public IgnorePortalPlugin(InitParams initParams) {
     ValuesParam valuesParam = initParams.getValuesParam("ignored.portals");
