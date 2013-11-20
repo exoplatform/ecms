@@ -158,15 +158,19 @@ public class DocumentSearchServiceConnector extends BaseContentSearchServiceConn
     return userPortalCfg;
   }
   
-  private boolean hasPortlet(NodeContext<?> pageCt, String plName) throws Exception {
+  private boolean hasPortlet(NodeContext<?> pageCt, String plName) {
     if (plName == null) return false;
     DataStorage ds = WCMCoreUtils.getService(DataStorage.class);
-    for (ModelObject mo : ds.getPage(pageCt.getState().getPageRef().format()).getChildren()) {
-      if (mo instanceof Application<?>) {
-        if (ds.getId(((Application<?>)mo).getState()).contains(plName)) {
-          return true;
+    try {
+      for (ModelObject mo : ds.getPage(pageCt.getState().getPageRef().format()).getChildren()) {
+        if (mo instanceof Application<?>) {
+          if (ds.getId(((Application<?>)mo).getState()).contains(plName)) {
+            return true;
+          }
         }
       }
+    } catch(Exception ex) {
+      return false;
     }
     return false;
   }
