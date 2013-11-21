@@ -28,6 +28,7 @@ import java.util.Locale;
 import java.util.MissingResourceException;
 import java.util.ResourceBundle;
 
+import javax.annotation.security.RolesAllowed;
 import javax.jcr.Node;
 import javax.jcr.NodeIterator;
 import javax.jcr.RepositoryException;
@@ -171,6 +172,7 @@ public class DriverConnector extends BaseConnector implements ResourceContainer 
    */
   @GET
   @Path("/getDrivers/")
+  @RolesAllowed("users")
   public Response getDrivers(@QueryParam("lang") String lang) throws Exception {
     ConversationState conversationState = ConversationState.getCurrent();
     String userId = conversationState.getIdentity().getUserId();
@@ -214,6 +216,7 @@ public class DriverConnector extends BaseConnector implements ResourceContainer 
    */
   @GET
   @Path("/getFoldersAndFiles/")
+  @RolesAllowed("users")
   public Response getFoldersAndFiles(
       @QueryParam("driverName") String driverName,
       @QueryParam("currentFolder") String currentFolder,
@@ -267,6 +270,7 @@ public class DriverConnector extends BaseConnector implements ResourceContainer 
    */
   @GET
   @Path("/uploadFile/checkUploadAvailable/")
+  @RolesAllowed("users")
   public Response checkUploadAvailable() throws Exception {
     CacheControl cacheControl = new CacheControl();
     cacheControl.setNoCache(true);
@@ -289,7 +293,7 @@ public class DriverConnector extends BaseConnector implements ResourceContainer 
    */
   @POST
   @Path("/uploadFile/upload/")
-
+  @RolesAllowed("users")
   public Response uploadFile(@Context HttpServletRequest servletRequest,
       @QueryParam("uploadId") String uploadId) throws Exception {
     //check if number of file uploading is greater than the limit
@@ -322,6 +326,7 @@ public class DriverConnector extends BaseConnector implements ResourceContainer 
    */
   @GET
   @Path("/uploadFile/checkExistence/")
+  @RolesAllowed("users")
   public Response checkExistence(
       @QueryParam("repositoryName") String repositoryName,
       @QueryParam("workspaceName") String workspaceName,
@@ -369,6 +374,7 @@ public class DriverConnector extends BaseConnector implements ResourceContainer 
    */
   @GET
   @Path("/uploadFile/control/")
+  @RolesAllowed("users")
   public Response processUpload(
       @QueryParam("repositoryName") String repositoryName,
       @QueryParam("workspaceName") String workspaceName,
