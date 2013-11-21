@@ -223,10 +223,11 @@
 	<div class="PDFViewerContent">
   	<div class="ImageView" style="overflow-x:auto; overflow-y:hidden" id ="pdf_viewer_image" name="pdf_viewer_image">
 		<%
+			  String lastModified = org.exoplatform.services.cms.impl.Utils.getJcrContentLastModified(originalNode);
 			  String pdfPageImage = "/" + uiParent.getPortalName() + "/" + Utils.getRestContextName(uiParent.getPortalName()) + 
 			                        "/pdfviewer/" + repository + "/" + uiParent.getWorkspaceName() + 
 			                        "/${currentPage}/${currentRotation}/${currentScale}/" + currentNode.getUUID() + "?" +
-			                        originalNode.getProperty("jcr:content/jcr:lastModified").getString();			  
+			                        lastModified;			  
 		%>
 			  <a href="$pdfPageImage" style="display:inline-block" rel="tooltip" data-placement="bottom" title="<%=uicomponent.getResourceBundle("PDFViewer.label.viewFullPage")%>"><img src="$pdfPageImage" /></a>
 		</div>

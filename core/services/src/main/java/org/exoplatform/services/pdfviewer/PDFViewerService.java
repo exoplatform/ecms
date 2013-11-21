@@ -34,6 +34,7 @@ import javax.jcr.Node;
 import org.artofsolving.jodconverter.office.OfficeException;
 import org.exoplatform.services.cache.CacheService;
 import org.exoplatform.services.cache.ExoCache;
+import org.exoplatform.services.cms.impl.Utils;
 import org.exoplatform.services.cms.jodconverter.JodConverterService;
 import org.exoplatform.services.cms.mimetype.DMSMimeTypeResolver;
 import org.exoplatform.services.jcr.RepositoryService;
@@ -127,7 +128,8 @@ public class PDFViewerService {
     File content = null;
     String name = currentNode.getName().replaceAll(":","_");
     Node contentNode = currentNode.getNode("jcr:content");
-    String lastModified = contentNode.getProperty("jcr:lastModified").getString();
+    
+    String lastModified = Utils.getJcrContentLastModified(currentNode);
     if (path == null || !(content = new File(path)).exists() || !lastModified.equals(lastModifiedTime)) {
       String mimeType = contentNode.getProperty("jcr:mimeType").getString();
       InputStream input = new BufferedInputStream(contentNode.getProperty("jcr:data").getStream());
