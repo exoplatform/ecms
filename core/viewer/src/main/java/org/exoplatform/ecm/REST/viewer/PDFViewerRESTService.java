@@ -347,7 +347,13 @@ public class PDFViewerRESTService implements ResourceContainer {
     if (node.isNodeType("nt:frozenNode")) {
       checkedNode = node.getSession().getNodeByUUID(node.getProperty("jcr:frozenUuid").getString());
     }
-    return checkedNode.getProperty("jcr:content/jcr:lastModified").getString();
+    String lastModified = "";
+    if(checkedNode.hasProperty("jcr:content/jcr:lastModified")){
+      lastModified =checkedNode.getProperty("jcr:content/jcr:lastModified").getString(); 
+    }else if(checkedNode.hasProperty("jcr:content/exo:dateModified")){
+      lastModified =checkedNode.getProperty("jcr:content/exo:dateModified").getString(); 
+    }
+    return lastModified;
   }  
 
 private void read(InputStream is, OutputStream os) throws Exception {
