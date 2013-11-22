@@ -127,16 +127,14 @@ select {
 
 /* outer/inner center provides horizontal center */
 html[dir='ltr'] .outerCenter {
-  float: right;
-  position: relative;
-  right: 15%;
   padding: 4px 0 0;
+  margin: auto;
+  width: 360px;
 }
 html[dir='rtl'] .outerCenter {
-  float: left;
-  position: relative;
-  left: 50%;
   padding: 4px 0 0;
+  margin: auto;
+  width: 360px;
 }
 html[dir='ltr'] .innerCenter {
   float: right;
@@ -463,7 +461,7 @@ html[dir='rtl'] #toolbarViewerRight {
   padding: 4px;
 }
 html[dir='ltr'] #toolbarViewerRight{
-  min-width: 8%;
+  width: 52px;
   padding: 4px;
 }
 
@@ -475,7 +473,7 @@ html[dir='rtl'] #toolbarViewerLeft {
   padding: 4px;
 }
 html[dir='rtl'] #toolbarViewerLeft {
-  min-width: 8%;
+  width: 52px;
   padding: 4px;
 }
 
@@ -1114,7 +1112,7 @@ a:focus > .thumbnail > .thumbnailSelectionRing > .thumbnailImage,
 
 a:focus > .thumbnail > .thumbnailSelectionRing,
 .thumbnail:hover > .thumbnailSelectionRing {
-  border: 3px solid #999999;
+  border: 3px solid #2f5e92;
   margin: -3px;
 }
 
@@ -1123,7 +1121,7 @@ a:focus > .thumbnail > .thumbnailSelectionRing,
 }
 
 .thumbnail.selected > .thumbnailSelectionRing {
-	border: 3px solid #2f5e92;
+	border: 3px solid #999999;
 	margin: -3px;
 }
 
