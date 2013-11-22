@@ -39,6 +39,7 @@ import javax.jcr.NodeIterator;
 import javax.jcr.Property;
 import javax.jcr.PropertyIterator;
 import javax.jcr.Session;
+import javax.jcr.lock.LockException;
 import javax.ws.rs.GET;
 import javax.ws.rs.Path;
 import javax.ws.rs.QueryParam;
@@ -222,12 +223,18 @@ public class RenameConnector implements ResourceContainer {
       }
 
       return Response.ok(uuid).build();
-    } catch (Exception e) {
-      if (LOG.isInfoEnabled()) {
-        LOG.info("Rename is not successful!");
+    } catch (LockException e) {
+      if (LOG.isWarnEnabled()) {
+        LOG.warn("The node or parent node is locked. Rename is not successful!");
       }
-      return Response.status(HTTPStatus.BAD_REQUEST).build();
+    } catch (Exception e) {
+      if (LOG.isDebugEnabled()) {
+        LOG.debug("Rename is not successful!", e);
+      } else if (LOG.isWarnEnabled()) {
+        LOG.warn("Rename is not successful!");
+      }
     }
+    return Response.status(HTTPStatus.BAD_REQUEST).build();
   }
 
   /**
