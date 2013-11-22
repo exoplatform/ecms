@@ -25,6 +25,7 @@ import org.exoplatform.ecm.webui.component.explorer.control.filter.IsCheckedOutF
 import org.exoplatform.ecm.webui.component.explorer.control.filter.IsNotEditingDocumentFilter;
 import org.exoplatform.ecm.webui.component.explorer.control.filter.IsNotInTrashFilter;
 import org.exoplatform.ecm.webui.component.explorer.control.filter.IsNotLockedFilter;
+import org.exoplatform.ecm.webui.component.explorer.control.filter.IsNotParentLockedWhenRenameFilter;
 import org.exoplatform.ecm.webui.component.explorer.control.filter.IsNotTrashHomeNodeFilter;
 import org.exoplatform.webui.config.annotation.ComponentConfig;
 import org.exoplatform.webui.ext.filter.UIExtensionFilter;
@@ -43,7 +44,7 @@ public class RenameManageComponent extends UIAbstractManagerComponent {
 
  private static final List<UIExtensionFilter> FILTERS
          = Arrays.asList(new UIExtensionFilter[]{new IsNotInTrashFilter(),
-                                                 new IsNotInTrashFilter(),
+                                                 new IsNotParentLockedWhenRenameFilter(),
                                                  new CanSetPropertyFilter(),
                                                  new IsNotLockedFilter(),
                                                  new IsCheckedOutFilter(),
