@@ -218,7 +218,7 @@
   <UIContentPropertySelector>
     <action>
       <Add>Ekle</Add>
-      <Cancel>İptal</Cancel>
+      <Cancel>#{word.cancel}</Cancel>
     </action>
     <label>
       <metadataType>Meta veri türü</metadataType>
@@ -235,7 +235,7 @@
   <UIContentNodeTypeSelector>
     <action>
       <Save>#{word.save}</Save>
-      <Cancel>İptal</Cancel>
+      <Cancel>#{word.cancel}</Cancel>
     </action>
   </UIContentNodeTypeSelector>
 
