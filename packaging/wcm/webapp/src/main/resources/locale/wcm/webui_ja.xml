@@ -218,7 +218,7 @@
   <UIContentPropertySelector>
     <action>
       <Add>追加</Add>
-      <Cancel>キャンセル</Cancel>
+      <Cancel>#{word.cancel}</Cancel>
     </action>
     <label>
       <metadataType>メタデータタイプ</metadataType>
@@ -235,7 +235,7 @@
   <UIContentNodeTypeSelector>
     <action>
       <Save>#{word.save}</Save>
-      <Cancel>キャンセル</Cancel>
+      <Cancel>#{word.cancel}</Cancel>
     </action>
   </UIContentNodeTypeSelector>
 

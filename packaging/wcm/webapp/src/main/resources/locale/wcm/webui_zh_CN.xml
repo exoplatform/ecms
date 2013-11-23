@@ -218,7 +218,7 @@
   <UIContentPropertySelector>
     <action>
       <Add>新增</Add>
-      <Cancel>取消</Cancel>
+      <Cancel>#{word.cancel}</Cancel>
     </action>
     <label>
       <metadataType>元数据类型</metadataType>
@@ -235,7 +235,7 @@
   <UIContentNodeTypeSelector>
     <action>
       <Save>#{word.save}</Save>
-      <Cancel>取消</Cancel>
+      <Cancel>#{word.cancel}</Cancel>
     </action>
   </UIContentNodeTypeSelector>
 

@@ -218,7 +218,7 @@
   <UIContentPropertySelector>
     <action>
       <Add>Lägg till</Add>
-      <Cancel>Avbryt</Cancel>
+      <Cancel>#{word.cancel}</Cancel>
     </action>
     <label>
       <metadataType>Metadatatyp</metadataType>
@@ -235,7 +235,7 @@
   <UIContentNodeTypeSelector>
     <action>
       <Save>#{word.save}</Save>
-      <Cancel>Avbryt</Cancel>
+      <Cancel>#{word.cancel}</Cancel>
     </action>
   </UIContentNodeTypeSelector>
 

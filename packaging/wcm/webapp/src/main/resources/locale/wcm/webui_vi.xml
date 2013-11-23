@@ -218,7 +218,7 @@
   <UIContentPropertySelector>
     <action>
       <Add>Thêm</Add>
-      <Cancel>Hủy bỏ</Cancel>
+      <Cancel>#{word.cancel}</Cancel>
     </action>
     <label>
       <metadataType>Kiểu Siêu dữ liệu</metadataType>
@@ -235,7 +235,7 @@
   <UIContentNodeTypeSelector>
     <action>
       <Save>#{word.save}</Save>
-      <Cancel>Hủy</Cancel>
+      <Cancel>#{word.cancel}</Cancel>
     </action>
   </UIContentNodeTypeSelector>
 
