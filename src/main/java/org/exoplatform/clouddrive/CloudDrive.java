@@ -24,6 +24,7 @@ import java.util.Collection;
 import java.util.List;
 import java.util.Queue;
 import java.util.concurrent.ConcurrentLinkedQueue;
+import java.util.concurrent.ExecutionException;
 
 import javax.jcr.Node;
 import javax.jcr.RepositoryException;
@@ -79,6 +80,13 @@ public abstract class CloudDrive {
      * @return long, time in milliseconds
      */
     long getFinishTime();
+    
+    /**
+     * Command name. 
+     * 
+     * @return String
+     */
+    String getName();
 
     /**
      * Collection of files affect by the command. Call to this method will return unmodifiable view on actual
@@ -89,11 +97,20 @@ public abstract class CloudDrive {
     Collection<CloudFile> getFiles();
 
     /**
+     * Collection of file paths removed by the command. Call to this method will return unmodifiable view on actual
+     * results and should be treated accordingly until the command will not be completed.
+     * 
+     * @return collection of {@link String} file paths
+     */
+    Collection<String> getRemoved();
+
+    /**
      * Wait for command will be done.
      * 
+     * @throws ExecutionException if command thrown an exception.
      * @throws InterruptedException if current thread was interrupted.
      */
-    void await() throws InterruptedException;
+    void await() throws ExecutionException, InterruptedException;
   }
 
   /**

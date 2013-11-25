@@ -377,6 +377,7 @@ public class ConnectService implements ResourceContainer {
           } catch (InterruptedException e) {
             LOG.info(getName() + " interrupted: " + e.getMessage());
             interrupted = true;
+            Thread.currentThread().interrupt();
           }
         }
       }

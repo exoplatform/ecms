@@ -1,4 +1,3 @@
-
 package org.exoplatform.clouddrive.box;
 
 import org.exoplatform.clouddrive.CloudDrive;
@@ -70,19 +69,12 @@ public class BoxConnector extends CloudDriveConnector {
         return new BoxAPI(getClientId(), getClientSecret(), code, getProvider().getRedirectUrl());
       } else {
         // build API based on locally stored tokens
-        return new BoxAPI(getClientId(),
-                                  getClientSecret(),
-                                  accessToken,
-                                  refreshToken,
-                                  expirationTime);
+        return new BoxAPI(getClientId(), getClientSecret(), accessToken, refreshToken, expirationTime);
       }
     }
   }
 
-  
-  public BoxConnector(RepositoryService jcrService,
-                           SessionProviderService sessionProviders,
-                           InitParams params) throws ConfigurationException {
+  public BoxConnector(RepositoryService jcrService, SessionProviderService sessionProviders, InitParams params) throws ConfigurationException {
     super(jcrService, sessionProviders, params);
   }
 
@@ -93,11 +85,34 @@ public class BoxConnector extends CloudDriveConnector {
   protected BoxProvider getProvider() {
     return (BoxProvider) super.getProvider();
   }
-  
+
+  /**
+   * {@inheritDoc}
+   */
+  @Override
+  protected String getConnectorHost() {
+    if (getConnectorSchema().equalsIgnoreCase("https")) {
+      return super.getConnectorHost();
+    } else {
+      // if not HTTPS, then only localhost possible
+      String[] host = connectorHost.split(":");
+      StringBuilder newHost = new StringBuilder();
+      newHost.append("localhost");
+      if (host.length > 1) {
+        // but use original port
+        newHost.append(':');
+        newHost.append(host[1]);
+      }
+      LOG.warn("Box connector supports only HTTPS for server redirect. Switched to localhost (Box's Development Mode).");
+      return newHost.toString();
+    }
+  }
+
   @Override
   protected CloudProvider createProvider() {
     StringBuilder redirectUrl = new StringBuilder();
-    redirectUrl.append("http://");
+    redirectUrl.append(getConnectorSchema());
+    redirectUrl.append("://");
     redirectUrl.append(getConnectorHost());
     redirectUrl.append("/portal/rest/clouddrive/connect/");
     redirectUrl.append(getProviderId());
@@ -111,7 +126,11 @@ public class BoxConnector extends CloudDriveConnector {
     authUrl.append("&redirect_uri=");
     authUrl.append(redirectUrl);
 
-    return new BoxProvider(getProviderId(), getProviderName(), authUrl.toString(), redirectUrl.toString(), jcrService);
+    return new BoxProvider(getProviderId(),
+                           getProviderName(),
+                           authUrl.toString(),
+                           redirectUrl.toString(),
+                           jcrService);
   }
 
   @Override
@@ -119,11 +138,7 @@ public class BoxConnector extends CloudDriveConnector {
     if (code != null && code.length() > 0) {
       BoxAPI driveAPI = new API().auth(code).build();
       com.box.boxjavalibv2.dao.BoxUser buser = driveAPI.currentUser();
-      BoxUser user = new BoxUser(buser.getId(),
-                                       buser.getName(),
-                                       buser.getLogin(),
-                                       provider,
-                                       driveAPI);
+      BoxUser user = new BoxUser(buser.getId(), buser.getName(), buser.getLogin(), provider, driveAPI);
       return user;
     } else {
       throw new CloudDriveException("Access key should not be null or empty");

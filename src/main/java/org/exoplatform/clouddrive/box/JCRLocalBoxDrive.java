@@ -161,7 +161,7 @@ public class JCRLocalBoxDrive extends JCRLocalCloudDrive implements UserTokenRef
         }
 
         // XXX thumbnail link not used
-        result.add(new JCRLocalCloudFile(localNode.getPath(),
+        changed.add(new JCRLocalCloudFile(localNode.getPath(),
                                          id,
                                          name,
                                          link,
@@ -275,7 +275,7 @@ public class JCRLocalBoxDrive extends JCRLocalCloudDrive implements UserTokenRef
                        f.getModifiedBy().getLogin(), // gf.getLastModifyingUserName(),
                        created,
                        modified);
-            result.add(new JCRLocalCloudFile(localNode.getPath(),
+            changed.add(new JCRLocalCloudFile(localNode.getPath(),
                                              id,
                                              name,
                                              link,
@@ -310,7 +310,7 @@ public class JCRLocalBoxDrive extends JCRLocalCloudDrive implements UserTokenRef
                      created,
                      modified);
             initBoxItem(localNode, item);
-            result.add(new JCRLocalCloudFile(localNode.getPath(),
+            changed.add(new JCRLocalCloudFile(localNode.getPath(),
                                              id,
                                              name,
                                              link,
@@ -331,6 +331,7 @@ public class JCRLocalBoxDrive extends JCRLocalCloudDrive implements UserTokenRef
         List<Node> nls = niter.next();
         niter.remove();
         for (Node n : nls) {
+          removed.add(n.getPath());
           n.remove();
         }
       }

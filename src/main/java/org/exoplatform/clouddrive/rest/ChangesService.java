@@ -36,6 +36,7 @@ import javax.annotation.security.RolesAllowed;
 import javax.jcr.Item;
 import javax.jcr.LoginException;
 import javax.jcr.Node;
+import javax.jcr.PathNotFoundException;
 import javax.jcr.RepositoryException;
 import javax.jcr.Session;
 import javax.ws.rs.FormParam;
@@ -85,7 +86,9 @@ public class ChangesService implements ResourceContainer {
   }
 
   /**
-   * Start asynchronous synchronization of a drive described by given workspace and path.
+   * Start asynchronous synchronization of a drive described by given workspace and path.<br>
+   * 
+   * TODO deprecated, not used anymore for Google Drive.
    * 
    * @param uriInfo - request info TODO need it?
    * @param workspace
@@ -94,6 +97,7 @@ public class ChangesService implements ResourceContainer {
    */
   @POST
   @RolesAllowed("users")
+  @Deprecated
   public Response asyncSynchronization(@Context UriInfo uriInfo,
                                        @FormParam("workspace") String workspace,
                                        @FormParam("path") String path) {
@@ -159,6 +163,12 @@ public class ChangesService implements ResourceContainer {
         } catch (LoginException e) {
           LOG.warn("Error login to read drive " + workspace + ":" + path + ". " + e.getMessage());
           return Response.status(Status.UNAUTHORIZED).entity("Authentication error.").build();
+        } catch(PathNotFoundException e) {
+          LOG.warn("Cannot run asynchronous syncronization for not existing node " + workspace + ":"
+              + path + ". " + e.getMessage());
+          return Response.status(Status.NOT_FOUND)
+                         .entity("Synchronization canceled. " + e.getMessage())
+                         .build();
         } catch (RepositoryException e) {
           LOG.error("Error reading drive " + workspace + ":" + path, e);
           return Response.status(Status.INTERNAL_SERVER_ERROR)

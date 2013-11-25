@@ -154,7 +154,7 @@ public class JCRLocalGoogleDrive extends JCRLocalCloudDrive {
                      modified);
           }
 
-          result.add(new JCRLocalCloudFile(localNode.getPath(),
+          changed.add(new JCRLocalCloudFile(localNode.getPath(),
                                            gf.getId(),
                                            gf.getTitle(),
                                            gf.getAlternateLink(),
@@ -305,6 +305,7 @@ public class JCRLocalGoogleDrive extends JCRLocalCloudDrive {
               }
             } // else will be removed below
           }
+          removed.add(en.getPath());
           en.remove();
         }
         nodes.remove(fileId);
@@ -409,7 +410,7 @@ public class JCRLocalGoogleDrive extends JCRLocalCloudDrive {
                      modified);
           }
 
-          result.add(new JCRLocalCloudFile(localNode.getPath(),
+          changed.add(new JCRLocalCloudFile(localNode.getPath(),
                                            gf.getId(),
                                            gf.getTitle(),
                                            gf.getAlternateLink(),
@@ -431,6 +432,7 @@ public class JCRLocalGoogleDrive extends JCRLocalCloudDrive {
         for (Iterator<Node> niter = existing.iterator(); niter.hasNext();) {
           Node n = niter.next();
           if (!synced.contains(n)) {
+            removed.add(n.getPath());
             niter.remove();
             n.remove();
           }

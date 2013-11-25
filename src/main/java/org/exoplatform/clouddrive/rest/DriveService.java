@@ -16,8 +16,27 @@
  */
 package org.exoplatform.clouddrive.rest;
 
+import org.exoplatform.clouddrive.CloudDrive;
+import org.exoplatform.clouddrive.CloudDrive.Command;
+import org.exoplatform.clouddrive.CloudDriveAccessException;
+import org.exoplatform.clouddrive.CloudDriveException;
+import org.exoplatform.clouddrive.CloudDriveService;
+import org.exoplatform.clouddrive.CloudFile;
+import org.exoplatform.clouddrive.CloudProvider;
+import org.exoplatform.clouddrive.DriveRemovedException;
+import org.exoplatform.clouddrive.NotCloudFileException;
+import org.exoplatform.clouddrive.jcr.JCRNodeFinder;
+import org.exoplatform.clouddrive.jcr.NodeFinder;
+import org.exoplatform.services.jcr.RepositoryService;
+import org.exoplatform.services.jcr.ext.app.SessionProviderService;
+import org.exoplatform.services.jcr.ext.common.SessionProvider;
+import org.exoplatform.services.log.ExoLogger;
+import org.exoplatform.services.log.Log;
+import org.exoplatform.services.rest.resource.ResourceContainer;
+
 import java.util.ArrayList;
 import java.util.Collection;
+import java.util.HashSet;
 
 import javax.annotation.security.RolesAllowed;
 import javax.jcr.Item;
@@ -36,23 +55,6 @@ import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 import javax.ws.rs.core.Response.Status;
 import javax.ws.rs.core.UriInfo;
-
-import org.exoplatform.clouddrive.CloudDrive;
-import org.exoplatform.clouddrive.CloudDriveAccessException;
-import org.exoplatform.clouddrive.CloudDriveException;
-import org.exoplatform.clouddrive.CloudDriveService;
-import org.exoplatform.clouddrive.CloudFile;
-import org.exoplatform.clouddrive.CloudProvider;
-import org.exoplatform.clouddrive.DriveRemovedException;
-import org.exoplatform.clouddrive.NotCloudFileException;
-import org.exoplatform.clouddrive.jcr.JCRNodeFinder;
-import org.exoplatform.clouddrive.jcr.NodeFinder;
-import org.exoplatform.services.jcr.RepositoryService;
-import org.exoplatform.services.jcr.ext.app.SessionProviderService;
-import org.exoplatform.services.jcr.ext.common.SessionProvider;
-import org.exoplatform.services.log.ExoLogger;
-import org.exoplatform.services.log.Log;
-import org.exoplatform.services.rest.resource.ResourceContainer;
 
 /**
  * REST service providing information about providers. Created by The eXo Platform SAS.
@@ -183,9 +185,12 @@ public class DriveService implements ResourceContainer {
           CloudDrive local = cloudDrives.findDrive(userNode);
           if (local != null) {
             Collection<CloudFile> files;
+            Collection<String> removed;
             if (synchronize) {
               try {
-                files = local.synchronize().getFiles();
+                Command sync = local.synchronize();
+                files =sync.getFiles();
+                removed = sync.getRemoved();
               } catch (CloudDriveAccessException e) {
                 LOG.warn("Request to cloud drive forbidden or revoked.", e);
                 // XXX client should treat this status in special way and obtain new credentials using given
@@ -199,6 +204,7 @@ public class DriveService implements ResourceContainer {
               }
             } else {
               files = new ArrayList<CloudFile>();
+              removed = new HashSet<String>();
               try {
                 String userPath = userNode.getPath();
                 if (!local.getPath().equals(userPath)) {
@@ -215,7 +221,7 @@ public class DriveService implements ResourceContainer {
               }
             }
 
-            return Response.ok().entity(DriveInfo.create(local, files)).build();
+            return Response.ok().entity(DriveInfo.create(local, files, removed)).build();
           } else {
             LOG.warn("Item " + workspace + ":" + path + " not a cloud file or drive not connected.");
             return Response.status(Status.NO_CONTENT).build();

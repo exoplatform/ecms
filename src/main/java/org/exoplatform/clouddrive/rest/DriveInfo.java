@@ -26,6 +26,7 @@ import org.exoplatform.clouddrive.DriveRemovedException;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.HashMap;
+import java.util.HashSet;
 import java.util.Map;
 
 import javax.jcr.RepositoryException;
@@ -42,6 +43,8 @@ public class DriveInfo {
   final CloudProvider          provider;
 
   final Map<String, CloudFile> files;
+
+  final Collection<String>     removed;
 
   final String                 path;
 
@@ -62,7 +65,8 @@ public class DriveInfo {
             String changesLink,
             boolean connected,
             CloudProvider provider,
-            Map<String, CloudFile> files) {
+            Map<String, CloudFile> files,
+            Collection<String> removed) {
     this.title = title;
     this.path = path;
     this.user = user;
@@ -71,10 +75,12 @@ public class DriveInfo {
     this.connected = connected;
     this.provider = provider;
     this.files = files;
+    this.removed = removed;
   }
 
-  static DriveInfo create(CloudDrive drive, Collection<CloudFile> files) throws DriveRemovedException, CloudProviderException,
-                                                                        RepositoryException {
+  static DriveInfo create(CloudDrive drive, Collection<CloudFile> files, Collection<String> removed) throws DriveRemovedException,
+                                                                                                    CloudProviderException,
+                                                                                                    RepositoryException {
     Map<String, CloudFile> driveFiles = new HashMap<String, CloudFile>();
     for (CloudFile cf : files) {
       driveFiles.put(cf.getPath(), cf);
@@ -86,11 +92,20 @@ public class DriveInfo {
                          drive.getChangesLink(),
                          drive.isConnected(),
                          drive.getUser().getProvider(),
-                         driveFiles);
+                         driveFiles,
+                         removed);
   }
 
-  static DriveInfo create(CloudDrive drive) throws DriveRemovedException, CloudProviderException, RepositoryException {
-    return create(drive, new ArrayList<CloudFile>());
+  static DriveInfo create(CloudDrive drive, Collection<CloudFile> files) throws DriveRemovedException,
+                                                                        CloudProviderException,
+                                                                        RepositoryException {
+    return create(drive, files, new HashSet<String>());
+  }
+
+  static DriveInfo create(CloudDrive drive) throws DriveRemovedException,
+                                           CloudProviderException,
+                                           RepositoryException {
+    return create(drive, new ArrayList<CloudFile>(), new HashSet<String>());
   }
 
   public CloudProvider getProvider() {
@@ -99,6 +114,10 @@ public class DriveInfo {
 
   public Map<String, CloudFile> getFiles() {
     return files;
+  }
+
+  public Collection<String> getRemoved() {
+    return removed;
   }
 
   public String getPath() {

@@ -36,6 +36,7 @@ import org.exoplatform.services.jcr.ext.common.SessionProvider;
 import org.exoplatform.services.security.ConversationState;
 
 import java.lang.ref.SoftReference;
+import java.lang.reflect.UndeclaredThrowableException;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -47,8 +48,11 @@ import java.util.List;
 import java.util.Map;
 import java.util.NoSuchElementException;
 import java.util.Queue;
+import java.util.concurrent.Callable;
 import java.util.concurrent.ConcurrentLinkedQueue;
 import java.util.concurrent.CountDownLatch;
+import java.util.concurrent.ExecutionException;
+import java.util.concurrent.Future;
 import java.util.concurrent.atomic.AtomicInteger;
 import java.util.concurrent.atomic.AtomicLong;
 import java.util.concurrent.atomic.AtomicReference;
@@ -163,6 +167,14 @@ public abstract class JCRLocalCloudDrive extends CloudDrive {
     }
 
     /**
+     * @inherritDoc
+     */
+    @Override
+    public Collection<String> getRemoved() {
+      return Collections.emptyList();
+    }
+    
+    /**
      * {@inheritDoc}
      */
     @Override
@@ -184,6 +196,14 @@ public abstract class JCRLocalCloudDrive extends CloudDrive {
     @Override
     public void await() throws InterruptedException {
       // already done
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public String getName() {
+      return "complete";
     }
   }
 
@@ -598,6 +618,7 @@ public abstract class JCRLocalCloudDrive extends CloudDrive {
   /**
    * Asynchronous runner for {@link Command}.
    */
+  @Deprecated
   protected class CommandRunnable implements Runnable {
     final AbstractCommand   command;
 
@@ -647,12 +668,49 @@ public abstract class JCRLocalCloudDrive extends CloudDrive {
       try {
         command.exec();
       } catch (CloudDriveException e) {
-        LOG.error("Cloud Drive error during " + command.getCommandVerb() + ": " + e.getMessage(), e);
+        LOG.error("Cloud Drive error during " + command.getName() + ": " + e.getMessage(), e);
       } catch (Throwable e) {
-        LOG.error("Error to " + command.getCommandVerb() + ": " + e.getMessage(), e);
+        LOG.error("Error to " + command.getName() + ": " + e.getMessage(), e);
       } finally {
         sp.close();
         lock.countDown();
+      }
+    }
+  }
+
+  /**
+   * Asynchronous runner for {@link Command}.
+   */
+  protected class CommandCallable implements Callable<Command> {
+    /**
+     * ConversationState for asynchronous execution.
+     */
+    final ConversationState conversation;
+
+    final AbstractCommand   command;
+
+    CommandCallable(AbstractCommand command, ConversationState conversation) throws CloudDriveException {
+      this.conversation = conversation;
+      this.command = command;
+    }
+
+    @Override
+    public Command call() throws Exception {
+      // set correct user's ConversationState
+      ConversationState prevConversation = ConversationState.getCurrent();
+      ConversationState.setCurrent(conversation);
+      // set correct SessionProvider
+      SessionProvider prevSessions = sessionProviders.getSessionProvider(null);
+      SessionProvider sp = new SessionProvider(conversation);
+      sessionProviders.setSessionProvider(null, sp);
+
+      try {
+        command.exec();
+        return command;
+      } finally {
+        sessionProviders.setSessionProvider(null, prevSessions);
+        ConversationState.setCurrent(prevConversation);
+        sp.close();
       }
     }
   }
@@ -663,9 +721,14 @@ public abstract class JCRLocalCloudDrive extends CloudDrive {
   protected abstract class AbstractCommand implements Command, CommandProgress {
 
     /**
-     * Local files affected by the command.
+     * Local files changed by the command.
      */
-    protected final Queue<CloudFile> result           = new ConcurrentLinkedQueue<CloudFile>();
+    protected final Queue<CloudFile> changed          = new ConcurrentLinkedQueue<CloudFile>();
+
+    /**
+     * Local file paths deleted by the command.
+     */
+    protected final Queue<String>    removed          = new ConcurrentLinkedQueue<String>();
 
     /**
      * Target JCR node. Will be initialized in exec() method (in actual runner thread).
@@ -690,7 +753,7 @@ public abstract class JCRLocalCloudDrive extends CloudDrive {
     /**
      * Asynchronous execution support.
      */
-    protected CommandRunnable        async;
+    protected Future<Command>        async;
 
     /**
      * Base command constructor.
@@ -701,13 +764,6 @@ public abstract class JCRLocalCloudDrive extends CloudDrive {
     protected AbstractCommand() throws RepositoryException, DriveRemovedException {
 
     }
-
-    /**
-     * Command verb used for error messages.
-     * 
-     * @return {@link String}
-     */
-    protected abstract String getCommandVerb();
 
     /**
      * Processing logic.
@@ -726,13 +782,14 @@ public abstract class JCRLocalCloudDrive extends CloudDrive {
      */
     void exec() throws CloudDriveException, RepositoryException {
       startTime.set(System.currentTimeMillis());
-      driveRoot = rootNode(); // init in actual runner thread
 
       try {
+        driveRoot = rootNode(); // init in actual runner thread
+
         startAction(JCRLocalCloudDrive.this);
 
         int attemptNumb = 0;
-        while (true) {
+        while (true && !Thread.currentThread().isInterrupted()) {
           try {
             process();
             return;
@@ -741,34 +798,34 @@ public abstract class JCRLocalCloudDrive extends CloudDrive {
             if (getUser().getProvider().retryOnProviderError()) {
               attemptNumb++;
               if (attemptNumb > CloudDriveConnector.PROVIDER_REQUEST_ATTEMPTS) {
-                handleError(driveRoot, e, getCommandVerb());
+                handleError(driveRoot, e, getName());
                 throw e;
               } else {
                 rollback(driveRoot);
                 try {
                   Thread.sleep(CloudDriveConnector.PROVIDER_REQUEST_ATTEMPT_TIMEOUT);
                 } catch (InterruptedException ie) {
-                  LOG.warn("Interrupted while waiting for a next attempt of " + getCommandVerb() + ": "
+                  LOG.warn("Interrupted while waiting for a next attempt of " + getName() + ": "
                       + ie.getMessage());
                 }
-                LOG.warn("Error running " + getCommandVerb() + " command: " + e.getMessage()
+                LOG.warn("Error running " + getName() + " command: " + e.getMessage()
                     + ". Rolled back and running next attempt.");
               }
             } else {
-              handleError(driveRoot, e, getCommandVerb());
+              handleError(driveRoot, e, getName());
               throw e;
             }
-          } catch (CloudDriveException e) {
-            handleError(driveRoot, e, getCommandVerb());
-            throw e;
-          } catch (RepositoryException e) {
-            handleError(driveRoot, e, getCommandVerb());
-            throw e;
-          } catch (RuntimeException e) {
-            handleError(driveRoot, e, getCommandVerb());
-            throw e;
           }
         }
+      } catch (CloudDriveException e) {
+        handleError(driveRoot, e, getName());
+        throw e;
+      } catch (RepositoryException e) {
+        handleError(driveRoot, e, getName());
+        throw e;
+      } catch (RuntimeException e) {
+        handleError(driveRoot, e, getName());
+        throw e;
       } finally {
         doneAction();
         finishTime.set(System.currentTimeMillis());
@@ -776,20 +833,24 @@ public abstract class JCRLocalCloudDrive extends CloudDrive {
     }
 
     /**
-     * Start command execution asynchronously using {@link #exec()} method inside {@link CommandRunnable}. Any
-     * exception will be stored to {@link CommandRunnable#error}.
+     * Start command execution asynchronously using {@link #exec()} method inside {@link CommandCallable}. Any
+     * exception if happened will be thrown by resulting {@link Future}.
      * 
+     * @return {@link Future} associated with this command.
      * @throws CloudDriveException if no ConversationState set in caller thread.
      */
-    void execAsync() throws CloudDriveException {
+    Future<Command> execAsync() throws CloudDriveException {
       ConversationState conversation = ConversationState.getCurrent();
       if (conversation == null) {
-        throw new CloudDriveException("Error to " + getCommandVerb() + " drive for user "
-            + getUser().getEmail() + ". User identity not set.");
+        throw new CloudDriveException("Error to " + getName() + " drive for user " + getUser().getEmail()
+            + ". User identity not set.");
       }
 
-      async = new CommandRunnable(this, conversation);
-      async.start();
+      // TODO old way
+      // async = new CommandRunnable(this, conversation);
+      // async.start();
+
+      return async = commandExecutor.submit(getName(), new CommandCallable(this, conversation));
     }
 
     /**
@@ -842,16 +903,24 @@ public abstract class JCRLocalCloudDrive extends CloudDrive {
      */
     @Override
     public Collection<CloudFile> getFiles() {
-      return Collections.unmodifiableCollection(result);
+      return Collections.unmodifiableCollection(changed);
     }
 
     /**
      * {@inheritDoc}
      */
     @Override
-    public void await() throws InterruptedException {
+    public Collection<String> getRemoved() {
+      return Collections.unmodifiableCollection(removed);
+    }
+    
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public void await() throws ExecutionException, InterruptedException {
       if (async != null) {
-        async.await();
+        async.get();
       } // else do nothing - command already done
     }
   }
@@ -880,7 +949,7 @@ public abstract class JCRLocalCloudDrive extends CloudDrive {
     protected abstract void fetchFiles() throws CloudDriveException, RepositoryException;
 
     @Override
-    protected String getCommandVerb() {
+    public String getName() {
       return "connect";
     }
 
@@ -929,7 +998,7 @@ public abstract class JCRLocalCloudDrive extends CloudDrive {
     }
 
     @Override
-    protected String getCommandVerb() {
+    public String getName() {
       return "synchronization";
     }
 
@@ -1046,7 +1115,7 @@ public abstract class JCRLocalCloudDrive extends CloudDrive {
      * {@inheritDoc}
      */
     @Override
-    protected String getCommandVerb() {
+    public String getName() {
       return "file synchronization";
     }
 
@@ -1065,7 +1134,7 @@ public abstract class JCRLocalCloudDrive extends CloudDrive {
   /**
    * Support for JCR actions. To do not fire on synchronization (our own modif) methods.
    */
-  protected static final ThreadLocal<CloudDrive>   actionDrive = new ThreadLocal<CloudDrive>();
+  protected static final ThreadLocal<CloudDrive>   actionDrive    = new ThreadLocal<CloudDrive>();
 
   protected final Transliterator                   accentsConverter;
 
@@ -1084,9 +1153,19 @@ public abstract class JCRLocalCloudDrive extends CloudDrive {
   protected final NodeRemoveHandler                handler;
 
   /**
+   * Currently active connect command. Used to control concurrency in Cloud Drive.
+   */
+  protected final AtomicReference<ConnectCommand>  currentConnect = new AtomicReference<ConnectCommand>();
+
+  /**
    * Currently active synchronization command. Used to control concurrency in Cloud Drive.
    */
-  protected final AtomicReference<SyncCommand>     currentSync = new AtomicReference<SyncCommand>();
+  protected final AtomicReference<SyncCommand>     currentSync    = new AtomicReference<SyncCommand>();
+
+  /**
+   * Managed queue of commands.
+   */
+  protected final CommandPoolExecutor              commandExecutor;
 
   /**
    * Title has special care. It used in error logs and an attempt to read <code>exo:title</code> property can
@@ -1111,6 +1190,8 @@ public abstract class JCRLocalCloudDrive extends CloudDrive {
     this.user = user;
     this.sessionProviders = sessionProviders;
     this.accentsConverter = Transliterator.getInstance("Latin; NFD; [:Nonspacing Mark:] Remove; NFC;");
+
+    this.commandExecutor = CommandPoolExecutor.getInstance();
 
     Session session = driveNode.getSession();
     this.repository = (ManageableRepository) session.getRepository();
@@ -1326,12 +1407,40 @@ public abstract class JCRLocalCloudDrive extends CloudDrive {
       // already connected
       return ALREADY_DONE;
     } else {
-      ConnectCommand connect = getConnectCommand();
-      if (async) {
-        connect.execAsync();
-      } else {
-        connect.exec();
+      ConnectCommand connect = currentConnect.get();
+      if (connect == null) {
+        synchronized (currentConnect) {
+          // check again in synchronized block!
+          connect = currentConnect.get();
+          if (connect == null) {
+            connect = getConnectCommand();
+            currentConnect.set(connect);
+            connect.execAsync();
+          }
+        }
+      } // else, connect already active
+
+      // connect already active, wait if it's not async request
+      if (!async) {
+        try {
+          connect.await();
+        } catch (InterruptedException e) {
+          LOG.warn("Caller of connect command interrupted.", e);
+          Thread.currentThread().interrupt();
+        } catch (ExecutionException e) {
+          Throwable err = e.getCause();
+          if (err instanceof CloudDriveException) {
+            throw (CloudDriveException) err;
+          } else if (err instanceof RepositoryException) {
+            throw (RepositoryException) err;
+          } else if (err instanceof RuntimeException) {
+            throw (RuntimeException) err;
+          } else {
+            throw new UndeclaredThrowableException(err, "Error connecting drive: " + err.getMessage());
+          }
+        }
       }
+
       return connect;
     }
   }
@@ -1390,6 +1499,9 @@ public abstract class JCRLocalCloudDrive extends CloudDrive {
       try {
         Node rootNode = rootNode();
         try {
+          // stop commands pool
+          commandExecutor.stop();
+
           rootNode.setProperty("ecd:connected", false);
 
           // remove all existing cloud files
@@ -1443,31 +1555,36 @@ public abstract class JCRLocalCloudDrive extends CloudDrive {
           // check again in synchronized block!
           sync = currentSync.get();
           if (sync == null) {
-            try {
-              startAction(this);
-              sync = getSyncCommand();
-              if (async) {
-                currentSync.set(sync);
-                sync.execAsync();
-              } else {
-                sync.exec();
-              }
-            } finally {
-              doneAction();
-            }
-          } else {
-            // sync already active, wait if it's not async request
-            if (!async) {
-              try {
-                sync.await();
-              } catch (InterruptedException e) {
-                LOG.warn("Caller of synchronization command interrupted.", e);
-                Thread.currentThread().interrupt();
-              }
-            }
+            sync = getSyncCommand();
+            currentSync.set(sync);
+            sync.execAsync();
           }
         }
       } // else, sync already active
+
+      // sync already active, wait if it's not async request
+      if (!async) {
+        try {
+          sync.await();
+        } catch (InterruptedException e) {
+          LOG.warn("Caller of synchronization command interrupted.", e);
+          Thread.currentThread().interrupt();
+        } catch (ExecutionException e) {
+          Throwable err = e.getCause();
+          if (err instanceof CloudDriveException) {
+            // LOG.error("Cloud Drive error during synchronization: " + err.getMessage(), err);
+            throw (CloudDriveException) err;
+          } else if (err instanceof RepositoryException) {
+            throw (RepositoryException) err;
+          } else if (err instanceof RuntimeException) {
+            throw (RuntimeException) err;
+          } else {
+            // LOG.error("Error synchronizing drive: " + err.getMessage(), err);
+            throw new UndeclaredThrowableException(err, "Error synchronizing drive: " + err.getMessage());
+          }
+        }
+      }
+
       return sync;
     } else {
       throw new NotConnectedException("Cloud drive '" + title() + "' not connected.");
@@ -1621,19 +1738,31 @@ public abstract class JCRLocalCloudDrive extends CloudDrive {
    * @param commandDescription {@link String}
    */
   void handleError(Node rootNode, Throwable error, String commandDescription) {
-    if (commandDescription.equals("connect")) {
+    String rootPath = null;
+    if (rootNode != null) {
       try {
-        // XXX it's workaround to prevent JCR Observation NPE
-        removeJCRListener(rootNode.getSession());
-      } catch (Throwable e) {
-        LOG.warn("Error removing observation listener on connect error '" + error.getMessage() + "' "
-            + " on Cloud Drive '" + title() + "':" + e.getMessage());
+        rootPath = rootNode.getPath();
+      } catch (RepositoryException e) {
+        LOG.warn("Error reading drive root '" + e.getMessage() + "' "
+            + (commandDescription != null ? "of " + commandDescription + " command " : "")
+            + "to listeners on Cloud Drive '" + title() + "':" + e.getMessage());
       }
+
+      if (commandDescription.equals("connect")) {
+        try {
+          // XXX it's workaround to prevent JCR Observation NPE
+          removeJCRListener(rootNode.getSession());
+        } catch (Throwable e) {
+          LOG.warn("Error removing observation listener on connect error '" + error.getMessage() + "' "
+              + " on Cloud Drive '" + title() + "':" + e.getMessage());
+        }
+      }
+
+      rollback(rootNode);
     }
 
-    rollback(rootNode);
     try {
-      listeners.fireOnError(new CloudDriveEvent(getUser(), rootWorkspace, rootNode.getPath()), error);
+      listeners.fireOnError(new CloudDriveEvent(getUser(), rootWorkspace, rootPath), error);
     } catch (Throwable e) {
       LOG.warn("Error firing error '" + error.getMessage() + "' "
           + (commandDescription != null ? "of " + commandDescription + " command " : "")

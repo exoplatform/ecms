@@ -122,7 +122,8 @@ public class GoogleDriveConnector extends CloudDriveConnector {
   @Override
   protected CloudProvider createProvider() {
     StringBuilder redirectUrl = new StringBuilder();
-    redirectUrl.append("http://");
+    redirectUrl.append(getConnectorSchema());
+    redirectUrl.append("://");
     redirectUrl.append(getConnectorHost());
     redirectUrl.append("/portal/rest/clouddrive/connect/");
     redirectUrl.append(getProviderId());

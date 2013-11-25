@@ -78,7 +78,7 @@ public class JCRLocalExoDrive extends JCRLocalCloudDrive {
                    f.getCreateDate(),
                    f.getModifiedDate());
 
-          result.add(new JCRLocalCloudFile(localNode.getPath(),
+          changed.add(new JCRLocalCloudFile(localNode.getPath(),
                                            f.getId(),
                                            f.getName(),
                                            f.getType(),
@@ -145,7 +145,7 @@ public class JCRLocalExoDrive extends JCRLocalCloudDrive {
                    f.getCreateDate(),
                    f.getModifiedDate());
 
-          result.add(new JCRLocalCloudFile(localNode.getPath(),
+          changed.add(new JCRLocalCloudFile(localNode.getPath(),
                                            f.getId(),
                                            f.getName(),
                                            f.getType(),

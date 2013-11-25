@@ -55,7 +55,7 @@ public class CloudDriveEvent {
   }
 
   /**
-   * @return the drive's JCR node path
+   * @return the drive's JCR node path, can be <code>null</code>
    */
   public String getNodePath() {
     return nodePath;
