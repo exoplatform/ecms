@@ -152,6 +152,7 @@ html[dir='rtl'] .innerCenter {
   height: 520px;
   border: 1px solid #d1d1d1;
   min-width: 665px;
+  margin-bottom: 15px;
 }
 
 #sidebarContainer {
