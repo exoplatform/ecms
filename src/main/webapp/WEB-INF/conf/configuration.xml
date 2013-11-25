@@ -167,6 +167,7 @@
           <property name="provider-client-id" value="${clouddrive.google.client.id}" />
           <property name="provider-client-secret" value="${clouddrive.google.client.secret}" />
           <property name="connector-host" value="${clouddrive.service.host}" />
+          <property name="connector-schema" value="${clouddrive.service.schema:http}" />
         </properties-param>
       </init-params>
     </component-plugin>
@@ -182,6 +183,7 @@
           <property name="provider-client-id" value="${clouddrive.box.client.id}" />
           <property name="provider-client-secret" value="${clouddrive.box.client.secret}" />
           <property name="connector-host" value="${clouddrive.service.host}" />
+          <property name="connector-schema" value="${clouddrive.service.schema:http}" />
         </properties-param>
       </init-params>
     </component-plugin>

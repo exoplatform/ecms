@@ -204,6 +204,7 @@
 			return initRequest(request);
 		}
 		
+		/** TODO deprecated */
 		var changesPost = function(workspace, path) {
 			var request = $.ajax({
 			  async : true, 
@@ -242,122 +243,6 @@
 			  dataType : "json"
 			});
 			return initRequest(request);
-		}
-
-		// TODO deprecated
-		var connectDriveOld = function(providerId, authUrl) {
-			var authWindow;
-			var auth;
-			if (authUrl) {
-				// use user interaction for authentication
-				authWindow = cloudDriveUI.connectDriveWindow(authUrl);
-			} else {
-				// function to call for auth using authUrl from provider
-				auth = serviceGet;
-			}
-
-			// 1 initialize connect workflow
-			var process = $.Deferred();
-			connectInit(providerId, {
-			  done : function(provider) {
-				  utils.log(provider.name + " connect initialized.");
-				  if (auth) {
-					  auth(provider.authUrl);
-				  }
-				  // 2 wait for authentication
-				  waitAuth(provider, {
-				    done : function() {
-					    utils.log(provider.name + " user authenticated.");
-					    // 3 and finally connect the drive
-					    var userNode = contextNode;
-					    if (userNode) {
-						    utils.log("Connecting Cloud Drive to node " + userNode.path + " in "
-						        + userNode.workspace);
-
-						    var post = connectPost(userNode.workspace, userNode.path);
-						    post.done(function(state, status) {
-							    utils.log("Connect requested: " + status + ". ");
-							    if (state) {
-								    if (status == 201) {
-									    utils.log("DONE: " + provider.name + " successfully connected.");
-									    contextDrive = state.drive;
-									    process.resolve(state);
-								    } else if (status == 202) {
-									    var check = connectCheck(state.serviceUrl);
-									    check.fail(function(error) {
-										    process.reject(error);
-									    });
-									    check.progress(function(state) {
-										    process.notify(state);
-									    });
-									    check.done(function(state) {
-										    contextDrive = state.drive;
-										    process.resolve(state);
-									    });
-								    } else {
-									    utils.log("WARN: unexpected state returned from connect service " + status);
-								    }
-							    } else {
-								    utils.log("ERROR: " + provider.name + " connect return null state.");
-								    process.reject("Cannot connect " + provider.name
-								        + ". Server return empty response.");
-							    }
-						    });
-						    post.fail(function(state, error, errorText) {
-							    utils.log("ERROR: " + provider.name + " connect failed: " + error + ". ");
-							    // JSON.stringify(state));
-							    if (typeof state === "string") {
-								    process.reject(state);
-							    } else {
-								    process.reject(state && state.error ? state.error : error + " " + errorText);
-							    }
-						    });
-					    } else {
-						    process.reject("Connect to " + provider.name + " canceled.");
-					    }
-				    },
-				    error : function(error) {
-					    utils.log("ERROR: " + provider.name + " authentication error: " + error);
-					    process.reject(error);
-				    },
-				    timeout : function() {
-					    utils.log("ERROR: " + provider.name + " user not authenticated in 2 minutes.");
-					    process.reject("Authentication timeout.");
-				    }
-				  });
-			  },
-			  fail : function(error) {
-				  utils.log("ERROR: Connect to Cloud Drive cannot be initiated. " + error);
-				  if (authWindow && !authWindow.closed) {
-					  authWindow.close();
-				  }
-				  process.reject(error);
-			  }
-			});
-			return process.promise();
-		};
-
-		// TODO deprecated
-		var waitAuthOld = function(provider, callbacks) {
-			var i = 0;
-			var intervalId = setInterval(function() {
-				var connectId = utils.getCookie("cloud-drive-connect-id");
-				if (connectId) {
-					intervalId = clearInterval(intervalId);
-					callbacks.done();
-				} else {
-					var error = utils.getCookie("cloud-drive-error");
-					if (error) {
-						intervalId = clearInterval(intervalId);
-						callbacks.error(error);
-					} else if (i > 120) {
-						// if open more 2min - close it and treat as not authenticated/allowed
-						intervalId = clearInterval(intervalId);
-						callbacks.timeout();
-					}
-				}
-				i++;
-			}, 1000);
 		}
 
 		var connectDrive = function(providerId, authUrl) {
@@ -559,6 +444,21 @@
 			return excluded[path] === true;
 		};
 		
+		var stopAutoSynchronize = function() {
+			for (var job in autoSyncs) {
+				if (autoSyncs.hasOwnProperty(job)) {
+					try {
+						clearTimeout(autoSyncs[job]);
+						clearInterval(autoSyncs[job]);
+					} catch(e) {
+						utils.log("Error stopping auto sync job: " + e);
+					}
+				}
+			}
+			
+			autoSyncs = {};
+		}
+		
 		var autoSynchronize = function() {
 			if (contextNode && contextDrive) {
 				var driveWorkspace = contextNode.workspace;
@@ -567,26 +467,33 @@
 				var syncName = driveWorkspace + ":" + drivePath;
 				
 				if (!autoSyncs[syncName]) {
-					/** Synchronization job */
+					var syncFunc;
+					function doSync() {
+						var syncProcess = synchronize(driveWorkspace, drivePath); // drive needs synchronization
+						syncProcess.done(function() {
+							scheduleSync(); // re-schedule
+						});
+						syncProcess.fail(function() {
+							delete autoSyncs[syncName]; // cancel and cleanup
+						});
+					}
+					var syncTimeout;
+					function scheduleSync() {
+						autoSyncs[syncName] = setTimeout(syncFunc, syncTimeout);
+					}
+					
 					if (drive.changesLink) {
 						// use long-polling from cloud provider
-						function scheduleSync() {
-							autoSyncs[syncName] = setTimeout(changesPoll, 100);
-						}
-						function changesPoll() {
+						syncFunc = syncPoll;
+						syncTimeout = 100;
+						function syncPoll() {
 							var changes = serviceGet(drive.changesLink);
 							changes.done(function(info) {
 								if (info.message) {
 									// XXX hardcode for Box only now
 									// http://developers.box.com/using-long-polling-to-monitor-events/
 									if (info.message == "new_change") {
-										var syncProcess = synchronize(driveWorkspace, drivePath); // drive needs synchronization
-										syncProcess.done(function() {
-											scheduleSync(); // re-schedule
-										});
-										syncProcess.fail(function() {
-											delete autoSyncs[syncName]; // cancel and cleanup
-										});
+										doSync();
 									} else if (info.message == "reconnect") {
 										// update change link and re-schedule
 										var newLink = changesLinkGet(driveWorkspace, drivePath);
@@ -603,34 +510,27 @@
 							});
 							changes.fail(function(response, status, err) {
 								utils.log("ERROR: changes long-polling error: " + err + ", " + status + ", " + response);
-								/*if (status >= 400 && status < 500) {
-									// need new changes link?
-								}
-								*/
 							});	
 						}
 						scheduleSync();
 						utils.log("Long-polling synchronization enabled for Cloud Drive on " + syncName);
 					} else {
-						// run sync periodically
-						var syncJob = setInterval(function() {
-							utils.log("Running auto synchronization for Cloud Drive on " + syncName);
-							var sync = changesPost(driveWorkspace, drivePath);
-							sync.done(function(status) {
-								if (status.syncDone) {
-									utils.log("Auto synchronization done for Cloud Drive on " + syncName);
-								} else {
-									utils.log("Auto synchronization in progress for Cloud Drive on " + syncName);
-								}
-							});	
-							sync.fail(function(response, status, err) {
-								utils.log("ERROR: auto synchronization error: " + err + ", " + status + ", " + response);
-								clearInterval(syncJob);
-								delete autoSyncs[syncName];
-							});
-						}, 15000);
-						autoSyncs[syncName] = syncJob;
+						// run sync periodically for some period
+						var syncPeriod = 60000 * 15;
+						syncFunc = doSync;
+						syncTimeout = 30000;
+						scheduleSync(doSync);
 						utils.log("Periodical synchronization enabled for Cloud Drive on " + syncName);
+						
+						setTimeout(function() {
+							// ... increase timeout after a half of a period
+							syncTimeout = 60000;
+						}, Math.round(syncPeriod/2));
+						
+						setTimeout(function() {
+							// ... and stop auto-sync after some period, user will enable it again by page refreshing/navigation
+							stopAutoSynchronize();
+						}, syncPeriod);
 					}
 				}
 			}
@@ -665,9 +565,16 @@
 							}
 						}
 	
+						changed += drive.removed.length; // count removed as changed
+						
 						// copy already cached but not synced files to the new drive
-						for (var fpath in sync.contextDrive.files) {
+						nextCached: for (var fpath in sync.contextDrive.files) {
 							if (!drive.files[fpath]) {
+								for (var fi = 0; fi < drive.removed.length; fi++) {
+									if (drive.removed[fi] === fpath) {
+										continue nextCached; // skip alreay removed
+									};
+								}
 								drive.files[fpath] = sync.contextDrive.files[fpath];
 							}
 						}
@@ -869,8 +776,13 @@
 				}
 				if (contextDrive) {
 					autoSynchronize();
+				} else {
+					stopAutoSynchronize();
 				}
-			} // else already cached as not in drive
+			} else {
+				// else already cached as not in drive
+				stopAutoSynchronize();
+			}
 		};
 
 		this.getContextDrive = function() {
@@ -1408,30 +1320,32 @@
 				    + " style=\"curson: pointer; border-bottom: 1px dashed #999; display: inline;\">"
 				    + drive.email + "</a></span>"
 				var details;
-				if (files + folders > 0) {
+				if (files + folders > 0 || drive.removed.length > 0) {
+					// TODO cleanup
 					// Don't refresh at all, as user can change the
 					// view. Istead we show a link on the message.
-					var details;
-					if (files > 0) {
-						details = files + " file" + (files > 1 ? "s" : "");
-					}
-					if (folders > 0) {
-						folders = folders + " folder" + (folders > 1 ? "s" : "");
-						details = (details ? details + " and " + folders : folders);
-					}
-					if (details) {
-						details = details + " updated on " + driveLink + " drive.";
-					} else {
-						details = "Drive " + driveLink + " successfuly updated.";
-					}
-					var titleLink = "<span>" + alink + ">" + drive.provider.name
-					    + " Synchronized.</a></span>"
-					cloudDriveUI.showInfo(titleLink, details, doneAction);
-				} else {
-					var titleLink = "<span>" + alink + ">" + drive.provider.name
-					    + " Already Up To Date.</a></span>"
-					cloudDriveUI.showInfo(titleLink, "Files on " + driveLink + " are in actual state.",
-					    doneAction);
+					//var details;
+					//if (files > 0) {
+					//	details = files + " file" + (files > 1 ? "s" : "");
+					//}
+					//if (folders > 0) {
+					//	folders = folders + " folder" + (folders > 1 ? "s" : "");
+					//	details = (details ? details + " and " + folders : folders);
+					//}
+					//if (details) {
+					//	details = details + " updated on " + driveLink + " drive.";
+					//} else {
+					//	details = "Drive " + driveLink + " successfuly updated.";
+					//}
+					//var titleLink = "<span>" + alink + ">" + drive.provider.name
+					//    + " Synchronized.</a></span>"
+					//cloudDriveUI.showInfo(titleLink, details, doneAction);
+					
+					// Show number of changes in the drive on Refresh icon
+					var changes = files + folders + drive.removed.length;
+					$("<span class='uiCloudDriveChanges' title='" + drive.provider.name +
+							" has " + changes +
+							" updates.'>" + (changes > 9 ? "9+" : changes) + "</span>" ).appendTo("a.refreshIcon i");
 				}
 			});
 			process.fail(function(response, status, err) {
@@ -1450,7 +1364,18 @@
 		    } else if (status == 204) {
 		    	// do nothing for no content - drive was removed
 		    } else {
-			    cloudDriveUI.showError("Error Synchronizing Drive", response + " (" + status + ")");
+		    	var message;
+		    	if (response) {
+		    		message = response + " ";
+		    	}
+		    	if (status) {
+		    		message += "(" + status + ")";
+		    	}
+		    	if (message) {
+		    		cloudDriveUI.showError("Error Synchronizing Drive", message);
+		    	} else {
+		    		utils.log("Error Synchronizing Drive: server doesn't respond.");
+		    	}
 		    }
 	    });
 		};
@@ -1497,7 +1422,7 @@
 		 */
 		this.connectDriveWindow = function(authUrl) {
 			var w = 850;
-			var h = 500;
+			var h = 600;
 			var left = (screen.width / 2) - (w / 2);
 			var top = (screen.height / 2) - (h / 2);
 			return window.open(authUrl, 'contacts', 'width=' + w + ',height=' + h + ',top=' + top
