@@ -19,6 +19,67 @@
  
 %>
 
+
+
+<!--
+
+
+<div class="result clearfix">
+    <div class="pull-left resultHeader" id="">Results 1 to 3 for <strong>exo<strong></strong></strong></div>
+    <div class="pull-right resultSort" id="" style="display: block;">
+		<div class="btn-group uiDropdownWithIcon pull-right">
+			<a class="btn dropdown-toggle" data-toggle="dropdown">
+			  <span id="" sort="relevancy" order="desc">Relevance</span>
+			  <span class="spiter"></span>
+			  <span class="caret"></span>
+			</a>
+			<ul class="dropdown-menu" id="">
+			  <li><a sort="relevancy" href="#">Relevance<i class="uiIconSortDown"></i></a></li>
+			  <li><a sort="date" href="#">Date</a></li>
+			  <li><a sort="title" href="#">Title</a></li>
+			</ul>
+		</div>
+		<span>Sort By:</span>
+	</div>
+</div>
+
+
+
+
+	      
+<div class="resultBox clearfix file"> 	        
+	<a href="#"> 	        
+		<span class="avatar pull-left ">
+			<i class="uiIcon64x64FileDefault uiIcon64x64nt_file uiIcon64x64texthtml"></i>
+		</span> 	      
+	</a> 	        
+	<div class="content"> 	          
+		<h6>
+			<a href="">eXoPlatform default page.html</a>
+		</h6> 	          
+		<p class="excerpt"></p> 	          
+		<div class="detail">Collaboration - 1 KB - Wednesday, July 24, 2013 12:57 PM</div> 	        
+	</div> 	      
+</div> 	     
+<div class="resultBox clearfix file"> 	        
+	<a href="#"> 	        
+		<span class="avatar pull-left ">
+			<i class="uiIcon64x64FileDefault uiIcon64x64nt_file uiIcon64x64texthtml"></i>
+		</span> 	      
+	</a> 	        
+	<div class="content"> 	          
+		<h6>
+			<a href="">eXoPlatform default page.html</a>
+		</h6> 	          
+		<p class="excerpt"></p> 	          
+		<div class="detail">Collaboration - 1 KB - Wednesday, July 24, 2013 12:57 PM</div> 	        
+	</div> 	      
+</div> 	     	      
+
+<div class="showMore" id=""><button value="Show More Results" id="" class="btn" type="button">Show More Results</button></div>
+
+-->
+
 <div id="$uicomponent.id" class="UIAdvanceSearchResultDefault">
  <%
   def showPaginator = false;
