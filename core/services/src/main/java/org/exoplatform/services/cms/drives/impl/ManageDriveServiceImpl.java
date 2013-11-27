@@ -16,17 +16,6 @@
  */
 package org.exoplatform.services.cms.drives.impl;
 
-import java.io.Serializable;
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.List;
-
-import javax.jcr.Node;
-import javax.jcr.NodeIterator;
-import javax.jcr.PathNotFoundException;
-import javax.jcr.RepositoryException;
-import javax.jcr.Session;
-
 import org.exoplatform.services.cache.CacheService;
 import org.exoplatform.services.cache.ExoCache;
 import org.exoplatform.services.cms.BasePath;
@@ -34,6 +23,7 @@ import org.exoplatform.services.cms.drives.DriveData;
 import org.exoplatform.services.cms.drives.ManageDriveService;
 import org.exoplatform.services.cms.impl.DMSConfiguration;
 import org.exoplatform.services.cms.impl.DMSRepositoryConfiguration;
+import org.exoplatform.services.cms.impl.Utils;
 import org.exoplatform.services.jcr.RepositoryService;
 import org.exoplatform.services.jcr.core.ManageableRepository;
 import org.exoplatform.services.jcr.ext.common.SessionProvider;
@@ -42,6 +32,17 @@ import org.exoplatform.services.log.ExoLogger;
 import org.exoplatform.services.log.Log;
 import org.exoplatform.services.wcm.utils.WCMCoreUtils;
 import org.picocontainer.Startable;
+
+import javax.jcr.Node;
+import javax.jcr.NodeIterator;
+import javax.jcr.PathNotFoundException;
+import javax.jcr.RepositoryException;
+import javax.jcr.Session;
+import java.io.Serializable;
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.List;
+import java.util.Set;
 
 /**
  * Created by The eXo Platform SARL
@@ -137,6 +138,7 @@ public class ManageDriveServiceImpl implements ManageDriveService, Startable {
 
   private DMSConfiguration dmsConfiguration_;
   private static final Log LOG  = ExoLogger.getLogger(ManageDriveServiceImpl.class.getName());
+  private static final String DELETED_DRIVE_NAMES= "DeletedDriveNames";
 
   /**
    * Keep the drives of repository
@@ -389,6 +391,8 @@ public class ManageDriveServiceImpl implements ManageDriveService, Startable {
     }
     drivesCache_.clearCache();
     session.logout();
+
+    this.updateDeletedDrivesLog(driveName);
   }
 
   /**
@@ -636,5 +640,20 @@ public class ManageDriveServiceImpl implements ManageDriveService, Startable {
       }
     }
     return null;
+  }
+
+  @Override
+  public Set<String> getDeletedDriveNames() throws Exception {
+    return Utils.getAllEditedConfiguredData(this.getClass().getSimpleName(), DELETED_DRIVE_NAMES, true);
+  }
+
+  /**
+   * Mark deleted drive to log file.
+   *
+   * @param driveName Drive Name
+   * @throws Exception
+   */
+  private void updateDeletedDrivesLog(String driveName) throws Exception {
+    Utils.addEditedConfiguredData(driveName, this.getClass().getSimpleName(), DELETED_DRIVE_NAMES, true);
   }
 }

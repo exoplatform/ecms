@@ -16,16 +16,12 @@
  */
 package org.exoplatform.services.cms.drives.impl;
 
-import java.util.Iterator;
-
-import javax.jcr.Node;
-import javax.jcr.Session;
-
 import org.exoplatform.container.component.BaseComponentPlugin;
 import org.exoplatform.container.xml.InitParams;
 import org.exoplatform.container.xml.ObjectParameter;
 import org.exoplatform.services.cms.BasePath;
 import org.exoplatform.services.cms.drives.DriveData;
+import org.exoplatform.services.cms.drives.ManageDriveService;
 import org.exoplatform.services.cms.impl.DMSConfiguration;
 import org.exoplatform.services.cms.impl.DMSRepositoryConfiguration;
 import org.exoplatform.services.jcr.RepositoryService;
@@ -33,6 +29,12 @@ import org.exoplatform.services.jcr.core.ManageableRepository;
 import org.exoplatform.services.jcr.ext.hierarchy.NodeHierarchyCreator;
 import org.exoplatform.services.log.ExoLogger;
 import org.exoplatform.services.log.Log;
+import org.exoplatform.services.wcm.utils.WCMCoreUtils;
+
+import javax.jcr.Node;
+import javax.jcr.Session;
+import java.util.Iterator;
+import java.util.Set;
 
 public class ManageDrivePlugin extends BaseComponentPlugin {
 
@@ -67,9 +69,11 @@ public class ManageDrivePlugin extends BaseComponentPlugin {
    */
   @SuppressWarnings("unchecked")
   public void init() throws Exception {
+    Set<String> deletedDriveNames = WCMCoreUtils.getService(ManageDriveService.class).getDeletedDriveNames();
     Iterator<ObjectParameter> it = params_.getObjectParamIterator() ;
     while(it.hasNext()){
       DriveData data = (DriveData)it.next().getObject() ;
+      if (deletedDriveNames.contains(data.getName())) continue;
       try{
         Session session  = getSession();
         addDrive(data, session) ;
