@@ -19,6 +19,8 @@
  
 %>
 
+
+
 <div id="$uicomponent.id" class="UIAdvanceSearchResultDefault">
  <%
   def showPaginator = false;
