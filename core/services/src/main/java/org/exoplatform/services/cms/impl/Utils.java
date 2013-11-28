@@ -520,6 +520,29 @@ public class Utils {
     session.save();
     return serviceLogContentNode;
   }
+  
+  public static Set<String> getAllEditedConfiguredData(String className, String id, boolean skipActivities) throws Exception {
+    DocumentContext.getCurrent().getAttributes().put(DocumentContext.IS_SKIP_RAISE_ACT, skipActivities);
+    HashSet<String> editedConfigTemplates = new HashSet<String>();
+    Node serviceLogContentNode= getServiceLogContentNode(className, id);
+    if (serviceLogContentNode != null) {
+      String logData = serviceLogContentNode.getProperty(NodetypeConstant.JCR_DATA).getString();
+      editedConfigTemplates.addAll(Arrays.asList(logData.split(";")));
+    }
+    return editedConfigTemplates;
+  }  
+  
+  public static void addEditedConfiguredData(String template, String className, String id, boolean skipActivities) throws Exception {
+    DocumentContext.getCurrent().getAttributes().put(DocumentContext.IS_SKIP_RAISE_ACT, skipActivities);
+    Node serviceLogContentNode = getServiceLogContentNode(className, id);
+    if (serviceLogContentNode != null) {
+      String logData = serviceLogContentNode.getProperty(NodetypeConstant.JCR_DATA).getString();
+      if (StringUtils.isEmpty(logData)) logData = template;
+      else if (logData.indexOf(template) == -1) logData = logData.concat(";").concat(template);
+      serviceLogContentNode.setProperty(NodetypeConstant.JCR_DATA, logData);
+      serviceLogContentNode.getSession().save();
+    }
+  }   
 
   /**
    * Get all the templates which have been added into the system
