@@ -260,7 +260,7 @@
       <SaveDraft>Save Draft</SaveDraft>
       <FastPublish>Fast Publish</FastPublish>
       <Preferences>Preferences</Preferences>
-      <Close>Close</Close>
+      <Close>#{word.close}</Close>
     </action>
     <msg>
       <access-denied>You do not have permission to add categories to this document.</access-denied>

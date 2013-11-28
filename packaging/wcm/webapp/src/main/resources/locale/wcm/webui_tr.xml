@@ -260,7 +260,7 @@
       <SaveDraft>Taslaklara Kaydet</SaveDraft>
       <FastPublish>Hızlı Yayın</FastPublish>
       <Preferences>Tercihler</Preferences>
-      <Close>Kapat</Close>
+      <Close>#{word.close}</Close>
     </action>
     <msg>
       <access-denied>Bu belgeye kategori eklemek için izniniz yok.</access-denied>
