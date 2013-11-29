@@ -43,6 +43,7 @@ import org.apache.commons.lang.StringUtils;
 import org.artofsolving.jodconverter.office.OfficeException;
 import org.exoplatform.services.cache.CacheService;
 import org.exoplatform.services.cache.ExoCache;
+import org.exoplatform.services.cms.impl.Utils;
 import org.exoplatform.services.cms.jodconverter.JodConverterService;
 import org.exoplatform.services.cms.mimetype.DMSMimeTypeResolver;
 import org.exoplatform.services.jcr.RepositoryService;
@@ -346,13 +347,7 @@ public class PDFViewerRESTService implements ResourceContainer {
     if (node.isNodeType("nt:frozenNode")) {
       checkedNode = node.getSession().getNodeByUUID(node.getProperty("jcr:frozenUuid").getString());
     }
-    String lastModified = "";
-    if(checkedNode.hasProperty("jcr:content/jcr:lastModified")){
-      lastModified =checkedNode.getProperty("jcr:content/jcr:lastModified").getString();
-    }else if(checkedNode.hasProperty("jcr:content/exo:dateModified")){
-      lastModified =checkedNode.getProperty("jcr:content/exo:dateModified").getString();
-    }
-    return lastModified;
+    return Utils.getJcrContentLastModified(checkedNode);
   }
 
   private void read(InputStream is, OutputStream os) throws Exception {

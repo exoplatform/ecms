@@ -1,0 +1,51 @@
+<configuration xmlns="http://www.exoplatform.org/xml/ns/kernel_1_2.xsd" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.exoplatform.org/xml/ns/kernel_1_2.xsd http://www.exoplatform.org/xml/ns/kernel_1_2.xsd">
+
+    <external-component-plugins>
+
+        <target-component>org.exoplatform.webui.ext.UIExtensionManager</target-component>
+
+        <component-plugin>
+
+            <name>add.action</name>
+
+            <set-method>registerUIExtensionPlugin</set-method>
+
+            <type>org.exoplatform.webui.ext.UIExtensionPlugin</type>
+
+            <init-params>
+
+                <object-param>
+
+                    <name>Example</name>
+
+                    <object type="org.exoplatform.webui.ext.UIExtension">
+
+                        <field name="type">
+
+                            <string>org.exoplatform.ecm.dms.UIActionBar</string>
+
+                        </field>
+
+                        <field name="name">
+
+                            <string>Example</string>
+
+                        </field>
+
+                        <field name="component">
+
+                            <string>com.acme.ExampleComponent</string>
+
+                        </field>
+
+                    </object>
+
+                </object-param>
+
+            </init-params>
+
+        </component-plugin>
+
+    </external-component-plugins>
+
+</configuration>
