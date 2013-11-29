@@ -223,12 +223,7 @@
 	<div class="PDFViewerContent">
   	<div class="ImageView" style="overflow-x:auto; overflow-y:hidden" id ="pdf_viewer_image" name="pdf_viewer_image">
 		<%
-			  String lastModified = "";
-			  if(originalNode.hasProperty("jcr:content/jcr:lastModified")){
-			  	lastModified = originalNode.getProperty("jcr:content/jcr:lastModified").getString();
-			  }else if(originalNode.hasProperty("jcr:content/exo:dateModified")){
-			  	lastModified =originalNode.getProperty("jcr:content/exo:dateModified").getString();
-			  } 
+			  String lastModified = org.exoplatform.services.cms.impl.Utils.getJcrContentLastModified(originalNode);
 			  String pdfPageImage = "/" + uiParent.getPortalName() + "/" + Utils.getRestContextName(uiParent.getPortalName()) + 
 			                        "/pdfviewer/" + repository + "/" + uiParent.getWorkspaceName() + 
 			                        "/${currentPage}/${currentRotation}/${currentScale}/" + currentNode.getUUID() + "?" +
