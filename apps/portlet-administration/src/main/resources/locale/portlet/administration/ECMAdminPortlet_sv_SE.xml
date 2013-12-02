@@ -154,7 +154,7 @@
   <UIActionForm>
     <title>Lägga till en åtgärd i kategoriträdet</title>
     <action>
-      <Save>Spara</Save>
+      <Save>#{word.save}</Save>
     </action>
     <msg>
       <name-not-allowed>Tomma namn eller specialtecken är inte tillåtna i namnet.</name-not-allowed>
@@ -326,7 +326,7 @@
       <metadataView>Metadatainformation</metadataView>
     </tab>
     <action>
-      <Cancel>Stäng</Cancel>
+      <Cancel>#{word.close}</Cancel>
       <Back>#{word.back}</Back>
     </action>
   </UIMetadataView>
@@ -2317,7 +2317,7 @@
   </EditUnLockForm>  
   <UITabPane>
     <action>
-      <Close>Stäng</Close>
+      <Close>#{word.close}</Close>
     </action>
     <title>
     <UILockHolderContainer>Hantera lås</UILockHolderContainer>
@@ -2328,7 +2328,7 @@
   <UIViewFormTabPane>
     <action>
       <AddTabForm>Lägg till fliken</AddTabForm>
-      <AddTab>Spara</AddTab>
+      <AddTab>#{word.save}</AddTab>
       <BackViewForm>Tillbaka</BackViewForm>
     </action>
   </UIViewFormTabPane>
@@ -2394,7 +2394,7 @@
 
 <UITaxonomyTreeContainer>
 <action>
-<Cancel>Stäng</Cancel>
+<Cancel>#{word.close}</Cancel>
 </action>
 </UITaxonomyTreeContainer>
 <UITaxonomyTreeMainForm>
@@ -2454,7 +2454,7 @@
   <UITagPermissionForm>
     <title>Lägg till behörighet</title>
     <action>
-      <Save>Spara</Save>
+      <Save>#{word.save}</Save>
       <Add>Lägg till</Add>
     </action>
     <label>

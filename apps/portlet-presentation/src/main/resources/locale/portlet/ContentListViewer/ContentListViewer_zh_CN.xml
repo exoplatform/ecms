@@ -2,88 +2,88 @@
 <bundle>
   <UICLVContainer>
     <label>
-      <Preferences>Preferences</Preferences>
-      <AddContent>Add Content</AddContent>
-      <ManageContent>Manage Content</ManageContent>
+      <Preferences>首选项</Preferences>
+      <AddContent>添加内容</AddContent>
+      <ManageContent>管理内容</ManageContent>
     </label>
     <msg>
-      <non-contents>Sorry, no articles are available.</non-contents>
-      <item-not-found>Item not found.</item-not-found>
-      <no-permission>You do not have permission to access this node.</no-permission>
-      <category-back>Go to previous</category-back>
+      <non-contents>对不起，没有文章。</non-contents>
+      <item-not-found>未找到条目</item-not-found>
+      <no-permission>您没有权限访问此节点。</no-permission>
+      <category-back>转到前面</category-back>
     </msg>
   </UICLVContainer>
   <UIViewerManagementPopupWindow>
     <title>
-      <UICLVConfig>Content List Preferences</UICLVConfig>
+      <UICLVConfig>内容列表首选项</UICLVConfig>
     </title>
   </UIViewerManagementPopupWindow>
   <UICLVConfig>
     <label>
-      <Title>Content List Preferences</Title>
-      <ContentSelectionBlock>Content Selection</ContentSelectionBlock>
-      <UICLVConfigDisplayModeFormRadioBoxInput>Mode</UICLVConfigDisplayModeFormRadioBoxInput>
-      <UICLVConfigItemPathFormInputSet>Folder Path</UICLVConfigItemPathFormInputSet>
-    <UICLVConfigItemPathFormStringInput>Folder Path</UICLVConfigItemPathFormStringInput>
-      <UICLVConfigOrderByFormSelectBox>Order by</UICLVConfigOrderByFormSelectBox>
+      <Title>内容列表首选项</Title>
+      <ContentSelectionBlock>内容选择</ContentSelectionBlock>
+      <UICLVConfigDisplayModeFormRadioBoxInput>模式</UICLVConfigDisplayModeFormRadioBoxInput>
+      <UICLVConfigItemPathFormInputSet>文件夹路径</UICLVConfigItemPathFormInputSet>
+    <UICLVConfigItemPathFormStringInput>文件夹路径</UICLVConfigItemPathFormStringInput>
+      <UICLVConfigOrderByFormSelectBox>按顺序</UICLVConfigOrderByFormSelectBox>
       <option>
-        <exo:title>Title</exo:title>
-        <exo:dateCreated>Created Date</exo:dateCreated>
-        <exo:lastModifiedDate>Modified Date</exo:lastModifiedDate>
-        <publication:liveDate>Published Date</publication:liveDate>
-        <exo:startEvent>Event Date</exo:startEvent>
-        <exo:index>Index</exo:index>
-        <DESC>Descendant</DESC>
-        <ASC>Ascendant</ASC>
+        <exo:title>标题</exo:title>
+        <exo:dateCreated>创建日期</exo:dateCreated>
+        <exo:lastModifiedDate>修改日期</exo:lastModifiedDate>
+        <publication:liveDate>出版日期</publication:liveDate>
+        <exo:startEvent>事件日期</exo:startEvent>
+        <exo:index>索引</exo:index>
+        <DESC>降序</DESC>
+        <ASC>升序</ASC>
       </option>
-      <DisplaySettingBlock>Display Settings</DisplaySettingBlock>
-      <UICLVConfigHeaderFormStringInput>Header</UICLVConfigHeaderFormStringInput>
-      <UICLVConfigDisplayTemplateFormSelectBox>Template</UICLVConfigDisplayTemplateFormSelectBox>
-      <UICLVConfigPaginatorTemplateFormSelectBox>Paginator</UICLVConfigPaginatorTemplateFormSelectBox>
-      <UICLVConfigItemsPerPageFormStringInput>Items per Page</UICLVConfigItemsPerPageFormStringInput>
-      <UICLVConfigShowIllustrationFormCheckboxInput>Show Image</UICLVConfigShowIllustrationFormCheckboxInput>
-      <UICLVConfigShowSummaryFormCheckboxInput>Show Summary</UICLVConfigShowSummaryFormCheckboxInput>
-      <UICLVConfigShowHeaderFormCheckboxInput>Show Header</UICLVConfigShowHeaderFormCheckboxInput>
-      <UICLVConfigShowRefreshFormCheckboxInput>Show Refresh</UICLVConfigShowRefreshFormCheckboxInput>
-      <UICLVConfigShowTitleFormCheckboxInput>Show Title</UICLVConfigShowTitleFormCheckboxInput>
-      <UICLVConfigShowDateCreatedFormCheckboxInput>Show Date</UICLVConfigShowDateCreatedFormCheckboxInput>
-      <UICLVConfigShowLinkFormCheckboxInput>Show Link</UICLVConfigShowLinkFormCheckboxInput>
-      <UICLVConfigShowReadmoreFormCheckboxInput>Show More Links</UICLVConfigShowReadmoreFormCheckboxInput>
-      <UICLVConfigAllowDynamicUrlStringInput>Allow Dynamic URL</UICLVConfigAllowDynamicUrlStringInput>
-      <UICLVConfigShowRssLinkFormCheckboxInput>Show RSS Link</UICLVConfigShowRssLinkFormCheckboxInput>
-      <UICLVConfigShowAutomaticDetectionCheckboxInput>Automatic Detection</UICLVConfigShowAutomaticDetectionCheckboxInput>
-      <AdvancedBlock>Advanced</AdvancedBlock>
-      <UICLVConfigDynamicNavigationLabel>Dynamic Navigation</UICLVConfigDynamicNavigationLabel>
-      <UICLVConfigContextualFolderRadioBoxInput>Contextual Folder</UICLVConfigContextualFolderRadioBoxInput>
-      <UICLVConfigShowCLVByStringInput>by</UICLVConfigShowCLVByStringInput>
-      <UICLVConfigshowSCVWithStringInput>with</UICLVConfigshowSCVWithStringInput>
-      <UICLVConfigTargetPageFormInputSet>Show in Page</UICLVConfigTargetPageFormInputSet>
-      <content-not-found>Content not found.</content-not-found>
-      <ContentPath>Content Path</ContentPath>
-      <Up>Up</Up>
-      <Down>Down</Down>
-      <UICLVConfigCacheManagementLabel>Content Visibility</UICLVConfigCacheManagementLabel>
+      <DisplaySettingBlock>显示设置</DisplaySettingBlock>
+      <UICLVConfigHeaderFormStringInput>标头</UICLVConfigHeaderFormStringInput>
+      <UICLVConfigDisplayTemplateFormSelectBox>模板</UICLVConfigDisplayTemplateFormSelectBox>
+      <UICLVConfigPaginatorTemplateFormSelectBox>分页程序</UICLVConfigPaginatorTemplateFormSelectBox>
+      <UICLVConfigItemsPerPageFormStringInput>每页显示</UICLVConfigItemsPerPageFormStringInput>
+      <UICLVConfigShowIllustrationFormCheckboxInput>显示图像</UICLVConfigShowIllustrationFormCheckboxInput>
+      <UICLVConfigShowSummaryFormCheckboxInput>显示摘要</UICLVConfigShowSummaryFormCheckboxInput>
+      <UICLVConfigShowHeaderFormCheckboxInput>显示页眉</UICLVConfigShowHeaderFormCheckboxInput>
+      <UICLVConfigShowRefreshFormCheckboxInput>显示刷新</UICLVConfigShowRefreshFormCheckboxInput>
+      <UICLVConfigShowTitleFormCheckboxInput>显示标题</UICLVConfigShowTitleFormCheckboxInput>
+      <UICLVConfigShowDateCreatedFormCheckboxInput>显示日期</UICLVConfigShowDateCreatedFormCheckboxInput>
+      <UICLVConfigShowLinkFormCheckboxInput>显示链接</UICLVConfigShowLinkFormCheckboxInput>
+      <UICLVConfigShowReadmoreFormCheckboxInput>显示更多链接</UICLVConfigShowReadmoreFormCheckboxInput>
+      <UICLVConfigAllowDynamicUrlStringInput>允许动态 URL</UICLVConfigAllowDynamicUrlStringInput>
+      <UICLVConfigShowRssLinkFormCheckboxInput>显示 RSS 链接</UICLVConfigShowRssLinkFormCheckboxInput>
+      <UICLVConfigShowAutomaticDetectionCheckboxInput>自动检测</UICLVConfigShowAutomaticDetectionCheckboxInput>
+      <AdvancedBlock>高级</AdvancedBlock>
+      <UICLVConfigDynamicNavigationLabel>动态导航</UICLVConfigDynamicNavigationLabel>
+      <UICLVConfigContextualFolderRadioBoxInput>背景文件夹</UICLVConfigContextualFolderRadioBoxInput>
+      <UICLVConfigShowCLVByStringInput>每页显示</UICLVConfigShowCLVByStringInput>
+      <UICLVConfigshowSCVWithStringInput>与</UICLVConfigshowSCVWithStringInput>
+      <UICLVConfigTargetPageFormInputSet>在页中显示</UICLVConfigTargetPageFormInputSet>
+      <content-not-found>找不到的内容。</content-not-found>
+      <ContentPath>内容路径</ContentPath>
+      <Up>向上</Up>
+      <Down>向下</Down>
+      <UICLVConfigCacheManagementLabel>内容可见性</UICLVConfigCacheManagementLabel>
       <UICLVContentByQueryLabel>Content by Query</UICLVContentByQueryLabel>
-      <UICLVConfigWorkspaceFormSelectBox>Workspace</UICLVConfigWorkspaceFormSelectBox>
+      <UICLVConfigWorkspaceFormSelectBox>工作区</UICLVConfigWorkspaceFormSelectBox>
       <UICLVConfigContentByQueryTextArea>by query</UICLVConfigContentByQueryTextArea>
       <UICLVConfigCacheEnableRadioBoxInput>Share content between users</UICLVConfigCacheEnableRadioBoxInput>
     </label>
     <help>
-      <ModeSelectionHelp>Two modes are available to show content. "By Folder" will take all the content available in your selected folder/category. "By Content" lets you manually select the content you want to show.</ModeSelectionHelp>
-      <FolderPathHelp>Select the content you want to show. The default selection will be replaced dynamically if you activate the Dynamic Navigation option (see the Advanced mode below).</FolderPathHelp>
-      <HeaderOptionHelp>Show a header on top of the content list. If you activate the Automatic Detection option, it will try to find the header based on the current selection.</HeaderOptionHelp>
+      <ModeSelectionHelp>两种模式可显示内容。"按文件夹"将您所选的文件夹类别中可用的所有内容。"的内容"允许您手动选择你想要显示的内容。</ModeSelectionHelp>
+      <FolderPathHelp>请选择您想要显示的内容。如果您激活动态导航选项，将动态替换此默认内容 （请参阅下面的高级的模式）。</FolderPathHelp>
+      <HeaderOptionHelp>显示在内容列表上的标头。如果您激活自动检测选项，它将尝试查找基于当前选定内容的标题。</HeaderOptionHelp>
       <GeneralOptionHelp>Select the graphical elements you want to show in your list. Note that, depending on your selected template, some elements may not be available.</GeneralOptionHelp>
-      <ContextualHelp>Activates the Dynamic Navigation option. Others can change the content dynamically based on a URL parameter.</ContextualHelp>
-      <ParameterHelp>This parameter will be used to access the content if Dynamic Navigation is activated.</ParameterHelp>
-      <ShowDetailInPageHelp>Clicking on content redirects the user to a Detail page. You must have a "Content by URL" portlet with Dynamic Navigation enabled on the target page to show the content.</ShowDetailInPageHelp>
-      <DetailParameterHelp>This parameter will contain the path to the content in the link to the Detail page. This parameter must match the parameter used in the "Content by URL" portlet of the page.</DetailParameterHelp>
+      <ContextualHelp>激活动态导航选项。其他人可以更改基于 URL 参数来动态的内容。</ContextualHelp>
+      <ParameterHelp>此参数将用于访问的内容，如果动态导航处于激活状态。</ParameterHelp>
+      <ShowDetailInPageHelp>点击内容可将用户重定向到详细页。与动态导航启用在目标页上要显示的内容，您必须具有"内容的 URL"portlet。</ShowDetailInPageHelp>
+      <DetailParameterHelp>此参数将包含链接到详细页中内容的路径。此参数必须与在页的"内容的 URL"portlet 中使用的参数相匹配。</DetailParameterHelp>
       <ContentByQueryHelp><![CDATA[You can set a SQL Query to get content dynamically. The following parameters are allowed : ${user}, ${lang} or any get parameter (PARAM) surrounded by ${PARAM}.]]></ContentByQueryHelp>
-      <ContentsVisibilityHelp>"Restricted by Authentication" will filter the content based on the authentication. If you do not sign in, you see public content only. If you are logged in, you see all the content visible by intranet users (but shared by all). "Restricted by User Roles" means you will see content depending on your rights. In most cases, this option should not be used, as it reduces the overall performance.</ContentsVisibilityHelp>
+      <ContentsVisibilityHelp>"受限制的身份验证"将筛选的基础进行身份验证的内容。如果你没有登录，您将看到仅公共内容。如果您登录，您看到的所有内容可见的 intranet 用户 （但所有共享）。"受限制的用户角色"意味着你将看到的内容取决于您的权利。在大多数情况下，这应不使用选项，因为它减少了总体性能。</ContentsVisibilityHelp>
     </help>
     <action>
-      <Save>Save</Save>
-      <Cancel>Cancel</Cancel>
-      <delete>Delete</delete>
+      <Save>#{word.save}</Save>
+      <Cancel>#{word.cancel}</Cancel>
+      <delete>删除</delete>
     </action>
     <msg>
       <not-valid-path>The Folder Path is invalid.</not-valid-path>
@@ -91,9 +91,9 @@
     </msg>
     <tab>
       <label>
-        <clvContentTab>Content Selection</clvContentTab>
-        <clvDisplayTab>Display Settings</clvDisplayTab>
-        <clvAdvancedTab>Advanced</clvAdvancedTab>
+        <clvContentTab>内容选择</clvContentTab>
+        <clvDisplayTab>显示设置</clvDisplayTab>
+        <clvAdvancedTab>高级设置</clvAdvancedTab>
       </label>
     </tab>
   </UICLVConfig>
@@ -105,51 +105,51 @@
   </UICLVConfigDisplayModeFormRadioBoxInput>
   <UICLVConfigItemPathFormInputSet>
     <title>
-      <SelectFolderPath>Select Folder Path</SelectFolderPath>
-      <AddPath>Add Path</AddPath>
+      <SelectFolderPath>选择文件夹路径</SelectFolderPath>
+      <AddPath>添加路径</AddPath>
     </title>
   </UICLVConfigItemPathFormInputSet>
   <FolderPathSelectorPopupWindow>
     <title>
-      <UIContentSelectorFolder>Folder Browser</UIContentSelectorFolder>
+      <UIContentSelectorFolder>文件夹浏览器</UIContentSelectorFolder>
     </title>
   </FolderPathSelectorPopupWindow>
   <UICLVConfigOrderTypeFormSelectBox>
     <label>
       <option>
-        <OrderDesc>Descendant</OrderDesc>
-        <OrderAsc>Ascendant</OrderAsc>
+        <OrderDesc>降序</OrderDesc>
+        <OrderAsc>升序</OrderAsc>
       </option>
     </label>
   </UICLVConfigOrderTypeFormSelectBox>
   <UICLVConfigTargetPageFormInputSet>
     <title>
-      <SelectBasePath>Select Base Path</SelectBasePath>
-      <SelectTargetPage>Select Base Path</SelectTargetPage>
+      <SelectBasePath>选择基路径</SelectBasePath>
+      <SelectTargetPage>选择基路径</SelectTargetPage>
     </title>
   </UICLVConfigTargetPageFormInputSet>
   <UICLVBasePathPopupWindow>
     <title>
-      <UIPageSelector>Page Selector</UIPageSelector>
+      <UIPageSelector>页面选择器</UIPageSelector>
     </title>
   </UICLVBasePathPopupWindow>
   <UICLVPresentation>
     <msg>
-      <confirm-delete>Are you sure you want to delete this content?</confirm-delete>
-      <delete-content-successfully>Content deleted successfully.</delete-content-successfully>
+      <confirm-delete>确实要删除此内容吗?</confirm-delete>
+      <delete-content-successfully>已成功删除内容。</delete-content-successfully>
     </msg>
     <label>
       <readmore>Read more</readmore>
       <rssFeed>RSS Feed</rssFeed>
     </label>
     <action>
-      <refresh>Refresh</refresh>
-      <edit>Edit in Content Explorer</edit>
-      <delete>Delete</delete>
-      <publish>Publish</publish>
+      <refresh>刷新</refresh>
+      <edit>在内容资源管理器中编辑</edit>
+      <delete>删除</delete>
+      <publish>发布</publish>
     </action>
     <label>
-      <draft>Draft</draft>
+      <draft>草稿</draft>
     </label>
   </UICLVPresentation>
   <CorrectContentSelectorPopupWindow>
@@ -164,25 +164,25 @@
   </UIContentDialogFormPopupWindow>
   <UICLVConfigContextualFolderRadioBoxInput>
     <label>
-      <contextualEnable>Enabled</contextualEnable>
-      <contextualDisable>Disabled</contextualDisable>
+      <contextualEnable>已启用</contextualEnable>
+      <contextualDisable>已禁用</contextualDisable>
     </label>
   </UICLVConfigContextualFolderRadioBoxInput>
   <PublicationStates>
-    <archived>Archived</archived>
-    <obsolete>Obsolete</obsolete>
-    <unpublished>Unpublished</unpublished>
-    <enrolled>Enrolled</enrolled>
-    <draft>Draft</draft>
-    <pending>Pending</pending>
-    <approved>Approved</approved>
-    <inreview>In Review</inreview>
-    <staged>Staged</staged>
-    <published>Published</published>
+    <archived>存档</archived>
+    <obsolete>已过时的</obsolete>
+    <unpublished>未发布</unpublished>
+    <enrolled>注册</enrolled>
+    <draft>草稿</draft>
+    <pending>等待中</pending>
+    <approved>核准</approved>
+    <inreview>在审查中</inreview>
+    <staged>上演</staged>
+    <published>出版</published>
   </PublicationStates>
   <UICLVConfigCacheEnableRadioBoxInput>
     <label>
-      <ENABLE>Restricted by Authentication</ENABLE>
+      <ENABLE>通过身份验证的限制</ENABLE>
       <DISABLE>Restricted by User Roles</DISABLE>
     </label>
   </UICLVConfigCacheEnableRadioBoxInput>

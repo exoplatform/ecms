@@ -27,7 +27,7 @@
       <folder>Pasta</folder>
 </value>
 <action>
-<Close>Fechar</Close>
+<Close>#{word.close}</Close>
 </action>
 </UIViewInfoContainer>
 </bundle>

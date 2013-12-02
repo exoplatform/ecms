@@ -16,8 +16,8 @@
       <new-jcr-template>Une erreur est survenue lors de la création d'un nouveau modèle.</new-jcr-template>
     </msg>
     <action>
-      <Save>Enregistrer</Save>
-      <Cancel>Annuler</Cancel>
+      <Save>#{word.save}</Save>
+      <Cancel>#{word.cancel}</Cancel>
     </action>
   </UIFCCForm>
 
@@ -46,7 +46,7 @@
       <do-select>Erreur de sélection</do-select>
     </msg>
     <action>
-      <Save>Enregistrer</Save>
+      <Save>#{word.save}</Save>
     </action>
   </UIFCCConfig>
 
@@ -115,8 +115,8 @@
   <UIFCCActionForm>
     <title>Ajouter / Éditer une action</title>
     <action>
-      <Save>Enregistrer</Save>
-      <Close>Fermer</Close>
+      <Save>#{word.save}</Save>
+      <Close>#{word.close}</Close>
     </action>
     <msg>
       <repository-exception>Impossible d'enregistrer cette action. Le nom fourni ne doit pas avoir un indice sur son dernier élément.</repository-exception>
@@ -173,7 +173,7 @@
 
   <UICategoriesSelector>
     <action>
-      <close>Fermer</close>
+      <close>#{word.close}</close>
     </action>
   </UICategoriesSelector>
 

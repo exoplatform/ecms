@@ -520,7 +520,7 @@
       <Rename>إعادة التسمية</Rename>
       <Cut>قصّ</Cut>
       <Copy>نسخ</Copy>
-      <Save>حفظ</Save>
+      <Save>#{word.save}</Save>
       <RemoveNode>حذف</RemoveNode>
       <Checkin>مراجعة</Checkin>
       <Checkout>إنهاء المراجعة</Checkout>
@@ -570,7 +570,7 @@
       <Copy>نسخ</Copy>
       <Rename>اعادة التّسمية</Rename>
       <Delete>حذف</Delete>
-      <Save>حفظ</Save>
+      <Save>#{word.save}</Save>
       <Cut>قص</Cut>
       <Paste>لصق</Paste>
       <CheckOut>انهاء المراجعة</CheckOut>
@@ -609,7 +609,7 @@
       <path>المسار</path>
     </header>
     <action>
-      <Close>غلق</Close>
+      <Close>#{word.close}</Close>
     </action>
   </UIReferencesList>
   <!--
@@ -705,7 +705,7 @@
     </label>
     <action>
       <Save>#{word.save}</Save>
-      <Cancel>الغاء</Cancel>
+      <Cancel>#{word.cancel}</Cancel>
       <Reset>اعادة ضبط</Reset>
     </action>
     <msg>
@@ -831,7 +831,7 @@
       <node-def-dnt>DNT</node-def-dnt>
     </label>
     <action>
-      <Close>غلق</Close>
+      <Close>#{word.close}</Close>
     </action>
   </UINodeTypeInfo>
   <!--
@@ -846,7 +846,7 @@
       </label>
     </tab>
     <action>
-      <Close>غلق</Close>
+      <Close>#{word.close}</Close>
     </action>
   </UICategoryManagerSearch>
   <UIContentNameSearch>
@@ -1075,7 +1075,7 @@
     </msg>
     <button>
       <label-Add>إضافة</label-Add>
-      <label-Cancel>إلغاء</label-Cancel>
+      <label-Cancel>#{word.cancel}</label-Cancel>
     </button>
   </UIConstraintsForm>
   <UIConstraintForm>
@@ -1122,8 +1122,8 @@
   </SaveQueryPopup>
   <UINodeTypeSelectForm>
     <action>
-      <Cancel>الغاء</Cancel>
-      <Save>حفظ</Save>
+      <Cancel>#{word.cancel}</Cancel>
+      <Save>#{word.save}</Save>
     </action>
   </UINodeTypeSelectForm>
   <UICompareExactlyForm>
@@ -1136,7 +1136,7 @@
     </title>
     <button>
       <label-Select>اختيار</label-Select>
-      <label-Cancel>الغاء</label-Cancel>
+      <label-Cancel>#{word.cancel}</label-Cancel>
     </button>
     <msg>
       <not-result-found>لم يتم العثور على أي نتيجة.</not-result-found>
@@ -1210,7 +1210,7 @@
     <pLabel>الخاصيّات:</pLabel>
     <action>
       <Add>إضافة</Add>
-      <Cancel>الغاء</Cancel>
+      <Cancel>#{word.cancel}</Cancel>
     </action>
   </UISelectPropertyForm>
   <ExactlyFormPopup>
@@ -1334,7 +1334,7 @@
       <invalid-item-state>لا يمكن استعادة هذا الإصدار. ربما تم حذف أو تحويل عناصر عن طريق دورة أخرى.</invalid-item-state>
     </msg>
     <action>
-      <close>إغلاق</close>
+      <close>#{word.close}</close>
       <close-view>إغلاق المشهد</close-view>
     </action>
   </UIVersionInfo>
@@ -1353,7 +1353,7 @@
       <e_4>تم إضافة الخاصيّة</e_4>
       <e_16>تم تغيير الخاصيّة</e_16>
       <e_8>تم حذف الخاصيّة</e_8>
-      <e_32>حفظ</e_32>
+      <e_32>#{word.save}</e_32>
       <e_64>تحويل</e_64>
       <e_128>نسخ</e_128>
       <e_256>إضافة الميكسين</e_256>
@@ -1392,7 +1392,7 @@
       <note>الاصدار لم يتمّ تفعيله على هذه العقدة.</note>
       <question>هل تريد تفعيله؟</question>
       <button-active>تفعيل</button-active>
-      <button-cancel>الغاء</button-cancel>
+      <button-cancel>#{word.cancel}</button-cancel>
     </label>
     <msg>
       <access-denied>ليس لديك الصلاحيّة الكافية لتفعيل عملية الإصدار في هذه العقدة</access-denied>
@@ -1410,7 +1410,7 @@
       <action>إجراء</action>
     </header>
     <action>
-      <Cancel>إغلاق</Cancel>
+      <Cancel>#{word.close}</Cancel>
     </action>
     <grid>
       <msg>
@@ -1434,7 +1434,7 @@
     </label>
     <action>
       <activate>تفعيل</activate>
-      <cancel>إلغاء</cancel>
+      <cancel>#{word.cancel}</cancel>
     </action>
   </UIActivateAuditing>
   <!--
@@ -1489,7 +1489,7 @@
     </label>
     <action>
       <Save>#{word.save}</Save>
-      <Cancel>إلغاء</Cancel>
+      <Cancel>#{word.cancel}</Cancel>
     </action>
     <title>إضافة رمز</title>
     <msg>
@@ -1544,7 +1544,7 @@
   -->
   <UICategoryManager>
     <action>
-      <Close>إغلاق</Close>
+      <Close>#{word.close}</Close>
     </action>
     <tab>
       <label>
@@ -1589,7 +1589,7 @@
   -->
   <UIRelationManager>
     <action>
-      <Close>اغلاق</Close>
+      <Close>#{word.close}</Close>
     </action>
     <tab>
       <label>
@@ -1665,7 +1665,7 @@
   <UIDocumentForm>
     <title>إضافة وثيقة</title>
     <action>
-      <Save>حفظ</Save>
+      <Save>#{word.save}</Save>
       <SaveAndClose>حفظ و غلق</SaveAndClose>
       <ChangeType>تغيير نوع المحتوى</ChangeType>
       <Fullscreen>شاشة كاملة</Fullscreen>
@@ -1983,9 +1983,9 @@
       <stateName>اسم الحالة</stateName>
     </label>
     <action>
-      <Save>حفظ</Save>
+      <Save>#{word.save}</Save>
       <UnsubcriberLifeCycle>الغاء التسجيل</UnsubcriberLifeCycle>
-      <Cancel>الغاء</Cancel>
+      <Cancel>#{word.cancel}</Cancel>
     </action>
   </UIPublicationForm>
   <!--
@@ -2079,7 +2079,7 @@
       <visibility>الرؤية</visibility>
     </header>
     <action>
-      <Close>إغلاق</Close>
+      <Close>#{word.close}</Close>
     </action>
   </UIPublicationLogList>
   <!--
@@ -2142,7 +2142,7 @@
   -->
   <UICategoriesSelector>
     <action>
-      <close>إغلاق</close>
+      <close>#{word.close}</close>
     </action>
   </UICategoriesSelector>
   <!--
@@ -2173,8 +2173,8 @@
     <title>تغيير مُستكشف الملفات</title>
     <action>
       <Edit>تغيير</Edit>
-      <Save>حفظ</Save>
-      <Cancel>الغاء</Cancel>
+      <Save>#{word.save}</Save>
+      <Cancel>#{word.cancel}</Cancel>
     </action>
     <label>
       <uploadFileSizeLimitMB>تقليص الحجم الأدنى للملفات المُحمّلة (MB)</uploadFileSizeLimitMB>
@@ -2380,7 +2380,7 @@
 
   <UISimpleCategoryManager>
     <action>
-      <Close>غلق</Close>
+      <Close>#{word.close}</Close>
     </action>
   </UISimpleCategoryManager>
   <UIPopupWindow>
@@ -2710,8 +2710,8 @@
       <name>اسم الفئة</name>
     </label>
     <action>
-      <Save>حفظ</Save>
-      <Cancel>إلغاء</Cancel>
+      <Save>#{word.save}</Save>
+      <Cancel>#{word.cancel}</Cancel>
     </action>
   </UICategoryForm>
   <UIPopupWindow>
@@ -2865,8 +2865,8 @@
 
   <UISelectRestorePath>
     <action>
-      <Save>حفظ</Save>
-      <Cancel>الغاء</Cancel>
+      <Save>#{word.save}</Save>
+      <Cancel>#{word.cancel}</Cancel>
     </action>
     <label>
       <formInput>فقد المسار السابق. الرجاء اختيار مسار جديد.</formInput>
@@ -2908,7 +2908,7 @@
 
 <UIPublicationPanel>
     <button>
-      <Close>غلق</Close>
+      <Close>#{word.close}</Close>
     </button>
     <revisions>
       <version>الاصدارات</version>
@@ -3114,7 +3114,7 @@
     <MaxFileSize>الحجم الأقصى للملفّ هو</MaxFileSize>
     <InvalidCharacters>سيتمّ تغيير الأحرف الغير مرغوب فيها  بـ '-'</InvalidCharacters>
     <DropFileMessage>إسقاط الملفات الخاصة بك في المجلد الحالي</DropFileMessage>
-    <Close>إغلاق</Close>
+    <Close>#{word.close}</Close>
     <in>في</in>
     <MaxFileSizeAlert>حجم الملف يتجاوز الحدّ الأقصى بحوالي</MaxFileSizeAlert>
     <Waiting>في الانتظار</Waiting>
@@ -3124,7 +3124,7 @@
     <Keep>الاحتفاظ بكليهما</Keep>
     <Replace>تعويض</Replace>
     <Canceled>تم إلغاؤها</Canceled>
-    <Cancel>الغاء</Cancel>
+    <Cancel>#{word.cancel}</Cancel>
     <AbortAllConfirmation>هل تريد أن تلغي تحميل جميع الملفات؟</AbortAllConfirmation>
   </label>
   </UIMultiUpload>

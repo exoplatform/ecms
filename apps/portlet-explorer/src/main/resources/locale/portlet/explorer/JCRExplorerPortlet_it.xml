@@ -8,7 +8,7 @@
   <UICommentForm>
     <label>
       <name>Nome</name>
-      <email>Email</email>
+      <email>E-mail</email>
       <website>Sito Web</website>
       <comment>Commenta</comment>
     </label>
@@ -34,10 +34,10 @@
       <verygood>Molto Buono/Clicca per votare</verygood>
       <excellent>Eccellente/Clicca per votare</excellent>
       <best>Migliore/Clicca per votare</best>
-      <no-value>no value yet</no-value>
+      <no-value>nessun valore per il momento</no-value>
     </title>
     <label>
-      <my-rating>My Rating:</my-rating>
+      <my-rating>Il mio punteggio:</my-rating>
     </label>
     <button>
       <label>
@@ -72,7 +72,7 @@
   <UISideBar>
     <label>
       <Relation>Relazione</Relation>
-      <Explorer>File Explorer</Explorer>
+      <Explorer>Esploratore di file</Explorer>
       <Close>Chiudi Sidebar</Close>
       <TagExplorer>Tag Cloud</TagExplorer>
       <Clipboard>Appunti</Clipboard>
@@ -90,14 +90,14 @@
   -->
   <UIViewBar>
     <label>
-      <driveWorkspace>Drive Workspace:</driveWorkspace>
+      <driveWorkspace>Workspace del Drive:</driveWorkspace>
       <backToJCR>Torna a Drive Principali JCR</backToJCR>
       <setUpBrowser>Imposta preferenze di navigazione</setUpBrowser>
       <refesh>Aggiorna</refesh>
       <currentDrive>Drive Attuale</currentDrive>
       <selectView>Seleziona Vista</selectView>
       <showSideBar>Mostra Sidebar</showSideBar>
-      <more>More</more>
+      <more>Più</more>
       <backTo>Indietro</backTo>
     </label>
   </UIViewBar>
@@ -109,14 +109,14 @@
   -->
   <UIDrivesBrowser>
     <title>
-      <PersonalDrives>Personal drives</PersonalDrives>
-      <GroupDrives>Group drives</GroupDrives>
-      <GeneralDrives>General drives</GeneralDrives>
+      <PersonalDrives>Drive personali</PersonalDrives>
+      <GroupDrives>Drive del Gruppo</GroupDrives>
+      <GeneralDrives>Drive generali</GeneralDrives>
     </title>
     <msg>
-      <no-view-found>There is no view available according to your access permissions in drive '{0}'.</no-view-found>
-      <access-denied>Access denied. You may not have permission in the workspace of drive '{0}'.</access-denied>
-      <workspace-not-exist>Drive '{0}' was stored in one unrecognized workspace. Please reconfigure this drive.</workspace-not-exist>
+      <no-view-found>Non c'è nessuna vista disponibile secondo le sue autorizzazioni di accesso in questo drive '{0}'.</no-view-found>
+      <access-denied>Accesso negato. Non si può avere autorizzazione nello Workspace dello drive '{0}'.</access-denied>
+      <workspace-not-exist>Il drive '{0}' è stato immagazzinato in un Workspace non riconosciuto. Per favore riconfigura questo drive.</workspace-not-exist>
     </msg>
   </UIDrivesBrowser>
 
@@ -208,8 +208,8 @@
       <version-exception>Questo nodo o l'antenato di questo nodo non sono in check out.</version-exception>
       <lock-exception>Nodo bloccato. Sblocca prima di rinominare.</lock-exception>
       <constraintViolation-exception>Errore rinominando il nodo '{0}'. Ricontrolla.</constraintViolation-exception>
-      <unknown-prefix>Prefix '{0}' has not been registered yet.</unknown-prefix>
-      <rename-error>An error occurred while renaming this node. Please check again.</rename-error>
+      <unknown-prefix>Il prefisso '{0}' non è stato ancora registrato.</unknown-prefix>
+      <rename-error>Un errore  è accaduto durante la ridenominazione di questo nodo. Per Favore controlla di nuovo.</rename-error>
     </msg>
   </UIRenameForm>
   <UIPopupWindow>
@@ -243,9 +243,9 @@
       <UIPreferencesForm>Preferenze</UIPreferencesForm>
       <UIPublicationManager>Gestione Pubblicazioni</UIPublicationManager>
       <UIConfirmMessage>Conferma Cancellazione</UIConfirmMessage>
-      <UIDeleteFileConfirmMessage>Delete File ?</UIDeleteFileConfirmMessage>
-      <UIDeleteFolderConfirmMessage>Delete Folder ?</UIDeleteFolderConfirmMessage>
-      <UIDeleteItemsConfirmMessage>Delete Items ?</UIDeleteItemsConfirmMessage>
+      <UIDeleteFileConfirmMessage>Cancellare file ?</UIDeleteFileConfirmMessage>
+      <UIDeleteFolderConfirmMessage>Cancellare la Cartella ?</UIDeleteFolderConfirmMessage>
+      <UIDeleteItemsConfirmMessage>Cancellare gli elementi?</UIDeleteItemsConfirmMessage>
       <UIRestoreConfirmMessage>Conferma Ripristino</UIRestoreConfirmMessage>
       <UIActivePublication>Partecipa al ciclo di vita pubblicazione</UIActivePublication>
       <UITaggingForm>Tagga Documento</UITaggingForm>
@@ -372,7 +372,7 @@
       <can-not-unlock-node>Non hai i permessi di sbloccare questo nodo. Contatta l'amministratore per avere i diritti corretti.</can-not-unlock-node>
       <no-node>Seleziona almeno un nodo prima di incollare.</no-node>
       <can-not-paste-node>Non hai i permessi di incollare in questo nodo. Contatta l'amministratore per avere i diritti corretti.</can-not-paste-node>
-      <can-not-move-node>You do not have permission to move this node. Please contact the administrator.</can-not-move-node>
+      <can-not-move-node>Non ha il permesso di spostare questo nodo. Per Favore contatta l'amministratore.</can-not-move-node>
       <does-not-support-versioning>Gestione versioni non supportata per questo nodo.</does-not-support-versioning>
       <path-not-found>Elemento cancellato o cambiato. Clicca il bottone Aggiorna.</path-not-found>
       <paste-lock-exception>Non puoi incollare '{0}' in questo nodo perchÃš il nodo sorgente o destinazione Ãš bloccato o ha una relazione con il nodo bloccato.</paste-lock-exception>
@@ -381,7 +381,7 @@
       <move-constraint-exception>Errore spostando il nodo.</move-constraint-exception>
       <not-lock-owner>Non puoi sbloccare questo nodo perchÃš non sei il proprietario del blocco.</not-lock-owner>
       <is-checked-in>Fare il check out del nodo prima di rinominare.</is-checked-in>
-      <is-checked-in-lock>Please check out this node before locking.</is-checked-in-lock>
+      <is-checked-in-lock>Per favore fare il check out di questo nodo prima di bloccarlo.</is-checked-in-lock>
       <cant-lock>Non puoi bloccare questo nodo.</cant-lock>
       <node-locked>L'elemento con percorso {0} o livello superiore Ãš bloccato.</node-locked>
       <can-not-delete>Chiudi questo nodo prima di cancellarlo.</can-not-delete>
@@ -413,8 +413,8 @@
       <Save>#{word.save}</Save>
     </action>
     <label>
-      <titleTextBox>Folder Name:</titleTextBox>
-      <customTypeCheckBox>Use a custom type of folder</customTypeCheckBox>
+      <titleTextBox>Nome cartella:</titleTextBox>
+      <customTypeCheckBox>Utilizzare un tipo personalizzato di cartella</customTypeCheckBox>
     </label>
     <title>Aggiungi/Modifica Cartella</title>
     <msg>
@@ -429,10 +429,10 @@
       <numberformat-exception>Impossibile salvare questa cartella. Il nome fornito deve essere in formato numerico.</numberformat-exception>
       <!--DMS 2.4.x; ECM-3553-->
       <not-allow-sameNameSibling>Impossibile salvare la cartella. Questo nodo non accetta 2 nodi con lo stesso nome.</not-allow-sameNameSibling>
-      <ntFolder-not-avaiable>You must select a custom type of folder</ntFolder-not-avaiable>
+      <ntFolder-not-avaiable>È necessario selezionare un tipo personalizzato di cartella</ntFolder-not-avaiable>
     </msg>
     <help>
-      <customTypeCheckBoxHelp>Check if you intend to store web contents or custom document types in this folder</customTypeCheckBoxHelp>
+      <customTypeCheckBoxHelp>Controllare se intende memorizzare contenuti web o tipi personalizzati di documenti in questa cartella</customTypeCheckBoxHelp>
     </help>
   </UIFolderForm>
   <!--
@@ -446,9 +446,9 @@
     </title>
     <msg>
       <!-- Delte one node is not in trash and have no relation -->
-      <confirm-delete>Are you sure you want to delete the item '{0}'?</confirm-delete>
-      <confirm-delete-file>Are you sure you want to delete the file '{0}'?</confirm-delete-file>
-      <confirm-delete-folder>Are you sure you want to delete the folder '{0}' and all subfolders?</confirm-delete-folder>
+      <confirm-delete>È sicuro di volere cancellare l'elemento '{0}'?</confirm-delete>
+      <confirm-delete-file>È sicuro di volere cancellare il file '{0}'?</confirm-delete-file>
+      <confirm-delete-folder>È sicuro di volere cancellare la cartella '{0}' e tutte le sottocartelle?</confirm-delete-folder>
       
       <!-- Delte one node is in trash and have no relation -->
       <confirm-delete-permanently>Are you sure you want to remove permanently the item '{0}'?</confirm-delete-permanently>
@@ -456,18 +456,18 @@
       <confirm-delete-folder-permanently>Are you sure you want to remove permanently the folder '{0}' and all subfolders?</confirm-delete-folder-permanently>
       
       <!-- Delte one node is not in trash and have relations -->
-      <confirm-delete-has-relations>Are you sure you want to delete the item '{0}' and its references?</confirm-delete-has-relations>
-      <confirm-delete-file-has-relations>Are you sure you want to delete the file '{0}' and its references?</confirm-delete-file-has-relations>
-      <confirm-delete-folder-has-relations>Are you sure you want to delete the folder '{0}' and its references?</confirm-delete-folder-has-relations>
+      <confirm-delete-has-relations>È sicuro di volere cancellare l'elemento '{0}' e i suoi riferimenti?</confirm-delete-has-relations>
+      <confirm-delete-file-has-relations>È sicuro di volere cancellare il file '{0}' e i suoi riferimenti?</confirm-delete-file-has-relations>
+      <confirm-delete-folder-has-relations>È sicuro di volere cancellare la cartella '{0}' e i suoi riferimenti?</confirm-delete-folder-has-relations>
       
       <!-- Delte multiple nodes, not in Trash, have no relations -->
-      <confirm-delete-multi-nodes-generic>Are you sure you want to delete the {0} selected items?</confirm-delete-multi-nodes-generic>  
-      <confirm-delete-multi-nodes-file>Are you sure you want to delete the {0} selected files?</confirm-delete-multi-nodes-file>
-      <confirm-delete-multi-nodes-folder>Are you sure you want to delete the {0} selected folders and all subfolders?</confirm-delete-multi-nodes-folder>
-      <confirm-delete-multi-nodes-generic-and-file>Are you sure you want to delete the {0} selected items and files?</confirm-delete-multi-nodes-generic-and-file>
-      <confirm-delete-multi-nodes-generic-and-folder>Are you sure you want to delete the {0} selected items, folders and all subfolders?</confirm-delete-multi-nodes-generic-and-folder>
-      <confirm-delete-multi-nodes-file-and-folder>Are you sure you want to delete the {0} selected files, folders and all subfolders?</confirm-delete-multi-nodes-file-and-folder>
-      <confirm-delete-multi-nodes-generic-and-file-and-folder>Are you sure you want to delete the {0} selected items, files, folders and all subfolders?</confirm-delete-multi-nodes-generic-and-file-and-folder>
+      <confirm-delete-multi-nodes-generic>È sicuro di volere cancellare gli {0} elementi selezionati?</confirm-delete-multi-nodes-generic>  
+      <confirm-delete-multi-nodes-file>È sicuro di volere cancellare i {0} file selezionate?</confirm-delete-multi-nodes-file>
+      <confirm-delete-multi-nodes-folder>È sicuro di volere cancellare le  {0} cartelle e tutte le sottocartelle selezionate ?</confirm-delete-multi-nodes-folder>
+      <confirm-delete-multi-nodes-generic-and-file>È sicuro di volere cancellare gli {0} elementi e file selezionati?</confirm-delete-multi-nodes-generic-and-file>
+      <confirm-delete-multi-nodes-generic-and-folder>È sicuro di volere cancellare gli {0} elementi, cartelle e tutte le sottocartelle selezionati?</confirm-delete-multi-nodes-generic-and-folder>
+      <confirm-delete-multi-nodes-file-and-folder>È sicuro di volere cancellare gli {0} file, cartelle e tutte le sottocartelle selezionate?</confirm-delete-multi-nodes-file-and-folder>
+      <confirm-delete-multi-nodes-generic-and-file-and-folder>È sicuro di volere cancellare gli {0} elementi, file, cartelle e tutte le sottocartelle selezionati?</confirm-delete-multi-nodes-generic-and-file-and-folder>
       
       <!-- Delte multiple nodes, in Trash -->
       <confirm-delete-multi-nodes-generic-permanently>Are you sure you want to remove permanently the {0} selected items?</confirm-delete-multi-nodes-generic-permanently>  
@@ -479,21 +479,21 @@
       <confirm-delete-multi-nodes-generic-and-file-and-folder-permanently>Are you sure you want to remove permanently the {0} selected items, files, folders and all subfolders?</confirm-delete-multi-nodes-generic-and-file-and-folder-permanently>
       
       <!-- Delte multiple nodes, have relations -->
-      <confirm-delete-multi-nodes-generic-have-relations>Are you sure you want to delete the {0} selected items and their references?</confirm-delete-multi-nodes-generic-have-relations>  
-      <confirm-delete-multi-nodes-file-have-relations>Are you sure you want to delete the {0} selected files and their references?</confirm-delete-multi-nodes-file-have-relations>
-      <confirm-delete-multi-nodes-folder-have-relations>Are you sure you want to delete the {0} selected folders, all subfolders and their references?</confirm-delete-multi-nodes-folder-have-relations>
-      <confirm-delete-multi-nodes-generic-and-file-have-relations>Are you sure you want to delete the {0} selected items, files and their references?</confirm-delete-multi-nodes-generic-and-file-have-relations>
-      <confirm-delete-multi-nodes-generic-and-folder-have-relations>Are you sure you want to delete the {0} selected items, their references, folders and all subfolders?</confirm-delete-multi-nodes-generic-and-folder-have-relations>
-      <confirm-delete-multi-nodes-file-and-folder-have-relations>Are you sure you want to delete the {0} selected files, their references, folders and all subfolders?</confirm-delete-multi-nodes-file-and-folder-have-relations>
-      <confirm-delete-multi-nodes-generic-and-file-and-folder-have-relations>Are you sure you want to delete the {0} selected items, files, their references, folders and all subfolders?</confirm-delete-multi-nodes-generic-and-file-and-folder-have-relations>
+      <confirm-delete-multi-nodes-generic-have-relations>È sicuro di volere cancellare gli {0} elementi selezionati e loro riferimenti?</confirm-delete-multi-nodes-generic-have-relations>  
+      <confirm-delete-multi-nodes-file-have-relations>È sicuro di volere cancellare i {0} file selezionate e loro riferimenti?</confirm-delete-multi-nodes-file-have-relations>
+      <confirm-delete-multi-nodes-folder-have-relations>È sicuro di volere cancellare i {0} cartelle selezionate con tutte le sottocartelle e i loro riferimenti?</confirm-delete-multi-nodes-folder-have-relations>
+      <confirm-delete-multi-nodes-generic-and-file-have-relations>È sicuro di volere cancellare gli {0} elementi e file selezionati e loro riferimenti?</confirm-delete-multi-nodes-generic-and-file-have-relations>
+      <confirm-delete-multi-nodes-generic-and-folder-have-relations>È sicuro di volere cancellare gli {0} elementi con loro riferimenti, le cartelle e tutte le sottocartelle selezionati?</confirm-delete-multi-nodes-generic-and-folder-have-relations>
+      <confirm-delete-multi-nodes-file-and-folder-have-relations>È sicuro di volere cancellare i {0} file selezionate, con loro riferimenti, cartelle e  sottocartelle?</confirm-delete-multi-nodes-file-and-folder-have-relations>
+      <confirm-delete-multi-nodes-generic-and-file-and-folder-have-relations>È sicuro di volere cancellare gli {0} elementi, file con loro riferimenti, cartelle e sottocartelle selezionate?</confirm-delete-multi-nodes-generic-and-file-and-folder-have-relations>
       
-      <feedback-delete>'{0}' was deleted succesfully.</feedback-delete>
-      <feedback-delete-multi>{0} items were deleted succesfully.</feedback-delete-multi>      
-      <feedback-delete-permanently>'{0}' was removed permanently.</feedback-delete-permanently>
-      <feedback-delete-permanently-multi>{0} items were removed permanently.</feedback-delete-permanently-multi>
-      <undo-delete>Undo</undo-delete>
-      <feedback-restore>'{0}' was successfully restored.</feedback-restore>
-      <feedback-restore-multi>{0} items were succesfully restored.</feedback-restore-multi>
+      <feedback-delete>'{0}' è stato cancellato con successo.</feedback-delete>
+      <feedback-delete-multi>{0} elementi sono stati cancellati con successo.</feedback-delete-multi>      
+      <feedback-delete-permanently>'{0}' è stato rimosso definitivamente.</feedback-delete-permanently>
+      <feedback-delete-permanently-multi>{0} elementi sono stati rimossi definitivamente.</feedback-delete-permanently-multi>
+      <undo-delete>Annulla</undo-delete>
+      <feedback-restore>'{0}' è stato correttamente ristabilito.</feedback-restore>
+      <feedback-restore-multi>{0} elementi sono stati  correttamente ristabiliti.</feedback-restore-multi>
       
       <confirm-restore>Un nodo con lo stesso nome esiste giÃ  nella precedente posizione di questo nodo '{0}'. Sei sicuro di voler ripristinare questo nodo?</confirm-restore>
       <confirm-move>Sei sicuro di voler spostare?</confirm-move>
@@ -520,7 +520,7 @@
       <Rename>Rinomina</Rename>
       <Cut>Taglia</Cut>
       <Copy>Copia</Copy>
-      <Save>Salva</Save>
+      <Save>#{word.save}</Save>
       <RemoveNode>Elimina</RemoveNode>
       <Checkin>Checkin</Checkin>
       <Checkout>Checkout</Checkout>
@@ -570,7 +570,7 @@
       <Copy>Copia</Copy>
       <Rename>Rinomina</Rename>
       <Delete>Elimina</Delete>
-      <Save>Salva</Save>
+      <Save>#{word.save}</Save>
       <Cut>Taglia</Cut>
       <Paste>Incolla</Paste>
       <CheckOut>CheckOut</CheckOut>
@@ -609,7 +609,7 @@
       <path>Percorso</path>
     </header>
     <action>
-      <Close>Chiudi</Close>
+      <Close>#{word.close}</Close>
     </action>
   </UIReferencesList>
   <!--
@@ -621,7 +621,7 @@
     <title>
       <UIPublishingPanel>Pannello Pubblicazione</UIPublishingPanel>
       <UIPublicationPanel>Revisione</UIPublicationPanel>
-      <UIPublicationSchedule>Scheduled</UIPublicationSchedule>
+      <UIPublicationSchedule>Programmato</UIPublicationSchedule>
       <UIPublicationPagesContainer>Pagine</UIPublicationPagesContainer>
       <UIPublicationHistory>Storia</UIPublicationHistory>
       <UIVersionViewer>Visualizzatore Versione</UIVersionViewer>
@@ -655,7 +655,7 @@
       <UISelectedCategoriesGrid>Categorie Referenziate</UISelectedCategoriesGrid>
       <UIWorkflowPublicationActionForm>Azione Pubblicazione Workflow</UIWorkflowPublicationActionForm>
       <UIWorkflowPublicationViewForm>Vista Pubblicazione Workflow</UIWorkflowPublicationViewForm>
-      <metadatasitemetadata>Site Metadata</metadatasitemetadata>
+      <metadatasitemetadata>Metadati del Sito</metadatasitemetadata>
       <dcelementset>Dublin Core</dcelementset>
     </title>
   </UITabPane>
@@ -705,8 +705,8 @@
     </label>
     <action>
       <Save>#{word.save}</Save>
-      <Cancel>Annulla</Cancel>
-      <Reset>Reset</Reset>
+      <Cancel>#{word.cancel}</Cancel>
+      <Reset>Azzera</Reset>
     </action>
     <msg>
       <name-invalid>Inserisci il nome proprietÃ .</name-invalid>
@@ -790,7 +790,7 @@
     <action>
       <Close>#{word.close}</Close>
       <Save>#{word.save}</Save>
-      <Reset>Reset</Reset>
+      <Reset>Azzera</Reset>
     </action>
     <msg>
       <checkbox-require>Seleziona almeno un permesso.</checkbox-require>
@@ -831,7 +831,7 @@
       <node-def-dnt>DNT</node-def-dnt>
     </label>
     <action>
-      <Close>Chiudi</Close>
+      <Close>#{word.close}</Close>
     </action>
   </UINodeTypeInfo>
   <!--
@@ -846,7 +846,7 @@
       </label>
     </tab>
     <action>
-      <Close>Chiudi</Close>
+      <Close>#{word.close}</Close>
     </action>
   </UICategoryManagerSearch>
   <UIContentNameSearch>
@@ -1075,7 +1075,7 @@
     </msg>
     <button>
       <label-Add>Aggiungi</label-Add>
-      <label-Cancel>Annulla</label-Cancel>
+      <label-Cancel>#{word.cancel}</label-Cancel>
     </button>
   </UIConstraintsForm>
   <UIConstraintForm>
@@ -1122,8 +1122,8 @@
   </SaveQueryPopup>
   <UINodeTypeSelectForm>
     <action>
-      <Cancel>Annulla</Cancel>
-      <Save>Salva</Save>
+      <Cancel>#{word.cancel}</Cancel>
+      <Save>#{word.save}</Save>
     </action>
   </UINodeTypeSelectForm>
   <UICompareExactlyForm>
@@ -1136,7 +1136,7 @@
     </title>
     <button>
       <label-Select>Seleziona</label-Select>
-      <label-Cancel>Annulla</label-Cancel>
+      <label-Cancel>#{word.cancel}</label-Cancel>
     </button>
     <msg>
       <not-result-found>Nessun risultato trovato.</not-result-found>
@@ -1210,7 +1210,7 @@
     <pLabel>ProprietÃ :</pLabel>
     <action>
       <Add>Aggiungi</Add>
-      <Cancel>Annulla</Cancel>
+      <Cancel>#{word.cancel}</Cancel>
     </action>
   </UISelectPropertyForm>
   <ExactlyFormPopup>
@@ -1287,7 +1287,7 @@
       <format>Formato</format>
       <nodePath>Percorso da esportare</nodePath>
       <zip>Zip</zip>
-      <systemView>System View</systemView>
+      <systemView>Vista sistema</systemView>
       <documentView>Vista Documento</documentView>
     </label>
     <action>
@@ -1334,7 +1334,7 @@
       <invalid-item-state>Non puoi ripristinare questa versione. Forse, uno o piÃ¹ elementi cancellati o spostati in un'altra sessione.</invalid-item-state>
     </msg>
     <action>
-      <close>Chiudi</close>
+      <close>#{word.close}</close>
       <close-view>Chiudi Vista</close-view>
     </action>
   </UIVersionInfo>
@@ -1353,7 +1353,7 @@
       <e_4>ProprietÃ  aggiunta</e_4>
       <e_16>ProprietÃ  cambiata</e_16>
       <e_8>ProprietÃ  rimossa</e_8>
-      <e_32>Salva</e_32>
+      <e_32>#{word.save}</e_32>
       <e_64>Sposta</e_64>
       <e_128>Copia</e_128>
       <e_256>Aggiungi mixin</e_256>
@@ -1361,8 +1361,8 @@
       <e_1024>Clona</e_1024>
       <e_2048>Aggiorna</e_2048>
       <e_4096>Importa</e_4096>
-      <e_8192>Check in</e_8192>
-      <e_16384>Check out</e_16384>
+      <e_8192>Check-in</e_8192>
+      <e_16384>Check-out</e_16384>
       <e_32768>Ripristina</e_32768>
       <e_65536>Unisci</e_65536>
       <e_131072>Cancella unione</e_131072>
@@ -1392,7 +1392,7 @@
       <note>Versionamento non attivato per questo nodo.</note>
       <question>Sei sicuro di volerlo attivare?</question>
       <button-active>Attiva</button-active>
-      <button-cancel>Annulla</button-cancel>
+      <button-cancel>#{word.cancel}</button-cancel>
     </label>
     <msg>
       <access-denied>Non hai il permesso di attivare il versionamento su questo nodo</access-denied>
@@ -1410,7 +1410,7 @@
       <action>Azione</action>
     </header>
     <action>
-      <Cancel>Chiudi</Cancel>
+      <Cancel>#{word.close}</Cancel>
     </action>
     <grid>
       <msg>
@@ -1434,7 +1434,7 @@
     </label>
     <action>
       <activate>Attiva</activate>
-      <cancel>Annulla</cancel>
+      <cancel>#{word.cancel}</cancel>
     </action>
   </UIActivateAuditing>
   <!--
@@ -1459,7 +1459,7 @@
   <UIImportNode>
     <label>
       <format>Formato</format>
-      <systemView>System View</systemView>
+      <systemView>Vista sistema</systemView>
       <documentView>Vista Documento</documentView>
       <upload>Carica File</upload>
     </label>
@@ -1474,7 +1474,7 @@
       <filetype-error>Impossibile caricare il file importato. Forse, il file .xml non Ãš valido.</filetype-error>
       <mimetype-invalid>Solo file .xml o .zip sono supportati per l'importazione.</mimetype-invalid>
       <access-denied>Accesso negato! Non sei autorizzato a importare.</access-denied>
-      <constraint-violation-exception>Impossible to import data. The type '{0}' is not allowed in this location.</constraint-violation-exception>
+      <constraint-violation-exception>Impossibile importare i dati. Il tipo '{0}' non è consentito in questa localizzazione.</constraint-violation-exception>
       <item-exists-exception>Un nodo referenziato ha lo stesso UUID di un nodo giÃ  esistente nel workspace.</item-exists-exception>
     </msg>
   </UIImportNode>
@@ -1489,7 +1489,7 @@
     </label>
     <action>
       <Save>#{word.save}</Save>
-      <Cancel>Annulla</Cancel>
+      <Cancel>#{word.cancel}</Cancel>
     </action>
     <title>Aggiungi Etichetta</title>
     <msg>
@@ -1544,7 +1544,7 @@
   -->
   <UICategoryManager>
     <action>
-      <Close>Chiudi</Close>
+      <Close>#{word.close}</Close>
     </action>
     <tab>
       <label>
@@ -1589,7 +1589,7 @@
   -->
   <UIRelationManager>
     <action>
-      <Close>Chiudi</Close>
+      <Close>#{word.close}</Close>
     </action>
     <tab>
       <label>
@@ -1652,8 +1652,8 @@
   <UISelectDocumentForm>
     <label>
       <selectTemplate>Seleziona il tuo template nella lista sotto</selectTemplate>
-      <ThumbnailView>Thumbnail View</ThumbnailView>
-      <ListView>List View</ListView>
+      <ThumbnailView>Vista miniature</ThumbnailView>
+      <ListView>Vista Liste</ListView>
       <Cancel>#{word.cancel}</Cancel>
     </label>
   </UISelectDocumentForm>
@@ -1665,7 +1665,7 @@
   <UIDocumentForm>
     <title>Aggiungi Nuovo Documento</title>
     <action>
-      <Save>Salva</Save>
+      <Save>#{word.save}</Save>
       <SaveAndClose>Salva &amp; Chiudi</SaveAndClose>
       <ChangeType>Cambia Tipo Contenuto</ChangeType>
       <Fullscreen>Pieno Schermo</Fullscreen>
@@ -1826,7 +1826,7 @@
       <exeButton>Vai</exeButton>
       <backButton>Torna al nodo precedente</backButton>
       <showHistory>Mostra storico indirizzo</showHistory>
-      <changeNode>Change Node</changeNode>
+      <changeNode>Cambiare Nodo</changeNode>
     </title>
   </UIAddressBar>
   <!--
@@ -1872,7 +1872,7 @@
       <tag-name-empty>Nome tag vuoto</tag-name-empty>
       <tag-name-duplicate>Nomi tag inseriti duplicati.</tag-name-duplicate>
       <tagName-too-long>Nomi tag inseriti troppo lungo. Il nome tag deve essere minore di 30 caratteri.</tagName-too-long>
-      <path-not-found>This tag has been deleted or changed. Please click on the Refresh button.</path-not-found>
+      <path-not-found>Questo tag è stato cancellato o modificato. Fare premere sul pulsante Aggiornare.</path-not-found>
     </msg>
     <introduction>
       <tagName>(Separa tag multipli con la virgola.)</tagName>
@@ -1936,7 +1936,7 @@
   </EmptyFieldValidator>
   <CategoryValidator>
     <msg>
-      <non-categories>Categories are wrong. Please select good categories.</non-categories>
+      <non-categories>Categorie sbagliate. Per favore seleziona categorie giuste.</non-categories>
     </msg>
   </CategoryValidator>
   <!--
@@ -1983,9 +1983,9 @@
       <stateName>Nome Stato</stateName>
     </label>
     <action>
-      <Save>Salva</Save>
+      <Save>#{word.save}</Save>
       <UnsubcriberLifeCycle>Cancellatore</UnsubcriberLifeCycle>
-      <Cancel>Annulla</Cancel>
+      <Cancel>#{word.cancel}</Cancel>
     </action>
   </UIPublicationForm>
   <!--
@@ -2079,7 +2079,7 @@
       <visibility>VisibilitÃ </visibility>
     </header>
     <action>
-      <Close>Chiudi</Close>
+      <Close>#{word.close}</Close>
     </action>
   </UIPublicationLogList>
   <!--
@@ -2102,18 +2102,18 @@
     <action>
       <Save>#{word.save}</Save>
       <Cancel>#{word.cancel}</Cancel>
-      <RemoveThumbnail>Remove Thumbnail</RemoveThumbnail>
+      <RemoveThumbnail>Rimuovere Thumbnail</RemoveThumbnail>
     </action>
     <label>
       <mediumSize>Immagine Anteprima</mediumSize>
-      <SelectFile>Choose Thumbnail Image</SelectFile>
+      <SelectFile>Scegli Immagine Thumbnail</SelectFile>
     </label>
     <msg>
       <mimetype-incorrect>Tipo file non corretto. Le anteprima possono essere create solo da file .JPG, .PNG or .GIF.</mimetype-incorrect>
       <access-denied>Accesso negato. Non hai permessi di aggiungere anteprime al nodo.</access-denied>
       <confirm-delete>Sei sicuro di voler rimuovere l'anteprima dal nodo?</confirm-delete>
       <is-checked-in>Questo nodo Ãš in checked in. Fare il check oput prima di eseguire qualsiasi azione.</is-checked-in>
-      <fileName-error>Please select a file to upload.</fileName-error>
+      <fileName-error>Per favore seleziona un file da caricare.</fileName-error>
     </msg>
     <title>
       <remove-thumbnail>Rimuovi questa anteprima</remove-thumbnail>
@@ -2142,7 +2142,7 @@
   -->
   <UICategoriesSelector>
     <action>
-      <close>Chiudi</close>
+      <close>#{word.close}</close>
     </action>
   </UICategoriesSelector>
   <!--
@@ -2173,8 +2173,8 @@
     <title>Modifica File Explorer</title>
     <action>
       <Edit>Modifica</Edit>
-      <Save>Salva</Save>
-      <Cancel>Annulla</Cancel>
+      <Save>#{word.save}</Save>
+      <Cancel>#{word.cancel}</Cancel>
     </action>
     <label>
       <uploadFileSizeLimitMB>La dimensione limite per i caricamenti(MB)</uploadFileSizeLimitMB>
@@ -2265,7 +2265,7 @@
       <non-node>Selezionare il nodo di destinazione autorizzato; o non hai permessi di leggere questo nodo.</non-node>
       <cannot-save>Errore creando il collegamento simbolico.</cannot-save>
       <item-exists-exception>Il nome nodo esiste giÃ .</item-exists-exception>
-      <translation-node-same-language-default>The translation node has the same language as the default language of current node.</translation-node-same-language-default>
+      <translation-node-same-language-default>Il nodo di traduzione ha la stessa lingua come lingua predefinita del nodo corrente.</translation-node-same-language-default>
       <UnsupportedRepositoryOperationException>Quesot nodo destinazione non Ãš referenziato.</UnsupportedRepositoryOperationException>
     </msg>
   </UISymLinkForm>
@@ -2273,17 +2273,17 @@
   <UIAddTranslationForm>
     <label>
       <symLinkName>Nome Collegamento Simbolico</symLinkName>
-      <pathNode>Document Path:</pathNode>
-      <note>Select another document that will serve as the translation</note>
+      <pathNode>Path del documento:</pathNode>
+      <note>Selezionare un altro documento che servirà di traduzione</note>
     </label>
     <action>
       <Save>#{word.save}</Save>
       <Cancel>#{word.cancel}</Cancel>
-      <SelectDocument>Select Document</SelectDocument>
+      <SelectDocument>Selezionare il documento</SelectDocument>
     </action>
     <msg>
-      <addFolder-successful>The symlink '{0}' is added successfully.</addFolder-successful>
-      <name-invalid>Inserisci il nome collegamento.</name-invalid>
+      <addFolder-successful>Collegamento simbolico '{0}' aggiunto con successo.</addFolder-successful>
+      <name-invalid>Inserisci il nome collegamento per favore.</name-invalid>
       <name-not-allowed>Nome non autorizzato.</name-not-allowed>
       <fileName-error>Nome file non valido.</fileName-error>
       <constraint-violation>Impossibila aggiungere il tipo di nodo '{0}' al nodo attuale.</constraint-violation>
@@ -2292,9 +2292,9 @@
       <path-node-invalid>Inserisci il percorso del nodo.</path-node-invalid>
       <path-node-not-allowed>Nome non autorizzato.</path-node-not-allowed>
       <non-node>Selezionare il nodo di destinazione autorizzato; o non hai permessi di leggere questo nodo.</non-node>
-      <cannot-save>An error occurred while creating the symlink.</cannot-save>
+      <cannot-save>Errore durante la creazione del collegamento simbolico.</cannot-save>
       <item-exists-exception>Il nome nodo esiste giÃ .</item-exists-exception>
-      <translation-node-same-language-default>The translation node has the same language as the default language of current node.</translation-node-same-language-default>
+      <translation-node-same-language-default>Il nodo di traduzione ha la stessa lingua come lingua predefinita del nodo corrente.</translation-node-same-language-default>
       <UnsupportedRepositoryOperationException>Quesot nodo destinazione non Ãš referenziato.</UnsupportedRepositoryOperationException>
     </msg>
   </UIAddTranslationForm>
@@ -2380,7 +2380,7 @@
 
   <UISimpleCategoryManager>
     <action>
-      <Close>Chiudi</Close>
+      <Close>#{word.close}</Close>
     </action>
   </UISimpleCategoryManager>
   <UIPopupWindow>
@@ -2407,7 +2407,7 @@
   <UIRestoreConfirmMessage>
     <label>
       <Close>#{word.close}</Close>
-      <OK>OK</OK>
+      <OK>Ok</OK>
       <ReplaceData>Sostituisci dati</ReplaceData>
       <Back>Torna a rinominare</Back>
       <Keepfile>Mantieni entrambi i file</Keepfile>
@@ -2424,7 +2424,7 @@
   <UIWorkingArea>
     <msg>
       <can-not-move-to-itself>Impossibile spostare la cartella destinazione perchÃš Ãš la stessa della sorgente.</can-not-move-to-itself>
-      <is-editing>You cannot move a document while it is being edited. Please close it first.</is-editing>
+      <is-editing>Non puoi spostare un documento mentre esso viene modificato. Per favore chiuderlo prima.</is-editing>
     </msg>
   </UIWorkingArea>
 
@@ -2463,7 +2463,7 @@
   <Import>
     <label>
       <docview>Vista Documento</docview>
-      <sysview>System View</sysview>
+      <sysview>Vista sistema</sysview>
     </label>
   </Import>
 
@@ -2554,10 +2554,10 @@
     <label>
       <nt_folder>Cartella Documenti</nt_folder>
       <nt_unstructured>Cartella Contenuti</nt_unstructured>
-      <exo_cssFolder>CSS Folder</exo_cssFolder>
-      <exo_jsFolder>Javascript Folder</exo_jsFolder>
+      <exo_cssFolder>Cartella CSS</exo_cssFolder>
+      <exo_jsFolder>Cartella di JavaScript</exo_jsFolder>
       <exo_linkFolder>Link Folder</exo_linkFolder>
-      <exo_webFolder>Web Content Folder</exo_webFolder>
+      <exo_webFolder>Cartella Contenuto Web</exo_webFolder>
    </label>
   </UIFolderForm>
 
@@ -2667,7 +2667,7 @@
       <ShowMusic>Mostra tutti i file musicali</ShowMusic>
       <ShowImages>Mostra tutti i file immagine</ShowImages>
       <ShowDocuments>Mostra tutti i file documento</ShowDocuments>
-      <ShowContent>Show all document types</ShowContent>
+      <ShowContent>Mostrare tutti i tipi documento</ShowContent>
     </title>
   </UIAllItemsByType>
 
@@ -2710,8 +2710,8 @@
       <name>Nome Categoria</name>
     </label>
     <action>
-      <Save>Salva</Save>
-      <Cancel>Annulla</Cancel>
+      <Save>#{word.save}</Save>
+      <Cancel>#{word.cancel}</Cancel>
     </action>
   </UICategoryForm>
   <UIPopupWindow>
@@ -2755,7 +2755,7 @@
       </title>
     </action>
     <msg>
-      <confirm-remove>Are you sure to delete this tag?</confirm-remove>
+      <confirm-remove>È sicuro di volere cancellare questo tag?</confirm-remove>
     </msg>
   </UIEditingTagsForm>
 
@@ -2865,8 +2865,8 @@
 
   <UISelectRestorePath>
     <action>
-      <Save>Salva</Save>
-      <Cancel>Annulla</Cancel>
+      <Save>#{word.save}</Save>
+      <Cancel>#{word.cancel}</Cancel>
     </action>
     <label>
       <formInput>Percorso precedente perso. Selezionane uno nuovo.</formInput>
@@ -2908,7 +2908,7 @@
 
 <UIPublicationPanel>
     <button>
-      <Close>Chiudi</Close>
+      <Close>#{word.close}</Close>
     </button>
     <revisions>
       <version>Revisioni</version>
@@ -2963,15 +2963,15 @@
   
   <UIPublicationSchedule>
     <label>
-      <introduction>You can schedule the publication of your document. Select the dates you would like to see your document published</introduction>
-      <no-schedule-info>There is no publication schedule for your document</no-schedule-info>
+      <introduction>È possibile pianificare la pubblicazione del documento. Seleziona il giorno che vi piacerebbe che il documento sia pubblicato</introduction>
+      <no-schedule-info>Non c'è nessun planificazione di pubblicazione per il suo documento</no-schedule-info>
     </label>
     <msg>
-      <save-finished>Your new publication schedule was saved successfully.</save-finished>
+      <save-finished>Il vostro nuovo programma di pubblicazione è stato salvato con successo.</save-finished>
     </msg>
     <action>
       <Save>#{word.save}</Save>
-      <Reset>Reset</Reset>
+      <Reset>Azzera</Reset>
     </action>
   </UIPublicationSchedule>
 
@@ -2982,7 +2982,7 @@
       <end>Fine Pubblicazione</end>
     </label>
     <msg>
-      <invalid-format>The date format is invalid. Please check again.</invalid-format>
+      <invalid-format>Il formato della data non è valido. Per favore controlla di nuovo.</invalid-format>
       <fromDate-after-toDate>La Data di Inizio deve essere minore della Data di Fine.</fromDate-after-toDate>
     </msg>
   </UIPublicationPanel>
@@ -3031,12 +3031,12 @@
   <UIJCRExplorerPortlet>
 <msg>
   <file-access-denied>Accesso file negato.</file-access-denied>
-  <anonymous-access-denied>Anonymous user does not have permission to use this function.</anonymous-access-denied>
+  <anonymous-access-denied>Utente anonimo non ha il permesso di utilizzare questa funzionalità.</anonymous-access-denied>
 </msg>
   </UIJCRExplorerPortlet>
   <UIDrivesArea>
     <DrivesArea>
-      <ShowDrives>Show Drives</ShowDrives>
+      <ShowDrives>Visualizza i Drive</ShowDrives>
     </DrivesArea>
   </UIDrivesArea>
   <UIJcrExplorerEditForm>
@@ -3086,70 +3086,70 @@
   </lifecyclePhase>
   <UIPopupMenu>
   <msg>
-<can-not-remove-locked-node>Node {0} is locked. You cannot move it to the Trash.</can-not-remove-locked-node>
-<can-not-remove-checked-in-node>Node {0} or its parent is checked in. You cannot move it to the Trash.</can-not-remove-checked-in-node>
-<access-denied-to-delete>Access denied. You cannot move node {0} to the Trash.</access-denied-to-delete>
+<can-not-remove-locked-node>Nodo {0} è bloccato. Non è possibile spostarlo nel cestino.</can-not-remove-locked-node>
+<can-not-remove-checked-in-node>Nodo {0} o il suo parente è già "checked in" . Non è possibile spostarlo nel cestino.</can-not-remove-checked-in-node>
+<access-denied-to-delete>Accesso negato. Nodo {0} non può essere spostato nel cestino.</access-denied-to-delete>
   </msg>
   </UIPopupMenu>
   <UIPropertyForm>
   <msg>
-  <unknown-error>An error occurred while editing this property.</unknown-error>
+  <unknown-error>Un errore è accaduto durante la modifica di questa proprietà.</unknown-error>
     </msg>
   </UIPropertyForm>
   <UIWatchDocumentForm>
     <msg>
-      <node-is-locked>This node is locked. You cannot watch it.</node-is-locked>
-      <unknown-error>Some errors have occurred. You cannot watch this node.</unknown-error>
+      <node-is-locked>Questo nodo è bloccato. Non può guardarlo.</node-is-locked>
+      <unknown-error>Ci sono stati alcuni errori. Lei non può guardare questo nodo.</unknown-error>
     </msg>
   </UIWatchDocumentForm>   
   <UIActionForm>
     <msg>
-      <xss-vulnerability-character>Field '{0}' contains XSS vulnerability characters</xss-vulnerability-character>
+      <xss-vulnerability-character>Campo '{0}' contiene caratteri a vulnerabilità XSS</xss-vulnerability-character>
     </msg>
   </UIActionForm>
   <UIMultiUpload>
   <label>
-    <AbortAll>Abort all</AbortAll>
+    <AbortAll>Interrompere tutti</AbortAll>
     <AbortAllFiles>Abort all files</AbortAllFiles>
     <MaxFileSize>Maximal file size is</MaxFileSize>
-    <InvalidCharacters>Invalid characters will be changed by '-'</InvalidCharacters>
-    <DropFileMessage>Drop your files here in the current folder</DropFileMessage>
-    <Close>Chiuso</Close>
-    <in>in</in>
-    <MaxFileSizeAlert>The file size exceeds the size limit of</MaxFileSizeAlert>
-    <Waiting>Waiting</Waiting>
-    <Error>Error</Error>
-    <or>or</or>
-    <AlreadyInUse>Already in use</AlreadyInUse>
-    <Keep>Keep both</Keep>
-    <Replace>Replace</Replace>
-    <Canceled>Canceled</Canceled>
-    <Cancel>Annulla</Cancel>
-    <AbortAllConfirmation>Do you want to abort all files in progress?</AbortAllConfirmation>
+    <InvalidCharacters>I caratteri non validi saranno cambiati da '-'</InvalidCharacters>
+    <DropFileMessage>Lasciare i vostri file qui nella cartella corrente</DropFileMessage>
+    <Close>#{word.close}</Close>
+    <in>dentro</in>
+    <MaxFileSizeAlert>La dimensione del file supera la dimensione massima del</MaxFileSizeAlert>
+    <Waiting>In attesa</Waiting>
+    <Error>Errore</Error>
+    <or>o</or>
+    <AlreadyInUse>Già in uso</AlreadyInUse>
+    <Keep>Tenere entrambi</Keep>
+    <Replace>Sostituire</Replace>
+    <Canceled>Annullato</Canceled>
+    <Cancel>#{word.cancel}</Cancel>
+    <AbortAllConfirmation>Desidera annullare tutti i file in corso?</AbortAllConfirmation>
   </label>
   </UIMultiUpload>
   <UIDocumentNodeList>
   <label>
-  <CreatedOn>Created on</CreatedOn>
-  <Updated>Updated</Updated>
-  <by>by</by>
-  <you>you</you>
+  <CreatedOn>Creato il</CreatedOn>
+  <Updated>Aggiornato</Updated>
+  <by>da</by>
+  <you>lei</you>
   </label>
   </UIDocumentNodeList>
   <FileView>
     <label>
-      <name>Name</name>
+      <name>Nome</name>
       <date>Data</date>
-      <size>Size</size>
+      <size>Dimensione</size>
       <sortBy>Ordina per</sortBy>
       <filesAreSelected>files are selected.</filesAreSelected>
-      <ClearSelection>Clear selection</ClearSelection>
-      <more>More</more>
+      <ClearSelection>Annulla selezione</ClearSelection>
+      <more>Più</more>
     </label>
   </FileView>
   <UIPropertyForm>
   <msg>
-  <property-name-incorrect>The property name is incorrect, please enter another value for it!</property-name-incorrect>
+  <property-name-incorrect>Il nome della proprietà non è corretto, inserisce un altro valore per esso per favore!</property-name-incorrect>
     </msg>
   </UIPropertyForm>
   <!--
@@ -3158,6 +3158,6 @@
   ###################################################################################
   -->
   <VersionException>
-  <msg>Cannot modify documents that are being checked in.</msg>  
+  <msg>Non è possibile modificare documenti per cui il check in è in corso.</msg>  
   </VersionException>
 </bundle>

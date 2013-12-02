@@ -8,7 +8,7 @@
   <RenameConnector>
     <label>
       <rename>名前変更</rename>
-      <cancel>キャンセル</cancel>
+      <cancel>#{word.cancel}</cancel>
     </label>
     <msg>
       <renaming>名前を変更中です。。。</renaming>

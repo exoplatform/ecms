@@ -27,8 +27,8 @@
   <priority>Geçerli değerler aralık 0.0 ile 1.0</priority>
   </tip>   
     <action>
-      <Save>Kaydet</Save>
-      <Cancel>İptal</Cancel>
+      <Save>#{word.save}</Save>
+      <Cancel>#{word.cancel}</Cancel>
     </action>
     <msg>
       <repository-exception>Sayfa meta veriler kaydedilirken beklenmeyen bir hata oluştu.</repository-exception>

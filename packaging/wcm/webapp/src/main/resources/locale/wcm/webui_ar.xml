@@ -62,7 +62,7 @@
   <UIPageSelectorPanel>
     <header>
       <path>مسار</path>
-      <action>اجراء</action>
+      <action>#{word.action}</action>
     </header>
     <msg>
       <child-not-found>لا توجد أي صفحة.</child-not-found>
@@ -136,7 +136,7 @@
 
   <UISelectedContentGrid>
     <label>
-      <name>الاسم</name>
+      <name>#{word.name}</name>
       <add>اضف</add>
       <delete>حذف</delete>
     </label>
@@ -148,14 +148,14 @@
 
   <UICLVContentSelectedGrid>
     <action>
-      <SaveCategories>حفظ</SaveCategories>
-      <Cancel>الغاء</Cancel>
+      <SaveCategories>#{word.save}</SaveCategories>
+      <Cancel>#{word.cancel}</Cancel>
     </action>
   </UICLVContentSelectedGrid>
 
   <UIContentBrowsePathSelector>
     <header>
-      <name>الاسم</name>
+      <name>#{word.name}</name>
       <publicationstate>حالة النشر</publicationstate>
       <action>اجراء</action>
     </header>
@@ -166,7 +166,7 @@
 
   <UIContentBrowsePathSelectorFolder>
     <header>
-      <name>الاسم</name>
+      <name>#{word.name}</name>
       <publicationstate>حالة النشر</publicationstate>
       <action>اجراء</action>
     </header>
@@ -218,7 +218,7 @@
   <UIContentPropertySelector>
     <action>
       <Add>اضافة</Add>
-      <Cancel>الغاء</Cancel>
+      <Cancel>#{word.cancel}</Cancel>
     </action>
     <label>
       <metadataType>نوع قالب المعلومات القياسية</metadataType>
@@ -234,8 +234,8 @@
 
   <UIContentNodeTypeSelector>
     <action>
-      <Save>حفظ</Save>
-      <Cancel>الغاء</Cancel>
+      <Save>#{word.save}</Save>
+      <Cancel>#{word.cancel}</Cancel>
     </action>
   </UIContentNodeTypeSelector>
 
@@ -276,7 +276,7 @@
       <UIEditableCheckboxInput>تغيير الاذن</UIEditableCheckboxInput>
     </label>
     <action>
-      <Save>حفظ</Save>
+      <Save>#{word.save}</Save>
       <Clear>مسح</Clear>
       <title>
         <Edit>تغيير</Edit>

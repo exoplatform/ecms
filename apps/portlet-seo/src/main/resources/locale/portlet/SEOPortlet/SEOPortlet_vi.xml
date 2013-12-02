@@ -27,8 +27,8 @@
   <priority>Phạm vi các giá trị hợp lệ từ 0.0 đến 1.0</priority>
   </tip>   
     <action>
-      <Save>Lưu</Save>
-      <Cancel>Hủy bỏ</Cancel>
+      <Save>#{word.save}</Save>
+      <Cancel>#{word.cancel}</Cancel>
     </action>
     <msg>
       <repository-exception>Một lỗi bất ngờ đã xảy ra khi đang lưu siêu dữ liệu của trang.</repository-exception>

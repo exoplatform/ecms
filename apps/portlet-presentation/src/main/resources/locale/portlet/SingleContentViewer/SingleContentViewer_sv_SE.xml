@@ -39,11 +39,11 @@
   </UIPreferencesPopupWindows>
   <UISCVPreferences>
     <action>
-      <Save>Spara</Save>
+      <Save>#{word.save}</Save>
       <Abort>Avbryt</Abort>
-      <Cancel>Avbryt</Cancel>
+      <Cancel>#{word.cancel}</Cancel>
       <Print>Skriv ut</Print>
-      <Close>Stäng</Close>
+      <Close>#{word.close}</Close>
     </action>
     <title>Detaljinställningar för innehåll</title>
     <label>

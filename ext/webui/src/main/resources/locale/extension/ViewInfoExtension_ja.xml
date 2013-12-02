@@ -27,7 +27,7 @@
       <folder>フォルダ</folder>
 </value>
 <action>
-<Close>閉じる</Close>
+<Close>#{word.close}</Close>
 </action>
 </UIViewInfoContainer>
 </bundle>

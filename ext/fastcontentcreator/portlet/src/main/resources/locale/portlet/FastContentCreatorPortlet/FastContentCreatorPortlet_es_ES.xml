@@ -16,8 +16,8 @@
       <new-jcr-template>Error al crear una nueva plantilla.</new-jcr-template>
     </msg>
     <action>
-      <Save>Guardar</Save>
-      <Cancel>Cancelar</Cancel>
+      <Save>#{word.save}</Save>
+      <Cancel>#{word.cancel}</Cancel>
     </action>
   </UIFCCForm>
 
@@ -46,7 +46,7 @@
       <do-select>Error al seleccionar la ubicación.</do-select>
       </msg>
     <action>
-      <Save>Guardar</Save>
+      <Save>#{word.save}</Save>
     </action>
   </UIFCCConfig>
 
@@ -115,8 +115,8 @@
   <UIFCCActionForm>
     <title>Agregar/ Editar la Acción</title>
     <action>
-      <Save>Guardar</Save>
-      <Close>Cerrar</Close>
+      <Save>#{word.save}</Save>
+      <Close>#{word.close}</Close>
     </action>
     <msg>
       <repository-exception>No se puede guardar esta acción  El nombre provisto no puede tener un índice en su elemento final.</repository-exception>
@@ -173,7 +173,7 @@
 
   <UICategoriesSelector>
     <action>
-      <close>Cerrar</close>
+      <close>#{word.close}</close>
     </action>
   </UICategoriesSelector>
 

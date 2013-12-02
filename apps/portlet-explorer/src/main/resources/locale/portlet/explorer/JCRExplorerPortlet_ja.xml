@@ -520,7 +520,7 @@
       <Rename>名前変更</Rename>
       <Cut>切り取り</Cut>
       <Copy>コピー</Copy>
-      <Save>保存</Save>
+      <Save>#{word.save}</Save>
       <RemoveNode>削除</RemoveNode>
       <Checkin>チェックイン</Checkin>
       <Checkout>チェックアウト</Checkout>
@@ -570,7 +570,7 @@
       <Copy>コピー</Copy>
       <Rename>名前変更</Rename>
       <Delete>削除</Delete>
-      <Save>保存</Save>
+      <Save>#{word.save}</Save>
       <Cut>切り取り</Cut>
       <Paste>貼り付け</Paste>
       <CheckOut>チェックアウト</CheckOut>
@@ -609,7 +609,7 @@
       <path>パス</path>
     </header>
     <action>
-      <Close>閉じる</Close>
+      <Close>#{word.close}</Close>
     </action>
   </UIReferencesList>
   <!--
@@ -705,7 +705,7 @@
     </label>
     <action>
       <Save>#{word.save}</Save>
-      <Cancel>キャンセル</Cancel>
+      <Cancel>#{word.cancel}</Cancel>
       <Reset>リセット</Reset>
     </action>
     <msg>
@@ -831,7 +831,7 @@
       <node-def-dnt>DNT</node-def-dnt>
     </label>
     <action>
-      <Close>閉じる</Close>
+      <Close>#{word.close}</Close>
     </action>
   </UINodeTypeInfo>
   <!--
@@ -846,7 +846,7 @@
       </label>
     </tab>
     <action>
-      <Close>閉じる</Close>
+      <Close>#{word.close}</Close>
     </action>
   </UICategoryManagerSearch>
   <UIContentNameSearch>
@@ -1075,7 +1075,7 @@
     </msg>
     <button>
       <label-Add>追加</label-Add>
-      <label-Cancel>キャンセル</label-Cancel>
+      <label-Cancel>#{word.cancel}</label-Cancel>
     </button>
   </UIConstraintsForm>
   <UIConstraintForm>
@@ -1122,8 +1122,8 @@
   </SaveQueryPopup>
   <UINodeTypeSelectForm>
     <action>
-      <Cancel>キャンセル</Cancel>
-      <Save>保存</Save>
+      <Cancel>#{word.cancel}</Cancel>
+      <Save>#{word.save}</Save>
     </action>
   </UINodeTypeSelectForm>
   <UICompareExactlyForm>
@@ -1136,7 +1136,7 @@
     </title>
     <button>
       <label-Select>選択</label-Select>
-      <label-Cancel>キャンセル</label-Cancel>
+      <label-Cancel>#{word.cancel}</label-Cancel>
     </button>
     <msg>
       <not-result-found>見つかりませんでした!</not-result-found>
@@ -1210,7 +1210,7 @@
     <pLabel>プロパティ：</pLabel>
     <action>
       <Add>追加</Add>
-      <Cancel>キャンセル</Cancel>
+      <Cancel>#{word.cancel}</Cancel>
     </action>
   </UISelectPropertyForm>
   <ExactlyFormPopup>
@@ -1334,7 +1334,7 @@
       <invalid-item-state>このバージョンをリストアできません。一つもしくは複数のアイテムが他のセッションで削除、もしくは削除された可能性があります。</invalid-item-state>
     </msg>
     <action>
-      <close>閉じる</close>
+      <close>#{word.close}</close>
       <close-view>ビューを閉じる</close-view>
     </action>
   </UIVersionInfo>
@@ -1353,7 +1353,7 @@
       <e_4>追加されたプロパティ</e_4>
       <e_16>変更されたプロパティ</e_16>
       <e_8>削除されたプロパティ</e_8>
-      <e_32>保存</e_32>
+      <e_32>#{word.save}</e_32>
       <e_64>削除</e_64>
       <e_128>コピー</e_128>
       <e_256>mixinの追加</e_256>
@@ -1392,7 +1392,7 @@
       <note>バージョニングはこのノードでアクティベートしませんでした。</note>
       <question>アクティベートしたいですか？</question>
       <button-active>アクティベート</button-active>
-      <button-cancel>キャンセル</button-cancel>
+      <button-cancel>#{word.cancel}</button-cancel>
     </label>
     <msg>
       <access-denied>このノード上のバージョン管理を有効にする権限がありません。</access-denied>
@@ -1410,7 +1410,7 @@
       <action>アクション</action>
     </header>
     <action>
-      <Cancel>閉じる</Cancel>
+      <Cancel>#{word.close}</Cancel>
     </action>
     <grid>
       <msg>
@@ -1434,7 +1434,7 @@
     </label>
     <action>
       <activate>アクティベート</activate>
-      <cancel>キャンセル</cancel>
+      <cancel>#{word.cancel}</cancel>
     </action>
   </UIActivateAuditing>
   <!--
@@ -1489,7 +1489,7 @@
     </label>
     <action>
       <Save>#{word.save}</Save>
-      <Cancel>キャンセル</Cancel>
+      <Cancel>#{word.cancel}</Cancel>
     </action>
     <title>ラベル追加</title>
     <msg>
@@ -1544,7 +1544,7 @@
   -->
   <UICategoryManager>
     <action>
-      <Close>閉じる</Close>
+      <Close>#{word.close}</Close>
     </action>
     <tab>
       <label>
@@ -1589,7 +1589,7 @@
   -->
   <UIRelationManager>
     <action>
-      <Close>閉じる</Close>
+      <Close>#{word.close}</Close>
     </action>
     <tab>
       <label>
@@ -1665,7 +1665,7 @@
   <UIDocumentForm>
     <title>新しいドキュメントの追加</title>
     <action>
-      <Save>ドラフトとして保存</Save>
+      <Save>#{word.save}</Save>
       <SaveAndClose>保存 &amp; 閉じる</SaveAndClose>
       <ChangeType>change content type</ChangeType>
       <Fullscreen>フルスクリーン</Fullscreen>
@@ -1983,9 +1983,9 @@
       <stateName>状態名</stateName>
     </label>
     <action>
-      <Save>保存</Save>
+      <Save>#{word.save}</Save>
       <UnsubcriberLifeCycle>Unsubcriber</UnsubcriberLifeCycle>
-      <Cancel>キャンセル</Cancel>
+      <Cancel>#{word.cancel}</Cancel>
     </action>
   </UIPublicationForm>
   <!--
@@ -2079,7 +2079,7 @@
       <visibility>可視性</visibility>
     </header>
     <action>
-      <Close>閉じる</Close>
+      <Close>#{word.close}</Close>
     </action>
   </UIPublicationLogList>
   <!--
@@ -2142,7 +2142,7 @@
   -->
   <UICategoriesSelector>
     <action>
-      <close>閉じる</close>
+      <close>#{word.close}</close>
     </action>
   </UICategoriesSelector>
   <!--
@@ -2173,8 +2173,8 @@
     <title>ファイルエクスプローラフォーム</title>
     <action>
       <Edit>編集</Edit>
-      <Save>保存</Save>
-      <Cancel>キャンセル</Cancel>
+      <Save>#{word.save}</Save>
+      <Cancel>#{word.cancel}</Cancel>
     </action>
     <label>
       <uploadFileSizeLimitMB>アップロード ファイルサイズリミット(MB)</uploadFileSizeLimitMB>
@@ -2380,7 +2380,7 @@
 
   <UISimpleCategoryManager>
     <action>
-      <Close>閉じる</Close>
+      <Close>#{word.close}</Close>
     </action>
   </UISimpleCategoryManager>
   <UIPopupWindow>
@@ -2710,8 +2710,8 @@
       <name>カテゴリ名</name>
     </label>
     <action>
-      <Save>保存</Save>
-      <Cancel>キャンセル</Cancel>
+      <Save>#{word.save}</Save>
+      <Cancel>#{word.cancel}</Cancel>
     </action>
   </UICategoryForm>
   <UIPopupWindow>
@@ -2865,8 +2865,8 @@
 
   <UISelectRestorePath>
     <action>
-      <Save>保存</Save>
-      <Cancel>キャンセル</Cancel>
+      <Save>#{word.save}</Save>
+      <Cancel>#{word.cancel}</Cancel>
     </action>
     <label>
       <formInput>古いパスは失われました。新しいものを選択してください。</formInput>
@@ -2908,7 +2908,7 @@
 
 <UIPublicationPanel>
     <button>
-      <Close>閉じる</Close>
+      <Close>#{word.close}</Close>
     </button>
     <revisions>
       <version>リビジョンs</version>
@@ -3114,7 +3114,7 @@
     <MaxFileSize>Maximal file size is</MaxFileSize>
     <InvalidCharacters>無効な文字は、'-'に変換されます</InvalidCharacters>
     <DropFileMessage>あなたのファイルを現在のフォルダーにドロップします。</DropFileMessage>
-    <Close>閉じる</Close>
+    <Close>#{word.close}</Close>
     <in>で</in>
     <MaxFileSizeAlert>ファイル サイズの制限を超えています</MaxFileSizeAlert>
     <Waiting>待機中です</Waiting>
@@ -3124,7 +3124,7 @@
     <Keep>両方を維持します。</Keep>
     <Replace>置換</Replace>
     <Canceled>キャンセルされました</Canceled>
-    <Cancel>キャンセル</Cancel>
+    <Cancel>#{word.cancel}</Cancel>
     <AbortAllConfirmation>進行中のすべてのファイルを中止しますか。</AbortAllConfirmation>
   </label>
   </UIMultiUpload>

@@ -34,7 +34,7 @@ addScripts('search.SearchPortlet.search("' + uicomponent.id + '");');
       <div class="control-group">
         <label class="control-label">&nbsp</label>
         <div class="controls">
-           <fieldset style="border:none;"><legend> </legend><%uiform.renderField(searchOptionRadioBox)%>
+           <fieldset style="border:none;"><%uiform.renderField(searchOptionRadioBox)%>
              <label for="<%=uiPortalSelectBox.getId()%>"><% uiform.renderField(uiPortalSelectBox) %></label>
            </fieldset>
         </div>

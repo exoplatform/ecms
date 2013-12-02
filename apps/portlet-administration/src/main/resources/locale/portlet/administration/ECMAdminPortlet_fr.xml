@@ -154,7 +154,7 @@
 	<UIActionForm>
     <title>Ajouter une action pour l'arbre de catégories</title>
 		<action>
-			<Save>Enregistrer</Save>
+      <Save>#{word.save}</Save>
 		</action>
 		<msg>
   		<name-not-allowed>Nom non autorisé</name-not-allowed>
@@ -326,7 +326,7 @@
       <metadataView>Métadonnées</metadataView>
     </tab>
     <action>
-      <Cancel>Fermer</Cancel>
+      <Cancel>#{word.close}</Cancel>
       <Back>#{word.back}</Back>
     </action>
   </UIMetadataView>
@@ -2317,7 +2317,7 @@
   </EditUnLockForm>  
   <UITabPane>
     <action>
-      <Close>Fermer</Close>
+      <Close>#{word.close}</Close>
     </action>
     <title>
     		<UILockHolderContainer>Gestion des verrous</UILockHolderContainer>
@@ -2328,7 +2328,7 @@
   <UIViewFormTabPane>
     <action>
       <AddTabForm>Ajouter un Onglet</AddTabForm>
-      <AddTab>Enregistrer</AddTab>
+      <AddTab>#{word.save}</AddTab>
       <BackViewForm>Précédent</BackViewForm>
     </action>
   </UIViewFormTabPane>
@@ -2394,7 +2394,7 @@
 		
 <UITaxonomyTreeContainer>
 		<action>
-			<Cancel>Fermer</Cancel>
+<Cancel>#{word.close}</Cancel>
 		</action>
 	</UITaxonomyTreeContainer>
 	 <UITaxonomyTreeMainForm>			
@@ -2454,7 +2454,7 @@
   <UITagPermissionForm>
     <title>Ajouter une permission</title>
     <action>
-      <Save>Enregistrer</Save>
+      <Save>#{word.save}</Save>
       <Add>Ajouter</Add>
     </action>
     <label>

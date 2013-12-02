@@ -23,11 +23,11 @@
     <header>
       <categoryName>カテゴリ名</categoryName>
       <categoryPath>カテゴリパス</categoryPath>
-      <action>アクション</action>
+      <action>#{word.action}</action>
     </header>
     <action>
-      <SaveCategories>保存</SaveCategories>
-      <Cancel>キャンセル</Cancel>
+      <SaveCategories>#{word.save}</SaveCategories>
+      <Cancel>#{word.cancel}</Cancel>
     </action>
     <msg>
       <cannot-save>カテゴリは保存されていません。</cannot-save>

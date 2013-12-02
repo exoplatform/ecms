@@ -520,7 +520,7 @@
       <Rename>Đổi tên</Rename>
       <Cut>Cắt</Cut>
       <Copy>Sao chép</Copy>
-      <Save>Lưu</Save>
+      <Save>#{word.save}</Save>
       <RemoveNode>Xóa</RemoveNode>
       <Checkin>Checkin</Checkin>
       <Checkout>Checkout</Checkout>
@@ -570,7 +570,7 @@
       <Copy>Sao chép</Copy>
       <Rename>Đổi tên</Rename>
       <Delete>Xóa</Delete>
-      <Save>Lưu</Save>
+      <Save>#{word.save}</Save>
       <Cut>Cắt</Cut>
       <Paste>Dán</Paste>
       <CheckOut>Checkout</CheckOut>
@@ -609,7 +609,7 @@
       <path>Đường dẫn</path>
     </header>
     <action>
-      <Close>Đóng</Close>
+      <Close>#{word.close}</Close>
     </action>
   </UIReferencesList>
   <!--
@@ -705,7 +705,7 @@
     </label>
     <action>
       <Save>Lưu</Save>
-      <Cancel>Hủy bỏ</Cancel>
+      <Cancel>#{word.cancel}</Cancel>
       <Reset>Thiết lập lại</Reset>
     </action>
     <msg>
@@ -831,7 +831,7 @@
       <node-def-dnt>DNT</node-def-dnt>
     </label>
     <action>
-      <Close>Đóng</Close>
+      <Close>#{word.close}</Close>
     </action>
   </UINodeTypeInfo>
   <!--
@@ -846,7 +846,7 @@
       </label>
     </tab>
     <action>
-      <Close>Đóng</Close>
+      <Close>#{word.close}</Close>
     </action>
   </UICategoryManagerSearch>
   <UIContentNameSearch>
@@ -1075,7 +1075,7 @@
     </msg>
     <button>
       <label-Add>Thêm</label-Add>
-      <label-Cancel>Hủy bỏ</label-Cancel>
+      <label-Cancel>#{word.cancel}</label-Cancel>
     </button>
   </UIConstraintsForm>
   <UIConstraintForm>
@@ -1122,8 +1122,8 @@
   </SaveQueryPopup>
   <UINodeTypeSelectForm>
     <action>
-      <Cancel>Hủy bỏ</Cancel>
-      <Save>Lưu</Save>
+      <Cancel>#{word.cancel}</Cancel>
+      <Save>#{word.save}</Save>
     </action>
   </UINodeTypeSelectForm>
   <UICompareExactlyForm>
@@ -1136,7 +1136,7 @@
     </title>
     <button>
       <label-Select>Lựa chọn</label-Select>
-      <label-Cancel>Hủy bỏ</label-Cancel>
+      <label-Cancel>#{word.cancel}</label-Cancel>
     </button>
     <msg>
       <not-result-found>Không có kết quả nào.</not-result-found>
@@ -1210,7 +1210,7 @@
     <pLabel>Thuộc tính:</pLabel>
     <action>
       <Add>Thêm</Add>
-      <Cancel>Hủy bỏ</Cancel>
+      <Cancel>#{word.cancel}</Cancel>
     </action>
   </UISelectPropertyForm>
   <ExactlyFormPopup>
@@ -1334,7 +1334,7 @@
       <invalid-item-state>Bạn không thể khôi phục phiên bản này. Chắc chắn một số khoản mục đã bị xóa hoặc được di chuyển trong một phiên làm việc khác.</invalid-item-state>
     </msg>
     <action>
-      <close>Đóng</close>
+      <close>#{word.close}</close>
       <close-view>Đóng cửa xem</close-view>
     </action>
   </UIVersionInfo>
@@ -1353,7 +1353,7 @@
       <e_4>Thuộc tính đã được thêm.</e_4>
       <e_16>Thuộc tính đã được thay đổi.</e_16>
       <e_8>Thuộc tính đã bị xóa bỏ</e_8>
-      <e_32>Lưu trữ</e_32>
+      <e_32>#{word.save}</e_32>
       <e_64>Di chuyển</e_64>
       <e_128>Sao chép</e_128>
       <e_256>Thêm Mixin</e_256>
@@ -1392,7 +1392,7 @@
       <note>Tính năng tạo phiên bản chưa được kích hoạt cho nút này.</note>
       <question>Bạn có chắc chắn muốn kích hoạt nó không?</question>
       <button-active>Kích hoạt</button-active>
-      <button-cancel>Hủy bỏ</button-cancel>
+      <button-cancel>#{word.cancel}</button-cancel>
     </label>
     <msg>
       <access-denied>Bạn không được phân quyền để kích hoạt tính năng Tạo phiên bản trên nút này.</access-denied>
@@ -1410,7 +1410,7 @@
       <action>Hành động</action>
     </header>
     <action>
-      <Cancel>Đóng</Cancel>
+      <Cancel>#{word.close}</Cancel>
     </action>
     <grid>
       <msg>
@@ -1434,7 +1434,7 @@
     </label>
     <action>
       <activate>Kích hoạt</activate>
-      <cancel>Hủy bỏ</cancel>
+      <cancel>#{word.cancel}</cancel>
     </action>
   </UIActivateAuditing>
   <!--
@@ -1489,7 +1489,7 @@
     </label>
     <action>
       <Save>Lưu</Save>
-      <Cancel>Hủy bỏ</Cancel>
+      <Cancel>#{word.cancel}</Cancel>
     </action>
     <title>Thêm Nhãn</title>
     <msg>
@@ -1544,7 +1544,7 @@
   -->
   <UICategoryManager>
     <action>
-      <Close>Đóng</Close>
+      <Close>#{word.close}</Close>
     </action>
     <tab>
       <label>
@@ -1589,7 +1589,7 @@
   -->
   <UIRelationManager>
     <action>
-      <Close>Đóng</Close>
+      <Close>#{word.close}</Close>
     </action>
     <tab>
       <label>
@@ -1983,9 +1983,9 @@
       <stateName>Tên tình trạng</stateName>
     </label>
     <action>
-      <Save>Lưu</Save>
+      <Save>#{word.save}</Save>
       <UnsubcriberLifeCycle>Gỡ bỏ ghi danh</UnsubcriberLifeCycle>
-      <Cancel>Hủy bỏ</Cancel>
+      <Cancel>#{word.cancel}</Cancel>
     </action>
   </UIPublicationForm>
   <!--
@@ -2079,7 +2079,7 @@
       <visibility>Khả năng hiển thị:</visibility>
     </header>
     <action>
-      <Close>Đóng</Close>
+      <Close>#{word.close}</Close>
     </action>
   </UIPublicationLogList>
   <!--
@@ -2142,7 +2142,7 @@
   -->
   <UICategoriesSelector>
     <action>
-      <close>Đóng</close>
+      <close>#{word.close}</close>
     </action>
   </UICategoriesSelector>
   <!--
@@ -2173,8 +2173,8 @@
     <title>Chỉnh sửa tập tin Explorer</title>
     <action>
       <Edit>Sửa</Edit>
-      <Save>Lưu</Save>
-      <Cancel>Hủy bỏ</Cancel>
+      <Save>#{word.save}</Save>
+      <Cancel>#{word.cancel}</Cancel>
     </action>
     <label>
       <uploadFileSizeLimitMB>Giới hạn kích thước tệp tải lên (MB)</uploadFileSizeLimitMB>
@@ -2710,8 +2710,8 @@
       <name>Tên danh mục</name>
     </label>
     <action>
-      <Save>Lưu</Save>
-      <Cancel>Hủy</Cancel>
+      <Save>#{word.save}</Save>
+      <Cancel>#{word.cancel}</Cancel>
     </action>
   </UICategoryForm>
   <UIPopupWindow>
@@ -2865,8 +2865,8 @@
 
   <UISelectRestorePath>
     <action>
-      <Save>Lưu</Save>
-      <Cancel>Hủy bỏ</Cancel>
+      <Save>#{word.save}</Save>
+      <Cancel>#{word.cancel}</Cancel>
     </action>
     <label>
       <formInput>Đường dẫn cũ đã bị mất, mời bạn chọn đường dẫn mới!</formInput>
@@ -2908,7 +2908,7 @@
 
 <UIPublicationPanel>
     <button>
-      <Close>Đóng</Close>
+      <Close>#{word.close}</Close>
     </button>
     <revisions>
       <version>Phiên bản</version>
@@ -3114,7 +3114,7 @@
     <MaxFileSize>Kích thước tối đa của tập tin là</MaxFileSize>
     <InvalidCharacters>Ký tự không hợp lệ sẽ được thay đổi bằng '-'</InvalidCharacters>
     <DropFileMessage>Kéo thả tập tin vào đây để tải lên</DropFileMessage>
-    <Close>Đóng</Close>
+    <Close>#{word.close}</Close>
     <in>Trong</in>
     <MaxFileSizeAlert>Kích thước của tập tin vượt quá giới hạn</MaxFileSizeAlert>
     <Waiting>Đợi</Waiting>
@@ -3124,7 +3124,7 @@
     <Keep>Giữ cả hai</Keep>
     <Replace>Thay thế</Replace>
     <Canceled>Huỷ bỏ</Canceled>
-    <Cancel>Huỷ bỏ</Cancel>
+    <Cancel>#{word.cancel}</Cancel>
     <AbortAllConfirmation>Bạn có muốn hủy bỏ tất cả các tập tin đang được tải lên?</AbortAllConfirmation>
   </label>
   </UIMultiUpload>

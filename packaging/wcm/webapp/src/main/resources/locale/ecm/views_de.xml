@@ -156,10 +156,10 @@
       </label>
       <action>
         <add-edit>Hinzufügen/Bearbeiten</add-edit>
-        <cancel>Abbrechen</cancel>
+        <cancel>#{word.cancel}</cancel>
       </action>
       <tooltip>
-        <cancel>Abbrechen</cancel>
+        <cancel>#{word.cancel}</cancel>
         <add-edit>Eigenschaften hinzufügen/bearbeiten</add-edit>
       </tooltip>
     </view>

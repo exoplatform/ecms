@@ -27,8 +27,8 @@
         <priority>Valeurs valides de 0.0 à 1.0.</priority>
     </tip>  
     <action>
-      <Save>Enregistrer</Save>
-      <Cancel>Annuler</Cancel>
+      <Save>#{word.save}</Save>
+      <Cancel>#{word.cancel}</Cancel>
     </action>
     <msg>
       <repository-exception>Une erreur inattendue s'est produite lors de l'enregistrement des métadonnées de la page.</repository-exception>

@@ -39,11 +39,11 @@
   </UIPreferencesPopupWindows>
   <UISCVPreferences>
     <action>
-      <Save>حفظ</Save>
+      <Save>#{word.save}</Save>
       <Abort>الغاء</Abort>
-      <Cancel>الغاء</Cancel>
+      <Cancel>#{word.cancel}</Cancel>
       <Print>طباعة</Print>
-      <Close>غلق</Close>
+      <Close>#{word.close}</Close>
     </action>
     <title>التفاصيل الخاصة بخيارات المحتوى</title>
     <label>
