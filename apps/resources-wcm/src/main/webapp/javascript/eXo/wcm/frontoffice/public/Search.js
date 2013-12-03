@@ -1,7 +1,52 @@
 (function(gj, ecm_bootstrap) {
 	function SearchPortlet() {
 	}
-	
+
+  SearchPortlet.prototype.init = function() {
+    gj("#sortOptions > li > a").unbind("click");
+    gj("#sortOptions > li > a").on("click", function() {
+      var oldOption = gj("#sortField").attr("sort");
+      var newOption = gj(this).attr("sort");
+
+      if (newOption == oldOption) { // Click a same option again
+          gj(this).children("i").toggleClass("uiIconSortUp uiIconSortDown"); // Toggle the arrow
+      } else {
+          gj("#sortField").text(gj(this).text());
+          gj("#sortField").attr("sort", newOption);
+
+          gj("#sortOptions > li > a > i").remove(); // Remove the arrows from other options
+
+          // Select the default sort order: DESC for Relevancy, ASC for Date & Title
+          var sortByIcon;
+          switch (newOption) {
+              case "relevancy":
+                  sortByIcon = 'uiIconSortDown';
+                  break;
+              case "date":
+                  sortByIcon = 'uiIconSortUp';
+                  break;
+              case "title":
+                  sortByIcon = 'uiIconSortUp';
+                  break;
+          }
+
+          gj(this).append("<i class='" + sortByIcon + "'></i>"); //add the arrow to this option
+      }
+
+      gj("#sortField").attr("order", gj(this).children("i").hasClass("uiIconSortUp") ? "asc" : "desc");
+      
+      // Store order criteria to hidden fields to submmit form later
+      gj("#orderTypeHiddenInputField").val(gj("#sortField").attr("order"));
+      gj("#sortHiddenInputField").val(gj("#sortField").attr("sort"));
+
+      // Execute search
+      var searchButton = gj("#UISearchForm").find("a.SearchButton:first")[0];
+      gj(searchButton).click();
+      var href = searchButton.getAttribute('href');
+      eval(href);
+    });
+  };
+
 	SearchPortlet.prototype.showObject = function(obj) {
 		var element = gj(obj).nextAll("div:first")[0];
 		if (!element.style.display || element.style.display != 'block') {
@@ -123,3 +168,4 @@
 		SearchPortlet : eXo.ecm.SearchPortlet
 	};
 })(gj, ecm_bootstrap);
+
