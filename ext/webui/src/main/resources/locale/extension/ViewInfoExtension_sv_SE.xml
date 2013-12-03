@@ -27,7 +27,7 @@
       <folder>Mappen</folder>
 </value>
 <action>
-<Close>Stäng</Close>
+<Close>#{word.close}</Close>
 </action>
 </UIViewInfoContainer>
 </bundle>

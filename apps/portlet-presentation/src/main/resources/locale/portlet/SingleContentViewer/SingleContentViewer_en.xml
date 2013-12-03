@@ -39,11 +39,11 @@
   </UIPreferencesPopupWindows>
   <UISCVPreferences>
     <action>
-      <Save>Save</Save>
+      <Save>#{word.save}</Save>
       <Abort>Abort</Abort>
-      <Cancel>Cancel</Cancel>
+      <Cancel>#{word.cancel}</Cancel>
       <Print>Print</Print>
-      <Close>Close</Close>
+      <Close>#{word.close}</Close>
     </action>
     <title>Content Detail Preferences</title>
     <label>

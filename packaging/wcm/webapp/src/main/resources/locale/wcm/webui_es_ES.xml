@@ -62,7 +62,7 @@
   <UIPageSelectorPanel>
     <header>
       <path>Ruta</path>
-      <action>Acción</action>
+      <action>#{word.action}</action>
     </header>
     <msg>
       <child-not-found>Página no encontrada.</child-not-found>
@@ -136,7 +136,7 @@
 
   <UISelectedContentGrid>
     <label>
-      <name>Nombre</name>
+      <name>#{word.name}</name>
       <add>Añadir</add>
       <delete>Borrar</delete>
     </label>
@@ -148,14 +148,14 @@
 
   <UICLVContentSelectedGrid>
     <action>
-      <SaveCategories>Guardar</SaveCategories>
-      <Cancel>Cancelar</Cancel>
+      <SaveCategories>#{word.save}</SaveCategories>
+      <Cancel>#{word.cancel}</Cancel>
     </action>
   </UICLVContentSelectedGrid>
 
   <UIContentBrowsePathSelector>
     <header>
-      <name>Nombre</name>
+      <name>#{word.name}</name>
       <publicationstate>Estado de publicación</publicationstate>
       <action>Acción</action>
     </header>
@@ -166,7 +166,7 @@
 
   <UIContentBrowsePathSelectorFolder>
     <header>
-      <name>Nombre</name>
+      <name>#{word.name}</name>
       <publicationstate>Estado de publicación</publicationstate>
       <action>Acción</action>
     </header>
@@ -218,7 +218,7 @@
   <UIContentPropertySelector>
     <action>
       <Add>Añadir</Add>
-      <Cancel>Cancelar</Cancel>
+      <Cancel>#{word.cancel}</Cancel>
     </action>
     <label>
       <metadataType>Tipo de metadatos</metadataType>
@@ -234,8 +234,8 @@
 
   <UIContentNodeTypeSelector>
     <action>
-      <Save>Guardar</Save>
-      <Cancel>Cancelar</Cancel>
+      <Save>#{word.save}</Save>
+      <Cancel>#{word.cancel}</Cancel>
     </action>
   </UIContentNodeTypeSelector>
 
@@ -276,7 +276,7 @@
       <UIEditableCheckboxInput>Derecho de Edición</UIEditableCheckboxInput>
     </label>
     <action>
-      <Save>Guardar</Save>
+      <Save>#{word.save}</Save>
       <Clear>Borrar</Clear>
       <title>
         <Edit>Editar</Edit>

@@ -156,10 +156,10 @@
       </label>
       <action>
         <add-edit>Lägg till/redigera</add-edit>
-        <cancel>Avbryt</cancel>
+        <cancel>#{word.cancel}</cancel>
       </action>
       <tooltip>
-        <cancel>Avbryt</cancel>
+        <cancel>#{word.cancel}</cancel>
         <add-edit>Lägg till/redigera egenskaper</add-edit>
       </tooltip>
     </view>

@@ -7,7 +7,7 @@
       <cannot-save>Errore riscontrato durante il salvataggio del nodo.</cannot-save>
       <saved-successfully>{0}</saved-successfully>
       <not-support>Impossibile caricare il template di '{0}'.</not-support>
-      <not-add-folder>Only files can be added to this folder.</not-add-folder>
+      <not-add-folder>Solo file possono essere aggiunti a questa cartella.</not-add-folder>
       <access-denied>Accesso negato. Non ha permessi adeguati per aggiungere su '{0}'.</access-denied>
       <path-not-found>Il path '{0}' è stato eliminato o non è valido.</path-not-found>
       <node-locked>Il nodo '{0}' è bloccato. Prego di sbloccarlo prima di creare documenti.</node-locked>
@@ -16,8 +16,8 @@
       <new-jcr-template>Errore riscontrato durante creazione del nuovo template.</new-jcr-template>
     </msg>
     <action>
-      <Save>Salva</Save>
-      <Cancel>Annulla</Cancel>
+      <Save>#{word.save}</Save>
+      <Cancel>#{word.cancel}</Cancel>
     </action>
   </UIFCCForm>
 
@@ -30,8 +30,8 @@
       <UIFCCTemplateFormSelectBox>Seleziona Template</UIFCCTemplateFormSelectBox>
       <UIFCCSaveFormStringInput>Pulsante Salva Personalizzato</UIFCCSaveFormStringInput>
       <UIFCCMessageFormTextareaInput>Messaggio Salvato Personalizzato</UIFCCMessageFormTextareaInput>
-      <UIFCCRedirectFormCheckboxInput>Redirect:</UIFCCRedirectFormCheckboxInput>
-      <UIFCCRedirectPathFormStringInput>Redirect Path:</UIFCCRedirectPathFormStringInput>
+      <UIFCCRedirectFormCheckboxInput>Reindirizzare:</UIFCCRedirectFormCheckboxInput>
+      <UIFCCRedirectPathFormStringInput>Path di Reindirizzamento:</UIFCCRedirectPathFormStringInput>
       <UIFCCActionField>Azioni</UIFCCActionField>
     </label>
     <msg>
@@ -46,7 +46,7 @@
       <do-select>Errore riscontrato durante la selezione di location.</do-select>
       </msg>
     <action>
-      <Save>Salva</Save>
+      <Save>#{word.save}</Save>
     </action>
   </UIFCCConfig>
 
@@ -86,7 +86,7 @@
     <label>
       <workspaceName>Workspace</workspaceName>
       <rootNodePath>Percorso Root</rootNodePath>
-      <rootNodeInfo>Root node</rootNodeInfo>
+      <rootNodeInfo>Nodo Root</rootNodeInfo>
     </label>
   </UIWorkspaceList>
 
@@ -115,8 +115,8 @@
   <UIFCCActionForm>
     <title>Aggiungi/Modifica Azione</title>
     <action>
-      <Save>Salva</Save>
-      <Close>Chiudi</Close>
+      <Save>#{word.save}</Save>
+      <Close>#{word.close}</Close>
     </action>
     <msg>
       <repository-exception>Impossibile salvare quest'azione. Il nome fornito non deve avere un indice o il suo elemento finale dentro.</repository-exception>
@@ -173,7 +173,7 @@
 
   <UICategoriesSelector>
     <action>
-      <close>Chiuso</close>
+      <close>#{word.close}</close>
     </action>
   </UICategoriesSelector>
 

@@ -156,10 +156,10 @@
       </label>
       <action>
         <add-edit>Thêm/Chỉnh sửa</add-edit>
-        <cancel>Hủy bỏ</cancel>
+        <cancel>#{word.cancel}</cancel>
       </action>
       <tooltip>
-        <cancel>Hủy bỏ</cancel>
+        <cancel>#{word.cancel}</cancel>
         <add-edit>Thêm/Chỉnh sửa Thuộc tính</add-edit>
       </tooltip>
     </view>

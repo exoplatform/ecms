@@ -23,11 +23,11 @@
     <header>
       <categoryName>Kategori adı</categoryName>
       <categoryPath>Kategori yolu</categoryPath>
-      <action>Eylem</action>
+      <action>#{word.action}</action>
     </header>
     <action>
-      <SaveCategories>Kaydet</SaveCategories>
-      <Cancel>İptal</Cancel>
+      <SaveCategories>#{word.save}</SaveCategories>
+      <Cancel>#{word.cancel}</Cancel>
     </action>
     <msg>
       <cannot-save>Kategoriler kaydedilmedi.</cannot-save>

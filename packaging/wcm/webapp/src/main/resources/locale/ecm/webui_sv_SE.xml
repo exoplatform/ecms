@@ -23,11 +23,11 @@
     <header>
       <categoryName>Kategorinamn</categoryName>
       <categoryPath>Kategori sökväg</categoryPath>
-      <action>Åtgärd</action>
+      <action>#{word.action}</action>
     </header>
     <action>
-      <SaveCategories>Spara</SaveCategories>
-      <Cancel>Avbryt</Cancel>
+      <SaveCategories>#{word.save}</SaveCategories>
+      <Cancel>#{word.cancel}</Cancel>
     </action>
     <msg>
       <cannot-save>Kategorier sparades inte.</cannot-save>

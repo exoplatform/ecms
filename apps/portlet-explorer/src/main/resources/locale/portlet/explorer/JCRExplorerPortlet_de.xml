@@ -520,7 +520,7 @@
       <Rename>Umbenennen</Rename>
       <Cut>Ausschneiden</Cut>
       <Copy>Kopieren</Copy>
-      <Save>Speichern</Save>
+      <Save>#{word.save}</Save>
       <RemoveNode>Löschen</RemoveNode>
       <Checkin>Check-in</Checkin>
       <Checkout>Check-out</Checkout>
@@ -570,7 +570,7 @@
       <Copy>Kopieren</Copy>
       <Rename>Umbenennen</Rename>
       <Delete>Löschen</Delete>
-      <Save>Speichern</Save>
+      <Save>#{word.save}</Save>
       <Cut>Ausschneiden</Cut>
       <Paste>Einfügen</Paste>
       <CheckOut>Check-out</CheckOut>
@@ -609,7 +609,7 @@
       <path>Pfad</path>
     </header>
     <action>
-      <Close>Schließen</Close>
+      <Close>#{word.close}</Close>
     </action>
   </UIReferencesList>
   <!--
@@ -705,7 +705,7 @@
     </label>
     <action>
       <Save>#{word.save}</Save>
-      <Cancel>Abbrechen</Cancel>
+      <Cancel>#{word.cancel}</Cancel>
       <Reset>Zurücksetzen</Reset>
     </action>
     <msg>
@@ -831,7 +831,7 @@
       <node-def-dnt>DNT</node-def-dnt>
     </label>
     <action>
-      <Close>Schließen</Close>
+      <Close>#{word.close}</Close>
     </action>
   </UINodeTypeInfo>
   <!--
@@ -846,7 +846,7 @@
       </label>
     </tab>
     <action>
-      <Close>Schließen</Close>
+      <Close>#{word.close}</Close>
     </action>
   </UICategoryManagerSearch>
   <UIContentNameSearch>
@@ -1075,7 +1075,7 @@
     </msg>
     <button>
       <label-Add>Hinzufügen</label-Add>
-      <label-Cancel>Abbrechen</label-Cancel>
+      <label-Cancel>#{word.cancel}</label-Cancel>
     </button>
   </UIConstraintsForm>
   <UIConstraintForm>
@@ -1122,8 +1122,8 @@
   </SaveQueryPopup>
   <UINodeTypeSelectForm>
     <action>
-      <Cancel>Abbrechen</Cancel>
-      <Save>Speichern</Save>
+      <Cancel>#{word.cancel}</Cancel>
+      <Save>#{word.save}</Save>
     </action>
   </UINodeTypeSelectForm>
   <UICompareExactlyForm>
@@ -1136,7 +1136,7 @@
     </title>
     <button>
       <label-Select>Auswählen</label-Select>
-      <label-Cancel>Abbrechen</label-Cancel>
+      <label-Cancel>#{word.cancel}</label-Cancel>
     </button>
     <msg>
       <not-result-found>Keine Ergebnisse gefunden.</not-result-found>
@@ -1210,7 +1210,7 @@
     <pLabel>Eigenschaften:</pLabel>
     <action>
       <Add>Hinzufügen</Add>
-      <Cancel>Abbrechen</Cancel>
+      <Cancel>#{word.cancel}</Cancel>
     </action>
   </UISelectPropertyForm>
   <ExactlyFormPopup>
@@ -1334,7 +1334,7 @@
       <invalid-item-state>Sie können diese Version nicht wiederherstellen. Vermutlich wurden während einer anderen Session ein oder mehrere Elemente gelöscht oder verschoben.</invalid-item-state>
     </msg>
     <action>
-      <close>Schließen</close>
+      <close>#{word.close}</close>
       <close-view>Ansicht schließen</close-view>
     </action>
   </UIVersionInfo>
@@ -1353,7 +1353,7 @@
       <e_4>Eigenschaft hinzugefügt</e_4>
       <e_16>Eigenschaft geändert</e_16>
       <e_8>Eigenschaft entfernt</e_8>
-      <e_32>Speichern</e_32>
+      <e_32>#{word.save}</e_32>
       <e_64>Verschieben</e_64>
       <e_128>Kopieren</e_128>
       <e_256>Mixin hinzufügen</e_256>
@@ -1392,7 +1392,7 @@
       <note>Versionierung wurde für diesen Knoten nicht aktiviert.</note>
       <question>Möchten Sie es wirklich aktivieren ?</question>
       <button-active>Aktivieren</button-active>
-      <button-cancel>Abbrechen</button-cancel>
+      <button-cancel>#{word.cancel}</button-cancel>
     </label>
     <msg>
       <access-denied>Ihnen fehlt die Berechtigung, die Versionierung auf diesem Knoten zu aktivieren</access-denied>
@@ -1410,7 +1410,7 @@
       <action>Aktion</action>
     </header>
     <action>
-      <Cancel>Schließen</Cancel>
+      <Cancel>#{word.close}</Cancel>
     </action>
     <grid>
       <msg>
@@ -1434,7 +1434,7 @@
     </label>
     <action>
       <activate>Aktivieren</activate>
-      <cancel>Abbrechen</cancel>
+      <cancel>#{word.cancel}</cancel>
     </action>
   </UIActivateAuditing>
   <!--
@@ -1489,7 +1489,7 @@
     </label>
     <action>
       <Save>#{word.save}</Save>
-      <Cancel>Abbrechen</Cancel>
+      <Cancel>#{word.cancel}</Cancel>
     </action>
     <title>Label hinzufügen</title>
     <msg>
@@ -1544,7 +1544,7 @@
   -->
   <UICategoryManager>
     <action>
-      <Close>Schließen</Close>
+      <Close>#{word.close}</Close>
     </action>
     <tab>
       <label>
@@ -1589,7 +1589,7 @@
   -->
   <UIRelationManager>
     <action>
-      <Close>Schließen</Close>
+      <Close>#{word.close}</Close>
     </action>
     <tab>
       <label>
@@ -1665,7 +1665,7 @@
   <UIDocumentForm>
     <title>Neues Dokument hinzufügen</title>
     <action>
-      <Save>Speichern</Save>
+      <Save>#{word.save}</Save>
       <SaveAndClose>Speichern &amp; Schließen</SaveAndClose>
       <ChangeType>Inhaltstyp ändern</ChangeType>
       <Fullscreen>Vollbild</Fullscreen>
@@ -1983,9 +1983,9 @@
       <stateName>Zustandsname</stateName>
     </label>
     <action>
-      <Save>Speichern</Save>
+      <Save>#{word.save}</Save>
       <UnsubcriberLifeCycle>Abmelder</UnsubcriberLifeCycle>
-      <Cancel>Abbrechen</Cancel>
+      <Cancel>#{word.cancel}</Cancel>
     </action>
   </UIPublicationForm>
   <!--
@@ -2079,7 +2079,7 @@
       <visibility>Sichtbarkeit</visibility>
     </header>
     <action>
-      <Close>Schließen</Close>
+      <Close>#{word.close}</Close>
     </action>
   </UIPublicationLogList>
   <!--
@@ -2142,7 +2142,7 @@
   -->
   <UICategoriesSelector>
     <action>
-      <close>Schließen</close>
+      <close>#{word.close}</close>
     </action>
   </UICategoriesSelector>
   <!--
@@ -2173,8 +2173,8 @@
     <title>Datei-Explorer bearbeiten</title>
     <action>
       <Edit>Bearbeiten</Edit>
-      <Save>Speichern</Save>
-      <Cancel>Abbrechen</Cancel>
+      <Save>#{word.save}</Save>
+      <Cancel>#{word.cancel}</Cancel>
     </action>
     <label>
       <uploadFileSizeLimitMB>Die Größenbeschränkung der hochgeladenen Datei (MB)</uploadFileSizeLimitMB>
@@ -2380,7 +2380,7 @@
 
   <UISimpleCategoryManager>
     <action>
-      <Close>Schließen</Close>
+      <Close>#{word.close}</Close>
     </action>
   </UISimpleCategoryManager>
   <UIPopupWindow>
@@ -2710,8 +2710,8 @@
       <name>Kategoriename</name>
     </label>
     <action>
-      <Save>Speichern</Save>
-      <Cancel>Abbrechen</Cancel>
+      <Save>#{word.save}</Save>
+      <Cancel>#{word.cancel}</Cancel>
     </action>
   </UICategoryForm>
   <UIPopupWindow>
@@ -2865,8 +2865,8 @@
 
   <UISelectRestorePath>
     <action>
-      <Save>Speichern</Save>
-      <Cancel>Abbrechen</Cancel>
+      <Save>#{word.save}</Save>
+      <Cancel>#{word.cancel}</Cancel>
     </action>
     <label>
       <formInput>Der alte Pfad ist verlorengegangen. Bitte wählen Sie einen neuen.</formInput>
@@ -2908,7 +2908,7 @@
 
 <UIPublicationPanel>
     <button>
-      <Close>Schließen</Close>
+      <Close>#{word.close}</Close>
     </button>
     <revisions>
       <version>Überarbeitungen</version>
@@ -3114,7 +3114,7 @@
     <MaxFileSize>Maximale Dateigröße beträgt</MaxFileSize>
     <InvalidCharacters>Ungültige Zeichen werden in "-" geändert werden</InvalidCharacters>
     <DropFileMessage>Legen Sie Ihre Dateien hier in den aktuellen Ordner</DropFileMessage>
-    <Close>Schließen</Close>
+    <Close>#{word.close}</Close>
     <in>in</in>
     <MaxFileSizeAlert>Die Dateigröße überschreitet die maximale Größe von</MaxFileSizeAlert>
     <Waiting>Warte</Waiting>
@@ -3124,7 +3124,7 @@
     <Keep>Beide behalten</Keep>
     <Replace>Ersetzen</Replace>
     <Canceled>Abgebrochen</Canceled>
-    <Cancel>Abbrechen</Cancel>
+    <Cancel>#{word.cancel}</Cancel>
     <AbortAllConfirmation>Möchten Sie alle Dateien in Bearbeitung abbrechen?</AbortAllConfirmation>
   </label>
   </UIMultiUpload>

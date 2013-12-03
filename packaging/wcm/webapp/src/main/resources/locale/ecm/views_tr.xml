@@ -156,10 +156,10 @@
       </label>
       <action>
         <add-edit>Ekle/Düzenle</add-edit>
-        <cancel>İptal</cancel>
+        <cancel>#{word.cancel}</cancel>
       </action>
       <tooltip>
-        <cancel>İptal</cancel>
+        <cancel>#{word.cancel}</cancel>
         <add-edit>Özellikleri Ekle/Düzenle</add-edit>
       </tooltip>
     </view>

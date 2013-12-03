@@ -62,7 +62,7 @@
   <UIPageSelectorPanel>
     <header>
       <path>Đường dẫn</path>
-      <action>Tác vụ</action>
+      <action>#{word.action}</action>
     </header>
     <msg>
       <child-not-found>Không có Trang nào được tìm thấy</child-not-found>
@@ -136,7 +136,7 @@
 
   <UISelectedContentGrid>
     <label>
-      <name>Tên</name>
+      <name>#{word.name}</name>
       <add>Thêm</add>
       <delete>Xóa</delete>
     </label>
@@ -148,14 +148,14 @@
 
   <UICLVContentSelectedGrid>
     <action>
-      <SaveCategories>Lưu</SaveCategories>
-      <Cancel>Hủy</Cancel>
+      <SaveCategories>#{word.save}</SaveCategories>
+      <Cancel>#{word.cancel}</Cancel>
     </action>
   </UICLVContentSelectedGrid>
 
   <UIContentBrowsePathSelector>
     <header>
-      <name>Tên</name>
+      <name>#{word.name}</name>
       <publicationstate>Trạng thái Xuất bản</publicationstate>
       <action>Tác vụ</action>
     </header>
@@ -166,7 +166,7 @@
 
   <UIContentBrowsePathSelectorFolder>
     <header>
-      <name>Tên</name>
+      <name>#{word.name}</name>
       <publicationstate>Trạng thái Xuất bản</publicationstate>
       <action>Tác vụ</action>
     </header>
@@ -218,7 +218,7 @@
   <UIContentPropertySelector>
     <action>
       <Add>Thêm</Add>
-      <Cancel>Hủy</Cancel>
+      <Cancel>#{word.cancel}</Cancel>
     </action>
     <label>
       <metadataType>Kiểu Siêu dữ liệu</metadataType>
@@ -234,8 +234,8 @@
 
   <UIContentNodeTypeSelector>
     <action>
-      <Save>Lưu</Save>
-      <Cancel>Hủy</Cancel>
+      <Save>#{word.save}</Save>
+      <Cancel>#{word.cancel}</Cancel>
     </action>
   </UIContentNodeTypeSelector>
 
@@ -276,7 +276,7 @@
       <UIEditableCheckboxInput>Quỳnh Chỉnh sửa</UIEditableCheckboxInput>
     </label>
     <action>
-      <Save>Lưu</Save>
+      <Save>#{word.save}</Save>
       <Clear>Làm lại</Clear>
       <title>
         <Edit>Sửa</Edit>

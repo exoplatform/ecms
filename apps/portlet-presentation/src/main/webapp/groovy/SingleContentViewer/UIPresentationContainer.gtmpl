@@ -122,14 +122,14 @@
 				%>
 					  <% if (isShowTitle) {
   					  if (uicomponent.isViewMode() ){
-                %><div class="Title"><%= uicomponent.getTitle(node) %></div><%
+                %><h4 class="title"><%= uicomponent.getTitle(node) %></h4><%
   					  }else {
   					   def orgNode =uicomponent.getOriginalNode();    					  
-  					   %><div class="Title WCMInlineEditable" contenteditable="true" propertyName="<%=propertyName%>" repo="<%=repo%>" workspace="<%=workspace%>" uuid="<%=uuid%>" siteName="<%=siteName%>" publishedmsg="<%=publishedMsg%>" draftmsg="<%=draftMsg%>" fastpublishlink="<%=uicomponent.event('FastPublish')%>" language="<%=language%>" ><%= uicomponent.getTitle(node) %></div><%             
+  					   %><h4 class="title WCMInlineEditable" contenteditable="true" propertyName="<%=propertyName%>" repo="<%=repo%>" workspace="<%=workspace%>" uuid="<%=uuid%>" siteName="<%=siteName%>" publishedmsg="<%=publishedMsg%>" draftmsg="<%=draftMsg%>" fastpublishlink="<%=uicomponent.event('FastPublish')%>" language="<%=language%>" ><%= uicomponent.getTitle(node) %></h4><%             
               }
             } %>
 						<% if (isShowDate) { %>
-						<div class="DateAndMail"><%= uicomponent.getCreatedDate(node) %></div>
+						<div class="dateAndMail"><%= uicomponent.getCreatedDate(node) %></div>
 						<% } %>
 				<%
 			}
@@ -138,15 +138,15 @@
       
 			if (!Utils.isPortalEditMode() && isShowOptionBar && !uicomponent.isPrinting()) { 
 				%>
-				<div class="UIOptionBar">
+				<div class="uiOptionBar clearfix">
         <% if (urlSearch != null) { %>  
           <a href="$urlSearch">
-             <div class="BackButton" title="<%= _ctx.appRes("UISCVPreferences.label.Back") %>" ><span></span></div>
+             <a class="actionIcon" title="<%= _ctx.appRes("UISCVPreferences.label.Back") %>" ><i class="uiIconEcmsReturn uiIconLightGray"></i></a>
           </a>
         <% } else {%>
-             <div class="BackButton" title="<%= _ctx.appRes("UISCVPreferences.label.Back") %>" onclick="history.go(-1)" ><span></span></div>
+             <a class="actionIcon" title="<%= _ctx.appRes("UISCVPreferences.label.Back") %>" onclick="history.go(-1)" ><i class="uiIconEcmsReturn uiIconLightGray"></i></a>
         <% } %>
-            <a class="ActionIcon PrintIcon" href="javascript: void(0);" onclick="window.open('<%= uicomponent.getPrintUrl(node) %>')" title="<%= _ctx.appRes("UIPresentationContainer.label.print");%>"><%= _ctx.appRes("UIPresentationContainer.label.print") %></a>
+            <a class="pull-right" href="javascript: void(0);" onclick="window.open('<%= uicomponent.getPrintUrl(node) %>')" title="<%= _ctx.appRes("UIPresentationContainer.label.print");%>"><i class="uiIconPrint uiIconLightGray"></i>  <%= _ctx.appRes("UIPresentationContainer.label.print") %></a>
         </div>
 				<% 
 			} 

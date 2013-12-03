@@ -62,7 +62,7 @@
   <UIPageSelectorPanel>
     <header>
       <path>Chemin</path>
-      <action>Action</action>
+      <action>#{word.action}</action>
     </header>
     <msg>
       <child-not-found>Aucune page trouvée</child-not-found>
@@ -136,7 +136,7 @@
 
   <UISelectedContentGrid>
     <label>
-      <name>Nom</name>
+      <name>#{word.name}</name>
       <add>Ajouter</add>
       <delete>Supprimer</delete>
     </label>
@@ -148,14 +148,14 @@
 
   <UICLVContentSelectedGrid>
     <action>
-      <SaveCategories>Enregistrer</SaveCategories>
-      <Cancel>Annuler</Cancel>
+      <SaveCategories>#{word.save}</SaveCategories>
+      <Cancel>#{word.cancel}</Cancel>
     </action>
   </UICLVContentSelectedGrid>
 
   <UIContentBrowsePathSelector>
     <header>
-      <name>Nom</name>
+      <name>#{word.name}</name>
       <publicationstate>Etat de Publication</publicationstate>
       <action>Action</action>
     </header>
@@ -166,7 +166,7 @@
 
   <UIContentBrowsePathSelectorFolder>
     <header>
-      <name>Nom</name>
+      <name>#{word.name}</name>
       <publicationstate>État de Publication</publicationstate>
       <action>Action</action>
     </header>
@@ -218,7 +218,7 @@
   <UIContentPropertySelector>
     <action>
       <Add>Ajouter</Add>
-      <Cancel>Annuler</Cancel>
+      <Cancel>#{word.cancel}</Cancel>
     </action>
     <label>
       <metadataType>Métadonnées de type</metadataType>
@@ -234,8 +234,8 @@
 
   <UIContentNodeTypeSelector>
     <action>
-      <Save>Enregistrer</Save>
-      <Cancel>Annuler</Cancel>
+      <Save>#{word.save}</Save>
+      <Cancel>#{word.cancel}</Cancel>
     </action>
   </UIContentNodeTypeSelector>
 
@@ -276,7 +276,7 @@
       <UIEditableCheckboxInput>Droit de modifier</UIEditableCheckboxInput>
     </label>
     <action>
-      <Save>Enregistrer</Save>
+      <Save>#{word.save}</Save>
       <Clear>Nettoyer</Clear>
       <title>
         <Edit>Modifier</Edit>

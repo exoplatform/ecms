@@ -39,11 +39,11 @@
       </label>
       <tooltip>
         <add-edit>Thêm/sửa Siêu dữ liệu</add-edit>
-        <cancel>Hủy bỏ</cancel>
+        <cancel>#{word.cancel}</cancel>
       </tooltip>
       <action>
         <add-edit>Thêm/Sửa</add-edit>
-        <cancel>Hủy bỏ</cancel>
+        <cancel>#{word.cancel}</cancel>
       </action>
     </view>
   </SiteMetadata>

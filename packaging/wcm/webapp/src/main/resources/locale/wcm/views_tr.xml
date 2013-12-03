@@ -39,11 +39,11 @@
       </label>
       <tooltip>
         <add-edit>Meta veriler Ekle/Düzenle</add-edit>
-        <cancel>İptal</cancel>
+        <cancel>#{word.cancel}</cancel>
       </tooltip>
       <action>
         <add-edit>Ekle/Düzenle</add-edit>
-        <cancel>İptal</cancel>
+        <cancel>#{word.cancel}</cancel>
       </action>
     </view>
   </SiteMetadata>

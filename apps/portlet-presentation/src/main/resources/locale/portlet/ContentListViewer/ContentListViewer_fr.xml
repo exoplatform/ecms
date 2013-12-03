@@ -81,8 +81,8 @@
       <ContentsVisibilityHelp>"Par Authentification" filtrera le contenu en se basant sur l'authentification. Si vous n'êtes pas connecté, vous verrez uniquement le contenu public. Si vous êtes connecté, vous voyez tout le contenu visible par les utilisateurs de l'intranet (mais partagé par tous). "Par Role" signifie que vous verrez le contenu selon vos droits. Dans la plupart des cas, cette option ne devrait pas être utilisée car elle réduit les performances globales.</ContentsVisibilityHelp>
     </help>
     <action>
-      <Save>Enregistrer</Save>
-      <Cancel>Annuler</Cancel>
+      <Save>#{word.save}</Save>
+      <Cancel>#{word.cancel}</Cancel>
       <delete>Supprimer</delete>
     </action>
     <msg>

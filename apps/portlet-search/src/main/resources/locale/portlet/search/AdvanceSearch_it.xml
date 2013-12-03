@@ -50,8 +50,8 @@
       </option>
     </label>
     <action>
-      <Save>Salva</Save>
-      <Cancel>Annulla</Cancel>
+      <Save>#{word.save}</Save>
+      <Cancel>#{word.cancel}</Cancel>
     </action>
   </UISearchPageLayoutManager>
   <searchResultBasePathInputSetAction>

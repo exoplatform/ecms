@@ -2,92 +2,92 @@
 <bundle>
   <UIDefaultSearchForm>
     <label>
-      <keyword>Keyword</keyword>
-      <portal>Portal</portal>
-      <Page>Page</Page>
-      <Document>Document</Document>
+      <keyword>关键字</keyword>
+      <portal>门户</portal>
+      <Page>页面</Page>
+      <Document>文档</Document>
     </label>
     <action>
-      <Search>Search</Search>
+      <Search>搜索</Search>
     </action>
   </UIDefaultSearchForm>
 
   <UIDefaultSearchResult>
     <label>
-      <Page>Page</Page>
-      <Document>Document</Document>
-      <DocumentAndPage>Document and Page</DocumentAndPage>
-      <documentandpage>Document and Page</documentandpage>
-      <resutlsCaption>Results</resutlsCaption>
-      <ofAboutCaption>of about</ofAboutCaption>
-      <forCaption>for</forCaption>
-      <timeUnitCaption>seconds</timeUnitCaption>
-      <similar>Pages where the same content appears</similar>
-      <editor>Editor</editor>
+      <Page>页面</Page>
+      <Document>文档</Document>
+      <DocumentAndPage>文档和页面</DocumentAndPage>
+      <documentandpage>文档和页面</documentandpage>
+      <resutlsCaption>结果</resutlsCaption>
+      <ofAboutCaption>约</ofAboutCaption>
+      <forCaption>为</forCaption>
+      <timeUnitCaption>秒</timeUnitCaption>
+      <similar>网页相同的内容的显示位置</similar>
+      <editor>编辑器</editor>
     </label>
     <action>
-      <edit>Edit</edit>
+      <edit>编辑</edit>
     </action>
     <msg>
-      <your-search>Your search</your-search>
-      <did-not-match>did not match any</did-not-match>
-      <new-suggestion>suggestion</new-suggestion>
+      <your-search>您的搜索</your-search>
+      <did-not-match>与任何不匹配</did-not-match>
+      <new-suggestion>建议</new-suggestion>
     </msg>
   </UIDefaultSearchResult>
   <UISearchPageLayoutManager>
     <label>
-      <itemsPerPageSelector>Items per Page</itemsPerPageSelector>
-      <searchFormSelector>Search Form Template</searchFormSelector>
-      <searchResultSelector>Search Result Template</searchResultSelector>
-      <searchPaginatorSelector>Search Paginator Template</searchPaginatorSelector>
-      <searchPageLayoutSelector>Search Page Layout Template</searchPageLayoutSelector>
-      <searchResultBasePathInputSetAction>Base Path</searchResultBasePathInputSetAction>
-      <pageMode>Page Mode</pageMode>
+      <itemsPerPageSelector>每页显示</itemsPerPageSelector>
+      <searchFormSelector>搜索表单模板</searchFormSelector>
+      <searchResultSelector>搜索结果模板</searchResultSelector>
+      <searchPaginatorSelector>搜索分页程序模板</searchPaginatorSelector>
+      <searchPageLayoutSelector>搜索页面布局模板</searchPageLayoutSelector>
+      <searchResultBasePathInputSetAction>基路径</searchResultBasePathInputSetAction>
+      <pageMode>页面模式</pageMode>
       <option>
-        <none>None</none>
-        <more>More</more>
-        <pagination>Pagination</pagination>
+        <none>无</none>
+        <more>更多</more>
+        <pagination>分页</pagination>
       </option>
     </label>
     <action>
-      <Save>Save</Save>
-      <Cancel>Cancel</Cancel>
+      <Save>#{word.save}</Save>
+      <Cancel>#{word.cancel}</Cancel>
     </action>
   </UISearchPageLayoutManager>
   <searchResultBasePathInputSetAction>
     <title>
-      <SelectBasePath>Select Base Path</SelectBasePath>
+      <SelectBasePath>选择基路径</SelectBasePath>
     </title>
   </searchResultBasePathInputSetAction>  
   <UISearchForm>  
    <message>
-     <keyword-not-support>The keyword is invalid. Some characters are not recognized.</keyword-not-support>
-     <not-checked>Please select a search type.</not-checked>
-     <keyword-not-empty>Please enter a keyword.</keyword-not-empty>
+     <keyword-not-support>关键字是无效的。某些字符不能识别。</keyword-not-support>
+     <not-checked>请选择搜索类型。</not-checked>
+     <keyword-not-empty>请输入一个关键字。</keyword-not-empty>
    </message>
   </UISearchForm>
   <UIPaginatorDefault>
     <label>
-      <next>Next</next>
-      <previous>Previous</previous>
-      <more>More</more>
+      <next>下一个</next>
+      <previous>上一个</previous>
+      <more>更多</more>
     </label>
   </UIPaginatorDefault>
   <UISearchPageLayoutDefault>
     <label>
-      <quickEditTitle>Quick Edit</quickEditTitle>
+      <quickEditTitle>快速编辑</quickEditTitle>
     </label>
   </UISearchPageLayoutDefault>
   <searchOption>
     <label>
-      <pageCheckBox>in Pages</pageCheckBox>
-      <documentCheckBox>in Content</documentCheckBox>
+      <pageCheckBox>在页中</pageCheckBox>
+      <documentCheckBox>在内容中</documentCheckBox>
     </label>
   </searchOption>
   <ViewMode>
     <label>
       <option>
-        <all>search all sites</all>
+        <all>搜索所有站点</all>
       </option>  
     </label>  
   </ViewMode>

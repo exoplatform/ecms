@@ -28,7 +28,7 @@
         <jsFile>default.js</jsFile>
         <Advanced>Avanzado</Advanced>
         <Summary>Sumario</Summary>
-        <name>Nombre</name>
+        <name>#{word.name}</name>
         <title>Título</title>
         <ContentCSS>Datos CSS</ContentCSS>
         <hintCSS>En este panel, puede especificar la hoja de estilo principal para su contenido web. Este estilo se superpondrá a la hoja de estilo a nivel del sitio y del nivel compartido.</hintCSS>
@@ -51,7 +51,7 @@
   <CSSFile>
     <dialog>
       <label>
-        <name>Nombre</name>
+        <name>#{word.name}</name>
         <active>Activo</active>
         <priority>Prioridad</priority>
         <content>Datos CSS</content>
@@ -62,7 +62,7 @@
   <JSFile>
     <dialog>
       <label>
-        <name>Nombre</name>
+        <name>#{word.name}</name>
         <active>Activo</active>
         <priority>Prioridad</priority>
         <content>Datos JS</content>
@@ -73,7 +73,7 @@
   <WebLink>
     <dialog>
       <label>
-        <name>Nombre</name>
+        <name>#{word.name}</name>
         <url>URL</url>
         <description>Descripción</description>
       </label>

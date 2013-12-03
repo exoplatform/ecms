@@ -27,7 +27,7 @@
       <folder>Klasör</folder>
 </value>
 <action>
-<Close>Kapat</Close>
+<Close>#{word.close}</Close>
 </action>
 </UIViewInfoContainer>
 </bundle>

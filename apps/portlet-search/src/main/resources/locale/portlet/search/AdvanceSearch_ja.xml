@@ -50,8 +50,8 @@
       </option>
     </label>
     <action>
-      <Save>保存</Save>
-      <Cancel>キャンセル</Cancel>
+      <Save>#{word.save}</Save>
+      <Cancel>#{word.cancel}</Cancel>
     </action>
   </UISearchPageLayoutManager>
   <searchResultBasePathInputSetAction>

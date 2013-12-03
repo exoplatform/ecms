@@ -39,11 +39,11 @@
       </label>
       <tooltip>
         <add-edit>Add/Edit Metadata</add-edit>
-        <cancel>Cancel</cancel>
+        <cancel>#{word.cancel}</cancel>
       </tooltip>
       <action>
         <add-edit>Add/Edit</add-edit>
-        <cancel>Cancel</cancel>
+        <cancel>#{word.cancel}</cancel>
       </action>
     </view>
   </SiteMetadata>

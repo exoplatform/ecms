@@ -48,7 +48,7 @@
       <list-view>Elenco</list-view>
       <authoring-view>Authoring</authoring-view>
       <wcm-category-view>Categorie</wcm-category-view>
-      <file-view>File Management View</file-view>
+      <file-view>Vista di Gestione di file</file-view>
     </label>
   </Views>
 
@@ -62,7 +62,7 @@
   <UIPageSelectorPanel>
     <header>
       <path>Percorso</path>
-      <action>Azione</action>
+      <action>#{word.action}</action>
     </header>
     <msg>
       <child-not-found>Nessuna Pagina Trovata.</child-not-found>
@@ -80,8 +80,8 @@
 
   <UITabPane>
     <title>
-      <UIContentBrowsePanelOne>Content Browser</UIContentBrowsePanelOne>
-      <UIContentBrowsePanelMulti>Content Browser</UIContentBrowsePanelMulti>
+      <UIContentBrowsePanelOne>Browser di Contenuto</UIContentBrowsePanelOne>
+      <UIContentBrowsePanelMulti>Browser di Contenuto</UIContentBrowsePanelMulti>
       <UIContentBrowsePanelFolder>Sfoglia Cartella</UIContentBrowsePanelFolder>
       <UIContentSearchForm>Form Cerca Contenuti</UIContentSearchForm>
       <UIContentSearchResult>Risultati Ricerca</UIContentSearchResult>
@@ -136,7 +136,7 @@
 
   <UISelectedContentGrid>
     <label>
-      <name>Nome</name>
+      <name>#{word.name}</name>
       <add>Aggiungi</add>
       <delete>Elimina</delete>
     </label>
@@ -148,14 +148,14 @@
 
   <UICLVContentSelectedGrid>
     <action>
-      <SaveCategories>Salva</SaveCategories>
-      <Cancel>Annulla</Cancel>
+      <SaveCategories>#{word.save}</SaveCategories>
+      <Cancel>#{word.cancel}</Cancel>
     </action>
   </UICLVContentSelectedGrid>
 
   <UIContentBrowsePathSelector>
     <header>
-      <name>Nome</name>
+      <name>#{word.name}</name>
       <publicationstate>Stato pubblicazione</publicationstate>
       <action>Azione</action>
     </header>
@@ -166,7 +166,7 @@
 
   <UIContentBrowsePathSelectorFolder>
     <header>
-      <name>Nome</name>
+      <name>#{word.name}</name>
       <publicationstate>Stato pubblicazione</publicationstate>
       <action>Azione</action>
     </header>
@@ -218,7 +218,7 @@
   <UIContentPropertySelector>
     <action>
       <Add>Aggiungi</Add>
-      <Cancel>Annulla</Cancel>
+      <Cancel>#{word.cancel}</Cancel>
     </action>
     <label>
       <metadataType>Tipo Metadata</metadataType>
@@ -234,8 +234,8 @@
 
   <UIContentNodeTypeSelector>
     <action>
-      <Save>Salva</Save>
-      <Cancel>Annulla</Cancel>
+      <Save>#{word.save}</Save>
+      <Cancel>#{word.cancel}</Cancel>
     </action>
   </UIContentNodeTypeSelector>
 
@@ -276,7 +276,7 @@
       <UIEditableCheckboxInput>Diritti Modifica</UIEditableCheckboxInput>
     </label>
     <action>
-      <Save>Salva</Save>
+      <Save>#{word.save}</Save>
       <Clear>Svuota</Clear>
       <title>
         <Edit>Modifica</Edit>

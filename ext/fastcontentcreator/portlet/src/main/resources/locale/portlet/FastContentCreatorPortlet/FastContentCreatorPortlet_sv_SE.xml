@@ -16,8 +16,8 @@
       <new-jcr-template>Ett fel uppstod när du skapade en ny mall.</new-jcr-template>
     </msg>
     <action>
-      <Save>Spara</Save>
-      <Cancel>Avbryt</Cancel>
+      <Save>#{word.save}</Save>
+      <Cancel>#{word.cancel}</Cancel>
     </action>
   </UIFCCForm>
 
@@ -46,7 +46,7 @@
       <do-select>Ett fel uppstod medan du valde plats.</do-select>
       </msg>
     <action>
-      <Save>Spara</Save>
+      <Save>#{word.save}</Save>
     </action>
   </UIFCCConfig>
 
@@ -115,8 +115,8 @@
   <UIFCCActionForm>
     <title>Lägg till/Redigera åtgärd</title>
     <action>
-      <Save>Spara</Save>
-      <Close>Stäng</Close>
+      <Save>#{word.save}</Save>
+      <Close>#{word.close}</Close>
     </action>
     <msg>
       <repository-exception>Kan inte spara den här åtgärden. Det namn som används får inte ha ett index som sitt sista element.</repository-exception>
@@ -173,7 +173,7 @@
 
   <UICategoriesSelector>
     <action>
-      <close>Stäng</close>
+      <close>#{word.close}</close>
     </action>
   </UICategoriesSelector>
 

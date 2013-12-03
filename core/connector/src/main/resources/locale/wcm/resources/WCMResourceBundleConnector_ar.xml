@@ -8,7 +8,7 @@
   <RenameConnector>
     <label>
       <rename>إعادة تسمية</rename>
-      <cancel>الغاء</cancel>
+      <cancel>#{word.cancel}</cancel>
     </label>
     <msg>
       <renaming>بصدد إعادة التّسمية...</renaming>

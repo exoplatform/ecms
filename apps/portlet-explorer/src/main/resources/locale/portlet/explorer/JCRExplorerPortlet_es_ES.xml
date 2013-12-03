@@ -109,14 +109,14 @@
   -->
   <UIDrivesBrowser>
     <title>
-      <PersonalDrives>Personal drives</PersonalDrives>
-      <GroupDrives>Group drives</GroupDrives>
-      <GeneralDrives>General drives</GeneralDrives>
+      <PersonalDrives>Unidades personales</PersonalDrives>
+      <GroupDrives>Unidades  del grupo</GroupDrives>
+      <GeneralDrives>Unidades generales</GeneralDrives>
     </title>
     <msg>
-      <no-view-found>There is no view available according to your access permissions in drive '{0}'.</no-view-found>
-      <access-denied>Access denied. You may not have permission in the workspace of drive '{0}'.</access-denied>
-      <workspace-not-exist>Drive '{0}' was stored in one unrecognized workspace. Please reconfigure this drive.</workspace-not-exist>
+      <no-view-found>No hay ninguna vista disponible para su permiso de acceso en la unidad '{0}'.</no-view-found>
+      <access-denied>Acceso denegado. Tal vez, no tienes permiso en el espacio de trabajo de la unidad '{0}'.</access-denied>
+      <workspace-not-exist>La unidad '{0}' se almacena en un área de trabajo no reconocido. Por favor, vuelva a configurar esta unidad.</workspace-not-exist>
     </msg>
   </UIDrivesBrowser>
 
@@ -520,7 +520,7 @@
       <Rename>Renombrar</Rename>
       <Cut>Cortar</Cut>
       <Copy>Copiar</Copy>
-      <Save>Guardar</Save>
+      <Save>#{word.save}</Save>
       <RemoveNode>Borrar</RemoveNode>
       <Checkin>Registrarse</Checkin>
       <Checkout>Salir</Checkout>
@@ -570,7 +570,7 @@
       <Copy>Copia</Copy>
       <Rename>Renombrar</Rename>
       <Delete>Borrar</Delete>
-      <Save>Guardar</Save>
+      <Save>#{word.save}</Save>
       <Cut>Cortar</Cut>
       <Paste>Pegar</Paste>
       <CheckOut>Salir</CheckOut>
@@ -609,7 +609,7 @@
       <path>Ruta</path>
     </header>
     <action>
-      <Close>Cerrar</Close>
+      <Close>#{word.close}</Close>
     </action>
   </UIReferencesList>
   <!--
@@ -705,7 +705,7 @@
     </label>
     <action>
       <Save>#{palabra.guardar}</Save>
-      <Cancel>Cancelar</Cancel>
+      <Cancel>#{word.cancel}</Cancel>
       <Reset>Reajustar</Reset>
     </action>
     <msg>
@@ -831,7 +831,7 @@
       <node-def-dnt>DNT</node-def-dnt>
     </label>
     <action>
-      <Close>Cerrar</Close>
+      <Close>#{word.close}</Close>
     </action>
   </UINodeTypeInfo>
   <!--
@@ -846,7 +846,7 @@
       </label>
     </tab>
     <action>
-      <Close>Cerrar</Close>
+      <Close>#{word.close}</Close>
     </action>
   </UICategoryManagerSearch>
   <UIContentNameSearch>
@@ -1075,7 +1075,7 @@
     </msg>
     <button>
       <label-Add>Añadir</label-Add>
-      <label-Cancel>Cancelar</label-Cancel>
+      <label-Cancel>#{word.cancel}</label-Cancel>
     </button>
   </UIConstraintsForm>
   <UIConstraintForm>
@@ -1122,8 +1122,8 @@
   </SaveQueryPopup>
   <UINodeTypeSelectForm>
     <action>
-      <Cancel>Cancelar</Cancel>
-      <Save>Guardar</Save>
+      <Cancel>#{word.cancel}</Cancel>
+      <Save>#{word.save}</Save>
     </action>
   </UINodeTypeSelectForm>
   <UICompareExactlyForm>
@@ -1136,7 +1136,7 @@
     </title>
     <button>
       <label-Select>Seleccionar</label-Select>
-      <label-Cancel>Cancelar</label-Cancel>
+      <label-Cancel>#{word.cancel}</label-Cancel>
     </button>
     <msg>
       <not-result-found>No se encontraron resultados.</not-result-found>
@@ -1210,7 +1210,7 @@
     <pLabel>Propiedades:</pLabel>
     <action>
       <Add>Añadir</Add>
-      <Cancel>Cancelar</Cancel>
+      <Cancel>#{word.cancel}</Cancel>
     </action>
   </UISelectPropertyForm>
   <ExactlyFormPopup>
@@ -1334,7 +1334,7 @@
       <invalid-item-state>No puede restaurar esta versión. Tal vez, uno o más elementos fueron eliminados o movidos por otra sesión.</invalid-item-state>
     </msg>
     <action>
-      <close>Cerrar</close>
+      <close>#{word.close}</close>
       <close-view>Cerrar vista</close-view>
     </action>
   </UIVersionInfo>
@@ -1353,7 +1353,7 @@
       <e_4>Propiedad añadida</e_4>
       <e_16>Propiedad cambiada</e_16>
       <e_8>Propiedad removida</e_8>
-      <e_32>Guardar</e_32>
+      <e_32>#{word.save}</e_32>
       <e_64>Mover</e_64>
       <e_128>Copiar</e_128>
       <e_256>Añadir mixin</e_256>
@@ -1392,7 +1392,7 @@
       <note>El versionamiento no ha sido activado para este nodo.</note>
       <question>¿Está seguro de querer activarlo?</question>
       <button-active>Activar</button-active>
-      <button-cancel>Cancelar</button-cancel>
+      <button-cancel>#{word.cancel}</button-cancel>
     </label>
     <msg>
       <access-denied>No tienes permiso para activar el control de versiones en este nodo</access-denied>
@@ -1410,7 +1410,7 @@
       <action>Acción</action>
     </header>
     <action>
-      <Cancel>Cerrar</Cancel>
+      <Cancel>#{word.close}</Cancel>
     </action>
     <grid>
       <msg>
@@ -1434,7 +1434,7 @@
     </label>
     <action>
       <activate>Activar</activate>
-      <cancel>Cancelar</cancel>
+      <cancel>#{word.cancel}</cancel>
     </action>
   </UIActivateAuditing>
   <!--
@@ -1474,7 +1474,7 @@
       <filetype-error>No se puede importar el archivo cargado. Tal vez, el archivo .xml no es válido.</filetype-error>
       <mimetype-invalid>Sólo los archivos .xml o .zip son compatibles para importar.</mimetype-invalid>
       <access-denied>¡Acceso denegado! No está autorizado a importar allí.</access-denied>
-      <constraint-violation-exception>Impossible to import data. The type '{0}' is not allowed in this location.</constraint-violation-exception>
+      <constraint-violation-exception>Es imposible importar datos. El tipo '{0}' no está permitido en este lugar.</constraint-violation-exception>
       <item-exists-exception>Un nodo entrante referenciable tiene el mismo UUID como un nodo existente en el área de trabajo.</item-exists-exception>
     </msg>
   </UIImportNode>
@@ -1489,7 +1489,7 @@
     </label>
     <action>
       <Save>#{word.save}</Save>
-      <Cancel>Cancelar</Cancel>
+      <Cancel>#{word.cancel}</Cancel>
     </action>
     <title>Añadir etiqueta</title>
     <msg>
@@ -1544,7 +1544,7 @@
   -->
   <UICategoryManager>
     <action>
-      <Close>Cerrar</Close>
+      <Close>#{word.close}</Close>
     </action>
     <tab>
       <label>
@@ -1589,7 +1589,7 @@
   -->
   <UIRelationManager>
     <action>
-      <Close>Cerrar</Close>
+      <Close>#{word.close}</Close>
     </action>
     <tab>
       <label>
@@ -1665,7 +1665,7 @@
   <UIDocumentForm>
     <title>Añadir Nuevo Documento</title>
     <action>
-      <Save>Guardar</Save>
+      <Save>#{word.save}</Save>
       <SaveAndClose>Guardar &amp; cerrar</SaveAndClose>
       <ChangeType>Cambiar el tipo de contenido</ChangeType>
       <Fullscreen>Pantalla completa</Fullscreen>
@@ -1983,9 +1983,9 @@
       <stateName>Nombre del Estado</stateName>
     </label>
     <action>
-      <Save>Guardar</Save>
+      <Save>#{word.save}</Save>
       <UnsubcriberLifeCycle>Darse de Baja</UnsubcriberLifeCycle>
-      <Cancel>Cancelar</Cancel>
+      <Cancel>#{word.cancel}</Cancel>
     </action>
   </UIPublicationForm>
   <!--
@@ -2079,7 +2079,7 @@
       <visibility>Visibilidad</visibility>
     </header>
     <action>
-      <Close>Cerrar</Close>
+      <Close>#{word.close}</Close>
     </action>
   </UIPublicationLogList>
   <!--
@@ -2113,7 +2113,7 @@
       <access-denied>Acceso denegado.  No tiene permiso para añadir una viñeta a este nodo.</access-denied>
       <confirm-delete>¿Está seguro que desea eliminar esta miniatura?</confirm-delete>
       <is-checked-in>Este nodo está conectado. Por favor consulte antes de realizar cualquier acción.</is-checked-in>
-      <fileName-error>Please select a file to upload.</fileName-error>
+      <fileName-error>Por favor, seleccione un archivo para cargarlo.</fileName-error>
     </msg>
     <title>
       <remove-thumbnail>Remover esta viñeta</remove-thumbnail>
@@ -2142,7 +2142,7 @@
   -->
   <UICategoriesSelector>
     <action>
-      <close>Cerrar</close>
+      <close>#{word.close}</close>
     </action>
   </UICategoriesSelector>
   <!--
@@ -2173,8 +2173,8 @@
     <title>Editar el explorador de archivo</title>
     <action>
       <Edit>Editar</Edit>
-      <Save>Guardar</Save>
-      <Cancel>Cancelar</Cancel>
+      <Save>#{word.save}</Save>
+      <Cancel>#{word.cancel}</Cancel>
     </action>
     <label>
       <uploadFileSizeLimitMB>El tamaño límite del(MB)subido</uploadFileSizeLimitMB>
@@ -2380,7 +2380,7 @@
 
   <UISimpleCategoryManager>
     <action>
-      <Close>Cerrar</Close>
+      <Close>#{word.close}</Close>
     </action>
   </UISimpleCategoryManager>
   <UIPopupWindow>
@@ -2710,8 +2710,8 @@
       <name>Nombre de la Categoría</name>
     </label>
     <action>
-      <Save>Guardar</Save>
-      <Cancel>Cancelar</Cancel>
+      <Save>#{word.save}</Save>
+      <Cancel>#{word.cancel}</Cancel>
     </action>
   </UICategoryForm>
   <UIPopupWindow>
@@ -2865,8 +2865,8 @@
 
   <UISelectRestorePath>
     <action>
-      <Save>Guardar</Save>
-      <Cancel>Cancelar</Cancel>
+      <Save>#{word.save}</Save>
+      <Cancel>#{word.cancel}</Cancel>
     </action>
     <label>
       <formInput>La ruta anterior se perdió. Por favor seleccione una nueva.</formInput>
@@ -2908,7 +2908,7 @@
 
 <UIPublicationPanel>
     <button>
-      <Close>Cerrar</Close>
+      <Close>#{word.close}</Close>
     </button>
     <revisions>
       <version>Revisiones</version>
@@ -3114,7 +3114,7 @@
     <MaxFileSize>Tamaño máximo de archivo es</MaxFileSize>
     <InvalidCharacters>Los caracteres no válidos se cambian por '-'</InvalidCharacters>
     <DropFileMessage>Deja aquí tus archivos en la carpeta actual</DropFileMessage>
-    <Close>Cerrar</Close>
+    <Close>#{word.close}</Close>
     <in>en</in>
     <MaxFileSizeAlert>El tamaño del archivo supera el límite de tamaño de</MaxFileSizeAlert>
     <Waiting>Esperando</Waiting>
@@ -3124,7 +3124,7 @@
     <Keep>Mantenga ambas</Keep>
     <Replace>Reemplazar</Replace>
     <Canceled>Cancelado</Canceled>
-    <Cancel>Cancelar</Cancel>
+    <Cancel>#{word.cancel}</Cancel>
     <AbortAllConfirmation>¿Quieres abortar todos los archivos en progreso?</AbortAllConfirmation>
   </label>
   </UIMultiUpload>
