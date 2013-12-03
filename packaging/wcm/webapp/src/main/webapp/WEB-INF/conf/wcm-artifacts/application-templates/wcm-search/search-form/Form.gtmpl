@@ -64,9 +64,11 @@ addScripts('search.SearchPortlet.search("' + uicomponent.id + '");');
         searchOption[1].onchange = function() { toggleSet(); };
       </script>
     </div>
-    </div>
-    <%uiform.end()%>
-    </div>
+  <%
+    uiform.renderChild(uicomponent.SORT_FIELD_HIDDEN_INPUT);
+    uiform.renderChild(uicomponent.ORDER_TYPE_HIDDEN_INPUT);
+    uiform.end()%>
+</div>
 <script type="text/javascript">
 	onload = function() {
 		eXo.ecm.SearchPortlet.keepKeywordOnBoxSearch();

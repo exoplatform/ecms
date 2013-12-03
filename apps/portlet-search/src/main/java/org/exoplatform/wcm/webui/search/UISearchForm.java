@@ -42,6 +42,7 @@ import org.exoplatform.webui.core.model.SelectItemOption;
 import org.exoplatform.webui.event.Event;
 import org.exoplatform.webui.event.EventListener;
 import org.exoplatform.webui.form.UIForm;
+import org.exoplatform.webui.form.UIFormHiddenInput;
 import org.exoplatform.webui.form.UIFormRadioBoxInput;
 import org.exoplatform.webui.form.UIFormSelectBox;
 import org.exoplatform.webui.form.UIFormStringInput;
@@ -79,6 +80,12 @@ public class UISearchForm extends UIForm {
   /** The Constant ALL_OPTION. */
   public static final String ALL_OPTION                      = "all";
 
+  /** The Constant SORT_FIELD_HIDDEN_INPUT */
+  public static final String SORT_FIELD_HIDDEN_INPUT = "sortHiddenInputField";
+
+  /** The Constant ORDER_TYPE_HIDDEN_INPUT */
+  public static final String ORDER_TYPE_HIDDEN_INPUT = "orderTypeHiddenInputField";
+
   /** The Constant MESSAGE_NOT_CHECKED_TYPE_SEARCH. */
   public static final String MESSAGE_NOT_CHECKED_TYPE_SEARCH = "UISearchForm.message.not-checked";
 
@@ -111,6 +118,10 @@ public class UISearchForm extends UIForm {
     addUIFormInput(uiKeywordInput);
     addUIFormInput(uiPortalSelectBox);
     addUIFormInput(searchOptionRadioBox);
+
+    // Hidden fields for storing order criteria from user
+    addUIFormInput(new UIFormHiddenInput(SORT_FIELD_HIDDEN_INPUT, SORT_FIELD_HIDDEN_INPUT, null));
+    addUIFormInput(new UIFormHiddenInput(ORDER_TYPE_HIDDEN_INPUT, ORDER_TYPE_HIDDEN_INPUT, null));
   }
 
   /**
@@ -200,6 +211,8 @@ public class UISearchForm extends UIForm {
       String keyword = uiKeywordInput.getValue();
       UIFormRadioBoxInput uiSearchOptionRadioBox = uiSearchForm.getUIFormRadioBoxInput(SEARCH_OPTION);
       String searchOption = uiSearchOptionRadioBox.getValue();
+      String sortField = ((UIFormHiddenInput)uiSearchForm.getUIInput(UISearchForm.SORT_FIELD_HIDDEN_INPUT)).getValue();
+      String orderType = ((UIFormHiddenInput)uiSearchForm.getUIInput(UISearchForm.ORDER_TYPE_HIDDEN_INPUT)).getValue();
       boolean pageChecked = false;
       boolean documentChecked = false;
       if (PAGE_CHECKING.equals(searchOption)) {
@@ -225,9 +238,9 @@ public class UISearchForm extends UIForm {
       }
       String resultType = null;
       if (pageChecked) {
-        resultType = "Page";
+        resultType = UIWCMSearchPortlet.SEARCH_PAGE_MODE;
       } else {
-        resultType = "Document";
+        resultType = UIWCMSearchPortlet.SEARCH_CONTENT_MODE;
       }
       String newKey = event.getRequestContext().getRequestParameter(OBJECTID);
       if (newKey != null) {
@@ -268,6 +281,8 @@ public class UISearchForm extends UIForm {
       int itemsPerPage = Integer.parseInt(portletPreferences.getValue(UIWCMSearchPortlet.ITEMS_PER_PAGE,
                                                                       null));
       queryCriteria.setPageMode(portletPreferences.getValue(UIWCMSearchPortlet.PAGE_MODE, null));
+      queryCriteria.setSortBy(sortField);
+      queryCriteria.setOrderBy(orderType);
       try {
         AbstractPageList<ResultNode> pageList = null;
         if (pageChecked) {

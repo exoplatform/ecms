@@ -428,9 +428,9 @@ public class SiteSearchServiceImpl implements SiteSearchService {
     //search page path
     if (queryCriteria.isSearchWebpage()) {
       if ("all".equals(siteName) || siteName == null || siteName.trim().length() == 0) {
-        return "/production/mop:workspace/mop:portalsites";
+        return PATH_PORTAL_SITES;
       }
-      return "/production/mop:workspace/mop:portalsites/mop:" + siteName;
+      return PATH_PORTAL_SITES.concat("/mop:").concat(siteName);
     }
     //search document path
     if (queryCriteria.getSearchPath() != null) {
