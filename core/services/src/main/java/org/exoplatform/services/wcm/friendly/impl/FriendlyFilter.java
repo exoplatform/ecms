@@ -16,18 +16,16 @@
  */
 package org.exoplatform.services.wcm.friendly.impl;
 
-import java.io.IOException;
+import org.exoplatform.services.wcm.friendly.FriendlyService;
+import org.exoplatform.services.wcm.utils.WCMCoreUtils;
+import org.exoplatform.web.filter.Filter;
 
 import javax.servlet.FilterChain;
 import javax.servlet.ServletException;
 import javax.servlet.ServletRequest;
 import javax.servlet.ServletResponse;
 import javax.servlet.http.HttpServletRequest;
-
-import org.exoplatform.container.definition.PortalContainerConfig;
-import org.exoplatform.services.wcm.friendly.FriendlyService;
-import org.exoplatform.services.wcm.utils.WCMCoreUtils;
-import org.exoplatform.web.filter.Filter;
+import java.io.IOException;
 
 /**
  * Created by The eXo Platform SAS
@@ -59,5 +57,4 @@ public class FriendlyFilter implements Filter {
       chain.doFilter(request, response);
     }
   }
-
 }
