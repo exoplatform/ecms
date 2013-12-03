@@ -61,6 +61,12 @@ public class UIWCMSearchPortlet extends UIPortletApplication {
   
   /** The Constant DETAIL_PARAMETER_NAME. */
   public final static String DETAIL_PARAMETER_NAME            = "detailParameterName";
+
+  /** Search Page Mode **/
+  public static final String SEARCH_PAGE_MODE = "Page";
+
+  /** Search Content Mode **/
+  public static final String SEARCH_CONTENT_MODE = "Document";
   
   
 
