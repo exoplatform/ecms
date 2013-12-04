@@ -123,16 +123,14 @@
 			String urlSearch = portalRequestContext.getRequestParameter("urlSearch");
 			if (!Utils.isPortalEditMode() && isShowOptionBar && !uicomponent.isPrinting()) { 
 				%>
-					<div class="UIOptionBar clearfix">
-					<% if (urlSearch != null) { %>  
-						<a href="$urlSearch">
-							<div class="BackButton" title="<%= _ctx.appRes("UISCVPreferences.label.Back") %>" ><span></span></div>
-						</a>
-					<% } else {%>
-						<div class="BackButton" title="<%= _ctx.appRes("UISCVPreferences.label.Back") %>" onclick="history.go(-1)" ><span></span></div>
-					<% } %>
-						<a class="ActionIcon PrintIcon" href="javascript: void(0);" onclick="window.open('<%= uicomponent.getPrintUrl(node) %>')" rel="tooltip" data-placement="bottom" title="<%= _ctx.appRes("UIPresentationContainer.label.print");%>"><%= _ctx.appRes("UIPresentationContainer.label.print") %></a>
-					</div>
+      <div class="uiOptionBar clearfix">
+        <% if (urlSearch != null) { %>  
+           <a  href="$urlSearch" class="actionIcon" title="<%= _ctx.appRes("UISCVPreferences.label.Back") %>" ><i class="uiIconEcmsReturn uiIconLightGray"></i></a>
+        <% } else {%>
+             <a class="actionIcon" title="<%= _ctx.appRes("UISCVPreferences.label.Back") %>" onclick="history.go(-1)" ><i class="uiIconEcmsReturn uiIconLightGray"></i></a>
+        <% } %>
+            <a class="pull-right" href="javascript: void(0);" onclick="window.open('<%= uicomponent.getPrintUrl(node) %>')" title="<%= _ctx.appRes("UIPresentationContainer.label.print");%>"><i class="uiIconPrint uiIconLightGray"></i>  <%= _ctx.appRes("UIPresentationContainer.label.print") %></a>
+        </div>
 				<% 
 			} 
 			uicomponent.renderChildren();
