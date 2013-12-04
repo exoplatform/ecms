@@ -56,34 +56,38 @@
       }
   }
   %>
+
   <!-- Header -->
   <div class="result clearfix">
       <%
-      if (currentPageData != null && !currentPageData.isEmpty()) {
+      if (currentPageData != null && !currentPageData.isEmpty()) { 
         if (SiteSearchService.PAGE_MODE_PAGINATION.equals(pageMode) ) startItemIndex =  (currentPage - 1) * itemsPerPage + 1;
         showPaginator = (itemsPerPage==currentPageData.size() && SiteSearchService.PAGE_MODE_MORE.equals(pageMode)) ||
                                       (SiteSearchService.PAGE_MODE_PAGINATION.equals(pageMode));
-       }
-      %>
-     <div class="pull-left resultHeader" id="resultHeader">
-       <%= _ctx.appRes("UIDefaultSearchResult.label.resutlsCaption") %> <%= startItemIndex %> to <%= endItemIndex %> <%= _ctx.appRes("UIDefaultSearchResult.label.forCaption") %> <strong><%= keyword %></strong>
-     </div>
-     <div class="pull-right resultSort" id="resultSort" style="display: block;">
-        <div class="btn-group uiDropdownWithIcon pull-right">
-           <a class="btn dropdown-toggle" data-toggle="dropdown">
-           <span id="sortField" sort="$sortField" order="$orderType"><%=uicomponent.getLabel("UIDefaultSearchResult.label." + sortField)%></span>
-           <span class="spiter"></span>
-           <span class="caret"></span>
-           </a>
-           <ul class="dropdown-menu" id="sortOptions">
-              <li><a sort="relevancy" href="#"><%=uicomponent.getLabel("UIDefaultSearchResult.label.relevancy")%><%=getSortTypeCss("relevancy");%></a></li>
-              <li><a sort="date" href="#"><%=uicomponent.getLabel("UIDefaultSearchResult.label.date")%><%=getSortTypeCss("date");%></a></li>
-              <li><a sort="title" href="#"><%=uicomponent.getLabel("UIDefaultSearchResult.label.title")%><%=getSortTypeCss("title");%></a></li>
-           </ul>
-        </div>
-        <span><%=uicomponent.getLabel("UIDefaultSearchResult.label.sortBy")%></span>
-     </div>
+   	 %>
+   		 <div class="pull-left resultHeader" id="resultHeader">
+	       <%= _ctx.appRes("UIDefaultSearchResult.label.resutlsCaption") %> <%= startItemIndex %> to <%= endItemIndex %> <%= _ctx.appRes("UIDefaultSearchResult.label.forCaption") %> <strong><%= keyword %></strong>
+	     </div>
+	     <div class="pull-right resultSort" id="resultSort" style="display: block;">
+	        <div class="btn-group uiDropdownWithIcon pull-right">
+	           <a class="btn dropdown-toggle" data-toggle="dropdown">
+	           <span id="sortField" sort="$sortField" order="$orderType"><%=uicomponent.getLabel("UIDefaultSearchResult.label." + sortField)%></span>
+	           <span class="spiter"></span>
+	           <span class="caret"></span>
+	           </a>
+	           <ul class="dropdown-menu" id="sortOptions">
+	              <li><a sort="relevancy" href="#"><%=uicomponent.getLabel("UIDefaultSearchResult.label.relevancy")%><%=getSortTypeCss("relevancy");%></a></li>
+	              <li><a sort="date" href="#"><%=uicomponent.getLabel("UIDefaultSearchResult.label.date")%><%=getSortTypeCss("date");%></a></li>
+	              <li><a sort="title" href="#"><%=uicomponent.getLabel("UIDefaultSearchResult.label.title")%><%=getSortTypeCss("title");%></a></li>
+	           </ul>
+	        </div>
+	        <span><%=uicomponent.getLabel("UIDefaultSearchResult.label.sortBy")%></span>
+	     </div>
+    
+      <% } %>
+     
   </div>
+
   <%
   if (realCurrentPageData.isEmpty()) {
     %>
