@@ -140,9 +140,7 @@
 				%>
 				<div class="uiOptionBar clearfix">
         <% if (urlSearch != null) { %>  
-          <a href="$urlSearch">
-             <a class="actionIcon" title="<%= _ctx.appRes("UISCVPreferences.label.Back") %>" ><i class="uiIconEcmsReturn uiIconLightGray"></i></a>
-          </a>
+           <a  href="$urlSearch" class="actionIcon" title="<%= _ctx.appRes("UISCVPreferences.label.Back") %>" ><i class="uiIconEcmsReturn uiIconLightGray"></i></a>
         <% } else {%>
              <a class="actionIcon" title="<%= _ctx.appRes("UISCVPreferences.label.Back") %>" onclick="history.go(-1)" ><i class="uiIconEcmsReturn uiIconLightGray"></i></a>
         <% } %>
