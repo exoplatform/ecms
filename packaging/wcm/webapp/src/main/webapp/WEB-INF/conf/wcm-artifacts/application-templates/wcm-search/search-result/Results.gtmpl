@@ -122,7 +122,7 @@
 
      %>
      <div class="resultBox clearfix">
-       <a href="#">
+       <a href="$itemUrl&urlSearch=$requestURL">
          <span class="avatar pull-left ">
            <i class="<%=Utils.getNodeTypeIcon(realNode, "uiIcon64x64")%>"></i>
          </span>
