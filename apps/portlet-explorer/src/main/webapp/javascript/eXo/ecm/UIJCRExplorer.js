@@ -3,9 +3,9 @@
 		this.vnScrollMgr = null; // View FilePlan Node
 		this.ntScrollMgr = null; // Node Type Popup
 	};
-	
+
 	UIJCRExplorer.prototype.loadViewNodeScroll = function(e) {
-	
+
 		var jcr = eXo.ecm.UIJCRExplorer;
 		var uiFilePlanView = document.getElementById("UIFilePlanView");
 		if (uiFilePlanView) {
@@ -28,7 +28,7 @@
 			jcr.initViewNodeScroll();
 		}
 	};
-	
+
 	UIJCRExplorer.prototype.initViewNodeScroll = function(e) {
 		var scrollMgr = eXo.ecm.UIJCRExplorer.vnScrollMgr;
 		scrollMgr.init();
@@ -36,7 +36,7 @@
 		scrollMgr.checkAvailableSpace();
 		scrollMgr.renderElements();
 	};
-	
+
 	UIJCRExplorer.prototype.viewNodeScrollCallback = function() {
 		var scrollMgr = eXo.ecm.UIJCRExplorer.vnScrollMgr;
 		var selTab = gj(scrollMgr.mainContainer).find("div.SelectedTab:first")[0];
@@ -45,7 +45,7 @@
 			scrollMgr.getElementsSpace();
 		}
 	};
-	
+
 	UIJCRExplorer.prototype.loadNodeTypeScroll = function() {
 		var jcr = eXo.ecm.UIJCRExplorer;
 		var uiPopup = document.getElementById("UINodeTypeInfoPopup");
@@ -69,7 +69,7 @@
 			jcr.initNodeTypeScroll();
 		}
 	};
-	
+
 	UIJCRExplorer.prototype.initNodeTypeScroll = function() {
 		var scrollMgr = eXo.ecm.UIJCRExplorer.ntScrollMgr;
 		scrollMgr.init();
@@ -77,7 +77,7 @@
 		scrollMgr.checkAvailableSpace();
 		scrollMgr.renderElements();
 	};
-	
+
 	UIJCRExplorer.prototype.dropDownIconList = function(uniqueId) {
 		var actionBar = document.getElementById(uniqueId);
 		if (!actionBar) return;
@@ -107,53 +107,71 @@
 			}
 		}
 	};
-	
+
 	/**
 	 * Gets the tab element and the tab content associated and displays them
 	 *  . changes the style of the tab
 	 *  . displays the tab content of the selected tab (display: block)
 	 * if tabId are provided, can get the tab content by Ajax
 	 */
-	UIJCRExplorer.prototype.displayTabContent = function(clickedEle) {
-		var uiSelectTab = gj(clickedEle);
-		var uiHorizontalTabs = clickedEle.parentNode;
-		var uiTabs = gj(uiHorizontalTabs).find("li");
-		var parentdHorizontalTab = uiHorizontalTabs.parentNode ;
-		var contentTabContainer = gj(uiHorizontalTabs).parents("div#UINodeTypeInfoPopup:first")[0];
-		var uiTabContents = gj(contentTabContainer).find(".UITabContent");
-		//    var form = DOMUtil.getChildrenByTagName(contentTabContainer, "form") ;
-		var form = gj(contentTabContainer).children("form") ;
-		  if(form.length > 0) {
-		      var tmp = gj(form[0]).children("div.UITabContent");
-		  for(var i = 0; i < tmp.length; i++) {
-		      uiTabContents.push(tmp[i]) ;
-		  }
-		  }
-		var index = 0 ;
-		uiSelectTab.attr("class","active");
-		uiTabs.each(function(i, elem) {
-			if (!(gj(elem).attr("class")=="dropdown")) {
-				if(clickedEle == elem) {
-					gj(elem).attr("class", "active");
-					index = i ;
-					changeClassName = false;
-				} else {
-					gj(elem).attr("class","");
-					if (uiTabContents.get(i)) 
-						uiTabContents.get(i).style.display = "none" ;
-				}
-			} else {
-				gj(uiTabs.get(i-1)).attr("class", gj(uiTabs.get(i-1)).attr("class") + " last");
-			}
-		});	
-		uiTabContents.get(index).style.display = "block" ;
-		  if (eXo.ecm.UIJCRExplorer) {
-		      try {
-		              eXo.ecm.UIJCRExplorer.initViewNodeScroll();
-		      } catch(e) {void(0);}
-		  }
+	UIJCRExplorer.prototype.displayTabContent = function(clickedItem) {
+        var uiNodeTypeInfo = gj("#UINodeTypeInfoPopup");
+        var nav = gj(uiNodeTypeInfo).find("ul.nav-tabs:first")[0];
+        var listHiddenTabsContainer = gj(nav).find("li.listHiddenTabsContainer:first")[0];
+        var uiDropdownContainer   = gj(listHiddenTabsContainer).find("ul.dropdown-menu:first")[0];
+        var navPaddingLeft = gj(nav).css("padding-left").replace("px","");
+        var navPaddingRight = gj(nav).css("padding-right").replace("px","");
+        var allowedSpace  = nav.offsetWidth - navPaddingLeft - navPaddingRight - gj(listHiddenTabsContainer).width();
+        var totalNavsLength = 0;
+
+        // Set active for clicked tab
+        gj(nav).children("li").removeClass("active");
+        gj(uiDropdownContainer).children("li").removeClass("active");
+        gj(clickedItem).addClass("active");
+
+        // Show tab content
+        gj(uiNodeTypeInfo).find(".UITabContent").hide();
+        gj(uiNodeTypeInfo).find("div[nodetypename='" + gj(clickedItem).text().trim().replace(':','').replace('-','') + "']").show();
+
+        // Total length of navigation items
+        gj(nav).children("li").not(".dropdown").each(function(i) {
+            totalNavsLength += gj(this).width();
+        });
+
+        // If tab item in dropdown clicked, move it to tab bar
+        if (gj(clickedItem).closest(".dropdown").length) {
+            nav.appendChild(clickedItem);
+            gj(clickedItem).removeClass("last").addClass("moved");
+            totalNavsLength = totalNavsLength + gj(clickedItem).width();
+
+            // Move last tab bar item to first of dropdown
+            while (totalNavsLength > allowedSpace) {
+                var tabBarLastNavItem = gj(nav).children("li").not(".dropdown").not(".moved").last()[0];
+                totalNavsLength = totalNavsLength - gj(tabBarLastNavItem).width();
+                gj(uiDropdownContainer).prepend(tabBarLastNavItem);
+            }
+            gj(clickedItem).removeClass("moved");
+
+            // If allowedSpace still avaiable, move tab items from dropdown to bar
+            while (totalNavsLength < allowedSpace) {
+                var dropdownFirstNavItem = gj(uiDropdownContainer).children("li").first()[0];
+                nav.appendChild(dropdownFirstNavItem);
+                if (totalNavsLength + gj(dropdownFirstNavItem).width() > allowedSpace) {
+                    gj(uiDropdownContainer).prepend(dropdownFirstNavItem);
+                    break;
+                }
+                totalNavsLength += gj(dropdownFirstNavItem).width();
+            }
+            gj(uiDropdownContainer).children("li").last().addClass("last");
+        }
+
+        if (eXo.ecm.UIJCRExplorer) {
+          try {
+            eXo.ecm.UIJCRExplorer.initViewNodeScroll();
+          } catch(e) {void(0);}
+        }
 	};
-	
+
 	eXo.ecm.UIJCRExplorer = new UIJCRExplorer();
 	return {
 		UIJCRExplorer : eXo.ecm.UIJCRExplorer

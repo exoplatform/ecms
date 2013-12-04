@@ -42,7 +42,8 @@ public class ViewNodeTypeActionComponent extends UIComponent {
     public void processEvent(Event<ViewNodeTypeActionComponent> event) throws Exception {
       UIJCRExplorer uiJCRExplorer = event.getSource().getAncestorOfType(UIJCRExplorer.class);
       UIPopupContainer UIPopupContainer = uiJCRExplorer.getChild(UIPopupContainer.class);
-      UIPopupContainer.activate(UINodeTypeInfo.class, 700);
+      UINodeTypeInfo uiNodeTypeInfo = uiJCRExplorer.createUIComponent(UINodeTypeInfo.class, null, null);
+      UIPopupContainer.activate(uiNodeTypeInfo, 700, 0, false);
       event.getRequestContext().addUIComponentToUpdateByAjax(UIPopupContainer);
     }
   }
