@@ -28,6 +28,7 @@ import javax.jcr.RepositoryException;
 import org.exoplatform.container.xml.InitParams;
 import org.exoplatform.services.cms.templates.TemplateService;
 import org.exoplatform.services.jcr.impl.core.NodeImpl;
+import org.exoplatform.services.wcm.core.NodeLocation;
 import org.exoplatform.services.wcm.core.NodetypeConstant;
 import org.exoplatform.services.wcm.utils.WCMCoreUtils;
 
@@ -84,8 +85,8 @@ public class ActivityCommonService {
   
   private Map<String, Object> properties = new HashMap<String, Object>();
   
-  private Set<String> creatingNodes = new HashSet<String>();
- 
+  private Set<Integer> creatingNodes = new HashSet<Integer>();
+
   public Map<String, Object> getPreProperties() { return properties; }
   
   public void setPreProperties(Map<String, Object> preProperties) { properties = preProperties; }
@@ -106,16 +107,12 @@ public class ActivityCommonService {
    * @return
    *  true if successful to setCreating
    */
-  public boolean setCreating(Node node, boolean isCreating){
-    try{
-      if(isCreating){
-        creatingNodes.add(node.getUUID());
-      }else{
-        creatingNodes.remove(node.getUUID());
-      }
-      return true;
-    }catch(Exception e){
-      return false;
+  public void setCreating(Node node, boolean isCreating){
+    NodeLocation nodeLocation = NodeLocation.getNodeLocationByNode(node);
+    if(isCreating){
+      creatingNodes.add(nodeLocation.hashCode());
+    }else{
+      creatingNodes.remove(nodeLocation.hashCode());
     }
   }
   
@@ -127,11 +124,8 @@ public class ActivityCommonService {
    */
   public boolean isCreating(Node node){
     boolean isCreating = false;
-    try{
-      isCreating = creatingNodes.contains(node.getUUID());
-    }catch(Exception e){
-      isCreating = false;
-    }
+    NodeLocation nodeLocation = NodeLocation.getNodeLocationByNode(node);
+    isCreating = creatingNodes.contains(nodeLocation.hashCode());
     return isCreating;
   }
   

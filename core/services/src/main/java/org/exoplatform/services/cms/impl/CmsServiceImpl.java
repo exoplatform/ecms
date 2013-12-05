@@ -144,10 +144,6 @@ public class CmsServiceImpl implements CmsService {
       //Broadcast CmsService.event.preCreate event
       listenerService.broadcast(PRE_CREATE_CONTENT_EVENT,storeHomeNode,mappings);
       currentNode = storeHomeNode.addNode(nodeName, primaryType);
-      if (currentNode.canAddMixin(ActivityCommonService.MIX_COMMENT)) {
-        currentNode.addMixin(ActivityCommonService.MIX_COMMENT);
-        currentNode.setProperty(ActivityCommonService.MIX_COMMENT_CREATING, "true");
-      }
       activityService.setCreating(currentNode, true);
       createNodeRecursively(NODE, currentNode, nodeType, mappings);
       createNodeRecursively(NODE, currentNode, nodetypeManager.getNodeType("exo:sortable"), mappings);
