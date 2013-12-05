@@ -17,7 +17,9 @@
 package org.exoplatform.services.cms.jcrext.activity;
 
 import java.util.HashMap;
+import java.util.HashSet;
 import java.util.Map;
+import java.util.Set;
 
 import javax.jcr.Item;
 import javax.jcr.Node;
@@ -78,11 +80,12 @@ public class ActivityCommonService {
   
   public static String MIX_COMMENT                = "exo:activityComment";
   public static String MIX_COMMENT_CREATOR        = "exo:activityCreator";
-  public static String MIX_COMMENT_CREATING       = "exo:activityCreating";
   public static String MIX_COMMENT_ACTIVITY_ID    = "exo:activityCommentID";
   
   private Map<String, Object> properties = new HashMap<String, Object>();
   
+  private Set<String> creatingNodes = new HashSet<String>();
+ 
   public Map<String, Object> getPreProperties() { return properties; }
   
   public void setPreProperties(Map<String, Object> preProperties) { properties = preProperties; }
@@ -96,20 +99,42 @@ public class ActivityCommonService {
     if (acceptedFileProperties==null) acceptedFileProperties ="";
   }
   
-  public boolean isCreating(Node node) {
-    String isCreating;
-    try {
-      if (node.isNodeType(MIX_COMMENT)) {
-        if (node.hasProperty(MIX_COMMENT_CREATING)) {
-          isCreating = node.getProperty(MIX_COMMENT_CREATING).getString();
-          return isCreating.equalsIgnoreCase("true");
-        }
+  /**
+   * set the node status to Creating 
+   * @param node
+   * @param isCreating
+   * @return
+   *  true if successful to setCreating
+   */
+  public boolean setCreating(Node node, boolean isCreating){
+    try{
+      if(isCreating){
+        creatingNodes.add(node.getUUID());
+      }else{
+        creatingNodes.remove(node.getUUID());
       }
-    } catch (Exception e) {
+      return true;
+    }catch(Exception e){
       return false;
     }
-    return false;
   }
+  
+  /**
+   * return if the node is Creating
+   * @param node
+   * @return
+   *   true if the node is creating
+   */
+  public boolean isCreating(Node node){
+    boolean isCreating = false;
+    try{
+      isCreating = creatingNodes.contains(node.getUUID());
+    }catch(Exception e){
+      isCreating = false;
+    }
+    return isCreating;
+  }
+  
   public boolean isAcceptedNode(Node node) {
     try {
       return node==null?false:acceptedNodeTypes.indexOf("{" + node.getPrimaryNodeType().getName() +"}")>=0;
