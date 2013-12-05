@@ -8,7 +8,7 @@
   <RenameConnector>
     <label>
       <rename>Yeniden Adlandır</rename>
-      <cancel>#{word.cancel}</cancel>
+      <cancel>İptal</cancel>
     </label>
     <msg>
       <renaming>Yeniden adlandırılıyor...</renaming>

@@ -1711,6 +1711,11 @@
 <list>Contenu</list>
 <navigation>Navigation</navigation>
   </label>
+                          <action>
+                            <Save>#{word.save}</Save>
+                            <Reset>Réinitialiser</Reset> 
+                            <Cancel>#{word.cancel}</Cancel> 
+                          </action> 
   <msg>
   <template-existing>Ce nom de template existe déjà. Veuillez sélectionner un autre.</template-existing>
   </msg>

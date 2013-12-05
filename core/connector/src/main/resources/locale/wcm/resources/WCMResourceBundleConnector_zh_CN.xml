@@ -8,7 +8,7 @@
   <RenameConnector>
     <label>
       <rename>重命名</rename>
-      <cancel>#{word.cancel}</cancel>
+      <cancel>取消</cancel>
     </label>
     <msg>
       <renaming>重命名......</renaming>

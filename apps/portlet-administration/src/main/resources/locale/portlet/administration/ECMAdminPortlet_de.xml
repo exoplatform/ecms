@@ -1711,6 +1711,11 @@
 <list>Inhalt</list>
 <navigation>Navigation</navigation>
   </label>
+                          <action>
+                            <Save>#{word.save}</Save>
+                            <Reset>Zurücksetzen</Reset> 
+                            <Cancel>#{word.cancel}</Cancel> 
+                          </action> 
   <msg>
   <template-existing>Dieser Vorlagenname ist bereits vorhanden. Bitte wählen Sie einen anderen.</template-existing>
   </msg>

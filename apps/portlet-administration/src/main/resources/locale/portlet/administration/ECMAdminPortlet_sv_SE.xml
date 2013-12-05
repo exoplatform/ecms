@@ -1711,6 +1711,11 @@
 <list>Innehåll</list>
 <navigation>Navigering</navigation>
   </label>
+                          <action>
+                            <Save>#{word.save}</Save>
+                            <Reset>Återställ</Reset> 
+                            <Cancel>#{word.cancel}</Cancel> 
+                          </action> 
   <msg>
   <template-existing>Detta namn finns redan. Välj en annan.</template-existing>
   </msg>

@@ -1711,6 +1711,11 @@
 <list>コンテンツ</list>
 <navigation>ナビゲーション</navigation>
   </label>
+                          <action>
+                            <Save>#{word.save}</Save>
+                            <Reset>リセット</Reset> 
+                            <Cancel>#{word.cancel}</Cancel> 
+                          </action> 
   <msg>
   <template-existing>このテンプレート名は既に存在します。他の名称を選択してください。</template-existing>
   </msg>

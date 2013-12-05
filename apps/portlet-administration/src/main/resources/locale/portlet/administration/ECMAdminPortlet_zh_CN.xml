@@ -1711,6 +1711,11 @@
 <list>内容</list>
 <navigation>导航</navigation>
   </label>
+                          <action>
+                            <Save>#{word.save}</Save>
+                            <Reset>重置</Reset> 
+                            <Cancel>#{word.cancel}</Cancel> 
+                          </action> 
   <msg>
   <template-existing>此模板的名称已经存在。请选择另一个。</template-existing>
   </msg>

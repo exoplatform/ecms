@@ -87,7 +87,7 @@
 -->
   <UITaxonomyTreeMainForm>
     <action>
-      <Reset>Làm lại</Reset>
+      <Reset>Thiết lập lại</Reset>
     </action>
     <msg>
       <name-not-allowed>Tên không hợp lệ</name-not-allowed>
@@ -1711,6 +1711,11 @@
 <list>Nội dung</list>
 <navigation>Điều hướng</navigation>
   </label>
+                          <action>
+                            <Save>#{word.save}</Save>
+                            <Reset>Làm lại</Reset> 
+                            <Cancel>#{word.cancel}</Cancel> 
+                          </action> 
   <msg>
   <template-existing>Tên mẫu này đã tồn tại. Vui lòng chọn tên khác.</template-existing>
   </msg>
