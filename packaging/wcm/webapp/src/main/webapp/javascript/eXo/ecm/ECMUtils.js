@@ -1485,6 +1485,11 @@
 		gj(nav).children("li").not(".dropdown").each(function(i) {
 		  totalNavsLength += gj(this).width();
 		});
+
+		// Remove dropdown if only a few node types avaiable
+		if (totalNavsLength < allowedSpace) {
+			gj(listHiddenTabsContainer).hide();
+		}
 		
 		// Move navigation item to dropdown menu if there are too many nav items
 		while (totalNavsLength > allowedSpace) {
