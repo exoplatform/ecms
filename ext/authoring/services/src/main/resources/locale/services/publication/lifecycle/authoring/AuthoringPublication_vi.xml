@@ -14,4 +14,11 @@
       </changeState>
     </AuthoringPublicationPlugin>
   </PublicationService>
+  <Publication>
+    <log>
+      <description>
+        <enrolled>Nội dung bắt đầu chu kì xuất bản</enrolled>
+      </description>
+    </log>
+  </Publication>
 </bundle>

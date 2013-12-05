@@ -1711,6 +1711,11 @@
 <list>Contenido</list>
 <navigation>Navegación</navigation>
   </label>
+                          <action>
+                            <Save>#{word.save}</Save>
+                            <Reset>Resetear</Reset> 
+                            <Cancel>#{word.cancel}</Cancel> 
+                          </action> 
   <msg>
   <template-existing>El nombre para esta plantilla ya existe. Por favor seleccione otro.</template-existing>
   </msg>

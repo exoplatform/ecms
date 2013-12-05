@@ -8,7 +8,7 @@
   <RenameConnector>
     <label>
       <rename>Đổi tên</rename>
-      <cancel>#{word.cancel}</cancel>
+      <cancel>Hủy bỏ</cancel>
     </label>
     <msg>
       <renaming>Đang đổi tên...</renaming>
