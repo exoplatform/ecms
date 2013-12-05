@@ -17,7 +17,9 @@
 package org.exoplatform.services.cms.jcrext.activity;
 
 import java.util.HashMap;
+import java.util.HashSet;
 import java.util.Map;
+import java.util.Set;
 
 import javax.jcr.Item;
 import javax.jcr.Node;
@@ -26,6 +28,7 @@ import javax.jcr.RepositoryException;
 import org.exoplatform.container.xml.InitParams;
 import org.exoplatform.services.cms.templates.TemplateService;
 import org.exoplatform.services.jcr.impl.core.NodeImpl;
+import org.exoplatform.services.wcm.core.NodeLocation;
 import org.exoplatform.services.wcm.core.NodetypeConstant;
 import org.exoplatform.services.wcm.utils.WCMCoreUtils;
 
@@ -78,11 +81,12 @@ public class ActivityCommonService {
   
   public static String MIX_COMMENT                = "exo:activityComment";
   public static String MIX_COMMENT_CREATOR        = "exo:activityCreator";
-  public static String MIX_COMMENT_CREATING       = "exo:activityCreating";
   public static String MIX_COMMENT_ACTIVITY_ID    = "exo:activityCommentID";
   
   private Map<String, Object> properties = new HashMap<String, Object>();
   
+  private Set<Integer> creatingNodes = new HashSet<Integer>();
+ 
   public Map<String, Object> getPreProperties() { return properties; }
   
   public void setPreProperties(Map<String, Object> preProperties) { properties = preProperties; }
@@ -96,20 +100,35 @@ public class ActivityCommonService {
     if (acceptedFileProperties==null) acceptedFileProperties ="";
   }
   
-  public boolean isCreating(Node node) {
-    String isCreating;
-    try {
-      if (node.isNodeType(MIX_COMMENT)) {
-        if (node.hasProperty(MIX_COMMENT_CREATING)) {
-          isCreating = node.getProperty(MIX_COMMENT_CREATING).getString();
-          return isCreating.equalsIgnoreCase("true");
-        }
-      }
-    } catch (Exception e) {
-      return false;
+  /**
+   * set the node status to Creating 
+   * @param node
+   * @param isCreating
+   * @return
+   *  true if successful to setCreating
+   */
+  public void setCreating(Node node, boolean isCreating){
+    NodeLocation nodeLocation = NodeLocation.getNodeLocationByNode(node);
+    if(isCreating){
+      creatingNodes.add(nodeLocation.hashCode());
+    }else{
+      creatingNodes.remove(nodeLocation.hashCode());
     }
-    return false;
   }
+  
+  /**
+   * return if the node is Creating
+   * @param node
+   * @return
+   *   true if the node is creating
+   */
+  public boolean isCreating(Node node){
+    boolean isCreating = false;
+    NodeLocation nodeLocation = NodeLocation.getNodeLocationByNode(node);
+    isCreating = creatingNodes.contains(nodeLocation.hashCode());
+    return isCreating;
+  }
+  
   public boolean isAcceptedNode(Node node) {
     try {
       return node==null?false:acceptedNodeTypes.indexOf("{" + node.getPrimaryNodeType().getName() +"}")>=0;
