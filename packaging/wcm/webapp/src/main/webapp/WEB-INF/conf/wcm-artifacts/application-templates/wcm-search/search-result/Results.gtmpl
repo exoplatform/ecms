@@ -126,7 +126,7 @@
        </a>
        <div class="content">
           <h6>
-             <a href="$itemUrl&urlSearch=$requestURL">$itemTitle</a>
+             <a href="$itemUrl&urlSearch=$requestURL">$itemName</a>
           </h6>
           <p class="excerpt">$itemExcerpt</p>
           <div class="detail">$detail</div>

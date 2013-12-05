@@ -326,8 +326,8 @@ public class UISearchResult extends UIContainer {
    * @throws Exception the exception
    */
   public String getTitle(Node node) throws Exception {
-    if (node.hasProperty("exo:title")) {
-      return node.getProperty("exo:title").getValue().getString();
+    if (UIWCMSearchPortlet.SEARCH_CONTENT_MODE.equals(this.getResultType())) {
+      return org.exoplatform.ecm.webui.utils.Utils.getTitle(node);
     } else {
       Session session = node.getSession();
       Node mopLink = (Node) session.getItem(node.getPath() + "/mop:link");
