@@ -37,7 +37,6 @@
   <!-- Twitter Bootstrap bootstrap-typeahead plugin -->
   <module>
     <name>wcm_bts_typeahead</name>
-    <load-group>bts</load-group>
     <script>
       <adapter>
         (function($) {
