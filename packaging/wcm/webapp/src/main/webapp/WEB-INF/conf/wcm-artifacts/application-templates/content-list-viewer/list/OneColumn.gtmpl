@@ -52,7 +52,7 @@
 				<%
 			if (uicomponent.getUIPageIterator().getAvailable() == 0) {
 				%>
-					<div style="height: 20px; text-align: center; font-size: 13px; background: white; padding: 10px; margin: 5px;">
+					<div class="emptyContent">
 						<span><%= _ctx.appRes(uicomponent.getParent().getMessageKey()) %></span>
 					</div>
 				<%
@@ -117,10 +117,10 @@
 												  else {
 													  if (isShowTitle) {
                               if (isShowLink) {
-                                %><div class="Title WCMInlineEditable" contenteditable="true" propertyName="<%=propertyName%>" publishedmsg="<%=publishedMsg%>" draftmsg="<%=draftMsg%>" repo="<%=repo%>" workspace="<%=workspace%>" uuid="<%=uuid%>" siteName="<%=siteName%>" language="<%=language%>" fastpublishlink="<%=uicomponent.getFastPublicLink(viewNode)%>"><a href="$itemLink" rel="tooltip" data-placement="bottom" title="$itemName">$itemName</a></div><%
+                                %><div class="heading WCMInlineEditable" contenteditable="true" propertyName="<%=propertyName%>" publishedmsg="<%=publishedMsg%>" draftmsg="<%=draftMsg%>" repo="<%=repo%>" workspace="<%=workspace%>" uuid="<%=uuid%>" siteName="<%=siteName%>" language="<%=language%>" fastpublishlink="<%=uicomponent.getFastPublicLink(viewNode)%>"><a href="$itemLink" rel="tooltip" data-placement="bottom" title="$itemName">$itemName</a></div><%
                               } else {
                               %>
-                                <div class="Title WCMInlineEditable" contenteditable="true" propertyName="<%=propertyName%>" publishedmsg="<%=publishedMsg%>" draftmsg="<%=draftMsg%>" repo="<%=repo%>" workspace="<%=workspace%>" uuid="<%=uuid%>" siteName="<%=siteName%>" language="<%=language%>" fastpublishlink="<%=uicomponent.getFastPublicLink(viewNode)%>"> 
+                                <div class="heading WCMInlineEditable" contenteditable="true" propertyName="<%=propertyName%>" publishedmsg="<%=publishedMsg%>" draftmsg="<%=draftMsg%>" repo="<%=repo%>" workspace="<%=workspace%>" uuid="<%=uuid%>" siteName="<%=siteName%>" language="<%=language%>" fastpublishlink="<%=uicomponent.getFastPublicLink(viewNode)%>"> 
                                   <% print uicomponent.getInlineEditingField(viewNode, "exo:title", itemName, "TEXT", "CLVTitle_"+String.valueOf(i), "GroovyCLVTitle", true, "button_direction=left-to-right","fast_publish=" + uicomponent.getFastPublicLink(viewNode)); %>
                                 </div>
                               <%  
