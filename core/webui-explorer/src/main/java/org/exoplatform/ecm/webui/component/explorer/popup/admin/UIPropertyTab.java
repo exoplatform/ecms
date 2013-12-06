@@ -205,8 +205,7 @@ public class UIPropertyTab extends UIContainer {
       }
       uiForm.loadForm(propertyName);
       uiManager.setIsEditProperty(true);
-      uiManager.setRenderedChild(UIPropertyForm.class);
-      uiPropertyTab.setRendered(false);
+      uiManager.setSelectedTab(2);
     }
   }
 

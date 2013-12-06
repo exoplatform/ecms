@@ -686,9 +686,8 @@ public class UIPropertyForm extends UIForm {
       }
       uiForm.refresh();
       UIPropertiesManager uiPropertiesManager = uiForm.getAncestorOfType(UIPropertiesManager.class);
-      uiPropertiesManager.setRenderedChild(UIPropertyTab.class);
+      uiPropertiesManager.setSelectedTab(1);
       uiPropertiesManager.setIsEditProperty(false);
-      return;
     }
   }
 
@@ -705,7 +704,7 @@ public class UIPropertyForm extends UIForm {
     public void execute(Event<UIPropertyForm> event) throws Exception {
       UIPropertyForm uiForm = event.getSource();
       UIPropertiesManager uiPropertiesManager = uiForm.getAncestorOfType(UIPropertiesManager.class);
-      uiPropertiesManager.setRenderedChild(UIPropertyTab.class);
+      uiPropertiesManager.setSelectedTab(1);
       uiForm.refresh();
       uiForm.isAddNew_ = true;
       event.getRequestContext().addUIComponentToUpdateByAjax(uiForm.getParent());

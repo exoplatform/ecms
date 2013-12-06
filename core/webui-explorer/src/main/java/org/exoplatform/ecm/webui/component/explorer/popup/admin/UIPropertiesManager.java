@@ -26,6 +26,7 @@ import org.exoplatform.ecm.webui.utils.Utils;
 import org.exoplatform.webui.application.WebuiRequestContext;
 import org.exoplatform.webui.config.annotation.ComponentConfig;
 import org.exoplatform.webui.config.annotation.EventConfig;
+import org.exoplatform.webui.core.UIComponent;
 import org.exoplatform.webui.core.UIContainer;
 import org.exoplatform.webui.core.UIPopupComponent;
 import org.exoplatform.webui.event.Event;
@@ -39,9 +40,9 @@ import org.exoplatform.webui.event.EventListener;
  * 10:07:15 AM
  */
 @ComponentConfig(
-    template = "system:/groovy/webui/core/UITabPane.gtmpl",
+    template = "system:/groovy/webui/core/UITabPane_New.gtmpl",
     events = {
-        @EventConfig(listeners = UIPropertiesManager.ChangeTabActionListener.class)
+        @EventConfig(listeners = UIPropertiesManager.SelectTabActionListener.class)
     }
 )
 
@@ -51,10 +52,27 @@ public class UIPropertiesManager extends UIContainer implements UIPopupComponent
   private String wsName_ = null;
   private boolean isEditProperty = false;
   private List<PropertyDefinition> properties = null;
+  private String selectedTabId = "";
 
   public UIPropertiesManager() throws Exception {
-    addChild(UIPropertyTab.class, null, null)  ;
-    addChild(UIPropertyForm.class, null, null).setRendered(false) ;
+    addChild(UIPropertyTab.class, null, null);
+    addChild(UIPropertyForm.class, null, null);
+    setSelectedTab(1);
+  }
+
+  public String getSelectedTabId()
+  {
+    return selectedTabId;
+  }
+
+  public void setSelectedTab(String renderTabId)
+  {
+    selectedTabId = renderTabId;
+  }
+
+  public void setSelectedTab(int index)
+  {
+    selectedTabId = getChild(index - 1).getId();
   }
   
   public void processRender(WebuiRequestContext context) throws Exception {
@@ -91,9 +109,21 @@ public class UIPropertiesManager extends UIContainer implements UIPopupComponent
     getChild(UIPropertyForm.class).lockForm(isLockForm) ;
   }
 
-  @SuppressWarnings("unused")
-  static public class ChangeTabActionListener extends EventListener<UIPropertiesManager> {
-    public void execute(Event<UIPropertiesManager> event) throws Exception {
+  static public class SelectTabActionListener extends EventListener<UIPropertiesManager> {
+    public void execute(Event<UIPropertiesManager> event) throws Exception
+    {
+      WebuiRequestContext context = event.getRequestContext();
+      String renderTab = context.getRequestParameter(UIComponent.OBJECTID);
+      if (renderTab == null)
+        return;
+      event.getSource().setSelectedTab(renderTab);
+      WebuiRequestContext parentContext = (WebuiRequestContext)context.getParentAppRequestContext();
+      if (parentContext != null) {
+        parentContext.setResponseComplete(true);
+      }
+      else {
+        context.setResponseComplete(true);
+      }
     }
   }
   
