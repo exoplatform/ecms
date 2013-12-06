@@ -49,13 +49,13 @@
 						  String actionLink = uicomponent.event("ChangeNode", child.getPath(), new Parameter("workspaceName", child.getSession().getWorkspace().getName())) ;
 					%>
 					<td>
-						<a href="$actionLink">
+						<a href="javascript:void(0);" onclick="$action<Link">
 						 		<%=child.getName()%>
 					 	</a>
 					</td>
 					<!--
 			    <td>
-			      <a href="<%=uicomponent.getDownloadLink(child)%>">
+			      <a href="javascript:void(0);" onclick="<%=uicomponent.getDownloadLink(child)%>">
 			        <%=child.getName()%>
 			      </a>
 			    </td>
@@ -65,7 +65,7 @@
 		      <tr>
 				    <td style="width:25%"><%=_ctx.appRes("Kofax.view.label.downloadable")%> #<%=i%></td>
 				    <td>
-				      <a href="<%=uicomponent.event("ChangeNode", formatNodeName(child.getPath()), new Parameter("workspaceName", child.getSession().getWorkspace().getName()))%>">
+				      <a href="javascript:void(0);" onclick="<%=uicomponent.event("ChangeNode", formatNodeName(child.getPath()), new Parameter("workspaceName", child.getSession().getWorkspace().getName()))%>">
 				        <%=child.getName()%>
 				      </a>
 				    </td>

@@ -189,7 +189,7 @@
         
         var closeIcon = document.createElement("a");
         closeIcon.className = "CloseLoadIcon";
-        closeIcon.setAttribute("href", "javascript:ajaxAbort();");
+        closeIcon.setAttribute("onclick", "javascript:ajaxAbort();");
         closeIcon.setAttribute("title", lblAbort);
         closeIcon.innerHTML = "&nbsp;";
         ajaxLoading.appendChild(closeIcon);

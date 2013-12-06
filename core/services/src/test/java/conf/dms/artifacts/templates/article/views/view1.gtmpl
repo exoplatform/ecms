@@ -429,7 +429,7 @@
 														actionLink = uicomponent.getRssLink() + wsName + relPath ;
 													}
 											 %>
-			  									<div> - <a href="$actionLink">$relName</a></div>
+			  									<div> - <a href="javascript:void(0);" onclick="$action<Link">$relName</a></div>
 			  							    <%		}
 			  							    	}%>
 					              		</div>
@@ -468,10 +468,10 @@
 								%>
 										<div class="AttachmentsContainer ClearFix">	
 							              <div class="AttachmentsContentIcon">
-							                 <a href="<%=uicomponent.event("ChangeNode", attPath)%>"><%=att.getName()%></a>
+							                 <a href="javascript:void(0);" onclick="<%=uicomponent.event("ChangeNode", attPath)%>"><%=att.getName()%></a>
 							              </div>
 							                  <% if (PermissionUtil.canRemoveNode(att)) {%>
-							              <a href="<%=uicomponent.event("RemoveAttach", attPath)%>" title="<%=_ctx.appRes(uicomponent.getId() + ".tooltip.remove-attachment")%>">
+							              <a href="javascript:void(0);" onclick="<%=uicomponent.event("RemoveAttach", attPath)%>" title="<%=_ctx.appRes(uicomponent.getId() + ".tooltip.remove-attachment")%>">
 							                  <div class="RemoveAttachments"><span></span></div>
 							              </a>
                                 <% } %>

@@ -198,7 +198,7 @@
 							  String actionLink2 = uicomponent.event("ChangeNode", rel.getPath(), new Parameter("workspaceName", rel.getSession().getWorkspace().getName())) ;
 							%>
 								<div style="font-size: 12px; padding: 10px;">
-									-	<a href="$actionLink2">
+									-	<a href="javascript:void(0);" onclick="$action<Link2">
 											<%=rel.getName()%>
 										</a>
 								</div>
@@ -226,7 +226,7 @@
 						%>
 							<div style="font-size: 12px; padding: 10px;">
 								<div class="RemoveNodeFloat">
-								 -<a href="$actionLink3">
+								 -<a href="javascript:void(0);" onclick="$action<Link3">
 								 		<%=att.getName()%>
 								 	</a>
 								</div>

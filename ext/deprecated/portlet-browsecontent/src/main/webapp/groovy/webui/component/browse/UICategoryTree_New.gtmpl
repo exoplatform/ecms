@@ -18,7 +18,7 @@
 				</div>
 				<div class="MiddleCategoryTree">
 					<div class="HomeNode">
-						<a class="HardDisk24x24Icon LableNode" href="<%=uicomponent.event('Select',uicomponent.getRootNode().getPath());%>">
+						<a class="HardDisk24x24Icon LableNode" href="javascript:void(0);" onclick="<%=uicomponent.event('Select',uicomponent.getRootNode().getPath());%>">
 						    <%=rootNode%>
 						</a>
 					</div>

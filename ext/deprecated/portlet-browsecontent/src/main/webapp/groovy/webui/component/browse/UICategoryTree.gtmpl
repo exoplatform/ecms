@@ -42,9 +42,9 @@
 	</div>
 	<div class="MiddleCategoryTree">
 		<div class="ClearFix">
-			<a href="<%=uicomponent.event('Select',uicomponent.getRootNode().getPath());%>"><div class="TreeRootIcon NormalFolder16x16Icon"><span></span></div></a>
-			<a href="<%=uicomponent.event('Select',uicomponent.getRootNode().getPath());%>"><div class="TreeRootIcon CBDefaultFolder16x16Icon"><span></span></div></a>
-			<a class="RootTreeNode" href="<%=uicomponent.event('Select',uicomponent.getRootNode().getPath());%>">
+			<a href="javascript:void(0);" onclick="<%=uicomponent.event('Select',uicomponent.getRootNode().getPath());%>"><div class="TreeRootIcon NormalFolder16x16Icon"><span></span></div></a>
+			<a href="javascript:void(0);" onclick="<%=uicomponent.event('Select',uicomponent.getRootNode().getPath());%>"><div class="TreeRootIcon CBDefaultFolder16x16Icon"><span></span></div></a>
+			<a class="RootTreeNode" href="javascript:void(0);" onclick="<%=uicomponent.event('Select',uicomponent.getRootNode().getPath());%>">
 			    <%=rootNode%>
 			</a>
 		</div>

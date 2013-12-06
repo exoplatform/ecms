@@ -48,10 +48,10 @@
 				for(group in groups) {
 			%>
 				<div class="FunctionItem">
-				  <a href="<%=group.event(group.getUIExtensionName())%>">
+				  <a href="javascript:void(0);" onclick="<%=group.event(group.getUIExtensionName())%>">
 				  <div class="ItemIcon DefaultItemIcon <%=group.getUIExtensionName()%>Icon"><span></span></div>
 				  </a>
-				  <a class="ItemLabel" href="<%=group.event(group.getUIExtensionName())%>">
+				  <a class="ItemLabel" href="javascript:void(0);" onclick="<%=group.event(group.getUIExtensionName())%>">
 					<%=_ctx.appRes(uicomponent.getName()+".label." + group.getUIExtensionName())%>
 				  </a>
 				</div>

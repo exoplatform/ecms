@@ -74,7 +74,7 @@
       <a href="javascript:eXo.ecm.ECMUtils.generateWebDAVLink('','<%=uicomponent.getPortalName()%>','<%=restContextName%>','${repository}','<%=uicomponent.getWorkspaceName()%>','<%=formatNodeName(originalNode.getPath())%>','<%=mimeType%>')" class="ActionButton LightBlueStyle">
           <%=_ctx.appRes("File.view.label.webDAV")%>
       </a>
-      <a href="<%=uicomponent.getDownloadLink(currentNode)%>" title="<%=_ctx.appRes("File.view.label.download")%>" class="ActionButton LightBlueStyle">
+      <a href="javascript:void(0);" onclick="<%=uicomponent.getDownloadLink(currentNode)%>" title="<%=_ctx.appRes("File.view.label.download")%>" class="ActionButton LightBlueStyle">
           <%=_ctx.appRes("File.view.label.download")%>
       </a>
   </div>  

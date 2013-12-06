@@ -16,7 +16,7 @@ import org.exoplatform.wcm.webui.Utils;
 	%>
 		<div style="position: relative; height: 0px;" id="<%=quickEditingBlockId%>">
 			<div style="position: absolute; right: 0px; top: 0px; height: 0px">
-				<a href="<%=uicomponent.event("QuickEdit")%>" title="<%= _ctx.appRes("UISearchPageLayoutDefault.title");%>"><div class="QuickEdit"><span></span></div></a>
+				<a href="javascript:void(0);" onclick="<%=uicomponent.event("QuickEdit")%>" title="<%= _ctx.appRes("UISearchPageLayoutDefault.title");%>"><div class="QuickEdit"><span></span></div></a>
 			</div>
 		</div>
 	<% } %>		

@@ -127,7 +127,7 @@
 
 							%>				
 								<div class="CaptionRefresh">
-									<a href="<%=uicomponent.event("Refresh")%>"><%= _ctx.appRes("UICLVPresentation.action.refresh") %></a>
+									<a href="javascript:void(0);" onclick="<%=uicomponent.event("Refresh")%>"><%= _ctx.appRes("UICLVPresentation.action.refresh") %></a>
 								</div>
 							<% 
 						}

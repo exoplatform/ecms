@@ -50,7 +50,7 @@
 	    </div>  
 	    <div class="UIAction">
 	        <%for(action in uicomponent.getActions()) { %>
-		        <a href="<%=uicomponent.event(action)%>" class="ActionButton LightBlueStyle" >				          
+		        <a href="javascript:void(0);" onclick="<%=uicomponent.event(action)%>" class="ActionButton LightBlueStyle" >				          
 		                <%=_ctx.appRes(uicomponent.getId() + ".action." + action)%>
 		         </a>
 	        <%} %>

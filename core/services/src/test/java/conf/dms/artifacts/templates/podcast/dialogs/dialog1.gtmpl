@@ -117,7 +117,7 @@
 									  <div style="font-size:12px; font-weight: bold; line-height: 17px;">
 									    <%=_ctx.appRes("File.dialog.label.re-upload")%>
 									  </div>
-										<a href="$actionLink">
+										<a href="javascript:void(0);" onclick="$action<Link">
 											<img src="/eXoResources/skin/DefaultSkin/background/Blank.gif" alt="" class="ActionIcon Remove16x16Icon"/>
 										</a>
 									</div>

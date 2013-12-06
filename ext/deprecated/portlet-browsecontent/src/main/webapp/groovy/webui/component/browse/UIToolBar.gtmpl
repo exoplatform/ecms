@@ -21,13 +21,13 @@
 	    	tooltip = _ctx.appRes(uicomponent.getName() + ".tooltip.Hidden") ; 
 	   	}
   %>      
-	      <a href="$actionShowHidden" title="$tooltip">
+	      <a href="javascript:void(0);" onclick="$action<ShowHidden" title="$tooltip">
 	        <div class="ShowHiddenIcon $iconName"><span></span></div>
 	      </a>
   <%}%>
    <%if(isEnablePath) {%>
       <div class="CategoryListIcon"><span></span></div>      
-      <a class="PathLabel" href="<%=uicomponent.event('SelectPath', root.getPath())%>">      
+      <a class="PathLabel" href="javascript:void(0);" onclick="<%=uicomponent.event('SelectPath', root.getPath())%>">      
 	      <%
 	      	String nodeName = root.getPath().substring(root.getPath().lastIndexOf("/") + 1) ;	      	
 	      	if(root.getPath().trim().equals("/")) nodeName = _ctx.appRes(uicomponent.getName() + ".label.RootNode") ;	     	      	
@@ -50,7 +50,7 @@
 		        <%
 		        } else {
 		        %>
-		        <a class="PathChildLabel" href="$actionLink"><%=name%></a>
+		        <a class="PathChildLabel" href="javascript:void(0);" onclick="$action<Link"><%=name%></a>
 		        <%
 		        }
 		        %>
@@ -73,14 +73,14 @@
           actionLabel = _ctx.appRes(uicomponent.getName() + ".tooltip.Vote") 
           link = uicomponent.event("Vote") ;
       %>
-          <a class="Icon VoteDocumentButton" href="$link" title="$actionLabel"><span></span></a>      
+          <a class="Icon VoteDocumentButton" href="javascript:void(0)" onclick="$link" title="$actionLabel"><span></span></a>      
      
       <%}
         if(isEnableComment) {
           actionLabel = _ctx.appRes(uicomponent.getName() + ".tooltip.Comment") 
           link = uicomponent.event("Comment") ;
       %>
-        <a class="Icon WriteCommentButton" href="$link" title="$actionLabel"><span></span></a>      
+        <a class="Icon WriteCommentButton" href="$javascript:void(0)" onclick="link" title="$actionLabel"><span></span></a>      
       <%}%>
       
       <%
@@ -88,14 +88,14 @@
 	      actionLabel = _ctx.appRes(uicomponent.getName() + ".tooltip.showSearch") 
 	      link = uicomponent.event("Search") ;
       %>
-	      <a class="Icon CBSearchButton" href="$link" title="$actionLabel"><span></span></a>      
+	      <a class="Icon CBSearchButton" href="javascript:void(0)" onclick="$link" title="$actionLabel"><span></span></a>      
       <%}%>  
 	    <%
 	      if(!uicomponent.isClearHistory()) {
 		      actionLabel = _ctx.appRes(uicomponent.getName() + ".tooltip.Back") 
 		      link = uicomponent.event("Back") ;
       %>
-	    	<a class="Icon Style1BackArrow24x24Icon" href="$link" title="$actionLabel"><span></span></a>   
+	    	<a class="Icon Style1BackArrow24x24Icon" href="javascript:void(0)" onclick="$link" title="$actionLabel"><span></span></a>   
 	    <%}%>   
  	 	<div class="SeparatorLine"><span></span></div>
     

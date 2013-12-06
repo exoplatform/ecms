@@ -59,28 +59,28 @@
 			<div class="GroundContextMenu" style="position: absolute;	top: 0px; display: none;">
 				<div class="UIRightClickPopupMenu" style="display: block;">
 					<div class="UIRightPopupMenuContainer" onmousedown="event.cancelBubble = true;">									
-						<a class="MenuItem" href="<%=contextMenu.event("AddFolder")%>" style="display: block;"> 	
+						<a class="MenuItem" href="javascript:void(0);" onclick="<%=contextMenu.event("AddFolder")%>" style="display: block;"> 	
 							<div class="ItemIcon AddFolder16x16Icon">
 								<%=_ctx.appRes("ECMContextMenu.event.AddFolder")%>
 							</div>
 					 	</a>
-					 	<a class="MenuItem" href="<%=contextMenu.event("AddDocument")%>" style="display: block;"> 	
+					 	<a class="MenuItem" href="javascript:void(0);" onclick="<%=contextMenu.event("AddDocument")%>" style="display: block;"> 	
 							<div class="ItemIcon AddDocument16x16Icon">
 								<%=_ctx.appRes("ECMContextMenu.event.AddDocument")%>
 							</div>
 					 	</a>
-					 	<a class="MenuItem" href="<%=contextMenu.event("Upload")%>" style="display: block;"> 	
+					 	<a class="MenuItem" href="javascript:void(0);" onclick="<%=contextMenu.event("Upload")%>" style="display: block;"> 	
 							<div class="ItemIcon Upload16x16Icon">
 								<%=_ctx.appRes("ECMContextMenu.event.Upload")%>
 							</div>
 					 	</a>
-					 	<a class="MenuItem" href="<%=contextMenu.event("AddSymLink")%>" style="display: block;">   
+					 	<a class="MenuItem" href="javascript:void(0);" onclick="<%=contextMenu.event("AddSymLink")%>" style="display: block;">   
               <div class="ItemIcon AddSymLink16x16Icon">
                 <%=_ctx.appRes("ECMContextMenu.event.AddSymLink")%>
               </div>
             </a>
 					 	<%if(uicomponent.isCanPaste()) {%>
-						 	<a class="MenuItem" href="<%=contextMenu.event("Paste")%>" style="display: block;"> 	
+						 	<a class="MenuItem" href="javascript:void(0);" onclick="<%=contextMenu.event("Paste")%>" style="display: block;"> 	
 								<div class="ItemIcon Paste16x16Icon">
 									<%=_ctx.appRes("ECMContextMenu.event.Paste")%>
 								</div>

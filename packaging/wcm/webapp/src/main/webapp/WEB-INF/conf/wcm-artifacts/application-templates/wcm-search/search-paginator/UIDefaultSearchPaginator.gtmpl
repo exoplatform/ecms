@@ -8,7 +8,7 @@
 
 <div class="UIPaginatorDefault">
 
-  <a href="<%=uicomponent.event("ShowPage","${currentPage + 1}")%>" class="Next"><%=_ctx.appRes("UIPaginatorDefault.label.more")%></a>
+  <a href="javascript:void(0);" onclick="<%=uicomponent.event("ShowPage","${currentPage + 1}")%>" class="Next"><%=_ctx.appRes("UIPaginatorDefault.label.more")%></a>
 
 </div>
 
@@ -23,7 +23,7 @@
 <div class="UIPaginatorDefault">
 
   <% if( currentPage - 1 > 0 ){%>
-      <a href="<%=uicomponent.event("ShowPage","${currentPage - 1}")%>" class="Prev">$previousPage</a>
+      <a href="javascript:void(0);" onclick="<%=uicomponent.event("ShowPage","${currentPage - 1}")%>" class="Prev">$previousPage</a>
   <% }%>
 
   <%
@@ -41,12 +41,12 @@
   <%  if( i == currentPage) { %>
 	    <a class="Item Current"><%=i%></a>
   <%  } else { %>
-	    <a href="<%=uicomponent.event("ShowPage","$i")%>" class="Item"><%=i%></a>
+	    <a href="javascript:void(0);" onclick="<%=uicomponent.event("ShowPage","$i")%>" class="Item"><%=i%></a>
   <%  } %>
   <%}%>
 
   <% if(currentPage + 1 <= totalPage) { %>
-       <a href="<%=uicomponent.event("ShowPage","${currentPage + 1}")%>" class="Next">$nextPage</a>
+       <a href="javascript:void(0);" onclick="<%=uicomponent.event("ShowPage","${currentPage + 1}")%>" class="Next">$nextPage</a>
   <% }%>
 
 </div>

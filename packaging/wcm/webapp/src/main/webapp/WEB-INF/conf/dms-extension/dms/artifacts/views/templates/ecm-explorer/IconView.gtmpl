@@ -70,7 +70,7 @@
 												for(itemGroundContext in managersGroundContext) {
 												action = itemGroundContext.getUIExtensionName();
 										%>
-										<a class="MenuItem" href="<%=itemGroundContext.event(action)%>" style="display: block;"> 	
+										<a class="MenuItem" href="javascript:void(0);" onclick="<%=itemGroundContext.event(action)%>" style="display: block;"> 	
 											<div class="ItemIcon ${action}16x16Icon">
 												<%=_ctx.appRes("ECMContextMenu.event." + action)%>
 											</div>

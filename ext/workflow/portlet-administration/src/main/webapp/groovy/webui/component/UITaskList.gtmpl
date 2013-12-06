@@ -45,7 +45,7 @@
 	      <td class="Text"><%=task.getActorId()%></td>
 
 	      <td class="Text"><%=dateFormat.format(uicomponent.getProcessInstanceStartDate(task))%></td>
-	      <td class="Text"><a href="<%=uicomponent.event("ManageState", task.getId())%>"><%= _ctx.appRes("UITaskList.label.managerState") %></a></td>
+	      <td class="Text"><a href="javascript:void(0);" onclick="<%=uicomponent.event("ManageState", task.getId())%>"><%= _ctx.appRes("UITaskList.label.managerState") %></a></td>
 	    </tr>
   <%
       }

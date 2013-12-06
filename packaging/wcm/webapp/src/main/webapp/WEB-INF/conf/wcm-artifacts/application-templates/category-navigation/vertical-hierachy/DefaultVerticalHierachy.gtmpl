@@ -19,7 +19,7 @@
   <div class="TreeContainer JSContainer">
   	<div style="padding-bottom: 12px">
 	    <div class="HomeNode">
-		    <a class="LevelUpArrowIcon" href="<%=uicomponent.getActionLink();%>" 
+		    <a class="LevelUpArrowIcon" href="javascript:void(0);" onclick="<%=uicomponent.getActionLink();%>" 
 		    onmousedown="event.cancelBubble=true;" onkeydown="event.cancelBubble=true;" 
 		    title="<%=_ctx.appRes("UITree.tooltip.UpLevel")%>" style="display: block;"><span></span></a>
 	  	</div>

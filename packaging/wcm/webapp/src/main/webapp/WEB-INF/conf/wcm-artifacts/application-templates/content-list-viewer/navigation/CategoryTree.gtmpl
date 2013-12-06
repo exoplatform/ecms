@@ -21,7 +21,7 @@ public List<CategoryBean> getCategoriesFromUrl() throws Exception {
     return uicomponent.getCategories(false);
   else {
 %>
-      <a class="CategoryLabel" href="<%=uicomponent.getBackLink(paramPath)%>" ><%=_ctx.appRes("UICLVContainer.msg.category-back");%></a>
+      <a class="CategoryLabel" href="javascript:void(0);" onclick="<%=uicomponent.getBackLink(paramPath)%>" ><%=_ctx.appRes("UICLVContainer.msg.category-back");%></a>
 <%
     return uicomponent.getCategories(paramPath, "exo:taxonomy", 1, false);
   }

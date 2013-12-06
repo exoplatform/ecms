@@ -112,7 +112,7 @@
 	   			 <%if(isShowAllDoc) {%>
 					    <div class="ViewPreviousDocument ClearFix"> 
 					      <div class="BackIcon"><span></span></div>
-					      <a href="<%=uicomponent.event('Back')%>">
+					      <a href="javascript:void(0);" onclick="<%=uicomponent.event('Back')%>">
 					      	<%=_ctx.appRes(componentName + ".label.previous")%>
 					      </a>
 					      
@@ -141,7 +141,7 @@
 								   int numbDocument = docChilds.size() ;
 							%>
 										<div class="TiteContentView ClearFix">										  
-										  <a class="TiteLabel" href="$actionLinkSub">
+										  <a class="TiteLabel" href="javascript:void(0);" onclick="$action<LinkSub">
 										  	<div class="TiteContentIcon CBDefaultFolder16x16Icon $iconSubCat">
 										  	<%if(Utils.isSymLink(subCatNode)) {%>
 						                      <div class="LinkSmall"></div>
@@ -204,7 +204,7 @@
 				                %>
 				                    <div class="ViewMoreDocument ClearFix">
 				                    	<div class="NextIcon"><span></span></div>
-				                    	<a href="<%=actionLinkSub%>">
+				                    	<a href="javascript:void(0);" onclick="<%=actionLinkSub%>">
 				                    		<%=_ctx.appRes(label)%>
 															</a>
 				                    	                             
