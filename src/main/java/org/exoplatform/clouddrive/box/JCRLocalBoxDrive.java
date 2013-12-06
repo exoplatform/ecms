@@ -43,9 +43,7 @@ import org.exoplatform.services.jcr.ext.app.SessionProviderService;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Iterator;
-import java.util.LinkedHashMap;
 import java.util.List;
-import java.util.Map;
 
 import javax.jcr.Node;
 import javax.jcr.PathNotFoundException;
@@ -143,7 +141,7 @@ public class JCRLocalBoxDrive extends JCRLocalCloudDrive implements UserTokenRef
         } else {
           // file
           BoxFile f = (BoxFile) item;
-          type = mimeTypes.getMimeType(name);
+          type = findMimetype(name);
           link = downloadLink = api.getLink(f);
           embedLink = api.getEmbedLink(f);
           localNode = openFile(id, name, type, parent);
@@ -162,17 +160,17 @@ public class JCRLocalBoxDrive extends JCRLocalCloudDrive implements UserTokenRef
 
         // XXX thumbnail link not used
         changed.add(new JCRLocalCloudFile(localNode.getPath(),
-                                         id,
-                                         name,
-                                         link,
-                                         embedLink,
-                                         downloadLink,
-                                         type,
-                                         item.getCreatedBy().getLogin(),
-                                         item.getModifiedBy().getLogin(),
-                                         created,
-                                         modified,
-                                         isFolder));
+                                          id,
+                                          name,
+                                          link,
+                                          embedLink,
+                                          downloadLink,
+                                          type,
+                                          item.getCreatedBy().getLogin(),
+                                          item.getModifiedBy().getLogin(),
+                                          created,
+                                          modified,
+                                          isFolder));
       }
       initBoxItem(parent, items.parent); // finally init parent
       return items.parent;
@@ -237,22 +235,33 @@ public class JCRLocalBoxDrive extends JCRLocalCloudDrive implements UserTokenRef
      */
     @Override
     protected void syncFiles() throws RepositoryException, CloudDriveException {
+      // real all local nodes of this drive
+      readLocalNodes();
+
+      // sync with cloud
       syncChilds(BoxAPI.BOX_ROOT_ID, driveRoot);
+
+      // remove local nodes of files not existing remotely, except of root
+      nodes.remove(BoxAPI.BOX_ROOT_ID);
+      for (Iterator<List<Node>> niter = nodes.values().iterator(); niter.hasNext();) {
+        List<Node> nls = niter.next();
+        niter.remove();
+        for (Node n : nls) {
+          removed.add(n.getPath());
+          n.remove();
+        }
+      }
     }
 
     protected void syncChilds(String folderId, Node parent) throws RepositoryException, CloudDriveException {
       ItemsIterator items = api.getFolderItems(folderId);
       iterators.add(items);
 
-      // local nodes of this folder, after this sync we'll remove what will lie in this map
-      Map<String, List<Node>> nodes = new LinkedHashMap<String, List<Node>>();
-      readNodes(parent, nodes, false);
-
       while (items.hasNext()) {
         BoxItem item = items.next();
 
         // remove from map of local to mark the item as existing
-        nodes.remove(item.getId());
+        List<Node> existing = nodes.remove(item.getId());
 
         boolean isFolder = item instanceof BoxFolder;
         Calendar created = api.parseDate(item.getCreatedAt());
@@ -276,24 +285,24 @@ public class JCRLocalBoxDrive extends JCRLocalCloudDrive implements UserTokenRef
                        created,
                        modified);
             changed.add(new JCRLocalCloudFile(localNode.getPath(),
-                                             id,
-                                             name,
-                                             link,
-                                             embedLink,
-                                             downloadLink,
-                                             type,
-                                             item.getCreatedBy().getLogin(),
-                                             item.getModifiedBy().getLogin(),
-                                             created,
-                                             modified,
-                                             isFolder));
+                                              id,
+                                              name,
+                                              link,
+                                              embedLink,
+                                              downloadLink,
+                                              type,
+                                              item.getCreatedBy().getLogin(),
+                                              item.getModifiedBy().getLogin(),
+                                              created,
+                                              modified,
+                                              isFolder));
           }
           // go recursive for all sub-folders
           syncChilds(id, localNode);
         } else {
           // sync file
           BoxFile f = (BoxFile) item;
-          type = mimeTypes.getMimeType(name);
+          type = findMimetype(name);
           localNode = openFile(id, name, type, parent);
           if (localNode.isNew() || !localNode.hasProperty("box:etag")
               || !localNode.getProperty("box:etag").getString().equals(f.getEtag())) {
@@ -311,28 +320,32 @@ public class JCRLocalBoxDrive extends JCRLocalCloudDrive implements UserTokenRef
                      modified);
             initBoxItem(localNode, item);
             changed.add(new JCRLocalCloudFile(localNode.getPath(),
-                                             id,
-                                             name,
-                                             link,
-                                             embedLink,
-                                             downloadLink,
-                                             type,
-                                             item.getCreatedBy().getLogin(),
-                                             item.getModifiedBy().getLogin(),
-                                             created,
-                                             modified,
-                                             isFolder));
+                                              id,
+                                              name,
+                                              link,
+                                              embedLink,
+                                              downloadLink,
+                                              type,
+                                              item.getCreatedBy().getLogin(),
+                                              item.getModifiedBy().getLogin(),
+                                              created,
+                                              modified,
+                                              isFolder));
           }
         }
-      }
 
-      // remove local nodes of files not existing remotely
-      for (Iterator<List<Node>> niter = nodes.values().iterator(); niter.hasNext();) {
-        List<Node> nls = niter.next();
-        niter.remove();
-        for (Node n : nls) {
-          removed.add(n.getPath());
-          n.remove();
+        // cleanup of this file located in another place (usecase of rename/move)
+        // XXX this also assumes that Box doesn't support linking of files to other folders
+        if (existing != null) {
+          for (Iterator<Node> eiter = existing.iterator(); eiter.hasNext();) {
+            Node enode = eiter.next();
+            String path = localNode.getPath();
+            if (!enode.getPath().equals(path)) {
+              removed.add(path);
+              enode.remove();
+              eiter.remove();
+            }
+          }
         }
       }
 
@@ -340,11 +353,9 @@ public class JCRLocalBoxDrive extends JCRLocalCloudDrive implements UserTokenRef
     }
   }
 
-  
-  
   protected final MimeTypeResolver mimeTypes = new MimeTypeResolver();
-  
- // protected 
+
+  // protected
 
   /**
    * @param user
@@ -491,7 +502,6 @@ public class JCRLocalBoxDrive extends JCRLocalCloudDrive implements UserTokenRef
   public String getChangesLink() throws DriveRemovedException, CloudProviderException, RepositoryException {
     return getUser().api().getChangesLink();
   }
-  
 
   /**
    * {@inheritDoc}
@@ -500,7 +510,7 @@ public class JCRLocalBoxDrive extends JCRLocalCloudDrive implements UserTokenRef
   public void updateChangesLink() throws DriveRemovedException, CloudProviderException, RepositoryException {
     getUser().api().updateChangesLink();
   }
-  
+
   /**
    * {@inheritDoc}
    */
@@ -545,6 +555,16 @@ public class JCRLocalBoxDrive extends JCRLocalCloudDrive implements UserTokenRef
     if (shared != null) {
       localNode.setProperty("box:sharedAccess", shared.getAccess());
       localNode.setProperty("box:sharedCanDownload", shared.getPermissions().isCan_download());
+    }
+  }
+
+  protected String findMimetype(String fileName) {
+    String name = fileName.toUpperCase().toLowerCase();
+    String ext = name.substring(name.lastIndexOf(".") + 1);
+    if (ext.equals(BoxAPI.BOX_WEBDOCUMENT_EXT)) {
+      return BoxAPI.BOX_WEBDOCUMENT_MIMETYPE;
+    } else {
+      return mimeTypes.getMimeType(fileName);
     }
   }
 

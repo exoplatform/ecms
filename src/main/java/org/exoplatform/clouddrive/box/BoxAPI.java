@@ -323,6 +323,17 @@ public class BoxAPI {
   public static final String    BOX_FILE_URL        = "https://app.box.com/" + BOX_FILES_PATH;
 
   /**
+   * Custom mimetype for Box's webdoc files.
+   */
+  public static final String BOX_WEBDOCUMENT_MIMETYPE = "application/x-exo.box.webdoc";
+  
+
+  /**
+   * Extension for Box's webdoc files.
+   */
+  public static final String BOX_WEBDOCUMENT_EXT = "webdoc";
+  
+  /**
    * URL patter for Embedded UI of Box file. Based on:<br>
    * http://stackoverflow.com/questions/12816239/box-com-embedded-file-folder-viewer-code-via-api
    * http://developers.box.com/box-embed/

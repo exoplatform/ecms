@@ -221,7 +221,7 @@ public class ChangesService implements ResourceContainer {
                   local.updateChangesLink();
                   String link = local.getChangesLink();
                   if (link != null) {
-                    return Response.status(Status.OK).entity("{changesLink:\"" + link + "\"}").build();
+                    return Response.status(Status.OK).entity("{\"changesLink\":\"" + link + "\"}").build();
                   } else {
                     return Response.status(Status.NOT_FOUND).entity("Changes link not provided").build();
                   }

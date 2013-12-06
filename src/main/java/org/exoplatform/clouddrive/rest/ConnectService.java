@@ -106,7 +106,7 @@ public class ConnectService implements ResourceContainer {
   /**
    * Error cookie expire time in seconds.
    */
-  public static final int       ERROR_COOKIE_EXPIRE    = 10;                                       // 10sec
+  public static final int       ERROR_COOKIE_EXPIRE    = 5;                                       // 5sec
 
   /**
    * Connect request expire time in milliseconds.
@@ -870,8 +870,7 @@ public class ConnectService implements ResourceContainer {
         String host = locator.getServiceHost(uriInfo.getRequestUri().getHost());
 
         UUID initId = generateId(localUser);
-        initiated.put(initId, new ConnectInit(localUser, cloudProvider, host)); // TODO cleanup +
-                                                                                // "/portal/rest"
+        initiated.put(initId, new ConnectInit(localUser, cloudProvider, host)); 
         timeline.put(initId, System.currentTimeMillis() + (INIT_COOKIE_EXPIRE * 1000) + 5000);
 
         resp.cookie(INIT_COOKIE,
