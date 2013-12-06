@@ -39,14 +39,14 @@
 			}
 			if (Utils.isShowQuickEdit() && !isPrint) {
 			  %>
-				 <a class="DocumentQuickEdit" href="<%= uicomponent.event("QuickEdit") %>" title="<%= _ctx.appRes("UIPCVContainer.title.QuickEdit") %>"></a>
+				 <a class="DocumentQuickEdit" href="javascript:void(0);" onclick="<%= uicomponent.event("QuickEdit") %>" title="<%= _ctx.appRes("UIPCVContainer.title.QuickEdit") %>"></a>
 				 <%
 	      	}
 			if(Utils.isShowDraft(node) && !isPrint){
     		%>
   			<div style="padding: 5px 10px; line-height: 16px; ">
 				[ <span class="DraftIcon" style="padding-left: 20px"><%= _ctx.appRes("UIPCVContainer.label.draft") %>, </span>
-				<a style="padding-left: 1px" href="<%= uicomponent.event("Edit") %>"> <%= _ctx.appRes("UIPCVContainer.label.edit") %></a>]
+				<a style="padding-left: 1px" href="javascript:void(0);" onclick="<%= uicomponent.event("Edit") %>"> <%= _ctx.appRes("UIPCVContainer.label.edit") %></a>]
 	 		</div>  
 		<% 
   		}

@@ -61,7 +61,7 @@
           </div>
           <div class="LineLeft"><span></span></div>
           <div class="RightColumn" style="border: none; width:80px;">
-            <a href="<%=uicomponent.event("Sort", typeActionLink + "Auditing")%>">
+            <a href="javascript:void(0);" onclick="<%=uicomponent.event("Sort", typeActionLink + "Auditing")%>">
               <%
                 if (typeSort.equals("Auditing")) {
               %>
@@ -75,7 +75,7 @@
           </div>
           <div class="LineLeft" style="float: right"><span></span></div>
           <div class="RightColumn" style="width:80px;">
-            <a href="<%=uicomponent.event("Sort", typeActionLink + "Versionable")%>">
+            <a href="javascript:void(0);" onclick="<%=uicomponent.event("Sort", typeActionLink + "Versionable")%>">
               <%
                 if (typeSort.equals("Versionable")) {
               %>
@@ -89,7 +89,7 @@
           </div>
           <div class="LineLeft" style="float: right"><span></span></div>
           <div class="RightColumn" style="width: 90px;">
-            <a href="<%=uicomponent.event("Sort", typeActionLink + "Owner")%>">
+            <a href="javascript:void(0);" onclick="<%=uicomponent.event("Sort", typeActionLink + "Owner")%>">
               <%
                 if (typeSort.equals("Owner")) {
               %>
@@ -103,7 +103,7 @@
           </div>
           <div class="LineLeft" style="float: right"><span></span></div>
           <div class="RightColumn" style="width: 125px;">
-            <a href="<%=uicomponent.event("Sort", typeActionLink + "ModifiedDate")%>">
+            <a href="javascript:void(0);" onclick="<%=uicomponent.event("Sort", typeActionLink + "ModifiedDate")%>">
               <%
                 if (typeSort.equals("ModifiedDate")) {
               %>
@@ -117,7 +117,7 @@
           </div>
           <div class="LineLeft" style="float: right"><span></span></div>
           <div class="RightColumn" style="width: 105px;">
-            <a href="<%=uicomponent.event("Sort", typeActionLink + "CreatedDate")%>">
+            <a href="javascript:void(0);" onclick="<%=uicomponent.event("Sort", typeActionLink + "CreatedDate")%>">
               <%
                 if (typeSort.equals("CreatedDate")) {
               %>
@@ -131,7 +131,7 @@
           </div>
           <div class="LineLeft" style="float: right"><span></span></div>
           <div class="ResizeColumn" style="margin-right: 530px">
-            <a href="<%=uicomponent.event("Sort", typeActionLink + "Alphabetic")%>">
+            <a href="javascript:void(0);" onclick="<%=uicomponent.event("Sort", typeActionLink + "Alphabetic")%>">
               <%
                 if (typeSort.equals("Alphabetic")) {
               %>

@@ -134,7 +134,7 @@
 							  	String actionLink2 = uicomponent.event("ChangeNode", rel.getPath(), params);
 							%>
 								<div style="font-size: 12px; padding: 10px;">
-									-	<a href="$actionLink2">
+									-	<a href="javascript:void(0);" onclick="$action<Link2">
 											<%=rel.getName()%>
 										</a>
 								</div>

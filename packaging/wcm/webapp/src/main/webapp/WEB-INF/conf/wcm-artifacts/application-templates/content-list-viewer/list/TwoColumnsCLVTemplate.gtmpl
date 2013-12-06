@@ -142,7 +142,7 @@
 					String link = uicomponent.event("Refresh");
 			%>
 				<div class="CaptionRefresh">
-					<a href="$link">$labelRefreshAction</a>
+					<a href="javascript:void(0) onclick="$link">$labelRefreshAction</a>
 				</div>	
 			<%
 			}

@@ -77,7 +77,7 @@
 								  <div class="TabL">
 								    <div class="TabR">
 										  <div class="TabM" style="width: 125px;">
-										    <a href="<%=uicomponent.event("ChangeTab", tab)%>" title="$fullTabName" class="TabLabel">$displayTabName</a>
+										    <a href="javascript:void(0);" onclick="<%=uicomponent.event("ChangeTab", tab)%>" title="$fullTabName" class="TabLabel">$displayTabName</a>
 										  </div>
 								    </div>
 								  </div>  
@@ -101,7 +101,7 @@
 								 <div class="NormalSubTabItemR">
 									 <div class="NormalSubTabItemM">
 									 	<div class="Split">
-										 	<a href="<%=action.event(button)%>" title="$title" class="SubTabIcon DefaultActionIcon ${button}Icon">$title</a>
+										 	<a href="javascript:void(0);" onclick="<%=action.event(button)%>" title="$title" class="SubTabIcon DefaultActionIcon ${button}Icon">$title</a>
 										 </div>
 									 </div>
 								 </div>
@@ -117,12 +117,12 @@
   		<div class="UIViewBarContainer ClearFix" id="UIViewBarContainer">
   		  <%
   		  if (uicomponent.hasBackButton()) {%>
-  		  <a class ="URLBackToButton" href="<%=uicomponent.event("BackTo")%>"></a>
+  		  <a class ="URLBackToButton" href="javascript:void(0);" onclick="<%=uicomponent.event("BackTo")%>"></a>
   		  <%}%>  	      
-  	    <a class="SetupPreferencesButton" href="<%=uicomponent.event("Preferences")%>" title="<%=_ctx.appRes("UIViewBar.label.setUpBrowser")%>"></a>
+  	    <a class="SetupPreferencesButton" href="javascript:void(0);" onclick="<%=uicomponent.event("Preferences")%>" title="<%=_ctx.appRes("UIViewBar.label.setUpBrowser")%>"></a>
 
 			 <%if (!uicomponent.isDirectlyDrive()) {%>
-  	     <a class="<%=getCSSClassOfDrivesButton()%>" href="<%=uicomponent.event("ShowDrives")%>" title="<%=_ctx.appRes("UIDrivesArea.DrivesArea.ShowDrives")%>"></a>
+  	     <a class="<%=getCSSClassOfDrivesButton()%>" href="javascript:void(0);" onclick="<%=uicomponent.event("ShowDrives")%>" title="<%=_ctx.appRes("UIDrivesArea.DrivesArea.ShowDrives")%>"></a>
   	   <%}%>
   	    
   			
@@ -139,7 +139,7 @@
   <% uiform.begin() %>
     <div class="UIActionBar $actionBarStyle" id="$uicomponent.id">
       <div class="UIViewBarContainer" id="UIViewBarContainer">
-        <a class ="URLBackToButton" href="<%=uicomponent.event("BackTo")%>" title="<%=_ctx.appRes("UIViewBar.title.backTo")%>"></a>
+        <a class ="URLBackToButton" href="javascript:void(0);" onclick="<%=uicomponent.event("BackTo")%>" title="<%=_ctx.appRes("UIViewBar.title.backTo")%>"></a>
       </div>
     </div>
   <% uiform.end() %>

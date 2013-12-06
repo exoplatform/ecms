@@ -35,7 +35,7 @@ context.getJavascriptManager().addJavascript('eXo.ecm.SearchPortlet.search("' + 
             </td>
             <td>
               <div class="UIAction">
-                <a href="$link" onclick="eXo.ecm.SearchPortlet.keepKeywordOnBoxSearch();" class="ActionButton LightBlueStyle SearchButton">$actionLabel</a>
+                <a href="javascript:void(0);" onclick="eXo.ecm.SearchPortlet.keepKeywordOnBoxSearch();$link;" class="ActionButton LightBlueStyle SearchButton">$actionLabel</a>
               </div>
             </td>
           </tr>

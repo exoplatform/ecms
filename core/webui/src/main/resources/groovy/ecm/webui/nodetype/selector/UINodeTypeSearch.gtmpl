@@ -26,7 +26,7 @@
                     %>
                 </td>  
                 <td class="ButtonCell">
-                    <a href="<%=uicomponent.event('SearchNodeType')%>" title="<%=uicomponent.getResource('UINodeTypeSearh.msg.title')%>"><div class="SearchIcon"></div></a>
+                    <a href="javascript:void(0);" onclick="<%=uicomponent.event('SearchNodeType')%>" title="<%=uicomponent.getResource('UINodeTypeSearh.msg.title')%>"><div class="SearchIcon"></div></a>
                 </td>
                </tr>
             </table>

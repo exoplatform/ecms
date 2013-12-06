@@ -25,8 +25,8 @@
 		}
 		%>
      <div class="FieldContainer">
-       <a class="SearchIcon" href="<%=uicomponent.event('Search')%>" title="<%=_ctx.appRes("UICBSearchForm.title.search")%>"><span></span></a>
-       <a class="SearchLabel" href="<%=uicomponent.event('Search')%>"><%=_ctx.appRes("UICBSearchForm.label.search")%></a>
+       <a class="SearchIcon" href="javascript:void(0);" onclick="<%=uicomponent.event('Search')%>" title="<%=_ctx.appRes("UICBSearchForm.title.search")%>"><span></span></a>
+       <a class="SearchLabel" href="javascript:void(0);" onclick="<%=uicomponent.event('Search')%>"><%=_ctx.appRes("UICBSearchForm.label.search")%></a>
      </div>
      
 	   <%uiform.end()%>   

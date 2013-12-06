@@ -71,14 +71,14 @@
 												<div class="ClearFix">
 													<%
 														if (isShowIllustrationImg) {
-															%><a class="ImageHotNews" href="<%=itemLink%>"><img width="248" alt="<%=imgSrc%>" src="<%=imgSrc%>" /></a><%
+															%><a class="ImageHotNews" href="javascript:void(0);" onclick="<%=itemLink%>"><img width="248" alt="<%=imgSrc%>" src="<%=imgSrc%>" /></a><%
 														} 
 													%>
 													<div class="ContentHotNews">
 														<% 
 															if (isShowTitle) {
 																if (isShowLink) {
-																	%><a class="TitleContentHotNews" href="<%=itemLink%>"><%=itemName%></a><%
+																	%><a class="TitleContentHotNews" href="javascript:void(0);" onclick="<%=itemLink%>"><%=itemName%></a><%
 																} else {
 																	%><%=itemName%><%
 																} 
@@ -103,7 +103,7 @@
 													</div>
 													</div>
 													<% if (isShowReadmore) { %>
-												  		<div class="ReadLink"><a href="<%=itemLink%>"><%= _ctx.appRes("UIPCLVConfig.label.readmore") %></a></div><%
+												  		<div class="ReadLink"><a href="javascript:void(0);" onclick="<%=itemLink%>"><%= _ctx.appRes("UIPCLVConfig.label.readmore") %></a></div><%
 													}%>
 												</div>
 											<%
@@ -113,7 +113,7 @@
 												<div class="NormalNews ClearFix">
 													<% 
 														if (isShowIllustrationImg) {
-															%><a class="ImageNormalNews" href="<%=itemLink%>"><img width="190" alt="<%=imgSrc%>" src="<%=imgSrc%>" /></a><%
+															%><a class="ImageNormalNews" href="javascript:void(0);" onclick="<%=itemLink%>"><img width="190" alt="<%=imgSrc%>" src="<%=imgSrc%>" /></a><%
 														} 
 													%>
 													<div class="ContentNormalNews">
@@ -123,7 +123,7 @@
 																	<div style="font-size: 12px;">
 																		<%
 																			if (isShowLink) {
-																				%><a class="TitleContentNormalNews" href="<%=itemLink%>"><%=itemName%></a><%
+																				%><a class="TitleContentNormalNews" href="javascript:void(0);" onclick="<%=itemLink%>"><%=itemName%></a><%
 																			} else {
   																			print uicomponent.getInlineEditingField(viewNode, "exo:title", itemName, "TEXT", "CLVTitle_"+String.valueOf(i), "GroovyCLVTitle", true, "button_direction=left-to-right");
 																			} 
@@ -152,7 +152,7 @@
 													
 												</div>
 												<% if (isShowReadmore) { %>
-												  		<div class="ReadLink"><a href="<%=itemLink%>"><%= _ctx.appRes("UIPCLVConfig.label.readmore") %></a></div><%
+												  		<div class="ReadLink"><a href="javascript:void(0);" onclick="<%=itemLink%>"><%= _ctx.appRes("UIPCLVConfig.label.readmore") %></a></div><%
 													}%>
 												<div class="LineNormalNews"><span></span></div>
 											<%
@@ -168,7 +168,7 @@
 						if (uicomponent.showRefreshButton()) {
 							%>				
 								<div class="CaptionRefresh">
-									<a href="<%=uicomponent.event("Refresh")%>"><%= _ctx.appRes("UIPCLVConfig.action.refresh") %></a>
+									<a href="javascript:void(0);" onclick="<%=uicomponent.event("Refresh")%>"><%= _ctx.appRes("UIPCLVConfig.action.refresh") %></a>
 								</div>
 							<% 
 						}

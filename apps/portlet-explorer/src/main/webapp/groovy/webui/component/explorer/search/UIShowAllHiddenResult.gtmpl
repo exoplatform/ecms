@@ -56,21 +56,21 @@
           <%
             if (uicomponent.iconName.equals("BlueUpArrow")) {
           %>
-            <a href="<%=uicomponent.event("SortASC", Utils.formatNodeName("name"))%>" title="<%=_ctx.appRes("UIShowAllHiddenResult.title.nameASC")%>">
+            <a href="javascript:void(0);" onclick="<%=uicomponent.event("SortASC", Utils.formatNodeName("name"))%>" title="<%=_ctx.appRes("UIShowAllHiddenResult.title.nameASC")%>">
               <%=_ctx.appRes("UIShowAllHiddenResult.header.name")%>
               <img src="/eXoResources/skin/sharedImages/Blank.gif" alt="<%=_ctx.appRes("UIShowAllHiddenResult.title.nameASC")%>" class="BlueUpArrow16x16Icon"/>
             </a>
           <%
             } else if (uicomponent.iconName.equals("BlueDownArrow")) {
           %>
-          <a href="<%=uicomponent.event("SortDESC", Utils.formatNodeName("name"))%>" title="<%=_ctx.appRes("UIShowAllHiddenResult.title.nameDESC")%>">
+          <a href="javascript:void(0);" onclick="<%=uicomponent.event("SortDESC", Utils.formatNodeName("name"))%>" title="<%=_ctx.appRes("UIShowAllHiddenResult.title.nameDESC")%>">
             <%=_ctx.appRes("UIShowAllHiddenResult.header.name")%>
             <img src="/eXoResources/skin/sharedImages/Blank.gif" alt="<%=_ctx.appRes("UIShowAllHiddenResult.title.nameDESC")%>" class="BlueDownArrow16x16Icon"/>
           </a>
           <%
             } else {
           %>
-            <a href="<%=uicomponent.event("SortASC", Utils.formatNodeName("name"))%>" title="<%=_ctx.appRes("UIShowAllHiddenResult.title.nameASC")%>">
+            <a href="javascript:void(0);" onclick="<%=uicomponent.event("SortASC", Utils.formatNodeName("name"))%>" title="<%=_ctx.appRes("UIShowAllHiddenResult.title.nameASC")%>">
               <%=_ctx.appRes("UIShowAllHiddenResult.header.name")%>         
             </a>
           <% } %>        

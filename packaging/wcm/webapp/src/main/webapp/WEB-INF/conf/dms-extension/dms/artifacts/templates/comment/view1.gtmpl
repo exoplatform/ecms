@@ -82,13 +82,13 @@
 	  		 <% if (uicomment != null) {
 	  		   Parameter[] paramsComment = [new Parameter("nodePath", org.exoplatform.ecm.webui.utils.Utils.formatNodeName(path))];
 	  		 %>
-			  		<a href="<%=uicomment.event("Comment", org.exoplatform.ecm.webui.utils.Utils.formatNodeName(parentPath), paramsComment)%>">
+			  		<a href="javascript:void(0);" onclick="<%=uicomment.event("Comment", org.exoplatform.ecm.webui.utils.Utils.formatNodeName(parentPath), paramsComment)%>">
 							<img class="EditComment" src="/eXoResources/skin/sharedImages/Blank.gif" alt="<%=_ctx.appRes("Comments.tooltip.edit-comment")%>" title="<%=_ctx.appRes("Comments.tooltip.edit-comment")%>"/>
 						</a>
 				<%
 	  		 Parameter[] params = [new Parameter("workspaceName", comment.getSession().getWorkspace().getName()), new Parameter("repository", repository)];
 	  		%>
-						<a href="<%=uiremovecomment.event("RemoveComment", org.exoplatform.ecm.webui.utils.Utils.formatNodeName(path), params)%>">
+						<a href="javascript:void(0);" onclick="<%=uiremovecomment.event("RemoveComment", org.exoplatform.ecm.webui.utils.Utils.formatNodeName(path), params)%>">
 						<img class="RemoveAttachments" src="/eXoResources/skin/sharedImages/Blank.gif" alt="<%=_ctx.appRes("Comments.tooltip.remove-comment")%>" title="<%=_ctx.appRes("Comments.tooltip.remove-comment")%>"/>
 						</a>
 				<%}}%>

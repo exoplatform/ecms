@@ -68,7 +68,7 @@
     def suggestionURL = uiSearchForm.event("Search", suggestion);
      %>
      <p>
-      <%= _ctx.appRes("UIDefaultSearchResult.msg.new-suggestion") %> : <strong style="font-size: 15px; font-style: italic;"><a href="<%= suggestionURL %>"><%= suggestion %></a></strong>
+      <%= _ctx.appRes("UIDefaultSearchResult.msg.new-suggestion") %> : <strong style="font-size: 15px; font-style: italic;"><a href="javascript:void(0);" onclick="<%= suggestionURL %>"><%= suggestion %></a></strong>
      </p>
     <%
    }

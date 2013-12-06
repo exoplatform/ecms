@@ -92,7 +92,7 @@
 	                <div class="RightHomeTab">
 	                  <div class="MiddleHomeTab ClearFix">
 	                  	<div class="LeftIcon CBHome16x16Icon" title="<%= _ctx.appRes( componentName  +".title.home") %>"><span></span></div>
-	                    <a href="<%=uicomponent.event('ChangeNode',Utils.formatNodeName(rootNode.getPath()))%>" ><%= _ctx.appRes(componentName + ".label.home") %></a>
+	                    <a href="javascript:void(0);" onclick="<%=uicomponent.event('ChangeNode',Utils.formatNodeName(rootNode.getPath()))%>" ><%= _ctx.appRes(componentName + ".label.home") %></a>
 	                    <div class="RightIcon CBDropDownArrow16x16Icon" onmouseup="eXo.ecm.ECMUtils.clickLeftMouse(event,this,2)"><span></span></div>
 	                    
 	                  </div>
@@ -115,7 +115,7 @@
 	                          <div class="MiddleTab ClearFix">
 	                          	<div class="Icon CBDefaultFolder16x16Icon"><span></span></div>
 	                            <div class="LabelButton">                            	
-	                              <a href="<%=uicomponent.event('ChangeNode',Utils.formatNodeName(tab) + "&workspace=" + currentNode.getSession().getWorkspace().getName());%>">$tabName</a>
+	                              <a href="javascript:void(0);" onclick="<%=uicomponent.event('ChangeNode',Utils.formatNodeName(tab) + "&workspace=" + currentNode.getSession().getWorkspace().getName());%>">$tabName</a>
 	                            </div>
 	                            
 	                          </div>
@@ -142,7 +142,7 @@
 					                  String catName = subCat.substring(subCat.lastIndexOf("/") + 1) ;
 					                  String actionLinkSub = uicomponent.event("ChangeNode", Utils.formatNodeName(subCat)) ; 
 					              %>
-				                    <a class="NodeLabel" href="$actionLinkSub">
+				                    <a class="NodeLabel" href="javascript:void(0);" onclick="$action<LinkSub">
 				                     <%if(uicomponent.isSymLink(subCat)) {%> 
 				                       <img class="LinkSmall" />
 				                     <%}%> 
@@ -230,7 +230,7 @@
 	    <%if(isShowAllDoc) {%>
 	    <div class="ViewPreviousDocument ClearFix"> 
 	      <div class="BackIcon"><span></span></div>
-	      <a href="<%=uicomponent.event('Back')%>">
+	      <a href="javascript:void(0);" onclick="<%=uicomponent.event('Back')%>">
 	      	<%=_ctx.appRes(componentName + ".label.previous")%>
 	      </a>
 	      

@@ -60,7 +60,7 @@ import java.util.List;
 							<div class="LeftTitle">
 								<div class="RightTitle">
 									<div class="CenterTitle" style="max-width:350px; overflow:hidden;">
-										<a title="<%=category.getTitle()%>" class="IconCategory" href="<%=uicomponent.event("OpenCategory", category.getName())%>"><%=category.getTitle()%></a>
+										<a title="<%=category.getTitle()%>" class="IconCategory" href="javascript:void(0);" onclick="<%=uicomponent.event("OpenCategory", category.getName())%>"><%=category.getTitle()%></a>
 									</div>
 								</div>
 							</div>
@@ -96,7 +96,7 @@ import java.util.List;
 											i ++;
 										%>
 											<tr class="$classTr">
-												<td style="width:auto; overflow: hidden; max-width: 350px;"><a title="<%=subScription.getTitle()%>" href="<%=uicomponent.event("SelectSubscription", category.getName() + "/" + subScription.getName())%>"><%=subScription.getTitle()%></a></td>
+												<td style="width:auto; overflow: hidden; max-width: 350px;"><a title="<%=subScription.getTitle()%>" href="javascript:void(0);" onclick="<%=uicomponent.event("SelectSubscription", category.getName() + "/" + subScription.getName())%>"><%=subScription.getTitle()%></a></td>
 												<td class="tdContent">
 													<%=uicomponent.getNumberOfUser(category.getName(), subScription.getName())%>
 												</td>

@@ -66,7 +66,7 @@
   			
   			if(isBaseVersion&&cNode.hasProperty("publication:currentState")&&!cNode.getProperty("publication:currentState").getString().equals(status)){
   			%>
-  			<a class="ActiveStatus" href="<%= uicomponent.event("ChangeState", status)%>">
+  			<a class="ActiveStatus" href="javascript:void(0);" onclick="<%= uicomponent.event("ChangeState", status)%>">
   			<%}
   			else{%>
   			<a class="CurrentStatus">
@@ -80,7 +80,7 @@
   			
   			else  if(!isAutomatic&&enableState){
   			%>	
-  			<a class="ActiveStatus" href="<%= uicomponent.event("ChangeState", status)%>">
+  			<a class="ActiveStatus" href="javascript:void(0);" onclick="<%= uicomponent.event("ChangeState", status)%>">
   			
   			<%}%>
   			<%=_ctx.appRes("UIPublicationPanel.status."+status)%></a>
@@ -135,7 +135,7 @@
                   <%
                 } else {
                   %>
-                    <a class="ActiveLink" href="<%= uicomponent.event("ChangeVersion", revision.getUUID()) %>"><div title="<%=nodeName%>" style="width:200px; overflow:hidden; margin-right: 3px;"><%=_ctx.appRes("UIPublicationPanel.revisions.label")%>:<%= nodeName %></div></a>
+                    <a class="ActiveLink" href="javascript:void(0);" onclick="<%= uicomponent.event("ChangeVersion", revision.getUUID()) %>"><div title="<%=nodeName%>" style="width:200px; overflow:hidden; margin-right: 3px;"><%=_ctx.appRes("UIPublicationPanel.revisions.label")%>:<%= nodeName %></div></a>
                   <%
                 }
               %>

@@ -9,7 +9,7 @@
 	  		<div class="TextButton"><%=_ctx.appRes(uicomponent.getId() + ".tab.label")%></div>
 	  	</div>
 	  	<div class="Separator"><span></span></div>
- 			<a class="RefreshSessionButton" href="<%=uicomponent.event("RefreshSession")%>" title="<%=_ctx.appRes(uicomponent.getId() + ".label.refresh")%>"></a>
+ 			<a class="RefreshSessionButton" href="javascript:void(0);" onclick="<%=uicomponent.event("RefreshSession")%>" title="<%=_ctx.appRes(uicomponent.getId() + ".label.refresh")%>"></a>
 	  </div>	  
 	  <div class="WorkflowPortletContent">
 	    <% uicomponent.renderChildren(); %>

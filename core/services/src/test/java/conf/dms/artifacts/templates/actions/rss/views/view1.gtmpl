@@ -65,7 +65,7 @@
 			  if(node.hasProperty("exo:link")) {
 			    String actionLink = node.getProperty("exo:link").getString() ; 
 			%>
-        <a href="$actionLink" title="$actionLink" target="_blank">$actionLink</a>			
+        <a href="javascript:void(0);" onclick="$action<Link" title="$actionLink" target="_blank">$actionLink</a>			
 			<%}%>	
 		</td>
   </tr>

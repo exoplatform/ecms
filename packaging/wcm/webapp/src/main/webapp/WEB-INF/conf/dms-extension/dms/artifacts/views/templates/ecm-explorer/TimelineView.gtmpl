@@ -165,7 +165,7 @@
                 for(itemGroundContext in managersGroundContext) {
                 action = itemGroundContext.getUIExtensionName();
               %>
-                <a class="MenuItem" href="<%=itemGroundContext.event(action)%>" style="display: block;">  
+                <a class="MenuItem" href="javascript:void(0);" onclick="<%=itemGroundContext.event(action)%>" style="display: block;">  
                   <div class="ItemIcon ${action}16x16Icon"><%=_ctx.appRes("ECMContextMenu.event." + action)%></div>
                 </a>
               <%}%>     
@@ -189,7 +189,7 @@
         <% if (uicomponent.getDisplayCategory().equals(uicomponent.CATEGORY_ALL)) { 
              if (uicomponent.getIsExpanded().get(label) == uicomponent.YES) {
         %>
-        <a class="ExpandCategory" href="<%=uicomponent.event("ExpandTimelineCatergory", label);%>" title="<%=_ctx.appRes("UIDocumentInfo.label.tooltip.expand")%>"><%=_ctx.appRes(label)%> >></a>
+        <a class="ExpandCategory" href="javascript:void(0);" onclick="<%=uicomponent.event("ExpandTimelineCatergory", label);%>" title="<%=_ctx.appRes("UIDocumentInfo.label.tooltip.expand")%>"><%=_ctx.appRes(label)%> >></a>
         <%
              } else {
         %>
@@ -198,7 +198,7 @@
              }
         %>
         <% } else { %>
-        <a class="CollapseCategory" href="<%=uicomponent.event("CollapseTimelineCatergory", label);%>" title="<%=_ctx.appRes("UIDocumentInfo.label.tooltip.collapse")%>"><%=_ctx.appRes(label)%> <<</a>
+        <a class="CollapseCategory" href="javascript:void(0);" onclick="<%=uicomponent.event("CollapseTimelineCatergory", label);%>" title="<%=_ctx.appRes("UIDocumentInfo.label.tooltip.collapse")%>"><%=_ctx.appRes(label)%> <<</a>
         <% } %>
       </div>  
       <div class="BorderRow">

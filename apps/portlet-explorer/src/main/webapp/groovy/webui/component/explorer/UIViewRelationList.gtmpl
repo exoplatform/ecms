@@ -30,7 +30,7 @@
 	        else subname = name ;
 	        %>
 	          <div>
-			        <a href="$actionLink" title="$name">$subname</a>
+			        <a href="javascript:void(0)" onclick="$actionLink" title="$name">$subname</a>
 			      </div>
     	  <%}
 		    }%>

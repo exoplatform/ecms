@@ -29,7 +29,7 @@
             %>
               <a class="CurrentStatus"><%=_ctx.appRes("UIPublicationPanel.status.enrolled")%></a>
               <span class="StatusArrow"></span>
-              <a class="ActiveStatus" href="<%= uicomponent.event("Draft")%>"><%=_ctx.appRes("UIPublicationPanel.status.draft")%></a>
+              <a class="ActiveStatus" href="javascript:void(0);" onclick="<%= uicomponent.event("Draft")%>"><%=_ctx.appRes("UIPublicationPanel.status.draft")%></a>
               <span class="StatusArrow"></span>
               <a class="DisableStatus"><%=_ctx.appRes("UIPublicationPanel.status.live")%></a>
               <span class="StatusArrow"></span>
@@ -42,7 +42,7 @@
               <span class="StatusArrow"></span>
               <a class="CurrentStatus"><%=_ctx.appRes("UIPublicationPanel.status.draft")%></a>
               <span class="StatusArrow"></span>
-              <a class="ActiveStatus" href="<%= uicomponent.event("Live")%>"><%=_ctx.appRes("UIPublicationPanel.status.live")%></a>
+              <a class="ActiveStatus" href="javascript:void(0);" onclick="<%= uicomponent.event("Live")%>"><%=_ctx.appRes("UIPublicationPanel.status.live")%></a>
               <span class="StatusArrow"></span>
               <a class="DisableStatus"><%=_ctx.appRes("UIPublicationPanel.status.obsolete")%></a>
                            
@@ -55,7 +55,7 @@
               <span class="StatusArrow"></span>
               <a class="CurrentStatus"><%=_ctx.appRes("UIPublicationPanel.status.live")%></a>
               <span class="StatusArrow"></span>
-              <a class="ActiveStatus" href="<%= uicomponent.event("obsolete")%>"><%=_ctx.appRes("UIPublicationPanel.status.obsolete")%></a>
+              <a class="ActiveStatus" href="javascript:void(0);" onclick="<%= uicomponent.event("obsolete")%>"><%=_ctx.appRes("UIPublicationPanel.status.obsolete")%></a>
               
             <%
           } else if (isCurrentRevision("obsolete", currentRevision)) {
@@ -105,7 +105,7 @@
                   <%
                 } else {
                   %>
-                  <a class="ActiveLink" href="<%= uicomponent.event("ChangeVersion", revision.getUUID()) %>"><div title="<%=nodeName%>" style="width:200px; overflow:hidden; margin-right: 3px;"><%=_ctx.appRes("UIPublicationPanel.revisions.label")%>:<%= nodeName %></div></a>
+                  <a class="ActiveLink" href="javascript:void(0);" onclick="<%= uicomponent.event("ChangeVersion", revision.getUUID()) %>"><div title="<%=nodeName%>" style="width:200px; overflow:hidden; margin-right: 3px;"><%=_ctx.appRes("UIPublicationPanel.revisions.label")%>:<%= nodeName %></div></a>
                   <%
                 }
               %>
@@ -151,7 +151,7 @@
     }
   %>
   <div class="UIAction">
-	    <a href="<%= uicomponent.event("Close") %>" class="ActionButton LightBlueStyle">              
+	    <a href="javascript:void(0);" onclick="<%= uicomponent.event("Close") %>" class="ActionButton LightBlueStyle">              
 	        <%=_ctx.appRes("UIPublicationPanel.button.Close")%>                 
 	    </a>
 	</div>
