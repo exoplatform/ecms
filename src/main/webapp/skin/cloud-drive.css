@@ -199,6 +199,18 @@
 	background: url('https://ssl.gstatic.com/docs/doclist/images/icon_10_excel_xl128.png') no-repeat right center !important; /* orientation=rt */
 }
 
+.uiIcon24x24applicationx-exoboxwebdoc {
+	background: url('http://app.box.com/img/sprites/24x24-sOgRgI.png') left -2731px no-repeat !important; /* orientation=lt */
+	background: url('http://app.box.com/img/sprites/24x24-sOgRgI.png') right -2731px no-repeat !important; /* orientation=rt */
+}
+
+.uiIcon64x64applicationx-exoboxwebdoc {
+	width: 43px;
+	height: 51px;
+	background: url('http://app.box.com/img/sprites/common_documents-W6QjAe.png') left -1554px no-repeat !important; /* orientation=lt */
+    background: url('http://app.box.com/img/sprites/common_documents-W6QjAe.png') right -1554px no-repeat !important; /* orientation=rt */
+}
+
 .application_xml16x16Icon {
 	background: url('icons/xml.gif') no-repeat left center !important; /* orientation=lt */
 	background: url('icons/xml.gif') no-repeat right center !important; /* orientation=rt */

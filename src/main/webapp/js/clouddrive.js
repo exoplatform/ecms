@@ -1321,10 +1321,11 @@
 				    + drive.email + "</a></span>"
 				var details;
 				if (files + folders > 0 || drive.removed.length > 0) {
-					// TODO cleanup
 					// Don't refresh at all, as user can change the
 					// view. Istead we show a link on the message.
 					//var details;
+
+					// TODO cleanup
 					//if (files > 0) {
 					//	details = files + " file" + (files > 1 ? "s" : "");
 					//}
@@ -1343,9 +1344,14 @@
 					
 					// Show number of changes in the drive on Refresh icon
 					var changes = files + folders + drive.removed.length;
-					$("<span class='uiCloudDriveChanges' title='" + drive.provider.name +
-							" has " + changes +
-							" updates.'>" + (changes > 9 ? "9+" : changes) + "</span>" ).appendTo("a.refreshIcon i");
+					changes = changes > 9 ? "9+" : changes;
+					var refreshChanges = $("span.uiCloudDriveChanges");
+					if (refreshChanges.size()>0) {
+						$(refreshChanges).text(changes);	
+					} else {
+						$("<span class='uiCloudDriveChanges' title='" + drive.provider.name +
+								" has updates.'>" + changes + "</span>" ).appendTo("a.refreshIcon i");
+					}
 				}
 			});
 			process.fail(function(response, status, err) {
