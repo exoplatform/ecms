@@ -17,7 +17,7 @@
   </UIActionBar>
   <UIActionBar>
     <tooltip>
-      <ConnectBox>Connect your Box files</ConnectBox>
+      <ConnectBox>Connect your Box</ConnectBox>
     </tooltip>
   </UIActionBar>
   <ECMContextMenu>
