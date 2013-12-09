@@ -423,28 +423,6 @@
   list-style: decimal;
 }
 
- 
-.UIWCMSearchPortlet {
-	.UIAdvanceSearchResultDefault {
-	    border: 1px solid @borderColor;
-	    margin: 10px;
-	    .ResultHeader {
-		    border-bottom: 1px solid @borderColor;
-		    line-height: 25px;
-		    overflow: hidden;
-		    padding: 0 5px;
-		  }
-		p {
-			padding: 0px 10px;
-		}
-	} 
-	.UISearchForm{
-		.controls{
-			line-height: 25px;
-		}
-	}
-}
-
 
 .permission{
 	.controls{
@@ -469,15 +447,42 @@
     		}
     	}
 	}
-	.resultBox{
-		padding: 0px 20px 10px;
-	}
+
 	.showMore{
 		padding: 15px 0;
 		.btn{
 			display: block;
 		    margin: 0;
 		    width: 100%;
+		}
+	}
+	.UIAdvanceSearchResultDefault {
+	    padding: 10px;
+	    .ResultHeader {
+		    border-bottom: 1px solid @borderColor;
+		    line-height: 25px;
+		    overflow: hidden;
+		    padding: 0 5px;
+		  }
+		p {
+			padding: 0px 10px;
+		}
+		.resultBox {
+			padding: 0 20px 20px;
+			.content {
+		    	margin-left: 85px;
+		    	h6{
+		    		margin: 0px;
+		    	}
+		    	.detail{
+		    		color:@grayLight;
+		    	}
+		    }
+		}
+	} 
+	.UISearchForm{
+		.controls{
+			line-height: 25px;
 		}
 	}
 }

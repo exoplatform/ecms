@@ -18,6 +18,7 @@ package org.exoplatform.ecm.webui.component.explorer;
 
 import java.awt.Image;
 import java.io.InputStream;
+import java.net.URLEncoder;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -140,6 +141,7 @@ import org.exoplatform.webui.ext.UIExtensionManager;
 @ComponentConfig(
     events = {
         @EventConfig(listeners = UIDocumentInfo.ChangeNodeActionListener.class),
+        @EventConfig(listeners = UIDocumentInfo.OnMouseOverActionListener.class),
         @EventConfig(listeners = UIDocumentInfo.ViewNodeActionListener.class),
         @EventConfig(listeners = UIDocumentInfo.SortActionListener.class),
         @EventConfig(listeners = UIDocumentInfo.VoteActionListener.class),
@@ -192,6 +194,8 @@ public class UIDocumentInfo extends UIBaseNodePresentation {
   protected UIDocumentNodeList    documentNodeList_;
 
   private static final Log      LOG                                = ExoLogger.getLogger(UIDocumentInfo.class.getName());
+
+  private enum ExplorerTemplateType { TREELIST, CONTENT, THUMBNAILS };
 
   private String                typeSort_                          = NodetypeConstant.SORT_BY_NODENAME;
 
@@ -1254,6 +1258,29 @@ public class UIDocumentInfo extends UIBaseNodePresentation {
     }
   }
 
+  static public class OnMouseOverActionListener extends EventListener<UIDocumentInfo> {
+    public void execute(Event<UIDocumentInfo> event) throws Exception {
+      UIDocumentInfo uiDocumentInfo =  event.getSource();
+
+      // Make objectId array from child nodes of current node
+      List<String> objectIds = new ArrayList<String>();
+      List<String> actionLists = new ArrayList<String>();
+      List<Node> childList = uiDocumentInfo.getChildrenList();
+      for (Node node : childList) {
+        objectIds.add(org.exoplatform.services.cms.impl.Utils.getObjectId(node.getPath()));
+        actionLists.add(uiDocumentInfo.getActionsList(node));
+      }
+
+      // Call  js to show context menu
+      event.getRequestContext().addUIComponentToUpdateByAjax(
+              event.getSource().getAncestorOfType(UIApplication.class).getChild(UIEmptyAjaxBlock.class));
+      event.getRequestContext().getJavascriptManager()
+              .require("SHARED/wcm-utils", "wcmUtils")
+              .addScripts("wcmUtils.WCMUtils.updateActionList('" + StringUtils.join(objectIds, ';') + "', '"
+                      + StringUtils.join(actionLists, ';') + "');");
+    }
+  }
+
   static public class SortActionListener extends EventListener<UIDocumentInfo> {
     public void execute(Event<UIDocumentInfo> event) throws Exception {
       UIDocumentInfo uicomp = event.getSource() ;
@@ -1802,6 +1829,13 @@ public class UIDocumentInfo extends UIBaseNodePresentation {
       context.getJavascriptManager().require("SHARED/multiUpload", "multiUpload").
               addScripts("multiUpload.unregisterEvents();");
     }
+
+    context.getJavascriptManager()
+            .require("SHARED/jquery", "gj")
+            .require("SHARED/wcm-utils", "wcmUtils")
+            .addScripts("gj('#UIDocumentInfo').mouseover(function() {"
+                    + "eXo.ecm.WCMUtils.onMouseOverDocumentInfo('"
+                      + URLEncoder.encode(this.event("OnMouseOver"), "utf-8") +"');});");
     super.processRender(context);
   }
 
@@ -1812,40 +1846,29 @@ public class UIDocumentInfo extends UIBaseNodePresentation {
   public List<Node> getChildrenFromNode(Node node) {
     return null;
   }
-  
-  /** get node attribute in Icons View & Web View **/
-  public String getNodeAttributeInView(Node node) throws Exception {
-    String preferenceWS = node.getSession().getWorkspace().getName();
-    String attr = getNodeAttributeInCommon(node);
-    StringBuilder builder = new StringBuilder(attr);
-    String rightClickMenu = "";
-    // right click menu in Icon View
-    if(!isSystemWorkspace()) 
-        rightClickMenu = "" + getContextMenu().getJSOnclickShowPopup(preferenceWS + ":" + Utils.formatNodeName(node.getPath()), getActionsList(node));
-    
-    builder.append(rightClickMenu);
-    return builder.toString();
-  }
-  
-  /** get node attribute in Admin View **/
-  public String getNodeAttribute(Node node) throws Exception {
+
+  public String getRightClickFunction(ExplorerTemplateType explorerTemplateType, Node node) throws Exception {
     StringBuilder builder = new StringBuilder();
     String preferenceWS = node.getSession().getWorkspace().getName();
-    
-    builder.append(getNodeAttributeInCommon(node));
-    
-    // right click menu in Admin View
-    if (!isSystemWorkspace()) {
-      builder.append(" onmousedown=\"eXo.ecm.UIFileView.clickRightMouse(event, this, 'ECMContextMenu','");
+    if(!isSystemWorkspace()) {
+      switch (explorerTemplateType) {
+        case CONTENT:
+        case THUMBNAILS:
+          builder.append("eXo.webui.UIRightClickPopupMenu.clickRightMouse(event, this, 'ECMContextMenu','");
+          break;
+        case TREELIST:
+          builder.append("eXo.ecm.UIFileView.clickRightMouse(event, this, 'ECMContextMenu','");
+          break;
+      }
       builder.append(preferenceWS + ":");
       builder.append(Utils.formatNodeName(node.getPath()) + "','" );
-      builder.append(getActionsList(node) + "');\"");
+      builder.append("#ActionListParamPlaceHolder');");
     }
     return builder.toString();
   }
   
   /** get Attribute in common. */
-  private String getNodeAttributeInCommon(Node node) throws Exception {
+  public String getNodeAttributeInCommon(Node node) throws Exception {
     StringBuilder builder = new StringBuilder();
     String preferenceWS = node.getSession().getWorkspace().getName();
     
