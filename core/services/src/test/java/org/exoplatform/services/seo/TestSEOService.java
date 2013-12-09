@@ -46,9 +46,6 @@ public class TestSEOService extends BaseWCMTestCase{
   
   public void setUp() throws Exception {
     super.setUp();
-      ExoContainer manager = ExoContainerContext.getCurrentContainer();
-      PortletInvoker portletInvoker = Mockito.mock(PortletInvoker.class);
-      manager.addComponentToCtx(portletInvoker.hashCode(), portletInvoker);
       sessionProvider = sessionProviderService_.getSystemSessionProvider(null);
     seoService = (SEOService) container.getComponentInstanceOfType(SEOService.class);
     applySystemSession();
