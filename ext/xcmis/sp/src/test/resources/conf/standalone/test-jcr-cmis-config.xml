@@ -40,6 +40,7 @@
             <properties>
               <property name="jbosscache-configuration"
                 value="conf/exo.portal.component.test.jcr-jbosscache-config.xml" />
+              <property name="jbosscache-cl-cache.jdbc.datasource" value="jdbcexo"/>
             </properties>
           </cache>
           <query-handler
@@ -55,6 +56,7 @@
               <property name="time-out" value="15m" />
               <property name="jbosscache-configuration"
                 value="conf/exo.portal.component.test.jcr-jbosscache-lock-config.xml" />
+              <property name="jbosscache-cl-cache.jdbc.datasource" value="jdbcexo"/>
             </properties>
           </lock-manager>
         </workspace>
@@ -94,6 +96,7 @@
             <properties>
               <property name="jbosscache-configuration"
                 value="conf/exo.portal.component.test.jcr-jbosscache-config.xml" />
+              <property name="jbosscache-cl-cache.jdbc.datasource" value="jdbcexo"/>
             </properties>
           </cache>
           <query-handler
@@ -109,6 +112,7 @@
               <property name="time-out" value="15m" />
               <property name="jbosscache-configuration"
                 value="conf/exo.portal.component.test.jcr-jbosscache-lock-config.xml" />
+              <property name="jbosscache-cl-cache.jdbc.datasource" value="jdbcexo"/>
             </properties>
           </lock-manager>
         </workspace>        
