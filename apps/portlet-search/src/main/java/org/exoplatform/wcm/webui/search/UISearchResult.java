@@ -16,12 +16,15 @@
  */
 package org.exoplatform.wcm.webui.search;
 
+import java.text.DateFormat;
 import java.text.Normalizer;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.HashSet;
 import java.util.List;
+import java.util.MissingResourceException;
+import java.util.ResourceBundle;
 import java.util.Set;
 
 import javax.jcr.Node;
@@ -31,6 +34,7 @@ import javax.portlet.PortletPreferences;
 import javax.portlet.PortletRequest;
 
 import org.exoplatform.commons.utils.ISO8601;
+import org.apache.commons.lang.StringUtils;
 import org.exoplatform.commons.utils.ObjectPageList;
 import org.exoplatform.commons.utils.PageList;
 import org.exoplatform.portal.application.PortalRequestContext;
@@ -39,6 +43,8 @@ import org.exoplatform.portal.webui.container.UIContainer;
 import org.exoplatform.portal.webui.util.Util;
 import org.exoplatform.resolver.ResourceResolver;
 import org.exoplatform.services.cms.templates.TemplateService;
+import org.exoplatform.services.wcm.core.NodetypeConstant;
+import org.exoplatform.services.wcm.portal.LivePortalManagerService;
 import org.exoplatform.services.wcm.publication.WCMComposer;
 import org.exoplatform.services.wcm.search.QueryCriteria;
 import org.exoplatform.services.wcm.search.ResultNode;
@@ -57,6 +63,7 @@ import org.exoplatform.webui.config.annotation.ComponentConfigs;
 import org.exoplatform.webui.config.annotation.EventConfig;
 import org.exoplatform.webui.core.UIApplication;
 import org.exoplatform.webui.core.lifecycle.Lifecycle;
+import org.exoplatform.webui.form.UIFormHiddenInput;
 import org.exoplatform.webui.form.UIFormRadioBoxInput;
 
 /*
@@ -197,6 +204,8 @@ public class UISearchResult extends UIContainer {
       queryCriteria.setPageMode(pageMode);
 
       queryCriteria.setLiveMode(WCMComposer.MODE_LIVE.equals(Utils.getCurrentMode()));
+      queryCriteria.setSortBy(this.getSortField());
+      queryCriteria.setOrderBy(this.getOrderType());
       int itemsPerPage = Integer.parseInt(portletPreferences.getValue(UIWCMSearchPortlet.ITEMS_PER_PAGE,
                                                                       null));
       try {
@@ -317,8 +326,8 @@ public class UISearchResult extends UIContainer {
    * @throws Exception the exception
    */
   public String getTitle(Node node) throws Exception {
-    if (node.hasProperty("exo:title")) {
-      return node.getProperty("exo:title").getValue().getString();
+    if (UIWCMSearchPortlet.SEARCH_CONTENT_MODE.equals(this.getResultType())) {
+      return org.exoplatform.ecm.webui.utils.Utils.getTitle(node);
     } else {
       Session session = node.getSession();
       Node mopLink = (Node) session.getItem(node.getPath() + "/mop:link");
@@ -436,6 +445,21 @@ public class UISearchResult extends UIContainer {
       return dateFormatter.format(calendar.getTime());
     }
     return null;
+  }
+
+  /**
+   * Gets the mofified date of search result node.
+   *
+   * @param node the node
+   * @return the mofified date
+   * @throws Exception the exception
+   */
+  private String getModifiedDate(Node node) throws Exception {
+    Calendar calendar = node.hasProperty(NodetypeConstant.EXO_LAST_MODIFIED_DATE) ?
+            node.getProperty(NodetypeConstant.EXO_LAST_MODIFIED_DATE).getDate() :
+            node.getProperty(NodetypeConstant.EXO_DATE_CREATED).getDate();
+    DateFormat simpleDateFormat = SimpleDateFormat.getDateTimeInstance(SimpleDateFormat.FULL, SimpleDateFormat.SHORT);
+    return simpleDateFormat.format(calendar.getTime());
   }
 
   /**
@@ -582,5 +606,65 @@ public class UISearchResult extends UIContainer {
     }
     return SiteSearchService.PAGE_MODE_MORE.equals(pageMode) ? moreListResult : getCurrentPageData();
   }
-   
+
+  /**
+   * Get string used to describe search result node.
+   *
+   * @param resultNode ResultNode
+   * @return result node description
+   * @throws Exception
+   */
+  private String getDetail(ResultNode resultNode) throws Exception {
+    Node realNode = org.exoplatform.wcm.webui.Utils.getRealNode(resultNode.getNode());
+    String resultType = this.getResultType();
+    if (UIWCMSearchPortlet.SEARCH_CONTENT_MODE.equals(resultType)) {
+      return WCMCoreUtils.getService(LivePortalManagerService.class).getLivePortalByChild(realNode).getName()
+            .concat(org.exoplatform.services.cms.impl.Utils.fileSize(realNode))
+            .concat(" - ")
+            .concat(getModifiedDate(realNode));
+    } else {
+      return StringUtils.substringBefore(StringUtils.substringAfter(realNode.getPath(),
+              SiteSearchService.PATH_PORTAL_SITES.concat("/mop:")),"/")
+              .concat(" - ")
+              .concat(resultNode.getUserNavigationURI());
+    }
+  }
+
+  /**
+   * Get resource bundle from given key.
+   *
+   * @param key Key
+   * @return
+   */
+  private String getLabel(String key) {
+    try {
+      ResourceBundle rs = WebuiRequestContext.getCurrentInstance().getApplicationResourceBundle();
+      return rs.getString(key);
+    } catch (MissingResourceException e) {
+      return key;
+    }
+  }
+
+  /**
+   * Get Order Type ("asc" or "desc") from user criteria.
+   *
+   * @return order type
+   * @throws Exception
+   */
+  private String getOrderType() throws Exception {
+    UISearchForm uiSearchForm = this.getParent().findFirstComponentOfType(UISearchForm.class);
+    String orderType = ((UIFormHiddenInput)uiSearchForm.getUIInput(UISearchForm.ORDER_TYPE_HIDDEN_INPUT)).getValue();
+    return StringUtils.isEmpty(orderType) ? "asc" : orderType;
+  }
+
+  /**
+   * Get Sort Field from user criteria.
+   *
+   * @return sort field used to sort result
+   */
+  private String getSortField() {
+    UISearchForm uiSearchForm = this.getParent().findFirstComponentOfType(UISearchForm.class);
+    String sortField = ((UIFormHiddenInput)uiSearchForm.getUIInput(UISearchForm.SORT_FIELD_HIDDEN_INPUT)).getValue();
+    return StringUtils.isEmpty(sortField) ? "relevancy" : sortField;
+  }
 }

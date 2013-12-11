@@ -14,7 +14,7 @@
  * You should have received a copy of the GNU General Public License
  * along with this program; if not, see<http://www.gnu.org/licenses/>.
  */
-package org.exoplatform.ecm.webui.component.explorer;
+  package org.exoplatform.ecm.webui.component.explorer;
 
 import org.exoplatform.ecm.jcr.model.Preference;
 import org.exoplatform.ecm.utils.text.Text;
@@ -101,6 +101,7 @@ public class UIJCRExplorerPortlet extends UIPortletApplication {
       explorerContainer.initExplorer();
       addChild(UIJcrExplorerEditContainer.class, null, null).setRendered(false);
     }
+    addChild(UIEmptyAjaxBlock.class, null, "EmptyAjaxBlock").setRendered(true);
   }
 
   public boolean isFlagSelect() { return flagSelect; }
@@ -177,6 +178,7 @@ public class UIJCRExplorerPortlet extends UIPortletApplication {
         }
       }
       getChild(UIJcrExplorerEditContainer.class).setRendered(false);
+      getChild(UIEmptyAjaxBlock.class).setRendered(true);
     } else if(portletReqContext.getApplicationMode() == PortletMode.HELP) {
       if (LOG.isDebugEnabled()) LOG.debug("\n\n>>>>>>>>>>>>>>>>>>> IN HELP  MODE \n");
     } else if(portletReqContext.getApplicationMode() == PortletMode.EDIT) {

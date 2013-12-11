@@ -28,47 +28,47 @@
     def publishedMsg = _ctx.appRes("PublicationStates.published");
 %>
 
-<div id="$uicomponent.id" class="TwoColumnsCLVTemplate">
-	<div class="CLV">
+<div id="$uicomponent.id" class="twoColumnsCLVTemplate">
+	<div class="clv uiBox">
 		<%
 			def header = uicomponent.getHeader();
 			def rssLink = uicomponent.getRssLink();
 			def isShowRssLink = uicomponent.isShowRssLink();
 		  def isShowHeader = uicomponent.isShowField(UICLVPortlet.PREFERENCE_SHOW_HEADER) && header != null && header.trim().length() != 0;
 			%>
-		  <div class="TopBoxHeader clearfix">
+		  <h5 class="title">
 				<%
 				if (isShowHeader || isShowRssLink) {
 					%>
-						<div class="TitleBarL">
-							<div class="TitleBarR">
-                <div class="TitleBarM">
                   <%if (isShowRssLink) {
-                    %><a class="RssIcon" onclick="javascript:window.open('$rssLink');" style="cursor:pointer" rel="tooltip" data-placement="bottom" title="<%= _ctx.appRes("UICLVPresentation.label.rssFeed") %>">&nbsp;</a><%
+                    %><a class="rssIcon pull-right" onclick="javascript:window.open('$rssLink');" style="cursor:pointer" rel="tooltip" data-placement="bottom" title="<%= _ctx.appRes("UICLVPresentation.label.rssFeed") %>"><i class="uiIconRss uiIconLightGray"></i></a><%
                   }
-                  if(isShowHeader) {%> $header <%}%>
-                </div>
-							</div>
-						</div>
+                  if(isShowHeader) {%><span>$header</span><%}%>
+                
 					<%
 				}
 				%>
 			
-			</div>
+			</h5>
 			<%
 	
 			if (uicomponent.getUIPageIterator().getAvailable() == 0) {
 				%>
-					<div style="height: 20px; text-align: center; font-size: 13px; background: white; padding: 10px; margin: 5px;">
+					<div  class="emptyContent">
 						<span><%= _ctx.appRes(uicomponent.getParent().getMessageKey()) %></span>
 					</div>
 				<%
 			} else {
 			%>
-		    	<div class="Contents">			
+		    	<div class="uiContentBox">			
 			<%
 			  def currentPageData = uicomponent.getCurrentPageData();
 				for (def i = 0; i < currentPageData.size(); i++) {
+					if (i %2 == 0) {
+					%>
+						<div class="rowContent clearfix  <%=((i%4==0)?"odd":"even")%>" >
+					<%
+					}
 				  	def viewNode = currentPageData.get(i);
 				 	if(!Utils.isViewable(viewNode)) continue;					
 					def isShowTitle = uicomponent.isShowField(UICLVPortlet.PREFERENCE_SHOW_TITLE);
@@ -98,22 +98,22 @@
 										
 					%>
 
-            <%=uicomponent.addQuickEditDiv("Column2", viewNode)%>
-							
+            <%=uicomponent.addQuickEditDiv("Column2 media", viewNode)%>
+							<div class="media-content">
 							<%
 							if(isShowImage) {
-							  %><a class="Image" rel="tooltip" data-placement="bottom" title="$itemName"><img alt="$itemName" rel="tooltip" data-placement="bottom" title="$itemName" src="$imgSrc" /></a><%
+							  %><a class="image pull-left" rel="tooltip" data-placement="bottom" title="$itemName"><img alt="$itemName" rel="tooltip" data-placement="bottom" title="$itemName" src="$imgSrc" class="media-object" /></a><%
 							}
 							%>
-							<div class="Content">
+							<div class="media-body">
 								<%
   								if (uicomponent.isViewMode()){
                     if (isShowTitle) {
                       if (isShowLink) {
-                        %><div class="Title"><a href="$itemLink" rel="tooltip" data-placement="bottom" title="$itemName">$itemName</a></div><%
+                        %><div class="heading"><a href="$itemLink" rel="tooltip" data-placement="bottom" title="$itemName">$itemName</a></div><%
                       } else {                          
                       %>
-                        <div class="Title">                              
+                        <div class="heading">                              
                           <% print uicomponent.getInlineEditingField(viewNode, "exo:title", itemName, "TEXT", "CLVTitle_"+String.valueOf(i), "GroovyCLVTitle", true, "button_direction=left-to-right","fast_publish=" + uicomponent.getFastPublicLink(viewNode));%>
                         </div>
                       <%  
@@ -123,10 +123,10 @@
                   else {
                     if (isShowTitle) {
                       if (isShowLink) {
-                        %><div class="Title WCMInlineEditable" contenteditable="true" propertyName="<%=propertyName%>" repo="<%=repo%>" workspace="<%=workspace%>" uuid="<%=uuid%>" siteName="<%=siteName%>" language="<%=language%>" publishedmsg="<%=publishedMsg%>" draftmsg="<%=draftMsg%>" fastpublishlink="<%=uicomponent.getFastPublicLink(viewNode)%>"><a href="$itemLink" rel="tooltip" data-placement="bottom" title="$itemName">$itemName</a></div><%
+                        %><div class="heading WCMInlineEditable" contenteditable="true" propertyName="<%=propertyName%>" repo="<%=repo%>" workspace="<%=workspace%>" uuid="<%=uuid%>" siteName="<%=siteName%>" language="<%=language%>" publishedmsg="<%=publishedMsg%>" draftmsg="<%=draftMsg%>" fastpublishlink="<%=uicomponent.getFastPublicLink(viewNode)%>"><a href="$itemLink" rel="tooltip" data-placement="bottom" title="$itemName">$itemName</a></div><%
                       } else {
                       %>
-                        <div class="Title WCMInlineEditable" contenteditable="true" propertyName="<%=propertyName%>" repo="<%=repo%>" workspace="<%=workspace%>" uuid="<%=uuid%>" siteName="<%=siteName%>" language="<%=language%>" publishedmsg="<%=publishedMsg%>" draftmsg="<%=draftMsg%>" fastpublishlink="<%=uicomponent.getFastPublicLink(viewNode)%>"> 
+                        <div class="heading WCMInlineEditable" contenteditable="true" propertyName="<%=propertyName%>" repo="<%=repo%>" workspace="<%=workspace%>" uuid="<%=uuid%>" siteName="<%=siteName%>" language="<%=language%>" publishedmsg="<%=publishedMsg%>" draftmsg="<%=draftMsg%>" fastpublishlink="<%=uicomponent.getFastPublicLink(viewNode)%>"> 
                           <% print uicomponent.getInlineEditingField(viewNode, "exo:title", itemName, "TEXT", "CLVTitle_"+String.valueOf(i), "GroovyCLVTitle", true, "button_direction=left-to-right","fast_publish=" + uicomponent.getFastPublicLink(viewNode)); %>
                         </div>
                       <%  
@@ -135,46 +135,65 @@
                   }
 									
 	                if (isShowDate) {
-	                  %><div class="DateAndMail">$itemDateCreated by $itemOwner</div><%
+	                  %><div class="dateAndMail">$itemDateCreated by $itemOwner</div><%
 	                }
 									if (isShowSummary) { 
-										%><div class="Summary"> <%
+										%><div class="summary"> <%
 										  if (itemSummaryField!=null) {
   										  print uicomponent.getInlineEditingField(viewNode, itemSummaryField, itemSummary, "TEXTAREA", "Text_"+String.valueOf(i), "CLV2ColSummary", true, "height=80px","fast_publish=" + uicomponent.getFastPublicLink(viewNode));
   										}
 										%> </div><% 
 									}
 								%>
-							</div>
-							<%
+						<%
 								if (isShowReadmore) {
-								  %><div class="LinkMore"><a href="$itemLink" rel="tooltip" data-placement="bottom" title="<%= _ctx.appRes("UICLVPresentation.label.readmore") %>"><%= _ctx.appRes("UICLVPresentation.label.readmore") %></a></div><%
+								  %><div class="readLink"><a href="$itemLink" rel="tooltip" data-placement="bottom" title="<%= _ctx.appRes("UICLVPresentation.label.readmore") %>"><%= _ctx.appRes("UICLVPresentation.label.readmore") %></a></div><%
 								}
 							%>
+							</div>
+							</div>
 						</div>
-				<% if ((i+1) % 2 == 0) { %>	
-				<% } %>
-				
-	    <%
+					<%
+					if (i %2 == 1) {
+					%>
+						</div>
+					<%
+					}
 				}
+			if (currentPageData.size() % 2 == 1) {
 			%>
-			<div class="CaptionFunc clearfix">
-				<% String labelRefreshAction = _ctx.appRes("UICLVPresentation.action.refresh");
+				</div>
+			<%
+			}
+			%>
+			<%
+			String labelRefreshAction = _ctx.appRes("UICLVPresentation.action.refresh");
 				  def isShowRefresh = uicomponent.isShowField(UICLVPortlet.PREFERENCE_SHOW_REFRESH_BUTTON);
-					if (isShowRefresh) { 
+			 %>
+				
+				
+				<% 
+					if (isShowRefresh) { %>
+					<div class="captionFunc clearfix">
+				<%
+				
 						String link = uicomponent.event("Refresh");
 				%>
-							<div class="CaptionRefresh">
-								<a href="$link" rel="tooltip" data-placement="bottom" title="$labelRefreshAction">$labelRefreshAction</a>
+							<div class="captionRefresh right">
+								<a href="$link" class="btn" rel="tooltip" data-placement="bottom" title="$labelRefreshAction">$labelRefreshAction</a>
 							</div>
+					
+				</div>	
 				<% 
 					}
-					if (uicomponent.showPaginator()) { 
-						uicomponent.renderChild(UICustomizeablePaginator.class)
+					if (uicomponent.showPaginator()) { %>
+					<div class="paginatorDefault" >	
+				<%		uicomponent.renderChild(UICustomizeablePaginator.class) %>
+					</div>
+				<%
 					} 
 				%>
-				
-			</div>				
+							
 			</div> <%
 			}
 		%>

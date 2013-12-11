@@ -1470,6 +1470,34 @@
 			}, 1*1000);
 		});
 	};
+	
+	ECMUtils.prototype.onLoadNodeTypeInfo = function() {
+		var uiNodeTypeInfo = gj("#UINodeTypeInfoPopup");
+		var nav = gj(uiNodeTypeInfo).find("ul.nav-tabs:first")[0];
+		var listHiddenTabsContainer = gj(nav).find("li.listHiddenTabsContainer:first")[0];
+		var uiDropdownContainer   = gj(listHiddenTabsContainer).find("ul.dropdown-menu:first")[0];
+		var navPaddingLeft = gj(nav).css("padding-left").replace("px","");
+		var navPaddingRight = gj(nav).css("padding-right").replace("px","");
+		var allowedSpace  = nav.offsetWidth - navPaddingLeft - navPaddingRight - gj(listHiddenTabsContainer).width();
+		var totalNavsLength = 0;
+		
+		// Total length of navigation items
+		gj(nav).children("li").not(".dropdown").each(function(i) {
+		  totalNavsLength += gj(this).width();
+		});
+
+		// Remove dropdown if only a few node types avaiable
+		if (totalNavsLength < allowedSpace) {
+			gj(listHiddenTabsContainer).hide();
+		}
+		
+		// Move navigation item to dropdown menu if there are too many nav items
+		while (totalNavsLength > allowedSpace) {
+		  var lastNavItem = gj(nav).children("li").not(".dropdown").last()[0];
+		  totalNavsLength = totalNavsLength - gj(lastNavItem).width();
+		  gj(uiDropdownContainer).prepend(lastNavItem);
+		}
+	};
 
 	eXo.ecm.ECMUtils = new ECMUtils();
 	

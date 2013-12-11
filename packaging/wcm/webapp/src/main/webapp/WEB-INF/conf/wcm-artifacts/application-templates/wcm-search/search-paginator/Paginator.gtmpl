@@ -6,9 +6,9 @@
   	def currentPage = uicomponent.getCurrentPage();
 %>
 
-<div class="UIPaginatorDefault">
+<div class="showMore" style="display:block">
 
-  <a href="<%=uicomponent.event("ShowPage","${currentPage + 1}")%>" class="Next"><%=_ctx.appRes("UIPaginatorDefault.label.more")%></a>
+  <button type="button" class="btn" value="<%=_ctx.appRes("UIPaginatorDefault.label.more")%>" onclick="<%=uicomponent.event("ShowPage","${currentPage + 1}")%>"><%=_ctx.appRes("UIPaginatorDefault.label.more")%></button>
 
 </div>
 
@@ -20,12 +20,18 @@
     String nextPage = _ctx.appRes("UIPaginatorDefault.label.next");
 %>
 
-<div class="UIPaginatorDefault">
-
+<div class="pagination uiPageIterator clearfix">
+	<ul class="pull-right">
+		
   <% if( currentPage - 1 > 0 ){%>
-      <a href="<%=uicomponent.event("ShowPage","${currentPage - 1}")%>" class="Prev">$previousPage</a>
-  <% }%>
-
+	  	<li>
+	      <a href="<%=uicomponent.event("ShowPage","${currentPage - 1}")%>" data-placement="bottom" rel="tooltip" data-original-title="Previous Page"><i class="uiIconPrevArrow"></i></a>
+	  	</li>
+  <% } else { %>
+		<li class="disabled">
+			<a data-placement="bottom" rel="tooltip" data-original-title="Previous Page"><i class="uiIconPrevArrow"></i></a>
+		</li>
+	<%  } %>
   <%
   int min = 1;
   int max = totalPage;
@@ -38,17 +44,33 @@
     max = 6;
   }
   for( i in min..max) { %>
+	
   <%  if( i == currentPage) { %>
-	    <a class="Item Current"><%=i%></a>
+  	<li class="active">
+	    <a ><%=i%></a>
+	</li>
   <%  } else { %>
-	    <a href="<%=uicomponent.event("ShowPage","$i")%>" class="Item"><%=i%></a>
+  	<li>
+	    <a href="<%=uicomponent.event("ShowPage","$i")%>"><%=i%></a>
+	 </li>
   <%  } %>
   <%}%>
-
+		
+		
   <% if(currentPage + 1 <= totalPage) { %>
-       <a href="<%=uicomponent.event("ShowPage","${currentPage + 1}")%>" class="Next">$nextPage</a>
-  <% }%>
-
+	  	<li>
+	       <a href="<%=uicomponent.event("ShowPage","${currentPage + 1}")%>" data-placement="bottom" rel="tooltip" data-original-title="Next Page"><i class="uiIconNextArrow"></i></a>
+	  	</li>
+  <% } else {%>
+	  	<li class="disabled">
+	       <a data-placement="bottom" rel="tooltip" data-original-title="Next Page"><i class="uiIconNextArrow"></i></a>
+	  	</li>
+  <%  } %>	
+	</ul>
+	<p class="pull-right">
+		<span>Total pages:</span>
+		<span class="pagesTotalNumber">$totalPage</span>
+	</p>
 </div>
 
 <%

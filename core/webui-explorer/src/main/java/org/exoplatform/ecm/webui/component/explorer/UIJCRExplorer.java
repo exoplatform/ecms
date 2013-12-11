@@ -952,13 +952,14 @@ public class UIJCRExplorer extends UIContainer {
     } else if (NodetypeConstant.SORT_BY_NODESIZE.equals(preferences_.getSortType())) {
       Collections.sort(childrenList, new NodeSizeComparator(preferences_.getOrder())) ;
     } else if (NodetypeConstant.SORT_BY_VERSIONABLE.equals(preferences_.getSortType())) {
-      Collections.sort(childrenList, new StringComparator(preferences_.getOrder(), Preference.SORT_BY_VERSIONABLE));
+      Collections.sort(childrenList, new StringComparator(preferences_.getOrder(), NodetypeConstant.SORT_BY_VERSIONABLE));
     } else if (NodetypeConstant.SORT_BY_AUDITING.equals(preferences_.getSortType())) {
-      Collections.sort(childrenList, new StringComparator(preferences_.getOrder(), Preference.SORT_BY_AUDITING));
+      Collections.sort(childrenList, new StringComparator(preferences_.getOrder(), NodetypeConstant.SORT_BY_AUDITING));
     } else if (NodetypeConstant.SORT_BY_CREATED_DATE.equals(preferences_.getSortType())) {
-      Collections.sort(childrenList, new PropertyValueComparator(Utils.EXO_CREATED_DATE, preferences_.getOrder()));
+        Collections.sort(childrenList, new PropertyValueComparator(Utils.EXO_CREATED_DATE, preferences_.getOrder()));
     } else if (NodetypeConstant.SORT_BY_MODIFIED_DATE.equals(preferences_.getSortType())) {
-      Collections.sort(childrenList, new PropertyValueComparator(NodetypeConstant.EXO_LAST_MODIFIED_DATE, preferences_.getOrder()));
+        Collections.sort(childrenList, 
+                         new PropertyValueComparator(NodetypeConstant.EXO_LAST_MODIFIED_DATE, preferences_.getOrder()));
     } else if (NodetypeConstant.SORT_BY_DATE.equals(preferences_.getSortType())) {
       Collections.sort(childrenList, new DateComparator(preferences_.getOrder()));
     } else {

@@ -27,14 +27,14 @@
  %>
  <%
   def rcontext = _ctx.getRequestContext() ;
-//  rcontext.getJavascriptManager().require("SHARED/uiJCRExplorer", "uiJCRExplorer").
-//  addScripts('uiJCRExplorer.UIJCRExplorer.loadNodeTypeScroll();');
+  rcontext.getJavascriptManager().require("SHARED/ecm-utils", "ecmUtils").
+  addScripts('ecmUtils.ECMUtils.onLoadNodeTypeInfo();');
 
 %>
 
 
 <div class="uiNodeTypeInfo" id="UINodeTypeInfoPopup">
-	<div class="uiTabNormal" id="UINodeTypeInfoPopup">
+	<div class="uiTabNormal">
 		<ul class="nav nav-tabs">
 						<%
 						String style="active";
@@ -44,19 +44,24 @@
 								style += " last";
 						%>
 							<li class="$style" onClick="eXo.ecm.UIJCRExplorer.displayTabContent(this)">
-								<a>$nodeType.name</a>
+								<a data-toggle="tab">$nodeType.name</a>
 							</li>
 						<%
 							style = "" ;
 						}
 						%>
+						<li class="dropdown pull-right listHiddenTabsContainer" style="display: block;">
+							 <a data-toggle="dropdown" class="dropdown-toggle" href="#">More <b class="caret"></b></a>
+							 <ul class="dropdown-menu">
+							 </ul>
+						</li>
 		</ul>
 
 		<div class="tab-content" id="myTabContent">
 			<%
 			style="display: block;" ;
 				for(nodeType in collect) {%>
-					<div class="UITabContent resizable" style="$style">
+					<div class="UITabContent resizable" nodeTypeName="<%=nodeType.name.replace("-","").replace(":","")%>" style="$style">
 						<table class="uiGrid table table-hover table-striped" cellspacing="0" borderspacing="0">
 							<thead>
 								<tr>
