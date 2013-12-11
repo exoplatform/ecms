@@ -8,11 +8,11 @@ import org.exoplatform.services.wcm.newsletter.NewsletterCategoryConfig;
 	<% uiform.begin() %>
 		<div class="ClearFix">
 		<div class="BreadCumbs">
-			<a class="ItemContent" style="color:blue;" href="<%=uicomponent.event("BackToCategories")%>">
+			<a class="ItemContent" style="color:blue;" href="javascript:void(0);" onclick="<%=uicomponent.event("BackToCategories")%>">
 					eXo Newsletter
 			</a>
 			>
-			<a class="ItemContent" style="color:blue;" href="<%=uicomponent.event("BackToSubcriptions")%>">
+			<a class="ItemContent" style="color:blue;" href="javascript:void(0);" onclick="<%=uicomponent.event("BackToSubcriptions")%>">
 					<%=uicomponent.categoryConfig.getTitle()%>
 			</a>
 			>
@@ -129,7 +129,7 @@ import org.exoplatform.services.wcm.newsletter.NewsletterCategoryConfig;
 							%>
 								<tr class="SubcriptionInfor" style="$color">
 									<td class="Infor" style="border-left:0px;">
-										<a href="<%=uicomponent.event("OpenSubscription")%>">
+										<a href="javascript:void(0);" onclick="<%=uicomponent.event("OpenSubscription")%>">
 											<%=newsletter.getNewsletterTitle()%>
 										</a>
 									</td>

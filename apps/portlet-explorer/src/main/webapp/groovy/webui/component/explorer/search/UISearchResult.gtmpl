@@ -59,21 +59,21 @@
           <%
             if (uicomponent.iconScore.equals("BlueUpArrow")) {
           %>
-            <a href="<%=uicomponent.event("SortASC", Utils.formatNodeName("score"))%>" title="<%=_ctx.appRes("UISearchResult.title.scoreASC")%>">
+            <a href="javascript:void(0);" onclick="<%=uicomponent.event("SortASC", Utils.formatNodeName("score"))%>" title="<%=_ctx.appRes("UISearchResult.title.scoreASC")%>">
               <%=_ctx.appRes("UISearchResult.header.score")%>
               <img src="/eXoResources/skin/sharedImages/Blank.gif" alt="<%=_ctx.appRes("UISearchResult.title.scoreASC")%>" class="BlueUpArrow16x16Icon"/>
             </a>
           <%
             } else if (uicomponent.iconScore.equals("BlueDownArrow")) {
           %>
-          <a href="<%=uicomponent.event("SortDESC", Utils.formatNodeName("score"))%>" title="<%=_ctx.appRes("UISearchResult.title.scoreDESC")%>">
+          <a href="javascript:void(0);" onclick="<%=uicomponent.event("SortDESC", Utils.formatNodeName("score"))%>" title="<%=_ctx.appRes("UISearchResult.title.scoreDESC")%>">
             <%=_ctx.appRes("UISearchResult.header.score")%>
             <img src="/eXoResources/skin/sharedImages/Blank.gif" alt="<%=_ctx.appRes("UISearchResult.title.scoreDESC")%>" class="BlueDownArrow16x16Icon"/>
           </a>
           <%
             } else {
           %>
-            <a href="<%=uicomponent.event("SortASC", Utils.formatNodeName("score"))%>" title="<%=_ctx.appRes("UISearchResult.title.scoreASC")%>">
+            <a href="javascript:void(0);" onclick="<%=uicomponent.event("SortASC", Utils.formatNodeName("score"))%>" title="<%=_ctx.appRes("UISearchResult.title.scoreASC")%>">
               <%=_ctx.appRes("UISearchResult.header.score")%>
             </a>
           <% } %>

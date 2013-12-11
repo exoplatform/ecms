@@ -38,7 +38,7 @@
 						if (uicomponent.isShowPreferences()) {					
 					%>
 							<div style="float: right" id="<%=quickEditingBlockId%>">
-									<a class="PreferencesIcon" href="<%=uicomponent.event("Preferences")%>" title="<%= _ctx.appRes("UICLVContainer.label.Preferences");%>">
+									<a class="PreferencesIcon" href="javascript:void(0);" onclick="<%=uicomponent.event("Preferences")%>" title="<%= _ctx.appRes("UICLVContainer.label.Preferences");%>">
 			<!--					  <div class="QuickEdit"><span></span></div>-->
 							&nbsp;
 									</a>					 
@@ -48,7 +48,7 @@
 					if (uicomponent.isShowManageContent()) {
 					  %>
 						<div style="float: right"  id="<%=manageContentBlockId%>">
-							<a class="ManageContentIcon" onclick = "eXo.ecm.CLV.addURL(this)" href="<%=manageContentsLink%>" title="<%= _ctx.appRes("UICLVContainer.label.ManageContent");%>">
+							<a class="ManageContentIcon" onclick = "eXo.ecm.CLV.addURL(this)" href="javascript:void(0);" onclick="<%=manageContentsLink%>" title="<%= _ctx.appRes("UICLVContainer.label.ManageContent");%>">
 							  &nbsp;
 							</a>           
 						</div>
@@ -58,7 +58,7 @@
 					if (uicomponent.isShowAddContent()) {          
 					  %>
 						<div style="float: right" id="<%=addContentBlockId%>">
-							<a class="AddContentIcon" onclick = "eXo.ecm.CLV.addURL(this)" href="<%=addContentLink%>" title="<%= _ctx.appRes("UICLVContainer.label.AddContent");%>">
+							<a class="AddContentIcon" onclick = "eXo.ecm.CLV.addURL(this)" href="javascript:void(0);" onclick="<%=addContentLink%>" title="<%= _ctx.appRes("UICLVContainer.label.AddContent");%>">
 							  &nbsp;
 							</a>           
 						</div>

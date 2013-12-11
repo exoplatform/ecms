@@ -15,13 +15,13 @@
     </div>
     <%uiform.end()%>    
   </div>  
-  <a class="Icon SetupPreferencesButton" href="<%=uicomponent.event("Preferences")%>" title="<%=_ctx.appRes("UIViewBar.label.setUpBrowser")%>"><span></span></a>
+  <a class="Icon SetupPreferencesButton" href="javascript:void(0);" onclick="<%=uicomponent.event("Preferences")%>" title="<%=_ctx.appRes("UIViewBar.label.setUpBrowser")%>"><span></span></a>
   <% if (!uicomponent.isDirectlyDrive()) {%>
-  <a class="Icon BackToMainDriveButton" href="<%=uicomponent.event("Back")%>" title="<%=_ctx.appRes("UIViewBar.label.backToJCR")%>"><span></span></a>
+  <a class="Icon BackToMainDriveButton" href="javascript:void(0);" onclick="<%=uicomponent.event("Back")%>" title="<%=_ctx.appRes("UIViewBar.label.backToJCR")%>"><span></span></a>
   <%}%>		
-  <a class="Icon RefreshSessionButton" href="<%=uicomponent.event("RefreshSession")%>" title="<%=_ctx.appRes("UIViewBar.label.refesh")%>"><span></span></a>
+  <a class="Icon RefreshSessionButton" href="javascript:void(0);" onclick="<%=uicomponent.event("RefreshSession")%>" title="<%=_ctx.appRes("UIViewBar.label.refesh")%>"><span></span></a>
 	<%if (!uicomponent.isShowSideBar()) {%>
-	  <a class="Icon ShowSideBarButton" href="<%=uicomponent.event("ShowSideBar")%>" title="<%=_ctx.appRes("UIViewBar.label.showSideBar")%>"><span></span></a>
+	  <a class="Icon ShowSideBarButton" href="javascript:void(0);" onclick="<%=uicomponent.event("ShowSideBar")%>" title="<%=_ctx.appRes("UIViewBar.label.showSideBar")%>"><span></span></a>
 	<%}%>		
 	<div class="Separator ViewBarSeparator"><span></span></div>		
 

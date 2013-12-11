@@ -44,13 +44,13 @@
 								if((!Utils.isPortalEditMode()) && rcontext.getRemoteUser() && Utils.hasEditPermissionOnPage()) {
 									%>
 									<div style="float: right">
-										<a href="<%= uicomponent.event("Preferences")%>" title="<%= _ctx.appRes("UISCVPreferences.label.Preferences")%>" class="PreferencesIcon" >
+										<a href="javascript:void(0);" onclick="<%= uicomponent.event("Preferences")%>" title="<%= _ctx.appRes("UISCVPreferences.label.Preferences")%>" class="PreferencesIcon" >
 										  &nbsp;
 										</a>         
 									</div>
 									<%}%>
 									<div style="float: right">
-									<a onclick = "eXo.ecm.CLV.addURL(this)" href="<%= uicomponent.getQuickEditLink(node) %>" class="EditContentIcon" title="<%= _ctx.appRes("UIPresentationContainer.title.QuickEdit")%>">
+									<a onclick = "eXo.ecm.CLV.addURL(this)" href="javascript:void(0);" onclick="<%= uicomponent.getQuickEditLink(node) %>" class="EditContentIcon" title="<%= _ctx.appRes("UIPresentationContainer.title.QuickEdit")%>">
 										  &nbsp;
 										</a>           
 									</div>
@@ -58,7 +58,7 @@
 									  if (org.exoplatform.wcm.webui.utils.Utils.isShowFastPublish(node)) {
 									%>
 									<div style="float: right">
-                    <a href="<%= uicomponent.event("FastPublish")%>" title="<%= _ctx.appRes("UIPresentationContainer.title.FastPublish")%>" class="FastPublishIcon" >
+                    <a href="javascript:void(0);" onclick="<%= uicomponent.event("FastPublish")%>" title="<%= _ctx.appRes("UIPresentationContainer.title.FastPublish")%>" class="FastPublishIcon" >
                       &nbsp;
                     </a>
 									</div>
@@ -82,7 +82,7 @@
 							if((!Utils.isPortalEditMode()) && rcontext.getRemoteUser() && Utils.hasEditPermissionOnPage()) {
 								%>
 								<div style="float: right">
-									<a href="<%= uicomponent.event("Preferences")%>" title="<%= _ctx.appRes("UISCVPreferences.label.Preferences")%>" class="PreferencesIcon" >
+									<a href="javascript:void(0);" onclick="<%= uicomponent.event("Preferences")%>" title="<%= _ctx.appRes("UISCVPreferences.label.Preferences")%>" class="PreferencesIcon" >
 									  &nbsp;
 									</a>         
 								</div>
@@ -159,7 +159,7 @@
              <div class="EdittingToolBarR">
                <div class="EdittingToolBarC ClearFix">
                  <div style="float: right">
-                   <a href="<%= uicomponent.event("Preferences")%>" title="<%= _ctx.appRes("UISCVPreferences.label.Preferences")%>" class="PreferencesIcon" >
+                   <a href="javascript:void(0);" onclick="<%= uicomponent.event("Preferences")%>" title="<%= _ctx.appRes("UISCVPreferences.label.Preferences")%>" class="PreferencesIcon" >
                      &nbsp;
                    </a>         
                  </div>            

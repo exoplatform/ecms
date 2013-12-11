@@ -30,14 +30,14 @@
   	          <div class="DriveIcon" onclick="<%=uicomponent.event("SelectDrive","${drive.name}")%>" title="${drive.name}">
     	          <img alt="${drive.name}" src="/${uicomponent.getPortalName()}/${uicomponent.getRestName()}/jcr/${repository}/${mainIconPath[0]}/${mainIconPath[1]}" width="27" height="27" onclick="<%=uicomponent.event("SelectDrive","${drive.name}")%>"/>
     	        </div>
-		          <a class="DriveLabel" href="<%=uicomponent.event("SelectDrive", Utils.formatNodeName(drive.getName()))%>"><%=uicomponent.getLabel(drive.getName())%></a>
+		          <a class="DriveLabel" href="javascript:void(0);" onclick="<%=uicomponent.event("SelectDrive", Utils.formatNodeName(drive.getName()))%>"><%=uicomponent.getLabel(drive.getName())%></a>
 				<%
 				    } else {
 				%>
 				      <div class="IconDrivesDefault IconDrives${drive.workspace} DriveIcon" onclick="<%=uicomponent.event("SelectDrive","${drive.name}")%>" title="<%=uicomponent.getLabel(drive.getName())%>">
 				        <span></span>
 			        </div>
- 				      <a class="DriveLabel" href="<%=uicomponent.event("SelectDrive", Utils.formatNodeName(drive.getName()))%>"  title="<%=uicomponent.getLabel(drive.getName())%>">
+ 				      <a class="DriveLabel" href="javascript:void(0);" onclick="<%=uicomponent.event("SelectDrive", Utils.formatNodeName(drive.getName()))%>"  title="<%=uicomponent.getLabel(drive.getName())%>">
  				        <%=uicomponent.getLabel(drive.getName())%>
 			        </a>
 				<%      
@@ -62,7 +62,7 @@
 			        </div>
 	        <%  } else {  %>
 				        <div class="IconDrivesUse DriveIcon" onclick="<%=uicomponent.event("SelectDrive","${groupDrive.name}")%>" title="${groupLabel}"><span></span></div>
-	  			      <a class="DriveLabel" href="<%=uicomponent.event("SelectDrive","${groupDrive.name}")%>" title="${groupLabel}">
+	  			      <a class="DriveLabel" href="javascript:void(0);" onclick="<%=uicomponent.event("SelectDrive","${groupDrive.name}")%>" title="${groupLabel}">
 	  			        ${groupLabel}
   			        </a>
 		      <%
@@ -89,7 +89,7 @@
 	            <div class="IconDrives${drive.name} DriveIcon" onclick="<%=uicomponent.event("SelectDrive","${drive.name}")%>" title="<%=uicomponent.getLabel(drive.getName())%>">
 	              <span></span>
               </div>
-  	          <a class="DriveLabel" href="<%=uicomponent.event("SelectDrive","${drive.name}")%>" title="<%=uicomponent.getLabel(drive.getName())%>">
+  	          <a class="DriveLabel" href="javascript:void(0);" onclick="<%=uicomponent.event("SelectDrive","${drive.name}")%>" title="<%=uicomponent.getLabel(drive.getName())%>">
   	            <%=uicomponent.getLabel(drive.getName())%>
 	            </a>
         <%
