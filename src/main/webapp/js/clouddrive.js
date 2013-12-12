@@ -414,7 +414,7 @@
 					if (typeof state === "string") {
 						process.reject(state);
 					} else {
-						process.reject("Internal error: " + (state && state.error ? state.error : error + " " + errorText) + ". Try again later.");
+						process.reject("Internal error: " + (state && state.error ? state.error : error + " " + errorText));
 					}
 				});
 			}, 3333);
@@ -509,6 +509,7 @@
 								}
 							});
 							changes.fail(function(response, status, err) {
+								delete autoSyncs[syncName]; // cancel and cleanup
 								utils.log("ERROR: changes long-polling error: " + err + ", " + status + ", " + response);
 							});	
 						}
@@ -1010,6 +1011,20 @@
 				    .append(
 				        "<li style='display: block;'><a class='actionIcon' style='height: 18px;'><i></i> </a></li>");
 				
+				// add sync call to Refresh action
+				// TODO call actualRefreshSession after sync done as a callback
+				$("a.refreshIcon").click(function() {
+					var refreshChanges = $("span.uiCloudDriveChanges");
+					if (refreshChanges.size() > 0) {
+						var currentDate = new Date();
+						var syncDate = $(refreshChanges).data("timestamp");
+						if (syncDate && (currentDate.getMilliseconds() - syncDate.getMilliseconds() <= 60000)) {
+							return true; // don't invoke sync if it was less a min ago
+						}
+					}
+					cloudDrive.synchronize();
+				});
+				
 				// File Viewer
 				var viewer = $("#CloudFileViewer");
 				if (viewer.size() > 0) {
@@ -1311,7 +1326,7 @@
 			process.done(function(files, folders, drive) {
 				function doneAction(pnotify) {
 					$(pnotify.text_container).find("a.cdSynchronizeProcessAction").click(function() {
-						//cloudDriveUI.openDrive(drive.title);
+						// TODO cloudDriveUI.openDrive(drive.title);
 						refresh(true);
 					});
 				}
@@ -1323,35 +1338,23 @@
 				if (files + folders > 0 || drive.removed.length > 0) {
 					// Don't refresh at all, as user can change the
 					// view. Istead we show a link on the message.
-					//var details;
 
-					// TODO cleanup
-					//if (files > 0) {
-					//	details = files + " file" + (files > 1 ? "s" : "");
-					//}
-					//if (folders > 0) {
-					//	folders = folders + " folder" + (folders > 1 ? "s" : "");
-					//	details = (details ? details + " and " + folders : folders);
-					//}
-					//if (details) {
-					//	details = details + " updated on " + driveLink + " drive.";
-					//} else {
-					//	details = "Drive " + driveLink + " successfuly updated.";
-					//}
-					//var titleLink = "<span>" + alink + ">" + drive.provider.name
-					//    + " Synchronized.</a></span>"
-					//cloudDriveUI.showInfo(titleLink, details, doneAction);
-					
 					// Show number of changes in the drive on Refresh icon
 					var changes = files + folders + drive.removed.length;
-					changes = changes > 9 ? "9+" : changes;
 					var refreshChanges = $("span.uiCloudDriveChanges");
-					if (refreshChanges.size()>0) {
+					if (refreshChanges.size() > 0) {
+						var prevChanges = parseInt($(refreshChanges).text());
+						if (!isNaN(prevChanges)) { 
+							changes = changes + prevChanges;
+						}
+						changes = changes > 9 ? "9+" : changes;
 						$(refreshChanges).text(changes);	
 					} else {
+						changes = changes > 9 ? "9+" : changes;
 						$("<span class='uiCloudDriveChanges' title='" + drive.provider.name +
 								" has updates.'>" + changes + "</span>" ).appendTo("a.refreshIcon i");
 					}
+					$("span.uiCloudDriveChanges").data("timestamp", new Date());
 				}
 			});
 			process.fail(function(response, status, err) {
