@@ -120,16 +120,16 @@ public abstract class CloudDrive {
     /**
      * Complete work in abstract units.
      * 
-     * @return int
+     * @return long
      */
-    int getComplete();
+    long getComplete();
 
     /**
      * Available work to do in abstract units.
      * 
-     * @return int
+     * @return long
      */
-    int getAvailable();
+    long getAvailable();
   }
 
   /**

@@ -18,21 +18,23 @@
  */
 package org.exoplatform.clouddrive.box;
 
-import com.box.boxjavalibv2.dao.BoxTypedObject;
-
 import com.box.boxjavalibv2.BoxClient;
 import com.box.boxjavalibv2.authorization.OAuthRefreshListener;
 import com.box.boxjavalibv2.dao.BoxCollection;
+import com.box.boxjavalibv2.dao.BoxEvent;
+import com.box.boxjavalibv2.dao.BoxEventCollection;
 import com.box.boxjavalibv2.dao.BoxFile;
 import com.box.boxjavalibv2.dao.BoxFolder;
 import com.box.boxjavalibv2.dao.BoxItem;
 import com.box.boxjavalibv2.dao.BoxOAuthToken;
 import com.box.boxjavalibv2.dao.BoxSharedLink;
+import com.box.boxjavalibv2.dao.BoxTypedObject;
 import com.box.boxjavalibv2.exceptions.AuthFatalFailureException;
 import com.box.boxjavalibv2.exceptions.BoxServerException;
 import com.box.boxjavalibv2.interfaces.IAuthData;
 import com.box.boxjavalibv2.interfaces.IAuthSecureStorage;
 import com.box.boxjavalibv2.requests.requestobjects.BoxDefaultRequestObject;
+import com.box.boxjavalibv2.requests.requestobjects.BoxEventRequestObject;
 import com.box.boxjavalibv2.requests.requestobjects.BoxFolderRequestObject;
 import com.box.boxjavalibv2.requests.requestobjects.BoxOAuthRequestObject;
 import com.box.boxjavalibv2.resourcemanagers.BoxFilesManager;
@@ -42,6 +44,7 @@ import com.box.restclientv2.exceptions.BoxRestException;
 
 import org.exoplatform.clouddrive.CloudDriveException;
 import org.exoplatform.clouddrive.oauth2.UserToken;
+import org.exoplatform.clouddrive.utils.ChunkIterator;
 import org.exoplatform.services.log.ExoLogger;
 import org.exoplatform.services.log.Log;
 
@@ -49,10 +52,12 @@ import java.text.ParseException;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
-import java.util.HashMap;
+import java.util.HashSet;
 import java.util.Iterator;
-import java.util.Map;
+import java.util.LinkedHashSet;
+import java.util.List;
 import java.util.NoSuchElementException;
+import java.util.Set;
 
 /**
  * All calls to Box API here.
@@ -115,32 +120,17 @@ public class BoxAPI {
    * request to the service. <br>
    * Iterator methods can throw {@link BoxException} in case of remote or communication errors.
    */
-  class ItemsIterator {
-    final String      folderId;
+  class ItemsIterator extends ChunkIterator<BoxItem> {
+    final String folderId;
 
-    Iterator<BoxItem> iter;
-
-    BoxItem           next;
-
-    /**
-     * Forecast of available items in the iterator. Calculated on each {@link #nextPage()}. Used for progress
-     * indicator.
-     */
-    volatile int      available;
-
-    /**
-     * Totally fetched items. Changes on each {@link #next()}. Used for progress indicator.
-     */
-    volatile int      fetched;
-
-    int               limit, offset;
+    int          limit, offset;
 
     /**
      * Parent folder.
      */
-    BoxFolder         parent;
+    BoxFolder    parent;
 
-    ItemsIterator(String folderId) throws BoxException {
+    ItemsIterator(String folderId) throws CloudDriveException {
       this.folderId = folderId;
       this.limit = 1000;
       this.offset = 0;
@@ -149,7 +139,7 @@ public class BoxAPI {
       this.iter = nextChunk();
     }
 
-    Iterator<BoxItem> nextChunk() throws BoxException {
+    protected Iterator<BoxItem> nextChunk() throws CloudDriveException {
       BoxFolderRequestObject obj = BoxFolderRequestObject.getFolderItemsRequestObject(limit, offset);
       obj.addField("id");
       obj.addField("parent");
@@ -168,6 +158,7 @@ public class BoxAPI {
       obj.addField("item_status");
       obj.addField("item_collection");
       try {
+        // TODO handle big drives in several requests with chunk_size
         // BoxCollection items = client.getFoldersManager().getFolderItems(folderId, obj);
         // offset = items.getNextStreamPosition();
 
@@ -176,7 +167,6 @@ public class BoxAPI {
         BoxCollection items = parent.getItemCollection();
         available(items.getTotalCount());
 
-        // ArrayList<BoxTypedObject> entries = items.getEntries();
         ArrayList<BoxItem> oitems = new ArrayList<BoxItem>();
         // put folders first, then files
         oitems.addAll(BoxFoldersManager.getFolders(items));
@@ -191,60 +181,106 @@ public class BoxAPI {
       }
     }
 
-    boolean hasNextChunk() {
+    protected boolean hasNextChunk() {
       return false; // XXX we assume all fully loaded by once
     }
+  }
 
-    boolean hasNext() throws BoxException {
-      if (next == null) {
-        if (iter.hasNext()) {
-          next = iter.next();
-        } else {
-          // try to fetch next portion of changes
-          while (hasNextChunk()) {
-            iter = nextChunk();
-            if (iter.hasNext()) {
-              next = iter.next();
-              break;
-            }
-          }
-        }
-        return next != null;
-      } else {
-        return true;
-      }
+  /**
+   * Iterator over set of events from Box service. This iterator hides next-chunk logic on
+   * request to the service. <br>
+   * Iterator methods can throw {@link BoxException} in case of remote or communication errors.
+   */
+  class EventsIterator extends ChunkIterator<BoxEvent> {
+    final int      limit;
+
+    long           streamPosition;
+
+    List<BoxEvent> nextChunk;
+
+    EventsIterator(long streamPosition) throws BoxException {
+      this.streamPosition = streamPosition;
+      this.limit = 1000;
+
+      // fetch first
+      this.iter = nextChunk();
     }
 
-    BoxItem next() throws NoSuchElementException {
-      if (next == null) {
-        throw new NoSuchElementException("No more data in the Box folder.");
-      } else {
-        BoxItem i = next;
-        next = null;
-        fetched++;
-        return i;
+    protected BoxEventCollection events(long position) throws BoxException {
+      try {
+        BoxEventRequestObject request = BoxEventRequestObject.getEventsRequestObject(position <= -1 ? BoxEventRequestObject.STREAM_POSITION_NOW
+                                                                                                   : position);
+
+        // interest to tree changes only
+        request.setStreamType(BoxEventRequestObject.STREAM_TYPE_CHANGES);
+        request.setLimit(limit);
+
+        return client.getEventsManager().getEvents(request);
+      } catch (BoxRestException e) {
+        throw new BoxException("Error requesting Events service: " + e.getMessage(), e);
+      } catch (BoxServerException e) {
+        throw new BoxException("Error reading Events service: " + e.getMessage(), e);
+      } catch (AuthFatalFailureException e) {
+        throw new BoxException("Authentication error for Events service: " + e.getMessage(), e);
       }
     }
 
     /**
-     * Calculate a forecast of items available to fetch. Call it on each {@link #nextChunk()}.
-     * 
-     * @param newValue int
+     * {@inheritDoc}
      */
-    void available(int newValue) {
-      // TODO use explicit values from Box API
-      if (available == 0) {
-        // magic here as we're in indeterminate progress during the fetching
-        // logic based on page bundles we're getting from the drive
-        // first page it's 100%, assume the second is filled on 25%
-        available = hasNextChunk() ? Math.round(newValue * 1.25f) : newValue;
+    protected Iterator<BoxEvent> nextChunk() throws BoxException {
+      List<BoxEvent> events;
+      if (nextChunk == null) {
+        BoxEventCollection ec = events(streamPosition);
+        events = readEvents(ec);
+        streamPosition = ec.getNextStreamPosition();
       } else {
-        // All previously set newValue was fetched.
-        // Assuming the next page is filled on 25%.
-        int newFetched = available;
-        available += hasNextChunk() ? Math.round(newValue * 1.25f) : newValue;
-        fetched = newFetched;
+        events = nextChunk;
       }
+
+      BoxEventCollection ec = events(streamPosition);
+      List<BoxEvent> nextEvents = readEvents(ec);
+      if (ec.getChunkSize() > 0 && hasNewEvents(events, nextEvents)) {
+        nextChunk = nextEvents;
+      } else {
+        nextChunk = null;
+      }
+
+      return events.iterator();
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    protected boolean hasNextChunk() {
+      return nextChunk != null;
+    }
+
+    private List<BoxEvent> readEvents(BoxEventCollection collection) {
+      ArrayList<BoxEvent> events = new ArrayList<BoxEvent>();
+      for (BoxTypedObject eobj : collection.getEntries()) {
+        BoxEvent event = (BoxEvent) eobj;
+        if (BOX_EVENTS.contains(event.getEventType())) {
+          events.add(event);
+        }
+      }
+      return events;
+    }
+
+    private boolean hasNewEvents(List<BoxEvent> events, List<BoxEvent> nextEvents) {
+      // HashSet for better performance on large collections
+      Set<String> ids = new HashSet<String>();
+      for (BoxEvent event : events) {
+        ids.add(event.getId());
+      }
+
+      int consumed = 0;
+      for (BoxEvent event : nextEvents) {
+        if (ids.contains(event.getId())) {
+          consumed++;
+        }
+      }
+      return nextEvents.size() > consumed;
     }
   }
 
@@ -303,51 +339,65 @@ public class BoxAPI {
     }
   }
 
-  protected static final Log    LOG                 = ExoLogger.getLogger(BoxAPI.class);
+  protected static final Log      LOG                      = ExoLogger.getLogger(BoxAPI.class);
 
-  public static final String    NO_STATE            = "__no_state_set__";
+  public static final String      NO_STATE                 = "__no_state_set__";
 
   /**
    * Id of root folder on Box.
    */
-  public static final String    BOX_ROOT_ID         = "0";
+  public static final String      BOX_ROOT_ID              = "0";
+
+  /**
+   * Id of Trash folder on Box.
+   */
+  public static final String      BOX_TRASH_ID              = "1";
 
   /**
    * Not official part of the path used in file services with Box API.
    */
-  protected static final String BOX_FILES_PATH      = "files/0/f/";
+  protected static final String   BOX_FILES_PATH           = "files/0/f/";
 
   /**
    * URL prefix for Box files' UI.
    */
-  public static final String    BOX_FILE_URL        = "https://app.box.com/" + BOX_FILES_PATH;
+  public static final String      BOX_FILE_URL             = "https://app.box.com/" + BOX_FILES_PATH;
 
   /**
    * Custom mimetype for Box's webdoc files.
    */
-  public static final String BOX_WEBDOCUMENT_MIMETYPE = "application/x-exo.box.webdoc";
-  
+  public static final String      BOX_WEBDOCUMENT_MIMETYPE = "application/x-exo.box.webdoc";
 
   /**
    * Extension for Box's webdoc files.
    */
-  public static final String BOX_WEBDOCUMENT_EXT = "webdoc";
-  
+  public static final String      BOX_WEBDOCUMENT_EXT      = "webdoc";
+
   /**
    * URL patter for Embedded UI of Box file. Based on:<br>
    * http://stackoverflow.com/questions/12816239/box-com-embedded-file-folder-viewer-code-via-api
    * http://developers.box.com/box-embed/
    */
-  public static final String    BOX_EMBED_URL       = "https://app.box.com/embed_widget/000000000000/%s?"
-                                                        + "view=list&sort=date&theme=gray&show_parent_path=no&show_item_feed_actions=no&session_expired=true";
+  public static final String      BOX_EMBED_URL            = "https://app.box.com/embed_widget/000000000000/%s?"
+                                                               + "view=list&sort=date&theme=gray&show_parent_path=no&show_item_feed_actions=no&session_expired=true";
 
-  private BoxToken              token;
+  public static final Set<String> BOX_EVENTS               = new HashSet<String>();
 
-  private BoxClient             client;
+  static {
+    BOX_EVENTS.add(BoxEvent.EVENT_TYPE_ITEM_CREATE);
+    BOX_EVENTS.add(BoxEvent.EVENT_TYPE_ITEM_UPLOAD);
+    BOX_EVENTS.add(BoxEvent.EVENT_TYPE_ITEM_MOVE);
+    BOX_EVENTS.add(BoxEvent.EVENT_TYPE_ITEM_COPY);
+    BOX_EVENTS.add(BoxEvent.EVENT_TYPE_ITEM_TRASH);
+    BOX_EVENTS.add(BoxEvent.EVENT_TYPE_ITEM_UNDELETE_VIA_TRASH);
+    BOX_EVENTS.add(BoxEvent.EVENT_TYPE_ITEM_RENAME);
+  }
 
-  private ChangesLink           changesLink;
+  private BoxToken                token;
 
-  private long                  changesLinkConsumed = 0;
+  private BoxClient               client;
+
+  private ChangesLink             changesLink;
 
   /**
    * Create Box API from OAuth2 authentication code.
@@ -463,19 +513,19 @@ public class BoxAPI {
     }
   }
 
-  ItemsIterator getFolderItems(String folderId) throws BoxException {
+  ItemsIterator getFolderItems(String folderId) throws CloudDriveException {
     return new ItemsIterator(folderId);
   }
 
-  Calendar parseDate(String dateString) {
+  Calendar parseDate(String dateString) throws ParseException {
     Calendar calendar = Calendar.getInstance();
-    try {
-      Date d = ISO8601DateParser.parse(dateString);
-      calendar.setTime(d);
-    } catch (ParseException e) {
-      LOG.error("Error persing date: " + dateString, e);
-    }
+    Date d = ISO8601DateParser.parse(dateString);
+    calendar.setTime(d);
     return calendar;
+  }
+
+  String formatDate(Calendar date) {
+    return ISO8601DateParser.toString(date.getTime());
   }
 
   /**
@@ -590,7 +640,7 @@ public class BoxAPI {
         try {
           ttl = ttlObj != null ? Long.parseLong(ttlObj.toString()) : 0;
         } catch (NumberFormatException e) {
-          LOG.warn("Error parsing ttl value in events response [" + ttlObj + "]: " + e);
+          LOG.warn("Error parsing ttl value in Events response [" + ttlObj + "]: " + e);
           ttl = 0;
         }
 
@@ -602,7 +652,7 @@ public class BoxAPI {
         try {
           maxRetries = maxRetriesObj != null ? Long.parseLong(maxRetriesObj.toString()) : 0;
         } catch (NumberFormatException e) {
-          LOG.warn("Error parsing max_retries value in events response [" + maxRetriesObj + "]: " + e);
+          LOG.warn("Error parsing max_retries value in Events response [" + maxRetriesObj + "]: " + e);
           maxRetries = 0;
         }
 
@@ -614,15 +664,14 @@ public class BoxAPI {
         try {
           retryTimeout = retryTimeoutObj != null ? Long.parseLong(retryTimeoutObj.toString()) : 0;
         } catch (NumberFormatException e) {
-          LOG.warn("Error parsing retry_timeout value in events response [" + retryTimeoutObj + "]: " + e);
+          LOG.warn("Error parsing retry_timeout value in Events response [" + retryTimeoutObj + "]: " + e);
           retryTimeout = 0;
         }
 
         changesLink = new ChangesLink(type, url, ttl, maxRetries, retryTimeout);
-        changesLinkConsumed = 0;
         return url;
       } else {
-        throw new BoxException("Empty entries from events service.");
+        throw new BoxException("Empty entries from Events service.");
       }
     } catch (BoxRestException e) {
       throw new BoxException("Error requesting changes long poll URL: " + e.getMessage(), e);
@@ -631,5 +680,9 @@ public class BoxAPI {
     } catch (AuthFatalFailureException e) {
       throw new BoxException("Authentication error for changes long poll URL: " + e.getMessage(), e);
     }
+  }
+
+  EventsIterator getEvents(long streamPosition) throws BoxException {
+    return new EventsIterator(streamPosition);
   }
 }

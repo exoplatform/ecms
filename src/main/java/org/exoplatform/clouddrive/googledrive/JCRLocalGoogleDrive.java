@@ -60,17 +60,12 @@ public class JCRLocalGoogleDrive extends JCRLocalCloudDrive {
   /**
    * Connect algorithm for Google Drive.
    */
-  protected class GoogleDriveConnect extends ConnectCommand {
+  protected class Connect extends ConnectCommand {
 
     /**
      * Google Drive service API.
      */
-    final GoogleDriveAPI      api;
-
-    /**
-     * Actually open child iterators. Used for progress indicator.
-     */
-    final List<ChildIterator> iterators = new ArrayList<GoogleDriveAPI.ChildIterator>();
+    protected final GoogleDriveAPI      api;
 
     /**
      * Create connect to Google Drive command.
@@ -78,7 +73,7 @@ public class JCRLocalGoogleDrive extends JCRLocalCloudDrive {
      * @throws RepositoryException
      * @throws DriveRemovedException
      */
-    protected GoogleDriveConnect() throws RepositoryException, DriveRemovedException {
+    protected Connect() throws RepositoryException, DriveRemovedException {
       super();
       this.api = getUser().api();
     }
@@ -104,6 +99,7 @@ public class JCRLocalGoogleDrive extends JCRLocalCloudDrive {
     protected void fetchChilds(String fileId, Node parent) throws CloudDriveException, RepositoryException {
       ChildIterator children = api.children(fileId);
       iterators.add(children);
+      
       while (children.hasNext()) {
         ChildReference child = children.next();
         File gf = api.file(child.getId());
@@ -169,49 +165,24 @@ public class JCRLocalGoogleDrive extends JCRLocalCloudDrive {
         }
       }
     }
-
-    /**
-     * {@inheritDoc}
-     */
-    @Override
-    public int getComplete() {
-      int complete = 0;
-      for (ChildIterator child : iterators) {
-        complete += child.fetched;
-      }
-      return complete;
-    }
-
-    /**
-     * {@inheritDoc}
-     */
-    @Override
-    public int getAvailable() {
-      int available = 0;
-      for (ChildIterator child : iterators) {
-        available += child.available;
-      }
-      // return always +7,5% more, average time for JCR save on mid-to-big drive
-      return Math.round(available * 1.075f);
-    }
   }
 
   /**
    * Sync algorithm for Google Drive.
    */
-  protected class GoogleDriveSync extends SyncCommand {
+  protected class Sync extends SyncCommand {
 
     /**
      * Google Drive service API.
      */
-    final GoogleDriveAPI api;
+    protected final GoogleDriveAPI api;
 
     /**
      * Existing files being synchronized with cloud.
      */
-    final Set<Node>      synced = new HashSet<Node>();
+    protected final Set<Node>      synced = new HashSet<Node>();
 
-    ChangesIterator      changes;
+    protected ChangesIterator      changes;
 
     /**
      * Create command for Google Drive synchronization.
@@ -219,7 +190,7 @@ public class JCRLocalGoogleDrive extends JCRLocalCloudDrive {
      * @throws RepositoryException
      * @throws DriveRemovedException
      */
-    protected GoogleDriveSync() throws RepositoryException, DriveRemovedException {
+    protected Sync() throws RepositoryException, DriveRemovedException {
       super();
       this.api = getUser().api();
     }
@@ -249,6 +220,7 @@ public class JCRLocalGoogleDrive extends JCRLocalCloudDrive {
       BigInteger startChangeId = changeId.add(BigInteger.ONE);
 
       changes = api.changes(startChangeId);
+      iterators.add(changes);
 
       if (changes.hasNext()) {
         readLocalNodes(); // read all local nodes to nodes list
@@ -378,7 +350,7 @@ public class JCRLocalGoogleDrive extends JCRLocalCloudDrive {
             existing.add(localNode);
           } else if (!localNode.getProperty("exo:title").getString().equals(gf.getTitle())) {
             // file was renamed, rename (move) its Node also
-            localNode = moveNode(localNode, gf.getTitle(), fp);
+            localNode = moveNode(gf.getId(), gf.getTitle(), localNode, fp);
           }
 
           Calendar created = api.parseDate(gf.getCreatedDate().toStringRfc3339());
@@ -452,28 +424,6 @@ public class JCRLocalGoogleDrive extends JCRLocalCloudDrive {
         }
       }
       return new String[0];
-    }
-
-    /**
-     * {@inheritDoc}
-     */
-    @Override
-    public int getComplete() {
-      if (changes != null) {
-        return changes.fetched;
-      }
-      return 0;
-    }
-
-    /**
-     * {@inheritDoc}
-     */
-    @Override
-    public int getAvailable() {
-      if (changes != null) {
-        return changes.available;
-      }
-      return 0;
     }
   }
 
@@ -625,7 +575,7 @@ public class JCRLocalGoogleDrive extends JCRLocalCloudDrive {
    */
   @Override
   protected ConnectCommand getConnectCommand() throws DriveRemovedException, RepositoryException {
-    return new GoogleDriveConnect();
+    return new Connect();
   }
 
   /**
@@ -635,7 +585,7 @@ public class JCRLocalGoogleDrive extends JCRLocalCloudDrive {
   protected SyncCommand getSyncCommand() throws DriveRemovedException,
                                         SyncNotSupportedException,
                                         RepositoryException {
-    return new GoogleDriveSync();
+    return new Sync();
   }
 
   /**

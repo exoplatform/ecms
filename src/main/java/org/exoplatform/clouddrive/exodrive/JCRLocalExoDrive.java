@@ -101,7 +101,7 @@ public class JCRLocalExoDrive extends JCRLocalCloudDrive {
      * {@inheritDoc}
      */
     @Override
-    public int getComplete() {
+    public long getComplete() {
       return complete;
     }
 
@@ -109,7 +109,7 @@ public class JCRLocalExoDrive extends JCRLocalCloudDrive {
      * {@inheritDoc}
      */
     @Override
-    public int getAvailable() {
+    public long getAvailable() {
       return available;
     }
   }
@@ -168,7 +168,7 @@ public class JCRLocalExoDrive extends JCRLocalCloudDrive {
      * {@inheritDoc}
      */
     @Override
-    public int getComplete() {
+    public long getComplete() {
       return complete;
     }
 
@@ -176,7 +176,7 @@ public class JCRLocalExoDrive extends JCRLocalCloudDrive {
      * {@inheritDoc}
      */
     @Override
-    public int getAvailable() {
+    public long getAvailable() {
       return available;
     }
   }
@@ -193,7 +193,7 @@ public class JCRLocalExoDrive extends JCRLocalCloudDrive {
      * {@inheritDoc}
      */
     @Override
-    public int getComplete() {
+    public long getComplete() {
       return COMPLETE; // XXX
     }
 
@@ -201,7 +201,7 @@ public class JCRLocalExoDrive extends JCRLocalCloudDrive {
      * {@inheritDoc}
      */
     @Override
-    public int getAvailable() {
+    public long getAvailable() {
       return COMPLETE; // XXX
     }
   }

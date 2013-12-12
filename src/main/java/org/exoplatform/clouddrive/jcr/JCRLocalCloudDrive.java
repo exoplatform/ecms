@@ -30,6 +30,9 @@ import org.exoplatform.clouddrive.DriveRemovedException;
 import org.exoplatform.clouddrive.NotCloudFileException;
 import org.exoplatform.clouddrive.NotConnectedException;
 import org.exoplatform.clouddrive.SyncNotSupportedException;
+import org.exoplatform.clouddrive.utils.ChunkIterator;
+import org.exoplatform.container.ExoContainer;
+import org.exoplatform.container.ExoContainerContext;
 import org.exoplatform.services.jcr.core.ManageableRepository;
 import org.exoplatform.services.jcr.ext.app.SessionProviderService;
 import org.exoplatform.services.jcr.ext.common.SessionProvider;
@@ -77,6 +80,9 @@ import javax.jcr.observation.Event;
 import javax.jcr.observation.EventIterator;
 import javax.jcr.observation.EventListener;
 import javax.jcr.observation.ObservationManager;
+import javax.jcr.query.Query;
+import javax.jcr.query.QueryManager;
+import javax.jcr.query.QueryResult;
 
 /**
  * JCR storage for local cloud drive. Created by The eXo Platform SAS
@@ -173,7 +179,7 @@ public abstract class JCRLocalCloudDrive extends CloudDrive {
     public Collection<String> getRemoved() {
       return Collections.emptyList();
     }
-    
+
     /**
      * {@inheritDoc}
      */
@@ -687,10 +693,16 @@ public abstract class JCRLocalCloudDrive extends CloudDrive {
      */
     final ConversationState conversation;
 
+    /**
+     * ExoContainer for asynchronous execution.
+     */
+    final ExoContainer      container;
+
     final AbstractCommand   command;
 
-    CommandCallable(AbstractCommand command, ConversationState conversation) throws CloudDriveException {
+    CommandCallable(AbstractCommand command, ConversationState conversation, ExoContainer container) throws CloudDriveException {
       this.conversation = conversation;
+      this.container = container;
       this.command = command;
     }
 
@@ -699,6 +711,9 @@ public abstract class JCRLocalCloudDrive extends CloudDrive {
       // set correct user's ConversationState
       ConversationState prevConversation = ConversationState.getCurrent();
       ConversationState.setCurrent(conversation);
+      // set correct container
+      ExoContainer prevContainer = ExoContainerContext.getCurrentContainerIfPresent();
+      ExoContainerContext.setCurrentContainer(container);
       // set correct SessionProvider
       SessionProvider prevSessions = sessionProviders.getSessionProvider(null);
       SessionProvider sp = new SessionProvider(conversation);
@@ -708,7 +723,9 @@ public abstract class JCRLocalCloudDrive extends CloudDrive {
         command.exec();
         return command;
       } finally {
+        // restore previous settings
         sessionProviders.setSessionProvider(null, prevSessions);
+        ExoContainerContext.setCurrentContainer(prevContainer);
         ConversationState.setCurrent(prevConversation);
         sp.close();
       }
@@ -723,37 +740,42 @@ public abstract class JCRLocalCloudDrive extends CloudDrive {
     /**
      * Local files changed by the command.
      */
-    protected final Queue<CloudFile> changed          = new ConcurrentLinkedQueue<CloudFile>();
+    protected final Queue<CloudFile>       changed          = new ConcurrentLinkedQueue<CloudFile>();
 
     /**
      * Local file paths deleted by the command.
      */
-    protected final Queue<String>    removed          = new ConcurrentLinkedQueue<String>();
+    protected final Queue<String>          removed          = new ConcurrentLinkedQueue<String>();
 
     /**
      * Target JCR node. Will be initialized in exec() method (in actual runner thread).
      */
-    protected Node                   driveRoot;
+    protected Node                         driveRoot;
 
     /**
      * Progress indicator in percents.
      */
-    protected final AtomicInteger    progressReported = new AtomicInteger();
+    protected final AtomicInteger          progressReported = new AtomicInteger();
 
     /**
      * Time of command start.
      */
-    protected final AtomicLong       startTime        = new AtomicLong();
+    protected final AtomicLong             startTime        = new AtomicLong();
 
     /**
      * Time of command finish.
      */
-    protected final AtomicLong       finishTime       = new AtomicLong();
+    protected final AtomicLong             finishTime       = new AtomicLong();
+
+    /**
+     * Actually open item iterators. Used for progress indicator.
+     */
+    protected final List<ChunkIterator<?>> iterators        = new ArrayList<ChunkIterator<?>>();
 
     /**
      * Asynchronous execution support.
      */
-    protected Future<Command>        async;
+    protected Future<Command>              async;
 
     /**
      * Base command constructor.
@@ -780,7 +802,7 @@ public abstract class JCRLocalCloudDrive extends CloudDrive {
      * @throws CloudDriveException
      * @throws RepositoryException
      */
-    void exec() throws CloudDriveException, RepositoryException {
+    protected void exec() throws CloudDriveException, RepositoryException {
       startTime.set(System.currentTimeMillis());
 
       try {
@@ -807,6 +829,7 @@ public abstract class JCRLocalCloudDrive extends CloudDrive {
                 } catch (InterruptedException ie) {
                   LOG.warn("Interrupted while waiting for a next attempt of " + getName() + ": "
                       + ie.getMessage());
+                  Thread.currentThread().interrupt();
                 }
                 LOG.warn("Error running " + getName() + " command: " + e.getMessage()
                     + ". Rolled back and running next attempt.");
@@ -839,18 +862,42 @@ public abstract class JCRLocalCloudDrive extends CloudDrive {
      * @return {@link Future} associated with this command.
      * @throws CloudDriveException if no ConversationState set in caller thread.
      */
-    Future<Command> execAsync() throws CloudDriveException {
+    protected Future<Command> execAsync() throws CloudDriveException {
       ConversationState conversation = ConversationState.getCurrent();
       if (conversation == null) {
         throw new CloudDriveException("Error to " + getName() + " drive for user " + getUser().getEmail()
             + ". User identity not set.");
       }
 
-      // TODO old way
-      // async = new CommandRunnable(this, conversation);
-      // async.start();
+      return async = commandExecutor.submit(getName(),
+                                            new CommandCallable(this,
+                                                                conversation,
+                                                                ExoContainerContext.getCurrentContainer()));
+    }
 
-      return async = commandExecutor.submit(getName(), new CommandCallable(this, conversation));
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public long getComplete() {
+      int complete = 0;
+      for (ChunkIterator<?> child : iterators) {
+        complete += child.getFetched();
+      }
+      return complete;
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public long getAvailable() {
+      int available = 0;
+      for (ChunkIterator<?> child : iterators) {
+        available += child.getAvailable();
+      }
+      // return always +7,5% more, average time for JCR save on mid-to-big drive
+      return Math.round(available * 1.075f);
     }
 
     /**
@@ -913,7 +960,7 @@ public abstract class JCRLocalCloudDrive extends CloudDrive {
     public Collection<String> getRemoved() {
       return Collections.unmodifiableCollection(removed);
     }
-    
+
     /**
      * {@inheritDoc}
      */
@@ -1770,20 +1817,9 @@ public abstract class JCRLocalCloudDrive extends CloudDrive {
     }
   }
 
-  /**
-   * Does rollback of drive Node changes and fire onError event to listeners.
-   * 
-   * @param rootNode {@link Node}
-   * @param error {@link Throwable}
-   */
-  void handleError(Node rootNode, Throwable error) {
-    handleError(rootNode, error, null);
-  }
-
-  protected Node openFile(String fileId, String fileTitle, String fileType, Node parent) throws RepositoryException,
-                                                                                        CloudDriveException {
+  private Node openNode(String fileId, String fileTitle, Node parent, String nodeType) throws RepositoryException,
+                                                                                      CloudDriveException {
     Node localNode;
-    Node content;
     String parentPath = parent.getPath();
     String title = cleanName(fileTitle);
     String nodeName = title;
@@ -1792,58 +1828,40 @@ public abstract class JCRLocalCloudDrive extends CloudDrive {
     do {
       try {
         localNode = parent.getNode(nodeName);
-        String localFileId = localNode.getProperty("ecd:id").getString();
-        if (fileId.equals(localFileId)) {
-          // the same file
-          if (!localNode.isNodeType(ECD_CLOUDFILE)) {
-            // oops, seems we cannot do anything - fail it up
-            String existingPath;
-            try {
-              existingPath = parent.getNode(nodeName).getPath();
-            } catch (RepositoryException e1) {
-              LOG.error("Cannot read existing non cloud file node from the local storage of cloud drive"
-                  + parentPath + ". Node name '" + nodeName + "'", e1);
-              existingPath = "<" + e1.getMessage() + ">";
-            }
-            throw new CloudDriveException("Error cannecting cloud file '" + fileTitle
-                + "'. Node with the same name exists and it is not a cloud drive file " + existingPath
-                + ". If it's local user file - remove it and refresh the drive.");
+        // should be ecd:cloudFile or ecd:cloudFolder, note: folder already extends the file NT
+        if (localNode.isNodeType(ECD_CLOUDFILE)) {
+          if (fileId.equals(localNode.getProperty("ecd:id").getString())) {
+            break; // we found node
+          } else {
+            // find new name for the local file
+            StringBuilder newName = new StringBuilder();
+            newName.append(title);
+            newName.append('-');
+            newName.append(siblingNumber);
+            nodeName = newName.toString();
+            siblingNumber++;
           }
-          break;
         } else {
-          // find new name for the local file
-          StringBuilder newName = new StringBuilder();
-          newName.append(title);
-          newName.append('-');
-          newName.append(siblingNumber);
-          nodeName = newName.toString();
-          siblingNumber++;
+          throw new CloudDriveException("Cannot open cloud file. Another node exists in drive storage with the same name: "
+              + parentPath + "/" + nodeName);
         }
       } catch (PathNotFoundException e) {
-        localNode = null;
+        // no such node exists, add it
+        localNode = parent.addNode(nodeName, nodeType);
         break;
       }
     } while (true);
 
-    boolean newContent;
-    if (localNode == null) {
-      // no such node exists, add it
-      localNode = parent.addNode(nodeName, NT_FILE);
-      // file's content - nt:resource node
-      content = localNode.addNode("jcr:content", NT_RESOURCE);
-      newContent = true;
-    } else {
-      // file's content - nt:resource node
-      try {
-        content = localNode.getNode("jcr:content");
-        newContent = false;
-      } catch (PathNotFoundException e) {
-        content = localNode.addNode("jcr:content", NT_RESOURCE);
-        newContent = true;
-      }
-    }
+    return localNode;
+  }
 
-    if (newContent) {
+  protected Node openFile(String fileId, String fileTitle, String fileType, Node parent) throws RepositoryException,
+                                                                                        CloudDriveException {
+    Node localNode = openNode(fileId, fileTitle, parent, NT_FILE);
+
+    // create content for new not complete node
+    if (localNode.isNew() && !localNode.hasNode("jcr:content")) {
+      Node content = localNode.addNode("jcr:content", NT_RESOURCE);
       setContent(content, fileType); // empty data by default
     }
 
@@ -1852,68 +1870,38 @@ public abstract class JCRLocalCloudDrive extends CloudDrive {
 
   protected Node openFolder(String folderId, String folderTitle, Node parent) throws RepositoryException,
                                                                              CloudDriveException {
-    // algorithms similar to openFile
-    Node localNode;
-    String parentPath = parent.getPath();
-    String title = cleanName(folderTitle);
-    String nodeName = title;
-
-    int siblingNumber = 1;
-    do {
-      try {
-        localNode = parent.getNode(nodeName);
-        String localFolderId = localNode.getProperty("ecd:id").getString();
-        if (folderId.equals(localFolderId)) {
-          // the same folder
-          if (!localNode.isNodeType(ECD_CLOUDFOLDER)) {
-            // oops, seems we cannot do anything - fail it up
-            String existingPath;
-            try {
-              existingPath = parent.getNode(nodeName).getPath();
-            } catch (RepositoryException e1) {
-              LOG.error("Cannot read existing non cloud folder node from the local storage of cloud drive"
-                  + parentPath + ". Node name '" + nodeName + "'", e1);
-              existingPath = "<" + e1.getMessage() + ">";
-            }
-            throw new CloudDriveException("Error cannecting cloud folder '" + folderTitle
-                + "'. Node with the same name exists and it is not a cloud drive folder " + existingPath
-                + ". If it's local user folder - remove it and refresh the drive.");
-          }
-          break;
-        } else {
-          // find new name for the local folder
-          StringBuilder newName = new StringBuilder();
-          newName.append(title);
-          newName.append('-');
-          newName.append(siblingNumber);
-          nodeName = newName.toString();
-          siblingNumber++;
-        }
-      } catch (PathNotFoundException e) {
-        // no such node exists, add it
-        localNode = parent.addNode(nodeName, NT_FOLDER);
-        break;
-      }
-    } while (true);
-
-    return localNode;
+    return openNode(folderId, folderTitle, parent, NT_FOLDER);
   }
 
   /**
-   * Move node with its subtree in scope of existing JCR session.
+   * Move node with its subtree in scope of existing JCR session. If a node already exists at destination and
+   * its id and title the same as given, then move will not be performed and existing node will be returned.
    * 
-   * @param node {@link Node}
-   * @param destName {@link String} a new name of the Node
+   * @param id {@link String} a file id of the Node
+   * @param title {@link String} a new name of the Node
+   * @param source {@link Node}
    * @param destParent {@link Node} a new parent
    * @return a {@link Node} from the destination
    * @throws RepositoryException
+   * @throws CloudDriveException
    */
-  protected Node moveNode(Node node, String destName, Node destParent) throws RepositoryException {
-    Session session = destParent.getSession();
-    String nodeName = findNodeName(destName, destParent.getPath(), session);
-    String destPath = destParent.getPath() + "/" + nodeName;
-    session.move(node.getPath(), destPath);
-    return node; // node will reflect a new destination
+  protected Node moveNode(String id, String title, Node source, Node destParent) throws RepositoryException,
+                                                                                CloudDriveException {
+
+    Node place = openNode(id, title, destParent, NT_FILE); // nt:file here, it will be removed anyway
+    if (place.isNew() && !place.hasProperty("ecd:id")) {
+      // this node was just created in openNode method, use its name as destination name
+      String nodeName = place.getName();
+      place.remove(); // clean the place
+
+      Session session = destParent.getSession();
+      // TODO cleanup String nodeName = findNodeName(destName, destParent.getPath(), session);
+      String destPath = destParent.getPath() + "/" + nodeName;
+      session.move(source.getPath(), destPath);
+      return source; // node will reflect a new destination
+    } // else node with such id and title already exists at destParent
+
+    return place;
   }
 
   /**
@@ -1960,12 +1948,14 @@ public abstract class JCRLocalCloudDrive extends CloudDrive {
 
   /**
    * Find a new non existing name for node in local JCR.
+   * TODO cleanup
    * 
    * @param fileTitle {@link String}
    * @param parent {@link Node}
    * @return String with non existing name.
    * @throws RepositoryException
    */
+  @Deprecated
   protected String findNodeName(String fileTitle, String parentPath, Session session) throws RepositoryException {
     String title = cleanName(fileTitle);
     String nodeName = title;
@@ -2016,6 +2006,60 @@ public abstract class JCRLocalCloudDrive extends CloudDrive {
         LOG.warn("Not a cloud file detected " + cn.getPath());
       }
     }
+  }
+
+  /**
+   * Read local node from the given parent using file title and its id.
+   * 
+   * @param parent {@link Node} parent
+   * @param title {@link String}
+   * @param id {@link String}
+   * @return {@link Node}
+   * @throws RepositoryException
+   */
+  protected Node readNode(Node parent, String title, String id) throws RepositoryException {
+    String name = cleanName(title);
+    try {
+      Node n = parent.getNode(name);
+      if (n.isNodeType(ECD_CLOUDFILE) && id.equals(n.getProperty("ecd:id").getString())) {
+        return n;
+      }
+    } catch (PathNotFoundException e) {
+    }
+
+    // will try find among childs with ending wildcard *
+    for (NodeIterator niter = parent.getNodes(name + "*"); niter.hasNext();) {
+      Node n = niter.nextNode();
+      if (n.isNodeType(ECD_CLOUDFILE) && id.equals(n.getProperty("ecd:id").getString())) {
+        return n;
+      }
+    }
+
+    return null;
+  }
+
+  /**
+   * Find local node using JCR SQL query by file id. Note, it will search only persisted nodes - not saved
+   * files cannot be found in JCR.
+   * 
+   * @param id {@link String}
+   * @return {@link Node}
+   * @throws RepositoryException
+   * @throws DriveRemovedException
+   */
+  protected Node findNode(String id) throws RepositoryException, DriveRemovedException {
+
+    Node rootNode = rootNode();
+    QueryManager qm = rootNode.getSession().getWorkspace().getQueryManager();
+    Query q = qm.createQuery("SELECT * FROM " + ECD_CLOUDFILE + " WHERE ecd:id='" + id
+        + "' AND jcr:path LIKE '" + rootNode.getPath() + "/%'", Query.SQL);
+    QueryResult qr = q.execute();
+    NodeIterator nodes = qr.getNodes();
+    if (nodes.hasNext()) {
+      return nodes.nextNode();
+    }
+
+    return null;
   }
 
   protected JCRLocalCloudFile readFile(Node fileNode) throws RepositoryException {

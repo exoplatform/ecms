@@ -239,17 +239,11 @@ public class ConnectService implements ResourceContainer {
 
     Throwable        error;
 
-    /**
-     * ConversationState used by initail thread.
-     */
-    // final ConversationState conversation;
-
     ConnectProcess(String name, String workspaceName, CloudDrive drive, ConversationState conversation) throws CloudDriveException,
         RepositoryException {
       this.drive = drive;
       this.name = name;
       this.workspaceName = workspaceName;
-      // this.conversation = conversation;
       this.drive.addListener(this); // listen to remove from active map
       this.process = drive.connect(true);
 
@@ -257,12 +251,6 @@ public class ConnectService implements ResourceContainer {
     }
 
     void rollback() throws RepositoryException {
-      // set correct user's ConversationState
-      // ConversationState.setCurrent(conversation);
-      // set correct SessionProvider
-      // sessionProviders.setSessionProvider(null, new SessionProvider(conversation));
-
-      // SessionProvider provider = new SessionProvider(conversation);
       SessionProvider provider = sessionProviders.getSessionProvider(null);
       Session session = provider.getSession(workspaceName, jcrService.getCurrentRepository());
 
@@ -295,8 +283,8 @@ public class ConnectService implements ResourceContainer {
                  e);
       } finally {
         lock.unlock();
-        // XXX no big sense to log it here, error should be reported in place it occurs
-        // LOG.error(name + " connect failed.", error);
+        // log error here as the connect was executed asynchronously
+        LOG.error(name + " connect failed.", error);
       }
     }
 
@@ -596,7 +584,7 @@ public class ConnectService implements ResourceContainer {
             String error = connect.error.getMessage();
             if (error == null) {
               // NPE case
-              error = "Internal error (null).";
+              error = "null.";
             }
             if (error.indexOf("backendError") >= 0) {
               error = "Google backend error. Try again later.";
@@ -820,7 +808,7 @@ public class ConnectService implements ResourceContainer {
           }
         } else {
           LOG.warn("Authentication was not initiated for " + providerId + " and id " + initId);
-          return resp.authError("Authentication request expired. Try again.",
+          return resp.authError("Authentication request expired. Try again later.",
                                 baseHost,
                                 null,
                                 iid.toString(),
@@ -836,7 +824,7 @@ public class ConnectService implements ResourceContainer {
       }
     } else {
       LOG.warn("Authentication id not set for provider id " + providerId + " and key " + key);
-      return resp.authError("Authentication not initiated or expired. Try again.", baseHost)
+      return resp.authError("Authentication not initiated or expired. Try again later.", baseHost)
                  .status(Status.BAD_REQUEST)
                  .build();
     }

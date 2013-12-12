@@ -18,10 +18,13 @@
  */
 package org.exoplatform.clouddrive.box;
 
-import com.box.boxjavalibv2.dao.BoxFile;
+import com.box.boxjavalibv2.dao.BoxCollection;
+import com.box.boxjavalibv2.dao.BoxEvent;
 import com.box.boxjavalibv2.dao.BoxFolder;
 import com.box.boxjavalibv2.dao.BoxItem;
 import com.box.boxjavalibv2.dao.BoxSharedLink;
+import com.box.boxjavalibv2.dao.BoxTypedObject;
+import com.box.boxjavalibv2.requests.requestobjects.BoxEventRequestObject;
 
 import org.exoplatform.clouddrive.CloudDriveException;
 import org.exoplatform.clouddrive.CloudFile;
@@ -29,6 +32,7 @@ import org.exoplatform.clouddrive.CloudProviderException;
 import org.exoplatform.clouddrive.CloudUser;
 import org.exoplatform.clouddrive.DriveRemovedException;
 import org.exoplatform.clouddrive.SyncNotSupportedException;
+import org.exoplatform.clouddrive.box.BoxAPI.EventsIterator;
 import org.exoplatform.clouddrive.box.BoxAPI.ItemsIterator;
 import org.exoplatform.clouddrive.box.BoxConnector.API;
 import org.exoplatform.clouddrive.googledrive.GoogleDriveException;
@@ -40,10 +44,18 @@ import org.exoplatform.clouddrive.oauth2.UserTokenRefreshListener;
 import org.exoplatform.commons.utils.MimeTypeResolver;
 import org.exoplatform.services.jcr.ext.app.SessionProviderService;
 
+import java.text.ParseException;
 import java.util.ArrayList;
 import java.util.Calendar;
+import java.util.Collection;
 import java.util.Iterator;
+import java.util.LinkedHashMap;
+import java.util.LinkedHashSet;
+import java.util.LinkedList;
 import java.util.List;
+import java.util.Map;
+import java.util.NoSuchElementException;
+import java.util.Set;
 
 import javax.jcr.Node;
 import javax.jcr.PathNotFoundException;
@@ -61,18 +73,19 @@ import javax.jcr.RepositoryException;
 public class JCRLocalBoxDrive extends JCRLocalCloudDrive implements UserTokenRefreshListener {
 
   /**
+   * Period to perform {@link FullSync} as a next sync request. See implementation of
+   * {@link #getSyncCommand()}.
+   */
+  public static final long FULL_SYNC_PERIOD = 24 * 60 * 60 * 60 * 1000; // 24hrs
+
+  /**
    * Connect algorithm for Box drive.
    */
-  protected class BoxConnect extends ConnectCommand {
+  protected class Connect extends ConnectCommand {
 
-    final BoxAPI              api;
+    protected final BoxAPI api;
 
-    /**
-     * Actually open child iterators. Used for progress indicator.
-     */
-    final List<ItemsIterator> iterators = new ArrayList<ItemsIterator>();
-
-    BoxConnect() throws RepositoryException, DriveRemovedException {
+    protected Connect() throws RepositoryException, DriveRemovedException {
       this.api = getUser().api();
     }
 
@@ -80,35 +93,21 @@ public class JCRLocalBoxDrive extends JCRLocalCloudDrive implements UserTokenRef
      * {@inheritDoc}
      */
     @Override
-    public int getComplete() {
-      int complete = 0;
-      for (ItemsIterator child : iterators) {
-        complete += child.fetched;
-      }
-      return complete;
-    }
-
-    /**
-     * {@inheritDoc}
-     */
-    @Override
-    public int getAvailable() {
-      int available = 0;
-      for (ItemsIterator child : iterators) {
-        available += child.available;
-      }
-      // return always +7,5% more, average time for JCR save on mid-to-big drive
-      return Math.round(available * 1.075f);
-    }
-
-    /**
-     * {@inheritDoc}
-     */
-    @Override
     protected void fetchFiles() throws CloudDriveException, RepositoryException {
-      BoxFolder root = fetchChilds(BoxAPI.BOX_ROOT_ID, driveRoot);
+      // call Events service before the actual fetch of Box files,
+      // this will provide us a proper streamPosition to start sync from later
+      EventsIterator eventsInit = api.getEvents(BoxEventRequestObject.STREAM_POSITION_NOW);
+
+      BoxFolder boxRoot = fetchChilds(BoxAPI.BOX_ROOT_ID, driveRoot);
+      initBoxItem(driveRoot, boxRoot); // init parent
+
       // actual drive URL (its root folder's id), see initDrive() also
-      driveRoot.setProperty("ecd:url", api.getLink(root));
+      driveRoot.setProperty("ecd:url", api.getLink(boxRoot));
+
+      // sync stream
+      driveRoot.setProperty("box:streamPosition", eventsInit.streamPosition);
+      driveRoot.setProperty("box:streamHistory", "");
+      driveRoot.setProperty("box:streamDate", Calendar.getInstance());
     }
 
     protected BoxFolder fetchChilds(String fileId, Node parent) throws CloudDriveException,
@@ -117,82 +116,31 @@ public class JCRLocalBoxDrive extends JCRLocalCloudDrive implements UserTokenRef
       iterators.add(items);
       while (items.hasNext()) {
         BoxItem item = items.next();
-        Calendar created = api.parseDate(item.getCreatedAt());
-        Calendar modified = api.parseDate(item.getModifiedAt());
-        boolean isFolder = item instanceof BoxFolder;
-        String id = item.getId();
-        String name = item.getName();
-        String type, link, embedLink, downloadLink;
-        Node localNode;
-        if (isFolder) {
-          // add folder
-          BoxFolder f = (BoxFolder) item;
-          type = f.getType();
-          link = embedLink = downloadLink = api.getLink(f);
-          localNode = openFolder(id, name, parent);
-          initFolder(localNode, id, name, type, // type=folder
-                     link, // gf.getAlternateLink(),
-                     f.getCreatedBy().getLogin(), // gf.getOwnerNames().get(0),
-                     f.getModifiedBy().getLogin(), // gf.getLastModifyingUserName(),
-                     created,
-                     modified);
-          // go recursive
-          fetchChilds(id, localNode);
+        JCRLocalCloudFile localItem = updateItem(api, item, parent, null);
+        if (localItem.isChanged()) {
+          changed.add(localItem);
+          if (localItem.isFolder()) {
+            // go recursive to the folder
+            fetchChilds(localItem.getId(), localItem.getNode());
+          }
         } else {
-          // file
-          BoxFile f = (BoxFile) item;
-          type = findMimetype(name);
-          link = downloadLink = api.getLink(f);
-          embedLink = api.getEmbedLink(f);
-          localNode = openFile(id, name, type, parent);
-          // TODO for thumbnail we can use Thumbnail service
-          // https://api.box.com/2.0/files/FILE_ID/thumbnail.png?min_height=256&min_width=256
-          initFile(localNode, id, name, type, // mimetype
-                   link, // gf.getAlternateLink(),
-                   embedLink, // gf.getEmbedLink(),
-                   downloadLink, // gf.getThumbnailLink(), // XXX not used
-                   f.getCreatedBy().getLogin(), // gf.getOwnerNames().get(0),
-                   f.getModifiedBy().getLogin(), // gf.getLastModifyingUserName(),
-                   created,
-                   modified);
-          initBoxItem(localNode, item);
+          throw new BoxFormatException("Fetched item was not added to local drive storage");
         }
-
-        // XXX thumbnail link not used
-        changed.add(new JCRLocalCloudFile(localNode.getPath(),
-                                          id,
-                                          name,
-                                          link,
-                                          embedLink,
-                                          downloadLink,
-                                          type,
-                                          item.getCreatedBy().getLogin(),
-                                          item.getModifiedBy().getLogin(),
-                                          created,
-                                          modified,
-                                          isFolder));
       }
-      initBoxItem(parent, items.parent); // finally init parent
       return items.parent;
     }
   }
 
   /**
-   * Sync algorithm for Box drive. With the Box API we don't have a diff/changes feature, thus we do
-   * compare all remote files by its Etag and fetch an item if the etags differ. <br>
-   * // TODO use Events service to get file related events http://developers.box.com/docs/#events
+   * Sync algorithm for Box drive based on all remote files traversing: we do
+   * compare all remote files with locals by its Etag and fetch an item if the tags differ.
    */
-  protected class BoxSync extends SyncCommand {
+  protected class FullSync extends SyncCommand {
 
     /**
      * Box API.
      */
-    final BoxAPI              api;
-
-    /**
-     * Actually open child iterators. Used for progress indicator.
-     */
-    final List<ItemsIterator> iterators = new ArrayList<ItemsIterator>();
+    protected final BoxAPI api;
 
     /**
      * Create command for Box synchronization.
@@ -200,34 +148,9 @@ public class JCRLocalBoxDrive extends JCRLocalCloudDrive implements UserTokenRef
      * @throws RepositoryException
      * @throws DriveRemovedException
      */
-    protected BoxSync() throws RepositoryException, DriveRemovedException {
+    protected FullSync() throws RepositoryException, DriveRemovedException {
       super();
       this.api = getUser().api();
-    }
-
-    /**
-     * {@inheritDoc}
-     */
-    @Override
-    public int getComplete() {
-      int complete = 0;
-      for (ItemsIterator child : iterators) {
-        complete += child.fetched;
-      }
-      return complete;
-    }
-
-    /**
-     * {@inheritDoc}
-     */
-    @Override
-    public int getAvailable() {
-      int available = 0;
-      for (ItemsIterator child : iterators) {
-        available += child.available;
-      }
-      // return always +7,5% more, average time for JCR save on mid-to-big drive
-      return Math.round(available * 1.075f);
     }
 
     /**
@@ -238,8 +161,18 @@ public class JCRLocalBoxDrive extends JCRLocalCloudDrive implements UserTokenRef
       // real all local nodes of this drive
       readLocalNodes();
 
+      // call Events service before the actual fetch of Box files,
+      // this will provide us a proper streamPosition to start sync from later
+      EventsIterator eventsInit = api.getEvents(BoxEventRequestObject.STREAM_POSITION_NOW);
+
       // sync with cloud
-      syncChilds(BoxAPI.BOX_ROOT_ID, driveRoot);
+      BoxFolder boxRoot = syncChilds(BoxAPI.BOX_ROOT_ID, driveRoot);
+      initBoxItem(driveRoot, boxRoot); // init parent
+
+      // sync stream
+      driveRoot.setProperty("box:streamPosition", eventsInit.streamPosition);
+      driveRoot.setProperty("box:streamHistory", "");
+      driveRoot.setProperty("box:streamDate", Calendar.getInstance());
 
       // remove local nodes of files not existing remotely, except of root
       nodes.remove(BoxAPI.BOX_ROOT_ID);
@@ -247,115 +180,686 @@ public class JCRLocalBoxDrive extends JCRLocalCloudDrive implements UserTokenRef
         List<Node> nls = niter.next();
         niter.remove();
         for (Node n : nls) {
-          removed.add(n.getPath());
-          n.remove();
+          String npath = n.getPath();
+          if (notInRange(npath, removed)) {
+            removed.add(npath);
+            n.remove();
+          }
         }
       }
     }
 
-    protected void syncChilds(String folderId, Node parent) throws RepositoryException, CloudDriveException {
+    protected BoxFolder syncChilds(String folderId, Node parent) throws RepositoryException,
+                                                                CloudDriveException {
       ItemsIterator items = api.getFolderItems(folderId);
       iterators.add(items);
-
       while (items.hasNext()) {
         BoxItem item = items.next();
 
         // remove from map of local to mark the item as existing
         List<Node> existing = nodes.remove(item.getId());
 
-        boolean isFolder = item instanceof BoxFolder;
-        Calendar created = api.parseDate(item.getCreatedAt());
-        Calendar modified = api.parseDate(item.getModifiedAt());
-        String id = item.getId();
-        String name = item.getName();
-        String type, link, embedLink, downloadLink;
-        Node localNode;
-        if (isFolder) {
-          // sync folder
-          BoxFolder f = (BoxFolder) item;
-          type = f.getType();
-          localNode = openFolder(id, name, parent);
-          if (localNode.isNew() || !localNode.hasProperty("box:etag")
-              || !localNode.getProperty("box:etag").getString().equals(f.getEtag())) {
-            link = embedLink = downloadLink = api.getLink(f);
-            initFolder(localNode, id, name, type, // type=folder
-                       link, // gf.getAlternateLink(),
-                       f.getCreatedBy().getLogin(), // gf.getOwnerNames().get(0),
-                       f.getModifiedBy().getLogin(), // gf.getLastModifyingUserName(),
-                       created,
-                       modified);
-            changed.add(new JCRLocalCloudFile(localNode.getPath(),
-                                              id,
-                                              name,
-                                              link,
-                                              embedLink,
-                                              downloadLink,
-                                              type,
-                                              item.getCreatedBy().getLogin(),
-                                              item.getModifiedBy().getLogin(),
-                                              created,
-                                              modified,
-                                              isFolder));
-          }
-          // go recursive for all sub-folders
-          syncChilds(id, localNode);
-        } else {
-          // sync file
-          BoxFile f = (BoxFile) item;
-          type = findMimetype(name);
-          localNode = openFile(id, name, type, parent);
-          if (localNode.isNew() || !localNode.hasProperty("box:etag")
-              || !localNode.getProperty("box:etag").getString().equals(f.getEtag())) {
-            // TODO for thumbnail we can use Thumbnail service
-            // https://api.box.com/2.0/files/FILE_ID/thumbnail.png?min_height=256&min_width=256
-            link = downloadLink = api.getLink(f);
-            embedLink = api.getEmbedLink(f);
-            initFile(localNode, id, name, type, // mimetype
-                     link, // gf.getAlternateLink(),
-                     embedLink, // gf.getEmbedLink(),
-                     downloadLink, // gf.getThumbnailLink(), // XXX not used
-                     f.getCreatedBy().getLogin(), // gf.getOwnerNames().get(0),
-                     f.getModifiedBy().getLogin(), // gf.getLastModifyingUserName(),
-                     created,
-                     modified);
-            initBoxItem(localNode, item);
-            changed.add(new JCRLocalCloudFile(localNode.getPath(),
-                                              id,
-                                              name,
-                                              link,
-                                              embedLink,
-                                              downloadLink,
-                                              type,
-                                              item.getCreatedBy().getLogin(),
-                                              item.getModifiedBy().getLogin(),
-                                              created,
-                                              modified,
-                                              isFolder));
-          }
-        }
+        JCRLocalCloudFile localItem = updateItem(api, item, parent, null);
+        if (localItem.isChanged()) {
+          changed.add(localItem);
 
-        // cleanup of this file located in another place (usecase of rename/move)
-        // XXX this also assumes that Box doesn't support linking of files to other folders
-        if (existing != null) {
-          for (Iterator<Node> eiter = existing.iterator(); eiter.hasNext();) {
-            Node enode = eiter.next();
-            String path = localNode.getPath();
-            if (!enode.getPath().equals(path)) {
-              removed.add(path);
-              enode.remove();
-              eiter.remove();
+          // cleanup of this file located in another place (usecase of rename/move)
+          // XXX this also assumes that Box doesn't support linking of files to other folders
+          if (existing != null) {
+            for (Iterator<Node> eiter = existing.iterator(); eiter.hasNext();) {
+              Node enode = eiter.next();
+              String path = localItem.getPath();
+              String epath = enode.getPath();
+              if (!epath.equals(path) && notInRange(epath, removed)) {
+                removed.add(epath);
+                enode.remove();
+                eiter.remove();
+              }
             }
           }
         }
+
+        if (localItem.isFolder()) {
+          // go recursive to the folder
+          syncChilds(localItem.getId(), localItem.getNode());
+        }
+      }
+      return items.parent;
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    protected void exec() throws CloudDriveException, RepositoryException {
+      // XXX we need this to be able run it from EventsSync.syncFiles()
+      super.exec();
+    }
+  }
+
+  /**
+   * Sync algorithm for Box drive based on drive changes obtained from Events service
+   * http://developers.box.com/docs/#events.
+   * 
+   */
+  protected class EventsSync extends SyncCommand {
+
+    @Deprecated
+    class Event {
+      final BoxEvent origin;
+
+      final BoxItem  item;
+
+      final int      sequenceId;
+
+      final String   parentPath; // relative to the root
+
+      Event(BoxEvent event, BoxItem item, String parentPath, int sequenceId) {
+        super();
+        this.origin = event;
+        this.item = item;
+        this.parentPath = parentPath;
+        this.sequenceId = sequenceId;
+      }
+    }
+
+    /**
+     * Box API.
+     */
+    protected final BoxAPI                         api;
+
+    /**
+     * Currently applied history of the drive storage.
+     */
+    protected final Set<String>                    history        = new LinkedHashSet<String>();
+
+    /**
+     * New history with currently applied event ids.
+     */
+    protected final Set<String>                    newHistory     = new LinkedHashSet<String>();
+
+    /**
+     * Queue of events postponed due to not existing parent or source.
+     */
+    protected final LinkedList<BoxEvent>           postponed      = new LinkedList<BoxEvent>();
+
+    /**
+     * Applied items in latest state mapped by item id.
+     */
+    protected final Map<String, JCRLocalCloudFile> applied        = new LinkedHashMap<String, JCRLocalCloudFile>();
+
+    /**
+     * Undeleted events by item id.
+     */
+    protected final Map<String, BoxItem>           undeleted      = new LinkedHashMap<String, BoxItem>();
+
+    /**
+     * Ids of removed items.
+     */
+    protected final Set<String>                    removedIds     = new LinkedHashSet<String>();
+
+    /**
+     * Events from Box to apply.
+     */
+    protected EventsIterator                       events;
+
+    protected BoxEvent                             nextEvent;
+
+    protected BoxEvent                             lastPostponed;
+
+    protected int                                  prevPostponedNumber, postponedNumber;
+
+    /**
+     * Counter of applied events in this Sync. Used for multi-pass looping over the events.
+     */
+    protected int                                  appliedCounter = 0;
+
+    /**
+     * Counter of events read from Box service. Used for multi-pass looping over the events.
+     */
+    protected int                                  readCounter    = 0;
+
+    /**
+     * Create command for Box synchronization.
+     * 
+     * @throws RepositoryException
+     * @throws DriveRemovedException
+     */
+    protected EventsSync() throws RepositoryException, DriveRemovedException {
+      super();
+      this.api = getUser().api();
+    }
+
+    @Deprecated
+    protected void syncFilesOld() throws CloudDriveException, RepositoryException {
+      // TODO cleanup
+      long localStreamPosition = driveRoot.getProperty("box:streamPosition").getLong();
+
+      // buffer all items,
+      // order them in proper order (by sequence_id, taking in account parent existence),
+      // remove already applied (check by event id in history),
+      // apply others to local nodes
+      // save just applied events as history
+      EventsIterator events = api.getEvents(localStreamPosition);
+      iterators.add(events);
+      try {
+        if (events.hasNext()) {
+          // History contains something applied in previous sync, it can be empty if it was full sync
+          for (String es : driveRoot.getProperty("box:streamHistory").getString().split(";")) {
+            history.add(es);
+          }
+
+          Set<String> newHistory = new LinkedHashSet<String>();
+
+          // ordered events-per-item
+          // XXX Box API tells about Events service:
+          // Events will occasionally arrive out of order. For example a file-upload might show up
+          // before the Folder-create event. You may need to buffer events and apply them in a logical
+          // order.
+          Map<String, List<Event>> order = new LinkedHashMap<String, List<Event>>();
+          do {
+            BoxEvent event = events.next();
+            String eventId = event.getId();
+            if (!history.contains(eventId)) {
+              BoxTypedObject source = event.getSource();
+              if (source instanceof BoxItem) {
+                BoxItem item = (BoxItem) source;
+                int sequenceId;
+                try {
+                  sequenceId = Integer.parseInt(item.getSequenceId());
+                } catch (NumberFormatException e) {
+                  LOG.warn("Cannot parse item's sequence_id " + item.getSequenceId() + ": " + e.getMessage());
+                  sequenceId = -1;
+                }
+
+                // keep in new history all we get from the Box API, it can be received in next sync also
+                newHistory.add(eventId);
+
+                StringBuilder epath = new StringBuilder();
+                Iterator<BoxTypedObject> pathEntries = item.getPathCollection().getEntries().iterator();
+                if (pathEntries.hasNext()) {
+                  pathEntries.next(); // skip root ("All files")
+                  while (pathEntries.hasNext()) {
+                    BoxTypedObject pe = pathEntries.next();
+                    if (epath.length() > 1) {
+                      epath.append('/');
+                    }
+                    epath.append(cleanName((String) pe.getValue(BoxItem.FIELD_NAME)));
+                  }
+                } else {
+                  LOG.warn("Empty path collection");
+                }
+                String parentPath = epath.toString(); // relative path!
+
+                // add to changes order
+                Event itemEvent = new Event(event, item, parentPath, sequenceId);
+                List<Event> itemEvents = order.get(item.getId());
+                if (itemEvents == null) {
+                  itemEvents = new ArrayList<Event>();
+                  order.put(item.getId(), itemEvents);
+                }
+                itemEvents.add(itemEvent);
+              } else {
+                LOG.warn("Skipping non Item in Box events: " + source);
+              }
+            } // else, skip already applied event
+          } while (events.hasNext());
+
+          // TODO do we need to sort each item events in sequence_id order or they are already?
+
+          int applied; // number of changes applied in an iteration through the order of events
+          do {
+            applied = 0; // reset it for each iteration
+            for (Iterator<Map.Entry<String, List<Event>>> ieiter = order.entrySet().iterator(); ieiter.hasNext();) {
+              // processing all events of next item
+              List<Event> itemEvents = ieiter.next().getValue();
+              JCRLocalCloudFile localFile = null;
+              for (Iterator<Event> eiter = itemEvents.iterator(); eiter.hasNext();) {
+                Event event = eiter.next();
+                String eventType = event.origin.getEventType();
+                try {
+                  Node parent = event.parentPath.length() > 0 ? driveRoot.getNode(event.parentPath)
+                                                             : driveRoot;
+                  if (eventType.equals(BoxEvent.EVENT_TYPE_ITEM_CREATE)
+                      || eventType.equals(BoxEvent.EVENT_TYPE_ITEM_UPLOAD)) {
+                    // add node, by path
+                    // TODO ITEM_UNDELETE_VIA_TRASH ensure it works as an adding of the whole subtree in case
+                    // of folder, otherwise need copy-behaviour but we have trashed items nowhere - thus need
+                    // full sync.
+                    localFile = updateItem(api, event.item, parent, null);
+                    changed.add(localFile);
+                  } else if (eventType.equals(BoxEvent.EVENT_TYPE_ITEM_COPY)
+                      || eventType.equals(BoxEvent.EVENT_TYPE_ITEM_UNDELETE_VIA_TRASH)) {
+                    // copy/undeleted node
+                    if (localFile != null) {
+                      // using transient change from this events order for this item
+                      // XXX doing this we assume that events appear in proper order
+                      Node source = localFile.getNode();
+                      Node node = copyNode(source, parent);
+                      localFile = updateItem(api, event.item, parent, node);
+                    } else {
+                      // read the only copied/undeleted node from the Box
+                      localFile = updateItem(api, event.item, parent, null);
+                      if (localFile.isFolder()) {
+                        // and fetch child files
+                        fetchChilds(localFile.getId(), localFile.getNode());
+                      }
+                    }
+                    changed.add(localFile);
+                  } else if (eventType.equals(BoxEvent.EVENT_TYPE_ITEM_TRASH)) {
+                    // remove node, by path
+                    Node node = readNode(parent, event.item.getName(), event.item.getId());
+                    if (node != null) {
+                      String path = node.getPath();
+                      node.remove();
+                      removed.add(path);
+                      localFile = null;
+                    } else {
+                      throw new BoxInsconsistentException("Cannot find removed node locally: "
+                          + parent.getPath() + "/" + event.item.getName());
+                    }
+                  } else if (eventType.equals(BoxEvent.EVENT_TYPE_ITEM_MOVE)
+                      || eventType.equals(BoxEvent.EVENT_TYPE_ITEM_RENAME)) {
+                    // move node
+                    Node source;
+                    if (localFile != null) {
+                      // using transient change from this events order for this item
+                      // XXX doing this we assume that events appear in proper order
+                      source = localFile.getNode();
+                    } else {
+                      // try search in persisted storage by file id
+                      source = findNode(event.item.getId());
+                    }
+                    // if (source == null)
+
+                    if (source != null /* && source.getParent().getPath().equals(parent.getPath()) */) {
+                      Node node = moveNode(event.item.getId(), event.item.getName(), source, parent);
+                      localFile = updateItem(api, event.item, parent, node);
+                      changed.add(localFile);
+                    } else {
+                      throw new BoxInsconsistentException("Cannot find moved node locally: "
+                          + parent.getPath() + "/" + event.item.getName());
+                    }
+                  } else {
+                    LOG.warn("Skipped unexpected event from Box Event: " + eventType);
+                  }
+
+                  eiter.remove();
+                  applied++;
+                } catch (PathNotFoundException e) {
+                  // parent not (yet) found, we wait for it in the order
+                }
+              }
+              if (itemEvents.size() == 0) {
+                ieiter.remove();
+              }
+            }
+          } while (!order.isEmpty() && applied > 0);
+
+          if (!order.isEmpty()) {
+            throw new BoxInsconsistentException("Not all events applied for Box sync");
+          }
+
+          // save history
+          // TODO consider for saving the history of several hours or even a day
+          StringBuilder newHistoryData = new StringBuilder();
+          for (Iterator<String> eriter = newHistory.iterator(); eriter.hasNext();) {
+            newHistoryData.append(eriter.next());
+            if (eriter.hasNext()) {
+              newHistoryData.append(';');
+            }
+          }
+          driveRoot.setProperty("box:streamHistory", newHistoryData.toString());
+        } // else, nothing changed
+
+        // update sync position
+        driveRoot.setProperty("box:streamPosition", events.streamPosition);
+        driveRoot.setProperty("box:streamDate", Calendar.getInstance());
+      } catch (BoxInsconsistentException e) {
+        LOG.warn(e.getMessage() + ". Running full sync.");
+
+        // rollback everything from this sync
+        rollback(driveRoot);
+
+        // we need full sync in this case
+        FullSync fullSync = new FullSync();
+        fullSync.exec();
+
+        changed.clear();
+        changed.addAll(fullSync.getFiles());
+        removed.clear();
+        removed.addAll(fullSync.getRemoved());
+      }
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    protected void syncFiles() throws CloudDriveException, RepositoryException {
+      long localStreamPosition = driveRoot.getProperty("box:streamPosition").getLong();
+
+      // buffer all items,
+      // apply them in proper order (taking in account parent existence),
+      // remove already applied (check by event id in history),
+      // apply others to local nodes
+      // save just applied events as history
+      events = api.getEvents(localStreamPosition);
+      iterators.add(events);
+
+      // Local history, it contains something applied in previous sync, it can be empty if it was full sync.
+      for (String es : driveRoot.getProperty("box:streamHistory").getString().split(";")) {
+        history.add(es);
       }
 
-      initBoxItem(parent, items.parent); // init parent
+      // XXX Box API tells about Events service:
+      // Events will occasionally arrive out of order. For example a file-upload might show up
+      // before the Folder-create event. You may need to buffer events and apply them in a logical
+      // order.
+      while (hasNextEvent()) {
+        BoxEvent event = nextEvent();
+        BoxTypedObject source = event.getSource();
+        if (source instanceof BoxItem) {
+          BoxItem item = (BoxItem) source;
+          String eventType = event.getEventType();
+
+          Node parent;
+          String parentId = item.getParent().getId();// .isRemoved(parentId)
+          if (BoxAPI.BOX_ROOT_ID.equals(parentId)) {
+            parent = driveRoot;
+          } else {
+            JCRLocalCloudFile local = applied(parentId);
+            if (local != null) {
+              parent = local.getNode();
+              // XXX workaround bug in JCR, otherwise it may load previously deleted node from persistence
+              // what will lead to NPE later
+              parent.getParent().getNodes();
+            } else {
+              parent = findNode(parentId); // can be null
+              if (parent == null) {
+                // parent not (yet) found or was removed, we postpone the event and wait for it in the order
+                // and fail at the end if will be not applied.
+                // XXX special logic for childs removal of already removed parent, JCR removes all together
+                // with the parent - we skip such events.
+                if (!(isRemoved(parentId) && eventType.equals(BoxEvent.EVENT_TYPE_ITEM_TRASH))) {
+                  postpone(event);
+                }
+                continue;
+              }
+            }
+          }
+
+          if (eventType.equals(BoxEvent.EVENT_TYPE_ITEM_CREATE)
+              || eventType.equals(BoxEvent.EVENT_TYPE_ITEM_UPLOAD)) {
+            // add node, by path
+            apply(updateItem(api, item, parent, null));
+          } else if (eventType.equals(BoxEvent.EVENT_TYPE_ITEM_MOVE)
+              || eventType.equals(BoxEvent.EVENT_TYPE_ITEM_RENAME)) {
+            BoxItem undelete = undeleted(item.getId());
+            if (undelete != null) {
+              // apply undelete here if ITEM_MOVE appeared after ITEM_UNDELETE_VIA_TRASH,
+              // it's not JCR item move actually - we just add a new node using name from this event
+              apply(updateItem(api, item, parent, null));
+            } else {
+              // move node
+              Node sourceNode;
+              JCRLocalCloudFile local = applied(item.getId());
+              if (local != null) {
+                // using transient change from this events order for this item,
+                sourceNode = local.getNode();
+              } else {
+                // try search in persisted storage by file id
+                sourceNode = findNode(item.getId());
+              }
+              if (sourceNode != null) {
+                Node destNode = moveNode(item.getId(), item.getName(), sourceNode, parent);
+                apply(updateItem(api, item, parent, destNode));
+              } else {
+                // else, wait for appearance of source node in following events,
+                // here we also covering ITEM_MOVE as part of undeleted item events if the move
+                // appeared first.
+                postpone(event);
+              }
+            }
+          } else if (eventType.equals(BoxEvent.EVENT_TYPE_ITEM_TRASH)) {
+            // remove node, by path
+            Node node = readNode(parent, item.getName(), item.getId());
+            if (node != null) {
+              String path = node.getPath();
+              node.remove();
+              remove(item.getId(), path);
+            } else {
+              // wait for a target node appearance in following events
+              postpone(event);
+            }
+          } else if (eventType.equals(BoxEvent.EVENT_TYPE_ITEM_UNDELETE_VIA_TRASH)) {
+            // undeleted folder will appear with its files, but in undefined order!
+            // for undeleted item we also will have ITEM_MOVE to a final restored destination
+            // here we already have a parent node, but ensure we have a "place" for undeleted item
+            Node place = readNode(parent, item.getName(), item.getId());
+            if (place == null) {// parent.getParent().getNode("other")
+              apply(updateItem(api, item, parent, null));
+            } else {
+              // another item already there, wait for ITEM_MOVE with actual "place" for the item
+              undelete(item);
+              postpone(event);
+            }
+          } else if (eventType.equals(BoxEvent.EVENT_TYPE_ITEM_COPY)) {
+            // copy node
+            JCRLocalCloudFile local = applied(item.getId());
+            if (local != null) {
+              // using transient change from this events order for this item
+              Node sourceNode = local.getNode();
+              Node destNode = copyNode(sourceNode, parent);
+              apply(updateItem(api, item, parent, destNode));
+            } else {
+              // read the only copied node from the Box
+              local = updateItem(api, item, parent, null);
+              apply(local);
+              if (local.isFolder()) {
+                // and fetch child files
+                fetchChilds(local.getId(), local.getNode());
+              }
+            }
+          } else {
+            LOG.warn("Skipped unexpected event from Box Event: " + eventType);
+          }
+        } else {
+          LOG.warn("Skipping non Item in Box events: " + source);
+        }
+      }
+
+      if (hasPostponed()) {
+        // EventsSync cannot solve all changes, need run FullSync
+        LOG.warn("Not all events applied for Box sync. Running full sync.");
+
+        // rollback everything from this sync
+        rollback(driveRoot);
+
+        // we need full sync in this case
+        FullSync fullSync = new FullSync();
+        fullSync.exec();
+
+        changed.clear();
+        changed.addAll(fullSync.getFiles());
+        removed.clear();
+        removed.addAll(fullSync.getRemoved());
+      } else {
+        // save history
+        // TODO consider for saving the history of several hours or even a day
+        StringBuilder newHistoryData = new StringBuilder();
+        for (Iterator<String> eriter = newHistory.iterator(); eriter.hasNext();) {
+          newHistoryData.append(eriter.next());
+          if (eriter.hasNext()) {
+            newHistoryData.append(';');
+          }
+        }
+        driveRoot.setProperty("box:streamHistory", newHistoryData.toString());
+
+        // update sync position
+        driveRoot.setProperty("box:streamPosition", events.streamPosition);
+        driveRoot.setProperty("box:streamDate", Calendar.getInstance());
+      }
+    }
+
+    protected BoxFolder fetchChilds(String fileId, Node parent) throws CloudDriveException,
+                                                               RepositoryException {
+      ItemsIterator items = api.getFolderItems(fileId);
+      iterators.add(items);
+      while (items.hasNext()) {
+        BoxItem item = items.next();
+        JCRLocalCloudFile localItem = updateItem(api, item, parent, null);
+        if (localItem.isChanged()) {
+          apply(localItem);
+          if (localItem.isFolder()) {
+            // go recursive to the folder
+            fetchChilds(localItem.getId(), localItem.getNode());
+          }
+        } else {
+          throw new BoxFormatException("Fetched item was not added to local drive storage");
+        }
+      }
+      return items.parent;
+    }
+
+    @Deprecated
+    protected String parentPath(BoxCollection path) {
+      // TODO not used
+      StringBuilder epath = new StringBuilder();
+      Iterator<BoxTypedObject> pathEntries = path.getEntries().iterator();
+      if (pathEntries.hasNext()) {
+        BoxTypedObject root = pathEntries.next();
+        String rootId = (String) root.getValue(BoxItem.FIELD_ID);
+        if (BoxAPI.BOX_TRASH_ID.equals(rootId)) {
+          return null; // return null for Trash
+        } // else, we skip root ("All files")
+        while (pathEntries.hasNext()) {
+          BoxTypedObject pe = pathEntries.next();
+          if (epath.length() > 1) {
+            epath.append('/');
+          }
+          epath.append(cleanName((String) pe.getValue(BoxItem.FIELD_NAME)));
+        }
+      } else {
+        LOG.warn("Empty path collection");
+      }
+      return epath.toString(); // relative path!
+    }
+
+    protected BoxEvent readEvent() throws CloudDriveException {
+      while (events.hasNext()) {
+        BoxEvent next = events.next();
+
+        // keep in new history all we get from the Box API, it can be received in next sync also
+        newHistory.add(next.getId());
+
+        if (!history.contains(next.getId())) {
+          readCounter++;
+          return next;
+        }
+      }
+      return null;
+    }
+
+    protected boolean hasNextEvent() throws CloudDriveException {
+      // condition of next: if Box events not yet full read or we have postponed and their number decreases
+      // from cycle to cycle over the whole queue.
+      if (nextEvent != null) {
+        return true;
+      }
+      nextEvent = readEvent();
+      if (nextEvent != null) {
+        return true;
+      }
+      return postponed.size() > 0 && (lastPostponed != null ? prevPostponedNumber > postponedNumber : true);
+    }
+
+    protected BoxEvent nextEvent() throws NoSuchElementException, CloudDriveException {
+      BoxEvent event = null;
+      if (nextEvent != null) {
+        event = nextEvent;
+        nextEvent = null;
+      } else {
+        event = readEvent();
+      }
+
+      if (event != null) {
+        return event;
+      }
+
+      if (postponed.size() > 0) {
+        if (lastPostponed == null) {
+          lastPostponed = postponed.getLast(); // init marker of postponed queue end
+          postponedNumber = readCounter - appliedCounter; // init number of postponed
+          prevPostponedNumber = Integer.MAX_VALUE; // need this for hasNextEvent() logic
+        }
+
+        BoxEvent firstPostponed = postponed.poll();
+        // we store number of postponed on each iteration over the postponed queue, if number doesn't go down
+        // then we cannot apply other postponed we have and need run FullSync.
+        if (firstPostponed == lastPostponed) {
+          prevPostponedNumber = postponedNumber;
+          postponedNumber = readCounter - appliedCounter; // next number of postponed
+        }
+        return firstPostponed;
+      }
+
+      throw new NoSuchElementException("No more events.");
+    }
+
+    protected void postpone(BoxEvent event) {
+      postponed.add(event);
+    }
+
+    protected boolean hasPostponed() {
+      return postponed.size() > 0;
+    }
+
+    protected BoxItem undeleted(String itemId) {
+      return undeleted.get(itemId);
+    }
+
+    protected void undelete(BoxItem item) {
+      undeleted.put(item.getId(), item);
+    }
+
+    protected void apply(JCRLocalCloudFile local) {
+      if (local.isChanged()) {
+        applied.put(local.getId(), local);
+        removed.remove(local.getPath());
+        removedIds.remove(local.getId());
+        changed.add(local);
+        appliedCounter++;
+      }
+    }
+
+    protected JCRLocalCloudFile applied(String itemId) {
+      return applied.get(itemId);
+    }
+
+    protected JCRLocalCloudFile remove(String itemId, String itemPath) {
+      appliedCounter++;
+      removed.add(itemPath);
+      removedIds.add(itemId);
+      return applied.remove(itemId);
+    }
+
+    @Deprecated
+    protected boolean isRemovedPath(String path) {
+      for (String rpath : removed) {
+        if (path.startsWith(rpath)) {
+          return true;
+        }
+      }
+      return false;
+    }
+
+    protected boolean isRemoved(String itemId) {
+      return removedIds.contains(itemId);
     }
   }
 
   protected final MimeTypeResolver mimeTypes = new MimeTypeResolver();
-
-  // protected
 
   /**
    * @param user
@@ -403,9 +907,9 @@ public class JCRLocalBoxDrive extends JCRLocalCloudDrive implements UserTokenRef
    * @throws BoxException
    * @throws CloudDriveException
    */
-  private static BoxUser loadUser(API apiBuilder, BoxProvider provider, Node driveNode) throws RepositoryException,
-                                                                                       BoxException,
-                                                                                       CloudDriveException {
+  protected static BoxUser loadUser(API apiBuilder, BoxProvider provider, Node driveNode) throws RepositoryException,
+                                                                                         BoxException,
+                                                                                         CloudDriveException {
     String username = driveNode.getProperty("ecd:cloudUserName").getString();
     String email = driveNode.getProperty("ecd:userEmail").getString();
     String userId = driveNode.getProperty("ecd:cloudUserId").getString();
@@ -455,7 +959,7 @@ public class JCRLocalBoxDrive extends JCRLocalCloudDrive implements UserTokenRef
    */
   @Override
   protected ConnectCommand getConnectCommand() throws DriveRemovedException, RepositoryException {
-    return new BoxConnect();
+    return new Connect();
   }
 
   /**
@@ -465,7 +969,20 @@ public class JCRLocalBoxDrive extends JCRLocalCloudDrive implements UserTokenRef
   protected SyncCommand getSyncCommand() throws DriveRemovedException,
                                         SyncNotSupportedException,
                                         RepositoryException {
-    return new BoxSync();
+
+    Calendar now = Calendar.getInstance();
+    Calendar last = rootNode().getProperty("box:streamDate").getDate();
+
+    // XXX we force a full sync (a whole drive traversing) each defined period.
+    // We do this for a case when Box will not provide a full history for files connected long time ago and
+    // weren't synced day by day (Box drive was rarely used).
+    // Their doc tells: Box does not store all events for all time on your account. We store somewhere between
+    // 2 weeks and 2 months of events.
+    if (now.getTimeInMillis() - last.getTimeInMillis() < FULL_SYNC_PERIOD) {
+      return new EventsSync();
+    } else {
+      return new FullSync();
+    }
   }
 
   /**
@@ -534,12 +1051,21 @@ public class JCRLocalBoxDrive extends JCRLocalCloudDrive implements UserTokenRef
    * @param localNode {@link Node}
    * @param item {@link BoxItem}
    * @throws RepositoryException
+   * @throws BoxException
    */
-  protected void initBoxItem(Node localNode, BoxItem item) throws RepositoryException {
+  protected void initBoxItem(Node localNode, BoxItem item) throws RepositoryException, BoxException {
     // Box properties, if null, ones will be removed by JCR core
 
-    // Etag used for synchronization
+    // Etag and sequence_id used for synchronization
     localNode.setProperty("box:etag", item.getEtag());
+    try {
+      String sequenceIdStr = item.getSequenceId();
+      if (sequenceIdStr != null) {
+        localNode.setProperty("box:sequenceId", Long.parseLong(sequenceIdStr));
+      } // else, it's null (root or trash)
+    } catch (NumberFormatException e) {
+      throw new BoxException("Error parsing sequence_id for " + localNode.getPath(), e);
+    }
 
     // File/folder size
     // TODO exo's property to show the size: jcr:content's length?
@@ -548,7 +1074,6 @@ public class JCRLocalBoxDrive extends JCRLocalCloudDrive implements UserTokenRef
     // properties below not actually used by the Cloud Drive,
     // they are just for information available to PLF user
     localNode.setProperty("box:ownedBy", item.getOwnedBy().getLogin());
-    localNode.setProperty("box:sequenceId", item.getSequenceId());
     localNode.setProperty("box:description", item.getDescription());
 
     BoxSharedLink shared = item.getSharedLink();
@@ -568,4 +1093,112 @@ public class JCRLocalBoxDrive extends JCRLocalCloudDrive implements UserTokenRef
     }
   }
 
+  /**
+   * Update or create a local node of Cloud File. If the node is <code>null</code> then it will be open on the
+   * given parent and created if not already exists.
+   * 
+   * @param api {@link BoxAPI}
+   * @param item {@link BoxItem}
+   * @param isFolder {@link Boolean}
+   * @param parent {@link Node}
+   * @param node {@link Node}, can be <code>null</code>
+   * @return {@link JCRLocalCloudFile}
+   * @throws RepositoryException for storage errors
+   * @throws CloudDriveException for drive or format errors
+   */
+  protected JCRLocalCloudFile updateItem(BoxAPI api, BoxItem item, Node parent, Node node) throws RepositoryException,
+                                                                                          CloudDriveException {
+    try {
+      Calendar created = api.parseDate(item.getCreatedAt());
+      Calendar modified = api.parseDate(item.getModifiedAt());
+      String id = item.getId();
+      String name = item.getName();
+      boolean isFolder = item instanceof BoxFolder;
+      String type = isFolder ? item.getType() : findMimetype(name);
+      String createdBy = item.getCreatedBy().getLogin();
+      String modifiedBy = item.getModifiedBy().getLogin();
+
+      // TODO do we need use Etag in conjunction with sequence_id? they mean almost the same in Box API.
+      long sequenceId;
+      try {
+        String sequenceIdStr = item.getSequenceId();
+        if (sequenceIdStr != null) {
+          sequenceId = Long.parseLong(sequenceIdStr);
+        } else {
+          sequenceId = -1; // for null (root or trash)
+        }
+      } catch (NumberFormatException e) {
+        throw new BoxFormatException("Error parsing sequence_id for " + parent.getPath() + "/"
+            + item.getName(), e);
+      }
+
+      // read/create local node if not given
+      if (node == null) {
+        if (isFolder) {
+          node = openFolder(id, name, parent);
+        } else {
+          node = openFile(id, name, type, parent);
+        }
+      }
+
+      boolean changed = node.isNew()
+          || (sequenceId >= 0 && node.getProperty("box:sequenceId").getLong() < sequenceId)
+          || !node.getProperty("box:etag").getString().equals(item.getEtag());
+
+      String link, embedLink, downloadLink;
+      if (isFolder) {
+        link = embedLink = downloadLink = api.getLink(item);
+        if (changed) {
+          initFolder(node, id, name, type, // type=folder
+                     link, // gf.getAlternateLink(),
+                     createdBy, // gf.getOwnerNames().get(0),
+                     modifiedBy, // gf.getLastModifyingUserName(),
+                     created,
+                     modified);
+          initBoxItem(node, item);
+        }
+      } else {
+        // TODO for thumbnail we can use Thumbnail service
+        // https://api.box.com/2.0/files/FILE_ID/thumbnail.png?min_height=256&min_width=256
+        link = downloadLink = api.getLink(item);
+        embedLink = api.getEmbedLink(item);
+        if (changed) {
+          initFile(node, id, name, type, // mimetype
+                   link, // gf.getAlternateLink(),
+                   embedLink, // gf.getEmbedLink(),
+                   downloadLink, // gf.getThumbnailLink(), // XXX not used
+                   createdBy, // gf.getOwnerNames().get(0),
+                   modifiedBy, // gf.getLastModifyingUserName(),
+                   created,
+                   modified);
+          initBoxItem(node, item);
+        }
+      }
+      return new JCRLocalCloudFile(node.getPath(),
+                                   id,
+                                   name,
+                                   link,
+                                   embedLink,
+                                   downloadLink,
+                                   type,
+                                   createdBy,
+                                   modifiedBy,
+                                   created,
+                                   modified,
+                                   isFolder,
+                                   node,
+                                   changed);
+    } catch (ParseException e) {
+      throw new BoxFormatException("Error parsing date for " + parent.getPath() + "/" + item.getName(), e);
+    }
+  }
+
+  protected boolean notInRange(String path, Collection<String> range) {
+    for (String p : range) {
+      if (path.startsWith(p)) {
+        return false;
+      }
+    }
+    return true;
+  }
 }

@@ -16,10 +16,11 @@
  */
 package org.exoplatform.clouddrive.jcr;
 
-import java.util.Calendar;
-
 import org.exoplatform.clouddrive.CloudFile;
 
+import java.util.Calendar;
+
+import javax.jcr.Node;
 
 /**
  * A POJO providing information about a cloud file stored in JCR.
@@ -48,6 +49,10 @@ public class JCRLocalCloudFile implements CloudFile {
 
   private final transient Calendar modifiedDate;
 
+  private final transient Node     node;
+
+  private final transient boolean  changed;
+
   private final boolean            isFolder;
 
   public JCRLocalCloudFile(String path,
@@ -61,7 +66,9 @@ public class JCRLocalCloudFile implements CloudFile {
                            String author,
                            Calendar createdDate,
                            Calendar modifiedDate,
-                           boolean isFolder) {
+                           boolean isFolder,
+                           Node node,
+                           boolean changed) {
     this.path = path;
     this.id = id;
     this.title = title;
@@ -74,6 +81,36 @@ public class JCRLocalCloudFile implements CloudFile {
     this.createdDate = createdDate;
     this.modifiedDate = modifiedDate;
     this.isFolder = isFolder;
+    this.node = node;
+    this.changed = changed;
+  }
+
+  public JCRLocalCloudFile(String path,
+                           String id,
+                           String title,
+                           String link,
+                           String previewLink,
+                           String thumbnailLink,
+                           String type,
+                           String lastUser,
+                           String author,
+                           Calendar createdDate,
+                           Calendar modifiedDate,
+                           boolean isFolder) {
+    this(path,
+         id,
+         title,
+         link,
+         previewLink,
+         thumbnailLink,
+         type,
+         lastUser,
+         author,
+         createdDate,
+         modifiedDate,
+         isFolder,
+         null,
+         false);
   }
 
   public String getPath() {
@@ -160,4 +197,24 @@ public class JCRLocalCloudFile implements CloudFile {
   public boolean isFolder() {
     return isFolder;
   }
+
+  /**
+   * JCR Node that represent this Cloud File in the storage.
+   * 
+   * @return the node that represent this Cloud File in the storage.
+   */
+  public Node getNode() {
+    return node;
+  }
+
+  /**
+   * Indicate does this Cloud File was changed (<code>true</code>) or read (<code>false</code>) from the
+   * storage.
+   * 
+   * @return the changed
+   */
+  public boolean isChanged() {
+    return changed;
+  }
+
 }
