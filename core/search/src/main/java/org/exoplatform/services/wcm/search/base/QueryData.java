@@ -16,8 +16,6 @@
  */
 package org.exoplatform.services.wcm.search.base;
 
-import javax.jcr.query.Query;
-
 /**
  * Created by The eXo Platform SAS
  * Author : Nguyen Anh Vu
@@ -28,8 +26,8 @@ public class QueryData {
   
   private String queryStatement_;
   private String workSpace_;
-  private String language_ = Query.SQL;
-  private boolean isSystemSession_ = false;
+  private String language_;
+  private boolean isSystemSession_;
   
   public QueryData(String queryStatement, String workspace, String language, boolean isSystemSession) {
     queryStatement_ = queryStatement;

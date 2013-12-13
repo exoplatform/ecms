@@ -8,13 +8,11 @@
 		
 		this.showRightContent = true;
 	}
-
-    WCMUtils.prototype.getHostName = function() {
+	
+	WCMUtils.prototype.getHostName = function() {
 		var parentLocation = window.parent.location;
 		return parentLocation.href.substring(0, parentLocation.href.indexOf(parentLocation.pathname));
 	};
-	
-	WCMUtils.prototype.rightClickEvent = null;
 	
 	WCMUtils.prototype.request = function(url) {
 		var xmlHttpRequest = false;
@@ -364,34 +362,6 @@
       		gj(obj.parentNode).addClass("fileTypeContent");
       		
     	};
-
-    WCMUtils.prototype.onMouseOverDocumentInfo = function(updateActionListActionLink) {
-        // Send request to update actions list
-        eval(decodeURIComponent(updateActionListActionLink));
-    };
-
-    WCMUtils.prototype.updateActionList = function(objectIds, actionLists) {
-        var objectIdArr = objectIds.split(";");
-        var actionListArr = actionLists.split(";");
-
-        // Get resize Bar offset
-        var uiDocumentInfo = document.getElementById('UIDocumentInfo');
-
-        // Update mouse position
-        for (var i = 0; i < objectIdArr.length; i++) {
-          var objectId = objectIdArr[i];
-          var actionList = actionListArr[i];
-
-          // Get right clicked item on right side and show context menu on it
-          gj(uiDocumentInfo).find("div[objectid='" + objectId + "']").each(function() {
-              var showContextMenuFunction = gj(this).attr('rightClickHandler').replace("#ActionListParamPlaceHolder", actionList);
-              gj(this).attr('mouseDown', showContextMenuFunction);
-              return;
-          });
-        }
-
-        gj(uiDocumentInfo).unbind('mouseover');
-    };
 	
 	eXo.ecm.WCMUtils = new WCMUtils();
 	

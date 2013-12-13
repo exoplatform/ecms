@@ -49,7 +49,6 @@ import org.exoplatform.ecm.webui.utils.JCRExceptionManager;
 import org.exoplatform.ecm.webui.utils.Utils;
 import org.exoplatform.portal.webui.util.Util;
 import org.exoplatform.portal.webui.workspace.UIPortalApplication;
-import org.exoplatform.services.cms.link.ItemLinkAware;
 import org.exoplatform.services.cms.link.LinkManager;
 import org.exoplatform.services.cms.link.LinkUtils;
 import org.exoplatform.services.cms.link.NodeFinder;
@@ -305,26 +304,12 @@ public class UIDocumentNodeList extends UIContainer {
   }
   
   @SuppressWarnings("unchecked")
-  private PageList<Object> getPageList(String path) throws Exception {
-    UIJCRExplorer uiExplorer = this.getAncestorOfType(UIJCRExplorer.class);
-    Preference pref = uiExplorer.getPreference();
-    
-    DocumentProviderUtils docProviderUtil = DocumentProviderUtils.getInstance();
-    if (docProviderUtil.canSortType(pref.getSortType()) && uiExplorer.getAllItemByTypeFilterMap().isEmpty()) {
-      return docProviderUtil.getPageList(
-               uiExplorer.getWorkspaceName(), 
-               path, 
-               pref, 
-               uiExplorer.getAllItemFilterMap(), 
-               uiExplorer.getAllItemByTypeFilterMap(),
-               (NodeLinkAware) ItemLinkAware.newInstance(uiExplorer.getWorkspaceName(), path, 
-                                                uiExplorer.getNodeByPath(path, uiExplorer.getSession())));
-
-    }
-    
+  private LazyPageList<Object> getPageList(String path) throws Exception {
     List<Node> nodeList = null;
 
+    UIJCRExplorer uiExplorer = this.getAncestorOfType(UIJCRExplorer.class);
     UIDocumentInfo uiDocInfo = this.getAncestorOfType(UIDocumentInfo.class);
+    Preference pref = uiExplorer.getPreference();
     int nodesPerPage = pref.getNodesPerPage();
 
     Set<String> allItemByTypeFilterMap = uiExplorer.getAllItemByTypeFilterMap();

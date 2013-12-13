@@ -26,7 +26,6 @@ import org.exoplatform.ecm.webui.component.explorer.UIJCRExplorer;
 import org.exoplatform.ecm.webui.component.explorer.UIWorkingArea;
 import org.exoplatform.ecm.webui.component.explorer.control.UIAllItemsPreferenceForm;
 import org.exoplatform.portal.webui.util.Util;
-import org.exoplatform.services.wcm.core.NodetypeConstant;
 import org.exoplatform.webui.config.annotation.ComponentConfig;
 import org.exoplatform.webui.config.annotation.EventConfig;
 import org.exoplatform.webui.core.UIComponent;
@@ -50,23 +49,31 @@ import org.exoplatform.webui.event.EventListener;
 )
 public class UIAllItems extends UIComponent {
 
+  public static final String FAVORITE    = "Favorites";
+
+  public static final String OWNED_BY_ME = "OwnedByMe";
+
+  public static final String HIDDEN      = "Hidden";
+
+  public static final String TRASH       = "Trash";
+
   public UIAllItems() throws Exception {
   }
 
   public static String getFAVORITE() {
-    return NodetypeConstant.FAVORITE;
+    return FAVORITE;
   }
 
   public static String getOWNED_BY_ME() {
-    return NodetypeConstant.OWNED_BY_ME;
+    return OWNED_BY_ME;
   }
 
   public static String getHIDDEN() {
-    return NodetypeConstant.HIDDEN;
+    return HIDDEN;
   }
 
   public static String getTRASH() {
-    return NodetypeConstant.TRASH;
+    return TRASH;
   }
 
   public Preference getPreference() {
@@ -84,13 +91,13 @@ public class UIAllItems extends UIComponent {
       String filterType = event.getRequestContext().getRequestParameter(OBJECTID);
       if (allItemFilterMap.contains(filterType)) {
         allItemFilterMap.remove(filterType);
-        if (filterType.equals(NodetypeConstant.HIDDEN)) {
+        if (filterType.equals(HIDDEN)) {
           uiExplorer.getPreference().setShowHiddenNode(false);
           response.addCookie(new Cookie(cookieName, "false"));
         }
       } else {
         allItemFilterMap.add(filterType);
-        if (filterType.equals(NodetypeConstant.HIDDEN)) {
+        if (filterType.equals(HIDDEN)) {
           uiExplorer.getPreference().setShowHiddenNode(true);
           response.addCookie(new Cookie(cookieName, "true"));
         }
