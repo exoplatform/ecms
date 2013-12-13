@@ -450,13 +450,12 @@
 					try {
 						clearTimeout(autoSyncs[job]);
 						clearInterval(autoSyncs[job]);
+						delete autoSyncs[job];
 					} catch(e) {
 						utils.log("Error stopping auto sync job: " + e);
 					}
 				}
 			}
-			
-			autoSyncs = {};
 		}
 		
 		var autoSynchronize = function() {
@@ -484,9 +483,8 @@
 					
 					if (drive.changesLink) {
 						// use long-polling from cloud provider
-						syncFunc = syncPoll;
 						syncTimeout = 100;
-						function syncPoll() {
+						syncFunc = function() {
 							var changes = serviceGet(drive.changesLink);
 							changes.done(function(info) {
 								if (info.message) {
@@ -518,9 +516,9 @@
 					} else {
 						// run sync periodically for some period
 						var syncPeriod = 60000 * 15;
-						syncFunc = doSync;
 						syncTimeout = 30000;
-						scheduleSync(doSync);
+						syncFunc = doSync;
+						scheduleSync();
 						utils.log("Periodical synchronization enabled for Cloud Drive on " + syncName);
 						
 						setTimeout(function() {
@@ -678,10 +676,6 @@
 		 * Initialize provider for connect operation.
 		 */
 		this.initProvider = function(id, authUrl) {
-			// connectProvider = {
-			// id : id,
-			// authUrl : authUrl
-			// };
 			connectProvider[id] = authUrl;
 		};
 
@@ -1443,16 +1437,31 @@
 		 */
 		this.init = function() {
 			// Add Connect Drive action
-			// TODO need transparent way of adding new providers, w/o exact naming
-			$("i.uiIconEcmsConnectGoogleDrive, i.uiIconEcmsConnectBox").each(function() {
-				var t = $(this).parent().parent().attr("onclick");
-				if (t) {
-					var c = t.split("//");
-					if (c.length >= 3) {
-						var providerId = c[1];
+			// init CloudDriveConnectDialog popup
+			$("i[class*='uiIconEcmsConnect'").each(function() {
+				if (!$(this).data("cd-connect")) {
+					var providerId = $(this).attr("provider-id");
+					if (providerId) {
+						// in Connect Cloud Documents popup
+						$(this).data("cd-connect", true);
 						$(this).parent().parent().click(function() {
 							cloudDrive.connect(providerId);
+							$("div.UIPopupWindow").hide();
 						});
+					} else {
+						// in Action bar
+						var t = $(this).parent().parent().attr("onclick");
+						if (t) {
+							var c = t.split("//");
+							if (c.length >= 3) {
+								var providerId = c[1];
+								$(this).data("cd-connect", true);
+								$(this).parent().parent().click(function() {
+									$("div.UIPopupWindow").hide();
+									cloudDrive.connect(providerId);
+								});
+							}
+						}
 					}
 				}
 			});
