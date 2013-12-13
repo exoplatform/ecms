@@ -81,6 +81,6 @@ public class ConnectBoxActionComponent extends BaseCloudDriveManagerComponent {
    */
   @Override
   public String getName() {
-    return "Connect your Box files";
+    return "Connect your Box";
   }
 }

@@ -58,6 +58,6 @@ public class ShowConnectCloudDriveActionComponent extends BaseCloudDriveManagerC
    */
   @Override
   public String getName() {
-    return "Connect Cloud Documents";
+    return "Cloud Documents";
   }
 }

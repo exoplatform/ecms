@@ -22,10 +22,12 @@
 
 -->
 */
-import org.exoplatform.clouddrive.ecms.CloudDriveService;
-import org.exoplatform.clouddrive.ecms.CloudProvider;
-import org.exoplatform.ecm.webui.component.explorer.UIJCRExplorer;
-import org.exoplatform.services.wcm.utils.WCMCoreUtils;
+import org.exoplatform.clouddrive.CloudDriveService
+import org.exoplatform.clouddrive.CloudProvider
+import org.exoplatform.clouddrive.ecms.CloudDriveContext
+import org.exoplatform.ecm.webui.component.explorer.UIJCRExplorer
+import org.exoplatform.services.wcm.utils.WCMCoreUtils
+import org.exoplatform.web.application.JavascriptManager
 
 def driveService = WCMCoreUtils.getService(CloudDriveService.class)
 if (!driveService) {
@@ -35,27 +37,46 @@ if (!driveService) {
 def uiExplorer = uicomponent.getAncestorOfType(UIJCRExplorer.class)
 def nodePath = uiExplorer.getCurrentNode().getPath()
 def workspace = uiExplorer.getCurrentNode().getSession().getWorkspace().getName()
+
+def rcontext = _ctx.getRequestContext()
+JavascriptManager js = rcontext.getJavascriptManager()
+
+CloudDriveContext.init(rcontext, workspace, nodePath)
+
+def connectYour = _ctx.appRes("UIPopupWindow.title.ConnectYour")
+
 %>
 <div class="UIForm $uicomponent.id">
 	<%
 	  uiform.begin()
 	%>
 	<div class="HorizontalLayout">
-		<div id="CloudDriveConnectDialog"
-			user-node="${uiExplorer.currentNode.path}"
-			user-workspace="${uiExplorer.currentNode.session.workspace.name}"
-			class="FormContainer">
-			<b><u>Connect Cloud Drive</b></u>
+		<div id="CloudDriveConnectDialog" class="FormContainer">
 			<div id="CloudDriveConnectDialogMessage" style="display: none;"></div>
 			<%
 			  for(provider in driveService.providers) {
+			    js.getRequireJS().addScripts("\ncloudDrive.initProvider('${provider.id}', '${provider.authUrl}');\n")
+			    // onclick="cloudDrive.connect('${provider.id}', '${provider.authUrl}');"
+			    
+				def driveSuffix = provider.name.replace(' ', '') 
+				// uiTabNormal 
 			%>
 			<div class="UIAction">
-				<a href="javascript:void(0);" target="_self"
-					onclick="cloudDrive.connect('${provider.id}', '${provider.authUrl}');"
-					class="ActionButton LightBlueStyle" style="width: 150px;">${provider.name}</a>
+				<div class="tab-content">
+					<ul>
+						<li>
+							<a class="actionIcon"><i class="uiIconEcmsConnect${driveSuffix}" provider-id="${provider.id}"></i> ${connectYour} ${provider.name}</a>
+						</li>
+					</ul>
+				</div>
 			</div>
 			<%
+			/*
+			<div class="UIAction">
+				<a href="javascript:void(0);" target="_self"
+					class="ActionButton LightBlueStyle uiIconEcmsConnect${driveSuffix}" style="width: 150px;"
+					provider-id="${provider.id}">${connectYour} ${provider.name}</a>
+			</div>*/
 			  }
 			%>
 		</div>

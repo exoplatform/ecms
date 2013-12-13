@@ -73,9 +73,15 @@ public class CloudDriveUIService implements Startable {
     // find all Cloud Drive actions configured for action bar
     List<String> cdActions = new ArrayList<String>();
     for (UIExtension ext : uiExtensions.getUIExtensions(ManageViewService.EXTENSION_TYPE)) {
-      if (ConnectGoogleDriveActionComponent.class.isAssignableFrom(ext.getComponent())) {
-        cdActions.add(ext.getName());
-      } else if (ConnectBoxActionComponent.class.isAssignableFrom(ext.getComponent())) {
+      // Dedicated to drive type components not enabled by default
+      /*
+       * if (ConnectGoogleDriveActionComponent.class.isAssignableFrom(ext.getComponent())) {
+       * cdActions.add(ext.getName());
+       * } else if (ConnectBoxActionComponent.class.isAssignableFrom(ext.getComponent())) {
+       * cdActions.add(ext.getName());
+       * } else
+       */
+      if (ShowConnectCloudDriveActionComponent.class.isAssignableFrom(ext.getComponent())) {
         cdActions.add(ext.getName());
       }
     }
