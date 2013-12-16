@@ -260,7 +260,7 @@
       <SaveDraft>Lưu Nháp</SaveDraft>
       <FastPublish>Xuất bản Nhanh</FastPublish>
       <Preferences>Tùy chọn</Preferences>
-      <Close>Đóng</Close>
+      <Close>#{word.close}</Close>
     </action>
     <msg>
       <access-denied>Bạn không được quyền thêm danh mục cho tài liệu này.</access-denied>

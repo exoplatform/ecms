@@ -260,7 +260,7 @@
       <SaveDraft>ドラフトの保存</SaveDraft>
       <FastPublish>すぐ公開</FastPublish>
       <Preferences>設定</Preferences>
-      <Close>閉じる</Close>
+      <Close>#{word.close}</Close>
     </action>
     <msg>
       <access-denied>このドキュメントにカテゴリを追加する権限がありません。</access-denied>

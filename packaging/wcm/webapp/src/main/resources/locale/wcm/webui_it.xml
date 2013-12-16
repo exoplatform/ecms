@@ -260,7 +260,7 @@
       <SaveDraft>Salva Bozza</SaveDraft>
       <FastPublish>Pubblicazione Veloce</FastPublish>
       <Preferences>Preferenze</Preferences>
-      <Close>Chiudi</Close>
+      <Close>#{word.close}</Close>
     </action>
     <msg>
       <access-denied>Non hai permessi adeguati per aggiungere categorie a questo documento.</access-denied>

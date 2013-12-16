@@ -260,7 +260,7 @@
       <SaveDraft>Enregistrer le brouillon</SaveDraft>
       <FastPublish>Publication Rapide</FastPublish>
       <Preferences>Préférences</Preferences>
-      <Close>Fermer</Close>
+      <Close>#{word.close}</Close>
     </action>
     <msg>
       <access-denied>Vous n'avez pas la permission ajouter des catégories pour ce document.</access-denied>

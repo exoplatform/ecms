@@ -1711,6 +1711,11 @@
 <list>المحتوى</list>
 <navigation>التصفح</navigation>
   </label>
+                          <action>
+                            <Save>#{word.save}</Save>
+                            <Reset>إعادة تعيين</Reset> 
+                            <Cancel>#{word.cancel}</Cancel> 
+                          </action> 
   <msg>
   <template-existing>اسم القالب هذا موجود مُسبقــا. الرجاء اختيار اسما آخرا.</template-existing>
   </msg>

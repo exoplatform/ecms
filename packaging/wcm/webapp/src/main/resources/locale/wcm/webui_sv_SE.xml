@@ -260,7 +260,7 @@
       <SaveDraft>Spara utkast</SaveDraft>
       <FastPublish>Snabbt publicera</FastPublish>
       <Preferences>Inställningar</Preferences>
-      <Close>Stäng</Close>
+      <Close>#{word.close}</Close>
     </action>
     <msg>
       <access-denied>Du har inte behörighet att lägga till kategorier i detta dokument.</access-denied>

@@ -14,4 +14,11 @@
       </changeState>
     </AuthoringPublicationPlugin>
   </PublicationService>
+  <Publication>
+    <log>
+      <description>
+        <enrolled>İçerik Yayın yaşam döngüsü kaydolur</enrolled>
+      </description>
+    </log>
+  </Publication>
 </bundle>

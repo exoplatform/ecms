@@ -260,7 +260,7 @@
       <SaveDraft>保存草稿</SaveDraft>
       <FastPublish>快速发布</FastPublish>
       <Preferences>首选项</Preferences>
-      <Close>关闭</Close>
+      <Close>#{word.close}</Close>
     </action>
     <msg>
       <access-denied>你并没有将类别添加到此文档的权限。</access-denied>

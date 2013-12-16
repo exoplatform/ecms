@@ -14,4 +14,11 @@
       </changeState>
     </AuthoringPublicationPlugin>
   </PublicationService>
+  <Publication>
+    <log>
+      <description>
+        <enrolled>The content enrolls in Publication life cycle</enrolled>
+      </description>
+    </log>
+  </Publication>
 </bundle>
