@@ -86,7 +86,7 @@ public class UITaxonomyTreeMainForm extends UIForm {
     .setReadOnly(true));
     uiActionHomePath.setActionInfo(FIELD_HOMEPATH, new String[] { "AddPath" });
     addUIComponentInput(uiActionHomePath);
-    setActions(new String[] {"NextViewPermission", "Cancel"});
+    setActions(new String[] {"NextViewPermission","Reset"});
   }
 
   public void update(TaxonomyTreeData taxonomyTree) throws Exception {
