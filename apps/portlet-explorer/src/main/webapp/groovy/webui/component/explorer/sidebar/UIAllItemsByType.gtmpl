@@ -22,7 +22,7 @@
 			%>
 			<li>
 				<i class="$classValue"></i>
-				<a href="$supportedLink" rel="tooltip" data-placement="bottom" title="<%=_ctx.appRes("UIAllItemsByType.title.Show"+type)%>">
+				<a href="javascript:void(0);" onclick="$supportedLink" rel="tooltip" data-placement="bottom" title="<%=_ctx.appRes("UIAllItemsByType.title.Show"+type)%>">
 					<%=_ctx.appRes("DocumentType.label." + type)%>
 				</a>
 			</li>

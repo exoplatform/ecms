@@ -83,7 +83,7 @@
                 <div id="FileViewPageIterator" class="fileViewPageIterator pull-right">
                   <!--Begin of prev-->
                   <% if (currentPage > 1) {%>
-                    <a href="<%=pageIterator.event("ShowPage","${currentPage - 1}")%>" class="prevPageIcon" title="<%=_ctx.appRes("UIPageIterator.label.previous")%>"><%=_ctx.appRes("UIPageIterator.label.previous")%></a>
+                    <a href="javascript:void(0);" onclick="<%=pageIterator.event("ShowPage","${currentPage - 1}")%>" class="prevPageIcon" title="<%=_ctx.appRes("UIPageIterator.label.previous")%>"><%=_ctx.appRes("UIPageIterator.label.previous")%></a>
                   <%}%>
                   <!--End of prev-->                  
                   
@@ -95,14 +95,14 @@
                       </button>
                       <ul class="dropdown-menu" style="max-height:290px;min-width:80px;overflow:auto">
                         <% for (int i = 1; i <= availablePage; i++) {%>
-                          <li><a href="<%=pageIterator.event("ShowPage", "$i")%>"><%=i%></a></li>
+                          <li><a href="javascript:void(0);" onclick="<%=pageIterator.event("ShowPage", "$i")%>"><%=i%></a></li>
                         <%}%>
                       </ul>
                     </div>
                   <!--End of drop down list-->
                   <!--Begin of next-->
                   <% if (currentPage < availablePage) {%>
-                    <a href="<%=pageIterator.event("ShowPage","${currentPage + 1}")%>" class="nextPageIcon" title="<%=_ctx.appRes("UIPageIterator.label.next")%>"><%=_ctx.appRes("UIPageIterator.label.next")%></a>
+                    <a href="javascript:void(0);" onclick="<%=pageIterator.event("ShowPage","${currentPage + 1}")%>" class="nextPageIcon" title="<%=_ctx.appRes("UIPageIterator.label.next")%>"><%=_ctx.appRes("UIPageIterator.label.next")%></a>
                   <%}%>
                   <!--End of next-->
                 </div>
@@ -137,7 +137,7 @@
                 </button>
                 <ul class="dropdown-menu" style="max-height:290px;min-width:80px;overflow:auto">
                     <li class="$nameClass">
-                      <a href="<%=uicomponent.event("Sort", typeActionLink + "Alphabetic")%>">
+                      <a href="javascript:void(0);" onclick="<%=uicomponent.event("Sort", typeActionLink + "Alphabetic")%>">
                         <%=_ctx.appRes("FileView.label.name")%>
                         <% if ("active".equals(nameClass)) {%>
                           <i class="uiIconSort<%="Down".equals(sortOrder)?"Up":"Down"%>">&nbsp;</i>
@@ -145,14 +145,14 @@
                       </a>
                     </li>
                     <li class="$dateClass">
-                      <a href="<%=uicomponent.event("Sort", typeActionLink + "Date")%>"><%=_ctx.appRes("FileView.label.date")%>
+                      <a href="javascript:void(0);" onclick="<%=uicomponent.event("Sort", typeActionLink + "Date")%>"><%=_ctx.appRes("FileView.label.date")%>
                         <% if ("active".equals(dateClass)) {%>
                           <i class="uiIconSort<%="Down".equals(sortOrder)?"Up":"Down"%>">&nbsp;</i>
                         <%} %>
                       </a>
                     </li>
                     <li class="$sizeClass">
-                    <a href="<%=uicomponent.event("Sort", typeActionLink + "Size")%>"><%=_ctx.appRes("FileView.label.size")%>
+                    <a href="javascript:void(0);" onclick="<%=uicomponent.event("Sort", typeActionLink + "Size")%>"><%=_ctx.appRes("FileView.label.size")%>
                       <% if ("active".equals(sizeClass)) {%>
                         <i class="uiIconSort<%="Down".equals(sortOrder)?"Up":"Down"%>">&nbsp;</i>
                       <%} %>
@@ -261,7 +261,7 @@
                       action = itemGroundContext.getUIExtensionName();
                 %>
                 <li class="menuItem" style="block">   
-                  <a href="<%=itemGroundContext.event(action)%>">   
+                  <a href="javascript:void(0);" onclick="<%=itemGroundContext.event(action)%>">   
                     <i class="uiIconEcms${action}"></i> <%=_ctx.appRes("ECMContextMenu.event." + action)%>
                   </a>
                 </li>
