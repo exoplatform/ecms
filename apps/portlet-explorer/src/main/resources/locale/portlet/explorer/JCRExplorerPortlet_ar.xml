@@ -1480,7 +1480,7 @@
       <filetype-error>لا يمكن الاستيراد. ربّما طرأ خطأ أثناء تحميل الملفّ.</filetype-error>
       <mimetype-invalid>يمكن استيراد ملفات من نوع 'xml' أو 'zip' فحسب.</mimetype-invalid>
       <access-denied>غير مسموح. لا يمكنك الاستيراد هناك.</access-denied>
-      <constraint-violation-exception>Impossible to import data. The type '{0}' is not allowed in this location.</constraint-violation-exception>
+      <constraint-violation-exception>لا يمكنك استيراد البيانات. نوع العقدة '{0}' غير متاح في هذا المكان.</constraint-violation-exception>
       <item-exists-exception>وردت عقدة ذات مرجع تحتوي على نفس الـمعرّف (UUID) مع عقدة موجودة مُسبقا في فضاء التخزين.</item-exists-exception>
     </msg>
   </UIImportNode>
