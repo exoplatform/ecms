@@ -678,6 +678,13 @@
 		this.initProvider = function(id, authUrl) {
 			connectProvider[id] = authUrl;
 		};
+		
+		/**
+		 * Initialize connected drive nodes for UI rendering.
+		 */
+		this.initNodes = function(map) {
+			cloudDriveUI.initNodes(map);
+		};
 
 		/**
 		 * Auth URL for given Id of a provider.
@@ -710,7 +717,7 @@
 		 */
 		this.initContext = function(nodeWorkspace, nodePath) {
 			utils.log("Init context node: " + nodeWorkspace + ":" + nodePath
-			    + (contextDrive ? ", drive: " + contextDrive.path : "") + " excluded: "
+			    + (contextDrive ? " (current drive: " + contextDrive.path + ")" : "") + " excluded: "
 			    + isExcluded(nodePath));
 
 			contextNode = {
@@ -1698,6 +1705,47 @@
 			}
 		};
 
+		/** 
+		 * Render given connected drive nodes in ECM documents view with branded styles of drive providers.  
+		 */
+		this.initNodes = function(map) {
+			// map: name = providerId
+			var files = [];
+			var styleSize;
+			var target = $("div.actionIconBox");
+			var tree;
+			if (target.size() > 0) {
+				styleSize = "uiIcon64x64"; // Icon view
+				tree = $("#UITreeExplorer li.node");
+			} else {
+				styleSize = "uiIcon24x24"; // List or Admin view
+				target = $("div.rowView");
+			}
+			for (var name in map) {
+				if (map.hasOwnProperty(name)) {
+					var providerId = map[name];
+					var cname = styleSize + "CloudDrive-" + providerId;
+					$(target).each(function(i, item) {
+						if ($(item).find("span.nodeName:contains('" + name + "')").size() > 0) {
+							$(item).find("div." + styleSize + "nt_folder:not(:has(div." + cname + "))").each(function() { // .not("div:has(div." + cname + ")")
+								$("<div class='" + cname + "'></div>").appendTo(this);
+							});
+						}
+					});
+					if (tree) {
+						cname = "uiIcon16x16CloudDrive-" + providerId;
+						$(tree).each(function() {
+							$(this).find("span.nodeName:contains('" + name + "')").each(function() {
+								$(this).siblings("i.uiIcon16x16nt_folder:not(:has(div." + cname + "))").each(function() {
+									$("<div class='" + cname + "'></div>").appendTo(this);
+								});
+							});
+						});
+					}
+				}
+			}
+		};
+		
 		/**
 		 * Show notice to user. Options support "icon" class, "hide", "closer" and "nonblock" features.
 		 */
@@ -1767,8 +1815,7 @@
 	var cloudDrive = new CloudDrive();
 	var cloudDriveUI = new CloudDriveUI();
 
-	// Load CloudDrive dependencies only in top window (not in iframes of
-	// gadgets).
+	// Load CloudDrive dependencies only in top window (not in iframes of gadgets).
 	if (window == top) {
 		try {
 			// load required styles
@@ -1787,6 +1834,5 @@
 	}
 
 	return cloudDrive;
-})
-    ($, cloudDriveUtils, cloudDriveTasks, uiRightClickPopupMenu, uiListView, uiSimpleView,
-        uiFileView);
+	
+})($, cloudDriveUtils, cloudDriveTasks, uiRightClickPopupMenu, uiListView, uiSimpleView, uiFileView);

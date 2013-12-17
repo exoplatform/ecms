@@ -10,9 +10,17 @@
 	width: 16px !important;
 }
 
-/*.uiIconEcmsOpenCloudFile,.uiIconEcmsRefreshCloudDrive {
-	background: url("icons/googledrive-gray-16x16.png") no-repeat left center transparent !important;
-}*/
+.uiIconEcmsConnectDialogGoogleDrive {
+	background: url('icons/googledrive-gray-24x24.png') no-repeat scroll left center transparent !important;
+	height: 32px !important;
+	width: 32px !important;
+}
+
+.uiIconEcmsConnectDialogBox {
+	background: url('icons/box-gray-24x24.png') no-repeat scroll left center transparent !important;
+	height: 32px !important;
+	width: 32px !important;
+}
 
 .uiIcon16x16CloudFile-gdrive {
 	background: url("icons/googledrive-gray-16x16.png") no-repeat left center transparent !important;
@@ -20,6 +28,47 @@
 
 .uiIcon16x16CloudFile-box {
 	background: url("icons/box-gray-16x16.png") no-repeat left center transparent !important;
+}
+
+.uiIcon24x24CloudDrive-gdrive {
+	background: url("icons/googledrive-gray-16x16.png") no-repeat left center transparent !important;
+}
+
+.uiIcon24x24CloudDrive-box {
+	left: 2px;
+	top: -3px;
+	-webkit-transform: scale(0.75);
+    -moz-transform: scale(0.75);
+    -o-transform: scale(0.75);
+    -ms-transform: scale(0.75);
+    transform: scale(0.75);
+	background: url("icons/box-gray-16x16.png") no-repeat left center transparent !important;
+}
+
+.uiIcon16x16CloudDrive-box {
+	left: 2px;
+	top: -3px;
+	-webkit-transform: scale(0.35);
+    -moz-transform: scale(0.35);
+    -o-transform: scale(0.35);
+    -ms-transform: scale(0.35);
+    transform: scale(0.35);
+	background: url("icons/box-gray-16x16.png") no-repeat left center transparent !important;
+}
+
+.uiIcon64x64CloudDrive-gdrive {
+	background: url("icons/googledrive-gray-32x32.png") no-repeat left center transparent !important;
+}
+
+.uiIcon64x64CloudDrive-box {
+	left: 13px;
+	top: -20px;
+	-webkit-transform: scale(0.75);
+    -moz-transform: scale(0.75);
+    -o-transform: scale(0.75);
+    -ms-transform: scale(0.75);
+    transform: scale(0.75);
+	background: url("icons/box-gray-32x32.png") no-repeat left center transparent !important;
 }
 
 .uiCloudDriveChanges {
@@ -199,16 +248,16 @@
 	background: url('https://ssl.gstatic.com/docs/doclist/images/icon_10_excel_xl128.png') no-repeat right center !important; /* orientation=rt */
 }
 
+.uiIcon16x16applicationx-exoboxwebdoc {
+	background: url('icons/box-webdoc-16x16.png') center center no-repeat !important;
+}
+
 .uiIcon24x24applicationx-exoboxwebdoc {
-	background: url('http://app.box.com/img/sprites/24x24-sOgRgI.png') left -2731px no-repeat !important; /* orientation=lt */
-	background: url('http://app.box.com/img/sprites/24x24-sOgRgI.png') right -2731px no-repeat !important; /* orientation=rt */
+    background: url('icons/box-webdoc-24x24.png') center center no-repeat !important;
 }
 
 .uiIcon64x64applicationx-exoboxwebdoc {
-	width: 43px;
-	height: 51px;
-	background: url('http://app.box.com/img/sprites/common_documents-W6QjAe.png') left -1554px no-repeat !important; /* orientation=lt */
-    background: url('http://app.box.com/img/sprites/common_documents-W6QjAe.png') right -1554px no-repeat !important; /* orientation=rt */
+    background: url('icons/box-webdoc-64x64.png') center center no-repeat !important;
 }
 
 .application_xml16x16Icon {
