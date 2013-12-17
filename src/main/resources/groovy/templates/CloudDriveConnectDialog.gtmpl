@@ -56,27 +56,21 @@ def connectYour = _ctx.appRes("UIPopupWindow.title.ConnectYour")
 			<%
 			  for(provider in driveService.providers) {
 			    js.getRequireJS().addScripts("\ncloudDrive.initProvider('${provider.id}', '${provider.authUrl}');\n")
-			    // onclick="cloudDrive.connect('${provider.id}', '${provider.authUrl}');"
-			    
 				def driveSuffix = provider.name.replace(' ', '') 
-				// uiTabNormal 
 			%>
 			<div class="UIAction">
 				<div class="tab-content">
 					<ul>
 						<li>
-							<a class="actionIcon"><i class="uiIconEcmsConnect${driveSuffix}" provider-id="${provider.id}"></i> ${connectYour} ${provider.name}</a>
+							<a class="actionIcon">
+								<i style="vertical-align:middle;" class="uiIconEcmsConnectDialog${driveSuffix}" provider-id="${provider.id}"></i>
+								<span style="vertical-align:middle;">${connectYour} ${provider.name}</span>
+							</a>
 						</li>
 					</ul>
 				</div>
 			</div>
 			<%
-			/*
-			<div class="UIAction">
-				<a href="javascript:void(0);" target="_self"
-					class="ActionButton LightBlueStyle uiIconEcmsConnect${driveSuffix}" style="width: 150px;"
-					provider-id="${provider.id}">${connectYour} ${provider.name}</a>
-			</div>*/
 			  }
 			%>
 		</div>

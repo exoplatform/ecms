@@ -17,9 +17,19 @@
 
 package org.exoplatform.clouddrive.ecms;
 
+import org.exoplatform.clouddrive.CloudDrive;
+import org.exoplatform.clouddrive.CloudDriveService;
+import org.exoplatform.services.wcm.utils.WCMCoreUtils;
 import org.exoplatform.web.application.JavascriptManager;
 import org.exoplatform.web.application.RequestContext;
 import org.exoplatform.webui.application.WebuiRequestContext;
+
+import java.util.HashMap;
+import java.util.Map;
+
+import javax.jcr.Node;
+import javax.jcr.NodeIterator;
+import javax.jcr.RepositoryException;
 
 /**
  * Created by The eXo Platform SAS.
@@ -29,19 +39,61 @@ import org.exoplatform.webui.application.WebuiRequestContext;
  */
 public class CloudDriveContext {
 
-  protected final static String JAVASCRIPT = "CloudDriveContext_Javascript".intern();
+  protected final static String JAVASCRIPT       = "CloudDriveContext_Javascript".intern();
+
+  protected final static String JAVASCRIPT_NODES = "CloudDriveContext_JavascriptNodes".intern();
 
   public static boolean init(RequestContext requestContext, String workspace, String nodePath) {
     Object script = requestContext.getAttribute(JAVASCRIPT);
     if (script == null) {
       // XXX yes... nasty cast
       JavascriptManager js = ((WebuiRequestContext) requestContext).getJavascriptManager();
-      js.require("SHARED/cloudDrive", "cloudDrive").addScripts("\ncloudDrive.init('" + workspace + "','" + nodePath + "');\n");
+      js.require("SHARED/cloudDrive", "cloudDrive").addScripts("\ncloudDrive.init('" + workspace + "','"
+          + nodePath + "');\n");
 
       requestContext.setAttribute(JAVASCRIPT, JAVASCRIPT);
       return true;
     } else {
       return false; // already added
     }
+  }
+
+  public static boolean initNodes(RequestContext requestContext, Node parent) throws RepositoryException {
+    Object script = requestContext.getAttribute(JAVASCRIPT_NODES);
+    if (script == null) {
+      NodeIterator childs = parent.getNodes();
+      if (childs.hasNext()) {
+        CloudDriveService driveService = WCMCoreUtils.getService(CloudDriveService.class);
+        StringBuilder map = new StringBuilder();
+        // we construct JSON object on the fly
+        map.append('{');
+        do {
+          Node child = childs.nextNode();
+          CloudDrive drive = driveService.findDrive(child);
+          if (drive != null) {
+            map.append('"');
+            map.append(child.getName()); // exo:title?
+            map.append("\":\"");
+            map.append(drive.getUser().getProvider().getId());
+            map.append("\",");
+          }
+        } while (childs.hasNext());
+        if (map.length() > 1) {
+          map.deleteCharAt(map.length() - 1); // remove last semicolon
+          map.append('}');
+
+          // XXX still... nasty cast
+          JavascriptManager js = ((WebuiRequestContext) requestContext).getJavascriptManager();
+
+          // XXX we already "required" cloudDrive as AMD dependency in init()
+          js.require("SHARED/cloudDrive", "cloudDrive").addScripts("\ncloudDrive.initNodes("
+              + map.toString() + ");\n");
+
+          requestContext.setAttribute(JAVASCRIPT_NODES, JAVASCRIPT_NODES);
+          return true;
+        }
+      }
+    } // already added
+    return false;
   }
 }
