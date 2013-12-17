@@ -12,7 +12,6 @@
   import org.exoplatform.web.application.Parameter ;
   import org.exoplatform.webui.core.UIRightClickPopupMenu ;
   import org.exoplatform.ecm.webui.component.explorer.UIWorkingArea;
-  import org.exoplatform.ecm.webui.component.explorer.UIDocumentInfo.ExplorerTemplateType;
   import org.exoplatform.ecm.webui.component.explorer.DocumentProviderUtils;
   import org.exoplatform.ecm.jcr.model.Preference;
   import org.exoplatform.ecm.webui.component.explorer.UIJCRExplorer;
@@ -332,8 +331,9 @@
             lockedLabel  = "("+_ctx.appRes("UIDocumentWorkspace.tooltip.LockedBy")+" "+data.getLock().getLockOwner()+")";
           }
           %>
-            <div <%= uicomponent.getNodeAttributeInCommon(data) %> class="rowView $oddEvenClassRow clearfix"
-                 ondblclick="$actionLink" rightClickHandler="<%=uicomponent.getRightClickFunction(ExplorerTemplateType.CONTENT, data)%>"
+            <div <%= uicomponent.getNodeAttributeInView(data) %> class="rowView $oddEvenClassRow clearfix" 
+                  
+                 ondblclick="$actionLink"
                  >$strActs
               <div class="columnIcon" style="width: 20px;">
                 <div rel="tooltip" data-placement="bottom" title="$name" class="<%=Utils.getNodeTypeIcon(data, "uiIcon16x16")%>">
