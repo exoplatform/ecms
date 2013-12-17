@@ -6,7 +6,6 @@
   import org.exoplatform.webui.core.UIRightClickPopupMenu ;
   import org.exoplatform.ecm.webui.component.explorer.UIWorkingArea;
   import org.exoplatform.ecm.webui.component.explorer.UIDocumentInfo;
-  import org.exoplatform.ecm.webui.component.explorer.UIDocumentInfo.ExplorerTemplateType;
   import org.exoplatform.services.cms.link.LinkManager;
   import org.exoplatform.ecm.webui.component.explorer.UIJCRExplorer;
   import javax.jcr.PathNotFoundException;
@@ -194,7 +193,7 @@ public void writeNodes(level, i, data, uiWorkingArea, linkManager, restContextNa
   }
 %>
   <div class="rowView fileViewRowView Normal clearfix"  
-       <%=uiDocumentInfo.getNodeAttributeInCommon(data)%> rightClickHandler="<%=uiDocumentInfo.getRightClickFunction(ExplorerTemplateType.TREELIST, data)%>"
+       <%=uiDocumentInfo.getNodeAttribute(data)%>
        style="padding-left:<%=uicomponent.getPadding()*40%>px">
     $strActs
     <% def folderIcon = "noArrow";
