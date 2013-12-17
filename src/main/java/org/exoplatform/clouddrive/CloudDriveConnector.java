@@ -65,8 +65,8 @@ public abstract class CloudDriveConnector extends BaseComponentPlugin {
    */
   public static final String             CONFIG_PROVIDER_CLIENT_SECRET    = "provider-client-secret";
 
-  // CLDINT-1051 increased from 3 to 5
-  public static final int                PROVIDER_REQUEST_ATTEMPTS        = 5;
+  // CLDINT-1051 increased from 3 to 5, later decreased to 3 again (due to closed JCR session in case of retry)
+  public static final int                PROVIDER_REQUEST_ATTEMPTS        = 3;
 
   // CLDINT-1051 increased from 5s tp 10s
   public static final long               PROVIDER_REQUEST_ATTEMPT_TIMEOUT = 10000;

@@ -30,7 +30,7 @@ import com.google.api.client.http.HttpResponseException;
 import com.google.api.client.http.HttpTransport;
 import com.google.api.client.http.HttpUnsuccessfulResponseHandler;
 import com.google.api.client.http.javanet.NetHttpTransport;
-import com.google.api.client.json.jackson.JacksonFactory;
+import com.google.api.client.json.jackson2.JacksonFactory;
 import com.google.api.services.drive.Drive;
 import com.google.api.services.drive.Drive.Changes;
 import com.google.api.services.drive.Drive.Children;
@@ -52,7 +52,6 @@ import org.exoplatform.services.log.ExoLogger;
 import org.exoplatform.services.log.Log;
 
 import java.io.IOException;
-import java.math.BigInteger;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Arrays;
@@ -289,7 +288,7 @@ class GoogleDriveAPI {
     /**
      * @throws GoogleDriveException
      */
-    ChangesIterator(BigInteger startChangeId) throws GoogleDriveException {
+    ChangesIterator(long startChangeId) throws GoogleDriveException {
       try {
         this.request = drive.changes().list();
         this.request.setStartChangeId(startChangeId);
@@ -500,10 +499,8 @@ class GoogleDriveAPI {
    */
   Userinfo userInfo() throws GoogleDriveException, CloudDriveException {
     Userinfo userInfo;
-    // this.userInfo = null; // consume it once
-    // if (userInfo == null) {
     try {
-      // TODO this caused Unauthorized: >>> .setHttpRequestInitializer(new RequestInitializer()
+      // XXX FYI this caused Unauthorized: >>> .setHttpRequestInitializer(new RequestInitializer()
       // Oauth2 oauth2 = new Oauth2.Builder(new NetHttpTransport(), new JacksonFactory(),
       // credential).build();
       userInfo = oauth2.userinfo().get().execute();
@@ -525,7 +522,6 @@ class GoogleDriveAPI {
     } catch (IOException e) {
       throw new GoogleDriveException("Authentication error: " + e.getMessage(), e);
     }
-    // }
     if (userInfo != null && userInfo.getId() != null) {
       return userInfo;
     } else {
@@ -551,7 +547,7 @@ class GoogleDriveAPI {
     return new ChildIterator(fileId);
   }
 
-  ChangesIterator changes(BigInteger startChangeId) throws GoogleDriveException {
+  ChangesIterator changes(long startChangeId) throws GoogleDriveException {
     return new ChangesIterator(startChangeId);
   }
 

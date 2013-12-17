@@ -65,7 +65,7 @@ public class JCRLocalGoogleDrive extends JCRLocalCloudDrive {
     /**
      * Google Drive service API.
      */
-    protected final GoogleDriveAPI      api;
+    protected final GoogleDriveAPI api;
 
     /**
      * Create connect to Google Drive command.
@@ -99,7 +99,7 @@ public class JCRLocalGoogleDrive extends JCRLocalCloudDrive {
     protected void fetchChilds(String fileId, Node parent) throws CloudDriveException, RepositoryException {
       ChildIterator children = api.children(fileId);
       iterators.add(children);
-      
+
       while (children.hasNext()) {
         ChildReference child = children.next();
         File gf = api.file(child.getId());
@@ -151,17 +151,17 @@ public class JCRLocalGoogleDrive extends JCRLocalCloudDrive {
           }
 
           changed.add(new JCRLocalCloudFile(localNode.getPath(),
-                                           gf.getId(),
-                                           gf.getTitle(),
-                                           gf.getAlternateLink(),
-                                           gf.getEmbedLink(),
-                                           gf.getThumbnailLink(),
-                                           gf.getMimeType(),
-                                           gf.getLastModifyingUserName(),
-                                           gf.getOwnerNames().get(0),
-                                           created,
-                                           modified,
-                                           isFolder));
+                                            gf.getId(),
+                                            gf.getTitle(),
+                                            gf.getAlternateLink(),
+                                            gf.getEmbedLink(),
+                                            gf.getThumbnailLink(),
+                                            gf.getMimeType(),
+                                            gf.getLastModifyingUserName(),
+                                            gf.getOwnerNames().get(0),
+                                            created,
+                                            modified,
+                                            isFolder));
         }
       }
     }
@@ -216,8 +216,13 @@ public class JCRLocalGoogleDrive extends JCRLocalCloudDrive {
         return;
       }
 
-      BigInteger changeId = new BigInteger(localChangeId);
-      BigInteger startChangeId = changeId.add(BigInteger.ONE);
+      long changeId;
+      try {
+        changeId = Long.parseLong(localChangeId);
+      } catch (NumberFormatException e) {
+        throw new CloudDriveException("Error parse localChangeId", e);
+      }
+      long startChangeId = changeId + 1;
 
       changes = api.changes(startChangeId);
       iterators.add(changes);
@@ -383,17 +388,17 @@ public class JCRLocalGoogleDrive extends JCRLocalCloudDrive {
           }
 
           changed.add(new JCRLocalCloudFile(localNode.getPath(),
-                                           gf.getId(),
-                                           gf.getTitle(),
-                                           gf.getAlternateLink(),
-                                           gf.getEmbedLink(),
-                                           gf.getThumbnailLink(),
-                                           gf.getMimeType(),
-                                           gf.getLastModifyingUserName(),
-                                           gf.getOwnerNames().get(0),
-                                           created,
-                                           modified,
-                                           isFolder));
+                                            gf.getId(),
+                                            gf.getTitle(),
+                                            gf.getAlternateLink(),
+                                            gf.getEmbedLink(),
+                                            gf.getThumbnailLink(),
+                                            gf.getMimeType(),
+                                            gf.getLastModifyingUserName(),
+                                            gf.getOwnerNames().get(0),
+                                            created,
+                                            modified,
+                                            isFolder));
 
           synced.add(localNode);
         }
