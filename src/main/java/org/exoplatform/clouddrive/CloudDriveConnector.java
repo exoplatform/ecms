@@ -193,7 +193,12 @@ public abstract class CloudDriveConnector extends BaseComponentPlugin {
   Set<CloudDrive> loadStored(Set<Node> driveNodes) throws RepositoryException, CloudDriveException {
     Set<CloudDrive> connected = new HashSet<CloudDrive>();
     for (Node driveNode : driveNodes) {
-      connected.add(loadDrive(driveNode));
+      try {
+        connected.add(loadDrive(driveNode));
+      } catch (DriveRemovedException e) {
+        // skip removed drive
+        LOG.warn("Node removed and cannot be loaded as Cloud Drive: " + e.getMessage());
+      }
     }
     return connected;
   }

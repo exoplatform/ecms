@@ -6,6 +6,8 @@ import org.exoplatform.clouddrive.CloudDriveException;
 import org.exoplatform.clouddrive.CloudProvider;
 import org.exoplatform.clouddrive.CloudUser;
 import org.exoplatform.clouddrive.ConfigurationException;
+import org.exoplatform.clouddrive.DriveRemovedException;
+import org.exoplatform.clouddrive.jcr.JCRLocalCloudDrive;
 import org.exoplatform.container.xml.InitParams;
 import org.exoplatform.services.jcr.RepositoryService;
 import org.exoplatform.services.jcr.ext.app.SessionProviderService;
@@ -159,7 +161,10 @@ public class BoxConnector extends CloudDriveConnector {
   }
 
   @Override
-  protected CloudDrive loadDrive(Node driveNode) throws CloudDriveException, RepositoryException {
+  protected CloudDrive loadDrive(Node driveNode) throws DriveRemovedException,
+                                                CloudDriveException,
+                                                RepositoryException {
+    JCRLocalCloudDrive.checkTrashed(driveNode);
     JCRLocalBoxDrive drive = new JCRLocalBoxDrive(new API(), getProvider(), driveNode, sessionProviders);
     drive.getUser().api().getToken().addListener(drive);
     return drive;

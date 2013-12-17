@@ -2328,4 +2328,17 @@ public abstract class JCRLocalCloudDrive extends CloudDrive {
   static void doneAction() {
     actionDrive.remove();
   }
+
+  /**
+   * Check if given node isn't a node in eXo Trash folder and throw {@link DriveRemovedException} if it is.
+   * 
+   * @param node {@link Node}
+   * @throws RepositoryException
+   * @throws DriveRemovedException if given node in the eXo Trash.
+   */
+  public static void checkTrashed(Node node) throws RepositoryException, DriveRemovedException {
+    if (node.getParent().isNodeType(EXO_TRASHFOLDER)) {
+      throw new DriveRemovedException("Drive " + node.getPath() + " was moved to Trash.");
+    }
+  }
 }

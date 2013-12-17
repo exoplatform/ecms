@@ -25,9 +25,11 @@ import org.exoplatform.clouddrive.CloudDriveException;
 import org.exoplatform.clouddrive.CloudProvider;
 import org.exoplatform.clouddrive.CloudUser;
 import org.exoplatform.clouddrive.ConfigurationException;
+import org.exoplatform.clouddrive.DriveRemovedException;
 import org.exoplatform.clouddrive.exodrive.service.ExoDriveConfigurationException;
 import org.exoplatform.clouddrive.exodrive.service.ExoDriveRepository;
 import org.exoplatform.clouddrive.exodrive.service.ExoDriveService;
+import org.exoplatform.clouddrive.jcr.JCRLocalCloudDrive;
 import org.exoplatform.container.xml.InitParams;
 import org.exoplatform.services.jcr.RepositoryService;
 import org.exoplatform.services.jcr.ext.app.SessionProviderService;
@@ -225,6 +227,7 @@ public class ExoDriveConnector extends CloudDriveConnector {
    */
   @Override
   public CloudDrive loadDrive(Node driveNode) throws CloudDriveException, RepositoryException {
+    JCRLocalCloudDrive.checkTrashed(driveNode);
     try {
       return new JCRLocalExoDrive(repository(), (ExoDriveProvider) provider, sessionProviders, driveNode);
     } catch (ExoDriveConfigurationException e) {

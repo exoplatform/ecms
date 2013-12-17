@@ -24,6 +24,8 @@ import org.exoplatform.clouddrive.CloudDriveException;
 import org.exoplatform.clouddrive.CloudProvider;
 import org.exoplatform.clouddrive.CloudUser;
 import org.exoplatform.clouddrive.ConfigurationException;
+import org.exoplatform.clouddrive.DriveRemovedException;
+import org.exoplatform.clouddrive.jcr.JCRLocalCloudDrive;
 import org.exoplatform.container.xml.InitParams;
 import org.exoplatform.services.jcr.RepositoryService;
 import org.exoplatform.services.jcr.ext.app.SessionProviderService;
@@ -191,6 +193,7 @@ public class GoogleDriveConnector extends CloudDriveConnector {
    */
   @Override
   protected CloudDrive loadDrive(Node driveNode) throws CloudDriveException, RepositoryException {
+    JCRLocalCloudDrive.checkTrashed(driveNode);
     return new JCRLocalGoogleDrive(new API(), getProvider(), driveNode, sessionProviders);
   }
 
