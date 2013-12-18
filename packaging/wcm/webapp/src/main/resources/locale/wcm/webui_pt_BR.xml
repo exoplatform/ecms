@@ -261,7 +261,7 @@ Não é possível pré-visualizar este conteúdo. Este modelo não é suportado<
       <SaveDraft>Salvar Rascunho</SaveDraft>
       <FastPublish>Publicação Rápida</FastPublish>
       <Preferences>Preferências</Preferences>
-      <Close>Fechar</Close>
+      <Close>#{word.close}</Close>
     </action>
     <msg>
       <access-denied>Você não tem permissão para adicionar categorias a este documento.</access-denied>

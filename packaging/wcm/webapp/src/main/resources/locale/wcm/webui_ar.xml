@@ -260,7 +260,7 @@
       <SaveDraft>حفظ المُسوّدة</SaveDraft>
       <FastPublish>نشر سريع</FastPublish>
       <Preferences>تفضيلات</Preferences>
-      <Close>غلق</Close>
+      <Close>#{word.close}</Close>
     </action>
     <msg>
       <access-denied>ليس لديك الصلاحيّات الكافية لإضافة الفئات لهذه الوثيقة.</access-denied>

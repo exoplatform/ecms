@@ -1078,6 +1078,12 @@
       <label-Cancel>#{word.cancel}</label-Cancel>
     </button>
   </UIConstraintsForm>
+  <ConstraintsForm>
+    <action>
+      <Add>新增</Add>
+      <Cancel>#{word.cancel}</Cancel>
+    </action>
+  </ConstraintsForm>
   <UIConstraintForm>
     <tooltip>
       <AddMetadataType>Add Property</AddMetadataType>

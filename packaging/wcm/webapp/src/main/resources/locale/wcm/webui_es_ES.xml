@@ -260,7 +260,7 @@
       <SaveDraft>Guardar borrador</SaveDraft>
       <FastPublish>Publicación rápida</FastPublish>
       <Preferences>Preferencias</Preferences>
-      <Close>Cerrar</Close>
+      <Close>#{word.close}</Close>
     </action>
     <msg>
       <access-denied>No tiene permiso para agregar categorías a este documento.</access-denied>

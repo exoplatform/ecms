@@ -260,7 +260,7 @@
       <SaveDraft>Entwurf speichern</SaveDraft>
       <FastPublish>Schnell veröffentlichen</FastPublish>
       <Preferences>Präferenzen</Preferences>
-      <Close>Schließen</Close>
+      <Close>#{word.close}</Close>
     </action>
     <msg>
       <access-denied>Sie haben keine Berechtigung zum Hinzufügen von Kategorien zu diesem Dokument.</access-denied>

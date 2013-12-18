@@ -1711,6 +1711,11 @@
 <list>İçerik</list>
 <navigation>Gezinti</navigation>
   </label>
+                          <action>
+                            <Save>#{word.save}</Save>
+                            <Reset>Sıfırla</Reset> 
+                            <Cancel>#{word.cancel}</Cancel> 
+                          </action> 
   <msg>
   <template-existing>Bu şablon adı zaten var. Lütfen başka bir tane seçin.</template-existing>
   </msg>
