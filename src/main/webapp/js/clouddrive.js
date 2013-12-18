@@ -468,9 +468,11 @@
 				if (!autoSyncs[syncName]) {
 					var syncFunc;
 					function doSync() {
-						var syncProcess = synchronize(driveWorkspace, drivePath); // drive needs synchronization
+						var syncProcess = synchronize(driveWorkspace, drivePath);
 						syncProcess.done(function() {
-							scheduleSync(); // re-schedule
+							if (autoSyncs[syncName]) {
+								scheduleSync(); // re-schedule only if enabled
+							}
 						});
 						syncProcess.fail(function() {
 							delete autoSyncs[syncName]; // cancel and cleanup
@@ -483,7 +485,9 @@
 					
 					if (drive.changesLink) {
 						// use long-polling from cloud provider
-						syncTimeout = 100;
+						// we starting from initial sync
+						synchronize(driveWorkspace, drivePath);
+						syncTimeout = 10000; // first polling check in 10sec
 						syncFunc = function() {
 							var changes = serviceGet(drive.changesLink);
 							changes.done(function(info) {
@@ -498,7 +502,7 @@
 										newLink.done(function(res) {
 											utils.log("New changes link: " + res.changesLink);
 											drive.changesLink = res.changesLink;
-											scheduleSync();
+										  scheduleSync();
 										});	
 										newLink.fail(function(response, status, err) {
 											utils.log("ERROR: error getting new changes link: " + err + ", " + status + ", " + response);
