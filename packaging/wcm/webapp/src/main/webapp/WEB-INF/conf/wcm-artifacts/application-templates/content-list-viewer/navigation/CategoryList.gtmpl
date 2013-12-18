@@ -9,19 +9,18 @@
 %>
 <%
 public void renderCategories(def categories) {
-    def first = true;
     for (category in categories) {
       def categoryTitle = category.getTitle();
       def categoryURL = category.getUrl();
-      def cssStyle = "CategoryLabel";
-      if (category.isSelected()) cssStyle = "CategoryLabel CategorySelected";
+      def cssStyle = "";
+      if (category.isSelected()) cssStyle = "active";
       %>
-      <%if (!first) {%> &nbsp;|&nbsp; <%}%>
-      <a class="$cssStyle" href="$categoryURL" rel="tooltip" data-placement="bottom" title="$categoryTitle">$categoryTitle</a>  
+      <li class="$cssStyle">
+      	<a  href="$categoryURL" rel="tooltip" data-placement="bottom" title="$categoryTitle">$categoryTitle</a>  
+      </li>
       <%
       first=false;
       if (category.hasChilds()) {
-        %> &nbsp;|&nbsp; <%
         renderCategories(category.getChilds());
       }
     }
@@ -33,30 +32,23 @@ public void renderCategories(def categories) {
   padding: 10px;
 }
 
-.CategorySelected {
+.categorySelected {
   color: #3366CC !important;
 }
 
-.SimpleHorizontal {
+.simpleHorizontal {
   padding-bottom:10px;
+  margin: -9px -9px 0 0;
 }
 
 </style>
 
-<div id="$uicomponent.id" class="SimpleHorizontal">
-  <div class="CategoriesContainer">
-    <div class="TitleBarL">
-      <div class="TitleBarR">
-        <div class="TitleBarM">
-          <div class="NewContent">
+<div id="$uicomponent.id" class="uiTabNormal uiTabGrayInPage simpleHorizontal">
+  	<ul class="nav nav-tabs">
             <%
             def categories = uicomponent.getCategories();
             renderCategories(categories);
             %>
-          </div>
-        </div>
-      </div>
-    </div>
-  </div>
+	</ul>
 </div>
 
