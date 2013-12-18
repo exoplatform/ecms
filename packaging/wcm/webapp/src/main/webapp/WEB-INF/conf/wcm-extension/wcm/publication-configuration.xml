@@ -42,39 +42,6 @@
     </init-params>
   </component>
 
-  <external-component-plugins>
-    <target-component>org.exoplatform.services.cache.CacheService</target-component>
-    <component-plugin>
-      <name>addExoCacheConfig</name>
-      <set-method>addExoCacheConfig</set-method>
-      <type>org.exoplatform.services.cache.ExoCacheConfigPlugin</type>
-      <description>Configures the cache for wcm composer</description>
-      <init-params>
-        <object-param>
-          <name>cache.config.wcm.composer</name>
-          <description>The cache configuration for wcm composer</description>
-          <object type="org.exoplatform.services.cache.ExoCacheConfig">
-            <field name="name">
-              <string>wcm.composer</string>
-            </field>
-            <field name="maxSize">
-              <int>${wcm.cache.wcmcomposer.capacity:300}</int>
-            </field>
-            <field name="liveTime">
-              <long>${wcm.cache.wcmcomposer.timetolive:600}</long>
-            </field>
-            <field name="distributed">
-              <boolean>false</boolean>
-            </field>
-            <field name="implementation">
-              <string>org.exoplatform.services.cache.concurrent.ConcurrentFIFOExoCache</string>
-            </field>
-          </object>
-        </object-param>
-      </init-params>
-    </component-plugin>
-  </external-component-plugins>
-
   <!-- 
 	WE USE THIS HANDLER TO ENROLL DOCUMENTS (UNTIL DMS 2.5.1)
 	-->
