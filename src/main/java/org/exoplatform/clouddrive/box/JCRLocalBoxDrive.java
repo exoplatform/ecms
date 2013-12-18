@@ -157,7 +157,7 @@ public class JCRLocalBoxDrive extends JCRLocalCloudDrive implements UserTokenRef
      * {@inheritDoc}
      */
     @Override
-    protected void syncFiles() throws RepositoryException, CloudDriveException {
+    protected void syncFiles() throws RepositoryException, AuthTokenException, CloudDriveException {
       // real all local nodes of this drive
       readLocalNodes();
 
@@ -244,25 +244,6 @@ public class JCRLocalBoxDrive extends JCRLocalCloudDrive implements UserTokenRef
    */
   protected class EventsSync extends SyncCommand {
 
-    @Deprecated
-    class Event {
-      final BoxEvent origin;
-
-      final BoxItem  item;
-
-      final int      sequenceId;
-
-      final String   parentPath; // relative to the root
-
-      Event(BoxEvent event, BoxItem item, String parentPath, int sequenceId) {
-        super();
-        this.origin = event;
-        this.item = item;
-        this.parentPath = parentPath;
-        this.sequenceId = sequenceId;
-      }
-    }
-
     /**
      * Box API.
      */
@@ -328,208 +309,6 @@ public class JCRLocalBoxDrive extends JCRLocalCloudDrive implements UserTokenRef
     protected EventsSync() throws RepositoryException, DriveRemovedException {
       super();
       this.api = getUser().api();
-    }
-
-    @Deprecated
-    protected void syncFilesOld() throws CloudDriveException, RepositoryException {
-      // TODO cleanup
-      long localStreamPosition = driveRoot.getProperty("box:streamPosition").getLong();
-
-      // buffer all items,
-      // order them in proper order (by sequence_id, taking in account parent existence),
-      // remove already applied (check by event id in history),
-      // apply others to local nodes
-      // save just applied events as history
-      EventsIterator events = api.getEvents(localStreamPosition);
-      iterators.add(events);
-      try {
-        if (events.hasNext()) {
-          // History contains something applied in previous sync, it can be empty if it was full sync
-          for (String es : driveRoot.getProperty("box:streamHistory").getString().split(";")) {
-            history.add(es);
-          }
-
-          Set<String> newHistory = new LinkedHashSet<String>();
-
-          // ordered events-per-item
-          // XXX Box API tells about Events service:
-          // Events will occasionally arrive out of order. For example a file-upload might show up
-          // before the Folder-create event. You may need to buffer events and apply them in a logical
-          // order.
-          Map<String, List<Event>> order = new LinkedHashMap<String, List<Event>>();
-          do {
-            BoxEvent event = events.next();
-            String eventId = event.getId();
-            if (!history.contains(eventId)) {
-              BoxTypedObject source = event.getSource();
-              if (source instanceof BoxItem) {
-                BoxItem item = (BoxItem) source;
-                int sequenceId;
-                try {
-                  sequenceId = Integer.parseInt(item.getSequenceId());
-                } catch (NumberFormatException e) {
-                  LOG.warn("Cannot parse item's sequence_id " + item.getSequenceId() + ": " + e.getMessage());
-                  sequenceId = -1;
-                }
-
-                // keep in new history all we get from the Box API, it can be received in next sync also
-                newHistory.add(eventId);
-
-                StringBuilder epath = new StringBuilder();
-                Iterator<BoxTypedObject> pathEntries = item.getPathCollection().getEntries().iterator();
-                if (pathEntries.hasNext()) {
-                  pathEntries.next(); // skip root ("All files")
-                  while (pathEntries.hasNext()) {
-                    BoxTypedObject pe = pathEntries.next();
-                    if (epath.length() > 1) {
-                      epath.append('/');
-                    }
-                    epath.append(cleanName((String) pe.getValue(BoxItem.FIELD_NAME)));
-                  }
-                } else {
-                  LOG.warn("Empty path collection");
-                }
-                String parentPath = epath.toString(); // relative path!
-
-                // add to changes order
-                Event itemEvent = new Event(event, item, parentPath, sequenceId);
-                List<Event> itemEvents = order.get(item.getId());
-                if (itemEvents == null) {
-                  itemEvents = new ArrayList<Event>();
-                  order.put(item.getId(), itemEvents);
-                }
-                itemEvents.add(itemEvent);
-              } else {
-                LOG.warn("Skipping non Item in Box events: " + source);
-              }
-            } // else, skip already applied event
-          } while (events.hasNext());
-
-          // TODO do we need to sort each item events in sequence_id order or they are already?
-
-          int applied; // number of changes applied in an iteration through the order of events
-          do {
-            applied = 0; // reset it for each iteration
-            for (Iterator<Map.Entry<String, List<Event>>> ieiter = order.entrySet().iterator(); ieiter.hasNext();) {
-              // processing all events of next item
-              List<Event> itemEvents = ieiter.next().getValue();
-              JCRLocalCloudFile localFile = null;
-              for (Iterator<Event> eiter = itemEvents.iterator(); eiter.hasNext();) {
-                Event event = eiter.next();
-                String eventType = event.origin.getEventType();
-                try {
-                  Node parent = event.parentPath.length() > 0 ? driveRoot.getNode(event.parentPath)
-                                                             : driveRoot;
-                  if (eventType.equals(BoxEvent.EVENT_TYPE_ITEM_CREATE)
-                      || eventType.equals(BoxEvent.EVENT_TYPE_ITEM_UPLOAD)) {
-                    // add node, by path
-                    // TODO ITEM_UNDELETE_VIA_TRASH ensure it works as an adding of the whole subtree in case
-                    // of folder, otherwise need copy-behaviour but we have trashed items nowhere - thus need
-                    // full sync.
-                    localFile = updateItem(api, event.item, parent, null);
-                    changed.add(localFile);
-                  } else if (eventType.equals(BoxEvent.EVENT_TYPE_ITEM_COPY)
-                      || eventType.equals(BoxEvent.EVENT_TYPE_ITEM_UNDELETE_VIA_TRASH)) {
-                    // copy/undeleted node
-                    if (localFile != null) {
-                      // using transient change from this events order for this item
-                      // XXX doing this we assume that events appear in proper order
-                      Node source = localFile.getNode();
-                      Node node = copyNode(source, parent);
-                      localFile = updateItem(api, event.item, parent, node);
-                    } else {
-                      // read the only copied/undeleted node from the Box
-                      localFile = updateItem(api, event.item, parent, null);
-                      if (localFile.isFolder()) {
-                        // and fetch child files
-                        fetchChilds(localFile.getId(), localFile.getNode());
-                      }
-                    }
-                    changed.add(localFile);
-                  } else if (eventType.equals(BoxEvent.EVENT_TYPE_ITEM_TRASH)) {
-                    // remove node, by path
-                    Node node = readNode(parent, event.item.getName(), event.item.getId());
-                    if (node != null) {
-                      String path = node.getPath();
-                      node.remove();
-                      removed.add(path);
-                      localFile = null;
-                    } else {
-                      throw new BoxInsconsistentException("Cannot find removed node locally: "
-                          + parent.getPath() + "/" + event.item.getName());
-                    }
-                  } else if (eventType.equals(BoxEvent.EVENT_TYPE_ITEM_MOVE)
-                      || eventType.equals(BoxEvent.EVENT_TYPE_ITEM_RENAME)) {
-                    // move node
-                    Node source;
-                    if (localFile != null) {
-                      // using transient change from this events order for this item
-                      // XXX doing this we assume that events appear in proper order
-                      source = localFile.getNode();
-                    } else {
-                      // try search in persisted storage by file id
-                      source = findNode(event.item.getId());
-                    }
-                    // if (source == null)
-
-                    if (source != null /* && source.getParent().getPath().equals(parent.getPath()) */) {
-                      Node node = moveNode(event.item.getId(), event.item.getName(), source, parent);
-                      localFile = updateItem(api, event.item, parent, node);
-                      changed.add(localFile);
-                    } else {
-                      throw new BoxInsconsistentException("Cannot find moved node locally: "
-                          + parent.getPath() + "/" + event.item.getName());
-                    }
-                  } else {
-                    LOG.warn("Skipped unexpected event from Box Event: " + eventType);
-                  }
-
-                  eiter.remove();
-                  applied++;
-                } catch (PathNotFoundException e) {
-                  // parent not (yet) found, we wait for it in the order
-                }
-              }
-              if (itemEvents.size() == 0) {
-                ieiter.remove();
-              }
-            }
-          } while (!order.isEmpty() && applied > 0);
-
-          if (!order.isEmpty()) {
-            throw new BoxInsconsistentException("Not all events applied for Box sync");
-          }
-
-          // save history
-          // TODO consider for saving the history of several hours or even a day
-          StringBuilder newHistoryData = new StringBuilder();
-          for (Iterator<String> eriter = newHistory.iterator(); eriter.hasNext();) {
-            newHistoryData.append(eriter.next());
-            if (eriter.hasNext()) {
-              newHistoryData.append(';');
-            }
-          }
-          driveRoot.setProperty("box:streamHistory", newHistoryData.toString());
-        } // else, nothing changed
-
-        // update sync position
-        driveRoot.setProperty("box:streamPosition", events.streamPosition);
-        driveRoot.setProperty("box:streamDate", Calendar.getInstance());
-      } catch (BoxInsconsistentException e) {
-        LOG.warn(e.getMessage() + ". Running full sync.");
-
-        // rollback everything from this sync
-        rollback(driveRoot);
-
-        // we need full sync in this case
-        FullSync fullSync = new FullSync();
-        fullSync.exec();
-
-        changed.clear();
-        changed.addAll(fullSync.getFiles());
-        removed.clear();
-        removed.addAll(fullSync.getRemoved());
-      }
     }
 
     /**
@@ -774,7 +553,7 @@ public class JCRLocalBoxDrive extends JCRLocalCloudDrive implements UserTokenRef
       return postponed.size() > 0 && (lastPostponed != null ? prevPostponedNumber > postponedNumber : true);
     }
 
-    protected BoxEvent nextEvent() throws NoSuchElementException, CloudDriveException {
+    protected BoxEvent nextEvent() throws NoSuchElementException, AuthTokenException, CloudDriveException {
       BoxEvent event = null;
       if (nextEvent != null) {
         event = nextEvent;

@@ -790,19 +790,21 @@ public abstract class JCRLocalCloudDrive extends CloudDrive {
     /**
      * Processing logic.
      * 
+     * @throws CloudDriveAccessException
      * @throws CloudDriveException
      * @throws RepositoryException
      */
-    protected abstract void process() throws CloudDriveException, RepositoryException;
+    protected abstract void process() throws CloudDriveAccessException, CloudDriveException, RepositoryException;
 
     /**
      * Start command execution. If command will fail due to provider error, the execution will be retried
      * {@link CloudDriveConnector#PROVIDER_REQUEST_ATTEMPTS} times before the throwing an exception.
      * 
+     * @throws CloudDriveAccessException
      * @throws CloudDriveException
      * @throws RepositoryException
      */
-    protected void exec() throws CloudDriveException, RepositoryException {
+    protected void exec() throws CloudDriveAccessException, CloudDriveException, RepositoryException {
       startTime.set(System.currentTimeMillis());
 
       try {
@@ -1053,7 +1055,7 @@ public abstract class JCRLocalCloudDrive extends CloudDrive {
      * {@inheritDoc}
      */
     @Override
-    protected void process() throws CloudDriveException, RepositoryException {
+    protected void process() throws CloudDriveAccessException, CloudDriveException, RepositoryException {
       // synchronize
       try {
         syncFiles();

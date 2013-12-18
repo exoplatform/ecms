@@ -54,9 +54,7 @@ import java.util.Calendar;
 import java.util.Date;
 import java.util.HashSet;
 import java.util.Iterator;
-import java.util.LinkedHashSet;
 import java.util.List;
-import java.util.NoSuchElementException;
 import java.util.Set;
 
 /**
@@ -139,7 +137,7 @@ public class BoxAPI {
       this.iter = nextChunk();
     }
 
-    protected Iterator<BoxItem> nextChunk() throws CloudDriveException {
+    protected Iterator<BoxItem> nextChunk() throws AuthTokenException, CloudDriveException {
       BoxFolderRequestObject obj = BoxFolderRequestObject.getFolderItemsRequestObject(limit, offset);
       obj.addField("id");
       obj.addField("parent");
@@ -177,6 +175,10 @@ public class BoxAPI {
       } catch (BoxServerException e) {
         throw new BoxException("Error reading folder items: " + e.getMessage(), e);
       } catch (AuthFatalFailureException e) {
+        if (e.isCallerResponsibleForFix()) {
+          // we need new access token (refresh token already expired here)
+          throw new AuthTokenException("Authentication failure. Reauthenticate.");
+        }
         throw new BoxException("Authentication error on folder items: " + e.getMessage(), e);
       }
     }
@@ -198,7 +200,7 @@ public class BoxAPI {
 
     List<BoxEvent> nextChunk;
 
-    EventsIterator(long streamPosition) throws BoxException {
+    EventsIterator(long streamPosition) throws BoxException, AuthTokenException {
       this.streamPosition = streamPosition;
       this.limit = 1000;
 
@@ -206,7 +208,7 @@ public class BoxAPI {
       this.iter = nextChunk();
     }
 
-    protected BoxEventCollection events(long position) throws BoxException {
+    BoxEventCollection events(long position) throws BoxException, AuthTokenException {
       try {
         BoxEventRequestObject request = BoxEventRequestObject.getEventsRequestObject(position <= -1 ? BoxEventRequestObject.STREAM_POSITION_NOW
                                                                                                    : position);
@@ -221,6 +223,10 @@ public class BoxAPI {
       } catch (BoxServerException e) {
         throw new BoxException("Error reading Events service: " + e.getMessage(), e);
       } catch (AuthFatalFailureException e) {
+        if (e.isCallerResponsibleForFix()) {
+          // we need new access token (refresh token already expired here)
+          throw new AuthTokenException("Authentication failure. Reauthenticate.");
+        }
         throw new BoxException("Authentication error for Events service: " + e.getMessage(), e);
       }
     }
@@ -228,7 +234,7 @@ public class BoxAPI {
     /**
      * {@inheritDoc}
      */
-    protected Iterator<BoxEvent> nextChunk() throws BoxException {
+    protected Iterator<BoxEvent> nextChunk() throws BoxException, AuthTokenException {
       List<BoxEvent> events;
       if (nextChunk == null) {
         BoxEventCollection ec = events(streamPosition);
@@ -351,7 +357,7 @@ public class BoxAPI {
   /**
    * Id of Trash folder on Box.
    */
-  public static final String      BOX_TRASH_ID              = "1";
+  public static final String      BOX_TRASH_ID             = "1";
 
   /**
    * Not official part of the path used in file services with Box API.
@@ -682,7 +688,7 @@ public class BoxAPI {
     }
   }
 
-  EventsIterator getEvents(long streamPosition) throws BoxException {
+  EventsIterator getEvents(long streamPosition) throws BoxException, AuthTokenException {
     return new EventsIterator(streamPosition);
   }
 }

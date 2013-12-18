@@ -192,7 +192,7 @@ public class DriveService implements ResourceContainer {
                 files =sync.getFiles();
                 removed = sync.getRemoved();
               } catch (CloudDriveAccessException e) {
-                LOG.warn("Request to cloud drive forbidden or revoked.", e);
+                LOG.warn("Request to cloud drive expired, forbidden or revoked.", e);
                 // XXX client should treat this status in special way and obtain new credentials using given
                 // provider
                 return Response.status(Status.FORBIDDEN).entity(local.getUser().getProvider()).build();

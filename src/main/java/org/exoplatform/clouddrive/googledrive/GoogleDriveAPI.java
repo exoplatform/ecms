@@ -356,18 +356,18 @@ class GoogleDriveAPI {
   /**
    * Credentials for request authentication.
    */
-  protected final Credential credential;
+  final Credential credential;
 
   /**
    * Drive services API.
    */
-  protected final Drive      drive;
+  final Drive      drive;
 
   /**
    * User info API.
    */
   // TODO cleanup
-  protected final Oauth2     oauth2;
+  final Oauth2     oauth2;
 
   /**
    * Create Google Drive API from OAuth2 authentication code.
@@ -455,9 +455,7 @@ class GoogleDriveAPI {
    * @param tokenStore
    * @return GoogleAuthorizationCodeFlow instance.
    */
-  protected GoogleAuthorizationCodeFlow createFlow(String clientId,
-                                                   String clientSecret,
-                                                   CredentialStore tokenStore) {
+  GoogleAuthorizationCodeFlow createFlow(String clientId, String clientSecret, CredentialStore tokenStore) {
     HttpTransport httpTransport = new NetHttpTransport();
     JacksonFactory jsonFactory = new JacksonFactory();
     // (access_type=offline) if application needs to refresh access tokens
