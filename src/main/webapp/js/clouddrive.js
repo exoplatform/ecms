@@ -1449,7 +1449,7 @@
 		this.init = function() {
 			// Add Connect Drive action
 			// init CloudDriveConnectDialog popup
-			$("i[class*='uiIconEcmsConnect'").each(function() {
+			$("i[class*='uiIconEcmsConnect']").each(function() {
 				if (!$(this).data("cd-connect")) {
 					var providerId = $(this).attr("provider-id");
 					if (providerId) {
