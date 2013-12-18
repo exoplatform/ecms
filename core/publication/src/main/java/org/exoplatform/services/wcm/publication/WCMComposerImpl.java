@@ -24,8 +24,6 @@ import org.exoplatform.management.jmx.annotations.NameTemplate;
 import org.exoplatform.management.jmx.annotations.Property;
 import org.exoplatform.management.rest.annotations.RESTEndpoint;
 import org.exoplatform.portal.webui.util.Util;
-import org.exoplatform.services.cache.CacheService;
-import org.exoplatform.services.cache.ExoCache;
 import org.exoplatform.services.cms.documents.TrashService;
 import org.exoplatform.services.cms.i18n.MultiLanguageService;
 import org.exoplatform.services.cms.link.LinkManager;
@@ -82,8 +80,6 @@ public class WCMComposerImpl implements WCMComposer, Startable {
   private ACLSessionProviderService aclSessionProviderService;
 
   private TrashService trashService;
-  /** The cache. */
-  private ExoCache<String, Object> cache;
 
   /** The log. */
   private static final Log LOG = ExoLogger.getLogger(WCMComposerImpl.class.getName());
@@ -119,7 +115,6 @@ public class WCMComposerImpl implements WCMComposer, Startable {
     templateService = WCMCoreUtils.getService(TemplateService.class);
     wcmService = WCMCoreUtils.getService(WCMService.class);
     multiLanguageService = WCMCoreUtils.getService(MultiLanguageService.class);
-    cache = WCMCoreUtils.getService(CacheService.class).getCacheInstance("wcm.composer");
     aclSessionProviderService = WCMCoreUtils.getService(ACLSessionProviderService.class);
 
     usedLanguages = new ArrayList<String>();
@@ -544,12 +539,6 @@ public class WCMComposerImpl implements WCMComposer, Startable {
   }
 
   @Managed
-  @ManagedDescription("How many nodes in the cache ?")
-  public int getCachedEntries() {
-    return this.cache.getCacheSize();
-  }
-
-  @Managed
   @ManagedDescription("Used Languages")
   public List<String> getUsedLanguages() {
     return usedLanguages;
@@ -599,7 +588,6 @@ public class WCMComposerImpl implements WCMComposer, Startable {
 
   /**
    * Gets all document nodetypes and write a query statement
-   * @param repository the repository's name
    * @return a part of the query allow search all document node and taxonomy link also. Return null if there is any exception.
    */
   private String getTemplatesSQLFilter() {
@@ -608,7 +596,6 @@ public class WCMComposerImpl implements WCMComposer, Startable {
   }
   /**
    * Update all document nodetypes and write a query statement
-   * @param repository the repository's name
    * @return a part of the query allow search all document node and taxonomy link also. Return null if there is any exception.
    */
   public String updateTemplatesSQLFilter() {    
