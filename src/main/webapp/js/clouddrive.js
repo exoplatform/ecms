@@ -582,7 +582,7 @@
 							}
 						}
 	
-						utils.log("DONE: Synchronized " + changed + " changes from Cloud Drive on "
+						utils.log("DONE: Synchronized " + changed + " changes from Cloud Drive associated with "
 						    + nodeWorkspace + ":" + nodePath);
 	
 						if (changed > 0 && sync.contextDrive == contextDrive) {
