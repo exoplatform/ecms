@@ -458,8 +458,8 @@ public class BoxAPI {
     this.client.addOAuthRefreshListener(token);
     this.client.authenticateFromSecureStorage(token);
 
-    // finally init changes link
-    updateChangesLink();
+    // XXX changes link will be loaded on demand
+    // updateChangesLink();
   }
 
   /**
