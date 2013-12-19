@@ -117,7 +117,7 @@ public class RenameConnector implements ResourceContainer {
       // Get renamed node
       String[] workspaceAndPath = parseWorkSpaceNameAndNodePath(oldPath);
       Node renamedNode = (Node)WCMCoreUtils.getService(NodeFinder.class)
-              .getItem(this.getSession(workspaceAndPath[0]), workspaceAndPath[1], true);
+              .getItem(this.getSession(workspaceAndPath[0]), workspaceAndPath[1], false);
 
       String oldName = renamedNode.getName();
       if (oldName.indexOf('.') != -1 && renamedNode.isNodeType(NodetypeConstant.NT_FILE)) {
