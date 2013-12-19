@@ -41,6 +41,7 @@ import javax.jcr.nodetype.ConstraintViolationException;
 import javax.jcr.nodetype.NodeType;
 import javax.jcr.version.VersionException;
 
+import org.exoplatform.ecm.webui.component.explorer.UIDocumentInfo;
 import org.exoplatform.ecm.webui.component.explorer.UIJCRExplorer;
 import org.exoplatform.ecm.webui.component.explorer.UIWorkingArea;
 import org.exoplatform.ecm.webui.component.explorer.control.filter.IsNotInTrashFilter;
@@ -48,6 +49,8 @@ import org.exoplatform.ecm.webui.component.explorer.control.filter.IsNotNtFileFi
 import org.exoplatform.ecm.webui.component.explorer.control.filter.IsNotTrashHomeNodeFilter;
 import org.exoplatform.ecm.webui.component.explorer.control.filter.IsPasteableFilter;
 import org.exoplatform.ecm.webui.component.explorer.control.listener.UIWorkingAreaActionListener;
+import org.exoplatform.ecm.webui.component.explorer.sidebar.UITreeExplorer;
+import org.exoplatform.ecm.webui.component.explorer.sidebar.UITreeNodePageIterator;
 import org.exoplatform.ecm.webui.utils.JCRExceptionManager;
 import org.exoplatform.ecm.utils.lock.LockUtil;
 import org.exoplatform.ecm.webui.utils.PermissionUtil;
@@ -70,6 +73,7 @@ import org.exoplatform.webui.config.annotation.ComponentConfig;
 import org.exoplatform.webui.config.annotation.EventConfig;
 import org.exoplatform.webui.core.UIApplication;
 import org.exoplatform.webui.core.UIComponent;
+import org.exoplatform.webui.core.UIPageIterator;
 import org.exoplatform.webui.event.Event;
 import org.exoplatform.webui.exception.MessageException;
 import org.exoplatform.webui.ext.filter.UIExtensionFilter;
@@ -184,7 +188,33 @@ public class PasteManageComponent extends UIAbstractManagerComponent {
       return;
     }
     session.save();
+
+
+    // Get paginator of UITreeExplorer && UIDocumentInfo
+    String currentPath = uiExplorer.getCurrentNode().getPath();
+    UITreeNodePageIterator extendedPageIterator = null;
+    UITreeExplorer uiTreeExplorer = uiExplorer.findFirstComponentOfType(UITreeExplorer.class);
+    if (uiTreeExplorer != null) {
+      extendedPageIterator = uiTreeExplorer.getUIPageIterator(currentPath);
+    }
+    UIPageIterator contentPageIterator = uiExplorer.findComponentById(UIDocumentInfo.CONTENT_PAGE_ITERATOR_ID);
+
+    // Get current page index
+    int currentPage = 1;
+    if (contentPageIterator != null) {
+      currentPage = contentPageIterator.getCurrentPage();
+    }
+
+    // Rebuild screen after pasting new content
     uiExplorer.updateAjax(event);
+
+    // Because after updateAjax, paginator automatically set to first page then we need set again current pageindex
+    if (contentPageIterator != null) {
+      contentPageIterator.setCurrentPage(currentPage);
+    }
+    if (extendedPageIterator != null) {
+      extendedPageIterator.setCurrentPage(currentPage);
+    }
   }
 
   public static void processPaste(ClipboardCommand currentClipboard, String destPath, Event<?> event)
