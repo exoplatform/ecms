@@ -177,7 +177,7 @@ public class UIDocumentInfo extends UIBaseNodePresentation {
 
   final protected static String CATEGORY_YEAR                      = "UIDocumentInfo.label.EarlierThisYear";
 
-  final protected static String CONTENT_PAGE_ITERATOR_ID           = "ContentPageIterator";
+  final public static String CONTENT_PAGE_ITERATOR_ID           = "ContentPageIterator";
 
   final protected static String CONTENT_TODAY_PAGE_ITERATOR_ID     = "ContentTodayPageIterator";
 
