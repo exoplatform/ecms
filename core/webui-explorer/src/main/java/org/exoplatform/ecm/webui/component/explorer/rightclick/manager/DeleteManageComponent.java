@@ -174,10 +174,9 @@ public class DeleteManageComponent extends UIAbstractManagerComponent {
   else {
       WCMComposer wcmComposer = WCMCoreUtils.getService(WCMComposer.class);
       List<Node> categories = WCMCoreUtils.getService(TaxonomyService.class).getAllCategories(node);
-
+      String nodeName = node.getName();
       String parentPath = node.getParent().getPath();
       String parentWSpace = node.getSession().getWorkspace().getName();
-
       wcmComposer.updateContent(parentWSpace, node.getPath(), new HashMap<String, String>());
       boolean isNodeReferenceable = Utils.isReferenceable(node);
       String nodeUUID = null;
@@ -202,7 +201,9 @@ public class DeleteManageComponent extends UIAbstractManagerComponent {
         //Broadcast the event when user move node to Trash
         ListenerService listenerService =  WCMCoreUtils.getService(ListenerService.class);
         ActivityCommonService activityService = WCMCoreUtils.getService(ActivityCommonService.class);
-        Node parent = node.getParent();
+        TrashService trashService = WCMCoreUtils.getService(TrashService.class);
+        Node parent = trashService.getTrashHomeNode();
+        node = parent.getNode(nodeName);
         if (node.getPrimaryNodeType().getName().equals(NodetypeConstant.NT_FILE)) {        
           if (activityService.isBroadcastNTFileEvents(node)) {
             listenerService.broadcast(ActivityCommonService.FILE_REMOVE_ACTIVITY, parent, node);
