@@ -1657,7 +1657,7 @@
   -->
   <UISelectDocumentForm>
     <label>
-      <selectTemplate>Select your template in the list below</selectTemplate>
+      <selectTemplate>Chọn mẫu tài liệu từ danh sách dưới đây</selectTemplate>
       <ThumbnailView>Xem hình thu nhỏ</ThumbnailView>
       <ListView>Hiển thị dạng danh sách</ListView>
       <Cancel>#{word.cancel}</Cancel>

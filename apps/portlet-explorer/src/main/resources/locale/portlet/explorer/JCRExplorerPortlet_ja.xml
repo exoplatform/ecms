@@ -1657,7 +1657,7 @@
   -->
   <UISelectDocumentForm>
     <label>
-      <selectTemplate>Select your template in the list below</selectTemplate>
+      <selectTemplate>Select your template from the list below</selectTemplate>
       <ThumbnailView>サムネイル表示</ThumbnailView>
       <ListView>一覧表示</ListView>
       <Cancel>#{word.cancel}</Cancel>

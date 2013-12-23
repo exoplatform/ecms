@@ -114,9 +114,9 @@
       <GeneralDrives>الأقراص الرئيسية</GeneralDrives>
     </title>
     <msg>
-      <no-view-found>There is no view available according to your access permissions in drive '{0}'.</no-view-found>
-      <access-denied>Access denied. You may not have permission in the workspace of drive '{0}'.</access-denied>
-      <workspace-not-exist>Drive '{0}' was stored in one unrecognized workspace. Please reconfigure this drive.</workspace-not-exist>
+      <no-view-found>ليس هناك مشهد متاح لك بالرجوع الى صلاحيّاتك على القرص '{0}'.</no-view-found>
+      <access-denied>غير مسموح بالدخول! ربما ، ليست لديك الصلاحيّات الكافية على مساحة العمل الخاصّة بالقرص '{0}'.</access-denied>
+      <workspace-not-exist>تم تخزين القرص '{0}' في مساحة عمل أخرى غير معروفة. يرجى إعادة تهيئته.</workspace-not-exist>
     </msg>
   </UIDrivesBrowser>
 
@@ -1480,7 +1480,7 @@
       <filetype-error>لا يمكن الاستيراد. ربّما طرأ خطأ أثناء تحميل الملفّ.</filetype-error>
       <mimetype-invalid>يمكن استيراد ملفات من نوع 'xml' أو 'zip' فحسب.</mimetype-invalid>
       <access-denied>غير مسموح. لا يمكنك الاستيراد هناك.</access-denied>
-      <constraint-violation-exception>Impossible to import data. The type '{0}' is not allowed in this location.</constraint-violation-exception>
+      <constraint-violation-exception>لا يمكنك استيراد البيانات. نوع العقدة '{0}' غير متاح في هذا المكان.</constraint-violation-exception>
       <item-exists-exception>وردت عقدة ذات مرجع تحتوي على نفس الـمعرّف (UUID) مع عقدة موجودة مُسبقا في فضاء التخزين.</item-exists-exception>
     </msg>
   </UIImportNode>
@@ -2119,7 +2119,7 @@
       <access-denied>غير مسموح بالدخول. ليس لك الصلاحيّات الكافية لاضافة صورة مصغرة الى هذه العقدة.</access-denied>
       <confirm-delete>هل أنت متأكد من حذف الصورة المصغرة؟</confirm-delete>
       <is-checked-in>هذه العقدة في حالة مراجعة. يُرجى انهاء المراجعة قبل الشروع في أي اجراء آخر.</is-checked-in>
-      <fileName-error>Please select a file to upload.</fileName-error>
+      <fileName-error>الرجاء اختيار ملف لتحميله.</fileName-error>
     </msg>
     <title>
       <remove-thumbnail>حذف الصورة المصغرة.</remove-thumbnail>
