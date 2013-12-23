@@ -18,6 +18,7 @@
 package org.exoplatform.ecm.webui.component.explorer.rightclick.manager;
 
 
+import org.apache.commons.lang.StringEscapeUtils;
 import org.apache.commons.lang.StringUtils;
 import org.apache.commons.lang.Validate;
 import org.exoplatform.ecm.webui.component.explorer.UIConfirmMessage;
@@ -495,7 +496,7 @@ public class DeleteManageComponent extends UIAbstractManagerComponent {
         Node node = this.getNodeByPath(nodePath);
         if(checkToMoveToTrash) deleteNotice = "UIWorkingArea.msg.feedback-delete";
         else deleteNotice = "UIWorkingArea.msg.feedback-delete-permanently";
-        deleteNoticeParam = Utils.getTitle(node);
+        deleteNoticeParam = StringEscapeUtils.unescapeHtml(Utils.getTitle(node));
         if (node != null) {
           processRemoveOrMoveToTrash(node.getPath(), node, event, false, checkToMoveToTrash);
         }        
@@ -511,6 +512,7 @@ public class DeleteManageComponent extends UIAbstractManagerComponent {
     }
     deleteNotice = res.getString(deleteNotice);
     deleteNotice = deleteNotice.replace("{" + 0 + "}", deleteNoticeParam);
+    deleteNotice = StringEscapeUtils.escapeHtml(deleteNotice);
     if(checkToMoveToTrash) {
       String undoLink = getUndoLink(nodePath);      
       uiWorkingArea.setDeleteNotice(deleteNotice);
@@ -674,7 +676,7 @@ public class DeleteManageComponent extends UIAbstractManagerComponent {
     } else {    	
     	Node node = deleteManageComponent.getNodeByPath(nodePath);
       if(node != null)
-      	nodeName = Utils.getTitle(node);
+      	nodeName = StringEscapeUtils.unescapeHtml(Utils.getTitle(node));
       contentType = deleteManageComponent.getContentType(nodePath);
     	if(contentType == FILE_TYPE)
     		uiConfirmMessage.setId(DELETE_FILE_CONFIRM_TITLE);
