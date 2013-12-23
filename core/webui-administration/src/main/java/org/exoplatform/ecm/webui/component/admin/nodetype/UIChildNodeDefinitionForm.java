@@ -246,6 +246,26 @@ public class UIChildNodeDefinitionForm extends UIFormInputSetWithAction {
       event.getRequestContext().addUIComponentToUpdateByAjax(uiForm.getParent());
     }
   }
+  
+  /**
+   * check if a nodeName is valid
+   * @param nodeName
+   * @return
+   * true if the nodeName is valid
+   */
+  private static boolean isValidNodeName(String nodeName){
+    if(!"*".equals(nodeName.trim())){
+      for(int i = 0; i < nodeName.length(); i ++){
+        char c = nodeName.charAt(i);
+        if(Character.isLetter(c) || Character.isDigit(c) || Character.isSpaceChar(c) || c=='_'
+           || c=='-' || c=='.' || c==':' || c=='@' || c=='^' || c=='[' || c==']' || c==',') {
+          continue ;
+        }
+        return false;
+      }
+    }
+    return true;
+  }
 
   static public class EditChildNodeActionListener extends EventListener<UINodeTypeForm> {
     public void execute(Event<UINodeTypeForm> event) throws Exception {
@@ -258,15 +278,11 @@ public class UIChildNodeDefinitionForm extends UIFormInputSetWithAction {
         uiApp.addMessage(new ApplicationMessage("UIChildNodeDefinitionForm.msg.child-name", null));
         return;
       }
-      for(int i = 0; i < nodeName.length(); i ++){
-        char c = nodeName.charAt(i);
-        if(Character.isLetter(c) || Character.isDigit(c) || Character.isSpaceChar(c) || c=='_'
-          || c=='-' || c=='.' || c==':' || c=='@' || c=='^' || c=='[' || c==']' || c==',') {
-          continue ;
-        }
+      String childNodeName = nodeName.split(":",2)[1];
+      if(!isValidNodeName(childNodeName)){
         uiApp.addMessage(new ApplicationMessage(
-            "UIChildNodeDefinitionForm.msg.child-invalid", null,
-            ApplicationMessage.WARNING));
+          "UIChildNodeDefinitionForm.msg.child-invalid", null,
+          ApplicationMessage.WARNING));
         return;
       }
       NodeDefinitionValue nodeDefValue =
@@ -298,15 +314,10 @@ public class UIChildNodeDefinitionForm extends UIFormInputSetWithAction {
         uiApp.addMessage(new ApplicationMessage("UIChildNodeDefinitionForm.msg.child-name", null));
         return;
       }
-      for(int i = 0; i < childNodeName.length(); i ++){
-        char c = childNodeName.charAt(i);
-        if(Character.isLetter(c) || Character.isDigit(c) || Character.isSpaceChar(c) || c=='_'
-          || c=='-' || c=='.' || c==':' || c=='@' || c=='^' || c=='[' || c==']' || c==',') {
-          continue ;
-        }
+      if(!isValidNodeName(childNodeName)){
         uiApp.addMessage(new ApplicationMessage("UIChildNodeDefinitionForm.msg.child-invalid",
-                                                null,
-                                                ApplicationMessage.WARNING));
+                                              null,
+                                              ApplicationMessage.WARNING));
         return;
       }
       if(prefix != null && prefix.length() > 0) {
@@ -378,15 +389,10 @@ public class UIChildNodeDefinitionForm extends UIFormInputSetWithAction {
         uiApp.addMessage(new ApplicationMessage("UIChildNodeDefinitionForm.msg.child-name", null));
         return;
       }
-      for(int i = 0; i < childNodeName.length(); i ++){
-        char c = childNodeName.charAt(i);
-        if(Character.isLetter(c) || Character.isDigit(c) || Character.isSpaceChar(c) || c=='_'
-          || c=='-' || c=='.' || c==':' || c=='@' || c=='^' || c=='[' || c==']' || c==',') {
-          continue ;
-        }
-        uiApp.addMessage(new ApplicationMessage(
-            "UIChildNodeDefinitionForm.msg.child-invalid", null,
-            ApplicationMessage.WARNING));
+      if(!isValidNodeName(childNodeName)){
+        uiApp.addMessage(new ApplicationMessage("UIChildNodeDefinitionForm.msg.child-invalid",
+                                              null,
+                                              ApplicationMessage.WARNING));
         return;
       }
       if (prefix != null && prefix.length() > 0) {
