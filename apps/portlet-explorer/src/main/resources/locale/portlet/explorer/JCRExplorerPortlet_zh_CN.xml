@@ -331,7 +331,7 @@
       <keyword-null>没有搜索的关键字。</keyword-null>
       <not-found>没有找到结果。</not-found>
       <keyword-not-allow>不允许使用此关键字。</keyword-not-allow>
-      <is-not-referenable>节点"{0}"不能是能被引用。</is-not-referenable>
+      <is-not-referenable>节点'{0}'不能是能被引用。</is-not-referenable>
       <access-denied>访问被拒绝。你在此节点中没有编辑权限。</access-denied>
       <access-add-denied>访问被拒绝。你在此节点中没有添加权限。</access-add-denied>
       <item-existed>此节点已存在。它不能有相同的名称作为其兄弟。</item-existed>
