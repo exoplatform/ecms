@@ -114,9 +114,9 @@
       <GeneralDrives>Allgemeine Laufwerke</GeneralDrives>
     </title>
     <msg>
-      <no-view-found>Mit Ihren Berechtigungen ist keine Ansicht in Laufwerk "{0}" verfügbar.</no-view-found>
-      <access-denied>Zugriff verweigert. Sie haben keine Berechtigung in dem Arbeitsbereich des Laufwerks "{0}".</access-denied>
-      <workspace-not-exist>Das Laufwerk "{0}" wurde in einem unbekannten Arbeitsbereich gespeichert. Bitte konfigurieren Sie das Laufwerk neu.</workspace-not-exist>
+      <no-view-found>Mit Ihren Berechtigungen ist keine Ansicht in Laufwerk '{0}' verfügbar.</no-view-found>
+      <access-denied>Zugriff verweigert. Sie haben keine Berechtigung in dem Arbeitsbereich des Laufwerks '{0}'.</access-denied>
+      <workspace-not-exist>Das Laufwerk '{0}' wurde in einem unbekannten Arbeitsbereich gespeichert. Bitte konfigurieren Sie das Laufwerk neu.</workspace-not-exist>
     </msg>
   </UIDrivesBrowser>
 
@@ -207,8 +207,8 @@
       <newName-same-oldName>Der neue Name ist bereits vorhanden. Bitte überprüfen Sie erneut.</newName-same-oldName>
       <version-exception>Dieser Knoten (oder der Vorgänger dieses Knotens) wird nicht ausgecheckt.</version-exception>
       <lock-exception>Der Knoten ist gesperrt. Entsperren vor Wiederbenennung.</lock-exception>
-      <constraintViolation-exception>Fehler beim Umbenennen des Knotens "{0}". Bitte überprüfen.</constraintViolation-exception>
-      <unknown-prefix>Präfix "{0}" wurde noch nicht registriert.</unknown-prefix>
+      <constraintViolation-exception>Fehler beim Umbenennen des Knotens '{0}'. Bitte überprüfen.</constraintViolation-exception>
+      <unknown-prefix>Präfix '{0}' wurde noch nicht registriert.</unknown-prefix>
       <rename-error>Fehler beim Umbenennen dieses Knotens. Bitte überprüfen Sie erneut.</rename-error>
     </msg>
   </UIRenameForm>
@@ -418,7 +418,7 @@
     </label>
     <title>Ordner hinzufügen/bearbeiten</title>
     <msg>
-      <addFolder-successful>Der Ordner "{0}" wurde erfolgreich hinzugefügt.</addFolder-successful>
+      <addFolder-successful>Der Ordner '{0}' wurde erfolgreich hinzugefügt.</addFolder-successful>
       <name-invalid>Bitte geben Sie den Ordnernamen ein.</name-invalid>
       <title-invalid>Bitte geben Sie den Ordnertitel ein.</title-invalid>
       <name-not-allowed>Dieser Name ist nicht erlaubt.</name-not-allowed>
@@ -446,19 +446,19 @@
     </title>
     <msg>
       <!-- Delte one node is not in trash and have no relation -->
-      <confirm-delete>Möchten Sie das Element "{0}" wirklich löschen?</confirm-delete>
-      <confirm-delete-file>Möchten Sie wirklich die Datei "{0}" löschen ?</confirm-delete-file>
-      <confirm-delete-folder>Möchten Sie wirklich den Ordner "{0}" und alle Unterordner löschen ?</confirm-delete-folder>
+      <confirm-delete>Möchten Sie das Element '{0}' wirklich löschen?</confirm-delete>
+      <confirm-delete-file>Möchten Sie wirklich die Datei '{0}' löschen ?</confirm-delete-file>
+      <confirm-delete-folder>Möchten Sie wirklich den Ordner '{0}' und alle Unterordner löschen ?</confirm-delete-folder>
       
       <!-- Delte one node is in trash and have no relation -->
-      <confirm-delete-permanently>Möchten Sie wirklich das Element "{0}" dauerhaft entfernen?</confirm-delete-permanently>
-      <confirm-delete-file-permanently>Möchten Sie wirklich die Datei "{0}" dauerhaft entfernen?</confirm-delete-file-permanently>
-      <confirm-delete-folder-permanently>Möchten Sie den Ordner "{0}" und alle Unterordner dauerhaft wirklich entfernen?</confirm-delete-folder-permanently>
+      <confirm-delete-permanently>Möchten Sie wirklich das Element '{0}' dauerhaft entfernen?</confirm-delete-permanently>
+      <confirm-delete-file-permanently>Möchten Sie wirklich die Datei '{0}' dauerhaft entfernen?</confirm-delete-file-permanently>
+      <confirm-delete-folder-permanently>Möchten Sie den Ordner '{0}' und alle Unterordner dauerhaft wirklich entfernen?</confirm-delete-folder-permanently>
       
       <!-- Delte one node is not in trash and have relations -->
-      <confirm-delete-has-relations>Möchten Sie das Element "{0}" und seine Referenzen wirklich löschen?</confirm-delete-has-relations>
-      <confirm-delete-file-has-relations>Möchten Sie die Datei "{0}" und ihre Referenzen wirklich löschen?</confirm-delete-file-has-relations>
-      <confirm-delete-folder-has-relations>Möchten Sie den Ordner "{0}" und seine Referenzen wirklich löschen?</confirm-delete-folder-has-relations>
+      <confirm-delete-has-relations>Möchten Sie das Element '{0}' und seine Referenzen wirklich löschen?</confirm-delete-has-relations>
+      <confirm-delete-file-has-relations>Möchten Sie die Datei '{0}' und ihre Referenzen wirklich löschen?</confirm-delete-file-has-relations>
+      <confirm-delete-folder-has-relations>Möchten Sie den Ordner '{0}' und seine Referenzen wirklich löschen?</confirm-delete-folder-has-relations>
       
       <!-- Delte multiple nodes, not in Trash, have no relations -->
       <confirm-delete-multi-nodes-generic>Möchten Sie die {0} ausgewählten Elemente wirklich löschen?</confirm-delete-multi-nodes-generic>  
@@ -487,15 +487,15 @@
       <confirm-delete-multi-nodes-file-and-folder-have-relations>Möchten Sie die ausgewählten {0} Dateien, ihre Referenzen, Ordner und alle Unterordner wirklich löschen?</confirm-delete-multi-nodes-file-and-folder-have-relations>
       <confirm-delete-multi-nodes-generic-and-file-and-folder-have-relations>Möchten Sie die ausgewählten {0} Elemente, Dateien, ihre Referenzen, Ordner und alle Unterordner wirklich löschen?</confirm-delete-multi-nodes-generic-and-file-and-folder-have-relations>
       
-      <feedback-delete>"{0}" wurde erfolgreich gelöscht.</feedback-delete>
+      <feedback-delete>'{0}' wurde erfolgreich gelöscht.</feedback-delete>
       <feedback-delete-multi>{0} Elemente wurden erfolgreich gelöscht.</feedback-delete-multi>      
-      <feedback-delete-permanently>"{0}" wurde dauerhaft entfernt.</feedback-delete-permanently>
+      <feedback-delete-permanently>'{0}' wurde dauerhaft entfernt.</feedback-delete-permanently>
       <feedback-delete-permanently-multi>{0} Elemente wurden dauerhaft entfernt.</feedback-delete-permanently-multi>
       <undo-delete>Rückgängig</undo-delete>
-      <feedback-restore>"{0}" wurde erfolgreich wiederhergestellt.</feedback-restore>
+      <feedback-restore>'{0}' wurde erfolgreich wiederhergestellt.</feedback-restore>
       <feedback-restore-multi>{0} Elemente wurden erfolgreich wiederhergestellt.</feedback-restore-multi>
       
-      <confirm-restore>Ein Knoten mit dem gleichen Namen ist bereits im alten Speicherort des Knotens "{0}" vorhanden. Möchten Sie diesen Knoten wirklich wiederherstellen?</confirm-restore>
+      <confirm-restore>Ein Knoten mit dem gleichen Namen ist bereits im alten Speicherort des Knotens '{0}' vorhanden. Möchten Sie diesen Knoten wirklich wiederherstellen?</confirm-restore>
       <confirm-move>Möchten Sie diese(n) Knoten wirklich verschieben?</confirm-move>
       <node-cut>Der Knoten '{0}' wurde ausgeschnitten.</node-cut>
       <execute-successfully>Die benutzerdefinierte Aktion '{0}' wurde ausgeführt.</execute-successfully>
@@ -715,7 +715,7 @@
       <node-checkedin>Sie müssen diesen Knoten auschecken, bevor eine Eigenschaft hinzufügen.</node-checkedin>
       <can-not-add>You cannot add properties to this node. This is only allowed for the node type nt:unstructured.</can-not-add>
       <propertyName-invalid>The property name must include namespace (e.g. namespace:name).</propertyName-invalid>
-      <propertyName-exist>Die Eigenschaft "{0}" ist bereits vorhanden.</propertyName-exist>
+      <propertyName-exist>Die Eigenschaft '{0}' ist bereits vorhanden.</propertyName-exist>
       <propertyValu-null>Einige Werte sind möglicherweise null oder leer.</propertyValu-null>
       <valueFormatEx>You cannot assign a multiple-valued value to a single-valued property.</valueFormatEx>
       <number-format-exception>Your input value has the wrong format.</number-format-exception>
@@ -1480,7 +1480,7 @@
       <filetype-error>Kann die hochgeladene Datei nicht importieren. Die .xml Datei könnte ungültig sein.</filetype-error>
       <mimetype-invalid>Sie können nur .xml oder .zip Dateien importieren.</mimetype-invalid>
       <access-denied>Zugriff verweigert. Sie haben kein Recht Elemente hier zu Importieren.</access-denied>
-      <constraint-violation-exception>Daten können nicht importiert werden. Der Knotentyp "{0}" ist nicht erlaubt.</constraint-violation-exception>
+      <constraint-violation-exception>Daten können nicht importiert werden. Der Knotentyp '{0}' ist nicht erlaubt.</constraint-violation-exception>
       <item-exists-exception>Der referenzierte Knoten hat dieselbe UUID wie ein im Arbeitsbereich bereits existierender Knoten.</item-exists-exception>
     </msg>
   </UIImportNode>
@@ -1500,7 +1500,7 @@
     <title>Label hinzufügen</title>
     <msg>
       <label-invalid>Die Beschreibung enthält einige ungültige Zeichen.</label-invalid>
-      <label-exist>"{0}" ist bereits vorhanden.</label-exist>
+      <label-exist>'{0}' ist bereits vorhanden.</label-exist>
     </msg>
   </UILabelForm>
   <!--
@@ -1684,7 +1684,7 @@
     <msg>
       <cannot-save>Während des Speicherns des Dokuments ist es zu einem Fehler gekommen.</cannot-save>
       <in-versioning>Bitte checken Sie den aktuellen Knoten aus bevor Sie einen neuen hinzufügen.</in-versioning>
-      <not-support>Die Vorlage von "{0}" kann nicht geladen werden.</not-support>
+      <not-support>Die Vorlage von '{0}' kann nicht geladen werden.</not-support>
       <value-invalid>'{0}' ist ein benötigter Wert.</value-invalid>
       <repository-exception>Während des Speicherns des Dokuments ist es zu einem Fehler gekommen.</repository-exception>
       <!--DMS 2.4.x; ECM-3543-->
@@ -1780,7 +1780,7 @@
     <msg>
       <repository-exception>Sie können diese Aktion nicht speichern. Der übergebene Name enthält Sonderzeichen.</repository-exception>
       <numberformat-exception>Sie können diese Aktion nicht speichern. Der übergebene Name muss in nummerischem Format sein.</numberformat-exception>
-      <existed-action>Der Aktionsname "{0}" ist bereits vorhanden. Wählen Sie bitte einen anderen Namen.</existed-action>
+      <existed-action>Der Aktionsname '{0}' ist bereits vorhanden. Wählen Sie bitte einen anderen Namen.</existed-action>
       <unable-add-action>Diese Aktion kann nicht hinzugefügt werden.</unable-add-action>
       <unable-add>Kann diese Aktion nicht hinzufügen. Bei diesem Knoten handelt es sich entweder um den Stammknoten oder Sie haben keine Berechtigung.</unable-add>
       <not-support>Der Dialog '{0}' wird nicht unterstützt</not-support>
@@ -1873,7 +1873,7 @@
       <Cancel>#{word.close}</Cancel>
     </action>
     <msg>
-      <name-exist>Der Tagname "{0}" ist bereits vorhanden.</name-exist>
+      <name-exist>Der Tagname '{0}' ist bereits vorhanden.</name-exist>
       <tagName-invalid>Der Tagname enthält ungültige Zeichen.</tagName-invalid>
       <tag-name-empty>Der Tagname ist leer</tag-name-empty>
       <tag-name-duplicate>Die eingegebenen Tagnamen müssen eindeutig sein.</tag-name-duplicate>
@@ -1937,7 +1937,7 @@
   </CronExpressionValidator>
   <EmptyFieldValidator>
     <msg>
-      <empty-input>Bitte füllen Sie das Feld "{0}" aus.</empty-input>
+      <empty-input>Bitte füllen Sie das Feld '{0}' aus.</empty-input>
     </msg>
   </EmptyFieldValidator>
   <CategoryValidator>
@@ -2292,7 +2292,7 @@
       <name-invalid>Bitte geben Sie den symbolischen Verknüpfungsname (Symlink) ein.</name-invalid>
       <name-not-allowed>Dieser Name ist nicht erlaubt.</name-not-allowed>
       <fileName-error>Der Dateiname ist ungültig.</fileName-error>
-      <constraint-violation>Sie können nicht zu dem aktuellen Knoten den Knotentyp "{0}" hinzufügen.</constraint-violation>
+      <constraint-violation>Sie können nicht zu dem aktuellen Knoten den Knotentyp '{0}' hinzufügen.</constraint-violation>
       <repository-exception>Zugriff verweigert! Sie haben nicht die Berechtigung, einen Symlink zu diesem Knoten hinzuzufügen.</repository-exception>
       <numberformat-exception>Dieser Ordner kann nicht gespeichert werden. Der angegebene Name muss im numerischen Format sein.</numberformat-exception>
       <path-node-invalid>Bitte geben Sie den Pfad zum Knoten ein.</path-node-invalid>
@@ -2326,8 +2326,8 @@
   <UIWorkingArea>
     <msg>
       <create-link-problem>Sie können keine Verknüpfung für den Knoten '{0}' in  '{1}' erstellen.</create-link-problem>
-      <dest-node-is-link>Der Zielknoten "{0}" ist bereits eine symbolische Verknüpfung, daher können Sie darin keine weitere erstellen.</dest-node-is-link>
-      <selected-is-link>Der ausgewählte Knoten "{0}" ist bereits eine Verknüpfung. Sie können keine Verknüpfung erstellen, die auf eine Verknüpfung verweist.</selected-is-link>
+      <dest-node-is-link>Der Zielknoten '{0}' ist bereits eine symbolische Verknüpfung, daher können Sie darin keine weitere erstellen.</dest-node-is-link>
+      <selected-is-link>Der ausgewählte Knoten '{0}' ist bereits eine Verknüpfung. Sie können keine Verknüpfung erstellen, die auf eine Verknüpfung verweist.</selected-is-link>
       <confirm-create-link>Möchten Sie eine Verknüpfung zu diesem Ort erstellen?</confirm-create-link>
     </msg>
   </UIWorkingArea>
@@ -3110,7 +3110,7 @@
   </UIWatchDocumentForm>   
   <UIActionForm>
     <msg>
-      <xss-vulnerability-character>Feld "{0}" enthält Zeichen, die zu XSS Schwachstellen führen</xss-vulnerability-character>
+      <xss-vulnerability-character>Feld '{0}' enthält Zeichen, die zu XSS Schwachstellen führen</xss-vulnerability-character>
     </msg>
   </UIActionForm>
   <UIMultiUpload>
