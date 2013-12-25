@@ -101,14 +101,18 @@ public class NavigationUtils {
    * @return UserNavigation of group  
    */
   public static UserNavigation getUserNavigation(UserPortal userPortal, SiteKey siteKey) throws Exception {
-    UserPortalConfigService userPortalConfigService = WCMCoreUtils.getService(UserPortalConfigService.class);
-    NavigationContext portalNav = userPortalConfigService.getNavigationService().loadNavigation(siteKey);
+    if (siteKey.getTypeName().equalsIgnoreCase(SiteType.PORTAL.getName())) {
+      return getUserNavigationOfPortal(userPortal,siteKey.getName());
+    }
     UserACL userACL = WCMCoreUtils.getService(UserACL.class);
+    UserPortalConfigService userPortalConfigService = WCMCoreUtils.getService(UserPortalConfigService.class);
+    NavigationContext portalNav = userPortalConfigService.getNavigationService().
+      loadNavigation(siteKey);
     if (portalNav == null) {
       return null;
+    } else {
+      return userNavigationCtor.newInstance(userPortal, portalNav, userACL.hasEditPermissionOnNavigation(siteKey));
     }
-    UserPortalConfig userPortalCfg = userPortalConfigService.getUserPortalConfig(userPortalConfigService.getDefaultPortal(), ConversationState.getCurrent().getIdentity().getUserId(), PortalRequestContext.USER_PORTAL_CONTEXT);
-    return userNavigationCtor.newInstance(userPortal, portalNav, userACL.hasEditPermission(userPortalCfg.getPortalConfig()));
   }
   
   public static void removeNavigationAsJson (String portalName, String username) throws Exception
