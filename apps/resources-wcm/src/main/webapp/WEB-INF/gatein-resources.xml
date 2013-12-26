@@ -25,13 +25,7 @@
   xsi:schemaLocation="http://www.gatein.org/xml/ns/gatein_resources_1_3 http://www.gatein.org/xml/ns/gatein_resources_1_3"
   xmlns="http://www.gatein.org/xml/ns/gatein_resources_1_3">
   
-  <!-- WCMSkin -->
-  <portal-skin>
-    <skin-name>Default</skin-name>
-    <skin-module>WCMSkin</skin-module>
-    <css-path>/skin/css/ecms-resources-wcmskin.css</css-path>
-    <css-priority>1</css-priority>
-  </portal-skin>
+  
 
   <!-- Bootstrap Javascripts -->
   <!-- Twitter Bootstrap bootstrap-typeahead plugin -->

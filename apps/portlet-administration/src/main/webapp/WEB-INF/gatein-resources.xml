@@ -25,13 +25,6 @@
   xsi:schemaLocation="http://www.gatein.org/xml/ns/gatein_resources_1_3 http://www.gatein.org/xml/ns/gatein_resources_1_3" 
   xmlns="http://www.gatein.org/xml/ns/gatein_resources_1_3">
 
-  <!-- ECMAdminPortlet skin -->
-  <portlet-skin>
-    <application-name>ecmadmin</application-name>
-    <portlet-name>ECMAdminPortlet</portlet-name>
-    <skin-name>Default</skin-name>
-    <css-path>/skin/css/ecms-administration.css</css-path>
-  </portlet-skin>
   
   <!-- Order should be modified 
   <portlet-skin>
