@@ -89,7 +89,7 @@ public class UIContentSearchResult extends UIGrid {
    * @return the date format
    */
   public DateFormat getDateFormat() {
-    Locale locale = new Locale(Util.getUIPortal().getLocale());
+    Locale locale = Util.getPortalRequestContext().getLocale();
     DateFormat dateFormat = DateFormat.getDateTimeInstance(DateFormat.SHORT, DateFormat.SHORT, locale);
     return dateFormat;
   }
