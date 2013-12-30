@@ -8,7 +8,7 @@
   <RenameConnector>
     <label>
       <rename>Ändra Namn</rename>
-      <cancel>Cancel</cancel>
+      <cancel>Avbryt</cancel>
     </label>
     <msg>
       <renaming>Byter namn på...</renaming>

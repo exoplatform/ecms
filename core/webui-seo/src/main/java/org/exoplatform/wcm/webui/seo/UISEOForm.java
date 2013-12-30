@@ -641,7 +641,7 @@ public class UISEOForm extends UIForm{
       LocaleConfig localConfig = iter.next() ;
       Locale locale = localConfig.getLocale();
       StringBuffer sb = new StringBuffer();
-      sb.append(locale.getCountry());
+      sb.append(locale.getLanguage());
       String country = locale.getCountry();
       if(StringUtils.isNotEmpty(country)) sb.append("_").append(country);
       String lang = sb.toString();
