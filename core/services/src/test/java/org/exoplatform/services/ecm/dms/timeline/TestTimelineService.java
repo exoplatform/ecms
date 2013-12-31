@@ -356,7 +356,7 @@ public class TestTimelineService extends BaseDMSTestCase {
                                                                    createSessionProvider(),
                                                                    "root",
                                                                    true);
-    assertEquals("testGetDocumentsOfEarlierThisWeek failed! ", count, res.size());
+    assertEquals("testGetDocumentsOfEarlierThisWeek failed! ", Math.min(5, count), res.size());
   }
   
   /**
@@ -426,9 +426,8 @@ public class TestTimelineService extends BaseDMSTestCase {
     int count = 0;
     int index = 0;
     while (currentTime.get(Calendar.MONTH) == time.get(Calendar.MONTH)) {
-      if (currentTime.get(Calendar.MONTH) == time.get(Calendar.MONTH)) {
-        if (time.get(Calendar.WEEK_OF_YEAR) < currentTime.get(Calendar.WEEK_OF_YEAR))
-          count++;
+      if (time.get(Calendar.WEEK_OF_YEAR) != currentTime.get(Calendar.WEEK_OF_YEAR)) {
+        count++;
       }
       Node dayNode = testNode.addNode("dayNode" + index++, "exo:sample");
       dayNode.setProperty("exo:title", "sample");
@@ -469,9 +468,8 @@ public class TestTimelineService extends BaseDMSTestCase {
     int count = 0;
     int index = 0;
     while (currentTime.get(Calendar.MONTH) == time.get(Calendar.MONTH)) {
-      if (currentTime.get(Calendar.MONTH) == time.get(Calendar.MONTH)) {
-        if (time.get(Calendar.WEEK_OF_YEAR) < currentTime.get(Calendar.WEEK_OF_YEAR))
-          count++;
+      if (time.get(Calendar.WEEK_OF_YEAR) != currentTime.get(Calendar.WEEK_OF_YEAR)) {
+        count++;
       }
       Node dayNode = testNode.addNode("dayNode" + index++, "exo:sample");
       dayNode.setProperty("exo:title", "sample");
