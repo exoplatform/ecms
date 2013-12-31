@@ -433,8 +433,7 @@ public class Utils {
 
   public static String getEditLink(Node node, boolean isEditable, boolean isNew) {
     try {
-      ManageDriveService manageDriveService = WCMCoreUtils.getService(ManageDriveService.class);
-      String itemPath = manageDriveService.getDriveOfDefaultWorkspace() + node.getPath();
+      String itemPath = node.getSession().getWorkspace().getName() + node.getPath();
       return getEditLink(itemPath, isEditable, isNew);
     } catch (RepositoryException re) {
       return null;
