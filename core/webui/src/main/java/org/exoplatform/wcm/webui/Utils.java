@@ -53,6 +53,7 @@ import org.exoplatform.portal.webui.util.Util;
 import org.exoplatform.portal.webui.workspace.UIMaskWorkspace;
 import org.exoplatform.portal.webui.workspace.UIPortalApplication;
 import org.exoplatform.portal.webui.workspace.UIWorkingWorkspace;
+import org.exoplatform.services.cms.drives.DriveData;
 import org.exoplatform.services.cms.drives.ManageDriveService;
 import org.exoplatform.services.cms.link.LinkManager;
 import org.exoplatform.services.jcr.RepositoryService;
@@ -427,7 +428,16 @@ public class Utils {
   public static String getEditLink(Node node, boolean isEditable, boolean isNew) {
     try {
       ManageDriveService manageDriveService = WCMCoreUtils.getService(ManageDriveService.class);
-      String itemPath = manageDriveService.getDriveOfDefaultWorkspace() + node.getPath();
+      String nodeWorkspace = node.getSession().getWorkspace().getName();
+      String driveWorkspace = nodeWorkspace;
+      List<DriveData> listDrive = manageDriveService.getAllDrives();
+      for(DriveData drive : listDrive) {
+        if(drive.getWorkspace().equals(nodeWorkspace) && node.getPath().startsWith(drive.getHomePath())) {
+          driveWorkspace = drive.getName();
+          break;
+        }
+      }
+      String itemPath = driveWorkspace + node.getPath();
       return getEditLink(itemPath, isEditable, isNew);
     } catch (RepositoryException re) {
       return null;
