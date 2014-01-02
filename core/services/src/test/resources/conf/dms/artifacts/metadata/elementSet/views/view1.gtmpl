@@ -49,13 +49,13 @@
 		def values = uicomponent.getMultiValues(node, name) ;
 		if(values.size() == 0) { %>
 	    <div style="overflow:hidden; width:99.5%; margin-top:5px; margin-left:5px">
-	      <div style="float:left"><img style="height:4px; vertical-align:middle; margin-right:3px" alt="" src='/ecm/skin/images/metadata/rect.gif'/></div>     
+	      <div style="float:left"><img style="height:4px; vertical-align:middle; margin-right:3px" alt="" src='/eXoSkin/skin/ecm/portlet/explorer/images/metadata/rect.gif'/></div>     
 	      <div style="text-align: left"><%=_ctx.appRes("ElementSet.view.label.not-avaliable")%></div>
 	    </div>    		
 	<%} else {
 			for(value in values) { %>
 	      <div style="overflow:hidden; width:99.5%; margin-top:5px; margin-left:5px">
-	        <div style="float:left"><img style="height:4px; vertical-align:middle; margin-right:3px" alt="" src='/ecm/skin/images/metadata/rect.gif'/></div>     
+	        <div style="float:left"><img style="height:4px; vertical-align:middle; margin-right:3px" alt="" src='/eXoSkin/skin/ecm/portlet/explorer/images/metadata/rect.gif'/></div>     
 	        <div style="font-size:12px; text-align: left ">$value</div>
 	      </div>    			
 	<%	}
