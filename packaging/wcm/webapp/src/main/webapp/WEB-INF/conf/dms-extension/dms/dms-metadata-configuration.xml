@@ -62,7 +62,7 @@
                     <object type="org.exoplatform.services.cms.templates.impl.TemplateConfig$NodeType">
                       <field  name="nodetypeName"><string>rma:record</string></field>
                       <field  name="documentTemplate"><boolean>false</boolean></field>
-                      <field  name="label"><string>Dublin core</string></field>
+                      <field  name="label"><string>Records Management</string></field>
                       <field  name="referencedDialog">
                         <collection type="java.util.ArrayList">
                           <value>                    
