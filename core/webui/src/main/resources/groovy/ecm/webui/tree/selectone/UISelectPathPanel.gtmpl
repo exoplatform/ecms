@@ -44,7 +44,7 @@
 	                $nodeTitle</div>
 				        </td>
 				        <td class="center">
-		              <a class="actionIcon" href="<%=uicomponent.event("Select", Utils.formatNodeName(node.getPath()))%>" rel="tooltip" data-placement="bottom" title="<%=_ctx.appRes("UITreeList.action.title.select")%>">
+		              <a class="actionIcon" href="javascript:void(0);" onclick="<%=uicomponent.event("Select", Utils.formatNodeName(node.getPath()))%>" rel="tooltip" data-placement="bottom" title="<%=_ctx.appRes("UITreeList.action.title.select")%>">
 		                <i class="uiIconValidate uiIconLightGray"></i>
 		              </a>
 				        </td>
