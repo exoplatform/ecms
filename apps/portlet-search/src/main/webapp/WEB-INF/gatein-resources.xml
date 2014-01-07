@@ -31,7 +31,7 @@
     <application-name>searches</application-name>
     <portlet-name>WCMAdvanceSearchPortlet</portlet-name>
     <skin-name>Default</skin-name>
-    <css-path>/skin/webui/UIAdvanceSearch/DefaultStylesheet.css</css-path>
+    <css-path>/skin/css/ecms-search.css</css-path>
   </portlet-skin>
   
    <!-- Order should be modified
