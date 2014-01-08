@@ -26,6 +26,7 @@ import java.util.Set;
 
 import javax.jcr.Node;
 import javax.jcr.NodeIterator;
+import javax.jcr.Session;
 import javax.jcr.nodetype.NodeType;
 import javax.jcr.query.Query;
 import javax.jcr.query.QueryManager;
@@ -38,6 +39,8 @@ import org.exoplatform.container.xml.InitParams;
 import org.exoplatform.services.cms.actions.ActionServiceContainer;
 import org.exoplatform.services.cms.scripts.ScriptService;
 import org.exoplatform.services.cms.scripts.impl.ScriptServiceImpl;
+import org.exoplatform.services.jcr.config.WorkspaceEntry;
+import org.exoplatform.services.jcr.core.ManageableRepository;
 import org.exoplatform.services.jcr.core.nodetype.ExtendedNodeTypeManager;
 import org.exoplatform.services.jcr.core.nodetype.NodeTypeValue;
 import org.exoplatform.services.jcr.core.nodetype.PropertyDefinitionValue;
@@ -63,6 +66,9 @@ import org.exoplatform.services.wcm.utils.WCMCoreUtils;
  */
 public class ScriptUpgradePlugin extends UpgradeProductPlugin {
   
+  private static final String EXO_ACTION = "exo:action";
+  private static final String EXO_SCRIPT = "exo:script";
+  
   private Log LOG = ExoLogger.getLogger(this.getClass());
   private ScriptService scriptService_;
   
@@ -82,6 +88,7 @@ public class ScriptUpgradePlugin extends UpgradeProductPlugin {
     //Remove old renamed scripts, 
     //change script name to new ones in action using renamed scripts,
     //add dc:description to jcr:content of old un-renamed scripts
+    //in all exo:action nodes, change property exo:script: rename old script name to new ones.
     migrateScripts();
 
   }
@@ -144,7 +151,8 @@ public class ScriptUpgradePlugin extends UpgradeProductPlugin {
   /**
    * Remove old renamed scripts, 
    * change script name to new ones in action using renamed scripts,
-   * add dc:description to jcr:content of old un-renamed scripts 
+   * add dc:description to jcr:content of old un-renamed scripts, 
+   * in all exo:action nodes, change property exo:script: rename old script name to new ones.
    */
   private void migrateScripts() {
     Map<String, String> scriptUpdateMap = new HashMap<String, String>();
@@ -169,6 +177,7 @@ public class ScriptUpgradePlugin extends UpgradeProductPlugin {
     removeOldScripts(scriptUpdateMap);
     changeScriptNameInActionNode(scriptUpdateMap);
     addDcDescription(oldUnrenamedScripts);
+    changeScriptNameInActionDataNode(scriptUpdateMap);
   }
 
   /**
@@ -310,6 +319,55 @@ public class ScriptUpgradePlugin extends UpgradeProductPlugin {
     } catch (Exception e) {
       if (LOG.isErrorEnabled()) {
         LOG.error("An unexpected error occurs when adding dc:description to old unrenamed scripts: ", e);
+      }
+    } finally {
+      if (sProvider != null) {
+        sProvider.close();
+      }
+    }
+  }
+  
+  /**
+   * change script name to new ones in action data nodes using renamed scripts,
+   */
+  private void changeScriptNameInActionDataNode(Map<String, String> scriptUpdateMap) {
+    SessionProvider sProvider = null;
+    try {
+      if (LOG.isInfoEnabled()) {
+        LOG.info("=====Start changing script name to new ones in action data nodes using renamed scripts =====");
+      }
+      sProvider = SessionProvider.createSystemProvider();
+      ManageableRepository repository = WCMCoreUtils.getRepository();
+      
+      String query = "SELECT * FROM " + EXO_ACTION; 
+      for (WorkspaceEntry wsEntry : repository.getConfiguration().getWorkspaceEntries()) {
+        try {
+          String ws = wsEntry.getName();
+          Session session = sProvider.getSession(ws, repository);
+          NodeIterator iter = session.getWorkspace().getQueryManager().createQuery(query, Query.SQL).execute().getNodes();
+          while (iter.hasNext()) {
+            Node action = iter.nextNode();
+            if (action.hasProperty(EXO_SCRIPT)) {
+              String oldScript = action.getProperty(EXO_SCRIPT).getString();
+              for (String script : scriptUpdateMap.keySet()) {
+                if (oldScript.contains(script)) {
+                  String newScript = oldScript.replace(script, scriptUpdateMap.get(script));
+                  action.setProperty(EXO_SCRIPT, newScript);
+                  action.save();
+                  break;
+                }
+              }
+            }
+          }
+        } catch (Exception e) {
+          if (LOG.isErrorEnabled()) {
+            LOG.error("An unexpected error occurs when change action in workspace: " + wsEntry.getName(), e);
+          }
+        }
+      }
+    } catch (Exception e) {
+      if (LOG.isErrorEnabled()) {
+        LOG.error("An unexpected error occurs when changing actions: ", e);
       }
     } finally {
       if (sProvider != null) {
