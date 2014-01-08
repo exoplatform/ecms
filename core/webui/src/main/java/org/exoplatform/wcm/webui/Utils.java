@@ -439,7 +439,7 @@ public class Utils {
       String driveWorkspace = nodeWorkspace;
       List<DriveData> listDrive = manageDriveService.getAllDrives();
       for(DriveData drive : listDrive) {
-        if(drive.getWorkspace().equals(nodeWorkspace)) {
+        if(drive.getWorkspace().equals(nodeWorkspace) && node.getPath().startsWith(drive.getHomePath())) {
           driveWorkspace = drive.getName();
           break;
         }
