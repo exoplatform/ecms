@@ -94,7 +94,6 @@
 					</li>
 		 </ul>
 		 <div id="ActionMenuPlaceHolder" class="ActionMenuPlaceHolder"><span></span></div>
-		 <%if(isSelected) {                                                               %>
 		 <div id="uiActionsBarContainer" class="tab-content">
 			 <div id="tab1_4" class="tab-pane fade in active">
 				 <ul class="nav nav-pills">
@@ -129,7 +128,6 @@
 					 </li>
 				 </ul>
 			 </div>
-		 <%}%>
   		<div class="uiViewBarContainer clearfix" id="UIViewBarContainer">
   		  <%
   		  if (uicomponent.hasBackButton()) {%>
