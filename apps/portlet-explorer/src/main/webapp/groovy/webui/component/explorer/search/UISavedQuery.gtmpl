@@ -13,6 +13,8 @@
   import javax.jcr.Node;
   import org.exoplatform.ecm.webui.utils.Utils;
   import org.exoplatform.ecm.webui.component.explorer.search.UISavedQuery.QueryData;
+  import org.exoplatform.wcm.webui.reader.ContentReader;
+
   int totalPages = uicomponent.getUIPageIterator().getAvailablePage() ;
 %>
 <div class="uiSavedQuery" id="UISavedQuery">
@@ -55,7 +57,7 @@
 		            		String statement = object.getStatement() ;
 		            		if(statement.length() > 30) statement = "..." + statement.substring(10) ;
 		            	%>
-		            	<div class="text" rel="tooltip" data-placement="bottom" title="<%=object.getStatement()%>"><%=statement%></div>
+		            	<div class="text" rel="tooltip" data-placement="bottom" title="<%=object.getStatement()%>"><%=ContentReader.getXSSCompatibilityContent(statement)%></div>
 		            </td>
 		            <td><%=uicomponent.getCurrentUserId()%></td>
 			          <td class="center">
