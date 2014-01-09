@@ -702,26 +702,6 @@ public class Utils {
         			"uuid=\""+uuid+"\" siteName=\""+siteName+"\" publishedMsg=\""+published+"\" draftMsg=\""+draft+"\" fastpublishlink=\""+publishLink+"\" language=\""+language+"\" >" + defaultValue + "</div>";
       }
     }
-      
-    if (orgNode.hasProperty(propertyName)) {
-      try {
-        if(propertyName.equals(EXO_TITLE))
-          currentValue =  ContentReader.getXSSCompatibilityContent(orgNode.getProperty(propertyName).getString());
-        else {
-          if (orgNode.getProperty(propertyName).getDefinition().isMultiple()) {
-          //The requested property is multiple-valued, inline editing enable users to edit the first value of property
-            currentValue = orgNode.getProperty(propertyName).getValues()[0].getString();
-          }else {
-            currentValue =  orgNode.getProperty(propertyName).getString() ;
-          }
-        }
-      }catch (Exception e) {
-        if (LOG.isWarnEnabled()) {
-          LOG.warn(e.getMessage());
-        }
-      }
-    }
-    
 
     sb.append("<div class=\"InlineEditing\" >\n");
     sb.append("\n<div rel=\"tooltip\" data-placement=\"bottom\" id=\"").append(showBlockId).append("\" Class=\"").append(cssClass).append("\"");
