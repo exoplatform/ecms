@@ -7,14 +7,14 @@
     </supertypes>
     <propertyDefinitions>
       <propertyDefinition name="exo:script" requiredType="String" autoCreated="true" mandatory="true"
-        onParentVersion="COPY" protected="true" multiple="false">
+        onParentVersion="COPY" protected="false" multiple="false">
         <valueConstraints/>
         <defaultValues>
           <defaultValue>ecm-explorer/action/AddMetadata.groovy</defaultValue>
         </defaultValues>
       </propertyDefinition>
       <propertyDefinition name="exo:scriptLabel" requiredType="String" autoCreated="true" mandatory="true"
-        onParentVersion="COPY" protected="true" multiple="false">
+        onParentVersion="COPY" protected="false" multiple="false">
         <valueConstraints/>
         <defaultValues>
           <defaultValue>Add Metadata</defaultValue>
@@ -31,14 +31,14 @@
     </supertypes>
     <propertyDefinitions>
       <propertyDefinition name="exo:script" requiredType="String" autoCreated="true" mandatory="true"
-        onParentVersion="COPY" protected="true" multiple="false">
+        onParentVersion="COPY" protected="false" multiple="false">
         <valueConstraints/>
         <defaultValues>
           <defaultValue>ecm-explorer/action/TrashFolder.groovy</defaultValue>
         </defaultValues>
       </propertyDefinition>
       <propertyDefinition name="exo:scriptLabel" requiredType="String" autoCreated="true" mandatory="true"
-        onParentVersion="COPY" protected="true" multiple="false">
+        onParentVersion="COPY" protected="false" multiple="false">
         <valueConstraints/>
         <defaultValues>
           <defaultValue>Trash Document</defaultValue>
@@ -53,14 +53,14 @@
     </supertypes>
     <propertyDefinitions>
       <propertyDefinition name="exo:script" requiredType="String" autoCreated="true" mandatory="true"
-        onParentVersion="COPY" protected="true" multiple="false">
+        onParentVersion="COPY" protected="false" multiple="false">
         <valueConstraints/>
         <defaultValues>
           <defaultValue>ecm-explorer/action/AddToFavorites.groovy</defaultValue>
         </defaultValues>
       </propertyDefinition>
 	     <propertyDefinition name="exo:scriptLabel" requiredType="String" autoCreated="true" mandatory="true"
-        onParentVersion="COPY" protected="true" multiple="false">
+        onParentVersion="COPY" protected="false" multiple="false">
         <valueConstraints/>
         <defaultValues>
           <defaultValue>Add To Favorites</defaultValue>
@@ -583,14 +583,14 @@
     </supertypes>
     <propertyDefinitions>
       <propertyDefinition name="exo:script" requiredType="String" autoCreated="true" mandatory="true"
-        onParentVersion="COPY" protected="true" multiple="false">
+        onParentVersion="COPY" protected="false" multiple="false">
         <valueConstraints/>
         <defaultValues>
           <defaultValue>ecm-explorer/action/AddToCategory.groovy</defaultValue>
         </defaultValues>
       </propertyDefinition>
 	     <propertyDefinition name="exo:scriptLabel" requiredType="String" autoCreated="true" mandatory="true"
-        onParentVersion="COPY" protected="true" multiple="false">
+        onParentVersion="COPY" protected="false" multiple="false">
         <valueConstraints/>
         <defaultValues>
           <defaultValue>Add To Category</defaultValue>
