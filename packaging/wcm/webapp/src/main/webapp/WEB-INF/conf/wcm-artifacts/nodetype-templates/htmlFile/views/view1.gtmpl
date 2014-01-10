@@ -8,19 +8,8 @@
 
   def currentNode = uicomponent.getNode() ; 
   def contentNode = currentNode.getNode("jcr:content") ;
-  def parentNode = currentNode.getParent();
   def rcontext = _ctx.getRequestContext() ;
 %>  
-<% if (parentNode.isNodeType(NodetypeConstant.EXO_WEBCONTENT)) { %>
-    def exSkinService = WCMCoreUtils.getService(XSkinService.class) ;
-    def css= exSkinService.getActiveStylesheet(parentNode);
-    <style><%=css%></style>
-<%  } %>
 
 <%=contentNode.getProperty("jcr:data").getString() ;%>
 
-<% if (parentNode.isNodeType(NodetypeConstant.EXO_WEBCONTENT)) { %>
-    def exJSService = WCMCoreUtils.getService(XJavascriptService.class) ;
-    def js=  exJSService.getActiveJavaScript(parentNode) ;
-    <script type="text/javascript"><%=js%></script>
-<%  } %>
