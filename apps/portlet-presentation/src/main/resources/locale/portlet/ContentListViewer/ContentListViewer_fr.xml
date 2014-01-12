@@ -70,7 +70,7 @@
     </label>
     <help>
       <ModeSelectionHelp>"Dossier" affiche de tous les contenus présents dans le dossier (ou catégorie) sélectionné ; "Manuel" vous permet de choisir manuellement les contenus à afficher.</ModeSelectionHelp>
-      <FolderPathHelp>Sélectionnez les contenus qui vous souhaitez afficher. La sélection par défaut sera remplacée dynamiquement si vous activez la Navigation Dynamique dans les Paramètres Avancés</FolderPathHelp>
+      <FolderPathHelp>Sélectionnez les contenus que vous souhaitez afficher. La sélection par défaut sera remplacée dynamiquement si vous activez la Navigation Dynamique dans les Paramètres Avancés.</FolderPathHelp>
       <HeaderOptionHelp>Afficher un entête sur la liste des contenus. Si la "Détection automatique" est activée, l'application tentera d'afficher un entête basé sur la sélection courante.</HeaderOptionHelp>
       <GeneralOptionHelp>Choisissez les éléments graphiques que vous souhaitez voir. Suivant le modèle de vue choisi, certains éléments ne seront pas disponibles.</GeneralOptionHelp>
       <ContextualHelp>Avec la Navigation dynamique, le chemin du contenu à afficher peut être indiqué via un paramètre de l'URL.</ContextualHelp>
