@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<bundle>
+  <PublicationService>
+    <AuthoringPublicationPlugin>
+      <changeState>
+        <obsoleted>Innholdet er foreldet</obsoleted>
+        <published>Innholdet er publisert</published>
+<unpublished>Innholdet er ikke publisert</unpublished>
+<archived>Innholdet er arkivert</archived>
+<staged>Innholdet har blitt lagt klar</staged>
+<approved>Innholdet er godkjent</approved>
+<pending>Innholdet er ventende</pending>
+<draft>Innholdet er i form av et utkast</draft>
+      </changeState>
+    </AuthoringPublicationPlugin>
+  </PublicationService>
+  <Publication>
+    <log>
+      <description>
+        <enrolled>Innholdet er registrert i publikasjonens livssyklus</enrolled>
+      </description>
+    </log>
+  </Publication>
+</bundle>

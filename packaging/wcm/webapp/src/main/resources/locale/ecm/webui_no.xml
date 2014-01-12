@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<bundle>
+  <!--
+  #####################################################################
+  # org.exoplatform.ecm.webui.tree.selectmany.UICategoriesSelectPanel #
+  #####################################################################
+  -->
+  <UITreeList>
+    <header>
+      <name>Navn</name>
+      <action>Legg til</action>
+    </header>
+    <info>
+      <child-not-found>Underkategori ikke funnet!</child-not-found>
+    </info>
+  </UITreeList>
+  <!--
+  ######################################################################
+  # org.exoplatform.ecm.webui.tree.selectmany.UISelectedCategoriesGrid #
+  ######################################################################
+  -->
+  <UISelectedCategoriesGrid>
+    <header>
+      <categoryName>Category name</categoryName>
+      <categoryPath>Kategori sti</categoryPath>
+      <action>#{word.action}</action>
+    </header>
+    <action>
+      <SaveCategories>#{word.save}</SaveCategories>
+      <Cancel>#{word.cancel}</Cancel>
+    </action>
+    <msg>
+      <cannot-save>Kategorier ble ikke lagret.</cannot-save>
+      <have-saved>Categories were saved successfully</have-saved>
+      <non-categories>Categories are wrong. Please select the appropriate categories.</non-categories>
+      <confirm-delete>Vil du slette denne kategorien?</confirm-delete>
+    </msg>
+  </UISelectedCategoriesGrid>
+  <!--
+  ######################################################################
+  # org.exoplatform.ecm.webui.selector.UIPermissionSelector           #
+  ######################################################################
+  -->
+  <SelectUserOrGroup>
+    <title>
+      <UIPermissionUser>Velg bruker</UIPermissionUser>
+      <UIPermissionMembership>Velg medlemsskap</UIPermissionMembership>
+    </title>
+  </SelectUserOrGroup>
+  <UIPermissionUser>
+    <label>
+      <selectUser>Select User</selectUser>
+      <selectGroup>Browse and select a group</selectGroup>
+    </label>
+  </UIPermissionUser>
+  <UIPermissionMembership>
+    <label>
+      <selectUser>Velg medlemsskap</selectUser>
+      <selectGroup>Browse and select a group</selectGroup>
+    </label>
+  </UIPermissionMembership>
+</bundle>
