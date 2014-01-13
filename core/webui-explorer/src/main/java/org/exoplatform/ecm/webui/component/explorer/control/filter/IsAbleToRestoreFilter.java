@@ -56,7 +56,15 @@ public class IsAbleToRestoreFilter extends UIExtensionAbstractFilter {
             //Is not a deleted node, may be groovy action, hidden node,...
             return false;
         }
-        
+
+        if(Utils.isInTrash(currentNode) && Utils.isSymLink(currentNode)) {
+            //return false if the target is already deleted
+            Node targetNode = Utils.getNodeSymLink(currentNode);
+            if(Utils.isInTrash(targetNode)){
+              return false;
+            }
+        }
+
         Session session = WCMCoreUtils.getUserSessionProvider().getSession(restoreWorkspace, WCMCoreUtils.getRepository());
         try {
             restoreLocationNode = (Node) session.getItem(restorePath);

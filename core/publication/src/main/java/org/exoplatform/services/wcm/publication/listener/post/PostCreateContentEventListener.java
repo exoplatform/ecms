@@ -31,6 +31,7 @@ import org.exoplatform.services.listener.Listener;
 import org.exoplatform.services.listener.ListenerService;
 import org.exoplatform.services.log.ExoLogger;
 import org.exoplatform.services.log.Log;
+import org.exoplatform.services.security.IdentityConstants;
 import org.exoplatform.services.wcm.core.NodetypeConstant;
 import org.exoplatform.services.wcm.core.WCMConfigurationService;
 import org.exoplatform.services.wcm.core.WebSchemaConfigService;
@@ -174,8 +175,9 @@ public class PostCreateContentEventListener extends Listener<CmsService, Node>{
       if (LOG.isDebugEnabled()) LOG.debug("No portal context available");
     }
     if (LOG.isInfoEnabled()) LOG.info(currentNode.getPath() + "::" + siteName + "::"+remoteUser);
-    if (remoteUser != null) { 
-      publicationService.updateLifecyleOnChangeContent(currentNode, siteName, remoteUser);     
+    if (remoteUser == null) {
+      remoteUser = IdentityConstants.ANONIM;
     }
+    publicationService.updateLifecyleOnChangeContent(currentNode, siteName, remoteUser);     
   }
 }

@@ -54,6 +54,7 @@ import org.exoplatform.container.definition.PortalContainerConfig;
 import org.exoplatform.container.xml.InitParams;
 import org.exoplatform.container.xml.ObjectParameter;
 import org.exoplatform.container.xml.PortalContainerInfo;
+import org.exoplatform.container.xml.ValueParam;
 import org.exoplatform.portal.config.UserACL;
 import org.exoplatform.portal.webui.util.Util;
 import org.exoplatform.services.cms.CmsService;
@@ -465,43 +466,79 @@ public class WCMCoreUtils {
                                         String portalName) throws Exception {
     Iterator iterator = initParams.getObjectParamIterator();
     LinkDeploymentDescriptor deploymentDescriptor = null;
+    ValueParam valueParam = initParams.getValueParam("override");
+    boolean overrideData = false;
+    if (valueParam != null) {
+        overrideData = "true".equals(valueParam.getValue());
+    }
     try {
       while (iterator.hasNext()) {
-        ObjectParameter objectParameter = (ObjectParameter) iterator.next();
-        deploymentDescriptor = (LinkDeploymentDescriptor) objectParameter.getObject();
-        String sourcePath = deploymentDescriptor.getSourcePath();
-        String targetPath = deploymentDescriptor.getTargetPath();
-
-        //in case: create portal from template
-        if (portalName != null && portalName.length() > 0) {
-          sourcePath = StringUtils.replace(sourcePath, "{portalName}", portalName);
-          targetPath = StringUtils.replace(targetPath, "{portalName}", portalName);
-        }
-
-        // sourcePath should looks like : repository:collaboration:/sites
-        // content/live/acme
-        String[] src = sourcePath.split(":");
-        String[] tgt = targetPath.split(":");
-
-        if (src.length == 3 && tgt.length == 3) {
-          ManageableRepository repository = repositoryService.getCurrentRepository();
-          Session session = sessionProvider.getSession(src[1], repository);
-          ManageableRepository repository2 = repositoryService.getCurrentRepository();
-          Session session2 = sessionProvider.getSession(tgt[1], repository2);
-          Node nodeSrc = session.getRootNode().getNode(src[2].substring(1));
-          Node nodeTgt = session2.getRootNode().getNode(tgt[2].substring(1));
-          linkManager.createLink(nodeTgt, "exo:taxonomyLink", nodeSrc);
-          ExoContainer container = ExoContainerContext.getCurrentContainer();
-          PortalContainerInfo containerInfo =
+        String sourcePath = null;
+        String targetPath = null;
+        try {
+          ObjectParameter objectParameter = (ObjectParameter) iterator.next();
+          deploymentDescriptor = (LinkDeploymentDescriptor) objectParameter.getObject();
+          sourcePath = deploymentDescriptor.getSourcePath();
+          targetPath = deploymentDescriptor.getTargetPath();
+  
+          //in case: create portal from template
+          if (portalName != null && portalName.length() > 0) {
+            sourcePath = StringUtils.replace(sourcePath, "{portalName}", portalName);
+            targetPath = StringUtils.replace(targetPath, "{portalName}", portalName);
+          }
+  
+          // sourcePath should looks like : repository:collaboration:/sites
+          // content/live/acme
+          String[] src = sourcePath.split(":");
+          String[] tgt = targetPath.split(":");
+  
+          if (src.length == 3 && tgt.length == 3) {
+            ManageableRepository repository = repositoryService.getCurrentRepository();
+            Session session = sessionProvider.getSession(src[1], repository);
+            ManageableRepository repository2 = repositoryService.getCurrentRepository();
+            Session session2 = sessionProvider.getSession(tgt[1], repository2);
+            Node nodeSrc = session.getRootNode().getNode(src[2].substring(1));
+            Node nodeTgt = session2.getRootNode().getNode(tgt[2].substring(1));
+            Node tnode = (Node) session.getItem(nodeTgt.getPath());
+            //check if the link node already exist then remove it 
+            if (overrideData && tnode.hasNode(nodeSrc.getName())) {
+                 NodeIterator nodeIterator = tnode.getNodes(nodeSrc.getName());
+                while (nodeIterator.hasNext()) {
+                  String path = "";
+                  try {
+                    Node targetNode = nodeIterator.nextNode();
+                    path = targetNode.getPath();
+                    LOG.info(" - Remove " + targetNode.getPath());
+                    targetNode.remove();
+                    session.save();
+                  } catch (Exception e) {
+                    if (LOG.isDebugEnabled()) {
+                      LOG.debug("Can not remove node: " + path, e);
+                    } else if (LOG.isWarnEnabled()) {
+                      LOG.warn("Can not remove node: " + path);
+                    }
+                  }
+                }
+            }
+            linkManager.createLink(nodeTgt, "exo:taxonomyLink", nodeSrc);
+            ExoContainer container = ExoContainerContext.getCurrentContainer();
+            PortalContainerInfo containerInfo =
               (PortalContainerInfo) container.getComponentInstanceOfType(PortalContainerInfo.class);
-          String containerName = containerInfo.getContainerName();
-          ListenerService listenerService = WCMCoreUtils.getService(ListenerService.class,
-                                                                    containerName);
-          CmsService cmsService = WCMCoreUtils.getService(CmsService.class, containerName);
-          listenerService.broadcast("WCMPublicationService.event.updateState", cmsService, nodeSrc);
-        }
-        if (LOG.isInfoEnabled()) {
-          LOG.info(sourcePath + " has a link into " + targetPath);
+            String containerName = containerInfo.getContainerName();
+            ListenerService listenerService = WCMCoreUtils.getService(ListenerService.class,
+                                                                      containerName);
+            CmsService cmsService = WCMCoreUtils.getService(CmsService.class, containerName);
+            listenerService.broadcast("WCMPublicationService.event.updateState", cmsService, nodeSrc);
+          }
+          if (LOG.isInfoEnabled()) {
+            LOG.info(sourcePath + " has a link into " + targetPath);
+          }
+        } catch (Exception e) {
+          if (LOG.isDebugEnabled()) {
+            LOG.debug("An error occurs when deploy link from " + sourcePath + " to " + targetPath, e);
+          } else if (LOG.isWarnEnabled()) {
+            LOG.warn("Can not deploy link from " + sourcePath + " to " + targetPath + ": " + e.getMessage());
+          }
         }
       }
     } catch (Exception ex) {

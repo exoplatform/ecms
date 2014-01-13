@@ -1089,6 +1089,12 @@
       <label-Cancel>#{word.cancel}</label-Cancel>
     </button>
   </UIConstraintsForm>
+  <ConstraintsForm>
+    <action>
+      <Add>Add</Add>
+      <Cancel>#{word.cancel}</Cancel>
+    </action>
+  </ConstraintsForm>
   <UIConstraintForm>
     <tooltip>
       <AddMetadataType>Add Property</AddMetadataType>
@@ -2211,7 +2217,6 @@
   </UIDriveSelector>
   <UIJcrExplorerEditForm>
     <label>
-      <driveName>Drive Name</driveName>
       <DriveNameInput>UI JCR Explorer Edit Form</DriveNameInput>
     </label>
     <msg>
@@ -2482,7 +2487,6 @@
 
   <UIDocumentForm>
     <msg>
-      <not-support>Cannot load the template of '{0}'.</not-support>
       <do-not-permission>You do not have permission to load the template '{0}'.</do-not-permission>
     </msg>
   </UIDocumentForm>
@@ -2652,7 +2656,7 @@
        <Video>Video</Video>
        <Music>Music</Music>
        <Documents>Document</Documents>
-       <Contents>Content</Contents>
+       <Content>Content</Content>
     </label>
   </DocumentType>
 
@@ -2662,7 +2666,7 @@
       <Video>Video</Video>
       <Music>Music</Music>
       <Documents>Document</Documents>
-      <Contents>Content</Contents>
+      <Content>Content</Content>
     </label>
     <title>Set Up Filter Preferences</title>
     <action>
@@ -2681,14 +2685,13 @@
       <ShowMusic>Show all music files</ShowMusic>
       <ShowImages>Show all image files</ShowImages>
       <ShowDocuments>Show all document files</ShowDocuments>
-      <ShowContents>Show all document types</ShowContents>
+      <ShowContent>Show all document types</ShowContent>
     </title>
   </UIAllItemsByType>
 
   <Views>
     <label>
       <slide-show>Slide Show</slide-show>
-      <timeline-view>Timeline View</timeline-view>
     </label>
   </Views>
   <ECMContextMenu>
@@ -2709,7 +2712,6 @@
       <showHiddens>Hidden</showHiddens>
       <showTrash>Trash</showTrash>
     </label>
-    <title>Set Up Filter Preferences</title>
     <action>
       <Save>#{word.save}</Save>
       <Cancel>#{word.cancel}</Cancel>
@@ -2904,11 +2906,6 @@
     </title>
   </rootNodeInfo>
 
-  <UIPopupWindow>
-    <title>
-      <UISelectRestorePath>Select Restore Path</UISelectRestorePath>
-    </title>
-  </UIPopupWindow>
   <UIActionForm>
     <msg>
       <homePath-emty>The home path is empty.</homePath-emty>
@@ -3037,9 +3034,6 @@
         <UIOneTaxonomySelector>Select Category</UIOneTaxonomySelector>
       </label>
     </tab>
-    <action>
-    	 <Close>Close</Close>
-    </action>
   </UICategoryManagerSearch>
 
   <UIPreferencesForm>
@@ -3099,8 +3093,6 @@
 	  <CLASSIFIED>Classified</CLASSIFIED>
   <UNCLASSIFIED>Unclassified</UNCLASSIFIED>
 	  <NOCONTRACT>No Contract</NOCONTRACT>
-	  <true>True</true>
-	  <false>False</false>
 	  <one-minute>One Minute</one-minute>
 	  <hourly>Hourly</hourly>
 	  <daily>Daily</daily>
