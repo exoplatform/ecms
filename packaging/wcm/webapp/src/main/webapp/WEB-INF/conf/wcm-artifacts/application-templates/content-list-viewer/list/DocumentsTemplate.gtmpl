@@ -97,7 +97,7 @@
 													if (isShowTitle) {
 														%><div title="$itemName" class="FL $itemIcon"></div><%
 														if (isShowLink) {
-															%><div class="Title"><a onclick="javascript:window.open('$itemWebdavLink');" style="cursor:pointer" title="$itemName">$itemName</a></div><%
+															%><div class="Title"><a href="$itemWebdavLink" style="cursor:pointer" title="$itemName" target="_blank">$itemName</a></div><%
 														} else {
 															%><div class="Title">
 															<%
