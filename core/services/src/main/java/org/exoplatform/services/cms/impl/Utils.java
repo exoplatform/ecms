@@ -31,10 +31,12 @@ import java.util.Collection;
 import java.util.Collections;
 import java.util.Comparator;
 import java.util.Date;
+import java.util.HashSet;
 import java.util.HashMap;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
+import java.util.Set;
 import java.util.Queue;
 import java.util.zip.ZipEntry;
 import java.util.zip.ZipInputStream;
@@ -61,6 +63,7 @@ import org.exoplatform.services.cms.link.LinkManager;
 import org.exoplatform.services.cms.templates.TemplateService;
 import org.exoplatform.services.cms.thumbnail.ThumbnailPlugin;
 import org.exoplatform.services.cms.thumbnail.ThumbnailService;
+import org.exoplatform.services.context.DocumentContext;
 import org.exoplatform.services.jcr.core.ExtendedNode;
 import org.exoplatform.services.jcr.core.ManageableRepository;
 import org.exoplatform.services.jcr.ext.common.SessionProvider;
@@ -483,7 +486,7 @@ public class Utils {
    * @return
    * @throws Exception
    */
-  public static Node getServiceLogContentNode(String serviceName, String logType) throws Exception {
+  private static Node getServiceLogContentNode(SessionProvider systemProvider, String serviceName, String logType) throws Exception {
     // Get workspace and session where store service log
     ManageableRepository repository = WCMCoreUtils.getRepository();
     Session session = WCMCoreUtils.getSystemSessionProvider().getSession(repository.getConfiguration().getDefaultWorkspaceName(), repository);
@@ -515,7 +518,18 @@ public class Utils {
     }
     session.save();
     return serviceLogContentNode;
-  }  
+  }
+  /**
+   * Get Service Log Content Node of specific service.
+   *
+   * @param serviceName
+   * @return
+   * @throws Exception
+   */
+  
+  public static Node getServiceLogContentNode(String serviceName, String logType) throws Exception {
+    return getServiceLogContentNode(WCMCoreUtils.getSystemSessionProvider(), serviceName, logType);
+  }
 
   /**
    * Get all the templates which have been added into the system
