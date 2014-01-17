@@ -1,7 +1,5 @@
 package org.exoplatform.services.cms.jodconverter.impl;
 
-import java.io.File;
-
 import org.artofsolving.jodconverter.OfficeDocumentConverter;
 import org.artofsolving.jodconverter.office.DefaultOfficeManagerConfiguration;
 import org.artofsolving.jodconverter.office.OfficeException;
@@ -11,6 +9,8 @@ import org.exoplatform.services.cms.jodconverter.JodConverterService;
 import org.exoplatform.services.log.ExoLogger;
 import org.exoplatform.services.log.Log;
 import org.picocontainer.Startable;
+
+import java.io.File;
 
 /**
  * {@inheritDoc}
@@ -133,7 +133,7 @@ public class JodConverterServiceImpl implements JodConverterService, Startable {
       }
     } catch (OfficeException oe) {
       if (LOG.isErrorEnabled()) {
-        LOG.error("Exception when start Office Service");
+        LOG.error("Exception when start Office Service: ",oe);
       }
     }
   }
@@ -152,7 +152,7 @@ public class JodConverterServiceImpl implements JodConverterService, Startable {
       }
     } catch (OfficeException oe) {
       if (LOG.isErrorEnabled()) {
-        LOG.error("Exception when stop Office Service");
+        LOG.error("Exception when stop Office Service: ",oe);
       }
     }
   }
