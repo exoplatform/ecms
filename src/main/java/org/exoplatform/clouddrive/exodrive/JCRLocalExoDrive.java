@@ -16,11 +16,6 @@
  */
 package org.exoplatform.clouddrive.exodrive;
 
-import java.util.List;
-
-import javax.jcr.Node;
-import javax.jcr.RepositoryException;
-
 import org.exoplatform.clouddrive.CloudDriveException;
 import org.exoplatform.clouddrive.CloudFile;
 import org.exoplatform.clouddrive.CloudProviderException;
@@ -33,6 +28,11 @@ import org.exoplatform.clouddrive.exodrive.service.FileStore;
 import org.exoplatform.clouddrive.jcr.JCRLocalCloudDrive;
 import org.exoplatform.clouddrive.jcr.JCRLocalCloudFile;
 import org.exoplatform.services.jcr.ext.app.SessionProviderService;
+
+import java.util.List;
+
+import javax.jcr.Node;
+import javax.jcr.RepositoryException;
 
 /**
  * Exo Drive for internal use.

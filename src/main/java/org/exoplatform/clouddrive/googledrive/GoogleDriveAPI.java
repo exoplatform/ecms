@@ -291,6 +291,8 @@ class GoogleDriveAPI {
     ChangesIterator(long startChangeId) throws GoogleDriveException {
       try {
         this.request = drive.changes().list();
+        this.request.setIncludeSubscribed(false); // get changes of files only explicitly added to user drive
+        this.request.setIncludeDeleted(true);
         this.request.setStartChangeId(startChangeId);
       } catch (IOException e) {
         throw new GoogleDriveException("Error creating request to Changes.List service: " + e.getMessage(), e);

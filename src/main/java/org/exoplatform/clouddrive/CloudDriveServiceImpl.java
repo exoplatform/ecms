@@ -16,10 +16,21 @@
  */
 package org.exoplatform.clouddrive;
 
+import org.exoplatform.clouddrive.jcr.JCRLocalCloudDrive;
+import org.exoplatform.container.component.ComponentPlugin;
+import org.exoplatform.services.jcr.RepositoryService;
+import org.exoplatform.services.jcr.config.WorkspaceEntry;
+import org.exoplatform.services.jcr.core.ManageableRepository;
+import org.exoplatform.services.jcr.ext.app.SessionProviderService;
+import org.exoplatform.services.jcr.ext.common.SessionProvider;
+import org.exoplatform.services.log.ExoLogger;
+import org.exoplatform.services.log.Log;
+import org.exoplatform.services.security.ConversationState;
+import org.picocontainer.Startable;
+
 import java.util.Collections;
 import java.util.HashMap;
 import java.util.HashSet;
-import java.util.Iterator;
 import java.util.Map;
 import java.util.Set;
 import java.util.concurrent.ConcurrentHashMap;
@@ -30,20 +41,6 @@ import javax.jcr.NodeIterator;
 import javax.jcr.RepositoryException;
 import javax.jcr.Session;
 import javax.jcr.query.Query;
-
-import org.exoplatform.clouddrive.jcr.JCRLocalCloudDrive;
-import org.exoplatform.container.component.ComponentPlugin;
-import org.exoplatform.services.jcr.RepositoryService;
-import org.exoplatform.services.jcr.config.RepositoryConfigurationException;
-import org.exoplatform.services.jcr.config.RepositoryEntry;
-import org.exoplatform.services.jcr.config.WorkspaceEntry;
-import org.exoplatform.services.jcr.core.ManageableRepository;
-import org.exoplatform.services.jcr.ext.app.SessionProviderService;
-import org.exoplatform.services.jcr.ext.common.SessionProvider;
-import org.exoplatform.services.log.ExoLogger;
-import org.exoplatform.services.log.Log;
-import org.exoplatform.services.security.ConversationState;
-import org.picocontainer.Startable;
 
 /**
  * Service implementing {@link CloudDriveService} and {@link Startable}.<br>
@@ -122,6 +119,11 @@ public class CloudDriveServiceImpl implements CloudDriveService, Startable {
    * removal).
    */
   protected final LocalDrivesListener                        drivesListener;
+  
+  /**
+   * Environment for commands execution.
+   */
+  protected CloudDriveEnvironment commandEnv;
 
   public CloudDriveServiceImpl(RepositoryService jcrService, SessionProviderService sessionProviders) {
     this.jcrService = jcrService;
@@ -134,6 +136,13 @@ public class CloudDriveServiceImpl implements CloudDriveService, Startable {
     if (plugin instanceof CloudDriveConnector) {
       CloudDriveConnector impl = (CloudDriveConnector) plugin;
       connectors.put(impl.getProvider(), impl);
+    } else if (plugin instanceof CloudDriveEnvironment) {
+      CloudDriveEnvironment env = (CloudDriveEnvironment) plugin;
+      if (commandEnv != null) {
+        commandEnv.chain(env);
+      } else {
+        commandEnv = env; 
+      }
     } else {
       LOG.warn("Cannot recognize component plugin for " + plugin.getName() + ": type " + plugin.getClass()
           + " not supported");
@@ -277,6 +286,7 @@ public class CloudDriveServiceImpl implements CloudDriveService, Startable {
     CloudDriveConnector conn = connectors.get(user.getProvider());
     if (conn != null) {
       CloudDrive local = conn.createDrive(user, driveNode);
+      local.configure(commandEnv);
       registerDrive(user, local, repoName);
       return local;
     } else {
@@ -382,6 +392,7 @@ public class CloudDriveServiceImpl implements CloudDriveService, Startable {
                 Set<CloudDrive> locals = conn.loadStored(pd.getValue());
                 for (CloudDrive local : locals) {
                   if (local.isConnected()) {
+                    local.configure(commandEnv);
                     CloudUser user = local.getUser();
                     String repoName = jcrRepository.getConfiguration().getName();
                     registerDrive(user, local, repoName);

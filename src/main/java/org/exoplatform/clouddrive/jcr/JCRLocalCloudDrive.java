@@ -21,6 +21,7 @@ import com.ibm.icu.text.Transliterator;
 import org.exoplatform.clouddrive.CloudDrive;
 import org.exoplatform.clouddrive.CloudDriveAccessException;
 import org.exoplatform.clouddrive.CloudDriveConnector;
+import org.exoplatform.clouddrive.CloudDriveEnvironment;
 import org.exoplatform.clouddrive.CloudDriveEvent;
 import org.exoplatform.clouddrive.CloudDriveException;
 import org.exoplatform.clouddrive.CloudFile;
@@ -46,6 +47,7 @@ import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Collection;
 import java.util.Collections;
+import java.util.HashMap;
 import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
@@ -53,7 +55,6 @@ import java.util.NoSuchElementException;
 import java.util.Queue;
 import java.util.concurrent.Callable;
 import java.util.concurrent.ConcurrentLinkedQueue;
-import java.util.concurrent.CountDownLatch;
 import java.util.concurrent.ExecutionException;
 import java.util.concurrent.Future;
 import java.util.concurrent.atomic.AtomicInteger;
@@ -624,111 +625,119 @@ public abstract class JCRLocalCloudDrive extends CloudDrive {
   /**
    * Asynchronous runner for {@link Command}.
    */
-  @Deprecated
-  protected class CommandRunnable implements Runnable {
-    final AbstractCommand   command;
-
-    /**
-     * Support of asynchronous execution.
-     */
-    final Thread            runner;
-
-    /**
-     * ConversationState for asynchronous execution.
-     */
-    final ConversationState conversation;
-
-    /**
-     * Lock until the command will be done.
-     */
-    final CountDownLatch    lock = new CountDownLatch(1);
-
-    CommandRunnable(AbstractCommand command, ConversationState conversation) throws CloudDriveException {
-      this.conversation = conversation;
-      this.command = command;
-      this.runner = new Thread(this, title() + " connect "
-          + DATE_FORMAT.format(Calendar.getInstance().getTime()));
-    }
-
-    /**
-     * Start asynchronous execution.
-     */
-    void start() {
-      runner.start();
-    }
-
-    void await() throws InterruptedException {
-      lock.await();
-    }
-
-    @Override
-    public void run() {
-      // initialize this thread:
-
-      // set correct user's ConversationState
-      ConversationState.setCurrent(conversation);
-      // set correct SessionProvider
-      SessionProvider sp = new SessionProvider(conversation);
-      sessionProviders.setSessionProvider(null, sp);
-
-      try {
-        command.exec();
-      } catch (CloudDriveException e) {
-        LOG.error("Cloud Drive error during " + command.getName() + ": " + e.getMessage(), e);
-      } catch (Throwable e) {
-        LOG.error("Error to " + command.getName() + ": " + e.getMessage(), e);
-      } finally {
-        sp.close();
-        lock.countDown();
-      }
-    }
-  }
-
-  /**
-   * Asynchronous runner for {@link Command}.
-   */
   protected class CommandCallable implements Callable<Command> {
-    /**
-     * ConversationState for asynchronous execution.
-     */
-    final ConversationState conversation;
+    final AbstractCommand command;
 
-    /**
-     * ExoContainer for asynchronous execution.
-     */
-    final ExoContainer      container;
-
-    final AbstractCommand   command;
-
-    CommandCallable(AbstractCommand command, ConversationState conversation, ExoContainer container) throws CloudDriveException {
-      this.conversation = conversation;
-      this.container = container;
+    CommandCallable(AbstractCommand command) throws CloudDriveException {
       this.command = command;
     }
 
     @Override
     public Command call() throws Exception {
-      // set correct user's ConversationState
-      ConversationState prevConversation = ConversationState.getCurrent();
-      ConversationState.setCurrent(conversation);
-      // set correct container
-      ExoContainer prevContainer = ExoContainerContext.getCurrentContainerIfPresent();
-      ExoContainerContext.setCurrentContainer(container);
-      // set correct SessionProvider
-      SessionProvider prevSessions = sessionProviders.getSessionProvider(null);
-      SessionProvider sp = new SessionProvider(conversation);
-      sessionProviders.setSessionProvider(null, sp);
+      // TODO cleanup
+      // // set correct user's ConversationState
+      // ConversationState prevConversation = ConversationState.getCurrent();
+      // ConversationState.setCurrent(conversation);
+      // // set correct container
+      // ExoContainer prevContainer = ExoContainerContext.getCurrentContainerIfPresent();
+      // ExoContainerContext.setCurrentContainer(container);
+      // // set correct SessionProvider
+      // SessionProvider prevSessions = sessionProviders.getSessionProvider(null);
+      // SessionProvider sp = new SessionProvider(conversation);
+      // sessionProviders.setSessionProvider(null, sp);
+
+      commandEnv.prepare(command);
 
       try {
         command.exec();
         return command;
       } finally {
         // restore previous settings
-        sessionProviders.setSessionProvider(null, prevSessions);
-        ExoContainerContext.setCurrentContainer(prevContainer);
-        ConversationState.setCurrent(prevConversation);
-        sp.close();
+        // sessionProviders.setSessionProvider(null, prevSessions);
+        // ExoContainerContext.setCurrentContainer(prevContainer);
+        // ConversationState.setCurrent(prevConversation);
+        // sp.close();
+        commandEnv.cleanup(command);
       }
+    }
+  }
+
+  protected class ExoJCRSettings {
+    final ConversationState conversation;
+
+    final ExoContainer      container;
+
+    ConversationState       prevConversation;
+
+    ExoContainer            prevContainer;
+
+    SessionProvider         prevSessions;
+
+    ExoJCRSettings(ConversationState conversation, ExoContainer container) {
+      this.conversation = conversation;
+      this.container = container;
+    }
+  }
+
+  /**
+   * Setup environment for commands execution in eXo JCR Container.
+   */
+  protected class ExoJCREnvironment extends CloudDriveEnvironment {
+
+    protected final Map<Command, ExoJCRSettings> config = new HashMap<Command, ExoJCRSettings>();
+    
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public void configure(Command command) throws CloudDriveException {
+      ConversationState conversation = ConversationState.getCurrent();
+      if (conversation == null) {
+        throw new CloudDriveException("Error to " + getName() + " drive for user " + getUser().getEmail()
+            + ". User identity not set.");
+      }
+
+      config.put(command, new ExoJCRSettings(conversation, ExoContainerContext.getCurrentContainer()));
+
+      super.configure(command);
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public void prepare(Command command) throws CloudDriveException {
+      ExoJCRSettings sessings = config.get(command);
+
+      sessings.prevConversation = ConversationState.getCurrent();
+      ConversationState.setCurrent(sessings.conversation);
+
+      // set correct container
+      sessings.prevContainer = ExoContainerContext.getCurrentContainerIfPresent();
+      ExoContainerContext.setCurrentContainer(sessings.container);
+
+      // set correct SessionProvider
+      sessings.prevSessions = sessionProviders.getSessionProvider(null);
+      SessionProvider sp = new SessionProvider(sessings.conversation);
+      sessionProviders.setSessionProvider(null, sp);
+
+      super.prepare(command);
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public void cleanup(Command command) throws CloudDriveException {
+      super.cleanup(command);
+
+      ExoJCRSettings sessings = config.get(command);
+
+      ConversationState.setCurrent(sessings.prevConversation);
+      ExoContainerContext.setCurrentContainer(sessings.prevContainer);
+      SessionProvider sp = sessionProviders.getSessionProvider(null);
+      sessionProviders.setSessionProvider(null, sessings.prevSessions);
+      sp.close();
     }
   }
 
@@ -777,6 +786,8 @@ public abstract class JCRLocalCloudDrive extends CloudDrive {
      */
     protected Future<Command>              async;
 
+    protected ExoJCRSettings               settings;
+
     /**
      * Base command constructor.
      * 
@@ -794,7 +805,9 @@ public abstract class JCRLocalCloudDrive extends CloudDrive {
      * @throws CloudDriveException
      * @throws RepositoryException
      */
-    protected abstract void process() throws CloudDriveAccessException, CloudDriveException, RepositoryException;
+    protected abstract void process() throws CloudDriveAccessException,
+                                     CloudDriveException,
+                                     RepositoryException;
 
     /**
      * Start command execution. If command will fail due to provider error, the execution will be retried
@@ -808,6 +821,8 @@ public abstract class JCRLocalCloudDrive extends CloudDrive {
       startTime.set(System.currentTimeMillis());
 
       try {
+        commandEnv.prepare(this);
+
         driveRoot = rootNode(); // init in actual runner thread
 
         startAction(JCRLocalCloudDrive.this);
@@ -844,15 +859,19 @@ public abstract class JCRLocalCloudDrive extends CloudDrive {
         }
       } catch (CloudDriveException e) {
         handleError(driveRoot, e, getName());
+        commandEnv.fail(this, e);
         throw e;
       } catch (RepositoryException e) {
         handleError(driveRoot, e, getName());
+        commandEnv.fail(this, e);
         throw e;
       } catch (RuntimeException e) {
         handleError(driveRoot, e, getName());
+        commandEnv.fail(this, e);
         throw e;
       } finally {
         doneAction();
+        commandEnv.cleanup(this);
         finishTime.set(System.currentTimeMillis());
       }
     }
@@ -865,16 +884,11 @@ public abstract class JCRLocalCloudDrive extends CloudDrive {
      * @throws CloudDriveException if no ConversationState set in caller thread.
      */
     protected Future<Command> execAsync() throws CloudDriveException {
-      ConversationState conversation = ConversationState.getCurrent();
-      if (conversation == null) {
-        throw new CloudDriveException("Error to " + getName() + " drive for user " + getUser().getEmail()
-            + ". User identity not set.");
-      }
+      commandEnv.configure(this);
 
-      return async = commandExecutor.submit(getName(),
-                                            new CommandCallable(this,
-                                                                conversation,
-                                                                ExoContainerContext.getCurrentContainer()));
+      Callable<Command> callable = new CommandCallable(this);
+
+      return async = commandExecutor.submit(getName(), callable);
     }
 
     /**
@@ -1119,6 +1133,7 @@ public abstract class JCRLocalCloudDrive extends CloudDrive {
 
       Node parentNode = file.getParent();
 
+      // TODO cleanup
       if (file.isNodeType(ECD_CLOUDFILE)) {
         // it's already existing cloud file, need sync its content
         // cloudFile = drive.openFile(file.getName(), null);
@@ -1136,12 +1151,12 @@ public abstract class JCRLocalCloudDrive extends CloudDrive {
         // cloudFile = drive.openFile(file.getName(), null);
       } else if (file.isNodeType(NT_FILE)) {
         // it's new local JCR node - upload it to the cloud
-        String mimeType = file.getNode("jcr:content").getProperty("jcr:mimeType").getString();
+        //String mimeType = file.getNode("jcr:content").getProperty("jcr:mimeType").getString();
         isFolder = false;
         // cloudFile = drive.openFile(file.getName(), mimeType);
       } else if (file.isNodeType(NT_RESOURCE)) {
         // it's resource of new local JCR node - upload this nt:file to the cloud
-        String mimeType = file.getProperty("jcr:mimeType").getString();
+        //String mimeType = file.getProperty("jcr:mimeType").getString();
         file = parentNode;
         parentNode = file.getParent();
         isFolder = false;
@@ -1157,7 +1172,6 @@ public abstract class JCRLocalCloudDrive extends CloudDrive {
       }
 
       this.fileNode = file;
-
     }
 
     /**
@@ -1183,45 +1197,50 @@ public abstract class JCRLocalCloudDrive extends CloudDrive {
   /**
    * Support for JCR actions. To do not fire on synchronization (our own modif) methods.
    */
-  protected static final ThreadLocal<CloudDrive>   actionDrive    = new ThreadLocal<CloudDrive>();
+  protected static final ThreadLocal<CloudDrive>        actionDrive    = new ThreadLocal<CloudDrive>();
 
-  protected final Transliterator                   accentsConverter;
+  protected final Transliterator                        accentsConverter;
 
-  protected final String                           rootWorkspace;
+  protected final String                                rootWorkspace;
 
-  protected final ManageableRepository             repository;
+  protected final ManageableRepository                  repository;
 
-  protected final SessionProviderService           sessionProviders;
+  protected final SessionProviderService                sessionProviders;
 
-  protected final CloudUser                        user;
+  protected final CloudUser                             user;
 
-  protected final String                           rootUUID;
+  protected final String                                rootUUID;
 
-  protected final ThreadLocal<SoftReference<Node>> rootNodeHolder;
+  protected final ThreadLocal<SoftReference<Node>>      rootNodeHolder;
 
-  protected final NodeRemoveHandler                handler;
+  protected final NodeRemoveHandler                     handler;
 
   /**
    * Currently active connect command. Used to control concurrency in Cloud Drive.
    */
-  protected final AtomicReference<ConnectCommand>  currentConnect = new AtomicReference<ConnectCommand>();
+  protected final AtomicReference<ConnectCommand>       currentConnect = new AtomicReference<ConnectCommand>();
 
   /**
    * Currently active synchronization command. Used to control concurrency in Cloud Drive.
    */
-  protected final AtomicReference<SyncCommand>     currentSync    = new AtomicReference<SyncCommand>();
+  protected final AtomicReference<SyncCommand>          currentSync    = new AtomicReference<SyncCommand>();
 
   /**
    * Managed queue of commands.
    */
-  protected final CommandPoolExecutor              commandExecutor;
+  protected final CommandPoolExecutor                   commandExecutor;
+
+  /**
+   * Environment for commands execution.
+   */
+  protected final CloudDriveEnvironment commandEnv     = new ExoJCREnvironment();
 
   /**
    * Title has special care. It used in error logs and an attempt to read <code>exo:title</code> property can
    * cause another {@link RepositoryException}. Thus need it pre-cached in the variable and try to read the
    * <code>exo:title</code> property each time, but if not successful use this one cached.
    */
-  private String                                   titleCached;
+  private String                                        titleCached;
 
   /**
    * Create JCR backed {@link CloudDrive}. This method used for both newly connecting drives and ones loading
@@ -2293,6 +2312,14 @@ public abstract class JCRLocalCloudDrive extends CloudDrive {
     ObservationManager observation = session.getWorkspace().getObservationManager();
     observation.removeEventListener(handler.removeListener);
     observation.removeEventListener(handler.addListener);
+  }
+
+  /**
+   * {@inheritDoc}
+   */
+  @Override
+  protected void configure(CloudDriveEnvironment env) {
+    commandEnv.chain(env);
   }
 
   // ============== abstract ==============

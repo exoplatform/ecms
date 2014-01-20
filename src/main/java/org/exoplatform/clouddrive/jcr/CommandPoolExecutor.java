@@ -110,7 +110,7 @@ public class CommandPoolExecutor {
 
   }
 
-  public synchronized Future<Command> submit(String name, Callable<Command> command) {
+  public synchronized <S> Future<Command> submit(String name, Callable<Command> command) {
     init();
     return executor.submit(command);
   }

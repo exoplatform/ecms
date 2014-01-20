@@ -80,9 +80,9 @@ public abstract class CloudDrive {
      * @return long, time in milliseconds
      */
     long getFinishTime();
-    
+
     /**
-     * Command name. 
+     * Command name.
      * 
      * @return String
      */
@@ -97,7 +97,8 @@ public abstract class CloudDrive {
     Collection<CloudFile> getFiles();
 
     /**
-     * Collection of file paths removed by the command. Call to this method will return unmodifiable view on actual
+     * Collection of file paths removed by the command. Call to this method will return unmodifiable view on
+     * actual
      * results and should be treated accordingly until the command will not be completed.
      * 
      * @return collection of {@link String} file paths
@@ -577,4 +578,11 @@ public abstract class CloudDrive {
    * @return {@link String} with drive title.
    */
   protected abstract String title();
+
+  /**
+   * Configure environment for commands execution (optional).
+   * 
+   * @param env {@link CloudDriveEnvironment}
+   */
+  protected abstract void configure(CloudDriveEnvironment env);
 }
