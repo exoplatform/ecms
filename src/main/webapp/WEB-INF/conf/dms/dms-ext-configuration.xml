@@ -29,6 +29,11 @@
     <type>org.exoplatform.clouddrive.ecms.CloudDriveUIService</type>
   </component>
 
+  <component>
+    <key>org.exoplatform.services.cms.watch.WatchDocumentService</key>
+    <type>org.exoplatform.clouddrive.ecms.watch.WatchCloudDocumentServiceImpl</type>
+  </component>
+
   <external-component-plugins>
     <target-component>org.exoplatform.webui.ext.UIExtensionManager</target-component>
     <component-plugin>

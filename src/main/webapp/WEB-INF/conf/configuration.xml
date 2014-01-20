@@ -200,6 +200,11 @@
         </properties-param>
       </init-params>
     </component-plugin -->
+    <component-plugin>
+      <name>add.portalenv</name>
+      <set-method>addPlugin</set-method>
+      <type>org.exoplatform.clouddrive.webui.PortalEnvironment</type>
+    </component-plugin>
   </external-component-plugins>
 
   <import>war:/conf/dms/dms-ext-configuration.xml</import>
