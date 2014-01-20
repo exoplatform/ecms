@@ -138,6 +138,7 @@
     <view>
       <label>
         <not-avaliable>Không có sẵn</not-avaliable>
+        <core-elements>Thành phần cơ bản</core-elements>
         <title>Tiêu đề</title>
         <creator>Người tạo</creator>
         <subject>Chủ đề</subject>

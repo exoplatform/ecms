@@ -77,7 +77,7 @@
       <ParameterHelp>Este parámetro será usado para acceder al contenido si la navegación dinámica es activada.</ParameterHelp>
       <ShowDetailInPageHelp>Hacer clic en el contenido redirecciona al usuario hacia la página de detalle. Debe tener un portlet "Contenido por URL" con navegación dinámica activado en la página de destino para mostrar el contenido.</ShowDetailInPageHelp>
       <DetailParameterHelp>Este parámetro contendrá el camino hacia el contenido en el enlace hacia la página de detalle. Este parámetro debe coincidir con el parámetro usado en en portlet "Contenido por URL" de la pagina.</DetailParameterHelp>
-      <ContentByQueryHelp><![CDATA[You can set a SQL Query to get content dynamically. The following parameters are allowed : ${user}, ${lang} or any get parameter (PARAM) surrounded by ${PARAM}.]]></ContentByQueryHelp>
+      <ContentByQueryHelp>Puede definir una consulta SQL para acceder al contenido de manera dinámica. Los siguientes parámetros son permitidos : ${user}, ${lang} u otro parámetro (PARAM) rodeado por ${PARAM}.</ContentByQueryHelp>
       <ContentsVisibilityHelp>"Restringido por autentificación" filtrará el contenido basado en la autentificación. Si no se registra, sólo verá el contenido público. Si está registrado, verá todo el contenido visible por usuarios de la intranet (pero compartidos por todos). "Restringido por roles de usuario" significa que verá el contenido dependiendo de sus derechos. En la mayoría de los casos esta opción no debería ser usada ya que reduce el rendimiento general.</ContentsVisibilityHelp>
     </help>
     <action>

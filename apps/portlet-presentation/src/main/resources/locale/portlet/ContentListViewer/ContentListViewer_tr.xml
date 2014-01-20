@@ -77,7 +77,7 @@
       <ParameterHelp>Bu parametre, Dinamik navigasyon etkinleştirilirse içeriğe erişmek için kullanılır.</ParameterHelp>
       <ShowDetailInPageHelp>İçerik'i tıklatarak kullanıcı ayrıntı sayfasına yönlendirir. Dinamik içeriği göstermek için hedef sayfasında etkin gezinme ile "İçerik tarafından URL" portlet olması gerekir.</ShowDetailInPageHelp>
       <DetailParameterHelp>Bu parametre bağlantı ayrıntı sayfasına içerik yolunu içerir. Bu parametre, sayfanın "İçerik URL'si tarafından" portlette kullanılan parametre eşleşmesi gerekir.</DetailParameterHelp>
-      <ContentByQueryHelp><![CDATA[You can set a SQL Query to get content dynamically. The following parameters are allowed : ${user}, ${lang} or any get parameter (PARAM) surrounded by ${PARAM}.]]></ContentByQueryHelp>
+      <ContentByQueryHelp>Dinamik içerik almak için bir SQL sorgusu ayarlayabilirsiniz. Aşağıdaki parametreler kullanılabilir: ${user}, ${lang}  veya herhangi almak çevrili yanında ${PARAM} parametresi (parametre).</ContentByQueryHelp>
       <ContentsVisibilityHelp>"Kimlik doğrulama ile sınırlı" temel kimlik doğrulaması üzerinde içerik süzer. Eğer oturmum açmazsanız sadece genel içeriği görebilirsiniz.Oturum açtıysanız, intranet kullanıcılar tarafından görülebilir tüm içeriği görebilirsiniz.(ama herkez tarafından paylaşılan) "Kullanıcı rolleri ile sınırlı" içerik haklarınızı bağlı olarak göreceksiniz anlımana gelir.Çoğu durumda bu seçenek kullanılmamalıdır çünkü genel performansı düşürür.</ContentsVisibilityHelp>
     </help>
     <action>

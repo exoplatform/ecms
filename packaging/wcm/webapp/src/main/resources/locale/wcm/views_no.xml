@@ -33,7 +33,7 @@
     <view>
       <label>
         <title>Nettstedets tittel</title>
-        <description>Site Description</description>
+        <description>Nettstedsbeskrivelse</description>
         <keywords>Nøkkelord for nettstedet</keywords>
         <robots>Søkemotor oppsett</robots>
       </label>
@@ -50,7 +50,7 @@
 
   <Category>
     <view>
-      <label>Category</label>
+      <label>Kategori</label>
     </view>
   </Category>
 

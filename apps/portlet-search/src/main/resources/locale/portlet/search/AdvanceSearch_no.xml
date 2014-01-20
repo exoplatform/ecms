@@ -39,7 +39,7 @@
       <itemsPerPageSelector>Elementer per side</itemsPerPageSelector>
       <searchFormSelector>Søkeskjema mal</searchFormSelector>
       <searchResultSelector>Søkeresultat mal</searchResultSelector>
-      <searchPaginatorSelector>Search Paginator Template</searchPaginatorSelector>
+      <searchPaginatorSelector>Søk paginatormal</searchPaginatorSelector>
       <searchPageLayoutSelector>Søkeside Layout mal</searchPageLayoutSelector>
       <searchResultBasePathInputSetAction>Basis sti</searchResultBasePathInputSetAction>
       <pageMode>Sidemodus</pageMode>
@@ -68,7 +68,7 @@
   </UISearchForm>
   <UIPaginatorDefault>
     <label>
-      <next>Next</next>
+      <next>Neste</next>
       <previous>Forrige</previous>
       <more>Mer</more>
     </label>

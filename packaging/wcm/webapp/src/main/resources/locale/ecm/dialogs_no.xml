@@ -9,14 +9,14 @@
         <end-time>Sluttid</end-time>
         <start-time>Starttid</start-time>
         <lifecycle>Livssyklus</lifecycle>
-        <mimeType>Mime Type</mimeType>
+        <mimeType>MIME-typen</mimeType>
         <repeat-count>Antall repetisjoner</repeat-count>
         <time-interval>Tidsintervall</time-interval>
-        <query-items>Query Items</query-items>
+        <query-items>Spørringselementer</query-items>
         <schedule-type>Tidsplan type</schedule-type>
-        <remove>Remove Item</remove>
-        <add>Add Item</add>
-        <expand>Expand This</expand>
+        <remove>Fjern element</remove>
+        <add>Legge til element</add>
+        <expand>Utvid dette</expand>
       </label>
     </dialog>
   </Ecm>
@@ -40,7 +40,7 @@
     <dialog>
       <label>
         <name>Navn</name>
-        <content>Content</content>
+        <content>Innhold</content>
       </label>
     </dialog>
   </HtmlFile>
@@ -55,7 +55,7 @@
         <categories>Kategorier</categories>
         <mimeType>#{Ecm.dialog.label.mimeType}</mimeType>
         <content>#{word.content}</content>
-        <re-upload>The file already exists. You can delete it and upload another file.</re-upload>
+        <re-upload>Filen finnes allerede. Du kan slette den og laste opp en annen fil.</re-upload>
       </label>
     </dialog>
   </File>
@@ -65,9 +65,9 @@
       <description>#{word.description}</description>
       <port>Port</port>
       <userName>#{word.userName}</userName>
-      <password>Password</password>
-      <link>Link</link>
-      <to>Send Mail To</to>
+      <password>Passord</password>
+      <link>Lenke</link>
+      <to>Send mail til</to>
       <actionName>#{word.name}</actionName>
     </label>
   </UIActionForm>
@@ -76,9 +76,9 @@
       <description>#{word.description}</description>
       <port>Port</port>
       <userName>#{word.userName}</userName>
-      <password>Password</password>
-      <link>Link</link>
-      <to>Send Mail To</to>
+      <password>Passord</password>
+      <link>Lenke</link>
+      <to>Send mail til</to>
       <actionName>#{word.name}</actionName>
     </label>
   </EditFormAction>
@@ -112,7 +112,7 @@
         <end-time>#{Ecm.dialog.label.end-time}</end-time>
         <repeat-count>#{Ecm.dialog.label.repeat-count}</repeat-count>
         <time-inteval>#{Ecm.dialog.label.time-interval}</time-inteval>
-        <cron-expression>Cron expression</cron-expression>
+        <cron-expression>Cron uttrykk</cron-expression>
         <description>#{word.description}</description>
       </label>
     </dialog>
@@ -143,20 +143,20 @@
     <dialog>
       <label>
         <title>#{word.title}:</title>
-        <creator>Creator:</creator>
+        <creator>Forfatter:</creator>
         <subject>#{word.subject}:</subject>
-        <source>Source:</source>
-        <contributor>Contributor:</contributor>
-        <resource-type>Resource Type:</resource-type>
+        <source>Kilde:</source>
+        <contributor>Bidragsyter:</contributor>
+        <resource-type>Ressurstype:</resource-type>
         <date>#{word.date}:</date>
-        <publisher>Publisher:</publisher>
+        <publisher>Utgiver:</publisher>
         <description>#{word.description}:</description>
-        <rights>Rights:</rights>
-        <relation>Relation:</relation>
+        <rights>Rettigheter:</rights>
+        <relation>Relasjon:</relation>
         <format>#{word.format}:</format>
-        <coverage>Coverage:</coverage>
-        <identifier>Identifier:</identifier>
-        <language>Language:</language>
+        <coverage>Dekning:</coverage>
+        <identifier>Identifikator:</identifier>
+        <language>Språk:</language>
       </label>
     </dialog>
   </ElementSet>
@@ -167,8 +167,8 @@
   <Actionable>
     <dialog>
       <label>
-        <primary-type>Primary Type</primary-type>
-        <mixin-types>Mixin Types</mixin-types>
+        <primary-type>Hovedtype</primary-type>
+        <mixin-types>Mixin Typer</mixin-types>
       </label>
     </dialog>
   </Actionable>
@@ -181,8 +181,8 @@
       <label>
         <destination-workpsace>Målets arbeidsområde</destination-workpsace>
         <destination-path>Destinasjons sti</destination-path>
-        <primary-type>Primary Type</primary-type>
-        <mixin-types>Mixin Types</mixin-types>
+        <primary-type>Hovedtype</primary-type>
+        <mixin-types>Mixin Typer</mixin-types>
       </label>
     </dialog>
   </Move>
@@ -192,8 +192,8 @@
   <Published>
     <dialog>
       <label>
-        <start-publication>Start Publication</start-publication>
-        <end-publication>End Publication</end-publication>
+        <start-publication>Starte publisering</start-publication>
+        <end-publication>Avslutte publisering</end-publication>
       </label>
     </dialog>
   </Published>
@@ -236,10 +236,10 @@
   <Versionable>
     <dialog>
       <label>
-        <version-history>Version History</version-history>
+        <version-history>Versjonshistorikk</version-history>
         <base-version>Baseversjon</base-version>
-        <is-checked-out>Is Checked out</is-checked-out>
-        <predecessors>Predecessors</predecessors>
+        <is-checked-out>Er sjekket ut</is-checked-out>
+        <predecessors>Foregående</predecessors>
         <merge-failed>Fletting feilet</merge-failed>
         <uuid>UUID</uuid>
       </label>
@@ -253,9 +253,9 @@
     <dialog>
       <label>
         <name>Navn</name>
-        <autoload>Auto Load</autoload>
-        <minetype>MIME Type</minetype>
-        <content>Content</content>
+        <autoload>Automatisk lasting</autoload>
+        <minetype>MIME-type</minetype>
+        <content>Innhold</content>
       </label>
     </dialog>
   </ResouceContainer>
@@ -264,17 +264,17 @@
   -->
   <EmailAddressValidator>
     <msg>
-      <Invalid-input>The email address is invalid.</Invalid-input>
+      <Invalid-input>E-postadressen er ugyldig.</Invalid-input>
     </msg>
   </EmailAddressValidator>
   <EmptyFieldValidator>
     <msg>
-      <empty-input>The field '{0}' is required. Please enter your value.</empty-input>
+      <empty-input>Feltet '{0}' er påkrevd. Du må angi en verdi.</empty-input>
     </msg>
   </EmptyFieldValidator>
   <NumberFormatValidator>
     <msg>
-      <Invalid-number>The field '{0}' is invalid.</Invalid-number>
+      <Invalid-number>Feltet '{0}', er ugyldig.</Invalid-number>
     </msg>
   </NumberFormatValidator>
   <!--
@@ -287,7 +287,7 @@
       <label>
         <id>Id</id>
         <name>Navn</name>
-        <lifecycle>Lifecycle</lifecycle>
+        <lifecycle>Livssyklus</lifecycle>
         <homePath>Hjem sti</homePath>
         <targetWorkspace>Målets arbeidsområde</targetWorkspace>
         <targetPath>Mål sti</targetPath>
@@ -296,7 +296,7 @@
   </ScriptAction>
   <UIDialogForm>
    <form>
-   <DialogFormException>Cannot save this document. There may be a problem with the pre-save interceptor.</DialogFormException>
+   <DialogFormException>Kan ikke lagre dette dokumentet. Det kan være et problem med forhånds-lagrings interceptoren.</DialogFormException>
    </form>
   </UIDialogForm>
 
@@ -305,36 +305,36 @@
 
   ###################### resoucebundle exo:taxonomyAction dialogs template ####
   -->
-<no>No</no>
-<yes>Yes</yes>
+<no>Nei</no>
+<yes>Ja</yes>
 <true>Sant</true>
 <false>Usant</false>
-<Electronic>Electronic</Electronic>
-<Paper>Paper</Paper>
-<NONE>None</NONE>
-<CLASSIFIED>Classified</CLASSIFIED>
-<UNCLASSIFIED>Unclassified</UNCLASSIFIED>
-<NOCONTRACT>No Contract</NOCONTRACT>
-<one-minute>One Minute</one-minute>
-<hourly>Hourly</hourly>
-<daily>Daily</daily>
-<quarterly>Quarterly</quarterly>
-<yearly>Yearly</yearly>
-<ten-years>Ten Years</ten-years>
-<read>User Action</read>
-  <schedule>Scheduler</schedule>
-  <node_added>Content Addition</node_added>
-  <node_removed>Content Removal</node_removed>
-  <property_added>Property Addition</property_added>
-  <property_removed>Property Removal</property_removed>
-  <property_changed>Property Modification</property_changed>
+<Electronic>Elektronisk</Electronic>
+<Paper>Papir</Paper>
+<NONE>Ingen</NONE>
+<CLASSIFIED>Klassifisert</CLASSIFIED>
+<UNCLASSIFIED>Uklassifisert</UNCLASSIFIED>
+<NOCONTRACT>Ingen kontrakt</NOCONTRACT>
+<one-minute>Ett minutt</one-minute>
+<hourly>Hver time</hourly>
+<daily>Daglig</daily>
+<quarterly>Kvartalsvis</quarterly>
+<yearly>Årlig</yearly>
+<ten-years>Ti års</ten-years>
+<read>Brukerhandling</read>
+  <schedule>Oppgaveplanlegger</schedule>
+  <node_added>Innholdstillegg</node_added>
+  <node_removed>Fjerning av innhold</node_removed>
+  <property_added>Legg til egenskaper</property_added>
+  <property_removed>Fjerne egenskaper</property_removed>
+  <property_changed>Endring av egenskaper</property_changed>
 
   <ScriptAction>
     <dialog>
       <label>
-        <isDeep>Is Deep</isDeep>
+        <isDeep>Er dypt</isDeep>
         <nodetypes>Nodetyper</nodetypes>
-        <affectedNodeTypeNames>Affected Node Types</affectedNodeTypeNames>
+        <affectedNodeTypeNames>Berørte nodetyper</affectedNodeTypeNames>
       </label>
     </dialog>
   </ScriptAction>
@@ -342,9 +342,9 @@
   <AddMetadata>
     <dialog>
       <label>
-        <isDeep>Is Deep</isDeep>
+        <isDeep>Er dypt</isDeep>
         <nodetypes>Nodetyper</nodetypes>
-        <affectedNodeTypeNames>Affected Node Types</affectedNodeTypeNames>
+        <affectedNodeTypeNames>Berørte nodetyper</affectedNodeTypeNames>
       </label>
     </dialog>
   </AddMetadata>
@@ -352,9 +352,9 @@
   <EnableVersioning>
     <dialog>
       <label>
-        <isDeep>Is Deep</isDeep>
+        <isDeep>Er dypt</isDeep>
         <nodetypes>Nodetyper</nodetypes>
-        <affectedNodeTypeNames>Affected Node Types</affectedNodeTypeNames>
+        <affectedNodeTypeNames>Berørte nodetyper</affectedNodeTypeNames>
       </label>
     </dialog>
   </EnableVersioning>
@@ -362,9 +362,9 @@
   <AutoVersioning>
     <dialog>
       <label>
-        <isDeep>Is Deep</isDeep>
+        <isDeep>Er dypt</isDeep>
         <nodetypes>Nodetyper</nodetypes>
-        <affectedNodeTypeNames>Affected Node Types</affectedNodeTypeNames>
+        <affectedNodeTypeNames>Berørte nodetyper</affectedNodeTypeNames>
       </label>
     </dialog>
   </AutoVersioning>
@@ -372,15 +372,15 @@
   <AccessibleMedia>
   <dialog>
   <label>
-  <captions>Captions</captions>
-<audioDescription>Audio description</audioDescription>
-<alternativeText>Alternative text</alternativeText>
+  <captions>Teksting</captions>
+<audioDescription>Lydbeskrivelse</audioDescription>
+<alternativeText>Alternativ tekst</alternativeText>
 </label>
 </dialog>
 <help>
-<CaptionsHelp>Captions should provide text of dialog and important sounds</CaptionsHelp>
-<AudioDescriptionHelp>An audio description is a narrated track of the video</AudioDescriptionHelp>
-<AlternativeTextHelp>Provide an accessible, alternative way of presenting the information</AlternativeTextHelp>
+<CaptionsHelp>Captions skal inneholde dialog teksten og viktige lyder</CaptionsHelp>
+<AudioDescriptionHelp>En lydbeskrivelse er et fortellerspor til videoen</AudioDescriptionHelp>
+<AlternativeTextHelp>Gi en tilgjengelig, alternativ måte å presentere informasjonen</AlternativeTextHelp>
 </help>
 </AccessibleMedia>
   

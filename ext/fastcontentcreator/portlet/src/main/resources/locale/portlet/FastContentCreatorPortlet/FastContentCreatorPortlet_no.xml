@@ -11,7 +11,7 @@
       <access-denied>Ingen tilgang. Du har ikke rettigheter til å legge til i '{0}'.</access-denied>
       <path-not-found>Stien: {0} har blitt slettet eller er ugyldige.</path-not-found>
       <node-locked>Noden {0} er låst. Du må låse opp denne noden før du kan opprette dokumenter.</node-locked>
-      <node-isExist>This node already exists in '{0}' and is not allowed to be the same name as its sibling.</node-isExist>
+      <node-isExist>Denne noden finnes allerede i '{0}', og det er ikke tillatt med samme navn som noen av sine sideordnede noder.</node-isExist>
       <get-dialog-path>Det oppstod en feil under henting av dialogboksens sti.</get-dialog-path>
       <new-jcr-template>Det oppstod en feil under oppretting av ny mal.</new-jcr-template>
     </msg>
@@ -98,7 +98,7 @@
 
   <UITreeList>
     <info>
-      <child-not-found>This node does not have any child ones.</child-not-found>
+      <child-not-found>Denne noden har ingen undernode.</child-not-found>
     </info>
     <header>
       <name>Navn</name>

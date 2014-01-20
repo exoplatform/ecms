@@ -138,6 +138,7 @@
     <view>
       <label>
         <not-avaliable>N/A</not-avaliable>
+        <core-elements>Core Elements</core-elements>
         <title>Titel</title>
         <creator>Skapare</creator>
         <subject>Subjekt</subject>
