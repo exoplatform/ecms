@@ -40,7 +40,7 @@
   <UISCVPreferences>
     <action>
       <Save>#{word.save}</Save>
-      <Abort>Abort</Abort>
+      <Abort>Avbryt</Abort>
       <Cancel>#{word.cancel}</Cancel>
       <Print>Skriv ut</Print>
       <Close>#{word.close}</Close>
@@ -49,11 +49,11 @@
     <label>
       <Back>Tilbake til forrige side</Back>
       <Edit>Rediger</Edit>
-      <Preferences>Preferences</Preferences>
+      <Preferences>Innstillinger</Preferences>
       <Title>Preferanser for Innholdsdetaljer</Title>
       <UISCVShowTitleConfigurationCheckBox>Vis tittel</UISCVShowTitleConfigurationCheckBox>
       <UISCVShowDateConfigurationCheckBox>Vis dato</UISCVShowDateConfigurationCheckBox>
-      <UISCVShowOptionBarConfigurationCheckBox>Show Option Bar</UISCVShowOptionBarConfigurationCheckBox>
+      <UISCVShowOptionBarConfigurationCheckBox>Vis alternativlinjen</UISCVShowOptionBarConfigurationCheckBox>
       <DisplaySettingBlock>Visningsinnstillinger</DisplaySettingBlock>
       <ContentPathBlock>Innholdsvalg</ContentPathBlock>
       <UISCVConfigItemPathFormInputSet>Innholds sti</UISCVConfigItemPathFormInputSet>
@@ -62,18 +62,18 @@
       <ContextCaption>Dynamisk navigasjon</ContextCaption>
       <UISCVContextualRadioBox>Kontekstuelt innhold</UISCVContextualRadioBox>
       <UISCVParameterInputBox>av</UISCVParameterInputBox>
-      <PrintSettingBlock>Print Settings</PrintSettingBlock>
-      <UISCVPrintPageParameter>with</UISCVPrintPageParameter>
-      <UISCVConfigPrintPageFormInputSet>Show in Page</UISCVConfigPrintPageFormInputSet>
+      <PrintSettingBlock>Utskriftsinnstillinger</PrintSettingBlock>
+      <UISCVPrintPageParameter>med</UISCVPrintPageParameter>
+      <UISCVConfigPrintPageFormInputSet>Vis i side</UISCVConfigPrintPageFormInputSet>
       <LockStatus>Lås</LockStatus>
-      <CacheManagement>Content Visibility</CacheManagement>
-      <UISCVCacheRadioBox>Share Content</UISCVCacheRadioBox>
+      <CacheManagement>Innholdets synlighet</CacheManagement>
+      <UISCVCacheRadioBox>Del innhold</UISCVCacheRadioBox>
     </label>
     <help>
-      <ContentPathBlock>Select the content you want to show. This default content will be replaced dynamically if you activate the Dynamic Navigation option (see the Advanced mode below).</ContentPathBlock>
-      <DisplaySettingBlock>You can show or hide the Option bar used to show the print link. Title and Date displays are also optional.</DisplaySettingBlock>
-      <ContextualHelp>Activates Dynamic Navigation. The content can be changed dynamically by another URL-based parameter.</ContextualHelp>
-      <ParameterHelp>This parameter will be used to get the content if the Dynamic Navigation is activated.</ParameterHelp>
+      <ContentPathBlock>Velg innholdet du vil vise. Standardvalget vil bli erstattet dynamisk hvis du aktiverer alternativet Dynamisk navigasjon (se Avansert modus nedenfor).</ContentPathBlock>
+      <DisplaySettingBlock>Du kan vise eller skjule alternativlinjen som brukes til å vise utskriftslinken. Om tittel og dato skal vises er også valgfritt.</DisplaySettingBlock>
+      <ContextualHelp>Aktiverer Dynamisk navigasjon. Innholdet blir endret dynamisk av en annen URL-baserte parameter.</ContextualHelp>
+      <ParameterHelp>Denne parameteren brukes for å hente innhold hvis dynamisk navigasjon er aktivert.</ParameterHelp>
     </help>
     <msg>
       <not-valid-path>Elementets sti er ugyldig.</not-valid-path>
@@ -82,8 +82,8 @@
       <label>
         <UISCVConfigContentFormInputSet>Innholdsvalg</UISCVConfigContentFormInputSet>
         <UISCVConfigDisplayFormInputSet>Vis innstillinger</UISCVConfigDisplayFormInputSet>
-        <UISCVConfigPrintFormInputSet>Print Settings</UISCVConfigPrintFormInputSet>
-        <UISCVConfigAdvancedFormInputSet>Advanced</UISCVConfigAdvancedFormInputSet>
+        <UISCVConfigPrintFormInputSet>Utskriftsinnstillinger</UISCVConfigPrintFormInputSet>
+        <UISCVConfigAdvancedFormInputSet>Avansert</UISCVConfigAdvancedFormInputSet>
       </label>
     </tab>
   </UISCVPreferences>
@@ -95,7 +95,7 @@
   </UISCVConfigItemPathFormInputSet>
   <UISCVConfigPrintPageFormInputSet>
     <title>
-      <SelectTargetPage>Show in Page</SelectTargetPage>
+      <SelectTargetPage>Vis i side</SelectTargetPage>
     </title>
   </UISCVConfigPrintPageFormInputSet>
   <PublicationStates>
@@ -106,14 +106,14 @@
     <draft>Utkast</draft>
     <pending>Venter</pending>
     <approved>Godkjent</approved>
-    <inreview>Under Review</inreview>
+    <inreview>Til gjennomsyn</inreview>
     <staged>Lagt klar</staged>
     <published>Publisert</published>
   </PublicationStates>
   <UISCVCacheRadioBox>
     <label>
-      <Enable>Restricted by Authentication</Enable>
-      <Disable>Restricted by User roles</Disable>
+      <Enable>Begrenset av autentisering</Enable>
+      <Disable>Begrenset av brukerroller</Disable>
     </label>
   </UISCVCacheRadioBox>
 </bundle>

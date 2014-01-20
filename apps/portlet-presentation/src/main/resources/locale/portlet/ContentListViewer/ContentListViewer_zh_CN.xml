@@ -77,7 +77,7 @@
       <ParameterHelp>此参数将用于访问的内容，如果动态导航处于激活状态。</ParameterHelp>
       <ShowDetailInPageHelp>点击内容可将用户重定向到详细页。与动态导航启用在目标页上要显示的内容，您必须具有"内容的 URL"portlet。</ShowDetailInPageHelp>
       <DetailParameterHelp>此参数将包含链接到详细页中内容的路径。此参数必须与在页的"内容的 URL"portlet 中使用的参数相匹配。</DetailParameterHelp>
-      <ContentByQueryHelp><![CDATA[You can set a SQL Query to get content dynamically. The following parameters are allowed : ${user}, ${lang} or any get parameter (PARAM) surrounded by ${PARAM}.]]></ContentByQueryHelp>
+      <ContentByQueryHelp>您可以设置 SQL 查询来动态地获取内容。允许使用下列参数： ${用户}、 {郎} $ 或任何获取参数 (参数) ${参数} 被包围。</ContentByQueryHelp>
       <ContentsVisibilityHelp>"受限制的身份验证"将筛选的基础进行身份验证的内容。如果你没有登录，您将看到仅公共内容。如果您登录，您看到的所有内容可见的 intranet 用户 （但所有共享）。"受限制的用户角色"意味着你将看到的内容取决于您的权利。在大多数情况下，这应不使用选项，因为它减少了总体性能。</ContentsVisibilityHelp>
     </help>
     <action>

@@ -138,6 +138,7 @@
     <view>
       <label>
         <not-avaliable>不适用</not-avaliable>
+        <core-elements>Core Elements</core-elements>
         <title>标题</title>
         <creator>创建者</creator>
         <subject>主题</subject>

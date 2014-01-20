@@ -77,7 +77,7 @@
       <ParameterHelp>Este parâmetro será usado para acessar o conteúdo se a Navegação Dinâmica estiver ativa.</ParameterHelp>
       <ShowDetailInPageHelp>Clicar em um conteúdo redireciona para uma página de detalhes. Você deve ter um portlet "Conteúdo por URL" com Navegação Dinâmica habilitada na página destino para mostrá-lo.</ShowDetailInPageHelp>
       <DetailParameterHelp>Este parâmetro conterá o caminho para o contéudo no link para a página de Detalhes. Este parâmetro deve corresponder ao parâmetro no portlet "Conteúdo por URL" na página.</DetailParameterHelp>
-      <ContentByQueryHelp><![CDATA[You can set a SQL Query to get content dynamically. The following parameters are allowed : ${user}, ${lang} or any get parameter (PARAM) surrounded by ${PARAM}.]]></ContentByQueryHelp>
+      <ContentByQueryHelp>Você pode definir uma consulta SQL para obter conteúdo dinamicamente. Os seguintes parâmetros são permitidos: ${user}, ${lang} ou qualquer parâmetro get (PARAM) cercado por ${PARAM}.</ContentByQueryHelp>
       <ContentsVisibilityHelp>"Restrito por autenticação" filtrará o conteúdo com base na autenticação. Se você não se conectar, você verá apenas conteúdo público. Se você estiver conectado, você verá todo o conteúdo visível pelos usuários da intranet (mas compartilhada por todos). "Restrito por funções de usuário" significa que você verá o conteúdo dependendo da permissões concedidas a você. Na maioria dos casos, esta opção não deverá ser usada, por que reduz o desempenho geral.</ContentsVisibilityHelp>
     </help>
     <action>

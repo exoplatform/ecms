@@ -21,7 +21,7 @@
   -->
   <UISelectedCategoriesGrid>
     <header>
-      <categoryName>Category name</categoryName>
+      <categoryName>Kategorinavn</categoryName>
       <categoryPath>Kategori sti</categoryPath>
       <action>#{word.action}</action>
     </header>
@@ -31,8 +31,8 @@
     </action>
     <msg>
       <cannot-save>Kategorier ble ikke lagret.</cannot-save>
-      <have-saved>Categories were saved successfully</have-saved>
-      <non-categories>Categories are wrong. Please select the appropriate categories.</non-categories>
+      <have-saved>Kategorier ble lagret</have-saved>
+      <non-categories>Kategoriene er feil. Velg riktig kategorier.</non-categories>
       <confirm-delete>Vil du slette denne kategorien?</confirm-delete>
     </msg>
   </UISelectedCategoriesGrid>
@@ -49,14 +49,14 @@
   </SelectUserOrGroup>
   <UIPermissionUser>
     <label>
-      <selectUser>Select User</selectUser>
-      <selectGroup>Browse and select a group</selectGroup>
+      <selectUser>Velg bruker</selectUser>
+      <selectGroup>Bla gjennom og velge en gruppe</selectGroup>
     </label>
   </UIPermissionUser>
   <UIPermissionMembership>
     <label>
       <selectUser>Velg medlemsskap</selectUser>
-      <selectGroup>Browse and select a group</selectGroup>
+      <selectGroup>Bla gjennom og velge en gruppe</selectGroup>
     </label>
   </UIPermissionMembership>
 </bundle>

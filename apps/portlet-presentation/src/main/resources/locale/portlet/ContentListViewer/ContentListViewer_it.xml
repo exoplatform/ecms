@@ -77,7 +77,7 @@
       <ParameterHelp>Questo parametro verrà utilizzato per ottenere il contenuto di navigazione dinamica, se è attivato.</ParameterHelp>
       <ShowDetailInPageHelp>Facendo clic su un contenuto reindirizza a una pagina di dettaglio. Devi avere una portlet "Contenuto da URL" con Navigazione Dinamica attivata sulla pagina di destinazione per mostrare il contenuto.</ShowDetailInPageHelp>
       <DetailParameterHelp>Questo parametro contiene il percorso del contenuto del link alla pagina di dettaglio. Questo parametro deve corrispondere al parametro utilizzato nella portlet "Contenuto da URL" della pagina.</DetailParameterHelp>
-      <ContentByQueryHelp><![CDATA[You can set a SQL Query to get content dynamically. The following parameters are allowed : ${user}, ${lang} or any get parameter (PARAM) surrounded by ${PARAM}.]]></ContentByQueryHelp>
+      <ContentByQueryHelp>È possibile impostare una query SQL per ottenere contenuti dinamicamente. I seguenti parametri sono consentiti : ${user}, ${lang} o qualsiasi parametro get (PARAM) circondato da ${PARAM}.</ContentByQueryHelp>
       <ContentsVisibilityHelp>Limitato da autenticazione "filtrerà i contenuti in base all'autenticazione. Se non accedi, si vede solo il contenuto pubblico. Se si è effettuato l'accesso, si vede tutto il contenuto visibile dagli utenti intranet (ma condiviso da tutti)." Ristretto da ruoli utente "significa vedere i contenuti a seconda dei Suoi diritti. Nella maggior parte dei casi, questa opzione non deve essere utilizzato in quanto riduce le prestazioni globali.</ContentsVisibilityHelp>
     </help>
     <action>

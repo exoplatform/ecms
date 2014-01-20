@@ -87,7 +87,7 @@
 -->
   <UITaxonomyTreeMainForm>
     <action>
-      <Reset>Reset</Reset>
+      <Reset>Tilbakestill</Reset>
     </action>
     <msg>
       <name-not-allowed>Forbudt navn</name-not-allowed>
@@ -127,7 +127,7 @@
 <header>
 <usersOrGroups>Bruker eller gruppe</usersOrGroups>
 <read>Lest</read>
-<addNode>Add Node</addNode>
+<addNode>Legg til Node</addNode>
 <setProperty>Angi egenskap</setProperty>
 <remove>Fjern</remove>
 <action>Handling</action>
@@ -236,12 +236,12 @@
       <False>usant</False>
     </label>
     <title>
-      <view>View</view>
+      <view>Vis</view>
       <edit>Rediger</edit>
       <delete>Slette</delete>
     </title>
     <header>
-      <icon>Icon</icon>
+      <icon>Ikon</icon>
       <name>Metadata</name>
       <type>Type</type>
       <internalUse>Intern bruk</internalUse>
@@ -282,10 +282,10 @@
     <title>Tilordning av metadata</title>
     <action>
       <Cancel>#{word.cancel}</Cancel>
-      <Save>Apply</Save>
+      <Save>Bruk</Save>
     </action>
     <header>
-      <icon>Icon</icon>
+      <icon>Symbol</icon>
       <label>Nodenavn</label>
       <input>Handling</input>
     </header>
@@ -295,7 +295,7 @@
       <metadataName>Metadata navn:</metadataName>
       <viewPermission>Rettighet:</viewPermission>
       <permission>UIMetadataForm</permission>
-      <metadataLabel>Label:</metadataLabel>
+      <metadataLabel>Etikett:</metadataLabel>
     </label>
     <tab>
       <label>
@@ -342,12 +342,12 @@
   -->
   <UIDriveList>
     <header>
-      <icon>Icon</icon>
+      <icon>Symbol</icon>
       <name>Navn</name>
       <workspace>Arbeidsområde</workspace>
       <homePath>Hjem sti</homePath>
       <permissions>Rettigheter</permissions>
-      <views>View</views>
+      <views>Vis</views>
       <action>Handling</action>
     </header>
     <tooltip>
@@ -400,7 +400,7 @@
       <showHiddenNode>Vis skjulte noder:</showHiddenNode>
       <allowCreateFolders>Tillat mappeoppretting:</allowCreateFolders>
       <Admin>Administrer:</Admin>
-      <Categories>Categories:</Categories>
+      <Categories>Kategorier:</Categories>
       <Icons>Ikoner:</Icons>
       <List>Liste:</List>
       <Web>Web:</Web>
@@ -439,8 +439,8 @@
   -->
   <UINodeTypeManager>
     <header>
-      <icon>Icon</icon>
-      <label>Node Name</label>
+      <icon>Symbol</icon>
+      <label>Nodenavn</label>
       <input>Handling</input>
     </header>
     <action>
@@ -458,7 +458,7 @@
       <false>Usant</false>
     </label>
     <header>
-      <icon>Icon</icon>
+      <icon>Symbol</icon>
       <nodeType>Nodetype</nodeType>
       <mixinType>Mixin Type</mixinType>
       <orderable>Sorterbare undernoder</orderable>
@@ -470,7 +470,7 @@
       <Add>Legg til</Add>
     </action>
     <tooltip>
-      <View>View</View>
+      <View>Vis</View>
       <Edit>Rediger</Edit>
       <Delete>Slette</Delete>
     </tooltip>
@@ -489,8 +489,8 @@
       <Add>Legg til</Add>
     </action>
     <header>
-      <icon>Icon</icon>
-      <label>Node Name</label>
+      <icon>Symbol</icon>
+      <label>Nodenavn</label>
       <input>Handling</input>
     </header>
   </UINodeTypeOptionList>
@@ -625,7 +625,7 @@
   -->
   <UINodeTypeExport>
     <header>
-      <icon>Icon</icon>
+      <icon>Symbol</icon>
       <label>Nodenavn</label>
       <input>Handling</input>
     </header>
@@ -684,8 +684,8 @@
       <Upload>Last opp på nytt</Upload>
     </action>
     <header>
-      <icon>Icon</icon>
-      <label>Node Name</label>
+      <icon>Symbol</icon>
+      <label>Nodenavn</label>
       <input>Handling</input>
     </header>
     <title>Velg Importer nodetype</title>
@@ -785,9 +785,9 @@
       <ECMTemplate>Mal utforsker</ECMTemplate>
       <UIScriptForm>Skript</UIScriptForm>
       <UIDialogTab>Dialogvindu</UIDialogTab>
-      <UIViewTab>View</UIViewTab>
-      <UITemplateEditForm>Template</UITemplateEditForm>
-      <UITemplateForm>Template</UITemplateForm>
+      <UIViewTab>Vis</UIViewTab>
+      <UITemplateEditForm>Mal</UITemplateEditForm>
+      <UITemplateForm>Mal</UITemplateForm>
       <UITemplateContainer>Dokumenter</UITemplateContainer>
       <UIActionsTemplateContainer>Handlinger</UIActionsTemplateContainer>
       <UIOthersTemplateContainer>Andre</UIOthersTemplateContainer>
@@ -811,7 +811,7 @@
   -->
   <UIViewList>
    <title>
-     <View>View</View>
+     <View>Vis</View>
      <EditInfo>Rediger</EditInfo>
      <Delete>Slette</Delete>
    </title>
@@ -833,7 +833,7 @@
   </UIViewList>
   <ViewPopup>
     <title>
-      <UIViewFormTabPane>View</UIViewFormTabPane>
+      <UIViewFormTabPane>Vis</UIViewFormTabPane>
     </title>
   </ViewPopup>
   <AddPopup>
@@ -921,7 +921,7 @@
   -->
   <UIViewForm>
     <title>
-      <AddPermission>Add Permission</AddPermission>
+      <AddPermission>Legge til rettighet</AddPermission>
       <RemovePermission>Fjern rettighet</RemovePermission>
     </title>
     <msg>
@@ -934,7 +934,7 @@
     </msg>
     <label>
       <viewName>Navn</viewName>
-      <template>Template</template>
+      <template>Mal</template>
 <version>Gjenopprett versjon</version>
       <enableVersion>Aktiver versjon</enableVersion>
       <hideExplorerPanel>Skjul utforskeren i sidestolpen</hideExplorerPanel>
@@ -950,7 +950,7 @@
       <version>Gjenopprett versjon</version>
       <viewName>Navn</viewName>
       <tabName>Fanenavn</tabName>
-      <permission>Permission</permission>
+      <permission>Rettighet</permission>
       <tabs>Faner</tabs>
       <template>Maler</template>
       <enableVersion>Aktiver versjon</enableVersion>
@@ -963,14 +963,14 @@
       <viewReferences>Vis referanser</viewReferences>
       <viewNodeType>Vis nodetype</viewNodeType>
       <viewPermissions>Vis rettigheter</viewPermissions>
-      <viewProperties>View Properties</viewProperties>
+      <viewProperties>Vis egenskaper</viewProperties>
       <manageVersions>Administrer versjoner</manageVersions>
       <manageAuditing>Administrer revisjonering</manageAuditing>
       <managePublications>Håndter publisering</managePublications>
       <manageCategories>Administrer kategorier</manageCategories>
       <manageRelations>Administrer relasjoner</manageRelations>
       <manageActions>Administrere handlinger</manageActions>
-      <exportNode>Export Node</exportNode>
+      <exportNode>Eksporter node</exportNode>
       <importNode>Importer Node</importNode>
       <viewRelations>Vis relasjoner</viewRelations>
       <showJCRStructure>Vis JCR struktur</showJCRStructure>
@@ -981,7 +981,7 @@
       <manageHidden>Skjul/vis innhold</manageHidden>
       <comment>Kommentar</comment>
       <vote>Stem</vote>  
-      <addCategory>Add Category</addCategory>
+      <addCategory>Legge til kategori</addCategory>
       <addLocalizationLink>Legge til oversettelse</addLocalizationLink>
       <publicationRequestApproval>Godkjenningsforespørsel</publicationRequestApproval>
       <publicationApproveContent>Godkjenn innhold</publicationApproveContent>
@@ -1003,21 +1003,21 @@
     <tab>
       <label>
         <UITabContainer>Handling</UITabContainer>
-        <UIViewForm>View</UIViewForm>
-        <UIViewPermissionContainer>Permission</UIViewPermissionContainer>    
+        <UIViewForm>Vis</UIViewForm>
+        <UIViewPermissionContainer>Rettighet</UIViewPermissionContainer>    
       </label>
     </tab>
     <action>
       <Save>#{word.save}</Save>
-      <Reset>Reset</Reset>
+      <Reset>Tilbakestill</Reset>
       <Cancel>#{word.cancel}</Cancel>
       <Close>#{word.close}</Close>
-      <Restore>Restore</Restore>
+      <Restore>Gjenopprett</Restore>
     </action>
   </UIViewFormTabPane>
   <PopupViewPermission>
     <title>
-      <UIPermissionSelector>Select Permission</UIPermissionSelector>
+      <UIPermissionSelector>Velg rettigheter</UIPermissionSelector>
     </title>
   </PopupViewPermission>
 
@@ -1041,7 +1041,7 @@
   -->
   <UIECMTemplateList>
     <title>
-      <View>View</View>
+      <View>Vis</View>
       <EditInfo>Rediger</EditInfo>
       <Delete>Slette</Delete>
     </title>
@@ -1070,8 +1070,8 @@
     <action>
       <Save>#{word.save}</Save>
       <Cancel>#{word.cancel}</Cancel>
-      <Reset>Reset</Reset>
-      <Restore>Restore</Restore>
+      <Reset>Tilbakestill</Reset>
+      <Restore>Gjenopprett</Restore>
       <Refresh>#{word.refresh}</Refresh>
     </action>
     <msg>
@@ -1083,19 +1083,19 @@
     </msg>
     <tab>
       <label>
-        <template>Template</template>
+        <template>Mal</template>
         <defaultDialog>Dialogvindu</defaultDialog>
-        <defaultView>View</defaultView>
+        <defaultView>Vis</defaultView>
       </label>
     </tab>
     <label>
       <name>navn:</name>
-      <label>Label:</label>
+      <label>Etikett:</label>
       <isDocumentTemplate>er dokumentmal:</isDocumentTemplate>
       <dialog>Dialogvindu innhold</dialog>
       <view>Vis innhold</view>
       <permission>Rettighet:</permission>
-      <selectPemistion>Permission</selectPemistion>
+      <selectPemistion>Rettighet</selectPemistion>
     </label>
   </UITemplateForm>
   <!--
@@ -1186,7 +1186,7 @@
       <Restore>#{word.restore}</Restore>
       <Cancel>#{word.cancel}</Cancel>
       <Refresh>#{word.refresh}</Refresh>
-      <Change>Change</Change>
+      <Change>Endre</Change>
     </action>
     <msg>
       <version-restored>Versjon {0} ble gjenopprettet.</version-restored>
@@ -1208,7 +1208,7 @@
   <UIScriptForm>
     <label>
       <selectVersion>Versjoner</selectVersion>
-      <scriptContent>Content</scriptContent>
+      <scriptContent>Innhold</scriptContent>
       <scriptLabel>Navn</scriptLabel>
       <scriptName>Skript</scriptName>
       <enableVersion>Aktiver versjonskontroll</enableVersion>
@@ -1223,7 +1223,7 @@
   <ecmScriptForm>
     <label>
       <selectVersion>Versjoner</selectVersion>
-      <scriptContent>Content</scriptContent>
+      <scriptContent>Innhold</scriptContent>
       <scriptLabel>Navn</scriptLabel>
       <scriptName>Skript</scriptName>
       <enableVersion>Aktiver versjonskontroll</enableVersion>
@@ -1239,7 +1239,7 @@
       <Save>#{word.save}</Save>
       <Cancel>#{word.cancel}</Cancel>
     </action>
-    <title>Add Category</title>
+    <title>Legge til kategori</title>
     <label>
       <taxonomyName>Kategorinavn</taxonomyName>
       <parentPath>Overordnet</parentPath>
@@ -1315,7 +1315,7 @@
   
   <TaxoTreeSelectUserOrGroup>
     <label>
-      <selectGroup>Select Group</selectGroup>
+      <selectGroup>Velg gruppe</selectGroup>
       <selectMembership>Velg medlemskap</selectMembership>
     </label>
   </TaxoTreeSelectUserOrGroup>
@@ -1378,7 +1378,7 @@
     <action>
       <Close>#{word.close}</Close>
       <Save>Lagre</Save>
-      <Reset>Reset</Reset>
+      <Reset>Tilbakestill</Reset>
     </action>
     <msg>
       <checkbox-require>Velg minst én rettighet.</checkbox-require>
@@ -1396,14 +1396,14 @@
   
   <PopupTaxonomyTreePermission>
     <title>
-      <UIPermissionSelector>Select Permission</UIPermissionSelector>
+      <UIPermissionSelector>Velg rettigheter</UIPermissionSelector>
     </title>
    </PopupTaxonomyTreePermission>
    
    <PopupDrivePermission>
     <title>
-      <AddDrivePermissionSelector>Add Permission</AddDrivePermissionSelector>
-      <UIPermissionSelector>Select Permission</UIPermissionSelector>
+      <AddDrivePermissionSelector>Legge til rettighet</AddDrivePermissionSelector>
+      <UIPermissionSelector>Velg rettigheter</UIPermissionSelector>
     </title>
   </PopupDrivePermission>
   
@@ -1461,7 +1461,7 @@
   </SelectUserOrGroup>
   <UIGroupSelector>
     <label>
-      <selectGroup>Select Group</selectGroup>
+      <selectGroup>Velg gruppe</selectGroup>
       <selectUser>Velg bruker</selectUser>
     </label>
     <msg>
@@ -1481,7 +1481,7 @@
     <action>
       <Close>#{word.close}</Close>
       <Save>#{word.save}</Save>
-      <Reset>Reset</Reset>
+      <Reset>Tilbakestill</Reset>
     </action>
     <msg>
       <checkbox-require>Velg minst én rettighet.</checkbox-require>
@@ -1493,7 +1493,7 @@
   
   <TaxonomyPopup>
     <title>
-      <UITaxonomyForm>Add Category</UITaxonomyForm>
+      <UITaxonomyForm>Legge til kategori</UITaxonomyForm>
     </title>
   </TaxonomyPopup>
   
@@ -1511,8 +1511,8 @@
     <header>
       <name>Type</name>
       <action>Handling</action>
-      <label>Template</label>
-      <icon>Icon</icon>
+      <label>Mal</label>
+      <icon>Symbol</icon>
     </header>
     <action>
       <AddNew>Legg til mal</AddNew>
@@ -1529,8 +1529,8 @@
     <header>
       <name>Type</name>
       <action>Handling</action>
-      <label>Template</label>
-      <icon>Icon</icon>
+      <label>Mal</label>
+      <icon>Symbol</icon>
     </header>
     <action>
       <AddNew>Legg til mal</AddNew>
@@ -1546,8 +1546,8 @@
   <UIOthersTemplateList>
     <header>
       <name>Type</name>
-      <label>Template</label>
-      <icon>Icon</icon>
+      <label>Mal</label>
+      <icon>Symbol</icon>
       <action>Handling</action>
     </header>
     <action>
@@ -1569,7 +1569,7 @@
 
 <UITabPane>
  <title>
- <ContentTemplateContainer>Content</ContentTemplateContainer>
+ <ContentTemplateContainer>Innhold</ContentTemplateContainer>
 <CateTemplateContainer>Navigering</CateTemplateContainer>
 <PageTemplateContainer>Paginator</PageTemplateContainer>
  </title>
@@ -1583,7 +1583,7 @@
     <header>
       <title>Navn</title>
       <action>Handling</action>
-      <template>Template</template>
+      <template>Mal</template>
     </header>
     <action>
       <AddTemplate>Legg til mal</AddTemplate>
@@ -1602,7 +1602,7 @@
     <header>
       <title>Navn</title>
       <action>Handling</action>
-      <template>Template</template>
+      <template>Mal</template>
     </header>
     <title>
       <Edit>Rediger</Edit>
@@ -1619,7 +1619,7 @@
     <header>
       <title>Navn</title>
       <action>Handling</action>
-      <template>Template</template>
+      <template>Mal</template>
     </header>
     <action>
       <AddTemplate>Legg til mal</AddTemplate>
@@ -1667,13 +1667,13 @@
 <UICLVTemplateForm_ContentTemplateContainer>
  <action>
   <Save>#{word.save}</Save>
-<Reset>Reset</Reset>
+<Reset>Tilbakestill</Reset>
 <Cancel>#{word.cancel}</Cancel>
  </action>
 <label>
  <title>Navn</title>
 <template>Malnavn</template>
-<content>Content</content>
+<content>Innhold</content>
 <type>Maltype</type>
 </label>
 </UICLVTemplateForm_ContentTemplateContainer>
@@ -1681,13 +1681,13 @@
 <UICLVTemplateForm_PageTemplateContainer>
  <action>
   <Save>#{word.save}</Save>
-<Reset>Reset</Reset>
+<Reset>Tilbakestill</Reset>
 <Cancel>#{word.cancel}</Cancel>
  </action>
 <label>
  <title>Navn</title>
 <template>Malnavn</template>
-<content>Content</content>
+<content>Innhold</content>
 <type>Maltype</type>
 </label>
 </UICLVTemplateForm_PageTemplateContainer>
@@ -1695,25 +1695,25 @@
 <UICLVTemplateForm_CateTemplateContainer>
  <action>
   <Save>#{word.save}</Save>
-<Reset>Reset</Reset>
+<Reset>Tilbakestill</Reset>
 <Cancel>#{word.cancel}</Cancel>
  </action>
 <label>
  <title>Navn</title>
 <template>Malnavn</template>
-<content>Content</content>
+<content>Innhold</content>
 <type>Maltype</type>
 </label>
 </UICLVTemplateForm_CateTemplateContainer>
 <UICLVTemplateForm>
   <label>
     <paginators>Paginator</paginators>
-<list>Content</list>
+<list>Innhold</list>
 <navigation>Navigering</navigation>
   </label>
                           <action>
                             <Save>#{word.save}</Save>
-                            <Reset>Reset</Reset> 
+                            <Reset>Tilbakestill</Reset> 
                             <Cancel>#{word.cancel}</Cancel> 
                           </action> 
   <msg>
@@ -1728,12 +1728,12 @@
   -->
   <AddNewTemplatePermission>
     <title>
-      <UIPermissionSelector>Select Permission</UIPermissionSelector>
+      <UIPermissionSelector>Velg rettigheter</UIPermissionSelector>
     </title>
   </AddNewTemplatePermission>
   <TemplatePermission>
     <title>
-      <UIPermissionSelector>Select Permission</UIPermissionSelector>
+      <UIPermissionSelector>Velg rettigheter</UIPermissionSelector>
     </title>
   </TemplatePermission>
   <TemplateContainerPopup>
@@ -1744,7 +1744,7 @@
   <ViewForm>
     <label>
       <UITemplateContent>ViewForm</UITemplateContent>
-      <UIPopupWindow>View Permission</UIPopupWindow>
+      <UIPopupWindow>Vis rettigheter</UIPopupWindow>
       <selectVersion>Versjoner</selectVersion>
       <content>Innhold:</content>
       <name>navn:</name>
@@ -1769,12 +1769,12 @@
   </DialogForm>
   <DialogFormTemplatePermission>
     <title>
-      <UIPermissionSelector>Select Permission</UIPermissionSelector>
+      <UIPermissionSelector>Velg rettigheter</UIPermissionSelector>
     </title>
   </DialogFormTemplatePermission>
   <ViewFormTemplatePermission>
     <title>
-      <UIPermissionSelector>Select Permission</UIPermissionSelector>
+      <UIPermissionSelector>Velg rettigheter</UIPermissionSelector>
     </title>
   </ViewFormTemplatePermission>
   <TemplateContainerPopup>
@@ -1803,7 +1803,7 @@
   <UITemplateEditForm>
     <label>
       <name>navn:</name>
-      <label>Label:</label>
+      <label>Etikett:</label>
       <isDocumentTemplate>er dokumentmal:</isDocumentTemplate>
     </label>
     <action>
@@ -1877,7 +1877,7 @@
       <name-exist>Navnet '{0}' finnes allerede.</name-exist>
     </msg>
     <title>
-      <AddPermission>Add Permission</AddPermission>
+      <AddPermission>Legge til rettighet</AddPermission>
       <RemovePermission>Fjern rettighet</RemovePermission>
     </title>
   </UITemplateContent>
@@ -1903,7 +1903,7 @@
   </JCRBrowser>
   <JCRBrowserAssets>
     <title>
-      <UIOneNodePathSelector>Select Icon</UIOneNodePathSelector>
+      <UIOneNodePathSelector>Velg ikon</UIOneNodePathSelector>
     </title>
   </JCRBrowserAssets>
   <!--
@@ -1965,7 +1965,7 @@
   </EditQueryForm>
 <PermissionPopup>
   <title>
-    <UIGroupMemberSelector>Select Permission</UIGroupMemberSelector>
+    <UIGroupMemberSelector>Velg rettigheter</UIGroupMemberSelector>
   </title>
 </PermissionPopup>
   <!--
@@ -2002,7 +2002,7 @@
       <styleHTML>HTML stil:</styleHTML>
     </label>
     <action>
-      <UpdateStyle>Update</UpdateStyle>
+      <UpdateStyle>Oppdater</UpdateStyle>
       <Cancel>#{word.cancel}</Cancel>
     </action>
     <msg>
@@ -2051,7 +2051,7 @@
     <label>
       <workspaceName>Arbeidsområde:</workspaceName>
       <rootNodeInfo>UIWorkspaceList</rootNodeInfo>
-      <rootNodePath>Root Path:</rootNodePath>
+      <rootNodePath>Rot sti:</rootNodePath>
     </label>
   </UIWorkspaceList>
   <!--
@@ -2061,22 +2061,22 @@
   -->
   <UIFormInputSetWithAction>
     <msg>
-      <confirm-delete>Are you sure you want to delete?</confirm-delete>
+      <confirm-delete>Er du sikker på at du vil slette?</confirm-delete>
     </msg>
   </UIFormInputSetWithAction>
   <template>
     <title>
-      <AddPermission>Add Permission</AddPermission>
+      <AddPermission>Legge til rettighet</AddPermission>
     </title>
   </template>
   <metadataTypeTab>
     <title>
-      <AddPermission>Add Permission</AddPermission>
+      <AddPermission>Legge til rettighet</AddPermission>
     </title>
   </metadataTypeTab>
   <PermissionButton>
     <title>
-      <AddPermission>Add Permission</AddPermission>
+      <AddPermission>Legge til rettighet</AddPermission>
     </title>
   </PermissionButton>
   <nodeTypeDefinition>
@@ -2105,7 +2105,7 @@
   -->
   <UIViewContainer>
     <title>
-      <View>View</View>
+      <View>Vis</View>
       <EditInfo>Rediger</EditInfo>
       <Delete>Slette</Delete>
     </title>
@@ -2121,7 +2121,7 @@
   </ECMTemplate>
   <step1>
     <title>
-      <AddPermission>Add Permission</AddPermission>
+      <AddPermission>Legge til rettighet</AddPermission>
     </title>
   </step1>
   <step2>
@@ -2137,7 +2137,7 @@
   </step3>
   <UIDrivePermissionSelector>
     <label>
-      <selectGroup>Select Group</selectGroup>
+      <selectGroup>Velg gruppe</selectGroup>
       <selectUser>Velg bruker</selectUser>
       <selectMembership>Velg medlemsskap</selectMembership>
     </label>
@@ -2145,7 +2145,7 @@
   
   <UIPermissionSelector>
     <label>
-      <selectGroup>Select Group</selectGroup>
+      <selectGroup>Velg gruppe</selectGroup>
       <selectUser>Velg bruker</selectUser>
       <selectMembership>Velg medlemsskap</selectMembership>
     </label>
@@ -2171,7 +2171,7 @@
   
   <MetadataPermission>
     <label>
-      <selectGroup>Select Group</selectGroup>
+      <selectGroup>Velg gruppe</selectGroup>
     </label>
   </MetadataPermission>  
   <MetadataPermission>
@@ -2189,7 +2189,7 @@
   -->
   <QueriesPermissionBrowse>
     <label>
-      <selectGroup>Select Group</selectGroup>
+      <selectGroup>Velg gruppe</selectGroup>
       <selectUser>Velg bruker</selectUser>
       <selectMembership>Velg medlemskap</selectMembership>
     </label>
@@ -2232,8 +2232,8 @@
         <firstName>#{word.firstName}</firstName>
         <email>#{word.email}</email>
       </option>
-      <group>Group</group>
-      <searchUser>User</searchUser>
+      <group>Gruppe</group>
+      <searchUser>Bruker</searchUser>
       <userName>#{word.userName}</userName>
       <lastName>#{word.lastName}</lastName>
       <firstName>#{word.firstName}</firstName>
@@ -2334,7 +2334,7 @@
     <action>
       <AddTabForm>Legg til fane</AddTabForm>
       <AddTab>#{word.save}</AddTab>
-      <BackViewForm>Back</BackViewForm>
+      <BackViewForm>Tilbake</BackViewForm>
     </action>
   </UIViewFormTabPane>
   
@@ -2404,7 +2404,7 @@
 </UITaxonomyTreeContainer>
 <UITaxonomyTreeMainForm>
 <action>
-<NextViewPermission>Next</NextViewPermission>
+<NextViewPermission>Neste</NextViewPermission>
 <Reset>Reset</Reset>
 </action>
 </UITaxonomyTreeMainForm>
@@ -2413,25 +2413,25 @@
 <action>
 <Save>Save</Save>
 <Reset>Reset</Reset>
-<NextAddAction>Next</NextAddAction>
-<Previous>Previous</Previous>
+<NextAddAction>Neste</NextAddAction>
+<Previous>Forrige</Previous>
 </action>
 </UIPermissionTreeForm>
 
 <UIActionForm>
 <action>
-<PreviousViewPermission>Previous</PreviousViewPermission>
-<NextViewTree>Next</NextViewTree>
+<PreviousViewPermission>Forrige</PreviousViewPermission>
+<NextViewTree>Neste</NextViewTree>
 </action>
   <msg>
-    <xss-vulnerability-character>Field '{0}' contains XSS vulnerability characters</xss-vulnerability-character>
+    <xss-vulnerability-character>Feltet '{0}' inneholder  XSS sårbare tegn</xss-vulnerability-character>
 <xss-vulnerability-character-wo-label>Inndataene kan inneholde XSS sårbare tegn</xss-vulnerability-character-wo-label>
   </msg>
 </UIActionForm>
 
 <UITaxonomyTreeWorkingArea>
 <action>
-<Previous>Previous</Previous>
+<Previous>Forrige</Previous>
 </action>
 </UITaxonomyTreeWorkingArea>
 
@@ -2457,7 +2457,7 @@
     </msg>   
   </UITagPermissionInfo>
   <UITagPermissionForm>
-    <title>Add Permission</title>
+    <title>Legge til rettighet</title>
     <action>
       <Save>#{word.save}</Save>
       <Add>Legg til</Add>
@@ -2472,7 +2472,7 @@
   
   <UIGroupMemberSelector>
     <label>
-      <selectGroup>Select Group</selectGroup>
+      <selectGroup>Velg gruppe</selectGroup>
       <selectMembership>Velg medlemsskap</selectMembership>
     </label>
   </UIGroupMemberSelector>
@@ -2518,7 +2518,7 @@
   
   <UIViewFormTabPane>
   <label>
-  <addCategory>Add Category</addCategory>
+  <addCategory>Legge til kategori</addCategory>
           <addLocalizationLink>Legge til oversettelse</addLocalizationLink>
   </label>
   </UIViewFormTabPane>

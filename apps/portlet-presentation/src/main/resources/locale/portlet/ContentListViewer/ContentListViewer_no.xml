@@ -2,7 +2,7 @@
 <bundle>
   <UICLVContainer>
     <label>
-      <Preferences>Preferences</Preferences>
+      <Preferences>Innstillinger</Preferences>
       <AddContent>Legg til innhold</AddContent>
       <ManageContent>Administrer innhold</ManageContent>
     </label>
@@ -38,7 +38,7 @@
       </option>
       <DisplaySettingBlock>Vis innstillinger</DisplaySettingBlock>
       <UICLVConfigHeaderFormStringInput>Toppbanner</UICLVConfigHeaderFormStringInput>
-      <UICLVConfigDisplayTemplateFormSelectBox>Template</UICLVConfigDisplayTemplateFormSelectBox>
+      <UICLVConfigDisplayTemplateFormSelectBox>Mal</UICLVConfigDisplayTemplateFormSelectBox>
       <UICLVConfigPaginatorTemplateFormSelectBox>Paginator</UICLVConfigPaginatorTemplateFormSelectBox>
       <UICLVConfigItemsPerPageFormStringInput>Elementer per side</UICLVConfigItemsPerPageFormStringInput>
       <UICLVConfigShowIllustrationFormCheckboxInput>Show Image</UICLVConfigShowIllustrationFormCheckboxInput>
@@ -77,7 +77,7 @@
       <ParameterHelp>Denne parameteren brukes til å få tilgang til innholdet hvis Dynamisk navigasjon er aktivert.</ParameterHelp>
       <ShowDetailInPageHelp>Ved å klikke på innhold blir brukeren viderekoblet til en informasjonsside. Du må ha "Innhold av URL"-portlet med Dynamisk navigasjon aktivert på målsiden for å vise innholdet.</ShowDetailInPageHelp>
       <DetailParameterHelp>Denne parameteren inneholder stien til innholdet i lenken til informasjonssiden. Denne parameteren må samsvare med parameteren som brukes i portleten "Innhold av URL" på siden.</DetailParameterHelp>
-      <ContentByQueryHelp><![CDATA[You can set a SQL Query to get content dynamically. The following parameters are allowed : ${user}, ${lang} or any get parameter (PARAM) surrounded by ${PARAM}.]]></ContentByQueryHelp>
+      <ContentByQueryHelp>Du kan angi en SQL-spørring for å få innhold dynamisk. Følgende parametere er tillatt: ${user}, ${lang} eller en hvilken som helst get parameter (PARAM) omgitt av ${PARAM}.</ContentByQueryHelp>
       <ContentsVisibilityHelp>"Begrenset av autentisering" vil filtrere innholdet basert på autentisering. Hvis du ikke logger på, ser du kun offentlig innhold. Om du er pålogget, ser du alt innholdet som er synlig for intranettbrukere (men delt av alle). "Begrenset av brukerroller" betyr at du vil se innholdet avhengig av dine rettigheter. Som oftest bør ikke dette alternativet brukes, da det reduserer den generelle ytelsen.</ContentsVisibilityHelp>
     </help>
     <action>
@@ -130,7 +130,7 @@
   </UICLVConfigTargetPageFormInputSet>
   <UICLVBasePathPopupWindow>
     <title>
-      <UIPageSelector>Page Selector</UIPageSelector>
+      <UIPageSelector>Sidevelger</UIPageSelector>
     </title>
   </UICLVBasePathPopupWindow>
   <UICLVPresentation>
