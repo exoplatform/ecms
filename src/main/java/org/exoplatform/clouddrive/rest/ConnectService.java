@@ -928,28 +928,4 @@ public class ConnectService implements ResourceContainer {
     }
     return false;
   }
-  //
-  // /**
-  // * Return host name for given request URI.
-  // *
-  // * @param uriInfo {@link UriInfo}
-  // * @return String with the host's domain name or empty string if it's <code>localhost</code>
-  // */
-  // protected String serviceHost(UriInfo uriInfo) {
-  // String host = locator.getBaseHost();
-  // if (host == null) {
-  // host = uriInfo.getRequestUri().getHost();
-  // }
-  // if (host.equalsIgnoreCase("localhost")) {
-  // // empty host for localhost domain, see http://curl.haxx.se/rfc/cookie_spec.html
-  // host = "";
-  // }
-  // // TODO cleanup
-  // // int port = uriInfo.getRequestUri().getPort();
-  // // if (port != 80 && port != 443) { // omit default ports
-  // // host += ":" + port;
-  // // }
-  // return host;
-  // }
-
 }

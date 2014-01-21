@@ -649,7 +649,6 @@ public class JCRLocalBoxDrive extends JCRLocalCloudDrive implements UserTokenRef
    */
   public JCRLocalBoxDrive(CloudUser user, Node driveNode, SessionProviderService sessionProviders) throws CloudDriveException,
       RepositoryException {
-    // TODO user isn't transparently synced with persistent state of the drive
     super(user, driveNode, sessionProviders);
   }
 
@@ -659,7 +658,6 @@ public class JCRLocalBoxDrive extends JCRLocalCloudDrive implements UserTokenRef
                              SessionProviderService sessionProviders) throws RepositoryException,
       GoogleDriveException,
       CloudDriveException {
-    // TODO user isn't transparently synced with persistent state of the drive
     super(loadUser(apiBuilder, provider, driveNode), driveNode, sessionProviders);
   }
 
@@ -945,7 +943,7 @@ public class JCRLocalBoxDrive extends JCRLocalCloudDrive implements UserTokenRef
           initFile(node, id, name, type, // mimetype
                    link, // gf.getAlternateLink(),
                    embedLink, // gf.getEmbedLink(),
-                   downloadLink, // gf.getThumbnailLink(), // XXX not used
+                   downloadLink, // gf.getThumbnailLink(), 
                    createdBy, // gf.getOwnerNames().get(0),
                    modifiedBy, // gf.getLastModifyingUserName(),
                    created,

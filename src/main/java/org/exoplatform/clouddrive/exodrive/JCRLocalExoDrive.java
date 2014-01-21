@@ -16,6 +16,7 @@
  */
 package org.exoplatform.clouddrive.exodrive;
 
+import org.exoplatform.clouddrive.CloudDriveAccessException;
 import org.exoplatform.clouddrive.CloudDriveException;
 import org.exoplatform.clouddrive.CloudFile;
 import org.exoplatform.clouddrive.CloudProviderException;
@@ -203,6 +204,14 @@ public class JCRLocalExoDrive extends JCRLocalCloudDrive {
     @Override
     public long getAvailable() {
       return COMPLETE; // XXX
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    protected void process() throws CloudDriveAccessException, CloudDriveException, RepositoryException {
+      // XXX nothing
     }
   }
 

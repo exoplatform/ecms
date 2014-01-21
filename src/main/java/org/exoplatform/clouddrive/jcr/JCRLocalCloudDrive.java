@@ -215,125 +215,6 @@ public abstract class JCRLocalCloudDrive extends CloudDrive {
   }
 
   /**
-   * XXX Experimental. Not used.
-   */
-  @Deprecated
-  class BufferedNodeIterator implements NodeIterator {
-
-    final List<Node> buff    = new ArrayList<Node>();
-
-    NodeIterator     nodes;
-
-    int              buffPos = 0;
-
-    BufferedNodeIterator(NodeIterator nodes) {
-      this.nodes = nodes;
-    }
-
-    /**
-     * {@inheritDoc}
-     */
-    @Override
-    public void skip(long skipNum) {
-      if (nodes != null) {
-        for (int i = 0; i < skipNum; i++) {
-          buff.add(nodes.nextNode());
-        }
-      } else {
-        buffPos += skipNum;
-      }
-    }
-
-    /**
-     * {@inheritDoc}
-     */
-    @Override
-    public long getSize() {
-      if (nodes != null) {
-        return nodes.getSize();
-      } else {
-        return buff.size();
-      }
-    }
-
-    /**
-     * {@inheritDoc}
-     */
-    @Override
-    public long getPosition() {
-      if (nodes != null) {
-        return nodes.getPosition();
-      } else {
-        return buffPos;
-      }
-    }
-
-    /**
-     * {@inheritDoc}
-     */
-    @Override
-    public boolean hasNext() {
-      if (nodes != null) {
-        return nodes.hasNext();
-      } else {
-        return buffPos < buff.size() - 1;
-      }
-    }
-
-    /**
-     * {@inheritDoc}
-     */
-    @Override
-    public Object next() {
-      return nextNode();
-    }
-
-    /**
-     * {@inheritDoc}
-     */
-    @Override
-    public Node nextNode() {
-      if (nodes != null) {
-        Node n = nodes.nextNode();
-        buff.add(n);
-        if (!nodes.hasNext()) {
-          nodes = null;
-        }
-        return n;
-      } else {
-        if (buffPos == buff.size()) {
-          throw new NoSuchElementException("Buffer has no more Nodes.");
-        }
-        Node n = buff.get(buffPos);
-        buffPos++;
-        return n;
-      }
-    }
-
-    /**
-     * {@inheritDoc}
-     */
-    @Override
-    public void remove() {
-      if (nodes != null) {
-        nodes.remove();
-      } else {
-        if (buffPos == buff.size()) {
-          throw new IllegalStateException("End of the buffer reached.");
-        }
-        buff.remove(buffPos);
-      }
-    }
-
-    /**
-     * Reset iterator position to begin of the nodes set.
-     */
-    void reset() {
-      buffPos = 0;
-    }
-  }
-
-  /**
    * Perform actual removal of the drive from JCR on its move to the Trash.
    */
   class NodeRemoveHandler {
@@ -634,29 +515,12 @@ public abstract class JCRLocalCloudDrive extends CloudDrive {
 
     @Override
     public Command call() throws Exception {
-      // TODO cleanup
-      // // set correct user's ConversationState
-      // ConversationState prevConversation = ConversationState.getCurrent();
-      // ConversationState.setCurrent(conversation);
-      // // set correct container
-      // ExoContainer prevContainer = ExoContainerContext.getCurrentContainerIfPresent();
-      // ExoContainerContext.setCurrentContainer(container);
-      // // set correct SessionProvider
-      // SessionProvider prevSessions = sessionProviders.getSessionProvider(null);
-      // SessionProvider sp = new SessionProvider(conversation);
-      // sessionProviders.setSessionProvider(null, sp);
-
       commandEnv.prepare(command);
-
       try {
         command.exec();
         return command;
       } finally {
         // restore previous settings
-        // sessionProviders.setSessionProvider(null, prevSessions);
-        // ExoContainerContext.setCurrentContainer(prevContainer);
-        // ConversationState.setCurrent(prevConversation);
-        // sp.close();
         commandEnv.cleanup(command);
       }
     }
@@ -1181,15 +1045,6 @@ public abstract class JCRLocalCloudDrive extends CloudDrive {
     public String getName() {
       return "file synchronization";
     }
-
-    /**
-     * {@inheritDoc}
-     */
-    @Override
-    protected void process() throws CloudDriveException, RepositoryException {
-      // TODO Auto-generated method stub
-
-    }
   }
 
   // *********** variables ***********
@@ -1589,13 +1444,9 @@ public abstract class JCRLocalCloudDrive extends CloudDrive {
           listeners.fireOnDisconnect(new CloudDriveEvent(getUser(), rootWorkspace, rootNode.getPath()));
         } catch (RepositoryException e) {
           rollback(rootNode);
-          // TODO do we need this?
-          // handleError(rootNode, e, "disconnect");
           throw e;
         } catch (RuntimeException e) {
           rollback(rootNode);
-          // TODO do we need this?
-          // handleError(rootNode, e, "disconnect");
           throw e;
         }
       } catch (ItemNotFoundException e) {
@@ -1685,7 +1536,6 @@ public abstract class JCRLocalCloudDrive extends CloudDrive {
       } else if (filePath.startsWith(rootPath)) {
         SyncFileCommand sync = getSyncFileCommand(file);
         sync.execAsync();
-        // TODO currentSync.set(sync);
         return sync;
       } else {
         throw new SyncNotSupportedException("Synchronization not supported for not cloud drive file: "
@@ -1916,7 +1766,6 @@ public abstract class JCRLocalCloudDrive extends CloudDrive {
       place.remove(); // clean the place
 
       Session session = destParent.getSession();
-      // TODO cleanup String nodeName = findNodeName(destName, destParent.getPath(), session);
       String destPath = destParent.getPath() + "/" + nodeName;
       session.move(source.getPath(), destPath);
       return source; // node will reflect a new destination
@@ -2009,7 +1858,6 @@ public abstract class JCRLocalCloudDrive extends CloudDrive {
    * @throws RepositoryException if JCR error happen
    */
   protected void readNodes(Node parent, Map<String, List<Node>> nodes, boolean deep) throws RepositoryException {
-    // TODO do we need caching of nodes?
     for (NodeIterator niter = parent.getNodes(); niter.hasNext();) {
       Node cn = niter.nextNode();
       if (cn.isNodeType(ECD_CLOUDFILE)) {
@@ -2224,7 +2072,6 @@ public abstract class JCRLocalCloudDrive extends CloudDrive {
   }
 
   protected void setContent(Node content, String mimetype) throws RepositoryException {
-    // TODO if (mimetype == null && mimetype.indexOf("text") >= 0) {
     content.setProperty("jcr:data", DUMMY_DATA); // reset local content
   }
 
@@ -2268,10 +2115,6 @@ public abstract class JCRLocalCloudDrive extends CloudDrive {
    * @return {@link String}
    */
   protected String title() {
-    // XXX call to getTitle() can cause recursion if drive removed.
-    // At the other hand the drive title can be changed only if local drive object will be
-    // recreated, thus it is static for some instance of the drive.
-
     return titleCached;
   }
 

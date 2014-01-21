@@ -505,18 +505,12 @@ class GoogleDriveAPI {
       // credential).build();
       userInfo = oauth2.userinfo().get().execute();
     } catch (GoogleJsonResponseException e) {
-      // TODO handle other methods' errors the same way
-
       GoogleJsonError error = e.getDetails();
-      // System.err.println('Error code: ' + error.getCode());
-      // System.err.println('Error message: ' + error.getMessage());
       // More error information can be retrieved with error.getErrors().
       throw new GoogleDriveException("Authentication error: " + error.getMessage() + " (" + error.getCode()
           + ").", e);
     } catch (HttpResponseException e) {
       // No Json body was returned by the API.
-      // System.err.println('HTTP Status code: ' + e.getStatusCode());
-      // System.err.println('HTTP Reason: ' + error.getMessage());
       throw new GoogleDriveException("Authentication error: " + e.getMessage() + " (" + e.getStatusCode()
           + ").", e);
     } catch (IOException e) {

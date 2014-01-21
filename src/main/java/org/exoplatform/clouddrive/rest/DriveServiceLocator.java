@@ -82,11 +82,6 @@ public class DriveServiceLocator {
       // empty host for localhost domain, see http://curl.haxx.se/rfc/cookie_spec.html
       host = "";
     }
-    // TODO cleanup
-    // int port = uriInfo.getRequestUri().getPort();
-    // if (port != 80 && port != 443) { // omit default ports
-    // host += ":" + port;
-    // }
     return host;
   }
 

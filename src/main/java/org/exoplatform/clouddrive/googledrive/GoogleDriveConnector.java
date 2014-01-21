@@ -102,10 +102,6 @@ public class GoogleDriveConnector extends CloudDriveConnector {
     }
   }
 
-  // TODO cleanup
-  // protected static final String SCOPES =
-  // "https://www.googleapis.com/auth/userinfo.email+https://www.googleapis.com/auth/userinfo.profile+https://www.googleapis.com/auth/drive.readonly";
-
   /**
    * GoogleDrive connector plugin constructor.
    * 

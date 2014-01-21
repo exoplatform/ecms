@@ -103,7 +103,7 @@ public class JCRLocalGoogleDrive extends JCRLocalCloudDrive {
       while (children.hasNext()) {
         ChildReference child = children.next();
         File gf = api.file(child.getId());
-        if (!gf.getLabels().getTrashed()) { // XXX skip files in Trash
+        if (!gf.getLabels().getTrashed()) { // skip files in Trash
           // create JCR node here
           boolean isFolder = api.isFolder(gf);
 
@@ -200,7 +200,7 @@ public class JCRLocalGoogleDrive extends JCRLocalCloudDrive {
      */
     @Override
     protected void syncFiles() throws RepositoryException, CloudDriveException {
-      String largestChangeId = ""; // TODO why Strings?
+      String largestChangeId = ""; 
 
       try {
         About about = api.about();
@@ -443,7 +443,6 @@ public class JCRLocalGoogleDrive extends JCRLocalCloudDrive {
    */
   protected JCRLocalGoogleDrive(GoogleUser user, Node driveNode, SessionProviderService sessionProviders) throws CloudDriveException,
       RepositoryException {
-    // TODO user isn't transparently synced with persistent state of the drive
     super(user, driveNode, sessionProviders);
   }
 
@@ -464,7 +463,6 @@ public class JCRLocalGoogleDrive extends JCRLocalCloudDrive {
                                 SessionProviderService sessionProviders) throws RepositoryException,
       GoogleDriveException,
       CloudDriveException {
-    // TODO user isn't transparently synced with persistent state of the drive
     super(loadUser(apiBuilder, provider, driveNode), driveNode, sessionProviders);
   }
 
@@ -549,8 +547,6 @@ public class JCRLocalGoogleDrive extends JCRLocalCloudDrive {
       driveNode.save();
     } catch (RepositoryException e) {
       rollback(driveNode);
-      // TODO do we need this?
-      // handleError(rootNode, e, "updateAccessKey");
       throw new GoogleDriveException("Error updating access key: " + e.getMessage(), e);
     }
   }
@@ -600,7 +596,6 @@ public class JCRLocalGoogleDrive extends JCRLocalCloudDrive {
   protected SyncFileCommand getSyncFileCommand(Node file) throws DriveRemovedException,
                                                          SyncNotSupportedException,
                                                          RepositoryException {
-    // TODO
     throw new SyncNotSupportedException("File synchronization not supported");
   }
 }
