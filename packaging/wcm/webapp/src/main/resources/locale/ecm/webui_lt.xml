@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<bundle>
+  <!--
+  #####################################################################
+  # org.exoplatform.ecm.webui.tree.selectmany.UICategoriesSelectPanel #
+  #####################################################################
+  -->
+  <UITreeList>
+    <header>
+      <name>Name</name>
+      <action>Add</action>
+    </header>
+    <info>
+      <child-not-found>Child not found!</child-not-found>
+    </info>
+  </UITreeList>
+  <!--
+  ######################################################################
+  # org.exoplatform.ecm.webui.tree.selectmany.UISelectedCategoriesGrid #
+  ######################################################################
+  -->
+  <UISelectedCategoriesGrid>
+    <header>
+      <categoryName>Category name</categoryName>
+      <categoryPath>Category path</categoryPath>
+      <action>#{word.action}</action>
+    </header>
+    <action>
+      <SaveCategories>#{word.save}</SaveCategories>
+      <Cancel>#{word.cancel}</Cancel>
+    </action>
+    <msg>
+      <cannot-save>Categories were not saved.</cannot-save>
+      <have-saved>Categories were saved successfully</have-saved>
+      <non-categories>Categories are wrong. Please select the appropriate categories.</non-categories>
+      <confirm-delete>Do you want to delete this category?</confirm-delete>
+    </msg>
+  </UISelectedCategoriesGrid>
+  <!--
+  ######################################################################
+  # org.exoplatform.ecm.webui.selector.UIPermissionSelector           #
+  ######################################################################
+  -->
+  <SelectUserOrGroup>
+    <title>
+      <UIPermissionUser>Select User</UIPermissionUser>
+      <UIPermissionMembership>Select Membership</UIPermissionMembership>
+    </title>
+  </SelectUserOrGroup>
+  <UIPermissionUser>
+    <label>
+      <selectUser>Select User</selectUser>
+      <selectGroup>Browse and select a group</selectGroup>
+    </label>
+  </UIPermissionUser>
+  <UIPermissionMembership>
+    <label>
+      <selectUser>Select Membership</selectUser>
+      <selectGroup>Browse and select a group</selectGroup>
+    </label>
+  </UIPermissionMembership>
+</bundle>

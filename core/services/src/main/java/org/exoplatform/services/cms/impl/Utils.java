@@ -389,6 +389,19 @@ public class Utils {
 	}
 
   /**
+   * Remove deleted Symlink from Trash
+   * @param node
+   * @throws Exception
+   */
+  private static void removeDeadSymlinksFromTrash(Node node) throws Exception {
+    LinkManager linkManager = WCMCoreUtils.getService(LinkManager.class);
+    List<Node> symlinks = linkManager.getAllLinks(node, EXO_SYMLINK);
+    for (Node symlink : symlinks) {
+      symlink.remove();
+    }
+  }
+  
+  /**
    * Remove all the link of a deleted node
    * @param     : node
    * @param     : keepInTrash true if the link will be move to trash, otherwise set by false
@@ -396,7 +409,7 @@ public class Utils {
    */
   public static void removeDeadSymlinks(Node node, boolean keepInTrash) throws Exception {
     if (isInTrash(node)) {
-
+      removeDeadSymlinksFromTrash(node);
       return;
     }
     LinkManager linkManager = WCMCoreUtils.getService(LinkManager.class);

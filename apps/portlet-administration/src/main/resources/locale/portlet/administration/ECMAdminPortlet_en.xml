@@ -1067,6 +1067,9 @@
   ################################################################################
   -->
   <UITemplateForm>
+    <title>
+      <AddPermission>Add Permission</AddPermission>
+    </title>
     <action>
       <Save>#{word.save}</Save>
       <Cancel>#{word.cancel}</Cancel>
@@ -1711,6 +1714,11 @@
 								<list>Content</list>
 								<navigation>Navigation</navigation>
 			  </label>
+                          <action>
+                            <Save>#{word.save}</Save>
+                            <Reset>Reset</Reset> 
+                            <Cancel>#{word.cancel}</Cancel> 
+                          </action> 
 			  <msg>
 			  	<template-existing>This template name already exists. Please select another one.</template-existing>
 			  </msg>
