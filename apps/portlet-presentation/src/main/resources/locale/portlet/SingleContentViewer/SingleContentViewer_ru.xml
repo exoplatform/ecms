@@ -3,33 +3,33 @@
   <UIPresentationContainer>
     <title>
       <QuickEdit>Edit in Content Explorer</QuickEdit>
-      <print>Print This Page</print>
-      <FastPublish>Publish</FastPublish>
+      <print>Напечатать эту страницу</print>
+      <FastPublish>Опубликовать</FastPublish>
     </title>
     <label>
-      <draft>Draft</draft>
-      <print>Print</print>
+      <draft>Черновик</draft>
+      <print>Печать</print>
     </label>
     <msg>
-      <no-content>No contents found.</no-content>
-      <internal-server-error>An error occurred while requesting the data from the sever.</internal-server-error>
-      <empty-title-error>Please specify the new title.</empty-title-error>
+      <no-content>Содержимое не найдено.</no-content>
+      <internal-server-error>При запросе данных с сервера произошла ошибка.</internal-server-error>
+      <empty-title-error>Пожалуйста, укажите новое название.</empty-title-error>
     </msg>
   </UIPresentationContainer>
   <CorrectContentSelectorPopupWindow>
     <title>
-      <UIContentSelectorOne>Select Content</UIContentSelectorOne>
+      <UIContentSelectorOne>Выбрать содержимое</UIContentSelectorOne>
     </title>
   </CorrectContentSelectorPopupWindow>
   <UISingleContentViewerPortlet>
     <msg>
-      <AccessControlException>You do not have permission to access the Edit mode.</AccessControlException>
+      <AccessControlException>У вас нет разрешения на доступ к режиму Редактирование.</AccessControlException>
     </msg>
   </UISingleContentViewerPortlet>
   <UISCVContextualRadioBox>
     <label>
-      <Enable>Enabled</Enable>
-      <Disable>Disabled</Disable>
+      <Enable>Включено</Enable>
+      <Disable>Отключено</Disable>
     </label>
   </UISCVContextualRadioBox>
   <UIPreferencesPopupWindows>
@@ -42,29 +42,29 @@
       <Save>#{word.save}</Save>
       <Abort>Abort</Abort>
       <Cancel>#{word.cancel}</Cancel>
-      <Print>Print</Print>
+      <Print>Печать</Print>
       <Close>#{word.close}</Close>
     </action>
     <title>Content Detail Preferences</title>
     <label>
-      <Back>Back to previous page</Back>
-      <Edit>Edit</Edit>
+      <Back>Вернуться на предыдущую страницу</Back>
+      <Edit>Редактировать</Edit>
       <Preferences>Preferences</Preferences>
       <Title>Content Detail Preferences</Title>
-      <UISCVShowTitleConfigurationCheckBox>Show Title</UISCVShowTitleConfigurationCheckBox>
-      <UISCVShowDateConfigurationCheckBox>Show Date</UISCVShowDateConfigurationCheckBox>
+      <UISCVShowTitleConfigurationCheckBox>Показать заголовок</UISCVShowTitleConfigurationCheckBox>
+      <UISCVShowDateConfigurationCheckBox>Показать дату</UISCVShowDateConfigurationCheckBox>
       <UISCVShowOptionBarConfigurationCheckBox>Show Option Bar</UISCVShowOptionBarConfigurationCheckBox>
-      <DisplaySettingBlock>Display Settings</DisplaySettingBlock>
+      <DisplaySettingBlock>Настройки экрана</DisplaySettingBlock>
       <ContentPathBlock>Content Selection</ContentPathBlock>
-      <UISCVConfigItemPathFormInputSet>Content Path</UISCVConfigItemPathFormInputSet>
-    <UISCVContentPathConfigurationInputBox>Content Path</UISCVContentPathConfigurationInputBox>
+      <UISCVConfigItemPathFormInputSet>Путь к содержимому</UISCVConfigItemPathFormInputSet>
+    <UISCVContentPathConfigurationInputBox>Путь к содержимому</UISCVContentPathConfigurationInputBox>
       <Advance>Advanced</Advance>
       <ContextCaption>Dynamic Navigation</ContextCaption>
       <UISCVContextualRadioBox>Contextual Content</UISCVContextualRadioBox>
       <UISCVParameterInputBox>by</UISCVParameterInputBox>
-      <PrintSettingBlock>Print Settings</PrintSettingBlock>
+      <PrintSettingBlock>Настройки печати</PrintSettingBlock>
       <UISCVPrintPageParameter>with</UISCVPrintPageParameter>
-      <UISCVConfigPrintPageFormInputSet>Show in Page</UISCVConfigPrintPageFormInputSet>
+      <UISCVConfigPrintPageFormInputSet>Показать на странице</UISCVConfigPrintPageFormInputSet>
       <LockStatus>Lock</LockStatus>
       <CacheManagement>Content Visibility</CacheManagement>
       <UISCVCacheRadioBox>Share Content</UISCVCacheRadioBox>
@@ -81,29 +81,29 @@
     <tab>
       <label>
         <UISCVConfigContentFormInputSet>Content Selection</UISCVConfigContentFormInputSet>
-        <UISCVConfigDisplayFormInputSet>Display Settings</UISCVConfigDisplayFormInputSet>
-        <UISCVConfigPrintFormInputSet>Print Settings</UISCVConfigPrintFormInputSet>
+        <UISCVConfigDisplayFormInputSet>Настройки экрана</UISCVConfigDisplayFormInputSet>
+        <UISCVConfigPrintFormInputSet>Настройки печати</UISCVConfigPrintFormInputSet>
         <UISCVConfigAdvancedFormInputSet>Advanced</UISCVConfigAdvancedFormInputSet>
       </label>
     </tab>
   </UISCVPreferences>
   <UISCVConfigItemPathFormInputSet>
     <title>
-      <SelectFolderPath>Select Folder Path</SelectFolderPath>
+      <SelectFolderPath>Выберите путь к папке</SelectFolderPath>
       <AddPath>Add Path</AddPath>
     </title>
   </UISCVConfigItemPathFormInputSet>
   <UISCVConfigPrintPageFormInputSet>
     <title>
-      <SelectTargetPage>Show in Page</SelectTargetPage>
+      <SelectTargetPage>Показать на странице</SelectTargetPage>
     </title>
   </UISCVConfigPrintPageFormInputSet>
   <PublicationStates>
-    <archived>Archived</archived>
+    <archived>В архиве</archived>
     <obsolete>Obsolete</obsolete>
     <unpublished>Unpublished</unpublished>
     <enrolled>Enrolled</enrolled>
-    <draft>Draft</draft>
+    <draft>Черновик</draft>
     <pending>Pending</pending>
     <approved>Approved</approved>
     <inreview>Under Review</inreview>

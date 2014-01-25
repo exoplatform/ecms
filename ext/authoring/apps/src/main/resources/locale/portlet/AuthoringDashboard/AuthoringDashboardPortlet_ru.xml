@@ -3,11 +3,12 @@
   <UIDashboardForm>
     <label>
       <title>Author Dashboard</title>
-      <nocontent>No Content</nocontent>
-      <mydraft>My Draft Content</mydraft>
-      <waitingapproval>Waiting For My Approval</waitingapproval>
-      <approve>Approve</approve>
-      <publishedtomorrow>To Be Published Tomorrow</publishedtomorrow>
+      <nocontent>Нет содержимого</nocontent>
+      <mydraft>Содержание моего проекта</mydraft>
+      <waitingapproval>Ожидают моего утверждения</waitingapproval>
+      <approve>Утвердить</approve>
+      <publishedtomorrow>Будет опубликовано завтра</publishedtomorrow>
+      <refresh>#{word.refresh}</refresh>
     </label>
   </UIDashboardForm>
 </bundle>
