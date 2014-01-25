@@ -8,6 +8,7 @@
       <waitingapproval>Tableau de Bord</waitingapproval>
       <approve>Valider</approve>
       <publishedtomorrow>Publiés Demain</publishedtomorrow>
+      <refresh>#{word.refresh}</refresh>
     </label>
   </UIDashboardForm>
 </bundle>

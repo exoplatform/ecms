@@ -1070,7 +1070,7 @@
     <action>
       <Save>#{word.save}</Save>
       <Cancel>#{word.cancel}</Cancel>
-      <Reset>Очистить</Reset>
+      <Reset>Reset</Reset>
       <Restore>Restore</Restore>
       <Refresh>#{word.refresh}</Refresh>
     </action>
@@ -1378,7 +1378,7 @@
     <action>
       <Close>#{word.close}</Close>
       <Save>Save</Save>
-      <Reset>Очистить</Reset>
+      <Reset>Reset</Reset>
     </action>
     <msg>
       <checkbox-require>Please select at least one permission.</checkbox-require>
@@ -1667,21 +1667,21 @@
 <UICLVTemplateForm_ContentTemplateContainer>
  <action>
   <Save>#{word.save}</Save>
-<Reset>Очистить</Reset>
+<Reset>Reset</Reset>
 <Cancel>#{word.cancel}</Cancel>
  </action>
 <label>
  <title>Name</title>
 <template>Template Name</template>
 <content>Content</content>
-<type>Template Type</type>
+<type>Тип шаблона</type>
 </label>
 </UICLVTemplateForm_ContentTemplateContainer>
 
 <UICLVTemplateForm_PageTemplateContainer>
  <action>
   <Save>#{word.save}</Save>
-<Reset>Очистить</Reset>
+<Reset>Reset</Reset>
 <Cancel>#{word.cancel}</Cancel>
  </action>
 <label>
@@ -1695,14 +1695,14 @@
 <UICLVTemplateForm_CateTemplateContainer>
  <action>
   <Save>#{word.save}</Save>
-<Reset>Очистить</Reset>
+<Reset>Reset</Reset>
 <Cancel>#{word.cancel}</Cancel>
  </action>
 <label>
  <title>Name</title>
 <template>Template Name</template>
 <content>Content</content>
-<type>Template Type</type>
+<type>Тип шаблона</type>
 </label>
 </UICLVTemplateForm_CateTemplateContainer>
 <UICLVTemplateForm>

@@ -8,6 +8,7 @@
       <waitingapproval>Venter på godkjenning</waitingapproval>
       <approve>Godkjenn</approve>
       <publishedtomorrow>For publisering i morgen</publishedtomorrow>
+      <refresh>#{word.refresh}</refresh>
     </label>
   </UIDashboardForm>
 </bundle>

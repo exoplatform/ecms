@@ -8,6 +8,7 @@
       <waitingapproval>Onay bekleyenlerim</waitingapproval>
       <approve>Onayla</approve>
       <publishedtomorrow>Yarın yayınlanacak</publishedtomorrow>
+      <refresh>#{word.refresh}</refresh>
     </label>
   </UIDashboardForm>
 </bundle>
