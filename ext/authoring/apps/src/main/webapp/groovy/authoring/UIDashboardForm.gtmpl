@@ -73,5 +73,5 @@ def escapeChar = '%' as char
   <div class="clearfix">
    <% uicomponent.renderChildren(); %>
   </div>
-  <a class="refresh btn" href="<%= uicomponent.event("Refresh") %>">refresh</a>
+  <a class="refresh btn" href="<%= uicomponent.event("Refresh") %>"><%=_ctx.appRes("UIDashboardForm.label.refresh")%></a>
 </div>
