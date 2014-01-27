@@ -26,7 +26,7 @@
 				%>
 				<li>
 					<i class="$classValue"></i>
-					<a href="<%=uicomponent.event("ClickFilter", ownedByMe)%>" rel="tooltip" data-placement="bottom" title="<%=_ctx.appRes("UIActionBar.title.ShowAllOwnedByUser")%>">
+					<a href="javascript:void(0);" onclick="<%=uicomponent.event("ClickFilter", ownedByMe)%>" rel="tooltip" data-placement="bottom" title="<%=_ctx.appRes("UIActionBar.title.ShowAllOwnedByUser")%>">
 						<%=_ctx.appRes("UIAllItems.label.OwnedByMe")%>
 					</a>
 				</li>
@@ -38,7 +38,7 @@
 				%>
 				<li>
 					<i class="$classValue"></i>
-					<a href="<%=uicomponent.event("ClickFilter", favorite)%>" rel="tooltip" data-placement="bottom" title="<%=_ctx.appRes("UIActionBar.title.ShowAllFavourite")%>">
+					<a href="javascript:void(0);" onclick="<%=uicomponent.event("ClickFilter", favorite)%>" rel="tooltip" data-placement="bottom" title="<%=_ctx.appRes("UIActionBar.title.ShowAllFavourite")%>">
 						<%=_ctx.appRes("UIAllItems.label.Favourites")%>
 					</a>
 				</a>
@@ -50,7 +50,7 @@
 				%>
 				<li>
 					<i class="$classValue"></i>
-					<a href="<%=uicomponent.event("ClickFilter", hidden)%>" rel="tooltip" data-placement="bottom" title="<%=_ctx.appRes("UIActionBar.title.ShowAllHidden")%>">
+					<a href="javascript:void(0);" onclick="<%=uicomponent.event("ClickFilter", hidden)%>" rel="tooltip" data-placement="bottom" title="<%=_ctx.appRes("UIActionBar.title.ShowAllHidden")%>">
 						<%=_ctx.appRes("UIAllItems.label.Hidden")%>
 					</a>
 				</li>
