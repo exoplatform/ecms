@@ -9,7 +9,7 @@
 <div class="uiAddActionForm resizable">
   <h6 class="titleBar"><%=_ctx.appRes(uicomponent.getId() + ".title")%></h6>
 	<% uiform.begin() %>  
-	<div class="form-horizontal">
+	<div class="form-horizontal" style="min-width:550px;">
 		<div class="control-group" style="display:none">
 			<label class="control-label" for="id"><%=_ctx.appRes("ScriptAction.dialog.label.id")%>:</label>
 			<div class="controls">
