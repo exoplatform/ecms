@@ -24,6 +24,10 @@
       <timeUnitCaption>секунд</timeUnitCaption>
       <similar>Страницы с тем же содержимым</similar>
       <editor>Редактор</editor>
+      <date>Дата</date>
+      <relevancy>Relevance</relevancy>
+      <title>Заголовок</title>
+      <sortBy>Sort By:</sortBy>
     </label>
     <action>
       <edit>Редактировать</edit>

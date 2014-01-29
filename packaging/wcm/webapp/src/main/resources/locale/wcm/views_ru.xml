@@ -24,7 +24,7 @@
     <view>
       <label>
         <url>URL</url>
-        <description>Description</description>
+        <description>Описание</description>
       </label>
     </view>
   </WebLink>
@@ -32,17 +32,17 @@
   <SiteMetadata>
     <view>
       <label>
-        <title>Site Title</title>
-        <description>Site Description</description>
-        <keywords>Site Keywords</keywords>
-        <robots>Search Engine Behavior</robots>
+        <title>Заголовок сайта</title>
+        <description>Описание сайта</description>
+        <keywords>Ключевые слова сайта</keywords>
+        <robots>Искать характеристики двигателя</robots>
       </label>
       <tooltip>
-        <add-edit>Add/Edit Metadata</add-edit>
+        <add-edit>Добавить/редактировать метаданные</add-edit>
         <cancel>#{word.cancel}</cancel>
       </tooltip>
       <action>
-        <add-edit>Add/Edit</add-edit>
+        <add-edit>Добавить/редактировать</add-edit>
         <cancel>#{word.cancel}</cancel>
       </action>
     </view>
@@ -56,7 +56,7 @@
 
   <Tag>
     <view>
-      <label>Tag</label>
+      <label>Тег</label>
     </view>
   </Tag>
 </bundle>

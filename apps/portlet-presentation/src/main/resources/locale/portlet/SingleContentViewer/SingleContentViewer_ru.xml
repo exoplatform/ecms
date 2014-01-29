@@ -40,7 +40,7 @@
   <UISCVPreferences>
     <action>
       <Save>#{word.save}</Save>
-      <Abort>Abort</Abort>
+      <Abort>Прервать</Abort>
       <Cancel>#{word.cancel}</Cancel>
       <Print>Печать</Print>
       <Close>#{word.close}</Close>
@@ -49,48 +49,48 @@
     <label>
       <Back>Вернуться на предыдущую страницу</Back>
       <Edit>Редактировать</Edit>
-      <Preferences>Preferences</Preferences>
+      <Preferences>Настройки</Preferences>
       <Title>Content Detail Preferences</Title>
       <UISCVShowTitleConfigurationCheckBox>Показать заголовок</UISCVShowTitleConfigurationCheckBox>
       <UISCVShowDateConfigurationCheckBox>Показать дату</UISCVShowDateConfigurationCheckBox>
-      <UISCVShowOptionBarConfigurationCheckBox>Show Option Bar</UISCVShowOptionBarConfigurationCheckBox>
+      <UISCVShowOptionBarConfigurationCheckBox>Показать панель опций</UISCVShowOptionBarConfigurationCheckBox>
       <DisplaySettingBlock>Настройки экрана</DisplaySettingBlock>
       <ContentPathBlock>Content Selection</ContentPathBlock>
       <UISCVConfigItemPathFormInputSet>Путь к содержимому</UISCVConfigItemPathFormInputSet>
     <UISCVContentPathConfigurationInputBox>Путь к содержимому</UISCVContentPathConfigurationInputBox>
-      <Advance>Advanced</Advance>
-      <ContextCaption>Dynamic Navigation</ContextCaption>
-      <UISCVContextualRadioBox>Contextual Content</UISCVContextualRadioBox>
+      <Advance>Расширенные</Advance>
+      <ContextCaption>Динамическая навигация</ContextCaption>
+      <UISCVContextualRadioBox>Контекстуальное содержание</UISCVContextualRadioBox>
       <UISCVParameterInputBox>by</UISCVParameterInputBox>
       <PrintSettingBlock>Настройки печати</PrintSettingBlock>
       <UISCVPrintPageParameter>with</UISCVPrintPageParameter>
       <UISCVConfigPrintPageFormInputSet>Показать на странице</UISCVConfigPrintPageFormInputSet>
-      <LockStatus>Lock</LockStatus>
-      <CacheManagement>Content Visibility</CacheManagement>
+      <LockStatus>Заблокировать</LockStatus>
+      <CacheManagement>Видимость контента</CacheManagement>
       <UISCVCacheRadioBox>Share Content</UISCVCacheRadioBox>
     </label>
     <help>
-      <ContentPathBlock>Select the content you want to show. This default content will be replaced dynamically if you activate the Dynamic Navigation option (see the Advanced mode below).</ContentPathBlock>
+      <ContentPathBlock>Выберите контент, который вы хотите показать. Выбор по умолчанию будет заменен в динамическом режиме при активации опции Динамическая Навигация (см. Режим расширенных настроек ниже).</ContentPathBlock>
       <DisplaySettingBlock>You can show or hide the Option bar used to show the print link. Title and Date displays are also optional.</DisplaySettingBlock>
       <ContextualHelp>Activates Dynamic Navigation. The content can be changed dynamically by another URL-based parameter.</ContextualHelp>
-      <ParameterHelp>This parameter will be used to get the content if the Dynamic Navigation is activated.</ParameterHelp>
+      <ParameterHelp>Этот параметр будет использоваться для получения содержимого, если включена Динамическая Навигация.</ParameterHelp>
     </help>
     <msg>
-      <not-valid-path>The item path is invalid.</not-valid-path>
+      <not-valid-path>Недопустимый путь к элементу.</not-valid-path>
     </msg>
     <tab>
       <label>
         <UISCVConfigContentFormInputSet>Content Selection</UISCVConfigContentFormInputSet>
         <UISCVConfigDisplayFormInputSet>Настройки экрана</UISCVConfigDisplayFormInputSet>
         <UISCVConfigPrintFormInputSet>Настройки печати</UISCVConfigPrintFormInputSet>
-        <UISCVConfigAdvancedFormInputSet>Advanced</UISCVConfigAdvancedFormInputSet>
+        <UISCVConfigAdvancedFormInputSet>Расширенные</UISCVConfigAdvancedFormInputSet>
       </label>
     </tab>
   </UISCVPreferences>
   <UISCVConfigItemPathFormInputSet>
     <title>
       <SelectFolderPath>Выберите путь к папке</SelectFolderPath>
-      <AddPath>Add Path</AddPath>
+      <AddPath>Добавить путь</AddPath>
     </title>
   </UISCVConfigItemPathFormInputSet>
   <UISCVConfigPrintPageFormInputSet>
@@ -101,14 +101,14 @@
   <PublicationStates>
     <archived>В архиве</archived>
     <obsolete>Obsolete</obsolete>
-    <unpublished>Unpublished</unpublished>
+    <unpublished>Не опубликовано</unpublished>
     <enrolled>Enrolled</enrolled>
     <draft>Черновик</draft>
     <pending>Pending</pending>
-    <approved>Approved</approved>
-    <inreview>Under Review</inreview>
+    <approved>Утверждено</approved>
+    <inreview>На рассмотрении</inreview>
     <staged>Staged</staged>
-    <published>Published</published>
+    <published>Опубликовано</published>
   </PublicationStates>
   <UISCVCacheRadioBox>
     <label>
