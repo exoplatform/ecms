@@ -24,6 +24,10 @@
       <timeUnitCaption>saniye</timeUnitCaption>
       <similar>Aynı içeriğin görüntülendiği sayfalar</similar>
       <editor>Düzenleyen</editor>
+      <date>Tarih</date>
+      <relevancy>İlgi</relevancy>
+      <title>Başlık</title>
+      <sortBy>Sıralama ölçütü:</sortBy>
     </label>
     <action>
       <edit>Düzenle</edit>

@@ -2,7 +2,7 @@
 <bundle>
   <UICLVContainer>
     <label>
-      <Preferences>Preferences</Preferences>
+      <Preferences>Настройки</Preferences>
       <AddContent>Добавить контент</AddContent>
       <ManageContent>Управление контентом</ManageContent>
     </label>
@@ -22,12 +22,12 @@
     <label>
       <Title>Content List Preferences</Title>
       <ContentSelectionBlock>Content Selection</ContentSelectionBlock>
-      <UICLVConfigDisplayModeFormRadioBoxInput>Mode</UICLVConfigDisplayModeFormRadioBoxInput>
+      <UICLVConfigDisplayModeFormRadioBoxInput>Режим</UICLVConfigDisplayModeFormRadioBoxInput>
       <UICLVConfigItemPathFormInputSet>Путь к папке</UICLVConfigItemPathFormInputSet>
     <UICLVConfigItemPathFormStringInput>Путь к папке</UICLVConfigItemPathFormStringInput>
       <UICLVConfigOrderByFormSelectBox>Order by</UICLVConfigOrderByFormSelectBox>
       <option>
-        <exo:title>Титул</exo:title>
+        <exo:title>Заголовок</exo:title>
         <exo:dateCreated>Дата создания</exo:dateCreated>
         <exo:lastModifiedDate>Дата изменения</exo:lastModifiedDate>
         <publication:liveDate>Дата публикации</publication:liveDate>
@@ -38,7 +38,7 @@
       </option>
       <DisplaySettingBlock>Настройки экрана</DisplaySettingBlock>
       <UICLVConfigHeaderFormStringInput>Заголовок</UICLVConfigHeaderFormStringInput>
-      <UICLVConfigDisplayTemplateFormSelectBox>Template</UICLVConfigDisplayTemplateFormSelectBox>
+      <UICLVConfigDisplayTemplateFormSelectBox>Шаблон</UICLVConfigDisplayTemplateFormSelectBox>
       <UICLVConfigPaginatorTemplateFormSelectBox>Paginator</UICLVConfigPaginatorTemplateFormSelectBox>
       <UICLVConfigItemsPerPageFormStringInput>Результатов на странице</UICLVConfigItemsPerPageFormStringInput>
       <UICLVConfigShowIllustrationFormCheckboxInput>Show Image</UICLVConfigShowIllustrationFormCheckboxInput>
@@ -52,8 +52,8 @@
       <UICLVConfigAllowDynamicUrlStringInput>Allow Dynamic URL</UICLVConfigAllowDynamicUrlStringInput>
       <UICLVConfigShowRssLinkFormCheckboxInput>Show RSS Link</UICLVConfigShowRssLinkFormCheckboxInput>
       <UICLVConfigShowAutomaticDetectionCheckboxInput>Automatic Detection</UICLVConfigShowAutomaticDetectionCheckboxInput>
-      <AdvancedBlock>Advanced</AdvancedBlock>
-      <UICLVConfigDynamicNavigationLabel>Dynamic Navigation</UICLVConfigDynamicNavigationLabel>
+      <AdvancedBlock>Расширенные</AdvancedBlock>
+      <UICLVConfigDynamicNavigationLabel>Динамическая навигация</UICLVConfigDynamicNavigationLabel>
       <UICLVConfigContextualFolderRadioBoxInput>Contextual Folder</UICLVConfigContextualFolderRadioBoxInput>
       <UICLVConfigShowCLVByStringInput>by</UICLVConfigShowCLVByStringInput>
       <UICLVConfigshowSCVWithStringInput>with</UICLVConfigshowSCVWithStringInput>
@@ -69,12 +69,12 @@
       <UICLVConfigCacheEnableRadioBoxInput>Share content between users</UICLVConfigCacheEnableRadioBoxInput>
     </label>
     <help>
-      <ModeSelectionHelp>Two modes are available to show content. "By Folder" will take all the content available in your selected folder/category. "By Content" lets you manually select the content you want to show.</ModeSelectionHelp>
+      <ModeSelectionHelp>Для отображения содержимого доступны два режима. "По папке" будет принимать все материалы, доступные в выбранной папке/категории. "По содержимому" позволяет вручную выбрать содержимое, которое вы хотите показать.</ModeSelectionHelp>
       <FolderPathHelp>Выберите контент, который вы хотите показать. Выбор по умолчанию будет заменен в динамическом режиме при активации опции Динамическая Навигация (см. Режим расширенных настроек ниже).</FolderPathHelp>
-      <HeaderOptionHelp>Show a header on top of the content list. If you activate the Automatic Detection option, it will try to find the header based on the current selection.</HeaderOptionHelp>
+      <HeaderOptionHelp>Показать заголовок наверху списка содержимого. Если вы активируете опцию автоматического обнаружения, она будет пытаться найти заголовок на основе текущего выделения.</HeaderOptionHelp>
       <GeneralOptionHelp>Select the graphical elements you want to show in your list. Note that, depending on your selected template, some elements may not be available.</GeneralOptionHelp>
-      <ContextualHelp>Activates the Dynamic Navigation option. Others can change the content dynamically based on a URL parameter.</ContextualHelp>
-      <ParameterHelp>This parameter will be used to access the content if Dynamic Navigation is activated.</ParameterHelp>
+      <ContextualHelp>Активирует возможность динамической навигации. Другие могут изменить содержимое динамически на основе параметра URL-адреса.</ContextualHelp>
+      <ParameterHelp>Этот параметр будет использоваться для доступа к содержимому, если активирована динамическая навигация.</ParameterHelp>
       <ShowDetailInPageHelp>Clicking on content redirects the user to a Detail page. You must have a "Content by URL" portlet with Dynamic Navigation enabled on the target page to show the content.</ShowDetailInPageHelp>
       <DetailParameterHelp>This parameter will contain the path to the content in the link to the Detail page. This parameter must match the parameter used in the "Content by URL" portlet of the page.</DetailParameterHelp>
       <ContentByQueryHelp>You can set a SQL Query to get content dynamically. The following parameters are allowed : ${user}, ${lang} or any get parameter (PARAM) surrounded by ${PARAM}.</ContentByQueryHelp>
@@ -91,9 +91,9 @@
     </msg>
     <tab>
       <label>
-        <clvContentTab>Content Selection</clvContentTab>
+        <clvContentTab>Выделение содержимого</clvContentTab>
         <clvDisplayTab>Настройки экрана</clvDisplayTab>
-        <clvAdvancedTab>Advanced</clvAdvancedTab>
+        <clvAdvancedTab>Расширенные</clvAdvancedTab>
       </label>
     </tab>
   </UICLVConfig>
@@ -130,7 +130,7 @@
   </UICLVConfigTargetPageFormInputSet>
   <UICLVBasePathPopupWindow>
     <title>
-      <UIPageSelector>Page Selector</UIPageSelector>
+      <UIPageSelector>Указатель страницы</UIPageSelector>
     </title>
   </UICLVBasePathPopupWindow>
   <UICLVPresentation>
@@ -171,12 +171,12 @@
   <PublicationStates>
     <archived>В архиве</archived>
     <obsolete>Obsolete</obsolete>
-    <unpublished>Unpublished</unpublished>
+    <unpublished>Не опубликовано</unpublished>
     <enrolled>Enrolled</enrolled>
     <draft>Черновик</draft>
     <pending>Pending</pending>
     <approved>Утверждено</approved>
-    <inreview>In Review</inreview>
+    <inreview>На рассмотрении</inreview>
     <staged>Staged</staged>
     <published>Опубликовано</published>
   </PublicationStates>

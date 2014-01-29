@@ -7,9 +7,9 @@
   -->
   <UIActionBar>
     <tooltip>
-      <PublicationRequestApproval>Request Approval</PublicationRequestApproval>
-      <PublicationApproveContent>Approve Content</PublicationApproveContent>
-      <PublicationPublish>Publish</PublicationPublish>
+      <PublicationRequestApproval>Утверждение запросов</PublicationRequestApproval>
+      <PublicationApproveContent>Утверждение содержимого</PublicationApproveContent>
+      <PublicationPublish>Публикация</PublicationPublish>
     </tooltip>
   </UIActionBar>
 </bundle>

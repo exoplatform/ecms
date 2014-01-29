@@ -1444,7 +1444,7 @@
     <title>
       <SelectUser>Sélectionner un utilisateur</SelectUser>
       <SelectMember>Rôle</SelectMember>
-      <AddAny>Tout le monde</AddAny>
+      <AddAny>Tous</AddAny>
     </title>
   </permission>
   <!--
