@@ -546,7 +546,7 @@ public class UITreeExplorer extends UIContainer {
     if(!node.hasNodes()) return false;
     UIJCRExplorer uiExplorer =  getAncestorOfType(UIJCRExplorer.class);
     Preference preferences = uiExplorer.getPreference();
-    if(!isFolderType(node) && !preferences.isJcrEnable())
+    if(!isFolderType(node) && !preferences.isJcrEnable() && !node.isNodeType(org.exoplatform.ecm.webui.utils.Utils.EXO_TAXONOMY))
       return false;
     NodeIterator iterator = node.getNodes();
     while(iterator.hasNext()) {
