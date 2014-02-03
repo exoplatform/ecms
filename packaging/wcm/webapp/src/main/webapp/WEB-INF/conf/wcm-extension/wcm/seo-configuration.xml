@@ -70,7 +70,8 @@
         </object-param>
       </init-params>
     </component-plugin>
-    <!-- clustering configuration for cache -->    
+    
+    <!-- clustering configuration for cache -->
     <component-plugin profiles="cluster">
       <name>addExoCacheConfig</name>
       <set-method>addExoCacheConfig</set-method>

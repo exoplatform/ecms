@@ -55,11 +55,9 @@
             </properties>
           </initializer>
           <cache enabled="true"
-            class="org.exoplatform.services.jcr.impl.dataflow.persistent.jbosscache.JBossCacheWorkspaceStorageCache">
+            class="org.exoplatform.services.jcr.impl.dataflow.persistent.infinispan.ISPNCacheWorkspaceStorageCache">
             <properties>
-              <property name="jbosscache-configuration"
-                value="conf/exo.portal.component.test.jcr-jbosscache-config.xml" />
-              <property name="jbosscache-cl-cache.jdbc.datasource" value="jdbcexo"/>
+              <property name="infinispan-configuration" value="conf/standalone/infinispan/cache-config.xml" />
             </properties>
           </cache>
           <query-handler
@@ -70,12 +68,11 @@
             </properties>
           </query-handler>
           <lock-manager
-            class="org.exoplatform.services.jcr.impl.core.lock.jbosscache.CacheableLockManagerImpl">
+            class="org.exoplatform.services.jcr.impl.core.lock.infinispan.ISPNCacheableLockManagerImpl">
             <properties>
               <property name="time-out" value="15m" />
-              <property name="jbosscache-configuration"
-                value="conf/exo.portal.component.test.jcr-jbosscache-lock-config.xml" />
-              <property name="jbosscache-cl-cache.jdbc.datasource" value="jdbcexo"/>
+              <property name="infinispan-cl-cache.jdbc.datasource" value="jdbcexo" />
+              <property name="infinispan-configuration" value="conf/standalone/infinispan/lock-config.xml" />
             </properties>
           </lock-manager>
         </workspace>
@@ -115,11 +112,9 @@
             </properties>
           </initializer>
           <cache enabled="true"
-            class="org.exoplatform.services.jcr.impl.dataflow.persistent.jbosscache.JBossCacheWorkspaceStorageCache">
+            class="org.exoplatform.services.jcr.impl.dataflow.persistent.infinispan.ISPNCacheWorkspaceStorageCache">
             <properties>
-              <property name="jbosscache-configuration"
-                value="conf/exo.portal.component.test.jcr-jbosscache-config.xml" />
-              <property name="jbosscache-cl-cache.jdbc.datasource" value="jdbcexo"/>
+              <property name="infinispan-configuration" value="conf/standalone/infinispan/cache-config.xml" />
             </properties>
           </cache>
           <query-handler
@@ -130,12 +125,11 @@
             </properties>
           </query-handler>
           <lock-manager
-            class="org.exoplatform.services.jcr.impl.core.lock.jbosscache.CacheableLockManagerImpl">
+            class="org.exoplatform.services.jcr.impl.core.lock.infinispan.ISPNCacheableLockManagerImpl">
             <properties>
               <property name="time-out" value="15m" />
-              <property name="jbosscache-configuration"
-                value="conf/exo.portal.component.test.jcr-jbosscache-lock-config.xml" />
-              <property name="jbosscache-cl-cache.jdbc.datasource" value="jdbcexo"/>
+              <property name="infinispan-cl-cache.jdbc.datasource" value="jdbcexo" />
+              <property name="infinispan-configuration" value="conf/standalone/infinispan/lock-config.xml" />
             </properties>
           </lock-manager>
         </workspace>
@@ -239,7 +233,6 @@
             <properties>
               <property name="jbosscache-configuration"
                 value="conf/exo.portal.component.test.jcr-jbosscache-config.xml" />
-              <property name="jbosscache-cl-cache.jdbc.datasource" value="jdbcexo"/>
             </properties>
           </cache>
           <query-handler
@@ -255,7 +248,6 @@
               <property name="time-out" value="15m" />
               <property name="jbosscache-configuration"
                 value="conf/exo.portal.component.test.jcr-jbosscache-lock-config.xml" />
-              <property name="jbosscache-cl-cache.jdbc.datasource" value="jdbcexo"/>
             </properties>
           </lock-manager>
         </workspace>
@@ -295,10 +287,9 @@
             </properties>
           </initializer>
           <cache enabled="true"
-            class="org.exoplatform.services.jcr.impl.dataflow.persistent.jbosscache.JBossCacheWorkspaceStorageCache">
+            class="org.exoplatform.services.jcr.impl.dataflow.persistent.infinispan.ISPNCacheWorkspaceStorageCache">
             <properties>
-              <property name="jbosscache-configuration"
-                value="conf/exo.portal.component.test.jcr-jbosscache-config.xml" />
+              <property name="infinispan-configuration" value="conf/standalone/infinispan/cache-config.xml" />
             </properties>
           </cache>
           <query-handler class="org.exoplatform.services.jcr.impl.core.query.lucene.SearchIndex">
@@ -308,11 +299,11 @@
             </properties>
           </query-handler>
           <lock-manager
-            class="org.exoplatform.services.jcr.impl.core.lock.jbosscache.CacheableLockManagerImpl">
+            class="org.exoplatform.services.jcr.impl.core.lock.infinispan.ISPNCacheableLockManagerImpl">
             <properties>
               <property name="time-out" value="15m" />
-              <property name="jbosscache-configuration"
-                value="conf/exo.portal.component.test.jcr-jbosscache-lock-config.xml" />
+              <property name="infinispan-cl-cache.jdbc.datasource" value="jdbcexo" />
+              <property name="infinispan-configuration" value="conf/standalone/infinispan/lock-config.xml" />
             </properties>
           </lock-manager>
           
@@ -350,11 +341,9 @@
             </properties>
           </initializer>
           <cache enabled="true"
-                 class="org.exoplatform.services.jcr.impl.dataflow.persistent.jbosscache.JBossCacheWorkspaceStorageCache">
+                 class="org.exoplatform.services.jcr.impl.dataflow.persistent.infinispan.ISPNCacheWorkspaceStorageCache">
             <properties>
-              <property name="jbosscache-configuration"
-                        value="conf/exo.portal.component.test.jcr-jbosscache-config.xml"/>
-              <property name="jbosscache-cl-cache.jdbc.datasource" value="jdbcexo"/>
+              <property name="infinispan-configuration" value="conf/standalone/infinispan/cache-config.xml"/>
             </properties>
           </cache>
           <query-handler class="org.exoplatform.services.jcr.impl.core.query.lucene.SearchIndex">
@@ -362,12 +351,11 @@
               <property name="index-dir" value="${gatein.test.tmp.dir}/jcr/jcrlucenedb/portal-test"/>
             </properties>
           </query-handler>
-          <lock-manager class="org.exoplatform.services.jcr.impl.core.lock.jbosscache.CacheableLockManagerImpl">
+          <lock-manager class="org.exoplatform.services.jcr.impl.core.lock.infinispan.ISPNCacheableLockManagerImpl">
             <properties>
               <property name="time-out" value="15m"/>
-              <property name="jbosscache-configuration"
-                        value="conf/exo.portal.component.test.jcr-jbosscache-lock-config.xml"/>
-              <property name="jbosscache-cl-cache.jdbc.datasource" value="jdbcexo"/>
+              <property name="infinispan-cl-cache.jdbc.datasource" value="jdbcexo" />
+              <property name="infinispan-configuration" value="conf/standalone/infinispan/lock-config.xml"/>
             </properties>
           </lock-manager>
         </workspace>
@@ -407,11 +395,9 @@
             </properties>
           </initializer>
           <cache enabled="true"
-            class="org.exoplatform.services.jcr.impl.dataflow.persistent.jbosscache.JBossCacheWorkspaceStorageCache">
+            class="org.exoplatform.services.jcr.impl.dataflow.persistent.infinispan.ISPNCacheWorkspaceStorageCache">
             <properties>
-              <property name="jbosscache-configuration"
-                value="conf/exo.portal.component.test.jcr-jbosscache-config.xml" />
-              <property name="jbosscache-cl-cache.jdbc.datasource" value="jdbcexo"/>
+              <property name="infinispan-configuration" value="conf/standalone/infinispan/cache-config.xml" />
             </properties>
           </cache>
           <query-handler
@@ -422,12 +408,11 @@
             </properties>
           </query-handler>
           <lock-manager
-            class="org.exoplatform.services.jcr.impl.core.lock.jbosscache.CacheableLockManagerImpl">
+            class="org.exoplatform.services.jcr.impl.core.lock.infinispan.ISPNCacheableLockManagerImpl">
             <properties>
               <property name="time-out" value="15m" />
-              <property name="jbosscache-configuration"
-                value="conf/exo.portal.component.test.jcr-jbosscache-lock-config.xml" />
-              <property name="jbosscache-cl-cache.jdbc.datasource" value="jdbcexo"/>
+              <property name="infinispan-cl-cache.jdbc.datasource" value="jdbcexo" />
+              <property name="infinispan-configuration"  value="conf/standalone/infinispan/lock-config.xml" />
             </properties>
           </lock-manager>
         </workspace>
