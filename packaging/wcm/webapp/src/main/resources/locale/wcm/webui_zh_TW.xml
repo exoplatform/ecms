@@ -1,0 +1,439 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+
+    Copyright (C) 2009 eXo Platform SAS.
+    
+    This is free software; you can redistribute it and/or modify it
+    under the terms of the GNU Lesser General Public License as
+    published by the Free Software Foundation; either version 2.1 of
+    the License, or (at your option) any later version.
+    
+    This software is distributed in the hope that it will be useful,
+    but WITHOUT ANY WARRANTY; without even the implied warranty of
+    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the GNU
+    Lesser General Public License for more details.
+    
+    You should have received a copy of the GNU Lesser General Public
+    License along with this software; if not, write to the Free
+    Software Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA
+    02110-1301 USA, or see the FSF site: http://www.fsf.org.
+
+-->
+<bundle>
+  <UIExoStart>
+    <tooltip>
+      <homepage>首頁</homepage>
+    </tooltip>
+  </UIExoStart>
+
+  <UIFormInputSetWithAction>
+    <msg>
+      <confirm-delete>確定要刪除此項目嗎?</confirm-delete>
+    </msg>
+  </UIFormInputSetWithAction>
+
+  <Drives>
+    <label>
+      <ManagedSites>網站管理</ManagedSites>
+      <SharedSite>共用的網站</SharedSite>
+    </label>
+  </Drives>
+
+  <Views>
+    <label>
+      <wcm-view>Web</wcm-view>
+      <admin-view>Admin</admin-view>
+      <icon-view>圖示</icon-view>
+      <thumbails-view>縮略圖</thumbails-view>
+      <list-view>清單</list-view>
+      <authoring-view>創作</authoring-view>
+      <wcm-category-view>類別</wcm-category-view>
+      <file-view>檔案管理檢視</file-view>
+    </label>
+  </Views>
+
+  <UIActionBar>
+    <obtion>
+      <Publication>發佈</Publication>
+      <System>系統</System>
+    </obtion>
+  </UIActionBar>
+
+  <UIPageSelectorPanel>
+    <header>
+      <path>路徑</path>
+      <action>#{word.action}</action>
+    </header>
+    <msg>
+      <child-not-found>沒有找到頁面。</child-not-found>
+    </msg>
+    <title>
+      <select>選擇</select>
+    </title>
+  </UIPageSelectorPanel>
+
+  <UIContentDialogFormPopupWindow>
+    <title>
+      <UIContentDialogPreference>Web 內容偏好</UIContentDialogPreference>
+    </title>
+  </UIContentDialogFormPopupWindow>
+
+  <UITabPane>
+    <title>
+      <UIContentBrowsePanelOne>內容瀏覽器</UIContentBrowsePanelOne>
+      <UIContentBrowsePanelMulti>內容瀏覽器</UIContentBrowsePanelMulti>
+      <UIContentBrowsePanelFolder>資料夾瀏覽器</UIContentBrowsePanelFolder>
+      <UIContentSearchForm>內容搜索表單</UIContentSearchForm>
+      <UIContentSearchResult>搜尋結果</UIContentSearchResult>
+      <UIContentViewer>預覽內容</UIContentViewer>
+      <WebContentMetadataPopup>屬性選擇器</WebContentMetadataPopup>
+      <WebContentNodeTypePopup>節點類型選擇器</WebContentNodeTypePopup>
+      <UIPermissionManager>權限管理器</UIPermissionManager>
+    </title>
+  </UITabPane>
+
+  <UIContentBrowsePanelOne>
+    <selectBoxValues>
+      <FilterBy>透過篩選</FilterBy>
+      <WebContent>Web 內容</WebContent>
+      <DMSDocument>文件</DMSDocument>
+      <Media>媒體</Media>
+    </selectBoxValues>
+    <msg>
+      <node-checkout>該節點已簽出。請執行此功能之前，檢查該節點。</node-checkout>
+    </msg>
+  </UIContentBrowsePanelOne>
+
+  <UIContentBrowsePanelMulti>
+    <selectBoxValues>
+      <FilterBy>透過篩選</FilterBy>
+      <WebContent>Web 內容</WebContent>
+      <DMSDocument>文件</DMSDocument>
+      <Media>媒體</Media>
+    </selectBoxValues>
+  </UIContentBrowsePanelMulti>
+
+  <UIContentBrowsePanelOne>
+    <label>
+      <LeftColumn>選擇要顯示為兒童內容的資料夾。</LeftColumn>
+      <RightColumn>下面的內容可以選擇。</RightColumn>
+    </label>
+  </UIContentBrowsePanelOne>
+
+  <UIContentBrowsePanelMulti>
+    <label>
+      <LeftColumn>選擇要顯示為兒童內容的資料夾。</LeftColumn>
+      <RightColumn>下面的內容可以選擇。</RightColumn>
+    </label>
+  </UIContentBrowsePanelMulti>
+
+  <UIContentBrowsePanelFolder>
+    <label>
+      <LeftColumn>選擇要顯示為兒童內容的資料夾。</LeftColumn>
+      <RightColumn>可以選擇下面的資料夾。</RightColumn>
+    </label>
+  </UIContentBrowsePanelFolder>
+
+  <UISelectedContentGrid>
+    <label>
+      <name>#{word.name}</name>
+      <add>新增</add>
+      <delete>刪除</delete>
+    </label>
+    <msg>
+      <no-content-found>沒有找到內容。</no-content-found>
+      <non-content>您沒有選擇任何內容。</non-content>
+    </msg>
+  </UISelectedContentGrid>
+
+  <UICLVContentSelectedGrid>
+    <action>
+      <SaveCategories>#{word.save}</SaveCategories>
+      <Cancel>#{word.cancel}</Cancel>
+    </action>
+  </UICLVContentSelectedGrid>
+
+  <UIContentBrowsePathSelector>
+    <header>
+      <name>#{word.name}</name>
+      <publicationstate>發佈狀態</publicationstate>
+      <action>操作</action>
+    </header>
+    <msg>
+      <child-not-found>沒有找到內容</child-not-found>
+    </msg>
+  </UIContentBrowsePathSelector>
+
+  <UIContentBrowsePathSelectorFolder>
+    <header>
+      <name>#{word.name}</name>
+      <publicationstate>發佈狀態</publicationstate>
+      <action>操作</action>
+    </header>
+    <msg>
+      <child-not-found>沒有找到資料夾</child-not-found>
+    </msg>
+  </UIContentBrowsePathSelectorFolder>
+
+  <UIContentSearchForm>
+    <title>
+      <Location>網站名稱</Location>
+      <SearchByName>按名稱搜索</SearchByName>
+      <Fulltext>單詞或短語在上下文中</Fulltext>
+      <Property>屬性</Property>
+      <Contain>包含</Contain>
+      <FromDate>日期從</FromDate>
+      <ToDate>到目前為止</ToDate>
+      <DocumentType>文件類型</DocumentType>
+    </title>
+    <tooltip>
+      <AddMetadataType>增加屬性</AddMetadataType>
+      <AddNodeType>新增節點類型</AddNodeType>
+    </tooltip>    
+    <label>
+      <option>
+        <CREATED>已建立</CREATED>
+        <MODIFIED>修改</MODIFIED>
+      </option>
+    </label>
+    <action>
+      <SearchWebContent>搜索</SearchWebContent>
+    </action>
+    <msg>
+      <time-to-late>搜索時間過長。</time-to-late>
+      <empty-field>請輸入有效的關鍵字進行搜索。</empty-field>
+      <invalid-format>欄位"{0}"不正確的日期/時間格式。</invalid-format>
+      <invalid-date>結束日期必須晚於開始日期</invalid-date>
+      <invalid-nodeType>節點類型"{0}"無效。請再次檢查。</invalid-nodeType>
+      <invalid-keyword>關鍵字不正確。無法識別某些字元。</invalid-keyword>
+    </msg>
+  </UIContentSearchForm>
+
+  <WebContentMetadataPopup>
+    <title>
+      <UIContentPropertySelector>屬性選擇器</UIContentPropertySelector>
+    </title>
+  </WebContentMetadataPopup>
+
+  <UIContentPropertySelector>
+    <action>
+      <Add>新增</Add>
+      <Cancel>#{word.cancel}</Cancel>
+    </action>
+    <label>
+      <metadataType>中繼資料類型</metadataType>
+      <property_select>屬性</property_select>
+    </label>
+  </UIContentPropertySelector>
+
+  <WebContentNodeTypePopup>
+    <title>
+      <UIContentNodeTypeSelector>節點類型選擇器</UIContentNodeTypeSelector>
+    </title>
+  </WebContentNodeTypePopup>
+
+  <UIContentNodeTypeSelector>
+    <action>
+      <Save>#{word.save}</Save>
+      <Cancel>#{word.cancel}</Cancel>
+    </action>
+  </UIContentNodeTypeSelector>
+
+  <UIContentSearchResult>
+    <header>
+      <title>標題</title>
+      <score>得分</score>
+      <publicationstate>發佈狀態</publicationstate>
+      <action>操作</action>
+    </header>
+    <title>
+      <Select>選擇</Select>
+      <View>查看</View>
+    </title>
+    <msg>
+    <template-not-support>無法預覽此內容。該範本不受支援</template-not-support>
+    </msg>
+  </UIContentSearchResult>
+
+  <UIContentDialogForm>
+    <action>
+      <SaveDraft>儲存草稿</SaveDraft>
+      <FastPublish>快速發佈</FastPublish>
+      <Preferences>選項</Preferences>
+      <Close>#{word.close}</Close>
+    </action>
+    <msg>
+      <access-denied>你並沒有將類別增加到此文檔的權限。</access-denied>
+      <exception>將類別增加到此文檔時出錯。</exception>
+      <non-categories>類別是錯誤的。請選擇適當的類別。</non-categories>
+    </msg>
+  </UIContentDialogForm>
+
+  <UIPermissionManager>
+    <label>
+      <UIPermissionInputSetWithAction>權限</UIPermissionInputSetWithAction>
+      <UIAccessibleCheckboxInput>存取權利</UIAccessibleCheckboxInput>
+      <UIEditableCheckboxInput>編輯權利</UIEditableCheckboxInput>
+    </label>
+    <action>
+      <Save>#{word.save}</Save>
+      <Clear>清除</Clear>
+      <title>
+        <Edit>編輯</Edit>
+        <Delete>刪除</Delete>
+      </title>
+    </action>
+  </UIPermissionManager>
+
+  <UIPermissionManagerGrid>
+    <header>
+      <owner>權限</owner>
+      <accessible>可訪問</accessible>
+      <editable>可編輯</editable>
+      <action>操作</action>
+    </header>
+    <msg>
+      <confirm-delete-permission>確定要刪除此權限嗎?</confirm-delete-permission>
+      <no-permission-remove>您沒有權限。</no-permission-remove>
+      <access-denied>訪問被拒絕。</access-denied>
+      <node-locked>路徑元素 {0} 已被父母其中之一鎖定。</node-locked>
+      <userOrGroup-required>您必須選擇一個使用者或群組。</userOrGroup-required>
+      <checkbox-require>您必須設定權限。</checkbox-require>
+      <node-checkedin>您必須簽出第一次。</node-checkedin>
+    </msg>
+  </UIPermissionManagerGrid>
+
+  <UIPermissionInputSetWithAction>
+    <title>
+      <SelectUser>選擇使用者</SelectUser>
+      <SelectMember>選擇成員</SelectMember>
+      <AddAny>新增任何權限</AddAny>
+    </title>
+  </UIPermissionInputSetWithAction>
+
+  <UIUserSelectorPopupWindow>
+    <title>
+      <UIUserContainer>使用者選擇器</UIUserContainer>
+    </title>
+  </UIUserSelectorPopupWindow>
+
+  <UIGroupSelectorPopupWindow>
+    <title>
+      <UIGroupMemberSelector>群組選擇器</UIGroupMemberSelector>
+    </title>
+  </UIGroupSelectorPopupWindow>
+
+  <UIGroupMemberSelector>
+    <label>
+      <selectGroup>選擇群組</selectGroup>
+      <selectMembership>選擇成員身份</selectMembership>
+    </label>
+  </UIGroupMemberSelector>
+
+  <UIContentDialogPreference>
+    <action>
+      <Back>返回</Back>
+    </action>
+  </UIContentDialogPreference>
+
+  <ZeroValidator>
+    <msg>
+      <Invalid-number>欄位"{0}"不接受為零。</Invalid-number>
+    </msg>
+  </ZeroValidator>
+
+  <UIDropDownPageTemp>
+    <item>
+      <WCMPageConfigs>WCM 頁面配置</WCMPageConfigs>
+      <ColumnPageConfigs>列頁面配置</ColumnPageConfigs>
+      <RowPageConfigs>行頁面配置</RowPageConfigs>
+      <TabsPageConfigs>標籤頁面配置</TabsPageConfigs>
+      <MixPageConfigs>混合頁面配置</MixPageConfigs>
+    </item>
+  </UIDropDownPageTemp>
+
+  <UIWizardPageSelectLayoutForm>
+    <label>
+      <SingleContentViewer>單一內容檢視器</SingleContentViewer>
+      <ContentListViewer>內容清單檢視器</ContentListViewer>
+      <Search>搜索</Search>
+      <Sitemap>網站導覽</Sitemap>
+      <TwoColumnsLayout>兩列佈局</TwoColumnsLayout>
+      <ThreeColumnsLayout>三列佈局</ThreeColumnsLayout>
+      <TwoRowsLayout>兩行佈局</TwoRowsLayout>
+      <ThreeRowsLayout>三行佈局</ThreeRowsLayout>
+      <TwoTabsLayout>兩個標籤佈局</TwoTabsLayout>
+      <ThreeTabsLayout>三個標籤佈局</ThreeTabsLayout>
+      <TwoColumnsOneRowLayout>兩列 &amp; 一行佈局</TwoColumnsOneRowLayout>
+      <OneRowTwoColumnsLayout>一行 &amp; 兩列佈局</OneRowTwoColumnsLayout>
+      <ThreeRowsTwoColumnsLayout>三行 &amp; 兩列佈局</ThreeRowsTwoColumnsLayout>
+    </label>
+  </UIWizardPageSelectLayoutForm>
+
+  <Signin>
+    <welcome>歡迎</welcome>
+    <login>登錄</login>
+    <logout>登出</logout>
+    <language>更改語言</language>
+    <register>註冊</register>
+  </Signin>
+  <UIDriveForm>
+<label>
+<wcm-category-view>類別視圖</wcm-category-view>
+<wcm-view>WCM 內容視圖</wcm-view>
+</label>
+  </UIDriveForm>
+  
+  <ContentSelector>
+    <title>
+      <PersonalDrives>個人磁碟機</PersonalDrives>
+      <GeneralDrives>一般的磁碟機</GeneralDrives>
+      <GroupDrives>群組磁碟機</GroupDrives>
+      <Private>私人</Private>
+      <Public>公開</Public>
+      <BackupCenter>備份中心</BackupCenter>
+      <CategorizedDocumentsCenter>分類文件中心</CategorizedDocumentsCenter>
+      <CollaborationCenter>協作中心</CollaborationCenter>
+      <DigitalAssetsManagementCenter>數位資產管理中心</DigitalAssetsManagementCenter>
+      <DMSAdministration>DMS 管理員</DMSAdministration>
+      <DocumentsManagementCenter>文件管理中心</DocumentsManagementCenter>
+      <LiveDocumentsCenter>生活文件中心</LiveDocumentsCenter>
+      <PendingDocumentsCenter>等待文件中心</PendingDocumentsCenter>
+      <RecordsManagementCenter>記錄管理中心</RecordsManagementCenter>
+      <SharedUsersSpace>共用的使用者空間</SharedUsersSpace>
+      <Systemfiles>系統檔案</Systemfiles>
+      <ValidationRequestsDocumentsCenter>驗證請求的文件中心</ValidationRequestsDocumentsCenter>
+      <ManagedSites>網站管理</ManagedSites>
+      <SharedSite>共用的網站</SharedSite>
+    </title>
+  </ContentSelector>
+  
+  <UICategoryNavigationTargetPathPopupWindow>
+    <title>
+      <UIPageSelector>頁面選擇器</UIPageSelector>
+    </title>
+  </UICategoryNavigationTargetPathPopupWindow>
+  
+  <UIDocumentInfo>
+    <msg>
+      <access-denied-exception>訪問被拒絕。你也許不具有讀取權限，或者該節點可能已刪除或更改。</access-denied-exception>
+    </msg>
+  </UIDocumentInfo>
+  <UIPortalApplication>
+    <title>
+      <abort>中止</abort>
+    </title>
+  </UIPortalApplication>    
+  
+  <CategoryNavigationTemplate>
+  <label>
+  <home>首頁</home>
+  </label>
+  </CategoryNavigationTemplate>
+  
+  <Breadcrumb>
+  <label>
+  <home>首頁</home>
+  </label>  
+  </Breadcrumb>
+</bundle>

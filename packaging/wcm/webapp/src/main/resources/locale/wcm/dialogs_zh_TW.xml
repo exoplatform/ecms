@@ -1,0 +1,93 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+
+    Copyright (C) 2009 eXo Platform SAS.
+    
+    This is free software; you can redistribute it and/or modify it
+    under the terms of the GNU Lesser General Public License as
+    published by the Free Software Foundation; either version 2.1 of
+    the License, or (at your option) any later version.
+    
+    This software is distributed in the hope that it will be useful,
+    but WITHOUT ANY WARRANTY; without even the implied warranty of
+    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the GNU
+    Lesser General Public License for more details.
+    
+    You should have received a copy of the GNU Lesser General Public
+    License along with this software; if not, write to the Free
+    Software Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA
+    02110-1301 USA, or see the FSF site: http://www.fsf.org.
+
+-->
+<bundle>
+  <WebContent>
+    <dialog>
+      <label>
+        <MainContent>主要內容</MainContent>
+        <cssFile>default.css</cssFile>
+        <jsFile>default.js</jsFile>
+        <Advanced>進階選項</Advanced>
+        <Summary>總結</Summary>
+        <name>#{word.name}</name>
+        <title>標題</title>
+        <ContentCSS>CSS 資料</ContentCSS>
+        <hintCSS>您可以為您的 web 內容指定主樣式表。此樣式會覆蓋在網站級別和共用級別定義的樣式表。</hintCSS>
+        <ContentJS>JS 資料</ContentJS>
+        <hintJS>您可以指定一些 JavaScript 代碼呈現在您的 web 內容之前。</hintJS>
+        <WebContentHtml>主要內容</WebContentHtml>
+        <Illustration>插圖</Illustration>
+        <hintIllustration>您可以指定您的 web 內容顯示在清單中時將顯示的圖像。您還可以指定一些摘要文本和此圖像一起。</hintIllustration>
+        <confirm-delete>確定要刪除此插圖嗎?</confirm-delete>
+        <illustrationImage>插圖圖片</illustrationImage>
+        <imageMimeType>圖片類型</imageMimeType>
+        <image>上傳圖片</image>
+        <imageWidth>圖片寬度</imageWidth>
+        <imageHeight>圖片高度</imageHeight>
+        <Synchronize>與 CSS 和 HTML 同步</Synchronize>
+      </label>
+    </dialog>
+  </WebContent>
+
+  <CSSFile>
+    <dialog>
+      <label>
+        <name>#{word.name}</name>
+        <active>啟動</active>
+        <priority>優先</priority>
+        <content>CSS 資料</content>
+      </label>
+    </dialog>
+  </CSSFile>
+
+  <JSFile>
+    <dialog>
+      <label>
+        <name>#{word.name}</name>
+        <active>啟動</active>
+        <priority>優先</priority>
+        <content>JS 資料</content>
+      </label>
+    </dialog>
+  </JSFile>
+
+  <WebLink>
+    <dialog>
+      <label>
+        <name>#{word.name}</name>
+        <url>URL</url>
+        <description>描述</description>
+      </label>
+    </dialog>
+  </WebLink>
+
+  <SiteMetadata>
+    <dialog>
+      <label>
+        <title>網站標題</title>
+        <description>網站描述</description>
+        <keywords>網站關鍵字</keywords>
+        <robots>搜尋引擎行為</robots>
+      </label>
+    </dialog>
+  </SiteMetadata>
+</bundle>

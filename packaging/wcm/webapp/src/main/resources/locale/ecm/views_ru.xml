@@ -42,7 +42,7 @@
       <label>
         <not-viewable>Этот контент не возможно отобразить. Загрузите его или используйте WebDAV для доступа</not-viewable>
         <using-webDAV>или используйте WebDAV для доступа к содержимому</using-webDAV>
-        <file-size-too-big>The content of this file is too big. You should download and open in the client.</file-size-too-big>
+        <file-size-too-big>Слишком большой размер содержимого этой страницы. Вам необходимо скачать и открыть в клиенте.</file-size-too-big>
         <webDAV>Показать через WebDAV</webDAV>
         <download>Загрузить</download>
         <htmlview>Показать как HTML</htmlview>
@@ -88,7 +88,7 @@
         <exo_owner>Владелец</exo_owner>
         <exo_dateCreated>Дата создания</exo_dateCreated>
         <exo_dateModified>Дата изменения</exo_dateModified>
-        <auditing>Auditing</auditing>
+        <auditing>Аудит</auditing>
       </label>
     </view>
   </ListView>
@@ -151,9 +151,9 @@
         <rights>Авторские права</rights>
         <relation>Отношение</relation>
         <format>Формат</format>
-        <coverage>Coverage</coverage>
-        <identifier>Identifier</identifier>
-        <languages>Languages</languages>
+        <coverage>Покрытие</coverage>
+        <identifier>Идентификатор</identifier>
+        <languages>Языки</languages>
       </label>
       <action>
         <add-edit>Добавить/редактировать</add-edit>
@@ -170,9 +170,9 @@
     <view>
       <label> 
         <isDeep>Глубоко</isDeep>
-        <nodetypes>Node types</nodetypes>
-        <affectedNodeTypeNames>Affected node types</affectedNodeTypeNames>
-        <nodeTypeName>Node type names</nodeTypeName>
+        <nodetypes>Типы узлов</nodetypes>
+        <affectedNodeTypeNames>Типы узлов, попавших под воздействие</affectedNodeTypeNames>
+        <nodeTypeName>Названия типов узлов</nodeTypeName>
       </label> 
     </view>
   </ScriptAction>
@@ -213,10 +213,10 @@
    <AccessibleMedia>
     <view>
       <label>
-      <Play-audio-description-of-this-video>Audio description</Play-audio-description-of-this-video>
-      <Read-more>Read more</Read-more>
-      <Read-less>Read less</Read-less>
-      <Switch-back-to-original-video>Original video</Switch-back-to-original-video>
+      <Play-audio-description-of-this-video>Аудио описание</Play-audio-description-of-this-video>
+      <Read-more>Подробнее</Read-more>
+      <Read-less>Скрыть подробности</Read-less>
+      <Switch-back-to-original-video>Оригинальное видео</Switch-back-to-original-video>
       </label>
       <tooltip>
       <A-second-media-file-is-available-as-audio-description>Второй файл мультимедиа доступен в качестве аудио описания</A-second-media-file-is-available-as-audio-description>

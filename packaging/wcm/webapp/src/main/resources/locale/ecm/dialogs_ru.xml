@@ -89,7 +89,7 @@
   <AddMetadata>
     <dialog>
       <label>
-        <id>Id</id>
+        <id>Идентификатор</id>
         <name>#{word.name}</name>
         <lifecycle>#{Ecm.dialog.label.lifecycle}</lifecycle>
         <metadata>Метаданные</metadata>
@@ -104,7 +104,7 @@
   <AutoVersioning>
     <dialog>
       <label>
-        <id>Id</id>
+        <id>Идентификатор</id>
         <name>#{word.name}</name>
         <lifecycle>#{Ecm.dialog.label.lifecycle}</lifecycle>
         <schedule-type>#{Ecm.dialog.label.schedule-type}</schedule-type>
@@ -112,7 +112,7 @@
         <end-time>#{Ecm.dialog.label.end-time}</end-time>
         <repeat-count>#{Ecm.dialog.label.repeat-count}</repeat-count>
         <time-inteval>#{Ecm.dialog.label.time-interval}</time-inteval>
-        <cron-expression>Cron expression</cron-expression>
+        <cron-expression>Команда планировщика задач</cron-expression>
         <description>#{word.description}</description>
       </label>
     </dialog>
@@ -123,7 +123,7 @@
   <EnableVersioning>
     <dialog>
       <label>
-        <id>Id</id>
+        <id>Идентификатор</id>
         <name>#{word.name}</name>
         <lifecycle>#{Ecm.dialog.label.lifecycle}</lifecycle>
         <schedule-type>#{Ecm.dialog.label.schedule-type}</schedule-type>
@@ -239,7 +239,7 @@
         <version-history>История версий</version-history>
         <base-version>Базовая версия</base-version>
         <is-checked-out>Извлечен</is-checked-out>
-        <predecessors>Predecessors</predecessors>
+        <predecessors>Предшественники</predecessors>
         <merge-failed>Ошибка слияния</merge-failed>
         <uuid>UUID</uuid>
       </label>
@@ -254,7 +254,7 @@
       <label>
         <name>Имя</name>
         <autoload>Автозагрузка</autoload>
-        <minetype>MIME Type</minetype>
+        <minetype>Тип MIME</minetype>
         <content>Содержимое</content>
       </label>
     </dialog>
@@ -274,7 +274,7 @@
   </EmptyFieldValidator>
   <NumberFormatValidator>
     <msg>
-      <Invalid-number>The field '{0}' is invalid.</Invalid-number>
+      <Invalid-number>Поле '{0}' является недопустимым.</Invalid-number>
     </msg>
   </NumberFormatValidator>
   <!--
@@ -285,8 +285,8 @@
   <ScriptAction>
     <dialog>
       <label>
-        <id>Id</id>
-        <name>Name</name>
+        <id>Идентификатор</id>
+        <name>Имя</name>
         <lifecycle>Жизненный цикл</lifecycle>
         <homePath>Маршрут личного каталога</homePath>
         <targetWorkspace>Целевая рабочая область</targetWorkspace>
@@ -312,9 +312,9 @@
 <Electronic>Электронный</Electronic>
 <Paper>Бумажный</Paper>
 <NONE>Нет</NONE>
-<CLASSIFIED>Classified</CLASSIFIED>
+<CLASSIFIED>Классифицированные</CLASSIFIED>
 <UNCLASSIFIED>Неклассифицированные</UNCLASSIFIED>
-<NOCONTRACT>No Contract</NOCONTRACT>
+<NOCONTRACT>Нет связи</NOCONTRACT>
 <one-minute>Ежеминутно</one-minute>
 <hourly>Каждый час</hourly>
 <daily>Каждый день</daily>
@@ -372,14 +372,14 @@
   <AccessibleMedia>
   <dialog>
   <label>
-  <captions>Captions</captions>
+  <captions>Титры</captions>
 <audioDescription>Аудио описание</audioDescription>
 <alternativeText>Замещающий текст</alternativeText>
 </label>
 </dialog>
 <help>
-<CaptionsHelp>Captions should provide text of dialog and important sounds</CaptionsHelp>
-<AudioDescriptionHelp>An audio description is a narrated track of the video</AudioDescriptionHelp>
+<CaptionsHelp>В титрах представляется текст диалога и важные звуки</CaptionsHelp>
+<AudioDescriptionHelp>Аудио описание - это комментарий к видео</AudioDescriptionHelp>
 <AlternativeTextHelp>Обеспечить доступный альтернативный способ представления информации</AlternativeTextHelp>
 </help>
 </AccessibleMedia>

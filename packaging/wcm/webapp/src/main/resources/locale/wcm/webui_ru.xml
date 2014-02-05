@@ -42,13 +42,13 @@
   <Views>
     <label>
       <wcm-view>Веб</wcm-view>
-      <admin-view>Admin</admin-view>
+      <admin-view>Администратор</admin-view>
       <icon-view>Иконки</icon-view>
       <thumbails-view>Эскизы</thumbails-view>
       <list-view>Список</list-view>
       <authoring-view>Разработка</authoring-view>
       <wcm-category-view>Категории</wcm-category-view>
-      <file-view>File Management View</file-view>
+      <file-view>Вид управления файлами</file-view>
     </label>
   </Views>
 
@@ -74,27 +74,27 @@
 
   <UIContentDialogFormPopupWindow>
     <title>
-      <UIContentDialogPreference>Web Content Preference</UIContentDialogPreference>
+      <UIContentDialogPreference>Настройка веб-контента</UIContentDialogPreference>
     </title>
   </UIContentDialogFormPopupWindow>
 
   <UITabPane>
     <title>
-      <UIContentBrowsePanelOne>Content Browser</UIContentBrowsePanelOne>
-      <UIContentBrowsePanelMulti>Content Browser</UIContentBrowsePanelMulti>
-      <UIContentBrowsePanelFolder>Folder Browser</UIContentBrowsePanelFolder>
+      <UIContentBrowsePanelOne>Обзор контента</UIContentBrowsePanelOne>
+      <UIContentBrowsePanelMulti>Обзор контента</UIContentBrowsePanelMulti>
+      <UIContentBrowsePanelFolder>Обзор папок</UIContentBrowsePanelFolder>
       <UIContentSearchForm>Форма поиска контента</UIContentSearchForm>
       <UIContentSearchResult>Результат поиска</UIContentSearchResult>
       <UIContentViewer>Предпросмотр контента</UIContentViewer>
-      <WebContentMetadataPopup>Property Selector</WebContentMetadataPopup>
-      <WebContentNodeTypePopup>Nodetype Selector</WebContentNodeTypePopup>
-      <UIPermissionManager>Permission Manager</UIPermissionManager>
+      <WebContentMetadataPopup>Выбор свойства</WebContentMetadataPopup>
+      <WebContentNodeTypePopup>Выбор типа узла</WebContentNodeTypePopup>
+      <UIPermissionManager>Управление разрешениями</UIPermissionManager>
     </title>
   </UITabPane>
 
   <UIContentBrowsePanelOne>
     <selectBoxValues>
-      <FilterBy>Filter by</FilterBy>
+      <FilterBy>Фильтр по</FilterBy>
       <WebContent>Веб-контент</WebContent>
       <DMSDocument>Документ</DMSDocument>
       <Media>Медиа</Media>
@@ -106,7 +106,7 @@
 
   <UIContentBrowsePanelMulti>
     <selectBoxValues>
-      <FilterBy>Filter by</FilterBy>
+      <FilterBy>Фильтр по</FilterBy>
       <WebContent>Веб-контент</WebContent>
       <DMSDocument>Документ</DMSDocument>
       <Media>Медиа</Media>
@@ -156,39 +156,39 @@
   <UIContentBrowsePathSelector>
     <header>
       <name>#{word.name}</name>
-      <publicationstate>Publication State</publicationstate>
+      <publicationstate>Состояние публикации</publicationstate>
       <action>Действие</action>
     </header>
     <msg>
-      <child-not-found>No Content Found</child-not-found>
+      <child-not-found>Контент не найден</child-not-found>
     </msg>
   </UIContentBrowsePathSelector>
 
   <UIContentBrowsePathSelectorFolder>
     <header>
       <name>#{word.name}</name>
-      <publicationstate>Publication State</publicationstate>
+      <publicationstate>Состояние публикации</publicationstate>
       <action>Действие</action>
     </header>
     <msg>
-      <child-not-found>No Folder Found</child-not-found>
+      <child-not-found>Папка не найдена</child-not-found>
     </msg>
   </UIContentBrowsePathSelectorFolder>
 
   <UIContentSearchForm>
     <title>
       <Location>Название сайта</Location>
-      <SearchByName>Search by Name</SearchByName>
-      <Fulltext>A word or phrase in context</Fulltext>
+      <SearchByName>Поиск по имени</SearchByName>
+      <Fulltext>Слово или фраза в контексте</Fulltext>
       <Property>Свойство</Property>
-      <Contain>Contain</Contain>
-      <FromDate>From Date</FromDate>
-      <ToDate>To Date</ToDate>
+      <Contain>Содержит</Contain>
+      <FromDate>Дата От</FromDate>
+      <ToDate>Дата До</ToDate>
       <DocumentType>Тип документа</DocumentType>
     </title>
     <tooltip>
-      <AddMetadataType>Add Property</AddMetadataType>
-      <AddNodeType>Add Node Type</AddNodeType>
+      <AddMetadataType>Добавить свойство</AddMetadataType>
+      <AddNodeType>Добавить тип узла</AddNodeType>
     </tooltip>    
     <label>
       <option>
@@ -197,21 +197,21 @@
       </option>
     </label>
     <action>
-      <SearchWebContent>Search</SearchWebContent>
+      <SearchWebContent>Искать</SearchWebContent>
     </action>
     <msg>
-      <time-to-late>The searching time is too long.</time-to-late>
-      <empty-field>Please input a valid keyword for search.</empty-field>
-      <invalid-format>Invalid date/time format in field '{0}'.</invalid-format>
-      <invalid-date>"To Date" must be later than "From Date"</invalid-date>
-      <invalid-nodeType>The node type "{0}" is invalid. Please check again.</invalid-nodeType>
+      <time-to-late>Слишком длительное время поиска.</time-to-late>
+      <empty-field>Пожалуйста, введите действительное ключевое слово для поиска.</empty-field>
+      <invalid-format>Недопустимый формат даты в поле '{0}'.</invalid-format>
+      <invalid-date>"Дата До" должна быть позже, чем "Дата От"</invalid-date>
+      <invalid-nodeType>Недопустимый тип узла "{0}". Пожалуйста, проверьте еще раз.</invalid-nodeType>
       <invalid-keyword>Неверное ключевое слово. Некоторые символы не поддерживаются.</invalid-keyword>
     </msg>
   </UIContentSearchForm>
 
   <WebContentMetadataPopup>
     <title>
-      <UIContentPropertySelector>Property Selector</UIContentPropertySelector>
+      <UIContentPropertySelector>Выбор свойства</UIContentPropertySelector>
     </title>
   </WebContentMetadataPopup>
 
@@ -228,7 +228,7 @@
 
   <WebContentNodeTypePopup>
     <title>
-      <UIContentNodeTypeSelector>Node Type Selector</UIContentNodeTypeSelector>
+      <UIContentNodeTypeSelector>Выбор типа узла</UIContentNodeTypeSelector>
     </title>
   </WebContentNodeTypePopup>
 
@@ -242,7 +242,7 @@
   <UIContentSearchResult>
     <header>
       <title>Заголовок</title>
-      <score>Score</score>
+      <score>Результат</score>
       <publicationstate>Состояние публикации</publicationstate>
       <action>Действие</action>
     </header>
@@ -299,7 +299,7 @@
       <node-locked>Элемент пути {0} или один из его дочерних элементов заблокирован.</node-locked>
       <userOrGroup-required>Необходимо выбрать пользователя или группу.</userOrGroup-required>
       <checkbox-require>Вы должны установить права.</checkbox-require>
-      <node-checkedin>You must check out first.</node-checkedin>
+      <node-checkedin>Сначала отметьте.</node-checkedin>
     </msg>
   </UIPermissionManagerGrid>
 
@@ -345,28 +345,28 @@
   <UIDropDownPageTemp>
     <item>
       <WCMPageConfigs>Конфигурации страницы WCM</WCMPageConfigs>
-      <ColumnPageConfigs>Column Page Configurations</ColumnPageConfigs>
-      <RowPageConfigs>Row Page Configurations</RowPageConfigs>
-      <TabsPageConfigs>Tabs Page Configurations</TabsPageConfigs>
-      <MixPageConfigs>Mix Page Configurations</MixPageConfigs>
+      <ColumnPageConfigs>Конфигурация страницы колонок</ColumnPageConfigs>
+      <RowPageConfigs>Конфигурация страницы строк</RowPageConfigs>
+      <TabsPageConfigs>Конфигурация страницы вкладок</TabsPageConfigs>
+      <MixPageConfigs>Конфигурация смешанной страницы</MixPageConfigs>
     </item>
   </UIDropDownPageTemp>
 
   <UIWizardPageSelectLayoutForm>
     <label>
-      <SingleContentViewer>Single Content Viewer</SingleContentViewer>
-      <ContentListViewer>Content List Viewer</ContentListViewer>
-      <Search>Search</Search>
-      <Sitemap>Site Map</Sitemap>
-      <TwoColumnsLayout>Two-column Layout</TwoColumnsLayout>
-      <ThreeColumnsLayout>Three-column Layout</ThreeColumnsLayout>
-      <TwoRowsLayout>Two-row Layout</TwoRowsLayout>
-      <ThreeRowsLayout>Three-row Layout</ThreeRowsLayout>
-      <TwoTabsLayout>Two-tab layout</TwoTabsLayout>
-      <ThreeTabsLayout>Three-tab Layout</ThreeTabsLayout>
-      <TwoColumnsOneRowLayout>Two-column &amp; One-row Layout</TwoColumnsOneRowLayout>
-      <OneRowTwoColumnsLayout>One-row &amp; Two-column Layout</OneRowTwoColumnsLayout>
-      <ThreeRowsTwoColumnsLayout>Three-row &amp; Two-column Layout</ThreeRowsTwoColumnsLayout>
+      <SingleContentViewer>Просмотр одного контента</SingleContentViewer>
+      <ContentListViewer>Просмотра списка контента</ContentListViewer>
+      <Search>Искать</Search>
+      <Sitemap>Карта сайта</Sitemap>
+      <TwoColumnsLayout>Макет с двумя столбцами</TwoColumnsLayout>
+      <ThreeColumnsLayout>Макет с тремя столбцами</ThreeColumnsLayout>
+      <TwoRowsLayout>Макет с двумя строками</TwoRowsLayout>
+      <ThreeRowsLayout>Макет с тремя строками</ThreeRowsLayout>
+      <TwoTabsLayout>Макет с двумя вкладками</TwoTabsLayout>
+      <ThreeTabsLayout>Макет с тремя вкладками</ThreeTabsLayout>
+      <TwoColumnsOneRowLayout>Макет с двумя столбцами и одной строкой</TwoColumnsOneRowLayout>
+      <OneRowTwoColumnsLayout>Макет с одной строкой и двумя столбцами</OneRowTwoColumnsLayout>
+      <ThreeRowsTwoColumnsLayout>Макет с тремя строками и двумя столбцами</ThreeRowsTwoColumnsLayout>
     </label>
   </UIWizardPageSelectLayoutForm>
 
@@ -375,34 +375,34 @@
     <login>Авторизация</login>
     <logout>Выйти</logout>
     <language>Изменить язык</language>
-    <register>Register</register>
+    <register>Зарегистрироваться</register>
   </Signin>
   <UIDriveForm>
 <label>
-<wcm-category-view>Category View</wcm-category-view>
-<wcm-view>WCM Content View</wcm-view>
+<wcm-category-view>Просмотр по категориям</wcm-category-view>
+<wcm-view>Просмотр WCM контента</wcm-view>
 </label>
   </UIDriveForm>
   
   <ContentSelector>
     <title>
-      <PersonalDrives>Personal Drives</PersonalDrives>
-      <GeneralDrives>General Drives</GeneralDrives>
-      <GroupDrives>Group Drives</GroupDrives>
-      <Private>Private</Private>
-      <Public>Public</Public>
-      <BackupCenter>Backup Center</BackupCenter>
-      <CategorizedDocumentsCenter>Categorized Documents Center</CategorizedDocumentsCenter>
-      <CollaborationCenter>Collaboration Center</CollaborationCenter>
-      <DigitalAssetsManagementCenter>Digital Assets Management Center</DigitalAssetsManagementCenter>
+      <PersonalDrives>Персональные диски</PersonalDrives>
+      <GeneralDrives>Общие диски</GeneralDrives>
+      <GroupDrives>Диски группы</GroupDrives>
+      <Private>Приватный</Private>
+      <Public>Публичный</Public>
+      <BackupCenter>Центр резервного копирования</BackupCenter>
+      <CategorizedDocumentsCenter>Центр упорядоченных по категориям документов</CategorizedDocumentsCenter>
+      <CollaborationCenter>Центр сотрудничества</CollaborationCenter>
+      <DigitalAssetsManagementCenter>Центр системы управления цифровыми ресурсами</DigitalAssetsManagementCenter>
       <DMSAdministration>Администрирование DMS</DMSAdministration>
       <DocumentsManagementCenter>Центр управления документами</DocumentsManagementCenter>
       <LiveDocumentsCenter>Центр обновляемых документов</LiveDocumentsCenter>
-      <PendingDocumentsCenter>Pending Documents Center</PendingDocumentsCenter>
+      <PendingDocumentsCenter>Центр документов на рассмотрении</PendingDocumentsCenter>
       <RecordsManagementCenter>Центр управления записями</RecordsManagementCenter>
       <SharedUsersSpace>Пространство общих пользователей</SharedUsersSpace>
       <Systemfiles>Системные файлы</Systemfiles>
-      <ValidationRequestsDocumentsCenter>Validation Requests Documents Center</ValidationRequestsDocumentsCenter>
+      <ValidationRequestsDocumentsCenter>Центр документов по утверждению запросов</ValidationRequestsDocumentsCenter>
       <ManagedSites>Управление сайтами</ManagedSites>
       <SharedSite>Сайт коллективного пользования</SharedSite>
     </title>
