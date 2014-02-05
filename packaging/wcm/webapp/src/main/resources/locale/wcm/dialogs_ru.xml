@@ -31,12 +31,12 @@
         <name>#{word.name}</name>
         <title>Заголовок</title>
         <ContentCSS>Данные CSS</ContentCSS>
-        <hintCSS>You can specify the main style sheet for your web content. This style will override the style sheets defined at the site level and at the shared level.</hintCSS>
+        <hintCSS>Вы можете указать основную таблицу стилей для вашего веб-контента. Этот стиль будет замещать таблицы стилей, определенные на общем уровне сайта.</hintCSS>
         <ContentJS>Данные JS</ContentJS>
         <hintJS>Можно указать некоторые коды JavaScript, которые могут быть выполнены перед визуализацией веб-содержимого.</hintJS>
         <WebContentHtml>Основное содержание</WebContentHtml>
         <Illustration>Иллюстрация</Illustration>
-        <hintIllustration>You can specify an image that will be shown when your web content is displayed in the list. You can also specify some summary texts to go with this image.</hintIllustration>
+        <hintIllustration>Вы можете указать изображение, которое будет показано при отображении вашего содержимого веб-узла в списке. Можно также указать некоторые сводные тексты идущие с этим изображением.</hintIllustration>
         <confirm-delete>Вы уверены, что хотите удалить эту иллюстрацию?</confirm-delete>
         <illustrationImage>Изображение иллюстрации</illustrationImage>
         <imageMimeType>Тип изображения</imageMimeType>

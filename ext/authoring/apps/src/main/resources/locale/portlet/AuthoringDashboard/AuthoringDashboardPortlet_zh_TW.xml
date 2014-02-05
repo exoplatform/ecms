@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<bundle>
+  <UIDashboardForm>
+    <label>
+      <title>Author Dashboard</title>
+      <nocontent>沒有內容</nocontent>
+      <mydraft>我的草稿內容</mydraft>
+      <waitingapproval>等待我的核准</waitingapproval>
+      <approve>核准</approve>
+      <publishedtomorrow>將於明日發佈</publishedtomorrow>
+      <refresh>#{word.refresh}</refresh>
+    </label>
+  </UIDashboardForm>
+</bundle>

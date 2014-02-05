@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<bundle>
+  <PublicationService>
+    <AuthoringPublicationPlugin>
+      <changeState>
+        <obsoleted>內容已過時</obsoleted>
+        <published>公佈的內容</published>
+<unpublished>內容是未發佈</unpublished>
+<archived>內容已歸檔</archived>
+<staged>內容被上演</staged>
+<approved>內容被批准</approved>
+<pending>內容正在等待</pending>
+<draft>內容是以草稿形式</draft>
+      </changeState>
+    </AuthoringPublicationPlugin>
+  </PublicationService>
+  <Publication>
+    <log>
+      <description>
+        <enrolled>內容註冊發佈生命週期中</enrolled>
+      </description>
+    </log>
+  </Publication>
+</bundle>

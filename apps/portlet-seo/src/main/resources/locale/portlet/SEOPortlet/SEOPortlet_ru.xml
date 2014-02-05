@@ -8,8 +8,8 @@
       <language>Язык:</language>
       <robots>Роботы:</robots>
       <sitemap>Карта сайта:</sitemap>
-      <sitemapvisible>Visible in Sitemap</sitemapvisible>
-    <isInherited>Inherited from parent page</isInherited>
+      <sitemapvisible>Видимый на карте сайта</sitemapvisible>
+    <isInherited>Унаследовано от исходной страницы</isInherited>
       <priority>Приоритет:</priority>
       <frequency>Частота:</frequency>
       <select-language>Выбрать язык</select-language>
@@ -39,7 +39,7 @@
     </title>
   <help> 
   <priority>Диапазон допустимых значений от 0.0 до 1.0.</priority>
-  <description>Help searchers: let them know that the following page has a link that they are looking for.</description>
+  <description>Помогите поисковикам: сообщите, если следующая страница имеет связь с тем, что они ищут.</description>
   <keywords>Наиболее важные термины на странице разделены запятой.</keywords>  
   </help>  
   </UISEOForm>
@@ -58,7 +58,7 @@
   </UISEOToolbarForm>  
   <FloatNumberValidator>
     <msg>
-      <Invalid-number>The value of the Priority field must be in a numerical format. The valid values range is from 0.0 to 1.0.</Invalid-number>
+      <Invalid-number>Значение поля Приоритет должно иметь цифровой формат. Диапазон допустимых значений от 0.0 до 1.0.</Invalid-number>
     </msg>
   </FloatNumberValidator>  
   

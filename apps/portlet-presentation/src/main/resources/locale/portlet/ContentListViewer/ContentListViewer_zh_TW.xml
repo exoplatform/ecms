@@ -1,0 +1,189 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<bundle>
+  <UICLVContainer>
+    <label>
+      <Preferences>偏好設定</Preferences>
+      <AddContent>新增內容</AddContent>
+      <ManageContent>管理內容</ManageContent>
+    </label>
+    <msg>
+      <non-contents>對不起，沒有文章可用。</non-contents>
+      <item-not-found>找不到項目。</item-not-found>
+      <no-permission>您沒有權限訪問此節點。</no-permission>
+      <category-back>回去上一頁</category-back>
+    </msg>
+  </UICLVContainer>
+  <UIViewerManagementPopupWindow>
+    <title>
+      <UICLVConfig>內容清單偏好設定</UICLVConfig>
+    </title>
+  </UIViewerManagementPopupWindow>
+  <UICLVConfig>
+    <label>
+      <Title>內容清單偏好設定</Title>
+      <ContentSelectionBlock>選擇內容</ContentSelectionBlock>
+      <UICLVConfigDisplayModeFormRadioBoxInput>模式</UICLVConfigDisplayModeFormRadioBoxInput>
+      <UICLVConfigItemPathFormInputSet>資料夾路徑</UICLVConfigItemPathFormInputSet>
+    <UICLVConfigItemPathFormStringInput>資料夾路徑</UICLVConfigItemPathFormStringInput>
+      <UICLVConfigOrderByFormSelectBox>按順序</UICLVConfigOrderByFormSelectBox>
+      <option>
+        <exo:title>標題</exo:title>
+        <exo:dateCreated>建立日期</exo:dateCreated>
+        <exo:lastModifiedDate>修改日期</exo:lastModifiedDate>
+        <publication:liveDate>出版日期</publication:liveDate>
+        <exo:startEvent>事件日期</exo:startEvent>
+        <exo:index>索引</exo:index>
+        <DESC>降冪</DESC>
+        <ASC>升冪</ASC>
+      </option>
+      <DisplaySettingBlock>顯示設定</DisplaySettingBlock>
+      <UICLVConfigHeaderFormStringInput>標頭</UICLVConfigHeaderFormStringInput>
+      <UICLVConfigDisplayTemplateFormSelectBox>範本</UICLVConfigDisplayTemplateFormSelectBox>
+      <UICLVConfigPaginatorTemplateFormSelectBox>分頁程式</UICLVConfigPaginatorTemplateFormSelectBox>
+      <UICLVConfigItemsPerPageFormStringInput>每頁項目</UICLVConfigItemsPerPageFormStringInput>
+      <UICLVConfigShowIllustrationFormCheckboxInput>Show Image</UICLVConfigShowIllustrationFormCheckboxInput>
+      <UICLVConfigShowSummaryFormCheckboxInput>Show Summary</UICLVConfigShowSummaryFormCheckboxInput>
+      <UICLVConfigShowHeaderFormCheckboxInput>Show Header</UICLVConfigShowHeaderFormCheckboxInput>
+      <UICLVConfigShowRefreshFormCheckboxInput>Show Refresh</UICLVConfigShowRefreshFormCheckboxInput>
+      <UICLVConfigShowTitleFormCheckboxInput>顯示標題</UICLVConfigShowTitleFormCheckboxInput>
+      <UICLVConfigShowDateCreatedFormCheckboxInput>顯示日期</UICLVConfigShowDateCreatedFormCheckboxInput>
+      <UICLVConfigShowLinkFormCheckboxInput>Show Link</UICLVConfigShowLinkFormCheckboxInput>
+      <UICLVConfigShowReadmoreFormCheckboxInput>Show More Links</UICLVConfigShowReadmoreFormCheckboxInput>
+      <UICLVConfigAllowDynamicUrlStringInput>Allow Dynamic URL</UICLVConfigAllowDynamicUrlStringInput>
+      <UICLVConfigShowRssLinkFormCheckboxInput>Show RSS Link</UICLVConfigShowRssLinkFormCheckboxInput>
+      <UICLVConfigShowAutomaticDetectionCheckboxInput>Automatic Detection</UICLVConfigShowAutomaticDetectionCheckboxInput>
+      <AdvancedBlock>進階選項</AdvancedBlock>
+      <UICLVConfigDynamicNavigationLabel>動態導航</UICLVConfigDynamicNavigationLabel>
+      <UICLVConfigContextualFolderRadioBoxInput>Contextual Folder</UICLVConfigContextualFolderRadioBoxInput>
+      <UICLVConfigShowCLVByStringInput>由</UICLVConfigShowCLVByStringInput>
+      <UICLVConfigshowSCVWithStringInput>與</UICLVConfigshowSCVWithStringInput>
+      <UICLVConfigTargetPageFormInputSet>在頁面中顯示</UICLVConfigTargetPageFormInputSet>
+      <content-not-found>Content not found.</content-not-found>
+      <ContentPath>內容路徑</ContentPath>
+      <Up>Up</Up>
+      <Down>Down</Down>
+      <UICLVConfigCacheManagementLabel>內容可見度</UICLVConfigCacheManagementLabel>
+      <UICLVContentByQueryLabel>Content by Query</UICLVContentByQueryLabel>
+      <UICLVConfigWorkspaceFormSelectBox>工作區</UICLVConfigWorkspaceFormSelectBox>
+      <UICLVConfigContentByQueryTextArea>by query</UICLVConfigContentByQueryTextArea>
+      <UICLVConfigCacheEnableRadioBoxInput>Share content between users</UICLVConfigCacheEnableRadioBoxInput>
+    </label>
+    <help>
+      <ModeSelectionHelp>兩種模式可顯示內容。"按資料夾"將您所選的資料夾類別中可用的所有內容。"按內容"允許您手動選擇你想要顯示的內容。</ModeSelectionHelp>
+      <FolderPathHelp>請選擇您想要顯示的內容。如果您啟動動態導航選項，將動態替換預設選擇 （可看見下文進階選項的模式）。</FolderPathHelp>
+      <HeaderOptionHelp>顯示在內容清單上的標頭。如果您啟動自動檢測選項，它將嘗試查找基於當前選定內容的標題。</HeaderOptionHelp>
+      <GeneralOptionHelp>Select the graphical elements you want to show in your list. Note that, depending on your selected template, some elements may not be available.</GeneralOptionHelp>
+      <ContextualHelp>啟動動態導航選項。其他人可以動態更改基於 URL 參數內容。</ContextualHelp>
+      <ParameterHelp>此參數將用於訪問的內容，如果動態導航處於啟動狀態。</ParameterHelp>
+      <ShowDetailInPageHelp>點擊內容可將使用者重新導向到詳細頁面。與動態導航啟用在目標頁面上要顯示的內容，您必須具有"內容的 URL"入口網站應用程式。</ShowDetailInPageHelp>
+      <DetailParameterHelp>此參數將包含連結到詳細頁面中內容的路徑。此參數必須與在頁面的"內容的 URL"入口網站應用程式中使用的參數相匹配。</DetailParameterHelp>
+      <ContentByQueryHelp>您可以設置 SQL 查詢來動態地獲取內容。允許使用下列參數： ${user}、 ${lang} 或任何獲取參數 (PARAM) 透過 ${PARAM} 。</ContentByQueryHelp>
+      <ContentsVisibilityHelp>"受限制的身份驗證"將篩選的基礎進行身份驗證的內容。如果你沒有登入，您將只看到公開內容。如果您登入，您可以看到內部網使用者所有的內容 （但分享是全部）。"受限制的使用者角色"意味著你將看到的內容取決於您的權限。在大多數情況下，這選項應該不使用，因為它減少了總體性能。</ContentsVisibilityHelp>
+    </help>
+    <action>
+      <Save>#{word.save}</Save>
+      <Cancel>#{word.cancel}</Cancel>
+      <delete>刪除</delete>
+    </action>
+    <msg>
+      <not-valid-path>The Folder Path is invalid.</not-valid-path>
+      <saving-success>The portlet's preferences are saved.</saving-success>
+    </msg>
+    <tab>
+      <label>
+        <clvContentTab>內容選擇</clvContentTab>
+        <clvDisplayTab>顯示設定</clvDisplayTab>
+        <clvAdvancedTab>進階選項</clvAdvancedTab>
+      </label>
+    </tab>
+  </UICLVConfig>
+  <UICLVConfigDisplayModeFormRadioBoxInput>
+    <label>
+      <AutoViewerMode>By Folder</AutoViewerMode>
+      <ManualViewerMode>By Content</ManualViewerMode>
+    </label>
+  </UICLVConfigDisplayModeFormRadioBoxInput>
+  <UICLVConfigItemPathFormInputSet>
+    <title>
+      <SelectFolderPath>選擇資料夾路徑</SelectFolderPath>
+      <AddPath>增加路徑</AddPath>
+    </title>
+  </UICLVConfigItemPathFormInputSet>
+  <FolderPathSelectorPopupWindow>
+    <title>
+      <UIContentSelectorFolder>資料夾瀏覽器</UIContentSelectorFolder>
+    </title>
+  </FolderPathSelectorPopupWindow>
+  <UICLVConfigOrderTypeFormSelectBox>
+    <label>
+      <option>
+        <OrderDesc>降冪</OrderDesc>
+        <OrderAsc>升冪</OrderAsc>
+      </option>
+    </label>
+  </UICLVConfigOrderTypeFormSelectBox>
+  <UICLVConfigTargetPageFormInputSet>
+    <title>
+      <SelectBasePath>選擇基本路徑</SelectBasePath>
+      <SelectTargetPage>選擇基本路徑</SelectTargetPage>
+    </title>
+  </UICLVConfigTargetPageFormInputSet>
+  <UICLVBasePathPopupWindow>
+    <title>
+      <UIPageSelector>頁面選擇器</UIPageSelector>
+    </title>
+  </UICLVBasePathPopupWindow>
+  <UICLVPresentation>
+    <msg>
+      <confirm-delete>您確定要刪除此內容嗎?</confirm-delete>
+      <delete-content-successfully>已成功刪除內容。</delete-content-successfully>
+    </msg>
+    <label>
+      <readmore>Read more</readmore>
+      <rssFeed>RSS Feed</rssFeed>
+    </label>
+    <action>
+      <refresh>重新整理</refresh>
+      <edit>在內容資源管理器中進行編輯</edit>
+      <delete>刪除</delete>
+      <publish>發佈</publish>
+    </action>
+    <label>
+      <draft>草稿</draft>
+    </label>
+  </UICLVPresentation>
+  <CorrectContentSelectorPopupWindow>
+    <title>
+      <UIContentSelectorMulti>Multiple Content Selector Pane</UIContentSelectorMulti>
+    </title>
+  </CorrectContentSelectorPopupWindow>
+  <UIContentDialogFormPopupWindow>
+    <title>
+      <UIContentDialogForm>Web Content Form</UIContentDialogForm>
+    </title>
+  </UIContentDialogFormPopupWindow>
+  <UICLVConfigContextualFolderRadioBoxInput>
+    <label>
+      <contextualEnable>已啟用</contextualEnable>
+      <contextualDisable>已禁用</contextualDisable>
+    </label>
+  </UICLVConfigContextualFolderRadioBoxInput>
+  <PublicationStates>
+    <archived>存檔</archived>
+    <obsolete>過時的</obsolete>
+    <unpublished>未發佈</unpublished>
+    <enrolled>註冊</enrolled>
+    <draft>草稿</draft>
+    <pending>等待中</pending>
+    <approved>核准</approved>
+    <inreview>在審查中</inreview>
+    <staged>上演</staged>
+    <published>已發佈</published>
+  </PublicationStates>
+  <UICLVConfigCacheEnableRadioBoxInput>
+    <label>
+      <ENABLE>通過身份驗證的限制</ENABLE>
+      <DISABLE>Restricted by User Roles</DISABLE>
+    </label>
+  </UICLVConfigCacheEnableRadioBoxInput>
+</bundle>

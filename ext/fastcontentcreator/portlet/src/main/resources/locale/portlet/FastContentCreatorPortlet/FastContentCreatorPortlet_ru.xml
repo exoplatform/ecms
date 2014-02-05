@@ -9,9 +9,9 @@
       <not-support>Не удается загрузить шаблон '{0}'.</not-support>
       <not-add-folder>Только файлы могут быть добавлены в эту папку.</not-add-folder>
       <access-denied>Доступ запрещен. У вас нет разрешения на добавление в {0}.</access-denied>
-      <path-not-found>The path '{0}' was deleted or invalid.</path-not-found>
+      <path-not-found>Путь "{0}" удален или является недопустимым.</path-not-found>
       <node-locked>Узел '{0}' заблокирован. Пожалуйста разблокируйте этот узел перед созданием документов.</node-locked>
-      <node-isExist>This node already exists in '{0}' and is not allowed to be the same name as its sibling.</node-isExist>
+      <node-isExist>Этот узел уже существует в '{0}' и не может иметь такое же имя, как и его родственный узел.</node-isExist>
       <get-dialog-path>При получении пути к диалоговому окну произошла ошибка.</get-dialog-path>
       <new-jcr-template>При создании нового шаблона произошла ошибка.</new-jcr-template>
     </msg>
@@ -40,10 +40,10 @@
       <fileType-empty>Пожалуйста, выберите тип файла перед сохранением этой конфигурации.</fileType-empty>
       <ws-empty>Пожалуйста, выберите одну рабочую область.</ws-empty>
       <action-empty>Пожалуйста, выберите папку с действием.</action-empty>
-      <message-empty>The "Custom Save Message" field is required in case you do not choose the redirect option, or the path is empty.</message-empty>
+      <message-empty>Поле "Пользовательское сохранение сообщения" необходимо в случае, если вы не выбрали опцию перенаправления, либо путь пуст.</message-empty>
       <get-template>Произошла ошибка при доступе к шаблону.</get-template>
       <set-template-option>Произошла ошибка при установке параметра шаблона.</set-template-option>
-      <do-select>An error occurred while selecting the location.</do-select>
+      <do-select>Произошла ошибка при выборе расположения.</do-select>
       </msg>
     <action>
       <Save>#{word.save}</Save>
@@ -60,7 +60,7 @@
     <header>
       <name>Название</name>
       <description>Описание</description>
-      <instanceOf>Instance of</instanceOf>
+      <instanceOf>Экземпляр</instanceOf>
       <action>Действие</action>
     </header>
     <action>
@@ -70,23 +70,23 @@
       <empty>Никаких действий</empty>
       <remove-popup-first>Перед удалением этого узла необходимо закрыть всплывающее окно редактирования.</remove-popup-first>
       <confirm-delete-action>Вы уверены, что хотите удалить это действие?</confirm-delete-action>
-      <template-empty>The template of '{0}' is null or empty.</template-empty>
-      <template-null>The template is null or empty, or you do not have permission to access this template.</template-null>
-      <access-denied>Access denied. You do not have permission to perform this action.</access-denied>
+      <template-empty>Шаблон '{0}' аннулирован или пуст.</template-empty>
+      <template-null>Шаблон аннулирован или пуст, либо у вас нет разрешения на доступ к этому шаблону.</template-null>
+      <access-denied>Доступ запрещен. У вас нет разрешения на выполнение этого действия.</access-denied>
     </msg>
   </UIFCCActionList>
 
   <UIFCCSelectorPopupWindow>
     <title>
-      <UIOneNodePathSelector>Select Location</UIOneNodePathSelector>
+      <UIOneNodePathSelector>Выберите расположение</UIOneNodePathSelector>
     </title>
   </UIFCCSelectorPopupWindow>
 
   <UIWorkspaceList>
     <label>
       <workspaceName>Рабочая область:</workspaceName>
-      <rootNodePath>Root Path:</rootNodePath>
-      <rootNodeInfo>Root node</rootNodeInfo>
+      <rootNodePath>Корневой каталог:</rootNodePath>
+      <rootNodeInfo>Корневой узел</rootNodeInfo>
     </label>
   </UIWorkspaceList>
 
@@ -119,9 +119,9 @@
       <Close>#{word.close}</Close>
     </action>
     <msg>
-      <repository-exception>Cannot save this action. The name provided must not have an index as its final element.</repository-exception>
-      <numberformat-exception>Cannot save this action. The name provided must not have '[' or ']'.</numberformat-exception>
-      <existed-action>The action name '{0}' already exists. Please select another name.</existed-action>
+      <repository-exception>Не удается сохранить это действие. Указанное имя не должно иметь такой же индекс, как и его последний элемент.</repository-exception>
+      <numberformat-exception>Не удается сохранить это действие. Имя не должно содержать '[' или ']'.</numberformat-exception>
+      <existed-action>Название действия '{0}' уже существует. Пожалуйста, выберите другое.</existed-action>
       <unable-add-action>Не удается добавить это действие.</unable-add-action>
       <unable-add>Не удается добавить это действие. Этот узел является корневым или у вас недостаточно прав.</unable-add>
       <not-support>Диалоговое окно «{0}» не поддерживается.</not-support>
@@ -129,14 +129,14 @@
       <access-denied>Доступ запрещен. У вас недостаточно прав для доступа к этому шаблону.</access-denied>
     </msg>
     <validator>
-      <validator>Validator</validator>
-      <destPath>With Path</destPath>
+      <validator>Агент проверки</validator>
+      <destPath>С путем</destPath>
     </validator>
   </UIFCCActionForm>
 
   <UIFCCActionTypeForm>
     <label>
-      <actionType>Create an Action of Type</actionType>
+      <actionType>Создать действие типа</actionType>
     </label>
     <msg>
       <not-support>Не удается загрузить шаблон '{0}'.</not-support>
@@ -146,22 +146,22 @@
 
   <PopupComponent>
     <title>
-      <UIOneNodePathSelector>Select Location</UIOneNodePathSelector>
-      <UIPermissionSelector>Permission Browser</UIPermissionSelector>
+      <UIOneNodePathSelector>Выбрать расположение</UIOneNodePathSelector>
+      <UIPermissionSelector>Обозреватель прав доступа</UIPermissionSelector>
       <UICategoriesSelector>Добавить категории</UICategoriesSelector>
     </title>
   </PopupComponent>
 
   <DateTimeValidator>
     <msg>
-      <Invalid-input>The field '{0}' with the value '{1}' is invalid.</Invalid-input>
+      <Invalid-input>Поле '{0}' со значением '{1}' является недопустимым.</Invalid-input>
     </msg>
   </DateTimeValidator>
 
   <UITabPane>
     <title>
       <UICategoriesSelectPanel>Выбрать категории</UICategoriesSelectPanel>
-      <UISelectedCategoriesGrid>Referenced Categories</UISelectedCategoriesGrid>
+      <UISelectedCategoriesGrid>Упоминаемые категории</UISelectedCategoriesGrid>
     </title>
   </UITabPane>
 
@@ -185,13 +185,13 @@
 
   <UITreeTaxonomyList>
     <label>
-      <taxonomyTree>Category Tree</taxonomyTree>
+      <taxonomyTree>Дерево категорий</taxonomyTree>
     </label>
   </UITreeTaxonomyList>
 
   <UIFCCTaxonomyPopupWindow>
     <title>
-      <UIOneTaxonomySelector>Category Selector</UIOneTaxonomySelector>
+      <UIOneTaxonomySelector>Выбор категорий</UIOneTaxonomySelector>
     </title>
   </UIFCCTaxonomyPopupWindow>
 </bundle>

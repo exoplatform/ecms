@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<bundle>
+  <!--
+  #####################################################################
+  # org.exoplatform.ecm.webui.tree.selectmany.UICategoriesSelectPanel #
+  #####################################################################
+  -->
+  <UITreeList>
+    <header>
+      <name>名稱</name>
+      <action>新增</action>
+    </header>
+    <info>
+      <child-not-found>找不到的孩子 ！</child-not-found>
+    </info>
+  </UITreeList>
+  <!--
+  ######################################################################
+  # org.exoplatform.ecm.webui.tree.selectmany.UISelectedCategoriesGrid #
+  ######################################################################
+  -->
+  <UISelectedCategoriesGrid>
+    <header>
+      <categoryName>類別名稱</categoryName>
+      <categoryPath>類別路徑</categoryPath>
+      <action>#{word.action}</action>
+    </header>
+    <action>
+      <SaveCategories>#{word.save}</SaveCategories>
+      <Cancel>#{word.cancel}</Cancel>
+    </action>
+    <msg>
+      <cannot-save>類別未被保存。</cannot-save>
+      <have-saved>類別已成功保存</have-saved>
+      <non-categories>類別是錯誤的。請選擇適當的類別。</non-categories>
+      <confirm-delete>你想要刪除此類別嗎？</confirm-delete>
+    </msg>
+  </UISelectedCategoriesGrid>
+  <!--
+  ######################################################################
+  # org.exoplatform.ecm.webui.selector.UIPermissionSelector           #
+  ######################################################################
+  -->
+  <SelectUserOrGroup>
+    <title>
+      <UIPermissionUser>選擇使用者</UIPermissionUser>
+      <UIPermissionMembership>選擇成員身份</UIPermissionMembership>
+    </title>
+  </SelectUserOrGroup>
+  <UIPermissionUser>
+    <label>
+      <selectUser>選擇使用者</selectUser>
+      <selectGroup>瀏覽並選擇一個群組</selectGroup>
+    </label>
+  </UIPermissionUser>
+  <UIPermissionMembership>
+    <label>
+      <selectUser>選擇成員身份</selectUser>
+      <selectGroup>瀏覽並選擇一個群組</selectGroup>
+    </label>
+  </UIPermissionMembership>
+</bundle>

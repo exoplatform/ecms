@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<bundle>
+  <!--
+  ###################################################################################
+  #             org.exoplatform.ecm.webui.component.explorer.UIActionBar      #
+  ###################################################################################
+  -->
+  <UIActionBar>
+    <tooltip>
+      <PublicationRequestApproval>請求批准</PublicationRequestApproval>
+      <PublicationApproveContent>批准內容</PublicationApproveContent>
+      <PublicationPublish>發佈</PublicationPublish>
+    </tooltip>
+  </UIActionBar>
+</bundle>
