@@ -13,7 +13,7 @@
   </form>
 
   <form>
-  	<resource-bundle>evaluation</resource-bundle>
+  	<resource-bundle>evaluation-payraise</resource-bundle>
   	<state-name>evaluation</state-name>
     <variable name="initiator" 
               editable="false"/>

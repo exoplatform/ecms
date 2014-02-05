@@ -8,7 +8,7 @@
   </form>
 
   <form>
-    <resource-bundle>evaluation</resource-bundle>
+    <resource-bundle>evaluation-holiday</resource-bundle>
   	<state-name>evaluation</state-name>
     <variable name="initiator" />
     <variable name="start" component="date"/>
