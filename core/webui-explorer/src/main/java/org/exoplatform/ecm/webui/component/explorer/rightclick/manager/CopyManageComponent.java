@@ -26,8 +26,9 @@ import javax.jcr.PathNotFoundException;
 import javax.jcr.Session;
 import javax.jcr.nodetype.ConstraintViolationException;
 
+import org.exoplatform.services.cms.clipboard.ClipboardService;
+import org.exoplatform.services.cms.clipboard.jcr.model.ClipboardCommand;
 import org.exoplatform.services.log.Log;
-import org.exoplatform.ecm.jcr.model.ClipboardCommand;
 import org.exoplatform.ecm.webui.component.explorer.UIJCRExplorer;
 import org.exoplatform.ecm.webui.component.explorer.UIWorkingArea;
 import org.exoplatform.ecm.webui.component.explorer.control.filter.IsNotInTrashFilter;
@@ -36,6 +37,8 @@ import org.exoplatform.ecm.webui.component.explorer.control.listener.UIWorkingAr
 import org.exoplatform.ecm.webui.utils.JCRExceptionManager;
 import org.exoplatform.ecm.webui.utils.Utils;
 import org.exoplatform.services.log.ExoLogger;
+import org.exoplatform.services.security.ConversationState;
+import org.exoplatform.services.wcm.utils.WCMCoreUtils;
 import org.exoplatform.web.application.ApplicationMessage;
 import org.exoplatform.webui.config.annotation.ComponentConfig;
 import org.exoplatform.webui.config.annotation.EventConfig;
@@ -108,19 +111,13 @@ public class CopyManageComponent extends UIAbstractManagerComponent {
       return;
     }
     try {
-      List<ClipboardCommand> clipboards = uiExplorer.getAllClipBoard();
-      for(ClipboardCommand command:clipboards) {
-        if(command.getSrcPath().equals(srcPath)) {
-          clipboards.remove(command);
-          break;
-        }
+      ClipboardCommand clipboard = new ClipboardCommand(ClipboardCommand.COPY, srcPath, wsName);
+      ClipboardService clipboardService = WCMCoreUtils.getService(ClipboardService.class);
+      String userId = ConversationState.getCurrent().getIdentity().getUserId();
+      clipboardService.addClipboardCommand(userId, clipboard, false);
+      if (isMultiSelect) {
+        clipboardService.addClipboardCommand(userId, clipboard, true);
       }
-      ClipboardCommand clipboard = new ClipboardCommand();
-      clipboard.setType(ClipboardCommand.COPY);
-      clipboard.setSrcPath(srcPath);
-      clipboard.setWorkspace(wsName);
-      uiExplorer.getAllClipBoard().add(clipboard);
-      if(isMultiSelect) uiWorkingArea.getVirtualClipboards().add(clipboard);
       uiExplorer.getSession().save();
     } catch(ConstraintViolationException cons) {
       uiExplorer.getSession().refresh(false);
@@ -141,9 +138,12 @@ public class CopyManageComponent extends UIAbstractManagerComponent {
   }
 
   public static void copyManage(Event<UIComponent> event) throws Exception {
-    UIWorkingArea uiWorkingArea = event.getSource().getParent();
     String srcPath = event.getRequestContext().getRequestParameter(OBJECTID);
-    uiWorkingArea.getVirtualClipboards().clear();
+    
+    ClipboardService clipboardService = WCMCoreUtils.getService(ClipboardService.class);
+    String userId = ConversationState.getCurrent().getIdentity().getUserId();
+    clipboardService.getClipboardList(userId, true).clear();
+    
     if(srcPath.indexOf(";") > -1) {      
       multipleCopy(Utils.removeChildNodes(srcPath), event);
     } else {

@@ -19,7 +19,6 @@ package org.exoplatform.ecm.webui.component.explorer;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.HashMap;
-import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
 import java.util.regex.Pattern;
@@ -32,7 +31,6 @@ import javax.jcr.Session;
 import javax.jcr.Value;
 
 import org.apache.commons.lang.StringUtils;
-import org.exoplatform.ecm.jcr.model.ClipboardCommand;
 import org.exoplatform.ecm.webui.component.explorer.control.UIActionBar;
 import org.exoplatform.ecm.webui.component.explorer.popup.actions.UIDocumentFormController;
 import org.exoplatform.ecm.webui.component.explorer.popup.actions.UISelectDocumentForm;
@@ -144,9 +142,6 @@ public class UIWorkingArea extends UIContainer {
   private List<UIAbstractManagerComponent> managers                 =
       Collections.synchronizedList(new ArrayList<UIAbstractManagerComponent>());
 
-  private List<ClipboardCommand>           virtualClipboards_       =
-      Collections.synchronizedList(new LinkedList<ClipboardCommand>());
-
   public UIWorkingArea() throws Exception {
     addChild(UIRightClickPopupMenu.class, "ECMContextMenu", null);
     addChild(UISideBar.class, null, null);
@@ -210,10 +205,6 @@ public class UIWorkingArea extends UIContainer {
 
   public void unregister(UIAbstractManagerComponent component) {
     managers.remove(component);
-  }
-
-  public List<ClipboardCommand> getVirtualClipboards() {
-    return virtualClipboards_;
   }
 
   //Should use this method to check for when execute Actions in Working Area instead in UIEditingTagsForm (line 120)
