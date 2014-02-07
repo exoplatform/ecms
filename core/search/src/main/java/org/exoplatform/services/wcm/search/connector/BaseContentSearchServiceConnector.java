@@ -16,13 +16,25 @@
  */
 package org.exoplatform.services.wcm.search.connector;
 
+import java.util.ArrayList;
 import java.util.Calendar;
+import java.util.List;
 
 import javax.jcr.Node;
+import javax.jcr.nodetype.NodeDefinition;
+import javax.jcr.nodetype.NodeType;
+import javax.jcr.nodetype.NodeTypeIterator;
+import javax.jcr.nodetype.NodeTypeManager;
 
 import org.exoplatform.commons.api.search.data.SearchContext;
 import org.exoplatform.container.xml.InitParams;
 import org.exoplatform.services.cms.drives.DriveData;
+import org.exoplatform.services.cms.impl.Utils;
+import org.exoplatform.services.cms.templates.TemplateService;
+import org.exoplatform.services.jcr.RepositoryService;
+import org.exoplatform.services.jcr.core.ManageableRepository;
+import org.exoplatform.services.jcr.impl.core.nodetype.NodeTypeDefinitionImpl;
+import org.exoplatform.services.jcr.impl.core.nodetype.NodeTypeManagerImpl;
 import org.exoplatform.services.security.ConversationState;
 import org.exoplatform.services.wcm.search.QueryCriteria;
 import org.exoplatform.services.wcm.search.ResultNode;
@@ -30,6 +42,8 @@ import org.exoplatform.services.wcm.search.base.AbstractPageList;
 import org.exoplatform.services.wcm.utils.WCMCoreUtils;
 
 public abstract class BaseContentSearchServiceConnector extends BaseSearchServiceConnector {
+  
+  public static List<String> excluded_nodetypes = new ArrayList<String>();
 
   public BaseContentSearchServiceConnector(InitParams initParams) throws Exception {
     super(initParams);
@@ -43,15 +57,20 @@ public abstract class BaseContentSearchServiceConnector extends BaseSearchServic
     QueryCriteria criteria = new QueryCriteria();
     //set content types
     criteria.setContentTypes(getSearchedDocTypes());
+    criteria.setNodeTypes(getNodeTypes());
     criteria.setKeyword(query.toLowerCase());
     criteria.setSearchWebpage(false);
     criteria.setSearchDocument(true);
     criteria.setSearchWebContent(true);
+    if(query.contains("~")) {
+      criteria.setFuzzySearch(true);
+    }
     criteria.setLiveMode(true);
     criteria.setOffset(offset);
     criteria.setLimit(limit);
     criteria.setSortBy(sort);
     criteria.setOrderBy(order);
+    
     if (ConversationState.getCurrent().getIdentity().getUserId() != null) {
       criteria.setSearchPath("");
     }
@@ -81,6 +100,13 @@ public abstract class BaseContentSearchServiceConnector extends BaseSearchServic
   protected abstract String[] getSearchedDocTypes();
   
   /**
+   * returns the primary types of the specific search service:
+   * nt:file for file search, null for document search
+   * @return searched doc types
+   */
+  protected abstract String[] getNodeTypes();
+  
+  /**
    * {@inheritDoc}
    */
   @Override
@@ -102,7 +128,7 @@ public abstract class BaseContentSearchServiceConnector extends BaseSearchServic
     DriveData driveData = getDriveData(retNode);
     Calendar date = getDate(retNode);
     return getDriveTitle(driveData) + fileSize(retNode) + formatDate(date);
-  }
+  } 
   
 }
 

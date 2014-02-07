@@ -49,6 +49,8 @@ import javax.jcr.RepositoryException;
 import javax.jcr.Session;
 import javax.jcr.ValueFormatException;
 import javax.jcr.nodetype.NodeType;
+import javax.jcr.nodetype.NodeTypeIterator;
+import javax.jcr.nodetype.NodeTypeManager;
 import javax.jcr.nodetype.PropertyDefinition;
 import javax.ws.rs.core.MediaType;
 
@@ -96,6 +98,7 @@ public class Utils {
   public static final String PRIVATE = "Private";
 
   public static final String PUBLIC = "Public";
+
 
   public static final long KB = 1024L;
   public static final long MB = 1024L*KB;
@@ -389,6 +392,19 @@ public class Utils {
 	}
 
   /**
+   * Remove deleted Symlink from Trash
+   * @param node
+   * @throws Exception
+   */
+  private static void removeDeadSymlinksFromTrash(Node node) throws Exception {
+    LinkManager linkManager = WCMCoreUtils.getService(LinkManager.class);
+    List<Node> symlinks = linkManager.getAllLinks(node, EXO_SYMLINK);
+    for (Node symlink : symlinks) {
+      symlink.remove();
+    }
+  }
+  
+  /**
    * Remove all the link of a deleted node
    * @param     : node
    * @param     : keepInTrash true if the link will be move to trash, otherwise set by false
@@ -396,7 +412,7 @@ public class Utils {
    */
   public static void removeDeadSymlinks(Node node, boolean keepInTrash) throws Exception {
     if (isInTrash(node)) {
-
+      removeDeadSymlinksFromTrash(node);
       return;
     }
     LinkManager linkManager = WCMCoreUtils.getService(LinkManager.class);

@@ -18,6 +18,7 @@ package org.exoplatform.services.wcm.utils;
 
 import java.util.Calendar;
 
+import org.apache.commons.lang.StringUtils;
 import org.exoplatform.commons.utils.ISO8601;
 
 
@@ -288,6 +289,7 @@ public class SQLQueryBuilder extends AbstractQueryBuilder {
    * org.exoplatform.services.wcm.search.AbstractQueryBuilder.PATH_TYPE)
    */
   public void setQueryPath(String path, PATH_TYPE pathtype) {
+    if(StringUtils.isEmpty(path)) return;
     if (PATH_TYPE.EXACT == pathtype) {
       if (path.indexOf("[%]") > 0)
         pathClause = new StringBuilder().append("jcr:path LIKE '").append(path).append("' ");
@@ -463,7 +465,11 @@ public class SQLQueryBuilder extends AbstractQueryBuilder {
       }
     }
     if (propertiesClause.length() > 0) {
-      statement = statement.append(propertiesClause.toString());
+      String propertiesStr = propertiesClause.toString();
+      if((propertiesStr.startsWith("AND") || propertiesStr.startsWith(" AND")) &&
+          statement.toString().endsWith("WHERE ")) 
+        propertiesStr = propertiesStr.substring(propertiesStr.lastIndexOf("AND") + 1, propertiesStr.length());
+      statement = statement.append(propertiesStr);
     }
     if (orderByClause.length() > 0) {
       statement = statement.append("ORDER BY ").append(orderByClause.toString());

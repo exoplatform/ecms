@@ -174,14 +174,13 @@ public class RestoreFromTrashManageComponent extends UIAbstractManagerComponent 
       Node trashHomeNode = (Node) trashSession.getItem(trashHomeNodePath);
       try {
         trashService.restoreFromTrash(srcPath, sessionProvider);
-        
+
         // delete symlink after target node
         LinkManager linkManager = WCMCoreUtils.getService(LinkManager.class);
         List<Node> symlinks = linkManager.getAllLinks(node, org.exoplatform.services.cms.impl.Utils.EXO_SYMLINK);
         for (Node symlink : symlinks) {
           trashService.restoreFromTrash(symlink.getPath(), sessionProvider);
         }
-        
         uiExplorer.updateAjax(event);
       } catch(PathNotFoundException e) {
         UIPopupContainer uiPopupContainer = uiExplorer.getChild(UIPopupContainer.class);

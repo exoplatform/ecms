@@ -56,9 +56,9 @@
 										String label = _ctx.appRes("UIPageNavigation.label.navigation").replace("{0}", option.label);
 										if(label.length() > 30) {
 									%>
-									<a class="OptionItem" href="<%=uicomponent.event(selectedIndex)%>" onclick="eXo.webui.UIDropDownControl.onclickEvt(this)" title="<%=label%>"><%=label.substring(0,25)%>...</a>
+									<a class="OptionItem" href="javascript:void(0);" onclick="<%=uicomponent.event(selectedIndex)%>" onclick="eXo.webui.UIDropDownControl.onclickEvt(this)" title="<%=label%>"><%=label.substring(0,25)%>...</a>
 									<% } else { %>
-									<a class="OptionItem" href="<%=uicomponent.event(selectedIndex)%>" onclick="eXo.webui.UIDropDownControl.onclickEvt(this)"><%=label%></a>
+									<a class="OptionItem" href="javascript:void(0);" onclick="<%=uicomponent.event(selectedIndex)%>" onclick="eXo.webui.UIDropDownControl.onclickEvt(this)"><%=label%></a>
 									<% } %>
 							</div>
 							<% selectedIndex++;}%>

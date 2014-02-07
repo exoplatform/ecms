@@ -1219,7 +1219,7 @@
 		            noticeElem.style.top = (pos.top + 5) + "px";
 		          }   
 		          noticeElem.style.display = "block";
-		          nodePathDelete = " <a href=\""+nodePathDelete+"\">Undo</a>";
+		          nodePathDelete = " <a href=\"javascript:void(0);\" onclick=\""+nodePathDelete+"\">Undo</a>";
 		          deleteNotice = deleteNotice + nodePathDelete;
 		          noticeElem.innerHTML = '<i class="uiIconSuccess"></i>' + deleteNotice;
 			  noticeElem.style.marginLeft = "-" + noticeElem.offsetWidth/2 + "px";

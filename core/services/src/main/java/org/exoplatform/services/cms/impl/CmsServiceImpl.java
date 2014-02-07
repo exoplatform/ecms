@@ -137,15 +137,14 @@ public class CmsServiceImpl implements CmsService {
         mixinTypes = new String[] {mixintypeName} ;
       }
     }
+    if (activityService==null) {
+      activityService = WCMCoreUtils.getService(ActivityCommonService.class);
+    }
     if (isAddNew) {
       //Broadcast CmsService.event.preCreate event
       listenerService.broadcast(PRE_CREATE_CONTENT_EVENT,storeHomeNode,mappings);
       currentNode = storeHomeNode.addNode(nodeName, primaryType);
-      if (currentNode.canAddMixin(ActivityCommonService.MIX_COMMENT)) {
-        currentNode.addMixin(ActivityCommonService.MIX_COMMENT);
-        currentNode.setProperty(ActivityCommonService.MIX_COMMENT_CREATING, "true");
-      }
-
+      activityService.setCreating(currentNode, true);
       createNodeRecursively(NODE, currentNode, nodeType, mappings);
       createNodeRecursively(NODE, currentNode, nodetypeManager.getNodeType("exo:sortable"), mappings);
 
@@ -191,9 +190,6 @@ public class CmsServiceImpl implements CmsService {
       listenerService.broadcast(POST_CREATE_CONTENT_EVENT,this,currentNode);
     } else {
       currentNode = storeHomeNode.getNode(nodeName);
-      if (currentNode.canAddMixin(ActivityCommonService.MIX_COMMENT)) {
-        currentNode.addMixin(ActivityCommonService.MIX_COMMENT);
-      }
       //Broadcast CmsService.event.preEdit event
       listenerService.broadcast(PRE_EDIT_CONTENT_EVENT,currentNode,mappings);
 
@@ -204,10 +200,8 @@ public class CmsServiceImpl implements CmsService {
       listenerService.broadcast(POST_EDIT_CONTENT_EVENT, this, currentNode);
 
     }
-    //add lastModified property to jcr:content
-    if (currentNode.isNodeType(ActivityCommonService.MIX_COMMENT)) {
-      currentNode.removeMixin(ActivityCommonService.MIX_COMMENT);
-    }
+
+    activityService.setCreating(currentNode, false);
     session.save();
     return currentNode.getPath();
   }

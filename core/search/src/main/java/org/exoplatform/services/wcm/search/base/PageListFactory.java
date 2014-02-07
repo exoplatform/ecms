@@ -73,6 +73,7 @@ public class PageListFactory {
     if (criteria != null) {
       if (criteria.getOffset() > 0) { ((QueryImpl)query).setOffset(criteria.getOffset()); }
     }
+    ((QueryImpl)query).setLimit(AbstractPageList.RESULT_SIZE_SEPARATOR + 1);
     QueryResult result = query.execute();
     int totalNodes = (int)result.getNodes().getSize();
     if (totalNodes <= AbstractPageList.RESULT_SIZE_SEPARATOR) {

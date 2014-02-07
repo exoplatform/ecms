@@ -894,7 +894,7 @@
   <UISearchResult>
     <msg>
       <not-support>Il n'y a pas de gabarit de restitution pour ce noeud.</not-support>
-      <empty>Chemin</empty>
+      <empty>Aucun résultat trouvé.</empty>
       <access-denied>Vous ne pouvez pas ouvrir ce dossier car il n'existe pas ou vous n'avez pas de permission d'y accéder.</access-denied>
       <query-invalid>La requête est invalide</query-invalid>
     </msg>

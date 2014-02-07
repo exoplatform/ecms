@@ -239,9 +239,7 @@ public class TemplateServiceImpl implements TemplateService, Startable {
     List<String> result = new ArrayList<String>();
     for (String contentType : testContentTypes) {
       if (isChildNodePrimaryTypeAllowed(node, contentType)) {
-        if (!folderType.equals(contentType)) // When content type is not parent
-          // node's content type
-          result.add(contentType);
+        result.add(contentType);
       }
     }
     return result;

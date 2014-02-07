@@ -99,7 +99,7 @@ public class UINodeTree extends UITree {
              .append(nodeIcon)
              .append(" ")
              .append(nodeTypeIcon)
-             .append("\" href=\"")
+             .append("\" href=\"javascript:void(0);\" onclick=\"")
              .append(actionLink)
              .append("\">");
     } else {

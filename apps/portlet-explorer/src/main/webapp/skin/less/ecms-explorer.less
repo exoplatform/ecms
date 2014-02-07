@@ -14,6 +14,8 @@
 		.tab-content {
 			.border-top-radius(3px);
 			border: 1px solid @borderColor;
+			background-color: @grayMediumWhiteSmoke;
+			min-height: 36px;
 			
 			.nav-pills {
 				.border-top-radius(3px);
@@ -1239,9 +1241,11 @@
 }
 
 .uiSimpleSearch{
-	min-height: 285px;
-	max-height: 400px;
-}
+  .resizable {
+    min-height: 245px;
+    max-height: 400px;
+  }
+ }
 
 .UIContentNameSearch{
 	min-height: 160px;
