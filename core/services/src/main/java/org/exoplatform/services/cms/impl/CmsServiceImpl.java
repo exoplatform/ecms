@@ -188,6 +188,8 @@ public class CmsServiceImpl implements CmsService {
       listenerService.broadcast(POST_CREATE_CONTENT_EVENT,this,currentNode);
     } else {
       currentNode = storeHomeNode.getNode(nodeName);
+      activityService.setEditing(currentNode, true);
+
       //Broadcast CmsService.event.preEdit event
       listenerService.broadcast(PRE_EDIT_CONTENT_EVENT,currentNode,mappings);
       
@@ -200,6 +202,12 @@ public class CmsServiceImpl implements CmsService {
     }
 
     activityService.setCreating(currentNode, false);
+
+    //
+    if (currentNode.isNodeType(ActivityCommonService.MIX_COMMENT)) {
+      currentNode.setProperty(ActivityCommonService.MIX_COMMENT_ACTIVITY_ID, StringUtils.EMPTY);
+    }
+
     session.save();
     return currentNode.getPath();
   }
