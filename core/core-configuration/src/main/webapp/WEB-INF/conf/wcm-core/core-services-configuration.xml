@@ -1,353 +1,353 @@
 <?xml version="1.0" encoding="ISO-8859-1"?>
 
 <configuration
-   xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-   xsi:schemaLocation="http://www.exoplatform.org/xml/ns/kernel_1_2.xsd http://www.exoplatform.org/xml/ns/kernel_1_2.xsd"
-   xmlns="http://www.exoplatform.org/xml/ns/kernel_1_2.xsd">
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:schemaLocation="http://www.exoplatform.org/xml/ns/kernel_1_2.xsd http://www.exoplatform.org/xml/ns/kernel_1_2.xsd"
+        xmlns="http://www.exoplatform.org/xml/ns/kernel_1_2.xsd">
 
-
-  <component>
-    <type>org.exoplatform.services.deployment.WCMContentInitializerService</type>
-  </component>
-
-  <component>
-    <key>org.exoplatform.webui.ext.UIExtensionManager</key>
-    <type>org.exoplatform.webui.ext.impl.UIExtensionManagerImpl</type>
-  </component>
-
-  <component>
-    <type>org.exoplatform.services.deployment.ContentInitializerService</type>
-  </component>
-
-  <component>
-    <key>org.exoplatform.services.cms.CmsService</key>
-    <type>org.exoplatform.services.cms.impl.CmsServiceImpl</type>
-  </component>
-
-  <component>
-    <type>org.exoplatform.services.pdfviewer.PDFViewerService</type>
-  </component>
-
-  <component>
-	  <key>org.exoplatform.services.cms.actions.ActionServiceContainer</key>
-	  <type>org.exoplatform.services.cms.actions.impl.ActionServiceContainerImpl</type>
-	  <init-params>
-      <value-param>
-        <name>workspace</name>
-        <value>system</value>
-      </value-param>
-    </init-params>
-  </component>
-
-  <component>
-    <key>org.exoplatform.services.cms.i18n.MultiLanguageService</key>
-    <type>org.exoplatform.services.cms.i18n.impl.MultiLanguageServiceImpl</type>
-  </component>
-
-  <component>
-    <key>org.exoplatform.services.cms.drives.ManageDriveService</key>
-    <type>org.exoplatform.services.cms.drives.impl.ManageDriveServiceImpl</type>
-  </component>
-
-  <component>
-	  <key>org.exoplatform.services.cms.folksonomy.NewFolksonomyService</key>
-	  <type>org.exoplatform.services.cms.folksonomy.impl.NewFolksonomyServiceImpl</type>
-	</component>
-
-  <component>
-    <key>org.exoplatform.services.cms.metadata.MetadataService</key>
-    <type>org.exoplatform.services.cms.metadata.impl.MetadataServiceImpl</type>
-  </component>
-
-  <component>
-    <key>org.exoplatform.services.cms.scripts.ScriptService</key>
-    <type>org.exoplatform.services.cms.scripts.impl.ScriptServiceImpl</type>
-  </component>
-
-  <component>
-	  <key>org.exoplatform.services.cms.relations.RelationsService</key>
-	  <type>org.exoplatform.services.cms.relations.impl.RelationsServiceImpl</type>
-	</component>
-
-	<component>
-	  <key>org.exoplatform.services.cms.voting.VotingService</key>
-	  <type>org.exoplatform.services.cms.voting.impl.VotingServiceImpl</type>
-	</component>
-
-	<component>
-	  <key>org.exoplatform.services.cms.comments.CommentsService</key>
-	  <type>org.exoplatform.services.cms.comments.impl.CommentsServiceImpl</type>
-	</component>
-
-	<component>
-	  <key>org.exoplatform.services.cms.watch.WatchDocumentService</key>
-	  <type>org.exoplatform.services.cms.watch.impl.WatchDocumentServiceImpl</type>
-	</component>
-
-	<component>
-	  <key>org.exoplatform.services.cms.queries.QueryService</key>
-	  <type>org.exoplatform.services.cms.queries.impl.QueryServiceImpl</type>
-	  <init-params>
-	    <value-param>
-	      <name>workspace</name>
-	      <value>system</value>
-	    </value-param>
-	    <value-param>
-	      <name>relativePath</name>
-	      <value>Private/Queries</value>
-	    </value-param>
-	    <value-param>
-	      <name>group</name>
-	      <value>*:/admin</value>
-	    </value-param>
-	  </init-params>
-	</component>
-
-	<component>
-    <key>org.exoplatform.services.cms.templates.TemplateService</key>
-    <type>org.exoplatform.services.cms.templates.impl.TemplateServiceImpl</type>
-  </component>
-
-  <component>
-    <key>org.exoplatform.services.cms.views.ManageViewService</key>
-    <type>org.exoplatform.services.cms.views.impl.ManageViewServiceImpl</type>
-  </component>
-
-  <component>
-    <key>org.exoplatform.services.cms.link.LinkManager</key>
-    <type>org.exoplatform.services.cms.link.impl.LinkManagerImpl</type>
-  </component>
-
-  <component>
-	  <key>org.exoplatform.services.cms.thumbnail.ThumbnailService</key>
-	  <type>org.exoplatform.services.cms.thumbnail.impl.ThumbnailServiceImpl</type>
-	  <init-params>
-      <value-param>
-      	<name>smallSize</name>
-	      <value>32x32</value>
-      </value-param>
-      <value-param>
-      	<name>mediumSize</name>
-	      <value>116x116</value>
-      </value-param>
-      <value-param>
-      	<name>bigSize</name>
-	      <value>300x300</value>
-      </value-param>
-      <value-param>
-      	<name>enable</name>
-	      <value>false</value>
-      </value-param>
-      <value-param>
-        <name>mimetypes</name>
-        <value>image/jpeg;image/png;image/gif;image/bmp</value>
-      </value-param>
-    </init-params>
-	</component>
-
-	 <component>
-    <key>org.exoplatform.services.cms.views.ApplicationTemplateManagerService</key>
-    <type>org.exoplatform.services.cms.views.impl.ApplicationTemplateManagerServiceImpl</type>
-  </component>
-
-	 <component>
-    <key>org.exoplatform.services.cms.link.NodeFinder</key>
-    <type>org.exoplatform.services.cms.link.impl.NodeFinderImpl</type>
-  </component>
-
-  <component>
-    <type>org.exoplatform.services.cms.impl.DMSConfiguration</type>
-  </component>
-
-  <component>
-    <key>org.exoplatform.services.cms.documents.DocumentTypeService</key>
-    <type>org.exoplatform.services.cms.documents.impl.DocumentTypeServiceImpl</type>
-  </component>
-
-  <component>
-    <key>org.exoplatform.services.cms.documents.FavoriteService</key>
-    <type>org.exoplatform.services.cms.documents.impl.FavoriteServiceImpl</type>
-  </component>
-
-  <component>
-    <key>org.exoplatform.services.cms.documents.TrashService</key>
-    <type>org.exoplatform.services.cms.documents.impl.TrashServiceImpl</type>
-    <init-params>
-      <value-param>
-        <name>trashWorkspace</name>
-        <value>collaboration</value>
-      </value-param>
-      <value-param>
-        <name>trashHomeNodePath</name>
-        <value>/Trash</value>
-      </value-param>
-    </init-params>
-  </component>
-
-  <component>
-    <key>org.exoplatform.services.cms.timeline.TimelineService</key>
-    <type>org.exoplatform.services.cms.timeline.impl.TimelineServiceImpl</type>
-    <init-params>
-      <value-param>
-        <name>itemPerTimeline</name>
-        <value>5</value>
-      </value-param>
-    </init-params>
-  </component>
-
-  <component>
-    <key>org.exoplatform.services.cms.lock.LockService</key>
-    <type>org.exoplatform.services.cms.lock.impl.LockServiceImpl</type>
-  </component>
 
     <component>
-	  <key>org.exoplatform.services.cms.jodconverter.JodConverterService</key>
-	  <type>org.exoplatform.services.cms.jodconverter.impl.JodConverterServiceImpl</type>
-    <init-params>
-      <value-param>
-        <name>port</name>
-        <value>${wcm.jodconverter.portnumbers}</value>
-      </value-param>
-      <value-param>
-        <name>officeHome</name>
-        <value>${wcm.jodconverter.officehome}</value>
-      </value-param>
-      <value-param>
-        <name>taskQueueTimeout</name>
-        <value>${wcm.jodconverter.taskqueuetimeout}</value>
-      </value-param>
-      <value-param>
-        <name>taskExecutionTimeout</name>
-        <value>${wcm.jodconverter.taskexecutiontimeout}</value>
-      </value-param>
-      <value-param>
-        <name>maxTasksPerProcess</name>
-        <value>${wcm.jodconverter.maxtasksperprocess}</value>
-      </value-param>
-      <value-param>
-        <name>retryTimeout</name>
-        <value>${wcm.jodconverter.retrytimeout}</value>
-      </value-param>
-    </init-params>
-  </component>
+        <type>org.exoplatform.services.deployment.WCMContentInitializerService</type>
+    </component>
 
-  <component>
-    <key>org.exoplatform.services.cms.clipboard.ClipboardService</key>
-    <type>org.exoplatform.services.cms.clipboard.impl.ClipboardServiceImpl</type>
-    <init-params>
-      <value-param>
-        <name>liveTime</name>
-        <value>${wcm.cache.clipboard.timetolive:-1}</value>
-      </value-param>
-      <value-param>
-        <name>maxSize</name>
-        <value>${wcm.cache.clipboard.capacity:500}</value>
-      </value-param>
-    </init-params>
-  </component>
+    <component>
+        <key>org.exoplatform.webui.ext.UIExtensionManager</key>
+        <type>org.exoplatform.webui.ext.impl.UIExtensionManagerImpl</type>
+    </component>
 
-	  <external-component-plugins>
-    <target-component>org.exoplatform.services.cms.watch.WatchDocumentService</target-component>
-    <component-plugin>
-      <name>watching document notification email contents setting</name>
-      <set-method>initializeMessageConfig</set-method>
-      <type>org.exoplatform.services.cms.watch.impl.MessageConfigPlugin</type>
-      <description>Initialize the settings for watching document notification email contents</description>
-      <init-params>
-        <object-param>
-          <name>messageConfig</name>
-          <description>Message Configuration</description>
-          <object type="org.exoplatform.services.cms.watch.impl.MessageConfig">
-            <field name="sender"><string>${gatein.ecms.watchdocument.sender:support@exoplatform.com}</string></field>
-            <field name="subject"><string>${gatein.ecms.watchdocument.subject:Your watching document is changed}</string></field>
-            <field name="mimeType"><string>${gatein.ecms.watchdocument.mimetype:text/html}</string></field>
-            <field name="content">
-              <string>${gatein.ecms.watchdocument.content:<![CDATA[Dear $user_name,<br><br>The document $doc_name ($doc_title) has changed.<br><br>Please go to <a href="$doc_url">$doc_title</a> to see this change.<br><br>]]>}
-              </string>
-            </field>
-          </object>
-        </object-param>
-      </init-params>
-    </component-plugin>
-  </external-component-plugins>
+    <component>
+        <type>org.exoplatform.services.deployment.ContentInitializerService</type>
+    </component>
 
-  <external-component-plugins>
-  	<target-component>org.exoplatform.services.organization.OrganizationService</target-component>
-    <component-plugin>
-      <name>drive.new.group.event.listener</name>
-      <set-method>addListenerPlugin</set-method>
-      <type>org.exoplatform.services.cms.drives.impl.NewGroupEventListener</type>
-      <description>New Group Event Listener</description>
-    </component-plugin>
-		<component-plugin>
-      <name>WCMMembershipUpdateListener</name>
-      <set-method>addListenerPlugin</set-method>
-      <type>org.exoplatform.services.cms.drives.impl.WCMMembershipUpdateListener</type>
-    </component-plugin>
-  </external-component-plugins>
+    <component>
+        <key>org.exoplatform.services.cms.CmsService</key>
+        <type>org.exoplatform.services.cms.impl.CmsServiceImpl</type>
+    </component>
 
-  <external-component-plugins>
-    <target-component>org.exoplatform.services.cms.lock.LockService</target-component>
-      <component-plugin>
-        <name>predefinedLockGroupsOrUsersPlugin</name>
-        <set-method>addLockGroupsOrUsersPlugin</set-method>
-        <type>org.exoplatform.services.cms.lock.impl.LockGroupsOrUsersPlugin</type>
+    <component>
+        <type>org.exoplatform.services.pdfviewer.PDFViewerService</type>
+    </component>
+
+    <component>
+        <key>org.exoplatform.services.cms.actions.ActionServiceContainer</key>
+        <type>org.exoplatform.services.cms.actions.impl.ActionServiceContainerImpl</type>
         <init-params>
-          <object-param>
-            <name>LockGroupsOrUsers.configuration</name>
-            <description>configuration predefined groups or users for lock administrator</description>
-            <object type="org.exoplatform.services.cms.lock.impl.LockGroupsOrUsersConfig">
-              <field  name="settingLockList">
-                <collection type="java.util.ArrayList">
-			            			<value><string>${wcm.lock.admin:*:/platform/administrators}</string></value>
-                </collection>
-              </field>
-            </object>
-          </object-param>
+            <value-param>
+                <name>workspace</name>
+                <value>system</value>
+            </value-param>
         </init-params>
-      </component-plugin>
-  </external-component-plugins>
+    </component>
 
-  <external-component-plugins>
-	  <target-component>org.exoplatform.services.jcr.RepositoryService</target-component>
-	  <component-plugin>
-	    <name>add.nodeType</name>
-	    <set-method>addPlugin</set-method>
-	    <type>org.exoplatform.services.jcr.impl.AddNodeTypePlugin</type>
-	    <init-params>
-	      <values-param>
-	        <name>autoCreatedInNewRepository</name>
-	        <description>Node types configuration file</description>
-	        <value>war:/conf/wcm-core/nodetypes/nodetypes-config.xml</value>
-	        <value>war:/conf/wcm-core/nodetypes/nodetypes-config-extended.xml</value>
-	      </values-param>
-	    </init-params>
-	  </component-plugin>
-	</external-component-plugins>
+    <component>
+        <key>org.exoplatform.services.cms.i18n.MultiLanguageService</key>
+        <type>org.exoplatform.services.cms.i18n.impl.MultiLanguageServiceImpl</type>
+    </component>
 
-  <!-- Configures live time for query service cache -->
-  <external-component-plugins>
-    <target-component>org.exoplatform.services.cache.CacheService</target-component>
-    <component-plugin  profiles="cluster">
-      <name>addExoCacheConfig</name>
-      <set-method>addExoCacheConfig</set-method>
-      <type>org.exoplatform.services.cache.ExoCacheConfigPlugin</type>
-      <description>Configures the cache for query service</description>
-      <init-params>
-	      <object-param>
-	        <name>cache.config.ecm.query</name>
-	        <description>The clustered cache configuration</description>
-	        <object type="org.exoplatform.services.cache.impl.infinispan.generic.GenericExoCacheConfig">
-	          <field name="name"><string>default</string></field>
-	          <field name="strategy"><string>LIRS</string></field>
-	          <field name="maxEntries"><int>${wcm.cache.queryservice.maxnodes:5000}</int></field>
-	          <field name="lifespan"><long>${wcm.cache.queryservice.expirationtimeout:600000}</long></field>
-            <field name="replicated"><boolean>true</boolean></field>
-	        </object>
-	      </object-param>
-      </init-params>
-    </component-plugin>
-  </external-component-plugins>
+    <component>
+        <key>org.exoplatform.services.cms.drives.ManageDriveService</key>
+        <type>org.exoplatform.services.cms.drives.impl.ManageDriveServiceImpl</type>
+    </component>
+
+    <component>
+        <key>org.exoplatform.services.cms.folksonomy.NewFolksonomyService</key>
+        <type>org.exoplatform.services.cms.folksonomy.impl.NewFolksonomyServiceImpl</type>
+    </component>
+
+    <component>
+        <key>org.exoplatform.services.cms.metadata.MetadataService</key>
+        <type>org.exoplatform.services.cms.metadata.impl.MetadataServiceImpl</type>
+    </component>
+
+    <component>
+        <key>org.exoplatform.services.cms.scripts.ScriptService</key>
+        <type>org.exoplatform.services.cms.scripts.impl.ScriptServiceImpl</type>
+    </component>
+
+    <component>
+        <key>org.exoplatform.services.cms.relations.RelationsService</key>
+        <type>org.exoplatform.services.cms.relations.impl.RelationsServiceImpl</type>
+    </component>
+
+    <component>
+        <key>org.exoplatform.services.cms.voting.VotingService</key>
+        <type>org.exoplatform.services.cms.voting.impl.VotingServiceImpl</type>
+    </component>
+
+    <component>
+        <key>org.exoplatform.services.cms.comments.CommentsService</key>
+        <type>org.exoplatform.services.cms.comments.impl.CommentsServiceImpl</type>
+    </component>
+
+    <component>
+        <key>org.exoplatform.services.cms.watch.WatchDocumentService</key>
+        <type>org.exoplatform.services.cms.watch.impl.WatchDocumentServiceImpl</type>
+    </component>
+
+    <component>
+        <key>org.exoplatform.services.cms.queries.QueryService</key>
+        <type>org.exoplatform.services.cms.queries.impl.QueryServiceImpl</type>
+        <init-params>
+            <value-param>
+                <name>workspace</name>
+                <value>system</value>
+            </value-param>
+            <value-param>
+                <name>relativePath</name>
+                <value>Private/Queries</value>
+            </value-param>
+            <value-param>
+                <name>group</name>
+                <value>*:/admin</value>
+            </value-param>
+        </init-params>
+    </component>
+
+    <component>
+        <key>org.exoplatform.services.cms.templates.TemplateService</key>
+        <type>org.exoplatform.services.cms.templates.impl.TemplateServiceImpl</type>
+    </component>
+
+    <component>
+        <key>org.exoplatform.services.cms.views.ManageViewService</key>
+        <type>org.exoplatform.services.cms.views.impl.ManageViewServiceImpl</type>
+    </component>
+
+    <component>
+        <key>org.exoplatform.services.cms.link.LinkManager</key>
+        <type>org.exoplatform.services.cms.link.impl.LinkManagerImpl</type>
+    </component>
+
+    <component>
+        <key>org.exoplatform.services.cms.thumbnail.ThumbnailService</key>
+        <type>org.exoplatform.services.cms.thumbnail.impl.ThumbnailServiceImpl</type>
+        <init-params>
+            <value-param>
+                <name>smallSize</name>
+                <value>32x32</value>
+            </value-param>
+            <value-param>
+                <name>mediumSize</name>
+                <value>116x116</value>
+            </value-param>
+            <value-param>
+                <name>bigSize</name>
+                <value>300x300</value>
+            </value-param>
+            <value-param>
+                <name>enable</name>
+                <value>false</value>
+            </value-param>
+            <value-param>
+                <name>mimetypes</name>
+                <value>image/jpeg;image/png;image/gif;image/bmp</value>
+            </value-param>
+        </init-params>
+    </component>
+
+    <component>
+        <key>org.exoplatform.services.cms.views.ApplicationTemplateManagerService</key>
+        <type>org.exoplatform.services.cms.views.impl.ApplicationTemplateManagerServiceImpl</type>
+    </component>
+
+    <component>
+        <key>org.exoplatform.services.cms.link.NodeFinder</key>
+        <type>org.exoplatform.services.cms.link.impl.NodeFinderImpl</type>
+    </component>
+
+    <component>
+        <type>org.exoplatform.services.cms.impl.DMSConfiguration</type>
+    </component>
+
+    <component>
+        <key>org.exoplatform.services.cms.documents.DocumentTypeService</key>
+        <type>org.exoplatform.services.cms.documents.impl.DocumentTypeServiceImpl</type>
+    </component>
+
+    <component>
+        <key>org.exoplatform.services.cms.documents.FavoriteService</key>
+        <type>org.exoplatform.services.cms.documents.impl.FavoriteServiceImpl</type>
+    </component>
+
+    <component>
+        <key>org.exoplatform.services.cms.documents.TrashService</key>
+        <type>org.exoplatform.services.cms.documents.impl.TrashServiceImpl</type>
+        <init-params>
+            <value-param>
+                <name>trashWorkspace</name>
+                <value>collaboration</value>
+            </value-param>
+            <value-param>
+                <name>trashHomeNodePath</name>
+                <value>/Trash</value>
+            </value-param>
+        </init-params>
+    </component>
+
+    <component>
+        <key>org.exoplatform.services.cms.timeline.TimelineService</key>
+        <type>org.exoplatform.services.cms.timeline.impl.TimelineServiceImpl</type>
+        <init-params>
+            <value-param>
+                <name>itemPerTimeline</name>
+                <value>5</value>
+            </value-param>
+        </init-params>
+    </component>
+
+    <component>
+        <key>org.exoplatform.services.cms.lock.LockService</key>
+        <type>org.exoplatform.services.cms.lock.impl.LockServiceImpl</type>
+    </component>
+
+    <component>
+        <key>org.exoplatform.services.cms.jodconverter.JodConverterService</key>
+        <type>org.exoplatform.services.cms.jodconverter.impl.JodConverterServiceImpl</type>
+        <init-params>
+            <value-param>
+                <name>port</name>
+                <value>${wcm.jodconverter.portnumbers}</value>
+            </value-param>
+            <value-param>
+                <name>officeHome</name>
+                <value>${wcm.jodconverter.officehome}</value>
+            </value-param>
+            <value-param>
+                <name>taskQueueTimeout</name>
+                <value>${wcm.jodconverter.taskqueuetimeout}</value>
+            </value-param>
+            <value-param>
+                <name>taskExecutionTimeout</name>
+                <value>${wcm.jodconverter.taskexecutiontimeout}</value>
+            </value-param>
+            <value-param>
+                <name>maxTasksPerProcess</name>
+                <value>${wcm.jodconverter.maxtasksperprocess}</value>
+            </value-param>
+            <value-param>
+                <name>retryTimeout</name>
+                <value>${wcm.jodconverter.retrytimeout}</value>
+            </value-param>
+        </init-params>
+    </component>
+
+    <component>
+        <key>org.exoplatform.services.cms.clipboard.ClipboardService</key>
+        <type>org.exoplatform.services.cms.clipboard.impl.ClipboardServiceImpl</type>
+        <init-params>
+            <value-param>
+                <name>liveTime</name>
+                <value>${wcm.cache.clipboard.timetolive:-1}</value>
+            </value-param>
+            <value-param>
+                <name>maxSize</name>
+                <value>${wcm.cache.clipboard.capacity:500}</value>
+            </value-param>
+        </init-params>
+    </component>
+
+    <external-component-plugins>
+        <target-component>org.exoplatform.services.cms.watch.WatchDocumentService</target-component>
+        <component-plugin>
+            <name>watching document notification email contents setting</name>
+            <set-method>initializeMessageConfig</set-method>
+            <type>org.exoplatform.services.cms.watch.impl.MessageConfigPlugin</type>
+            <description>Initialize the settings for watching document notification email contents</description>
+            <init-params>
+                <object-param>
+                    <name>messageConfig</name>
+                    <description>Message Configuration</description>
+                    <object type="org.exoplatform.services.cms.watch.impl.MessageConfig">
+                        <field name="sender"><string>${gatein.ecms.watchdocument.sender:support@exoplatform.com}</string></field>
+                        <field name="subject"><string>${gatein.ecms.watchdocument.subject:Your watching document is changed}</string></field>
+                        <field name="mimeType"><string>${gatein.ecms.watchdocument.mimetype:text/html}</string></field>
+                        <field name="content">
+                            <string>${gatein.ecms.watchdocument.content:<![CDATA[Dear $user_name,<br><br>The document $doc_name ($doc_title) has changed.<br><br>Please go to <a href="$doc_url">$doc_title</a> to see this change.<br><br>]]>}
+                            </string>
+                        </field>
+                    </object>
+                </object-param>
+            </init-params>
+        </component-plugin>
+    </external-component-plugins>
+
+    <external-component-plugins>
+        <target-component>org.exoplatform.services.organization.OrganizationService</target-component>
+        <component-plugin>
+            <name>drive.new.group.event.listener</name>
+            <set-method>addListenerPlugin</set-method>
+            <type>org.exoplatform.services.cms.drives.impl.NewGroupEventListener</type>
+            <description>New Group Event Listener</description>
+        </component-plugin>
+        <component-plugin>
+            <name>WCMMembershipUpdateListener</name>
+            <set-method>addListenerPlugin</set-method>
+            <type>org.exoplatform.services.cms.drives.impl.WCMMembershipUpdateListener</type>
+        </component-plugin>
+    </external-component-plugins>
+
+    <external-component-plugins>
+        <target-component>org.exoplatform.services.cms.lock.LockService</target-component>
+        <component-plugin>
+            <name>predefinedLockGroupsOrUsersPlugin</name>
+            <set-method>addLockGroupsOrUsersPlugin</set-method>
+            <type>org.exoplatform.services.cms.lock.impl.LockGroupsOrUsersPlugin</type>
+            <init-params>
+                <object-param>
+                    <name>LockGroupsOrUsers.configuration</name>
+                    <description>configuration predefined groups or users for lock administrator</description>
+                    <object type="org.exoplatform.services.cms.lock.impl.LockGroupsOrUsersConfig">
+                        <field  name="settingLockList">
+                            <collection type="java.util.ArrayList">
+                                <value><string>${wcm.lock.admin:*:/platform/administrators}</string></value>
+                            </collection>
+                        </field>
+                    </object>
+                </object-param>
+            </init-params>
+        </component-plugin>
+    </external-component-plugins>
+
+    <external-component-plugins>
+        <target-component>org.exoplatform.services.jcr.RepositoryService</target-component>
+        <component-plugin>
+            <name>add.nodeType</name>
+            <set-method>addPlugin</set-method>
+            <type>org.exoplatform.services.jcr.impl.AddNodeTypePlugin</type>
+            <init-params>
+                <values-param>
+                    <name>autoCreatedInNewRepository</name>
+                    <description>Node types configuration file</description>
+                    <value>war:/conf/wcm-core/nodetypes/nodetypes-config.xml</value>
+                    <value>war:/conf/wcm-core/nodetypes/nodetypes-config-extended.xml</value>
+                </values-param>
+            </init-params>
+        </component-plugin>
+    </external-component-plugins>
+
+    <!-- Configures live time for query service cache -->
+    <external-component-plugins>
+        <target-component>org.exoplatform.services.cache.CacheService</target-component>
+        <component-plugin  profiles="cluster">
+            <name>addExoCacheConfig</name>
+            <set-method>addExoCacheConfig</set-method>
+            <type>org.exoplatform.services.cache.ExoCacheConfigPlugin</type>
+            <description>Configures the cache for query service</description>
+            <init-params>
+                <object-param>
+                    <name>cache.config.ecm.query</name>
+                    <description>The clustered cache configuration</description>
+                    <object type="org.exoplatform.services.cache.impl.infinispan.generic.GenericExoCacheConfig">
+                        <field name="name"><string>default</string></field>
+                        <field name="strategy"><string>LIRS</string></field>
+                        <field name="maxEntries"><int>${wcm.cache.queryservice.maxnodes:5000}</int></field>
+                        <field name="lifespan"><long>${wcm.cache.queryservice.expirationtimeout:600000}</long></field>
+                        <field name="replicated"><boolean>true</boolean></field>
+                    </object>
+                </object-param>
+            </init-params>
+        </component-plugin>
+    </external-component-plugins>
 
   <external-component-plugins>
     <target-component>org.exoplatform.services.cache.CacheService</target-component>
@@ -372,27 +372,27 @@
     </component-plugin>
     <!-- Configure drive service cache - Cluster mode -->
     <component-plugin  profiles="cluster">
-      <name>addExoCacheConfig</name>
-      <set-method>addExoCacheConfig</set-method>
-      <type>org.exoplatform.services.cache.ExoCacheConfigPlugin</type>
-      <description>Configures the cache for drive service</description>
-      <init-params>
-        <object-param>
-          <name>cache.config.default</name>
-          <description>The clustered cache configuration</description>
-          <object type="org.exoplatform.services.cache.impl.infinispan.generic.GenericExoCacheConfig">
-            <field name="name"><string>wcm.drive</string></field>
-            <field name="strategy"><string>LIRS</string></field>
-            <field name="maxEntries"><int>${wcm.cache.managedrive.maxnodes:5000}</int></field>
-            <field name="lifespan"><long>${wcm.cache.managedrive.expirationtimeout:600000}</long></field>
-            <field name="replicated"><boolean>true</boolean></field>
-          </object>
-        </object-param>
-      </init-params>
-    </component-plugin>
-
+            <name>addExoCacheConfig</name>
+            <set-method>addExoCacheConfig</set-method>
+            <type>org.exoplatform.services.cache.ExoCacheConfigPlugin</type>
+            <description>Configures the cache for query service</description>
+            <init-params>
+                <object-param>
+                    <name>cache.config.default</name>
+                    <description>The clustered cache configuration</description>
+                    <object type="org.exoplatform.services.cache.impl.infinispan.generic.GenericExoCacheConfig">
+                        <field name="name"><string>wcm.drive</string></field>
+                        <field name="strategy"><string>LIRS</string></field>
+                        <field name="maxEntries"><int>${wcm.cache.managedrive.maxnodes:5000}</int></field>
+                        <field name="lifespan"><long>${wcm.cache.managedrive.expirationtimeout:600000}</long></field>
+                        <field name="replicated"><boolean>true</boolean></field>
+                    </object>
+                </object-param>
+            </init-params>
+        </component-plugin>
   </external-component-plugins>
-
+  
+  
   <external-component-plugins>
     <target-component>org.exoplatform.services.cache.CacheService</target-component>
     <component-plugin>
@@ -445,7 +445,7 @@
       <type>org.exoplatform.services.cache.ExoCacheConfigPlugin</type>
       <description>add Exo Cache Config</description>
       <init-params>
-
+      
         <!-- ECMS | Templates -->
         <object-param>
           <name>org.exoplatform.services.cms.templates.TemplateService</name>
@@ -458,7 +458,7 @@
             <field name="replicated"><boolean>true</boolean></field>
           </object>
         </object-param>
-
+        
         <!-- ECMS | Webcontent -->
         <object-param>
           <name>org.exoplatform.services.wcm.webcontent.InitialWebContentPlugin</name>
@@ -471,12 +471,13 @@
             <field name="replicated"><boolean>true</boolean></field>
           </object>
         </object-param>
-
+        
       </init-params>
     </component-plugin>
 
   </external-component-plugins>
-
+  
+  
   <!-- Configure Fragment service caches - Standalone mode -->
   <external-component-plugins>
     <target-component>org.exoplatform.services.cache.CacheService</target-component>
@@ -500,7 +501,7 @@
       </init-params>
     </component-plugin>
   </external-component-plugins>
-
+  
   <!-- Configure Fragment service caches - Cluster mode -->
   <external-component-plugins>
    <target-component>org.exoplatform.services.cache.CacheService</target-component>
@@ -520,7 +521,7 @@
             <field name="maxEntries"><int>${wcm.cache.fragmentcacheservice.maxnodes:10000}</int></field>
             <field name="lifespan"><long>${wcm.cache.fragmentcacheservice.expirationtimeout:30000}</long></field>
             <field name="replicated"><boolean>true</boolean></field>
-          </object>
+          </object>          
         </object-param>
       </init-params>
     </component-plugin>
@@ -622,7 +623,7 @@
       </init-params>
     </component-plugin>
   </external-component-plugins>
-
+    
   <!-- Configure PDF service caches - Cluster mode -->
   <external-component-plugins>
     <target-component>org.exoplatform.services.cache.CacheService</target-component>
@@ -641,12 +642,12 @@
             <field name="maxEntries"><int>${wcm.cache.pdfviewer.maxnodes:300}</int></field>
             <field name="lifespan"><long>${wcm.cache.pdfviewer.expirationtimeout:600000}</long></field>
             <field name="replicated"><boolean>true</boolean></field>
-          </object>
+          </object>          
         </object-param>
       </init-params>
     </component-plugin>
   </external-component-plugins>
-
+  
   <external-component-plugins>
 	  <target-component>org.exoplatform.services.jcr.core.nodetype.NodeTypeDataManager</target-component>
 		<component-plugin>
@@ -746,3 +747,4 @@
   </external-component-plugins>
 
 </configuration>
+
