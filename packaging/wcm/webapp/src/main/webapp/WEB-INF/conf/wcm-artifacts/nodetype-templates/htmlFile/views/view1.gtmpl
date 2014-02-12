@@ -4,7 +4,6 @@
   import org.exoplatform.services.wcm.utils.WCMCoreUtils;
   import org.exoplatform.services.wcm.javascript.XJavascriptService;
   import org.exoplatform.services.wcm.skin.XSkinService;
-  import org.exoplatform.services.wcm.core.NodetypeConstant;
 
   def currentNode = uicomponent.getNode() ; 
   def contentNode = currentNode.getNode("jcr:content") ;
