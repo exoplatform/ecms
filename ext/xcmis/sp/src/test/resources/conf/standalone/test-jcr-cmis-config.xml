@@ -39,7 +39,7 @@
                            class="org.exoplatform.services.jcr.impl.dataflow.persistent.infinispan.ISPNCacheWorkspaceStorageCache">
                         <properties>
                             <property name="infinispan-configuration"
-                                      value="conf/standalone/infinispan/cache-config.xml" />
+                                      value="conf/exo.portal.component.test.jcr-infinispan-config.xml" />
                         </properties>
                     </cache>
                     <query-handler
@@ -54,8 +54,13 @@
                         <properties>
                             <property name="time-out" value="15m" />
                             <property name="infinispan-cl-cache.jdbc.datasource" value="jdbcexo" />
+                            <property name="infinispan-cl-cache.jdbc.table.create" value="true" />
+                            <property name="infinispan-cl-cache.jdbc.table.drop" value="false" />
+                            <property name="infinispan-cl-cache.jdbc.id.column" value="id" />
+                            <property name="infinispan-cl-cache.jdbc.data.column" value="data" />
+                            <property name="infinispan-cl-cache.jdbc.timestamp.column" value="timestamp" />
                             <property name="infinispan-configuration"
-                                      value="conf/standalone/infinispan/lock-config.xml" />
+                                      value="conf/exo.portal.component.test.jcr-infinispan-lock.xml" />
                         </properties>
                     </lock-manager>
                 </workspace>
@@ -94,7 +99,7 @@
                            class="org.exoplatform.services.jcr.impl.dataflow.persistent.infinispan.ISPNCacheWorkspaceStorageCache">
                         <properties>
                             <property name="infinispan-configuration"
-                                      value="conf/standalone/infinispan/cache-config.xml" />
+                                      value="conf/exo.portal.component.test.jcr-infinispan-config.xml" />
                         </properties>
                     </cache>
                     <query-handler
@@ -109,8 +114,13 @@
                         <properties>
                             <property name="time-out" value="15m" />
                             <property name="infinispan-cl-cache.jdbc.datasource" value="jdbcexo" />
+                            <property name="infinispan-cl-cache.jdbc.table.create" value="true" />
+                            <property name="infinispan-cl-cache.jdbc.table.drop" value="false" />
+                            <property name="infinispan-cl-cache.jdbc.id.column" value="id" />
+                            <property name="infinispan-cl-cache.jdbc.data.column" value="data" />
+                            <property name="infinispan-cl-cache.jdbc.timestamp.column" value="timestamp" />
                             <property name="infinispan-configuration"
-                                      value="conf/standalone/infinispan/lock-config.xml" />
+                                      value="conf/exo.portal.component.test.jcr-infinispan-lock.xml" />
                         </properties>
                     </lock-manager>
                 </workspace>
