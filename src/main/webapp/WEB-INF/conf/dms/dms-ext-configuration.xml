@@ -34,6 +34,23 @@
     <type>org.exoplatform.clouddrive.ecms.watch.WatchCloudDocumentServiceImpl</type>
   </component>
 
+  <!-- ECMS menu configuration for Cloud Drive actions, see also UIExtensionManager ext -->
+  <external-component-plugins>
+    <target-component>org.exoplatform.clouddrive.ecms.CloudDriveUIService</target-component>
+    <component-plugin>
+      <name>add.clouddrive.ecms.menu</name>
+      <set-method>addPlugin</set-method>
+      <type>org.exoplatform.clouddrive.ecms.CloudDriveUIExtension</type>
+      <init-params>
+        <values-param>
+          <name>default-actions</name>
+          <description>ECMS menu actions enabled by default (WebUI extensions)</description>
+          <value>org.exoplatform.clouddrive.ecms.ShowConnectCloudDriveActionComponent</value>
+        </values-param>
+      </init-params>
+    </component-plugin>
+  </external-component-plugins>
+
   <external-component-plugins>
     <target-component>org.exoplatform.webui.ext.UIExtensionManager</target-component>
     <component-plugin>
@@ -359,31 +376,31 @@
         </object-param>
       </init-params>
     </component-plugin>
-  </external-component-plugins -->  
-    
+  </external-component-plugins -->
+
   <external-component-plugins>
-  <!-- The full qualified name of the ResourceBundleService -->
-  <target-component>org.exoplatform.services.resources.ResourceBundleService</target-component>
-  <component-plugin>
-    <!-- The name of the plugin -->
-    <name>ResourceBundle Plugin</name>
-    <!-- The name of the method to call on the ResourceBundleService in order to register the ResourceBundles -->
-    <set-method>addResourceBundle</set-method>
-    <!-- The full qualified name of the BaseResourceBundlePlugin -->
-    <type>org.exoplatform.services.resources.impl.BaseResourceBundlePlugin</type>
-    <init-params>
-      <values-param>
-        <name>init.resources</name>
-        <description>Store the following resources into the db for the first launch </description>
-        <value>locale.clouddrive.CloudDrive</value>
-      </values-param>
-      <values-param>
-        <name>portal.resource.names</name>
-        <description>The properties files of the portal , those file will be merged into one ResoruceBundle
+    <!-- The full qualified name of the ResourceBundleService -->
+    <target-component>org.exoplatform.services.resources.ResourceBundleService</target-component>
+    <component-plugin>
+      <!-- The name of the plugin -->
+      <name>ResourceBundle Plugin</name>
+      <!-- The name of the method to call on the ResourceBundleService in order to register the ResourceBundles -->
+      <set-method>addResourceBundle</set-method>
+      <!-- The full qualified name of the BaseResourceBundlePlugin -->
+      <type>org.exoplatform.services.resources.impl.BaseResourceBundlePlugin</type>
+      <init-params>
+        <values-param>
+          <name>init.resources</name>
+          <description>Store the following resources into the db for the first launch </description>
+          <value>locale.clouddrive.CloudDrive</value>
+        </values-param>
+        <values-param>
+          <name>portal.resource.names</name>
+          <description>The properties files of the portal , those file will be merged into one ResoruceBundle
           properties </description>
-        <value>locale.clouddrive.CloudDrive</value>
-      </values-param>
-    </init-params>
-  </component-plugin>
-</external-component-plugins>
+          <value>locale.clouddrive.CloudDrive</value>
+        </values-param>
+      </init-params>
+    </component-plugin>
+  </external-component-plugins>
 </configuration>
