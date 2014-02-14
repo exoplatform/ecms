@@ -66,7 +66,7 @@ public class JCRLocalExoDrive extends JCRLocalCloudDrive {
         List<FileStore> files = service.listFiles(user.getUsername());
         available = files.size();
         for (FileStore f : files) {
-          Node localNode = openFile(f.getId(), f.getName(), f.getType(), driveRoot);
+          Node localNode = openFile(f.getId(), f.getName(), f.getType(), rootNode);
           initFile(localNode,
                    f.getId(),
                    f.getName(),
@@ -133,7 +133,7 @@ public class JCRLocalExoDrive extends JCRLocalCloudDrive {
         List<FileStore> files = service.listFiles(user.getUsername());
         available = files.size();
         for (FileStore f : files) {
-          Node localNode = openFile(f.getId(), f.getName(), f.getType(), driveRoot);
+          Node localNode = openFile(f.getId(), f.getName(), f.getType(), rootNode);
           initFile(localNode,
                    f.getId(),
                    f.getName(),

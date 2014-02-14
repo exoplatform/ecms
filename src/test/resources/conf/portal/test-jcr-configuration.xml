@@ -39,21 +39,22 @@
       <properties-param>
         <name>properties</name>
         <description>Log4J properties</description>
-        <property name="log4j.rootLogger" value="INFO, stdout, file"/>
+        <property name="log4j.rootLogger" value="INFO, stdout, file" />
 
-        <property name="log4j.appender.stdout" value="org.apache.log4j.ConsoleAppender"/>
-        <property name="log4j.appender.stdout.threshold" value="DEBUG"/>
+        <property name="log4j.appender.stdout" value="org.apache.log4j.ConsoleAppender" />
+        <property name="log4j.appender.stdout.threshold" value="DEBUG" />
 
-        <property name="log4j.appender.stdout.layout" value="org.apache.log4j.PatternLayout"/>
-        <property name="log4j.appender.stdout.layout.ConversionPattern" value="%d{dd.MM.yyyy HH:mm:ss} *%-5p* [%t] %c{1}: %m (%F, line %L) %n"/>
+        <property name="log4j.appender.stdout.layout" value="org.apache.log4j.PatternLayout" />
+        <property name="log4j.appender.stdout.layout.ConversionPattern" value="%d{dd.MM.yyyy HH:mm:ss} *%-5p* [%t] %c{1}: %m (%F, line %L) %n" />
 
-        <property name="log4j.appender.file" value="org.apache.log4j.FileAppender"/>
-        <property name="log4j.appender.file.File" value="target/jcr.log"/>
+        <property name="log4j.appender.file" value="org.apache.log4j.FileAppender" />
+        <property name="log4j.appender.file.File" value="target/jcr.log" />
 
-        <property name="log4j.appender.file.layout" value="org.apache.log4j.PatternLayout"/>
-        <property name="log4j.appender.file.layout.ConversionPattern" value="%d{dd.MM.yyyy HH:mm:ss} *%-5p* [%t] %c{1}: %m (%F, line %L) %n"/>
+        <property name="log4j.appender.file.layout" value="org.apache.log4j.PatternLayout" />
+        <property name="log4j.appender.file.layout.ConversionPattern" value="%d{dd.MM.yyyy HH:mm:ss} *%-5p* [%t] %c{1}: %m (%F, line %L) %n" />
 
-        <property name="log4j.category.jcr.NodeImpl" value="DEBUG"/>
+        <property name="log4j.category.jcr.NodeImpl" value="DEBUG" />
+
       </properties-param>
     </init-params>
   </component>
@@ -101,9 +102,9 @@
           <properties-param>
             <name>namespaces</name>
             <!-- property name="dc" value="http://purl.org/dc/elements/1.1/" / -->
-            <property name="jos" value="http://www.exoplatform.com/jcr-services/organization-service/1.0/"/>
-            <property name="ecd" value="http://www.exoplatform.com/jcr/clouddrive/1.0/"/>
-            <property name="gdrive" value="http://www.exoplatform.com/jcr/googledrive/1.0/"/>
+            <property name="jos" value="http://www.exoplatform.com/jcr-services/organization-service/1.0/" />
+            <property name="ecd" value="http://www.exoplatform.com/jcr/clouddrive/1.0/" />
+            <property name="gdrive" value="http://www.exoplatform.com/jcr/googledrive/1.0/" />
           </properties-param>
         </init-params>
       </component-plugin>
@@ -131,9 +132,21 @@
           </values-param>
         </init-params>
       </component-plugin>
+      <component-plugin>
+        <name>add.gadget.services.nodeType</name>
+        <set-method>addPlugin</set-method>
+        <type>org.exoplatform.services.jcr.impl.AddNodeTypePlugin</type>
+        <init-params>
+          <values-param>
+            <name>autoCreatedInNewRepository</name>
+            <description>Cloud Drive node types configuration file</description>
+            <value>jar:/conf/portal/jcr/test-nodetypes.xml</value>
+          </values-param>
+        </init-params>
+      </component-plugin>
     </component-plugins>
   </component>
-
+  
   <!-- component>
     <key>org.exoplatform.services.jcr.ext.repository.creation.RepositoryCreationService</key>
     <type>org.exoplatform.services.jcr.ext.repository.creation.RepositoryCreationServiceImpl</type>
@@ -188,10 +201,11 @@
         <properties-param>
           <name>ref-addresses</name>
           <description>ref-addresses</description>
-          <property name="driverClassName" value="org.hsqldb.jdbcDriver"/>
-          <property name="url" value="jdbc:hsqldb:file:target/temp/hsqldb/${gatein.jcr.repository.default}"/>
-          <property name="username" value="sa"/>
-          <property name="password" value=""/>
+          <property name="driverClassName" value="org.hsqldb.jdbcDriver" />
+          <property name="url"
+            value="jdbc:hsqldb:file:${gatein.data.dir}/hsqldb/${exo.test.type:test}/${gatein.jcr.repository.default}" />
+          <property name="username" value="sa" />
+          <property name="password" value="" />
         </properties-param>
       </init-params>
     </component-plugin>

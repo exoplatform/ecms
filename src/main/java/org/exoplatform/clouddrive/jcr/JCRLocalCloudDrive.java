@@ -51,7 +51,6 @@ import java.util.HashMap;
 import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
-import java.util.NoSuchElementException;
 import java.util.Queue;
 import java.util.concurrent.Callable;
 import java.util.concurrent.ConcurrentLinkedQueue;
@@ -623,7 +622,7 @@ public abstract class JCRLocalCloudDrive extends CloudDrive {
     /**
      * Target JCR node. Will be initialized in exec() method (in actual runner thread).
      */
-    protected Node                         driveRoot;
+    protected Node                         rootNode;
 
     /**
      * Progress indicator in percents.
@@ -687,7 +686,7 @@ public abstract class JCRLocalCloudDrive extends CloudDrive {
       try {
         commandEnv.prepare(this);
 
-        driveRoot = rootNode(); // init in actual runner thread
+        rootNode = rootNode(); // init in actual runner thread
 
         startAction(JCRLocalCloudDrive.this);
 
@@ -701,10 +700,10 @@ public abstract class JCRLocalCloudDrive extends CloudDrive {
             if (getUser().getProvider().retryOnProviderError()) {
               attemptNumb++;
               if (attemptNumb > CloudDriveConnector.PROVIDER_REQUEST_ATTEMPTS) {
-                handleError(driveRoot, e, getName());
+                handleError(rootNode, e, getName());
                 throw e;
               } else {
-                rollback(driveRoot);
+                rollback(rootNode);
                 try {
                   Thread.sleep(CloudDriveConnector.PROVIDER_REQUEST_ATTEMPT_TIMEOUT);
                 } catch (InterruptedException ie) {
@@ -716,21 +715,21 @@ public abstract class JCRLocalCloudDrive extends CloudDrive {
                     + ". Rolled back and running next attempt.");
               }
             } else {
-              handleError(driveRoot, e, getName());
+              handleError(rootNode, e, getName());
               throw e;
             }
           }
         }
       } catch (CloudDriveException e) {
-        handleError(driveRoot, e, getName());
+        handleError(rootNode, e, getName());
         commandEnv.fail(this, e);
         throw e;
       } catch (RepositoryException e) {
-        handleError(driveRoot, e, getName());
+        handleError(rootNode, e, getName());
         commandEnv.fail(this, e);
         throw e;
       } catch (RuntimeException e) {
-        handleError(driveRoot, e, getName());
+        handleError(rootNode, e, getName());
         commandEnv.fail(this, e);
         throw e;
       } finally {
@@ -889,19 +888,19 @@ public abstract class JCRLocalCloudDrive extends CloudDrive {
       fetchFiles();
 
       // connected drive properties
-      driveRoot.setProperty("ecd:cloudUserId", getUser().getId());
-      driveRoot.setProperty("ecd:cloudUserName", getUser().getUsername());
-      driveRoot.setProperty("ecd:userEmail", getUser().getEmail());
-      driveRoot.setProperty("ecd:connectDate", Calendar.getInstance());
+      rootNode.setProperty("ecd:cloudUserId", getUser().getId());
+      rootNode.setProperty("ecd:cloudUserName", getUser().getUsername());
+      rootNode.setProperty("ecd:userEmail", getUser().getEmail());
+      rootNode.setProperty("ecd:connectDate", Calendar.getInstance());
 
       // mark as connected
-      driveRoot.setProperty("ecd:connected", true);
+      rootNode.setProperty("ecd:connected", true);
 
       // and save the node
-      driveRoot.save();
+      rootNode.save();
 
       // fire listeners
-      listeners.fireOnConnect(new CloudDriveEvent(getUser(), rootWorkspace, driveRoot.getPath()));
+      listeners.fireOnConnect(new CloudDriveEvent(getUser(), rootWorkspace, rootNode.getPath()));
     }
   }
 
@@ -939,13 +938,13 @@ public abstract class JCRLocalCloudDrive extends CloudDrive {
         syncFiles();
 
         // and save the drive node
-        driveRoot.save();
+        rootNode.save();
       } finally {
         currentSync.set(null);
       }
 
       // fire listeners
-      listeners.fireOnSynchronized(new CloudDriveEvent(getUser(), rootWorkspace, driveRoot.getPath()));
+      listeners.fireOnSynchronized(new CloudDriveEvent(getUser(), rootWorkspace, rootNode.getPath()));
     }
 
     /**
@@ -967,11 +966,11 @@ public abstract class JCRLocalCloudDrive extends CloudDrive {
      */
     protected void readLocalNodes() throws RepositoryException {
       Map<String, List<Node>> nodes = new LinkedHashMap<String, List<Node>>();
-      String rootId = driveRoot.getProperty("ecd:id").getString();
+      String rootId = rootNode.getProperty("ecd:id").getString();
       List<Node> rootList = new ArrayList<Node>();
-      rootList.add(driveRoot);
+      rootList.add(rootNode);
       nodes.put(rootId, rootList);
-      readNodes(driveRoot, nodes, true);
+      readNodes(rootNode, nodes, true);
 
       this.nodes = nodes;
     }
@@ -1279,28 +1278,28 @@ public abstract class JCRLocalCloudDrive extends CloudDrive {
   /**
    * Internal initialization of newly connecting drive node.
    * 
-   * @param driveRoot a {@link Node} to initialize
+   * @param rootNode a {@link Node} to initialize
    * @throws CloudDriveException
    * @throws RepositoryException
    */
-  protected void initDrive(Node driveNode) throws CloudDriveException, RepositoryException {
-    Session session = driveNode.getSession();
+  protected void initDrive(Node rootNode) throws CloudDriveException, RepositoryException {
+    Session session = rootNode.getSession();
 
-    driveNode.addMixin(ECD_CLOUDDRIVE);
-    if (!driveNode.hasProperty("exo:title")) {
+    rootNode.addMixin(ECD_CLOUDDRIVE);
+    if (!rootNode.hasProperty("exo:title")) {
       // default title
-      driveNode.setProperty("exo:title", titleCached = getUser().getProvider().getName() + " - "
+      rootNode.setProperty("exo:title", titleCached = getUser().getProvider().getName() + " - "
           + getUser().getEmail());
     } else {
-      titleCached = driveNode.getProperty("exo:title").getString();
+      titleCached = rootNode.getProperty("exo:title").getString();
     }
 
-    driveNode.setProperty("ecd:connected", false);
+    rootNode.setProperty("ecd:connected", false);
     // know who actually initialized the drive
-    driveNode.setProperty("ecd:localUserName", session.getUserID());
-    driveNode.setProperty("ecd:initDate", Calendar.getInstance());
+    rootNode.setProperty("ecd:localUserName", session.getUserID());
+    rootNode.setProperty("ecd:initDate", Calendar.getInstance());
     // TODO how to store provider properly? need store its API version?
-    driveNode.setProperty("ecd:provider", getUser().getProvider().getId());
+    rootNode.setProperty("ecd:provider", getUser().getProvider().getId());
 
     // XXX ecd:id and ecd:url should be set in actual impl of the drive where they are known
   }
@@ -2134,14 +2133,14 @@ public abstract class JCRLocalCloudDrive extends CloudDrive {
                                  false,
                                  null,
                                  null,
-                                 true);
+                                 false);
     observation.addEventListener(handler.addListener,
                                  Event.NODE_ADDED,
                                  null,
                                  false,
                                  null,
                                  new String[] { EXO_TRASHFOLDER },
-                                 true);
+                                 false);
     return handler;
   }
 

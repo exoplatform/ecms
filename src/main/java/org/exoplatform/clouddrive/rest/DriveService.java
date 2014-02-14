@@ -178,7 +178,6 @@ public class DriveService implements ResourceContainer {
 
       try {
         Item item = finder.getItem(userSession, path, true);
-        // item = userSession.getItem(path);
         if (item.isNode()) {
           Node userNode = (Node) item;
 

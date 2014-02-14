@@ -84,7 +84,7 @@
       <artifactId>google-api-client</artifactId>
       <scope>compile</scope>
       <type>jar</type>
-    </dependency>    
+    </dependency>
     <dependency>
       <groupId>com.google.http-client</groupId>
       <artifactId>google-http-client-jackson2</artifactId>
@@ -163,10 +163,53 @@
       <type>jar</type>
     </dependency>
     <dependency>
+      <groupId>junit</groupId>
+      <artifactId>junit</artifactId>
+      <scope>test</scope>
+      <type>jar</type>
+    </dependency>
+    <dependency>
       <groupId>org.testng</groupId>
       <artifactId>testng</artifactId>
       <scope>test</scope>
       <type>jar</type>
+    </dependency>
+    <dependency>
+      <groupId>org.spockframework</groupId>
+      <artifactId>spock-core</artifactId>
+      <scope>test</scope>
+      <exclusions>
+        <exclusion>
+          <groupId>org.codehaus.groovy</groupId>
+          <artifactId>groovy-all</artifactId>
+        </exclusion>
+      </exclusions>
+    </dependency>
+    <dependency>
+      <groupId>org.codehaus.groovy</groupId>
+      <artifactId>groovy-all</artifactId>
+      <version>${test.groovy.version}</version> <!-- version explicitly here to let eXo's version live outside -->
+      <scope>test</scope>
+    </dependency>
+    <dependency>
+      <groupId>org.ow2.asm</groupId>
+      <artifactId>asm</artifactId>
+      <scope>test</scope>
+    </dependency>
+    <dependency>
+      <groupId>cglib</groupId>
+      <artifactId>cglib-nodep</artifactId>
+      <scope>test</scope>
+    </dependency>
+    <dependency>
+      <groupId>org.objenesis</groupId>
+      <artifactId>objenesis</artifactId>
+      <scope>test</scope>
+    </dependency>
+    <dependency>
+      <groupId>org.hamcrest</groupId>
+      <artifactId>hamcrest-core</artifactId>
+      <scope>test</scope>
     </dependency>
   </dependencies>
 
@@ -199,23 +242,92 @@
         <groupId>org.apache.maven.plugins</groupId>
         <artifactId>maven-surefire-plugin</artifactId>
         <configuration>
+          <useFile>false</useFile>
           <argLine>${env.MAVEN_OPTS} -Djava.security.manager=org.exoplatform.commons.test.TestSecurityManager
             -Djava.security.policy=${project.build.directory}/test-classes/conf/test.policy</argLine>
           <systemPropertyVariables>
-            <exo.shared.dir>${project.build.directory}/cloud</exo.shared.dir>
             <maven.exoplatform.dir>${project.build.directory}</maven.exoplatform.dir>
             <exo.conf.dir.name>test-classes/conf</exo.conf.dir.name>
             <java.security.auth.login.config>${project.build.directory}/test-classes/conf/jaas.conf</java.security.auth.login.config>
           </systemPropertyVariables>
           <includes>
-            <include>**/**/NoTests.java</include>
+            <include>**/**/Test*.java</include>
           </includes>
           <excludes>
             <exclude>**/**/TestGoogle*.java</exclude>
-            <exclude>**/**/TestJCRRemoveObservation.java</exclude>
           </excludes>
-          <forkMode>never</forkMode>
+          <forkCount>0</forkCount>
         </configuration>
+      </plugin>
+      <plugin>
+        <groupId>org.apache.maven.plugins</groupId>
+        <artifactId>maven-failsafe-plugin</artifactId>
+        <executions>
+          <execution>
+            <id>integration-spec</id>
+            <goals>
+              <goal>integration-test</goal>
+            </goals>
+            <configuration>
+              <argLine>${env.MAVEN_OPTS}
+                -Djava.security.manager=org.exoplatform.commons.test.TestSecurityManager
+                -Djava.security.policy=${project.build.directory}/test-classes/conf/test.policy</argLine>
+              <systemPropertyVariables>
+                <exo.test.type>integration</exo.test.type><!-- to separate HSQL and Indexer files in JCR -->
+                <maven.exoplatform.dir>${project.build.directory}</maven.exoplatform.dir>
+                <exo.conf.dir.name>test-classes/conf</exo.conf.dir.name>
+                <java.security.auth.login.config>${project.build.directory}/test-classes/conf/jaas.conf</java.security.auth.login.config>
+              </systemPropertyVariables>
+              <includes>
+                <include>**/**/*Spec.java</include>
+              </includes>
+              <forkCount>0</forkCount>
+            </configuration>
+          </execution>
+        </executions>
+        <!--
+        [ Force use of JUnit: How to execute JUnit(=Spock) and TestNG test cases at same time ? ]
+        see: http://solidsoft.wordpress.com/2013/03/12/mixing-testng-and-junit-tests-in-one-maven-module-2013-edition/
+        -->
+        <dependencies>
+          <dependency>
+            <groupId>org.apache.maven.surefire</groupId>
+            <artifactId>surefire-junit47</artifactId>
+            <version>${maven.surefire.junit47.version}</version>
+          </dependency>
+        </dependencies>
+      </plugin>
+      <plugin>
+        <groupId>org.codehaus.gmaven</groupId>
+        <artifactId>gmaven-plugin</artifactId>
+        <configuration>
+          <providerSelection>2.0</providerSelection>
+        </configuration>
+        <executions>
+          <execution>
+            <goals>
+              <goal>testCompile</goal>
+            </goals>
+          </execution>
+        </executions>
+        <dependencies>
+          <dependency>
+            <groupId>org.codehaus.gmaven.runtime</groupId>
+            <artifactId>gmaven-runtime-2.0</artifactId>
+            <version>${maven.gmaven.runtime.version}</version>
+            <exclusions>
+              <exclusion>
+                <groupId>org.codehaus.groovy</groupId>
+                <artifactId>groovy-all</artifactId>
+              </exclusion>
+            </exclusions>
+          </dependency>
+          <dependency>
+            <groupId>org.codehaus.groovy</groupId>
+            <artifactId>groovy-all</artifactId>
+            <version>${test.groovy.version}</version>
+          </dependency>
+        </dependencies>
       </plugin>
     </plugins>
   </build>

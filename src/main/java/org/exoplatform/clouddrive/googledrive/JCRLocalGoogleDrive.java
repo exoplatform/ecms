@@ -87,13 +87,13 @@ public class JCRLocalGoogleDrive extends JCRLocalCloudDrive {
       // drive id
       String id = about.getRootFolderId();
 
-      fetchChilds(id, driveRoot);
+      fetchChilds(id, rootNode);
 
       // connect metadata
-      driveRoot.setProperty("gdrive:oauth2AccessToken", api.getAccessToken());
-      driveRoot.setProperty("gdrive:oauth2RefreshToken", api.getRefreshToken());
-      driveRoot.setProperty("gdrive:oauth2TokenExpirationTime", api.getExpirationTime());
-      driveRoot.setProperty("gdrive:largestChangeId", about.getLargestChangeId());
+      rootNode.setProperty("gdrive:oauth2AccessToken", api.getAccessToken());
+      rootNode.setProperty("gdrive:oauth2RefreshToken", api.getRefreshToken());
+      rootNode.setProperty("gdrive:oauth2TokenExpirationTime", api.getExpirationTime());
+      rootNode.setProperty("gdrive:largestChangeId", about.getLargestChangeId());
     }
 
     protected void fetchChilds(String fileId, Node parent) throws CloudDriveException, RepositoryException {
@@ -210,7 +210,7 @@ public class JCRLocalGoogleDrive extends JCRLocalCloudDrive {
         throw new NoRefreshTokenException("Error calling About service of Google Drive: " + e.getMessage(), e);
       }
 
-      String localChangeId = driveRoot.getProperty("gdrive:largestChangeId").getString();
+      String localChangeId = rootNode.getProperty("gdrive:largestChangeId").getString();
       if (largestChangeId.equals(localChangeId)) {
         // nothing changed
         return;
@@ -233,7 +233,7 @@ public class JCRLocalGoogleDrive extends JCRLocalCloudDrive {
       }
 
       // update sync metadata
-      driveRoot.setProperty("gdrive:largestChangeId", largestChangeId);
+      rootNode.setProperty("gdrive:largestChangeId", largestChangeId);
     }
 
     protected void syncNext() throws RepositoryException, CloudDriveException {

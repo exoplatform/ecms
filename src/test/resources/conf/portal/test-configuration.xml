@@ -28,6 +28,16 @@
     <key>org.exoplatform.clouddrive.CloudDriveService</key>
     <type>org.exoplatform.clouddrive.CloudDriveServiceImpl</type>
   </component>
+  
+  <component>
+    <key>org.exoplatform.clouddrive.jcr.NodeFinder</key>
+    <type>org.exoplatform.clouddrive.jcr.JCRNodeFinder</type>
+  </component>
+  
+  <component>
+    <key>org.exoplatform.clouddrive.CloudDriveFeatures</key>
+    <type>org.exoplatform.clouddrive.features.PermissiveFeatures</type>
+  </component>
 
   <component>
     <key>org.exoplatform.clouddrive.exodrive.service.ExoDriveService</key>
@@ -125,7 +135,7 @@
     <component-plugin>
       <name>add.clouddriveprovider</name>
       <set-method>addPlugin</set-method>
-      <type>org.exoplatform.clouddrive.exodrive.BoxConnector</type>
+      <type>org.exoplatform.clouddrive.box.BoxConnector</type>
       <init-params>
         <properties-param>
           <name>drive-configuration</name>

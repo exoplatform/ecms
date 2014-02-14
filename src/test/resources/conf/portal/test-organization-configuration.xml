@@ -296,6 +296,50 @@
                     </field>
                   </object>
                 </value>
+                <value>
+                  <object type="org.exoplatform.services.organization.OrganizationConfig$User">
+                    <field name="userName">
+                      <string>john</string>
+                    </field>
+                    <field name="password">
+                      <string></string>
+                    </field>
+                    <field name="firstName">
+                      <string>John</string>
+                    </field>
+                    <field name="lastName">
+                      <string>Dou</string>
+                    </field>
+                    <field name="email">
+                      <string>john@acme</string>
+                    </field>
+                    <field name="groups">
+                      <string>*:/platform/administrators,*:/platform/users,*:/platform/web-contributors,*:/organization/employees</string>
+                    </field>
+                  </object>
+                </value>
+                <value>
+                  <object type="org.exoplatform.services.organization.OrganizationConfig$User">
+                    <field name="userName">
+                      <string>mark</string>
+                    </field>
+                    <field name="password">
+                      <string></string>
+                    </field>
+                    <field name="firstName">
+                      <string>Mark</string>
+                    </field>
+                    <field name="lastName">
+                      <string>Kovalsky</string>
+                    </field>
+                    <field name="email">
+                      <string>mark@acme</string>
+                    </field>
+                    <field name="groups">
+                      <string>*:/platform/administrators,*:/platform/users,*:/platform/web-contributors,*:/organization/employees</string>
+                    </field>
+                  </object>
+                </value>
               </collection>
             </field>
           </object>

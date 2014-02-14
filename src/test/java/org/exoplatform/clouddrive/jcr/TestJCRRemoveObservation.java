@@ -77,7 +77,7 @@ public class TestJCRRemoveObservation extends TestCase {
     // login via Authenticator
     Authenticator authr = (Authenticator) container.getComponentInstanceOfType(Authenticator.class);
     String user = authr.validateUser(new Credential[] { new UsernameCredential("root"),
-        new PasswordCredential("12345") });
+        new PasswordCredential("") });
     ConversationState.setCurrent(new ConversationState(authr.createIdentity(user)));
 
     // and set session provider to the service

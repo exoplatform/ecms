@@ -38,7 +38,7 @@
               <property name="update-storage" value="true" />
               <property name="max-buffer-size" value="200k" />
               <property name="swap-directory"
-                value="${gatein.jcr.data.dir}/${gatein.jcr.repository.default}/swap/system${container.name.suffix}" />
+                value="${gatein.jcr.data.dir}/${exo.test.type:test}/${gatein.jcr.repository.default}/swap/system${container.name.suffix}" />
             </properties>
           </container>
           <initializer class="org.exoplatform.services.jcr.impl.core.ScratchWorkspaceInitializer">
@@ -61,7 +61,7 @@
           <query-handler class="org.exoplatform.services.jcr.impl.core.query.lucene.SearchIndex">
             <properties>
               <property name="index-dir"
-                value="${gatein.jcr.data.dir}/${gatein.jcr.repository.default}/index/system${container.name.suffix}" />
+                value="${gatein.jcr.data.dir}/${exo.test.type:test}/${gatein.jcr.repository.default}/index/system${container.name.suffix}" />
               <property name="changesfilter-class" value="${gatein.jcr.index.changefilterclass}" />
               <property name="jbosscache-configuration" value="${gatein.jcr.index.cache.config}" />
               <property name="jgroups-configuration" value="${gatein.jcr.jgroups.config}" />
@@ -99,7 +99,7 @@
               <property name="update-storage" value="true" />
               <property name="max-buffer-size" value="200k" />
               <property name="swap-directory"
-                value="${gatein.jcr.data.dir}/${gatein.jcr.repository.default}/swap/system${container.name.suffix}" />
+                value="${gatein.jcr.data.dir}/${exo.test.type:test}/${gatein.jcr.repository.default}/swap/system${container.name.suffix}" />
             </properties>
           </container>
           <initializer class="org.exoplatform.services.jcr.impl.core.ScratchWorkspaceInitializer">
@@ -122,7 +122,7 @@
           <query-handler class="org.exoplatform.services.jcr.impl.core.query.lucene.SearchIndex">
             <properties>
               <property name="index-dir"
-                value="${gatein.jcr.data.dir}/${gatein.jcr.repository.default}/index/system${container.name.suffix}" />
+                value="${gatein.jcr.data.dir}/${exo.test.type:test}/${gatein.jcr.repository.default}/index/system${container.name.suffix}" />
               <property name="changesfilter-class" value="${gatein.jcr.index.changefilterclass}" />
               <property name="jbosscache-configuration" value="${gatein.jcr.index.cache.config}" />
               <property name="jgroups-configuration" value="${gatein.jcr.jgroups.config}" />

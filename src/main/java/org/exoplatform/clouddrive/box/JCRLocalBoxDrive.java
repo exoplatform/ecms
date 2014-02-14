@@ -98,16 +98,16 @@ public class JCRLocalBoxDrive extends JCRLocalCloudDrive implements UserTokenRef
       // this will provide us a proper streamPosition to start sync from later
       EventsIterator eventsInit = api.getEvents(BoxEventRequestObject.STREAM_POSITION_NOW);
 
-      BoxFolder boxRoot = fetchChilds(BoxAPI.BOX_ROOT_ID, driveRoot);
-      initBoxItem(driveRoot, boxRoot); // init parent
+      BoxFolder boxRoot = fetchChilds(BoxAPI.BOX_ROOT_ID, rootNode);
+      initBoxItem(rootNode, boxRoot); // init parent
 
       // actual drive URL (its root folder's id), see initDrive() also
-      driveRoot.setProperty("ecd:url", api.getLink(boxRoot));
+      rootNode.setProperty("ecd:url", api.getLink(boxRoot));
 
       // sync stream
-      driveRoot.setProperty("box:streamPosition", eventsInit.streamPosition);
-      driveRoot.setProperty("box:streamHistory", "");
-      driveRoot.setProperty("box:streamDate", Calendar.getInstance());
+      rootNode.setProperty("box:streamPosition", eventsInit.streamPosition);
+      rootNode.setProperty("box:streamHistory", "");
+      rootNode.setProperty("box:streamDate", Calendar.getInstance());
     }
 
     protected BoxFolder fetchChilds(String fileId, Node parent) throws CloudDriveException,
@@ -166,13 +166,13 @@ public class JCRLocalBoxDrive extends JCRLocalCloudDrive implements UserTokenRef
       EventsIterator eventsInit = api.getEvents(BoxEventRequestObject.STREAM_POSITION_NOW);
 
       // sync with cloud
-      BoxFolder boxRoot = syncChilds(BoxAPI.BOX_ROOT_ID, driveRoot);
-      initBoxItem(driveRoot, boxRoot); // init parent
+      BoxFolder boxRoot = syncChilds(BoxAPI.BOX_ROOT_ID, rootNode);
+      initBoxItem(rootNode, boxRoot); // init parent
 
       // sync stream
-      driveRoot.setProperty("box:streamPosition", eventsInit.streamPosition);
-      driveRoot.setProperty("box:streamHistory", "");
-      driveRoot.setProperty("box:streamDate", Calendar.getInstance());
+      rootNode.setProperty("box:streamPosition", eventsInit.streamPosition);
+      rootNode.setProperty("box:streamHistory", "");
+      rootNode.setProperty("box:streamDate", Calendar.getInstance());
 
       // remove local nodes of files not existing remotely, except of root
       nodes.remove(BoxAPI.BOX_ROOT_ID);
@@ -316,7 +316,7 @@ public class JCRLocalBoxDrive extends JCRLocalCloudDrive implements UserTokenRef
      */
     @Override
     protected void syncFiles() throws CloudDriveException, RepositoryException {
-      long localStreamPosition = driveRoot.getProperty("box:streamPosition").getLong();
+      long localStreamPosition = rootNode.getProperty("box:streamPosition").getLong();
 
       // buffer all items,
       // apply them in proper order (taking in account parent existence),
@@ -327,7 +327,7 @@ public class JCRLocalBoxDrive extends JCRLocalCloudDrive implements UserTokenRef
       iterators.add(events);
 
       // Local history, it contains something applied in previous sync, it can be empty if it was full sync.
-      for (String es : driveRoot.getProperty("box:streamHistory").getString().split(";")) {
+      for (String es : rootNode.getProperty("box:streamHistory").getString().split(";")) {
         history.add(es);
       }
 
@@ -345,7 +345,7 @@ public class JCRLocalBoxDrive extends JCRLocalCloudDrive implements UserTokenRef
           Node parent;
           String parentId = item.getParent().getId();// .isRemoved(parentId)
           if (BoxAPI.BOX_ROOT_ID.equals(parentId)) {
-            parent = driveRoot;
+            parent = rootNode;
           } else {
             JCRLocalCloudFile local = applied(parentId);
             if (local != null) {
@@ -453,7 +453,7 @@ public class JCRLocalBoxDrive extends JCRLocalCloudDrive implements UserTokenRef
         LOG.warn("Not all events applied for Box sync. Running full sync.");
 
         // rollback everything from this sync
-        rollback(driveRoot);
+        rollback(rootNode);
 
         // we need full sync in this case
         FullSync fullSync = new FullSync();
@@ -473,11 +473,11 @@ public class JCRLocalBoxDrive extends JCRLocalCloudDrive implements UserTokenRef
             newHistoryData.append(';');
           }
         }
-        driveRoot.setProperty("box:streamHistory", newHistoryData.toString());
+        rootNode.setProperty("box:streamHistory", newHistoryData.toString());
 
         // update sync position
-        driveRoot.setProperty("box:streamPosition", events.streamPosition);
-        driveRoot.setProperty("box:streamDate", Calendar.getInstance());
+        rootNode.setProperty("box:streamPosition", events.streamPosition);
+        rootNode.setProperty("box:streamDate", Calendar.getInstance());
       }
     }
 

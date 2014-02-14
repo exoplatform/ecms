@@ -16,6 +16,8 @@
  */
 package org.exoplatform.clouddrive;
 
+import org.exoplatform.clouddrive.features.CloudDriveFeatures;
+import org.exoplatform.clouddrive.features.PermissiveFeatures;
 import org.exoplatform.clouddrive.jcr.JCRLocalCloudDrive;
 import org.exoplatform.container.component.ComponentPlugin;
 import org.exoplatform.services.jcr.RepositoryService;
@@ -31,6 +33,7 @@ import org.picocontainer.Startable;
 import java.util.Collections;
 import java.util.HashMap;
 import java.util.HashSet;
+import java.util.LinkedHashSet;
 import java.util.Map;
 import java.util.Set;
 import java.util.concurrent.ConcurrentHashMap;
@@ -114,35 +117,64 @@ public class CloudDriveServiceImpl implements CloudDriveService, Startable {
    */
   protected final Map<CloudUser, Map<CloudUser, CloudDrive>> userDrives       = new ConcurrentHashMap<CloudUser, Map<CloudUser, CloudDrive>>();
 
+  protected final Set<CloudDriveListener>                    drivesListeners  = new LinkedHashSet<CloudDriveListener>();
+
   /**
-   * Internal listener used for handling consistency in users-per-repository map (on drive disconnect or
-   * removal).
+   * Managed features specification.
    */
-  protected final LocalDrivesListener                        drivesListener;
-  
+  protected final CloudDriveFeatures                         features;
+
   /**
    * Environment for commands execution.
    */
-  protected CloudDriveEnvironment commandEnv;
+  protected CloudDriveEnvironment                            commandEnv;
 
-  public CloudDriveServiceImpl(RepositoryService jcrService, SessionProviderService sessionProviders) {
+  /**
+   * Cloud Drive service with storage in JCR and with managed features.
+   * 
+   * @param jcrService {@link RepositoryService}
+   * @param sessionProviders {@link SessionProviderService}
+   * @param features {@link CloudDriveFeatures}
+   */
+  public CloudDriveServiceImpl(RepositoryService jcrService,
+                               SessionProviderService sessionProviders,
+                               CloudDriveFeatures features) {
     this.jcrService = jcrService;
     this.sessionProviders = sessionProviders;
 
-    this.drivesListener = new LocalDrivesListener();
+    // Add internal listener for handling consistency in users-per-repository map (on drive disconnect or
+    // removal)
+    this.drivesListeners.add(new LocalDrivesListener());
+
+    this.features = features;
+  }
+
+  /**
+   * Cloud Drive service with storage in JCR and all features permitted.
+   * 
+   * @param jcrService {@link RepositoryService}
+   * @param sessionProviders {@link SessionProviderService}
+   */
+  public CloudDriveServiceImpl(RepositoryService jcrService, SessionProviderService sessionProviders) {
+    this(jcrService, sessionProviders, new PermissiveFeatures());
   }
 
   public void addPlugin(ComponentPlugin plugin) {
     if (plugin instanceof CloudDriveConnector) {
+      // connectors
       CloudDriveConnector impl = (CloudDriveConnector) plugin;
       connectors.put(impl.getProvider(), impl);
     } else if (plugin instanceof CloudDriveEnvironment) {
+      // environment customizations
       CloudDriveEnvironment env = (CloudDriveEnvironment) plugin;
       if (commandEnv != null) {
         commandEnv.chain(env);
       } else {
-        commandEnv = env; 
+        commandEnv = env;
       }
+    } else if (plugin instanceof CloudDriveListener) {
+      // global listeners
+      drivesListeners.add((CloudDriveListener) plugin);
     } else {
       LOG.warn("Cannot recognize component plugin for " + plugin.getName() + ": type " + plugin.getClass()
           + " not supported");
@@ -285,10 +317,17 @@ public class CloudDriveServiceImpl implements CloudDriveService, Startable {
     // create new
     CloudDriveConnector conn = connectors.get(user.getProvider());
     if (conn != null) {
-      CloudDrive local = conn.createDrive(user, driveNode);
-      local.configure(commandEnv);
-      registerDrive(user, local, repoName);
-      return local;
+      if (features.canCreateDrive(driveNode.getSession().getWorkspace().getName(),
+                                  driveNode.getPath(),
+                                  user.getId(),
+                                  user.getProvider())) {
+        CloudDrive local = conn.createDrive(user, driveNode);
+        local.configure(commandEnv);
+        registerDrive(user, local, repoName);
+        return local;
+      } else {
+        throw new CannotCreateDriveException("Cannot create drive for user " + user.getEmail());
+      }
     } else {
       // shouldn't happen if user obtained from this service
       throw new ProviderNotAvailableException("Provider not available " + user.getProvider().getName());
@@ -340,8 +379,10 @@ public class CloudDriveServiceImpl implements CloudDriveService, Startable {
     }
     drives.put(user, drive);
 
-    // add listener
-    drive.addListener(drivesListener);
+    // add listeners
+    for (CloudDriveListener listner : drivesListeners) {
+      drive.addListener(listner);
+    }
   }
 
   /**
