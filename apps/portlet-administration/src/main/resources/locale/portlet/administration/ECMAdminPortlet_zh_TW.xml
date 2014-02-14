@@ -1583,7 +1583,7 @@
     <header>
       <title>名稱</title>
       <action>操作</action>
-      <template>模板</template>
+      <template>Template</template>
     </header>
     <action>
       <AddTemplate>新增範本</AddTemplate>
@@ -2092,7 +2092,7 @@
   </childNodeDefinition>
   <propertyDefinition>
     <title>
-      <AddConstraints>增加約束</AddConstraints>
+      <AddConstraints>Add Constraints</AddConstraints>
     </title>
   </propertyDefinition>
   <authInputSet>

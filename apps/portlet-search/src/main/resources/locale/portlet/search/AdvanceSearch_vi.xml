@@ -33,7 +33,7 @@
       <edit>Chỉnh sửa</edit>
     </action>
     <msg>
-      <your-search>Tìm kiếm của bạn</your-search>
+      <your-search>Từ khóa</your-search>
       <did-not-match>không khớp với bất kỳ mục nào</did-not-match>
       <new-suggestion>đề xuất</new-suggestion>
     </msg>

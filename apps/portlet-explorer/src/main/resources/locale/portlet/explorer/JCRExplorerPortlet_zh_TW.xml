@@ -1466,7 +1466,7 @@
     <label>
       <format>格式</format>
       <systemView>系統檢視</systemView>
-      <documentView>文件視圖</documentView>
+      <documentView>Document View</documentView>
       <upload>上傳檔案</upload>
     </label>
     <action>
@@ -1957,7 +1957,7 @@
     <msg>這一項目已經存在。</msg>
   </ItemExistsException>
   <AccessControlException>
-    <msg>訪問被拒絕。您沒有F權限來執行此操作。</msg>
+    <msg>訪問被拒絕。您沒有權限來執行此操作。</msg>
   </AccessControlException>
   <AccessDeniedException>
     <msg>訪問被拒絕。</msg>
@@ -2468,7 +2468,7 @@
 
   <Import>
     <label>
-      <docview>文件視圖</docview>
+      <docview>Document View</docview>
       <sysview>系統檢視</sysview>
     </label>
   </Import>
@@ -2487,7 +2487,7 @@
   -->
   <UIActionBar>
     <obtion>
-      <Admin>Admin</Admin>
+      <Admin>管理員</Admin>
       <Info>資訊</Info>
       <Actions>操作</Actions>
       <Collaboration>合作</Collaboration>
@@ -3067,8 +3067,8 @@
     <label>
     <no>否</no>
   <yes>是</yes>
-  <true>true</true>
-  <false>false</false>
+  <true>對</true>
+  <false>錯</false>
   <Electronic>電子</Electronic>
   <Paper>Paper</Paper>
   <NONE>無</NONE>
