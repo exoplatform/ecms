@@ -221,8 +221,6 @@ class FeaturesSpec extends ExoSpecification {
     1 * features.isAutosyncEnabled(johnDrive) >> true
     !autosyncMark
     autosyncJohn
-
-    // TODO rest service closes session
   }
 
   // =============== helpers ===============
@@ -250,7 +248,6 @@ class FeaturesSpec extends ExoSpecification {
     
     CloudProvider provider = cloudDrives.getProvider("exo")
     CloudUser user = cloudDrives.authenticate(provider, session.userID)
-    
     
     CloudDrive drive = cloudDrives.createDrive(user, userNode)
     drive.connect()
