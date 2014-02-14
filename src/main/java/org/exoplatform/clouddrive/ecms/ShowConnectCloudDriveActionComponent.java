@@ -37,7 +37,6 @@ public class ShowConnectCloudDriveActionComponent extends BaseCloudDriveManagerC
     public void processEvent(Event<ShowConnectCloudDriveActionComponent> event) throws Exception {
 
       UIJCRExplorer uiExplorer = event.getSource().getAncestorOfType(UIJCRExplorer.class);
-      event.getSource().getAncestorOfType(UIJCRExplorer.class);
       connectToDrive(event, uiExplorer);
     }
 

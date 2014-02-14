@@ -18,20 +18,23 @@
 package org.exoplatform.clouddrive.ecms;
 
 import org.exoplatform.clouddrive.CloudDrive;
+import org.exoplatform.clouddrive.CloudDriveException;
 import org.exoplatform.clouddrive.CloudDriveService;
+import org.exoplatform.clouddrive.CloudProvider;
+import org.exoplatform.clouddrive.features.CloudDriveFeatures;
 import org.exoplatform.services.wcm.utils.WCMCoreUtils;
 import org.exoplatform.web.application.JavascriptManager;
 import org.exoplatform.web.application.RequestContext;
+import org.exoplatform.web.application.RequireJS;
 import org.exoplatform.webui.application.WebuiRequestContext;
-
-import java.util.HashMap;
-import java.util.Map;
 
 import javax.jcr.Node;
 import javax.jcr.NodeIterator;
 import javax.jcr.RepositoryException;
 
 /**
+ * Initialize Cloud Drive support in portal request.<br>
+ * 
  * Created by The eXo Platform SAS.
  * 
  * @author <a href="mailto:pnedonosko@exoplatform.com">Peter Nedonosko</a>
@@ -43,14 +46,40 @@ public class CloudDriveContext {
 
   protected final static String JAVASCRIPT_NODES = "CloudDriveContext_JavascriptNodes".intern();
 
-  public static boolean init(RequestContext requestContext, String workspace, String nodePath) {
+  /**
+   * Initialize request with Cloud Drive support for given JCR location and {@link CloudProvider}.
+   * 
+   * @param requestContext {@link RequestContext}
+   * @param workspace {@link String}
+   * @param nodePath {@link String}
+   * @param provider {@link CloudProvider} optional, if <code>null</code> then any provider will be assumed
+   * @return boolean <code>true</code> if request successfully initialized, <code>false</code> if request
+   *         already
+   *         initialized
+   * @throws CloudDriveException if cannot auth url from the provider
+   */
+  public static boolean init(RequestContext requestContext,
+                             String workspace,
+                             String nodePath,
+                             CloudProvider provider) throws CloudDriveException {
     Object script = requestContext.getAttribute(JAVASCRIPT);
     if (script == null) {
       // XXX yes... nasty cast
       JavascriptManager js = ((WebuiRequestContext) requestContext).getJavascriptManager();
-      js.require("SHARED/cloudDrive", "cloudDrive").addScripts("\ncloudDrive.init('" + workspace + "','"
-          + nodePath + "');\n");
+      RequireJS require = js.require("SHARED/cloudDrive", "cloudDrive");
 
+      CloudDriveFeatures features = WCMCoreUtils.getService(CloudDriveFeatures.class);
+      // init cloud drive if we can connect for this user
+      if (features.canCreateDrive(workspace, nodePath, requestContext.getRemoteUser(), provider)) {
+        require.addScripts("\ncloudDrive.init('" + workspace + "','" + nodePath + "');\n");
+      } // else, drive will be not initialized - thus not able to connect
+
+      if (provider != null) {
+        // add provider's default params
+        require.addScripts("\ncloudDrive.initProvider('" + provider.getId() + "', '"
+            + provider.getAuthUrl() + "');\n");
+      }
+      
       requestContext.setAttribute(JAVASCRIPT, JAVASCRIPT);
       return true;
     } else {
@@ -58,6 +87,32 @@ public class CloudDriveContext {
     }
   }
 
+  /**
+   * Initialize request with Cloud Drive support for given JCR location.
+   * 
+   * @param requestContext {@link RequestContext}
+   * @param workspace {@link String}
+   * @param nodePath {@link String}
+   * @return boolean <code>true</code> if request successfully initialized, <code>false</code> if request
+   *         already initialized
+   * @throws CloudDriveException if cannot auth url from the provider
+   */
+  public static boolean init(RequestContext requestContext, String workspace, String nodePath) throws CloudDriveException {
+    return init(requestContext, workspace, nodePath, null);
+  }
+
+  /**
+   * Initialize already connected drives for a request and given JCR location. This method assumes that
+   * request already initialized by {@link #init(RequestContext, String, String, CloudProvider)} method.
+   * 
+   * @param requestContext {@link RequestContext}
+   * @param parent {@link Node}
+   * @return boolean <code>true</code> if nodes successfully initialized, <code>false</code> if nodes already
+   *         initialized
+   * @throws RepositoryException
+   * @see {@link #init(RequestContext, String, String)}
+   * @see {@link #init(RequestContext, String, String, CloudProvider)}
+   */
   public static boolean initNodes(RequestContext requestContext, Node parent) throws RepositoryException {
     Object script = requestContext.getAttribute(JAVASCRIPT_NODES);
     if (script == null) {
@@ -86,8 +141,8 @@ public class CloudDriveContext {
           JavascriptManager js = ((WebuiRequestContext) requestContext).getJavascriptManager();
 
           // XXX we already "required" cloudDrive as AMD dependency in init()
-          js.require("SHARED/cloudDrive", "cloudDrive").addScripts("\ncloudDrive.initNodes("
-              + map.toString() + ");\n");
+          js.require("SHARED/cloudDrive", "cloudDrive").addScripts("\ncloudDrive.initNodes(" + map.toString()
+              + ");\n");
 
           requestContext.setAttribute(JAVASCRIPT_NODES, JAVASCRIPT_NODES);
           return true;

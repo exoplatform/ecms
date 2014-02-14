@@ -25,9 +25,7 @@ import org.exoplatform.ecm.webui.component.explorer.control.listener.UIActionBar
 import org.exoplatform.services.log.ExoLogger;
 import org.exoplatform.services.log.Log;
 import org.exoplatform.services.wcm.utils.WCMCoreUtils;
-import org.exoplatform.web.application.JavascriptManager;
 import org.exoplatform.web.application.Parameter;
-import org.exoplatform.webui.application.WebuiRequestContext;
 import org.exoplatform.webui.config.annotation.ComponentConfig;
 import org.exoplatform.webui.config.annotation.EventConfig;
 import org.exoplatform.webui.event.Event;
@@ -57,13 +55,7 @@ public class ConnectGoogleDriveActionComponent extends BaseCloudDriveManagerComp
       try {
         // XXX gdrive - Google Drive id from configuration
         CloudProvider provider = drivesService.getProvider("gdrive");
-
-        initContext();
-
-        // add provider's default params
-        JavascriptManager js = ((WebuiRequestContext) WebuiRequestContext.getCurrentInstance()).getJavascriptManager();
-        js.getRequireJS().addScripts("\ncloudDrive.initProvider('" + provider.getId() + "', '"
-            + provider.getAuthUrl() + "');\n");
+        initContext(provider);
 
         // XXX do workaround here, need point an id of the provider for this Connect component
         // this could be better to do by HTML attribute, but we cannot do this for the moment

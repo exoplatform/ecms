@@ -16,22 +16,26 @@
  */
 package org.exoplatform.clouddrive.ecms;
 
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
-
-import javax.jcr.Node;
-import javax.jcr.Session;
-
 import org.exoplatform.clouddrive.CloudDriveService;
+import org.exoplatform.container.component.ComponentPlugin;
 import org.exoplatform.services.cms.views.ManageViewService;
 import org.exoplatform.services.jcr.RepositoryService;
 import org.exoplatform.services.jcr.ext.common.SessionProvider;
 import org.exoplatform.services.log.ExoLogger;
 import org.exoplatform.services.log.Log;
+import org.exoplatform.webui.core.UIComponent;
 import org.exoplatform.webui.ext.UIExtension;
 import org.exoplatform.webui.ext.UIExtensionManager;
 import org.picocontainer.Startable;
+
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.HashSet;
+import java.util.List;
+import java.util.Set;
+
+import javax.jcr.Node;
+import javax.jcr.Session;
 
 /**
  * Add ImportCloudDocument button in ListView. We're doing this by hack of already stored DMS
@@ -53,6 +57,8 @@ public class CloudDriveUIService implements Startable {
 
   protected final UIExtensionManager uiExtensions;
 
+  protected final Set<Class<?>>      defaultUIExtensions        = new HashSet<Class<?>>();
+
   protected final List<String>       VIEWS                      = Arrays.asList("List/List",
                                                                                 "Admin/Admin",
                                                                                 "Web/Authoring",
@@ -69,20 +75,31 @@ public class CloudDriveUIService implements Startable {
     this.uiExtensions = uiExtensions;
   }
 
+  public void addPlugin(ComponentPlugin plugin) {
+    if (plugin instanceof CloudDriveUIExtension) {
+      // default menu action to initialize
+      CloudDriveUIExtension ext = (CloudDriveUIExtension) plugin;
+      defaultUIExtensions.addAll(ext.getDefaultExtensions());
+    } else {
+      LOG.warn("Cannot recognize component plugin for " + plugin.getName() + ": type " + plugin.getClass()
+          + " not supported");
+    }
+  }
+
   protected void prepareViews() throws Exception {
-    // find all Cloud Drive actions configured for action bar
+    // find all Cloud Drive actions configured by default for action bar
     List<String> cdActions = new ArrayList<String>();
     for (UIExtension ext : uiExtensions.getUIExtensions(ManageViewService.EXTENSION_TYPE)) {
-      // Dedicated to drive type components not enabled by default
-      /*
-       * if (ConnectGoogleDriveActionComponent.class.isAssignableFrom(ext.getComponent())) {
-       * cdActions.add(ext.getName());
-       * } else if (ConnectBoxActionComponent.class.isAssignableFrom(ext.getComponent())) {
-       * cdActions.add(ext.getName());
-       * } else
-       */
-      if (ShowConnectCloudDriveActionComponent.class.isAssignableFrom(ext.getComponent())) {
+      Class<? extends UIComponent> extComp = ext.getComponent();
+      if (defaultUIExtensions.contains(extComp)) {
         cdActions.add(ext.getName());
+      } else {
+        for (Class<?> extClass : defaultUIExtensions) {
+          if (extClass.isAssignableFrom(extComp)) {
+            cdActions.add(ext.getName());
+            break;
+          }
+        }
       }
     }
 
