@@ -371,15 +371,6 @@
     color: #999999;
     font-size: 10px;
 }
-
-.UIPresentationContainer ul, .UIPresentationContainer ol, .UIPresentationContainer dl {
-    padding: 0 40px;
-    margin-top: 15px;
-}
-.UIPresentationContainer ul li {
-    list-style-type: disc !important;
-}
-
 .UISingleContentViewerPortlet .UIContainerConfigOptions {
   border: 1px solid #b7b7b7;
 }
