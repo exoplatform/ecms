@@ -117,8 +117,8 @@
   <UICLVConfigOrderTypeFormSelectBox>
     <label>
       <option>
-        <OrderDesc>降冪</OrderDesc>
-        <OrderAsc>升冪</OrderAsc>
+        <OrderDesc>Descendant</OrderDesc>
+        <OrderAsc>Ascendant</OrderAsc>
       </option>
     </label>
   </UICLVConfigOrderTypeFormSelectBox>
