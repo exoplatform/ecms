@@ -1,4 +1,4 @@
-(function(gj, base, bts_popover) {
+(function(gj, base) {
 	// WCMUtils
 	function WCMUtils(){
 		this.cmdEcmBundle = "/bundle/";
@@ -934,4 +934,4 @@
 		CKEditor : eXo.ecm.CKEditor,
 		SELocalization : eXo.ecm.SELocalization
 	};
-})(gj, base, bts_popover);
+})(gj, base);

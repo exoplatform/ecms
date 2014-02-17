@@ -24,6 +24,10 @@
       <timeUnitCaption>sekunder</timeUnitCaption>
       <similar>Sidene der det samme innholdet vises</similar>
       <editor>Redaktør</editor>
+      <date>Dato</date>
+      <relevancy>Relevance</relevancy>
+      <title>Tittel</title>
+      <sortBy>Sort By:</sortBy>
     </label>
     <action>
       <edit>Rediger</edit>
@@ -39,7 +43,7 @@
       <itemsPerPageSelector>Elementer per side</itemsPerPageSelector>
       <searchFormSelector>Søkeskjema mal</searchFormSelector>
       <searchResultSelector>Søkeresultat mal</searchResultSelector>
-      <searchPaginatorSelector>Search Paginator Template</searchPaginatorSelector>
+      <searchPaginatorSelector>Søk paginatormal</searchPaginatorSelector>
       <searchPageLayoutSelector>Søkeside Layout mal</searchPageLayoutSelector>
       <searchResultBasePathInputSetAction>Basis sti</searchResultBasePathInputSetAction>
       <pageMode>Sidemodus</pageMode>
@@ -68,7 +72,7 @@
   </UISearchForm>
   <UIPaginatorDefault>
     <label>
-      <next>Next</next>
+      <next>Neste</next>
       <previous>Forrige</previous>
       <more>Mer</more>
     </label>

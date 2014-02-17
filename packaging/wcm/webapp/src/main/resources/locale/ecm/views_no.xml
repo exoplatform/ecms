@@ -7,10 +7,10 @@
         <en>Engelsk</en>
         <fr>Fransk</fr>
         <ru>Russisk</ru>
-        <vi>Vietnamese</vi>
+        <vi>Vietnamesisk</vi>
         <nl>Nederlandsk</nl>
         <de>Tysk</de>
-        <uk>Ukrainian</uk>
+        <uk>Ukrainsk</uk>
         <ar>Arabisk</ar>
       </languages>
     </label>
@@ -24,12 +24,12 @@
       <label>
         <postedBy>Siste kommentar postet av</postedBy>
         <at>hos</at>
-        <comments>Comment(s)</comments>
+        <comments>Kommentar(er)</comments>
         <show-comments>Vis kommentarer</show-comments>
         <hide-comments>Skjul kommentarer</hide-comments>
         <comment-by>Kommentert av</comment-by>
-        <email>Email</email>
-        <site>Site</site>
+        <email>E-post</email>
+        <site>Nettsted</site>
       </label>
     </view>
   </Comment>
@@ -40,12 +40,12 @@
   <File>
     <view>
       <label>
-        <not-viewable>This content is not viewable</not-viewable>
+        <not-viewable>Dette innholdet er ikke synlig</not-viewable>
         <using-webDAV>eller bruker WebDAV til å få tilgang til innholdet</using-webDAV>
         <file-size-too-big>Innholdet i filen er for stor. Du bør laste den ned og åpne den i klienten.</file-size-too-big>
         <webDAV>WebDAVvisning</webDAV>
-        <download>Download</download>
-        <htmlview>View as HTML</htmlview>
+        <download>Last ned</download>
+        <htmlview>Vis som HTML</htmlview>
         <plaintextview>Vis som ren tekst</plaintextview>
       </label>
     </view>
@@ -58,11 +58,11 @@
     <view>
       <label>
         <from>Fra:</from>
-        <to>To:</to>
+        <to>Til:</to>
         <cc>Cc:</cc>
-        <date>Date:</date>
-        <subject>Subject:</subject>
-        <attachment>Attachments:</attachment>
+        <date>Dato:</date>
+        <subject>Emne:</subject>
+        <attachment>Vedlegg:</attachment>
       </label>
     </view>
   </Mail>
@@ -72,8 +72,8 @@
   <Vote>
     <view>
       <label>
-        <avg-rating>Avg. Rating</avg-rating>
-        <subscription>Votes</subscription>
+        <avg-rating>Gjennomsnittlig vurdering</avg-rating>
+        <subscription>Stemmer</subscription>
       </label>
     </view>
   </Vote>
@@ -85,10 +85,10 @@
       <label>
         <name>Navn</name>
         <versionable>Versjonerbar</versionable>
-        <exo_owner>Owner</exo_owner>
+        <exo_owner>Eier</exo_owner>
         <exo_dateCreated>Opprettet dato</exo_dateCreated>
-        <exo_dateModified>Date Modified</exo_dateModified>
-        <auditing>Auditing</auditing>
+        <exo_dateModified>Endringsdato</exo_dateModified>
+        <auditing>Revisjonering</auditing>
       </label>
     </view>
   </ListView>
@@ -99,8 +99,8 @@
   <AddMetadata>
     <view>
       <label>
-        <action-name>Action Name</action-name>
-        <lifecycle>Lifecycle</lifecycle>
+        <action-name>Navn på handlingen</action-name>
+        <lifecycle>Livssyklus</lifecycle>
         <metadata>Metadata</metadata>
         <description>Beskrivelse</description>
       </label>
@@ -113,8 +113,8 @@
   <AutoVersioning>
     <view>
       <label>
-        <action-name>Action Name</action-name>
-        <lifecycle>Lifecycle</lifecycle>
+        <action-name>Navn på handlingen</action-name>
+        <lifecycle>Livssyklus</lifecycle>
         <description>Beskrivelse</description>
       </label>
     </view>
@@ -126,7 +126,7 @@
     <view>
       <label>
         <action-name>Navn</action-name>
-        <lifecycle>Lifecycle</lifecycle>
+        <lifecycle>Livssyklus</lifecycle>
         <description>Beskrivelse</description>
       </label>
     </view>
@@ -138,21 +138,22 @@
     <view>
       <label>
         <not-avaliable>N/A</not-avaliable>
+        <core-elements>Core Elements</core-elements>
         <title>Tittel</title>
-        <creator>Creator</creator>
-        <subject>Subject</subject>
+        <creator>Skaperen</creator>
+        <subject>Emne</subject>
         <source>Kilde</source>
-        <contributor>Contributor</contributor>
-        <resource-type>Resource Type</resource-type>
+        <contributor>Bidragsyter</contributor>
+        <resource-type>Ressurstype</resource-type>
         <date>Dato</date>
-        <publisher>Publisher</publisher>
+        <publisher>Utgiver</publisher>
         <description>Beskrivelse</description>
-        <rights>Rights</rights>
+        <rights>Rettigheter</rights>
         <relation>Forbindelse</relation>
         <format>Format</format>
-        <coverage>Coverage</coverage>
-        <identifier>Identifier</identifier>
-        <languages>Languages</languages>
+        <coverage>Dekning</coverage>
+        <identifier>Identifikator</identifier>
+        <languages>Språk</languages>
       </label>
       <action>
         <add-edit>Legg til/Rediger</add-edit>
@@ -168,10 +169,10 @@
   <ScriptAction>
     <view>
       <label> 
-        <isDeep>Is Deep</isDeep>
-        <nodetypes>Node types</nodetypes>
-        <affectedNodeTypeNames>Affected node types</affectedNodeTypeNames>
-        <nodeTypeName>Node type names</nodeTypeName>
+        <isDeep>Er dypt</isDeep>
+        <nodetypes>Nodetyper</nodetypes>
+        <affectedNodeTypeNames>Berørte nodetyper</affectedNodeTypeNames>
+        <nodeTypeName>Navn på nodetype</nodeTypeName>
       </label> 
     </view>
   </ScriptAction>
@@ -179,10 +180,10 @@
   <AddMetadata>
     <view>
       <label>
-        <isDeep>Is Deep</isDeep>
+        <isDeep>Er dypt</isDeep>
         <nodetypes>Nodetyper</nodetypes>
-        <affectedNodeTypeNames>Affected Node Types</affectedNodeTypeNames>
-        <nodeTypeName>Node Type Names</nodeTypeName>
+        <affectedNodeTypeNames>Berørte nodetyper</affectedNodeTypeNames>
+        <nodeTypeName>Navn på nodetype</nodeTypeName>
       </label> 
     </view>
   </AddMetadata>
@@ -190,10 +191,10 @@
   <EnableVersioning>
     <view>
       <label>
-        <isDeep>Is Deep</isDeep>
+        <isDeep>Er dypt</isDeep>
         <nodetypes>Nodetyper</nodetypes> 
-        <affectedNodeTypeNames>Affected Node Types</affectedNodeTypeNames>
-        <nodeTypeName>Node Type Names</nodeTypeName>
+        <affectedNodeTypeNames>Berørte nodetyper</affectedNodeTypeNames>
+        <nodeTypeName>Navn på nodetype</nodeTypeName>
       </label> 
     </view>
   </EnableVersioning>
@@ -201,10 +202,10 @@
   <AutoVersioning>
     <view>
       <label>
-        <isDeep>Is Deep</isDeep>
+        <isDeep>Er dypt</isDeep>
         <nodetypes>Nodetyper</nodetypes>
-        <affectedNodeTypeNames>Affected Node Types</affectedNodeTypeNames>
-        <nodeTypeName>Node Type Names</nodeTypeName>
+        <affectedNodeTypeNames>Berørte nodetyper</affectedNodeTypeNames>
+        <nodeTypeName>Navn på nodetype</nodeTypeName>
       </label> 
     </view>
   </AutoVersioning>
@@ -212,13 +213,13 @@
    <AccessibleMedia>
     <view>
       <label>
-      <Play-audio-description-of-this-video>Audio description</Play-audio-description-of-this-video>
-      <Read-more>Read more</Read-more>
-      <Read-less>Read less</Read-less>
-      <Switch-back-to-original-video>Original video</Switch-back-to-original-video>
+      <Play-audio-description-of-this-video>Lydbeskrivelse</Play-audio-description-of-this-video>
+      <Read-more>Les mer</Read-more>
+      <Read-less>Les mindre</Read-less>
+      <Switch-back-to-original-video>Opprinnelige video</Switch-back-to-original-video>
       </label>
       <tooltip>
-      <A-second-media-file-is-available-as-audio-description>A second media file is available as an audio description</A-second-media-file-is-available-as-audio-description>
+      <A-second-media-file-is-available-as-audio-description>En annen mediefil er tilgjengelig som en lyd beskrivelse</A-second-media-file-is-available-as-audio-description>
       </tooltip>
     </view>
   </AccessibleMedia>

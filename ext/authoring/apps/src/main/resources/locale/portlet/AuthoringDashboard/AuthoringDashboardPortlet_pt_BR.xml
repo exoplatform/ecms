@@ -8,6 +8,7 @@
       <waitingapproval>Esperando Por Minha Aprovação</waitingapproval>
       <approve>Aprovar</approve>
       <publishedtomorrow>Para Ser Publicado Amanhã</publishedtomorrow>
+      <refresh>#{word.refresh}</refresh>
     </label>
   </UIDashboardForm>
 </bundle>

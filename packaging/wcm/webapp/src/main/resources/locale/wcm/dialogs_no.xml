@@ -27,7 +27,7 @@
         <cssFile>default.css</cssFile>
         <jsFile>default.js</jsFile>
         <Advanced>Avansert</Advanced>
-        <Summary>Summary</Summary>
+        <Summary>Sammendrag</Summary>
         <name>#{word.name}</name>
         <title>Tittel</title>
         <ContentCSS>CSS Data</ContentCSS>
@@ -37,13 +37,13 @@
         <WebContentHtml>Hovedinnhold</WebContentHtml>
         <Illustration>Illustrasjon</Illustration>
         <hintIllustration>Du kan angi et bilde som skal vises når web-innholdet vises i listen. Du kan også legge til et sammendrag til dette bildet.</hintIllustration>
-        <confirm-delete>Are you sure you want to delete this illustration?</confirm-delete>
-        <illustrationImage>Illustration Image</illustrationImage>
-        <imageMimeType>Image Type</imageMimeType>
+        <confirm-delete>Er du sikker på at du vil slette denne illustrasjonen?</confirm-delete>
+        <illustrationImage>Illustrasjonsbilde</illustrationImage>
+        <imageMimeType>Bildetype</imageMimeType>
         <image>Last opp bilde</image>
         <imageWidth>Bildebredde</imageWidth>
         <imageHeight>Bildehøyde</imageHeight>
-        <Synchronize>Synchronize with CSS and HTML</Synchronize>
+        <Synchronize>Synkronisere med CSS og HTML</Synchronize>
       </label>
     </dialog>
   </WebContent>
@@ -83,10 +83,10 @@
   <SiteMetadata>
     <dialog>
       <label>
-        <title>Site Title</title>
-        <description>Site Description</description>
-        <keywords>Site Keywords</keywords>
-        <robots>Search Engine Behavior</robots>
+        <title>Nettstedets tittel</title>
+        <description>Nettstedsbeskrivelse</description>
+        <keywords>Nøkkelord for nettstedet</keywords>
+        <robots>Søkemotoroppsett</robots>
       </label>
     </dialog>
   </SiteMetadata>
