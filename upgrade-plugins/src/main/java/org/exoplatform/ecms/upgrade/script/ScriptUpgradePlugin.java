@@ -176,7 +176,7 @@ public class ScriptUpgradePlugin extends UpgradeProductPlugin {
     
     removeOldScripts(scriptUpdateMap);
     changeScriptNameInActionNode(scriptUpdateMap);
-    addDcDescription(oldUnrenamedScripts);
+    addDcDescription();
     changeScriptNameInActionDataNode(scriptUpdateMap);
   }
 
@@ -282,7 +282,7 @@ public class ScriptUpgradePlugin extends UpgradeProductPlugin {
   /**
    * Adds dc:description to jcr:content of old un-renamed scripts
    */
-  private void addDcDescription(List<String> oldUnrenamedScripts) {
+  private void addDcDescription() {
     SessionProvider sProvider = null;
     try {
       if (LOG.isInfoEnabled()) {
@@ -295,19 +295,17 @@ public class ScriptUpgradePlugin extends UpgradeProductPlugin {
       for (Node actionScript : actionScripts) {
         String scriptName = actionScript.getName();
         try {
-          if (oldUnrenamedScripts.contains(scriptName)) {
-            if (LOG.isInfoEnabled()) {
-              LOG.info("Adding dc:description for " + scriptName);
+          if (LOG.isInfoEnabled()) {
+            LOG.info("Adding dc:description for " + scriptName);
+          }
+          Node content = actionScript.getNode(NodetypeConstant.JCR_CONTENT);
+          if (!content.hasProperty(NodetypeConstant.DC_DESCRIPTION)) {
+            if (content.canAddMixin(NodetypeConstant.DC_ELEMENT_SET)) {
+              content.addMixin(NodetypeConstant.DC_ELEMENT_SET);
             }
-            Node content = actionScript.getNode(NodetypeConstant.JCR_CONTENT);
-            if (!content.hasProperty(NodetypeConstant.DC_DESCRIPTION)) {
-              if (content.canAddMixin(NodetypeConstant.DC_ELEMENT_SET)) {
-                content.addMixin(NodetypeConstant.DC_ELEMENT_SET);
-              }
-              String description = scriptName.indexOf(".") > -1 ? 
-                                   scriptName.substring(0, scriptName.indexOf(".")) : scriptName;
-              content.setProperty(NodetypeConstant.DC_DESCRIPTION, new String[]{description});
-            }
+            String description = scriptName.indexOf(".") > -1 ? 
+                                 scriptName.substring(0, scriptName.indexOf(".")) : scriptName;
+            content.setProperty(NodetypeConstant.DC_DESCRIPTION, new String[]{description});
           }
         } catch (Exception e) {
           if (LOG.isErrorEnabled()) {
