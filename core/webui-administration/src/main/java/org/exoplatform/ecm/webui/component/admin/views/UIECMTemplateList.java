@@ -124,8 +124,7 @@ public class UIECMTemplateList extends UIPagingGrid {
     public void execute(Event<UIECMTemplateList> event) throws Exception {
       UIECMTemplateList uiECMTemp = event.getSource() ;
       ManageViewService vservice = uiECMTemp.getApplicationComponent(ManageViewService.class) ;
-      UIViewManager uiViewManager = uiECMTemp.getAncestorOfType(UIViewManager.class) ;
-      uiViewManager.setRenderedChild(UIECMTemplateList.ST_ECMTemp) ;
+      uiECMTemp.setRenderSibling(UIECMTemplateList.class);
       String templatePath = event.getRequestContext().getRequestParameter(OBJECTID) ;
       String templateName = templatePath.substring(templatePath.lastIndexOf("/") + 1) ;
       if (uiECMTemp.getApplicationComponent(ManageDriveService.class).isUsedView(templateName)) {
