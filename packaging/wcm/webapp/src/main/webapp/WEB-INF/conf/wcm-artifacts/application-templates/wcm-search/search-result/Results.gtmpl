@@ -120,13 +120,22 @@
      %>
      <div class="resultBox clearfix">
        <a href="$itemUrl&urlSearch=$requestURL">
+       <%if(resultType.equals("Document")){%>
+         <a href="$itemUrl&urlSearch=$requestURL">
+       <%}else{%>
+       <a href="$itemUrl">
+       <%}%>
          <span class="avatar pull-left ">
            <i class="<%=Utils.getNodeTypeIcon(realNode, "uiIcon64x64")%>"></i>
          </span>
        </a>
        <div class="content">
           <h6>
-             <a href="$itemUrl&urlSearch=$requestURL">$itemName</a>
+             <%if(resultType.equals("Document")){%>
+               <a href="$itemUrl&urlSearch=$requestURL">$itemName</a>
+             <%}else{%>
+               <a href="$itemUrl">$itemName</a>
+             <%}%>
           </h6>
           <p class="excerpt">$itemExcerpt</p>
           <div class="detail">$detail</div>
