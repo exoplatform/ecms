@@ -88,6 +88,11 @@
     margin-top: 15px;		
 }
 
+.cke_show_borders ul li { 
+    list-style-type: disc;
+}
+
+
 .UISiteAdminToolBar {
 	height: auto;
 	padding-right: 20px;
