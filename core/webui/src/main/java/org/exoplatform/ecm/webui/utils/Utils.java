@@ -39,6 +39,7 @@ import javax.jcr.Node;
 import javax.jcr.NodeIterator;
 import javax.jcr.PathNotFoundException;
 import javax.jcr.RepositoryException;
+import javax.jcr.Value;
 import javax.jcr.nodetype.NodeDefinition;
 import javax.jcr.nodetype.NodeType;
 import javax.jcr.nodetype.NodeTypeManager;
@@ -862,7 +863,10 @@ public class Utils {
       title = node.getProperty("exo:title").getValue().getString();
     } catch (PathNotFoundException pnf1) {
       try {
-        title = node.getNode("jcr:content").getProperty("dc:title").getValues()[0].getString();
+        Value[] values = node.getNode("jcr:content").getProperty("dc:title").getValues();
+        if(values.length != 0){
+          title = values[0].getString();
+        }
       } catch (PathNotFoundException pnf2) {
         title = null;
       }
