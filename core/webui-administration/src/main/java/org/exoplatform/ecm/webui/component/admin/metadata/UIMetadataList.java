@@ -16,14 +16,6 @@
  */
 package org.exoplatform.ecm.webui.component.admin.metadata;
 
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.List;
-
-import javax.jcr.PathNotFoundException;
-import javax.jcr.nodetype.NodeType;
-import javax.jcr.nodetype.PropertyDefinition;
-
 import org.exoplatform.commons.utils.LazyPageList;
 import org.exoplatform.commons.utils.ListAccess;
 import org.exoplatform.commons.utils.ListAccessImpl;
@@ -36,6 +28,13 @@ import org.exoplatform.webui.config.annotation.EventConfig;
 import org.exoplatform.webui.core.UIApplication;
 import org.exoplatform.webui.event.Event;
 import org.exoplatform.webui.event.EventListener;
+
+import javax.jcr.PathNotFoundException;
+import javax.jcr.nodetype.NodeType;
+import javax.jcr.nodetype.PropertyDefinition;
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.List;
 
 /**
  * Created by The eXo Platform SARL
@@ -132,6 +131,8 @@ public class UIMetadataList extends UIPagingGridDecorator {
       UIApplication uiApp = uiMetaList.getAncestorOfType(UIApplication.class);
       try {
         metadataService.removeMetadata(metadataName);
+        org.exoplatform.services.cms.impl.Utils.addEditedConfiguredData(metadataName, "ContentTemplateList",
+          "EditedConfiguredTemplateList", true);
       } catch(PathNotFoundException ex) {
       	uiApp.addMessage(new ApplicationMessage("UIMetadataList.msg.path-not-found-exception", null, ApplicationMessage.WARNING));
         return;

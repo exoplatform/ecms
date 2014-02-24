@@ -16,18 +16,6 @@
  */
 package org.exoplatform.services.cms.taxonomy.impl;
 
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.Iterator;
-import java.util.List;
-import java.util.Map;
-import java.util.Set;
-
-import javax.jcr.Node;
-import javax.jcr.Session;
-import javax.jcr.nodetype.NodeType;
-import javax.jcr.nodetype.PropertyDefinition;
-
 import org.apache.commons.lang.StringUtils;
 import org.exoplatform.container.component.BaseComponentPlugin;
 import org.exoplatform.container.xml.InitParams;
@@ -53,6 +41,17 @@ import org.exoplatform.services.jcr.ext.hierarchy.NodeHierarchyCreator;
 import org.exoplatform.services.log.ExoLogger;
 import org.exoplatform.services.log.Log;
 import org.exoplatform.services.security.IdentityConstants;
+
+import javax.jcr.Node;
+import javax.jcr.Session;
+import javax.jcr.nodetype.NodeType;
+import javax.jcr.nodetype.PropertyDefinition;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Iterator;
+import java.util.List;
+import java.util.Map;
+import java.util.Set;
 
 /**
  * Created by The eXo Platform SARL Author : Ly Dinh Quang
@@ -162,6 +161,8 @@ public class TaxonomyPlugin extends BaseComponentPlugin {
         setWorkspace(dmsRepoConfig.getSystemWorkspace());
     }
     Session session = manageableRepository.getSystemSession(getWorkspace());
+    if(Utils.getAllEditedConfiguredData(
+      "TaxonomyTree", "EditedConfiguredTaxonomyTree", true).contains(treeName)) return;
     Node taxonomyStorageNode = (Node) session.getItem(path);
     if (taxonomyStorageNode.hasNode(treeName)) {
       session.logout();
