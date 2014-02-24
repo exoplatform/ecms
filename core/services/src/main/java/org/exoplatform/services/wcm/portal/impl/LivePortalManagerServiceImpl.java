@@ -24,6 +24,7 @@ import java.util.concurrent.ConcurrentHashMap;
 
 import javax.jcr.Node;
 import javax.jcr.NodeIterator;
+import javax.jcr.PathNotFoundException;
 import javax.jcr.Session;
 import javax.jcr.query.Query;
 import javax.jcr.query.QueryResult;
@@ -152,7 +153,11 @@ public class LivePortalManagerServiceImpl implements LivePortalManagerService, S
                                         final String repository) throws Exception {
     Node portalsStorage = getLivePortalsStorage(sessionProvider);
     String sharePortalName = wcmConfigService.getSharedPortalName();
-    return portalsStorage.getNode(sharePortalName);
+    try {
+      return portalsStorage.getNode(sharePortalName);
+    } catch (PathNotFoundException e) {
+      return null;
+    }
   }
 
   private Node getLivePortalsStorage(final SessionProvider sessionProvider) throws Exception {

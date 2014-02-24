@@ -188,7 +188,18 @@ public class AuthoringPublicationPlugin extends  WebpagePublicationPlugin {
                                   userId,
                                   new GregorianCalendar(),
                                   AuthoringPublicationConstant.CHANGE_TO_UNPUBLISHED);
-      VersionData versionData = revisionsMap.get(selectedRevision.getUUID());
+      
+      
+      VersionData selectedVersionData = revisionsMap.get(selectedRevision.getUUID());
+      if (selectedVersionData != null) {
+        selectedVersionData.setAuthor(userId);
+        selectedVersionData.setState(PublicationDefaultStates.UNPUBLISHED);
+      } else {
+        selectedVersionData = new VersionData(selectedRevision.getUUID(),
+                                      PublicationDefaultStates.UNPUBLISHED,
+                                      userId);
+      }
+      VersionData versionData = revisionsMap.get(node.getUUID());
       if (versionData != null) {
         versionData.setAuthor(userId);
         versionData.setState(PublicationDefaultStates.UNPUBLISHED);
@@ -197,11 +208,23 @@ public class AuthoringPublicationPlugin extends  WebpagePublicationPlugin {
                                       PublicationDefaultStates.UNPUBLISHED,
                                       userId);
       }
-      revisionsMap.put(selectedRevision.getUUID(), versionData);
+      revisionsMap.put(node.getUUID(), versionData);
+      revisionsMap.put(selectedRevision.getUUID(), selectedVersionData);
+      
       addLog(node, versionLog);
       // change base version to unpublished state
       node.setProperty(AuthoringPublicationConstant.CURRENT_STATE,
                        PublicationDefaultStates.UNPUBLISHED);
+      Value value = valueFactory.createValue(selectedRevision);
+      Value liveRevision = null;
+      if (node.hasProperty(AuthoringPublicationConstant.LIVE_REVISION_PROP)) {
+        liveRevision = node.getProperty(AuthoringPublicationConstant.LIVE_REVISION_PROP)
+                               .getValue();
+      }
+      if (liveRevision != null && value.getString().equals(liveRevision.getString())) {
+        node.setProperty(AuthoringPublicationConstant.LIVE_REVISION_PROP,
+                         valueFactory.createValue(""));
+      }
       addRevisionData(node, revisionsMap.values());
     } else if (PublicationDefaultStates.OBSOLETE.equals(newState)) {
       node.setProperty(AuthoringPublicationConstant.CURRENT_STATE, newState);

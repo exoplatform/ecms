@@ -761,7 +761,25 @@ public class Utils {
     }
     return false;
   }
-
+  /**
+   * get Last Modify date of jcr:content of a node
+   * 
+   * @param node
+   * @return Last Modify date of jcr:content of a node
+   * @throws Exception
+   */
+  public static String getJcrContentLastModified(Node node) throws Exception {
+    String lastModified = "";
+    if(node.hasProperty("jcr:content/jcr:lastModified")){
+      lastModified = node.getProperty("jcr:content/jcr:lastModified").getString();
+    }else if(node.hasProperty("jcr:content/exo:dateModified")){
+      lastModified =node.getProperty("jcr:content/exo:dateModified").getString();
+    }else if(node.hasProperty("jcr:content/exo:lastModifiedDate")){
+      lastModified =node.getProperty("jcr:content/exo:lastModifiedDate").getString();
+    }
+    return lastModified;
+  }
+  
   /**
    * gets the file size in friendly format
    * @param node the file node

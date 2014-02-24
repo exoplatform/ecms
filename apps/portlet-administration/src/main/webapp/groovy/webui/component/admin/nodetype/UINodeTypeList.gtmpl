@@ -21,7 +21,7 @@
   	    <th><%=_ctx.appRes("UINodeTypeList.header.nodeType")%></th>
   	    <th><%=_ctx.appRes("UINodeTypeList.header.mixinType")%></th>
   	    <th><%=_ctx.appRes("UINodeTypeList.header.orderable")%></th>
-  	    <th class="center span1"><%=_ctx.appRes("UINodeTypeList.header.action")%></th>
+  	    <th class="center span2"><%=_ctx.appRes("UINodeTypeList.header.action")%></th>
       </tr>
     </thead>
     <tbody>
@@ -102,7 +102,6 @@
                 	<div class="text">$booleanText</div>
                 </div>
               </td>
-              <td align="center"><div class="text"><%=_ctx.appRes("UINodeTypeList.info.description")%></div></td>
               <td class="center">                                
                 <a class="actionIcon" onclick="<%=uicomponent.event("Edit", node.getName())%>" rel="tooltip" data-placement="bottom" title="<%=_ctx.appRes("UINodeTypeList.tooltip.Edit")%>" ><i class="uiIconEdit"></i></a>
                 <a class="actionIcon"  onclick="<%=uicomponent.event("Delete", node.getName())%>" rel="tooltip" data-placement="bottom" title="<%=_ctx.appRes("UINodeTypeList.tooltip.Delete")%>"><i class="uiIconDelete"></i></a>

@@ -697,9 +697,6 @@ public class UICLVPresentation extends UIContainer {
    */
   public String addQuickEditDiv(String cssClass, Node viewNode) throws Exception {
     StringBuffer sb = new StringBuffer();
-    String contentEditLink = getEditLink(viewNode, true, false);
-    String contentDeleteLink = event("DeleteContent", NodeLocation.getExpressionByNode(viewNode));
-    String fastPublishLink = event("FastPublish", NodeLocation.getExpressionByNode(viewNode));
     String id = this.getClass().getSimpleName() + System.currentTimeMillis();
     PortletRequestContext portletRequestContext = WebuiRequestContext.getCurrentInstance();
     sb.append("<div id=\""+id+"\" class=\"" + cssClass + " \">");
@@ -720,6 +717,7 @@ public class UICLVPresentation extends UIContainer {
           }
         }
         if (org.exoplatform.wcm.webui.utils.Utils.isShowFastPublish(viewNode)) {
+          String fastPublishLink = event("FastPublish", NodeLocation.getExpressionByNode(viewNode));
           String strFastPublishBundle = "Publish";
           try {
             strFastPublishBundle = portletRequestContext.getApplicationResourceBundle()
@@ -733,6 +731,7 @@ public class UICLVPresentation extends UIContainer {
           sb.append("            <i class=\"uiIconEcmsPublish\" ></i>");
           sb.append("          </a>");
         }
+        String contentEditLink = getEditLink(viewNode, true, false);
         sb.append("          <a class=\"btn\" onclick = 'eXo.ecm.CLV.addURL(this)' href=\"" + contentEditLink + "\" rel=\"tooltip\" data-placement=\"bottom\" title=\"" + strEditBundle + "\">");
         sb.append("            <i class=\"uiIconEdit\"></i>");
         sb.append("          </a>");
@@ -743,6 +742,7 @@ public class UICLVPresentation extends UIContainer {
       }
       
       if (Utils.isShowDelete(viewNode)) {
+        String contentDeleteLink = event("DeleteContent", NodeLocation.getExpressionByNode(viewNode));
         String strDeleteBundle = "Delete";
         try {
           strDeleteBundle = portletRequestContext.getApplicationResourceBundle()
@@ -787,8 +787,14 @@ public class UICLVPresentation extends UIContainer {
     String className = cssClass + " " + this.getAncestorOfType(UICLVPortlet.class).getName();
     String hoverClass = Utils.isShowQuickEdit() ? " containerHoverClassInner" : "";
     JavascriptManager jsManager = portletRequestContext.getJavascriptManager();
-    jsManager.getRequireJS().addScripts("gj('#"+id+"').mouseenter( function() {eXo.ecm.WCMUtils.changeStyleClass('"+id+"','"+className+" "+hoverClass+"');});");
-    jsManager.getRequireJS().addScripts("gj('#"+id+"').mouseleave( function() {eXo.ecm.WCMUtils.changeStyleClass('"+id+"','"+className+"');});");
+    jsManager.getRequireJS()
+             .require("SHARED/jquery", "gj")
+             .addScripts("gj('#" + id
+                 + "').mouseenter( function() {eXo.ecm.WCMUtils.changeStyleClass('" + id + "','"
+                 + className + " " + hoverClass + "');});")
+             .addScripts("gj('#" + id
+                 + "').mouseleave( function() {eXo.ecm.WCMUtils.changeStyleClass('" + id + "',"
+                 +         "'" + className + "');});");
     return sb.toString();
   }
 
