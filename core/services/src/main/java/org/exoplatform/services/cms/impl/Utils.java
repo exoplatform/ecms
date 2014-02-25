@@ -325,7 +325,7 @@ public class Utils {
         }
       }
     }
-    if (title == null) {
+    if ((title==null) || ((title!=null) && (title.trim().length()==0))) {
       if (node.isNodeType("nt:frozenNode")) {
         String uuid = node.getProperty("jcr:frozenUuid").getString();
         Node originalNode = node.getSession().getNodeByUUID(uuid);
