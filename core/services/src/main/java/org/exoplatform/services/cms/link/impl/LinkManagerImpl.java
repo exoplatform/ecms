@@ -106,9 +106,11 @@ public class LinkManagerImpl implements LinkManager {
   public Node createLink(Node parent, String linkType, Node target, String linkName, String linkTitle)
       throws RepositoryException {
     if (!target.isNodeType(SYMLINK)) {
+      boolean targetEdited = false;
       if (target.canAddMixin("mix:referenceable")) {
         target.addMixin("mix:referenceable");
         target.getSession().save();
+        targetEdited = true;
       }
       if (linkType == null || linkType.trim().length() == 0)
         linkType = SYMLINK;
@@ -135,7 +137,7 @@ public class LinkManagerImpl implements LinkManager {
       try {
         String remoteUser = WCMCoreUtils.getRemoteUser();
         if (remoteUser != null) {
-          if (Utils.isDocument(target)) {
+          if (Utils.isDocument(target) && targetEdited) {
             listenerService.broadcast(CmsService.POST_EDIT_CONTENT_EVENT, null, target);
           }
         }
