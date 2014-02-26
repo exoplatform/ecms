@@ -16,6 +16,7 @@
  */
 package org.exoplatform.ecm.webui.component.explorer;
 
+import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Set;
@@ -30,6 +31,8 @@ import javax.jcr.nodetype.NodeTypeIterator;
 import javax.jcr.nodetype.NodeTypeManager;
 import javax.jcr.query.Query;
 import javax.jcr.query.Row;
+
+import org.apache.commons.lang.StringUtils;
 import org.exoplatform.ecm.jcr.model.Preference;
 import org.exoplatform.ecm.webui.utils.Utils;
 import org.exoplatform.services.cms.documents.DocumentTypeService;
@@ -330,7 +333,7 @@ public class DocumentProviderUtils {
     @Override
     public NodeLinkAware createData(Node node, Row row) {
       try {
-        return (NodeLinkAware)parent.getNode(node.getName());
+    	return (NodeLinkAware)parent.getNode(StringUtils.substringAfterLast(node.getPath(), "/"));
       } catch (PathNotFoundException e) {
         if (LOG.isWarnEnabled()) {
           LOG.warn("Can not create NodeLinkAware ", e.getMessage());
