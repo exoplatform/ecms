@@ -31,6 +31,8 @@ import org.exoplatform.services.log.ExoLogger;
 import org.exoplatform.services.log.Log;
 import org.exoplatform.services.wcm.utils.WCMCoreUtils;
 
+import javax.jcr.nodetype.NoSuchNodeTypeException;
+
 /**
  * Created by The eXo Platform SAS
  * Author : eXoPlatform
@@ -68,11 +70,12 @@ public class ActionTypeUpgradePlugin extends UpgradeProductPlugin {
     ExtendedNodeTypeManager nodeTypeManager =   WCMCoreUtils.getRepository().getNodeTypeManager();
     for (String actionType : actionTypes) {
       try {
+        NodeTypeValue nodeTypeValue = nodeTypeManager.getNodeTypeValue(actionType);
+        List<PropertyDefinitionValue> propValues = nodeTypeValue.getDeclaredPropertyDefinitionValues();
+        // Start the migration for the specific action node type
         if (log.isInfoEnabled()) {
           log.info("Migrating " + actionType + ".............");
         }
-        NodeTypeValue nodeTypeValue = nodeTypeManager.getNodeTypeValue(actionType);
-        List<PropertyDefinitionValue> propValues = nodeTypeValue.getDeclaredPropertyDefinitionValues();
         for (PropertyDefinitionValue propValue : propValues) {
           if (propertySet.contains(propValue.getName())) {
             propValue.setReadOnly(false);
@@ -80,6 +83,8 @@ public class ActionTypeUpgradePlugin extends UpgradeProductPlugin {
         }
         nodeTypeValue.setDeclaredPropertyDefinitionValues(propValues);
         nodeTypeManager.registerNodeType(nodeTypeValue, ExtendedNodeTypeManager.REPLACE_IF_EXISTS);
+      } catch(NoSuchNodeTypeException e) {
+        continue;
       } catch (Exception e) {
         if (log.isErrorEnabled()) {
           log.error("An unexpected error occurs when migrating action node type: " + actionType, e);        
