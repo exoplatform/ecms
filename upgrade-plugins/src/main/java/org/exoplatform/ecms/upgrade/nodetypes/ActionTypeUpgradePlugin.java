@@ -31,6 +31,8 @@ import org.exoplatform.services.log.ExoLogger;
 import org.exoplatform.services.log.Log;
 import org.exoplatform.services.wcm.utils.WCMCoreUtils;
 
+import javax.jcr.nodetype.NoSuchNodeTypeException;
+
 /**
  * Created by The eXo Platform SAS
  * Author : eXoPlatform
@@ -80,6 +82,8 @@ public class ActionTypeUpgradePlugin extends UpgradeProductPlugin {
         }
         nodeTypeValue.setDeclaredPropertyDefinitionValues(propValues);
         nodeTypeManager.registerNodeType(nodeTypeValue, ExtendedNodeTypeManager.REPLACE_IF_EXISTS);
+      } catch(NoSuchNodeTypeException e) {
+        continue;
       } catch (Exception e) {
         if (log.isErrorEnabled()) {
           log.error("An unexpected error occurs when migrating action node type: " + actionType, e);        
