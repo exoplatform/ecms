@@ -128,9 +128,16 @@ public abstract class BaseContentSearchServiceConnector extends BaseSearchServic
    * {@inheritDoc}
    */
   protected String getDetails(ResultNode retNode, SearchContext context) throws Exception {
-    DriveData driveData = getDriveData(retNode);
+    String driveDataTitle;
     Calendar date = getDate(retNode);
-    return getDriveTitle(driveData) + fileSize(retNode) + formatDate(date);
+    DriveData driveData = getDriveData(retNode); 
+    if (driveData == null ) {
+      driveDataTitle = retNode.getSession().getWorkspace().getName();
+      driveDataTitle = Character.toUpperCase(driveDataTitle.charAt(0)) + driveDataTitle.substring(1); 
+    } else {
+      driveDataTitle =  getDriveTitle(driveData);
+    }
+    return driveDataTitle + fileSize(retNode) + formatDate(date);
   } 
   
 }
