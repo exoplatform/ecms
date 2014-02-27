@@ -75,7 +75,7 @@ public class MetadataTemplateUpgradePlugin extends UpgradeProductPlugin {
       for (String metadataType : configuredMetadataTypeSet) {
         if (!unchangedMetadataTypeSet.contains(metadataType)) {
           removedMetadata.add(metadataType);
-          log.info("Metadata " + metadataType + " will be removed.");
+          log.info("Metadata " + metadataType + " will be updated.");
         }
       }
       // remove all old metadata node type
