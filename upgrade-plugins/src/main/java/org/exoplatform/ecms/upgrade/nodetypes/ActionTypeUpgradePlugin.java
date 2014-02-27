@@ -70,11 +70,12 @@ public class ActionTypeUpgradePlugin extends UpgradeProductPlugin {
     ExtendedNodeTypeManager nodeTypeManager =   WCMCoreUtils.getRepository().getNodeTypeManager();
     for (String actionType : actionTypes) {
       try {
+        NodeTypeValue nodeTypeValue = nodeTypeManager.getNodeTypeValue(actionType);
+        List<PropertyDefinitionValue> propValues = nodeTypeValue.getDeclaredPropertyDefinitionValues();
+        // Start migration specific nodetype
         if (log.isInfoEnabled()) {
           log.info("Migrating " + actionType + ".............");
         }
-        NodeTypeValue nodeTypeValue = nodeTypeManager.getNodeTypeValue(actionType);
-        List<PropertyDefinitionValue> propValues = nodeTypeValue.getDeclaredPropertyDefinitionValues();
         for (PropertyDefinitionValue propValue : propValues) {
           if (propertySet.contains(propValue.getName())) {
             propValue.setReadOnly(false);
