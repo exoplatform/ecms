@@ -196,7 +196,7 @@ public class UIDocumentInfo extends UIBaseNodePresentation {
 
   private String                typeSort_                          = NodetypeConstant.SORT_BY_NODENAME;
 
-  private String                sortOrder_                         = Preference.BLUE_UP_ARROW;
+  private String                sortOrder_                         = Preference.BLUE_DOWN_ARROW;
 
   private String                displayCategory_;
 
@@ -1271,6 +1271,10 @@ public class UIDocumentInfo extends UIBaseNodePresentation {
 
         String prefOrder = Preference.ASCENDING_ORDER.equals(array[0].trim()) || !array[1].trim().equals(uicomp.getTypeSort())?
                            Preference.ASCENDING_ORDER : Preference.DESCENDING_ORDER;
+        if(!uicomp.getTypeSort().equals(array[1].trim()) && array[1].trim().equals("Date")){
+          order = Preference.BLUE_UP_ARROW;
+          prefOrder = Preference.DESCENDING_ORDER;  
+        }
         uicomp.setSortOrder(order);
         uicomp.setTypeSort(array[1]);
         Preference pref = uiExplorer.getPreference();
