@@ -39,6 +39,7 @@ import javax.jcr.Node;
 import javax.jcr.NodeIterator;
 import javax.jcr.PathNotFoundException;
 import javax.jcr.RepositoryException;
+import javax.jcr.Session;
 import javax.jcr.nodetype.NodeDefinition;
 import javax.jcr.nodetype.NodeType;
 import javax.jcr.nodetype.NodeTypeManager;
@@ -273,6 +274,46 @@ public class Utils {
     return false;
   }
 
+  /** check if we can restore a node */
+  public static boolean isAbleToRestore(Node currentNode) throws Exception{
+ 	  String restorePath;
+      String restoreWorkspace;
+      Node restoreLocationNode;
+      
+      if(!Utils.isInTrash(currentNode)){
+        return false;
+      }
+      
+      // return false if the node is exo:actions
+      if (Utils.EXO_ACTIONS.equals(currentNode.getName()) && Utils.isInTrash(currentNode)) {
+        return false;
+      }
+      
+      // return false if the target has been already in Trash.
+      if ( Utils.targetNodeAndLinkInTrash(currentNode) ) {
+        return false;
+      }
+      
+      if (ConversationState.getCurrent().getIdentity().getUserId().equalsIgnoreCase(WCMCoreUtils.getSuperUser())) { 
+        return true;
+      }
+
+      if ( currentNode.isNodeType(TrashService.EXO_RESTORE_LOCATION)) {
+          restorePath = currentNode.getProperty(TrashService.RESTORE_PATH).getString();
+          restoreWorkspace = currentNode.getProperty(TrashService.RESTORE_WORKSPACE).getString();
+          restorePath = restorePath.substring(0, restorePath.lastIndexOf("/"));
+      } else {
+          //Is not a deleted node, may be groovy action, hidden node,...
+          return false;
+      }
+      Session session = WCMCoreUtils.getUserSessionProvider().getSession(restoreWorkspace, WCMCoreUtils.getRepository());
+      try {
+          restoreLocationNode = (Node) session.getItem(restorePath);
+      } catch(Exception e) {
+          return false;
+      }
+      return PermissionUtil.canAddNode(restoreLocationNode);
+ }
     public static boolean isReferenceable(Node node) throws RepositoryException {
       return node.isNodeType(MIX_REFERENCEABLE);
     }
