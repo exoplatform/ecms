@@ -104,7 +104,6 @@
 .UIPDFViewerContainer .PDFViewerBar .DownLoadIcon{
 	background: url('/eXoWCMResources/skin/images/file/DownLoadIcon.gif') no-repeat left center ;
 	Line-height: 28px;
-	width: 110px;
 	cursor: pointer;
 	float: right;
 	margin-right: 8px;
