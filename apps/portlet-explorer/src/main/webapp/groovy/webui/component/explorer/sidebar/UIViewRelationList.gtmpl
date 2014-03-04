@@ -29,7 +29,7 @@
             if (relTitle!=null && !"".equals(relTitle)) relName = relTitle;
             relName = ContentReader.getXSSCompatibilityContent(relName);
         %>
-            <div> - <a href="$actionLink">$relLang ($relName)</a></div>
+            <div> - <a href="javascript:void(0);" onclick="$actionLink">$relLang ($relName)</a></div>
         <% 
           }
         }
@@ -61,7 +61,7 @@
             if (relTitle!=null && !"".equals(relTitle)) relName = relTitle;
             relName = ContentReader.getXSSCompatibilityContent(relName);
 				%>
-				 	  <div> - <a href="$actionLink">$relName</a></div>
+				 	  <div> - <a href="javascript:void(0);" onclick="$actionLink">$relName</a></div>
 				<% 
 				  }
 				}
@@ -93,7 +93,7 @@
             if (relTitle!=null && !"".equals(relTitle)) relName = relTitle;
             relName = ContentReader.getXSSCompatibilityContent(relName);
 				%>
-				 	  <div> - <a href="$actionLink">$relName</a></div>
+				 	  <div> - <a href="javascript:void(0);" onclick="$actionLink">$relName</a></div>
 				<% 
 				  }
 				}
