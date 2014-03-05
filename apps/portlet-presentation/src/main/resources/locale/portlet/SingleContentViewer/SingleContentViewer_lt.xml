@@ -4,11 +4,11 @@
     <title>
       <QuickEdit>Edit in Content Explorer</QuickEdit>
       <print>Print This Page</print>
-      <FastPublish>Publish</FastPublish>
+      <FastPublish>Paskelbti</FastPublish>
     </title>
     <label>
       <draft>Draft</draft>
-      <print>Print</print>
+      <print>Spausdinti</print>
     </label>
     <msg>
       <no-content>No contents found.</no-content>
@@ -40,15 +40,15 @@
   <UISCVPreferences>
     <action>
       <Save>#{word.save}</Save>
-      <Abort>Abort</Abort>
+      <Abort>Nutraukti</Abort>
       <Cancel>#{word.cancel}</Cancel>
-      <Print>Print</Print>
+      <Print>Spausdinti</Print>
       <Close>#{word.close}</Close>
     </action>
     <title>Content Detail Preferences</title>
     <label>
       <Back>Back to previous page</Back>
-      <Edit>Edit</Edit>
+      <Edit>Redaguoti</Edit>
       <Preferences>Preferences</Preferences>
       <Title>Content Detail Preferences</Title>
       <UISCVShowTitleConfigurationCheckBox>Show Title</UISCVShowTitleConfigurationCheckBox>
@@ -56,13 +56,13 @@
       <UISCVShowOptionBarConfigurationCheckBox>Show Option Bar</UISCVShowOptionBarConfigurationCheckBox>
       <DisplaySettingBlock>Display Settings</DisplaySettingBlock>
       <ContentPathBlock>Content Selection</ContentPathBlock>
-      <UISCVConfigItemPathFormInputSet>Content Path</UISCVConfigItemPathFormInputSet>
-    <UISCVContentPathConfigurationInputBox>Content Path</UISCVContentPathConfigurationInputBox>
+      <UISCVConfigItemPathFormInputSet>Turinio kelias</UISCVConfigItemPathFormInputSet>
+    <UISCVContentPathConfigurationInputBox>Turinio kelias</UISCVContentPathConfigurationInputBox>
       <Advance>Advanced</Advance>
       <ContextCaption>Dynamic Navigation</ContextCaption>
       <UISCVContextualRadioBox>Contextual Content</UISCVContextualRadioBox>
       <UISCVParameterInputBox>by</UISCVParameterInputBox>
-      <PrintSettingBlock>Print Settings</PrintSettingBlock>
+      <PrintSettingBlock>Spausdinimo parametrai</PrintSettingBlock>
       <UISCVPrintPageParameter>with</UISCVPrintPageParameter>
       <UISCVConfigPrintPageFormInputSet>Show in Page</UISCVConfigPrintPageFormInputSet>
       <LockStatus>Lock</LockStatus>
@@ -82,7 +82,7 @@
       <label>
         <UISCVConfigContentFormInputSet>Content Selection</UISCVConfigContentFormInputSet>
         <UISCVConfigDisplayFormInputSet>Display Settings</UISCVConfigDisplayFormInputSet>
-        <UISCVConfigPrintFormInputSet>Print Settings</UISCVConfigPrintFormInputSet>
+        <UISCVConfigPrintFormInputSet>Spausdinimo parametrai</UISCVConfigPrintFormInputSet>
         <UISCVConfigAdvancedFormInputSet>Advanced</UISCVConfigAdvancedFormInputSet>
       </label>
     </tab>

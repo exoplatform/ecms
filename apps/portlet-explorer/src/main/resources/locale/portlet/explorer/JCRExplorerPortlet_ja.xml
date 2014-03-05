@@ -591,7 +591,7 @@
       <MoveToTrash>ゴミ箱へ移動</MoveToTrash>
       <RestoreFromTrash>ゴミ箱からリストア</RestoreFromTrash>
       <EmptyTrash>ゴミ箱を空にする</EmptyTrash>
-      <WebDavView>ダウンロード</WebDavView>
+      <WebDavView>Edit in MS Office</WebDavView>
     </event>
   </ECMContextMenu>
  

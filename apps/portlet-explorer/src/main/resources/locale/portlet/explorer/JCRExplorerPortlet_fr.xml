@@ -591,7 +591,7 @@
       <MoveToTrash>Déplacer dans la Corbeille</MoveToTrash>
       <RestoreFromTrash>Restaurer</RestoreFromTrash>
       <EmptyTrash>Supprimer</EmptyTrash>
-      <WebDavView>Modifier à Distance</WebDavView>
+      <WebDavView>Modifier dans MS Office</WebDavView>
     </event>
   </ECMContextMenu>
  

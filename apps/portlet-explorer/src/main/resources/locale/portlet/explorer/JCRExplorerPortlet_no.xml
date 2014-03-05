@@ -591,7 +591,7 @@
       <MoveToTrash>Flytt til papirkurven</MoveToTrash>
       <RestoreFromTrash>Gjenopprett fra papirkurven</RestoreFromTrash>
       <EmptyTrash>Tøm papirkurven</EmptyTrash>
-      <WebDavView>Last ned og tillat redigering</WebDavView>
+      <WebDavView>Edit in MS Office</WebDavView>
     </event>
   </ECMContextMenu>
  
