@@ -34,7 +34,7 @@
 
   <Drives>
     <label>
-      <ManagedSites>Sites Management</ManagedSites>
+      <ManagedSites>Svetainių valdymas</ManagedSites>
       <SharedSite>Shared Site</SharedSite>
     </label>
   </Drives>
@@ -84,7 +84,7 @@
       <UIContentBrowsePanelMulti>Content Browser</UIContentBrowsePanelMulti>
       <UIContentBrowsePanelFolder>Folder Browser</UIContentBrowsePanelFolder>
       <UIContentSearchForm>Content Search Form</UIContentSearchForm>
-      <UIContentSearchResult>Search Result</UIContentSearchResult>
+      <UIContentSearchResult>Paieškos rezultatas</UIContentSearchResult>
       <UIContentViewer>Preview Content</UIContentViewer>
       <WebContentMetadataPopup>Property Selector</WebContentMetadataPopup>
       <WebContentNodeTypePopup>Nodetype Selector</WebContentNodeTypePopup>
@@ -168,7 +168,7 @@
     <header>
       <name>#{word.name}</name>
       <publicationstate>Publication State</publicationstate>
-      <action>Action</action>
+      <action>Veiksmas</action>
     </header>
     <msg>
       <child-not-found>No Folder Found</child-not-found>
@@ -177,7 +177,7 @@
 
   <UIContentSearchForm>
     <title>
-      <Location>Site Name</Location>
+      <Location>Svetainės pavadinimas</Location>
       <SearchByName>Search by Name</SearchByName>
       <Fulltext>A word or phrase in context</Fulltext>
       <Property>Property</Property>
@@ -241,10 +241,10 @@
 
   <UIContentSearchResult>
     <header>
-      <title>Title</title>
+      <title>Antraštė</title>
       <score>Score</score>
       <publicationstate>Publication State</publicationstate>
-      <action>Action</action>
+      <action>Veiksmas</action>
     </header>
     <title>
       <Select>Select</Select>
@@ -279,7 +279,7 @@
       <Save>#{word.save}</Save>
       <Clear>Clear</Clear>
       <title>
-        <Edit>Edit</Edit>
+        <Edit>Redaguoti</Edit>
         <Delete>Delete</Delete>
       </title>
     </action>
@@ -403,7 +403,7 @@
       <SharedUsersSpace>Shared Users Space</SharedUsersSpace>
       <Systemfiles>System Files</Systemfiles>
       <ValidationRequestsDocumentsCenter>Validation Requests Documents Center</ValidationRequestsDocumentsCenter>
-      <ManagedSites>Sites Management</ManagedSites>
+      <ManagedSites>Svetainių valdymas</ManagedSites>
       <SharedSite>Shared Site</SharedSite>
     </title>
   </ContentSelector>
@@ -421,7 +421,7 @@
   </UIDocumentInfo>
   <UIPortalApplication>
     <title>
-      <abort>Abort</abort>
+      <abort>Nutraukti</abort>
     </title>
   </UIPortalApplication>    
   

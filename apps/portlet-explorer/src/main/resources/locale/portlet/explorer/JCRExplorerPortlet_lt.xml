@@ -72,11 +72,11 @@
   <UISideBar>
     <label>
       <Relation>Relation</Relation>
-      <Explorer>File Explorer</Explorer>
+      <Explorer>Failų naršyklė</Explorer>
       <Close>Close Sidebar</Close>
-      <TagExplorer>Tag Cloud</TagExplorer>
-      <Clipboard>Clipboard</Clipboard>
-      <SavedSearches>Saved Searches</SavedSearches>
+      <TagExplorer>Žymos debesis</TagExplorer>
+      <Clipboard>Iškarpinė</Clipboard>
+      <SavedSearches>Išsaugotos paieškos</SavedSearches>
     </label>
     <title>
       <Control>Control Sidebar</Control>
@@ -93,11 +93,11 @@
       <driveWorkspace>Drive Workspace:</driveWorkspace>
       <backToJCR>Back to JCR Main Drives</backToJCR>
       <setUpBrowser>Set up your browsing preferences</setUpBrowser>
-      <refesh>Refresh</refesh>
+      <refesh>Atnaujinti</refesh>
       <currentDrive>Current Drive</currentDrive>
       <selectView>Select View</selectView>
       <showSideBar>Show Sidebar</showSideBar>
-      <more>More</more>
+      <more>Daugiau</more>
       <backTo>Back</backTo>
     </label>
   </UIViewBar>
@@ -109,9 +109,9 @@
   -->
   <UIDrivesBrowser>
     <title>
-      <PersonalDrives>Personal drives</PersonalDrives>
-      <GroupDrives>Group drives</GroupDrives>
-      <GeneralDrives>General drives</GeneralDrives>
+      <PersonalDrives>Asmeniniai diskai</PersonalDrives>
+      <GroupDrives>Grupės diskai</GroupDrives>
+      <GeneralDrives>Bendrieji diskai</GeneralDrives>
     </title>
     <msg>
       <no-view-found>There is no view available according to your access permissions in drive '{0}'.</no-view-found>
@@ -190,7 +190,7 @@
   #########################################################################################
   -->
   <UIRenameForm>
-    <title>Rename</title>
+    <title>Pervadinti</title>
     <label>
       <nameField>Name</nameField>
       <titleField>Title</titleField>
@@ -214,7 +214,7 @@
   </UIRenameForm>
   <UIPopupWindow>
     <title>
-      <UIRenameForm>Rename</UIRenameForm>
+      <UIRenameForm>Pervadinti</UIRenameForm>
       <UIActionContainer>Edit Action</UIActionContainer>
       <UIFolderForm>New Folder</UIFolderForm>
       <UIUploadManager>Upload File</UIUploadManager>
@@ -231,11 +231,11 @@
       <UISavedQuery>Saved Queries List</UISavedQuery>
       <UIWatchDocumentForm>Watch Document</UIWatchDocumentForm>
       <UIActionManager>Manage Actions</UIActionManager>
-      <UIDocumentForm>Edit Document</UIDocumentForm>
+      <UIDocumentForm>Redaguoti dokumentą</UIDocumentForm>
       <UIDocumentFormController>Add New Document</UIDocumentFormController>
-      <EditFormController>Edit Document</EditFormController>
+      <EditFormController>Redaguoti dokumentą</EditFormController>
       <UIRelationManager>Add Relation</UIRelationManager>
-      <UICategoryManager>Add Category</UICategoryManager>
+      <UICategoryManager>Pridėti kategoriją</UICategoryManager>
       <UIImportNode>Import</UIImportNode>
       <UIViewMetadataManager>View Metadata</UIViewMetadataManager>
       <UIVoteForm>Vote Document</UIVoteForm>
@@ -252,8 +252,8 @@
       <UIThumbnailForm>Add Thumbnail Image</UIThumbnailForm>
       <UIAllItemsPreferenceForm>Preference Settings</UIAllItemsPreferenceForm>
       <UISelectRestorePath>Select Restore Path</UISelectRestorePath>
-      <UISEOForm>Manage SEO</UISEOForm>
-      <UISEOToolbarForm>Manage SEO</UISEOToolbarForm>
+      <UISEOForm>Valdyti SEO</UISEOForm>
+      <UISEOToolbarForm>Valdyti SEO</UISEOToolbarForm>
     </title>
     <header>
       <workspace>Workspace</workspace>
@@ -282,7 +282,7 @@
     <tooltip>
       <AddFolder>New Folder</AddFolder>
       <AddDocument>New Content</AddDocument>
-      <EditDocument>Edit</EditDocument>
+      <EditDocument>Redaguoti</EditDocument>
       <Upload>Upload</Upload>
       <Paste>Paste</Paste>
       <Search>Search</Search>
@@ -346,12 +346,12 @@
     </msg>
     <title>
       <select-tab>Select Tab</select-tab>
-      <SimpleSearch>Quick Search</SimpleSearch>
+      <SimpleSearch>Greita paieška</SimpleSearch>
       <AdvanceSearch>Advanced Search</AdvanceSearch>
       <SavedQueries>Saved Queries</SavedQueries>
-      <ShowAllOwnedByUser>Show All My Items</ShowAllOwnedByUser>
+      <ShowAllOwnedByUser>Rodyti visus mano elementus</ShowAllOwnedByUser>
       <ShowAllFavourite>Show All Favorite Items</ShowAllFavourite>
-      <ShowAllHidden>Show All Hidden Items</ShowAllHidden>
+      <ShowAllHidden>Rodyti visus paslėptus elementus</ShowAllHidden>
       <ShowAllFromTrash>Show All Items From Trash</ShowAllFromTrash>
     </title>
   </UIActionBar>
@@ -442,7 +442,7 @@
   -->
   <UIWorkingArea>
     <title>
-      <Icon>Icon</Icon>
+      <Icon>Piktograma</Icon>
     </title>
     <msg>
       <!-- Delte one node is not in trash and have no relation -->
@@ -517,7 +517,7 @@
       <node-remove-success>Node '{0}' has been removed.</node-remove-success>
     </msg>
     <tooltip>
-      <Rename>Rename</Rename>
+      <Rename>Pervadinti</Rename>
       <Cut>Cut</Cut>
       <Copy>Copy</Copy>
       <Save>#{word.save}</Save>
@@ -526,7 +526,7 @@
       <Checkout>Checkout</Checkout>
       <Lock>Lock</Lock>
       <Unlock>Unlock</Unlock>
-      <EditDocument>Edit</EditDocument>
+      <EditDocument>Redaguoti</EditDocument>
       <Paste>Paste</Paste>
       <LockedBy>Locked by</LockedBy>
     </tooltip>
@@ -566,9 +566,9 @@
     <event>
       <Lock>Lock</Lock>
       <Unlock>UnLock</Unlock>
-      <EditDocument>Edit</EditDocument>
+      <EditDocument>Redaguoti</EditDocument>
       <Copy>Copy</Copy>
-      <Rename>Rename</Rename>
+      <Rename>Pervadinti</Rename>
       <Delete>Delete</Delete>
       <Save>#{word.save}</Save>
       <Cut>Cut</Cut>
@@ -591,7 +591,7 @@
       <MoveToTrash>Move to Trash</MoveToTrash>
       <RestoreFromTrash>Restore from Trash</RestoreFromTrash>
       <EmptyTrash>Empty Trash</EmptyTrash>
-      <WebDavView>Download and Allow Editing</WebDavView>
+      <WebDavView>Edit in MS Office</WebDavView>
     </event>
   </ECMContextMenu>
  
@@ -626,7 +626,7 @@
       <UIPublicationHistory>History</UIPublicationHistory>
       <UIVersionViewer>Version Viewer</UIVersionViewer>
 
-      <UIPropertyTab>Properties</UIPropertyTab>
+      <UIPropertyTab>Ypatybės</UIPropertyTab>
       <UIMetadataTab>Metadata</UIMetadataTab>
       <UIPropertyForm>Add New Property</UIPropertyForm>
       <UIUploadContent>Information of uploaded file</UIUploadContent>
@@ -671,7 +671,7 @@
       <name>Name</name>
       <multiValue>Multi Value</multiValue>
       <value>Value</value>
-      <action>Action</action>
+      <action>Veiksmas</action>
     </header>
     <label>
       <binary>Binary Data</binary>
@@ -706,7 +706,7 @@
     <action>
       <Save>#{word.save}</Save>
       <Cancel>#{word.cancel}</Cancel>
-      <Reset>Reset</Reset>
+      <Reset>Atstatyti</Reset>
     </action>
     <msg>
       <name-invalid>Please enter the property name.</name-invalid>
@@ -731,7 +731,7 @@
   <UIPermissionInfo>
     <action>
       <title>
-        <Edit>Edit</Edit>
+        <Edit>Redaguoti</Edit>
         <Delete>Remove Permission</Delete>
       </title>
     </action>
@@ -740,7 +740,7 @@
       <read>Read</read>
       <addNode>Modify</addNode>
       <remove>Remove</remove>
-      <action>Action</action>
+      <action>Veiksmas</action>
     </header>
     <msg>
       <confirm-delete-permission>Are you sure you want to remove this permission?</confirm-delete-permission>
@@ -790,7 +790,7 @@
     <action>
       <Close>#{word.close}</Close>
       <Save>#{word.save}</Save>
-      <Reset>Reset</Reset>
+      <Reset>Atstatyti</Reset>
     </action>
     <msg>
       <checkbox-require>Please select at least one permission.</checkbox-require>
@@ -901,7 +901,7 @@
     <header>
       <name>#{word.name}</name>
       <path>Path</path>
-      <action>Action</action>
+      <action>Veiksmas</action>
       <shortcutPath>Path</shortcutPath>
       <type>Type</type>
       <dateCreated>Date Created</dateCreated>
@@ -932,7 +932,7 @@
     <header>
       <name>#{word.name}</name>
       <path>Path</path>
-      <action>Action</action>
+      <action>Veiksmas</action>
       <shortcutPath>Path</shortcutPath>
       <type>Type</type>
       <dateCreated>Date Created</dateCreated>
@@ -963,7 +963,7 @@
     <header>
       <name>#{word.name}</name>
       <path>Path</path>
-      <action>Action</action>
+      <action>Veiksmas</action>
       <shortcutPath>Path</shortcutPath>
       <type>Type</type>
       <dateCreated>Date Created</dateCreated>
@@ -994,7 +994,7 @@
     <header>
       <name>#{word.name}</name>
       <path>Path</path>
-      <action>Action</action>
+      <action>Veiksmas</action>
       <shortcutPath>Path</shortcutPath>
       <type>Type</type>
       <dateCreated>Date Created</dateCreated>
@@ -1027,7 +1027,7 @@
     <header>
       <name>#{word.name}</name>
       <path>Path</path>
-      <action>Action</action>
+      <action>Veiksmas</action>
       <shortcutPath>Path</shortcutPath>
       <type>Type</type>
       <dateCreated>Date Created</dateCreated>
@@ -1053,7 +1053,7 @@
   <UIConstraintsForm>
     <label>
       <constraints>UIConstraintsForm</constraints>
-      <metadataProperty>Properties</metadataProperty>
+      <metadataProperty>Ypatybės</metadataProperty>
       <operator>Operator</operator>
       <contains>Contain Value</contains>
       <notcontains>Not Contain Value</notcontains>
@@ -1088,7 +1088,7 @@
     <tooltip>
       <AddMetadataType>Add Property</AddMetadataType>
       <AddNodeType>Add Node Type</AddNodeType>
-      <AddCategory>Add Category</AddCategory>
+      <AddCategory>Pridėti kategoriją</AddCategory>
       <FindExactly>Find Exactly</FindExactly>
     </tooltip>
     <label>
@@ -1227,7 +1227,7 @@
   <UIECMSearch>
     <header>
       <name>Name</name>
-      <language>Language</language>
+      <language>Kalba</language>
       <query>Query</query>
       <action>Actions</action>
       <path>Path</path>
@@ -1238,7 +1238,7 @@
       <not-found>Data not found.</not-found>
     </msg>
     <header>
-      <action>Action</action>
+      <action>Veiksmas</action>
     </header>
   </UIResult>
   <UISaveQueryForm>
@@ -1265,7 +1265,7 @@
     </header>
     <tooltip>
       <Execute>Execute</Execute>
-      <Edit>Edit</Edit>
+      <Edit>Redaguoti</Edit>
       <Delete>Delete</Delete>
     </tooltip>
     <label>
@@ -1413,7 +1413,7 @@
     <header>
       <LifecycleName>Name</LifecycleName>
       <LifecycleDesc>Description</LifecycleDesc>
-      <action>Action</action>
+      <action>Veiksmas</action>
     </header>
     <action>
       <Cancel>#{word.close}</Cancel>
@@ -1575,14 +1575,14 @@
     </action>
     <label>
       <category>Category</category>
-      <actions>Action</actions>
+      <actions>Veiksmas</actions>
       <delete>Delete</delete>
     </label>
   </UICategoriesAddedList>
   <UITreeList>
     <header>
       <name>Name</name>
-      <action>Action</action>
+      <action>Veiksmas</action>
     </header>
     <info>
       <child-not-found>This node does not have any child nodes.</child-not-found>
@@ -1632,7 +1632,7 @@
     <header>
       <path>Path</path>
       <command>Cm</command>
-      <action>Action</action>
+      <action>Veiksmas</action>
     </header>
     <label>
       <nocommand>There are no items in the clipboard.</nocommand>
@@ -1753,7 +1753,7 @@
   <lifecycle>Life Cycle</lifecycle>
   <triggeredaction>Triggered Action</triggeredaction>
       <instanceOf>Instance of Action Type</instanceOf>
-      <action>Action</action>
+      <action>Veiksmas</action>
     </header>
     <msg>
       <remove-popup-first>You must close the edit pop-up before deleting this node.</remove-popup-first>
@@ -1765,7 +1765,7 @@
     <action>
       <Close>#{word.close}</Close>
       <View>View</View>
-      <Edit>Edit</Edit>
+      <Edit>Redaguoti</Edit>
       <Delete>Delete</Delete>
     </action>
   </UIActionList>
@@ -1830,8 +1830,8 @@
     </label>
     <title>
       <exeButton>Go</exeButton>
-      <backButton>Back to the previous node</backButton>
-      <showHistory>Show the history address</showHistory>
+      <backButton>Grįžti į ankstesnę skiltį</backButton>
+      <showHistory>Rodyti istorijos adresą</showHistory>
       <changeNode>Change Node</changeNode>
     </title>
   </UIAddressBar>
@@ -2178,7 +2178,7 @@
   <UIJcrExplorerEditForm>
     <title>Edit File Explorer</title>
     <action>
-      <Edit>Edit</Edit>
+      <Edit>Redaguoti</Edit>
       <Save>#{word.save}</Save>
       <Cancel>#{word.cancel}</Cancel>
     </action>
@@ -2199,7 +2199,7 @@
   <UIDriveSelector>
     <label>
       <driveName>Drive Name</driveName>
-      <action>Action</action>
+      <action>Veiksmas</action>
       <adddrives>Add Drives</adddrives>
     </label>
   </UIDriveSelector>
@@ -2391,7 +2391,7 @@
   </UISimpleCategoryManager>
   <UIPopupWindow>
     <title>
-      <UISimpleCategoryManager>Add Category</UISimpleCategoryManager>
+      <UISimpleCategoryManager>Pridėti kategoriją</UISimpleCategoryManager>
     </title>
   </UIPopupWindow>
   <UICategoriesAddedList>
@@ -2413,7 +2413,7 @@
   <UIRestoreConfirmMessage>
     <label>
       <Close>#{word.close}</Close>
-      <OK>OK</OK>
+      <OK>Gerai</OK>
       <ReplaceData>Replace Data</ReplaceData>
       <Back>Back to Rename</Back>
       <Keepfile>Keep both files</Keepfile>
@@ -2618,7 +2618,7 @@
       <Configuration>Set Up Preferences</Configuration>
     </label>
     <title>
-      <allItems>All Items</allItems>
+      <allItems>Visi elementai</allItems>
     </title>
   </UIAllItems>
 
@@ -2635,7 +2635,7 @@
 
   <UISavedSearches>
     <title>
-      <savedSearches>Saved Searches</savedSearches>
+      <savedSearches>Išsaugotos paieškos</savedSearches>
     </title>
   </UISavedSearches>
   <DocumentType>
@@ -2644,7 +2644,7 @@
        <Video>Video</Video>
        <Music>Music</Music>
        <Documents>Document</Documents>
-       <Content>Content</Content>
+       <Content>Turinys</Content>
     </label>
   </DocumentType>
 
@@ -2654,7 +2654,7 @@
       <Video>Video</Video>
       <Music>Music</Music>
       <Documents>Document</Documents>
-      <Content>Content</Content>
+      <Content>Turinys</Content>
     </label>
     <title>Set Up Filter Preferences</title>
     <action>
@@ -2669,11 +2669,11 @@
       <DocumentFilterConfiguration>Set Up Filter Preferences</DocumentFilterConfiguration>
     </label>
     <title>
-      <ShowVideo>Show all video files</ShowVideo>
-      <ShowMusic>Show all music files</ShowMusic>
-      <ShowImages>Show all image files</ShowImages>
-      <ShowDocuments>Show all document files</ShowDocuments>
-      <ShowContent>Show all document types</ShowContent>
+      <ShowVideo>Rodyti visus video failus</ShowVideo>
+      <ShowMusic>Rodyti visus muzikos failus</ShowMusic>
+      <ShowImages>Rodyti visus vaizdo failus</ShowImages>
+      <ShowDocuments>Rodyti visus dokumentų failus</ShowDocuments>
+      <ShowContent>Rodyti visus dokumentų tipus</ShowContent>
     </title>
   </UIAllItemsByType>
 
@@ -2722,12 +2722,12 @@
   </UICategoryForm>
   <UIPopupWindow>
     <title>
-      <UICategoryForm>Add Category</UICategoryForm>
+      <UICategoryForm>Pridėti kategoriją</UICategoryForm>
     </title>
   </UIPopupWindow>
   <UIActionBar>
     <tooltip>
-      <AddCategory>Add Category</AddCategory>
+      <AddCategory>Pridėti kategoriją</AddCategory>
     </tooltip>
    </UIActionBar>
 
@@ -2751,7 +2751,7 @@
     <header>
       <name>Name</name>
       <relatedDocuments>Related Documents</relatedDocuments>
-      <action>Action</action>
+      <action>Veiksmas</action>
     </header>
     <action>
       <title>
@@ -2921,7 +2921,7 @@
       <date>Date</date>
       <author>Author</author>
       <status>Status</status>
-      <action>Action</action>
+      <action>Veiksmas</action>
       <label>Revision</label>
       <none>No revisions</none>
       <seeall>See all versions</seeall>
@@ -2977,7 +2977,7 @@
     </msg>
     <action>
       <Save>#{word.save}</Save>
-      <Reset>Reset</Reset>
+      <Reset>Atstatyti</Reset>
     </action>
   </UIPublicationSchedule>
 
@@ -3000,11 +3000,11 @@
   </UIPopupWindow>
   <WCMContentView>
     <header>
-      <status>Status</status>
-      <author>Author</author>
-      <date>Created Date</date>
-      <title>Document Title</title>
-      <lastUser>Last User</lastUser>
+      <status>Būsena</status>
+      <author>Autorius</author>
+      <date>Sukūrimo data</date>
+      <title>Dokumento pavadinimas</title>
+      <lastUser>Paskutinis vartotojas</lastUser>
     </header>
   </WCMContentView>
   <UITagForm>
@@ -3042,7 +3042,7 @@
   </UIJCRExplorerPortlet>
   <UIDrivesArea>
     <DrivesArea>
-      <ShowDrives>Show Drives</ShowDrives>
+      <ShowDrives>Rodyti diskus</ShowDrives>
     </DrivesArea>
   </UIDrivesArea>
   <UIJcrExplorerEditForm>
@@ -3065,8 +3065,8 @@
   </UploadFileMimeTypesValidator>
   <lifecyclePhase>
     <label>
-    <no>No</no>
-  <yes>Yes</yes>
+    <no>Ne</no>
+  <yes>Taip</yes>
   <true>True</true>
   <false>False</false>
   <Electronic>Electronic</Electronic>

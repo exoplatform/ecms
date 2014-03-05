@@ -8,7 +8,7 @@
       <label>
         <end-time>End Time</end-time>
         <start-time>Start Time</start-time>
-        <lifecycle>Lifecycle</lifecycle>
+        <lifecycle>Gyvenimo ciklas</lifecycle>
         <mimeType>Mime Type</mimeType>
         <repeat-count>Repeat Count</repeat-count>
         <time-interval>Time Interval</time-interval>
@@ -40,7 +40,7 @@
     <dialog>
       <label>
         <name>Name</name>
-        <content>Content</content>
+        <content>Turinys</content>
       </label>
     </dialog>
   </HtmlFile>
@@ -89,7 +89,7 @@
   <AddMetadata>
     <dialog>
       <label>
-        <id>Id</id>
+        <id>ID</id>
         <name>#{word.name}</name>
         <lifecycle>#{Ecm.dialog.label.lifecycle}</lifecycle>
         <metadata>Metadata</metadata>
@@ -104,7 +104,7 @@
   <AutoVersioning>
     <dialog>
       <label>
-        <id>Id</id>
+        <id>ID</id>
         <name>#{word.name}</name>
         <lifecycle>#{Ecm.dialog.label.lifecycle}</lifecycle>
         <schedule-type>#{Ecm.dialog.label.schedule-type}</schedule-type>
@@ -123,7 +123,7 @@
   <EnableVersioning>
     <dialog>
       <label>
-        <id>Id</id>
+        <id>ID</id>
         <name>#{word.name}</name>
         <lifecycle>#{Ecm.dialog.label.lifecycle}</lifecycle>
         <schedule-type>#{Ecm.dialog.label.schedule-type}</schedule-type>
@@ -255,7 +255,7 @@
         <name>Name</name>
         <autoload>Auto Load</autoload>
         <minetype>MIME Type</minetype>
-        <content>Content</content>
+        <content>Turinys</content>
       </label>
     </dialog>
   </ResouceContainer>
@@ -285,9 +285,9 @@
   <ScriptAction>
     <dialog>
       <label>
-        <id>Id</id>
+        <id>ID</id>
         <name>Name</name>
-        <lifecycle>Lifecycle</lifecycle>
+        <lifecycle>Gyvenimo ciklas</lifecycle>
         <homePath>Home Path</homePath>
         <targetWorkspace>Target Workspace</targetWorkspace>
         <targetPath>Target Path</targetPath>
@@ -333,7 +333,7 @@
     <dialog>
       <label>
         <isDeep>Is Deep</isDeep>
-        <nodetypes>Node Types</nodetypes>
+        <nodetypes>Skilčių tipai</nodetypes>
         <affectedNodeTypeNames>Affected Node Types</affectedNodeTypeNames>
       </label>
     </dialog>
@@ -343,7 +343,7 @@
     <dialog>
       <label>
         <isDeep>Is Deep</isDeep>
-        <nodetypes>Node Types</nodetypes>
+        <nodetypes>Skilčių tipai</nodetypes>
         <affectedNodeTypeNames>Affected Node Types</affectedNodeTypeNames>
       </label>
     </dialog>
@@ -353,7 +353,7 @@
     <dialog>
       <label>
         <isDeep>Is Deep</isDeep>
-        <nodetypes>Node Types</nodetypes>
+        <nodetypes>Skilčių tipai</nodetypes>
         <affectedNodeTypeNames>Affected Node Types</affectedNodeTypeNames>
       </label>
     </dialog>
@@ -363,7 +363,7 @@
     <dialog>
       <label>
         <isDeep>Is Deep</isDeep>
-        <nodetypes>Node Types</nodetypes>
+        <nodetypes>Skilčių tipai</nodetypes>
         <affectedNodeTypeNames>Affected Node Types</affectedNodeTypeNames>
       </label>
     </dialog>

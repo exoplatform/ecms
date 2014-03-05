@@ -591,7 +591,7 @@
       <MoveToTrash>Chuyển vào Thư mục Rác</MoveToTrash>
       <RestoreFromTrash>Khôi phục từ Thư mục Rác</RestoreFromTrash>
       <EmptyTrash>Xóa sạch Thư mục Rác?</EmptyTrash>
-      <WebDavView>Tải về và Cho phép Chỉnh sửa</WebDavView>
+      <WebDavView>Chỉnh sửa trong MS Office</WebDavView>
     </event>
   </ECMContextMenu>
  

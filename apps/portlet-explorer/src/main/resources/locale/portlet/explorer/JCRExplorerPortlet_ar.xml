@@ -591,7 +591,7 @@
       <MoveToTrash>تحويله الى سلة المهملات</MoveToTrash>
       <RestoreFromTrash>الاستعادة من سلّة المهملات</RestoreFromTrash>
       <EmptyTrash>إفراغ سلّة المهملات</EmptyTrash>
-      <WebDavView>التّحميل والسّماح بالتّغيير</WebDavView>
+      <WebDavView>Edit in MS Office</WebDavView>
     </event>
   </ECMContextMenu>
  
