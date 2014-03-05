@@ -684,7 +684,7 @@ public class SEOServiceImpl implements SEOService {
       }
       robotsNode.setProperty("jcr:data", robotsContent.toString());
       robotsNode.setProperty("jcr:lastModified", new GregorianCalendar());
-      cache.put(getHash(portalName + ROBOTS_NAME), robotsContent);
+      cache.put(getHash(portalName + ROBOTS_NAME), robotsContent.toString());
     }
   }
 
