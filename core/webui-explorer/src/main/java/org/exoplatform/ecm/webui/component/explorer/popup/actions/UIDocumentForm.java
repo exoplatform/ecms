@@ -64,6 +64,7 @@ import org.exoplatform.services.log.ExoLogger;
 import org.exoplatform.services.log.Log;
 import org.exoplatform.services.wcm.core.NodetypeConstant;
 import org.exoplatform.services.wcm.utils.WCMCoreUtils;
+import org.exoplatform.wcm.webui.reader.ContentReader;
 import org.exoplatform.web.application.ApplicationMessage;
 import org.exoplatform.webui.application.WebuiRequestContext;
 import org.exoplatform.webui.config.annotation.ComponentConfig;
@@ -286,7 +287,7 @@ public class UIDocumentForm extends UIDialogForm implements UIPopupComponent, UI
           .append("\" class=\"uiIconEcmsExpand uiIconEcmsLightGrey\"></i></a>");
 					
     writer.append("</div>");
-    writer.append("<span class='uiDialogTitle'>" + getTemplateLabel() + " " + getChangeTypeActionLink () + "</span>");
+    writer.append("<span class='uiDialogTitle'>" + ContentReader.getXSSCompatibilityContent(getTemplateLabel()) + " " + getChangeTypeActionLink () + "</span>");
     writer.append("</h5>");
     context.getJavascriptManager().loadScriptResource("uiDocumentForm");
     context.getJavascriptManager().addCustomizedOnLoadScript("eXo.webui.UIDocForm.initFullScreenStatus(\"" + contextID + "\");");
