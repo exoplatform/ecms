@@ -23,7 +23,6 @@ import org.exoplatform.container.xml.InitParams;
 import org.exoplatform.container.xml.ValuesParam;
 import org.exoplatform.services.log.ExoLogger;
 import org.exoplatform.services.log.Log;
-import org.exoplatform.webui.core.UIComponent;
 
 import java.util.Collection;
 import java.util.Collections;
@@ -41,9 +40,9 @@ import java.util.Set;
  */
 public class CloudDriveUIExtension extends BaseComponentPlugin {
 
-  protected static final Log    LOG                 = ExoLogger.getLogger(CloudDriveUIExtension.class);
+  protected static final Log  LOG            = ExoLogger.getLogger(CloudDriveUIExtension.class);
 
-  protected final Set<Class<?>> defaultUIExtensions = new HashSet<Class<?>>();
+  protected final Set<String> defaultActions = new HashSet<String>();
 
   /**
    * 
@@ -53,17 +52,18 @@ public class CloudDriveUIExtension extends BaseComponentPlugin {
     if (params != null) {
       for (Object ov : params.getValues()) {
         if (ov instanceof String) {
-          String className = (String) ov;
-          try {
-            Class<?> extClass = Class.forName(className);
-            if (UIComponent.class.isAssignableFrom(extClass)) {
-              defaultUIExtensions.add(extClass);
-            } else {
-              LOG.warn("Action class " + className + " not an UIExtension.");
-            }
-          } catch (ClassNotFoundException e) {
-            LOG.warn("Cannot load extension class " + className + " : " + e.getMessage());
-          }
+          defaultActions.add((String) ov);
+          // TODO cleanup
+          // try {
+          // Class<?> extClass = Class.forName(className);
+          // if (UIComponent.class.isAssignableFrom(extClass)) {
+          // defaultActions.add(extClass);
+          // } else {
+          // LOG.warn("Action class " + className + " not an UIExtension.");
+          // }
+          // } catch (ClassNotFoundException e) {
+          // LOG.warn("Cannot load extension class " + className + " : " + e.getMessage());
+          // }
         }
       }
     } else {
@@ -71,7 +71,7 @@ public class CloudDriveUIExtension extends BaseComponentPlugin {
     }
   }
 
-  public Collection<Class<?>> getDefaultExtensions() {
-    return Collections.unmodifiableSet(defaultUIExtensions);
+  public Collection<String> getDefaultActions() {
+    return Collections.unmodifiableSet(defaultActions);
   }
 }

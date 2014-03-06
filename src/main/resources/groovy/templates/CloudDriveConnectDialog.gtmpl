@@ -39,7 +39,6 @@ def nodePath = uiExplorer.getCurrentNode().getPath()
 def workspace = uiExplorer.getCurrentNode().getSession().getWorkspace().getName()
 
 def rcontext = _ctx.getRequestContext()
-JavascriptManager js = rcontext.getJavascriptManager()
 
 CloudDriveContext.init(rcontext, workspace, nodePath)
 
@@ -55,7 +54,7 @@ def connectYour = _ctx.appRes("UIPopupWindow.title.ConnectYour")
 			<div id="CloudDriveConnectDialogMessage" style="display: none;"></div>
 			<%
 			  for(provider in driveService.providers) {
-			    js.getRequireJS().addScripts("\ncloudDrive.initProvider('${provider.id}', '${provider.authUrl}');\n")
+			    CloudDriveContext.initProviders(rcontext, provider)
 				def driveSuffix = provider.name.replace(' ', '') 
 			%>
 			<div class="UIAction">

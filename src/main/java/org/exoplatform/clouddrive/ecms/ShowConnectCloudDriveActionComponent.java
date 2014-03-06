@@ -20,6 +20,7 @@ package org.exoplatform.clouddrive.ecms;
 
 import org.exoplatform.ecm.webui.component.explorer.UIJCRExplorer;
 import org.exoplatform.ecm.webui.component.explorer.control.listener.UIActionBarActionListener;
+import org.exoplatform.web.application.Parameter;
 import org.exoplatform.webui.config.annotation.ComponentConfig;
 import org.exoplatform.webui.config.annotation.EventConfig;
 import org.exoplatform.webui.core.UIComponent;
@@ -27,8 +28,11 @@ import org.exoplatform.webui.core.UIPopupContainer;
 import org.exoplatform.webui.event.Event;
 import org.exoplatform.webui.ext.manager.UIAbstractManager;
 
-@ComponentConfig(events = { @EventConfig(listeners = ShowConnectCloudDriveActionComponent.ShowConnectCloudDriveActionListener.class) })
-public class ShowConnectCloudDriveActionComponent extends BaseCloudDriveManagerComponent {
+@ComponentConfig(
+                 events = { @EventConfig(
+                                         listeners = ShowConnectCloudDriveActionComponent.ShowConnectCloudDriveActionListener.class) })
+public class ShowConnectCloudDriveActionComponent extends BaseCloudDriveManagerComponent implements
+    CloudDriveUIMenuAction {
 
   public static class ShowConnectCloudDriveActionListener
                                                          extends
@@ -42,6 +46,7 @@ public class ShowConnectCloudDriveActionComponent extends BaseCloudDriveManagerC
 
     private void connectToDrive(Event<? extends UIComponent> event, UIJCRExplorer uiExplorer) throws Exception {
       UIPopupContainer uiPopupContainer = uiExplorer.getChild(UIPopupContainer.class);
+      // this form will initialize request context from its template
       uiPopupContainer.activate(ConnectCloudDriveForm.class, 400);
       event.getRequestContext().addUIComponentToUpdateByAjax(uiPopupContainer);
     }

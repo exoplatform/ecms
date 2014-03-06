@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<nodeTypes xmlns:nt="http://www.jcp.org/jcr/nt/1.0" xmlns:mix="http://www.jcp.org/jcr/mix/1.0"
+  xmlns:jcr="http://www.jcp.org/jcr/1.0">
+
+  <!-- A mixin to be added to exo:tab to save current exo:buttons related to Cloud Drive -->
+  <nodeType name="ecd:userButtons" isMixin="true" hasOrderableChildNodes="false" primaryItemName="ecd:buttons">
+    <propertyDefinitions>
+      <propertyDefinition name="ecd:buttons" requiredType="String" autoCreated="false" mandatory="true"
+        onParentVersion="COPY" protected="false" multiple="false">
+        <valueConstraints />
+      </propertyDefinition>
+    </propertyDefinitions>
+  </nodeType>
+  
+</nodeTypes>

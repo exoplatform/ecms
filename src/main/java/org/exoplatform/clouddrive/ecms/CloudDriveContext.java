@@ -28,6 +28,9 @@ import org.exoplatform.web.application.RequestContext;
 import org.exoplatform.web.application.RequireJS;
 import org.exoplatform.webui.application.WebuiRequestContext;
 
+import java.util.HashSet;
+import java.util.Set;
+
 import javax.jcr.Node;
 import javax.jcr.NodeIterator;
 import javax.jcr.RepositoryException;
@@ -42,9 +45,7 @@ import javax.jcr.RepositoryException;
  */
 public class CloudDriveContext {
 
-  protected final static String JAVASCRIPT       = "CloudDriveContext_Javascript".intern();
-
-  protected final static String JAVASCRIPT_NODES = "CloudDriveContext_JavascriptNodes".intern();
+  protected final static String JAVASCRIPT = "CloudDriveContext_Javascript".intern();
 
   /**
    * Initialize request with Cloud Drive support for given JCR location and {@link CloudProvider}.
@@ -62,25 +63,22 @@ public class CloudDriveContext {
                              String workspace,
                              String nodePath,
                              CloudProvider provider) throws CloudDriveException {
-    Object script = requestContext.getAttribute(JAVASCRIPT);
-    if (script == null) {
-      // XXX yes... nasty cast
-      JavascriptManager js = ((WebuiRequestContext) requestContext).getJavascriptManager();
-      RequireJS require = js.require("SHARED/cloudDrive", "cloudDrive");
+    Object obj = requestContext.getAttribute(JAVASCRIPT);
+    if (obj == null) {
+      CloudDriveContext context = new CloudDriveContext(requestContext);
 
       CloudDriveFeatures features = WCMCoreUtils.getService(CloudDriveFeatures.class);
-      // init cloud drive if we can connect for this user
+      // init cloud drive if we can connect to this user
       if (features.canCreateDrive(workspace, nodePath, requestContext.getRemoteUser(), provider)) {
-        require.addScripts("\ncloudDrive.init('" + workspace + "','" + nodePath + "');\n");
+        context.init(workspace, nodePath);
       } // else, drive will be not initialized - thus not able to connect
 
       if (provider != null) {
         // add provider's default params
-        require.addScripts("\ncloudDrive.initProvider('" + provider.getId() + "', '"
-            + provider.getAuthUrl() + "');\n");
+        context.addProvider(provider);
       }
-      
-      requestContext.setAttribute(JAVASCRIPT, JAVASCRIPT);
+
+      requestContext.setAttribute(JAVASCRIPT, context);
       return true;
     } else {
       return false; // already added
@@ -110,45 +108,104 @@ public class CloudDriveContext {
    * @return boolean <code>true</code> if nodes successfully initialized, <code>false</code> if nodes already
    *         initialized
    * @throws RepositoryException
+   * @throws CloudDriveException
    * @see {@link #init(RequestContext, String, String)}
    * @see {@link #init(RequestContext, String, String, CloudProvider)}
    */
-  public static boolean initNodes(RequestContext requestContext, Node parent) throws RepositoryException {
-    Object script = requestContext.getAttribute(JAVASCRIPT_NODES);
-    if (script == null) {
-      NodeIterator childs = parent.getNodes();
-      if (childs.hasNext()) {
-        CloudDriveService driveService = WCMCoreUtils.getService(CloudDriveService.class);
-        StringBuilder map = new StringBuilder();
-        // we construct JSON object on the fly
-        map.append('{');
-        do {
-          Node child = childs.nextNode();
-          CloudDrive drive = driveService.findDrive(child);
-          if (drive != null) {
+  public static void initNodes(RequestContext requestContext, Node parent) throws RepositoryException,
+                                                                          CloudDriveException {
+    Object obj = requestContext.getAttribute(JAVASCRIPT);
+    if (obj != null) {
+      CloudDriveContext context = (CloudDriveContext) obj;
+      context.addNodes(parent.getNodes());
+    } else {
+      throw new RequestContextNotInitializedException("Context not initialized for adding of drive nodes");
+    }
+  }
+
+  /**
+   * Initialize request with Cloud Drive providers {@link CloudProvider}.
+   * 
+   * @param requestContext {@link RequestContext}
+   * @param providers array of {@link CloudProvider} to add to the request context
+   * @throws CloudDriveException if cannot auth url from the provider
+   */
+  public static void initProviders(RequestContext requestContext, CloudProvider... providers) throws CloudDriveException {
+    Object obj = requestContext.getAttribute(JAVASCRIPT);
+    if (obj != null) {
+      CloudDriveContext context = (CloudDriveContext) obj;
+      for (CloudProvider p : providers) {
+        context.addProvider(p);
+      }
+    } else {
+      throw new RequestContextNotInitializedException("Context not initialized for adding of providers.");
+    }
+  }
+
+  // instance methods
+
+  private final RequireJS   require;
+
+  private final Set<String> nodes     = new HashSet<String>();
+
+  private final Set<String> providers = new HashSet<String>();
+
+  /**
+   * Internal constructor.
+   * 
+   * @param requestContext {@link RequestContext}
+   */
+  private CloudDriveContext(RequestContext requestContext) {
+    JavascriptManager js = ((WebuiRequestContext) requestContext).getJavascriptManager();
+    this.require = js.require("SHARED/cloudDrive", "cloudDrive");
+  }
+
+  private CloudDriveContext init(String workspace, String nodePath) {
+    require.addScripts("\ncloudDrive.init('" + workspace + "','" + nodePath + "');\n");
+    return this;
+  }
+
+  private CloudDriveContext addNodes(NodeIterator nodes) throws CloudDriveException, RepositoryException {
+    if (nodes.hasNext()) {
+      CloudDriveService driveService = WCMCoreUtils.getService(CloudDriveService.class);
+      StringBuilder map = new StringBuilder();
+      // we construct JSON object on the fly
+      map.append('{');
+      int count = 0;
+      do {
+        Node child = nodes.nextNode();
+        CloudDrive drive = driveService.findDrive(child);
+        if (drive != null) {
+          String title = child.getProperty("exo:title").getString();
+          if (!this.nodes.contains(title)) {
             map.append('"');
-            map.append(child.getName()); // exo:title?
+            // map.append(child.getName()); // exo:title required for js side
+            map.append(title);
             map.append("\":\"");
             map.append(drive.getUser().getProvider().getId());
             map.append("\",");
+            count++;
+            this.nodes.add(title);
           }
-        } while (childs.hasNext());
-        if (map.length() > 1) {
-          map.deleteCharAt(map.length() - 1); // remove last semicolon
-          map.append('}');
-
-          // XXX still... nasty cast
-          JavascriptManager js = ((WebuiRequestContext) requestContext).getJavascriptManager();
-
-          // XXX we already "required" cloudDrive as AMD dependency in init()
-          js.require("SHARED/cloudDrive", "cloudDrive").addScripts("\ncloudDrive.initNodes(" + map.toString()
-              + ");\n");
-
-          requestContext.setAttribute(JAVASCRIPT_NODES, JAVASCRIPT_NODES);
-          return true;
         }
+      } while (nodes.hasNext());
+      if (count >= 1) {
+        map.deleteCharAt(map.length() - 1); // remove last semicolon
+        map.append('}');
+
+        // we already "required" cloudDrive as AMD dependency in init()
+        require.addScripts("\ncloudDrive.initNodes(" + map.toString() + ");\n");
       }
-    } // already added
-    return false;
+    }
+    return this;
+  }
+
+  private CloudDriveContext addProvider(CloudProvider provider) throws CloudDriveException {
+    String id = provider.getId();
+    if (!providers.contains(id)) {
+      require.addScripts("\ncloudDrive.initProvider('" + id + "', '" + provider.getAuthUrl() + "');\n");
+      providers.add(id);
+    }
+    return this;
   }
 }
