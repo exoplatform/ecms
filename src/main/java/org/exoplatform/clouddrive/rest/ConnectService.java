@@ -376,7 +376,7 @@ public class ConnectService implements ResourceContainer {
   /**
    * Start connection of user's Cloud Drive to local JCR node.
    * 
-   * @param uriInfo - request info TODO need it?
+   * @param uriInfo - request info
    * @param workspace - workspace for cloud drive node
    * @param path - path to user's node to what connect the drive
    * @param jsessionsId
@@ -424,7 +424,7 @@ public class ConnectService implements ResourceContainer {
               Item item = userSession.getItem(path);
               if (item.isNode()) {
                 userNode = (Node) item;
-                String name = driveName(user);
+                String name = JCRLocalCloudDrive.rootName(user);
                 String processId = processId(workspace, userNode.getPath(), name);
 
                 // rest it by expire = 0
@@ -592,7 +592,7 @@ public class ConnectService implements ResourceContainer {
             resp.error(error).status(Status.INTERNAL_SERVER_ERROR);
           } else {
             // OK:connected or accepted (in progress)
-            // XXX don't send files each time but on done only
+            // don't send files each time but on done only
             if (connect.process.isDone()) {
               DriveInfo drive = DriveInfo.create(connect.drive, connect.process.getFiles());
               resp.drive(drive);
@@ -667,7 +667,7 @@ public class ConnectService implements ResourceContainer {
    * (Google Drive). <br>
    * This method is GET because of possibility of redirect on it.
    * 
-   * @param uriInfo - request info TODO need it?
+   * @param uriInfo - request info
    * @param providerId - provider id, see more in {@link CloudProvider}
    * @param key - authentication key (OAuth2 code for example)
    * @param error - error from the provider
@@ -697,23 +697,12 @@ public class ConnectService implements ResourceContainer {
     String requestHost = uriInfo.getRequestUri().getHost();
     if (repoName != null) {
       if (locator.isRedirect(requestHost)) {
-        // need redirect to actual service URL, TODO remove state query parameter
+        // need redirect to actual service URL
         resp.location(locator.getServiceLink(repoName, uriInfo.getRequestUri().toString()));
         return resp.status(Status.MOVED_PERMANENTLY).build(); // redirect
       }
     }
     String baseHost = locator.getServiceHost(requestHost);
-
-    // if (baseHost == null) {
-    // baseHost = uriInfo.getRequestUri().getHost();
-    // } else if (repoName != null) {
-    // if (baseHost.equals(uriInfo.getRequestUri().getHost())) {
-    // // need redirect to actual service URL, TODO remove state query parameter
-    // resp.location(locator.getServiceLink(repoName, uriInfo.getRequestUri().toString()));
-    // return resp.status(Status.MOVED_PERMANENTLY).build(); // redirect
-    // }
-    // }
-
     if (initId != null) {
       try {
         UUID iid = UUID.fromString(initId.getValue());
@@ -899,10 +888,6 @@ public class ConnectService implements ResourceContainer {
 
   protected String processId(String workspace, String nodePath) {
     return workspace + ":" + nodePath;
-  }
-
-  protected String driveName(CloudUser user) {
-    return user.getProvider().getName() + " - " + user.getEmail();
   }
 
   /**

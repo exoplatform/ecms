@@ -116,7 +116,9 @@ public class DriveService implements ResourceContainer {
   /**
    * Return drive information.
    * 
-   * @param uriInfo - request info TODO need it?
+   * @param uriInfo {@link UriInfo}
+   * @param workspace String
+   * @param path String
    * @return set of {@link CloudProvider} currently available for connect
    */
   @GET
@@ -139,7 +141,8 @@ public class DriveService implements ResourceContainer {
   /**
    * Synchronized cloud drive or its file/folder and return result for client refresh.
    * 
-   * @param uriInfo {@link UriInfo} - request info TODO need it?
+   * @param uriInfo {@link UriInfo}
+   * @param workspace {@link String} Drive Node workspace
    * @param path {@link String} Drive Node path
    * @return
    */
@@ -192,7 +195,7 @@ public class DriveService implements ResourceContainer {
                 removed = sync.getRemoved();
               } catch (CloudDriveAccessException e) {
                 LOG.warn("Request to cloud drive expired, forbidden or revoked.", e);
-                // XXX client should treat this status in special way and obtain new credentials using given
+                // client should treat this status in special way and obtain new credentials using given
                 // provider
                 return Response.status(Status.FORBIDDEN).entity(local.getUser().getProvider()).build();
               } catch (CloudDriveException e) {

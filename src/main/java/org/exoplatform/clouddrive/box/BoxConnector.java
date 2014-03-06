@@ -165,6 +165,7 @@ public class BoxConnector extends CloudDriveConnector {
                                                 CloudDriveException,
                                                 RepositoryException {
     JCRLocalCloudDrive.checkTrashed(driveNode);
+    JCRLocalCloudDrive.migrateName(driveNode);
     JCRLocalBoxDrive drive = new JCRLocalBoxDrive(new API(), getProvider(), driveNode, sessionProviders);
     drive.getUser().api().getToken().addListener(drive);
     return drive;

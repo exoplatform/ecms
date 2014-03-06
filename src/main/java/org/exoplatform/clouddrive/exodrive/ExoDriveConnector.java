@@ -226,8 +226,9 @@ public class ExoDriveConnector extends CloudDriveConnector {
    * {@inheritDoc}
    */
   @Override
-  public CloudDrive loadDrive(Node driveNode) throws CloudDriveException, RepositoryException {
+  protected CloudDrive loadDrive(Node driveNode) throws CloudDriveException, RepositoryException {
     JCRLocalCloudDrive.checkTrashed(driveNode);
+    JCRLocalCloudDrive.migrateName(driveNode);
     try {
       return new JCRLocalExoDrive(repository(), (ExoDriveProvider) provider, sessionProviders, driveNode);
     } catch (ExoDriveConfigurationException e) {

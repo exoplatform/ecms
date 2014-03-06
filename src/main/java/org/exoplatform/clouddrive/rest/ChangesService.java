@@ -90,7 +90,7 @@ public class ChangesService implements ResourceContainer {
    * 
    * TODO deprecated, not used anymore for Google Drive.
    * 
-   * @param uriInfo - request info TODO need it?
+   * @param uriInfo - request info
    * @param workspace
    * @param path
    * @return {@link Response}
@@ -133,7 +133,7 @@ public class ChangesService implements ResourceContainer {
                                  .build();
                 } catch (CloudDriveAccessException e) {
                   LOG.warn("Request to cloud drive forbidden or revoked.", e);
-                  // XXX client should treat this status in special way and obtain new credentials using
+                  // client should treat this status in special way and obtain new credentials using
                   // given provider
                   return Response.status(Status.FORBIDDEN).entity(local.getUser().getProvider()).build();
                 } catch (DriveRemovedException e) {
@@ -191,7 +191,7 @@ public class ChangesService implements ResourceContainer {
   /**
    * Start asynchronous synchronization of a drive described by given workspace and path.
    * 
-   * @param uriInfo - request info TODO need it?
+   * @param uriInfo - request info
    * @param workspace
    * @param path
    * @return {@link Response}

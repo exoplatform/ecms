@@ -126,6 +126,10 @@ public abstract class JCRLocalCloudDrive extends CloudDrive {
 
   public static final String        NT_UNSTRUCTURED       = "nt:unstructured";
 
+  public static final String        ECD_LOCALFORMAT       = "ecd:localFormat";
+
+  public static final double        CURRENT_LOCALFORMAT   = 1.1d;
+
   public static final String        DUMMY_DATA            = "";
 
   public static final String        USER_WORKSPACE        = "user.workspace";
@@ -548,7 +552,7 @@ public abstract class JCRLocalCloudDrive extends CloudDrive {
   protected class ExoJCREnvironment extends CloudDriveEnvironment {
 
     protected final Map<Command, ExoJCRSettings> config = new HashMap<Command, ExoJCRSettings>();
-    
+
     /**
      * {@inheritDoc}
      */
@@ -1014,12 +1018,12 @@ public abstract class JCRLocalCloudDrive extends CloudDrive {
         // cloudFile = drive.openFile(file.getName(), null);
       } else if (file.isNodeType(NT_FILE)) {
         // it's new local JCR node - upload it to the cloud
-        //String mimeType = file.getNode("jcr:content").getProperty("jcr:mimeType").getString();
+        // String mimeType = file.getNode("jcr:content").getProperty("jcr:mimeType").getString();
         isFolder = false;
         // cloudFile = drive.openFile(file.getName(), mimeType);
       } else if (file.isNodeType(NT_RESOURCE)) {
         // it's resource of new local JCR node - upload this nt:file to the cloud
-        //String mimeType = file.getProperty("jcr:mimeType").getString();
+        // String mimeType = file.getProperty("jcr:mimeType").getString();
         file = parentNode;
         parentNode = file.getParent();
         isFolder = false;
@@ -1051,50 +1055,50 @@ public abstract class JCRLocalCloudDrive extends CloudDrive {
   /**
    * Support for JCR actions. To do not fire on synchronization (our own modif) methods.
    */
-  protected static final ThreadLocal<CloudDrive>        actionDrive    = new ThreadLocal<CloudDrive>();
+  protected static final ThreadLocal<CloudDrive>   actionDrive      = new ThreadLocal<CloudDrive>();
 
-  protected final Transliterator                        accentsConverter;
+  protected static final Transliterator            accentsConverter = Transliterator.getInstance("Latin; NFD; [:Nonspacing Mark:] Remove; NFC;");
 
-  protected final String                                rootWorkspace;
+  protected final String                           rootWorkspace;
 
-  protected final ManageableRepository                  repository;
+  protected final ManageableRepository             repository;
 
-  protected final SessionProviderService                sessionProviders;
+  protected final SessionProviderService           sessionProviders;
 
-  protected final CloudUser                             user;
+  protected final CloudUser                        user;
 
-  protected final String                                rootUUID;
+  protected final String                           rootUUID;
 
-  protected final ThreadLocal<SoftReference<Node>>      rootNodeHolder;
+  protected final ThreadLocal<SoftReference<Node>> rootNodeHolder;
 
-  protected final NodeRemoveHandler                     handler;
+  protected final NodeRemoveHandler                handler;
 
   /**
    * Currently active connect command. Used to control concurrency in Cloud Drive.
    */
-  protected final AtomicReference<ConnectCommand>       currentConnect = new AtomicReference<ConnectCommand>();
+  protected final AtomicReference<ConnectCommand>  currentConnect   = new AtomicReference<ConnectCommand>();
 
   /**
    * Currently active synchronization command. Used to control concurrency in Cloud Drive.
    */
-  protected final AtomicReference<SyncCommand>          currentSync    = new AtomicReference<SyncCommand>();
+  protected final AtomicReference<SyncCommand>     currentSync      = new AtomicReference<SyncCommand>();
 
   /**
    * Managed queue of commands.
    */
-  protected final CommandPoolExecutor                   commandExecutor;
+  protected final CommandPoolExecutor              commandExecutor;
 
   /**
    * Environment for commands execution.
    */
-  protected final CloudDriveEnvironment commandEnv     = new ExoJCREnvironment();
+  protected final CloudDriveEnvironment            commandEnv       = new ExoJCREnvironment();
 
   /**
    * Title has special care. It used in error logs and an attempt to read <code>exo:title</code> property can
    * cause another {@link RepositoryException}. Thus need it pre-cached in the variable and try to read the
    * <code>exo:title</code> property each time, but if not successful use this one cached.
    */
-  private String                                        titleCached;
+  private String                                   titleCached;
 
   /**
    * Create JCR backed {@link CloudDrive}. This method used for both newly connecting drives and ones loading
@@ -1111,7 +1115,6 @@ public abstract class JCRLocalCloudDrive extends CloudDrive {
 
     this.user = user;
     this.sessionProviders = sessionProviders;
-    this.accentsConverter = Transliterator.getInstance("Latin; NFD; [:Nonspacing Mark:] Remove; NFC;");
 
     this.commandExecutor = CommandPoolExecutor.getInstance();
 
@@ -1287,9 +1290,8 @@ public abstract class JCRLocalCloudDrive extends CloudDrive {
 
     rootNode.addMixin(ECD_CLOUDDRIVE);
     if (!rootNode.hasProperty("exo:title")) {
-      // default title
-      rootNode.setProperty("exo:title", titleCached = getUser().getProvider().getName() + " - "
-          + getUser().getEmail());
+      // default title TODO
+      rootNode.setProperty("exo:title", titleCached = rootTitle(getUser()));
     } else {
       titleCached = rootNode.getProperty("exo:title").getString();
     }
@@ -2075,40 +2077,6 @@ public abstract class JCRLocalCloudDrive extends CloudDrive {
   }
 
   /**
-   * Clean up string for JCR compatible name.
-   * 
-   * @param String str
-   * @return String - JCR compatible name of local file
-   */
-  protected String cleanName(String str) {
-    str = accentsConverter.transliterate(str.trim());
-    // the character ? seems to not be changed to d by the transliterate function
-    StringBuffer cleanedStr = new StringBuffer(str.trim());
-    // delete special character
-    if (cleanedStr.length() == 1) {
-      char c = cleanedStr.charAt(0);
-      if (c == '.' || c == '/' || c == ':' || c == '[' || c == ']' || c == '*' || c == '\'' || c == '"'
-          || c == '|') {
-        // any -> _<NEXNUM OF c>
-        cleanedStr.deleteCharAt(0);
-        cleanedStr.append('_');
-        cleanedStr.append(Integer.toHexString(c).toUpperCase());
-      }
-    } else {
-      for (int i = 0; i < cleanedStr.length(); i++) {
-        char c = cleanedStr.charAt(i);
-        if (c == '/' || c == ':' || c == '[' || c == ']' || c == '*' || c == '\'' || c == '"' || c == '|') {
-          cleanedStr.deleteCharAt(i);
-          cleanedStr.insert(i, '_');
-        } else if (!(Character.isLetterOrDigit(c) || Character.isWhitespace(c) || c == '.' || c == '-' || c == '_')) {
-          cleanedStr.deleteCharAt(i--);
-        }
-      }
-    }
-    return cleanedStr.toString().trim(); // finally trim also
-  }
-
-  /**
    * Internal access to Cloud Drive title without throwing an Exception.
    * 
    * @return {@link String}
@@ -2175,6 +2143,40 @@ public abstract class JCRLocalCloudDrive extends CloudDrive {
   protected abstract boolean isSyncSupported(CloudFile cloudFile);
 
   /**
+   * Clean up string for JCR compatible name.
+   * 
+   * @param String str
+   * @return String - JCR compatible name of local file
+   */
+  protected static String cleanName(String name) {
+    String str = accentsConverter.transliterate(name.trim());
+    // the character ? seems to not be changed to d by the transliterate function
+    StringBuilder cleanedStr = new StringBuilder(str.trim());
+    // delete special character
+    if (cleanedStr.length() == 1) {
+      char c = cleanedStr.charAt(0);
+      if (c == '.' || c == '/' || c == ':' || c == '[' || c == ']' || c == '*' || c == '\'' || c == '"'
+          || c == '|') {
+        // any -> _<NEXNUM OF c>
+        cleanedStr.deleteCharAt(0);
+        cleanedStr.append('_');
+        cleanedStr.append(Integer.toHexString(c).toUpperCase());
+      }
+    } else {
+      for (int i = 0; i < cleanedStr.length(); i++) {
+        char c = cleanedStr.charAt(i);
+        if (c == '/' || c == ':' || c == '[' || c == ']' || c == '*' || c == '\'' || c == '"' || c == '|') {
+          cleanedStr.deleteCharAt(i);
+          cleanedStr.insert(i, '_');
+        } else if (!(Character.isLetterOrDigit(c) || Character.isWhitespace(c) || c == '.' || c == '-' || c == '_')) {
+          cleanedStr.deleteCharAt(i--);
+        }
+      }
+    }
+    return cleanedStr.toString().trim(); // finally trim also
+  }
+
+  /**
    * Block other JCR extension actions.
    * 
    * @param drive {@link CloudDrive}
@@ -2211,5 +2213,79 @@ public abstract class JCRLocalCloudDrive extends CloudDrive {
     if (node.getParent().isNodeType(EXO_TRASHFOLDER)) {
       throw new DriveRemovedException("Drive " + node.getPath() + " was moved to Trash.");
     }
+  }
+
+  /**
+   * Migrate Cloud Drive root node naming from title based (PROVIDER_NAME - user@email) to transliterated
+   * title (for ECMS compatibility). Note that node will be saved during the migration: all transient changes
+   * will be saved as well. If given node not a root of cloud drive this method will do nothing.
+   * 
+   * @param node {@link Node}
+   * @throws RepositoryException
+   */
+  public static void migrateName(Node node) throws RepositoryException {
+    if (node.isNodeType(ECD_CLOUDDRIVE)) {
+      // root node has a property (not exactly defined): ecd:localFormat. It is a string with version of
+      // format.
+      boolean upgrade;
+      try {
+        double localFormat = node.getProperty(ECD_LOCALFORMAT).getDouble();
+        if (localFormat == CURRENT_LOCALFORMAT) {
+          upgrade = false;
+        } else {
+          // local format unknown
+          LOG.warn("Local format unknown: " + localFormat + ". Supported format: " + CURRENT_LOCALFORMAT
+              + " or lower.");
+          upgrade = false;
+        }
+      } catch (PathNotFoundException e) {
+        // property not found - format not defined, assuming old format 1.0
+        upgrade = true;
+      }
+
+      if (upgrade) {
+        // ******** upgrade from 1.0 to 1.1 ********
+        // move root node to transliterated name, downgrade not supported
+        String name = node.getName();
+        Session session = node.getSession();
+        try {
+          session.move(node.getPath(), node.getParent().getPath() + '/' + cleanName(name));
+          session.save();
+        } catch (RepositoryException e) {
+          try {
+            session.refresh(false);
+          } catch (RepositoryException re) {
+            LOG.warn("Error rolling back the session during root node migration: " + re);
+          }
+          throw e;
+        }
+      }
+    } else {
+      LOG.warn("Not a Cloud Drive root node: " + node.getPath());
+    }
+  }
+
+  /**
+   * Create a name for Cloud Drive root node.
+   * 
+   * @param user {@link CloudUser}
+   * @return String with a text of root node for given user
+   * @throws RepositoryException
+   * @throws DriveRemovedException
+   */
+  public static String rootName(CloudUser user) throws RepositoryException, DriveRemovedException {
+    return cleanName(rootTitle(user));
+  }
+
+  /**
+   * Create a title for Cloud Drive root node.
+   * 
+   * @param user {@link CloudUser}
+   * @return String with a text of root node for given user
+   * @throws RepositoryException
+   * @throws DriveRemovedException
+   */
+  public static String rootTitle(CloudUser user) throws RepositoryException, DriveRemovedException {
+    return user.getProvider().getName() + " - " + user.getEmail();
   }
 }
