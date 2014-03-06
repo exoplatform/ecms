@@ -144,7 +144,6 @@ public class TrashServiceImpl implements TrashService {
     }
     String originalPath = node.getPath();
     String nodeWorkspaceName = nodeSession.getWorkspace().getName();
-    addRestorePathInfo(node);
     //List<Node> categories = taxonomyService_.getAllCategories(node, true);
     String nodeUUID = node.isNodeType(MIX_REFERENCEABLE) ? node.getUUID() : null;
     if (node.isNodeType(SYMLINK)) nodeUUID = null;
@@ -155,6 +154,7 @@ public class TrashServiceImpl implements TrashService {
       cache.remove(seoService.getHash(nodeUUID));
     }
     if (!node.isNodeType(EXO_RESTORE_LOCATION)) {
+      addRestorePathInfo(node);
       ManageableRepository manageableRepository = repositoryService.getCurrentRepository();
       Session trashSession = WCMCoreUtils.getSystemSessionProvider().getSession(this.trashWorkspace_, manageableRepository);
       String actualTrashPath = this.trashHome_ + (this.trashHome_.endsWith("/") ? "" : "/")
