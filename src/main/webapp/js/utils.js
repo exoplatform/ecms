@@ -31,15 +31,15 @@
 			} else {
 				expires = "";
 			}
-			(toDocument ? toDocument : document).cookie =
-					name + "=" + encodeURIComponent(value) + expires + "; path=" + (toPath ? toPath : "/") + (toDomain ? "; domain=" + toDomain : "");
+			(toDocument ? toDocument : document).cookie = name + "=" + encodeURIComponent(value) + expires + "; path="
+			    + (toPath ? toPath : "/") + (toDomain ? "; domain=" + toDomain : "");
 		};
 
 		/** Read cookie */
 		this.getCookie = function(name, fromDocument) {
 			var nameEQ = name + "=";
 			var ca = (fromDocument ? fromDocument : document).cookie.split(';');
-			for ( var i = 0; i < ca.length; i++) {
+			for (var i = 0; i < ca.length; i++) {
 				var c = ca[i];
 				while (c.charAt(0) == ' ') {
 					c = c.substring(1, c.length);
@@ -67,7 +67,7 @@
 				// $("head").append($("<link href='" + cssUrl + "' rel='stylesheet' type='text/css' />"));
 			}
 		};
-		
+
 		/** For debug logging. */
 		this.log = function(msg, e) {
 			if (typeof console != "undefined" && typeof console.log != "undefined") {
@@ -78,6 +78,6 @@
 			}
 		};
 	}
-	
+
 	return new CDUtils();
 })($);

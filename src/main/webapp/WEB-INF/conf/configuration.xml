@@ -28,6 +28,11 @@
     <key>org.exoplatform.clouddrive.CloudDriveService</key>
     <type>org.exoplatform.clouddrive.CloudDriveServiceImpl</type>
   </component>
+  
+  <component>
+    <key>org.exoplatform.clouddrive.CloudDriveFeatures</key>
+    <type>org.exoplatform.clouddrive.features.PermissiveFeatures</type>
+  </component>
 
   <component>
     <key>org.exoplatform.clouddrive.jcr.NodeFinder</key>
@@ -48,6 +53,10 @@
 
   <component>
     <type>org.exoplatform.clouddrive.rest.ChangesService</type>
+  </component>
+  
+  <component>
+    <type>org.exoplatform.clouddrive.rest.FeaturesService</type>
   </component>
   
   <component>
@@ -147,6 +156,7 @@
           <name>autoCreatedInNewRepository</name>
           <description>Cloud Drive node types configuration file</description>
           <value>jar:/conf/portal/jcr/clouddrive-nodetypes.xml</value>
+          <value>jar:/conf/portal/jcr/clouddrive-ui-nodetypes.xml</value>
         </values-param>
       </init-params>
     </component-plugin>

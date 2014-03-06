@@ -45,7 +45,7 @@
 					map[502] = function() {
 						// treat 502 as request error also
 						callbacks.fail("Bad gateway", "error", 502);
-					}
+					};
 				}
 				return jQueryStatusCode(map);
 			};
@@ -94,7 +94,7 @@
 					map[502] = function() {
 						// treat 502 as request error also
 						process.fail("Bad gateway", 502, "error");
-					}
+					};
 				}
 				return jQueryStatusCode(map);
 			};
@@ -128,7 +128,7 @@
 			});
 
 			initRequestDefaults(request, callbacks);
-		}
+		};
 
 		var connectPost = function(workspace, path) {
 			var request = $.ajax({
@@ -145,7 +145,7 @@
 			});
 
 			return initRequest(request);
-		}
+		};
 
 		var connectInit = function(providerId, callbacks) {
 			var request = $.ajax({
@@ -155,7 +155,7 @@
 			});
 
 			initRequestDefaults(request, callbacks);
-		}
+		};
 
 		var getDrive = function(workspace, path, callbacks) {
 			var request = $.ajax({
@@ -170,7 +170,7 @@
 			});
 
 			initRequestDefaults(request, callbacks);
-		}
+		};
 
 		var getFile = function(workspace, path, callbacks) {
 			var request = $.ajax({
@@ -184,7 +184,7 @@
 			  }
 			});
 			initRequestDefaults(request, callbacks);
-		}
+		};
 
 		var synchronizePost = function(workspace, path) {
 			var request = $.ajax({
@@ -199,7 +199,7 @@
 			});
 
 			return initRequest(request);
-		}
+		};
 
 		/** TODO deprecated */
 		var changesPost = function(workspace, path) {
@@ -215,7 +215,7 @@
 			});
 
 			return initRequest(request);
-		}
+		};
 
 		var changesLinkGet = function(workspace, path) {
 			var request = $.ajax({
@@ -230,7 +230,7 @@
 			});
 
 			return initRequest(request);
-		}
+		};
 
 		var serviceGet = function(url) {
 			var request = $.ajax({
@@ -240,7 +240,22 @@
 			  dataType : "json"
 			});
 			return initRequest(request);
-		}
+		};
+
+		var featuresIsAutosync = function(workspace, path) {
+			var request = $.ajax({
+			  async : true,
+			  type : "GET",
+			  url : prefixUrl + "/portal/rest/clouddrive/features/is-autosync-enabled",
+			  dataType : "json",
+			  data : {
+			    workspace : workspace,
+			    path : path
+			  }
+			});
+
+			return initRequest(request);
+		};
 
 		var connectDrive = function(providerId, authUrl) {
 			var authWindow;
@@ -352,7 +367,7 @@
 				i++;
 			}, 1000);
 			return process.promise();
-		}
+		};
 
 		var connectCheck = function(checkUrl) {
 			var process = $.Deferred();
@@ -421,12 +436,12 @@
 
 		var getPortalUser = function() {
 			return eXo.env.portal.userName;
-		}
+		};
 
 		var getFileLink = function(nodePath) {
 			var file = contextDrive.files[nodePath];
 			return file ? file.link : null;
-		}
+		};
 
 		var addExcluded = function(path) {
 			excluded[path] = true;
@@ -448,7 +463,7 @@
 					}
 				}
 			}
-		}
+		};
 
 		var autoSynchronize = function() {
 			if (contextNode && contextDrive) {
@@ -506,7 +521,7 @@
 								delete autoSyncs[syncName]; // cancel and cleanup
 								utils.log("ERROR: changes long-polling error: " + err + ", " + status + ", " + response);
 							});
-						}
+						};
 						scheduleSync();
 						utils.log("Long-polling synchronization enabled for Cloud Drive on " + syncName);
 					} else {
@@ -530,7 +545,7 @@
 					}
 				}
 			}
-		}
+		};
 
 		var synchronize = function(nodeWorkspace, nodePath) {
 			var process = $.Deferred();
@@ -641,7 +656,6 @@
 			utils.log("Connecting Cloud Drive...");
 
 			if (!authUrl) {
-				// TODO cleanup // providerId = connectProvider.id;
 				authUrl = connectProvider[providerId];
 				if (!authUrl) {
 					utils.log("ERROR: Authentication URL not found for " + providerId);
@@ -710,7 +724,7 @@
 		};
 
 		/**
-		 * Initialize context node and optionaly drive.
+		 * Initialize context node and optionally a drive.
 		 */
 		this.initContext = function(nodeWorkspace, nodePath) {
 			utils.log("Init context node: " + nodeWorkspace + ":" + nodePath
@@ -772,7 +786,18 @@
 					    });
 				}
 				if (contextDrive) {
-					autoSynchronize();
+					var autosync = featuresIsAutosync(nodeWorkspace, nodePath);
+					autosync.done(function(check) {
+						if (check && check.result) {
+							autoSynchronize();
+						} else {
+							stopAutoSynchronize();
+						}
+					});
+					autosync.fail(function(response, status, err) {
+						// in case of error: don't enable/disable autosync
+						utils.log("ERROR: features autosync: " + err + ", " + status + ", " + response);
+					});
 				} else {
 					stopAutoSynchronize();
 				}
@@ -823,7 +848,7 @@
 	 * WebUI integration.
 	 */
 	function CloudDriveUI() {
-		var NOTICE_WIDTH = "320px"
+		var NOTICE_WIDTH = "320px";
 
 		var MENU_OPEN_FILE = "OpenCloudFile";
 		var MENU_REFRESH_DRIVE = "RefreshCloudDrive";
@@ -1100,7 +1125,7 @@
 			if (tasks) {
 				// add check task to get user notified in case of leaving this
 				// page
-				task = "cloudDriveUI.connectState(\"" + checkUrl + "\", \"" + docsUrl + "\", \"" + docsOnclick + "\");"
+				task = "cloudDriveUI.connectState(\"" + checkUrl + "\", \"" + docsUrl + "\", \"" + docsOnclick + "\");";
 				tasks.add(task);
 			} else {
 				utils.log("Tasks not defined");
@@ -1307,7 +1332,7 @@
 				}
 				var alink = "<a class='cdSynchronizeProcessAction' href='javascript:void(0);'";
 				var driveLink = "<span>" + alink + " style=\"curson: pointer; border-bottom: 1px dashed #999; display: inline;\">"
-				    + drive.email + "</a></span>"
+				    + drive.email + "</a></span>";
 				var details;
 				if (files + folders > 0 || drive.removed.length > 0) {
 					// Don't refresh at all, as user can change the

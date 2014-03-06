@@ -44,8 +44,8 @@
       <init-params>
         <values-param>
           <name>default-actions</name>
-          <description>ECMS menu actions enabled by default (WebUI extensions)</description>
-          <value>org.exoplatform.clouddrive.ecms.ShowConnectCloudDriveActionComponent</value>
+          <description>Names of ECMS menu actions enabled by default (WebUI extensions)</description>
+          <value>ShowConnectCloudDrive</value>
         </values-param>
       </init-params>
     </component-plugin>
