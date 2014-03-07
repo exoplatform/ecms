@@ -106,7 +106,7 @@ public class ConnectService implements ResourceContainer {
   /**
    * Error cookie expire time in seconds.
    */
-  public static final int       ERROR_COOKIE_EXPIRE    = 5;                                       // 5sec
+  public static final int       ERROR_COOKIE_EXPIRE    = 5;                                        // 5sec
 
   /**
    * Connect request expire time in milliseconds.
@@ -231,7 +231,7 @@ public class ConnectService implements ResourceContainer {
 
     final Command    process;
 
-    final String     name;
+    final String     title;
 
     final String     workspaceName;
 
@@ -239,15 +239,15 @@ public class ConnectService implements ResourceContainer {
 
     Throwable        error;
 
-    ConnectProcess(String name, String workspaceName, CloudDrive drive, ConversationState conversation) throws CloudDriveException,
+    ConnectProcess(String workspaceName, CloudDrive drive, ConversationState conversation) throws CloudDriveException,
         RepositoryException {
       this.drive = drive;
-      this.name = name;
+      this.title = drive.getTitle();
       this.workspaceName = workspaceName;
       this.drive.addListener(this); // listen to remove from active map
       this.process = drive.connect(true);
 
-      LOG.info(name + " connect started.");
+      LOG.info(title + " connect started.");
     }
 
     void rollback() throws RepositoryException {
@@ -284,7 +284,7 @@ public class ConnectService implements ResourceContainer {
       } finally {
         lock.unlock();
         // log error here as the connect was executed asynchronously
-        LOG.error(name + " connect failed.", error);
+        LOG.error(title + " connect failed.", error);
       }
     }
 
@@ -295,7 +295,7 @@ public class ConnectService implements ResourceContainer {
       // unregister listener
       drive.removeListener(this);
 
-      LOG.info(name + " successfully connected.");
+      LOG.info(title + " successfully connected.");
     }
   }
 
@@ -470,7 +470,7 @@ public class ConnectService implements ResourceContainer {
                       LOG.info(drive.getEmail() + " already connected.");
                     } else {
                       // a new or exist but not connected - connect it
-                      connect = new ConnectProcess(name, workspace, local, convo);
+                      connect = new ConnectProcess(workspace, local, convo);
                       active.put(processId, connect);
 
                       resp.status(connect.process.isDone() ? Status.CREATED : Status.ACCEPTED);
@@ -490,7 +490,7 @@ public class ConnectService implements ResourceContainer {
                 } else {
                   // else, such connect already in progress (probably was started by another request)
                   // client can warn the user or try use check url to get that work status
-                  String message = "Connect to " + connect.name
+                  String message = "Connect to " + connect.title
                       + " already posted and currently in progress.";
                   LOG.warn(message);
 
@@ -610,7 +610,7 @@ public class ConnectService implements ResourceContainer {
         } catch (DriveRemovedException e) {
           LOG.warn("Drive removed " + processId, e);
           // KO:removed
-          resp.error("Drive removed '" + connect.name + "'.").status(Status.BAD_REQUEST);
+          resp.error("Drive removed '" + connect.title + "'.").status(Status.BAD_REQUEST);
         } finally {
           connect.lock.unlock();
         }
@@ -847,7 +847,7 @@ public class ConnectService implements ResourceContainer {
         String host = locator.getServiceHost(uriInfo.getRequestUri().getHost());
 
         UUID initId = generateId(localUser);
-        initiated.put(initId, new ConnectInit(localUser, cloudProvider, host)); 
+        initiated.put(initId, new ConnectInit(localUser, cloudProvider, host));
         timeline.put(initId, System.currentTimeMillis() + (INIT_COOKIE_EXPIRE * 1000) + 5000);
 
         resp.cookie(INIT_COOKIE,
