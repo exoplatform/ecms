@@ -36,6 +36,7 @@ public class TaxonomyConfig {
   static public class Taxonomy {
     private String path;
     private String name;
+    private String title;
     private String description;
     private List<Permission> permissions = new ArrayList<Permission>(4);
 
@@ -46,6 +47,10 @@ public class TaxonomyConfig {
     public String getName() {return this.name; }
 
     public void setName(String name) { this.name = name; }
+
+    public String getTitle() {return this.title; }
+
+    public void setTitle(String title) { this.title = title; }
 
     public String getDescription()  { return this.description; }
 
