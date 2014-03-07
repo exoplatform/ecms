@@ -22,6 +22,8 @@ import org.exoplatform.clouddrive.CloudDriveException;
 import org.exoplatform.clouddrive.CloudDriveService;
 import org.exoplatform.clouddrive.CloudProvider;
 import org.exoplatform.clouddrive.features.CloudDriveFeatures;
+import org.exoplatform.services.log.ExoLogger;
+import org.exoplatform.services.log.Log;
 import org.exoplatform.services.wcm.utils.WCMCoreUtils;
 import org.exoplatform.web.application.JavascriptManager;
 import org.exoplatform.web.application.RequestContext;
@@ -45,7 +47,9 @@ import javax.jcr.RepositoryException;
  */
 public class CloudDriveContext {
 
-  protected final static String JAVASCRIPT = "CloudDriveContext_Javascript".intern();
+  protected static final String JAVASCRIPT = "CloudDriveContext_Javascript".intern();
+
+  protected static final Log    LOG        = ExoLogger.getLogger(CloudDriveContext.class);
 
   /**
    * Initialize request with Cloud Drive support for given JCR location and {@link CloudProvider}.
@@ -81,7 +85,10 @@ public class CloudDriveContext {
       requestContext.setAttribute(JAVASCRIPT, context);
       return true;
     } else {
-      return false; // already added
+      if (LOG.isDebugEnabled()) {
+        LOG.debug("Request context already initialized");
+      }
+      return false;
     }
   }
 
@@ -112,14 +119,18 @@ public class CloudDriveContext {
    * @see {@link #init(RequestContext, String, String)}
    * @see {@link #init(RequestContext, String, String, CloudProvider)}
    */
-  public static void initNodes(RequestContext requestContext, Node parent) throws RepositoryException,
+  public static boolean initNodes(RequestContext requestContext, Node parent) throws RepositoryException,
                                                                           CloudDriveException {
     Object obj = requestContext.getAttribute(JAVASCRIPT);
     if (obj != null) {
       CloudDriveContext context = (CloudDriveContext) obj;
       context.addNodes(parent.getNodes());
+      return true;
     } else {
-      throw new RequestContextNotInitializedException("Context not initialized for adding of drive nodes");
+      if (LOG.isDebugEnabled()) {
+        LOG.debug("Context not initialized for adding of drive nodes.");
+      }
+      return false;
     }
   }
 
@@ -130,15 +141,19 @@ public class CloudDriveContext {
    * @param providers array of {@link CloudProvider} to add to the request context
    * @throws CloudDriveException if cannot auth url from the provider
    */
-  public static void initProviders(RequestContext requestContext, CloudProvider... providers) throws CloudDriveException {
+  public static boolean initProviders(RequestContext requestContext, CloudProvider... providers) throws CloudDriveException {
     Object obj = requestContext.getAttribute(JAVASCRIPT);
     if (obj != null) {
       CloudDriveContext context = (CloudDriveContext) obj;
       for (CloudProvider p : providers) {
         context.addProvider(p);
       }
+      return true;
     } else {
-      throw new RequestContextNotInitializedException("Context not initialized for adding of providers.");
+      if (LOG.isDebugEnabled()) {
+        LOG.debug("Context not initialized for adding of providers.");
+      }
+      return false;
     }
   }
 
