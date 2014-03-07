@@ -37,7 +37,7 @@ import org.exoplatform.services.wcm.search.ResultNode;
 import org.exoplatform.services.wcm.search.SiteSearchService;
 import org.exoplatform.services.wcm.search.base.AbstractPageList;
 import org.exoplatform.services.wcm.utils.WCMCoreUtils;
-import org.exoplatform.wcm.webui.selector.content.one.UIContentSelectorOne;
+import org.exoplatform.wcm.webui.selector.content.UIContentSelector;
 import org.exoplatform.web.application.ApplicationMessage;
 import org.exoplatform.webui.application.WebuiRequestContext;
 import org.exoplatform.webui.config.annotation.ComponentConfig;
@@ -141,7 +141,7 @@ public class UIContentSearchForm extends UIForm {
       UIContentSearchForm contentSearchForm = event.getSource();
       UIContentSelector contentSelector = contentSearchForm.getParent();
       contentSearchForm.setCheckedRadioId(event.getRequestContext().getRequestParameter(CHECKED_RADIO_ID));
-      UIContainer uiContainer = contentSearchForm.getAncestorOfType(UIContentSelectorOne.class).getAncestorOfType(UIContainer.class);
+      UIContainer uiContainer = contentSearchForm.getAncestorOfType(UIContentSelector.class).getAncestorOfType(UIContainer.class);
       contentSelector.initMetadataPopup(uiContainer);
       event.getRequestContext().addUIComponentToUpdateByAjax(uiContainer);
     }
@@ -152,7 +152,7 @@ public class UIContentSearchForm extends UIForm {
       UIContentSearchForm contentSearchForm = event.getSource();
       UIContentSelector contentSelector = contentSearchForm.getParent();
       contentSearchForm.setCheckedRadioId(event.getRequestContext().getRequestParameter(CHECKED_RADIO_ID));
-      UIContainer uiContainer = contentSearchForm.getAncestorOfType(UIContentSelectorOne.class).getAncestorOfType(UIContainer.class);
+      UIContainer uiContainer = contentSearchForm.getAncestorOfType(UIContentSelector.class).getAncestorOfType(UIContainer.class);
       contentSelector.initNodeTypePopup(uiContainer);
       event.getRequestContext().addUIComponentToUpdateByAjax(uiContainer);
     }
