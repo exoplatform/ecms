@@ -2,9 +2,9 @@
 <bundle>
   <UIViewFormTabPane>
   <label>
-          <publicationRequestApproval>Publication &gt; Request Approval</publicationRequestApproval>
-          <publicationApproveContent>Publication &gt; Approve Content</publicationApproveContent>
-          <publicationPublish>Publication &gt; Publish</publicationPublish>
+          <publicationRequestApproval>Paskelbimas &gt; Prašyti patvirtinimo</publicationRequestApproval>
+          <publicationApproveContent>Paskelbimas &gt; Patvirtinti turinį</publicationApproveContent>
+          <publicationPublish>Paskelbimas &gt; Skelbti</publicationPublish>
   </label>
   </UIViewFormTabPane>
 </bundle>

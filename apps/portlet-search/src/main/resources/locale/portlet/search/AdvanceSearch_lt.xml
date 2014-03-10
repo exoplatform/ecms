@@ -2,55 +2,55 @@
 <bundle>
   <UIDefaultSearchForm>
     <label>
-      <keyword>Keyword</keyword>
+      <keyword>Raktas</keyword>
       <portal>Portalas</portal>
       <Page>Puslapis</Page>
-      <Document>Document</Document>
+      <Document>Dokumentas</Document>
     </label>
     <action>
-      <Search>Search</Search>
+      <Search>Paieška</Search>
     </action>
   </UIDefaultSearchForm>
 
   <UIDefaultSearchResult>
     <label>
       <Page>Puslapis</Page>
-      <Document>Document</Document>
-      <DocumentAndPage>Document and Page</DocumentAndPage>
-      <documentandpage>Document and Page</documentandpage>
-      <resutlsCaption>Results</resutlsCaption>
+      <Document>Dokumentas</Document>
+      <DocumentAndPage>Dokumentas ir puslapis</DocumentAndPage>
+      <documentandpage>Dokumentas ir puslapis</documentandpage>
+      <resutlsCaption>Rezultatai</resutlsCaption>
       <ofAboutCaption>of about</ofAboutCaption>
       <forCaption>for</forCaption>
       <timeUnitCaption>seconds</timeUnitCaption>
-      <similar>Pages where the same content appears</similar>
-      <editor>Editor</editor>
-      <date>Date</date>
-      <relevancy>Relevance</relevancy>
-      <title>Title</title>
-      <sortBy>Sort By:</sortBy>
+      <similar>Puslapiai, kuriuose tas pats turinys</similar>
+      <editor>Redaktorius</editor>
+      <date>Data</date>
+      <relevancy>Aktualumas</relevancy>
+      <title>Pavadinmas</title>
+      <sortBy>Rūšiuoti pagal:</sortBy>
     </label>
     <action>
       <edit>Redaguoti</edit>
     </action>
     <msg>
-      <your-search>Your search</your-search>
+      <your-search>Jūsų paieška</your-search>
       <did-not-match>did not match any</did-not-match>
       <new-suggestion>suggestion</new-suggestion>
     </msg>
   </UIDefaultSearchResult>
   <UISearchPageLayoutManager>
     <label>
-      <itemsPerPageSelector>Items per Page</itemsPerPageSelector>
-      <searchFormSelector>Search Form Template</searchFormSelector>
+      <itemsPerPageSelector>Elementų kiekis puslapyje</itemsPerPageSelector>
+      <searchFormSelector>Ieškoti pagal šabloną</searchFormSelector>
       <searchResultSelector>Search Result Template</searchResultSelector>
       <searchPaginatorSelector>Search Paginator Template</searchPaginatorSelector>
       <searchPageLayoutSelector>Search Page Layout Template</searchPageLayoutSelector>
-      <searchResultBasePathInputSetAction>Base Path</searchResultBasePathInputSetAction>
-      <pageMode>Page Mode</pageMode>
+      <searchResultBasePathInputSetAction>Bazinis kelias</searchResultBasePathInputSetAction>
+      <pageMode>Puslapio režimas</pageMode>
       <option>
         <none>None</none>
-        <more>More</more>
-        <pagination>Pagination</pagination>
+        <more>Daugiau</more>
+        <pagination>Numeracija</pagination>
       </option>
     </label>
     <action>
@@ -60,38 +60,38 @@
   </UISearchPageLayoutManager>
   <searchResultBasePathInputSetAction>
     <title>
-      <SelectBasePath>Select Base Path</SelectBasePath>
+      <SelectBasePath>Pasirinkti bazinį kelią</SelectBasePath>
     </title>
   </searchResultBasePathInputSetAction>  
   <UISearchForm>  
    <message>
-     <keyword-not-support>The keyword is invalid. Some characters are not recognized.</keyword-not-support>
-     <not-checked>Please select a search type.</not-checked>
-     <keyword-not-empty>Please enter a keyword.</keyword-not-empty>
+     <keyword-not-support>Raktinis žodis yra neteisingas. Kai kurie ženklai yra neatpažįstami.</keyword-not-support>
+     <not-checked>Pasirinkite paieškos tipą.</not-checked>
+     <keyword-not-empty>Įveskite raktinį žodį.</keyword-not-empty>
    </message>
   </UISearchForm>
   <UIPaginatorDefault>
     <label>
-      <next>Next</next>
-      <previous>Previous</previous>
-      <more>More</more>
+      <next>Sekantis</next>
+      <previous>Ankstesnis</previous>
+      <more>Daugiau</more>
     </label>
   </UIPaginatorDefault>
   <UISearchPageLayoutDefault>
     <label>
-      <quickEditTitle>Quick Edit</quickEditTitle>
+      <quickEditTitle>Greitas redagavimas</quickEditTitle>
     </label>
   </UISearchPageLayoutDefault>
   <searchOption>
     <label>
-      <pageCheckBox>in Pages</pageCheckBox>
-      <documentCheckBox>in Content</documentCheckBox>
+      <pageCheckBox>puslapiuose</pageCheckBox>
+      <documentCheckBox>turinyje</documentCheckBox>
     </label>
   </searchOption>
   <ViewMode>
     <label>
       <option>
-        <all>search all sites</all>
+        <all>Ieškoti visose svetainėse</all>
       </option>  
     </label>  
   </ViewMode>

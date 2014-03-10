@@ -40,8 +40,8 @@
   <File>
     <view>
       <label>
-        <not-viewable>このコンテンツは見ることができません、ダウンロードする、もしくはWebDAVを使ってアクセスしてください。</not-viewable>
-        <using-webDAV>または、WebDAV を使用して、コンテンツにアクセスしてください</using-webDAV>
+        <not-viewable>The preview of this document is not available.</not-viewable>
+        <using-webDAV>or Open in MS Office</using-webDAV>
         <file-size-too-big>ファイルのコンテンツが大きすぎます。ダウンロードし、クライアント上で開いて下さい。</file-size-too-big>
         <webDAV>WebDAV ビュー</webDAV>
         <download>ファイルをダウンロード</download>

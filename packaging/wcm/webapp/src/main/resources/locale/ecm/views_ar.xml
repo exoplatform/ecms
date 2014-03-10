@@ -40,8 +40,8 @@
   <File>
     <view>
       <label>
-        <not-viewable>هذا المحتوى غير قابل للعرض. يُرجى تحميله أو استخدام تقنية 'WEBDAV' للوصول إليه</not-viewable>
-        <using-webDAV>أو استخدام الـ WebDAV للوصول إلى المحتوى</using-webDAV>
+        <not-viewable>The preview of this document is not available.</not-viewable>
+        <using-webDAV>or Open in MS Office</using-webDAV>
         <file-size-too-big>محتوى هذا الملف كبير جدا. لتتمكن من عرضه يُرجى تنزيله</file-size-too-big>
         <webDAV>مشهد WebDAV</webDAV>
         <download>تنزيل هذا الملف</download>

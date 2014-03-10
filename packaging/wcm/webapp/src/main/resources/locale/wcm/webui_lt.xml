@@ -82,7 +82,7 @@
     <title>
       <UIContentBrowsePanelOne>Content Browser</UIContentBrowsePanelOne>
       <UIContentBrowsePanelMulti>Content Browser</UIContentBrowsePanelMulti>
-      <UIContentBrowsePanelFolder>Folder Browser</UIContentBrowsePanelFolder>
+      <UIContentBrowsePanelFolder>Aplankų naršyklė</UIContentBrowsePanelFolder>
       <UIContentSearchForm>Content Search Form</UIContentSearchForm>
       <UIContentSearchResult>Paieškos rezultatas</UIContentSearchResult>
       <UIContentViewer>Preview Content</UIContentViewer>
@@ -178,9 +178,9 @@
   <UIContentSearchForm>
     <title>
       <Location>Svetainės pavadinimas</Location>
-      <SearchByName>Search by Name</SearchByName>
+      <SearchByName>Paieška pagal vardą</SearchByName>
       <Fulltext>A word or phrase in context</Fulltext>
-      <Property>Property</Property>
+      <Property>Ypatybė</Property>
       <Contain>Contain</Contain>
       <FromDate>From Date</FromDate>
       <ToDate>To Date</ToDate>
@@ -197,7 +197,7 @@
       </option>
     </label>
     <action>
-      <SearchWebContent>Search</SearchWebContent>
+      <SearchWebContent>Ieškoti</SearchWebContent>
     </action>
     <msg>
       <time-to-late>The searching time is too long.</time-to-late>
@@ -217,12 +217,12 @@
 
   <UIContentPropertySelector>
     <action>
-      <Add>Add</Add>
+      <Add>Pridėti</Add>
       <Cancel>#{word.cancel}</Cancel>
     </action>
     <label>
       <metadataType>Metadata Type</metadataType>
-      <property_select>Property</property_select>
+      <property_select>Ypatybė</property_select>
     </label>
   </UIContentPropertySelector>
 
@@ -313,7 +313,7 @@
 
   <UIUserSelectorPopupWindow>
     <title>
-      <UIUserContainer>User Selector</UIUserContainer>
+      <UIUserContainer>Vartotojo pasirinkimas</UIUserContainer>
     </title>
   </UIUserSelectorPopupWindow>
 
@@ -390,7 +390,7 @@
       <GeneralDrives>General Drives</GeneralDrives>
       <GroupDrives>Group Drives</GroupDrives>
       <Private>Private</Private>
-      <Public>Public</Public>
+      <Public>Viešas</Public>
       <BackupCenter>Backup Center</BackupCenter>
       <CategorizedDocumentsCenter>Categorized Documents Center</CategorizedDocumentsCenter>
       <CollaborationCenter>Collaboration Center</CollaborationCenter>

@@ -129,7 +129,7 @@
     <title>Utforsker</title>
     <label>
       <Root>Rot</Root>
-      <webDavView>Last ned og tillat editering</webDavView>
+      <webDavView>Open in MS Office</webDavView>
     </label>
     <msg>
       <path-not-found>Dette elementet ble slettet eller endret. Klikk Oppdater-knappen.</path-not-found>
@@ -591,7 +591,7 @@
       <MoveToTrash>Flytt til papirkurven</MoveToTrash>
       <RestoreFromTrash>Gjenopprett fra papirkurven</RestoreFromTrash>
       <EmptyTrash>Tøm papirkurven</EmptyTrash>
-      <WebDavView>Edit in MS Office</WebDavView>
+      <WebDavView>Open in MS Office</WebDavView>
     </event>
   </ECMContextMenu>
  

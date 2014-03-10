@@ -40,8 +40,8 @@
   <File>
     <view>
       <label>
-        <not-viewable>Ce contenu n'est pas consultable</not-viewable>
-        <using-webDAV>ou utiliser WebDAV pour y accéder</using-webDAV>
+        <not-viewable>L'aperçu de ce document n'est pas disponible.</not-viewable>
+        <using-webDAV>ou Ouvrir dans MS Office</using-webDAV>
         <file-size-too-big>Le contenu de ce fichier est trop important. Veuillez le télécharger pour le consulter.</file-size-too-big>
         <webDAV>Vue WebDAV</webDAV>
         <download>Télécharger</download>

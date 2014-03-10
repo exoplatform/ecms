@@ -259,7 +259,7 @@
   </UIMetadataList>
   <MetadataPopupAddNew>
     <title>
-      <UIMetadataForm>Add New Metadata's Template</UIMetadataForm>
+      <UIMetadataForm>添加新的資料範本</UIMetadataForm>
     </title>
   </MetadataPopupAddNew>
   <MetadataPopupEdit>
@@ -706,9 +706,9 @@
   -->
   <DriveInputSet>
     <label>
-      <both>Both</both>
-      <folderOnly>Folder</folderOnly>
-      <unstructuredFolder>Unstructured Folder</unstructuredFolder>
+      <both>兩個</both>
+      <folderOnly>資料夾</folderOnly>
+      <unstructuredFolder>非結構化的資料夾</unstructuredFolder>
     </label>
     <title>
       <AddPermission>增加權限</AddPermission>
@@ -755,7 +755,7 @@
     <label>
       <actionType>擴展操作類型：</actionType>
       <name>名稱：</name>
-      <isMove>is Action Move:</isMove>
+      <isMove>是行動移動：</isMove>
       <variables>變數：</variables>
       <exo_businessProcessAction>業務流程：</exo_businessProcessAction>
       <exo_scriptAction>Groovy 腳本：</exo_scriptAction>
@@ -1176,7 +1176,7 @@
   -->
   <uiECMScriptsPopup>
     <title>
-      <ecmScriptForm>ECM Script</ecmScriptForm>
+      <ecmScriptForm>ECM 腳本</ecmScriptForm>
     </title>
   </uiECMScriptsPopup>
 
@@ -2092,7 +2092,7 @@
   </childNodeDefinition>
   <propertyDefinition>
     <title>
-      <AddConstraints>Add Constraints</AddConstraints>
+      <AddConstraints>增加限制</AddConstraints>
     </title>
   </propertyDefinition>
   <authInputSet>
@@ -2240,7 +2240,7 @@
     <email>#{word.email}</email>
       <action>#{word.action}</action>
       <Add>#{word.Add}</Add>
-      <Close>#{word.Close}</Close>
+      <Close># {word.close}</Close>
     </label>
   </PermissionTreeSelectUser>
   
@@ -2512,7 +2512,7 @@
   </UIWorkspaceWizard>
   <UIRepositoryForm>
     <msg>
-      <not-complete-repository>The repository is being created. You need to wait a few minutes before creating another one.</not-complete-repository>
+      <not-complete-repository>正在創建存儲庫。你需要等待幾分鐘，然後創建另一個。</not-complete-repository>
     </msg>
   </UIRepositoryForm>
   

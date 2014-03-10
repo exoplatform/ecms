@@ -129,7 +129,7 @@
     <title>Explorer</title>
     <label>
       <Root>Wurzel</Root>
-      <webDavView>Download und Bearbeitung erlauben</webDavView>
+      <webDavView>Open in MS Office</webDavView>
     </label>
     <msg>
       <path-not-found>Dieses Element wurde gelöscht oder geändert. Bitte klicken Sie auf die Schaltfläche "aktualisieren".</path-not-found>
@@ -591,7 +591,7 @@
       <MoveToTrash>In den Papierkorb verschieben</MoveToTrash>
       <RestoreFromTrash>Aus dem Papierkorb wiederherstellen</RestoreFromTrash>
       <EmptyTrash>Papierkorb leeren</EmptyTrash>
-      <WebDavView>In MS Office bearbeiten</WebDavView>
+      <WebDavView>Open in MS Office</WebDavView>
     </event>
   </ECMContextMenu>
  

@@ -40,8 +40,8 @@
   <File>
     <view>
       <label>
-        <not-viewable>Este comentário não está visível.</not-viewable>
-        <using-webDAV>ou utilize WebDAV para acessar o conteúdo</using-webDAV>
+        <not-viewable>A visualização deste documento não está disponível.</not-viewable>
+        <using-webDAV>ou abrir no MS Office</using-webDAV>
         <file-size-too-big>O contéudo deste arquivo é muito grande. Você deve baixá-lo e abrí-lo no cliente.</file-size-too-big>
         <webDAV>Ver WebDAV</webDAV>
         <download>Baixar</download>
@@ -138,7 +138,7 @@
     <view>
       <label>
         <not-avaliable>N/D</not-avaliable>
-        <core-elements>Core Elements</core-elements>
+        <core-elements>Elementos centrais</core-elements>
         <title>Título</title>
         <creator>Criador</creator>
         <subject>Assunto</subject>

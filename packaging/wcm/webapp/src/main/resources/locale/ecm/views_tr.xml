@@ -40,8 +40,8 @@
   <File>
     <view>
       <label>
-        <not-viewable>Bu içerik görüntülenebilir değil</not-viewable>
-        <using-webDAV>ya da içeriğe erişmek için WebDAV kullan</using-webDAV>
+        <not-viewable>Bu belgenin önizlemesi mevcut değildir.</not-viewable>
+        <using-webDAV>veya MS Office ile Açın</using-webDAV>
         <file-size-too-big>Bu içerik çok büyük. İçeriği indirip görüntüleyebilirsiniz.</file-size-too-big>
         <webDAV>WebDAV Görünümü</webDAV>
         <download>İndir</download>
