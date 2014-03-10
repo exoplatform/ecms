@@ -21,7 +21,7 @@
       <UINodeTypeManager>Skilčių tipai</UINodeTypeManager>
       <UITemplatesManager>Dokumentai</UITemplatesManager>
    <UICLVTemplatesManager>Sąrašas</UICLVTemplatesManager>
-      <UIViewManager>Views</UIViewManager>
+      <UIViewManager>Peržiūros</UIViewManager>
       <UIDriveManager>Diskai</UIDriveManager>
       <UIQueriesManager>Užklausos</UIQueriesManager>
       <UIActionManager>Veiksmai</UIActionManager>
@@ -50,7 +50,7 @@
   </UITaxonomyWorkingArea>
   <UITaxonomyManager>
     <msg>
-      <confirm-delete>Are you sure you want to delete this category?</confirm-delete>
+      <confirm-delete>Ar jūs tikrai norite ištrinti šią kategoriją?</confirm-delete>
     </msg>
     <title>
       <add>Add</add>
@@ -108,7 +108,7 @@
 
   <TaxonomyTreeHomePath>
     <title>
-      <AddPath>Add Path</AddPath>
+      <AddPath>Pridėti kelią</AddPath>
     </title>
   </TaxonomyTreeHomePath>
   
@@ -293,7 +293,7 @@
       <dialogTemplate>Dialog Template:</dialogTemplate>
       <viewTemplate>View Template:</viewTemplate>
       <metadataName>Metadata Name:</metadataName>
-      <viewPermission>Permission:</viewPermission>
+      <viewPermission>Teisė:</viewPermission>
       <permission>UIMetadataForm</permission>
       <metadataLabel>Label:</metadataLabel>
     </label>
@@ -516,7 +516,7 @@
       <childDefinitions>Child Node Definitions</childDefinitions>
       <namespace>Name Space</namespace>
       <propertyNamespace>Name Space</propertyNamespace>
-      <nodeTypeName>Node Type Name</nodeTypeName>
+      <nodeTypeName>Mazgo tipo pavadinimas</nodeTypeName>
       <mixinType>Is Mixin Type</mixinType>
       <hasOrderableChildNodes>Orderable Child Nodes</hasOrderableChildNodes>
       <primaryItemName>Primary Item Name</primaryItemName>
@@ -714,7 +714,7 @@
       <AddPermission>Add Permission</AddPermission>
       <RemovePermission>Remove Permission</RemovePermission>
       <AddIcon>Add Icon</AddIcon>
-      <AddPath>Add Path</AddPath>
+      <AddPath>Pridėti kelią</AddPath>
     </title>
   </DriveInputSet>
   <!--
@@ -796,7 +796,7 @@
 <UIInterceptorScriptContainer>Perėmėjai</UIInterceptorScriptContainer>
 
 <nodeTypeDefinition>Node Type</nodeTypeDefinition>
-      <propertyDefinition>Property</propertyDefinition>
+      <propertyDefinition>Ypatybė</propertyDefinition>
       <childNodeDefinition>Child Node</childNodeDefinition>
       <SuperTypeTab>Super Types</SuperTypeTab>
       <DefaultTypeTab>Default Primary</DefaultTypeTab>
@@ -979,7 +979,7 @@
       <viewMetadatas>View Metadata</viewMetadatas>
       <overloadThumbnail>Overload Thumbnail</overloadThumbnail>
       <manageHidden>Hide/Show Content</manageHidden>
-      <comment>Comment</comment>
+      <comment>Komentuoti</comment>
       <vote>Vote</vote>  
       <addCategory>Add Category</addCategory>
       <addLocalizationLink>Add Translation</addLocalizationLink>
@@ -1047,7 +1047,7 @@
     </title>
     <header>
       <name>Pavadinimas</name>
-      <path>Value</path>
+      <path>Reikšmė</path>
       <baseVersion>Base Version</baseVersion>
       <action>Veiksmas</action>
     </header>
@@ -1094,7 +1094,7 @@
       <isDocumentTemplate>is Document Template:</isDocumentTemplate>
       <dialog>Dialog Content</dialog>
       <view>View Content</view>
-      <permission>Permission:</permission>
+      <permission>Teisė:</permission>
       <selectPemistion>Permission</selectPemistion>
     </label>
   </UITemplateForm>
@@ -1527,13 +1527,13 @@
   
   <UIActionsTemplateList>
     <header>
-      <name>Type</name>
+      <name>Tipas</name>
       <action>Veiksmas</action>
       <label>Šablonas</label>
       <icon>Piktograma</icon>
     </header>
     <action>
-      <AddNew>Add Template</AddNew>
+      <AddNew>Pridėti šabloną</AddNew>
     </action>
     <msg>
       <confirm-delete>Do you really want to delete?</confirm-delete>
@@ -1545,13 +1545,13 @@
   
   <UIOthersTemplateList>
     <header>
-      <name>Type</name>
+      <name>Tipas</name>
       <label>Šablonas</label>
       <icon>Piktograma</icon>
       <action>Veiksmas</action>
     </header>
     <action>
-      <AddNew>Add Template</AddNew>
+      <AddNew>Pridėti šabloną</AddNew>
     </action>
     <msg>
       <confirm-delete>Do you really want to delete?</confirm-delete>
@@ -1749,7 +1749,7 @@
       <content>Content:</content>
       <name>Name:</name>
       <isDocumentTemplate>is Document Template</isDocumentTemplate>
-      <viewPermission>Permission:</viewPermission>
+      <viewPermission>Teisė:</viewPermission>
       <enableVersion>Versioning activated</enableVersion>
     </label>
     <title>Add/Edit View</title>
@@ -1762,7 +1762,7 @@
       <content>Content:</content>
       <name>Name:</name>
       <isDocumentTemplate>is Document Template</isDocumentTemplate>
-      <viewPermission>Permission:</viewPermission>
+      <viewPermission>Teisė:</viewPermission>
       <enableVersion>Enable Versioning</enableVersion>
     </label>
     <title>Add/Edit Dialog</title>
@@ -2002,7 +2002,7 @@
       <styleHTML>HTML Style:</styleHTML>
     </label>
     <action>
-      <UpdateStyle>Update</UpdateStyle>
+      <UpdateStyle>Atnaujinti</UpdateStyle>
       <Cancel>#{word.cancel}</Cancel>
     </action>
     <msg>
@@ -2334,7 +2334,7 @@
     <action>
       <AddTabForm>Add Tab</AddTabForm>
       <AddTab>#{word.save}</AddTab>
-      <BackViewForm>Back</BackViewForm>
+      <BackViewForm>Atgal</BackViewForm>
     </action>
   </UIViewFormTabPane>
   
@@ -2379,7 +2379,7 @@
       <content>Content:</content>
       <name>Name:</name>
       <isDocumentTemplate>is Document Template</isDocumentTemplate>
-      <viewPermission>Permission:</viewPermission>
+      <viewPermission>Teisė:</viewPermission>
       <enableVersion>Enable Versioning</enableVersion>
     </label>
     <title>Add/Edit Skin</title>
@@ -2460,7 +2460,7 @@
     <title>Add Permission</title>
     <action>
       <Save>#{word.save}</Save>
-      <Add>Add</Add>
+      <Add>Pridėti</Add>
     </action>
     <label>
       <userOrGroup>Memberships:</userOrGroup>
@@ -2531,13 +2531,13 @@
 <DriveInputSet>
 <title>
 <RemovePermission>Remove Permission</RemovePermission>
-<ChooseNodeType>Select Node Types</ChooseNodeType>
+<ChooseNodeType>Pasirinkti mazgų tipus</ChooseNodeType>
 <RemoveNodeType>Remove</RemoveNodeType>
 </title>
 </DriveInputSet>
 <PopupNodeTypeSelector>
 <title>
-<UINodeTypeSelector>Select Node Types</UINodeTypeSelector>
+<UINodeTypeSelector>Pasirinkti mazgų tipus</UINodeTypeSelector>
 <PopupNodeTypeSelector>Select Node Types</PopupNodeTypeSelector>
 </title>
 </PopupNodeTypeSelector>

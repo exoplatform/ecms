@@ -2,39 +2,39 @@
 <bundle>
   <UIPresentationContainer>
     <title>
-      <QuickEdit>Edit in Content Explorer</QuickEdit>
-      <print>Print This Page</print>
+      <QuickEdit>Redaguoti turinio naršyklėje</QuickEdit>
+      <print>Spausdinti šį puslapį</print>
       <FastPublish>Paskelbti</FastPublish>
     </title>
     <label>
-      <draft>Draft</draft>
+      <draft>Projektas</draft>
       <print>Spausdinti</print>
     </label>
     <msg>
-      <no-content>No contents found.</no-content>
-      <internal-server-error>An error occurred while requesting the data from the sever.</internal-server-error>
-      <empty-title-error>Please specify the new title.</empty-title-error>
+      <no-content>Turinys nerastas.</no-content>
+      <internal-server-error>Įvyko duomenų užklausos klaida jungiantis prie serverio.</internal-server-error>
+      <empty-title-error>Prašom nurodyti naują pavadinimą.</empty-title-error>
     </msg>
   </UIPresentationContainer>
   <CorrectContentSelectorPopupWindow>
     <title>
-      <UIContentSelectorOne>Select Content</UIContentSelectorOne>
+      <UIContentSelectorOne>Pasirinkite turinį</UIContentSelectorOne>
     </title>
   </CorrectContentSelectorPopupWindow>
   <UISingleContentViewerPortlet>
     <msg>
-      <AccessControlException>You do not have permission to access the Edit mode.</AccessControlException>
+      <AccessControlException>Jūs neturite leidimo pasiekti redagavimo režimo.</AccessControlException>
     </msg>
   </UISingleContentViewerPortlet>
   <UISCVContextualRadioBox>
     <label>
-      <Enable>Enabled</Enable>
-      <Disable>Disabled</Disable>
+      <Enable>Įjungta</Enable>
+      <Disable>Išjungta</Disable>
     </label>
   </UISCVContextualRadioBox>
   <UIPreferencesPopupWindows>
     <title>
-      <UISCVPreferences>Content Detail Preferences</UISCVPreferences>
+      <UISCVPreferences>Išsamaus turinio nuostatos</UISCVPreferences>
     </title>
   </UIPreferencesPopupWindows>
   <UISCVPreferences>
@@ -45,26 +45,26 @@
       <Print>Spausdinti</Print>
       <Close>#{word.close}</Close>
     </action>
-    <title>Content Detail Preferences</title>
+    <title>Išsamaus turinio nuostatos</title>
     <label>
-      <Back>Back to previous page</Back>
+      <Back>Grįžti į ankstesnį puslapį</Back>
       <Edit>Redaguoti</Edit>
-      <Preferences>Preferences</Preferences>
-      <Title>Content Detail Preferences</Title>
-      <UISCVShowTitleConfigurationCheckBox>Show Title</UISCVShowTitleConfigurationCheckBox>
-      <UISCVShowDateConfigurationCheckBox>Show Date</UISCVShowDateConfigurationCheckBox>
-      <UISCVShowOptionBarConfigurationCheckBox>Show Option Bar</UISCVShowOptionBarConfigurationCheckBox>
-      <DisplaySettingBlock>Display Settings</DisplaySettingBlock>
-      <ContentPathBlock>Content Selection</ContentPathBlock>
+      <Preferences>Nuostatos</Preferences>
+      <Title>Išsamaus turinio nuostatos</Title>
+      <UISCVShowTitleConfigurationCheckBox>Rodyti pavadinima</UISCVShowTitleConfigurationCheckBox>
+      <UISCVShowDateConfigurationCheckBox>Rodyti datą</UISCVShowDateConfigurationCheckBox>
+      <UISCVShowOptionBarConfigurationCheckBox>Rodyti parinkties juostą</UISCVShowOptionBarConfigurationCheckBox>
+      <DisplaySettingBlock>Rodymo nustatymas</DisplaySettingBlock>
+      <ContentPathBlock>Turinio pasirinkimas</ContentPathBlock>
       <UISCVConfigItemPathFormInputSet>Turinio kelias</UISCVConfigItemPathFormInputSet>
     <UISCVContentPathConfigurationInputBox>Turinio kelias</UISCVContentPathConfigurationInputBox>
-      <Advance>Advanced</Advance>
-      <ContextCaption>Dynamic Navigation</ContextCaption>
-      <UISCVContextualRadioBox>Contextual Content</UISCVContextualRadioBox>
+      <Advance>Plačiau</Advance>
+      <ContextCaption>Dinaminė navigacija</ContextCaption>
+      <UISCVContextualRadioBox>Kontekstinis turinys</UISCVContextualRadioBox>
       <UISCVParameterInputBox>by</UISCVParameterInputBox>
       <PrintSettingBlock>Spausdinimo parametrai</PrintSettingBlock>
       <UISCVPrintPageParameter>with</UISCVPrintPageParameter>
-      <UISCVConfigPrintPageFormInputSet>Show in Page</UISCVConfigPrintPageFormInputSet>
+      <UISCVConfigPrintPageFormInputSet>Rodyti puslapyje</UISCVConfigPrintPageFormInputSet>
       <LockStatus>Lock</LockStatus>
       <CacheManagement>Content Visibility</CacheManagement>
       <UISCVCacheRadioBox>Share Content</UISCVCacheRadioBox>
@@ -80,40 +80,40 @@
     </msg>
     <tab>
       <label>
-        <UISCVConfigContentFormInputSet>Content Selection</UISCVConfigContentFormInputSet>
-        <UISCVConfigDisplayFormInputSet>Display Settings</UISCVConfigDisplayFormInputSet>
+        <UISCVConfigContentFormInputSet>Turinio pasirinkimas</UISCVConfigContentFormInputSet>
+        <UISCVConfigDisplayFormInputSet>Rodymo nustatymas</UISCVConfigDisplayFormInputSet>
         <UISCVConfigPrintFormInputSet>Spausdinimo parametrai</UISCVConfigPrintFormInputSet>
-        <UISCVConfigAdvancedFormInputSet>Advanced</UISCVConfigAdvancedFormInputSet>
+        <UISCVConfigAdvancedFormInputSet>Plačiau</UISCVConfigAdvancedFormInputSet>
       </label>
     </tab>
   </UISCVPreferences>
   <UISCVConfigItemPathFormInputSet>
     <title>
-      <SelectFolderPath>Select Folder Path</SelectFolderPath>
-      <AddPath>Add Path</AddPath>
+      <SelectFolderPath>Pasirinkite aplanko kelią</SelectFolderPath>
+      <AddPath>Pridėti kelią</AddPath>
     </title>
   </UISCVConfigItemPathFormInputSet>
   <UISCVConfigPrintPageFormInputSet>
     <title>
-      <SelectTargetPage>Show in Page</SelectTargetPage>
+      <SelectTargetPage>Rodyti puslapyje</SelectTargetPage>
     </title>
   </UISCVConfigPrintPageFormInputSet>
   <PublicationStates>
-    <archived>Archived</archived>
-    <obsolete>Obsolete</obsolete>
-    <unpublished>Unpublished</unpublished>
-    <enrolled>Enrolled</enrolled>
-    <draft>Draft</draft>
-    <pending>Pending</pending>
-    <approved>Approved</approved>
-    <inreview>Under Review</inreview>
-    <staged>Staged</staged>
-    <published>Published</published>
+    <archived>Suarchyvuotas</archived>
+    <obsolete>Pasenęs</obsolete>
+    <unpublished>Neskelbtas</unpublished>
+    <enrolled>Įtrauktas</enrolled>
+    <draft>Ruošinys</draft>
+    <pending>Laukiama</pending>
+    <approved>Patvirtintas</approved>
+    <inreview>Nagrinėjamasis</inreview>
+    <staged>Įvykdytas</staged>
+    <published>Paskelbtas</published>
   </PublicationStates>
   <UISCVCacheRadioBox>
     <label>
-      <Enable>Restricted by Authentication</Enable>
-      <Disable>Restricted by User roles</Disable>
+      <Enable>Ribojamas pagal autentifikaciją</Enable>
+      <Disable>Ribojamas pagal vartotojų roles</Disable>
     </label>
   </UISCVCacheRadioBox>
 </bundle>

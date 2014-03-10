@@ -6,7 +6,7 @@
       <nocontent>Nėra turinio</nocontent>
       <mydraft>Mano projekto turinys</mydraft>
       <waitingapproval>Laukiama mano patvirtinimo</waitingapproval>
-      <approve>Approve</approve>
+      <approve>Patvirtinti</approve>
       <publishedtomorrow>Turi būti paskelbta rytoj</publishedtomorrow>
       <refresh>#{word.refresh}</refresh>
     </label>

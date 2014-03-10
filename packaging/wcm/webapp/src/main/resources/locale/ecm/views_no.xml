@@ -40,8 +40,8 @@
   <File>
     <view>
       <label>
-        <not-viewable>Dette innholdet er ikke synlig</not-viewable>
-        <using-webDAV>eller bruker WebDAV til å få tilgang til innholdet</using-webDAV>
+        <not-viewable>The preview of this document is not available.</not-viewable>
+        <using-webDAV>or Open in MS Office</using-webDAV>
         <file-size-too-big>Innholdet i filen er for stor. Du bør laste den ned og åpne den i klienten.</file-size-too-big>
         <webDAV>WebDAVvisning</webDAV>
         <download>Last ned</download>

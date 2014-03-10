@@ -24,7 +24,7 @@
     <view>
       <label>
         <url>URL</url>
-        <description>Description</description>
+        <description>Aprašymas</description>
       </label>
     </view>
   </WebLink>
@@ -50,13 +50,13 @@
 
   <Category>
     <view>
-      <label>Category</label>
+      <label>Kategorija</label>
     </view>
   </Category>
 
   <Tag>
     <view>
-      <label>Tag</label>
+      <label>Žymė</label>
     </view>
   </Tag>
 </bundle>

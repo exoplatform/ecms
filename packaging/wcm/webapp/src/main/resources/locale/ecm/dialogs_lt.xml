@@ -9,14 +9,14 @@
         <end-time>End Time</end-time>
         <start-time>Start Time</start-time>
         <lifecycle>Gyvenimo ciklas</lifecycle>
-        <mimeType>Mime Type</mimeType>
+        <mimeType>MIME tipas</mimeType>
         <repeat-count>Repeat Count</repeat-count>
-        <time-interval>Time Interval</time-interval>
-        <query-items>Query Items</query-items>
-        <schedule-type>Schedule Type</schedule-type>
-        <remove>Remove Item</remove>
-        <add>Add Item</add>
-        <expand>Expand This</expand>
+        <time-interval>Laiko intervalas</time-interval>
+        <query-items>Užklausos elementai</query-items>
+        <schedule-type>Tvarkaraščio tipas</schedule-type>
+        <remove>Pašalinti elementą</remove>
+        <add>Pridėti elementą</add>
+        <expand>Išplėsti šį</expand>
       </label>
     </dialog>
   </Ecm>
@@ -24,12 +24,12 @@
   <UIDocumentForm>
     <label>
       <title>#{word.title}</title>
-      <link>Link</link>
+      <link>Nuoroda</link>
       <contentHtml>#{word.content}</contentHtml>
       <content>#{word.content}</content>
       <contentPlain>#{word.content}</contentPlain>
       <name>Name</name>
-    <categories>Categories</categories>
+    <categories>Kategorijos</categories>
     </label>
   </UIDocumentForm>
  
@@ -52,10 +52,10 @@
     <dialog>
       <label>
         <name>#{word.name}</name>
-        <categories>Categories</categories>
+        <categories>Kategorijos</categories>
         <mimeType>#{Ecm.dialog.label.mimeType}</mimeType>
         <content>#{word.content}</content>
-        <re-upload>The file already exists. You can delete it and upload another file.</re-upload>
+        <re-upload>Failas jau egzistuoja. Jūs galėtumėte jį ištrinti ir įkelti kitą failą.</re-upload>
       </label>
     </dialog>
   </File>
@@ -63,22 +63,22 @@
   <UIActionForm>
     <label>
       <description>#{word.description}</description>
-      <port>Port</port>
+      <port>Jungtis</port>
       <userName>#{word.userName}</userName>
-      <password>Password</password>
-      <link>Link</link>
-      <to>Send Mail To</to>
+      <password>Slaptažodis</password>
+      <link>Nuoroda</link>
+      <to>Siųsti laišką</to>
       <actionName>#{word.name}</actionName>
     </label>
   </UIActionForm>
   <EditFormAction>
     <label>
       <description>#{word.description}</description>
-      <port>Port</port>
+      <port>Jungtis</port>
       <userName>#{word.userName}</userName>
-      <password>Password</password>
-      <link>Link</link>
-      <to>Send Mail To</to>
+      <password>Slaptažodis</password>
+      <link>Nuoroda</link>
+      <to>Siųsti laišką</to>
       <actionName>#{word.name}</actionName>
     </label>
   </EditFormAction>
@@ -92,7 +92,7 @@
         <id>ID</id>
         <name>#{word.name}</name>
         <lifecycle>#{Ecm.dialog.label.lifecycle}</lifecycle>
-        <metadata>Metadata</metadata>
+        <metadata>Metaduomenys</metadata>
         <description>#{word.description}</description>
       </label>
     </dialog>
@@ -112,7 +112,7 @@
         <end-time>#{Ecm.dialog.label.end-time}</end-time>
         <repeat-count>#{Ecm.dialog.label.repeat-count}</repeat-count>
         <time-inteval>#{Ecm.dialog.label.time-interval}</time-inteval>
-        <cron-expression>Cron expression</cron-expression>
+        <cron-expression>Cron išraiška</cron-expression>
         <description>#{word.description}</description>
       </label>
     </dialog>
@@ -143,20 +143,20 @@
     <dialog>
       <label>
         <title>#{word.title}:</title>
-        <creator>Creator:</creator>
+        <creator>Kūrėjas:</creator>
         <subject>#{word.subject}:</subject>
-        <source>Source:</source>
-        <contributor>Contributor:</contributor>
-        <resource-type>Resource Type:</resource-type>
+        <source>Šaltinis:</source>
+        <contributor>Talkininkas:</contributor>
+        <resource-type>Išteklių tipas:</resource-type>
         <date>#{word.date}:</date>
-        <publisher>Publisher:</publisher>
+        <publisher>Leidėjas:</publisher>
         <description>#{word.description}:</description>
-        <rights>Rights:</rights>
-        <relation>Relation:</relation>
+        <rights>Teisės:</rights>
+        <relation>Ryšys:</relation>
         <format>#{word.format}:</format>
-        <coverage>Coverage:</coverage>
-        <identifier>Identifier:</identifier>
-        <language>Language:</language>
+        <coverage>Aprėptis:</coverage>
+        <identifier>Identifikatorius:</identifier>
+        <language>Kalba:</language>
       </label>
     </dialog>
   </ElementSet>
@@ -167,8 +167,8 @@
   <Actionable>
     <dialog>
       <label>
-        <primary-type>Primary Type</primary-type>
-        <mixin-types>Mixin Types</mixin-types>
+        <primary-type>Pagrindinis tipas</primary-type>
+        <mixin-types>"Mixin" tipas</mixin-types>
       </label>
     </dialog>
   </Actionable>
@@ -179,10 +179,10 @@
   <Move>
     <dialog>
       <label>
-        <destination-workpsace>Destination Workspace</destination-workpsace>
-        <destination-path>Destination Path</destination-path>
-        <primary-type>Primary Type</primary-type>
-        <mixin-types>Mixin Types</mixin-types>
+        <destination-workpsace>Paskirties darbo sritis</destination-workpsace>
+        <destination-path>Paskirties kelias</destination-path>
+        <primary-type>Pagrindinis tipas</primary-type>
+        <mixin-types>"Mixin" tipas</mixin-types>
       </label>
     </dialog>
   </Move>
@@ -192,8 +192,8 @@
   <Published>
     <dialog>
       <label>
-        <start-publication>Start Publication</start-publication>
-        <end-publication>End Publication</end-publication>
+        <start-publication>Pradėti paskelbimą</start-publication>
+        <end-publication>Baigti paskelbimą</end-publication>
       </label>
     </dialog>
   </Published>
@@ -214,7 +214,7 @@
   <Relationable>
     <dialog>
       <label>
-        <relation>Relation</relation>
+        <relation>Ryšys</relation>
       </label>
     </dialog>
   </Relationable>
@@ -224,7 +224,7 @@
   <RssEnable>
     <dialog>
       <label>
-        <title>Title</title>
+        <title>Pavadinimas</title>
         <summary>#{word.summary}</summary>
       </label>
     </dialog>
@@ -236,11 +236,11 @@
   <Versionable>
     <dialog>
       <label>
-        <version-history>Version History</version-history>
-        <base-version>Base Version</base-version>
-        <is-checked-out>Is Checked out</is-checked-out>
-        <predecessors>Predecessors</predecessors>
-        <merge-failed>Merge Failed</merge-failed>
+        <version-history>Versijų istorija</version-history>
+        <base-version>Bazinė versija</base-version>
+        <is-checked-out>Yra išregistruotas</is-checked-out>
+        <predecessors>Pirmtakai</predecessors>
+        <merge-failed>Sulieti nepavyko</merge-failed>
         <uuid>UUID</uuid>
       </label>
     </dialog>
@@ -252,9 +252,9 @@
   <ResouceContainer>
     <dialog>
       <label>
-        <name>Name</name>
-        <autoload>Auto Load</autoload>
-        <minetype>MIME Type</minetype>
+        <name>Vardas</name>
+        <autoload>Automatinis krovimas</autoload>
+        <minetype>MIME tipas</minetype>
         <content>Turinys</content>
       </label>
     </dialog>
@@ -264,17 +264,17 @@
   -->
   <EmailAddressValidator>
     <msg>
-      <Invalid-input>The email address is invalid.</Invalid-input>
+      <Invalid-input>Elektroninio pašto adresas yra neteisingas.</Invalid-input>
     </msg>
   </EmailAddressValidator>
   <EmptyFieldValidator>
     <msg>
-      <empty-input>The field '{0}' is required. Please enter your value.</empty-input>
+      <empty-input>'{0}' yra reikalingas laukas. Įveskite savo reikšmę.</empty-input>
     </msg>
   </EmptyFieldValidator>
   <NumberFormatValidator>
     <msg>
-      <Invalid-number>The field '{0}' is invalid.</Invalid-number>
+      <Invalid-number>Laukas '{0}' yra netinkamas.</Invalid-number>
     </msg>
   </NumberFormatValidator>
   <!--
@@ -286,17 +286,17 @@
     <dialog>
       <label>
         <id>ID</id>
-        <name>Name</name>
+        <name>Vardas</name>
         <lifecycle>Gyvenimo ciklas</lifecycle>
         <homePath>Home Path</homePath>
-        <targetWorkspace>Target Workspace</targetWorkspace>
-        <targetPath>Target Path</targetPath>
+        <targetWorkspace>Tikslinė darbo sritis</targetWorkspace>
+        <targetPath>Tikslo kelias</targetPath>
       </label>
     </dialog>
   </ScriptAction>
   <UIDialogForm>
    <form>
-   <DialogFormException>Cannot save this document. There may be a problem with the pre-save interceptor.</DialogFormException>
+   <DialogFormException>Negalima išsaugoti šio dokumento. Gali būti problema susijusi su prieš-išsaugojimo perėmeju.</DialogFormException>
    </form>
   </UIDialogForm>
 
@@ -305,36 +305,36 @@
 
   ###################### resoucebundle exo:taxonomyAction dialogs template ####
   -->
-<no>No</no>
-<yes>Yes</yes>
-<true>True</true>
-<false>False</false>
+<no>Ne</no>
+<yes>Taip</yes>
+<true>Tiesa</true>
+<false>Netiesa</false>
 <Electronic>Electronic</Electronic>
 <Paper>Paper</Paper>
 <NONE>None</NONE>
-<CLASSIFIED>Classified</CLASSIFIED>
-<UNCLASSIFIED>Unclassified</UNCLASSIFIED>
-<NOCONTRACT>No Contract</NOCONTRACT>
+<CLASSIFIED>Klasifikuotas</CLASSIFIED>
+<UNCLASSIFIED>Neklasifikuotas</UNCLASSIFIED>
+<NOCONTRACT>Nėra sutarties</NOCONTRACT>
 <one-minute>One Minute</one-minute>
-<hourly>Hourly</hourly>
-<daily>Daily</daily>
-<quarterly>Quarterly</quarterly>
-<yearly>Yearly</yearly>
-<ten-years>Ten Years</ten-years>
-<read>User Action</read>
-  <schedule>Scheduler</schedule>
-  <node_added>Content Addition</node_added>
-  <node_removed>Content Removal</node_removed>
-  <property_added>Property Addition</property_added>
-  <property_removed>Property Removal</property_removed>
-  <property_changed>Property Modification</property_changed>
+<hourly>Kas valandą</hourly>
+<daily>Kasdien</daily>
+<quarterly>Kas ketvirtį</quarterly>
+<yearly>Kas metus</yearly>
+<ten-years>Dešimt metų</ten-years>
+<read>Vartotojo veiksmas</read>
+  <schedule>Planuotojas</schedule>
+  <node_added>Turinio papildymas</node_added>
+  <node_removed>Turinio pašalinimas</node_removed>
+  <property_added>Sąvybių papildymas</property_added>
+  <property_removed>Sąvybių pašalinimas</property_removed>
+  <property_changed>Sąvybių pakeitimas</property_changed>
 
   <ScriptAction>
     <dialog>
       <label>
         <isDeep>Is Deep</isDeep>
         <nodetypes>Skilčių tipai</nodetypes>
-        <affectedNodeTypeNames>Affected Node Types</affectedNodeTypeNames>
+        <affectedNodeTypeNames>Įtakoti mazgo tipai</affectedNodeTypeNames>
       </label>
     </dialog>
   </ScriptAction>
@@ -344,7 +344,7 @@
       <label>
         <isDeep>Is Deep</isDeep>
         <nodetypes>Skilčių tipai</nodetypes>
-        <affectedNodeTypeNames>Affected Node Types</affectedNodeTypeNames>
+        <affectedNodeTypeNames>Įtakoti mazgo tipai</affectedNodeTypeNames>
       </label>
     </dialog>
   </AddMetadata>
@@ -354,7 +354,7 @@
       <label>
         <isDeep>Is Deep</isDeep>
         <nodetypes>Skilčių tipai</nodetypes>
-        <affectedNodeTypeNames>Affected Node Types</affectedNodeTypeNames>
+        <affectedNodeTypeNames>Įtakoti mazgo tipai</affectedNodeTypeNames>
       </label>
     </dialog>
   </EnableVersioning>
@@ -364,7 +364,7 @@
       <label>
         <isDeep>Is Deep</isDeep>
         <nodetypes>Skilčių tipai</nodetypes>
-        <affectedNodeTypeNames>Affected Node Types</affectedNodeTypeNames>
+        <affectedNodeTypeNames>Įtakoti mazgo tipai</affectedNodeTypeNames>
       </label>
     </dialog>
   </AutoVersioning>
@@ -373,14 +373,14 @@
   <dialog>
   <label>
   <captions>Captions</captions>
-<audioDescription>Audio description</audioDescription>
-<alternativeText>Alternative text</alternativeText>
+<audioDescription>Garso aprašymas</audioDescription>
+<alternativeText>Alternatyvus tekstas</alternativeText>
 </label>
 </dialog>
 <help>
 <CaptionsHelp>Captions should provide text of dialog and important sounds</CaptionsHelp>
-<AudioDescriptionHelp>An audio description is a narrated track of the video</AudioDescriptionHelp>
-<AlternativeTextHelp>Provide an accessible, alternative way of presenting the information</AlternativeTextHelp>
+<AudioDescriptionHelp>Garso aprašymas yra video įgarsinimo takelis</AudioDescriptionHelp>
+<AlternativeTextHelp>Pateikti prieinamą, alternatyvų informacijos pateikimo būdą</AlternativeTextHelp>
 </help>
 </AccessibleMedia>
   

@@ -13,18 +13,18 @@
 </ECMContextMenu>
 <UIViewInfoContainer>
 <label>
-      <name>Name</name>
-      <title>Title</title>
-      <type>Type</type>
-      <size>Size</size>
-      <owner>Owner</owner>
-      <lastModifier>Last Modifier</lastModifier>
-      <created>Created Date</created>
-      <lastModified>Last Modified Date</lastModified>
-      <publicationState>Publication State</publicationState>
+      <name>Pavadinimas</name>
+      <title>Pavadinimas</title>
+      <type>Tipas</type>
+      <size>Dydis</size>
+      <owner>Savininkas</owner>
+      <lastModifier>Paskutinis keitė</lastModifier>
+      <created>Sukūrimo data</created>
+      <lastModified>Paskutinio pakeitimo data</lastModified>
+      <publicationState>Paskelbimo būsena</publicationState>
 </label>
 <value>
-      <folder>Folder</folder>
+      <folder>Aplankas</folder>
 </value>
 <action>
 <Close>#{word.close}</Close>

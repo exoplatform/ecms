@@ -129,7 +129,7 @@
     <title>المستكشف</title>
     <label>
       <Root>الجذر</Root>
-      <webDavView>تحميل و السماح بالتغيير</webDavView>
+      <webDavView>Open in MS Office</webDavView>
     </label>
     <msg>
       <path-not-found>ربما تم حذف هذه العقدة أو تغييرها. الرجاء الضغط على زر التحديث.</path-not-found>
@@ -591,7 +591,7 @@
       <MoveToTrash>تحويله الى سلة المهملات</MoveToTrash>
       <RestoreFromTrash>الاستعادة من سلّة المهملات</RestoreFromTrash>
       <EmptyTrash>إفراغ سلّة المهملات</EmptyTrash>
-      <WebDavView>Edit in MS Office</WebDavView>
+      <WebDavView>Open in MS Office</WebDavView>
     </event>
   </ECMContextMenu>
  

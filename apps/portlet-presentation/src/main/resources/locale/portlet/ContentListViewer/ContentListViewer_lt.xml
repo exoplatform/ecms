@@ -2,88 +2,88 @@
 <bundle>
   <UICLVContainer>
     <label>
-      <Preferences>Preferences</Preferences>
-      <AddContent>Add Content</AddContent>
-      <ManageContent>Manage Content</ManageContent>
+      <Preferences>Nuostatos</Preferences>
+      <AddContent>Pridėti turinį</AddContent>
+      <ManageContent>Turinio valdymas</ManageContent>
     </label>
     <msg>
-      <non-contents>Sorry, no articles are available.</non-contents>
-      <item-not-found>Item not found.</item-not-found>
-      <no-permission>You do not have permission to access this node.</no-permission>
-      <category-back>Go to previous</category-back>
+      <non-contents>Atsiprašome, bet jokių straipsnių nėra.</non-contents>
+      <item-not-found>Elementas nerastas.</item-not-found>
+      <no-permission>Jūs neturite leidimo pasiekti šį mazgą.</no-permission>
+      <category-back>Eiti į ankstesnį</category-back>
     </msg>
   </UICLVContainer>
   <UIViewerManagementPopupWindow>
     <title>
-      <UICLVConfig>Content List Preferences</UICLVConfig>
+      <UICLVConfig>Turinio sąrašo nuostatos</UICLVConfig>
     </title>
   </UIViewerManagementPopupWindow>
   <UICLVConfig>
     <label>
-      <Title>Content List Preferences</Title>
-      <ContentSelectionBlock>Content Selection</ContentSelectionBlock>
-      <UICLVConfigDisplayModeFormRadioBoxInput>Mode</UICLVConfigDisplayModeFormRadioBoxInput>
-      <UICLVConfigItemPathFormInputSet>Folder Path</UICLVConfigItemPathFormInputSet>
-    <UICLVConfigItemPathFormStringInput>Folder Path</UICLVConfigItemPathFormStringInput>
-      <UICLVConfigOrderByFormSelectBox>Order by</UICLVConfigOrderByFormSelectBox>
+      <Title>Turinio sąrašo nuostatos</Title>
+      <ContentSelectionBlock>Turinio pasirinkimas</ContentSelectionBlock>
+      <UICLVConfigDisplayModeFormRadioBoxInput>Režimas</UICLVConfigDisplayModeFormRadioBoxInput>
+      <UICLVConfigItemPathFormInputSet>Aplanko kelias</UICLVConfigItemPathFormInputSet>
+    <UICLVConfigItemPathFormStringInput>Aplanko kelias</UICLVConfigItemPathFormStringInput>
+      <UICLVConfigOrderByFormSelectBox>Rūšiuoti pagal</UICLVConfigOrderByFormSelectBox>
       <option>
-        <exo:title>Title</exo:title>
-        <exo:dateCreated>Created Date</exo:dateCreated>
-        <exo:lastModifiedDate>Modified Date</exo:lastModifiedDate>
-        <publication:liveDate>Published Date</publication:liveDate>
-        <exo:startEvent>Event Date</exo:startEvent>
-        <exo:index>Index</exo:index>
+        <exo:title>Pavadinimas</exo:title>
+        <exo:dateCreated>Sukūrimo data</exo:dateCreated>
+        <exo:lastModifiedDate>Pakeitimo data</exo:lastModifiedDate>
+        <publication:liveDate>Publikavimo data</publication:liveDate>
+        <exo:startEvent>Įvykio data</exo:startEvent>
+        <exo:index>Indeksas</exo:index>
         <DESC>Descendant</DESC>
         <ASC>Ascendant</ASC>
       </option>
-      <DisplaySettingBlock>Display Settings</DisplaySettingBlock>
-      <UICLVConfigHeaderFormStringInput>Header</UICLVConfigHeaderFormStringInput>
-      <UICLVConfigDisplayTemplateFormSelectBox>Template</UICLVConfigDisplayTemplateFormSelectBox>
-      <UICLVConfigPaginatorTemplateFormSelectBox>Paginator</UICLVConfigPaginatorTemplateFormSelectBox>
-      <UICLVConfigItemsPerPageFormStringInput>Items per Page</UICLVConfigItemsPerPageFormStringInput>
+      <DisplaySettingBlock>Rodymo nustatymas</DisplaySettingBlock>
+      <UICLVConfigHeaderFormStringInput>Antraštė</UICLVConfigHeaderFormStringInput>
+      <UICLVConfigDisplayTemplateFormSelectBox>Šablonas</UICLVConfigDisplayTemplateFormSelectBox>
+      <UICLVConfigPaginatorTemplateFormSelectBox>Numeracija</UICLVConfigPaginatorTemplateFormSelectBox>
+      <UICLVConfigItemsPerPageFormStringInput>Elementų kiekis puslapyje</UICLVConfigItemsPerPageFormStringInput>
       <UICLVConfigShowIllustrationFormCheckboxInput>Show Image</UICLVConfigShowIllustrationFormCheckboxInput>
       <UICLVConfigShowSummaryFormCheckboxInput>Show Summary</UICLVConfigShowSummaryFormCheckboxInput>
       <UICLVConfigShowHeaderFormCheckboxInput>Show Header</UICLVConfigShowHeaderFormCheckboxInput>
       <UICLVConfigShowRefreshFormCheckboxInput>Show Refresh</UICLVConfigShowRefreshFormCheckboxInput>
-      <UICLVConfigShowTitleFormCheckboxInput>Show Title</UICLVConfigShowTitleFormCheckboxInput>
-      <UICLVConfigShowDateCreatedFormCheckboxInput>Show Date</UICLVConfigShowDateCreatedFormCheckboxInput>
+      <UICLVConfigShowTitleFormCheckboxInput>Rodyti pavadinimą</UICLVConfigShowTitleFormCheckboxInput>
+      <UICLVConfigShowDateCreatedFormCheckboxInput>Rodyti datą</UICLVConfigShowDateCreatedFormCheckboxInput>
       <UICLVConfigShowLinkFormCheckboxInput>Show Link</UICLVConfigShowLinkFormCheckboxInput>
       <UICLVConfigShowReadmoreFormCheckboxInput>Show More Links</UICLVConfigShowReadmoreFormCheckboxInput>
       <UICLVConfigAllowDynamicUrlStringInput>Allow Dynamic URL</UICLVConfigAllowDynamicUrlStringInput>
       <UICLVConfigShowRssLinkFormCheckboxInput>Show RSS Link</UICLVConfigShowRssLinkFormCheckboxInput>
       <UICLVConfigShowAutomaticDetectionCheckboxInput>Automatic Detection</UICLVConfigShowAutomaticDetectionCheckboxInput>
-      <AdvancedBlock>Advanced</AdvancedBlock>
-      <UICLVConfigDynamicNavigationLabel>Dynamic Navigation</UICLVConfigDynamicNavigationLabel>
+      <AdvancedBlock>Plačiau</AdvancedBlock>
+      <UICLVConfigDynamicNavigationLabel>Dinaminė navigacija</UICLVConfigDynamicNavigationLabel>
       <UICLVConfigContextualFolderRadioBoxInput>Contextual Folder</UICLVConfigContextualFolderRadioBoxInput>
       <UICLVConfigShowCLVByStringInput>by</UICLVConfigShowCLVByStringInput>
       <UICLVConfigshowSCVWithStringInput>with</UICLVConfigshowSCVWithStringInput>
-      <UICLVConfigTargetPageFormInputSet>Show in Page</UICLVConfigTargetPageFormInputSet>
+      <UICLVConfigTargetPageFormInputSet>Rodyti puslapyje</UICLVConfigTargetPageFormInputSet>
       <content-not-found>Content not found.</content-not-found>
-      <ContentPath>Content Path</ContentPath>
+      <ContentPath>Turinio kelias</ContentPath>
       <Up>Up</Up>
       <Down>Down</Down>
-      <UICLVConfigCacheManagementLabel>Content Visibility</UICLVConfigCacheManagementLabel>
+      <UICLVConfigCacheManagementLabel>Turinio matomumas</UICLVConfigCacheManagementLabel>
       <UICLVContentByQueryLabel>Content by Query</UICLVContentByQueryLabel>
-      <UICLVConfigWorkspaceFormSelectBox>Workspace</UICLVConfigWorkspaceFormSelectBox>
+      <UICLVConfigWorkspaceFormSelectBox>Darbo sritis</UICLVConfigWorkspaceFormSelectBox>
       <UICLVConfigContentByQueryTextArea>by query</UICLVConfigContentByQueryTextArea>
       <UICLVConfigCacheEnableRadioBoxInput>Share content between users</UICLVConfigCacheEnableRadioBoxInput>
     </label>
     <help>
-      <ModeSelectionHelp>Two modes are available to show content. "By Folder" will take all the content available in your selected folder/category. "By Content" lets you manually select the content you want to show.</ModeSelectionHelp>
-      <FolderPathHelp>Select the content you want to show. The default selection will be replaced dynamically if you activate the Dynamic Navigation option (see the Advanced mode below).</FolderPathHelp>
-      <HeaderOptionHelp>Show a header on top of the content list. If you activate the Automatic Detection option, it will try to find the header based on the current selection.</HeaderOptionHelp>
+      <ModeSelectionHelp>Yra du režimai parodyti turinį. "Pagal aplanką" apims visą prieinamą turinį jūsų pasirinktame aplanke/kategorijoje. "Pagal turinį" leidžia rankiniu būdu pasirinkti turinį, kurį norite rodyti.</ModeSelectionHelp>
+      <FolderPathHelp>Pasirinkite turinį, kurį norite rodyti. Numatytasis pasirinkimas bus pakeistas dinamiškai jeigu aktyvuosite Dinaminės navigacijos opciją (žr. 'Plačiau' apačioje).</FolderPathHelp>
+      <HeaderOptionHelp>Rodyti turinio sąrašo antraštę viršuje. Jei aktyvuosite automatinio aptikimo funkciją, bus bandoma rasti antraštę remiantis dabartiniu pasirinkimu.</HeaderOptionHelp>
       <GeneralOptionHelp>Select the graphical elements you want to show in your list. Note that, depending on your selected template, some elements may not be available.</GeneralOptionHelp>
-      <ContextualHelp>Activates the Dynamic Navigation option. Others can change the content dynamically based on a URL parameter.</ContextualHelp>
-      <ParameterHelp>This parameter will be used to access the content if Dynamic Navigation is activated.</ParameterHelp>
-      <ShowDetailInPageHelp>Clicking on content redirects the user to a Detail page. You must have a "Content by URL" portlet with Dynamic Navigation enabled on the target page to show the content.</ShowDetailInPageHelp>
-      <DetailParameterHelp>This parameter will contain the path to the content in the link to the Detail page. This parameter must match the parameter used in the "Content by URL" portlet of the page.</DetailParameterHelp>
-      <ContentByQueryHelp>You can set a SQL Query to get content dynamically. The following parameters are allowed : ${user}, ${lang} or any get parameter (PARAM) surrounded by ${PARAM}.</ContentByQueryHelp>
-      <ContentsVisibilityHelp>"Restricted by Authentication" will filter the content based on the authentication. If you do not sign in, you see public content only. If you are logged in, you see all the content visible by intranet users (but shared by all). "Restricted by User Roles" means you will see content depending on your rights. In most cases, this option should not be used, as it reduces the overall performance.</ContentsVisibilityHelp>
+      <ContextualHelp>Aktyvuoja Dinaminės navigacijos opciją. Kitos programos gali pakeisti turinį dinamiškai grindžiant URL parametrais.</ContextualHelp>
+      <ParameterHelp>Šis parametras bus naudojamas turinio prieigai, jei Dinaminė navigacija aktyvuota.</ParameterHelp>
+      <ShowDetailInPageHelp>Paspaudę ant turinio vartotojas bus nukreiptas į "Detalių" puslapį. Jūs privalote turėti "Content by URL" portalo įskiepį su aktyvuota Dinamine navigacija tikslo puslapyje, kad būtų atvaizduotas turinys.</ShowDetailInPageHelp>
+      <DetailParameterHelp>Šis parametras nurodys kelią į "Detalių" puslapio nuorodą. Šis parametras privalo sutapti su parametru "Content by URL" portalo įskiepio puslapyje.</DetailParameterHelp>
+      <ContentByQueryHelp>Galite nustatyti SQL užklausą ir gauti turinį dinamiškai. Šie parametrai yra leidžiami: ${user}, ${lang} arba bet koks get parametras (PARAM) apsupto  ${PARAM}.</ContentByQueryHelp>
+      <ContentsVisibilityHelp>"Ribojamas pagal autentifikaciją" filtruos turinį, remiantis autentiškumu. Jei neprisijungsite, matysite tik viešąjį turinį. Jei esate prisijungęs, galite pamatyti visą turinį, kuris yra matomas intraneto vartotojams (bet bendras visų). "Ribojamas pagal vartotojų roles" reiškia, kad jūs matysite turinį, priklausomai nuo jūsų teisių. Daugeliu atvejų, šis variantas neturėtų būti naudojamas, nes jis sumažina bendrą efektyvumą.</ContentsVisibilityHelp>
     </help>
     <action>
       <Save>#{word.save}</Save>
       <Cancel>#{word.cancel}</Cancel>
-      <delete>Delete</delete>
+      <delete>Ištrinti</delete>
     </action>
     <msg>
       <not-valid-path>The Folder Path is invalid.</not-valid-path>
@@ -91,9 +91,9 @@
     </msg>
     <tab>
       <label>
-        <clvContentTab>Content Selection</clvContentTab>
-        <clvDisplayTab>Display Settings</clvDisplayTab>
-        <clvAdvancedTab>Advanced</clvAdvancedTab>
+        <clvContentTab>Turinio pasirinkimas</clvContentTab>
+        <clvDisplayTab>Rodymo nustatymas</clvDisplayTab>
+        <clvAdvancedTab>Plačiau</clvAdvancedTab>
       </label>
     </tab>
   </UICLVConfig>
@@ -105,13 +105,13 @@
   </UICLVConfigDisplayModeFormRadioBoxInput>
   <UICLVConfigItemPathFormInputSet>
     <title>
-      <SelectFolderPath>Select Folder Path</SelectFolderPath>
-      <AddPath>Add Path</AddPath>
+      <SelectFolderPath>Pasirinkti aplanko kelią</SelectFolderPath>
+      <AddPath>Pridėti kelią</AddPath>
     </title>
   </UICLVConfigItemPathFormInputSet>
   <FolderPathSelectorPopupWindow>
     <title>
-      <UIContentSelectorFolder>Folder Browser</UIContentSelectorFolder>
+      <UIContentSelectorFolder>Aplankų naršyklė</UIContentSelectorFolder>
     </title>
   </FolderPathSelectorPopupWindow>
   <UICLVConfigOrderTypeFormSelectBox>
@@ -124,32 +124,32 @@
   </UICLVConfigOrderTypeFormSelectBox>
   <UICLVConfigTargetPageFormInputSet>
     <title>
-      <SelectBasePath>Select Base Path</SelectBasePath>
-      <SelectTargetPage>Select Base Path</SelectTargetPage>
+      <SelectBasePath>Pasirinkti bazinį kelią</SelectBasePath>
+      <SelectTargetPage>Pasirinkti bazinį kelią</SelectTargetPage>
     </title>
   </UICLVConfigTargetPageFormInputSet>
   <UICLVBasePathPopupWindow>
     <title>
-      <UIPageSelector>Page Selector</UIPageSelector>
+      <UIPageSelector>Puslapio parinkimas</UIPageSelector>
     </title>
   </UICLVBasePathPopupWindow>
   <UICLVPresentation>
     <msg>
-      <confirm-delete>Are you sure you want to delete this content?</confirm-delete>
-      <delete-content-successfully>Content deleted successfully.</delete-content-successfully>
+      <confirm-delete>Ar Jūs esate įsitikinęs, kad norite ištrinti šį turinį?</confirm-delete>
+      <delete-content-successfully>Turinys sėkmingai ištrintas.</delete-content-successfully>
     </msg>
     <label>
       <readmore>Read more</readmore>
       <rssFeed>RSS Feed</rssFeed>
     </label>
     <action>
-      <refresh>Refresh</refresh>
-      <edit>Edit in Content Explorer</edit>
-      <delete>Delete</delete>
-      <publish>Publish</publish>
+      <refresh>Atnaujinti</refresh>
+      <edit>Redaguoti turinio naršyklėje</edit>
+      <delete>Ištrinti</delete>
+      <publish>Skelbti</publish>
     </action>
     <label>
-      <draft>Draft</draft>
+      <draft>Projektas</draft>
     </label>
   </UICLVPresentation>
   <CorrectContentSelectorPopupWindow>
@@ -164,25 +164,25 @@
   </UIContentDialogFormPopupWindow>
   <UICLVConfigContextualFolderRadioBoxInput>
     <label>
-      <contextualEnable>Enabled</contextualEnable>
-      <contextualDisable>Disabled</contextualDisable>
+      <contextualEnable>Įjungta</contextualEnable>
+      <contextualDisable>Išjungta</contextualDisable>
     </label>
   </UICLVConfigContextualFolderRadioBoxInput>
   <PublicationStates>
-    <archived>Archived</archived>
-    <obsolete>Obsolete</obsolete>
-    <unpublished>Unpublished</unpublished>
-    <enrolled>Enrolled</enrolled>
-    <draft>Draft</draft>
-    <pending>Pending</pending>
-    <approved>Approved</approved>
-    <inreview>In Review</inreview>
-    <staged>Staged</staged>
-    <published>Published</published>
+    <archived>Suarchyvuota</archived>
+    <obsolete>Pasenę</obsolete>
+    <unpublished>Neskelbta</unpublished>
+    <enrolled>Įtraukta</enrolled>
+    <draft>Projektas</draft>
+    <pending>Laukiama</pending>
+    <approved>Patvirtinta</approved>
+    <inreview>Peržvelgiama</inreview>
+    <staged>Įvykdyta</staged>
+    <published>Paskelbta</published>
   </PublicationStates>
   <UICLVConfigCacheEnableRadioBoxInput>
     <label>
-      <ENABLE>Restricted by Authentication</ENABLE>
+      <ENABLE>Ribojamas pagal autentifikaciją</ENABLE>
       <DISABLE>Restricted by User Roles</DISABLE>
     </label>
   </UICLVConfigCacheEnableRadioBoxInput>

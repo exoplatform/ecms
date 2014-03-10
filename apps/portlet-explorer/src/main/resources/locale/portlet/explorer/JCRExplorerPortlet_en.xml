@@ -129,7 +129,7 @@
     <title>Explorer</title>
     <label>
       <Root>Root</Root>
-      <webDavView>Download and allow edition</webDavView>
+      <webDavView>Open in MS Office</webDavView>
     </label>
     <msg>
       <path-not-found>This element was deleted or changed. Please click the Refresh button.</path-not-found>
@@ -591,7 +591,7 @@
       <MoveToTrash>Move to Trash</MoveToTrash>
       <RestoreFromTrash>Restore from Trash</RestoreFromTrash>
       <EmptyTrash>Empty Trash</EmptyTrash>
-      <WebDavView>Edit in MS Office</WebDavView>
+      <WebDavView>Open in MS Office</WebDavView>
     </event>
   </ECMContextMenu>
  

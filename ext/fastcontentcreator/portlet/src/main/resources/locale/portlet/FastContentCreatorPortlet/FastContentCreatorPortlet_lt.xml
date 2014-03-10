@@ -2,18 +2,18 @@
 <bundle>
   <UIFCCForm>
     <msg>
-      <name-not-allowed>This name is not allowed.</name-not-allowed>
-      <in-versioning>Please check the current node before adding a new node.</in-versioning>
-      <cannot-save>An error occurred while saving the node.</cannot-save>
+      <name-not-allowed>Šis pavadinimas yra neleidžiamas.</name-not-allowed>
+      <in-versioning>Prašome patikrinti dabartinį mazgą prieš pridedant naują.</in-versioning>
+      <cannot-save>Įvyko klaida išsaugojant mazgą.</cannot-save>
       <saved-successfully>{0}</saved-successfully>
-      <not-support>Cannot load the template of '{0}'.</not-support>
-      <not-add-folder>Only files can be added to this folder.</not-add-folder>
-      <access-denied>Access denied. You do not have add permission at '{0}'.</access-denied>
-      <path-not-found>The path '{0}' was deleted or invalid.</path-not-found>
-      <node-locked>Node '{0}' is locked. Please unlock this node before creating documents.</node-locked>
-      <node-isExist>This node already exists in '{0}' and is not allowed to be the same name as its sibling.</node-isExist>
-      <get-dialog-path>An error occurred while getting the dialog path.</get-dialog-path>
-      <new-jcr-template>An error occurred while creating a new template.</new-jcr-template>
+      <not-support>Nepavyko įkelti '{0}' šablono.</not-support>
+      <not-add-folder>Tik failai gali būti pridedami į šį aplanką.</not-add-folder>
+      <access-denied>Prieiga uždrausta. Jūs neturite pridėjimo teisės prie '{0}'.</access-denied>
+      <path-not-found>Kelias '{0}' ištrintas arba klaidingas.</path-not-found>
+      <node-locked>Mazgas '{0}' yra užrakintas. Prašome atrakinti šį mazgą prieš dokumentų kūrimą.</node-locked>
+      <node-isExist>Šis mazgas jau egzistuoja '{0}' ir negali būti tuo pačiu pavadinimu.</node-isExist>
+      <get-dialog-path>Įvyko klaida gaunant dialogo kelią.</get-dialog-path>
+      <new-jcr-template>Kuriant naują šabloną įvyko klaida.</new-jcr-template>
     </msg>
     <action>
       <Save>#{word.save}</Save>
@@ -23,27 +23,27 @@
 
   <UIFCCConfig>
     <label>
-      <UIFCCSaveLocationField>Save Location</UIFCCSaveLocationField>
-      <UIFCCWorkspaceFormSelectBox>Select Workspace</UIFCCWorkspaceFormSelectBox>
-      <UIFCCTemplateField>Template Options</UIFCCTemplateField>
-      <UIFCCLocationFormInputAction>Location to Save</UIFCCLocationFormInputAction>
-      <UIFCCTemplateFormSelectBox>Select Template</UIFCCTemplateFormSelectBox>
-      <UIFCCSaveFormStringInput>Custom Save Button</UIFCCSaveFormStringInput>
-      <UIFCCMessageFormTextareaInput>Custom Save Message</UIFCCMessageFormTextareaInput>
-      <UIFCCRedirectFormCheckboxInput>Redirect:</UIFCCRedirectFormCheckboxInput>
-      <UIFCCRedirectPathFormStringInput>Redirect Path:</UIFCCRedirectPathFormStringInput>
-      <UIFCCActionField>Actions</UIFCCActionField>
+      <UIFCCSaveLocationField>Išsaugoti vietą</UIFCCSaveLocationField>
+      <UIFCCWorkspaceFormSelectBox>Pasirinkti darbo sritį</UIFCCWorkspaceFormSelectBox>
+      <UIFCCTemplateField>Šablono parinktys</UIFCCTemplateField>
+      <UIFCCLocationFormInputAction>Vieta išsaugojimui</UIFCCLocationFormInputAction>
+      <UIFCCTemplateFormSelectBox>Pasirinkti šabloną</UIFCCTemplateFormSelectBox>
+      <UIFCCSaveFormStringInput>Pasirinktinis išsaugojimo mygtukas</UIFCCSaveFormStringInput>
+      <UIFCCMessageFormTextareaInput>Pasirinktinė išsaugojimo žinutė</UIFCCMessageFormTextareaInput>
+      <UIFCCRedirectFormCheckboxInput>Nukreipti:</UIFCCRedirectFormCheckboxInput>
+      <UIFCCRedirectPathFormStringInput>Nukreipimo kelias:</UIFCCRedirectPathFormStringInput>
+      <UIFCCActionField>Veiksmai</UIFCCActionField>
     </label>
     <msg>
-      <save-successfully>Saved to portlet preferences successfully.</save-successfully>
-      <item-not-found>This path is invalid.</item-not-found>
-      <fileType-empty>Please select a file type before saving this configuration.</fileType-empty>
-      <ws-empty>Please select one workspace.</ws-empty>
+      <save-successfully>Sėkmingai įrašyta į portalo įskiepio nuostatas.</save-successfully>
+      <item-not-found>Šis kelias yra klaidingas.</item-not-found>
+      <fileType-empty>Prieš įrašant šią konfigūraciją pasirinkite failo tipą.</fileType-empty>
+      <ws-empty>Prašome pasirinkti vieną darbo sritį.</ws-empty>
       <action-empty>Please select a folder with an action.</action-empty>
-      <message-empty>The "Custom Save Message" field is required in case you do not choose the redirect option, or the path is empty.</message-empty>
-      <get-template>An error occurred while accessing the template.</get-template>
-      <set-template-option>An error occurred while setting the template option.</set-template-option>
-      <do-select>An error occurred while selecting the location.</do-select>
+      <message-empty>"Pasirinktinė išsaugojimo žinutė" laukelis būtinas, jeigu jūs nepasirinksite parinkčių peradresavimo, arba kai kelias yra tuščias.</message-empty>
+      <get-template>Įvyko klaida mėginant pasiekti šabloną.</get-template>
+      <set-template-option>Įvyko klaida mėginant nustyatyti šablono parinktį.</set-template-option>
+      <do-select>Įvyko klaida parenkant vietą.</do-select>
       </msg>
     <action>
       <Save>#{word.save}</Save>
@@ -52,116 +52,116 @@
 
   <UIFCCLocationFormInputAction>
     <title>
-      <SelectPath>Select Path</SelectPath>
+      <SelectPath>Pasirinkti kelią</SelectPath>
     </title>
   </UIFCCLocationFormInputAction>
 
   <UIFCCActionList>
     <header>
-      <name>Name</name>
-      <description>Description</description>
+      <name>Pavadinimas</name>
+      <description>Aprašymas</description>
       <instanceOf>Instance of</instanceOf>
       <action>Veiksmas</action>
     </header>
     <action>
-      <Add>Add</Add>
+      <Add>Pridėti</Add>
     </action>
     <msg>
-      <empty>No actions</empty>
-      <remove-popup-first>You must close the edit pop-up before deleting this node.</remove-popup-first>
-      <confirm-delete-action>Are you sure you want to delete this action?</confirm-delete-action>
-      <template-empty>The template of '{0}' is null or empty.</template-empty>
-      <template-null>The template is null or empty, or you do not have permission to access this template.</template-null>
-      <access-denied>Access denied. You do not have permission to perform this action.</access-denied>
+      <empty>Nėra veiksmų</empty>
+      <remove-popup-first>Jūs turite uždaryti redagavimo iškylantįjį langą prieš ištrindami šį mazgą.</remove-popup-first>
+      <confirm-delete-action>Ar tikrai norite ištrinti šį veiksmą?</confirm-delete-action>
+      <template-empty>'{0}' šablonas yra negaliojantis arba tuščias.</template-empty>
+      <template-null>Šablonas yra negaliojantis arba tuščias, arba jūs neturite teisės prieiti prie šio šablono.</template-null>
+      <access-denied>Prieiga uždrausta. Jūs neturite teisės atlikti šio veiksmo.</access-denied>
     </msg>
   </UIFCCActionList>
 
   <UIFCCSelectorPopupWindow>
     <title>
-      <UIOneNodePathSelector>Select Location</UIOneNodePathSelector>
+      <UIOneNodePathSelector>Pasirinkti vietą</UIOneNodePathSelector>
     </title>
   </UIFCCSelectorPopupWindow>
 
   <UIWorkspaceList>
     <label>
-      <workspaceName>Workspace:</workspaceName>
-      <rootNodePath>Root Path:</rootNodePath>
-      <rootNodeInfo>Root node</rootNodeInfo>
+      <workspaceName>Darbo sritis:</workspaceName>
+      <rootNodePath>Šakninis kelias:</rootNodePath>
+      <rootNodeInfo>Šakninis mazgas</rootNodeInfo>
     </label>
   </UIWorkspaceList>
 
   <rootNodeInfo>
     <title>
-      <AddRootNode>Add Root Node</AddRootNode>
+      <AddRootNode>Pridėti šakninį mazgą</AddRootNode>
     </title>
   </rootNodeInfo>
 
   <UITreeList>
     <info>
-      <child-not-found>This node does not have any child ones.</child-not-found>
+      <child-not-found>Šis mazgas neturi jokių antrinių mazgų.</child-not-found>
     </info>
     <header>
-      <name>Name</name>
-      <action>Action</action>
+      <name>Pavadinimas</name>
+      <action>Veiksmas</action>
     </header>
   </UITreeList>
 
   <UIFCCActionPopupWindow>
     <title>
-      <UIFCCActionContainer>Add Action</UIFCCActionContainer>
+      <UIFCCActionContainer>Pridėti veiksmą</UIFCCActionContainer>
     </title>
   </UIFCCActionPopupWindow>
 
   <UIFCCActionForm>
-    <title>Add/Edit Action</title>
+    <title>Pridėti/Redaguoti veiksmą</title>
     <action>
       <Save>#{word.save}</Save>
       <Close>#{word.close}</Close>
     </action>
     <msg>
-      <repository-exception>Cannot save this action. The name provided must not have an index as its final element.</repository-exception>
-      <numberformat-exception>Cannot save this action. The name provided must not have '[' or ']'.</numberformat-exception>
-      <existed-action>The action name '{0}' already exists. Please select another name.</existed-action>
-      <unable-add-action>Unable to add this action.</unable-add-action>
-      <unable-add>Unable to add this action. This node is root or you do not have permision.</unable-add>
-      <not-support>The dialog '{0}' is not supported.</not-support>
-      <no-permission-add>Access denied. You do not have the right to add an action here.</no-permission-add>
-      <access-denied>Access denied. You do not have permission to access this template.</access-denied>
+      <repository-exception>Negalima išsaugoti šio veiksmo. Jo pavadinimas neturi būti indeksas kaip jo baigiamasis elementas.</repository-exception>
+      <numberformat-exception>Negalima išsaugoti šio veiksmo. Pavadinimas neturi turėti '[' arba ']'.</numberformat-exception>
+      <existed-action>Veiksmo pavadinimas '{0}' jau egzistuoja. Prašome pasirinkti kitą pavadinimą.</existed-action>
+      <unable-add-action>Neįmanoma pridėti šio veiksmo.</unable-add-action>
+      <unable-add>Neįmanoma pridėti šio veiksmo. Šis mazgas yra pagrindinis arba jūs neturite leidimo.</unable-add>
+      <not-support>Dialogas '{0}' yra nepalaikomas.</not-support>
+      <no-permission-add>Prieiga uždrausta. Jūs neturite teisės pridėti veiksmo čia.</no-permission-add>
+      <access-denied>Prieiga uždrausta. Jūs neturite teisės prieiti prie šio šablono.</access-denied>
     </msg>
     <validator>
-      <validator>Validator</validator>
-      <destPath>With Path</destPath>
+      <validator>Validatorius</validator>
+      <destPath>Su keliu</destPath>
     </validator>
   </UIFCCActionForm>
 
   <UIFCCActionTypeForm>
     <label>
-      <actionType>Create an Action of Type</actionType>
+      <actionType>Kurti tipo veiksmą</actionType>
     </label>
     <msg>
-      <not-support>Cannot load the template of '{0}'.</not-support>
-      <do-not-permission>You do not have permission to load the template of '{0}'.</do-not-permission>
+      <not-support>Nepavyko įkelti '{0}' šablono.</not-support>
+      <do-not-permission>Jūs neturite teisės įkelti šabloną '{0}'.</do-not-permission>
     </msg>
   </UIFCCActionTypeForm>
 
   <PopupComponent>
     <title>
-      <UIOneNodePathSelector>Select Location</UIOneNodePathSelector>
-      <UIPermissionSelector>Permission Browser</UIPermissionSelector>
-      <UICategoriesSelector>Add Categories</UICategoriesSelector>
+      <UIOneNodePathSelector>Pasirinkti vietą</UIOneNodePathSelector>
+      <UIPermissionSelector>Teisių naršyklė</UIPermissionSelector>
+      <UICategoriesSelector>Pridėti kategorijas</UICategoriesSelector>
     </title>
   </PopupComponent>
 
   <DateTimeValidator>
     <msg>
-      <Invalid-input>The field '{0}' with the value '{1}' is invalid.</Invalid-input>
+      <Invalid-input>Lauke '{0}' reikšmė '{1}' yra netinkama.</Invalid-input>
     </msg>
   </DateTimeValidator>
 
   <UITabPane>
     <title>
-      <UICategoriesSelectPanel>Select Categories</UICategoriesSelectPanel>
-      <UISelectedCategoriesGrid>Referenced Categories</UISelectedCategoriesGrid>
+      <UICategoriesSelectPanel>Pasirinkti kategorijas</UICategoriesSelectPanel>
+      <UISelectedCategoriesGrid>Nurodytos kategorijos</UISelectedCategoriesGrid>
     </title>
   </UITabPane>
 
@@ -179,19 +179,19 @@
 
   <PopupComponent>
     <title>
-      <UIOneTaxonomySelector>Add Categories</UIOneTaxonomySelector>
+      <UIOneTaxonomySelector>Pridėti kategorijas</UIOneTaxonomySelector>
     </title>
   </PopupComponent>
 
   <UITreeTaxonomyList>
     <label>
-      <taxonomyTree>Category Tree</taxonomyTree>
+      <taxonomyTree>Kategorijos medis</taxonomyTree>
     </label>
   </UITreeTaxonomyList>
 
   <UIFCCTaxonomyPopupWindow>
     <title>
-      <UIOneTaxonomySelector>Category Selector</UIOneTaxonomySelector>
+      <UIOneTaxonomySelector>Kategorijos pasirinkimas</UIOneTaxonomySelector>
     </title>
   </UIFCCTaxonomyPopupWindow>
 </bundle>
