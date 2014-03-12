@@ -18,8 +18,6 @@ package org.exoplatform.services.wcm.portal.artifacts;
 
 import org.exoplatform.services.jcr.ext.common.SessionProvider;
 
-import java.util.HashMap;
-
 /**
  * Created by The eXo Platform SAS
  * Author : Hoa Pham
@@ -46,11 +44,4 @@ public interface CreatePortalArtifactsService {
    * @throws Exception
    */
   public void deployArtifactsToPortal(SessionProvider sessionProvider, String portalName, String portalTemplateName) throws Exception;
-
-   /**
-     * Return all artifacts plugins - list of CreatePortalPlugin
-     *
-     * @return the artifactPlugins
-     */
-  public HashMap<String, CreatePortalPlugin> getArtifactPlugins();
 }

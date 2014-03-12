@@ -72,12 +72,4 @@ public class CreatePortalArtifactsServiceImpl implements CreatePortalArtifactsSe
 
     listenerService.broadcast(CREATE_PORTAL_EVENT, portalName, sessionProvider);
   }
-
-   /**
-   * {@inheritDoc}
-   */
-   @Override
-   public HashMap<String, CreatePortalPlugin> getArtifactPlugins() {
-     return artifactPlugins;
-   }
 }
