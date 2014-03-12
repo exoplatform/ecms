@@ -8,8 +8,8 @@ import org.exoplatform.wcm.webui.reader.ContentReader;
 			if (templates != null) {
 				for (int i = 0; i < templates.size(); i++) {
 					def label = templates.get(i);
-					label = ContentReader.getXSSCompatibilityContent(label);
 					def contentType = uicomponent.getContentType(label);
+					label = ContentReader.getXSSCompatibilityContent(label);
 					def actionLink = uicomponent.event("SelectTemplate", contentType);
 					def cssClass = uicomponent.getTemplateIconStylesheet(contentType);
 		%>
