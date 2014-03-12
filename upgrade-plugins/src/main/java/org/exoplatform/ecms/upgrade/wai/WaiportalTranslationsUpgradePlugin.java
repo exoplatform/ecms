@@ -41,12 +41,8 @@ public class WaiportalTranslationsUpgradePlugin extends UpgradeProductPlugin {
 
   private static final Log             LOG = ExoLogger.getLogger(WaiportalTranslationsUpgradePlugin.class.getName());
 
-  private CreatePortalArtifactsService createPortalArtifactsService;
-
-  public WaiportalTranslationsUpgradePlugin(InitParams initParams,
-                                            CreatePortalArtifactsService createPortalArtifactsService) {
+  public WaiportalTranslationsUpgradePlugin(InitParams initParams) {
     super(initParams);
-    this.createPortalArtifactsService = createPortalArtifactsService;
   }
 
   @Override
@@ -59,10 +55,11 @@ public class WaiportalTranslationsUpgradePlugin extends UpgradeProductPlugin {
     LivePortalManagerService livePortalManagerService = WCMCoreUtils.getService(LivePortalManagerService.class);
     try {
       List<Node> livePortals = livePortalManagerService.getLivePortals(sessionProvider);
-      HashMap<String, CreatePortalPlugin> artifactPlugins = createPortalArtifactsService.getArtifactPlugins();
+      HashMap<String, CreatePortalPlugin> artifactPlugins =
+              WCMCoreUtils.getService(CreatePortalArtifactsService.class).getArtifactPlugins();
       for (CreatePortalPlugin plugin : artifactPlugins.values()) {
         if (plugin instanceof AddTranslationPlugin
-            && plugin.getName().equals("template-WAIPortal-translation")) {
+            && plugin.getName().equals("template-Upgrade-WAIPortal-translation")) {
           for (Node node : livePortals) {
             plugin.deployToPortal(sessionProvider, node.getName());
           }
