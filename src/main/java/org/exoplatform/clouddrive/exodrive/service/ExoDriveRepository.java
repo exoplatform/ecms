@@ -209,6 +209,14 @@ public class ExoDriveRepository {
     file.mkdirs();
     return file.exists();
   }
+  
+  public boolean removeUser(String ownerName) throws ExoDriveException {
+    File file = userRoot(ownerName);
+    for (FileStore fs : listFiles(ownerName)) {
+      fs.remove();
+    }
+    return file.delete();
+  }
 
   public FileStore create(String ownerName, String name, String type, Calendar createDate) throws ExoDriveException {
     File parentDir = userRoot(ownerName);

@@ -101,7 +101,6 @@ class ExoSpecification extends Specification {
         }
       }
     }
-    //params.getPropertiesParam("drive-configuration")
     new ExoDriveConnector(repositoryService, sessionProviders, exoDrives, orgService, params)
   }
 

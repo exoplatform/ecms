@@ -1389,7 +1389,7 @@ public abstract class JCRLocalCloudDrive extends CloudDrive {
   protected abstract ConnectCommand getConnectCommand() throws DriveRemovedException, RepositoryException;
 
   /**
-   * Factory method to create an actual implementation of {@link SyncCommand} command.
+   * Factory method to create an instance of {@link SyncCommand} command.
    * 
    * @throws DriveRemovedException
    * @throws SyncNotSupportedException
@@ -1401,7 +1401,7 @@ public abstract class JCRLocalCloudDrive extends CloudDrive {
                                                  RepositoryException;
 
   /**
-   * Factory method to create an actual implementation of {@link SyncFileCommand} command.
+   * Factory method to create a instance of {@link SyncFileCommand} command.
    * 
    * @param file {@link Node} to synchronize
    * @throws DriveRemovedException
