@@ -7,19 +7,19 @@
   -->
   <UICommentForm>
     <label>
-      <name>Name</name>
-      <email>Email</email>
-      <website>Website</website>
-      <comment>Comment</comment>
+      <name>Название</name>
+      <email>Эл. почта</email>
+      <website>Сайт</website>
+      <comment>Комментировать</comment>
     </label>
     <action>
       <Save>#{word.save}</Save>
       <Cancel>#{word.cancel}</Cancel>
     </action>
     <msg>
-      <not-support>You cannot comment on this document type.</not-support>
+      <not-support>Вы не можете комментировать документ этого типа.</not-support>
       <not-checkedout>You must check out the node before commenting on it.</not-checkedout>
-      <content-null>You cannot post an empty comment.</content-null>
+      <content-null>Вы не можете опубликовать пустой комментарий.</content-null>
     </msg>
   </UICommentForm>
   <!--
@@ -37,17 +37,17 @@
       <no-value>no value yet</no-value>
     </title>
     <label>
-      <my-rating>My Rating:</my-rating>
+      <my-rating>Мой рейтинг:</my-rating>
     </label>
     <button>
       <label>
-        <confirm>OK</confirm>
+        <confirm>ОК</confirm>
       </label>
     </button>
     <msg>
-      <not-support>You cannot vote for this document type.</not-support>
+      <not-support>Вы не можете голосовать за этот тип документа.</not-support>
       <not-checkedout>You must check out the node before voting.</not-checkedout>
-      <vote-restriction>You cannot vote more than one time.</vote-restriction>
+      <vote-restriction>Вы не можете голосовать более чем один раз.</vote-restriction>
     </msg>
   </UIVoteForm>
  
@@ -58,10 +58,10 @@
   -->
   <UIJCRExplorer>
     <msg>
-      <refresh-session-success>The session was refreshed successfully.</refresh-session-success>
-      <no-node-history>You are in the root node.</no-node-history>
-      <save-session-success>All changes have been saved.</save-session-success>
-      <target-path-not-found>You cannot access this node, either because it doesn't exist anymore or because you do not have the right to access it.</target-path-not-found>
+      <refresh-session-success>Сессия была успешно обновлена.</refresh-session-success>
+      <no-node-history>Вы находитесь в корневом узле.</no-node-history>
+      <save-session-success>Все изменения были сохранены.</save-session-success>
+      <target-path-not-found>Не удается получить доступ к этому узлу либо потому, что он больше не существует, либо потому, что вы не имеете прав на доступ к нему.</target-path-not-found>
     </msg>
   </UIJCRExplorer>
   <!--
@@ -71,16 +71,16 @@
   -->
   <UISideBar>
     <label>
-      <Relation>Relation</Relation>
+      <Relation>Отношение</Relation>
       <Explorer>File Explorer</Explorer>
-      <Close>Close Sidebar</Close>
+      <Close>Закрыть боковую панель</Close>
       <TagExplorer>Tag Cloud</TagExplorer>
       <Clipboard>Clipboard</Clipboard>
-      <SavedSearches>Saved Searches</SavedSearches>
+      <SavedSearches>Сохраненные результаты поиска</SavedSearches>
     </label>
     <title>
       <Control>Control Sidebar</Control>
-      <Close>Close Sidebar</Close>
+      <Close>Закрыть боковую панель</Close>
     </title>
   </UISideBar>
   <!--
@@ -93,12 +93,12 @@
       <driveWorkspace>Drive Workspace:</driveWorkspace>
       <backToJCR>Back to JCR Main Drives</backToJCR>
       <setUpBrowser>Set up your browsing preferences</setUpBrowser>
-      <refesh>Refresh</refesh>
-      <currentDrive>Current Drive</currentDrive>
+      <refesh>Обновить</refesh>
+      <currentDrive>Текущий диск</currentDrive>
       <selectView>Select View</selectView>
-      <showSideBar>Show Sidebar</showSideBar>
-      <more>More</more>
-      <backTo>Back</backTo>
+      <showSideBar>Показать боковую панель</showSideBar>
+      <more>Еще</more>
+      <backTo>Назад</backTo>
     </label>
   </UIViewBar>
 
@@ -109,9 +109,9 @@
   -->
   <UIDrivesBrowser>
     <title>
-      <PersonalDrives>Personal drives</PersonalDrives>
-      <GroupDrives>Group drives</GroupDrives>
-      <GeneralDrives>General drives</GeneralDrives>
+      <PersonalDrives>Персональные диски</PersonalDrives>
+      <GroupDrives>Групповые диски</GroupDrives>
+      <GeneralDrives>Общие диски</GeneralDrives>
     </title>
     <msg>
       <no-view-found>There is no view available according to your access permissions in drive '{0}'.</no-view-found>
@@ -132,7 +132,7 @@
       <webDavView>Download and allow edition</webDavView>
     </label>
     <msg>
-      <path-not-found>This element was deleted or changed. Please click the Refresh button.</path-not-found>
+      <path-not-found>Этот элемент был удален или изменен. Пожалуйста, нажмите кнопку Обновить.</path-not-found>
     </msg>
   </UITreeExplorer>
   <!--
@@ -142,11 +142,11 @@
   -->
   <UIViewRelationList>
     <label>
-      <languages-list>Translations</languages-list>
-      <relation-list>Relations</relation-list>
-      <references-list>References</references-list>
-      <no-related-document>No Related Document</no-related-document>
-      <related-document>Related Documents</related-document>
+      <languages-list>Переводы</languages-list>
+      <relation-list>Отношения</relation-list>
+      <references-list>Ссылки</references-list>
+      <no-related-document>Нет взаимосвязанных документов</no-related-document>
+      <related-document>Связанные документы</related-document>
     </label>
   </UIViewRelationList>
   <!--
@@ -158,14 +158,14 @@
     <title>Set up your browsing preferences</title>
     <label>
       <enableStructure>Enable DMS Structure:</enableStructure>
-      <showSideBar>Show Sidebar:</showSideBar>
-      <showHiddenNode>Show Hidden Nodes:</showHiddenNode>
+      <showSideBar>Показать боковую панель:</showSideBar>
+      <showHiddenNode>Показать скрытые узлы:</showHiddenNode>
       <showNonDocument>Show Non-document Nodes:</showNonDocument>
       <showRefDocuments>Show Referenced Documents:</showRefDocuments>
       <enableDragAndDrop>Enable Drag &amp; Drop:</enableDragAndDrop>
-      <sortBy>Sort by:</sortBy>
+      <sortBy>Упорядочить по:</sortBy>
       <order>Order by:</order>
-      <nodesPerPage>Nodes Per Page:</nodesPerPage>
+      <nodesPerPage>Узлов на странице:</nodesPerPage>
     </label>
     <action>
       <Back>#{word.close}</Back>
@@ -190,10 +190,10 @@
   #########################################################################################
   -->
   <UIRenameForm>
-    <title>Rename</title>
+    <title>Переименовать</title>
     <label>
-      <nameField>Name</nameField>
-      <titleField>Титул</titleField>
+      <nameField>Название</nameField>
+      <titleField>Заголовок</titleField>
     </label>
     <action>
       <Cancel>#{word.cancel}</Cancel>
@@ -201,63 +201,63 @@
       <Back>#{word.back}</Back>
     </action>
     <msg>
-      <rename-successfull>Node '{0}' was renamed to '{1}' successfully.</rename-successfull>
-      <rename-denied>Access denied. You cannot rename this node.</rename-denied>
-      <fileName-invalid>The new name contains some invalid characters.</fileName-invalid>
-      <newName-same-oldName>The new name already exists. Please check again.</newName-same-oldName>
+      <rename-successfull>Узел '{0}' был успешно переименован в «{1}».</rename-successfull>
+      <rename-denied>Доступ запрещен. Вы не можете переименовать этот узел.</rename-denied>
+      <fileName-invalid>Новое имя содержит недопустимые знаки.</fileName-invalid>
+      <newName-same-oldName>Новое имя уже существует. Пожалуйста, проверьте еще раз.</newName-same-oldName>
       <version-exception>This node (or the ancestor of this node) is not checked out.</version-exception>
-      <lock-exception>This node is locked. Please unlock it before renaming.</lock-exception>
-      <constraintViolation-exception>An error occurred while renaming node '{0}'. Please check again.</constraintViolation-exception>
-      <unknown-prefix>Prefix '{0}' has not been registered yet.</unknown-prefix>
-      <rename-error>An error occurred while renaming this node. Please check again.</rename-error>
+      <lock-exception>Этот узел заблокирован. Пожалуйста разблокируйте его до переименования.</lock-exception>
+      <constraintViolation-exception>Произошла ошибка при переименовании узла «{0}». Пожалуйста, проверьте еще раз.</constraintViolation-exception>
+      <unknown-prefix>Префикс "{0}" не были зарегистрирован.</unknown-prefix>
+      <rename-error>Произошла ошибка при переименовании данного узла. Пожалуйста, проверьте еще раз.</rename-error>
     </msg>
   </UIRenameForm>
   <UIPopupWindow>
     <title>
-      <UIRenameForm>Rename</UIRenameForm>
-      <UIActionContainer>Edit Action</UIActionContainer>
-      <UIFolderForm>New Folder</UIFolderForm>
-      <UIUploadManager>Upload File</UIUploadManager>
-      <UIReferencesList>References List</UIReferencesList>
-      <UIExportNode>Export</UIExportNode>
-      <UINodeTypeInfo>Node Type Information</UINodeTypeInfo>
-      <UIVersionInfo>Version Info</UIVersionInfo>
-      <UIActivateVersion>Activate Version</UIActivateVersion>
+      <UIRenameForm>Переименовать</UIRenameForm>
+      <UIActionContainer>Изменить действие</UIActionContainer>
+      <UIFolderForm>Новая папка</UIFolderForm>
+      <UIUploadManager>Загрузить файл</UIUploadManager>
+      <UIReferencesList>Список ссылок</UIReferencesList>
+      <UIExportNode>Экспорт</UIExportNode>
+      <UINodeTypeInfo>Сведения о типе узла</UINodeTypeInfo>
+      <UIVersionInfo>Информация о версии</UIVersionInfo>
+      <UIActivateVersion>Активировать версию</UIActivateVersion>
       <UIAuditingInfo>Auditing Information</UIAuditingInfo>
       <UIActivateAuditing>Activate Auditing</UIActivateAuditing>
-      <UIPermissionManager>Permission Management</UIPermissionManager>
-      <UIPropertiesManager>Properties Management</UIPropertiesManager>
+      <UIPermissionManager>Управление разрешениями</UIPermissionManager>
+      <UIPropertiesManager>Управление свойствами</UIPropertiesManager>
       <UIECMSearch>Расширенный поиск</UIECMSearch>
-      <UISavedQuery>Saved Queries List</UISavedQuery>
-      <UIWatchDocumentForm>Watch Document</UIWatchDocumentForm>
-      <UIActionManager>Manage Actions</UIActionManager>
-      <UIDocumentForm>Edit Document</UIDocumentForm>
-      <UIDocumentFormController>Add New Document</UIDocumentFormController>
-      <EditFormController>Edit Document</EditFormController>
-      <UIRelationManager>Add Relation</UIRelationManager>
-      <UICategoryManager>Add Category</UICategoryManager>
-      <UIImportNode>Import</UIImportNode>
-      <UIViewMetadataManager>View Metadata</UIViewMetadataManager>
+      <UISavedQuery>Сохраненный список запросов</UISavedQuery>
+      <UIWatchDocumentForm>Просмотреть документ</UIWatchDocumentForm>
+      <UIActionManager>Управление действиями</UIActionManager>
+      <UIDocumentForm>Редактировать документ</UIDocumentForm>
+      <UIDocumentFormController>Добавить новый документ</UIDocumentFormController>
+      <EditFormController>Редактировать документ</EditFormController>
+      <UIRelationManager>Добавить связь</UIRelationManager>
+      <UICategoryManager>Добавить категорию</UICategoryManager>
+      <UIImportNode>Импорт</UIImportNode>
+      <UIViewMetadataManager>Просмотр метаданных</UIViewMetadataManager>
       <UIVoteForm>Vote Document</UIVoteForm>
-      <UICommentForm>Comment</UICommentForm>
-      <UIPreferencesForm>Preferences</UIPreferencesForm>
-      <UIPublicationManager>Manage Publication</UIPublicationManager>
-      <UIConfirmMessage>Delete ?</UIConfirmMessage>
-      <UIDeleteFileConfirmMessage>Delete File ?</UIDeleteFileConfirmMessage>
-      <UIDeleteFolderConfirmMessage>Delete Folder ?</UIDeleteFolderConfirmMessage>
-      <UIDeleteItemsConfirmMessage>Delete Items ?</UIDeleteItemsConfirmMessage>
-      <UIRestoreConfirmMessage>Confirm Restore</UIRestoreConfirmMessage>
+      <UICommentForm>Комментировать</UICommentForm>
+      <UIPreferencesForm>Настройки</UIPreferencesForm>
+      <UIPublicationManager>Управление публикацией</UIPublicationManager>
+      <UIConfirmMessage>Удалить ?</UIConfirmMessage>
+      <UIDeleteFileConfirmMessage>Удалить файл ?</UIDeleteFileConfirmMessage>
+      <UIDeleteFolderConfirmMessage>Удалить папку ?</UIDeleteFolderConfirmMessage>
+      <UIDeleteItemsConfirmMessage>Удалить элементы?</UIDeleteItemsConfirmMessage>
+      <UIRestoreConfirmMessage>Подтверждение восстановления</UIRestoreConfirmMessage>
       <UIActivePublication>Enroll to Publication Lifecycle</UIActivePublication>
       <UITaggingForm>Tag Document</UITaggingForm>
       <UIThumbnailForm>Add Thumbnail Image</UIThumbnailForm>
       <UIAllItemsPreferenceForm>Preference Settings</UIAllItemsPreferenceForm>
-      <UISelectRestorePath>Select Restore Path</UISelectRestorePath>
-      <UISEOForm>Manage SEO</UISEOForm>
-      <UISEOToolbarForm>Manage SEO</UISEOToolbarForm>
+      <UISelectRestorePath>Выберите путь восстановления</UISelectRestorePath>
+      <UISEOForm>Управление SEO</UISEOForm>
+      <UISEOToolbarForm>Управление SEO</UISEOToolbarForm>
     </title>
     <header>
-      <workspace>Workspace</workspace>
-      <path>Path</path>
+      <workspace>Рабочая область</workspace>
+      <path>Путь</path>
     </header>
   </UIPopupWindow>
   <!--
@@ -266,11 +266,11 @@
   #########################################################################################
   -->
   <UIResourceForm>
-    <title>Edit File Content</title>
+    <title>Редактировать содержимое файла</title>
     <label>
-      <name>Name</name>
-      <textToModify>Text to modify</textToModify>
-      <fileToUpload>Upload new content for that document (must be the same mime-type)</fileToUpload>
+      <name>Название</name>
+      <textToModify>Текст для изменения</textToModify>
+      <fileToUpload>Добавить новое содержимое для этого документа (должно быть такого же mime-типа)</fileToUpload>
     </label>
   </UIResourceForm>
   <!--
@@ -280,85 +280,85 @@
   -->
   <UIActionBar>
     <tooltip>
-      <AddFolder>New Folder</AddFolder>
-      <AddDocument>New Content</AddDocument>
-      <EditDocument>Edit</EditDocument>
-      <Upload>Upload</Upload>
-      <Paste>Paste</Paste>
-      <Search>Search</Search>
+      <AddFolder>Новая папка</AddFolder>
+      <AddDocument>Новый контент</AddDocument>
+      <EditDocument>Редактировать</EditDocument>
+      <Upload>Загрузить</Upload>
+      <Paste>Вставить</Paste>
+      <Search>Поиск</Search>
       <WatchDocument>Watch/Unwatch</WatchDocument>
-      <TaggingDocument>Tag</TaggingDocument>
+      <TaggingDocument>Тег</TaggingDocument>
       <Vote>Vote</Vote>
-      <Comment>Comment</Comment>
-      <ManageVersions>Versions</ManageVersions>
+      <Comment>Комментировать</Comment>
+      <ManageVersions>Версии</ManageVersions>
       <ManageAuditing>Audit</ManageAuditing>
-      <ManagePublications>Publications</ManagePublications>
-      <ManageCategories>Categories</ManageCategories>
-      <ManageRelations>Relations</ManageRelations>
-      <ManageActions>Actions</ManageActions>
-      <ExportNode>Export</ExportNode>
-      <ImportNode>Import</ImportNode>
+      <ManagePublications>Публикации</ManagePublications>
+      <ManageCategories>Категории</ManageCategories>
+      <ManageRelations>Отношения</ManageRelations>
+      <ManageActions>Действия</ManageActions>
+      <ExportNode>Экспорт</ExportNode>
+      <ImportNode>Импорт</ImportNode>
       <OverloadThumbnail>Overload Thumbnail</OverloadThumbnail>
-      <ManageHidden>Show/Hide Content</ManageHidden>
-      <ViewReferences>References</ViewReferences>
-      <ViewNodeType>Types</ViewNodeType>
-      <ViewPermissions>Permissions</ViewPermissions>
-      <ViewProperties>Properties</ViewProperties>
-      <ViewMetadatas>Metadata</ViewMetadatas>
-      <ViewRelations>Show/Hide Relations</ViewRelations>
-      <ShowJCRStructure>Show/Hide Content Structure</ShowJCRStructure>
+      <ManageHidden>Показать/скрыть содержание</ManageHidden>
+      <ViewReferences>Ссылки</ViewReferences>
+      <ViewNodeType>Типы</ViewNodeType>
+      <ViewPermissions>Права доступа</ViewPermissions>
+      <ViewProperties>Свойства</ViewProperties>
+      <ViewMetadatas>Метаданные</ViewMetadatas>
+      <ViewRelations>Показать/скрыть отношения</ViewRelations>
+      <ShowJCRStructure>Показать/скрыть структуру содержимого</ShowJCRStructure>
     </tooltip>
     <msg>
-      <cannot-action-in-rootnode>You cannot perform this action in the root node.</cannot-action-in-rootnode>
+      <cannot-action-in-rootnode>Это действие нельзя выполнить в корневом узле.</cannot-action-in-rootnode>
       <node-checkedin>You must check out first.</node-checkedin>
-      <cannot-enable-version-rootnode>Cannot enable versioning for the root node.</cannot-enable-version-rootnode>
-      <cannot-enable-publication-rootnode>Cannot enable publication for the root node.</cannot-enable-publication-rootnode>
+      <cannot-enable-version-rootnode>Не удается включить управление версиями для корневого узла.</cannot-enable-version-rootnode>
+      <cannot-enable-publication-rootnode>Невозможно включить публикации для корневого узла.</cannot-enable-publication-rootnode>
       <manage-publication>
-        <not-supported-nodetype>The publication supports the document node only.</not-supported-nodetype>
+        <not-supported-nodetype>Публикация поддерживает только узел документа.</not-supported-nodetype>
         <no-publication-lifecycle>No publication lifecycle is configured.</no-publication-lifecycle>
       </manage-publication>
       <unsubcriber-lifecycle>The node was already unsubscribed.</unsubcriber-lifecycle>
       <not-supported-nodetype>The unsubscriber lifecycle supports the document node only.</not-supported-nodetype>
       <unsubcriber-lifecycle-finish>The node was unsubscribed successfully.</unsubcriber-lifecycle-finish>
       <access-false>The node is not an article or checked in.</access-false>
-      <unsupported-action>This action is not supported.</unsupported-action>
+      <unsupported-action>Это действие не поддерживается.</unsupported-action>
       <not-relationable>This node has not yet had any related links to another node.</not-relationable>
       <node-pasted>Node '{0}' has been pasted at the location '{1}'. This operation has already been saved.</node-pasted>
       <no-node-selected>No node copied.</no-node-selected>
       <unable-edit>Node'{0}' with nodetype '{1}' is not supported to edit.</unable-edit>
-      <not-support>Cannot edit the selected node.</not-support>
-      <template-null>This node has no dialog available.</template-null>
-      <keyword-null>There are no keywords to search.</keyword-null>
-      <not-found>No results found.</not-found>
-      <keyword-not-allow>This keyword is not allowed.</keyword-not-allow>
-      <is-not-referenable>Node '{0}' cannot be referenceable.</is-not-referenable>
-      <access-denied>Access denied. You do not have edit permission in this node.</access-denied>
-      <access-add-denied>Access denied. You do not have add permission in this node.</access-add-denied>
+      <not-support>Невозможно редактировать выбранный узел.</not-support>
+      <template-null>В этом узле нет доступных диалоговых окон.</template-null>
+      <keyword-null>Нет ключевых слов для поиска.</keyword-null>
+      <not-found>Ничего не найдено.</not-found>
+      <keyword-not-allow>Это ключевое слово не допускается.</keyword-not-allow>
+      <is-not-referenable>Нельзя ссылаться на узел {0}.</is-not-referenable>
+      <access-denied>Доступ запрещен. У вас недостаточно прав для редактирования этого узла.</access-denied>
+      <access-add-denied>Доступ запрещен. У вас недостаточно прав для редактирования этого узла.</access-add-denied>
       <item-existed>This node already exists. It cannot have the same name as its sibling.</item-existed>
       <removed-hidden-mixin>You removed the hidden mixin successfully.</removed-hidden-mixin>
       <added-hidden-mixin>You added the hidden mixin successfully.</added-hidden-mixin>
       <not-supported>This function is supported for the document type only.</not-supported>
-      <empty-file-type>You cannot add a document to this node.</empty-file-type>
+      <empty-file-type>Вы не можете добавить документ в этот узел.</empty-file-type>
       <unsupported-watch>Only the document node can be watched.</unsupported-watch>
-      <watch-checkedin>You must check out the node before watching.</watch-checkedin>
+      <watch-checkedin>Вы должны проверить узел перед просмотром.</watch-checkedin>
       <unsupported-tagging>Only the document node can be tagged.</unsupported-tagging>
       <tagnode-checkedin>You must check out the node before tagging.</tagnode-checkedin>
     </msg>
     <title>
-      <select-tab>Select Tab</select-tab>
-      <SimpleSearch>Quick Search</SimpleSearch>
+      <select-tab>Выбрать вкладку</select-tab>
+      <SimpleSearch>Быстрый поиск</SimpleSearch>
       <AdvanceSearch>Расширенный поиск</AdvanceSearch>
-      <SavedQueries>Saved Queries</SavedQueries>
-      <ShowAllOwnedByUser>Show All My Items</ShowAllOwnedByUser>
-      <ShowAllFavourite>Show All Favorite Items</ShowAllFavourite>
-      <ShowAllHidden>Show All Hidden Items</ShowAllHidden>
-      <ShowAllFromTrash>Show All Items From Trash</ShowAllFromTrash>
+      <SavedQueries>Сохраненные запросы</SavedQueries>
+      <ShowAllOwnedByUser>Показать все мои элементы</ShowAllOwnedByUser>
+      <ShowAllFavourite>Показать все избранные элементы</ShowAllFavourite>
+      <ShowAllHidden>Показать все скрытые элементы</ShowAllHidden>
+      <ShowAllFromTrash>Показать все элементы из корзины</ShowAllFromTrash>
     </title>
   </UIActionBar>
   <UIPopupMenu>
     <msg>
-      <has-not-permission>Access denied. You do not have add permission in this node.</has-not-permission>
-      <has-not-edit-permission>Access denied. You do not have edit permission in this node. Please contact the administrator.</has-not-edit-permission>
+      <has-not-permission>Доступ запрещен. У вас недостаточно прав для добавления содержимого в этот узел.</has-not-permission>
+      <has-not-edit-permission>Доступ запрещен. У вас недостаточно прав для редактирования содержимого этого узла. Пожалуйста, обратитесь к администратору.</has-not-edit-permission>
       <cannot-login-node>You cannot access and paste the node here.</cannot-login-node>
       <cannot-paste-nodetype>You cannot paste the node here.</cannot-paste-nodetype>
       <has-not-permission-unlok>You do not have permission to unlock this node.</has-not-permission-unlok>
@@ -370,21 +370,21 @@
       <can-not-remove-node>You do not have permission to remove this node. Please contact the administrator.</can-not-remove-node>
       <can-not-lock-node>You do not have permission to lock node {0}. Please contact the administrator.</can-not-lock-node>
       <can-not-unlock-node>You do not have permission to unlock this node. Please contact the administrator.</can-not-unlock-node>
-      <no-node>Please select at least one node before pasting.</no-node>
+      <no-node>Пожалуйста, выберите по крайней мере один узел перед вставкой.</no-node>
       <can-not-paste-node>You do not have permission to move to this node. Please contact the administrator.</can-not-paste-node>
       <can-not-move-node>You do not have permission to move this node. Please contact the administrator.</can-not-move-node>
       <does-not-support-versioning>You do not have permission to move to this node. Please contact the administrator.</does-not-support-versioning>
-      <path-not-found>This element was deleted or changed. Please click the Refresh button.</path-not-found>
+      <path-not-found>Этот элемент был удален или изменен. Пожалуйста, нажмите кнопку Обновить.</path-not-found>
       <paste-lock-exception>You cannot paste '{0}' to this node because the source or the destination node is locked or is related to the locked node.</paste-lock-exception>
       <can-not-checkin-node>You cannot check in this node. Please check that you have the right permissions.</can-not-checkin-node>
       <can-not-checkout-node>You cannot check out this node. Please check that you have the right permissions.</can-not-checkout-node>
       <move-constraint-exception>An error occurred while moving the node.</move-constraint-exception>
       <not-lock-owner>You cannot unlock this node because you are not the lock owner.</not-lock-owner>
       <is-checked-in>Please check out this node before renaming.</is-checked-in>
-      <is-checked-in-lock>Please check out this node before locking.</is-checked-in-lock>
-      <cant-lock>You cannot lock this node.</cant-lock>
+      <is-checked-in-lock>Пожалуйста, проверьте этот узел до блокировки.</is-checked-in-lock>
+      <cant-lock>Вы не можете заблокировать этот узел.</cant-lock>
       <node-locked>The item with the path {0} or upper level is locked.</node-locked>
-      <can-not-delete>Please close this node before deleting.</can-not-delete>
+      <can-not-delete>Пожалуйста, закройте этот узел перед удалением.</can-not-delete>
       <can-not-delete-version>You cannot delete this node. It is versioning.</can-not-delete-version>
       <not-support>You cannot delete the selected node. Please select another node.</not-support>
       <current-node-not-allow-paste>You cannot paste the copied node type on the current node.</current-node-not-allow-paste>
@@ -398,8 +398,8 @@
       <remove-verion-exception>You cannot remove this node because it (or its ancestor) is checked in.</remove-verion-exception>
       <remove-referentialIntegrityException>You cannot delete this node because it is currently the target of a Reference property.</remove-referentialIntegrityException>
       <constraintviolation-exception>The mandatory item jcr:uuid was not found. The node may have been deleted or changed. Please click the Refresh button.</constraintviolation-exception>
-      <path-not-found-exception>This node was deleted or changed. Please click the Refresh button.</path-not-found-exception>
-      <not-exist-categories>The category does not exist.</not-exist-categories>
+      <path-not-found-exception>Этот узел был удален или изменен. Пожалуйста, нажмите кнопку Обновить.</path-not-found-exception>
+      <not-exist-categories>Указанная категория не существует.</not-exist-categories>
     </msg>
   </UIPopupMenu>
   <!--
@@ -410,26 +410,26 @@
   <UIFolderForm>
     <action>
       <Cancel>#{word.cancel}</Cancel>
-      <Save>Create Folder</Save>
+      <Save>Создать папку</Save>
     </action>
     <label>
-      <titleTextBox>Folder Name:</titleTextBox>
-      <customTypeCheckBox>Use a custom type of folder</customTypeCheckBox>
+      <titleTextBox>Название папки:</titleTextBox>
+      <customTypeCheckBox>Использовать пользовательский тип папки</customTypeCheckBox>
     </label>
-    <title>Add/Edit Folder</title>
+    <title>Добавить/редактировать папку</title>
     <msg>
-      <addFolder-successful>The folder '{0}' was added successfully.</addFolder-successful>
-      <name-invalid>Please enter the folder name.</name-invalid>
-      <title-invalid>Please enter the folder title.</title-invalid>
-      <name-not-allowed>This name is not allowed.</name-not-allowed>
-      <fileName-error>The file name is invalid.</fileName-error>
+      <addFolder-successful>Папка '{0}' была успешно добавлена.</addFolder-successful>
+      <name-invalid>Пожалуйста, введите название папки.</name-invalid>
+      <title-invalid>Пожалуйста, введите заголовок для папки.</title-invalid>
+      <name-not-allowed>Это имя не разрешено.</name-not-allowed>
+      <fileName-error>Недопустимое имя файла.</fileName-error>
       <constraint-violation>The current node does not allow you to add the node type '{0}'.</constraint-violation>
-      <repository-exception>An unexpected error occurred. Please contact your administrator for more details.</repository-exception>
-      <repository-exception-permission>You do not have permission to add a new folder to this node.</repository-exception-permission>
-      <numberformat-exception>You cannot save this folder. The name provided must be in numerical format.</numberformat-exception>
+      <repository-exception>Произошла непредвиденная ошибка. Для получения более подробной информации, пожалуйста, обратитесь к администратору.</repository-exception>
+      <repository-exception-permission>У вас недостаточно прав для добавления новой папки в этот узел.</repository-exception-permission>
+      <numberformat-exception>Невозможно сохранить эту папку. Указанное имя должно быть в цифровом формате.</numberformat-exception>
       <!--DMS 2.4.x; ECM-3553-->
       <not-allow-sameNameSibling>You cannot save the folder. This node does not accept two nodes with the same name.</not-allow-sameNameSibling>
-      <ntFolder-not-avaiable>You must select a custom type of folder</ntFolder-not-avaiable>
+      <ntFolder-not-avaiable>Необходимо выбрать пользовательский тип папки</ntFolder-not-avaiable>
     </msg>
     <help>
       <customTypeCheckBoxHelp>Check if you intend to store web contents or custom document types in this folder</customTypeCheckBoxHelp>
@@ -442,118 +442,118 @@
   -->
   <UIWorkingArea>
     <title>
-      <Icon>Icon</Icon>
+      <Icon>Иконка</Icon>
     </title>
     <msg>
       <!-- Delte one node is not in trash and have no relation -->
-      <confirm-delete>Are you sure you want to delete the item '{0}'?</confirm-delete>
-      <confirm-delete-file>Are you sure you want to delete the file '{0}'?</confirm-delete-file>
-      <confirm-delete-folder>Are you sure you want to delete the folder '{0}' and all subfolders?</confirm-delete-folder>
+      <confirm-delete>Вы уверены, что хотите удалить элемент "{0}"?</confirm-delete>
+      <confirm-delete-file>Вы уверены, что хотите удалить файл "{0}"?</confirm-delete-file>
+      <confirm-delete-folder>Вы уверены, что хотите удалить папку "{0}" и все вложенные папки?</confirm-delete-folder>
       
       <!-- Delte one node is in trash and have no relation -->
-      <confirm-delete-permanently>Are you sure you want to permanently remove the item '{0}'?</confirm-delete-permanently>
-      <confirm-delete-file-permanently>Are you sure you want to permanently remove the file '{0}'?</confirm-delete-file-permanently>
-      <confirm-delete-folder-permanently>Are you sure you want to permanently remove the folder '{0}' and all subfolders?</confirm-delete-folder-permanently>
+      <confirm-delete-permanently>Вы уверены, что хотите навсегда удалить элемент "{0}"?</confirm-delete-permanently>
+      <confirm-delete-file-permanently>Вы уверены, что хотите навсегда удалить файл "{0}"?</confirm-delete-file-permanently>
+      <confirm-delete-folder-permanently>Вы уверены, что хотите навсегда удалить папку "{0}" и все вложенные папки?</confirm-delete-folder-permanently>
       
       <!-- Delte one node is not in trash and have relations -->
-      <confirm-delete-has-relations>Are you sure you want to delete the item '{0}' and its references?</confirm-delete-has-relations>
-      <confirm-delete-file-has-relations>Are you sure you want to delete the file '{0}' and its references?</confirm-delete-file-has-relations>
-      <confirm-delete-folder-has-relations>Are you sure you want to delete the folder '{0}' and its references?</confirm-delete-folder-has-relations>
+      <confirm-delete-has-relations>Вы уверены, что хотите удалить элемент '{0}' и его ссылки?</confirm-delete-has-relations>
+      <confirm-delete-file-has-relations>Вы уверены, что хотите удалить файл "{0}" и его ссылки?</confirm-delete-file-has-relations>
+      <confirm-delete-folder-has-relations>Вы уверены, что хотите удалить папку "{0}" и ее ссылки?</confirm-delete-folder-has-relations>
       
       <!-- Delte multiple nodes, not in Trash, have no relations -->
-      <confirm-delete-multi-nodes-generic>Are you sure you want to delete the {0} selected items?</confirm-delete-multi-nodes-generic>  
-      <confirm-delete-multi-nodes-file>Are you sure you want to delete the {0} selected files?</confirm-delete-multi-nodes-file>
+      <confirm-delete-multi-nodes-generic>Вы уверены, что хотите удалить {0} выбранных элементов?</confirm-delete-multi-nodes-generic>  
+      <confirm-delete-multi-nodes-file>Вы уверены, что хотите удалить {0} выбранных файлов?</confirm-delete-multi-nodes-file>
       <confirm-delete-multi-nodes-folder>Are you sure you want to delete the {0} selected folders and all subfolders?</confirm-delete-multi-nodes-folder>
-      <confirm-delete-multi-nodes-generic-and-file>Are you sure you want to delete the {0} selected items and files?</confirm-delete-multi-nodes-generic-and-file>
+      <confirm-delete-multi-nodes-generic-and-file>Вы уверенны, что хотите удалить {0} выбранных элементов и файлов?</confirm-delete-multi-nodes-generic-and-file>
       <confirm-delete-multi-nodes-generic-and-folder>Are you sure you want to delete the {0} selected items, folders and all subfolders?</confirm-delete-multi-nodes-generic-and-folder>
       <confirm-delete-multi-nodes-file-and-folder>Are you sure you want to delete the {0} selected files, folders and all subfolders?</confirm-delete-multi-nodes-file-and-folder>
       <confirm-delete-multi-nodes-generic-and-file-and-folder>Are you sure you want to delete the {0} selected items, files, folders and all subfolders?</confirm-delete-multi-nodes-generic-and-file-and-folder>
       
       <!-- Delte multiple nodes, in Trash -->
-      <confirm-delete-multi-nodes-generic-permanently>Are you sure you want to permanently remove the {0} selected items?</confirm-delete-multi-nodes-generic-permanently>  
-      <confirm-delete-multi-nodes-file-permanently>Are you sure you want to permanently remove the {0} selected files?</confirm-delete-multi-nodes-file-permanently>
+      <confirm-delete-multi-nodes-generic-permanently>Вы уверены, что хотите навсегда удалить {0} выбранных элементов?</confirm-delete-multi-nodes-generic-permanently>  
+      <confirm-delete-multi-nodes-file-permanently>Вы уверены, что хотите навсегда удалить {0} выбранных файлов?</confirm-delete-multi-nodes-file-permanently>
       <confirm-delete-multi-nodes-folder-permanently>Are you sure you want to permanently remove the {0} selected folders and all subfolders?</confirm-delete-multi-nodes-folder-permanently>
-      <confirm-delete-multi-nodes-generic-and-file-permanently>Are you sure you want to permanently remove the {0} selected items and files?</confirm-delete-multi-nodes-generic-and-file-permanently>
+      <confirm-delete-multi-nodes-generic-and-file-permanently>Вы уверенны, что хотите навсегда удалить {0} выбранных элементов и файлов?</confirm-delete-multi-nodes-generic-and-file-permanently>
       <confirm-delete-multi-nodes-generic-and-folder-permanently>Are you sure you want to permanently remove the {0} selected items, folders and all subfolders?</confirm-delete-multi-nodes-generic-and-folder-permanently>
       <confirm-delete-multi-nodes-file-and-folder-permanently>Are you sure you want to permanently remove the {0} selected files, folders and all subfolders?</confirm-delete-multi-nodes-file-and-folder-permanently>
       <confirm-delete-multi-nodes-generic-and-file-and-folder-permanently>Are you sure you want to permanently remove the {0} selected items, files, folders and all subfolders?</confirm-delete-multi-nodes-generic-and-file-and-folder-permanently>
       
       <!-- Delte multiple nodes, have relations -->
-      <confirm-delete-multi-nodes-generic-have-relations>Are you sure you want to delete the {0} selected items and their references?</confirm-delete-multi-nodes-generic-have-relations>  
-      <confirm-delete-multi-nodes-file-have-relations>Are you sure you want to delete the {0} selected files and their references?</confirm-delete-multi-nodes-file-have-relations>
-      <confirm-delete-multi-nodes-folder-have-relations>Are you sure you want to delete the {0} selected folders, all subfolders and their references?</confirm-delete-multi-nodes-folder-have-relations>
-      <confirm-delete-multi-nodes-generic-and-file-have-relations>Are you sure you want to delete the {0} selected items, files and their references?</confirm-delete-multi-nodes-generic-and-file-have-relations>
+      <confirm-delete-multi-nodes-generic-have-relations>Вы уверены, что хотите удалить {0} выбранных элементов и их ссылки?</confirm-delete-multi-nodes-generic-have-relations>  
+      <confirm-delete-multi-nodes-file-have-relations>Вы уверены, что хотите удалить {0} выбранных файлов и их ссылки?</confirm-delete-multi-nodes-file-have-relations>
+      <confirm-delete-multi-nodes-folder-have-relations>Вы уверены, что хотите удалить {0} выбранных папок, все вложенные папки и ссылки?</confirm-delete-multi-nodes-folder-have-relations>
+      <confirm-delete-multi-nodes-generic-and-file-have-relations>Вы уверены, что хотите удалить {0} выбранных элементов, файлы и ссылки на них?</confirm-delete-multi-nodes-generic-and-file-have-relations>
       <confirm-delete-multi-nodes-generic-and-folder-have-relations>Are you sure you want to delete the {0} selected items, their references, folders and all subfolders?</confirm-delete-multi-nodes-generic-and-folder-have-relations>
       <confirm-delete-multi-nodes-file-and-folder-have-relations>Are you sure you want to delete the {0} selected files, their references, folders and all subfolders?</confirm-delete-multi-nodes-file-and-folder-have-relations>
       <confirm-delete-multi-nodes-generic-and-file-and-folder-have-relations>Are you sure you want to delete the {0} selected items, files, their references, folders and all subfolders?</confirm-delete-multi-nodes-generic-and-file-and-folder-have-relations>
       
-      <feedback-delete>'{0}' was deleted succesfully.</feedback-delete>
-      <feedback-delete-multi>{0} items were deleted succesfully.</feedback-delete-multi>      
-      <feedback-delete-permanently>'{0}' was removed permanently.</feedback-delete-permanently>
-      <feedback-delete-permanently-multi>{0} items were removed permanently.</feedback-delete-permanently-multi>
-      <undo-delete>Undo</undo-delete>
-      <feedback-restore>'{0}' was successfully restored.</feedback-restore>
-      <feedback-restore-multi>{0} items were succesfully restored.</feedback-restore-multi>
+      <feedback-delete>«{0}» был успешно удален.</feedback-delete>
+      <feedback-delete-multi>{0} элементов было успешно удалено.</feedback-delete-multi>      
+      <feedback-delete-permanently>«{0}» был удален навсегда.</feedback-delete-permanently>
+      <feedback-delete-permanently-multi>{0} элементов было окончательно удалено.</feedback-delete-permanently-multi>
+      <undo-delete>Отменить</undo-delete>
+      <feedback-restore>«{0}» был успешно восстановлен.</feedback-restore>
+      <feedback-restore-multi>{0} элементов было успешно восстановлено.</feedback-restore-multi>
       
-      <confirm-restore>A node with the same name already exists in the old location of node'{0}'. Are you sure you want to restore this node?</confirm-restore>
-      <confirm-move>Are you sure you want to move?</confirm-move>
-      <node-cut>Node '{0}' has been cut.</node-cut>
+      <confirm-restore>Узел с тем же именем уже существует в старом расположении узла «{0}». Вы уверены, что хотите восстановить этот узел?</confirm-restore>
+      <confirm-move>Вы уверены, что хотите переместить?</confirm-move>
+      <node-cut>Узел '{0}' был вырезан.</node-cut>
       <execute-successfully>The custom action '{0}' has been executed.</execute-successfully>
-      <save-node-success>Node '{0}' has been saved.</save-node-success>
+      <save-node-success>Узел '{0}' был сохранен.</save-node-success>
       <move-problem>You cannot move node '{0}' to '{1}' because there was a problem with permission or constraint conditions.</move-problem>
     </msg>
   </UIWorkingArea>
   <UIDocumentWorkspace>
     <label>
-      <no-children>This node does not have any child nodes.</no-children>
-      <no-children-but-has-hidden>This node does not have any child nodes, but there are some hidden files.</no-children-but-has-hidden>
+      <no-children>Этот узел не имеет дочерних узлов.</no-children>
+      <no-children-but-has-hidden>Этот узел не имеет дочерних узлов, но есть некоторые скрытые файлы.</no-children-but-has-hidden>
     </label>
     <msg>
       <unable-save-node>Node '{0}' has been newly created. Please save session before performing this action.</unable-save-node>
-      <save-node-success>Node '{0}' has been saved.</save-node-success>
-      <node-copied>Node '{0}' has been copied.</node-copied>
-      <node-cut>Node '{0}' has been cut.</node-cut>
-      <remove-root>You cannot remove the root node.</remove-root>
-      <node-remove-success>Node '{0}' has been removed.</node-remove-success>
+      <save-node-success>Узел '{0}' был сохранен.</save-node-success>
+      <node-copied>Узел «{0}» был скопирован.</node-copied>
+      <node-cut>Узел '{0}' был вырезан.</node-cut>
+      <remove-root>Невозможно удалить корневой узел.</remove-root>
+      <node-remove-success>Узел '{0}' был удален.</node-remove-success>
     </msg>
     <tooltip>
-      <Rename>Rename</Rename>
-      <Cut>Cut</Cut>
-      <Copy>Copy</Copy>
+      <Rename>Переименовать</Rename>
+      <Cut>Вырезать</Cut>
+      <Copy>Копировать</Copy>
       <Save>#{word.save}</Save>
-      <RemoveNode>Delete</RemoveNode>
+      <RemoveNode>Удалить</RemoveNode>
       <Checkin>Checkin</Checkin>
       <Checkout>Checkout</Checkout>
-      <Lock>Lock</Lock>
-      <Unlock>Unlock</Unlock>
-      <EditDocument>Edit</EditDocument>
-      <Paste>Paste</Paste>
-      <LockedBy>Locked by</LockedBy>
+      <Lock>Заблокировать</Lock>
+      <Unlock>Разблокировать</Unlock>
+      <EditDocument>Редактировать</EditDocument>
+      <Paste>Вставить</Paste>
+      <LockedBy>Заблокировано</LockedBy>
     </tooltip>
   </UIDocumentWorkspace>
   <UIDocumentInfo>
     <msg>
-      <access-denied>Access denied. You cannot access node '{0}'.</access-denied>
-      <null-exception>Item not found. It was either removed or changed, or you do not have permission to access this node.</null-exception>
-      <confirm-deleteattachment>Are you sure you want to remove this attachment file?</confirm-deleteattachment>
-      <confirm-deleteattcomment>Are you sure you want to remove this comment?</confirm-deleteattcomment>
+      <access-denied>Доступ запрещен. Не удается получить доступ к узлу «{0}».</access-denied>
+      <null-exception>Элемент не найден. Он был удален или изменен, либо вы у вас недостаточно прав для доступа к этому узлу.</null-exception>
+      <confirm-deleteattachment>Вы уверенны, что хотите удалить этот вложенный файл?</confirm-deleteattachment>
+      <confirm-deleteattcomment>Вы уверены, что хотите удалить этот комментарий?</confirm-deleteattcomment>
       <access-denied-exception>Access denied. You may not have reading privileges, or the node may have been removed or changed.</access-denied-exception>
-      <path-not-found>This element was deleted or changed. Please click the Refresh button.</path-not-found>
+      <path-not-found>Этот элемент был удален или изменен. Пожалуйста, нажмите кнопку Обновить.</path-not-found>
     </msg>
     <tooltip>
-      <remove-attachment>Remove this attachment file</remove-attachment>
-      <remove-comment>Remove this comment</remove-comment>
+      <remove-attachment>Удалить этот вложенный файл</remove-attachment>
+      <remove-comment>Удалить этот комментарий</remove-comment>
     </tooltip>
   </UIDocumentInfo>
   <ListView>
     <view>
       <label>
-        <name>Name</name>
+        <name>Имя</name>
         <versionable>Versionable</versionable>
-        <exo_owner>Owner</exo_owner>
+        <exo_owner>Владелец</exo_owner>
         <auditing>Auditing</auditing>
-        <exo_dateCreated>Date Created</exo_dateCreated>
-        <exo_dateModified>Date Modifed</exo_dateModified>
+        <exo_dateCreated>Дата создания</exo_dateCreated>
+        <exo_dateModified>Дата изменения</exo_dateModified>
       </label>
     </view>
   </ListView>
@@ -564,34 +564,34 @@
   -->
   <ECMContextMenu>
     <event>
-      <Lock>Lock</Lock>
-      <Unlock>UnLock</Unlock>
-      <EditDocument>Edit</EditDocument>
-      <Copy>Copy</Copy>
-      <Rename>Rename</Rename>
-      <Delete>Delete</Delete>
+      <Lock>Заблокировать</Lock>
+      <Unlock>Разблокировать</Unlock>
+      <EditDocument>Редактировать</EditDocument>
+      <Copy>Копировать</Copy>
+      <Rename>Переименовать</Rename>
+      <Delete>Удалить</Delete>
       <Save>#{word.save}</Save>
-      <Cut>Cut</Cut>
-      <Paste>Paste</Paste>
+      <Cut>Вырезать</Cut>
+      <Paste>Вставить</Paste>
       <CheckOut>CheckOut</CheckOut>
       <CheckIn>CheckIn</CheckIn>
       <WebDAV>View WebDAV</WebDAV>
       <autoversion>Auto Versioning</autoversion>
       <Custom>Custom</Custom>
-      <AddFolder>New Folder</AddFolder>
-      <AddDocument>New Content</AddDocument>
-      <Upload>Upload Files</Upload>
-      <MoveNode>Move</MoveNode>
-      <UnLock>Unlock</UnLock>
-      <ViewProperties>View Properties</ViewProperties>
+      <AddFolder>Новая папка</AddFolder>
+      <AddDocument>Новый контент</AddDocument>
+      <Upload>Загрузить файлы</Upload>
+      <MoveNode>Переместить</MoveNode>
+      <UnLock>Разблокировать</UnLock>
+      <ViewProperties>Просмотреть свойства</ViewProperties>
       <GetURL>Copy URL To Clipboard</GetURL>
       <AddThumbnail>Add/Remove Thumbnail</AddThumbnail>
-      <AddToFavourite>Add To Favorite</AddToFavourite>
-      <RemoveFromFavourite>Remove From Favorite</RemoveFromFavourite>
-      <MoveToTrash>Move to Trash</MoveToTrash>
-      <RestoreFromTrash>Restore from Trash</RestoreFromTrash>
-      <EmptyTrash>Empty Trash</EmptyTrash>
-      <WebDavView>Download and Allow Editing</WebDavView>
+      <AddToFavourite>Добавить в избранное</AddToFavourite>
+      <RemoveFromFavourite>Удалить из избранного</RemoveFromFavourite>
+      <MoveToTrash>Переместить в корзину</MoveToTrash>
+      <RestoreFromTrash>Восстановить из корзины</RestoreFromTrash>
+      <EmptyTrash>Очистить Корзину</EmptyTrash>
+      <WebDavView>Загрузить и разрешить редактирование</WebDavView>
     </event>
   </ECMContextMenu>
  
@@ -602,11 +602,11 @@
   -->
   <UIReferencesList>
     <msg>
-      <no-references>References not found</no-references>
+      <no-references>Ссылки не найдены</no-references>
     </msg>
     <header>
-      <workspace>Workspace</workspace>
-      <path>Path</path>
+      <workspace>Рабочая область</workspace>
+      <path>Путь</path>
     </header>
     <action>
       <Close>#{word.close}</Close>
@@ -622,55 +622,55 @@
       <UIPublishingPanel>Publication Pane</UIPublishingPanel>
       <UIPublicationPanel>Revision</UIPublicationPanel>
       <UIPublicationSchedule>Scheduled</UIPublicationSchedule>
-      <UIPublicationPagesContainer>Pages</UIPublicationPagesContainer>
-      <UIPublicationHistory>History</UIPublicationHistory>
+      <UIPublicationPagesContainer>Страницы</UIPublicationPagesContainer>
+      <UIPublicationHistory>История</UIPublicationHistory>
       <UIVersionViewer>Version Viewer</UIVersionViewer>
 
-      <UIPropertyTab>Properties</UIPropertyTab>
-      <UIMetadataTab>Metadata</UIMetadataTab>
-      <UIPropertyForm>Add New Property</UIPropertyForm>
-      <UIUploadContent>Information of uploaded file</UIUploadContent>
-      <UIJCRAdvancedSearch>New Query</UIJCRAdvancedSearch>
-      <UISavedQuery>Saved Query</UISavedQuery>
-      <AdvancedSearchResult>Search Results</AdvancedSearchResult>
-      <UISimpleSearch>Simple Search</UISimpleSearch>
+      <UIPropertyTab>Свойства</UIPropertyTab>
+      <UIMetadataTab>Метаданные</UIMetadataTab>
+      <UIPropertyForm>Добавить новое свойство</UIPropertyForm>
+      <UIUploadContent>Информация о загруженном файле</UIUploadContent>
+      <UIJCRAdvancedSearch>Новый запрос</UIJCRAdvancedSearch>
+      <UISavedQuery>Сохраненный запрос</UISavedQuery>
+      <AdvancedSearchResult>Результаты поиска</AdvancedSearchResult>
+      <UISimpleSearch>Простой поиск</UISimpleSearch>
       <UISearchContainer>Расширенный поиск</UISearchContainer>
-      <UICategoryManagerSearch>Add Category to Search</UICategoryManagerSearch>
-      <UIConstraintsForm>Constraints Form</UIConstraintsForm>
+      <UICategoryManagerSearch>Добавить категорию для поиска</UICategoryManagerSearch>
+      <UIConstraintsForm>Форма ограничения</UIConstraintsForm>
       <UIViewSearchResult>View Content</UIViewSearchResult>
-      <UIContentNameSearch>Search by Name</UIContentNameSearch>
-      <UINodeInfo>Version Info</UINodeInfo>
-      <UINodeProperty>Node Property</UINodeProperty>
-      <UIActionListContainer>Available Actions</UIActionListContainer>
-      <UIActionContainer>Add Action</UIActionContainer>
-      <UIActionViewContainer>Action Info</UIActionViewContainer>
+      <UIContentNameSearch>Поиск по названию</UIContentNameSearch>
+      <UINodeInfo>Информация о версии</UINodeInfo>
+      <UINodeProperty>Свойства узла</UINodeProperty>
+      <UIActionListContainer>Доступные действия</UIActionListContainer>
+      <UIActionContainer>Добавить действие</UIActionContainer>
+      <UIActionViewContainer>Информация о действии</UIActionViewContainer>
       <UIMultiLanguageForm>View Language</UIMultiLanguageForm>
-      <UIAddLanguageContainer>Add Language</UIAddLanguageContainer>
+      <UIAddLanguageContainer>Добавить язык</UIAddLanguageContainer>
       <UINonPublishedForm>State</UINonPublishedForm>
       <UIPublishedForm>State</UIPublishedForm>
-      <UIPublicationLogList>History</UIPublicationLogList>
-      <UIDocumentWithTree>File View</UIDocumentWithTree>
-      <UIDocumentInfo>Document View</UIDocumentInfo>
-      <UICategoriesSelectPanel>Select Categories</UICategoriesSelectPanel>
+      <UIPublicationLogList>История</UIPublicationLogList>
+      <UIDocumentWithTree>Просмотр файла</UIDocumentWithTree>
+      <UIDocumentInfo>Просмотр документа</UIDocumentInfo>
+      <UICategoriesSelectPanel>Выбрать категории</UICategoriesSelectPanel>
       <UISelectedCategoriesGrid>Referenced Categories</UISelectedCategoriesGrid>
       <UIWorkflowPublicationActionForm>Workflow Publication Action</UIWorkflowPublicationActionForm>
       <UIWorkflowPublicationViewForm>Workflow Publication View</UIWorkflowPublicationViewForm>
-      <metadatasitemetadata>Site Metadata</metadatasitemetadata>
+      <metadatasitemetadata>Метаданные сайта</metadatasitemetadata>
       <dcelementset>Dublin Core</dcelementset>
     </title>
   </UITabPane>
   <UIPropertyTab>
     <title>
-      <edit>Edit this property</edit>
-      <delete>Remove this property</delete>
+      <edit>Редактировать это свойство</edit>
+      <delete>Удалить это свойство</delete>
     </title>
     <confirm>
-      <remove-property>Are you sure you want to remove this property?</remove-property>
+      <remove-property>Вы уверены, что хотите удалить это свойство?</remove-property>
     </confirm>
     <header>
-      <name>Name</name>
+      <name>Имя</name>
       <multiValue>Multi Value</multiValue>
-      <value>Value</value>
+      <value>Значение</value>
       <action>Действие</action>
     </header>
     <label>
@@ -695,10 +695,10 @@
   <UIPropertyForm>
     <title>Add/Edit Property</title>
     <label>
-      <name>Name:</name>
-      <type>Type:</type>
+      <name>Имя:</name>
+      <type>Тип:</type>
       <value>Value:</value>
-      <upload>Upload:</upload>
+      <upload>Загрузить:</upload>
       <namespace>Namespace:</namespace>
       <multiple>Multiple:</multiple>
       <property_select>Add New Property:</property_select>
@@ -706,7 +706,7 @@
     <action>
       <Save>#{word.save}</Save>
       <Cancel>#{word.cancel}</Cancel>
-      <Reset>Очистить</Reset>
+      <Reset>Сброс</Reset>
     </action>
     <msg>
       <name-invalid>Please enter the property name.</name-invalid>
@@ -731,7 +731,7 @@
   <UIPermissionInfo>
     <action>
       <title>
-        <Edit>Edit</Edit>
+        <Edit>Редактировать</Edit>
         <Delete>Remove Permission</Delete>
       </title>
     </action>
@@ -739,7 +739,7 @@
       <usersOrGroups>User or Group</usersOrGroups>
       <read>Read</read>
       <addNode>Modify</addNode>
-      <remove>Remove</remove>
+      <remove>Удалить</remove>
       <action>Действие</action>
     </header>
     <msg>
@@ -763,15 +763,15 @@
   -->
   <SelectUserOrGroup>
     <title>
-      <UIGroupSelector>Select User</UIGroupSelector>
+      <UIGroupSelector>Выбрать пользователя</UIGroupSelector>
       <UIPermissionSelector>Select Member</UIPermissionSelector>
-      <UIGroupMemberSelector>Select Membership</UIGroupMemberSelector>
+      <UIGroupMemberSelector>Выбрать членство</UIGroupMemberSelector>
     </title>
   </SelectUserOrGroup>
   <UIGroupSelector>
     <label>
       <selectGroup>Browse and Select a Group</selectGroup>
-      <selectUser>Select User</selectUser>
+      <selectUser>Выбрать пользователя</selectUser>
     </label>
     <msg>
       <not-change-owner>'{0}' is the owner of this node and has full control permission.</not-change-owner>
@@ -781,7 +781,7 @@
     <label>
       <UIPopupWindow>Select</UIPopupWindow>
       <permission>UIPermissionForm</permission>
-      <userOrGroup>User or Group</userOrGroup>
+      <userOrGroup>Пользователь или группа</userOrGroup>
       <read>Read Right</read>
       <add_node>Modify Right</add_node>
       <remove>Remove Right</remove>
@@ -790,13 +790,13 @@
     <action>
       <Close>#{word.close}</Close>
       <Save>#{word.save}</Save>
-      <Reset>Очистить</Reset>
+      <Reset>Сброс</Reset>
     </action>
     <msg>
       <checkbox-require>Please select at least one permission.</checkbox-require>
       <userOrGroup-required>Please select a user or group before saving this permission.</userOrGroup-required>
       <not-change-permission>You do not have the right to add a permission.</not-change-permission>
-      <access-denied>Access denied. You cannot remove this permission.</access-denied>
+      <access-denied>Доступ запрещен. Вы не можете удалить это разрешение.</access-denied>
     </msg>
   </UIPermissionForm>
 
@@ -808,14 +808,14 @@
   <UINodeTypeInfo>
     <label>
       <node-type>Node Type</node-type>
-      <name>Name</name>
+      <name>Имя</name>
       <item>Primary Item Name</item>
       <super-types>Parent Types</super-types>
       <mixin>Mixin Node Type</mixin>
       <orderable-children>Orderable Children</orderable-children>
       <property-def>Node Property Definition</property-def>
-      <prop-name>Name</prop-name>
-      <prop-type>Type</prop-type>
+      <prop-name>Имя</prop-name>
+      <prop-type>Тип</prop-type>
       <prop-multiple>Mul</prop-multiple>
       <prop-mandatory>Man</prop-mandatory>
       <prop-protected>Pr</prop-protected>
@@ -823,7 +823,7 @@
       <prop-default-values><![CDATA[<span title="Default Values">DV</span>]]></prop-default-values>
       <prop-constraints><![CDATA[<span title="Constraints Values">CV</span>]]></prop-constraints>
       <node-def>Child Node Definition</node-def>
-      <node-def-name>Name</node-def-name>
+      <node-def-name>Имя</node-def-name>
       <node-def-opv>OPV</node-def-opv>
       <node-def-ac>AC</node-def-ac>
       <node-def-man>MAN</node-def-man>
@@ -855,17 +855,17 @@
       <location>Search in this location:</location>
     </label>
     <action>
-      <Search>Search</Search>
+      <Search>Поиск</Search>
       <Cancel>#{word.cancel}</Cancel>
     </action>
     <msg>
-      <keyword-not-allowed>This keyword is not allowed.</keyword-not-allowed>
+      <keyword-not-allowed>Это ключевое слово не допускается.</keyword-not-allowed>
     </msg>
   </UIContentNameSearch>
   <UISimpleSearch>
     <action>
       <MoreConstraints>Show/Hide Constraint Form</MoreConstraints>
-      <Search>Search</Search>
+      <Search>Поиск</Search>
       <Save>#{word.save}</Save>
       <Cancel>#{word.cancel}</Cancel>
     </action>
@@ -878,8 +878,8 @@
     </label>
     <msg>
       <keyword-null>Please enter your keyword.</keyword-null>
-      <not-found>No results found.</not-found>
-      <keyword-not-allow>This keyword is not allowed.</keyword-not-allow>
+      <not-found>Ничего не найдено.</not-found>
+      <keyword-not-allow>Это ключевое слово не допускается.</keyword-not-allow>
       <value-null>Please enter your keyword or constraints.</value-null>
       <value-save-null>Please enter a keyword or constraints before saving this query.</value-save-null>
       <inputSearch-invalid>There are invalid characters in the search input.</inputSearch-invalid>
@@ -894,17 +894,17 @@
   <UISearchResult>
     <msg>
       <not-support>There is no View template for this node.</not-support>
-      <empty>No results found.</empty>
+      <empty>Ничего не найдено.</empty>
       <access-denied>You cannot open this folder, either because it no longer exists or because you do not have the right to access it.</access-denied>
       <query-invalid>The query is invalid.</query-invalid>
     </msg>
     <header>
       <name>#{word.name}</name>
-      <path>Path</path>
+      <path>Путь</path>
       <action>Действие</action>
-      <shortcutPath>Path</shortcutPath>
-      <type>Type</type>
-      <dateCreated>Date Created</dateCreated>
+      <shortcutPath>Путь</shortcutPath>
+      <type>Тип</type>
+      <dateCreated>Дата создания</dateCreated>
       <score>Score</score>
     </header>
     <title>
@@ -925,31 +925,31 @@
   <UIShowAllOwnedByUserResult>
     <msg>
       <not-support>There is no View template for this node</not-support>
-      <empty>No results found.</empty>
+      <empty>Ничего не найдено.</empty>
       <access-denied>You cannot view this node, either because this template is not supported or because access is denied.</access-denied>
       <query-invalid>The query is invalid</query-invalid>
     </msg>
     <header>
       <name>#{word.name}</name>
-      <path>Path</path>
+      <path>Путь</path>
       <action>Действие</action>
-      <shortcutPath>Path</shortcutPath>
-      <type>Type</type>
-      <dateCreated>Date Created</dateCreated>
+      <shortcutPath>Путь</shortcutPath>
+      <type>Тип</type>
+      <dateCreated>Дата создания</dateCreated>
       <score>Score</score>
     </header>
     <title>
-      <typeASC>Sort by document type in ascending order</typeASC>
-      <typeDESC>Sort by document type in descending order</typeDESC>
+      <typeASC>Сортировка по типу документа в порядке убывания</typeASC>
+      <typeDESC>Сортировка по типу документа в порядке убывания</typeDESC>
       <scoreASC>Sort by score in ascending order</scoreASC>
       <scoreDESC>Sort by score in descending order</scoreDESC>
-      <nameASC>Sort by name in ascending order</nameASC>
-      <nameDESC>Sort by name in descending order</nameDESC>
+      <nameASC>Сортировать по названию по возрастанию</nameASC>
+      <nameDESC>Сортировать по названию по убыванию</nameDESC>
       <datecreatedASC>Sort by Created date in ascending order</datecreatedASC>
       <datecreatedDESC>Sort by Created date in descending order</datecreatedDESC>
     </title>
     <tooltip>
-      <View>View this node</View>
+      <View>Просмотреть этот узел</View>
       <OpenFolder>Go to Folder</OpenFolder>
     </tooltip>
   </UIShowAllOwnedByUserResult>
@@ -962,75 +962,75 @@
     </msg>
     <header>
       <name>#{word.name}</name>
-      <path>Path</path>
+      <path>Путь</path>
       <action>Действие</action>
-      <shortcutPath>Path</shortcutPath>
-      <type>Type</type>
-      <dateCreated>Date Created</dateCreated>
+      <shortcutPath>Путь</shortcutPath>
+      <type>Тип</type>
+      <dateCreated>Дата создания</dateCreated>
       <score>Score</score>
     </header>
     <title>
-      <typeASC>Sort by document type in ascending order</typeASC>
-      <typeDESC>Sort by document type in descending order</typeDESC>
+      <typeASC>Сортировать по типу документа в порядке возрастания</typeASC>
+      <typeDESC>Сортировать по типу документа в порядке убывания</typeDESC>
       <scoreASC>Sort by score in ascending order</scoreASC>
       <scoreDESC>Sort by score in descending order</scoreDESC>
-      <nameASC>Sort by name in ascending order</nameASC>
-      <nameDESC>Sort by name in descending order</nameDESC>
-      <datecreatedASC>Sort by created date in ascending order</datecreatedASC>
-      <datecreatedDESC>Sort by created date in descending order</datecreatedDESC>
+      <nameASC>Сортировать по названию в порядке возрастания</nameASC>
+      <nameDESC>Сортировать по названию в порядке убывания</nameDESC>
+      <datecreatedASC>Сортировать по дате создания в порядке возрастания</datecreatedASC>
+      <datecreatedDESC>Сортировать по дате создания в порядке убывания</datecreatedDESC>
     </title>
     <tooltip>
       <View>View this Node</View>
-      <OpenFolder>Go to Folder</OpenFolder>
+      <OpenFolder>Перейти в папку</OpenFolder>
     </tooltip>
   </UIShowAllFavouriteResult>
   <UIShowAllHiddenResult>
     <msg>
       <not-support>There is no View template for this node.</not-support>
-      <empty>No results found.</empty>
+      <empty>Ничего не найдено.</empty>
       <access-denied>You cannot view this node, either because this template is not supported or because access is denied.</access-denied>
       <query-invalid>The query is invalid.</query-invalid>
     </msg>
     <header>
       <name>#{word.name}</name>
-      <path>Path</path>
+      <path>Путь</path>
       <action>Действие</action>
-      <shortcutPath>Path</shortcutPath>
-      <type>Type</type>
-      <dateCreated>Date Created</dateCreated>
+      <shortcutPath>Путь</shortcutPath>
+      <type>Тип</type>
+      <dateCreated>Дата создания</dateCreated>
       <score>Score</score>
       <AddRemoveFavourite>Add/Remove to Favorite</AddRemoveFavourite>
     </header>
     <title>
-      <typeASC>Sort by document type in ascending order</typeASC>
-      <typeDESC>Sort by document type in descending order</typeDESC>
+      <typeASC>Сортировать по типу документа в порядке возрастания</typeASC>
+      <typeDESC>Сортировать по типу документа в порядке убывания</typeDESC>
       <scoreASC>Sort by score in ascending order</scoreASC>
       <scoreDESC>Sort by score in descending order</scoreDESC>
-      <nameASC>Sort by name in ascending order</nameASC>
-      <nameDESC>Sort by name in descending order</nameDESC>
-      <datecreatedASC>Sort by created date in ascending order</datecreatedASC>
-      <datecreatedDESC>Sort by created date in descending order</datecreatedDESC>
+      <nameASC>Сортировать по названию в порядке возрастания</nameASC>
+      <nameDESC>Сортировать по названию в порядке убывания</nameDESC>
+      <datecreatedASC>Сортировать по дате создания в порядке возрастания</datecreatedASC>
+      <datecreatedDESC>Сортировать по дате создания в порядке убывания</datecreatedDESC>
     </title>
     <tooltip>
-      <View>View this Node</View>
-      <OpenFolder>Go to Folder</OpenFolder>
+      <View>Просмотреть этот узел</View>
+      <OpenFolder>Перейти в папку</OpenFolder>
       <RemoveHiddenAttribute>Remove Hidden Attribute</RemoveHiddenAttribute>
     </tooltip>
   </UIShowAllHiddenResult>
   <UIShowAllTrashResult>
     <msg>
       <not-support>There is no View template for this node.</not-support>
-      <empty>No results found</empty>
+      <empty>Ничего не найдено</empty>
       <access-denied>You cannot view this node, either because this template is not supported or because access is denied.</access-denied>
       <query-invalid>The query is invalid.</query-invalid>
     </msg>
     <header>
       <name>#{word.name}</name>
-      <path>Path</path>
+      <path>Путь</path>
       <action>Действие</action>
-      <shortcutPath>Path</shortcutPath>
-      <type>Type</type>
-      <dateCreated>Date Created</dateCreated>
+      <shortcutPath>Путь</shortcutPath>
+      <type>Тип</type>
+      <dateCreated>Дата создания</dateCreated>
       <score>Score</score>
     </header>
     <title>
@@ -1044,22 +1044,22 @@
       <datecreatedDESC>Sort by created date in descending order</datecreatedDESC>
     </title>
     <tooltip>
-      <View>View this Node</View>
-      <OpenFolder>Go to Folder</OpenFolder>
+      <View>Просмотреть этот узел</View>
+      <OpenFolder>Перейти в папку</OpenFolder>
       <DeletePermanently>Delete permanently</DeletePermanently>
-      <RestoreFromTrash>Restore from Trash</RestoreFromTrash>
+      <RestoreFromTrash>Восстановить из корзины</RestoreFromTrash>
     </tooltip>
   </UIShowAllTrashResult>
   <UIConstraintsForm>
     <label>
       <constraints>UIConstraintsForm</constraints>
-      <metadataProperty>Properties</metadataProperty>
+      <metadataProperty>Свойства</metadataProperty>
       <operator>Operator</operator>
       <contains>Contain Value</contains>
       <notcontains>Not Contain Value</notcontains>
     </label>
     <action>
-      <Add>Add</Add>
+      <Add>Добавить</Add>
       <Cancel>#{word.cancel}</Cancel>
     </action>
     <msg>
@@ -1074,13 +1074,13 @@
       <toDate-invalid>Invalid type in the 'To' field. Please reselect or type correctly.</toDate-invalid>
     </msg>
     <button>
-      <label-Add>Add</label-Add>
+      <label-Add>Добавить</label-Add>
       <label-Cancel>#{word.cancel}</label-Cancel>
     </button>
   </UIConstraintsForm>
   <ConstraintsForm>
     <action>
-      <Add>Add</Add>
+      <Add>Добавить</Add>
       <Cancel>#{word.cancel}</Cancel>
     </action>
   </ConstraintsForm>
@@ -1088,42 +1088,42 @@
     <tooltip>
       <AddMetadataType>Add Property</AddMetadataType>
       <AddNodeType>Add Node Type</AddNodeType>
-      <AddCategory>Add Category</AddCategory>
+      <AddCategory>Добавить категорию</AddCategory>
       <FindExactly>Find Exactly</FindExactly>
     </tooltip>
     <label>
       <colon>:</colon>
       <operator>Operator</operator>
-      <exactlyPro-properties>Property</exactlyPro-properties>
+      <exactlyPro-properties>Свойство</exactlyPro-properties>
       <exactlyPro-ContainExactly>Contain Exactly</exactlyPro-ContainExactly>
-      <containPro-properties>Property</containPro-properties>
+      <containPro-properties>Свойство</containPro-properties>
       <containPro-Contain>Contain</containPro-Contain>
-      <notContainPro-properties>Property</notContainPro-properties>
+      <notContainPro-properties>Свойство</notContainPro-properties>
       <notContainPro-notContain>Not Contain</notContainPro-notContain>
       <ConstraintOption-From>From</ConstraintOption-From>
       <ConstraintOption-To>To</ConstraintOption-To>
-      <DocumentType-label>Document Type</DocumentType-label>
+      <DocumentType-label>Тип документа</DocumentType-label>
       <Category-label>Категория</Category-label>
-      <created>Created</created>
-      <modified>Modified</modified>
-      <and>And</and>
-      <or>Or</or>
+      <created>Создано</created>
+      <modified>Дата последней модификации</modified>
+      <and>И</and>
+      <or>Или</or>
     </label>
   </UIConstraintForm>
   <NodeTypePopup>
     <title>
-      <UINodeTypeSelectForm>Select Node Type</UINodeTypeSelectForm>
+      <UINodeTypeSelectForm>Выбрать тип узла</UINodeTypeSelectForm>
     </title>
   </NodeTypePopup>
   <CategoryPopup>
     <title>
-      <UICategoryManagerSearch>Add Category to Search</UICategoryManagerSearch>
-      <UIOneNodePathSelector>Select Category</UIOneNodePathSelector>
+      <UICategoryManagerSearch>Добавить категорию для поиска</UICategoryManagerSearch>
+      <UIOneNodePathSelector>Выбрать категорию</UIOneNodePathSelector>
     </title>
   </CategoryPopup>
   <SaveQueryPopup>
     <title>
-      <UISaveQueryForm>Query Form</UISaveQueryForm>
+      <UISaveQueryForm>Форма запроса</UISaveQueryForm>
     </title>
   </SaveQueryPopup>
   <UINodeTypeSelectForm>
@@ -1134,35 +1134,35 @@
   </UINodeTypeSelectForm>
   <UICompareExactlyForm>
     <label>
-      <filter>Filter:</filter>
-      <result>Results:</result>
+      <filter>Фильтр:</filter>
+      <result>Результаты:</result>
     </label>
     <title>
-      <result>Filter</result>
+      <result>Фильтр</result>
     </title>
     <button>
-      <label-Select>Select</label-Select>
+      <label-Select>Выбрать</label-Select>
       <label-Cancel>#{word.cancel}</label-Cancel>
     </button>
     <msg>
-      <not-result-found>No results found.</not-result-found>
+      <not-result-found>Ничего не найдено.</not-result-found>
     </msg>
   </UICompareExactlyForm>
   <UIJCRAdvancedSearch>
     <label>
-      <name>Name:</name>
+      <name>Имя:</name>
       <selectBox>Select Query Style:</selectBox>
-      <query>Query:</query>
+      <query>Запрос:</query>
     </label>
     <action>
       <Save>#{word.save}</Save>
       <Cancel>#{word.cancel}</Cancel>
-      <Search>Search</Search>
+      <Search>Поиск</Search>
     </action>
     <msg>
       <!--DMS 2.4.x ECM-3566-->
-      <name-invalid>The name is invalid.</name-invalid>
-      <query-added>The query was added successfully.</query-added>
+      <name-invalid>Недопустимое имя.</name-invalid>
+      <query-added>Запрос был успешно добавлен.</query-added>
       <save_unSuccessful>Cannot save the query. The statement may be invalid or the query name may already exist.</save_unSuccessful>
       <invalid-queryStatement>Invalid query statement.</invalid-queryStatement>
       <value-save-null>Please enter your query statement.</value-save-null>
@@ -1171,9 +1171,9 @@
   </UIJCRAdvancedSearch>
   <EditQueryForm>
     <label>
-      <name>Name</name>
+      <name>Имя</name>
       <selectBox>Select Query Style</selectBox>
-      <query>Query</query>
+      <query>Запрос</query>
     </label>
     <action>
       <Save>#{word.save}</Save>
@@ -1187,35 +1187,35 @@
   </EditSavedQueryForm>
   <UIMetadataSelectForm>
     <label>
-      <metadataType>Metadata type</metadataType>
+      <metadataType>Тип метаданных</metadataType>
     </label>
     <action>
       <Cancel>#{word.cancel}</Cancel>
-      <Add>Add</Add>
+      <Add>Добавить</Add>
     </action>
   </UIMetadataSelectForm>
   <property1MetadataPopup>
     <title>
-      <UISelectPropertyForm>Select Property</UISelectPropertyForm>
+      <UISelectPropertyForm>Выбрать свойство</UISelectPropertyForm>
     </title>
   </property1MetadataPopup>
   <property2MetadataPopup>
     <title>
-      <UISelectPropertyForm>Select Property</UISelectPropertyForm>
+      <UISelectPropertyForm>Выбрать свойство</UISelectPropertyForm>
     </title>
   </property2MetadataPopup>
   <property3MetadataPopup>
     <title>
-      <UISelectPropertyForm>Select Property</UISelectPropertyForm>
+      <UISelectPropertyForm>Выбрать свойство</UISelectPropertyForm>
     </title>
   </property3MetadataPopup>
   <UISelectPropertyForm>
     <label>
-      <metadataType>Metadata Type</metadataType>
+      <metadataType>Тип метаданных</metadataType>
     </label>
-    <pLabel>Properties:</pLabel>
+    <pLabel>Свойства:</pLabel>
     <action>
-      <Add>Add</Add>
+      <Add>Добавить</Add>
       <Cancel>#{word.cancel}</Cancel>
     </action>
   </UISelectPropertyForm>
@@ -1226,16 +1226,16 @@
   </ExactlyFormPopup>
   <UIECMSearch>
     <header>
-      <name>Name</name>
-      <language>Language</language>
-      <query>Query</query>
-      <action>Actions</action>
-      <path>Path</path>
+      <name>Имя</name>
+      <language>Язык</language>
+      <query>Запрос</query>
+      <action>Действия</action>
+      <path>Путь</path>
     </header>
   </UIECMSearch>
   <UIResult>
     <msg>
-      <not-found>Data not found.</not-found>
+      <not-found>Данные не найдены.</not-found>
     </msg>
     <header>
       <action>Действие</action>
@@ -1243,12 +1243,12 @@
   </UIResult>
   <UISaveQueryForm>
     <msg>
-      <query-name-null>Please enter query name to save.</query-name-null>
+      <query-name-null>Пожалуйста, введите имя запроса, чтобы сохранить.</query-name-null>
       <access-denied>Access denied. You do not have the add permission needed to save this query.</access-denied>
       <save-failed>You cannot save the query, either because the statement is invalid or because the query name already exists.</save-failed>
     </msg>
     <label>
-      <queryName>Query name</queryName>
+      <queryName>Название запроса</queryName>
     </label>
     <action>
       <Save>#{word.save}</Save>
@@ -1257,28 +1257,28 @@
   </UISaveQueryForm>
   <UISavedQuery>
     <header>
-      <name>Name</name>
-      <type>Type</type>
+      <name>Имя</name>
+      <type>Тип</type>
       <statement>Statement</statement>
-      <permission>Permissions</permission>
-      <action>Actions</action>
+      <permission>Права доступа</permission>
+      <action>Действия</action>
     </header>
     <tooltip>
-      <Execute>Execute</Execute>
-      <Edit>Edit</Edit>
-      <Delete>Delete</Delete>
+      <Execute>Выполнить</Execute>
+      <Edit>Редактировать</Edit>
+      <Delete>Удалить</Delete>
     </tooltip>
     <label>
       <no-children>No query is saved.</no-children>
     </label>
     <msg>
-      <confirm-delete-query>Are you sure you want to delete this query?</confirm-delete-query>
-      <not-result-found>No results found.</not-result-found>
+      <confirm-delete-query>Вы уверены, что хотите удалить этот запрос?</confirm-delete-query>
+      <not-result-found>Ничего не найдено.</not-result-found>
     </msg>
   </UISavedQuery>
   <UIQueryResultPageIterator>
     <label>
-      <results>Results</results>
+      <results>Результаты</results>
       <of-about>of about</of-about>
       <of>of</of>
     </label>
@@ -1291,16 +1291,16 @@
   <UIExportNode>
     <label>
       <format>Формат</format>
-      <nodePath>Path to Export</nodePath>
+      <nodePath>Путь экспорта</nodePath>
       <zip>Zip</zip>
       <systemView>System View</systemView>
-      <documentView>Document View</documentView>
+      <documentView>Просмотр документа</documentView>
     </label>
     <action>
       <Cancel>#{word.cancel}</Cancel>
-      <Export>Export</Export>
+      <Export>Экспорт</Export>
     </action>
-    <title>Export Node</title>
+    <title>Экспорт узла</title>
   </UIExportNode>
   <!--
   ###############################################################################
@@ -1309,13 +1309,13 @@
   -->
   <PopupUserSelector>
     <title>
-      <UIUserContainer>Select User Permission</UIUserContainer>
+      <UIUserContainer>Выбрать права доступа пользователя</UIUserContainer>
     </title>
   </PopupUserSelector>
   <UIPopupTaxonomy>
     <title>
-      <UICategoriesSelector>Add Categories</UICategoriesSelector>
-      <UIOneNodePathSelector>Add Categories</UIOneNodePathSelector>
+      <UICategoriesSelector>Добавить категории</UICategoriesSelector>
+      <UIOneNodePathSelector>Добавить категории</UIOneNodePathSelector>
     </title>
   </UIPopupTaxonomy>
   <!--
@@ -1325,23 +1325,23 @@
   -->
   <UIVersionInfo>
     <tooltip>
-      <addLabel>Add Label</addLabel>
-      <removeLable>Remove Label</removeLable>
-      <restoreVersion>Restore Version</restoreVersion>
-      <viewVersion>View Version Info</viewVersion>
-      <deleteVersion>Delete Version</deleteVersion>
-      <compareVersion>Compare with the  base version</compareVersion>
+      <addLabel>Добавить метку</addLabel>
+      <removeLable>Удалить метку</removeLable>
+      <restoreVersion>Восстановить версию</restoreVersion>
+      <viewVersion>Просмотреть сведения о версии</viewVersion>
+      <deleteVersion>Удалить версию</deleteVersion>
+      <compareVersion>Сравнить с базовой версией</compareVersion>
     </tooltip>
     <msg>
       <have-no-view-template>The view template is not supported.</have-no-view-template>
-      <cannot-remove-version>You cannot remove the base version.</cannot-remove-version>
-      <confirm-delete>Are you sure you want to remove this version?</confirm-delete>
-      <not-checked-out>You have to check out this node before restoring.</not-checked-out>
+      <cannot-remove-version>Нельзя удалить базовую версию.</cannot-remove-version>
+      <confirm-delete>Вы уверены, что хотите удалить эту версию?</confirm-delete>
+      <not-checked-out>Вы должны проверить этот узел перед восстановлением.</not-checked-out>
       <invalid-item-state>You cannot restore this version, either because one or more items were deleted or moved during another session.</invalid-item-state>
     </msg>
     <action>
       <close>#{word.close}</close>
-      <close-view>Close View</close-view>
+      <close-view>Закрыть просмотр</close-view>
     </action>
   </UIVersionInfo>
   <!--
@@ -1354,37 +1354,37 @@
       <noVersion>No Version</noVersion>
     </msg>
     <eventName>
-      <e_1>Node Added</e_1>
-      <e_2>Node Removed</e_2>
-      <e_4>Property Added</e_4>
-      <e_16>Property Changed</e_16>
-      <e_8>Property Removed</e_8>
+      <e_1>Узел добавлен</e_1>
+      <e_2>Узел удален</e_2>
+      <e_4>Свойство добавлено</e_4>
+      <e_16>Свойство изменено</e_16>
+      <e_8>Свойство удалено</e_8>
       <e_32>#{word.save}</e_32>
-      <e_64>Move</e_64>
-      <e_128>Copy</e_128>
+      <e_64>Переместить</e_64>
+      <e_128>Копировать</e_128>
       <e_256>Add Mixin</e_256>
       <e_512>Remove Mixin</e_512>
       <e_1024>Clone</e_1024>
       <e_2048>Обновить</e_2048>
-      <e_4096>Import</e_4096>
+      <e_4096>Импорт</e_4096>
       <e_8192>Check in</e_8192>
       <e_16384>Check out</e_16384>
-      <e_32768>Restore</e_32768>
+      <e_32768>Восстановить</e_32768>
       <e_65536>Merge</e_65536>
       <e_131072>Cancel Merge</e_131072>
       <e_262144>Done Merge</e_262144>
       <e_524288>Add Version Label</e_524288>
       <e_1048576>Remove Version Label</e_1048576>
       <e_2097152>Remove Version</e_2097152>
-      <e_4194304>Lock</e_4194304>
-      <e_8388608>Unlock</e_8388608>
-      <e_16777216>Read</e_16777216>
+      <e_4194304>Заблокировать</e_4194304>
+      <e_8388608>Разблокировать</e_8388608>
+      <e_16777216>Читать</e_16777216>
     </eventName>
     <label>
       <operation>Operation</operation>
-      <userName>Username</userName>
-      <date>Date</date>
-      <version>Version</version>
+      <userName>Имя пользователя</userName>
+      <date>Дата</date>
+      <version>Версия</version>
     </label>
   </UIAuditingInfo>
 
@@ -1397,7 +1397,7 @@
     <label>
       <note>Versioning has not been activated for this node.</note>
       <question>Are you sure you want to activate it?</question>
-      <button-active>Activate</button-active>
+      <button-active>Активировать</button-active>
       <button-cancel>#{word.cancel}</button-cancel>
     </label>
     <msg>
@@ -1411,8 +1411,8 @@
   -->
   <UIActivePublication>
     <header>
-      <LifecycleName>Name</LifecycleName>
-      <LifecycleDesc>Description</LifecycleDesc>
+      <LifecycleName>Название</LifecycleName>
+      <LifecycleDesc>Описание</LifecycleDesc>
       <action>Действие</action>
     </header>
     <action>
@@ -1439,7 +1439,7 @@
       <question>Are you sure you want to activate?</question>
     </label>
     <action>
-      <activate>Activate</activate>
+      <activate>Активировать</activate>
       <cancel>#{word.cancel}</cancel>
     </action>
   </UIActivateAuditing>
@@ -1450,10 +1450,10 @@
   -->
   <UIDiff>
     <label>
-      <diffTitle>Compare between two versions</diffTitle>
+      <diffTitle>Сравнение двух версий</diffTitle>
       <noChange>No change between two versions</noChange>
-      <baseVerion>Base Version</baseVerion>
-      <compareVerion>Version</compareVerion>
+      <baseVerion>Базовая версия</baseVerion>
+      <compareVerion>Версия</compareVerion>
       <can-not-compare>Failed to compare two versions</can-not-compare>
     </label>
   </UIDiff>
@@ -1466,19 +1466,19 @@
     <label>
       <format>Формат</format>
       <systemView>System View</systemView>
-      <documentView>Document View</documentView>
-      <upload>Upload File</upload>
+      <documentView>Просмотр документа</documentView>
+      <upload>Загрузить файл</upload>
     </label>
     <action>
       <Cancel>#{word.cancel}</Cancel>
-      <Import>Import</Import>
+      <Import>Импорт</Import>
     </action>
-    <title>Import Node</title>
+    <title>Импорт узла</title>
     <msg>
-      <import-successful>Imported successfully.</import-successful>
+      <import-successful>Успешно импортировано.</import-successful>
       <filename-invalid>Browse an .xml file for the 'Upload File' field to import.</filename-invalid>
       <filetype-error>Cannot import the uploaded file. The .xml file may be invalid.</filetype-error>
-      <mimetype-invalid>You can only import .xml or .zip files.</mimetype-invalid>
+      <mimetype-invalid>Можно импортировать только файлы .xml или .zip.</mimetype-invalid>
       <access-denied>Access denied. You are not allowed to import there.</access-denied>
       <constraint-violation-exception>Impossible to import data. The type '{0}' is not allowed in this location.</constraint-violation-exception>
       <item-exists-exception>An incoming referenceable node has the same UUID as an existing node in the workspace.</item-exists-exception>
@@ -1491,16 +1491,16 @@
   -->
   <UILabelForm>
     <label>
-      <label>Label</label>
+      <label>Метка</label>
     </label>
     <action>
       <Save>#{word.save}</Save>
       <Cancel>#{word.cancel}</Cancel>
     </action>
-    <title>Add Label</title>
+    <title>Добавить метку</title>
     <msg>
-      <label-invalid>The label contains some invalid characters.</label-invalid>
-      <label-exist>'{0}' already exists.</label-exist>
+      <label-invalid>Метка содержит недопустимые знаки.</label-invalid>
+      <label-exist>"{0}" уже существует.</label-exist>
     </msg>
   </UILabelForm>
   <!--
@@ -1509,12 +1509,12 @@
   ###############################################################################
   -->
   <UIRemoveLabelForm>
-    <title>Remove Label</title>
+    <title>Удалить метку</title>
     <label>
-      <label>Select Label</label>
+      <label>Выбрать метку</label>
     </label>
     <action>
-      <Remove>Remove</Remove>
+      <Remove>Удалить</Remove>
       <Cancel>#{word.cancel}</Cancel>
     </action>
   </UIRemoveLabelForm>
@@ -1528,13 +1528,13 @@
   </UIVersionTree>
   <UIViewVersion>
     <label>
-      <nodeType>Node Type</nodeType>
-      <nodeName>Node Name</nodeName>
-      <VersionNumber>Version Number</VersionNumber>
+      <nodeType>Тип узла</nodeType>
+      <nodeName>Название узла</nodeName>
+      <VersionNumber>Номер версии</VersionNumber>
       <VersionLabels>Version Labels</VersionLabels>
-      <VersionDate>Version Date</VersionDate>
-      <PropertyName>Property Name</PropertyName>
-      <PropertyValue>Property Values</PropertyValue>
+      <VersionDate>Дата версии</VersionDate>
+      <PropertyName>Название свойства</PropertyName>
+      <PropertyValue>Значения свойства</PropertyValue>
     </label>
     <msg>
       <not-supported>This function is not supported for versioning.</not-supported>
@@ -1555,37 +1555,37 @@
     <tab>
       <label>
         <UICategoriesAddedList>Referenced Categories</UICategoriesAddedList>
-        <UIOneNodePathSelector>Select Category</UIOneNodePathSelector>
+        <UIOneNodePathSelector>Выбрать категорию</UIOneNodePathSelector>
       </label>
     </tab>
   </UICategoryManager>
   <UICategoriesAddedList>
     <header>
       <path>Категория</path>
-      <action>Actions</action>
+      <action>Действия</action>
     </header>
     <msg>
       <access-denied>Access denied. You do not have access permission in this node.</access-denied>
-      <confirm-delete>Are you sure you want to delete this reference?</confirm-delete>
+      <confirm-delete>Вы уверены, что хотите удалить эту ссылку?</confirm-delete>
     </msg>
     <action>
       <title>
-        <Delete>Delete</Delete>
+        <Delete>Удалить</Delete>
       </title>
     </action>
     <label>
       <category>Категория</category>
       <actions>Действие</actions>
-      <delete>Delete</delete>
+      <delete>Удалить</delete>
     </label>
   </UICategoriesAddedList>
   <UITreeList>
     <header>
-      <name>Name</name>
+      <name>Название</name>
       <action>Действие</action>
     </header>
     <info>
-      <child-not-found>This node does not have any child nodes.</child-not-found>
+      <child-not-found>Этот узел не имеет дочерних узлов.</child-not-found>
     </info>
   </UITreeList>
   <!--
@@ -1610,12 +1610,12 @@
   </UIRelationManager>
   <UIRelationsAddedList>
     <header>
-      <path>Relations</path>
-      <action>Actions</action>
+      <path>Отношения</path>
+      <action>Действия</action>
     </header>
     <action>
       <title>
-        <Delete>Delete</Delete>
+        <Delete>Удалить</Delete>
       </title>
     </action>
     <msg>
@@ -1630,7 +1630,7 @@
   -->
   <UIClipboard>
     <header>
-      <path>Path</path>
+      <path>Путь</path>
       <command>Cm</command>
       <action>Действие</action>
     </header>
@@ -1638,10 +1638,10 @@
       <nocommand>There are no items in the clipboard.</nocommand>
     </label>
     <action>
-      <clearall>Clear All</clearall>
+      <clearall>Очистить все</clearall>
     </action>
     <msg>
-      <unable-pasted>Cannot paste this node.</unable-pasted>
+      <unable-pasted>Не удается вставить этот узел.</unable-pasted>
       <node-pasted>Node {0} has been pasted at location {1}. This operation has already been saved.</node-pasted>
     </msg>
   </UIClipboard>
@@ -1669,28 +1669,28 @@
   #######################################################################
   -->
   <UIDocumentForm>
-    <title>Add New Document</title>
+    <title>Добавить новый документ</title>
     <action>
       <Save>#{word.save}</Save>
-      <SaveAndClose>Save &amp; Close</SaveAndClose>
-      <ChangeType>Change Content Type</ChangeType>
-      <Fullscreen>Fullscreen</Fullscreen>
+      <SaveAndClose>Сохранить и закрыть</SaveAndClose>
+      <ChangeType>Изменить тип содержимого</ChangeType>
+      <Fullscreen>Полноэкранный режим</Fullscreen>
       <Cancel>#{word.cancel}</Cancel>
       <Close>#{word.close}</Close>
     </action>
 <tooltip>
-<FullScreen>Maximize/Minimize</FullScreen>
+<FullScreen>Увеличить/уменьшить</FullScreen>
 </tooltip>
     <msg>
-      <cannot-save>An error occurred while saving the document.</cannot-save>
-      <in-versioning>Please check out the current node before adding a new node.</in-versioning>
-      <not-support>Cannot load the template of '{0}'.</not-support>
-      <value-invalid>'{0}' is a needed value.</value-invalid>
-      <repository-exception>An error occurred while saving the document.</repository-exception>
+      <cannot-save>Произошла ошибка при сохранении документа.</cannot-save>
+      <in-versioning>Пожалуйста, проверьте текущий узел перед добавлением нового узла.</in-versioning>
+      <not-support>Не удается загрузить шаблон '{0}'.</not-support>
+      <value-invalid>«{0}» является необходимым значением.</value-invalid>
+      <repository-exception>Произошла ошибка при сохранении документа.</repository-exception>
       <!--DMS 2.4.x; ECM-3543-->
-      <repository-exception-permission>You do not have permission to add a new document to this node.</repository-exception-permission>
+      <repository-exception-permission>У вас недостаточно прав для добавления нового документа в этот узел.</repository-exception-permission>
       <not-allowed-same-name-sibling>You cannot save this document. It is not allowed to have the same name as its sibling.</not-allowed-same-name-sibling>
-      <numberformat-exception>You cannot save this document. The name provided must be in numerical format.</numberformat-exception>
+      <numberformat-exception>Невозможно сохранить этот документ. Указанное имя должно быть в цифровом формате.</numberformat-exception>
       <item-not-found>Item not found. This node (or its ancestor) may have been deleted. Please click the Refresh button.</item-not-found>
     </msg>
   </UIDocumentForm>
@@ -1702,7 +1702,7 @@
   <UIViewDocumentController>
     <tab>
       <label>
-        <UIViewDocumentInfo>Information</UIViewDocumentInfo>
+        <UIViewDocumentInfo>Информация</UIViewDocumentInfo>
       </label>
     </tab>
     <action>
@@ -1720,10 +1720,10 @@
   #############################################################################
   -->
   <UIQuerySaveForm>
-    <title>Save Query Form</title>
+    <title>Сохранить форму запроса</title>
     <label>
-      <query>Query</query>
-      <name>Query Name</name>
+      <query>Запрос</query>
+      <name>Название запроса</name>
     </label>
     <action>
       <Save>#{word.save}</Save>
@@ -1737,8 +1737,8 @@
   -->
   <editActionPopup>
     <title>
-      <UIActionForm>Edit Action</UIActionForm>
-      <EditFormAction>Edit Action</EditFormAction>
+      <UIActionForm>Изменить действие</UIActionForm>
+      <EditFormAction>Изменить действие</EditFormAction>
     </title>
   </editActionPopup>
   <UIActionViewContainer>
@@ -1749,7 +1749,7 @@
   <UIActionList>
     <header>
       <name>#{word.name}</name>
-      <description>Description</description>
+      <description>Описание</description>
   <lifecycle>Life Cycle</lifecycle>
   <triggeredaction>Triggered Action</triggeredaction>
       <instanceOf>Instance of Action Type</instanceOf>
@@ -1757,16 +1757,16 @@
     </header>
     <msg>
       <remove-popup-first>You must close the edit pop-up before deleting this node.</remove-popup-first>
-      <confirm-delete-action>Are you sure you want to delete this action?</confirm-delete-action>
+      <confirm-delete-action>Вы уверены, что хотите удалить это действие?</confirm-delete-action>
       <template-empty>The '{0}' template is null or empty.</template-empty>
       <template-null>The template is either null or you do not have permission to access this template.</template-null>
       <access-denied>Access denied. You do not have permission to perform this action.</access-denied>
     </msg>
     <action>
       <Close>#{word.close}</Close>
-      <View>View</View>
-      <Edit>Edit</Edit>
-      <Delete>Delete</Delete>
+      <View>Показать</View>
+      <Edit>Редактировать</Edit>
+      <Delete>Удалить</Delete>
     </action>
   </UIActionList>
   <UIActionForm>
@@ -1781,14 +1781,14 @@
       <repository-exception>You cannot save this action. The name provided has some special characters.</repository-exception>
       <numberformat-exception>You cannot save this action. The name provided must be in numerical format.</numberformat-exception>
       <existed-action>The action name '{0}' already exists. Please select another one.</existed-action>
-      <unable-add-action>Cannot add this action.</unable-add-action>
+      <unable-add-action>Не удается добавить это действие.</unable-add-action>
       <unable-add>Cannot add this action. This node is either root or you do not have permision.</unable-add>
-      <not-support>Dialog '{0}' is not supported.</not-support>
+      <not-support>Диалоговое окно «{0}» не поддерживается.</not-support>
       <no-permission-add>Access denied. You do not have the right to add an action here.</no-permission-add>
       <access-denied>Access denied. You do not have permission to access this template.</access-denied>
       <lifecycle-invalid>You cannot add this action. The lifecycle phase of action is invalid.</lifecycle-invalid>
     </msg>
-    <title>Add/Edit Action</title>
+    <title>Добавить/изменить действие</title>
     <validator>
       <validator>Validator</validator>
       <destPath>With Path</destPath>
@@ -1803,7 +1803,7 @@
     <title>
       <UIOneNodePathSelector>Select Location</UIOneNodePathSelector>
       <UIPermissionSelector>Permission Browser</UIPermissionSelector>
-      <UICategoriesSelector>Add Categories</UICategoriesSelector>
+      <UICategoriesSelector>Добавить категории</UICategoriesSelector>
     </title>
   </PopupComponent>
   <EditFormAction>
@@ -1822,17 +1822,17 @@
     <msg>
       <path-not-found>Path not found.</path-not-found>
       <access-denied>Access denied. You do not have the right to read the node.</access-denied>
-      <keyword-not-support>The keyword is invalid. Some characters are not supported.</keyword-not-support>
+      <keyword-not-support>Неверное ключевое слово. Некоторые символы не поддерживаются.</keyword-not-support>
     </msg>
     <label>
-      <exeButton>Go</exeButton>
-      <address>Address:</address>
+      <exeButton>Перейти</exeButton>
+      <address>Адрес:</address>
     </label>
     <title>
-      <exeButton>Go</exeButton>
-      <backButton>Back to the previous node</backButton>
+      <exeButton>Перейти</exeButton>
+      <backButton>Вернуться к предыдущему узлу</backButton>
       <showHistory>Show the history address</showHistory>
-      <changeNode>Change Node</changeNode>
+      <changeNode>Изменить узел</changeNode>
     </title>
   </UIAddressBar>
   <!--
@@ -1844,17 +1844,17 @@
     <action>
       <Watch>Watch</Watch>
       <Cancel>#{word.cancel}</Cancel>
-      <Continue>Continue</Continue>
+      <Continue>Продолжить</Continue>
       <Unwatch>Unwatch</Unwatch>
     </action>
     <label>
-      <notificationType>Notification Type:</notificationType>
+      <notificationType>Тип уведомления:</notificationType>
     </label>
     <msg>
-      <not-support>This notification type is not supported. Please select another type.</not-support>
-      <watching-successfully>You are watching this document.</watching-successfully>
+      <not-support>Этот тип уведомления не поддерживается. Пожалуйста, выберите другой тип.</not-support>
+      <watching-successfully>Вы просматриваете этот документ.</watching-successfully>
       <unwatching-successfully>You have left the watchers list successfully.</unwatching-successfully>
-      <node-iswatching>This document is watched.</node-iswatching>
+      <node-iswatching>Этот документ просматривается.</node-iswatching>
     </msg>
   </UIWatchDocumentForm>
   <!--
@@ -1869,19 +1869,19 @@
       <tagSet>UITaggingForm</tagSet>
     </label>
     <action>
-      <AddTag>Add</AddTag>
+      <AddTag>Добавить</AddTag>
       <Cancel>#{word.close}</Cancel>
     </action>
     <msg>
-      <name-exist>The tag name '{0}' already exists.</name-exist>
-      <tagName-invalid>The tag name contains some invalid characters.</tagName-invalid>
+      <name-exist>Имя тега "{0}" уже существует.</name-exist>
+      <tagName-invalid>Имя тега содержит недопустимые знаки.</tagName-invalid>
       <tag-name-empty>Your tag name is empty</tag-name-empty>
       <tag-name-duplicate>The input tag names are duplicate.</tag-name-duplicate>
       <tagName-too-long>One of the tags entered was too long. The tag name must be less than 30 characters.</tagName-too-long>
       <path-not-found>This tag has been deleted or changed. Please click on the Refresh button.</path-not-found>
     </msg>
     <introduction>
-      <tagName>Separate multiple tags by commas ","</tagName>
+      <tagName>Несколько тегов можно разделять запятыми «,»</tagName>
     </introduction>
   </UITaggingForm>
 
@@ -1908,7 +1908,7 @@
   </UIViewMetadataForm>
   <metadataForm>
     <title>
-      <UIViewMetadataForm>Add/Edit Properties</UIViewMetadataForm>
+      <UIViewMetadataForm>Добавить/редактировать свойства</UIViewMetadataForm>
     </title>
   </metadataForm>
   <UIViewMetadataTemplate>
@@ -1923,13 +1923,13 @@
   -->
   <ECMNameValidator>
     <msg>
-      <Invalid-char>The field '{0}' contains some invalid characters. Please enter another value.</Invalid-char>
+      <Invalid-char>Поле «{0}» содержит недопустимые знаки. Пожалуйста, введите другое значение.</Invalid-char>
       <empty-input>The value of the field '{0}' is null or empty.</empty-input>
     </msg>
   </ECMNameValidator>
   <DateTimeValidator>
     <msg>
-      <Invalid-input>Field '{0}' with value '{1}' is invalid.</Invalid-input>
+      <Invalid-input>Поле «{0}» со значением «{1}» является недопустимым.</Invalid-input>
     </msg>
   </DateTimeValidator>
   <CronExpressionValidator>
@@ -1937,7 +1937,7 @@
   </CronExpressionValidator>
   <EmptyFieldValidator>
     <msg>
-      <empty-input>Please fill in the field '{0}'.</empty-input>
+      <empty-input>Пожалуйста, заполните поле «{0}».</empty-input>
     </msg>
   </EmptyFieldValidator>
   <CategoryValidator>
@@ -1954,22 +1954,22 @@
     <msg>Action failed. There are still some reference items in the workspace.</msg>
   </ReferentialIntegrityException>
   <ItemExistsException>
-    <msg>This item already exists.</msg>
+    <msg>Этот элемент уже существует.</msg>
   </ItemExistsException>
   <AccessControlException>
     <msg>Access denied. You do not have permission to perform this action.</msg>
   </AccessControlException>
   <AccessDeniedException>
-    <msg>Access denied.</msg>
+    <msg>Доступ запрещён.</msg>
   </AccessDeniedException>
   <ItemNotFoundException>
-    <msg>Item not found. It may have been removed or changed.</msg>
+    <msg>Элемент не найден. Возможно он был удален или изменен.</msg>
   </ItemNotFoundException>
   <PathNotFoundException>
-    <msg>Path not found. It may have been removed or changed.</msg>
+    <msg>Путь не найден. Возможно он был удален или изменен.</msg>
   </PathNotFoundException>
   <ConstraintViolationException>
-    <msg>You cannot perform this action due to some constraints.</msg>
+    <msg>Вы не можете выполнить это действие из-за установленных ограничений.</msg>
   </ConstraintViolationException>
   <!--
   ###################################################################################
@@ -1978,13 +1978,13 @@
   -->
   <UIPublicationForm>
     <label>
-      <published>Published</published>
-      <non-published>Unpublished</non-published>
+      <published>Опубликовано</published>
+      <non-published>Не опубликовано</non-published>
       <public>Public</public>
       <private>Private</private>
       <state>State</state>
-      <visibility>Visibility</visibility>
-      <nodeName>Node Name:</nodeName>
+      <visibility>Видимость</visibility>
+      <nodeName>Название узла:</nodeName>
       <lifecycleName>Lifecycle Name</lifecycleName>
       <stateName>State Name</stateName>
     </label>
@@ -2001,7 +2001,7 @@
   -->
   <UIWorkspaceList>
     <label>
-      <workspaceName>Workspace:</workspaceName>
+      <workspaceName>Рабочая область:</workspaceName>
       <rootNodeInfo>Root Path:</rootNodeInfo>
       <rootPath>Root Path:</rootPath>
     </label>
@@ -2018,12 +2018,12 @@
   -->
   <EmailAddressValidator>
     <msg>
-      <Invalid-input>The email address is invalid.</Invalid-input>
+      <Invalid-input>Недопустимый адрес электронной почты.</Invalid-input>
     </msg>
   </EmailAddressValidator>
   <UIFormInputSetWithAction>
     <msg>
-      <confirm-delete>Are you sure you want to delete?</confirm-delete>
+      <confirm-delete>Вы уверены, что хотите удалить?</confirm-delete>
     </msg>
   </UIFormInputSetWithAction>
   <RepeatCountValidator>
@@ -2038,9 +2038,9 @@
   </RepeatIntervalValidator>
   <UIPermissionSelector>
     <label>
-      <selectGroup>Select Group</selectGroup>
-      <selectUser>Select User</selectUser>
-      <selectMembership>Select Membership</selectMembership>
+      <selectGroup>Выбрать группу</selectGroup>
+      <selectUser>Выбрать пользователя</selectUser>
+      <selectMembership>Выбрать членство</selectMembership>
     </label>
   </UIPermissionSelector>
   <!--
@@ -2062,7 +2062,7 @@
   <SearchValidator>
     <msg>
       <empty-input>The value of this field is null or empty.</empty-input>
-      <Invalid-char>This field contains some invalid characters. Please enter another value.</Invalid-char>
+      <Invalid-char>Это поле содержит недопустимые знаки. Пожалуйста, введите другое значение.</Invalid-char>
       <Invalid-char2>The number must be followed by the character '~'.</Invalid-char2>
       <Invalid-char1>The number following the character '~' must between 0 and 1.</Invalid-char1>
       <Invalid-char3>The number must be followed by the character '^'.</Invalid-char3>
@@ -2077,12 +2077,12 @@
   -->
   <UIPublicationLogList>
     <header>
-      <date>Date</date>
-      <newState>New State</newState>
+      <date>Дата</date>
+      <newState>Новое состояние</newState>
       <user>Пользователь</user>
-      <description>Description</description>
-      <version>Version</version>
-      <visibility>Visibility</visibility>
+      <description>Описание</description>
+      <version>Версия</version>
+      <visibility>Видимость</visibility>
     </header>
     <action>
       <Close>#{word.close}</Close>
@@ -2095,7 +2095,7 @@
   -->
   <UIVersionTreeList>
     <header>
-      <version>Version</version>
+      <version>Версия</version>
       <state>State</state>
     </header>
   </UIVersionTreeList>
@@ -2119,7 +2119,7 @@
       <access-denied>Access denied. You do not have permission to add a thumbnail to this node.</access-denied>
       <confirm-delete>Are you sure you want to remove this thumbnail?</confirm-delete>
       <is-checked-in>This node is checked in. Please check out before performing any action.</is-checked-in>
-      <fileName-error>Please select a file to upload.</fileName-error>
+      <fileName-error>Пожалуйста, выберите файл для загрузки.</fileName-error>
     </msg>
     <title>
       <remove-thumbnail>Remove this Thumbnail</remove-thumbnail>
@@ -2132,13 +2132,13 @@
   -->
   <UIAnyPermission>
     <label>
-      <anyPermission>Any Permission</anyPermission>
+      <anyPermission>Любое разрешение</anyPermission>
     </label>
   </UIAnyPermission>
 
   <anyPermission>
     <title>
-      <AddAnyPermission>Set Any Permission</AddAnyPermission>
+      <AddAnyPermission>Установить любое разрешение</AddAnyPermission>
     </title>
   </anyPermission>
   <!--
@@ -2158,9 +2158,9 @@
   -->
   <UIGroupMemberSelector>
     <label>
-      <selectGroup>Select Group</selectGroup>
-      <selectUser>Select User</selectUser>
-      <selectMembership>Select Membership</selectMembership>
+      <selectGroup>Выбрать группу</selectGroup>
+      <selectUser>Выбрать пользователя</selectUser>
+      <selectMembership>Выбрать членство</selectMembership>
     </label>
   </UIGroupMemberSelector>
   <!--
@@ -2178,29 +2178,29 @@
   <UIJcrExplorerEditForm>
     <title>Edit File Explorer</title>
     <action>
-      <Edit>Edit</Edit>
+      <Edit>Редактировать</Edit>
       <Save>#{word.save}</Save>
       <Cancel>#{word.cancel}</Cancel>
     </action>
     <label>
       <uploadFileSizeLimitMB>The size limit of the uploaded file (MB)</uploadFileSizeLimitMB>
       <isDirectlyDrive>Direct Drive</isDirectlyDrive>
-      <driveName>Drive Name</driveName>
-      <usecase>Select Type</usecase>
-      <SelectNodePath>Select Path</SelectNodePath>
-      <showTopBar>Show Top Bar</showTopBar>
-      <showActionBar>Show Action Bar</showActionBar>
-      <showSideBar>Show Left Bar</showSideBar>
-      <showFilterBar>Show Filter Bar</showFilterBar>
-      <nodePath>Select Path</nodePath>
+      <driveName>Название диска</driveName>
+      <usecase>Выбрать тип</usecase>
+      <SelectNodePath>Выбрать путь</SelectNodePath>
+      <showTopBar>Показать верхнюю панель</showTopBar>
+      <showActionBar>Показать панель действий</showActionBar>
+      <showSideBar>Показать левую панель</showSideBar>
+      <showFilterBar>Показать панель фильтра</showFilterBar>
+      <nodePath>Выбрать путь</nodePath>
     </label>
   </UIJcrExplorerEditForm>
 
   <UIDriveSelector>
     <label>
-      <driveName>Drive Name</driveName>
+      <driveName>Имя диска</driveName>
       <action>Действие</action>
-      <adddrives>Add Drives</adddrives>
+      <adddrives>Добавить диски</adddrives>
     </label>
   </UIDriveSelector>
   <UIJcrExplorerEditForm>
@@ -2209,26 +2209,26 @@
     </label>
     <msg>
       <personal-usecase>The private drive of the current user will be used when you select the Personal usecase.</personal-usecase>
-      <drive-edit-permission>You cannot edit the drive name. Please click the Edit button.</drive-edit-permission>
-      <path-edit-permission>You cannot edit the path. Please click the Edit button.</path-edit-permission>
+      <drive-edit-permission>Невозможно редактировать имя диска. Пожалуйста, нажмите на кнопку Редактировать.</drive-edit-permission>
+      <path-edit-permission>Невозможно редактировать путь. Пожалуйста, нажмите на кнопку Редактировать.</path-edit-permission>
     </msg>
   </UIJcrExplorerEditForm>
 
   <PopUpSelectDrive>
     <title>
-      <UIDriveSelector>Select Drive</UIDriveSelector>
+      <UIDriveSelector>Выбрать диск</UIDriveSelector>
     </title>
   </PopUpSelectDrive>
 
   <PopupSelectPath>
     <title>
-      <UIOneNodePathSelector>Select Node</UIOneNodePathSelector>
+      <UIOneNodePathSelector>Выбрать узел</UIOneNodePathSelector>
     </title>
   </PopupSelectPath>
 
   <DriveNameInput>
     <title>
-      <SelectDrive>Select Drive</SelectDrive>
+      <SelectDrive>Выбрать диск</SelectDrive>
     </title>
   </DriveNameInput>
 
@@ -2238,14 +2238,14 @@
   <UIActionBar>
     <tooltip>
       <AddSymLink>Add Symlink</AddSymLink>
-      <AddLocalizationLink>Add Translation</AddLocalizationLink>
+      <AddLocalizationLink>Добавить перевод</AddLocalizationLink>
     </tooltip>
   </UIActionBar>
 
   <UIPopupWindow>
     <title>
       <UISymLinkManager>Symlink Manager</UISymLinkManager>
-      <UIAddTranslationManager>Add Translation</UIAddTranslationManager>
+      <UIAddTranslationManager>Добавить перевод</UIAddTranslationManager>
     </title>
   </UIPopupWindow>
 
@@ -2261,16 +2261,16 @@
     <msg>
       <addFolder-successful>The symlink '{0}' was added successfully.</addFolder-successful>
       <name-invalid>Please enter the symlink name.</name-invalid>
-      <name-not-allowed>This name is not allowed.</name-not-allowed>
-      <fileName-error>The file name is invalid.</fileName-error>
+      <name-not-allowed>Это имя не разрешено.</name-not-allowed>
+      <fileName-error>Недопустимое имя файла.</fileName-error>
       <constraint-violation>You cannot add the'{0}' node type to the current node.</constraint-violation>
       <repository-exception>Access denied. You do not have permission to add symlink to this node.</repository-exception>
-      <numberformat-exception>You cannot save this folder. The name provided must be in numerical format.</numberformat-exception>
+      <numberformat-exception>Невозможно сохранить эту папку. Указанное имя должно быть в цифровом формате.</numberformat-exception>
       <path-node-invalid>Please enter the path node.</path-node-invalid>
-      <path-node-not-allowed>This name is not allowed.</path-node-not-allowed>
+      <path-node-not-allowed>Это имя не разрешено.</path-node-not-allowed>
       <non-node>Please select the trust target node; you may not have the right to read this node.</non-node>
       <cannot-save>You cannot add a symlink for this node type.</cannot-save>
-      <item-exists-exception>The node name already exists.</item-exists-exception>
+      <item-exists-exception>Узел с таким названием уже существует.</item-exists-exception>
       <translation-node-same-language-default>The translation node has the same language as the default language of current node.</translation-node-same-language-default>
       <UnsupportedRepositoryOperationException>This target node is not referred.</UnsupportedRepositoryOperationException>
     </msg>
@@ -2279,27 +2279,27 @@
   <UIAddTranslationForm>
     <label>
       <symLinkName>Symlink Name</symLinkName>
-      <pathNode>Document Path:</pathNode>
-      <note>Select another document that will serve as the translation</note>
+      <pathNode>Путь к документу:</pathNode>
+      <note>Выберите другой документ, который будет служить в качестве перевода</note>
     </label>
     <action>
       <Save>#{word.save}</Save>
       <Cancel>#{word.cancel}</Cancel>
-      <SelectDocument>Select Document</SelectDocument>
+      <SelectDocument>Выбрать документ</SelectDocument>
     </action>
     <msg>
       <addFolder-successful>The symlink '{0}' is added successfully.</addFolder-successful>
       <name-invalid>Please enter the symlink name.</name-invalid>
-      <name-not-allowed>This name is not allowed.</name-not-allowed>
-      <fileName-error>The file name is invalid.</fileName-error>
+      <name-not-allowed>Это имя не разрешено.</name-not-allowed>
+      <fileName-error>Недопустимое имя файла.</fileName-error>
       <constraint-violation>You cannot add the'{0}' node type to the current node.</constraint-violation>
       <repository-exception>Access denied. You do not have permission to add symlink to this node.</repository-exception>
-      <numberformat-exception>You cannot save this folder. The name provided must be in numerical format.</numberformat-exception>
+      <numberformat-exception>Невозможно сохранить эту папку. Указанное имя должно быть в цифровом формате.</numberformat-exception>
       <path-node-invalid>Please enter the path node.</path-node-invalid>
-      <path-node-not-allowed>This name is not allowed.</path-node-not-allowed>
+      <path-node-not-allowed>Это имя не разрешено.</path-node-not-allowed>
       <non-node>Please select the trust target node; you may not have the right to read this node.</non-node>
       <cannot-save>An error occurred while creating the symlink.</cannot-save>
-      <item-exists-exception>The node name already exists.</item-exists-exception>
+      <item-exists-exception>Узел с таким названием уже существует.</item-exists-exception>
       <translation-node-same-language-default>The translation node has the same language as the default language of current node.</translation-node-same-language-default>
       <UnsupportedRepositoryOperationException>This target node is not referred.</UnsupportedRepositoryOperationException>
     </msg>
@@ -2312,20 +2312,20 @@
   </UIPopupSymLink>
   <UIPopupSymLink>
     <title>
-      <UIContentSelectorOne>Select Document</UIContentSelectorOne>
+      <UIContentSelectorOne>Выбрать документ</UIContentSelectorOne>
     </title>
   </UIPopupSymLink>
 
   <ECMContextMenu>
     <event>
       <AddSymLink>Add Symlink</AddSymLink>
-      <AddLocalizationLink>Add Translation</AddLocalizationLink>
+      <AddLocalizationLink>Добавить перевод</AddLocalizationLink>
     </event>
   </ECMContextMenu>
 
   <UIWorkingArea>
     <msg>
-      <create-link-problem>You cannot create a link for node '{0}' at '{1}'.</create-link-problem>
+      <create-link-problem>Нельзя создать ссылку для узла «{0}» в '{1}'.</create-link-problem>
       <dest-node-is-link>The destination node '{0}' is already a symlink, so you cannot create a symlink inside it.</dest-node-is-link>
       <selected-is-link>The selected node '{0}' is already a link, so you cannot create a link point to another link.</selected-is-link>
       <confirm-create-link>Do you want to create a link to this location?</confirm-create-link>
@@ -2334,7 +2334,7 @@
 
   <ECMContextMenu>
     <event>
-      <CreateLink>Create Link</CreateLink>
+      <CreateLink>Создать ссылку</CreateLink>
     </event>
   </ECMContextMenu>
 
@@ -2349,7 +2349,7 @@
 
   <UIPopupTaxonomy>
     <title>
-      <UIOneTaxonomySelector>Add Categories</UIOneTaxonomySelector>
+      <UIOneTaxonomySelector>Добавить категории</UIOneTaxonomySelector>
     </title>
   </UIPopupTaxonomy>
 
@@ -2371,7 +2371,7 @@
     <tab>
       <label>
         <UICategoriesAddedList>Referenced Categories</UICategoriesAddedList>
-        <UIOneNodePathSelector>Select Category</UIOneNodePathSelector>
+        <UIOneNodePathSelector>Выбрать категорию</UIOneNodePathSelector>
       </label>
     </tab>
   </UISimpleCategoryManager>
@@ -2379,7 +2379,7 @@
   <UICategoryManager>
     <tab>
       <label>
-        <UIOneTaxonomySelector>Select Category</UIOneTaxonomySelector>
+        <UIOneTaxonomySelector>Выбрать категорию</UIOneTaxonomySelector>
       </label>
     </tab>
   </UICategoryManager>
@@ -2391,65 +2391,65 @@
   </UISimpleCategoryManager>
   <UIPopupWindow>
     <title>
-      <UISimpleCategoryManager>Add Category</UISimpleCategoryManager>
+      <UISimpleCategoryManager>Добавить категорию</UISimpleCategoryManager>
     </title>
   </UIPopupWindow>
   <UICategoriesAddedList>
     <msg>
-      <ItemExistsException>The category name already exists.</ItemExistsException>
+      <ItemExistsException>Название категории уже существует.</ItemExistsException>
     </msg>
   </UICategoriesAddedList>
 
   <UIConfirmMessage>
     <label>
       <Close>#{word.cancel}</Close>
-      <OK>Delete</OK>
-      <ReplaceData>Replace Data</ReplaceData>
-      <Back>Back to Rename</Back>
-      <Keepfile>Keep both files</Keepfile>
+      <OK>Удалить</OK>
+      <ReplaceData>Заменить данные</ReplaceData>
+      <Back>Вернуться к переименованию</Back>
+      <Keepfile>Сохранить оба файла</Keepfile>
     </label>
   </UIConfirmMessage>
 
   <UIRestoreConfirmMessage>
     <label>
       <Close>#{word.close}</Close>
-      <OK>OK</OK>
-      <ReplaceData>Replace Data</ReplaceData>
-      <Back>Back to Rename</Back>
-      <Keepfile>Keep both files</Keepfile>
+      <OK>ОК</OK>
+      <ReplaceData>Заменить данные</ReplaceData>
+      <Back>Вернуться к переименованию</Back>
+      <Keepfile>Сохранить оба файла</Keepfile>
     </label>
   </UIRestoreConfirmMessage>
 
 
   <PopupComponent>
     <title>
-      <UIOneTaxonomySelector>Add Categories</UIOneTaxonomySelector>
+      <UIOneTaxonomySelector>Добавить категории</UIOneTaxonomySelector>
     </title>
   </PopupComponent>
 
   <UIWorkingArea>
     <msg>
-      <can-not-move-to-itself>You cannot move the file, because the destination folder is the same as the source folder.</can-not-move-to-itself>
-      <is-editing>You cannot move a document while it is being edited. Please close it first.</is-editing>
+      <can-not-move-to-itself>Невозможно переместить файл, потому что папка назначения совпадает с исходной папки.</can-not-move-to-itself>
+      <is-editing>Документ нельзя переместить, пока он редактируется. Пожалуйста, сперва закройте его.</is-editing>
     </msg>
   </UIWorkingArea>
 
   <UIImportNode>
     <label>
       <behavior>UUID Behavior</behavior>
-      <versionHistory>Version History</versionHistory>
+      <versionHistory>История версий</versionHistory>
     </label>
     <msg>
-      <history-invalid-type>Invalid file type in the version history. Only .zip files are supported.</history-invalid-type>
-      <history-invalid-content>Invalid content in the version history data. Please select a supported file type to import.</history-invalid-content>
+      <history-invalid-type>Недопустимый тип файла в истории версий. Поддерживаются только ZIP-файлы.</history-invalid-type>
+      <history-invalid-content>Недопустимое содержание в данных версии истории. Пожалуйста, выберите тип поддерживаемого файла для импорта.</history-invalid-content>
     </msg>
   </UIImportNode>
 
   <Import>
     <Behavior>
-      <type0>Create New</type0>
-      <type1>Remove Existing</type1>
-      <type2>Replace Existing</type2>
+      <type0>Создать новый</type0>
+      <type1>Удалить существующий</type1>
+      <type2>Заменить существующий</type2>
       <type3>Throw Exception</type3>
     </Behavior>
   </Import>
@@ -2462,20 +2462,20 @@
 
   <UIPopupMenu>
     <msg>
-      <node-locked-other-person>This node or its parent node is being locked by another user, so you cannot delete it.</node-locked-other-person>
+      <node-locked-other-person>Этот узел или его родительский узел заблокирован другим пользователем, поэтому вы не можете удалить его.</node-locked-other-person>
     </msg>
   </UIPopupMenu>
 
   <Import>
     <label>
-      <docview>Document View</docview>
+      <docview>Просмотр документа</docview>
       <sysview>System View</sysview>
     </label>
   </Import>
 
   <UIDocumentForm>
     <msg>
-      <do-not-permission>You do not have permission to load the template '{0}'.</do-not-permission>
+      <do-not-permission>У вас недостаточно прав для загрузки шаблона {0}.</do-not-permission>
     </msg>
   </UIDocumentForm>
 
@@ -2489,9 +2489,9 @@
     <obtion>
       <Admin>Admin</Admin>
       <Info>Info</Info>
-      <Actions>Actions</Actions>
-      <Collaboration>Collaboration</Collaboration>
-      <Search>Search</Search>
+      <Actions>Действия</Actions>
+      <Collaboration>Сотрудничество</Collaboration>
+      <Search>Поиск</Search>
     </obtion>
   </UIActionBar>
 
@@ -2511,17 +2511,17 @@
   </UIActionBar>
   <UIPopupMenu>
     <msg>
-        <cannot-readsource>You cannot read data from the source node.</cannot-readsource>
+        <cannot-readsource>Вы не можете прочитать данные из исходного узла.</cannot-readsource>
     </msg>
   </UIPopupMenu>
   <UIUploadForm>
     <msg>
-      <upload-not-null>Please upload the file before adding a category.</upload-not-null>
+      <upload-not-null>Пожалуйста, загрузите файл перед добавлением в категорию.</upload-not-null>
     </msg>
   </UIUploadForm>
   <UIActionBar>
     <msg>
-      <allow-setProperty>You must set a property for this group.</allow-setProperty>
+      <allow-setProperty>Необходимо задать свойство для этой группы.</allow-setProperty>
     </msg>
   </UIActionBar>
 
@@ -2548,7 +2548,7 @@
    -->
   <ECMContextMenu>
       <event>
-        <Permlink>View Document</Permlink>
+        <Permlink>Просмотр документа</Permlink>
       </event>
   </ECMContextMenu>
   
@@ -2558,7 +2558,7 @@
    -->
   <UIFolderForm>
     <label>
-      <nt_folder>Document Folder</nt_folder>
+      <nt_folder>Папка документа</nt_folder>
       <nt_unstructured>Content Folder</nt_unstructured>
       <exo_cssFolder>CSS Folder</exo_cssFolder>
       <exo_jsFolder>Javascript Folder</exo_jsFolder>
@@ -2569,13 +2569,13 @@
 
   <Comments>
     <tooltip>
-      <remove-comment>Remove this comment</remove-comment>
-      <edit-comment>Edit this comment</edit-comment>
+      <remove-comment>Удалить этот комментарий</remove-comment>
+      <edit-comment>Редактировать этот комментарий</edit-comment>
     </tooltip>
   </Comments>
   <UIDocumentInfo>
     <msg>
-      <confirm-deletecomment>Are you sure you want to delete this comment?</confirm-deletecomment>
+      <confirm-deletecomment>Вы уверены, что хотите удалить этот комментарий?</confirm-deletecomment>
     </msg>
   </UIDocumentInfo>
 
@@ -2599,62 +2599,62 @@
 
   <UIViewSearchResult>
     <tooltip>
-      <remove-attachment>Are you sure you want to remove this attachment file?</remove-attachment>
+      <remove-attachment>Вы уверенны, что хотите удалить этот вложенный файл?</remove-attachment>
     </tooltip>
   </UIViewSearchResult>
 
   <SameNamePopup>
     <title>
-      <UIUploadBehaviorWithSameName>Upload File</UIUploadBehaviorWithSameName>
+      <UIUploadBehaviorWithSameName>Загрузить файл</UIUploadBehaviorWithSameName>
     </title>
   </SameNamePopup>
 
   <UIAllItems>
     <label>
-      <OwnedByMe>Owned by me</OwnedByMe>
-      <Favourites>Favorites</Favourites>
-      <Hidden>Hidden</Hidden>
-      <Trash>Trash</Trash>
+      <OwnedByMe>Принадлежащие мне</OwnedByMe>
+      <Favourites>Избранное</Favourites>
+      <Hidden>Скрытые</Hidden>
+      <Trash>Корзина</Trash>
       <Configuration>Set Up Preferences</Configuration>
     </label>
     <title>
-      <allItems>All Items</allItems>
+      <allItems>Все элементы</allItems>
     </title>
   </UIAllItems>
 
   <UIPreferencesForm>
       <label>
-          <Alphabetic>Alphabetical</Alphabetic>
-          <Type>Type</Type>
-          <CreatedDate>Created Date</CreatedDate>
-          <ModifiedDate>Modified Date</ModifiedDate>
-          <Ascending>Ascending</Ascending>
-          <Descending>Descending</Descending>
+          <Alphabetic>По алфавиту</Alphabetic>
+          <Type>Тип</Type>
+          <CreatedDate>Дата создания</CreatedDate>
+          <ModifiedDate>Дата изменения</ModifiedDate>
+          <Ascending>По возрастанию</Ascending>
+          <Descending>По убыванию</Descending>
       </label>
   </UIPreferencesForm>
 
   <UISavedSearches>
     <title>
-      <savedSearches>Saved Searches</savedSearches>
+      <savedSearches>Сохраненные результаты поиска</savedSearches>
     </title>
   </UISavedSearches>
   <DocumentType>
     <label>
-       <Images>Image</Images>
-       <Video>Video</Video>
-       <Music>Music</Music>
-       <Documents>Document</Documents>
-       <Content>Content</Content>
+       <Images>Изображение</Images>
+       <Video>Видео</Video>
+       <Music>Музыка</Music>
+       <Documents>Документ</Documents>
+       <Content>Содержимое</Content>
     </label>
   </DocumentType>
 
   <UIDocumentFilterForm>
     <label>
-      <Images>Image</Images>
-      <Video>Video</Video>
-      <Music>Music</Music>
-      <Documents>Document</Documents>
-      <Content>Content</Content>
+      <Images>Изображение</Images>
+      <Video>Видео</Video>
+      <Music>Музыка</Music>
+      <Documents>Документ</Documents>
+      <Content>Содержимое</Content>
     </label>
     <title>Set Up Filter Preferences</title>
     <action>
@@ -2665,21 +2665,21 @@
 
   <UIAllItemsByType>
     <label>
-    <ByType>Filter by Type</ByType>
+    <ByType>Фильтрация по типу</ByType>
       <DocumentFilterConfiguration>Set Up Filter Preferences</DocumentFilterConfiguration>
     </label>
     <title>
-      <ShowVideo>Show all video files</ShowVideo>
-      <ShowMusic>Show all music files</ShowMusic>
-      <ShowImages>Show all image files</ShowImages>
-      <ShowDocuments>Show all document files</ShowDocuments>
-      <ShowContent>Show all document types</ShowContent>
+      <ShowVideo>Показать все видео файлы</ShowVideo>
+      <ShowMusic>Показать все музыкальные файлы</ShowMusic>
+      <ShowImages>Показать все файлы изображений</ShowImages>
+      <ShowDocuments>Показать все файлы документов</ShowDocuments>
+      <ShowContent>Показать все типы документов</ShowContent>
     </title>
   </UIAllItemsByType>
 
   <Views>
     <label>
-      <slide-show>Slide Show</slide-show>
+      <slide-show>Слайд-шоу</slide-show>
     </label>
   </Views>
   <ECMContextMenu>
@@ -2695,10 +2695,10 @@
 
   <UIAllItemsPreferenceForm>
     <label>
-      <showOwnedByUser>Owned by me</showOwnedByUser>
-      <showFavourites>Favorites</showFavourites>
-      <showHiddens>Hidden</showHiddens>
-      <showTrash>Trash</showTrash>
+      <showOwnedByUser>Принадлежащие мне</showOwnedByUser>
+      <showFavourites>Избранное</showFavourites>
+      <showHiddens>Скрытые</showHiddens>
+      <showTrash>Корзина</showTrash>
     </label>
     <action>
       <Save>#{word.save}</Save>
@@ -2708,12 +2708,12 @@
 
   <EmptyTrashManageComponent>
     <msg>
-      <confirm-delete>Are you sure you want to empty all items from trash?</confirm-delete>
+      <confirm-delete>Вы уверены, что хотите удалить все элементы из корзины?</confirm-delete>
     </msg>
   </EmptyTrashManageComponent>
   <UICategoryForm>
     <label>
-      <name>Category Name</name>
+      <name>Название категории</name>
     </label>
     <action>
       <Save>#{word.save}</Save>
@@ -2722,12 +2722,12 @@
   </UICategoryForm>
   <UIPopupWindow>
     <title>
-      <UICategoryForm>Add Category</UICategoryForm>
+      <UICategoryForm>Добавить категорию</UICategoryForm>
     </title>
   </UIPopupWindow>
   <UIActionBar>
     <tooltip>
-      <AddCategory>Add Category</AddCategory>
+      <AddCategory>Добавить категорию</AddCategory>
     </tooltip>
    </UIActionBar>
 
@@ -2741,34 +2741,34 @@
 
   <UITagExplorer>
     <title>
-      <PublicTags>Tags</PublicTags>
-      <EditPublicTags>Edit Tags</EditPublicTags>
-      <PrivateTags>Tags</PrivateTags>
+      <PublicTags>Теги</PublicTags>
+      <EditPublicTags>Изменить Теги</EditPublicTags>
+      <PrivateTags>Теги</PrivateTags>
     </title>
   </UITagExplorer>
 
   <UIEditingTagsForm>
     <header>
-      <name>Name</name>
-      <relatedDocuments>Related Documents</relatedDocuments>
+      <name>Название</name>
+      <relatedDocuments>Связанные документы</relatedDocuments>
       <action>Действие</action>
     </header>
     <action>
       <title>
-        <EditTag>Edit Tag</EditTag>
-        <RemoveTag>Remove Tag</RemoveTag>
-        <AddTag>Add Tag</AddTag>
+        <EditTag>Изменить тег</EditTag>
+        <RemoveTag>Удалить тег</RemoveTag>
+        <AddTag>Добавить тег</AddTag>
       </title>
     </action>
     <msg>
-      <confirm-remove>Are you sure to delete this tag?</confirm-remove>
+      <confirm-remove>Вы действительно хотите удалить этот тег?</confirm-remove>
     </msg>
   </UIEditingTagsForm>
 
 
   <UIPopupWindow>
     <title>
-      <UIEditingTagsForm>Edit Tag</UIEditingTagsForm>
+      <UIEditingTagsForm>Изменить тег</UIEditingTagsForm>
     </title>
   </UIPopupWindow>
 
@@ -2778,14 +2778,14 @@
       <Cancel>#{word.close}</Cancel>
     </action>
     <label>
-      <tagName>Tag Name:</tagName>
-      <relatedDocuments>Related Documents</relatedDocuments>
+      <tagName>Имя тега:</tagName>
+      <relatedDocuments>Связанные документы</relatedDocuments>
     </label>
   </UITagForm>
 
   <TagPopup>
     <title>
-      <UITagForm>Tag</UITagForm>
+      <UITagForm>Тег</UITagForm>
     </title>
   </TagPopup>
 
@@ -2802,7 +2802,7 @@
 
   <UIPopupMenu>
     <msg>
-      <editTagAccessDenied>Access denied.</editTagAccessDenied>
+      <editTagAccessDenied>Доступ запрещён.</editTagAccessDenied>
     </msg>
   </UIPopupMenu>
 
@@ -2814,34 +2814,34 @@
 
     <PopupComponent>
     <title>
-      <UINodeTypeSelector>Select Node Type</UINodeTypeSelector>
+      <UINodeTypeSelector>Выбрать тип узла</UINodeTypeSelector>
     </title>
   </PopupComponent>
 
     <UIActionForm>
     <title>
-      <ShowComponent>Show Component</ShowComponent>
-      <removeReference>Remove</removeReference>
+      <ShowComponent>Показать компонент</ShowComponent>
+      <removeReference>Удалить</removeReference>
     </title>
   </UIActionForm>
 
   <EditFormAction>
     <title>
-      <ShowComponent>Show Component</ShowComponent>
-      <removeReference>Remove</removeReference>
+      <ShowComponent>Показать компонент</ShowComponent>
+      <removeReference>Удалить</removeReference>
     </title>
   </EditFormAction>
 
   <NodeTypeNameValidator>
     <msg>
-      <Invalid-char>There are some invalid characters. Please type another value.</Invalid-char>
+      <Invalid-char>Есть некоторые недопустимые символы. Пожалуйста, введите другое значение.</Invalid-char>
       <empty-input>The value of the field is null or empty.</empty-input>
     </msg>
   </NodeTypeNameValidator>
 
   <UIPreferencesForm>
       <label>
-            <queryType>Query Type:</queryType>
+            <queryType>Тип запроса:</queryType>
             <SQL>SQL</SQL>
             <XPATH>XPATH</XPATH>
       </label>
@@ -2860,12 +2860,12 @@
   </UITreeExplorer>
   <UIDocumentForm>
     <msg>
-      <constraintviolation-exception>You cannot save the document. The input data are missing or invalid.</constraintviolation-exception>
+      <constraintviolation-exception>Невозможно сохранить документ. Входные данные отсутствуют или являются недопустимыми.</constraintviolation-exception>
     </msg>
   </UIDocumentForm>
   <UIActionForm>
     <msg>
-      <constraintviolation-exception>You cannot save the document. The input data are missing or invalid.</constraintviolation-exception>
+      <constraintviolation-exception>Невозможно сохранить документ. Входные данные отсутствуют или являются недопустимыми.</constraintviolation-exception>
     </msg>
   </UIActionForm>
 
@@ -2875,12 +2875,12 @@
       <Cancel>#{word.cancel}</Cancel>
     </action>
     <label>
-      <formInput>The previous path was lost. Please select a new one.</formInput>
+      <formInput>Предыдущий путь был потерян. Пожалуйста, выберите новый.</formInput>
     </label>
   </UISelectRestorePath>
   <PathNode>
     <title>
-      <Add>Add</Add>
+      <Add>Добавить</Add>
     </title>
   </PathNode>
   <UIPopupPathFoRestore>
@@ -2890,7 +2890,7 @@
   </UIPopupPathFoRestore>
   <rootNodeInfo>
     <title>
-      <AddRootNode>Add Root Node</AddRootNode>
+      <AddRootNode>Добавить корневой узел</AddRootNode>
     </title>
   </rootNodeInfo>
 
@@ -2918,30 +2918,30 @@
     </button>
     <revisions>
       <version>Revisions</version>
-      <date>Date</date>
-      <author>Author</author>
-      <status>Status</status>
+      <date>Дата</date>
+      <author>Автор</author>
+      <status>Статус</status>
       <action>Действие</action>
       <label>Revision</label>
       <none>No revisions</none>
-      <seeall>See all versions</seeall>
+      <seeall>Просмотреть все версии</seeall>
       <currentVersion>Current Revision</currentVersion>
       <confirm>You will lose your draft work. Are you sure you want to replace the current revision?</confirm>
     </revisions>
     <status>
       <version>Revision</version>
-      <title>Status</title>
-      <archived>Archived</archived>
+      <title>Статус</title>
+      <archived>В архиве</archived>
       <obsolete>Obsolete</obsolete>
-      <unpublished>Unpublished</unpublished>
+      <unpublished>Не опубликовано</unpublished>
       <enrolled>Enrolled</enrolled>
-      <draft>Draft</draft>
+      <draft>Черновик</draft>
       <pending>Pending</pending>
-      <approved>Approved</approved>
-      <inreview>In Review</inreview>
+      <approved>Утверждено</approved>
+      <inreview>На рассмотрении</inreview>
       <staged>Staged</staged>
-      <published>Published</published>
-      <live>Published</live>
+      <published>Опубликовано</published>
+      <live>Опубликовано</live>
     </status>
     <scheduled>
       <title>Scheduled</title>
@@ -2949,67 +2949,67 @@
       <to>To</to>
     </scheduled>
     <title>
-      <preview>Preview</preview>
-      <restore>Restore</restore>
+      <preview>Предварительный просмотр</preview>
+      <restore>Восстановить</restore>
     </title>
     <msg>
       <have-no-view-template>The View template is not supported.</have-no-view-template>
-      <restore-complete>Restore completed.</restore-complete>
+      <restore-complete>Восстановление завершено.</restore-complete>
     </msg>
   </UIPublicationPanel>
   <UIPublicationHistory>
     <header>
-      <date>Date</date>
+      <date>Дата</date>
       <versionName>Revision Name</versionName>
-      <currentState>Current State</currentState>
-      <user>Author</user>
-      <description>Description</description>
+      <currentState>Текущее состояние</currentState>
+      <user>Автор</user>
+      <description>Описание</description>
     </header>
   </UIPublicationHistory>
   
   <UIPublicationSchedule>
     <label>
       <introduction>You can schedule the publication of your document. Select the dates you would like to see your document published</introduction>
-      <no-schedule-info>There is no publication schedule for your document</no-schedule-info>
+      <no-schedule-info>Нет графика публикации для вашего документа</no-schedule-info>
     </label>
     <msg>
-      <save-finished>Your new publication schedule was saved successfully.</save-finished>
+      <save-finished>Ваш новый график публикации успешно сохранен.</save-finished>
     </msg>
     <action>
       <Save>#{word.save}</Save>
-      <Reset>Очистить</Reset>
+      <Reset>Сброс</Reset>
     </action>
   </UIPublicationSchedule>
 
   <UIPublicationPanel>
     <label>
-      <header>Publication Date</header>
-      <start>Start Publication</start>
-      <end>End Publication</end>
+      <header>Дата публикации</header>
+      <start>Начало публикации</start>
+      <end>Окончание публикации</end>
     </label>
     <msg>
-      <invalid-format>The date format is invalid. Please check again.</invalid-format>
+      <invalid-format>Недопустимый формат даты. Пожалуйста, проверьте еще раз.</invalid-format>
       <fromDate-after-toDate>The From date has to be earlier than the To date.</fromDate-after-toDate>
     </msg>
   </UIPublicationPanel>
   <UIPopupWindow>
     <title>
-      <UIPublicationContainer>Manage Publication</UIPublicationContainer>
-      <UIPublishingPanel>Manage Publication</UIPublishingPanel>
+      <UIPublicationContainer>Управление публикацией</UIPublicationContainer>
+      <UIPublishingPanel>Управление публикацией</UIPublishingPanel>
     </title>
   </UIPopupWindow>
   <WCMContentView>
     <header>
-      <status>Status</status>
-      <author>Author</author>
-      <date>Created Date</date>
-      <title>Document Title</title>
-      <lastUser>Last User</lastUser>
+      <status>Статус</status>
+      <author>Автор</author>
+      <date>Дата создания</date>
+      <title>Название документа</title>
+      <lastUser>Последний пользователь</lastUser>
     </header>
   </WCMContentView>
   <UITagForm>
     <msg>
-      <NameAlreadyExist>The tag name already exists.</NameAlreadyExist>
+      <NameAlreadyExist>Имя тега уже существует.</NameAlreadyExist>
     </msg>
   </UITagForm>
 
@@ -3019,43 +3019,43 @@
   <UICategoryManagerSearch>
     <tab>
       <label>
-        <UIOneTaxonomySelector>Select Category</UIOneTaxonomySelector>
+        <UIOneTaxonomySelector>Выбрать категорию</UIOneTaxonomySelector>
       </label>
     </tab>
   </UICategoryManagerSearch>
 
   <UIPreferencesForm>
    <action>
-     <HideAdvance>Hide Advanced</HideAdvance>
-     <ShowAdvance>Show Advanced</ShowAdvance>
+     <HideAdvance>Скрыть расширенные</HideAdvance>
+     <ShowAdvance>Показать расширенные</ShowAdvance>
     </action>
     <label>
-    <Advance>Advanced</Advance>
+    <Advance>Расширенные</Advance>
     </label>
   </UIPreferencesForm>
 
   <UIJCRExplorerPortlet>
 <msg>
-  <file-access-denied>File access denied.</file-access-denied>
-  <anonymous-access-denied>Anonymous user does not have permission to use this function.</anonymous-access-denied>
+  <file-access-denied>Доступ к файлу запрещен.</file-access-denied>
+  <anonymous-access-denied>Анонимный пользователь не имеет разрешения на использование этой функции.</anonymous-access-denied>
 </msg>
   </UIJCRExplorerPortlet>
   <UIDrivesArea>
     <DrivesArea>
-      <ShowDrives>Show Drives</ShowDrives>
+      <ShowDrives>Показать диски</ShowDrives>
     </DrivesArea>
   </UIDrivesArea>
   <UIJcrExplorerEditForm>
     <msg>
-      <fields-saved>All field values saved.</fields-saved>
-      <fields-cancelled>All field values canceled.</fields-cancelled>
+      <fields-saved>Все значения полей сохранены.</fields-saved>
+      <fields-cancelled>Все значения полей отменены.</fields-cancelled>
     </msg>
   </UIJcrExplorerEditForm>
   <UIDocumentForm>
   <msg>
-  <confirm-close>The changes you made will be lost if you close this form.</confirm-close>
-  <confirm-changeType>The changes you made will be lost if you change the content type.</confirm-changeType>
-  <confirm-navigate>The changes you made will be lost if you navigate away from this page.</confirm-navigate>
+  <confirm-close>Сделанные изменения будут потеряны при закрытии этой формы.</confirm-close>
+  <confirm-changeType>Сделанные изменения будут потеряны, если изменить тип содержимого.</confirm-changeType>
+  <confirm-navigate>Сделанные изменения будут потеряны, если вы покинете эту страницу.</confirm-navigate>
   </msg>
   </UIDocumentForm>
   <UploadFileMimeTypesValidator>
@@ -3065,8 +3065,8 @@
   </UploadFileMimeTypesValidator>
   <lifecyclePhase>
     <label>
-    <no>No</no>
-  <yes>Yes</yes>
+    <no>Нет</no>
+  <yes>Да</yes>
   <true>True</true>
   <false>False</false>
   <Electronic>Electronic</Electronic>
@@ -3075,37 +3075,37 @@
   <CLASSIFIED>Classified</CLASSIFIED>
   <UNCLASSIFIED>Unclassified</UNCLASSIFIED>
   <NOCONTRACT>No Contract</NOCONTRACT>
-  <one-minute>One Minute</one-minute>
-  <hourly>Hourly</hourly>
-  <daily>Daily</daily>
-  <quarterly>Quarterly</quarterly>
-  <yearly>Yearly</yearly>
-  <ten-years>Ten Years</ten-years>
+  <one-minute>Ежеминутно</one-minute>
+  <hourly>Каждый час</hourly>
+  <daily>Ежедневно</daily>
+  <quarterly>Ежеквартально</quarterly>
+  <yearly>Ежегодно</yearly>
+  <ten-years>Каждые десять лет</ten-years>
   <read>User Action</read>
   <schedule>Scheduler</schedule>
-  <node_added>Content Addition</node_added>
-  <node_removed>Content Removal</node_removed>
-  <property_added>Property Addition</property_added>
-  <property_removed>Property Removal</property_removed>
-  <property_changed>Property Modification</property_changed>
+  <node_added>Добавление содержимого</node_added>
+  <node_removed>Удаление содержимого</node_removed>
+  <property_added>Добавление свойства</property_added>
+  <property_removed>Удаление свойства</property_removed>
+  <property_changed>Изменение свойства</property_changed>
 </label>
   </lifecyclePhase>
   <UIPopupMenu>
   <msg>
-<can-not-remove-locked-node>Node {0} is locked. You cannot move it to the Trash.</can-not-remove-locked-node>
+<can-not-remove-locked-node>Узел {0} заблокирован. Его нельзя переместить в корзину.</can-not-remove-locked-node>
 <can-not-remove-checked-in-node>Node {0} or its parent is checked in. You cannot move it to the Trash.</can-not-remove-checked-in-node>
-<access-denied-to-delete>Access denied. You cannot move node {0} to the Trash.</access-denied-to-delete>
+<access-denied-to-delete>Доступ запрещен. Узел {0} нельзя переместить в корзину.</access-denied-to-delete>
   </msg>
   </UIPopupMenu>
   <UIPropertyForm>
   <msg>
-  <unknown-error>An error occurred while editing this property.</unknown-error>
+  <unknown-error>Произошла ошибка при редактировании этого свойства.</unknown-error>
     </msg>
   </UIPropertyForm>
   <UIWatchDocumentForm>
     <msg>
-      <node-is-locked>This node is locked. You cannot watch it.</node-is-locked>
-      <unknown-error>Some errors have occurred. You cannot watch this node.</unknown-error>
+      <node-is-locked>Этот узел заблокирован. Вы не можете просмотреть его.</node-is-locked>
+      <unknown-error>Произошли некоторые ошибки. Вы не можете просмотреть этот узел.</unknown-error>
     </msg>
   </UIWatchDocumentForm>   
   <UIActionForm>
@@ -3115,16 +3115,16 @@
   </UIActionForm>
   <UIMultiUpload>
   <label>
-    <AbortAll>Abort all</AbortAll>
+    <AbortAll>Прервать все</AbortAll>
     <AbortAllFiles>Abort all Files</AbortAllFiles>
-    <MaxFileSize>Maximum file size is</MaxFileSize>
-    <InvalidCharacters>Invalid characters will be changed by '-'</InvalidCharacters>
+    <MaxFileSize>Максимальный размер файла</MaxFileSize>
+    <InvalidCharacters>Недопустимые символы будут заменены на '-'</InvalidCharacters>
     <DropFileMessage>Drop your files here in the current folder</DropFileMessage>
     <Close>#{word.close}</Close>
     <in>in</in>
     <MaxFileSizeAlert>The file size exceeds the size limit of</MaxFileSizeAlert>
     <Waiting>Waiting</Waiting>
-    <Error>Error</Error>
+    <Error>Ошибка</Error>
     <or>or</or>
     <AlreadyInUse>Already in use</AlreadyInUse>
     <Keep>Keep both</Keep>
@@ -3145,12 +3145,12 @@
   <FileView>
     <label>
       <name>Name</name>
-      <date>Date</date>
-      <size>Size</size>
-      <sortBy>Sort by:</sortBy>
-      <filesAreSelected>Files are selected.</filesAreSelected>
-      <ClearSelection>Clear selection</ClearSelection>
-      <more>More</more>
+      <date>Дата</date>
+      <size>Размер</size>
+      <sortBy>Упорядочить по:</sortBy>
+      <filesAreSelected>Файлы выбраны.</filesAreSelected>
+      <ClearSelection>Очистить выделение</ClearSelection>
+      <more>Еще</more>
     </label>
   </FileView>
   <UIPropertyForm>

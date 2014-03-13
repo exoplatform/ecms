@@ -14,7 +14,7 @@
  * You should have received a copy of the GNU General Public License
  * along with this program; if not, see<http://www.gnu.org/licenses/>.
  */
-package org.exoplatform.ecm.jcr.model;
+package org.exoplatform.services.cms.clipboard.jcr.model;
 
 public class ClipboardCommand {
 
@@ -30,6 +30,13 @@ public class ClipboardCommand {
 
   private String             wsName    = null;
 
+  public ClipboardCommand() {}
+  
+  public ClipboardCommand(String type, String path, String ws) {
+    this.type = type;
+    this.srcPath = path;
+    this.wsName = ws;
+  }
 
   public String getSrcPath() {
     return srcPath;
@@ -53,5 +60,25 @@ public class ClipboardCommand {
 
   public String getWorkspace() {
     return wsName;
+  }
+  
+  public int hashCode() {
+    int ret = 0;
+    if (type != null) ret += type.hashCode();
+    if (wsName != null) ret += wsName.hashCode();
+    if (srcPath != null) ret += srcPath.hashCode();
+    return ret;
+  }
+  
+  public boolean equals(Object o) {
+    if (o != null || o instanceof ClipboardCommand) {
+      ClipboardCommand cObject = ClipboardCommand.class.cast(o);
+      if (wsName == null && cObject.wsName != null || wsName != null && cObject.wsName == null) return false;
+      if (srcPath == null && cObject.srcPath != null || srcPath != null && cObject.srcPath == null) return false;
+      return ((wsName == null && cObject.wsName == null) || (wsName.equals(cObject.wsName))) &&
+             ((srcPath == null && cObject.srcPath == null) || (srcPath.equals(cObject.srcPath)));
+    } else {
+      return false;
+    }
   }
 }

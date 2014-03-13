@@ -18,6 +18,7 @@ package org.exoplatform.services.wcm;
 
 import org.exoplatform.commons.testing.BaseExoContainerTestSuite;
 import org.exoplatform.commons.testing.ConfigTestCase;
+import org.exoplatform.services.cms.clipboard.TestClipboardService;
 import org.exoplatform.services.cms.documents.TestDocumentTypeService;
 import org.exoplatform.services.cms.lock.impl.TestLockService;
 import org.exoplatform.services.deployment.TestWCMContentInitializerService;
@@ -104,7 +105,8 @@ import org.junit.runners.Suite.SuiteClasses;
   TestSymLink.class,
   TestDMSConfigurationService.class,
   TestThumbnailService.class,
-  TestSEOService.class
+  TestSEOService.class,
+  TestClipboardService.class
 })
 @ConfigTestCase(BaseWCMTestCase.class)
 public class BaseWCMTestSuite extends BaseExoContainerTestSuite {

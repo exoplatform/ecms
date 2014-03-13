@@ -24,6 +24,10 @@
       <timeUnitCaption>segundos</timeUnitCaption>
       <similar>Páginas onde o mesmo conteúdo aparece</similar>
       <editor>Editor</editor>
+      <date>Data</date>
+      <relevancy>Relevância</relevancy>
+      <title>Título</title>
+      <sortBy>Ordenar por:</sortBy>
     </label>
     <action>
       <edit>Editar</edit>

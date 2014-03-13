@@ -19,7 +19,7 @@
   RepositoryService rService = uicomponent.getApplicationComponent(RepositoryService.class);
   String repositoryName = rService.getCurrentRepository().getConfiguration().getName();  
 %>
-<div id="$uicomponent.id" class="uiContentSearchResult">
+<div id="$uicomponent.id" class="uiContentSearchResult resizable">
   <table class="uiGrid table table-hover table-striped" cellspacing="0">
     <thead>
       <tr class="uiWCMSearchContent">

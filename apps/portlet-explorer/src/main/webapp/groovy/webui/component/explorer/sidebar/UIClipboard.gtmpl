@@ -8,7 +8,7 @@
  **/
  
   import org.exoplatform.webui.core.UIComponent ;
-  import org.exoplatform.ecm.jcr.model.ClipboardCommand ;
+  import org.exoplatform.services.cms.clipboard.jcr.model.ClipboardCommand ;
   
   String[] beanFields =  uicomponent.getBeanFields() ;
   String[] beanActions =  uicomponent.getBeanActions() ;

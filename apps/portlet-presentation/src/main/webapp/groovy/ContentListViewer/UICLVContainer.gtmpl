@@ -23,8 +23,6 @@
     def addContentBlockId = portletId + "-AddContentBlock";
     def manageContentBlockId = portletId + "-ManageContentBlock";   
     
-    def addContentLink = uicomponent.getEditLink(false, true);
-    def manageContentsLink = uicomponent.getEditLink(false, false);
     boolean isShowInfoBar = uicomponent.isShowInfoBar();    
     def edittingStyle = "z-index: 10";
       if (isShowInfoBar)
@@ -36,11 +34,13 @@
       <div class="btn-group">         
         <%
         if (uicomponent.isShowAddContent()) {          
+		def addContentLink = uicomponent.getEditLink(false, true);
         %>
           <a id="<%=addContentBlockId%>" class="btn" onclick = "eXo.ecm.CLV.addURL(this)" href="<%=addContentLink%>"><i class="uiIconPlus" rel="tooltip" data-placement="bottom" title="<%= _ctx.appRes("UICLVContainer.label.AddContent");%>"></i></a>
         <% }
         
         if (uicomponent.isShowManageContent()) {
+		def manageContentsLink = uicomponent.getEditLink(false, false);
         %>
           <a id="<%=manageContentBlockId%>" class="btn" onclick = "eXo.ecm.CLV.addURL(this)" href="<%=manageContentsLink%>"><i class="uiIconEcmsManageContent" rel="tooltip" data-placement="bottom" title="<%= _ctx.appRes("UICLVContainer.label.ManageContent");%>"></i></a>
         <% }

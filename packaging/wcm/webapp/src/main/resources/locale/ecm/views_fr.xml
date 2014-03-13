@@ -326,6 +326,7 @@
     <view>
       <label>
         <not-avaliable/>
+        <core-elements>Dublin Core</core-elements>
         <title>Titre</title>
         <creator>Créateur</creator>
         <subject>Sujet</subject>

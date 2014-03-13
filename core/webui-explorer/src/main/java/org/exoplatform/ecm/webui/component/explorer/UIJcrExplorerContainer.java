@@ -24,6 +24,7 @@ import org.exoplatform.ecm.webui.component.explorer.sidebar.UISideBar;
 import org.exoplatform.ecm.webui.utils.JCRExceptionManager;
 import org.exoplatform.ecm.webui.utils.Utils;
 import org.exoplatform.portal.webui.util.Util;
+import org.exoplatform.services.cms.clipboard.ClipboardService;
 import org.exoplatform.services.cms.drives.DriveData;
 import org.exoplatform.services.cms.drives.ManageDriveService;
 import org.exoplatform.services.cms.views.ManageViewService;
@@ -154,7 +155,7 @@ public class UIJcrExplorerContainer extends UIContainer {
         JCRExceptionManager.process(uiApp, e);
         return;
       }
-      uiJCRExplorer.getAllClipBoard().clear();
+      
       uiJCRExplorer.setRepositoryName(repoName);
       uiJCRExplorer.setWorkspaceName(drive.getWorkspace());
       uiJCRExplorer.setRootPath(homePath);

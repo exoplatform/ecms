@@ -138,6 +138,7 @@
     <view>
       <label>
         <not-avaliable>N/A</not-avaliable>
+        <core-elements>Temel Unsurlar</core-elements>
         <title>Başlık</title>
         <creator>Oluşturan</creator>
         <subject>Konu</subject>

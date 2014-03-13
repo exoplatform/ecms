@@ -330,6 +330,8 @@ public class WCMCoreUtils {
    * @throws Exception
    */
   public static String getSiteGlobalActiveStylesheet(Node siteNode) throws Exception {
+    if (siteNode == null) return StringUtils.EMPTY;
+
     StringBuilder buffer = new StringBuilder();
     try {
       List<Node> cssNodeList = new ArrayList<Node>();
@@ -383,6 +385,8 @@ public class WCMCoreUtils {
   }
 
   public static String getSiteActiveJs(Node siteNode) throws Exception {
+    if (siteNode == null) return StringUtils.EMPTY;
+
     StringBuilder buffer = new StringBuilder();
     try {
       List<Node> jsNodeList = new ArrayList<Node>();

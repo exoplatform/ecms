@@ -151,7 +151,7 @@
 			uicomponent.renderChildren();
 			if(uicomponent.isPrinting()) {
         %>
-          <div class="ActionContainer">
+          <div class="ActionContainer" style="padding-bottom:40px">
             <a class="PrintFrameIcon PrintIcon" href="javascript: void(0)" onclick="window.print();"><%= _ctx.appRes("UISCVPreferences.action.Print") %></a>
             <a class="PrintFrameIcon CloseIcon" id="CloseIcon" href="javascript: void(0)" onclick="window.close();"><%= _ctx.appRes("UISCVPreferences.action.Close") %></a>
           </div>

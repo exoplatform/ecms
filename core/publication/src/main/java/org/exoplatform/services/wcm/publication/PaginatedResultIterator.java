@@ -117,7 +117,15 @@ public class PaginatedResultIterator extends PageList {
       throw new ExoMessageException("PageList.page-out-of-range", args);
     }
     populateCurrentPage(page);
+    while (currentListPage_ != null && currentListPage_.size() == 0 && page > 1) {
+      page--;
+      result.setNumTotal(page * this.getPageSize());
+      populateCurrentPage(page);
+      availablePage_ = page;
+    }
+
     return currentListPage_;
+    
   }
 
   /**

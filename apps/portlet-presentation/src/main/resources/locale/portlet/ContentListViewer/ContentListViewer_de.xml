@@ -77,7 +77,7 @@
       <ParameterHelp>Dieser Parameter wird verwendet werden, um den Inhalt zu erhalten, wenn dynamische Navigation aktiviert ist.</ParameterHelp>
       <ShowDetailInPageHelp>Beim Klicken auf "Inhalt" wird der Benutzer zu einer Detailseite weitergeleitet. Sie müssen ein "Inhalte nach URL" Portlet mit eingeschalteter dynamischer Navigation auf der Zielseite haben, um den Inhalt anzuzeigen.</ShowDetailInPageHelp>
       <DetailParameterHelp>Dieser Parameter wird den Pfad zum Inhalt im Link der Detailseite enthalten. Dieser Parameter muss dem verwendeten Parameter im "Inhalte nach URL" Portlet der Seite entsprechen.</DetailParameterHelp>
-      <ContentByQueryHelp><![CDATA[You can set a SQL Query to get content dynamically. The following parameters are allowed : ${user}, ${lang} or any get parameter (PARAM) surrounded by ${PARAM}.]]></ContentByQueryHelp>
+      <ContentByQueryHelp>Sie können eine SQL-Abfrage festlegen, um Inhalten dynamisch abzurufen. Folgende Parameter sind zulässig: ${user}, ${lang} oder ein beliebiger Abrufparameter (PARAM) umgeben von ${PARAM}.</ContentByQueryHelp>
       <ContentsVisibilityHelp>"Durch Authentifizierung eingeschränkt" filtert den Inhalt basierend auf der Authentifizierung. Wenn Sie sich nicht anmelden, sehen Sie nur öffentliche Inhalte. Wenn Sie eingeloggt sind, sehen Sie alle sichtbaren Inhalt von Intranetbenutzern (geteilt mit allen). "Eingeschränkt durch Benutzerrollen" bedeutet, dass Sie Inhalte entsprechend Ihrer Benutzerrolen sehen werden. In den meisten Fällen sollte diese Option nicht verwendet werden, da sie die Gesamtleistung reduziert.</ContentsVisibilityHelp>
     </help>
     <action>

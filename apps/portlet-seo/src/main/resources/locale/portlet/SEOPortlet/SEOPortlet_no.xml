@@ -3,7 +3,7 @@
   <UISEOForm>
     <label>  
       <title>Tittel:</title>
-      <description>Description:</description>
+      <description>Beskrivelse:</description>
       <keywords>Nøkkelord:</keywords>
       <language>Språk:</language>
       <robots>Roboter:</robots>
@@ -12,15 +12,15 @@
     <isInherited>Arvet fra overordnet side</isInherited>
       <priority>Prioritet:</priority>
       <frequency>Frekvens:</frequency>
-      <select-language>Select a language</select-language>
+      <select-language>Velg språk</select-language>
       <option>
-        <Always>Always</Always>
+        <Always>Alltid</Always>
         <Hourly>Hver time</Hourly>
         <Daily>Daglig</Daily>
         <Weekly>Ukentlig</Weekly>
         <Monthly>Månedlig</Monthly>
         <Yearly>Årlig</Yearly>
-        <Never>Never</Never>
+        <Never>Aldri</Never>
       </option> 
     </label>
     <tip>

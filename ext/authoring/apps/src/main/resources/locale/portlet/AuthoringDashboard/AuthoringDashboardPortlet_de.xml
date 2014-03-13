@@ -8,6 +8,7 @@
       <waitingapproval>Zu genehmigen</waitingapproval>
       <approve>Genehmigen</approve>
       <publishedtomorrow>Wird morgen veröffentlicht</publishedtomorrow>
+      <refresh>#{word.refresh}</refresh>
     </label>
   </UIDashboardForm>
 </bundle>

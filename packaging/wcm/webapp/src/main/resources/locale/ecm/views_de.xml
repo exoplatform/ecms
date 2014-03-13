@@ -138,6 +138,7 @@
     <view>
       <label>
         <not-avaliable>N/V</not-avaliable>
+        <core-elements>Kernelemente</core-elements>
         <title>Titel</title>
         <creator>Ersteller</creator>
         <subject>Betreff</subject>

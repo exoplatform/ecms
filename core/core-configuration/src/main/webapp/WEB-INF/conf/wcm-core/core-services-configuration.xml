@@ -230,6 +230,21 @@
       </value-param>
     </init-params>
   </component>
+  
+  <component>
+    <key>org.exoplatform.services.cms.clipboard.ClipboardService</key>  
+    <type>org.exoplatform.services.cms.clipboard.impl.ClipboardServiceImpl</type>
+    <init-params>
+      <value-param>
+        <name>liveTime</name>
+        <value>${wcm.cache.clipboard.timetolive:-1}</value>
+      </value-param>
+      <value-param>
+        <name>maxSize</name>
+        <value>${wcm.cache.clipboard.capacity:500}</value>
+      </value-param>
+    </init-params>
+  </component>  
 		
 	  <external-component-plugins>
     <target-component>org.exoplatform.services.cms.watch.WatchDocumentService</target-component>

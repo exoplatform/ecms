@@ -77,7 +77,7 @@
       <ParameterHelp>سيتم استخدام هذا المعيار للحصول على المحتويات إذا تم تفعيل التصفــّــح الديناميكي.</ParameterHelp>
       <ShowDetailInPageHelp>بالنقر على المحتوى ىسيتمّ إعادة توجيهك إلى صفحة التفاصيل. يجب أن يكون لديك المدخل "محتوى بواسطة عنوان الموار الموحّد URL" و التأكد من تفعيل خيار التصفّح الديناميكي على مُستوى الصفحة الهدف  قصد عرض المحتوى.</ShowDetailInPageHelp>
       <DetailParameterHelp>سوف يحتوي هذا المعيار على المسار المؤدّي إلى الرّابط الخاصّ بتفاصيل الصفحة. يجب أن يتطابق هذا المعيار مع ذلك التي تمّ استخدامه ضمن تبويبة "المحتوى عن طريق عنوان الموارد الموحّد"  الخاص بالصفحة المعنيّة.</DetailParameterHelp>
-      <ContentByQueryHelp><![CDATA[You can set a SQL Query to get content dynamically. The following parameters are allowed : ${user}, ${lang} or any get parameter (PARAM) surrounded by ${PARAM}.]]></ContentByQueryHelp>
+      <ContentByQueryHelp>يمكنك تعيين استعلام SQL للحصول على المحتوى بشكل حيوي. مسموح بالمعلمات التالية: ${user} ${lang} أو أي معلمة محاطة ${PARAM}.</ContentByQueryHelp>
       <ContentsVisibilityHelp>"مقيّدة بتسجيل الدّخول" سيتم تصفية المحتوى استنادا إلى المصادقة. إذا لم تقم بتسجيل الدخول، سترى المحتوى العام فقط. إذا قمت بتسجيل الدخول،سترى كل المحتوى المرئي من قبل مستخدمي الإنترنت. "مقيدة بأدوار المستخدمين" سيتم تصفية المحتوى اعتمادا على صلاحيّاتك. في معظم الحالات، ينبغي عدم استخدام هذا الخيار، لأنه يقلل من الأداء العام.</ContentsVisibilityHelp>
     </help>
     <action>

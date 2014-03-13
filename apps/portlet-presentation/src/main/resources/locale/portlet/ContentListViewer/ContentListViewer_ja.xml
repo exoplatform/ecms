@@ -77,7 +77,7 @@
       <ParameterHelp>ダイナミックナビゲーションが有効化されている場合、コンテンツの取得にこのパラメータが使用されます。</ParameterHelp>
       <ShowDetailInPageHelp>コンテンツをクリックすると詳細ページへリダイレクトされる。コンテンツを表示するためにはターゲットのページが、ダイナミックナビゲーションが有効な"Content by URL"のポートレットを持つ必要があります。</ShowDetailInPageHelp>
       <DetailParameterHelp>このパラメータは詳細ページへのリンクのコンテンツへのパスを保持します。このパラメータはそのページの"Content by URL"ポートレットで使われるパラメータとマッチしなければなりません。</DetailParameterHelp>
-      <ContentByQueryHelp><![CDATA[You can set a SQL Query to get content dynamically. The following parameters are allowed : ${user}, ${lang} or any get parameter (PARAM) surrounded by ${PARAM}.]]></ContentByQueryHelp>
+      <ContentByQueryHelp>SQL クエリで、動的にコンテンツを取得できます。次のパラメーターが使用できます:  ${user}, ${lang} または ${PARAM} で 囲まれたパラメーターです。</ContentByQueryHelp>
       <ContentsVisibilityHelp>”権限でフィルター”は、権限レベルに応じてコンテンツをフィルタリングします。サイトにログインしていない時には、一般公開されているコンテンツしか参照することが出来ません。サイトにログインした後は、インターネットユーザに許可されているコンテンツまで参照することができます。”ユーザロールでフォルター”は、コンテンツをユーザが持つ権限毎に参照するものです。システムのパフォーマンスを消費するため、通常は使われません。</ContentsVisibilityHelp>
     </help>
     <action>

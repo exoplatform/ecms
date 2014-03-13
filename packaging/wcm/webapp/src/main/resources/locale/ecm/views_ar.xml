@@ -138,6 +138,7 @@
     <view>
       <label>
         <not-avaliable>غير متوفرة</not-avaliable>
+        <core-elements>Core Elements</core-elements>
         <title>العنوان</title>
         <creator>الصانع</creator>
         <subject>الموضوع</subject>

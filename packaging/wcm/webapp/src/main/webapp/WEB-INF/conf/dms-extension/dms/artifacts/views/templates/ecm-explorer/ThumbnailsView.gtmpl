@@ -1,5 +1,7 @@
 <%
   import java.net.URLEncoder;
+  import javax.jcr.PathNotFoundException;
+  
   import org.exoplatform.ecm.webui.utils.Utils ;
   import org.exoplatform.web.application.Parameter ;
   import org.exoplatform.webui.core.UIRightClickPopupMenu ;
@@ -9,8 +11,8 @@
   import org.exoplatform.ecm.webui.component.explorer.UIJCRExplorer;
   import org.exoplatform.services.cms.link.LinkManager;  
   import org.exoplatform.services.jcr.RepositoryService; 
-  import org.exoplatform.services.wcm.utils.WCMCoreUtils; 
-      
+  import org.exoplatform.services.wcm.utils.WCMCoreUtils;
+  
   def linkManager = WCMCoreUtils.getService(LinkManager.class);
   def uiWorkingArea = uicomponent.getAncestorOfType(UIWorkingArea.class);
   def uiExplorer = uicomponent.getAncestorOfType(UIJCRExplorer.class);
@@ -109,6 +111,11 @@
 		      int i = 0;
 		      def permlink;
 		      for(data in uicomponent.getChildrenList()) {
+    	        try {
+    	          data.getSession().getItem(data.getPath());
+    	        } catch(PathNotFoundException pne) {
+    	          continue;
+    	        }
               i++;
 		          def isPreferenceNode = uicomponent.isPreferenceNode(data) ;
 		          def preferenceWS = data.getSession().getWorkspace().getName() ;
