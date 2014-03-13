@@ -1106,7 +1106,7 @@ For licensing, see LICENSE.html or http://ckeditor.com/license
 					elements :
 					[
 						{
-							id : 'txtUrl',
+							id : 'txtUrlLink',
 							type : 'text',
 							label : editor.lang.common.url,
 							style : 'width: 100%',
