@@ -185,12 +185,23 @@ public class DeleteManageComponent extends UIAbstractManagerComponent {
     if (!checkToMoveToTrash || Utils.isInTrash(node))
       processRemoveNode(nodePath, node, event, isMultiSelect);
     else {
+      String nodeName = node.getName();
+      String nodeUUID = null;
+      if (Utils.isReferenceable(node))
+        nodeUUID = node.getUUID();
       boolean moveOK = moveToTrash(nodePath, node, event, isMultiSelect);
       if (moveOK) {
         //Broadcast the event when user move node to Trash
         ListenerService listenerService =  WCMCoreUtils.getService(ListenerService.class);
         ActivityCommonService activityService = WCMCoreUtils.getService(ActivityCommonService.class);
-        Node parent = node.getParent();
+
+        TrashService trashService = WCMCoreUtils.getService(TrashService.class);
+        Node parent = trashService.getTrashHomeNode();
+        if (nodeUUID != null) {
+          node = parent.getSession().getNodeByUUID(nodeUUID);
+        } else {
+          node = parent.getNode(nodeName);
+        }
         if (node.getPrimaryNodeType().getName().equals(NodetypeConstant.NT_FILE)) {
           if (activityService.isBroadcastNTFileEvents(node)) {
             listenerService.broadcast(ActivityCommonService.FILE_REMOVE_ACTIVITY, parent, node);
