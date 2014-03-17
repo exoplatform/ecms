@@ -18,11 +18,11 @@
 	}
 %>
 <div class="resizable">
-	<h5 class="header">Core Elements</h5>
+	<h5 class="header"><%=_ctx.appRes("ElementSet.view.label.core-elements")%></h5>
 	<div class="row-fluid">
 		<ul class="span6">
 			<li class="contentBlock">
-				<div class="title">Title</div>
+				<div class="title"><%=_ctx.appRes("ElementSet.view.label.title")%></div>
 				<% renderDCValues("dc:title") %>
 			</li>
 			

@@ -1,0 +1,227 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<bundle>
+ 
+  <View>
+    <label>
+      <languages>
+        <en>英文</en>
+        <fr>法文</fr>
+        <ru>俄文</ru>
+        <vi>越南文</vi>
+        <nl>荷蘭文</nl>
+        <de>德文</de>
+        <uk>烏克蘭文</uk>
+        <ar>阿拉伯文</ar>
+      </languages>
+    </label>
+  </View>
+ 
+  <!--
+  ################resoucebundle FOR EXO:COMMENT VIEW TEMPLATE#############
+  -->
+  <Comment>
+    <view>
+      <label>
+        <postedBy>最後一條評論發表於</postedBy>
+        <at>在</at>
+        <comments>評論</comments>
+        <show-comments>顯示評論</show-comments>
+        <hide-comments>隱藏評論</hide-comments>
+        <comment-by>發表評論</comment-by>
+        <email>電子郵件：</email>
+        <site>網站</site>
+      </label>
+    </view>
+  </Comment>
+ 
+  <!--
+  ################resoucebundle FOR NT:FILE VIEW TEMPLATE##############
+  -->
+  <File>
+    <view>
+      <label>
+        <not-viewable>此內容不可查看</not-viewable>
+        <using-webDAV>或使用 WebDAV 訪問的內容</using-webDAV>
+        <file-size-too-big>此檔的內容太大。您應該在用戶端下載並打開。</file-size-too-big>
+        <webDAV>WebDAV 視圖</webDAV>
+        <download>下載</download>
+        <htmlview>作為 HTML 視圖</htmlview>
+        <plaintextview>以純文字格式查看</plaintextview>
+      </label>
+    </view>
+  </File>
+ 
+  <!--
+  ################resoucebundle FOR MAIL:DOCUMENT VIEW TEMPLATE##############
+  -->
+  <Mail>
+    <view>
+      <label>
+        <from>從：</from>
+        <to>至：</to>
+        <cc>Cc:</cc>
+        <date>日期:</date>
+        <subject>主題：</subject>
+        <attachment>附件:</attachment>
+      </label>
+    </view>
+  </Mail>
+  <!--
+  ################resoucebundle FOR EXO:VOTE VIEW TEMPLATE##############
+  -->
+  <Vote>
+    <view>
+      <label>
+        <avg-rating>平均等級</avg-rating>
+        <subscription>投票</subscription>
+      </label>
+    </view>
+  </Vote>
+  <!--
+  ################resoucebundle FOR LISTVIEW VIEW TEMPLATE##############
+  -->
+  <ListView>
+    <view>
+      <label>
+        <name>名稱</name>
+        <versionable>無版本</versionable>
+        <exo_owner>擁有者</exo_owner>
+        <exo_dateCreated>建立日期</exo_dateCreated>
+        <exo_dateModified>修改日期</exo_dateModified>
+        <auditing>審核</auditing>
+      </label>
+    </view>
+  </ListView>
+
+  <!--
+  ###################### resoucebundle for exo:addMetadataAction view template ####
+  -->
+  <AddMetadata>
+    <view>
+      <label>
+        <action-name>操作名稱</action-name>
+        <lifecycle>生命週期</lifecycle>
+        <metadata>中繼資料</metadata>
+        <description>描述</description>
+      </label>
+    </view>
+  </AddMetadata>
+
+  <!--
+  ###################### resoucebundle for exo:autoVersioning view template ####
+  -->
+  <AutoVersioning>
+    <view>
+      <label>
+        <action-name>操作名稱</action-name>
+        <lifecycle>生命週期</lifecycle>
+        <description>描述</description>
+      </label>
+    </view>
+  </AutoVersioning>
+  <!--
+  ###################### resoucebundle for exo:enableVersiong view template ####
+  -->
+  <EnableVersioning>
+    <view>
+      <label>
+        <action-name>名稱</action-name>
+        <lifecycle>生命週期</lifecycle>
+        <description>描述</description>
+      </label>
+    </view>
+  </EnableVersioning>
+  <!--
+  ###################### resoucebundle for dc:elementSet view template ####
+  -->
+  <ElementSet>
+    <view>
+      <label>
+        <not-avaliable>不適用</not-avaliable>
+        <core-elements>核心元素</core-elements>
+        <title>標題</title>
+        <creator>建立者</creator>
+        <subject>主題</subject>
+        <source>來源</source>
+        <contributor>貢獻者</contributor>
+        <resource-type>資源類型</resource-type>
+        <date>日期</date>
+        <publisher>發行者</publisher>
+        <description>描述</description>
+        <rights>權利</rights>
+        <relation>關係</relation>
+        <format>格式</format>
+        <coverage>覆蓋範圍</coverage>
+        <identifier>識別碼</identifier>
+        <languages>語言</languages>
+      </label>
+      <action>
+        <add-edit>新增/編輯</add-edit>
+        <cancel>#{word.cancel}</cancel>
+      </action>
+      <tooltip>
+        <cancel>#{word.cancel}</cancel>
+        <add-edit>增加/編輯屬性</add-edit>
+      </tooltip>
+    </view>
+  </ElementSet>
+
+  <ScriptAction>
+    <view>
+      <label> 
+        <isDeep>深</isDeep>
+        <nodetypes>節點類型</nodetypes>
+        <affectedNodeTypeNames>受影響的節點類型</affectedNodeTypeNames>
+        <nodeTypeName>節點類型名稱</nodeTypeName>
+      </label> 
+    </view>
+  </ScriptAction>
+  
+  <AddMetadata>
+    <view>
+      <label>
+        <isDeep>深</isDeep>
+        <nodetypes>節點類型</nodetypes>
+        <affectedNodeTypeNames>受影響的節點類型</affectedNodeTypeNames>
+        <nodeTypeName>節點類型名稱</nodeTypeName>
+      </label> 
+    </view>
+  </AddMetadata>
+
+  <EnableVersioning>
+    <view>
+      <label>
+        <isDeep>深</isDeep>
+        <nodetypes>節點類型</nodetypes> 
+        <affectedNodeTypeNames>受影響的節點類型</affectedNodeTypeNames>
+        <nodeTypeName>節點類型名稱</nodeTypeName>
+      </label> 
+    </view>
+  </EnableVersioning>
+  
+  <AutoVersioning>
+    <view>
+      <label>
+        <isDeep>深</isDeep>
+        <nodetypes>節點類型</nodetypes>
+        <affectedNodeTypeNames>受影響的節點類型</affectedNodeTypeNames>
+        <nodeTypeName>節點類型名稱</nodeTypeName>
+      </label> 
+    </view>
+  </AutoVersioning>
+  
+   <AccessibleMedia>
+    <view>
+      <label>
+      <Play-audio-description-of-this-video>音訊描述</Play-audio-description-of-this-video>
+      <Read-more>閱讀更多</Read-more>
+      <Read-less>閱讀減少</Read-less>
+      <Switch-back-to-original-video>原始視頻</Switch-back-to-original-video>
+      </label>
+      <tooltip>
+      <A-second-media-file-is-available-as-audio-description>第二個媒體檔案是可以作為音訊描述</A-second-media-file-is-available-as-audio-description>
+      </tooltip>
+    </view>
+  </AccessibleMedia>
+ 
+</bundle>

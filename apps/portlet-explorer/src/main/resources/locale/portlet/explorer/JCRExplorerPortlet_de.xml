@@ -446,19 +446,19 @@
     </title>
     <msg>
       <!-- Delte one node is not in trash and have no relation -->
-      <confirm-delete>Möchten Sie das Element "{0}" wirklich löschen?</confirm-delete>
-      <confirm-delete-file>Möchten Sie wirklich die Datei "{0}" löschen ?</confirm-delete-file>
-      <confirm-delete-folder>Möchten Sie wirklich den Ordner "{0}" und alle Unterordner löschen ?</confirm-delete-folder>
+      <confirm-delete>Möchten Sie das Element '{0}' wirklich löschen?</confirm-delete>
+      <confirm-delete-file>Möchten Sie wirklich die Datei '{0}' löschen ?</confirm-delete-file>
+      <confirm-delete-folder>Möchten Sie wirklich den Ordner '{0}' und alle Unterordner löschen ?</confirm-delete-folder>
       
       <!-- Delte one node is in trash and have no relation -->
-      <confirm-delete-permanently>Möchten Sie wirklich das Element "{0}" dauerhaft entfernen?</confirm-delete-permanently>
-      <confirm-delete-file-permanently>Möchten Sie wirklich die Datei "{0}" dauerhaft entfernen?</confirm-delete-file-permanently>
-      <confirm-delete-folder-permanently>Möchten Sie den Ordner "{0}" und alle Unterordner dauerhaft wirklich entfernen?</confirm-delete-folder-permanently>
+      <confirm-delete-permanently>Möchten Sie wirklich das Element '{0}' dauerhaft entfernen?</confirm-delete-permanently>
+      <confirm-delete-file-permanently>Möchten Sie wirklich die Datei '{0}' dauerhaft entfernen?</confirm-delete-file-permanently>
+      <confirm-delete-folder-permanently>Möchten Sie den Ordner '{0}' und alle Unterordner dauerhaft wirklich entfernen?</confirm-delete-folder-permanently>
       
       <!-- Delte one node is not in trash and have relations -->
-      <confirm-delete-has-relations>Möchten Sie das Element "{0}" und seine Referenzen wirklich löschen?</confirm-delete-has-relations>
-      <confirm-delete-file-has-relations>Möchten Sie die Datei "{0}" und ihre Referenzen wirklich löschen?</confirm-delete-file-has-relations>
-      <confirm-delete-folder-has-relations>Möchten Sie den Ordner "{0}" und seine Referenzen wirklich löschen?</confirm-delete-folder-has-relations>
+      <confirm-delete-has-relations>Möchten Sie das Element '{0}' und seine Referenzen wirklich löschen?</confirm-delete-has-relations>
+      <confirm-delete-file-has-relations>Möchten Sie die Datei '{0}' und ihre Referenzen wirklich löschen?</confirm-delete-file-has-relations>
+      <confirm-delete-folder-has-relations>Möchten Sie den Ordner '{0}' und seine Referenzen wirklich löschen?</confirm-delete-folder-has-relations>
       
       <!-- Delte multiple nodes, not in Trash, have no relations -->
       <confirm-delete-multi-nodes-generic>Möchten Sie die {0} ausgewählten Elemente wirklich löschen?</confirm-delete-multi-nodes-generic>  
@@ -495,7 +495,7 @@
       <feedback-restore>"{0}" wurde erfolgreich wiederhergestellt.</feedback-restore>
       <feedback-restore-multi>{0} Elemente wurden erfolgreich wiederhergestellt.</feedback-restore-multi>
       
-      <confirm-restore>Ein Knoten mit dem gleichen Namen ist bereits im alten Speicherort des Knotens "{0}" vorhanden. Möchten Sie diesen Knoten wirklich wiederherstellen?</confirm-restore>
+      <confirm-restore>Ein Knoten mit dem gleichen Namen ist bereits im alten Speicherort des Knotens '{0}' vorhanden. Möchten Sie diesen Knoten wirklich wiederherstellen?</confirm-restore>
       <confirm-move>Möchten Sie diese(n) Knoten wirklich verschieben?</confirm-move>
       <node-cut>Der Knoten '{0}' wurde ausgeschnitten.</node-cut>
       <execute-successfully>Die benutzerdefinierte Aktion '{0}' wurde ausgeführt.</execute-successfully>

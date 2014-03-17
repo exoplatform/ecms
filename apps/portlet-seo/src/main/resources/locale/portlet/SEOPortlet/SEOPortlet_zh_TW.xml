@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<bundle>
+  <UISEOForm>
+    <label>  
+      <title>標題：</title>
+      <description>描述：</description>
+      <keywords>關鍵字：</keywords>
+      <language>語言：</language>
+      <robots>機器人：</robots>
+      <sitemap>網站地圖：</sitemap>
+      <sitemapvisible>在網站地圖中可見</sitemapvisible>
+    <isInherited>繼承自父頁面</isInherited>
+      <priority>優先:</priority>
+      <frequency>頻率：</frequency>
+      <select-language>選擇一種語言</select-language>
+      <option>
+        <Always>總是</Always>
+        <Hourly>每小時</Hourly>
+        <Daily>每日</Daily>
+        <Weekly>每週</Weekly>
+        <Monthly>每月</Monthly>
+        <Yearly>每年</Yearly>
+        <Never>從來沒有</Never>
+      </option> 
+    </label>
+    <tip>
+  <priority>有效值範圍從 0.0 到 1.0</priority>
+  </tip>   
+    <action>
+      <Save>#{word.save}</Save>
+      <Cancel>#{word.cancel}</Cancel>
+    </action>
+    <msg>
+      <repository-exception>保存網頁的中繼資料時發生意外的錯誤。</repository-exception>
+      <confirm-delete>您確定要刪除這些 SEO 資料嗎?</confirm-delete>      
+    </msg>
+    <title>
+    <seo-delete>刪除</seo-delete>
+    </title>
+  <help> 
+  <priority>有效值範圍從 0.0 到 1.0。</priority>
+  <description>幫助搜索者： 他們正在尋找一個連結，讓他們知道下面的頁面有。</description>
+  <keywords>在頁面中以逗號分隔是最重要的條件。</keywords>  
+  </help>  
+  </UISEOForm>
+  <UISEOPopupWindow>
+  <title>
+      <UISEOForm>搜索引擎優化管理</UISEOForm>
+  </title>
+  </UISEOPopupWindow>    
+  <UISEOToolbarForm>
+  <title>
+      <seo>搜索引擎優化管理</seo>
+  </title>
+  <label>
+    <seo>搜索引擎優化</seo>
+  </label>
+  </UISEOToolbarForm>  
+  <FloatNumberValidator>
+    <msg>
+      <Invalid-number>優先順序欄位的值必須是數字格式。有效值範圍是從 0.0 到 1.0。</Invalid-number>
+    </msg>
+  </FloatNumberValidator>  
+  
+</bundle>

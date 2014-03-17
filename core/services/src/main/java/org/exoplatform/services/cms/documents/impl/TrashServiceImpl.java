@@ -188,7 +188,13 @@ public class TrashServiceImpl implements TrashService {
 
       trashSession.save();
 
-      Node nodeInTrash =  trashSession.getRootNode().getNode(actualTrashPath.substring(1));
+      Node nodeInTrash = null;
+      if (nodeUUID != null) {
+        nodeInTrash = trashSession.getRootNode().getSession().getNodeByUUID(nodeUUID);
+      } else {
+        nodeInTrash = trashSession.getRootNode().getNode(actualTrashPath.substring(1));
+      }
+
       nodeInTrash.addMixin(EXO_RESTORE_LOCATION);
       nodeInTrash.setProperty(RESTORE_PATH, fixRestorePath(restorePath));
       nodeInTrash.setProperty(RESTORE_WORKSPACE, nodeWorkspaceName);

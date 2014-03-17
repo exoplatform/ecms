@@ -2,7 +2,7 @@
 <bundle>
   <UIPresentationContainer>
     <title>
-      <QuickEdit>Edit in Content Explorer</QuickEdit>
+      <QuickEdit>Изменить в Обозревателе Контента</QuickEdit>
       <print>Напечатать эту страницу</print>
       <FastPublish>Опубликовать</FastPublish>
     </title>
@@ -34,7 +34,7 @@
   </UISCVContextualRadioBox>
   <UIPreferencesPopupWindows>
     <title>
-      <UISCVPreferences>Content Detail Preferences</UISCVPreferences>
+      <UISCVPreferences>Настройки детализации содержимого</UISCVPreferences>
     </title>
   </UIPreferencesPopupWindows>
   <UISCVPreferences>
@@ -45,34 +45,34 @@
       <Print>Печать</Print>
       <Close>#{word.close}</Close>
     </action>
-    <title>Content Detail Preferences</title>
+    <title>Настройки детализации содержимого</title>
     <label>
       <Back>Вернуться на предыдущую страницу</Back>
       <Edit>Редактировать</Edit>
       <Preferences>Настройки</Preferences>
-      <Title>Content Detail Preferences</Title>
+      <Title>Настройки детализации содержимого</Title>
       <UISCVShowTitleConfigurationCheckBox>Показать заголовок</UISCVShowTitleConfigurationCheckBox>
       <UISCVShowDateConfigurationCheckBox>Показать дату</UISCVShowDateConfigurationCheckBox>
       <UISCVShowOptionBarConfigurationCheckBox>Показать панель опций</UISCVShowOptionBarConfigurationCheckBox>
       <DisplaySettingBlock>Настройки экрана</DisplaySettingBlock>
-      <ContentPathBlock>Content Selection</ContentPathBlock>
+      <ContentPathBlock>Выбор контента</ContentPathBlock>
       <UISCVConfigItemPathFormInputSet>Путь к содержимому</UISCVConfigItemPathFormInputSet>
     <UISCVContentPathConfigurationInputBox>Путь к содержимому</UISCVContentPathConfigurationInputBox>
       <Advance>Расширенные</Advance>
       <ContextCaption>Динамическая навигация</ContextCaption>
       <UISCVContextualRadioBox>Контекстуальное содержание</UISCVContextualRadioBox>
-      <UISCVParameterInputBox>by</UISCVParameterInputBox>
+      <UISCVParameterInputBox/>
       <PrintSettingBlock>Настройки печати</PrintSettingBlock>
-      <UISCVPrintPageParameter>with</UISCVPrintPageParameter>
+      <UISCVPrintPageParameter>с</UISCVPrintPageParameter>
       <UISCVConfigPrintPageFormInputSet>Показать на странице</UISCVConfigPrintPageFormInputSet>
       <LockStatus>Заблокировать</LockStatus>
       <CacheManagement>Видимость контента</CacheManagement>
-      <UISCVCacheRadioBox>Share Content</UISCVCacheRadioBox>
+      <UISCVCacheRadioBox>Поделиться контентом</UISCVCacheRadioBox>
     </label>
     <help>
       <ContentPathBlock>Выберите контент, который вы хотите показать. Выбор по умолчанию будет заменен в динамическом режиме при активации опции Динамическая Навигация (см. Режим расширенных настроек ниже).</ContentPathBlock>
-      <DisplaySettingBlock>You can show or hide the Option bar used to show the print link. Title and Date displays are also optional.</DisplaySettingBlock>
-      <ContextualHelp>Activates Dynamic Navigation. The content can be changed dynamically by another URL-based parameter.</ContextualHelp>
+      <DisplaySettingBlock>Вы можете показать или скрыть меню Опции, которое используется чтобы показать ссылку для печати. Отображение Заголовка и Даты также опционально.</DisplaySettingBlock>
+      <ContextualHelp>Активирует Динамическую Навигацию. Контент может быть динамически изменен другим параметром на основе URL.</ContextualHelp>
       <ParameterHelp>Этот параметр будет использоваться для получения содержимого, если включена Динамическая Навигация.</ParameterHelp>
     </help>
     <msg>
@@ -80,7 +80,7 @@
     </msg>
     <tab>
       <label>
-        <UISCVConfigContentFormInputSet>Content Selection</UISCVConfigContentFormInputSet>
+        <UISCVConfigContentFormInputSet>Выбор контента</UISCVConfigContentFormInputSet>
         <UISCVConfigDisplayFormInputSet>Настройки экрана</UISCVConfigDisplayFormInputSet>
         <UISCVConfigPrintFormInputSet>Настройки печати</UISCVConfigPrintFormInputSet>
         <UISCVConfigAdvancedFormInputSet>Расширенные</UISCVConfigAdvancedFormInputSet>
@@ -100,20 +100,20 @@
   </UISCVConfigPrintPageFormInputSet>
   <PublicationStates>
     <archived>В архиве</archived>
-    <obsolete>Obsolete</obsolete>
+    <obsolete>Устаревшие</obsolete>
     <unpublished>Не опубликовано</unpublished>
-    <enrolled>Enrolled</enrolled>
+    <enrolled>Подключенный</enrolled>
     <draft>Черновик</draft>
-    <pending>Pending</pending>
+    <pending>В ожидании</pending>
     <approved>Утверждено</approved>
     <inreview>На рассмотрении</inreview>
-    <staged>Staged</staged>
+    <staged>Размещенный</staged>
     <published>Опубликовано</published>
   </PublicationStates>
   <UISCVCacheRadioBox>
     <label>
-      <Enable>Restricted by Authentication</Enable>
-      <Disable>Restricted by User roles</Disable>
+      <Enable>Ограничено механизмом аутентификации</Enable>
+      <Disable>Ограничивается ролями пользователей</Disable>
     </label>
   </UISCVCacheRadioBox>
 </bundle>

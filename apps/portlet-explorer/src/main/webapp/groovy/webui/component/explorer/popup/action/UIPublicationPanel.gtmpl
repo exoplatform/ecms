@@ -115,6 +115,9 @@
 	<tbody>
     <%
       List<Node> revisions = uicomponent.getRevisions();
+      if (isCurrentRevision("published", currentRevision)) {
+    	  revisions.remove(0);
+      }
       if (revisions.isEmpty()) {
         %>
           <tr>

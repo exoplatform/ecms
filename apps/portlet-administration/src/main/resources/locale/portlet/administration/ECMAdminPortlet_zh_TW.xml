@@ -1,0 +1,2579 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<bundle>
+  <!--
+  ################################################################################
+  #             org.exoplatform.ecm.webui.component.admin.UIECMAdminControlPanel #
+  ################################################################################
+  -->
+  <UIECMAdminControlPanel>
+    <tab>
+      <label>
+        <Templates>範本</Templates>
+        <Explorer>資源管理器</Explorer>
+        <Repository>資源庫</Repository>
+        <Advanced>進階選項</Advanced>
+      </label>
+    </tab>    
+    <label>     
+      <UITaxonomyManagerTrees>類別</UITaxonomyManagerTrees>
+      <UIMetadataManager>中繼資料</UIMetadataManager>
+      <UINamespaceManager>命名空間</UINamespaceManager>
+      <UINodeTypeManager>節點類型</UINodeTypeManager>
+      <UITemplatesManager>文件</UITemplatesManager>
+   <UICLVTemplatesManager>清單</UICLVTemplatesManager>
+      <UIViewManager>檢視</UIViewManager>
+      <UIDriveManager>磁碟機</UIDriveManager>
+      <UIQueriesManager>查詢</UIQueriesManager>
+      <UIActionManager>操作</UIActionManager>
+      <UIScriptManager>腳本</UIScriptManager>
+      <UIUnLockManager>鎖</UIUnLockManager>
+      <UIFolksonomyManager>標籤</UIFolksonomyManager>      
+    </label>
+    <msg>
+      <access-denied>訪問被拒絕。您沒有權限來執行此操作。</access-denied>
+    </msg>
+  </UIECMAdminControlPanel>
+  <!--
+  ################################################################################
+  #             org.exoplatform.ecm.webui.component.admin.UITaxonomy #
+  ################################################################################
+  -->
+  <UITaxonomyWorkingArea>
+    <msg>
+      <referential-integrity>無法讀取原始檔案或目標類別是一個子類別。</referential-integrity>
+      <no-taxonomy-selected>您必須複製或剪下至少一個類別。</no-taxonomy-selected>
+      <node-is-cutting>不能在這裡貼上。類別節點 '{0}' 可能被剪下。</node-is-cutting>
+      <can-not-paste>剪貼簿中沒有任何資料。</can-not-paste>
+      <reference-exception>不能刪除此類別，因為它當前引用的內容。</reference-exception>
+      <path-error>刪除此類別節點時出錯。</path-error>
+    </msg>
+  </UITaxonomyWorkingArea>
+  <UITaxonomyManager>
+    <msg>
+      <confirm-delete>是否確定要刪除此類別?</confirm-delete>
+    </msg>
+    <title>
+      <add>新增</add>
+      <paste>貼上</paste>
+      <cut>剪下</cut>
+      <copy>複製</copy>
+      <remove>刪除</remove>
+    </title>
+  </UITaxonomyManager>
+  
+  <!--
+  ################################################################################
+  #    org.exoplatform.ecm.webui.component.admin.taxonomy.UITaxonomyTreeContainer#
+  ################################################################################
+  -->
+  <UITaxonomyTreeContainer>
+    <tab>
+      <info>
+        <UITaxonomyTreeMainForm>指定的類別名稱、 工作區和首頁的路徑。</UITaxonomyTreeMainForm>
+        <UIPermissionTreeManager>設定類別樹的權限。</UIPermissionTreeManager>
+        <UIActionTaxonomyManager>新增一個動作類別樹完成建立或更新。</UIActionTaxonomyManager>
+        <UITaxonomyTreeCreateChild>通過增加、 複製、 剪下和選擇權限編輯分類樹。</UITaxonomyTreeCreateChild>
+      </info>
+    </tab>
+    <msg>
+      <not-exist-tree>類別樹並不存在。</not-exist-tree>
+    </msg>
+  </UITaxonomyTreeContainer>
+  
+  <!--
+##########################################################################################
+#     org.exoplatform.ecm.webui.component.admin.taxonomy.UITaxonomyTreeMainForm          #
+##########################################################################################
+-->
+  <UITaxonomyTreeMainForm>
+    <action>
+      <Reset>重置</Reset>
+    </action>
+    <msg>
+      <name-not-allowed>禁止的名稱</name-not-allowed>
+      <name-emty>樹名稱是必填的。</name-emty>
+      <homePath-emty>首頁路徑是必填的。</homePath-emty>
+      <targetPath-emty>目標路徑是必填的。</targetPath-emty>
+      <taxonomytree-existed>類別樹名稱已經存在。</taxonomytree-existed>
+    </msg>
+  </UITaxonomyTreeMainForm>
+
+  <TaxonomyTreeMainForm>
+    <label>
+      <TaxoTreeName>名稱</TaxoTreeName>
+      <TaxoTreeWorkspace>工作區</TaxoTreeWorkspace>
+      <TaxoTreeHomePath>首頁路徑</TaxoTreeHomePath>
+    </label>
+  </TaxonomyTreeMainForm>
+
+  <TaxonomyTreeHomePath>
+    <title>
+      <AddPath>增加路徑</AddPath>
+    </title>
+  </TaxonomyTreeHomePath>
+  
+  <!--
+##########################################################################################
+#     org.exoplatform.ecm.webui.component.admin.taxonomy.tree.info.UIPermissionTreeInfo  #
+##########################################################################################
+-->
+<UIPermissionTreeInfo>
+<action>
+<title>
+<Delete>刪除</Delete>
+<Edit>編輯</Edit>
+</title>
+</action>
+<header>
+<usersOrGroups>使用者或群組</usersOrGroups>
+<read>讀取</read>
+<addNode>增加節點</addNode>
+<setProperty>設定屬性</setProperty>
+<remove>刪除</remove>
+<action>操作</action>
+</header>
+</UIPermissionTreeInfo>
+
+<!--
+##########################################################################################
+#     org.exoplatform.ecm.webui.component.admin.taxonomy.tree.info.UIPermissionTreeForm  #
+##########################################################################################
+-->
+  <UIPermissionTreeForm>
+    <msg>
+      <have-not-any-permission>請指定此節點至少一個權限。</have-not-any-permission>
+    </msg>
+  </UIPermissionTreeForm>
+
+<!--
+################################################################################
+#     org.exoplatform.ecm.webui.component.admin.taxonomy.UIActionForm          #
+################################################################################
+-->
+
+  <UIActionForm>
+    <title>將操作增加到類別樹</title>
+    <action>
+      <Save>#{word.save}</Save>
+    </action>
+    <msg>
+      <name-not-allowed>操作名稱中不允許空白名稱或特殊字元。</name-not-allowed>
+      <path-invalid>此路徑不正確。</path-invalid>
+      <taxonomy-existed>類別樹已經存在。</taxonomy-existed>
+      <taxonomy-node-existed>類別節點已存在。</taxonomy-node-existed>
+      <no-permission-add>你並沒有增加操作的權利。</no-permission-add>
+      <not-created-tree>類別樹尚未建立。</not-created-tree>
+    </msg>
+  </UIActionForm>
+
+  <!--
+  ################################################################################
+  #             org.exoplatform.ecm.webui.component.admin.UITemplatesManager #
+  ################################################################################
+  -->
+  <UITemplatesList>
+    <header>
+      <name>範本名稱</name>
+      <action>操作</action>
+    </header>
+  </UITemplatesList>
+  <!--
+  ################################################################################
+  #             org.exoplatform.ecm.webui.component.admin.UINamespaceForm  #
+  ################################################################################
+  -->
+  <NameSpacePopup>
+    <title>
+      <UINamespaceForm>命名空間表單</UINamespaceForm>
+    </title>
+  </NameSpacePopup>
+  <UINamespaceForm>
+    <title>註冊新的命名空間</title>
+    <label>
+      <namespace>命名空間的首碼</namespace>
+      <uri>URI</uri>
+    </label>
+    <action>
+      <Save>#{word.save}</Save>
+      <Cancel>#{word.cancel}</Cancel>
+    </action>
+    <msg>
+      <register-unsuccessfull>命名空間或 URI 已經存在。</register-unsuccessfull>
+      <prefix-null>請指定的命名空間的首碼。</prefix-null>
+      <uri-null>請指定的命名空間的 URI。</uri-null>
+    </msg>
+  </UINamespaceForm>
+  <!--
+  ################################################################################
+  #      org.exoplatform.ecm.webui.component.admin.namespace.UINamespaceList #
+  ################################################################################
+  -->
+  <UINamespaceList>
+    <header>
+      <prefix>首碼</prefix>
+      <uri>命名空間 URI</uri>
+      <action>操作</action>
+    </header>
+    <action>
+      <AddNamespace>註冊</AddNamespace>
+    </action>
+  </UINamespaceList>
+  <NamespacePopup>
+    <title>
+      <UINamespaceForm>註冊新的命名空間</UINamespaceForm>
+    </title>
+  </NamespacePopup>
+  <!--
+  ################################################################################
+  #             org.exoplatform.ecm.webui.component.admin.UIMetadataList #
+  ################################################################################
+  -->
+  <UIMetadataList>
+    <label>
+      <false>false</false>
+      <true>true</true>
+      <True>true</True>
+      <False>false</False>
+    </label>
+    <title>
+      <view>查看</view>
+      <edit>編輯</edit>
+      <delete>刪除</delete>
+    </title>
+    <header>
+      <icon>圖示</icon>
+      <name>中繼資料</name>
+      <type>類型</type>
+      <internalUse>內部使用</internalUse>
+      <action>操作</action>
+    </header>
+    <msg>
+      <confirm-delete>是否確定要刪除此中繼資料?</confirm-delete>
+      <delete-successful>已成功刪除範本的 '{0}'。</delete-successful>
+      <path-not-found-exception>此中繼資料已被刪除或更改。請按一下刷新按鈕。</path-not-found-exception>
+    </msg>
+    <action>
+      <Add>增加中繼資料</Add>
+      <Cancel>#{word.cancel}</Cancel>
+    </action>
+  </UIMetadataList>
+  <MetadataPopupAddNew>
+    <title>
+      <UIMetadataForm>Add New Metadata's Template</UIMetadataForm>
+    </title>
+  </MetadataPopupAddNew>
+  <MetadataPopupEdit>
+    <title>
+      <UIMetadataForm>編輯中繼資料範本</UIMetadataForm>
+    </title>
+  </MetadataPopupEdit>
+  <MetataPermissionPopup>
+    <title>
+      <MetadataPermission>設定的權限</MetadataPermission>
+      <QueriesPermissionBrowse>增加權限</QueriesPermissionBrowse>
+    </title>
+  </MetataPermissionPopup>
+  <!--
+  ################################################################################
+  #    org.exoplatform.ecm.webui.component.admin.metadata.UIMetadataForm #
+  ################################################################################
+  -->
+  <UIMetadataForm>
+    <title>映射中繼資料</title>
+    <action>
+      <Cancel>#{word.cancel}</Cancel>
+      <Save>套用</Save>
+    </action>
+    <header>
+      <icon>圖示</icon>
+      <label>節點名稱</label>
+      <input>操作</input>
+    </header>
+    <label>
+      <dialogTemplate>對話方塊範本：</dialogTemplate>
+      <viewTemplate>視圖範本：</viewTemplate>
+      <metadataName>中繼資料名稱：</metadataName>
+      <viewPermission>權限：</viewPermission>
+      <permission>UIMetadataForm</permission>
+      <metadataLabel>標籤：</metadataLabel>
+    </label>
+    <tab>
+      <label>
+        <metadataTypeTab>中繼資料類型</metadataTypeTab>
+        <dialogTab>對話方塊範本</dialogTab>
+        <viewTab>視圖範本</viewTab>
+      </label>
+    </tab>
+  </UIMetadataForm>
+  <!--
+  ################################################################################
+  #    org.exoplatform.ecm.webui.component.admin.metadata.UIMetadataView #
+  ################################################################################
+  -->
+  <UIMetadataView>
+    <header>
+      <name>元素名稱</name>
+      <type>類型</type>
+      <description>描述</description>
+      <isMixin>是混合類型</isMixin>
+      <orderable>兒童可訂購</orderable>
+    </header>
+    <info>
+      <description>描述</description>
+    </info>
+    <tab>
+      <element>元素</element>
+      <metadataView>中繼資料資訊</metadataView>
+    </tab>
+    <action>
+      <Cancel>#{word.close}</Cancel>
+      <Back>#{word.back}</Back>
+    </action>
+  </UIMetadataView>
+  <ViewMetadataPopup>
+    <title>
+      <UIMetadataView>中繼資料資訊</UIMetadataView>
+    </title>
+  </ViewMetadataPopup>
+  <!--
+  ################################################################################
+  #             org.exoplatform.ecm.webui.component.admin.UIDriveManager #
+  ################################################################################
+  -->
+  <UIDriveList>
+    <header>
+      <icon>圖示</icon>
+      <name>名稱</name>
+      <workspace>工作區</workspace>
+      <homePath>首頁路徑</homePath>
+      <permissions>權限</permissions>
+      <views>查看</views>
+      <action>操作</action>
+    </header>
+    <tooltip>
+      <Delete>刪除</Delete>
+      <EditInfo>編輯</EditInfo>
+    </tooltip>
+    <msg>
+      <confirm-delete>是否確定要刪除這個磁碟機?</confirm-delete>
+    </msg>
+    <action>
+      <AddDrive>增加磁碟機</AddDrive>
+    </action>
+    <label>
+      <permission>{0} {1} 中</permission>
+    </label>
+  </UIDriveList>
+  <UIDriveForm>
+    <action>
+      <Cancel>#{word.cancel}</Cancel>
+      <Save>#{word.save}</Save>
+      <Back>#{word.back}</Back>
+      <Refresh>#{word.refresh}</Refresh>
+    </action>
+    <msg>
+      <drive-exists>磁碟機已存在。</drive-exists>
+      <workspace-path-invalid>工作區的路徑不正確。</workspace-path-invalid>
+      <drive-views-invalid>請選擇一個視圖。</drive-views-invalid>
+      <icon-not-found>找不到圖示。</icon-not-found>
+      <permission-null>此磁碟機您必須設定權限。</permission-null>
+      <allowCreateFolders>您必須選擇資料夾類型。</allowCreateFolders>
+      <name-null>請輸入該磁碟機的名稱。</name-null>
+      <fileName-invalid>該磁碟機的名稱有一些不正確字元。</fileName-invalid>
+    </msg>
+    <tab>
+      <label>
+        <DriveInputSet>磁碟機</DriveInputSet>
+        <ViewsInputSet>應用視圖</ViewsInputSet>
+        <PermissionInputSet>設定權限</PermissionInputSet>
+      </label>
+    </tab>
+    <label>
+      <name>名稱：</name>
+      <workspace>工作區：</workspace>
+      <homePath>首頁路徑：</homePath>
+      <icon>工作區的圖示：</icon>
+      <viewPreferences>顯示引用的文件：</viewPreferences>
+      <viewNonDocument>顯示非文件節點：</viewNonDocument>
+      <viewSideBar>顯示側欄：</viewSideBar>
+      <permissions>權限：</permissions>
+      <showHiddenNode>顯示隱藏的節點：</showHiddenNode>
+      <allowCreateFolders>允許建立資料夾：</allowCreateFolders>
+      <Admin>Admin：</Admin>
+      <Categories>類別：</Categories>
+      <Icons>圖示：</Icons>
+      <List>清單：</List>
+      <Web>Web：</Web>
+    </label>
+  </UIDriveForm>
+  <AddDriveManagerPopup>
+    <title>
+      <UIDriveForm>增加磁碟機</UIDriveForm>
+    </title>
+  </AddDriveManagerPopup>
+  <EditDriveManagerPopup>
+    <title>
+      <UIDriveForm>編輯磁碟機</UIDriveForm>
+    </title>
+  </EditDriveManagerPopup>
+  <UITreeList>
+    <info>
+      <child-not-found>找不到子節點。</child-not-found>
+    </info>
+    <header>
+      <name>名稱</name>
+      <action>操作</action>
+    </header>
+  </UITreeList>
+  
+  <UIRepositoryList>
+    <titlebar>
+      <label>管理 ECM 主要功能</label>
+    </titlebar>
+  </UIRepositoryList>
+  
+  <!--
+  ################################################################################
+  #    org.exoplatform.ecm.webui.component.admin.nodetype.UINodeTypeManager #
+  ################################################################################
+  -->
+  <UINodeTypeManager>
+    <header>
+      <icon>圖示</icon>
+      <label>節點名</label>
+      <input>操作</input>
+    </header>
+    <action>
+      <Save>#{word.save}</Save>
+    </action>
+  </UINodeTypeManager>
+  <!--
+  ################################################################################
+  #    org.exoplatform.ecm.webui.component.admin.nodetype.UINodeTypeList #
+  ################################################################################
+  -->
+  <UINodeTypeList>
+    <label>
+      <true>true</true>
+      <false>false</false>
+    </label>
+    <header>
+      <icon>圖示</icon>
+      <nodeType>節點類型</nodeType>
+      <mixinType>混合類型</mixinType>
+      <orderable>可訂購的子節點</orderable>
+      <action>操作</action>
+    </header>
+    <action>
+      <Export>匯出</Export>
+      <Import>匯入</Import>
+      <Add>新增</Add>
+    </action>
+    <tooltip>
+      <View>查看</View>
+      <Edit>編輯</Edit>
+      <Delete>刪除</Delete>
+    </tooltip>
+    <msg>
+      <confirm-delete>確定要刪除此節點類型嗎?</confirm-delete>
+    </msg>
+  </UINodeTypeList>
+  <!--
+  ################################################################################
+  #    org.exoplatform.ecm.webui.component.admin.nodetype.UINodeTypeOptionList #
+  ################################################################################
+  -->
+  <UINodeTypeOptionList>
+    <action>
+      <Save>#{word.save}</Save>
+      <Add>新增</Add>
+    </action>
+    <header>
+      <icon>圖示</icon>
+      <label>節點名稱</label>
+      <input>操作</input>
+    </header>
+  </UINodeTypeOptionList>
+  <!--
+  ################################################################################
+  #    org.exoplatform.ecm.webui.component.admin.nodetype.UINodeTypeForm #
+  ################################################################################
+  -->
+  <UINodeTypeForm>
+    <tab>
+      <label>
+        <nodeTypeDefinition>節點類型</nodeTypeDefinition>
+        <propertyDefinition>屬性</propertyDefinition>
+        <childNodeDefinition>子節點</childNodeDefinition>
+        <superTypeTab>父類型</superTypeTab>
+        <DefaultTypeTab>主要預設</DefaultTypeTab>
+        <RequiredTypeTab>主要所需</RequiredTypeTab>
+        <Contraints>約束</Contraints>
+      </label>
+    </tab>
+    <label>
+      <propertiesDefinitions>屬性定義</propertiesDefinitions>
+      <childDefinitions>子節點定義</childDefinitions>
+      <namespace>名稱空間</namespace>
+      <propertyNamespace>名稱空間</propertyNamespace>
+      <nodeTypeName>節點類型名稱</nodeTypeName>
+      <mixinType>是混合類型</mixinType>
+      <hasOrderableChildNodes>可訂購的子節點</hasOrderableChildNodes>
+      <primaryItemName>主要項目名稱</primaryItemName>
+      <superTypes>父類型</superTypes>
+      <propertyname>定義名稱</propertyname>
+      <requiredType>所需的類型</requiredType>
+      <multiple>是多個</multiple>
+      <mandatory>是強制性的</mandatory>
+      <autoCreated>是自動建立</autoCreated>
+      <parentversion>在母版上</parentversion>
+      <protected>是受保護</protected>
+      <constraints>值</constraints>
+      <UIFormTableInputSet>UIFormTableInputSet</UIFormTableInputSet>
+      <sameNameSiblings>是同名同級</sameNameSiblings>
+      <childNamespace>名稱空間</childNamespace>
+      <childMandatory>是強制性的</childMandatory>
+      <childAutocreated>是自動建立</childAutocreated>
+      <childParentversion>在母版上</childParentversion>
+      <childProtected>是受保護</childProtected>
+      <childNodename>定義名稱</childNodename>
+      <requiredPrimaryType>所需的主要類型</requiredPrimaryType>
+      <defaultPrimaryType>預設的主要類型</defaultPrimaryType>
+      <valueconstraints>約束的值</valueconstraints>
+    </label>
+    <action>
+      <Cancel>#{word.cancel}</Cancel>
+      <Save>#{word.save}</Save>
+      <SaveDraft>保存為草稿</SaveDraft>
+      <AddProperty>增加屬性</AddProperty>
+      <AddChild>增加子</AddChild>
+      <AddConstraints>增加約束</AddConstraints>
+      <Back>#{word.back}</Back>
+      <AddType>增加類型</AddType>
+      <AddValue>新增</AddValue>
+      <CancelConstraints>#{word.cancel}</CancelConstraints>
+      <CancelTab>#{word.cancel}</CancelTab>
+      <UpdateChild>#{word.update}</UpdateChild>
+      <CancelChild>#{word.cancel}</CancelChild>
+      <UpdateProperty>#{word.update}</UpdateProperty>
+      <CancelProperty>#{word.cancel}</CancelProperty>
+      <Close>#{word.close}</Close>
+    </action>
+    <msg>
+      <register-successfully>'{0}' 節點類型已成功註冊。</register-successfully>
+      <supertype-is-madatory>父類型是強制性的當你註冊一個新的節點類型。請選擇至少一個父類型。</supertype-is-madatory>
+      <register-failed>節點類型註冊不成功。它已經存在或父類型無效。</register-failed>
+      <nodeType-name>節點類型名稱是必填的。</nodeType-name>
+      <fileName-invalid>檔案名稱中有一些不正確字元。</fileName-invalid>
+      <node-type-exists>'{0}' 節點類型已經存在。</node-type-exists>
+      <node-type-name>節點類型名稱不正確。</node-type-name>
+      <values-error>請選擇只有一個預設的主要類型的節點類型。</values-error>
+      <confirm-delete-child>是否確定要刪除此子節點?</confirm-delete-child>
+      <confirm-delete-property>確定要刪除此屬性嗎?</confirm-delete-property>
+    </msg>
+  </UINodeTypeForm>
+  <UIPropertyDefinitionForm>
+    <tab>
+      <label>
+        <constraints>約束</constraints>
+        <UIFormMultiValueInputSet>約束</UIFormMultiValueInputSet>
+      </label>
+    </tab>
+    <msg>
+      <property-name>屬性定義的名稱不正確。</property-name>
+      <not-supported-value-constraints>這需求類型不支援值約束。</not-supported-value-constraints>
+    </msg>
+  </UIPropertyDefinitionForm>
+  <UIChildNodeDefinitionForm>
+    <msg>
+      <child-name>子節點名稱是必填的。</child-name>
+      <child-invalid>子節點名稱中包含一些不正確字元。</child-invalid>
+      <default-node-type-not-found>找不到預設的節點類型。</default-node-type-not-found>
+      <requiredPrimaryType>所需的主要類型是必填的。</requiredPrimaryType>
+      <defaultPrimaryType>預設的主要類型是必填的。</defaultPrimaryType>
+    </msg>
+  </UIChildNodeDefinitionForm>
+  <defaultPrimaryTypePopup>
+    <title>
+      <FormdefaultPrimaryTypePopup>選擇預設的主要類型</FormdefaultPrimaryTypePopup>
+    </title>
+  </defaultPrimaryTypePopup>
+  <requiredPrimaryTypePopup>
+    <title>
+      <FormrequiredPrimaryTypePopup>選擇所需的主要類型</FormrequiredPrimaryTypePopup>
+    </title>
+  </requiredPrimaryTypePopup>
+  <superTypesPopup>
+    <title>
+      <FormsuperTypesPopup>選擇父類型</FormsuperTypesPopup>
+    </title>
+  </superTypesPopup>
+  <NodeTypePopup>
+    <title>
+      <UINodeTypeForm>增加/編輯節點類型定義</UINodeTypeForm>
+    </title>
+  </NodeTypePopup>
+  <ViewNodeTypePopup>
+    <title>
+      <UINodeTypeForm>查看節點類型資訊</UINodeTypeForm>
+    </title>
+  </ViewNodeTypePopup>
+  <!--
+  ################################################################################
+  #    org.exoplatform.ecm.webui.component.admin.nodetype.UINodeTypeExport   #
+  ################################################################################
+  -->
+  <UINodeTypeExport>
+    <header>
+      <icon>圖示</icon>
+      <label>節點名稱</label>
+      <input>操作</input>
+    </header>
+    <action>
+      <Cancel>#{word.cancel}</Cancel>
+      <Export>匯出</Export>
+      <UncheckAll>全部取消</UncheckAll>
+      <CheckAll>選擇所有</CheckAll>
+    </action>
+    <title>匯出節點類型</title>
+    <msg>
+      <item-null>請至少選擇您要匯出的一個節點。</item-null>
+    </msg>
+  </UINodeTypeExport>
+  <NodeTypeExportPopup>
+    <title>
+      <UINodeTypeExport>匯出節點類型</UINodeTypeExport>
+    </title>
+  </NodeTypeExportPopup>
+  <!--
+  ################################################################################
+  #    org.exoplatform.ecm.webui.component.admin.nodetype.UINodeTypeOptionList   #
+  ################################################################################
+  -->
+  <!--
+  ################################################################################
+  #    org.exoplatform.ecm.webui.component.admin.nodetype.UINodeTypeUpload   #
+  ################################################################################
+  -->
+  <UINodeTypeUpload>
+    <label>
+      <upload>檔案名稱</upload>
+    </label>
+    <action>
+      <Cancel>#{word.cancel}</Cancel>
+      <Upload>上傳</Upload>
+    </action>
+    <title>從 XML 檔案匯入節點類型</title>
+    <msg>
+      <filename-error>瀏覽要匯入節點類型的檔案。</filename-error>
+      <data-file-error>只有.xml 或.ZIP 檔案可以匯入。</data-file-error>
+      <data-invalid>資料不正確。請檢查您的檔案類型，然後再試一次。</data-invalid>
+      <nodetype-exist>'{0}' 節點類型已經存在。</nodetype-exist>
+      <namespace-invalid>'{0}' 命名空間不正確。</namespace-invalid>
+    </msg>
+  </UINodeTypeUpload>
+  <!--
+  ################################################################################
+  #    org.exoplatform.ecm.webui.component.admin.nodetype.UINodeTypeImport   #
+  ################################################################################
+  -->
+  <UINodeTypeImport>
+    <action>
+      <Cancel>#{word.cancel}</Cancel>
+      <Import>匯入</Import>
+      <Upload>重新上傳</Upload>
+    </action>
+    <header>
+      <icon>圖示</icon>
+      <label>節點名稱</label>
+      <input>操作</input>
+    </header>
+    <title>選擇導入節點類型</title>
+    <msg>
+      <no-nodetype-registered>沒有註冊的節點類型。</no-nodetype-registered>
+      <nodetype-registered>註冊成功。</nodetype-registered>
+    </msg>
+  </UINodeTypeImport>
+  <NodeTypeImportPopup>
+    <title>
+      <UINodeTypeImportPopup>從 XML 檔案匯入節點類型</UINodeTypeImportPopup>
+    </title>
+  </NodeTypeImportPopup>
+  <!--
+  ################################################################################
+  #             org.exoplatform.ecm.webui.component.admin.UIDriveForm #
+  ################################################################################
+  -->
+  <DriveInputSet>
+    <label>
+      <both>Both</both>
+      <folderOnly>Folder</folderOnly>
+      <unstructuredFolder>Unstructured Folder</unstructuredFolder>
+    </label>
+    <title>
+      <AddPermission>增加權限</AddPermission>
+      <RemovePermission>刪除權限</RemovePermission>
+      <AddIcon>增加圖示</AddIcon>
+      <AddPath>增加路徑</AddPath>
+    </title>
+  </DriveInputSet>
+  <!--
+  ###################################################################################
+  #             org.exoplatform.ecm.webui.component.admin.action.UIActionTypeList#
+  ###################################################################################
+  -->
+  <UIActionTypeList>
+    <header>
+      <name>腳本</name>
+      <label>名稱</label>
+      <action>操作</action>
+    </header>
+    <title>
+      <Edit>編輯</Edit>
+      <Delete>刪除</Delete>
+    </title>
+    <action>
+      <AddAction>增加操作類型</AddAction>
+    </action>
+<msg>
+ <confirm-delete>確定要刪除此操作類型嗎?</confirm-delete>
+<cannot-delete>您無法刪除此操作類型，因為該系統仍在使用它。</cannot-delete>
+</msg>
+  </UIActionTypeList>
+  <!--
+  ######################################################################################
+  #             org.exoplatform.ecm.webui.component.admin.action.UIActionTypeForm #
+  ######################################################################################
+  -->
+  <ActionPopup>
+    <title>
+      <UIActionTypeForm>增加操作類型</UIActionTypeForm>
+    </title>
+  </ActionPopup>
+  <UIActionTypeForm>
+    <title>增加操作類型</title>
+    <label>
+      <actionType>擴展操作類型：</actionType>
+      <name>名稱：</name>
+      <isMove>is Action Move:</isMove>
+      <variables>變數：</variables>
+      <exo_businessProcessAction>業務流程：</exo_businessProcessAction>
+      <exo_scriptAction>Groovy 腳本：</exo_scriptAction>
+      <exo_ruleAction>定義的規則：</exo_ruleAction>
+      <script>腳本：</script>
+    </label>
+    <action>
+      <Save>#{word.save}</Save>
+      <Cancel>#{word.cancel}</Cancel>
+    </action>
+    <msg>
+      <action-type-added>已成功增加 '{0}' 操作類型。</action-type-added>
+      <action-type-create-error>建立操作類型時出錯。</action-type-create-error>
+      <action-name-invalid>'{0}' 是不正確。該名稱必須與開始 'exo： '。</action-name-invalid>
+      <action-exist>這一操作已在 ECM 系統中存在。</action-exist>
+      <fileName-invalid>操作名稱中包含一些不正確字元。</fileName-invalid>
+    </msg>
+  </UIActionTypeForm>
+  <!--
+  ######################################################################################
+  #             org.exoplatform.ecm.webui.component.admin.view.UIViewManager     #
+  ######################################################################################
+  -->
+  <UITabPane>
+    <title>
+      <UIViewContainer>檢視</UIViewContainer>
+      <ECMTemplate>資源管理器中的範本</ECMTemplate>
+      <UIScriptForm>腳本</UIScriptForm>
+      <UIDialogTab>對話</UIDialogTab>
+      <UIViewTab>查看</UIViewTab>
+      <UITemplateEditForm>模板</UITemplateEditForm>
+      <UITemplateForm>模板</UITemplateForm>
+      <UITemplateContainer>文件</UITemplateContainer>
+      <UIActionsTemplateContainer>操作</UIActionsTemplateContainer>
+      <UIOthersTemplateContainer>其他人</UIOthersTemplateContainer>
+  <UIActionScriptContainer>操作</UIActionScriptContainer>
+  <UIWidgetScriptContainer>桌面小工具</UIWidgetScriptContainer>
+<UIInterceptorScriptContainer>攔截器</UIInterceptorScriptContainer>
+
+<nodeTypeDefinition>節點類型</nodeTypeDefinition>
+      <propertyDefinition>屬性</propertyDefinition>
+      <childNodeDefinition>子節點</childNodeDefinition>
+      <SuperTypeTab>父類型</SuperTypeTab>
+      <DefaultTypeTab>主要預設</DefaultTypeTab>
+      <RequiredTypeTab>主要所需</RequiredTypeTab>
+      <Contraints>約束</Contraints>
+    </title>
+  </UITabPane>
+  <!--
+  ######################################################################################
+  #             org.exoplatform.ecm.webui.component.admin.view.UIViewList    #
+  ######################################################################################
+  -->
+  <UIViewList>
+   <title>
+     <View>查看</View>
+     <EditInfo>編輯</EditInfo>
+     <Delete>刪除</Delete>
+   </title>
+    <header>
+      <name>名稱</name>
+      <permissions>權限</permissions>
+      <tabList>操作標籤</tabList>
+      <baseVersion>基本版本</baseVersion>
+      <action>操作</action>
+    </header>
+    <action>
+      <AddView>增加視圖</AddView>
+    </action>
+    <msg>
+      <access-denied>訪問被拒絕。您沒有權限使用此功能。</access-denied>
+      <template-in-use>不能刪除 {0}。它正被使用中。</template-in-use>
+      <confirm-delete>是否確定要刪除此視圖?</confirm-delete>
+    </msg>
+  </UIViewList>
+  <ViewPopup>
+    <title>
+      <UIViewFormTabPane>查看</UIViewFormTabPane>
+    </title>
+  </ViewPopup>
+  <AddPopup>
+    <title>
+      <UIViewFormTabPane>增加視圖</UIViewFormTabPane>
+      <AddPopup>新增範本</AddPopup>
+    </title>
+  </AddPopup>
+  <EditPopup>
+    <title>
+      <UIViewFormTabPane>編輯檢視</UIViewFormTabPane>
+    </title>
+  </EditPopup>
+
+<UITabList>
+                  <title>
+                    <Edit>編輯</Edit>
+                    <Delete>刪除</Delete>
+                  </title>       
+ <header>
+  <tabName>標籤</tabName>
+  <localizeButtons>描述</localizeButtons>
+<action>操作</action>
+</header>
+<action>
+ <AddTab>新增</AddTab>
+</action>
+<msg>
+ <confirm-delete>確定要刪除此標籤嗎?</confirm-delete>
+</msg>
+<grid>
+ <msg>
+  <empty>沒有標籤在這個視圖</empty>
+ </msg>
+</grid>
+</UITabList>
+
+<UIViewPermissionList>
+ <title>選擇擁有者與此視圖的權限：</title>
+<label>
+ <permission>{0} {1} 中</permission>
+</label>
+<msg>
+ <confirm-delete>確定要刪除此權限嗎?</confirm-delete>
+  <permission-cannot-empty>需要查看權限，不能為空。</permission-cannot-empty>
+</msg>
+</UIViewPermissionList>
+
+<UIViewPermissionList>
+                         <title>
+                           <Delete>刪除</Delete>
+                         </title>
+ <header>
+<friendlyPermission>權限</friendlyPermission>
+     <action>操作</action>
+ </header>
+<action>
+ <title>
+  <Delete>刪除</Delete>
+ </title>
+</action>
+<grid>
+ <msg>
+  <empty>沒有關於此視圖的權限</empty>
+ </msg>
+</grid>
+</UIViewPermissionList>
+
+<UIViewPermissionForm>
+<action>
+ <Add>新增</Add>
+</action>
+<label>
+ <userOrGroup>使用者或群組</userOrGroup>
+</label>
+<msg>
+ <permission-exist>權限 '{0}' 已經存在於清單中。</permission-exist>
+</msg>
+</UIViewPermissionForm>
+
+  <!--
+  ######################################################################################
+  #             org.exoplatform.ecm.webui.component.admin.view.UIViewFormTabPane   #
+  ######################################################################################
+  -->
+  <UIViewForm>
+    <title>
+      <AddPermission>增加權限</AddPermission>
+      <RemovePermission>刪除權限</RemovePermission>
+    </title>
+    <msg>
+      <view-name-invalid>視圖名稱是必填的。</view-name-invalid>
+      <fileName-invalid>視圖名稱中包含一些不正確字元。</fileName-invalid>
+      <permission-not-empty>請選擇一個視圖的權限。</permission-not-empty>      
+      <mustbe-add-tab>請增加一個標籤。</mustbe-add-tab>
+<mustbe-add-permission>請選擇此視圖的權限</mustbe-add-permission>
+      <view-exist>視圖名稱已存在。</view-exist>
+    </msg>
+    <label>
+      <viewName>名稱</viewName>
+      <template>範本</template>
+<version>還原的版本</version>
+      <enableVersion>啟用版本</enableVersion>
+      <hideExplorerPanel>隱藏側欄中的資源管理器面板</hideExplorerPanel>
+    </label>
+  </UIViewForm>
+  <UITabForm>
+    <msg>
+      <button-select-error>請從清單中至少選擇一個函數。</button-select-error>
+      <tab-name-error>該標籤名稱是必填的。</tab-name-error>
+      <fileName-invalid>標籤名稱中包含一些不正確字元。</fileName-invalid>
+    </msg>
+    <label>
+      <version>還原的版本</version>
+      <viewName>名稱</viewName>
+      <tabName>標籤名稱</tabName>
+      <permission>權限</permission>
+      <tabs>標籤</tabs>
+      <template>範本</template>
+      <enableVersion>啟用版本</enableVersion>
+      <addFolder>新增資料夾</addFolder>
+      <addDocument>新增文件</addDocument>
+      <editDocument>編輯文件</editDocument>
+      <upload>上傳</upload>
+      <paste>貼上</paste>
+      <search>搜索</search>
+      <viewReferences>查看參考</viewReferences>
+      <viewNodeType>查看節點類型</viewNodeType>
+      <viewPermissions>查看權限</viewPermissions>
+      <viewProperties>查看屬性</viewProperties>
+      <manageVersions>管理版本</manageVersions>
+      <manageAuditing>管理審核</manageAuditing>
+      <managePublications>管理出版</managePublications>
+      <manageCategories>管理類別</manageCategories>
+      <manageRelations>管理關係</manageRelations>
+      <manageActions>管理操作</manageActions>
+      <exportNode>匯出節點</exportNode>
+      <importNode>匯入節點</importNode>
+      <viewRelations>查看關係</viewRelations>
+      <showJCRStructure>顯示 JCR 結構</showJCRStructure>
+      <watchDocument>觀注文檔</watchDocument>
+      <taggingDocument>標記文件</taggingDocument>
+      <viewMetadatas>查看中繼資料</viewMetadatas>
+      <overloadThumbnail>超載的縮略圖</overloadThumbnail>
+      <manageHidden>隱藏/顯示內容</manageHidden>
+      <comment>評論</comment>
+      <vote>投票</vote>  
+      <addCategory>新增類別</addCategory>
+      <addLocalizationLink>增加翻譯</addLocalizationLink>
+      <publicationRequestApproval>請求批准</publicationRequestApproval>
+      <publicationApproveContent>批准內容</publicationApproveContent>
+      <publicationPublish>發佈</publicationPublish>
+<contentNavigation>內容導航</contentNavigation>
+<addSymLink>增加符號連結</addSymLink>
+    </label>
+    <action>
+      <Save>#{word.save}</Save>      
+      <Cancel>#{word.cancel}</Cancel>      
+    </action>
+  </UITabForm>
+  <UIPermissionForm>
+    <label>
+      <permission>UIPermissionForm</permission>
+    </label>
+  </UIPermissionForm>
+  <UIViewFormTabPane>
+    <tab>
+      <label>
+        <UITabContainer>操作</UITabContainer>
+        <UIViewForm>查看</UIViewForm>
+        <UIViewPermissionContainer>權限</UIViewPermissionContainer>    
+      </label>
+    </tab>
+    <action>
+      <Save>#{word.save}</Save>
+      <Reset>重置</Reset>
+      <Cancel>#{word.cancel}</Cancel>
+      <Close>#{word.close}</Close>
+      <Restore>還原</Restore>
+    </action>
+  </UIViewFormTabPane>
+  <PopupViewPermission>
+    <title>
+      <UIPermissionSelector>設定權限</UIPermissionSelector>
+    </title>
+  </PopupViewPermission>
+
+<TabForm_Popup>
+ <title>
+  <UITabForm>增加/編輯標籤</UITabForm>
+ </title>
+</TabForm_Popup>
+
+<tab_permission>
+ <title>
+  <SelectUser>選擇使用者</SelectUser>
+<SelectMember>選擇成員</SelectMember>
+<AddAny>任何</AddAny>
+ </title>
+</tab_permission>
+  <!--
+  ######################################################################################
+  #             org.exoplatform.ecm.webui.component.admin.view.UIECMTemplateList   #
+  ######################################################################################
+  -->
+  <UIECMTemplateList>
+    <title>
+      <View>查看</View>
+      <EditInfo>編輯</EditInfo>
+      <Delete>刪除</Delete>
+    </title>
+    <header>
+      <name>名稱</name>
+      <path>值</path>
+      <baseVersion>基本版本</baseVersion>
+      <action>操作</action>
+    </header>
+    <action>
+      <Add>新增</Add>
+    </action>
+    <msg>
+      <template-in-use>不能刪除 {0}。它正被使用中。</template-in-use>
+      <confirm-delete>是否確定要刪除此範本?</confirm-delete>
+      <access-denied>訪問被拒絕。您沒有權限使用此功能。</access-denied>
+      <delete-permission-denied>您沒有刪除 '{0}' 範本的權限。</delete-permission-denied>
+    </msg>
+  </UIECMTemplateList>
+  <!--
+  ################################################################################
+  #             org.exoplatform.ecm.webui.component.admin.view.UITemplateForm #
+  ################################################################################
+  -->
+  <UITemplateForm>
+    <action>
+      <Save>#{word.save}</Save>
+      <Cancel>#{word.cancel}</Cancel>
+      <Reset>重置</Reset>
+      <Restore>還原</Restore>
+      <Refresh>#{word.refresh}</Refresh>
+    </action>
+    <msg>
+      <version-restored>版本 {0} 成功恢復了。</version-restored>
+      <role-require>請選擇一個權限。</role-require>
+      <template-name-exist>範本名稱"{0}"已經存在。</template-name-exist>
+      <add-permission-denied>您沒有權限來增加新的範本。</add-permission-denied>
+      <edit-permission-denied>您沒有權限修改 '{0}' 範本。</edit-permission-denied>
+    </msg>
+    <tab>
+      <label>
+        <template>模板</template>
+        <defaultDialog>對話</defaultDialog>
+        <defaultView>查看</defaultView>
+      </label>
+    </tab>
+    <label>
+      <name>名稱：</name>
+      <label>標籤：</label>
+      <isDocumentTemplate>是文件範本：</isDocumentTemplate>
+      <dialog>對話方塊的內容</dialog>
+      <view>查看內容</view>
+      <permission>權限：</permission>
+      <selectPemistion>權限</selectPemistion>
+    </label>
+  </UITemplateForm>
+  <!--
+  ################################################################################
+  #             org.exoplatform.ecm.webui.component.admin.view.ecmTempForm #
+  ################################################################################
+  -->
+  <ecmTempForm>
+    <label>
+      <version>選擇版本：</version>
+      <content>內容：</content>
+      <name>名稱：</name>
+      <homeTemplate>範本類型：</homeTemplate>
+      <enableVersion>啟用的版本：</enableVersion>
+    </label>
+  </ecmTempForm>
+  <ecmTempFormPopup>
+    <title>
+      <ecmTempForm>增加/編輯檢視範本</ecmTempForm>
+    </title>
+  </ecmTempFormPopup>
+  <ecmTempFormAdd>
+    <title>
+      <ecmTempForm>增加資源管理器範本</ecmTempForm>
+      <ecmTempFormAdd>增加資源管理器範本</ecmTempFormAdd>
+    </title>
+  </ecmTempFormAdd>
+  <ecmTempFormEdit>
+    <title>
+      <ecmTempForm>編輯資源管理器範本</ecmTempForm>
+    </title>
+  </ecmTempFormEdit>
+
+  <!--
+  ######################################################################################
+  #             org.exoplatform.ecm.webui.component.admin.script.UIScriptManager #
+  ######################################################################################
+  -->
+  <!--
+  ######################################################################################
+  #             org.exoplatform.ecm.webui.component.admin.script.UIECMFilterForm #
+  ######################################################################################
+  -->
+  <UIECMFilterForm>
+    <label>
+      <selectScript>選擇類別</selectScript>
+    </label>
+  </UIECMFilterForm>
+  <!--
+  ######################################################################################
+  #             org.exoplatform.ecm.webui.component.admin.script.UIScriptList #
+  ######################################################################################
+  -->
+  <UIScriptList>
+    <action>
+      <Edit>#{word.edit}</Edit>
+      <Delete>#{word.delete}</Delete>
+      <AddNew>增加腳本</AddNew>
+    </action>
+    <msg>
+      <confirm-delete>是否確定要刪除此腳本?</confirm-delete>
+    </msg>
+    <header>
+      <scriptName>名稱</scriptName>
+      <path>腳本</path>
+      <baseVersion>基本版本</baseVersion>
+      <action>操作</action>
+    </header>
+    <tooltip>
+      <Edit>編輯</Edit>
+      <Delete>刪除</Delete>
+    </tooltip>
+  </UIScriptList>
+  <!--
+  ######################################################################################
+  #             org.exoplatform.ecm.webui.component.admin.script.UIScriptForm #
+  ######################################################################################
+  -->
+  <uiECMScriptsPopup>
+    <title>
+      <ecmScriptForm>ECM Script</ecmScriptForm>
+    </title>
+  </uiECMScriptsPopup>
+
+  <UIScriptForm>
+    <action>
+      <Save>#{word.save}</Save>
+      <Restore>#{word.restore}</Restore>
+      <Cancel>#{word.cancel}</Cancel>
+      <Refresh>#{word.refresh}</Refresh>
+      <Change>變更</Change>
+    </action>
+    <msg>
+      <version-restored>版本 {0} 成功恢復了。</version-restored>
+      <name-null>請輸入腳本名稱。</name-null>
+      <name-exist>腳本名稱"{0}"已經存在。</name-exist>
+      <fileName-invalid>腳本名稱中有一些不正確字元。</fileName-invalid>
+    </msg>
+  </UIScriptForm>
+  <!--
+  ######################################################################################
+  #             org.exoplatform.ecm.webui.component.admin.script.CBScriptForm #
+  ######################################################################################
+  -->
+  <ScriptContainerPopup>
+    <title>
+      <UIScriptForm>增加/編輯腳本</UIScriptForm>
+    </title>
+  </ScriptContainerPopup>
+  <UIScriptForm>
+    <label>
+      <selectVersion>版本</selectVersion>
+      <scriptContent>內容</scriptContent>
+      <scriptLabel>名稱</scriptLabel>
+      <scriptName>腳本</scriptName>
+      <enableVersion>啟用版本控制</enableVersion>
+    </label>
+  </UIScriptForm>
+  <!--
+  ######################################################################################
+  #             org.exoplatform.ecm.webui.component.admin.script.ecmScriptForm #
+  ######################################################################################
+  -->
+ 
+  <ecmScriptForm>
+    <label>
+      <selectVersion>版本</selectVersion>
+      <scriptContent>內容</scriptContent>
+      <scriptLabel>名稱</scriptLabel>
+      <scriptName>腳本</scriptName>
+      <enableVersion>啟用版本控制</enableVersion>
+    </label>
+  </ecmScriptForm>
+  <!--
+  ######################################################################################
+  #             org.exoplatform.ecm.webui.component.admin.taxonomy.UITaxonomyForm #
+  ######################################################################################
+  -->
+  <UITaxonomyForm>
+    <action>
+      <Save>#{word.save}</Save>
+      <Cancel>#{word.cancel}</Cancel>
+    </action>
+    <title>新增類別</title>
+    <label>
+      <taxonomyName>類別名稱</taxonomyName>
+      <parentPath>父</parentPath>
+    </label>
+    <msg>
+      <exist>"{0}"類別已存在。</exist>
+      <name-null>請指定類別名稱。</name-null>
+      <name-invalid>類別名稱中有一些不正確字元。</name-invalid>
+      <name-too-long>類別名稱少於 30 個字元。</name-too-long>
+    </msg>
+  </UITaxonomyForm>
+    
+  <EditTaxonomyTreePopup>
+    <title>
+      <UITaxonomyTreeContainer>編輯類別樹</UITaxonomyTreeContainer>
+    </title>
+  </EditTaxonomyTreePopup>
+
+  <AddTaxonomyTreePopup>
+    <title>
+      <UITaxonomyTreeContainer>增加類別樹</UITaxonomyTreeContainer>
+    </title>
+  </AddTaxonomyTreePopup>
+  
+  <TaxonomyPopupCreateChild>
+    <title>
+      <UITaxonomyTreeCreateChildForm>編輯類別樹</UITaxonomyTreeCreateChildForm>
+    </title>
+  </TaxonomyPopupCreateChild>
+
+<UITaxonomyTreeCreateChildForm>
+  <action>
+      <Save>#{word.save}</Save>
+      <Cancel>#{word.cancel}</Cancel>
+    </action>
+    <label>
+      <parentPath>父：</parentPath>
+      <taxonomyName>類別名稱：</taxonomyName>
+    </label>
+    <msg>
+      <name-null>類別名稱是空的。</name-null>
+      <name-invalid>類別名稱不正確。</name-invalid>
+      <name-too-long>類別名稱必須不能超過 {0} 個字元。</name-too-long>
+      <exist>類別名稱已經存在。</exist>
+    </msg>
+</UITaxonomyTreeCreateChildForm>
+
+  <PopupComponent>
+    <title>
+      <UIOneNodePathSelector>選擇路徑</UIOneNodePathSelector>
+    </title>
+  </PopupComponent>
+  
+  <TaxoPopupUserSelector>
+  <title>
+      <TaxoTreeSelectUserOrGroup>選擇使用者</TaxoTreeSelectUserOrGroup>
+      <UIPermissionTreeSelectUser>選擇使用者</UIPermissionTreeSelectUser>
+    </title>
+  </TaxoPopupUserSelector>
+
+  <TaxoTreeSelectUserOrGroupPopup>
+  <title>
+      <TaxoTreeSelectUserOrGroup>選擇成員身份</TaxoTreeSelectUserOrGroup>
+    </title>
+  </TaxoTreeSelectUserOrGroupPopup>
+  
+  <TaxoTreeAnyPermission>
+    <label>
+      <any>任何權限</any>
+      <anyPermission>TaxoTreeAnyPermission</anyPermission>
+    </label>
+  </TaxoTreeAnyPermission>
+  
+  <TaxoTreeSelectUserOrGroup>
+    <label>
+      <selectGroup>選擇群組</selectGroup>
+      <selectMembership>選擇成員身份</selectMembership>
+    </label>
+  </TaxoTreeSelectUserOrGroup>
+  
+  <!--
+  ######################################################################################
+  #             org.exoplatform.ecm.webui.component.admin.taxonomy.UITaxonomyTreeList #
+  ######################################################################################
+  -->
+  <UITaxonomyTreeList>
+    <header>
+      <name>類別樹</name>
+      <workspace>工作區</workspace>
+      <homePath>路徑</homePath>
+      <action>操作</action>
+    </header>
+    <action>
+      <AddTaxonomyTree>增加類別樹</AddTaxonomyTree>
+    </action>
+    <tooltip>
+      <EditTaxonomyTree>編輯類別樹</EditTaxonomyTree>
+      <Delete>刪除類別樹</Delete>
+    </tooltip>
+    <title>瀏覽類別樹</title>
+    <msg>
+      <no-list>沒有類別樹建立。</no-list>
+      <confirm-delete>確定要刪除類別樹嗎?</confirm-delete>
+      <is-in-trash>此類別樹已被移動到垃圾桶。</is-in-trash>
+    </msg>
+  </UITaxonomyTreeList>
+  
+  <!--
+  ######################################################################################
+  #             org.exoplatform.ecm.webui.component.admin.taxonomy.UITaxonomyTreeForm  #
+  ######################################################################################
+  -->
+  <UITaxonomyTreeForm>
+    <label>
+      <name>名稱</name>
+      <workspace>工作區</workspace>
+      <homePath>路徑</homePath>
+      <permissions>權限</permissions>
+    </label>
+    <msg>
+      <homapath-emty>輸入路徑</homapath-emty>
+    </msg>
+  </UITaxonomyTreeForm>
+  
+  <UIPermissionTreeForm>
+    <label>
+      <UIPopupWindow>選擇</UIPopupWindow>
+      <permission>UIPermissionTreeForm</permission>
+      <userOrGroup>使用者或群組</userOrGroup>
+      <read>閱讀權利</read>
+      <add_node>增加節點的權利</add_node>
+      <set_property>屬性設定權利</set_property>
+      <remove>刪除權利</remove>
+    </label>
+    <title>增加權限到該節點</title>
+    <action>
+      <Close>#{word.close}</Close>
+      <Save>儲存</Save>
+      <Reset>重置</Reset>
+    </action>
+    <msg>
+      <checkbox-require>請至少選擇一個權限。</checkbox-require>
+      <userOrGroup-required>保存權限之前，請先選擇使用者或群組。</userOrGroup-required>
+      <not-change-permission>你並沒有增加權限的權利。</not-change-permission>
+      <access-denied>訪問被拒絕。您不能刪除此權限。</access-denied>
+    </msg>
+  </UIPermissionTreeForm>
+  
+  <PopupTaxonomyJCRBrowser>
+  <title>
+      <UIOneNodePathSelector>選擇首頁路徑</UIOneNodePathSelector>
+    </title>
+  </PopupTaxonomyJCRBrowser>
+  
+  <PopupTaxonomyTreePermission>
+    <title>
+      <UIPermissionSelector>選擇權限</UIPermissionSelector>
+    </title>
+   </PopupTaxonomyTreePermission>
+   
+   <PopupDrivePermission>
+    <title>
+      <AddDrivePermissionSelector>增加權限</AddDrivePermissionSelector>
+      <UIPermissionSelector>選擇權限</UIPermissionSelector>
+    </title>
+  </PopupDrivePermission>
+  
+  <UIPopupWindow>
+    <title>
+      <UIPermissionManager>權限管理</UIPermissionManager>
+    </title>
+   </UIPopupWindow>
+
+  <PopupUserSelector>
+    <title>
+      <UIUserContainer>權限管理</UIUserContainer>
+    </title>
+   </PopupUserSelector>
+   
+  <UIPermissionInfo>
+    <action>
+      <title>
+        <Edit>編輯</Edit>
+        <Delete>刪除權限</Delete>
+      </title>
+    </action>
+    <header>
+      <usersOrGroups>使用者或群組</usersOrGroups>
+      <read>讀取</read>
+      <addNode>修改節點</addNode>
+      <remove>刪除</remove>
+      <action>操作</action>
+    </header>
+    <msg>
+      <confirm-delete-permission>確定要刪除此權限嗎?</confirm-delete-permission>
+      <no-permission-tochange>您沒有刪除此權限的權利。</no-permission-tochange>
+      <no-permission-remove>您不能刪除擁有者或系統使用者。</no-permission-remove>
+      <access-denied>訪問被拒絕。您不能刪除此權限。</access-denied>
+    </msg>
+  </UIPermissionInfo>
+  <permission>
+    <title>
+      <SelectUser>選擇使用者</SelectUser>
+      <SelectMember>選擇成員身份</SelectMember>
+      <AddAny>每個人</AddAny>
+    </title>
+  </permission>
+  <!--
+  #############################################################################
+  #             org.exoplatform.ecm.webui.component.explorer.UIPermissionForm #
+  #############################################################################
+  -->
+  <SelectUserOrGroup>
+    <title>
+      <UIGroupSelector>選擇使用者</UIGroupSelector>
+      <UIPermissionSelector>選擇成員</UIPermissionSelector>
+      <UIGroupMemberSelector>選擇成員身份</UIGroupMemberSelector>
+    </title>
+  </SelectUserOrGroup>
+  <UIGroupSelector>
+    <label>
+      <selectGroup>選擇群組</selectGroup>
+      <selectUser>選擇使用者</selectUser>
+    </label>
+    <msg>
+      <not-change-owner>'{0}' 是此節點的擁有者和具有完全控制權限。</not-change-owner>
+    </msg>
+  </UIGroupSelector>
+  <UIPermissionForm>
+    <label>
+      <UIPopupWindow>請選擇</UIPopupWindow>
+      <permission>UIPermissionForm</permission>
+      <userOrGroup>使用者或群組</userOrGroup>
+      <read>讀取</read>
+      <add_node>修改</add_node>
+      <remove>刪除</remove>
+    </label>
+    <title>增加權限到該節點</title>
+    <action>
+      <Close>#{word.close}</Close>
+      <Save>#{word.save}</Save>
+      <Reset>重置</Reset>
+    </action>
+    <msg>
+      <checkbox-require>請至少選擇一個權限。</checkbox-require>
+      <userOrGroup-required>保存權限之前，請先選擇使用者或群組。</userOrGroup-required>
+      <not-change-permission>你並沒有增加權限的權利。</not-change-permission>
+      <access-denied>訪問被拒絕。您不能刪除此權限。</access-denied>
+    </msg>
+  </UIPermissionForm>
+  
+  <TaxonomyPopup>
+    <title>
+      <UITaxonomyForm>新增類別</UITaxonomyForm>
+    </title>
+  </TaxonomyPopup>
+  
+  <UITaxonomyManager>
+    <title>
+      <permission>權限管理</permission>
+    </title>
+  </UITaxonomyManager>
+  <!--
+  ######################################################################################
+  #             org.exoplatform.ecm.webui.component.admin.templates.UITemplateList #
+  ######################################################################################
+  -->
+  <UITemplateList>
+    <header>
+      <name>類型</name>
+      <action>操作</action>
+      <label>範本</label>
+      <icon>圖示</icon>
+    </header>
+    <action>
+      <AddNew>新增範本</AddNew>
+    </action>
+    <msg>
+      <confirm-delete>確定要刪除嗎？</confirm-delete>
+      <access-denied>訪問被拒絕。您沒有權限使用此功能。</access-denied>
+      <editing-template>訪問被拒絕。不能刪除同時也編輯此範本。</editing-template>
+      <template-not-exist>您正在嘗試刪除不存在的範本。</template-not-exist>
+    </msg>
+  </UITemplateList>
+  
+  <UIActionsTemplateList>
+    <header>
+      <name>類型</name>
+      <action>操作</action>
+      <label>範本</label>
+      <icon>圖示</icon>
+    </header>
+    <action>
+      <AddNew>新增範本</AddNew>
+    </action>
+    <msg>
+      <confirm-delete>確定要刪除嗎？</confirm-delete>
+      <access-denied>訪問被拒絕。您沒有權限使用此功能。</access-denied>
+      <editing-template>訪問被拒絕。不能刪除同時也編輯此範本。</editing-template>
+      <template-not-exist>您正在嘗試刪除不存在的範本。</template-not-exist>
+    </msg>
+  </UIActionsTemplateList>
+  
+  <UIOthersTemplateList>
+    <header>
+      <name>類型</name>
+      <label>模板</label>
+      <icon>圖示</icon>
+      <action>操作</action>
+    </header>
+    <action>
+      <AddNew>新增範本</AddNew>
+    </action>
+    <msg>
+      <confirm-delete>確定要刪除嗎？</confirm-delete>
+      <access-denied>訪問被拒絕。您沒有權限使用此功能。</access-denied>
+      <editing-template>訪問被拒絕。不能刪除同時也編輯此範本。</editing-template>
+      <template-not-exist>您正在嘗試刪除不存在的範本。</template-not-exist>
+    </msg>
+  </UIOthersTemplateList>
+
+ <!--
+  ######################################################################################
+  #             org.exoplatform.ecm.webui.component.admin.templates.clv package #
+  ######################################################################################
+  -->
+
+<UITabPane>
+ <title>
+ <ContentTemplateContainer>內容</ContentTemplateContainer>
+<CateTemplateContainer>導航</CateTemplateContainer>
+<PageTemplateContainer>分頁程式</PageTemplateContainer>
+ </title>
+</UITabPane>
+
+  <UICLVTemplateList>
+    <title>
+      <Edit>編輯</Edit>
+      <Delete>刪除</Delete>
+    </title>
+    <header>
+      <title>名稱</title>
+      <action>操作</action>
+      <template>Template</template>
+    </header>
+    <action>
+      <AddTemplate>新增範本</AddTemplate>
+<Edit>編輯</Edit>
+<Delete>刪除</Delete>
+    </action>
+    <msg>
+      <confirm-delete>是否確定要刪除此範本?</confirm-delete>
+      <access-denied>訪問被拒絕。您沒有權限使用此功能。</access-denied>
+      <editing-template>訪問被拒絕。不能刪除同時也編輯此範本。</editing-template>
+      <template-not-exist>您正在嘗試刪除不存在的範本。</template-not-exist>
+    </msg>
+  </UICLVTemplateList>
+
+<CateTemplateList>
+    <header>
+      <title>名稱</title>
+      <action>操作</action>
+      <template>範本</template>
+    </header>
+    <title>
+      <Edit>編輯</Edit>
+      <Delete>刪除</Delete>
+    </title>
+    <action>
+      <AddTemplate>新增範本</AddTemplate>
+<Edit>編輯</Edit>
+<Delete>刪除</Delete>
+    </action>
+</CateTemplateList>
+
+<PageTemplateList>
+    <header>
+      <title>名稱</title>
+      <action>操作</action>
+      <template>範本</template>
+    </header>
+    <action>
+      <AddTemplate>新增範本</AddTemplate>
+<Edit>編輯</Edit>
+<Delete>刪除</Delete>
+    </action>
+</PageTemplateList>
+
+<EditCLVTemplatePopup_ContentTemplateContainer>
+ <title>
+   <UICLVTemplateForm_ContentTemplateContainer>編輯清單範本</UICLVTemplateForm_ContentTemplateContainer>   
+ </title>
+</EditCLVTemplatePopup_ContentTemplateContainer>
+
+<EditCLVTemplatePopup_CateTemplateContainer>
+ <title>
+   <UICLVTemplateForm_CateTemplateContainer>編輯清單範本</UICLVTemplateForm_CateTemplateContainer>   
+ </title>
+</EditCLVTemplatePopup_CateTemplateContainer>
+
+<EditCLVTemplatePopup_PageTemplateContainer>
+ <title>
+   <UICLVTemplateForm_PageTemplateContainer>編輯清單範本</UICLVTemplateForm_PageTemplateContainer>   
+ </title>
+</EditCLVTemplatePopup_PageTemplateContainer>
+
+<CLVTemplatePopup_ContentTemplateContainer>
+ <title>
+   <UICLVTemplateForm_ContentTemplateContainer>增加清單範本</UICLVTemplateForm_ContentTemplateContainer>   
+ </title>
+</CLVTemplatePopup_ContentTemplateContainer>
+
+<CLVTemplatePopup_CateTemplateContainer>
+ <title>
+   <UICLVTemplateForm_CateTemplateContainer>增加清單範本</UICLVTemplateForm_CateTemplateContainer>   
+ </title>
+</CLVTemplatePopup_CateTemplateContainer>
+
+<CLVTemplatePopup_PageTemplateContainer>
+ <title>
+   <UICLVTemplateForm_PageTemplateContainer>增加清單範本</UICLVTemplateForm_PageTemplateContainer>   
+ </title>
+</CLVTemplatePopup_PageTemplateContainer>
+
+<UICLVTemplateForm_ContentTemplateContainer>
+ <action>
+  <Save>#{word.save}</Save>
+<Reset>重置</Reset>
+<Cancel>#{word.cancel}</Cancel>
+ </action>
+<label>
+ <title>名稱</title>
+<template>範本名稱</template>
+<content>內容</content>
+<type>範本類型</type>
+</label>
+</UICLVTemplateForm_ContentTemplateContainer>
+
+<UICLVTemplateForm_PageTemplateContainer>
+ <action>
+  <Save>#{word.save}</Save>
+<Reset>重置</Reset>
+<Cancel>#{word.cancel}</Cancel>
+ </action>
+<label>
+ <title>名稱</title>
+<template>範本名稱</template>
+<content>內容</content>
+<type>範本類型</type>
+</label>
+</UICLVTemplateForm_PageTemplateContainer>
+
+<UICLVTemplateForm_CateTemplateContainer>
+ <action>
+  <Save>#{word.save}</Save>
+<Reset>重置</Reset>
+<Cancel>#{word.cancel}</Cancel>
+ </action>
+<label>
+ <title>名稱</title>
+<template>範本名稱</template>
+<content>內容</content>
+<type>範本類型</type>
+</label>
+</UICLVTemplateForm_CateTemplateContainer>
+<UICLVTemplateForm>
+  <label>
+    <paginators>分頁程式</paginators>
+<list>內容</list>
+<navigation>導航</navigation>
+  </label>
+                          <action>
+                            <Save>#{word.save}</Save>
+                            <Reset>重置</Reset> 
+                            <Cancel>#{word.cancel}</Cancel> 
+                          </action> 
+  <msg>
+  <template-existing>此範本的名稱已經存在。請選擇另一個。</template-existing>
+  </msg>
+</UICLVTemplateForm>
+
+  <!--
+  ######################################################################################
+  #             org.exoplatform.ecm.webui.component.admin.templates.UITemplateForm #
+  ######################################################################################
+  -->
+  <AddNewTemplatePermission>
+    <title>
+      <UIPermissionSelector>選擇權限</UIPermissionSelector>
+    </title>
+  </AddNewTemplatePermission>
+  <TemplatePermission>
+    <title>
+      <UIPermissionSelector>選擇權限</UIPermissionSelector>
+    </title>
+  </TemplatePermission>
+  <TemplateContainerPopup>
+    <title>
+      <UITemplateForm>表單範本</UITemplateForm>
+    </title>
+  </TemplateContainerPopup>
+  <ViewForm>
+    <label>
+      <UITemplateContent>ViewForm</UITemplateContent>
+      <UIPopupWindow>查看權限</UIPopupWindow>
+      <selectVersion>版本</selectVersion>
+      <content>內容：</content>
+      <name>名稱：</name>
+      <isDocumentTemplate>是文件範本：</isDocumentTemplate>
+      <viewPermission>權限：</viewPermission>
+      <enableVersion>啟用版本控制</enableVersion>
+    </label>
+    <title>增加/編輯檢視</title>
+  </ViewForm>
+  <DialogForm>
+    <label>
+      <UITemplateContent>DialogForm</UITemplateContent>
+      <UIPopupWindow>對話方塊的權限</UIPopupWindow>
+      <selectVersion>版本</selectVersion>
+      <content>內容：</content>
+      <name>名稱：</name>
+      <isDocumentTemplate>是文件範本：</isDocumentTemplate>
+      <viewPermission>權限：</viewPermission>
+      <enableVersion>啟用版本控制</enableVersion>
+    </label>
+    <title>增加/編輯對話方塊</title>
+  </DialogForm>
+  <DialogFormTemplatePermission>
+    <title>
+      <UIPermissionSelector>選擇權限</UIPermissionSelector>
+    </title>
+  </DialogFormTemplatePermission>
+  <ViewFormTemplatePermission>
+    <title>
+      <UIPermissionSelector>選擇權限</UIPermissionSelector>
+    </title>
+  </ViewFormTemplatePermission>
+  <TemplateContainerPopup>
+    <title>
+      <UIViewTemplate_UITemplateContainer><![CDATA[View & Edit Template]]></UIViewTemplate_UITemplateContainer>
+      <UIViewTemplate_UIActionsTemplateContainer><![CDATA[View & Edit Template]]></UIViewTemplate_UIActionsTemplateContainer>
+      <UIViewTemplate_UIOthersTemplateContainer><![CDATA[View & Edit Template]]></UIViewTemplate_UIOthersTemplateContainer>
+    </title>
+  </TemplateContainerPopup>
+  <UITemplatesManager>
+    <title>
+      <Edit>編輯</Edit>
+      <Delete>刪除</Delete>
+    </title>
+  </UITemplatesManager>
+  <!--
+  ######################################################################################
+  #             org.exoplatform.ecm.webui.component.admin.templates.UIViewTemplate #
+  ######################################################################################
+  -->
+  <!--
+  ######################################################################################
+  #             org.exoplatform.ecm.webui.component.admin.templates.UITemplateEditForm #
+  ######################################################################################
+  -->
+  <UITemplateEditForm>
+    <label>
+      <name>名稱：</name>
+      <label>標籤：</label>
+      <isDocumentTemplate>是文件範本：</isDocumentTemplate>
+    </label>
+    <action>
+      <Save>#{word.save}</Save>
+      <Cancel>#{word.cancel}</Cancel>
+      <Refresh>#{word.refresh}</Refresh>
+    </action>
+  </UITemplateEditForm>
+  <!--
+  ######################################################################################
+  #             org.exoplatform.ecm.webui.component.admin.templates.UIDialogTab #
+  ######################################################################################
+  -->
+  <UIDialogTab>
+    <header>
+      <name>名稱</name>
+      <roles>角色</roles>
+      <baseVersion>版本</baseVersion>
+      <action>操作</action>
+    </header>
+    <msg>
+      <undeletable>您不能刪除 '{0}' 因為它是預設的。</undeletable>
+      <confirm-delete>是否確定要刪除此對話方塊?</confirm-delete>
+    </msg>
+    <action>
+      <title>
+        <Edit>編輯</Edit>
+        <Delete>刪除</Delete>
+      </title>
+    </action>
+  </UIDialogTab>
+  <!--
+  ######################################################################################
+  #             org.exoplatform.ecm.webui.component.admin.templates.UIViewTab #
+  ######################################################################################
+  -->
+  <UIViewTab>
+    <header>
+      <name>名稱</name>
+      <roles>角色</roles>
+      <baseVersion>版本</baseVersion>
+      <action>操作</action>
+    </header>
+    <msg>
+      <undeletable>不能刪除 '{0}'，它是預設的。</undeletable>
+      <confirm-delete>確定要刪除嗎？</confirm-delete>
+    </msg>
+    <action>
+      <title>
+        <Edit>編輯</Edit>
+        <Delete>刪除</Delete>
+      </title>
+    </action>
+  </UIViewTab>
+  <!--
+  ######################################################################################
+  #             org.exoplatform.ecm.webui.component.admin.templates.UITemplateContent #
+  ######################################################################################
+  -->
+  <UITemplateContent>
+    <action>
+      <Save>#{word.save}</Save>
+      <Restore>#{word.restore}</Restore>
+      <Cancel>#{word.cancel}</Cancel>
+      <Refresh>#{word.refresh}</Refresh>
+    </action>
+    <msg>
+      <name-invalid>欄位名稱不能包含特殊字元。</name-invalid>
+      <roles-invalid>權限欄位是必填的。</roles-invalid>
+      <version-restored>版本 {0} 成功恢復了。</version-restored>
+      <name-exist>名稱 {0} 已經存在。</name-exist>
+    </msg>
+    <title>
+      <AddPermission>增加權限</AddPermission>
+      <RemovePermission>刪除權限</RemovePermission>
+    </title>
+  </UITemplateContent>
+  <!--
+  ######################################################################################
+  #             org.exoplatform.ecm.webui.component.admin.templates.DialogForm #
+  ######################################################################################
+  -->
+  <!--
+  ######################################################################################
+  #             org.exoplatform.ecm.webui.component.admin.templates.ViewForm #
+  ######################################################################################
+  -->
+  <!--
+  ######################################################################################
+  #             org.exoplatform.ecm.webui.component.UIJCRBrowser #
+  ######################################################################################
+  -->
+  <JCRBrowser>
+    <title>
+      <UIOneNodePathSelector>選擇首頁路徑</UIOneNodePathSelector>
+    </title>
+  </JCRBrowser>
+  <JCRBrowserAssets>
+    <title>
+      <UIOneNodePathSelector>選擇圖示</UIOneNodePathSelector>
+    </title>
+  </JCRBrowserAssets>
+  <!--
+  ######################################################################################
+  #             org.exoplatform.ecm.webui.component.admin.queries #
+  ######################################################################################
+  -->
+  <UIQueriesList>
+    <header>
+      <name>名稱</name>
+      <type>類型</type>
+      <statement>聲明</statement>
+      <permission>權限</permission>
+      <action>操作</action>
+    </header>
+    <action>
+      <AddQuery>增加查詢</AddQuery>
+    </action>
+    <tooltip>
+      <Edit>編輯此查詢</Edit>
+      <Delete>刪除此查詢</Delete>
+    </tooltip>
+    <msg>
+      <confirm-delete>確定要刪除此查詢嗎?</confirm-delete>
+      <query-not-existed>查詢不存在。</query-not-existed>
+      <can-not-remove>刪除查詢時出現錯誤。請與管理員聯繫。</can-not-remove>
+    </msg>
+  </UIQueriesList>
+  <UIQueriesForm>
+    <label>
+      <name>查詢名稱</name>
+      <type>查詢類型</type>
+      <statement>聲明</statement>
+      <cache>啟用緩存結果</cache>
+      <permissions>權限</permissions>
+      <PermissionButton>UIQueriesForm</PermissionButton>
+    </label>
+    <action>
+      <Save>#{word.save}</Save>
+      <Cancel>#{word.cancel}</Cancel>
+    </action>
+    <msg>
+      <permission-require>請選擇權限。</permission-require>
+      <name-invalid>名稱欄位不能包含特殊字元。</name-invalid>
+      <name-existing>此查詢名稱已經存在。請選擇另一個。</name-existing>
+      <invalid-query>該查詢不正確。請檢查您的查詢語句。</invalid-query>
+      <access-denied>訪問被拒絕。您沒有權限來執行此操作。</access-denied>
+    </msg>
+  </UIQueriesForm>
+  <AddQueryForm>
+    <title>
+      <UIQueriesForm>增加查詢</UIQueriesForm>
+    </title>
+  </AddQueryForm>
+  <EditQueryForm>
+    <title>
+      <UIQueriesForm>編輯查詢</UIQueriesForm>
+    </title>
+  </EditQueryForm>
+<PermissionPopup>
+  <title>
+    <UIGroupMemberSelector>選擇權限</UIGroupMemberSelector>
+  </title>
+</PermissionPopup>
+  <!--
+  ######################################################################################
+  #             org.exoplatform.ecm.webui.component.admin.folksonomy #
+  ######################################################################################
+  -->
+  <UITagManager>
+    <title>
+      <EditStyle>編輯樣式</EditStyle>
+      <RemoveStyle>刪除樣式</RemoveStyle>
+    </title>    
+  </UITagManager>
+  <UITagStyleList>
+    <header>
+      <name>樣式名稱</name>
+      <documentRange>出現的次數</documentRange>
+      <tagHTML>標籤樣式</tagHTML>
+      <action>操作</action>
+    </header>
+    <title>
+      <Edit>編輯</Edit>
+      <Delete>刪除</Delete>
+      <Remove>刪除</Remove>
+    </title>
+    <action>
+      <AddStyle>增加樣式</AddStyle>
+    </action>
+  </UITagStyleList>
+  <UITagStyleForm>
+    <label>
+      <styleName>樣式名稱：</styleName>
+      <documentRange>出現次數:</documentRange>
+      <styleHTML>HTML 樣式：</styleHTML>
+    </label>
+    <action>
+      <UpdateStyle>更新</UpdateStyle>
+      <Cancel>#{word.cancel}</Cancel>
+    </action>
+    <msg>
+      <range-validator>範圍無效。格式必須是：......b，其中 a、 b 為正整數。您可以使用 * 而不是 b 來指示的範圍是不受限制。</range-validator>
+      <error-update>更新失敗。您的資訊不正確。</error-update>
+      <item-not-existing>您無法保存對此標記的更改，因為它不存在資料庫中。</item-not-existing>
+    </msg>
+  </UITagStyleForm>
+  <FolksonomyPopup>
+    <title>
+      <UITagStyleForm>編輯標記樣式配置</UITagStyleForm>
+    </title>
+  </FolksonomyPopup>
+  <!--
+  ###################################################################################
+  # org.exoplatform.ecm.jcr.ECMNameValidator  #
+  ###################################################################################
+  -->
+  <ECMNameValidator>
+    <msg>
+      <Invalid-char>該欄位 '{0}' 具有一些不正確字元。請輸入另一個值。</Invalid-char>
+      <empty-input>欄位"{0}"的值為空。</empty-input>
+    </msg>
+  </ECMNameValidator>
+  <EmptyFieldValidator>
+    <msg>
+      <empty-input>請輸入欄位"{0}"的值。</empty-input>
+    </msg>
+  </EmptyFieldValidator>
+  <!--
+  ###################################################################################
+  # org.exoplatform.ecm.jcr.PermissionValidator  #
+  ###################################################################################
+  -->
+  <PermissionValidator>
+  <msg>
+      <permission-path-invalid>權限 '{0}' 不正確。</permission-path-invalid>
+  </msg>
+  </PermissionValidator>
+  <!--
+  ###################################################################################
+  # Repository  #
+  ###################################################################################
+  -->
+  <UIWorkspaceList>
+    <label>
+      <workspaceName>工作區：</workspaceName>
+      <rootNodeInfo>UIWorkspaceList</rootNodeInfo>
+      <rootNodePath>根路徑：</rootNodePath>
+    </label>
+  </UIWorkspaceList>
+  <!--
+  ###################################################################################
+  # Others  #
+  ###################################################################################
+  -->
+  <UIFormInputSetWithAction>
+    <msg>
+      <confirm-delete>確定要刪除嗎?</confirm-delete>
+    </msg>
+  </UIFormInputSetWithAction>
+  <template>
+    <title>
+      <AddPermission>增加權限</AddPermission>
+    </title>
+  </template>
+  <metadataTypeTab>
+    <title>
+      <AddPermission>增加權限</AddPermission>
+    </title>
+  </metadataTypeTab>
+  <PermissionButton>
+    <title>
+      <AddPermission>增加權限</AddPermission>
+    </title>
+  </PermissionButton>
+  <nodeTypeDefinition>
+    <title>
+      <AddSuperType>增加父類型</AddSuperType>
+    </title>
+  </nodeTypeDefinition>
+  <childNodeDefinition>
+    <title>
+      <AddRequiredType>增加所需的類型</AddRequiredType>
+      <AddDefaultType>增加預設類型</AddDefaultType>
+    </title>
+  </childNodeDefinition>
+  <propertyDefinition>
+    <title>
+      <AddConstraints>Add Constraints</AddConstraints>
+    </title>
+  </propertyDefinition>
+  <authInputSet>
+    <title>
+      <Select>選擇</Select>
+    </title>
+  </authInputSet>
+  <!--
+  #grid with action
+  -->
+  <UIViewContainer>
+    <title>
+      <View>查看</View>
+      <EditInfo>編輯</EditInfo>
+      <Delete>刪除</Delete>
+    </title>
+<label>
+  <permission>{0} {1} 中</permission>
+</label>
+  </UIViewContainer>
+  <ECMTemplate>
+    <title>
+      <EditInfo>編輯</EditInfo>
+      <Delete>刪除</Delete>
+    </title>
+  </ECMTemplate>
+  <step1>
+    <title>
+      <AddPermission>增加權限</AddPermission>
+    </title>
+  </step1>
+  <step2>
+    <title>
+      <SelectContainer>選擇容器</SelectContainer>
+      <SelectStore>選擇儲存</SelectStore>
+    </title>
+  </step2>
+  <step3>
+    <title>
+      <SelectQueryHandler>選取查詢處理器</SelectQueryHandler>
+    </title>
+  </step3>
+  <UIDrivePermissionSelector>
+    <label>
+      <selectGroup>選擇群組</selectGroup>
+      <selectUser>選擇使用者</selectUser>
+      <selectMembership>選擇成員身份</selectMembership>
+    </label>
+  </UIDrivePermissionSelector>
+  
+  <UIPermissionSelector>
+    <label>
+      <selectGroup>選擇群組</selectGroup>
+      <selectUser>選擇使用者</selectUser>
+      <selectMembership>選擇成員身份</selectMembership>
+    </label>
+  </UIPermissionSelector>
+  
+  <UIAnyPermission>
+    <label>
+      <anyPermission>任何權限</anyPermission>
+    </label>
+  </UIAnyPermission>
+  
+  <UIMDriveAnyPermission>
+    <label>
+      <anyPermission>任何權限</anyPermission>
+    </label>
+  </UIMDriveAnyPermission>
+  
+  <UIQueriesAnyPermission>
+    <label>
+      <anyPermission>任何權限</anyPermission>
+    </label>
+  </UIQueriesAnyPermission>
+  
+  <MetadataPermission>
+    <label>
+      <selectGroup>選擇群組</selectGroup>
+    </label>
+  </MetadataPermission>  
+  <MetadataPermission>
+    <label>
+      <selectMembership>選擇成員身份</selectMembership>
+    </label>
+  </MetadataPermission>
+  <anyPermission>
+    <title>
+      <AddAnyPermission>設定任何權限</AddAnyPermission>
+    </title>
+  </anyPermission>
+  <!--
+  #########Since ECM 2.3##################
+  -->
+  <QueriesPermissionBrowse>
+    <label>
+      <selectGroup>選擇群組</selectGroup>
+      <selectUser>選擇使用者</selectUser>
+      <selectMembership>選擇成員身份</selectMembership>
+    </label>
+  </QueriesPermissionBrowse>
+  <!--
+  #########Since ECM 2.4##################
+  -->  
+  <UIViewFormTabPane>
+    <label>
+      <addSymLink>增加符號連結</addSymLink>
+    </label>
+  </UIViewFormTabPane>
+  <!--
+  #########Since ECM 2.5##################
+  --> 
+  
+  <UIDriveForm>
+<msg>
+  <permission-path-invalid>權限 '{0}' 不正確。</permission-path-invalid>
+  </msg>
+  </UIDriveForm>
+  
+  <UITaxonomyTreeMainForm>
+    <msg>
+      <homepath-emty>首頁路徑是必填的。</homepath-emty>
+      <targetpath-emty>目標路徑是必填的。</targetpath-emty>
+    </msg>
+  </UITaxonomyTreeMainForm>
+  <UITaxonomyWorkingArea>
+  <msg>
+  <exist>此樹節點已存在。</exist>
+  </msg>
+  </UITaxonomyWorkingArea>
+
+  <PermissionTreeSelectUser>
+    <label>
+      <option>
+        <userName>#{word.userName}</userName>
+        <lastName>#{word.lastName}</lastName>
+        <firstName>#{word.firstName}</firstName>
+        <email>#{word.email}</email>
+      </option>
+      <group>群組</group>
+      <searchUser>使用者</searchUser>
+      <userName>#{word.userName}</userName>
+      <lastName>#{word.lastName}</lastName>
+      <firstName>#{word.firstName}</firstName>
+    <email>#{word.email}</email>
+      <action>#{word.action}</action>
+      <Add>#{word.Add}</Add>
+      <Close>#{word.Close}</Close>
+    </label>
+  </PermissionTreeSelectUser>
+  
+  <!--
+  #########Since ECM 2.6 ##################
+  -->   
+  <DriveInputSet>
+    <label>
+      <nt_folder>文件資料夾</nt_folder>
+      <nt_unstructured>內容資料夾</nt_unstructured>
+      <exo_cssFolder>CSS 資料夾</exo_cssFolder>
+      <exo_jsFolder>JAVAscript 的資料夾</exo_jsFolder>
+      <exo_linkFolder>連結資料夾</exo_linkFolder>
+      <exo_webFolder>Web 內容資料夾</exo_webFolder>
+   </label>
+  </DriveInputSet>
+  <UIPermissionTreeInfo>
+  <msg>
+      <confirm-delete-permission>確定要刪除此權限嗎?</confirm-delete-permission>
+      <no-permission-remove>您不能刪除擁有者或系統使用者。</no-permission-remove>  
+  </msg>
+  </UIPermissionTreeInfo>  
+  <UITaxonomyTreeMainForm>
+<msg>
+      <no-right-target-path>請選擇另一個首頁路徑。</no-right-target-path>
+</msg>
+</UITaxonomyTreeMainForm>
+
+<UIECMAdminControlPanel>
+    <tab>
+      <label>        
+        <ManageUnLock>管理鎖</ManageUnLock>
+      </label>
+    </tab>        
+</UIECMAdminControlPanel>
+<UIUnLockForm>
+    <label>
+      <name>路徑節點</name>      
+      <permissions>權限</permissions>
+      <PermissionButton>UI Unlock Form</PermissionButton>
+    </label>
+    <action>
+      <Save>#{word.save}</Save>
+      <Cancel>#{word.cancel}</Cancel>
+    </action>
+    <msg>
+      <permission-require>您必須選擇權限。</permission-require>      
+    </msg>
+  </UIUnLockForm>
+  <UILockHolderList>
+  <header>
+  <name>群組或使用者</name>
+  <action>操作</action>
+  </header>
+  <tooltip>
+<DeleteLock>刪除群組</DeleteLock>
+  </tooltip>
+  <msg>
+  <can-not-delete-lock-holder>不能刪除的群組 {0}。</can-not-delete-lock-holder>
+  </msg>
+  </UILockHolderList>
+  <UILockNodeList>
+  <header>
+  <name>標題</name>
+  <hoderLock>鎖的擁有者</hoderLock>
+  <action>操作</action>
+  </header>
+  <tooltip>
+<UnLock>解鎖</UnLock>
+  </tooltip>
+  <msg>
+  <access-denied-exception>您沒有權限訪問的節點路徑 {0}，或此節點將被刪除。</access-denied-exception>
+  </msg>
+  </UILockNodeList>
+  <EditUnLockForm>
+    <title>
+      <UIUnLockForm>管理鎖</UIUnLockForm>
+    </title>
+  </EditUnLockForm>  
+  <UITabPane>
+    <action>
+      <Close>#{word.close}</Close>
+    </action>
+    <title>
+    <UILockHolderContainer>管理鎖</UILockHolderContainer>
+    <UILockNodeList>鎖定的節點</UILockNodeList>
+    </title>
+  </UITabPane>
+  
+  <UIViewFormTabPane>
+    <action>
+      <AddTabForm>增加標籤</AddTabForm>
+      <AddTab>#{word.save}</AddTab>
+      <BackViewForm>返回</BackViewForm>
+    </action>
+  </UIViewFormTabPane>
+  
+ <UITemplateForm>
+<tab>
+<label>
+<defaultSkin>CSS</defaultSkin>
+</label>
+</tab>
+</UITemplateForm>
+ 
+  <UITabPane>
+    <title>
+      <UISkinTab>CSS</UISkinTab>
+    </title>
+  </UITabPane>
+  
+  <UISkinTab>
+    <header>
+      <name>名稱</name>
+      <roles>角色</roles>
+      <baseVersion>版本</baseVersion>
+      <action>操作</action>
+    </header>
+    <msg>
+      <undeletable>您不能刪除 '{0}' 因為它是預設的。</undeletable>
+      <confirm-delete>你確定要刪除這個面板？</confirm-delete>
+    </msg>
+    <action>
+      <title>
+        <Edit>編輯</Edit>
+        <Delete>刪除</Delete>
+      </title>
+    </action>
+  </UISkinTab>
+  
+  <SkinForm>
+    <label>
+      <UITemplateContent>SkinForm</UITemplateContent>
+      <UIPopupWindow>面板權限</UIPopupWindow>
+      <selectVersion>版本</selectVersion>
+      <content>內容：</content>
+      <name>名稱：</name>
+      <isDocumentTemplate>是文件範本：</isDocumentTemplate>
+      <viewPermission>權限：</viewPermission>
+      <enableVersion>啟用版本控制</enableVersion>
+    </label>
+    <title>增加/編輯面板</title>
+  </SkinForm>
+
+ <UITagManager>
+   <action>
+     <title>
+       <RemoveStyle>刪除</RemoveStyle>
+         <AddStyle>增加樣式</AddStyle>
+     </title>
+   </action>
+   <msg>
+     <confirm-delete>是否確定要刪除該樣式?</confirm-delete>
+   </msg>
+ </UITagManager>
+
+<UITaxonomyTreeContainer>
+<action>
+<Cancel>#{word.close}</Cancel>
+</action>
+</UITaxonomyTreeContainer>
+<UITaxonomyTreeMainForm>
+<action>
+<NextViewPermission>下一步</NextViewPermission>
+<Reset>Reset</Reset>
+</action>
+</UITaxonomyTreeMainForm>
+
+<UIPermissionTreeForm>
+<action>
+<Save>Save</Save>
+<Reset>Reset</Reset>
+<NextAddAction>下一步</NextAddAction>
+<Previous>上一步</Previous>
+</action>
+</UIPermissionTreeForm>
+
+<UIActionForm>
+<action>
+<PreviousViewPermission>上一步</PreviousViewPermission>
+<NextViewTree>下一步</NextViewTree>
+</action>
+  <msg>
+    <xss-vulnerability-character>欄位"{0}"包含 XSS 漏洞字元</xss-vulnerability-character>
+<xss-vulnerability-character-wo-label>您的輸入可能包含 XSS 漏洞字元</xss-vulnerability-character-wo-label>
+  </msg>
+</UIActionForm>
+
+<UITaxonomyTreeWorkingArea>
+<action>
+<Previous>上一步</Previous>
+</action>
+</UITaxonomyTreeWorkingArea>
+
+  <UITabPane>
+    <title>
+      <UITagManager>標籤管理</UITagManager>
+      <UITagPermissionManager>標籤權限管理</UITagPermissionManager>
+    </title>
+  </UITabPane>
+  
+  <UITagPermissionInfo>
+    <header>
+      <usersOrGroups>使用者或群組</usersOrGroups>
+      <action>操作</action>
+    </header>
+    <action>
+      <title>
+        <Delete>刪除</Delete>
+      </title>
+    </action>
+    <msg>
+      <confirm-delete-permission>確定要刪除此權限嗎?</confirm-delete-permission>
+    </msg>   
+  </UITagPermissionInfo>
+  <UITagPermissionForm>
+    <title>增加權限</title>
+    <action>
+      <Save>#{word.save}</Save>
+      <Add>新增</Add>
+    </action>
+    <label>
+      <userOrGroup>成員身份：</userOrGroup>
+    </label>
+    <msg>
+      <userOrGroup-alreadyExists>此成員已存在。請選擇另一個。</userOrGroup-alreadyExists>
+    </msg>    
+  </UITagPermissionForm>
+  
+  <UIGroupMemberSelector>
+    <label>
+      <selectGroup>選擇群組</selectGroup>
+      <selectMembership>選擇成員身份</selectMembership>
+    </label>
+  </UIGroupMemberSelector>
+  
+  <UIFolksonomyManager>
+  <msg>
+      <confirm-delete>是否確定要刪除該樣式?</confirm-delete>
+  </msg>
+    <action>
+      <title>
+        <AddStyle>增加樣式</AddStyle>
+      </title>
+    </action>
+  </UIFolksonomyManager>  
+<UIActionForm>
+  <title>
+  <ShowComponent>打開視窗</ShowComponent>
+  <removeReference>刪除</removeReference>
+  </title>
+  </UIActionForm> 
+  <NodeTypeNameValidator>
+    <msg>
+      <Invalid-char>有一些不正確字元。請輸入另一個值。</Invalid-char>
+      <empty-input>欄位的值是空的。</empty-input>
+    </msg>
+  </NodeTypeNameValidator>
+  <UIActionForm>
+    <msg>
+      <constraint-violation-exception>節點"{0}"不能增加到 '{1}' 在工作區中 '{2}'。有權限或約束條件的問題。</constraint-violation-exception>
+    </msg>
+  </UIActionForm>
+  
+  <UIWorkspaceWizard>
+    <msg>
+      <name-not-allowed>禁止的名稱</name-not-allowed>
+    </msg>
+  </UIWorkspaceWizard>
+  <UIRepositoryForm>
+    <msg>
+      <not-complete-repository>The repository is being created. You need to wait a few minutes before creating another one.</not-complete-repository>
+    </msg>
+  </UIRepositoryForm>
+  
+  <UIViewFormTabPane>
+  <label>
+  <addCategory>新增類別</addCategory>
+          <addLocalizationLink>增加翻譯</addLocalizationLink>
+  </label>
+  </UIViewFormTabPane>
+
+<UIDriveForm>
+<label>
+<allowNodeTypesOnTree>津貼節點類型在左樹上：</allowNodeTypesOnTree>
+</label>
+</UIDriveForm>
+<DriveInputSet>
+<title>
+<RemovePermission>Remove Permission</RemovePermission>
+<ChooseNodeType>選擇節點類型</ChooseNodeType>
+<RemoveNodeType>刪除</RemoveNodeType>
+</title>
+</DriveInputSet>
+<PopupNodeTypeSelector>
+<title>
+<UINodeTypeSelector>選擇節點類型</UINodeTypeSelector>
+<PopupNodeTypeSelector>選擇節點類型</PopupNodeTypeSelector>
+</title>
+</PopupNodeTypeSelector>
+  <UINodeTypeSelector>
+    <label>
+      <selectedAllNodeTypes>選擇所有節點類型</selectedAllNodeTypes>
+    </label>
+  </UINodeTypeSelector>
+  <UIScriptForm>
+    <msg>
+      <PathNotFoundException>'{0}' 資料夾中已經存在該腳本。</PathNotFoundException>      
+    </msg>
+  </UIScriptForm>
+ <UINodeTypeList>
+   <msg>
+   <no-list>沒有節點類型符合您的搜索。</no-list>
+   </msg>
+ </UINodeTypeList>
+  <UIActionForm>
+    <msg>
+      <canotChangeActionId>您不能更改操作 id。</canotChangeActionId>
+    </msg>
+  </UIActionForm>
+  <PopupComponent>
+    <title>
+      <UINodeTypeSelector>節點類型選擇器</UINodeTypeSelector>
+    </title>
+  </PopupComponent>
+  <UIPageIterator>
+    <label>
+      <maxPageSize>最大頁面大小</maxPageSize>
+    </label>
+  </UIPageIterator>
+  <UILockNodeList>
+    <msg>
+      <can-not-unlock-node>您沒有權限來解鎖此節點。請與管理員聯繫以獲取正確的權利。</can-not-unlock-node>
+    </msg>
+ </UILockNodeList>
+</bundle>

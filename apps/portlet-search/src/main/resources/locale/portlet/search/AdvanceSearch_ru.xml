@@ -19,15 +19,15 @@
       <DocumentAndPage>Документ и страница</DocumentAndPage>
       <documentandpage>Документ и страница</documentandpage>
       <resutlsCaption>Результаты</resutlsCaption>
-      <ofAboutCaption>of about</ofAboutCaption>
-      <forCaption>for</forCaption>
+      <ofAboutCaption>около</ofAboutCaption>
+      <forCaption>для</forCaption>
       <timeUnitCaption>секунд</timeUnitCaption>
       <similar>Страницы с тем же содержимым</similar>
       <editor>Редактор</editor>
       <date>Дата</date>
-      <relevancy>Relevance</relevancy>
+      <relevancy>Релевантность</relevancy>
       <title>Заголовок</title>
-      <sortBy>Sort By:</sortBy>
+      <sortBy>Сортировать по:</sortBy>
     </label>
     <action>
       <edit>Редактировать</edit>
@@ -41,16 +41,16 @@
   <UISearchPageLayoutManager>
     <label>
       <itemsPerPageSelector>Результатов на странице</itemsPerPageSelector>
-      <searchFormSelector>Поиск по шаблону</searchFormSelector>
+      <searchFormSelector>Шаблон формы поиска</searchFormSelector>
       <searchResultSelector>Шаблон результатов поиска</searchResultSelector>
-      <searchPaginatorSelector>Search Paginator Template</searchPaginatorSelector>
-      <searchPageLayoutSelector>Search Page Layout Template</searchPageLayoutSelector>
-      <searchResultBasePathInputSetAction>Base Path</searchResultBasePathInputSetAction>
+      <searchPaginatorSelector>Поиск шаблона разбивки на страницы</searchPaginatorSelector>
+      <searchPageLayoutSelector>Поиск шаблона макета страницы</searchPageLayoutSelector>
+      <searchResultBasePathInputSetAction>Базовый путь</searchResultBasePathInputSetAction>
       <pageMode>Режим страницы</pageMode>
       <option>
-        <none>None</none>
+        <none>Нет</none>
         <more>Еще</more>
-        <pagination>Pagination</pagination>
+        <pagination>Разбивка на страницы</pagination>
       </option>
     </label>
     <action>
@@ -60,7 +60,7 @@
   </UISearchPageLayoutManager>
   <searchResultBasePathInputSetAction>
     <title>
-      <SelectBasePath>Select Base Path</SelectBasePath>
+      <SelectBasePath>Выбрать базовый путь</SelectBasePath>
     </title>
   </searchResultBasePathInputSetAction>  
   <UISearchForm>  
@@ -72,7 +72,7 @@
   </UISearchForm>
   <UIPaginatorDefault>
     <label>
-      <next>Далее</next>
+      <next>Вперед</next>
       <previous>Предыдущий</previous>
       <more>Еще</more>
     </label>
@@ -84,14 +84,14 @@
   </UISearchPageLayoutDefault>
   <searchOption>
     <label>
-      <pageCheckBox>in Pages</pageCheckBox>
-      <documentCheckBox>in Content</documentCheckBox>
+      <pageCheckBox>на страницах</pageCheckBox>
+      <documentCheckBox>в содержании</documentCheckBox>
     </label>
   </searchOption>
   <ViewMode>
     <label>
       <option>
-        <all>search all sites</all>
+        <all>поиск всех сайтов</all>
       </option>  
     </label>  
   </ViewMode>

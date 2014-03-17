@@ -15,31 +15,31 @@
   </UICLVContainer>
   <UIViewerManagementPopupWindow>
     <title>
-      <UICLVConfig>Content List Preferences</UICLVConfig>
+      <UICLVConfig>Настройки содержания</UICLVConfig>
     </title>
   </UIViewerManagementPopupWindow>
   <UICLVConfig>
     <label>
-      <Title>Content List Preferences</Title>
-      <ContentSelectionBlock>Content Selection</ContentSelectionBlock>
+      <Title>Настройки содержания</Title>
+      <ContentSelectionBlock>Выбор контента</ContentSelectionBlock>
       <UICLVConfigDisplayModeFormRadioBoxInput>Режим</UICLVConfigDisplayModeFormRadioBoxInput>
       <UICLVConfigItemPathFormInputSet>Путь к папке</UICLVConfigItemPathFormInputSet>
     <UICLVConfigItemPathFormStringInput>Путь к папке</UICLVConfigItemPathFormStringInput>
-      <UICLVConfigOrderByFormSelectBox>Order by</UICLVConfigOrderByFormSelectBox>
+      <UICLVConfigOrderByFormSelectBox>Сортировать по</UICLVConfigOrderByFormSelectBox>
       <option>
         <exo:title>Заголовок</exo:title>
         <exo:dateCreated>Дата создания</exo:dateCreated>
         <exo:lastModifiedDate>Дата изменения</exo:lastModifiedDate>
         <publication:liveDate>Дата публикации</publication:liveDate>
         <exo:startEvent>Дата события</exo:startEvent>
-        <exo:index>Index</exo:index>
-        <DESC>Descendant</DESC>
-        <ASC>Ascendant</ASC>
+        <exo:index>Индекс</exo:index>
+        <DESC>По убыванию</DESC>
+        <ASC>По возрастанию</ASC>
       </option>
       <DisplaySettingBlock>Настройки экрана</DisplaySettingBlock>
       <UICLVConfigHeaderFormStringInput>Заголовок</UICLVConfigHeaderFormStringInput>
       <UICLVConfigDisplayTemplateFormSelectBox>Шаблон</UICLVConfigDisplayTemplateFormSelectBox>
-      <UICLVConfigPaginatorTemplateFormSelectBox>Paginator</UICLVConfigPaginatorTemplateFormSelectBox>
+      <UICLVConfigPaginatorTemplateFormSelectBox>Разбивка на страницы</UICLVConfigPaginatorTemplateFormSelectBox>
       <UICLVConfigItemsPerPageFormStringInput>Результатов на странице</UICLVConfigItemsPerPageFormStringInput>
       <UICLVConfigShowIllustrationFormCheckboxInput>Show Image</UICLVConfigShowIllustrationFormCheckboxInput>
       <UICLVConfigShowSummaryFormCheckboxInput>Show Summary</UICLVConfigShowSummaryFormCheckboxInput>
@@ -55,8 +55,8 @@
       <AdvancedBlock>Расширенные</AdvancedBlock>
       <UICLVConfigDynamicNavigationLabel>Динамическая навигация</UICLVConfigDynamicNavigationLabel>
       <UICLVConfigContextualFolderRadioBoxInput>Contextual Folder</UICLVConfigContextualFolderRadioBoxInput>
-      <UICLVConfigShowCLVByStringInput>by</UICLVConfigShowCLVByStringInput>
-      <UICLVConfigshowSCVWithStringInput>with</UICLVConfigshowSCVWithStringInput>
+      <UICLVConfigShowCLVByStringInput/>
+      <UICLVConfigshowSCVWithStringInput>с</UICLVConfigshowSCVWithStringInput>
       <UICLVConfigTargetPageFormInputSet>Показать на странице</UICLVConfigTargetPageFormInputSet>
       <content-not-found>Content not found.</content-not-found>
       <ContentPath>Путь к содержимому</ContentPath>
@@ -75,10 +75,10 @@
       <GeneralOptionHelp>Select the graphical elements you want to show in your list. Note that, depending on your selected template, some elements may not be available.</GeneralOptionHelp>
       <ContextualHelp>Активирует возможность динамической навигации. Другие могут изменить содержимое динамически на основе параметра URL-адреса.</ContextualHelp>
       <ParameterHelp>Этот параметр будет использоваться для доступа к содержимому, если активирована динамическая навигация.</ParameterHelp>
-      <ShowDetailInPageHelp>Clicking on content redirects the user to a Detail page. You must have a "Content by URL" portlet with Dynamic Navigation enabled on the target page to show the content.</ShowDetailInPageHelp>
-      <DetailParameterHelp>This parameter will contain the path to the content in the link to the Detail page. This parameter must match the parameter used in the "Content by URL" portlet of the page.</DetailParameterHelp>
-      <ContentByQueryHelp>You can set a SQL Query to get content dynamically. The following parameters are allowed : ${user}, ${lang} or any get parameter (PARAM) surrounded by ${PARAM}.</ContentByQueryHelp>
-      <ContentsVisibilityHelp>"Restricted by Authentication" will filter the content based on the authentication. If you do not sign in, you see public content only. If you are logged in, you see all the content visible by intranet users (but shared by all). "Restricted by User Roles" means you will see content depending on your rights. In most cases, this option should not be used, as it reduces the overall performance.</ContentsVisibilityHelp>
+      <ShowDetailInPageHelp>Нажатие на контент перенаправляет пользователя на страницу Подробности. Для отображения контента на целевой странице у вас должен быть включен портлет "Контент по URL" с Динамической Навигацией.</ShowDetailInPageHelp>
+      <DetailParameterHelp>Этот параметр будет содержать путь к контенту в ссылке на страницу Подробности. Этот параметр должен соответствовать параметру, используемому в портлете "Контент по URL" страницы.</DetailParameterHelp>
+      <ContentByQueryHelp>Вы можете установить SQL Query, чтобы получать контент динамически. Допустимы следующие параметры: ${user}, ${lang} или любой параметр получения (PARAM), окруженный ${PARAM}.</ContentByQueryHelp>
+      <ContentsVisibilityHelp>"Ограничено механизмом аутентификации" отфильтрует контент, основываясь на аутентификации. Если не авторизуетесь, вы увидите только общедоступный контент. Если вы авторизуетесь, вы увидите весь контент, доступный для пользователей внутренней сети (но доступный для всех). "Ограничено пользовательскими ролями" означает, что вы увидите контент в зависимости от ваших прав доступа. В большинстве случаев, не следует использовать эту опцию, т.к. она снижает общую производительность.</ContentsVisibilityHelp>
     </help>
     <action>
       <Save>#{word.save}</Save>
@@ -91,7 +91,7 @@
     </msg>
     <tab>
       <label>
-        <clvContentTab>Выделение содержимого</clvContentTab>
+        <clvContentTab>Выбор контента</clvContentTab>
         <clvDisplayTab>Настройки экрана</clvDisplayTab>
         <clvAdvancedTab>Расширенные</clvAdvancedTab>
       </label>
@@ -117,15 +117,15 @@
   <UICLVConfigOrderTypeFormSelectBox>
     <label>
       <option>
-        <OrderDesc>Descendant</OrderDesc>
-        <OrderAsc>Ascendant</OrderAsc>
+        <OrderDesc>По убыванию</OrderDesc>
+        <OrderAsc>По возрастанию</OrderAsc>
       </option>
     </label>
   </UICLVConfigOrderTypeFormSelectBox>
   <UICLVConfigTargetPageFormInputSet>
     <title>
-      <SelectBasePath>Select Base Path</SelectBasePath>
-      <SelectTargetPage>Select Base Path</SelectTargetPage>
+      <SelectBasePath>Выбрать базовый путь</SelectBasePath>
+      <SelectTargetPage>Выбрать базовый путь</SelectTargetPage>
     </title>
   </UICLVConfigTargetPageFormInputSet>
   <UICLVBasePathPopupWindow>
@@ -144,7 +144,7 @@
     </label>
     <action>
       <refresh>Обновить</refresh>
-      <edit>Изменить в Content Explorer</edit>
+      <edit>Изменить в Обозревателе Контента</edit>
       <delete>Удалить</delete>
       <publish>Опубликовать</publish>
     </action>
@@ -170,19 +170,19 @@
   </UICLVConfigContextualFolderRadioBoxInput>
   <PublicationStates>
     <archived>В архиве</archived>
-    <obsolete>Obsolete</obsolete>
+    <obsolete>Устаревшие</obsolete>
     <unpublished>Не опубликовано</unpublished>
-    <enrolled>Enrolled</enrolled>
+    <enrolled>Подключенный</enrolled>
     <draft>Черновик</draft>
-    <pending>Pending</pending>
+    <pending>В ожидании</pending>
     <approved>Утверждено</approved>
     <inreview>На рассмотрении</inreview>
-    <staged>Staged</staged>
+    <staged>Размещенный</staged>
     <published>Опубликовано</published>
   </PublicationStates>
   <UICLVConfigCacheEnableRadioBoxInput>
     <label>
-      <ENABLE>Restricted by Authentication</ENABLE>
+      <ENABLE>Ограничено механизмом аутентификации</ENABLE>
       <DISABLE>Restricted by User Roles</DISABLE>
     </label>
   </UICLVConfigCacheEnableRadioBoxInput>

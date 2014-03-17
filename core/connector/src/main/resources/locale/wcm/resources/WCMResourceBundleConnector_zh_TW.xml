@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<bundle>
+  <ContentSelector>
+    <msg>
+      <no-file-selected>沒有選定的內容。請至少選擇一個。</no-file-selected>
+    </msg>
+  </ContentSelector>
+  <RenameConnector>
+    <label>
+      <rename>重新命名</rename>
+      <cancel>取消</cancel>
+    </label>
+    <msg>
+      <renaming>重新命名中......</renaming>
+    </msg>
+  </RenameConnector>
+</bundle>
