@@ -53,7 +53,8 @@ public class EditFilePropertyActivityAction implements Action{
       }
     }
     //Notify to update activity
-    if(activityService.isBroadcastNTFileEvents(node)) {
+    if(node.getPrimaryNodeType().getName().equals(NodetypeConstant.NT_FILE) && activityService.isBroadcastNTFileEvents(node) 
+        && !activityService.isCreating(node)) {
       listenerService.broadcast(ActivityCommonService.FILE_EDIT_ACTIVITY, nodeTemp, propertyName);
     }    
     return false;

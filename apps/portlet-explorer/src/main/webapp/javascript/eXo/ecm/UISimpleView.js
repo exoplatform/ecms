@@ -728,8 +728,9 @@
       var checkInTrash = false;
       var checkEmptyTrash = false;
       var checkMediaType = false;
-      var checkLinkAndTargetInTash = false;
-  	  var checkExoActionNode = false;
+      var checkLinkAndTargetInTrash = false;
+      var checkExoActionNode = false;
+      var checkInStatus = false;
 
       for (var i in Self.itemsSelected) {
         if (Array.prototype[i]) continue;
@@ -740,7 +741,7 @@
   	  	}  
   	  	//check symlink and target are in trash to show Delete button only on action bar.
   	  	else if (Self.itemsSelected[i].getAttribute('isLinkWithTarget') == "true") {
-  	  	  checkLinkAndTargetInTash = true; 
+  	  	  checkLinkAndTargetInTrash = true; 
   	  	  continue;
   	  	}
         if (Self.itemsSelected[i].getAttribute('locked') == "true") checkUnlock = true;
@@ -748,6 +749,7 @@
         if (Self.itemsSelected[i].getAttribute('inTrash') == "true") checkInTrash = true;
         if (Self.itemsSelected[i].getAttribute('trashHome') == "true") checkEmptyTrash = true;
         if (Self.itemsSelected[i].getAttribute('mediaType') == "true") checkMediaType = true;
+        if (Self.itemsSelected[i].getAttribute('isCheckedIn') == "true") checkInStatus = true;
       }
       
       var lockAction = gj(contextMenu).find("i.uiIconEcmsLock:first")[0];
@@ -767,7 +769,7 @@
   	  if (checkExoActionNode) {
   		// disable all buttons
         contextMenu.style.display = "none";
-  	  } else if (checkLinkAndTargetInTash) {
+  	  } else if (checkLinkAndTargetInTrash) {
   		  // just display Delete button.
   		deleteAction.parentNode.style.display = "block";
   		unlockAction.parentNode.parentNode.style.display = "none";
@@ -800,9 +802,13 @@
   		  
   		if (!checkInTrash) {
   		  restoreFromTrashAction.parentNode.parentNode.style.display = "none";
-  		}
-  		if (checkInTrash) {
+  		}else{
   		  restoreFromTrashAction.parentNode.parentNode.style.display = "block";
+  		}
+  		if (checkInStatus) {
+  		  addSymLinkAction.parentNode.style.display = "none";
+  		} else {
+  		  addSymLinkAction.parentNode.style.display = "block";
   		}
   		if (!checkMediaType) {
   		  playMediaAction.parentNode.style.display = "none";

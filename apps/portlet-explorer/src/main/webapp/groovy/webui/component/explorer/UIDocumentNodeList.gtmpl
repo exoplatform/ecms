@@ -228,8 +228,8 @@ public void writeNodes(level, i, data, uiWorkingArea, linkManager, restContextNa
 			<span class="uiCheckbox"><input type="checkbox" name="checkbox" class="checkbox"><span></span></span>
 		</div>
     <div class="columnText" data-placement="bottom" rel="tooltip" title="$lockedLabel">
-			<a href="javascript void(0)" onmousedown="$actionLink" onmouseup="eXo.ecm.UIFileView.cancelEvent(event);">
-					<span class="nodeName"><%=fileName%><span>
+			<a href="javascript:void(0);" onmousedown="$actionLink" onmouseup="eXo.ecm.UIFileView.cancelEvent(event);">
+					<span class="nodeName"><%=fileName%></span>
 			</a>
 			<span class="nodeLabel fileExtension"><%=fileExtension%></span>
 

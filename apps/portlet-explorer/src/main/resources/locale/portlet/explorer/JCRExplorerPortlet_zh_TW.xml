@@ -1,0 +1,3169 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<bundle>
+  <!--
+  #############################################################################
+  #             org.exoplatform.ecm.webui.component.UICommentForm             #
+  #############################################################################
+  -->
+  <UICommentForm>
+    <label>
+      <name>名稱</name>
+      <email>電子郵件：</email>
+      <website>網站</website>
+      <comment>評論</comment>
+    </label>
+    <action>
+      <Save>#{word.save}</Save>
+      <Cancel>#{word.cancel}</Cancel>
+    </action>
+    <msg>
+      <not-support>你不能評論此文件類型。</not-support>
+      <not-checkedout>您必須簽出該節點之前對其進行評論。</not-checkedout>
+      <content-null>你不能發佈一個空的評論。</content-null>
+    </msg>
+  </UICommentForm>
+  <!--
+  #############################################################
+  # org.exoplatform.ecm.webui.component.UIVoteForm.gtmpl    #
+  #############################################################
+  -->
+  <UIVoteForm>
+    <title>
+      <normal>可憐</normal>
+      <good>低於平均值</good>
+      <verygood>平均</verygood>
+      <excellent>高於平均值</excellent>
+      <best>很好</best>
+      <no-value>還沒有任何值</no-value>
+    </title>
+    <label>
+      <my-rating>我的評分：</my-rating>
+    </label>
+    <button>
+      <label>
+        <confirm>OK</confirm>
+      </label>
+    </button>
+    <msg>
+      <not-support>您不能投票的此文件類型。</not-support>
+      <not-checkedout>在表決前，您必須簽出該節點。</not-checkedout>
+      <vote-restriction>您不能投票超過一次。</vote-restriction>
+    </msg>
+  </UIVoteForm>
+ 
+  <!--
+  #############################################################################
+  #             org.exoplatform.ecm.webui.component.explorer.UIJCRExplorer    #
+  #############################################################################
+  -->
+  <UIJCRExplorer>
+    <msg>
+      <refresh-session-success>會話已成功刷新。</refresh-session-success>
+      <no-node-history>你在根節點中。</no-node-history>
+      <save-session-success>已保存所有更改。</save-session-success>
+      <target-path-not-found>您不能訪問此節點，因為它已經不存在了，或者因為您沒有訪問它的權利。</target-path-not-found>
+    </msg>
+  </UIJCRExplorer>
+  <!--
+  #############################################################################
+  #             org.exoplatform.ecm.webui.component.explorer.UISideBar        #
+  #############################################################################
+  -->
+  <UISideBar>
+    <label>
+      <Relation>關係</Relation>
+      <Explorer>檔案資源管理器</Explorer>
+      <Close>關閉側邊欄</Close>
+      <TagExplorer>標籤雲</TagExplorer>
+      <Clipboard>剪貼簿</Clipboard>
+      <SavedSearches>已保存的搜索</SavedSearches>
+    </label>
+    <title>
+      <Control>Control Sidebar</Control>
+      <Close>關閉側邊欄</Close>
+    </title>
+  </UISideBar>
+  <!--
+  ################################################################################
+  #             org.exoplatform.ecm.webui.component.explorer.UIExplorerActionBar #
+  ################################################################################
+  -->
+  <UIViewBar>
+    <label>
+      <driveWorkspace>磁碟機工作區：</driveWorkspace>
+      <backToJCR>回 JCR 主要磁碟機</backToJCR>
+      <setUpBrowser>設定您的瀏覽喜好</setUpBrowser>
+      <refesh>重新整理</refesh>
+      <currentDrive>當前磁碟機</currentDrive>
+      <selectView>選擇視圖</selectView>
+      <showSideBar>顯示側邊欄</showSideBar>
+      <more>更多</more>
+      <backTo>返回</backTo>
+    </label>
+  </UIViewBar>
+
+  <!--
+  #############################################################################
+  #             org.exoplatform.ecm.webui.component.explorer.UIDrivesArea  #
+  #############################################################################
+  -->
+  <UIDrivesBrowser>
+    <title>
+      <PersonalDrives>個人磁碟機</PersonalDrives>
+      <GroupDrives>群組磁碟機</GroupDrives>
+      <GeneralDrives>一般的磁碟機</GeneralDrives>
+    </title>
+    <msg>
+      <no-view-found>沒有視圖可根據您在磁碟機 '{0}' 中的存取權限。</no-view-found>
+      <access-denied>訪問被拒絕。您可能沒有在工作區中的磁碟機權限 '{0}' 。</access-denied>
+      <workspace-not-exist>磁碟機 '{0}' 存儲在一個無法識別的工作區中。請重新配置此磁碟機。</workspace-not-exist>
+    </msg>
+  </UIDrivesBrowser>
+
+  <!--
+  #############################################################################
+  #             org.exoplatform.ecm.webui.component.explorer.UITreeExplorer    #
+  #############################################################################
+  -->
+  <UITreeExplorer>
+    <title>資源管理器</title>
+    <label>
+      <Root>根</Root>
+      <webDavView>下載並允許編輯</webDavView>
+    </label>
+    <msg>
+      <path-not-found>此元素被刪除或更改。請按一下刷新按鈕。</path-not-found>
+    </msg>
+  </UITreeExplorer>
+  <!--
+  ##################################################################################
+  #             org.exoplatform.ecm.webui.component.explorer.UIViewRelationList    #
+  ##################################################################################
+  -->
+  <UIViewRelationList>
+    <label>
+      <languages-list>翻譯</languages-list>
+      <relation-list>關係</relation-list>
+      <references-list>引用</references-list>
+      <no-related-document>沒有相關的文件</no-related-document>
+      <related-document>相關的檔案</related-document>
+    </label>
+  </UIViewRelationList>
+  <!--
+  #########################################################################################
+  #             org.exoplatform.ecm.webui.component.explorer.control.UIPreferencesForm  #
+  #########################################################################################
+  -->
+  <UIPreferencesForm>
+    <title>設定您的瀏覽喜好</title>
+    <label>
+      <enableStructure>啟用 DMS 結構：</enableStructure>
+      <showSideBar>顯示側邊欄：</showSideBar>
+      <showHiddenNode>顯示隱藏的節點：</showHiddenNode>
+      <showNonDocument>顯示非文件節點：</showNonDocument>
+      <showRefDocuments>顯示引用的文件：</showRefDocuments>
+      <enableDragAndDrop>啟用拖拉 &amp; 拖放：</enableDragAndDrop>
+      <sortBy>排序依據:</sortBy>
+      <order>排序依據:</order>
+      <nodesPerPage>每頁的節點：</nodesPerPage>
+    </label>
+    <action>
+      <Back>#{word.close}</Back>
+      <Save>#{word.save}</Save>
+    </action>
+  </UIPreferencesForm>
+  <!--
+  #########################################################################################
+  #             org.exoplatform.ecm.webui.component.explorer.control.UIPreferencesForm  #
+  #########################################################################################
+  -->
+  <UIAllItemsPreferenceForm>
+    <title>將篩選器偏好設定</title>
+    <action>
+      <Cancel>#{word.cancel}</Cancel>
+      <Save>#{word.save}</Save>
+    </action>
+  </UIAllItemsPreferenceForm>
+  <!--
+  #########################################################################################
+  #             org.exoplatform.ecm.webui.component.explorer.UIRenameForm  #
+  #########################################################################################
+  -->
+  <UIRenameForm>
+    <title>重新命名</title>
+    <label>
+      <nameField>名稱</nameField>
+      <titleField>標題</titleField>
+    </label>
+    <action>
+      <Cancel>#{word.cancel}</Cancel>
+      <Save>#{word.save}</Save>
+      <Back>#{word.back}</Back>
+    </action>
+    <msg>
+      <rename-successfull>節點"{0}"成功更名為 '{1}'。</rename-successfull>
+      <rename-denied>訪問被拒絕。您不能重新命名此節點。</rename-denied>
+      <fileName-invalid>新名稱中包含一些不正確字元。</fileName-invalid>
+      <newName-same-oldName>新的名稱已經存在。請再次檢查。</newName-same-oldName>
+      <version-exception>此節點 （或此節點的祖先） 未簽出。</version-exception>
+      <lock-exception>此節點將被鎖定。請在重新命名之前解鎖。</lock-exception>
+      <constraintViolation-exception>重新命名節點"{0}"時出錯。請再次檢查。</constraintViolation-exception>
+      <unknown-prefix>首碼 '{0}' 尚未註冊。</unknown-prefix>
+      <rename-error>重新命名此節點時出錯。請再次檢查。</rename-error>
+    </msg>
+  </UIRenameForm>
+  <UIPopupWindow>
+    <title>
+      <UIRenameForm>重新命名</UIRenameForm>
+      <UIActionContainer>編輯操作</UIActionContainer>
+      <UIFolderForm>新資料夾</UIFolderForm>
+      <UIUploadManager>上傳檔案</UIUploadManager>
+      <UIReferencesList>引用清單</UIReferencesList>
+      <UIExportNode>匯出</UIExportNode>
+      <UINodeTypeInfo>節點類型資訊</UINodeTypeInfo>
+      <UIVersionInfo>版本資訊</UIVersionInfo>
+      <UIActivateVersion>啟動版本</UIActivateVersion>
+      <UIAuditingInfo>審計資訊</UIAuditingInfo>
+      <UIActivateAuditing>啟動審核</UIActivateAuditing>
+      <UIPermissionManager>權限管理</UIPermissionManager>
+      <UIPropertiesManager>屬性管理</UIPropertiesManager>
+      <UIECMSearch>進階搜尋</UIECMSearch>
+      <UISavedQuery>保存的查詢清單</UISavedQuery>
+      <UIWatchDocumentForm>觀注文件</UIWatchDocumentForm>
+      <UIActionManager>管理操作</UIActionManager>
+      <UIDocumentForm>編輯文件</UIDocumentForm>
+      <UIDocumentFormController>增加新的文件</UIDocumentFormController>
+      <EditFormController>編輯文件</EditFormController>
+      <UIRelationManager>增加關係</UIRelationManager>
+      <UICategoryManager>新增類別</UICategoryManager>
+      <UIImportNode>匯入</UIImportNode>
+      <UIViewMetadataManager>查看中繼資料</UIViewMetadataManager>
+      <UIVoteForm>投票文件</UIVoteForm>
+      <UICommentForm>評論</UICommentForm>
+      <UIPreferencesForm>偏好設定</UIPreferencesForm>
+      <UIPublicationManager>管理出版</UIPublicationManager>
+      <UIConfirmMessage>刪除嗎？</UIConfirmMessage>
+      <UIDeleteFileConfirmMessage>刪除檔案嗎?</UIDeleteFileConfirmMessage>
+      <UIDeleteFolderConfirmMessage>刪除資料夾嗎？</UIDeleteFolderConfirmMessage>
+      <UIDeleteItemsConfirmMessage>刪除項目嗎？</UIDeleteItemsConfirmMessage>
+      <UIRestoreConfirmMessage>確認還原</UIRestoreConfirmMessage>
+      <UIActivePublication>註冊過程註冊到出版物的生命週期</UIActivePublication>
+      <UITaggingForm>標記文件</UITaggingForm>
+      <UIThumbnailForm>增加縮略圖圖像</UIThumbnailForm>
+      <UIAllItemsPreferenceForm>偏好選項設定</UIAllItemsPreferenceForm>
+      <UISelectRestorePath>選擇復原路徑</UISelectRestorePath>
+      <UISEOForm>管理 SEO</UISEOForm>
+      <UISEOToolbarForm>管理 SEO</UISEOToolbarForm>
+    </title>
+    <header>
+      <workspace>工作區</workspace>
+      <path>路徑</path>
+    </header>
+  </UIPopupWindow>
+  <!--
+  #########################################################################################
+  #             org.exoplatform.ecm.webui.component.explorer.UIResourceForm #
+  #########################################################################################
+  -->
+  <UIResourceForm>
+    <title>編輯檔案內容</title>
+    <label>
+      <name>名稱</name>
+      <textToModify>修改的文本</textToModify>
+      <fileToUpload>上載新內容為該文件 （必須是相同的 mime 類型）</fileToUpload>
+    </label>
+  </UIResourceForm>
+  <!--
+  ###################################################################################
+  #             org.exoplatform.ecm.webui.component.explorer.UIActionBar      #
+  ###################################################################################
+  -->
+  <UIActionBar>
+    <tooltip>
+      <AddFolder>新資料夾</AddFolder>
+      <AddDocument>新內容</AddDocument>
+      <EditDocument>編輯</EditDocument>
+      <Upload>上傳</Upload>
+      <Paste>貼上</Paste>
+      <Search>搜索</Search>
+      <WatchDocument>觀注/不觀注</WatchDocument>
+      <TaggingDocument>標記</TaggingDocument>
+      <Vote>投票</Vote>
+      <Comment>評論</Comment>
+      <ManageVersions>版本</ManageVersions>
+      <ManageAuditing>審核</ManageAuditing>
+      <ManagePublications>出版物</ManagePublications>
+      <ManageCategories>類別</ManageCategories>
+      <ManageRelations>關係</ManageRelations>
+      <ManageActions>操作</ManageActions>
+      <ExportNode>匯出</ExportNode>
+      <ImportNode>匯入</ImportNode>
+      <OverloadThumbnail>超載的縮略圖</OverloadThumbnail>
+      <ManageHidden>顯示/隱藏內容</ManageHidden>
+      <ViewReferences>引用</ViewReferences>
+      <ViewNodeType>類型</ViewNodeType>
+      <ViewPermissions>權限</ViewPermissions>
+      <ViewProperties>屬性</ViewProperties>
+      <ViewMetadatas>中繼資料</ViewMetadatas>
+      <ViewRelations>顯示/隱藏關係</ViewRelations>
+      <ShowJCRStructure>顯示/隱藏內容結構</ShowJCRStructure>
+    </tooltip>
+    <msg>
+      <cannot-action-in-rootnode>您不能在根節點中執行此操作。</cannot-action-in-rootnode>
+      <node-checkedin>您必須簽出第一次。</node-checkedin>
+      <cannot-enable-version-rootnode>根節點不能啟用版本控制。</cannot-enable-version-rootnode>
+      <cannot-enable-publication-rootnode>根節點不能啟用出版。</cannot-enable-publication-rootnode>
+      <manage-publication>
+        <not-supported-nodetype>發佈僅限支援文件節點。</not-supported-nodetype>
+        <no-publication-lifecycle>配置沒有發佈生命週期。</no-publication-lifecycle>
+      </manage-publication>
+      <unsubcriber-lifecycle>該節點已經取消訂閱。</unsubcriber-lifecycle>
+      <not-supported-nodetype>未訂閱的生命週期僅限支援文件節點。</not-supported-nodetype>
+      <unsubcriber-lifecycle-finish>該節點已成功取消訂閱。</unsubcriber-lifecycle-finish>
+      <access-false>該節點不是一篇文章或簽入。</access-false>
+      <unsupported-action>不支援此操作。</unsupported-action>
+      <not-relationable>此節點尚未有任何相關連結到另一個節點。</not-relationable>
+      <node-pasted>節點 {0} 已貼在位置 {1}。已經保存此操作。</node-pasted>
+      <no-node-selected>沒有複製節點。</no-node-selected>
+      <unable-edit>節點 '{0}' 與節點類型'{1}' 不支援編輯。</unable-edit>
+      <not-support>不能編輯選定的節點。</not-support>
+      <template-null>此節點有沒有可用的對話方塊。</template-null>
+      <keyword-null>沒有要搜索的關鍵字。</keyword-null>
+      <not-found>沒有找到結果。</not-found>
+      <keyword-not-allow>不允許使用此關鍵字。</keyword-not-allow>
+      <is-not-referenable>節點"{0}"不能被引用。</is-not-referenable>
+      <access-denied>訪問被拒絕。你在此節點中沒有編輯權限。</access-denied>
+      <access-add-denied>訪問被拒絕。你在此節點中沒有增加權限。</access-add-denied>
+      <item-existed>此節點已存在。它不能有相同名稱作為其兄弟。</item-existed>
+      <removed-hidden-mixin>您成功刪除隱藏廠拌。</removed-hidden-mixin>
+      <added-hidden-mixin>您成功增加隱藏廠拌了。</added-hidden-mixin>
+      <not-supported>文件類型僅支援此功能。</not-supported>
+      <empty-file-type>您不能將文件增加到此節點。</empty-file-type>
+      <unsupported-watch>只有文件節點可以看。</unsupported-watch>
+      <watch-checkedin>在看之前，您必須簽出該節點。</watch-checkedin>
+      <unsupported-tagging>可以標記僅在文件節點。</unsupported-tagging>
+      <tagnode-checkedin>在標記前，您必須簽出該節點。</tagnode-checkedin>
+    </msg>
+    <title>
+      <select-tab>選擇標籤</select-tab>
+      <SimpleSearch>快速搜尋</SimpleSearch>
+      <AdvanceSearch>進階搜尋</AdvanceSearch>
+      <SavedQueries>保存的查詢</SavedQueries>
+      <ShowAllOwnedByUser>顯示我所有項目</ShowAllOwnedByUser>
+      <ShowAllFavourite>顯示所有的最愛項目</ShowAllFavourite>
+      <ShowAllHidden>顯示所有隱藏項目</ShowAllHidden>
+      <ShowAllFromTrash>從垃圾桶中顯示所有項目</ShowAllFromTrash>
+    </title>
+  </UIActionBar>
+  <UIPopupMenu>
+    <msg>
+      <has-not-permission>訪問被拒絕。你在此節點中沒有增加權限。</has-not-permission>
+      <has-not-edit-permission>訪問被拒絕。此節點中沒有編輯權限。請與管理員聯繫。</has-not-edit-permission>
+      <cannot-login-node>您不能訪問並貼上在這裡的節點。</cannot-login-node>
+      <cannot-paste-nodetype>不能貼上在這裡的節點。</cannot-paste-nodetype>
+      <has-not-permission-unlok>您沒有權限來解鎖此節點。</has-not-permission-unlok>
+      <bound-exception>你並沒有重命名此節點的權限。請與管理員聯繫。</bound-exception>
+      <bound-move-exception>對本身或它的子節點中，您不能移動節點。</bound-move-exception>
+      <does-not-support-auditing>您不能啟動此節點上的審核。</does-not-support-auditing>
+      <can-not-rename-node>你並沒有重命名此節點的權限。請與管理員聯繫以獲取正確的權利。</can-not-rename-node>
+      <can-not-cut-node>你並沒有剪下此節點的權限。請與管理員聯繫。</can-not-cut-node>
+      <can-not-remove-node>您沒有權限刪除此節點。請與管理員聯繫。</can-not-remove-node>
+      <can-not-lock-node>你並沒有鎖定節點 {0} 的權限。請與管理員聯繫。</can-not-lock-node>
+      <can-not-unlock-node>您沒有權限來解鎖此節點。請與管理員聯繫。</can-not-unlock-node>
+      <no-node>請至少選擇一個節點在貼上之前。</no-node>
+      <can-not-paste-node>你並沒有將節點移動的權限。請與管理員聯繫。</can-not-paste-node>
+      <can-not-move-node>你並沒有將節點移動的權限。請與管理員聯繫。</can-not-move-node>
+      <does-not-support-versioning>你並沒有將節點移動的權限。請與管理員聯繫。</does-not-support-versioning>
+      <path-not-found>此元素被刪除或更改。請按一下刷新按鈕。</path-not-found>
+      <paste-lock-exception>你不能貼上 '{0}' 到此節點，因為來源或目標節點處於鎖定狀態或有關係的鎖定節點。</paste-lock-exception>
+      <can-not-checkin-node>您不能簽入此節點。請檢查您具有正確的權限。</can-not-checkin-node>
+      <can-not-checkout-node>您不能簽出此節點。請檢查您具有正確的權限。</can-not-checkout-node>
+      <move-constraint-exception>移動節點時出錯。</move-constraint-exception>
+      <not-lock-owner>因為你不是鎖的擁有者，您無法解鎖此節點。</not-lock-owner>
+      <is-checked-in>請在重新命名之前檢查節點。</is-checked-in>
+      <is-checked-in-lock>請鎖定之前檢查此節點。</is-checked-in-lock>
+      <cant-lock>您不能鎖定此節點。</cant-lock>
+      <node-locked>具有路徑 {0} 或上部級別的項目被鎖定。</node-locked>
+      <can-not-delete>請在刪除之前，關閉此節點。</can-not-delete>
+      <can-not-delete-version>您不能刪除此節點。這是版本控制。</can-not-delete-version>
+      <not-support>您不能刪除選定的節點。請選擇另一個節點。</not-support>
+      <current-node-not-allow-paste>您不能在當前節點上貼上複製的節點類型。</current-node-not-allow-paste>
+      <copied-node-in-versioning>不能貼上複製的節點。這是版本控制。</copied-node-in-versioning>
+      <parent-node-locked>您沒有權限來解鎖節點"{0}"。</parent-node-locked>
+      <this-node-locked-by-parent>你不能解鎖此節點。父或祖先節點被鎖定。</this-node-locked-by-parent>
+      <paste-node-same-name>您不能在目的檔案夾中貼上具有相同名稱作為一個節點的節點。</paste-node-same-name>
+      <has-not-add-permission>您沒有權限，增加一個新節點。</has-not-add-permission>
+      <node-cutting>節點正被剪下。您不能將其貼上這裡。</node-cutting>
+      <access-denied>訪問被拒絕。您可能在此節點中沒有權限。</access-denied>
+      <remove-verion-exception>您無法刪除此節點，因為它 （或其祖先） 已簽入。</remove-verion-exception>
+      <remove-referentialIntegrityException>不能刪除此節點，因為它當前引用屬性的目標。</remove-referentialIntegrityException>
+      <constraintviolation-exception>找不到強制性專案 jcr:uuid。該節點可能已刪除或更改。請按一下刷新按鈕。</constraintviolation-exception>
+      <path-not-found-exception>此節點已被刪除或更改。請按一下刷新按鈕。</path-not-found-exception>
+      <not-exist-categories>該類別不存在。</not-exist-categories>
+    </msg>
+  </UIPopupMenu>
+  <!--
+  #############################################################################
+  #     org.exoplatform.ecm.webui.component.explorer.actions.UIFolderForm     #
+  #############################################################################
+  -->
+  <UIFolderForm>
+    <action>
+      <Cancel>#{word.cancel}</Cancel>
+      <Save>建立資料夾</Save>
+    </action>
+    <label>
+      <titleTextBox>資料夾名稱：</titleTextBox>
+      <customTypeCheckBox>使用自訂類型資料夾</customTypeCheckBox>
+    </label>
+    <title>增加/編輯資料夾</title>
+    <msg>
+      <addFolder-successful>已成功增加資料夾 '{0}'。</addFolder-successful>
+      <name-invalid>請輸入資料夾名稱。</name-invalid>
+      <title-invalid>請輸入資料夾標題。</title-invalid>
+      <name-not-allowed>此名稱不允許。</name-not-allowed>
+      <fileName-error>檔案名稱不正確。</fileName-error>
+      <constraint-violation>當前節點不允許您增加節點類型 '{0}'。</constraint-violation>
+      <repository-exception>出現意外的錯誤。更多詳細資訊請與您的管理員聯繫。</repository-exception>
+      <repository-exception-permission>你並沒有到此節點增加一個新資料夾的權限。</repository-exception-permission>
+      <numberformat-exception>您不能保存此資料夾。提供的名稱必須是數字格式。</numberformat-exception>
+      <!--DMS 2.4.x; ECM-3553-->
+      <not-allow-sameNameSibling>您不能保存該資料夾。此節點不接受兩個節點具有相同的名稱。</not-allow-sameNameSibling>
+      <ntFolder-not-avaiable>您必須選擇自訂資料夾的類型</ntFolder-not-avaiable>
+    </msg>
+    <help>
+      <customTypeCheckBoxHelp>檢查是否您打算在此資料夾中存儲 web 內容或自訂的文件類型</customTypeCheckBoxHelp>
+    </help>
+  </UIFolderForm>
+  <!--
+  ###################################################################################
+  #             org.exoplatform.ecm.webui.component.explorer.UIDocumentWorkspace    #
+  ###################################################################################
+  -->
+  <UIWorkingArea>
+    <title>
+      <Icon>圖示</Icon>
+    </title>
+    <msg>
+      <!-- Delte one node is not in trash and have no relation -->
+      <confirm-delete>是否確定要刪除項目 '{0}'?</confirm-delete>
+      <confirm-delete-file>是否確定要刪除的檔案 '{0}'?</confirm-delete-file>
+      <confirm-delete-folder>確定要刪除 '{0}' 的資料夾及其所有子資料夾嗎?</confirm-delete-folder>
+      
+      <!-- Delte one node is in trash and have no relation -->
+      <confirm-delete-permanently>你確定你要永久地刪除該項目 '{0}'？</confirm-delete-permanently>
+      <confirm-delete-file-permanently>你確定你要永久地刪除該檔案 '{0}'？</confirm-delete-file-permanently>
+      <confirm-delete-folder-permanently>確定要永久刪除資料夾 '{0}' 和所有子資料夾嗎?</confirm-delete-folder-permanently>
+      
+      <!-- Delte one node is not in trash and have relations -->
+      <confirm-delete-has-relations>是否確定要刪除項目 '{0}' 及其引用?</confirm-delete-has-relations>
+      <confirm-delete-file-has-relations>是否確實要刪除檔案 '{0}' 及其引用?</confirm-delete-file-has-relations>
+      <confirm-delete-folder-has-relations>是否確定要刪除資料夾 '{0}' 及其引用?</confirm-delete-folder-has-relations>
+      
+      <!-- Delte multiple nodes, not in Trash, have no relations -->
+      <confirm-delete-multi-nodes-generic>確定要刪除 {0} 個選定的項目嗎?</confirm-delete-multi-nodes-generic>  
+      <confirm-delete-multi-nodes-file>確定要刪除 {0} 個選定檔案嗎?</confirm-delete-multi-nodes-file>
+      <confirm-delete-multi-nodes-folder>確定要刪除 {0} 個選定資料夾和所有子資料夾嗎?</confirm-delete-multi-nodes-folder>
+      <confirm-delete-multi-nodes-generic-and-file>您確定要刪除選中的 {0} 項目和檔案？</confirm-delete-multi-nodes-generic-and-file>
+      <confirm-delete-multi-nodes-generic-and-folder>確實要刪除 {0} 個選定的項目、 資料夾和所有子資料夾嗎?</confirm-delete-multi-nodes-generic-and-folder>
+      <confirm-delete-multi-nodes-file-and-folder>確定要刪除 {0} 個選定檔案、 資料夾和所有子資料夾嗎?</confirm-delete-multi-nodes-file-and-folder>
+      <confirm-delete-multi-nodes-generic-and-file-and-folder>確定要刪除 {0} 個選定的項目、 檔案、 資料夾和所有子資料夾嗎?</confirm-delete-multi-nodes-generic-and-file-and-folder>
+      
+      <!-- Delte multiple nodes, in Trash -->
+      <confirm-delete-multi-nodes-generic-permanently>確定要永久刪除 {0} 個選定的項目嗎?</confirm-delete-multi-nodes-generic-permanently>  
+      <confirm-delete-multi-nodes-file-permanently>確定要永久刪除 {0} 個選定檔案嗎?</confirm-delete-multi-nodes-file-permanently>
+      <confirm-delete-multi-nodes-folder-permanently>確定要永久刪除 {0} 個選定資料夾和所有子資料夾嗎?</confirm-delete-multi-nodes-folder-permanently>
+      <confirm-delete-multi-nodes-generic-and-file-permanently>你確定你想要永久刪除選中的 {0} 項目和檔案？</confirm-delete-multi-nodes-generic-and-file-permanently>
+      <confirm-delete-multi-nodes-generic-and-folder-permanently>確定要永久刪除 {0} 個選定的項目、 資料夾和所有子資料夾嗎?</confirm-delete-multi-nodes-generic-and-folder-permanently>
+      <confirm-delete-multi-nodes-file-and-folder-permanently>確定要永久刪除 {0} 個選定檔案、 資料夾和所有子資料夾嗎?</confirm-delete-multi-nodes-file-and-folder-permanently>
+      <confirm-delete-multi-nodes-generic-and-file-and-folder-permanently>確定要永久刪除 {0} 個選定的項目、 檔案、 資料夾和所有子資料夾嗎?</confirm-delete-multi-nodes-generic-and-file-and-folder-permanently>
+      
+      <!-- Delte multiple nodes, have relations -->
+      <confirm-delete-multi-nodes-generic-have-relations>是否確定要刪除 {0} 個選定項目和它們的引用?</confirm-delete-multi-nodes-generic-have-relations>  
+      <confirm-delete-multi-nodes-file-have-relations>是否確定要刪除 {0} 個選定檔案和它們的引用?</confirm-delete-multi-nodes-file-have-relations>
+      <confirm-delete-multi-nodes-folder-have-relations>是否確定要刪除 {0} 個選定資料夾、 所有子資料夾和它們的引用?</confirm-delete-multi-nodes-folder-have-relations>
+      <confirm-delete-multi-nodes-generic-and-file-have-relations>是否確定要刪除 {0} 個選定的項目、 檔案和它們的引用?</confirm-delete-multi-nodes-generic-and-file-have-relations>
+      <confirm-delete-multi-nodes-generic-and-folder-have-relations>確定要刪除 {0} 個選定的項目、 它們的引用、 資料夾和所有子資料夾嗎?</confirm-delete-multi-nodes-generic-and-folder-have-relations>
+      <confirm-delete-multi-nodes-file-and-folder-have-relations>您確定要刪除選中的 {0} 的檔案，它們的引用、 資料夾和所有子資料夾？</confirm-delete-multi-nodes-file-and-folder-have-relations>
+      <confirm-delete-multi-nodes-generic-and-file-and-folder-have-relations>您確定要刪除 {0} 個選定的項目、 檔案、 它們的引用、 資料夾和所有子資料夾嗎?</confirm-delete-multi-nodes-generic-and-file-and-folder-have-relations>
+      
+      <feedback-delete>'{0}' 刪除成功。</feedback-delete>
+      <feedback-delete-multi>{0}項目刪除成功。</feedback-delete-multi>      
+      <feedback-delete-permanently>'{0}' 被永久刪除。</feedback-delete-permanently>
+      <feedback-delete-permanently-multi>{0} 項目被永久刪除。</feedback-delete-permanently-multi>
+      <undo-delete>撤銷</undo-delete>
+      <feedback-restore>'{0}' 成功地恢復了。</feedback-restore>
+      <feedback-restore-multi>{0} 項目被成功還原。</feedback-restore-multi>
+      
+      <confirm-restore>節點中的舊位置"{0}"已存在具有相同名稱的節點。是否確實要還原此節點?</confirm-restore>
+      <confirm-move>確定要移動嗎?</confirm-move>
+      <node-cut>節點"{0}"已被剪下。</node-cut>
+      <execute-successfully>已執行自訂操作 '{0}'。</execute-successfully>
+      <save-node-success>節點"{0}"已被保存。</save-node-success>
+      <move-problem>因為沒有權限或約束條件的問題，不能移動到 '{1}' 節點"{0}"。</move-problem>
+    </msg>
+  </UIWorkingArea>
+  <UIDocumentWorkspace>
+    <label>
+      <no-children>此節點不具有任何子節點。</no-children>
+      <no-children-but-has-hidden>此節點不具有任何子節點，但有一些隱藏的檔案。</no-children-but-has-hidden>
+    </label>
+    <msg>
+      <unable-save-node>已建立新節點"{0}"。請保存會話之前執行此操作。</unable-save-node>
+      <save-node-success>節點"{0}"已被保存。</save-node-success>
+      <node-copied>已複製節點"{0}"。</node-copied>
+      <node-cut>節點"{0}"已被剪下。</node-cut>
+      <remove-root>您不能刪除根節點。</remove-root>
+      <node-remove-success>節點"{0}"已被刪除。</node-remove-success>
+    </msg>
+    <tooltip>
+      <Rename>重新命名</Rename>
+      <Cut>剪下</Cut>
+      <Copy>複製</Copy>
+      <Save>#{word.save}</Save>
+      <RemoveNode>刪除</RemoveNode>
+      <Checkin>簽入</Checkin>
+      <Checkout>簽出</Checkout>
+      <Lock>鎖</Lock>
+      <Unlock>解鎖</Unlock>
+      <EditDocument>編輯</EditDocument>
+      <Paste>貼上</Paste>
+      <LockedBy>被鎖定</LockedBy>
+    </tooltip>
+  </UIDocumentWorkspace>
+  <UIDocumentInfo>
+    <msg>
+      <access-denied>訪問被拒絕。您不能訪問節點"{0}"。</access-denied>
+      <null-exception>找不到項目。它被移除或更改，或您沒有權限訪問此節點。</null-exception>
+      <confirm-deleteattachment>確定要刪除此附件檔案嗎?</confirm-deleteattachment>
+      <confirm-deleteattcomment>是否確定要刪除此評論?</confirm-deleteattcomment>
+      <access-denied-exception>訪問被拒絕。您可能沒有讀取權限，或者該節點可能已刪除或更改。</access-denied-exception>
+      <path-not-found>此元素被刪除或更改。請按一下刷新按鈕。</path-not-found>
+    </msg>
+    <tooltip>
+      <remove-attachment>刪除此附件檔案</remove-attachment>
+      <remove-comment>刪除此評論</remove-comment>
+    </tooltip>
+  </UIDocumentInfo>
+  <ListView>
+    <view>
+      <label>
+        <name>名稱</name>
+        <versionable>無</versionable>
+        <exo_owner>擁有者</exo_owner>
+        <auditing>審核</auditing>
+        <exo_dateCreated>建立日期</exo_dateCreated>
+        <exo_dateModified>修改日期</exo_dateModified>
+      </label>
+    </view>
+  </ListView>
+  <!--
+  #############################################################################
+  #             org.exoplatform.ecm.webui.component.explorer.ECMContextMenu   #
+  #############################################################################
+  -->
+  <ECMContextMenu>
+    <event>
+      <Lock>鎖</Lock>
+      <Unlock>解鎖</Unlock>
+      <EditDocument>編輯</EditDocument>
+      <Copy>複製</Copy>
+      <Rename>重新命名</Rename>
+      <Delete>刪除</Delete>
+      <Save>#{word.save}</Save>
+      <Cut>剪下</Cut>
+      <Paste>貼上</Paste>
+      <CheckOut>簽出</CheckOut>
+      <CheckIn>簽入</CheckIn>
+      <WebDAV>視圖 WebDAV</WebDAV>
+      <autoversion>自動版本控制</autoversion>
+      <Custom>自訂</Custom>
+      <AddFolder>新資料夾</AddFolder>
+      <AddDocument>新內容</AddDocument>
+      <Upload>上載檔案</Upload>
+      <MoveNode>移動</MoveNode>
+      <UnLock>解鎖</UnLock>
+      <ViewProperties>查看屬性</ViewProperties>
+      <GetURL>將 URL 複製到剪貼簿</GetURL>
+      <AddThumbnail>增加/刪除縮略圖</AddThumbnail>
+      <AddToFavourite>增加到我的最愛</AddToFavourite>
+      <RemoveFromFavourite>從我的最愛中刪除</RemoveFromFavourite>
+      <MoveToTrash>移到垃圾桶</MoveToTrash>
+      <RestoreFromTrash>從垃圾桶中還原</RestoreFromTrash>
+      <EmptyTrash>清空垃圾桶</EmptyTrash>
+      <WebDavView>下載並允許編輯</WebDavView>
+    </event>
+  </ECMContextMenu>
+ 
+  <!--
+  #############################################################################
+  #     org.exoplatform.ecm.webui.component.explorer.UIReferencesList         #
+  #############################################################################
+  -->
+  <UIReferencesList>
+    <msg>
+      <no-references>找不到引用</no-references>
+    </msg>
+    <header>
+      <workspace>工作區</workspace>
+      <path>路徑</path>
+    </header>
+    <action>
+      <Close>#{word.close}</Close>
+    </action>
+  </UIReferencesList>
+  <!--
+  #############################################################################
+  #         org.exoplatform.ecm.webui.component.explorer.UIPropertiesManager  #
+  #############################################################################
+  -->
+  <UITabPane>
+    <title>
+      <UIPublishingPanel>Publication Pane</UIPublishingPanel>
+      <UIPublicationPanel>修訂</UIPublicationPanel>
+      <UIPublicationSchedule>已排程</UIPublicationSchedule>
+      <UIPublicationPagesContainer>頁面</UIPublicationPagesContainer>
+      <UIPublicationHistory>歷史紀錄</UIPublicationHistory>
+      <UIVersionViewer>版本檢視器</UIVersionViewer>
+
+      <UIPropertyTab>屬性</UIPropertyTab>
+      <UIMetadataTab>中繼資料</UIMetadataTab>
+      <UIPropertyForm>增加新的屬性</UIPropertyForm>
+      <UIUploadContent>上載檔案的資訊</UIUploadContent>
+      <UIJCRAdvancedSearch>新查詢</UIJCRAdvancedSearch>
+      <UISavedQuery>儲存的查詢</UISavedQuery>
+      <AdvancedSearchResult>搜尋結果</AdvancedSearchResult>
+      <UISimpleSearch>簡單搜索</UISimpleSearch>
+      <UISearchContainer>進階搜尋</UISearchContainer>
+      <UICategoryManagerSearch>將類別增加到搜索</UICategoryManagerSearch>
+      <UIConstraintsForm>限制表單</UIConstraintsForm>
+      <UIViewSearchResult>查看內容</UIViewSearchResult>
+      <UIContentNameSearch>按名稱搜索</UIContentNameSearch>
+      <UINodeInfo>版本資訊</UINodeInfo>
+      <UINodeProperty>節點屬性</UINodeProperty>
+      <UIActionListContainer>可用的操作</UIActionListContainer>
+      <UIActionContainer>增加操作</UIActionContainer>
+      <UIActionViewContainer>操作資訊</UIActionViewContainer>
+      <UIMultiLanguageForm>查看語言</UIMultiLanguageForm>
+      <UIAddLanguageContainer>新增語言</UIAddLanguageContainer>
+      <UINonPublishedForm>狀態</UINonPublishedForm>
+      <UIPublishedForm>狀態</UIPublishedForm>
+      <UIPublicationLogList>歷史紀錄</UIPublicationLogList>
+      <UIDocumentWithTree>檔案視圖</UIDocumentWithTree>
+      <UIDocumentInfo>文件視圖</UIDocumentInfo>
+      <UICategoriesSelectPanel>選擇類別</UICategoriesSelectPanel>
+      <UISelectedCategoriesGrid>引用的類別</UISelectedCategoriesGrid>
+      <UIWorkflowPublicationActionForm>Workflow Publication Action</UIWorkflowPublicationActionForm>
+      <UIWorkflowPublicationViewForm>Workflow Publication View</UIWorkflowPublicationViewForm>
+      <metadatasitemetadata>網站中繼資料</metadatasitemetadata>
+      <dcelementset>都柏林核心</dcelementset>
+    </title>
+  </UITabPane>
+  <UIPropertyTab>
+    <title>
+      <edit>編輯此屬性</edit>
+      <delete>刪除此屬性</delete>
+    </title>
+    <confirm>
+      <remove-property>確定要刪除此屬性嗎?</remove-property>
+    </confirm>
+    <header>
+      <name>名稱</name>
+      <multiValue>Multi Value</multiValue>
+      <value>值</value>
+      <action>操作</action>
+    </header>
+    <label>
+      <binary>Binary Data</binary>
+      <notavailable>N/A</notavailable>
+      <cannotget>Cannot get values</cannotget>
+    </label>
+    <action>
+      <Close>#{word.close}</Close>
+    </action>
+  </UIPropertyTab>
+  <!--
+  #############################################################################
+  #         org.exoplatform.ecm.webui.component.explorer.UIPropertyTab     #
+  #############################################################################
+  -->
+  <!--
+  #############################################################################
+  #           org.exoplatform.ecm.webui.component.explorer.UIPropertyForm     #
+  #############################################################################
+  -->
+  <UIPropertyForm>
+    <title>Add/Edit Property</title>
+    <label>
+      <name>名稱：</name>
+      <type>類型：</type>
+      <value>Value:</value>
+      <upload>上傳:</upload>
+      <namespace>Namespace:</namespace>
+      <multiple>Multiple:</multiple>
+      <property_select>Add New Property:</property_select>
+    </label>
+    <action>
+      <Save>#{word.save}</Save>
+      <Cancel>#{word.cancel}</Cancel>
+      <Reset>重置</Reset>
+    </action>
+    <msg>
+      <name-invalid>Please enter the property name.</name-invalid>
+      <unable-create>Cannot add properties.</unable-create>
+      <value-invalid>Please enter the value.</value-invalid>
+      <node-checkedin>You must check out this node before adding a property.</node-checkedin>
+      <can-not-add>You cannot add properties to this node. This is only allowed for the node type nt:unstructured.</can-not-add>
+      <propertyName-invalid>The property name must include namespace (e.g. namespace:name).</propertyName-invalid>
+      <propertyName-exist>The property '{0}' already exists.</propertyName-exist>
+      <propertyValu-null>Some values may be null.</propertyValu-null>
+      <valueFormatEx>You cannot assign a multiple-valued value to a single-valued property.</valueFormatEx>
+      <number-format-exception>Your input value has the wrong format.</number-format-exception>
+      <property-not-exist>The property {0} doesn't exist.</property-not-exist>
+    </msg>
+  </UIPropertyForm>
+
+  <!--
+  #############################################################################
+  #             org.exoplatform.ecm.webui.component.explorer.UIPermissionInfo #
+  #############################################################################
+  -->
+  <UIPermissionInfo>
+    <action>
+      <title>
+        <Edit>編輯</Edit>
+        <Delete>Remove Permission</Delete>
+      </title>
+    </action>
+    <header>
+      <usersOrGroups>User or Group</usersOrGroups>
+      <read>Read</read>
+      <addNode>Modify</addNode>
+      <remove>刪除</remove>
+      <action>操作</action>
+    </header>
+    <msg>
+      <confirm-delete-permission>Are you sure you want to remove this permission?</confirm-delete-permission>
+      <no-permission-tochange>You do not have the right to remove permission.</no-permission-tochange>
+      <no-permission-remove>You cannot remove the owner.</no-permission-remove>
+      <access-denied>Access denied. You cannot remove this permission.</access-denied>
+    </msg>
+  </UIPermissionInfo>
+  <permission>
+    <title>
+      <SelectUser>Select User</SelectUser>
+      <SelectMember>Select Membership</SelectMember>
+      <AddAny>Select Everyone</AddAny>
+    </title>
+  </permission>
+  <!--
+  #############################################################################
+  #             org.exoplatform.ecm.webui.component.explorer.UIPermissionForm #
+  #############################################################################
+  -->
+  <SelectUserOrGroup>
+    <title>
+      <UIGroupSelector>選擇使用者</UIGroupSelector>
+      <UIPermissionSelector>Select Member</UIPermissionSelector>
+      <UIGroupMemberSelector>選擇成員身份</UIGroupMemberSelector>
+    </title>
+  </SelectUserOrGroup>
+  <UIGroupSelector>
+    <label>
+      <selectGroup>Browse and Select a Group</selectGroup>
+      <selectUser>選擇使用者</selectUser>
+    </label>
+    <msg>
+      <not-change-owner>'{0}' is the owner of this node and has full control permission.</not-change-owner>
+    </msg>
+  </UIGroupSelector>
+  <UIPermissionForm>
+    <label>
+      <UIPopupWindow>Select</UIPopupWindow>
+      <permission>UIPermissionForm</permission>
+      <userOrGroup>使用者或群組</userOrGroup>
+      <read>Read Right</read>
+      <add_node>Modify Right</add_node>
+      <remove>Remove Right</remove>
+    </label>
+    <title>Add a permission to that node</title>
+    <action>
+      <Close>#{word.close}</Close>
+      <Save>#{word.save}</Save>
+      <Reset>重置</Reset>
+    </action>
+    <msg>
+      <checkbox-require>Please select at least one permission.</checkbox-require>
+      <userOrGroup-required>Please select a user or group before saving this permission.</userOrGroup-required>
+      <not-change-permission>You do not have the right to add a permission.</not-change-permission>
+      <access-denied>訪問被拒絕。您不能刪除此權限。</access-denied>
+    </msg>
+  </UIPermissionForm>
+
+  <!--
+  ###############################################################################
+  #             org.exoplatform.ecm.webui.component.explorer.UINodeTypeInfo     #
+  ###############################################################################
+  -->
+  <UINodeTypeInfo>
+    <label>
+      <node-type>Node Type</node-type>
+      <name>名稱</name>
+      <item>Primary Item Name</item>
+      <super-types>Parent Types</super-types>
+      <mixin>Mixin Node Type</mixin>
+      <orderable-children>Orderable Children</orderable-children>
+      <property-def>Node Property Definition</property-def>
+      <prop-name>名稱</prop-name>
+      <prop-type>類型</prop-type>
+      <prop-multiple>Mul</prop-multiple>
+      <prop-mandatory>Man</prop-mandatory>
+      <prop-protected>Pr</prop-protected>
+      <prop-auto-create>AC</prop-auto-create>
+      <prop-default-values><![CDATA[<span title="Default Values">DV</span>]]></prop-default-values>
+      <prop-constraints><![CDATA[<span title="Constraints Values">CV</span>]]></prop-constraints>
+      <node-def>Child Node Definition</node-def>
+      <node-def-name>名稱</node-def-name>
+      <node-def-opv>OPV</node-def-opv>
+      <node-def-ac>交流</node-def-ac>
+      <node-def-man>MAN</node-def-man>
+      <node-def-pr>PR</node-def-pr>
+      <node-def-dnt>DNT</node-def-dnt>
+    </label>
+    <action>
+      <Close>#{word.close}</Close>
+    </action>
+  </UINodeTypeInfo>
+  <!--
+  ###############################################################################
+  #                    org.exoplatform.ecm.webui.component.explorer.search      #
+  ###############################################################################
+  -->
+  <UICategoryManagerSearch>
+    <tab>
+      <label>
+        <UIOneNodePathSelector>Select Category</UIOneNodePathSelector>
+      </label>
+    </tab>
+    <action>
+      <Close>#{word.close}</Close>
+    </action>
+  </UICategoryManagerSearch>
+  <UIContentNameSearch>
+    <label>
+      <keyword>Content Name:</keyword>
+      <location>Search in this location:</location>
+    </label>
+    <action>
+      <Search>搜索</Search>
+      <Cancel>#{word.cancel}</Cancel>
+    </action>
+    <msg>
+      <keyword-not-allowed>不允許使用此關鍵字。</keyword-not-allowed>
+    </msg>
+  </UIContentNameSearch>
+  <UISimpleSearch>
+    <action>
+      <MoreConstraints>Show/Hide Constraint Form</MoreConstraints>
+      <Search>搜索</Search>
+      <Save>#{word.save}</Save>
+      <Cancel>#{word.cancel}</Cancel>
+    </action>
+    <label>
+      <moreConstraints>UISimpleSearch</moreConstraints>
+      <firstOperator>Operator:</firstOperator>
+      <input>A word or phrase in content:</input>
+      <constraints>More Constraints:</constraints>
+      <nodePath>Current Location:</nodePath>
+    </label>
+    <msg>
+      <keyword-null>Please enter your keyword.</keyword-null>
+      <not-found>沒有找到結果。</not-found>
+      <keyword-not-allow>不允許使用此關鍵字。</keyword-not-allow>
+      <value-null>Please enter your keyword or constraints.</value-null>
+      <value-save-null>Please enter a keyword or constraints before saving this query.</value-save-null>
+      <inputSearch-invalid>There are invalid characters in the search input.</inputSearch-invalid>
+      <query-invalid>The query is invalid. Please check your constraint.</query-invalid>
+    </msg>
+  </UISimpleSearch>
+  <ViewSearch>
+    <title>
+      <UIViewSearchResult>View Template</UIViewSearchResult>
+    </title>
+  </ViewSearch>
+  <UISearchResult>
+    <msg>
+      <not-support>There is no View template for this node.</not-support>
+      <empty>沒有找到結果。</empty>
+      <access-denied>You cannot open this folder, either because it no longer exists or because you do not have the right to access it.</access-denied>
+      <query-invalid>The query is invalid.</query-invalid>
+    </msg>
+    <header>
+      <name>#{word.name}</name>
+      <path>路徑</path>
+      <action>操作</action>
+      <shortcutPath>路徑</shortcutPath>
+      <type>類型</type>
+      <dateCreated>建立日期</dateCreated>
+      <score>Score</score>
+    </header>
+    <title>
+      <typeASC>Sort by document type in ascending order</typeASC>
+      <typeDESC>Sort by document type in descending order</typeDESC>
+      <scoreASC>Sort by score in ascending order</scoreASC>
+      <scoreDESC>Sort by score in descending order</scoreDESC>
+      <nameASC>Sort by name in ascending order</nameASC>
+      <nameDESC>Sort by name in descending order</nameDESC>
+      <datecreatedASC>Sort by created date in ascending order</datecreatedASC>
+      <datecreatedDESC>Sort by created date in descending order</datecreatedDESC>
+    </title>
+    <tooltip>
+      <View>View this node</View>
+      <OpenFolder>Go to folder</OpenFolder>
+    </tooltip>
+  </UISearchResult>
+  <UIShowAllOwnedByUserResult>
+    <msg>
+      <not-support>There is no View template for this node</not-support>
+      <empty>沒有找到結果。</empty>
+      <access-denied>You cannot view this node, either because this template is not supported or because access is denied.</access-denied>
+      <query-invalid>The query is invalid</query-invalid>
+    </msg>
+    <header>
+      <name>#{word.name}</name>
+      <path>路徑</path>
+      <action>操作</action>
+      <shortcutPath>路徑</shortcutPath>
+      <type>類型</type>
+      <dateCreated>建立日期</dateCreated>
+      <score>得分</score>
+    </header>
+    <title>
+      <typeASC>按文件類型降冪排序</typeASC>
+      <typeDESC>按文件類型降冪排序</typeDESC>
+      <scoreASC>按積分昇冪排序</scoreASC>
+      <scoreDESC>按分數降冪排序</scoreDESC>
+      <nameASC>按名稱昇冪排序</nameASC>
+      <nameDESC>按名稱降冪排序</nameDESC>
+      <datecreatedASC>Sort by Created date in ascending order</datecreatedASC>
+      <datecreatedDESC>Sort by Created date in descending order</datecreatedDESC>
+    </title>
+    <tooltip>
+      <View>查看此節點</View>
+      <OpenFolder>Go to Folder</OpenFolder>
+    </tooltip>
+  </UIShowAllOwnedByUserResult>
+  <UIShowAllFavouriteResult>
+    <msg>
+      <not-support>沒有此節點的視圖範本。</not-support>
+      <empty>No results found</empty>
+      <access-denied>您不能查看此節點，因為此範本不受支援，或訪問被拒絕。</access-denied>
+      <query-invalid>查詢無效</query-invalid>
+    </msg>
+    <header>
+      <name>#{word.name}</name>
+      <path>路徑</path>
+      <action>操作</action>
+      <shortcutPath>路徑</shortcutPath>
+      <type>類型</type>
+      <dateCreated>建立日期</dateCreated>
+      <score>得分</score>
+    </header>
+    <title>
+      <typeASC>按文件類型降冪排序</typeASC>
+      <typeDESC>按文件類型降冪排序</typeDESC>
+      <scoreASC>按分數昇冪排序</scoreASC>
+      <scoreDESC>按分數降冪排序</scoreDESC>
+      <nameASC>按名稱昇冪排序</nameASC>
+      <nameDESC>按名稱降冪排序</nameDESC>
+      <datecreatedASC>按建立日期昇冪排序</datecreatedASC>
+      <datecreatedDESC>按建立日期降冪排序</datecreatedDESC>
+    </title>
+    <tooltip>
+      <View>View this Node</View>
+      <OpenFolder>轉到資料夾</OpenFolder>
+    </tooltip>
+  </UIShowAllFavouriteResult>
+  <UIShowAllHiddenResult>
+    <msg>
+      <not-support>沒有此節點的視圖範本。</not-support>
+      <empty>沒有找到結果。</empty>
+      <access-denied>您不能查看此節點，因為此範本不受支援，或訪問被拒絕。</access-denied>
+      <query-invalid>該查詢不正確。</query-invalid>
+    </msg>
+    <header>
+      <name>#{word.name}</name>
+      <path>路徑</path>
+      <action>操作</action>
+      <shortcutPath>路徑</shortcutPath>
+      <type>類型</type>
+      <dateCreated>建立日期</dateCreated>
+      <score>得分</score>
+      <AddRemoveFavourite>Add/Remove to Favorite</AddRemoveFavourite>
+    </header>
+    <title>
+      <typeASC>按文件類型昇冪排序</typeASC>
+      <typeDESC>按文件類型降冪排序</typeDESC>
+      <scoreASC>按分數昇冪排序</scoreASC>
+      <scoreDESC>按分數降冪排序</scoreDESC>
+      <nameASC>按名稱昇冪排序</nameASC>
+      <nameDESC>按名稱降冪排序</nameDESC>
+      <datecreatedASC>按建立日期昇冪排序</datecreatedASC>
+      <datecreatedDESC>按建立日期降冪排序</datecreatedDESC>
+    </title>
+    <tooltip>
+      <View>查看此節點</View>
+      <OpenFolder>轉到資料夾</OpenFolder>
+      <RemoveHiddenAttribute>Remove Hidden Attribute</RemoveHiddenAttribute>
+    </tooltip>
+  </UIShowAllHiddenResult>
+  <UIShowAllTrashResult>
+    <msg>
+      <not-support>沒有此節點的視圖範本。</not-support>
+      <empty>未找到任何結果</empty>
+      <access-denied>您不能查看此節點，因為此範本不受支援，或訪問被拒絕。</access-denied>
+      <query-invalid>該查詢不正確。</query-invalid>
+    </msg>
+    <header>
+      <name>#{word.name}</name>
+      <path>路徑</path>
+      <action>操作</action>
+      <shortcutPath>路徑</shortcutPath>
+      <type>類型</type>
+      <dateCreated>建立日期</dateCreated>
+      <score>得分</score>
+    </header>
+    <title>
+      <typeASC>按文件類型昇冪排序</typeASC>
+      <typeDESC>按文件類型降冪排序</typeDESC>
+      <scoreASC>按分數昇冪排序</scoreASC>
+      <scoreDESC>按分數降冪排序</scoreDESC>
+      <nameASC>按名稱昇冪排序</nameASC>
+      <nameDESC>按名稱降冪排序</nameDESC>
+      <datecreatedASC>按建立日期昇冪排序</datecreatedASC>
+      <datecreatedDESC>按建立日期降冪排序</datecreatedDESC>
+    </title>
+    <tooltip>
+      <View>查看此節點</View>
+      <OpenFolder>轉到資料夾</OpenFolder>
+      <DeletePermanently>Delete permanently</DeletePermanently>
+      <RestoreFromTrash>從垃圾桶中還原</RestoreFromTrash>
+    </tooltip>
+  </UIShowAllTrashResult>
+  <UIConstraintsForm>
+    <label>
+      <constraints>UIConstraintsForm</constraints>
+      <metadataProperty>屬性</metadataProperty>
+      <operator>Operator</operator>
+      <contains>Contain Value</contains>
+      <notcontains>Not Contain Value</notcontains>
+    </label>
+    <action>
+      <Add>新增</Add>
+      <Cancel>#{word.cancel}</Cancel>
+    </action>
+    <msg>
+      <properties-required>The Property name is required.</properties-required>
+      <value-required>The Value field is required.</value-required>
+      <date-invalid>The From date must be earlier than the To date.</date-invalid>
+      <fromDate-required>The From date is required.</fromDate-required>
+      <must-choose-one>You have to select at least one type.</must-choose-one>
+      <properties-null>Select properties first, then filter.</properties-null>
+      <exactly-require>You have to fill in the Value exactly before saving this constraint.</exactly-require>
+      <fromDate-invalid>Invalid type in the 'From' field. Please reselect or type correctly.</fromDate-invalid>
+      <toDate-invalid>Invalid type in the 'To' field. Please reselect or type correctly.</toDate-invalid>
+    </msg>
+    <button>
+      <label-Add>新增</label-Add>
+      <label-Cancel>#{word.cancel}</label-Cancel>
+    </button>
+  </UIConstraintsForm>
+  <ConstraintsForm>
+    <action>
+      <Add>新增</Add>
+      <Cancel>#{word.cancel}</Cancel>
+    </action>
+  </ConstraintsForm>
+  <UIConstraintForm>
+    <tooltip>
+      <AddMetadataType>Add Property</AddMetadataType>
+      <AddNodeType>Add Node Type</AddNodeType>
+      <AddCategory>新增類別</AddCategory>
+      <FindExactly>Find Exactly</FindExactly>
+    </tooltip>
+    <label>
+      <colon>:</colon>
+      <operator>運算子</operator>
+      <exactlyPro-properties>屬性</exactlyPro-properties>
+      <exactlyPro-ContainExactly>確切地包含</exactlyPro-ContainExactly>
+      <containPro-properties>屬性</containPro-properties>
+      <containPro-Contain>包含</containPro-Contain>
+      <notContainPro-properties>屬性</notContainPro-properties>
+      <notContainPro-notContain>不包含</notContainPro-notContain>
+      <ConstraintOption-From>從</ConstraintOption-From>
+      <ConstraintOption-To>至</ConstraintOption-To>
+      <DocumentType-label>文件類型</DocumentType-label>
+      <Category-label>類別</Category-label>
+      <created>已建立</created>
+      <modified>已修改</modified>
+      <and>和</and>
+      <or>或</or>
+    </label>
+  </UIConstraintForm>
+  <NodeTypePopup>
+    <title>
+      <UINodeTypeSelectForm>選擇節點類型</UINodeTypeSelectForm>
+    </title>
+  </NodeTypePopup>
+  <CategoryPopup>
+    <title>
+      <UICategoryManagerSearch>將類別增加到搜索</UICategoryManagerSearch>
+      <UIOneNodePathSelector>選擇類別</UIOneNodePathSelector>
+    </title>
+  </CategoryPopup>
+  <SaveQueryPopup>
+    <title>
+      <UISaveQueryForm>查詢表單</UISaveQueryForm>
+    </title>
+  </SaveQueryPopup>
+  <UINodeTypeSelectForm>
+    <action>
+      <Cancel>#{word.cancel}</Cancel>
+      <Save>#{word.save}</Save>
+    </action>
+  </UINodeTypeSelectForm>
+  <UICompareExactlyForm>
+    <label>
+      <filter>篩選器：</filter>
+      <result>結果:</result>
+    </label>
+    <title>
+      <result>篩選器</result>
+    </title>
+    <button>
+      <label-Select>選擇</label-Select>
+      <label-Cancel>#{word.cancel}</label-Cancel>
+    </button>
+    <msg>
+      <not-result-found>沒有找到結果。</not-result-found>
+    </msg>
+  </UICompareExactlyForm>
+  <UIJCRAdvancedSearch>
+    <label>
+      <name>名稱：</name>
+      <selectBox>選取查詢方式:</selectBox>
+      <query>查詢：</query>
+    </label>
+    <action>
+      <Save>#{word.save}</Save>
+      <Cancel>#{word.cancel}</Cancel>
+      <Search>搜索</Search>
+    </action>
+    <msg>
+      <!--DMS 2.4.x ECM-3566-->
+      <name-invalid>名稱不正確。</name-invalid>
+      <query-added>已成功增加查詢。</query-added>
+      <save_unSuccessful>無法保存該查詢。該語句可能無效或查詢的名稱可能已經存在。</save_unSuccessful>
+      <invalid-queryStatement>查詢語句不正確。</invalid-queryStatement>
+      <value-save-null>請輸入您的查詢語句。</value-save-null>
+      <query-name-null>請輸入您的查詢名稱。</query-name-null>
+    </msg>
+  </UIJCRAdvancedSearch>
+  <EditQueryForm>
+    <label>
+      <name>名稱</name>
+      <selectBox>選取查詢樣式</selectBox>
+      <query>查詢</query>
+    </label>
+    <action>
+      <Save>#{word.save}</Save>
+      <Cancel>#{word.cancel}</Cancel>
+    </action>
+  </EditQueryForm>
+  <EditSavedQueryForm>
+    <title>
+      <EditQueryForm>編輯查詢表單</EditQueryForm>
+    </title>
+  </EditSavedQueryForm>
+  <UIMetadataSelectForm>
+    <label>
+      <metadataType>中繼資料類型</metadataType>
+    </label>
+    <action>
+      <Cancel>#{word.cancel}</Cancel>
+      <Add>新增</Add>
+    </action>
+  </UIMetadataSelectForm>
+  <property1MetadataPopup>
+    <title>
+      <UISelectPropertyForm>選擇屬性</UISelectPropertyForm>
+    </title>
+  </property1MetadataPopup>
+  <property2MetadataPopup>
+    <title>
+      <UISelectPropertyForm>選擇屬性</UISelectPropertyForm>
+    </title>
+  </property2MetadataPopup>
+  <property3MetadataPopup>
+    <title>
+      <UISelectPropertyForm>選擇屬性</UISelectPropertyForm>
+    </title>
+  </property3MetadataPopup>
+  <UISelectPropertyForm>
+    <label>
+      <metadataType>中繼資料類型</metadataType>
+    </label>
+    <pLabel>屬性：</pLabel>
+    <action>
+      <Add>新增</Add>
+      <Cancel>#{word.cancel}</Cancel>
+    </action>
+  </UISelectPropertyForm>
+  <ExactlyFormPopup>
+    <title>
+      <UICompareExactlyForm>表單篩選器</UICompareExactlyForm>
+    </title>
+  </ExactlyFormPopup>
+  <UIECMSearch>
+    <header>
+      <name>名稱</name>
+      <language>語言</language>
+      <query>查詢</query>
+      <action>操作</action>
+      <path>路徑</path>
+    </header>
+  </UIECMSearch>
+  <UIResult>
+    <msg>
+      <not-found>未找到資料。</not-found>
+    </msg>
+    <header>
+      <action>操作</action>
+    </header>
+  </UIResult>
+  <UISaveQueryForm>
+    <msg>
+      <query-name-null>請輸入要保存的查詢名稱。</query-name-null>
+      <access-denied>訪問被拒絕。您沒有保存該查詢所需的增加權限。</access-denied>
+      <save-failed>您不能保存查詢，因為該語句不正確或者因為該查詢名稱已經存在。</save-failed>
+    </msg>
+    <label>
+      <queryName>查詢名稱</queryName>
+    </label>
+    <action>
+      <Save>#{word.save}</Save>
+      <Cancel>#{word.cancel}</Cancel>
+    </action>
+  </UISaveQueryForm>
+  <UISavedQuery>
+    <header>
+      <name>名稱</name>
+      <type>類型</type>
+      <statement>聲明</statement>
+      <permission>權限</permission>
+      <action>操作</action>
+    </header>
+    <tooltip>
+      <Execute>執行</Execute>
+      <Edit>編輯</Edit>
+      <Delete>刪除</Delete>
+    </tooltip>
+    <label>
+      <no-children>沒有查詢可保存。</no-children>
+    </label>
+    <msg>
+      <confirm-delete-query>確定要刪除此查詢嗎?</confirm-delete-query>
+      <not-result-found>沒有找到結果。</not-result-found>
+    </msg>
+  </UISavedQuery>
+  <UIQueryResultPageIterator>
+    <label>
+      <results>結果</results>
+      <of-about>約</of-about>
+      <of>的</of>
+    </label>
+  </UIQueryResultPageIterator>
+  <!--
+  ###############################################################################
+  #             org.exoplatform.ecm.webui.component.explorer.admin.UIExportNode #
+  ###############################################################################
+  -->
+  <UIExportNode>
+    <label>
+      <format>格式</format>
+      <nodePath>匯出的路徑</nodePath>
+      <zip>Zip</zip>
+      <systemView>系統檢視</systemView>
+      <documentView>文件視圖</documentView>
+    </label>
+    <action>
+      <Cancel>#{word.cancel}</Cancel>
+      <Export>匯出</Export>
+    </action>
+    <title>匯出節點</title>
+  </UIExportNode>
+  <!--
+  ###############################################################################
+  #             org.exoplatform.ecm.webui.component.explorer.UIPopupAction     #
+  ###############################################################################
+  -->
+  <PopupUserSelector>
+    <title>
+      <UIUserContainer>選擇使用者權限</UIUserContainer>
+    </title>
+  </PopupUserSelector>
+  <UIPopupTaxonomy>
+    <title>
+      <UICategoriesSelector>新增類別</UICategoriesSelector>
+      <UIOneNodePathSelector>新增類別</UIOneNodePathSelector>
+    </title>
+  </UIPopupTaxonomy>
+  <!--
+  ###############################################################################
+  #   org.exoplatform.ecm.webui.component.explorer.versions.UIVersionInfo       #
+  ###############################################################################
+  -->
+  <UIVersionInfo>
+    <tooltip>
+      <addLabel>增加標籤</addLabel>
+      <removeLable>移除標籤</removeLable>
+      <restoreVersion>還原的版本</restoreVersion>
+      <viewVersion>查看版本資訊</viewVersion>
+      <deleteVersion>刪除版本</deleteVersion>
+      <compareVersion>與基礎版本比較</compareVersion>
+    </tooltip>
+    <msg>
+      <have-no-view-template>不支援視圖範本。</have-no-view-template>
+      <cannot-remove-version>您不能刪除基礎版本。</cannot-remove-version>
+      <confirm-delete>是否確定要刪除此版本?</confirm-delete>
+      <not-checked-out>您必須在還原之前簽出此節點。</not-checked-out>
+      <invalid-item-state>你不能還原此版本，因為一個或多個項目被刪除或移動另一個會議期間。</invalid-item-state>
+    </msg>
+    <action>
+      <close>#{word.close}</close>
+      <close-view>關閉視圖</close-view>
+    </action>
+  </UIVersionInfo>
+  <!--
+  ################################################################################
+  #  org.exoplatform.ecm.webui.component.explorer.auditing.UIAuditingInfo
+  ################################################################################
+  -->
+  <UIAuditingInfo>
+    <msg>
+      <noVersion>沒有版本</noVersion>
+    </msg>
+    <eventName>
+      <e_1>增加節點</e_1>
+      <e_2>刪除節點</e_2>
+      <e_4>增加屬性</e_4>
+      <e_16>屬性更改</e_16>
+      <e_8>刪除屬性</e_8>
+      <e_32>#{word.save}</e_32>
+      <e_64>移動</e_64>
+      <e_128>複製</e_128>
+      <e_256>增加混合</e_256>
+      <e_512>刪除混合</e_512>
+      <e_1024>克隆</e_1024>
+      <e_2048>更新</e_2048>
+      <e_4096>匯入</e_4096>
+      <e_8192>登記</e_8192>
+      <e_16384>簽出</e_16384>
+      <e_32768>還原</e_32768>
+      <e_65536>合併</e_65536>
+      <e_131072>取消合併</e_131072>
+      <e_262144>完成合併</e_262144>
+      <e_524288>增加版本標籤</e_524288>
+      <e_1048576>刪除版本標籤</e_1048576>
+      <e_2097152>刪除版本</e_2097152>
+      <e_4194304>鎖</e_4194304>
+      <e_8388608>解鎖</e_8388608>
+      <e_16777216>讀取</e_16777216>
+    </eventName>
+    <label>
+      <operation>操作</operation>
+      <userName>使用者名稱</userName>
+      <date>日期</date>
+      <version>版本</version>
+    </label>
+  </UIAuditingInfo>
+
+  <!--
+  ###############################################################################
+  #   org.exoplatform.ecm.webui.component.explorer.versions.UIActivateVersion   #
+  ###############################################################################
+  -->
+  <UIActivateVersion>
+    <label>
+      <note>不啟動此節點的版本控制。</note>
+      <question>確定你想啟動它嗎?</question>
+      <button-active>啟動</button-active>
+      <button-cancel>#{word.cancel}</button-cancel>
+    </label>
+    <msg>
+      <access-denied>您沒有權限來啟動此節點上的版本控制</access-denied>
+    </msg>
+  </UIActivateVersion>
+  <!--
+  ###############################################################################
+  #   org.exoplatform.ecm.webui.component.explorer.versions.UIActivePublication #
+  ###############################################################################
+  -->
+  <UIActivePublication>
+    <header>
+      <LifecycleName>名稱</LifecycleName>
+      <LifecycleDesc>描述</LifecycleDesc>
+      <action>操作</action>
+    </header>
+    <action>
+      <Cancel>#{word.close}</Cancel>
+    </action>
+    <grid>
+      <msg>
+        <empty>沒有發現發佈外掛程式。</empty>
+      </msg>
+    </grid>
+    <msg>
+      <node-type-invalid>只有文件節點類型可以被錄取。</node-type-invalid>
+      <already-enroled>此文件已被註冊。</already-enroled>
+    </msg>
+  </UIActivePublication>
+  <!--
+  ###############################################################################
+  #   org.exoplatform.ecm.webui.component.explorer.versions.UIActivateAuditing  #
+  ###############################################################################
+  -->
+  <UIActivateAuditing>
+    <label>
+      <note>此節點審核尚未啟動。</note>
+      <question>你確定你要啟動？</question>
+    </label>
+    <action>
+      <activate>啟動</activate>
+      <cancel>#{word.cancel}</cancel>
+    </action>
+  </UIActivateAuditing>
+  <!--
+  ###############################################################################
+  #   org.exoplatform.ecm.webui.component.explorer.versions.UIDiff   #
+  ###############################################################################
+  -->
+  <UIDiff>
+    <label>
+      <diffTitle>比較兩個版本的差異</diffTitle>
+      <noChange>兩個版本之間沒有差異</noChange>
+      <baseVerion>基本版本</baseVerion>
+      <compareVerion>版本</compareVerion>
+      <can-not-compare>未能比較兩個版本</can-not-compare>
+    </label>
+  </UIDiff>
+  <!--
+  ###############################################################################
+  #       org.exoplatform.ecm.webui.component.explorer.admin.UIImportNode      #
+  ###############################################################################
+  -->
+  <UIImportNode>
+    <label>
+      <format>格式</format>
+      <systemView>系統檢視</systemView>
+      <documentView>Document View</documentView>
+      <upload>上傳檔案</upload>
+    </label>
+    <action>
+      <Cancel>#{word.cancel}</Cancel>
+      <Import>匯入</Import>
+    </action>
+    <title>匯入節點</title>
+    <msg>
+      <import-successful>已成功匯入。</import-successful>
+      <filename-invalid>瀏覽要匯入的上載檔案欄位的.xml 檔。</filename-invalid>
+      <filetype-error>不能匯入已上載檔案。.Xml 檔可能無效。</filetype-error>
+      <mimetype-invalid>您只可以匯入.xml 或.ZIP 檔案。</mimetype-invalid>
+      <access-denied>訪問被拒絕。你不允許在那裡匯入。</access-denied>
+      <constraint-violation-exception>無法匯入資料。此位置不允許類型 '{0}'。</constraint-violation-exception>
+      <item-exists-exception>傳入的可引用節點在工作區中都有同一個 UUID 作為現有的節點。</item-exists-exception>
+    </msg>
+  </UIImportNode>
+  <!--
+  ###############################################################################
+  #         org.exoplatform.ecm.webui.component.explorer.versions.UILabelForm   #
+  ###############################################################################
+  -->
+  <UILabelForm>
+    <label>
+      <label>標籤</label>
+    </label>
+    <action>
+      <Save>#{word.save}</Save>
+      <Cancel>#{word.cancel}</Cancel>
+    </action>
+    <title>增加標籤</title>
+    <msg>
+      <label-invalid>該標籤包含一些不正確字元。</label-invalid>
+      <label-exist>'{0}' 已存在。</label-exist>
+    </msg>
+  </UILabelForm>
+  <!--
+  ###############################################################################
+  #   org.exoplatform.ecm.webui.component.explorer.versions.UIRemoveLabelForm   #
+  ###############################################################################
+  -->
+  <UIRemoveLabelForm>
+    <title>刪除標籤</title>
+    <label>
+      <label>選擇標籤</label>
+    </label>
+    <action>
+      <Remove>刪除</Remove>
+      <Cancel>#{word.cancel}</Cancel>
+    </action>
+  </UIRemoveLabelForm>
+  <!--
+  ###############################################################################
+  #    org.exoplatform.ecm.webui.component.explorer.versions.UIViewVersion      #
+  ###############################################################################
+  -->
+  <UIVersionTree>
+    <title>子樹</title>
+  </UIVersionTree>
+  <UIViewVersion>
+    <label>
+      <nodeType>節點類型</nodeType>
+      <nodeName>節點名稱</nodeName>
+      <VersionNumber>版本編號</VersionNumber>
+      <VersionLabels>版本標籤</VersionLabels>
+      <VersionDate>版本日期</VersionDate>
+      <PropertyName>屬性名稱</PropertyName>
+      <PropertyValue>屬性值</PropertyValue>
+    </label>
+    <msg>
+      <not-supported>此函數不支援版本控制。</not-supported>
+    </msg>
+  </UIViewVersion>
+  <UIVersionList>
+    <title>子名字</title>
+  </UIVersionList>
+  <!--
+  ################################################################################
+  #       org.exoplatform.ecm.webui.component.explorer.admin.UICategoryManager #
+  ################################################################################
+  -->
+  <UICategoryManager>
+    <action>
+      <Close>#{word.close}</Close>
+    </action>
+    <tab>
+      <label>
+        <UICategoriesAddedList>引用的類別</UICategoriesAddedList>
+        <UIOneNodePathSelector>選擇類別</UIOneNodePathSelector>
+      </label>
+    </tab>
+  </UICategoryManager>
+  <UICategoriesAddedList>
+    <header>
+      <path>類別</path>
+      <action>操作</action>
+    </header>
+    <msg>
+      <access-denied>訪問被拒絕。你此節點中沒有存取權限。</access-denied>
+      <confirm-delete>是否確定要刪除此引用?</confirm-delete>
+    </msg>
+    <action>
+      <title>
+        <Delete>刪除</Delete>
+      </title>
+    </action>
+    <label>
+      <category>類別</category>
+      <actions>操作</actions>
+      <delete>刪除</delete>
+    </label>
+  </UICategoriesAddedList>
+  <UITreeList>
+    <header>
+      <name>名稱</name>
+      <action>操作</action>
+    </header>
+    <info>
+      <child-not-found>此節點不具有任何子節點。</child-not-found>
+    </info>
+  </UITreeList>
+  <!--
+  ################################################################################
+  #       org.exoplatform.ecm.webui.component.explorer.admin.UIRelationManager #
+  ################################################################################
+  -->
+  <UIRelationManager>
+    <action>
+      <Close>#{word.close}</Close>
+    </action>
+    <tab>
+      <label>
+        <UIOneNodePathSelector>選擇關係</UIOneNodePathSelector>
+      </label>
+    </tab>
+    <tab>
+      <label>
+        <UIRelationsAddedList>關係清單</UIRelationsAddedList>
+      </label>
+    </tab>
+  </UIRelationManager>
+  <UIRelationsAddedList>
+    <header>
+      <path>關係</path>
+      <action>操作</action>
+    </header>
+    <action>
+      <title>
+        <Delete>刪除</Delete>
+      </title>
+    </action>
+    <msg>
+      <confirm-delete>確定要刪除此關係嗎?</confirm-delete>
+      <can-not-add-itself>不能增加一個關係到自己。</can-not-add-itself>
+    </msg>
+  </UIRelationsAddedList>
+  <!--
+  ###################################################################
+  #       org.exoplatform.ecm.webui.component.explorer.UIClipboard  #
+  ###################################################################
+  -->
+  <UIClipboard>
+    <header>
+      <path>路徑</path>
+      <command>Cm</command>
+      <action>操作</action>
+    </header>
+    <label>
+      <nocommand>在剪貼簿中沒有任何項目。</nocommand>
+    </label>
+    <action>
+      <clearall>全部清除</clearall>
+    </action>
+    <msg>
+      <unable-pasted>不能貼上此節點。</unable-pasted>
+      <node-pasted>節點 {0} 已貼'上在位置 {1}。已經保存此操作。</node-pasted>
+    </msg>
+  </UIClipboard>
+  <!--
+  ###################################################################
+  #       org.exoplatform.ecm.webui.component.explorer.UIPopupMenu  #
+  ###################################################################
+  -->
+  <!--
+  ###################################################################################
+  #org.exoplatform.ecm.webui.component.explorer.popup.actions.UISelectDocumentForm  #
+  ###################################################################################
+  -->
+  <UISelectDocumentForm>
+    <label>
+      <selectTemplate>從下面的清單中選擇您的範本</selectTemplate>
+      <ThumbnailView>縮略圖視圖</ThumbnailView>
+      <ListView>清單視圖</ListView>
+      <Cancel>#{word.cancel}</Cancel>
+    </label>
+  </UISelectDocumentForm>
+  <!--
+  #######################################################################
+  #org.exoplatform.ecm.webui.component.explorerpopup.actions.UIDocumentForm  #
+  #######################################################################
+  -->
+  <UIDocumentForm>
+    <title>增加新的文件</title>
+    <action>
+      <Save>#{word.save}</Save>
+      <SaveAndClose>保存 &amp; 關閉</SaveAndClose>
+      <ChangeType>更改內容類型</ChangeType>
+      <Fullscreen>全屏顯示</Fullscreen>
+      <Cancel>#{word.cancel}</Cancel>
+      <Close>#{word.close}</Close>
+    </action>
+<tooltip>
+<FullScreen>最大化/最小化</FullScreen>
+</tooltip>
+    <msg>
+      <cannot-save>保存文件時出錯。</cannot-save>
+      <in-versioning>增加一個新的節點之前，請先檢查當前節點。</in-versioning>
+      <not-support>無法載入該範本的 '{0}'。</not-support>
+      <value-invalid>'{0}' 是所需的值。</value-invalid>
+      <repository-exception>保存文件時出錯。</repository-exception>
+      <!--DMS 2.4.x; ECM-3543-->
+      <repository-exception-permission>你並沒有到此節點增加一個新文件的權限。</repository-exception-permission>
+      <not-allowed-same-name-sibling>您不能保存此文件。它不允許具有相同的名稱作為其兄弟。</not-allowed-same-name-sibling>
+      <numberformat-exception>您不能保存此文件。提供的名稱必須是數字格式。</numberformat-exception>
+      <item-not-found>找不到項目。此節點 （或其祖先） 可能已被刪除。請按一下刷新按鈕。</item-not-found>
+    </msg>
+  </UIDocumentForm>
+  <!--
+  #################################################################################
+  #org.exoplatform.ecm.webui.component.explorer.actions.UIViewDocumentController  #
+  #################################################################################
+  -->
+  <UIViewDocumentController>
+    <tab>
+      <label>
+        <UIViewDocumentInfo>訊息</UIViewDocumentInfo>
+      </label>
+    </tab>
+    <action>
+      <Close>#{word.close}</Close>
+    </action>
+  </UIViewDocumentController>
+  <!--
+  #############################################################################
+  #       org.exoplatform.ecm.webui.component.explorer.search.UI  #
+  #############################################################################
+  -->
+  <!--
+  #############################################################################
+  #    org.exoplatform.ecm.webui.component.explorer.search.UIQuerySaveForm    #
+  #############################################################################
+  -->
+  <UIQuerySaveForm>
+    <title>保存查詢表單</title>
+    <label>
+      <query>查詢</query>
+      <name>查詢名稱</name>
+    </label>
+    <action>
+      <Save>#{word.save}</Save>
+      <Cancel>#{word.cancel}</Cancel>
+    </action>
+  </UIQuerySaveForm>
+  <!--
+  #############################################################################
+  #       org.exoplatform.ecm.webui.component.explorer.admin.UIActionManager  #
+  #############################################################################
+  -->
+  <editActionPopup>
+    <title>
+      <UIActionForm>編輯操作</UIActionForm>
+      <EditFormAction>編輯操作</EditFormAction>
+    </title>
+  </editActionPopup>
+  <UIActionViewContainer>
+    <action>
+      <Cancel>#{word.cancel}</Cancel>
+    </action>
+  </UIActionViewContainer>
+  <UIActionList>
+    <header>
+      <name>#{word.name}</name>
+      <description>描述</description>
+  <lifecycle>生命週期</lifecycle>
+  <triggeredaction>觸發的動作</triggeredaction>
+      <instanceOf>操作類型的實例</instanceOf>
+      <action>操作</action>
+    </header>
+    <msg>
+      <remove-popup-first>您必須在刪除此節點之前關閉編輯快顯視窗。</remove-popup-first>
+      <confirm-delete-action>是否確定要刪除此操作?</confirm-delete-action>
+      <template-empty>此範本的 '{0}' 是 null 或為空。</template-empty>
+      <template-null>該範本為空或者您沒有權限訪問此範本。</template-null>
+      <access-denied>訪問被拒絕。您沒有權限來執行此操作。</access-denied>
+    </msg>
+    <action>
+      <Close>#{word.close}</Close>
+      <View>查看</View>
+      <Edit>編輯</Edit>
+      <Delete>刪除</Delete>
+    </action>
+  </UIActionList>
+  <UIActionForm>
+    <action>
+      <Save>#{word.save}</Save>
+      <Back>#{word.back}</Back>
+    </action>
+    <label>
+      <name>操作表單</name>
+    </label>
+    <msg>
+      <repository-exception>您不能保存此操作。提供的名稱有一些特殊的字元。</repository-exception>
+      <numberformat-exception>您不能保存此操作。提供的名稱必須是數字格式。</numberformat-exception>
+      <existed-action>操作名稱 '{0}' 已存在。請選擇另一個。</existed-action>
+      <unable-add-action>不能增加此操作。</unable-add-action>
+      <unable-add>不能增加此操作。此節點是根或您沒有權限。</unable-add>
+      <not-support>'{0}'不支援對話方塊。</not-support>
+      <no-permission-add>訪問被拒絕。你並沒有在這裡增加採取行動的權利。</no-permission-add>
+      <access-denied>訪問被拒絕。您沒有權限訪問此範本。</access-denied>
+      <lifecycle-invalid>您不能增加此操作。生命週期階段操作不正確。</lifecycle-invalid>
+    </msg>
+    <title>增加/編輯操作</title>
+    <validator>
+      <validator>驗證程式</validator>
+      <destPath>與路徑</destPath>
+    </validator>
+  </UIActionForm>
+  <UIActionTypeForm>
+    <label>
+      <actionType>建立操作的類型</actionType>
+    </label>
+  </UIActionTypeForm>
+  <PopupComponent>
+    <title>
+      <UIOneNodePathSelector>選擇位置</UIOneNodePathSelector>
+      <UIPermissionSelector>瀏覽器權限</UIPermissionSelector>
+      <UICategoriesSelector>新增類別</UICategoriesSelector>
+    </title>
+  </PopupComponent>
+  <EditFormAction>
+    <validator>
+      <validator>驗證程式</validator>
+      <destPath>與路徑</destPath>
+    </validator>
+    <title>操作表單</title>
+  </EditFormAction>
+  <!--
+  #############################################################################
+  #       org.exoplatform.ecm.webui.component.explorer.control.UIAddressBar   #
+  #############################################################################
+  -->
+  <UIAddressBar>
+    <msg>
+      <path-not-found>找不到路徑。</path-not-found>
+      <access-denied>訪問被拒絕。你沒有讀取節點的權利。</access-denied>
+      <keyword-not-support>關鍵字不正確。不支援某些字元。</keyword-not-support>
+    </msg>
+    <label>
+      <exeButton>轉到</exeButton>
+      <address>位址：</address>
+    </label>
+    <title>
+      <exeButton>轉到</exeButton>
+      <backButton>返回到前一個節點</backButton>
+      <showHistory>顯示歷史記錄位址</showHistory>
+      <changeNode>更改節點</changeNode>
+    </title>
+  </UIAddressBar>
+  <!--
+  ###################################################################################
+  # org.exoplatform.ecm.webui.component.explorer.popup.actions.UIWatchDocumentForm  #
+  ###################################################################################
+  -->
+  <UIWatchDocumentForm>
+    <action>
+      <Watch>觀注</Watch>
+      <Cancel>#{word.cancel}</Cancel>
+      <Continue>繼續</Continue>
+      <Unwatch>不觀注</Unwatch>
+    </action>
+    <label>
+      <notificationType>通知類型：</notificationType>
+    </label>
+    <msg>
+      <not-support>這種通知類型不受支援。請選擇另一種類型。</not-support>
+      <watching-successfully>您正在觀注此文件。</watching-successfully>
+      <unwatching-successfully>你已經成功地離開觀注清單。</unwatching-successfully>
+      <node-iswatching>本文件已觀注。</node-iswatching>
+    </msg>
+  </UIWatchDocumentForm>
+  <!--
+  ###################################################################################
+  #   org.exoplatform.ecm.webui.component.explorer.popup.actions.UITaggingForm      #
+  ###################################################################################
+  -->
+  <UITaggingForm>
+    <label>
+      <names>標籤名稱：</names>
+      <linked>連結的標籤：</linked>
+      <tagSet>UITaggingForm</tagSet>
+    </label>
+    <action>
+      <AddTag>新增</AddTag>
+      <Cancel>#{word.close}</Cancel>
+    </action>
+    <msg>
+      <name-exist>'{0}' 的標籤名稱已經存在。</name-exist>
+      <tagName-invalid>標籤名稱中包含一些不正確字元。</tagName-invalid>
+      <tag-name-empty>您的標籤名稱為空</tag-name-empty>
+      <tag-name-duplicate>輸入的標籤名稱是重複的。</tag-name-duplicate>
+      <tagName-too-long>輸入的標籤太長。標籤名稱必須少於 30 個字元。</tagName-too-long>
+      <path-not-found>此標籤已被刪除或更改。請按一下刷新按鈕。</path-not-found>
+    </msg>
+    <introduction>
+      <tagName>用逗號分隔多個標籤"、"</tagName>
+    </introduction>
+  </UITaggingForm>
+
+  <!--
+  ###################################################################################
+  # org.exoplatform.ecm.webui.component.explorer.popup.info.UIMetadataContainer     #
+  ###################################################################################
+  -->
+  <UIViewMetadataContainer>
+    <msg>
+      <path-not-found>節點不支援這一視圖。</path-not-found>
+    </msg>
+  </UIViewMetadataContainer>
+  <!--
+  ###################################################################################
+  # org.exoplatform.ecm.webui.component.explorer.popup.info.UIViewMetadataForm      #
+  ###################################################################################
+  -->
+  <UIViewMetadataForm>
+    <action>
+      <Save>#{word.save}</Save>
+      <Cancel>#{word.cancel}</Cancel>
+    </action>
+  </UIViewMetadataForm>
+  <metadataForm>
+    <title>
+      <UIViewMetadataForm>增加/編輯屬性</UIViewMetadataForm>
+    </title>
+  </metadataForm>
+  <UIViewMetadataTemplate>
+    <msg>
+      <access-denied>訪問被拒絕。你不是擁有者或做不有此節點中的編輯權限。</access-denied>
+    </msg>
+  </UIViewMetadataTemplate>
+  <!--
+  ###################################################################################
+  # Validator messages                                                              #
+  ###################################################################################
+  -->
+  <ECMNameValidator>
+    <msg>
+      <Invalid-char>欄位"{0}"包含一些不正確字元。請輸入另一個值。</Invalid-char>
+      <empty-input>欄位"{0}"的值是 null 或為空。</empty-input>
+    </msg>
+  </ECMNameValidator>
+  <DateTimeValidator>
+    <msg>
+      <Invalid-input>值 '{1}' 的欄位 '{0}' 不正確。</Invalid-input>
+    </msg>
+  </DateTimeValidator>
+  <CronExpressionValidator>
+    <invalid-input>Cron 運算式是不正確。請檢查語法。</invalid-input>
+  </CronExpressionValidator>
+  <EmptyFieldValidator>
+    <msg>
+      <empty-input>請填寫欄位"{0}"。</empty-input>
+    </msg>
+  </EmptyFieldValidator>
+  <CategoryValidator>
+    <msg>
+      <non-categories>類別是錯誤的。請選擇適當的類別。</non-categories>
+    </msg>
+  </CategoryValidator>
+  <!--
+  ###################################################################################
+  # JCR Exceptions manager                                                              #
+  ###################################################################################
+  -->
+  <ReferentialIntegrityException>
+    <msg>操作失敗。在工作區中仍有一些引用項目。</msg>
+  </ReferentialIntegrityException>
+  <ItemExistsException>
+    <msg>這一項目已經存在。</msg>
+  </ItemExistsException>
+  <AccessControlException>
+    <msg>訪問被拒絕。您沒有權限來執行此操作。</msg>
+  </AccessControlException>
+  <AccessDeniedException>
+    <msg>訪問被拒絕。</msg>
+  </AccessDeniedException>
+  <ItemNotFoundException>
+    <msg>找不到項目。它可能已刪除或更改。</msg>
+  </ItemNotFoundException>
+  <PathNotFoundException>
+    <msg>找不到路徑。它可能已刪除或更改。</msg>
+  </PathNotFoundException>
+  <ConstraintViolationException>
+    <msg>您不能執行此操作由於某些方面的限制。</msg>
+  </ConstraintViolationException>
+  <!--
+  ###################################################################################
+  # Publication Manage                                                              #
+  ###################################################################################
+  -->
+  <UIPublicationForm>
+    <label>
+      <published>已發佈</published>
+      <non-published>未發佈</non-published>
+      <public>公開</public>
+      <private>私人</private>
+      <state>狀態</state>
+      <visibility>可見度</visibility>
+      <nodeName>節點名：</nodeName>
+      <lifecycleName>生命週期名稱</lifecycleName>
+      <stateName>狀態名稱</stateName>
+    </label>
+    <action>
+      <Save>#{word.save}</Save>
+      <UnsubcriberLifeCycle>未訂閱</UnsubcriberLifeCycle>
+      <Cancel>#{word.cancel}</Cancel>
+    </action>
+  </UIPublicationForm>
+  <!--
+  ###################################################################################
+  # JCR Browser                                                             #
+  ###################################################################################
+  -->
+  <UIWorkspaceList>
+    <label>
+      <workspaceName>工作區：</workspaceName>
+      <rootNodeInfo>根路徑：</rootNodeInfo>
+      <rootPath>根路徑：</rootPath>
+    </label>
+  </UIWorkspaceList>
+  <pathSelector>
+    <title>
+      <UIOneNodePathSelector>節點選擇器</UIOneNodePathSelector>
+    </title>
+  </pathSelector>
+  <!--
+  ###################################################################################
+  # Others                                                                          #
+  ###################################################################################
+  -->
+  <EmailAddressValidator>
+    <msg>
+      <Invalid-input>電子郵件地址是不正確。</Invalid-input>
+    </msg>
+  </EmailAddressValidator>
+  <UIFormInputSetWithAction>
+    <msg>
+      <confirm-delete>確定要刪除嗎?</confirm-delete>
+    </msg>
+  </UIFormInputSetWithAction>
+  <RepeatCountValidator>
+    <msg>
+      <invalid-value>重複次數欄位中的值不正確。只有允許整數或-1。</invalid-value>
+    </msg>
+  </RepeatCountValidator>
+  <RepeatIntervalValidator>
+    <msg>
+      <invalid-value>時間間隔欄位中的值不正確。只允許長式類型。</invalid-value>
+    </msg>
+  </RepeatIntervalValidator>
+  <UIPermissionSelector>
+    <label>
+      <selectGroup>選擇群組</selectGroup>
+      <selectUser>選擇使用者</selectUser>
+      <selectMembership>選擇成員身份</selectMembership>
+    </label>
+  </UIPermissionSelector>
+  <!--
+  ###################################################################################
+  # org.exoplatform.ecm.jcr.ECMStandardPropertyNameValidator                        #
+  ###################################################################################
+  -->
+  <ECMStandardPropertyNameValidator>
+    <msg>
+      <empty-input>欄位"{0}"的值是 null 或為空。</empty-input>
+      <Invalid-char>欄位"{0}"包含一些不正確字元。請輸入另一個值。</Invalid-char>
+    </msg>
+  </ECMStandardPropertyNameValidator>
+  <!--
+  ###################################################################################
+  # org.exoplatform.ecm.jcr.SearchValidator                                     #
+  ###################################################################################
+  -->
+  <SearchValidator>
+    <msg>
+      <empty-input>此欄位的值是 null 或為空。</empty-input>
+      <Invalid-char>此欄位包含一些不正確字元。請輸入另一個值。</Invalid-char>
+      <Invalid-char2>數字必須遵循由字元 ' ~'。</Invalid-char2>
+      <Invalid-char1>字元後面的字元數 ' ~' 必須介於 0 和 1 之間。</Invalid-char1>
+      <Invalid-char3>數字必須遵循由字元 ' ^'。</Invalid-char3>
+      <Invalid-char4>不允許有空白字元 ' ~'。</Invalid-char4>
+      <Invalid-char5>不允許有空白字元 ' ~'。</Invalid-char5>
+    </msg>
+  </SearchValidator>
+  <!--
+  ###################################################################################
+  # PublicationService                                                              #
+  ###################################################################################
+  -->
+  <UIPublicationLogList>
+    <header>
+      <date>日期</date>
+      <newState>新的狀態</newState>
+      <user>使用者</user>
+      <description>描述</description>
+      <version>版本</version>
+      <visibility>可見度</visibility>
+    </header>
+    <action>
+      <Close>#{word.close}</Close>
+    </action>
+  </UIPublicationLogList>
+  <!--
+  ###################################################################################
+  # UIVersionTreeList                                                             #
+  ###################################################################################
+  -->
+  <UIVersionTreeList>
+    <header>
+      <version>版本</version>
+      <state>狀態</state>
+    </header>
+  </UIVersionTreeList>
+  <!--
+  ###################################################################################
+  # UIThumbnailForm                                                             #
+  ###################################################################################
+  -->
+  <UIThumbnailForm>
+    <action>
+      <Save>#{word.save}</Save>
+      <Cancel>#{word.cancel}</Cancel>
+      <RemoveThumbnail>刪除縮略圖</RemoveThumbnail>
+    </action>
+    <label>
+      <mediumSize>縮略圖圖片</mediumSize>
+      <SelectFile>選擇縮略圖圖片</SelectFile>
+    </label>
+    <msg>
+      <mimetype-incorrect>不正確的檔案類型。僅可以從建立縮略圖。JPG。PNG 或。GIF 檔。</mimetype-incorrect>
+      <access-denied>訪問被拒絕。您沒有權限增加一個縮略圖到此節點。</access-denied>
+      <confirm-delete>確定要刪除此縮略圖嗎?</confirm-delete>
+      <is-checked-in>此節點被簽入。請在執行任何操作之前檢查。</is-checked-in>
+      <fileName-error>請選擇要上載的檔案。</fileName-error>
+    </msg>
+    <title>
+      <remove-thumbnail>刪除此縮略圖</remove-thumbnail>
+    </title>
+  </UIThumbnailForm>
+  <!--
+  ###################################################################################
+  # UIAnyPermission                                                                 #
+  ###################################################################################
+  -->
+  <UIAnyPermission>
+    <label>
+      <anyPermission>任何權限</anyPermission>
+    </label>
+  </UIAnyPermission>
+
+  <anyPermission>
+    <title>
+      <AddAnyPermission>設定任何權限</AddAnyPermission>
+    </title>
+  </anyPermission>
+  <!--
+  ###################################################################################
+  # UICategoriesAddedList                                                           #
+  ###################################################################################
+  -->
+  <UICategoriesSelector>
+    <action>
+      <close>#{word.close}</close>
+    </action>
+  </UICategoriesSelector>
+  <!--
+  ###################################################################################
+  # Since ECM version 2.2                                                             #
+  ###################################################################################
+  -->
+  <UIGroupMemberSelector>
+    <label>
+      <selectGroup>選擇群組</selectGroup>
+      <selectUser>選擇使用者</selectUser>
+      <selectMembership>選擇成員身份</selectMembership>
+    </label>
+  </UIGroupMemberSelector>
+  <!--
+  ###Since ECM version 2.2##############
+  -->
+ 
+  <!--
+  ### Since ECM version 2.3 Alpha##############
+  Access directly a JCR FE drive
+  -->
+  <UIJCRExplorerPortlet>
+    <nopermission>沒有磁碟機或您沒有權限訪問此磁碟機。</nopermission>
+  </UIJCRExplorerPortlet>
+
+  <UIJcrExplorerEditForm>
+    <title>編輯檔資源管理器</title>
+    <action>
+      <Edit>編輯</Edit>
+      <Save>#{word.save}</Save>
+      <Cancel>#{word.cancel}</Cancel>
+    </action>
+    <label>
+      <uploadFileSizeLimitMB>上載檔案的大小限制(MB)</uploadFileSizeLimitMB>
+      <isDirectlyDrive>直接驅動</isDirectlyDrive>
+      <driveName>磁碟機的名稱</driveName>
+      <usecase>選擇類型</usecase>
+      <SelectNodePath>選擇路徑</SelectNodePath>
+      <showTopBar>顯示頂部欄</showTopBar>
+      <showActionBar>顯示操作列</showActionBar>
+      <showSideBar>顯示左邊欄</showSideBar>
+      <showFilterBar>顯示篩選器欄</showFilterBar>
+      <nodePath>選擇路徑</nodePath>
+    </label>
+  </UIJcrExplorerEditForm>
+
+  <UIDriveSelector>
+    <label>
+      <driveName>磁碟機的名稱</driveName>
+      <action>操作</action>
+      <adddrives>增加磁碟機</adddrives>
+    </label>
+  </UIDriveSelector>
+  <UIJcrExplorerEditForm>
+    <label>
+      <DriveNameInput>UI JCR Explorer Edit Form</DriveNameInput>
+    </label>
+    <msg>
+      <personal-usecase>當您選擇個人時，將使用當前使用者的專用磁碟機。</personal-usecase>
+      <drive-edit-permission>您不能編輯該磁碟機的名稱。請按一下編輯按鈕。</drive-edit-permission>
+      <path-edit-permission>您不能編輯路徑。請按一下編輯按鈕。</path-edit-permission>
+    </msg>
+  </UIJcrExplorerEditForm>
+
+  <PopUpSelectDrive>
+    <title>
+      <UIDriveSelector>選擇磁碟機</UIDriveSelector>
+    </title>
+  </PopUpSelectDrive>
+
+  <PopupSelectPath>
+    <title>
+      <UIOneNodePathSelector>選擇節點</UIOneNodePathSelector>
+    </title>
+  </PopupSelectPath>
+
+  <DriveNameInput>
+    <title>
+      <SelectDrive>選擇磁碟機</SelectDrive>
+    </title>
+  </DriveNameInput>
+
+  <!--
+  ### Since ECM version 2.4.x ##############
+  -->
+  <UIActionBar>
+    <tooltip>
+      <AddSymLink>增加符號連結</AddSymLink>
+      <AddLocalizationLink>增加翻譯</AddLocalizationLink>
+    </tooltip>
+  </UIActionBar>
+
+  <UIPopupWindow>
+    <title>
+      <UISymLinkManager>符號連結管理員</UISymLinkManager>
+      <UIAddTranslationManager>增加翻譯</UIAddTranslationManager>
+    </title>
+  </UIPopupWindow>
+
+  <UISymLinkForm>
+    <label>
+      <symLinkName>符號連結名稱</symLinkName>
+      <pathNode>路徑節點</pathNode>
+    </label>
+    <action>
+      <Save>#{word.save}</Save>
+      <Cancel>#{word.cancel}</Cancel>
+    </action>
+    <msg>
+      <addFolder-successful>已成功增加符號連結 '{0}'。</addFolder-successful>
+      <name-invalid>請輸入符號連結名稱。</name-invalid>
+      <name-not-allowed>此名稱不允許。</name-not-allowed>
+      <fileName-error>檔案名稱不正確。</fileName-error>
+      <constraint-violation>不能將 '{0}' 節點類型增加到當前節點。</constraint-violation>
+      <repository-exception>訪問被拒絕。你並沒有將符號連結增加到此節點的權限。</repository-exception>
+      <numberformat-exception>您不能保存此資料夾。提供的名稱必須是數字格式。</numberformat-exception>
+      <path-node-invalid>請輸入路徑節點。</path-node-invalid>
+      <path-node-not-allowed>此名稱不允許。</path-node-not-allowed>
+      <non-node>請選擇信任目標節點 ；您可能沒有讀取此節點的權限。</non-node>
+      <cannot-save>您不能增加此節點類型的符號連結。</cannot-save>
+      <item-exists-exception>節點名稱已存在。</item-exists-exception>
+      <translation-node-same-language-default>翻譯的節點具有相同的語言，當前節點的預設語言。</translation-node-same-language-default>
+      <UnsupportedRepositoryOperationException>沒有提到此目標節點。</UnsupportedRepositoryOperationException>
+    </msg>
+  </UISymLinkForm>
+  
+  <UIAddTranslationForm>
+    <label>
+      <symLinkName>符號連結名稱</symLinkName>
+      <pathNode>文件路徑:</pathNode>
+      <note>選擇將擔任翻譯的另一個文件</note>
+    </label>
+    <action>
+      <Save>#{word.save}</Save>
+      <Cancel>#{word.cancel}</Cancel>
+      <SelectDocument>選擇文件</SelectDocument>
+    </action>
+    <msg>
+      <addFolder-successful>符號連結 '{0}' 增加成功。</addFolder-successful>
+      <name-invalid>請輸入符號連結名稱。</name-invalid>
+      <name-not-allowed>此名稱不允許。</name-not-allowed>
+      <fileName-error>檔案名稱不正確。</fileName-error>
+      <constraint-violation>不能將 '{0}' 節點類型增加到當前節點。</constraint-violation>
+      <repository-exception>訪問被拒絕。你並沒有將符號連結增加到此節點的權限。</repository-exception>
+      <numberformat-exception>您不能保存此資料夾。提供的名稱必須是數字格式。</numberformat-exception>
+      <path-node-invalid>請輸入路徑節點。</path-node-invalid>
+      <path-node-not-allowed>此名稱不允許。</path-node-not-allowed>
+      <non-node>請選擇信任目標節點 ；您可能沒有讀取此節點的權限。</non-node>
+      <cannot-save>建立符號連結時出錯。</cannot-save>
+      <item-exists-exception>節點名稱已存在。</item-exists-exception>
+      <translation-node-same-language-default>翻譯的節點具有相同的語言，當前節點的預設語言。</translation-node-same-language-default>
+      <UnsupportedRepositoryOperationException>沒有提到此目標節點。</UnsupportedRepositoryOperationException>
+    </msg>
+  </UIAddTranslationForm>
+
+  <UIPopupSymLink>
+    <title>
+      <UIOneNodePathSelector>選擇目標節點</UIOneNodePathSelector>
+    </title>
+  </UIPopupSymLink>
+  <UIPopupSymLink>
+    <title>
+      <UIContentSelectorOne>選擇文件</UIContentSelectorOne>
+    </title>
+  </UIPopupSymLink>
+
+  <ECMContextMenu>
+    <event>
+      <AddSymLink>增加符號連結</AddSymLink>
+      <AddLocalizationLink>增加翻譯</AddLocalizationLink>
+    </event>
+  </ECMContextMenu>
+
+  <UIWorkingArea>
+    <msg>
+      <create-link-problem>您不能在 '{1}' 建立節點"{0}"的連結。</create-link-problem>
+      <dest-node-is-link>目標節點"{0}"已經是一個符號連接，所以您不能建立一個符號連接在裡面。</dest-node-is-link>
+      <selected-is-link>在選定的節點 '{0}' 已經是一個連結，因此您無法建立到另一個連結的連結點。</selected-is-link>
+      <confirm-create-link>你想要建立一個連結到此位置嗎？</confirm-create-link>
+    </msg>
+  </UIWorkingArea>
+
+  <ECMContextMenu>
+    <event>
+      <CreateLink>建立連結</CreateLink>
+    </event>
+  </ECMContextMenu>
+
+  <UIWorkspaceList>
+    <msg>
+      <AccessDeniedException>訪問被拒絕。此工作區中沒有讀取的權限。</AccessDeniedException>
+    </msg>
+    <label>
+      <taxonomyTree>類別樹</taxonomyTree>
+    </label>
+  </UIWorkspaceList>
+
+  <UIPopupTaxonomy>
+    <title>
+      <UIOneTaxonomySelector>新增類別</UIOneTaxonomySelector>
+    </title>
+  </UIPopupTaxonomy>
+
+  <UITreeTaxonomyList>
+    <label>
+      <taxonomyTree>類別樹：</taxonomyTree>
+      <rootNodePath>根樹：</rootNodePath>
+      <rootNodeInfo>UITreeTaxonomyList</rootNodeInfo>
+    </label>
+  </UITreeTaxonomyList>
+
+  <UIActionBar>
+    <tooltip>
+      <ManageSimpleCategories>管理簡單類別</ManageSimpleCategories>
+    </tooltip>
+  </UIActionBar>
+
+  <UISimpleCategoryManager>
+    <tab>
+      <label>
+        <UICategoriesAddedList>引用的類別</UICategoriesAddedList>
+        <UIOneNodePathSelector>選擇類別</UIOneNodePathSelector>
+      </label>
+    </tab>
+  </UISimpleCategoryManager>
+
+  <UICategoryManager>
+    <tab>
+      <label>
+        <UIOneTaxonomySelector>選擇類別</UIOneTaxonomySelector>
+      </label>
+    </tab>
+  </UICategoryManager>
+
+  <UISimpleCategoryManager>
+    <action>
+      <Close>#{word.close}</Close>
+    </action>
+  </UISimpleCategoryManager>
+  <UIPopupWindow>
+    <title>
+      <UISimpleCategoryManager>新增類別</UISimpleCategoryManager>
+    </title>
+  </UIPopupWindow>
+  <UICategoriesAddedList>
+    <msg>
+      <ItemExistsException>類別名稱已經存在。</ItemExistsException>
+    </msg>
+  </UICategoriesAddedList>
+
+  <UIConfirmMessage>
+    <label>
+      <Close>#{word.cancel}</Close>
+      <OK>刪除</OK>
+      <ReplaceData>替換資料</ReplaceData>
+      <Back>返回重新命名</Back>
+      <Keepfile>保持這兩個檔案</Keepfile>
+    </label>
+  </UIConfirmMessage>
+
+  <UIRestoreConfirmMessage>
+    <label>
+      <Close>#{word.close}</Close>
+      <OK>OK</OK>
+      <ReplaceData>替換資料</ReplaceData>
+      <Back>返回重新命名</Back>
+      <Keepfile>保持這兩個檔案</Keepfile>
+    </label>
+  </UIRestoreConfirmMessage>
+
+
+  <PopupComponent>
+    <title>
+      <UIOneTaxonomySelector>新增類別</UIOneTaxonomySelector>
+    </title>
+  </PopupComponent>
+
+  <UIWorkingArea>
+    <msg>
+      <can-not-move-to-itself>您不能移動該檔案，因為目的檔案夾與來源資料夾相同。</can-not-move-to-itself>
+      <is-editing>雖然它正在進行編輯，不能移動文件。請先關閉它。</is-editing>
+    </msg>
+  </UIWorkingArea>
+
+  <UIImportNode>
+    <label>
+      <behavior>UUID 行為</behavior>
+      <versionHistory>版本歷程記錄</versionHistory>
+    </label>
+    <msg>
+      <history-invalid-type>不正確檔案類型中的版本歷程記錄。僅支援.ZIP 檔案。</history-invalid-type>
+      <history-invalid-content>版本歷程記錄資料中的無效內容。請選擇要匯入受支援的檔案類型。</history-invalid-content>
+    </msg>
+  </UIImportNode>
+
+  <Import>
+    <Behavior>
+      <type0>建立新的</type0>
+      <type1>刪除現有的</type1>
+      <type2>替換現有的</type2>
+      <type3>拋出異常</type3>
+    </Behavior>
+  </Import>
+
+  <UIExportNode>
+    <action>
+      <ExportHistory>匯出版本歷史記錄</ExportHistory>
+    </action>
+  </UIExportNode>
+
+  <UIPopupMenu>
+    <msg>
+      <node-locked-other-person>此節點或父節點是正在被其他使用者鎖定，所以您不能刪除它。</node-locked-other-person>
+    </msg>
+  </UIPopupMenu>
+
+  <Import>
+    <label>
+      <docview>Document View</docview>
+      <sysview>系統檢視</sysview>
+    </label>
+  </Import>
+
+  <UIDocumentForm>
+    <msg>
+      <do-not-permission>您沒有權限載入範本 '{0}'。</do-not-permission>
+    </msg>
+  </UIDocumentForm>
+
+  <!--
+  ###################################################################################
+  #             org.exoplatform.ecm.webui.component.explorer.UIActionBar                #
+  #                           Localize tab                                                                                    #
+  ###################################################################################
+  -->
+  <UIActionBar>
+    <obtion>
+      <Admin>管理員</Admin>
+      <Info>資訊</Info>
+      <Actions>操作</Actions>
+      <Collaboration>合作</Collaboration>
+      <Search>搜索</Search>
+    </obtion>
+  </UIActionBar>
+
+  <UIPopupMenu>
+    <msg>
+      <can-not-unlock-node-is-checked-in>你不能解鎖因為節點"{0}"(或祖先) 已簽入。</can-not-unlock-node-is-checked-in>
+    </msg>
+  </UIPopupMenu>
+
+  <!--
+   #############  From DMS 2.5 #############
+  -->
+  <UIActionBar>
+    <msg>
+      <cannot-enable-version>不能啟用版本控制節點。</cannot-enable-version>
+    </msg>
+  </UIActionBar>
+  <UIPopupMenu>
+    <msg>
+        <cannot-readsource>您不能在來源節點中讀取資料。</cannot-readsource>
+    </msg>
+  </UIPopupMenu>
+  <UIUploadForm>
+    <msg>
+      <upload-not-null>上載檔案前請先增加類別。</upload-not-null>
+    </msg>
+  </UIUploadForm>
+  <UIActionBar>
+    <msg>
+      <allow-setProperty>你必須為群組設定屬性。</allow-setProperty>
+    </msg>
+  </UIActionBar>
+
+  <UIActionForm>
+    <msg>
+      <name-not-allowed>不允許操作的名稱。</name-not-allowed>
+    </msg>
+  </UIActionForm>
+
+  <UISaveQueryForm>
+    <msg>
+      <name-not-allowed>不允許使用此查詢名稱。</name-not-allowed>
+    </msg>
+  </UISaveQueryForm>
+  <UISimpleSearch>
+    <msg>
+      <name-not-allowed>單詞或短語的內容不是允許的。</name-not-allowed>
+    </msg>
+  </UISimpleSearch>
+
+ 
+    <!--
+   #############  From DMS 2.6 #############
+   -->
+  <ECMContextMenu>
+      <event>
+        <Permlink>查看文件</Permlink>
+      </event>
+  </ECMContextMenu>
+  
+
+  <!--
+    ############  From DMS 2.6 ##############
+   -->
+  <UIFolderForm>
+    <label>
+      <nt_folder>文件資料夾</nt_folder>
+      <nt_unstructured>內容資料夾</nt_unstructured>
+      <exo_cssFolder>CSS 資料夾</exo_cssFolder>
+      <exo_jsFolder>Javascript 資料夾</exo_jsFolder>
+      <exo_linkFolder>Link Folder</exo_linkFolder>
+      <exo_webFolder>Web 內容資料夾</exo_webFolder>
+   </label>
+  </UIFolderForm>
+
+  <Comments>
+    <tooltip>
+      <remove-comment>刪除此評論</remove-comment>
+      <edit-comment>編輯此評論</edit-comment>
+    </tooltip>
+  </Comments>
+  <UIDocumentInfo>
+    <msg>
+      <confirm-deletecomment>確定要刪除此評論嗎?</confirm-deletecomment>
+    </msg>
+  </UIDocumentInfo>
+
+ <UIExportNode>
+  <msg>
+    <OutOfMemoryError>匯出大量資料時，您應該選擇系統檢視。</OutOfMemoryError>
+  </msg>
+ </UIExportNode>
+ <Taxonomy>
+    <msg>
+      <AccessDeniedException>您沒有權限訪問這些類別樹。</AccessDeniedException>
+    </msg>
+  </Taxonomy>
+
+  <UIJcrExplorerEditForm>
+    <msg>
+      <notNullDriveName>磁碟機名稱為 null 或空。請填寫磁碟機名稱欄位。</notNullDriveName>
+      <notNullPath>該路徑是 null 或為空。請填寫該路徑。</notNullPath>
+    </msg>
+  </UIJcrExplorerEditForm>
+
+  <UIViewSearchResult>
+    <tooltip>
+      <remove-attachment>確定要刪除此附件檔案嗎?</remove-attachment>
+    </tooltip>
+  </UIViewSearchResult>
+
+  <SameNamePopup>
+    <title>
+      <UIUploadBehaviorWithSameName>上傳檔案</UIUploadBehaviorWithSameName>
+    </title>
+  </SameNamePopup>
+
+  <UIAllItems>
+    <label>
+      <OwnedByMe>我所擁有</OwnedByMe>
+      <Favourites>我的最愛</Favourites>
+      <Hidden>隱藏</Hidden>
+      <Trash>垃圾桶</Trash>
+      <Configuration>設定偏好選項</Configuration>
+    </label>
+    <title>
+      <allItems>所有項目</allItems>
+    </title>
+  </UIAllItems>
+
+  <UIPreferencesForm>
+      <label>
+          <Alphabetic>按字母順序排列</Alphabetic>
+          <Type>類型</Type>
+          <CreatedDate>建立日期</CreatedDate>
+          <ModifiedDate>修改日期</ModifiedDate>
+          <Ascending>昇冪</Ascending>
+          <Descending>降冪</Descending>
+      </label>
+  </UIPreferencesForm>
+
+  <UISavedSearches>
+    <title>
+      <savedSearches>已保存的搜索</savedSearches>
+    </title>
+  </UISavedSearches>
+  <DocumentType>
+    <label>
+       <Images>圖片</Images>
+       <Video>視頻</Video>
+       <Music>音樂</Music>
+       <Documents>文件</Documents>
+       <Content>內容</Content>
+    </label>
+  </DocumentType>
+
+  <UIDocumentFilterForm>
+    <label>
+      <Images>圖片</Images>
+      <Video>視頻</Video>
+      <Music>音樂</Music>
+      <Documents>文件</Documents>
+      <Content>內容</Content>
+    </label>
+    <title>將篩選器偏好設定</title>
+    <action>
+      <Save>#{word.save}</Save>
+      <Cancel>#{word.cancel}</Cancel>
+    </action>
+  </UIDocumentFilterForm>
+
+  <UIAllItemsByType>
+    <label>
+    <ByType>按類型篩選</ByType>
+      <DocumentFilterConfiguration>將篩選器偏好設定</DocumentFilterConfiguration>
+    </label>
+    <title>
+      <ShowVideo>顯示所有視頻檔案</ShowVideo>
+      <ShowMusic>顯示所有音樂檔案</ShowMusic>
+      <ShowImages>顯示所有影片檔案</ShowImages>
+      <ShowDocuments>顯示所有文件檔案</ShowDocuments>
+      <ShowContent>顯示所有文件類型</ShowContent>
+    </title>
+  </UIAllItemsByType>
+
+  <Views>
+    <label>
+      <slide-show>放映投影片</slide-show>
+    </label>
+  </Views>
+  <ECMContextMenu>
+    <event>
+      <PlayMedia>播放媒體</PlayMedia>
+    </event>
+  </ECMContextMenu>
+  <UIPopupWindow>
+    <title>
+      <UIDocumentFilterForm>文件類型篩選器</UIDocumentFilterForm>
+    </title>
+  </UIPopupWindow>
+
+  <UIAllItemsPreferenceForm>
+    <label>
+      <showOwnedByUser>我所擁有</showOwnedByUser>
+      <showFavourites>我的最愛</showFavourites>
+      <showHiddens>隱藏</showHiddens>
+      <showTrash>垃圾桶</showTrash>
+    </label>
+    <action>
+      <Save>#{word.save}</Save>
+      <Cancel>#{word.cancel}</Cancel>
+    </action>
+  </UIAllItemsPreferenceForm>
+
+  <EmptyTrashManageComponent>
+    <msg>
+      <confirm-delete>你確定你要清空垃圾桶中的所有項目？</confirm-delete>
+    </msg>
+  </EmptyTrashManageComponent>
+  <UICategoryForm>
+    <label>
+      <name>類別名稱</name>
+    </label>
+    <action>
+      <Save>#{word.save}</Save>
+      <Cancel>#{word.cancel}</Cancel>
+    </action>
+  </UICategoryForm>
+  <UIPopupWindow>
+    <title>
+      <UICategoryForm>新增類別</UICategoryForm>
+    </title>
+  </UIPopupWindow>
+  <UIActionBar>
+    <tooltip>
+      <AddCategory>新增類別</AddCategory>
+    </tooltip>
+   </UIActionBar>
+
+   <UITaggingForm>
+    <label>
+      <Public>公開</Public>
+      <Private>私人</Private>
+      <tagScopes>標籤範圍</tagScopes>
+    </label>
+   </UITaggingForm>
+
+  <UITagExplorer>
+    <title>
+      <PublicTags>標籤</PublicTags>
+      <EditPublicTags>編輯標籤</EditPublicTags>
+      <PrivateTags>標籤</PrivateTags>
+    </title>
+  </UITagExplorer>
+
+  <UIEditingTagsForm>
+    <header>
+      <name>名稱</name>
+      <relatedDocuments>相關的檔案</relatedDocuments>
+      <action>操作</action>
+    </header>
+    <action>
+      <title>
+        <EditTag>編輯標籤</EditTag>
+        <RemoveTag>刪除標籤</RemoveTag>
+        <AddTag>增加標籤</AddTag>
+      </title>
+    </action>
+    <msg>
+      <confirm-remove>是否確定要刪除此標籤？</confirm-remove>
+    </msg>
+  </UIEditingTagsForm>
+
+
+  <UIPopupWindow>
+    <title>
+      <UIEditingTagsForm>編輯標籤</UIEditingTagsForm>
+    </title>
+  </UIPopupWindow>
+
+  <UITagForm>
+    <action>
+      <UpdateTag>#{word.save}</UpdateTag>
+      <Cancel>#{word.close}</Cancel>
+    </action>
+    <label>
+      <tagName>標籤名稱：</tagName>
+      <relatedDocuments>相關的檔案</relatedDocuments>
+    </label>
+  </UITagForm>
+
+  <TagPopup>
+    <title>
+      <UITagForm>標記</UITagForm>
+    </title>
+  </TagPopup>
+
+    <UIPopupMenu>
+    <msg>
+      <node-locked-editing>您不能編輯此節點的路徑 {0}。它正被另一使用者鎖定。</node-locked-editing>
+    </msg>
+  </UIPopupMenu>
+  <UITagStyleForm>
+    <msg>
+      <error-update>更新標籤樣式時出錯。</error-update>
+    </msg>
+  </UITagStyleForm>
+
+  <UIPopupMenu>
+    <msg>
+      <editTagAccessDenied>訪問被拒絕。</editTagAccessDenied>
+    </msg>
+  </UIPopupMenu>
+
+  <UIPopupWindow>
+    <title>
+      <UITaggingFormContainer>標籤管理</UITaggingFormContainer>
+    </title>
+  </UIPopupWindow>
+
+    <PopupComponent>
+    <title>
+      <UINodeTypeSelector>選擇節點類型</UINodeTypeSelector>
+    </title>
+  </PopupComponent>
+
+    <UIActionForm>
+    <title>
+      <ShowComponent>顯示元件</ShowComponent>
+      <removeReference>刪除</removeReference>
+    </title>
+  </UIActionForm>
+
+  <EditFormAction>
+    <title>
+      <ShowComponent>顯示元件</ShowComponent>
+      <removeReference>刪除</removeReference>
+    </title>
+  </EditFormAction>
+
+  <NodeTypeNameValidator>
+    <msg>
+      <Invalid-char>有一些不正確字元。請輸入另一個值。</Invalid-char>
+      <empty-input>欄位的值是 null 或為空。</empty-input>
+    </msg>
+  </NodeTypeNameValidator>
+
+  <UIPreferencesForm>
+      <label>
+            <queryType>查詢類型：</queryType>
+            <SQL>SQL</SQL>
+            <XPATH>XPATH</XPATH>
+      </label>
+  </UIPreferencesForm>
+
+  <UIDocumentInfo>
+    <msg>
+      <repository-error>出現了一個錯誤。有關存儲庫中的資訊丟失了。</repository-error>
+    </msg>
+  </UIDocumentInfo>
+
+  <UITreeExplorer>
+    <msg>
+      <repository-error>出現了一個錯誤。有關存儲庫中的資訊丟失了。</repository-error>
+    </msg>
+  </UITreeExplorer>
+  <UIDocumentForm>
+    <msg>
+      <constraintviolation-exception>您不能保存文件。輸入資料遺失或是不正確。</constraintviolation-exception>
+    </msg>
+  </UIDocumentForm>
+  <UIActionForm>
+    <msg>
+      <constraintviolation-exception>您不能保存文件。輸入資料遺失或是不正確。</constraintviolation-exception>
+    </msg>
+  </UIActionForm>
+
+  <UISelectRestorePath>
+    <action>
+      <Save>#{word.save}</Save>
+      <Cancel>#{word.cancel}</Cancel>
+    </action>
+    <label>
+      <formInput>失去先前的路徑。請選擇一個新的。</formInput>
+    </label>
+  </UISelectRestorePath>
+  <PathNode>
+    <title>
+      <Add>新增</Add>
+    </title>
+  </PathNode>
+  <UIPopupPathFoRestore>
+    <title>
+      <UIOneNodePathSelector>選擇父節點</UIOneNodePathSelector>
+    </title>
+  </UIPopupPathFoRestore>
+  <rootNodeInfo>
+    <title>
+      <AddRootNode>增加根節點</AddRootNode>
+    </title>
+  </rootNodeInfo>
+
+  <UIActionForm>
+    <msg>
+      <homePath-emty>首頁路徑是空的。</homePath-emty>
+      <targetPath-emty>目標路徑是空的。</targetPath-emty>
+    </msg>
+    </UIActionForm>
+    <UIActionBar>
+      <msg>
+        <not-exist-categories>沒有任何類別。</not-exist-categories>
+      </msg>
+    </UIActionBar>
+
+  <UIPublicationContainer>
+   <action>
+    <Close>#{word.close}</Close>
+   </action>
+  </UIPublicationContainer>
+
+  <UIPublicationPanel>
+    <button>
+      <Close>#{word.close}</Close>
+    </button>
+    <revisions>
+      <version>修訂</version>
+      <date>日期</date>
+      <author>作者</author>
+      <status>狀態</status>
+      <action>操作</action>
+      <label>修訂</label>
+      <none>沒有修訂</none>
+      <seeall>查看所有版本</seeall>
+      <currentVersion>當前修訂版本</currentVersion>
+      <confirm>您將丟失您的草稿工作。確定要替換當前修訂版本嗎?</confirm>
+    </revisions>
+    <status>
+      <version>修訂</version>
+      <title>狀態</title>
+      <archived>存檔</archived>
+      <obsolete>過時的</obsolete>
+      <unpublished>未發佈</unpublished>
+      <enrolled>註冊</enrolled>
+      <draft>草稿</draft>
+      <pending>等待中</pending>
+      <approved>核准</approved>
+      <inreview>在審查中</inreview>
+      <staged>上演</staged>
+      <published>已發佈</published>
+      <live>已發佈</live>
+    </status>
+    <scheduled>
+      <title>已排程</title>
+      <from>從</from>
+      <to>至</to>
+    </scheduled>
+    <title>
+      <preview>預覽</preview>
+      <restore>還原</restore>
+    </title>
+    <msg>
+      <have-no-view-template>不支援視圖範本。</have-no-view-template>
+      <restore-complete>還原已完成。</restore-complete>
+    </msg>
+  </UIPublicationPanel>
+  <UIPublicationHistory>
+    <header>
+      <date>日期</date>
+      <versionName>修訂名稱</versionName>
+      <currentState>目前狀態</currentState>
+      <user>作者</user>
+      <description>描述</description>
+    </header>
+  </UIPublicationHistory>
+  
+  <UIPublicationSchedule>
+    <label>
+      <introduction>你可以安排您的文件發佈。選擇你想看到您發佈的文件日期</introduction>
+      <no-schedule-info>沒有為您的文件發佈時程表</no-schedule-info>
+    </label>
+    <msg>
+      <save-finished>您新的發佈排程已成功保存。</save-finished>
+    </msg>
+    <action>
+      <Save>#{word.save}</Save>
+      <Reset>重置</Reset>
+    </action>
+  </UIPublicationSchedule>
+
+  <UIPublicationPanel>
+    <label>
+      <header>出版日期</header>
+      <start>開始的出版物</start>
+      <end>最終出版物</end>
+    </label>
+    <msg>
+      <invalid-format>日期格式無效。請再次檢查。</invalid-format>
+      <fromDate-after-toDate>開始日期必須早於結束日期。</fromDate-after-toDate>
+    </msg>
+  </UIPublicationPanel>
+  <UIPopupWindow>
+    <title>
+      <UIPublicationContainer>管理出版</UIPublicationContainer>
+      <UIPublishingPanel>管理出版</UIPublishingPanel>
+    </title>
+  </UIPopupWindow>
+  <WCMContentView>
+    <header>
+      <status>狀態</status>
+      <author>作者</author>
+      <date>建立日期</date>
+      <title>文件標題</title>
+      <lastUser>最後一位使用者</lastUser>
+    </header>
+  </WCMContentView>
+  <UITagForm>
+    <msg>
+      <NameAlreadyExist>標籤名稱已經存在。</NameAlreadyExist>
+    </msg>
+  </UITagForm>
+
+  <!--
+  ############  From WCM 2.1.0 ##############
+  -->
+  <UICategoryManagerSearch>
+    <tab>
+      <label>
+        <UIOneTaxonomySelector>選擇類別</UIOneTaxonomySelector>
+      </label>
+    </tab>
+  </UICategoryManagerSearch>
+
+  <UIPreferencesForm>
+   <action>
+     <HideAdvance>隱藏進階選項</HideAdvance>
+     <ShowAdvance>顯示進階選項</ShowAdvance>
+    </action>
+    <label>
+    <Advance>進階選項</Advance>
+    </label>
+  </UIPreferencesForm>
+
+  <UIJCRExplorerPortlet>
+<msg>
+  <file-access-denied>檔案訪問被拒絕。</file-access-denied>
+  <anonymous-access-denied>匿名使用者沒有使用此功能的權限。</anonymous-access-denied>
+</msg>
+  </UIJCRExplorerPortlet>
+  <UIDrivesArea>
+    <DrivesArea>
+      <ShowDrives>顯示磁碟機</ShowDrives>
+    </DrivesArea>
+  </UIDrivesArea>
+  <UIJcrExplorerEditForm>
+    <msg>
+      <fields-saved>保存所有欄位的值。</fields-saved>
+      <fields-cancelled>取消所有欄位的值。</fields-cancelled>
+    </msg>
+  </UIJcrExplorerEditForm>
+  <UIDocumentForm>
+  <msg>
+  <confirm-close>如果您關閉此表單，你所做的更改將會丟失。</confirm-close>
+  <confirm-changeType>如果您更改內容類型，您所做的更改將會丟失。</confirm-changeType>
+  <confirm-navigate>如果您導航到其他頁面，你所做的更改將會丟失。</confirm-navigate>
+  </msg>
+  </UIDocumentForm>
+  <UploadFileMimeTypesValidator>
+    <msg>
+      <wrong-mimetype>Mime 類型 {0} 不允許欄位 {1}。請上傳另一個檔案</wrong-mimetype>
+    </msg>
+  </UploadFileMimeTypesValidator>
+  <lifecyclePhase>
+    <label>
+    <no>否</no>
+  <yes>是</yes>
+  <true>對</true>
+  <false>錯</false>
+  <Electronic>電子</Electronic>
+  <Paper>Paper</Paper>
+  <NONE>無</NONE>
+  <CLASSIFIED>Classified</CLASSIFIED>
+  <UNCLASSIFIED>未分類</UNCLASSIFIED>
+  <NOCONTRACT>沒有合約</NOCONTRACT>
+  <one-minute>一分鐘</one-minute>
+  <hourly>每小時</hourly>
+  <daily>每天</daily>
+  <quarterly>每季</quarterly>
+  <yearly>每年</yearly>
+  <ten-years>十年</ten-years>
+  <read>使用者操作</read>
+  <schedule>排程</schedule>
+  <node_added>增加內容</node_added>
+  <node_removed>刪除內容</node_removed>
+  <property_added>增加屬性</property_added>
+  <property_removed>刪除屬性</property_removed>
+  <property_changed>修改屬性</property_changed>
+</label>
+  </lifecyclePhase>
+  <UIPopupMenu>
+  <msg>
+<can-not-remove-locked-node>節點 {0} 已被鎖定。不能將它移動到垃圾桶。</can-not-remove-locked-node>
+<can-not-remove-checked-in-node>節點 {0} 或父節點被簽入。不能將它移動到垃圾桶。</can-not-remove-checked-in-node>
+<access-denied-to-delete>訪問被拒絕。您不能到垃圾桶中移動節點 {0}。</access-denied-to-delete>
+  </msg>
+  </UIPopupMenu>
+  <UIPropertyForm>
+  <msg>
+  <unknown-error>編輯此屬性時出錯。</unknown-error>
+    </msg>
+  </UIPropertyForm>
+  <UIWatchDocumentForm>
+    <msg>
+      <node-is-locked>此節點被鎖定。您不能觀看。</node-is-locked>
+      <unknown-error>出現了一些錯誤。您不能觀看此節點。</unknown-error>
+    </msg>
+  </UIWatchDocumentForm>   
+  <UIActionForm>
+    <msg>
+      <xss-vulnerability-character>欄位"{0}"包含 XSS 漏洞字元</xss-vulnerability-character>
+    </msg>
+  </UIActionForm>
+  <UIMultiUpload>
+  <label>
+    <AbortAll>中止所有</AbortAll>
+    <AbortAllFiles>中止所有檔案</AbortAllFiles>
+    <MaxFileSize>最大檔案大小是</MaxFileSize>
+    <InvalidCharacters>不正確字元將更改為 '-'</InvalidCharacters>
+    <DropFileMessage>在當前資料夾中刪除您的檔案</DropFileMessage>
+    <Close>#{word.close}</Close>
+    <in>在中</in>
+    <MaxFileSizeAlert>檔案大小超出大小限制的</MaxFileSizeAlert>
+    <Waiting>等待中</Waiting>
+    <Error>錯誤</Error>
+    <or>或</or>
+    <AlreadyInUse>已在使用中</AlreadyInUse>
+    <Keep>記住這兩個</Keep>
+    <Replace>替換</Replace>
+    <Canceled>已取消</Canceled>
+    <Cancel>#{word.cancel}</Cancel>
+    <AbortAllConfirmation>你想要中止進展中的所有檔案嗎？</AbortAllConfirmation>
+  </label>
+  </UIMultiUpload>
+  <UIDocumentNodeList>
+  <label>
+  <CreatedOn>建立於</CreatedOn>
+  <Updated>更新</Updated>
+  <by>由</by>
+  <you>你</you>
+  </label>
+  </UIDocumentNodeList>
+  <FileView>
+    <label>
+      <name>名稱</name>
+      <date>日期</date>
+      <size>大小</size>
+      <sortBy>排序依據:</sortBy>
+      <filesAreSelected>選擇檔案。</filesAreSelected>
+      <ClearSelection>清除選擇</ClearSelection>
+      <more>更多</more>
+    </label>
+  </FileView>
+  <UIPropertyForm>
+  <msg>
+  <property-name-incorrect>屬性名稱不正確，請輸入另一個值給它 ！</property-name-incorrect>
+    </msg>
+  </UIPropertyForm>
+  <!--
+  ###################################################################################
+  # JCR Exceptions manager                                                              #
+  ###################################################################################
+  -->
+  <VersionException>
+  <msg>不能修改正在簽入的文件。</msg>  
+  </VersionException>
+</bundle>

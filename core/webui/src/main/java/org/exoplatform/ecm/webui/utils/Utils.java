@@ -20,7 +20,6 @@ import java.io.InputStream;
 import java.net.URLEncoder;
 import java.text.DecimalFormat;
 import java.util.ArrayList;
-import java.util.Collection;
 import java.util.Comparator;
 import java.util.HashMap;
 import java.util.List;
@@ -40,6 +39,7 @@ import javax.jcr.NodeIterator;
 import javax.jcr.PathNotFoundException;
 import javax.jcr.RepositoryException;
 import javax.jcr.ValueFormatException;
+import javax.jcr.Value;
 import javax.jcr.nodetype.NodeDefinition;
 import javax.jcr.nodetype.NodeType;
 import javax.jcr.nodetype.NodeTypeManager;
@@ -53,9 +53,6 @@ import org.exoplatform.container.definition.PortalContainerConfig;
 import org.exoplatform.container.xml.PortalContainerInfo;
 import org.exoplatform.download.DownloadService;
 import org.exoplatform.download.InputStreamDownloadResource;
-import org.exoplatform.portal.config.UserPortalConfig;
-import org.exoplatform.portal.resource.SkinConfig;
-import org.exoplatform.portal.resource.SkinService;
 import org.exoplatform.portal.webui.util.Util;
 import org.exoplatform.services.cms.documents.TrashService;
 import org.exoplatform.services.cms.drives.DriveData;
@@ -807,7 +804,10 @@ public class Utils {
       title = node.getProperty("exo:title").getValue().getString();
     } catch (PathNotFoundException pnf1) {
       try {
-        title = node.getNode("jcr:content").getProperty("dc:title").getValues()[0].getString();
+        Value[] values = node.getNode("jcr:content").getProperty("dc:title").getValues();
+        if(values.length != 0){
+          title = values[0].getString();
+        }
       } catch (PathNotFoundException pnf2) {
         title = null;
       }

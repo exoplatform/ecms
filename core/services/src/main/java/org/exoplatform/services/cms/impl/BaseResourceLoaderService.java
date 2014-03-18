@@ -34,6 +34,7 @@ import org.exoplatform.container.configuration.ConfigurationManager;
 import org.exoplatform.services.cache.CacheService;
 import org.exoplatform.services.cache.ExoCache;
 import org.exoplatform.services.cms.actions.ActionServiceContainer;
+import org.exoplatform.services.cms.jcrext.activity.ActivityCommonService;
 import org.exoplatform.services.cms.scripts.CmsScript;
 import org.exoplatform.services.jcr.RepositoryService;
 import org.exoplatform.services.jcr.core.ManageableRepository;
@@ -54,6 +55,8 @@ public abstract class BaseResourceLoaderService implements Startable{
   protected ExoCache<String, CmsScript>  resourceCache_;
   
   private static final String EDITED_CONFIGURED_SCRIPTS = "EditedConfiguredScripts";
+
+  private ActivityCommonService activityService = null;
 
   /**
    * DMS configuration which used to store informations
@@ -179,19 +182,25 @@ public abstract class BaseResourceLoaderService implements Startable{
       resourcesHome = parentResource ;
       resourceName = StringUtils.substringAfterLast(resourceName,"/") ;
     }
+    Node script = null;
     try {
-      Node script = resourcesHome.getNode(resourceName);
+      script = resourcesHome.getNode(resourceName);
       contentNode = script.getNode(NodetypeConstant.JCR_CONTENT);
       if(!contentNode.isCheckedOut()) contentNode.checkout() ;
     } catch (PathNotFoundException e) {
-      Node script = resourcesHome.addNode(resourceName, NodetypeConstant.NT_FILE);
+      script = resourcesHome.addNode(resourceName, NodetypeConstant.NT_FILE);
       contentNode = script.addNode(NodetypeConstant.JCR_CONTENT, NodetypeConstant.EXO_RESOURCES);
       contentNode.setProperty(NodetypeConstant.JCR_ENCODING, "UTF-8");
       contentNode.setProperty(NodetypeConstant.JCR_MIME_TYPE, "application/x-groovy");
     }
+    if (activityService==null) {
+      activityService = WCMCoreUtils.getService(ActivityCommonService.class);
+    }
+    activityService.setCreating(script, true);
     contentNode.setProperty(NodetypeConstant.JCR_DATA, in);
     contentNode.setProperty(NodetypeConstant.DC_DESCRIPTION, new String[] { resourceDescription });
     contentNode.setProperty(NodetypeConstant.JCR_LAST_MODIFIED, new GregorianCalendar());
+    activityService.setCreating(script, false);
     resourcesHome.save() ;
   }  
 

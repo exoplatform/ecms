@@ -140,12 +140,6 @@
       <artifactId>log4j</artifactId>
       <optional>true</optional>
     </dependency>
-    <!-- "Unused declared" by analyze but still need for testing -->
-    <dependency>
-      <groupId>org.chromattic</groupId>
-      <artifactId>chromattic.core</artifactId>
-      <scope>test</scope>
-    </dependency>
     <!-- "unused declared" by analyze but still use for test -->
     <dependency>
       <groupId>org.exoplatform.commons</groupId>

@@ -1866,7 +1866,8 @@ public class UIDocumentInfo extends UIBaseNodePresentation {
     builder.append(" isFile='" + node.isNodeType("nt:file") + "' ");
     builder.append(" isLinkWithTarget='" + Utils.targetNodeAndLinkInTrash(node) + "' ");
     builder.append(" isExoAction='" + (Utils.EXO_ACTIONS.equals(node.getName()) && Utils.isInTrash(node)) + "' ");
-    
+    builder.append(" isCheckedIn='" + !node.isCheckedOut() + "' ");
+
     return builder.toString();
   }
 

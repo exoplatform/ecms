@@ -220,7 +220,8 @@ public class WCMPublicationServiceImpl
                                             String siteName,
                                             String remoteUser,
                                             String newState) throws Exception {
-    if(!node.getPath().startsWith(publicationLocation.split(":")[1])) return;
+    if(!node.getPath().startsWith(publicationLocation.split(":")[1]) 
+			&& !publicationService.isNodeEnrolledInLifecycle(node)) return;
     if(node.getPrimaryNodeType().getName().equals(NodetypeConstant.NT_FILE)) {
       for(String nodeType : notAllowChildNodeEnrollInPubliction) {
         if(!allowEnrollInPublication(node, nodeType)) return;
