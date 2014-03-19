@@ -16,6 +16,18 @@
  */
 package org.exoplatform.wcm.webui.clv;
 
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Collections;
+import java.util.Comparator;
+import java.util.Iterator;
+import java.util.List;
+
+import javax.jcr.Node;
+import javax.jcr.PathNotFoundException;
+import javax.jcr.RepositoryException;
+import javax.portlet.PortletPreferences;
+
 import org.exoplatform.ecm.utils.text.Text;
 import org.exoplatform.ecm.webui.selector.UISelectable;
 import org.exoplatform.services.cms.drives.DriveData;
@@ -253,7 +265,20 @@ public class UICLVConfig extends UIFormTabPane  implements UISelectable {
     String itemPath = Utils.getPortletPreference(UICLVPortlet.PREFERENCE_ITEM_PATH);
     if (items == null && UICLVPortlet.DISPLAY_MODE_MANUAL.equals(displayMode) && itemPath != null) {
       if(itemPath.contains(";")) {
-        items = Arrays.asList(itemPath.split(";"));
+        List<String> tmpItems = Arrays.asList(itemPath.split(";"));
+        items = new ArrayList<String>();
+        //only add exist Node
+        for(String item:tmpItems) {
+          try{
+            Node realNode=getRealNode(item);
+            if(realNode != null){
+              items.add(item);
+            }
+          }catch(RepositoryException e){
+            //
+          }
+          
+        }
       }
     }
     return items;
@@ -670,15 +695,15 @@ public class UICLVConfig extends UIFormTabPane  implements UISelectable {
 
   /**
    *
-   * @param itemPath The path
-   * @return The title
-   * @throws RepositoryException
+   * get the realnode with a path
+   * @param itemPath
+   * @return the realnode. null if the path is not ok
    */
-  private String getTitle(String itemPath) throws RepositoryException {
+  private Node getRealNode(String itemPath) throws RepositoryException{
     String strRepository, strWorkspace, strIdentifier;
     int repoIndex, wsIndex;
     if (itemPath==null || itemPath.length() == 0)
-      return "";
+      return null;
     repoIndex = itemPath.indexOf(':');
     wsIndex = itemPath.lastIndexOf(':');
     strRepository = itemPath.substring(0, repoIndex);
@@ -688,6 +713,17 @@ public class UICLVConfig extends UIFormTabPane  implements UISelectable {
                                           Text.escapeIllegalJcrChars(strWorkspace),
                                           Text.escapeIllegalJcrChars(strIdentifier),
                                           false);
+    return selectedNode;
+  }
+  
+ /**
+   *
+   * @param itemPath The path
+   * @return The title
+   * @throws RepositoryException
+   */
+  private String getTitle(String itemPath) throws RepositoryException {
+    Node selectedNode = getRealNode(itemPath);
     if (selectedNode==null) return null;
     String title = null;
     if (selectedNode.hasProperty("exo:title")) {
