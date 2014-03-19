@@ -1,0 +1,387 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<bundle>
+  <!--
+  ###################### global word for ECM dialogs resoucebundle ####
+  -->
+  <Ecm>
+    <dialog>
+      <label>
+        <end-time>結束時間</end-time>
+        <start-time>開始時間</start-time>
+        <lifecycle>生命週期</lifecycle>
+        <mimeType>Mime 類型</mimeType>
+        <repeat-count>重複次數</repeat-count>
+        <time-interval>時間間隔</time-interval>
+        <query-items>查詢項目</query-items>
+        <schedule-type>計畫類型</schedule-type>
+        <remove>刪除項目</remove>
+        <add>增加項目</add>
+        <expand>展開這個</expand>
+      </label>
+    </dialog>
+  </Ecm>
+  
+  <UIDocumentForm>
+    <label>
+      <title>#{word.title}</title>
+      <link>連結</link>
+      <contentHtml>#{word.content}</contentHtml>
+      <content>#{word.content}</content>
+      <contentPlain>#{word.content}</contentPlain>
+      <name>名稱</name>
+    <categories>類別</categories>
+    </label>
+  </UIDocumentForm>
+ 
+  <!--
+  ###################### resoucebundle for HTMLFile dialogs template ####
+  -->
+  <HtmlFile>
+    <dialog>
+      <label>
+        <name>名稱</name>
+        <content>內容</content>
+      </label>
+    </dialog>
+  </HtmlFile>
+
+  <!--
+  ###################### resoucebundle for nt:file dialogs template ####
+  -->
+  <File>
+    <dialog>
+      <label>
+        <name>#{word.name}</name>
+        <categories>類別</categories>
+        <mimeType>#{Ecm.dialog.label.mimeType}</mimeType>
+        <content>#{word.content}</content>
+        <re-upload>該檔案已經存在。您可以刪除它，並將另一個檔案上傳。</re-upload>
+      </label>
+    </dialog>
+  </File>
+
+  <UIActionForm>
+    <label>
+      <description>#{word.description}</description>
+      <port>埠</port>
+      <userName>#{word.userName}</userName>
+      <password>密碼</password>
+      <link>連結</link>
+      <to>發送郵件到</to>
+      <actionName>#{word.name}</actionName>
+    </label>
+  </UIActionForm>
+  <EditFormAction>
+    <label>
+      <description>#{word.description}</description>
+      <port>埠</port>
+      <userName>#{word.userName}</userName>
+      <password>密碼</password>
+      <link>連結</link>
+      <to>發送郵件到</to>
+      <actionName>#{word.name}</actionName>
+    </label>
+  </EditFormAction>
+
+  <!--
+  ###################### resoucebundle for exo:addMetadataAction dialogs template ####
+  -->
+  <AddMetadata>
+    <dialog>
+      <label>
+        <id>Id</id>
+        <name>#{word.name}</name>
+        <lifecycle>#{Ecm.dialog.label.lifecycle}</lifecycle>
+        <metadata>中繼資料</metadata>
+        <description>#{word.description}</description>
+      </label>
+    </dialog>
+  </AddMetadata>
+
+  <!--
+  ###################### resoucebundle for exo:autoVersioning dialogs template ####
+  -->
+  <AutoVersioning>
+    <dialog>
+      <label>
+        <id>Id</id>
+        <name>#{word.name}</name>
+        <lifecycle>#{Ecm.dialog.label.lifecycle}</lifecycle>
+        <schedule-type>#{Ecm.dialog.label.schedule-type}</schedule-type>
+        <start-time>#{Ecm.dialog.label.start-time}</start-time>
+        <end-time>#{Ecm.dialog.label.end-time}</end-time>
+        <repeat-count>#{Ecm.dialog.label.repeat-count}</repeat-count>
+        <time-inteval>#{Ecm.dialog.label.time-interval}</time-inteval>
+        <cron-expression>Cron 運算式</cron-expression>
+        <description>#{word.description}</description>
+      </label>
+    </dialog>
+  </AutoVersioning>
+  <!--
+  ###################### resoucebundle for exo:enableVersiong dialogs template ####
+  -->
+  <EnableVersioning>
+    <dialog>
+      <label>
+        <id>Id</id>
+        <name>#{word.name}</name>
+        <lifecycle>#{Ecm.dialog.label.lifecycle}</lifecycle>
+        <schedule-type>#{Ecm.dialog.label.schedule-type}</schedule-type>
+        <start-time>#{Ecm.dialog.label.start-time}</start-time>
+        <end-time>#{Ecm.dialog.label.end-time}</end-time>
+        <repeat-count>#{Ecm.dialog.label.repeat-count}</repeat-count>
+        <time-inteval>#{Ecm.dialog.label.time-interval}</time-inteval>
+        <cron-expression>Cron Expression</cron-expression>
+        <description>#{word.description}</description>
+      </label>
+    </dialog>
+  </EnableVersioning>
+  <!--
+  ###################### resoucebundle for dc:elementSet dialogs template ####
+  -->
+  <ElementSet>
+    <dialog>
+      <label>
+        <title>#{word.title}:</title>
+        <creator>建立者:</creator>
+        <subject>#{word.subject}:</subject>
+        <source>來源:</source>
+        <contributor>貢獻者 ：</contributor>
+        <resource-type>資源類型：</resource-type>
+        <date>#{word.date}:</date>
+        <publisher>發行者：</publisher>
+        <description>#{word.description}:</description>
+        <rights>權利：</rights>
+        <relation>關係：</relation>
+        <format>#{word.format}:</format>
+        <coverage>覆蓋範圍：</coverage>
+        <identifier>識別碼：</identifier>
+        <language>語言：</language>
+      </label>
+    </dialog>
+  </ElementSet>
+
+  <!--
+  ###################### resoucebundle for exo:actionable dialogs template ####
+  -->
+  <Actionable>
+    <dialog>
+      <label>
+        <primary-type>主要類型</primary-type>
+        <mixin-types>混合類型</mixin-types>
+      </label>
+    </dialog>
+  </Actionable>
+
+  <!--
+  ###################### resoucebundle for exo:move dialogs template ####
+  -->
+  <Move>
+    <dialog>
+      <label>
+        <destination-workpsace>目標工作區</destination-workpsace>
+        <destination-path>目標路徑</destination-path>
+        <primary-type>主要類型</primary-type>
+        <mixin-types>混合類型</mixin-types>
+      </label>
+    </dialog>
+  </Move>
+  <!--
+  ###################### resoucebundle for exo:published dialogs template ####
+  -->
+  <Published>
+    <dialog>
+      <label>
+        <start-publication>開始的出版物</start-publication>
+        <end-publication>最終出版物</end-publication>
+      </label>
+    </dialog>
+  </Published>
+ 
+  <!--
+  ###################### resoucebundle mix:referenceable dialogs template ####
+  -->
+  <Referenceable>
+    <dialog>
+      <label>
+        <uuid>UUID</uuid>
+      </label>
+    </dialog>
+  </Referenceable>
+  <!--
+  ###################### resoucebundle exo:relationable dialogs template ####
+  -->
+  <Relationable>
+    <dialog>
+      <label>
+        <relation>關係</relation>
+      </label>
+    </dialog>
+  </Relationable>
+  <!--
+  ###################### resoucebundle exo:rss-enable dialogs template ####
+  -->
+  <RssEnable>
+    <dialog>
+      <label>
+        <title>標題</title>
+        <summary>#{word.summary}</summary>
+      </label>
+    </dialog>
+  </RssEnable>
+
+  <!--
+  ###################### resoucebundle mix:versionable dialogs template ####
+  -->
+  <Versionable>
+    <dialog>
+      <label>
+        <version-history>版本歷程記錄</version-history>
+        <base-version>基本版本</base-version>
+        <is-checked-out>已簽出</is-checked-out>
+        <predecessors>前置任務</predecessors>
+        <merge-failed>合併失敗</merge-failed>
+        <uuid>UUID</uuid>
+      </label>
+    </dialog>
+  </Versionable>
+
+  <!--
+  ##################### resoucebundle for resouce container dialogs template#####
+  -->
+  <ResouceContainer>
+    <dialog>
+      <label>
+        <name>名稱</name>
+        <autoload>自動負載</autoload>
+        <minetype>MIME 類型</minetype>
+        <content>內容</content>
+      </label>
+    </dialog>
+  </ResouceContainer>
+  <!--
+  ###################### resoucebundle for validator ####
+  -->
+  <EmailAddressValidator>
+    <msg>
+      <Invalid-input>電子郵件地址不正確。</Invalid-input>
+    </msg>
+  </EmailAddressValidator>
+  <EmptyFieldValidator>
+    <msg>
+      <empty-input>欄位"{0}"是必需的。請輸入您的值。</empty-input>
+    </msg>
+  </EmptyFieldValidator>
+  <NumberFormatValidator>
+    <msg>
+      <Invalid-number>欄位"{0}"無效。</Invalid-number>
+    </msg>
+  </NumberFormatValidator>
+  <!--
+  #####Since version 2.4#######
+
+  ###################### resoucebundle exo:taxonomyAction dialogs template ####
+  -->
+  <ScriptAction>
+    <dialog>
+      <label>
+        <id>Id</id>
+        <name>名稱</name>
+        <lifecycle>生命週期</lifecycle>
+        <homePath>家路徑</homePath>
+        <targetWorkspace>目標工作區</targetWorkspace>
+        <targetPath>目標路徑</targetPath>
+      </label>
+    </dialog>
+  </ScriptAction>
+  <UIDialogForm>
+   <form>
+   <DialogFormException>不能保存此文檔。可能預保存攔截器有問題。</DialogFormException>
+   </form>
+  </UIDialogForm>
+
+  <!--
+  #####Since version 2.6#######
+
+  ###################### resoucebundle exo:taxonomyAction dialogs template ####
+  -->
+<no>否</no>
+<yes>是</yes>
+<true>True</true>
+<false>False</false>
+<Electronic>電子</Electronic>
+<Paper>紙</Paper>
+<NONE>無</NONE>
+<CLASSIFIED>分類</CLASSIFIED>
+<UNCLASSIFIED>未分類</UNCLASSIFIED>
+<NOCONTRACT>沒有合同</NOCONTRACT>
+<one-minute>一分鐘</one-minute>
+<hourly>每小時</hourly>
+<daily>每日</daily>
+<quarterly>每季</quarterly>
+<yearly>每年</yearly>
+<ten-years>十年</ten-years>
+<read>使用者操作</read>
+  <schedule>調度</schedule>
+  <node_added>內容增加</node_added>
+  <node_removed>內容刪除</node_removed>
+  <property_added>屬性加法</property_added>
+  <property_removed>屬性刪除</property_removed>
+  <property_changed>屬性修改</property_changed>
+
+  <ScriptAction>
+    <dialog>
+      <label>
+        <isDeep>深</isDeep>
+        <nodetypes>節點類型</nodetypes>
+        <affectedNodeTypeNames>受影響的節點類型</affectedNodeTypeNames>
+      </label>
+    </dialog>
+  </ScriptAction>
+
+  <AddMetadata>
+    <dialog>
+      <label>
+        <isDeep>深</isDeep>
+        <nodetypes>節點類型</nodetypes>
+        <affectedNodeTypeNames>受影響的節點類型</affectedNodeTypeNames>
+      </label>
+    </dialog>
+  </AddMetadata>
+
+  <EnableVersioning>
+    <dialog>
+      <label>
+        <isDeep>深</isDeep>
+        <nodetypes>節點類型</nodetypes>
+        <affectedNodeTypeNames>受影響的節點類型</affectedNodeTypeNames>
+      </label>
+    </dialog>
+  </EnableVersioning>
+  
+  <AutoVersioning>
+    <dialog>
+      <label>
+        <isDeep>深</isDeep>
+        <nodetypes>節點類型</nodetypes>
+        <affectedNodeTypeNames>受影響的節點類型</affectedNodeTypeNames>
+      </label>
+    </dialog>
+  </AutoVersioning>
+
+  <AccessibleMedia>
+  <dialog>
+  <label>
+  <captions>標題</captions>
+<audioDescription>音訊描述</audioDescription>
+<alternativeText>替代文本</alternativeText>
+</label>
+</dialog>
+<help>
+<CaptionsHelp>標題應提供對話的方塊和重要聲音的文本</CaptionsHelp>
+<AudioDescriptionHelp>音訊描述是講述軌道的視頻</AudioDescriptionHelp>
+<AlternativeTextHelp>提供可訪問、 替代性方式呈現資訊</AlternativeTextHelp>
+</help>
+</AccessibleMedia>
+  
+</bundle>

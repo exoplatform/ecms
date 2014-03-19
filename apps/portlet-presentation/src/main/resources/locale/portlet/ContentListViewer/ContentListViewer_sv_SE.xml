@@ -77,7 +77,7 @@
       <ParameterHelp>Denna parameter kommer att användas för åtkomst till innehållet om dynamisk navigering är aktiverad.</ParameterHelp>
       <ShowDetailInPageHelp>Genom att klicka på innehåll omdirigeras användaren till en detaljsida. Du måste ha en "Innehåll via URL" portlet med dynamisk navigering aktiverad på sidan för att innehåll skall visas.</ShowDetailInPageHelp>
       <DetailParameterHelp>Den här parametern innehåller sökvägen till innehållet i länken till detaljsidan. Denna parameter måste matcha den parameter som används i portleten "Innehåll via URL" på sidan.</DetailParameterHelp>
-      <ContentByQueryHelp><![CDATA[You can set a SQL Query to get content dynamically. The following parameters are allowed : ${user}, ${lang} or any get parameter (PARAM) surrounded by ${PARAM}.]]></ContentByQueryHelp>
+      <ContentByQueryHelp>Du kan ange en SQL-fråga för att få innehåll dynamiskt. Följande parametrar är tillåtna: ${user}, ${lang} eller någon GET parameter (PARAM) omgiven av ${PARAM}.</ContentByQueryHelp>
       <ContentsVisibilityHelp>"Restricted by Authentication" will filter the content based on the authentication. If you do not sign in, you see public content only. If you are logged in, you see all the content visible by intranet users (but shared by all). "Restricted by User Roles" means you will see content depending on your rights. In most cases, this option should not be used, as it reduces the overall performance.</ContentsVisibilityHelp>
     </help>
     <action>

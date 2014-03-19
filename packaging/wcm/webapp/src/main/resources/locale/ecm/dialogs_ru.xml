@@ -6,17 +6,17 @@
   <Ecm>
     <dialog>
       <label>
-        <end-time>End Time</end-time>
-        <start-time>Start Time</start-time>
-        <lifecycle>Lifecycle</lifecycle>
-        <mimeType>Mime Type</mimeType>
-        <repeat-count>Repeat Count</repeat-count>
-        <time-interval>Time Interval</time-interval>
-        <query-items>Query Items</query-items>
-        <schedule-type>Schedule Type</schedule-type>
-        <remove>Remove Item</remove>
-        <add>Add Item</add>
-        <expand>Expand This</expand>
+        <end-time>Время окончания</end-time>
+        <start-time>Время начала</start-time>
+        <lifecycle>Жизненный цикл</lifecycle>
+        <mimeType>Mime тип</mimeType>
+        <repeat-count>Повторить подсчет</repeat-count>
+        <time-interval>Интервал времени</time-interval>
+        <query-items>Элементы запроса</query-items>
+        <schedule-type>Тип расписания</schedule-type>
+        <remove>Удалить элемент</remove>
+        <add>Добавить элемент</add>
+        <expand>Развернуть</expand>
       </label>
     </dialog>
   </Ecm>
@@ -24,12 +24,12 @@
   <UIDocumentForm>
     <label>
       <title>#{word.title}</title>
-      <link>Ссылки</link>
+      <link>Ссылка</link>
       <contentHtml>#{word.content}</contentHtml>
       <content>#{word.content}</content>
       <contentPlain>#{word.content}</contentPlain>
-      <name>Name</name>
-    <categories>Categories</categories>
+      <name>Название</name>
+    <categories>Категории</categories>
     </label>
   </UIDocumentForm>
  
@@ -39,8 +39,8 @@
   <HtmlFile>
     <dialog>
       <label>
-        <name>Name</name>
-        <content>Content</content>
+        <name>Название</name>
+        <content>Содержимое</content>
       </label>
     </dialog>
   </HtmlFile>
@@ -52,10 +52,10 @@
     <dialog>
       <label>
         <name>#{word.name}</name>
-        <categories>Categories</categories>
+        <categories>Категории</categories>
         <mimeType>#{Ecm.dialog.label.mimeType}</mimeType>
         <content>#{word.content}</content>
-        <re-upload>The file already exists. You can delete it and upload another file.</re-upload>
+        <re-upload>Файл уже существует. Вы можете удалить его и загрузить другой файл.</re-upload>
       </label>
     </dialog>
   </File>
@@ -63,22 +63,22 @@
   <UIActionForm>
     <label>
       <description>#{word.description}</description>
-      <port>Port</port>
+      <port>Порт</port>
       <userName>#{word.userName}</userName>
-      <password>Password</password>
-      <link>Ссылки</link>
-      <to>Send Mail To</to>
+      <password>Пароль</password>
+      <link>Ссылка</link>
+      <to>Отправить почту</to>
       <actionName>#{word.name}</actionName>
     </label>
   </UIActionForm>
   <EditFormAction>
     <label>
       <description>#{word.description}</description>
-      <port>Port</port>
+      <port>Порт</port>
       <userName>#{word.userName}</userName>
-      <password>Password</password>
-      <link>Ссылки</link>
-      <to>Send Mail To</to>
+      <password>Пароль</password>
+      <link>Ссылка</link>
+      <to>Отправить почту</to>
       <actionName>#{word.name}</actionName>
     </label>
   </EditFormAction>
@@ -89,10 +89,10 @@
   <AddMetadata>
     <dialog>
       <label>
-        <id>Id</id>
+        <id>Идентификатор</id>
         <name>#{word.name}</name>
         <lifecycle>#{Ecm.dialog.label.lifecycle}</lifecycle>
-        <metadata>Metadata</metadata>
+        <metadata>Метаданные</metadata>
         <description>#{word.description}</description>
       </label>
     </dialog>
@@ -104,7 +104,26 @@
   <AutoVersioning>
     <dialog>
       <label>
-        <id>Id</id>
+        <id>Идентификатор</id>
+        <name>#{word.name}</name>
+        <lifecycle>#{Ecm.dialog.label.lifecycle}</lifecycle>
+        <schedule-type>#{Ecm.dialog.label.schedule-type}</schedule-type>
+        <start-time>#{Ecm.dialog.label.start-time}</start-time>
+        <end-time>#{Ecm.dialog.label.end-time}</end-time>
+        <repeat-count>#{Ecm.dialog.label.repeat-count}</repeat-count>
+        <time-inteval>#{Ecm.dialog.label.time-interval}</time-inteval>
+        <cron-expression>Команда планировщика задач</cron-expression>
+        <description>#{word.description}</description>
+      </label>
+    </dialog>
+  </AutoVersioning>
+  <!--
+  ###################### resoucebundle for exo:enableVersiong dialogs template ####
+  -->
+  <EnableVersioning>
+    <dialog>
+      <label>
+        <id>Идентификатор</id>
         <name>#{word.name}</name>
         <lifecycle>#{Ecm.dialog.label.lifecycle}</lifecycle>
         <schedule-type>#{Ecm.dialog.label.schedule-type}</schedule-type>
@@ -116,25 +135,6 @@
         <description>#{word.description}</description>
       </label>
     </dialog>
-  </AutoVersioning>
-  <!--
-  ###################### resoucebundle for exo:enableVersiong dialogs template ####
-  -->
-  <EnableVersioning>
-    <dialog>
-      <label>
-        <id>Id</id>
-        <name>#{word.name}</name>
-        <lifecycle>#{Ecm.dialog.label.lifecycle}</lifecycle>
-        <schedule-type>#{Ecm.dialog.label.schedule-type}</schedule-type>
-        <start-time>#{Ecm.dialog.label.start-time}</start-time>
-        <end-time>#{Ecm.dialog.label.end-time}</end-time>
-        <repeat-count>#{Ecm.dialog.label.repeat-count}</repeat-count>
-        <time-inteval>#{Ecm.dialog.label.time-interval}</time-inteval>
-        <cron-expression>Cron Expression</cron-expression>
-        <description>#{word.description}</description>
-      </label>
-    </dialog>
   </EnableVersioning>
   <!--
   ###################### resoucebundle for dc:elementSet dialogs template ####
@@ -142,21 +142,21 @@
   <ElementSet>
     <dialog>
       <label>
-        <title>#{word.title}:</title>
-        <creator>Creator:</creator>
-        <subject>#{word.subject}:</subject>
-        <source>Source:</source>
-        <contributor>Contributor:</contributor>
-        <resource-type>Resource Type:</resource-type>
-        <date>#{word.date}:</date>
-        <publisher>Publisher:</publisher>
-        <description>#{word.description}:</description>
-        <rights>Rights:</rights>
-        <relation>Relation:</relation>
-        <format>#{word.format}:</format>
-        <coverage>Coverage:</coverage>
-        <identifier>Identifier:</identifier>
-        <language>Language:</language>
+        <title>#{word.title}</title>
+        <creator>Создатель:</creator>
+        <subject>#{word.subject}</subject>
+        <source>Источник:</source>
+        <contributor>Помощник:</contributor>
+        <resource-type>Тип ресурса:</resource-type>
+        <date>#{word.date}</date>
+        <publisher>Издатель:</publisher>
+        <description>#{word.description}</description>
+        <rights>Права:</rights>
+        <relation>Отношение</relation>
+        <format>#{word.format}</format>
+        <coverage>Покрытие</coverage>
+        <identifier>Идентификатор</identifier>
+        <language>Язык</language>
       </label>
     </dialog>
   </ElementSet>
@@ -167,8 +167,8 @@
   <Actionable>
     <dialog>
       <label>
-        <primary-type>Primary Type</primary-type>
-        <mixin-types>Mixin Types</mixin-types>
+        <primary-type>Основной тип</primary-type>
+        <mixin-types>Смешанные типы</mixin-types>
       </label>
     </dialog>
   </Actionable>
@@ -179,10 +179,10 @@
   <Move>
     <dialog>
       <label>
-        <destination-workpsace>Destination Workspace</destination-workpsace>
-        <destination-path>Destination Path</destination-path>
-        <primary-type>Primary Type</primary-type>
-        <mixin-types>Mixin Types</mixin-types>
+        <destination-workpsace>Область назначения</destination-workpsace>
+        <destination-path>Путь назначения</destination-path>
+        <primary-type>Основной тип</primary-type>
+        <mixin-types>Смешанные типы</mixin-types>
       </label>
     </dialog>
   </Move>
@@ -192,8 +192,8 @@
   <Published>
     <dialog>
       <label>
-        <start-publication>Start Publication</start-publication>
-        <end-publication>End Publication</end-publication>
+        <start-publication>Начало публикации</start-publication>
+        <end-publication>Окончание публикации</end-publication>
       </label>
     </dialog>
   </Published>
@@ -214,7 +214,7 @@
   <Relationable>
     <dialog>
       <label>
-        <relation>Relation</relation>
+        <relation>Отношение</relation>
       </label>
     </dialog>
   </Relationable>
@@ -224,7 +224,7 @@
   <RssEnable>
     <dialog>
       <label>
-        <title>Титул</title>
+        <title>Заголовок</title>
         <summary>#{word.summary}</summary>
       </label>
     </dialog>
@@ -236,11 +236,11 @@
   <Versionable>
     <dialog>
       <label>
-        <version-history>Version History</version-history>
-        <base-version>Base Version</base-version>
-        <is-checked-out>Is Checked out</is-checked-out>
-        <predecessors>Predecessors</predecessors>
-        <merge-failed>Merge Failed</merge-failed>
+        <version-history>История версий</version-history>
+        <base-version>Базовая версия</base-version>
+        <is-checked-out>Извлечен</is-checked-out>
+        <predecessors>Предшественники</predecessors>
+        <merge-failed>Ошибка слияния</merge-failed>
         <uuid>UUID</uuid>
       </label>
     </dialog>
@@ -252,10 +252,10 @@
   <ResouceContainer>
     <dialog>
       <label>
-        <name>Name</name>
-        <autoload>Auto Load</autoload>
-        <minetype>MIME Type</minetype>
-        <content>Content</content>
+        <name>Имя</name>
+        <autoload>Автозагрузка</autoload>
+        <minetype>Тип MIME</minetype>
+        <content>Содержимое</content>
       </label>
     </dialog>
   </ResouceContainer>
@@ -264,17 +264,17 @@
   -->
   <EmailAddressValidator>
     <msg>
-      <Invalid-input>The email address is invalid.</Invalid-input>
+      <Invalid-input>Недопустимый адрес электронной почты.</Invalid-input>
     </msg>
   </EmailAddressValidator>
   <EmptyFieldValidator>
     <msg>
-      <empty-input>The field '{0}' is required. Please enter your value.</empty-input>
+      <empty-input>Поле '{0}' обязательно. Пожалуйста, введите значение.</empty-input>
     </msg>
   </EmptyFieldValidator>
   <NumberFormatValidator>
     <msg>
-      <Invalid-number>The field '{0}' is invalid.</Invalid-number>
+      <Invalid-number>Поле '{0}' является недопустимым.</Invalid-number>
     </msg>
   </NumberFormatValidator>
   <!--
@@ -285,18 +285,18 @@
   <ScriptAction>
     <dialog>
       <label>
-        <id>Id</id>
-        <name>Name</name>
-        <lifecycle>Lifecycle</lifecycle>
-        <homePath>Home Path</homePath>
-        <targetWorkspace>Target Workspace</targetWorkspace>
-        <targetPath>Target Path</targetPath>
+        <id>Идентификатор</id>
+        <name>Имя</name>
+        <lifecycle>Жизненный цикл</lifecycle>
+        <homePath>Маршрут личного каталога</homePath>
+        <targetWorkspace>Целевая рабочая область</targetWorkspace>
+        <targetPath>Целевой путь</targetPath>
       </label>
     </dialog>
   </ScriptAction>
   <UIDialogForm>
    <form>
-   <DialogFormException>Cannot save this document. There may be a problem with the pre-save interceptor.</DialogFormException>
+   <DialogFormException>Не удается сохранить этот документ. Возможно, возникли проблемы с предварительным сохранением метода-перехватчика.</DialogFormException>
    </form>
   </UIDialogForm>
 
@@ -305,36 +305,36 @@
 
   ###################### resoucebundle exo:taxonomyAction dialogs template ####
   -->
-<no>No</no>
-<yes>Yes</yes>
-<true>True</true>
-<false>False</false>
-<Electronic>Electronic</Electronic>
-<Paper>Paper</Paper>
-<NONE>None</NONE>
-<CLASSIFIED>Classified</CLASSIFIED>
-<UNCLASSIFIED>Unclassified</UNCLASSIFIED>
-<NOCONTRACT>No Contract</NOCONTRACT>
-<one-minute>One Minute</one-minute>
-<hourly>Hourly</hourly>
-<daily>Daily</daily>
-<quarterly>Quarterly</quarterly>
-<yearly>Yearly</yearly>
-<ten-years>Ten Years</ten-years>
-<read>User Action</read>
-  <schedule>Scheduler</schedule>
-  <node_added>Content Addition</node_added>
-  <node_removed>Content Removal</node_removed>
-  <property_added>Property Addition</property_added>
-  <property_removed>Property Removal</property_removed>
-  <property_changed>Property Modification</property_changed>
+<no>Нет</no>
+<yes>Да</yes>
+<true>Верно</true>
+<false>Неверно</false>
+<Electronic>Электронный</Electronic>
+<Paper>Бумажный</Paper>
+<NONE>Нет</NONE>
+<CLASSIFIED>Классифицированные</CLASSIFIED>
+<UNCLASSIFIED>Неклассифицированные</UNCLASSIFIED>
+<NOCONTRACT>Нет связи</NOCONTRACT>
+<one-minute>Ежеминутно</one-minute>
+<hourly>Каждый час</hourly>
+<daily>Каждый день</daily>
+<quarterly>Каждый квартал</quarterly>
+<yearly>Каждый год</yearly>
+<ten-years>Каждые десять лет</ten-years>
+<read>Действие пользователя</read>
+  <schedule>Планировщик</schedule>
+  <node_added>Добавление содержимого</node_added>
+  <node_removed>Удаление содержимого</node_removed>
+  <property_added>Добавление свойства</property_added>
+  <property_removed>Удаление свойства</property_removed>
+  <property_changed>Изменение свойства</property_changed>
 
   <ScriptAction>
     <dialog>
       <label>
-        <isDeep>Is Deep</isDeep>
-        <nodetypes>Node Types</nodetypes>
-        <affectedNodeTypeNames>Affected Node Types</affectedNodeTypeNames>
+        <isDeep>Глубоко</isDeep>
+        <nodetypes>Типы узлов</nodetypes>
+        <affectedNodeTypeNames>Типы узлов, оказавшиеся под воздействием</affectedNodeTypeNames>
       </label>
     </dialog>
   </ScriptAction>
@@ -342,9 +342,9 @@
   <AddMetadata>
     <dialog>
       <label>
-        <isDeep>Is Deep</isDeep>
-        <nodetypes>Node Types</nodetypes>
-        <affectedNodeTypeNames>Affected Node Types</affectedNodeTypeNames>
+        <isDeep>Глубоко</isDeep>
+        <nodetypes>Типы узлов</nodetypes>
+        <affectedNodeTypeNames>Типы узлов, оказавшиеся под воздействием</affectedNodeTypeNames>
       </label>
     </dialog>
   </AddMetadata>
@@ -352,9 +352,9 @@
   <EnableVersioning>
     <dialog>
       <label>
-        <isDeep>Is Deep</isDeep>
-        <nodetypes>Node Types</nodetypes>
-        <affectedNodeTypeNames>Affected Node Types</affectedNodeTypeNames>
+        <isDeep>Глубоко</isDeep>
+        <nodetypes>Типы узлов</nodetypes>
+        <affectedNodeTypeNames>Типы узлов, оказавшиеся под воздействием</affectedNodeTypeNames>
       </label>
     </dialog>
   </EnableVersioning>
@@ -362,9 +362,9 @@
   <AutoVersioning>
     <dialog>
       <label>
-        <isDeep>Is Deep</isDeep>
-        <nodetypes>Node Types</nodetypes>
-        <affectedNodeTypeNames>Affected Node Types</affectedNodeTypeNames>
+        <isDeep>Глубоко</isDeep>
+        <nodetypes>Типы узлов</nodetypes>
+        <affectedNodeTypeNames>Типы узлов, оказавшиеся под воздействием</affectedNodeTypeNames>
       </label>
     </dialog>
   </AutoVersioning>
@@ -372,15 +372,15 @@
   <AccessibleMedia>
   <dialog>
   <label>
-  <captions>Captions</captions>
-<audioDescription>Audio description</audioDescription>
-<alternativeText>Alternative text</alternativeText>
+  <captions>Титры</captions>
+<audioDescription>Аудио описание</audioDescription>
+<alternativeText>Замещающий текст</alternativeText>
 </label>
 </dialog>
 <help>
-<CaptionsHelp>Captions should provide text of dialog and important sounds</CaptionsHelp>
-<AudioDescriptionHelp>An audio description is a narrated track of the video</AudioDescriptionHelp>
-<AlternativeTextHelp>Provide an accessible, alternative way of presenting the information</AlternativeTextHelp>
+<CaptionsHelp>В титрах представляется текст диалога и важные звуки</CaptionsHelp>
+<AudioDescriptionHelp>Аудио описание - это комментарий к видео</AudioDescriptionHelp>
+<AlternativeTextHelp>Обеспечить доступный альтернативный способ представления информации</AlternativeTextHelp>
 </help>
 </AccessibleMedia>
   

@@ -46,6 +46,7 @@ import org.exoplatform.ecm.webui.component.explorer.UIJCRExplorerPortlet;
 import org.exoplatform.ecm.webui.component.explorer.UIWorkingArea;
 import org.exoplatform.ecm.webui.component.explorer.control.UIAddressBar;
 import org.exoplatform.ecm.webui.utils.JCRExceptionManager;
+import org.exoplatform.services.cms.clipboard.ClipboardService;
 import org.exoplatform.services.cms.drives.DriveData;
 import org.exoplatform.services.cms.impl.Utils;
 import org.exoplatform.services.cms.link.LinkManager;
@@ -113,8 +114,11 @@ public class UITreeExplorer extends UIContainer {
   public TreeNode getRootTreeNode() { return treeRoot_ ; }
 
   public String getRootActionList() throws Exception {
+    ClipboardService clipboardService = WCMCoreUtils.getService(ClipboardService.class);
+    String userId = ConversationState.getCurrent().getIdentity().getUserId();
+    
     UIJCRExplorer uiExplorer = getAncestorOfType(UIJCRExplorer.class);
-    if (uiExplorer.getAllClipBoard().size() > 0) {
+    if (!clipboardService.getClipboardList(userId, false).isEmpty()) {
       return getContextMenu().getJSOnclickShowPopup(uiExplorer.getCurrentDriveWorkspace() + ":"
           + uiExplorer.getRootPath(),
           "Paste").toString();

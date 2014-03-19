@@ -22,6 +22,7 @@ import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.Set;
 import java.util.regex.Matcher;
 
 import javax.jcr.AccessDeniedException;
@@ -40,7 +41,7 @@ import javax.jcr.nodetype.ConstraintViolationException;
 import javax.jcr.nodetype.NodeType;
 import javax.jcr.version.VersionException;
 
-import org.exoplatform.ecm.jcr.model.ClipboardCommand;
+import org.exoplatform.ecm.webui.component.explorer.UIDocumentInfo;
 import org.exoplatform.ecm.webui.component.explorer.UIJCRExplorer;
 import org.exoplatform.ecm.webui.component.explorer.UIWorkingArea;
 import org.exoplatform.ecm.webui.component.explorer.control.filter.IsNotInTrashFilter;
@@ -48,11 +49,15 @@ import org.exoplatform.ecm.webui.component.explorer.control.filter.IsNotNtFileFi
 import org.exoplatform.ecm.webui.component.explorer.control.filter.IsNotTrashHomeNodeFilter;
 import org.exoplatform.ecm.webui.component.explorer.control.filter.IsPasteableFilter;
 import org.exoplatform.ecm.webui.component.explorer.control.listener.UIWorkingAreaActionListener;
+import org.exoplatform.ecm.webui.component.explorer.sidebar.UITreeExplorer;
+import org.exoplatform.ecm.webui.component.explorer.sidebar.UITreeNodePageIterator;
 import org.exoplatform.ecm.webui.utils.JCRExceptionManager;
 import org.exoplatform.ecm.utils.lock.LockUtil;
 import org.exoplatform.ecm.webui.utils.PermissionUtil;
 import org.exoplatform.ecm.webui.utils.Utils;
 import org.exoplatform.services.cms.actions.ActionServiceContainer;
+import org.exoplatform.services.cms.clipboard.ClipboardService;
+import org.exoplatform.services.cms.clipboard.jcr.model.ClipboardCommand;
 import org.exoplatform.services.cms.jcrext.activity.ActivityCommonService;
 import org.exoplatform.services.cms.link.LinkUtils;
 import org.exoplatform.services.cms.relations.RelationsService;
@@ -60,6 +65,7 @@ import org.exoplatform.services.cms.thumbnail.ThumbnailService;
 import org.exoplatform.services.listener.ListenerService;
 import org.exoplatform.services.log.ExoLogger;
 import org.exoplatform.services.log.Log;
+import org.exoplatform.services.security.ConversationState;
 import org.exoplatform.services.wcm.core.NodetypeConstant;
 import org.exoplatform.services.wcm.utils.WCMCoreUtils;
 import org.exoplatform.web.application.ApplicationMessage;
@@ -67,6 +73,7 @@ import org.exoplatform.webui.config.annotation.ComponentConfig;
 import org.exoplatform.webui.config.annotation.EventConfig;
 import org.exoplatform.webui.core.UIApplication;
 import org.exoplatform.webui.core.UIComponent;
+import org.exoplatform.webui.core.UIPageIterator;
 import org.exoplatform.webui.event.Event;
 import org.exoplatform.webui.exception.MessageException;
 import org.exoplatform.webui.ext.filter.UIExtensionFilter;
@@ -104,6 +111,9 @@ public class PasteManageComponent extends UIAbstractManagerComponent {
 
   public static void pasteManage(Event<PasteManageComponent> event, UIJCRExplorer uiExplorer)
       throws Exception {
+    ClipboardService clipboardService = WCMCoreUtils.getService(ClipboardService.class);
+    String userId = ConversationState.getCurrent().getIdentity().getUserId();
+    
     UIWorkingArea uiWorkingArea = event.getSource().getParent();
     String destPath = event.getRequestContext().getRequestParameter(OBJECTID);
     String nodePath = null;
@@ -120,7 +130,7 @@ public class PasteManageComponent extends UIAbstractManagerComponent {
       }
     }
     UIApplication uiApp = uiExplorer.getAncestorOfType(UIApplication.class);
-    if (uiExplorer.getAllClipBoard().size() < 1) {
+    if (clipboardService.getClipboardList(userId, false).size() < 1) {
       uiApp.addMessage(new ApplicationMessage("UIPopupMenu.msg.no-node", null,
           ApplicationMessage.WARNING));
 
@@ -167,8 +177,8 @@ public class PasteManageComponent extends UIAbstractManagerComponent {
     }
 
     try {
-      if (uiWorkingArea.getVirtualClipboards().isEmpty()) {
-        processPaste(uiExplorer.getAllClipBoard().getLast(), destPath, event);
+      if (clipboardService.getClipboardList(userId, true).isEmpty()) {
+        processPaste(clipboardService.getLastClipboard(userId), destPath, event);
       } else {
         processPasteMultiple(destPath, event, uiExplorer);
       }
@@ -178,7 +188,33 @@ public class PasteManageComponent extends UIAbstractManagerComponent {
       return;
     }
     session.save();
+
+
+    // Get paginator of UITreeExplorer && UIDocumentInfo
+    String currentPath = uiExplorer.getCurrentNode().getPath();
+    UITreeNodePageIterator extendedPageIterator = null;
+    UITreeExplorer uiTreeExplorer = uiExplorer.findFirstComponentOfType(UITreeExplorer.class);
+    if (uiTreeExplorer != null) {
+      extendedPageIterator = uiTreeExplorer.getUIPageIterator(currentPath);
+    }
+    UIPageIterator contentPageIterator = uiExplorer.findComponentById(UIDocumentInfo.CONTENT_PAGE_ITERATOR_ID);
+
+    // Get current page index
+    int currentPage = 1;
+    if (contentPageIterator != null) {
+      currentPage = contentPageIterator.getCurrentPage();
+    }
+
+    // Rebuild screen after pasting new content
     uiExplorer.updateAjax(event);
+
+    // Because after updateAjax, paginator automatically set to first page then we need set again current pageindex
+    if (contentPageIterator != null) {
+      contentPageIterator.setCurrentPage(currentPage);
+    }
+    if (extendedPageIterator != null) {
+      extendedPageIterator.setCurrentPage(currentPage);
+    }
   }
 
   public static void processPaste(ClipboardCommand currentClipboard, String destPath, Event<?> event)
@@ -188,9 +224,10 @@ public class PasteManageComponent extends UIAbstractManagerComponent {
 
   private static void processPasteMultiple(String destPath, Event<?> event, UIJCRExplorer uiExplorer)
       throws Exception {
+    ClipboardService clipboardService = WCMCoreUtils.getService(ClipboardService.class);
+    String userId = ConversationState.getCurrent().getIdentity().getUserId();
     int pasteNum = 0;
-    UIWorkingArea uiWorkingArea = uiExplorer.getChild(UIWorkingArea.class);
-    List<ClipboardCommand> virtualClipboards = uiWorkingArea.getVirtualClipboards();
+    Set<ClipboardCommand> virtualClipboards = clipboardService.getClipboardList(userId, true);
     for (ClipboardCommand clipboard : virtualClipboards) {
       pasteNum++;
       if (pasteNum == virtualClipboards.size()) {
@@ -207,7 +244,7 @@ public class PasteManageComponent extends UIAbstractManagerComponent {
    * @param mapClipboard
    * @throws Exception
    */
-  private static void updateClipboard(List<ClipboardCommand> clipboardCommands,
+  private static void updateClipboard(Set<ClipboardCommand> clipboardCommands,
                                       Map<ClipboardCommand, Node> mapClipboard) throws Exception {
     Node srcNode;
     for (ClipboardCommand clipboard : clipboardCommands) {
@@ -226,7 +263,7 @@ public class PasteManageComponent extends UIAbstractManagerComponent {
    * @return
    * @throws Exception
    */
-  private static Map<ClipboardCommand, Node> parseToMap(List<ClipboardCommand> clipboardCommands,
+  private static Map<ClipboardCommand, Node> parseToMap(Set<ClipboardCommand> clipboardCommands,
                                                         UIJCRExplorer uiExplorer) throws Exception {
     String srcPath;
     String type;
@@ -413,14 +450,17 @@ public class PasteManageComponent extends UIAbstractManagerComponent {
       Session session, String srcWorkspace, String srcPath, String destPath,
       ActionServiceContainer actionContainer, boolean isMultiSelect,
       boolean isLastPaste) throws Exception {
+    ClipboardService clipboardService = WCMCoreUtils.getService(ClipboardService.class);
+    String userId = ConversationState.getCurrent().getIdentity().getUserId();
+    
     UIWorkingArea uiWorkingArea = uiExplorer.getChild(UIWorkingArea.class);
     Workspace workspace = session.getWorkspace();
     if (workspace.getName().equals(srcWorkspace)) {
       if (srcPath.equals(destPath))
         return;
     }
-    List<ClipboardCommand> allClipboard = uiExplorer.getAllClipBoard();
-    List<ClipboardCommand> virtualClipboard = uiWorkingArea.getVirtualClipboards();
+    Set<ClipboardCommand> allClipboard = clipboardService.getClipboardList(userId, false);
+    Set<ClipboardCommand> virtualClipboard = clipboardService.getClipboardList(userId, true);
     Map<ClipboardCommand, Node> mapAllClipboardNode = parseToMap(allClipboard, uiExplorer);
     Map<ClipboardCommand, Node> mapVirtualClipboardNode = parseToMap(virtualClipboard, uiExplorer);
 
@@ -486,7 +526,7 @@ public class PasteManageComponent extends UIAbstractManagerComponent {
           relationsService.addRelation(addRef, destPath, session.getWorkspace().getName());
           addRef.save();
         }
-        uiWorkingArea.getVirtualClipboards().clear();
+        clipboardService.clearClipboardList(userId, true);
         Node currentNode = uiExplorer.getCurrentNode();
         String realCurrentPath = currentNode.getPath();
         if (srcWorkspace.equals(currentNode.getSession().getWorkspace().getName())
@@ -501,13 +541,13 @@ public class PasteManageComponent extends UIAbstractManagerComponent {
         listenerService.broadcast(ActivityCommonService.NODE_MOVED_ACTIVITY, desNode, destPath);
       }
       if (!isMultiSelect || (isMultiSelect && isLastPaste)) {
-        uiWorkingArea.getVirtualClipboards().clear();
+        clipboardService.clearClipboardList(userId, true);
       }
     }
     session.save();
-    uiExplorer.getAllClipBoard().remove(currentClipboard);
-    updateClipboard(uiWorkingArea.getVirtualClipboards(), mapVirtualClipboardNode);
-    updateClipboard(uiExplorer.getAllClipBoard(), mapAllClipboardNode);
+    clipboardService.getClipboardList(userId, false).remove(currentClipboard);
+    updateClipboard(clipboardService.getClipboardList(userId, true), mapVirtualClipboardNode);
+    updateClipboard(clipboardService.getClipboardList(userId, false), mapAllClipboardNode);
   }
 
   public static class PasteActionListener extends UIWorkingAreaActionListener<PasteManageComponent> {

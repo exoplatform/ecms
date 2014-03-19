@@ -2,118 +2,118 @@
 <bundle>
   <UIPresentationContainer>
     <title>
-      <QuickEdit>Edit in Content Explorer</QuickEdit>
-      <print>Print This Page</print>
-      <FastPublish>Publish</FastPublish>
+      <QuickEdit>Изменить в Обозревателе Контента</QuickEdit>
+      <print>Напечатать эту страницу</print>
+      <FastPublish>Опубликовать</FastPublish>
     </title>
     <label>
-      <draft>Draft</draft>
-      <print>Print</print>
+      <draft>Черновик</draft>
+      <print>Печать</print>
     </label>
     <msg>
-      <no-content>No contents found.</no-content>
-      <internal-server-error>An error occurred while requesting the data from the sever.</internal-server-error>
-      <empty-title-error>Please specify the new title.</empty-title-error>
+      <no-content>Содержимое не найдено.</no-content>
+      <internal-server-error>При запросе данных с сервера произошла ошибка.</internal-server-error>
+      <empty-title-error>Пожалуйста, укажите новое название.</empty-title-error>
     </msg>
   </UIPresentationContainer>
   <CorrectContentSelectorPopupWindow>
     <title>
-      <UIContentSelectorOne>Select Content</UIContentSelectorOne>
+      <UIContentSelectorOne>Выбрать содержимое</UIContentSelectorOne>
     </title>
   </CorrectContentSelectorPopupWindow>
   <UISingleContentViewerPortlet>
     <msg>
-      <AccessControlException>You do not have permission to access the Edit mode.</AccessControlException>
+      <AccessControlException>У вас нет разрешения на доступ к режиму Редактирование.</AccessControlException>
     </msg>
   </UISingleContentViewerPortlet>
   <UISCVContextualRadioBox>
     <label>
-      <Enable>Enabled</Enable>
-      <Disable>Disabled</Disable>
+      <Enable>Включено</Enable>
+      <Disable>Отключено</Disable>
     </label>
   </UISCVContextualRadioBox>
   <UIPreferencesPopupWindows>
     <title>
-      <UISCVPreferences>Content Detail Preferences</UISCVPreferences>
+      <UISCVPreferences>Настройки детализации содержимого</UISCVPreferences>
     </title>
   </UIPreferencesPopupWindows>
   <UISCVPreferences>
     <action>
       <Save>#{word.save}</Save>
-      <Abort>Abort</Abort>
+      <Abort>Прервать</Abort>
       <Cancel>#{word.cancel}</Cancel>
-      <Print>Print</Print>
+      <Print>Печать</Print>
       <Close>#{word.close}</Close>
     </action>
-    <title>Content Detail Preferences</title>
+    <title>Настройки детализации содержимого</title>
     <label>
-      <Back>Back to previous page</Back>
-      <Edit>Edit</Edit>
-      <Preferences>Preferences</Preferences>
-      <Title>Content Detail Preferences</Title>
-      <UISCVShowTitleConfigurationCheckBox>Show Title</UISCVShowTitleConfigurationCheckBox>
-      <UISCVShowDateConfigurationCheckBox>Show Date</UISCVShowDateConfigurationCheckBox>
-      <UISCVShowOptionBarConfigurationCheckBox>Show Option Bar</UISCVShowOptionBarConfigurationCheckBox>
-      <DisplaySettingBlock>Display Settings</DisplaySettingBlock>
-      <ContentPathBlock>Content Selection</ContentPathBlock>
-      <UISCVConfigItemPathFormInputSet>Content Path</UISCVConfigItemPathFormInputSet>
-    <UISCVContentPathConfigurationInputBox>Content Path</UISCVContentPathConfigurationInputBox>
-      <Advance>Advanced</Advance>
-      <ContextCaption>Dynamic Navigation</ContextCaption>
-      <UISCVContextualRadioBox>Contextual Content</UISCVContextualRadioBox>
-      <UISCVParameterInputBox>by</UISCVParameterInputBox>
-      <PrintSettingBlock>Print Settings</PrintSettingBlock>
-      <UISCVPrintPageParameter>with</UISCVPrintPageParameter>
-      <UISCVConfigPrintPageFormInputSet>Show in Page</UISCVConfigPrintPageFormInputSet>
-      <LockStatus>Lock</LockStatus>
-      <CacheManagement>Content Visibility</CacheManagement>
-      <UISCVCacheRadioBox>Share Content</UISCVCacheRadioBox>
+      <Back>Вернуться на предыдущую страницу</Back>
+      <Edit>Редактировать</Edit>
+      <Preferences>Настройки</Preferences>
+      <Title>Настройки детализации содержимого</Title>
+      <UISCVShowTitleConfigurationCheckBox>Показать заголовок</UISCVShowTitleConfigurationCheckBox>
+      <UISCVShowDateConfigurationCheckBox>Показать дату</UISCVShowDateConfigurationCheckBox>
+      <UISCVShowOptionBarConfigurationCheckBox>Показать панель опций</UISCVShowOptionBarConfigurationCheckBox>
+      <DisplaySettingBlock>Настройки экрана</DisplaySettingBlock>
+      <ContentPathBlock>Выбор контента</ContentPathBlock>
+      <UISCVConfigItemPathFormInputSet>Путь к содержимому</UISCVConfigItemPathFormInputSet>
+    <UISCVContentPathConfigurationInputBox>Путь к содержимому</UISCVContentPathConfigurationInputBox>
+      <Advance>Расширенные</Advance>
+      <ContextCaption>Динамическая навигация</ContextCaption>
+      <UISCVContextualRadioBox>Контекстуальное содержание</UISCVContextualRadioBox>
+      <UISCVParameterInputBox/>
+      <PrintSettingBlock>Настройки печати</PrintSettingBlock>
+      <UISCVPrintPageParameter>с</UISCVPrintPageParameter>
+      <UISCVConfigPrintPageFormInputSet>Показать на странице</UISCVConfigPrintPageFormInputSet>
+      <LockStatus>Заблокировать</LockStatus>
+      <CacheManagement>Видимость контента</CacheManagement>
+      <UISCVCacheRadioBox>Поделиться контентом</UISCVCacheRadioBox>
     </label>
     <help>
-      <ContentPathBlock>Select the content you want to show. This default content will be replaced dynamically if you activate the Dynamic Navigation option (see the Advanced mode below).</ContentPathBlock>
-      <DisplaySettingBlock>You can show or hide the Option bar used to show the print link. Title and Date displays are also optional.</DisplaySettingBlock>
-      <ContextualHelp>Activates Dynamic Navigation. The content can be changed dynamically by another URL-based parameter.</ContextualHelp>
-      <ParameterHelp>This parameter will be used to get the content if the Dynamic Navigation is activated.</ParameterHelp>
+      <ContentPathBlock>Выберите контент, который вы хотите показать. Выбор по умолчанию будет заменен в динамическом режиме при активации опции Динамическая Навигация (см. Режим расширенных настроек ниже).</ContentPathBlock>
+      <DisplaySettingBlock>Вы можете показать или скрыть меню Опции, которое используется чтобы показать ссылку для печати. Отображение Заголовка и Даты также опционально.</DisplaySettingBlock>
+      <ContextualHelp>Активирует Динамическую Навигацию. Контент может быть динамически изменен другим параметром на основе URL.</ContextualHelp>
+      <ParameterHelp>Этот параметр будет использоваться для получения содержимого, если включена Динамическая Навигация.</ParameterHelp>
     </help>
     <msg>
-      <not-valid-path>The item path is invalid.</not-valid-path>
+      <not-valid-path>Недопустимый путь к элементу.</not-valid-path>
     </msg>
     <tab>
       <label>
-        <UISCVConfigContentFormInputSet>Content Selection</UISCVConfigContentFormInputSet>
-        <UISCVConfigDisplayFormInputSet>Display Settings</UISCVConfigDisplayFormInputSet>
-        <UISCVConfigPrintFormInputSet>Print Settings</UISCVConfigPrintFormInputSet>
-        <UISCVConfigAdvancedFormInputSet>Advanced</UISCVConfigAdvancedFormInputSet>
+        <UISCVConfigContentFormInputSet>Выбор контента</UISCVConfigContentFormInputSet>
+        <UISCVConfigDisplayFormInputSet>Настройки экрана</UISCVConfigDisplayFormInputSet>
+        <UISCVConfigPrintFormInputSet>Настройки печати</UISCVConfigPrintFormInputSet>
+        <UISCVConfigAdvancedFormInputSet>Расширенные</UISCVConfigAdvancedFormInputSet>
       </label>
     </tab>
   </UISCVPreferences>
   <UISCVConfigItemPathFormInputSet>
     <title>
-      <SelectFolderPath>Select Folder Path</SelectFolderPath>
-      <AddPath>Add Path</AddPath>
+      <SelectFolderPath>Выберите путь к папке</SelectFolderPath>
+      <AddPath>Добавить путь</AddPath>
     </title>
   </UISCVConfigItemPathFormInputSet>
   <UISCVConfigPrintPageFormInputSet>
     <title>
-      <SelectTargetPage>Show in Page</SelectTargetPage>
+      <SelectTargetPage>Показать на странице</SelectTargetPage>
     </title>
   </UISCVConfigPrintPageFormInputSet>
   <PublicationStates>
-    <archived>Archived</archived>
-    <obsolete>Obsolete</obsolete>
-    <unpublished>Unpublished</unpublished>
-    <enrolled>Enrolled</enrolled>
-    <draft>Draft</draft>
-    <pending>Pending</pending>
-    <approved>Approved</approved>
-    <inreview>Under Review</inreview>
-    <staged>Staged</staged>
-    <published>Published</published>
+    <archived>В архиве</archived>
+    <obsolete>Устаревшие</obsolete>
+    <unpublished>Не опубликовано</unpublished>
+    <enrolled>Подключенный</enrolled>
+    <draft>Черновик</draft>
+    <pending>В ожидании</pending>
+    <approved>Утверждено</approved>
+    <inreview>На рассмотрении</inreview>
+    <staged>Размещенный</staged>
+    <published>Опубликовано</published>
   </PublicationStates>
   <UISCVCacheRadioBox>
     <label>
-      <Enable>Restricted by Authentication</Enable>
-      <Disable>Restricted by User roles</Disable>
+      <Enable>Ограничено механизмом аутентификации</Enable>
+      <Disable>Ограничивается ролями пользователей</Disable>
     </label>
   </UISCVCacheRadioBox>
 </bundle>

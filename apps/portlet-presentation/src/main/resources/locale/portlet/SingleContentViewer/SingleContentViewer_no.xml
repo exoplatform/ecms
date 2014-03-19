@@ -1,0 +1,119 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<bundle>
+  <UIPresentationContainer>
+    <title>
+      <QuickEdit>Rediger i innholdsutforskeren</QuickEdit>
+      <print>Skriv ut denne siden</print>
+      <FastPublish>Publiser</FastPublish>
+    </title>
+    <label>
+      <draft>Utkast</draft>
+      <print>Skriv ut</print>
+    </label>
+    <msg>
+      <no-content>Ingen innhold funnet.</no-content>
+      <internal-server-error>Det oppstod en feil under forespørsel om data fra serveren.</internal-server-error>
+      <empty-title-error>Angi den nye tittelen.</empty-title-error>
+    </msg>
+  </UIPresentationContainer>
+  <CorrectContentSelectorPopupWindow>
+    <title>
+      <UIContentSelectorOne>Velg innhold</UIContentSelectorOne>
+    </title>
+  </CorrectContentSelectorPopupWindow>
+  <UISingleContentViewerPortlet>
+    <msg>
+      <AccessControlException>Du har ikke tilgang til redigeringsmodus.</AccessControlException>
+    </msg>
+  </UISingleContentViewerPortlet>
+  <UISCVContextualRadioBox>
+    <label>
+      <Enable>Aktivert</Enable>
+      <Disable>Deaktivert</Disable>
+    </label>
+  </UISCVContextualRadioBox>
+  <UIPreferencesPopupWindows>
+    <title>
+      <UISCVPreferences>Preferanser for innholdsdetaljer</UISCVPreferences>
+    </title>
+  </UIPreferencesPopupWindows>
+  <UISCVPreferences>
+    <action>
+      <Save>#{word.save}</Save>
+      <Abort>Avbryt</Abort>
+      <Cancel>#{word.cancel}</Cancel>
+      <Print>Skriv ut</Print>
+      <Close>#{word.close}</Close>
+    </action>
+    <title>Preferanser for innholdsdetaljer</title>
+    <label>
+      <Back>Tilbake til forrige side</Back>
+      <Edit>Rediger</Edit>
+      <Preferences>Innstillinger</Preferences>
+      <Title>Preferanser for Innholdsdetaljer</Title>
+      <UISCVShowTitleConfigurationCheckBox>Vis tittel</UISCVShowTitleConfigurationCheckBox>
+      <UISCVShowDateConfigurationCheckBox>Vis dato</UISCVShowDateConfigurationCheckBox>
+      <UISCVShowOptionBarConfigurationCheckBox>Vis alternativlinjen</UISCVShowOptionBarConfigurationCheckBox>
+      <DisplaySettingBlock>Visningsinnstillinger</DisplaySettingBlock>
+      <ContentPathBlock>Innholdsvalg</ContentPathBlock>
+      <UISCVConfigItemPathFormInputSet>Innholds sti</UISCVConfigItemPathFormInputSet>
+    <UISCVContentPathConfigurationInputBox>Innholds sti</UISCVContentPathConfigurationInputBox>
+      <Advance>Avansert</Advance>
+      <ContextCaption>Dynamisk navigasjon</ContextCaption>
+      <UISCVContextualRadioBox>Kontekstuelt innhold</UISCVContextualRadioBox>
+      <UISCVParameterInputBox>av</UISCVParameterInputBox>
+      <PrintSettingBlock>Utskriftsinnstillinger</PrintSettingBlock>
+      <UISCVPrintPageParameter>med</UISCVPrintPageParameter>
+      <UISCVConfigPrintPageFormInputSet>Vis i side</UISCVConfigPrintPageFormInputSet>
+      <LockStatus>Lås</LockStatus>
+      <CacheManagement>Innholdets synlighet</CacheManagement>
+      <UISCVCacheRadioBox>Del innhold</UISCVCacheRadioBox>
+    </label>
+    <help>
+      <ContentPathBlock>Velg innholdet du vil vise. Standardvalget vil bli erstattet dynamisk hvis du aktiverer alternativet Dynamisk navigasjon (se Avansert modus nedenfor).</ContentPathBlock>
+      <DisplaySettingBlock>Du kan vise eller skjule alternativlinjen som brukes til å vise utskriftslinken. Om tittel og dato skal vises er også valgfritt.</DisplaySettingBlock>
+      <ContextualHelp>Aktiverer Dynamisk navigasjon. Innholdet blir endret dynamisk av en annen URL-baserte parameter.</ContextualHelp>
+      <ParameterHelp>Denne parameteren brukes for å hente innhold hvis dynamisk navigasjon er aktivert.</ParameterHelp>
+    </help>
+    <msg>
+      <not-valid-path>Elementets sti er ugyldig.</not-valid-path>
+    </msg>
+    <tab>
+      <label>
+        <UISCVConfigContentFormInputSet>Innholdsvalg</UISCVConfigContentFormInputSet>
+        <UISCVConfigDisplayFormInputSet>Vis innstillinger</UISCVConfigDisplayFormInputSet>
+        <UISCVConfigPrintFormInputSet>Utskriftsinnstillinger</UISCVConfigPrintFormInputSet>
+        <UISCVConfigAdvancedFormInputSet>Avansert</UISCVConfigAdvancedFormInputSet>
+      </label>
+    </tab>
+  </UISCVPreferences>
+  <UISCVConfigItemPathFormInputSet>
+    <title>
+      <SelectFolderPath>Velg mappesti</SelectFolderPath>
+      <AddPath>Legg til sti</AddPath>
+    </title>
+  </UISCVConfigItemPathFormInputSet>
+  <UISCVConfigPrintPageFormInputSet>
+    <title>
+      <SelectTargetPage>Vis i side</SelectTargetPage>
+    </title>
+  </UISCVConfigPrintPageFormInputSet>
+  <PublicationStates>
+    <archived>Arkivert</archived>
+    <obsolete>Foreldet</obsolete>
+    <unpublished>Upublisert</unpublished>
+    <enrolled>Registrert</enrolled>
+    <draft>Utkast</draft>
+    <pending>Venter</pending>
+    <approved>Godkjent</approved>
+    <inreview>Til gjennomsyn</inreview>
+    <staged>Lagt klar</staged>
+    <published>Publisert</published>
+  </PublicationStates>
+  <UISCVCacheRadioBox>
+    <label>
+      <Enable>Begrenset av autentisering</Enable>
+      <Disable>Begrenset av brukerroller</Disable>
+    </label>
+  </UISCVCacheRadioBox>
+</bundle>

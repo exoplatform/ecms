@@ -24,6 +24,10 @@
       <timeUnitCaption>ثوان</timeUnitCaption>
       <similar>الصفحات التي تحتوي على نفس المضمون</similar>
       <editor>المؤلّف</editor>
+      <date>تاريخ</date>
+      <relevancy>الأهمية</relevancy>
+      <title>عنوان</title>
+      <sortBy>الترتيب حسب:</sortBy>
     </label>
     <action>
       <edit>تغيير</edit>

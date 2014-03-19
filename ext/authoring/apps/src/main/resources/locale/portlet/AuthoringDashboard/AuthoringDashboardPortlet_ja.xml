@@ -8,6 +8,7 @@
       <waitingapproval>承認待ち</waitingapproval>
       <approve>承認</approve>
       <publishedtomorrow>明日公開予定</publishedtomorrow>
+      <refresh>#{word.refresh}</refresh>
     </label>
   </UIDashboardForm>
 </bundle>

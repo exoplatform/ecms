@@ -1,0 +1,439 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+
+    Copyright (C) 2009 eXo Platform SAS.
+    
+    This is free software; you can redistribute it and/or modify it
+    under the terms of the GNU Lesser General Public License as
+    published by the Free Software Foundation; either version 2.1 of
+    the License, or (at your option) any later version.
+    
+    This software is distributed in the hope that it will be useful,
+    but WITHOUT ANY WARRANTY; without even the implied warranty of
+    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the GNU
+    Lesser General Public License for more details.
+    
+    You should have received a copy of the GNU Lesser General Public
+    License along with this software; if not, write to the Free
+    Software Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA
+    02110-1301 USA, or see the FSF site: http://www.fsf.org.
+
+-->
+<bundle>
+  <UIExoStart>
+    <tooltip>
+      <homepage>Hjemmeside</homepage>
+    </tooltip>
+  </UIExoStart>
+
+  <UIFormInputSetWithAction>
+    <msg>
+      <confirm-delete>Er du sikker på at du vil slette dette elementet?</confirm-delete>
+    </msg>
+  </UIFormInputSetWithAction>
+
+  <Drives>
+    <label>
+      <ManagedSites>Nettstedsadministrasjon</ManagedSites>
+      <SharedSite>Delt nettsted</SharedSite>
+    </label>
+  </Drives>
+
+  <Views>
+    <label>
+      <wcm-view>Web</wcm-view>
+      <admin-view>Administrer</admin-view>
+      <icon-view>Ikoner</icon-view>
+      <thumbails-view>Miniatyrbilder</thumbails-view>
+      <list-view>Liste</list-view>
+      <authoring-view>Redigering</authoring-view>
+      <wcm-category-view>Kategorier</wcm-category-view>
+      <file-view>Fil administrasjonsvisning</file-view>
+    </label>
+  </Views>
+
+  <UIActionBar>
+    <obtion>
+      <Publication>Publikasjon</Publication>
+      <System>System</System>
+    </obtion>
+  </UIActionBar>
+
+  <UIPageSelectorPanel>
+    <header>
+      <path>Sti</path>
+      <action>#{word.action}</action>
+    </header>
+    <msg>
+      <child-not-found>Finner ikke siden.</child-not-found>
+    </msg>
+    <title>
+      <select>Velg</select>
+    </title>
+  </UIPageSelectorPanel>
+
+  <UIContentDialogFormPopupWindow>
+    <title>
+      <UIContentDialogPreference>Web innholdsinnstilling</UIContentDialogPreference>
+    </title>
+  </UIContentDialogFormPopupWindow>
+
+  <UITabPane>
+    <title>
+      <UIContentBrowsePanelOne>Innholdsutforsker</UIContentBrowsePanelOne>
+      <UIContentBrowsePanelMulti>Innholdsutforsker</UIContentBrowsePanelMulti>
+      <UIContentBrowsePanelFolder>Mappe utforsker</UIContentBrowsePanelFolder>
+      <UIContentSearchForm>Innholder søkeskjema</UIContentSearchForm>
+      <UIContentSearchResult>Søkeresultat</UIContentSearchResult>
+      <UIContentViewer>Forhåndsvis innhold</UIContentViewer>
+      <WebContentMetadataPopup>Egenskapsvelger</WebContentMetadataPopup>
+      <WebContentNodeTypePopup>Nodetypevelger</WebContentNodeTypePopup>
+      <UIPermissionManager>Tillatelse administrator</UIPermissionManager>
+    </title>
+  </UITabPane>
+
+  <UIContentBrowsePanelOne>
+    <selectBoxValues>
+      <FilterBy>Filtrert etter</FilterBy>
+      <WebContent>Webinnhold</WebContent>
+      <DMSDocument>Dokument</DMSDocument>
+      <Media>Media</Media>
+    </selectBoxValues>
+    <msg>
+      <node-checkout>Noden er sjekket ut. Kontroller noden før du utfører denne funksjonen.</node-checkout>
+    </msg>
+  </UIContentBrowsePanelOne>
+
+  <UIContentBrowsePanelMulti>
+    <selectBoxValues>
+      <FilterBy>Filtrert etter</FilterBy>
+      <WebContent>Webinnhold</WebContent>
+      <DMSDocument>Dokument</DMSDocument>
+      <Media>Media</Media>
+    </selectBoxValues>
+  </UIContentBrowsePanelMulti>
+
+  <UIContentBrowsePanelOne>
+    <label>
+      <LeftColumn>Velg en mappe for å vise dens undermapper som innhold.</LeftColumn>
+      <RightColumn>Innholdet nedenfor kan velges.</RightColumn>
+    </label>
+  </UIContentBrowsePanelOne>
+
+  <UIContentBrowsePanelMulti>
+    <label>
+      <LeftColumn>Velg en mappe for å vise dens undermapper som innhold.</LeftColumn>
+      <RightColumn>Innholdet nedenfor kan velges.</RightColumn>
+    </label>
+  </UIContentBrowsePanelMulti>
+
+  <UIContentBrowsePanelFolder>
+    <label>
+      <LeftColumn>Velg en mappe for å vise dens undermapper som innhold.</LeftColumn>
+      <RightColumn>Mappen nedenfor kan velges.</RightColumn>
+    </label>
+  </UIContentBrowsePanelFolder>
+
+  <UISelectedContentGrid>
+    <label>
+      <name>#{word.name}</name>
+      <add>Legg til</add>
+      <delete>Slette</delete>
+    </label>
+    <msg>
+      <no-content-found>Ingen innhold funnet.</no-content-found>
+      <non-content>Du har ikke valgt noe innhold.</non-content>
+    </msg>
+  </UISelectedContentGrid>
+
+  <UICLVContentSelectedGrid>
+    <action>
+      <SaveCategories>#{word.save}</SaveCategories>
+      <Cancel>#{word.cancel}</Cancel>
+    </action>
+  </UICLVContentSelectedGrid>
+
+  <UIContentBrowsePathSelector>
+    <header>
+      <name>#{word.name}</name>
+      <publicationstate>Publikasjonens tilstand</publicationstate>
+      <action>Handling</action>
+    </header>
+    <msg>
+      <child-not-found>Ingen innhold funnet</child-not-found>
+    </msg>
+  </UIContentBrowsePathSelector>
+
+  <UIContentBrowsePathSelectorFolder>
+    <header>
+      <name>#{word.name}</name>
+      <publicationstate>Publikasjonens tilstand</publicationstate>
+      <action>Handling</action>
+    </header>
+    <msg>
+      <child-not-found>Ingen mappe funnet</child-not-found>
+    </msg>
+  </UIContentBrowsePathSelectorFolder>
+
+  <UIContentSearchForm>
+    <title>
+      <Location>Nettsteds navn</Location>
+      <SearchByName>Søk etter navn</SearchByName>
+      <Fulltext>Et ord eller uttrykk i sammenheng</Fulltext>
+      <Property>Egenskap</Property>
+      <Contain>Inneholder</Contain>
+      <FromDate>Fra dato</FromDate>
+      <ToDate>Til dato</ToDate>
+      <DocumentType>Dokumenttype</DocumentType>
+    </title>
+    <tooltip>
+      <AddMetadataType>Legg til egenskap</AddMetadataType>
+      <AddNodeType>Legge til nodetype</AddNodeType>
+    </tooltip>    
+    <label>
+      <option>
+        <CREATED>Opprettet</CREATED>
+        <MODIFIED>Redigert</MODIFIED>
+      </option>
+    </label>
+    <action>
+      <SearchWebContent>Søk</SearchWebContent>
+    </action>
+    <msg>
+      <time-to-late>Søketiden er for lang.</time-to-late>
+      <empty-field>Skriv inn et gyldig søkeord.</empty-field>
+      <invalid-format>Ugyldig dato/tidsformat i feltet '{0}'.</invalid-format>
+      <invalid-date>"Til dato" må være etter "Fra dato"</invalid-date>
+      <invalid-nodeType>Nodetypen "{0}", er ugyldig. Vennligst sjekk igjen.</invalid-nodeType>
+      <invalid-keyword>Søkeordet er ugyldig. Noen tegn er ikke støttet.</invalid-keyword>
+    </msg>
+  </UIContentSearchForm>
+
+  <WebContentMetadataPopup>
+    <title>
+      <UIContentPropertySelector>Egenskapsvelger</UIContentPropertySelector>
+    </title>
+  </WebContentMetadataPopup>
+
+  <UIContentPropertySelector>
+    <action>
+      <Add>Legg til</Add>
+      <Cancel>#{word.cancel}</Cancel>
+    </action>
+    <label>
+      <metadataType>Metadata type</metadataType>
+      <property_select>Egenskap</property_select>
+    </label>
+  </UIContentPropertySelector>
+
+  <WebContentNodeTypePopup>
+    <title>
+      <UIContentNodeTypeSelector>Nodetype velgeren</UIContentNodeTypeSelector>
+    </title>
+  </WebContentNodeTypePopup>
+
+  <UIContentNodeTypeSelector>
+    <action>
+      <Save>#{word.save}</Save>
+      <Cancel>#{word.cancel}</Cancel>
+    </action>
+  </UIContentNodeTypeSelector>
+
+  <UIContentSearchResult>
+    <header>
+      <title>Tittel</title>
+      <score>Poengsum</score>
+      <publicationstate>Publikasjonens tilstand</publicationstate>
+      <action>Handling</action>
+    </header>
+    <title>
+      <Select>Velg</Select>
+      <View>Vis</View>
+    </title>
+    <msg>
+    <template-not-support>Kan ikke forhåndsvise dette innholdet. Malen er ikke støttet</template-not-support>
+    </msg>
+  </UIContentSearchResult>
+
+  <UIContentDialogForm>
+    <action>
+      <SaveDraft>Lagre utkast</SaveDraft>
+      <FastPublish>Rask publisering</FastPublish>
+      <Preferences>Innstillinger</Preferences>
+      <Close>#{word.close}</Close>
+    </action>
+    <msg>
+      <access-denied>Du har ikke tillatelse til å legge kategorier til dette dokumentet.</access-denied>
+      <exception>Det oppstod en feil mens du la til kategorier til dette dokumentet.</exception>
+      <non-categories>Kategoriene er feil. Velg riktige kategorier.</non-categories>
+    </msg>
+  </UIContentDialogForm>
+
+  <UIPermissionManager>
+    <label>
+      <UIPermissionInputSetWithAction>Rettighet</UIPermissionInputSetWithAction>
+      <UIAccessibleCheckboxInput>Tilgangsrettigheter</UIAccessibleCheckboxInput>
+      <UIEditableCheckboxInput>Redigeringsrettigheter</UIEditableCheckboxInput>
+    </label>
+    <action>
+      <Save>#{word.save}</Save>
+      <Clear>Fjern</Clear>
+      <title>
+        <Edit>Rediger</Edit>
+        <Delete>Slette</Delete>
+      </title>
+    </action>
+  </UIPermissionManager>
+
+  <UIPermissionManagerGrid>
+    <header>
+      <owner>Rettighet</owner>
+      <accessible>Tilgjengelig</accessible>
+      <editable>Redigerbar</editable>
+      <action>Handling</action>
+    </header>
+    <msg>
+      <confirm-delete-permission>Er du sikker på at du vil slette denne rettigheten?</confirm-delete-permission>
+      <no-permission-remove>Du har ikke rettigheter.</no-permission-remove>
+      <access-denied>Ingen tilgang.</access-denied>
+      <node-locked>Stielementet {0} eller en overordnet ressursgruppe er låst.</node-locked>
+      <userOrGroup-required>Du må velge en bruker eller en gruppe.</userOrGroup-required>
+      <checkbox-require>Du må angi rettigheter.</checkbox-require>
+      <node-checkedin>Du må sjekke ut først.</node-checkedin>
+    </msg>
+  </UIPermissionManagerGrid>
+
+  <UIPermissionInputSetWithAction>
+    <title>
+      <SelectUser>Velg bruker</SelectUser>
+      <SelectMember>Velg medlem</SelectMember>
+      <AddAny>Legg til rettighet</AddAny>
+    </title>
+  </UIPermissionInputSetWithAction>
+
+  <UIUserSelectorPopupWindow>
+    <title>
+      <UIUserContainer>Brukervelger</UIUserContainer>
+    </title>
+  </UIUserSelectorPopupWindow>
+
+  <UIGroupSelectorPopupWindow>
+    <title>
+      <UIGroupMemberSelector>Gruppevelger</UIGroupMemberSelector>
+    </title>
+  </UIGroupSelectorPopupWindow>
+
+  <UIGroupMemberSelector>
+    <label>
+      <selectGroup>Velg gruppe</selectGroup>
+      <selectMembership>Velg medlemskap</selectMembership>
+    </label>
+  </UIGroupMemberSelector>
+
+  <UIContentDialogPreference>
+    <action>
+      <Back>Tilbake</Back>
+    </action>
+  </UIContentDialogPreference>
+
+  <ZeroValidator>
+    <msg>
+      <Invalid-number>Null er ikke akseptert i feltet '{0}'.</Invalid-number>
+    </msg>
+  </ZeroValidator>
+
+  <UIDropDownPageTemp>
+    <item>
+      <WCMPageConfigs>WCM sidekonfigurasjon</WCMPageConfigs>
+      <ColumnPageConfigs>Kolonne sidekonfigurering</ColumnPageConfigs>
+      <RowPageConfigs>Rad sidekonfigurering</RowPageConfigs>
+      <TabsPageConfigs>Fane sidekonfigurering</TabsPageConfigs>
+      <MixPageConfigs>Blandet sidekonfigurering</MixPageConfigs>
+    </item>
+  </UIDropDownPageTemp>
+
+  <UIWizardPageSelectLayoutForm>
+    <label>
+      <SingleContentViewer>Enkel innholdsviser</SingleContentViewer>
+      <ContentListViewer>Innholdslisteviser</ContentListViewer>
+      <Search>Søk</Search>
+      <Sitemap>Nettstedskart</Sitemap>
+      <TwoColumnsLayout>To kolonners layout</TwoColumnsLayout>
+      <ThreeColumnsLayout>Tre kolonners layout</ThreeColumnsLayout>
+      <TwoRowsLayout>To raders layout</TwoRowsLayout>
+      <ThreeRowsLayout>Tre raders layout</ThreeRowsLayout>
+      <TwoTabsLayout>To faners layout</TwoTabsLayout>
+      <ThreeTabsLayout>Tre faners layout</ThreeTabsLayout>
+      <TwoColumnsOneRowLayout>To kolonners og en rads layout</TwoColumnsOneRowLayout>
+      <OneRowTwoColumnsLayout>En rad og to kolonners layout</OneRowTwoColumnsLayout>
+      <ThreeRowsTwoColumnsLayout>Tre raders og to kolonners layout</ThreeRowsTwoColumnsLayout>
+    </label>
+  </UIWizardPageSelectLayoutForm>
+
+  <Signin>
+    <welcome>Velkommen</welcome>
+    <login>Innlogging</login>
+    <logout>Logg ut</logout>
+    <language>Bytt språk</language>
+    <register>Registrer</register>
+  </Signin>
+  <UIDriveForm>
+<label>
+<wcm-category-view>Kategorivisning</wcm-category-view>
+<wcm-view>WCM innholdsvisning</wcm-view>
+</label>
+  </UIDriveForm>
+  
+  <ContentSelector>
+    <title>
+      <PersonalDrives>Personlige stasjoner</PersonalDrives>
+      <GeneralDrives>Generelle stasjoner</GeneralDrives>
+      <GroupDrives>Gruppestasjoner</GroupDrives>
+      <Private>Privat</Private>
+      <Public>Offentlig</Public>
+      <BackupCenter>Backup senter</BackupCenter>
+      <CategorizedDocumentsCenter>Kategoriserte dokumentsenter</CategorizedDocumentsCenter>
+      <CollaborationCenter>Samhandlingssenter</CollaborationCenter>
+      <DigitalAssetsManagementCenter>Digitale ressurser administrasjonssenter</DigitalAssetsManagementCenter>
+      <DMSAdministration>DMS administrasjon</DMSAdministration>
+      <DocumentsManagementCenter>Dokumenter administrasjonssenter</DocumentsManagementCenter>
+      <LiveDocumentsCenter>Levende dokumentsenter</LiveDocumentsCenter>
+      <PendingDocumentsCenter>Ventende dokumentsenter</PendingDocumentsCenter>
+      <RecordsManagementCenter>Arkiv administrasjonssenter</RecordsManagementCenter>
+      <SharedUsersSpace>Delt brukerfellesskap</SharedUsersSpace>
+      <Systemfiles>Systemfiler</Systemfiles>
+      <ValidationRequestsDocumentsCenter>Valideringsforespørsler dokumentersenter</ValidationRequestsDocumentsCenter>
+      <ManagedSites>Nettstedsadministrasjon</ManagedSites>
+      <SharedSite>Delt nettsted</SharedSite>
+    </title>
+  </ContentSelector>
+  
+  <UICategoryNavigationTargetPathPopupWindow>
+    <title>
+      <UIPageSelector>Sidevelger</UIPageSelector>
+    </title>
+  </UICategoryNavigationTargetPathPopupWindow>
+  
+  <UIDocumentInfo>
+    <msg>
+      <access-denied-exception>Ingen tilgang. Du har ikke lesetilgang, eller noden kan ha blitt fjernet eller endret.</access-denied-exception>
+    </msg>
+  </UIDocumentInfo>
+  <UIPortalApplication>
+    <title>
+      <abort>Avbryt</abort>
+    </title>
+  </UIPortalApplication>    
+  
+  <CategoryNavigationTemplate>
+  <label>
+  <home>Hjem</home>
+  </label>
+  </CategoryNavigationTemplate>
+  
+  <Breadcrumb>
+  <label>
+  <home>Hjem</home>
+  </label>  
+  </Breadcrumb>
+</bundle>

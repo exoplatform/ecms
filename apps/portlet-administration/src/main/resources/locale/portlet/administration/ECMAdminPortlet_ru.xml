@@ -8,29 +8,29 @@
   <UIECMAdminControlPanel>
     <tab>
       <label>
-        <Templates>Templates</Templates>
+        <Templates>Шаблоны</Templates>
         <Explorer>Explorer</Explorer>
-        <Repository>Repository</Repository>
-        <Advanced>Advanced</Advanced>
+        <Repository>Репозиторий</Repository>
+        <Advanced>Расширенные</Advanced>
       </label>
     </tab>    
     <label>     
-      <UITaxonomyManagerTrees>Categories</UITaxonomyManagerTrees>
-      <UIMetadataManager>Metadata</UIMetadataManager>
-      <UINamespaceManager>Namespaces</UINamespaceManager>
-      <UINodeTypeManager>Node Types</UINodeTypeManager>
-      <UITemplatesManager>Documents</UITemplatesManager>
-   <UICLVTemplatesManager>List</UICLVTemplatesManager>
-      <UIViewManager>Views</UIViewManager>
-      <UIDriveManager>Drives</UIDriveManager>
-      <UIQueriesManager>Queries</UIQueriesManager>
-      <UIActionManager>Actions</UIActionManager>
-      <UIScriptManager>Scripts</UIScriptManager>
-      <UIUnLockManager>Locks</UIUnLockManager>
-      <UIFolksonomyManager>Tags</UIFolksonomyManager>      
+      <UITaxonomyManagerTrees>Категории</UITaxonomyManagerTrees>
+      <UIMetadataManager>Метаданные</UIMetadataManager>
+      <UINamespaceManager>Пространства имен</UINamespaceManager>
+      <UINodeTypeManager>Типы узлов</UINodeTypeManager>
+      <UITemplatesManager>Документы</UITemplatesManager>
+   <UICLVTemplatesManager>Список</UICLVTemplatesManager>
+      <UIViewManager>Просмотры</UIViewManager>
+      <UIDriveManager>Диски</UIDriveManager>
+      <UIQueriesManager>Запросы</UIQueriesManager>
+      <UIActionManager>Действия</UIActionManager>
+      <UIScriptManager>Скрипты</UIScriptManager>
+      <UIUnLockManager>Блокировки</UIUnLockManager>
+      <UIFolksonomyManager>Теги</UIFolksonomyManager>      
     </label>
     <msg>
-      <access-denied>Access denied. You do not have permission to perform this action.</access-denied>
+      <access-denied>Отказано в доступе. У Вас не хватает прав для выполнения этого действия.</access-denied>
     </msg>
   </UIECMAdminControlPanel>
   <!--
@@ -40,24 +40,24 @@
   -->
   <UITaxonomyWorkingArea>
     <msg>
-      <referential-integrity>Cannot read from the source file, or the destination category is a sub-category.</referential-integrity>
-      <no-taxonomy-selected>You must copy or cut at least one category.</no-taxonomy-selected>
-      <node-is-cutting>You cannot paste here. The category node '{0}' might be cut.</node-is-cutting>
-      <can-not-paste>There is no data in the clipboard to paste.</can-not-paste>
-      <reference-exception>Cannot delete this category  because it is currently referenced by a content.</reference-exception>
-      <path-error>An error occurred while removing this category node.</path-error>
+      <referential-integrity>Не удается прочитать из исходного файла, либо нужная вам категория является подкатегорией.</referential-integrity>
+      <no-taxonomy-selected>Необходимо скопировать или вырезать по крайней мере одну категорию.</no-taxonomy-selected>
+      <node-is-cutting>Вы не можете вставить здесь. Узел категории '{0}' может быть вырезан.</node-is-cutting>
+      <can-not-paste>В буфере обмена отсутствуют данные.</can-not-paste>
+      <reference-exception>Невозможно удалить эту категорию, поскольку в настоящий момент на нее ссылается контент.</reference-exception>
+      <path-error>Произошла ошибка при удалении узла этой категории.</path-error>
     </msg>
   </UITaxonomyWorkingArea>
   <UITaxonomyManager>
     <msg>
-      <confirm-delete>Are you sure you want to delete this category?</confirm-delete>
+      <confirm-delete>Вы действительно хотите удалить категорию?</confirm-delete>
     </msg>
     <title>
-      <add>Add</add>
-      <paste>Paste</paste>
-      <cut>Cut</cut>
-      <copy>Copy</copy>
-      <remove>Delete</remove>
+      <add>Добавить</add>
+      <paste>Вставить</paste>
+      <cut>Вырезать</cut>
+      <copy>Копировать</copy>
+      <remove>Удалить</remove>
     </title>
   </UITaxonomyManager>
   
@@ -69,14 +69,14 @@
   <UITaxonomyTreeContainer>
     <tab>
       <info>
-        <UITaxonomyTreeMainForm>Specify the category name, workspace and home path.</UITaxonomyTreeMainForm>
-        <UIPermissionTreeManager>Set permission for the category tree.</UIPermissionTreeManager>
-        <UIActionTaxonomyManager>Add an action to the category tree to complete the creation or update.</UIActionTaxonomyManager>
-        <UITaxonomyTreeCreateChild>Edit the taxonomy tree by adding, copying, cutting and selecting permissions.</UITaxonomyTreeCreateChild>
+        <UITaxonomyTreeMainForm>Укажите название категории, рабочую область и маршрут личного каталога.</UITaxonomyTreeMainForm>
+        <UIPermissionTreeManager>Установить разрешение для дерева категорий.</UIPermissionTreeManager>
+        <UIActionTaxonomyManager>Добавьте действие в дерево категорий, чтобы завершить создание или обновление.</UIActionTaxonomyManager>
+        <UITaxonomyTreeCreateChild>Редактируйте дерево классификации путем добавления, копирования, вырезания и выбора разрешений.</UITaxonomyTreeCreateChild>
       </info>
     </tab>
     <msg>
-      <not-exist-tree>The category tree does not exist.</not-exist-tree>
+      <not-exist-tree>Дерево категорий не существует.</not-exist-tree>
     </msg>
   </UITaxonomyTreeContainer>
   
@@ -87,28 +87,28 @@
 -->
   <UITaxonomyTreeMainForm>
     <action>
-      <Reset>Очистить</Reset>
+      <Reset>Сбросить</Reset>
     </action>
     <msg>
-      <name-not-allowed>Forbidden Name</name-not-allowed>
-      <name-emty>The tree name is required.</name-emty>
-      <homePath-emty>The home path is required.</homePath-emty>
-      <targetPath-emty>The target path is required.</targetPath-emty>
-      <taxonomytree-existed>The category tree name already exists.</taxonomytree-existed>
+      <name-not-allowed>Запрещенное имя</name-not-allowed>
+      <name-emty>Требуется название дерева.</name-emty>
+      <homePath-emty>Требуется путь в домашний директорий.</homePath-emty>
+      <targetPath-emty>Требуется путь назначения.</targetPath-emty>
+      <taxonomytree-existed>Название дерева категории уже существует.</taxonomytree-existed>
     </msg>
   </UITaxonomyTreeMainForm>
 
   <TaxonomyTreeMainForm>
     <label>
-      <TaxoTreeName>Name</TaxoTreeName>
-      <TaxoTreeWorkspace>Workspace</TaxoTreeWorkspace>
-      <TaxoTreeHomePath>Home Path</TaxoTreeHomePath>
+      <TaxoTreeName>Имя</TaxoTreeName>
+      <TaxoTreeWorkspace>Рабочая область</TaxoTreeWorkspace>
+      <TaxoTreeHomePath>Путь в домашний директорий</TaxoTreeHomePath>
     </label>
   </TaxonomyTreeMainForm>
 
   <TaxonomyTreeHomePath>
     <title>
-      <AddPath>Add Path</AddPath>
+      <AddPath>Добавить путь</AddPath>
     </title>
   </TaxonomyTreeHomePath>
   
@@ -120,16 +120,16 @@
 <UIPermissionTreeInfo>
 <action>
 <title>
-<Delete>Delete</Delete>
-<Edit>Edit</Edit>
+<Delete>Удалить</Delete>
+<Edit>Изменить</Edit>
 </title>
 </action>
 <header>
-<usersOrGroups>User or Group</usersOrGroups>
-<read>Read</read>
-<addNode>Add Node</addNode>
-<setProperty>Set Property</setProperty>
-<remove>Remove</remove>
+<usersOrGroups>Пользователь или группа</usersOrGroups>
+<read>Читать</read>
+<addNode>Добавить узел</addNode>
+<setProperty>Установить свойство</setProperty>
+<remove>Удалить</remove>
 <action>Действие</action>
 </header>
 </UIPermissionTreeInfo>
@@ -141,7 +141,7 @@
 -->
   <UIPermissionTreeForm>
     <msg>
-      <have-not-any-permission>Please specify at least one permission for this node.</have-not-any-permission>
+      <have-not-any-permission>Пожалуйста, укажите по крайней мере одно разрешение для данного узла.</have-not-any-permission>
     </msg>
   </UIPermissionTreeForm>
 
@@ -152,17 +152,17 @@
 -->
 
   <UIActionForm>
-    <title>Add an action to the category tree</title>
+    <title>Добавить действие в дерево категорий</title>
     <action>
       <Save>#{word.save}</Save>
     </action>
     <msg>
-      <name-not-allowed>Empty name or special characters are not allowed in the action name.</name-not-allowed>
-      <path-invalid>The path is invalid.</path-invalid>
-      <taxonomy-existed>The category tree already exists.</taxonomy-existed>
-      <taxonomy-node-existed>The category node already exists.</taxonomy-node-existed>
-      <no-permission-add>You do not have the right to add an action.</no-permission-add>
-      <not-created-tree>The category tree has not yet been created.</not-created-tree>
+      <name-not-allowed>Пустое имя или специальные символы не допускаются в названии действия.</name-not-allowed>
+      <path-invalid>Недопустимый путь.</path-invalid>
+      <taxonomy-existed>Дерево категорий уже существует.</taxonomy-existed>
+      <taxonomy-node-existed>Узел категорий уже существует.</taxonomy-node-existed>
+      <no-permission-add>У вас недостаточно прав для добавления действия.</no-permission-add>
+      <not-created-tree>Дерево категорий пока не было создано.</not-created-tree>
     </msg>
   </UIActionForm>
 
@@ -173,8 +173,8 @@
   -->
   <UITemplatesList>
     <header>
-      <name>Template Name</name>
-      <action>Actions</action>
+      <name>Имя шаблона</name>
+      <action>Действия</action>
     </header>
   </UITemplatesList>
   <!--
@@ -184,13 +184,13 @@
   -->
   <NameSpacePopup>
     <title>
-      <UINamespaceForm>Namespace Form</UINamespaceForm>
+      <UINamespaceForm>Форма пространства имен</UINamespaceForm>
     </title>
   </NameSpacePopup>
   <UINamespaceForm>
-    <title>Register New Namespace</title>
+    <title>Зарегистрировать новое пространство имен</title>
     <label>
-      <namespace>Namespace Prefix</namespace>
+      <namespace>Префикс пространства имен</namespace>
       <uri>URI</uri>
     </label>
     <action>
@@ -198,9 +198,9 @@
       <Cancel>#{word.cancel}</Cancel>
     </action>
     <msg>
-      <register-unsuccessfull>Namespace or URI already exists.</register-unsuccessfull>
-      <prefix-null>Please specify the namespace's prefix.</prefix-null>
-      <uri-null>Please specify the namespace's URI.</uri-null>
+      <register-unsuccessfull>Пространство имен или URI уже существует.</register-unsuccessfull>
+      <prefix-null>Пожалуйста, укажите префикс пространства имен.</prefix-null>
+      <uri-null>Пожалуйста, укажите URI пространства имен.</uri-null>
     </msg>
   </UINamespaceForm>
   <!--
@@ -210,17 +210,17 @@
   -->
   <UINamespaceList>
     <header>
-      <prefix>Prefix</prefix>
-      <uri>Namespace URI</uri>
+      <prefix>Префикс</prefix>
+      <uri>URI пространства имен</uri>
       <action>Действие</action>
     </header>
     <action>
-      <AddNamespace>Register</AddNamespace>
+      <AddNamespace>Регистрация</AddNamespace>
     </action>
   </UINamespaceList>
   <NamespacePopup>
     <title>
-      <UINamespaceForm>Register New Namespace</UINamespaceForm>
+      <UINamespaceForm>Зарегистрировать новое пространство имен</UINamespaceForm>
     </title>
   </NamespacePopup>
   <!--
@@ -230,30 +230,30 @@
   -->
   <UIMetadataList>
     <label>
-      <false>false</false>
-      <true>true</true>
-      <True>true</True>
-      <False>false</False>
+      <false>ложное значение</false>
+      <true>правильное значение</true>
+      <True>правильное значение</True>
+      <False>ложное значение</False>
     </label>
     <title>
-      <view>View</view>
-      <edit>Edit</edit>
-      <delete>Delete</delete>
+      <view>Показать</view>
+      <edit>Редактировать</edit>
+      <delete>Удалить</delete>
     </title>
     <header>
-      <icon>Icon</icon>
-      <name>Metadata</name>
-      <type>Type</type>
-      <internalUse>Internal Use</internalUse>
-      <action>Actions</action>
+      <icon>Иконка</icon>
+      <name>Метаданные</name>
+      <type>Тип</type>
+      <internalUse>Внутреннее использование</internalUse>
+      <action>Действия</action>
     </header>
     <msg>
-      <confirm-delete>Are you sure you want to delete this metadata?</confirm-delete>
-      <delete-successful>The templates of '{0}' were deleted successfully.</delete-successful>
-      <path-not-found-exception>This metadata was deleted or changed. Please click the Refresh button.</path-not-found-exception>
+      <confirm-delete>Вы уверены, что вы хотите удалить метаданные?</confirm-delete>
+      <delete-successful>Шаблоны «{0}» были успешно удалены.</delete-successful>
+      <path-not-found-exception>Эти метаданные были удалены или изменены. Пожалуйста, нажмите кнопку Обновить.</path-not-found-exception>
     </msg>
     <action>
-      <Add>Add Metadata</Add>
+      <Add>Добавить метаданные</Add>
       <Cancel>#{word.cancel}</Cancel>
     </action>
   </UIMetadataList>
@@ -264,13 +264,13 @@
   </MetadataPopupAddNew>
   <MetadataPopupEdit>
     <title>
-      <UIMetadataForm>Edit Metadata's Template</UIMetadataForm>
+      <UIMetadataForm>Редактировать шаблон метаданных</UIMetadataForm>
     </title>
   </MetadataPopupEdit>
   <MetataPermissionPopup>
     <title>
-      <MetadataPermission>Set Permissions</MetadataPermission>
-      <QueriesPermissionBrowse>Add Permissions</QueriesPermissionBrowse>
+      <MetadataPermission>Установить разрешения</MetadataPermission>
+      <QueriesPermissionBrowse>Добавить разрешения</QueriesPermissionBrowse>
     </title>
   </MetataPermissionPopup>
   <!--
@@ -279,29 +279,29 @@
   ################################################################################
   -->
   <UIMetadataForm>
-    <title>Mapping Metadata</title>
+    <title>Картографирование памяти метаданных</title>
     <action>
       <Cancel>#{word.cancel}</Cancel>
-      <Save>Apply</Save>
+      <Save>Применить</Save>
     </action>
     <header>
-      <icon>Icon</icon>
-      <label>Node name</label>
+      <icon>Иконка</icon>
+      <label>Имя узла</label>
       <input>Действие</input>
     </header>
     <label>
-      <dialogTemplate>Dialog Template:</dialogTemplate>
-      <viewTemplate>View Template:</viewTemplate>
-      <metadataName>Metadata Name:</metadataName>
-      <viewPermission>Permission:</viewPermission>
+      <dialogTemplate>Шаблон диалогового окна:</dialogTemplate>
+      <viewTemplate>Показать шаблон:</viewTemplate>
+      <metadataName>Имя метаданных:</metadataName>
+      <viewPermission>Права доступа:</viewPermission>
       <permission>UIMetadataForm</permission>
-      <metadataLabel>Label:</metadataLabel>
+      <metadataLabel>Метка:</metadataLabel>
     </label>
     <tab>
       <label>
-        <metadataTypeTab>Metadata Type</metadataTypeTab>
-        <dialogTab>Dialog Template</dialogTab>
-        <viewTab>View Template</viewTab>
+        <metadataTypeTab>Тип метаданных</metadataTypeTab>
+        <dialogTab>Шаблон диалогового окна</dialogTab>
+        <viewTab>Показать шаблон</viewTab>
       </label>
     </tab>
   </UIMetadataForm>
@@ -312,18 +312,18 @@
   -->
   <UIMetadataView>
     <header>
-      <name>Element Name</name>
-      <type>Type</type>
-      <description>Description</description>
-      <isMixin>Is Mixin Type</isMixin>
-      <orderable>Orderable children</orderable>
+      <name>Имя элемента</name>
+      <type>Тип</type>
+      <description>Описание</description>
+      <isMixin>Смешанного типа</isMixin>
+      <orderable>Упорядочиваемые дочерние записи</orderable>
     </header>
     <info>
-      <description>Description</description>
+      <description>Описание</description>
     </info>
     <tab>
-      <element>Elements</element>
-      <metadataView>Metadata Information</metadataView>
+      <element>Элементы</element>
+      <metadataView>Сведения о метаданных</metadataView>
     </tab>
     <action>
       <Cancel>#{word.close}</Cancel>
@@ -332,7 +332,7 @@
   </UIMetadataView>
   <ViewMetadataPopup>
     <title>
-      <UIMetadataView>Metadata Information</UIMetadataView>
+      <UIMetadataView>Сведения о метаданных</UIMetadataView>
     </title>
   </ViewMetadataPopup>
   <!--
@@ -342,26 +342,26 @@
   -->
   <UIDriveList>
     <header>
-      <icon>Icon</icon>
-      <name>Name</name>
-      <workspace>Workspace</workspace>
-      <homePath>Home Path</homePath>
-      <permissions>Permissions</permissions>
-      <views>View</views>
+      <icon>Иконка</icon>
+      <name>Имя</name>
+      <workspace>Рабочая область</workspace>
+      <homePath>Путь в домашний директорий</homePath>
+      <permissions>Разрешения</permissions>
+      <views>Показать</views>
       <action>Действие</action>
     </header>
     <tooltip>
-      <Delete>Delete</Delete>
-      <EditInfo>Edit</EditInfo>
+      <Delete>Удалить</Delete>
+      <EditInfo>Изменить</EditInfo>
     </tooltip>
     <msg>
-      <confirm-delete>Are you sure you want to delete this drive?</confirm-delete>
+      <confirm-delete>Вы уверены, что хотите удалить этот диск?</confirm-delete>
     </msg>
     <action>
-      <AddDrive>Add Drive</AddDrive>
+      <AddDrive>Добавить диск</AddDrive>
     </action>
     <label>
-      <permission>{0} in {1}</permission>
+      <permission>{0} в {1}</permission>
     </label>
   </UIDriveList>
   <UIDriveForm>
@@ -372,63 +372,63 @@
       <Refresh>#{word.refresh}</Refresh>
     </action>
     <msg>
-      <drive-exists>The drive already exists.</drive-exists>
-      <workspace-path-invalid>The workspace path is invalid.</workspace-path-invalid>
-      <drive-views-invalid>Please select a view.</drive-views-invalid>
-      <icon-not-found>Icon not found.</icon-not-found>
-      <permission-null>You must set the permission for this drive.</permission-null>
-      <allowCreateFolders>You must select the folder type.</allowCreateFolders>
-      <name-null>Please enter the drive name.</name-null>
-      <fileName-invalid>The drive name has some invalid characters.</fileName-invalid>
+      <drive-exists>Диск уже существует.</drive-exists>
+      <workspace-path-invalid>Недопустимый путь к рабочей области.</workspace-path-invalid>
+      <drive-views-invalid>Пожалуйста выберите вид.</drive-views-invalid>
+      <icon-not-found>Иконка не найдена.</icon-not-found>
+      <permission-null>Необходимо установить разрешение для этого диска.</permission-null>
+      <allowCreateFolders>Вы должны выбрать тип папки.</allowCreateFolders>
+      <name-null>Пожалуйста, введите название диска.</name-null>
+      <fileName-invalid>Название диска содержит недопустимые символы.</fileName-invalid>
     </msg>
     <tab>
       <label>
-        <DriveInputSet>Drive</DriveInputSet>
-        <ViewsInputSet>Apply Views</ViewsInputSet>
-        <PermissionInputSet>Set Permissions</PermissionInputSet>
+        <DriveInputSet>Привод</DriveInputSet>
+        <ViewsInputSet>Применить отображения данных</ViewsInputSet>
+        <PermissionInputSet>Установить разрешения</PermissionInputSet>
       </label>
     </tab>
     <label>
-      <name>Name:</name>
-      <workspace>Workspace:</workspace>
-      <homePath>Home Path:</homePath>
-      <icon>Workspace Icon:</icon>
-      <viewPreferences>Show Referenced Documents:</viewPreferences>
-      <viewNonDocument>Show Non-document Nodes:</viewNonDocument>
-      <viewSideBar>Show Sidebar:</viewSideBar>
-      <permissions>Permissions:</permissions>
-      <showHiddenNode>Show Hidden Nodes:</showHiddenNode>
-      <allowCreateFolders>Allow Folder Creation:</allowCreateFolders>
-      <Admin>Admin:</Admin>
-      <Categories>Categories:</Categories>
-      <Icons>Icons:</Icons>
-      <List>List:</List>
+      <name>Название:</name>
+      <workspace>Рабочая область:</workspace>
+      <homePath>Путь в домашний директорий:</homePath>
+      <icon>Иконка рабочей области:</icon>
+      <viewPreferences>Показать ссылочные документы:</viewPreferences>
+      <viewNonDocument>Показать узлы вне документов:</viewNonDocument>
+      <viewSideBar>Показать боковую панель:</viewSideBar>
+      <permissions>Разрешения:</permissions>
+      <showHiddenNode>Показать скрытые узлы:</showHiddenNode>
+      <allowCreateFolders>Разрешить создание папки:</allowCreateFolders>
+      <Admin>Администратор:</Admin>
+      <Categories>Категории:</Categories>
+      <Icons>Иконки:</Icons>
+      <List>Список:</List>
       <Web>Web:</Web>
     </label>
   </UIDriveForm>
   <AddDriveManagerPopup>
     <title>
-      <UIDriveForm>Add Drive</UIDriveForm>
+      <UIDriveForm>Добавить диск</UIDriveForm>
     </title>
   </AddDriveManagerPopup>
   <EditDriveManagerPopup>
     <title>
-      <UIDriveForm>Edit Drive</UIDriveForm>
+      <UIDriveForm>Изменить диск</UIDriveForm>
     </title>
   </EditDriveManagerPopup>
   <UITreeList>
     <info>
-      <child-not-found>Child node not found.</child-not-found>
+      <child-not-found>Дочерний узел не найден.</child-not-found>
     </info>
     <header>
-      <name>Name</name>
+      <name>Имя</name>
       <action>Действие</action>
     </header>
   </UITreeList>
   
   <UIRepositoryList>
     <titlebar>
-      <label>Manage ECM Main Functions</label>
+      <label>Управление основными функциями ECM</label>
     </titlebar>
   </UIRepositoryList>
   
@@ -439,8 +439,8 @@
   -->
   <UINodeTypeManager>
     <header>
-      <icon>Icon</icon>
-      <label>Node Name</label>
+      <icon>Иконка</icon>
+      <label>Название узла</label>
       <input>Действие</input>
     </header>
     <action>
@@ -454,28 +454,28 @@
   -->
   <UINodeTypeList>
     <label>
-      <true>True</true>
-      <false>False</false>
+      <true>Верно</true>
+      <false>Неверно</false>
     </label>
     <header>
-      <icon>Icon</icon>
-      <nodeType>Node Type</nodeType>
-      <mixinType>Mixin Type</mixinType>
-      <orderable>Orderable Child Nodes</orderable>
+      <icon>Иконка</icon>
+      <nodeType>Тип узла</nodeType>
+      <mixinType>Смешанный тип</mixinType>
+      <orderable>Упорядочиваемые дочерние узлы</orderable>
       <action>Действие</action>
     </header>
     <action>
-      <Export>Export</Export>
-      <Import>Import</Import>
-      <Add>Add</Add>
+      <Export>Экспорт</Export>
+      <Import>Импорт</Import>
+      <Add>Добавить</Add>
     </action>
     <tooltip>
-      <View>View</View>
-      <Edit>Edit</Edit>
-      <Delete>Delete</Delete>
+      <View>Показать</View>
+      <Edit>Редактировать</Edit>
+      <Delete>Удалить</Delete>
     </tooltip>
     <msg>
-      <confirm-delete>Are you sure you want to delete this node type?</confirm-delete>
+      <confirm-delete>Вы уверены, что хотите удалить этот тип узла?</confirm-delete>
     </msg>
   </UINodeTypeList>
   <!--
@@ -486,11 +486,11 @@
   <UINodeTypeOptionList>
     <action>
       <Save>#{word.save}</Save>
-      <Add>Add</Add>
+      <Add>Добавить</Add>
     </action>
     <header>
-      <icon>Icon</icon>
-      <label>Node Name</label>
+      <icon>Иконка</icon>
+      <label>Название узла</label>
       <input>Действие</input>
     </header>
   </UINodeTypeOptionList>
@@ -502,55 +502,55 @@
   <UINodeTypeForm>
     <tab>
       <label>
-        <nodeTypeDefinition>Node Type</nodeTypeDefinition>
-        <propertyDefinition>Property</propertyDefinition>
-        <childNodeDefinition>Child Node</childNodeDefinition>
-        <superTypeTab>Super Types</superTypeTab>
-        <DefaultTypeTab>Default Primary</DefaultTypeTab>
-        <RequiredTypeTab>Required Primary</RequiredTypeTab>
-        <Contraints>Constraints</Contraints>
+        <nodeTypeDefinition>Тип узла</nodeTypeDefinition>
+        <propertyDefinition>Свойство</propertyDefinition>
+        <childNodeDefinition>Дочерний узел</childNodeDefinition>
+        <superTypeTab>Супер типы</superTypeTab>
+        <DefaultTypeTab>Первичное значение по умолчанию</DefaultTypeTab>
+        <RequiredTypeTab>Требуемое первичное значение</RequiredTypeTab>
+        <Contraints>Ограничения</Contraints>
       </label>
     </tab>
     <label>
-      <propertiesDefinitions>Property Definitions</propertiesDefinitions>
-      <childDefinitions>Child Node Definitions</childDefinitions>
-      <namespace>Name Space</namespace>
-      <propertyNamespace>Name Space</propertyNamespace>
-      <nodeTypeName>Node Type Name</nodeTypeName>
-      <mixinType>Is Mixin Type</mixinType>
-      <hasOrderableChildNodes>Orderable Child Nodes</hasOrderableChildNodes>
-      <primaryItemName>Primary Item Name</primaryItemName>
-      <superTypes>Super Types</superTypes>
-      <propertyname>Definition Name</propertyname>
-      <requiredType>Required Type</requiredType>
-      <multiple>Is Multiple</multiple>
-      <mandatory>Is Mandatory</mandatory>
-      <autoCreated>Is Auto-created</autoCreated>
-      <parentversion>On parent version</parentversion>
-      <protected>Is Protected</protected>
-      <constraints>Values</constraints>
+      <propertiesDefinitions>Определения свойств</propertiesDefinitions>
+      <childDefinitions>Определения дочерних узлов</childDefinitions>
+      <namespace>Пространство имен</namespace>
+      <propertyNamespace>Пространство имен</propertyNamespace>
+      <nodeTypeName>Название типа узла</nodeTypeName>
+      <mixinType>Смешанного типа</mixinType>
+      <hasOrderableChildNodes>Упорядочиваемые дочерние узлы</hasOrderableChildNodes>
+      <primaryItemName>Название первичного элемента</primaryItemName>
+      <superTypes>Супер типы</superTypes>
+      <propertyname>Имя определения</propertyname>
+      <requiredType>Требуемый тип</requiredType>
+      <multiple>Множественный</multiple>
+      <mandatory>Обязательный</mandatory>
+      <autoCreated>Создан автоматически</autoCreated>
+      <parentversion>В исходной версии</parentversion>
+      <protected>Защищен</protected>
+      <constraints>Значения</constraints>
       <UIFormTableInputSet>UIFormTableInputSet</UIFormTableInputSet>
-      <sameNameSiblings>Is same name sibling</sameNameSiblings>
-      <childNamespace>Name Space</childNamespace>
-      <childMandatory>Is Mandatory</childMandatory>
-      <childAutocreated>Is Auto-created</childAutocreated>
-      <childParentversion>On parent version</childParentversion>
-      <childProtected>Is Protected</childProtected>
-      <childNodename>Definition Name</childNodename>
-      <requiredPrimaryType>Required Primary Type</requiredPrimaryType>
-      <defaultPrimaryType>Default Primary Type</defaultPrimaryType>
-      <valueconstraints>Value Constraints</valueconstraints>
+      <sameNameSiblings>Такое же имя, как и у родственного документа</sameNameSiblings>
+      <childNamespace>Пространство имен</childNamespace>
+      <childMandatory>Обязательный</childMandatory>
+      <childAutocreated>Создан автоматически</childAutocreated>
+      <childParentversion>В исходной версии</childParentversion>
+      <childProtected>Защищен</childProtected>
+      <childNodename>Имя определения</childNodename>
+      <requiredPrimaryType>Требуемый исходный тип</requiredPrimaryType>
+      <defaultPrimaryType>Исходный тип по умолчанию</defaultPrimaryType>
+      <valueconstraints>Требования к значению</valueconstraints>
     </label>
     <action>
       <Cancel>#{word.cancel}</Cancel>
       <Save>#{word.save}</Save>
-      <SaveDraft>Save as Draft</SaveDraft>
-      <AddProperty>Add Property</AddProperty>
-      <AddChild>Add Child</AddChild>
-      <AddConstraints>Add Constraints</AddConstraints>
+      <SaveDraft>Сохранить как черновик</SaveDraft>
+      <AddProperty>Добавить свойство</AddProperty>
+      <AddChild>Добавить дочерний элемент</AddChild>
+      <AddConstraints>Добавить требования</AddConstraints>
       <Back>#{word.back}</Back>
-      <AddType>Add Type</AddType>
-      <AddValue>Add</AddValue>
+      <AddType>Добавить тип</AddType>
+      <AddValue>Добавить</AddValue>
       <CancelConstraints>#{word.cancel}</CancelConstraints>
       <CancelTab>#{word.cancel}</CancelTab>
       <UpdateChild>#{word.update}</UpdateChild>
@@ -560,62 +560,62 @@
       <Close>#{word.close}</Close>
     </action>
     <msg>
-      <register-successfully>The '{0}' node type was registered successfully.</register-successfully>
-      <supertype-is-madatory>The super type is mandatory when you register a new node type. Please select at least one super type.</supertype-is-madatory>
-      <register-failed>The node type registration was unsuccessful. It either already exists or the super type is invalid.</register-failed>
-      <nodeType-name>The node type name is required.</nodeType-name>
-      <fileName-invalid>The file name has some invalid characters.</fileName-invalid>
-      <node-type-exists>The '{0}' node type already exists.</node-type-exists>
-      <node-type-name>The node type name is invalid.</node-type-name>
-      <values-error>Please select only one node type for the default primary type.</values-error>
-      <confirm-delete-child>Are you sure you want to delete this child node?</confirm-delete-child>
-      <confirm-delete-property>Are you sure you want to delete this property?</confirm-delete-property>
+      <register-successfully>Тип узла '{0}' был успешно зарегистрирован.</register-successfully>
+      <supertype-is-madatory>Супер тип обязателен при регистрации нового типа узла. Пожалуйста, выберите хотя бы один супер тип.</supertype-is-madatory>
+      <register-failed>Регистрация регистрации типа узла прошла безуспешно. Он либо уже существует, либо супер тип является недопустимым.</register-failed>
+      <nodeType-name>Требуется название типа узла.</nodeType-name>
+      <fileName-invalid>Имя файла содержит недопустимые знаки.</fileName-invalid>
+      <node-type-exists>Тип узла «{0}» уже существует.</node-type-exists>
+      <node-type-name>Недопустимое название типа узла.</node-type-name>
+      <values-error>Пожалуйста, выберите только один тип узла для исходного типа по умолчанию.</values-error>
+      <confirm-delete-child>Вы уверены, что хотите удалить этот дочерний узел?</confirm-delete-child>
+      <confirm-delete-property>Вы уверены, что вы хотите удалить это свойство?</confirm-delete-property>
     </msg>
   </UINodeTypeForm>
   <UIPropertyDefinitionForm>
     <tab>
       <label>
-        <constraints>Constraints</constraints>
-        <UIFormMultiValueInputSet>Constraints</UIFormMultiValueInputSet>
+        <constraints>Ограничения</constraints>
+        <UIFormMultiValueInputSet>Ограничения</UIFormMultiValueInputSet>
       </label>
     </tab>
     <msg>
-      <property-name>The property definition's name was invalid.</property-name>
-      <not-supported-value-constraints>This required type does not support value constraints.</not-supported-value-constraints>
+      <property-name>Недопустимое имя определения свойства.</property-name>
+      <not-supported-value-constraints>Этот требуемый тип не поддерживает ограничения значений.</not-supported-value-constraints>
     </msg>
   </UIPropertyDefinitionForm>
   <UIChildNodeDefinitionForm>
     <msg>
-      <child-name>The child node name is required.</child-name>
-      <child-invalid>The child node name contains some invalid characters.</child-invalid>
-      <default-node-type-not-found>The default node type is not found.</default-node-type-not-found>
-      <requiredPrimaryType>The required primary type is required.</requiredPrimaryType>
-      <defaultPrimaryType>The default primary type is required.</defaultPrimaryType>
+      <child-name>Требуется название дочернего узла.</child-name>
+      <child-invalid>Название дочернего узла содержит недопустимые знаки.</child-invalid>
+      <default-node-type-not-found>Тип узла по умолчанию не найден.</default-node-type-not-found>
+      <requiredPrimaryType>Необходим требуемый исходный тип.</requiredPrimaryType>
+      <defaultPrimaryType>Требуется исходный тип по умолчанию.</defaultPrimaryType>
     </msg>
   </UIChildNodeDefinitionForm>
   <defaultPrimaryTypePopup>
     <title>
-      <FormdefaultPrimaryTypePopup>Select Default Primary Type</FormdefaultPrimaryTypePopup>
+      <FormdefaultPrimaryTypePopup>Выберите исходный тип по умолчанию</FormdefaultPrimaryTypePopup>
     </title>
   </defaultPrimaryTypePopup>
   <requiredPrimaryTypePopup>
     <title>
-      <FormrequiredPrimaryTypePopup>Select Required Primary Type</FormrequiredPrimaryTypePopup>
+      <FormrequiredPrimaryTypePopup>Выберите требуемый исходный тип</FormrequiredPrimaryTypePopup>
     </title>
   </requiredPrimaryTypePopup>
   <superTypesPopup>
     <title>
-      <FormsuperTypesPopup>Select Super Types</FormsuperTypesPopup>
+      <FormsuperTypesPopup>Выбрать супер типы</FormsuperTypesPopup>
     </title>
   </superTypesPopup>
   <NodeTypePopup>
     <title>
-      <UINodeTypeForm>Add/Edit Node Type Definitions</UINodeTypeForm>
+      <UINodeTypeForm>Добавить/изменить определения типа узла</UINodeTypeForm>
     </title>
   </NodeTypePopup>
   <ViewNodeTypePopup>
     <title>
-      <UINodeTypeForm>View Node Type Information</UINodeTypeForm>
+      <UINodeTypeForm>Показать информацию о типе узла</UINodeTypeForm>
     </title>
   </ViewNodeTypePopup>
   <!--
@@ -625,24 +625,24 @@
   -->
   <UINodeTypeExport>
     <header>
-      <icon>Icon</icon>
-      <label>Node name</label>
+      <icon>Иконка</icon>
+      <label>Имя узла</label>
       <input>Действие</input>
     </header>
     <action>
       <Cancel>#{word.cancel}</Cancel>
-      <Export>Export</Export>
-      <UncheckAll>Uncheck all</UncheckAll>
-      <CheckAll>Check all</CheckAll>
+      <Export>Экспорт</Export>
+      <UncheckAll>Убрать все отметки</UncheckAll>
+      <CheckAll>Отметить все</CheckAll>
     </action>
-    <title>Export Node Types</title>
+    <title>Экспорт типов узлов</title>
     <msg>
-      <item-null>Please select at least one node that you want to export.</item-null>
+      <item-null>Пожалуйста, выберите хотя бы один узел, который вы хотите экспортировать.</item-null>
     </msg>
   </UINodeTypeExport>
   <NodeTypeExportPopup>
     <title>
-      <UINodeTypeExport>Export Node Types</UINodeTypeExport>
+      <UINodeTypeExport>Экспорт типов узлов</UINodeTypeExport>
     </title>
   </NodeTypeExportPopup>
   <!--
@@ -657,19 +657,19 @@
   -->
   <UINodeTypeUpload>
     <label>
-      <upload>File Name</upload>
+      <upload>Имя файла</upload>
     </label>
     <action>
       <Cancel>#{word.cancel}</Cancel>
-      <Upload>Upload</Upload>
+      <Upload>Загрузить</Upload>
     </action>
-    <title>Import Node Type From XML File</title>
+    <title>Импортировать тип узла из XML-файла</title>
     <msg>
-      <filename-error>Browse a node type file to import.</filename-error>
-      <data-file-error>Only .xml or .zip files can be imported.</data-file-error>
-      <data-invalid>The data is invalid. Please check your file type and try again.</data-invalid>
-      <nodetype-exist>The '{0}' node type already exists.</nodetype-exist>
-      <namespace-invalid>The '{0}' namespace is invalid.</namespace-invalid>
+      <filename-error>Просмотр файла типа узла для импорта.</filename-error>
+      <data-file-error>Можно импортировать только файлы .xml или .zip.</data-file-error>
+      <data-invalid>Неверные данные. Пожалуйста, проверьте тип файла и повторите попытку.</data-invalid>
+      <nodetype-exist>Тип узла «{0}» уже существует.</nodetype-exist>
+      <namespace-invalid>Недопустимое пространство имен '{0}'.</namespace-invalid>
     </msg>
   </UINodeTypeUpload>
   <!--
@@ -680,23 +680,23 @@
   <UINodeTypeImport>
     <action>
       <Cancel>#{word.cancel}</Cancel>
-      <Import>Import</Import>
-      <Upload>Re-upload</Upload>
+      <Import>Импорт</Import>
+      <Upload>Повторно загрузить</Upload>
     </action>
     <header>
-      <icon>Icon</icon>
-      <label>Node Name</label>
+      <icon>Иконка</icon>
+      <label>Название узла</label>
       <input>Действие</input>
     </header>
-    <title>Select Import Node Type</title>
+    <title>Выбрать тип узла для импорта</title>
     <msg>
-      <no-nodetype-registered>There are no node types registered.</no-nodetype-registered>
-      <nodetype-registered>Registration successful.</nodetype-registered>
+      <no-nodetype-registered>Нет зарегистрированных типов узлов.</no-nodetype-registered>
+      <nodetype-registered>Регистрация выполнена успешно.</nodetype-registered>
     </msg>
   </UINodeTypeImport>
   <NodeTypeImportPopup>
     <title>
-      <UINodeTypeImportPopup>Import Node Type From XML File</UINodeTypeImportPopup>
+      <UINodeTypeImportPopup>Импортировать тип узла из XML-файла</UINodeTypeImportPopup>
     </title>
   </NodeTypeImportPopup>
   <!--
@@ -711,10 +711,10 @@
       <unstructuredFolder>Unstructured Folder</unstructuredFolder>
     </label>
     <title>
-      <AddPermission>Add Permission</AddPermission>
-      <RemovePermission>Remove Permission</RemovePermission>
-      <AddIcon>Add Icon</AddIcon>
-      <AddPath>Add Path</AddPath>
+      <AddPermission>Добавить разрешение</AddPermission>
+      <RemovePermission>Удалить разрешение</RemovePermission>
+      <AddIcon>Добавить иконку</AddIcon>
+      <AddPath>Добавить путь</AddPath>
     </title>
   </DriveInputSet>
   <!--
@@ -724,20 +724,20 @@
   -->
   <UIActionTypeList>
     <header>
-      <name>Script</name>
-      <label>Name</label>
-<action>Actions</action>
+      <name>Скрипт</name>
+      <label>Имя</label>
+      <action>Действия</action>
     </header>
     <title>
-      <Edit>Edit</Edit>
-      <Delete>Delete</Delete>
+      <Edit>Редактировать</Edit>
+      <Delete>Удалить</Delete>
     </title>
     <action>
-      <AddAction>Add Action Type</AddAction>
+      <AddAction>Добавить тип действия</AddAction>
     </action>
 <msg>
- <confirm-delete>Are you sure you want to delete this action type?</confirm-delete>
-<cannot-delete>You cannot remove this action type because the system is still using it.</cannot-delete>
+ <confirm-delete>Вы уверены, что хотите удалить этот тип действия?</confirm-delete>
+<cannot-delete>Невозможно удалить этот тип действия, так как он еще используется системой.</cannot-delete>
 </msg>
   </UIActionTypeList>
   <!--
@@ -747,31 +747,31 @@
   -->
   <ActionPopup>
     <title>
-      <UIActionTypeForm>Add Action Type</UIActionTypeForm>
+      <UIActionTypeForm>Добавить тип действия</UIActionTypeForm>
     </title>
   </ActionPopup>
   <UIActionTypeForm>
-    <title>Add Action Type</title>
+    <title>Добавить тип действия</title>
     <label>
-      <actionType>Extend Action Type:</actionType>
-      <name>Name:</name>
+      <actionType>Расширить тип действия:</actionType>
+      <name>Имя:</name>
       <isMove>is Action Move:</isMove>
-      <variables>Variables:</variables>
-      <exo_businessProcessAction>Business Processes:</exo_businessProcessAction>
-      <exo_scriptAction>Groovy Scripts:</exo_scriptAction>
-      <exo_ruleAction>Defined Rules:</exo_ruleAction>
-      <script>Script:</script>
+      <variables>Переменные:</variables>
+      <exo_businessProcessAction>Бизнес-процессы:</exo_businessProcessAction>
+      <exo_scriptAction>Скрипты Groovy:</exo_scriptAction>
+      <exo_ruleAction>Определенные правила:</exo_ruleAction>
+      <script>Скрипт:</script>
     </label>
     <action>
       <Save>#{word.save}</Save>
       <Cancel>#{word.cancel}</Cancel>
     </action>
     <msg>
-      <action-type-added>The '{0}' action type was added successfully.</action-type-added>
-      <action-type-create-error>An error occurred while creating the action type.</action-type-create-error>
-      <action-name-invalid>'{0}' is invalid. The name must begin with 'exo:'.</action-name-invalid>
-      <action-exist>This action already exists in the ECM system.</action-exist>
-      <fileName-invalid>The action name contains some invalid characters.</fileName-invalid>
+      <action-type-added>Тип действия '{0}' был успешно добавлен.</action-type-added>
+      <action-type-create-error>Произошла ошибка при создании типа действия.</action-type-create-error>
+      <action-name-invalid>"{0}" является недопустимым. Имя должно начинаться с ' exo:'.</action-name-invalid>
+      <action-exist>Это действие уже существует в системе ECM.</action-exist>
+      <fileName-invalid>Название действия содержит недопустимые знаки.</fileName-invalid>
     </msg>
   </UIActionTypeForm>
   <!--
@@ -781,27 +781,27 @@
   -->
   <UITabPane>
     <title>
-      <UIViewContainer>Views</UIViewContainer>
-      <ECMTemplate>Explorer Templates</ECMTemplate>
-      <UIScriptForm>Scripts</UIScriptForm>
-      <UIDialogTab>Dialog</UIDialogTab>
-      <UIViewTab>View</UIViewTab>
-      <UITemplateEditForm>Template</UITemplateEditForm>
-      <UITemplateForm>Template</UITemplateForm>
-      <UITemplateContainer>Documents</UITemplateContainer>
-      <UIActionsTemplateContainer>Actions</UIActionsTemplateContainer>
-      <UIOthersTemplateContainer>Others</UIOthersTemplateContainer>
+      <UIViewContainer>Отображение данных</UIViewContainer>
+      <ECMTemplate>Шаблоны обозревателя</ECMTemplate>
+      <UIScriptForm>Скрипты</UIScriptForm>
+      <UIDialogTab>Диалоговое окно</UIDialogTab>
+      <UIViewTab>Показать</UIViewTab>
+      <UITemplateEditForm>Шаблон</UITemplateEditForm>
+      <UITemplateForm>Шаблон</UITemplateForm>
+      <UITemplateContainer>Документы</UITemplateContainer>
+      <UIActionsTemplateContainer>Действия</UIActionsTemplateContainer>
+      <UIOthersTemplateContainer>Другое</UIOthersTemplateContainer>
   <UIActionScriptContainer>Действие</UIActionScriptContainer>
-  <UIWidgetScriptContainer>Widgets</UIWidgetScriptContainer>
-<UIInterceptorScriptContainer>Interceptors</UIInterceptorScriptContainer>
+  <UIWidgetScriptContainer>Виджеты</UIWidgetScriptContainer>
+<UIInterceptorScriptContainer>Методы-перехватчики</UIInterceptorScriptContainer>
 
-<nodeTypeDefinition>Node Type</nodeTypeDefinition>
-      <propertyDefinition>Property</propertyDefinition>
-      <childNodeDefinition>Child Node</childNodeDefinition>
-      <SuperTypeTab>Super Types</SuperTypeTab>
-      <DefaultTypeTab>Default Primary</DefaultTypeTab>
-      <RequiredTypeTab>Required Primary</RequiredTypeTab>
-      <Contraints>Constraints</Contraints>
+<nodeTypeDefinition>Тип узла</nodeTypeDefinition>
+      <propertyDefinition>Свойство</propertyDefinition>
+      <childNodeDefinition>Дочерний узел</childNodeDefinition>
+      <SuperTypeTab>Супер типы</SuperTypeTab>
+      <DefaultTypeTab>Первичное значение по умолчанию</DefaultTypeTab>
+      <RequiredTypeTab>Требуемое первичное значение</RequiredTypeTab>
+      <Contraints>Ограничения</Contraints>
     </title>
   </UITabPane>
   <!--
@@ -811,106 +811,106 @@
   -->
   <UIViewList>
    <title>
-     <View>View</View>
-     <EditInfo>Edit</EditInfo>
-     <Delete>Delete</Delete>
+     <View>Показать</View>
+     <EditInfo>Редактировать</EditInfo>
+     <Delete>Удалить</Delete>
    </title>
     <header>
-      <name>Name</name>
-      <permissions>Permissions</permissions>
-      <tabList>Action Tab</tabList>
-      <baseVersion>Base Version</baseVersion>
+      <name>Имя</name>
+      <permissions>Права доступа</permissions>
+      <tabList>Вкладка "Действие"</tabList>
+      <baseVersion>Базовая версия</baseVersion>
       <action>Действие</action>
     </header>
     <action>
-      <AddView>Add View</AddView>
+      <AddView>Добавить вид</AddView>
     </action>
     <msg>
-      <access-denied>Access denied. You do not have permission to use this function.</access-denied>
-      <template-in-use>Cannot delete {0}. It is currently in use.</template-in-use>
-      <confirm-delete>Are you sure you want to delete this view?</confirm-delete>
+      <access-denied>Доступ запрещен. Отсутствует разрешение на использование этой функции.</access-denied>
+      <template-in-use>Не удается удалить {0}. Он используется в данный момент.</template-in-use>
+      <confirm-delete>Вы действительно хотите удалить этот вид?</confirm-delete>
     </msg>
   </UIViewList>
   <ViewPopup>
     <title>
-      <UIViewFormTabPane>View</UIViewFormTabPane>
+      <UIViewFormTabPane>Показать</UIViewFormTabPane>
     </title>
   </ViewPopup>
   <AddPopup>
     <title>
-      <UIViewFormTabPane>Add View</UIViewFormTabPane>
-      <AddPopup>Add Template</AddPopup>
+      <UIViewFormTabPane>Добавить вид</UIViewFormTabPane>
+      <AddPopup>Добавить шаблон</AddPopup>
     </title>
   </AddPopup>
   <EditPopup>
     <title>
-      <UIViewFormTabPane>Edit View</UIViewFormTabPane>
+      <UIViewFormTabPane>Изменить вид</UIViewFormTabPane>
     </title>
   </EditPopup>
 
 <UITabList>
                   <title>
-                    <Edit>Edit</Edit>
-                    <Delete>Delete</Delete>
+                    <Edit>Редактировать</Edit>
+                    <Delete>Удалить</Delete>
                   </title>       
  <header>
-  <tabName>Tab</tabName>
-  <localizeButtons>Description</localizeButtons>
-<action>Actions</action>
+  <tabName>Вкладка</tabName>
+  <localizeButtons>Описание</localizeButtons>
+<action>Действия</action>
 </header>
 <action>
- <AddTab>Add</AddTab>
+ <AddTab>Добавить</AddTab>
 </action>
 <msg>
- <confirm-delete>Are you sure you want to delete this tab?</confirm-delete>
+ <confirm-delete>Вы действительно хотите удалить эту вкладку?</confirm-delete>
 </msg>
 <grid>
  <msg>
-  <empty>There is no tab on this view</empty>
+  <empty>В этом режиме отображения нет вкладки</empty>
  </msg>
 </grid>
 </UITabList>
 
 <UIViewPermissionList>
- <title>Select Owner with permissions on this view:</title>
+ <title>Выберите владельца с разрешениями для данного представления:</title>
 <label>
- <permission>{0} in {1}</permission>
+ <permission>{0} в {1}</permission>
 </label>
 <msg>
- <confirm-delete>Are you sure you want to delete this permission?</confirm-delete>
-  <permission-cannot-empty>View permission is required and cannot be empty.</permission-cannot-empty>
+ <confirm-delete>Вы действительно хотите удалить это разрешение?</confirm-delete>
+  <permission-cannot-empty>Разрешение на просмотр является обязательным и не может быть пустым.</permission-cannot-empty>
 </msg>
 </UIViewPermissionList>
 
 <UIViewPermissionList>
                          <title>
-                           <Delete>Delete</Delete>
+                           <Delete>Удалить</Delete>
                          </title>
  <header>
-<friendlyPermission>Permissions</friendlyPermission>
+<friendlyPermission>Разрешения</friendlyPermission>
      <action>Действие</action>
  </header>
 <action>
  <title>
-  <Delete>Delete</Delete>
+  <Delete>Удалить</Delete>
  </title>
 </action>
 <grid>
  <msg>
-  <empty>There is no permission on this view</empty>
+  <empty>Нет разрешения на этот вид</empty>
  </msg>
 </grid>
 </UIViewPermissionList>
 
 <UIViewPermissionForm>
 <action>
- <Add>Add</Add>
+ <Add>Добавить</Add>
 </action>
 <label>
- <userOrGroup>User or Group</userOrGroup>
+ <userOrGroup>Пользователь или группа</userOrGroup>
 </label>
 <msg>
- <permission-exist>The permission '{0}' already exists in the list.</permission-exist>
+ <permission-exist>Разрешение «{0}» уже существует в списке.</permission-exist>
 </msg>
 </UIViewPermissionForm>
 
@@ -921,73 +921,73 @@
   -->
   <UIViewForm>
     <title>
-      <AddPermission>Add Permission</AddPermission>
-      <RemovePermission>Remove Permission</RemovePermission>
+      <AddPermission>Добавить разрешение</AddPermission>
+      <RemovePermission>Удалить разрешение</RemovePermission>
     </title>
     <msg>
-      <view-name-invalid>The view name is required.</view-name-invalid>
-      <fileName-invalid>The view name contains some invalid characters.</fileName-invalid>
-      <permission-not-empty>Please select a permission for the view.</permission-not-empty>      
-      <mustbe-add-tab>Please add a tab.</mustbe-add-tab>
-<mustbe-add-permission>Please select permission for this view</mustbe-add-permission>
-      <view-exist>The view name already exists.</view-exist>
+      <view-name-invalid>Требуется имя вида.</view-name-invalid>
+      <fileName-invalid>Имя вида содержит недопустимые знаки.</fileName-invalid>
+      <permission-not-empty>Выберите разрешение для просмотра.</permission-not-empty>      
+      <mustbe-add-tab>Пожалуйста, добавьте вкладку.</mustbe-add-tab>
+<mustbe-add-permission>Выберите разрешение для этого просмотра</mustbe-add-permission>
+      <view-exist>Такое имя вида уже существует.</view-exist>
     </msg>
     <label>
-      <viewName>Name</viewName>
-      <template>Template</template>
-<version>Restore Version</version>
-      <enableVersion>Enable Version</enableVersion>
-      <hideExplorerPanel>Hide explorer panel in side bar</hideExplorerPanel>
+      <viewName>Имя</viewName>
+      <template>Шаблон</template>
+<version>Восстановить версию</version>
+      <enableVersion>Включить версию</enableVersion>
+      <hideExplorerPanel>Скрыть панель обозревателя в боковой панели</hideExplorerPanel>
     </label>
   </UIViewForm>
   <UITabForm>
     <msg>
-      <button-select-error>Please select at least one function from the list.</button-select-error>
-      <tab-name-error>The tab name is required.</tab-name-error>
-      <fileName-invalid>The tab name contains some invalid characters.</fileName-invalid>
+      <button-select-error>Пожалуйста, выберите хотя бы одну функцию из списка.</button-select-error>
+      <tab-name-error>Требуется название вкладки.</tab-name-error>
+      <fileName-invalid>Новое имя содержит недопустимые знаки.</fileName-invalid>
     </msg>
     <label>
-      <version>Restore Version</version>
-      <viewName>Name</viewName>
-      <tabName>Tab Name</tabName>
-      <permission>Permission</permission>
-      <tabs>Tabs</tabs>
-      <template>Templates</template>
-      <enableVersion>Enable Version</enableVersion>
-      <addFolder>Add Folder</addFolder>
-      <addDocument>Add Document</addDocument>
-      <editDocument>Edit Document</editDocument>
-      <upload>Upload</upload>
-      <paste>Paste</paste>
-      <search>Search</search>
-      <viewReferences>View References</viewReferences>
-      <viewNodeType>View Node Type</viewNodeType>
-      <viewPermissions>View Permissions</viewPermissions>
-      <viewProperties>View Properties</viewProperties>
-      <manageVersions>Manage Versions</manageVersions>
-      <manageAuditing>Manage Auditing</manageAuditing>
-      <managePublications>Manage Publication</managePublications>
-      <manageCategories>Manage Categories</manageCategories>
-      <manageRelations>Manage Relations</manageRelations>
-      <manageActions>Manage Actions</manageActions>
-      <exportNode>Export Node</exportNode>
-      <importNode>Import Node</importNode>
-      <viewRelations>View Relations</viewRelations>
-      <showJCRStructure>Show JCR Structure</showJCRStructure>
-      <watchDocument>Watch Document</watchDocument>
-      <taggingDocument>Tag Document</taggingDocument>
-      <viewMetadatas>View Metadata</viewMetadatas>
-      <overloadThumbnail>Overload Thumbnail</overloadThumbnail>
-      <manageHidden>Hide/Show Content</manageHidden>
-      <comment>Comment</comment>
-      <vote>Vote</vote>  
-      <addCategory>Add Category</addCategory>
-      <addLocalizationLink>Add Translation</addLocalizationLink>
-      <publicationRequestApproval>Request Approval</publicationRequestApproval>
-      <publicationApproveContent>Approve Content</publicationApproveContent>
-      <publicationPublish>Publish</publicationPublish>
-<contentNavigation>Content Navigation</contentNavigation>
-<addSymLink>Add Symlink</addSymLink>
+      <version>Восстановить версию</version>
+      <viewName>Имя</viewName>
+      <tabName>Название вкладки</tabName>
+      <permission>Разрешение</permission>
+      <tabs>Вкладки</tabs>
+      <template>Шаблоны</template>
+      <enableVersion>Включить версию</enableVersion>
+      <addFolder>Добавить папку</addFolder>
+      <addDocument>Добавить документ</addDocument>
+      <editDocument>Редактировать документ</editDocument>
+      <upload>Загрузить</upload>
+      <paste>Вставить</paste>
+      <search>Поиск</search>
+      <viewReferences>Просмотр ссылок</viewReferences>
+      <viewNodeType>Просмотр типа узла</viewNodeType>
+      <viewPermissions>Просмотр разрешений</viewPermissions>
+      <viewProperties>Просмотреть свойства</viewProperties>
+      <manageVersions>Управление версиями</manageVersions>
+      <manageAuditing>Управление аудитом</manageAuditing>
+      <managePublications>Управление публикацией</managePublications>
+      <manageCategories>Управление категориями</manageCategories>
+      <manageRelations>Управление отношениями</manageRelations>
+      <manageActions>Управление действиями</manageActions>
+      <exportNode>Экспорт узла</exportNode>
+      <importNode>Импорт узла</importNode>
+      <viewRelations>Просмотреть отношения</viewRelations>
+      <showJCRStructure>Показать структуру JCR</showJCRStructure>
+      <watchDocument>Отслеживать документ</watchDocument>
+      <taggingDocument>Отметить документ</taggingDocument>
+      <viewMetadatas>Просмотр метаданных</viewMetadatas>
+      <overloadThumbnail>Совместить эскиз</overloadThumbnail>
+      <manageHidden>Скрыть/Показать контент</manageHidden>
+      <comment>Комментировать</comment>
+      <vote>Голосовать</vote>  
+      <addCategory>Добавить категорию</addCategory>
+      <addLocalizationLink>Добавить перевод</addLocalizationLink>
+      <publicationRequestApproval>Утверждение запросов</publicationRequestApproval>
+      <publicationApproveContent>Одобрить контент</publicationApproveContent>
+      <publicationPublish>Опубликовать</publicationPublish>
+<contentNavigation>Навигация по содержимому</contentNavigation>
+<addSymLink>Добавить символьную ссылку</addSymLink>
     </label>
     <action>
       <Save>#{word.save}</Save>      
@@ -1003,8 +1003,8 @@
     <tab>
       <label>
         <UITabContainer>Действие</UITabContainer>
-        <UIViewForm>View</UIViewForm>
-        <UIViewPermissionContainer>Permission</UIViewPermissionContainer>    
+        <UIViewForm>Показать</UIViewForm>
+        <UIViewPermissionContainer>Разрешение</UIViewPermissionContainer>    
       </label>
     </tab>
     <action>
@@ -1012,26 +1012,26 @@
       <Reset>Очистить</Reset>
       <Cancel>#{word.cancel}</Cancel>
       <Close>#{word.close}</Close>
-      <Restore>Restore</Restore>
+      <Restore>Восстановить</Restore>
     </action>
   </UIViewFormTabPane>
   <PopupViewPermission>
     <title>
-      <UIPermissionSelector>Select Permission</UIPermissionSelector>
+      <UIPermissionSelector>Выбрать разрешение</UIPermissionSelector>
     </title>
   </PopupViewPermission>
 
 <TabForm_Popup>
  <title>
-  <UITabForm>Add/Edit Tab</UITabForm>
+  <UITabForm>Добавить/Редактировать вкладку</UITabForm>
  </title>
 </TabForm_Popup>
 
 <tab_permission>
  <title>
-  <SelectUser>Select User</SelectUser>
-<SelectMember>Select Member</SelectMember>
-<AddAny>Any</AddAny>
+  <SelectUser>Выбрать пользователя</SelectUser>
+<SelectMember>Выбрать члена</SelectMember>
+<AddAny>Любой</AddAny>
  </title>
 </tab_permission>
   <!--
@@ -1041,24 +1041,24 @@
   -->
   <UIECMTemplateList>
     <title>
-      <View>View</View>
-      <EditInfo>Edit</EditInfo>
-      <Delete>Delete</Delete>
+      <View>Показать</View>
+      <EditInfo>Изменить</EditInfo>
+      <Delete>Удалить</Delete>
     </title>
     <header>
-      <name>Name</name>
-      <path>Value</path>
-      <baseVersion>Base Version</baseVersion>
+      <name>Имя</name>
+      <path>Значение</path>
+      <baseVersion>Базовая версия</baseVersion>
       <action>Действие</action>
     </header>
     <action>
-      <Add>Add</Add>
+      <Add>Добавить</Add>
     </action>
     <msg>
-      <template-in-use>Cannot delete {0}. It is currently in use.</template-in-use>
-      <confirm-delete>Are you sure you want to delete this template?</confirm-delete>
-      <access-denied>Access denied. You do not have permission to use this function.</access-denied>
-      <delete-permission-denied>You do not have permission to delete '{0}' template.</delete-permission-denied>
+      <template-in-use>Не удается удалить {0}. Он используется в данный момент.</template-in-use>
+      <confirm-delete>Вы уверены, что хотите удалить этот шаблон?</confirm-delete>
+      <access-denied>Доступ запрещен. Отсутствует разрешение на использование этой функции.</access-denied>
+      <delete-permission-denied>Нет разрешения на удаление шаблона '{0}'.</delete-permission-denied>
     </msg>
   </UIECMTemplateList>
   <!--
@@ -1070,32 +1070,32 @@
     <action>
       <Save>#{word.save}</Save>
       <Cancel>#{word.cancel}</Cancel>
-      <Reset>Очистить</Reset>
-      <Restore>Restore</Restore>
+      <Reset>Сбросить</Reset>
+      <Restore>Восстановить</Restore>
       <Refresh>#{word.refresh}</Refresh>
     </action>
     <msg>
-      <version-restored>Version {0} was restored successfully.</version-restored>
-      <role-require>Please select a permission.</role-require>
-      <template-name-exist>The template name '{0}' already exists.</template-name-exist>
-      <add-permission-denied>You do not have permission to add a new template.</add-permission-denied>
-      <edit-permission-denied>You do not have permission to modify '{0}' template.</edit-permission-denied>
+      <version-restored>Версия {0} была успешно восстановлена.</version-restored>
+      <role-require>Пожалуйста, выберите разрешение.</role-require>
+      <template-name-exist>Имя шаблона «{0}» уже существует.</template-name-exist>
+      <add-permission-denied>У вас нет разрешения на добавление нового шаблона.</add-permission-denied>
+      <edit-permission-denied>У вас нет разрешения на изменение шаблона '{0}'.</edit-permission-denied>
     </msg>
     <tab>
       <label>
-        <template>Template</template>
-        <defaultDialog>Dialog</defaultDialog>
-        <defaultView>View</defaultView>
+        <template>Шаблон</template>
+        <defaultDialog>Диалоговое окно</defaultDialog>
+        <defaultView>Показать</defaultView>
       </label>
     </tab>
     <label>
-      <name>Name:</name>
-      <label>Label:</label>
-      <isDocumentTemplate>is Document Template:</isDocumentTemplate>
-      <dialog>Dialog Content</dialog>
-      <view>View Content</view>
-      <permission>Permission:</permission>
-      <selectPemistion>Permission</selectPemistion>
+      <name>Имя:</name>
+      <label>Метка:</label>
+      <isDocumentTemplate>это шаблон документа:</isDocumentTemplate>
+      <dialog>Содержимое диалогового окна</dialog>
+      <view>Просмотреть контент</view>
+      <permission>Разрешение:</permission>
+      <selectPemistion>Разрешение</selectPemistion>
     </label>
   </UITemplateForm>
   <!--
@@ -1105,27 +1105,27 @@
   -->
   <ecmTempForm>
     <label>
-      <version>Select Version:</version>
-      <content>Content:</content>
-      <name>Name:</name>
-      <homeTemplate>Template Type:</homeTemplate>
-      <enableVersion>Enabled Version:</enableVersion>
+      <version>Выбрать версию:</version>
+      <content>Содержимое:</content>
+      <name>Имя:</name>
+      <homeTemplate>Тип шаблона:</homeTemplate>
+      <enableVersion>Включена версия:</enableVersion>
     </label>
   </ecmTempForm>
   <ecmTempFormPopup>
     <title>
-      <ecmTempForm>Add/Edit View Template</ecmTempForm>
+      <ecmTempForm>Добавить/Редактировать шаблон представления</ecmTempForm>
     </title>
   </ecmTempFormPopup>
   <ecmTempFormAdd>
     <title>
-      <ecmTempForm>Add Explorer Template</ecmTempForm>
-      <ecmTempFormAdd>Add Explorer Template</ecmTempFormAdd>
+      <ecmTempForm>Добавить шаблон Explorer</ecmTempForm>
+      <ecmTempFormAdd>Добавить шаблон Explorer</ecmTempFormAdd>
     </title>
   </ecmTempFormAdd>
   <ecmTempFormEdit>
     <title>
-      <ecmTempForm>Edit Explorer Template</ecmTempForm>
+      <ecmTempForm>Редактировать шаблон Explorer</ecmTempForm>
     </title>
   </ecmTempFormEdit>
 
@@ -1141,7 +1141,7 @@
   -->
   <UIECMFilterForm>
     <label>
-      <selectScript>Select Category</selectScript>
+      <selectScript>Выбрать категорию</selectScript>
     </label>
   </UIECMFilterForm>
   <!--
@@ -1153,20 +1153,20 @@
     <action>
       <Edit>#{word.edit}</Edit>
       <Delete>#{word.delete}</Delete>
-      <AddNew>Add Script</AddNew>
+      <AddNew>Добавить скрипт</AddNew>
     </action>
     <msg>
-      <confirm-delete>Are you sure you want to delete this script?</confirm-delete>
+      <confirm-delete>Вы действительно хотите удалить этот скрипт?</confirm-delete>
     </msg>
     <header>
-      <scriptName>Name</scriptName>
-      <path>Script</path>
-      <baseVersion>Base Version</baseVersion>
-      <action>Actions</action>
+      <scriptName>Имя</scriptName>
+      <path>Скрипт</path>
+      <baseVersion>Базовая версия</baseVersion>
+      <action>Действия</action>
     </header>
     <tooltip>
-      <Edit>Edit</Edit>
-      <Delete>Delete</Delete>
+      <Edit>Редактировать</Edit>
+      <Delete>Удалить</Delete>
     </tooltip>
   </UIScriptList>
   <!--
@@ -1186,13 +1186,13 @@
       <Restore>#{word.restore}</Restore>
       <Cancel>#{word.cancel}</Cancel>
       <Refresh>#{word.refresh}</Refresh>
-      <Change>Change</Change>
+      <Change>Изменить</Change>
     </action>
     <msg>
-      <version-restored>Version {0} was restored successfully.</version-restored>
-      <name-null>Please enter the script name.</name-null>
-      <name-exist>The script name '{0}' already exists.</name-exist>
-      <fileName-invalid>The script name has some invalid characters.</fileName-invalid>
+      <version-restored>Версия {0} была успешно восстановлена.</version-restored>
+      <name-null>Введите название скрипта.</name-null>
+      <name-exist>Название скрипта '{0}' уже существует.</name-exist>
+      <fileName-invalid>Название скрипта содержит недопустимые символы.</fileName-invalid>
     </msg>
   </UIScriptForm>
   <!--
@@ -1202,16 +1202,16 @@
   -->
   <ScriptContainerPopup>
     <title>
-      <UIScriptForm>Add/Edit Script</UIScriptForm>
+      <UIScriptForm>Добавить/Редактировать скрипт</UIScriptForm>
     </title>
   </ScriptContainerPopup>
   <UIScriptForm>
     <label>
-      <selectVersion>Versions</selectVersion>
-      <scriptContent>Content</scriptContent>
-      <scriptLabel>Name</scriptLabel>
-      <scriptName>Script</scriptName>
-      <enableVersion>Enable Versioning</enableVersion>
+      <selectVersion>Версии</selectVersion>
+      <scriptContent>Содержимое</scriptContent>
+      <scriptLabel>Имя</scriptLabel>
+      <scriptName>Скрипт</scriptName>
+      <enableVersion>Включить управление версиями</enableVersion>
     </label>
   </UIScriptForm>
   <!--
@@ -1222,11 +1222,11 @@
  
   <ecmScriptForm>
     <label>
-      <selectVersion>Versions</selectVersion>
-      <scriptContent>Content</scriptContent>
-      <scriptLabel>Name</scriptLabel>
-      <scriptName>Script</scriptName>
-      <enableVersion>Enable Versioning</enableVersion>
+      <selectVersion>Версии</selectVersion>
+      <scriptContent>Содержимое</scriptContent>
+      <scriptLabel>Имя</scriptLabel>
+      <scriptName>Скрипт</scriptName>
+      <enableVersion>Включить управление версиями</enableVersion>
     </label>
   </ecmScriptForm>
   <!--
@@ -1239,34 +1239,34 @@
       <Save>#{word.save}</Save>
       <Cancel>#{word.cancel}</Cancel>
     </action>
-    <title>Add Category</title>
+    <title>Добавить категорию</title>
     <label>
-      <taxonomyName>Category Name</taxonomyName>
-      <parentPath>Parent</parentPath>
+      <taxonomyName>Название категории</taxonomyName>
+      <parentPath>Родительский объект</parentPath>
     </label>
     <msg>
-      <exist>The "{0}" category already exists.</exist>
-      <name-null>Please specify the category name.</name-null>
-      <name-invalid>The category name has some invalid characters.</name-invalid>
-      <name-too-long>The category name must have less than 30 characters.</name-too-long>
+      <exist>Категория «{0}» уже существует.</exist>
+      <name-null>Пожалуйста, укажите название категории.</name-null>
+      <name-invalid>Название категории содержит недопустимые символы.</name-invalid>
+      <name-too-long>Название категории должно быть менее 30 символов.</name-too-long>
     </msg>
   </UITaxonomyForm>
     
   <EditTaxonomyTreePopup>
     <title>
-      <UITaxonomyTreeContainer>Edit Category Tree</UITaxonomyTreeContainer>
+      <UITaxonomyTreeContainer>Редактировать дерево категорий</UITaxonomyTreeContainer>
     </title>
   </EditTaxonomyTreePopup>
 
   <AddTaxonomyTreePopup>
     <title>
-      <UITaxonomyTreeContainer>Add Category Tree</UITaxonomyTreeContainer>
+      <UITaxonomyTreeContainer>Добавить дерево категорий</UITaxonomyTreeContainer>
     </title>
   </AddTaxonomyTreePopup>
   
   <TaxonomyPopupCreateChild>
     <title>
-      <UITaxonomyTreeCreateChildForm>Edit Category Tree</UITaxonomyTreeCreateChildForm>
+      <UITaxonomyTreeCreateChildForm>Редактировать дерево категорий</UITaxonomyTreeCreateChildForm>
     </title>
   </TaxonomyPopupCreateChild>
 
@@ -1276,47 +1276,47 @@
       <Cancel>#{word.cancel}</Cancel>
     </action>
     <label>
-      <parentPath>Parent:</parentPath>
-      <taxonomyName>Category Name:</taxonomyName>
+      <parentPath>Родительский объект:</parentPath>
+      <taxonomyName>Название категории:</taxonomyName>
     </label>
     <msg>
-      <name-null>The category name is empty.</name-null>
-      <name-invalid>The category name is invalid.</name-invalid>
-      <name-too-long>The category name must not have more than {0} characters.</name-too-long>
-      <exist>The category name already exists.</exist>
+      <name-null>Нет названия дерева категорий.</name-null>
+      <name-invalid>Недопустимое название категории.</name-invalid>
+      <name-too-long>Название категории должно состоять из не более чем {0} знаков.</name-too-long>
+      <exist>Название категории уже существует.</exist>
     </msg>
 </UITaxonomyTreeCreateChildForm>
 
   <PopupComponent>
     <title>
-      <UIOneNodePathSelector>Select Path</UIOneNodePathSelector>
+      <UIOneNodePathSelector>Выбрать путь</UIOneNodePathSelector>
     </title>
   </PopupComponent>
   
   <TaxoPopupUserSelector>
   <title>
-      <TaxoTreeSelectUserOrGroup>Select User</TaxoTreeSelectUserOrGroup>
-      <UIPermissionTreeSelectUser>Select User</UIPermissionTreeSelectUser>
+      <TaxoTreeSelectUserOrGroup>Выбрать пользователя</TaxoTreeSelectUserOrGroup>
+      <UIPermissionTreeSelectUser>Выбрать пользователя</UIPermissionTreeSelectUser>
     </title>
   </TaxoPopupUserSelector>
 
   <TaxoTreeSelectUserOrGroupPopup>
   <title>
-      <TaxoTreeSelectUserOrGroup>Select Membership</TaxoTreeSelectUserOrGroup>
+      <TaxoTreeSelectUserOrGroup>Выбрать членство</TaxoTreeSelectUserOrGroup>
     </title>
   </TaxoTreeSelectUserOrGroupPopup>
   
   <TaxoTreeAnyPermission>
     <label>
-      <any>Any Permission</any>
+      <any>Любое разрешение</any>
       <anyPermission>TaxoTreeAnyPermission</anyPermission>
     </label>
   </TaxoTreeAnyPermission>
   
   <TaxoTreeSelectUserOrGroup>
     <label>
-      <selectGroup>Select Group</selectGroup>
-      <selectMembership>Select Membership</selectMembership>
+      <selectGroup>Выбрать группу</selectGroup>
+      <selectMembership>Выбрать членство</selectMembership>
     </label>
   </TaxoTreeSelectUserOrGroup>
   
@@ -1327,23 +1327,23 @@
   -->
   <UITaxonomyTreeList>
     <header>
-      <name>Category Tree</name>
-      <workspace>Workspace</workspace>
-      <homePath>Path</homePath>
+      <name>Дерево категорий</name>
+      <workspace>Рабочая область</workspace>
+      <homePath>Путь</homePath>
       <action>Действие</action>
     </header>
     <action>
-      <AddTaxonomyTree>Add Category Tree</AddTaxonomyTree>
+      <AddTaxonomyTree>Добавить дерево категорий</AddTaxonomyTree>
     </action>
     <tooltip>
-      <EditTaxonomyTree>Edit Category Tree</EditTaxonomyTree>
-      <Delete>Delete Category Tree</Delete>
+      <EditTaxonomyTree>Редактировать дерево категорий</EditTaxonomyTree>
+      <Delete>Удалить дерево категорий</Delete>
     </tooltip>
-    <title>Browse Category Tree</title>
+    <title>Просмотр дерева категорий</title>
     <msg>
-      <no-list>No category trees have been created.</no-list>
-      <confirm-delete>Are you sure you want to delete the category tree?</confirm-delete>
-      <is-in-trash>This category tree has been moved to the Trash.</is-in-trash>
+      <no-list>Ни одно дерево категорий не было создано.</no-list>
+      <confirm-delete>Вы действительно хотите удалить это дерево категорий?</confirm-delete>
+      <is-in-trash>Это дерево категорий было перемещено в Корзину.</is-in-trash>
     </msg>
   </UITaxonomyTreeList>
   
@@ -1354,97 +1354,97 @@
   -->
   <UITaxonomyTreeForm>
     <label>
-      <name>Name</name>
-      <workspace>Workspace</workspace>
-      <homePath>Path</homePath>
-      <permissions>Permissions</permissions>
+      <name>Название</name>
+      <workspace>Рабочая область</workspace>
+      <homePath>Путь</homePath>
+      <permissions>Разрешения</permissions>
     </label>
     <msg>
-      <homapath-emty>Input Path</homapath-emty>
+      <homapath-emty>Введите путь</homapath-emty>
     </msg>
   </UITaxonomyTreeForm>
   
   <UIPermissionTreeForm>
     <label>
-      <UIPopupWindow>Select</UIPopupWindow>
+      <UIPopupWindow>Выбрать</UIPopupWindow>
       <permission>UIPermissionTreeForm</permission>
-      <userOrGroup>User Or Group</userOrGroup>
-      <read>Read Right</read>
-      <add_node>Add Node Right</add_node>
-      <set_property>Set Property Right</set_property>
-      <remove>Remove Right</remove>
+      <userOrGroup>Пользователь или группа</userOrGroup>
+      <read>Право на чтение</read>
+      <add_node>Право на добавление узла</add_node>
+      <set_property>Установить право собственности</set_property>
+      <remove>Удалить право</remove>
     </label>
-    <title>Add a permission to that node</title>
+    <title>Добавить разрешение для этого узла</title>
     <action>
       <Close>#{word.close}</Close>
-      <Save>Save</Save>
-      <Reset>Очистить</Reset>
+      <Save>Сохранить</Save>
+      <Reset>Сброс</Reset>
     </action>
     <msg>
-      <checkbox-require>Please select at least one permission.</checkbox-require>
-      <userOrGroup-required>Please select a user or group before saving the permission.</userOrGroup-required>
-      <not-change-permission>You do not have the right to add a permission.</not-change-permission>
-      <access-denied>Access denied. You cannot remove this permission.</access-denied>
+      <checkbox-require>Пожалуйста, выберите хотя бы одно разрешение.</checkbox-require>
+      <userOrGroup-required>Перед сохранением разрешения выберите пользователя или группу.</userOrGroup-required>
+      <not-change-permission>У вас недостаточно прав для добавления разрешения.</not-change-permission>
+      <access-denied>Доступ запрещен. Вы не можете удалить это разрешение.</access-denied>
     </msg>
   </UIPermissionTreeForm>
   
   <PopupTaxonomyJCRBrowser>
   <title>
-      <UIOneNodePathSelector>Select Home Path</UIOneNodePathSelector>
+      <UIOneNodePathSelector>Выбрать путь в домашний директорий</UIOneNodePathSelector>
     </title>
   </PopupTaxonomyJCRBrowser>
   
   <PopupTaxonomyTreePermission>
     <title>
-      <UIPermissionSelector>Select Permission</UIPermissionSelector>
+      <UIPermissionSelector>Выбрать разрешение</UIPermissionSelector>
     </title>
    </PopupTaxonomyTreePermission>
    
    <PopupDrivePermission>
     <title>
-      <AddDrivePermissionSelector>Add Permission</AddDrivePermissionSelector>
-      <UIPermissionSelector>Select Permission</UIPermissionSelector>
+      <AddDrivePermissionSelector>Добавить разрешение</AddDrivePermissionSelector>
+      <UIPermissionSelector>Выбрать разрешение</UIPermissionSelector>
     </title>
   </PopupDrivePermission>
   
   <UIPopupWindow>
     <title>
-      <UIPermissionManager>Permission Management</UIPermissionManager>
+      <UIPermissionManager>Управление разрешениями</UIPermissionManager>
     </title>
    </UIPopupWindow>
 
   <PopupUserSelector>
     <title>
-      <UIUserContainer>Permission Management</UIUserContainer>
+      <UIUserContainer>Управление разрешениями</UIUserContainer>
     </title>
    </PopupUserSelector>
    
   <UIPermissionInfo>
     <action>
       <title>
-        <Edit>Edit</Edit>
-        <Delete>Remove Permission</Delete>
+        <Edit>Изменить</Edit>
+        <Delete>Удалить разрешение</Delete>
       </title>
     </action>
     <header>
-      <usersOrGroups>User or Group</usersOrGroups>
-      <read>Read</read>
-      <addNode>Modify Node</addNode>
-      <remove>Remove</remove>
+      <usersOrGroups>Пользователь или группа</usersOrGroups>
+      <read>Читать</read>
+      <addNode>Изменить узел</addNode>
+      <remove>Удалить</remove>
       <action>Действие</action>
     </header>
     <msg>
-      <confirm-delete-permission>Are you sure you want to remove this permission?</confirm-delete-permission>
-      <no-permission-tochange>You do not have the right to remove this permission.</no-permission-tochange>
-      <no-permission-remove>You cannot remove the owner or the system user.</no-permission-remove>
-      <access-denied>Access denied. You cannot remove this permission.</access-denied>
+      <confirm-delete-permission>Вы уверены, что хотите удалить это разрешение?</confirm-delete-permission>
+      <no-permission-tochange>У вас недостаточно прав для удаления этого разрешения.</no-permission-tochange>
+      <no-permission-remove>Нельзя удалить владельца или пользователя системы.</no-permission-remove>
+      <access-denied>Доступ запрещен. Нельзя удалить это разрешение.</access-denied>
     </msg>
   </UIPermissionInfo>
   <permission>
     <title>
-      <SelectUser>Select User</SelectUser>
-      <SelectMember>Select Membership</SelectMember>
-      <AddAny>Everyone</AddAny>
+      <SelectUser>Выбрать пользователя</SelectUser>
+      <SelectMember>Выбрать членство</SelectMember>
+      <AddAny>Все</AddAny>
     </title>
   </permission>
   <!--
@@ -1454,52 +1454,52 @@
   -->
   <SelectUserOrGroup>
     <title>
-      <UIGroupSelector>Select User</UIGroupSelector>
-      <UIPermissionSelector>Select Member</UIPermissionSelector>
-      <UIGroupMemberSelector>Select Membership</UIGroupMemberSelector>
+      <UIGroupSelector>Выбрать пользователя</UIGroupSelector>
+      <UIPermissionSelector>Выбрать члена</UIPermissionSelector>
+      <UIGroupMemberSelector>Выбрать членство</UIGroupMemberSelector>
     </title>
   </SelectUserOrGroup>
   <UIGroupSelector>
     <label>
-      <selectGroup>Select Group</selectGroup>
-      <selectUser>Select User</selectUser>
+      <selectGroup>Выбрать группу</selectGroup>
+      <selectUser>Выбрать пользователя</selectUser>
     </label>
     <msg>
-      <not-change-owner>'{0}' is the owner of this node and has full control permission.</not-change-owner>
+      <not-change-owner>'{0}' является владельцем этого узла и имеет разрешение на полное управление.</not-change-owner>
     </msg>
   </UIGroupSelector>
   <UIPermissionForm>
     <label>
-      <UIPopupWindow>Select</UIPopupWindow>
+      <UIPopupWindow>Выбрать</UIPopupWindow>
       <permission>UIPermissionForm</permission>
-      <userOrGroup>User or Group</userOrGroup>
-      <read>Read</read>
-      <add_node>Modify</add_node>
-      <remove>Remove</remove>
+      <userOrGroup>Пользователь или группа</userOrGroup>
+      <read>Читать</read>
+      <add_node>Изменить</add_node>
+      <remove>Удалить</remove>
     </label>
-    <title>Add permission to that node</title>
+    <title>Добавить разрешение для этого узла</title>
     <action>
       <Close>#{word.close}</Close>
       <Save>#{word.save}</Save>
       <Reset>Очистить</Reset>
     </action>
     <msg>
-      <checkbox-require>Please select at least one permission.</checkbox-require>
-      <userOrGroup-required>Please select a user or group before saving the permission.</userOrGroup-required>
-      <not-change-permission>You do not have the right to add a permission.</not-change-permission>
-      <access-denied>Access denied. You cannot remove this permission.</access-denied>
+      <checkbox-require>Пожалуйста, выберите хотя бы одно разрешение.</checkbox-require>
+      <userOrGroup-required>Перед сохранением разрешения выберите пользователя или группу.</userOrGroup-required>
+      <not-change-permission>У вас недостаточно прав для добавления разрешения.</not-change-permission>
+      <access-denied>Доступ запрещен. Нельзя удалить это разрешение.</access-denied>
     </msg>
   </UIPermissionForm>
   
   <TaxonomyPopup>
     <title>
-      <UITaxonomyForm>Add Category</UITaxonomyForm>
+      <UITaxonomyForm>Добавить категорию</UITaxonomyForm>
     </title>
   </TaxonomyPopup>
   
   <UITaxonomyManager>
     <title>
-      <permission>Permission Management</permission>
+      <permission>Управление разрешениями</permission>
     </title>
   </UITaxonomyManager>
   <!--
@@ -1509,55 +1509,55 @@
   -->
   <UITemplateList>
     <header>
-      <name>Type</name>
+      <name>Тип</name>
       <action>Действие</action>
-      <label>Template</label>
-      <icon>Icon</icon>
+      <label>Шаблон</label>
+      <icon>Иконка</icon>
     </header>
     <action>
-      <AddNew>Add Template</AddNew>
+      <AddNew>Добавить шаблон</AddNew>
     </action>
     <msg>
-      <confirm-delete>Do you really want to delete?</confirm-delete>
-      <access-denied>Access denied. You do not have permission to use this function.</access-denied>
-      <editing-template>Access denied. You cannot delete and edit the template simultaneously.</editing-template>
-      <template-not-exist>The template that you are trying to delete doesn't exist.</template-not-exist>
+      <confirm-delete>Вы действительно хотите удалить?</confirm-delete>
+      <access-denied>Доступ запрещен. Отсутствует разрешение на использование этой функции.</access-denied>
+      <editing-template>Доступ запрещен. Вы не можете удалить и одновременно редактировать этот шаблон.</editing-template>
+      <template-not-exist>Шаблон, который вы пытаетесь удалить, не существует.</template-not-exist>
     </msg>
   </UITemplateList>
   
   <UIActionsTemplateList>
     <header>
-      <name>Type</name>
+      <name>Тип</name>
       <action>Действие</action>
-      <label>Template</label>
-      <icon>Icon</icon>
+      <label>Шаблон</label>
+      <icon>Иконка</icon>
     </header>
     <action>
-      <AddNew>Add Template</AddNew>
+      <AddNew>Добавить шаблон</AddNew>
     </action>
     <msg>
-      <confirm-delete>Do you really want to delete?</confirm-delete>
-      <access-denied>Access denied. You do not have permission to use this function.</access-denied>
-      <editing-template>Access denied. You cannot delete and edit this template simultaneously.</editing-template>
-      <template-not-exist>The template that you are trying to delete doesn't exist.</template-not-exist>
+      <confirm-delete>Вы действительно хотите удалить?</confirm-delete>
+      <access-denied>Доступ запрещен. Отсутствует разрешение на использование этой функции.</access-denied>
+      <editing-template>Доступ запрещен. Вы не можете удалить и одновременно редактировать этот шаблон.</editing-template>
+      <template-not-exist>Шаблон, который вы пытаетесь удалить, не существует.</template-not-exist>
     </msg>
   </UIActionsTemplateList>
   
   <UIOthersTemplateList>
     <header>
-      <name>Type</name>
-      <label>Template</label>
-      <icon>Icon</icon>
+      <name>Тип</name>
+      <label>Шаблон</label>
+      <icon>Иконка</icon>
       <action>Действие</action>
     </header>
     <action>
-      <AddNew>Add Template</AddNew>
+      <AddNew>Добавить шаблон</AddNew>
     </action>
     <msg>
-      <confirm-delete>Do you really want to delete?</confirm-delete>
-      <access-denied>Access denied. You do not have permission to use this function.</access-denied>
-      <editing-template>Access denied. You cannot delete and edit this template simultaneously.</editing-template>
-      <template-not-exist>The template that you are trying to delete doesn't exist.</template-not-exist>
+      <confirm-delete>Вы действительно хотите удалить?</confirm-delete>
+      <access-denied>Доступ запрещен. Отсутствует разрешение на использование этой функции.</access-denied>
+      <editing-template>Доступ запрещен. Вы не можете удалить и одновременно редактировать этот шаблон.</editing-template>
+      <template-not-exist>Шаблон, который вы пытаетесь удалить, не существует.</template-not-exist>
     </msg>
   </UIOthersTemplateList>
 
@@ -1569,147 +1569,147 @@
 
 <UITabPane>
  <title>
- <ContentTemplateContainer>Content</ContentTemplateContainer>
-<CateTemplateContainer>Navigation</CateTemplateContainer>
-<PageTemplateContainer>Paginator</PageTemplateContainer>
+ <ContentTemplateContainer>Содержимое</ContentTemplateContainer>
+<CateTemplateContainer>Навигация</CateTemplateContainer>
+<PageTemplateContainer>Разбивка на страницы</PageTemplateContainer>
  </title>
 </UITabPane>
 
   <UICLVTemplateList>
     <title>
-      <Edit>Edit</Edit>
-      <Delete>Delete</Delete>
+      <Edit>Редактировать</Edit>
+      <Delete>Удалить</Delete>
     </title>
     <header>
-      <title>Name</title>
+      <title>Имя</title>
       <action>Действие</action>
-      <template>Template</template>
+      <template>Шаблон</template>
     </header>
     <action>
-      <AddTemplate>Add Template</AddTemplate>
-<Edit>Edit</Edit>
-<Delete>Delete</Delete>
+      <AddTemplate>Добавить шаблон</AddTemplate>
+<Edit>Редактировать</Edit>
+<Delete>Удалить</Delete>
     </action>
     <msg>
-      <confirm-delete>Are you sure you want to delete this template?</confirm-delete>
-      <access-denied>Access denied. You do not have permission to use this function.</access-denied>
-      <editing-template>Access denied. You cannot delete and edit this template simultaneously.</editing-template>
-      <template-not-exist>The template that you are trying to delete doesn't exist.</template-not-exist>
+      <confirm-delete>Вы уверены, что хотите удалить этот шаблон?</confirm-delete>
+      <access-denied>Доступ запрещен. Отсутствует разрешение на использование этой функции.</access-denied>
+      <editing-template>Доступ запрещен. Вы не можете удалить и одновременно редактировать этот шаблон.</editing-template>
+      <template-not-exist>Шаблон, который вы пытаетесь удалить, не существует.</template-not-exist>
     </msg>
   </UICLVTemplateList>
 
 <CateTemplateList>
     <header>
-      <title>Name</title>
+      <title>Имя</title>
       <action>Действие</action>
-      <template>Template</template>
+      <template>Шаблон</template>
     </header>
     <title>
-      <Edit>Edit</Edit>
-      <Delete>Delete</Delete>
+      <Edit>Редактировать</Edit>
+      <Delete>Удалить</Delete>
     </title>
     <action>
-      <AddTemplate>Add Template</AddTemplate>
-<Edit>Edit</Edit>
-<Delete>Delete</Delete>
+      <AddTemplate>Добавить шаблон</AddTemplate>
+<Edit>Редактировать</Edit>
+<Delete>Удалить</Delete>
     </action>
 </CateTemplateList>
 
 <PageTemplateList>
     <header>
-      <title>Name</title>
+      <title>Имя</title>
       <action>Действие</action>
-      <template>Template</template>
+      <template>Шаблон</template>
     </header>
     <action>
-      <AddTemplate>Add Template</AddTemplate>
-<Edit>Edit</Edit>
-<Delete>Delete</Delete>
+      <AddTemplate>Добавить шаблон</AddTemplate>
+<Edit>Редактировать</Edit>
+<Delete>Удалить</Delete>
     </action>
 </PageTemplateList>
 
 <EditCLVTemplatePopup_ContentTemplateContainer>
  <title>
-   <UICLVTemplateForm_ContentTemplateContainer>Edit List Template</UICLVTemplateForm_ContentTemplateContainer>   
+   <UICLVTemplateForm_ContentTemplateContainer>Редактировать шаблон списка</UICLVTemplateForm_ContentTemplateContainer>   
  </title>
 </EditCLVTemplatePopup_ContentTemplateContainer>
 
 <EditCLVTemplatePopup_CateTemplateContainer>
  <title>
-   <UICLVTemplateForm_CateTemplateContainer>Edit List Template</UICLVTemplateForm_CateTemplateContainer>   
+   <UICLVTemplateForm_CateTemplateContainer>Редактировать шаблон списка</UICLVTemplateForm_CateTemplateContainer>   
  </title>
 </EditCLVTemplatePopup_CateTemplateContainer>
 
 <EditCLVTemplatePopup_PageTemplateContainer>
  <title>
-   <UICLVTemplateForm_PageTemplateContainer>Edit List Template</UICLVTemplateForm_PageTemplateContainer>   
+   <UICLVTemplateForm_PageTemplateContainer>Редактировать шаблон списка</UICLVTemplateForm_PageTemplateContainer>   
  </title>
 </EditCLVTemplatePopup_PageTemplateContainer>
 
 <CLVTemplatePopup_ContentTemplateContainer>
  <title>
-   <UICLVTemplateForm_ContentTemplateContainer>Add List Template</UICLVTemplateForm_ContentTemplateContainer>   
+   <UICLVTemplateForm_ContentTemplateContainer>Добавить шаблон списка</UICLVTemplateForm_ContentTemplateContainer>   
  </title>
 </CLVTemplatePopup_ContentTemplateContainer>
 
 <CLVTemplatePopup_CateTemplateContainer>
  <title>
-   <UICLVTemplateForm_CateTemplateContainer>Add List Template</UICLVTemplateForm_CateTemplateContainer>   
+   <UICLVTemplateForm_CateTemplateContainer>Добавить шаблон списка</UICLVTemplateForm_CateTemplateContainer>   
  </title>
 </CLVTemplatePopup_CateTemplateContainer>
 
 <CLVTemplatePopup_PageTemplateContainer>
  <title>
-   <UICLVTemplateForm_PageTemplateContainer>Add List Template</UICLVTemplateForm_PageTemplateContainer>   
+   <UICLVTemplateForm_PageTemplateContainer>Добавить шаблон списка</UICLVTemplateForm_PageTemplateContainer>   
  </title>
 </CLVTemplatePopup_PageTemplateContainer>
 
 <UICLVTemplateForm_ContentTemplateContainer>
  <action>
   <Save>#{word.save}</Save>
-<Reset>Очистить</Reset>
+<Reset>Сбросить</Reset>
 <Cancel>#{word.cancel}</Cancel>
  </action>
 <label>
- <title>Name</title>
-<template>Template Name</template>
-<content>Content</content>
-<type>Template Type</type>
+ <title>Имя</title>
+<template>Название шаблона</template>
+<content>Содержимое</content>
+<type>Тип шаблона</type>
 </label>
 </UICLVTemplateForm_ContentTemplateContainer>
 
 <UICLVTemplateForm_PageTemplateContainer>
  <action>
   <Save>#{word.save}</Save>
-<Reset>Очистить</Reset>
+<Reset>Сбросить</Reset>
 <Cancel>#{word.cancel}</Cancel>
  </action>
 <label>
- <title>Name</title>
-<template>Template Name</template>
-<content>Content</content>
-<type>Template Type</type>
+ <title>Имя</title>
+<template>Название шаблона</template>
+<content>Содержимое</content>
+<type>Тип шаблона</type>
 </label>
 </UICLVTemplateForm_PageTemplateContainer>
 
 <UICLVTemplateForm_CateTemplateContainer>
  <action>
   <Save>#{word.save}</Save>
-<Reset>Очистить</Reset>
+<Reset>Сбросить</Reset>
 <Cancel>#{word.cancel}</Cancel>
  </action>
 <label>
- <title>Name</title>
-<template>Template Name</template>
-<content>Content</content>
-<type>Template Type</type>
+ <title>Имя</title>
+<template>Название шаблона</template>
+<content>Содержимое</content>
+<type>Тип шаблона</type>
 </label>
 </UICLVTemplateForm_CateTemplateContainer>
 <UICLVTemplateForm>
   <label>
-    <paginators>Paginator</paginators>
-<list>Content</list>
-<navigation>Navigation</navigation>
+    <paginators>Разбивка на страницы</paginators>
+<list>Содержимое</list>
+<navigation>Навигация</navigation>
   </label>
                           <action>
                             <Save>#{word.save}</Save>
@@ -1717,7 +1717,7 @@
                             <Cancel>#{word.cancel}</Cancel> 
                           </action> 
   <msg>
-  <template-existing>This template name already exists. Please select another one.</template-existing>
+  <template-existing>Это название шаблона уже существует. Пожалуйста, выберите другое.</template-existing>
   </msg>
 </UICLVTemplateForm>
 
@@ -1728,53 +1728,53 @@
   -->
   <AddNewTemplatePermission>
     <title>
-      <UIPermissionSelector>Select Permission</UIPermissionSelector>
+      <UIPermissionSelector>Выбрать разрешение</UIPermissionSelector>
     </title>
   </AddNewTemplatePermission>
   <TemplatePermission>
     <title>
-      <UIPermissionSelector>Select Permission</UIPermissionSelector>
+      <UIPermissionSelector>Выбрать разрешение</UIPermissionSelector>
     </title>
   </TemplatePermission>
   <TemplateContainerPopup>
     <title>
-      <UITemplateForm>Template Form</UITemplateForm>
+      <UITemplateForm>Форма шаблона</UITemplateForm>
     </title>
   </TemplateContainerPopup>
   <ViewForm>
     <label>
       <UITemplateContent>ViewForm</UITemplateContent>
-      <UIPopupWindow>View Permission</UIPopupWindow>
-      <selectVersion>Versions</selectVersion>
-      <content>Content:</content>
-      <name>Name:</name>
-      <isDocumentTemplate>is Document Template</isDocumentTemplate>
-      <viewPermission>Permission:</viewPermission>
-      <enableVersion>Versioning activated</enableVersion>
+      <UIPopupWindow>Разрешение на просмотр</UIPopupWindow>
+      <selectVersion>Версии</selectVersion>
+      <content>Содержимое:</content>
+      <name>Название:</name>
+      <isDocumentTemplate>это шаблон документа</isDocumentTemplate>
+      <viewPermission>Права доступа:</viewPermission>
+      <enableVersion>Управление версиями активировано</enableVersion>
     </label>
-    <title>Add/Edit View</title>
+    <title>Добавить/Изменить вид</title>
   </ViewForm>
   <DialogForm>
     <label>
       <UITemplateContent>DialogForm</UITemplateContent>
-      <UIPopupWindow>Dialog Permission</UIPopupWindow>
-      <selectVersion>Versions</selectVersion>
-      <content>Content:</content>
-      <name>Name:</name>
-      <isDocumentTemplate>is Document Template</isDocumentTemplate>
-      <viewPermission>Permission:</viewPermission>
-      <enableVersion>Enable Versioning</enableVersion>
+      <UIPopupWindow>Права доступа диалогового окна</UIPopupWindow>
+      <selectVersion>Версии</selectVersion>
+      <content>Содержимое:</content>
+      <name>Имя:</name>
+      <isDocumentTemplate>это шаблон документа</isDocumentTemplate>
+      <viewPermission>Права доступа:</viewPermission>
+      <enableVersion>Включить управление версиями</enableVersion>
     </label>
-    <title>Add/Edit Dialog</title>
+    <title>Добавить/Редактировать диалоговое окно</title>
   </DialogForm>
   <DialogFormTemplatePermission>
     <title>
-      <UIPermissionSelector>Select Permission</UIPermissionSelector>
+      <UIPermissionSelector>Выбрать разрешение</UIPermissionSelector>
     </title>
   </DialogFormTemplatePermission>
   <ViewFormTemplatePermission>
     <title>
-      <UIPermissionSelector>Select Permission</UIPermissionSelector>
+      <UIPermissionSelector>Выбрать разрешение</UIPermissionSelector>
     </title>
   </ViewFormTemplatePermission>
   <TemplateContainerPopup>
@@ -1786,8 +1786,8 @@
   </TemplateContainerPopup>
   <UITemplatesManager>
     <title>
-      <Edit>Edit</Edit>
-      <Delete>Delete</Delete>
+      <Edit>Изменить</Edit>
+      <Delete>Удалить</Delete>
     </title>
   </UITemplatesManager>
   <!--
@@ -1802,9 +1802,9 @@
   -->
   <UITemplateEditForm>
     <label>
-      <name>Name:</name>
-      <label>Label:</label>
-      <isDocumentTemplate>is Document Template:</isDocumentTemplate>
+      <name>Имя:</name>
+      <label>Метка:</label>
+      <isDocumentTemplate>это шаблон документа:</isDocumentTemplate>
     </label>
     <action>
       <Save>#{word.save}</Save>
@@ -1819,19 +1819,19 @@
   -->
   <UIDialogTab>
     <header>
-      <name>Name</name>
-      <roles>Roles</roles>
-      <baseVersion>Version</baseVersion>
-      <action>Actions</action>
+      <name>Имя</name>
+      <roles>Роли</roles>
+      <baseVersion>Версия</baseVersion>
+      <action>Действия</action>
     </header>
     <msg>
-      <undeletable>You cannot delete '{0}' because it is the default one.</undeletable>
-      <confirm-delete>Are you sure you want to delete this dialog?</confirm-delete>
+      <undeletable>Вы не можете удалить '{0}' поскольку он используется по умолчанию.</undeletable>
+      <confirm-delete>Вы уверены, что вы хотите удалить это диалоговое окно?</confirm-delete>
     </msg>
     <action>
       <title>
-        <Edit>Edit</Edit>
-        <Delete>Delete</Delete>
+        <Edit>Изменить</Edit>
+        <Delete>Удалить</Delete>
       </title>
     </action>
   </UIDialogTab>
@@ -1842,19 +1842,19 @@
   -->
   <UIViewTab>
     <header>
-      <name>Name</name>
-      <roles>Roles</roles>
-      <baseVersion>Version</baseVersion>
-      <action>Actions</action>
+      <name>Название</name>
+      <roles>Роли</roles>
+      <baseVersion>Версия</baseVersion>
+      <action>Действия</action>
     </header>
     <msg>
-      <undeletable>'{0}' cannot be deleted, it is the default one.</undeletable>
-      <confirm-delete>Do you really want to delete?</confirm-delete>
+      <undeletable>'{0}' не может быть удален, он используется по умолчанию.</undeletable>
+      <confirm-delete>Вы действительно хотите удалить?</confirm-delete>
     </msg>
     <action>
       <title>
-        <Edit>Edit</Edit>
-        <Delete>Delete</Delete>
+        <Edit>Изменить</Edit>
+        <Delete>Удалить</Delete>
       </title>
     </action>
   </UIViewTab>
@@ -1871,14 +1871,14 @@
       <Refresh>#{word.refresh}</Refresh>
     </action>
     <msg>
-      <name-invalid>The field name must not contain special characters.</name-invalid>
-      <roles-invalid>The Permission field is required.</roles-invalid>
-      <version-restored>Version {0} was restored successfully.</version-restored>
-      <name-exist>The name '{0}' already exists.</name-exist>
+      <name-invalid>Название поля не должно содержать специальных символов.</name-invalid>
+      <roles-invalid>Необходимо заполнить поле Разрешение.</roles-invalid>
+      <version-restored>Версия {0} была успешно восстановлена.</version-restored>
+      <name-exist>Имя {0} уже существует.</name-exist>
     </msg>
     <title>
-      <AddPermission>Add Permission</AddPermission>
-      <RemovePermission>Remove Permission</RemovePermission>
+      <AddPermission>Добавить разрешение</AddPermission>
+      <RemovePermission>Удалить разрешение</RemovePermission>
     </title>
   </UITemplateContent>
   <!--
@@ -1898,12 +1898,12 @@
   -->
   <JCRBrowser>
     <title>
-      <UIOneNodePathSelector>Select Home Path</UIOneNodePathSelector>
+      <UIOneNodePathSelector>Выбрать путь в домашний директорий</UIOneNodePathSelector>
     </title>
   </JCRBrowser>
   <JCRBrowserAssets>
     <title>
-      <UIOneNodePathSelector>Select Icon</UIOneNodePathSelector>
+      <UIOneNodePathSelector>Выбрать значок</UIOneNodePathSelector>
     </title>
   </JCRBrowserAssets>
   <!--
@@ -1913,32 +1913,32 @@
   -->
   <UIQueriesList>
     <header>
-      <name>Name</name>
-      <type>Type</type>
-      <statement>Statement</statement>
-      <permission>Permissions</permission>
-      <action>Actions</action>
+      <name>Название</name>
+      <type>Тип</type>
+      <statement>Описание</statement>
+      <permission>Разрешения</permission>
+      <action>Действия</action>
     </header>
     <action>
-      <AddQuery>Add Query</AddQuery>
+      <AddQuery>Добавить запрос</AddQuery>
     </action>
     <tooltip>
-      <Edit>Edit this Query</Edit>
-      <Delete>Delete this Query</Delete>
+      <Edit>Редактировать этот запрос</Edit>
+      <Delete>Удалить этот запрос</Delete>
     </tooltip>
     <msg>
-      <confirm-delete>Are you sure you want to delete this query?</confirm-delete>
-      <query-not-existed>The query does not exist anymore.</query-not-existed>
-      <can-not-remove>An error occurred while deleting the query. Please contact the administrator for information.</can-not-remove>
+      <confirm-delete>Вы уверены, что хотите удалить этот запрос?</confirm-delete>
+      <query-not-existed>Запрос больше не существует.</query-not-existed>
+      <can-not-remove>Произошла ошибка при удалении запроса. Пожалуйста, свяжитесь с администратором для получения информации.</can-not-remove>
     </msg>
   </UIQueriesList>
   <UIQueriesForm>
     <label>
-      <name>Query Name</name>
-      <type>Query Type</type>
-      <statement>Statement</statement>
-      <cache>Enable Cache Results</cache>
-      <permissions>Permissions</permissions>
+      <name>Название запроса</name>
+      <type>Тип запроса</type>
+      <statement>Описание</statement>
+      <cache>Включить кэш результатов</cache>
+      <permissions>Разрешения</permissions>
       <PermissionButton>UIQueriesForm</PermissionButton>
     </label>
     <action>
@@ -1946,26 +1946,26 @@
       <Cancel>#{word.cancel}</Cancel>
     </action>
     <msg>
-      <permission-require>Please select permissions.</permission-require>
-      <name-invalid>The Name field cannot contain special characters.</name-invalid>
-      <name-existing>This query name already exists. Please select another one.</name-existing>
-      <invalid-query>The query is invalid. Please check your query statement.</invalid-query>
-      <access-denied>Access denied. You do not have permission to perform this operation.</access-denied>
+      <permission-require>Пожалуйста, выберите разрешения.</permission-require>
+      <name-invalid>Поле Название не может содержать специальные символы.</name-invalid>
+      <name-existing>Это название запроса уже существует. Пожалуйста, выберите другое.</name-existing>
+      <invalid-query>Недопустимый запрос. Проверьте формулировку запроса.</invalid-query>
+      <access-denied>Отказано в доступе. У Вас не достаточно прав доступа.</access-denied>
     </msg>
   </UIQueriesForm>
   <AddQueryForm>
     <title>
-      <UIQueriesForm>Add Query</UIQueriesForm>
+      <UIQueriesForm>Добавить запрос</UIQueriesForm>
     </title>
   </AddQueryForm>
   <EditQueryForm>
     <title>
-      <UIQueriesForm>Edit Query</UIQueriesForm>
+      <UIQueriesForm>Изменить запрос</UIQueriesForm>
     </title>
   </EditQueryForm>
 <PermissionPopup>
   <title>
-    <UIGroupMemberSelector>Select Permission</UIGroupMemberSelector>
+    <UIGroupMemberSelector>Выбрать разрешение</UIGroupMemberSelector>
   </title>
 </PermissionPopup>
   <!--
@@ -1975,45 +1975,45 @@
   -->
   <UITagManager>
     <title>
-      <EditStyle>Edit Style</EditStyle>
-      <RemoveStyle>Remove Style</RemoveStyle>
+      <EditStyle>Изменить стиль</EditStyle>
+      <RemoveStyle>Удалить стиль</RemoveStyle>
     </title>    
   </UITagManager>
   <UITagStyleList>
     <header>
-      <name>Style Name</name>
-      <documentRange>Number of Occurrences</documentRange>
-      <tagHTML>Tag Style</tagHTML>
+      <name>Название стиля</name>
+      <documentRange>Количество случаев</documentRange>
+      <tagHTML>Стиль тега</tagHTML>
       <action>Действие</action>
     </header>
     <title>
-      <Edit>Edit</Edit>
-      <Delete>Delete</Delete>
-      <Remove>Remove</Remove>
+      <Edit>Редактировать</Edit>
+      <Delete>Удалить</Delete>
+      <Remove>Удалить</Remove>
     </title>
     <action>
-      <AddStyle>Add Style</AddStyle>
+      <AddStyle>Добавить стиль</AddStyle>
     </action>
   </UITagStyleList>
   <UITagStyleForm>
     <label>
-      <styleName>Style Name:</styleName>
-      <documentRange>Number of Occurrences:</documentRange>
-      <styleHTML>HTML Style:</styleHTML>
+      <styleName>Название стиля:</styleName>
+      <documentRange>Количество случаев:</documentRange>
+      <styleHTML>Стиль HTML:</styleHTML>
     </label>
     <action>
       <UpdateStyle>Обновить</UpdateStyle>
       <Cancel>#{word.cancel}</Cancel>
     </action>
     <msg>
-      <range-validator>The range is invalid. The format must be: a..b, among which a, b are positive integers. You can use * instead of b to indicate that the range is unlimited.</range-validator>
-      <error-update>Update failed. Your information is invalid.</error-update>
-      <item-not-existing>You cannot save changes to this tag since it no longer exists in the database.</item-not-existing>
+      <range-validator>Недопустимый диапазон. Формат должен быть: a...b, где a и b - положительные целые числа. Вы можете использовать * вместо b, чтобы показать, что диапазон неограниченный.</range-validator>
+      <error-update>Не удалось обновить. Ваша информация является недействительной.</error-update>
+      <item-not-existing>Нельзя сохранить изменения в этот тег, поскольку он больше не существует в базе данных.</item-not-existing>
     </msg>
   </UITagStyleForm>
   <FolksonomyPopup>
     <title>
-      <UITagStyleForm>Edit Tag Style Configuration</UITagStyleForm>
+      <UITagStyleForm>Изменить конфигурацию стиля тега</UITagStyleForm>
     </title>
   </FolksonomyPopup>
   <!--
@@ -2023,13 +2023,13 @@
   -->
   <ECMNameValidator>
     <msg>
-      <Invalid-char>The field '{0}' has some invalid characters. Please type another value.</Invalid-char>
-      <empty-input>The value of the field '{0}' is empty.</empty-input>
+      <Invalid-char>Поле «{0}» содержит недопустимые знаки. Пожалуйста, введите другое значение.</Invalid-char>
+      <empty-input>Значение поля «{0}» является пустым.</empty-input>
     </msg>
   </ECMNameValidator>
   <EmptyFieldValidator>
     <msg>
-      <empty-input>Please enter the value into the field '{0}'.</empty-input>
+      <empty-input>Пожалуйста, введите значение в поле «{0}».</empty-input>
     </msg>
   </EmptyFieldValidator>
   <!--
@@ -2039,7 +2039,7 @@
   -->
   <PermissionValidator>
   <msg>
-      <permission-path-invalid>The permission '{0}' is invalid.</permission-path-invalid>
+      <permission-path-invalid>Разрешение «{0}» является недопустимым.</permission-path-invalid>
   </msg>
   </PermissionValidator>
   <!--
@@ -2049,9 +2049,9 @@
   -->
   <UIWorkspaceList>
     <label>
-      <workspaceName>Workspace:</workspaceName>
+      <workspaceName>Рабочая область:</workspaceName>
       <rootNodeInfo>UIWorkspaceList</rootNodeInfo>
-      <rootNodePath>Root Path:</rootNodePath>
+      <rootNodePath>Корневой каталог:</rootNodePath>
     </label>
   </UIWorkspaceList>
   <!--
@@ -2061,43 +2061,43 @@
   -->
   <UIFormInputSetWithAction>
     <msg>
-      <confirm-delete>Are you sure you want to delete?</confirm-delete>
+      <confirm-delete>Вы уверены, что хотите удалить?</confirm-delete>
     </msg>
   </UIFormInputSetWithAction>
   <template>
     <title>
-      <AddPermission>Add Permission</AddPermission>
+      <AddPermission>Добавить разрешение</AddPermission>
     </title>
   </template>
   <metadataTypeTab>
     <title>
-      <AddPermission>Add Permission</AddPermission>
+      <AddPermission>Добавить разрешение</AddPermission>
     </title>
   </metadataTypeTab>
   <PermissionButton>
     <title>
-      <AddPermission>Add Permission</AddPermission>
+      <AddPermission>Добавить разрешение</AddPermission>
     </title>
   </PermissionButton>
   <nodeTypeDefinition>
     <title>
-      <AddSuperType>Add Super Type</AddSuperType>
+      <AddSuperType>Добавить супер тип</AddSuperType>
     </title>
   </nodeTypeDefinition>
   <childNodeDefinition>
     <title>
-      <AddRequiredType>Add Required Type</AddRequiredType>
-      <AddDefaultType>Add Default Type</AddDefaultType>
+      <AddRequiredType>Добавить требуемый тип</AddRequiredType>
+      <AddDefaultType>Добавить тип по умолчанию</AddDefaultType>
     </title>
   </childNodeDefinition>
   <propertyDefinition>
     <title>
-      <AddConstraints>Add Constraints</AddConstraints>
+      <AddConstraints>Добавить требования</AddConstraints>
     </title>
   </propertyDefinition>
   <authInputSet>
     <title>
-      <Select>Select</Select>
+      <Select>Выбрать</Select>
     </title>
   </authInputSet>
   <!--
@@ -2105,83 +2105,83 @@
   -->
   <UIViewContainer>
     <title>
-      <View>View</View>
-      <EditInfo>Edit</EditInfo>
-      <Delete>Delete</Delete>
+      <View>Показать</View>
+      <EditInfo>Изменить</EditInfo>
+      <Delete>Удалить</Delete>
     </title>
 <label>
-  <permission>{0} in {1}</permission>
+  <permission>{0} в {1}</permission>
 </label>
   </UIViewContainer>
   <ECMTemplate>
     <title>
-      <EditInfo>Edit</EditInfo>
-      <Delete>Delete</Delete>
+      <EditInfo>Изменить</EditInfo>
+      <Delete>Удалить</Delete>
     </title>
   </ECMTemplate>
   <step1>
     <title>
-      <AddPermission>Add Permission</AddPermission>
+      <AddPermission>Добавить разрешение</AddPermission>
     </title>
   </step1>
   <step2>
     <title>
-      <SelectContainer>Select Container</SelectContainer>
-      <SelectStore>Select Store</SelectStore>
+      <SelectContainer>Выбрать контейнер</SelectContainer>
+      <SelectStore>Выбрать хранилище</SelectStore>
     </title>
   </step2>
   <step3>
     <title>
-      <SelectQueryHandler>Select Query Handler</SelectQueryHandler>
+      <SelectQueryHandler>Выбрать обработчик запросов</SelectQueryHandler>
     </title>
   </step3>
   <UIDrivePermissionSelector>
     <label>
-      <selectGroup>Select Group</selectGroup>
-      <selectUser>Select User</selectUser>
-      <selectMembership>Select Membership</selectMembership>
+      <selectGroup>Выбрать группу</selectGroup>
+      <selectUser>Выбрать пользователя</selectUser>
+      <selectMembership>Выбрать членство</selectMembership>
     </label>
   </UIDrivePermissionSelector>
   
   <UIPermissionSelector>
     <label>
-      <selectGroup>Select Group</selectGroup>
-      <selectUser>Select User</selectUser>
-      <selectMembership>Select Membership</selectMembership>
+      <selectGroup>Выбрать группу</selectGroup>
+      <selectUser>Выбрать пользователя</selectUser>
+      <selectMembership>Выбрать членство</selectMembership>
     </label>
   </UIPermissionSelector>
   
   <UIAnyPermission>
     <label>
-      <anyPermission>Any Permission</anyPermission>
+      <anyPermission>Любое разрешение</anyPermission>
     </label>
   </UIAnyPermission>
   
   <UIMDriveAnyPermission>
     <label>
-      <anyPermission>Any Permission</anyPermission>
+      <anyPermission>Любое разрешение</anyPermission>
     </label>
   </UIMDriveAnyPermission>
   
   <UIQueriesAnyPermission>
     <label>
-      <anyPermission>Any Permission</anyPermission>
+      <anyPermission>Любое разрешение</anyPermission>
     </label>
   </UIQueriesAnyPermission>
   
   <MetadataPermission>
     <label>
-      <selectGroup>Select Group</selectGroup>
+      <selectGroup>Выбрать группу</selectGroup>
     </label>
   </MetadataPermission>  
   <MetadataPermission>
     <label>
-      <selectMembership>Select Membership</selectMembership>
+      <selectMembership>Выбрать членство</selectMembership>
     </label>
   </MetadataPermission>
   <anyPermission>
     <title>
-      <AddAnyPermission>Set any Permission</AddAnyPermission>
+      <AddAnyPermission>Установить любое разрешение</AddAnyPermission>
     </title>
   </anyPermission>
   <!--
@@ -2189,9 +2189,9 @@
   -->
   <QueriesPermissionBrowse>
     <label>
-      <selectGroup>Select Group</selectGroup>
-      <selectUser>Select User</selectUser>
-      <selectMembership>Select Membership</selectMembership>
+      <selectGroup>Выбрать группу</selectGroup>
+      <selectUser>Выбрать пользователя</selectUser>
+      <selectMembership>Выбрать членство</selectMembership>
     </label>
   </QueriesPermissionBrowse>
   <!--
@@ -2199,7 +2199,7 @@
   -->  
   <UIViewFormTabPane>
     <label>
-      <addSymLink>Add Symlink</addSymLink>
+      <addSymLink>Добавить символьную ссылку</addSymLink>
     </label>
   </UIViewFormTabPane>
   <!--
@@ -2208,19 +2208,19 @@
   
   <UIDriveForm>
 <msg>
-  <permission-path-invalid>The permission '{0}' is invalid.</permission-path-invalid>
+  <permission-path-invalid>Разрешение «{0}» является недопустимым.</permission-path-invalid>
   </msg>
   </UIDriveForm>
   
   <UITaxonomyTreeMainForm>
     <msg>
-      <homepath-emty>The home path is required.</homepath-emty>
-      <targetpath-emty>The target path is required.</targetpath-emty>
+      <homepath-emty>Требуется путь в домашний директорий.</homepath-emty>
+      <targetpath-emty>Требуется путь назначения.</targetpath-emty>
     </msg>
   </UITaxonomyTreeMainForm>
   <UITaxonomyWorkingArea>
   <msg>
-  <exist>This tree node already exists.</exist>
+  <exist>Этот узел дерева уже существует.</exist>
   </msg>
   </UITaxonomyWorkingArea>
 
@@ -2249,37 +2249,37 @@
   -->   
   <DriveInputSet>
     <label>
-      <nt_folder>Document Folder</nt_folder>
-      <nt_unstructured>Content Folder</nt_unstructured>
-      <exo_cssFolder>CSS Folder</exo_cssFolder>
-      <exo_jsFolder>Javascript Folder</exo_jsFolder>
-      <exo_linkFolder>Link Folder</exo_linkFolder>
-      <exo_webFolder>Web Content Folder</exo_webFolder>
+      <nt_folder>Папка документа</nt_folder>
+      <nt_unstructured>Папка контента</nt_unstructured>
+      <exo_cssFolder>Папка CSS</exo_cssFolder>
+      <exo_jsFolder>Папка JavaScript</exo_jsFolder>
+      <exo_linkFolder>Папка ссылки</exo_linkFolder>
+      <exo_webFolder>Папка веб-контента</exo_webFolder>
    </label>
   </DriveInputSet>
   <UIPermissionTreeInfo>
   <msg>
-      <confirm-delete-permission>Are you sure you want to delete this permission?</confirm-delete-permission>
-      <no-permission-remove>You cannot remove the owner or the system user.</no-permission-remove>  
+      <confirm-delete-permission>Вы уверенны, что хотите удалить это разрешение?</confirm-delete-permission>
+      <no-permission-remove>Нельзя удалить владельца или пользователя системы.</no-permission-remove>  
   </msg>
   </UIPermissionTreeInfo>  
   <UITaxonomyTreeMainForm>
 <msg>
-      <no-right-target-path>Please select another home path.</no-right-target-path>
+      <no-right-target-path>Пожалуйста, выберите другой путь в домашний директорий.</no-right-target-path>
 </msg>
 </UITaxonomyTreeMainForm>
 
 <UIECMAdminControlPanel>
     <tab>
       <label>        
-        <ManageUnLock>Manage Locks</ManageUnLock>
+        <ManageUnLock>Управление блокировками</ManageUnLock>
       </label>
     </tab>        
 </UIECMAdminControlPanel>
 <UIUnLockForm>
     <label>
-      <name>Path Node</name>      
-      <permissions>Permissions</permissions>
+      <name>Узел</name>      
+      <permissions>Разрешения</permissions>
       <PermissionButton>UI Unlock Form</PermissionButton>
     </label>
     <action>
@@ -2287,37 +2287,37 @@
       <Cancel>#{word.cancel}</Cancel>
     </action>
     <msg>
-      <permission-require>You must select permissions.</permission-require>      
+      <permission-require>Вы должны выбрать разрешения.</permission-require>      
     </msg>
   </UIUnLockForm>
   <UILockHolderList>
   <header>
-  <name>Groups or Users</name>
+  <name>Группы или пользователи</name>
   <action>Действие</action>
   </header>
   <tooltip>
-<DeleteLock>Delete Group</DeleteLock>
+<DeleteLock>Удалить группу</DeleteLock>
   </tooltip>
   <msg>
-  <can-not-delete-lock-holder>Cannot delete the group {0}.</can-not-delete-lock-holder>
+  <can-not-delete-lock-holder>Невозможно удалить группу {0}.</can-not-delete-lock-holder>
   </msg>
   </UILockHolderList>
   <UILockNodeList>
   <header>
-  <name>Титул</name>
-  <hoderLock>Lock Owner</hoderLock>
+  <name>Заголовок</name>
+  <hoderLock>Владелец блокировки</hoderLock>
   <action>Действие</action>
   </header>
   <tooltip>
-<UnLock>UnLock</UnLock>
+<UnLock>Разблокировать</UnLock>
   </tooltip>
   <msg>
-  <access-denied-exception>You do not have permission to access the node with the path {0}, or this node is deleted.</access-denied-exception>
+  <access-denied-exception>У вас нет разрешения на доступ к узлу с путем {0}, либо этот узел удален.</access-denied-exception>
   </msg>
   </UILockNodeList>
   <EditUnLockForm>
     <title>
-      <UIUnLockForm>Manage Lock</UIUnLockForm>
+      <UIUnLockForm>Управление блокировкой</UIUnLockForm>
     </title>
   </EditUnLockForm>  
   <UITabPane>
@@ -2325,16 +2325,16 @@
       <Close>#{word.close}</Close>
     </action>
     <title>
-    <UILockHolderContainer>Manage Lock</UILockHolderContainer>
-    <UILockNodeList>Locked Node</UILockNodeList>
+    <UILockHolderContainer>Управление блокировкой</UILockHolderContainer>
+    <UILockNodeList>Заблокированный узел</UILockNodeList>
     </title>
   </UITabPane>
   
   <UIViewFormTabPane>
     <action>
-      <AddTabForm>Add Tab</AddTabForm>
+      <AddTabForm>Добавить вкладку</AddTabForm>
       <AddTab>#{word.save}</AddTab>
-      <BackViewForm>Back</BackViewForm>
+      <BackViewForm>Назад</BackViewForm>
     </action>
   </UIViewFormTabPane>
   
@@ -2354,19 +2354,19 @@
   
   <UISkinTab>
     <header>
-      <name>Name</name>
-      <roles>Roles</roles>
-      <baseVersion>Version</baseVersion>
-      <action>Actions</action>
+      <name>Имя</name>
+      <roles>Роли</roles>
+      <baseVersion>Версия</baseVersion>
+      <action>Действия</action>
     </header>
     <msg>
-      <undeletable>You cannot delete '{0}' because it is the default one.</undeletable>
-      <confirm-delete>Are you sure you want to delete this skin?</confirm-delete>
+      <undeletable>Вы не можете удалить '{0}' поскольку он используется по умолчанию.</undeletable>
+      <confirm-delete>Вы действительно хотите удалить этот скин?</confirm-delete>
     </msg>
     <action>
       <title>
-        <Edit>Edit</Edit>
-        <Delete>Delete</Delete>
+        <Edit>Изменить</Edit>
+        <Delete>Удалить</Delete>
       </title>
     </action>
   </UISkinTab>
@@ -2374,26 +2374,26 @@
   <SkinForm>
     <label>
       <UITemplateContent>SkinForm</UITemplateContent>
-      <UIPopupWindow>Skin Permission</UIPopupWindow>
-      <selectVersion>Versions</selectVersion>
-      <content>Content:</content>
-      <name>Name:</name>
-      <isDocumentTemplate>is Document Template</isDocumentTemplate>
-      <viewPermission>Permission:</viewPermission>
-      <enableVersion>Enable Versioning</enableVersion>
+      <UIPopupWindow>Разрешение скина</UIPopupWindow>
+      <selectVersion>Версии</selectVersion>
+      <content>Содержимое:</content>
+      <name>Название:</name>
+      <isDocumentTemplate>это шаблон документа</isDocumentTemplate>
+      <viewPermission>Права доступа:</viewPermission>
+      <enableVersion>Включить управление версиями</enableVersion>
     </label>
-    <title>Add/Edit Skin</title>
+    <title>Добавить/Изменить скин</title>
   </SkinForm>
 
  <UITagManager>
    <action>
      <title>
-       <RemoveStyle>Remove</RemoveStyle>
-         <AddStyle>Add Style</AddStyle>
+       <RemoveStyle>Удалить</RemoveStyle>
+         <AddStyle>Добавить стиль</AddStyle>
      </title>
    </action>
    <msg>
-     <confirm-delete>Are you sure you want to delete this tag style?</confirm-delete>
+     <confirm-delete>Вы действительно хотите удалить этот стиль тега?</confirm-delete>
    </msg>
  </UITagManager>
 
@@ -2404,7 +2404,7 @@
 </UITaxonomyTreeContainer>
 <UITaxonomyTreeMainForm>
 <action>
-<NextViewPermission>Next</NextViewPermission>
+<NextViewPermission>Следующее</NextViewPermission>
 <Reset>Reset</Reset>
 </action>
 </UITaxonomyTreeMainForm>
@@ -2413,101 +2413,101 @@
 <action>
 <Save>Save</Save>
 <Reset>Reset</Reset>
-<NextAddAction>Next</NextAddAction>
-<Previous>Previous</Previous>
+<NextAddAction>Следующее</NextAddAction>
+<Previous>Предыдущее</Previous>
 </action>
 </UIPermissionTreeForm>
 
 <UIActionForm>
 <action>
-<PreviousViewPermission>Previous</PreviousViewPermission>
-<NextViewTree>Next</NextViewTree>
+<PreviousViewPermission>Предыдущее</PreviousViewPermission>
+<NextViewTree>Следующее</NextViewTree>
 </action>
   <msg>
-    <xss-vulnerability-character>Field '{0}' contains XSS vulnerability characters</xss-vulnerability-character>
-<xss-vulnerability-character-wo-label>Your input may contain XSS vulnerability characters</xss-vulnerability-character-wo-label>
+    <xss-vulnerability-character>Поле '{0}' содержит символы уязвимости XSS</xss-vulnerability-character>
+<xss-vulnerability-character-wo-label>Ваши вводимые данные могут содержать символы уязвимости XSS</xss-vulnerability-character-wo-label>
   </msg>
 </UIActionForm>
 
 <UITaxonomyTreeWorkingArea>
 <action>
-<Previous>Previous</Previous>
+<Previous>Предыдущее</Previous>
 </action>
 </UITaxonomyTreeWorkingArea>
 
   <UITabPane>
     <title>
-      <UITagManager>Tag Manager</UITagManager>
-      <UITagPermissionManager>Tag Permission Manager</UITagPermissionManager>
+      <UITagManager>Диспетчер тегов</UITagManager>
+      <UITagPermissionManager>Диспетчер разрешения тегов</UITagPermissionManager>
     </title>
   </UITabPane>
   
   <UITagPermissionInfo>
     <header>
-      <usersOrGroups>User or Group</usersOrGroups>
+      <usersOrGroups>Пользователь или группа</usersOrGroups>
       <action>Действие</action>
     </header>
     <action>
       <title>
-        <Delete>Delete</Delete>
+        <Delete>Удалить</Delete>
       </title>
     </action>
     <msg>
-      <confirm-delete-permission>Are you sure you want to delete this permission?</confirm-delete-permission>
+      <confirm-delete-permission>Вы уверенны, что хотите удалить это разрешение?</confirm-delete-permission>
     </msg>   
   </UITagPermissionInfo>
   <UITagPermissionForm>
-    <title>Add Permission</title>
+    <title>Добавить разрешение</title>
     <action>
       <Save>#{word.save}</Save>
-      <Add>Add</Add>
+      <Add>Добавить</Add>
     </action>
     <label>
-      <userOrGroup>Memberships:</userOrGroup>
+      <userOrGroup>Членства:</userOrGroup>
     </label>
     <msg>
-      <userOrGroup-alreadyExists>This membership already exists. Please select another one.</userOrGroup-alreadyExists>
+      <userOrGroup-alreadyExists>Это членство уже существует. Пожалуйста, выберите другое.</userOrGroup-alreadyExists>
     </msg>    
   </UITagPermissionForm>
   
   <UIGroupMemberSelector>
     <label>
-      <selectGroup>Select Group</selectGroup>
-      <selectMembership>Select Membership</selectMembership>
+      <selectGroup>Выбрать группу</selectGroup>
+      <selectMembership>Выбрать членство</selectMembership>
     </label>
   </UIGroupMemberSelector>
   
   <UIFolksonomyManager>
   <msg>
-      <confirm-delete>Are you sure you want to delete this style?</confirm-delete>
+      <confirm-delete>Вы уверены, что хотите удалить этот стиль?</confirm-delete>
   </msg>
     <action>
       <title>
-        <AddStyle>Add Style</AddStyle>
+        <AddStyle>Добавить стиль</AddStyle>
       </title>
     </action>
   </UIFolksonomyManager>  
 <UIActionForm>
   <title>
-  <ShowComponent>Open Window</ShowComponent>
-  <removeReference>Remove</removeReference>
+  <ShowComponent>Открыть окно</ShowComponent>
+  <removeReference>Удалить</removeReference>
   </title>
   </UIActionForm> 
   <NodeTypeNameValidator>
     <msg>
-      <Invalid-char>There are some invalid characters. Please enter another value.</Invalid-char>
-      <empty-input>The value of the field is empty.</empty-input>
+      <Invalid-char>Есть некоторые недопустимые символы. Пожалуйста, введите другое значение.</Invalid-char>
+      <empty-input>Пустое значение поля.</empty-input>
     </msg>
   </NodeTypeNameValidator>
   <UIActionForm>
     <msg>
-      <constraint-violation-exception>The node '{0}' cannot be added to '{1}' in the workspace '{2}'.  There is a problem with the permissions or constraints condition.</constraint-violation-exception>
+      <constraint-violation-exception>Невозможно добавить узел '{0}' в '{1}' рабочей области '{2}'.  Возникла проблема с разрешениями или условием ограничений.</constraint-violation-exception>
     </msg>
   </UIActionForm>
   
   <UIWorkspaceWizard>
     <msg>
-      <name-not-allowed>Forbidden Name</name-not-allowed>
+      <name-not-allowed>Запрещенное имя</name-not-allowed>
     </msg>
   </UIWorkspaceWizard>
   <UIRepositoryForm>
@@ -2518,62 +2518,62 @@
   
   <UIViewFormTabPane>
   <label>
-  <addCategory>Add Category</addCategory>
-          <addLocalizationLink>Add Translation</addLocalizationLink>
+  <addCategory>Добавить категорию</addCategory>
+          <addLocalizationLink>Добавить перевод</addLocalizationLink>
   </label>
   </UIViewFormTabPane>
 
 <UIDriveForm>
 <label>
-<allowNodeTypesOnTree>Allowance nodetype on left tree:</allowNodeTypesOnTree>
+<allowNodeTypesOnTree>Разрешение типа узла в левом дереве:</allowNodeTypesOnTree>
 </label>
 </UIDriveForm>
 <DriveInputSet>
 <title>
 <RemovePermission>Remove Permission</RemovePermission>
-<ChooseNodeType>Select Node Types</ChooseNodeType>
-<RemoveNodeType>Remove</RemoveNodeType>
+<ChooseNodeType>Выбрать типы узлов</ChooseNodeType>
+<RemoveNodeType>Удалить</RemoveNodeType>
 </title>
 </DriveInputSet>
 <PopupNodeTypeSelector>
 <title>
-<UINodeTypeSelector>Select Node Types</UINodeTypeSelector>
-<PopupNodeTypeSelector>Select Node Types</PopupNodeTypeSelector>
+<UINodeTypeSelector>Выбрать типы узлов</UINodeTypeSelector>
+<PopupNodeTypeSelector>Выбрать типы узлов</PopupNodeTypeSelector>
 </title>
 </PopupNodeTypeSelector>
   <UINodeTypeSelector>
     <label>
-      <selectedAllNodeTypes>Select All Node Types</selectedAllNodeTypes>
+      <selectedAllNodeTypes>Выбрать все типы узлов</selectedAllNodeTypes>
     </label>
   </UINodeTypeSelector>
   <UIScriptForm>
     <msg>
-      <PathNotFoundException>The script already exists in the '{0}' folder.</PathNotFoundException>      
+      <PathNotFoundException>Скрипт уже существует в папке '{0}'.</PathNotFoundException>      
     </msg>
   </UIScriptForm>
  <UINodeTypeList>
    <msg>
-   <no-list>There is no node type matching your search.</no-list>
+   <no-list>Отсутсвует тип узла, соответствующий вашему поиску.</no-list>
    </msg>
  </UINodeTypeList>
   <UIActionForm>
     <msg>
-      <canotChangeActionId>You cannot change the Action ID.</canotChangeActionId>
+      <canotChangeActionId>Нельзя изменить идентификатор действия.</canotChangeActionId>
     </msg>
   </UIActionForm>
   <PopupComponent>
     <title>
-      <UINodeTypeSelector>Node Type Selector</UINodeTypeSelector>
+      <UINodeTypeSelector>Выбор типа узла</UINodeTypeSelector>
     </title>
   </PopupComponent>
   <UIPageIterator>
     <label>
-      <maxPageSize>Maximum Page Size</maxPageSize>
+      <maxPageSize>Максимальный размер страницы</maxPageSize>
     </label>
   </UIPageIterator>
   <UILockNodeList>
     <msg>
-      <can-not-unlock-node>You do not have permission to unlock this node. Please contact the administrator to get the correct right.</can-not-unlock-node>
+      <can-not-unlock-node>У вас недостаточно прав для того, чтобы разблокировать этот узел. Пожалуйста, свяжитесь с администратором для получения необходимых прав.</can-not-unlock-node>
     </msg>
  </UILockNodeList>
 </bundle>

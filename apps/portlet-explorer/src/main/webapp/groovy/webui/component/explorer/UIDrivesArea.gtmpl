@@ -30,13 +30,13 @@
 				<i class="driveIcon" onclick="<%=uicomponent.event("SelectDrive","${drive.name}")%>" rel="tooltip" data-placement="bottom" title="<%=uicomponent.getLabel(drive.getName())%>">
 					<img rel="tooltip" data-placement="bottom" title="<%=uicomponent.getLabel(drive.getName())%>" alt="<%=uicomponent.getLabel(drive.getName())%>" src="$thumbnailImage" onclick="<%=uicomponent.event("SelectDrive","${drive.name}")%>"/>
 				</i>
-				<a class="driveLabel" href="<%=uicomponent.event("SelectDrive", Utils.formatNodeName(drive.getName()))%>" rel="tooltip" data-placement="bottom" title="<%=uicomponent.getLabel(drive.getName())%>"><%=uicomponent.getLabel(drive.getName())%></a>
+				<a class="driveLabel" href="javascript:void(0);" onclick="<%=uicomponent.event("SelectDrive", Utils.formatNodeName(drive.getName()))%>" rel="tooltip" data-placement="bottom" title="<%=uicomponent.getLabel(drive.getName())%>"><%=uicomponent.getLabel(drive.getName())%></a>
 				<%
 				    } else {
 						def styleDrive = drive.getName().replace(" ","");
 
 				%>
-				<a class="driveLabel" href="<%=uicomponent.event("SelectDrive", Utils.formatNodeName(drive.getName()))%>" rel="tooltip" data-placement="bottom"  title="<%=uicomponent.getLabel(drive.getName())%>">
+				<a class="driveLabel" href="javascript:void(0);" onclick="<%=uicomponent.event("SelectDrive", Utils.formatNodeName(drive.getName()))%>" rel="tooltip" data-placement="bottom"  title="<%=uicomponent.getLabel(drive.getName())%>">
 					<i class="uiIconEcms24x24DriveGeneral uiIconEcms24x24Drive${styleDrive} uiIconEcms24x24LightGray driveIcon"></i><%=uicomponent.getLabel(drive.getName())%>
 				</a>
 				<%      
@@ -62,9 +62,9 @@
 				<i class="driveIcon" onclick="<%=uicomponent.event("SelectDrive","${groupDrive.name}")%>" rel="tooltip" data-placement="bottom" title="${groupLabel}">
 					<img rel="tooltip" data-placement="bottom" title="${groupLabel}" alt="${groupLabel}" src="$thumbnailImage" onclick="<%=uicomponent.event("SelectDrive","${groupDrive.name}")%>"/>
 				</i>
-				<a class="driveLabel" href="<%=uicomponent.event("SelectDrive", Utils.formatNodeName(groupDrive.getName()))%>" rel="tooltip" data-placement="bottom" title="${groupLabel}">${groupLabel}</a>
+				<a class="driveLabel" href="javascript:void(0);" onclick="<%=uicomponent.event("SelectDrive", Utils.formatNodeName(groupDrive.getName()))%>" rel="tooltip" data-placement="bottom" title="${groupLabel}">${groupLabel}</a>
 	        <%  } else {  %>
-					<a class="driveLabel" href="<%=uicomponent.event("SelectDrive","${groupDrive.name}")%>" rel="tooltip" data-placement="bottom" title="${groupLabel}">
+					<a class="driveLabel" href="javascript:void(0);" onclick="<%=uicomponent.event("SelectDrive","${groupDrive.name}")%>" rel="tooltip" data-placement="bottom" title="${groupLabel}">
 						<i class="uiIconEcms24x24DriveGroup uiIconEcms24x24LightGray driveIcon"></i>${groupLabel}
 					</a>
 		      <%
@@ -89,9 +89,9 @@
 				<i class="driveIcon" onclick="<%=uicomponent.event("SelectDrive","${drive.name}")%>" rel="tooltip" data-placement="bottom" title="<%=uicomponent.getLabel(drive.getName())%>">
 					<img rel="tooltip" data-placement="bottom" title="<%=uicomponent.getLabel(drive.getName())%>" alt="<%=uicomponent.getLabel(drive.getName())%>" src="$thumbnailImage" onclick="<%=uicomponent.event("SelectDrive","${drive.name}")%>"/>
 				</i>
-				<a class="driveLabel" href="<%=uicomponent.event("SelectDrive", Utils.formatNodeName(drive.getName()))%>" rel="tooltip" data-placement="bottom" title="<%=uicomponent.getLabel(drive.getName())%>"><%=uicomponent.getLabel(drive.getName())%></a>
+				<a class="driveLabel" href="javascript:void(0);" onclick="<%=uicomponent.event("SelectDrive", Utils.formatNodeName(drive.getName()))%>" rel="tooltip" data-placement="bottom" title="<%=uicomponent.getLabel(drive.getName())%>"><%=uicomponent.getLabel(drive.getName())%></a>
 	      <%  } else { %>
-				<a class="driveLabel" href="<%=uicomponent.event("SelectDrive","${drive.name}")%>" rel="tooltip" data-placement="bottom" title="<%=uicomponent.getLabel(drive.getName())%>">
+				<a class="driveLabel" href="javascript:void(0);" onclick="<%=uicomponent.event("SelectDrive","${drive.name}")%>" rel="tooltip" data-placement="bottom" title="<%=uicomponent.getLabel(drive.getName())%>">
 					<i class="uiIconEcms24x24Drive${drive.name} uiIconEcms24x24LightGray driveIcon"></i> <%=uicomponent.getLabel(drive.getName())%>
 				</a>
         <%

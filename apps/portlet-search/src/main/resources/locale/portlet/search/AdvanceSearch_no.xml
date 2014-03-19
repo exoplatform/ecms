@@ -1,0 +1,98 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<bundle>
+  <UIDefaultSearchForm>
+    <label>
+      <keyword>Søkeord</keyword>
+      <portal>Portal</portal>
+      <Page>Side</Page>
+      <Document>Dokument</Document>
+    </label>
+    <action>
+      <Search>Søk</Search>
+    </action>
+  </UIDefaultSearchForm>
+
+  <UIDefaultSearchResult>
+    <label>
+      <Page>Side</Page>
+      <Document>Dokument</Document>
+      <DocumentAndPage>Dokument og side</DocumentAndPage>
+      <documentandpage>Dokument og side</documentandpage>
+      <resutlsCaption>Resultater</resutlsCaption>
+      <ofAboutCaption>av ca</ofAboutCaption>
+      <forCaption>for</forCaption>
+      <timeUnitCaption>sekunder</timeUnitCaption>
+      <similar>Sidene der det samme innholdet vises</similar>
+      <editor>Redaktør</editor>
+      <date>Dato</date>
+      <relevancy>Relevans</relevancy>
+      <title>Tittel</title>
+      <sortBy>Sorter etter:</sortBy>
+    </label>
+    <action>
+      <edit>Rediger</edit>
+    </action>
+    <msg>
+      <your-search>Ditt søk</your-search>
+      <did-not-match>samsvarte ikke med noen</did-not-match>
+      <new-suggestion>forslag</new-suggestion>
+    </msg>
+  </UIDefaultSearchResult>
+  <UISearchPageLayoutManager>
+    <label>
+      <itemsPerPageSelector>Elementer per side</itemsPerPageSelector>
+      <searchFormSelector>Søkeskjema mal</searchFormSelector>
+      <searchResultSelector>Søkeresultat mal</searchResultSelector>
+      <searchPaginatorSelector>Søk paginatormal</searchPaginatorSelector>
+      <searchPageLayoutSelector>Søkeside Layout mal</searchPageLayoutSelector>
+      <searchResultBasePathInputSetAction>Basis sti</searchResultBasePathInputSetAction>
+      <pageMode>Sidemodus</pageMode>
+      <option>
+        <none>Ingen</none>
+        <more>Mer</more>
+        <pagination>Paginering</pagination>
+      </option>
+    </label>
+    <action>
+      <Save>#{word.save}</Save>
+      <Cancel>#{word.cancel}</Cancel>
+    </action>
+  </UISearchPageLayoutManager>
+  <searchResultBasePathInputSetAction>
+    <title>
+      <SelectBasePath>Velg basis sti</SelectBasePath>
+    </title>
+  </searchResultBasePathInputSetAction>  
+  <UISearchForm>  
+   <message>
+     <keyword-not-support>Søkeordet er ugyldig. Noen tegn er ukjente.</keyword-not-support>
+     <not-checked>Velg en søketype.</not-checked>
+     <keyword-not-empty>Skriv inn et søkeord.</keyword-not-empty>
+   </message>
+  </UISearchForm>
+  <UIPaginatorDefault>
+    <label>
+      <next>Neste</next>
+      <previous>Forrige</previous>
+      <more>Mer</more>
+    </label>
+  </UIPaginatorDefault>
+  <UISearchPageLayoutDefault>
+    <label>
+      <quickEditTitle>Hurtigredigering</quickEditTitle>
+    </label>
+  </UISearchPageLayoutDefault>
+  <searchOption>
+    <label>
+      <pageCheckBox>på sider</pageCheckBox>
+      <documentCheckBox>i innhold</documentCheckBox>
+    </label>
+  </searchOption>
+  <ViewMode>
+    <label>
+      <option>
+        <all>søk alle nettsteder</all>
+      </option>  
+    </label>  
+  </ViewMode>
+</bundle>

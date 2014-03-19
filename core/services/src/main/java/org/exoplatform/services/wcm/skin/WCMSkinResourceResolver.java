@@ -20,6 +20,7 @@ import java.io.Reader;
 import java.io.StringReader;
 
 import javax.jcr.Node;
+import javax.jcr.PathNotFoundException;
 
 import org.exoplatform.portal.resource.Resource;
 import org.exoplatform.portal.resource.ResourceResolver;
@@ -78,6 +79,8 @@ public class WCMSkinResourceResolver implements ResourceResolver {
           return new StringReader(cssData);
         }
       };
+    } catch(PathNotFoundException e) {
+      return null;
     } catch(Exception e) {
       if (LOG.isErrorEnabled()) {
         LOG.error("Unexpected error happens", e);

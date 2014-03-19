@@ -2,51 +2,55 @@
 <bundle>
   <UIDefaultSearchForm>
     <label>
-      <keyword>Keyword</keyword>
-      <portal>Portal</portal>
-      <Page>Page</Page>
-      <Document>Document</Document>
+      <keyword>Ключевое слово</keyword>
+      <portal>Портал</portal>
+      <Page>Страница</Page>
+      <Document>Документ</Document>
     </label>
     <action>
-      <Search>Search</Search>
+      <Search>Поиск</Search>
     </action>
   </UIDefaultSearchForm>
 
   <UIDefaultSearchResult>
     <label>
-      <Page>Page</Page>
-      <Document>Document</Document>
-      <DocumentAndPage>Document and Page</DocumentAndPage>
-      <documentandpage>Document and Page</documentandpage>
-      <resutlsCaption>Results</resutlsCaption>
-      <ofAboutCaption>of about</ofAboutCaption>
-      <forCaption>for</forCaption>
-      <timeUnitCaption>seconds</timeUnitCaption>
-      <similar>Pages where the same content appears</similar>
-      <editor>Editor</editor>
+      <Page>Страница</Page>
+      <Document>Документ</Document>
+      <DocumentAndPage>Документ и страница</DocumentAndPage>
+      <documentandpage>Документ и страница</documentandpage>
+      <resutlsCaption>Результаты</resutlsCaption>
+      <ofAboutCaption>около</ofAboutCaption>
+      <forCaption>для</forCaption>
+      <timeUnitCaption>секунд</timeUnitCaption>
+      <similar>Страницы с тем же содержимым</similar>
+      <editor>Редактор</editor>
+      <date>Дата</date>
+      <relevancy>Релевантность</relevancy>
+      <title>Заголовок</title>
+      <sortBy>Сортировать по:</sortBy>
     </label>
     <action>
-      <edit>Edit</edit>
+      <edit>Редактировать</edit>
     </action>
     <msg>
-      <your-search>Your search</your-search>
-      <did-not-match>did not match any</did-not-match>
-      <new-suggestion>suggestion</new-suggestion>
+      <your-search>Ваш поиск</your-search>
+      <did-not-match>совпадений не найдено</did-not-match>
+      <new-suggestion>предложение</new-suggestion>
     </msg>
   </UIDefaultSearchResult>
   <UISearchPageLayoutManager>
     <label>
-      <itemsPerPageSelector>Items per Page</itemsPerPageSelector>
-      <searchFormSelector>Search Form Template</searchFormSelector>
-      <searchResultSelector>Search Result Template</searchResultSelector>
-      <searchPaginatorSelector>Search Paginator Template</searchPaginatorSelector>
-      <searchPageLayoutSelector>Search Page Layout Template</searchPageLayoutSelector>
-      <searchResultBasePathInputSetAction>Base Path</searchResultBasePathInputSetAction>
-      <pageMode>Page Mode</pageMode>
+      <itemsPerPageSelector>Результатов на странице</itemsPerPageSelector>
+      <searchFormSelector>Шаблон формы поиска</searchFormSelector>
+      <searchResultSelector>Шаблон результатов поиска</searchResultSelector>
+      <searchPaginatorSelector>Поиск шаблона разбивки на страницы</searchPaginatorSelector>
+      <searchPageLayoutSelector>Поиск шаблона макета страницы</searchPageLayoutSelector>
+      <searchResultBasePathInputSetAction>Базовый путь</searchResultBasePathInputSetAction>
+      <pageMode>Режим страницы</pageMode>
       <option>
-        <none>None</none>
-        <more>More</more>
-        <pagination>Pagination</pagination>
+        <none>Нет</none>
+        <more>Еще</more>
+        <pagination>Разбивка на страницы</pagination>
       </option>
     </label>
     <action>
@@ -56,38 +60,38 @@
   </UISearchPageLayoutManager>
   <searchResultBasePathInputSetAction>
     <title>
-      <SelectBasePath>Select Base Path</SelectBasePath>
+      <SelectBasePath>Выбрать базовый путь</SelectBasePath>
     </title>
   </searchResultBasePathInputSetAction>  
   <UISearchForm>  
    <message>
-     <keyword-not-support>The keyword is invalid. Some characters are not recognized.</keyword-not-support>
-     <not-checked>Please select a search type.</not-checked>
-     <keyword-not-empty>Please enter a keyword.</keyword-not-empty>
+     <keyword-not-support>Неверное ключевое слово. Некоторые символы не распознаны.</keyword-not-support>
+     <not-checked>Пожалуйста, выберите тип поиска.</not-checked>
+     <keyword-not-empty>Пожалуйста, введите ключевое слово.</keyword-not-empty>
    </message>
   </UISearchForm>
   <UIPaginatorDefault>
     <label>
-      <next>Next</next>
-      <previous>Previous</previous>
-      <more>More</more>
+      <next>Вперед</next>
+      <previous>Предыдущий</previous>
+      <more>Еще</more>
     </label>
   </UIPaginatorDefault>
   <UISearchPageLayoutDefault>
     <label>
-      <quickEditTitle>Quick Edit</quickEditTitle>
+      <quickEditTitle>Быстрое редактирование</quickEditTitle>
     </label>
   </UISearchPageLayoutDefault>
   <searchOption>
     <label>
-      <pageCheckBox>in Pages</pageCheckBox>
-      <documentCheckBox>in Content</documentCheckBox>
+      <pageCheckBox>на страницах</pageCheckBox>
+      <documentCheckBox>в содержании</documentCheckBox>
     </label>
   </searchOption>
   <ViewMode>
     <label>
       <option>
-        <all>search all sites</all>
+        <all>поиск всех сайтов</all>
       </option>  
     </label>  
   </ViewMode>

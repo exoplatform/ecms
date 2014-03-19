@@ -45,7 +45,7 @@
 				          			<div class=""><%= page.getURI() %></div>
 				        		</td>
 				        		<td>
-			              			<a href="<%=uicomponent.event("Select", page.getURI())%>" rel="tooltip" data-placement="bottom" title="<%=_ctx.appRes("UIPageSelectorPanel.title.select")%>">
+			              			<a href="javascript:void(0);" onclick="<%=uicomponent.event("Select", page.getURI())%>" rel="tooltip" data-placement="bottom" title="<%=_ctx.appRes("UIPageSelectorPanel.title.select")%>">
 			                			<div class="Select16x16Icon" style="margin: auto;"></div>
 			              			</a>
 				        		</td>

@@ -26,7 +26,6 @@ import javax.jcr.PathNotFoundException;
 import javax.jcr.Session;
 import javax.jcr.nodetype.ConstraintViolationException;
 
-import org.exoplatform.ecm.jcr.model.ClipboardCommand;
 import org.exoplatform.ecm.webui.component.explorer.UIJCRExplorer;
 import org.exoplatform.ecm.webui.component.explorer.UIWorkingArea;
 import org.exoplatform.ecm.webui.component.explorer.control.filter.CanCutNodeFilter;
@@ -37,8 +36,12 @@ import org.exoplatform.ecm.webui.component.explorer.control.filter.IsNotTrashHom
 import org.exoplatform.ecm.webui.component.explorer.control.listener.UIWorkingAreaActionListener;
 import org.exoplatform.ecm.webui.utils.JCRExceptionManager;
 import org.exoplatform.ecm.webui.utils.Utils;
+import org.exoplatform.services.cms.clipboard.ClipboardService;
+import org.exoplatform.services.cms.clipboard.jcr.model.ClipboardCommand;
 import org.exoplatform.services.log.ExoLogger;
 import org.exoplatform.services.log.Log;
+import org.exoplatform.services.security.ConversationState;
+import org.exoplatform.services.wcm.utils.WCMCoreUtils;
 import org.exoplatform.web.application.ApplicationMessage;
 import org.exoplatform.webui.config.annotation.ComponentConfig;
 import org.exoplatform.webui.config.annotation.EventConfig;
@@ -124,20 +127,12 @@ public class CutManageComponent extends UIAbstractManagerComponent {
       return;
     }
     try {
-      List<ClipboardCommand> clipboards = uiExplorer.getAllClipBoard();
-      for(ClipboardCommand command:clipboards) {
-        if(command.getSrcPath().equals(nodePath)) {
-          clipboards.remove(command);
-          break;
-        }
-      }
-      ClipboardCommand clipboard = new ClipboardCommand();
-      clipboard.setType(ClipboardCommand.CUT);
-      clipboard.setSrcPath(nodePath);
-      clipboard.setWorkspace(wsName);
-      uiExplorer.getAllClipBoard().add(clipboard);
-      if(isMultiSelect) {
-        uiWorkingArea.getVirtualClipboards().add(clipboard);
+      ClipboardCommand clipboard = new ClipboardCommand(ClipboardCommand.CUT, nodePath, wsName);
+      ClipboardService clipboardService = WCMCoreUtils.getService(ClipboardService.class);
+      String userId = ConversationState.getCurrent().getIdentity().getUserId();
+      clipboardService.addClipboardCommand(userId, clipboard, false);
+      if (isMultiSelect) {
+        clipboardService.addClipboardCommand(userId, clipboard, true);
       } else {
         session.save();
       }
@@ -159,7 +154,9 @@ public class CutManageComponent extends UIAbstractManagerComponent {
     UIWorkingArea uiWorkingArea = event.getSource().getParent();
     String nodePath = event.getRequestContext().getRequestParameter(OBJECTID);
     if(nodePath.indexOf(";") > -1) {
-      uiWorkingArea.getVirtualClipboards().clear();
+      ClipboardService clipboardService = WCMCoreUtils.getService(ClipboardService.class);
+      String userId = ConversationState.getCurrent().getIdentity().getUserId();
+      clipboardService.clearClipboardList(userId, true);
       processMultipleCut(Utils.removeChildNodes(nodePath), event, uiExplorer);
     } else {
       processCut(nodePath, event, uiExplorer, false);

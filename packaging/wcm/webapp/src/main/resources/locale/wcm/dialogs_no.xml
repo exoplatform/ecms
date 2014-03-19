@@ -1,0 +1,93 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+
+    Copyright (C) 2009 eXo Platform SAS.
+    
+    This is free software; you can redistribute it and/or modify it
+    under the terms of the GNU Lesser General Public License as
+    published by the Free Software Foundation; either version 2.1 of
+    the License, or (at your option) any later version.
+    
+    This software is distributed in the hope that it will be useful,
+    but WITHOUT ANY WARRANTY; without even the implied warranty of
+    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the GNU
+    Lesser General Public License for more details.
+    
+    You should have received a copy of the GNU Lesser General Public
+    License along with this software; if not, write to the Free
+    Software Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA
+    02110-1301 USA, or see the FSF site: http://www.fsf.org.
+
+-->
+<bundle>
+  <WebContent>
+    <dialog>
+      <label>
+        <MainContent>Hovedinnhold</MainContent>
+        <cssFile>default.css</cssFile>
+        <jsFile>default.js</jsFile>
+        <Advanced>Avansert</Advanced>
+        <Summary>Sammendrag</Summary>
+        <name>#{word.name}</name>
+        <title>Tittel</title>
+        <ContentCSS>CSS Data</ContentCSS>
+        <hintCSS>Du kan angi hovedstilsettet for web-innholdet ditt. Dette stilsettet vil overstyre stilsettet som er definert på nettstedsnivå og på delt nivå.</hintCSS>
+        <ContentJS>JS Data</ContentJS>
+        <hintJS>Du kan angi noe JavaScript-kode som vil bli kjørt før web-innholdet vises.</hintJS>
+        <WebContentHtml>Hovedinnhold</WebContentHtml>
+        <Illustration>Illustrasjon</Illustration>
+        <hintIllustration>Du kan angi et bilde som skal vises når web-innholdet vises i listen. Du kan også legge til et sammendrag til dette bildet.</hintIllustration>
+        <confirm-delete>Er du sikker på at du vil slette denne illustrasjonen?</confirm-delete>
+        <illustrationImage>Illustrasjonsbilde</illustrationImage>
+        <imageMimeType>Bildetype</imageMimeType>
+        <image>Last opp bilde</image>
+        <imageWidth>Bildebredde</imageWidth>
+        <imageHeight>Bildehøyde</imageHeight>
+        <Synchronize>Synkronisere med CSS og HTML</Synchronize>
+      </label>
+    </dialog>
+  </WebContent>
+
+  <CSSFile>
+    <dialog>
+      <label>
+        <name>#{word.name}</name>
+        <active>Aktiv</active>
+        <priority>Prioritet</priority>
+        <content>CSS Data</content>
+      </label>
+    </dialog>
+  </CSSFile>
+
+  <JSFile>
+    <dialog>
+      <label>
+        <name>#{word.name}</name>
+        <active>Aktiv</active>
+        <priority>Prioritet</priority>
+        <content>JS Data</content>
+      </label>
+    </dialog>
+  </JSFile>
+
+  <WebLink>
+    <dialog>
+      <label>
+        <name>#{word.name}</name>
+        <url>URL</url>
+        <description>Beskrivelse</description>
+      </label>
+    </dialog>
+  </WebLink>
+
+  <SiteMetadata>
+    <dialog>
+      <label>
+        <title>Nettstedets tittel</title>
+        <description>Nettstedsbeskrivelse</description>
+        <keywords>Nøkkelord for nettstedet</keywords>
+        <robots>Søkemotoroppsett</robots>
+      </label>
+    </dialog>
+  </SiteMetadata>
+</bundle>

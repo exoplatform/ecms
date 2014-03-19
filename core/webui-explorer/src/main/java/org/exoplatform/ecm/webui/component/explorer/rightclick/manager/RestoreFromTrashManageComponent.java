@@ -16,6 +16,7 @@
  */
 package org.exoplatform.ecm.webui.component.explorer.rightclick.manager;
 
+import org.apache.commons.lang.StringEscapeUtils;
 import org.exoplatform.ecm.webui.component.explorer.UIJCRExplorer;
 import org.exoplatform.ecm.webui.component.explorer.UIWorkingArea;
 import org.exoplatform.ecm.webui.component.explorer.control.filter.*;
@@ -260,6 +261,8 @@ public class RestoreFromTrashManageComponent extends UIAbstractManagerComponent 
         restoreNotice = res.getString(restoreNotice);
         restoreNotice = restoreNotice.replace("{" + 0 + "}", String.valueOf(numberItemsRestored));
       }      
+      restoreNotice = restoreNotice.replace("\"", "'");
+      restoreNotice = StringEscapeUtils.escapeHtml(restoreNotice);
       if(restoreNotice.length() > 0) {
         UIWorkingArea uiWorkingArea = event.getSource().getParent();
         uiWorkingArea.setWCMNotice(restoreNotice);

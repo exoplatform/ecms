@@ -87,6 +87,8 @@ public class ActivityCommonService {
   
   private Set<Integer> creatingNodes = new HashSet<Integer>();
 
+  private Set<Integer> editingNodes = new HashSet<Integer>();
+
   public Map<String, Object> getPreProperties() { return properties; }
   
   public void setPreProperties(Map<String, Object> preProperties) { properties = preProperties; }
@@ -101,7 +103,7 @@ public class ActivityCommonService {
   }
   
   /**
-   * set the node status to Creating 
+   * set the node status to Creating
    * @param node
    * @param isCreating
    * @return
@@ -111,11 +113,31 @@ public class ActivityCommonService {
     NodeLocation nodeLocation = NodeLocation.getNodeLocationByNode(node);
     if(isCreating){
       creatingNodes.add(nodeLocation.hashCode());
+      setEditing(node, true);
     }else{
       creatingNodes.remove(nodeLocation.hashCode());
+      setEditing(node, false);
     }
   }
-  
+
+  /**
+   * Set the node status to Editing
+   * Status Editing means node in status creating or editing
+   *
+   * @param node Node
+   * @param isEditing
+   * @return
+   *  true if successful to Editing
+   */
+  public void setEditing(Node node, boolean isEditing) {
+    NodeLocation nodeLocation = NodeLocation.getNodeLocationByNode(node);
+    if(isEditing){
+      editingNodes.add(nodeLocation.hashCode());
+    }else{
+      editingNodes.remove(nodeLocation.hashCode());
+    }
+  }
+
   /**
    * return if the node is Creating
    * @param node
@@ -127,6 +149,20 @@ public class ActivityCommonService {
     NodeLocation nodeLocation = NodeLocation.getNodeLocationByNode(node);
     isCreating = creatingNodes.contains(nodeLocation.hashCode());
     return isCreating;
+  }
+
+  /**
+   * Return if the node is Editing.
+   * Status Editing means node in status creating or editing
+   * @param node Node
+   * @return
+   *   true if the node is Editing
+   */
+  public boolean isEditing(Node node){
+    boolean isEditing = false;
+    NodeLocation nodeLocation = NodeLocation.getNodeLocationByNode(node);
+    isEditing = editingNodes.contains(nodeLocation.hashCode());
+    return isEditing;
   }
   
   public boolean isAcceptedNode(Node node) {

@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<bundle>
+<UIPopupWindow>
+<title>
+<UIViewInfoManager>查看資訊</UIViewInfoManager>
+</title>
+</UIPopupWindow>
+    
+<ECMContextMenu>
+<event>
+<ViewInfo>查看資訊</ViewInfo>
+</event>
+</ECMContextMenu>
+<UIViewInfoContainer>
+<label>
+      <name>名稱</name>
+      <title>標題</title>
+      <type>類型</type>
+      <size>大小</size>
+      <owner>擁有者</owner>
+      <lastModifier>最後修改</lastModifier>
+      <created>建立日期</created>
+      <lastModified>上次修改的日期</lastModified>
+      <publicationState>發佈狀態</publicationState>
+</label>
+<value>
+      <folder>資料夾</folder>
+</value>
+<action>
+<Close>#{word.close}</Close>
+</action>
+</UIViewInfoContainer>
+</bundle>

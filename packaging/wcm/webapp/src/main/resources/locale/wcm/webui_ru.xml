@@ -22,127 +22,127 @@
 <bundle>
   <UIExoStart>
     <tooltip>
-      <homepage>Homepage</homepage>
+      <homepage>Главная страница</homepage>
     </tooltip>
   </UIExoStart>
 
   <UIFormInputSetWithAction>
     <msg>
-      <confirm-delete>Are you sure you want to delete this item?</confirm-delete>
+      <confirm-delete>Вы уверены, что хотите удалить этот элемент?</confirm-delete>
     </msg>
   </UIFormInputSetWithAction>
 
   <Drives>
     <label>
-      <ManagedSites>Sites Management</ManagedSites>
-      <SharedSite>Shared Site</SharedSite>
+      <ManagedSites>Управление сайтами</ManagedSites>
+      <SharedSite>Сайт коллективного пользования</SharedSite>
     </label>
   </Drives>
 
   <Views>
     <label>
-      <wcm-view>Web</wcm-view>
-      <admin-view>Admin</admin-view>
-      <icon-view>Icons</icon-view>
-      <thumbails-view>Thumbnails</thumbails-view>
-      <list-view>List</list-view>
-      <authoring-view>Authoring</authoring-view>
-      <wcm-category-view>Categories</wcm-category-view>
-      <file-view>File Management View</file-view>
+      <wcm-view>Веб</wcm-view>
+      <admin-view>Администратор</admin-view>
+      <icon-view>Иконки</icon-view>
+      <thumbails-view>Эскизы</thumbails-view>
+      <list-view>Список</list-view>
+      <authoring-view>Разработка</authoring-view>
+      <wcm-category-view>Категории</wcm-category-view>
+      <file-view>Вид управления файлами</file-view>
     </label>
   </Views>
 
   <UIActionBar>
     <obtion>
-      <Publication>Publication</Publication>
-      <System>System</System>
+      <Publication>Публикация</Publication>
+      <System>Система</System>
     </obtion>
   </UIActionBar>
 
   <UIPageSelectorPanel>
     <header>
-      <path>Path</path>
+      <path>Путь</path>
       <action>#{word.action}</action>
     </header>
     <msg>
-      <child-not-found>No Page Found.</child-not-found>
+      <child-not-found>Страница не найдена.</child-not-found>
     </msg>
     <title>
-      <select>Select</select>
+      <select>Выбрать</select>
     </title>
   </UIPageSelectorPanel>
 
   <UIContentDialogFormPopupWindow>
     <title>
-      <UIContentDialogPreference>Web Content Preference</UIContentDialogPreference>
+      <UIContentDialogPreference>Настройка веб-контента</UIContentDialogPreference>
     </title>
   </UIContentDialogFormPopupWindow>
 
   <UITabPane>
     <title>
-      <UIContentBrowsePanelOne>Content Browser</UIContentBrowsePanelOne>
-      <UIContentBrowsePanelMulti>Content Browser</UIContentBrowsePanelMulti>
-      <UIContentBrowsePanelFolder>Folder Browser</UIContentBrowsePanelFolder>
-      <UIContentSearchForm>Content Search Form</UIContentSearchForm>
-      <UIContentSearchResult>Search Result</UIContentSearchResult>
-      <UIContentViewer>Preview Content</UIContentViewer>
-      <WebContentMetadataPopup>Property Selector</WebContentMetadataPopup>
-      <WebContentNodeTypePopup>Nodetype Selector</WebContentNodeTypePopup>
-      <UIPermissionManager>Permission Manager</UIPermissionManager>
+      <UIContentBrowsePanelOne>Обзор контента</UIContentBrowsePanelOne>
+      <UIContentBrowsePanelMulti>Обзор контента</UIContentBrowsePanelMulti>
+      <UIContentBrowsePanelFolder>Обзор папок</UIContentBrowsePanelFolder>
+      <UIContentSearchForm>Форма поиска контента</UIContentSearchForm>
+      <UIContentSearchResult>Результат поиска</UIContentSearchResult>
+      <UIContentViewer>Предпросмотр контента</UIContentViewer>
+      <WebContentMetadataPopup>Выбор свойства</WebContentMetadataPopup>
+      <WebContentNodeTypePopup>Выбор типа узла</WebContentNodeTypePopup>
+      <UIPermissionManager>Управление разрешениями</UIPermissionManager>
     </title>
   </UITabPane>
 
   <UIContentBrowsePanelOne>
     <selectBoxValues>
-      <FilterBy>Filter by</FilterBy>
-      <WebContent>Web Content</WebContent>
-      <DMSDocument>Document</DMSDocument>
-      <Media>Media</Media>
+      <FilterBy>Фильтр по</FilterBy>
+      <WebContent>Веб-контент</WebContent>
+      <DMSDocument>Документ</DMSDocument>
+      <Media>Медиа</Media>
     </selectBoxValues>
     <msg>
-      <node-checkout>The node is checked out. Please check the node before performing this function.</node-checkout>
+      <node-checkout>Узел извлечен. Пожалуйста, проверьте узел перед выполнением этой функции.</node-checkout>
     </msg>
   </UIContentBrowsePanelOne>
 
   <UIContentBrowsePanelMulti>
     <selectBoxValues>
-      <FilterBy>Filter by</FilterBy>
-      <WebContent>Web Content</WebContent>
-      <DMSDocument>Document</DMSDocument>
-      <Media>Media</Media>
+      <FilterBy>Фильтр по</FilterBy>
+      <WebContent>Веб-контент</WebContent>
+      <DMSDocument>Документ</DMSDocument>
+      <Media>Медиа</Media>
     </selectBoxValues>
   </UIContentBrowsePanelMulti>
 
   <UIContentBrowsePanelOne>
     <label>
-      <LeftColumn>Select a folder to display its children as content.</LeftColumn>
-      <RightColumn>The content below can be selected.</RightColumn>
+      <LeftColumn>Выберите папку для отображения ее дочерних элементов в качестве содержания.</LeftColumn>
+      <RightColumn>Можно выбрать контент, поданный ниже.</RightColumn>
     </label>
   </UIContentBrowsePanelOne>
 
   <UIContentBrowsePanelMulti>
     <label>
-      <LeftColumn>Select a folder to display its children as content.</LeftColumn>
-      <RightColumn>The content below can be selected.</RightColumn>
+      <LeftColumn>Выберите папку для отображения ее дочерних элементов в качестве содержания.</LeftColumn>
+      <RightColumn>Можно выбрать контент, поданный ниже.</RightColumn>
     </label>
   </UIContentBrowsePanelMulti>
 
   <UIContentBrowsePanelFolder>
     <label>
-      <LeftColumn>Select a folder to display its children as content.</LeftColumn>
-      <RightColumn>The folder below can be selected.</RightColumn>
+      <LeftColumn>Выберите папку для отображения ее дочерних элементов в качестве содержания.</LeftColumn>
+      <RightColumn>Можно выбрать папку ниже.</RightColumn>
     </label>
   </UIContentBrowsePanelFolder>
 
   <UISelectedContentGrid>
     <label>
       <name>#{word.name}</name>
-      <add>Add</add>
-      <delete>Delete</delete>
+      <add>Добавить</add>
+      <delete>Удалить</delete>
     </label>
     <msg>
-      <no-content-found>No content found.</no-content-found>
-      <non-content>You have not selected any content.</non-content>
+      <no-content-found>Содержимое не найдено.</no-content-found>
+      <non-content>Вы не выбрали содержимое.</non-content>
     </msg>
   </UISelectedContentGrid>
 
@@ -156,79 +156,79 @@
   <UIContentBrowsePathSelector>
     <header>
       <name>#{word.name}</name>
-      <publicationstate>Publication State</publicationstate>
+      <publicationstate>Состояние публикации</publicationstate>
       <action>Действие</action>
     </header>
     <msg>
-      <child-not-found>No Content Found</child-not-found>
+      <child-not-found>Контент не найден</child-not-found>
     </msg>
   </UIContentBrowsePathSelector>
 
   <UIContentBrowsePathSelectorFolder>
     <header>
       <name>#{word.name}</name>
-      <publicationstate>Publication State</publicationstate>
+      <publicationstate>Состояние публикации</publicationstate>
       <action>Действие</action>
     </header>
     <msg>
-      <child-not-found>No Folder Found</child-not-found>
+      <child-not-found>Папка не найдена</child-not-found>
     </msg>
   </UIContentBrowsePathSelectorFolder>
 
   <UIContentSearchForm>
     <title>
-      <Location>Site Name</Location>
-      <SearchByName>Search by Name</SearchByName>
-      <Fulltext>A word or phrase in context</Fulltext>
-      <Property>Property</Property>
-      <Contain>Contain</Contain>
-      <FromDate>From Date</FromDate>
-      <ToDate>To Date</ToDate>
-      <DocumentType>Document Type</DocumentType>
+      <Location>Название сайта</Location>
+      <SearchByName>Поиск по имени</SearchByName>
+      <Fulltext>Слово или фраза в контексте</Fulltext>
+      <Property>Свойство</Property>
+      <Contain>Содержит</Contain>
+      <FromDate>Дата От</FromDate>
+      <ToDate>Дата До</ToDate>
+      <DocumentType>Тип документа</DocumentType>
     </title>
     <tooltip>
-      <AddMetadataType>Add Property</AddMetadataType>
-      <AddNodeType>Add Node Type</AddNodeType>
+      <AddMetadataType>Добавить свойство</AddMetadataType>
+      <AddNodeType>Добавить тип узла</AddNodeType>
     </tooltip>    
     <label>
       <option>
-        <CREATED>Created</CREATED>
-        <MODIFIED>Modified</MODIFIED>
+        <CREATED>Создано</CREATED>
+        <MODIFIED>Дата последней модификации</MODIFIED>
       </option>
     </label>
     <action>
-      <SearchWebContent>Search</SearchWebContent>
+      <SearchWebContent>Искать</SearchWebContent>
     </action>
     <msg>
-      <time-to-late>The searching time is too long.</time-to-late>
-      <empty-field>Please input a valid keyword for search.</empty-field>
-      <invalid-format>Invalid date/time format in field '{0}'.</invalid-format>
-      <invalid-date>"To Date" must be later than "From Date"</invalid-date>
-      <invalid-nodeType>The node type "{0}" is invalid. Please check again.</invalid-nodeType>
-      <invalid-keyword>The keyword is invalid. Some characters are not supported.</invalid-keyword>
+      <time-to-late>Слишком длительное время поиска.</time-to-late>
+      <empty-field>Пожалуйста, введите действительное ключевое слово для поиска.</empty-field>
+      <invalid-format>Недопустимый формат даты в поле '{0}'.</invalid-format>
+      <invalid-date>"Дата До" должна быть позже, чем "Дата От"</invalid-date>
+      <invalid-nodeType>Недопустимый тип узла "{0}". Пожалуйста, проверьте еще раз.</invalid-nodeType>
+      <invalid-keyword>Неверное ключевое слово. Некоторые символы не поддерживаются.</invalid-keyword>
     </msg>
   </UIContentSearchForm>
 
   <WebContentMetadataPopup>
     <title>
-      <UIContentPropertySelector>Property Selector</UIContentPropertySelector>
+      <UIContentPropertySelector>Выбор свойства</UIContentPropertySelector>
     </title>
   </WebContentMetadataPopup>
 
   <UIContentPropertySelector>
     <action>
-      <Add>Add</Add>
+      <Add>Добавить</Add>
       <Cancel>#{word.cancel}</Cancel>
     </action>
     <label>
-      <metadataType>Metadata Type</metadataType>
-      <property_select>Property</property_select>
+      <metadataType>Тип метаданных</metadataType>
+      <property_select>Свойство</property_select>
     </label>
   </UIContentPropertySelector>
 
   <WebContentNodeTypePopup>
     <title>
-      <UIContentNodeTypeSelector>Node Type Selector</UIContentNodeTypeSelector>
+      <UIContentNodeTypeSelector>Выбор типа узла</UIContentNodeTypeSelector>
     </title>
   </WebContentNodeTypePopup>
 
@@ -241,199 +241,199 @@
 
   <UIContentSearchResult>
     <header>
-      <title>Титул</title>
-      <score>Score</score>
-      <publicationstate>Publication State</publicationstate>
+      <title>Заголовок</title>
+      <score>Результат</score>
+      <publicationstate>Состояние публикации</publicationstate>
       <action>Действие</action>
     </header>
     <title>
-      <Select>Select</Select>
-      <View>View</View>
+      <Select>Выбрать</Select>
+      <View>Показать</View>
     </title>
     <msg>
-    <template-not-support>Cannot preview this content. The template is not supported</template-not-support>
+    <template-not-support>Невозможно предварительно просмотреть этот контент. Шаблон не поддерживается</template-not-support>
     </msg>
   </UIContentSearchResult>
 
   <UIContentDialogForm>
     <action>
-      <SaveDraft>Save Draft</SaveDraft>
-      <FastPublish>Fast Publish</FastPublish>
-      <Preferences>Preferences</Preferences>
+      <SaveDraft>Сохранить черновик</SaveDraft>
+      <FastPublish>Быстрая публикация</FastPublish>
+      <Preferences>Настройки</Preferences>
       <Close>#{word.close}</Close>
     </action>
     <msg>
-      <access-denied>You do not have permission to add categories to this document.</access-denied>
-      <exception>An error occurred while adding categories to this document.</exception>
-      <non-categories>Categories are wrong. Please select appropriate categories.</non-categories>
+      <access-denied>У вас недостаточно прав для добавления категорий в этот документ.</access-denied>
+      <exception>Произошла ошибка при добавлении категорий в этот документ.</exception>
+      <non-categories>Неверные категории. Пожалуйста, выберите соответствующие категории.</non-categories>
     </msg>
   </UIContentDialogForm>
 
   <UIPermissionManager>
     <label>
-      <UIPermissionInputSetWithAction>Permission</UIPermissionInputSetWithAction>
-      <UIAccessibleCheckboxInput>Access Right</UIAccessibleCheckboxInput>
-      <UIEditableCheckboxInput>Edit Right</UIEditableCheckboxInput>
+      <UIPermissionInputSetWithAction>Разрешение</UIPermissionInputSetWithAction>
+      <UIAccessibleCheckboxInput>Право доступа</UIAccessibleCheckboxInput>
+      <UIEditableCheckboxInput>Право на редактирование</UIEditableCheckboxInput>
     </label>
     <action>
       <Save>#{word.save}</Save>
-      <Clear>Clear</Clear>
+      <Clear>Очистить</Clear>
       <title>
-        <Edit>Edit</Edit>
-        <Delete>Delete</Delete>
+        <Edit>Редактировать</Edit>
+        <Delete>Удалить</Delete>
       </title>
     </action>
   </UIPermissionManager>
 
   <UIPermissionManagerGrid>
     <header>
-      <owner>Permission</owner>
-      <accessible>Accessible</accessible>
-      <editable>Editable</editable>
+      <owner>Разрешение</owner>
+      <accessible>Доступный</accessible>
+      <editable>Редактируемый</editable>
       <action>Действие</action>
     </header>
     <msg>
-      <confirm-delete-permission>Are you sure you want to delete this permission?</confirm-delete-permission>
-      <no-permission-remove>You do not have permission.</no-permission-remove>
-      <access-denied>Access denied.</access-denied>
-      <node-locked>The path element {0} or one of its parents is locked.</node-locked>
-      <userOrGroup-required>You must select a user or group.</userOrGroup-required>
-      <checkbox-require>You must set rights.</checkbox-require>
-      <node-checkedin>You must check out first.</node-checkedin>
+      <confirm-delete-permission>Вы уверены, что хотите удалить это разрешение?</confirm-delete-permission>
+      <no-permission-remove>У вас нет разрешения.</no-permission-remove>
+      <access-denied>Доступ запрещён.</access-denied>
+      <node-locked>Элемент пути {0} или один из его дочерних элементов заблокирован.</node-locked>
+      <userOrGroup-required>Необходимо выбрать пользователя или группу.</userOrGroup-required>
+      <checkbox-require>Вы должны установить права.</checkbox-require>
+      <node-checkedin>Сначала отметьте.</node-checkedin>
     </msg>
   </UIPermissionManagerGrid>
 
   <UIPermissionInputSetWithAction>
     <title>
-      <SelectUser>Select User</SelectUser>
-      <SelectMember>Select Member</SelectMember>
-      <AddAny>Add Any Permission</AddAny>
+      <SelectUser>Выбрать пользователя</SelectUser>
+      <SelectMember>Выбрать члена</SelectMember>
+      <AddAny>Добавить любое разрешение</AddAny>
     </title>
   </UIPermissionInputSetWithAction>
 
   <UIUserSelectorPopupWindow>
     <title>
-      <UIUserContainer>User Selector</UIUserContainer>
+      <UIUserContainer>Выбор пользователя</UIUserContainer>
     </title>
   </UIUserSelectorPopupWindow>
 
   <UIGroupSelectorPopupWindow>
     <title>
-      <UIGroupMemberSelector>Группы</UIGroupMemberSelector>
+      <UIGroupMemberSelector>Выбор группы</UIGroupMemberSelector>
     </title>
   </UIGroupSelectorPopupWindow>
 
   <UIGroupMemberSelector>
     <label>
-      <selectGroup>Select Group</selectGroup>
-      <selectMembership>Select Membership</selectMembership>
+      <selectGroup>Выбрать группу</selectGroup>
+      <selectMembership>Выбрать членство</selectMembership>
     </label>
   </UIGroupMemberSelector>
 
   <UIContentDialogPreference>
     <action>
-      <Back>Back</Back>
+      <Back>Назад</Back>
     </action>
   </UIContentDialogPreference>
 
   <ZeroValidator>
     <msg>
-      <Invalid-number>Zero is not accepted in the field '{0}'.</Invalid-number>
+      <Invalid-number>Ноль не приемлем в поле «{0}».</Invalid-number>
     </msg>
   </ZeroValidator>
 
   <UIDropDownPageTemp>
     <item>
-      <WCMPageConfigs>WCM Page Configurations</WCMPageConfigs>
-      <ColumnPageConfigs>Column Page Configurations</ColumnPageConfigs>
-      <RowPageConfigs>Row Page Configurations</RowPageConfigs>
-      <TabsPageConfigs>Tabs Page Configurations</TabsPageConfigs>
-      <MixPageConfigs>Mix Page Configurations</MixPageConfigs>
+      <WCMPageConfigs>Конфигурации страницы WCM</WCMPageConfigs>
+      <ColumnPageConfigs>Конфигурация страницы колонок</ColumnPageConfigs>
+      <RowPageConfigs>Конфигурация страницы строк</RowPageConfigs>
+      <TabsPageConfigs>Конфигурация страницы вкладок</TabsPageConfigs>
+      <MixPageConfigs>Конфигурация смешанной страницы</MixPageConfigs>
     </item>
   </UIDropDownPageTemp>
 
   <UIWizardPageSelectLayoutForm>
     <label>
-      <SingleContentViewer>Single Content Viewer</SingleContentViewer>
-      <ContentListViewer>Content List Viewer</ContentListViewer>
-      <Search>Search</Search>
-      <Sitemap>Site Map</Sitemap>
-      <TwoColumnsLayout>Two-column Layout</TwoColumnsLayout>
-      <ThreeColumnsLayout>Three-column Layout</ThreeColumnsLayout>
-      <TwoRowsLayout>Two-row Layout</TwoRowsLayout>
-      <ThreeRowsLayout>Three-row Layout</ThreeRowsLayout>
-      <TwoTabsLayout>Two-tab layout</TwoTabsLayout>
-      <ThreeTabsLayout>Three-tab Layout</ThreeTabsLayout>
-      <TwoColumnsOneRowLayout>Two-column &amp; One-row Layout</TwoColumnsOneRowLayout>
-      <OneRowTwoColumnsLayout>One-row &amp; Two-column Layout</OneRowTwoColumnsLayout>
-      <ThreeRowsTwoColumnsLayout>Three-row &amp; Two-column Layout</ThreeRowsTwoColumnsLayout>
+      <SingleContentViewer>Просмотр одного контента</SingleContentViewer>
+      <ContentListViewer>Просмотра списка контента</ContentListViewer>
+      <Search>Искать</Search>
+      <Sitemap>Карта сайта</Sitemap>
+      <TwoColumnsLayout>Макет с двумя столбцами</TwoColumnsLayout>
+      <ThreeColumnsLayout>Макет с тремя столбцами</ThreeColumnsLayout>
+      <TwoRowsLayout>Макет с двумя строками</TwoRowsLayout>
+      <ThreeRowsLayout>Макет с тремя строками</ThreeRowsLayout>
+      <TwoTabsLayout>Макет с двумя вкладками</TwoTabsLayout>
+      <ThreeTabsLayout>Макет с тремя вкладками</ThreeTabsLayout>
+      <TwoColumnsOneRowLayout>Макет с двумя столбцами и одной строкой</TwoColumnsOneRowLayout>
+      <OneRowTwoColumnsLayout>Макет с одной строкой и двумя столбцами</OneRowTwoColumnsLayout>
+      <ThreeRowsTwoColumnsLayout>Макет с тремя строками и двумя столбцами</ThreeRowsTwoColumnsLayout>
     </label>
   </UIWizardPageSelectLayoutForm>
 
   <Signin>
-    <welcome>Welcome</welcome>
-    <login>Login</login>
-    <logout>Logout</logout>
-    <language>Change Language</language>
-    <register>Register</register>
+    <welcome>Добро пожаловать</welcome>
+    <login>Авторизация</login>
+    <logout>Выйти</logout>
+    <language>Изменить язык</language>
+    <register>Зарегистрироваться</register>
   </Signin>
   <UIDriveForm>
 <label>
-<wcm-category-view>Category View</wcm-category-view>
-<wcm-view>WCM Content View</wcm-view>
+<wcm-category-view>Просмотр по категориям</wcm-category-view>
+<wcm-view>Просмотр WCM контента</wcm-view>
 </label>
   </UIDriveForm>
   
   <ContentSelector>
     <title>
-      <PersonalDrives>Personal Drives</PersonalDrives>
-      <GeneralDrives>General Drives</GeneralDrives>
-      <GroupDrives>Group Drives</GroupDrives>
-      <Private>Private</Private>
-      <Public>Public</Public>
-      <BackupCenter>Backup Center</BackupCenter>
-      <CategorizedDocumentsCenter>Categorized Documents Center</CategorizedDocumentsCenter>
-      <CollaborationCenter>Collaboration Center</CollaborationCenter>
-      <DigitalAssetsManagementCenter>Digital Assets Management Center</DigitalAssetsManagementCenter>
-      <DMSAdministration>DMS Administration</DMSAdministration>
-      <DocumentsManagementCenter>Documents Management Center</DocumentsManagementCenter>
-      <LiveDocumentsCenter>Live Documents Center</LiveDocumentsCenter>
-      <PendingDocumentsCenter>Pending Documents Center</PendingDocumentsCenter>
-      <RecordsManagementCenter>Records Management Center</RecordsManagementCenter>
-      <SharedUsersSpace>Shared Users Space</SharedUsersSpace>
-      <Systemfiles>System Files</Systemfiles>
-      <ValidationRequestsDocumentsCenter>Validation Requests Documents Center</ValidationRequestsDocumentsCenter>
-      <ManagedSites>Sites Management</ManagedSites>
-      <SharedSite>Shared Site</SharedSite>
+      <PersonalDrives>Персональные диски</PersonalDrives>
+      <GeneralDrives>Общие диски</GeneralDrives>
+      <GroupDrives>Диски группы</GroupDrives>
+      <Private>Приватный</Private>
+      <Public>Публичный</Public>
+      <BackupCenter>Центр резервного копирования</BackupCenter>
+      <CategorizedDocumentsCenter>Центр упорядоченных по категориям документов</CategorizedDocumentsCenter>
+      <CollaborationCenter>Центр сотрудничества</CollaborationCenter>
+      <DigitalAssetsManagementCenter>Центр системы управления цифровыми ресурсами</DigitalAssetsManagementCenter>
+      <DMSAdministration>Администрирование DMS</DMSAdministration>
+      <DocumentsManagementCenter>Центр управления документами</DocumentsManagementCenter>
+      <LiveDocumentsCenter>Центр обновляемых документов</LiveDocumentsCenter>
+      <PendingDocumentsCenter>Центр документов на рассмотрении</PendingDocumentsCenter>
+      <RecordsManagementCenter>Центр управления записями</RecordsManagementCenter>
+      <SharedUsersSpace>Пространство общих пользователей</SharedUsersSpace>
+      <Systemfiles>Системные файлы</Systemfiles>
+      <ValidationRequestsDocumentsCenter>Центр документов по утверждению запросов</ValidationRequestsDocumentsCenter>
+      <ManagedSites>Управление сайтами</ManagedSites>
+      <SharedSite>Сайт коллективного пользования</SharedSite>
     </title>
   </ContentSelector>
   
   <UICategoryNavigationTargetPathPopupWindow>
     <title>
-      <UIPageSelector>Page Selector</UIPageSelector>
+      <UIPageSelector>Выбор страницы</UIPageSelector>
     </title>
   </UICategoryNavigationTargetPathPopupWindow>
   
   <UIDocumentInfo>
     <msg>
-      <access-denied-exception>Access denied. You maybe not have read permission, or the node may have been removed or changed.</access-denied-exception>
+      <access-denied-exception>Доступ запрещен. Возможно, у вас нет разрешения на чтение, либо узел был удален или изменен.</access-denied-exception>
     </msg>
   </UIDocumentInfo>
   <UIPortalApplication>
     <title>
-      <abort>Abort</abort>
+      <abort>Прервать</abort>
     </title>
   </UIPortalApplication>    
   
   <CategoryNavigationTemplate>
   <label>
-  <home>Home</home>
+  <home>Домой</home>
   </label>
   </CategoryNavigationTemplate>
   
   <Breadcrumb>
   <label>
-  <home>Home</home>
+  <home>Домой</home>
   </label>  
   </Breadcrumb>
 </bundle>

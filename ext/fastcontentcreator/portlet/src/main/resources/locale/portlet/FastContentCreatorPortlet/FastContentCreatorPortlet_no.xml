@@ -1,0 +1,197 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<bundle>
+  <UIFCCForm>
+    <msg>
+      <name-not-allowed>Dette navnet er ikke tillatt.</name-not-allowed>
+      <in-versioning>Kontroller gjeldende node før du legger til en ny node.</in-versioning>
+      <cannot-save>Det oppstod en feil under lagring av noden.</cannot-save>
+      <saved-successfully>{0}</saved-successfully>
+      <not-support>Kan ikke laste malen {0}.</not-support>
+      <not-add-folder>Bare filer kan legges til denne mappen.</not-add-folder>
+      <access-denied>Ingen tilgang. Du har ikke rettigheter til å legge til i '{0}'.</access-denied>
+      <path-not-found>Stien: {0} har blitt slettet eller er ugyldige.</path-not-found>
+      <node-locked>Noden {0} er låst. Du må låse opp denne noden før du kan opprette dokumenter.</node-locked>
+      <node-isExist>Denne noden finnes allerede i '{0}', og det er ikke tillatt med samme navn som noen av sine sideordnede noder.</node-isExist>
+      <get-dialog-path>Det oppstod en feil under henting av dialogboksens sti.</get-dialog-path>
+      <new-jcr-template>Det oppstod en feil under oppretting av ny mal.</new-jcr-template>
+    </msg>
+    <action>
+      <Save>#{word.save}</Save>
+      <Cancel>#{word.cancel}</Cancel>
+    </action>
+  </UIFCCForm>
+
+  <UIFCCConfig>
+    <label>
+      <UIFCCSaveLocationField>Lagringssted</UIFCCSaveLocationField>
+      <UIFCCWorkspaceFormSelectBox>Velg arbeidsområde</UIFCCWorkspaceFormSelectBox>
+      <UIFCCTemplateField>Malalternativer</UIFCCTemplateField>
+      <UIFCCLocationFormInputAction>Sted for lagring</UIFCCLocationFormInputAction>
+      <UIFCCTemplateFormSelectBox>Velg mal</UIFCCTemplateFormSelectBox>
+      <UIFCCSaveFormStringInput>Egendefinert lagreknapp</UIFCCSaveFormStringInput>
+      <UIFCCMessageFormTextareaInput>Tilpasset lagringsmelding</UIFCCMessageFormTextareaInput>
+      <UIFCCRedirectFormCheckboxInput>Videresend:</UIFCCRedirectFormCheckboxInput>
+      <UIFCCRedirectPathFormStringInput>Videresendingssti:</UIFCCRedirectPathFormStringInput>
+      <UIFCCActionField>Handlinger</UIFCCActionField>
+    </label>
+    <msg>
+      <save-successfully>Lagret i portlet innstillingene.</save-successfully>
+      <item-not-found>Stien er ugyldig.</item-not-found>
+      <fileType-empty>Velg filtypen før du lagrer denne konfigurasjonen.</fileType-empty>
+      <ws-empty>Velg et arbeidsområde.</ws-empty>
+      <action-empty>Velg en mappe med en handling.</action-empty>
+      <message-empty>Feltet "Tilpasset lagrings melding" er påkrevd i tilfelle du ikke velger alternativet videresending, eller stien er tom.</message-empty>
+      <get-template>Det oppstod en feil under henting av malen.</get-template>
+      <set-template-option>Det oppstod en feil under setting av malinstillingene.</set-template-option>
+      <do-select>Det oppstod en feil under valg av plassering.</do-select>
+      </msg>
+    <action>
+      <Save>#{word.save}</Save>
+    </action>
+  </UIFCCConfig>
+
+  <UIFCCLocationFormInputAction>
+    <title>
+      <SelectPath>Velg sti</SelectPath>
+    </title>
+  </UIFCCLocationFormInputAction>
+
+  <UIFCCActionList>
+    <header>
+      <name>Navn</name>
+      <description>Beskrivelse</description>
+      <instanceOf>Forekomst av</instanceOf>
+      <action>Handling</action>
+    </header>
+    <action>
+      <Add>Legg til</Add>
+    </action>
+    <msg>
+      <empty>Ingen handlinger</empty>
+      <remove-popup-first>Du må lukke redigert popup-vindu før du sletter denne noden.</remove-popup-first>
+      <confirm-delete-action>Er du sikker på at du vil slette denne handlingen?</confirm-delete-action>
+      <template-empty>Malen '{0}' er null eller tom.</template-empty>
+      <template-null>Malen er null eller tomt, eller du har ikke rettigheter til denne malen.</template-null>
+      <access-denied>Tilgang nektet. Du har ikke tillatelse til å gjøre denne handlingen.</access-denied>
+    </msg>
+  </UIFCCActionList>
+
+  <UIFCCSelectorPopupWindow>
+    <title>
+      <UIOneNodePathSelector>Velg plassering</UIOneNodePathSelector>
+    </title>
+  </UIFCCSelectorPopupWindow>
+
+  <UIWorkspaceList>
+    <label>
+      <workspaceName>Arbeidsområde:</workspaceName>
+      <rootNodePath>Rot sti:</rootNodePath>
+      <rootNodeInfo>Rotnoden</rootNodeInfo>
+    </label>
+  </UIWorkspaceList>
+
+  <rootNodeInfo>
+    <title>
+      <AddRootNode>Legg til rotnode</AddRootNode>
+    </title>
+  </rootNodeInfo>
+
+  <UITreeList>
+    <info>
+      <child-not-found>Denne noden har ingen undernode.</child-not-found>
+    </info>
+    <header>
+      <name>Navn</name>
+      <action>Handling</action>
+    </header>
+  </UITreeList>
+
+  <UIFCCActionPopupWindow>
+    <title>
+      <UIFCCActionContainer>Legg til handling</UIFCCActionContainer>
+    </title>
+  </UIFCCActionPopupWindow>
+
+  <UIFCCActionForm>
+    <title>Legg til/Rediger handling</title>
+    <action>
+      <Save>#{word.save}</Save>
+      <Close>#{word.close}</Close>
+    </action>
+    <msg>
+      <repository-exception>Kan ikke lagre denne handlingen. Navnet kan ikke ha en indeks som dets siste element.</repository-exception>
+      <numberformat-exception>Kan ikke lagre denne handlingen. Navnet kan ikke inneholde '[' eller ']'.</numberformat-exception>
+      <existed-action>Handlingsnavnet '{0}' finnes allerede. Velg et annet navn.</existed-action>
+      <unable-add-action>Kan ikke legge til denne handlingen.</unable-add-action>
+      <unable-add>Kan ikke legge til denne handlingen. Denne noden er roten eller så har du ikke tilstrekkelig rettigheter.</unable-add>
+      <not-support>Dialogvinduet '{0}' støttes ikke.</not-support>
+      <no-permission-add>Ingen tilgang. Du har ikke rettigheter til å legge til en handling her.</no-permission-add>
+      <access-denied>Ingen tilgang. Du har ikke tilgang til denne malen.</access-denied>
+    </msg>
+    <validator>
+      <validator>Validerer</validator>
+      <destPath>Med sti</destPath>
+    </validator>
+  </UIFCCActionForm>
+
+  <UIFCCActionTypeForm>
+    <label>
+      <actionType>Opprett en handling av type</actionType>
+    </label>
+    <msg>
+      <not-support>Kan ikke laste malen '{0}'.</not-support>
+      <do-not-permission>Du har ikke tillatelse til å laste malen {0}.</do-not-permission>
+    </msg>
+  </UIFCCActionTypeForm>
+
+  <PopupComponent>
+    <title>
+      <UIOneNodePathSelector>Velg plassering</UIOneNodePathSelector>
+      <UIPermissionSelector>Rettighetsutforsker</UIPermissionSelector>
+      <UICategoriesSelector>Legg til kategorier</UICategoriesSelector>
+    </title>
+  </PopupComponent>
+
+  <DateTimeValidator>
+    <msg>
+      <Invalid-input>Feltet {0} med verdien {1}, er ugyldig.</Invalid-input>
+    </msg>
+  </DateTimeValidator>
+
+  <UITabPane>
+    <title>
+      <UICategoriesSelectPanel>Velge kategorier</UICategoriesSelectPanel>
+      <UISelectedCategoriesGrid>Refererte kategorier</UISelectedCategoriesGrid>
+    </title>
+  </UITabPane>
+
+  <PopupComponent>
+    <title>
+      <UICategoriesSelector>Add Categories</UICategoriesSelector>
+    </title>
+  </PopupComponent>
+
+  <UICategoriesSelector>
+    <action>
+      <close>#{word.close}</close>
+    </action>
+  </UICategoriesSelector>
+
+  <PopupComponent>
+    <title>
+      <UIOneTaxonomySelector>Legg til kategorier</UIOneTaxonomySelector>
+    </title>
+  </PopupComponent>
+
+  <UITreeTaxonomyList>
+    <label>
+      <taxonomyTree>Kategoritre</taxonomyTree>
+    </label>
+  </UITreeTaxonomyList>
+
+  <UIFCCTaxonomyPopupWindow>
+    <title>
+      <UIOneTaxonomySelector>Kategorivelger</UIOneTaxonomySelector>
+    </title>
+  </UIFCCTaxonomyPopupWindow>
+</bundle>

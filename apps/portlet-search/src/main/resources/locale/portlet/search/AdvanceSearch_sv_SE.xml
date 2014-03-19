@@ -24,6 +24,10 @@
       <timeUnitCaption>sekunder</timeUnitCaption>
       <similar>Sidor där samma innehåll visas</similar>
       <editor>Redigerare</editor>
+      <date>Datum</date>
+      <relevancy>Betydelse för</relevancy>
+      <title>Titel</title>
+      <sortBy>Sortera efter:</sortBy>
     </label>
     <action>
       <edit>Redigera</edit>

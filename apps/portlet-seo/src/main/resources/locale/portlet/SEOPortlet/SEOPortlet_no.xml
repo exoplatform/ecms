@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<bundle>
+  <UISEOForm>
+    <label>  
+      <title>Tittel:</title>
+      <description>Beskrivelse:</description>
+      <keywords>Nøkkelord:</keywords>
+      <language>Språk:</language>
+      <robots>Roboter:</robots>
+      <sitemap>Nettstedskart:</sitemap>
+      <sitemapvisible>Synlig i nettstedskartet</sitemapvisible>
+    <isInherited>Arvet fra overordnet side</isInherited>
+      <priority>Prioritet:</priority>
+      <frequency>Frekvens:</frequency>
+      <select-language>Velg språk</select-language>
+      <option>
+        <Always>Alltid</Always>
+        <Hourly>Hver time</Hourly>
+        <Daily>Daglig</Daily>
+        <Weekly>Ukentlig</Weekly>
+        <Monthly>Månedlig</Monthly>
+        <Yearly>Årlig</Yearly>
+        <Never>Aldri</Never>
+      </option> 
+    </label>
+    <tip>
+  <priority>Gyldige verdier er  fra 0,0 til 1,0</priority>
+  </tip>   
+    <action>
+      <Save>#{word.save}</Save>
+      <Cancel>#{word.cancel}</Cancel>
+    </action>
+    <msg>
+      <repository-exception>Det oppstod en uventet feil under lagring av sidens metadata.</repository-exception>
+      <confirm-delete>Er du sikker på at du vil slette disse SEO dataene?</confirm-delete>      
+    </msg>
+    <title>
+    <seo-delete>Slette</seo-delete>
+    </title>
+  <help> 
+  <priority>Gyldige verdier er  fra 0,0 til 1,0.</priority>
+  <description>Hjelp de som søker: la dem få vite at denne side har en link med det de leter etter.</description>
+  <keywords>De viktigste ordene og uttrykkene på siden må være atskilt med semikolon.</keywords>  
+  </help>  
+  </UISEOForm>
+  <UISEOPopupWindow>
+  <title>
+      <UISEOForm>SEO Administrasjon</UISEOForm>
+  </title>
+  </UISEOPopupWindow>    
+  <UISEOToolbarForm>
+  <title>
+      <seo>SEO Administrasjon</seo>
+  </title>
+  <label>
+    <seo>SEO</seo>
+  </label>
+  </UISEOToolbarForm>  
+  <FloatNumberValidator>
+    <msg>
+      <Invalid-number>Verdien i prioritet-feltet må være numerisk. Gyldige verdier er fra 0,0 til 1,0.</Invalid-number>
+    </msg>
+  </FloatNumberValidator>  
+  
+</bundle>

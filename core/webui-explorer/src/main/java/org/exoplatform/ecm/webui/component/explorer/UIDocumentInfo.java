@@ -82,6 +82,7 @@ import org.exoplatform.ecm.webui.utils.Utils;
 import org.exoplatform.portal.webui.util.Util;
 import org.exoplatform.portal.webui.workspace.UIPortalApplication;
 import org.exoplatform.resolver.ResourceResolver;
+import org.exoplatform.services.cms.clipboard.ClipboardService;
 import org.exoplatform.services.cms.comments.CommentsService;
 import org.exoplatform.services.cms.documents.DocumentTypeService;
 import org.exoplatform.services.cms.documents.FavoriteService;
@@ -177,7 +178,7 @@ public class UIDocumentInfo extends UIBaseNodePresentation {
 
   final protected static String CATEGORY_YEAR                      = "UIDocumentInfo.label.EarlierThisYear";
 
-  final protected static String CONTENT_PAGE_ITERATOR_ID           = "ContentPageIterator";
+  final public static String CONTENT_PAGE_ITERATOR_ID           = "ContentPageIterator";
 
   final protected static String CONTENT_TODAY_PAGE_ITERATOR_ID     = "ContentTodayPageIterator";
 
@@ -890,8 +891,11 @@ public class UIDocumentInfo extends UIBaseNodePresentation {
   }
 
   public boolean isCanPaste() {
+    ClipboardService clipboardService = WCMCoreUtils.getService(ClipboardService.class);
+    String userId = ConversationState.getCurrent().getIdentity().getUserId();
+    
     UIJCRExplorer uiExplorer = getAncestorOfType(UIJCRExplorer.class) ;
-    if(uiExplorer.getAllClipBoard().size() > 0) return true;
+    if(!clipboardService.getClipboardList(userId, false).isEmpty()) return true;
     return false;
   }
 
@@ -1862,7 +1866,8 @@ public class UIDocumentInfo extends UIBaseNodePresentation {
     builder.append(" isFile='" + node.isNodeType("nt:file") + "' ");
     builder.append(" isLinkWithTarget='" + Utils.targetNodeAndLinkInTrash(node) + "' ");
     builder.append(" isExoAction='" + (Utils.EXO_ACTIONS.equals(node.getName()) && Utils.isInTrash(node)) + "' ");
-    
+    builder.append(" isCheckedIn='" + !node.isCheckedOut() + "' ");
+
     return builder.toString();
   }
 

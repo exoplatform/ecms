@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<bundle>
+  <UIDashboardForm>
+    <label>
+      <title>Dashboard forfatter</title>
+      <nocontent>Ingen innhold</nocontent>
+      <mydraft>Mitt utkast</mydraft>
+      <waitingapproval>Venter på godkjenning</waitingapproval>
+      <approve>Godkjenn</approve>
+      <publishedtomorrow>For publisering i morgen</publishedtomorrow>
+      <refresh>#{word.refresh}</refresh>
+    </label>
+  </UIDashboardForm>
+</bundle>

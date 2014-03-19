@@ -8,6 +8,7 @@
       <waitingapproval>Väntar på mitt godkännande</waitingapproval>
       <approve>Godkänn</approve>
       <publishedtomorrow>Att publiceras i morgon</publishedtomorrow>
+      <refresh>#{word.refresh}</refresh>
     </label>
   </UIDashboardForm>
 </bundle>

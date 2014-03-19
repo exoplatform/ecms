@@ -24,12 +24,16 @@
       <timeUnitCaption>giây</timeUnitCaption>
       <similar>Các trang có cùng nội dung</similar>
       <editor>Biên tập viên</editor>
+      <date>Ngày</date>
+      <relevancy>Mức độ liên quan</relevancy>
+      <title>Tiêu đề</title>
+      <sortBy>Phân loại theo:</sortBy>
     </label>
     <action>
       <edit>Chỉnh sửa</edit>
     </action>
     <msg>
-      <your-search>Tìm kiếm của bạn</your-search>
+      <your-search>Từ khóa</your-search>
       <did-not-match>không khớp với bất kỳ mục nào</did-not-match>
       <new-suggestion>đề xuất</new-suggestion>
     </msg>

@@ -23,27 +23,27 @@
   <WebContent>
     <dialog>
       <label>
-        <MainContent>Main Content</MainContent>
+        <MainContent>Основное содержание</MainContent>
         <cssFile>default.css</cssFile>
         <jsFile>default.js</jsFile>
-        <Advanced>Advanced</Advanced>
-        <Summary>Summary</Summary>
+        <Advanced>Расширенные</Advanced>
+        <Summary>Краткое описание</Summary>
         <name>#{word.name}</name>
-        <title>Титул</title>
-        <ContentCSS>CSS Data</ContentCSS>
-        <hintCSS>You can specify the main style sheet for your web content. This style will override the style sheets defined at the site level and at the shared level.</hintCSS>
-        <ContentJS>JS Data</ContentJS>
-        <hintJS>You can specify some JavaScript codes that can be executed before your web content is rendered.</hintJS>
-        <WebContentHtml>Main Content</WebContentHtml>
-        <Illustration>Illustration</Illustration>
-        <hintIllustration>You can specify an image that will be shown when your web content is displayed in the list. You can also specify some summary texts to go with this image.</hintIllustration>
-        <confirm-delete>Are you sure you want to delete this illustration?</confirm-delete>
-        <illustrationImage>Illustration Image</illustrationImage>
-        <imageMimeType>Image Type</imageMimeType>
-        <image>Upload Image</image>
-        <imageWidth>Image Width</imageWidth>
-        <imageHeight>Image Height</imageHeight>
-        <Synchronize>Synchronize with CSS and HTML</Synchronize>
+        <title>Заголовок</title>
+        <ContentCSS>Данные CSS</ContentCSS>
+        <hintCSS>Вы можете указать основную таблицу стилей для вашего веб-контента. Этот стиль будет замещать таблицы стилей, определенные на общем уровне сайта.</hintCSS>
+        <ContentJS>Данные JS</ContentJS>
+        <hintJS>Можно указать некоторые коды JavaScript, которые могут быть выполнены перед визуализацией веб-содержимого.</hintJS>
+        <WebContentHtml>Основное содержание</WebContentHtml>
+        <Illustration>Иллюстрация</Illustration>
+        <hintIllustration>Вы можете указать изображение, которое будет показано при отображении вашего содержимого веб-узла в списке. Можно также указать некоторые сводные тексты идущие с этим изображением.</hintIllustration>
+        <confirm-delete>Вы уверены, что хотите удалить эту иллюстрацию?</confirm-delete>
+        <illustrationImage>Изображение иллюстрации</illustrationImage>
+        <imageMimeType>Тип изображения</imageMimeType>
+        <image>Загрузить изображение</image>
+        <imageWidth>Ширина изображения</imageWidth>
+        <imageHeight>Высота изображения</imageHeight>
+        <Synchronize>Синхронизировать с CSS и HTML</Synchronize>
       </label>
     </dialog>
   </WebContent>
@@ -52,9 +52,9 @@
     <dialog>
       <label>
         <name>#{word.name}</name>
-        <active>Active</active>
-        <priority>Priority</priority>
-        <content>CSS Data</content>
+        <active>Активное</active>
+        <priority>Приоритет</priority>
+        <content>Данные CSS</content>
       </label>
     </dialog>
   </CSSFile>
@@ -63,9 +63,9 @@
     <dialog>
       <label>
         <name>#{word.name}</name>
-        <active>Active</active>
-        <priority>Priority</priority>
-        <content>JS Data</content>
+        <active>Активное</active>
+        <priority>Приоритет</priority>
+        <content>Данные JS</content>
       </label>
     </dialog>
   </JSFile>
@@ -75,7 +75,7 @@
       <label>
         <name>#{word.name}</name>
         <url>URL</url>
-        <description>Description</description>
+        <description>Описание</description>
       </label>
     </dialog>
   </WebLink>
@@ -83,10 +83,10 @@
   <SiteMetadata>
     <dialog>
       <label>
-        <title>Site Title</title>
-        <description>Site Description</description>
-        <keywords>Site Keywords</keywords>
-        <robots>Search Engine Behavior</robots>
+        <title>Заголовок сайта</title>
+        <description>Описание сайта</description>
+        <keywords>Ключевые слова сайта</keywords>
+        <robots>Искать характеристики двигателя</robots>
       </label>
     </dialog>
   </SiteMetadata>

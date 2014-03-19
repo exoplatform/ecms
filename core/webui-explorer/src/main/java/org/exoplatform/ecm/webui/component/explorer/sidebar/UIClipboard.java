@@ -21,10 +21,12 @@ import java.util.LinkedList;
 import javax.jcr.Node;
 import javax.jcr.PathNotFoundException;
 
-import org.exoplatform.ecm.jcr.model.ClipboardCommand;
 import org.exoplatform.ecm.webui.component.explorer.UIJCRExplorer;
-import org.exoplatform.ecm.webui.component.explorer.UIWorkingArea;
 import org.exoplatform.ecm.webui.component.explorer.rightclick.manager.PasteManageComponent;
+import org.exoplatform.services.cms.clipboard.ClipboardService;
+import org.exoplatform.services.cms.clipboard.jcr.model.ClipboardCommand;
+import org.exoplatform.services.security.ConversationState;
+import org.exoplatform.services.wcm.utils.WCMCoreUtils;
 import org.exoplatform.web.application.ApplicationMessage;
 import org.exoplatform.webui.config.annotation.ComponentConfig;
 import org.exoplatform.webui.config.annotation.EventConfig;
@@ -65,16 +67,16 @@ public class UIClipboard extends UIComponent {
   }
 
   public LinkedList<ClipboardCommand> getClipboardData() throws Exception {
-    UIJCRExplorer uiExplorer = getAncestorOfType(UIJCRExplorer.class) ;
-    clipboard_ = uiExplorer.getAllClipBoard() ;
-    return clipboard_ ;
+    String userId = ConversationState.getCurrent().getIdentity().getUserId();
+    ClipboardService  clipboardService = WCMCoreUtils.getService(ClipboardService.class);
+    clipboard_ = new LinkedList<ClipboardCommand>(clipboardService.getClipboardList(userId, false));
+    return clipboard_;
   }
 
   static public class PasteActionListener extends EventListener<UIClipboard> {
     public void execute(Event<UIClipboard> event) throws Exception {
       UIClipboard uiClipboard = event.getSource() ;
       UIJCRExplorer uiExplorer = uiClipboard.getAncestorOfType(UIJCRExplorer.class);
-      UIWorkingArea uiWorkingArea = uiExplorer.findFirstComponentOfType(UIWorkingArea.class);
       String id = event.getRequestContext().getRequestParameter(OBJECTID) ;
       int index = Integer.parseInt(id) ;
       ClipboardCommand selectedClipboard = uiClipboard.clipboard_.get(index-1);
@@ -102,7 +104,10 @@ public class UIClipboard extends UIComponent {
     public void execute(Event<UIClipboard> event) throws Exception{
       UIClipboard uiClipboard = event.getSource() ;
       String itemIndex = event.getRequestContext().getRequestParameter(OBJECTID) ;
-      uiClipboard.clipboard_.remove(Integer.parseInt(itemIndex)-1) ;
+      ClipboardCommand command = uiClipboard.clipboard_.remove(Integer.parseInt(itemIndex)-1);
+      String userId = ConversationState.getCurrent().getIdentity().getUserId();
+      ClipboardService  clipboardService = WCMCoreUtils.getService(ClipboardService.class);
+      clipboardService.getClipboardList(userId, false).remove(command);
     }
   }
 
@@ -110,6 +115,10 @@ public class UIClipboard extends UIComponent {
     public void execute(Event<UIClipboard> event) {
       UIClipboard uiClipboard = event.getSource() ;
       uiClipboard.clipboard_.clear() ;
+      
+      String userId = ConversationState.getCurrent().getIdentity().getUserId();
+      ClipboardService  clipboardService = WCMCoreUtils.getService(ClipboardService.class);
+      clipboardService.clearClipboardList(userId, false);
     }
   }
 }

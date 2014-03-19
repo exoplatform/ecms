@@ -20,6 +20,9 @@ package org.exoplatform.ecm.webui.component.explorer.control.filter;
 import java.util.Map;
 
 import org.exoplatform.ecm.webui.component.explorer.UIJCRExplorer;
+import org.exoplatform.services.cms.clipboard.ClipboardService;
+import org.exoplatform.services.security.ConversationState;
+import org.exoplatform.services.wcm.utils.WCMCoreUtils;
 import org.exoplatform.webui.ext.filter.UIExtensionAbstractFilter;
 import org.exoplatform.webui.ext.filter.UIExtensionFilterType;
 
@@ -42,7 +45,11 @@ public class IsPasteableFilter extends UIExtensionAbstractFilter {
   public boolean accept(Map<String, Object> context) throws Exception {
     if (context==null) return true;
     UIJCRExplorer uiExplorer = (UIJCRExplorer) context.get(UIJCRExplorer.class.getName());
-    return !uiExplorer.getAllClipBoard().isEmpty();
+    
+    ClipboardService clipboardService = WCMCoreUtils.getService(ClipboardService.class);
+    String userId = ConversationState.getCurrent().getIdentity().getUserId();
+
+    return !clipboardService.getClipboardList(userId, false).isEmpty();
   }
 
   public void onDeny(Map<String, Object> context) throws Exception {

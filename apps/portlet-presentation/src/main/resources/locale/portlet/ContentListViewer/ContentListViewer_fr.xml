@@ -70,14 +70,14 @@
     </label>
     <help>
       <ModeSelectionHelp>"Dossier" affiche de tous les contenus présents dans le dossier (ou catégorie) sélectionné ; "Manuel" vous permet de choisir manuellement les contenus à afficher.</ModeSelectionHelp>
-      <FolderPathHelp>Sélectionnez les contenus qui vous souhaitez afficher. La sélection par défaut sera remplacée dynamiquement si vous activez la Navigation Dynamique dans les Paramètres Avancés</FolderPathHelp>
+      <FolderPathHelp>Sélectionnez les contenus que vous souhaitez afficher. La sélection par défaut sera remplacée dynamiquement si vous activez la Navigation Dynamique dans les Paramètres Avancés.</FolderPathHelp>
       <HeaderOptionHelp>Afficher un entête sur la liste des contenus. Si la "Détection automatique" est activée, l'application tentera d'afficher un entête basé sur la sélection courante.</HeaderOptionHelp>
       <GeneralOptionHelp>Choisissez les éléments graphiques que vous souhaitez voir. Suivant le modèle de vue choisi, certains éléments ne seront pas disponibles.</GeneralOptionHelp>
       <ContextualHelp>Avec la Navigation dynamique, le chemin du contenu à afficher peut être indiqué via un paramètre de l'URL.</ContextualHelp>
       <ParameterHelp>Ce paramètre sera utilisé pour récupérer le contenu si la Navigation Dynamique est activée.</ParameterHelp>
       <ShowDetailInPageHelp>Cliquer sur un contenu redirige sur une page de détail. Vous devez avoir une portlet "Contenu par URL" configurée en "Navigation dynamique" sur la page cible pour afficher le contenu.</ShowDetailInPageHelp>
       <DetailParameterHelp>Ce paramètre contiendra le chemin vers le contenu à afficher dans la page de détail. Il doit être identique au paramètre utilisé dans la portlet "Contenu par URL" de la page.</DetailParameterHelp>
-      <ContentByQueryHelp><![CDATA[You can set a SQL Query to get content dynamically. The following parameters are allowed : ${user}, ${lang} or any get parameter (PARAM) surrounded by ${PARAM}.]]></ContentByQueryHelp>
+      <ContentByQueryHelp>Vous pouvez définir une requête SQL pour obtenir le contenu dynamiquement. Les paramètres suivants sont autorisés: ${user}, ${lang} ou tout paramètre GET (PARAM) entouré de ${PARAM}.</ContentByQueryHelp>
       <ContentsVisibilityHelp>"Par Authentification" filtrera le contenu en se basant sur l'authentification. Si vous n'êtes pas connecté, vous verrez uniquement le contenu public. Si vous êtes connecté, vous voyez tout le contenu visible par les utilisateurs de l'intranet (mais partagé par tous). "Par Role" signifie que vous verrez le contenu selon vos droits. Dans la plupart des cas, cette option ne devrait pas être utilisée car elle réduit les performances globales.</ContentsVisibilityHelp>
     </help>
     <action>

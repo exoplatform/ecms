@@ -77,7 +77,7 @@
       <ParameterHelp>Tham số này sẽ được dùng để truy cập nội dung nếu Điều hướng Động được kích hoạt.</ParameterHelp>
       <ShowDetailInPageHelp>Việc nhấp vào nội dung sẽ đưa người dùng đến trang Chi tiết. Bạn phải có một portlet "Nội dung theo URL" cùng với tính năng Điều hướng Động đã được bật trên trang đích để hiện nội dung.</ShowDetailInPageHelp>
       <DetailParameterHelp>Tham số này sẽ chứa đường dẫn đến nội dung trong liên kết đến trang Chi tiết. Tham số này phải khớp với tham số được sử dụng trong portlet "Nội dung theo URL" của trang đó.</DetailParameterHelp>
-      <ContentByQueryHelp><![CDATA[You can set a SQL Query to get content dynamically. The following parameters are allowed : ${user}, ${lang} or any get parameter (PARAM) surrounded by ${PARAM}.]]></ContentByQueryHelp>
+      <ContentByQueryHelp>Bạn có thể thiết lập một Truy vấn SQL để lấy nội dung tự động. Các tham số sau được cho phép: ${user}, ${lang} hoặc bất kỳ tham số (PARAM) nào được bao bởi ${PARAM}.</ContentByQueryHelp>
       <ContentsVisibilityHelp>"Giới hạn bằng xác thực" sẽ lọc nội dung dựa trên việc xác thực. Nếu bạn không đăng nhập, bạn sẽ chỉ thấy những nội dung được công khai. Nếu bạn đã đăng nhập, bạn thấy tất cả các nội dung có thể nhìn thấy dành cho người sử dụng mạng nội bộ (nhưng được mọi người chia sẻ). "Giới hạn theo vai trò người dùng" nghĩa là bạn sẽ thấy nội dung tùy thuộc vào quyền hạn của bạn. Trong hầu hết trường hợp, tùy chọn này không nên được dùng, vì nó làm giảm hiệu năng chung của hệ thống.</ContentsVisibilityHelp>
     </help>
     <action>

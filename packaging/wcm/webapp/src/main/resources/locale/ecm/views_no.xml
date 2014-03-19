@@ -1,0 +1,227 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<bundle>
+ 
+  <View>
+    <label>
+      <languages>
+        <en>Engelsk</en>
+        <fr>Fransk</fr>
+        <ru>Russisk</ru>
+        <vi>Vietnamesisk</vi>
+        <nl>Nederlandsk</nl>
+        <de>Tysk</de>
+        <uk>Ukrainsk</uk>
+        <ar>Arabisk</ar>
+      </languages>
+    </label>
+  </View>
+ 
+  <!--
+  ################resoucebundle FOR EXO:COMMENT VIEW TEMPLATE#############
+  -->
+  <Comment>
+    <view>
+      <label>
+        <postedBy>Siste kommentar postet av</postedBy>
+        <at>hos</at>
+        <comments>Kommentar(er)</comments>
+        <show-comments>Vis kommentarer</show-comments>
+        <hide-comments>Skjul kommentarer</hide-comments>
+        <comment-by>Kommentert av</comment-by>
+        <email>E-post</email>
+        <site>Nettsted</site>
+      </label>
+    </view>
+  </Comment>
+ 
+  <!--
+  ################resoucebundle FOR NT:FILE VIEW TEMPLATE##############
+  -->
+  <File>
+    <view>
+      <label>
+        <not-viewable>Dette innholdet er ikke synlig</not-viewable>
+        <using-webDAV>eller bruker WebDAV til å få tilgang til innholdet</using-webDAV>
+        <file-size-too-big>Innholdet i filen er for stor. Du bør laste den ned og åpne den i klienten.</file-size-too-big>
+        <webDAV>WebDAVvisning</webDAV>
+        <download>Last ned</download>
+        <htmlview>Vis som HTML</htmlview>
+        <plaintextview>Vis som ren tekst</plaintextview>
+      </label>
+    </view>
+  </File>
+ 
+  <!--
+  ################resoucebundle FOR MAIL:DOCUMENT VIEW TEMPLATE##############
+  -->
+  <Mail>
+    <view>
+      <label>
+        <from>Fra:</from>
+        <to>Til:</to>
+        <cc>Cc:</cc>
+        <date>Dato:</date>
+        <subject>Emne:</subject>
+        <attachment>Vedlegg:</attachment>
+      </label>
+    </view>
+  </Mail>
+  <!--
+  ################resoucebundle FOR EXO:VOTE VIEW TEMPLATE##############
+  -->
+  <Vote>
+    <view>
+      <label>
+        <avg-rating>Gjennomsnittlig vurdering</avg-rating>
+        <subscription>Stemmer</subscription>
+      </label>
+    </view>
+  </Vote>
+  <!--
+  ################resoucebundle FOR LISTVIEW VIEW TEMPLATE##############
+  -->
+  <ListView>
+    <view>
+      <label>
+        <name>Navn</name>
+        <versionable>Versjonerbar</versionable>
+        <exo_owner>Eier</exo_owner>
+        <exo_dateCreated>Opprettet dato</exo_dateCreated>
+        <exo_dateModified>Endringsdato</exo_dateModified>
+        <auditing>Revisjonering</auditing>
+      </label>
+    </view>
+  </ListView>
+
+  <!--
+  ###################### resoucebundle for exo:addMetadataAction view template ####
+  -->
+  <AddMetadata>
+    <view>
+      <label>
+        <action-name>Navn på handlingen</action-name>
+        <lifecycle>Livssyklus</lifecycle>
+        <metadata>Metadata</metadata>
+        <description>Beskrivelse</description>
+      </label>
+    </view>
+  </AddMetadata>
+
+  <!--
+  ###################### resoucebundle for exo:autoVersioning view template ####
+  -->
+  <AutoVersioning>
+    <view>
+      <label>
+        <action-name>Navn på handlingen</action-name>
+        <lifecycle>Livssyklus</lifecycle>
+        <description>Beskrivelse</description>
+      </label>
+    </view>
+  </AutoVersioning>
+  <!--
+  ###################### resoucebundle for exo:enableVersiong view template ####
+  -->
+  <EnableVersioning>
+    <view>
+      <label>
+        <action-name>Navn</action-name>
+        <lifecycle>Livssyklus</lifecycle>
+        <description>Beskrivelse</description>
+      </label>
+    </view>
+  </EnableVersioning>
+  <!--
+  ###################### resoucebundle for dc:elementSet view template ####
+  -->
+  <ElementSet>
+    <view>
+      <label>
+        <not-avaliable>N/A</not-avaliable>
+        <core-elements>Core Elements</core-elements>
+        <title>Tittel</title>
+        <creator>Skaperen</creator>
+        <subject>Emne</subject>
+        <source>Kilde</source>
+        <contributor>Bidragsyter</contributor>
+        <resource-type>Ressurstype</resource-type>
+        <date>Dato</date>
+        <publisher>Utgiver</publisher>
+        <description>Beskrivelse</description>
+        <rights>Rettigheter</rights>
+        <relation>Forbindelse</relation>
+        <format>Format</format>
+        <coverage>Dekning</coverage>
+        <identifier>Identifikator</identifier>
+        <languages>Språk</languages>
+      </label>
+      <action>
+        <add-edit>Legg til/Rediger</add-edit>
+        <cancel>#{word.cancel}</cancel>
+      </action>
+      <tooltip>
+        <cancel>#{word.cancel}</cancel>
+        <add-edit>Legg til/Rediger egenskaper</add-edit>
+      </tooltip>
+    </view>
+  </ElementSet>
+
+  <ScriptAction>
+    <view>
+      <label> 
+        <isDeep>Er dypt</isDeep>
+        <nodetypes>Nodetyper</nodetypes>
+        <affectedNodeTypeNames>Berørte nodetyper</affectedNodeTypeNames>
+        <nodeTypeName>Navn på nodetype</nodeTypeName>
+      </label> 
+    </view>
+  </ScriptAction>
+  
+  <AddMetadata>
+    <view>
+      <label>
+        <isDeep>Er dypt</isDeep>
+        <nodetypes>Nodetyper</nodetypes>
+        <affectedNodeTypeNames>Berørte nodetyper</affectedNodeTypeNames>
+        <nodeTypeName>Navn på nodetype</nodeTypeName>
+      </label> 
+    </view>
+  </AddMetadata>
+
+  <EnableVersioning>
+    <view>
+      <label>
+        <isDeep>Er dypt</isDeep>
+        <nodetypes>Nodetyper</nodetypes> 
+        <affectedNodeTypeNames>Berørte nodetyper</affectedNodeTypeNames>
+        <nodeTypeName>Navn på nodetype</nodeTypeName>
+      </label> 
+    </view>
+  </EnableVersioning>
+  
+  <AutoVersioning>
+    <view>
+      <label>
+        <isDeep>Er dypt</isDeep>
+        <nodetypes>Nodetyper</nodetypes>
+        <affectedNodeTypeNames>Berørte nodetyper</affectedNodeTypeNames>
+        <nodeTypeName>Navn på nodetype</nodeTypeName>
+      </label> 
+    </view>
+  </AutoVersioning>
+  
+   <AccessibleMedia>
+    <view>
+      <label>
+      <Play-audio-description-of-this-video>Lydbeskrivelse</Play-audio-description-of-this-video>
+      <Read-more>Les mer</Read-more>
+      <Read-less>Les mindre</Read-less>
+      <Switch-back-to-original-video>Opprinnelige video</Switch-back-to-original-video>
+      </label>
+      <tooltip>
+      <A-second-media-file-is-available-as-audio-description>En annen mediefil er tilgjengelig som en lyd beskrivelse</A-second-media-file-is-available-as-audio-description>
+      </tooltip>
+    </view>
+  </AccessibleMedia>
+ 
+</bundle>

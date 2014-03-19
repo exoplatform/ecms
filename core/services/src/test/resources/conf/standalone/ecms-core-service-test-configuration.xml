@@ -289,7 +289,22 @@
         </object>  	    
 	  </object-param>	
     </init-params>
-  </component>	
+  </component>
+  
+  <component>
+    <key>org.exoplatform.services.cms.clipboard.ClipboardService</key>  
+    <type>org.exoplatform.services.cms.clipboard.impl.ClipboardServiceImpl</type>
+    <init-params>
+      <value-param>
+        <name>liveTime</name>
+        <value>${wcm.cache.clipboard.timetolive:-1}</value>
+      </value-param>
+      <value-param>
+        <name>maxSize</name>
+        <value>${wcm.cache.clipboard.capacity:500}</value>
+      </value-param>
+    </init-params>
+  </component>  
 	  
   <external-component-plugins>
     <target-component>org.exoplatform.services.cms.lock.LockService</target-component>     
@@ -387,8 +402,7 @@
       </init-params>  
     </component-plugin>     
  </external-component-plugins>
-
-	
+ 
   <import>classpath:/conf/standalone/wcm-configuration.xml</import>
   <import>classpath:/conf/standalone/test-configuration.xml</import>
   <import>classpath:/conf/standalone/wcm/test-configuration.xml</import>
