@@ -124,15 +124,17 @@ public class UICLVManualMode extends UICLVContainer {
       if (listContent != null && listContent.length != 0) {
         for (String itemPath : listContent) {
           Node currentNode = NodeLocation.getNodeByExpression(itemPath);
-          try {
-            linkManager.updateSymlink(currentNode);
-            currentNode = NodeLocation.getNodeByExpression(itemPath);
-          } catch (Exception e) {
-            if (LOG.isErrorEnabled()) {
-              LOG.error("Can not update symlink: " + currentNode.getPath(), e);
+          if(currentNode != null){
+            try {
+              linkManager.updateSymlink(currentNode);
+              currentNode = NodeLocation.getNodeByExpression(itemPath);
+            } catch (Exception e) {
+              if (LOG.isErrorEnabled()) {
+                LOG.error("Can not update symlink: " + currentNode.getPath(), e);
+              }
             }
+            originalList.add(currentNode);
           }
-          originalList.add(currentNode);
         }
       }
       //sort nodes
