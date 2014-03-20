@@ -26,6 +26,7 @@ import javax.jcr.NodeIterator;
 import javax.jcr.PathNotFoundException;
 import javax.jcr.RepositoryException;
 import javax.jcr.Session;
+import javax.jcr.UnsupportedRepositoryOperationException;
 import javax.jcr.query.Query;
 import javax.jcr.query.QueryManager;
 import javax.jcr.query.QueryResult;
@@ -60,6 +61,10 @@ public class VersionNode {
         ws_ = version.getSession().getWorkspace().getName();
         uuid_ = version.getUUID();
         versionLabels_ = version.getVersionHistory().getVersionLabels(version);
+      } catch (UnsupportedRepositoryOperationException e){
+        if (LOG.isDebugEnabled()){
+          LOG.warn(e.getMessage());
+        }
       } catch (Exception e) {
         if (LOG.isWarnEnabled()) {
           LOG.warn(e.getMessage());
