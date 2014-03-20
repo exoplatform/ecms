@@ -61,7 +61,7 @@ public class VersionNode {
         uuid_ = version.getUUID();
         versionLabels_ = version.getVersionHistory().getVersionLabels(version);
       } catch (Exception e) {
-        if (LOG.isWarnEnabled()) {
+        if (LOG.isDebugEnabled()) {
           LOG.warn(e.getMessage());
         }
       }
