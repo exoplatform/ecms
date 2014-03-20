@@ -648,7 +648,7 @@ public class Utils {
       String popupWindowId,
       int width) throws Exception {
     UIPopupContainer popupContainer = getPopupContainer(container);
-    popupContainer.removeChildById(popupWindowId);
+    popupContainer.removeChildById("UIPopupWindow");
     UIPopupWindow popupWindow = popupContainer.addChild(UIPopupWindow.class, null, popupWindowId);
     popupWindow.setUIComponent(component);
     popupWindow.setWindowSize(width, 0);
