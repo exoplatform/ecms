@@ -90,11 +90,11 @@
 
   <%
   if (realCurrentPageData.isEmpty()) {
+    def msgNotMatch = _ctx.appRes("UIDefaultSearchResult.msg.search-not-match-type");
+    msgNotMatch = msgNotMatch.replace("{0}", "<strong style=\"font-size: 15px; font-style: italic;\">" + keyword + "</strong>");
+    msgNotMatch = msgNotMatch.replace("{1}", _ctx.appRes("UIDefaultSearchResult.label." + resultType).toLowerCase()); 
     %>
-     <p>
-      <%= _ctx.appRes("UIDefaultSearchResult.msg.your-search") %> <strong style="font-size: 15px; font-style: italic;"> <%= keyword %> </strong> -
-      <%= _ctx.appRes("UIDefaultSearchResult.msg.did-not-match") %> <%= _ctx.appRes("UIDefaultSearchResult.label." + resultType.toLowerCase()) %>
-     </p>
+     <p>$msgNotMatch</p>
     <%
   } else {
     int dataIndex = 0;
