@@ -105,7 +105,7 @@ public abstract class BaseSearchServiceConnector extends SearchServiceConnector 
         ret = convertResult(searchNodes(criteria), limit, context);
     } catch (Exception e) {
       if (LOG.isErrorEnabled()) {
-        LOG.error(e);
+        LOG.error(e.getMessage(), e);
       }
     }
     return ret;
@@ -188,7 +188,7 @@ public abstract class BaseSearchServiceConnector extends SearchServiceConnector 
               }//if
             } catch (Exception e) {
               if (LOG.isErrorEnabled()) {
-                LOG.error(e);
+                LOG.error("Failed to get result information.", e);
               }
             }
           }//for inner
@@ -196,7 +196,7 @@ public abstract class BaseSearchServiceConnector extends SearchServiceConnector 
       }//if
     } catch (Exception e) {
       if (LOG.isErrorEnabled()) {
-        LOG.error(e);
+        LOG.error(e.getMessage(), e);
       }
     }
     return ret;
