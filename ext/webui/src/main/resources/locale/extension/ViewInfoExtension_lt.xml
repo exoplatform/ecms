@@ -2,13 +2,13 @@
 <bundle>
 <UIPopupWindow>
 <title>
-<UIViewInfoManager>View Information</UIViewInfoManager>
+<UIViewInfoManager>Rodyti informaciją</UIViewInfoManager>
 </title>
 </UIPopupWindow>
     
 <ECMContextMenu>
 <event>
-<ViewInfo>View Information</ViewInfo>
+<ViewInfo>Rodyti informaciją</ViewInfo>
 </event>
 </ECMContextMenu>
 <UIViewInfoContainer>

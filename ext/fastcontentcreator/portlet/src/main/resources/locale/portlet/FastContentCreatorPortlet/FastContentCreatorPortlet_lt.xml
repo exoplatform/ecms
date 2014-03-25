@@ -61,7 +61,7 @@
       <name>Name</name>
       <description>Description</description>
       <instanceOf>Instance of</instanceOf>
-      <action>Action</action>
+      <action>Veiksmas</action>
     </header>
     <action>
       <Add>Add</Add>

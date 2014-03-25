@@ -4,12 +4,12 @@
   <View>
     <label>
       <languages>
-        <en>English</en>
-        <fr>French</fr>
+        <en>Anglų</en>
+        <fr>Prancūzų</fr>
         <ru>Russian</ru>
         <vi>Vietnamese</vi>
         <nl>Dutch</nl>
-        <de>German</de>
+        <de>Vokiečių</de>
         <uk>Ukrainian</uk>
         <ar>Arabic</ar>
       </languages>
@@ -57,7 +57,7 @@
   <Mail>
     <view>
       <label>
-        <from>From:</from>
+        <from>Nuo:</from>
         <to>To:</to>
         <cc>Cc:</cc>
         <date>Date:</date>
@@ -100,7 +100,7 @@
     <view>
       <label>
         <action-name>Action Name</action-name>
-        <lifecycle>Lifecycle</lifecycle>
+        <lifecycle>Gyvenimo ciklas</lifecycle>
         <metadata>Metadata</metadata>
         <description>Description</description>
       </label>
@@ -114,7 +114,7 @@
     <view>
       <label>
         <action-name>Action Name</action-name>
-        <lifecycle>Lifecycle</lifecycle>
+        <lifecycle>Gyvenimo ciklas</lifecycle>
         <description>Description</description>
       </label>
     </view>
@@ -126,7 +126,7 @@
     <view>
       <label>
         <action-name>Name</action-name>
-        <lifecycle>Lifecycle</lifecycle>
+        <lifecycle>Gyvenimo ciklas</lifecycle>
         <description>Description</description>
       </label>
     </view>

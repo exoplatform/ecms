@@ -591,7 +591,7 @@
       <MoveToTrash>移到垃圾桶</MoveToTrash>
       <RestoreFromTrash>從垃圾桶中還原</RestoreFromTrash>
       <EmptyTrash>清空垃圾桶</EmptyTrash>
-      <WebDavView>下載並允許編輯</WebDavView>
+      <WebDavView>Edit in MS Office</WebDavView>
     </event>
   </ECMContextMenu>
  

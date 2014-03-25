@@ -3,11 +3,11 @@
   <UIDashboardForm>
     <label>
       <title>Author Dashboard</title>
-      <nocontent>No Content</nocontent>
-      <mydraft>My Draft Content</mydraft>
-      <waitingapproval>Waiting For My Approval</waitingapproval>
+      <nocontent>Nėra turinio</nocontent>
+      <mydraft>Mano projekto turinys</mydraft>
+      <waitingapproval>Laukiama mano patvirtinimo</waitingapproval>
       <approve>Approve</approve>
-      <publishedtomorrow>To Be Published Tomorrow</publishedtomorrow>
+      <publishedtomorrow>Turi būti paskelbta rytoj</publishedtomorrow>
       <refresh>#{word.refresh}</refresh>
     </label>
   </UIDashboardForm>

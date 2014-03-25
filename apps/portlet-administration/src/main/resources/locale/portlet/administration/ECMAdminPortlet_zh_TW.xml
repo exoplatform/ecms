@@ -1583,7 +1583,7 @@
     <header>
       <title>名稱</title>
       <action>操作</action>
-      <template>Template</template>
+      <template>範本</template>
     </header>
     <action>
       <AddTemplate>新增範本</AddTemplate>

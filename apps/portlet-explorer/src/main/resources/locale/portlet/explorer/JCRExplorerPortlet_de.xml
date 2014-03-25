@@ -591,7 +591,7 @@
       <MoveToTrash>In den Papierkorb verschieben</MoveToTrash>
       <RestoreFromTrash>Aus dem Papierkorb wiederherstellen</RestoreFromTrash>
       <EmptyTrash>Papierkorb leeren</EmptyTrash>
-      <WebDavView>Herunterladen und Bearbeiten erlauben</WebDavView>
+      <WebDavView>In MS Office bearbeiten</WebDavView>
     </event>
   </ECMContextMenu>
  
