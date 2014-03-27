@@ -40,8 +40,8 @@
   <File>
     <view>
       <label>
-        <not-viewable>The preview of this document is not available.</not-viewable>
-        <using-webDAV>or Open in MS Office</using-webDAV>
+        <not-viewable>Просмотр этого документа не доступен.</not-viewable>
+        <using-webDAV>или открыть в MS Office</using-webDAV>
         <file-size-too-big>Слишком большой размер содержимого этой страницы. Вам необходимо скачать и открыть в клиенте.</file-size-too-big>
         <webDAV>Показать через WebDAV</webDAV>
         <download>Загрузить</download>

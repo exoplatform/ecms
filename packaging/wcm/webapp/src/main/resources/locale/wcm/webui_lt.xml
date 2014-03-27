@@ -22,93 +22,93 @@
 <bundle>
   <UIExoStart>
     <tooltip>
-      <homepage>Homepage</homepage>
+      <homepage>Pagrindinis puslapis</homepage>
     </tooltip>
   </UIExoStart>
 
   <UIFormInputSetWithAction>
     <msg>
-      <confirm-delete>Are you sure you want to delete this item?</confirm-delete>
+      <confirm-delete>Ar tikrai norite ištrinti šį elementą?</confirm-delete>
     </msg>
   </UIFormInputSetWithAction>
 
   <Drives>
     <label>
       <ManagedSites>Svetainių valdymas</ManagedSites>
-      <SharedSite>Shared Site</SharedSite>
+      <SharedSite>Bendrinama svetainė</SharedSite>
     </label>
   </Drives>
 
   <Views>
     <label>
-      <wcm-view>Web</wcm-view>
-      <admin-view>Admin</admin-view>
-      <icon-view>Icons</icon-view>
-      <thumbails-view>Thumbnails</thumbails-view>
-      <list-view>List</list-view>
-      <authoring-view>Authoring</authoring-view>
-      <wcm-category-view>Categories</wcm-category-view>
-      <file-view>File Management View</file-view>
+      <wcm-view>Internetas</wcm-view>
+      <admin-view>Administratorius</admin-view>
+      <icon-view>Piktogramos</icon-view>
+      <thumbails-view>Miniatiūros</thumbails-view>
+      <list-view>Sąrašas</list-view>
+      <authoring-view>Kūrimas</authoring-view>
+      <wcm-category-view>Kategorijos</wcm-category-view>
+      <file-view>Failų valdymo peržiūra</file-view>
     </label>
   </Views>
 
   <UIActionBar>
     <obtion>
-      <Publication>Publication</Publication>
-      <System>System</System>
+      <Publication>Paskelbimas</Publication>
+      <System>Sistema</System>
     </obtion>
   </UIActionBar>
 
   <UIPageSelectorPanel>
     <header>
-      <path>Path</path>
+      <path>Kelias</path>
       <action>#{word.action}</action>
     </header>
     <msg>
-      <child-not-found>No Page Found.</child-not-found>
+      <child-not-found>Puslapis nerastas.</child-not-found>
     </msg>
     <title>
-      <select>Select</select>
+      <select>Pasirinkti</select>
     </title>
   </UIPageSelectorPanel>
 
   <UIContentDialogFormPopupWindow>
     <title>
-      <UIContentDialogPreference>Web Content Preference</UIContentDialogPreference>
+      <UIContentDialogPreference>Interneto turinio pirmenybė</UIContentDialogPreference>
     </title>
   </UIContentDialogFormPopupWindow>
 
   <UITabPane>
     <title>
-      <UIContentBrowsePanelOne>Content Browser</UIContentBrowsePanelOne>
-      <UIContentBrowsePanelMulti>Content Browser</UIContentBrowsePanelMulti>
+      <UIContentBrowsePanelOne>Turinio naršyklė</UIContentBrowsePanelOne>
+      <UIContentBrowsePanelMulti>Turinio naršyklė</UIContentBrowsePanelMulti>
       <UIContentBrowsePanelFolder>Aplankų naršyklė</UIContentBrowsePanelFolder>
-      <UIContentSearchForm>Content Search Form</UIContentSearchForm>
+      <UIContentSearchForm>Turinio paieškos forma</UIContentSearchForm>
       <UIContentSearchResult>Paieškos rezultatas</UIContentSearchResult>
-      <UIContentViewer>Preview Content</UIContentViewer>
-      <WebContentMetadataPopup>Property Selector</WebContentMetadataPopup>
-      <WebContentNodeTypePopup>Nodetype Selector</WebContentNodeTypePopup>
-      <UIPermissionManager>Permission Manager</UIPermissionManager>
+      <UIContentViewer>Peržiūrėti turinį</UIContentViewer>
+      <WebContentMetadataPopup>Savybės pasirinkimas</WebContentMetadataPopup>
+      <WebContentNodeTypePopup>Mazgų tipo pasirinkimas</WebContentNodeTypePopup>
+      <UIPermissionManager>Teisių valdymas</UIPermissionManager>
     </title>
   </UITabPane>
 
   <UIContentBrowsePanelOne>
     <selectBoxValues>
-      <FilterBy>Filter by</FilterBy>
-      <WebContent>Web Content</WebContent>
-      <DMSDocument>Document</DMSDocument>
+      <FilterBy>Filtruoti pagal</FilterBy>
+      <WebContent>Interneto turinys</WebContent>
+      <DMSDocument>Dokumentas</DMSDocument>
       <Media>Media</Media>
     </selectBoxValues>
     <msg>
-      <node-checkout>The node is checked out. Please check the node before performing this function.</node-checkout>
+      <node-checkout>Mazgas yra išregistruotas. Prašome patikrinti mazgą prieš atliekant šią funkciją.</node-checkout>
     </msg>
   </UIContentBrowsePanelOne>
 
   <UIContentBrowsePanelMulti>
     <selectBoxValues>
-      <FilterBy>Filter by</FilterBy>
-      <WebContent>Web Content</WebContent>
-      <DMSDocument>Document</DMSDocument>
+      <FilterBy>Filtruoti pagal</FilterBy>
+      <WebContent>Interneto turinys</WebContent>
+      <DMSDocument>Dokumentas</DMSDocument>
       <Media>Media</Media>
     </selectBoxValues>
   </UIContentBrowsePanelMulti>
@@ -116,33 +116,33 @@
   <UIContentBrowsePanelOne>
     <label>
       <LeftColumn>Select a folder to display its children as content.</LeftColumn>
-      <RightColumn>The content below can be selected.</RightColumn>
+      <RightColumn>Žemiau esantis turinys gali būti pasirinktas.</RightColumn>
     </label>
   </UIContentBrowsePanelOne>
 
   <UIContentBrowsePanelMulti>
     <label>
       <LeftColumn>Select a folder to display its children as content.</LeftColumn>
-      <RightColumn>The content below can be selected.</RightColumn>
+      <RightColumn>Žemiau esantis turinys gali būti pasirinktas.</RightColumn>
     </label>
   </UIContentBrowsePanelMulti>
 
   <UIContentBrowsePanelFolder>
     <label>
       <LeftColumn>Select a folder to display its children as content.</LeftColumn>
-      <RightColumn>The folder below can be selected.</RightColumn>
+      <RightColumn>Žemiau esantis aplankas gali būti pasirinktas.</RightColumn>
     </label>
   </UIContentBrowsePanelFolder>
 
   <UISelectedContentGrid>
     <label>
       <name>#{word.name}</name>
-      <add>Add</add>
-      <delete>Delete</delete>
+      <add>Pridėti</add>
+      <delete>Ištrinti</delete>
     </label>
     <msg>
-      <no-content-found>No content found.</no-content-found>
-      <non-content>You have not selected any content.</non-content>
+      <no-content-found>Turinys nerastas.</no-content-found>
+      <non-content>Jūs neesate pasirinkę jokio turinio.</non-content>
     </msg>
   </UISelectedContentGrid>
 
@@ -156,22 +156,22 @@
   <UIContentBrowsePathSelector>
     <header>
       <name>#{word.name}</name>
-      <publicationstate>Publication State</publicationstate>
-      <action>Action</action>
+      <publicationstate>Paskelbimo būsena</publicationstate>
+      <action>Veiksmas</action>
     </header>
     <msg>
-      <child-not-found>No Content Found</child-not-found>
+      <child-not-found>Turinys nerastas</child-not-found>
     </msg>
   </UIContentBrowsePathSelector>
 
   <UIContentBrowsePathSelectorFolder>
     <header>
       <name>#{word.name}</name>
-      <publicationstate>Publication State</publicationstate>
+      <publicationstate>Paskelbimo būsena</publicationstate>
       <action>Veiksmas</action>
     </header>
     <msg>
-      <child-not-found>No Folder Found</child-not-found>
+      <child-not-found>Nerasta jokių aplankų</child-not-found>
     </msg>
   </UIContentBrowsePathSelectorFolder>
 
@@ -179,39 +179,39 @@
     <title>
       <Location>Svetainės pavadinimas</Location>
       <SearchByName>Paieška pagal vardą</SearchByName>
-      <Fulltext>A word or phrase in context</Fulltext>
+      <Fulltext>Žodis ar frazės kontekste</Fulltext>
       <Property>Ypatybė</Property>
-      <Contain>Contain</Contain>
-      <FromDate>From Date</FromDate>
-      <ToDate>To Date</ToDate>
-      <DocumentType>Document Type</DocumentType>
+      <Contain>Turi</Contain>
+      <FromDate>Data nuo</FromDate>
+      <ToDate>Data iki</ToDate>
+      <DocumentType>Dokumento tipas</DocumentType>
     </title>
     <tooltip>
-      <AddMetadataType>Add Property</AddMetadataType>
-      <AddNodeType>Add Node Type</AddNodeType>
+      <AddMetadataType>Pridėti savybę</AddMetadataType>
+      <AddNodeType>Pridėti mazgo tipą</AddNodeType>
     </tooltip>    
     <label>
       <option>
-        <CREATED>Created</CREATED>
-        <MODIFIED>Modified</MODIFIED>
+        <CREATED>Sukurta</CREATED>
+        <MODIFIED>Modifikuota</MODIFIED>
       </option>
     </label>
     <action>
       <SearchWebContent>Ieškoti</SearchWebContent>
     </action>
     <msg>
-      <time-to-late>The searching time is too long.</time-to-late>
-      <empty-field>Please input a valid keyword for search.</empty-field>
-      <invalid-format>Invalid date/time format in field '{0}'.</invalid-format>
-      <invalid-date>"To Date" must be later than "From Date"</invalid-date>
-      <invalid-nodeType>The node type "{0}" is invalid. Please check again.</invalid-nodeType>
-      <invalid-keyword>The keyword is invalid. Some characters are not supported.</invalid-keyword>
+      <time-to-late>Paieškos laikas per ilgas.</time-to-late>
+      <empty-field>Prašome įvesti galiojantį raktažodį paieškoje.</empty-field>
+      <invalid-format>Neleistinas datos/laiko formatas lauke '{0}'.</invalid-format>
+      <invalid-date>"Data iki" turi būti vėlesnė už "Data nuo"</invalid-date>
+      <invalid-nodeType>Mazgo tipas "{0}" yra netinkamas. Prašome patikrinti dar kartą.</invalid-nodeType>
+      <invalid-keyword>Raktinis žodis yra neteisingas. Kai kurie ženklai yra nepalaikomi.</invalid-keyword>
     </msg>
   </UIContentSearchForm>
 
   <WebContentMetadataPopup>
     <title>
-      <UIContentPropertySelector>Property Selector</UIContentPropertySelector>
+      <UIContentPropertySelector>Savybės pasirinkimas</UIContentPropertySelector>
     </title>
   </WebContentMetadataPopup>
 
@@ -221,14 +221,14 @@
       <Cancel>#{word.cancel}</Cancel>
     </action>
     <label>
-      <metadataType>Metadata Type</metadataType>
+      <metadataType>Metaduomenų tipas</metadataType>
       <property_select>Ypatybė</property_select>
     </label>
   </UIContentPropertySelector>
 
   <WebContentNodeTypePopup>
     <title>
-      <UIContentNodeTypeSelector>Node Type Selector</UIContentNodeTypeSelector>
+      <UIContentNodeTypeSelector>Mazgo tipo selektorius</UIContentNodeTypeSelector>
     </title>
   </WebContentNodeTypePopup>
 
@@ -242,72 +242,72 @@
   <UIContentSearchResult>
     <header>
       <title>Antraštė</title>
-      <score>Score</score>
-      <publicationstate>Publication State</publicationstate>
+      <score>Rezultatas</score>
+      <publicationstate>Paskelbimo būsena</publicationstate>
       <action>Veiksmas</action>
     </header>
     <title>
-      <Select>Select</Select>
-      <View>View</View>
+      <Select>Pasirinkti</Select>
+      <View>Rodyti</View>
     </title>
     <msg>
-    <template-not-support>Cannot preview this content. The template is not supported</template-not-support>
+    <template-not-support>Negalima peržiūrėti šio turinio. Šablonas yra nepalaikomas</template-not-support>
     </msg>
   </UIContentSearchResult>
 
   <UIContentDialogForm>
     <action>
-      <SaveDraft>Save Draft</SaveDraft>
-      <FastPublish>Fast Publish</FastPublish>
-      <Preferences>Preferences</Preferences>
+      <SaveDraft>Išsaugoti juodraštį</SaveDraft>
+      <FastPublish>Greitas publikavimas</FastPublish>
+      <Preferences>Nuostatos</Preferences>
       <Close>#{word.close}</Close>
     </action>
     <msg>
-      <access-denied>You do not have permission to add categories to this document.</access-denied>
-      <exception>An error occurred while adding categories to this document.</exception>
-      <non-categories>Categories are wrong. Please select appropriate categories.</non-categories>
+      <access-denied>Jūs neturite teisės pridėti kategorijų į šį dokumentą.</access-denied>
+      <exception>Įvyko klaida pridedant kategorijas į šį dokumentą.</exception>
+      <non-categories>Kategorijos yra neteisingos. Prašome pasirinkti atitinkamas kategorijas.</non-categories>
     </msg>
   </UIContentDialogForm>
 
   <UIPermissionManager>
     <label>
-      <UIPermissionInputSetWithAction>Permission</UIPermissionInputSetWithAction>
-      <UIAccessibleCheckboxInput>Access Right</UIAccessibleCheckboxInput>
-      <UIEditableCheckboxInput>Edit Right</UIEditableCheckboxInput>
+      <UIPermissionInputSetWithAction>Teisė</UIPermissionInputSetWithAction>
+      <UIAccessibleCheckboxInput>Prieigos teisė</UIAccessibleCheckboxInput>
+      <UIEditableCheckboxInput>Redaguoti teisę</UIEditableCheckboxInput>
     </label>
     <action>
       <Save>#{word.save}</Save>
-      <Clear>Clear</Clear>
+      <Clear>Išvalyti</Clear>
       <title>
         <Edit>Redaguoti</Edit>
-        <Delete>Delete</Delete>
+        <Delete>Ištrinti</Delete>
       </title>
     </action>
   </UIPermissionManager>
 
   <UIPermissionManagerGrid>
     <header>
-      <owner>Permission</owner>
-      <accessible>Accessible</accessible>
-      <editable>Editable</editable>
-      <action>Action</action>
+      <owner>Teisė</owner>
+      <accessible>Prieinama</accessible>
+      <editable>Redaguojama</editable>
+      <action>Veiksmas</action>
     </header>
     <msg>
-      <confirm-delete-permission>Are you sure you want to delete this permission?</confirm-delete-permission>
-      <no-permission-remove>You do not have permission.</no-permission-remove>
-      <access-denied>Access denied.</access-denied>
+      <confirm-delete-permission>Ar tikrai norite ištrinti šią teisę?</confirm-delete-permission>
+      <no-permission-remove>Jūs neturite teisės.</no-permission-remove>
+      <access-denied>Prieiga uždrausta.</access-denied>
       <node-locked>The path element {0} or one of its parents is locked.</node-locked>
-      <userOrGroup-required>You must select a user or group.</userOrGroup-required>
-      <checkbox-require>You must set rights.</checkbox-require>
-      <node-checkedin>You must check out first.</node-checkedin>
+      <userOrGroup-required>Pasirinkite vartotoją arba grupę.</userOrGroup-required>
+      <checkbox-require>Turite nustatyti teises.</checkbox-require>
+      <node-checkedin>Turite pirmiau išsiregistruoti.</node-checkedin>
     </msg>
   </UIPermissionManagerGrid>
 
   <UIPermissionInputSetWithAction>
     <title>
-      <SelectUser>Select User</SelectUser>
-      <SelectMember>Select Member</SelectMember>
-      <AddAny>Add Any Permission</AddAny>
+      <SelectUser>Pasirinkti vartotoją</SelectUser>
+      <SelectMember>Pasirinkti narį</SelectMember>
+      <AddAny>Pridėkite bet kokią teisę</AddAny>
     </title>
   </UIPermissionInputSetWithAction>
 
@@ -319,104 +319,104 @@
 
   <UIGroupSelectorPopupWindow>
     <title>
-      <UIGroupMemberSelector>Group Selector</UIGroupMemberSelector>
+      <UIGroupMemberSelector>Grupės pasirinkimas</UIGroupMemberSelector>
     </title>
   </UIGroupSelectorPopupWindow>
 
   <UIGroupMemberSelector>
     <label>
-      <selectGroup>Select Group</selectGroup>
-      <selectMembership>Select Membership</selectMembership>
+      <selectGroup>Pasirinkti grupę</selectGroup>
+      <selectMembership>Pasirinkti narystę</selectMembership>
     </label>
   </UIGroupMemberSelector>
 
   <UIContentDialogPreference>
     <action>
-      <Back>Back</Back>
+      <Back>Atgal</Back>
     </action>
   </UIContentDialogPreference>
 
   <ZeroValidator>
     <msg>
-      <Invalid-number>Zero is not accepted in the field '{0}'.</Invalid-number>
+      <Invalid-number>Nulis yra negalimas laukelyje '{0}'.</Invalid-number>
     </msg>
   </ZeroValidator>
 
   <UIDropDownPageTemp>
     <item>
-      <WCMPageConfigs>WCM Page Configurations</WCMPageConfigs>
-      <ColumnPageConfigs>Column Page Configurations</ColumnPageConfigs>
-      <RowPageConfigs>Row Page Configurations</RowPageConfigs>
-      <TabsPageConfigs>Tabs Page Configurations</TabsPageConfigs>
-      <MixPageConfigs>Mix Page Configurations</MixPageConfigs>
+      <WCMPageConfigs>WCM puslapio konfigūracija</WCMPageConfigs>
+      <ColumnPageConfigs>Stulpelio puslapio konfigūracija</ColumnPageConfigs>
+      <RowPageConfigs>Eilutės puslapio konfigūracija</RowPageConfigs>
+      <TabsPageConfigs>Skirtukų puslapio konfigūracija</TabsPageConfigs>
+      <MixPageConfigs>Sumaišyto puslapio konfiguracija</MixPageConfigs>
     </item>
   </UIDropDownPageTemp>
 
   <UIWizardPageSelectLayoutForm>
     <label>
-      <SingleContentViewer>Single Content Viewer</SingleContentViewer>
-      <ContentListViewer>Content List Viewer</ContentListViewer>
-      <Search>Search</Search>
-      <Sitemap>Site Map</Sitemap>
-      <TwoColumnsLayout>Two-column Layout</TwoColumnsLayout>
-      <ThreeColumnsLayout>Three-column Layout</ThreeColumnsLayout>
-      <TwoRowsLayout>Two-row Layout</TwoRowsLayout>
-      <ThreeRowsLayout>Three-row Layout</ThreeRowsLayout>
-      <TwoTabsLayout>Two-tab layout</TwoTabsLayout>
-      <ThreeTabsLayout>Three-tab Layout</ThreeTabsLayout>
-      <TwoColumnsOneRowLayout>Two-column &amp; One-row Layout</TwoColumnsOneRowLayout>
-      <OneRowTwoColumnsLayout>One-row &amp; Two-column Layout</OneRowTwoColumnsLayout>
-      <ThreeRowsTwoColumnsLayout>Three-row &amp; Two-column Layout</ThreeRowsTwoColumnsLayout>
+      <SingleContentViewer>Vieno turinio peržiūros programa</SingleContentViewer>
+      <ContentListViewer>Turinio sąrašo peržiūros programa</ContentListViewer>
+      <Search>Ieškoti</Search>
+      <Sitemap>Svetainės žemėlapis</Sitemap>
+      <TwoColumnsLayout>Dviejų stulpelių išdėstymas</TwoColumnsLayout>
+      <ThreeColumnsLayout>Trijų stulpelių išdėstymas</ThreeColumnsLayout>
+      <TwoRowsLayout>Dviejų eilučių išdėstymas</TwoRowsLayout>
+      <ThreeRowsLayout>Trijų eilučių išdėstymas</ThreeRowsLayout>
+      <TwoTabsLayout>Dviejų skirtukų išdėstymas</TwoTabsLayout>
+      <ThreeTabsLayout>Trijų skirtukų išdėstymas</ThreeTabsLayout>
+      <TwoColumnsOneRowLayout>Dviejų stulpelių ir vienos eilutės išdėstymas</TwoColumnsOneRowLayout>
+      <OneRowTwoColumnsLayout>Vienos eilutės ir dviejų stulpelių išdėstymas</OneRowTwoColumnsLayout>
+      <ThreeRowsTwoColumnsLayout>Trijų eilučių ir dviejų stulpelių išdėstymas</ThreeRowsTwoColumnsLayout>
     </label>
   </UIWizardPageSelectLayoutForm>
 
   <Signin>
-    <welcome>Welcome</welcome>
-    <login>Login</login>
-    <logout>Logout</logout>
-    <language>Change Language</language>
-    <register>Register</register>
+    <welcome>Sveiki</welcome>
+    <login>Prisijungti</login>
+    <logout>Atsijungti</logout>
+    <language>Pakeisti kalbą</language>
+    <register>Registruotis</register>
   </Signin>
   <UIDriveForm>
 <label>
-<wcm-category-view>Category View</wcm-category-view>
-<wcm-view>WCM Content View</wcm-view>
+<wcm-category-view>Kategorijos rodinys</wcm-category-view>
+<wcm-view>WCM turinio rodinys</wcm-view>
 </label>
   </UIDriveForm>
   
   <ContentSelector>
     <title>
-      <PersonalDrives>Personal Drives</PersonalDrives>
-      <GeneralDrives>General Drives</GeneralDrives>
-      <GroupDrives>Group Drives</GroupDrives>
-      <Private>Private</Private>
+      <PersonalDrives>Asmeniniai diskai</PersonalDrives>
+      <GeneralDrives>Bendrieji diskai</GeneralDrives>
+      <GroupDrives>Grupės diskai</GroupDrives>
+      <Private>Privatus</Private>
       <Public>Viešas</Public>
-      <BackupCenter>Backup Center</BackupCenter>
-      <CategorizedDocumentsCenter>Categorized Documents Center</CategorizedDocumentsCenter>
-      <CollaborationCenter>Collaboration Center</CollaborationCenter>
-      <DigitalAssetsManagementCenter>Digital Assets Management Center</DigitalAssetsManagementCenter>
-      <DMSAdministration>DMS Administration</DMSAdministration>
-      <DocumentsManagementCenter>Documents Management Center</DocumentsManagementCenter>
-      <LiveDocumentsCenter>Live Documents Center</LiveDocumentsCenter>
-      <PendingDocumentsCenter>Pending Documents Center</PendingDocumentsCenter>
-      <RecordsManagementCenter>Records Management Center</RecordsManagementCenter>
-      <SharedUsersSpace>Shared Users Space</SharedUsersSpace>
-      <Systemfiles>System Files</Systemfiles>
-      <ValidationRequestsDocumentsCenter>Validation Requests Documents Center</ValidationRequestsDocumentsCenter>
+      <BackupCenter>Atsarginių kopijų centras</BackupCenter>
+      <CategorizedDocumentsCenter>Suskirstytų dokumentų centras</CategorizedDocumentsCenter>
+      <CollaborationCenter>Bendradarbiavimo centras</CollaborationCenter>
+      <DigitalAssetsManagementCenter>Skaitmeninio turto valdymo centras</DigitalAssetsManagementCenter>
+      <DMSAdministration>DMS administracija</DMSAdministration>
+      <DocumentsManagementCenter>Dokumentų valdymo centras</DocumentsManagementCenter>
+      <LiveDocumentsCenter>Einamųjų dokumentų centras</LiveDocumentsCenter>
+      <PendingDocumentsCenter>Laukiančių dokumentų centras</PendingDocumentsCenter>
+      <RecordsManagementCenter>Įrašų valdymo centras</RecordsManagementCenter>
+      <SharedUsersSpace>Bendrinamų vartotojų erdvė</SharedUsersSpace>
+      <Systemfiles>Sisteminiai failai</Systemfiles>
+      <ValidationRequestsDocumentsCenter>Patvirtinimo prašymų dokumentų centras</ValidationRequestsDocumentsCenter>
       <ManagedSites>Svetainių valdymas</ManagedSites>
-      <SharedSite>Shared Site</SharedSite>
+      <SharedSite>Bendrinama svetainė</SharedSite>
     </title>
   </ContentSelector>
   
   <UICategoryNavigationTargetPathPopupWindow>
     <title>
-      <UIPageSelector>Page Selector</UIPageSelector>
+      <UIPageSelector>Puslapio parinkimas</UIPageSelector>
     </title>
   </UICategoryNavigationTargetPathPopupWindow>
   
   <UIDocumentInfo>
     <msg>
-      <access-denied-exception>Access denied. You maybe not have read permission, or the node may have been removed or changed.</access-denied-exception>
+      <access-denied-exception>Prieiga uždrausta. Jūs turbūt neturite leidimo skaityti, arba mazgas buvo pašalintas ar pakeistas.</access-denied-exception>
     </msg>
   </UIDocumentInfo>
   <UIPortalApplication>
@@ -427,13 +427,13 @@
   
   <CategoryNavigationTemplate>
   <label>
-  <home>Home</home>
+  <home>Pagrindinis</home>
   </label>
   </CategoryNavigationTemplate>
   
   <Breadcrumb>
   <label>
-  <home>Home</home>
+  <home>Pagrindinis</home>
   </label>  
   </Breadcrumb>
 </bundle>
