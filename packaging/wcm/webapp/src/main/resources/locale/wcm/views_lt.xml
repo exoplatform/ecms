@@ -32,17 +32,17 @@
   <SiteMetadata>
     <view>
       <label>
-        <title>Site Title</title>
-        <description>Site Description</description>
-        <keywords>Site Keywords</keywords>
-        <robots>Search Engine Behavior</robots>
+        <title>Svetainės pavadinimas</title>
+        <description>Svetainės aprašymas</description>
+        <keywords>Svetainės raktažodžiai</keywords>
+        <robots>Paieškos variklio elgesys</robots>
       </label>
       <tooltip>
-        <add-edit>Add/Edit Metadata</add-edit>
+        <add-edit>Pridėti/redaguoti metaduomenis</add-edit>
         <cancel>#{word.cancel}</cancel>
       </tooltip>
       <action>
-        <add-edit>Add/Edit</add-edit>
+        <add-edit>Pridėti/redaguoti</add-edit>
         <cancel>#{word.cancel}</cancel>
       </action>
     </view>

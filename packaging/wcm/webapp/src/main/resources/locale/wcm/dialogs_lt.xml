@@ -23,27 +23,27 @@
   <WebContent>
     <dialog>
       <label>
-        <MainContent>Main Content</MainContent>
+        <MainContent>Pagrindinis turinys</MainContent>
         <cssFile>default.css</cssFile>
         <jsFile>default.js</jsFile>
-        <Advanced>Advanced</Advanced>
-        <Summary>Summary</Summary>
+        <Advanced>Plačiau</Advanced>
+        <Summary>Santrauka</Summary>
         <name>#{word.name}</name>
-        <title>Title</title>
-        <ContentCSS>CSS Data</ContentCSS>
-        <hintCSS>You can specify the main style sheet for your web content. This style will override the style sheets defined at the site level and at the shared level.</hintCSS>
-        <ContentJS>JS Data</ContentJS>
-        <hintJS>You can specify some JavaScript codes that can be executed before your web content is rendered.</hintJS>
-        <WebContentHtml>Main Content</WebContentHtml>
-        <Illustration>Illustration</Illustration>
-        <hintIllustration>You can specify an image that will be shown when your web content is displayed in the list. You can also specify some summary texts to go with this image.</hintIllustration>
-        <confirm-delete>Are you sure you want to delete this illustration?</confirm-delete>
-        <illustrationImage>Illustration Image</illustrationImage>
-        <imageMimeType>Image Type</imageMimeType>
-        <image>Upload Image</image>
-        <imageWidth>Image Width</imageWidth>
-        <imageHeight>Image Height</imageHeight>
-        <Synchronize>Synchronize with CSS and HTML</Synchronize>
+        <title>Antraštė</title>
+        <ContentCSS>CSS duomenys</ContentCSS>
+        <hintCSS>Galite nurodyti pagrindinį stilių savo tinklapio turiniui. Šis stilius perrašys stilius, kurie yra svetainės ir bendrąjame lygmenyje.</hintCSS>
+        <ContentJS>JS duomenys</ContentJS>
+        <hintJS>Galite nurodyti kai kuriuos JavaScript kodus, kurie gali būti įvykdyti prieš jūsų žiniatinklio turinį ir būtų atvaizduojami.</hintJS>
+        <WebContentHtml>Pagrindinis turinys</WebContentHtml>
+        <Illustration>Iliustracija</Illustration>
+        <hintIllustration>Galite nurodyti paveiksliuką, kuris bus rodomas, kai jūsų interneto turinys yra rodomas sąraše. Taip pat galite nurodyti suvestinės tekstą su šiuo paveiksliuku.</hintIllustration>
+        <confirm-delete>Ar tikrai norite ištrinti šią iliustraciją?</confirm-delete>
+        <illustrationImage>Iliustracijos nuotrauka</illustrationImage>
+        <imageMimeType>Paveikslėlio tipas</imageMimeType>
+        <image>Įkelti paveikslėlį</image>
+        <imageWidth>Paveikslėlio plotis</imageWidth>
+        <imageHeight>Paveikslėlio aukštis</imageHeight>
+        <Synchronize>Sinchronizuoti su CSS ir HTML</Synchronize>
       </label>
     </dialog>
   </WebContent>
@@ -52,9 +52,9 @@
     <dialog>
       <label>
         <name>#{word.name}</name>
-        <active>Active</active>
+        <active>Aktyvus</active>
         <priority>Prioritetas</priority>
-        <content>CSS Data</content>
+        <content>CSS duomenys</content>
       </label>
     </dialog>
   </CSSFile>
@@ -63,9 +63,9 @@
     <dialog>
       <label>
         <name>#{word.name}</name>
-        <active>Active</active>
+        <active>Aktyvus</active>
         <priority>Prioritetas</priority>
-        <content>JS Data</content>
+        <content>JS duomenys</content>
       </label>
     </dialog>
   </JSFile>
@@ -75,7 +75,7 @@
       <label>
         <name>#{word.name}</name>
         <url>URL</url>
-        <description>Description</description>
+        <description>Aprašymas</description>
       </label>
     </dialog>
   </WebLink>
@@ -83,10 +83,10 @@
   <SiteMetadata>
     <dialog>
       <label>
-        <title>Site Title</title>
-        <description>Site Description</description>
-        <keywords>Site Keywords</keywords>
-        <robots>Search Engine Behavior</robots>
+        <title>Svetainės pavadinimas</title>
+        <description>Svetainės aprašymas</description>
+        <keywords>Svetainės raktažodžiai</keywords>
+        <robots>Paieškos variklio elgesys</robots>
       </label>
     </dialog>
   </SiteMetadata>

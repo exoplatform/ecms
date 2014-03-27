@@ -55,8 +55,8 @@
       <AdvancedBlock>Plačiau</AdvancedBlock>
       <UICLVConfigDynamicNavigationLabel>Dinaminė navigacija</UICLVConfigDynamicNavigationLabel>
       <UICLVConfigContextualFolderRadioBoxInput>Contextual Folder</UICLVConfigContextualFolderRadioBoxInput>
-      <UICLVConfigShowCLVByStringInput>by</UICLVConfigShowCLVByStringInput>
-      <UICLVConfigshowSCVWithStringInput>with</UICLVConfigshowSCVWithStringInput>
+      <UICLVConfigShowCLVByStringInput>pagal</UICLVConfigShowCLVByStringInput>
+      <UICLVConfigshowSCVWithStringInput>su</UICLVConfigshowSCVWithStringInput>
       <UICLVConfigTargetPageFormInputSet>Rodyti puslapyje</UICLVConfigTargetPageFormInputSet>
       <content-not-found>Content not found.</content-not-found>
       <ContentPath>Turinio kelias</ContentPath>

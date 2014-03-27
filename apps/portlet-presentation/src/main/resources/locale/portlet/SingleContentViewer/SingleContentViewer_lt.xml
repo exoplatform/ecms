@@ -65,18 +65,18 @@
       <PrintSettingBlock>Spausdinimo parametrai</PrintSettingBlock>
       <UISCVPrintPageParameter>with</UISCVPrintPageParameter>
       <UISCVConfigPrintPageFormInputSet>Rodyti puslapyje</UISCVConfigPrintPageFormInputSet>
-      <LockStatus>Lock</LockStatus>
-      <CacheManagement>Content Visibility</CacheManagement>
-      <UISCVCacheRadioBox>Share Content</UISCVCacheRadioBox>
+      <LockStatus>Užrakinti</LockStatus>
+      <CacheManagement>Turinio matomumas</CacheManagement>
+      <UISCVCacheRadioBox>Dalintis turiniu</UISCVCacheRadioBox>
     </label>
     <help>
-      <ContentPathBlock>Select the content you want to show. This default content will be replaced dynamically if you activate the Dynamic Navigation option (see the Advanced mode below).</ContentPathBlock>
-      <DisplaySettingBlock>You can show or hide the Option bar used to show the print link. Title and Date displays are also optional.</DisplaySettingBlock>
-      <ContextualHelp>Activates Dynamic Navigation. The content can be changed dynamically by another URL-based parameter.</ContextualHelp>
-      <ParameterHelp>This parameter will be used to get the content if the Dynamic Navigation is activated.</ParameterHelp>
+      <ContentPathBlock>Pasirinkite turinį, kurį norite rodyti. Numatytasis pasirinkimas bus pakeistas dinamiškai jei įjungsite Dinaminės Navigacijos opciją (žr. Plačiau apačioje).</ContentPathBlock>
+      <DisplaySettingBlock>Galite rodyti arba slėpti parinkties juostą naudojamą spausdinimo nuorodai. Pavadinimas ir data taip pat nėra privaloma.</DisplaySettingBlock>
+      <ContextualHelp>Aktyvina Dinaminę Navigaciją. Turinys gali būti dinamiškai pakeistas remiantis kitu URL parametru.</ContextualHelp>
+      <ParameterHelp>Šis parametras bus naudojamas gauti turinį jei Dinaminė Navigacija yra aktyvinta.</ParameterHelp>
     </help>
     <msg>
-      <not-valid-path>The item path is invalid.</not-valid-path>
+      <not-valid-path>Elemento kelias yra klaidingas.</not-valid-path>
     </msg>
     <tab>
       <label>

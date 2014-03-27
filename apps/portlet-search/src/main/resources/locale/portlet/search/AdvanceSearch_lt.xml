@@ -42,13 +42,13 @@
     <label>
       <itemsPerPageSelector>Elementų kiekis puslapyje</itemsPerPageSelector>
       <searchFormSelector>Ieškoti pagal šabloną</searchFormSelector>
-      <searchResultSelector>Search Result Template</searchResultSelector>
-      <searchPaginatorSelector>Search Paginator Template</searchPaginatorSelector>
-      <searchPageLayoutSelector>Search Page Layout Template</searchPageLayoutSelector>
+      <searchResultSelector>Paieškos rezultatų šablonas</searchResultSelector>
+      <searchPaginatorSelector>Paieškos puslapiavimo šablonas</searchPaginatorSelector>
+      <searchPageLayoutSelector>Paieškos puslapio išdėstymo šablonas</searchPageLayoutSelector>
       <searchResultBasePathInputSetAction>Bazinis kelias</searchResultBasePathInputSetAction>
       <pageMode>Puslapio režimas</pageMode>
       <option>
-        <none>None</none>
+        <none>Nėra</none>
         <more>Daugiau</more>
         <pagination>Numeracija</pagination>
       </option>

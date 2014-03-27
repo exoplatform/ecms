@@ -39,7 +39,7 @@
       <item-not-found>Šis kelias yra klaidingas.</item-not-found>
       <fileType-empty>Prieš įrašant šią konfigūraciją pasirinkite failo tipą.</fileType-empty>
       <ws-empty>Prašome pasirinkti vieną darbo sritį.</ws-empty>
-      <action-empty>Please select a folder with an action.</action-empty>
+      <action-empty>Pasirinkite aplanką su veiksmu.</action-empty>
       <message-empty>"Pasirinktinė išsaugojimo žinutė" laukelis būtinas, jeigu jūs nepasirinksite parinkčių peradresavimo, arba kai kelias yra tuščias.</message-empty>
       <get-template>Įvyko klaida mėginant pasiekti šabloną.</get-template>
       <set-template-option>Įvyko klaida mėginant nustyatyti šablono parinktį.</set-template-option>

@@ -40,8 +40,8 @@
   <File>
     <view>
       <label>
-        <not-viewable>The preview of this document is not available.</not-viewable>
-        <using-webDAV>or Open in MS Office</using-webDAV>
+        <not-viewable>Šio dokumento peržiūra negalima.</not-viewable>
+        <using-webDAV>arba atidaryti su MS Office</using-webDAV>
         <file-size-too-big>Šio failo turinys yra per didelis. Jums reikia atsisiųsti ir atidaryti kliento programoje.</file-size-too-big>
         <webDAV>WebDAV rodinys</webDAV>
         <download>Atsisiųsti</download>
@@ -58,7 +58,7 @@
     <view>
       <label>
         <from>Nuo:</from>
-        <to>To:</to>
+        <to>Kam:</to>
         <cc>Cc:</cc>
         <date>Data:</date>
         <subject>Tema:</subject>
@@ -169,7 +169,7 @@
   <ScriptAction>
     <view>
       <label> 
-        <isDeep>Is Deep</isDeep>
+        <isDeep>Yra giliai</isDeep>
         <nodetypes>Mazgų tipai</nodetypes>
         <affectedNodeTypeNames>Įtakoti mazgo tipai</affectedNodeTypeNames>
         <nodeTypeName>Mazgo tipo pavadinimai</nodeTypeName>
@@ -180,7 +180,7 @@
   <AddMetadata>
     <view>
       <label>
-        <isDeep>Is Deep</isDeep>
+        <isDeep>Yra giliai</isDeep>
         <nodetypes>Mazgo tipai</nodetypes>
         <affectedNodeTypeNames>Įtakoti mazgo tipai</affectedNodeTypeNames>
         <nodeTypeName>Mazgo tipo pavadinimai</nodeTypeName>
@@ -191,7 +191,7 @@
   <EnableVersioning>
     <view>
       <label>
-        <isDeep>Is Deep</isDeep>
+        <isDeep>Yra giliai</isDeep>
         <nodetypes>Mazgo tipai</nodetypes> 
         <affectedNodeTypeNames>Įtakoti mazgo tipai</affectedNodeTypeNames>
         <nodeTypeName>Mazgo tipo pavadinimai</nodeTypeName>
@@ -202,7 +202,7 @@
   <AutoVersioning>
     <view>
       <label>
-        <isDeep>Is Deep</isDeep>
+        <isDeep>Yra giliai</isDeep>
         <nodetypes>Mazgo tipai</nodetypes>
         <affectedNodeTypeNames>Įtakoti mazgo tipai</affectedNodeTypeNames>
         <nodeTypeName>Mazgo tipo pavadinimai</nodeTypeName>
