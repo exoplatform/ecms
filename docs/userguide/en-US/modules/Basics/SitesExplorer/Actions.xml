@@ -4267,9 +4267,23 @@ After being created successfully, a file document with the <guilabel>text/html</
               </row>
               <row>
                 <entry><guilabel>Tag Scopes</guilabel></entry>
-                <entry>Classify the tags. There are four tag types: private, public, group, and site. Currently, the two
-                  first types are activated ("Private" means that a user who creates tags can view and edit tags; "Public" means that all users
-                  can view and edit tags).
+                <entry><para>Classify the tags. There are four tag types: private, public, group, and site. Currently, the two
+                  first types are activated.</para>
+				  <itemizedlist>
+					<listitem>
+						<para>"Private" means that only user who creates tags can view and edit them.</para>
+					</listitem>
+					<listitem>
+						<para>"Public" means that all users can view and use the tags. The permission to edit "public" tags is declared in <menuchoice>
+    <guiicon><inlinegraphic fileref="images/sawtooth_icon.png" format="PNG" scalefit="1" width="4mm"/></guiicon>
+    <guimenuitem>Content</guimenuitem>
+    <guimenuitem>Content Administration</guimenuitem> 
+	<guimenuitem>Categories &amp; Tags</guimenuitem>
+	<guimenuitem>Manage Tags</guimenuitem>
+	<guimenuitem>Tag Permission Manager</guimenuitem>
+  </menuchoice> on the <guilabel>Administration</guilabel> bar.</para>
+					</listitem>
+				 </itemizedlist>
                 </entry>
               </row>
               <row>
