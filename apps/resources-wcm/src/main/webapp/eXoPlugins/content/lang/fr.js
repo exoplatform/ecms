@@ -2,7 +2,7 @@ var UserLanguage = {
 	Filter							:	"Filtre",
 	All									: "tout",
 	WebContents						:   "Contenu Web",
-	DMSDocuments					:	"DMS Document",
+	DMSDocuments					:	"Document DMS",
 	Medias							:	"Medias",
 	UploadFile						:	"Envoyer un fichier",
 
@@ -23,13 +23,13 @@ var UserLanguage = {
 	CreateDate						:	"Date",
 	FileSize						:	"Taille",	
 
-	NoContent						:	"Il n'ya pas de contenu",
+	NoContent						:	"Il n'y a pas de contenu",
 
 	BtnCancel						: 	"Annuler",
 	BtnUpload						: 	"Envoyer",
 	BtnSetting						: 	"Paramètre",
 	BtnClose						: 	"Fermer",
-	BtnSave							: 	"Sauver",
+	BtnSave							: 	"Enregistrer",
 	BtnAbort						: 	"Abort",
 	BtnDelete						: 	"Supprimer",
 	
