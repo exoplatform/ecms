@@ -4,7 +4,7 @@ CKEDITOR.plugins.setLang( 'insertPortalLink', 'fr',
   WCMInsertPortalLinkDialogTitle    : 'Insérer lien vers une page',
   WCMInsertPortalLinkInputTitle     : 'Titre: ',
   WCMInsertPortalLinkInputUrl       : 'Lien: ',
-  WCMInsertPortalLinkButtonGet      : 'Selectionner la page',
+  WCMInsertPortalLinkButtonGet      : 'Sélectionner la page',
   WCMInsertPortalLinkButtonPreview  : 'Prévisualiser',
-  WCMInsertPortalLinkButtonSave     : 'Sauver'
+  WCMInsertPortalLinkButtonSave     : 'Enregistrer'
 } );
