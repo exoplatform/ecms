@@ -286,7 +286,7 @@
 				ret += oldName[i];
 			}
 		}
-		return encodeURIComponent(ret);
+		return ret;
 	};
 
 	MultiUpload.prototype.changeStatusValue = function(id, delta) {
@@ -890,7 +890,7 @@
 		  	  //load image thumbnail
 		  	  var nodePath = (eXo.ecm.MultiUpload.drivePath.length <= 1 ? "":"/" + eXo.ecm.MultiUpload.drivePath) + 
 		  	  (eXo.ecm.MultiUpload.pathMap[progressID].length <= 1 ? "" : "/" + eXo.ecm.MultiUpload.pathMap[progressID]) +
-		  	  "/" + cleanName(file.name);
+		  	  "/" + encodeURIComponent(cleanName(file.name));
 				var icon = gj("#icon" + progressID, eXo.ecm.MultiUpload.document)[0];
 		  	  if (icon && eXo.ecm.MultiUpload.fileType[progressID].indexOf("image") != -1) {
 		  		  var iconHTMLForImageLoadFail = gj(icon).html();

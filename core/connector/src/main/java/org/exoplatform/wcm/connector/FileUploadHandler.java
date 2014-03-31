@@ -19,6 +19,7 @@ package org.exoplatform.wcm.connector;
 import java.io.BufferedInputStream;
 import java.io.File;
 import java.io.FileInputStream;
+import java.net.URLDecoder;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.Date;
@@ -332,6 +333,7 @@ public class FileUploadHandler {
     if(parent.isLocked()) {
       parent.getSession().addLockToken(LockUtil.getLockToken(parent));
     }
+    fileName = Text.escapeIllegalJcrChars(URLDecoder.decode(fileName,"UTF-8"));
     if (parent.hasNode(fileName)) {
 //      Object args[] = { fileName, parent.getPath() };
 //      Document fileExisted = fckMessage.createMessage(FCKMessage.FILE_EXISTED,
