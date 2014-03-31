@@ -53,11 +53,16 @@
 									}
 									gj("#viewTypeAreaID").html(strView);
 									gj("#viewPresentAreaID").html(strViewPresent);
-
-									require(["lang/" + eXp.userLanguage + ".js"], function() {
+                                                                       
+                                                                	langFile = "lang/" + eXp.userLanguage + ".js";    
+									require([langFile], function() {
 										eXo.ecm.ECS.initRequestXmlTree('editor');
 										eXo.ecm.ECS.languageInit();
-										//eXo.ecm.ECS.fixHeightTrees();
+                                                                        }, function(err) {
+                                                                          require(["lang/en.js"], function() {
+                                                                            eXo.ecm.ECS.initRequestXmlTree('editor');
+									    eXo.ecm.ECS.languageInit(); 
+                                                                          });
 									});
 								});
 							});
