@@ -25,7 +25,12 @@
 							window.wcm_utils = wcm_utils; require(["../../../eXoWCMResources/javascript/eXo/wcm/frontoffice/private/ContentSelector.js"], function(content_selector) {
 								window.content_selector = content_selector; require(["../../eXoPlugins.js"], function() {
 									eXp.init();
-									eXp.userLanguage = eXo.ecm.ECS.userLanguage || "en";
+									var langCode = eXo.ecm.ECS.userLanguage, 
+									    pluginLang = ['en', 'fr', 'vi'];
+									eXp.userLanguage = "en";    
+									if (CKEDITOR.tools.indexOf(pluginLang, langCode) >= 0)
+									  eXp.userLanguage = langCode;
+
 									if(eXo.ecm.ECS.insertContentType=="Image") {
 										strHTML = "<input type=\"hidden\" name=\"Filter\" id=\"Filter\" value=\"Image\">";
 									} else {
@@ -57,8 +62,8 @@
 									require(["lang/" + eXp.userLanguage + ".js"], function() {
 										eXo.ecm.ECS.initRequestXmlTree('editor');
 										eXo.ecm.ECS.languageInit();
-										//eXo.ecm.ECS.fixHeightTrees();
 									});
+                                                                       
 								});
 							});
 						});
