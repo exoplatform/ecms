@@ -296,6 +296,8 @@ public class AuthoringPublicationPlugin extends  WebpagePublicationPlugin {
       if (!node.isCheckedOut()) {
         node.checkout();
       }
+      node.setProperty(AuthoringPublicationConstant.LIVE_DATE_PROP, new GregorianCalendar());
+      node.save();
       Version liveVersion = node.checkin();
       node.checkout();
       // Change current live revision to unpublished
@@ -354,7 +356,6 @@ public class AuthoringPublicationPlugin extends  WebpagePublicationPlugin {
                                   AuthoringPublicationConstant.ENROLLED_TO_LIFECYCLE);
       Value liveVersionValue = valueFactory.createValue(liveVersion);
       node.setProperty(AuthoringPublicationConstant.LIVE_REVISION_PROP, liveVersionValue);
-      node.setProperty(AuthoringPublicationConstant.LIVE_DATE_PROP, new GregorianCalendar());
       VersionData liveRevisionData = new VersionData(liveVersion.getUUID(),
                                                      PublicationDefaultStates.PUBLISHED,
                                                      userId);
