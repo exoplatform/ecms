@@ -275,7 +275,9 @@ public class UICLVConfig extends UIFormTabPane  implements UISelectable {
               items.add(item);
             }
           }catch(RepositoryException e){
-            //
+            if(LOG.isDebugEnabled()){
+              LOG.debug(e.getMessage());
+            }
           }
           
         }
