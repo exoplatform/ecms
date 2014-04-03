@@ -54,6 +54,8 @@
         <name>#{word.name}</name>
         <categories>カテゴリ</categories>
         <mimeType>#{Ecm.dialog.label.mimeType}</mimeType>
+        <width>Width</width>
+        <height>Height</height>
         <content>#{word.content}</content>
         <re-upload>ファイルが既に存在します。再度アップロードすることで置き換えることができます。</re-upload>
       </label>
