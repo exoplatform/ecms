@@ -28,7 +28,7 @@
         <show-comments>Hiển thị bình luận</show-comments>
         <hide-comments>Ẩn bình luận</hide-comments>
         <comment-by>Bình luận bởi</comment-by>
-        <email>Email</email>
+        <email>Địa chỉ thư điện tử</email>
         <site>Trang</site>
       </label>
     </view>
