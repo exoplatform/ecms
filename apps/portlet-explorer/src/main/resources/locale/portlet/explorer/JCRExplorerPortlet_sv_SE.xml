@@ -143,7 +143,7 @@
   <UIViewRelationList>
     <label>
       <languages-list>Översättningar</languages-list>
-      <relation-list>Relations</relation-list>
+      <relation-list>Relation</relation-list>
       <references-list>Referenser</references-list>
       <no-related-document>Inga relaterade dokument</no-related-document>
       <related-document>Relaterade dokument</related-document>
@@ -236,7 +236,7 @@
       <EditFormController>Redigera dokument</EditFormController>
       <UIRelationManager>Lägg till Relation</UIRelationManager>
       <UICategoryManager>Lägg till kategori</UICategoryManager>
-      <UIImportNode>Import</UIImportNode>
+      <UIImportNode>Importera</UIImportNode>
       <UIViewMetadataManager>Visa Metadata</UIViewMetadataManager>
       <UIVoteForm>Omröstning dokument</UIVoteForm>
       <UICommentForm>Kommentar</UICommentForm>
@@ -294,7 +294,7 @@
       <ManageAuditing>Revision</ManageAuditing>
       <ManagePublications>Publikationer</ManagePublications>
       <ManageCategories>Kategorier</ManageCategories>
-      <ManageRelations>Relations</ManageRelations>
+      <ManageRelations>Relation</ManageRelations>
       <ManageActions>Åtgärder</ManageActions>
       <ExportNode>Exportera</ExportNode>
       <ImportNode>Importera</ImportNode>
@@ -305,7 +305,7 @@
       <ViewPermissions>Behörighet</ViewPermissions>
       <ViewProperties>Egenskaper</ViewProperties>
       <ViewMetadatas>Metadata</ViewMetadatas>
-      <ViewRelations>Show/Hide Relations</ViewRelations>
+      <ViewRelations>Visa/Dölj Relation</ViewRelations>
       <ShowJCRStructure>Visa/Dölj innehålls struktur</ShowJCRStructure>
     </tooltip>
     <msg>
@@ -702,6 +702,17 @@
       <namespace>Utrymme för namn:</namespace>
       <multiple>Flera:</multiple>
       <property_select>Lägga till ny egenskap:</property_select>
+      <value0>Value 0</value0>
+      <value1>Value 1</value1>
+      <value2>Value 2</value2>
+      <value3>Value 3</value3>
+      <value4>Value 4</value4>
+      <value5>Value 5</value5>
+      <value6>Value 6</value6>
+      <value7>Value 7</value7>
+      <value8>Value 8</value8>
+      <value9>Value 9</value9>
+      <value10>Value 10</value10>
     </label>
     <action>
       <Save>#{word.save}</Save>
@@ -1134,11 +1145,11 @@
   </UINodeTypeSelectForm>
   <UICompareExactlyForm>
     <label>
-      <filter>Filter:</filter>
+      <filter>Filtrera:</filter>
       <result>Resultat:</result>
     </label>
     <title>
-      <result>Filter</result>
+      <result>Filtrera</result>
     </title>
     <button>
       <label-Select>Välj</label-Select>
@@ -1366,7 +1377,7 @@
       <e_512>Ta bort Mixin</e_512>
       <e_1024>Klon</e_1024>
       <e_2048>Uppdatera</e_2048>
-      <e_4096>Import</e_4096>
+      <e_4096>Importera</e_4096>
       <e_8192>Checka in</e_8192>
       <e_16384>Checka ut</e_16384>
       <e_32768>Återställ</e_32768>
@@ -1471,7 +1482,7 @@
     </label>
     <action>
       <Cancel>#{word.cancel}</Cancel>
-      <Import>Import</Import>
+      <Import>Importera</Import>
     </action>
     <title>Importera noden</title>
     <msg>
@@ -1610,7 +1621,7 @@
   </UIRelationManager>
   <UIRelationsAddedList>
     <header>
-      <path>Relations</path>
+      <path>Relation</path>
       <action>Åtgärder</action>
     </header>
     <action>
@@ -1875,6 +1886,7 @@
     <msg>
       <name-exist>Taggens namn {0} finns redan.</name-exist>
       <tagName-invalid>Taggens namn innehåller ogiltiga tecken.</tagName-invalid>
+      <tagName-empty-or-invalid>The tag name is empty or contains some invalid characters.</tagName-empty-or-invalid>
       <tag-name-empty>Din taggnamn är tom</tag-name-empty>
       <tag-name-duplicate>Input-tagg namnen är dubbletter.</tag-name-duplicate>
       <tagName-too-long>En av de taggar som angetts är för långt. Taggens namn måste vara mindre än 30 tecken.</tagName-too-long>
@@ -3044,6 +3056,12 @@
     <DrivesArea>
       <ShowDrives>Visa enheter</ShowDrives>
     </DrivesArea>
+    <msg>
+      <no-view-found>There are no views applied for your access permission in drive '{0}'.</no-view-found>
+      <access-denied>Access denied. You may not have permission in the workspace of drive '{0}'.</access-denied>
+      <empty-drives>Access denied. Either there is no drive in this repository or you do not have permission to access any drives in this repository.</empty-drives>
+      <workspace-not-exist>Drive '{0}' was stored in one unrecognized workspace. Please reconfigure this drive.</workspace-not-exist>
+    </msg>
   </UIDrivesArea>
   <UIJcrExplorerEditForm>
     <msg>
