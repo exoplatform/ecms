@@ -87,7 +87,7 @@
 -->
   <UITaxonomyTreeMainForm>
     <action>
-      <Reset>Redefinir</Reset>
+      <Reset>Limpar</Reset>
     </action>
     <msg>
       <name-not-allowed>Nome não permitido</name-not-allowed>
@@ -361,7 +361,7 @@
       <AddDrive>Adicionar Unidade</AddDrive>
     </action>
     <label>
-      <permission>'{0}' in '{1}'</permission>
+      <permission>{0}' in '{1}</permission>
     </label>
   </UIDriveList>
   <UIDriveForm>
@@ -874,7 +874,7 @@
 <UIViewPermissionList>
  <title>Selecione o Proprietário com permissões para esta visualização:</title>
 <label>
- <permission>'{0}' in '{1}'</permission>
+ <permission>{0}' in '{1}</permission>
 </label>
 <msg>
  <confirm-delete>Tem certeza que deseja excluir esta permissão?</confirm-delete>
@@ -1067,6 +1067,9 @@
   ################################################################################
   -->
   <UITemplateForm>
+    <title>
+      <AddPermission>Adicionar Permissão</AddPermission>
+    </title>
     <action>
       <Save>#{word.save}</Save>
       <Cancel>#{word.cancel}</Cancel>
@@ -1378,7 +1381,7 @@
     <action>
       <Close>#{word.close}</Close>
       <Save>Salvar</Save>
-      <Reset>Redefinir</Reset>
+      <Reset>Limpar</Reset>
     </action>
     <msg>
       <checkbox-require>Você deve selecionar ao menos uma permissão.</checkbox-require>
@@ -2110,7 +2113,7 @@
       <Delete>Excluir</Delete>
     </title>
 <label>
-  <permission>'{0}' in '{1}'</permission>
+  <permission>{0}' in '{1}</permission>
 </label>
   </UIViewContainer>
   <ECMTemplate>
