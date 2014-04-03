@@ -509,19 +509,28 @@ public class ManageDriveServiceImpl implements ManageDriveService, Startable {
     if (drives != null)
       return new ArrayList<DriveData>((List<DriveData>) drives);
     List<DriveData> groupDrives = new ArrayList<DriveData>();
-    String groupPath = nodeHierarchyCreator_.getJcrPath(BasePath.CMS_GROUPS_PATH);
+    DriveData groupDrive = getDriveByName("Groups");
+    String[] allPermission = groupDrive.getAllPermissions();
+    boolean flag = false;
     for (String role : userRoles) {
-      String group = role.substring(role.indexOf(":")+1);
-      if (groupDriveTemplate_ != null && group.charAt(0)=='/') {
-        DriveData drive = groupDriveTemplate_.clone();
-        drive.setHomePath(groupDriveTemplate_.getHomePath().replace("${groupId}", group));
-        drive.setName(group.replace("/", "."));
-        drive.setPermissions("*:"+group);
-        if (!groupDrives.contains(drive))
-          groupDrives.add(drive);
+      if (groupDrive.hasPermission(allPermission, role)) {
+        flag = true;
+        break;
       }
     }
-
+    if(flag){
+      for (String role : userRoles) {
+        String group = role.substring(role.indexOf(":")+1);
+        if (groupDriveTemplate_ != null && group.charAt(0)=='/') {
+          DriveData drive = groupDriveTemplate_.clone();
+          drive.setHomePath(groupDriveTemplate_.getHomePath().replace("${groupId}", group));
+          drive.setName(group.replace("/", "."));
+          drive.setPermissions("*:"+group);
+          if (!groupDrives.contains(drive))
+            groupDrives.add(drive);
+        }
+      }
+    }  
     Collections.sort(groupDrives);
     drivesCache_.put(getRepoName() + "_" + userId + ALL_GROUP_CACHED_DRIVES, groupDrives);
     return new ArrayList<DriveData>(groupDrives);
