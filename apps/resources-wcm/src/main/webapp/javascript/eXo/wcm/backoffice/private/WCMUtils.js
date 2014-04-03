@@ -16,7 +16,12 @@
        hostName = parentLocation.href.substring(0, parentLocation.href.indexOf(parentLocation.pathname));
     } else {
       // If window is iframe, location should be parsing from src property
-      var url = window.src;
+      var url; 
+      if (eXo.core.Browser.ie) {
+        url = window.frameElement.src;
+      } else {
+        url = window.src;
+      }
       var parser = document.createElement('a');
       parser.href = url;
       hostName =  parser.protocol + "//" + parser.hostname + ":" + parser.port;
