@@ -712,7 +712,7 @@
     </label>
     <title>
       <AddPermission>إضافة صلاحية</AddPermission>
-      <RemovePermission>إزالة إذن</RemovePermission>
+      <RemovePermission>حذف الصلاحية</RemovePermission>
       <AddIcon>إضافة ايقونة</AddIcon>
       <AddPath>إضافة مسار</AddPath>
     </title>
@@ -769,7 +769,7 @@
     <msg>
       <action-type-added>تم اضافة نوع الاجراء '{0}' بنجاح</action-type-added>
       <action-type-create-error>طرأ خطأ أثناء القيام بصنع نوع الاجراء.</action-type-create-error>
-      <action-name-invalid>'{0}' غير صحيح، يجب أن يبدأ الاسم بـ':exo'</action-name-invalid>
+      <action-name-invalid>{0}' غير صحيح، يجب أن يبدأ الاسم بـ':exo</action-name-invalid>
       <action-exist>هذا الاجراء موجود مُسبقـا.</action-exist>
       <fileName-invalid>هناك بعض الأحرف الغير مُتاحة في هذا الاسم.</fileName-invalid>
     </msg>
@@ -996,7 +996,7 @@
   </UITabForm>
   <UIPermissionForm>
     <label>
-      <permission>إذن نموذج واجهة المستخدم</permission>
+      <permission>UIPermissionForm</permission>
     </label>
   </UIPermissionForm>
   <UIViewFormTabPane>
@@ -1067,6 +1067,9 @@
   ################################################################################
   -->
   <UITemplateForm>
+    <title>
+      <AddPermission>إضافة صلاحية</AddPermission>
+    </title>
     <action>
       <Save>#{word.save}</Save>
       <Cancel>#{word.cancel}</Cancel>
@@ -1378,7 +1381,7 @@
     <action>
       <Close>#{word.close}</Close>
       <Save>حفظ</Save>
-      <Reset>اعادة ضبط</Reset>
+      <Reset>إعادة تعيين</Reset>
     </action>
     <msg>
       <checkbox-require>يُرجى اختيار صلاحيّة واحدة  على أقصى تقدير.</checkbox-require>
