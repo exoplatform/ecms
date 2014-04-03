@@ -548,7 +548,7 @@
       <AddProperty>Añadir propiedad</AddProperty>
       <AddChild>Agregar subnodo</AddChild>
       <AddConstraints>Añadir restricciones</AddConstraints>
-      <Back>#{word.back}</Back>
+      <Back>#{palabra.atrás}</Back>
       <AddType>Agregar tipo</AddType>
       <AddValue>Añadir</AddValue>
       <CancelConstraints>#{word.cancel}</CancelConstraints>
@@ -557,7 +557,7 @@
       <CancelChild>#{word.cancel}</CancelChild>
       <UpdateProperty>#{palabra.actualizar}</UpdateProperty>
       <CancelProperty>#{word.cancel}</CancelProperty>
-      <Close>#{word.close}</Close>
+      <Close>#{word.cancel}</Close>
     </action>
     <msg>
       <register-successfully>El tipo de nodo '{0}' se registró correctamente.</register-successfully>
@@ -1067,6 +1067,9 @@
   ################################################################################
   -->
   <UITemplateForm>
+    <title>
+      <AddPermission>Añadir Permisos</AddPermission>
+    </title>
     <action>
       <Save>#{word.save}</Save>
       <Cancel>#{word.cancel}</Cancel>
