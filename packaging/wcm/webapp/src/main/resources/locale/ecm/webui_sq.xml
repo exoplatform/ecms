@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<bundle>
+  <!--
+  #####################################################################
+  # org.exoplatform.ecm.webui.tree.selectmany.UICategoriesSelectPanel #
+  #####################################################################
+  -->
+  <UITreeList>
+    <header>
+      <name>crwdns6793357:0crwdne6793357:0</name>
+      <action>crwdns6793358:0crwdne6793358:0</action>
+    </header>
+    <info>
+      <child-not-found>crwdns6793359:0crwdne6793359:0</child-not-found>
+    </info>
+  </UITreeList>
+  <!--
+  ######################################################################
+  # org.exoplatform.ecm.webui.tree.selectmany.UISelectedCategoriesGrid #
+  ######################################################################
+  -->
+  <UISelectedCategoriesGrid>
+    <header>
+      <categoryName>crwdns6793360:0crwdne6793360:0</categoryName>
+      <categoryPath>crwdns6793361:0crwdne6793361:0</categoryPath>
+      <action>crwdns6793362:0{word.action}crwdne6793362:0</action>
+    </header>
+    <action>
+      <SaveCategories>crwdns6793363:0{word.save}crwdne6793363:0</SaveCategories>
+      <Cancel>crwdns6793364:0{word.cancel}crwdne6793364:0</Cancel>
+    </action>
+    <msg>
+      <cannot-save>crwdns6793365:0crwdne6793365:0</cannot-save>
+      <have-saved>crwdns6793366:0crwdne6793366:0</have-saved>
+      <non-categories>crwdns6793367:0crwdne6793367:0</non-categories>
+      <confirm-delete>crwdns6793368:0crwdne6793368:0</confirm-delete>
+    </msg>
+  </UISelectedCategoriesGrid>
+  <!--
+  ######################################################################
+  # org.exoplatform.ecm.webui.selector.UIPermissionSelector           #
+  ######################################################################
+  -->
+  <SelectUserOrGroup>
+    <title>
+      <UIPermissionUser>crwdns6793369:0crwdne6793369:0</UIPermissionUser>
+      <UIPermissionMembership>crwdns6793370:0crwdne6793370:0</UIPermissionMembership>
+    </title>
+  </SelectUserOrGroup>
+  <UIPermissionUser>
+    <label>
+      <selectUser>crwdns6793371:0crwdne6793371:0</selectUser>
+      <selectGroup>crwdns6793372:0crwdne6793372:0</selectGroup>
+    </label>
+  </UIPermissionUser>
+  <UIPermissionMembership>
+    <label>
+      <selectUser>crwdns6793373:0crwdne6793373:0</selectUser>
+      <selectGroup>crwdns6793374:0crwdne6793374:0</selectGroup>
+    </label>
+  </UIPermissionMembership>
+</bundle>

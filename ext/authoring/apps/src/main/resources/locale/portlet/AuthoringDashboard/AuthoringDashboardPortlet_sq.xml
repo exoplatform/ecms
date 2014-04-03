@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<bundle>
+  <UIDashboardForm>
+    <label>
+      <title>crwdns6793375:0crwdne6793375:0</title>
+      <nocontent>crwdns6793376:0crwdne6793376:0</nocontent>
+      <mydraft>crwdns6793377:0crwdne6793377:0</mydraft>
+      <waitingapproval>crwdns6793378:0crwdne6793378:0</waitingapproval>
+      <approve>crwdns6793379:0crwdne6793379:0</approve>
+      <publishedtomorrow>crwdns6793380:0crwdne6793380:0</publishedtomorrow>
+      <refresh>crwdns6793381:0{word.refresh}crwdne6793381:0</refresh>
+    </label>
+  </UIDashboardForm>
+</bundle>
