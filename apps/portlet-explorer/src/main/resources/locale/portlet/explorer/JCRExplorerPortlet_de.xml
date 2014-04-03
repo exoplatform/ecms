@@ -41,7 +41,7 @@
     </label>
     <button>
       <label>
-        <confirm>OK</confirm>
+        <confirm>Ok</confirm>
       </label>
     </button>
     <msg>
@@ -446,19 +446,19 @@
     </title>
     <msg>
       <!-- Delte one node is not in trash and have no relation -->
-      <confirm-delete>Möchten Sie das Element '{0}' wirklich löschen?</confirm-delete>
-      <confirm-delete-file>Möchten Sie wirklich die Datei '{0}' löschen ?</confirm-delete-file>
-      <confirm-delete-folder>Möchten Sie wirklich den Ordner '{0}' und alle Unterordner löschen ?</confirm-delete-folder>
+      <confirm-delete>Möchten Sie das Element "{0}" wirklich löschen?</confirm-delete>
+      <confirm-delete-file>Möchten Sie wirklich die Datei "{0}" löschen ?</confirm-delete-file>
+      <confirm-delete-folder>Möchten Sie wirklich den Ordner "{0}" und alle Unterordner löschen ?</confirm-delete-folder>
       
       <!-- Delte one node is in trash and have no relation -->
-      <confirm-delete-permanently>Möchten Sie wirklich das Element '{0}' dauerhaft entfernen?</confirm-delete-permanently>
-      <confirm-delete-file-permanently>Möchten Sie wirklich die Datei '{0}' dauerhaft entfernen?</confirm-delete-file-permanently>
-      <confirm-delete-folder-permanently>Möchten Sie den Ordner '{0}' und alle Unterordner dauerhaft wirklich entfernen?</confirm-delete-folder-permanently>
+      <confirm-delete-permanently>Möchten Sie wirklich das Element "{0}" dauerhaft entfernen?</confirm-delete-permanently>
+      <confirm-delete-file-permanently>Möchten Sie wirklich die Datei "{0}" dauerhaft entfernen?</confirm-delete-file-permanently>
+      <confirm-delete-folder-permanently>Möchten Sie den Ordner "{0}" und alle Unterordner dauerhaft wirklich entfernen?</confirm-delete-folder-permanently>
       
       <!-- Delte one node is not in trash and have relations -->
-      <confirm-delete-has-relations>Möchten Sie das Element '{0}' und seine Referenzen wirklich löschen?</confirm-delete-has-relations>
-      <confirm-delete-file-has-relations>Möchten Sie die Datei '{0}' und ihre Referenzen wirklich löschen?</confirm-delete-file-has-relations>
-      <confirm-delete-folder-has-relations>Möchten Sie den Ordner '{0}' und seine Referenzen wirklich löschen?</confirm-delete-folder-has-relations>
+      <confirm-delete-has-relations>Möchten Sie das Element "{0}" und seine Referenzen wirklich löschen?</confirm-delete-has-relations>
+      <confirm-delete-file-has-relations>Möchten Sie die Datei "{0}" und ihre Referenzen wirklich löschen?</confirm-delete-file-has-relations>
+      <confirm-delete-folder-has-relations>Möchten Sie den Ordner "{0}" und seine Referenzen wirklich löschen?</confirm-delete-folder-has-relations>
       
       <!-- Delte multiple nodes, not in Trash, have no relations -->
       <confirm-delete-multi-nodes-generic>Möchten Sie die {0} ausgewählten Elemente wirklich löschen?</confirm-delete-multi-nodes-generic>  
@@ -495,7 +495,7 @@
       <feedback-restore>"{0}" wurde erfolgreich wiederhergestellt.</feedback-restore>
       <feedback-restore-multi>{0} Elemente wurden erfolgreich wiederhergestellt.</feedback-restore-multi>
       
-      <confirm-restore>Ein Knoten mit dem gleichen Namen ist bereits im alten Speicherort des Knotens '{0}' vorhanden. Möchten Sie diesen Knoten wirklich wiederherstellen?</confirm-restore>
+      <confirm-restore>Ein Knoten mit dem gleichen Namen ist bereits im alten Speicherort des Knotens "{0}" vorhanden. Möchten Sie diesen Knoten wirklich wiederherstellen?</confirm-restore>
       <confirm-move>Möchten Sie diese(n) Knoten wirklich verschieben?</confirm-move>
       <node-cut>Der Knoten '{0}' wurde ausgeschnitten.</node-cut>
       <execute-successfully>Die benutzerdefinierte Aktion '{0}' wurde ausgeführt.</execute-successfully>
@@ -702,6 +702,17 @@
       <namespace>Namensraum:</namespace>
       <multiple>Mehrwertig:</multiple>
       <property_select>Neue Eigenschaft hinzufügen:</property_select>
+      <value0>Value 0</value0>
+      <value1>Value 1</value1>
+      <value2>Value 2</value2>
+      <value3>Value 3</value3>
+      <value4>Value 4</value4>
+      <value5>Value 5</value5>
+      <value6>Value 6</value6>
+      <value7>Value 7</value7>
+      <value8>Value 8</value8>
+      <value9>Value 9</value9>
+      <value10>Value 10</value10>
     </label>
     <action>
       <Save>#{word.save}</Save>
@@ -713,12 +724,12 @@
       <unable-create>Eigenschaften können nicht hinzugefügt werden.</unable-create>
       <value-invalid>Bitte geben Sie den Wert ein.</value-invalid>
       <node-checkedin>Sie müssen diesen Knoten auschecken, bevor eine Eigenschaft hinzufügen.</node-checkedin>
-      <can-not-add>You cannot add properties to this node. This is only allowed for the node type nt:unstructured.</can-not-add>
-      <propertyName-invalid>The property name must include namespace (e.g. namespace:name).</propertyName-invalid>
+      <can-not-add>Sie k&amp;ouml;nnen diesem Knoten keine Eigenschaften zuf&amp;uuml;gen. Nur f&amp;uuml;r Knotentyp ist nt:unstrukturiert</can-not-add>
+      <propertyName-invalid>Eigenschaftsname muss Namenspalte beinhalten (z.B.: Namenspalte:Name)</propertyName-invalid>
       <propertyName-exist>Die Eigenschaft "{0}" ist bereits vorhanden.</propertyName-exist>
       <propertyValu-null>Einige Werte sind möglicherweise null oder leer.</propertyValu-null>
-      <valueFormatEx>You cannot assign a multiple-valued value to a single-valued property.</valueFormatEx>
-      <number-format-exception>Your input value has the wrong format.</number-format-exception>
+      <valueFormatEx>Kann keinen Mehrfachwert auf eine einzelwertige Eigenschaft zuweisen.</valueFormatEx>
+      <number-format-exception>Ihr eingegebener Wert ist im falschen Format</number-format-exception>
       <property-not-exist>Die Eigenschaft {0} existiert nicht.</property-not-exist>
     </msg>
   </UIPropertyForm>
@@ -774,13 +785,13 @@
       <selectUser>Benutzer auswählen</selectUser>
     </label>
     <msg>
-      <not-change-owner>'{0}' is the owner of this node and has full control permission.</not-change-owner>
+      <not-change-owner>'{0}' ist der Besitzer des Knotens volle Kontrollgenehmigung</not-change-owner>
     </msg>
   </UIGroupSelector>
   <UIPermissionForm>
     <label>
       <UIPopupWindow>Auswählen</UIPopupWindow>
-      <permission>UIPermissionForm</permission>
+      <permission>UIGenehmigungsForm</permission>
       <userOrGroup>Benutzer oder Gruppe</userOrGroup>
       <read>Recht lesen</read>
       <add_node>Recht ändern</add_node>
@@ -795,7 +806,7 @@
     <msg>
       <checkbox-require>Bitte wählen Sie mindestens eine Berechtigung aus.</checkbox-require>
       <userOrGroup-required>Bitte wählen Sie einen Benutzer oder eine Gruppe vor dem Speichern dieser Berechtigung aus.</userOrGroup-required>
-      <not-change-permission>You do not have the right to add a permission.</not-change-permission>
+      <not-change-permission>Sie haben kein Recht eine Genehmigung hinzuzuf&amp;uuml;gen</not-change-permission>
       <access-denied>Zugriff verweigert. Sie können diese Berechtigung nicht entfernen.</access-denied>
     </msg>
   </UIPermissionForm>
@@ -810,7 +821,7 @@
       <node-type>Knotentyp</node-type>
       <name>Name</name>
       <item>Primäre Elementname</item>
-      <super-types>Parent Types</super-types>
+      <super-types>Vorg&amp;auml;ngertypen</super-types>
       <mixin>Mixin Knotentyp</mixin>
       <orderable-children>Sortierbare Unterknoten</orderable-children>
       <property-def>Knoten-Eigenschaftsdefinition</property-def>
@@ -864,26 +875,26 @@
   </UIContentNameSearch>
   <UISimpleSearch>
     <action>
-      <MoreConstraints>Show/Hide Constraint Form</MoreConstraints>
+      <MoreConstraints>Einschr&amp;auml;nkungsform anzeigen/verstecken</MoreConstraints>
       <Search>Suche</Search>
       <Save>#{word.save}</Save>
       <Cancel>#{word.cancel}</Cancel>
     </action>
     <label>
-      <moreConstraints>UISimpleSearch</moreConstraints>
+      <moreConstraints>UIEifacheSuche</moreConstraints>
       <firstOperator>Operator:</firstOperator>
       <input>Ein Wort oder eine Phrase im Inhalt</input>
-      <constraints>More Constraints:</constraints>
+      <constraints>Mehr Einschr&amp;auml;nkungen</constraints>
       <nodePath>Aktueller Ort</nodePath>
     </label>
     <msg>
       <keyword-null>Bitte geben Sie Ihr Schlüsselwort ein.</keyword-null>
       <not-found>Keine Ergebnisse gefunden.</not-found>
       <keyword-not-allow>Dieses Schlüsselwort ist nicht erlaubt.</keyword-not-allow>
-      <value-null>Please enter your keyword or constraints.</value-null>
-      <value-save-null>Please enter a keyword or constraints before saving this query.</value-save-null>
-      <inputSearch-invalid>There are invalid characters in the search input.</inputSearch-invalid>
-      <query-invalid>The query is invalid. Please check your constraint.</query-invalid>
+      <value-null>Suchbegriff oder Einschr&amp;auml;nkungen eingeben.</value-null>
+      <value-save-null>Bevor Abfrage gespeichert wird, bitte Suchbegriff oder Einschr&amp;auml;nkungen eingeben.</value-save-null>
+      <inputSearch-invalid>Ung&amp;uuml;ltige Symbole in Ihrem Suchbegriff</inputSearch-invalid>
+      <query-invalid>Die Abfrage ist ung&amp;uuml;ltig. Bitte Einschr&amp;auml;nkungen &amp;uuml;berpr&amp;uuml;fen</query-invalid>
     </msg>
   </UISimpleSearch>
   <ViewSearch>
@@ -893,9 +904,9 @@
   </ViewSearch>
   <UISearchResult>
     <msg>
-      <not-support>There is no View template for this node.</not-support>
+      <not-support>Es gibt keine Ansischtsvorlage f&amp;uuml;r diesen Knoten</not-support>
       <empty>Keine Ergebnisse gefunden.</empty>
-      <access-denied>You cannot open this folder, either because it no longer exists or because you do not have the right to access it.</access-denied>
+      <access-denied>Sie k&amp;ouml;nnen diesen Knoten nicht anschauen weil die Vorlage nicht unterst&amp;uuml;tzt wird oder Zugang wird verweigert!</access-denied>
       <query-invalid>Die Abfrage ist ungültig.</query-invalid>
     </msg>
     <header>
@@ -1014,7 +1025,7 @@
     <tooltip>
       <View>Diesen Knoten anzeigen</View>
       <OpenFolder>Gehe zum Ordner</OpenFolder>
-      <RemoveHiddenAttribute>Remove Hidden Attribute</RemoveHiddenAttribute>
+      <RemoveHiddenAttribute>Remove hidden attribute</RemoveHiddenAttribute>
     </tooltip>
   </UIShowAllHiddenResult>
   <UIShowAllTrashResult>
@@ -1052,11 +1063,11 @@
   </UIShowAllTrashResult>
   <UIConstraintsForm>
     <label>
-      <constraints>UIConstraintsForm</constraints>
+      <constraints>UICEinschr&amp;auml;nkungsForm</constraints>
       <metadataProperty>Eigenschaften</metadataProperty>
       <operator>Operator</operator>
-      <contains>Contain Value</contains>
-      <notcontains>Not Contain Value</notcontains>
+      <contains>Enth&amp;auml;lt Wert</contains>
+      <notcontains>NICHT enh&amp;auml;lt Wert</notcontains>
     </label>
     <action>
       <Add>Hinzufügen</Add>
@@ -1065,13 +1076,13 @@
     <msg>
       <properties-required>Eigenschaftsname wird benötigt.</properties-required>
       <value-required>Das Wertfeld wird benötigt.</value-required>
-      <date-invalid>The From date must be earlier than the To date.</date-invalid>
+      <date-invalid>Anfangsdatum muss kleiner sein als Enddatum.</date-invalid>
       <fromDate-required>Das Anfangsdatum wird benötigt.</fromDate-required>
-      <must-choose-one>You have to select at least one type.</must-choose-one>
-      <properties-null>Select properties first, then filter.</properties-null>
-      <exactly-require>You have to fill in the Value exactly before saving this constraint.</exactly-require>
-      <fromDate-invalid>Invalid type in the 'From' field. Please reselect or type correctly.</fromDate-invalid>
-      <toDate-invalid>Invalid type in the 'To' field. Please reselect or type correctly.</toDate-invalid>
+      <must-choose-one>Sie m&amp;uuml;ssen mindestens einen Typen w&amp;auml;hlen.</must-choose-one>
+      <properties-null>Erst Eigenschaften w&amp;auml;hlen, dann Filter</properties-null>
+      <exactly-require>Sie m&amp;uuml;ssen den Wert genau einf&amp;uuml;hlen bevor Sie diese Einschr&amp;auml;nkung speichern k&amp;ouml;nnen</exactly-require>
+      <fromDate-invalid>Ung&amp;uuml;ltiger Typ in 'Anfangsdatum' Feld. Bitte Aussuchen oder richtig Tippen.</fromDate-invalid>
+      <toDate-invalid>Ung&amp;uuml;ltiger Typ in 'Enddatum' Feld. Bitte Aussuchen oder richtig Tippen.</toDate-invalid>
     </msg>
     <button>
       <label-Add>Hinzufügen</label-Add>
@@ -1631,7 +1642,7 @@
   <UIClipboard>
     <header>
       <path>Pfad</path>
-      <command>Cm</command>
+      <command>Km</command>
       <action>Aktion</action>
     </header>
     <label>
@@ -1875,6 +1886,7 @@
     <msg>
       <name-exist>Der Tagname "{0}" ist bereits vorhanden.</name-exist>
       <tagName-invalid>Der Tagname enthält ungültige Zeichen.</tagName-invalid>
+      <tagName-empty-or-invalid>The tag name is empty or contains some invalid characters.</tagName-empty-or-invalid>
       <tag-name-empty>Der Tagname ist leer</tag-name-empty>
       <tag-name-duplicate>Die eingegebenen Tagnamen müssen eindeutig sein.</tag-name-duplicate>
       <tagName-too-long>Einer der eingegebenen Tags war zu lang. Tagnamen müssen kürzer als 30 Buchstaben sein.</tagName-too-long>
@@ -2205,7 +2217,7 @@
   </UIDriveSelector>
   <UIJcrExplorerEditForm>
     <label>
-      <DriveNameInput>UI JCR Explorer Edit Form</DriveNameInput>
+      <DriveNameInput>UIJcrExplorerEditForm</DriveNameInput>
     </label>
     <msg>
       <personal-usecase>Das private Laufwerk des aktuellen Benutzers wird verwendet werden, wenn Sie als Auswahl den persönlichen Anwendungsfall wählen.</personal-usecase>
@@ -3044,6 +3056,12 @@
     <DrivesArea>
       <ShowDrives>Laufwerke anzeigen</ShowDrives>
     </DrivesArea>
+    <msg>
+      <no-view-found>There are no views applied for your access permission in drive '{0}'.</no-view-found>
+      <access-denied>Zugriff verweigert. Sie haben keine Berechtigung in dem Arbeitsbereich des Laufwerks "{0}".</access-denied>
+      <empty-drives>Access denied. Either there is no drive in this repository or you do not have permission to access any drives in this repository.</empty-drives>
+      <workspace-not-exist>Das Laufwerk "{0}" wurde in einem unbekannten Arbeitsbereich gespeichert. Bitte konfigurieren Sie das Laufwerk neu.</workspace-not-exist>
+    </msg>
   </UIDrivesArea>
   <UIJcrExplorerEditForm>
     <msg>

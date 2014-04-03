@@ -203,7 +203,7 @@
       <time-to-late>Die Suche benötigt zuviel Zeit.</time-to-late>
       <empty-field>Bitte geben Sie ein gültiges Schlüsselwort für die Suche ein.</empty-field>
       <invalid-format>Ungültiges Datums-/Zeitformat im Feld '{0}'.</invalid-format>
-      <invalid-date>Das Enddatum muss nach dem Anfangsdatum liegen</invalid-date>
+      <invalid-date>"Das Enddatum muss nach dem Anfangsdatum liegen"</invalid-date>
       <invalid-nodeType>Der Knotentyp "{0}" ist ungültig. Bitte überprüfen Sie ihn.</invalid-nodeType>
       <invalid-keyword>Das Schlüsselwort ist ungültig. Einige Zeichen werden nicht erkannt.</invalid-keyword>
     </msg>
