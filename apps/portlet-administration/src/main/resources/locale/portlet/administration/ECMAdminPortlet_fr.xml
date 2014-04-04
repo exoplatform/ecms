@@ -243,7 +243,7 @@
     <header>
       <icon>Icône</icon>
       <name>Métadonnées</name>
-      <type>Type</type>
+      <type>Nom</type>
       <internalUse>Usage interne</internalUse>
       <action>Actions</action>
     </header>
@@ -313,7 +313,7 @@
   <UIMetadataView>
     <header>
       <name>Nom de l'élement</name>
-      <type>Type</type>
+      <type>Nom</type>
       <description>Description</description>
       <isMixin>Mixin</isMixin>
       <orderable>Sous-Noeuds Ordonnables</orderable>
@@ -1512,7 +1512,7 @@
   -->
   <UITemplateList>
     <header>
-      <name>Type</name>
+      <name>Nom</name>
       <action>Action</action>
       <label>Nom</label>
       <icon>Icône</icon>
@@ -1530,7 +1530,7 @@
   
   <UIActionsTemplateList>
     <header>
-      <name>Type</name>
+      <name>Nom</name>
       <action>Action</action>
       <label>Nom</label>
       <icon>Icône</icon>
@@ -1548,7 +1548,7 @@
   
   <UIOthersTemplateList>
     <header>
-      <name>Type</name>
+      <name>Nom</name>
       <label>Nom</label>
       <icon>Icône</icon>
       <action>Action</action>
@@ -1917,7 +1917,7 @@
   <UIQueriesList>
     <header>
       <name>Nom</name>
-      <type>Type</type>
+      <type>Nom</type>
       <statement>Requêtes</statement>
       <permission>Permissions</permission>
       <action>Actions</action>

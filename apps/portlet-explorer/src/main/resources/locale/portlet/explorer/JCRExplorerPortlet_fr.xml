@@ -573,8 +573,8 @@
       <Save>#{word.save}</Save>
       <Cut>Couper</Cut>
       <Paste>Coller</Paste>
-      <CheckOut>CheckOut</CheckOut>
-      <CheckIn>CheckIn</CheckIn>
+      <CheckOut>Checkout</CheckOut>
+      <CheckIn>Checkin</CheckIn>
       <WebDAV>Visualiser par WebDAV</WebDAV>
       <autoversion>Versioning automatique</autoversion>
       <Custom>Personnaliser</Custom>
@@ -702,17 +702,17 @@
       <namespace>Espace de nommage:</namespace>
       <multiple>Multi-valué:</multiple>
       <property_select>Ajouter une Nouvelle Propriété</property_select>
-      <value0>Value 0</value0>
-      <value1>Value 1</value1>
-      <value2>Value 2</value2>
-      <value3>Value 3</value3>
-      <value4>Value 4</value4>
-      <value5>Value 5</value5>
-      <value6>Value 6</value6>
-      <value7>Value 7</value7>
-      <value8>Value 8</value8>
-      <value9>Value 9</value9>
-      <value10>Value 10</value10>
+      <value0>Valeur 0</value0>
+      <value1>Valeur 1</value1>
+      <value2>Valeur 2</value2>
+      <value3>Valeur 3</value3>
+      <value4>Valeur 4</value4>
+      <value5>Valeur 5</value5>
+      <value6>Valeur 6</value6>
+      <value7>Valeur 7</value7>
+      <value8>Valeur 8</value8>
+      <value9>Valeur 9</value9>
+      <value10>Valeur 10</value10>
     </label>
     <action>
       <Save>#{word.save}</Save>
@@ -826,7 +826,7 @@
       <orderable-children>Sous-Noeuds Ordonnables</orderable-children>
       <property-def>Définition de la Propriété</property-def>
       <prop-name>Nom</prop-name>
-      <prop-type>Type</prop-type>
+      <prop-type>Nom</prop-type>
       <prop-multiple>Mul</prop-multiple>
       <prop-mandatory>Man</prop-mandatory>
       <prop-protected>Pr</prop-protected>
@@ -914,7 +914,7 @@
       <path>Chemin</path>
       <action>Action</action>
       <shortcutPath>Dossier</shortcutPath>
-      <type>Type</type>
+      <type>Nom</type>
       <dateCreated>Date de création</dateCreated>
       <score>Score</score>
     </header>
@@ -945,7 +945,7 @@
       <path>Dossier</path>
       <action>Action</action>
       <shortcutPath>Dossier</shortcutPath>
-      <type>Type</type>
+      <type>Nom</type>
       <dateCreated>Date de création</dateCreated>
       <score>Score</score>
     </header>
@@ -976,7 +976,7 @@
       <path>Dossier</path>
       <action>Action</action>
       <shortcutPath>Dossier</shortcutPath>
-      <type>Type</type>
+      <type>Nom</type>
       <dateCreated>Date de création</dateCreated>
       <score>Score</score>
     </header>
@@ -1007,7 +1007,7 @@
       <path>Dossier</path>
       <action>Action</action>
       <shortcutPath>Dossier</shortcutPath>
-      <type>Type</type>
+      <type>Nom</type>
       <dateCreated>Date de création</dateCreated>
       <score>Score</score>
       <AddRemoveFavourite>Ajouter/Supprimer un favori</AddRemoveFavourite>
@@ -1040,7 +1040,7 @@
       <path>Annuler</path>
       <action>Action</action>
       <shortcutPath>Dossier</shortcutPath>
-      <type>Type</type>
+      <type>Nom</type>
       <dateCreated>Date de création</dateCreated>
       <score>Score</score>
     </header>
@@ -1269,7 +1269,7 @@
   <UISavedQuery>
     <header>
       <name>Nom</name>
-      <type>Type</type>
+      <type>Nom</type>
       <statement>Code</statement>
       <permission>Permissions</permission>
       <action>Actions</action>
@@ -1642,7 +1642,7 @@
   <UIClipboard>
     <header>
       <path>Dossier</path>
-      <command>Cm</command>
+      <command/>
       <action>Act</action>
     </header>
     <label>
@@ -1886,7 +1886,7 @@
     <msg>
       <name-exist>Le tag existe déjà ou est invalide</name-exist>
       <tagName-invalid>Caractères invalides détectés dans le nom du tag.</tagName-invalid>
-      <tagName-empty-or-invalid>The tag name is empty or contains some invalid characters.</tagName-empty-or-invalid>
+      <tagName-empty-or-invalid>Le tag est vide ou contient des caractères non valides.</tagName-empty-or-invalid>
       <tag-name-empty>Nom du tag requis</tag-name-empty>
       <tag-name-duplicate>Les noms du tag sont dupliqués.</tag-name-duplicate>
       <tagName-too-long>Nom du tag trop long (doit être inférieur à 30 caractères)</tagName-too-long>
@@ -1992,7 +1992,7 @@
     <label>
       <published>Publié</published>
       <non-published>Non publié</non-published>
-      <public>Public</public>
+      <public>Oui</public>
       <private>Privé</private>
       <state>Etat</state>
       <visibility>Visibilité</visibility>
@@ -2637,7 +2637,7 @@
   <UIPreferencesForm>
       <label>
           <Alphabetic>Nom</Alphabetic>
-          <Type>Type</Type>
+          <Type>Nom</Type>
           <CreatedDate>Date de Création</CreatedDate>
           <ModifiedDate>Date de Modification</ModifiedDate>
           <Ascending>Ascendant</Ascending>
@@ -2745,7 +2745,7 @@
 
    <UITaggingForm>
     <label>
-      <Public>Public</Public>
+      <Public>Oui</Public>
       <Private>Privé</Private>
       <tagScopes>Portée des Tags</tagScopes>
     </label>
@@ -3057,9 +3057,9 @@
       <ShowDrives>Afficher les Lecteurs</ShowDrives>
     </DrivesArea>
     <msg>
-      <no-view-found>There are no views applied for your access permission in drive '{0}'.</no-view-found>
+      <no-view-found>Il n'y a pas de vue disponible par rapport à vos droits d'accès sur le lecteur '{0}'.</no-view-found>
       <access-denied>Accès refusé. Vous n'avez peut-être pas les droits suffisants pour accéder à l'espace de stockage du lecteur '{0}'.</access-denied>
-      <empty-drives>Access denied. Either there is no drive in this repository or you do not have permission to access any drives in this repository.</empty-drives>
+      <empty-drives>Il n'y a pas de lecteur dans ce dépôt de données ou vous n'avez pas les droits requis pour accéder à au moins un lecteur de ce dépôt de données.</empty-drives>
       <workspace-not-exist>Le lecteur '{0}' a été sauvegardé dans un espace de stockage inconnu. Veuillez reconfigurer le lecteur.</workspace-not-exist>
     </msg>
   </UIDrivesArea>
