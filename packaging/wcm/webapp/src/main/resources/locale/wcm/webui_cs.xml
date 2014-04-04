@@ -1,0 +1,439 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+
+    Copyright (C) 2009 eXo Platform SAS.
+    
+    This is free software; you can redistribute it and/or modify it
+    under the terms of the GNU Lesser General Public License as
+    published by the Free Software Foundation; either version 2.1 of
+    the License, or (at your option) any later version.
+    
+    This software is distributed in the hope that it will be useful,
+    but WITHOUT ANY WARRANTY; without even the implied warranty of
+    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the GNU
+    Lesser General Public License for more details.
+    
+    You should have received a copy of the GNU Lesser General Public
+    License along with this software; if not, write to the Free
+    Software Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA
+    02110-1301 USA, or see the FSF site: http://www.fsf.org.
+
+-->
+<bundle>
+  <UIExoStart>
+    <tooltip>
+      <homepage>Domovská stránka</homepage>
+    </tooltip>
+  </UIExoStart>
+
+  <UIFormInputSetWithAction>
+    <msg>
+      <confirm-delete>Jste si jisti, že chcete odstranit tuto položku?</confirm-delete>
+    </msg>
+  </UIFormInputSetWithAction>
+
+  <Drives>
+    <label>
+      <ManagedSites>Správa webů</ManagedSites>
+      <SharedSite>Sdílený web</SharedSite>
+    </label>
+  </Drives>
+
+  <Views>
+    <label>
+      <wcm-view>Web</wcm-view>
+      <admin-view>Admin</admin-view>
+      <icon-view>Ikony</icon-view>
+      <thumbails-view>Miniatury</thumbails-view>
+      <list-view>Seznam</list-view>
+      <authoring-view>Vytváření obsahu</authoring-view>
+      <wcm-category-view>Kategorie</wcm-category-view>
+      <file-view>Zobrazení správy souborů</file-view>
+    </label>
+  </Views>
+
+  <UIActionBar>
+    <obtion>
+      <Publication>Zveřejnění</Publication>
+      <System>Systém</System>
+    </obtion>
+  </UIActionBar>
+
+  <UIPageSelectorPanel>
+    <header>
+      <path>Cesta</path>
+      <action>#{word.action}</action>
+    </header>
+    <msg>
+      <child-not-found>Žádná stránka nalezena.</child-not-found>
+    </msg>
+    <title>
+      <select>Vybrat</select>
+    </title>
+  </UIPageSelectorPanel>
+
+  <UIContentDialogFormPopupWindow>
+    <title>
+      <UIContentDialogPreference>Předvolby webového obsahu</UIContentDialogPreference>
+    </title>
+  </UIContentDialogFormPopupWindow>
+
+  <UITabPane>
+    <title>
+      <UIContentBrowsePanelOne>Prohlížeč obsahu</UIContentBrowsePanelOne>
+      <UIContentBrowsePanelMulti>Prohlížeč obsahu</UIContentBrowsePanelMulti>
+      <UIContentBrowsePanelFolder>Prohlížeč složek</UIContentBrowsePanelFolder>
+      <UIContentSearchForm>Formulář vyhledávání obsahu</UIContentSearchForm>
+      <UIContentSearchResult>Výsledek hledání</UIContentSearchResult>
+      <UIContentViewer>Náhled obsahu</UIContentViewer>
+      <WebContentMetadataPopup>Výběr vlastnosti</WebContentMetadataPopup>
+      <WebContentNodeTypePopup>Výběr typu uzlu</WebContentNodeTypePopup>
+      <UIPermissionManager>Správa oprávnění</UIPermissionManager>
+    </title>
+  </UITabPane>
+
+  <UIContentBrowsePanelOne>
+    <selectBoxValues>
+      <FilterBy>Filtrovat podle</FilterBy>
+      <WebContent>Webový obsah</WebContent>
+      <DMSDocument>Dokument</DMSDocument>
+      <Media>Média</Media>
+    </selectBoxValues>
+    <msg>
+      <node-checkout>Uzel je ve stavu checked out. Prosím zkontrolujte uzel před provedením této funkce.</node-checkout>
+    </msg>
+  </UIContentBrowsePanelOne>
+
+  <UIContentBrowsePanelMulti>
+    <selectBoxValues>
+      <FilterBy>Filtrovat podle</FilterBy>
+      <WebContent>Webový obsah</WebContent>
+      <DMSDocument>Dokument</DMSDocument>
+      <Media>Média</Media>
+    </selectBoxValues>
+  </UIContentBrowsePanelMulti>
+
+  <UIContentBrowsePanelOne>
+    <label>
+      <LeftColumn>Vyberte složku pro zobrazení jejích potomků jako obsah.</LeftColumn>
+      <RightColumn>Obsah níže může být vybrán.</RightColumn>
+    </label>
+  </UIContentBrowsePanelOne>
+
+  <UIContentBrowsePanelMulti>
+    <label>
+      <LeftColumn>Vyberte složku pro zobrazení jejích potomků jako obsah.</LeftColumn>
+      <RightColumn>Obsah níže může být vybrán.</RightColumn>
+    </label>
+  </UIContentBrowsePanelMulti>
+
+  <UIContentBrowsePanelFolder>
+    <label>
+      <LeftColumn>Vyberte složku pro zobrazení jejích potomků jako obsah.</LeftColumn>
+      <RightColumn>Složku níže lze vybrat.</RightColumn>
+    </label>
+  </UIContentBrowsePanelFolder>
+
+  <UISelectedContentGrid>
+    <label>
+      <name>#{word.name}</name>
+      <add>Přidat</add>
+      <delete>Odstranit</delete>
+    </label>
+    <msg>
+      <no-content-found>Nenalezen žádný obsah.</no-content-found>
+      <non-content>Nevybrali jste žádný obsah.</non-content>
+    </msg>
+  </UISelectedContentGrid>
+
+  <UICLVContentSelectedGrid>
+    <action>
+      <SaveCategories>#{word.save}</SaveCategories>
+      <Cancel>#{word.cancel}</Cancel>
+    </action>
+  </UICLVContentSelectedGrid>
+
+  <UIContentBrowsePathSelector>
+    <header>
+      <name>#{word.name}</name>
+      <publicationstate>Stav zveřejnění</publicationstate>
+      <action>Akce</action>
+    </header>
+    <msg>
+      <child-not-found>Nenalezen žádný obsah</child-not-found>
+    </msg>
+  </UIContentBrowsePathSelector>
+
+  <UIContentBrowsePathSelectorFolder>
+    <header>
+      <name>#{word.name}</name>
+      <publicationstate>Stav zveřejnění</publicationstate>
+      <action>Akce</action>
+    </header>
+    <msg>
+      <child-not-found>Žádná složka nenalezena</child-not-found>
+    </msg>
+  </UIContentBrowsePathSelectorFolder>
+
+  <UIContentSearchForm>
+    <title>
+      <Location>Název webu</Location>
+      <SearchByName>Hledat podle jména</SearchByName>
+      <Fulltext>Slovo nebo frázi v kontextu</Fulltext>
+      <Property>Vlastnost</Property>
+      <Contain>Obsahuje</Contain>
+      <FromDate>Od data</FromDate>
+      <ToDate>K datu</ToDate>
+      <DocumentType>Typ dokumentu</DocumentType>
+    </title>
+    <tooltip>
+      <AddMetadataType>Přidat vlastnost</AddMetadataType>
+      <AddNodeType>Přidat typ uzlu</AddNodeType>
+    </tooltip>    
+    <label>
+      <option>
+        <CREATED>Vytvořeno</CREATED>
+        <MODIFIED>Změněno</MODIFIED>
+      </option>
+    </label>
+    <action>
+      <SearchWebContent>Hledat</SearchWebContent>
+    </action>
+    <msg>
+      <time-to-late>Doba hledání je příliš dlouhá.</time-to-late>
+      <empty-field>Zadejte platné klíčové slovo pro vyhledávání.</empty-field>
+      <invalid-format>Neplatný formát data/času v poli '{0}'.</invalid-format>
+      <invalid-date>"K datu" musí být pozdější než "Datum od"</invalid-date>
+      <invalid-nodeType>Typ uzlu "{0}" je neplatný. Zkontrolujte znovu.</invalid-nodeType>
+      <invalid-keyword>Klíčové slovo je neplatné. Některé znaky nejsou podporovány.</invalid-keyword>
+    </msg>
+  </UIContentSearchForm>
+
+  <WebContentMetadataPopup>
+    <title>
+      <UIContentPropertySelector>Výběr vlastnosti</UIContentPropertySelector>
+    </title>
+  </WebContentMetadataPopup>
+
+  <UIContentPropertySelector>
+    <action>
+      <Add>Přidat</Add>
+      <Cancel>#{word.cancel}</Cancel>
+    </action>
+    <label>
+      <metadataType>Typ metadat</metadataType>
+      <property_select>Vlastnost</property_select>
+    </label>
+  </UIContentPropertySelector>
+
+  <WebContentNodeTypePopup>
+    <title>
+      <UIContentNodeTypeSelector>Výběr typu uzlu</UIContentNodeTypeSelector>
+    </title>
+  </WebContentNodeTypePopup>
+
+  <UIContentNodeTypeSelector>
+    <action>
+      <Save>#{word.save}</Save>
+      <Cancel>#{word.cancel}</Cancel>
+    </action>
+  </UIContentNodeTypeSelector>
+
+  <UIContentSearchResult>
+    <header>
+      <title>Popisek</title>
+      <score>Skóre</score>
+      <publicationstate>Stav zveřejnění</publicationstate>
+      <action>Akce</action>
+    </header>
+    <title>
+      <Select>Vybrat</Select>
+      <View>Zobrazit</View>
+    </title>
+    <msg>
+    <template-not-support>Nelze zobrazit náhled tohoto obsahu. Šablona není podporována</template-not-support>
+    </msg>
+  </UIContentSearchResult>
+
+  <UIContentDialogForm>
+    <action>
+      <SaveDraft>Uložit koncept</SaveDraft>
+      <FastPublish>Rychlé zveřejnění</FastPublish>
+      <Preferences>Preference</Preferences>
+      <Close>#{word.close}</Close>
+    </action>
+    <msg>
+      <access-denied>Nemáte oprávnění přidávat k tomuto dokumentu kategorie.</access-denied>
+      <exception>Při přidávání kategorií do tohoto dokumentu došlo k chybě.</exception>
+      <non-categories>Kategorie jsou nesprávné. Vyberte příslušné kategorie.</non-categories>
+    </msg>
+  </UIContentDialogForm>
+
+  <UIPermissionManager>
+    <label>
+      <UIPermissionInputSetWithAction>Oprávnění</UIPermissionInputSetWithAction>
+      <UIAccessibleCheckboxInput>Právo přístupu</UIAccessibleCheckboxInput>
+      <UIEditableCheckboxInput>Právo úpravy</UIEditableCheckboxInput>
+    </label>
+    <action>
+      <Save>#{word.save}</Save>
+      <Clear>Vymazat</Clear>
+      <title>
+        <Edit>Upravit</Edit>
+        <Delete>Odstranit</Delete>
+      </title>
+    </action>
+  </UIPermissionManager>
+
+  <UIPermissionManagerGrid>
+    <header>
+      <owner>Oprávnění</owner>
+      <accessible>Přístupné</accessible>
+      <editable>Upravitelné</editable>
+      <action>Akce</action>
+    </header>
+    <msg>
+      <confirm-delete-permission>Jste si jisti, že chcete odstranit toto oprávnění?</confirm-delete-permission>
+      <no-permission-remove>Nemáte oprávnění.</no-permission-remove>
+      <access-denied>Přístup byl odepřen.</access-denied>
+      <node-locked>Cesta elementu {0} nebo některý z jeho rodičů je uzamčen.</node-locked>
+      <userOrGroup-required>Je nutné vybrat uživatele nebo skupinu.</userOrGroup-required>
+      <checkbox-require>Musíte nastavit práva.</checkbox-require>
+      <node-checkedin>Je třeba nejprve zaškrtnout.</node-checkedin>
+    </msg>
+  </UIPermissionManagerGrid>
+
+  <UIPermissionInputSetWithAction>
+    <title>
+      <SelectUser>Vybrat uživatele</SelectUser>
+      <SelectMember>Vybrat člena</SelectMember>
+      <AddAny>Přidat libovolné oprávnění</AddAny>
+    </title>
+  </UIPermissionInputSetWithAction>
+
+  <UIUserSelectorPopupWindow>
+    <title>
+      <UIUserContainer>Výběr uživatele</UIUserContainer>
+    </title>
+  </UIUserSelectorPopupWindow>
+
+  <UIGroupSelectorPopupWindow>
+    <title>
+      <UIGroupMemberSelector>Výběr skupiny</UIGroupMemberSelector>
+    </title>
+  </UIGroupSelectorPopupWindow>
+
+  <UIGroupMemberSelector>
+    <label>
+      <selectGroup>Vybrat skupinu</selectGroup>
+      <selectMembership>Vybrat členství</selectMembership>
+    </label>
+  </UIGroupMemberSelector>
+
+  <UIContentDialogPreference>
+    <action>
+      <Back>Zpět</Back>
+    </action>
+  </UIContentDialogPreference>
+
+  <ZeroValidator>
+    <msg>
+      <Invalid-number>V poli {0} není povolena nula.</Invalid-number>
+    </msg>
+  </ZeroValidator>
+
+  <UIDropDownPageTemp>
+    <item>
+      <WCMPageConfigs>Nastavení WCM stránky</WCMPageConfigs>
+      <ColumnPageConfigs>Nastavení sloupcové stránky</ColumnPageConfigs>
+      <RowPageConfigs>Nastavení řádkové stránky</RowPageConfigs>
+      <TabsPageConfigs>Nastavení stránky s taby</TabsPageConfigs>
+      <MixPageConfigs>Nastavení smíšené stránky</MixPageConfigs>
+    </item>
+  </UIDropDownPageTemp>
+
+  <UIWizardPageSelectLayoutForm>
+    <label>
+      <SingleContentViewer>Jediný prohlížeč obsahu</SingleContentViewer>
+      <ContentListViewer>Prohlížeč seznamu obsahu</ContentListViewer>
+      <Search>Hledat</Search>
+      <Sitemap>Mapa stránek</Sitemap>
+      <TwoColumnsLayout>Rozložení do dvou sloupců</TwoColumnsLayout>
+      <ThreeColumnsLayout>Rozložení do tří sloupců</ThreeColumnsLayout>
+      <TwoRowsLayout>Dvouřadé rozložení</TwoRowsLayout>
+      <ThreeRowsLayout>Třířadé rozložení</ThreeRowsLayout>
+      <TwoTabsLayout>Rozložení do dvou karet</TwoTabsLayout>
+      <ThreeTabsLayout>Rozložení do tří karet</ThreeTabsLayout>
+      <TwoColumnsOneRowLayout>Rozložení do dvou sloupců &amp; jednoho řádku</TwoColumnsOneRowLayout>
+      <OneRowTwoColumnsLayout>Rozložení do jednoho řádku &amp; dvou sloupců</OneRowTwoColumnsLayout>
+      <ThreeRowsTwoColumnsLayout>Rozložení do tří řádků &amp; dvou sloupců</ThreeRowsTwoColumnsLayout>
+    </label>
+  </UIWizardPageSelectLayoutForm>
+
+  <Signin>
+    <welcome>Vítejte</welcome>
+    <login>Přihlášení</login>
+    <logout>Odhlásit</logout>
+    <language>Změnit jazyk</language>
+    <register>Registrace</register>
+  </Signin>
+  <UIDriveForm>
+<label>
+<wcm-category-view>Zobrazení podle kategorií</wcm-category-view>
+<wcm-view>Zobrazení obsahu WCM</wcm-view>
+</label>
+  </UIDriveForm>
+  
+  <ContentSelector>
+    <title>
+      <PersonalDrives>Osobní disky</PersonalDrives>
+      <GeneralDrives>Obecné disky</GeneralDrives>
+      <GroupDrives>Skupinové disky</GroupDrives>
+      <Private>Soukromé</Private>
+      <Public>Veřejné</Public>
+      <BackupCenter>Centrum zálohování</BackupCenter>
+      <CategorizedDocumentsCenter>Centrum kategorizovaných dokumentů</CategorizedDocumentsCenter>
+      <CollaborationCenter>Centrum spolupráce</CollaborationCenter>
+      <DigitalAssetsManagementCenter>Centrum správy digitálních aktiv</DigitalAssetsManagementCenter>
+      <DMSAdministration>Administrace DMS</DMSAdministration>
+      <DocumentsManagementCenter>Centrum správy dokumentů</DocumentsManagementCenter>
+      <LiveDocumentsCenter>Centrum live dokumentů</LiveDocumentsCenter>
+      <PendingDocumentsCenter>Centrum dokumentů čekajících na zpracování</PendingDocumentsCenter>
+      <RecordsManagementCenter>Centrum správy záznamů</RecordsManagementCenter>
+      <SharedUsersSpace>Skupina sdílená uživateli</SharedUsersSpace>
+      <Systemfiles>Systémové soubory</Systemfiles>
+      <ValidationRequestsDocumentsCenter>Centrum ověření požadavků na dokumenty</ValidationRequestsDocumentsCenter>
+      <ManagedSites>Správa webů</ManagedSites>
+      <SharedSite>Sdílený web</SharedSite>
+    </title>
+  </ContentSelector>
+  
+  <UICategoryNavigationTargetPathPopupWindow>
+    <title>
+      <UIPageSelector>Výběr stránky</UIPageSelector>
+    </title>
+  </UICategoryNavigationTargetPathPopupWindow>
+  
+  <UIDocumentInfo>
+    <msg>
+      <access-denied-exception>Přístup byl odepřen. Možná nemáte oprávnění ke čtení, nebo mohl být uzel odstraněn nebo změněn.</access-denied-exception>
+    </msg>
+  </UIDocumentInfo>
+  <UIPortalApplication>
+    <title>
+      <abort>Přerušit</abort>
+    </title>
+  </UIPortalApplication>    
+  
+  <CategoryNavigationTemplate>
+  <label>
+  <home>Domovská stránka</home>
+  </label>
+  </CategoryNavigationTemplate>
+  
+  <Breadcrumb>
+  <label>
+  <home>Domovská stránka</home>
+  </label>  
+  </Breadcrumb>
+</bundle>

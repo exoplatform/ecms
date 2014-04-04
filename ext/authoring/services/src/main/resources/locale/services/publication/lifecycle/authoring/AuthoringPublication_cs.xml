@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<bundle>
+  <PublicationService>
+    <AuthoringPublicationPlugin>
+      <changeState>
+        <obsoleted>Obsah je zastaralý</obsoleted>
+        <published>Obsah je publikován</published>
+<unpublished>Obsah je nepublikovaný</unpublished>
+<archived>Obsah je archivován</archived>
+<staged>Obsah je umístěn</staged>
+<approved>Obsah je schválen</approved>
+<pending>Obsah čeká na vyřízení</pending>
+<draft>Obsah je v podobě konceptu</draft>
+      </changeState>
+    </AuthoringPublicationPlugin>
+  </PublicationService>
+  <Publication>
+    <log>
+      <description>
+        <enrolled>Obsah se přidá do cyklu zveřejnění</enrolled>
+      </description>
+    </log>
+  </Publication>
+</bundle>

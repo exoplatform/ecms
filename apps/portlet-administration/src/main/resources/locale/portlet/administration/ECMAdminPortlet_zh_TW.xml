@@ -44,7 +44,7 @@
       <no-taxonomy-selected>您必須複製或剪下至少一個類別。</no-taxonomy-selected>
       <node-is-cutting>不能在這裡貼上。類別節點 '{0}' 可能被剪下。</node-is-cutting>
       <can-not-paste>剪貼簿中沒有任何資料。</can-not-paste>
-      <reference-exception>不能刪除此類別，因為它當前引用的內容。</reference-exception>
+      <reference-exception>無法刪除該目錄，因為它的內容正被引用中。</reference-exception>
       <path-error>刪除此類別節點時出錯。</path-error>
     </msg>
   </UITaxonomyWorkingArea>
@@ -279,7 +279,7 @@
   ################################################################################
   -->
   <UIMetadataForm>
-    <title>映射中繼資料</title>
+    <title>核對Metadata</title>
     <action>
       <Cancel>#{word.cancel}</Cancel>
       <Save>套用</Save>
@@ -291,7 +291,7 @@
     </header>
     <label>
       <dialogTemplate>對話方塊範本：</dialogTemplate>
-      <viewTemplate>視圖範本：</viewTemplate>
+      <viewTemplate>檢視範本：</viewTemplate>
       <metadataName>中繼資料名稱：</metadataName>
       <viewPermission>權限：</viewPermission>
       <permission>UIMetadataForm</permission>
@@ -301,7 +301,7 @@
       <label>
         <metadataTypeTab>中繼資料類型</metadataTypeTab>
         <dialogTab>對話方塊範本</dialogTab>
-        <viewTab>視圖範本</viewTab>
+        <viewTab>檢視範本</viewTab>
       </label>
     </tab>
   </UIMetadataForm>
@@ -505,7 +505,7 @@
         <nodeTypeDefinition>節點類型</nodeTypeDefinition>
         <propertyDefinition>屬性</propertyDefinition>
         <childNodeDefinition>子節點</childNodeDefinition>
-        <superTypeTab>父類型</superTypeTab>
+        <superTypeTab>超級類型</superTypeTab>
         <DefaultTypeTab>主要預設</DefaultTypeTab>
         <RequiredTypeTab>主要所需</RequiredTypeTab>
         <Contraints>約束</Contraints>
@@ -520,7 +520,7 @@
       <mixinType>是混合類型</mixinType>
       <hasOrderableChildNodes>可訂購的子節點</hasOrderableChildNodes>
       <primaryItemName>主要項目名稱</primaryItemName>
-      <superTypes>父類型</superTypes>
+      <superTypes>超級類型</superTypes>
       <propertyname>定義名稱</propertyname>
       <requiredType>所需的類型</requiredType>
       <multiple>是多個</multiple>
@@ -547,7 +547,7 @@
       <SaveDraft>保存為草稿</SaveDraft>
       <AddProperty>增加屬性</AddProperty>
       <AddChild>增加子</AddChild>
-      <AddConstraints>增加約束</AddConstraints>
+      <AddConstraints>增加限制</AddConstraints>
       <Back>#{word.back}</Back>
       <AddType>增加類型</AddType>
       <AddValue>新增</AddValue>
@@ -605,7 +605,7 @@
   </requiredPrimaryTypePopup>
   <superTypesPopup>
     <title>
-      <FormsuperTypesPopup>選擇父類型</FormsuperTypesPopup>
+      <FormsuperTypesPopup>選擇超級類型</FormsuperTypesPopup>
     </title>
   </superTypesPopup>
   <NodeTypePopup>
@@ -786,8 +786,8 @@
       <UIScriptForm>腳本</UIScriptForm>
       <UIDialogTab>對話</UIDialogTab>
       <UIViewTab>查看</UIViewTab>
-      <UITemplateEditForm>模板</UITemplateEditForm>
-      <UITemplateForm>模板</UITemplateForm>
+      <UITemplateEditForm>範本</UITemplateEditForm>
+      <UITemplateForm>範本</UITemplateForm>
       <UITemplateContainer>文件</UITemplateContainer>
       <UIActionsTemplateContainer>操作</UIActionsTemplateContainer>
       <UIOthersTemplateContainer>其他人</UIOthersTemplateContainer>
@@ -798,7 +798,7 @@
 <nodeTypeDefinition>節點類型</nodeTypeDefinition>
       <propertyDefinition>屬性</propertyDefinition>
       <childNodeDefinition>子節點</childNodeDefinition>
-      <SuperTypeTab>父類型</SuperTypeTab>
+      <SuperTypeTab>超級類型</SuperTypeTab>
       <DefaultTypeTab>主要預設</DefaultTypeTab>
       <RequiredTypeTab>主要所需</RequiredTypeTab>
       <Contraints>約束</Contraints>
@@ -974,10 +974,10 @@
       <importNode>匯入節點</importNode>
       <viewRelations>查看關係</viewRelations>
       <showJCRStructure>顯示 JCR 結構</showJCRStructure>
-      <watchDocument>觀注文檔</watchDocument>
+      <watchDocument>觀看文件</watchDocument>
       <taggingDocument>標記文件</taggingDocument>
       <viewMetadatas>查看中繼資料</viewMetadatas>
-      <overloadThumbnail>超載的縮略圖</overloadThumbnail>
+      <overloadThumbnail>超載的縮圖</overloadThumbnail>
       <manageHidden>隱藏/顯示內容</manageHidden>
       <comment>評論</comment>
       <vote>投票</vote>  
@@ -986,7 +986,7 @@
       <publicationRequestApproval>請求批准</publicationRequestApproval>
       <publicationApproveContent>批准內容</publicationApproveContent>
       <publicationPublish>發佈</publicationPublish>
-<contentNavigation>內容導航</contentNavigation>
+<contentNavigation>內容導引</contentNavigation>
 <addSymLink>增加符號連結</addSymLink>
     </label>
     <action>
@@ -1041,7 +1041,7 @@
   -->
   <UIECMTemplateList>
     <title>
-      <View>查看</View>
+      <View>檢視</View>
       <EditInfo>編輯</EditInfo>
       <Delete>刪除</Delete>
     </title>
@@ -1083,9 +1083,9 @@
     </msg>
     <tab>
       <label>
-        <template>模板</template>
+        <template>範本</template>
         <defaultDialog>對話</defaultDialog>
-        <defaultView>查看</defaultView>
+        <defaultView>檢視</defaultView>
       </label>
     </tab>
     <label>
@@ -1546,7 +1546,7 @@
   <UIOthersTemplateList>
     <header>
       <name>類型</name>
-      <label>模板</label>
+      <label>範本</label>
       <icon>圖示</icon>
       <action>操作</action>
     </header>
@@ -1570,8 +1570,8 @@
 <UITabPane>
  <title>
  <ContentTemplateContainer>內容</ContentTemplateContainer>
-<CateTemplateContainer>導航</CateTemplateContainer>
-<PageTemplateContainer>分頁程式</PageTemplateContainer>
+<CateTemplateContainer>引導</CateTemplateContainer>
+<PageTemplateContainer>分頁</PageTemplateContainer>
  </title>
 </UITabPane>
 
@@ -1707,9 +1707,9 @@
 </UICLVTemplateForm_CateTemplateContainer>
 <UICLVTemplateForm>
   <label>
-    <paginators>分頁程式</paginators>
+    <paginators>分頁</paginators>
 <list>內容</list>
-<navigation>導航</navigation>
+<navigation>引導</navigation>
   </label>
                           <action>
                             <Save>#{word.save}</Save>
@@ -2501,7 +2501,7 @@
   </NodeTypeNameValidator>
   <UIActionForm>
     <msg>
-      <constraint-violation-exception>節點"{0}"不能增加到 '{1}' 在工作區中 '{2}'。有權限或約束條件的問題。</constraint-violation-exception>
+      <constraint-violation-exception>節點"{0}"不能增加到 '{1}' 在工作區中 '{2}'。有權限或限制條件的問題。</constraint-violation-exception>
     </msg>
   </UIActionForm>
   

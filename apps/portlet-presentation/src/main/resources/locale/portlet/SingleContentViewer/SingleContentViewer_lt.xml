@@ -61,9 +61,9 @@
       <Advance>Plačiau</Advance>
       <ContextCaption>Dinaminė navigacija</ContextCaption>
       <UISCVContextualRadioBox>Kontekstinis turinys</UISCVContextualRadioBox>
-      <UISCVParameterInputBox>by</UISCVParameterInputBox>
+      <UISCVParameterInputBox>pagal</UISCVParameterInputBox>
       <PrintSettingBlock>Spausdinimo parametrai</PrintSettingBlock>
-      <UISCVPrintPageParameter>with</UISCVPrintPageParameter>
+      <UISCVPrintPageParameter>su</UISCVPrintPageParameter>
       <UISCVConfigPrintPageFormInputSet>Rodyti puslapyje</UISCVConfigPrintPageFormInputSet>
       <LockStatus>Užrakinti</LockStatus>
       <CacheManagement>Turinio matomumas</CacheManagement>

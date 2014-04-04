@@ -19,9 +19,9 @@
       <DocumentAndPage>Dokumentas ir puslapis</DocumentAndPage>
       <documentandpage>Dokumentas ir puslapis</documentandpage>
       <resutlsCaption>Rezultatai</resutlsCaption>
-      <ofAboutCaption>of about</ofAboutCaption>
-      <forCaption>for</forCaption>
-      <timeUnitCaption>seconds</timeUnitCaption>
+      <ofAboutCaption>apie</ofAboutCaption>
+      <forCaption>už</forCaption>
+      <timeUnitCaption>sekundės(-ių)</timeUnitCaption>
       <similar>Puslapiai, kuriuose tas pats turinys</similar>
       <editor>Redaktorius</editor>
       <date>Data</date>
@@ -34,8 +34,8 @@
     </action>
     <msg>
       <your-search>Jūsų paieška</your-search>
-      <did-not-match>did not match any</did-not-match>
-      <new-suggestion>suggestion</new-suggestion>
+      <did-not-match>neatitinko</did-not-match>
+      <new-suggestion>pasiūlymas</new-suggestion>
     </msg>
   </UIDefaultSearchResult>
   <UISearchPageLayoutManager>

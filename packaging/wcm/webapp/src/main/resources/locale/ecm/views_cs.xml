@@ -1,0 +1,227 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<bundle>
+ 
+  <View>
+    <label>
+      <languages>
+        <en>Angličtina</en>
+        <fr>Francouzština</fr>
+        <ru>Ruština</ru>
+        <vi>Vietnamština</vi>
+        <nl>Holandština</nl>
+        <de>Němčina</de>
+        <uk>Ukrajinština</uk>
+        <ar>Arabština</ar>
+      </languages>
+    </label>
+  </View>
+ 
+  <!--
+  ################resoucebundle FOR EXO:COMMENT VIEW TEMPLATE#############
+  -->
+  <Comment>
+    <view>
+      <label>
+        <postedBy>Poslední komentář přidal</postedBy>
+        <at>na</at>
+        <comments>Komentář(ů)</comments>
+        <show-comments>Zobrazit komentáře</show-comments>
+        <hide-comments>Skrýt komentáře</hide-comments>
+        <comment-by>Komentoval</comment-by>
+        <email>E-mail</email>
+        <site>Web</site>
+      </label>
+    </view>
+  </Comment>
+ 
+  <!--
+  ################resoucebundle FOR NT:FILE VIEW TEMPLATE##############
+  -->
+  <File>
+    <view>
+      <label>
+        <not-viewable>Náhled na tento dokument není k dispozici.</not-viewable>
+        <using-webDAV>nebo otevřete v MS Office</using-webDAV>
+        <file-size-too-big>Obsah tohoto souboru je příliš velký. Měli byste jej stáhnout a otevřít v klientovi.</file-size-too-big>
+        <webDAV>WebDAV zobrazení</webDAV>
+        <download>Stáhnout</download>
+        <htmlview>Zobrazit jako HTML</htmlview>
+        <plaintextview>Zobrazit jako prostý text</plaintextview>
+      </label>
+    </view>
+  </File>
+ 
+  <!--
+  ################resoucebundle FOR MAIL:DOCUMENT VIEW TEMPLATE##############
+  -->
+  <Mail>
+    <view>
+      <label>
+        <from>Od:</from>
+        <to>Do:</to>
+        <cc>Cc:</cc>
+        <date>Datum:</date>
+        <subject>Předmět:</subject>
+        <attachment>Přílohy:</attachment>
+      </label>
+    </view>
+  </Mail>
+  <!--
+  ################resoucebundle FOR EXO:VOTE VIEW TEMPLATE##############
+  -->
+  <Vote>
+    <view>
+      <label>
+        <avg-rating>Prům. Hodnocení</avg-rating>
+        <subscription>Hlasy</subscription>
+      </label>
+    </view>
+  </Vote>
+  <!--
+  ################resoucebundle FOR LISTVIEW VIEW TEMPLATE##############
+  -->
+  <ListView>
+    <view>
+      <label>
+        <name>Jméno</name>
+        <versionable>Verzování</versionable>
+        <exo_owner>Vlastník</exo_owner>
+        <exo_dateCreated>Datum vytvoření</exo_dateCreated>
+        <exo_dateModified>Datum změny</exo_dateModified>
+        <auditing>Auditování</auditing>
+      </label>
+    </view>
+  </ListView>
+
+  <!--
+  ###################### resoucebundle for exo:addMetadataAction view template ####
+  -->
+  <AddMetadata>
+    <view>
+      <label>
+        <action-name>Název akce</action-name>
+        <lifecycle>Cyklus</lifecycle>
+        <metadata>Metadata</metadata>
+        <description>Popis</description>
+      </label>
+    </view>
+  </AddMetadata>
+
+  <!--
+  ###################### resoucebundle for exo:autoVersioning view template ####
+  -->
+  <AutoVersioning>
+    <view>
+      <label>
+        <action-name>Název akce</action-name>
+        <lifecycle>Cyklus</lifecycle>
+        <description>Popis</description>
+      </label>
+    </view>
+  </AutoVersioning>
+  <!--
+  ###################### resoucebundle for exo:enableVersiong view template ####
+  -->
+  <EnableVersioning>
+    <view>
+      <label>
+        <action-name>Jméno</action-name>
+        <lifecycle>Cyklus</lifecycle>
+        <description>Popis</description>
+      </label>
+    </view>
+  </EnableVersioning>
+  <!--
+  ###################### resoucebundle for dc:elementSet view template ####
+  -->
+  <ElementSet>
+    <view>
+      <label>
+        <not-avaliable>NENÍ K DISPOZICI</not-avaliable>
+        <core-elements>Základní prvky</core-elements>
+        <title>Popisek</title>
+        <creator>Tvůrce</creator>
+        <subject>Předmět š</subject>
+        <source>Zdroj</source>
+        <contributor>Přispěvatel</contributor>
+        <resource-type>Typ zdroje</resource-type>
+        <date>Datum</date>
+        <publisher>Vydavatel</publisher>
+        <description>Popis</description>
+        <rights>Práva</rights>
+        <relation>Vztah</relation>
+        <format>Formát</format>
+        <coverage>Rozsah</coverage>
+        <identifier>Identifikátor</identifier>
+        <languages>Jazyky</languages>
+      </label>
+      <action>
+        <add-edit>Přidat či upravit</add-edit>
+        <cancel>#{word.cancel}</cancel>
+      </action>
+      <tooltip>
+        <cancel>#{word.cancel}</cancel>
+        <add-edit>Přidat či upravit vlastnosti</add-edit>
+      </tooltip>
+    </view>
+  </ElementSet>
+
+  <ScriptAction>
+    <view>
+      <label> 
+        <isDeep>Je hluboký</isDeep>
+        <nodetypes>Typy uzlů</nodetypes>
+        <affectedNodeTypeNames>Ovlivněné typy uzlů</affectedNodeTypeNames>
+        <nodeTypeName>Názvy typů uzlů</nodeTypeName>
+      </label> 
+    </view>
+  </ScriptAction>
+  
+  <AddMetadata>
+    <view>
+      <label>
+        <isDeep>Je hluboký</isDeep>
+        <nodetypes>Typy uzlů</nodetypes>
+        <affectedNodeTypeNames>Ovlivněné typy uzlů</affectedNodeTypeNames>
+        <nodeTypeName>Názvy typů uzlů</nodeTypeName>
+      </label> 
+    </view>
+  </AddMetadata>
+
+  <EnableVersioning>
+    <view>
+      <label>
+        <isDeep>Je hluboký</isDeep>
+        <nodetypes>Typy uzlů</nodetypes> 
+        <affectedNodeTypeNames>Ovlivněné typy uzlů</affectedNodeTypeNames>
+        <nodeTypeName>Názvy typů uzlů</nodeTypeName>
+      </label> 
+    </view>
+  </EnableVersioning>
+  
+  <AutoVersioning>
+    <view>
+      <label>
+        <isDeep>Je hluboký</isDeep>
+        <nodetypes>Typy uzlů</nodetypes>
+        <affectedNodeTypeNames>Ovlivněné typy uzlů</affectedNodeTypeNames>
+        <nodeTypeName>Názvy typů uzlů</nodeTypeName>
+      </label> 
+    </view>
+  </AutoVersioning>
+  
+   <AccessibleMedia>
+    <view>
+      <label>
+      <Play-audio-description-of-this-video>Popis zvuku</Play-audio-description-of-this-video>
+      <Read-more>Přečtěte si více</Read-more>
+      <Read-less>Číst méně</Read-less>
+      <Switch-back-to-original-video>Původní video</Switch-back-to-original-video>
+      </label>
+      <tooltip>
+      <A-second-media-file-is-available-as-audio-description>Druhý mediální soubor je k dispozici jako zvukový popis</A-second-media-file-is-available-as-audio-description>
+      </tooltip>
+    </view>
+  </AccessibleMedia>
+ 
+</bundle>
