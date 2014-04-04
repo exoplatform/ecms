@@ -55,7 +55,7 @@
       <AdvancedBlock>Расширенные</AdvancedBlock>
       <UICLVConfigDynamicNavigationLabel>Динамическая навигация</UICLVConfigDynamicNavigationLabel>
       <UICLVConfigContextualFolderRadioBoxInput>Contextual Folder</UICLVConfigContextualFolderRadioBoxInput>
-      <UICLVConfigShowCLVByStringInput>by</UICLVConfigShowCLVByStringInput>
+      <UICLVConfigShowCLVByStringInput>От</UICLVConfigShowCLVByStringInput>
       <UICLVConfigshowSCVWithStringInput>с</UICLVConfigshowSCVWithStringInput>
       <UICLVConfigTargetPageFormInputSet>Показать на странице</UICLVConfigTargetPageFormInputSet>
       <content-not-found>Content not found.</content-not-found>
