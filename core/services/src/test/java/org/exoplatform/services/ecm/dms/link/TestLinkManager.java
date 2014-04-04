@@ -16,18 +16,17 @@
  */
 package org.exoplatform.services.ecm.dms.link;
 
-import java.util.Calendar;
-import java.util.GregorianCalendar;
-
-import javax.jcr.Node;
-import javax.jcr.PathNotFoundException;
-import javax.jcr.Session;
-
 import org.exoplatform.services.cms.link.LinkManager;
 import org.exoplatform.services.log.ExoLogger;
 import org.exoplatform.services.log.Log;
 import org.exoplatform.services.wcm.BaseWCMTestCase;
 import org.exoplatform.services.wcm.core.NodetypeConstant;
+
+import javax.jcr.Node;
+import javax.jcr.PathNotFoundException;
+import javax.jcr.Session;
+import java.util.Calendar;
+import java.util.GregorianCalendar;
 
 /**
  * Created by The eXo Platform SARL
@@ -383,12 +382,12 @@ public class TestLinkManager extends BaseWCMTestCase {
 
     linkManager.updateSymlink(symlinkNode);
 
-    assertEquals(symlinkNode.getProperty(NodetypeConstant.EXO_DATE_CREATED).getDate(), 
-                 nodeB1_1.getProperty(NodetypeConstant.EXO_DATE_CREATED).getDate());
-    assertEquals(symlinkNode.getProperty(NodetypeConstant.EXO_LAST_MODIFIED_DATE).getDate(), 
-                 nodeB1_1.getProperty(NodetypeConstant.EXO_LAST_MODIFIED_DATE).getDate());
-    assertEquals(symlinkNode.getProperty(NodetypeConstant.PUBLICATION_LIVE_DATE).getDate(), 
-                 nodeB1_1.getProperty(NodetypeConstant.PUBLICATION_LIVE_DATE).getDate());
+    assertEquals(symlinkNode.getProperty(NodetypeConstant.EXO_DATE_CREATED).getDate().getTime(),
+                 nodeB1_1.getProperty(NodetypeConstant.EXO_DATE_CREATED).getDate().getTime());
+    assertEquals(symlinkNode.getProperty(NodetypeConstant.EXO_LAST_MODIFIED_DATE).getDate().getTime(),
+                 nodeB1_1.getProperty(NodetypeConstant.EXO_LAST_MODIFIED_DATE).getDate().getTime());
+    assertEquals(symlinkNode.getProperty(NodetypeConstant.PUBLICATION_LIVE_DATE).getDate().getTime(),
+                 nodeB1_1.getProperty(NodetypeConstant.PUBLICATION_LIVE_DATE).getDate().getTime());
     assertEquals(symlinkNode.getProperty(NodetypeConstant.EXO_INDEX).getLong(), 
                  nodeB1_1.getProperty(NodetypeConstant.EXO_INDEX).getLong());
   }
