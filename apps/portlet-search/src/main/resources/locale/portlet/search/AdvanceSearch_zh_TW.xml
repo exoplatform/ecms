@@ -34,17 +34,17 @@
     </action>
     <msg>
       <your-search>您的搜索</your-search>
-      <did-not-match>與任何不匹配</did-not-match>
+      <did-not-match>無法符合</did-not-match>
       <new-suggestion>建議</new-suggestion>
     </msg>
   </UIDefaultSearchResult>
   <UISearchPageLayoutManager>
     <label>
       <itemsPerPageSelector>每頁項目</itemsPerPageSelector>
-      <searchFormSelector>搜索表單範本</searchFormSelector>
+      <searchFormSelector>搜尋表單範本</searchFormSelector>
       <searchResultSelector>搜尋結果範本</searchResultSelector>
-      <searchPaginatorSelector>搜索分頁程式範本</searchPaginatorSelector>
-      <searchPageLayoutSelector>搜索頁面配置範本</searchPageLayoutSelector>
+      <searchPaginatorSelector>搜尋分頁程式範本</searchPaginatorSelector>
+      <searchPageLayoutSelector>搜尋頁面配置範本</searchPageLayoutSelector>
       <searchResultBasePathInputSetAction>基本路徑</searchResultBasePathInputSetAction>
       <pageMode>頁面模式</pageMode>
       <option>

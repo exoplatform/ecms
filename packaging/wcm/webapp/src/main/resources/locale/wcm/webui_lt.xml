@@ -115,21 +115,21 @@
 
   <UIContentBrowsePanelOne>
     <label>
-      <LeftColumn>Select a folder to display its children as content.</LeftColumn>
+      <LeftColumn>Pasirinkite aplanką, kuris rodys savo atšakas kaip turinį.</LeftColumn>
       <RightColumn>Žemiau esantis turinys gali būti pasirinktas.</RightColumn>
     </label>
   </UIContentBrowsePanelOne>
 
   <UIContentBrowsePanelMulti>
     <label>
-      <LeftColumn>Select a folder to display its children as content.</LeftColumn>
+      <LeftColumn>Pasirinkite aplanką, kuris rodys savo atšakas kaip turinį.</LeftColumn>
       <RightColumn>Žemiau esantis turinys gali būti pasirinktas.</RightColumn>
     </label>
   </UIContentBrowsePanelMulti>
 
   <UIContentBrowsePanelFolder>
     <label>
-      <LeftColumn>Select a folder to display its children as content.</LeftColumn>
+      <LeftColumn>Pasirinkite aplanką, kuris rodys savo atšakas kaip turinį.</LeftColumn>
       <RightColumn>Žemiau esantis aplankas gali būti pasirinktas.</RightColumn>
     </label>
   </UIContentBrowsePanelFolder>
@@ -296,7 +296,7 @@
       <confirm-delete-permission>Ar tikrai norite ištrinti šią teisę?</confirm-delete-permission>
       <no-permission-remove>Jūs neturite teisės.</no-permission-remove>
       <access-denied>Prieiga uždrausta.</access-denied>
-      <node-locked>The path element {0} or one of its parents is locked.</node-locked>
+      <node-locked>Kelio elementas {0} arba vienas iš jo pradininkų yra užrakintas.</node-locked>
       <userOrGroup-required>Pasirinkite vartotoją arba grupę.</userOrGroup-required>
       <checkbox-require>Turite nustatyti teises.</checkbox-require>
       <node-checkedin>Turite pirmiau išsiregistruoti.</node-checkedin>

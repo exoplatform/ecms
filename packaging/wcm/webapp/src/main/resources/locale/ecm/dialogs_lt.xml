@@ -315,7 +315,7 @@
 <CLASSIFIED>Klasifikuotas</CLASSIFIED>
 <UNCLASSIFIED>Neklasifikuotas</UNCLASSIFIED>
 <NOCONTRACT>Nėra sutarties</NOCONTRACT>
-<one-minute>One Minute</one-minute>
+<one-minute>Viena minutė</one-minute>
 <hourly>Kas valandą</hourly>
 <daily>Kasdien</daily>
 <quarterly>Kas ketvirtį</quarterly>
@@ -372,13 +372,13 @@
   <AccessibleMedia>
   <dialog>
   <label>
-  <captions>Captions</captions>
+  <captions>Nuorodinės antraštės</captions>
 <audioDescription>Garso aprašymas</audioDescription>
 <alternativeText>Alternatyvus tekstas</alternativeText>
 </label>
 </dialog>
 <help>
-<CaptionsHelp>Captions should provide text of dialog and important sounds</CaptionsHelp>
+<CaptionsHelp>Nuorodinės antraštės turi pateikti dialogo tekstą ir svarbius garsus</CaptionsHelp>
 <AudioDescriptionHelp>Garso aprašymas yra video įgarsinimo takelis</AudioDescriptionHelp>
 <AlternativeTextHelp>Pateikti prieinamą, alternatyvų informacijos pateikimo būdą</AlternativeTextHelp>
 </help>

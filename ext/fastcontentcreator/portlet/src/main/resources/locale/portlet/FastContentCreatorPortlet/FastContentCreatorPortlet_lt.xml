@@ -60,7 +60,7 @@
     <header>
       <name>Pavadinimas</name>
       <description>Aprašymas</description>
-      <instanceOf>Instance of</instanceOf>
+      <instanceOf>Pavyzdys</instanceOf>
       <action>Veiksmas</action>
     </header>
     <action>
