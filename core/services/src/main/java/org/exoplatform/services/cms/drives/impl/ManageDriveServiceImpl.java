@@ -67,6 +67,8 @@ public class ManageDriveServiceImpl implements ManageDriveService, Startable {
   private static String ALL_PERSONAL_CACHED_DRIVE = "_personalDrives";
 
   private static String ALL_GROUP_CACHED_DRIVES = "_groupDrives";
+  
+  private static String ALL_GROUP_PERMISSION = "*:${groupId}";
   /**
    * Name of property PERMISSIONS
    */
@@ -510,7 +512,7 @@ public class ManageDriveServiceImpl implements ManageDriveService, Startable {
     String[] allPermission = groupDrive.getAllPermissions();
     boolean flag = false;
     for (String role : userRoles) {
-      if (groupDrive.hasPermission(allPermission, role)) {
+      if (groupDrive.hasPermission(allPermission, role) || ALL_GROUP_PERMISSION.equals(allPermission[0])) {
         flag = true;
         break;
       }
