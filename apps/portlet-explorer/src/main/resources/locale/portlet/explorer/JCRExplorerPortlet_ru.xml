@@ -676,7 +676,7 @@
     <label>
       <binary>Binary Data</binary>
       <notavailable>N/A</notavailable>
-      <cannotget>Cannot get values</cannotget>
+      <cannotget>Не удается получить значения</cannotget>
     </label>
     <action>
       <Close>#{word.close}</Close>
@@ -693,26 +693,26 @@
   #############################################################################
   -->
   <UIPropertyForm>
-    <title>Add/Edit Property</title>
+    <title>Добавление и изменение свойств</title>
     <label>
       <name>Имя:</name>
       <type>Тип:</type>
-      <value>Value:</value>
+      <value>Значение:</value>
       <upload>Загрузить:</upload>
-      <namespace>Namespace:</namespace>
-      <multiple>Multiple:</multiple>
-      <property_select>Add New Property:</property_select>
-      <value0>Value 0</value0>
-      <value1>Value 1</value1>
-      <value2>Value 2</value2>
-      <value3>Value 3</value3>
-      <value4>Value 4</value4>
-      <value5>Value 5</value5>
-      <value6>Value 6</value6>
-      <value7>Value 7</value7>
-      <value8>Value 8</value8>
-      <value9>Value 9</value9>
-      <value10>Value 10</value10>
+      <namespace>Пространство имен:</namespace>
+      <multiple>Несколько:</multiple>
+      <property_select>Добавьте новое свойство:</property_select>
+      <value0>Значение 0</value0>
+      <value1>Значение 1</value1>
+      <value2>Значение 2</value2>
+      <value3>Значение 3</value3>
+      <value4>Значение 4</value4>
+      <value5>Значение 5</value5>
+      <value6>Значение 6</value6>
+      <value7>Значение 7</value7>
+      <value8>Значение 8</value8>
+      <value9>Значение 9</value9>
+      <value10>Значение 10</value10>
     </label>
     <action>
       <Save>#{word.save}</Save>
@@ -720,17 +720,17 @@
       <Reset>Сброс</Reset>
     </action>
     <msg>
-      <name-invalid>Please enter the property name.</name-invalid>
-      <unable-create>Cannot add properties.</unable-create>
-      <value-invalid>Please enter the value.</value-invalid>
-      <node-checkedin>You must check out this node before adding a property.</node-checkedin>
-      <can-not-add>You cannot add properties to this node. This is only allowed for the node type nt:unstructured.</can-not-add>
-      <propertyName-invalid>The property name must include namespace (e.g. namespace:name).</propertyName-invalid>
-      <propertyName-exist>The property '{0}' already exists.</propertyName-exist>
-      <propertyValu-null>Some values may be null.</propertyValu-null>
-      <valueFormatEx>You cannot assign a multiple-valued value to a single-valued property.</valueFormatEx>
-      <number-format-exception>Your input value has the wrong format.</number-format-exception>
-      <property-not-exist>The property {0} doesn't exist.</property-not-exist>
+      <name-invalid>Пожалуйста, введите название свойства.</name-invalid>
+      <unable-create>Не удается добавить свойства.</unable-create>
+      <value-invalid>Пожалуйста, введите значение.</value-invalid>
+      <node-checkedin>Вы должны проверить этот узел перед добавлением свойства.</node-checkedin>
+      <can-not-add>Свойства нельзя добавить на этот узел. Это допускается только для узла типа nt:unstructured.</can-not-add>
+      <propertyName-invalid>Имя свойства должно включать пространство имен (например, namespace:name).</propertyName-invalid>
+      <propertyName-exist>Свойство "{0}" уже существует.</propertyName-exist>
+      <propertyValu-null>Некоторые значения могут иметь значение null.</propertyValu-null>
+      <valueFormatEx>Вы не можете примвоить многозначное значение свойству, которое имеет однозначный тип значений.</valueFormatEx>
+      <number-format-exception>Вводимое вами значение имеет неправильный формат.</number-format-exception>
+      <property-not-exist>Свойство {0} не существует.</property-not-exist>
     </msg>
   </UIPropertyForm>
 
@@ -743,28 +743,28 @@
     <action>
       <title>
         <Edit>Редактировать</Edit>
-        <Delete>Remove Permission</Delete>
+        <Delete>Удалить права доступа</Delete>
       </title>
     </action>
     <header>
       <usersOrGroups>Пользователь или группа</usersOrGroups>
-      <read>Read</read>
-      <addNode>Modify</addNode>
+      <read>Чтение</read>
+      <addNode>Редактирование</addNode>
       <remove>Удалить</remove>
       <action>Действие</action>
     </header>
     <msg>
-      <confirm-delete-permission>Are you sure you want to remove this permission?</confirm-delete-permission>
-      <no-permission-tochange>You do not have the right to remove permission.</no-permission-tochange>
-      <no-permission-remove>You cannot remove the owner.</no-permission-remove>
-      <access-denied>Access denied. You cannot remove this permission.</access-denied>
+      <confirm-delete-permission>Вы уверены, что вы хотите удалить эти права доступа?</confirm-delete-permission>
+      <no-permission-tochange>У вас недостаточно прав для удаления этих прав доступа.</no-permission-tochange>
+      <no-permission-remove>Нельзя удалить владельца.</no-permission-remove>
+      <access-denied>Доступ запрещен. Вы не можете удалить эти права доступа.</access-denied>
     </msg>
   </UIPermissionInfo>
   <permission>
     <title>
       <SelectUser>Выберите пользователя</SelectUser>
       <SelectMember>Выбрать членство</SelectMember>
-      <AddAny>Select Everyone</AddAny>
+      <AddAny>Выбрать все</AddAny>
     </title>
   </permission>
   <!--
@@ -775,17 +775,17 @@
   <SelectUserOrGroup>
     <title>
       <UIGroupSelector>Выбрать пользователя</UIGroupSelector>
-      <UIPermissionSelector>Select Member</UIPermissionSelector>
+      <UIPermissionSelector>Выберите члена</UIPermissionSelector>
       <UIGroupMemberSelector>Выбрать членство</UIGroupMemberSelector>
     </title>
   </SelectUserOrGroup>
   <UIGroupSelector>
     <label>
-      <selectGroup>Browse and Select a Group</selectGroup>
+      <selectGroup>Найдите и выберите группу</selectGroup>
       <selectUser>Выбрать пользователя</selectUser>
     </label>
     <msg>
-      <not-change-owner>'{0}' is the owner of this node and has full control permission.</not-change-owner>
+      <not-change-owner>'{0}' является владельцем этого узла и имеет право доступа на полное управление.</not-change-owner>
     </msg>
   </UIGroupSelector>
   <UIPermissionForm>
@@ -793,20 +793,20 @@
       <UIPopupWindow>Выбрать</UIPopupWindow>
       <permission>UIPermissionForm</permission>
       <userOrGroup>Пользователь или группа</userOrGroup>
-      <read>Read Right</read>
-      <add_node>Modify Right</add_node>
-      <remove>Remove Right</remove>
+      <read>Право на чтение</read>
+      <add_node>Право на редактирование</add_node>
+      <remove>Право на удаление</remove>
     </label>
-    <title>Add a permission to that node</title>
+    <title>Добавить права доступа для этого узла</title>
     <action>
       <Close>#{word.close}</Close>
       <Save>#{word.save}</Save>
       <Reset>Сброс</Reset>
     </action>
     <msg>
-      <checkbox-require>Please select at least one permission.</checkbox-require>
-      <userOrGroup-required>Please select a user or group before saving this permission.</userOrGroup-required>
-      <not-change-permission>You do not have the right to add a permission.</not-change-permission>
+      <checkbox-require>Пожалуйста, выберите хотя бы одно право доступа.</checkbox-require>
+      <userOrGroup-required>Пожалуйста, выберите пользователя или группу, перед сохранением этого прва доступа.</userOrGroup-required>
+      <not-change-permission>У вас недостаточно прав для добавления прав доступа.</not-change-permission>
       <access-denied>Доступ запрещен. Вы не можете удалить это разрешение.</access-denied>
     </msg>
   </UIPermissionForm>
@@ -818,22 +818,22 @@
   -->
   <UINodeTypeInfo>
     <label>
-      <node-type>Node Type</node-type>
+      <node-type>Тип узла</node-type>
       <name>Имя</name>
-      <item>Primary Item Name</item>
-      <super-types>Parent Types</super-types>
+      <item>Название первичного элемента</item>
+      <super-types>Родительские типы</super-types>
       <mixin>Mixin Node Type</mixin>
-      <orderable-children>Orderable Children</orderable-children>
-      <property-def>Node Property Definition</property-def>
+      <orderable-children>Упорядочиваемые дочерние записи</orderable-children>
+      <property-def>Определение свойства узла</property-def>
       <prop-name>Имя</prop-name>
       <prop-type>Тип</prop-type>
       <prop-multiple>Mul</prop-multiple>
-      <prop-mandatory>Man</prop-mandatory>
-      <prop-protected>Pr</prop-protected>
+      <prop-mandatory>MAN</prop-mandatory>
+      <prop-protected>PR</prop-protected>
       <prop-auto-create>AC</prop-auto-create>
       <prop-default-values><![CDATA[<span title="Default Values">DV</span>]]></prop-default-values>
       <prop-constraints><![CDATA[<span title="Constraints Values">CV</span>]]></prop-constraints>
-      <node-def>Child Node Definition</node-def>
+      <node-def>Определение дочернего узла</node-def>
       <node-def-name>Имя</node-def-name>
       <node-def-opv>OPV</node-def-opv>
       <node-def-ac>AC</node-def-ac>
@@ -862,8 +862,8 @@
   </UICategoryManagerSearch>
   <UIContentNameSearch>
     <label>
-      <keyword>Content Name:</keyword>
-      <location>Search in this location:</location>
+      <keyword>Название содержания:</keyword>
+      <location>Поиск в этом месте:</location>
     </label>
     <action>
       <Search>Поиск</Search>
@@ -875,39 +875,39 @@
   </UIContentNameSearch>
   <UISimpleSearch>
     <action>
-      <MoreConstraints>Show/Hide Constraint Form</MoreConstraints>
+      <MoreConstraints>Показать/скрыть форму ограничения</MoreConstraints>
       <Search>Поиск</Search>
       <Save>#{word.save}</Save>
       <Cancel>#{word.cancel}</Cancel>
     </action>
     <label>
       <moreConstraints>UISimpleSearch</moreConstraints>
-      <firstOperator>Operator:</firstOperator>
-      <input>A word or phrase in content:</input>
-      <constraints>More Constraints:</constraints>
-      <nodePath>Current Location:</nodePath>
+      <firstOperator>Оператор:</firstOperator>
+      <input>Слово или фраза в контексте:</input>
+      <constraints>Дополнительные ограничения:</constraints>
+      <nodePath>Текущее местоположение:</nodePath>
     </label>
     <msg>
-      <keyword-null>Please enter your keyword.</keyword-null>
+      <keyword-null>Пожалуйста, введите ключевое слово.</keyword-null>
       <not-found>Ничего не найдено.</not-found>
       <keyword-not-allow>Это ключевое слово не допускается.</keyword-not-allow>
-      <value-null>Please enter your keyword or constraints.</value-null>
-      <value-save-null>Please enter a keyword or constraints before saving this query.</value-save-null>
-      <inputSearch-invalid>There are invalid characters in the search input.</inputSearch-invalid>
-      <query-invalid>The query is invalid. Please check your constraint.</query-invalid>
+      <value-null>Пожалуйста, введите ключевое слово или ограничение.</value-null>
+      <value-save-null>Пожалуйста, введите ключевое слово или ограничения перед сохранением этого запроса.</value-save-null>
+      <inputSearch-invalid>В строке поиска присутствуют недопустимые символы.</inputSearch-invalid>
+      <query-invalid>Запрос является недействительным. Пожалуйста, проверьте ваши ограничения.</query-invalid>
     </msg>
   </UISimpleSearch>
   <ViewSearch>
     <title>
-      <UIViewSearchResult>View Template</UIViewSearchResult>
+      <UIViewSearchResult>Показать шаблон</UIViewSearchResult>
     </title>
   </ViewSearch>
   <UISearchResult>
     <msg>
-      <not-support>There is no View template for this node.</not-support>
+      <not-support>Нет шаблона Просмотра для этого узла.</not-support>
       <empty>Ничего не найдено.</empty>
-      <access-denied>You cannot open this folder, either because it no longer exists or because you do not have the right to access it.</access-denied>
-      <query-invalid>The query is invalid.</query-invalid>
+      <access-denied>Невозможно открыть эту папку, потому, что она больше не существует или потому что вы не имеете прав на доступ к ней.</access-denied>
+      <query-invalid>Недопустимый запрос.</query-invalid>
     </msg>
     <header>
       <name>#{word.name}</name>
@@ -919,26 +919,26 @@
       <score>Результат</score>
     </header>
     <title>
-      <typeASC>Sort by document type in ascending order</typeASC>
-      <typeDESC>Sort by document type in descending order</typeDESC>
-      <scoreASC>Sort by score in ascending order</scoreASC>
-      <scoreDESC>Sort by score in descending order</scoreDESC>
-      <nameASC>Sort by name in ascending order</nameASC>
-      <nameDESC>Sort by name in descending order</nameDESC>
-      <datecreatedASC>Sort by created date in ascending order</datecreatedASC>
-      <datecreatedDESC>Sort by created date in descending order</datecreatedDESC>
+      <typeASC>Сортировка по типу документа в порядке возрастания</typeASC>
+      <typeDESC>Сортировать по типу документа в порядке убывания</typeDESC>
+      <scoreASC>Сортировать по результату в порядке возрастания</scoreASC>
+      <scoreDESC>Сортировать по результату в порядке убывания</scoreDESC>
+      <nameASC>Сортировать по названию в порядке возрастания</nameASC>
+      <nameDESC>Сортировать по названию в порядке убывания</nameDESC>
+      <datecreatedASC>Сортировать по дате создания в порядке возрастания</datecreatedASC>
+      <datecreatedDESC>Сортировать по дате создания в порядке убывания</datecreatedDESC>
     </title>
     <tooltip>
-      <View>View this node</View>
-      <OpenFolder>Go to folder</OpenFolder>
+      <View>Просмотреть этот узел</View>
+      <OpenFolder>Перейдите в папку</OpenFolder>
     </tooltip>
   </UISearchResult>
   <UIShowAllOwnedByUserResult>
     <msg>
-      <not-support>There is no View template for this node</not-support>
+      <not-support>Нет шаблона Просмотра для этого узла</not-support>
       <empty>Ничего не найдено.</empty>
-      <access-denied>You cannot view this node, either because this template is not supported or because access is denied.</access-denied>
-      <query-invalid>The query is invalid</query-invalid>
+      <access-denied>Не удается просмотреть этот узел, либо потому, что этот шаблон не поддерживается, или потому, что доступ запрещен.</access-denied>
+      <query-invalid>Недопустимый запрос</query-invalid>
     </msg>
     <header>
       <name>#{word.name}</name>
@@ -956,18 +956,18 @@
       <scoreDESC>Сортировать по результату в порядке убывания</scoreDESC>
       <nameASC>Сортировать по названию по возрастанию</nameASC>
       <nameDESC>Сортировать по названию по убыванию</nameDESC>
-      <datecreatedASC>Sort by Created date in ascending order</datecreatedASC>
-      <datecreatedDESC>Sort by Created date in descending order</datecreatedDESC>
+      <datecreatedASC>Сортировать по дате создания в порядке возрастания</datecreatedASC>
+      <datecreatedDESC>Сортировать по дате создания в порядке убывания</datecreatedDESC>
     </title>
     <tooltip>
       <View>Просмотреть этот узел</View>
-      <OpenFolder>Go to Folder</OpenFolder>
+      <OpenFolder>Перейти в папку</OpenFolder>
     </tooltip>
   </UIShowAllOwnedByUserResult>
   <UIShowAllFavouriteResult>
     <msg>
       <not-support>Нет шаблона Просмотра для этого узла</not-support>
-      <empty>No results found</empty>
+      <empty>Результаты не найдены</empty>
       <access-denied>Вы не можете просмотреть этот узел, поскольку он либо не поддерживается, либо доступ запрещен.</access-denied>
       <query-invalid>Недопустимый запрос</query-invalid>
     </msg>
@@ -991,7 +991,7 @@
       <datecreatedDESC>Сортировать по дате создания в порядке убывания</datecreatedDESC>
     </title>
     <tooltip>
-      <View>View this Node</View>
+      <View>Просмотреть этот узел</View>
       <OpenFolder>Перейти в папку</OpenFolder>
     </tooltip>
   </UIShowAllFavouriteResult>
@@ -1010,7 +1010,7 @@
       <type>Тип</type>
       <dateCreated>Дата создания</dateCreated>
       <score>Результат</score>
-      <AddRemoveFavourite>Add/Remove to Favorite</AddRemoveFavourite>
+      <AddRemoveFavourite>Добавить/удалить в избранное</AddRemoveFavourite>
     </header>
     <title>
       <typeASC>Сортировать по типу документа в порядке возрастания</typeASC>
@@ -1025,7 +1025,7 @@
     <tooltip>
       <View>Просмотреть этот узел</View>
       <OpenFolder>Перейти в папку</OpenFolder>
-      <RemoveHiddenAttribute>Remove Hidden Attribute</RemoveHiddenAttribute>
+      <RemoveHiddenAttribute>Удалить скрытый атрибут</RemoveHiddenAttribute>
     </tooltip>
   </UIShowAllHiddenResult>
   <UIShowAllTrashResult>
@@ -1057,7 +1057,7 @@
     <tooltip>
       <View>Просмотреть этот узел</View>
       <OpenFolder>Перейти в папку</OpenFolder>
-      <DeletePermanently>Delete permanently</DeletePermanently>
+      <DeletePermanently>Окончательно удалить</DeletePermanently>
       <RestoreFromTrash>Восстановить из корзины</RestoreFromTrash>
     </tooltip>
   </UIShowAllTrashResult>
@@ -1065,24 +1065,24 @@
     <label>
       <constraints>UIConstraintsForm</constraints>
       <metadataProperty>Свойства</metadataProperty>
-      <operator>Operator</operator>
-      <contains>Contain Value</contains>
-      <notcontains>Not Contain Value</notcontains>
+      <operator>Оператор</operator>
+      <contains>Содержит значение</contains>
+      <notcontains>Не содержит значение</notcontains>
     </label>
     <action>
       <Add>Добавить</Add>
       <Cancel>#{word.cancel}</Cancel>
     </action>
     <msg>
-      <properties-required>The Property name is required.</properties-required>
-      <value-required>The Value field is required.</value-required>
-      <date-invalid>The From date must be earlier than the To date.</date-invalid>
+      <properties-required>Имя свойства не требуется.</properties-required>
+      <value-required>В поле значение требуется.</value-required>
+      <date-invalid>Дата От должна быть раньше, чем дата До.</date-invalid>
       <fromDate-required>Требуется Дата От.</fromDate-required>
-      <must-choose-one>You have to select at least one type.</must-choose-one>
-      <properties-null>Select properties first, then filter.</properties-null>
-      <exactly-require>You have to fill in the Value exactly before saving this constraint.</exactly-require>
-      <fromDate-invalid>Invalid type in the 'From' field. Please reselect or type correctly.</fromDate-invalid>
-      <toDate-invalid>Invalid type in the 'To' field. Please reselect or type correctly.</toDate-invalid>
+      <must-choose-one>Вы должны выбрать по крайней мере один тип.</must-choose-one>
+      <properties-null>Сначала выберите свойства, затем фильтр.</properties-null>
+      <exactly-require>Вы должны заполнить значение точно перед сохранением этого ограничения.</exactly-require>
+      <fromDate-invalid>Недопустимый тип в поле «От». Пожалуйста выберите заново, или введите правильно.</fromDate-invalid>
+      <toDate-invalid>Недопустимый тип в поле «От». Пожалуйста выберите заново, или введите правильно.</toDate-invalid>
     </msg>
     <button>
       <label-Add>Добавить</label-Add>
@@ -1097,10 +1097,10 @@
   </ConstraintsForm>
   <UIConstraintForm>
     <tooltip>
-      <AddMetadataType>Add Property</AddMetadataType>
-      <AddNodeType>Add Node Type</AddNodeType>
+      <AddMetadataType>Добавить свойства</AddMetadataType>
+      <AddNodeType>Добавить тип узла</AddNodeType>
       <AddCategory>Добавить категорию</AddCategory>
-      <FindExactly>Find Exactly</FindExactly>
+      <FindExactly>Найти точно</FindExactly>
     </tooltip>
     <label>
       <colon>:</colon>
@@ -1303,7 +1303,7 @@
     <label>
       <format>Формат</format>
       <nodePath>Путь экспорта</nodePath>
-      <zip>Zip</zip>
+      <zip>ZIP</zip>
       <systemView>Системный вид</systemView>
       <documentView>Вид документа</documentView>
     </label>
@@ -1886,7 +1886,7 @@
     <msg>
       <name-exist>Имя тега "{0}" уже существует.</name-exist>
       <tagName-invalid>Имя тега содержит недопустимые знаки.</tagName-invalid>
-      <tagName-empty-or-invalid>The tag name is empty or contains some invalid characters.</tagName-empty-or-invalid>
+      <tagName-empty-or-invalid>Имя тега является пустым или содержит недопустимые знаки.</tagName-empty-or-invalid>
       <tag-name-empty>Отсутствует название тега</tag-name-empty>
       <tag-name-duplicate>Повторяющиеся названия введенных тегов.</tag-name-duplicate>
       <tagName-too-long>Один из введенных тегов был слишком длинный. Название тега должно содержать меньше, чем 30 символов.</tagName-too-long>
@@ -2574,7 +2574,7 @@
       <nt_unstructured>Папка контента</nt_unstructured>
       <exo_cssFolder>Папка CSS</exo_cssFolder>
       <exo_jsFolder>Папка JavaScript</exo_jsFolder>
-      <exo_linkFolder>Link Folder</exo_linkFolder>
+      <exo_linkFolder>Папка ссылки</exo_linkFolder>
       <exo_webFolder>Папка веб-контента</exo_webFolder>
    </label>
   </UIFolderForm>
@@ -3057,9 +3057,9 @@
       <ShowDrives>Показать диски</ShowDrives>
     </DrivesArea>
     <msg>
-      <no-view-found>There are no views applied for your access permission in drive '{0}'.</no-view-found>
+      <no-view-found>Нет доступного вида в соответствии с вашими разрешениями на доступ на диске '{0}'.</no-view-found>
       <access-denied>Доступ запрещен. Возможно у вас нет доступа к рабочей области диска '{0}'.</access-denied>
-      <empty-drives>Access denied. Either there is no drive in this repository or you do not have permission to access any drives in this repository.</empty-drives>
+      <empty-drives>Доступ запрещен. Либо нет диска в этом хранилище, или у вас нет разрешения на доступ к любому приводу в этом хранилище.</empty-drives>
       <workspace-not-exist>Диск '{0}' был помещен в неопознанную рабочую область. Пожалуйста, перенастройте этот диск.</workspace-not-exist>
     </msg>
   </UIDrivesArea>
@@ -3088,9 +3088,9 @@
   <true>Верно</true>
   <false>Неверно</false>
   <Electronic>Электронный</Electronic>
-  <Paper>Paper</Paper>
+  <Paper>Бумага</Paper>
   <NONE>Нет</NONE>
-  <CLASSIFIED>Classified</CLASSIFIED>
+  <CLASSIFIED>Классифицируются</CLASSIFIED>
   <UNCLASSIFIED>Неклассифицированные</UNCLASSIFIED>
   <NOCONTRACT>Нет связи</NOCONTRACT>
   <one-minute>Ежеминутно</one-minute>
