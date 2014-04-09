@@ -279,7 +279,7 @@
 				ret += oldName[i];
 			}
 		}
-		return encodeURIComponent(ret);
+		return ret;
 	};
 
 	MultiUpload.prototype.changeStatusValue = function(id, delta) {
