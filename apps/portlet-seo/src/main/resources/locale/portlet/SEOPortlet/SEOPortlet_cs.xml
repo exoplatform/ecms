@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<bundle>
+  <UISEOForm>
+    <label>  
+      <title>Název:</title>
+      <description>Popis:</description>
+      <keywords>Klíčová slova:</keywords>
+      <language>Jazyk:</language>
+      <robots>Roboti:</robots>
+      <sitemap>Mapa stránek:</sitemap>
+      <sitemapvisible>Viditelné v mapě stránek</sitemapvisible>
+    <isInherited>Zděděno z nadřazené stránky</isInherited>
+      <priority>Priorita:</priority>
+      <frequency>Frekvence:</frequency>
+      <select-language>Zvolte jazyk</select-language>
+      <option>
+        <Always>Vždy</Always>
+        <Hourly>Každou hodinu</Hourly>
+        <Daily>Denně</Daily>
+        <Weekly>Týdně</Weekly>
+        <Monthly>Měsíčně</Monthly>
+        <Yearly>Ročně</Yearly>
+        <Never>Nikdy</Never>
+      </option> 
+    </label>
+    <tip>
+  <priority>Platné hodnoty jsou v rozsahu od 0.0 do 1.0</priority>
+  </tip>   
+    <action>
+      <Save>#{word.save}</Save>
+      <Cancel>#{word.cancel}</Cancel>
+    </action>
+    <msg>
+      <repository-exception>Při ukládání metadat stránky došlo k neočekávané chybě.</repository-exception>
+      <confirm-delete>Jste si jisti, že chcete odstranit tyto údaje SEO?</confirm-delete>      
+    </msg>
+    <title>
+    <seo-delete>Odstranit</seo-delete>
+    </title>
+  <help> 
+  <priority>Platné hodnoty jsou v rozsahu od 0.0 do 1.0.</priority>
+  <description>Pomoc hledajícím: dejte jim vědět, že na následující stránce se nachází odkaz, který hledají.</description>
+  <keywords>Nejdůležitější názvy na stránce odděleny čárkou.</keywords>  
+  </help>  
+  </UISEOForm>
+  <UISEOPopupWindow>
+  <title>
+      <UISEOForm>Správa SEO</UISEOForm>
+  </title>
+  </UISEOPopupWindow>    
+  <UISEOToolbarForm>
+  <title>
+      <seo>Správa SEO</seo>
+  </title>
+  <label>
+    <seo>SEO</seo>
+  </label>
+  </UISEOToolbarForm>  
+  <FloatNumberValidator>
+    <msg>
+      <Invalid-number>Hodnota pole Priorita musí být v číselném formátu. Platné hodnoty jsou v rozsahu od 0,0 do 1,0.</Invalid-number>
+    </msg>
+  </FloatNumberValidator>  
+  
+</bundle>

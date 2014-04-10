@@ -1,0 +1,389 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<bundle>
+  <!--
+  ###################### global word for ECM dialogs resoucebundle ####
+  -->
+  <Ecm>
+    <dialog>
+      <label>
+        <end-time>Čas ukončení</end-time>
+        <start-time>Čas zahájení</start-time>
+        <lifecycle>Cyklus</lifecycle>
+        <mimeType>MIME typ</mimeType>
+        <repeat-count>Počet opakování</repeat-count>
+        <time-interval>Časový Interval</time-interval>
+        <query-items>Položky dotazu</query-items>
+        <schedule-type>Typ plánu</schedule-type>
+        <remove>Odstranit položku</remove>
+        <add>Přidat položku</add>
+        <expand>Rozbalit</expand>
+      </label>
+    </dialog>
+  </Ecm>
+  
+  <UIDocumentForm>
+    <label>
+      <title>#{word.title}</title>
+      <link>Odkaz</link>
+      <contentHtml>#{word.content}</contentHtml>
+      <content>#{word.content}</content>
+      <contentPlain>#{word.content}</contentPlain>
+      <name>Jméno</name>
+    <categories>Kategorie</categories>
+    </label>
+  </UIDocumentForm>
+ 
+  <!--
+  ###################### resoucebundle for HTMLFile dialogs template ####
+  -->
+  <HtmlFile>
+    <dialog>
+      <label>
+        <name>Jméno</name>
+        <content>Obsah</content>
+      </label>
+    </dialog>
+  </HtmlFile>
+
+  <!--
+  ###################### resoucebundle for nt:file dialogs template ####
+  -->
+  <File>
+    <dialog>
+      <label>
+        <name>#{word.name}</name>
+        <categories>Kategorie</categories>
+        <mimeType>#{Ecm.dialog.label.mimeType}</mimeType>
+        <width>Width</width>
+        <height>Height</height>
+        <content>#{word.content}</content>
+        <re-upload>Soubor již existuje. Můžete jej odstranit a nahrát jiný soubor.</re-upload>
+      </label>
+    </dialog>
+  </File>
+
+  <UIActionForm>
+    <label>
+      <description>#{word.description}</description>
+      <port>Port</port>
+      <userName>#{word.userName}</userName>
+      <password>Heslo</password>
+      <link>Odkaz</link>
+      <to>Poslat E-mail</to>
+      <actionName>#{word.name}</actionName>
+    </label>
+  </UIActionForm>
+  <EditFormAction>
+    <label>
+      <description>#{word.description}</description>
+      <port>Port</port>
+      <userName>#{word.userName}</userName>
+      <password>Heslo</password>
+      <link>Odkaz</link>
+      <to>Poslat E-mail</to>
+      <actionName>#{word.name}</actionName>
+    </label>
+  </EditFormAction>
+
+  <!--
+  ###################### resoucebundle for exo:addMetadataAction dialogs template ####
+  -->
+  <AddMetadata>
+    <dialog>
+      <label>
+        <id>ID</id>
+        <name>#{word.name}</name>
+        <lifecycle>#{Ecm.dialog.label.lifecycle}</lifecycle>
+        <metadata>Metadata</metadata>
+        <description>#{word.description}</description>
+      </label>
+    </dialog>
+  </AddMetadata>
+
+  <!--
+  ###################### resoucebundle for exo:autoVersioning dialogs template ####
+  -->
+  <AutoVersioning>
+    <dialog>
+      <label>
+        <id>ID</id>
+        <name>#{word.name}</name>
+        <lifecycle>#{Ecm.dialog.label.lifecycle}</lifecycle>
+        <schedule-type>#{Ecm.dialog.label.schedule-type}</schedule-type>
+        <start-time>#{Ecm.dialog.label.start-time}</start-time>
+        <end-time>#{Ecm.dialog.label.end-time}</end-time>
+        <repeat-count>#{Ecm.dialog.label.repeat-count}</repeat-count>
+        <time-inteval>#{Ecm.dialog.label.time-interval}</time-inteval>
+        <cron-expression>Cron výraz</cron-expression>
+        <description>#{word.description}</description>
+      </label>
+    </dialog>
+  </AutoVersioning>
+  <!--
+  ###################### resoucebundle for exo:enableVersiong dialogs template ####
+  -->
+  <EnableVersioning>
+    <dialog>
+      <label>
+        <id>ID</id>
+        <name>#{word.name}</name>
+        <lifecycle>#{Ecm.dialog.label.lifecycle}</lifecycle>
+        <schedule-type>#{Ecm.dialog.label.schedule-type}</schedule-type>
+        <start-time>#{Ecm.dialog.label.start-time}</start-time>
+        <end-time>#{Ecm.dialog.label.end-time}</end-time>
+        <repeat-count>#{Ecm.dialog.label.repeat-count}</repeat-count>
+        <time-inteval>#{Ecm.dialog.label.time-interval}</time-inteval>
+        <cron-expression>Cron Expression</cron-expression>
+        <description>#{word.description}</description>
+      </label>
+    </dialog>
+  </EnableVersioning>
+  <!--
+  ###################### resoucebundle for dc:elementSet dialogs template ####
+  -->
+  <ElementSet>
+    <dialog>
+      <label>
+        <title>#{word.title}:</title>
+        <creator>Autor:</creator>
+        <subject>#{word.subject}:</subject>
+        <source>Zdroj:</source>
+        <contributor>Přispěvatel:</contributor>
+        <resource-type>Typ zdroje:</resource-type>
+        <date>#{word.date}:</date>
+        <publisher>Vydavatel:</publisher>
+        <description>#{word.description}:</description>
+        <rights>Práva:</rights>
+        <relation>Vztah:</relation>
+        <format>#{word.format}:</format>
+        <coverage>Rozsah:</coverage>
+        <identifier>Identifikátor:</identifier>
+        <language>Jazyk:</language>
+      </label>
+    </dialog>
+  </ElementSet>
+
+  <!--
+  ###################### resoucebundle for exo:actionable dialogs template ####
+  -->
+  <Actionable>
+    <dialog>
+      <label>
+        <primary-type>Primární typ</primary-type>
+        <mixin-types>Smíšený typ</mixin-types>
+      </label>
+    </dialog>
+  </Actionable>
+
+  <!--
+  ###################### resoucebundle for exo:move dialogs template ####
+  -->
+  <Move>
+    <dialog>
+      <label>
+        <destination-workpsace>Cílová pracovní plocha</destination-workpsace>
+        <destination-path>Cílová cesta</destination-path>
+        <primary-type>Primární typ</primary-type>
+        <mixin-types>Smíšený typ</mixin-types>
+      </label>
+    </dialog>
+  </Move>
+  <!--
+  ###################### resoucebundle for exo:published dialogs template ####
+  -->
+  <Published>
+    <dialog>
+      <label>
+        <start-publication>Začít proces zveřejnění</start-publication>
+        <end-publication>Ukončit proces zveřejnění</end-publication>
+      </label>
+    </dialog>
+  </Published>
+ 
+  <!--
+  ###################### resoucebundle mix:referenceable dialogs template ####
+  -->
+  <Referenceable>
+    <dialog>
+      <label>
+        <uuid>UUID</uuid>
+      </label>
+    </dialog>
+  </Referenceable>
+  <!--
+  ###################### resoucebundle exo:relationable dialogs template ####
+  -->
+  <Relationable>
+    <dialog>
+      <label>
+        <relation>Vztah</relation>
+      </label>
+    </dialog>
+  </Relationable>
+  <!--
+  ###################### resoucebundle exo:rss-enable dialogs template ####
+  -->
+  <RssEnable>
+    <dialog>
+      <label>
+        <title>Popisek</title>
+        <summary>#{word.summary}</summary>
+      </label>
+    </dialog>
+  </RssEnable>
+
+  <!--
+  ###################### resoucebundle mix:versionable dialogs template ####
+  -->
+  <Versionable>
+    <dialog>
+      <label>
+        <version-history>Historie verzí</version-history>
+        <base-version>Základní verze</base-version>
+        <is-checked-out>Je ve stavu checked out</is-checked-out>
+        <predecessors>Předchůdci</predecessors>
+        <merge-failed>Sloučení se nezdařilo</merge-failed>
+        <uuid>UUID</uuid>
+      </label>
+    </dialog>
+  </Versionable>
+
+  <!--
+  ##################### resoucebundle for resouce container dialogs template#####
+  -->
+  <ResouceContainer>
+    <dialog>
+      <label>
+        <name>Jméno</name>
+        <autoload>Automatické načtění</autoload>
+        <minetype>MIME typ</minetype>
+        <content>Obsah</content>
+      </label>
+    </dialog>
+  </ResouceContainer>
+  <!--
+  ###################### resoucebundle for validator ####
+  -->
+  <EmailAddressValidator>
+    <msg>
+      <Invalid-input>E-mailová adresa je neplatná.</Invalid-input>
+    </msg>
+  </EmailAddressValidator>
+  <EmptyFieldValidator>
+    <msg>
+      <empty-input>Je vyžadováno pole {0}. Prosím zadejte hodnotu.</empty-input>
+    </msg>
+  </EmptyFieldValidator>
+  <NumberFormatValidator>
+    <msg>
+      <Invalid-number>Pole {0} je neplatné.</Invalid-number>
+    </msg>
+  </NumberFormatValidator>
+  <!--
+  #####Since version 2.4#######
+
+  ###################### resoucebundle exo:taxonomyAction dialogs template ####
+  -->
+  <ScriptAction>
+    <dialog>
+      <label>
+        <id>ID</id>
+        <name>Jméno</name>
+        <lifecycle>Cyklus</lifecycle>
+        <homePath>Cesta domů</homePath>
+        <targetWorkspace>Cílová pracovní plocha</targetWorkspace>
+        <targetPath>Cílová cesta</targetPath>
+      </label>
+    </dialog>
+  </ScriptAction>
+  <UIDialogForm>
+   <form>
+   <DialogFormException>Tento dokument nelze uložit. Může být problém s funkcí uložení.</DialogFormException>
+   </form>
+  </UIDialogForm>
+
+  <!--
+  #####Since version 2.6#######
+
+  ###################### resoucebundle exo:taxonomyAction dialogs template ####
+  -->
+<no>Ne</no>
+<yes>Ano</yes>
+<true>Pravda</true>
+<false>Nepravda</false>
+<Electronic>Elektronický</Electronic>
+<Paper>Papír</Paper>
+<NONE>Žádný</NONE>
+<CLASSIFIED>Zařazené</CLASSIFIED>
+<UNCLASSIFIED>Nezařazené</UNCLASSIFIED>
+<NOCONTRACT>Žádná smlouva</NOCONTRACT>
+<one-minute>Minuta</one-minute>
+<hourly>Každou hodinu</hourly>
+<daily>Denně</daily>
+<quarterly>Čtvrletně</quarterly>
+<yearly>Ročně</yearly>
+<ten-years>Deset let</ten-years>
+<read>Akce uživatele</read>
+  <schedule>Plánovač</schedule>
+  <node_added>Přidání obsahu</node_added>
+  <node_removed>Odstranění obsahu</node_removed>
+  <property_added>Přidání vlastnosti</property_added>
+  <property_removed>Odebrání vlastnosti</property_removed>
+  <property_changed>Změna vlastnosti</property_changed>
+
+  <ScriptAction>
+    <dialog>
+      <label>
+        <isDeep>Je hluboké</isDeep>
+        <nodetypes>Typy uzlů</nodetypes>
+        <affectedNodeTypeNames>Ovlivněné typy uzlů</affectedNodeTypeNames>
+      </label>
+    </dialog>
+  </ScriptAction>
+
+  <AddMetadata>
+    <dialog>
+      <label>
+        <isDeep>Je hluboké</isDeep>
+        <nodetypes>Typy uzlů</nodetypes>
+        <affectedNodeTypeNames>Ovlivněné typy uzlů</affectedNodeTypeNames>
+      </label>
+    </dialog>
+  </AddMetadata>
+
+  <EnableVersioning>
+    <dialog>
+      <label>
+        <isDeep>Je hluboké</isDeep>
+        <nodetypes>Typy uzlů</nodetypes>
+        <affectedNodeTypeNames>Ovlivněné typy uzlů</affectedNodeTypeNames>
+      </label>
+    </dialog>
+  </EnableVersioning>
+  
+  <AutoVersioning>
+    <dialog>
+      <label>
+        <isDeep>Je hluboké</isDeep>
+        <nodetypes>Typy uzlů</nodetypes>
+        <affectedNodeTypeNames>Ovlivněné typy uzlů</affectedNodeTypeNames>
+      </label>
+    </dialog>
+  </AutoVersioning>
+
+  <AccessibleMedia>
+  <dialog>
+  <label>
+  <captions>Titulky</captions>
+<audioDescription>Popis audia</audioDescription>
+<alternativeText>Alternativní text</alternativeText>
+</label>
+</dialog>
+<help>
+<CaptionsHelp>Titulky by měly poskytnout text k dialogům a důležitým zvukům</CaptionsHelp>
+<AudioDescriptionHelp>Zvukový popis je vyprávěná stopa videa</AudioDescriptionHelp>
+<AlternativeTextHelp>Poskytněte přístupný, alternativní způsob prezentace informací</AlternativeTextHelp>
+</help>
+</AccessibleMedia>
+  
+</bundle>

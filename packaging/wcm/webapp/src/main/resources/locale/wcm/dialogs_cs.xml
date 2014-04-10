@@ -1,0 +1,93 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+
+    Copyright (C) 2009 eXo Platform SAS.
+    
+    This is free software; you can redistribute it and/or modify it
+    under the terms of the GNU Lesser General Public License as
+    published by the Free Software Foundation; either version 2.1 of
+    the License, or (at your option) any later version.
+    
+    This software is distributed in the hope that it will be useful,
+    but WITHOUT ANY WARRANTY; without even the implied warranty of
+    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the GNU
+    Lesser General Public License for more details.
+    
+    You should have received a copy of the GNU Lesser General Public
+    License along with this software; if not, write to the Free
+    Software Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA
+    02110-1301 USA, or see the FSF site: http://www.fsf.org.
+
+-->
+<bundle>
+  <WebContent>
+    <dialog>
+      <label>
+        <MainContent>Hlavní obsah</MainContent>
+        <cssFile>default.css</cssFile>
+        <jsFile>default.js</jsFile>
+        <Advanced>Pokročilé</Advanced>
+        <Summary>Shrnutí</Summary>
+        <name>#{word.name}</name>
+        <title>Popisek</title>
+        <ContentCSS>CSS Data</ContentCSS>
+        <hintCSS>Můžete specifikovat hlavní style sheet pro váš webový obsah. Tento styl přepíše styly definované na úrovni webu a na sdílené úrovni.</hintCSS>
+        <ContentJS>JS Data</ContentJS>
+        <hintJS>Můžete specifikovat některé JavaScript kódy, které budou provedeny dříve, než se váš webový obsah vykreslí.</hintJS>
+        <WebContentHtml>Hlavní obsah</WebContentHtml>
+        <Illustration>Ilustrace</Illustration>
+        <hintIllustration>Můžete specifikovat obrázek, který se ukáže, když je váš webový obsah zobrazen v seznamu. K tomuto obrázku také můžete přidat nějaký souhrnný text.</hintIllustration>
+        <confirm-delete>Jste si jisti, že chcete odstranit tuto ilustraci?</confirm-delete>
+        <illustrationImage>Ilustrační obrázek</illustrationImage>
+        <imageMimeType>Typ obrázku</imageMimeType>
+        <image>Nahrát obrázek</image>
+        <imageWidth>Šířka obrázku</imageWidth>
+        <imageHeight>Výška obrázku</imageHeight>
+        <Synchronize>Synchronizace s HTML a CSS</Synchronize>
+      </label>
+    </dialog>
+  </WebContent>
+
+  <CSSFile>
+    <dialog>
+      <label>
+        <name>#{word.name}</name>
+        <active>Aktivní</active>
+        <priority>Priorita</priority>
+        <content>CSS Data</content>
+      </label>
+    </dialog>
+  </CSSFile>
+
+  <JSFile>
+    <dialog>
+      <label>
+        <name>#{word.name}</name>
+        <active>Aktivní</active>
+        <priority>Priorita</priority>
+        <content>JS Data</content>
+      </label>
+    </dialog>
+  </JSFile>
+
+  <WebLink>
+    <dialog>
+      <label>
+        <name>#{word.name}</name>
+        <url>ADRESA URL</url>
+        <description>Popis</description>
+      </label>
+    </dialog>
+  </WebLink>
+
+  <SiteMetadata>
+    <dialog>
+      <label>
+        <title>Název webu</title>
+        <description>Popis webu</description>
+        <keywords>Klíčová slova webu</keywords>
+        <robots>Chování vyhledávacího mechanismu</robots>
+      </label>
+    </dialog>
+  </SiteMetadata>
+</bundle>

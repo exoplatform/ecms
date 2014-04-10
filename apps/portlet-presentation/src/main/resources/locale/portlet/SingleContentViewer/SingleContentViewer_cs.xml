@@ -1,0 +1,119 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<bundle>
+  <UIPresentationContainer>
+    <title>
+      <QuickEdit>Upravit v Průzkumníku obsahu</QuickEdit>
+      <print>Vytisknout tuto stránku</print>
+      <FastPublish>Zveřejnit</FastPublish>
+    </title>
+    <label>
+      <draft>Koncept</draft>
+      <print>Tisk</print>
+    </label>
+    <msg>
+      <no-content>Nenalezen žádný obsah.</no-content>
+      <internal-server-error>Došlo k chybě při žádání dat ze severu.</internal-server-error>
+      <empty-title-error>Zadejte nový název.</empty-title-error>
+    </msg>
+  </UIPresentationContainer>
+  <CorrectContentSelectorPopupWindow>
+    <title>
+      <UIContentSelectorOne>Vybrat obsah</UIContentSelectorOne>
+    </title>
+  </CorrectContentSelectorPopupWindow>
+  <UISingleContentViewerPortlet>
+    <msg>
+      <AccessControlException>Nemáte oprávnění k přístupu do režimu úprav.</AccessControlException>
+    </msg>
+  </UISingleContentViewerPortlet>
+  <UISCVContextualRadioBox>
+    <label>
+      <Enable>Povoleno</Enable>
+      <Disable>Zakázáno</Disable>
+    </label>
+  </UISCVContextualRadioBox>
+  <UIPreferencesPopupWindows>
+    <title>
+      <UISCVPreferences>Předvolby pro detail obsahu</UISCVPreferences>
+    </title>
+  </UIPreferencesPopupWindows>
+  <UISCVPreferences>
+    <action>
+      <Save>#{word.save}</Save>
+      <Abort>Přerušit</Abort>
+      <Cancel>#{word.cancel}</Cancel>
+      <Print>Tisk</Print>
+      <Close>#{word.close}</Close>
+    </action>
+    <title>Předvolby pro detail obsahu</title>
+    <label>
+      <Back>Zpět na předchozí stránku</Back>
+      <Edit>Upravit</Edit>
+      <Preferences>Preference</Preferences>
+      <Title>Předvolby pro detail obsahu</Title>
+      <UISCVShowTitleConfigurationCheckBox>Zobrazit název</UISCVShowTitleConfigurationCheckBox>
+      <UISCVShowDateConfigurationCheckBox>Zobrazit datum</UISCVShowDateConfigurationCheckBox>
+      <UISCVShowOptionBarConfigurationCheckBox>Zobrazit panel možností</UISCVShowOptionBarConfigurationCheckBox>
+      <DisplaySettingBlock>Nastavení zobrazení</DisplaySettingBlock>
+      <ContentPathBlock>Výběr obsahu</ContentPathBlock>
+      <UISCVConfigItemPathFormInputSet>Cesta k obsahu</UISCVConfigItemPathFormInputSet>
+    <UISCVContentPathConfigurationInputBox>Cesta k obsahu</UISCVContentPathConfigurationInputBox>
+      <Advance>Pokročilé</Advance>
+      <ContextCaption>Dynamická navigace</ContextCaption>
+      <UISCVContextualRadioBox>Kontextový obsah</UISCVContextualRadioBox>
+      <UISCVParameterInputBox>od</UISCVParameterInputBox>
+      <PrintSettingBlock>Nastavení tisku</PrintSettingBlock>
+      <UISCVPrintPageParameter>s</UISCVPrintPageParameter>
+      <UISCVConfigPrintPageFormInputSet>Zobrazit na stránce</UISCVConfigPrintPageFormInputSet>
+      <LockStatus>Zamknout</LockStatus>
+      <CacheManagement>Viditelnost obsahu</CacheManagement>
+      <UISCVCacheRadioBox>Sdílet obsah</UISCVCacheRadioBox>
+    </label>
+    <help>
+      <ContentPathBlock>Vyberte obsah, který chcete zobrazit. Pokud aktivujete možnost dynamické navigace (viz pokročilý režim), bude výchozí obsah nahrazen dynamicky.</ContentPathBlock>
+      <DisplaySettingBlock>Můžete zobrazit nebo skrýt panel možnosti, který slouží k zobrazení odkazu tisku. Zobrazení názvu a data je rovněž volitelné.</DisplaySettingBlock>
+      <ContextualHelp>Aktivuje dynamickou navigaci. Obsah lze dynamicky měnit jiným parametrem, založeným na adrese URL.</ContextualHelp>
+      <ParameterHelp>Tento parametr bude použit k získání obsahu, pokud je aktivována dynamická navigace.</ParameterHelp>
+    </help>
+    <msg>
+      <not-valid-path>Cesta položky je neplatná.</not-valid-path>
+    </msg>
+    <tab>
+      <label>
+        <UISCVConfigContentFormInputSet>Výběr obsahu</UISCVConfigContentFormInputSet>
+        <UISCVConfigDisplayFormInputSet>Nastavení zobrazení</UISCVConfigDisplayFormInputSet>
+        <UISCVConfigPrintFormInputSet>Nastavení tisku</UISCVConfigPrintFormInputSet>
+        <UISCVConfigAdvancedFormInputSet>Pokročilé</UISCVConfigAdvancedFormInputSet>
+      </label>
+    </tab>
+  </UISCVPreferences>
+  <UISCVConfigItemPathFormInputSet>
+    <title>
+      <SelectFolderPath>Vybrat cestu ke složce</SelectFolderPath>
+      <AddPath>Přidat cestu</AddPath>
+    </title>
+  </UISCVConfigItemPathFormInputSet>
+  <UISCVConfigPrintPageFormInputSet>
+    <title>
+      <SelectTargetPage>Zobrazit na stránce</SelectTargetPage>
+    </title>
+  </UISCVConfigPrintPageFormInputSet>
+  <PublicationStates>
+    <archived>Archivováno</archived>
+    <obsolete>Zastaralý</obsolete>
+    <unpublished>Nezveřejněno</unpublished>
+    <enrolled>Zapsáno</enrolled>
+    <draft>Koncept</draft>
+    <pending>Čekající</pending>
+    <approved>Schváleno</approved>
+    <inreview>V revizi</inreview>
+    <staged>Umístěno</staged>
+    <published>Zveřejněno</published>
+  </PublicationStates>
+  <UISCVCacheRadioBox>
+    <label>
+      <Enable>Omezeno kvůli ověření</Enable>
+      <Disable>Omezeno uživatelskou rolí</Disable>
+    </label>
+  </UISCVCacheRadioBox>
+</bundle>
