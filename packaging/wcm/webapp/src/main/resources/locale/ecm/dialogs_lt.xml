@@ -6,11 +6,11 @@
   <Ecm>
     <dialog>
       <label>
-        <end-time>End Time</end-time>
-        <start-time>Start Time</start-time>
+        <end-time>Pabaigos laikas</end-time>
+        <start-time>Pradžios laikas</start-time>
         <lifecycle>Gyvenimo ciklas</lifecycle>
         <mimeType>MIME tipas</mimeType>
-        <repeat-count>Repeat Count</repeat-count>
+        <repeat-count>Kartojimų skaičius</repeat-count>
         <time-interval>Laiko intervalas</time-interval>
         <query-items>Užklausos elementai</query-items>
         <schedule-type>Tvarkaraščio tipas</schedule-type>
@@ -28,7 +28,7 @@
       <contentHtml>#{word.content}</contentHtml>
       <content>#{word.content}</content>
       <contentPlain>#{word.content}</contentPlain>
-      <name>Name</name>
+      <name>Pavadinimas</name>
     <categories>Kategorijos</categories>
     </label>
   </UIDocumentForm>
@@ -39,7 +39,7 @@
   <HtmlFile>
     <dialog>
       <label>
-        <name>Name</name>
+        <name>Pavadinimas</name>
         <content>Turinys</content>
       </label>
     </dialog>
@@ -54,6 +54,8 @@
         <name>#{word.name}</name>
         <categories>Kategorijos</categories>
         <mimeType>#{Ecm.dialog.label.mimeType}</mimeType>
+        <width>Width</width>
+        <height>Height</height>
         <content>#{word.content}</content>
         <re-upload>Failas jau egzistuoja. Jūs galėtumėte jį ištrinti ir įkelti kitą failą.</re-upload>
       </label>
@@ -288,7 +290,7 @@
         <id>ID</id>
         <name>Vardas</name>
         <lifecycle>Gyvenimo ciklas</lifecycle>
-        <homePath>Home Path</homePath>
+        <homePath>Namų kelias</homePath>
         <targetWorkspace>Tikslinė darbo sritis</targetWorkspace>
         <targetPath>Tikslo kelias</targetPath>
       </label>
@@ -309,13 +311,13 @@
 <yes>Taip</yes>
 <true>Tiesa</true>
 <false>Netiesa</false>
-<Electronic>Electronic</Electronic>
-<Paper>Paper</Paper>
-<NONE>None</NONE>
+<Electronic>Elektroninis</Electronic>
+<Paper>Popierius</Paper>
+<NONE>Nėra</NONE>
 <CLASSIFIED>Klasifikuotas</CLASSIFIED>
 <UNCLASSIFIED>Neklasifikuotas</UNCLASSIFIED>
 <NOCONTRACT>Nėra sutarties</NOCONTRACT>
-<one-minute>One Minute</one-minute>
+<one-minute>Viena minutė</one-minute>
 <hourly>Kas valandą</hourly>
 <daily>Kasdien</daily>
 <quarterly>Kas ketvirtį</quarterly>
@@ -332,8 +334,8 @@
   <ScriptAction>
     <dialog>
       <label>
-        <isDeep>Is Deep</isDeep>
-        <nodetypes>Skilčių tipai</nodetypes>
+        <isDeep>Yra giliai</isDeep>
+        <nodetypes>Mazgo tipai</nodetypes>
         <affectedNodeTypeNames>Įtakoti mazgo tipai</affectedNodeTypeNames>
       </label>
     </dialog>
@@ -342,8 +344,8 @@
   <AddMetadata>
     <dialog>
       <label>
-        <isDeep>Is Deep</isDeep>
-        <nodetypes>Skilčių tipai</nodetypes>
+        <isDeep>Yra giliai</isDeep>
+        <nodetypes>Mazgo tipai</nodetypes>
         <affectedNodeTypeNames>Įtakoti mazgo tipai</affectedNodeTypeNames>
       </label>
     </dialog>
@@ -352,8 +354,8 @@
   <EnableVersioning>
     <dialog>
       <label>
-        <isDeep>Is Deep</isDeep>
-        <nodetypes>Skilčių tipai</nodetypes>
+        <isDeep>Yra giliai</isDeep>
+        <nodetypes>Mazgo tipai</nodetypes>
         <affectedNodeTypeNames>Įtakoti mazgo tipai</affectedNodeTypeNames>
       </label>
     </dialog>
@@ -362,8 +364,8 @@
   <AutoVersioning>
     <dialog>
       <label>
-        <isDeep>Is Deep</isDeep>
-        <nodetypes>Skilčių tipai</nodetypes>
+        <isDeep>Yra giliai</isDeep>
+        <nodetypes>Mazgo tipai</nodetypes>
         <affectedNodeTypeNames>Įtakoti mazgo tipai</affectedNodeTypeNames>
       </label>
     </dialog>
@@ -372,13 +374,13 @@
   <AccessibleMedia>
   <dialog>
   <label>
-  <captions>Captions</captions>
+  <captions>Nuorodinės antraštės</captions>
 <audioDescription>Garso aprašymas</audioDescription>
 <alternativeText>Alternatyvus tekstas</alternativeText>
 </label>
 </dialog>
 <help>
-<CaptionsHelp>Captions should provide text of dialog and important sounds</CaptionsHelp>
+<CaptionsHelp>Nuorodinės antraštės turi pateikti dialogo tekstą ir svarbius garsus</CaptionsHelp>
 <AudioDescriptionHelp>Garso aprašymas yra video įgarsinimo takelis</AudioDescriptionHelp>
 <AlternativeTextHelp>Pateikti prieinamą, alternatyvų informacijos pateikimo būdą</AlternativeTextHelp>
 </help>

@@ -19,9 +19,9 @@
       <DocumentAndPage>Dokumentas ir puslapis</DocumentAndPage>
       <documentandpage>Dokumentas ir puslapis</documentandpage>
       <resutlsCaption>Rezultatai</resutlsCaption>
-      <ofAboutCaption>of about</ofAboutCaption>
-      <forCaption>for</forCaption>
-      <timeUnitCaption>seconds</timeUnitCaption>
+      <ofAboutCaption>apie</ofAboutCaption>
+      <forCaption>už</forCaption>
+      <timeUnitCaption>sekundės(-ių)</timeUnitCaption>
       <similar>Puslapiai, kuriuose tas pats turinys</similar>
       <editor>Redaktorius</editor>
       <date>Data</date>
@@ -34,21 +34,21 @@
     </action>
     <msg>
       <your-search>Jūsų paieška</your-search>
-      <did-not-match>did not match any</did-not-match>
-      <new-suggestion>suggestion</new-suggestion>
+      <did-not-match>neatitinko</did-not-match>
+      <new-suggestion>pasiūlymas</new-suggestion>
     </msg>
   </UIDefaultSearchResult>
   <UISearchPageLayoutManager>
     <label>
       <itemsPerPageSelector>Elementų kiekis puslapyje</itemsPerPageSelector>
       <searchFormSelector>Ieškoti pagal šabloną</searchFormSelector>
-      <searchResultSelector>Search Result Template</searchResultSelector>
-      <searchPaginatorSelector>Search Paginator Template</searchPaginatorSelector>
-      <searchPageLayoutSelector>Search Page Layout Template</searchPageLayoutSelector>
+      <searchResultSelector>Paieškos rezultatų šablonas</searchResultSelector>
+      <searchPaginatorSelector>Paieškos puslapiavimo šablonas</searchPaginatorSelector>
+      <searchPageLayoutSelector>Paieškos puslapio išdėstymo šablonas</searchPageLayoutSelector>
       <searchResultBasePathInputSetAction>Bazinis kelias</searchResultBasePathInputSetAction>
       <pageMode>Puslapio režimas</pageMode>
       <option>
-        <none>None</none>
+        <none>Nėra</none>
         <more>Daugiau</more>
         <pagination>Numeracija</pagination>
       </option>
