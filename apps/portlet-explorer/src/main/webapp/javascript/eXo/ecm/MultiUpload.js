@@ -1074,8 +1074,7 @@
 			eXo.ecm.MultiUpload.connectionFailed = window.eXo.ecm.MultiUpload.connectionFailed;
 			eXo.ecm.MultiUpload.uploadingFileQueue = window.eXo.ecm.MultiUpload.uploadingFileQueue;	
 		}
-
-var progressId = Math.random().toString().substring(2);
+		var progressId = Math.random().toString().substring(2);
 		  var uri = eXo.ecm.MultiUpload.restContext + 
 		  "/wcmDriver/uploadFile/upload?uploadId=" + progressId;
 		  var formUpload = input.parentNode;
