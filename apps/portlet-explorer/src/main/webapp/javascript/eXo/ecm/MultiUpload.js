@@ -1016,40 +1016,66 @@
 	//-------------------------------------------------------------
 	//-----------------------handleForIE---------------------------
 	MultiUpload.prototype.handleFileIE = function(input) {
-		eXo.ecm.MultiUpload.ws = document.parentWindow.parent.eXo.ecm.MultiUpload.ws;
-		eXo.ecm.MultiUpload.drive = document.parentWindow.parent.eXo.ecm.MultiUpload.drive;
-		eXo.ecm.MultiUpload.driveTitle = document.parentWindow.parent.eXo.ecm.MultiUpload.driveTitle;
-		eXo.ecm.MultiUpload.drivePath = document.parentWindow.parent.eXo.ecm.MultiUpload.drivePath;
-		eXo.ecm.MultiUpload.path = document.parentWindow.parent.eXo.ecm.MultiUpload.path;
-		eXo.ecm.MultiUpload.dropNodePath = document.parentWindow.parent.eXo.ecm.MultiUpload.dropNodePath;
-		eXo.ecm.MultiUpload.pathMap = document.parentWindow.parent.eXo.ecm.MultiUpload.pathMap;
-		eXo.ecm.MultiUpload.cancelRequestMap = document.parentWindow.parent.eXo.ecm.MultiUpload.cancelRequestMap;
-		eXo.ecm.MultiUpload.sizeMap = document.parentWindow.parent.eXo.ecm.MultiUpload.sizeMap;
-		eXo.ecm.MultiUpload.uploadingFileIds = document.parentWindow.parent.eXo.ecm.MultiUpload.uploadingFileIds;
-		eXo.ecm.MultiUpload.percentMap = document.parentWindow.parent.eXo.ecm.MultiUpload.percentMap;
-	
-		eXo.ecm.MultiUpload.portalName = document.parentWindow.parent.eXo.ecm.MultiUpload.portalName;
-		eXo.ecm.MultiUpload.context = document.parentWindow.parent.eXo.ecm.MultiUpload.context;
-		eXo.ecm.MultiUpload.restContext = document.parentWindow.parent.eXo.ecm.MultiUpload.restContext;
-	
-		eXo.ecm.MultiUpload.userId = document.parentWindow.parent.eXo.ecm.MultiUpload.userId;
-		eXo.ecm.MultiUpload.userLanguage = document.parentWindow.parent.eXo.ecm.MultiUpload.userLanguage;
-		eXo.ecm.MultiUpload.maxFileSize = document.parentWindow.parent.eXo.ecm.MultiUpload.maxFileSize;
-		eXo.ecm.MultiUpload.fileType = document.parentWindow.parent.eXo.ecm.MultiUpload.fileType;
-		eXo.ecm.MultiUpload.existingBehavior = document.parentWindow.parent.eXo.ecm.MultiUpload.existingBehavior;
-	
-		eXo.ecm.MultiUpload.document = document.parentWindow.parent.document;
-	
-		eXo.ecm.MultiUpload.uploadingFileCount = document.parentWindow.parent.eXo.ecm.MultiUpload.uploadingFileCount;
-		eXo.ecm.MultiUpload.maxFileSize = document.parentWindow.parent.eXo.ecm.MultiUpload.maxFileSize;
-		eXo.ecm.MultiUpload.maxUploadCount = document.parentWindow.parent.eXo.ecm.MultiUpload.maxUploadCount;
-		eXo.ecm.MultiUpload.invalidFiles = document.parentWindow.parent.eXo.ecm.MultiUpload.invalidFiles;
-		//--------------Collection data type------------------//  
-		eXo.ecm.MultiUpload.connectionFailed = document.parentWindow.parent.eXo.ecm.MultiUpload.connectionFailed;
-		eXo.ecm.MultiUpload.uploadingFileQueue = document.parentWindow.parent.eXo.ecm.MultiUpload.uploadingFileQueue;
+		if (self == top) {
+			eXo.ecm.MultiUpload.ws = document.parentWindow.parent.eXo.ecm.MultiUpload.ws;
+			eXo.ecm.MultiUpload.drive = document.parentWindow.parent.eXo.ecm.MultiUpload.drive;
+			eXo.ecm.MultiUpload.driveTitle = document.parentWindow.parent.eXo.ecm.MultiUpload.driveTitle;
+			eXo.ecm.MultiUpload.drivePath = document.parentWindow.parent.eXo.ecm.MultiUpload.drivePath;
+			eXo.ecm.MultiUpload.path = document.parentWindow.parent.eXo.ecm.MultiUpload.path;
+			eXo.ecm.MultiUpload.dropNodePath = document.parentWindow.parent.eXo.ecm.MultiUpload.dropNodePath;
+			eXo.ecm.MultiUpload.pathMap = document.parentWindow.parent.eXo.ecm.MultiUpload.pathMap;
+			eXo.ecm.MultiUpload.cancelRequestMap = document.parentWindow.parent.eXo.ecm.MultiUpload.cancelRequestMap;
+			eXo.ecm.MultiUpload.sizeMap = document.parentWindow.parent.eXo.ecm.MultiUpload.sizeMap;
+			eXo.ecm.MultiUpload.uploadingFileIds = document.parentWindow.parent.eXo.ecm.MultiUpload.uploadingFileIds;
+			eXo.ecm.MultiUpload.percentMap = document.parentWindow.parent.eXo.ecm.MultiUpload.percentMap;
+			eXo.ecm.MultiUpload.portalName = document.parentWindow.parent.eXo.ecm.MultiUpload.portalName;
+			eXo.ecm.MultiUpload.context = document.parentWindow.parent.eXo.ecm.MultiUpload.context;
+			eXo.ecm.MultiUpload.restContext = document.parentWindow.parent.eXo.ecm.MultiUpload.restContext;
+			eXo.ecm.MultiUpload.userId = document.parentWindow.parent.eXo.ecm.MultiUpload.userId;
+			eXo.ecm.MultiUpload.userLanguage = document.parentWindow.parent.eXo.ecm.MultiUpload.userLanguage;
+			eXo.ecm.MultiUpload.maxFileSize = document.parentWindow.parent.eXo.ecm.MultiUpload.maxFileSize;
+			eXo.ecm.MultiUpload.fileType = document.parentWindow.parent.eXo.ecm.MultiUpload.fileType;
+			eXo.ecm.MultiUpload.existingBehavior = document.parentWindow.parent.eXo.ecm.MultiUpload.existingBehavior;
+			eXo.ecm.MultiUpload.document = document.parentWindow.parent.document;
+			eXo.ecm.MultiUpload.uploadingFileCount = document.parentWindow.parent.eXo.ecm.MultiUpload.uploadingFileCount;
+			eXo.ecm.MultiUpload.maxFileSize = document.parentWindow.parent.eXo.ecm.MultiUpload.maxFileSize;
+			eXo.ecm.MultiUpload.maxUploadCount = document.parentWindow.parent.eXo.ecm.MultiUpload.maxUploadCount;
+			eXo.ecm.MultiUpload.invalidFiles = document.parentWindow.parent.eXo.ecm.MultiUpload.invalidFiles;
+			//--------------Collection data type------------------//  
+			eXo.ecm.MultiUpload.connectionFailed = document.parentWindow.parent.eXo.ecm.MultiUpload.connectionFailed;
+			eXo.ecm.MultiUpload.uploadingFileQueue = document.parentWindow.parent.eXo.ecm.MultiUpload.uploadingFileQueue;
+		} else {
+			// Handle Iframe
+			eXo.ecm.MultiUpload.ws = window.eXo.ecm.MultiUpload.ws;
+			eXo.ecm.MultiUpload.drive = window.eXo.ecm.MultiUpload.drive;
+			eXo.ecm.MultiUpload.driveTitle = window.eXo.ecm.MultiUpload.driveTitle;
+			eXo.ecm.MultiUpload.drivePath = window.eXo.ecm.MultiUpload.drivePath;
+			eXo.ecm.MultiUpload.path = window.eXo.ecm.MultiUpload.path;
+			eXo.ecm.MultiUpload.dropNodePath = window.eXo.ecm.MultiUpload.dropNodePath;
+			eXo.ecm.MultiUpload.pathMap = window.eXo.ecm.MultiUpload.pathMap;
+			eXo.ecm.MultiUpload.cancelRequestMap = window.eXo.ecm.MultiUpload.cancelRequestMap;
+			eXo.ecm.MultiUpload.sizeMap = window.eXo.ecm.MultiUpload.sizeMap;
+			eXo.ecm.MultiUpload.uploadingFileIds = window.eXo.ecm.MultiUpload.uploadingFileIds;
+			eXo.ecm.MultiUpload.percentMap = window.eXo.ecm.MultiUpload.percentMap;
+			eXo.ecm.MultiUpload.portalName = window.eXo.ecm.MultiUpload.portalName;
+			eXo.ecm.MultiUpload.context = window.eXo.ecm.MultiUpload.context;
+			eXo.ecm.MultiUpload.restContext = window.eXo.ecm.MultiUpload.restContext;
+			eXo.ecm.MultiUpload.userId = window.eXo.ecm.MultiUpload.userId;
+			eXo.ecm.MultiUpload.userLanguage = window.eXo.ecm.MultiUpload.userLanguage;
+			eXo.ecm.MultiUpload.maxFileSize = window.eXo.ecm.MultiUpload.maxFileSize;
+			eXo.ecm.MultiUpload.fileType = window.eXo.ecm.MultiUpload.fileType;
+			eXo.ecm.MultiUpload.existingBehavior = window.eXo.ecm.MultiUpload.existingBehavior;
+			eXo.ecm.MultiUpload.document = window.document;
+			eXo.ecm.MultiUpload.uploadingFileCount = window.eXo.ecm.MultiUpload.uploadingFileCount;
+			eXo.ecm.MultiUpload.maxFileSize = window.eXo.ecm.MultiUpload.maxFileSize;
+			eXo.ecm.MultiUpload.maxUploadCount = window.eXo.ecm.MultiUpload.maxUploadCount;
+			eXo.ecm.MultiUpload.invalidFiles = window.eXo.ecm.MultiUpload.invalidFiles;
+			//--------------Collection data type------------------//  
+			eXo.ecm.MultiUpload.connectionFailed = window.eXo.ecm.MultiUpload.connectionFailed;
+			eXo.ecm.MultiUpload.uploadingFileQueue = window.eXo.ecm.MultiUpload.uploadingFileQueue;	
+		}
 
-	
-		  var progressId = Math.random().toString().substring(2);
+var progressId = Math.random().toString().substring(2);
 		  var uri = eXo.ecm.MultiUpload.restContext + 
 		  "/wcmDriver/uploadFile/upload?uploadId=" + progressId;
 		  var formUpload = input.parentNode;
