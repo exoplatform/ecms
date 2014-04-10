@@ -67,7 +67,7 @@ public class CloudFileAction extends AbstractJCRAction {
             // if addProperty or changeProperty - push changes to the cloud drive this will be cared
             // relying on Item.isNew
             // if removeProperty - remove from the cloud also removal of jcr:data isn't possible
-            localDrive.synchronize(fileNode);
+            localDrive.synchronize(); // TODO ?
             return true;
           } catch (SyncNotSupportedException e) {
             LOG.error("Node cannot be stored in Cloud Drive. Action Node was: " + fileNode.getPath(), e);

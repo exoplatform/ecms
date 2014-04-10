@@ -24,7 +24,7 @@ package org.exoplatform.clouddrive;
  * <br>Created by The eXo Platform SAS.
  * 
  * @author <a href="mailto:pnedonosko@exoplatform.com">Peter Nedonosko</a>
- * @version $Id: NotCloudFileException.java 00000 30 груд. 2012 peter $
+ * @version $Id: NotCloudFileException.java 00000. 2012 peter $
  */
 public class NotCloudFileException extends CloudDriveException {
 
@@ -38,14 +38,6 @@ public class NotCloudFileException extends CloudDriveException {
    */
   public NotCloudFileException(String message) {
     super(message);
-  }
-
-  /**
-   * @param message
-   * @param cause
-   */
-  public NotCloudFileException(String message, Throwable cause) {
-    super(message, cause);
   }
 
 }

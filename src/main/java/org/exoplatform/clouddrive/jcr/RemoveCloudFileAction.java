@@ -16,19 +16,21 @@
  */
 package org.exoplatform.clouddrive.jcr;
 
-import javax.jcr.Node;
-
 import org.apache.commons.chain.Context;
 import org.exoplatform.clouddrive.CloudDrive;
 import org.exoplatform.clouddrive.CloudDriveService;
+import org.exoplatform.clouddrive.SyncNotSupportedException;
 import org.exoplatform.services.ext.action.InvocationContext;
+import org.exoplatform.services.jcr.observation.ExtendedEvent;
 import org.exoplatform.services.log.ExoLogger;
 import org.exoplatform.services.log.Log;
 
+import javax.jcr.Node;
+
 /**
- * Care about ecd:cloudFile nodes removal - this action should prevent the removal by throwing
- * {@link IllegalStateException}. <br> Created by The eXo Platform SAS
-  * 
+ * Care about ecd:cloudFile nodes removal - this action should remove the file on cloud provider side. <br>
+ * Created by The eXo Platform SAS
+ * 
  * @author <a href="mailto:pnedonosko@exoplatform.com">Peter Nedonosko</a>
  * @version $Id: CloudFileAction.java 00000 Oct 5, 2012 pnedonosko $
  */
@@ -42,22 +44,41 @@ public class RemoveCloudFileAction extends AbstractJCRAction {
   @Override
   public boolean execute(Context context) throws Exception {
     Node fileNode = (Node) context.get(InvocationContext.CURRENT_ITEM);
-    CloudDriveService drives = drives(context);
-    CloudDrive localDrive = drives.findDrive(fileNode);
-    if (accept(localDrive)) {
-      try {
-        start(localDrive);
 
-        // TODO remove file from the cloud drive and set this action on nt:file
-        // LOG.error("***** Cloud Drive file removed: " + cloudFile.getPath() + " *****");
-        throw new IllegalStateException(localDrive.getUser().getProvider().getName()
-            + " file cannot be locally removed: " + fileNode.getPath());
-        // return false;
-      } finally {
-        done();
-      }
+    // we work only with node removal (no matter what set in the action config)
+    if (ExtendedEvent.NODE_REMOVED == (Integer) context.get(InvocationContext.EVENT)) {
+      CloudDriveService drives = drives(context);
+      CloudDrive localDrive = drives.findDrive(fileNode);
+      if (localDrive != null) {
+        if (localDrive.isConnected()) {
+          if (accept(localDrive)) {
+            try {
+              start(localDrive);
+
+              // XXX works with JCR impl only
+              try {
+                ((JCRLocalCloudDrive) localDrive).initRemove(fileNode);
+              } catch (SyncNotSupportedException e) {
+                LOG.error("Cannor remove file " + fileNode.getPath() + ": " + e.getMessage());
+              }
+              // TODO remove file from the cloud drive and set this action on nt:file
+              // LOG.error("***** Cloud Drive file removed: " + cloudFile.getPath() + " *****");
+              // throw new IllegalStateException(localDrive.getUser().getProvider().getName()
+              // + " file cannot be locally removed: " + fileNode.getPath());
+            } finally {
+              done();
+            }
+          }
+          return true;
+        } else {
+          LOG.warn("Cloud Drive not connected " + localDrive.getPath());
+        }
+      } // drive not found, may be this file in Trash folder and user is cleaning it, do nothing
+    } else {
+      LOG.warn(RemoveCloudFileAction.class.getName()
+          + " supports only node removal. Check configuration. Item skipped: " + fileNode.getPath());
     }
-    return true;
+    return false;
   }
 
 }

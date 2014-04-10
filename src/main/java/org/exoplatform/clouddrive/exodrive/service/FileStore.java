@@ -59,6 +59,14 @@ public class FileStore {
 
   public static final String         META_MODIFIEDDATE   = "modifiydate";
 
+  public static final String         TYPE_FOLDER         = "application/vnd.exoplatform.exodrive-folder";
+
+  public static final String         FILE_SEPARATOR      = "/";                                           // the
+                                                                                                           // same
+                                                                                                           // as
+                                                                                                           // in
+                                                                                                           // JCR!
+
   /**
    * I/O buffer size for internal operations (16K).
    */
@@ -123,10 +131,14 @@ public class FileStore {
   }
 
   public InputStream read() throws ExoDriveException {
-    try {
-      return new FileInputStream(local);
-    } catch (FileNotFoundException e) {
-      throw new ExoDriveException("File not found " + local.getName(), e);
+    if (local.isFile()) {
+      try {
+        return new FileInputStream(local);
+      } catch (FileNotFoundException e) {
+        throw new ExoDriveException("File not found " + local.getName(), e);
+      }
+    } else {
+      throw new ExoDriveException("Not a file " + local.getAbsolutePath());
     }
   }
 

@@ -106,7 +106,7 @@ public abstract class CloudDrive {
     Collection<String> getRemoved();
 
     /**
-     * Wait for command will be done.
+     * Wait for command completion.
      * 
      * @throws ExecutionException if command thrown an exception.
      * @throws InterruptedException if current thread was interrupted.
@@ -419,6 +419,7 @@ public abstract class CloudDrive {
    * @throws CloudDriveException
    * @throws RepositoryException
    */
+  @Deprecated
   public abstract List<CloudFile> listFiles(CloudFile parent) throws DriveRemovedException,
                                                              CloudDriveException,
                                                              RepositoryException;
@@ -430,22 +431,11 @@ public abstract class CloudDrive {
    * To check the state of the connect process use {@link CloudDrive#isConnected()}. To be informed in the
    * process register a listener to the drive {@link CloudDrive#addListener(CloudDriveListener)}. <br>
    * Method returns {@link Command} object what provides information about the connect process such as
-   * progress in percents, timing and affected files available during the processing of the command. If async
-   * parameter {@code false} then the command will be already done and contain all processed files.
+   * progress in percents, timing and affected files available during the processing of the command. Connect
+   * process will be started asynchronously in another thread and method return immediately.
    * 
-   * @param async boolean, if {@code true} then the connect process will be started in another thread and
-   *          method return immediately.
    * @return {@link Command} describing the connect process
    * @see CloudDriveListener#onConnect(CloudDriveEvent)
-   * @throws CloudDriveException
-   * @throws RepositoryException
-   */
-  public abstract Command connect(boolean async) throws CloudDriveException, RepositoryException;
-
-  /**
-   * A shortcut for {@link #connect(boolean)} with {@code false} parameter.
-   * 
-   * @return {@link Command} describing connect process
    * @throws CloudDriveException
    * @throws RepositoryException
    */
@@ -457,32 +447,13 @@ public abstract class CloudDrive {
    * Drive may not support synchronization. In such case {@link SyncNotSupportedException} will be thrown.<br>
    * To check the state of the synchronization register a listener to drive
    * {@link CloudDrive#addListener(CloudDriveListener)}. <br>
-   * Method returns {@link Command} object what provides sychronization information such as progress in
-   * percents, timing and affected files available during the processing of the command. If async parameter
-   * {@code false} then the command will be already done and contain all processed files.
+   * Method returns {@link Command} object providing information about sychronization progress in
+   * percents, timing and affected files available during the processing of the command. Synchronization
+   * process will be started asynchronously in another thread and method return immediately.
    * 
-   * @param async boolean, if {@code true} then synchronization process will be started in another thread and
-   *          method return immediately.
    * @see CloudDriveListener#onSynchronized(CloudDriveEvent)
    * @see CloudDriveListener#getFileChangeAction()
    * @return {@link Command} describing the synchronization process
-   * @throws SyncNotSupportedException if synchronization not supported
-   * @throws DriveRemovedException
-   * @throws CloudDriveException
-   * @throws CloudDriveAccessException
-   * @throws RepositoryException
-   */
-  public abstract Command synchronize(boolean async) throws SyncNotSupportedException,
-                                                    DriveRemovedException,
-                                                    CloudDriveException,
-                                                    CloudDriveAccessException,
-                                                    RepositoryException;
-
-  /**
-   * A shortcut for {@link #synchronize(boolean)} with {@code false} parameter.
-   * 
-   * @see #synchronize(boolean)
-   * @return {@link Command} describing synchronization process
    * @throws SyncNotSupportedException if synchronization not supported
    * @throws DriveRemovedException
    * @throws CloudDriveException
@@ -495,30 +466,38 @@ public abstract class CloudDrive {
                                        CloudDriveAccessException,
                                        RepositoryException;
 
-  /**
-   * Synchronize file or folder from local drive with its representation in the cloud. Refreshes metadata and
-   * optionally the content of the file. <br>
-   * If given Node is of type nt:file, nt:folder or nt:unstructured it will be treated as a new file to add to
-   * the drive and if such synchronization supported it will uploaded to the cloud provider. <br>
-   * Drive should be connected to synchronized its files.<br/>
-   * Drive may not support synchronization. In such case {@link SyncNotSupportedException} will be thrown.<br>
-   * To check the state of the synchronization register a listener to drive
-   * {@link CloudDrive#addListener(CloudDriveListener)}.
-   * 
-   * @see #isConnected(Node)
-   * @param file {@link Node}
-   * @return {@link Command} describing synchronization process
-   * @throws SyncNotSupportedException if synchronization not supported for this drive or given object
-   * @throws DriveRemovedException
-   * @throws NotConnectedException
-   * @throws CloudDriveException
-   * @throws RepositoryException
-   */
-  public abstract Command synchronize(Node fileNode) throws SyncNotSupportedException,
-                                                    DriveRemovedException,
-                                                    NotConnectedException,
-                                                    CloudDriveException,
-                                                    RepositoryException;
+  // TODO cleanup
+  // /**
+  // * Synchronize file or folder from local drive with its representation in the cloud. Refreshes metadata
+  // and
+  // * optionally the content of the file. <br>
+  // * If given Node is of type nt:file, nt:folder or nt:unstructured it will be treated as a new file to add
+  // to
+  // * the drive and if such synchronization supported it will uploaded to the cloud provider. <br>
+  // * Drive should be connected to synchronized its files.<br/>
+  // * Drive may not support synchronization. In such case {@link SyncNotSupportedException} will be
+  // thrown.<br>
+  // * To check the state of the synchronization register a listener to drive
+  // * {@link CloudDrive#addListener(CloudDriveListener)}.
+  // *
+  // * <br>
+  // * Deprecated as not fully possible for many cloud providers.
+  // *
+  // * @see #isConnected(Node)
+  // * @param file {@link Node}
+  // * @return {@link Command} describing synchronization process
+  // * @throws SyncNotSupportedException if synchronization not supported for this drive or given object
+  // * @throws DriveRemovedException
+  // * @throws NotConnectedException
+  // * @throws CloudDriveException
+  // * @throws RepositoryException
+  // */
+  // @Deprecated
+  // public abstract Command synchronize(Node fileNode) throws SyncNotSupportedException,
+  // DriveRemovedException,
+  // NotConnectedException,
+  // CloudDriveException,
+  // RepositoryException;
 
   /**
    * Answers if drive is connected.
@@ -583,6 +562,8 @@ public abstract class CloudDrive {
    * Configure environment for commands execution (optional).
    * 
    * @param env {@link CloudDriveEnvironment}
+   * @param synchronizers collection of {@link CloudFileSynchronizer}, it will be used for file
+   *          synchronization.
    */
-  protected abstract void configure(CloudDriveEnvironment env);
+  protected abstract void configure(CloudDriveEnvironment env, Collection<CloudFileSynchronizer> synchronizers);
 }

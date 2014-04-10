@@ -25,6 +25,12 @@ import static org.exoplatform.clouddrive.exodrive.service.FileStore.META_ID;
 import static org.exoplatform.clouddrive.exodrive.service.FileStore.META_LASTUSER;
 import static org.exoplatform.clouddrive.exodrive.service.FileStore.META_MODIFIEDDATE;
 import static org.exoplatform.clouddrive.exodrive.service.FileStore.META_TYPE;
+import static org.exoplatform.clouddrive.exodrive.service.FileStore.FILE_SEPARATOR;
+import static org.exoplatform.clouddrive.exodrive.service.FileStore.TYPE_FOLDER;
+
+import org.exoplatform.commons.utils.MimeTypeResolver;
+import org.exoplatform.services.log.ExoLogger;
+import org.exoplatform.services.log.Log;
 
 import java.io.File;
 import java.io.FileInputStream;
@@ -34,22 +40,12 @@ import java.io.InputStream;
 import java.io.OutputStream;
 import java.text.ParseException;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Calendar;
-import java.util.Collections;
+import java.util.Iterator;
 import java.util.List;
-import java.util.Map;
 import java.util.Properties;
 import java.util.UUID;
-
-import org.exoplatform.clouddrive.CloudDriveService;
-import org.exoplatform.clouddrive.exodrive.ExoDriveConnector;
-import org.exoplatform.commons.utils.MimeTypeResolver;
-import org.exoplatform.container.xml.InitParams;
-import org.exoplatform.container.xml.PropertiesParam;
-import org.exoplatform.services.log.ExoLogger;
-import org.exoplatform.services.log.Log;
-import org.picocontainer.Startable;
-
 
 /**
  * Exo Drive repository abstraction.
@@ -100,17 +96,16 @@ public class ExoDriveRepository {
 
   // ********* internal methods ************
 
-  
-  
   /**
    * Read file to {@link FileStore}. Here we assume the file exists and it's a {@link File}.
    * 
-   * @param file
    * @param ownerName
+   * @param file
+   * 
    * @return
    * @throws ExoDriveException
    */
-  protected FileStore readFile(File file, String ownerName) throws ExoDriveException {
+  protected FileStore openStore(String ownerName, File file) throws ExoDriveException {
     try {
       File metaDir = new File(file.getParent(), METADIR_NAME);
       File meta = new File(metaDir, file.getName() + METAFILE_EXT);
@@ -164,13 +159,44 @@ public class ExoDriveRepository {
     return new File(baseDir, user);
   }
 
-  String fileLink(String ownerName, String name) {
-    return baseUrl + "/" + ownerName + "/" + name;
+  String fileLink(String ownerName, String path) {
+    return baseUrl + "/" + ownerName + "/" + path;
   }
 
-  String generateId(File parentDir, String name) {
-    String idpath = parentDir.getAbsolutePath() + "_secret_" + name;
+  String generateId(File parentDir, String path) {
+    String idpath = parentDir.getAbsolutePath() + "_secret_" + path;
     return UUID.nameUUIDFromBytes(idpath.getBytes()).toString();
+  }
+
+  File findFile(File userDir, String path) throws ExoDriveException {
+    List<String> pathFiles = Arrays.asList(path.split(FILE_SEPARATOR));
+    File parent = userDir;
+    File file = null;
+    for (Iterator<String> piter = pathFiles.iterator(); piter.hasNext();) {
+      String pfn = piter.next();
+      File pf = new File(parent, pfn);
+      if (piter.hasNext()) {
+        if (pf.exists()) {
+          if (pf.isDirectory()) {
+            // ok, it's a folder in the file path
+            parent = pf;
+          } else {
+            throw new ExoDriveException("File found on the parent path '" + path + "', folder expected: "
+                + pf.getPath());
+          }
+        } else {
+          throw new ExoDriveException("Parent path not found '" + path + "', folder doesn't exist: "
+              + pf.getPath());
+        }
+      } else {
+        if (pf.exists()) {
+          throw new ExoDriveException("File already exists " + pf.getPath());
+        } else {
+          file = pf;
+        }
+      }
+    }
+    return file;
   }
 
   // ********* service methods *************
@@ -180,13 +206,13 @@ public class ExoDriveRepository {
    * drive exists at all.
    * 
    * @param ownerName
-   * @param name
+   * @param path
    * @return
    */
-  public boolean exists(String ownerName, String name) {
+  public boolean exists(String ownerName, String path) {
     File file;
-    if (name != null) {
-      file = new File(userRoot(ownerName), name);
+    if (path != null) {
+      file = new File(userRoot(ownerName), path);
     } else {
       file = userRoot(ownerName);
     }
@@ -209,7 +235,7 @@ public class ExoDriveRepository {
     file.mkdirs();
     return file.exists();
   }
-  
+
   public boolean removeUser(String ownerName) throws ExoDriveException {
     File file = userRoot(ownerName);
     for (FileStore fs : listFiles(ownerName)) {
@@ -218,109 +244,116 @@ public class ExoDriveRepository {
     return file.delete();
   }
 
-  public FileStore create(String ownerName, String name, String type, Calendar createDate) throws ExoDriveException {
-    File parentDir = userRoot(ownerName);
-    if (parentDir.exists()) {
-      File file = new File(parentDir, name);
+  public FileStore create(String ownerName, String path, String type, Calendar createDate) throws ExoDriveException {
+    File userDir = userRoot(ownerName);
+    if (userDir.exists()) {
+      File file = findFile(userDir, path);
+      if (file == null) {
+        throw new ExoDriveException("File cannot be created with such path '" + path + "'");
+      }
+
       try {
-        if (file.createNewFile()) {
-          File metaDir = new File(parentDir, METADIR_NAME);
-          metaDir.mkdirs();
-
-          File meta = new File(metaDir, name + METAFILE_EXT);
-
-          String id = generateId(parentDir, name);
-
-          String mimeType = type != null ? type : mimeResolver.getMimeType(name);
-
-          Properties metap = new Properties();
-          metap.put(META_ID, id);
-          metap.put(META_TYPE, mimeType);
-          metap.put(META_AUTHOR, ownerName);
-          metap.put(META_LASTUSER, ownerName);
-          metap.put(META_CREATEDATE, METAFILE_DATEFORMAT.format(createDate.getTime()));
-          metap.put(META_MODIFIEDDATE, METAFILE_DATEFORMAT.format(createDate.getTime()));
-
-          FileStore local =
-              new FileStore(file,
-                            id,
-                            fileLink(ownerName, file.getName()),
-                            mimeType,
-                            ownerName,
-                            ownerName,
-                            createDate,
-                            createDate);
-
-          OutputStream out = new FileOutputStream(meta);
-          try {
-            metap.store(out, "Metadata for " + file.getAbsolutePath() + ". Generated at "
-                + METAFILE_DATEFORMAT.format(Calendar.getInstance().getTime()));
-          } finally {
-            out.close();
+        if (TYPE_FOLDER.equals(type)) {
+          // create folder
+          if (!file.mkdir()) {
+            throw new ExoDriveException("Cannot crate new folder " + file.getPath());
           }
-
-          return local;
         } else {
-          throw new ExoDriveException("Local cloud drive exists with the same name " + file);
+          // create file
+          if (!file.createNewFile()) {
+            throw new ExoDriveException("Cannot create new file" + file.getPath());
+          }
         }
+        File metaDir = new File(userDir, METADIR_NAME);
+        metaDir.mkdirs();
+
+        File meta = new File(metaDir, path + METAFILE_EXT);
+
+        String id = generateId(userDir, path);
+
+        String mimeType = type != null ? type : mimeResolver.getMimeType(path);
+
+        Properties metap = new Properties();
+        metap.put(META_ID, id);
+        metap.put(META_TYPE, mimeType);
+        metap.put(META_AUTHOR, ownerName);
+        metap.put(META_LASTUSER, ownerName);
+        metap.put(META_CREATEDATE, METAFILE_DATEFORMAT.format(createDate.getTime()));
+        metap.put(META_MODIFIEDDATE, METAFILE_DATEFORMAT.format(createDate.getTime()));
+
+        FileStore local = new FileStore(file,
+                                        id,
+                                        fileLink(ownerName, file.getName()),
+                                        mimeType,
+                                        ownerName,
+                                        ownerName,
+                                        createDate,
+                                        createDate);
+
+        OutputStream out = new FileOutputStream(meta);
+        try {
+          metap.store(out,
+                      "Metadata for " + file.getAbsolutePath() + ". Generated at "
+                          + METAFILE_DATEFORMAT.format(Calendar.getInstance().getTime()));
+        } finally {
+          out.close();
+        }
+
+        return local;
       } catch (IOException ioe) {
-        throw new ExoDriveException("Cannot create cloud file in storage " + file, ioe);
+        throw new ExoDriveException("Cannot create file in storage " + file, ioe);
       }
     } else {
-      LOG.warn("User not found: " + ownerName + ". Requested file not created '" + name
-          + "' as parent not found " + parentDir.getAbsolutePath());
-      throw new NotFoundException("User not found: " + ownerName + ". Requested file not created " + name);
+      LOG.warn("User not found: " + ownerName + ". Requested file not created '" + path
+          + "' as parent not found " + userDir.getAbsolutePath());
+      throw new NotFoundException("User not found: " + ownerName + ". Requested file not created " + path);
     }
   }
 
-  public FileStore read(String ownerName, String name) throws ExoDriveException {
-    File parentDir = userRoot(ownerName);
-    File file = new File(parentDir, name);
-    if (file.exists() && file.isFile()) {
-      return readFile(file, ownerName);
+  public FileStore read(String ownerName, String path) throws ExoDriveException {
+    File userDir = userRoot(ownerName);
+    File file = findFile(userDir, path);
+    if (file != null && file.exists()) {
+      return openStore(ownerName, file);
     } else {
-      LOG.warn("User not found: " + ownerName + ". Requested storage not exists "
-          + parentDir.getAbsolutePath());
-      throw new NotFoundException((parentDir.exists() ? "Cloud file " + name + " not found."
-          : "User not found " + ownerName));
+      LOG.warn("User not found: " + ownerName + ". Requested storage not exists " + userDir.getAbsolutePath());
+      throw new NotFoundException((userDir.exists() ? "Cloud file " + path + " not found."
+                                                   : "User not found " + ownerName));
     }
   }
 
   public List<FileStore> listFiles(String ownerName) throws ExoDriveException {
     List<FileStore> res = new ArrayList<FileStore>();
-    File parentDir = userRoot(ownerName);
-    File[] userFiles = parentDir.listFiles();
+    File userDir = userRoot(ownerName);
+    File[] userFiles = userDir.listFiles();
     if (userFiles != null) {
       for (File f : userFiles) {
-        if (f.isFile()) {
-          res.add(readFile(f, ownerName));
-        }
+        res.add(openStore(ownerName, f));
       }
     } else {
-      LOG.warn("User not found: " + ownerName + ". Requested storage not exists "
-          + parentDir.getAbsolutePath());
+      LOG.warn("User not found: " + ownerName + ". Requested storage not exists " + userDir.getAbsolutePath());
       throw new NotFoundException("User not found " + ownerName);
     }
     return res;
   }
 
   public List<FileStore> listFiles(String ownerName, FileStore parentDir) throws ExoDriveException {
-    List<FileStore> res = new ArrayList<FileStore>();
-    File ownerDir = userRoot(ownerName);
-    if (parentDir.getFile().getAbsolutePath().startsWith(ownerDir.getAbsolutePath())) {
-      File[] userFiles = parentDir.getFile().listFiles();
-      if (userFiles != null) {
-        for (File f : parentDir.getFile().listFiles()) {
-          if (f.isFile()) {
-            res.add(readFile(f, ownerName));
-          }
-        }
+    File userDir = userRoot(ownerName);
+    if (parentDir.getFile().getAbsolutePath().startsWith(userDir.getAbsolutePath())) {
+      List<FileStore> res = new ArrayList<FileStore>();
+      if (parentDir.isFolder()) {
+        throw new NotFoundException("Parent not a folder " + parentDir.getFile().getAbsolutePath());
       } else {
-        LOG.warn("User not found: " + ownerName + ". Requested storage not exists "
-            + parentDir.getFile().getAbsolutePath());
-        throw new NotFoundException("User not found " + ownerName);
+        File[] userFiles = parentDir.getFile().listFiles();
+        if (userFiles != null) {
+          for (File f : userFiles) {
+            res.add(openStore(ownerName, f));
+          }
+        } else {
+          throw new NotFoundException("Cannot read parent folder " + parentDir.getFile().getAbsolutePath());
+        }
+        return res;
       }
-      return res;
     } else {
       throw new NotFoundException("Not user '" + ownerName + "' folder " + parentDir.getFile());
     }

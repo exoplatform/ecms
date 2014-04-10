@@ -23,6 +23,7 @@ import com.google.api.client.googleapis.auth.oauth2.GoogleAuthorizationCodeFlow;
 import com.google.api.client.googleapis.auth.oauth2.GoogleTokenResponse;
 import com.google.api.client.googleapis.json.GoogleJsonError;
 import com.google.api.client.googleapis.json.GoogleJsonResponseException;
+import com.google.api.client.http.AbstractInputStreamContent;
 import com.google.api.client.http.HttpRequest;
 import com.google.api.client.http.HttpRequestInitializer;
 import com.google.api.client.http.HttpResponse;
@@ -34,6 +35,7 @@ import com.google.api.client.json.jackson2.JacksonFactory;
 import com.google.api.services.drive.Drive;
 import com.google.api.services.drive.Drive.Changes;
 import com.google.api.services.drive.Drive.Children;
+import com.google.api.services.drive.Drive.Files.Delete;
 import com.google.api.services.drive.DriveScopes;
 import com.google.api.services.drive.model.About;
 import com.google.api.services.drive.model.Change;
@@ -47,6 +49,7 @@ import com.google.api.services.oauth2.model.Userinfo;
 
 import org.exoplatform.clouddrive.CloudDriveConnector;
 import org.exoplatform.clouddrive.CloudDriveException;
+import org.exoplatform.clouddrive.NotFoundException;
 import org.exoplatform.clouddrive.utils.ChunkIterator;
 import org.exoplatform.services.log.ExoLogger;
 import org.exoplatform.services.log.Log;
@@ -74,7 +77,11 @@ class GoogleDriveAPI {
 
   public static final String       FOLDER_MIMETYPE = "application/vnd.google-apps.folder";
 
-  public static final List<String> SCOPES          = Arrays.asList(DriveScopes.DRIVE_READONLY,
+  public static final List<String> SCOPES          = Arrays.asList(DriveScopes.DRIVE,
+                                                                   DriveScopes.DRIVE_FILE,
+                                                                   DriveScopes.DRIVE_APPDATA,
+                                                                   DriveScopes.DRIVE_SCRIPTS,
+                                                                   DriveScopes.DRIVE_APPS_READONLY,
                                                                    Oauth2Scopes.USERINFO_EMAIL,
                                                                    Oauth2Scopes.USERINFO_PROFILE);
 
@@ -285,6 +292,8 @@ class GoogleDriveAPI {
   class ChangesIterator extends ChunkIterator<Change> {
     final Changes.List request;
 
+    long               largestChangeId;
+
     /**
      * @throws GoogleDriveException
      */
@@ -306,6 +315,7 @@ class GoogleDriveAPI {
     protected Iterator<Change> nextChunk() throws GoogleDriveException {
       try {
         ChangeList children = request.execute();
+        largestChangeId = children.getLargestChangeId();
         request.setPageToken(children.getNextPageToken());
         List<Change> items = children.getItems();
 
@@ -320,6 +330,10 @@ class GoogleDriveAPI {
     @Override
     protected boolean hasNextChunk() {
       return request.getPageToken() != null && request.getPageToken().length() > 0;
+    }
+
+    long getLargestChangeId() {
+      return largestChangeId;
     }
   }
 
@@ -551,12 +565,167 @@ class GoogleDriveAPI {
    * @param fileId {@link String}
    * @return {@link File}
    * @throws GoogleDriveException
+   * @throws NotFoundException
    */
-  File file(String fileId) throws GoogleDriveException {
+  File file(String fileId) throws GoogleDriveException, NotFoundException {
     try {
       return drive.files().get(fileId).execute();
+    } catch (GoogleJsonResponseException e) {
+      if (e.getStatusCode() == 404) {
+        throw new NotFoundException("Cloud file not found: " + fileId, e);
+      } else {
+        throw new GoogleDriveException("Error getting file from Files service: " + e.getMessage(), e);
+      }
     } catch (IOException e) {
-      throw new GoogleDriveException("Error requesting Files service: " + e.getMessage(), e);
+      throw new GoogleDriveException("Error getting file from Files service: " + e.getMessage(), e);
+    }
+  }
+
+  /**
+   * Insert a new file to Files service and upload its content.
+   * 
+   * @param file {@link File} file metadata
+   * @param file {@link AbstractInputStreamContent} file content
+   * @return {@link File} resulting file
+   * @throws GoogleDriveException
+   */
+  File insert(File file, AbstractInputStreamContent content) throws GoogleDriveException {
+    try {
+      return drive.files().insert(file, content).execute();
+    } catch (IOException e) {
+      throw new GoogleDriveException("Error inserting file with content to Files service: " + e.getMessage(),
+                                     e);
+    }
+  }
+
+  /**
+   * Insert a new file to Files service. This method will create an empty file or a folder (if given file
+   * object has such mimetype).
+   * 
+   * @param file {@link File} file metadata
+   * @return {@link File} resulting file
+   * @throws GoogleDriveException
+   */
+  File insert(File file) throws GoogleDriveException {
+    try {
+      return drive.files().insert(file).execute();
+    } catch (IOException e) {
+      throw new GoogleDriveException("Error inserting file to Files service: " + e.getMessage(), e);
+    }
+  }
+
+  /**
+   * Update a file metadata in Files service and upload its new content.
+   * 
+   * @param file {@link File} file metadata
+   * @param file {@link AbstractInputStreamContent} file content
+   * @return {@link File} resulting file
+   * @throws GoogleDriveException
+   * @throws NotFoundException
+   */
+  void update(File file, AbstractInputStreamContent content) throws GoogleDriveException, NotFoundException {
+    String fileId = file.getId();
+    try {
+      // file id update not assumed in this context
+      drive.files().update(fileId, file, content).execute();
+    } catch (GoogleJsonResponseException e) {
+      if (e.getStatusCode() == 404) {
+        throw new NotFoundException("Cloud file not found for updating: " + fileId, e);
+      } else {
+        throw new GoogleDriveException("Error updating file in Files service: " + e.getMessage(), e);
+      }
+    } catch (IOException e) {
+      throw new GoogleDriveException("Error upating file with content in Files service: " + e.getMessage(), e);
+    }
+  }
+
+  /**
+   * Update a file metadata in Files service.
+   * 
+   * @param file {@link File} file metadata
+   * @return {@link File} resulting file
+   * @throws GoogleDriveException
+   * @throws NotFoundException
+   */
+  void update(File file) throws GoogleDriveException, NotFoundException {
+    String fileId = file.getId();
+    try {
+      // file id update not assumed in this context
+      drive.files().update(fileId, file).execute();
+    } catch (GoogleJsonResponseException e) {
+      if (e.getStatusCode() == 404) {
+        throw new NotFoundException("Cloud file not found for updating: " + fileId, e);
+      } else {
+        throw new GoogleDriveException("Error updating file in Files service: " + e.getMessage(), e);
+      }
+    } catch (IOException e) {
+      throw new GoogleDriveException("Error upating file metadata in Files service: " + e.getMessage(), e);
+    }
+  }
+
+  /**
+   * Delete a file in Files service.
+   * 
+   * @param fileId {@link String} file id
+   * @return {@link Delete} resulting object
+   * @throws GoogleDriveException
+   * @throws NotFoundException
+   */
+  void delete(String fileId) throws GoogleDriveException, NotFoundException {
+    try {
+      drive.files().delete(fileId).execute();
+    } catch (GoogleJsonResponseException e) {
+      if (e.getStatusCode() == 404) {
+        throw new NotFoundException("Cloud file not found for deleting: " + fileId, e);
+      } else {
+        throw new GoogleDriveException("Error deleting file in Files service: " + e.getMessage(), e);
+      }
+    } catch (IOException e) {
+      throw new GoogleDriveException("Error deleting file in Files service: " + e.getMessage(), e);
+    }
+  }
+
+  /**
+   * Move a file to Trash using Files service.
+   * 
+   * @param fileId {@link String} file id
+   * @return {@link File} resulting object
+   * @throws GoogleDriveException
+   * @throws NotFoundException
+   */
+  File trash(String fileId) throws GoogleDriveException, NotFoundException {
+    try {
+      return drive.files().trash(fileId).execute();
+    } catch (GoogleJsonResponseException e) {
+      if (e.getStatusCode() == 404) {
+        throw new NotFoundException("Cloud file not found for trashing: " + fileId, e);
+      } else {
+        throw new GoogleDriveException("Error trashing file in Files service: " + e.getMessage(), e);
+      }
+    } catch (IOException e) {
+      throw new GoogleDriveException("Error trashing file in Files service: " + e.getMessage(), e);
+    }
+  }
+
+  /**
+   * Move a file from Trash to its original place using Files service.
+   * 
+   * @param fileId {@link String} file id
+   * @return {@link File} resulting object
+   * @throws GoogleDriveException
+   * @throws NotFoundException
+   */
+  File untrash(String fileId) throws GoogleDriveException, NotFoundException {
+    try {
+      return drive.files().untrash(fileId).execute();
+    } catch (GoogleJsonResponseException e) {
+      if (e.getStatusCode() == 404) {
+        throw new NotFoundException("Cloud file not found for untrashing: " + fileId, e);
+      } else {
+        throw new GoogleDriveException("Error untrashing file in Files service: " + e.getMessage(), e);
+      }
+    } catch (IOException e) {
+      throw new GoogleDriveException("Error untrashing file in Files service: " + e.getMessage(), e);
     }
   }
 

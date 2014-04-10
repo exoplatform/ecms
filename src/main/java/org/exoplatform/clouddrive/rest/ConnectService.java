@@ -245,7 +245,7 @@ public class ConnectService implements ResourceContainer {
       this.title = drive.getTitle();
       this.workspaceName = workspaceName;
       this.drive.addListener(this); // listen to remove from active map
-      this.process = drive.connect(true);
+      this.process = drive.connect();
 
       LOG.info(title + " connect started.");
     }

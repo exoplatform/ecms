@@ -34,9 +34,11 @@ import org.exoplatform.services.log.ExoLogger;
 import org.exoplatform.services.log.Log;
 import org.exoplatform.services.rest.resource.ResourceContainer;
 
+import java.lang.reflect.UndeclaredThrowableException;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.HashSet;
+import java.util.concurrent.ExecutionException;
 
 import javax.annotation.security.RolesAllowed;
 import javax.jcr.Item;
@@ -191,8 +193,37 @@ public class DriveService implements ResourceContainer {
             if (synchronize) {
               try {
                 Command sync = local.synchronize();
-                files =sync.getFiles();
+                sync.await(); // wait for sync process
+                files = sync.getFiles();
                 removed = sync.getRemoved();
+              } catch (InterruptedException e) {
+                LOG.warn("Caller of synchronization command interrupted.", e);
+                Thread.currentThread().interrupt();
+                return Response.status(Status.SERVICE_UNAVAILABLE)
+                               .entity("Synchrinization interrupted. Try again later.")
+                               .build();
+              } catch (ExecutionException e) {
+                Throwable err = e.getCause();
+                if (err instanceof CloudDriveException) {
+                  LOG.error("Error synchrinizing the drive: " + err.getMessage(), err);
+                  return Response.status(Status.INTERNAL_SERVER_ERROR)
+                                 .entity("Error synchrinizing the drive. Try again later.")
+                                 .build();
+                } else if (err instanceof RepositoryException) {
+                  LOG.error("Storage error: " + err.getMessage(), err);
+                  return Response.status(Status.INTERNAL_SERVER_ERROR)
+                                 .entity("Storage error. Synchronization canceled.")
+                                 .build();
+                } else if (err instanceof RuntimeException) {
+                  LOG.error("Runtime error: " + err.getMessage(), err);
+                  return Response.status(Status.INTERNAL_SERVER_ERROR)
+                                 .entity("Internal server error. Synchronization canceled. Try again later.")
+                                 .build();
+                }
+                LOG.error("Unexpected error: " + err.getMessage(), err);
+                return Response.status(Status.INTERNAL_SERVER_ERROR)
+                               .entity("Unexpected server error. Synchronization canceled. Try again later.")
+                               .build();
               } catch (CloudDriveAccessException e) {
                 LOG.warn("Request to cloud drive expired, forbidden or revoked.", e);
                 // client should treat this status in special way and obtain new credentials using given

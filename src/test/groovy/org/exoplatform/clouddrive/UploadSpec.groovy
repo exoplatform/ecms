@@ -57,9 +57,6 @@ class UploadSpec extends ExoSpecification {
     exoDrives.createUser(USER_NAME);
   }
 
-  /**
-   * {@inheritDoc}
-   */
   @Override
   public Object cleanup() {
     exoDrives.removeUser(USER_NAME)

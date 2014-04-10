@@ -38,10 +38,12 @@ import org.exoplatform.services.security.UsernameCredential;
 
 import java.io.ByteArrayInputStream;
 import java.io.InputStream;
+import java.lang.reflect.UndeclaredThrowableException;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Calendar;
 import java.util.List;
+import java.util.concurrent.ExecutionException;
 
 import javax.jcr.Node;
 import javax.jcr.NodeIterator;
@@ -141,12 +143,12 @@ public class TestCloudDriveService extends TestCase {
     // create 1- files in the exo drive
     int filesCount = 10;
 
-    String fileContnetPattern = "test";
+    String fileContentPattern = "test";
     exoDrives.createUser(cloudUser.getUsername());
     for (int i = 1; i <= filesCount; i++) {
       String fname = FILE_NAME_PATTERN + i + ".txt";
-      FileStore fs = exoDrives.create(cloudUser.getUsername(), fname, "tetx/plain", Calendar.getInstance());
-      InputStream stream = new ByteArrayInputStream((fileContnetPattern + i).getBytes());
+      FileStore fs = exoDrives.create(cloudUser.getUsername(), fname, "text/plain", Calendar.getInstance());
+      InputStream stream = new ByteArrayInputStream((fileContentPattern + i).getBytes());
       fs.write(stream);
       stream.close();
     }
@@ -221,6 +223,26 @@ public class TestCloudDriveService extends TestCase {
     }
   }
 
+  protected void connect(CloudDrive drive) throws CloudDriveException, RepositoryException {
+    try {
+      drive.connect().await();
+    } catch (InterruptedException e) {
+      LOG.warn("Caller of connect command interrupted.", e);
+      Thread.currentThread().interrupt();
+    } catch (ExecutionException e) {
+      Throwable err = e.getCause();
+      if (err instanceof CloudDriveException) {
+        throw (CloudDriveException) err;
+      } else if (err instanceof RepositoryException) {
+        throw (RepositoryException) err;
+      } else if (err instanceof RuntimeException) {
+        throw (RuntimeException) err;
+      } else {
+        throw new UndeclaredThrowableException(err, "Error connecting drive: " + err.getMessage());
+      }
+    }
+  }
+  
   /**
    * Test if drive connected well, has expected nodetypes and subnodes.
    * 
@@ -233,7 +255,7 @@ public class TestCloudDriveService extends TestCase {
     testRoot.save();
     try {
       drive = cdService.createDrive(cloudUser, driveNode);
-      drive.connect();
+      connect(drive);
     } catch (CloudDriveException e) {
       LOG.error("testConnect(): ", e);
       fail("Error: " + e);
@@ -268,7 +290,7 @@ public class TestCloudDriveService extends TestCase {
     testRoot.save();
     try {
       drive = cdService.createDrive(cloudUser, driveNode);
-      drive.connect();
+      connect(drive);
     } catch (CloudDriveException e) {
       LOG.error("testDisconnect(): ", e);
       fail("Error: " + e);
@@ -292,7 +314,7 @@ public class TestCloudDriveService extends TestCase {
     assertTrue("Drive node should not have sub-files", driveNode.getNodes().getSize() == 0);
   }
 
-  public void testSynchronize() throws RepositoryException {
+  public void testSynchronize() throws RepositoryException, ExecutionException, InterruptedException {
     try {
       String driveName = provider.getName() + " - " + cloudUser.getEmail();
       Node driveNode = testRoot.addNode(driveName, "nt:folder");
@@ -300,7 +322,7 @@ public class TestCloudDriveService extends TestCase {
       
       // connect
       drive = cdService.createDrive(cloudUser, driveNode);
-      drive.connect();
+      connect(drive);
 
       // create local node in JCR
       Node syncNode1 = driveNode.addNode("test_to_sync1", "nt:file");
@@ -320,7 +342,7 @@ public class TestCloudDriveService extends TestCase {
       driveNode.save();
 
       // synchronize the whole drive, only cloud files should be on the drive
-      drive.synchronize();
+      drive.synchronize().await();
 
       // check if both nodes are on the drive storage
       assertFilesNotExist(exoDrives.listFiles(cloudUser.getUsername()), "test_to_sync1", "test_to_sync2");
@@ -346,7 +368,7 @@ public class TestCloudDriveService extends TestCase {
       
       // connect
       drive = cdService.createDrive(cloudUser, driveNode);
-      drive.connect();
+      connect(drive);
 
       // create local node in JCR
       Node syncNode1 = driveNode.addNode("test_to_sync1", "nt:file");
@@ -366,10 +388,10 @@ public class TestCloudDriveService extends TestCase {
       driveNode.save();
 
       // synchronize the whole drive
-      Command syncCmd = drive.synchronize(syncNode2);
+      Command syncCmd = drive.synchronize(); // TODO ?
       // respect async behaviour
       int i = 0;
-      while (!syncCmd.isDone()) {
+      while (!syncCmd.isStarted()) {
         assertTrue("Sync command not finished in time", i <= 50);
         Thread.sleep(200);
         i++;

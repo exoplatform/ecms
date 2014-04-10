@@ -60,7 +60,7 @@ public class CloudFolderAction extends AbstractJCRAction {
           try {
             start(localDrive);
             // 3. try to synchronize
-            localDrive.synchronize(cloudFolder);
+            localDrive.synchronize(); // TODO ?
             return true;
           } catch (SyncNotSupportedException e) {
             LOG.error("Node cannot be stored in Cloud Drive. Action Node was: " + cloudFolder.getPath(), e);

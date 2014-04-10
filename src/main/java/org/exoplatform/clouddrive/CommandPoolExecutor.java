@@ -16,9 +16,8 @@
  * Software Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA
  * 02110-1301 USA, or see the FSF site: http://www.fsf.org.
  */
-package org.exoplatform.clouddrive.jcr;
+package org.exoplatform.clouddrive;
 
-import org.exoplatform.clouddrive.CloudDrive;
 import org.exoplatform.clouddrive.CloudDrive.Command;
 import org.exoplatform.services.log.ExoLogger;
 import org.exoplatform.services.log.Log;
@@ -50,14 +49,14 @@ public class CommandPoolExecutor {
   /**
    * Wait period for synchronization process in milliseconds.
    */
-  public static final long                      SYNC_PERIOD  = 10000;
+  public static final long             SYNC_PERIOD  = 10000;
 
   /**
    * A timeout to wait for scheduler stop in milliseconds. It is four times bigger of SYNC_PERIOD.
    */
-  public static final long                      STOP_TIMEOUT = 4 * SYNC_PERIOD;
+  public static final long             STOP_TIMEOUT = 4 * SYNC_PERIOD;
 
-  protected static final Log                    LOG          = ExoLogger.getLogger(CommandPoolExecutor.class);
+  protected static final Log           LOG          = ExoLogger.getLogger(CommandPoolExecutor.class);
 
   protected static CommandPoolExecutor singleton;
 
@@ -65,11 +64,11 @@ public class CommandPoolExecutor {
    * Command thread factory adapted from {@link Executors#DefaultThreadFactory}.
    */
   static class CommandThreadFactory implements ThreadFactory {
-    final ThreadGroup          group;
+    final ThreadGroup   group;
 
-    final AtomicInteger        threadNumber = new AtomicInteger(1);
+    final AtomicInteger threadNumber = new AtomicInteger(1);
 
-    final String               namePrefix;
+    final String        namePrefix;
 
     CommandThreadFactory() {
       SecurityManager s = System.getSecurityManager();
@@ -78,7 +77,18 @@ public class CommandPoolExecutor {
     }
 
     public Thread newThread(Runnable r) {
-      Thread t = new Thread(group, r, namePrefix + threadNumber.getAndIncrement(), 0);
+      Thread t = new Thread(group, r, namePrefix + threadNumber.getAndIncrement(), 0) {
+
+        /**
+         * {@inheritDoc}
+         */
+        @Override
+        protected void finalize() throws Throwable {
+          super.finalize();
+          threadNumber.decrementAndGet();
+        }
+
+      };
       if (t.isDaemon())
         t.setDaemon(false);
       if (t.getPriority() != Thread.NORM_PRIORITY)
@@ -96,7 +106,7 @@ public class CommandPoolExecutor {
    * 
    * @return {@link CommandPoolExecutor} instance
    */
-  static CommandPoolExecutor getInstance() {
+  public static CommandPoolExecutor getInstance() {
     if (singleton == null) {
       singleton = new CommandPoolExecutor();
     }
@@ -115,7 +125,7 @@ public class CommandPoolExecutor {
     return executor.submit(command);
   }
 
-  void stop() {
+  public void stop() {
     stopSheduller();
   }
 
@@ -143,8 +153,9 @@ public class CommandPoolExecutor {
 
     // Executor will queue all commands and run them in maximum six threads. Two threads will be maintained
     // online even idle, other inactive will be stopped in two minutes.
+    // TODO calculate max pool size taking in account actual CPU of the machine
     executor = new ThreadPoolExecutor(2,
-                                      6,
+                                      10,
                                       120,
                                       TimeUnit.SECONDS,
                                       new LinkedBlockingQueue<Runnable>(),

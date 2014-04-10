@@ -19,6 +19,7 @@ package org.exoplatform.clouddrive;
 import org.exoplatform.clouddrive.features.CloudDriveFeatures;
 import org.exoplatform.clouddrive.features.PermissiveFeatures;
 import org.exoplatform.clouddrive.jcr.JCRLocalCloudDrive;
+import org.exoplatform.clouddrive.jcr.NtFileSynchronizer;
 import org.exoplatform.container.component.ComponentPlugin;
 import org.exoplatform.services.jcr.RepositoryService;
 import org.exoplatform.services.jcr.config.WorkspaceEntry;
@@ -93,7 +94,7 @@ public class CloudDriveServiceImpl implements CloudDriveService, Startable {
     }
   }
 
-  protected static final Log                                 LOG              = ExoLogger.getLogger(CloudDriveService.class);
+  protected static final Log                                 LOG               = ExoLogger.getLogger(CloudDriveService.class);
 
   protected final RepositoryService                          jcrService;
 
@@ -102,12 +103,12 @@ public class CloudDriveServiceImpl implements CloudDriveService, Startable {
   /**
    * Registered CloudDrive connectors.
    */
-  protected final Map<CloudProvider, CloudDriveConnector>    connectors       = new HashMap<CloudProvider, CloudDriveConnector>();
+  protected final Map<CloudProvider, CloudDriveConnector>    connectors        = new HashMap<CloudProvider, CloudDriveConnector>();
 
   /**
    * In-memory multiton for drives created per repository and per user. Only connected drives here.
    */
-  protected final Map<String, Map<CloudUser, CloudDrive>>    repositoryDrives = new ConcurrentHashMap<String, Map<CloudUser, CloudDrive>>();
+  protected final Map<String, Map<CloudUser, CloudDrive>>    repositoryDrives  = new ConcurrentHashMap<String, Map<CloudUser, CloudDrive>>();
 
   /**
    * User-in-repositoryDrives reference map for unregistration of disconnected and removed drives (via
@@ -115,9 +116,11 @@ public class CloudDriveServiceImpl implements CloudDriveService, Startable {
    * 
    * @see #repositoryDrives
    */
-  protected final Map<CloudUser, Map<CloudUser, CloudDrive>> userDrives       = new ConcurrentHashMap<CloudUser, Map<CloudUser, CloudDrive>>();
+  protected final Map<CloudUser, Map<CloudUser, CloudDrive>> userDrives        = new ConcurrentHashMap<CloudUser, Map<CloudUser, CloudDrive>>();
 
-  protected final Set<CloudDriveListener>                    drivesListeners  = new LinkedHashSet<CloudDriveListener>();
+  protected final Set<CloudDriveListener>                    drivesListeners   = new LinkedHashSet<CloudDriveListener>();
+
+  protected final Set<CloudFileSynchronizer>                 fileSynchronizers = new LinkedHashSet<CloudFileSynchronizer>();
 
   /**
    * Managed features specification.
@@ -147,6 +150,8 @@ public class CloudDriveServiceImpl implements CloudDriveService, Startable {
     this.drivesListeners.add(new LocalDrivesListener());
 
     this.features = features;
+
+    this.fileSynchronizers.add(new NtFileSynchronizer()); // default one for nt:file + nt:folder
   }
 
   /**
@@ -175,6 +180,9 @@ public class CloudDriveServiceImpl implements CloudDriveService, Startable {
     } else if (plugin instanceof CloudDriveListener) {
       // global listeners
       drivesListeners.add((CloudDriveListener) plugin);
+    } else if (plugin instanceof CloudFileSynchronizer) {
+      // sync plugin
+      fileSynchronizers.add((CloudFileSynchronizer) plugin);
     } else {
       LOG.warn("Cannot recognize component plugin for " + plugin.getName() + ": type " + plugin.getClass()
           + " not supported");
@@ -322,7 +330,7 @@ public class CloudDriveServiceImpl implements CloudDriveService, Startable {
                                   user.getId(),
                                   user.getProvider())) {
         CloudDrive local = conn.createDrive(user, driveNode);
-        local.configure(commandEnv);
+        local.configure(commandEnv, fileSynchronizers);
         registerDrive(user, local, repoName);
         return local;
       } else {
@@ -433,7 +441,7 @@ public class CloudDriveServiceImpl implements CloudDriveService, Startable {
                 Set<CloudDrive> locals = conn.loadStored(pd.getValue());
                 for (CloudDrive local : locals) {
                   if (local.isConnected()) {
-                    local.configure(commandEnv);
+                    local.configure(commandEnv, fileSynchronizers);
                     CloudUser user = local.getUser();
                     String repoName = jcrRepository.getConfiguration().getName();
                     registerDrive(user, local, repoName);

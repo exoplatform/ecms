@@ -169,7 +169,7 @@
         <valueConstraints />
       </propertyDefinition>
     </propertyDefinitions>
-    <childNodeDefinitions>
+    <childNodeDefinitions><!-- ecd:cloudFile not used as child node -->
       <childNodeDefinition name="ecd:cloudFile" autoCreated="false" mandatory="false"
         onParentVersion="ABORT" protected="false" sameNameSiblings="false">
         <requiredPrimaryTypes>
@@ -178,5 +178,9 @@
       </childNodeDefinition>
     </childNodeDefinitions>
   </nodeType>
-
+  
+  <!-- a nodetype-marker of ignored nodes inside cloud drive (for technical nodes) -->
+  <nodeType name="ecd:ignored" isMixin="true" hasOrderableChildNodes="false" primaryItemName="">
+  </nodeType>
+  
 </nodeTypes>

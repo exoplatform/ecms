@@ -117,7 +117,7 @@ public class ChangesService implements ResourceContainer {
               CloudDrive local = cloudDrives.findDrive(userNode);
               if (local != null) {
                 try {
-                  Command sync = local.synchronize(true);
+                  Command sync = local.synchronize();
 
                   // wait a bit here to let the sync to init and do empty check
                   try {

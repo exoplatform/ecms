@@ -16,9 +16,9 @@
  */
 package org.exoplatform.clouddrive.exodrive;
 
-import org.exoplatform.clouddrive.CloudDriveAccessException;
 import org.exoplatform.clouddrive.CloudDriveException;
 import org.exoplatform.clouddrive.CloudFile;
+import org.exoplatform.clouddrive.CloudFileAPI;
 import org.exoplatform.clouddrive.CloudProviderException;
 import org.exoplatform.clouddrive.CloudUser;
 import org.exoplatform.clouddrive.DriveRemovedException;
@@ -30,9 +30,12 @@ import org.exoplatform.clouddrive.jcr.JCRLocalCloudDrive;
 import org.exoplatform.clouddrive.jcr.JCRLocalCloudFile;
 import org.exoplatform.services.jcr.ext.app.SessionProviderService;
 
+import java.io.InputStream;
+import java.util.Calendar;
 import java.util.List;
 
 import javax.jcr.Node;
+import javax.jcr.PathNotFoundException;
 import javax.jcr.RepositoryException;
 
 /**
@@ -80,17 +83,17 @@ public class JCRLocalExoDrive extends JCRLocalCloudDrive {
                    f.getModifiedDate());
 
           changed.add(new JCRLocalCloudFile(localNode.getPath(),
-                                           f.getId(),
-                                           f.getName(),
-                                           f.getType(),
-                                           f.getLink(),
-                                           f.getLink(),
-                                           f.getLink(),
-                                           f.getAuthor(),
-                                           f.getAuthor(),
-                                           f.getCreateDate(),
-                                           f.getModifiedDate(),
-                                           false));
+                                            f.getId(),
+                                            f.getName(),
+                                            f.getType(),
+                                            f.getLink(),
+                                            f.getLink(),
+                                            f.getLink(),
+                                            f.getAuthor(),
+                                            f.getAuthor(),
+                                            f.getCreateDate(),
+                                            f.getModifiedDate(),
+                                            false));
           complete++;
         }
       } catch (ExoDriveException e) {
@@ -147,17 +150,17 @@ public class JCRLocalExoDrive extends JCRLocalCloudDrive {
                    f.getModifiedDate());
 
           changed.add(new JCRLocalCloudFile(localNode.getPath(),
-                                           f.getId(),
-                                           f.getName(),
-                                           f.getType(),
-                                           f.getLink(),
-                                           f.getLink(),
-                                           f.getLink(),
-                                           f.getAuthor(),
-                                           f.getAuthor(),
-                                           f.getCreateDate(),
-                                           f.getModifiedDate(),
-                                           false));
+                                            f.getId(),
+                                            f.getName(),
+                                            f.getType(),
+                                            f.getLink(),
+                                            f.getLink(),
+                                            f.getLink(),
+                                            f.getAuthor(),
+                                            f.getAuthor(),
+                                            f.getCreateDate(),
+                                            f.getModifiedDate(),
+                                            false));
           complete++;
         }
       } catch (ExoDriveException e) {
@@ -182,37 +185,128 @@ public class JCRLocalExoDrive extends JCRLocalCloudDrive {
     }
   }
 
-  class ExoDriveFileSync extends SyncFileCommand {
+  protected class FileAPI extends AbstractFileAPI {
 
-    public ExoDriveFileSync(Node file) throws RepositoryException,
-        DriveRemovedException,
-        SyncNotSupportedException {
-      super(file);
+    String filePath(Node fileNode) throws RepositoryException, CloudDriveException {
+      String nodePath = fileNode.getPath();
+      String drivePath = rootPath();
+      int si = drivePath.length() + 1; // w/o a next file separator
+      if (nodePath.startsWith(drivePath) && nodePath.length() > si) {
+        return nodePath.substring(si);
+      } else {
+        throw new CloudDriveException("Not a drive file " + nodePath);
+      }
     }
 
     /**
      * {@inheritDoc}
      */
     @Override
-    public long getComplete() {
-      return COMPLETE; // XXX
+    public String createFile(Node fileNode,
+                             String description,
+                             Calendar created,
+                             Calendar modified,
+                             String mimeType,
+                             InputStream content) throws CloudDriveException, RepositoryException {
+      try {
+        FileStore fs = service.create(user.getUsername(), filePath(fileNode), mimeType, created);
+        fs.write(content);
+        return fs.getId();
+      } catch (ExoDriveException e) {
+        throw new CloudDriveException("Error creating cloud file " + getTitle(fileNode), e);
+      }
     }
 
     /**
      * {@inheritDoc}
      */
     @Override
-    public long getAvailable() {
-      return COMPLETE; // XXX
+    public String createFolder(Node folderNode, String description, Calendar created) throws CloudDriveException,
+                                                                                     RepositoryException {
+      try {
+        FileStore fs = service.create(user.getUsername(),
+                                      filePath(folderNode),
+                                      FileStore.TYPE_FOLDER,
+                                      created);
+        return fs.getId();
+      } catch (ExoDriveException e) {
+        throw new CloudDriveException("Error creating cloud folder " + getTitle(folderNode), e);
+      }
     }
 
     /**
      * {@inheritDoc}
      */
     @Override
-    protected void process() throws CloudDriveAccessException, CloudDriveException, RepositoryException {
-      // XXX nothing
+    public void updateFile(Node fileNode, String description, Calendar modified) throws CloudDriveException,
+                                                                                RepositoryException {
+      // TODO
+      // try {
+      // FileStore fs = service.create(user.getUsername(), filePath(fileNode), mimeType, created);
+      // } catch (ExoDriveException e) {
+      // throw new CloudDriveException("Error creating cloud file " + getTitle(fileNode), e);
+      // }
     }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public void updateFolder(Node folderNode, String description, Calendar modified) throws CloudDriveException,
+                                                                                    RepositoryException {
+      // TODO Auto-generated method stub
+
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public void updateFileContent(Node fileNode,
+                                  String description,
+                                  Calendar modified,
+                                  String mimeType,
+                                  InputStream content) throws CloudDriveException, RepositoryException {
+      // TODO Auto-generated method stub
+
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public void remove(String id) throws CloudDriveException, RepositoryException {
+      // TODO Auto-generated method stub
+
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public boolean trash(String id) throws CloudDriveException, RepositoryException {
+      // TODO Auto-generated method stub
+      return false;
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public boolean untrash(Node fileNode) throws CloudDriveException, RepositoryException {
+      // TODO Auto-generated method stub
+      return false;
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public boolean isTrashSupported() {
+      // TODO Auto-generated method stub
+      return false;
+    }
+
   }
 
   /**
@@ -413,6 +507,14 @@ public class JCRLocalExoDrive extends JCRLocalCloudDrive {
    * {@inheritDoc}
    */
   @Override
+  protected String getChangeId() throws DriveRemovedException, RepositoryException {
+    return "0"; // not maintained as used by single user
+  }
+
+  /**
+   * {@inheritDoc}
+   */
+  @Override
   protected void checkAccess() throws CloudDriveException {
   }
 
@@ -445,9 +547,10 @@ public class JCRLocalExoDrive extends JCRLocalCloudDrive {
    * {@inheritDoc}
    */
   @Override
-  protected SyncFileCommand getSyncFileCommand(Node file) throws DriveRemovedException,
-                                                         SyncNotSupportedException,
-                                                         RepositoryException {
-    return new ExoDriveFileSync(file);
+  protected CloudFileAPI createFileAPI() throws DriveRemovedException,
+                                        SyncNotSupportedException,
+                                        RepositoryException {
+    return new FileAPI();
   }
+
 }

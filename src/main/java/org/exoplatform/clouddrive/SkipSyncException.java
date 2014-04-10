@@ -16,40 +16,25 @@
  */
 package org.exoplatform.clouddrive;
 
-import java.util.Calendar;
-
 /**
- *  General abstraction for cloud file.
- *
+ * Created by The eXo Platform SAS
+ * 
+ * @author <a href="mailto:pnedonosko@exoplatform.com">Peter Nedonosko</a>
+ * @version $Id: SkipSyncException.java 00000 Apr 7, 2014 pnedonosko $
+ * 
  */
-public interface CloudFile {
-  
-  String getId();
-  
-  String getTitle();
-  
-  String getLink();
-  
-  String getPreviewLink();
-  
-  String getThumbnailLink();
-  
-  String getType();
+public class SkipSyncException extends CloudDriveException {
 
-  String getLastUser();
-
-  String getAuthor();
-
-  Calendar getCreatedDate();
-  
-  Calendar getModifiedDate();
-  
-  boolean isFolder();
-  
   /**
-   * Path to the cloud file in local storage.
    * 
-   * @return {@link String}
    */
-  String getPath();
+  private static final long serialVersionUID = -7053103350175153575L;
+
+  /**
+   * @param message
+   */
+  public SkipSyncException(String message) {
+    super(message);
+  }
+
 }
