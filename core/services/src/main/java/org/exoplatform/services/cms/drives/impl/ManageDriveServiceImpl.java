@@ -509,6 +509,9 @@ public class ManageDriveServiceImpl implements ManageDriveService, Startable {
       return new ArrayList<DriveData>((List<DriveData>) drives);
     List<DriveData> groupDrives = new ArrayList<DriveData>();
     DriveData groupDrive = getDriveByName("Groups");
+    if(groupDrive == null){
+      return groupDrives;
+    }
     String[] allPermission = groupDrive.getAllPermissions();
     boolean flag = false;
     for (String role : userRoles) {
