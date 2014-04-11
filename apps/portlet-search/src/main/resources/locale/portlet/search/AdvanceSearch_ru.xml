@@ -33,9 +33,7 @@
       <edit>Редактировать</edit>
     </action>
     <msg>
-      <your-search>Ваш поиск</your-search>
-      <did-not-match>совпадений не найдено</did-not-match>
-      <new-suggestion>предложение</new-suggestion>
+      <search-not-match-type>Your search {0} does not match any {1}.</search-not-match-type>
     </msg>
   </UIDefaultSearchResult>
   <UISearchPageLayoutManager>

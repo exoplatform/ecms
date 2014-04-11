@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<bundle>
+  <PublicationService>
+    <AuthoringPublicationPlugin>
+      <changeState>
+        <obsoleted>Застарілий контент</obsoleted>
+        <published>Контент опублікований</published>
+<unpublished>Контент не був опублікований</unpublished>
+<archived>Заархівувати контент</archived>
+<staged>Контент розміщений</staged>
+<approved>Контент затверджений</approved>
+<pending>Контент перебуває на розгляді</pending>
+<draft>Контент в чорновому варіанті</draft>
+      </changeState>
+    </AuthoringPublicationPlugin>
+  </PublicationService>
+  <Publication>
+    <log>
+      <description>
+        <enrolled>Зміст надходить до Публікації життєвого циклу</enrolled>
+      </description>
+    </log>
+  </Publication>
+</bundle>

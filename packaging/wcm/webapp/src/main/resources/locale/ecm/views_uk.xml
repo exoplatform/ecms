@@ -1,0 +1,227 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<bundle>
+ 
+  <View>
+    <label>
+      <languages>
+        <en>Англійська</en>
+        <fr>Французька</fr>
+        <ru>Російська</ru>
+        <vi>В’єтнамська</vi>
+        <nl>Голландська</nl>
+        <de>Німецька</de>
+        <uk>Українська</uk>
+        <ar>Арабська</ar>
+      </languages>
+    </label>
+  </View>
+ 
+  <!--
+  ################resoucebundle FOR EXO:COMMENT VIEW TEMPLATE#############
+  -->
+  <Comment>
+    <view>
+      <label>
+        <postedBy>Останній коментар написаний</postedBy>
+        <at>в</at>
+        <comments>Комментар(і)</comments>
+        <show-comments>Показати коментарі</show-comments>
+        <hide-comments>Приховати коментарі</hide-comments>
+        <comment-by>Прокоментував</comment-by>
+        <email>Електронна пошта</email>
+        <site>Сайт</site>
+      </label>
+    </view>
+  </Comment>
+ 
+  <!--
+  ################resoucebundle FOR NT:FILE VIEW TEMPLATE##############
+  -->
+  <File>
+    <view>
+      <label>
+        <not-viewable>Перегляд цього документа недоступний.</not-viewable>
+        <using-webDAV>або відкрийте в MS Office</using-webDAV>
+        <file-size-too-big>Вміст цього файлу завеликий. Вам необхідно завантажити та відкрити у клієнті.</file-size-too-big>
+        <webDAV>WebDAV подання</webDAV>
+        <download>Завантажити</download>
+        <htmlview>Подати як HTML</htmlview>
+        <plaintextview>Показати як звичайний текст</plaintextview>
+      </label>
+    </view>
+  </File>
+ 
+  <!--
+  ################resoucebundle FOR MAIL:DOCUMENT VIEW TEMPLATE##############
+  -->
+  <Mail>
+    <view>
+      <label>
+        <from>Від:</from>
+        <to>До:</to>
+        <cc>Cc:</cc>
+        <date>Дата:</date>
+        <subject>Тема:</subject>
+        <attachment>Вкладення:</attachment>
+      </label>
+    </view>
+  </Mail>
+  <!--
+  ################resoucebundle FOR EXO:VOTE VIEW TEMPLATE##############
+  -->
+  <Vote>
+    <view>
+      <label>
+        <avg-rating>Середній рейтинг</avg-rating>
+        <subscription>Голоси</subscription>
+      </label>
+    </view>
+  </Vote>
+  <!--
+  ################resoucebundle FOR LISTVIEW VIEW TEMPLATE##############
+  -->
+  <ListView>
+    <view>
+      <label>
+        <name>Ім’я</name>
+        <versionable>Версійний</versionable>
+        <exo_owner>Власник</exo_owner>
+        <exo_dateCreated>дата створення</exo_dateCreated>
+        <exo_dateModified>Дата змінення</exo_dateModified>
+        <auditing>Аудит</auditing>
+      </label>
+    </view>
+  </ListView>
+
+  <!--
+  ###################### resoucebundle for exo:addMetadataAction view template ####
+  -->
+  <AddMetadata>
+    <view>
+      <label>
+        <action-name>Ім'я дії</action-name>
+        <lifecycle>Життєвий цикл</lifecycle>
+        <metadata>Метадані</metadata>
+        <description>Опис</description>
+      </label>
+    </view>
+  </AddMetadata>
+
+  <!--
+  ###################### resoucebundle for exo:autoVersioning view template ####
+  -->
+  <AutoVersioning>
+    <view>
+      <label>
+        <action-name>Ім'я дії</action-name>
+        <lifecycle>Життєвий цикл</lifecycle>
+        <description>Опис</description>
+      </label>
+    </view>
+  </AutoVersioning>
+  <!--
+  ###################### resoucebundle for exo:enableVersiong view template ####
+  -->
+  <EnableVersioning>
+    <view>
+      <label>
+        <action-name>Ім’я</action-name>
+        <lifecycle>Життєвий цикл</lifecycle>
+        <description>Опис</description>
+      </label>
+    </view>
+  </EnableVersioning>
+  <!--
+  ###################### resoucebundle for dc:elementSet view template ####
+  -->
+  <ElementSet>
+    <view>
+      <label>
+        <not-avaliable>Н/Д</not-avaliable>
+        <core-elements>Основні елементи</core-elements>
+        <title>Назва</title>
+        <creator>Розробник</creator>
+        <subject>Тема</subject>
+        <source>Джерело</source>
+        <contributor>Співавтор</contributor>
+        <resource-type>Тип ресурсу</resource-type>
+        <date>Дата</date>
+        <publisher>Видавець</publisher>
+        <description>Опис</description>
+        <rights>Права</rights>
+        <relation>Співвідношення</relation>
+        <format>Формати</format>
+        <coverage>Покриття</coverage>
+        <identifier>Ідентифікатор</identifier>
+        <languages>Мови</languages>
+      </label>
+      <action>
+        <add-edit>Додати/Редагувати</add-edit>
+        <cancel>#{word.cancel}</cancel>
+      </action>
+      <tooltip>
+        <cancel>#{word.cancel}</cancel>
+        <add-edit>Додати/редагувати властивості</add-edit>
+      </tooltip>
+    </view>
+  </ElementSet>
+
+  <ScriptAction>
+    <view>
+      <label> 
+        <isDeep>Глибоке</isDeep>
+        <nodetypes>Типи вузлів</nodetypes>
+        <affectedNodeTypeNames>Уражені типи вузлів</affectedNodeTypeNames>
+        <nodeTypeName>Назви типів вузла</nodeTypeName>
+      </label> 
+    </view>
+  </ScriptAction>
+  
+  <AddMetadata>
+    <view>
+      <label>
+        <isDeep>Глибоке</isDeep>
+        <nodetypes>Типи вузла</nodetypes>
+        <affectedNodeTypeNames>Вражені типи вузла</affectedNodeTypeNames>
+        <nodeTypeName>Назви типу вузла</nodeTypeName>
+      </label> 
+    </view>
+  </AddMetadata>
+
+  <EnableVersioning>
+    <view>
+      <label>
+        <isDeep>Глибоке</isDeep>
+        <nodetypes>Типи вузла</nodetypes> 
+        <affectedNodeTypeNames>Вражені типи вузла</affectedNodeTypeNames>
+        <nodeTypeName>Назви типу вузла</nodeTypeName>
+      </label> 
+    </view>
+  </EnableVersioning>
+  
+  <AutoVersioning>
+    <view>
+      <label>
+        <isDeep>Глибоке</isDeep>
+        <nodetypes>Типи вузла</nodetypes>
+        <affectedNodeTypeNames>Вражені типи вузла</affectedNodeTypeNames>
+        <nodeTypeName>Назви типу вузла</nodeTypeName>
+      </label> 
+    </view>
+  </AutoVersioning>
+  
+   <AccessibleMedia>
+    <view>
+      <label>
+      <Play-audio-description-of-this-video>Звуковий опис</Play-audio-description-of-this-video>
+      <Read-more>Читати далі</Read-more>
+      <Read-less>Приховати деталі</Read-less>
+      <Switch-back-to-original-video>Оригінальне відео</Switch-back-to-original-video>
+      </label>
+      <tooltip>
+      <A-second-media-file-is-available-as-audio-description>Другий мультимедійний файл доступний в якості звукового опису</A-second-media-file-is-available-as-audio-description>
+      </tooltip>
+    </view>
+  </AccessibleMedia>
+ 
+</bundle>

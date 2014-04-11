@@ -1,0 +1,189 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<bundle>
+  <UICLVContainer>
+    <label>
+      <Preferences>Налаштування</Preferences>
+      <AddContent>Додати контент</AddContent>
+      <ManageContent>Керування контентом</ManageContent>
+    </label>
+    <msg>
+      <non-contents>На жаль, статті недоступні.</non-contents>
+      <item-not-found>Елемент не знайдено.</item-not-found>
+      <no-permission>Ви не маєте дозволу на доступ до цього вузла.</no-permission>
+      <category-back>Перейти до попереднього</category-back>
+    </msg>
+  </UICLVContainer>
+  <UIViewerManagementPopupWindow>
+    <title>
+      <UICLVConfig>Налаштування вмісту списку</UICLVConfig>
+    </title>
+  </UIViewerManagementPopupWindow>
+  <UICLVConfig>
+    <label>
+      <Title>Налаштування вмісту списку</Title>
+      <ContentSelectionBlock>Вибір контенту</ContentSelectionBlock>
+      <UICLVConfigDisplayModeFormRadioBoxInput>Режим</UICLVConfigDisplayModeFormRadioBoxInput>
+      <UICLVConfigItemPathFormInputSet>Шлях до папки</UICLVConfigItemPathFormInputSet>
+    <UICLVConfigItemPathFormStringInput>Шлях до папки</UICLVConfigItemPathFormStringInput>
+      <UICLVConfigOrderByFormSelectBox>Сортувати по</UICLVConfigOrderByFormSelectBox>
+      <option>
+        <exo:title>Назва</exo:title>
+        <exo:dateCreated>Датою створення</exo:dateCreated>
+        <exo:lastModifiedDate>Датою модифікації</exo:lastModifiedDate>
+        <publication:liveDate>Дата публікації</publication:liveDate>
+        <exo:startEvent>Дата події</exo:startEvent>
+        <exo:index>Індекс</exo:index>
+        <DESC>По спаданню</DESC>
+        <ASC>По висхідній</ASC>
+      </option>
+      <DisplaySettingBlock>Налаштування відображення</DisplaySettingBlock>
+      <UICLVConfigHeaderFormStringInput>Заголовок</UICLVConfigHeaderFormStringInput>
+      <UICLVConfigDisplayTemplateFormSelectBox>Шаблон</UICLVConfigDisplayTemplateFormSelectBox>
+      <UICLVConfigPaginatorTemplateFormSelectBox>Розбивка на сторінки</UICLVConfigPaginatorTemplateFormSelectBox>
+      <UICLVConfigItemsPerPageFormStringInput>Результатів на сторінці</UICLVConfigItemsPerPageFormStringInput>
+      <UICLVConfigShowIllustrationFormCheckboxInput>Show Image</UICLVConfigShowIllustrationFormCheckboxInput>
+      <UICLVConfigShowSummaryFormCheckboxInput>Show Summary</UICLVConfigShowSummaryFormCheckboxInput>
+      <UICLVConfigShowHeaderFormCheckboxInput>Show Header</UICLVConfigShowHeaderFormCheckboxInput>
+      <UICLVConfigShowRefreshFormCheckboxInput>Show Refresh</UICLVConfigShowRefreshFormCheckboxInput>
+      <UICLVConfigShowTitleFormCheckboxInput>Показувати назву</UICLVConfigShowTitleFormCheckboxInput>
+      <UICLVConfigShowDateCreatedFormCheckboxInput>Показати дату</UICLVConfigShowDateCreatedFormCheckboxInput>
+      <UICLVConfigShowLinkFormCheckboxInput>Show Link</UICLVConfigShowLinkFormCheckboxInput>
+      <UICLVConfigShowReadmoreFormCheckboxInput>Show More Links</UICLVConfigShowReadmoreFormCheckboxInput>
+      <UICLVConfigAllowDynamicUrlStringInput>Allow Dynamic URL</UICLVConfigAllowDynamicUrlStringInput>
+      <UICLVConfigShowRssLinkFormCheckboxInput>Show RSS Link</UICLVConfigShowRssLinkFormCheckboxInput>
+      <UICLVConfigShowAutomaticDetectionCheckboxInput>Automatic Detection</UICLVConfigShowAutomaticDetectionCheckboxInput>
+      <AdvancedBlock>Розширені налаштування</AdvancedBlock>
+      <UICLVConfigDynamicNavigationLabel>Динамічна навігація</UICLVConfigDynamicNavigationLabel>
+      <UICLVConfigContextualFolderRadioBoxInput>Contextual Folder</UICLVConfigContextualFolderRadioBoxInput>
+      <UICLVConfigShowCLVByStringInput>за</UICLVConfigShowCLVByStringInput>
+      <UICLVConfigshowSCVWithStringInput>з</UICLVConfigshowSCVWithStringInput>
+      <UICLVConfigTargetPageFormInputSet>Показати на сторінці</UICLVConfigTargetPageFormInputSet>
+      <content-not-found>Content not found.</content-not-found>
+      <ContentPath>Шлях до змісту</ContentPath>
+      <Up>Up</Up>
+      <Down>Down</Down>
+      <UICLVConfigCacheManagementLabel>Видимість контенту</UICLVConfigCacheManagementLabel>
+      <UICLVContentByQueryLabel>Content by Query</UICLVContentByQueryLabel>
+      <UICLVConfigWorkspaceFormSelectBox>Робоча область</UICLVConfigWorkspaceFormSelectBox>
+      <UICLVConfigContentByQueryTextArea>by query</UICLVConfigContentByQueryTextArea>
+      <UICLVConfigCacheEnableRadioBoxInput>Share content between users</UICLVConfigCacheEnableRadioBoxInput>
+    </label>
+    <help>
+      <ModeSelectionHelp>Доступні два режими відображення вмісту. «За папкою" прийме всі матеріали, доступні у вибраній папка/категорія. "За змістом" дає вам змогу вручну вибрати вміст, який ви хочете показати.</ModeSelectionHelp>
+      <FolderPathHelp>Виберіть вміст, який ви хочете показати. Вибір за замовчуванням буде замінено динамічно , якщо активувати опцію Динамічні навігації (див. нижче режим Розширених налаштувань).</FolderPathHelp>
+      <HeaderOptionHelp>Відображати заголовок на вершині списку вмісту. Якщо активувати параметр автоматичного виявлення, він спробує знайти заголовок на основі поточного виділення.</HeaderOptionHelp>
+      <GeneralOptionHelp>Select the graphical elements you want to show in your list. Note that, depending on your selected template, some elements may not be available.</GeneralOptionHelp>
+      <ContextualHelp>Активує опцію Динамічні навігації. Інші можуть змінити вміст динамічно на основі параметру URL-адреси.</ContextualHelp>
+      <ParameterHelp>Цей параметр буде використовуватися для доступу до вмісту, якщо активована Динамічна навігація.</ParameterHelp>
+      <ShowDetailInPageHelp>Натискання на вміст переспрямовує користувача на сторінку Деталі. Для відображення контенту на цільовій сторінці, у вас повинен бути включений портлет  "Контент за URL-адресою"  з Динамічною новігацією.</ShowDetailInPageHelp>
+      <DetailParameterHelp>Цей параметр буде містити шлях до контенту в посиланні на сторінку Деталі. Цей параметр має відповідати параметру, який використовується в портлеті "Контент за URL-адресою" сторінки.</DetailParameterHelp>
+      <ContentByQueryHelp>Ви можете встановити SQL запит для отримання контенту динамічно. Допускаються наступні параметри: ${user}, ${lang} або будь-який параметр отримання (PARAM), оточений ${PARAM}.</ContentByQueryHelp>
+      <ContentsVisibilityHelp>"Обмежено шляхом перевірки автентичності" відфільтрує контент, на основі аутентифікації. Якщо ви не авторизувались, ви побачите тільки загальнодоступний контент. Якщо ви авторизувались, ви побачите весь контент видний користувачам внутрішньої мережі (але загальний для всіх). "Обмежені за ролями користувачів" означає, що ви побачите контент в залежності від вашого права доступа. У більшості випадків цю опцію не слід використовувати, так як це зменшує загальну продуктивність.</ContentsVisibilityHelp>
+    </help>
+    <action>
+      <Save>#{word.save}</Save>
+      <Cancel>#{word.cancel}</Cancel>
+      <delete>Видалити</delete>
+    </action>
+    <msg>
+      <not-valid-path>The Folder Path is invalid.</not-valid-path>
+      <saving-success>The portlet's preferences are saved.</saving-success>
+    </msg>
+    <tab>
+      <label>
+        <clvContentTab>Вибір контенту</clvContentTab>
+        <clvDisplayTab>Налаштування відображення</clvDisplayTab>
+        <clvAdvancedTab>Розширені настройки</clvAdvancedTab>
+      </label>
+    </tab>
+  </UICLVConfig>
+  <UICLVConfigDisplayModeFormRadioBoxInput>
+    <label>
+      <AutoViewerMode>By Folder</AutoViewerMode>
+      <ManualViewerMode>By Content</ManualViewerMode>
+    </label>
+  </UICLVConfigDisplayModeFormRadioBoxInput>
+  <UICLVConfigItemPathFormInputSet>
+    <title>
+      <SelectFolderPath>Виберіть шлях до папки</SelectFolderPath>
+      <AddPath>Додати шлях</AddPath>
+    </title>
+  </UICLVConfigItemPathFormInputSet>
+  <FolderPathSelectorPopupWindow>
+    <title>
+      <UIContentSelectorFolder>Огляд папок</UIContentSelectorFolder>
+    </title>
+  </FolderPathSelectorPopupWindow>
+  <UICLVConfigOrderTypeFormSelectBox>
+    <label>
+      <option>
+        <OrderDesc>По спаданню</OrderDesc>
+        <OrderAsc>По висхідній</OrderAsc>
+      </option>
+    </label>
+  </UICLVConfigOrderTypeFormSelectBox>
+  <UICLVConfigTargetPageFormInputSet>
+    <title>
+      <SelectBasePath>Виберіть основний шлях</SelectBasePath>
+      <SelectTargetPage>Виберіть основний шлях</SelectTargetPage>
+    </title>
+  </UICLVConfigTargetPageFormInputSet>
+  <UICLVBasePathPopupWindow>
+    <title>
+      <UIPageSelector>Сторінка вибору</UIPageSelector>
+    </title>
+  </UICLVBasePathPopupWindow>
+  <UICLVPresentation>
+    <msg>
+      <confirm-delete>Ви дійсно бажаєте видалити цей контент?</confirm-delete>
+      <delete-content-successfully>Контент видалений успішно.</delete-content-successfully>
+    </msg>
+    <label>
+      <readmore>Read more</readmore>
+      <rssFeed>RSS Feed</rssFeed>
+    </label>
+    <action>
+      <refresh>Оновити</refresh>
+      <edit>Редагувати в Оглядачі Контента</edit>
+      <delete>Видалити</delete>
+      <publish>Публікувати</publish>
+    </action>
+    <label>
+      <draft>Чернетка</draft>
+    </label>
+  </UICLVPresentation>
+  <CorrectContentSelectorPopupWindow>
+    <title>
+      <UIContentSelectorMulti>Multiple Content Selector Pane</UIContentSelectorMulti>
+    </title>
+  </CorrectContentSelectorPopupWindow>
+  <UIContentDialogFormPopupWindow>
+    <title>
+      <UIContentDialogForm>Web Content Form</UIContentDialogForm>
+    </title>
+  </UIContentDialogFormPopupWindow>
+  <UICLVConfigContextualFolderRadioBoxInput>
+    <label>
+      <contextualEnable>Ввімкнено</contextualEnable>
+      <contextualDisable>Вимкнений</contextualDisable>
+    </label>
+  </UICLVConfigContextualFolderRadioBoxInput>
+  <PublicationStates>
+    <archived>Архівні</archived>
+    <obsolete>Застарілий</obsolete>
+    <unpublished>Неопубліковані</unpublished>
+    <enrolled>Зареєстровано</enrolled>
+    <draft>Чернетка</draft>
+    <pending>Очікування</pending>
+    <approved>Схвалено</approved>
+    <inreview>В огляді</inreview>
+    <staged>Розміщений</staged>
+    <published>Опубліковано</published>
+  </PublicationStates>
+  <UICLVConfigCacheEnableRadioBoxInput>
+    <label>
+      <ENABLE>Обмежується автентифікацією</ENABLE>
+      <DISABLE>Restricted by User Roles</DISABLE>
+    </label>
+  </UICLVConfigCacheEnableRadioBoxInput>
+</bundle>

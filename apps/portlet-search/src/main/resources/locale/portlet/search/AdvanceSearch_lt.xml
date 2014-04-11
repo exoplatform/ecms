@@ -33,9 +33,7 @@
       <edit>Redaguoti</edit>
     </action>
     <msg>
-      <your-search>Jūsų paieška</your-search>
-      <did-not-match>neatitinko</did-not-match>
-      <new-suggestion>pasiūlymas</new-suggestion>
+      <search-not-match-type>Jūsų paieška {0} neatitinka jokių {1}.</search-not-match-type>
     </msg>
   </UIDefaultSearchResult>
   <UISearchPageLayoutManager>

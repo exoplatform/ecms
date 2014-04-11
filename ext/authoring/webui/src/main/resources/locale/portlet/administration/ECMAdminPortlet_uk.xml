@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<bundle>
+  <UIViewFormTabPane>
+  <label>
+          <publicationRequestApproval>Публікація &gt; Затвердження запиту</publicationRequestApproval>
+          <publicationApproveContent>Публікація &gt; Затвердити вміст</publicationApproveContent>
+          <publicationPublish>Публікація &gt; Опублікувати</publicationPublish>
+  </label>
+  </UIViewFormTabPane>
+</bundle>
