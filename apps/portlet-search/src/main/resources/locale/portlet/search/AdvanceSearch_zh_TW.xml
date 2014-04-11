@@ -33,9 +33,7 @@
       <edit>編輯</edit>
     </action>
     <msg>
-      <your-search>您的搜索</your-search>
-      <did-not-match>無法符合</did-not-match>
-      <new-suggestion>建議</new-suggestion>
+      <search-not-match-type>Your search {0} does not match any {1}.</search-not-match-type>
     </msg>
   </UIDefaultSearchResult>
   <UISearchPageLayoutManager>

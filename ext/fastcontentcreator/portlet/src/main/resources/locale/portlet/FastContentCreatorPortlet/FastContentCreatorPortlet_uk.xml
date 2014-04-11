@@ -1,0 +1,197 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<bundle>
+  <UIFCCForm>
+    <msg>
+      <name-not-allowed>Це ім'я не допускається.</name-not-allowed>
+      <in-versioning>Перш ніж додавати новий вузол, будь ласка, перевірте поточний вузол.</in-versioning>
+      <cannot-save>Сталася помилка під час збереження вузла.</cannot-save>
+      <saved-successfully>{0}</saved-successfully>
+      <not-support>Не вдалося завантажити шаблон '{0}'.</not-support>
+      <not-add-folder>Лише файли можуть бути додані до цієї папки.</not-add-folder>
+      <access-denied>Доступ заборонено. У вас немає дозволу на додавання в '{0}'.</access-denied>
+      <path-not-found>Шлях '{0}' був видалений або є неприпустимим.</path-not-found>
+      <node-locked>Вузол '{0}' заблокований. Розблокуйте цей вузол, перш ніж створювати документи.</node-locked>
+      <node-isExist>Цей вузол вже існує в '{0}' і не дозволяється мати декілька вузлів з одаковими іменами.</node-isExist>
+      <get-dialog-path>При отриманні шляху до діалогового вікна сталася помилка.</get-dialog-path>
+      <new-jcr-template>Під час створення нового шаблону сталася помилка.</new-jcr-template>
+    </msg>
+    <action>
+      <Save>#{word.save}</Save>
+      <Cancel>#{word.cancel}</Cancel>
+    </action>
+  </UIFCCForm>
+
+  <UIFCCConfig>
+    <label>
+      <UIFCCSaveLocationField>Зберегти розташування</UIFCCSaveLocationField>
+      <UIFCCWorkspaceFormSelectBox>Вибрати робочу область</UIFCCWorkspaceFormSelectBox>
+      <UIFCCTemplateField>Параметри шаблону</UIFCCTemplateField>
+      <UIFCCLocationFormInputAction>Розташування для збереження</UIFCCLocationFormInputAction>
+      <UIFCCTemplateFormSelectBox>Вибрати шаблон</UIFCCTemplateFormSelectBox>
+      <UIFCCSaveFormStringInput>Користувальницька кнопка збереження</UIFCCSaveFormStringInput>
+      <UIFCCMessageFormTextareaInput>Користувальницьке повідомлення про збереження</UIFCCMessageFormTextareaInput>
+      <UIFCCRedirectFormCheckboxInput>Переспрямування:</UIFCCRedirectFormCheckboxInput>
+      <UIFCCRedirectPathFormStringInput>Шлях для переспрямування:</UIFCCRedirectPathFormStringInput>
+      <UIFCCActionField>Дії</UIFCCActionField>
+    </label>
+    <msg>
+      <save-successfully>Успішно збережено в настройках порталу.</save-successfully>
+      <item-not-found>Цей шлях є неприпустимим.</item-not-found>
+      <fileType-empty>Будь ласка, виберіть тип файлу перед збереженням цієї конфігурації.</fileType-empty>
+      <ws-empty>Будь ласка, виберіть одну робочу область.</ws-empty>
+      <action-empty>Будь ласка виберіть папку з дією.</action-empty>
+      <message-empty>Поле "Користувальницьке повідомлення про збереження" потрібне в випадку, якщо ви не вибрали опцію переспрямування або шлях був порожній.</message-empty>
+      <get-template>Сталася помилка під час доступу до шаблона.</get-template>
+      <set-template-option>Сталася помилка під час установлення параметру шаблону.</set-template-option>
+      <do-select>Сталася помилка під час вибору розташування.</do-select>
+      </msg>
+    <action>
+      <Save>#{word.save}</Save>
+    </action>
+  </UIFCCConfig>
+
+  <UIFCCLocationFormInputAction>
+    <title>
+      <SelectPath>Вибрати шлях</SelectPath>
+    </title>
+  </UIFCCLocationFormInputAction>
+
+  <UIFCCActionList>
+    <header>
+      <name>Ім’я</name>
+      <description>Опис</description>
+      <instanceOf>Екземпляр</instanceOf>
+      <action>Дія</action>
+    </header>
+    <action>
+      <Add>Додати</Add>
+    </action>
+    <msg>
+      <empty>Нема дій</empty>
+      <remove-popup-first>Спливаюче меню редагування потрібно закривати перед видаленням цього вузла.</remove-popup-first>
+      <confirm-delete-action>Ви дійсно бажаєте видалити цю дію?</confirm-delete-action>
+      <template-empty>Шаблон "{0}" анульований або пустий.</template-empty>
+      <template-null>Шаблон анульований або пустий, або ви не маєте дозволу на доступ до цього шаблону.</template-null>
+      <access-denied>Доступ заборонено. У вас не вистачає на це права доступу.</access-denied>
+    </msg>
+  </UIFCCActionList>
+
+  <UIFCCSelectorPopupWindow>
+    <title>
+      <UIOneNodePathSelector>Виберіть розташування</UIOneNodePathSelector>
+    </title>
+  </UIFCCSelectorPopupWindow>
+
+  <UIWorkspaceList>
+    <label>
+      <workspaceName>Робоча область:</workspaceName>
+      <rootNodePath>Кореневий шлях:</rootNodePath>
+      <rootNodeInfo>Кореневий вузол</rootNodeInfo>
+    </label>
+  </UIWorkspaceList>
+
+  <rootNodeInfo>
+    <title>
+      <AddRootNode>Додати кореневий вузол</AddRootNode>
+    </title>
+  </rootNodeInfo>
+
+  <UITreeList>
+    <info>
+      <child-not-found>Цей вузол немає дочірніх вузлів.</child-not-found>
+    </info>
+    <header>
+      <name>Ім’я</name>
+      <action>Дія</action>
+    </header>
+  </UITreeList>
+
+  <UIFCCActionPopupWindow>
+    <title>
+      <UIFCCActionContainer>Додати дію</UIFCCActionContainer>
+    </title>
+  </UIFCCActionPopupWindow>
+
+  <UIFCCActionForm>
+    <title>Додати/Змінити дію</title>
+    <action>
+      <Save>#{word.save}</Save>
+      <Close>#{word.close}</Close>
+    </action>
+    <msg>
+      <repository-exception>Не вдалося зберегти цю дію. Надане ім'я не може мати такий же індекс як і його останній елемент.</repository-exception>
+      <numberformat-exception>Не вдалося зберегти цю дію. Надане ім'я не повинне мати ' [' або ']'.</numberformat-exception>
+      <existed-action>Дія під іменем "{0}" уже існує. Будь ласка, виберіть іншу назву.</existed-action>
+      <unable-add-action>Не вдалося додати цю дію.</unable-add-action>
+      <unable-add>Не вдалося додати цю дію. Цей вузол є кореневим або у вас немає прав доступу.</unable-add>
+      <not-support>Діалогове вікно '{0}' не підтримується.</not-support>
+      <no-permission-add>Доступ заборонено. Ви не маєте права додавати тут дію.</no-permission-add>
+      <access-denied>Доступ заборонено. Ви не маєте дозвіл на доступ до цього шаблону.</access-denied>
+    </msg>
+    <validator>
+      <validator>Агент перевірки</validator>
+      <destPath>Із шляхом</destPath>
+    </validator>
+  </UIFCCActionForm>
+
+  <UIFCCActionTypeForm>
+    <label>
+      <actionType>Створити дію типу</actionType>
+    </label>
+    <msg>
+      <not-support>Не вдалося завантажити шаблон '{0}'.</not-support>
+      <do-not-permission>Ви не маєте дозволу завантажити шаблон '{0}'.</do-not-permission>
+    </msg>
+  </UIFCCActionTypeForm>
+
+  <PopupComponent>
+    <title>
+      <UIOneNodePathSelector>Виберіть розташування</UIOneNodePathSelector>
+      <UIPermissionSelector>Оглядач прав доступа</UIPermissionSelector>
+      <UICategoriesSelector>Додати категорії</UICategoriesSelector>
+    </title>
+  </PopupComponent>
+
+  <DateTimeValidator>
+    <msg>
+      <Invalid-input>Поле "{0}" зі значенням "{1}", є неприпустимим.</Invalid-input>
+    </msg>
+  </DateTimeValidator>
+
+  <UITabPane>
+    <title>
+      <UICategoriesSelectPanel>Виберіть категорії</UICategoriesSelectPanel>
+      <UISelectedCategoriesGrid>Згадувані категорії</UISelectedCategoriesGrid>
+    </title>
+  </UITabPane>
+
+  <PopupComponent>
+    <title>
+      <UICategoriesSelector>Add Categories</UICategoriesSelector>
+    </title>
+  </PopupComponent>
+
+  <UICategoriesSelector>
+    <action>
+      <close>#{word.close}</close>
+    </action>
+  </UICategoriesSelector>
+
+  <PopupComponent>
+    <title>
+      <UIOneTaxonomySelector>Додати категорії</UIOneTaxonomySelector>
+    </title>
+  </PopupComponent>
+
+  <UITreeTaxonomyList>
+    <label>
+      <taxonomyTree>Дерево категорій</taxonomyTree>
+    </label>
+  </UITreeTaxonomyList>
+
+  <UIFCCTaxonomyPopupWindow>
+    <title>
+      <UIOneTaxonomySelector>Вибір категорії</UIOneTaxonomySelector>
+    </title>
+  </UIFCCTaxonomyPopupWindow>
+</bundle>

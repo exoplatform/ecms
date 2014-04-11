@@ -33,9 +33,7 @@
       <edit>Editar</edit>
     </action>
     <msg>
-      <your-search>Sua busca</your-search>
-      <did-not-match>não corresponde a nenhum</did-not-match>
-      <new-suggestion>Sugestão</new-suggestion>
+      <search-not-match-type>Your search {0} does not match any {1}.</search-not-match-type>
     </msg>
   </UIDefaultSearchResult>
   <UISearchPageLayoutManager>

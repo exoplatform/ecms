@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<bundle>
+  <UISEOForm>
+    <label>  
+      <title>Назва:</title>
+      <description>Опис:</description>
+      <keywords>Ключові слова:</keywords>
+      <language>Мова:</language>
+      <robots>Роботи:</robots>
+      <sitemap>Мапа сайту:</sitemap>
+      <sitemapvisible>Видимий на мапі сайту</sitemapvisible>
+    <isInherited>Успадковано від початкової сторінки</isInherited>
+      <priority>Пріоритет:</priority>
+      <frequency>Частота:</frequency>
+      <select-language>Вибір мови</select-language>
+      <option>
+        <Always>Завжди</Always>
+        <Hourly>Погодинно</Hourly>
+        <Daily>Щодня</Daily>
+        <Weekly>Щотижня</Weekly>
+        <Monthly>Щомісяця</Monthly>
+        <Yearly>Щороку</Yearly>
+        <Never>Ніколи</Never>
+      </option> 
+    </label>
+    <tip>
+  <priority>Припустимі значення в діапазоні від 0,0 до 1,0</priority>
+  </tip>   
+    <action>
+      <Save>#{word.save}</Save>
+      <Cancel>#{word.cancel}</Cancel>
+    </action>
+    <msg>
+      <repository-exception>Під час збереження метаданих сторінки сталася неочікувана помилка.</repository-exception>
+      <confirm-delete>Ви дійсно бажаєте видалити ці дані SEO?</confirm-delete>      
+    </msg>
+    <title>
+    <seo-delete>Видалити</seo-delete>
+    </title>
+  <help> 
+  <priority>Припустимі значення в діапазоні від 0,0 до 1,0.</priority>
+  <description>Допоможіть шукачам: повідомте, якщо наступна сторінка має зв'язок з тим, що вони шукають.</description>
+  <keywords>Найважливіші терміни на сторінці відокремлені комою.</keywords>  
+  </help>  
+  </UISEOForm>
+  <UISEOPopupWindow>
+  <title>
+      <UISEOForm>Курування SEO</UISEOForm>
+  </title>
+  </UISEOPopupWindow>    
+  <UISEOToolbarForm>
+  <title>
+      <seo>Курування SEO</seo>
+  </title>
+  <label>
+    <seo>SEO</seo>
+  </label>
+  </UISEOToolbarForm>  
+  <FloatNumberValidator>
+    <msg>
+      <Invalid-number>Значення поля Пріоритет має бути в числовому форматі. Діапазон припустимих значень від 0,0 до 1,0.</Invalid-number>
+    </msg>
+  </FloatNumberValidator>  
+  
+</bundle>

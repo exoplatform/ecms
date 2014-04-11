@@ -782,7 +782,7 @@
   <UITabPane>
     <title>
       <UIViewContainer>Giao diện xem</UIViewContainer>
-      <ECMTemplate>Các mẫu Hiển thị</ECMTemplate>
+      <ECMTemplate>Các mẫu Hiển thị</ECMTemplate>
       <UIScriptForm>Kịch bản</UIScriptForm>
       <UIDialogTab>Hộp thoại</UIDialogTab>
       <UIViewTab>Giao diện xem</UIViewTab>

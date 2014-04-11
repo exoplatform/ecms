@@ -33,9 +33,7 @@
       <edit>Redigera</edit>
     </action>
     <msg>
-      <your-search>Din sökning</your-search>
-      <did-not-match>matchade inte någon</did-not-match>
-      <new-suggestion>förslag</new-suggestion>
+      <search-not-match-type>Your search {0} does not match any {1}.</search-not-match-type>
     </msg>
   </UIDefaultSearchResult>
   <UISearchPageLayoutManager>
