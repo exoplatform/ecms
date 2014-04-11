@@ -87,7 +87,7 @@
 -->
   <UITaxonomyTreeMainForm>
     <action>
-      <Reset>Vynulovat</Reset>
+      <Reset>Reset</Reset>
     </action>
     <msg>
       <name-not-allowed>Zakázaný název</name-not-allowed>
@@ -712,7 +712,7 @@
     </label>
     <title>
       <AddPermission>Přidat oprávnění</AddPermission>
-      <RemovePermission>Odebrat oprávnění</RemovePermission>
+      <RemovePermission>Remove Permission</RemovePermission>
       <AddIcon>Přidat ikonu</AddIcon>
       <AddPath>Přidat cestu</AddPath>
     </title>
@@ -1380,8 +1380,8 @@
     <title>Přidání oprávnění do tohoto uzlu</title>
     <action>
       <Close>#{word.close}</Close>
-      <Save>Uložit</Save>
-      <Reset>Vynulovat</Reset>
+      <Save>Save</Save>
+      <Reset>Reset</Reset>
     </action>
     <msg>
       <checkbox-require>Vyberte alespoň jedno oprávnění.</checkbox-require>
