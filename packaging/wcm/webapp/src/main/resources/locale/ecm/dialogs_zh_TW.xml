@@ -327,7 +327,7 @@
   <schedule>調度</schedule>
   <node_added>內容增加</node_added>
   <node_removed>內容刪除</node_removed>
-  <property_added>屬性增加</property_added>
+  <property_added>屬性加法</property_added>
   <property_removed>屬性刪除</property_removed>
   <property_changed>屬性修改</property_changed>
 
@@ -376,7 +376,7 @@
   <label>
   <captions>標題</captions>
 <audioDescription>音訊描述</audioDescription>
-<alternativeText>替代文字</alternativeText>
+<alternativeText>替代文本</alternativeText>
 </label>
 </dialog>
 <help>

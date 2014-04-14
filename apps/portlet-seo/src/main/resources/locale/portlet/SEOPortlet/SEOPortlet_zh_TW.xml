@@ -9,7 +9,7 @@
       <robots>機器人：</robots>
       <sitemap>網站地圖：</sitemap>
       <sitemapvisible>在網站地圖中可見</sitemapvisible>
-    <isInherited>承接上層網頁</isInherited>
+    <isInherited>繼承自父頁面</isInherited>
       <priority>優先:</priority>
       <frequency>頻率：</frequency>
       <select-language>選擇一種語言</select-language>
@@ -39,7 +39,7 @@
     </title>
   <help> 
   <priority>有效值範圍從 0.0 到 1.0。</priority>
-  <description>幫助搜索者： 讓他們知道下面的頁面有一個連結，他們正在尋找。</description>
+  <description>幫助搜索者： 他們正在尋找一個連結，讓他們知道下面的頁面有。</description>
   <keywords>在頁面中以逗號分隔是最重要的條件。</keywords>  
   </help>  
   </UISEOForm>
