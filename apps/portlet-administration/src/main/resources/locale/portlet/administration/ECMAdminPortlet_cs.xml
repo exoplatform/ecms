@@ -87,11 +87,7 @@
 -->
   <UITaxonomyTreeMainForm>
     <action>
-<<<<<<< HEAD
-      <Reset>Reset</Reset>
-=======
       <Reset>Vynulovat</Reset>
->>>>>>> remotes/origin/feature/stabilization
     </action>
     <msg>
       <name-not-allowed>Zakázaný název</name-not-allowed>
@@ -716,11 +712,7 @@
     </label>
     <title>
       <AddPermission>Přidat oprávnění</AddPermission>
-<<<<<<< HEAD
-      <RemovePermission>Remove Permission</RemovePermission>
-=======
       <RemovePermission>Odebrat oprávnění</RemovePermission>
->>>>>>> remotes/origin/feature/stabilization
       <AddIcon>Přidat ikonu</AddIcon>
       <AddPath>Přidat cestu</AddPath>
     </title>
@@ -1075,12 +1067,6 @@
   ################################################################################
   -->
   <UITemplateForm>
-<<<<<<< HEAD
-    <title>
-      <AddPermission>Add Permission</AddPermission>
-    </title>
-=======
->>>>>>> remotes/origin/feature/stabilization
     <action>
       <Save>#{word.save}</Save>
       <Cancel>#{word.cancel}</Cancel>
@@ -1391,13 +1377,8 @@
     <title>Přidání oprávnění do tohoto uzlu</title>
     <action>
       <Close>#{word.close}</Close>
-<<<<<<< HEAD
-      <Save>Save</Save>
-      <Reset>Reset</Reset>
-=======
       <Save>Uložit</Save>
       <Reset>Vynulovat</Reset>
->>>>>>> remotes/origin/feature/stabilization
     </action>
     <msg>
       <checkbox-require>Vyberte alespoň jedno oprávnění.</checkbox-require>
