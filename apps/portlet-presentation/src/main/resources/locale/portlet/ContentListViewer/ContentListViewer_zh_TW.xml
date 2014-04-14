@@ -37,9 +37,9 @@
         <ASC>升冪</ASC>
       </option>
       <DisplaySettingBlock>顯示設定</DisplaySettingBlock>
-      <UICLVConfigHeaderFormStringInput>標頭</UICLVConfigHeaderFormStringInput>
+      <UICLVConfigHeaderFormStringInput>標題</UICLVConfigHeaderFormStringInput>
       <UICLVConfigDisplayTemplateFormSelectBox>範本</UICLVConfigDisplayTemplateFormSelectBox>
-      <UICLVConfigPaginatorTemplateFormSelectBox>分頁程式</UICLVConfigPaginatorTemplateFormSelectBox>
+      <UICLVConfigPaginatorTemplateFormSelectBox>分頁</UICLVConfigPaginatorTemplateFormSelectBox>
       <UICLVConfigItemsPerPageFormStringInput>每頁項目</UICLVConfigItemsPerPageFormStringInput>
       <UICLVConfigShowIllustrationFormCheckboxInput>顯示圖像</UICLVConfigShowIllustrationFormCheckboxInput>
       <UICLVConfigShowSummaryFormCheckboxInput>顯示摘要</UICLVConfigShowSummaryFormCheckboxInput>
@@ -71,7 +71,7 @@
     <help>
       <ModeSelectionHelp>兩種模式可顯示內容。"按資料夾"將您所選的資料夾類別中可用的所有內容。"按內容"允許您手動選擇你想要顯示的內容。</ModeSelectionHelp>
       <FolderPathHelp>請選擇您想要顯示的內容。如果您啟動動態導航選項，將動態替換預設選擇 （可看見下文進階選項的模式）。</FolderPathHelp>
-      <HeaderOptionHelp>顯示在內容清單上的標頭。如果您啟動自動檢測選項，它將嘗試查找基於當前選定內容的標題。</HeaderOptionHelp>
+      <HeaderOptionHelp>顯示在內容清單上的標題。如果您啟動自動檢測選項，它將嘗試找尋基於當前選定內容的標題。</HeaderOptionHelp>
       <GeneralOptionHelp>選擇您想要在您的清單中顯示的圖形元素。請注意根據您所選的範本，某些元素可能不可用。</GeneralOptionHelp>
       <ContextualHelp>啟動動態導航選項。其他人可以動態更改基於 URL 參數內容。</ContextualHelp>
       <ParameterHelp>此參數將用於訪問的內容，如果動態導航處於啟動狀態。</ParameterHelp>
@@ -177,7 +177,7 @@
     <pending>等待中</pending>
     <approved>核准</approved>
     <inreview>在審查中</inreview>
-    <staged>上演</staged>
+    <staged>階段</staged>
     <published>已發佈</published>
   </PublicationStates>
   <UICLVConfigCacheEnableRadioBoxInput>

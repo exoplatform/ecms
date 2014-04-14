@@ -269,7 +269,7 @@
     <title>編輯檔案內容</title>
     <label>
       <name>名稱</name>
-      <textToModify>修改的文本</textToModify>
+      <textToModify>內文需修正</textToModify>
       <fileToUpload>上載新內容為該文件 （必須是相同的 mime 類型）</fileToUpload>
     </label>
   </UIResourceForm>
@@ -549,7 +549,7 @@
     <view>
       <label>
         <name>名稱</name>
-        <versionable>無</versionable>
+        <versionable>無版本衝突</versionable>
         <exo_owner>擁有者</exo_owner>
         <auditing>審核</auditing>
         <exo_dateCreated>建立日期</exo_dateCreated>
@@ -649,8 +649,8 @@
       <UINonPublishedForm>狀態</UINonPublishedForm>
       <UIPublishedForm>狀態</UIPublishedForm>
       <UIPublicationLogList>歷史紀錄</UIPublicationLogList>
-      <UIDocumentWithTree>檔案視圖</UIDocumentWithTree>
-      <UIDocumentInfo>文件視圖</UIDocumentInfo>
+      <UIDocumentWithTree>檔案檢視</UIDocumentWithTree>
+      <UIDocumentInfo>文件檢視</UIDocumentInfo>
       <UICategoriesSelectPanel>選擇類別</UICategoriesSelectPanel>
       <UISelectedCategoriesGrid>引用的類別</UISelectedCategoriesGrid>
       <UIWorkflowPublicationActionForm>Workflow Publication Action</UIWorkflowPublicationActionForm>
@@ -950,12 +950,12 @@
       <score>得分</score>
     </header>
     <title>
-      <typeASC>按文件類型降冪排序</typeASC>
-      <typeDESC>按文件類型降冪排序</typeDESC>
-      <scoreASC>按積分昇冪排序</scoreASC>
-      <scoreDESC>按分數降冪排序</scoreDESC>
-      <nameASC>按名稱昇冪排序</nameASC>
-      <nameDESC>按名稱降冪排序</nameDESC>
+      <typeASC>按文件類型降序排序</typeASC>
+      <typeDESC>按文件類型降序排序</typeDESC>
+      <scoreASC>按積分升序排序</scoreASC>
+      <scoreDESC>按分數降序排序</scoreDESC>
+      <nameASC>按名稱升序排序</nameASC>
+      <nameDESC>按名稱降序排序</nameDESC>
       <datecreatedASC>Sort by Created date in ascending order</datecreatedASC>
       <datecreatedDESC>Sort by Created date in descending order</datecreatedDESC>
     </title>
@@ -981,14 +981,14 @@
       <score>得分</score>
     </header>
     <title>
-      <typeASC>按文件類型降冪排序</typeASC>
-      <typeDESC>按文件類型降冪排序</typeDESC>
-      <scoreASC>按分數昇冪排序</scoreASC>
-      <scoreDESC>按分數降冪排序</scoreDESC>
-      <nameASC>按名稱昇冪排序</nameASC>
-      <nameDESC>按名稱降冪排序</nameDESC>
-      <datecreatedASC>按建立日期昇冪排序</datecreatedASC>
-      <datecreatedDESC>按建立日期降冪排序</datecreatedDESC>
+      <typeASC>按文件類型降序排序</typeASC>
+      <typeDESC>按文件類型降序排序</typeDESC>
+      <scoreASC>按分數升序排序</scoreASC>
+      <scoreDESC>按分數降序排序</scoreDESC>
+      <nameASC>按名稱升序排序</nameASC>
+      <nameDESC>按名稱降序排序</nameDESC>
+      <datecreatedASC>按建立日期升序排序</datecreatedASC>
+      <datecreatedDESC>按建立日期降序排序</datecreatedDESC>
     </title>
     <tooltip>
       <View>View this Node</View>
@@ -1013,14 +1013,14 @@
       <AddRemoveFavourite>Add/Remove to Favorite</AddRemoveFavourite>
     </header>
     <title>
-      <typeASC>按文件類型昇冪排序</typeASC>
-      <typeDESC>按文件類型降冪排序</typeDESC>
-      <scoreASC>按分數昇冪排序</scoreASC>
-      <scoreDESC>按分數降冪排序</scoreDESC>
-      <nameASC>按名稱昇冪排序</nameASC>
-      <nameDESC>按名稱降冪排序</nameDESC>
-      <datecreatedASC>按建立日期昇冪排序</datecreatedASC>
-      <datecreatedDESC>按建立日期降冪排序</datecreatedDESC>
+      <typeASC>按文件類型升序排序</typeASC>
+      <typeDESC>按文件類型降序排序</typeDESC>
+      <scoreASC>按分數升序排序</scoreASC>
+      <scoreDESC>按分數降序排序</scoreDESC>
+      <nameASC>按名稱升序排序</nameASC>
+      <nameDESC>按名稱降序排序</nameDESC>
+      <datecreatedASC>按建立日期升序排序</datecreatedASC>
+      <datecreatedDESC>按建立日期降序排序</datecreatedDESC>
     </title>
     <tooltip>
       <View>查看此節點</View>
@@ -1045,14 +1045,14 @@
       <score>得分</score>
     </header>
     <title>
-      <typeASC>按文件類型昇冪排序</typeASC>
-      <typeDESC>按文件類型降冪排序</typeDESC>
-      <scoreASC>按分數昇冪排序</scoreASC>
-      <scoreDESC>按分數降冪排序</scoreDESC>
-      <nameASC>按名稱昇冪排序</nameASC>
-      <nameDESC>按名稱降冪排序</nameDESC>
-      <datecreatedASC>按建立日期昇冪排序</datecreatedASC>
-      <datecreatedDESC>按建立日期降冪排序</datecreatedDESC>
+      <typeASC>按文件類型升序排序</typeASC>
+      <typeDESC>按文件類型降序排序</typeDESC>
+      <scoreASC>按分數升序排序</scoreASC>
+      <scoreDESC>按分數降序排序</scoreDESC>
+      <nameASC>按名稱升序排序</nameASC>
+      <nameDESC>按名稱降序排序</nameDESC>
+      <datecreatedASC>按建立日期升序排序</datecreatedASC>
+      <datecreatedDESC>按建立日期降序排序</datecreatedDESC>
     </title>
     <tooltip>
       <View>查看此節點</View>
@@ -1305,7 +1305,7 @@
       <nodePath>匯出的路徑</nodePath>
       <zip>Zip</zip>
       <systemView>系統檢視</systemView>
-      <documentView>文件視圖</documentView>
+      <documentView>文件檢視</documentView>
     </label>
     <action>
       <Cancel>#{word.cancel}</Cancel>
@@ -1341,11 +1341,11 @@
       <restoreVersion>還原的版本</restoreVersion>
       <viewVersion>查看版本資訊</viewVersion>
       <deleteVersion>刪除版本</deleteVersion>
-      <compareVersion>與基礎版本比較</compareVersion>
+      <compareVersion>與基本版本比較</compareVersion>
     </tooltip>
     <msg>
       <have-no-view-template>不支援視圖範本。</have-no-view-template>
-      <cannot-remove-version>您不能刪除基礎版本。</cannot-remove-version>
+      <cannot-remove-version>您不能刪除基本版本。</cannot-remove-version>
       <confirm-delete>是否確定要刪除此版本?</confirm-delete>
       <not-checked-out>您必須在還原之前簽出此節點。</not-checked-out>
       <invalid-item-state>你不能還原此版本，因為一個或多個項目被刪除或移動另一個會議期間。</invalid-item-state>
@@ -1669,8 +1669,8 @@
   <UISelectDocumentForm>
     <label>
       <selectTemplate>從下面的清單中選擇您的範本</selectTemplate>
-      <ThumbnailView>縮略圖視圖</ThumbnailView>
-      <ListView>清單視圖</ListView>
+      <ThumbnailView>縮圖檢視</ThumbnailView>
+      <ListView>清單檢視</ListView>
       <Cancel>#{word.cancel}</Cancel>
     </label>
   </UISelectDocumentForm>
@@ -1702,7 +1702,7 @@
       <repository-exception-permission>你並沒有到此節點增加一個新文件的權限。</repository-exception-permission>
       <not-allowed-same-name-sibling>您不能保存此文件。它不允許具有相同的名稱作為其兄弟。</not-allowed-same-name-sibling>
       <numberformat-exception>您不能保存此文件。提供的名稱必須是數字格式。</numberformat-exception>
-      <item-not-found>找不到項目。此節點 （或其祖先） 可能已被刪除。請按一下刷新按鈕。</item-not-found>
+      <item-not-found>找不到項目。此節點 （或其原始檔） 可能已被刪除。請按一下更新按鈕。</item-not-found>
     </msg>
   </UIDocumentForm>
   <!--
@@ -1863,8 +1863,8 @@
     </label>
     <msg>
       <not-support>這種通知類型不受支援。請選擇另一種類型。</not-support>
-      <watching-successfully>您正在觀注此文件。</watching-successfully>
-      <unwatching-successfully>你已經成功地離開觀注清單。</unwatching-successfully>
+      <watching-successfully>您正在觀看此文件。</watching-successfully>
+      <unwatching-successfully>你已經成功地離開觀看清單。</unwatching-successfully>
       <node-iswatching>本文件已觀注。</node-iswatching>
     </msg>
   </UIWatchDocumentForm>
@@ -2560,7 +2560,7 @@
    -->
   <ECMContextMenu>
       <event>
-        <Permlink>查看文件</Permlink>
+        <Permlink>檢視文件</Permlink>
       </event>
   </ECMContextMenu>
   
@@ -2640,8 +2640,8 @@
           <Type>類型</Type>
           <CreatedDate>建立日期</CreatedDate>
           <ModifiedDate>修改日期</ModifiedDate>
-          <Ascending>昇冪</Ascending>
-          <Descending>降冪</Descending>
+          <Ascending>升序</Ascending>
+          <Descending>降序</Descending>
       </label>
   </UIPreferencesForm>
 

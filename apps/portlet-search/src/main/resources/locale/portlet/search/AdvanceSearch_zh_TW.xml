@@ -33,7 +33,7 @@
       <edit>編輯</edit>
     </action>
     <msg>
-      <your-search>您的搜尋</your-search>
+      <your-search>您的搜索</your-search>
       <did-not-match>無法符合</did-not-match>
       <new-suggestion>建議</new-suggestion>
     </msg>
@@ -66,7 +66,7 @@
   <UISearchForm>  
    <message>
      <keyword-not-support>關鍵字不正確。無法識別某些字元。</keyword-not-support>
-     <not-checked>請選擇搜尋類型。</not-checked>
+     <not-checked>請選擇搜索類型。</not-checked>
      <keyword-not-empty>請輸入一個關鍵字。</keyword-not-empty>
    </message>
   </UISearchForm>
@@ -91,7 +91,7 @@
   <ViewMode>
     <label>
       <option>
-        <all>搜尋所有網站</all>
+        <all>搜索所有網站</all>
       </option>  
     </label>  
   </ViewMode>
