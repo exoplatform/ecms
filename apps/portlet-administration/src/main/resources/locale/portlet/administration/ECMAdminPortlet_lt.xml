@@ -712,11 +712,7 @@
     </label>
     <title>
       <AddPermission>Pridėti teisę</AddPermission>
-<<<<<<< HEAD
-      <RemovePermission>Remove Permission</RemovePermission>
-=======
       <RemovePermission>Pašalinti teisę</RemovePermission>
->>>>>>> remotes/origin/feature/stabilization
       <AddIcon>Pridėti piktogramą</AddIcon>
       <AddPath>Pridėti kelią</AddPath>
     </title>
