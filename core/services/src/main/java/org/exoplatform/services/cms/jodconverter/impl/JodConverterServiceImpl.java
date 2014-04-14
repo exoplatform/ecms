@@ -121,7 +121,7 @@ public class JodConverterServiceImpl implements JodConverterService, Startable {
 
   public void start() {
     if(!enable) {
-      LOG.info("JodConverter is disabled. To use JodConverter please change EXO_JODCONVERTER_ENABLE=true in " 
+      LOG.info("JODConverter is disabled. To view office files in Activity Stream or Content Explorer, you need to change EXO_JODCONVERTER_ENABLE=true in " 
             + "customization setting file");
       return;  
     }
@@ -138,7 +138,7 @@ public class JodConverterServiceImpl implements JodConverterService, Startable {
 
   public void stop() {
     if(!enable) {
-      LOG.info("JodConverter is disabled. To use JodConverter please change EXO_JODCONVERTER_ENABLE=true in " 
+      LOG.info("JODConverter is disabled. To view office files in Activity Stream or Content Explorer, you need to change EXO_JODCONVERTER_ENABLE=true in " 
             + "customization setting file");
       return;
     }
