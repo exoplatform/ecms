@@ -47,7 +47,7 @@ import java.util.*;
 public class ApplicationTemplateManagerServiceImpl implements ApplicationTemplateManagerService, Startable {
 
   private static final Log LOG = ExoLogger.getLogger(ApplicationTemplateManagerServiceImpl.class.getName());
-  private static final String EDITED_CONFIGURED_TEMPLATES = "EditedConfiguredTemplates";
+  public static final String EDITED_CONFIGURED_TEMPLATES = "EditedConfiguredTemplates";
   
   private RepositoryService repositoryService;
 
