@@ -179,7 +179,11 @@ public class RestoreFromTrashManageComponent extends UIAbstractManagerComponent 
         LinkManager linkManager = WCMCoreUtils.getService(LinkManager.class);
         List<Node> symlinks = linkManager.getAllLinks(node, org.exoplatform.services.cms.impl.Utils.EXO_SYMLINK);
         for (Node symlink : symlinks) {
-          trashService.restoreFromTrash(symlink.getPath(), sessionProvider);
+          String realPath = symlink.getPath();
+          if(!trashHomeNode.getSession().itemExists(realPath)){
+            realPath = trashHomeNodePath + "/" + symlink.getName();
+          }
+          trashService.restoreFromTrash(realPath, sessionProvider);
         }
         uiExplorer.updateAjax(event);
       } catch(PathNotFoundException e) {
