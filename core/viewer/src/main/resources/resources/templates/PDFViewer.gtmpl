@@ -235,7 +235,7 @@
 <% }else {%>	
       <div class="uiUnEditable clearfix">
         <div class="iconContainer">
-          <i class="<%=Utils.getNodeTypeIcon(currentNode, "uiIcon64x64")%>"></i>
+          <i class="<%=Utils.getNodeTypeIcon(org.exoplatform.wcm.webui.Utils.getRealNode(currentNode), "uiIcon64x64")%>"></i>
         </div>
         <div class="detailContainer">
           <h4><%=_ctx.appRes("File.view.label.not-viewable")%></h4>
