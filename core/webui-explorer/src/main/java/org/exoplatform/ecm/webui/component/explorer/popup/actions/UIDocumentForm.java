@@ -475,9 +475,15 @@ public class UIDocumentForm extends UIDialogForm implements UIPopupComponent, UI
           if (newNode.hasProperty("exo:category")) newNode.setProperty("exo:category", vals.toArray(new Value[vals.size()]));
           newNode.save();
         }
-        uiExplorer.setCurrentPath(newNode.getPath());
-        uiExplorer.setWorkspaceName(newNode.getSession().getWorkspace().getName());
-        uiExplorer.refreshExplorer(newNode, true);
+		Node selectedNode = newNode;
+        if (documentForm.isAddNew()) {
+        	if (homeNode.isNodeType("exo:taxonomy")) {
+        		selectedNode = (Node) homeNode.getSession().getItem(homeNode.getPath() + "/" + newNode.getName());
+        	}
+	        uiExplorer.setCurrentPath(selectedNode.getPath());
+	        uiExplorer.setWorkspaceName(selectedNode.getSession().getWorkspace().getName());
+	        uiExplorer.refreshExplorer(selectedNode, true);
+        }   
         uiExplorer.updateAjax(event);
         return newNode;
       } catch(Exception e) {

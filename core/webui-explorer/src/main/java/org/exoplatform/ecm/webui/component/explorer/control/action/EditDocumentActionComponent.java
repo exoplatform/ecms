@@ -254,7 +254,6 @@ public class EditDocumentActionComponent extends UIAbstractManagerComponent {
         }
       }
       if (selectedNode == null)  selectedNode = uiExplorer.getCurrentNode();
-      uiExplorer.setCurrentPath(selectedNode.getPath());
       UIApplication uiApp = uicomp.getAncestorOfType(UIApplication.class);
       editDocument(event, null, uicomp, uiExplorer, selectedNode, uiApp);
     }
