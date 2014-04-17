@@ -593,7 +593,7 @@
 				  	eXo.ecm.MultiUpload.processUploadRequest1(id);
 				  }
 		      },
-		      ajaxError: function() {
+		      error: function() {
 				 if (eXo.ecm.MultiUpload.connectionFailed[id]++ > eXo.ecm.MultiUpload.MAX_CONNECTION) {
 					 var e = eXo.ecm.MultiUpload.handleReaderAbort(id, eXo.ecm.MultiUpload.ERROR);
 					 e(window.event);
@@ -711,7 +711,7 @@
 					  	setTimeout(function(){eXo.ecm.MultiUpload.processUploadRequest2(id);}, 5000);
 					  }
 			       },
-			       ajaxError: function() {
+			       error: function() {
 			      	 if (eXo.ecm.MultiUpload.connectionFailed[id]++ > eXo.ecm.MultiUpload.MAX_CONNECTION) {
 			      		 var e = eXo.ecm.MultiUpload.handleReaderAbort(id, eXo.ecm.MultiUpload.ERROR);
 			      		 e(window.event);
@@ -766,7 +766,7 @@
 		  "&currentPortal="+ eXo.ecm.MultiUpload.portalName +
 		  "&userId=" + eXo.ecm.MultiUpload.userId +
 		  "&action=progress&uploadId=" + id;
-		  gj.ajax({url: uri, 
+		  gj.ajax({url: uri, timeout: 1000,
 			   success: function(ret) {
 		  		if (!ret) {
 					setTimeout(function(){eXo.ecm.MultiUpload.handleReaderProgress(id)}, 1000);
@@ -816,7 +816,7 @@
 					}
 				}	    
 			},
-		      ajaxError: function() {
+		      error: function() {
 				 if (eXo.ecm.MultiUpload.connectionFailed[id]++ > eXo.ecm.MultiUpload.MAX_CONNECTION) {
 					 var e = eXo.ecm.MultiUpload.handleReaderAbort(id, eXo.ecm.MultiUpload.ERROR);
 					 e(window.event);
@@ -846,7 +846,7 @@
 		    "&fileName=" + cleanName(file.name) + 
 		    "&language=" + eXo.ecm.MultiUpload.userLanguage +
 		    "&existenceAction=" + eXo.ecm.MultiUpload.existingBehavior[progressID];
-		    gj.ajax({url: uri, 
+		    gj.ajax({url: uri, timeout: 1000,
 	 	     success: function(ret, status, xhr) {
 		  	  //mark OK
 		  	  if (eXo.ecm.MultiUpload.connectionFailed[progressID] > eXo.ecm.MultiUpload.MAX_CONNECTION) {
@@ -922,7 +922,7 @@
 		  	  //process next upload request
 		  	  eXo.ecm.MultiUpload.processNextUploadRequestInQueue();
 		    	 },
-		       ajaxError: function() {
+		       error: function() {
 				 if (eXo.ecm.MultiUpload.connectionFailed[id]++ > eXo.ecm.MultiUpload.MAX_CONNECTION) {
 					 var e = eXo.ecm.MultiUpload.handleReaderAbort(id, eXo.ecm.MultiUpload.ERROR);
 					 e(window.event);
