@@ -31,6 +31,7 @@ import java.util.Set;
 
 import javax.jcr.ItemExistsException;
 import javax.jcr.Node;
+import javax.jcr.RepositoryException;
 import javax.servlet.http.HttpServletRequest;
 import javax.ws.rs.core.CacheControl;
 import javax.ws.rs.core.MediaType;
@@ -257,12 +258,19 @@ public class FileUploadHandler {
     DateFormat dateFormat = new SimpleDateFormat(IF_MODIFIED_SINCE_DATE_FORMAT);
     
     //create ret
+    
     DocumentBuilderFactory factory = DocumentBuilderFactory.newInstance();
     DocumentBuilder builder = factory.newDocumentBuilder();
     Document fileExistence = builder.newDocument();
-    fileName = Text.escapeIllegalJcrChars(fileName);
+    fileName = getCleanName(fileName);
+    boolean hasNode;
+    try{
+      hasNode = parent.hasNode(fileName);
+    }catch(RepositoryException e){
+      hasNode = false;
+    }
     Element rootElement = fileExistence.createElement(
-                              parent.hasNode(fileName) ? "Existed" : "NotExisted");
+                              hasNode ? "Existed" : "NotExisted");
     fileExistence.appendChild(rootElement);
     //return ret;
     return Response.ok(new DOMSource(fileExistence), MediaType.TEXT_XML)
@@ -367,18 +375,7 @@ public class FileUploadHandler {
       Node file = null;
       boolean fileCreated = false;
       String exoTitle = fileName;
-      // Clean file name by removing special characters ($%^&...)
-      String ext = StringUtils.EMPTY;
-      if (fileName.indexOf('.') > 0) {
-        ext = fileName.substring(fileName.lastIndexOf('.'));
-        fileName = Utils.cleanString(fileName.substring(0, fileName.lastIndexOf('.')));
-      } else {
-        fileName = Utils.cleanString(fileName);
-      }
-      if (StringUtils.isEmpty(fileName)) {
-        fileName = DEFAULT_NAME;
-      }
-      fileName.concat(ext);
+      fileName = getCleanName(fileName);
       String nodeName = fileName;
       int count = 0;
       do {
@@ -432,6 +429,21 @@ public class FileUploadHandler {
       LOG.error(exc.getMessage(), exc);
       return Response.serverError().entity(exc.getMessage()).build();
     }  
+  }
+
+  // Clean file name by removing special characters ($%^&...)
+  private String getCleanName(String fileName){
+    String ext = StringUtils.EMPTY;
+    if (fileName.indexOf('.') > 0) {
+      ext = fileName.substring(fileName.lastIndexOf('.'));
+      fileName = Utils.cleanString(fileName.substring(0, fileName.lastIndexOf('.')));
+    } else {
+      fileName = Utils.cleanString(fileName);
+    }
+    if (StringUtils.isEmpty(fileName)) {
+      fileName = DEFAULT_NAME;
+    }
+    return fileName.concat(ext);
   }
   
   public boolean isDocumentNodeType(Node node) throws Exception {
