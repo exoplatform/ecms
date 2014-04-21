@@ -675,7 +675,7 @@
     </header>
     <label>
       <binary>Datos binarios</binary>
-      <notavailable>N/A</notavailable>
+      <notavailable>N/D</notavailable>
       <cannotget>No se puede obtener valores</cannotget>
     </label>
     <action>
@@ -702,17 +702,17 @@
       <namespace>Nombre del Espacio</namespace>
       <multiple>Múltiple</multiple>
       <property_select>Añadir Nueva Propiedad</property_select>
-      <value0>Value 0</value0>
-      <value1>Value 1</value1>
-      <value2>Value 2</value2>
-      <value3>Value 3</value3>
-      <value4>Value 4</value4>
-      <value5>Value 5</value5>
-      <value6>Value 6</value6>
-      <value7>Value 7</value7>
-      <value8>Value 8</value8>
-      <value9>Value 9</value9>
-      <value10>Value 10</value10>
+      <value0>Valor 0</value0>
+      <value1>Valor 1</value1>
+      <value2>Valor 2</value2>
+      <value3>Valor 3</value3>
+      <value4>Valor 4</value4>
+      <value5>Valor 5</value5>
+      <value6>Valor 6</value6>
+      <value7>Valor 7</value7>
+      <value8>Valor 8</value8>
+      <value9>Valor 9</value9>
+      <value10>Valor 10</value10>
     </label>
     <action>
       <Save>#{palabra.guardar}</Save>
@@ -1886,7 +1886,7 @@
     <msg>
       <name-exist>Ya existe el nombre de la etiqueta '{0}'.</name-exist>
       <tagName-invalid>El nombre de la etiqueta contiene algunos caracteres no válidos.</tagName-invalid>
-      <tagName-empty-or-invalid>The tag name is empty or contains some invalid characters.</tagName-empty-or-invalid>
+      <tagName-empty-or-invalid>La etiqueta de nombre está vacía o contiene carácteres no válidos.</tagName-empty-or-invalid>
       <tag-name-empty>El nombre de su etiqueta está vacío</tag-name-empty>
       <tag-name-duplicate>Los nombres de las etiquetas de entrada están duplicados.</tag-name-duplicate>
       <tagName-too-long>Una de las etiquetas introducidas es demasiado larga. El nombre de la etiqueta debe ser menos de 30 caracteres.</tagName-too-long>
@@ -2500,7 +2500,7 @@
   <UIActionBar>
     <obtion>
       <Admin>Administrador</Admin>
-      <Info>Info</Info>
+      <Info>Información</Info>
       <Actions>Acciones</Actions>
       <Collaboration>Colaboración</Collaboration>
       <Search>Búsqueda</Search>
@@ -3057,9 +3057,9 @@
       <ShowDrives>Mostrar unidades</ShowDrives>
     </DrivesArea>
     <msg>
-      <no-view-found>There are no views applied for your access permission in drive '{0}'.</no-view-found>
+      <no-view-found>No hay ninguna vista aplicada para su permiso de acceso en la unidad '{0}'.</no-view-found>
       <access-denied>Acceso denegado. Tal vez, no tienes permiso en el espacio de trabajo de la unidad '{0}'.</access-denied>
-      <empty-drives>Access denied. Either there is no drive in this repository or you do not have permission to access any drives in this repository.</empty-drives>
+      <empty-drives>Acceso denegado. No hay lector en este repositorio o no tiene permiso para acceder cualquier lector en este repositorio.</empty-drives>
       <workspace-not-exist>La unidad '{0}' se almacena en un área de trabajo no reconocido. Por favor, vuelva a configurar esta unidad.</workspace-not-exist>
     </msg>
   </UIDrivesArea>

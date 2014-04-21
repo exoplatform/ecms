@@ -2515,7 +2515,7 @@
   </UIWorkspaceWizard>
   <UIRepositoryForm>
     <msg>
-      <not-complete-repository>The repository is being created. You need to wait a few minutes before creating another one.</not-complete-repository>
+      <not-complete-repository>Se está creando el repositorio. Tiene que esperar unos minutos antes de crear otro.</not-complete-repository>
     </msg>
   </UIRepositoryForm>
   
