@@ -387,7 +387,7 @@ public class UICLVPresentation extends UIContainer {
         }
       }
     }
-    return desc;
+    return ContentReader.getXSSCompatibilityContent(desc);
   }
   public static String getInlineEditingField(Node orgNode, String propertyName, String defaultValue, String inputType,
       String idGenerator, String cssClass, boolean isGenericProperty, String... arguments) throws Exception {
