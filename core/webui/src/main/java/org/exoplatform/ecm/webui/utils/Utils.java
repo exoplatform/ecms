@@ -678,7 +678,7 @@ public class Utils {
         else {
           if (orgNode.getProperty(propertyName).getDefinition().isMultiple()) {
           //The requested property is multiple-valued, inline editing enable users to edit the first value of property
-            currentValue = orgNode.getProperty(propertyName).getValues()[0].getString();
+            currentValue = ContentReader.getXSSCompatibilityContent(orgNode.getProperty(propertyName).getValues()[0].getString());
           }else {
             currentValue =  orgNode.getProperty(propertyName).getString() ;
           }
