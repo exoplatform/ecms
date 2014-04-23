@@ -1,0 +1,98 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<bundle>
+  <UIDefaultSearchForm>
+    <label>
+      <keyword>Ключове слово</keyword>
+      <portal>Портал</portal>
+      <Page>Сторінка</Page>
+      <Document>Документ</Document>
+    </label>
+    <action>
+      <Search>Пошук</Search>
+    </action>
+  </UIDefaultSearchForm>
+
+  <UIDefaultSearchResult>
+    <label>
+      <Page>Сторінка</Page>
+      <Document>Документ</Document>
+      <DocumentAndPage>Документ та сторінка</DocumentAndPage>
+      <documentandpage>Документ та сторінка</documentandpage>
+      <resutlsCaption>Результати</resutlsCaption>
+      <ofAboutCaption>близько</ofAboutCaption>
+      <forCaption>для</forCaption>
+      <timeUnitCaption>секунд</timeUnitCaption>
+      <similar>Сторінки, де з'являється той же зміст</similar>
+      <editor>Редактор</editor>
+      <date>Дата</date>
+      <relevancy>Релевантність</relevancy>
+      <title>Назва</title>
+      <sortBy>Сортувати по:</sortBy>
+    </label>
+    <action>
+      <edit>Редагувати</edit>
+    </action>
+    <msg>
+      <your-search>Your search</your-search>
+      <did-not-match>did not match any</did-not-match>
+      <new-suggestion>suggestion</new-suggestion>
+    </msg>
+  </UIDefaultSearchResult>
+  <UISearchPageLayoutManager>
+    <label>
+      <itemsPerPageSelector>Результатів на сторінці</itemsPerPageSelector>
+      <searchFormSelector>Форма пошуку шаблону</searchFormSelector>
+      <searchResultSelector>Шаблон результатів пошуку</searchResultSelector>
+      <searchPaginatorSelector>Пошук шаблону розбивки на сторінки</searchPaginatorSelector>
+      <searchPageLayoutSelector>Пошук макету сторінки-шаблону</searchPageLayoutSelector>
+      <searchResultBasePathInputSetAction>Основний шлях</searchResultBasePathInputSetAction>
+      <pageMode>Режим сторінки</pageMode>
+      <option>
+        <none>Жоден</none>
+        <more>Більше</more>
+        <pagination>Розбивка на сторінки</pagination>
+      </option>
+    </label>
+    <action>
+      <Save>#{word.save}</Save>
+      <Cancel>#{word.cancel}</Cancel>
+    </action>
+  </UISearchPageLayoutManager>
+  <searchResultBasePathInputSetAction>
+    <title>
+      <SelectBasePath>Виберіть основний шлях</SelectBasePath>
+    </title>
+  </searchResultBasePathInputSetAction>  
+  <UISearchForm>  
+   <message>
+     <keyword-not-support>Невірне ключове слово. Деякі символи не розпізнані.</keyword-not-support>
+     <not-checked>Будь ласка, виберіть тип пошуку.</not-checked>
+     <keyword-not-empty>Будь ласка, введіть ключове слово.</keyword-not-empty>
+   </message>
+  </UISearchForm>
+  <UIPaginatorDefault>
+    <label>
+      <next>Далі</next>
+      <previous>Попередній</previous>
+      <more>Більше</more>
+    </label>
+  </UIPaginatorDefault>
+  <UISearchPageLayoutDefault>
+    <label>
+      <quickEditTitle>Швидке редагування</quickEditTitle>
+    </label>
+  </UISearchPageLayoutDefault>
+  <searchOption>
+    <label>
+      <pageCheckBox>на сторінках</pageCheckBox>
+      <documentCheckBox>за змістом</documentCheckBox>
+    </label>
+  </searchOption>
+  <ViewMode>
+    <label>
+      <option>
+        <all>пошук всіх сайтів</all>
+      </option>  
+    </label>  
+  </ViewMode>
+</bundle>

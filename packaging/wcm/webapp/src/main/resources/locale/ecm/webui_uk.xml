@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<bundle>
+  <!--
+  #####################################################################
+  # org.exoplatform.ecm.webui.tree.selectmany.UICategoriesSelectPanel #
+  #####################################################################
+  -->
+  <UITreeList>
+    <header>
+      <name>Ім’я</name>
+      <action>Додати</action>
+    </header>
+    <info>
+      <child-not-found>Дитина не знайдено!</child-not-found>
+    </info>
+  </UITreeList>
+  <!--
+  ######################################################################
+  # org.exoplatform.ecm.webui.tree.selectmany.UISelectedCategoriesGrid #
+  ######################################################################
+  -->
+  <UISelectedCategoriesGrid>
+    <header>
+      <categoryName>Ім'я категорії</categoryName>
+      <categoryPath>Шлях до категорії</categoryPath>
+      <action>#{word.action}</action>
+    </header>
+    <action>
+      <SaveCategories>#{word.save}</SaveCategories>
+      <Cancel>#{word.cancel}</Cancel>
+    </action>
+    <msg>
+      <cannot-save>Категорії не збережено.</cannot-save>
+      <have-saved>Категорії збережені успішно</have-saved>
+      <non-categories>Невірні категорії. Будь ласка, виберіть відповідні категорії.</non-categories>
+      <confirm-delete>Видалити цю категорію?</confirm-delete>
+    </msg>
+  </UISelectedCategoriesGrid>
+  <!--
+  ######################################################################
+  # org.exoplatform.ecm.webui.selector.UIPermissionSelector           #
+  ######################################################################
+  -->
+  <SelectUserOrGroup>
+    <title>
+      <UIPermissionUser>Виберіть Користувача</UIPermissionUser>
+      <UIPermissionMembership>Виберіть Членство</UIPermissionMembership>
+    </title>
+  </SelectUserOrGroup>
+  <UIPermissionUser>
+    <label>
+      <selectUser>Виберіть користувача</selectUser>
+      <selectGroup>Перегляд і вибір групи</selectGroup>
+    </label>
+  </UIPermissionUser>
+  <UIPermissionMembership>
+    <label>
+      <selectUser>Виберіть Членство</selectUser>
+      <selectGroup>Перегляд і вибір групи</selectGroup>
+    </label>
+  </UIPermissionMembership>
+</bundle>

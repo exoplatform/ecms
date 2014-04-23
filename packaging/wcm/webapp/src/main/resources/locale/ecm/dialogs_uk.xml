@@ -1,0 +1,389 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<bundle>
+  <!--
+  ###################### global word for ECM dialogs resoucebundle ####
+  -->
+  <Ecm>
+    <dialog>
+      <label>
+        <end-time>Час завершення</end-time>
+        <start-time>Час початку</start-time>
+        <lifecycle>Життєвий цикл</lifecycle>
+        <mimeType>Mime тип</mimeType>
+        <repeat-count>Повторити підрахунок</repeat-count>
+        <time-interval>Інтервал часу</time-interval>
+        <query-items>Елементи запросу</query-items>
+        <schedule-type>тип розкладу</schedule-type>
+        <remove>Видалити елемент</remove>
+        <add>Додати елемент</add>
+        <expand>Розгорнути це</expand>
+      </label>
+    </dialog>
+  </Ecm>
+  
+  <UIDocumentForm>
+    <label>
+      <title>#{word.title}</title>
+      <link>Посилання</link>
+      <contentHtml>#{word.content}</contentHtml>
+      <content>#{word.content}</content>
+      <contentPlain>#{word.content}</contentPlain>
+      <name>Ім’я</name>
+    <categories>Категорії</categories>
+    </label>
+  </UIDocumentForm>
+ 
+  <!--
+  ###################### resoucebundle for HTMLFile dialogs template ####
+  -->
+  <HtmlFile>
+    <dialog>
+      <label>
+        <name>Ім’я</name>
+        <content>Контент</content>
+      </label>
+    </dialog>
+  </HtmlFile>
+
+  <!--
+  ###################### resoucebundle for nt:file dialogs template ####
+  -->
+  <File>
+    <dialog>
+      <label>
+        <name>#{word.name}</name>
+        <categories>Категорії</categories>
+        <mimeType>#{Ecm.dialog.label.mimeType}</mimeType>
+        <width>Width</width>
+        <height>Height</height>
+        <content>#{word.content}</content>
+        <re-upload>Файл вже існує. Ви можете видалити його і завантажити інший файл.</re-upload>
+      </label>
+    </dialog>
+  </File>
+
+  <UIActionForm>
+    <label>
+      <description>#{word.description}</description>
+      <port>Порт</port>
+      <userName>#{word.userName}</userName>
+      <password>Пароль</password>
+      <link>Посилання</link>
+      <to>Надіслати пошту</to>
+      <actionName>#{word.name}</actionName>
+    </label>
+  </UIActionForm>
+  <EditFormAction>
+    <label>
+      <description>#{word.description}</description>
+      <port>Порт</port>
+      <userName>#{word.userName}</userName>
+      <password>Пароль</password>
+      <link>Посилання</link>
+      <to>Надіслати пошту</to>
+      <actionName>#{word.name}</actionName>
+    </label>
+  </EditFormAction>
+
+  <!--
+  ###################### resoucebundle for exo:addMetadataAction dialogs template ####
+  -->
+  <AddMetadata>
+    <dialog>
+      <label>
+        <id>Ідентифікатор</id>
+        <name>#{word.name}</name>
+        <lifecycle>#{Ecm.dialog.label.lifecycle}</lifecycle>
+        <metadata>Метадані</metadata>
+        <description>#{word.description}</description>
+      </label>
+    </dialog>
+  </AddMetadata>
+
+  <!--
+  ###################### resoucebundle for exo:autoVersioning dialogs template ####
+  -->
+  <AutoVersioning>
+    <dialog>
+      <label>
+        <id>Ідентифікатор</id>
+        <name>#{word.name}</name>
+        <lifecycle>#{Ecm.dialog.label.lifecycle}</lifecycle>
+        <schedule-type>#{Ecm.dialog.label.schedule-type}</schedule-type>
+        <start-time>#{Ecm.dialog.label.start-time}</start-time>
+        <end-time>#{Ecm.dialog.label.end-time}</end-time>
+        <repeat-count>#{Ecm.dialog.label.repeat-count}</repeat-count>
+        <time-inteval>#{Ecm.dialog.label.time-interval}</time-inteval>
+        <cron-expression>Команда планувальника завдань</cron-expression>
+        <description>#{word.description}</description>
+      </label>
+    </dialog>
+  </AutoVersioning>
+  <!--
+  ###################### resoucebundle for exo:enableVersiong dialogs template ####
+  -->
+  <EnableVersioning>
+    <dialog>
+      <label>
+        <id>Ідентифікатор</id>
+        <name>#{word.name}</name>
+        <lifecycle>#{Ecm.dialog.label.lifecycle}</lifecycle>
+        <schedule-type>#{Ecm.dialog.label.schedule-type}</schedule-type>
+        <start-time>#{Ecm.dialog.label.start-time}</start-time>
+        <end-time>#{Ecm.dialog.label.end-time}</end-time>
+        <repeat-count>#{Ecm.dialog.label.repeat-count}</repeat-count>
+        <time-inteval>#{Ecm.dialog.label.time-interval}</time-inteval>
+        <cron-expression>Cron Expression</cron-expression>
+        <description>#{word.description}</description>
+      </label>
+    </dialog>
+  </EnableVersioning>
+  <!--
+  ###################### resoucebundle for dc:elementSet dialogs template ####
+  -->
+  <ElementSet>
+    <dialog>
+      <label>
+        <title>#{word.title}:</title>
+        <creator>Розробник:</creator>
+        <subject>#{word.subject}:</subject>
+        <source>Джерело:</source>
+        <contributor>Автор:</contributor>
+        <resource-type>Тип ресурсу:</resource-type>
+        <date>#{word.date}:</date>
+        <publisher>Видавець:</publisher>
+        <description>#{word.description}:</description>
+        <rights>Права:</rights>
+        <relation>Співвідношення:</relation>
+        <format>#{word.format}:</format>
+        <coverage>Покриття:</coverage>
+        <identifier>Ідентифікатор:</identifier>
+        <language>Мова:</language>
+      </label>
+    </dialog>
+  </ElementSet>
+
+  <!--
+  ###################### resoucebundle for exo:actionable dialogs template ####
+  -->
+  <Actionable>
+    <dialog>
+      <label>
+        <primary-type>Основний тип</primary-type>
+        <mixin-types>Змішані типи</mixin-types>
+      </label>
+    </dialog>
+  </Actionable>
+
+  <!--
+  ###################### resoucebundle for exo:move dialogs template ####
+  -->
+  <Move>
+    <dialog>
+      <label>
+        <destination-workpsace>Призначення робочої області</destination-workpsace>
+        <destination-path>Шлях призначення</destination-path>
+        <primary-type>Основний тип</primary-type>
+        <mixin-types>Змішані типи</mixin-types>
+      </label>
+    </dialog>
+  </Move>
+  <!--
+  ###################### resoucebundle for exo:published dialogs template ####
+  -->
+  <Published>
+    <dialog>
+      <label>
+        <start-publication>Початок публікації</start-publication>
+        <end-publication>Завершення публікації</end-publication>
+      </label>
+    </dialog>
+  </Published>
+ 
+  <!--
+  ###################### resoucebundle mix:referenceable dialogs template ####
+  -->
+  <Referenceable>
+    <dialog>
+      <label>
+        <uuid>UUID</uuid>
+      </label>
+    </dialog>
+  </Referenceable>
+  <!--
+  ###################### resoucebundle exo:relationable dialogs template ####
+  -->
+  <Relationable>
+    <dialog>
+      <label>
+        <relation>Співвідношення</relation>
+      </label>
+    </dialog>
+  </Relationable>
+  <!--
+  ###################### resoucebundle exo:rss-enable dialogs template ####
+  -->
+  <RssEnable>
+    <dialog>
+      <label>
+        <title>Назва</title>
+        <summary>#{word.summary}</summary>
+      </label>
+    </dialog>
+  </RssEnable>
+
+  <!--
+  ###################### resoucebundle mix:versionable dialogs template ####
+  -->
+  <Versionable>
+    <dialog>
+      <label>
+        <version-history>Історія версій</version-history>
+        <base-version>Базова версія</base-version>
+        <is-checked-out>Видана</is-checked-out>
+        <predecessors>Попередники</predecessors>
+        <merge-failed>Не вдалося виконати злиття</merge-failed>
+        <uuid>UUID</uuid>
+      </label>
+    </dialog>
+  </Versionable>
+
+  <!--
+  ##################### resoucebundle for resouce container dialogs template#####
+  -->
+  <ResouceContainer>
+    <dialog>
+      <label>
+        <name>Ім’я</name>
+        <autoload>Автозавантаження</autoload>
+        <minetype>Mime тип</minetype>
+        <content>Контент</content>
+      </label>
+    </dialog>
+  </ResouceContainer>
+  <!--
+  ###################### resoucebundle for validator ####
+  -->
+  <EmailAddressValidator>
+    <msg>
+      <Invalid-input>Адреса електронної пошти недійсна.</Invalid-input>
+    </msg>
+  </EmailAddressValidator>
+  <EmptyFieldValidator>
+    <msg>
+      <empty-input>Поле "{0}" обов'язкове. Будь ласка, введіть ваше значення.</empty-input>
+    </msg>
+  </EmptyFieldValidator>
+  <NumberFormatValidator>
+    <msg>
+      <Invalid-number>Поле "{0}" є неприпустимим.</Invalid-number>
+    </msg>
+  </NumberFormatValidator>
+  <!--
+  #####Since version 2.4#######
+
+  ###################### resoucebundle exo:taxonomyAction dialogs template ####
+  -->
+  <ScriptAction>
+    <dialog>
+      <label>
+        <id>Ідентифікатор</id>
+        <name>Ім’я</name>
+        <lifecycle>Життєвий цикл</lifecycle>
+        <homePath>Маршрут особистого каталогу</homePath>
+        <targetWorkspace>Цільова робоча область</targetWorkspace>
+        <targetPath>Цільовий шлях</targetPath>
+      </label>
+    </dialog>
+  </ScriptAction>
+  <UIDialogForm>
+   <form>
+   <DialogFormException>Не вдалося зберегти цей документ. Там може бути проблема з попереднім збереженням метода-перехоплювача.</DialogFormException>
+   </form>
+  </UIDialogForm>
+
+  <!--
+  #####Since version 2.6#######
+
+  ###################### resoucebundle exo:taxonomyAction dialogs template ####
+  -->
+<no>НІ</no>
+<yes>Так</yes>
+<true>Вірно</true>
+<false>Невірно</false>
+<Electronic>Електронний</Electronic>
+<Paper>Паперовий</Paper>
+<NONE>Жоден</NONE>
+<CLASSIFIED>Класифікований</CLASSIFIED>
+<UNCLASSIFIED>Некласифікований</UNCLASSIFIED>
+<NOCONTRACT>Немає контракту</NOCONTRACT>
+<one-minute>Одна хвилина</one-minute>
+<hourly>Погодинно</hourly>
+<daily>Щоденно</daily>
+<quarterly>Щоквартально</quarterly>
+<yearly>Щороку</yearly>
+<ten-years>Десять років</ten-years>
+<read>Дія користувача</read>
+  <schedule>Планувальник</schedule>
+  <node_added>Доповнення вмісту</node_added>
+  <node_removed>Вилучення вмісту</node_removed>
+  <property_added>Доповнення властивості</property_added>
+  <property_removed>Видалення власності</property_removed>
+  <property_changed>Модифікація власності</property_changed>
+
+  <ScriptAction>
+    <dialog>
+      <label>
+        <isDeep>Глибоке</isDeep>
+        <nodetypes>Типи вузла</nodetypes>
+        <affectedNodeTypeNames>Вражені типи вузла</affectedNodeTypeNames>
+      </label>
+    </dialog>
+  </ScriptAction>
+
+  <AddMetadata>
+    <dialog>
+      <label>
+        <isDeep>Глибоке</isDeep>
+        <nodetypes>Типи вузла</nodetypes>
+        <affectedNodeTypeNames>Вражені типи вузла</affectedNodeTypeNames>
+      </label>
+    </dialog>
+  </AddMetadata>
+
+  <EnableVersioning>
+    <dialog>
+      <label>
+        <isDeep>Глибоке</isDeep>
+        <nodetypes>Типи вузла</nodetypes>
+        <affectedNodeTypeNames>Вражені типи вузла</affectedNodeTypeNames>
+      </label>
+    </dialog>
+  </EnableVersioning>
+  
+  <AutoVersioning>
+    <dialog>
+      <label>
+        <isDeep>Глибоке</isDeep>
+        <nodetypes>Типи вузла</nodetypes>
+        <affectedNodeTypeNames>Вражені типи вузла</affectedNodeTypeNames>
+      </label>
+    </dialog>
+  </AutoVersioning>
+
+  <AccessibleMedia>
+  <dialog>
+  <label>
+  <captions>Підписи</captions>
+<audioDescription>Звуковий опис</audioDescription>
+<alternativeText>Текст заміщення</alternativeText>
+</label>
+</dialog>
+<help>
+<CaptionsHelp>Підписи повинні надати текст діалогу і важливих звуків</CaptionsHelp>
+<AudioDescriptionHelp>Звуковий опис - це коментар до відео</AudioDescriptionHelp>
+<AlternativeTextHelp>Забезпечити доступним, альтернативний спосіб представити інформацію</AlternativeTextHelp>
+</help>
+</AccessibleMedia>
+  
+</bundle>

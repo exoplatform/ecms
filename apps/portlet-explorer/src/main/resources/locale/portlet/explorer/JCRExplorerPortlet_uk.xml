@@ -1,0 +1,3187 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<bundle>
+  <!--
+  #############################################################################
+  #             org.exoplatform.ecm.webui.component.UICommentForm             #
+  #############################################################################
+  -->
+  <UICommentForm>
+    <label>
+      <name>Ім’я</name>
+      <email>Електронна пошта</email>
+      <website>Сайт</website>
+      <comment>Коментар</comment>
+    </label>
+    <action>
+      <Save>#{word.save}</Save>
+      <Cancel>#{word.cancel}</Cancel>
+    </action>
+    <msg>
+      <not-support>Неможливо коментувати документ цього типу.</not-support>
+      <not-checkedout>Ви повинні відмітити вузол, перш ніж коментувати його.</not-checkedout>
+      <content-null>Ви не можете опублікувати порожній коментар.</content-null>
+    </msg>
+  </UICommentForm>
+  <!--
+  #############################################################
+  # org.exoplatform.ecm.webui.component.UIVoteForm.gtmpl    #
+  #############################################################
+  -->
+  <UIVoteForm>
+    <title>
+      <normal>Погано</normal>
+      <good>Нижче середнього</good>
+      <verygood>Посередньо</verygood>
+      <excellent>Вище середнього</excellent>
+      <best>Добре</best>
+      <no-value>ще немає оцінок</no-value>
+    </title>
+    <label>
+      <my-rating>Мій рейтинг:</my-rating>
+    </label>
+    <button>
+      <label>
+        <confirm>Гаразд</confirm>
+      </label>
+    </button>
+    <msg>
+      <not-support>Ви не можете голосувати за цей тип документа.</not-support>
+      <not-checkedout>Ви повинні відмітити вузол перед голосуванням.</not-checkedout>
+      <vote-restriction>Не можете голосувати більше одного разу.</vote-restriction>
+    </msg>
+  </UIVoteForm>
+ 
+  <!--
+  #############################################################################
+  #             org.exoplatform.ecm.webui.component.explorer.UIJCRExplorer    #
+  #############################################################################
+  -->
+  <UIJCRExplorer>
+    <msg>
+      <refresh-session-success>Сесія була успішно оновлена.</refresh-session-success>
+      <no-node-history>Ви знаходитесь в кореневому вузлі.</no-node-history>
+      <save-session-success>Всі зміни були збережені.</save-session-success>
+      <target-path-not-found>Немає доступу до цього вузла, оскільки він більше не існує або ви не маєте права на доступ до нього.</target-path-not-found>
+    </msg>
+  </UIJCRExplorer>
+  <!--
+  #############################################################################
+  #             org.exoplatform.ecm.webui.component.explorer.UISideBar        #
+  #############################################################################
+  -->
+  <UISideBar>
+    <label>
+      <Relation>Співвідношення</Relation>
+      <Explorer>Файловий провідник</Explorer>
+      <Close>Закрити бічну панель</Close>
+      <TagExplorer>Хмара тегів</TagExplorer>
+      <Clipboard>Буфер обміну</Clipboard>
+      <SavedSearches>Збережені результати пошуку</SavedSearches>
+    </label>
+    <title>
+      <Control>Control Sidebar</Control>
+      <Close>Закрити бічну панель</Close>
+    </title>
+  </UISideBar>
+  <!--
+  ################################################################################
+  #             org.exoplatform.ecm.webui.component.explorer.UIExplorerActionBar #
+  ################################################################################
+  -->
+  <UIViewBar>
+    <label>
+      <driveWorkspace>Робоча область диску:</driveWorkspace>
+      <backToJCR>Назад до основних дисків JCR</backToJCR>
+      <setUpBrowser>Встановіть настройки перегляду</setUpBrowser>
+      <refesh>Оновити</refesh>
+      <currentDrive>Поточний диск</currentDrive>
+      <selectView>Виберіть вид</selectView>
+      <showSideBar>Показати бічну панель</showSideBar>
+      <more>Більше</more>
+      <backTo>Назад</backTo>
+    </label>
+  </UIViewBar>
+
+  <!--
+  #############################################################################
+  #             org.exoplatform.ecm.webui.component.explorer.UIDrivesArea  #
+  #############################################################################
+  -->
+  <UIDrivesBrowser>
+    <title>
+      <PersonalDrives>Персональні диски</PersonalDrives>
+      <GroupDrives>Групові диски</GroupDrives>
+      <GeneralDrives>Загальні диски</GeneralDrives>
+    </title>
+    <msg>
+      <no-view-found>Немає доступного виду у відповідності з вашими правами доступу на диску '{0}'.</no-view-found>
+      <access-denied>Доступ заборонено. Можливо у вас немає права доступа до робочої області диска '{0}'.</access-denied>
+      <workspace-not-exist>Диск '{0}' був розміщений в одній невизначеній робочій області. Будь ласка, переналаштуйте цей диск.</workspace-not-exist>
+    </msg>
+  </UIDrivesBrowser>
+
+  <!--
+  #############################################################################
+  #             org.exoplatform.ecm.webui.component.explorer.UITreeExplorer    #
+  #############################################################################
+  -->
+  <UITreeExplorer>
+    <title>Explorer</title>
+    <label>
+      <Root>Корінь</Root>
+      <webDavView>Відкрити в MS Office</webDavView>
+    </label>
+    <msg>
+      <path-not-found>Цей елемент видалено або змінено. Будь ласка, натисніть кнопку Оновити.</path-not-found>
+    </msg>
+  </UITreeExplorer>
+  <!--
+  ##################################################################################
+  #             org.exoplatform.ecm.webui.component.explorer.UIViewRelationList    #
+  ##################################################################################
+  -->
+  <UIViewRelationList>
+    <label>
+      <languages-list>Переклади</languages-list>
+      <relation-list>Відносини</relation-list>
+      <references-list>Посилання</references-list>
+      <no-related-document>Немає пов'язаних  документів</no-related-document>
+      <related-document>Пов'язані документи</related-document>
+    </label>
+  </UIViewRelationList>
+  <!--
+  #########################################################################################
+  #             org.exoplatform.ecm.webui.component.explorer.control.UIPreferencesForm  #
+  #########################################################################################
+  -->
+  <UIPreferencesForm>
+    <title>Встановіть настройки перегляду</title>
+    <label>
+      <enableStructure>Увімкнути структуру DMS :</enableStructure>
+      <showSideBar>Показати бічну панель:</showSideBar>
+      <showHiddenNode>Показувати приховані вузли:</showHiddenNode>
+      <showNonDocument>Показать вузли поза документів:</showNonDocument>
+      <showRefDocuments>Показати посилальні документи:</showRefDocuments>
+      <enableDragAndDrop>Увімкнути перетягування:</enableDragAndDrop>
+      <sortBy>Сортувати за:</sortBy>
+      <order>Сортувати по:</order>
+      <nodesPerPage>Вузлів на сторінці:</nodesPerPage>
+    </label>
+    <action>
+      <Back>#{word.close}</Back>
+      <Save>#{word.save}</Save>
+    </action>
+  </UIPreferencesForm>
+  <!--
+  #########################################################################################
+  #             org.exoplatform.ecm.webui.component.explorer.control.UIPreferencesForm  #
+  #########################################################################################
+  -->
+  <UIAllItemsPreferenceForm>
+    <title>Встановити налаштування фільтра</title>
+    <action>
+      <Cancel>#{word.cancel}</Cancel>
+      <Save>#{word.save}</Save>
+    </action>
+  </UIAllItemsPreferenceForm>
+  <!--
+  #########################################################################################
+  #             org.exoplatform.ecm.webui.component.explorer.UIRenameForm  #
+  #########################################################################################
+  -->
+  <UIRenameForm>
+    <title>Перейменувати</title>
+    <label>
+      <nameField>Ім’я</nameField>
+      <titleField>Назва</titleField>
+    </label>
+    <action>
+      <Cancel>#{word.cancel}</Cancel>
+      <Save>#{word.save}</Save>
+      <Back>#{word.back}</Back>
+    </action>
+    <msg>
+      <rename-successfull>Вузол '{0}' було успішно перейменовано в '{1}'.</rename-successfull>
+      <rename-denied>Доступ заборонено. Цей вузол не можна перейменувати.</rename-denied>
+      <fileName-invalid>Нове Ім'я  містить кілька неприпустимих символів.</fileName-invalid>
+      <newName-same-oldName>Нове ім'я вже існує. Будь ласка, перевірте ще раз.</newName-same-oldName>
+      <version-exception>Цей вузол (або батьківський вузол) не відмічений.</version-exception>
+      <lock-exception>Цей вузол заблоковано. Будь ласка, розблокуйте його перед перейменуванням.</lock-exception>
+      <constraintViolation-exception>Помилка під час перейменування вузла '{0}'. Будь ласка, перевірте ще раз.</constraintViolation-exception>
+      <unknown-prefix>Префікс '{0}' ще не був зареєстрований.</unknown-prefix>
+      <rename-error>Помилка під час перейменування цього вузла. Будь ласка, перевірте ще раз.</rename-error>
+    </msg>
+  </UIRenameForm>
+  <UIPopupWindow>
+    <title>
+      <UIRenameForm>Перейменувати</UIRenameForm>
+      <UIActionContainer>Змінити дію</UIActionContainer>
+      <UIFolderForm>Нова папка</UIFolderForm>
+      <UIUploadManager>Завантажити файл</UIUploadManager>
+      <UIReferencesList>Список посилань</UIReferencesList>
+      <UIExportNode>Експорт</UIExportNode>
+      <UINodeTypeInfo>Відомості про тип вузла</UINodeTypeInfo>
+      <UIVersionInfo>Інформація про версію</UIVersionInfo>
+      <UIActivateVersion>Активувати версію</UIActivateVersion>
+      <UIAuditingInfo>Інформація про аудит</UIAuditingInfo>
+      <UIActivateAuditing>Активувати аудит</UIActivateAuditing>
+      <UIPermissionManager>Керування дозволами</UIPermissionManager>
+      <UIPropertiesManager>Керування властивостями</UIPropertiesManager>
+      <UIECMSearch>Розширений пошук</UIECMSearch>
+      <UISavedQuery>Збережений список запитів</UISavedQuery>
+      <UIWatchDocumentForm>Дивитися документ</UIWatchDocumentForm>
+      <UIActionManager>Керувати діями</UIActionManager>
+      <UIDocumentForm>Редагувати документ</UIDocumentForm>
+      <UIDocumentFormController>Додати новий документ</UIDocumentFormController>
+      <EditFormController>Редагувати документ</EditFormController>
+      <UIRelationManager>Додати зв'язок</UIRelationManager>
+      <UICategoryManager>Додати категорію</UICategoryManager>
+      <UIImportNode>Import</UIImportNode>
+      <UIViewMetadataManager>Перегляд метаданих</UIViewMetadataManager>
+      <UIVoteForm>Проголосувати за документ</UIVoteForm>
+      <UICommentForm>Коментар</UICommentForm>
+      <UIPreferencesForm>Налаштування</UIPreferencesForm>
+      <UIPublicationManager>Керувати публікацією</UIPublicationManager>
+      <UIConfirmMessage>Видалити?</UIConfirmMessage>
+      <UIDeleteFileConfirmMessage>Видалити файл ?</UIDeleteFileConfirmMessage>
+      <UIDeleteFolderConfirmMessage>Видалити папку?</UIDeleteFolderConfirmMessage>
+      <UIDeleteItemsConfirmMessage>Видалити елементи?</UIDeleteItemsConfirmMessage>
+      <UIRestoreConfirmMessage>Підтвердити відновлення</UIRestoreConfirmMessage>
+      <UIActivePublication>Внести до життєвого циклу публікації</UIActivePublication>
+      <UITaggingForm>Відмітити документ</UITaggingForm>
+      <UIThumbnailForm>Додати зображення ескізу</UIThumbnailForm>
+      <UIAllItemsPreferenceForm>Налаштування привілеїв</UIAllItemsPreferenceForm>
+      <UISelectRestorePath>Виділіть шлях відновлення</UISelectRestorePath>
+      <UISEOForm>Керувати SEO</UISEOForm>
+      <UISEOToolbarForm>Керувати SEO</UISEOToolbarForm>
+    </title>
+    <header>
+      <workspace>Робоча область</workspace>
+      <path>Шлях</path>
+    </header>
+  </UIPopupWindow>
+  <!--
+  #########################################################################################
+  #             org.exoplatform.ecm.webui.component.explorer.UIResourceForm #
+  #########################################################################################
+  -->
+  <UIResourceForm>
+    <title>Редагувати вміст файлу</title>
+    <label>
+      <name>Ім’я</name>
+      <textToModify>Текст для зміни</textToModify>
+      <fileToUpload>Завантажити новий вміст для даного документа (повинні бути одного mime-типу )</fileToUpload>
+    </label>
+  </UIResourceForm>
+  <!--
+  ###################################################################################
+  #             org.exoplatform.ecm.webui.component.explorer.UIActionBar      #
+  ###################################################################################
+  -->
+  <UIActionBar>
+    <tooltip>
+      <AddFolder>Нова папка</AddFolder>
+      <AddDocument>Новий контент</AddDocument>
+      <EditDocument>Редагувати</EditDocument>
+      <Upload>Завантажити</Upload>
+      <Paste>Вставити</Paste>
+      <Search>Пошук</Search>
+      <WatchDocument>Відстежувати/Перестати відстежувати</WatchDocument>
+      <TaggingDocument>Тег</TaggingDocument>
+      <Vote>Проголосувати</Vote>
+      <Comment>Коментар</Comment>
+      <ManageVersions>Версії</ManageVersions>
+      <ManageAuditing>Аудит</ManageAuditing>
+      <ManagePublications>Публікації</ManagePublications>
+      <ManageCategories>Категорії</ManageCategories>
+      <ManageRelations>Відносини</ManageRelations>
+      <ManageActions>Дії</ManageActions>
+      <ExportNode>Експорт</ExportNode>
+      <ImportNode>Import</ImportNode>
+      <OverloadThumbnail>Поєднати ескіз</OverloadThumbnail>
+      <ManageHidden>Показати/Приховати зміст</ManageHidden>
+      <ViewReferences>Посилання</ViewReferences>
+      <ViewNodeType>Типи</ViewNodeType>
+      <ViewPermissions>Права доступу</ViewPermissions>
+      <ViewProperties>Властивості</ViewProperties>
+      <ViewMetadatas>Метадані</ViewMetadatas>
+      <ViewRelations>Показати/Приховати відносини</ViewRelations>
+      <ShowJCRStructure>Показати/Приховати структуру контенту</ShowJCRStructure>
+    </tooltip>
+    <msg>
+      <cannot-action-in-rootnode>Цю дію не можна виконати в кореневому вузлі.</cannot-action-in-rootnode>
+      <node-checkedin>Спочатку відмітьте.</node-checkedin>
+      <cannot-enable-version-rootnode>Не вдалося увімкнути керування версіями для кореневого вузла.</cannot-enable-version-rootnode>
+      <cannot-enable-publication-rootnode>Не вдалося увімкнути публікації для кореневого вузла.</cannot-enable-publication-rootnode>
+      <manage-publication>
+        <not-supported-nodetype>Публікація підтримує тільки вузол документу.</not-supported-nodetype>
+        <no-publication-lifecycle>Жоден життєвий цикл публікації не налаштовується.</no-publication-lifecycle>
+      </manage-publication>
+      <unsubcriber-lifecycle>Підписка на вузол вже була скасована.</unsubcriber-lifecycle>
+      <not-supported-nodetype>Життєвий цикл, підписка на який була скасована, підтримує тільки вузол документа.</not-supported-nodetype>
+      <unsubcriber-lifecycle-finish>Підписка на вузол була успішно скасована.</unsubcriber-lifecycle-finish>
+      <access-false>Вузол не є статтею або не зазначений.</access-false>
+      <unsupported-action>Ця дія не підтримується.</unsupported-action>
+      <not-relationable>У цього вузла ще немає посилань пов'язаних з іншим вузлом.</not-relationable>
+      <node-pasted>Вузол '{0}' було вставлено у  місце '{1}'. Ця операція вже збережена.</node-pasted>
+      <no-node-selected>Нема скопіруваних вузлів.</no-node-selected>
+      <unable-edit>Вузол '{0}' типу '{1}' не підтримується для редагування.</unable-edit>
+      <not-support>Не можна редагувати виділений вузол.</not-support>
+      <template-null>Цей вузол не містить доступних діалогових вікон.</template-null>
+      <keyword-null>Немає ключових слів для пошуку.</keyword-null>
+      <not-found>Результатів не знайдено.</not-found>
+      <keyword-not-allow>Це ключове слово не допускається.</keyword-not-allow>
+      <is-not-referenable>Не можна посилатися на вузол '{0}'.</is-not-referenable>
+      <access-denied>Доступ заборонено. У вас немає дозволів на редагування цього вузла.</access-denied>
+      <access-add-denied>Доступ заборонений. Ви не повинні додавати дозвіл в цьому вузлі.</access-add-denied>
+      <item-existed>Цей вузол уже існує. Він не може мати однакове ім'я із спорідненими вузлами.</item-existed>
+      <removed-hidden-mixin>Ви успішно видалили  приховане змішування.</removed-hidden-mixin>
+      <added-hidden-mixin>Ви успішно додали  приховане змішування.</added-hidden-mixin>
+      <not-supported>Ця функція підтримується тільки для типу документа.</not-supported>
+      <empty-file-type>Документ не можна додати до цього вузла.</empty-file-type>
+      <unsupported-watch>Можна відстежувати лише вузол документу.</unsupported-watch>
+      <watch-checkedin>Ви повинні перевірити вузол до перегляду.</watch-checkedin>
+      <unsupported-tagging>Тільки вузол документу може бути відміченим.</unsupported-tagging>
+      <tagnode-checkedin>Ви повинні перевірити вузол перед тим, як ставити  позначку.</tagnode-checkedin>
+    </msg>
+    <title>
+      <select-tab>Виберіть вкладку</select-tab>
+      <SimpleSearch>Швидкий пошук</SimpleSearch>
+      <AdvanceSearch>Розширений пошук</AdvanceSearch>
+      <SavedQueries>Збережені запити</SavedQueries>
+      <ShowAllOwnedByUser>Показати всі мої елементи</ShowAllOwnedByUser>
+      <ShowAllFavourite>Відображати всі улюблені елементи</ShowAllFavourite>
+      <ShowAllHidden>Показати всі приховані елементи</ShowAllHidden>
+      <ShowAllFromTrash>Показати всі елементи з кошика</ShowAllFromTrash>
+    </title>
+  </UIActionBar>
+  <UIPopupMenu>
+    <msg>
+      <has-not-permission>Доступ заборонено.  Ви не повинні додавати дозвіл в цьому вузлі.</has-not-permission>
+      <has-not-edit-permission>Доступ заборонений. Ви не повинні редагувати дозвіл в цьому вузлі. Будь ласка, зверніться до адміністратора.</has-not-edit-permission>
+      <cannot-login-node>Ви не можете отримати доступ і вставити вузол тут.</cannot-login-node>
+      <cannot-paste-nodetype>Не можна вставити тут вузол.</cannot-paste-nodetype>
+      <has-not-permission-unlok>Вам не дозволено розблокувати цей вузол.</has-not-permission-unlok>
+      <bound-exception>Ви не маєте дозволу на перейменування цього вузла. Будь ласка, зверніться до адміністратора.</bound-exception>
+      <bound-move-exception>Не можна перемістити вузол в самого себе або у його підвузол.</bound-move-exception>
+      <does-not-support-auditing>Ви не можете активувати аудит на цьому вузлі.</does-not-support-auditing>
+      <can-not-rename-node>Вам не дозволено перейменувати цей вузол. Зверніться до адміністратора, щоб отримати необхідне право.</can-not-rename-node>
+      <can-not-cut-node>Ви не маєте дозволу вирізати цей вузол. Будь ласка, зверніться до адміністратора.</can-not-cut-node>
+      <can-not-remove-node>Ви не маєте дозволу на видалення цього вузла. Будь ласка, зверніться до адміністратора.</can-not-remove-node>
+      <can-not-lock-node>Вам не дозволено блокування вузла {0}. Будь ласка, зверніться до адміністратора.</can-not-lock-node>
+      <can-not-unlock-node>Вам не дозволено розблокувати цей вузол. Будь ласка, зверніться до адміністратора.</can-not-unlock-node>
+      <no-node>Будь ласка, оберіть хоча б один вузол перед вставкою.</no-node>
+      <can-not-paste-node>Ви не маєте дозволу на переміщення цього вузла. Будь ласка, зверніться до адміністратора.</can-not-paste-node>
+      <can-not-move-node>Ви не маєте дозволу на переміщення цього вузла. Будь ласка, зверніться до адміністратора.</can-not-move-node>
+      <does-not-support-versioning>Ви не маєте дозволу на переміщення цього вузла. Будь ласка, зверніться до адміністратора.</does-not-support-versioning>
+      <path-not-found>Цей елемент видалено або змінено. Будь ласка, натисніть кнопку Оновити.</path-not-found>
+      <paste-lock-exception>Не можна вставити '{0}' в цей вузол, оскільки вихідний або цільовий вузол заблоковано або пов'язано з заблокованим вузлом.</paste-lock-exception>
+      <can-not-checkin-node>Ви не можете позначати в цьому  вузлі. Будь ласка, перевірте, що ви маєте відповідні права доступу.</can-not-checkin-node>
+      <can-not-checkout-node>Не вдалося перевірити цей вузол. Будь ласка, перевірте, що ви маєте відповідні права доступу.</can-not-checkout-node>
+      <move-constraint-exception>Сталася помилка при переміщенні вузла.</move-constraint-exception>
+      <not-lock-owner>Ви не можете розблокувати цей вузол, оскільки ви не є власником блокування.</not-lock-owner>
+      <is-checked-in>Будь ласка, перевірте цей вузол до перейменування.</is-checked-in>
+      <is-checked-in-lock>Будь ласка, перевірте цей вузол перед блокуванням.</is-checked-in-lock>
+      <cant-lock>Не можна заблокувати цей вузол.</cant-lock>
+      <node-locked>Елемент, що має шлях {0} або верхній рівень  заблоковано.</node-locked>
+      <can-not-delete>Будь ласка, закрийте цей вузол перед видаленням.</can-not-delete>
+      <can-not-delete-version>Не можна видалити цей вузол. Це керування версіями.</can-not-delete-version>
+      <not-support>Не вдалося видалити виділений вузол. Будь ласка, виберіть інший вузол.</not-support>
+      <current-node-not-allow-paste>Не можна вставити скопійований тип вузла  в поточний вузол.</current-node-not-allow-paste>
+      <copied-node-in-versioning>Не можна вставити скопійований вузол. Це керування версіями.</copied-node-in-versioning>
+      <parent-node-locked>Ви не маєте дозволу, щоб розблокувати вузол '{0}'.</parent-node-locked>
+      <this-node-locked-by-parent>Ви не можете розблокувати цей вузол. Він заблокований батьківським вузлом або вузлом-предком.</this-node-locked-by-parent>
+      <paste-node-same-name>Вузол з такою ж назвою, як у вузла в папц,і не можна вставити в папку призначення.</paste-node-same-name>
+      <has-not-add-permission>У вас немає дозволу на додавання нового вузла.</has-not-add-permission>
+      <node-cutting>Цей вузол вирізається. Ви не можете вставити його тут.</node-cutting>
+      <access-denied>Доступ заборонено. Ви не можете мати дозволу в цьому вузлі.</access-denied>
+      <remove-verion-exception>Цей вузол не можна видалити, тому, що він (або його предок) не відмічені.</remove-verion-exception>
+      <remove-referentialIntegrityException>Не можна видалити цей вузол, тому що він в даний час є об'єктом Властивості посилання.</remove-referentialIntegrityException>
+      <constraintviolation-exception>Jcr:uuid обов'язковий елемент не знайдено. Можливо вузол було видалено або змінено. Будь ласка, натисніть кнопку Оновити.</constraintviolation-exception>
+      <path-not-found-exception>Цей вузол видалено або змінено. Будь ласка, натисніть кнопку Оновити.</path-not-found-exception>
+      <not-exist-categories>Категорії не існує.</not-exist-categories>
+    </msg>
+  </UIPopupMenu>
+  <!--
+  #############################################################################
+  #     org.exoplatform.ecm.webui.component.explorer.actions.UIFolderForm     #
+  #############################################################################
+  -->
+  <UIFolderForm>
+    <action>
+      <Cancel>#{word.cancel}</Cancel>
+      <Save>Створити папку</Save>
+    </action>
+    <label>
+      <titleTextBox>Ім'я папки:</titleTextBox>
+      <customTypeCheckBox>Використовувати користувальницький тип папки</customTypeCheckBox>
+    </label>
+    <title>Додати/Змінити папку</title>
+    <msg>
+      <addFolder-successful>Папка '{0}' була успішно додана.</addFolder-successful>
+      <name-invalid>Будь ласка, введіть ім'я папки.</name-invalid>
+      <title-invalid>Будь ласка, введіть назву папки.</title-invalid>
+      <name-not-allowed>Це ім'я не допускається.</name-not-allowed>
+      <fileName-error>Неприпустиме ім'я файлу.</fileName-error>
+      <constraint-violation>В поточний вузол не дозволяють додати тип вузла"{0}".</constraint-violation>
+      <repository-exception>Сталася неочікувана помилка. Для більш докладної інформації зверніться до адміністратора.</repository-exception>
+      <repository-exception-permission>У вас немає дозволу на додання нової папки до цього вузла.</repository-exception-permission>
+      <numberformat-exception>Не можна зберегти цю папку. Надане ім'я має бути в числовому форматі.</numberformat-exception>
+      <!--DMS 2.4.x; ECM-3553-->
+      <not-allow-sameNameSibling>Неможливо зберегти  папку. Цей вузол не підтримує можливість збереження двох вузлів з такою ж назвою.</not-allow-sameNameSibling>
+      <ntFolder-not-avaiable>Слід вибрати користувальницький тип папки</ntFolder-not-avaiable>
+    </msg>
+    <help>
+      <customTypeCheckBoxHelp>Перевірте, якщо ви збираєтеся зберігати веб-вміст або користувальницькі типи документів в цій папці</customTypeCheckBoxHelp>
+    </help>
+  </UIFolderForm>
+  <!--
+  ###################################################################################
+  #             org.exoplatform.ecm.webui.component.explorer.UIDocumentWorkspace    #
+  ###################################################################################
+  -->
+  <UIWorkingArea>
+    <title>
+      <Icon>Піктограма</Icon>
+    </title>
+    <msg>
+      <!-- Delte one node is not in trash and have no relation -->
+      <confirm-delete>Ви впевнені, що бажаєте видалити елемент "{0}"?</confirm-delete>
+      <confirm-delete-file>Ви дійсно бажаєте видалити файл '{0}'?</confirm-delete-file>
+      <confirm-delete-folder>Ви дійсно бажаєте видалити папку "{0}" та всі вкладені папки?</confirm-delete-folder>
+      
+      <!-- Delte one node is in trash and have no relation -->
+      <confirm-delete-permanently>Ви дійсно бажаєте остаточно видалити елемент "{0}"?</confirm-delete-permanently>
+      <confirm-delete-file-permanently>Ви дійсно бажаєте остаточно видалити файл "{0}"?</confirm-delete-file-permanently>
+      <confirm-delete-folder-permanently>Ви дійсно бажаєте остаточно видалити папку "{0}" та всі вкладені папки?</confirm-delete-folder-permanently>
+      
+      <!-- Delte one node is not in trash and have relations -->
+      <confirm-delete-has-relations>Ви впевнені, що бажаєте видалити елемент "{0}" та його посилання?</confirm-delete-has-relations>
+      <confirm-delete-file-has-relations>Ви впевнені, що бажаєте видалити файл "{0}" та його посилання?</confirm-delete-file-has-relations>
+      <confirm-delete-folder-has-relations>Ви впевнені, що бажаєте видалити папку "{0}" та її посилання?</confirm-delete-folder-has-relations>
+      
+      <!-- Delte multiple nodes, not in Trash, have no relations -->
+      <confirm-delete-multi-nodes-generic>Ви дійсно бажаєте видалити {0}  виділених елементів?</confirm-delete-multi-nodes-generic>  
+      <confirm-delete-multi-nodes-file>Ви впевнені, що бажаєте видалити {0} вибраних файлів?</confirm-delete-multi-nodes-file>
+      <confirm-delete-multi-nodes-folder>Ви впевнені, що бажаєте видалити {0} вибраних папок та всі вкладені папки?</confirm-delete-multi-nodes-folder>
+      <confirm-delete-multi-nodes-generic-and-file>Чи ви справді бажаєте видалити {0} вибраних елементів та файлів?</confirm-delete-multi-nodes-generic-and-file>
+      <confirm-delete-multi-nodes-generic-and-folder>Ви впевнені, що бажаєте видалити {0} вибраних елементів, папок та всі вкладені папки?</confirm-delete-multi-nodes-generic-and-folder>
+      <confirm-delete-multi-nodes-file-and-folder>Ви впевнені, що бажаєте видалити {0} вибраних файлів, папок та всі вкладені папки?</confirm-delete-multi-nodes-file-and-folder>
+      <confirm-delete-multi-nodes-generic-and-file-and-folder>Ви впевнені, що бажаєте видалити {0} вибраних елементів, файлів, папок та всі вкладені папки?</confirm-delete-multi-nodes-generic-and-file-and-folder>
+      
+      <!-- Delte multiple nodes, in Trash -->
+      <confirm-delete-multi-nodes-generic-permanently>Ви дійсно бажаєте остаточно видалити {0} виділених елементів?</confirm-delete-multi-nodes-generic-permanently>  
+      <confirm-delete-multi-nodes-file-permanently>Ви дійсно бажаєте остаточно видалити {0} виділених файлів?</confirm-delete-multi-nodes-file-permanently>
+      <confirm-delete-multi-nodes-folder-permanently>Ви дійсно бажаєте остаточно видалити {0} вибраних папок та всі вкладені папки?</confirm-delete-multi-nodes-folder-permanently>
+      <confirm-delete-multi-nodes-generic-and-file-permanently>Чи ви справді бажаєте остаточно видалити {0} вибраних елементів та файлів?</confirm-delete-multi-nodes-generic-and-file-permanently>
+      <confirm-delete-multi-nodes-generic-and-folder-permanently>Ви дійсно бажаєте остаточно видалити {0} вибраних елементів, папок та всі вкладені папки?</confirm-delete-multi-nodes-generic-and-folder-permanently>
+      <confirm-delete-multi-nodes-file-and-folder-permanently>Ви дійсно бажаєте остаточно видалити {0} вибраних файлів, папок та всі вкладені папки?</confirm-delete-multi-nodes-file-and-folder-permanently>
+      <confirm-delete-multi-nodes-generic-and-file-and-folder-permanently>Ви дійсно бажаєте остаточно видалити {0} вибраних елементів, файлів, папок та всі вкладені папки?</confirm-delete-multi-nodes-generic-and-file-and-folder-permanently>
+      
+      <!-- Delte multiple nodes, have relations -->
+      <confirm-delete-multi-nodes-generic-have-relations>Ви дійсно бажаєте видалити {0} вибраних елементів та їх посилання?</confirm-delete-multi-nodes-generic-have-relations>  
+      <confirm-delete-multi-nodes-file-have-relations>Ви дійсно бажаєте видалити {0} вибраних файлів та їх посилання?</confirm-delete-multi-nodes-file-have-relations>
+      <confirm-delete-multi-nodes-folder-have-relations>Ви впевнені, що бажаєте видалити {0} вибраних папок, всі вкладені папки та їх посилання?</confirm-delete-multi-nodes-folder-have-relations>
+      <confirm-delete-multi-nodes-generic-and-file-have-relations>Ви впевнені, що бажаєте видалити {0} вибраних елементів, файли та їх посилання?</confirm-delete-multi-nodes-generic-and-file-have-relations>
+      <confirm-delete-multi-nodes-generic-and-folder-have-relations>Ви впевнені, що бажаєте видалити {0} вибраних елементів, їх посилання, папки і всі вкладені папки?</confirm-delete-multi-nodes-generic-and-folder-have-relations>
+      <confirm-delete-multi-nodes-file-and-folder-have-relations>Чи ви справді бажаєте видалити {0}  вибраних  файлів, їх посилання, папки  і всі вкладені папки?</confirm-delete-multi-nodes-file-and-folder-have-relations>
+      <confirm-delete-multi-nodes-generic-and-file-and-folder-have-relations>Ви впевнені, що бажаєте видалити {0} вибраних елементів, їх посилання, папки і всі вкладені папки?</confirm-delete-multi-nodes-generic-and-file-and-folder-have-relations>
+      
+      <feedback-delete>'{0}' був видалений успішно.</feedback-delete>
+      <feedback-delete-multi>{0} елементів були видалені успішно.</feedback-delete-multi>      
+      <feedback-delete-permanently>'{0}' видалено назавжди.</feedback-delete-permanently>
+      <feedback-delete-permanently-multi>{0} елементів видаляється назавжди.</feedback-delete-permanently-multi>
+      <undo-delete>Відмінити</undo-delete>
+      <feedback-restore>'{0}' був успішно відновлений.</feedback-restore>
+      <feedback-restore-multi>{0} елементів були успішно відновлені.</feedback-restore-multi>
+      
+      <confirm-restore>Вузол з таким іменем уже існує в старому місці вузла '{0}'. Ви дійсно бажаєте відновити цей вузол?</confirm-restore>
+      <confirm-move>Ви дійсно бажаєте перемістити?</confirm-move>
+      <node-cut>Вузол '{0}' був вирізаний.</node-cut>
+      <execute-successfully>Користувальницька дія '{0}' була виконана.</execute-successfully>
+      <save-node-success>Вузол '{0}' був збережений.</save-node-success>
+      <move-problem>Ви не можете перемістити вузол '{0}' в '{1}', так як з'явилася помилка з дозволом або обмеженими умовами.</move-problem>
+    </msg>
+  </UIWorkingArea>
+  <UIDocumentWorkspace>
+    <label>
+      <no-children>Цей вузол немає дочірніх вузлів.</no-children>
+      <no-children-but-has-hidden>Цей вузол не містить будь-яких дочірніх вузлів, але є деякі приховані файли.</no-children-but-has-hidden>
+    </label>
+    <msg>
+      <unable-save-node>Щойно створено вузол '{0}'. Будь ласка, збережіть сесію перед виконанням цієї дії.</unable-save-node>
+      <save-node-success>Вузол '{0}' був збережений.</save-node-success>
+      <node-copied>Вузол '{0}' був скопійований.</node-copied>
+      <node-cut>Вузол '{0}' був вирізаний.</node-cut>
+      <remove-root>Неможливо видалити кореневий вузол.</remove-root>
+      <node-remove-success>Вузол '{0}' був видалений.</node-remove-success>
+    </msg>
+    <tooltip>
+      <Rename>Перейменувати</Rename>
+      <Cut>Вирізати</Cut>
+      <Copy>Копіювати</Copy>
+      <Save>#{word.save}</Save>
+      <RemoveNode>Видалити</RemoveNode>
+      <Checkin>Зняти відмітку</Checkin>
+      <Checkout>Відмвтити</Checkout>
+      <Lock>Блокування</Lock>
+      <Unlock>Розблокувати</Unlock>
+      <EditDocument>Редагувати</EditDocument>
+      <Paste>Вставити</Paste>
+      <LockedBy>Заблоковано</LockedBy>
+    </tooltip>
+  </UIDocumentWorkspace>
+  <UIDocumentInfo>
+    <msg>
+      <access-denied>Доступ заборонено. Немає доступу до вузла '{0}'.</access-denied>
+      <null-exception>Елемент не знайдено. Він був втрачений або змінений, або ви не маєте дозволу на доступ до цього вузла.</null-exception>
+      <confirm-deleteattachment>Ви дійсно бажаєте видалити цей вкладений файл ?</confirm-deleteattachment>
+      <confirm-deleteattcomment>Ви дійсно бажаєте видалити цей коментар?</confirm-deleteattcomment>
+      <access-denied-exception>Доступ заборонено. Можливо, відсутні привілеї на читання, або вузол втрачений або змінений.</access-denied-exception>
+      <path-not-found>Цей елемент видалено або змінено. Будь ласка, натисніть кнопку Оновити.</path-not-found>
+    </msg>
+    <tooltip>
+      <remove-attachment>Видалити цей  вкладений файл</remove-attachment>
+      <remove-comment>Видалити цей коментар</remove-comment>
+    </tooltip>
+  </UIDocumentInfo>
+  <ListView>
+    <view>
+      <label>
+        <name>Ім’я</name>
+        <versionable>Версифікований</versionable>
+        <exo_owner>Власник</exo_owner>
+        <auditing>Аудит</auditing>
+        <exo_dateCreated>дата створення</exo_dateCreated>
+        <exo_dateModified>Дата змінення</exo_dateModified>
+      </label>
+    </view>
+  </ListView>
+  <!--
+  #############################################################################
+  #             org.exoplatform.ecm.webui.component.explorer.ECMContextMenu   #
+  #############################################################################
+  -->
+  <ECMContextMenu>
+    <event>
+      <Lock>Блокування</Lock>
+      <Unlock>Розблокування</Unlock>
+      <EditDocument>Редагувати</EditDocument>
+      <Copy>Копіювати</Copy>
+      <Rename>Перейменувати</Rename>
+      <Delete>Видалити</Delete>
+      <Save>#{word.save}</Save>
+      <Cut>Вирізати</Cut>
+      <Paste>Вставити</Paste>
+      <CheckOut>Відмітити</CheckOut>
+      <CheckIn>Зняти відмітку</CheckIn>
+      <WebDAV>Перегляд WebDAV</WebDAV>
+      <autoversion>Автоматичне керування версіями</autoversion>
+      <Custom>Користувальницькі</Custom>
+      <AddFolder>Нова папка</AddFolder>
+      <AddDocument>Новий контент</AddDocument>
+      <Upload>Завантажити файли</Upload>
+      <MoveNode>Перемістити</MoveNode>
+      <UnLock>Розблокувати</UnLock>
+      <ViewProperties>Перегляд властивостей</ViewProperties>
+      <GetURL>Скопіювати URL в буфер обміну</GetURL>
+      <AddThumbnail>Додати/Видалити ескіз</AddThumbnail>
+      <AddToFavourite>Додати до улюблених</AddToFavourite>
+      <RemoveFromFavourite>Вилучити з улюблених</RemoveFromFavourite>
+      <MoveToTrash>Перемістити до кошику</MoveToTrash>
+      <RestoreFromTrash>Відновлення з кошика</RestoreFromTrash>
+      <EmptyTrash>Очистити Кошик</EmptyTrash>
+      <WebDavView>Відкрити в MS Office</WebDavView>
+    </event>
+  </ECMContextMenu>
+ 
+  <!--
+  #############################################################################
+  #     org.exoplatform.ecm.webui.component.explorer.UIReferencesList         #
+  #############################################################################
+  -->
+  <UIReferencesList>
+    <msg>
+      <no-references>Посилання не знайдено</no-references>
+    </msg>
+    <header>
+      <workspace>Робоча область</workspace>
+      <path>Шлях</path>
+    </header>
+    <action>
+      <Close>#{word.close}</Close>
+    </action>
+  </UIReferencesList>
+  <!--
+  #############################################################################
+  #         org.exoplatform.ecm.webui.component.explorer.UIPropertiesManager  #
+  #############################################################################
+  -->
+  <UITabPane>
+    <title>
+      <UIPublishingPanel>Publication Pane</UIPublishingPanel>
+      <UIPublicationPanel>Переглянута версія</UIPublicationPanel>
+      <UIPublicationSchedule>Заплановано</UIPublicationSchedule>
+      <UIPublicationPagesContainer>Сторінки</UIPublicationPagesContainer>
+      <UIPublicationHistory>Історія</UIPublicationHistory>
+      <UIVersionViewer>Перегляд версії</UIVersionViewer>
+
+      <UIPropertyTab>Властивості</UIPropertyTab>
+      <UIMetadataTab>Метадані</UIMetadataTab>
+      <UIPropertyForm>Додати нову властивість</UIPropertyForm>
+      <UIUploadContent>Інформація про завантажений файл</UIUploadContent>
+      <UIJCRAdvancedSearch>Новий запит</UIJCRAdvancedSearch>
+      <UISavedQuery>Зберегти запит</UISavedQuery>
+      <AdvancedSearchResult>Результати пошуку</AdvancedSearchResult>
+      <UISimpleSearch>Простий пошук</UISimpleSearch>
+      <UISearchContainer>Розширений пошук</UISearchContainer>
+      <UICategoryManagerSearch>Додати категорію для пошуку</UICategoryManagerSearch>
+      <UIConstraintsForm>Форма обмеження</UIConstraintsForm>
+      <UIViewSearchResult>Переглянути контент</UIViewSearchResult>
+      <UIContentNameSearch>Пошук за іменем</UIContentNameSearch>
+      <UINodeInfo>Інформація про версію</UINodeInfo>
+      <UINodeProperty>Властивість вузла</UINodeProperty>
+      <UIActionListContainer>Доступні дії</UIActionListContainer>
+      <UIActionContainer>Додати дію</UIActionContainer>
+      <UIActionViewContainer>Інформація про дію</UIActionViewContainer>
+      <UIMultiLanguageForm>Показати мову</UIMultiLanguageForm>
+      <UIAddLanguageContainer>Додати мову</UIAddLanguageContainer>
+      <UINonPublishedForm>Стан</UINonPublishedForm>
+      <UIPublishedForm>Стан</UIPublishedForm>
+      <UIPublicationLogList>Історія</UIPublicationLogList>
+      <UIDocumentWithTree>Перегляд файлу</UIDocumentWithTree>
+      <UIDocumentInfo>Перегляд документу</UIDocumentInfo>
+      <UICategoriesSelectPanel>Виберіть категорії</UICategoriesSelectPanel>
+      <UISelectedCategoriesGrid>Згадувані категорії</UISelectedCategoriesGrid>
+      <UIWorkflowPublicationActionForm>Workflow Publication Action</UIWorkflowPublicationActionForm>
+      <UIWorkflowPublicationViewForm>Workflow Publication View</UIWorkflowPublicationViewForm>
+      <metadatasitemetadata>Метадані сайту</metadatasitemetadata>
+      <dcelementset>Дублінське ядро</dcelementset>
+    </title>
+  </UITabPane>
+  <UIPropertyTab>
+    <title>
+      <edit>Редагувати цю властивість</edit>
+      <delete>Видалення цієї властивості</delete>
+    </title>
+    <confirm>
+      <remove-property>Ви справді хочете видалити цю властивість?</remove-property>
+    </confirm>
+    <header>
+      <name>Ім’я</name>
+      <multiValue>Multi Value</multiValue>
+      <value>Значення</value>
+      <action>Дія</action>
+    </header>
+    <label>
+      <binary>Binary Data</binary>
+      <notavailable>N/A</notavailable>
+      <cannotget>Cannot get values</cannotget>
+    </label>
+    <action>
+      <Close>#{word.close}</Close>
+    </action>
+  </UIPropertyTab>
+  <!--
+  #############################################################################
+  #         org.exoplatform.ecm.webui.component.explorer.UIPropertyTab     #
+  #############################################################################
+  -->
+  <!--
+  #############################################################################
+  #           org.exoplatform.ecm.webui.component.explorer.UIPropertyForm     #
+  #############################################################################
+  -->
+  <UIPropertyForm>
+    <title>Add/Edit Property</title>
+    <label>
+      <name>Ім'я:</name>
+      <type>Тип:</type>
+      <value>Value:</value>
+      <upload>Завантажити:</upload>
+      <namespace>Namespace:</namespace>
+      <multiple>Multiple:</multiple>
+      <property_select>Add New Property:</property_select>
+      <value0>Value 0</value0>
+      <value1>Value 1</value1>
+      <value2>Value 2</value2>
+      <value3>Value 3</value3>
+      <value4>Value 4</value4>
+      <value5>Value 5</value5>
+      <value6>Value 6</value6>
+      <value7>Value 7</value7>
+      <value8>Value 8</value8>
+      <value9>Value 9</value9>
+      <value10>Value 10</value10>
+    </label>
+    <action>
+      <Save>#{word.save}</Save>
+      <Cancel>#{word.cancel}</Cancel>
+      <Reset>Скинути</Reset>
+    </action>
+    <msg>
+      <name-invalid>Please enter the property name.</name-invalid>
+      <unable-create>Cannot add properties.</unable-create>
+      <value-invalid>Please enter the value.</value-invalid>
+      <node-checkedin>You must check out this node before adding a property.</node-checkedin>
+      <can-not-add>You cannot add properties to this node. This is only allowed for the node type nt:unstructured.</can-not-add>
+      <propertyName-invalid>The property name must include namespace (e.g. namespace:name).</propertyName-invalid>
+      <propertyName-exist>The property '{0}' already exists.</propertyName-exist>
+      <propertyValu-null>Some values may be null.</propertyValu-null>
+      <valueFormatEx>You cannot assign a multiple-valued value to a single-valued property.</valueFormatEx>
+      <number-format-exception>Your input value has the wrong format.</number-format-exception>
+      <property-not-exist>The property {0} doesn't exist.</property-not-exist>
+    </msg>
+  </UIPropertyForm>
+
+  <!--
+  #############################################################################
+  #             org.exoplatform.ecm.webui.component.explorer.UIPermissionInfo #
+  #############################################################################
+  -->
+  <UIPermissionInfo>
+    <action>
+      <title>
+        <Edit>Редагувати</Edit>
+        <Delete>Remove Permission</Delete>
+      </title>
+    </action>
+    <header>
+      <usersOrGroups>User or Group</usersOrGroups>
+      <read>Read</read>
+      <addNode>Modify</addNode>
+      <remove>Видалити</remove>
+      <action>Дія</action>
+    </header>
+    <msg>
+      <confirm-delete-permission>Are you sure you want to remove this permission?</confirm-delete-permission>
+      <no-permission-tochange>You do not have the right to remove permission.</no-permission-tochange>
+      <no-permission-remove>You cannot remove the owner.</no-permission-remove>
+      <access-denied>Access denied. You cannot remove this permission.</access-denied>
+    </msg>
+  </UIPermissionInfo>
+  <permission>
+    <title>
+      <SelectUser>Select User</SelectUser>
+      <SelectMember>Select Membership</SelectMember>
+      <AddAny>Select Everyone</AddAny>
+    </title>
+  </permission>
+  <!--
+  #############################################################################
+  #             org.exoplatform.ecm.webui.component.explorer.UIPermissionForm #
+  #############################################################################
+  -->
+  <SelectUserOrGroup>
+    <title>
+      <UIGroupSelector>Вибрати користувача</UIGroupSelector>
+      <UIPermissionSelector>Select Member</UIPermissionSelector>
+      <UIGroupMemberSelector>Виберіть Членство</UIGroupMemberSelector>
+    </title>
+  </SelectUserOrGroup>
+  <UIGroupSelector>
+    <label>
+      <selectGroup>Browse and Select a Group</selectGroup>
+      <selectUser>Вибрати користувача</selectUser>
+    </label>
+    <msg>
+      <not-change-owner>'{0}' is the owner of this node and has full control permission.</not-change-owner>
+    </msg>
+  </UIGroupSelector>
+  <UIPermissionForm>
+    <label>
+      <UIPopupWindow>Select</UIPopupWindow>
+      <permission>UIPermissionForm</permission>
+      <userOrGroup>Користувач або Група</userOrGroup>
+      <read>Read Right</read>
+      <add_node>Modify Right</add_node>
+      <remove>Remove Right</remove>
+    </label>
+    <title>Add a permission to that node</title>
+    <action>
+      <Close>#{word.close}</Close>
+      <Save>#{word.save}</Save>
+      <Reset>Скинути</Reset>
+    </action>
+    <msg>
+      <checkbox-require>Please select at least one permission.</checkbox-require>
+      <userOrGroup-required>Please select a user or group before saving this permission.</userOrGroup-required>
+      <not-change-permission>You do not have the right to add a permission.</not-change-permission>
+      <access-denied>Доступ заборонено. Не можна видалити цей дозвіл.</access-denied>
+    </msg>
+  </UIPermissionForm>
+
+  <!--
+  ###############################################################################
+  #             org.exoplatform.ecm.webui.component.explorer.UINodeTypeInfo     #
+  ###############################################################################
+  -->
+  <UINodeTypeInfo>
+    <label>
+      <node-type>Node Type</node-type>
+      <name>Ім’я</name>
+      <item>Primary Item Name</item>
+      <super-types>Parent Types</super-types>
+      <mixin>Mixin Node Type</mixin>
+      <orderable-children>Orderable Children</orderable-children>
+      <property-def>Node Property Definition</property-def>
+      <prop-name>Ім’я</prop-name>
+      <prop-type>Тип</prop-type>
+      <prop-multiple>Mul</prop-multiple>
+      <prop-mandatory>Man</prop-mandatory>
+      <prop-protected>Pr</prop-protected>
+      <prop-auto-create>AC</prop-auto-create>
+      <prop-default-values><![CDATA[<span title="Default Values">DV</span>]]></prop-default-values>
+      <prop-constraints><![CDATA[<span title="Constraints Values">CV</span>]]></prop-constraints>
+      <node-def>Child Node Definition</node-def>
+      <node-def-name>Ім’я</node-def-name>
+      <node-def-opv>OPV</node-def-opv>
+      <node-def-ac>AC</node-def-ac>
+      <node-def-man>MAN</node-def-man>
+      <node-def-pr>PR</node-def-pr>
+      <node-def-dnt>DNT</node-def-dnt>
+    </label>
+    <action>
+      <Close>#{word.close}</Close>
+    </action>
+  </UINodeTypeInfo>
+  <!--
+  ###############################################################################
+  #                    org.exoplatform.ecm.webui.component.explorer.search      #
+  ###############################################################################
+  -->
+  <UICategoryManagerSearch>
+    <tab>
+      <label>
+        <UIOneNodePathSelector>Select Category</UIOneNodePathSelector>
+      </label>
+    </tab>
+    <action>
+      <Close>#{word.close}</Close>
+    </action>
+  </UICategoryManagerSearch>
+  <UIContentNameSearch>
+    <label>
+      <keyword>Content Name:</keyword>
+      <location>Search in this location:</location>
+    </label>
+    <action>
+      <Search>Пошук</Search>
+      <Cancel>#{word.cancel}</Cancel>
+    </action>
+    <msg>
+      <keyword-not-allowed>Це ключове слово не допускається.</keyword-not-allowed>
+    </msg>
+  </UIContentNameSearch>
+  <UISimpleSearch>
+    <action>
+      <MoreConstraints>Show/Hide Constraint Form</MoreConstraints>
+      <Search>Пошук</Search>
+      <Save>#{word.save}</Save>
+      <Cancel>#{word.cancel}</Cancel>
+    </action>
+    <label>
+      <moreConstraints>UISimpleSearch</moreConstraints>
+      <firstOperator>Operator:</firstOperator>
+      <input>A word or phrase in content:</input>
+      <constraints>More Constraints:</constraints>
+      <nodePath>Current Location:</nodePath>
+    </label>
+    <msg>
+      <keyword-null>Please enter your keyword.</keyword-null>
+      <not-found>Результатів не знайдено.</not-found>
+      <keyword-not-allow>Це ключове слово не допускається.</keyword-not-allow>
+      <value-null>Please enter your keyword or constraints.</value-null>
+      <value-save-null>Please enter a keyword or constraints before saving this query.</value-save-null>
+      <inputSearch-invalid>There are invalid characters in the search input.</inputSearch-invalid>
+      <query-invalid>The query is invalid. Please check your constraint.</query-invalid>
+    </msg>
+  </UISimpleSearch>
+  <ViewSearch>
+    <title>
+      <UIViewSearchResult>View Template</UIViewSearchResult>
+    </title>
+  </ViewSearch>
+  <UISearchResult>
+    <msg>
+      <not-support>There is no View template for this node.</not-support>
+      <empty>Результатів не знайдено.</empty>
+      <access-denied>You cannot open this folder, either because it no longer exists or because you do not have the right to access it.</access-denied>
+      <query-invalid>The query is invalid.</query-invalid>
+    </msg>
+    <header>
+      <name>#{word.name}</name>
+      <path>Шлях</path>
+      <action>Дія</action>
+      <shortcutPath>Шлях</shortcutPath>
+      <type>Тип</type>
+      <dateCreated>дата створення</dateCreated>
+      <score>Score</score>
+    </header>
+    <title>
+      <typeASC>Sort by document type in ascending order</typeASC>
+      <typeDESC>Sort by document type in descending order</typeDESC>
+      <scoreASC>Sort by score in ascending order</scoreASC>
+      <scoreDESC>Sort by score in descending order</scoreDESC>
+      <nameASC>Sort by name in ascending order</nameASC>
+      <nameDESC>Sort by name in descending order</nameDESC>
+      <datecreatedASC>Sort by created date in ascending order</datecreatedASC>
+      <datecreatedDESC>Sort by created date in descending order</datecreatedDESC>
+    </title>
+    <tooltip>
+      <View>View this node</View>
+      <OpenFolder>Go to folder</OpenFolder>
+    </tooltip>
+  </UISearchResult>
+  <UIShowAllOwnedByUserResult>
+    <msg>
+      <not-support>There is no View template for this node</not-support>
+      <empty>Результатів не знайдено.</empty>
+      <access-denied>You cannot view this node, either because this template is not supported or because access is denied.</access-denied>
+      <query-invalid>The query is invalid</query-invalid>
+    </msg>
+    <header>
+      <name>#{word.name}</name>
+      <path>Шлях</path>
+      <action>Дія</action>
+      <shortcutPath>Шлях</shortcutPath>
+      <type>Тип</type>
+      <dateCreated>дата створення</dateCreated>
+      <score>Оцінка</score>
+    </header>
+    <title>
+      <typeASC>Сортувати за типом документа за зростанням</typeASC>
+      <typeDESC>Сортувати за типом документа в порядку зменшення</typeDESC>
+      <scoreASC>Сортування за оцінками у порядку зростання</scoreASC>
+      <scoreDESC>Сортування за оцінками у порядку зростання</scoreDESC>
+      <nameASC>Сортувати за іменем за зростанням</nameASC>
+      <nameDESC>Сортувати за іменем у порядку спадання</nameDESC>
+      <datecreatedASC>Sort by Created date in ascending order</datecreatedASC>
+      <datecreatedDESC>Sort by Created date in descending order</datecreatedDESC>
+    </title>
+    <tooltip>
+      <View>Переглянути цей вузол</View>
+      <OpenFolder>Go to Folder</OpenFolder>
+    </tooltip>
+  </UIShowAllOwnedByUserResult>
+  <UIShowAllFavouriteResult>
+    <msg>
+      <not-support>Немає  шаблону Перегляд  для цього вузла</not-support>
+      <empty>No results found</empty>
+      <access-denied>Цей вузол не можна переглянути, оскільки цей шаблон не підтримується або немає доступу.</access-denied>
+      <query-invalid>Запит є неприпустимим</query-invalid>
+    </msg>
+    <header>
+      <name>#{word.name}</name>
+      <path>Шлях</path>
+      <action>Дія</action>
+      <shortcutPath>Шлях</shortcutPath>
+      <type>Тип</type>
+      <dateCreated>дата створення</dateCreated>
+      <score>Оцінка</score>
+    </header>
+    <title>
+      <typeASC>Сортувати за типом документа за зростанням</typeASC>
+      <typeDESC>Сортувати за типом документа в порядку зменшення</typeDESC>
+      <scoreASC>Сортування за оцінкою у порядку зростання</scoreASC>
+      <scoreDESC>Сортування за оцінками у порядку зменшення</scoreDESC>
+      <nameASC>Сортувати за іменем за зростанням</nameASC>
+      <nameDESC>Сортувати за іменем у порядку зменшення</nameDESC>
+      <datecreatedASC>Сортування за датою створення за зростанням</datecreatedASC>
+      <datecreatedDESC>Сортування за датою створення у порядку зменшення</datecreatedDESC>
+    </title>
+    <tooltip>
+      <View>View this Node</View>
+      <OpenFolder>Перейти до папки</OpenFolder>
+    </tooltip>
+  </UIShowAllFavouriteResult>
+  <UIShowAllHiddenResult>
+    <msg>
+      <not-support>Немає  шаблону Перегляд  для цього вузла.</not-support>
+      <empty>Результатів не знайдено.</empty>
+      <access-denied>Цей вузол не можна переглянути, оскільки цей шаблон не підтримується або немає доступу.</access-denied>
+      <query-invalid>Запит є неприпустимим.</query-invalid>
+    </msg>
+    <header>
+      <name>#{word.name}</name>
+      <path>Шлях</path>
+      <action>Дія</action>
+      <shortcutPath>Шлях</shortcutPath>
+      <type>Тип</type>
+      <dateCreated>дата створення</dateCreated>
+      <score>Оцінка</score>
+      <AddRemoveFavourite>Add/Remove to Favorite</AddRemoveFavourite>
+    </header>
+    <title>
+      <typeASC>Сортувати за типом документа за зростанням</typeASC>
+      <typeDESC>Сортувати за типом документа в порядку зменшення</typeDESC>
+      <scoreASC>Сортування за оцінками у порядку зростання</scoreASC>
+      <scoreDESC>Сортування за оцінками у порядку зменшення</scoreDESC>
+      <nameASC>Сортувати за іменем за зростанням</nameASC>
+      <nameDESC>Сортувати за іменем за спаданням</nameDESC>
+      <datecreatedASC>Сортування по даті створення за зростанням</datecreatedASC>
+      <datecreatedDESC>Сортування по даті створення у порядку зменшення</datecreatedDESC>
+    </title>
+    <tooltip>
+      <View>Переглянути цей вузол</View>
+      <OpenFolder>Перейти до папки</OpenFolder>
+      <RemoveHiddenAttribute>Remove Hidden Attribute</RemoveHiddenAttribute>
+    </tooltip>
+  </UIShowAllHiddenResult>
+  <UIShowAllTrashResult>
+    <msg>
+      <not-support>Немає  шаблону Перегляд  для цього вузла.</not-support>
+      <empty>Результатів не знайдено</empty>
+      <access-denied>Цей вузол не можна переглянути, оскільки цей шаблон не підтримується або немає доступу.</access-denied>
+      <query-invalid>Запит є неприпустимим.</query-invalid>
+    </msg>
+    <header>
+      <name>#{word.name}</name>
+      <path>Шлях</path>
+      <action>Дія</action>
+      <shortcutPath>Шлях</shortcutPath>
+      <type>Тип</type>
+      <dateCreated>дата створення</dateCreated>
+      <score>Оцінка</score>
+    </header>
+    <title>
+      <typeASC>Сортувати за типом документа за зростанням</typeASC>
+      <typeDESC>Сортувати за типом документа в порядку зменшення</typeDESC>
+      <scoreASC>Сортування за оцінками у порядку зростання</scoreASC>
+      <scoreDESC>Сортування за оцінками у порядку зменшення</scoreDESC>
+      <nameASC>Сортувати за іменем за зростанням</nameASC>
+      <nameDESC>Сортувати за іменем у порядку зменшення</nameDESC>
+      <datecreatedASC>Сортування по даті створення за зростанням</datecreatedASC>
+      <datecreatedDESC>Сортування по даті створення у порядку зменшення</datecreatedDESC>
+    </title>
+    <tooltip>
+      <View>Переглянути цей вузол</View>
+      <OpenFolder>Перейти до папки</OpenFolder>
+      <DeletePermanently>Delete permanently</DeletePermanently>
+      <RestoreFromTrash>Відновлення з кошика</RestoreFromTrash>
+    </tooltip>
+  </UIShowAllTrashResult>
+  <UIConstraintsForm>
+    <label>
+      <constraints>UIConstraintsForm</constraints>
+      <metadataProperty>Властивості</metadataProperty>
+      <operator>Operator</operator>
+      <contains>Contain Value</contains>
+      <notcontains>Not Contain Value</notcontains>
+    </label>
+    <action>
+      <Add>Додати</Add>
+      <Cancel>#{word.cancel}</Cancel>
+    </action>
+    <msg>
+      <properties-required>The Property name is required.</properties-required>
+      <value-required>The Value field is required.</value-required>
+      <date-invalid>The From date must be earlier than the To date.</date-invalid>
+      <fromDate-required>The From date is required.</fromDate-required>
+      <must-choose-one>You have to select at least one type.</must-choose-one>
+      <properties-null>Select properties first, then filter.</properties-null>
+      <exactly-require>You have to fill in the Value exactly before saving this constraint.</exactly-require>
+      <fromDate-invalid>Invalid type in the 'From' field. Please reselect or type correctly.</fromDate-invalid>
+      <toDate-invalid>Invalid type in the 'To' field. Please reselect or type correctly.</toDate-invalid>
+    </msg>
+    <button>
+      <label-Add>Додати</label-Add>
+      <label-Cancel>#{word.cancel}</label-Cancel>
+    </button>
+  </UIConstraintsForm>
+  <ConstraintsForm>
+    <action>
+      <Add>Додати</Add>
+      <Cancel>#{word.cancel}</Cancel>
+    </action>
+  </ConstraintsForm>
+  <UIConstraintForm>
+    <tooltip>
+      <AddMetadataType>Add Property</AddMetadataType>
+      <AddNodeType>Add Node Type</AddNodeType>
+      <AddCategory>Додати категорію</AddCategory>
+      <FindExactly>Find Exactly</FindExactly>
+    </tooltip>
+    <label>
+      <colon>:</colon>
+      <operator>Оператор</operator>
+      <exactlyPro-properties>Властивість</exactlyPro-properties>
+      <exactlyPro-ContainExactly>Містять саме</exactlyPro-ContainExactly>
+      <containPro-properties>Властивість</containPro-properties>
+      <containPro-Contain>Містить</containPro-Contain>
+      <notContainPro-properties>Властивість</notContainPro-properties>
+      <notContainPro-notContain>Не містить</notContainPro-notContain>
+      <ConstraintOption-From>Від</ConstraintOption-From>
+      <ConstraintOption-To>До</ConstraintOption-To>
+      <DocumentType-label>Тип документа</DocumentType-label>
+      <Category-label>Категорія</Category-label>
+      <created>Створено</created>
+      <modified>Змінено</modified>
+      <and>І</and>
+      <or>Або</or>
+    </label>
+  </UIConstraintForm>
+  <NodeTypePopup>
+    <title>
+      <UINodeTypeSelectForm>Виберіть тип вузла</UINodeTypeSelectForm>
+    </title>
+  </NodeTypePopup>
+  <CategoryPopup>
+    <title>
+      <UICategoryManagerSearch>Додати категорію для пошуку</UICategoryManagerSearch>
+      <UIOneNodePathSelector>Вибрати категорію</UIOneNodePathSelector>
+    </title>
+  </CategoryPopup>
+  <SaveQueryPopup>
+    <title>
+      <UISaveQueryForm>Форма запиту</UISaveQueryForm>
+    </title>
+  </SaveQueryPopup>
+  <UINodeTypeSelectForm>
+    <action>
+      <Cancel>#{word.cancel}</Cancel>
+      <Save>#{word.save}</Save>
+    </action>
+  </UINodeTypeSelectForm>
+  <UICompareExactlyForm>
+    <label>
+      <filter>Фільтр:</filter>
+      <result>Результати:</result>
+    </label>
+    <title>
+      <result>Фільтр</result>
+    </title>
+    <button>
+      <label-Select>Виберіть</label-Select>
+      <label-Cancel>#{word.cancel}</label-Cancel>
+    </button>
+    <msg>
+      <not-result-found>Результатів не знайдено.</not-result-found>
+    </msg>
+  </UICompareExactlyForm>
+  <UIJCRAdvancedSearch>
+    <label>
+      <name>Ім'я:</name>
+      <selectBox>Виберіть стиль запиту:</selectBox>
+      <query>Запит:</query>
+    </label>
+    <action>
+      <Save>#{word.save}</Save>
+      <Cancel>#{word.cancel}</Cancel>
+      <Search>Пошук</Search>
+    </action>
+    <msg>
+      <!--DMS 2.4.x ECM-3566-->
+      <name-invalid>Неприпустиме ім'я .</name-invalid>
+      <query-added>Запит був успішно доданий.</query-added>
+      <save_unSuccessful>Не вдалося зберегти запит. Можливо він неправильний або запит з таким ім'ям уже існує.</save_unSuccessful>
+      <invalid-queryStatement>Неприпустимий запит.</invalid-queryStatement>
+      <value-save-null>Будь ласка, введіть ваш запит.</value-save-null>
+      <query-name-null>Будь ласка, введіть ім'я запиту.</query-name-null>
+    </msg>
+  </UIJCRAdvancedSearch>
+  <EditQueryForm>
+    <label>
+      <name>Ім’я</name>
+      <selectBox>Виберіть стиль запиту</selectBox>
+      <query>Запит</query>
+    </label>
+    <action>
+      <Save>#{word.save}</Save>
+      <Cancel>#{word.cancel}</Cancel>
+    </action>
+  </EditQueryForm>
+  <EditSavedQueryForm>
+    <title>
+      <EditQueryForm>Редагувати форму запиту</EditQueryForm>
+    </title>
+  </EditSavedQueryForm>
+  <UIMetadataSelectForm>
+    <label>
+      <metadataType>Тип метаданих</metadataType>
+    </label>
+    <action>
+      <Cancel>#{word.cancel}</Cancel>
+      <Add>Додати</Add>
+    </action>
+  </UIMetadataSelectForm>
+  <property1MetadataPopup>
+    <title>
+      <UISelectPropertyForm>Виберіть властивість</UISelectPropertyForm>
+    </title>
+  </property1MetadataPopup>
+  <property2MetadataPopup>
+    <title>
+      <UISelectPropertyForm>Виберіть властивість</UISelectPropertyForm>
+    </title>
+  </property2MetadataPopup>
+  <property3MetadataPopup>
+    <title>
+      <UISelectPropertyForm>Виберіть властивість</UISelectPropertyForm>
+    </title>
+  </property3MetadataPopup>
+  <UISelectPropertyForm>
+    <label>
+      <metadataType>Тип метаданих</metadataType>
+    </label>
+    <pLabel>Властивості:</pLabel>
+    <action>
+      <Add>Додати</Add>
+      <Cancel>#{word.cancel}</Cancel>
+    </action>
+  </UISelectPropertyForm>
+  <ExactlyFormPopup>
+    <title>
+      <UICompareExactlyForm>Форма фільтру</UICompareExactlyForm>
+    </title>
+  </ExactlyFormPopup>
+  <UIECMSearch>
+    <header>
+      <name>Ім’я</name>
+      <language>Мова</language>
+      <query>Запит</query>
+      <action>Дії</action>
+      <path>Шлях</path>
+    </header>
+  </UIECMSearch>
+  <UIResult>
+    <msg>
+      <not-found>Дані не знайдено.</not-found>
+    </msg>
+    <header>
+      <action>Дія</action>
+    </header>
+  </UIResult>
+  <UISaveQueryForm>
+    <msg>
+      <query-name-null>Будь ласка, введіть ім'я запиту для збереження.</query-name-null>
+      <access-denied>Доступ заборонено. Ви не маєте дозволу на додавання, необхідного, щоб зберегти цей запит.</access-denied>
+      <save-failed>Ви не можете зберегти запит тому, що опис є недійсним або тому, що ім'я запиту вже існує.</save-failed>
+    </msg>
+    <label>
+      <queryName>Ім'я запиту</queryName>
+    </label>
+    <action>
+      <Save>#{word.save}</Save>
+      <Cancel>#{word.cancel}</Cancel>
+    </action>
+  </UISaveQueryForm>
+  <UISavedQuery>
+    <header>
+      <name>Ім’я</name>
+      <type>Тип</type>
+      <statement>Опис</statement>
+      <permission>Права доступу</permission>
+      <action>Дії</action>
+    </header>
+    <tooltip>
+      <Execute>Виконати</Execute>
+      <Edit>Редагувати</Edit>
+      <Delete>Видалити</Delete>
+    </tooltip>
+    <label>
+      <no-children>Немає збережених запитів.</no-children>
+    </label>
+    <msg>
+      <confirm-delete-query>Ви дійсно бажаєте видалити цей запит?</confirm-delete-query>
+      <not-result-found>Результатів не знайдено.</not-result-found>
+    </msg>
+  </UISavedQuery>
+  <UIQueryResultPageIterator>
+    <label>
+      <results>Результати</results>
+      <of-about>з близько</of-about>
+      <of>з</of>
+    </label>
+  </UIQueryResultPageIterator>
+  <!--
+  ###############################################################################
+  #             org.exoplatform.ecm.webui.component.explorer.admin.UIExportNode #
+  ###############################################################################
+  -->
+  <UIExportNode>
+    <label>
+      <format>Формати</format>
+      <nodePath>Шлях експорту</nodePath>
+      <zip>Zip</zip>
+      <systemView>Системний вид</systemView>
+      <documentView>Перегляд документу</documentView>
+    </label>
+    <action>
+      <Cancel>#{word.cancel}</Cancel>
+      <Export>Експорт</Export>
+    </action>
+    <title>Експорт вузла</title>
+  </UIExportNode>
+  <!--
+  ###############################################################################
+  #             org.exoplatform.ecm.webui.component.explorer.UIPopupAction     #
+  ###############################################################################
+  -->
+  <PopupUserSelector>
+    <title>
+      <UIUserContainer>Виберіть права доступа користувача</UIUserContainer>
+    </title>
+  </PopupUserSelector>
+  <UIPopupTaxonomy>
+    <title>
+      <UICategoriesSelector>Додати категорії</UICategoriesSelector>
+      <UIOneNodePathSelector>Додати категорії</UIOneNodePathSelector>
+    </title>
+  </UIPopupTaxonomy>
+  <!--
+  ###############################################################################
+  #   org.exoplatform.ecm.webui.component.explorer.versions.UIVersionInfo       #
+  ###############################################################################
+  -->
+  <UIVersionInfo>
+    <tooltip>
+      <addLabel>Додати мітку</addLabel>
+      <removeLable>Видалити мітку</removeLable>
+      <restoreVersion>Відновити версію</restoreVersion>
+      <viewVersion>Перегляд інформації про версію</viewVersion>
+      <deleteVersion>Видалення версії</deleteVersion>
+      <compareVersion>Порівняти з базовою версією</compareVersion>
+    </tooltip>
+    <msg>
+      <have-no-view-template>Шаблони перегляду не підтримуються.</have-no-view-template>
+      <cannot-remove-version>Не можна видалити базову версію.</cannot-remove-version>
+      <confirm-delete>Ви справді бажаєте видалити цю версію?</confirm-delete>
+      <not-checked-out>Ви повинні відмітити цей вузол перед відновленням.</not-checked-out>
+      <invalid-item-state>Ви не можете відновити цю версію тому, що один або кілька елементів були видалені або переміщені під час  іншої сесії.</invalid-item-state>
+    </msg>
+    <action>
+      <close>#{word.close}</close>
+      <close-view>Закрити перегляд</close-view>
+    </action>
+  </UIVersionInfo>
+  <!--
+  ################################################################################
+  #  org.exoplatform.ecm.webui.component.explorer.auditing.UIAuditingInfo
+  ################################################################################
+  -->
+  <UIAuditingInfo>
+    <msg>
+      <noVersion>Немає версії</noVersion>
+    </msg>
+    <eventName>
+      <e_1>Вузол додано</e_1>
+      <e_2>Вузол видалений</e_2>
+      <e_4>Властивість додана</e_4>
+      <e_16>Властивість змінена</e_16>
+      <e_8>Властивість видалена</e_8>
+      <e_32>#{word.save}</e_32>
+      <e_64>Перемістити</e_64>
+      <e_128>Копіювати</e_128>
+      <e_256>Додати змішування</e_256>
+      <e_512>Видалити змішування</e_512>
+      <e_1024>Клонувати</e_1024>
+      <e_2048>Поновити</e_2048>
+      <e_4096>Import</e_4096>
+      <e_8192>Зняти відмітку</e_8192>
+      <e_16384>Відмітити</e_16384>
+      <e_32768>Відновити</e_32768>
+      <e_65536>Злиття</e_65536>
+      <e_131072>Скасувати злиття</e_131072>
+      <e_262144>Завершити злиття</e_262144>
+      <e_524288>Додати мітки версії</e_524288>
+      <e_1048576>Видалити мітку версії</e_1048576>
+      <e_2097152>Видалити версію</e_2097152>
+      <e_4194304>Блокування</e_4194304>
+      <e_8388608>Розблокувати</e_8388608>
+      <e_16777216>Читати</e_16777216>
+    </eventName>
+    <label>
+      <operation>Операція</operation>
+      <userName>Ім'я користувача</userName>
+      <date>Дата</date>
+      <version>Версія</version>
+    </label>
+  </UIAuditingInfo>
+
+  <!--
+  ###############################################################################
+  #   org.exoplatform.ecm.webui.component.explorer.versions.UIActivateVersion   #
+  ###############################################################################
+  -->
+  <UIActivateVersion>
+    <label>
+      <note>Відстеження версій не було активоване для цього вузла.</note>
+      <question>Ви впевнені, що ви хочете активувати?</question>
+      <button-active>Активувати</button-active>
+      <button-cancel>#{word.cancel}</button-cancel>
+    </label>
+    <msg>
+      <access-denied>Ви не маєте дозволу для активації керування версіями на цьому вузлі</access-denied>
+    </msg>
+  </UIActivateVersion>
+  <!--
+  ###############################################################################
+  #   org.exoplatform.ecm.webui.component.explorer.versions.UIActivePublication #
+  ###############################################################################
+  -->
+  <UIActivePublication>
+    <header>
+      <LifecycleName>Ім’я</LifecycleName>
+      <LifecycleDesc>Опис</LifecycleDesc>
+      <action>Дія</action>
+    </header>
+    <action>
+      <Cancel>#{word.close}</Cancel>
+    </action>
+    <grid>
+      <msg>
+        <empty>Плагіни публікації не знайдено.</empty>
+      </msg>
+    </grid>
+    <msg>
+      <node-type-invalid>Тільки тип  вузла документа може бути зареєстрований.</node-type-invalid>
+      <already-enroled>Цей документ вже зареєстрований.</already-enroled>
+    </msg>
+  </UIActivePublication>
+  <!--
+  ###############################################################################
+  #   org.exoplatform.ecm.webui.component.explorer.versions.UIActivateAuditing  #
+  ###############################################################################
+  -->
+  <UIActivateAuditing>
+    <label>
+      <note>Аудит не був активований для цього вузла.</note>
+      <question>Ви впевнені, що ви хочете активувати?</question>
+    </label>
+    <action>
+      <activate>Активувати</activate>
+      <cancel>#{word.cancel}</cancel>
+    </action>
+  </UIActivateAuditing>
+  <!--
+  ###############################################################################
+  #   org.exoplatform.ecm.webui.component.explorer.versions.UIDiff   #
+  ###############################################################################
+  -->
+  <UIDiff>
+    <label>
+      <diffTitle>Порівняти дві версії</diffTitle>
+      <noChange>Немає різниці між двома версіями</noChange>
+      <baseVerion>Базова версія</baseVerion>
+      <compareVerion>Версія</compareVerion>
+      <can-not-compare>Не вдалося порівняти дві версії</can-not-compare>
+    </label>
+  </UIDiff>
+  <!--
+  ###############################################################################
+  #       org.exoplatform.ecm.webui.component.explorer.admin.UIImportNode      #
+  ###############################################################################
+  -->
+  <UIImportNode>
+    <label>
+      <format>Формати</format>
+      <systemView>Системний вид</systemView>
+      <documentView>Перегляд документу</documentView>
+      <upload>Завантажити файл</upload>
+    </label>
+    <action>
+      <Cancel>#{word.cancel}</Cancel>
+      <Import>Import</Import>
+    </action>
+    <title>Імпорт вузла</title>
+    <msg>
+      <import-successful>Імпортовано успішно.</import-successful>
+      <filename-invalid>Перегляньте файл .xml для імпорту в поле "Завантажити файл".</filename-invalid>
+      <filetype-error>Не вдалося імпортувати завантажений файл. Можливо, файл . xml неприпустимий.</filetype-error>
+      <mimetype-invalid>Лише .xml або .zip файли можуть бути імпортовані.</mimetype-invalid>
+      <access-denied>Доступ заборонено. Вам не дозволено імпортувати тут.</access-denied>
+      <constraint-violation-exception>Неможливо імпортувати дані. Тип "{0}" не допускається в цьому місці.</constraint-violation-exception>
+      <item-exists-exception>Вхідний вузол, на який посилаються, має той же UUID як існуючий вузол в робочій області.</item-exists-exception>
+    </msg>
+  </UIImportNode>
+  <!--
+  ###############################################################################
+  #         org.exoplatform.ecm.webui.component.explorer.versions.UILabelForm   #
+  ###############################################################################
+  -->
+  <UILabelForm>
+    <label>
+      <label>Позначка</label>
+    </label>
+    <action>
+      <Save>#{word.save}</Save>
+      <Cancel>#{word.cancel}</Cancel>
+    </action>
+    <title>Додати мітку</title>
+    <msg>
+      <label-invalid>Мітка містить неприпустимі знаки.</label-invalid>
+      <label-exist>'{0}' уже існує.</label-exist>
+    </msg>
+  </UILabelForm>
+  <!--
+  ###############################################################################
+  #   org.exoplatform.ecm.webui.component.explorer.versions.UIRemoveLabelForm   #
+  ###############################################################################
+  -->
+  <UIRemoveLabelForm>
+    <title>Видалити мітку</title>
+    <label>
+      <label>Виберіть мітку</label>
+    </label>
+    <action>
+      <Remove>Видалити</Remove>
+      <Cancel>#{word.cancel}</Cancel>
+    </action>
+  </UIRemoveLabelForm>
+  <!--
+  ###############################################################################
+  #    org.exoplatform.ecm.webui.component.explorer.versions.UIViewVersion      #
+  ###############################################################################
+  -->
+  <UIVersionTree>
+    <title>Дерево дочірніх елементів</title>
+  </UIVersionTree>
+  <UIViewVersion>
+    <label>
+      <nodeType>Тип вузла</nodeType>
+      <nodeName>Назва вузла</nodeName>
+      <VersionNumber>Номер версії</VersionNumber>
+      <VersionLabels>Мітка версії</VersionLabels>
+      <VersionDate>Дата версії</VersionDate>
+      <PropertyName>Ім'я властивості</PropertyName>
+      <PropertyValue>Значення властивостей</PropertyValue>
+    </label>
+    <msg>
+      <not-supported>Ця функція не підтримується для керування версіями.</not-supported>
+    </msg>
+  </UIViewVersion>
+  <UIVersionList>
+    <title>Ім'я дочірніх елементів</title>
+  </UIVersionList>
+  <!--
+  ################################################################################
+  #       org.exoplatform.ecm.webui.component.explorer.admin.UICategoryManager #
+  ################################################################################
+  -->
+  <UICategoryManager>
+    <action>
+      <Close>#{word.close}</Close>
+    </action>
+    <tab>
+      <label>
+        <UICategoriesAddedList>Згадувані категорії</UICategoriesAddedList>
+        <UIOneNodePathSelector>Вибрати категорію</UIOneNodePathSelector>
+      </label>
+    </tab>
+  </UICategoryManager>
+  <UICategoriesAddedList>
+    <header>
+      <path>Категорія</path>
+      <action>Дії</action>
+    </header>
+    <msg>
+      <access-denied>Доступ заборонено. У вас немає дозволу на доступ в цей вузол.</access-denied>
+      <confirm-delete>Ви впевнені, що бажаєте видалити це посилання?</confirm-delete>
+    </msg>
+    <action>
+      <title>
+        <Delete>Видалити</Delete>
+      </title>
+    </action>
+    <label>
+      <category>Категорія</category>
+      <actions>Дія</actions>
+      <delete>Видалити</delete>
+    </label>
+  </UICategoriesAddedList>
+  <UITreeList>
+    <header>
+      <name>Ім’я</name>
+      <action>Дія</action>
+    </header>
+    <info>
+      <child-not-found>Цей вузол немає дочірніх вузлів.</child-not-found>
+    </info>
+  </UITreeList>
+  <!--
+  ################################################################################
+  #       org.exoplatform.ecm.webui.component.explorer.admin.UIRelationManager #
+  ################################################################################
+  -->
+  <UIRelationManager>
+    <action>
+      <Close>#{word.close}</Close>
+    </action>
+    <tab>
+      <label>
+        <UIOneNodePathSelector>Виберіть відношення</UIOneNodePathSelector>
+      </label>
+    </tab>
+    <tab>
+      <label>
+        <UIRelationsAddedList>Список відношень</UIRelationsAddedList>
+      </label>
+    </tab>
+  </UIRelationManager>
+  <UIRelationsAddedList>
+    <header>
+      <path>Відносини</path>
+      <action>Дії</action>
+    </header>
+    <action>
+      <title>
+        <Delete>Видалити</Delete>
+      </title>
+    </action>
+    <msg>
+      <confirm-delete>Ви дійсно бажаєте видалити це відношення?</confirm-delete>
+      <can-not-add-itself>Ви не можете додати відношення в самого себе.</can-not-add-itself>
+    </msg>
+  </UIRelationsAddedList>
+  <!--
+  ###################################################################
+  #       org.exoplatform.ecm.webui.component.explorer.UIClipboard  #
+  ###################################################################
+  -->
+  <UIClipboard>
+    <header>
+      <path>Шлях</path>
+      <command>Cm</command>
+      <action>Дія</action>
+    </header>
+    <label>
+      <nocommand>Немає елементів в буфері обміну.</nocommand>
+    </label>
+    <action>
+      <clearall>Очистити все</clearall>
+    </action>
+    <msg>
+      <unable-pasted>Не вдалося вставити цей вузол.</unable-pasted>
+      <node-pasted>Вузол '{0}' було вставлено у  місце '{1}'. Ця операція вже збережена.</node-pasted>
+    </msg>
+  </UIClipboard>
+  <!--
+  ###################################################################
+  #       org.exoplatform.ecm.webui.component.explorer.UIPopupMenu  #
+  ###################################################################
+  -->
+  <!--
+  ###################################################################################
+  #org.exoplatform.ecm.webui.component.explorer.popup.actions.UISelectDocumentForm  #
+  ###################################################################################
+  -->
+  <UISelectDocumentForm>
+    <label>
+      <selectTemplate>Виберіть шаблон із нижченаведеного списку</selectTemplate>
+      <ThumbnailView>Перегляд ескізів</ThumbnailView>
+      <ListView>Перегляд списку</ListView>
+      <Cancel>#{word.cancel}</Cancel>
+    </label>
+  </UISelectDocumentForm>
+  <!--
+  #######################################################################
+  #org.exoplatform.ecm.webui.component.explorerpopup.actions.UIDocumentForm  #
+  #######################################################################
+  -->
+  <UIDocumentForm>
+    <title>Додати новий документ</title>
+    <action>
+      <Save>#{word.save}</Save>
+      <SaveAndClose>Зберегти та закрити</SaveAndClose>
+      <ChangeType>Змінити тип вмісту</ChangeType>
+      <Fullscreen>Повноекранний режим</Fullscreen>
+      <Cancel>#{word.cancel}</Cancel>
+      <Close>#{word.close}</Close>
+    </action>
+<tooltip>
+<FullScreen>Збільшити/Зменшити</FullScreen>
+</tooltip>
+    <msg>
+      <cannot-save>Сталася помилка під час збереження документа.</cannot-save>
+      <in-versioning>Перш ніж додавати новий вузол, будь ласка, перевірте поточний вузол.</in-versioning>
+      <not-support>Не вдалося завантажити шаблон '{0}'.</not-support>
+      <value-invalid>'{0}' є необхідним значенням.</value-invalid>
+      <repository-exception>Сталася помилка під час збереження документа.</repository-exception>
+      <!--DMS 2.4.x; ECM-3543-->
+      <repository-exception-permission>Вас немає дозволу на додавання нового документа до цього вузла.</repository-exception-permission>
+      <not-allowed-same-name-sibling>Не можна зберегти цей документ. Він не може мати таку ж назву, як його споріднений документ.</not-allowed-same-name-sibling>
+      <numberformat-exception>Цю дію не можна зберегти. Надане ім'я має бути в числовому форматі.</numberformat-exception>
+      <item-not-found>Елемент не знайдено. Цей вузол (або його попередник) було видалено. Будь ласка, натисніть кнопку Оновити.</item-not-found>
+    </msg>
+  </UIDocumentForm>
+  <!--
+  #################################################################################
+  #org.exoplatform.ecm.webui.component.explorer.actions.UIViewDocumentController  #
+  #################################################################################
+  -->
+  <UIViewDocumentController>
+    <tab>
+      <label>
+        <UIViewDocumentInfo>Інформація</UIViewDocumentInfo>
+      </label>
+    </tab>
+    <action>
+      <Close>#{word.close}</Close>
+    </action>
+  </UIViewDocumentController>
+  <!--
+  #############################################################################
+  #       org.exoplatform.ecm.webui.component.explorer.search.UI  #
+  #############################################################################
+  -->
+  <!--
+  #############################################################################
+  #    org.exoplatform.ecm.webui.component.explorer.search.UIQuerySaveForm    #
+  #############################################################################
+  -->
+  <UIQuerySaveForm>
+    <title>Зберегти форму запиту</title>
+    <label>
+      <query>Запит</query>
+      <name>Ім'я запиту</name>
+    </label>
+    <action>
+      <Save>#{word.save}</Save>
+      <Cancel>#{word.cancel}</Cancel>
+    </action>
+  </UIQuerySaveForm>
+  <!--
+  #############################################################################
+  #       org.exoplatform.ecm.webui.component.explorer.admin.UIActionManager  #
+  #############################################################################
+  -->
+  <editActionPopup>
+    <title>
+      <UIActionForm>Змінити дію</UIActionForm>
+      <EditFormAction>Змінити дію</EditFormAction>
+    </title>
+  </editActionPopup>
+  <UIActionViewContainer>
+    <action>
+      <Cancel>#{word.cancel}</Cancel>
+    </action>
+  </UIActionViewContainer>
+  <UIActionList>
+    <header>
+      <name>#{word.name}</name>
+      <description>Опис</description>
+  <lifecycle>Життєвий цикл</lifecycle>
+  <triggeredaction>Запущена дія</triggeredaction>
+      <instanceOf>Працююча копія програми типу дії</instanceOf>
+      <action>Дія</action>
+    </header>
+    <msg>
+      <remove-popup-first>Спливаюче меню редагування потрібно закривати перед видаленням цього вузла.</remove-popup-first>
+      <confirm-delete-action>Ви дійсно бажаєте видалити цю дію?</confirm-delete-action>
+      <template-empty>Шаблон "{0}" анульований або порожній.</template-empty>
+      <template-null>Шаблон анульовано або ви не маєте дозволу на доступ до цього шаблону.</template-null>
+      <access-denied>Доступ заборонено. Ви не маєте дозвіл на виконання цієї дії.</access-denied>
+    </msg>
+    <action>
+      <Close>#{word.close}</Close>
+      <View>Перегляд</View>
+      <Edit>Редагувати</Edit>
+      <Delete>Видалити</Delete>
+    </action>
+  </UIActionList>
+  <UIActionForm>
+    <action>
+      <Save>#{word.save}</Save>
+      <Back>#{word.back}</Back>
+    </action>
+    <label>
+      <name>Форма дії</name>
+    </label>
+    <msg>
+      <repository-exception>Цю дію не можна зберегти. Надане ім'я має деякі спеціальні символи.</repository-exception>
+      <numberformat-exception>Цю дію не можна зберегти. Надане ім'я має бути в числовому форматі.</numberformat-exception>
+      <existed-action>Дія під іменем "{0}" уже існує. Будь ласка, виберіть іншу назву.</existed-action>
+      <unable-add-action>Не вдалося додати цю дію.</unable-add-action>
+      <unable-add>Не вдалося додати цю дію. Або цей вузол є кореневим або у вас немає дозволу.</unable-add>
+      <not-support>Діалогове вікно '{0}' не підтримується.</not-support>
+      <no-permission-add>Доступ заборонено. Ви не маєте права додавати тут дію.</no-permission-add>
+      <access-denied>Доступ заборонено. Ви не маєте дозволу на доступ до цього шаблону.</access-denied>
+      <lifecycle-invalid>Цю дію не можна додати. Неприпустима фаза життєвого циклу дій.</lifecycle-invalid>
+    </msg>
+    <title>Додати/Змінити дію</title>
+    <validator>
+      <validator>Агент перевірки</validator>
+      <destPath>Із шляхом</destPath>
+    </validator>
+  </UIActionForm>
+  <UIActionTypeForm>
+    <label>
+      <actionType>Створити дію типу</actionType>
+    </label>
+  </UIActionTypeForm>
+  <PopupComponent>
+    <title>
+      <UIOneNodePathSelector>Виберіть розташування</UIOneNodePathSelector>
+      <UIPermissionSelector>Оглядач прав доступа</UIPermissionSelector>
+      <UICategoriesSelector>Додати категорії</UICategoriesSelector>
+    </title>
+  </PopupComponent>
+  <EditFormAction>
+    <validator>
+      <validator>Агент перевірки</validator>
+      <destPath>Із шляхом</destPath>
+    </validator>
+    <title>Форма дії</title>
+  </EditFormAction>
+  <!--
+  #############################################################################
+  #       org.exoplatform.ecm.webui.component.explorer.control.UIAddressBar   #
+  #############################################################################
+  -->
+  <UIAddressBar>
+    <msg>
+      <path-not-found>Не вдалося знайти шлях.</path-not-found>
+      <access-denied>Доступ заборонено. Ви не маєте права на зчитування вузла.</access-denied>
+      <keyword-not-support>Неприпустиме ключове слово. Деякі символи не підтримуються.</keyword-not-support>
+    </msg>
+    <label>
+      <exeButton>Йти</exeButton>
+      <address>Адреса:</address>
+    </label>
+    <title>
+      <exeButton>Йти</exeButton>
+      <backButton>Повернутися до попереднього вузла</backButton>
+      <showHistory>Показати адресу історії</showHistory>
+      <changeNode>Змінити вузол</changeNode>
+    </title>
+  </UIAddressBar>
+  <!--
+  ###################################################################################
+  # org.exoplatform.ecm.webui.component.explorer.popup.actions.UIWatchDocumentForm  #
+  ###################################################################################
+  -->
+  <UIWatchDocumentForm>
+    <action>
+      <Watch>Відстеження</Watch>
+      <Cancel>#{word.cancel}</Cancel>
+      <Continue>Продовжити</Continue>
+      <Unwatch>Перестати відстежувати</Unwatch>
+    </action>
+    <label>
+      <notificationType>Тип повідомлення:</notificationType>
+    </label>
+    <msg>
+      <not-support>Цей тип сповіщень не підтримується. Будь ласка, виберіть інший тип.</not-support>
+      <watching-successfully>Ви продивляєтесь цей документ.</watching-successfully>
+      <unwatching-successfully>Ви успішно покинули список спостерігачів.</unwatching-successfully>
+      <node-iswatching>Цей документ відсліджувався.</node-iswatching>
+    </msg>
+  </UIWatchDocumentForm>
+  <!--
+  ###################################################################################
+  #   org.exoplatform.ecm.webui.component.explorer.popup.actions.UITaggingForm      #
+  ###################################################################################
+  -->
+  <UITaggingForm>
+    <label>
+      <names>Імена тегів:</names>
+      <linked>Пов'язані Теги:</linked>
+      <tagSet>UITaggingForm</tagSet>
+    </label>
+    <action>
+      <AddTag>Додати</AddTag>
+      <Cancel>#{word.close}</Cancel>
+    </action>
+    <msg>
+      <name-exist>Ім'я тегу "{0}" уже існує.</name-exist>
+      <tagName-invalid>Ім'я тега містить кілька неприпустимих символів.</tagName-invalid>
+      <tagName-empty-or-invalid>The tag name is empty or contains some invalid characters.</tagName-empty-or-invalid>
+      <tag-name-empty>Порожнє ім'я тега</tag-name-empty>
+      <tag-name-duplicate>Імена введених тегів повторюються.</tag-name-duplicate>
+      <tagName-too-long>Один з тегів вийшов  дуже довгим. Ім'я тегу повинне бути менше 30 символів.</tagName-too-long>
+      <path-not-found>Цей тег видалено або змінено. Будь ласка, натисніть на кнопку Оновити.</path-not-found>
+    </msg>
+    <introduction>
+      <tagName>Розділіть декілька тегів  комами ","</tagName>
+    </introduction>
+  </UITaggingForm>
+
+  <!--
+  ###################################################################################
+  # org.exoplatform.ecm.webui.component.explorer.popup.info.UIMetadataContainer     #
+  ###################################################################################
+  -->
+  <UIViewMetadataContainer>
+    <msg>
+      <path-not-found>Вузол не підтримує цього подання.</path-not-found>
+    </msg>
+  </UIViewMetadataContainer>
+  <!--
+  ###################################################################################
+  # org.exoplatform.ecm.webui.component.explorer.popup.info.UIViewMetadataForm      #
+  ###################################################################################
+  -->
+  <UIViewMetadataForm>
+    <action>
+      <Save>#{word.save}</Save>
+      <Cancel>#{word.cancel}</Cancel>
+    </action>
+  </UIViewMetadataForm>
+  <metadataForm>
+    <title>
+      <UIViewMetadataForm>Додати/редагувати властивості</UIViewMetadataForm>
+    </title>
+  </metadataForm>
+  <UIViewMetadataTemplate>
+    <msg>
+      <access-denied>Доступ заборонено. Ви не власник або не маєте права робити  редагування в цьому вузлі.</access-denied>
+    </msg>
+  </UIViewMetadataTemplate>
+  <!--
+  ###################################################################################
+  # Validator messages                                                              #
+  ###################################################################################
+  -->
+  <ECMNameValidator>
+    <msg>
+      <Invalid-char>Поля "{0}" містить кілька неприпустимих символів. Будь ласка, введіть інше значення.</Invalid-char>
+      <empty-input>Значення поля "{0}"анульоване або порожнє.</empty-input>
+    </msg>
+  </ECMNameValidator>
+  <DateTimeValidator>
+    <msg>
+      <Invalid-input>Поле "{0}" зі значенням "{1}", є неприпустимим.</Invalid-input>
+    </msg>
+  </DateTimeValidator>
+  <CronExpressionValidator>
+    <invalid-input>Неправильна команда для планувальника завдань. Перевірте синтаксис.</invalid-input>
+  </CronExpressionValidator>
+  <EmptyFieldValidator>
+    <msg>
+      <empty-input>Будь ласка, заповніть поле "{0}".</empty-input>
+    </msg>
+  </EmptyFieldValidator>
+  <CategoryValidator>
+    <msg>
+      <non-categories>Невірні категорії. Будь ласка, виберіть відповідні категорії.</non-categories>
+    </msg>
+  </CategoryValidator>
+  <!--
+  ###################################################################################
+  # JCR Exceptions manager                                                              #
+  ###################################################################################
+  -->
+  <ReferentialIntegrityException>
+    <msg>Не вдалося виконати дію. В робочій області є ще деякі  елементи посилання.</msg>
+  </ReferentialIntegrityException>
+  <ItemExistsException>
+    <msg>Цей елемент уже існує.</msg>
+  </ItemExistsException>
+  <AccessControlException>
+    <msg>Доступ заборонено. Ви не маєте дозвіл на виконання цієї дії.</msg>
+  </AccessControlException>
+  <AccessDeniedException>
+    <msg>Доступ заборонено.</msg>
+  </AccessDeniedException>
+  <ItemNotFoundException>
+    <msg>Елемент не знайдено. Можливо, його видалено або змінено.</msg>
+  </ItemNotFoundException>
+  <PathNotFoundException>
+    <msg>Не вдалося знайти шлях. Можливо, його видалено або змінено.</msg>
+  </PathNotFoundException>
+  <ConstraintViolationException>
+    <msg>Ви не можете виконати цю дію через деякі обмеження.</msg>
+  </ConstraintViolationException>
+  <!--
+  ###################################################################################
+  # Publication Manage                                                              #
+  ###################################################################################
+  -->
+  <UIPublicationForm>
+    <label>
+      <published>Опубліковано</published>
+      <non-published>Неопубліковані</non-published>
+      <public>Відкритий</public>
+      <private>Приватний</private>
+      <state>Стан</state>
+      <visibility>Видимість</visibility>
+      <nodeName>Назва вузла:</nodeName>
+      <lifecycleName>Ім'я життєвого циклу</lifecycleName>
+      <stateName>Ім!я стану</stateName>
+    </label>
+    <action>
+      <Save>#{word.save}</Save>
+      <UnsubcriberLifeCycle>Скасування підписки</UnsubcriberLifeCycle>
+      <Cancel>#{word.cancel}</Cancel>
+    </action>
+  </UIPublicationForm>
+  <!--
+  ###################################################################################
+  # JCR Browser                                                             #
+  ###################################################################################
+  -->
+  <UIWorkspaceList>
+    <label>
+      <workspaceName>Робоча область:</workspaceName>
+      <rootNodeInfo>Кореневий шлях:</rootNodeInfo>
+      <rootPath>Кореневий шлях:</rootPath>
+    </label>
+  </UIWorkspaceList>
+  <pathSelector>
+    <title>
+      <UIOneNodePathSelector>Отборщик вузлів</UIOneNodePathSelector>
+    </title>
+  </pathSelector>
+  <!--
+  ###################################################################################
+  # Others                                                                          #
+  ###################################################################################
+  -->
+  <EmailAddressValidator>
+    <msg>
+      <Invalid-input>Адреса електронної пошти недійсна.</Invalid-input>
+    </msg>
+  </EmailAddressValidator>
+  <UIFormInputSetWithAction>
+    <msg>
+      <confirm-delete>Ви впевнені, що бажаєте видалити?</confirm-delete>
+    </msg>
+  </UIFormInputSetWithAction>
+  <RepeatCountValidator>
+    <msg>
+      <invalid-value>Неприпустиме значення в полі "Повторити відлік". Дозволяються тільки цілі числа або -1.</invalid-value>
+    </msg>
+  </RepeatCountValidator>
+  <RepeatIntervalValidator>
+    <msg>
+      <invalid-value>Неприпустиме значення в полі "Інтервал часу". Дозволяються тільки довгі типи.</invalid-value>
+    </msg>
+  </RepeatIntervalValidator>
+  <UIPermissionSelector>
+    <label>
+      <selectGroup>Вибрати групу</selectGroup>
+      <selectUser>Вибрати користувача</selectUser>
+      <selectMembership>Виберіть Членство</selectMembership>
+    </label>
+  </UIPermissionSelector>
+  <!--
+  ###################################################################################
+  # org.exoplatform.ecm.jcr.ECMStandardPropertyNameValidator                        #
+  ###################################################################################
+  -->
+  <ECMStandardPropertyNameValidator>
+    <msg>
+      <empty-input>Значення поля "{0}"анульоване або порожнє.</empty-input>
+      <Invalid-char>Поле "{0}" містить кілька неприпустимих знаків. Будь ласка, введіть інше значення.</Invalid-char>
+    </msg>
+  </ECMStandardPropertyNameValidator>
+  <!--
+  ###################################################################################
+  # org.exoplatform.ecm.jcr.SearchValidator                                     #
+  ###################################################################################
+  -->
+  <SearchValidator>
+    <msg>
+      <empty-input>Значення поля анульоване або порожнє.</empty-input>
+      <Invalid-char>Поле "{0}" містить кілька неприпустимих знаків. Будь ласка, введіть інше значення.</Invalid-char>
+      <Invalid-char2>За числом повинен слідувати знак ' ~'.</Invalid-char2>
+      <Invalid-char1>Число після знака ' ~' повинне бути між 0 та 1.</Invalid-char1>
+      <Invalid-char3>За числом повинен слідувати знак ' ^'.</Invalid-char3>
+      <Invalid-char4>Не можна використовувати пробіли поблизу знаку "~".</Invalid-char4>
+      <Invalid-char5>Не можна використовувати пробіли біля символу '^'.</Invalid-char5>
+    </msg>
+  </SearchValidator>
+  <!--
+  ###################################################################################
+  # PublicationService                                                              #
+  ###################################################################################
+  -->
+  <UIPublicationLogList>
+    <header>
+      <date>Дата</date>
+      <newState>Новий стан</newState>
+      <user>Користувач</user>
+      <description>Опис</description>
+      <version>Версія</version>
+      <visibility>Видимість</visibility>
+    </header>
+    <action>
+      <Close>#{word.close}</Close>
+    </action>
+  </UIPublicationLogList>
+  <!--
+  ###################################################################################
+  # UIVersionTreeList                                                             #
+  ###################################################################################
+  -->
+  <UIVersionTreeList>
+    <header>
+      <version>Версія</version>
+      <state>Стан</state>
+    </header>
+  </UIVersionTreeList>
+  <!--
+  ###################################################################################
+  # UIThumbnailForm                                                             #
+  ###################################################################################
+  -->
+  <UIThumbnailForm>
+    <action>
+      <Save>#{word.save}</Save>
+      <Cancel>#{word.cancel}</Cancel>
+      <RemoveThumbnail>Видалити ескіз</RemoveThumbnail>
+    </action>
+    <label>
+      <mediumSize>Зображення ескізу</mediumSize>
+      <SelectFile>Виберіть зображення ескізу</SelectFile>
+    </label>
+    <msg>
+      <mimetype-incorrect>Хибний тип файлу. Ескізи можуть бути створені тільки з файлів .JPG, .PNG або .GIF.</mimetype-incorrect>
+      <access-denied>Доступ заборонено. Вам не дозволено додати ескіз для цього вузла.</access-denied>
+      <confirm-delete>Ви дійсно бажаєте видалити цей ескіз?</confirm-delete>
+      <is-checked-in>Цей вузол не відмічений. Будь ласка, відмітьте перед виконанням будь-які дії.</is-checked-in>
+      <fileName-error>Будь ласка, виберіть файл для завантаження.</fileName-error>
+    </msg>
+    <title>
+      <remove-thumbnail>Видалити цей ескіз</remove-thumbnail>
+    </title>
+  </UIThumbnailForm>
+  <!--
+  ###################################################################################
+  # UIAnyPermission                                                                 #
+  ###################################################################################
+  -->
+  <UIAnyPermission>
+    <label>
+      <anyPermission>Будь-яке право доступа</anyPermission>
+    </label>
+  </UIAnyPermission>
+
+  <anyPermission>
+    <title>
+      <AddAnyPermission>Встановити будь-яке право доступу</AddAnyPermission>
+    </title>
+  </anyPermission>
+  <!--
+  ###################################################################################
+  # UICategoriesAddedList                                                           #
+  ###################################################################################
+  -->
+  <UICategoriesSelector>
+    <action>
+      <close>#{word.close}</close>
+    </action>
+  </UICategoriesSelector>
+  <!--
+  ###################################################################################
+  # Since ECM version 2.2                                                             #
+  ###################################################################################
+  -->
+  <UIGroupMemberSelector>
+    <label>
+      <selectGroup>Вибрати групу</selectGroup>
+      <selectUser>Вибрати користувача</selectUser>
+      <selectMembership>Виберіть Членство</selectMembership>
+    </label>
+  </UIGroupMemberSelector>
+  <!--
+  ###Since ECM version 2.2##############
+  -->
+ 
+  <!--
+  ### Since ECM version 2.3 Alpha##############
+  Access directly a JCR FE drive
+  -->
+  <UIJCRExplorerPortlet>
+    <nopermission>Немає диску або ви не маєте дозволу на доступ до цього диска.</nopermission>
+  </UIJCRExplorerPortlet>
+
+  <UIJcrExplorerEditForm>
+    <title>Редагувати File Explorer</title>
+    <action>
+      <Edit>Редагувати</Edit>
+      <Save>#{word.save}</Save>
+      <Cancel>#{word.cancel}</Cancel>
+    </action>
+    <label>
+      <uploadFileSizeLimitMB>Обмеження розміру завантаженого файлу (МБ)</uploadFileSizeLimitMB>
+      <isDirectlyDrive>Прямий привід</isDirectlyDrive>
+      <driveName>Ім'я диску</driveName>
+      <usecase>Виберіть тип</usecase>
+      <SelectNodePath>Вибрати шлях</SelectNodePath>
+      <showTopBar>Показати верхню панель</showTopBar>
+      <showActionBar>Показати панель дії</showActionBar>
+      <showSideBar>Показати ліву панель</showSideBar>
+      <showFilterBar>Показати панель фільтру</showFilterBar>
+      <nodePath>Вибрати шлях</nodePath>
+    </label>
+  </UIJcrExplorerEditForm>
+
+  <UIDriveSelector>
+    <label>
+      <driveName>Ім'я диску</driveName>
+      <action>Дія</action>
+      <adddrives>Додати диски</adddrives>
+    </label>
+  </UIDriveSelector>
+  <UIJcrExplorerEditForm>
+    <label>
+      <DriveNameInput>UI JCR Explorer Edit Form</DriveNameInput>
+    </label>
+    <msg>
+      <personal-usecase>Приватний диск поточного користувача буде використовуватися при виборі Персональногосценарію використання.</personal-usecase>
+      <drive-edit-permission>Ви не можете редагувати ім'я диска. Будь ласка, натисніть кнопку Редагувати.</drive-edit-permission>
+      <path-edit-permission>Ви не можете редагувати шлях. Будь ласка, натисніть кнопку Редагувати.</path-edit-permission>
+    </msg>
+  </UIJcrExplorerEditForm>
+
+  <PopUpSelectDrive>
+    <title>
+      <UIDriveSelector>Вибрати диск</UIDriveSelector>
+    </title>
+  </PopUpSelectDrive>
+
+  <PopupSelectPath>
+    <title>
+      <UIOneNodePathSelector>Виберіть вузол</UIOneNodePathSelector>
+    </title>
+  </PopupSelectPath>
+
+  <DriveNameInput>
+    <title>
+      <SelectDrive>Вибрати диск</SelectDrive>
+    </title>
+  </DriveNameInput>
+
+  <!--
+  ### Since ECM version 2.4.x ##############
+  -->
+  <UIActionBar>
+    <tooltip>
+      <AddSymLink>Додати символьне посилання</AddSymLink>
+      <AddLocalizationLink>Додати переклад</AddLocalizationLink>
+    </tooltip>
+  </UIActionBar>
+
+  <UIPopupWindow>
+    <title>
+      <UISymLinkManager>Керування символьним посиланням</UISymLinkManager>
+      <UIAddTranslationManager>Додати переклад</UIAddTranslationManager>
+    </title>
+  </UIPopupWindow>
+
+  <UISymLinkForm>
+    <label>
+      <symLinkName>Ім'я символьного посилання</symLinkName>
+      <pathNode>Шлях вузла</pathNode>
+    </label>
+    <action>
+      <Save>#{word.save}</Save>
+      <Cancel>#{word.cancel}</Cancel>
+    </action>
+    <msg>
+      <addFolder-successful>Символьне посилання '{0}' успішно додане.</addFolder-successful>
+      <name-invalid>Будь ласка, введіть ім'я символьного посилання.</name-invalid>
+      <name-not-allowed>Це ім'я не допускається.</name-not-allowed>
+      <fileName-error>Неприпустиме ім'я файлу.</fileName-error>
+      <constraint-violation>Не вдалося додати тип вузла '{0}' в поточний вузол.</constraint-violation>
+      <repository-exception>Доступ заборонено. У вас немає дозволу на додання символьного посилання в цей вузол.</repository-exception>
+      <numberformat-exception>Не можна зберегти цю папку. Надане ім'я має бути в числовому форматі.</numberformat-exception>
+      <path-node-invalid>Будь ласка, введіть шлях вузла.</path-node-invalid>
+      <path-node-not-allowed>Це ім'я не допускається.</path-node-not-allowed>
+      <non-node>Будь ласка, виберіть цільової вузол довіри; можливо, у вас недостатньо права читати цей вузол.</non-node>
+      <cannot-save>Не можна додати символьне посилання для цього типу вузла.</cannot-save>
+      <item-exists-exception>Ім'я вузла вже існує.</item-exists-exception>
+      <translation-node-same-language-default>Вузол перекладу має таку саму мову, як мова за замовчуванням поточного вузла.</translation-node-same-language-default>
+      <UnsupportedRepositoryOperationException>Цей цільовий вузол не згадується.</UnsupportedRepositoryOperationException>
+    </msg>
+  </UISymLinkForm>
+  
+  <UIAddTranslationForm>
+    <label>
+      <symLinkName>Ім'я символьного посилання</symLinkName>
+      <pathNode>Шлях до документа:</pathNode>
+      <note>Виберіть інший документ, який буде служити в якості перекладу</note>
+    </label>
+    <action>
+      <Save>#{word.save}</Save>
+      <Cancel>#{word.cancel}</Cancel>
+      <SelectDocument>Виберіть документ</SelectDocument>
+    </action>
+    <msg>
+      <addFolder-successful>Символьне посилання '{0}' успішно додане.</addFolder-successful>
+      <name-invalid>Будь ласка, введіть ім'я символьного посилання.</name-invalid>
+      <name-not-allowed>Це ім'я не допускається.</name-not-allowed>
+      <fileName-error>Неприпустиме ім'я файлу.</fileName-error>
+      <constraint-violation>Не вдалося додати тип вузла '{0}' в поточний вузол.</constraint-violation>
+      <repository-exception>Доступ заборонено. У вас немає дозволу на додання символьного посилання в цей вузол.</repository-exception>
+      <numberformat-exception>Не можна зберегти цю папку. Надане ім'я має бути в числовому форматі.</numberformat-exception>
+      <path-node-invalid>Будь ласка, введіть шлях вузла.</path-node-invalid>
+      <path-node-not-allowed>Це ім'я не допускається.</path-node-not-allowed>
+      <non-node>Будь ласка, виберіть цільової вузол довіри; у вас недостатньо права читати цей вузол.</non-node>
+      <cannot-save>Сталася помилка під час створення посилання.</cannot-save>
+      <item-exists-exception>Ім'я вузла вже існує.</item-exists-exception>
+      <translation-node-same-language-default>Вузол перекладу має таку саму мову, як мова за замовчуванням поточного вузла.</translation-node-same-language-default>
+      <UnsupportedRepositoryOperationException>Цей цільовий вузол не згадується.</UnsupportedRepositoryOperationException>
+    </msg>
+  </UIAddTranslationForm>
+
+  <UIPopupSymLink>
+    <title>
+      <UIOneNodePathSelector>Виберіть цільової вузол</UIOneNodePathSelector>
+    </title>
+  </UIPopupSymLink>
+  <UIPopupSymLink>
+    <title>
+      <UIContentSelectorOne>Виберіть документ</UIContentSelectorOne>
+    </title>
+  </UIPopupSymLink>
+
+  <ECMContextMenu>
+    <event>
+      <AddSymLink>Додати символьне посилання</AddSymLink>
+      <AddLocalizationLink>Додати переклад</AddLocalizationLink>
+    </event>
+  </ECMContextMenu>
+
+  <UIWorkingArea>
+    <msg>
+      <create-link-problem>Не вдалося створити посилання на вузол '{0}' в '{1}'.</create-link-problem>
+      <dest-node-is-link>Вузол призначення '{0}' вже є символьне посилання, так що ви не можете створити символьне посилання всередині нього.</dest-node-is-link>
+      <selected-is-link>Обраний вузол '{0}' вже є посиланням, тому не можна створити точку з'єднання з іншим посиланням.</selected-is-link>
+      <confirm-create-link>Хочете створити посилання на цьому місці?</confirm-create-link>
+    </msg>
+  </UIWorkingArea>
+
+  <ECMContextMenu>
+    <event>
+      <CreateLink>Створити посилання</CreateLink>
+    </event>
+  </ECMContextMenu>
+
+  <UIWorkspaceList>
+    <msg>
+      <AccessDeniedException>Доступ заборонено. Ви не маєте дозволу читати  вцій робочій області.</AccessDeniedException>
+    </msg>
+    <label>
+      <taxonomyTree>Дерево категорій</taxonomyTree>
+    </label>
+  </UIWorkspaceList>
+
+  <UIPopupTaxonomy>
+    <title>
+      <UIOneTaxonomySelector>Додати категорії</UIOneTaxonomySelector>
+    </title>
+  </UIPopupTaxonomy>
+
+  <UITreeTaxonomyList>
+    <label>
+      <taxonomyTree>Дерево категорій:</taxonomyTree>
+      <rootNodePath>Кореневе дерево:</rootNodePath>
+      <rootNodeInfo>UITreeTaxonomyList</rootNodeInfo>
+    </label>
+  </UITreeTaxonomyList>
+
+  <UIActionBar>
+    <tooltip>
+      <ManageSimpleCategories>Керування простими категоріями</ManageSimpleCategories>
+    </tooltip>
+  </UIActionBar>
+
+  <UISimpleCategoryManager>
+    <tab>
+      <label>
+        <UICategoriesAddedList>Згадувані категорії</UICategoriesAddedList>
+        <UIOneNodePathSelector>Вибрати категорію</UIOneNodePathSelector>
+      </label>
+    </tab>
+  </UISimpleCategoryManager>
+
+  <UICategoryManager>
+    <tab>
+      <label>
+        <UIOneTaxonomySelector>Вибрати категорію</UIOneTaxonomySelector>
+      </label>
+    </tab>
+  </UICategoryManager>
+
+  <UISimpleCategoryManager>
+    <action>
+      <Close>#{word.close}</Close>
+    </action>
+  </UISimpleCategoryManager>
+  <UIPopupWindow>
+    <title>
+      <UISimpleCategoryManager>Додати категорію</UISimpleCategoryManager>
+    </title>
+  </UIPopupWindow>
+  <UICategoriesAddedList>
+    <msg>
+      <ItemExistsException>Ім'я категорії вже існує.</ItemExistsException>
+    </msg>
+  </UICategoriesAddedList>
+
+  <UIConfirmMessage>
+    <label>
+      <Close>#{word.cancel}</Close>
+      <OK>Видалити</OK>
+      <ReplaceData>Замінити дані</ReplaceData>
+      <Back>Повернутися до Перейменувати</Back>
+      <Keepfile>Зберегти обидва файли</Keepfile>
+    </label>
+  </UIConfirmMessage>
+
+  <UIRestoreConfirmMessage>
+    <label>
+      <Close>#{word.close}</Close>
+      <OK>Гаразд</OK>
+      <ReplaceData>Замінити дані</ReplaceData>
+      <Back>Повернутися до Перейменувати</Back>
+      <Keepfile>Зберегти обидва файли</Keepfile>
+    </label>
+  </UIRestoreConfirmMessage>
+
+
+  <PopupComponent>
+    <title>
+      <UIOneTaxonomySelector>Додати категорії</UIOneTaxonomySelector>
+    </title>
+  </PopupComponent>
+
+  <UIWorkingArea>
+    <msg>
+      <can-not-move-to-itself>Не можна перемістити файл, оскільки папка призначення співпадає з вихідною папкою.</can-not-move-to-itself>
+      <is-editing>Неможливо перемістити документ, поки він в даний час редагується  . Будь ласка закрийте його.</is-editing>
+    </msg>
+  </UIWorkingArea>
+
+  <UIImportNode>
+    <label>
+      <behavior>Лінія поведінки UUID</behavior>
+      <versionHistory>Історія версій</versionHistory>
+    </label>
+    <msg>
+      <history-invalid-type>Неприпустимий файл типу в історії версій. Підтримуються лише ZIP-файли.</history-invalid-type>
+      <history-invalid-content>Неприпустимий вміст в даних історії версій. Будь ласка, виберіть тип підтримуваного файлу для імпорту.</history-invalid-content>
+    </msg>
+  </UIImportNode>
+
+  <Import>
+    <Behavior>
+      <type0>Створити новий</type0>
+      <type1>Видалити існуючий</type1>
+      <type2>Замінити існуючий</type2>
+      <type3>Запустити виняткову ситуацію</type3>
+    </Behavior>
+  </Import>
+
+  <UIExportNode>
+    <action>
+      <ExportHistory>Експорт історії версій</ExportHistory>
+    </action>
+  </UIExportNode>
+
+  <UIPopupMenu>
+    <msg>
+      <node-locked-other-person>Цей вузол або його батьківський вузол в даний час заблокований іншим користувачем, так що ви не можете видалити його.</node-locked-other-person>
+    </msg>
+  </UIPopupMenu>
+
+  <Import>
+    <label>
+      <docview>Перегляд документу</docview>
+      <sysview>Системний вид</sysview>
+    </label>
+  </Import>
+
+  <UIDocumentForm>
+    <msg>
+      <do-not-permission>Ви не маєте дозволу завантажити шаблон '{0}'.</do-not-permission>
+    </msg>
+  </UIDocumentForm>
+
+  <!--
+  ###################################################################################
+  #             org.exoplatform.ecm.webui.component.explorer.UIActionBar                #
+  #                           Localize tab                                                                                    #
+  ###################################################################################
+  -->
+  <UIActionBar>
+    <obtion>
+      <Admin>Адміністратор</Admin>
+      <Info>Інформація</Info>
+      <Actions>Дії</Actions>
+      <Collaboration>Співпраця</Collaboration>
+      <Search>Пошук</Search>
+    </obtion>
+  </UIActionBar>
+
+  <UIPopupMenu>
+    <msg>
+      <can-not-unlock-node-is-checked-in>Ви не можете розблокувати, тому що вузол '{0}' (або його попередник) не відмічений.</can-not-unlock-node-is-checked-in>
+    </msg>
+  </UIPopupMenu>
+
+  <!--
+   #############  From DMS 2.5 #############
+  -->
+  <UIActionBar>
+    <msg>
+      <cannot-enable-version>Не вдалося увімкнути вузол керування версіями.</cannot-enable-version>
+    </msg>
+  </UIActionBar>
+  <UIPopupMenu>
+    <msg>
+        <cannot-readsource>Ви не можете прочитати дані з вихідного вузла.</cannot-readsource>
+    </msg>
+  </UIPopupMenu>
+  <UIUploadForm>
+    <msg>
+      <upload-not-null>Перш ніж додати категорію, будь ласка, завантажте файл.</upload-not-null>
+    </msg>
+  </UIUploadForm>
+  <UIActionBar>
+    <msg>
+      <allow-setProperty>Ви повинні встановити властивість для цієї групи.</allow-setProperty>
+    </msg>
+  </UIActionBar>
+
+  <UIActionForm>
+    <msg>
+      <name-not-allowed>Це ім'я дії не допускається.</name-not-allowed>
+    </msg>
+  </UIActionForm>
+
+  <UISaveQueryForm>
+    <msg>
+      <name-not-allowed>Це ім'я запиту не допускається.</name-not-allowed>
+    </msg>
+  </UISaveQueryForm>
+  <UISimpleSearch>
+    <msg>
+      <name-not-allowed>Слово або фраза у змісті не допускається.</name-not-allowed>
+    </msg>
+  </UISimpleSearch>
+
+ 
+    <!--
+   #############  From DMS 2.6 #############
+   -->
+  <ECMContextMenu>
+      <event>
+        <Permlink>Перегляд документа</Permlink>
+      </event>
+  </ECMContextMenu>
+  
+
+  <!--
+    ############  From DMS 2.6 ##############
+   -->
+  <UIFolderForm>
+    <label>
+      <nt_folder>Папка документа</nt_folder>
+      <nt_unstructured>Папка контента</nt_unstructured>
+      <exo_cssFolder>Папка CSS</exo_cssFolder>
+      <exo_jsFolder>Папка JavaScript</exo_jsFolder>
+      <exo_linkFolder>Link Folder</exo_linkFolder>
+      <exo_webFolder>Папка веб-контенту</exo_webFolder>
+   </label>
+  </UIFolderForm>
+
+  <Comments>
+    <tooltip>
+      <remove-comment>Видалити цей коментар</remove-comment>
+      <edit-comment>Відредагувати цей коментар</edit-comment>
+    </tooltip>
+  </Comments>
+  <UIDocumentInfo>
+    <msg>
+      <confirm-deletecomment>Ви дійсно бажаєте видалити цей коментар?</confirm-deletecomment>
+    </msg>
+  </UIDocumentInfo>
+
+ <UIExportNode>
+  <msg>
+    <OutOfMemoryError>Ви повинні вибрати Системний Вид під час експортування великих обсягів даних.</OutOfMemoryError>
+  </msg>
+ </UIExportNode>
+ <Taxonomy>
+    <msg>
+      <AccessDeniedException>У вас немає дозволу на доступ до цих дерев категорій.</AccessDeniedException>
+    </msg>
+  </Taxonomy>
+
+  <UIJcrExplorerEditForm>
+    <msg>
+      <notNullDriveName>Ім'я диску анульоване або порожнє. Будь ласка, заповніть поле Ім'я диску.</notNullDriveName>
+      <notNullPath>Шлях анульований або порожній. Будь ласка, заповніть шлях.</notNullPath>
+    </msg>
+  </UIJcrExplorerEditForm>
+
+  <UIViewSearchResult>
+    <tooltip>
+      <remove-attachment>Ви дійсно бажаєте видалити цей вкладений файл ?</remove-attachment>
+    </tooltip>
+  </UIViewSearchResult>
+
+  <SameNamePopup>
+    <title>
+      <UIUploadBehaviorWithSameName>Завантажити файл</UIUploadBehaviorWithSameName>
+    </title>
+  </SameNamePopup>
+
+  <UIAllItems>
+    <label>
+      <OwnedByMe>Ті, що належать мені</OwnedByMe>
+      <Favourites>Обране</Favourites>
+      <Hidden>Прихований</Hidden>
+      <Trash>Кошик</Trash>
+      <Configuration>Налаштування парамертів</Configuration>
+    </label>
+    <title>
+      <allItems>Всі елементи</allItems>
+    </title>
+  </UIAllItems>
+
+  <UIPreferencesForm>
+      <label>
+          <Alphabetic>Алфавітом</Alphabetic>
+          <Type>Типом</Type>
+          <CreatedDate>Датою створення</CreatedDate>
+          <ModifiedDate>Датою модифікації</ModifiedDate>
+          <Ascending>За зростанням</Ascending>
+          <Descending>За спаданням</Descending>
+      </label>
+  </UIPreferencesForm>
+
+  <UISavedSearches>
+    <title>
+      <savedSearches>Збережені результати пошуку</savedSearches>
+    </title>
+  </UISavedSearches>
+  <DocumentType>
+    <label>
+       <Images>Зображення</Images>
+       <Video>Відео</Video>
+       <Music>Музика</Music>
+       <Documents>Документ</Documents>
+       <Content>Контент</Content>
+    </label>
+  </DocumentType>
+
+  <UIDocumentFilterForm>
+    <label>
+      <Images>Зображення</Images>
+      <Video>Відео</Video>
+      <Music>Музика</Music>
+      <Documents>Документ</Documents>
+      <Content>Контент</Content>
+    </label>
+    <title>Встановити налаштування фільтра</title>
+    <action>
+      <Save>#{word.save}</Save>
+      <Cancel>#{word.cancel}</Cancel>
+    </action>
+  </UIDocumentFilterForm>
+
+  <UIAllItemsByType>
+    <label>
+    <ByType>Фільтрувати за типом</ByType>
+      <DocumentFilterConfiguration>Встановити налаштування фільтра</DocumentFilterConfiguration>
+    </label>
+    <title>
+      <ShowVideo>Показати всі відео файли</ShowVideo>
+      <ShowMusic>Показати всі музичні файли</ShowMusic>
+      <ShowImages>Показати всі файли зображень</ShowImages>
+      <ShowDocuments>Показати всі файли документів</ShowDocuments>
+      <ShowContent>Показати всі типи документів</ShowContent>
+    </title>
+  </UIAllItemsByType>
+
+  <Views>
+    <label>
+      <slide-show>Слайд-шоу</slide-show>
+    </label>
+  </Views>
+  <ECMContextMenu>
+    <event>
+      <PlayMedia>Відтворювати медіафайли</PlayMedia>
+    </event>
+  </ECMContextMenu>
+  <UIPopupWindow>
+    <title>
+      <UIDocumentFilterForm>Фільтр типу документів</UIDocumentFilterForm>
+    </title>
+  </UIPopupWindow>
+
+  <UIAllItemsPreferenceForm>
+    <label>
+      <showOwnedByUser>Ті, що належать мені</showOwnedByUser>
+      <showFavourites>Обране</showFavourites>
+      <showHiddens>Прихований</showHiddens>
+      <showTrash>Кошик</showTrash>
+    </label>
+    <action>
+      <Save>#{word.save}</Save>
+      <Cancel>#{word.cancel}</Cancel>
+    </action>
+  </UIAllItemsPreferenceForm>
+
+  <EmptyTrashManageComponent>
+    <msg>
+      <confirm-delete>Ви впевнені, що ви хочете очистити всі елементи з кошика?</confirm-delete>
+    </msg>
+  </EmptyTrashManageComponent>
+  <UICategoryForm>
+    <label>
+      <name>Ім'я категорії</name>
+    </label>
+    <action>
+      <Save>#{word.save}</Save>
+      <Cancel>#{word.cancel}</Cancel>
+    </action>
+  </UICategoryForm>
+  <UIPopupWindow>
+    <title>
+      <UICategoryForm>Додати категорію</UICategoryForm>
+    </title>
+  </UIPopupWindow>
+  <UIActionBar>
+    <tooltip>
+      <AddCategory>Додати категорію</AddCategory>
+    </tooltip>
+   </UIActionBar>
+
+   <UITaggingForm>
+    <label>
+      <Public>Відкритий</Public>
+      <Private>Приватний</Private>
+      <tagScopes>Відмітити результати</tagScopes>
+    </label>
+   </UITaggingForm>
+
+  <UITagExplorer>
+    <title>
+      <PublicTags>Теги</PublicTags>
+      <EditPublicTags>Редагувати Теги</EditPublicTags>
+      <PrivateTags>Теги</PrivateTags>
+    </title>
+  </UITagExplorer>
+
+  <UIEditingTagsForm>
+    <header>
+      <name>Ім’я</name>
+      <relatedDocuments>Пов'язані документи</relatedDocuments>
+      <action>Дія</action>
+    </header>
+    <action>
+      <title>
+        <EditTag>Редагувати тег</EditTag>
+        <RemoveTag>Видалити тег</RemoveTag>
+        <AddTag>Додати тег</AddTag>
+      </title>
+    </action>
+    <msg>
+      <confirm-remove>Ви справді бажаєте видалити цей тег?</confirm-remove>
+    </msg>
+  </UIEditingTagsForm>
+
+
+  <UIPopupWindow>
+    <title>
+      <UIEditingTagsForm>Редагувати тег</UIEditingTagsForm>
+    </title>
+  </UIPopupWindow>
+
+  <UITagForm>
+    <action>
+      <UpdateTag>#{word.save}</UpdateTag>
+      <Cancel>#{word.close}</Cancel>
+    </action>
+    <label>
+      <tagName>Ім'я тегу:</tagName>
+      <relatedDocuments>Пов'язані документи</relatedDocuments>
+    </label>
+  </UITagForm>
+
+  <TagPopup>
+    <title>
+      <UITagForm>Тег</UITagForm>
+    </title>
+  </TagPopup>
+
+    <UIPopupMenu>
+    <msg>
+      <node-locked-editing>Цей вузол зі шляху {0} не можна редагувати. Він блокується іншим користувачем.</node-locked-editing>
+    </msg>
+  </UIPopupMenu>
+  <UITagStyleForm>
+    <msg>
+      <error-update>Помилка під час оновлення стилю тега.</error-update>
+    </msg>
+  </UITagStyleForm>
+
+  <UIPopupMenu>
+    <msg>
+      <editTagAccessDenied>Доступ заборонено.</editTagAccessDenied>
+    </msg>
+  </UIPopupMenu>
+
+  <UIPopupWindow>
+    <title>
+      <UITaggingFormContainer>Керування тегом</UITaggingFormContainer>
+    </title>
+  </UIPopupWindow>
+
+    <PopupComponent>
+    <title>
+      <UINodeTypeSelector>Виберіть тип вузла</UINodeTypeSelector>
+    </title>
+  </PopupComponent>
+
+    <UIActionForm>
+    <title>
+      <ShowComponent>Показати компонент</ShowComponent>
+      <removeReference>Видалити</removeReference>
+    </title>
+  </UIActionForm>
+
+  <EditFormAction>
+    <title>
+      <ShowComponent>Показать компонент</ShowComponent>
+      <removeReference>Видалити</removeReference>
+    </title>
+  </EditFormAction>
+
+  <NodeTypeNameValidator>
+    <msg>
+      <Invalid-char>Існують деякі неприпустимі символи. Будь ласка, введіть інше значення.</Invalid-char>
+      <empty-input>Значення поля анульоване або порожнє.</empty-input>
+    </msg>
+  </NodeTypeNameValidator>
+
+  <UIPreferencesForm>
+      <label>
+            <queryType>Тип запиту:</queryType>
+            <SQL>SQL</SQL>
+            <XPATH>XPATH</XPATH>
+      </label>
+  </UIPreferencesForm>
+
+  <UIDocumentInfo>
+    <msg>
+      <repository-error>Сталася помилка. Інформація щодо сховища була втрачена.</repository-error>
+    </msg>
+  </UIDocumentInfo>
+
+  <UITreeExplorer>
+    <msg>
+      <repository-error>Сталася помилка. Інформація щодо сховища була втрачена.</repository-error>
+    </msg>
+  </UITreeExplorer>
+  <UIDocumentForm>
+    <msg>
+      <constraintviolation-exception>Не вдалося зберегти документ. Вхідні дані відсутні або неприпустимі.</constraintviolation-exception>
+    </msg>
+  </UIDocumentForm>
+  <UIActionForm>
+    <msg>
+      <constraintviolation-exception>Не вдалося зберегти документ. Вхідні дані відсутні або неприпустимі.</constraintviolation-exception>
+    </msg>
+  </UIActionForm>
+
+  <UISelectRestorePath>
+    <action>
+      <Save>#{word.save}</Save>
+      <Cancel>#{word.cancel}</Cancel>
+    </action>
+    <label>
+      <formInput>Попередній шлях було втрачено. Будь ласка, виберіть новий.</formInput>
+    </label>
+  </UISelectRestorePath>
+  <PathNode>
+    <title>
+      <Add>Додати</Add>
+    </title>
+  </PathNode>
+  <UIPopupPathFoRestore>
+    <title>
+      <UIOneNodePathSelector>Виберіть батьківський вузол</UIOneNodePathSelector>
+    </title>
+  </UIPopupPathFoRestore>
+  <rootNodeInfo>
+    <title>
+      <AddRootNode>Додати кореневий вузол</AddRootNode>
+    </title>
+  </rootNodeInfo>
+
+  <UIActionForm>
+    <msg>
+      <homePath-emty>Порожній шлях в говний директорій.</homePath-emty>
+      <targetPath-emty>Шлях призначення порожній.</targetPath-emty>
+    </msg>
+    </UIActionForm>
+    <UIActionBar>
+      <msg>
+        <not-exist-categories>Категорії відсутні.</not-exist-categories>
+      </msg>
+    </UIActionBar>
+
+  <UIPublicationContainer>
+   <action>
+    <Close>#{word.close}</Close>
+   </action>
+  </UIPublicationContainer>
+
+  <UIPublicationPanel>
+    <button>
+      <Close>#{word.close}</Close>
+    </button>
+    <revisions>
+      <version>Переглянуті версії</version>
+      <date>Дата</date>
+      <author>Автор</author>
+      <status>Статус</status>
+      <action>Дія</action>
+      <label>Переглянута версія</label>
+      <none>Немає переглянутих версій</none>
+      <seeall>Переглянути всі версії</seeall>
+      <currentVersion>Поточна переглянута версія</currentVersion>
+      <confirm>Ви втратите ваший робочий проект. Ви дійсно бажаєте замінити Поточну перглянуту  версію?</confirm>
+    </revisions>
+    <status>
+      <version>Переглянута версія</version>
+      <title>Статус</title>
+      <archived>Архівні</archived>
+      <obsolete>Застарілий</obsolete>
+      <unpublished>Неопубліковані</unpublished>
+      <enrolled>Зареєстровано</enrolled>
+      <draft>Чернетка</draft>
+      <pending>Очікування</pending>
+      <approved>Схвалено</approved>
+      <inreview>В огляді</inreview>
+      <staged>Розміщений</staged>
+      <published>Опубліковано</published>
+      <live>Опубліковано</live>
+    </status>
+    <scheduled>
+      <title>Заплановано</title>
+      <from>Від</from>
+      <to>До</to>
+    </scheduled>
+    <title>
+      <preview>Попередній перегляд</preview>
+      <restore>Відновити</restore>
+    </title>
+    <msg>
+      <have-no-view-template>Шаблони перегляду не підтримуються.</have-no-view-template>
+      <restore-complete>Відновлення завершено.</restore-complete>
+    </msg>
+  </UIPublicationPanel>
+  <UIPublicationHistory>
+    <header>
+      <date>Дата</date>
+      <versionName>Ім'я переглянутої версії</versionName>
+      <currentState>Поточний стан</currentState>
+      <user>Автор</user>
+      <description>Опис</description>
+    </header>
+  </UIPublicationHistory>
+  
+  <UIPublicationSchedule>
+    <label>
+      <introduction>Ви можете запланувати публікацію документа. Виберіть термін, коли б ви хотіли  бачити ваш документ опублікованим</introduction>
+      <no-schedule-info>Немає розкладу  публікації для вашого документу</no-schedule-info>
+    </label>
+    <msg>
+      <save-finished>Ваш новий розклад публікації успішно збережено.</save-finished>
+    </msg>
+    <action>
+      <Save>#{word.save}</Save>
+      <Reset>Скинути</Reset>
+    </action>
+  </UIPublicationSchedule>
+
+  <UIPublicationPanel>
+    <label>
+      <header>Дата публікації</header>
+      <start>Початок публікації</start>
+      <end>Завершення публікації</end>
+    </label>
+    <msg>
+      <invalid-format>Неприпустимий формат дати. Будь ласка, перевірте ще раз.</invalid-format>
+      <fromDate-after-toDate>Дата Від має передувати даті До.</fromDate-after-toDate>
+    </msg>
+  </UIPublicationPanel>
+  <UIPopupWindow>
+    <title>
+      <UIPublicationContainer>Керувати публікацією</UIPublicationContainer>
+      <UIPublishingPanel>Керувати публікацією</UIPublishingPanel>
+    </title>
+  </UIPopupWindow>
+  <WCMContentView>
+    <header>
+      <status>Статус</status>
+      <author>Автор</author>
+      <date>Датою створення</date>
+      <title>Назва документа</title>
+      <lastUser>Останній користувач</lastUser>
+    </header>
+  </WCMContentView>
+  <UITagForm>
+    <msg>
+      <NameAlreadyExist>Ім'я тега вже існує.</NameAlreadyExist>
+    </msg>
+  </UITagForm>
+
+  <!--
+  ############  From WCM 2.1.0 ##############
+  -->
+  <UICategoryManagerSearch>
+    <tab>
+      <label>
+        <UIOneTaxonomySelector>Вибрати категорію</UIOneTaxonomySelector>
+      </label>
+    </tab>
+  </UICategoryManagerSearch>
+
+  <UIPreferencesForm>
+   <action>
+     <HideAdvance>Приховати розширені</HideAdvance>
+     <ShowAdvance>Показати розширені</ShowAdvance>
+    </action>
+    <label>
+    <Advance>Розширені налаштування</Advance>
+    </label>
+  </UIPreferencesForm>
+
+  <UIJCRExplorerPortlet>
+<msg>
+  <file-access-denied>Доступ до файлу заборонений.</file-access-denied>
+  <anonymous-access-denied>Анонімний Користувач не має дозволу на використання цієї функції.</anonymous-access-denied>
+</msg>
+  </UIJCRExplorerPortlet>
+  <UIDrivesArea>
+    <DrivesArea>
+      <ShowDrives>Показати диски</ShowDrives>
+    </DrivesArea>
+    <msg>
+      <no-view-found>There are no views applied for your access permission in drive '{0}'.</no-view-found>
+      <access-denied>Access denied. You may not have permission in the workspace of drive '{0}'.</access-denied>
+      <empty-drives>Access denied. Either there is no drive in this repository or you do not have permission to access any drives in this repository.</empty-drives>
+      <workspace-not-exist>Drive '{0}' was stored in one unrecognized workspace. Please reconfigure this drive.</workspace-not-exist>
+    </msg>
+  </UIDrivesArea>
+  <UIJcrExplorerEditForm>
+    <msg>
+      <fields-saved>Всі значення поля  збережено.</fields-saved>
+      <fields-cancelled>Усі значення поля скасовано.</fields-cancelled>
+    </msg>
+  </UIJcrExplorerEditForm>
+  <UIDocumentForm>
+  <msg>
+  <confirm-close>Внесені зміни буде втрачено, якщо закрити цю форму.</confirm-close>
+  <confirm-changeType>Внесені зміни буде втрачено, якщо змінити тип вмісту.</confirm-changeType>
+  <confirm-navigate>Внесені зміни буде втрачено, якщо ви підете з цієї сторінки.</confirm-navigate>
+  </msg>
+  </UIDocumentForm>
+  <UploadFileMimeTypesValidator>
+    <msg>
+      <wrong-mimetype>Тип Mime {0} не можна використовувати для поля {1}. Будь ласка, завантажте інший файл</wrong-mimetype>
+    </msg>
+  </UploadFileMimeTypesValidator>
+  <lifecyclePhase>
+    <label>
+    <no>Ні</no>
+  <yes>Так</yes>
+  <true>Вірно</true>
+  <false>Невірно</false>
+  <Electronic>Електронний</Electronic>
+  <Paper>Paper</Paper>
+  <NONE>Жоден</NONE>
+  <CLASSIFIED>Classified</CLASSIFIED>
+  <UNCLASSIFIED>Некласифікований</UNCLASSIFIED>
+  <NOCONTRACT>Немає контракту</NOCONTRACT>
+  <one-minute>Одна хвилина</one-minute>
+  <hourly>Погодинно</hourly>
+  <daily>Щодня</daily>
+  <quarterly>Щоквартально</quarterly>
+  <yearly>Щороку</yearly>
+  <ten-years>Десять років</ten-years>
+  <read>Дія користувача</read>
+  <schedule>Планувальник</schedule>
+  <node_added>Доповнення вмісту</node_added>
+  <node_removed>Вилучення вмісту</node_removed>
+  <property_added>Доповнення властивості</property_added>
+  <property_removed>Видалення властивості</property_removed>
+  <property_changed>Модифікація властивості</property_changed>
+</label>
+  </lifecyclePhase>
+  <UIPopupMenu>
+  <msg>
+<can-not-remove-locked-node>Вузол {0} заблоковано. Не можна перемістити в кошик.</can-not-remove-locked-node>
+<can-not-remove-checked-in-node>Вузол {0} або його батьківський вузол не відмічений. Ви не можете перемістити його в кошик.</can-not-remove-checked-in-node>
+<access-denied-to-delete>Доступ заборонено. Вузол {0} не можна перемістити в кошик.</access-denied-to-delete>
+  </msg>
+  </UIPopupMenu>
+  <UIPropertyForm>
+  <msg>
+  <unknown-error>Під час редагування цієї властивості сталася помилка.</unknown-error>
+    </msg>
+  </UIPropertyForm>
+  <UIWatchDocumentForm>
+    <msg>
+      <node-is-locked>Цей вузол заблоковано. Ви не можете відстежувати його.</node-is-locked>
+      <unknown-error>Сталися деякі помилки. Ви не можете відстежувати цей вузол.</unknown-error>
+    </msg>
+  </UIWatchDocumentForm>   
+  <UIActionForm>
+    <msg>
+      <xss-vulnerability-character>Поле "{0}" містить символи уразливості XSS</xss-vulnerability-character>
+    </msg>
+  </UIActionForm>
+  <UIMultiUpload>
+  <label>
+    <AbortAll>Перервати все</AbortAll>
+    <AbortAllFiles>Перервати всі файли</AbortAllFiles>
+    <MaxFileSize>Максимальний розмір файлу є</MaxFileSize>
+    <InvalidCharacters>Неприпустимі символи буде змінено на '-'</InvalidCharacters>
+    <DropFileMessage>Перетяніть ваші файли в цю папку</DropFileMessage>
+    <Close>#{word.close}</Close>
+    <in>у</in>
+    <MaxFileSizeAlert>Розмір файлу перевищує ліміт розміру</MaxFileSizeAlert>
+    <Waiting>Очікування</Waiting>
+    <Error>Помилка</Error>
+    <or>або</or>
+    <AlreadyInUse>Вже у використанні</AlreadyInUse>
+    <Keep>Тримати обидва</Keep>
+    <Replace>Замінити</Replace>
+    <Canceled>Скасовано</Canceled>
+    <Cancel>#{word.cancel}</Cancel>
+    <AbortAllConfirmation>Ви хочете перервати всі файли в прогресі?</AbortAllConfirmation>
+  </label>
+  </UIMultiUpload>
+  <UIDocumentNodeList>
+  <label>
+  <CreatedOn>Створено:</CreatedOn>
+  <Updated>Оновлено</Updated>
+  <by>за</by>
+  <you>ви</you>
+  </label>
+  </UIDocumentNodeList>
+  <FileView>
+    <label>
+      <name>Назвою</name>
+      <date>Дата</date>
+      <size>Розміром</size>
+      <sortBy>Сортувати за:</sortBy>
+      <filesAreSelected>Файли вибрані.</filesAreSelected>
+      <ClearSelection>Очистити вибране</ClearSelection>
+      <more>Більше</more>
+    </label>
+  </FileView>
+  <UIPropertyForm>
+  <msg>
+  <property-name-incorrect>Хибне ім'я властивості, будь ласка, введіть для неї інше значення!</property-name-incorrect>
+    </msg>
+  </UIPropertyForm>
+  <!--
+  ###################################################################################
+  # JCR Exceptions manager                                                              #
+  ###################################################################################
+  -->
+  <VersionException>
+  <msg>Неможливо змінити документи, які в даний час перевіряються.</msg>  
+  </VersionException>
+</bundle>

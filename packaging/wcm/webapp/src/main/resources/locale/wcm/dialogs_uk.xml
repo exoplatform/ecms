@@ -1,0 +1,93 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+
+    Copyright (C) 2009 eXo Platform SAS.
+    
+    This is free software; you can redistribute it and/or modify it
+    under the terms of the GNU Lesser General Public License as
+    published by the Free Software Foundation; either version 2.1 of
+    the License, or (at your option) any later version.
+    
+    This software is distributed in the hope that it will be useful,
+    but WITHOUT ANY WARRANTY; without even the implied warranty of
+    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the GNU
+    Lesser General Public License for more details.
+    
+    You should have received a copy of the GNU Lesser General Public
+    License along with this software; if not, write to the Free
+    Software Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA
+    02110-1301 USA, or see the FSF site: http://www.fsf.org.
+
+-->
+<bundle>
+  <WebContent>
+    <dialog>
+      <label>
+        <MainContent>Основний контент</MainContent>
+        <cssFile>default.css</cssFile>
+        <jsFile>default.js</jsFile>
+        <Advanced>Розширені налаштування</Advanced>
+        <Summary>Резюме</Summary>
+        <name>#{word.name}</name>
+        <title>Назва</title>
+        <ContentCSS>Дані CSS</ContentCSS>
+        <hintCSS>Ви можете вказати основну таблицю стилів для веб-контенту. Цей стиль буде перевизначати таблиці стилів, визначені на спільному рівні сайту.</hintCSS>
+        <ContentJS>Дані JS</ContentJS>
+        <hintJS>Ви можете вказати деякі JavaScript коди, які можуть бути виконані до перегляду веб-вмісту.</hintJS>
+        <WebContentHtml>Основний контент</WebContentHtml>
+        <Illustration>Ілюстрація</Illustration>
+        <hintIllustration>Можна вказати зображення, яке буде показано, коли веб-вміст відображається в списку. Ви також можете вказати деякі зведені тексти, що йдуть з  цим зображенням.</hintIllustration>
+        <confirm-delete>Ви дійсно бажаєте видалити цю ілюстрацію?</confirm-delete>
+        <illustrationImage>Зображення  ілюстрації</illustrationImage>
+        <imageMimeType>Тип зображення</imageMimeType>
+        <image>Завантажити зображення</image>
+        <imageWidth>Ширина зображення</imageWidth>
+        <imageHeight>Висота зображення</imageHeight>
+        <Synchronize>Синхронізувати з CSS і HTML</Synchronize>
+      </label>
+    </dialog>
+  </WebContent>
+
+  <CSSFile>
+    <dialog>
+      <label>
+        <name>#{word.name}</name>
+        <active>Активні</active>
+        <priority>Пріоритет</priority>
+        <content>Дані CSS</content>
+      </label>
+    </dialog>
+  </CSSFile>
+
+  <JSFile>
+    <dialog>
+      <label>
+        <name>#{word.name}</name>
+        <active>Активні</active>
+        <priority>Пріоритет</priority>
+        <content>Дані JS</content>
+      </label>
+    </dialog>
+  </JSFile>
+
+  <WebLink>
+    <dialog>
+      <label>
+        <name>#{word.name}</name>
+        <url>URL-адреса</url>
+        <description>Опис</description>
+      </label>
+    </dialog>
+  </WebLink>
+
+  <SiteMetadata>
+    <dialog>
+      <label>
+        <title>Назва сайту</title>
+        <description>Опис сайту</description>
+        <keywords>Ключові слова сайту</keywords>
+        <robots>Характеристика пошуку</robots>
+      </label>
+    </dialog>
+  </SiteMetadata>
+</bundle>

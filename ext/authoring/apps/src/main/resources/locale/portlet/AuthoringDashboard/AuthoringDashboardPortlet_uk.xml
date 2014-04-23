@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<bundle>
+  <UIDashboardForm>
+    <label>
+      <title>Author Dashboard</title>
+      <nocontent>Немає вмісту</nocontent>
+      <mydraft>Вміст мого проекту</mydraft>
+      <waitingapproval>Очікується моє ухвалення</waitingapproval>
+      <approve>Затвердити</approve>
+      <publishedtomorrow>Буде опубліковане завтра</publishedtomorrow>
+      <refresh>#{word.refresh}</refresh>
+    </label>
+  </UIDashboardForm>
+</bundle>
