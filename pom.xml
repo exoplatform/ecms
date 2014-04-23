@@ -51,10 +51,10 @@
     <org.gatein.pc.version>2.4.0.Final</org.gatein.pc.version>
     <org.gatein.portal.version>3.5.9.Final</org.gatein.portal.version>
     <!-- Platform Project Dependencies -->
-    <org.exoplatform.commons.version>4.1.0-SNAPSHOT</org.exoplatform.commons.version>
-    <org.exoplatform.platform-ui.version>4.1.0-SNAPSHOT</org.exoplatform.platform-ui.version>
+    <org.exoplatform.commons.version>4.1-M1</org.exoplatform.commons.version>
+    <org.exoplatform.platform-ui.version>4.1-M1</org.exoplatform.platform-ui.version>
     <!-- Platform Project 3rd party Dependencies -->
-    <org.exoplatform.doc.doc-style.version>4.1.0-SNAPSHOT</org.exoplatform.doc.doc-style.version>
+    <org.exoplatform.doc.doc-style.version>4.1-M1</org.exoplatform.doc.doc-style.version>
   </properties>
   <dependencyManagement>
     <!-- ### NEVER CHANGE THIS ORDER OF DEPMGT ### -->
