@@ -1085,6 +1085,7 @@
 			for(var i = 0; i < arrContent.length-1; i++) {
 				var path = arrContent[i];
 				var target = arrTarget[i];
+				if (target == "") continue;
 				var newRow = tblListFilesContent.tBodies[0].insertRow(tblListFilesContent.children[0].children.length - 1);
 				var strTmpArr = arrContent[i].split('/');
 				var nodeName = strTmpArr[strTmpArr.length-1];

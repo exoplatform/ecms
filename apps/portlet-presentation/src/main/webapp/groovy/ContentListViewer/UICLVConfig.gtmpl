@@ -68,13 +68,13 @@
 													    <%=uicomponent.getLabel(uicomponent.ITEM_PATH_FORM_INPUT_SET) %>: 
 													  </label>
 													  <a class="actionIcon pull-right"  title="<%= StringEscapeUtils.escapeHtml(_ctx.appRes("UICLVConfig.help.FolderPathHelp")) %>" data-placement="left" rel="tooltip"><i class="uiIconQuestion uiIconLightGray" id=""></i></a>
-													  <div class="controls" <% if (uicomponent.getSavedPath() != null) { %>title="<%=uicomponent.getSavedPath()%>" <% }%> >
+													  <div class="controls" <% if (uicomponent.getAliveSavedPath() != null) { %>title="<%=uicomponent.getAliveSavedPath()%>" <% }%> >
 													    <% uiform.renderField(uicomponent.ITEM_PATH_FORM_INPUT_SET) %>
 													  </div>
 													</div>
 													<div class="control-group">                  
 													  <label class="control-label" for="<%=uicomponent.ORDER_BY_FORM_SELECT_BOX%>"><%=uicomponent.getLabel(uicomponent.ORDER_BY_FORM_SELECT_BOX) %>: </label>
-													  <div class="controls" <% if (uicomponent.getSavedPath() != null) { %>title="<%=uicomponent.getSavedPath()%>" <% }%> >
+													  <div class="controls" <% if (uicomponent.getAliveSavedPath() != null) { %>title="<%=uicomponent.getAliveSavedPath()%>" <% }%> >
 														<% uiform.renderField(uicomponent.ORDER_BY_FORM_SELECT_BOX) %>
 													  <% uiform.renderField(uicomponent.ORDER_TYPE_FORM_SELECT_BOX) %>
 													  </div>

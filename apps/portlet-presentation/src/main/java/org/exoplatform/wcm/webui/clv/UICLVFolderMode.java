@@ -155,8 +155,9 @@ public class UICLVFolderMode extends UICLVContainer {
       return new Result(new ArrayList<Node>(), 0, 0, null, null);
     }
     NodeLocation nodeLocation = NodeLocation.getNodeLocationByExpression(folderPath);
+    Node targetNode = NodeLocation.getNodeByLocation(nodeLocation);
     //check if folder is empty, return empty result
-    if (!NodeLocation.getNodeByLocation(nodeLocation).hasNodes()) {
+    if (targetNode == null || !targetNode.hasNodes()) {
       return new Result(new ArrayList<Node>(), 0, 0, nodeLocation, filters);
     } else {
       return wcmComposer.getPaginatedContents(nodeLocation,
