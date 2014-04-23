@@ -87,7 +87,7 @@
 -->
   <UITaxonomyTreeMainForm>
     <action>
-      <Reset>Скинути</Reset>
+      <Reset>Reset</Reset>
     </action>
     <msg>
       <name-not-allowed>Заборонене ім'я</name-not-allowed>
@@ -712,7 +712,7 @@
     </label>
     <title>
       <AddPermission>Додати права доступу</AddPermission>
-      <RemovePermission>Видалити дозвіл</RemovePermission>
+      <RemovePermission>Remove Permission</RemovePermission>
       <AddIcon>Додати значок</AddIcon>
       <AddPath>Додати шлях</AddPath>
     </title>
@@ -1380,8 +1380,8 @@
     <title>Додати дозвіл до цього вузла</title>
     <action>
       <Close>#{word.close}</Close>
-      <Save>Зберегти</Save>
-      <Reset>Скинути</Reset>
+      <Save>Save</Save>
+      <Reset>Reset</Reset>
     </action>
     <msg>
       <checkbox-require>Будь ласка, оберіть хоча б один дозвіл.</checkbox-require>
