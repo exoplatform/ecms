@@ -474,7 +474,7 @@ public abstract class JCRLocalCloudDrive extends CloudDrive {
               String eventPath = event.getPath();
 
               if (eventPath.endsWith("jcr:mixinTypes") || eventPath.endsWith("jcr:content")
-                  || eventPath.indexOf("ecd:") >= 0) {
+                  || eventPath.indexOf("ecd:") >= 0 || eventPath.indexOf("/exo:thumbnails") > 0) {
                 continue; // XXX hardcoded undesired system stuff to skip
               }
 
@@ -1192,6 +1192,7 @@ public abstract class JCRLocalCloudDrive extends CloudDrive {
         FileChange change = chiter.next();
         for (String ipath : ignoredPaths) {
           if (change.getPath().startsWith(ipath)) {
+            chiter.remove();
             continue next; // skip parts of ignored (not supported by sync) nodes
           }
         }
@@ -1201,12 +1202,14 @@ public abstract class JCRLocalCloudDrive extends CloudDrive {
           change.apply();
         } catch (SyncNotSupportedException e) {
           // remember to skip sub-files
+          chiter.remove();
           ignoredPaths.add(change.getPath());
         } catch (PathNotFoundException e) {
           // XXX hardcode ignorance of exo:thumbnails here,
           // it's possible that thumbnails' child nodes will disappear, thus we ignore them
           if (e.getMessage().indexOf("/exo:thumbnails") > 0
               && change.getPath().indexOf("/exo:thumbnails") > 0) {
+            chiter.remove();
             ignoredPaths.add(change.getPath());
           }
         }
@@ -1515,10 +1518,6 @@ public abstract class JCRLocalCloudDrive extends CloudDrive {
               }
             } catch (SkipSyncException e) {
               // skip this file (it can be a part of top level NT supported by the sync)
-            } catch (PathNotFoundException e) {
-              LOG.error("Cannot find an item of cloud file for synchronization: " + getPath() + ": "
-                            + e.getMessage(),
-                        e);
             }
           }
         } finally {
@@ -1585,9 +1584,10 @@ public abstract class JCRLocalCloudDrive extends CloudDrive {
     private void complete() throws PathNotFoundException, RepositoryException, CloudDriveException {
       try {
         fileChanges.remove(getPath(), this);
-        if (changedType != null) {
-          addChanged(fileId, changedType);
-        }
+        // TODO cleanup
+        // if (changedType != null) {
+        // addChanged(fileId, changedType);
+        // }
       } finally {
         applied.countDown();
       }
@@ -1718,7 +1718,7 @@ public abstract class JCRLocalCloudDrive extends CloudDrive {
       // we can know the id after the sync
       fileId = fileAPI.getId(file);
 
-      LOG.info("Created file " + file.getPath() + " " + fileId); // TODO cleanup
+      LOG.info("Created file " + filePath + " " + fileId); // TODO cleanup
 
       changedType = UPDATE;
     }
@@ -2506,7 +2506,11 @@ public abstract class JCRLocalCloudDrive extends CloudDrive {
 
     // store applied changes in runtime cache
     for (FileChange ch : changes) {
-      addChanged(ch.fileId, ch.changedType);
+      if (ch.fileId != null) {
+        addChanged(ch.fileId, ch.changedType);
+      } else {
+        LOG.warn("Cannot save file change with null file id: " + ch.changedType + " " + ch.getPath());
+      }
     }
   }
 
@@ -2651,9 +2655,13 @@ public abstract class JCRLocalCloudDrive extends CloudDrive {
       } catch (NumberFormatException e) {
         throw new CloudDriveException("Cannot parse file id from local changes: " + ch, e);
       }
-      
+
       // add changed to runtime cache
-      addChanged(fileId, changeType);
+      if (fileId != null) {
+        addChanged(fileId, changeType);
+      } else {
+        LOG.warn("Cannot load file change with null file id: " + ch);
+      }
     }
   }
 
@@ -2864,11 +2872,13 @@ public abstract class JCRLocalCloudDrive extends CloudDrive {
           // try NodeFinder name (storage specific, e.g. ECMS)
           internalName = name;
           name = finder.cleanName(fileTitle);
-        } else {
-          // no such node exists, add it using internalName created by CD's cleanName()
-          node = parent.addNode(internalName, nodeType);
-          break;
+          if (name.length() > 0) {
+            continue;
+          }
         }
+        // no such node exists, add it using internalName created by CD's cleanName()
+        node = parent.addNode(internalName, nodeType);
+        break;
       }
     } while (true);
 
@@ -3074,10 +3084,12 @@ public abstract class JCRLocalCloudDrive extends CloudDrive {
           // try NodeFinder name (storage specific, e.g. ECMS)
           internalName = name;
           name = finder.cleanName(fileTitle);
-        } else {
-          // no such node
-          return null;
+          if (name.length() > 0) {
+            continue;
+          }
         }
+        // no such node
+        return null;
       }
     } while (true);
 
