@@ -107,6 +107,7 @@ public interface CloudDriveListener {
    * @param event {@link CloudDriveEvent}
    * @param error {@link Throwable}, an error happened during connect or synchronization. Check type of the
    *          underlying error to handle a specific exceptions.
+   * @param operationName {@link String} name of an operation when this error happened
    */
-  void onError(CloudDriveEvent event, Throwable error);
+  void onError(CloudDriveEvent event, Throwable error, String operationName);
 }

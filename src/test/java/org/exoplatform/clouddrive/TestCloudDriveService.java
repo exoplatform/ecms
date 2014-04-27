@@ -391,7 +391,7 @@ public class TestCloudDriveService extends TestCase {
       Command syncCmd = drive.synchronize(); // TODO ?
       // respect async behaviour
       int i = 0;
-      while (!syncCmd.isStarted()) {
+      while (!syncCmd.isDone()) {
         assertTrue("Sync command not finished in time", i <= 50);
         Thread.sleep(200);
         i++;

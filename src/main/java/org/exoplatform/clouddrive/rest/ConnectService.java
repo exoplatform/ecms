@@ -270,7 +270,7 @@ public class ConnectService implements ResourceContainer {
      * {@inheritDoc}
      */
     @Override
-    public void onError(CloudDriveEvent event, Throwable error) {
+    public void onError(CloudDriveEvent event, Throwable error, String operationName) {
       lock.lock();
       // unregister listener
       drive.removeListener(this);
@@ -337,8 +337,7 @@ public class ConnectService implements ResourceContainer {
     this.connectsCleaner = new Thread("Cloud Drive connections cleaner") {
       @Override
       public void run() {
-        boolean interrupted = false;
-        while (!interrupted) {
+        while (!Thread.currentThread().isInterrupted()) {
           final long now = System.currentTimeMillis();
 
           for (Iterator<Map.Entry<UUID, Long>> titer = timeline.entrySet().iterator(); titer.hasNext();) {
@@ -363,8 +362,7 @@ public class ConnectService implements ResourceContainer {
           try {
             Thread.sleep(CONNECT_REQUEST_EXPIRE);
           } catch (InterruptedException e) {
-            LOG.info(getName() + " interrupted: " + e.getMessage());
-            interrupted = true;
+            LOG.warn(getName() + " interrupted.", e);
             Thread.currentThread().interrupt();
           }
         }

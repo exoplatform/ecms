@@ -187,14 +187,14 @@ public abstract class CloudDrive {
       }
     }
 
-    public void fireOnError(CloudDriveEvent event, Throwable error) {
+    public void fireOnError(CloudDriveEvent event, Throwable error, String operationName) {
       for (CloudDriveListener listener : registry) {
         try {
-          listener.onError(event, error);
+          listener.onError(event, error, operationName);
         } catch (Throwable th) {
           // nothing should prevent at this point
-          LOG.warn("Error firing onError listener about '" + error.getMessage() + "' on Cloud Drive '"
-              + title() + "': " + th.getMessage(), th);
+          LOG.warn("Error firing onError listener about '" + error.getMessage() + "' during " + operationName
+              + " in cloud drive '" + title() + "': " + th.getMessage(), th);
         }
       }
     }
@@ -465,40 +465,6 @@ public abstract class CloudDrive {
                                        CloudDriveException,
                                        CloudDriveAccessException,
                                        RepositoryException;
-
-  // TODO cleanup
-  // /**
-  // * Synchronize file or folder from local drive with its representation in the cloud. Refreshes metadata
-  // and
-  // * optionally the content of the file. <br>
-  // * If given Node is of type nt:file, nt:folder or nt:unstructured it will be treated as a new file to add
-  // to
-  // * the drive and if such synchronization supported it will uploaded to the cloud provider. <br>
-  // * Drive should be connected to synchronized its files.<br/>
-  // * Drive may not support synchronization. In such case {@link SyncNotSupportedException} will be
-  // thrown.<br>
-  // * To check the state of the synchronization register a listener to drive
-  // * {@link CloudDrive#addListener(CloudDriveListener)}.
-  // *
-  // * <br>
-  // * Deprecated as not fully possible for many cloud providers.
-  // *
-  // * @see #isConnected(Node)
-  // * @param file {@link Node}
-  // * @return {@link Command} describing synchronization process
-  // * @throws SyncNotSupportedException if synchronization not supported for this drive or given object
-  // * @throws DriveRemovedException
-  // * @throws NotConnectedException
-  // * @throws CloudDriveException
-  // * @throws RepositoryException
-  // */
-  // @Deprecated
-  // public abstract Command synchronize(Node fileNode) throws SyncNotSupportedException,
-  // DriveRemovedException,
-  // NotConnectedException,
-  // CloudDriveException,
-  // RepositoryException;
-
   /**
    * Answers if drive is connected.
    * 

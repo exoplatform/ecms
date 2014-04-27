@@ -41,21 +41,21 @@ public class CloudDriveEvent {
   }
 
   /**
-   * @return affected user
+   * @return affected user.
    */
   public CloudUser getUser() {
     return user;
   }
 
   /**
-   * @return the drive's JCR node workspace name
+   * @return the drive's JCR node workspace name.
    */
   public String getWorkspace() {
     return workspace;
   }
 
   /**
-   * @return the drive's JCR node path, can be <code>null</code>
+   * @return the drive's JCR node path, can be <code>null</code>.
    */
   public String getNodePath() {
     return nodePath;

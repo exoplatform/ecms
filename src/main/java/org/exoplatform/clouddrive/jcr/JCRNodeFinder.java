@@ -18,6 +18,7 @@
 package org.exoplatform.clouddrive.jcr;
 
 import javax.jcr.Item;
+import javax.jcr.Node;
 import javax.jcr.PathNotFoundException;
 import javax.jcr.RepositoryException;
 import javax.jcr.Session;
@@ -34,17 +35,25 @@ import org.exoplatform.services.jcr.RepositoryService;
 public class JCRNodeFinder implements NodeFinder {
 
   protected final RepositoryService jcrService;
-  
+
   public JCRNodeFinder(RepositoryService jcrService) {
     this.jcrService = jcrService;
   }
-  
+
   /**
    * @inherritDoc
    */
   @Override
-  public Item getItem(Session userSession, String path, boolean symlinkTarget) throws PathNotFoundException, RepositoryException {
+  public Item getItem(Session userSession, String path, boolean symlinkTarget) throws PathNotFoundException,
+                                                                              RepositoryException {
     return userSession.getItem(path);
   }
 
+  /**
+   * {@inheritDoc}
+   */
+  @Override
+  public String cleanName(String name) {
+    return name; // no conversion required
+  }
 }

@@ -17,7 +17,6 @@
 package org.exoplatform.clouddrive.exodrive;
 
 import org.exoplatform.clouddrive.CloudDriveException;
-import org.exoplatform.clouddrive.CloudFile;
 import org.exoplatform.clouddrive.CloudFileAPI;
 import org.exoplatform.clouddrive.CloudProviderException;
 import org.exoplatform.clouddrive.CloudUser;
@@ -28,6 +27,7 @@ import org.exoplatform.clouddrive.exodrive.service.ExoDriveRepository;
 import org.exoplatform.clouddrive.exodrive.service.FileStore;
 import org.exoplatform.clouddrive.jcr.JCRLocalCloudDrive;
 import org.exoplatform.clouddrive.jcr.JCRLocalCloudFile;
+import org.exoplatform.clouddrive.jcr.NodeFinder;
 import org.exoplatform.services.jcr.ext.app.SessionProviderService;
 
 import java.io.InputStream;
@@ -35,7 +35,6 @@ import java.util.Calendar;
 import java.util.List;
 
 import javax.jcr.Node;
-import javax.jcr.PathNotFoundException;
 import javax.jcr.RepositoryException;
 
 /**
@@ -52,11 +51,11 @@ import javax.jcr.RepositoryException;
  */
 public class JCRLocalExoDrive extends JCRLocalCloudDrive {
 
-  class ExoDriveConnect extends ConnectCommand {
+  class Connect extends ConnectCommand {
 
     volatile int complete, available;
 
-    public ExoDriveConnect() throws RepositoryException, DriveRemovedException {
+    public Connect() throws RepositoryException, DriveRemovedException {
       super();
     }
 
@@ -118,11 +117,11 @@ public class JCRLocalExoDrive extends JCRLocalCloudDrive {
     }
   }
 
-  class ExoDriveSync extends SyncCommand {
+  class Sync extends SyncCommand {
 
     volatile int complete, available;
 
-    public ExoDriveSync() throws RepositoryException, DriveRemovedException {
+    public Sync() throws RepositoryException, DriveRemovedException {
       super();
     }
 
@@ -203,7 +202,6 @@ public class JCRLocalExoDrive extends JCRLocalCloudDrive {
      */
     @Override
     public String createFile(Node fileNode,
-                             String description,
                              Calendar created,
                              Calendar modified,
                              String mimeType,
@@ -221,8 +219,8 @@ public class JCRLocalExoDrive extends JCRLocalCloudDrive {
      * {@inheritDoc}
      */
     @Override
-    public String createFolder(Node folderNode, String description, Calendar created) throws CloudDriveException,
-                                                                                     RepositoryException {
+    public String createFolder(Node folderNode, Calendar created) throws CloudDriveException,
+                                                                 RepositoryException {
       try {
         FileStore fs = service.create(user.getUsername(),
                                       filePath(folderNode),
@@ -238,8 +236,7 @@ public class JCRLocalExoDrive extends JCRLocalCloudDrive {
      * {@inheritDoc}
      */
     @Override
-    public void updateFile(Node fileNode, String description, Calendar modified) throws CloudDriveException,
-                                                                                RepositoryException {
+    public void updateFile(Node fileNode, Calendar modified) throws CloudDriveException, RepositoryException {
       // TODO
       // try {
       // FileStore fs = service.create(user.getUsername(), filePath(fileNode), mimeType, created);
@@ -252,8 +249,8 @@ public class JCRLocalExoDrive extends JCRLocalCloudDrive {
      * {@inheritDoc}
      */
     @Override
-    public void updateFolder(Node folderNode, String description, Calendar modified) throws CloudDriveException,
-                                                                                    RepositoryException {
+    public void updateFolder(Node folderNode, Calendar modified) throws CloudDriveException,
+                                                                RepositoryException {
       // TODO Auto-generated method stub
 
     }
@@ -262,11 +259,8 @@ public class JCRLocalExoDrive extends JCRLocalCloudDrive {
      * {@inheritDoc}
      */
     @Override
-    public void updateFileContent(Node fileNode,
-                                  String description,
-                                  Calendar modified,
-                                  String mimeType,
-                                  InputStream content) throws CloudDriveException, RepositoryException {
+    public void updateFileContent(Node fileNode, Calendar modified, String mimeType, InputStream content) throws CloudDriveException,
+                                                                                                         RepositoryException {
       // TODO Auto-generated method stub
 
     }
@@ -275,7 +269,7 @@ public class JCRLocalExoDrive extends JCRLocalCloudDrive {
      * {@inheritDoc}
      */
     @Override
-    public void remove(String id) throws CloudDriveException, RepositoryException {
+    public void removeFile(String id) throws CloudDriveException, RepositoryException {
       // TODO Auto-generated method stub
 
     }
@@ -284,7 +278,16 @@ public class JCRLocalExoDrive extends JCRLocalCloudDrive {
      * {@inheritDoc}
      */
     @Override
-    public boolean trash(String id) throws CloudDriveException, RepositoryException {
+    public void removeFolder(String id) throws CloudDriveException, RepositoryException {
+      // TODO Auto-generated method stub
+
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public boolean trashFile(String id) throws CloudDriveException, RepositoryException {
       // TODO Auto-generated method stub
       return false;
     }
@@ -293,7 +296,25 @@ public class JCRLocalExoDrive extends JCRLocalCloudDrive {
      * {@inheritDoc}
      */
     @Override
-    public boolean untrash(Node fileNode) throws CloudDriveException, RepositoryException {
+    public boolean trashFolder(String id) throws CloudDriveException, RepositoryException {
+      // TODO Auto-generated method stub
+      return false;
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public boolean untrashFile(Node fileNode) throws CloudDriveException, RepositoryException {
+      // TODO Auto-generated method stub
+      return false;
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public boolean untrashFolder(Node fileNode) throws CloudDriveException, RepositoryException {
       // TODO Auto-generated method stub
       return false;
     }
@@ -325,8 +346,9 @@ public class JCRLocalExoDrive extends JCRLocalCloudDrive {
   public JCRLocalExoDrive(ExoDriveUser user,
                           ExoDriveRepository service,
                           SessionProviderService sessionProviders,
+                          NodeFinder finder,
                           Node driveNode) throws CloudDriveException, RepositoryException {
-    super(user, driveNode, sessionProviders);
+    super(user, driveNode, sessionProviders, finder);
     this.service = service;
   }
 
@@ -352,10 +374,11 @@ public class JCRLocalExoDrive extends JCRLocalCloudDrive {
   public JCRLocalExoDrive(ExoDriveRepository service,
                           ExoDriveProvider provider,
                           SessionProviderService sessionProviders,
+                          NodeFinder finder,
                           Node driveNode) throws CloudDriveException, RepositoryException {
     super(new ExoDriveUser(driveNode.getProperty("ecd:cloudUserName").getString(),
                            driveNode.getProperty("ecd:userEmail").getString(),
-                           provider), driveNode, sessionProviders);
+                           provider), driveNode, sessionProviders, finder);
     this.service = service;
   }
 
@@ -498,17 +521,16 @@ public class JCRLocalExoDrive extends JCRLocalCloudDrive {
    * {@inheritDoc}
    */
   @Override
-  protected boolean isSyncSupported(CloudFile cloudFile) {
-    // return cloudFile instanceof ExoDriveFile;
-    return false;
+  protected Long readChangeId() throws DriveRemovedException, RepositoryException {
+    return Long.MIN_VALUE; // not maintained as used by single user
   }
 
   /**
    * {@inheritDoc}
    */
   @Override
-  protected String getChangeId() throws DriveRemovedException, RepositoryException {
-    return "0"; // not maintained as used by single user
+  protected void saveChangeId(Long id) throws CloudDriveException, RepositoryException {
+    // do nothing
   }
 
   /**
@@ -530,7 +552,7 @@ public class JCRLocalExoDrive extends JCRLocalCloudDrive {
    */
   @Override
   protected ConnectCommand getConnectCommand() throws DriveRemovedException, RepositoryException {
-    return new ExoDriveConnect();
+    return new Connect();
   }
 
   /**
@@ -540,7 +562,7 @@ public class JCRLocalExoDrive extends JCRLocalCloudDrive {
   protected SyncCommand getSyncCommand() throws DriveRemovedException,
                                         SyncNotSupportedException,
                                         RepositoryException {
-    return new ExoDriveSync();
+    return new Sync();
   }
 
   /**

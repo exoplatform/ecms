@@ -18,6 +18,9 @@
  */
 package org.exoplatform.clouddrive.box;
 
+import com.google.api.client.util.DateTime;
+import com.google.api.services.drive.model.File;
+import com.google.api.services.drive.model.ParentReference;
 import com.box.boxjavalibv2.BoxClient;
 import com.box.boxjavalibv2.authorization.OAuthRefreshListener;
 import com.box.boxjavalibv2.dao.BoxCollection;
@@ -27,6 +30,7 @@ import com.box.boxjavalibv2.dao.BoxFile;
 import com.box.boxjavalibv2.dao.BoxFolder;
 import com.box.boxjavalibv2.dao.BoxItem;
 import com.box.boxjavalibv2.dao.BoxOAuthToken;
+import com.box.boxjavalibv2.dao.BoxServerError;
 import com.box.boxjavalibv2.dao.BoxSharedLink;
 import com.box.boxjavalibv2.dao.BoxTypedObject;
 import com.box.boxjavalibv2.exceptions.AuthFatalFailureException;
@@ -35,7 +39,10 @@ import com.box.boxjavalibv2.interfaces.IAuthData;
 import com.box.boxjavalibv2.interfaces.IAuthSecureStorage;
 import com.box.boxjavalibv2.requests.requestobjects.BoxDefaultRequestObject;
 import com.box.boxjavalibv2.requests.requestobjects.BoxEventRequestObject;
+import com.box.boxjavalibv2.requests.requestobjects.BoxFileRequestObject;
+import com.box.boxjavalibv2.requests.requestobjects.BoxFileUploadRequestObject;
 import com.box.boxjavalibv2.requests.requestobjects.BoxFolderRequestObject;
+import com.box.boxjavalibv2.requests.requestobjects.BoxItemRestoreRequestObject;
 import com.box.boxjavalibv2.requests.requestobjects.BoxOAuthRequestObject;
 import com.box.boxjavalibv2.resourcemanagers.BoxFilesManager;
 import com.box.boxjavalibv2.resourcemanagers.BoxFoldersManager;
@@ -43,13 +50,18 @@ import com.box.boxjavalibv2.utils.ISO8601DateParser;
 import com.box.restclientv2.exceptions.BoxRestException;
 
 import org.exoplatform.clouddrive.CloudDriveException;
+import org.exoplatform.clouddrive.FileTrashRemovedException;
+import org.exoplatform.clouddrive.NotFoundException;
 import org.exoplatform.clouddrive.oauth2.UserToken;
 import org.exoplatform.clouddrive.utils.ChunkIterator;
 import org.exoplatform.services.log.ExoLogger;
 import org.exoplatform.services.log.Log;
 
+import java.io.InputStream;
+import java.io.UnsupportedEncodingException;
 import java.text.ParseException;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.HashSet;
@@ -358,6 +370,16 @@ public class BoxAPI {
    * Id of Trash folder on Box.
    */
   public static final String      BOX_TRASH_ID             = "1";
+
+  /**
+   * Box item_status for active items.
+   */
+  public static final String      BOX_ITEM_STATE_ACTIVE    = "active";
+
+  /**
+   * Box item_status for trashed items.
+   */
+  public static final String      BOX_ITEM_STATE_TRASHED   = "trashed";
 
   /**
    * Not official part of the path used in file services with Box API.
@@ -690,5 +712,549 @@ public class BoxAPI {
 
   EventsIterator getEvents(long streamPosition) throws BoxException, AuthTokenException {
     return new EventsIterator(streamPosition);
+  }
+
+  BoxFile createFile(String parentId, String name, Calendar created, InputStream data) throws BoxException,
+                                                                                      AuthTokenException,
+                                                                                      NotFoundException {
+    try {
+      // TODO You can optionally specify a Content-MD5 header with the SHA1 hash of the file to ensure that
+      // the file is not corrupted in transit.
+      BoxFileUploadRequestObject obj = BoxFileUploadRequestObject.uploadFileRequestObject(parentId,
+                                                                                          name,
+                                                                                          data);
+      obj.setLocalFileCreatedAt(created.getTime());
+      obj.put("created_at", formatDate(created));
+      return client.getFilesManager().uploadFile(obj);
+    } catch (UnsupportedEncodingException e) {
+      throw new BoxException("Error uploading file: " + e.getMessage(), e);
+    } catch (BoxRestException e) {
+      throw new BoxException("Error uploading file: " + e.getMessage(), e);
+    } catch (BoxServerException e) {
+      int status = getErrorStatus(e);
+      if (status == 404 || status == 412) {
+        // not_found or precondition_failed - then parent not found
+        throw new NotFoundException("Parent not found " + parentId, e);
+      } else if (status == 403) {
+        throw new NotFoundException("The user doesn’t have access to upload a file " + name, e);
+      } else if (status == 409) {
+        // conflict - the same name file exists
+        throw new NotFoundException("File with the same name as creating already exists " + name, e);
+      }
+      throw new BoxException("Error uploading file: " + e.getMessage(), e);
+    } catch (AuthFatalFailureException e) {
+      if (e.isCallerResponsibleForFix()) {
+        // we need new access token (refresh token already expired here)
+        throw new AuthTokenException("Authentication failure. Reauthenticate.");
+      }
+      throw new BoxException("Authentication error when uploading file: " + e.getMessage(), e);
+    } catch (InterruptedException e) {
+      Thread.currentThread().interrupt();
+      throw new BoxException("File " + name + " uploading interrupted.", e);
+    }
+  }
+
+  BoxFolder createFolder(String parentId, String name, Calendar created) throws BoxException,
+                                                                        AuthTokenException,
+                                                                        NotFoundException {
+    try {
+      BoxFolderRequestObject obj = BoxFolderRequestObject.createFolderRequestObject(name, parentId);
+      obj.put("created_at", formatDate(created));
+      return client.getFoldersManager().createFolder(obj);
+    } catch (BoxRestException e) {
+      throw new BoxException("Error creating folder: " + e.getMessage(), e);
+    } catch (BoxServerException e) {
+      int status = getErrorStatus(e);
+      if (status == 404 || status == 412) {
+        // not_found or precondition_failed - then parent not found
+        throw new NotFoundException("Parent not found " + parentId, e);
+      } else if (status == 403) {
+        throw new NotFoundException("The user doesn’t have access to create a folder " + name, e);
+      } else if (status == 409) {
+        // conflict - the same name file exists
+        throw new NotFoundException("File with the same name as creating already exists " + name, e);
+      }
+      throw new BoxException("Error creating folder: " + e.getMessage(), e);
+    } catch (AuthFatalFailureException e) {
+      if (e.isCallerResponsibleForFix()) {
+        // we need new access token (refresh token already expired here)
+        throw new AuthTokenException("Authentication failure. Reauthenticate.");
+      }
+      throw new BoxException("Authentication error when creating folder: " + e.getMessage(), e);
+    }
+  }
+
+  /**
+   * Delete a cloud file by given fileId. Depending on Box enterprise settings for this user, the file will
+   * either be actually deleted from Box or moved to the Trash.
+   * 
+   * @param id {@link String}
+   * @throws BoxException
+   * @throws AuthTokenException
+   * @throws NotFoundException
+   */
+  void deleteFile(String id) throws BoxException, AuthTokenException, NotFoundException {
+    try {
+      BoxFileRequestObject obj = BoxFileRequestObject.deleteFileRequestObject();
+      // obj.setIfMatch(etag); // // TODO use it!
+      client.getFilesManager().deleteFile(id, obj);
+    } catch (BoxRestException e) {
+      throw new BoxException("Error deleting file: " + e.getMessage(), e);
+    } catch (BoxServerException e) {
+      int status = getErrorStatus(e);
+      if (status == 404 || status == 412) {
+        // not_found or precondition_failed - then item not found
+        throw new NotFoundException("File not found " + id, e);
+      } else if (status == 403) {
+        throw new NotFoundException("The user doesn’t have access to the file " + id, e);
+      }
+      throw new BoxException("Error deleting file: " + e.getMessage(), e);
+    } catch (AuthFatalFailureException e) {
+      if (e.isCallerResponsibleForFix()) {
+        // we need new access token (refresh token already expired here)
+        throw new AuthTokenException("Authentication failure. Reauthenticate.");
+      }
+      throw new BoxException("Authentication error when deleting file: " + e.getMessage(), e);
+    }
+  }
+
+  /**
+   * Delete a cloud folder by given folderId. Depending on Box enterprise settings for this user, the folder
+   * will
+   * either be actually deleted from Box or moved to the Trash.
+   * 
+   * @param id {@link String}
+   * @throws BoxException
+   * @throws AuthTokenException
+   * @throws NotFoundException
+   */
+  void deleteFolder(String id) throws BoxException, AuthTokenException, NotFoundException {
+    try {
+      BoxFolderRequestObject obj = BoxFolderRequestObject.deleteFolderRequestObject(true);
+      // obj.setIfMatch(etag); // TODO use it!
+      client.getFoldersManager().deleteFolder(id, obj);
+    } catch (BoxRestException e) {
+      throw new BoxException("Error deleting folder: " + e.getMessage(), e);
+    } catch (BoxServerException e) {
+      int status = getErrorStatus(e);
+      if (status == 404 || status == 412) {
+        // not_found or precondition_failed - then item not found
+        throw new NotFoundException("File not found " + id, e);
+      } else if (status == 403) {
+        throw new NotFoundException("The user doesn’t have access to the folder " + id, e);
+      }
+      throw new BoxException("Error deleting folder: " + e.getMessage(), e);
+    } catch (AuthFatalFailureException e) {
+      if (e.isCallerResponsibleForFix()) {
+        // we need new access token (refresh token already expired here)
+        throw new AuthTokenException("Authentication failure. Reauthenticate.");
+      }
+      throw new BoxException("Authentication error when deleting folder: " + e.getMessage(), e);
+    }
+  }
+
+  /**
+   * Trash a cloud file by given fileId. Depending on Box enterprise settings for this user, the file will
+   * either be actually deleted from Box or moved to the Trash. If the file was actually deleted on Box, this
+   * method will throw {@link FileTrashRemovedException}, and the caller code should delete the file locally
+   * also.
+   * 
+   * @param id {@link String}
+   * @return {@link BoxFile} of the file successfully moved to Box Trash
+   * @throws BoxException
+   * @throws AuthTokenException
+   * @throws FileTrashRemovedException if file was permanently removed.
+   * @throws NotFoundException
+   */
+  BoxFile trashFile(String id) throws BoxException,
+                              AuthTokenException,
+                              FileTrashRemovedException,
+                              NotFoundException {
+    try {
+      BoxFileRequestObject deleteObj = BoxFileRequestObject.deleteFileRequestObject();
+      // deleteObj.setIfMatch(etag); // TODO use it!
+      client.getFilesManager().deleteFile(id, deleteObj);
+
+      // check if file actually removed or in the trash
+      try {
+        BoxDefaultRequestObject trashObj = new BoxDefaultRequestObject();
+        return client.getFilesManager().getTrashFile(id, trashObj);
+      } catch (BoxRestException e) {
+        throw new BoxException("Error reading trashed file: " + e.getMessage(), e);
+      } catch (BoxServerException e) {
+        int status = getErrorStatus(e);
+        if (status == 404 || status == 412) {
+          // not_found or precondition_failed - then file not found in the Trash
+          // XXX throwing an exception not a best solution, but returning a boolean also can have double
+          // meaning: not trashed at all or deleted instead of trashed
+          throw new FileTrashRemovedException("Trashed file deleted permanently " + id);
+        }
+        throw new BoxException("Error reading trashed file: " + e.getMessage(), e);
+      }
+    } catch (BoxRestException e) {
+      throw new BoxException("Error trashing file: " + e.getMessage(), e);
+    } catch (BoxServerException e) {
+      int status = getErrorStatus(e);
+      if (status == 404 || status == 412) {
+        // not_found or precondition_failed - then item not found
+        throw new NotFoundException("File not found " + id, e);
+      } else if (status == 403) {
+        throw new NotFoundException("The user doesn’t have access to the file " + id, e);
+      }
+      throw new BoxException("Error trashing file: " + e.getMessage(), e);
+    } catch (AuthFatalFailureException e) {
+      if (e.isCallerResponsibleForFix()) {
+        // we need new access token (refresh token already expired here)
+        throw new AuthTokenException("Authentication failure. Reauthenticate.");
+      }
+      throw new BoxException("Authentication error when trashing file: " + e.getMessage(), e);
+    }
+  }
+
+  /**
+   * Trash a cloud folder by given folderId. Depending on Box enterprise settings for this user, the folder
+   * will either be actually deleted from Box or moved to the Trash. If the folder was actually deleted in
+   * Box, this method will return {@link FileTrashRemovedException}, and the caller code should delete the
+   * folder locally also.
+   * 
+   * @param id {@link String}
+   * @return {@link BoxFolder} of the folder successfully moved to Box Trash
+   * @throws BoxException
+   * @throws AuthTokenException
+   * @throws FileTrashRemovedException if folder was permanently removed.
+   * @throws NotFoundException
+   */
+  BoxFolder trashFolder(String id) throws BoxException,
+                                  AuthTokenException,
+                                  FileTrashRemovedException,
+                                  NotFoundException {
+    try {
+      BoxFolderRequestObject deleteObj = BoxFolderRequestObject.deleteFolderRequestObject(true);
+      // deleteObj.setIfMatch(etag); // TODO use it!
+      client.getFoldersManager().deleteFolder(id, deleteObj);
+
+      // check if file actually removed or in the trash
+      try {
+        BoxDefaultRequestObject trashObj = new BoxDefaultRequestObject();
+        return client.getFoldersManager().getTrashFolder(id, trashObj);
+      } catch (BoxRestException e) {
+        throw new BoxException("Error reading trashed foler: " + e.getMessage(), e);
+      } catch (BoxServerException e) {
+        int status = getErrorStatus(e);
+        if (status == 404 || status == 412) {
+          // not_found or precondition_failed - then foler not found in the Trash
+          // XXX throwing an exception not a best solution, but returning a boolean also can have double
+          // meaning: not trashed at all or deleted instead of trashed
+          throw new FileTrashRemovedException("Trashed folder deleted permanently " + id);
+        }
+        throw new BoxException("Error reading trashed foler: " + e.getMessage(), e);
+      }
+    } catch (BoxRestException e) {
+      throw new BoxException("Error trashing foler: " + e.getMessage(), e);
+    } catch (BoxServerException e) {
+      int status = getErrorStatus(e);
+      if (status == 404 || status == 412) {
+        // not_found or precondition_failed - then item not found
+        throw new NotFoundException("File not found " + id, e);
+      } else if (status == 403) {
+        throw new NotFoundException("The user doesn’t have access to the folder " + id, e);
+      }
+      throw new BoxException("Error trashing foler: " + e.getMessage(), e);
+    } catch (AuthFatalFailureException e) {
+      if (e.isCallerResponsibleForFix()) {
+        // we need new access token (refresh token already expired here)
+        throw new AuthTokenException("Authentication failure. Reauthenticate.");
+      }
+      throw new BoxException("Authentication error when trashing foler: " + e.getMessage(), e);
+    }
+  }
+
+  BoxFile untrashFile(String id) throws BoxException, AuthTokenException, NotFoundException {
+    try {
+      BoxItemRestoreRequestObject obj = BoxItemRestoreRequestObject.restoreItemRequestObject();
+      return client.getFilesManager().restoreTrashFile(id, obj);
+    } catch (BoxRestException e) {
+      throw new BoxException("Error untrashing file: " + e.getMessage(), e);
+    } catch (BoxServerException e) {
+      int status = getErrorStatus(e);
+      if (status == 404 || status == 412) {
+        // not_found or precondition_failed - then item not found
+        throw new NotFoundException("Trashed file not found " + id, e);
+      } else if (status == 405) {
+        // method_not_allowed
+        throw new NotFoundException("File not in the trash " + id, e);
+      } else if (status == 409) {
+        // conflict
+        throw new NotFoundException("File with the same name as untrashed already exists " + id, e);
+      }
+      throw new BoxException("Error untrashing file: " + e.getMessage(), e);
+    } catch (AuthFatalFailureException e) {
+      if (e.isCallerResponsibleForFix()) {
+        // we need new access token (refresh token already expired here)
+        throw new AuthTokenException("Authentication failure. Reauthenticate.");
+      }
+      throw new BoxException("Authentication error when untrashing file: " + e.getMessage(), e);
+    }
+  }
+
+  BoxFolder untrashFolder(String id) throws BoxException, AuthTokenException, NotFoundException {
+    try {
+      BoxItemRestoreRequestObject obj = BoxItemRestoreRequestObject.restoreItemRequestObject();
+      return client.getFoldersManager().restoreTrashFolder(id, obj);
+    } catch (BoxRestException e) {
+      throw new BoxException("Error untrashing folder: " + e.getMessage(), e);
+    } catch (BoxServerException e) {
+      int status = getErrorStatus(e);
+      if (status == 404 || status == 412) {
+        // not_found or precondition_failed - then item not found
+        throw new NotFoundException("Trashed folder not found " + id, e);
+      } else if (status == 405) {
+        // method_not_allowed
+        throw new NotFoundException("Folder not in the trash " + id, e);
+      } else if (status == 409) {
+        // conflict
+        throw new NotFoundException("Folder with the same name as untrashed already exists " + id, e);
+      }
+      throw new BoxException("Error untrashing folder: " + e.getMessage(), e);
+    } catch (AuthFatalFailureException e) {
+      if (e.isCallerResponsibleForFix()) {
+        // we need new access token (refresh token already expired here)
+        throw new AuthTokenException("Authentication failure. Reauthenticate.");
+      }
+      throw new BoxException("Authentication error when untrashing folder: " + e.getMessage(), e);
+    }
+  }
+
+  /**
+   * Update file name or/and parent and set given modified date. If file was actually updated (name or/and
+   * parent changed) this method return updated file object or <code>null</code> if file already exists
+   * with such name and parent.
+   * 
+   * 
+   * @param parentId {@link String}
+   * @param id {@link String}
+   * @param name {@link String}
+   * @param modified {@link Calendar}
+   * @return {@link BoxFile} of actually changed file or <code>null</code> if file already exists with
+   *         such name and parent.
+   * @throws BoxException
+   * @throws AuthTokenException
+   * @throws NotFoundException
+   */
+  BoxFile updateFile(String parentId, String id, String name, Calendar modified) throws BoxException,
+                                                                                AuthTokenException,
+                                                                                NotFoundException {
+
+    BoxFile existing = readFile(id);
+    int attemts = 0;
+    boolean nameChanged = !existing.getName().equals(name);
+    boolean parentChanged = !existing.getParent().getId().equals(parentId);
+    while ((nameChanged || parentChanged) && attemts < 3) {
+      attemts++;
+      try {
+        // if name of parent changed - we do actual update, we ignore modified date changes
+        // otherwise, if name the same, Box service will respond with error 409 (conflict)
+        BoxFileRequestObject obj = BoxFileRequestObject.updateFileRequestObject();
+        // obj.setIfMatch(etag); // TODO use it
+        if (nameChanged) {
+          obj.setName(name);
+        }
+        if (parentChanged) {
+          obj.setParent(parentId);
+        }
+        obj.put("modified_at", formatDate(modified));
+        return client.getFilesManager().updateFileInfo(id, obj);
+      } catch (BoxRestException e) {
+        throw new BoxException("Error updating file: " + e.getMessage(), e);
+      } catch (BoxServerException e) {
+        int status = getErrorStatus(e);
+        if (status == 404 || status == 412) {
+          // not_found or precondition_failed - then item not found
+          throw new NotFoundException("File not found " + id, e);
+        } else if (status == 409) {
+          // conflict, try again
+          if (attemts < 3) {
+            if (LOG.isDebugEnabled()) {
+              LOG.debug("File with the same name as updated already exists " + id + ". Trying again.");
+            }
+            existing = readFile(id);
+            nameChanged = !existing.getName().equals(name);
+            parentChanged = !existing.getParent().getId().equals(parentId);
+          } else {
+            throw new NotFoundException("File with the same name as updated already exists " + id);
+          }
+        }
+        throw new BoxException("Error updating file: " + e.getMessage(), e);
+      } catch (UnsupportedEncodingException e) {
+        throw new BoxException("Error updating file: " + e.getMessage(), e);
+      } catch (AuthFatalFailureException e) {
+        if (e.isCallerResponsibleForFix()) {
+          // we need new access token (refresh token already expired here)
+          throw new AuthTokenException("Authentication failure. Reauthenticate.");
+        }
+        throw new BoxException("Authentication error when updating file: " + e.getMessage(), e);
+      }
+    }
+    // else we return null, it means existing file wasn't changed
+    return null;
+  }
+
+  BoxFile updateFileContent(String parentId, String id, String name, Calendar modified, InputStream data) throws BoxException,
+                                                                                                         AuthTokenException,
+                                                                                                         NotFoundException {
+    try {
+      BoxFileUploadRequestObject obj = BoxFileUploadRequestObject.uploadFileRequestObject(parentId,
+                                                                                          name,
+                                                                                          data);
+      obj.setLocalFileLastModifiedAt(modified.getTime());
+      obj.put("modified_at", formatDate(modified));
+      return client.getFilesManager().uploadNewVersion(id, obj);
+    } catch (BoxRestException e) {
+      throw new BoxException("Error uploading new version of file: " + e.getMessage(), e);
+    } catch (BoxServerException e) {
+      int status = getErrorStatus(e);
+      if (status == 404 || status == 412) {
+        // not_found or precondition_failed - then item not found
+        throw new NotFoundException("File not found " + id, e);
+      }
+      throw new BoxException("Error uploading new version of file: " + e.getMessage(), e);
+    } catch (UnsupportedEncodingException e) {
+      throw new BoxException("Error uploading new version of file: " + e.getMessage(), e);
+    } catch (AuthFatalFailureException e) {
+      if (e.isCallerResponsibleForFix()) {
+        // we need new access token (refresh token already expired here)
+        throw new AuthTokenException("Authentication failure. Reauthenticate.");
+      }
+      throw new BoxException("Authentication error when uploading new version of file: " + e.getMessage(), e);
+    } catch (InterruptedException e) {
+      Thread.currentThread().interrupt();
+      throw new BoxException("File " + name + ", new version uploading interrupted.", e);
+    }
+  }
+
+  /**
+   * Update folder name or/and parent and set given modified date. If folder was actually updated (name or/and
+   * parent changed) this method return updated folder object or <code>null</code> if folder already exists
+   * with such name and parent.
+   * 
+   * @param parentId {@link String}
+   * @param id {@link String}
+   * @param name {@link String}
+   * @param modified {@link Calendar}
+   * @return {@link BoxFolder} of actually changed folder or <code>null</code> if folder already exists with
+   *         such name and parent.
+   * @throws BoxException
+   * @throws AuthTokenException
+   * @throws NotFoundException
+   */
+  BoxFolder updateFolder(String parentId, String id, String name, Calendar modified) throws BoxException,
+                                                                                    AuthTokenException,
+                                                                                    NotFoundException {
+    BoxFolder existing = readFolder(id);
+    int attemts = 0;
+    boolean nameChanged = !existing.getName().equals(name);
+    boolean parentChanged = !existing.getParent().getId().equals(parentId);
+    while ((nameChanged || parentChanged) && attemts < 3) {
+      attemts++;
+      // if name of parent changed - we do actual update, we ignore modified date changes
+      // otherwise, if name the same, Box service will respond with error 409 (conflict)
+      try {
+        BoxFolderRequestObject obj = BoxFolderRequestObject.createFolderRequestObject(name, parentId);
+        obj.put("modified_at", formatDate(modified));
+        return client.getFoldersManager().updateFolderInfo(id, obj);
+      } catch (BoxRestException e) {
+        throw new BoxException("Error updating folder: " + e.getMessage(), e);
+      } catch (BoxServerException e) {
+        int status = getErrorStatus(e);
+        if (status == 404 || status == 412) {
+          // not_found or precondition_failed - then item not found
+          throw new NotFoundException("Folder not found " + id, e);
+        } else if (status == 409) {
+          // conflict, try again
+          if (attemts < 3) {
+            if (LOG.isDebugEnabled()) {
+              LOG.debug("Folder with the same name as updated already exists " + id + ". Trying again.");
+            }
+            existing = readFolder(id);
+            nameChanged = !existing.getName().equals(name);
+            parentChanged = !existing.getParent().getId().equals(parentId);
+          } else {
+            throw new NotFoundException("Folder with the same name as updated already exists " + id);
+          }
+        }
+        throw new BoxException("Error updating folder: " + e.getMessage(), e);
+      } catch (UnsupportedEncodingException e) {
+        throw new BoxException("Error updating folder: " + e.getMessage(), e);
+      } catch (AuthFatalFailureException e) {
+        if (e.isCallerResponsibleForFix()) {
+          // we need new access token (refresh token already expired here)
+          throw new AuthTokenException("Authentication failure. Reauthenticate.");
+        }
+        throw new BoxException("Authentication error when updating folder: " + e.getMessage(), e);
+      }
+    }
+    // else we return null, it means existing folder wasn't changed
+    return null;
+  }
+
+  BoxFile readFile(String id) throws BoxException, AuthTokenException, NotFoundException {
+    try {
+      return client.getFilesManager().getFile(id, new BoxDefaultRequestObject());
+    } catch (BoxRestException e) {
+      throw new BoxException("Error reading file: " + e.getMessage(), e);
+    } catch (BoxServerException e) {
+      int status = getErrorStatus(e);
+      if (status == 404 || status == 412) {
+        // not_found or precondition_failed - then item not found
+        throw new NotFoundException("File not found " + id, e);
+      }
+      throw new BoxException("Error reading file: " + e.getMessage(), e);
+    } catch (AuthFatalFailureException e) {
+      if (e.isCallerResponsibleForFix()) {
+        // we need new access token (refresh token already expired here)
+        throw new AuthTokenException("Authentication failure. Reauthenticate.");
+      }
+      throw new BoxException("Authentication error when reading file: " + e.getMessage(), e);
+    }
+  }
+
+  BoxFolder readFolder(String id) throws BoxException, AuthTokenException, NotFoundException {
+    try {
+      return client.getFoldersManager().getFolder(id, new BoxDefaultRequestObject());
+    } catch (BoxRestException e) {
+      throw new BoxException("Error reading folder: " + e.getMessage(), e);
+    } catch (BoxServerException e) {
+      int status = getErrorStatus(e);
+      if (status == 404 || status == 412) {
+        // not_found or precondition_failed - then item not found
+        throw new NotFoundException("Folder not found " + id, e);
+      }
+      throw new BoxException("Error reading folder: " + e.getMessage(), e);
+    } catch (AuthFatalFailureException e) {
+      if (e.isCallerResponsibleForFix()) {
+        // we need new access token (refresh token already expired here)
+        throw new AuthTokenException("Authentication failure. Reauthenticate.");
+      }
+      throw new BoxException("Authentication error when reading folder: " + e.getMessage(), e);
+    }
+  }
+
+  // ********* internal *********
+
+  /**
+   * Find server error status.
+   * 
+   * @param e {@link BoxServerException}
+   * @return int
+   */
+  int getErrorStatus(BoxServerException e) {
+    BoxServerError se = e.getError();
+    if (se != null) {
+      int status = se.getStatus();
+      if (status != 0) {
+        return status;
+      }
+    }
+    return e.getStatusCode();
   }
 }

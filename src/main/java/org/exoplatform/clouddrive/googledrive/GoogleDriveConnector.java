@@ -26,6 +26,7 @@ import org.exoplatform.clouddrive.CloudUser;
 import org.exoplatform.clouddrive.ConfigurationException;
 import org.exoplatform.clouddrive.DriveRemovedException;
 import org.exoplatform.clouddrive.jcr.JCRLocalCloudDrive;
+import org.exoplatform.clouddrive.jcr.NodeFinder;
 import org.exoplatform.container.xml.InitParams;
 import org.exoplatform.services.jcr.RepositoryService;
 import org.exoplatform.services.jcr.ext.app.SessionProviderService;
@@ -40,7 +41,7 @@ import javax.jcr.RepositoryException;
  * @version $Id: GoogleDriveConnector.java 00000 Sep 13, 2012 pnedonosko $
  */
 public class GoogleDriveConnector extends CloudDriveConnector {
-  
+
   /**
    * API builder.
    */
@@ -110,8 +111,9 @@ public class GoogleDriveConnector extends CloudDriveConnector {
    */
   public GoogleDriveConnector(RepositoryService jcrService,
                               SessionProviderService sessionProviders,
+                              NodeFinder finder,
                               InitParams params) throws ConfigurationException {
-    super(jcrService, sessionProviders, params);
+    super(jcrService, sessionProviders, finder, params);
   }
 
   /**
@@ -141,7 +143,11 @@ public class GoogleDriveConnector extends CloudDriveConnector {
     authUrl.append("&redirect_uri=");
     authUrl.append(redirectUrl);
 
-    return new GoogleProvider(getProviderId(), getProviderName(), authUrl.toString(), redirectUrl.toString(), jcrService);
+    return new GoogleProvider(getProviderId(),
+                              getProviderName(),
+                              authUrl.toString(),
+                              redirectUrl.toString(),
+                              jcrService);
   }
 
   /**
@@ -178,7 +184,7 @@ public class GoogleDriveConnector extends CloudDriveConnector {
   protected JCRLocalGoogleDrive createDrive(CloudUser user, Node driveNode) throws CloudDriveException,
                                                                            RepositoryException {
     if (user instanceof GoogleUser) {
-      return new JCRLocalGoogleDrive((GoogleUser) user, driveNode, sessionProviders);
+      return new JCRLocalGoogleDrive((GoogleUser) user, driveNode, sessionProviders, jcrFinder);
     } else {
       throw new CloudDriveException("Not Google user: " + user);
     }
@@ -191,7 +197,7 @@ public class GoogleDriveConnector extends CloudDriveConnector {
   protected CloudDrive loadDrive(Node driveNode) throws CloudDriveException, RepositoryException {
     JCRLocalCloudDrive.checkTrashed(driveNode);
     JCRLocalCloudDrive.migrateName(driveNode);
-    return new JCRLocalGoogleDrive(new API(), getProvider(), driveNode, sessionProviders);
+    return new JCRLocalGoogleDrive(new API(), getProvider(), driveNode, sessionProviders, jcrFinder);
   }
 
 }

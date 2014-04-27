@@ -29,6 +29,7 @@ import java.util.Set;
 import javax.jcr.Node;
 import javax.jcr.RepositoryException;
 
+import org.exoplatform.clouddrive.jcr.NodeFinder;
 import org.exoplatform.container.component.BaseComponentPlugin;
 import org.exoplatform.container.xml.InitParams;
 import org.exoplatform.container.xml.PropertiesParam;
@@ -65,7 +66,8 @@ public abstract class CloudDriveConnector extends BaseComponentPlugin {
    */
   public static final String             CONFIG_PROVIDER_CLIENT_SECRET    = "provider-client-secret";
 
-  // CLDINT-1051 increased from 3 to 5, later decreased to 3 again (due to closed JCR session in case of retry)
+  // CLDINT-1051 increased from 3 to 5, later decreased to 3 again (due to closed JCR session in case of
+  // retry)
   public static final int                PROVIDER_REQUEST_ATTEMPTS        = 3;
 
   // CLDINT-1051 increased from 5s tp 10s
@@ -79,6 +81,8 @@ public abstract class CloudDriveConnector extends BaseComponentPlugin {
 
   protected final RepositoryService      jcrService;
 
+  protected final NodeFinder             jcrFinder;
+
   protected final CloudProvider          provider;
 
   protected final String                 connectorHost;
@@ -87,10 +91,12 @@ public abstract class CloudDriveConnector extends BaseComponentPlugin {
 
   protected CloudDriveConnector(RepositoryService jcrService,
                                 SessionProviderService sessionProviders,
+                                NodeFinder jcrFinder,
                                 InitParams params) throws ConfigurationException {
 
     this.sessionProviders = sessionProviders;
     this.jcrService = jcrService;
+    this.jcrFinder = jcrFinder;
 
     PropertiesParam param = params.getPropertiesParam("drive-configuration");
 

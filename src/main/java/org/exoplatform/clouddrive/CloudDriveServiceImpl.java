@@ -89,7 +89,7 @@ public class CloudDriveServiceImpl implements CloudDriveService, Startable {
      * @inherritDoc
      */
     @Override
-    public void onError(CloudDriveEvent event, Throwable error) {
+    public void onError(CloudDriveEvent event, Throwable error, String operationName) {
       // XXX don't do this on error // cleanUserCaches(event.getUser());
     }
   }

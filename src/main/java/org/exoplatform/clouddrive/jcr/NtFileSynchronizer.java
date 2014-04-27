@@ -27,13 +27,11 @@ import org.exoplatform.services.log.Log;
 
 import java.io.IOException;
 import java.io.InputStream;
-import java.text.SimpleDateFormat;
 import java.util.Calendar;
 
 import javax.jcr.Node;
 import javax.jcr.NodeIterator;
 import javax.jcr.RepositoryException;
-import javax.jcr.nodetype.NodeType;
 
 /**
  * Created by The eXo Platform SAS
@@ -44,11 +42,10 @@ import javax.jcr.nodetype.NodeType;
  */
 public class NtFileSynchronizer implements CloudFileSynchronizer {
 
-  public static final String[] NODETYPES = new String[] {JCRLocalCloudDrive.NT_FILE, JCRLocalCloudDrive.NT_FOLDER}; 
-  
-  protected static final Log              LOG         = ExoLogger.getLogger(NtFileSynchronizer.class);
+  public static final String[] NODETYPES = new String[] { JCRLocalCloudDrive.NT_FILE,
+      JCRLocalCloudDrive.NT_FOLDER      };
 
-  protected static final SimpleDateFormat DATE_FORMAT = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss'Z'");
+  protected static final Log   LOG       = ExoLogger.getLogger(NtFileSynchronizer.class);
 
   /**
    * 
@@ -62,7 +59,7 @@ public class NtFileSynchronizer implements CloudFileSynchronizer {
   public String[] getSupportedNodetypes() {
     return NODETYPES;
   }
-  
+
   /**
    * {@inheritDoc}
    */
@@ -97,10 +94,9 @@ public class NtFileSynchronizer implements CloudFileSynchronizer {
    */
   public boolean create(Node file, CloudFileAPI api) throws RepositoryException, CloudDriveException {
     String title = api.getTitle(file);
-
     Calendar created = file.getProperty("jcr:created").getDate();
 
-    if (file.isNodeType(JCRLocalCloudDrive.NT_FILE)) {
+    if (file.isNodeType(JCRLocalCloudDrive.NT_FILE)) { // use JCR, this node not yet a cloud file
       Node resource = file.getNode("jcr:content");
       String mimeType = resource.getProperty("jcr:mimeType").getString();
       Calendar modified = resource.getProperty("jcr:lastModified").getDate();
@@ -111,13 +107,7 @@ public class NtFileSynchronizer implements CloudFileSynchronizer {
       InputStream data = resource.getProperty("jcr:data").getStream();
 
       try {
-        api.createFile(file,
-                       title + " uploaded from eXo at "
-                           + DATE_FORMAT.format(Calendar.getInstance().getTime()),
-                       created,
-                       modified,
-                       mimeType,
-                       data);
+        api.createFile(file, created, modified, mimeType, data);
         resource.setProperty("jcr:data", JCRLocalCloudDrive.DUMMY_DATA); // empty data to zero string
         return true;
       } finally {
@@ -128,14 +118,13 @@ public class NtFileSynchronizer implements CloudFileSynchronizer {
         }
       }
     } else if (file.isNodeType(JCRLocalCloudDrive.NT_FOLDER)) {
-      api.createFolder(file,
-                       title + " created from eXo at " + DATE_FORMAT.format(Calendar.getInstance().getTime()),
-                       created);
+      api.createFolder(file, created);
       // traverse and create childs
       boolean result = true;
       for (NodeIterator childs = file.getNodes(); childs.hasNext();) {
         Node child = childs.nextNode();
-        child = JCRLocalCloudDrive.cleanNode(child, api.getTitle(child)); // we need name cleanup!
+        // TODO do we really need name cleanup? The child already is in JCR.
+        // child = JCRLocalCloudDrive.cleanNode(child, api.getTitle(child));
         result &= create(child, api);
       }
       return result;
@@ -150,25 +139,38 @@ public class NtFileSynchronizer implements CloudFileSynchronizer {
   /**
    * {@inheritDoc}
    */
-  public boolean trash(String filePath, String fileId, CloudFileAPI api) throws RepositoryException, CloudDriveException {
-    return api.trash(fileId);
+  @Override
+  public boolean remove(String filePath, String fileId, boolean isFolder, CloudFileAPI api) throws CloudDriveException,
+                                                                                           RepositoryException {
+    if (isFolder) {
+      api.removeFolder(fileId);
+    } else {
+      api.removeFile(fileId);
+    }
+    return true;
   }
-  
+
+  /**
+   * {@inheritDoc}
+   */
+  public boolean trash(String filePath, String fileId, boolean isFolder, CloudFileAPI api) throws RepositoryException,
+                                                                                          CloudDriveException {
+    if (isFolder) {
+      return api.trashFolder(fileId);
+    } else {
+      return api.trashFile(fileId);
+    }
+  }
+
   /**
    * {@inheritDoc}
    */
   public boolean untrash(Node file, CloudFileAPI api) throws RepositoryException, CloudDriveException {
-    return api.untrash(file);
-  }
-  
-  /**
-   * {@inheritDoc}
-   */
-  @Override
-  public boolean remove(String filePath, String fileId, CloudFileAPI api) throws CloudDriveException,
-                                                                         RepositoryException {
-    api.remove(fileId);
-    return true;
+    if (api.isFolder(file)) {
+      return api.untrashFolder(file);
+    } else {
+      return api.untrashFile(file);
+    }
   }
 
   /**
@@ -176,17 +178,7 @@ public class NtFileSynchronizer implements CloudFileSynchronizer {
    */
   @Override
   public boolean update(Node file, CloudFileAPI api) throws CloudDriveException, RepositoryException {
-    String title = api.getTitle(file);
-
-    if (file.isNodeType(JCRLocalCloudDrive.NT_FILE)) {
-      Node resource = file.getNode("jcr:content");
-      Calendar modified = resource.getProperty("jcr:lastModified").getDate();
-
-      api.updateFile(file,
-                     title + " updated from eXo at " + DATE_FORMAT.format(Calendar.getInstance().getTime()),
-                     modified);
-      return true;
-    } else if (file.isNodeType(JCRLocalCloudDrive.NT_FOLDER)) {
+    if (api.isFolder(file)) { // use API to get a type of given node, it is already a cloud file
       Calendar modified;
       if (file.isNodeType(JCRLocalCloudDrive.EXO_DATETIME)) {
         modified = file.getProperty("exo:dateModified").getDate();
@@ -194,10 +186,14 @@ public class NtFileSynchronizer implements CloudFileSynchronizer {
         modified = Calendar.getInstance(); // will be "now"
       }
 
-      api.updateFolder(file,
-                       title + " updated from eXo at " + DATE_FORMAT.format(Calendar.getInstance().getTime()),
-                       modified);
+      api.updateFolder(file, modified);
       // we don't traverse and update childs!
+      return true;
+    } else if (api.isFile(file)) {
+      Node resource = file.getNode("jcr:content");
+      Calendar modified = resource.getProperty("jcr:lastModified").getDate();
+
+      api.updateFile(file, modified);
       return true;
     } else {
       // it's smth not expected
@@ -214,19 +210,14 @@ public class NtFileSynchronizer implements CloudFileSynchronizer {
   public boolean updateContent(Node file, CloudFileAPI api) throws CloudDriveException, RepositoryException {
     String title = api.getTitle(file);
 
-    if (file.isNodeType(JCRLocalCloudDrive.NT_FILE)) {
+    if (api.isFile(file)) { // use API, in accept() we already selected nt:file
       Node resource = file.getNode("jcr:content");
       String mimeType = resource.getProperty("jcr:mimeType").getString();
       Calendar modified = resource.getProperty("jcr:lastModified").getDate();
       InputStream data = resource.getProperty("jcr:data").getStream();
 
       try {
-        api.updateFileContent(file,
-                              title + " updated from eXo at "
-                                  + DATE_FORMAT.format(Calendar.getInstance().getTime()),
-                              modified,
-                              mimeType,
-                              data);
+        api.updateFileContent(file, modified, mimeType, data);
         return true;
       } finally {
         try {

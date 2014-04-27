@@ -120,7 +120,7 @@ public class CommandPoolExecutor {
 
   }
 
-  public synchronized <S> Future<Command> submit(String name, Callable<Command> command) {
+  public synchronized <S> Future<Command> submit(String name, Callable<Command> command) throws InterruptedException {
     init();
     return executor.submit(command);
   }
@@ -131,19 +131,15 @@ public class CommandPoolExecutor {
 
   // internals
 
-  private void init() {
+  private void init() throws InterruptedException {
     if (executor != null) {
       if (executor.isShutdown()) {
         if (!executor.isTerminated()) {
           stopSheduller();
-          try {
             if (!executor.awaitTermination(STOP_TIMEOUT, TimeUnit.SECONDS)) {
               LOG.warn("Cloud Drive scheduler (" + drives.size()
                   + ") already shutdown but not yet terminated " + executor);
             }
-          } catch (InterruptedException e) {
-            Thread.currentThread().interrupt();
-          }
         }
       } else {
         // scheduler already initialized and running - do nothing

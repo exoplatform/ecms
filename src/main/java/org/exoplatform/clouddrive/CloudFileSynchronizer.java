@@ -18,13 +18,8 @@
  */
 package org.exoplatform.clouddrive;
 
-import com.sun.javadoc.ThrowsTag;
-
-import java.util.List;
-
 import javax.jcr.Node;
 import javax.jcr.RepositoryException;
-import javax.jcr.nodetype.NodeType;
 
 /**
  * Synchronize local to cloud file.
@@ -74,16 +69,17 @@ public interface CloudFileSynchronizer {
    * the file can be handled by the synchronizer - use {@link #accept(Node)} to perform such check before
    * calling the method.
    * 
-   * @param filePath {@link String}
-   * @param fileId {@link String}
+   * @param path {@link String}
+   * @param id {@link String}
+   * @param isFolder TODO
    * @param api {@link CloudFileAPI}
    * @return boolean, <code>true</code> if file was successfully removed, <code>false</code> otherwise.
    * @see #accept(Node)
    */
-  boolean remove(String filePath, String fileId, CloudFileAPI api) throws CloudDriveException,
+  boolean remove(String path, String id, boolean isFolder, CloudFileAPI api) throws CloudDriveException,
                                                                   RepositoryException;
 
-  boolean trash(String filePath, String fileId, CloudFileAPI api) throws CloudDriveException, RepositoryException;
+  boolean trash(String path, String id, boolean isFolder, CloudFileAPI api) throws CloudDriveException, RepositoryException;
 
   boolean untrash(Node file, CloudFileAPI api) throws CloudDriveException, RepositoryException;
 

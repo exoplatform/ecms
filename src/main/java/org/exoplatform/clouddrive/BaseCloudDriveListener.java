@@ -72,7 +72,7 @@ public class BaseCloudDriveListener implements CloudDriveListener {
    * {@inheritDoc}
    */
   @Override
-  public void onError(CloudDriveEvent event, Throwable error) {
+  public void onError(CloudDriveEvent event, Throwable error, String operationName) {
     // nothing
   }
 }

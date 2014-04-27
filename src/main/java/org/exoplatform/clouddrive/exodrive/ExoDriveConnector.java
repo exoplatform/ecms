@@ -16,20 +16,17 @@
  */
 package org.exoplatform.clouddrive.exodrive;
 
-import javax.jcr.Node;
-import javax.jcr.RepositoryException;
-
 import org.exoplatform.clouddrive.CloudDrive;
 import org.exoplatform.clouddrive.CloudDriveConnector;
 import org.exoplatform.clouddrive.CloudDriveException;
 import org.exoplatform.clouddrive.CloudProvider;
 import org.exoplatform.clouddrive.CloudUser;
 import org.exoplatform.clouddrive.ConfigurationException;
-import org.exoplatform.clouddrive.DriveRemovedException;
 import org.exoplatform.clouddrive.exodrive.service.ExoDriveConfigurationException;
 import org.exoplatform.clouddrive.exodrive.service.ExoDriveRepository;
 import org.exoplatform.clouddrive.exodrive.service.ExoDriveService;
 import org.exoplatform.clouddrive.jcr.JCRLocalCloudDrive;
+import org.exoplatform.clouddrive.jcr.NodeFinder;
 import org.exoplatform.container.xml.InitParams;
 import org.exoplatform.services.jcr.RepositoryService;
 import org.exoplatform.services.jcr.ext.app.SessionProviderService;
@@ -39,6 +36,8 @@ import org.exoplatform.services.organization.OrganizationService;
 import org.exoplatform.services.organization.User;
 import org.exoplatform.services.security.ConversationState;
 
+import javax.jcr.Node;
+import javax.jcr.RepositoryException;
 
 /**
  * Created for tests... but can be used to store files to the local files. Created by The eXo Platform SAS.
@@ -69,7 +68,8 @@ public class ExoDriveConnector extends CloudDriveConnector {
         authUrl.append(jcrService.getCurrentRepository().getConfiguration().getName());
         error = null;
       } catch (RepositoryException e) {
-        LOG.warn("Error getting Current Repository for repository based auth url of eXo Drive: " + e.getMessage(),
+        LOG.warn("Error getting Current Repository for repository based auth url of eXo Drive: "
+                     + e.getMessage(),
                  e);
         error = "Current Repository not set.";
       }
@@ -77,7 +77,7 @@ public class ExoDriveConnector extends CloudDriveConnector {
       authUrl.append(getConnectorHost());
       authUrl.append("/portal/rest/clouddrive/connect/");
       authUrl.append(getProviderId());
-      
+
       // query string
       authUrl.append('?');
       if (error == null) {
@@ -119,8 +119,9 @@ public class ExoDriveConnector extends CloudDriveConnector {
                            SessionProviderService sessionProviders,
                            ExoDriveService service,
                            OrganizationService orgService,
+                           NodeFinder finder,
                            InitParams params) throws ConfigurationException {
-    super(jcrService, sessionProviders, params);
+    super(jcrService, sessionProviders, finder, params);
 
     this.service = service;
     this.orgService = orgService;
@@ -167,7 +168,7 @@ public class ExoDriveConnector extends CloudDriveConnector {
 
       String userEmail;
       try {
-        // we're treating given key as user name from org-service        
+        // we're treating given key as user name from org-service
         User user = orgService.getUserHandler().findUserByName(code);
         if (user != null) {
           userEmail = user.getEmail();
@@ -213,7 +214,7 @@ public class ExoDriveConnector extends CloudDriveConnector {
                                                                      RepositoryException {
     if (user instanceof ExoDriveUser) {
       try {
-        return new JCRLocalExoDrive((ExoDriveUser) user, repository(), sessionProviders, driveNode);
+        return new JCRLocalExoDrive((ExoDriveUser) user, repository(), sessionProviders, jcrFinder, driveNode);
       } catch (ExoDriveConfigurationException e) {
         throw new CloudDriveException("Error getting eXo Drive repository:", e);
       }
@@ -230,7 +231,11 @@ public class ExoDriveConnector extends CloudDriveConnector {
     JCRLocalCloudDrive.checkTrashed(driveNode);
     JCRLocalCloudDrive.migrateName(driveNode);
     try {
-      return new JCRLocalExoDrive(repository(), (ExoDriveProvider) provider, sessionProviders, driveNode);
+      return new JCRLocalExoDrive(repository(),
+                                  (ExoDriveProvider) provider,
+                                  sessionProviders,
+                                  jcrFinder,
+                                  driveNode);
     } catch (ExoDriveConfigurationException e) {
       throw new CloudDriveException("Error getting eXo Drive repository:", e);
     }

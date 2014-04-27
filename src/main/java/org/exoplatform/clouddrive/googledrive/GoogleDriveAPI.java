@@ -624,6 +624,8 @@ class GoogleDriveAPI {
    * @throws NotFoundException
    */
   void update(File file, AbstractInputStreamContent content) throws GoogleDriveException, NotFoundException {
+    // TODO use If-Match with local ETag to esnure consistency
+    // http://stackoverflow.com/questions/15723284/google-drive-sdk-check-etag-when-uploading-synchronizing
     String fileId = file.getId();
     try {
       // file id update not assumed in this context
@@ -648,6 +650,8 @@ class GoogleDriveAPI {
    * @throws NotFoundException
    */
   void update(File file) throws GoogleDriveException, NotFoundException {
+    // TODO use If-Match with local ETag to esnure consistency
+    // http://stackoverflow.com/questions/15723284/google-drive-sdk-check-etag-when-uploading-synchronizing
     String fileId = file.getId();
     try {
       // file id update not assumed in this context

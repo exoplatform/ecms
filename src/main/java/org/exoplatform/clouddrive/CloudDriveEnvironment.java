@@ -20,6 +20,8 @@ package org.exoplatform.clouddrive;
 
 import org.exoplatform.clouddrive.CloudDrive.Command;
 import org.exoplatform.container.component.BaseComponentPlugin;
+import org.exoplatform.services.log.ExoLogger;
+import org.exoplatform.services.log.Log;
 
 /**
  * Support different environments for Cloud Drive commands execution. Three phases can be implemented:
@@ -32,6 +34,8 @@ import org.exoplatform.container.component.BaseComponentPlugin;
  * 
  */
 public abstract class CloudDriveEnvironment extends BaseComponentPlugin {
+  
+  protected static final Log      LOG = ExoLogger.getLogger(CloudDriveEnvironment.class);
 
   protected CloudDriveEnvironment next;
 
@@ -84,10 +88,10 @@ public abstract class CloudDriveEnvironment extends BaseComponentPlugin {
   }
 
   /**
-   * Command failed and here it can be reported or some special action applied regarding the error. This method
-   * should be invoked in a thread where the command runs.<br/>
-   * Fail <strong>should not</strong> restore setting applied in {@link #prepare(Command)} method, this should be done by
-   * {@link #cleanup(Command)} call from try-finally block for example.
+   * Command failed and here it can be reported or some special action applied regarding the error. This
+   * method should be invoked in a thread where the command runs.<br/>
+   * Fail <strong>should not</strong> restore setting applied in {@link #prepare(Command)} method, this should
+   * be done by {@link #cleanup(Command)} call from try-finally block for example.
    * 
    * @param command {@link Command}
    * @param error {@link Throwable}
@@ -106,10 +110,12 @@ public abstract class CloudDriveEnvironment extends BaseComponentPlugin {
    * @param next {@link CloudDriveEnvironment} a next env in chain.
    */
   public void chain(CloudDriveEnvironment next) {
-    if (this.next != null) {
-      this.next.chain(next);
-    } else if (next != this) {
-      this.next = next;
+    if (this != next) {
+      if (this.next == null) {
+        this.next = next;
+      } else {
+        this.next.chain(next);
+      }
     }
   }
 }

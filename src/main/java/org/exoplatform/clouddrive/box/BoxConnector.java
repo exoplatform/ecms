@@ -8,6 +8,7 @@ import org.exoplatform.clouddrive.CloudUser;
 import org.exoplatform.clouddrive.ConfigurationException;
 import org.exoplatform.clouddrive.DriveRemovedException;
 import org.exoplatform.clouddrive.jcr.JCRLocalCloudDrive;
+import org.exoplatform.clouddrive.jcr.NodeFinder;
 import org.exoplatform.container.xml.InitParams;
 import org.exoplatform.services.jcr.RepositoryService;
 import org.exoplatform.services.jcr.ext.app.SessionProviderService;
@@ -76,8 +77,11 @@ public class BoxConnector extends CloudDriveConnector {
     }
   }
 
-  public BoxConnector(RepositoryService jcrService, SessionProviderService sessionProviders, InitParams params) throws ConfigurationException {
-    super(jcrService, sessionProviders, params);
+  public BoxConnector(RepositoryService jcrService,
+                      SessionProviderService sessionProviders,
+                      NodeFinder finder,
+                      InitParams params) throws ConfigurationException {
+    super(jcrService, sessionProviders, finder, params);
   }
 
   /**
@@ -152,7 +156,7 @@ public class BoxConnector extends CloudDriveConnector {
                                                                   RepositoryException {
     if (user instanceof BoxUser) {
       BoxUser boxUser = (BoxUser) user;
-      JCRLocalBoxDrive drive = new JCRLocalBoxDrive(boxUser, driveNode, sessionProviders);
+      JCRLocalBoxDrive drive = new JCRLocalBoxDrive(boxUser, driveNode, sessionProviders, jcrFinder);
       boxUser.api().getToken().addListener(drive);
       return drive;
     } else {
@@ -166,7 +170,11 @@ public class BoxConnector extends CloudDriveConnector {
                                                 RepositoryException {
     JCRLocalCloudDrive.checkTrashed(driveNode);
     JCRLocalCloudDrive.migrateName(driveNode);
-    JCRLocalBoxDrive drive = new JCRLocalBoxDrive(new API(), getProvider(), driveNode, sessionProviders);
+    JCRLocalBoxDrive drive = new JCRLocalBoxDrive(new API(),
+                                                  getProvider(),
+                                                  driveNode,
+                                                  sessionProviders,
+                                                  jcrFinder);
     drive.getUser().api().getToken().addListener(drive);
     return drive;
   }

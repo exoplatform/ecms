@@ -25,7 +25,6 @@ import com.google.api.services.drive.model.File;
 import com.google.api.services.drive.model.ParentReference;
 
 import org.exoplatform.clouddrive.CloudDriveException;
-import org.exoplatform.clouddrive.CloudFile;
 import org.exoplatform.clouddrive.CloudFileAPI;
 import org.exoplatform.clouddrive.CloudProviderException;
 import org.exoplatform.clouddrive.CloudUser;
@@ -36,6 +35,7 @@ import org.exoplatform.clouddrive.googledrive.GoogleDriveAPI.ChildIterator;
 import org.exoplatform.clouddrive.googledrive.GoogleDriveConnector.API;
 import org.exoplatform.clouddrive.jcr.JCRLocalCloudDrive;
 import org.exoplatform.clouddrive.jcr.JCRLocalCloudFile;
+import org.exoplatform.clouddrive.jcr.NodeFinder;
 import org.exoplatform.services.jcr.ext.app.SessionProviderService;
 
 import java.io.IOException;
@@ -51,7 +51,6 @@ import java.util.Set;
 import javax.jcr.Node;
 import javax.jcr.PathNotFoundException;
 import javax.jcr.RepositoryException;
-import javax.jcr.ValueFormatException;
 
 /**
  * JCR local storage for Google Drive. Created by The eXo Platform SAS.
@@ -97,14 +96,14 @@ public class JCRLocalGoogleDrive extends JCRLocalCloudDrive {
       rootNode.setProperty("gdrive:oauth2AccessToken", api.getAccessToken());
       rootNode.setProperty("gdrive:oauth2RefreshToken", api.getRefreshToken());
       rootNode.setProperty("gdrive:oauth2TokenExpirationTime", api.getExpirationTime());
-      rootNode.setProperty("gdrive:largestChangeId", about.getLargestChangeId());
+      setChangeId(about.getLargestChangeId());
     }
 
     protected void fetchChilds(String fileId, Node parent) throws CloudDriveException, RepositoryException {
       ChildIterator children = api.children(fileId);
       iterators.add(children);
 
-      while (children.hasNext()) {
+      while (children.hasNext() && !Thread.currentThread().isInterrupted()) {
         ChildReference child = children.next();
         File gf = api.file(child.getId());
         if (!gf.getLabels().getTrashed()) { // skip files in Trash
@@ -204,29 +203,24 @@ public class JCRLocalGoogleDrive extends JCRLocalCloudDrive {
      */
     @Override
     protected void syncFiles() throws RepositoryException, CloudDriveException {
-      String largestChangeId = "";
+      long largestChangeId;
 
       try {
         About about = api.about();
-        largestChangeId = String.valueOf(about.getLargestChangeId());
+        largestChangeId = about.getLargestChangeId();
       } catch (Exception e) {
         // TODO can we have more precise exception from Google API?
         throw new NoRefreshTokenException("Error calling About service of Google Drive: " + e.getMessage(), e);
       }
 
-      String localChangeId = rootNode.getProperty("gdrive:largestChangeId").getString();
-      if (largestChangeId.equals(localChangeId)) {
+      long localChangeId = getChangeId(); // TODO cleanup
+                                          // rootNode.getProperty("gdrive:largestChangeId").getString();
+      if (largestChangeId == localChangeId) {
         // nothing changed
         return;
       }
 
-      long changeId;
-      try {
-        changeId = Long.parseLong(localChangeId);
-      } catch (NumberFormatException e) {
-        throw new CloudDriveException("Error parse localChangeId", e);
-      }
-      long startChangeId = changeId + 1;
+      long startChangeId = localChangeId + 1;
 
       LOG.info("Synchronizing changes from " + startChangeId + " to about " + largestChangeId); // TODO
                                                                                                 // cleanup
@@ -240,11 +234,11 @@ public class JCRLocalGoogleDrive extends JCRLocalCloudDrive {
       }
 
       // update sync metadata, use actual change id from the last iterator
-      rootNode.setProperty("gdrive:largestChangeId", changes.getLargestChangeId());
+      setChangeId(changes.getLargestChangeId());
     }
 
     protected void syncNext() throws RepositoryException, CloudDriveException {
-      while (changes.hasNext()) {
+      while (changes.hasNext() && !Thread.currentThread().isInterrupted()) {
         Change ch = changes.next();
         File gf = ch.getFile(); // gf will be null for deleted
 
@@ -253,8 +247,8 @@ public class JCRLocalGoogleDrive extends JCRLocalCloudDrive {
         // if parents empty - file deleted or shared file was removed from user drive (My Drive)
         // if file in Trash - proceed to delete also, inside it should be checked for the same ETag
         if (ch.getDeleted() || (parents = getParents(gf)).length == 0) {
-          if (hasChanged(ch.getFileId(), FileChange.REMOVE)) {
-            removeChanged(ch.getFileId(), FileChange.REMOVE);
+          if (hasRemoved(ch.getFileId())) {
+            cleanRemoved(ch.getFileId());
             LOG.info(">> Returned file removal " + ch.getFileId());
           } else {
             LOG.info(">> File removal " + ch.getFileId());
@@ -262,16 +256,16 @@ public class JCRLocalGoogleDrive extends JCRLocalCloudDrive {
           deleteFile(ch.getFileId());
         } else {
           if (gf.getLabels().getTrashed()) {
-            if (hasChanged(gf.getId(), FileChange.REMOVE)) {
-              removeChanged(gf.getId(), FileChange.REMOVE);
+            if (hasRemoved(gf.getId())) {
+              cleanRemoved(gf.getId());
               LOG.info(">> Returned file trashing " + gf.getId() + " " + gf.getTitle());
             } else {
               LOG.info(">> File trashing " + gf.getId() + " " + gf.getTitle());
               deleteFile(gf.getId());
             }
           } else {
-            if (hasChanged(gf.getId(), FileChange.UPDATE)) {
-              removeChanged(gf.getId(), FileChange.UPDATE);
+            if (hasUpdated(gf.getId())) {
+              cleanUpdated(gf.getId());
               LOG.info(">> Returned file update " + gf.getId() + " " + gf.getTitle());
             } else {
               LOG.info(">> File update " + gf.getId() + " " + gf.getTitle());
@@ -324,6 +318,7 @@ public class JCRLocalGoogleDrive extends JCRLocalCloudDrive {
      * @throws CloudDriveException
      * @throws IOException
      * @throws RepositoryException
+     * @throws InterruptedException
      */
     protected void updateFile(File gf, String[] parentIds) throws CloudDriveException, RepositoryException {
       // using changes only related to current parent:
@@ -341,6 +336,7 @@ public class JCRLocalGoogleDrive extends JCRLocalCloudDrive {
 
           fileParent = nodes.get(parentFileId);
           if (fileParent == null) {
+            // TODO run full sync and restore the drive from the cloud side
             throw new CloudDriveException("Inconsistent changes: cannot find parent Node for '"
                 + gf.getTitle() + "'");
           }
@@ -472,7 +468,6 @@ public class JCRLocalGoogleDrive extends JCRLocalCloudDrive {
      */
     @Override
     public String createFile(Node fileNode,
-                             String description,
                              Calendar created,
                              Calendar modified,
                              String mimeType,
@@ -481,7 +476,6 @@ public class JCRLocalGoogleDrive extends JCRLocalCloudDrive {
       // File's metadata.
       File gf = new File();
       gf.setTitle(getTitle(fileNode));
-      gf.setDescription(description);
       gf.setMimeType(mimeType);
       gf.setParents(Arrays.asList(new ParentReference().setId(getParentId(fileNode))));
       gf.setCreatedDate(new DateTime(created.getTime()));
@@ -512,12 +506,11 @@ public class JCRLocalGoogleDrive extends JCRLocalCloudDrive {
      * {@inheritDoc}
      */
     @Override
-    public String createFolder(Node folderNode, String description, Calendar created) throws CloudDriveException,
-                                                                                     RepositoryException {
+    public String createFolder(Node folderNode, Calendar created) throws CloudDriveException,
+                                                                 RepositoryException {
       // Folder metadata.
       File gf = new File();
       gf.setTitle(getTitle(folderNode));
-      gf.setDescription(description);
       gf.setMimeType(GoogleDriveAPI.FOLDER_MIMETYPE);
       gf.setParents(Arrays.asList(new ParentReference().setId(getParentId(folderNode))));
       gf.setCreatedDate(new DateTime(created.getTime()));
@@ -543,12 +536,10 @@ public class JCRLocalGoogleDrive extends JCRLocalCloudDrive {
      * {@inheritDoc}
      */
     @Override
-    public void updateFile(Node fileNode, String description, Calendar modified) throws CloudDriveException,
-                                                                                RepositoryException {
+    public void updateFile(Node fileNode, Calendar modified) throws CloudDriveException, RepositoryException {
       // Update existing file metadata and parent (location).
       File gf = api.file(getId(fileNode));
       gf.setTitle(getTitle(fileNode));
-      gf.setDescription(description);
       // TODO merge parents (in case of move replace source on destination)
       gf.setParents(Arrays.asList(new ParentReference().setId(getParentId(fileNode))));
       gf.setModifiedDate(new DateTime(modified.getTime()));
@@ -560,12 +551,11 @@ public class JCRLocalGoogleDrive extends JCRLocalCloudDrive {
      * {@inheritDoc}
      */
     @Override
-    public void updateFolder(Node folderNode, String description, Calendar modified) throws CloudDriveException,
-                                                                                    RepositoryException {
+    public void updateFolder(Node folderNode, Calendar modified) throws CloudDriveException,
+                                                                RepositoryException {
       // Update existing folder metadata and parent (location).
       File gf = api.file(getId(folderNode));
       gf.setTitle(getTitle(folderNode));
-      gf.setDescription(description);
       // TODO merge parents (in case of move replace source on destination)
       gf.setParents(Arrays.asList(new ParentReference().setId(getParentId(folderNode))));
       gf.setModifiedDate(new DateTime(modified.getTime()));
@@ -577,14 +567,10 @@ public class JCRLocalGoogleDrive extends JCRLocalCloudDrive {
      * {@inheritDoc}
      */
     @Override
-    public void updateFileContent(Node fileNode,
-                                  String description,
-                                  Calendar modified,
-                                  String mimeType,
-                                  InputStream content) throws CloudDriveException, RepositoryException {
+    public void updateFileContent(Node fileNode, Calendar modified, String mimeType, InputStream content) throws CloudDriveException,
+                                                                                                         RepositoryException {
       // Update existing file content and related metadata.
       File gf = api.file(getId(fileNode));
-      gf.setDescription(description);
       gf.setMimeType(mimeType);
       gf.setModifiedDate(new DateTime(modified.getTime()));
 
@@ -597,7 +583,7 @@ public class JCRLocalGoogleDrive extends JCRLocalCloudDrive {
      * {@inheritDoc}
      */
     @Override
-    public void remove(String id) throws CloudDriveException, RepositoryException {
+    public void removeFile(String id) throws CloudDriveException, RepositoryException {
       api.delete(id);
     }
 
@@ -605,7 +591,15 @@ public class JCRLocalGoogleDrive extends JCRLocalCloudDrive {
      * {@inheritDoc}
      */
     @Override
-    public boolean trash(String id) throws CloudDriveException, RepositoryException {
+    public void removeFolder(String id) throws CloudDriveException, RepositoryException {
+      api.delete(id);
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public boolean trashFile(String id) throws CloudDriveException, RepositoryException {
       File file = api.trash(id);
       return file.getLabels().getTrashed();
     }
@@ -614,8 +608,26 @@ public class JCRLocalGoogleDrive extends JCRLocalCloudDrive {
      * {@inheritDoc}
      */
     @Override
-    public boolean untrash(Node fileNode) throws CloudDriveException, RepositoryException {
+    public boolean trashFolder(String id) throws CloudDriveException, RepositoryException {
+      File file = api.trash(id);
+      return file.getLabels().getTrashed();
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public boolean untrashFile(Node fileNode) throws CloudDriveException, RepositoryException {
       File file = api.untrash(getId(fileNode));
+      return !file.getLabels().getTrashed();
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public boolean untrashFolder(Node folderNode) throws CloudDriveException, RepositoryException {
+      File file = api.untrash(getId(folderNode));
       return !file.getLabels().getTrashed();
     }
 
@@ -629,38 +641,6 @@ public class JCRLocalGoogleDrive extends JCRLocalCloudDrive {
   }
 
   /**
-   * File sync algorithm for Google Drive.
-   */
-  @Deprecated
-  protected class SyncFile extends SyncFileCommand {
-
-    /**
-     * Google Drive service API.
-     */
-    protected final GoogleDriveAPI api;
-
-    /**
-     * Existing files being synchronized with cloud.
-     */
-    protected final Set<Node>      synced = new HashSet<Node>();
-
-    protected ChangesIterator      changes;
-
-    /**
-     * Create command for Google Drive file synchronization.
-     * 
-     * @param file {@link Node}
-     * @throws RepositoryException
-     * @throws DriveRemovedException
-     * @throws SyncNotSupportedException
-     */
-    protected SyncFile(Node file) throws RepositoryException, SyncNotSupportedException {
-      super(file);
-      this.api = getUser().api();
-    }
-  }
-
-  /**
    * Create newly connecting drive.
    * 
    * @param user
@@ -669,9 +649,11 @@ public class JCRLocalGoogleDrive extends JCRLocalCloudDrive {
    * @throws CloudDriveException
    * @throws RepositoryException
    */
-  protected JCRLocalGoogleDrive(GoogleUser user, Node driveNode, SessionProviderService sessionProviders) throws CloudDriveException,
-      RepositoryException {
-    super(user, driveNode, sessionProviders);
+  protected JCRLocalGoogleDrive(GoogleUser user,
+                                Node driveNode,
+                                SessionProviderService sessionProviders,
+                                NodeFinder finder) throws CloudDriveException, RepositoryException {
+    super(user, driveNode, sessionProviders, finder);
   }
 
   /**
@@ -688,10 +670,11 @@ public class JCRLocalGoogleDrive extends JCRLocalCloudDrive {
   protected JCRLocalGoogleDrive(API apiBuilder,
                                 GoogleProvider provider,
                                 Node driveNode,
-                                SessionProviderService sessionProviders) throws RepositoryException,
+                                SessionProviderService sessionProviders,
+                                NodeFinder finder) throws RepositoryException,
       GoogleDriveException,
       CloudDriveException {
-    super(loadUser(apiBuilder, provider, driveNode), driveNode, sessionProviders);
+    super(loadUser(apiBuilder, provider, driveNode), driveNode, sessionProviders, finder);
   }
 
   /**
@@ -787,21 +770,22 @@ public class JCRLocalGoogleDrive extends JCRLocalCloudDrive {
    * {@inheritDoc}
    */
   @Override
-  protected boolean isSyncSupported(CloudFile cloudFile) {
-    return false;
+  protected Long readChangeId() throws RepositoryException, CloudDriveException {
+    try {
+      return rootNode().getProperty("gdrive:largestChangeId").getLong();
+    } catch (PathNotFoundException e) {
+      throw new CloudDriveException("Change id not found for the drive " + title());
+    }
   }
 
   /**
    * {@inheritDoc}
    */
   @Override
-  protected String getChangeId() throws DriveRemovedException, RepositoryException {
-    try {
-      return rootNode().getProperty("gdrive:largestChangeId").getString();
-    } catch (PathNotFoundException e) {
-      LOG.warn("Change Id not found for the drive " + title());
-      return null;
-    }
+  protected void saveChangeId(Long id) throws CloudDriveException, RepositoryException {
+    Node driveNode = rootNode();
+    // will be saved in a single save of the drive command (sync)
+    driveNode.setProperty("gdrive:largestChangeId", id);
   }
 
   /**

@@ -46,4 +46,12 @@ public interface NodeFinder {
   Item getItem(Session userSession, String path, boolean symlinkTarget) throws PathNotFoundException,
                                                                        RepositoryException;
 
+  /**
+   * Align given name to current repository conventions by removing or escaping forbidden characters.
+   * 
+   * @param name {@link String}
+   * @return {@link String} cleaned name
+   */
+  String cleanName(String name);
+  
 }
