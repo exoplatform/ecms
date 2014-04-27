@@ -21,12 +21,12 @@ package org.exoplatform.clouddrive.webui;
 import org.exoplatform.clouddrive.CloudDrive.Command;
 import org.exoplatform.clouddrive.CloudDriveEnvironment;
 import org.exoplatform.clouddrive.CloudDriveException;
-import org.exoplatform.clouddrive.webui.PortalEnvironment.Settings;
 import org.exoplatform.web.application.RequestContext;
 import org.exoplatform.webui.application.WebuiRequestContext;
 
-import java.util.HashMap;
+import java.util.Collections;
 import java.util.Map;
+import java.util.WeakHashMap;
 
 /**
  * Created by The eXo Platform SAS
@@ -47,8 +47,8 @@ public class PortalEnvironment extends CloudDriveEnvironment {
     }
   }
 
-  protected final Map<Command, Settings> config = new HashMap<Command, Settings>();
-  
+  protected final Map<Command, Settings> config = Collections.synchronizedMap(new WeakHashMap<Command, Settings>());
+
   /**
    * 
    */
@@ -60,8 +60,8 @@ public class PortalEnvironment extends CloudDriveEnvironment {
    */
   @Override
   public void configure(Command command) throws CloudDriveException {
-    config.put(command, new Settings(WebuiRequestContext.getCurrentInstance()));
     super.configure(command);
+    config.put(command, new Settings(WebuiRequestContext.getCurrentInstance()));
   }
 
   /**
@@ -69,11 +69,15 @@ public class PortalEnvironment extends CloudDriveEnvironment {
    */
   @Override
   public void prepare(Command command) throws CloudDriveException {
-    Settings settings = config.get(command);
-    
-    settings.prevContext = WebuiRequestContext.getCurrentInstance();
-    WebuiRequestContext.setCurrentInstance(settings.context);
     super.prepare(command);
+    Settings settings = config.get(command);
+    if (settings != null) {
+      settings.prevContext = WebuiRequestContext.getCurrentInstance();
+      WebuiRequestContext.setCurrentInstance(settings.context);
+    } else {
+      throw new CloudDriveException(this.getClass().getName() + " setting not configured for " + command
+          + " to be prepared.");
+    }
   }
 
   /**
@@ -81,9 +85,13 @@ public class PortalEnvironment extends CloudDriveEnvironment {
    */
   @Override
   public void cleanup(Command command) throws CloudDriveException {
-    Settings settings = config.get(command);
-    
-    WebuiRequestContext.setCurrentInstance(settings.prevContext);
+    Settings settings = config.remove(command);
+    if (settings != null) {
+      WebuiRequestContext.setCurrentInstance(settings.prevContext);
+    } else {
+      throw new CloudDriveException(this.getClass().getName() + " setting not configured for " + command
+          + " to be cleaned.");
+    }
     super.cleanup(command);
   }
 

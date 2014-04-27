@@ -18,9 +18,14 @@
 package org.exoplatform.clouddrive.ecms.jcr;
 
 import org.exoplatform.clouddrive.jcr.NodeFinder;
+import org.exoplatform.ecm.utils.text.Text;
 import org.exoplatform.services.cms.link.LinkManager;
 import org.exoplatform.services.cms.link.impl.NodeFinderImpl;
 import org.exoplatform.services.jcr.RepositoryService;
+
+import javax.jcr.Node;
+import javax.jcr.PathNotFoundException;
+import javax.jcr.RepositoryException;
 
 /**
  * Node finder based on original implementation from ECMS.<br>
@@ -35,6 +40,25 @@ public class CMSNodeFinder extends NodeFinderImpl implements NodeFinder {
 
   public CMSNodeFinder(RepositoryService repositoryService, LinkManager linkManager) {
     super(repositoryService, linkManager);
-  }  
+  }
   
+  /**
+   * {@inheritDoc}
+   */
+  public String cleanName(String name) {
+    // Align name to ECMS conventions
+    int extIndex = name.lastIndexOf('.');
+    String fileName;
+    if (extIndex >= 0) {
+      fileName = name.substring(0, extIndex);
+    } else {
+      fileName = name;
+    }
+    String jcrName = Text.escapeIllegalJcrChars(org.exoplatform.services.cms.impl.Utils.cleanString(fileName));
+    if (extIndex >= 0) {
+      jcrName += name.substring(extIndex);
+    }
+    return jcrName;
+  }
+
 }
