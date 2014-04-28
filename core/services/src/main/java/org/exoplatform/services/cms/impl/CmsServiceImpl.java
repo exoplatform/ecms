@@ -146,6 +146,8 @@ public class CmsServiceImpl implements CmsService {
       currentNode = storeHomeNode.addNode(nodeName, primaryType);
       activityService.setCreating(currentNode, true);
       createNodeRecursively(NODE, currentNode, nodeType, mappings);
+      createNodeRecursively(NODE, currentNode, nodetypeManager.getNodeType("exo:sortable"), mappings);
+
       if(mixinTypes != null){
         for(String type : mixinTypes){
           if(!currentNode.isNodeType(type)) {

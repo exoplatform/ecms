@@ -31,6 +31,7 @@ import java.util.Set;
 
 import javax.jcr.ItemExistsException;
 import javax.jcr.Node;
+import javax.jcr.RepositoryException;
 import javax.servlet.http.HttpServletRequest;
 import javax.ws.rs.core.CacheControl;
 import javax.ws.rs.core.MediaType;
@@ -45,10 +46,13 @@ import org.exoplatform.ecm.connector.fckeditor.FCKMessage;
 import org.exoplatform.ecm.connector.fckeditor.FCKUtils;
 import org.exoplatform.ecm.utils.text.Text;
 import org.exoplatform.ecm.webui.utils.LockUtil;
+import org.exoplatform.services.cms.impl.Utils;
 import org.exoplatform.services.cms.jcrext.activity.ActivityCommonService;
 import org.exoplatform.services.cms.mimetype.DMSMimeTypeResolver;
 import org.exoplatform.services.cms.templates.TemplateService;
 import org.exoplatform.services.listener.ListenerService;
+import org.exoplatform.services.log.ExoLogger;
+import org.exoplatform.services.log.Log;
 import org.exoplatform.services.wcm.core.NodetypeConstant;
 import org.exoplatform.services.wcm.publication.WCMPublicationService;
 import org.exoplatform.services.wcm.utils.WCMCoreUtils;
@@ -65,6 +69,9 @@ import org.w3c.dom.Element;
  */
 public class FileUploadHandler {
 
+  /** Logger */  
+  private static final Log LOG = ExoLogger.getLogger(FileUploadHandler.class.getName());
+  
   /** The Constant UPLOAD_ACTION. */
   public final static String UPLOAD_ACTION = "upload";
 
@@ -94,6 +101,9 @@ public class FileUploadHandler {
 
   /** The Constant IF_MODIFIED_SINCE_DATE_FORMAT. */
   private static final String IF_MODIFIED_SINCE_DATE_FORMAT = "EEE, dd MMM yyyy HH:mm:ss z";
+
+  /** Default file name */
+  private static final String DEFAULT_NAME = "untitled";
   
   public final static String POST_CREATE_CONTENT_EVENT = "CmsService.event.postCreate";
   
@@ -248,12 +258,19 @@ public class FileUploadHandler {
     DateFormat dateFormat = new SimpleDateFormat(IF_MODIFIED_SINCE_DATE_FORMAT);
     
     //create ret
+    
     DocumentBuilderFactory factory = DocumentBuilderFactory.newInstance();
     DocumentBuilder builder = factory.newDocumentBuilder();
     Document fileExistence = builder.newDocument();
-    fileName = Text.escapeIllegalJcrChars(fileName);
+    fileName = getCleanName(fileName);
+    boolean hasNode;
+    try{
+      hasNode = parent.hasNode(fileName);
+    }catch(RepositoryException e){
+      hasNode = false;
+    }
     Element rootElement = fileExistence.createElement(
-                              parent.hasNode(fileName) ? "Existed" : "NotExisted");
+                              hasNode ? "Existed" : "NotExisted");
     fileExistence.appendChild(rootElement);
     //return ret;
     return Response.ok(new DOMSource(fileExistence), MediaType.TEXT_XML)
@@ -301,40 +318,44 @@ public class FileUploadHandler {
                                String siteName,
                                String userId,
                                String existenceAction) throws Exception {
-    CacheControl cacheControl = new CacheControl();
-    cacheControl.setNoCache(true);
-    UploadResource resource = uploadService.getUploadResource(uploadId);
-    DateFormat dateFormat = new SimpleDateFormat(IF_MODIFIED_SINCE_DATE_FORMAT);
-    if (parent == null) {
-      Document fileNotUploaded = fckMessage.createMessage(FCKMessage.FILE_NOT_UPLOADED,
+    try {
+      CacheControl cacheControl = new CacheControl();
+      cacheControl.setNoCache(true);
+      UploadResource resource = uploadService.getUploadResource(uploadId);
+      DateFormat dateFormat = new SimpleDateFormat(IF_MODIFIED_SINCE_DATE_FORMAT);
+      if (parent == null) {
+        Document fileNotUploaded = fckMessage.createMessage(FCKMessage.FILE_NOT_UPLOADED,
                                                           FCKMessage.ERROR,
                                                           language,
                                                           null);
-      return Response.ok(new DOMSource(fileNotUploaded), MediaType.TEXT_XML)
+        return Response.ok(new DOMSource(fileNotUploaded), MediaType.TEXT_XML)
                      .cacheControl(cacheControl)
                      .header(LAST_MODIFIED_PROPERTY, dateFormat.format(new Date()))
                      .build();
-    }
-    if (!FCKUtils.hasAddNodePermission(parent)) {
-      Object[] args = { parent.getPath() };
-      Document message = fckMessage.createMessage(FCKMessage.FILE_UPLOAD_RESTRICTION,
+      }
+      if (!FCKUtils.hasAddNodePermission(parent)) {
+        Object[] args = { parent.getPath() };
+        Document message = fckMessage.createMessage(FCKMessage.FILE_UPLOAD_RESTRICTION,
                                                   FCKMessage.ERROR,
                                                   language,
                                                   args);
-      return Response.ok(new DOMSource(message), MediaType.TEXT_XML)
+        return Response.ok(new DOMSource(message), MediaType.TEXT_XML)
                      .cacheControl(cacheControl)
                      .header(LAST_MODIFIED_PROPERTY, dateFormat.format(new Date()))
                      .build();
-    }
-    if ((fileName == null) || (fileName.length() == 0)) {
-      fileName = resource.getFileName();
-    }
-    //add lock token
-    if(parent.isLocked()) {
-      parent.getSession().addLockToken(LockUtil.getLockToken(parent));
-    }
-    fileName = URLDecoder.decode(fileName,"UTF-8");
-    if (parent.hasNode(fileName)) {
+      }
+      if ((fileName == null) || (fileName.length() == 0)) {
+        fileName = resource.getFileName();
+      }
+      //add lock token
+      if(parent.isLocked()) {
+        parent.getSession().addLockToken(LockUtil.getLockToken(parent));
+      }
+      fileName = URLDecoder.decode(fileName,"UTF-8").trim();
+      //save node with name=fileName
+      String exoTitle = fileName;
+      fileName = getCleanName(fileName);
+      if (parent.hasNode(fileName)) {
 //      Object args[] = { fileName, parent.getPath() };
 //      Document fileExisted = fckMessage.createMessage(FCKMessage.FILE_EXISTED,
 //                                                      FCKMessage.ERROR,
@@ -344,68 +365,85 @@ public class FileUploadHandler {
 //                     .cacheControl(cacheControl)
 //                     .header(LAST_MODIFIED_PROPERTY, dateFormat.format(new Date()))
 //                     .build();
-      if (REPLACE.equals(existenceAction)) {
-        //Broadcast the event when user move node to Trash
-        ListenerService listenerService =  WCMCoreUtils.getService(ListenerService.class);
-        listenerService.broadcast(ActivityCommonService.FILE_REMOVE_ACTIVITY, parent, parent.getNode(fileName));
-        parent.getNode(fileName).remove();
-        parent.save();        
+        if (REPLACE.equals(existenceAction)) {
+          //Broadcast the event when user move node to Trash
+          ListenerService listenerService =  WCMCoreUtils.getService(ListenerService.class);
+          listenerService.broadcast(ActivityCommonService.FILE_REMOVE_ACTIVITY, parent, parent.getNode(fileName));
+          parent.getNode(fileName).remove();
+          parent.save();        
+        }
       }
-    }
-    String location = resource.getStoreLocation();
-    //save node with name=fileName
-    Node file = null;
-    boolean fileCreated = false;
-    fileName = Text.escapeIllegalJcrChars(fileName);
-    String nodeName = fileName;
-    int count = 0;
-    do {
-      try {
-        file = parent.addNode(nodeName,FCKUtils.NT_FILE);
-        fileCreated = true;
-      } catch (ItemExistsException e) {//sameNameSibling is not allowed
-        nodeName = increaseName(fileName, ++count);
-      }      
-    } while (!fileCreated);
-    //--------------------------------------------------------
-    if(!file.isNodeType(NodetypeConstant.MIX_REFERENCEABLE)) {
-    	file.addMixin(NodetypeConstant.MIX_REFERENCEABLE);
-    }
+      String location = resource.getStoreLocation();
+      Node file = null;
+      boolean fileCreated = false;
+      String nodeName = fileName;
+      int count = 0;
+      do {
+        try {
+          file = parent.addNode(nodeName,FCKUtils.NT_FILE);
+          fileCreated = true;
+        } catch (ItemExistsException e) {//sameNameSibling is not allowed
+          nodeName = increaseName(fileName, ++count);
+        }      
+      } while (!fileCreated);
+      //--------------------------------------------------------
+      if(!file.isNodeType(NodetypeConstant.MIX_REFERENCEABLE)) {
+    	  file.addMixin(NodetypeConstant.MIX_REFERENCEABLE);
+      }
     
-    if(!file.isNodeType(NodetypeConstant.MIX_COMMENTABLE))
-    	file.addMixin(NodetypeConstant.MIX_COMMENTABLE);
+      if(!file.isNodeType(NodetypeConstant.MIX_COMMENTABLE))
+      	file.addMixin(NodetypeConstant.MIX_COMMENTABLE);
     
-    if(!file.isNodeType(NodetypeConstant.MIX_VOTABLE))
-    	file.addMixin(NodetypeConstant.MIX_VOTABLE);
+      if(!file.isNodeType(NodetypeConstant.MIX_VOTABLE))
+        file.addMixin(NodetypeConstant.MIX_VOTABLE);
     
-    if(!file.isNodeType(NodetypeConstant.MIX_I18N))
-    	file.addMixin(NodetypeConstant.MIX_I18N);
+      if(!file.isNodeType(NodetypeConstant.MIX_I18N))
+        file.addMixin(NodetypeConstant.MIX_I18N);
     
-    if(!file.hasProperty(NodetypeConstant.EXO_TITLE)) {
-    	file.setProperty(NodetypeConstant.EXO_TITLE, file.getName());
-    }
-    Node jcrContent = file.addNode("jcr:content","nt:resource");
-    //MimeTypeResolver mimeTypeResolver = new MimeTypeResolver();
-    DMSMimeTypeResolver mimeTypeResolver = DMSMimeTypeResolver.getInstance();
-    String mimetype = mimeTypeResolver.getMimeType(resource.getFileName());
-    jcrContent.setProperty("jcr:data",new BufferedInputStream(new FileInputStream(new File(location))));
-    jcrContent.setProperty("jcr:lastModified",new GregorianCalendar());
-    jcrContent.setProperty("jcr:mimeType",mimetype);
-    
-    parent.getSession().refresh(true); // Make refreshing data
-    uploadService.removeUploadResource(uploadId);
-    uploadIdTimeMap.remove(uploadId);
-    WCMPublicationService wcmPublicationService = WCMCoreUtils.getService(WCMPublicationService.class);    
-    wcmPublicationService.updateLifecyleOnChangeContent(file, siteName, userId);
-   
-    if (activityService.isBroadcastNTFileEvents(file)) {
-      listenerService.broadcast(ActivityCommonService.FILE_CREATED_ACTIVITY, null, file);
-    }
-    file.getSession().save();
-    return Response.ok(createDOMResponse("Result", mimetype), MediaType.TEXT_XML)
+      if(!file.hasProperty(NodetypeConstant.EXO_TITLE)) {
+        file.setProperty(NodetypeConstant.EXO_TITLE, exoTitle);
+      }
+      Node jcrContent = file.addNode("jcr:content","nt:resource");
+      //MimeTypeResolver mimeTypeResolver = new MimeTypeResolver();
+      DMSMimeTypeResolver mimeTypeResolver = DMSMimeTypeResolver.getInstance();
+      String mimetype = mimeTypeResolver.getMimeType(resource.getFileName());
+      jcrContent.setProperty("jcr:data",new BufferedInputStream(new FileInputStream(new File(location))));
+      jcrContent.setProperty("jcr:lastModified",new GregorianCalendar());
+      jcrContent.setProperty("jcr:mimeType",mimetype);
+      
+      parent.getSession().refresh(true); // Make refreshing data
+      uploadService.removeUploadResource(uploadId);
+      uploadIdTimeMap.remove(uploadId);
+      WCMPublicationService wcmPublicationService = WCMCoreUtils.getService(WCMPublicationService.class);    
+      wcmPublicationService.updateLifecyleOnChangeContent(file, siteName, userId);
+     
+      if (activityService.isBroadcastNTFileEvents(file)) {
+        listenerService.broadcast(ActivityCommonService.FILE_CREATED_ACTIVITY, null, file);
+      }
+      file.getSession().save();
+      return Response.ok(createDOMResponse("Result", mimetype), MediaType.TEXT_XML)
                    .cacheControl(cacheControl)
                    .header(LAST_MODIFIED_PROPERTY, dateFormat.format(new Date()))
                    .build();
+    } catch (Exception exc) {
+      LOG.error(exc.getMessage(), exc);
+      return Response.serverError().entity(exc.getMessage()).build();
+    }  
+  }
+
+  // Clean file name by removing special characters ($%^&...)
+  private String getCleanName(String fileName){
+    String ext = StringUtils.EMPTY;
+    if (fileName.indexOf('.') > 0) {
+      ext = fileName.substring(fileName.lastIndexOf('.'));
+      fileName = Utils.cleanString(fileName.substring(0, fileName.lastIndexOf('.')));
+    } else {
+      fileName = Utils.cleanString(fileName);
+    }
+    if (StringUtils.isEmpty(fileName)) {
+      fileName = DEFAULT_NAME;
+    }
+    return fileName.concat(ext);
   }
   
   public boolean isDocumentNodeType(Node node) throws Exception {
