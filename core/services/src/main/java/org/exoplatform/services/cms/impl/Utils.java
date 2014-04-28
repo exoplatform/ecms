@@ -850,4 +850,28 @@ public class Utils {
     }
     return "," + Math.round(Double.valueOf(Integer.valueOf(strSize) / 100.0));
   }
+  /**
+   * Use escapeIllegalJcrChars from JCR to escape a path
+   * @param path to escape
+   * @return escaped path
+   */
+  public static String escapeIllegalJcrPath (String path) {
+    if (path == null) return null;
+    if (path.length() == 0) return "";
+    StringBuilder encoded = new StringBuilder();
+    StringBuilder currentItem = new StringBuilder();
+    for (int i = 0; i < path.length(); i++) {
+      if (path.charAt(i) == '/') {
+        if (currentItem != null && currentItem.length() > 0) {
+          encoded.append(Text.escapeIllegalJcrChars(currentItem.toString()));
+          currentItem = new StringBuilder();
+        }
+        encoded.append('/');
+      } else {
+        currentItem.append(path.charAt(i));
+      }
+    }
+    if (currentItem != null && currentItem.length() > 0) encoded.append(Text.escapeIllegalJcrChars(currentItem.toString()));
+    return encoded.toString();
+  }
 }
