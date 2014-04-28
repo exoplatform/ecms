@@ -242,7 +242,7 @@ public class DriverConnector extends BaseConnector implements ResourceContainer 
       ConversationState conversationState = ConversationState.getCurrent();
       String userId = conversationState.getIdentity().getUserId();
       itemPath = Utils.getPersonalDrivePath(itemPath, userId);
-      Node node = (Node)session.getItem(Text.escapeIllegalJcrChars(itemPath));
+      Node node = (Node)session.getItem(Utils.escapeIllegalJcrPath(itemPath));
       return buildXMLResponseForChildren(node,
                                          null,
                                          filterBy,
@@ -339,8 +339,8 @@ public class DriverConnector extends BaseConnector implements ResourceContainer 
       // Check file existence
       Node currentFolderNode = getParentFolderNode(workspaceName,
                                                    Text.escapeIllegalJcrChars(driverName),
-                                                   Text.escapeIllegalJcrChars(currentFolder));
-
+                                                   Utils.escapeIllegalJcrPath(currentFolder));
+      
       return fileUploadHandler.checkExistence(currentFolderNode, fileName);
     } catch (Exception e) {
       if (LOG.isErrorEnabled()) {
@@ -402,13 +402,13 @@ public class DriverConnector extends BaseConnector implements ResourceContainer 
 
         Node currentFolderNode = getParentFolderNode(workspaceName,
                                                      Text.escapeIllegalJcrChars(driverName),
-                                                     Text.escapeIllegalJcrChars(currentFolder));
+                                                     Utils.escapeIllegalJcrPath(currentFolder));
         fileName = Text.escapeIllegalJcrChars(fileName);
         return createProcessUploadResponse(workspaceName,
                                            currentFolderNode,
                                            currentPortal,
                                            userId,
-                                           Text.escapeIllegalJcrChars(jcrPath),
+                                           Utils.escapeIllegalJcrPath(jcrPath),
                                            action,
                                            language,
                                            fileName,
