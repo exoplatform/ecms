@@ -31,7 +31,6 @@ import javax.jcr.query.Query;
 
 import org.apache.commons.lang.StringUtils;
 import org.exoplatform.ecm.jcr.SimpleSearchValidator;
-import org.exoplatform.ecm.utils.text.Text;
 import org.exoplatform.ecm.webui.component.explorer.UIDocumentContainer;
 import org.exoplatform.ecm.webui.component.explorer.UIDocumentInfo;
 import org.exoplatform.ecm.webui.component.explorer.UIDocumentWorkspace;
