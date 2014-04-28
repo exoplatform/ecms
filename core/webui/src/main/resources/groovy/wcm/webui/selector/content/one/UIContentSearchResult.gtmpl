@@ -17,7 +17,7 @@
   DateFormat dateFormat = uicomponent.getDateFormat();
 %>
 
-<div id="$uicomponent.id" class="uiContentSearchResult">
+<div id="$uicomponent.id" class="uiContentSearchResult resizable">
   <table class="uiGrid table table-hover table-striped" cellspacing="0">
     <thead>
       <tr class="uiWCMSearchContent">
