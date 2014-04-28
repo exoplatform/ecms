@@ -33,7 +33,6 @@ import javax.ws.rs.PathParam;
 import javax.ws.rs.core.Response;
 
 import org.exoplatform.container.component.ComponentPlugin;
-import org.exoplatform.services.cms.impl.Utils;
 import org.exoplatform.services.cms.link.LinkManager;
 import org.exoplatform.services.cms.link.NodeFinder;
 import org.exoplatform.services.cms.thumbnail.ThumbnailPlugin;
