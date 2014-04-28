@@ -42,6 +42,7 @@ import org.exoplatform.ecm.webui.component.explorer.UIWorkingArea;
 import org.exoplatform.ecm.webui.component.explorer.search.UISearchResult;
 import org.exoplatform.ecm.webui.component.explorer.sidebar.UISideBar;
 import org.exoplatform.services.cms.link.LinkUtils;
+import org.exoplatform.services.cms.impl.Utils;
 import org.exoplatform.services.jcr.core.ManageableRepository;
 import org.exoplatform.services.jcr.ext.common.SessionProvider;
 import org.exoplatform.services.security.ConversationState;
@@ -57,6 +58,7 @@ import org.exoplatform.webui.event.EventListener;
 import org.exoplatform.webui.form.UIForm;
 import org.exoplatform.webui.form.UIFormHiddenInput;
 import org.exoplatform.webui.form.UIFormStringInput;
+
 
 /**
  * Created by The eXo Platform SARL
@@ -184,7 +186,7 @@ public class UIAddressBar extends UIForm {
   static public class ChangeNodeActionListener extends EventListener<UIAddressBar> {
     public void execute(Event<UIAddressBar> event) throws Exception {
       UIAddressBar uiAddress = event.getSource() ;
-      String path = Text.escapeIllegalJcrChars(uiAddress.getUIStringInput(FIELD_ADDRESS).getValue());
+      String path = Utils.escapeIllegalJcrPath(uiAddress.getUIStringInput(FIELD_ADDRESS).getValue());
       ((UIFormHiddenInput)uiAddress.getChildById(FIELD_ADDRESS_HIDDEN)).setValue(path);
       if (path == null || path.trim().length() == 0) path = "/";
       UIJCRExplorer uiExplorer = uiAddress.getAncestorOfType(UIJCRExplorer.class) ;
