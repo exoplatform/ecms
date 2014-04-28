@@ -352,6 +352,9 @@ public class FileUploadHandler {
         parent.getSession().addLockToken(LockUtil.getLockToken(parent));
       }
       fileName = URLDecoder.decode(fileName,"UTF-8").trim();
+      //save node with name=fileName
+      String exoTitle = fileName;
+      fileName = getCleanName(fileName);
       if (parent.hasNode(fileName)) {
 //      Object args[] = { fileName, parent.getPath() };
 //      Document fileExisted = fckMessage.createMessage(FCKMessage.FILE_EXISTED,
@@ -371,11 +374,8 @@ public class FileUploadHandler {
         }
       }
       String location = resource.getStoreLocation();
-      //save node with name=fileName
       Node file = null;
       boolean fileCreated = false;
-      String exoTitle = fileName;
-      fileName = getCleanName(fileName);
       String nodeName = fileName;
       int count = 0;
       do {
