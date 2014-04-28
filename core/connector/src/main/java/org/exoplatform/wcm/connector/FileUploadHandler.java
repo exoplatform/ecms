@@ -351,7 +351,7 @@ public class FileUploadHandler {
       if(parent.isLocked()) {
         parent.getSession().addLockToken(LockUtil.getLockToken(parent));
       }
-      fileName = URLDecoder.decode(fileName,"UTF-8");
+      fileName = URLDecoder.decode(fileName,"UTF-8").trim();
       if (parent.hasNode(fileName)) {
 //      Object args[] = { fileName, parent.getPath() };
 //      Document fileExisted = fckMessage.createMessage(FCKMessage.FILE_EXISTED,
