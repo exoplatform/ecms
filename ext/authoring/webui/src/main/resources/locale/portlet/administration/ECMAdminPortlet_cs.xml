@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<bundle>
+  <UIViewFormTabPane>
+  <label>
+          <publicationRequestApproval>Zveřejnění &gt; Zažádat o schválení</publicationRequestApproval>
+          <publicationApproveContent>Zveřejnění &gt; Schválit obsah</publicationApproveContent>
+          <publicationPublish>Zveřejnění &gt; Zveřejnit</publicationPublish>
+  </label>
+  </UIViewFormTabPane>
+</bundle>

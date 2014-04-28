@@ -16,6 +16,7 @@
  */
 package org.exoplatform.services.wcm.extensions.publication.lifecycle.authoring.ui;
 
+import org.apache.commons.lang.StringUtils;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.exoplatform.ecm.utils.lock.LockUtil;
@@ -79,9 +80,10 @@ public class UIPublicationPanel extends org.exoplatform.services.wcm.publication
     String currentState = node.getProperty(AuthoringPublicationConstant.CURRENT_STATE).getString();
     if (PublicationDefaultStates.PUBLISHED.equals(currentState) || PublicationDefaultStates.UNPUBLISHED.equals(currentState)
 	    || PublicationDefaultStates.OBSOLETE.equals(currentState)) {
-      nodeVersionUUID = node.getProperty(AuthoringPublicationConstant.LIVE_REVISION_PROP)
-          .getString();
-      if (!"".equals(nodeVersionUUID)) {
+      if (node.hasProperty(AuthoringPublicationConstant.LIVE_REVISION_PROP)) {
+        nodeVersionUUID = node.getProperty(AuthoringPublicationConstant.LIVE_REVISION_PROP).getString();
+      }
+      if (StringUtils.isNotEmpty(nodeVersionUUID)) {
         Node revision = this.getRevisionByUUID(nodeVersionUUID);
         this.setCurrentRevision(revision);
       }

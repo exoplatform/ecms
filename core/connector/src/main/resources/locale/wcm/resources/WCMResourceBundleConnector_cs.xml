@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<bundle>
+  <ContentSelector>
+    <msg>
+      <no-file-selected>Není vybrán žádný obsah. Vyberte prosím alespoň jeden.</no-file-selected>
+    </msg>
+  </ContentSelector>
+  <RenameConnector>
+    <label>
+      <rename>Přejmenovat</rename>
+      <cancel>Storno</cancel>
+    </label>
+    <msg>
+      <renaming>Přejmenování...</renaming>
+    </msg>
+  </RenameConnector>
+</bundle>

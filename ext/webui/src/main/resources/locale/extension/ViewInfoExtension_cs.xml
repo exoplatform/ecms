@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<bundle>
+<UIPopupWindow>
+<title>
+<UIViewInfoManager>Zobrazit informace</UIViewInfoManager>
+</title>
+</UIPopupWindow>
+    
+<ECMContextMenu>
+<event>
+<ViewInfo>Zobrazit informace</ViewInfo>
+</event>
+</ECMContextMenu>
+<UIViewInfoContainer>
+<label>
+      <name>Jméno</name>
+      <title>Popisek</title>
+      <type>Typ</type>
+      <size>Velikost</size>
+      <owner>Vlastník</owner>
+      <lastModifier>Poslední změna</lastModifier>
+      <created>Datum vytvoření</created>
+      <lastModified>Datum poslední změny</lastModified>
+      <publicationState>Stav zveřejnění</publicationState>
+</label>
+<value>
+      <folder>Složka</folder>
+</value>
+<action>
+<Close>#{word.close}</Close>
+</action>
+</UIViewInfoContainer>
+</bundle>

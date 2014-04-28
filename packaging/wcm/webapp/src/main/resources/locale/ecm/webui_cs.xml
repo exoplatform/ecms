@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<bundle>
+  <!--
+  #####################################################################
+  # org.exoplatform.ecm.webui.tree.selectmany.UICategoriesSelectPanel #
+  #####################################################################
+  -->
+  <UITreeList>
+    <header>
+      <name>Jméno</name>
+      <action>Přidat</action>
+    </header>
+    <info>
+      <child-not-found>Potomek nebyl nalezen!</child-not-found>
+    </info>
+  </UITreeList>
+  <!--
+  ######################################################################
+  # org.exoplatform.ecm.webui.tree.selectmany.UISelectedCategoriesGrid #
+  ######################################################################
+  -->
+  <UISelectedCategoriesGrid>
+    <header>
+      <categoryName>Název kategorie</categoryName>
+      <categoryPath>Cesta kategorie</categoryPath>
+      <action>#{word.action}</action>
+    </header>
+    <action>
+      <SaveCategories>#{word.save}</SaveCategories>
+      <Cancel>#{word.cancel}</Cancel>
+    </action>
+    <msg>
+      <cannot-save>Kategorie nebyly uloženy.</cannot-save>
+      <have-saved>Kategorie byly úspěšně uloženy</have-saved>
+      <non-categories>Kategorie jsou nesprávné. Prosím vyberte příslušné kategorie.</non-categories>
+      <confirm-delete>Přejete si odstranit tuto kategorii?</confirm-delete>
+    </msg>
+  </UISelectedCategoriesGrid>
+  <!--
+  ######################################################################
+  # org.exoplatform.ecm.webui.selector.UIPermissionSelector           #
+  ######################################################################
+  -->
+  <SelectUserOrGroup>
+    <title>
+      <UIPermissionUser>Vybrat uživatele</UIPermissionUser>
+      <UIPermissionMembership>Vybrat členství</UIPermissionMembership>
+    </title>
+  </SelectUserOrGroup>
+  <UIPermissionUser>
+    <label>
+      <selectUser>Vybrat uživatele</selectUser>
+      <selectGroup>Projít a vybrat skupinu</selectGroup>
+    </label>
+  </UIPermissionUser>
+  <UIPermissionMembership>
+    <label>
+      <selectUser>Vybrat členství</selectUser>
+      <selectGroup>Projít a vybrat skupinu</selectGroup>
+    </label>
+  </UIPermissionMembership>
+</bundle>

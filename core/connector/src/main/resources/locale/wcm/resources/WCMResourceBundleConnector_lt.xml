@@ -2,16 +2,16 @@
 <bundle>
   <ContentSelector>
     <msg>
-      <no-file-selected>There is no content selected. Please select at least one.</no-file-selected>
+      <no-file-selected>Nėra pasirinkto turinio. Pasirinkite mažiausiai vieną.</no-file-selected>
     </msg>
   </ContentSelector>
   <RenameConnector>
     <label>
-      <rename>Rename</rename>
-      <cancel>Cancel</cancel>
+      <rename>Pervadinti</rename>
+      <cancel>Atšaukti</cancel>
     </label>
     <msg>
-      <renaming>Renaming...</renaming>
+      <renaming>Pervadinama...</renaming>
     </msg>
   </RenameConnector>
 </bundle>

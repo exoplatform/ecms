@@ -36,6 +36,7 @@ import org.exoplatform.services.jcr.core.ManageableRepository;
 import org.exoplatform.services.jcr.ext.common.SessionProvider;
 import org.exoplatform.services.log.ExoLogger;
 import org.exoplatform.services.log.Log;
+import org.exoplatform.services.wcm.core.NodetypeConstant;
 import org.exoplatform.services.wcm.utils.WCMCoreUtils;
 
 public class VersionNode {
@@ -59,7 +60,9 @@ public class VersionNode {
         path_ = version.getPath();
         ws_ = version.getSession().getWorkspace().getName();
         uuid_ = version.getUUID();
-        versionLabels_ = version.getVersionHistory().getVersionLabels(version);
+        if (version.isNodeType(NodetypeConstant.MIX_VERSIONABLE)) {
+          versionLabels_ = version.getVersionHistory().getVersionLabels(version);
+        }
       } catch (Exception e) {
         if (LOG.isWarnEnabled()) {
           LOG.warn(e.getMessage());
