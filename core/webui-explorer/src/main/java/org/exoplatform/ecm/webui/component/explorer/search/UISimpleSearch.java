@@ -35,7 +35,6 @@ import org.exoplatform.ecm.webui.form.UIFormInputSetWithAction;
 import org.exoplatform.services.log.ExoLogger;
 import org.exoplatform.services.log.Log;
 import org.exoplatform.services.security.IdentityConstants;
-import org.exoplatform.wcm.webui.reader.ContentReader;
 import org.exoplatform.web.application.ApplicationMessage;
 import org.exoplatform.web.application.RequestContext;
 import org.exoplatform.webui.config.annotation.ComponentConfig;
@@ -143,7 +142,6 @@ public class UISimpleSearch extends UIForm {
 
   public void updateAdvanceConstraint(String constraint, String operator, String virtualDateQuery) {
     if (constraint.length() > 0) {
-      constraint = ContentReader.getXSSCompatibilityContent(constraint);
       if (constraints_.size() == 0) {
         constraints_.add("(" + constraint + " )");
         if (virtualDateQuery != null)
