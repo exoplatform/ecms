@@ -33,6 +33,7 @@ import javax.jcr.PropertyType;
 
 import org.exoplatform.commons.utils.IOUtil;
 import org.exoplatform.ecm.utils.text.Text;
+import org.exoplatform.ecm.webui.form.UIDialogForm;
 import org.exoplatform.ecm.webui.form.UIFormUploadInputNoUploadButton;
 import org.exoplatform.ecm.webui.form.validator.CategoryValidator;
 import org.exoplatform.ecm.webui.form.validator.CronExpressionValidator;
@@ -206,6 +207,13 @@ public class DialogFormUtil {
               boolean isEmpty = Utils.isEmptyContent(inputValue);
               if(isEmpty) inputValue = "";
               else if(option == null || option.indexOf(SANITIZATION_FLAG) < 0) inputValue = Utils.sanitize(inputValue);
+              if (input.getName().equals("name") && input.getAncestorOfType(UIDialogForm.class).isAddNew()) {
+                JcrInputProperty jcrExoTitle = new JcrInputProperty();
+                jcrExoTitle.setJcrPath("/node/exo:title");
+                jcrExoTitle.setValue(inputValue);
+                properties.put("/node/exo:title", jcrExoTitle);
+                inputValue = Utils.cleanString(inputValue);
+              } 
               property.setValue(inputValue);
             } else {
               property.setValue(input.getValue());
