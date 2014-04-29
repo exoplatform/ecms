@@ -1,4 +1,12 @@
-<% String fieldName; %>
+<% 
+import org.apache.commons.lang.StringUtils;
+
+def rcontext = _ctx.getRequestContext() ;
+def jsManager = rcontext.getJavascriptManager();
+
+jsManager.require("SHARED/jquery", "gj").addScripts("gj('#" + uiform.FIELD_TITLE_TEXT_BOX + "').focus(); gj('#" + uiform.id + "').unbind('keypress').keypress(function(e) { if(e.which == 13) {gj('button.addFolderButton').click(); e.preventDefault();}});");
+
+String fieldName; %>
 <div class="UIForm uiAddFolder">
   <%uiform.begin()%>
       <div class="form-horizontal resizable">
@@ -25,9 +33,11 @@
         <% for(action in uiform.getActions()) {
              String actionLabel = _ctx.appRes(uiform.getName() + ".action." + action);
              String link = uiform.event(action);
+             String saveClass = "Save".equals(action) ? "addFolderButton": StringUtils.EMPTY;
         %>
-          <button type="button" href="javascript:void(0);" onclick="$link" class="btn">$actionLabel</button>
+          <button type="button" href="javascript:void(0);" onclick="$link" class="btn $saveClass">$actionLabel</button>
         <%}%>
       </div>
   <%uiform.end()%>
 </div>
+

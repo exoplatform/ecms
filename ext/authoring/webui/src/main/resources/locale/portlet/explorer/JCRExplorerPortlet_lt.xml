@@ -7,9 +7,9 @@
   -->
   <UIActionBar>
     <tooltip>
-      <PublicationRequestApproval>Request Approval</PublicationRequestApproval>
-      <PublicationApproveContent>Approve Content</PublicationApproveContent>
-      <PublicationPublish>Publish</PublicationPublish>
+      <PublicationRequestApproval>Prašymo patvirtinimas</PublicationRequestApproval>
+      <PublicationApproveContent>Patvirtinti turinį</PublicationApproveContent>
+      <PublicationPublish>Paskelbti</PublicationPublish>
     </tooltip>
   </UIActionBar>
 </bundle>

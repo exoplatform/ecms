@@ -2,55 +2,55 @@
 <bundle>
   <UISEOForm>
     <label>  
-      <title>Title:</title>
-      <description>Description:</description>
-      <keywords>Keywords:</keywords>
-      <language>Language:</language>
-      <robots>Robots:</robots>
-      <sitemap>Sitemap:</sitemap>
-      <sitemapvisible>Visible in Sitemap</sitemapvisible>
-    <isInherited>Inherited from parent page</isInherited>
-      <priority>Priority:</priority>
-      <frequency>Frequency:</frequency>
-      <select-language>Select a language</select-language>
+      <title>Pavadinimas:</title>
+      <description>Aprašymas:</description>
+      <keywords>Raktažodžiai:</keywords>
+      <language>Kalba:</language>
+      <robots>Robotai:</robots>
+      <sitemap>Svetainės žemėlapis:</sitemap>
+      <sitemapvisible>Matomas svetainės žemėlapyje</sitemapvisible>
+    <isInherited>Paveldėtas iš pagrindinio puslapio</isInherited>
+      <priority>Prioritetas:</priority>
+      <frequency>Dažnis:</frequency>
+      <select-language>Pasirinkti kalbą</select-language>
       <option>
-        <Always>Always</Always>
-        <Hourly>Hourly</Hourly>
-        <Daily>Daily</Daily>
-        <Weekly>Weekly</Weekly>
-        <Monthly>Monthly</Monthly>
-        <Yearly>Yearly</Yearly>
-        <Never>Never</Never>
+        <Always>Visada</Always>
+        <Hourly>Kas valandą</Hourly>
+        <Daily>Kasdien</Daily>
+        <Weekly>Kas savaitę</Weekly>
+        <Monthly>Kas mėnesį</Monthly>
+        <Yearly>Kas metus</Yearly>
+        <Never>Niekada</Never>
       </option> 
     </label>
     <tip>
-  <priority>Valid values range from 0.0 to 1.0</priority>
+  <priority>Leistinos reikšmės svyruoja nuo 0,0 iki 1,0</priority>
   </tip>   
     <action>
       <Save>#{word.save}</Save>
       <Cancel>#{word.cancel}</Cancel>
     </action>
     <msg>
-      <repository-exception>An unexpected error occurred while saving the page metadata.</repository-exception>
-      <confirm-delete>Are you sure you want to delete these SEO data?</confirm-delete>      
+      <repository-exception>Įvyko netikėta klaida išsaugant puslapio metaduomenis.</repository-exception>
+      <confirm-delete>Ar tikrai norite ištrinti šiuos SEO duomenis?</confirm-delete>      
     </msg>
     <title>
-    <seo-delete>Delete</seo-delete>
+    <seo-delete>Ištrinti</seo-delete>
     </title>
   <help> 
-  <priority>Valid values range from 0.0 to 1.0.</priority>
-  <description>Help searchers: let them know that the following page has a link that they are looking for.</description>
-  <keywords>Most important terms in the page separated by a comma.</keywords>  
+  <priority>Leistinos reikšmės svyruoja nuo 0,0 iki 1,0.</priority>
+  <description>Padėti vartotojams: leiskite jiems žinoti, kad kitame puslapyje yra nuoroda, kurios jie ieško.</description>
+  <keywords>Svarbiausi terminai puslapyje atskirti kableliais.</keywords>  
   </help>  
   </UISEOForm>
   <UISEOPopupWindow>
   <title>
-      <UISEOForm>SEO Management</UISEOForm>
+      <UISEOForm>SEO valdymas</UISEOForm>
   </title>
   </UISEOPopupWindow>    
   <UISEOToolbarForm>
   <title>
-      <seo>SEO Management</seo>
+      <seo>SEO valdymas</seo>
   </title>
   <label>
     <seo>SEO</seo>
@@ -58,7 +58,7 @@
   </UISEOToolbarForm>  
   <FloatNumberValidator>
     <msg>
-      <Invalid-number>The value of the Priority field must be in a numerical format. The valid values range is from 0.0 to 1.0.</Invalid-number>
+      <Invalid-number>Prioriteto lauko vertė turi būti skaičiaus formato. Leistinos reikšmės yra nuo 0,0 iki 1,0.</Invalid-number>
     </msg>
   </FloatNumberValidator>  
   

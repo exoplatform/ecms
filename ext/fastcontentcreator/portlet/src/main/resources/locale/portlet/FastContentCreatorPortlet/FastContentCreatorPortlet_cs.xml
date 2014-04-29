@@ -1,0 +1,197 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<bundle>
+  <UIFCCForm>
+    <msg>
+      <name-not-allowed>Tento název není povolen.</name-not-allowed>
+      <in-versioning>Před přidáním nového uzlu zkontrolujte aktuální uzel.</in-versioning>
+      <cannot-save>Došlo k chybě při ukládání uzlu.</cannot-save>
+      <saved-successfully>{0}</saved-successfully>
+      <not-support>Nelze načíst šablonu {0}.</not-support>
+      <not-add-folder>Do této složky lze přidat pouze soubory.</not-add-folder>
+      <access-denied>Přístup byl odepřen. V '{0}' nemáte oprávnění přidávat.</access-denied>
+      <path-not-found>Cesta '{0}' byla odstraněna nebo je neplatná.</path-not-found>
+      <node-locked>Uzel {0}' je uzamčen. Prosím odemkněte tento uzel před vytvořením dokumentů.</node-locked>
+      <node-isExist>Tento uzel již v '{0}' existuje a nesmí mít stejný název jako jeho sourozenec.</node-isExist>
+      <get-dialog-path>Došlo k chybě při získávání cesty dialogu.</get-dialog-path>
+      <new-jcr-template>Došlo k chybě při vytváření nové šablony.</new-jcr-template>
+    </msg>
+    <action>
+      <Save>#{word.save}</Save>
+      <Cancel>#{word.cancel}</Cancel>
+    </action>
+  </UIFCCForm>
+
+  <UIFCCConfig>
+    <label>
+      <UIFCCSaveLocationField>Uložit umístění</UIFCCSaveLocationField>
+      <UIFCCWorkspaceFormSelectBox>Vybrat pracovní plochu</UIFCCWorkspaceFormSelectBox>
+      <UIFCCTemplateField>Možnosti šablony</UIFCCTemplateField>
+      <UIFCCLocationFormInputAction>Umístění pro uložení</UIFCCLocationFormInputAction>
+      <UIFCCTemplateFormSelectBox>Vybrat šablonu</UIFCCTemplateFormSelectBox>
+      <UIFCCSaveFormStringInput>Vlastní tlačítko Uložit</UIFCCSaveFormStringInput>
+      <UIFCCMessageFormTextareaInput>Vlastní zpráva při uložení</UIFCCMessageFormTextareaInput>
+      <UIFCCRedirectFormCheckboxInput>Přesměrování:</UIFCCRedirectFormCheckboxInput>
+      <UIFCCRedirectPathFormStringInput>Cesta přesměrování:</UIFCCRedirectPathFormStringInput>
+      <UIFCCActionField>Akce</UIFCCActionField>
+    </label>
+    <msg>
+      <save-successfully>Úspěšně uloženo do předvoleb portletu.</save-successfully>
+      <item-not-found>Tato cesta je neplatná.</item-not-found>
+      <fileType-empty>Před uložením tohoto nastavení vyberte typ souboru.</fileType-empty>
+      <ws-empty>Vyberte prosím jednu pracovní plochu.</ws-empty>
+      <action-empty>Vyberte prosím složku s akcí.</action-empty>
+      <message-empty>Pole "Vlastní zpráva při uložení" je nutné v případě, že nevyberete možnost přesměrování, nebo cesta je prázdná.</message-empty>
+      <get-template>Došlo k chybě při přístupu k šabloně.</get-template>
+      <set-template-option>Došlo k chybě při nastavování možnosti šablony.</set-template-option>
+      <do-select>Při výběru umístění došlo k chybě.</do-select>
+      </msg>
+    <action>
+      <Save>#{word.save}</Save>
+    </action>
+  </UIFCCConfig>
+
+  <UIFCCLocationFormInputAction>
+    <title>
+      <SelectPath>Vybrat cestu</SelectPath>
+    </title>
+  </UIFCCLocationFormInputAction>
+
+  <UIFCCActionList>
+    <header>
+      <name>Jméno</name>
+      <description>Popis</description>
+      <instanceOf>Instance</instanceOf>
+      <action>Akce</action>
+    </header>
+    <action>
+      <Add>Přidat</Add>
+    </action>
+    <msg>
+      <empty>Žádné akce</empty>
+      <remove-popup-first>Před odstraněním tohoto uzlu je nutné zavřít okno s úpravami.</remove-popup-first>
+      <confirm-delete-action>Jste si jisti, že chcete tuto akci odstranit?</confirm-delete-action>
+      <template-empty>Šablona '{0}' je null nebo prázdná.</template-empty>
+      <template-null>Šablona je null nebo prázdná, nebo k této šabloně nemáte oprávnění k přístupu.</template-null>
+      <access-denied>Přístup byl odepřen. Nemáte oprávnění k provedení této akce.</access-denied>
+    </msg>
+  </UIFCCActionList>
+
+  <UIFCCSelectorPopupWindow>
+    <title>
+      <UIOneNodePathSelector>Vybrat umístění</UIOneNodePathSelector>
+    </title>
+  </UIFCCSelectorPopupWindow>
+
+  <UIWorkspaceList>
+    <label>
+      <workspaceName>Pracovní plocha:</workspaceName>
+      <rootNodePath>Kořenová cesta:</rootNodePath>
+      <rootNodeInfo>Kořenový uzel</rootNodeInfo>
+    </label>
+  </UIWorkspaceList>
+
+  <rootNodeInfo>
+    <title>
+      <AddRootNode>Přidat kořenový uzel</AddRootNode>
+    </title>
+  </rootNodeInfo>
+
+  <UITreeList>
+    <info>
+      <child-not-found>Tento uzel nemá žádné podřízené uzly.</child-not-found>
+    </info>
+    <header>
+      <name>Jméno</name>
+      <action>Akce</action>
+    </header>
+  </UITreeList>
+
+  <UIFCCActionPopupWindow>
+    <title>
+      <UIFCCActionContainer>Přidat akci</UIFCCActionContainer>
+    </title>
+  </UIFCCActionPopupWindow>
+
+  <UIFCCActionForm>
+    <title>Přidat či upravit akci</title>
+    <action>
+      <Save>#{word.save}</Save>
+      <Close>#{word.close}</Close>
+    </action>
+    <msg>
+      <repository-exception>Tuto akci nelze uložit. Zadaný název nesmí mít index jako jeho poslední prvek.</repository-exception>
+      <numberformat-exception>Tuto akci nelze uložit. Zadaný název nesmí obsahovat ' [' nebo ']'.</numberformat-exception>
+      <existed-action>Název akce '{0}' již existuje. Zvolte prosím jiný název.</existed-action>
+      <unable-add-action>Nelze přidat tuto akci.</unable-add-action>
+      <unable-add>Nelze přidat tuto akci. Tento uzel je kořenem nebo nemáte oprávnění.</unable-add>
+      <not-support>Dialog '{0}' není podporován.</not-support>
+      <no-permission-add>Přístup byl odepřen. Nemáte právo zde přidat akci.</no-permission-add>
+      <access-denied>Přístup byl odepřen. Nemáte oprávnění k přístupu k této šabloně.</access-denied>
+    </msg>
+    <validator>
+      <validator>Validátor</validator>
+      <destPath>S cestou</destPath>
+    </validator>
+  </UIFCCActionForm>
+
+  <UIFCCActionTypeForm>
+    <label>
+      <actionType>Vytvořit akci typu</actionType>
+    </label>
+    <msg>
+      <not-support>Nelze načíst šablonu {0}.</not-support>
+      <do-not-permission>Nemáte oprávnění k načtení šablony {0}.</do-not-permission>
+    </msg>
+  </UIFCCActionTypeForm>
+
+  <PopupComponent>
+    <title>
+      <UIOneNodePathSelector>Vybrat umístění</UIOneNodePathSelector>
+      <UIPermissionSelector>Prohlížeč oprávnění</UIPermissionSelector>
+      <UICategoriesSelector>Přidat kategorie</UICategoriesSelector>
+    </title>
+  </PopupComponent>
+
+  <DateTimeValidator>
+    <msg>
+      <Invalid-input>Pole '{0}' s hodnotou '{1}' je neplatné.</Invalid-input>
+    </msg>
+  </DateTimeValidator>
+
+  <UITabPane>
+    <title>
+      <UICategoriesSelectPanel>Vybrat kategorie</UICategoriesSelectPanel>
+      <UISelectedCategoriesGrid>Odkazované kategorie</UISelectedCategoriesGrid>
+    </title>
+  </UITabPane>
+
+  <PopupComponent>
+    <title>
+      <UICategoriesSelector>Add Categories</UICategoriesSelector>
+    </title>
+  </PopupComponent>
+
+  <UICategoriesSelector>
+    <action>
+      <close>#{word.close}</close>
+    </action>
+  </UICategoriesSelector>
+
+  <PopupComponent>
+    <title>
+      <UIOneTaxonomySelector>Přidat kategorie</UIOneTaxonomySelector>
+    </title>
+  </PopupComponent>
+
+  <UITreeTaxonomyList>
+    <label>
+      <taxonomyTree>Strom kategorií</taxonomyTree>
+    </label>
+  </UITreeTaxonomyList>
+
+  <UIFCCTaxonomyPopupWindow>
+    <title>
+      <UIOneTaxonomySelector>Výběr kategorie</UIOneTaxonomySelector>
+    </title>
+  </UIFCCTaxonomyPopupWindow>
+</bundle>

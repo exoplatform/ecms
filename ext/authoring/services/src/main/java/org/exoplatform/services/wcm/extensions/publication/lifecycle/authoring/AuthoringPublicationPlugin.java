@@ -245,8 +245,10 @@ public class AuthoringPublicationPlugin extends  WebpagePublicationPlugin {
       addRevisionData(node, revisionsMap.values());
     } else if (PublicationDefaultStates.ARCHIVED.equalsIgnoreCase(newState)) {
       Value value = valueFactory.createValue(selectedRevision);
-      Value liveRevision = node.getProperty(AuthoringPublicationConstant.LIVE_REVISION_PROP)
-                               .getValue();
+      Value liveRevision = null;
+      if (node.hasProperty(AuthoringPublicationConstant.LIVE_REVISION_PROP)) {
+        liveRevision = node.getProperty(AuthoringPublicationConstant.LIVE_REVISION_PROP).getValue();
+      }
       if (liveRevision != null && value.getString().equals(liveRevision.getString())) {
         node.setProperty(AuthoringPublicationConstant.LIVE_REVISION_PROP,
                          valueFactory.createValue(""));

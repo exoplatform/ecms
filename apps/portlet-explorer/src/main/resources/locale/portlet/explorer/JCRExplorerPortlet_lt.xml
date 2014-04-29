@@ -7,19 +7,19 @@
   -->
   <UICommentForm>
     <label>
-      <name>Name</name>
-      <email>Email</email>
-      <website>Website</website>
-      <comment>Comment</comment>
+      <name>Vardas</name>
+      <email>El.paštas</email>
+      <website>Tinklalapis</website>
+      <comment>Komentaras</comment>
     </label>
     <action>
       <Save>#{word.save}</Save>
       <Cancel>#{word.cancel}</Cancel>
     </action>
     <msg>
-      <not-support>You cannot comment on this document type.</not-support>
-      <not-checkedout>You must check out the node before commenting on it.</not-checkedout>
-      <content-null>You cannot post an empty comment.</content-null>
+      <not-support>Jūs negalite komentuoti šio dokumento tipo.</not-support>
+      <not-checkedout>Jūs turite patikrinti mazgą prieš komentuojant jame.</not-checkedout>
+      <content-null>jūs negalite siųsti tuščio komentaro.</content-null>
     </msg>
   </UICommentForm>
   <!--
@@ -29,25 +29,25 @@
   -->
   <UIVoteForm>
     <title>
-      <normal>Poor</normal>
-      <good>Below average</good>
-      <verygood>Average</verygood>
-      <excellent>Above average</excellent>
-      <best>Good</best>
-      <no-value>no value yet</no-value>
+      <normal>Prastas</normal>
+      <good>Mažesnis nei vidutinis</good>
+      <verygood>Vidutinis</verygood>
+      <excellent>Didesnis nei vidutinis</excellent>
+      <best>Geras</best>
+      <no-value>nėra jokio vertinimo</no-value>
     </title>
     <label>
-      <my-rating>My Rating:</my-rating>
+      <my-rating>Mano vertinimas:</my-rating>
     </label>
     <button>
       <label>
-        <confirm>OK</confirm>
+        <confirm>Gerai</confirm>
       </label>
     </button>
     <msg>
-      <not-support>You cannot vote for this document type.</not-support>
-      <not-checkedout>You must check out the node before voting.</not-checkedout>
-      <vote-restriction>You cannot vote more than one time.</vote-restriction>
+      <not-support>Jūs negalite balsuoti už šio dokumento tipą.</not-support>
+      <not-checkedout>Mazgas turi būti patikrintas prieš balsavimą.</not-checkedout>
+      <vote-restriction>Jūs negalite balsuoti daugiau nei vieną kartą.</vote-restriction>
     </msg>
   </UIVoteForm>
  
@@ -58,10 +58,10 @@
   -->
   <UIJCRExplorer>
     <msg>
-      <refresh-session-success>The session was refreshed successfully.</refresh-session-success>
-      <no-node-history>You are in the root node.</no-node-history>
-      <save-session-success>All changes have been saved.</save-session-success>
-      <target-path-not-found>You cannot access this node, either because it doesn't exist anymore or because you do not have the right to access it.</target-path-not-found>
+      <refresh-session-success>Sesija buvo sėkmingai atnaujinta.</refresh-session-success>
+      <no-node-history>Jūs esate šakniniame mazge.</no-node-history>
+      <save-session-success>Visi pakeitimai išsaugoti.</save-session-success>
+      <target-path-not-found>Negalite prieiti prie šio mazgo, nes jis nebeegzistuoja arba neturite priėjimo teisės.</target-path-not-found>
     </msg>
   </UIJCRExplorer>
   <!--
@@ -71,16 +71,16 @@
   -->
   <UISideBar>
     <label>
-      <Relation>Relation</Relation>
-      <Explorer>File Explorer</Explorer>
-      <Close>Close Sidebar</Close>
-      <TagExplorer>Tag Cloud</TagExplorer>
-      <Clipboard>Clipboard</Clipboard>
-      <SavedSearches>Saved Searches</SavedSearches>
+      <Relation>Ryšys</Relation>
+      <Explorer>Failų naršyklė</Explorer>
+      <Close>uždaryti šoninę juostą</Close>
+      <TagExplorer>Žymos debesis</TagExplorer>
+      <Clipboard>Iškarpinė</Clipboard>
+      <SavedSearches>Išsaugotos paieškos</SavedSearches>
     </label>
     <title>
       <Control>Control Sidebar</Control>
-      <Close>Close Sidebar</Close>
+      <Close>uždaryti šoninę juostą</Close>
     </title>
   </UISideBar>
   <!--
@@ -90,15 +90,15 @@
   -->
   <UIViewBar>
     <label>
-      <driveWorkspace>Drive Workspace:</driveWorkspace>
-      <backToJCR>Back to JCR Main Drives</backToJCR>
-      <setUpBrowser>Set up your browsing preferences</setUpBrowser>
-      <refesh>Refresh</refesh>
-      <currentDrive>Current Drive</currentDrive>
-      <selectView>Select View</selectView>
-      <showSideBar>Show Sidebar</showSideBar>
-      <more>More</more>
-      <backTo>Back</backTo>
+      <driveWorkspace>Disko darbo sritis:</driveWorkspace>
+      <backToJCR>Atgal į JCR pagrindinius diskus</backToJCR>
+      <setUpBrowser>Nustatyti jūsų naršymo pasirinkimus</setUpBrowser>
+      <refesh>Atnaujinti</refesh>
+      <currentDrive>Esamas diskas</currentDrive>
+      <selectView>Pasirinkti rodymą</selectView>
+      <showSideBar>Rodyti šoninę juostą</showSideBar>
+      <more>Daugiau</more>
+      <backTo>Atgal</backTo>
     </label>
   </UIViewBar>
 
@@ -109,14 +109,14 @@
   -->
   <UIDrivesBrowser>
     <title>
-      <PersonalDrives>Personal drives</PersonalDrives>
-      <GroupDrives>Group drives</GroupDrives>
-      <GeneralDrives>General drives</GeneralDrives>
+      <PersonalDrives>Asmeniniai diskai</PersonalDrives>
+      <GroupDrives>Grupės diskai</GroupDrives>
+      <GeneralDrives>Bendrieji diskai</GeneralDrives>
     </title>
     <msg>
-      <no-view-found>There is no view available according to your access permissions in drive '{0}'.</no-view-found>
-      <access-denied>Access denied. You may not have permission in the workspace of drive '{0}'.</access-denied>
-      <workspace-not-exist>Drive '{0}' was stored in one unrecognized workspace. Please reconfigure this drive.</workspace-not-exist>
+      <no-view-found>Nėra jokio rodymo pagal jūsų prieigos teises diske '{0}'.</no-view-found>
+      <access-denied>Prieiga uždrausta. Jūs galite neturėti teisių darbo srities diske '{0}'.</access-denied>
+      <workspace-not-exist>Programa"{0}" buvo išsaugota vienoje neatpažintoje darbo srityje. Prašome sukonfigūruoti šį diską.</workspace-not-exist>
     </msg>
   </UIDrivesBrowser>
 
@@ -126,13 +126,13 @@
   #############################################################################
   -->
   <UITreeExplorer>
-    <title>Explorer</title>
+    <title>Naršyklė</title>
     <label>
-      <Root>Root</Root>
-      <webDavView>Download and allow edition</webDavView>
+      <Root>Šaknis</Root>
+      <webDavView>Atidaryti su MS Office</webDavView>
     </label>
     <msg>
-      <path-not-found>This element was deleted or changed. Please click the Refresh button.</path-not-found>
+      <path-not-found>Šis elementas buvo ištrintas arba pakeistas. Spustelėkite mygtuką atnaujinti.</path-not-found>
     </msg>
   </UITreeExplorer>
   <!--
@@ -142,11 +142,11 @@
   -->
   <UIViewRelationList>
     <label>
-      <languages-list>Translations</languages-list>
-      <relation-list>Relations</relation-list>
-      <references-list>References</references-list>
-      <no-related-document>No Related Document</no-related-document>
-      <related-document>Related Documents</related-document>
+      <languages-list>Vertimai</languages-list>
+      <relation-list>Ryšiai</relation-list>
+      <references-list>Nuorodos</references-list>
+      <no-related-document>Nėra atitinkamo dokumento</no-related-document>
+      <related-document>Susiję dokumentai</related-document>
     </label>
   </UIViewRelationList>
   <!--
@@ -155,17 +155,17 @@
   #########################################################################################
   -->
   <UIPreferencesForm>
-    <title>Set up your browsing preferences</title>
+    <title>Nustatyti jūsų naršymo nuostatas</title>
     <label>
-      <enableStructure>Enable DMS Structure:</enableStructure>
-      <showSideBar>Show Sidebar:</showSideBar>
-      <showHiddenNode>Show Hidden Nodes:</showHiddenNode>
-      <showNonDocument>Show Non-document Nodes:</showNonDocument>
-      <showRefDocuments>Show Referenced Documents:</showRefDocuments>
-      <enableDragAndDrop>Enable Drag &amp; Drop:</enableDragAndDrop>
-      <sortBy>Sort by:</sortBy>
-      <order>Order by:</order>
-      <nodesPerPage>Nodes Per Page:</nodesPerPage>
+      <enableStructure>Įgalinti DMS struktūrą:</enableStructure>
+      <showSideBar>Rodyti šoninę juostą:</showSideBar>
+      <showHiddenNode>Rodyti paslėptus mazgus:</showHiddenNode>
+      <showNonDocument>Rodyti ne dokumentų mazgus:</showNonDocument>
+      <showRefDocuments>Rodyti nurodytus dokumentus:</showRefDocuments>
+      <enableDragAndDrop>Įgalinti „Vilkti ir Mesti”:</enableDragAndDrop>
+      <sortBy>Rūšiuoti pagal:</sortBy>
+      <order>Rūšiuoti pagal:</order>
+      <nodesPerPage>Mazgų skaičius puslapyje:</nodesPerPage>
     </label>
     <action>
       <Back>#{word.close}</Back>
@@ -178,7 +178,7 @@
   #########################################################################################
   -->
   <UIAllItemsPreferenceForm>
-    <title>Set Up Filter Preferences</title>
+    <title>Nustatyti filtro pirmenybes</title>
     <action>
       <Cancel>#{word.cancel}</Cancel>
       <Save>#{word.save}</Save>
@@ -190,10 +190,10 @@
   #########################################################################################
   -->
   <UIRenameForm>
-    <title>Rename</title>
+    <title>Pervadinti</title>
     <label>
-      <nameField>Name</nameField>
-      <titleField>Title</titleField>
+      <nameField>Pavadinimas</nameField>
+      <titleField>Pavadinimas</titleField>
     </label>
     <action>
       <Cancel>#{word.cancel}</Cancel>
@@ -201,63 +201,63 @@
       <Back>#{word.back}</Back>
     </action>
     <msg>
-      <rename-successfull>Node '{0}' was renamed to '{1}' successfully.</rename-successfull>
-      <rename-denied>Access denied. You cannot rename this node.</rename-denied>
-      <fileName-invalid>The new name contains some invalid characters.</fileName-invalid>
-      <newName-same-oldName>The new name already exists. Please check again.</newName-same-oldName>
-      <version-exception>This node (or the ancestor of this node) is not checked out.</version-exception>
-      <lock-exception>This node is locked. Please unlock it before renaming.</lock-exception>
-      <constraintViolation-exception>An error occurred while renaming node '{0}'. Please check again.</constraintViolation-exception>
-      <unknown-prefix>Prefix '{0}' has not been registered yet.</unknown-prefix>
-      <rename-error>An error occurred while renaming this node. Please check again.</rename-error>
+      <rename-successfull>Mazgas '{0}' buvo sėkmingai pervadintas į '{1}'.</rename-successfull>
+      <rename-denied>Prieiga uždrausta. Negalima pervadinti šiame mazge.</rename-denied>
+      <fileName-invalid>Naujame pavadinime yra neleistinų simbolių.</fileName-invalid>
+      <newName-same-oldName>Naujas pavadinimas jau egzistuoja. Prašome patikrinti dar kartą.</newName-same-oldName>
+      <version-exception>Šis mazgas (ar šio mazgo pradininkas) yra neišregistruotas.</version-exception>
+      <lock-exception>Šis mazgas yra užrakintas. Prašome atrakinti jį prieš pervadinant.</lock-exception>
+      <constraintViolation-exception>Pervadinant mazgą '{0}' įvyko klaida. Prašome patikrinti dar kartą.</constraintViolation-exception>
+      <unknown-prefix>Priešdėlis '{0}' dar nebuvo registruotas.</unknown-prefix>
+      <rename-error>Pervardijant šį mazgą įvyko klaida. Prašome patikrinti dar kartą.</rename-error>
     </msg>
   </UIRenameForm>
   <UIPopupWindow>
     <title>
-      <UIRenameForm>Rename</UIRenameForm>
-      <UIActionContainer>Edit Action</UIActionContainer>
-      <UIFolderForm>New Folder</UIFolderForm>
-      <UIUploadManager>Upload File</UIUploadManager>
-      <UIReferencesList>References List</UIReferencesList>
-      <UIExportNode>Export</UIExportNode>
-      <UINodeTypeInfo>Node Type Information</UINodeTypeInfo>
-      <UIVersionInfo>Version Info</UIVersionInfo>
-      <UIActivateVersion>Activate Version</UIActivateVersion>
-      <UIAuditingInfo>Auditing Information</UIAuditingInfo>
-      <UIActivateAuditing>Activate Auditing</UIActivateAuditing>
-      <UIPermissionManager>Permission Management</UIPermissionManager>
-      <UIPropertiesManager>Properties Management</UIPropertiesManager>
-      <UIECMSearch>Advanced Search</UIECMSearch>
-      <UISavedQuery>Saved Queries List</UISavedQuery>
-      <UIWatchDocumentForm>Watch Document</UIWatchDocumentForm>
-      <UIActionManager>Manage Actions</UIActionManager>
-      <UIDocumentForm>Edit Document</UIDocumentForm>
-      <UIDocumentFormController>Add New Document</UIDocumentFormController>
-      <EditFormController>Edit Document</EditFormController>
-      <UIRelationManager>Add Relation</UIRelationManager>
-      <UICategoryManager>Add Category</UICategoryManager>
-      <UIImportNode>Import</UIImportNode>
-      <UIViewMetadataManager>View Metadata</UIViewMetadataManager>
-      <UIVoteForm>Vote Document</UIVoteForm>
-      <UICommentForm>Comment</UICommentForm>
-      <UIPreferencesForm>Preferences</UIPreferencesForm>
-      <UIPublicationManager>Manage Publication</UIPublicationManager>
-      <UIConfirmMessage>Delete ?</UIConfirmMessage>
-      <UIDeleteFileConfirmMessage>Delete File ?</UIDeleteFileConfirmMessage>
-      <UIDeleteFolderConfirmMessage>Delete Folder ?</UIDeleteFolderConfirmMessage>
-      <UIDeleteItemsConfirmMessage>Delete Items ?</UIDeleteItemsConfirmMessage>
-      <UIRestoreConfirmMessage>Confirm Restore</UIRestoreConfirmMessage>
-      <UIActivePublication>Enroll to Publication Lifecycle</UIActivePublication>
-      <UITaggingForm>Tag Document</UITaggingForm>
-      <UIThumbnailForm>Add Thumbnail Image</UIThumbnailForm>
-      <UIAllItemsPreferenceForm>Preference Settings</UIAllItemsPreferenceForm>
-      <UISelectRestorePath>Select Restore Path</UISelectRestorePath>
-      <UISEOForm>Manage SEO</UISEOForm>
-      <UISEOToolbarForm>Manage SEO</UISEOToolbarForm>
+      <UIRenameForm>Pervadinti</UIRenameForm>
+      <UIActionContainer>Redagavimo veiksmas</UIActionContainer>
+      <UIFolderForm>Naujas aplankas</UIFolderForm>
+      <UIUploadManager>Įkelti failą</UIUploadManager>
+      <UIReferencesList>Nuorodų sąrašas</UIReferencesList>
+      <UIExportNode>Eksportuoti</UIExportNode>
+      <UINodeTypeInfo>Mazgo tipo informacija</UINodeTypeInfo>
+      <UIVersionInfo>Versijos informacija</UIVersionInfo>
+      <UIActivateVersion>Aktyvuoti versiją</UIActivateVersion>
+      <UIAuditingInfo>Audito informacija</UIAuditingInfo>
+      <UIActivateAuditing>Aktyvuoti auditą</UIActivateAuditing>
+      <UIPermissionManager>Teisių valdymas</UIPermissionManager>
+      <UIPropertiesManager>Ypatybių valdymas</UIPropertiesManager>
+      <UIECMSearch>Išplėstinė paieška</UIECMSearch>
+      <UISavedQuery>Išsaugotų užklausų sąrašas</UISavedQuery>
+      <UIWatchDocumentForm>Stebėti dokumentą</UIWatchDocumentForm>
+      <UIActionManager>Valdyti veiksmus</UIActionManager>
+      <UIDocumentForm>Redaguoti dokumentą</UIDocumentForm>
+      <UIDocumentFormController>Pridėti naują dokumentą</UIDocumentFormController>
+      <EditFormController>Redaguoti dokumentą</EditFormController>
+      <UIRelationManager>Pridėti ryšį</UIRelationManager>
+      <UICategoryManager>Pridėti kategoriją</UICategoryManager>
+      <UIImportNode>Importuoti</UIImportNode>
+      <UIViewMetadataManager>Peržiūrėti metaduomenis</UIViewMetadataManager>
+      <UIVoteForm>Dokumento balsavimas</UIVoteForm>
+      <UICommentForm>Komentuoti</UICommentForm>
+      <UIPreferencesForm>Nuostatos</UIPreferencesForm>
+      <UIPublicationManager>Valdyti paskelbimą</UIPublicationManager>
+      <UIConfirmMessage>Ištrinti ?</UIConfirmMessage>
+      <UIDeleteFileConfirmMessage>Ištrinti failą ?</UIDeleteFileConfirmMessage>
+      <UIDeleteFolderConfirmMessage>Ištrinti dokumentą ?</UIDeleteFolderConfirmMessage>
+      <UIDeleteItemsConfirmMessage>Ištrinti elementus ?</UIDeleteItemsConfirmMessage>
+      <UIRestoreConfirmMessage>Patvirtinti atkūrimą</UIRestoreConfirmMessage>
+      <UIActivePublication>Įregistruoti į paskelbimo gyvavimo ciklą</UIActivePublication>
+      <UITaggingForm>Žymėti dokumentą</UITaggingForm>
+      <UIThumbnailForm>Pridėti miniatiūrą</UIThumbnailForm>
+      <UIAllItemsPreferenceForm>Pradiniai nustatymai</UIAllItemsPreferenceForm>
+      <UISelectRestorePath>Pasirinkite atkūrimo kelią</UISelectRestorePath>
+      <UISEOForm>Valdyti SEO</UISEOForm>
+      <UISEOToolbarForm>Valdyti SEO</UISEOToolbarForm>
     </title>
     <header>
-      <workspace>Workspace</workspace>
-      <path>Path</path>
+      <workspace>Darbo sritis</workspace>
+      <path>Kelias</path>
     </header>
   </UIPopupWindow>
   <!--
@@ -266,11 +266,11 @@
   #########################################################################################
   -->
   <UIResourceForm>
-    <title>Edit File Content</title>
+    <title>Redaguoti failo turinį</title>
     <label>
-      <name>Name</name>
-      <textToModify>Text to modify</textToModify>
-      <fileToUpload>Upload new content for that document (must be the same mime-type)</fileToUpload>
+      <name>Pavadinimas</name>
+      <textToModify>Tekstas keitimui</textToModify>
+      <fileToUpload>Įkelti naują turinį šiam dokumentui (turi būti to paties MIME tipo)</fileToUpload>
     </label>
   </UIResourceForm>
   <!--
@@ -280,126 +280,126 @@
   -->
   <UIActionBar>
     <tooltip>
-      <AddFolder>New Folder</AddFolder>
-      <AddDocument>New Content</AddDocument>
-      <EditDocument>Edit</EditDocument>
-      <Upload>Upload</Upload>
-      <Paste>Paste</Paste>
-      <Search>Search</Search>
-      <WatchDocument>Watch/Unwatch</WatchDocument>
-      <TaggingDocument>Tag</TaggingDocument>
-      <Vote>Vote</Vote>
-      <Comment>Comment</Comment>
-      <ManageVersions>Versions</ManageVersions>
-      <ManageAuditing>Audit</ManageAuditing>
-      <ManagePublications>Publications</ManagePublications>
-      <ManageCategories>Categories</ManageCategories>
-      <ManageRelations>Relations</ManageRelations>
-      <ManageActions>Actions</ManageActions>
-      <ExportNode>Export</ExportNode>
-      <ImportNode>Import</ImportNode>
-      <OverloadThumbnail>Overload Thumbnail</OverloadThumbnail>
-      <ManageHidden>Show/Hide Content</ManageHidden>
-      <ViewReferences>References</ViewReferences>
-      <ViewNodeType>Types</ViewNodeType>
-      <ViewPermissions>Permissions</ViewPermissions>
-      <ViewProperties>Properties</ViewProperties>
-      <ViewMetadatas>Metadata</ViewMetadatas>
-      <ViewRelations>Show/Hide Relations</ViewRelations>
-      <ShowJCRStructure>Show/Hide Content Structure</ShowJCRStructure>
+      <AddFolder>Naujas aplankas</AddFolder>
+      <AddDocument>Naujas turinys</AddDocument>
+      <EditDocument>Redaguoti</EditDocument>
+      <Upload>Įkelti</Upload>
+      <Paste>Įklijuoti</Paste>
+      <Search>Ieškoti</Search>
+      <WatchDocument>Stebėti/Nestebėti</WatchDocument>
+      <TaggingDocument>Žymė</TaggingDocument>
+      <Vote>Balsavimas</Vote>
+      <Comment>Komentuoti</Comment>
+      <ManageVersions>Versijos</ManageVersions>
+      <ManageAuditing>Auditas</ManageAuditing>
+      <ManagePublications>Publikacijos</ManagePublications>
+      <ManageCategories>Kategorijos</ManageCategories>
+      <ManageRelations>Ryšiai</ManageRelations>
+      <ManageActions>Veiksmai</ManageActions>
+      <ExportNode>Eksportuoti</ExportNode>
+      <ImportNode>Importuoti</ImportNode>
+      <OverloadThumbnail>Perkrovos miniatūra</OverloadThumbnail>
+      <ManageHidden>Rodyti/slėpti turinį</ManageHidden>
+      <ViewReferences>Nuorodos</ViewReferences>
+      <ViewNodeType>Tipai</ViewNodeType>
+      <ViewPermissions>Teisės</ViewPermissions>
+      <ViewProperties>Ypatybės</ViewProperties>
+      <ViewMetadatas>Metaduomenys</ViewMetadatas>
+      <ViewRelations>Rodyti/slėpti ryšius</ViewRelations>
+      <ShowJCRStructure>Rodyti/slėpti turinio struktūrą</ShowJCRStructure>
     </tooltip>
     <msg>
-      <cannot-action-in-rootnode>You cannot perform this action in the root node.</cannot-action-in-rootnode>
-      <node-checkedin>You must check out first.</node-checkedin>
-      <cannot-enable-version-rootnode>Cannot enable versioning for the root node.</cannot-enable-version-rootnode>
-      <cannot-enable-publication-rootnode>Cannot enable publication for the root node.</cannot-enable-publication-rootnode>
+      <cannot-action-in-rootnode>Šio veiksmo negalima atlikti šaknėje skiltyje.</cannot-action-in-rootnode>
+      <node-checkedin>Jums pirmiau reikia išsiregistruoti.</node-checkedin>
+      <cannot-enable-version-rootnode>Negalite įgalinti versijavimo šakniniam mazgui.</cannot-enable-version-rootnode>
+      <cannot-enable-publication-rootnode>Negalite įgalinti šakninio mazgo paskelbimo.</cannot-enable-publication-rootnode>
       <manage-publication>
-        <not-supported-nodetype>The publication supports the document node only.</not-supported-nodetype>
-        <no-publication-lifecycle>No publication lifecycle is configured.</no-publication-lifecycle>
+        <not-supported-nodetype>Paskelbimas palaiko tik dokumento mazgą.</not-supported-nodetype>
+        <no-publication-lifecycle>Paskelbimo gyvavimo ciklo nesukonfigūruotas.</no-publication-lifecycle>
       </manage-publication>
-      <unsubcriber-lifecycle>The node was already unsubscribed.</unsubcriber-lifecycle>
-      <not-supported-nodetype>The unsubscriber lifecycle supports the document node only.</not-supported-nodetype>
-      <unsubcriber-lifecycle-finish>The node was unsubscribed successfully.</unsubcriber-lifecycle-finish>
-      <access-false>The node is not an article or checked in.</access-false>
-      <unsupported-action>This action is not supported.</unsupported-action>
-      <not-relationable>This node has not yet had any related links to another node.</not-relationable>
-      <node-pasted>Node '{0}' has been pasted at the location '{1}'. This operation has already been saved.</node-pasted>
-      <no-node-selected>No node copied.</no-node-selected>
-      <unable-edit>Node'{0}' with nodetype '{1}' is not supported to edit.</unable-edit>
-      <not-support>Cannot edit the selected node.</not-support>
-      <template-null>This node has no dialog available.</template-null>
-      <keyword-null>There are no keywords to search.</keyword-null>
-      <not-found>No results found.</not-found>
-      <keyword-not-allow>This keyword is not allowed.</keyword-not-allow>
-      <is-not-referenable>Node '{0}' cannot be referenceable.</is-not-referenable>
-      <access-denied>Access denied. You do not have edit permission in this node.</access-denied>
-      <access-add-denied>Access denied. You do not have add permission in this node.</access-add-denied>
-      <item-existed>This node already exists. It cannot have the same name as its sibling.</item-existed>
-      <removed-hidden-mixin>You removed the hidden mixin successfully.</removed-hidden-mixin>
-      <added-hidden-mixin>You added the hidden mixin successfully.</added-hidden-mixin>
-      <not-supported>This function is supported for the document type only.</not-supported>
-      <empty-file-type>You cannot add a document to this node.</empty-file-type>
-      <unsupported-watch>Only the document node can be watched.</unsupported-watch>
-      <watch-checkedin>You must check out the node before watching.</watch-checkedin>
-      <unsupported-tagging>Only the document node can be tagged.</unsupported-tagging>
-      <tagnode-checkedin>You must check out the node before tagging.</tagnode-checkedin>
+      <unsubcriber-lifecycle>Mazgas jau yra neprinumeruojamas.</unsubcriber-lifecycle>
+      <not-supported-nodetype>Abonento gyvavimo ciklas palaiko tik dokumento mazgą.</not-supported-nodetype>
+      <unsubcriber-lifecycle-finish>Mazgo buvo sėkmingai atsisakyta.</unsubcriber-lifecycle-finish>
+      <access-false>Mazgas nėra straipsnyje arba priregistruotas.</access-false>
+      <unsupported-action>Šis veiksmas yra nepalaikomas.</unsupported-action>
+      <not-relationable>Šis mazgas dar neturėjo jokios susijusios nuorodos į kitą mazgą.</not-relationable>
+      <node-pasted>Mazgas '{0}' buvo įterptas į vietą '{1}'. Ši operacija jau buvo išsaugota.</node-pasted>
+      <no-node-selected>Mazgas nenukopijuotas.</no-node-selected>
+      <unable-edit>Mazgas '{0}' su mazgo tipu "{1}" nepalaiko redagavimo.</unable-edit>
+      <not-support>Negalite redaguoti pažymėto mazgo.</not-support>
+      <template-null>Šis mazgas neturi dialogo lango.</template-null>
+      <keyword-null>Raktažodžių paieškai nėra.</keyword-null>
+      <not-found>Rezultatų nerasta.</not-found>
+      <keyword-not-allow>Šis raktinis žodis yra neleistinas.</keyword-not-allow>
+      <is-not-referenable>Mazgas '{0}' negali būti susietas.</is-not-referenable>
+      <access-denied>Prieiga uždrausta. Jūs neturite teisių redaguoti šiame mazge.</access-denied>
+      <access-add-denied>Prieiga uždrausta. Jūs neturite pridėjimo teisių šiame mazge.</access-add-denied>
+      <item-existed>Šis mazgas jau egzistuoja. Jis negali turėti to paties pavadinimo ar giminingo.</item-existed>
+      <removed-hidden-mixin>Jūs pašalinote paslėptą mixin sėkmingai.</removed-hidden-mixin>
+      <added-hidden-mixin>Pridėjote paslėptą mixin sėkmingai.</added-hidden-mixin>
+      <not-supported>Ši funkcija palaiko tik dokumento tipą.</not-supported>
+      <empty-file-type>Jūs negalite pridėti dokumento šiame mazge.</empty-file-type>
+      <unsupported-watch>Tik dokumento mazgas gali būti stebimas.</unsupported-watch>
+      <watch-checkedin>Mazgas turi būti išregistruotas prieš stebėjimą.</watch-checkedin>
+      <unsupported-tagging>Tik dokumento mazgas gali būti pažymėtas.</unsupported-tagging>
+      <tagnode-checkedin>Mazgas turi būti išregistruotas prieš žymėjimą.</tagnode-checkedin>
     </msg>
     <title>
-      <select-tab>Select Tab</select-tab>
-      <SimpleSearch>Quick Search</SimpleSearch>
-      <AdvanceSearch>Advanced Search</AdvanceSearch>
-      <SavedQueries>Saved Queries</SavedQueries>
-      <ShowAllOwnedByUser>Show All My Items</ShowAllOwnedByUser>
-      <ShowAllFavourite>Show All Favorite Items</ShowAllFavourite>
-      <ShowAllHidden>Show All Hidden Items</ShowAllHidden>
-      <ShowAllFromTrash>Show All Items From Trash</ShowAllFromTrash>
+      <select-tab>Pasirinkti skirtuką</select-tab>
+      <SimpleSearch>Greita paieška</SimpleSearch>
+      <AdvanceSearch>Išplėstinė paieška</AdvanceSearch>
+      <SavedQueries>Įšsaugotos užklausos</SavedQueries>
+      <ShowAllOwnedByUser>Rodyti visus mano elementus</ShowAllOwnedByUser>
+      <ShowAllFavourite>Rodyti visus mėgstamus elementus</ShowAllFavourite>
+      <ShowAllHidden>Rodyti visus paslėptus elementus</ShowAllHidden>
+      <ShowAllFromTrash>Rodyti visus elementus iš šiukšliadėžės</ShowAllFromTrash>
     </title>
   </UIActionBar>
   <UIPopupMenu>
     <msg>
-      <has-not-permission>Access denied. You do not have add permission in this node.</has-not-permission>
-      <has-not-edit-permission>Access denied. You do not have edit permission in this node. Please contact the administrator.</has-not-edit-permission>
-      <cannot-login-node>You cannot access and paste the node here.</cannot-login-node>
-      <cannot-paste-nodetype>You cannot paste the node here.</cannot-paste-nodetype>
-      <has-not-permission-unlok>You do not have permission to unlock this node.</has-not-permission-unlok>
-      <bound-exception>You do not have permission to rename this node. Please contact the administrator.</bound-exception>
-      <bound-move-exception>You cannot move the node to itself or in its sub-node.</bound-move-exception>
-      <does-not-support-auditing>You cannot activate auditing on this node.</does-not-support-auditing>
-      <can-not-rename-node>You do not have permission to rename this node. Please contact the administrator to get the correct right.</can-not-rename-node>
-      <can-not-cut-node>You do not have permission to cut this node. Please contact the administrator.</can-not-cut-node>
-      <can-not-remove-node>You do not have permission to remove this node. Please contact the administrator.</can-not-remove-node>
-      <can-not-lock-node>You do not have permission to lock node {0}. Please contact the administrator.</can-not-lock-node>
-      <can-not-unlock-node>You do not have permission to unlock this node. Please contact the administrator.</can-not-unlock-node>
-      <no-node>Please select at least one node before pasting.</no-node>
-      <can-not-paste-node>You do not have permission to move to this node. Please contact the administrator.</can-not-paste-node>
-      <can-not-move-node>You do not have permission to move this node. Please contact the administrator.</can-not-move-node>
-      <does-not-support-versioning>You do not have permission to move to this node. Please contact the administrator.</does-not-support-versioning>
-      <path-not-found>This element was deleted or changed. Please click the Refresh button.</path-not-found>
-      <paste-lock-exception>You cannot paste '{0}' to this node because the source or the destination node is locked or is related to the locked node.</paste-lock-exception>
-      <can-not-checkin-node>You cannot check in this node. Please check that you have the right permissions.</can-not-checkin-node>
-      <can-not-checkout-node>You cannot check out this node. Please check that you have the right permissions.</can-not-checkout-node>
-      <move-constraint-exception>An error occurred while moving the node.</move-constraint-exception>
-      <not-lock-owner>You cannot unlock this node because you are not the lock owner.</not-lock-owner>
-      <is-checked-in>Please check out this node before renaming.</is-checked-in>
-      <is-checked-in-lock>Please check out this node before locking.</is-checked-in-lock>
-      <cant-lock>You cannot lock this node.</cant-lock>
-      <node-locked>The item with the path {0} or upper level is locked.</node-locked>
-      <can-not-delete>Please close this node before deleting.</can-not-delete>
-      <can-not-delete-version>You cannot delete this node. It is versioning.</can-not-delete-version>
-      <not-support>You cannot delete the selected node. Please select another node.</not-support>
-      <current-node-not-allow-paste>You cannot paste the copied node type on the current node.</current-node-not-allow-paste>
-      <copied-node-in-versioning>You cannot paste the copied node. It is versioning.</copied-node-in-versioning>
-      <parent-node-locked>You do not have permission to unlock node '{0}'.</parent-node-locked>
-      <this-node-locked-by-parent>You cannot unlock this node. It is locked by the parent or ancestor node.</this-node-locked-by-parent>
-      <paste-node-same-name>You cannot paste a node with the same name as a node in the destination folder.</paste-node-same-name>
-      <has-not-add-permission>You do not have permission to add a new node.</has-not-add-permission>
-      <node-cutting>Node is being cut. You cannot paste it here.</node-cutting>
-      <access-denied>Access denied. You may not have permission in this node.</access-denied>
-      <remove-verion-exception>You cannot remove this node because it (or its ancestor) is checked in.</remove-verion-exception>
-      <remove-referentialIntegrityException>You cannot delete this node because it is currently the target of a Reference property.</remove-referentialIntegrityException>
-      <constraintviolation-exception>The mandatory item jcr:uuid was not found. The node may have been deleted or changed. Please click the Refresh button.</constraintviolation-exception>
-      <path-not-found-exception>This node was deleted or changed. Please click the Refresh button.</path-not-found-exception>
-      <not-exist-categories>The category does not exist.</not-exist-categories>
+      <has-not-permission>Prieiga uždrausta. Jūs neturite leidimo šioje skiltyje pridėti.</has-not-permission>
+      <has-not-edit-permission>Prieiga uždrausta. Jūs neturite leidimo šioje skiltyje redaguoti. Prašome kreiptis į administratorių.</has-not-edit-permission>
+      <cannot-login-node>Čia negalite prieiti ir įklijuoti skilties.</cannot-login-node>
+      <cannot-paste-nodetype>Čia negalite įklijuoti skilties.</cannot-paste-nodetype>
+      <has-not-permission-unlok>Jūs neturite teisės atrakinti šios skilties.</has-not-permission-unlok>
+      <bound-exception>Jūs neturite teisės pervadinti šios skilties. Prašome kreiptis į administratorių.</bound-exception>
+      <bound-move-exception>Jūs negalite perkelti skilties į ją pačią arba į jos subsklitį.</bound-move-exception>
+      <does-not-support-auditing>Jūs negalite aktyvuoti audito šiame mazge.</does-not-support-auditing>
+      <can-not-rename-node>Jūs neturite teisių pervadinti šio mazgo. Prašome kreiptis į administratorių dėl reikiamų teisių.</can-not-rename-node>
+      <can-not-cut-node>Jūs neturite teisės iškirpti šio mazgo. Prašome susisiekti su administratoriumi.</can-not-cut-node>
+      <can-not-remove-node>Jūs neturite teisės pašalinti šio mazgo. Prašome susisiekti su administratoriumi.</can-not-remove-node>
+      <can-not-lock-node>Jūs neturite teisės užrakinti mazgą {0}. Prašome susisiekti su administratoriumi.</can-not-lock-node>
+      <can-not-unlock-node>Jūs neturite teisės atrakinti šio mazgo. Prašome susisiekti su administratoriumi.</can-not-unlock-node>
+      <no-node>Prašome pasirinkti bent vieną mazgą prieš įklijavimą.</no-node>
+      <can-not-paste-node>Jūs neturite teisės perkelti šio mazgo. Prašome susisiekti su administratoriumi.</can-not-paste-node>
+      <can-not-move-node>Jūs neturite teisės perkelti šio mazgo. Prašome susisiekti su administratoriumi.</can-not-move-node>
+      <does-not-support-versioning>Jūs neturite teisės perkelti šio mazgo. Prašome susisiekti su administratoriumi.</does-not-support-versioning>
+      <path-not-found>Šis elementas buvo ištrintas arba pakeistas. Spustelėkite mygtuką atnaujinti.</path-not-found>
+      <paste-lock-exception>Jūs negalite įklijuoti '{0}' į šį mazgą, nes šaltinis arba paskirties mazgas yra užrakintas arba susijęs su užrakintu mazgu.</paste-lock-exception>
+      <can-not-checkin-node>Nebegalite įregistruoti šio mazgo. Patikrinkite ar turite teises.</can-not-checkin-node>
+      <can-not-checkout-node>Nebegalite įregistruoti šio mazgo. Patikrinkite ar turite teises.</can-not-checkout-node>
+      <move-constraint-exception>Įvyko klaida perkeliant mazgą.</move-constraint-exception>
+      <not-lock-owner>Jūs negalite atrakinti šio mazgo, nes nesate savininkas, kuris užrakino.</not-lock-owner>
+      <is-checked-in>Prašome patikrinti šį mazgą prieš pervadinimą.</is-checked-in>
+      <is-checked-in-lock>Prašome išregistruoti šį mazgą prieš užrakinimą.</is-checked-in-lock>
+      <cant-lock>Jums negalima užrakinti šio mazgo.</cant-lock>
+      <node-locked>Elementas {0} arba aukštesnis lygis yra užrakintas.</node-locked>
+      <can-not-delete>Uždarykite šį mazgą prieš ištrinant.</can-not-delete>
+      <can-not-delete-version>Šio mazgo ištrinti negalima. Tai versijavimas.</can-not-delete-version>
+      <not-support>Negalite naikinti pažymėto mazgo. Prašome pasirinkti kitą mazgą.</not-support>
+      <current-node-not-allow-paste>Negalite įklijuoti nukopijuoto mazgo tipo dabartiniame mazge.</current-node-not-allow-paste>
+      <copied-node-in-versioning>Negalite įklijuoti nukopijuoto mazgo. Tai versijavimas.</copied-node-in-versioning>
+      <parent-node-locked>Jūs neturite teisės atrakinti mazgo '{0}'.</parent-node-locked>
+      <this-node-locked-by-parent>Jūs negalite atrakinti šio mazgo. Jis yra užrakintas pradinio mazgo.</this-node-locked-by-parent>
+      <paste-node-same-name>Negalite įklijuoti mazgo tuo pačiu pavadinimu kaip mazgas paskirties aplanke.</paste-node-same-name>
+      <has-not-add-permission>Jūs neturite leidimo pridėti naujo mazgo.</has-not-add-permission>
+      <node-cutting>Mazgas yra iškirptas. Jūs negalite įklijuoti jo čia.</node-cutting>
+      <access-denied>Prieiga uždrausta. Galite neturėti teisės šiame mazge.</access-denied>
+      <remove-verion-exception>Jūs negalite pašalinti mazgo, nes jis (arba jo pradininkas) yra įregistruotas.</remove-verion-exception>
+      <remove-referentialIntegrityException>Šio mazgo negalima ištrinti, nes jis yra šiuo metu yra paskirtis į nuorodos ypatybę.</remove-referentialIntegrityException>
+      <constraintviolation-exception>Privalomas elementas jcr:uuid nerastas. Mazgas gali būti ištrintas arba pakeistas. Spustelėkite mygtuką atnaujinti.</constraintviolation-exception>
+      <path-not-found-exception>Šis mazgas buvo ištrintas arba pakeistas. Spustelėkite mygtuką atnaujinti.</path-not-found-exception>
+      <not-exist-categories>Kategorija neegzistuoja.</not-exist-categories>
     </msg>
   </UIPopupMenu>
   <!--
@@ -410,29 +410,29 @@
   <UIFolderForm>
     <action>
       <Cancel>#{word.cancel}</Cancel>
-      <Save>Create Folder</Save>
+      <Save>Sukurti aplanką</Save>
     </action>
     <label>
-      <titleTextBox>Folder Name:</titleTextBox>
-      <customTypeCheckBox>Use a custom type of folder</customTypeCheckBox>
+      <titleTextBox>Aplanko pavadinimas:</titleTextBox>
+      <customTypeCheckBox>Naudoti pasirinktinį aplanko tipą</customTypeCheckBox>
     </label>
-    <title>Add/Edit Folder</title>
+    <title>Pridėti/Redaguoti aplanką</title>
     <msg>
-      <addFolder-successful>The folder '{0}' was added successfully.</addFolder-successful>
-      <name-invalid>Please enter the folder name.</name-invalid>
-      <title-invalid>Please enter the folder title.</title-invalid>
-      <name-not-allowed>This name is not allowed.</name-not-allowed>
-      <fileName-error>The file name is invalid.</fileName-error>
-      <constraint-violation>The current node does not allow you to add the node type '{0}'.</constraint-violation>
-      <repository-exception>An unexpected error occurred. Please contact your administrator for more details.</repository-exception>
-      <repository-exception-permission>You do not have permission to add a new folder to this node.</repository-exception-permission>
-      <numberformat-exception>You cannot save this folder. The name provided must be in numerical format.</numberformat-exception>
+      <addFolder-successful>Aplankas '{0}' buvo pridėtas sėkmingai.</addFolder-successful>
+      <name-invalid>Prašome įrašyti aplanko pavadinimą.</name-invalid>
+      <title-invalid>Prašome įrašyti aplanko antraštę.</title-invalid>
+      <name-not-allowed>Šis pavadinimas neleidžiamas.</name-not-allowed>
+      <fileName-error>Failo pavadinimas yra klaidingas.</fileName-error>
+      <constraint-violation>Šis mazgas neleidžia jums pridėti mazgo tipo '{0}'.</constraint-violation>
+      <repository-exception>Įvyko netikėta klaida. Dėl išsamesnės informacijos kreipkitės į administratorių.</repository-exception>
+      <repository-exception-permission>Jūs neturite teisės pridėti naujo aplanko į šį mazgą.</repository-exception-permission>
+      <numberformat-exception>Jūs negalite išsaugoti šio dokumento. Pavadinimas turi būti skaitinio formato.</numberformat-exception>
       <!--DMS 2.4.x; ECM-3553-->
-      <not-allow-sameNameSibling>You cannot save the folder. This node does not accept two nodes with the same name.</not-allow-sameNameSibling>
-      <ntFolder-not-avaiable>You must select a custom type of folder</ntFolder-not-avaiable>
+      <not-allow-sameNameSibling>Negalima įrašyti į aplanką. Šio mazgas negali priimti dviejų mazgų tuo pačiu pavadinimu.</not-allow-sameNameSibling>
+      <ntFolder-not-avaiable>Pasirinkite pasirinktinį aplanko tipą</ntFolder-not-avaiable>
     </msg>
     <help>
-      <customTypeCheckBoxHelp>Check if you intend to store web contents or custom document types in this folder</customTypeCheckBoxHelp>
+      <customTypeCheckBoxHelp>Patikrinkite jei ketinate saugoti interneto turinį arba pasirinkti dokumentų tipą šiame aplanke</customTypeCheckBoxHelp>
     </help>
   </UIFolderForm>
   <!--
@@ -442,118 +442,118 @@
   -->
   <UIWorkingArea>
     <title>
-      <Icon>Icon</Icon>
+      <Icon>Piktograma</Icon>
     </title>
     <msg>
       <!-- Delte one node is not in trash and have no relation -->
-      <confirm-delete>Are you sure you want to delete the item '{0}'?</confirm-delete>
-      <confirm-delete-file>Are you sure you want to delete the file '{0}'?</confirm-delete-file>
-      <confirm-delete-folder>Are you sure you want to delete the folder '{0}' and all subfolders?</confirm-delete-folder>
+      <confirm-delete>Ar tikrai norite ištrinti elementą '{0}'?</confirm-delete>
+      <confirm-delete-file>Ar tikrai norite ištrinti failą '{0}'?</confirm-delete-file>
+      <confirm-delete-folder>Ar tikrai norite ištrinti aplanką '{0}' ir visus poaplankius?</confirm-delete-folder>
       
       <!-- Delte one node is in trash and have no relation -->
-      <confirm-delete-permanently>Are you sure you want to permanently remove the item '{0}'?</confirm-delete-permanently>
-      <confirm-delete-file-permanently>Are you sure you want to permanently remove the file '{0}'?</confirm-delete-file-permanently>
-      <confirm-delete-folder-permanently>Are you sure you want to permanently remove the folder '{0}' and all subfolders?</confirm-delete-folder-permanently>
+      <confirm-delete-permanently>Ar tikrai norite visam laikui pašalinti elementą '{0}'?</confirm-delete-permanently>
+      <confirm-delete-file-permanently>Ar tikrai norite visam laikui panaikinti failą '{0}'?</confirm-delete-file-permanently>
+      <confirm-delete-folder-permanently>Ar tikrai norite visam laikui pašalinti aplanką '{0}' ir visus poaplankius?</confirm-delete-folder-permanently>
       
       <!-- Delte one node is not in trash and have relations -->
-      <confirm-delete-has-relations>Are you sure you want to delete the item '{0}' and its references?</confirm-delete-has-relations>
-      <confirm-delete-file-has-relations>Are you sure you want to delete the file '{0}' and its references?</confirm-delete-file-has-relations>
-      <confirm-delete-folder-has-relations>Are you sure you want to delete the folder '{0}' and its references?</confirm-delete-folder-has-relations>
+      <confirm-delete-has-relations>Ar tikrai norite pašalinti elementą '{0}' ir jo nuorodas?</confirm-delete-has-relations>
+      <confirm-delete-file-has-relations>Ar tikrai norite pašalinti failą '{0}' ir jo nuorodas?</confirm-delete-file-has-relations>
+      <confirm-delete-folder-has-relations>Ar tikrai norite ištrinti aplanką '{0}' ir jo nuorodas?</confirm-delete-folder-has-relations>
       
       <!-- Delte multiple nodes, not in Trash, have no relations -->
-      <confirm-delete-multi-nodes-generic>Are you sure you want to delete the {0} selected items?</confirm-delete-multi-nodes-generic>  
-      <confirm-delete-multi-nodes-file>Are you sure you want to delete the {0} selected files?</confirm-delete-multi-nodes-file>
-      <confirm-delete-multi-nodes-folder>Are you sure you want to delete the {0} selected folders and all subfolders?</confirm-delete-multi-nodes-folder>
-      <confirm-delete-multi-nodes-generic-and-file>Are you sure you want to delete the {0} selected items and files?</confirm-delete-multi-nodes-generic-and-file>
-      <confirm-delete-multi-nodes-generic-and-folder>Are you sure you want to delete the {0} selected items, folders and all subfolders?</confirm-delete-multi-nodes-generic-and-folder>
-      <confirm-delete-multi-nodes-file-and-folder>Are you sure you want to delete the {0} selected files, folders and all subfolders?</confirm-delete-multi-nodes-file-and-folder>
-      <confirm-delete-multi-nodes-generic-and-file-and-folder>Are you sure you want to delete the {0} selected items, files, folders and all subfolders?</confirm-delete-multi-nodes-generic-and-file-and-folder>
+      <confirm-delete-multi-nodes-generic>Ar tikrai norite ištrinti pasirinktus {0} elementus?</confirm-delete-multi-nodes-generic>  
+      <confirm-delete-multi-nodes-file>Ar tikrai norite ištrinti pasirinktus {0} failus?</confirm-delete-multi-nodes-file>
+      <confirm-delete-multi-nodes-folder>Ar tikrai norite ištrinti pasirinktus {0} aplankus ir visus poaplankius?</confirm-delete-multi-nodes-folder>
+      <confirm-delete-multi-nodes-generic-and-file>Ar tikrai norite ištrinti pasirinktus {0} elementus ir failus?</confirm-delete-multi-nodes-generic-and-file>
+      <confirm-delete-multi-nodes-generic-and-folder>Ar tikrai norite ištrinti pasirinktus {0} elementus, aplankus ir visus poaplankius?</confirm-delete-multi-nodes-generic-and-folder>
+      <confirm-delete-multi-nodes-file-and-folder>Ar tikrai norite ištrinti pasirinktus {0} failus, aplankus ir visus poaplankius?</confirm-delete-multi-nodes-file-and-folder>
+      <confirm-delete-multi-nodes-generic-and-file-and-folder>Ar tikrai norite ištrinti pasirinktus {0} elementus, failus, aplankus ir visus poaplankius?</confirm-delete-multi-nodes-generic-and-file-and-folder>
       
       <!-- Delte multiple nodes, in Trash -->
-      <confirm-delete-multi-nodes-generic-permanently>Are you sure you want to permanently remove the {0} selected items?</confirm-delete-multi-nodes-generic-permanently>  
-      <confirm-delete-multi-nodes-file-permanently>Are you sure you want to permanently remove the {0} selected files?</confirm-delete-multi-nodes-file-permanently>
-      <confirm-delete-multi-nodes-folder-permanently>Are you sure you want to permanently remove the {0} selected folders and all subfolders?</confirm-delete-multi-nodes-folder-permanently>
-      <confirm-delete-multi-nodes-generic-and-file-permanently>Are you sure you want to permanently remove the {0} selected items and files?</confirm-delete-multi-nodes-generic-and-file-permanently>
-      <confirm-delete-multi-nodes-generic-and-folder-permanently>Are you sure you want to permanently remove the {0} selected items, folders and all subfolders?</confirm-delete-multi-nodes-generic-and-folder-permanently>
-      <confirm-delete-multi-nodes-file-and-folder-permanently>Are you sure you want to permanently remove the {0} selected files, folders and all subfolders?</confirm-delete-multi-nodes-file-and-folder-permanently>
-      <confirm-delete-multi-nodes-generic-and-file-and-folder-permanently>Are you sure you want to permanently remove the {0} selected items, files, folders and all subfolders?</confirm-delete-multi-nodes-generic-and-file-and-folder-permanently>
+      <confirm-delete-multi-nodes-generic-permanently>Ar tikrai norite visam laikui pašalinti {0} pasirinktus elementus?</confirm-delete-multi-nodes-generic-permanently>  
+      <confirm-delete-multi-nodes-file-permanently>Ar tikrai norite visam laikui pašalinti {0} pasirinktus failus?</confirm-delete-multi-nodes-file-permanently>
+      <confirm-delete-multi-nodes-folder-permanently>Ar tikrai norite visam laikui pašalinti {0} pasirinktus aplankus ir visus poaplankius?</confirm-delete-multi-nodes-folder-permanently>
+      <confirm-delete-multi-nodes-generic-and-file-permanently>Ar tikrai norite visam laikui pašalinti pasirinktus {0} elementus ir failus?</confirm-delete-multi-nodes-generic-and-file-permanently>
+      <confirm-delete-multi-nodes-generic-and-folder-permanently>Ar jūs tikrai norite visam laikui pašalinti {0} pasirinktus elementus, aplankus ir visus poaplankius?</confirm-delete-multi-nodes-generic-and-folder-permanently>
+      <confirm-delete-multi-nodes-file-and-folder-permanently>Ar jūs tikrai norite visam laikui pašalinti {0} pasirinktus elementus, aplankus ir visus poaplankius?</confirm-delete-multi-nodes-file-and-folder-permanently>
+      <confirm-delete-multi-nodes-generic-and-file-and-folder-permanently>Ar jūs tikrai norite visam laikui pašalinti {0} pasirinktus elementus, aplankus ir visus poaplankius?</confirm-delete-multi-nodes-generic-and-file-and-folder-permanently>
       
       <!-- Delte multiple nodes, have relations -->
-      <confirm-delete-multi-nodes-generic-have-relations>Are you sure you want to delete the {0} selected items and their references?</confirm-delete-multi-nodes-generic-have-relations>  
-      <confirm-delete-multi-nodes-file-have-relations>Are you sure you want to delete the {0} selected files and their references?</confirm-delete-multi-nodes-file-have-relations>
-      <confirm-delete-multi-nodes-folder-have-relations>Are you sure you want to delete the {0} selected folders, all subfolders and their references?</confirm-delete-multi-nodes-folder-have-relations>
-      <confirm-delete-multi-nodes-generic-and-file-have-relations>Are you sure you want to delete the {0} selected items, files and their references?</confirm-delete-multi-nodes-generic-and-file-have-relations>
-      <confirm-delete-multi-nodes-generic-and-folder-have-relations>Are you sure you want to delete the {0} selected items, their references, folders and all subfolders?</confirm-delete-multi-nodes-generic-and-folder-have-relations>
-      <confirm-delete-multi-nodes-file-and-folder-have-relations>Are you sure you want to delete the {0} selected files, their references, folders and all subfolders?</confirm-delete-multi-nodes-file-and-folder-have-relations>
-      <confirm-delete-multi-nodes-generic-and-file-and-folder-have-relations>Are you sure you want to delete the {0} selected items, files, their references, folders and all subfolders?</confirm-delete-multi-nodes-generic-and-file-and-folder-have-relations>
+      <confirm-delete-multi-nodes-generic-have-relations>Ar tikrai norite pašalinti {0} pasirinktus elementus ir jų nuorodas?</confirm-delete-multi-nodes-generic-have-relations>  
+      <confirm-delete-multi-nodes-file-have-relations>Ar tikrai norite pašalinti {0} pasirinktus failus ir jų nuorodas?</confirm-delete-multi-nodes-file-have-relations>
+      <confirm-delete-multi-nodes-folder-have-relations>Ar jūs tikrai norite ištrinti {0} pasirinktus aplankus, visus poaplankius ir jų nuorodas?</confirm-delete-multi-nodes-folder-have-relations>
+      <confirm-delete-multi-nodes-generic-and-file-have-relations>Ar jūs tikrai norite ištrinti {0} pasirinktus elementus, failus ir visas jų nuorodas?</confirm-delete-multi-nodes-generic-and-file-have-relations>
+      <confirm-delete-multi-nodes-generic-and-folder-have-relations>Ar jūs tikrai norite ištrinti {0} pasirinktus elementus, jų nuorodas, aplankus ir visus poaplankius?</confirm-delete-multi-nodes-generic-and-folder-have-relations>
+      <confirm-delete-multi-nodes-file-and-folder-have-relations>Ar jūs tikrai norite ištrinti {0} pasirinktus failus, jų nuorodas, aplankus ir visus poaplankius?</confirm-delete-multi-nodes-file-and-folder-have-relations>
+      <confirm-delete-multi-nodes-generic-and-file-and-folder-have-relations>Ar jūs tikrai norite ištrinti {0} pasirinktus elementus, failus, jų nuorodas, aplankus ir visus poaplankius?</confirm-delete-multi-nodes-generic-and-file-and-folder-have-relations>
       
-      <feedback-delete>'{0}' was deleted succesfully.</feedback-delete>
-      <feedback-delete-multi>{0} items were deleted succesfully.</feedback-delete-multi>      
-      <feedback-delete-permanently>'{0}' was removed permanently.</feedback-delete-permanently>
-      <feedback-delete-permanently-multi>{0} items were removed permanently.</feedback-delete-permanently-multi>
-      <undo-delete>Undo</undo-delete>
-      <feedback-restore>'{0}' was successfully restored.</feedback-restore>
-      <feedback-restore-multi>{0} items were succesfully restored.</feedback-restore-multi>
+      <feedback-delete>'{0}' sėkmingai ištrinta.</feedback-delete>
+      <feedback-delete-multi>{0} elementai ištrinti sėkmingai.</feedback-delete-multi>      
+      <feedback-delete-permanently>'{0}' pašalinta visam laikui.</feedback-delete-permanently>
+      <feedback-delete-permanently-multi>{0} elementai pašalinti visam laikui.</feedback-delete-permanently-multi>
+      <undo-delete>Anuliuoti</undo-delete>
+      <feedback-restore>'{0}' sėkmingai atkurta.</feedback-restore>
+      <feedback-restore-multi>{0} elementai sėkmingai atkurti.</feedback-restore-multi>
       
-      <confirm-restore>A node with the same name already exists in the old location of node'{0}'. Are you sure you want to restore this node?</confirm-restore>
-      <confirm-move>Are you sure you want to move?</confirm-move>
-      <node-cut>Node '{0}' has been cut.</node-cut>
-      <execute-successfully>The custom action '{0}' has been executed.</execute-successfully>
-      <save-node-success>Node '{0}' has been saved.</save-node-success>
-      <move-problem>You cannot move node '{0}' to '{1}' because there was a problem with permission or constraint conditions.</move-problem>
+      <confirm-restore>Mazgas tuo pačiu pavadinimu jau egzistuoja mazgo'{0}' senoje vietoje. Ar jūs norite atkurti šį mazgą?</confirm-restore>
+      <confirm-move>Ar jūs tikrai norite perkelti?</confirm-move>
+      <node-cut>Mazgas '{0}' iškirptas.</node-cut>
+      <execute-successfully>Pasirinktinis veiksmas '{0}' įvykdytas.</execute-successfully>
+      <save-node-success>Mazgas '{0}' išsaugotas.</save-node-success>
+      <move-problem>Jūs negalite perkelti mazgo '{0}' į '{1}', nes yra problemų su teisėmis arba apribojimo sąlygomis.</move-problem>
     </msg>
   </UIWorkingArea>
   <UIDocumentWorkspace>
     <label>
-      <no-children>This node does not have any child nodes.</no-children>
-      <no-children-but-has-hidden>This node does not have any child nodes, but there are some hidden files.</no-children-but-has-hidden>
+      <no-children>Šis mazgas neturi jokių antrinių mazgų.</no-children>
+      <no-children-but-has-hidden>Šis mazgas neturi jokių antrinių mazgų, bet yra keletas paslėptų failų.</no-children-but-has-hidden>
     </label>
     <msg>
-      <unable-save-node>Node '{0}' has been newly created. Please save session before performing this action.</unable-save-node>
-      <save-node-success>Node '{0}' has been saved.</save-node-success>
-      <node-copied>Node '{0}' has been copied.</node-copied>
-      <node-cut>Node '{0}' has been cut.</node-cut>
-      <remove-root>You cannot remove the root node.</remove-root>
-      <node-remove-success>Node '{0}' has been removed.</node-remove-success>
+      <unable-save-node>Mazgas '{0}' sukurtas iš naujo. Prašome išsaugoti sesiją prieš atliekant šį veiksmą.</unable-save-node>
+      <save-node-success>Mazgas '{0}' išsaugotas.</save-node-success>
+      <node-copied>Mazgas '{0}' nukopijuotas.</node-copied>
+      <node-cut>Mazgas '{0}' iškirptas.</node-cut>
+      <remove-root>Jūs negalite pašalinti šakninio mazgo.</remove-root>
+      <node-remove-success>Mazgas '{0}' pašalintas.</node-remove-success>
     </msg>
     <tooltip>
-      <Rename>Rename</Rename>
-      <Cut>Cut</Cut>
-      <Copy>Copy</Copy>
+      <Rename>Pervadinti</Rename>
+      <Cut>Iškirpti</Cut>
+      <Copy>Kopijuoti</Copy>
       <Save>#{word.save}</Save>
-      <RemoveNode>Delete</RemoveNode>
-      <Checkin>Checkin</Checkin>
-      <Checkout>Checkout</Checkout>
-      <Lock>Lock</Lock>
-      <Unlock>Unlock</Unlock>
-      <EditDocument>Edit</EditDocument>
-      <Paste>Paste</Paste>
-      <LockedBy>Locked by</LockedBy>
+      <RemoveNode>Ištrinti</RemoveNode>
+      <Checkin>Užsiregistruoti</Checkin>
+      <Checkout>Išsiregistruoti</Checkout>
+      <Lock>Užrakinti</Lock>
+      <Unlock>Atrakinti</Unlock>
+      <EditDocument>Redaguoti</EditDocument>
+      <Paste>Įklijuoti</Paste>
+      <LockedBy>Užrakino</LockedBy>
     </tooltip>
   </UIDocumentWorkspace>
   <UIDocumentInfo>
     <msg>
-      <access-denied>Access denied. You cannot access node '{0}'.</access-denied>
-      <null-exception>Item not found. It was either removed or changed, or you do not have permission to access this node.</null-exception>
-      <confirm-deleteattachment>Are you sure you want to remove this attachment file?</confirm-deleteattachment>
-      <confirm-deleteattcomment>Are you sure you want to remove this comment?</confirm-deleteattcomment>
-      <access-denied-exception>Access denied. You may not have reading privileges, or the node may have been removed or changed.</access-denied-exception>
-      <path-not-found>This element was deleted or changed. Please click the Refresh button.</path-not-found>
+      <access-denied>Prieiga uždrausta. Jūs negalite prieiti prie mazgo '{0}'.</access-denied>
+      <null-exception>Elementas nerastas. Jis buvo pašalintas arba pakeistas, arba jūs neturite teisės pasiekti šio mazgo.</null-exception>
+      <confirm-deleteattachment>Ar jūs tikrai norite pašalinti šį pridėtinį failą?</confirm-deleteattachment>
+      <confirm-deleteattcomment>Ar jūs tikrai norite pašalinti šį komentarą?</confirm-deleteattcomment>
+      <access-denied-exception>Prieiga uždrausta. Jūs negalite turėti skaitymo teisių, arba mazgas gali būti pašalintas arba pakeistas.</access-denied-exception>
+      <path-not-found>Šis elementas buvo ištrintas arba pakeistas. Spustelėkite mygtuką atnaujinti.</path-not-found>
     </msg>
     <tooltip>
-      <remove-attachment>Remove this attachment file</remove-attachment>
-      <remove-comment>Remove this comment</remove-comment>
+      <remove-attachment>Pašalinti šį pridėtinį failą</remove-attachment>
+      <remove-comment>Pašalinti šį komentarą</remove-comment>
     </tooltip>
   </UIDocumentInfo>
   <ListView>
     <view>
       <label>
-        <name>Name</name>
-        <versionable>Versionable</versionable>
-        <exo_owner>Owner</exo_owner>
-        <auditing>Auditing</auditing>
-        <exo_dateCreated>Date Created</exo_dateCreated>
-        <exo_dateModified>Date Modifed</exo_dateModified>
+        <name>Vardas</name>
+        <versionable>Versijuojamas</versionable>
+        <exo_owner>Savininkas</exo_owner>
+        <auditing>Auditas</auditing>
+        <exo_dateCreated>Sukūrimo data</exo_dateCreated>
+        <exo_dateModified>Redagavimo data</exo_dateModified>
       </label>
     </view>
   </ListView>
@@ -564,34 +564,34 @@
   -->
   <ECMContextMenu>
     <event>
-      <Lock>Lock</Lock>
-      <Unlock>UnLock</Unlock>
-      <EditDocument>Edit</EditDocument>
-      <Copy>Copy</Copy>
-      <Rename>Rename</Rename>
-      <Delete>Delete</Delete>
+      <Lock>Užrakinti</Lock>
+      <Unlock>Atrakinti</Unlock>
+      <EditDocument>Redaguoti</EditDocument>
+      <Copy>Kopijuoti</Copy>
+      <Rename>Pervadinti</Rename>
+      <Delete>Ištrinti</Delete>
       <Save>#{word.save}</Save>
-      <Cut>Cut</Cut>
-      <Paste>Paste</Paste>
-      <CheckOut>CheckOut</CheckOut>
-      <CheckIn>CheckIn</CheckIn>
-      <WebDAV>View WebDAV</WebDAV>
-      <autoversion>Auto Versioning</autoversion>
-      <Custom>Custom</Custom>
-      <AddFolder>New Folder</AddFolder>
-      <AddDocument>New Content</AddDocument>
-      <Upload>Upload Files</Upload>
-      <MoveNode>Move</MoveNode>
-      <UnLock>Unlock</UnLock>
-      <ViewProperties>View Properties</ViewProperties>
-      <GetURL>Copy URL To Clipboard</GetURL>
-      <AddThumbnail>Add/Remove Thumbnail</AddThumbnail>
-      <AddToFavourite>Add To Favorite</AddToFavourite>
-      <RemoveFromFavourite>Remove From Favorite</RemoveFromFavourite>
-      <MoveToTrash>Move to Trash</MoveToTrash>
-      <RestoreFromTrash>Restore from Trash</RestoreFromTrash>
-      <EmptyTrash>Empty Trash</EmptyTrash>
-      <WebDavView>Download and Allow Editing</WebDavView>
+      <Cut>Iškirpti</Cut>
+      <Paste>Įklijuoti</Paste>
+      <CheckOut>Išregistruoti</CheckOut>
+      <CheckIn>Užregistruoti</CheckIn>
+      <WebDAV>Rodyti WebDAV</WebDAV>
+      <autoversion>Automatinis versijavimas</autoversion>
+      <Custom>Pasirinktinis</Custom>
+      <AddFolder>Naujas aplankas</AddFolder>
+      <AddDocument>Naujas turinys</AddDocument>
+      <Upload>Įkelti failus</Upload>
+      <MoveNode>Perkelti</MoveNode>
+      <UnLock>Atrakinti</UnLock>
+      <ViewProperties>Rodyti ypatybes</ViewProperties>
+      <GetURL>Kopijuoti URL į iškarpinę</GetURL>
+      <AddThumbnail>Pridėti/Pašalinti miniatiūrą</AddThumbnail>
+      <AddToFavourite>Pridėti prie mėgiamų</AddToFavourite>
+      <RemoveFromFavourite>Pašalinti iš mėgstamų</RemoveFromFavourite>
+      <MoveToTrash>Perkelti į šiukšliadėžę</MoveToTrash>
+      <RestoreFromTrash>Atkurti iš šiukšliadėžės</RestoreFromTrash>
+      <EmptyTrash>Išvalyti šiukšliadėžę</EmptyTrash>
+      <WebDavView>Atidaryti su MS Office</WebDavView>
     </event>
   </ECMContextMenu>
  
@@ -602,11 +602,11 @@
   -->
   <UIReferencesList>
     <msg>
-      <no-references>References not found</no-references>
+      <no-references>Nuorodos nerastos</no-references>
     </msg>
     <header>
-      <workspace>Workspace</workspace>
-      <path>Path</path>
+      <workspace>Darbo sritis</workspace>
+      <path>Kelias</path>
     </header>
     <action>
       <Close>#{word.close}</Close>
@@ -620,58 +620,58 @@
   <UITabPane>
     <title>
       <UIPublishingPanel>Publication Pane</UIPublishingPanel>
-      <UIPublicationPanel>Revision</UIPublicationPanel>
-      <UIPublicationSchedule>Scheduled</UIPublicationSchedule>
-      <UIPublicationPagesContainer>Pages</UIPublicationPagesContainer>
-      <UIPublicationHistory>History</UIPublicationHistory>
-      <UIVersionViewer>Version Viewer</UIVersionViewer>
+      <UIPublicationPanel>Revizija</UIPublicationPanel>
+      <UIPublicationSchedule>Suplanuota</UIPublicationSchedule>
+      <UIPublicationPagesContainer>Puslapiai</UIPublicationPagesContainer>
+      <UIPublicationHistory>Istorija</UIPublicationHistory>
+      <UIVersionViewer>Versijų rodymas</UIVersionViewer>
 
-      <UIPropertyTab>Properties</UIPropertyTab>
-      <UIMetadataTab>Metadata</UIMetadataTab>
-      <UIPropertyForm>Add New Property</UIPropertyForm>
-      <UIUploadContent>Information of uploaded file</UIUploadContent>
-      <UIJCRAdvancedSearch>New Query</UIJCRAdvancedSearch>
-      <UISavedQuery>Saved Query</UISavedQuery>
-      <AdvancedSearchResult>Search Results</AdvancedSearchResult>
-      <UISimpleSearch>Simple Search</UISimpleSearch>
-      <UISearchContainer>Advanced Search</UISearchContainer>
-      <UICategoryManagerSearch>Add Category to Search</UICategoryManagerSearch>
-      <UIConstraintsForm>Constraints Form</UIConstraintsForm>
-      <UIViewSearchResult>View Content</UIViewSearchResult>
-      <UIContentNameSearch>Search by Name</UIContentNameSearch>
-      <UINodeInfo>Version Info</UINodeInfo>
-      <UINodeProperty>Node Property</UINodeProperty>
-      <UIActionListContainer>Available Actions</UIActionListContainer>
-      <UIActionContainer>Add Action</UIActionContainer>
-      <UIActionViewContainer>Action Info</UIActionViewContainer>
-      <UIMultiLanguageForm>View Language</UIMultiLanguageForm>
-      <UIAddLanguageContainer>Add Language</UIAddLanguageContainer>
-      <UINonPublishedForm>State</UINonPublishedForm>
-      <UIPublishedForm>State</UIPublishedForm>
-      <UIPublicationLogList>History</UIPublicationLogList>
-      <UIDocumentWithTree>File View</UIDocumentWithTree>
-      <UIDocumentInfo>Document View</UIDocumentInfo>
-      <UICategoriesSelectPanel>Select Categories</UICategoriesSelectPanel>
-      <UISelectedCategoriesGrid>Referenced Categories</UISelectedCategoriesGrid>
+      <UIPropertyTab>Ypatybės</UIPropertyTab>
+      <UIMetadataTab>Metaduomenys</UIMetadataTab>
+      <UIPropertyForm>Pridėti naują ypatybę</UIPropertyForm>
+      <UIUploadContent>Įkelto failo informacija</UIUploadContent>
+      <UIJCRAdvancedSearch>Nauja užklausa</UIJCRAdvancedSearch>
+      <UISavedQuery>Išsaugota užklausa</UISavedQuery>
+      <AdvancedSearchResult>Paieškos rezultatai</AdvancedSearchResult>
+      <UISimpleSearch>Paprasta paieška</UISimpleSearch>
+      <UISearchContainer>Išplėstinė paieška</UISearchContainer>
+      <UICategoryManagerSearch>Pridėti kategoriją į paiešką</UICategoryManagerSearch>
+      <UIConstraintsForm>Apribojimų forma</UIConstraintsForm>
+      <UIViewSearchResult>Peržiūrėti turinį</UIViewSearchResult>
+      <UIContentNameSearch>Paieška pagal vardą</UIContentNameSearch>
+      <UINodeInfo>Versijos informacija</UINodeInfo>
+      <UINodeProperty>Mazgo ypatybė</UINodeProperty>
+      <UIActionListContainer>Galimi veiksmai</UIActionListContainer>
+      <UIActionContainer>Pridėti veiksmą</UIActionContainer>
+      <UIActionViewContainer>Veiksmo informacija</UIActionViewContainer>
+      <UIMultiLanguageForm>Rodyti kalbą</UIMultiLanguageForm>
+      <UIAddLanguageContainer>Pridėti kalbą</UIAddLanguageContainer>
+      <UINonPublishedForm>Būsena</UINonPublishedForm>
+      <UIPublishedForm>Būsena</UIPublishedForm>
+      <UIPublicationLogList>Istorija</UIPublicationLogList>
+      <UIDocumentWithTree>Failo rodymas</UIDocumentWithTree>
+      <UIDocumentInfo>Dokumento rodymas</UIDocumentInfo>
+      <UICategoriesSelectPanel>Pasirinkti kategorijas</UICategoriesSelectPanel>
+      <UISelectedCategoriesGrid>Nurodytos kategorijos</UISelectedCategoriesGrid>
       <UIWorkflowPublicationActionForm>Workflow Publication Action</UIWorkflowPublicationActionForm>
       <UIWorkflowPublicationViewForm>Workflow Publication View</UIWorkflowPublicationViewForm>
-      <metadatasitemetadata>Site Metadata</metadatasitemetadata>
-      <dcelementset>Dublin Core</dcelementset>
+      <metadatasitemetadata>Svetainės metaduomenys</metadatasitemetadata>
+      <dcelementset>Dublin branduolys</dcelementset>
     </title>
   </UITabPane>
   <UIPropertyTab>
     <title>
-      <edit>Edit this property</edit>
-      <delete>Remove this property</delete>
+      <edit>Redaguoti šią ypatybę</edit>
+      <delete>Pašalinti šią ypatybę</delete>
     </title>
     <confirm>
-      <remove-property>Are you sure you want to remove this property?</remove-property>
+      <remove-property>Ar tikrai norite pašalinti šią ypatybę?</remove-property>
     </confirm>
     <header>
-      <name>Name</name>
+      <name>Pavadinimas</name>
       <multiValue>Multi Value</multiValue>
-      <value>Value</value>
-      <action>Action</action>
+      <value>Reikšmė</value>
+      <action>Veiksmas</action>
     </header>
     <label>
       <binary>Binary Data</binary>
@@ -695,10 +695,10 @@
   <UIPropertyForm>
     <title>Add/Edit Property</title>
     <label>
-      <name>Name:</name>
-      <type>Type:</type>
+      <name>Pavadinimas:</name>
+      <type>Tipas:</type>
       <value>Value:</value>
-      <upload>Upload:</upload>
+      <upload>Įkelti:</upload>
       <namespace>Namespace:</namespace>
       <multiple>Multiple:</multiple>
       <property_select>Add New Property:</property_select>
@@ -706,7 +706,7 @@
     <action>
       <Save>#{word.save}</Save>
       <Cancel>#{word.cancel}</Cancel>
-      <Reset>Reset</Reset>
+      <Reset>Atstatyti</Reset>
     </action>
     <msg>
       <name-invalid>Please enter the property name.</name-invalid>
@@ -731,7 +731,7 @@
   <UIPermissionInfo>
     <action>
       <title>
-        <Edit>Edit</Edit>
+        <Edit>Redaguoti</Edit>
         <Delete>Remove Permission</Delete>
       </title>
     </action>
@@ -739,8 +739,8 @@
       <usersOrGroups>User or Group</usersOrGroups>
       <read>Read</read>
       <addNode>Modify</addNode>
-      <remove>Remove</remove>
-      <action>Action</action>
+      <remove>Pašalinti</remove>
+      <action>Veiksmas</action>
     </header>
     <msg>
       <confirm-delete-permission>Are you sure you want to remove this permission?</confirm-delete-permission>
@@ -763,15 +763,15 @@
   -->
   <SelectUserOrGroup>
     <title>
-      <UIGroupSelector>Select User</UIGroupSelector>
+      <UIGroupSelector>Pasirinkti vartotoją</UIGroupSelector>
       <UIPermissionSelector>Select Member</UIPermissionSelector>
-      <UIGroupMemberSelector>Select Membership</UIGroupMemberSelector>
+      <UIGroupMemberSelector>Pasirinkti narystę</UIGroupMemberSelector>
     </title>
   </SelectUserOrGroup>
   <UIGroupSelector>
     <label>
       <selectGroup>Browse and Select a Group</selectGroup>
-      <selectUser>Select User</selectUser>
+      <selectUser>Pasirinkti vartotoją</selectUser>
     </label>
     <msg>
       <not-change-owner>'{0}' is the owner of this node and has full control permission.</not-change-owner>
@@ -781,7 +781,7 @@
     <label>
       <UIPopupWindow>Select</UIPopupWindow>
       <permission>UIPermissionForm</permission>
-      <userOrGroup>User or Group</userOrGroup>
+      <userOrGroup>Vartotojas arba grupė</userOrGroup>
       <read>Read Right</read>
       <add_node>Modify Right</add_node>
       <remove>Remove Right</remove>
@@ -790,13 +790,13 @@
     <action>
       <Close>#{word.close}</Close>
       <Save>#{word.save}</Save>
-      <Reset>Reset</Reset>
+      <Reset>Atstatyti</Reset>
     </action>
     <msg>
       <checkbox-require>Please select at least one permission.</checkbox-require>
       <userOrGroup-required>Please select a user or group before saving this permission.</userOrGroup-required>
       <not-change-permission>You do not have the right to add a permission.</not-change-permission>
-      <access-denied>Access denied. You cannot remove this permission.</access-denied>
+      <access-denied>Prieiga uždrausta. Jūs negalite pašalinti šiios teisės.</access-denied>
     </msg>
   </UIPermissionForm>
 
@@ -808,14 +808,14 @@
   <UINodeTypeInfo>
     <label>
       <node-type>Node Type</node-type>
-      <name>Name</name>
+      <name>Pavadinimas</name>
       <item>Primary Item Name</item>
       <super-types>Parent Types</super-types>
       <mixin>Mixin Node Type</mixin>
       <orderable-children>Orderable Children</orderable-children>
       <property-def>Node Property Definition</property-def>
-      <prop-name>Name</prop-name>
-      <prop-type>Type</prop-type>
+      <prop-name>Pavadinimas</prop-name>
+      <prop-type>Tipas</prop-type>
       <prop-multiple>Mul</prop-multiple>
       <prop-mandatory>Man</prop-mandatory>
       <prop-protected>Pr</prop-protected>
@@ -823,9 +823,9 @@
       <prop-default-values><![CDATA[<span title="Default Values">DV</span>]]></prop-default-values>
       <prop-constraints><![CDATA[<span title="Constraints Values">CV</span>]]></prop-constraints>
       <node-def>Child Node Definition</node-def>
-      <node-def-name>Name</node-def-name>
+      <node-def-name>Pavadinimas</node-def-name>
       <node-def-opv>OPV</node-def-opv>
-      <node-def-ac>AC</node-def-ac>
+      <node-def-ac>Automatiškai sukurtas</node-def-ac>
       <node-def-man>MAN</node-def-man>
       <node-def-pr>PR</node-def-pr>
       <node-def-dnt>DNT</node-def-dnt>
@@ -855,17 +855,17 @@
       <location>Search in this location:</location>
     </label>
     <action>
-      <Search>Search</Search>
+      <Search>Paieška</Search>
       <Cancel>#{word.cancel}</Cancel>
     </action>
     <msg>
-      <keyword-not-allowed>This keyword is not allowed.</keyword-not-allowed>
+      <keyword-not-allowed>Šis raktinis žodis yra neleistinas.</keyword-not-allowed>
     </msg>
   </UIContentNameSearch>
   <UISimpleSearch>
     <action>
       <MoreConstraints>Show/Hide Constraint Form</MoreConstraints>
-      <Search>Search</Search>
+      <Search>Ieškoti</Search>
       <Save>#{word.save}</Save>
       <Cancel>#{word.cancel}</Cancel>
     </action>
@@ -878,8 +878,8 @@
     </label>
     <msg>
       <keyword-null>Please enter your keyword.</keyword-null>
-      <not-found>No results found.</not-found>
-      <keyword-not-allow>This keyword is not allowed.</keyword-not-allow>
+      <not-found>Rezultatų nerasta.</not-found>
+      <keyword-not-allow>Šis raktinis žodis yra neleistinas.</keyword-not-allow>
       <value-null>Please enter your keyword or constraints.</value-null>
       <value-save-null>Please enter a keyword or constraints before saving this query.</value-save-null>
       <inputSearch-invalid>There are invalid characters in the search input.</inputSearch-invalid>
@@ -894,17 +894,17 @@
   <UISearchResult>
     <msg>
       <not-support>There is no View template for this node.</not-support>
-      <empty>No results found.</empty>
+      <empty>Rezultatų nerasta.</empty>
       <access-denied>You cannot open this folder, either because it no longer exists or because you do not have the right to access it.</access-denied>
       <query-invalid>The query is invalid.</query-invalid>
     </msg>
     <header>
       <name>#{word.name}</name>
-      <path>Path</path>
-      <action>Action</action>
-      <shortcutPath>Path</shortcutPath>
-      <type>Type</type>
-      <dateCreated>Date Created</dateCreated>
+      <path>Kelias</path>
+      <action>Veiksmas</action>
+      <shortcutPath>Kelias</shortcutPath>
+      <type>Tipas</type>
+      <dateCreated>Sukūrimo data</dateCreated>
       <score>Score</score>
     </header>
     <title>
@@ -925,141 +925,141 @@
   <UIShowAllOwnedByUserResult>
     <msg>
       <not-support>There is no View template for this node</not-support>
-      <empty>No results found.</empty>
+      <empty>Rezultatų nerasta.</empty>
       <access-denied>You cannot view this node, either because this template is not supported or because access is denied.</access-denied>
       <query-invalid>The query is invalid</query-invalid>
     </msg>
     <header>
       <name>#{word.name}</name>
-      <path>Path</path>
-      <action>Action</action>
-      <shortcutPath>Path</shortcutPath>
-      <type>Type</type>
-      <dateCreated>Date Created</dateCreated>
-      <score>Score</score>
+      <path>Kelias</path>
+      <action>Veiksmas</action>
+      <shortcutPath>Kelias</shortcutPath>
+      <type>Tipas</type>
+      <dateCreated>Sukūrimo data</dateCreated>
+      <score>Rezultatas</score>
     </header>
     <title>
-      <typeASC>Sort by document type in ascending order</typeASC>
-      <typeDESC>Sort by document type in descending order</typeDESC>
-      <scoreASC>Sort by score in ascending order</scoreASC>
-      <scoreDESC>Sort by score in descending order</scoreDESC>
-      <nameASC>Sort by name in ascending order</nameASC>
-      <nameDESC>Sort by name in descending order</nameDESC>
+      <typeASC>Rūšiuoti pagal dokumento tipą didėjančia tvarka</typeASC>
+      <typeDESC>Rūšiuoti pagal dokumento tipą mažėjančia tvarka</typeDESC>
+      <scoreASC>Rūšiuoti pagal rezultatą didėjimo tvarka</scoreASC>
+      <scoreDESC>Rūšiuoti pagal rezultatą mažėjimo tvarka</scoreDESC>
+      <nameASC>Rūšiuoti pagal pavadinimą didėjančia tvarka</nameASC>
+      <nameDESC>Rūšiavimas pagal pavadinimą mažėjančia tvarka</nameDESC>
       <datecreatedASC>Sort by Created date in ascending order</datecreatedASC>
       <datecreatedDESC>Sort by Created date in descending order</datecreatedDESC>
     </title>
     <tooltip>
-      <View>View this node</View>
+      <View>Rodyti šį mazgą</View>
       <OpenFolder>Go to Folder</OpenFolder>
     </tooltip>
   </UIShowAllOwnedByUserResult>
   <UIShowAllFavouriteResult>
     <msg>
-      <not-support>There is no View template for this node</not-support>
+      <not-support>Nėra jokių rodymo šablonų šiam mazgui</not-support>
       <empty>No results found</empty>
-      <access-denied>You cannot view this node, either because this template is not supported or because access is denied.</access-denied>
-      <query-invalid>The query is invalid</query-invalid>
+      <access-denied>Negalite peržiūrėti šio mazgo, nes šis šablonas yra nepalaikomas arba prieiga uždrausta.</access-denied>
+      <query-invalid>Užklausa yra klaidinga</query-invalid>
     </msg>
     <header>
       <name>#{word.name}</name>
-      <path>Path</path>
-      <action>Action</action>
-      <shortcutPath>Path</shortcutPath>
-      <type>Type</type>
-      <dateCreated>Date Created</dateCreated>
-      <score>Score</score>
+      <path>Kelias</path>
+      <action>Veiksmas</action>
+      <shortcutPath>Kelias</shortcutPath>
+      <type>Tipas</type>
+      <dateCreated>Sukūrimo data</dateCreated>
+      <score>Rezultatas</score>
     </header>
     <title>
-      <typeASC>Sort by document type in ascending order</typeASC>
-      <typeDESC>Sort by document type in descending order</typeDESC>
-      <scoreASC>Sort by score in ascending order</scoreASC>
-      <scoreDESC>Sort by score in descending order</scoreDESC>
-      <nameASC>Sort by name in ascending order</nameASC>
-      <nameDESC>Sort by name in descending order</nameDESC>
-      <datecreatedASC>Sort by created date in ascending order</datecreatedASC>
-      <datecreatedDESC>Sort by created date in descending order</datecreatedDESC>
+      <typeASC>Rūšiuoti pagal dokumento tipą didėjančia tvarka</typeASC>
+      <typeDESC>Rūšiuoti pagal dokumento tipą mažėjančia tvarka</typeDESC>
+      <scoreASC>Rūšiuoti pagal rezultatą didėjimo tvarka</scoreASC>
+      <scoreDESC>Rūšiuoti pagal rezultatą mažėjimo tvarka</scoreDESC>
+      <nameASC>Rūšiuoti pagal pavadinimą didėjančia tvarka</nameASC>
+      <nameDESC>Rūšiuoti pagal pavadinimą mažėjančia tvarka</nameDESC>
+      <datecreatedASC>Rūšiuoti pagal sukūrimo datą didėjimo tvarka</datecreatedASC>
+      <datecreatedDESC>Rūšiuoti pagal sukūrimo datą mažėjančia tvarka</datecreatedDESC>
     </title>
     <tooltip>
       <View>View this Node</View>
-      <OpenFolder>Go to Folder</OpenFolder>
+      <OpenFolder>Eiti į aplanką</OpenFolder>
     </tooltip>
   </UIShowAllFavouriteResult>
   <UIShowAllHiddenResult>
     <msg>
-      <not-support>There is no View template for this node.</not-support>
-      <empty>No results found.</empty>
-      <access-denied>You cannot view this node, either because this template is not supported or because access is denied.</access-denied>
-      <query-invalid>The query is invalid.</query-invalid>
+      <not-support>Nėra jokių rodymo šablonų šiam mazgui.</not-support>
+      <empty>Rezultatų nerasta.</empty>
+      <access-denied>Negalite peržiūrėti šio mazgo, nes šis šablonas yra nepalaikomas arba prieiga uždrausta.</access-denied>
+      <query-invalid>Užklausa yra klaidinga.</query-invalid>
     </msg>
     <header>
       <name>#{word.name}</name>
-      <path>Path</path>
-      <action>Action</action>
-      <shortcutPath>Path</shortcutPath>
-      <type>Type</type>
-      <dateCreated>Date Created</dateCreated>
-      <score>Score</score>
+      <path>Kelias</path>
+      <action>Veiksmas</action>
+      <shortcutPath>Kelias</shortcutPath>
+      <type>Tipas</type>
+      <dateCreated>Sukūrimo data</dateCreated>
+      <score>Rezultatas</score>
       <AddRemoveFavourite>Add/Remove to Favorite</AddRemoveFavourite>
     </header>
     <title>
-      <typeASC>Sort by document type in ascending order</typeASC>
-      <typeDESC>Sort by document type in descending order</typeDESC>
-      <scoreASC>Sort by score in ascending order</scoreASC>
-      <scoreDESC>Sort by score in descending order</scoreDESC>
-      <nameASC>Sort by name in ascending order</nameASC>
-      <nameDESC>Sort by name in descending order</nameDESC>
-      <datecreatedASC>Sort by created date in ascending order</datecreatedASC>
-      <datecreatedDESC>Sort by created date in descending order</datecreatedDESC>
+      <typeASC>Rūšiuoti pagal dokumento tipą didėjančia tvarka</typeASC>
+      <typeDESC>Rūšiuoti pagal dokumento tipas mažėjančia tvarka</typeDESC>
+      <scoreASC>Rūšiuoti pagal rezultatą didėjimo tvarka</scoreASC>
+      <scoreDESC>Rūšiuoti pagal rezultatą mažėjimo tvarka</scoreDESC>
+      <nameASC>Rūšiuoti pagal pavadinimą didėjančia tvarka</nameASC>
+      <nameDESC>Rūšiavimas pagal pavadinimą mažėjančia tvarka</nameDESC>
+      <datecreatedASC>Rūšiuoti pagal sukūrimo datą didėjimo tvarka</datecreatedASC>
+      <datecreatedDESC>Rūšiuoti pagal sukūrimo datą mažėjančia tvarka</datecreatedDESC>
     </title>
     <tooltip>
-      <View>View this Node</View>
-      <OpenFolder>Go to Folder</OpenFolder>
+      <View>Rodyti šį mazgą</View>
+      <OpenFolder>Eiti į aplanką</OpenFolder>
       <RemoveHiddenAttribute>Remove Hidden Attribute</RemoveHiddenAttribute>
     </tooltip>
   </UIShowAllHiddenResult>
   <UIShowAllTrashResult>
     <msg>
-      <not-support>There is no View template for this node.</not-support>
-      <empty>No results found</empty>
-      <access-denied>You cannot view this node, either because this template is not supported or because access is denied.</access-denied>
-      <query-invalid>The query is invalid.</query-invalid>
+      <not-support>Nėra jokių rodymo šablonų šiam mazgui.</not-support>
+      <empty>Rezultatų nerasta</empty>
+      <access-denied>Negalite peržiūrėti šio mazgo, nes šis šablonas yra nepalaikomas arba prieiga uždrausta.</access-denied>
+      <query-invalid>Užklausa yra klaidinga.</query-invalid>
     </msg>
     <header>
       <name>#{word.name}</name>
-      <path>Path</path>
-      <action>Action</action>
-      <shortcutPath>Path</shortcutPath>
-      <type>Type</type>
-      <dateCreated>Date Created</dateCreated>
-      <score>Score</score>
+      <path>Kelias</path>
+      <action>Veiksmas</action>
+      <shortcutPath>Kelias</shortcutPath>
+      <type>Tipas</type>
+      <dateCreated>Sukūrimo data</dateCreated>
+      <score>Rezultatas</score>
     </header>
     <title>
-      <typeASC>Sort by document type in ascending order</typeASC>
-      <typeDESC>Sort by document type in descending order</typeDESC>
-      <scoreASC>Sort by score in ascending order</scoreASC>
-      <scoreDESC>Sort by score in descending order</scoreDESC>
-      <nameASC>Sort by name in ascending order</nameASC>
-      <nameDESC>Sort by name in descending order</nameDESC>
-      <datecreatedASC>Sort by created date in ascending order</datecreatedASC>
-      <datecreatedDESC>Sort by created date in descending order</datecreatedDESC>
+      <typeASC>Rūšiuoti pagal dokumento tipą didėjančia tvarka</typeASC>
+      <typeDESC>Rūšiuoti pagal dokumento tipą mažėjančia tvarka</typeDESC>
+      <scoreASC>Rūšiuoti pagal rezultatą didėjimo tvarka</scoreASC>
+      <scoreDESC>Rūšiuoti pagal rezultatą mažėjimo tvarka</scoreDESC>
+      <nameASC>Rūšiuoti pagal pavadinimą didėjančia tvarka</nameASC>
+      <nameDESC>Rūšiavimas pagal pavadinimą mažėjančia tvarka</nameDESC>
+      <datecreatedASC>Rūšiuoti pagal sukūrimo datą didėjimo tvarka</datecreatedASC>
+      <datecreatedDESC>Rūšiuoti pagal sukūrimo datą mažėjančia tvarka</datecreatedDESC>
     </title>
     <tooltip>
-      <View>View this Node</View>
-      <OpenFolder>Go to Folder</OpenFolder>
+      <View>Rodyti šį mazgą</View>
+      <OpenFolder>Eiti į aplanką</OpenFolder>
       <DeletePermanently>Delete permanently</DeletePermanently>
-      <RestoreFromTrash>Restore from Trash</RestoreFromTrash>
+      <RestoreFromTrash>Atkurti iš šiukšliadėžės</RestoreFromTrash>
     </tooltip>
   </UIShowAllTrashResult>
   <UIConstraintsForm>
     <label>
       <constraints>UIConstraintsForm</constraints>
-      <metadataProperty>Properties</metadataProperty>
+      <metadataProperty>Ypatybės</metadataProperty>
       <operator>Operator</operator>
       <contains>Contain Value</contains>
       <notcontains>Not Contain Value</notcontains>
     </label>
     <action>
-      <Add>Add</Add>
+      <Add>Pridėti</Add>
       <Cancel>#{word.cancel}</Cancel>
     </action>
     <msg>
@@ -1074,13 +1074,13 @@
       <toDate-invalid>Invalid type in the 'To' field. Please reselect or type correctly.</toDate-invalid>
     </msg>
     <button>
-      <label-Add>Add</label-Add>
+      <label-Add>Pridėti</label-Add>
       <label-Cancel>#{word.cancel}</label-Cancel>
     </button>
   </UIConstraintsForm>
   <ConstraintsForm>
     <action>
-      <Add>Add</Add>
+      <Add>Pridėti</Add>
       <Cancel>#{word.cancel}</Cancel>
     </action>
   </ConstraintsForm>
@@ -1088,42 +1088,42 @@
     <tooltip>
       <AddMetadataType>Add Property</AddMetadataType>
       <AddNodeType>Add Node Type</AddNodeType>
-      <AddCategory>Add Category</AddCategory>
+      <AddCategory>Pridėti kategoriją</AddCategory>
       <FindExactly>Find Exactly</FindExactly>
     </tooltip>
     <label>
       <colon>:</colon>
-      <operator>Operator</operator>
-      <exactlyPro-properties>Property</exactlyPro-properties>
-      <exactlyPro-ContainExactly>Contain Exactly</exactlyPro-ContainExactly>
-      <containPro-properties>Property</containPro-properties>
-      <containPro-Contain>Contain</containPro-Contain>
-      <notContainPro-properties>Property</notContainPro-properties>
-      <notContainPro-notContain>Not Contain</notContainPro-notContain>
-      <ConstraintOption-From>From</ConstraintOption-From>
-      <ConstraintOption-To>To</ConstraintOption-To>
-      <DocumentType-label>Document Type</DocumentType-label>
-      <Category-label>Category</Category-label>
-      <created>Created</created>
-      <modified>Modified</modified>
-      <and>And</and>
-      <or>Or</or>
+      <operator>Operatorius</operator>
+      <exactlyPro-properties>Ypatybė</exactlyPro-properties>
+      <exactlyPro-ContainExactly>Yra tiksliai</exactlyPro-ContainExactly>
+      <containPro-properties>Ypatybė</containPro-properties>
+      <containPro-Contain>Turi</containPro-Contain>
+      <notContainPro-properties>Ypatybė</notContainPro-properties>
+      <notContainPro-notContain>Neturi</notContainPro-notContain>
+      <ConstraintOption-From>Nuo</ConstraintOption-From>
+      <ConstraintOption-To>Iki</ConstraintOption-To>
+      <DocumentType-label>Dokumento tipas</DocumentType-label>
+      <Category-label>Kategorija</Category-label>
+      <created>Sukurta</created>
+      <modified>Modifikuotas</modified>
+      <and>Ir</and>
+      <or>Arba</or>
     </label>
   </UIConstraintForm>
   <NodeTypePopup>
     <title>
-      <UINodeTypeSelectForm>Select Node Type</UINodeTypeSelectForm>
+      <UINodeTypeSelectForm>Pasirinkite mazgo tipą</UINodeTypeSelectForm>
     </title>
   </NodeTypePopup>
   <CategoryPopup>
     <title>
-      <UICategoryManagerSearch>Add Category to Search</UICategoryManagerSearch>
-      <UIOneNodePathSelector>Select Category</UIOneNodePathSelector>
+      <UICategoryManagerSearch>Pridėti kategoriją į paiešką</UICategoryManagerSearch>
+      <UIOneNodePathSelector>Pasirinkti kategoriją</UIOneNodePathSelector>
     </title>
   </CategoryPopup>
   <SaveQueryPopup>
     <title>
-      <UISaveQueryForm>Query Form</UISaveQueryForm>
+      <UISaveQueryForm>Užklausos forma</UISaveQueryForm>
     </title>
   </SaveQueryPopup>
   <UINodeTypeSelectForm>
@@ -1134,46 +1134,46 @@
   </UINodeTypeSelectForm>
   <UICompareExactlyForm>
     <label>
-      <filter>Filter:</filter>
-      <result>Results:</result>
+      <filter>Filtras:</filter>
+      <result>Rezultatai:</result>
     </label>
     <title>
-      <result>Filter</result>
+      <result>Filtras</result>
     </title>
     <button>
-      <label-Select>Select</label-Select>
+      <label-Select>Pasirinkti</label-Select>
       <label-Cancel>#{word.cancel}</label-Cancel>
     </button>
     <msg>
-      <not-result-found>No results found.</not-result-found>
+      <not-result-found>Rezultatų nerasta.</not-result-found>
     </msg>
   </UICompareExactlyForm>
   <UIJCRAdvancedSearch>
     <label>
-      <name>Name:</name>
-      <selectBox>Select Query Style:</selectBox>
-      <query>Query:</query>
+      <name>Vardas:</name>
+      <selectBox>Pasirinkti užklausos stilių:</selectBox>
+      <query>Užklausa:</query>
     </label>
     <action>
       <Save>#{word.save}</Save>
       <Cancel>#{word.cancel}</Cancel>
-      <Search>Search</Search>
+      <Search>Ieškoti</Search>
     </action>
     <msg>
       <!--DMS 2.4.x ECM-3566-->
-      <name-invalid>The name is invalid.</name-invalid>
-      <query-added>The query was added successfully.</query-added>
-      <save_unSuccessful>Cannot save the query. The statement may be invalid or the query name may already exist.</save_unSuccessful>
-      <invalid-queryStatement>Invalid query statement.</invalid-queryStatement>
-      <value-save-null>Please enter your query statement.</value-save-null>
-      <query-name-null>Please enter your query name.</query-name-null>
+      <name-invalid>Pavadinimas yra neleistinas.</name-invalid>
+      <query-added>Užklausa buvo įtraukta sėkmingai.</query-added>
+      <save_unSuccessful>Negalite išsaugoti užklausos. Teiginys gali būti negaliojantis arba užklausos pavadinimas jau gali egzistuoti.</save_unSuccessful>
+      <invalid-queryStatement>Neleistinas užklausos teiginys.</invalid-queryStatement>
+      <value-save-null>Įveskite savo užklausos teiginį.</value-save-null>
+      <query-name-null>Prašome įvesti savo užklausos pavadinimą.</query-name-null>
     </msg>
   </UIJCRAdvancedSearch>
   <EditQueryForm>
     <label>
-      <name>Name</name>
-      <selectBox>Select Query Style</selectBox>
-      <query>Query</query>
+      <name>Vardas</name>
+      <selectBox>Pasirinkti užklausos stilių</selectBox>
+      <query>Užklausa</query>
     </label>
     <action>
       <Save>#{word.save}</Save>
@@ -1182,73 +1182,73 @@
   </EditQueryForm>
   <EditSavedQueryForm>
     <title>
-      <EditQueryForm>Edit Query Form</EditQueryForm>
+      <EditQueryForm>Redaguoti užklausos formą</EditQueryForm>
     </title>
   </EditSavedQueryForm>
   <UIMetadataSelectForm>
     <label>
-      <metadataType>Metadata type</metadataType>
+      <metadataType>Metaduomenų tipas</metadataType>
     </label>
     <action>
       <Cancel>#{word.cancel}</Cancel>
-      <Add>Add</Add>
+      <Add>Pridėti</Add>
     </action>
   </UIMetadataSelectForm>
   <property1MetadataPopup>
     <title>
-      <UISelectPropertyForm>Select Property</UISelectPropertyForm>
+      <UISelectPropertyForm>Pasirinkti ypatybę</UISelectPropertyForm>
     </title>
   </property1MetadataPopup>
   <property2MetadataPopup>
     <title>
-      <UISelectPropertyForm>Select Property</UISelectPropertyForm>
+      <UISelectPropertyForm>Pasirinkti ypatybę</UISelectPropertyForm>
     </title>
   </property2MetadataPopup>
   <property3MetadataPopup>
     <title>
-      <UISelectPropertyForm>Select Property</UISelectPropertyForm>
+      <UISelectPropertyForm>Pasirinkti ypatybę</UISelectPropertyForm>
     </title>
   </property3MetadataPopup>
   <UISelectPropertyForm>
     <label>
-      <metadataType>Metadata Type</metadataType>
+      <metadataType>Metaduomenų tipas</metadataType>
     </label>
-    <pLabel>Properties:</pLabel>
+    <pLabel>Ypatybės:</pLabel>
     <action>
-      <Add>Add</Add>
+      <Add>Pridėti</Add>
       <Cancel>#{word.cancel}</Cancel>
     </action>
   </UISelectPropertyForm>
   <ExactlyFormPopup>
     <title>
-      <UICompareExactlyForm>Filter Form</UICompareExactlyForm>
+      <UICompareExactlyForm>Filtro forma</UICompareExactlyForm>
     </title>
   </ExactlyFormPopup>
   <UIECMSearch>
     <header>
-      <name>Name</name>
-      <language>Language</language>
-      <query>Query</query>
-      <action>Actions</action>
-      <path>Path</path>
+      <name>Pavadinimas</name>
+      <language>Kalba</language>
+      <query>Užklausa</query>
+      <action>Veiksmai</action>
+      <path>Kelias</path>
     </header>
   </UIECMSearch>
   <UIResult>
     <msg>
-      <not-found>Data not found.</not-found>
+      <not-found>Duomenų nerasta.</not-found>
     </msg>
     <header>
-      <action>Action</action>
+      <action>Veiksmas</action>
     </header>
   </UIResult>
   <UISaveQueryForm>
     <msg>
-      <query-name-null>Please enter query name to save.</query-name-null>
-      <access-denied>Access denied. You do not have the add permission needed to save this query.</access-denied>
-      <save-failed>You cannot save the query, either because the statement is invalid or because the query name already exists.</save-failed>
+      <query-name-null>Prašome įrašyti užklausos pavadinimą, kad ją išsaugoti.</query-name-null>
+      <access-denied>Prieiga uždrausta. Jūs neturite pridėjimo teisės, kuri reikalinga šios užklausos išsaugojimui.</access-denied>
+      <save-failed>Jūs negalite išsaugoti šios užklausos, nes teiginys yra neteisingas arba užklausos pavadinimas jau egzistuoja.</save-failed>
     </msg>
     <label>
-      <queryName>Query name</queryName>
+      <queryName>Užklausos pavadinimas</queryName>
     </label>
     <action>
       <Save>#{word.save}</Save>
@@ -1257,30 +1257,30 @@
   </UISaveQueryForm>
   <UISavedQuery>
     <header>
-      <name>Name</name>
-      <type>Type</type>
-      <statement>Statement</statement>
-      <permission>Permissions</permission>
-      <action>Actions</action>
+      <name>Pavadinimas</name>
+      <type>Tipas</type>
+      <statement>Teiginys</statement>
+      <permission>Teisės</permission>
+      <action>Veiksmai</action>
     </header>
     <tooltip>
-      <Execute>Execute</Execute>
-      <Edit>Edit</Edit>
-      <Delete>Delete</Delete>
+      <Execute>Vykdyti</Execute>
+      <Edit>Redaguoti</Edit>
+      <Delete>Ištrinti</Delete>
     </tooltip>
     <label>
-      <no-children>No query is saved.</no-children>
+      <no-children>Užklausa neišsaugota.</no-children>
     </label>
     <msg>
-      <confirm-delete-query>Are you sure you want to delete this query?</confirm-delete-query>
-      <not-result-found>No results found.</not-result-found>
+      <confirm-delete-query>Ar tikrai norite ištrinti šią užklausą?</confirm-delete-query>
+      <not-result-found>Rezultatų nerasta.</not-result-found>
     </msg>
   </UISavedQuery>
   <UIQueryResultPageIterator>
     <label>
-      <results>Results</results>
-      <of-about>of about</of-about>
-      <of>of</of>
+      <results>Rezultatai</results>
+      <of-about>apie</of-about>
+      <of>iš</of>
     </label>
   </UIQueryResultPageIterator>
   <!--
@@ -1290,17 +1290,17 @@
   -->
   <UIExportNode>
     <label>
-      <format>Format</format>
-      <nodePath>Path to Export</nodePath>
+      <format>Formatas</format>
+      <nodePath>Kelias eksportavimui</nodePath>
       <zip>Zip</zip>
-      <systemView>System View</systemView>
-      <documentView>Document View</documentView>
+      <systemView>Sistemos rodymas</systemView>
+      <documentView>Dokumento rodymas</documentView>
     </label>
     <action>
       <Cancel>#{word.cancel}</Cancel>
-      <Export>Export</Export>
+      <Export>Eksportuoti</Export>
     </action>
-    <title>Export Node</title>
+    <title>Eksportuoti mazgą</title>
   </UIExportNode>
   <!--
   ###############################################################################
@@ -1309,13 +1309,13 @@
   -->
   <PopupUserSelector>
     <title>
-      <UIUserContainer>Select User Permission</UIUserContainer>
+      <UIUserContainer>Pasirinkti vartotojo teisę</UIUserContainer>
     </title>
   </PopupUserSelector>
   <UIPopupTaxonomy>
     <title>
-      <UICategoriesSelector>Add Categories</UICategoriesSelector>
-      <UIOneNodePathSelector>Add Categories</UIOneNodePathSelector>
+      <UICategoriesSelector>Pridėti kategorijas</UICategoriesSelector>
+      <UIOneNodePathSelector>Pridėti kategorijas</UIOneNodePathSelector>
     </title>
   </UIPopupTaxonomy>
   <!--
@@ -1325,23 +1325,23 @@
   -->
   <UIVersionInfo>
     <tooltip>
-      <addLabel>Add Label</addLabel>
-      <removeLable>Remove Label</removeLable>
-      <restoreVersion>Restore Version</restoreVersion>
-      <viewVersion>View Version Info</viewVersion>
-      <deleteVersion>Delete Version</deleteVersion>
-      <compareVersion>Compare with the  base version</compareVersion>
+      <addLabel>Pridėti etiketę</addLabel>
+      <removeLable>Pašalinti etiketę</removeLable>
+      <restoreVersion>Atkurti versiją</restoreVersion>
+      <viewVersion>Rodyti versijos informaciją</viewVersion>
+      <deleteVersion>Ištrinti versiją</deleteVersion>
+      <compareVersion>Palyginti su bazine versija</compareVersion>
     </tooltip>
     <msg>
-      <have-no-view-template>The view template is not supported.</have-no-view-template>
-      <cannot-remove-version>You cannot remove the base version.</cannot-remove-version>
-      <confirm-delete>Are you sure you want to remove this version?</confirm-delete>
-      <not-checked-out>You have to check out this node before restoring.</not-checked-out>
-      <invalid-item-state>You cannot restore this version, either because one or more items were deleted or moved during another session.</invalid-item-state>
+      <have-no-view-template>Rodymo šablonas yra nesuderinamas.</have-no-view-template>
+      <cannot-remove-version>Jūs negalite pašalinti bazinės versijos.</cannot-remove-version>
+      <confirm-delete>Ar tikrai norite pašalinti šią versiją?</confirm-delete>
+      <not-checked-out>Jūs turite išregistruoti šį mazgą prieš atkurdami.</not-checked-out>
+      <invalid-item-state>Negalite atkurti šios versijos, arba todėl, kad vienas ar keli elementai buvo ištrinti arba perkelti kitur kitos sesijos metu.</invalid-item-state>
     </msg>
     <action>
       <close>#{word.close}</close>
-      <close-view>Close View</close-view>
+      <close-view>Uždaryti rodinį</close-view>
     </action>
   </UIVersionInfo>
   <!--
@@ -1351,40 +1351,40 @@
   -->
   <UIAuditingInfo>
     <msg>
-      <noVersion>No Version</noVersion>
+      <noVersion>Nėra versijos</noVersion>
     </msg>
     <eventName>
-      <e_1>Node Added</e_1>
-      <e_2>Node Removed</e_2>
-      <e_4>Property Added</e_4>
-      <e_16>Property Changed</e_16>
-      <e_8>Property Removed</e_8>
+      <e_1>Mazgas pridėtas</e_1>
+      <e_2>Mazgas pašalintas</e_2>
+      <e_4>Ypatybė pridėta</e_4>
+      <e_16>Ypatybė pakeista</e_16>
+      <e_8>Ypatybė pašalinta</e_8>
       <e_32>#{word.save}</e_32>
-      <e_64>Move</e_64>
-      <e_128>Copy</e_128>
-      <e_256>Add Mixin</e_256>
-      <e_512>Remove Mixin</e_512>
-      <e_1024>Clone</e_1024>
-      <e_2048>Update</e_2048>
-      <e_4096>Import</e_4096>
-      <e_8192>Check in</e_8192>
-      <e_16384>Check out</e_16384>
-      <e_32768>Restore</e_32768>
-      <e_65536>Merge</e_65536>
-      <e_131072>Cancel Merge</e_131072>
-      <e_262144>Done Merge</e_262144>
-      <e_524288>Add Version Label</e_524288>
-      <e_1048576>Remove Version Label</e_1048576>
-      <e_2097152>Remove Version</e_2097152>
-      <e_4194304>Lock</e_4194304>
-      <e_8388608>Unlock</e_8388608>
-      <e_16777216>Read</e_16777216>
+      <e_64>Perkelti</e_64>
+      <e_128>Kopijuoti</e_128>
+      <e_256>Pridėti mixin</e_256>
+      <e_512>Šalinti mixin</e_512>
+      <e_1024>Klonuoti</e_1024>
+      <e_2048>Atnaujinti</e_2048>
+      <e_4096>Importuoti</e_4096>
+      <e_8192>Įsiregistruoti</e_8192>
+      <e_16384>Išsiregistruoti</e_16384>
+      <e_32768>Atkurti</e_32768>
+      <e_65536>Sujungti</e_65536>
+      <e_131072>Atšaukti sujungimą</e_131072>
+      <e_262144>Sujungimas baigtas</e_262144>
+      <e_524288>Pridėti versijos etiketę</e_524288>
+      <e_1048576>Pašalinti versijos etiketę</e_1048576>
+      <e_2097152>Pašalinti versiją</e_2097152>
+      <e_4194304>Užrakinti</e_4194304>
+      <e_8388608>Atrakinti</e_8388608>
+      <e_16777216>Skaityti</e_16777216>
     </eventName>
     <label>
-      <operation>Operation</operation>
-      <userName>Username</userName>
-      <date>Date</date>
-      <version>Version</version>
+      <operation>Operacija</operation>
+      <userName>Vartotojo vardas</userName>
+      <date>Data</date>
+      <version>Versija</version>
     </label>
   </UIAuditingInfo>
 
@@ -1395,13 +1395,13 @@
   -->
   <UIActivateVersion>
     <label>
-      <note>Versioning has not been activated for this node.</note>
-      <question>Are you sure you want to activate it?</question>
-      <button-active>Activate</button-active>
+      <note>Versijavimas nėra aktyvuotas šiam mazgui.</note>
+      <question>Ar tikrai norite aktyvuoti?</question>
+      <button-active>Aktyvuoti</button-active>
       <button-cancel>#{word.cancel}</button-cancel>
     </label>
     <msg>
-      <access-denied>You do not have permission to activate versioning on this node</access-denied>
+      <access-denied>Jūs neturite teisės aktyvuoti versijavimo šiame mazge</access-denied>
     </msg>
   </UIActivateVersion>
   <!--
@@ -1411,21 +1411,21 @@
   -->
   <UIActivePublication>
     <header>
-      <LifecycleName>Name</LifecycleName>
-      <LifecycleDesc>Description</LifecycleDesc>
-      <action>Action</action>
+      <LifecycleName>Vardas</LifecycleName>
+      <LifecycleDesc>Aprašymas</LifecycleDesc>
+      <action>Veiksmas</action>
     </header>
     <action>
       <Cancel>#{word.close}</Cancel>
     </action>
     <grid>
       <msg>
-        <empty>No publication plugins found.</empty>
+        <empty>Nerasti paskelbimo įskiepiai.</empty>
       </msg>
     </grid>
     <msg>
-      <node-type-invalid>Only the document node type can be enrolled.</node-type-invalid>
-      <already-enroled>This document has already been enrolled.</already-enroled>
+      <node-type-invalid>Tik dokumento mazgo tipas gali būti įtrauktas.</node-type-invalid>
+      <already-enroled>Šis dokumentas jau įtrauktas.</already-enroled>
     </msg>
   </UIActivePublication>
   <!--
@@ -1435,11 +1435,11 @@
   -->
   <UIActivateAuditing>
     <label>
-      <note>Auditing has not been activated for this node.</note>
-      <question>Are you sure you want to activate?</question>
+      <note>Auditas šiam mazgui neaktyvuotas.</note>
+      <question>Ar tikrai norite aktyvuoti?</question>
     </label>
     <action>
-      <activate>Activate</activate>
+      <activate>Aktyvuoti</activate>
       <cancel>#{word.cancel}</cancel>
     </action>
   </UIActivateAuditing>
@@ -1450,11 +1450,11 @@
   -->
   <UIDiff>
     <label>
-      <diffTitle>Compare between two versions</diffTitle>
-      <noChange>No change between two versions</noChange>
-      <baseVerion>Base Version</baseVerion>
-      <compareVerion>Version</compareVerion>
-      <can-not-compare>Failed to compare two versions</can-not-compare>
+      <diffTitle>Palyginti tarp dviejų versijų</diffTitle>
+      <noChange>Jokių pokyčių tarp dviejų versijų</noChange>
+      <baseVerion>Bazinė versija</baseVerion>
+      <compareVerion>Versija</compareVerion>
+      <can-not-compare>Nepavyko palyginti versijų</can-not-compare>
     </label>
   </UIDiff>
   <!--
@@ -1464,24 +1464,24 @@
   -->
   <UIImportNode>
     <label>
-      <format>Format</format>
-      <systemView>System View</systemView>
-      <documentView>Document View</documentView>
-      <upload>Upload File</upload>
+      <format>Formatas</format>
+      <systemView>Sistemos rodymas</systemView>
+      <documentView>Dokumento rodymas</documentView>
+      <upload>Įkelti failą</upload>
     </label>
     <action>
       <Cancel>#{word.cancel}</Cancel>
-      <Import>Import</Import>
+      <Import>Importuoti</Import>
     </action>
-    <title>Import Node</title>
+    <title>Importuoti mazgą</title>
     <msg>
-      <import-successful>Imported successfully.</import-successful>
-      <filename-invalid>Browse an .xml file for the 'Upload File' field to import.</filename-invalid>
-      <filetype-error>Cannot import the uploaded file. The .xml file may be invalid.</filetype-error>
-      <mimetype-invalid>You can only import .xml or .zip files.</mimetype-invalid>
-      <access-denied>Access denied. You are not allowed to import there.</access-denied>
-      <constraint-violation-exception>Impossible to import data. The type '{0}' is not allowed in this location.</constraint-violation-exception>
-      <item-exists-exception>An incoming referenceable node has the same UUID as an existing node in the workspace.</item-exists-exception>
+      <import-successful>Sėkmingai importuotas.</import-successful>
+      <filename-invalid>Pasirinkite .xml failą 'Įkelti failą' laukelyje, kad įkelti.</filename-invalid>
+      <filetype-error>Negalima importuoti įkelto failo. Failas .xml gali būti klaidingas.</filetype-error>
+      <mimetype-invalid>Galima įkelti tik .xml arba .zip failus.</mimetype-invalid>
+      <access-denied>Prieiga uždrausta. Jums neleidžiama įkelti čia.</access-denied>
+      <constraint-violation-exception>Neįmanoma importuoti duomenų. Tipas '{0}' yra neleidžiamas šioje vietoje.</constraint-violation-exception>
+      <item-exists-exception>Įeinamasis susietas mazgas turi tą patį UUID kaip ir esamas mazgas darbo srityje.</item-exists-exception>
     </msg>
   </UIImportNode>
   <!--
@@ -1491,16 +1491,16 @@
   -->
   <UILabelForm>
     <label>
-      <label>Label</label>
+      <label>Etiketė</label>
     </label>
     <action>
       <Save>#{word.save}</Save>
       <Cancel>#{word.cancel}</Cancel>
     </action>
-    <title>Add Label</title>
+    <title>Pridėti etiketę</title>
     <msg>
-      <label-invalid>The label contains some invalid characters.</label-invalid>
-      <label-exist>'{0}' already exists.</label-exist>
+      <label-invalid>Etiketėje yra neleistinų simbolių.</label-invalid>
+      <label-exist>'{0}' jau egzistuoja.</label-exist>
     </msg>
   </UILabelForm>
   <!--
@@ -1509,12 +1509,12 @@
   ###############################################################################
   -->
   <UIRemoveLabelForm>
-    <title>Remove Label</title>
+    <title>Pašalinti etiketę</title>
     <label>
-      <label>Select Label</label>
+      <label>Pasirinkti etiketę</label>
     </label>
     <action>
-      <Remove>Remove</Remove>
+      <Remove>Pašalinti</Remove>
       <Cancel>#{word.cancel}</Cancel>
     </action>
   </UIRemoveLabelForm>
@@ -1524,24 +1524,24 @@
   ###############################################################################
   -->
   <UIVersionTree>
-    <title>Children Tree</title>
+    <title>Atšakų medis</title>
   </UIVersionTree>
   <UIViewVersion>
     <label>
-      <nodeType>Node Type</nodeType>
-      <nodeName>Node Name</nodeName>
-      <VersionNumber>Version Number</VersionNumber>
-      <VersionLabels>Version Labels</VersionLabels>
-      <VersionDate>Version Date</VersionDate>
-      <PropertyName>Property Name</PropertyName>
-      <PropertyValue>Property Values</PropertyValue>
+      <nodeType>Mazgo tipas</nodeType>
+      <nodeName>Mazgo pavadinimas</nodeName>
+      <VersionNumber>Versijos numeris</VersionNumber>
+      <VersionLabels>Versijos etiketės</VersionLabels>
+      <VersionDate>Versijos data</VersionDate>
+      <PropertyName>Ypatybės pavadinimas</PropertyName>
+      <PropertyValue>Ypatybių vertės</PropertyValue>
     </label>
     <msg>
-      <not-supported>This function is not supported for versioning.</not-supported>
+      <not-supported>Ši funkcija yra nesuderinama versijoms.</not-supported>
     </msg>
   </UIViewVersion>
   <UIVersionList>
-    <title>Children Name</title>
+    <title>Atšakos pavadinimas</title>
   </UIVersionList>
   <!--
   ################################################################################
@@ -1554,38 +1554,38 @@
     </action>
     <tab>
       <label>
-        <UICategoriesAddedList>Referenced Categories</UICategoriesAddedList>
-        <UIOneNodePathSelector>Select Category</UIOneNodePathSelector>
+        <UICategoriesAddedList>Nurodytos kategorijos</UICategoriesAddedList>
+        <UIOneNodePathSelector>Pasirinkti kategoriją</UIOneNodePathSelector>
       </label>
     </tab>
   </UICategoryManager>
   <UICategoriesAddedList>
     <header>
-      <path>Category</path>
-      <action>Actions</action>
+      <path>Kategorija</path>
+      <action>Veiksmai</action>
     </header>
     <msg>
-      <access-denied>Access denied. You do not have access permission in this node.</access-denied>
-      <confirm-delete>Are you sure you want to delete this reference?</confirm-delete>
+      <access-denied>Prieiga uždrausta. Jūs neturite priėjimo teisių šiame mazge.</access-denied>
+      <confirm-delete>Ar tikrai norite ištrinti šią nuorodą?</confirm-delete>
     </msg>
     <action>
       <title>
-        <Delete>Delete</Delete>
+        <Delete>Ištrinti</Delete>
       </title>
     </action>
     <label>
-      <category>Category</category>
-      <actions>Action</actions>
-      <delete>Delete</delete>
+      <category>Kategorija</category>
+      <actions>Veiksmas</actions>
+      <delete>Ištrinti</delete>
     </label>
   </UICategoriesAddedList>
   <UITreeList>
     <header>
-      <name>Name</name>
-      <action>Action</action>
+      <name>Pavadinimas</name>
+      <action>Veiksmas</action>
     </header>
     <info>
-      <child-not-found>This node does not have any child nodes.</child-not-found>
+      <child-not-found>Šis mazgas neturi jokių antrinių mazgų.</child-not-found>
     </info>
   </UITreeList>
   <!--
@@ -1599,28 +1599,28 @@
     </action>
     <tab>
       <label>
-        <UIOneNodePathSelector>Select Relation</UIOneNodePathSelector>
+        <UIOneNodePathSelector>Pasirinkite ryšį</UIOneNodePathSelector>
       </label>
     </tab>
     <tab>
       <label>
-        <UIRelationsAddedList>Relation List</UIRelationsAddedList>
+        <UIRelationsAddedList>Ryšių sąrašas</UIRelationsAddedList>
       </label>
     </tab>
   </UIRelationManager>
   <UIRelationsAddedList>
     <header>
-      <path>Relations</path>
-      <action>Actions</action>
+      <path>Ryšiai</path>
+      <action>Veiksmai</action>
     </header>
     <action>
       <title>
-        <Delete>Delete</Delete>
+        <Delete>Ištrinti</Delete>
       </title>
     </action>
     <msg>
-      <confirm-delete>Are you sure you want to delete this relation?</confirm-delete>
-      <can-not-add-itself>You cannot add a relation to itself.</can-not-add-itself>
+      <confirm-delete>Ar tikrai norite ištrinti šį ryšį?</confirm-delete>
+      <can-not-add-itself>Jūs negalite pridėti ryšio į jį patį.</can-not-add-itself>
     </msg>
   </UIRelationsAddedList>
   <!--
@@ -1630,19 +1630,19 @@
   -->
   <UIClipboard>
     <header>
-      <path>Path</path>
+      <path>Kelias</path>
       <command>Cm</command>
-      <action>Action</action>
+      <action>Veiksmas</action>
     </header>
     <label>
-      <nocommand>There are no items in the clipboard.</nocommand>
+      <nocommand>Nėra elementų iškirptinėje.</nocommand>
     </label>
     <action>
-      <clearall>Clear All</clearall>
+      <clearall>Išvalyti viską</clearall>
     </action>
     <msg>
-      <unable-pasted>Cannot paste this node.</unable-pasted>
-      <node-pasted>Node {0} has been pasted at location {1}. This operation has already been saved.</node-pasted>
+      <unable-pasted>Negalima įklijuoti šio mazgo.</unable-pasted>
+      <node-pasted>Mazgas '{0}' buvo įterptas į vietą '{1}'. Ši operacija jau buvo išsaugota.</node-pasted>
     </msg>
   </UIClipboard>
   <!--
@@ -1657,9 +1657,9 @@
   -->
   <UISelectDocumentForm>
     <label>
-      <selectTemplate>Select your template from the list below</selectTemplate>
-      <ThumbnailView>Thumbnail View</ThumbnailView>
-      <ListView>List View</ListView>
+      <selectTemplate>Pasirinkite savo šabloną iš žemiau pateikto sąrašo</selectTemplate>
+      <ThumbnailView>Miniatiūrų rodinys</ThumbnailView>
+      <ListView>Sąrašo rodinys</ListView>
       <Cancel>#{word.cancel}</Cancel>
     </label>
   </UISelectDocumentForm>
@@ -1669,29 +1669,29 @@
   #######################################################################
   -->
   <UIDocumentForm>
-    <title>Add New Document</title>
+    <title>Pridėti naują dokumentą</title>
     <action>
       <Save>#{word.save}</Save>
-      <SaveAndClose>Save &amp; Close</SaveAndClose>
-      <ChangeType>Change Content Type</ChangeType>
-      <Fullscreen>Fullscreen</Fullscreen>
+      <SaveAndClose>Išsaugoti ir uždaryti</SaveAndClose>
+      <ChangeType>Turinio tipo keitimas</ChangeType>
+      <Fullscreen>Per visą ekraną</Fullscreen>
       <Cancel>#{word.cancel}</Cancel>
       <Close>#{word.close}</Close>
     </action>
 <tooltip>
-<FullScreen>Maximize/Minimize</FullScreen>
+<FullScreen>Padidinti/sumažinti</FullScreen>
 </tooltip>
     <msg>
-      <cannot-save>An error occurred while saving the document.</cannot-save>
-      <in-versioning>Please check out the current node before adding a new node.</in-versioning>
-      <not-support>Cannot load the template of '{0}'.</not-support>
-      <value-invalid>'{0}' is a needed value.</value-invalid>
-      <repository-exception>An error occurred while saving the document.</repository-exception>
+      <cannot-save>Įvyko klaida išsaugojant dokumentą.</cannot-save>
+      <in-versioning>Prašome patikrinti dabartinį mazgą prieš pridedant naują.</in-versioning>
+      <not-support>Nepavyko įkelti '{0}' šablono.</not-support>
+      <value-invalid>'{0}' yra reikalinga reikšmė.</value-invalid>
+      <repository-exception>Įvyko klaida išsaugojant dokumentą.</repository-exception>
       <!--DMS 2.4.x; ECM-3543-->
-      <repository-exception-permission>You do not have permission to add a new document to this node.</repository-exception-permission>
-      <not-allowed-same-name-sibling>You cannot save this document. It is not allowed to have the same name as its sibling.</not-allowed-same-name-sibling>
-      <numberformat-exception>You cannot save this document. The name provided must be in numerical format.</numberformat-exception>
-      <item-not-found>Item not found. This node (or its ancestor) may have been deleted. Please click the Refresh button.</item-not-found>
+      <repository-exception-permission>Jūs neturite teisės pridėti naują dokumentą į šį mazgą.</repository-exception-permission>
+      <not-allowed-same-name-sibling>Negalima išsaugoti šio dokumento. Neleidžiama turėti to pačio pavadinimo kaip ir giminaičio.</not-allowed-same-name-sibling>
+      <numberformat-exception>Jūs negalite išsaugoti šio dokumento. Pavadinimas turi būti skaitinio formato.</numberformat-exception>
+      <item-not-found>Elementas nerastas. Šis mazgas (arba jo pradininkas) yra ištrintas. Prašome spustelėti perkrovimo mygtuką.</item-not-found>
     </msg>
   </UIDocumentForm>
   <!--
@@ -1702,7 +1702,7 @@
   <UIViewDocumentController>
     <tab>
       <label>
-        <UIViewDocumentInfo>Information</UIViewDocumentInfo>
+        <UIViewDocumentInfo>Informacija</UIViewDocumentInfo>
       </label>
     </tab>
     <action>
@@ -1720,10 +1720,10 @@
   #############################################################################
   -->
   <UIQuerySaveForm>
-    <title>Save Query Form</title>
+    <title>Išsaugoti užklausos formą</title>
     <label>
-      <query>Query</query>
-      <name>Query Name</name>
+      <query>Užklausa</query>
+      <name>Užklausos pavadinimas</name>
     </label>
     <action>
       <Save>#{word.save}</Save>
@@ -1737,8 +1737,8 @@
   -->
   <editActionPopup>
     <title>
-      <UIActionForm>Edit Action</UIActionForm>
-      <EditFormAction>Edit Action</EditFormAction>
+      <UIActionForm>Redagavimo veiksmas</UIActionForm>
+      <EditFormAction>Redagavimo veiksmas</EditFormAction>
     </title>
   </editActionPopup>
   <UIActionViewContainer>
@@ -1749,24 +1749,24 @@
   <UIActionList>
     <header>
       <name>#{word.name}</name>
-      <description>Description</description>
-  <lifecycle>Life Cycle</lifecycle>
-  <triggeredaction>Triggered Action</triggeredaction>
-      <instanceOf>Instance of Action Type</instanceOf>
-      <action>Action</action>
+      <description>Aprašymas</description>
+  <lifecycle>Gyvavimo ciklas</lifecycle>
+  <triggeredaction>Valdomieji veiksmai</triggeredaction>
+      <instanceOf>Veiksmo tipo pavyzdys</instanceOf>
+      <action>Veiksmas</action>
     </header>
     <msg>
-      <remove-popup-first>You must close the edit pop-up before deleting this node.</remove-popup-first>
-      <confirm-delete-action>Are you sure you want to delete this action?</confirm-delete-action>
-      <template-empty>The '{0}' template is null or empty.</template-empty>
-      <template-null>The template is either null or you do not have permission to access this template.</template-null>
-      <access-denied>Access denied. You do not have permission to perform this action.</access-denied>
+      <remove-popup-first>Jūs turite uždaryti redagavimo iškylantįjį langą prieš ištrindami šį mazgą.</remove-popup-first>
+      <confirm-delete-action>Ar tikrai norite ištrinti šį veiksmą?</confirm-delete-action>
+      <template-empty>'{0}' šablonas yra negaliojantis arba tuščias.</template-empty>
+      <template-null>Šablonas yra tuščias arba jūs neturite teisių pasiekti šį šabloną.</template-null>
+      <access-denied>Prieiga uždrausta. Jūs neturite teisės atlikti šio veiksmo.</access-denied>
     </msg>
     <action>
       <Close>#{word.close}</Close>
-      <View>View</View>
-      <Edit>Edit</Edit>
-      <Delete>Delete</Delete>
+      <View>Rodyti</View>
+      <Edit>Redaguoti</Edit>
+      <Delete>Ištrinti</Delete>
     </action>
   </UIActionList>
   <UIActionForm>
@@ -1775,43 +1775,43 @@
       <Back>#{word.back}</Back>
     </action>
     <label>
-      <name>Action Form</name>
+      <name>Veiksmo forma</name>
     </label>
     <msg>
-      <repository-exception>You cannot save this action. The name provided has some special characters.</repository-exception>
-      <numberformat-exception>You cannot save this action. The name provided must be in numerical format.</numberformat-exception>
-      <existed-action>The action name '{0}' already exists. Please select another one.</existed-action>
-      <unable-add-action>Cannot add this action.</unable-add-action>
-      <unable-add>Cannot add this action. This node is either root or you do not have permision.</unable-add>
-      <not-support>Dialog '{0}' is not supported.</not-support>
-      <no-permission-add>Access denied. You do not have the right to add an action here.</no-permission-add>
-      <access-denied>Access denied. You do not have permission to access this template.</access-denied>
-      <lifecycle-invalid>You cannot add this action. The lifecycle phase of action is invalid.</lifecycle-invalid>
+      <repository-exception>Jūs negalite išsaugoti šio veiksmo. Pavadinimas turi specialių simbolių.</repository-exception>
+      <numberformat-exception>Jūs negalite išsaugoti šio veiksmo. Pavadinimas turi būti skaitinio formato.</numberformat-exception>
+      <existed-action>Veiksmo pavadinimas '{0}' jau egzistuoja. Prašome pasirinkti kitą pavadinimą.</existed-action>
+      <unable-add-action>Negalima pridėti šio veiksmo.</unable-add-action>
+      <unable-add>Negalima pridėti šio veiksmo. Mazgas yra pagrindinis arba jūs neturite teisės.</unable-add>
+      <not-support>Dialogas '{0}' yra nepalaikomas.</not-support>
+      <no-permission-add>Prieiga uždrausta. Jūs neturite teisės pridėti veiksmo čia.</no-permission-add>
+      <access-denied>Prieiga uždrausta. Jūs neturite teisės prieiti prie šio šablono.</access-denied>
+      <lifecycle-invalid>Jūs negalite pridėti šio veiksmo. Veiksmo gyvavimo ciklo fazė yra klaidinga.</lifecycle-invalid>
     </msg>
-    <title>Add/Edit Action</title>
+    <title>Pridėti/Redaguoti veiksmą</title>
     <validator>
-      <validator>Validator</validator>
-      <destPath>With Path</destPath>
+      <validator>Validatorius</validator>
+      <destPath>Su keliu</destPath>
     </validator>
   </UIActionForm>
   <UIActionTypeForm>
     <label>
-      <actionType>Create Action of Type</actionType>
+      <actionType>Sukurti tipo veiksmą</actionType>
     </label>
   </UIActionTypeForm>
   <PopupComponent>
     <title>
-      <UIOneNodePathSelector>Select Location</UIOneNodePathSelector>
-      <UIPermissionSelector>Permission Browser</UIPermissionSelector>
-      <UICategoriesSelector>Add Categories</UICategoriesSelector>
+      <UIOneNodePathSelector>Pasirinkti vietą</UIOneNodePathSelector>
+      <UIPermissionSelector>Teisių naršyklė</UIPermissionSelector>
+      <UICategoriesSelector>Pridėti kategorijas</UICategoriesSelector>
     </title>
   </PopupComponent>
   <EditFormAction>
     <validator>
-      <validator>Validator</validator>
-      <destPath>With Path</destPath>
+      <validator>Validatorius</validator>
+      <destPath>Su keliu</destPath>
     </validator>
-    <title>Action Form</title>
+    <title>Veiksmo forma</title>
   </EditFormAction>
   <!--
   #############################################################################
@@ -1820,19 +1820,19 @@
   -->
   <UIAddressBar>
     <msg>
-      <path-not-found>Path not found.</path-not-found>
-      <access-denied>Access denied. You do not have the right to read the node.</access-denied>
-      <keyword-not-support>The keyword is invalid. Some characters are not supported.</keyword-not-support>
+      <path-not-found>Kelias nerastas.</path-not-found>
+      <access-denied>Prieiga uždrausta. Jūs neturite teisės skaityti mazgo.</access-denied>
+      <keyword-not-support>Raktinis žodis yra neteisingas. Kai kurie ženklai yra nepripažįstami.</keyword-not-support>
     </msg>
     <label>
-      <exeButton>Go</exeButton>
-      <address>Address:</address>
+      <exeButton>Eiti</exeButton>
+      <address>Adresas:</address>
     </label>
     <title>
-      <exeButton>Go</exeButton>
-      <backButton>Back to the previous node</backButton>
-      <showHistory>Show the history address</showHistory>
-      <changeNode>Change Node</changeNode>
+      <exeButton>Eiti</exeButton>
+      <backButton>Grįžti į ankstesnę skiltį</backButton>
+      <showHistory>Rodyti istorijos adresą</showHistory>
+      <changeNode>Pakeisti mazgą</changeNode>
     </title>
   </UIAddressBar>
   <!--
@@ -1842,19 +1842,19 @@
   -->
   <UIWatchDocumentForm>
     <action>
-      <Watch>Watch</Watch>
+      <Watch>Stebėti</Watch>
       <Cancel>#{word.cancel}</Cancel>
-      <Continue>Continue</Continue>
-      <Unwatch>Unwatch</Unwatch>
+      <Continue>Toliau</Continue>
+      <Unwatch>Nebestebėti</Unwatch>
     </action>
     <label>
-      <notificationType>Notification Type:</notificationType>
+      <notificationType>Pranešimo tipas:</notificationType>
     </label>
     <msg>
-      <not-support>This notification type is not supported. Please select another type.</not-support>
-      <watching-successfully>You are watching this document.</watching-successfully>
-      <unwatching-successfully>You have left the watchers list successfully.</unwatching-successfully>
-      <node-iswatching>This document is watched.</node-iswatching>
+      <not-support>Šio priminimo tipas nepalaikomas. Pasirinkite kitą tipą.</not-support>
+      <watching-successfully>Jūs stebite šį dokumentą.</watching-successfully>
+      <unwatching-successfully>Sėkmingai palikote stebėtojų sąrašą.</unwatching-successfully>
+      <node-iswatching>Šis dokumentas yra stebimas.</node-iswatching>
     </msg>
   </UIWatchDocumentForm>
   <!--
@@ -1864,24 +1864,24 @@
   -->
   <UITaggingForm>
     <label>
-      <names>Tag Names:</names>
-      <linked>Linked Tags:</linked>
+      <names>Žymos pavadinimai:</names>
+      <linked>Susietos žymės:</linked>
       <tagSet>UITaggingForm</tagSet>
     </label>
     <action>
-      <AddTag>Add</AddTag>
+      <AddTag>Pridėti</AddTag>
       <Cancel>#{word.close}</Cancel>
     </action>
     <msg>
-      <name-exist>The tag name '{0}' already exists.</name-exist>
-      <tagName-invalid>The tag name contains some invalid characters.</tagName-invalid>
-      <tag-name-empty>Your tag name is empty</tag-name-empty>
-      <tag-name-duplicate>The input tag names are duplicate.</tag-name-duplicate>
-      <tagName-too-long>One of the tags entered was too long. The tag name must be less than 30 characters.</tagName-too-long>
-      <path-not-found>This tag has been deleted or changed. Please click on the Refresh button.</path-not-found>
+      <name-exist>Žymės pavadinimas '{0}' jau yra.</name-exist>
+      <tagName-invalid>Žymės pavadinime yra neleistinų simbolių.</tagName-invalid>
+      <tag-name-empty>Jūsų žymės pavadinimas yra tuščias</tag-name-empty>
+      <tag-name-duplicate>Įvesties žymės pavadinimai yra dubliuoti.</tag-name-duplicate>
+      <tagName-too-long>Viena iš įrašytų žymių buvo per ilga. Žymės pavadinimas turi būti mažesnis kaip 30 simbolių.</tagName-too-long>
+      <path-not-found>Ši žymė buvo panaikinta ar pakeista. Spustelėkite mygtuką atnaujinti.</path-not-found>
     </msg>
     <introduction>
-      <tagName>Separate multiple tags by commas ","</tagName>
+      <tagName>Kelias žymes atskirti kableliu ","</tagName>
     </introduction>
   </UITaggingForm>
 
@@ -1892,7 +1892,7 @@
   -->
   <UIViewMetadataContainer>
     <msg>
-      <path-not-found>Node does not support this view.</path-not-found>
+      <path-not-found>Mazgas nepalaiko šio rodinio.</path-not-found>
     </msg>
   </UIViewMetadataContainer>
   <!--
@@ -1908,12 +1908,12 @@
   </UIViewMetadataForm>
   <metadataForm>
     <title>
-      <UIViewMetadataForm>Add/Edit Properties</UIViewMetadataForm>
+      <UIViewMetadataForm>Pridėti/redaguoti ypatybes</UIViewMetadataForm>
     </title>
   </metadataForm>
   <UIViewMetadataTemplate>
     <msg>
-      <access-denied>Access denied. You are either not the owner or do not have edit permission in this node.</access-denied>
+      <access-denied>Prieiga uždrausta. Jūs esate ne savininkas arba neturite teisės redaguoti šiame mazge.</access-denied>
     </msg>
   </UIViewMetadataTemplate>
   <!--
@@ -1923,26 +1923,26 @@
   -->
   <ECMNameValidator>
     <msg>
-      <Invalid-char>The field '{0}' contains some invalid characters. Please enter another value.</Invalid-char>
-      <empty-input>The value of the field '{0}' is null or empty.</empty-input>
+      <Invalid-char>Laukelyje '{0}' yra neleistinų simbolių. Prašome įrašyti kitą reikšmę.</Invalid-char>
+      <empty-input>Reikšmė laukelyje '{0}' yra negaliojanti arba tuščia.</empty-input>
     </msg>
   </ECMNameValidator>
   <DateTimeValidator>
     <msg>
-      <Invalid-input>Field '{0}' with value '{1}' is invalid.</Invalid-input>
+      <Invalid-input>Laukas '{0}' su reikšme '{1}' yra netinkamas.</Invalid-input>
     </msg>
   </DateTimeValidator>
   <CronExpressionValidator>
-    <invalid-input>Your cron expression is invalid. Please check the syntax.</invalid-input>
+    <invalid-input>Jūsų cron išraiška yra netinkama. Prašome patikrinti sintaksę.</invalid-input>
   </CronExpressionValidator>
   <EmptyFieldValidator>
     <msg>
-      <empty-input>Please fill in the field '{0}'.</empty-input>
+      <empty-input>Prašome užpildyti lauką '{0}'.</empty-input>
     </msg>
   </EmptyFieldValidator>
   <CategoryValidator>
     <msg>
-      <non-categories>Categories are wrong. Please select good categories.</non-categories>
+      <non-categories>Kategorijos yra neteisingos. Prašome pasirinkti atitinkamas kategorijas.</non-categories>
     </msg>
   </CategoryValidator>
   <!--
@@ -1951,25 +1951,25 @@
   ###################################################################################
   -->
   <ReferentialIntegrityException>
-    <msg>Action failed. There are still some reference items in the workspace.</msg>
+    <msg>Veiksmas nepavyko. Vis dar yra kai kurių nuorodų elementų darbo srityje.</msg>
   </ReferentialIntegrityException>
   <ItemExistsException>
-    <msg>This item already exists.</msg>
+    <msg>Šis elementas jau egzistuoja.</msg>
   </ItemExistsException>
   <AccessControlException>
-    <msg>Access denied. You do not have permission to perform this action.</msg>
+    <msg>Prieiga uždrausta. Jūs neturite teisės įvykdyti šio veiksmo.</msg>
   </AccessControlException>
   <AccessDeniedException>
-    <msg>Access denied.</msg>
+    <msg>Prieiga uždrausta.</msg>
   </AccessDeniedException>
   <ItemNotFoundException>
-    <msg>Item not found. It may have been removed or changed.</msg>
+    <msg>Elementas nerastas. Jis galėjo būti pašalintas arba pakeistas.</msg>
   </ItemNotFoundException>
   <PathNotFoundException>
-    <msg>Path not found. It may have been removed or changed.</msg>
+    <msg>Kelias nerastas. Jis galėjo būti pašalintas arba pakeistas.</msg>
   </PathNotFoundException>
   <ConstraintViolationException>
-    <msg>You cannot perform this action due to some constraints.</msg>
+    <msg>Jūs negalite atlikti šio veiksmo dėl konkrečių apribojimų.</msg>
   </ConstraintViolationException>
   <!--
   ###################################################################################
@@ -1978,19 +1978,19 @@
   -->
   <UIPublicationForm>
     <label>
-      <published>Published</published>
-      <non-published>Unpublished</non-published>
-      <public>Public</public>
-      <private>Private</private>
-      <state>State</state>
-      <visibility>Visibility</visibility>
-      <nodeName>Node Name:</nodeName>
-      <lifecycleName>Lifecycle Name</lifecycleName>
-      <stateName>State Name</stateName>
+      <published>Paskelbtas</published>
+      <non-published>Neskelbtas</non-published>
+      <public>Viešas</public>
+      <private>Privatus</private>
+      <state>Būsena</state>
+      <visibility>Matomumas</visibility>
+      <nodeName>Mazgo pavadinimas:</nodeName>
+      <lifecycleName>Gyvavimo ciklo pavadinimas</lifecycleName>
+      <stateName>Būsenos pavadinimas</stateName>
     </label>
     <action>
       <Save>#{word.save}</Save>
-      <UnsubcriberLifeCycle>Unsubscriber</UnsubcriberLifeCycle>
+      <UnsubcriberLifeCycle>Neprenumeratorius</UnsubcriberLifeCycle>
       <Cancel>#{word.cancel}</Cancel>
     </action>
   </UIPublicationForm>
@@ -2001,14 +2001,14 @@
   -->
   <UIWorkspaceList>
     <label>
-      <workspaceName>Workspace:</workspaceName>
-      <rootNodeInfo>Root Path:</rootNodeInfo>
-      <rootPath>Root Path:</rootPath>
+      <workspaceName>Darbo sritis:</workspaceName>
+      <rootNodeInfo>Pagrindinis kelias:</rootNodeInfo>
+      <rootPath>Pagrindinis kelias:</rootPath>
     </label>
   </UIWorkspaceList>
   <pathSelector>
     <title>
-      <UIOneNodePathSelector>Node Selector</UIOneNodePathSelector>
+      <UIOneNodePathSelector>Mazgo pasirinkimas</UIOneNodePathSelector>
     </title>
   </pathSelector>
   <!--
@@ -2018,29 +2018,29 @@
   -->
   <EmailAddressValidator>
     <msg>
-      <Invalid-input>The email address is invalid.</Invalid-input>
+      <Invalid-input>Elektroninio pašto adresas yra neteisingas.</Invalid-input>
     </msg>
   </EmailAddressValidator>
   <UIFormInputSetWithAction>
     <msg>
-      <confirm-delete>Are you sure you want to delete?</confirm-delete>
+      <confirm-delete>Ar tikrai norite ištrinti?</confirm-delete>
     </msg>
   </UIFormInputSetWithAction>
   <RepeatCountValidator>
     <msg>
-      <invalid-value>The value in the field 'Repeat Count' is invalid. Only integers or -1 are allowed.</invalid-value>
+      <invalid-value>Vertė laukelyje 'Kartoti skaičiavimą' yra klaidinga. Tik sveikieji skaičiai arba -1 yra leidžiama.</invalid-value>
     </msg>
   </RepeatCountValidator>
   <RepeatIntervalValidator>
     <msg>
-      <invalid-value>The value in the field 'Time Interval' is invalid. Only long types are allowed.</invalid-value>
+      <invalid-value>Vertė laukelyje 'Laiko intervalas' yra klaidinga. Tik ilgieji tipai yra leidžiami.</invalid-value>
     </msg>
   </RepeatIntervalValidator>
   <UIPermissionSelector>
     <label>
-      <selectGroup>Select Group</selectGroup>
-      <selectUser>Select User</selectUser>
-      <selectMembership>Select Membership</selectMembership>
+      <selectGroup>Pasirinkti grupę</selectGroup>
+      <selectUser>Pasirinkti vartotoją</selectUser>
+      <selectMembership>Pasirinkti narystę</selectMembership>
     </label>
   </UIPermissionSelector>
   <!--
@@ -2050,8 +2050,8 @@
   -->
   <ECMStandardPropertyNameValidator>
     <msg>
-      <empty-input>The value of the field '{0}' is null or empty.</empty-input>
-      <Invalid-char>The field '{0}'contains some invalid characters. Please enter another value.</Invalid-char>
+      <empty-input>Vertė laukelyje '{0}' yra negaliojanti arba tuščia.</empty-input>
+      <Invalid-char>Laukelyje '{0}'yra neleistinų simbolių. Prašome įrašyti kitą vertę.</Invalid-char>
     </msg>
   </ECMStandardPropertyNameValidator>
   <!--
@@ -2061,13 +2061,13 @@
   -->
   <SearchValidator>
     <msg>
-      <empty-input>The value of this field is null or empty.</empty-input>
-      <Invalid-char>This field contains some invalid characters. Please enter another value.</Invalid-char>
-      <Invalid-char2>The number must be followed by the character '~'.</Invalid-char2>
-      <Invalid-char1>The number following the character '~' must between 0 and 1.</Invalid-char1>
-      <Invalid-char3>The number must be followed by the character '^'.</Invalid-char3>
-      <Invalid-char4>Spaces are not allowed near the character '~'.</Invalid-char4>
-      <Invalid-char5>Spaces are not allowed near the character '^'.</Invalid-char5>
+      <empty-input>Šio laukelio vertė yra negaliojanti arba tuščia.</empty-input>
+      <Invalid-char>Šiame laukelyje yra neleistinų simbolių. Prašome įrašyti kitą vertę.</Invalid-char>
+      <Invalid-char2>Numeris turi būti paskui simbolį "~".</Invalid-char2>
+      <Invalid-char1>Numeris einantis paskui simbolį "~" turi būti nuo 0 iki 1.</Invalid-char1>
+      <Invalid-char3>Numeris turi būti paskui simbolį "^".</Invalid-char3>
+      <Invalid-char4>Tarpai yra neleidžiami prie simbolio '~'.</Invalid-char4>
+      <Invalid-char5>Tarpai yra neleidžiami prie simbolio '^'.</Invalid-char5>
     </msg>
   </SearchValidator>
   <!--
@@ -2077,12 +2077,12 @@
   -->
   <UIPublicationLogList>
     <header>
-      <date>Date</date>
-      <newState>New State</newState>
-      <user>User</user>
-      <description>Description</description>
-      <version>Version</version>
-      <visibility>Visibility</visibility>
+      <date>Data</date>
+      <newState>Nauja būsena</newState>
+      <user>Vartotojas</user>
+      <description>Aprašymas</description>
+      <version>Versija</version>
+      <visibility>Matomumas</visibility>
     </header>
     <action>
       <Close>#{word.close}</Close>
@@ -2095,8 +2095,8 @@
   -->
   <UIVersionTreeList>
     <header>
-      <version>Version</version>
-      <state>State</state>
+      <version>Versija</version>
+      <state>Būsena</state>
     </header>
   </UIVersionTreeList>
   <!--
@@ -2108,21 +2108,21 @@
     <action>
       <Save>#{word.save}</Save>
       <Cancel>#{word.cancel}</Cancel>
-      <RemoveThumbnail>Remove Thumbnail</RemoveThumbnail>
+      <RemoveThumbnail>Pašalinti miniatiūrą</RemoveThumbnail>
     </action>
     <label>
-      <mediumSize>Thumbnail Image</mediumSize>
-      <SelectFile>Choose Thumbnail Image</SelectFile>
+      <mediumSize>Miniatiūros paveikslėlis</mediumSize>
+      <SelectFile>Pasirinkti miniatiūros paveikslėlį</SelectFile>
     </label>
     <msg>
-      <mimetype-incorrect>Incorrect file type. Thumbnails can only be created from .JPG, .PNG or .GIF files.</mimetype-incorrect>
-      <access-denied>Access denied. You do not have permission to add a thumbnail to this node.</access-denied>
-      <confirm-delete>Are you sure you want to remove this thumbnail?</confirm-delete>
-      <is-checked-in>This node is checked in. Please check out before performing any action.</is-checked-in>
-      <fileName-error>Please select a file to upload.</fileName-error>
+      <mimetype-incorrect>Neteisingas failo tipas. Miniatiūros gali būti sukurtos tik iš .JPG, .PNG arba .GIF failų.</mimetype-incorrect>
+      <access-denied>Prieiga uždrausta. Jūs neturite teisės pridėti miniatiūros į šį mazgą.</access-denied>
+      <confirm-delete>Ar tikrai norite pašalinti šią miniatiūrą?</confirm-delete>
+      <is-checked-in>Šis mazgas yra įregistruotas. Prašome patikrinti prieš atliekant bet kokį veiksmą.</is-checked-in>
+      <fileName-error>Pasirinkite failą, kurį norite įkelti.</fileName-error>
     </msg>
     <title>
-      <remove-thumbnail>Remove this Thumbnail</remove-thumbnail>
+      <remove-thumbnail>Pašalinti šią miniatiūrą</remove-thumbnail>
     </title>
   </UIThumbnailForm>
   <!--
@@ -2132,13 +2132,13 @@
   -->
   <UIAnyPermission>
     <label>
-      <anyPermission>Any Permission</anyPermission>
+      <anyPermission>Bet kuri teisė</anyPermission>
     </label>
   </UIAnyPermission>
 
   <anyPermission>
     <title>
-      <AddAnyPermission>Set Any Permission</AddAnyPermission>
+      <AddAnyPermission>Nustatyti bet kurią teisę</AddAnyPermission>
     </title>
   </anyPermission>
   <!--
@@ -2158,9 +2158,9 @@
   -->
   <UIGroupMemberSelector>
     <label>
-      <selectGroup>Select Group</selectGroup>
-      <selectUser>Select User</selectUser>
-      <selectMembership>Select Membership</selectMembership>
+      <selectGroup>Pasirinkti grupę</selectGroup>
+      <selectUser>Pasirinkti vartotoją</selectUser>
+      <selectMembership>Pasirinkti narystę</selectMembership>
     </label>
   </UIGroupMemberSelector>
   <!--
@@ -2172,35 +2172,35 @@
   Access directly a JCR FE drive
   -->
   <UIJCRExplorerPortlet>
-    <nopermission>There is either no drive or you do not have permission to access this drive.</nopermission>
+    <nopermission>Arba nėra disko arba Jūs neturite leidimo pasiekti šį diską.</nopermission>
   </UIJCRExplorerPortlet>
 
   <UIJcrExplorerEditForm>
-    <title>Edit File Explorer</title>
+    <title>Failų redagavimo naršyklė</title>
     <action>
-      <Edit>Edit</Edit>
+      <Edit>Redaguoti</Edit>
       <Save>#{word.save}</Save>
       <Cancel>#{word.cancel}</Cancel>
     </action>
     <label>
-      <uploadFileSizeLimitMB>The size limit of the uploaded file (MB)</uploadFileSizeLimitMB>
-      <isDirectlyDrive>Direct Drive</isDirectlyDrive>
-      <driveName>Drive Name</driveName>
-      <usecase>Select Type</usecase>
-      <SelectNodePath>Select Path</SelectNodePath>
-      <showTopBar>Show Top Bar</showTopBar>
-      <showActionBar>Show Action Bar</showActionBar>
-      <showSideBar>Show Left Bar</showSideBar>
-      <showFilterBar>Show Filter Bar</showFilterBar>
-      <nodePath>Select Path</nodePath>
+      <uploadFileSizeLimitMB>Įkelto failo dydžio limitas (MB)</uploadFileSizeLimitMB>
+      <isDirectlyDrive>Tiesioginis diskas</isDirectlyDrive>
+      <driveName>Disko pavadinimas</driveName>
+      <usecase>Pasirinkite tipą</usecase>
+      <SelectNodePath>Pasirinkti kelią</SelectNodePath>
+      <showTopBar>Rodyti viršutinę juostą</showTopBar>
+      <showActionBar>Rodyti veiksmų juostą</showActionBar>
+      <showSideBar>Rodyti kairę juostą</showSideBar>
+      <showFilterBar>Rodyti filtro juostą</showFilterBar>
+      <nodePath>Pasirinkti kelią</nodePath>
     </label>
   </UIJcrExplorerEditForm>
 
   <UIDriveSelector>
     <label>
-      <driveName>Drive Name</driveName>
-      <action>Action</action>
-      <adddrives>Add Drives</adddrives>
+      <driveName>Disko pavadinimas</driveName>
+      <action>Veiksmas</action>
+      <adddrives>Pridėti diskus</adddrives>
     </label>
   </UIDriveSelector>
   <UIJcrExplorerEditForm>
@@ -2208,27 +2208,27 @@
       <DriveNameInput>UI JCR Explorer Edit Form</DriveNameInput>
     </label>
     <msg>
-      <personal-usecase>The private drive of the current user will be used when you select the Personal usecase.</personal-usecase>
-      <drive-edit-permission>You cannot edit the drive name. Please click the Edit button.</drive-edit-permission>
-      <path-edit-permission>You cannot edit the path. Please click the Edit button.</path-edit-permission>
+      <personal-usecase>Dabartinio vartotojo privatus ​​diskas bus naudojamas kai jūs pasirinksite asmenį panaudos atvejį (usecase).</personal-usecase>
+      <drive-edit-permission>Jūs negalite redaguoti disko vardo. Spustelėkite mygtuką redaguoti.</drive-edit-permission>
+      <path-edit-permission>Jūs negalite redaguoti kelio. Spustelėkite mygtuką redaguoti.</path-edit-permission>
     </msg>
   </UIJcrExplorerEditForm>
 
   <PopUpSelectDrive>
     <title>
-      <UIDriveSelector>Select Drive</UIDriveSelector>
+      <UIDriveSelector>Pasirinkti diską</UIDriveSelector>
     </title>
   </PopUpSelectDrive>
 
   <PopupSelectPath>
     <title>
-      <UIOneNodePathSelector>Select Node</UIOneNodePathSelector>
+      <UIOneNodePathSelector>Pasirinkite mazgą</UIOneNodePathSelector>
     </title>
   </PopupSelectPath>
 
   <DriveNameInput>
     <title>
-      <SelectDrive>Select Drive</SelectDrive>
+      <SelectDrive>Pasirinkti diską</SelectDrive>
     </title>
   </DriveNameInput>
 
@@ -2237,141 +2237,141 @@
   -->
   <UIActionBar>
     <tooltip>
-      <AddSymLink>Add Symlink</AddSymLink>
-      <AddLocalizationLink>Add Translation</AddLocalizationLink>
+      <AddSymLink>Pridėti nuorodą</AddSymLink>
+      <AddLocalizationLink>Pridėti vertimą</AddLocalizationLink>
     </tooltip>
   </UIActionBar>
 
   <UIPopupWindow>
     <title>
-      <UISymLinkManager>Symlink Manager</UISymLinkManager>
-      <UIAddTranslationManager>Add Translation</UIAddTranslationManager>
+      <UISymLinkManager>Simbolinės nuorodos vadovas</UISymLinkManager>
+      <UIAddTranslationManager>Pridėti vertimą</UIAddTranslationManager>
     </title>
   </UIPopupWindow>
 
   <UISymLinkForm>
     <label>
-      <symLinkName>Symlink Name</symLinkName>
-      <pathNode>Path Node</pathNode>
+      <symLinkName>Simbolinės nuorodos pavadinimas</symLinkName>
+      <pathNode>Kelio mazgas</pathNode>
     </label>
     <action>
       <Save>#{word.save}</Save>
       <Cancel>#{word.cancel}</Cancel>
     </action>
     <msg>
-      <addFolder-successful>The symlink '{0}' was added successfully.</addFolder-successful>
-      <name-invalid>Please enter the symlink name.</name-invalid>
-      <name-not-allowed>This name is not allowed.</name-not-allowed>
-      <fileName-error>The file name is invalid.</fileName-error>
-      <constraint-violation>You cannot add the'{0}' node type to the current node.</constraint-violation>
-      <repository-exception>Access denied. You do not have permission to add symlink to this node.</repository-exception>
-      <numberformat-exception>You cannot save this folder. The name provided must be in numerical format.</numberformat-exception>
-      <path-node-invalid>Please enter the path node.</path-node-invalid>
-      <path-node-not-allowed>This name is not allowed.</path-node-not-allowed>
-      <non-node>Please select the trust target node; you may not have the right to read this node.</non-node>
-      <cannot-save>You cannot add a symlink for this node type.</cannot-save>
-      <item-exists-exception>The node name already exists.</item-exists-exception>
-      <translation-node-same-language-default>The translation node has the same language as the default language of current node.</translation-node-same-language-default>
-      <UnsupportedRepositoryOperationException>This target node is not referred.</UnsupportedRepositoryOperationException>
+      <addFolder-successful>Simbolė nuoroda '{0}' buvo įtraukta sėkmingai.</addFolder-successful>
+      <name-invalid>Įveskite simbolinės nuorodos pavadinimą.</name-invalid>
+      <name-not-allowed>Šis pavadinimas neleidžiamas.</name-not-allowed>
+      <fileName-error>Failo pavadinimas yra klaidingas.</fileName-error>
+      <constraint-violation>Jūs negalite pridėti'{0}' mazgo tipo prie dabartinio mazgo.</constraint-violation>
+      <repository-exception>Prieiga uždrausta. Jūs neturite leidimo pridėti simbolinės nuorodos į šį mazgą.</repository-exception>
+      <numberformat-exception>Jūs negalite išsaugoti šio dokumento. Pavadinimas turi būti skaitinio formato.</numberformat-exception>
+      <path-node-invalid>Prašome įvesti kelio mazgą.</path-node-invalid>
+      <path-node-not-allowed>Šis pavadinimas neleidžiamas.</path-node-not-allowed>
+      <non-node>Prašome pasirinkti patikimą tikslinį mazgą; jūs galite neturėti teisės skaityti šio mazgo.</non-node>
+      <cannot-save>Jūs negalite pridėti simbolinės nuorodos šiam mazgo tipui.</cannot-save>
+      <item-exists-exception>Mazgo pavadinimas jau egzistuoja.</item-exists-exception>
+      <translation-node-same-language-default>Vertimo mazgas turi tą pačią kalbą kaip ir numatytoji dabartinio mazgo kalba.</translation-node-same-language-default>
+      <UnsupportedRepositoryOperationException>Šis tikslinis mazgas nebuvo paminėtas.</UnsupportedRepositoryOperationException>
     </msg>
   </UISymLinkForm>
   
   <UIAddTranslationForm>
     <label>
-      <symLinkName>Symlink Name</symLinkName>
-      <pathNode>Document Path:</pathNode>
-      <note>Select another document that will serve as the translation</note>
+      <symLinkName>Simbolinės nuorodos pavadinimas</symLinkName>
+      <pathNode>Dokumento kelias:</pathNode>
+      <note>Pasirinkite kitą dokumentą, kuris bus naudojamas kaip vertimas</note>
     </label>
     <action>
       <Save>#{word.save}</Save>
       <Cancel>#{word.cancel}</Cancel>
-      <SelectDocument>Select Document</SelectDocument>
+      <SelectDocument>Pasirinkti dokumentą</SelectDocument>
     </action>
     <msg>
-      <addFolder-successful>The symlink '{0}' is added successfully.</addFolder-successful>
-      <name-invalid>Please enter the symlink name.</name-invalid>
-      <name-not-allowed>This name is not allowed.</name-not-allowed>
-      <fileName-error>The file name is invalid.</fileName-error>
-      <constraint-violation>You cannot add the'{0}' node type to the current node.</constraint-violation>
-      <repository-exception>Access denied. You do not have permission to add symlink to this node.</repository-exception>
-      <numberformat-exception>You cannot save this folder. The name provided must be in numerical format.</numberformat-exception>
-      <path-node-invalid>Please enter the path node.</path-node-invalid>
-      <path-node-not-allowed>This name is not allowed.</path-node-not-allowed>
-      <non-node>Please select the trust target node; you may not have the right to read this node.</non-node>
-      <cannot-save>An error occurred while creating the symlink.</cannot-save>
-      <item-exists-exception>The node name already exists.</item-exists-exception>
-      <translation-node-same-language-default>The translation node has the same language as the default language of current node.</translation-node-same-language-default>
-      <UnsupportedRepositoryOperationException>This target node is not referred.</UnsupportedRepositoryOperationException>
+      <addFolder-successful>Nuoroda '{0}' yra pridėta sėkmingai.</addFolder-successful>
+      <name-invalid>Įveskite nuorodos pavadinimą.</name-invalid>
+      <name-not-allowed>Šis pavadinimas neleidžiamas.</name-not-allowed>
+      <fileName-error>Failo pavadinimas yra klaidingas.</fileName-error>
+      <constraint-violation>Jūs negalite pridėti'{0}' mazgo tipo prie dabartinio mazgo.</constraint-violation>
+      <repository-exception>Prieiga uždrausta. Jūs neturite leidimo pridėti nuorodą į šį mazgą.</repository-exception>
+      <numberformat-exception>Jūs negalite išsaugoti šio aplanko. Pavadinimas turi būti skaitinio formato.</numberformat-exception>
+      <path-node-invalid>Prašome įvesti kelio mazgą.</path-node-invalid>
+      <path-node-not-allowed>Šis pavadinimas neleidžiamas.</path-node-not-allowed>
+      <non-node>Prašome pasirinkti tikslinį mazgą; jūs galite neturėti teisės skaityti šio mazgo.</non-node>
+      <cannot-save>Sukuriant nuorodą įvyko klaida.</cannot-save>
+      <item-exists-exception>Mazgo pavadinimas jau egzistuoja.</item-exists-exception>
+      <translation-node-same-language-default>Vertimo mazgas turi tą pačią kalbą kaip ir numatytoji dabartinio mazgo kalba.</translation-node-same-language-default>
+      <UnsupportedRepositoryOperationException>Šis tikslinis mazgas nebuvo paminėtas.</UnsupportedRepositoryOperationException>
     </msg>
   </UIAddTranslationForm>
 
   <UIPopupSymLink>
     <title>
-      <UIOneNodePathSelector>Select Target Node</UIOneNodePathSelector>
+      <UIOneNodePathSelector>Pasirinkite tikslinį mazgą</UIOneNodePathSelector>
     </title>
   </UIPopupSymLink>
   <UIPopupSymLink>
     <title>
-      <UIContentSelectorOne>Select Document</UIContentSelectorOne>
+      <UIContentSelectorOne>Pasirinkti dokumentą</UIContentSelectorOne>
     </title>
   </UIPopupSymLink>
 
   <ECMContextMenu>
     <event>
-      <AddSymLink>Add Symlink</AddSymLink>
-      <AddLocalizationLink>Add Translation</AddLocalizationLink>
+      <AddSymLink>Pridėti nuorodą</AddSymLink>
+      <AddLocalizationLink>Pridėti vertimą</AddLocalizationLink>
     </event>
   </ECMContextMenu>
 
   <UIWorkingArea>
     <msg>
-      <create-link-problem>You cannot create a link for node '{0}' at '{1}'.</create-link-problem>
-      <dest-node-is-link>The destination node '{0}' is already a symlink, so you cannot create a symlink inside it.</dest-node-is-link>
-      <selected-is-link>The selected node '{0}' is already a link, so you cannot create a link point to another link.</selected-is-link>
-      <confirm-create-link>Do you want to create a link to this location?</confirm-create-link>
+      <create-link-problem>Negalima sukurti nuorodos mazgui '{0}' '{1}'.</create-link-problem>
+      <dest-node-is-link>Paskirties mazgas '{0}' yra jau simbolinė nuoroda, tad negalite sukurti simbolinės nuorodos jo viduje.</dest-node-is-link>
+      <selected-is-link>Pažymėtas mazgas '{0}' jau yra nuoroda, tad negalite sukurti nuorodos į kitą nuorodą.</selected-is-link>
+      <confirm-create-link>Ar norite kurti nuorodą šioje vietoje?</confirm-create-link>
     </msg>
   </UIWorkingArea>
 
   <ECMContextMenu>
     <event>
-      <CreateLink>Create Link</CreateLink>
+      <CreateLink>Sukurti nuorodą</CreateLink>
     </event>
   </ECMContextMenu>
 
   <UIWorkspaceList>
     <msg>
-      <AccessDeniedException>Access denied. You do not have read permission in this workspace.</AccessDeniedException>
+      <AccessDeniedException>Prieiga uždrausta. Jūs neturite teises skaityti šioje darbo srityje.</AccessDeniedException>
     </msg>
     <label>
-      <taxonomyTree>Category Tree</taxonomyTree>
+      <taxonomyTree>Kategorijos medis</taxonomyTree>
     </label>
   </UIWorkspaceList>
 
   <UIPopupTaxonomy>
     <title>
-      <UIOneTaxonomySelector>Add Categories</UIOneTaxonomySelector>
+      <UIOneTaxonomySelector>Pridėti kategorijas</UIOneTaxonomySelector>
     </title>
   </UIPopupTaxonomy>
 
   <UITreeTaxonomyList>
     <label>
-      <taxonomyTree>Category Tree:</taxonomyTree>
-      <rootNodePath>Root Tree:</rootNodePath>
+      <taxonomyTree>Kategorijos medis:</taxonomyTree>
+      <rootNodePath>Šakninis medis:</rootNodePath>
       <rootNodeInfo>UITreeTaxonomyList</rootNodeInfo>
     </label>
   </UITreeTaxonomyList>
 
   <UIActionBar>
     <tooltip>
-      <ManageSimpleCategories>Manage Simple Categories</ManageSimpleCategories>
+      <ManageSimpleCategories>Valdyti paprastas kategorijas</ManageSimpleCategories>
     </tooltip>
   </UIActionBar>
 
   <UISimpleCategoryManager>
     <tab>
       <label>
-        <UICategoriesAddedList>Referenced Categories</UICategoriesAddedList>
-        <UIOneNodePathSelector>Select Category</UIOneNodePathSelector>
+        <UICategoriesAddedList>Nurodytos kategorijos</UICategoriesAddedList>
+        <UIOneNodePathSelector>Pasirinkite kategoriją</UIOneNodePathSelector>
       </label>
     </tab>
   </UISimpleCategoryManager>
@@ -2379,7 +2379,7 @@
   <UICategoryManager>
     <tab>
       <label>
-        <UIOneTaxonomySelector>Select Category</UIOneTaxonomySelector>
+        <UIOneTaxonomySelector>Pasirinkite kategoriją</UIOneTaxonomySelector>
       </label>
     </tab>
   </UICategoryManager>
@@ -2391,91 +2391,91 @@
   </UISimpleCategoryManager>
   <UIPopupWindow>
     <title>
-      <UISimpleCategoryManager>Add Category</UISimpleCategoryManager>
+      <UISimpleCategoryManager>Pridėti kategoriją</UISimpleCategoryManager>
     </title>
   </UIPopupWindow>
   <UICategoriesAddedList>
     <msg>
-      <ItemExistsException>The category name already exists.</ItemExistsException>
+      <ItemExistsException>Kategorijos pavadinimas jau egzistuoja.</ItemExistsException>
     </msg>
   </UICategoriesAddedList>
 
   <UIConfirmMessage>
     <label>
       <Close>#{word.cancel}</Close>
-      <OK>Delete</OK>
-      <ReplaceData>Replace Data</ReplaceData>
-      <Back>Back to Rename</Back>
-      <Keepfile>Keep both files</Keepfile>
+      <OK>Ištrinti</OK>
+      <ReplaceData>Pakeisti duomenis</ReplaceData>
+      <Back>Atgal į pervadinimą</Back>
+      <Keepfile>Palikti abu failus</Keepfile>
     </label>
   </UIConfirmMessage>
 
   <UIRestoreConfirmMessage>
     <label>
       <Close>#{word.close}</Close>
-      <OK>OK</OK>
-      <ReplaceData>Replace Data</ReplaceData>
-      <Back>Back to Rename</Back>
-      <Keepfile>Keep both files</Keepfile>
+      <OK>Gerai</OK>
+      <ReplaceData>Pakeisti duomenis</ReplaceData>
+      <Back>Atgal į pervadinimą</Back>
+      <Keepfile>Palikti abu failus</Keepfile>
     </label>
   </UIRestoreConfirmMessage>
 
 
   <PopupComponent>
     <title>
-      <UIOneTaxonomySelector>Add Categories</UIOneTaxonomySelector>
+      <UIOneTaxonomySelector>Pridėti kategorijas</UIOneTaxonomySelector>
     </title>
   </PopupComponent>
 
   <UIWorkingArea>
     <msg>
-      <can-not-move-to-itself>You cannot move the file, because the destination folder is the same as the source folder.</can-not-move-to-itself>
-      <is-editing>You cannot move a document while it is being edited. Please close it first.</is-editing>
+      <can-not-move-to-itself>Negalite perkelti failo, nes paskirties aplankas yra toks pats, kaip šaltinio aplankas.</can-not-move-to-itself>
+      <is-editing>Negalite perkelti dokumento, nes jis yra redaguojamas. Pirmiausia jį uždarykite.</is-editing>
     </msg>
   </UIWorkingArea>
 
   <UIImportNode>
     <label>
-      <behavior>UUID Behavior</behavior>
-      <versionHistory>Version History</versionHistory>
+      <behavior>UUID Elgesys</behavior>
+      <versionHistory>Versijų istorija</versionHistory>
     </label>
     <msg>
-      <history-invalid-type>Invalid file type in the version history. Only .zip files are supported.</history-invalid-type>
-      <history-invalid-content>Invalid content in the version history data. Please select a supported file type to import.</history-invalid-content>
+      <history-invalid-type>Neteisingas failo tipas versijų istorijoje. Tik .zip failai yra palaikomi.</history-invalid-type>
+      <history-invalid-content>Netinkamas turinys versijų istorijos duomenyse. Prašome pasirinkti tipus, kuriuos palaiko importavimas.</history-invalid-content>
     </msg>
   </UIImportNode>
 
   <Import>
     <Behavior>
-      <type0>Create New</type0>
-      <type1>Remove Existing</type1>
-      <type2>Replace Existing</type2>
-      <type3>Throw Exception</type3>
+      <type0>Sukurti naują</type0>
+      <type1>Pašalinti esantį</type1>
+      <type2>Pakeisti esantį</type2>
+      <type3>Mesti išimtį</type3>
     </Behavior>
   </Import>
 
   <UIExportNode>
     <action>
-      <ExportHistory>Export Version History</ExportHistory>
+      <ExportHistory>Eksportuoti versijų istoriją</ExportHistory>
     </action>
   </UIExportNode>
 
   <UIPopupMenu>
     <msg>
-      <node-locked-other-person>This node or its parent node is being locked by another user, so you cannot delete it.</node-locked-other-person>
+      <node-locked-other-person>Šį mazgą arba jo pirminį mazgą yra užrakinęs kitas vartotojas, todėl jų panaikinti negalėsite.</node-locked-other-person>
     </msg>
   </UIPopupMenu>
 
   <Import>
     <label>
-      <docview>Document View</docview>
-      <sysview>System View</sysview>
+      <docview>Dokumento rodymas</docview>
+      <sysview>Sistemos rodymas</sysview>
     </label>
   </Import>
 
   <UIDocumentForm>
     <msg>
-      <do-not-permission>You do not have permission to load the template '{0}'.</do-not-permission>
+      <do-not-permission>Jūs neturite teisės įkelti šablono '{0}'.</do-not-permission>
     </msg>
   </UIDocumentForm>
 
@@ -2487,17 +2487,17 @@
   -->
   <UIActionBar>
     <obtion>
-      <Admin>Admin</Admin>
-      <Info>Info</Info>
-      <Actions>Actions</Actions>
-      <Collaboration>Collaboration</Collaboration>
-      <Search>Search</Search>
+      <Admin>Administratorius</Admin>
+      <Info>Informacija</Info>
+      <Actions>Veiksmai</Actions>
+      <Collaboration>Bendradarbiavimas</Collaboration>
+      <Search>Ieškoti</Search>
     </obtion>
   </UIActionBar>
 
   <UIPopupMenu>
     <msg>
-      <can-not-unlock-node-is-checked-in>You cannot unlock because the node '{0}' (or its ancestor) is checked in.</can-not-unlock-node-is-checked-in>
+      <can-not-unlock-node-is-checked-in>Jūs negalite atrakinti, nes mazgas '{0}' (arba jo pradininkas) yra įregistruotas.</can-not-unlock-node-is-checked-in>
     </msg>
   </UIPopupMenu>
 
@@ -2506,39 +2506,39 @@
   -->
   <UIActionBar>
     <msg>
-      <cannot-enable-version>Cannot enable versioning node.</cannot-enable-version>
+      <cannot-enable-version>Negalima įjungti versijavimo mazgo.</cannot-enable-version>
     </msg>
   </UIActionBar>
   <UIPopupMenu>
     <msg>
-        <cannot-readsource>You cannot read data from the source node.</cannot-readsource>
+        <cannot-readsource>Jūs negalite perskaityti duomenų iš šaltinio mazgo.</cannot-readsource>
     </msg>
   </UIPopupMenu>
   <UIUploadForm>
     <msg>
-      <upload-not-null>Please upload the file before adding a category.</upload-not-null>
+      <upload-not-null>Prašome įkelti failą prieš pridedant kategoriją.</upload-not-null>
     </msg>
   </UIUploadForm>
   <UIActionBar>
     <msg>
-      <allow-setProperty>You must set a property for this group.</allow-setProperty>
+      <allow-setProperty>Turite nustatyti ypatybę šiai grupei.</allow-setProperty>
     </msg>
   </UIActionBar>
 
   <UIActionForm>
     <msg>
-      <name-not-allowed>This action name is not allowed.</name-not-allowed>
+      <name-not-allowed>Šio veiksmo pavadinimas neleistinas.</name-not-allowed>
     </msg>
   </UIActionForm>
 
   <UISaveQueryForm>
     <msg>
-      <name-not-allowed>This query name is not allowed.</name-not-allowed>
+      <name-not-allowed>Šios užklausos pavadinimas neleistinas.</name-not-allowed>
     </msg>
   </UISaveQueryForm>
   <UISimpleSearch>
     <msg>
-      <name-not-allowed>A word or phrase in the content is not allowed.</name-not-allowed>
+      <name-not-allowed>Žodis ar frazė turinyje neleistini.</name-not-allowed>
     </msg>
   </UISimpleSearch>
 
@@ -2548,7 +2548,7 @@
    -->
   <ECMContextMenu>
       <event>
-        <Permlink>View Document</Permlink>
+        <Permlink>Rodyti dokumentą</Permlink>
       </event>
   </ECMContextMenu>
   
@@ -2558,105 +2558,105 @@
    -->
   <UIFolderForm>
     <label>
-      <nt_folder>Document Folder</nt_folder>
-      <nt_unstructured>Content Folder</nt_unstructured>
-      <exo_cssFolder>CSS Folder</exo_cssFolder>
-      <exo_jsFolder>Javascript Folder</exo_jsFolder>
+      <nt_folder>Dokumento aplankas</nt_folder>
+      <nt_unstructured>Turinio aplankas</nt_unstructured>
+      <exo_cssFolder>CSS aplankas</exo_cssFolder>
+      <exo_jsFolder>Javascript aplankas</exo_jsFolder>
       <exo_linkFolder>Link Folder</exo_linkFolder>
-      <exo_webFolder>Web Content Folder</exo_webFolder>
+      <exo_webFolder>Internetinio turinio aplankas</exo_webFolder>
    </label>
   </UIFolderForm>
 
   <Comments>
     <tooltip>
-      <remove-comment>Remove this comment</remove-comment>
-      <edit-comment>Edit this comment</edit-comment>
+      <remove-comment>Pašalinti šį komentarą</remove-comment>
+      <edit-comment>Redaguoti šį komentarą</edit-comment>
     </tooltip>
   </Comments>
   <UIDocumentInfo>
     <msg>
-      <confirm-deletecomment>Are you sure you want to delete this comment?</confirm-deletecomment>
+      <confirm-deletecomment>Ar tikrai norite ištrinti šį komentarą?</confirm-deletecomment>
     </msg>
   </UIDocumentInfo>
 
  <UIExportNode>
   <msg>
-    <OutOfMemoryError>You should select System View while exporting large data.</OutOfMemoryError>
+    <OutOfMemoryError>Jūs turėtumėte pasirinkti Sistemos rodinys eksportuojant didelius duomenis.</OutOfMemoryError>
   </msg>
  </UIExportNode>
  <Taxonomy>
     <msg>
-      <AccessDeniedException>You do not have permission to access these category trees.</AccessDeniedException>
+      <AccessDeniedException>Jūs neturite leidimo prieiti prie šių kategorijų medžių.</AccessDeniedException>
     </msg>
   </Taxonomy>
 
   <UIJcrExplorerEditForm>
     <msg>
-      <notNullDriveName>The Drive Name is null or empty. Please fill out the Drive Name field.</notNullDriveName>
-      <notNullPath>The path is null or empty. Please fill out the path.</notNullPath>
+      <notNullDriveName>Disko pavadinimas yra neapibrėžtas arba tuščias. Prašome užpildyti disko pavadinimo lauką.</notNullDriveName>
+      <notNullPath>Kelias yra neapibrėžtas arba tuščias. Prašome užpildyti kelią.</notNullPath>
     </msg>
   </UIJcrExplorerEditForm>
 
   <UIViewSearchResult>
     <tooltip>
-      <remove-attachment>Are you sure you want to remove this attachment file?</remove-attachment>
+      <remove-attachment>Ar jūs tikrai norite pašalinti šį pridėtinį failą?</remove-attachment>
     </tooltip>
   </UIViewSearchResult>
 
   <SameNamePopup>
     <title>
-      <UIUploadBehaviorWithSameName>Upload File</UIUploadBehaviorWithSameName>
+      <UIUploadBehaviorWithSameName>Įkelti failą</UIUploadBehaviorWithSameName>
     </title>
   </SameNamePopup>
 
   <UIAllItems>
     <label>
-      <OwnedByMe>Owned by me</OwnedByMe>
-      <Favourites>Favorites</Favourites>
-      <Hidden>Hidden</Hidden>
-      <Trash>Trash</Trash>
-      <Configuration>Set Up Preferences</Configuration>
+      <OwnedByMe>Priklausantys man</OwnedByMe>
+      <Favourites>Mėgstamiausi</Favourites>
+      <Hidden>Paslėptas</Hidden>
+      <Trash>Šiukšliadėžė</Trash>
+      <Configuration>Nuostatos</Configuration>
     </label>
     <title>
-      <allItems>All Items</allItems>
+      <allItems>Visi elementai</allItems>
     </title>
   </UIAllItems>
 
   <UIPreferencesForm>
       <label>
-          <Alphabetic>Alphabetical</Alphabetic>
-          <Type>Type</Type>
-          <CreatedDate>Created Date</CreatedDate>
-          <ModifiedDate>Modified Date</ModifiedDate>
-          <Ascending>Ascending</Ascending>
-          <Descending>Descending</Descending>
+          <Alphabetic>Abėcėlę</Alphabetic>
+          <Type>Tipas</Type>
+          <CreatedDate>Sukūrimo data</CreatedDate>
+          <ModifiedDate>Pakeitimo data</ModifiedDate>
+          <Ascending>Didėjančią tvarką</Ascending>
+          <Descending>Mažėjimo tvarka</Descending>
       </label>
   </UIPreferencesForm>
 
   <UISavedSearches>
     <title>
-      <savedSearches>Saved Searches</savedSearches>
+      <savedSearches>Išsaugotos paieškos</savedSearches>
     </title>
   </UISavedSearches>
   <DocumentType>
     <label>
-       <Images>Image</Images>
+       <Images>Paveikslėlis</Images>
        <Video>Video</Video>
-       <Music>Music</Music>
-       <Documents>Document</Documents>
-       <Content>Content</Content>
+       <Music>Muzika</Music>
+       <Documents>Dokumentas</Documents>
+       <Content>Turinys</Content>
     </label>
   </DocumentType>
 
   <UIDocumentFilterForm>
     <label>
-      <Images>Image</Images>
+      <Images>Paveikslėlis</Images>
       <Video>Video</Video>
-      <Music>Music</Music>
-      <Documents>Document</Documents>
-      <Content>Content</Content>
+      <Music>Muzika</Music>
+      <Documents>Dokumentas</Documents>
+      <Content>Turinys</Content>
     </label>
-    <title>Set Up Filter Preferences</title>
+    <title>Nustatyti filtro pirmenybes</title>
     <action>
       <Save>#{word.save}</Save>
       <Cancel>#{word.cancel}</Cancel>
@@ -2665,40 +2665,40 @@
 
   <UIAllItemsByType>
     <label>
-    <ByType>Filter by Type</ByType>
-      <DocumentFilterConfiguration>Set Up Filter Preferences</DocumentFilterConfiguration>
+    <ByType>Filtruoti pagal tipą</ByType>
+      <DocumentFilterConfiguration>Nustatyti filtro nuostatas</DocumentFilterConfiguration>
     </label>
     <title>
-      <ShowVideo>Show all video files</ShowVideo>
-      <ShowMusic>Show all music files</ShowMusic>
-      <ShowImages>Show all image files</ShowImages>
-      <ShowDocuments>Show all document files</ShowDocuments>
-      <ShowContent>Show all document types</ShowContent>
+      <ShowVideo>Rodyti visus video failus</ShowVideo>
+      <ShowMusic>Rodyti visus muzikos failus</ShowMusic>
+      <ShowImages>Rodyti visus vaizdo failus</ShowImages>
+      <ShowDocuments>Rodyti visus dokumentų failus</ShowDocuments>
+      <ShowContent>Rodyti visus dokumentų tipus</ShowContent>
     </title>
   </UIAllItemsByType>
 
   <Views>
     <label>
-      <slide-show>Slide Show</slide-show>
+      <slide-show>Skaidrių demonstravimas</slide-show>
     </label>
   </Views>
   <ECMContextMenu>
     <event>
-      <PlayMedia>Play Media</PlayMedia>
+      <PlayMedia>Leisti media</PlayMedia>
     </event>
   </ECMContextMenu>
   <UIPopupWindow>
     <title>
-      <UIDocumentFilterForm>Filter Documents Type</UIDocumentFilterForm>
+      <UIDocumentFilterForm>Filtruoti dokumentų tipą</UIDocumentFilterForm>
     </title>
   </UIPopupWindow>
 
   <UIAllItemsPreferenceForm>
     <label>
-      <showOwnedByUser>Owned by me</showOwnedByUser>
-      <showFavourites>Favorites</showFavourites>
-      <showHiddens>Hidden</showHiddens>
-      <showTrash>Trash</showTrash>
+      <showOwnedByUser>Priklausantys man</showOwnedByUser>
+      <showFavourites>Mėgstamiausi</showFavourites>
+      <showHiddens>Paslėptas</showHiddens>
+      <showTrash>Šiukšliadėžė</showTrash>
     </label>
     <action>
       <Save>#{word.save}</Save>
@@ -2708,12 +2708,12 @@
 
   <EmptyTrashManageComponent>
     <msg>
-      <confirm-delete>Are you sure you want to empty all items from trash?</confirm-delete>
+      <confirm-delete>Ar tikrai norite ištuštinti visus elementus iš šiukšliadėžės?</confirm-delete>
     </msg>
   </EmptyTrashManageComponent>
   <UICategoryForm>
     <label>
-      <name>Category Name</name>
+      <name>Kategorijos pavadinimas</name>
     </label>
     <action>
       <Save>#{word.save}</Save>
@@ -2722,53 +2722,53 @@
   </UICategoryForm>
   <UIPopupWindow>
     <title>
-      <UICategoryForm>Add Category</UICategoryForm>
+      <UICategoryForm>Pridėti kategoriją</UICategoryForm>
     </title>
   </UIPopupWindow>
   <UIActionBar>
     <tooltip>
-      <AddCategory>Add Category</AddCategory>
+      <AddCategory>Pridėti kategoriją</AddCategory>
     </tooltip>
    </UIActionBar>
 
    <UITaggingForm>
     <label>
-      <Public>Public</Public>
-      <Private>Private</Private>
-      <tagScopes>Tag Scopes</tagScopes>
+      <Public>Viešas</Public>
+      <Private>Privatus</Private>
+      <tagScopes>Žymių aprėptys</tagScopes>
     </label>
    </UITaggingForm>
 
   <UITagExplorer>
     <title>
-      <PublicTags>Tags</PublicTags>
-      <EditPublicTags>Edit Tags</EditPublicTags>
-      <PrivateTags>Tags</PrivateTags>
+      <PublicTags>Žymos</PublicTags>
+      <EditPublicTags>Redaguoti Žymas</EditPublicTags>
+      <PrivateTags>Žymos</PrivateTags>
     </title>
   </UITagExplorer>
 
   <UIEditingTagsForm>
     <header>
-      <name>Name</name>
-      <relatedDocuments>Related Documents</relatedDocuments>
-      <action>Action</action>
+      <name>Vardas</name>
+      <relatedDocuments>Susiję dokumentai</relatedDocuments>
+      <action>Veiksmas</action>
     </header>
     <action>
       <title>
-        <EditTag>Edit Tag</EditTag>
-        <RemoveTag>Remove Tag</RemoveTag>
-        <AddTag>Add Tag</AddTag>
+        <EditTag>Redaguoti žymę</EditTag>
+        <RemoveTag>Šalinti žymę</RemoveTag>
+        <AddTag>Pridėti žymę</AddTag>
       </title>
     </action>
     <msg>
-      <confirm-remove>Are you sure to delete this tag?</confirm-remove>
+      <confirm-remove>Ar tikrai norite ištrinti šią žymę?</confirm-remove>
     </msg>
   </UIEditingTagsForm>
 
 
   <UIPopupWindow>
     <title>
-      <UIEditingTagsForm>Edit Tag</UIEditingTagsForm>
+      <UIEditingTagsForm>Redaguoti žymę</UIEditingTagsForm>
     </title>
   </UIPopupWindow>
 
@@ -2778,70 +2778,70 @@
       <Cancel>#{word.close}</Cancel>
     </action>
     <label>
-      <tagName>Tag Name:</tagName>
-      <relatedDocuments>Related Documents</relatedDocuments>
+      <tagName>Žymės pavadinimas:</tagName>
+      <relatedDocuments>Susiję dokumentai</relatedDocuments>
     </label>
   </UITagForm>
 
   <TagPopup>
     <title>
-      <UITagForm>Tag</UITagForm>
+      <UITagForm>Žymė</UITagForm>
     </title>
   </TagPopup>
 
     <UIPopupMenu>
     <msg>
-      <node-locked-editing>You cannot edit this node with the path {0}. It is being locked by another user.</node-locked-editing>
+      <node-locked-editing>Jūs negalite redaguoti šio mazgo kelyje {0}. Jį užrakinęs kitas vartotojas.</node-locked-editing>
     </msg>
   </UIPopupMenu>
   <UITagStyleForm>
     <msg>
-      <error-update>An error occurred while updating the tag style.</error-update>
+      <error-update>Klaida įvyko atnaujinant žymių stilių.</error-update>
     </msg>
   </UITagStyleForm>
 
   <UIPopupMenu>
     <msg>
-      <editTagAccessDenied>Access denied.</editTagAccessDenied>
+      <editTagAccessDenied>Prieiga uždrausta.</editTagAccessDenied>
     </msg>
   </UIPopupMenu>
 
   <UIPopupWindow>
     <title>
-      <UITaggingFormContainer>Tag Manager</UITaggingFormContainer>
+      <UITaggingFormContainer>Žymos valdymas</UITaggingFormContainer>
     </title>
   </UIPopupWindow>
 
     <PopupComponent>
     <title>
-      <UINodeTypeSelector>Select Node Type</UINodeTypeSelector>
+      <UINodeTypeSelector>Pasirinkti mazgo tipą</UINodeTypeSelector>
     </title>
   </PopupComponent>
 
     <UIActionForm>
     <title>
-      <ShowComponent>Show Component</ShowComponent>
-      <removeReference>Remove</removeReference>
+      <ShowComponent>Rodyti komponentą</ShowComponent>
+      <removeReference>Pašalinti</removeReference>
     </title>
   </UIActionForm>
 
   <EditFormAction>
     <title>
-      <ShowComponent>Show Component</ShowComponent>
-      <removeReference>Remove</removeReference>
+      <ShowComponent>Rodyti komponentą</ShowComponent>
+      <removeReference>Pašalinti</removeReference>
     </title>
   </EditFormAction>
 
   <NodeTypeNameValidator>
     <msg>
-      <Invalid-char>There are some invalid characters. Please type another value.</Invalid-char>
-      <empty-input>The value of the field is null or empty.</empty-input>
+      <Invalid-char>Yra keletas neleistinų simbolių. Įveskite kitą vertę.</Invalid-char>
+      <empty-input>Šio laukelio vertė yra negaliojanti arba tuščia.</empty-input>
     </msg>
   </NodeTypeNameValidator>
 
   <UIPreferencesForm>
       <label>
-            <queryType>Query Type:</queryType>
+            <queryType>Užklausos tipas:</queryType>
             <SQL>SQL</SQL>
             <XPATH>XPATH</XPATH>
       </label>
@@ -2849,23 +2849,23 @@
 
   <UIDocumentInfo>
     <msg>
-      <repository-error>An error occurred. The information about the repository was lost.</repository-error>
+      <repository-error>Įvyko klaida. Informacija apie saugyklą buvo prarasta.</repository-error>
     </msg>
   </UIDocumentInfo>
 
   <UITreeExplorer>
     <msg>
-      <repository-error>An error occurred. The information about the repository was lost.</repository-error>
+      <repository-error>Įvyko klaida. Informacija apie saugyklą buvo prarasta.</repository-error>
     </msg>
   </UITreeExplorer>
   <UIDocumentForm>
     <msg>
-      <constraintviolation-exception>You cannot save the document. The input data are missing or invalid.</constraintviolation-exception>
+      <constraintviolation-exception>Negalima išsaugoti dokumento. Įvesties duomenys neteisingi arba jų nėra.</constraintviolation-exception>
     </msg>
   </UIDocumentForm>
   <UIActionForm>
     <msg>
-      <constraintviolation-exception>You cannot save the document. The input data are missing or invalid.</constraintviolation-exception>
+      <constraintviolation-exception>Negalima išsaugoti dokumento. Įvesties duomenys neteisingi arba jų nėra.</constraintviolation-exception>
     </msg>
   </UIActionForm>
 
@@ -2875,34 +2875,34 @@
       <Cancel>#{word.cancel}</Cancel>
     </action>
     <label>
-      <formInput>The previous path was lost. Please select a new one.</formInput>
+      <formInput>Ankstesnis kelias buvo prarastas. Prašome pasirinkti naują.</formInput>
     </label>
   </UISelectRestorePath>
   <PathNode>
     <title>
-      <Add>Add</Add>
+      <Add>Pridėti</Add>
     </title>
   </PathNode>
   <UIPopupPathFoRestore>
     <title>
-      <UIOneNodePathSelector>Select Parent Node</UIOneNodePathSelector>
+      <UIOneNodePathSelector>Pasirinkite pirminį mazgą</UIOneNodePathSelector>
     </title>
   </UIPopupPathFoRestore>
   <rootNodeInfo>
     <title>
-      <AddRootNode>Add Root Node</AddRootNode>
+      <AddRootNode>Pridėti šakninį mazgą</AddRootNode>
     </title>
   </rootNodeInfo>
 
   <UIActionForm>
     <msg>
-      <homePath-emty>The home path is empty.</homePath-emty>
-      <targetPath-emty>The target path is empty.</targetPath-emty>
+      <homePath-emty>Namų kelias yra tuščias.</homePath-emty>
+      <targetPath-emty>Tikslinis kelias yra tuščias.</targetPath-emty>
     </msg>
     </UIActionForm>
     <UIActionBar>
       <msg>
-        <not-exist-categories>There are no categories.</not-exist-categories>
+        <not-exist-categories>Nėra kategorijų.</not-exist-categories>
       </msg>
     </UIActionBar>
 
@@ -2917,99 +2917,99 @@
       <Close>#{word.close}</Close>
     </button>
     <revisions>
-      <version>Revisions</version>
-      <date>Date</date>
-      <author>Author</author>
-      <status>Status</status>
-      <action>Action</action>
-      <label>Revision</label>
-      <none>No revisions</none>
-      <seeall>See all versions</seeall>
-      <currentVersion>Current Revision</currentVersion>
-      <confirm>You will lose your draft work. Are you sure you want to replace the current revision?</confirm>
+      <version>Revizijos</version>
+      <date>Data</date>
+      <author>Autorius</author>
+      <status>Būsena</status>
+      <action>Veiksmas</action>
+      <label>Revizija</label>
+      <none>Jokių revizijų</none>
+      <seeall>Matyti visas versijas</seeall>
+      <currentVersion>Dabartinė revizija</currentVersion>
+      <confirm>Jūs prarasite savo projekto darbą. Ar tikrai norite pakeisti dabartinę reviziją?</confirm>
     </revisions>
     <status>
-      <version>Revision</version>
-      <title>Status</title>
-      <archived>Archived</archived>
-      <obsolete>Obsolete</obsolete>
-      <unpublished>Unpublished</unpublished>
-      <enrolled>Enrolled</enrolled>
-      <draft>Draft</draft>
-      <pending>Pending</pending>
-      <approved>Approved</approved>
-      <inreview>In Review</inreview>
-      <staged>Staged</staged>
-      <published>Published</published>
-      <live>Published</live>
+      <version>Revizija</version>
+      <title>Būsena</title>
+      <archived>Suarchyvuota</archived>
+      <obsolete>Pasenęs</obsolete>
+      <unpublished>Neskelbtas</unpublished>
+      <enrolled>Įtraukta</enrolled>
+      <draft>Projektas</draft>
+      <pending>Laukiama</pending>
+      <approved>Patvirtinta</approved>
+      <inreview>Apžvalgoje</inreview>
+      <staged>Etapas</staged>
+      <published>Paskelbtas</published>
+      <live>Paskelbtas</live>
     </status>
     <scheduled>
-      <title>Scheduled</title>
-      <from>From</from>
-      <to>To</to>
+      <title>Suplanuota</title>
+      <from>Nuo</from>
+      <to>Iki</to>
     </scheduled>
     <title>
-      <preview>Preview</preview>
-      <restore>Restore</restore>
+      <preview>Peržiūra</preview>
+      <restore>Atkurti</restore>
     </title>
     <msg>
-      <have-no-view-template>The View template is not supported.</have-no-view-template>
-      <restore-complete>Restore completed.</restore-complete>
+      <have-no-view-template>Rodymo šablonas yra nesuderinamas.</have-no-view-template>
+      <restore-complete>Atkūrimas baigtas.</restore-complete>
     </msg>
   </UIPublicationPanel>
   <UIPublicationHistory>
     <header>
-      <date>Date</date>
-      <versionName>Revision Name</versionName>
-      <currentState>Current State</currentState>
-      <user>Author</user>
-      <description>Description</description>
+      <date>Data</date>
+      <versionName>Revizijos pavadinims</versionName>
+      <currentState>Dabartinė būsena</currentState>
+      <user>Autorius</user>
+      <description>Aprašymas</description>
     </header>
   </UIPublicationHistory>
   
   <UIPublicationSchedule>
     <label>
-      <introduction>You can schedule the publication of your document. Select the dates you would like to see your document published</introduction>
-      <no-schedule-info>There is no publication schedule for your document</no-schedule-info>
+      <introduction>Galite suplanuoti savo dokumento paskelbimą. Pasirinkite datas kada norite matyti savo dokumentą paskelbtą</introduction>
+      <no-schedule-info>Nėra jokio paskelbimo grafiko jūsų dokumentui</no-schedule-info>
     </label>
     <msg>
-      <save-finished>Your new publication schedule was saved successfully.</save-finished>
+      <save-finished>Jūsų naujas paskelbimo grafikas buvo sėkmingai išsaugotas.</save-finished>
     </msg>
     <action>
       <Save>#{word.save}</Save>
-      <Reset>Reset</Reset>
+      <Reset>Atstatyti</Reset>
     </action>
   </UIPublicationSchedule>
 
   <UIPublicationPanel>
     <label>
-      <header>Publication Date</header>
-      <start>Start Publication</start>
-      <end>End Publication</end>
+      <header>Paskelbimo data</header>
+      <start>Pradėti paskelbimą</start>
+      <end>Baigti paskelbimą</end>
     </label>
     <msg>
-      <invalid-format>The date format is invalid. Please check again.</invalid-format>
-      <fromDate-after-toDate>The From date has to be earlier than the To date.</fromDate-after-toDate>
+      <invalid-format>Datos formatas yra netinkamas. Prašome patikrinti dar kartą.</invalid-format>
+      <fromDate-after-toDate>Nuo data turi būti ankstesnė nei Iki data.</fromDate-after-toDate>
     </msg>
   </UIPublicationPanel>
   <UIPopupWindow>
     <title>
-      <UIPublicationContainer>Manage Publication</UIPublicationContainer>
-      <UIPublishingPanel>Manage Publication</UIPublishingPanel>
+      <UIPublicationContainer>Valdyti paskelbimą</UIPublicationContainer>
+      <UIPublishingPanel>Valdyti paskelbimą</UIPublishingPanel>
     </title>
   </UIPopupWindow>
   <WCMContentView>
     <header>
-      <status>Status</status>
-      <author>Author</author>
-      <date>Created Date</date>
-      <title>Document Title</title>
-      <lastUser>Last User</lastUser>
+      <status>Būsena</status>
+      <author>Autorius</author>
+      <date>Sukūrimo data</date>
+      <title>Dokumento pavadinimas</title>
+      <lastUser>Paskutinis vartotojas</lastUser>
     </header>
   </WCMContentView>
   <UITagForm>
     <msg>
-      <NameAlreadyExist>The tag name already exists.</NameAlreadyExist>
+      <NameAlreadyExist>Žymės pavadinimas jau egzistuoja.</NameAlreadyExist>
     </msg>
   </UITagForm>
 
@@ -3019,143 +3019,143 @@
   <UICategoryManagerSearch>
     <tab>
       <label>
-        <UIOneTaxonomySelector>Select Category</UIOneTaxonomySelector>
+        <UIOneTaxonomySelector>Pasirinkite kategoriją</UIOneTaxonomySelector>
       </label>
     </tab>
   </UICategoryManagerSearch>
 
   <UIPreferencesForm>
    <action>
-     <HideAdvance>Hide Advanced</HideAdvance>
-     <ShowAdvance>Show Advanced</ShowAdvance>
+     <HideAdvance>Paslėpti Plačiau</HideAdvance>
+     <ShowAdvance>Rodyti Plačiau</ShowAdvance>
     </action>
     <label>
-    <Advance>Advanced</Advance>
+    <Advance>Papildomi</Advance>
     </label>
   </UIPreferencesForm>
 
   <UIJCRExplorerPortlet>
 <msg>
-  <file-access-denied>File access denied.</file-access-denied>
-  <anonymous-access-denied>Anonymous user does not have permission to use this function.</anonymous-access-denied>
+  <file-access-denied>Failo prieiga uždrausta.</file-access-denied>
+  <anonymous-access-denied>Anoniminis vartotojas neturi teisės naudotis šia funkcija.</anonymous-access-denied>
 </msg>
   </UIJCRExplorerPortlet>
   <UIDrivesArea>
     <DrivesArea>
-      <ShowDrives>Show Drives</ShowDrives>
+      <ShowDrives>Rodyti diskus</ShowDrives>
     </DrivesArea>
   </UIDrivesArea>
   <UIJcrExplorerEditForm>
     <msg>
-      <fields-saved>All field values saved.</fields-saved>
-      <fields-cancelled>All field values canceled.</fields-cancelled>
+      <fields-saved>Visos laukų reikšmės išsaugotos.</fields-saved>
+      <fields-cancelled>Visos laukų reikšmės atšauktos.</fields-cancelled>
     </msg>
   </UIJcrExplorerEditForm>
   <UIDocumentForm>
   <msg>
-  <confirm-close>The changes you made will be lost if you close this form.</confirm-close>
-  <confirm-changeType>The changes you made will be lost if you change the content type.</confirm-changeType>
-  <confirm-navigate>The changes you made will be lost if you navigate away from this page.</confirm-navigate>
+  <confirm-close>Padaryti pakeitimai bus prarasti uždarius šią formą.</confirm-close>
+  <confirm-changeType>Padaryti pakeitimai bus prarasti, pakeitus turinio tipą.</confirm-changeType>
+  <confirm-navigate>Padaryti pakeitimai bus prarasti, jei išeisite iš šio puslapio.</confirm-navigate>
   </msg>
   </UIDocumentForm>
   <UploadFileMimeTypesValidator>
     <msg>
-      <wrong-mimetype>Mime type {0} is not allowed for field {1}. Please upload another file</wrong-mimetype>
+      <wrong-mimetype>MIME tipas {0} yra neleidžiamas laukui {1}. Prašome įkelti kitą failą</wrong-mimetype>
     </msg>
   </UploadFileMimeTypesValidator>
   <lifecyclePhase>
     <label>
-    <no>No</no>
-  <yes>Yes</yes>
-  <true>True</true>
-  <false>False</false>
-  <Electronic>Electronic</Electronic>
+    <no>Ne</no>
+  <yes>Taip</yes>
+  <true>Tiesa</true>
+  <false>Netiesa</false>
+  <Electronic>Elektroninis</Electronic>
   <Paper>Paper</Paper>
-  <NONE>None</NONE>
+  <NONE>Nėra</NONE>
   <CLASSIFIED>Classified</CLASSIFIED>
-  <UNCLASSIFIED>Unclassified</UNCLASSIFIED>
-  <NOCONTRACT>No Contract</NOCONTRACT>
-  <one-minute>One Minute</one-minute>
-  <hourly>Hourly</hourly>
-  <daily>Daily</daily>
-  <quarterly>Quarterly</quarterly>
-  <yearly>Yearly</yearly>
-  <ten-years>Ten Years</ten-years>
-  <read>User Action</read>
-  <schedule>Scheduler</schedule>
-  <node_added>Content Addition</node_added>
-  <node_removed>Content Removal</node_removed>
-  <property_added>Property Addition</property_added>
-  <property_removed>Property Removal</property_removed>
-  <property_changed>Property Modification</property_changed>
+  <UNCLASSIFIED>Neklasifikuotas</UNCLASSIFIED>
+  <NOCONTRACT>Nėra sutarties</NOCONTRACT>
+  <one-minute>Viena minutė</one-minute>
+  <hourly>Kas valandą</hourly>
+  <daily>Kasdien</daily>
+  <quarterly>Kas ketvirtį</quarterly>
+  <yearly>Kas metus</yearly>
+  <ten-years>Dešimt metų</ten-years>
+  <read>Vartotojo veiksmas</read>
+  <schedule>Planuotojas</schedule>
+  <node_added>Turinio papildymas</node_added>
+  <node_removed>Turinio šalinimas</node_removed>
+  <property_added>Sąvybių papildymas</property_added>
+  <property_removed>Sąvybių pašalinimas</property_removed>
+  <property_changed>Sąvybių pakeitimas</property_changed>
 </label>
   </lifecyclePhase>
   <UIPopupMenu>
   <msg>
-<can-not-remove-locked-node>Node {0} is locked. You cannot move it to the Trash.</can-not-remove-locked-node>
-<can-not-remove-checked-in-node>Node {0} or its parent is checked in. You cannot move it to the Trash.</can-not-remove-checked-in-node>
-<access-denied-to-delete>Access denied. You cannot move node {0} to the Trash.</access-denied-to-delete>
+<can-not-remove-locked-node>Mazgas {0} yra užrakintas. Negalima perkelti jo į šiukšliadėžę.</can-not-remove-locked-node>
+<can-not-remove-checked-in-node>Mazgas {0} arba jo pirminis mazgas yra įregistruoti. Negalima perkelti jo į šiukšliadėžę.</can-not-remove-checked-in-node>
+<access-denied-to-delete>Prieiga uždrausta. Mazgo {0} negalima perkelti į šiukšlinę.</access-denied-to-delete>
   </msg>
   </UIPopupMenu>
   <UIPropertyForm>
   <msg>
-  <unknown-error>An error occurred while editing this property.</unknown-error>
+  <unknown-error>Redaguojant šią ypatybę įvyko klaida.</unknown-error>
     </msg>
   </UIPropertyForm>
   <UIWatchDocumentForm>
     <msg>
-      <node-is-locked>This node is locked. You cannot watch it.</node-is-locked>
-      <unknown-error>Some errors have occurred. You cannot watch this node.</unknown-error>
+      <node-is-locked>Šis mazgas yra užrakintas. Jūs negalite jo stebėti.</node-is-locked>
+      <unknown-error>Įvyko klaidų. Jūs negalite stebėti šio mazgo.</unknown-error>
     </msg>
   </UIWatchDocumentForm>   
   <UIActionForm>
     <msg>
-      <xss-vulnerability-character>Field '{0}' contains XSS vulnerability characters</xss-vulnerability-character>
+      <xss-vulnerability-character>Lauke '{0}' yra XSS pažeidžiamumo simbolių</xss-vulnerability-character>
     </msg>
   </UIActionForm>
   <UIMultiUpload>
   <label>
-    <AbortAll>Abort all</AbortAll>
-    <AbortAllFiles>Abort all Files</AbortAllFiles>
-    <MaxFileSize>Maximum file size is</MaxFileSize>
-    <InvalidCharacters>Invalid characters will be changed by '-'</InvalidCharacters>
-    <DropFileMessage>Drop your files here in the current folder</DropFileMessage>
+    <AbortAll>Nutraukti visus</AbortAll>
+    <AbortAllFiles>Nutraukti visus failus</AbortAllFiles>
+    <MaxFileSize>Maksimalus failo dydis yra</MaxFileSize>
+    <InvalidCharacters>Neleistini simboliai bus pakeisti į "-"</InvalidCharacters>
+    <DropFileMessage>Numeskite failus esamame aplanke</DropFileMessage>
     <Close>#{word.close}</Close>
-    <in>in</in>
-    <MaxFileSizeAlert>The file size exceeds the size limit of</MaxFileSizeAlert>
-    <Waiting>Waiting</Waiting>
-    <Error>Error</Error>
-    <or>or</or>
-    <AlreadyInUse>Already in use</AlreadyInUse>
-    <Keep>Keep both</Keep>
-    <Replace>Replace</Replace>
-    <Canceled>Canceled</Canceled>
+    <in>į</in>
+    <MaxFileSizeAlert>Failo dydis viršija ribą</MaxFileSizeAlert>
+    <Waiting>Laukiama</Waiting>
+    <Error>Klaida</Error>
+    <or>ar</or>
+    <AlreadyInUse>Jau naudojama</AlreadyInUse>
+    <Keep>Pasilikti abu</Keep>
+    <Replace>Pakeisti</Replace>
+    <Canceled>Atšauktas</Canceled>
     <Cancel>#{word.cancel}</Cancel>
-    <AbortAllConfirmation>Do you want to abort all files in progress?</AbortAllConfirmation>
+    <AbortAllConfirmation>Ar norite nutraukti visus failus pažangoje?</AbortAllConfirmation>
   </label>
   </UIMultiUpload>
   <UIDocumentNodeList>
   <label>
-  <CreatedOn>Created on</CreatedOn>
-  <Updated>Updated</Updated>
-  <by>by</by>
-  <you>you</you>
+  <CreatedOn>Sukurta</CreatedOn>
+  <Updated>Atnaujinta</Updated>
+  <by>pagal</by>
+  <you>Jūs</you>
   </label>
   </UIDocumentNodeList>
   <FileView>
     <label>
-      <name>Name</name>
-      <date>Date</date>
-      <size>Size</size>
-      <sortBy>Sort by:</sortBy>
-      <filesAreSelected>Files are selected.</filesAreSelected>
-      <ClearSelection>Clear selection</ClearSelection>
-      <more>More</more>
+      <name>Vardas</name>
+      <date>Data</date>
+      <size>Dydis</size>
+      <sortBy>Rūšiuoti pagal:</sortBy>
+      <filesAreSelected>Failai yra pasirinkti.</filesAreSelected>
+      <ClearSelection>Išvalyti pasirinkimą</ClearSelection>
+      <more>Daugiau</more>
     </label>
   </FileView>
   <UIPropertyForm>
   <msg>
-  <property-name-incorrect>The property name is incorrect, please enter another value for it!</property-name-incorrect>
+  <property-name-incorrect>Ypatybės pavadinimas yra neteisingas, įveskite kitą vertę jam!</property-name-incorrect>
     </msg>
   </UIPropertyForm>
   <!--
@@ -3164,6 +3164,6 @@
   ###################################################################################
   -->
   <VersionException>
-  <msg>Cannot modify documents that are being checked in.</msg>  
+  <msg>Negalima keisti dokumentų, kurie yra užregistruoti.</msg>  
   </VersionException>
 </bundle>

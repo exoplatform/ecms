@@ -223,7 +223,7 @@ public class StageAndVersionPublicationPlugin extends WebpagePublicationPlugin{
       Value liveRevision = getValue(node,StageAndVersionPublicationConstant.LIVE_REVISION_PROP);
       if (liveRevision != null && value.getString().equals(liveRevision.getString())) {
         node.setProperty(StageAndVersionPublicationConstant.LIVE_REVISION_PROP,
-                         valueFactory.createValue(""));
+                (javax.jcr.Value)null);
       }
       versionLog = new VersionLog(selectedRevision.getName(),
                                   PublicationDefaultStates.OBSOLETE,
@@ -287,8 +287,11 @@ public class StageAndVersionPublicationPlugin extends WebpagePublicationPlugin{
    */
   private Node getLiveRevision(Node node) {
     try {
-      String nodeVersionUUID = node.getProperty(StageAndVersionPublicationConstant.LIVE_REVISION_PROP).getString();
-      if ("".equals(nodeVersionUUID)
+      String nodeVersionUUID = null;
+      if (node.hasProperty(StageAndVersionPublicationConstant.LIVE_REVISION_PROP)) {
+        nodeVersionUUID = node.getProperty(StageAndVersionPublicationConstant.LIVE_REVISION_PROP).getString();
+      }
+      if ((nodeVersionUUID == null)
           && PublicationDefaultStates.PUBLISHED.equals(node.getProperty(StageAndVersionPublicationConstant.CURRENT_STATE)
                                                            .getString()))
             return node;

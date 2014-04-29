@@ -141,10 +141,10 @@ public class UITaggingForm extends UIForm {
     NewFolksonomyService newFolksonomyService = WCMCoreUtils.getService(NewFolksonomyService.class);
     List<String> memberships = Utils.getMemberships();
     String[] actionsForTags = newFolksonomyService.canEditTag(this.getIntValue(tagScope), memberships) ?
-                                                                                                        new String[] {"Edit", "Remove"} : null;
-                                                                                                        uiLinkedInput.setActionInfo(LINKED_TAGS, actionsForTags);
-                                                                                                        uiLinkedInput.setIsShowOnly(true);
-                                                                                                        uiLinkedInput.setIsDeleteOnly(false);
+                  new String[] {"Edit", "Remove"} : null;
+    uiLinkedInput.setActionInfo(LINKED_TAGS, actionsForTags);
+    uiLinkedInput.setIsShowOnly(true);
+    uiLinkedInput.setIsDeleteOnly(false);
   }
 
   public void deActivate() throws Exception {

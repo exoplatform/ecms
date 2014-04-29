@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<bundle>
+  <UIDashboardForm>
+    <label>
+      <title>Author Dashboard</title>
+      <nocontent>Žádný obsah</nocontent>
+      <mydraft>Můj obsah v návrhu</mydraft>
+      <waitingapproval>Čeká na schválení</waitingapproval>
+      <approve>Schválit</approve>
+      <publishedtomorrow>Zveřejnění zítra</publishedtomorrow>
+      <refresh>#{word.refresh}</refresh>
+    </label>
+  </UIDashboardForm>
+</bundle>

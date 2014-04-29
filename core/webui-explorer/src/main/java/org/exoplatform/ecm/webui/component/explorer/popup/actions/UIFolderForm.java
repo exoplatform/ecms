@@ -212,10 +212,12 @@ public class UIFolderForm extends UIForm implements UIPopupComponent {
       Node currentNode = uiExplorer.getCurrentNode();
       if (uiExplorer.nodeIsLocked(currentNode)) {
         uiApp.addMessage(new ApplicationMessage("UIPopupMenu.msg.node-locked", null, ApplicationMessage.WARNING));
+        event.getRequestContext().addUIComponentToUpdateByAjax(uiFolderForm);
         return;
       }
       if(StringUtils.isBlank(title)) {
         uiApp.addMessage(new ApplicationMessage("UIFolderForm.msg.name-invalid", null, ApplicationMessage.WARNING));
+        event.getRequestContext().addUIComponentToUpdateByAjax(uiFolderForm);
         return;
       }
 
@@ -241,6 +243,7 @@ public class UIFolderForm extends UIForm implements UIPopupComponent {
                              new ApplicationMessage("UIFolderForm.msg.ntFolder-not-avaiable",
                                                     null,
                                                     ApplicationMessage.WARNING));
+            event.getRequestContext().addUIComponentToUpdateByAjax(uiFolderForm);
             return;
           }
         }

@@ -587,6 +587,30 @@ public class Utils {
     }
   }
 
+  public static void removeEditedConfiguredData(String template,
+                                                String className,
+                                                String id,
+                                                boolean skipActivities) throws Exception {
+    SessionProvider systemProvider = SessionProvider.createSystemProvider();
+    try {
+      DocumentContext.getCurrent()
+                     .getAttributes()
+                     .put(DocumentContext.IS_SKIP_RAISE_ACT, skipActivities);
+      Node serviceLogContentNode = getServiceLogContentNode(systemProvider, className, id);
+      if (serviceLogContentNode == null)
+        return;
+      String logData = serviceLogContentNode.getProperty(NodetypeConstant.JCR_DATA).getString();
+      if (StringUtils.isNotBlank(logData)) {
+        logData = ";".concat(logData).replace(";".concat(template), StringUtils.EMPTY);
+        logData = StringUtils.substring(logData, 1);
+        serviceLogContentNode.setProperty(NodetypeConstant.JCR_DATA, logData);
+        serviceLogContentNode.getSession().save();
+      }
+    } finally {
+      systemProvider.close();
+    }
+  }
+
   public static String getObjectId(String nodePath) throws UnsupportedEncodingException {
     return URLEncoder.encode(nodePath.replaceAll("'", "\\\\'"), "utf-8");
   }

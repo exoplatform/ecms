@@ -1,0 +1,2579 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<bundle>
+  <!--
+  ################################################################################
+  #             org.exoplatform.ecm.webui.component.admin.UIECMAdminControlPanel #
+  ################################################################################
+  -->
+  <UIECMAdminControlPanel>
+    <tab>
+      <label>
+        <Templates>Šablony</Templates>
+        <Explorer>Průzkumník</Explorer>
+        <Repository>Úložiště</Repository>
+        <Advanced>Pokročilé</Advanced>
+      </label>
+    </tab>    
+    <label>     
+      <UITaxonomyManagerTrees>Kategorie</UITaxonomyManagerTrees>
+      <UIMetadataManager>Metadata</UIMetadataManager>
+      <UINamespaceManager>Jmenné prostory</UINamespaceManager>
+      <UINodeTypeManager>Typy uzlů</UINodeTypeManager>
+      <UITemplatesManager>Dokumenty</UITemplatesManager>
+   <UICLVTemplatesManager>Seznam</UICLVTemplatesManager>
+      <UIViewManager>Zobrazení</UIViewManager>
+      <UIDriveManager>Disky</UIDriveManager>
+      <UIQueriesManager>Dotazy</UIQueriesManager>
+      <UIActionManager>Akce</UIActionManager>
+      <UIScriptManager>Skripty</UIScriptManager>
+      <UIUnLockManager>Zámky</UIUnLockManager>
+      <UIFolksonomyManager>Tagy</UIFolksonomyManager>      
+    </label>
+    <msg>
+      <access-denied>Přístup byl odepřen. Nemáte oprávnění k provedení této akce.</access-denied>
+    </msg>
+  </UIECMAdminControlPanel>
+  <!--
+  ################################################################################
+  #             org.exoplatform.ecm.webui.component.admin.UITaxonomy #
+  ################################################################################
+  -->
+  <UITaxonomyWorkingArea>
+    <msg>
+      <referential-integrity>Nelze přečíst ze zdrojového souboru nebo cílová kategorie je podkategorie.</referential-integrity>
+      <no-taxonomy-selected>Musíte kopírovat nebo vyjmout alespoň jednu kategorii.</no-taxonomy-selected>
+      <node-is-cutting>Zde nelze vložit. Uzel {0} kategorie může být vyjmut.</node-is-cutting>
+      <can-not-paste>Ve schránce neexistují žádná data k vložení.</can-not-paste>
+      <reference-exception>Tuto kategorii nelze odstranit, protože je v současné době odkazována obsahem.</reference-exception>
+      <path-error>Došlo k chybě při odebírání toho uzlu kategorie.</path-error>
+    </msg>
+  </UITaxonomyWorkingArea>
+  <UITaxonomyManager>
+    <msg>
+      <confirm-delete>Jste si jisti, že chcete odstranit tuto kategorii?</confirm-delete>
+    </msg>
+    <title>
+      <add>Přidat</add>
+      <paste>Vložit</paste>
+      <cut>Vyjmout</cut>
+      <copy>Kopírovat</copy>
+      <remove>Odstranit</remove>
+    </title>
+  </UITaxonomyManager>
+  
+  <!--
+  ################################################################################
+  #    org.exoplatform.ecm.webui.component.admin.taxonomy.UITaxonomyTreeContainer#
+  ################################################################################
+  -->
+  <UITaxonomyTreeContainer>
+    <tab>
+      <info>
+        <UITaxonomyTreeMainForm>Zadejte název kategorie, cestu k pracovnímu a domovskému adresáři.</UITaxonomyTreeMainForm>
+        <UIPermissionTreeManager>Nastavení oprávnění pro strom kategorií.</UIPermissionTreeManager>
+        <UIActionTaxonomyManager>Přidejte akci do stromu kategorií pro dokončení vytvoření nebo aktualizaci.</UIActionTaxonomyManager>
+        <UITaxonomyTreeCreateChild>Upravte taxonomii stromu přidáním, kopírováním, vyjmutím a výběrem oprávnění.</UITaxonomyTreeCreateChild>
+      </info>
+    </tab>
+    <msg>
+      <not-exist-tree>Strom kategorie neexistuje.</not-exist-tree>
+    </msg>
+  </UITaxonomyTreeContainer>
+  
+  <!--
+##########################################################################################
+#     org.exoplatform.ecm.webui.component.admin.taxonomy.UITaxonomyTreeMainForm          #
+##########################################################################################
+-->
+  <UITaxonomyTreeMainForm>
+    <action>
+      <Reset>Vynulovat</Reset>
+    </action>
+    <msg>
+      <name-not-allowed>Zakázaný název</name-not-allowed>
+      <name-emty>Je požadován název stromu.</name-emty>
+      <homePath-emty>Je požadována cesta k domovskému adresáři.</homePath-emty>
+      <targetPath-emty>Je vyžadována cílová cesta.</targetPath-emty>
+      <taxonomytree-existed>Název stromu kategorie již existuje.</taxonomytree-existed>
+    </msg>
+  </UITaxonomyTreeMainForm>
+
+  <TaxonomyTreeMainForm>
+    <label>
+      <TaxoTreeName>Název</TaxoTreeName>
+      <TaxoTreeWorkspace>Pracovní prostor</TaxoTreeWorkspace>
+      <TaxoTreeHomePath>Cesta domů</TaxoTreeHomePath>
+    </label>
+  </TaxonomyTreeMainForm>
+
+  <TaxonomyTreeHomePath>
+    <title>
+      <AddPath>Přidat cestu</AddPath>
+    </title>
+  </TaxonomyTreeHomePath>
+  
+  <!--
+##########################################################################################
+#     org.exoplatform.ecm.webui.component.admin.taxonomy.tree.info.UIPermissionTreeInfo  #
+##########################################################################################
+-->
+<UIPermissionTreeInfo>
+<action>
+<title>
+<Delete>Odstranit</Delete>
+<Edit>Upravit</Edit>
+</title>
+</action>
+<header>
+<usersOrGroups>Uživatel nebo skupina</usersOrGroups>
+<read>Čtení</read>
+<addNode>Přidat uzel</addNode>
+<setProperty>Nastavit vlastnost</setProperty>
+<remove>Odstranit</remove>
+<action>Akce</action>
+</header>
+</UIPermissionTreeInfo>
+
+<!--
+##########################################################################################
+#     org.exoplatform.ecm.webui.component.admin.taxonomy.tree.info.UIPermissionTreeForm  #
+##########################################################################################
+-->
+  <UIPermissionTreeForm>
+    <msg>
+      <have-not-any-permission>Zadejte alespoň jedno oprávnění pro tento uzel.</have-not-any-permission>
+    </msg>
+  </UIPermissionTreeForm>
+
+<!--
+################################################################################
+#     org.exoplatform.ecm.webui.component.admin.taxonomy.UIActionForm          #
+################################################################################
+-->
+
+  <UIActionForm>
+    <title>Přidat akci do stromu kategorie</title>
+    <action>
+      <Save>#{word.save}</Save>
+    </action>
+    <msg>
+      <name-not-allowed>Prázdné jméno nebo speciální znaky nejsou povoleny v názvu akce.</name-not-allowed>
+      <path-invalid>Cesta není platná.</path-invalid>
+      <taxonomy-existed>Strom kategorie již existuje.</taxonomy-existed>
+      <taxonomy-node-existed>Kategorie uzlu již existuje.</taxonomy-node-existed>
+      <no-permission-add>Nemáte právo přidat akci.</no-permission-add>
+      <not-created-tree>Strom kategorie ještě nebyl vytvořen.</not-created-tree>
+    </msg>
+  </UIActionForm>
+
+  <!--
+  ################################################################################
+  #             org.exoplatform.ecm.webui.component.admin.UITemplatesManager #
+  ################################################################################
+  -->
+  <UITemplatesList>
+    <header>
+      <name>Název šablony</name>
+      <action>Akce</action>
+    </header>
+  </UITemplatesList>
+  <!--
+  ################################################################################
+  #             org.exoplatform.ecm.webui.component.admin.UINamespaceForm  #
+  ################################################################################
+  -->
+  <NameSpacePopup>
+    <title>
+      <UINamespaceForm>Formluář jmenného prostoru</UINamespaceForm>
+    </title>
+  </NameSpacePopup>
+  <UINamespaceForm>
+    <title>Registrovat nový Jmenný prostor</title>
+    <label>
+      <namespace>Předpona Jmenného prostoru</namespace>
+      <uri>URI</uri>
+    </label>
+    <action>
+      <Save>#{word.save}</Save>
+      <Cancel>#{word.cancel}</Cancel>
+    </action>
+    <msg>
+      <register-unsuccessfull>Jmenný prostor nebo URI již existuje.</register-unsuccessfull>
+      <prefix-null>Zadejte předponu jmenného prostoru.</prefix-null>
+      <uri-null>Zadejte identifikátor URI jmenného prostoru.</uri-null>
+    </msg>
+  </UINamespaceForm>
+  <!--
+  ################################################################################
+  #      org.exoplatform.ecm.webui.component.admin.namespace.UINamespaceList #
+  ################################################################################
+  -->
+  <UINamespaceList>
+    <header>
+      <prefix>Předpona</prefix>
+      <uri>URI Jmenného prostoru</uri>
+      <action>Akce</action>
+    </header>
+    <action>
+      <AddNamespace>Registrovat</AddNamespace>
+    </action>
+  </UINamespaceList>
+  <NamespacePopup>
+    <title>
+      <UINamespaceForm>Registrovat nový Jmenný prostor</UINamespaceForm>
+    </title>
+  </NamespacePopup>
+  <!--
+  ################################################################################
+  #             org.exoplatform.ecm.webui.component.admin.UIMetadataList #
+  ################################################################################
+  -->
+  <UIMetadataList>
+    <label>
+      <false>ne</false>
+      <true>ano</true>
+      <True>ano</True>
+      <False>ne</False>
+    </label>
+    <title>
+      <view>Zobrazit</view>
+      <edit>Upravit</edit>
+      <delete>Odstranit</delete>
+    </title>
+    <header>
+      <icon>Ikona</icon>
+      <name>Metadata</name>
+      <type>Typ</type>
+      <internalUse>Vnitřní použití</internalUse>
+      <action>Akce</action>
+    </header>
+    <msg>
+      <confirm-delete>Jste si jisti, že chcete odstranit tato metadata?</confirm-delete>
+      <delete-successful>Šablony {0} byly úspěšně odstraněny.</delete-successful>
+      <path-not-found-exception>Tato metadata byla odstraněna nebo změněna. Prosím klikněte na tlačítko Obnovit.</path-not-found-exception>
+    </msg>
+    <action>
+      <Add>Přidat Metadata</Add>
+      <Cancel>#{word.cancel}</Cancel>
+    </action>
+  </UIMetadataList>
+  <MetadataPopupAddNew>
+    <title>
+      <UIMetadataForm>Add New Metadata's Template</UIMetadataForm>
+    </title>
+  </MetadataPopupAddNew>
+  <MetadataPopupEdit>
+    <title>
+      <UIMetadataForm>Upravit šablonu metadat</UIMetadataForm>
+    </title>
+  </MetadataPopupEdit>
+  <MetataPermissionPopup>
+    <title>
+      <MetadataPermission>Nastavit oprávnění</MetadataPermission>
+      <QueriesPermissionBrowse>Přidat oprávnění</QueriesPermissionBrowse>
+    </title>
+  </MetataPermissionPopup>
+  <!--
+  ################################################################################
+  #    org.exoplatform.ecm.webui.component.admin.metadata.UIMetadataForm #
+  ################################################################################
+  -->
+  <UIMetadataForm>
+    <title>Mapování Metadat</title>
+    <action>
+      <Cancel>#{word.cancel}</Cancel>
+      <Save>Použít</Save>
+    </action>
+    <header>
+      <icon>Ikona</icon>
+      <label>Název uzlu</label>
+      <input>Akce</input>
+    </header>
+    <label>
+      <dialogTemplate>Šablona dialogového okna:</dialogTemplate>
+      <viewTemplate>Šablona zobrazení:</viewTemplate>
+      <metadataName>Název metadat:</metadataName>
+      <viewPermission>Oprávnění:</viewPermission>
+      <permission>UIMetadataForm</permission>
+      <metadataLabel>Popisek:</metadataLabel>
+    </label>
+    <tab>
+      <label>
+        <metadataTypeTab>Typ metadat</metadataTypeTab>
+        <dialogTab>Šablona dialogového okna</dialogTab>
+        <viewTab>Šablona zobrazení</viewTab>
+      </label>
+    </tab>
+  </UIMetadataForm>
+  <!--
+  ################################################################################
+  #    org.exoplatform.ecm.webui.component.admin.metadata.UIMetadataView #
+  ################################################################################
+  -->
+  <UIMetadataView>
+    <header>
+      <name>Název prvku</name>
+      <type>Typ</type>
+      <description>Popis</description>
+      <isMixin>Je smíšený typ</isMixin>
+      <orderable>Seřaditelní potomci</orderable>
+    </header>
+    <info>
+      <description>Popis</description>
+    </info>
+    <tab>
+      <element>Prvky</element>
+      <metadataView>Informace o metadatech</metadataView>
+    </tab>
+    <action>
+      <Cancel>#{word.close}</Cancel>
+      <Back>#{word.back}</Back>
+    </action>
+  </UIMetadataView>
+  <ViewMetadataPopup>
+    <title>
+      <UIMetadataView>Informace o metadatech</UIMetadataView>
+    </title>
+  </ViewMetadataPopup>
+  <!--
+  ################################################################################
+  #             org.exoplatform.ecm.webui.component.admin.UIDriveManager #
+  ################################################################################
+  -->
+  <UIDriveList>
+    <header>
+      <icon>Ikona</icon>
+      <name>Název</name>
+      <workspace>Pracovní prostor</workspace>
+      <homePath>Cesta domů</homePath>
+      <permissions>Oprávnění</permissions>
+      <views>Zobrazit</views>
+      <action>Akce</action>
+    </header>
+    <tooltip>
+      <Delete>Odstranit</Delete>
+      <EditInfo>Upravit</EditInfo>
+    </tooltip>
+    <msg>
+      <confirm-delete>Jste si jisti, že chcete odstranit tento disk?</confirm-delete>
+    </msg>
+    <action>
+      <AddDrive>Přidat disk</AddDrive>
+    </action>
+    <label>
+      <permission>{0} v {1}</permission>
+    </label>
+  </UIDriveList>
+  <UIDriveForm>
+    <action>
+      <Cancel>#{word.cancel}</Cancel>
+      <Save>#{word.save}</Save>
+      <Back>#{word.back}</Back>
+      <Refresh>#{word.refresh}</Refresh>
+    </action>
+    <msg>
+      <drive-exists>Disk již existuje.</drive-exists>
+      <workspace-path-invalid>Cesta k pracovnímu prostoru je neplatná.</workspace-path-invalid>
+      <drive-views-invalid>Vyberte prosím zobrazení.</drive-views-invalid>
+      <icon-not-found>Ikona nebyla nalezena.</icon-not-found>
+      <permission-null>Pro tento disk Je nutné nastavit oprávnění.</permission-null>
+      <allowCreateFolders>Je třeba vybrat typ složky.</allowCreateFolders>
+      <name-null>Zadejte prosím název disku.</name-null>
+      <fileName-invalid>Název disku obsahuje některé neplatné znaky.</fileName-invalid>
+    </msg>
+    <tab>
+      <label>
+        <DriveInputSet>Disk</DriveInputSet>
+        <ViewsInputSet>Použít zobrazení</ViewsInputSet>
+        <PermissionInputSet>Nastavit oprávnění</PermissionInputSet>
+      </label>
+    </tab>
+    <label>
+      <name>Název:</name>
+      <workspace>Pracovní prostor:</workspace>
+      <homePath>Cesta domů:</homePath>
+      <icon>Ikona pracovního prostoru:</icon>
+      <viewPreferences>Zobrazit odkazované dokumenty:</viewPreferences>
+      <viewNonDocument>Zobrazit ne-dokumentové uzly:</viewNonDocument>
+      <viewSideBar>Zobrazit postranní panel:</viewSideBar>
+      <permissions>Oprávnění:</permissions>
+      <showHiddenNode>Zobrazit skryté uzly:</showHiddenNode>
+      <allowCreateFolders>Povolit vytvoření složky:</allowCreateFolders>
+      <Admin>Admin:</Admin>
+      <Categories>Kategorie:</Categories>
+      <Icons>Ikony:</Icons>
+      <List>Seznam:</List>
+      <Web>Web:</Web>
+    </label>
+  </UIDriveForm>
+  <AddDriveManagerPopup>
+    <title>
+      <UIDriveForm>Přidat disk</UIDriveForm>
+    </title>
+  </AddDriveManagerPopup>
+  <EditDriveManagerPopup>
+    <title>
+      <UIDriveForm>Upravit disk</UIDriveForm>
+    </title>
+  </EditDriveManagerPopup>
+  <UITreeList>
+    <info>
+      <child-not-found>Podřízený uzel nebyl nalezen.</child-not-found>
+    </info>
+    <header>
+      <name>Název</name>
+      <action>Akce</action>
+    </header>
+  </UITreeList>
+  
+  <UIRepositoryList>
+    <titlebar>
+      <label>Spravovat hlavní funkce ECM</label>
+    </titlebar>
+  </UIRepositoryList>
+  
+  <!--
+  ################################################################################
+  #    org.exoplatform.ecm.webui.component.admin.nodetype.UINodeTypeManager #
+  ################################################################################
+  -->
+  <UINodeTypeManager>
+    <header>
+      <icon>Ikona</icon>
+      <label>Název uzlu</label>
+      <input>Akce</input>
+    </header>
+    <action>
+      <Save>#{word.save}</Save>
+    </action>
+  </UINodeTypeManager>
+  <!--
+  ################################################################################
+  #    org.exoplatform.ecm.webui.component.admin.nodetype.UINodeTypeList #
+  ################################################################################
+  -->
+  <UINodeTypeList>
+    <label>
+      <true>Pravda</true>
+      <false>Nepravda</false>
+    </label>
+    <header>
+      <icon>Ikona</icon>
+      <nodeType>Typ uzlu</nodeType>
+      <mixinType>Smíšený typ</mixinType>
+      <orderable>Seřaditelné podřízené uzly</orderable>
+      <action>Akce</action>
+    </header>
+    <action>
+      <Export>Exportovat</Export>
+      <Import>Importovat</Import>
+      <Add>Přidat</Add>
+    </action>
+    <tooltip>
+      <View>Zobrazit</View>
+      <Edit>Upravit</Edit>
+      <Delete>Odstranit</Delete>
+    </tooltip>
+    <msg>
+      <confirm-delete>Jste si jisti, že chcete odstranit tento typ uzlu?</confirm-delete>
+    </msg>
+  </UINodeTypeList>
+  <!--
+  ################################################################################
+  #    org.exoplatform.ecm.webui.component.admin.nodetype.UINodeTypeOptionList #
+  ################################################################################
+  -->
+  <UINodeTypeOptionList>
+    <action>
+      <Save>#{word.save}</Save>
+      <Add>Přidat</Add>
+    </action>
+    <header>
+      <icon>Ikona</icon>
+      <label>Název uzlu</label>
+      <input>Akce</input>
+    </header>
+  </UINodeTypeOptionList>
+  <!--
+  ################################################################################
+  #    org.exoplatform.ecm.webui.component.admin.nodetype.UINodeTypeForm #
+  ################################################################################
+  -->
+  <UINodeTypeForm>
+    <tab>
+      <label>
+        <nodeTypeDefinition>Typ uzlu</nodeTypeDefinition>
+        <propertyDefinition>Vlastnost</propertyDefinition>
+        <childNodeDefinition>Podřízený uzel</childNodeDefinition>
+        <superTypeTab>Nadtypy</superTypeTab>
+        <DefaultTypeTab>Výchozí primární</DefaultTypeTab>
+        <RequiredTypeTab>Požadovaný primární</RequiredTypeTab>
+        <Contraints>Omezení</Contraints>
+      </label>
+    </tab>
+    <label>
+      <propertiesDefinitions>Definice vlastností</propertiesDefinitions>
+      <childDefinitions>Definice podřízeného uzlu</childDefinitions>
+      <namespace>Jmenný prostor</namespace>
+      <propertyNamespace>Jmenný prostor</propertyNamespace>
+      <nodeTypeName>Název typu uzlu</nodeTypeName>
+      <mixinType>Je smíšený typ</mixinType>
+      <hasOrderableChildNodes>Seřaditelné podřízené uzly</hasOrderableChildNodes>
+      <primaryItemName>Název primární položky</primaryItemName>
+      <superTypes>Nadtypy</superTypes>
+      <propertyname>Název definice</propertyname>
+      <requiredType>Požadovaný typ</requiredType>
+      <multiple>Je vícenásobný</multiple>
+      <mandatory>Je povinný</mandatory>
+      <autoCreated>Je vytvořen automaticky</autoCreated>
+      <parentversion>Na nadřazenou verzi</parentversion>
+      <protected>Je chráněno</protected>
+      <constraints>Hodnoty</constraints>
+      <UIFormTableInputSet>UIFormTableInputSet</UIFormTableInputSet>
+      <sameNameSiblings>Je sourozencem se stejným názvem</sameNameSiblings>
+      <childNamespace>Jmenný prostor</childNamespace>
+      <childMandatory>Je povinný</childMandatory>
+      <childAutocreated>Je vytvořen automaticky</childAutocreated>
+      <childParentversion>Na nadřazenou verzi</childParentversion>
+      <childProtected>Je chráněno</childProtected>
+      <childNodename>Název definice</childNodename>
+      <requiredPrimaryType>Požadovaný primární typ</requiredPrimaryType>
+      <defaultPrimaryType>Výchozí primární typ</defaultPrimaryType>
+      <valueconstraints>Omezení hodnot</valueconstraints>
+    </label>
+    <action>
+      <Cancel>#{word.cancel}</Cancel>
+      <Save>#{word.save}</Save>
+      <SaveDraft>Uložit jako koncept</SaveDraft>
+      <AddProperty>Přidat vlastnost</AddProperty>
+      <AddChild>Přidat potomka</AddChild>
+      <AddConstraints>Přidat omezení</AddConstraints>
+      <Back>#{word.back}</Back>
+      <AddType>Přidat typ</AddType>
+      <AddValue>Přidat</AddValue>
+      <CancelConstraints>#{word.cancel}</CancelConstraints>
+      <CancelTab>#{word.cancel}</CancelTab>
+      <UpdateChild>#{word.update}</UpdateChild>
+      <CancelChild>#{word.cancel}</CancelChild>
+      <UpdateProperty>#{word.update}</UpdateProperty>
+      <CancelProperty>#{word.cancel}</CancelProperty>
+      <Close>#{word.close}</Close>
+    </action>
+    <msg>
+      <register-successfully>Typ uzlu {0}' byl úspěšně zaregistrován.</register-successfully>
+      <supertype-is-madatory>Nadtyp je povinný, když zaregistrujete nový typ uzlu. Vyberte prosím alespoň jeden nadtyp.</supertype-is-madatory>
+      <register-failed>Registrace typu uzlu neproběhla úspěšně. Buď již existuje, nebo nadtyp je neplatný.</register-failed>
+      <nodeType-name>Je požadován název typu uzlu.</nodeType-name>
+      <fileName-invalid>Název souboru obsahuje některé neplatné znaky.</fileName-invalid>
+      <node-type-exists>Typ uzlu '{0}' již existuje.</node-type-exists>
+      <node-type-name>Název typu uzlu je neplatný.</node-type-name>
+      <values-error>Vyberte prosím pouze jeden typ uzlu jako výchozí primární.</values-error>
+      <confirm-delete-child>Jste si jisti, že chcete odstranit tento podřízený uzel?</confirm-delete-child>
+      <confirm-delete-property>Opravdu chcete odstranit tuto vlastnost?</confirm-delete-property>
+    </msg>
+  </UINodeTypeForm>
+  <UIPropertyDefinitionForm>
+    <tab>
+      <label>
+        <constraints>Omezení</constraints>
+        <UIFormMultiValueInputSet>Omezení</UIFormMultiValueInputSet>
+      </label>
+    </tab>
+    <msg>
+      <property-name>Název definice vlastnosti byla neplatná.</property-name>
+      <not-supported-value-constraints>Tento vyžadovaný typ nepodporuje omezení hodnot.</not-supported-value-constraints>
+    </msg>
+  </UIPropertyDefinitionForm>
+  <UIChildNodeDefinitionForm>
+    <msg>
+      <child-name>Je požadován název podřízeného uzlu.</child-name>
+      <child-invalid>Název podřízeného uzlu obsahuje některé neplatné znaky.</child-invalid>
+      <default-node-type-not-found>Nebyl nalezen výchozí typ uzlu.</default-node-type-not-found>
+      <requiredPrimaryType>Je vyžadován požadovaný primární typ.</requiredPrimaryType>
+      <defaultPrimaryType>Výchozí primární typ je vyžadován.</defaultPrimaryType>
+    </msg>
+  </UIChildNodeDefinitionForm>
+  <defaultPrimaryTypePopup>
+    <title>
+      <FormdefaultPrimaryTypePopup>Vyberte výchozí primární typ</FormdefaultPrimaryTypePopup>
+    </title>
+  </defaultPrimaryTypePopup>
+  <requiredPrimaryTypePopup>
+    <title>
+      <FormrequiredPrimaryTypePopup>Vyberte požadovaný primární typ</FormrequiredPrimaryTypePopup>
+    </title>
+  </requiredPrimaryTypePopup>
+  <superTypesPopup>
+    <title>
+      <FormsuperTypesPopup>Vybrat nadtypy</FormsuperTypesPopup>
+    </title>
+  </superTypesPopup>
+  <NodeTypePopup>
+    <title>
+      <UINodeTypeForm>Přidat či upravit definice typů uzlů</UINodeTypeForm>
+    </title>
+  </NodeTypePopup>
+  <ViewNodeTypePopup>
+    <title>
+      <UINodeTypeForm>Zobrazit informace o typu uzlu</UINodeTypeForm>
+    </title>
+  </ViewNodeTypePopup>
+  <!--
+  ################################################################################
+  #    org.exoplatform.ecm.webui.component.admin.nodetype.UINodeTypeExport   #
+  ################################################################################
+  -->
+  <UINodeTypeExport>
+    <header>
+      <icon>Ikona</icon>
+      <label>Název uzlu</label>
+      <input>Akce</input>
+    </header>
+    <action>
+      <Cancel>#{word.cancel}</Cancel>
+      <Export>Exportovat</Export>
+      <UncheckAll>Odznačit vše</UncheckAll>
+      <CheckAll>Označit vše</CheckAll>
+    </action>
+    <title>Exportovat typy uzlů</title>
+    <msg>
+      <item-null>Vyberte prosím alespoň jeden uzel, který chcete exportovat.</item-null>
+    </msg>
+  </UINodeTypeExport>
+  <NodeTypeExportPopup>
+    <title>
+      <UINodeTypeExport>Exportovat typy uzlů</UINodeTypeExport>
+    </title>
+  </NodeTypeExportPopup>
+  <!--
+  ################################################################################
+  #    org.exoplatform.ecm.webui.component.admin.nodetype.UINodeTypeOptionList   #
+  ################################################################################
+  -->
+  <!--
+  ################################################################################
+  #    org.exoplatform.ecm.webui.component.admin.nodetype.UINodeTypeUpload   #
+  ################################################################################
+  -->
+  <UINodeTypeUpload>
+    <label>
+      <upload>Název souboru</upload>
+    </label>
+    <action>
+      <Cancel>#{word.cancel}</Cancel>
+      <Upload>Nahrát</Upload>
+    </action>
+    <title>Importovat typ uzlu ze souboru XML</title>
+    <msg>
+      <filename-error>Procházet soubor typů uzlů k importu.</filename-error>
+      <data-file-error>Importovány mohou být pouze soubory XML nebo zip.</data-file-error>
+      <data-invalid>Data nejsou platná. Zkontrolujte typ souboru a opakujte akci.</data-invalid>
+      <nodetype-exist>Typ uzlu {0}' již existuje.</nodetype-exist>
+      <namespace-invalid>Jmenný prostor {0} je neplatný.</namespace-invalid>
+    </msg>
+  </UINodeTypeUpload>
+  <!--
+  ################################################################################
+  #    org.exoplatform.ecm.webui.component.admin.nodetype.UINodeTypeImport   #
+  ################################################################################
+  -->
+  <UINodeTypeImport>
+    <action>
+      <Cancel>#{word.cancel}</Cancel>
+      <Import>Importovat</Import>
+      <Upload>Nahrát znovu</Upload>
+    </action>
+    <header>
+      <icon>Ikona</icon>
+      <label>Název uzlu</label>
+      <input>Akce</input>
+    </header>
+    <title>Vybrat typ importovaného uzlu</title>
+    <msg>
+      <no-nodetype-registered>Nejsou registrovány žádné typy uzlů.</no-nodetype-registered>
+      <nodetype-registered>Registrace úspěšná.</nodetype-registered>
+    </msg>
+  </UINodeTypeImport>
+  <NodeTypeImportPopup>
+    <title>
+      <UINodeTypeImportPopup>Importovat typ uzlu ze souboru XML</UINodeTypeImportPopup>
+    </title>
+  </NodeTypeImportPopup>
+  <!--
+  ################################################################################
+  #             org.exoplatform.ecm.webui.component.admin.UIDriveForm #
+  ################################################################################
+  -->
+  <DriveInputSet>
+    <label>
+      <both>Both</both>
+      <folderOnly>Folder</folderOnly>
+      <unstructuredFolder>Unstructured Folder</unstructuredFolder>
+    </label>
+    <title>
+      <AddPermission>Přidat oprávnění</AddPermission>
+      <RemovePermission>Odebrat oprávnění</RemovePermission>
+      <AddIcon>Přidat ikonu</AddIcon>
+      <AddPath>Přidat cestu</AddPath>
+    </title>
+  </DriveInputSet>
+  <!--
+  ###################################################################################
+  #             org.exoplatform.ecm.webui.component.admin.action.UIActionTypeList#
+  ###################################################################################
+  -->
+  <UIActionTypeList>
+    <header>
+      <name>Skript</name>
+      <label>Název</label>
+      <action>Akce</action>
+    </header>
+    <title>
+      <Edit>Upravit</Edit>
+      <Delete>Odstranit</Delete>
+    </title>
+    <action>
+      <AddAction>Přidat typ akce</AddAction>
+    </action>
+<msg>
+ <confirm-delete>Jste si jisti, že chcete odstranit tento typ akce?</confirm-delete>
+<cannot-delete>Tento typ akce nelze odebrat, protože systém jej stále používá.</cannot-delete>
+</msg>
+  </UIActionTypeList>
+  <!--
+  ######################################################################################
+  #             org.exoplatform.ecm.webui.component.admin.action.UIActionTypeForm #
+  ######################################################################################
+  -->
+  <ActionPopup>
+    <title>
+      <UIActionTypeForm>Přidat typ akce</UIActionTypeForm>
+    </title>
+  </ActionPopup>
+  <UIActionTypeForm>
+    <title>Přidat typ akce</title>
+    <label>
+      <actionType>Rozšířit typ akce:</actionType>
+      <name>Název:</name>
+      <isMove>is Action Move:</isMove>
+      <variables>Proměnné:</variables>
+      <exo_businessProcessAction>Podnikové procesy:</exo_businessProcessAction>
+      <exo_scriptAction>Groovy skripty:</exo_scriptAction>
+      <exo_ruleAction>Definovaná pravidla:</exo_ruleAction>
+      <script>Skript:</script>
+    </label>
+    <action>
+      <Save>#{word.save}</Save>
+      <Cancel>#{word.cancel}</Cancel>
+    </action>
+    <msg>
+      <action-type-added>Akce typu '{0}' byla úspěšně přidána.</action-type-added>
+      <action-type-create-error>Došlo k chybě při vytváření typu akce.</action-type-create-error>
+      <action-name-invalid>{0} je neplatný. Název musí začínat ' exo:'.</action-name-invalid>
+      <action-exist>Tato akce již existuje v systému ECM.</action-exist>
+      <fileName-invalid>Název akce obsahuje některé neplatné znaky.</fileName-invalid>
+    </msg>
+  </UIActionTypeForm>
+  <!--
+  ######################################################################################
+  #             org.exoplatform.ecm.webui.component.admin.view.UIViewManager     #
+  ######################################################################################
+  -->
+  <UITabPane>
+    <title>
+      <UIViewContainer>Zobrazení</UIViewContainer>
+      <ECMTemplate>Šablony aplikace Průzkumník</ECMTemplate>
+      <UIScriptForm>Skripty</UIScriptForm>
+      <UIDialogTab>Dialogové okno</UIDialogTab>
+      <UIViewTab>Zobrazit</UIViewTab>
+      <UITemplateEditForm>Šablona</UITemplateEditForm>
+      <UITemplateForm>Šablona</UITemplateForm>
+      <UITemplateContainer>Dokumenty</UITemplateContainer>
+      <UIActionsTemplateContainer>Akce</UIActionsTemplateContainer>
+      <UIOthersTemplateContainer>Ostatní</UIOthersTemplateContainer>
+  <UIActionScriptContainer>Akce</UIActionScriptContainer>
+  <UIWidgetScriptContainer>Widgety</UIWidgetScriptContainer>
+<UIInterceptorScriptContainer>Interceptory</UIInterceptorScriptContainer>
+
+<nodeTypeDefinition>Typ uzlu</nodeTypeDefinition>
+      <propertyDefinition>Vlastnost</propertyDefinition>
+      <childNodeDefinition>Podřízený uzel</childNodeDefinition>
+      <SuperTypeTab>Nadtypy</SuperTypeTab>
+      <DefaultTypeTab>Výchozí primární</DefaultTypeTab>
+      <RequiredTypeTab>Požadovaný primární</RequiredTypeTab>
+      <Contraints>Omezení</Contraints>
+    </title>
+  </UITabPane>
+  <!--
+  ######################################################################################
+  #             org.exoplatform.ecm.webui.component.admin.view.UIViewList    #
+  ######################################################################################
+  -->
+  <UIViewList>
+   <title>
+     <View>Zobrazit</View>
+     <EditInfo>Upravit</EditInfo>
+     <Delete>Odstranit</Delete>
+   </title>
+    <header>
+      <name>Název</name>
+      <permissions>Oprávnění</permissions>
+      <tabList>Záložka akce</tabList>
+      <baseVersion>Základní verze</baseVersion>
+      <action>Akce</action>
+    </header>
+    <action>
+      <AddView>Přidat zobrazení</AddView>
+    </action>
+    <msg>
+      <access-denied>Přístup byl odepřen. Nemáte oprávnění k používání této funkce.</access-denied>
+      <template-in-use>Nelze odstranit {0}. V současné době je v provozu.</template-in-use>
+      <confirm-delete>Jste si jisti, že chcete toto zobrazení odstranit?</confirm-delete>
+    </msg>
+  </UIViewList>
+  <ViewPopup>
+    <title>
+      <UIViewFormTabPane>Zobrazit</UIViewFormTabPane>
+    </title>
+  </ViewPopup>
+  <AddPopup>
+    <title>
+      <UIViewFormTabPane>Přidat zobrazení</UIViewFormTabPane>
+      <AddPopup>Přidat šablonu</AddPopup>
+    </title>
+  </AddPopup>
+  <EditPopup>
+    <title>
+      <UIViewFormTabPane>Upravit zobrazení</UIViewFormTabPane>
+    </title>
+  </EditPopup>
+
+<UITabList>
+                  <title>
+                    <Edit>Upravit</Edit>
+                    <Delete>Odstranit</Delete>
+                  </title>       
+ <header>
+  <tabName>Záložka</tabName>
+  <localizeButtons>Popis</localizeButtons>
+<action>Akce</action>
+</header>
+<action>
+ <AddTab>Přidat</AddTab>
+</action>
+<msg>
+ <confirm-delete>Jste si jisti, že chcete odstranit tuto záložku?</confirm-delete>
+</msg>
+<grid>
+ <msg>
+  <empty>V tomto zobrazení není žádná záložka</empty>
+ </msg>
+</grid>
+</UITabList>
+
+<UIViewPermissionList>
+ <title>Vybrat vlastníka s oprávněními v tomto zobrazení:</title>
+<label>
+ <permission>{0} v {1}</permission>
+</label>
+<msg>
+ <confirm-delete>Jste si jisti, že chcete odstranit toto oprávnění?</confirm-delete>
+  <permission-cannot-empty>Oprávnění k zobrazení je požadováno a nemůže být prázdné.</permission-cannot-empty>
+</msg>
+</UIViewPermissionList>
+
+<UIViewPermissionList>
+                         <title>
+                           <Delete>Odstranit</Delete>
+                         </title>
+ <header>
+<friendlyPermission>Oprávnění</friendlyPermission>
+     <action>Akce</action>
+ </header>
+<action>
+ <title>
+  <Delete>Odstranit</Delete>
+ </title>
+</action>
+<grid>
+ <msg>
+  <empty>Neexistuje žádné oprávnění na toto zobrazení</empty>
+ </msg>
+</grid>
+</UIViewPermissionList>
+
+<UIViewPermissionForm>
+<action>
+ <Add>Přidat</Add>
+</action>
+<label>
+ <userOrGroup>Uživatel nebo skupina</userOrGroup>
+</label>
+<msg>
+ <permission-exist>Oprávnění '{0}' již v seznamu existuje.</permission-exist>
+</msg>
+</UIViewPermissionForm>
+
+  <!--
+  ######################################################################################
+  #             org.exoplatform.ecm.webui.component.admin.view.UIViewFormTabPane   #
+  ######################################################################################
+  -->
+  <UIViewForm>
+    <title>
+      <AddPermission>Přidat oprávnění</AddPermission>
+      <RemovePermission>Odebrat oprávnění</RemovePermission>
+    </title>
+    <msg>
+      <view-name-invalid>Je požadován název zobrazení.</view-name-invalid>
+      <fileName-invalid>Název zobrazení obsahuje některé neplatné znaky.</fileName-invalid>
+      <permission-not-empty>Vyberte oprávnění pro zobrazení.</permission-not-empty>      
+      <mustbe-add-tab>Prosím přidejte záložku.</mustbe-add-tab>
+<mustbe-add-permission>Vyberte oprávnění pro toto zobrazení</mustbe-add-permission>
+      <view-exist>Název zobrazení již existuje.</view-exist>
+    </msg>
+    <label>
+      <viewName>Název</viewName>
+      <template>Šablona</template>
+<version>Obnovit verzi</version>
+      <enableVersion>Povolit verzi</enableVersion>
+      <hideExplorerPanel>Skrýt panel aplikace průzkumník v postranním panelu</hideExplorerPanel>
+    </label>
+  </UIViewForm>
+  <UITabForm>
+    <msg>
+      <button-select-error>Vyberte prosím alespoň jednu funkci ze seznamu.</button-select-error>
+      <tab-name-error>Je požadován název záložky.</tab-name-error>
+      <fileName-invalid>Název záložky obsahuje některé neplatné znaky.</fileName-invalid>
+    </msg>
+    <label>
+      <version>Obnovit verzi</version>
+      <viewName>Název</viewName>
+      <tabName>Název záložky</tabName>
+      <permission>Oprávnění</permission>
+      <tabs>Záložky</tabs>
+      <template>Šablony</template>
+      <enableVersion>Povolit verzi</enableVersion>
+      <addFolder>Přidat složku</addFolder>
+      <addDocument>Přidat dokument</addDocument>
+      <editDocument>Upravit dokument</editDocument>
+      <upload>Nahrát</upload>
+      <paste>Vložit</paste>
+      <search>Hledat</search>
+      <viewReferences>Zobrazit reference</viewReferences>
+      <viewNodeType>Zobrazit typ uzlu</viewNodeType>
+      <viewPermissions>Zobrazit oprávnění</viewPermissions>
+      <viewProperties>Zobrazit vlastnosti</viewProperties>
+      <manageVersions>Správa verzí</manageVersions>
+      <manageAuditing>Správa auditování</manageAuditing>
+      <managePublications>Správa zveřejnění</managePublications>
+      <manageCategories>Správa kategorií</manageCategories>
+      <manageRelations>Správa vztahů</manageRelations>
+      <manageActions>Správa akcí</manageActions>
+      <exportNode>Exportovat uzel</exportNode>
+      <importNode>Importovat uzel</importNode>
+      <viewRelations>Zobrazit vztahy</viewRelations>
+      <showJCRStructure>Zobrazit strukturu JCR</showJCRStructure>
+      <watchDocument>Sledovat dokument</watchDocument>
+      <taggingDocument>Otagovat dokument</taggingDocument>
+      <viewMetadatas>Zobrazit Metadata</viewMetadatas>
+      <overloadThumbnail>Miniatura přetížení</overloadThumbnail>
+      <manageHidden>Skrýt/zobrazit obsah</manageHidden>
+      <comment>Komentář</comment>
+      <vote>Hlasovat</vote>  
+      <addCategory>Přidat kategorii</addCategory>
+      <addLocalizationLink>Přidat překlad</addLocalizationLink>
+      <publicationRequestApproval>Žádost o schválení</publicationRequestApproval>
+      <publicationApproveContent>Schválení obsahu</publicationApproveContent>
+      <publicationPublish>Zveřejnit</publicationPublish>
+<contentNavigation>Navigace obsahu</contentNavigation>
+<addSymLink>Přidat symlink</addSymLink>
+    </label>
+    <action>
+      <Save>#{word.save}</Save>      
+      <Cancel>#{word.cancel}</Cancel>      
+    </action>
+  </UITabForm>
+  <UIPermissionForm>
+    <label>
+      <permission>UIPermissionForm</permission>
+    </label>
+  </UIPermissionForm>
+  <UIViewFormTabPane>
+    <tab>
+      <label>
+        <UITabContainer>Akce</UITabContainer>
+        <UIViewForm>Zobrazit</UIViewForm>
+        <UIViewPermissionContainer>Oprávnění</UIViewPermissionContainer>    
+      </label>
+    </tab>
+    <action>
+      <Save>#{word.save}</Save>
+      <Reset>Vynulovat</Reset>
+      <Cancel>#{word.cancel}</Cancel>
+      <Close>#{word.close}</Close>
+      <Restore>Obnovit</Restore>
+    </action>
+  </UIViewFormTabPane>
+  <PopupViewPermission>
+    <title>
+      <UIPermissionSelector>Vyberte práva</UIPermissionSelector>
+    </title>
+  </PopupViewPermission>
+
+<TabForm_Popup>
+ <title>
+  <UITabForm>Přidat či upravit záložku</UITabForm>
+ </title>
+</TabForm_Popup>
+
+<tab_permission>
+ <title>
+  <SelectUser>Vybrat uživatele</SelectUser>
+<SelectMember>Vybrat člena</SelectMember>
+<AddAny>Jakýkoli</AddAny>
+ </title>
+</tab_permission>
+  <!--
+  ######################################################################################
+  #             org.exoplatform.ecm.webui.component.admin.view.UIECMTemplateList   #
+  ######################################################################################
+  -->
+  <UIECMTemplateList>
+    <title>
+      <View>Zobrazit</View>
+      <EditInfo>Upravit</EditInfo>
+      <Delete>Odstranit</Delete>
+    </title>
+    <header>
+      <name>Název</name>
+      <path>Hodnota</path>
+      <baseVersion>Základní verze</baseVersion>
+      <action>Akce</action>
+    </header>
+    <action>
+      <Add>Přidat</Add>
+    </action>
+    <msg>
+      <template-in-use>Nelze odstranit {0}. V současné době je v provozu.</template-in-use>
+      <confirm-delete>Jste si jisti, že chcete odstranit tuto šablonu?</confirm-delete>
+      <access-denied>Přístup byl odepřen. Nemáte oprávnění k používání této funkce.</access-denied>
+      <delete-permission-denied>Nemáte oprávnění odstranit šablonu {0}.</delete-permission-denied>
+    </msg>
+  </UIECMTemplateList>
+  <!--
+  ################################################################################
+  #             org.exoplatform.ecm.webui.component.admin.view.UITemplateForm #
+  ################################################################################
+  -->
+  <UITemplateForm>
+    <action>
+      <Save>#{word.save}</Save>
+      <Cancel>#{word.cancel}</Cancel>
+      <Reset>Vynulovat</Reset>
+      <Restore>Obnovit</Restore>
+      <Refresh>#{word.refresh}</Refresh>
+    </action>
+    <msg>
+      <version-restored>Verze {0} byla úspěšně obnovena.</version-restored>
+      <role-require>Vyberte oprávnění.</role-require>
+      <template-name-exist>Název šablony {0}' již existuje.</template-name-exist>
+      <add-permission-denied>Nemáte oprávnění přidat novou šablonu.</add-permission-denied>
+      <edit-permission-denied>Nemáte oprávnění ke změně šablony {0}.</edit-permission-denied>
+    </msg>
+    <tab>
+      <label>
+        <template>Šablona</template>
+        <defaultDialog>Dialogové okno</defaultDialog>
+        <defaultView>Zobrazit</defaultView>
+      </label>
+    </tab>
+    <label>
+      <name>Název:</name>
+      <label>Popisek:</label>
+      <isDocumentTemplate>je šablona dokumentu:</isDocumentTemplate>
+      <dialog>Obsah Dialogového okna</dialog>
+      <view>Zobrazit obsah</view>
+      <permission>Oprávnění:</permission>
+      <selectPemistion>Oprávnění</selectPemistion>
+    </label>
+  </UITemplateForm>
+  <!--
+  ################################################################################
+  #             org.exoplatform.ecm.webui.component.admin.view.ecmTempForm #
+  ################################################################################
+  -->
+  <ecmTempForm>
+    <label>
+      <version>Vybrat verzi:</version>
+      <content>Obsah:</content>
+      <name>Název:</name>
+      <homeTemplate>Typ šablony:</homeTemplate>
+      <enableVersion>Zpřístupněná verze:</enableVersion>
+    </label>
+  </ecmTempForm>
+  <ecmTempFormPopup>
+    <title>
+      <ecmTempForm>Přidat či upravit šablony zobrazení</ecmTempForm>
+    </title>
+  </ecmTempFormPopup>
+  <ecmTempFormAdd>
+    <title>
+      <ecmTempForm>Přidat šablonu Průzkumník</ecmTempForm>
+      <ecmTempFormAdd>Přidat šablonu Průzkumník</ecmTempFormAdd>
+    </title>
+  </ecmTempFormAdd>
+  <ecmTempFormEdit>
+    <title>
+      <ecmTempForm>Upravit šablonu Průzkumník</ecmTempForm>
+    </title>
+  </ecmTempFormEdit>
+
+  <!--
+  ######################################################################################
+  #             org.exoplatform.ecm.webui.component.admin.script.UIScriptManager #
+  ######################################################################################
+  -->
+  <!--
+  ######################################################################################
+  #             org.exoplatform.ecm.webui.component.admin.script.UIECMFilterForm #
+  ######################################################################################
+  -->
+  <UIECMFilterForm>
+    <label>
+      <selectScript>Vybrat kategorii</selectScript>
+    </label>
+  </UIECMFilterForm>
+  <!--
+  ######################################################################################
+  #             org.exoplatform.ecm.webui.component.admin.script.UIScriptList #
+  ######################################################################################
+  -->
+  <UIScriptList>
+    <action>
+      <Edit>#{word.edit}</Edit>
+      <Delete>#{word.delete}</Delete>
+      <AddNew>Přidat skript</AddNew>
+    </action>
+    <msg>
+      <confirm-delete>Jste si jisti, že chcete odstranit tento skript?</confirm-delete>
+    </msg>
+    <header>
+      <scriptName>Název</scriptName>
+      <path>Skript</path>
+      <baseVersion>Základní verze</baseVersion>
+      <action>Akce</action>
+    </header>
+    <tooltip>
+      <Edit>Upravit</Edit>
+      <Delete>Odstranit</Delete>
+    </tooltip>
+  </UIScriptList>
+  <!--
+  ######################################################################################
+  #             org.exoplatform.ecm.webui.component.admin.script.UIScriptForm #
+  ######################################################################################
+  -->
+  <uiECMScriptsPopup>
+    <title>
+      <ecmScriptForm>ECM Script</ecmScriptForm>
+    </title>
+  </uiECMScriptsPopup>
+
+  <UIScriptForm>
+    <action>
+      <Save>#{word.save}</Save>
+      <Restore>#{word.restore}</Restore>
+      <Cancel>#{word.cancel}</Cancel>
+      <Refresh>#{word.refresh}</Refresh>
+      <Change>Změna</Change>
+    </action>
+    <msg>
+      <version-restored>Verze {0} byla úspěšně obnovena.</version-restored>
+      <name-null>Zadejte prosím název skriptu.</name-null>
+      <name-exist>Název skriptu '{0}' již existuje.</name-exist>
+      <fileName-invalid>Název skriptu má některé neplatné znaky.</fileName-invalid>
+    </msg>
+  </UIScriptForm>
+  <!--
+  ######################################################################################
+  #             org.exoplatform.ecm.webui.component.admin.script.CBScriptForm #
+  ######################################################################################
+  -->
+  <ScriptContainerPopup>
+    <title>
+      <UIScriptForm>Přidat či upravit skript</UIScriptForm>
+    </title>
+  </ScriptContainerPopup>
+  <UIScriptForm>
+    <label>
+      <selectVersion>Verze</selectVersion>
+      <scriptContent>Obsah</scriptContent>
+      <scriptLabel>Název</scriptLabel>
+      <scriptName>Skript</scriptName>
+      <enableVersion>Povolit správu verzí</enableVersion>
+    </label>
+  </UIScriptForm>
+  <!--
+  ######################################################################################
+  #             org.exoplatform.ecm.webui.component.admin.script.ecmScriptForm #
+  ######################################################################################
+  -->
+ 
+  <ecmScriptForm>
+    <label>
+      <selectVersion>Verze</selectVersion>
+      <scriptContent>Obsah</scriptContent>
+      <scriptLabel>Název</scriptLabel>
+      <scriptName>Skript</scriptName>
+      <enableVersion>Povolit správu verzí</enableVersion>
+    </label>
+  </ecmScriptForm>
+  <!--
+  ######################################################################################
+  #             org.exoplatform.ecm.webui.component.admin.taxonomy.UITaxonomyForm #
+  ######################################################################################
+  -->
+  <UITaxonomyForm>
+    <action>
+      <Save>#{word.save}</Save>
+      <Cancel>#{word.cancel}</Cancel>
+    </action>
+    <title>Přidat kategorii</title>
+    <label>
+      <taxonomyName>Název kategorie</taxonomyName>
+      <parentPath>Předek</parentPath>
+    </label>
+    <msg>
+      <exist>Kategorie "{0}" již existuje.</exist>
+      <name-null>Zadejte název kategorie.</name-null>
+      <name-invalid>Název kategorie má některé neplatné znaky.</name-invalid>
+      <name-too-long>Název kategorie musí mít méně než 30 znaků.</name-too-long>
+    </msg>
+  </UITaxonomyForm>
+    
+  <EditTaxonomyTreePopup>
+    <title>
+      <UITaxonomyTreeContainer>Upravit strom kategorií</UITaxonomyTreeContainer>
+    </title>
+  </EditTaxonomyTreePopup>
+
+  <AddTaxonomyTreePopup>
+    <title>
+      <UITaxonomyTreeContainer>Přidat strom kategorií</UITaxonomyTreeContainer>
+    </title>
+  </AddTaxonomyTreePopup>
+  
+  <TaxonomyPopupCreateChild>
+    <title>
+      <UITaxonomyTreeCreateChildForm>Upravit strom kategorií</UITaxonomyTreeCreateChildForm>
+    </title>
+  </TaxonomyPopupCreateChild>
+
+<UITaxonomyTreeCreateChildForm>
+  <action>
+      <Save>#{word.save}</Save>
+      <Cancel>#{word.cancel}</Cancel>
+    </action>
+    <label>
+      <parentPath>Předek:</parentPath>
+      <taxonomyName>Název kategorie:</taxonomyName>
+    </label>
+    <msg>
+      <name-null>Název kategorie je prázdný.</name-null>
+      <name-invalid>Název kategorie je neplatný.</name-invalid>
+      <name-too-long>Název kategorie nesmí obsahovat více než {0} znaků.</name-too-long>
+      <exist>Název kategorie již existuje.</exist>
+    </msg>
+</UITaxonomyTreeCreateChildForm>
+
+  <PopupComponent>
+    <title>
+      <UIOneNodePathSelector>Vybrat cestu</UIOneNodePathSelector>
+    </title>
+  </PopupComponent>
+  
+  <TaxoPopupUserSelector>
+  <title>
+      <TaxoTreeSelectUserOrGroup>Vybrat uživatele</TaxoTreeSelectUserOrGroup>
+      <UIPermissionTreeSelectUser>Vybrat uživatele</UIPermissionTreeSelectUser>
+    </title>
+  </TaxoPopupUserSelector>
+
+  <TaxoTreeSelectUserOrGroupPopup>
+  <title>
+      <TaxoTreeSelectUserOrGroup>Vybrat členství</TaxoTreeSelectUserOrGroup>
+    </title>
+  </TaxoTreeSelectUserOrGroupPopup>
+  
+  <TaxoTreeAnyPermission>
+    <label>
+      <any>Jakékoliv oprávnění</any>
+      <anyPermission>TaxoTreeAnyPermission</anyPermission>
+    </label>
+  </TaxoTreeAnyPermission>
+  
+  <TaxoTreeSelectUserOrGroup>
+    <label>
+      <selectGroup>Vybrat skupinu</selectGroup>
+      <selectMembership>Vybrat členství</selectMembership>
+    </label>
+  </TaxoTreeSelectUserOrGroup>
+  
+  <!--
+  ######################################################################################
+  #             org.exoplatform.ecm.webui.component.admin.taxonomy.UITaxonomyTreeList #
+  ######################################################################################
+  -->
+  <UITaxonomyTreeList>
+    <header>
+      <name>Strom kategorií</name>
+      <workspace>Pracovní prostor</workspace>
+      <homePath>Cesta</homePath>
+      <action>Akce</action>
+    </header>
+    <action>
+      <AddTaxonomyTree>Přidat strom kategorií</AddTaxonomyTree>
+    </action>
+    <tooltip>
+      <EditTaxonomyTree>Upravit strom kategorií</EditTaxonomyTree>
+      <Delete>Odstranit strom kategorií</Delete>
+    </tooltip>
+    <title>Procházet strom kategorií</title>
+    <msg>
+      <no-list>Nebyly vytvořeny žádné stromy kategorií.</no-list>
+      <confirm-delete>Jste si jisti, že chcete odstranit strom kategorie?</confirm-delete>
+      <is-in-trash>Tento strom kategorii byl přesunut do koše.</is-in-trash>
+    </msg>
+  </UITaxonomyTreeList>
+  
+  <!--
+  ######################################################################################
+  #             org.exoplatform.ecm.webui.component.admin.taxonomy.UITaxonomyTreeForm  #
+  ######################################################################################
+  -->
+  <UITaxonomyTreeForm>
+    <label>
+      <name>Název</name>
+      <workspace>Pracovní prostor</workspace>
+      <homePath>Cesta</homePath>
+      <permissions>Oprávnění</permissions>
+    </label>
+    <msg>
+      <homapath-emty>Vstupní cesta</homapath-emty>
+    </msg>
+  </UITaxonomyTreeForm>
+  
+  <UIPermissionTreeForm>
+    <label>
+      <UIPopupWindow>Vybrat</UIPopupWindow>
+      <permission>UIPermissionTreeForm</permission>
+      <userOrGroup>Uživatel nebo skupina</userOrGroup>
+      <read>Právo čtení</read>
+      <add_node>Právo přidat uzel</add_node>
+      <set_property>Právo nastavit vlastnost</set_property>
+      <remove>Právo mazat</remove>
+    </label>
+    <title>Přidání oprávnění do tohoto uzlu</title>
+    <action>
+      <Close>#{word.close}</Close>
+      <Save>Uložit</Save>
+      <Reset>Vynulovat</Reset>
+    </action>
+    <msg>
+      <checkbox-require>Vyberte alespoň jedno oprávnění.</checkbox-require>
+      <userOrGroup-required>Před uložením oprávnění vyberte uživatele nebo skupinu.</userOrGroup-required>
+      <not-change-permission>Nemáte právo přidat oprávnění.</not-change-permission>
+      <access-denied>Přístup byl odepřen. Toto oprávnění, nelze odebrat.</access-denied>
+    </msg>
+  </UIPermissionTreeForm>
+  
+  <PopupTaxonomyJCRBrowser>
+  <title>
+      <UIOneNodePathSelector>Zvolit cestu domů</UIOneNodePathSelector>
+    </title>
+  </PopupTaxonomyJCRBrowser>
+  
+  <PopupTaxonomyTreePermission>
+    <title>
+      <UIPermissionSelector>Vyberte práva</UIPermissionSelector>
+    </title>
+   </PopupTaxonomyTreePermission>
+   
+   <PopupDrivePermission>
+    <title>
+      <AddDrivePermissionSelector>Přidat oprávnění</AddDrivePermissionSelector>
+      <UIPermissionSelector>Vyberte práva</UIPermissionSelector>
+    </title>
+  </PopupDrivePermission>
+  
+  <UIPopupWindow>
+    <title>
+      <UIPermissionManager>Správa oprávnění</UIPermissionManager>
+    </title>
+   </UIPopupWindow>
+
+  <PopupUserSelector>
+    <title>
+      <UIUserContainer>Správa oprávnění</UIUserContainer>
+    </title>
+   </PopupUserSelector>
+   
+  <UIPermissionInfo>
+    <action>
+      <title>
+        <Edit>Upravit</Edit>
+        <Delete>Odebrat oprávnění</Delete>
+      </title>
+    </action>
+    <header>
+      <usersOrGroups>Uživatel nebo skupina</usersOrGroups>
+      <read>Čtení</read>
+      <addNode>Změnit uzel</addNode>
+      <remove>Odstranit</remove>
+      <action>Akce</action>
+    </header>
+    <msg>
+      <confirm-delete-permission>Jste si jisti, že chcete odstranit toto oprávnění?</confirm-delete-permission>
+      <no-permission-tochange>Nemáte právo odstranit toto oprávnění.</no-permission-tochange>
+      <no-permission-remove>Nelze odstranit vlastníka nebo uživatele systému.</no-permission-remove>
+      <access-denied>Přístup byl odepřen. Toto oprávnění, nelze odebrat.</access-denied>
+    </msg>
+  </UIPermissionInfo>
+  <permission>
+    <title>
+      <SelectUser>Vybrat uživatele</SelectUser>
+      <SelectMember>Vybrat členství</SelectMember>
+      <AddAny>Každý</AddAny>
+    </title>
+  </permission>
+  <!--
+  #############################################################################
+  #             org.exoplatform.ecm.webui.component.explorer.UIPermissionForm #
+  #############################################################################
+  -->
+  <SelectUserOrGroup>
+    <title>
+      <UIGroupSelector>Vybrat uživatele</UIGroupSelector>
+      <UIPermissionSelector>Vybrat člena</UIPermissionSelector>
+      <UIGroupMemberSelector>Vybrat členství</UIGroupMemberSelector>
+    </title>
+  </SelectUserOrGroup>
+  <UIGroupSelector>
+    <label>
+      <selectGroup>Vybrat skupinu</selectGroup>
+      <selectUser>Vybrat uživatele</selectUser>
+    </label>
+    <msg>
+      <not-change-owner>'{0}' je vlastníkem tohoto uzlu a má oprávnění k úplnému řízení.</not-change-owner>
+    </msg>
+  </UIGroupSelector>
+  <UIPermissionForm>
+    <label>
+      <UIPopupWindow>Vybrat</UIPopupWindow>
+      <permission>UIPermissionForm</permission>
+      <userOrGroup>Uživatel nebo skupina</userOrGroup>
+      <read>Čtení</read>
+      <add_node>Změnit</add_node>
+      <remove>Odstranit</remove>
+    </label>
+    <title>Přidat oprávnění k tomuto uzlu</title>
+    <action>
+      <Close>#{word.close}</Close>
+      <Save>#{word.save}</Save>
+      <Reset>Vynulovat</Reset>
+    </action>
+    <msg>
+      <checkbox-require>Vyberte alespoň jedno oprávnění.</checkbox-require>
+      <userOrGroup-required>Před uložením oprávnění vyberte uživatele nebo skupinu.</userOrGroup-required>
+      <not-change-permission>Nemáte právo přidat oprávnění.</not-change-permission>
+      <access-denied>Přístup byl odepřen. Toto oprávnění nelze odebrat.</access-denied>
+    </msg>
+  </UIPermissionForm>
+  
+  <TaxonomyPopup>
+    <title>
+      <UITaxonomyForm>Přidat kategorii</UITaxonomyForm>
+    </title>
+  </TaxonomyPopup>
+  
+  <UITaxonomyManager>
+    <title>
+      <permission>Správa oprávnění</permission>
+    </title>
+  </UITaxonomyManager>
+  <!--
+  ######################################################################################
+  #             org.exoplatform.ecm.webui.component.admin.templates.UITemplateList #
+  ######################################################################################
+  -->
+  <UITemplateList>
+    <header>
+      <name>Typ</name>
+      <action>Akce</action>
+      <label>Šablona</label>
+      <icon>Ikona</icon>
+    </header>
+    <action>
+      <AddNew>Přidat šablonu</AddNew>
+    </action>
+    <msg>
+      <confirm-delete>Opravdu chcete odstranit?</confirm-delete>
+      <access-denied>Přístup byl odepřen. Nemáte oprávnění k používání této funkce.</access-denied>
+      <editing-template>Přístup byl odepřen. Nemůžete současně odstranit a upravit tuto šablonu.</editing-template>
+      <template-not-exist>Neexistuje šablona, kterou se pokoušíte odstranit.</template-not-exist>
+    </msg>
+  </UITemplateList>
+  
+  <UIActionsTemplateList>
+    <header>
+      <name>Typ</name>
+      <action>Akce</action>
+      <label>Šablona</label>
+      <icon>Ikona</icon>
+    </header>
+    <action>
+      <AddNew>Přidat šablonu</AddNew>
+    </action>
+    <msg>
+      <confirm-delete>Opravdu chcete odstranit?</confirm-delete>
+      <access-denied>Přístup byl odepřen. Nemáte oprávnění k používání této funkce.</access-denied>
+      <editing-template>Přístup byl odepřen. Nemůžete současně odstranit a upravit tuto šablonu.</editing-template>
+      <template-not-exist>Neexistuje šablona, kterou se pokoušíte odstranit.</template-not-exist>
+    </msg>
+  </UIActionsTemplateList>
+  
+  <UIOthersTemplateList>
+    <header>
+      <name>Typ</name>
+      <label>Šablona</label>
+      <icon>Ikona</icon>
+      <action>Akce</action>
+    </header>
+    <action>
+      <AddNew>Přidat šablonu</AddNew>
+    </action>
+    <msg>
+      <confirm-delete>Opravdu chcete odstranit?</confirm-delete>
+      <access-denied>Přístup byl odepřen. Nemáte oprávnění k používání této funkce.</access-denied>
+      <editing-template>Přístup byl odepřen. Nemůžete odstranit a upravit tuto šablonu současně.</editing-template>
+      <template-not-exist>Neexistuje šablona, kterou se pokoušíte odstranit.</template-not-exist>
+    </msg>
+  </UIOthersTemplateList>
+
+ <!--
+  ######################################################################################
+  #             org.exoplatform.ecm.webui.component.admin.templates.clv package #
+  ######################################################################################
+  -->
+
+<UITabPane>
+ <title>
+ <ContentTemplateContainer>Obsah</ContentTemplateContainer>
+<CateTemplateContainer>Navigace</CateTemplateContainer>
+<PageTemplateContainer>Stránkovač</PageTemplateContainer>
+ </title>
+</UITabPane>
+
+  <UICLVTemplateList>
+    <title>
+      <Edit>Upravit</Edit>
+      <Delete>Odstranit</Delete>
+    </title>
+    <header>
+      <title>Název</title>
+      <action>Akce</action>
+      <template>Šablona</template>
+    </header>
+    <action>
+      <AddTemplate>Přidat šablonu</AddTemplate>
+<Edit>Upravit</Edit>
+<Delete>Odstranit</Delete>
+    </action>
+    <msg>
+      <confirm-delete>Jste si jisti, že chcete odstranit tuto šablonu?</confirm-delete>
+      <access-denied>Přístup byl odepřen. Nemáte oprávnění k používání této funkce.</access-denied>
+      <editing-template>Přístup byl odepřen. Nemůžete současně odstranit a upravit tuto šablonu.</editing-template>
+      <template-not-exist>Neexistuje šablona, kterou se pokoušíte odstranit.</template-not-exist>
+    </msg>
+  </UICLVTemplateList>
+
+<CateTemplateList>
+    <header>
+      <title>Název</title>
+      <action>Akce</action>
+      <template>Šablona</template>
+    </header>
+    <title>
+      <Edit>Upravit</Edit>
+      <Delete>Odstranit</Delete>
+    </title>
+    <action>
+      <AddTemplate>Přidat šablonu</AddTemplate>
+<Edit>Upravit</Edit>
+<Delete>Odstranit</Delete>
+    </action>
+</CateTemplateList>
+
+<PageTemplateList>
+    <header>
+      <title>Název</title>
+      <action>Akce</action>
+      <template>Šablona</template>
+    </header>
+    <action>
+      <AddTemplate>Přidat šablonu</AddTemplate>
+<Edit>Upravit</Edit>
+<Delete>Odstranit</Delete>
+    </action>
+</PageTemplateList>
+
+<EditCLVTemplatePopup_ContentTemplateContainer>
+ <title>
+   <UICLVTemplateForm_ContentTemplateContainer>Upravit šablonu seznamů</UICLVTemplateForm_ContentTemplateContainer>   
+ </title>
+</EditCLVTemplatePopup_ContentTemplateContainer>
+
+<EditCLVTemplatePopup_CateTemplateContainer>
+ <title>
+   <UICLVTemplateForm_CateTemplateContainer>Upravit šablonu seznamů</UICLVTemplateForm_CateTemplateContainer>   
+ </title>
+</EditCLVTemplatePopup_CateTemplateContainer>
+
+<EditCLVTemplatePopup_PageTemplateContainer>
+ <title>
+   <UICLVTemplateForm_PageTemplateContainer>Upravit šablonu seznamů</UICLVTemplateForm_PageTemplateContainer>   
+ </title>
+</EditCLVTemplatePopup_PageTemplateContainer>
+
+<CLVTemplatePopup_ContentTemplateContainer>
+ <title>
+   <UICLVTemplateForm_ContentTemplateContainer>Přidat šablonu seznamů</UICLVTemplateForm_ContentTemplateContainer>   
+ </title>
+</CLVTemplatePopup_ContentTemplateContainer>
+
+<CLVTemplatePopup_CateTemplateContainer>
+ <title>
+   <UICLVTemplateForm_CateTemplateContainer>Přidat šablonu seznamů</UICLVTemplateForm_CateTemplateContainer>   
+ </title>
+</CLVTemplatePopup_CateTemplateContainer>
+
+<CLVTemplatePopup_PageTemplateContainer>
+ <title>
+   <UICLVTemplateForm_PageTemplateContainer>Přidat šablonu seznamů</UICLVTemplateForm_PageTemplateContainer>   
+ </title>
+</CLVTemplatePopup_PageTemplateContainer>
+
+<UICLVTemplateForm_ContentTemplateContainer>
+ <action>
+  <Save>#{word.save}</Save>
+<Reset>Vynulovat</Reset>
+<Cancel>#{word.cancel}</Cancel>
+ </action>
+<label>
+ <title>Název</title>
+<template>Název šablony</template>
+<content>Obsah</content>
+<type>Typ šablony</type>
+</label>
+</UICLVTemplateForm_ContentTemplateContainer>
+
+<UICLVTemplateForm_PageTemplateContainer>
+ <action>
+  <Save>#{word.save}</Save>
+<Reset>Vynulovat</Reset>
+<Cancel>#{word.cancel}</Cancel>
+ </action>
+<label>
+ <title>Název</title>
+<template>Název šablony</template>
+<content>Obsah</content>
+<type>Typ šablony</type>
+</label>
+</UICLVTemplateForm_PageTemplateContainer>
+
+<UICLVTemplateForm_CateTemplateContainer>
+ <action>
+  <Save>#{word.save}</Save>
+<Reset>Vynulovat</Reset>
+<Cancel>#{word.cancel}</Cancel>
+ </action>
+<label>
+ <title>Jméno</title>
+<template>Název šablony</template>
+<content>Obsah</content>
+<type>Typ šablony</type>
+</label>
+</UICLVTemplateForm_CateTemplateContainer>
+<UICLVTemplateForm>
+  <label>
+    <paginators>Stránkovač</paginators>
+<list>Obsah</list>
+<navigation>Navigace</navigation>
+  </label>
+                          <action>
+                            <Save>#{word.save}</Save>
+                            <Reset>Vynulovat</Reset> 
+                            <Cancel>#{word.cancel}</Cancel> 
+                          </action> 
+  <msg>
+  <template-existing>Tento název šablony již existuje. Vyberte jinou kombinaci.</template-existing>
+  </msg>
+</UICLVTemplateForm>
+
+  <!--
+  ######################################################################################
+  #             org.exoplatform.ecm.webui.component.admin.templates.UITemplateForm #
+  ######################################################################################
+  -->
+  <AddNewTemplatePermission>
+    <title>
+      <UIPermissionSelector>Vyberte práva</UIPermissionSelector>
+    </title>
+  </AddNewTemplatePermission>
+  <TemplatePermission>
+    <title>
+      <UIPermissionSelector>Vyberte práva</UIPermissionSelector>
+    </title>
+  </TemplatePermission>
+  <TemplateContainerPopup>
+    <title>
+      <UITemplateForm>Formulář šablony</UITemplateForm>
+    </title>
+  </TemplateContainerPopup>
+  <ViewForm>
+    <label>
+      <UITemplateContent>ViewForm</UITemplateContent>
+      <UIPopupWindow>Právo na prohlížení</UIPopupWindow>
+      <selectVersion>Verze</selectVersion>
+      <content>Obsah:</content>
+      <name>Název:</name>
+      <isDocumentTemplate>je šablona dokumentu</isDocumentTemplate>
+      <viewPermission>Oprávnění:</viewPermission>
+      <enableVersion>Správa verzí aktivována</enableVersion>
+    </label>
+    <title>Přidat či upravit zobrazení</title>
+  </ViewForm>
+  <DialogForm>
+    <label>
+      <UITemplateContent>DialogForm</UITemplateContent>
+      <UIPopupWindow>Oprávnění Dialogového okna</UIPopupWindow>
+      <selectVersion>Verze</selectVersion>
+      <content>Obsah:</content>
+      <name>Název:</name>
+      <isDocumentTemplate>je šablona dokumentu</isDocumentTemplate>
+      <viewPermission>Oprávnění:</viewPermission>
+      <enableVersion>Povolit správu verzí</enableVersion>
+    </label>
+    <title>Přidat nebo upravit Dialogové okno</title>
+  </DialogForm>
+  <DialogFormTemplatePermission>
+    <title>
+      <UIPermissionSelector>Vyberte práva</UIPermissionSelector>
+    </title>
+  </DialogFormTemplatePermission>
+  <ViewFormTemplatePermission>
+    <title>
+      <UIPermissionSelector>Vyberte práva</UIPermissionSelector>
+    </title>
+  </ViewFormTemplatePermission>
+  <TemplateContainerPopup>
+    <title>
+      <UIViewTemplate_UITemplateContainer><![CDATA[View & Edit Template]]></UIViewTemplate_UITemplateContainer>
+      <UIViewTemplate_UIActionsTemplateContainer><![CDATA[View & Edit Template]]></UIViewTemplate_UIActionsTemplateContainer>
+      <UIViewTemplate_UIOthersTemplateContainer><![CDATA[View & Edit Template]]></UIViewTemplate_UIOthersTemplateContainer>
+    </title>
+  </TemplateContainerPopup>
+  <UITemplatesManager>
+    <title>
+      <Edit>Upravit</Edit>
+      <Delete>Odstranit</Delete>
+    </title>
+  </UITemplatesManager>
+  <!--
+  ######################################################################################
+  #             org.exoplatform.ecm.webui.component.admin.templates.UIViewTemplate #
+  ######################################################################################
+  -->
+  <!--
+  ######################################################################################
+  #             org.exoplatform.ecm.webui.component.admin.templates.UITemplateEditForm #
+  ######################################################################################
+  -->
+  <UITemplateEditForm>
+    <label>
+      <name>Název:</name>
+      <label>Popisek:</label>
+      <isDocumentTemplate>je šablona dokumentu:</isDocumentTemplate>
+    </label>
+    <action>
+      <Save>#{word.save}</Save>
+      <Cancel>#{word.cancel}</Cancel>
+      <Refresh>#{word.refresh}</Refresh>
+    </action>
+  </UITemplateEditForm>
+  <!--
+  ######################################################################################
+  #             org.exoplatform.ecm.webui.component.admin.templates.UIDialogTab #
+  ######################################################################################
+  -->
+  <UIDialogTab>
+    <header>
+      <name>Název</name>
+      <roles>Role</roles>
+      <baseVersion>Verze</baseVersion>
+      <action>Akce</action>
+    </header>
+    <msg>
+      <undeletable>Nelze odstranit {0}, protože to je výchozí hodnota.</undeletable>
+      <confirm-delete>Jste si jisti, že chcete odstranit tento dialog?</confirm-delete>
+    </msg>
+    <action>
+      <title>
+        <Edit>Upravit</Edit>
+        <Delete>Odstranit</Delete>
+      </title>
+    </action>
+  </UIDialogTab>
+  <!--
+  ######################################################################################
+  #             org.exoplatform.ecm.webui.component.admin.templates.UIViewTab #
+  ######################################################################################
+  -->
+  <UIViewTab>
+    <header>
+      <name>Název</name>
+      <roles>Role</roles>
+      <baseVersion>Verze</baseVersion>
+      <action>Akce</action>
+    </header>
+    <msg>
+      <undeletable>{0} nemůže být odstraněn, je výchozí.</undeletable>
+      <confirm-delete>Opravdu chcete odstranit?</confirm-delete>
+    </msg>
+    <action>
+      <title>
+        <Edit>Upravit</Edit>
+        <Delete>Odstranit</Delete>
+      </title>
+    </action>
+  </UIViewTab>
+  <!--
+  ######################################################################################
+  #             org.exoplatform.ecm.webui.component.admin.templates.UITemplateContent #
+  ######################################################################################
+  -->
+  <UITemplateContent>
+    <action>
+      <Save>#{word.save}</Save>
+      <Restore>#{word.restore}</Restore>
+      <Cancel>#{word.cancel}</Cancel>
+      <Refresh>#{word.refresh}</Refresh>
+    </action>
+    <msg>
+      <name-invalid>Název pole nesmí obsahovat speciální znaky.</name-invalid>
+      <roles-invalid>Je vyžadováno pole oprávnění.</roles-invalid>
+      <version-restored>Verze {0} byla úspěšně obnovena.</version-restored>
+      <name-exist>Název {0}' již existuje.</name-exist>
+    </msg>
+    <title>
+      <AddPermission>Přidat oprávnění</AddPermission>
+      <RemovePermission>Odebrat oprávnění</RemovePermission>
+    </title>
+  </UITemplateContent>
+  <!--
+  ######################################################################################
+  #             org.exoplatform.ecm.webui.component.admin.templates.DialogForm #
+  ######################################################################################
+  -->
+  <!--
+  ######################################################################################
+  #             org.exoplatform.ecm.webui.component.admin.templates.ViewForm #
+  ######################################################################################
+  -->
+  <!--
+  ######################################################################################
+  #             org.exoplatform.ecm.webui.component.UIJCRBrowser #
+  ######################################################################################
+  -->
+  <JCRBrowser>
+    <title>
+      <UIOneNodePathSelector>Zvolit cestu domů</UIOneNodePathSelector>
+    </title>
+  </JCRBrowser>
+  <JCRBrowserAssets>
+    <title>
+      <UIOneNodePathSelector>Zvolit ikonu</UIOneNodePathSelector>
+    </title>
+  </JCRBrowserAssets>
+  <!--
+  ######################################################################################
+  #             org.exoplatform.ecm.webui.component.admin.queries #
+  ######################################################################################
+  -->
+  <UIQueriesList>
+    <header>
+      <name>Název</name>
+      <type>Typ</type>
+      <statement>Prohlášení</statement>
+      <permission>Oprávnění</permission>
+      <action>Akce</action>
+    </header>
+    <action>
+      <AddQuery>Přidat dotaz</AddQuery>
+    </action>
+    <tooltip>
+      <Edit>Upravit dotaz</Edit>
+      <Delete>Odstranit tento dotaz</Delete>
+    </tooltip>
+    <msg>
+      <confirm-delete>Jste si jisti, že chcete odstranit tento dotaz?</confirm-delete>
+      <query-not-existed>Dotaz již neexistuje.</query-not-existed>
+      <can-not-remove>Došlo k chybě při odstraňování dotazu. Informace získáte od správce.</can-not-remove>
+    </msg>
+  </UIQueriesList>
+  <UIQueriesForm>
+    <label>
+      <name>Název dotazu</name>
+      <type>Typ dotazu</type>
+      <statement>Prohlášení</statement>
+      <cache>Povolit uchovávání výsledků v mezipaměti</cache>
+      <permissions>Oprávnění</permissions>
+      <PermissionButton>UIQueriesForm</PermissionButton>
+    </label>
+    <action>
+      <Save>#{word.save}</Save>
+      <Cancel>#{word.cancel}</Cancel>
+    </action>
+    <msg>
+      <permission-require>Vyberte oprávnění.</permission-require>
+      <name-invalid>Pole "Název" nesmí obsahovat speciální znaky.</name-invalid>
+      <name-existing>Tento název dotazu již existuje. Prosím vyberte jiný.</name-existing>
+      <invalid-query>Dotaz je neplatný. Zkontrolujte příkaz dotazu.</invalid-query>
+      <access-denied>Přístup byl odepřen. Nemáte oprávnění k provedení této operace.</access-denied>
+    </msg>
+  </UIQueriesForm>
+  <AddQueryForm>
+    <title>
+      <UIQueriesForm>Přidat dotaz</UIQueriesForm>
+    </title>
+  </AddQueryForm>
+  <EditQueryForm>
+    <title>
+      <UIQueriesForm>Upravit dotaz</UIQueriesForm>
+    </title>
+  </EditQueryForm>
+<PermissionPopup>
+  <title>
+    <UIGroupMemberSelector>Vyberte práva</UIGroupMemberSelector>
+  </title>
+</PermissionPopup>
+  <!--
+  ######################################################################################
+  #             org.exoplatform.ecm.webui.component.admin.folksonomy #
+  ######################################################################################
+  -->
+  <UITagManager>
+    <title>
+      <EditStyle>Upravit styl</EditStyle>
+      <RemoveStyle>Odstranit styl</RemoveStyle>
+    </title>    
+  </UITagManager>
+  <UITagStyleList>
+    <header>
+      <name>Název stylu</name>
+      <documentRange>Počet výskytů</documentRange>
+      <tagHTML>Styl tagu</tagHTML>
+      <action>Akce</action>
+    </header>
+    <title>
+      <Edit>Upravit</Edit>
+      <Delete>Odstranit</Delete>
+      <Remove>Odstranit</Remove>
+    </title>
+    <action>
+      <AddStyle>Přidat styl</AddStyle>
+    </action>
+  </UITagStyleList>
+  <UITagStyleForm>
+    <label>
+      <styleName>Název stylu:</styleName>
+      <documentRange>Počet výskytů:</documentRange>
+      <styleHTML>Styl ve formátu HTML:</styleHTML>
+    </label>
+    <action>
+      <UpdateStyle>Aktualizovat</UpdateStyle>
+      <Cancel>#{word.cancel}</Cancel>
+    </action>
+    <msg>
+      <range-validator>Rozsah je neplatný. Formát musí být: a..b, kde a, b jsou celá kladná čísla. Můžete použít * namísto b k označení, že rozsah je neomezený.</range-validator>
+      <error-update>Aktualizace se nezdařila. Vaše informace je neplatná.</error-update>
+      <item-not-existing>Nelze uložit změny na tohoto tagu, protože již neexistuje v databázi.</item-not-existing>
+    </msg>
+  </UITagStyleForm>
+  <FolksonomyPopup>
+    <title>
+      <UITagStyleForm>Upravit nastavení stylu tagu</UITagStyleForm>
+    </title>
+  </FolksonomyPopup>
+  <!--
+  ###################################################################################
+  # org.exoplatform.ecm.jcr.ECMNameValidator  #
+  ###################################################################################
+  -->
+  <ECMNameValidator>
+    <msg>
+      <Invalid-char>Pole {0} má některé neplatné znaky. Zadejte jinou hodnotu.</Invalid-char>
+      <empty-input>Hodnota pole '{0}' je prázdná.</empty-input>
+    </msg>
+  </ECMNameValidator>
+  <EmptyFieldValidator>
+    <msg>
+      <empty-input>Zadejte hodnotu do pole {0}.</empty-input>
+    </msg>
+  </EmptyFieldValidator>
+  <!--
+  ###################################################################################
+  # org.exoplatform.ecm.jcr.PermissionValidator  #
+  ###################################################################################
+  -->
+  <PermissionValidator>
+  <msg>
+      <permission-path-invalid>Oprávnění {0} je neplatné.</permission-path-invalid>
+  </msg>
+  </PermissionValidator>
+  <!--
+  ###################################################################################
+  # Repository  #
+  ###################################################################################
+  -->
+  <UIWorkspaceList>
+    <label>
+      <workspaceName>Pracovní prostor:</workspaceName>
+      <rootNodeInfo>UIWorkspaceList</rootNodeInfo>
+      <rootNodePath>Kořenová cesta:</rootNodePath>
+    </label>
+  </UIWorkspaceList>
+  <!--
+  ###################################################################################
+  # Others  #
+  ###################################################################################
+  -->
+  <UIFormInputSetWithAction>
+    <msg>
+      <confirm-delete>Jste si jisti, že chcete odstranit?</confirm-delete>
+    </msg>
+  </UIFormInputSetWithAction>
+  <template>
+    <title>
+      <AddPermission>Přidat právo</AddPermission>
+    </title>
+  </template>
+  <metadataTypeTab>
+    <title>
+      <AddPermission>Přidat právo</AddPermission>
+    </title>
+  </metadataTypeTab>
+  <PermissionButton>
+    <title>
+      <AddPermission>Přidat právo</AddPermission>
+    </title>
+  </PermissionButton>
+  <nodeTypeDefinition>
+    <title>
+      <AddSuperType>Přidat nadtyp</AddSuperType>
+    </title>
+  </nodeTypeDefinition>
+  <childNodeDefinition>
+    <title>
+      <AddRequiredType>Přidat požadovaný typ</AddRequiredType>
+      <AddDefaultType>Přidat výchozí typ</AddDefaultType>
+    </title>
+  </childNodeDefinition>
+  <propertyDefinition>
+    <title>
+      <AddConstraints>Přidat omezení</AddConstraints>
+    </title>
+  </propertyDefinition>
+  <authInputSet>
+    <title>
+      <Select>Vybrat</Select>
+    </title>
+  </authInputSet>
+  <!--
+  #grid with action
+  -->
+  <UIViewContainer>
+    <title>
+      <View>Zobrazit</View>
+      <EditInfo>Upravit</EditInfo>
+      <Delete>Odstranit</Delete>
+    </title>
+<label>
+  <permission>{0} v {1}</permission>
+</label>
+  </UIViewContainer>
+  <ECMTemplate>
+    <title>
+      <EditInfo>Upravit</EditInfo>
+      <Delete>Odstranit</Delete>
+    </title>
+  </ECMTemplate>
+  <step1>
+    <title>
+      <AddPermission>Přidat právo</AddPermission>
+    </title>
+  </step1>
+  <step2>
+    <title>
+      <SelectContainer>Vybrat kontejner</SelectContainer>
+      <SelectStore>Vybrat úložiště</SelectStore>
+    </title>
+  </step2>
+  <step3>
+    <title>
+      <SelectQueryHandler>Vybrat obsluhu dotazu</SelectQueryHandler>
+    </title>
+  </step3>
+  <UIDrivePermissionSelector>
+    <label>
+      <selectGroup>Vybrat skupinu</selectGroup>
+      <selectUser>Vybrat uživatele</selectUser>
+      <selectMembership>Vybrat členství</selectMembership>
+    </label>
+  </UIDrivePermissionSelector>
+  
+  <UIPermissionSelector>
+    <label>
+      <selectGroup>Vybrat skupinu</selectGroup>
+      <selectUser>Vybrat uživatele</selectUser>
+      <selectMembership>Vybrat členství</selectMembership>
+    </label>
+  </UIPermissionSelector>
+  
+  <UIAnyPermission>
+    <label>
+      <anyPermission>Jakékoliv oprávnění</anyPermission>
+    </label>
+  </UIAnyPermission>
+  
+  <UIMDriveAnyPermission>
+    <label>
+      <anyPermission>Jakékoliv oprávnění</anyPermission>
+    </label>
+  </UIMDriveAnyPermission>
+  
+  <UIQueriesAnyPermission>
+    <label>
+      <anyPermission>Jakékoliv oprávnění</anyPermission>
+    </label>
+  </UIQueriesAnyPermission>
+  
+  <MetadataPermission>
+    <label>
+      <selectGroup>Vybrat skupinu</selectGroup>
+    </label>
+  </MetadataPermission>  
+  <MetadataPermission>
+    <label>
+      <selectMembership>Vybrat členství</selectMembership>
+    </label>
+  </MetadataPermission>
+  <anyPermission>
+    <title>
+      <AddAnyPermission>Nastavit libovolné oprávnění</AddAnyPermission>
+    </title>
+  </anyPermission>
+  <!--
+  #########Since ECM 2.3##################
+  -->
+  <QueriesPermissionBrowse>
+    <label>
+      <selectGroup>Vybrat skupinu</selectGroup>
+      <selectUser>Vybrat uživatele</selectUser>
+      <selectMembership>Vybrat členství</selectMembership>
+    </label>
+  </QueriesPermissionBrowse>
+  <!--
+  #########Since ECM 2.4##################
+  -->  
+  <UIViewFormTabPane>
+    <label>
+      <addSymLink>Přidat symlink</addSymLink>
+    </label>
+  </UIViewFormTabPane>
+  <!--
+  #########Since ECM 2.5##################
+  --> 
+  
+  <UIDriveForm>
+<msg>
+  <permission-path-invalid>Oprávnění {0} je neplatné.</permission-path-invalid>
+  </msg>
+  </UIDriveForm>
+  
+  <UITaxonomyTreeMainForm>
+    <msg>
+      <homepath-emty>Je požadována cesta k domovskému adresáři.</homepath-emty>
+      <targetpath-emty>Je vyžadována cílová cesta.</targetpath-emty>
+    </msg>
+  </UITaxonomyTreeMainForm>
+  <UITaxonomyWorkingArea>
+  <msg>
+  <exist>Tento uzel stromu již existuje.</exist>
+  </msg>
+  </UITaxonomyWorkingArea>
+
+  <PermissionTreeSelectUser>
+    <label>
+      <option>
+        <userName>#{word.userName}</userName>
+        <lastName>#{word.lastName}</lastName>
+        <firstName>#{word.firstName}</firstName>
+        <email>#{word.email}</email>
+      </option>
+      <group>Skupina</group>
+      <searchUser>Uživatel</searchUser>
+      <userName>#{word.userName}</userName>
+      <lastName>#{word.lastName}</lastName>
+      <firstName>#{word.firstName}</firstName>
+    <email>#{word.email}</email>
+      <action>#{word.action}</action>
+      <Add>#{word.Add}</Add>
+      <Close>#{word.Close}</Close>
+    </label>
+  </PermissionTreeSelectUser>
+  
+  <!--
+  #########Since ECM 2.6 ##################
+  -->   
+  <DriveInputSet>
+    <label>
+      <nt_folder>Složka dokumentů</nt_folder>
+      <nt_unstructured>Složka obsahu</nt_unstructured>
+      <exo_cssFolder>Složka CSS</exo_cssFolder>
+      <exo_jsFolder>Složka Javascript</exo_jsFolder>
+      <exo_linkFolder>Odkaz na složku</exo_linkFolder>
+      <exo_webFolder>Složka obsahu webu</exo_webFolder>
+   </label>
+  </DriveInputSet>
+  <UIPermissionTreeInfo>
+  <msg>
+      <confirm-delete-permission>Jste si jisti, že chcete odstranit toto oprávnění?</confirm-delete-permission>
+      <no-permission-remove>Nelze odstranit vlastníka nebo uživatele systému.</no-permission-remove>  
+  </msg>
+  </UIPermissionTreeInfo>  
+  <UITaxonomyTreeMainForm>
+<msg>
+      <no-right-target-path>Vyberte jinou cestu domů.</no-right-target-path>
+</msg>
+</UITaxonomyTreeMainForm>
+
+<UIECMAdminControlPanel>
+    <tab>
+      <label>        
+        <ManageUnLock>Správa zamykání</ManageUnLock>
+      </label>
+    </tab>        
+</UIECMAdminControlPanel>
+<UIUnLockForm>
+    <label>
+      <name>Cesta uzlu</name>      
+      <permissions>Oprávnění</permissions>
+      <PermissionButton>UI Unlock Form</PermissionButton>
+    </label>
+    <action>
+      <Save>#{word.save}</Save>
+      <Cancel>#{word.cancel}</Cancel>
+    </action>
+    <msg>
+      <permission-require>Je třeba vybrat oprávnění.</permission-require>      
+    </msg>
+  </UIUnLockForm>
+  <UILockHolderList>
+  <header>
+  <name>Skupiny nebo uživatelé</name>
+  <action>Akce</action>
+  </header>
+  <tooltip>
+<DeleteLock>Odstranit skupinu</DeleteLock>
+  </tooltip>
+  <msg>
+  <can-not-delete-lock-holder>Nelze odstranit skupinu {0}.</can-not-delete-lock-holder>
+  </msg>
+  </UILockHolderList>
+  <UILockNodeList>
+  <header>
+  <name>Popisek</name>
+  <hoderLock>Vlastník zámku</hoderLock>
+  <action>Akce</action>
+  </header>
+  <tooltip>
+<UnLock>Odemknout</UnLock>
+  </tooltip>
+  <msg>
+  <access-denied-exception>Nemáte oprávnění k přístupu uzlu s cestou {0}, nebo tento uzel je odstraněn.</access-denied-exception>
+  </msg>
+  </UILockNodeList>
+  <EditUnLockForm>
+    <title>
+      <UIUnLockForm>Správa zámku</UIUnLockForm>
+    </title>
+  </EditUnLockForm>  
+  <UITabPane>
+    <action>
+      <Close>#{word.close}</Close>
+    </action>
+    <title>
+    <UILockHolderContainer>Správa zámku</UILockHolderContainer>
+    <UILockNodeList>Uzamčený uzel</UILockNodeList>
+    </title>
+  </UITabPane>
+  
+  <UIViewFormTabPane>
+    <action>
+      <AddTabForm>Přidat záložku</AddTabForm>
+      <AddTab>#{word.save}</AddTab>
+      <BackViewForm>Zpět</BackViewForm>
+    </action>
+  </UIViewFormTabPane>
+  
+ <UITemplateForm>
+<tab>
+<label>
+<defaultSkin>CSS</defaultSkin>
+</label>
+</tab>
+</UITemplateForm>
+ 
+  <UITabPane>
+    <title>
+      <UISkinTab>CSS</UISkinTab>
+    </title>
+  </UITabPane>
+  
+  <UISkinTab>
+    <header>
+      <name>Název</name>
+      <roles>Role</roles>
+      <baseVersion>Verze</baseVersion>
+      <action>Akce</action>
+    </header>
+    <msg>
+      <undeletable>Nelze odstranit {0}, protože to je výchozí hodnota.</undeletable>
+      <confirm-delete>Opravdu chcete odstranit tento vzhled?</confirm-delete>
+    </msg>
+    <action>
+      <title>
+        <Edit>Upravit</Edit>
+        <Delete>Odstranit</Delete>
+      </title>
+    </action>
+  </UISkinTab>
+  
+  <SkinForm>
+    <label>
+      <UITemplateContent>SkinForm</UITemplateContent>
+      <UIPopupWindow>Oprávnění vzhledu</UIPopupWindow>
+      <selectVersion>Verze</selectVersion>
+      <content>Obsah:</content>
+      <name>Název:</name>
+      <isDocumentTemplate>je šablona dokumentu</isDocumentTemplate>
+      <viewPermission>Oprávnění:</viewPermission>
+      <enableVersion>Povolit správu verzí</enableVersion>
+    </label>
+    <title>Přidat či upravit vzhled</title>
+  </SkinForm>
+
+ <UITagManager>
+   <action>
+     <title>
+       <RemoveStyle>Odstranit</RemoveStyle>
+         <AddStyle>Přidat styl</AddStyle>
+     </title>
+   </action>
+   <msg>
+     <confirm-delete>Jste si jisti, že chcete odstranit tento styl tagu?</confirm-delete>
+   </msg>
+ </UITagManager>
+
+<UITaxonomyTreeContainer>
+<action>
+<Cancel>#{word.close}</Cancel>
+</action>
+</UITaxonomyTreeContainer>
+<UITaxonomyTreeMainForm>
+<action>
+<NextViewPermission>Další</NextViewPermission>
+<Reset>Reset</Reset>
+</action>
+</UITaxonomyTreeMainForm>
+
+<UIPermissionTreeForm>
+<action>
+<Save>Save</Save>
+<Reset>Reset</Reset>
+<NextAddAction>Další</NextAddAction>
+<Previous>Předchozí</Previous>
+</action>
+</UIPermissionTreeForm>
+
+<UIActionForm>
+<action>
+<PreviousViewPermission>Předchozí</PreviousViewPermission>
+<NextViewTree>Další</NextViewTree>
+</action>
+  <msg>
+    <xss-vulnerability-character>Pole '{0}' obsahuje XSS zranitelné znaky</xss-vulnerability-character>
+<xss-vulnerability-character-wo-label>Váš vstup může obsahovat zranitelné znaky XSS</xss-vulnerability-character-wo-label>
+  </msg>
+</UIActionForm>
+
+<UITaxonomyTreeWorkingArea>
+<action>
+<Previous>Předchozí</Previous>
+</action>
+</UITaxonomyTreeWorkingArea>
+
+  <UITabPane>
+    <title>
+      <UITagManager>Manažer Tagů</UITagManager>
+      <UITagPermissionManager>Správce oprávnění Tagů</UITagPermissionManager>
+    </title>
+  </UITabPane>
+  
+  <UITagPermissionInfo>
+    <header>
+      <usersOrGroups>Uživatel nebo skupina</usersOrGroups>
+      <action>Akce</action>
+    </header>
+    <action>
+      <title>
+        <Delete>Odstranit</Delete>
+      </title>
+    </action>
+    <msg>
+      <confirm-delete-permission>Jste si jisti, že chcete odstranit toto oprávnění?</confirm-delete-permission>
+    </msg>   
+  </UITagPermissionInfo>
+  <UITagPermissionForm>
+    <title>Přidat právo</title>
+    <action>
+      <Save>#{word.save}</Save>
+      <Add>Přidat</Add>
+    </action>
+    <label>
+      <userOrGroup>Členství:</userOrGroup>
+    </label>
+    <msg>
+      <userOrGroup-alreadyExists>Toto členství již existuje. Vyberte jinou kombinaci.</userOrGroup-alreadyExists>
+    </msg>    
+  </UITagPermissionForm>
+  
+  <UIGroupMemberSelector>
+    <label>
+      <selectGroup>Vybrat skupinu</selectGroup>
+      <selectMembership>Vybrat členství</selectMembership>
+    </label>
+  </UIGroupMemberSelector>
+  
+  <UIFolksonomyManager>
+  <msg>
+      <confirm-delete>Jste si jisti, že chcete odstranit tento styl?</confirm-delete>
+  </msg>
+    <action>
+      <title>
+        <AddStyle>Přidat styl</AddStyle>
+      </title>
+    </action>
+  </UIFolksonomyManager>  
+<UIActionForm>
+  <title>
+  <ShowComponent>Otevřít okno</ShowComponent>
+  <removeReference>Odstranit</removeReference>
+  </title>
+  </UIActionForm> 
+  <NodeTypeNameValidator>
+    <msg>
+      <Invalid-char>Jsou tam některé neplatné znaky. Zadejte jinou hodnotu.</Invalid-char>
+      <empty-input>Hodnota pole je prázdná.</empty-input>
+    </msg>
+  </NodeTypeNameValidator>
+  <UIActionForm>
+    <msg>
+      <constraint-violation-exception>Uzel '{0}' nelze přidat do '{1}' v prostoru '{2}'.  Problém je s oprávněním nebo ve stavu omezení.</constraint-violation-exception>
+    </msg>
+  </UIActionForm>
+  
+  <UIWorkspaceWizard>
+    <msg>
+      <name-not-allowed>Zakázaný název</name-not-allowed>
+    </msg>
+  </UIWorkspaceWizard>
+  <UIRepositoryForm>
+    <msg>
+      <not-complete-repository>The repository is being created. You need to wait a few minutes before creating another one.</not-complete-repository>
+    </msg>
+  </UIRepositoryForm>
+  
+  <UIViewFormTabPane>
+  <label>
+  <addCategory>Přidat kategorii</addCategory>
+          <addLocalizationLink>Přidat překlad</addLocalizationLink>
+  </label>
+  </UIViewFormTabPane>
+
+<UIDriveForm>
+<label>
+<allowNodeTypesOnTree>Přípustný typ uzlu v levém stromě:</allowNodeTypesOnTree>
+</label>
+</UIDriveForm>
+<DriveInputSet>
+<title>
+<RemovePermission>Remove Permission</RemovePermission>
+<ChooseNodeType>Vybrat typy uzlů</ChooseNodeType>
+<RemoveNodeType>Odstranit</RemoveNodeType>
+</title>
+</DriveInputSet>
+<PopupNodeTypeSelector>
+<title>
+<UINodeTypeSelector>Vybrat typy uzlů</UINodeTypeSelector>
+<PopupNodeTypeSelector>Vybrat typy uzlů</PopupNodeTypeSelector>
+</title>
+</PopupNodeTypeSelector>
+  <UINodeTypeSelector>
+    <label>
+      <selectedAllNodeTypes>Vybrat všechny typy uzlů</selectedAllNodeTypes>
+    </label>
+  </UINodeTypeSelector>
+  <UIScriptForm>
+    <msg>
+      <PathNotFoundException>Skript již existuje ve složce {0}.</PathNotFoundException>      
+    </msg>
+  </UIScriptForm>
+ <UINodeTypeList>
+   <msg>
+   <no-list>Neexistuje žádný typ uzlu odpovídající zadanému hledání.</no-list>
+   </msg>
+ </UINodeTypeList>
+  <UIActionForm>
+    <msg>
+      <canotChangeActionId>Nemůžete změnit ID akce.</canotChangeActionId>
+    </msg>
+  </UIActionForm>
+  <PopupComponent>
+    <title>
+      <UINodeTypeSelector>Výběr typu uzlu</UINodeTypeSelector>
+    </title>
+  </PopupComponent>
+  <UIPageIterator>
+    <label>
+      <maxPageSize>Maximální velikost stránky</maxPageSize>
+    </label>
+  </UIPageIterator>
+  <UILockNodeList>
+    <msg>
+      <can-not-unlock-node>Nemáte oprávnění k odemknutí tohoto uzlu. Obraťte se na správce, abyste dostali odpovídající právo.</can-not-unlock-node>
+    </msg>
+ </UILockNodeList>
+</bundle>

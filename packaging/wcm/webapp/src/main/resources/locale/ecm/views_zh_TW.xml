@@ -41,7 +41,7 @@
     <view>
       <label>
         <not-viewable>此內容不可查看</not-viewable>
-        <using-webDAV>或使用 WebDAV 訪問的內容</using-webDAV>
+        <using-webDAV>或在 MS Office 中打開</using-webDAV>
         <file-size-too-big>此檔的內容太大。您應該在用戶端下載並打開。</file-size-too-big>
         <webDAV>WebDAV 視圖</webDAV>
         <download>下載</download>

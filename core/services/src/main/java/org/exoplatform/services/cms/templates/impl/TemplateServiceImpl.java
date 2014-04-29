@@ -693,9 +693,9 @@ public class TemplateServiceImpl implements TemplateService, Startable {
     if(identity == null) {
       return false ;
     }
-    String[] listRoles = roles.split("; ");
+    String[] listRoles = roles.split(",");
     for (int i = 0; i < listRoles.length; i++) {
-      String role = listRoles[i];
+      String role = listRoles[i].trim();
       if("*".equalsIgnoreCase(role)) return true ;
       MembershipEntry membershipEntry = MembershipEntry.parse(role) ;
       if(identity.isMemberOf(membershipEntry)) {

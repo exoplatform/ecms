@@ -1,0 +1,98 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<bundle>
+  <UIDefaultSearchForm>
+    <label>
+      <keyword>Klíčové slovo</keyword>
+      <portal>Portal</portal>
+      <Page>Stránka</Page>
+      <Document>Dokument</Document>
+    </label>
+    <action>
+      <Search>Hledat</Search>
+    </action>
+  </UIDefaultSearchForm>
+
+  <UIDefaultSearchResult>
+    <label>
+      <Page>Stránka</Page>
+      <Document>Dokument</Document>
+      <DocumentAndPage>Dokument a stránka</DocumentAndPage>
+      <documentandpage>Dokument a stránka</documentandpage>
+      <resutlsCaption>Výsledky</resutlsCaption>
+      <ofAboutCaption>asi</ofAboutCaption>
+      <forCaption>pro</forCaption>
+      <timeUnitCaption>sekund</timeUnitCaption>
+      <similar>Stránky, kde je uveden stejný obsah</similar>
+      <editor>Editor</editor>
+      <date>Datum</date>
+      <relevancy>Důležitost</relevancy>
+      <title>Popisek</title>
+      <sortBy>Seřadit podle:</sortBy>
+    </label>
+    <action>
+      <edit>Upravit</edit>
+    </action>
+    <msg>
+      <your-search>Vaše hledání</your-search>
+      <did-not-match>neodpovídá žádnému</did-not-match>
+      <new-suggestion>návrh</new-suggestion>
+    </msg>
+  </UIDefaultSearchResult>
+  <UISearchPageLayoutManager>
+    <label>
+      <itemsPerPageSelector>Položek na stránku</itemsPerPageSelector>
+      <searchFormSelector>Šablona formuláře vyhledávání</searchFormSelector>
+      <searchResultSelector>Šablona výsledků vyhledávání</searchResultSelector>
+      <searchPaginatorSelector>Šablona stránkování vyhledávání</searchPaginatorSelector>
+      <searchPageLayoutSelector>Šablona rozložení stránky vyhledávání</searchPageLayoutSelector>
+      <searchResultBasePathInputSetAction>Základní cesta</searchResultBasePathInputSetAction>
+      <pageMode>Režim stránky</pageMode>
+      <option>
+        <none>Žádný</none>
+        <more>Více</more>
+        <pagination>Stránkování</pagination>
+      </option>
+    </label>
+    <action>
+      <Save>#{word.save}</Save>
+      <Cancel>#{word.cancel}</Cancel>
+    </action>
+  </UISearchPageLayoutManager>
+  <searchResultBasePathInputSetAction>
+    <title>
+      <SelectBasePath>Vybrat základní cestu</SelectBasePath>
+    </title>
+  </searchResultBasePathInputSetAction>  
+  <UISearchForm>  
+   <message>
+     <keyword-not-support>Klíčové slovo je neplatné. Některé znaky nejsou rozpoznány.</keyword-not-support>
+     <not-checked>Prosím vyberte typ vyhledávání.</not-checked>
+     <keyword-not-empty>Zadejte klíčové slovo.</keyword-not-empty>
+   </message>
+  </UISearchForm>
+  <UIPaginatorDefault>
+    <label>
+      <next>Další</next>
+      <previous>Předchozí</previous>
+      <more>Více</more>
+    </label>
+  </UIPaginatorDefault>
+  <UISearchPageLayoutDefault>
+    <label>
+      <quickEditTitle>Rychlé úpravy</quickEditTitle>
+    </label>
+  </UISearchPageLayoutDefault>
+  <searchOption>
+    <label>
+      <pageCheckBox>na stránkách</pageCheckBox>
+      <documentCheckBox>v obsahu</documentCheckBox>
+    </label>
+  </searchOption>
+  <ViewMode>
+    <label>
+      <option>
+        <all>hledat všechny stránky</all>
+      </option>  
+    </label>  
+  </ViewMode>
+</bundle>
