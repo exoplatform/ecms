@@ -222,8 +222,9 @@ public class JCRLocalGoogleDrive extends JCRLocalCloudDrive {
 
       long startChangeId = localChangeId + 1;
 
-      LOG.info("Synchronizing changes from " + startChangeId + " to about " + largestChangeId); // TODO
-                                                                                                // cleanup
+      if (LOG.isDebugEnabled()) {
+        LOG.debug("Synchronizing changes from " + startChangeId + " to about " + largestChangeId);
+      }
 
       changes = api.changes(startChangeId);
       iterators.add(changes);
@@ -249,26 +250,38 @@ public class JCRLocalGoogleDrive extends JCRLocalCloudDrive {
         if (ch.getDeleted() || (parents = getParents(gf)).length == 0) {
           if (hasRemoved(ch.getFileId())) {
             cleanRemoved(ch.getFileId());
-            LOG.info(">> Returned file removal " + ch.getFileId());
+            if (LOG.isDebugEnabled()) {
+              LOG.debug(">> Returned file removal " + ch.getFileId());
+            }
           } else {
-            LOG.info(">> File removal " + ch.getFileId());
+            if (LOG.isDebugEnabled()) {
+              LOG.debug(">> File removal " + ch.getFileId());
+            }
           }
           deleteFile(ch.getFileId());
         } else {
           if (gf.getLabels().getTrashed()) {
             if (hasRemoved(gf.getId())) {
               cleanRemoved(gf.getId());
-              LOG.info(">> Returned file trashing " + gf.getId() + " " + gf.getTitle());
+              if (LOG.isDebugEnabled()) {
+                LOG.debug(">> Returned file trashing " + gf.getId() + " " + gf.getTitle());
+              }
             } else {
-              LOG.info(">> File trashing " + gf.getId() + " " + gf.getTitle());
+              if (LOG.isDebugEnabled()) {
+                LOG.debug(">> File trashing " + gf.getId() + " " + gf.getTitle());
+              }
               deleteFile(gf.getId());
             }
           } else {
             if (hasUpdated(gf.getId())) {
               cleanUpdated(gf.getId());
-              LOG.info(">> Returned file update " + gf.getId() + " " + gf.getTitle());
+              if (LOG.isDebugEnabled()) {
+                LOG.debug(">> Returned file update " + gf.getId() + " " + gf.getTitle());
+              }
             } else {
-              LOG.info(">> File update " + gf.getId() + " " + gf.getTitle());
+              if (LOG.isDebugEnabled()) {
+                LOG.debug(">> File update " + gf.getId() + " " + gf.getTitle());
+              }
               updateFile(gf, parents);
             }
           }

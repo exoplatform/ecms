@@ -591,22 +591,18 @@ public class JCRLocalBoxDrive extends JCRLocalCloudDrive implements UserTokenRef
           String name = item.getName();
           String sequenceId = item.getSequenceId();
 
-          LOG.info("> " + eventType + ": " + id + " " + name + " " + sequenceId);
-
-          // Handle removed locally and returned from cloud side
-          // TODO cleanup
-          // if (eventType.equals(BoxEvent.EVENT_TYPE_ITEM_TRASH) && hasRemoved(id)) {
-          // LOG.info(">> Returned file removal " + id + " " + name);
-          // cleanRemoved(id);
-          // continue; // this item was removed locally
-          // }
+          if (LOG.isDebugEnabled()) {
+            LOG.debug("> " + eventType + ": " + id + " " + name + " " + sequenceId);
+          }
 
           // find parent id
           String parentId;
           if (eventType.equals(BoxEvent.EVENT_TYPE_ITEM_TRASH)) {
             if (hasRemoved(id)) {
               // Handle removed locally and returned from cloud side
-              LOG.info(">> Returned file removal " + id + " " + name);
+              if (LOG.isDebugEnabled()) {
+                LOG.debug(">> Returned file removal " + id + " " + name);
+              }
               cleanRemoved(id);
               continue; // this item was removed locally
             }
@@ -663,24 +659,32 @@ public class JCRLocalBoxDrive extends JCRLocalCloudDrive implements UserTokenRef
                 || eventType.equals(BoxEvent.EVENT_TYPE_ITEM_UPLOAD)) {
               if (hasUpdated(id)) {
                 // this item was created/modified locally
-                LOG.info(">> Returned file creation/modification " + id + " " + name);
+                if (LOG.isDebugEnabled()) {
+                  LOG.debug(">> Returned file creation/modification " + id + " " + name);
+                }
                 cleanUpdated(id);
               } else {
-                LOG.info(">> File create/modify " + id + " " + name);
+                if (LOG.isDebugEnabled()) {
+                  LOG.debug(">> File create/modify " + id + " " + name);
+                }
                 apply(updateItem(api, item, parent, null));
               }
             } else if (eventType.equals(BoxEvent.EVENT_TYPE_ITEM_MOVE)
                 || eventType.equals(BoxEvent.EVENT_TYPE_ITEM_RENAME)) {
               if (hasUpdated(id)) {
                 // this item was moved/renamed locally
-                LOG.info(">> Returned file move/rename " + id + " " + name);
+                if (LOG.isDebugEnabled()) {
+                  LOG.debug(">> Returned file move/rename " + id + " " + name);
+                }
                 cleanUpdated(id);
               } else {
                 BoxItem undelete = undeleted(id);
                 if (undelete != null) {
                   // apply undelete here if ITEM_MOVE appeared after ITEM_UNDELETE_VIA_TRASH,
                   // it's not JCR item move actually - we just add a new node using name from this event
-                  LOG.info(">> File undeleted " + id + " " + name);
+                  if (LOG.isDebugEnabled()) {
+                    LOG.debug(">> File undeleted " + id + " " + name);
+                  }
                   apply(updateItem(api, item, parent, null));
                 } else {
                   // move node
@@ -699,7 +703,9 @@ public class JCRLocalBoxDrive extends JCRLocalCloudDrive implements UserTokenRef
                       // file node already has required name and parent
                       // apply(updateItem(api, item, parent, sourceNode)); // no need to update it
                     } else {
-                      LOG.info(">> File move/rename " + id + " " + name);
+                      if (LOG.isDebugEnabled()) {
+                        LOG.debug(">> File move/rename " + id + " " + name);
+                      }
                       // XXX workaround bug in JCR (see also above in this method), otherwise it may load
                       // previously moved node from persistence what will lead to PathNotFoundException (on
                       // move/rename) in moveFile()
@@ -720,7 +726,9 @@ public class JCRLocalBoxDrive extends JCRLocalCloudDrive implements UserTokenRef
               // FYI removed locally checked above in this iteration
               Node node = readNode(parent, name, id);
               if (node != null) {
-                LOG.info(">> File removal " + id + " " + name);
+                if (LOG.isDebugEnabled()) {
+                  LOG.debug(">> File removal " + id + " " + name);
+                }
                 String path = node.getPath();
                 node.remove();
                 remove(id, path);
@@ -731,7 +739,9 @@ public class JCRLocalBoxDrive extends JCRLocalCloudDrive implements UserTokenRef
             } else if (eventType.equals(BoxEvent.EVENT_TYPE_ITEM_UNDELETE_VIA_TRASH)) {
               if (hasUpdated(id)) {
                 // this item was untrashed locally
-                LOG.info(">> Returned file untrash " + id + " " + name);
+                if (LOG.isDebugEnabled()) {
+                  LOG.debug(">> Returned file untrash " + id + " " + name);
+                }
                 cleanUpdated(id);
               } else {
                 // undeleted folder will appear with its files, but in undefined order!
@@ -739,7 +749,9 @@ public class JCRLocalBoxDrive extends JCRLocalCloudDrive implements UserTokenRef
                 // here we already have a parent node, but ensure we have a "place" for undeleted item
                 Node place = readNode(parent, name, id);
                 if (place == null) {
-                  LOG.info(">> File untrash " + id + " " + name);
+                  if (LOG.isDebugEnabled()) {
+                    LOG.debug(">> File untrash " + id + " " + name);
+                  }
                   apply(updateItem(api, item, parent, null));
                 } else if (fileAPI.getTitle(place).equals(name)
                     && fileAPI.getParentId(place).equals(parentId)) {
@@ -754,10 +766,14 @@ public class JCRLocalBoxDrive extends JCRLocalCloudDrive implements UserTokenRef
             } else if (eventType.equals(BoxEvent.EVENT_TYPE_ITEM_COPY)) {
               if (hasUpdated(id)) {
                 // this item was copied locally
-                LOG.info(">> Returned file copy " + id + " " + name);
+                if (LOG.isDebugEnabled()) {
+                  LOG.debug(">> Returned file copy " + id + " " + name);
+                }
                 cleanUpdated(id);
               } else {
-                LOG.info(">> File copy " + id + " " + name);
+                if (LOG.isDebugEnabled()) {
+                  LOG.debug(">> File copy " + id + " " + name);
+                }
                 JCRLocalCloudFile local = applied(id);
                 if (local != null) {
                   // using transient change from this events order for this item
@@ -840,10 +856,6 @@ public class JCRLocalBoxDrive extends JCRLocalCloudDrive implements UserTokenRef
             fetchChilds(localItem.getId(), localItem.getNode());
           }
         }
-        // TODO cleanup, if not changed then it already on the place
-        // else {
-        // throw new BoxFormatException("Fetched item was not added to local drive storage");
-        // }
       }
       return items.parent;
     }
@@ -915,16 +927,18 @@ public class JCRLocalBoxDrive extends JCRLocalCloudDrive implements UserTokenRef
 
     protected boolean hasPostponed() {
       if (postponed.size() > 0) {
-        LOG.info("Not resolved Box events >>> ");
-        for (BoxEvent e : postponed) {
-          BoxTypedObject source = e.getSource();
-          if (source instanceof BoxItem) {
-            BoxItem item = (BoxItem) source;
-            LOG.info(e.getEventType() + ": " + item.getId() + " " + item.getName() + " "
-                + item.getSequenceId());
+        if (LOG.isDebugEnabled()) {
+          LOG.debug("Not resolved Box events >>>> ");
+          for (BoxEvent e : postponed) {
+            BoxTypedObject source = e.getSource();
+            if (source instanceof BoxItem) {
+              BoxItem item = (BoxItem) source;
+              LOG.info(e.getEventType() + ": " + item.getId() + " " + item.getName() + " "
+                  + item.getSequenceId());
+            }
           }
+          LOG.debug("<<<<");
         }
-        LOG.info("<<<<");
       }
       return postponed.size() > 0;
     }
