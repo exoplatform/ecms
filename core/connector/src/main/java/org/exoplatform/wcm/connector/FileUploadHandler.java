@@ -342,15 +342,14 @@ public class FileUploadHandler {
                      .cacheControl(cacheControl)
                      .header(LAST_MODIFIED_PROPERTY, dateFormat.format(new Date()))
                      .build();
-    }
-    if ((fileName == null) || (fileName.length() == 0)) {
-      fileName = resource.getFileName();
-    }
-    //add lock token
-    if(parent.isLocked()) {
-      parent.getSession().addLockToken(LockUtil.getLockToken(parent));
-    }
-    if (parent.hasNode(fileName)) {
+      }
+      if ((fileName == null) || (fileName.length() == 0)) {
+        fileName = resource.getFileName();
+      }
+      //add lock token
+      if(parent.isLocked()) {
+        parent.getSession().addLockToken(LockUtil.getLockToken(parent));
+      }
       //save node with name=fileName
       String exoTitle = fileName;
       fileName = getCleanName(fileName);
