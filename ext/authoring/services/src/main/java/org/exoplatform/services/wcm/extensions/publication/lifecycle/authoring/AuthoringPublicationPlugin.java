@@ -121,7 +121,7 @@ public class AuthoringPublicationPlugin extends  WebpagePublicationPlugin {
                                   newState,
                                   userId,
                                   GregorianCalendar.getInstance(),
-                                  AuthoringPublicationConstant.CHANGE_TO_DRAFT);
+                                  AuthoringPublicationConstant.CHANGE_TO_PENDING);
       addLog(node, versionLog);
       VersionData versionData = revisionsMap.get(node.getUUID());
       if (versionData != null) {
