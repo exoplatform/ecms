@@ -575,7 +575,7 @@
 		  "&currentFolder=" + eXo.ecm.MultiUpload.pathMap[id] +
 		  "&currentPortal="+ eXo.ecm.MultiUpload.portalName +
 		  "&userId=" + eXo.ecm.MultiUpload.userId +
-		  "&fileName=" + cleanName(eXo.ecm.MultiUpload.uploadingFileIds[id].name) + 
+		  "&fileName=" + encodeURIComponent(cleanName(eXo.ecm.MultiUpload.uploadingFileIds[id].name)) + 
 		  "&language=" + eXo.ecm.MultiUpload.userLanguage;
 		  
 		gj.ajax({url: uri, 
@@ -843,7 +843,7 @@
 		    "&currentPortal="+ eXo.ecm.MultiUpload.portalName +
 		    "&userId=" + eXo.ecm.MultiUpload.userId +
 		    "&action=save&uploadId=" + progressID +
-		    "&fileName=" + cleanName(file.name) + 
+		    "&fileName=" + encodeURIComponent(cleanName(file.name)) + 
 		    "&language=" + eXo.ecm.MultiUpload.userLanguage +
 		    "&existenceAction=" + eXo.ecm.MultiUpload.existingBehavior[progressID];
 		    gj.ajax({url: uri, 
