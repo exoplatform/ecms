@@ -8,7 +8,7 @@
       <Document>文件</Document>
     </label>
     <action>
-      <Search>搜索</Search>
+      <Search>搜尋</Search>
     </action>
   </UIDefaultSearchForm>
 

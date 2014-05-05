@@ -44,7 +44,7 @@
       <no-taxonomy-selected>您必須複製或剪下至少一個類別。</no-taxonomy-selected>
       <node-is-cutting>不能在這裡貼上。類別節點 '{0}' 可能被剪下。</node-is-cutting>
       <can-not-paste>剪貼簿中沒有任何資料。</can-not-paste>
-      <reference-exception>不能刪除此類別，因為它當前引用的內容。</reference-exception>
+      <reference-exception>不能刪除此類別，因為它的內容正被引用中。</reference-exception>
       <path-error>刪除此類別節點時出錯。</path-error>
     </msg>
   </UITaxonomyWorkingArea>
@@ -230,10 +230,10 @@
   -->
   <UIMetadataList>
     <label>
-      <false>false</false>
-      <true>true</true>
-      <True>true</True>
-      <False>false</False>
+      <false>錯</false>
+      <true>對</true>
+      <True>對</True>
+      <False>錯</False>
     </label>
     <title>
       <view>查看</view>
@@ -279,7 +279,7 @@
   ################################################################################
   -->
   <UIMetadataForm>
-    <title>映射中繼資料</title>
+    <title>核對中繼資料</title>
     <action>
       <Cancel>#{word.cancel}</Cancel>
       <Save>套用</Save>
@@ -291,7 +291,7 @@
     </header>
     <label>
       <dialogTemplate>對話方塊範本：</dialogTemplate>
-      <viewTemplate>視圖範本：</viewTemplate>
+      <viewTemplate>檢視範本：</viewTemplate>
       <metadataName>中繼資料名稱：</metadataName>
       <viewPermission>權限：</viewPermission>
       <permission>UIMetadataForm</permission>
@@ -301,7 +301,7 @@
       <label>
         <metadataTypeTab>中繼資料類型</metadataTypeTab>
         <dialogTab>對話方塊範本</dialogTab>
-        <viewTab>視圖範本</viewTab>
+        <viewTab>檢視範本：</viewTab>
       </label>
     </tab>
   </UIMetadataForm>
@@ -399,7 +399,7 @@
       <permissions>權限：</permissions>
       <showHiddenNode>顯示隱藏的節點：</showHiddenNode>
       <allowCreateFolders>允許建立資料夾：</allowCreateFolders>
-      <Admin>Admin：</Admin>
+      <Admin>管理員</Admin>
       <Categories>類別：</Categories>
       <Icons>圖示：</Icons>
       <List>清單：</List>
@@ -454,8 +454,8 @@
   -->
   <UINodeTypeList>
     <label>
-      <true>true</true>
-      <false>false</false>
+      <true>對</true>
+      <false>錯</false>
     </label>
     <header>
       <icon>圖示</icon>
@@ -526,7 +526,7 @@
       <multiple>是多個</multiple>
       <mandatory>是強制性的</mandatory>
       <autoCreated>是自動建立</autoCreated>
-      <parentversion>在母版上</parentversion>
+      <parentversion>在原始版上</parentversion>
       <protected>是受保護</protected>
       <constraints>值</constraints>
       <UIFormTableInputSet>UIFormTableInputSet</UIFormTableInputSet>
@@ -534,7 +534,7 @@
       <childNamespace>名稱空間</childNamespace>
       <childMandatory>是強制性的</childMandatory>
       <childAutocreated>是自動建立</childAutocreated>
-      <childParentversion>在母版上</childParentversion>
+      <childParentversion>在原始版上</childParentversion>
       <childProtected>是受保護</childProtected>
       <childNodename>定義名稱</childNodename>
       <requiredPrimaryType>所需的主要類型</requiredPrimaryType>
@@ -561,8 +561,8 @@
     </action>
     <msg>
       <register-successfully>'{0}' 節點類型已成功註冊。</register-successfully>
-      <supertype-is-madatory>父類型是強制性的當你註冊一個新的節點類型。請選擇至少一個父類型。</supertype-is-madatory>
-      <register-failed>節點類型註冊不成功。它已經存在或父類型無效。</register-failed>
+      <supertype-is-madatory>超級類型是強制性的當你註冊一個新的節點類型。請選擇至少一個超級類型。</supertype-is-madatory>
+      <register-failed>節點類型註冊不成功。它已經存在或超級類型無效。</register-failed>
       <nodeType-name>節點類型名稱是必填的。</nodeType-name>
       <fileName-invalid>檔案名稱中有一些不正確字元。</fileName-invalid>
       <node-type-exists>'{0}' 節點類型已經存在。</node-type-exists>
@@ -712,7 +712,7 @@
     </label>
     <title>
       <AddPermission>增加權限</AddPermission>
-      <RemovePermission>Remove Permission</RemovePermission>
+      <RemovePermission>刪除權限</RemovePermission>
       <AddIcon>增加圖示</AddIcon>
       <AddPath>增加路徑</AddPath>
     </title>
