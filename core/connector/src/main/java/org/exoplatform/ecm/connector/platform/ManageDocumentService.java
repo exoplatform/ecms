@@ -579,7 +579,7 @@ public class ManageDocumentService implements ResourceContainer {
     String driveHomePath = manageDriveService.getDriveByName(Text.escapeIllegalJcrChars(driveName)).getHomePath();
     String userId = ConversationState.getCurrent().getIdentity().getUserId();
     String drivePath = Utils.getPersonalDrivePath(driveHomePath, userId);
-    Node node = (Node) session.getItem(Utils.escapeIllegalJcrPath(drivePath));
+    Node node = (Node) session.getItem(Text.escapeIllegalJcrChars(drivePath));
     if (StringUtils.isEmpty(currentFolder)) {
       return node;
     }
