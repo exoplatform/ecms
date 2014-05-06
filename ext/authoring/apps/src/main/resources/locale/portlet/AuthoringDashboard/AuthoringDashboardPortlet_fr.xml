@@ -5,7 +5,7 @@
       <title>Etat des Publications</title>
       <nocontent>Aucun contenu</nocontent>
       <mydraft>Mes Brouillons</mydraft>
-      <waitingapproval>En attente de mon approbation</waitingapproval>
+      <waitingapproval>Tableau de Bord</waitingapproval>
       <approve>Valider</approve>
       <publishedtomorrow>Publiés Demain</publishedtomorrow>
       <refresh>#{word.refresh}</refresh>
