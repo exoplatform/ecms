@@ -2,88 +2,88 @@
 <bundle>
   <UICLVContainer>
     <label>
-      <Preferences>ÐÐ°Ð»Ð°ÑÑÑÐ²Ð°Ð½Ð½Ñ</Preferences>
-      <AddContent>ÐÐ¾Ð´Ð°ÑÐ¸ ÐºÐ¾Ð½ÑÐµÐ½Ñ</AddContent>
-      <ManageContent>ÐÐµÑÑÐ²Ð°Ð½Ð½Ñ ÐºÐ¾Ð½ÑÐµÐ½ÑÐ¾Ð¼</ManageContent>
+      <Preferences>Налаштування</Preferences>
+      <AddContent>Додати контент</AddContent>
+      <ManageContent>Керування контентом</ManageContent>
     </label>
     <msg>
-      <non-contents>ÐÐ° Ð¶Ð°Ð»Ñ, ÑÑÐ°ÑÑÑ Ð½ÐµÐ´Ð¾ÑÑÑÐ¿Ð½Ñ.</non-contents>
-      <item-not-found>ÐÐ»ÐµÐ¼ÐµÐ½Ñ Ð½Ðµ Ð·Ð½Ð°Ð¹Ð´ÐµÐ½Ð¾.</item-not-found>
-      <no-permission>ÐÐ¸ Ð½Ðµ Ð¼Ð°ÑÑÐµ Ð´Ð¾Ð·Ð²Ð¾Ð»Ñ Ð½Ð° Ð´Ð¾ÑÑÑÐ¿ Ð´Ð¾ ÑÑÐ¾Ð³Ð¾ Ð²ÑÐ·Ð»Ð°.</no-permission>
-      <category-back>ÐÐµÑÐµÐ¹ÑÐ¸ Ð´Ð¾ Ð¿Ð¾Ð¿ÐµÑÐµÐ´Ð½ÑÐ¾Ð³Ð¾</category-back>
+      <non-contents>На жаль, статті недоступні.</non-contents>
+      <item-not-found>Елемент не знайдено.</item-not-found>
+      <no-permission>Ви не маєте дозволу на доступ до цього вузла.</no-permission>
+      <category-back>Перейти до попереднього</category-back>
     </msg>
   </UICLVContainer>
   <UIViewerManagementPopupWindow>
     <title>
-      <UICLVConfig>ÐÐ°Ð»Ð°ÑÑÑÐ²Ð°Ð½Ð½Ñ Ð²Ð¼ÑÑÑÑ ÑÐ¿Ð¸ÑÐºÑ</UICLVConfig>
+      <UICLVConfig>Налаштування вмісту списку</UICLVConfig>
     </title>
   </UIViewerManagementPopupWindow>
   <UICLVConfig>
     <label>
-      <Title>ÐÐ°Ð»Ð°ÑÑÑÐ²Ð°Ð½Ð½Ñ Ð²Ð¼ÑÑÑÑ ÑÐ¿Ð¸ÑÐºÑ</Title>
-      <ContentSelectionBlock>ÐÐ¸Ð±ÑÑ ÐºÐ¾Ð½ÑÐµÐ½ÑÑ</ContentSelectionBlock>
-      <UICLVConfigDisplayModeFormRadioBoxInput>Ð ÐµÐ¶Ð¸Ð¼</UICLVConfigDisplayModeFormRadioBoxInput>
-      <UICLVConfigItemPathFormInputSet>Ð¨Ð»ÑÑ Ð´Ð¾ Ð¿Ð°Ð¿ÐºÐ¸</UICLVConfigItemPathFormInputSet>
-    <UICLVConfigItemPathFormStringInput>Ð¨Ð»ÑÑ Ð´Ð¾ Ð¿Ð°Ð¿ÐºÐ¸</UICLVConfigItemPathFormStringInput>
-      <UICLVConfigOrderByFormSelectBox>Ð¡Ð¾ÑÑÑÐ²Ð°ÑÐ¸ Ð¿Ð¾</UICLVConfigOrderByFormSelectBox>
+      <Title>Налаштування вмісту списку</Title>
+      <ContentSelectionBlock>Вибір контенту</ContentSelectionBlock>
+      <UICLVConfigDisplayModeFormRadioBoxInput>Режим</UICLVConfigDisplayModeFormRadioBoxInput>
+      <UICLVConfigItemPathFormInputSet>Шлях до папки</UICLVConfigItemPathFormInputSet>
+    <UICLVConfigItemPathFormStringInput>Шлях до папки</UICLVConfigItemPathFormStringInput>
+      <UICLVConfigOrderByFormSelectBox>Сортувати по</UICLVConfigOrderByFormSelectBox>
       <option>
-        <exo:title>ÐÐ°Ð·Ð²Ð°</exo:title>
-        <exo:dateCreated>ÐÐ°ÑÐ¾Ñ ÑÑÐ²Ð¾ÑÐµÐ½Ð½Ñ</exo:dateCreated>
-        <exo:lastModifiedDate>ÐÐ°ÑÐ¾Ñ Ð¼Ð¾Ð´Ð¸ÑÑÐºÐ°ÑÑÑ</exo:lastModifiedDate>
-        <publication:liveDate>ÐÐ°ÑÐ° Ð¿ÑÐ±Ð»ÑÐºÐ°ÑÑÑ</publication:liveDate>
-        <exo:startEvent>ÐÐ°ÑÐ° Ð¿Ð¾Ð´ÑÑ</exo:startEvent>
-        <exo:index>ÐÐ½Ð´ÐµÐºÑ</exo:index>
-        <DESC>ÐÐ¾ ÑÐ¿Ð°Ð´Ð°Ð½Ð½Ñ</DESC>
-        <ASC>ÐÐ¾ Ð²Ð¸ÑÑÑÐ´Ð½ÑÐ¹</ASC>
+        <exo:title>Назва</exo:title>
+        <exo:dateCreated>Датою створення</exo:dateCreated>
+        <exo:lastModifiedDate>Датою модифікації</exo:lastModifiedDate>
+        <publication:liveDate>Дата публікації</publication:liveDate>
+        <exo:startEvent>Дата події</exo:startEvent>
+        <exo:index>Індекс</exo:index>
+        <DESC>По спаданню</DESC>
+        <ASC>По висхідній</ASC>
       </option>
-      <DisplaySettingBlock>ÐÐ°Ð»Ð°ÑÑÑÐ²Ð°Ð½Ð½Ñ Ð²ÑÐ´Ð¾Ð±ÑÐ°Ð¶ÐµÐ½Ð½Ñ</DisplaySettingBlock>
-      <UICLVConfigHeaderFormStringInput>ÐÐ°Ð³Ð¾Ð»Ð¾Ð²Ð¾Ðº</UICLVConfigHeaderFormStringInput>
-      <UICLVConfigDisplayTemplateFormSelectBox>Ð¨Ð°Ð±Ð»Ð¾Ð½</UICLVConfigDisplayTemplateFormSelectBox>
-      <UICLVConfigPaginatorTemplateFormSelectBox>Ð Ð¾Ð·Ð±Ð¸Ð²ÐºÐ° Ð½Ð° ÑÑÐ¾ÑÑÐ½ÐºÐ¸</UICLVConfigPaginatorTemplateFormSelectBox>
-      <UICLVConfigItemsPerPageFormStringInput>Ð ÐµÐ·ÑÐ»ÑÑÐ°ÑÑÐ² Ð½Ð° ÑÑÐ¾ÑÑÐ½ÑÑ</UICLVConfigItemsPerPageFormStringInput>
+      <DisplaySettingBlock>Налаштування відображення</DisplaySettingBlock>
+      <UICLVConfigHeaderFormStringInput>Заголовок</UICLVConfigHeaderFormStringInput>
+      <UICLVConfigDisplayTemplateFormSelectBox>Шаблон</UICLVConfigDisplayTemplateFormSelectBox>
+      <UICLVConfigPaginatorTemplateFormSelectBox>Розбивка на сторінки</UICLVConfigPaginatorTemplateFormSelectBox>
+      <UICLVConfigItemsPerPageFormStringInput>Результатів на сторінці</UICLVConfigItemsPerPageFormStringInput>
       <UICLVConfigShowIllustrationFormCheckboxInput>Show Image</UICLVConfigShowIllustrationFormCheckboxInput>
       <UICLVConfigShowSummaryFormCheckboxInput>Show Summary</UICLVConfigShowSummaryFormCheckboxInput>
       <UICLVConfigShowHeaderFormCheckboxInput>Show Header</UICLVConfigShowHeaderFormCheckboxInput>
       <UICLVConfigShowRefreshFormCheckboxInput>Show Refresh</UICLVConfigShowRefreshFormCheckboxInput>
-      <UICLVConfigShowTitleFormCheckboxInput>ÐÐ¾ÐºÐ°Ð·ÑÐ²Ð°ÑÐ¸ Ð½Ð°Ð·Ð²Ñ</UICLVConfigShowTitleFormCheckboxInput>
-      <UICLVConfigShowDateCreatedFormCheckboxInput>ÐÐ¾ÐºÐ°Ð·Ð°ÑÐ¸ Ð´Ð°ÑÑ</UICLVConfigShowDateCreatedFormCheckboxInput>
+      <UICLVConfigShowTitleFormCheckboxInput>Показувати назву</UICLVConfigShowTitleFormCheckboxInput>
+      <UICLVConfigShowDateCreatedFormCheckboxInput>Показати дату</UICLVConfigShowDateCreatedFormCheckboxInput>
       <UICLVConfigShowLinkFormCheckboxInput>Show Link</UICLVConfigShowLinkFormCheckboxInput>
       <UICLVConfigShowReadmoreFormCheckboxInput>Show More Links</UICLVConfigShowReadmoreFormCheckboxInput>
       <UICLVConfigAllowDynamicUrlStringInput>Allow Dynamic URL</UICLVConfigAllowDynamicUrlStringInput>
       <UICLVConfigShowRssLinkFormCheckboxInput>Show RSS Link</UICLVConfigShowRssLinkFormCheckboxInput>
       <UICLVConfigShowAutomaticDetectionCheckboxInput>Automatic Detection</UICLVConfigShowAutomaticDetectionCheckboxInput>
-      <AdvancedBlock>Ð Ð¾Ð·ÑÐ¸ÑÐµÐ½Ñ Ð½Ð°Ð»Ð°ÑÑÑÐ²Ð°Ð½Ð½Ñ</AdvancedBlock>
-      <UICLVConfigDynamicNavigationLabel>ÐÐ¸Ð½Ð°Ð¼ÑÑÐ½Ð° Ð½Ð°Ð²ÑÐ³Ð°ÑÑÑ</UICLVConfigDynamicNavigationLabel>
+      <AdvancedBlock>Розширені налаштування</AdvancedBlock>
+      <UICLVConfigDynamicNavigationLabel>Динамічна навігація</UICLVConfigDynamicNavigationLabel>
       <UICLVConfigContextualFolderRadioBoxInput>Contextual Folder</UICLVConfigContextualFolderRadioBoxInput>
-      <UICLVConfigShowCLVByStringInput>Ð·Ð°</UICLVConfigShowCLVByStringInput>
-      <UICLVConfigshowSCVWithStringInput>Ð·</UICLVConfigshowSCVWithStringInput>
-      <UICLVConfigTargetPageFormInputSet>ÐÐ¾ÐºÐ°Ð·Ð°ÑÐ¸ Ð½Ð° ÑÑÐ¾ÑÑÐ½ÑÑ</UICLVConfigTargetPageFormInputSet>
+      <UICLVConfigShowCLVByStringInput>за</UICLVConfigShowCLVByStringInput>
+      <UICLVConfigshowSCVWithStringInput>з</UICLVConfigshowSCVWithStringInput>
+      <UICLVConfigTargetPageFormInputSet>Показати на сторінці</UICLVConfigTargetPageFormInputSet>
       <content-not-found>Content not found.</content-not-found>
-      <ContentPath>Ð¨Ð»ÑÑ Ð´Ð¾ Ð·Ð¼ÑÑÑÑ</ContentPath>
-      <Up>ÐÐ³Ð¾ÑÑ</Up>
-      <Down>ÐÐ½Ð¸Ð·</Down>
-      <UICLVConfigCacheManagementLabel>ÐÐ¸Ð´Ð¸Ð¼ÑÑÑÑ ÐºÐ¾Ð½ÑÐµÐ½ÑÑ</UICLVConfigCacheManagementLabel>
+      <ContentPath>Шлях до змісту</ContentPath>
+      <Up>Вгору</Up>
+      <Down>Вниз</Down>
+      <UICLVConfigCacheManagementLabel>Видимість контенту</UICLVConfigCacheManagementLabel>
       <UICLVContentByQueryLabel>Content by Query</UICLVContentByQueryLabel>
-      <UICLVConfigWorkspaceFormSelectBox>Ð Ð¾Ð±Ð¾ÑÐ° Ð¾Ð±Ð»Ð°ÑÑÑ</UICLVConfigWorkspaceFormSelectBox>
+      <UICLVConfigWorkspaceFormSelectBox>Робоча область</UICLVConfigWorkspaceFormSelectBox>
       <UICLVConfigContentByQueryTextArea>by query</UICLVConfigContentByQueryTextArea>
       <UICLVConfigCacheEnableRadioBoxInput>Share content between users</UICLVConfigCacheEnableRadioBoxInput>
     </label>
     <help>
-      <ModeSelectionHelp>ÐÐ¾ÑÑÑÐ¿Ð½Ñ Ð´Ð²Ð° ÑÐµÐ¶Ð¸Ð¼Ð¸ Ð²ÑÐ´Ð¾Ð±ÑÐ°Ð¶ÐµÐ½Ð½Ñ Ð²Ð¼ÑÑÑÑ. Â«ÐÐ° Ð¿Ð°Ð¿ÐºÐ¾Ñ" Ð¿ÑÐ¸Ð¹Ð¼Ðµ Ð²ÑÑ Ð¼Ð°ÑÐµÑÑÐ°Ð»Ð¸, Ð´Ð¾ÑÑÑÐ¿Ð½Ñ Ñ Ð²Ð¸Ð±ÑÐ°Ð½ÑÐ¹ Ð¿Ð°Ð¿ÐºÐ°/ÐºÐ°ÑÐµÐ³Ð¾ÑÑÑ. "ÐÐ° Ð·Ð¼ÑÑÑÐ¾Ð¼" Ð´Ð°Ñ Ð²Ð°Ð¼ Ð·Ð¼Ð¾Ð³Ñ Ð²ÑÑÑÐ½Ñ Ð²Ð¸Ð±ÑÐ°ÑÐ¸ Ð²Ð¼ÑÑÑ, ÑÐºÐ¸Ð¹ Ð²Ð¸ ÑÐ¾ÑÐµÑÐµ Ð¿Ð¾ÐºÐ°Ð·Ð°ÑÐ¸.</ModeSelectionHelp>
-      <FolderPathHelp>ÐÐ¸Ð±ÐµÑÑÑÑ Ð²Ð¼ÑÑÑ, ÑÐºÐ¸Ð¹ Ð²Ð¸ ÑÐ¾ÑÐµÑÐµ Ð¿Ð¾ÐºÐ°Ð·Ð°ÑÐ¸. ÐÐ¸Ð±ÑÑ Ð·Ð° Ð·Ð°Ð¼Ð¾Ð²ÑÑÐ²Ð°Ð½Ð½ÑÐ¼ Ð±ÑÐ´Ðµ Ð·Ð°Ð¼ÑÐ½ÐµÐ½Ð¾ Ð´Ð¸Ð½Ð°Ð¼ÑÑÐ½Ð¾ , ÑÐºÑÐ¾ Ð°ÐºÑÐ¸Ð²ÑÐ²Ð°ÑÐ¸ Ð¾Ð¿ÑÑÑ ÐÐ¸Ð½Ð°Ð¼ÑÑÐ½Ñ Ð½Ð°Ð²ÑÐ³Ð°ÑÑÑ (Ð´Ð¸Ð². Ð½Ð¸Ð¶ÑÐµ ÑÐµÐ¶Ð¸Ð¼ Ð Ð¾Ð·ÑÐ¸ÑÐµÐ½Ð¸Ñ Ð½Ð°Ð»Ð°ÑÑÑÐ²Ð°Ð½Ñ).</FolderPathHelp>
-      <HeaderOptionHelp>ÐÑÐ´Ð¾Ð±ÑÐ°Ð¶Ð°ÑÐ¸ Ð·Ð°Ð³Ð¾Ð»Ð¾Ð²Ð¾Ðº Ð½Ð° Ð²ÐµÑÑÐ¸Ð½Ñ ÑÐ¿Ð¸ÑÐºÑ Ð²Ð¼ÑÑÑÑ. Ð¯ÐºÑÐ¾ Ð°ÐºÑÐ¸Ð²ÑÐ²Ð°ÑÐ¸ Ð¿Ð°ÑÐ°Ð¼ÐµÑÑ Ð°Ð²ÑÐ¾Ð¼Ð°ÑÐ¸ÑÐ½Ð¾Ð³Ð¾ Ð²Ð¸ÑÐ²Ð»ÐµÐ½Ð½Ñ, Ð²ÑÐ½ ÑÐ¿ÑÐ¾Ð±ÑÑ Ð·Ð½Ð°Ð¹ÑÐ¸ Ð·Ð°Ð³Ð¾Ð»Ð¾Ð²Ð¾Ðº Ð½Ð° Ð¾ÑÐ½Ð¾Ð²Ñ Ð¿Ð¾ÑÐ¾ÑÐ½Ð¾Ð³Ð¾ Ð²Ð¸Ð´ÑÐ»ÐµÐ½Ð½Ñ.</HeaderOptionHelp>
+      <ModeSelectionHelp>Доступні два режими відображення вмісту. «За папкою" прийме всі матеріали, доступні у вибраній папка/категорія. "За змістом" дає вам змогу вручну вибрати вміст, який ви хочете показати.</ModeSelectionHelp>
+      <FolderPathHelp>Виберіть вміст, який ви хочете показати. Вибір за замовчуванням буде замінено динамічно , якщо активувати опцію Динамічні навігації (див. нижче режим Розширених налаштувань).</FolderPathHelp>
+      <HeaderOptionHelp>Відображати заголовок на вершині списку вмісту. Якщо активувати параметр автоматичного виявлення, він спробує знайти заголовок на основі поточного виділення.</HeaderOptionHelp>
       <GeneralOptionHelp>Select the graphical elements you want to show in your list. Note that, depending on your selected template, some elements may not be available.</GeneralOptionHelp>
-      <ContextualHelp>ÐÐºÑÐ¸Ð²ÑÑ Ð¾Ð¿ÑÑÑ ÐÐ¸Ð½Ð°Ð¼ÑÑÐ½Ñ Ð½Ð°Ð²ÑÐ³Ð°ÑÑÑ. ÐÐ½ÑÑ Ð¼Ð¾Ð¶ÑÑÑ Ð·Ð¼ÑÐ½Ð¸ÑÐ¸ Ð²Ð¼ÑÑÑ Ð´Ð¸Ð½Ð°Ð¼ÑÑÐ½Ð¾ Ð½Ð° Ð¾ÑÐ½Ð¾Ð²Ñ Ð¿Ð°ÑÐ°Ð¼ÐµÑÑÑ URL-Ð°Ð´ÑÐµÑÐ¸.</ContextualHelp>
-      <ParameterHelp>Ð¦ÐµÐ¹ Ð¿Ð°ÑÐ°Ð¼ÐµÑÑ Ð±ÑÐ´Ðµ Ð²Ð¸ÐºÐ¾ÑÐ¸ÑÑÐ¾Ð²ÑÐ²Ð°ÑÐ¸ÑÑ Ð´Ð»Ñ Ð´Ð¾ÑÑÑÐ¿Ñ Ð´Ð¾ Ð²Ð¼ÑÑÑÑ, ÑÐºÑÐ¾ Ð°ÐºÑÐ¸Ð²Ð¾Ð²Ð°Ð½Ð° ÐÐ¸Ð½Ð°Ð¼ÑÑÐ½Ð° Ð½Ð°Ð²ÑÐ³Ð°ÑÑÑ.</ParameterHelp>
-      <ShowDetailInPageHelp>ÐÐ°ÑÐ¸ÑÐºÐ°Ð½Ð½Ñ Ð½Ð° Ð²Ð¼ÑÑÑ Ð¿ÐµÑÐµÑÐ¿ÑÑÐ¼Ð¾Ð²ÑÑ ÐºÐ¾ÑÐ¸ÑÑÑÐ²Ð°ÑÐ° Ð½Ð° ÑÑÐ¾ÑÑÐ½ÐºÑ ÐÐµÑÐ°Ð»Ñ. ÐÐ»Ñ Ð²ÑÐ´Ð¾Ð±ÑÐ°Ð¶ÐµÐ½Ð½Ñ ÐºÐ¾Ð½ÑÐµÐ½ÑÑ Ð½Ð° ÑÑÐ»ÑÐ¾Ð²ÑÐ¹ ÑÑÐ¾ÑÑÐ½ÑÑ, Ñ Ð²Ð°Ñ Ð¿Ð¾Ð²Ð¸Ð½ÐµÐ½ Ð±ÑÑÐ¸ Ð²ÐºÐ»ÑÑÐµÐ½Ð¸Ð¹ Ð¿Ð¾ÑÑÐ»ÐµÑ  "ÐÐ¾Ð½ÑÐµÐ½Ñ Ð·Ð° URL-Ð°Ð´ÑÐµÑÐ¾Ñ"  Ð· ÐÐ¸Ð½Ð°Ð¼ÑÑÐ½Ð¾Ñ Ð½Ð¾Ð²ÑÐ³Ð°ÑÑÑÑ.</ShowDetailInPageHelp>
-      <DetailParameterHelp>Ð¦ÐµÐ¹ Ð¿Ð°ÑÐ°Ð¼ÐµÑÑ Ð±ÑÐ´Ðµ Ð¼ÑÑÑÐ¸ÑÐ¸ ÑÐ»ÑÑ Ð´Ð¾ ÐºÐ¾Ð½ÑÐµÐ½ÑÑ Ð² Ð¿Ð¾ÑÐ¸Ð»Ð°Ð½Ð½Ñ Ð½Ð° ÑÑÐ¾ÑÑÐ½ÐºÑ ÐÐµÑÐ°Ð»Ñ. Ð¦ÐµÐ¹ Ð¿Ð°ÑÐ°Ð¼ÐµÑÑ Ð¼Ð°Ñ Ð²ÑÐ´Ð¿Ð¾Ð²ÑÐ´Ð°ÑÐ¸ Ð¿Ð°ÑÐ°Ð¼ÐµÑÑÑ, ÑÐºÐ¸Ð¹ Ð²Ð¸ÐºÐ¾ÑÐ¸ÑÑÐ¾Ð²ÑÑÑÑÑÑ Ð² Ð¿Ð¾ÑÑÐ»ÐµÑÑ "ÐÐ¾Ð½ÑÐµÐ½Ñ Ð·Ð° URL-Ð°Ð´ÑÐµÑÐ¾Ñ" ÑÑÐ¾ÑÑÐ½ÐºÐ¸.</DetailParameterHelp>
-      <ContentByQueryHelp>ÐÐ¸ Ð¼Ð¾Ð¶ÐµÑÐµ Ð²ÑÑÐ°Ð½Ð¾Ð²Ð¸ÑÐ¸ SQL Ð·Ð°Ð¿Ð¸Ñ Ð´Ð»Ñ Ð¾ÑÑÐ¸Ð¼Ð°Ð½Ð½Ñ ÐºÐ¾Ð½ÑÐµÐ½ÑÑ Ð´Ð¸Ð½Ð°Ð¼ÑÑÐ½Ð¾. ÐÐ¾Ð¿ÑÑÐºÐ°ÑÑÑÑÑ Ð½Ð°ÑÑÑÐ¿Ð½Ñ Ð¿Ð°ÑÐ°Ð¼ÐµÑÑÐ¸: ${user}, ${lang} Ð°Ð±Ð¾ Ð±ÑÐ´Ñ-ÑÐºÐ¸Ð¹ Ð¿Ð°ÑÐ°Ð¼ÐµÑÑ Ð¾ÑÑÐ¸Ð¼Ð°Ð½Ð½Ñ (PARAM), Ð¾ÑÐ¾ÑÐµÐ½Ð¸Ð¹ ${PARAM}.</ContentByQueryHelp>
-      <ContentsVisibilityHelp>"ÐÐ±Ð¼ÐµÐ¶ÐµÐ½Ð¾ ÑÐ»ÑÑÐ¾Ð¼ Ð¿ÐµÑÐµÐ²ÑÑÐºÐ¸ Ð°Ð²ÑÐµÐ½ÑÐ¸ÑÐ½Ð¾ÑÑÑ" Ð²ÑÐ´ÑÑÐ»ÑÑÑÑÑ ÐºÐ¾Ð½ÑÐµÐ½Ñ, Ð½Ð° Ð¾ÑÐ½Ð¾Ð²Ñ Ð°ÑÑÐµÐ½ÑÐ¸ÑÑÐºÐ°ÑÑÑ. Ð¯ÐºÑÐ¾ Ð²Ð¸ Ð½Ðµ Ð°Ð²ÑÐ¾ÑÐ¸Ð·ÑÐ²Ð°Ð»Ð¸ÑÑ, Ð²Ð¸ Ð¿Ð¾Ð±Ð°ÑÐ¸ÑÐµ ÑÑÐ»ÑÐºÐ¸ Ð·Ð°Ð³Ð°Ð»ÑÐ½Ð¾Ð´Ð¾ÑÑÑÐ¿Ð½Ð¸Ð¹ ÐºÐ¾Ð½ÑÐµÐ½Ñ. Ð¯ÐºÑÐ¾ Ð²Ð¸ Ð°Ð²ÑÐ¾ÑÐ¸Ð·ÑÐ²Ð°Ð»Ð¸ÑÑ, Ð²Ð¸ Ð¿Ð¾Ð±Ð°ÑÐ¸ÑÐµ Ð²ÐµÑÑ ÐºÐ¾Ð½ÑÐµÐ½Ñ Ð²Ð¸Ð´Ð½Ð¸Ð¹ ÐºÐ¾ÑÐ¸ÑÑÑÐ²Ð°ÑÐ°Ð¼ Ð²Ð½ÑÑÑÑÑÐ½ÑÐ¾Ñ Ð¼ÐµÑÐµÐ¶Ñ (Ð°Ð»Ðµ Ð·Ð°Ð³Ð°Ð»ÑÐ½Ð¸Ð¹ Ð´Ð»Ñ Ð²ÑÑÑ). "ÐÐ±Ð¼ÐµÐ¶ÐµÐ½Ñ Ð·Ð° ÑÐ¾Ð»ÑÐ¼Ð¸ ÐºÐ¾ÑÐ¸ÑÑÑÐ²Ð°ÑÑÐ²" Ð¾Ð·Ð½Ð°ÑÐ°Ñ, ÑÐ¾ Ð²Ð¸ Ð¿Ð¾Ð±Ð°ÑÐ¸ÑÐµ ÐºÐ¾Ð½ÑÐµÐ½Ñ Ð² Ð·Ð°Ð»ÐµÐ¶Ð½Ð¾ÑÑÑ Ð²ÑÐ´ Ð²Ð°ÑÐ¾Ð³Ð¾ Ð¿ÑÐ°Ð²Ð° Ð´Ð¾ÑÑÑÐ¿Ð°. Ð£ Ð±ÑÐ»ÑÑÐ¾ÑÑÑ Ð²Ð¸Ð¿Ð°Ð´ÐºÑÐ² ÑÑ Ð¾Ð¿ÑÑÑ Ð½Ðµ ÑÐ»ÑÐ´ Ð²Ð¸ÐºÐ¾ÑÐ¸ÑÑÐ¾Ð²ÑÐ²Ð°ÑÐ¸, ÑÐ°Ðº ÑÐº ÑÐµ Ð·Ð¼ÐµÐ½ÑÑÑ Ð·Ð°Ð³Ð°Ð»ÑÐ½Ñ Ð¿ÑÐ¾Ð´ÑÐºÑÐ¸Ð²Ð½ÑÑÑÑ.</ContentsVisibilityHelp>
+      <ContextualHelp>Активує опцію Динамічні навігації. Інші можуть змінити вміст динамічно на основі параметру URL-адреси.</ContextualHelp>
+      <ParameterHelp>Цей параметр буде використовуватися для доступу до вмісту, якщо активована Динамічна навігація.</ParameterHelp>
+      <ShowDetailInPageHelp>Натискання на вміст переспрямовує користувача на сторінку Деталі. Для відображення контенту на цільовій сторінці, у вас повинен бути включений портлет  "Контент за URL-адресою"  з Динамічною новігацією.</ShowDetailInPageHelp>
+      <DetailParameterHelp>Цей параметр буде містити шлях до контенту в посиланні на сторінку Деталі. Цей параметр має відповідати параметру, який використовується в портлеті "Контент за URL-адресою" сторінки.</DetailParameterHelp>
+      <ContentByQueryHelp>Ви можете встановити SQL запит для отримання контенту динамічно. Допускаються наступні параметри: ${user}, ${lang} або будь-який параметр отримання (PARAM), оточений ${PARAM}.</ContentByQueryHelp>
+      <ContentsVisibilityHelp>"Обмежено шляхом перевірки автентичності" відфільтрує контент, на основі аутентифікації. Якщо ви не авторизувались, ви побачите тільки загальнодоступний контент. Якщо ви авторизувались, ви побачите весь контент видний користувачам внутрішньої мережі (але загальний для всіх). "Обмежені за ролями користувачів" означає, що ви побачите контент в залежності від вашого права доступа. У більшості випадків цю опцію не слід використовувати, так як це зменшує загальну продуктивність.</ContentsVisibilityHelp>
     </help>
     <action>
       <Save>#{word.save}</Save>
       <Cancel>#{word.cancel}</Cancel>
-      <delete>ÐÐ¸Ð´Ð°Ð»Ð¸ÑÐ¸</delete>
+      <delete>Видалити</delete>
     </action>
     <msg>
       <not-valid-path>The Folder Path is invalid.</not-valid-path>
@@ -91,9 +91,9 @@
     </msg>
     <tab>
       <label>
-        <clvContentTab>ÐÐ¸Ð±ÑÑ ÐºÐ¾Ð½ÑÐµÐ½ÑÑ</clvContentTab>
-        <clvDisplayTab>ÐÐ°Ð»Ð°ÑÑÑÐ²Ð°Ð½Ð½Ñ Ð²ÑÐ´Ð¾Ð±ÑÐ°Ð¶ÐµÐ½Ð½Ñ</clvDisplayTab>
-        <clvAdvancedTab>Ð Ð¾Ð·ÑÐ¸ÑÐµÐ½Ñ Ð½Ð°ÑÑÑÐ¾Ð¹ÐºÐ¸</clvAdvancedTab>
+        <clvContentTab>Вибір контенту</clvContentTab>
+        <clvDisplayTab>Налаштування відображення</clvDisplayTab>
+        <clvAdvancedTab>Розширені настройки</clvAdvancedTab>
       </label>
     </tab>
   </UICLVConfig>
@@ -105,51 +105,51 @@
   </UICLVConfigDisplayModeFormRadioBoxInput>
   <UICLVConfigItemPathFormInputSet>
     <title>
-      <SelectFolderPath>ÐÐ¸Ð±ÐµÑÑÑÑ ÑÐ»ÑÑ Ð´Ð¾ Ð¿Ð°Ð¿ÐºÐ¸</SelectFolderPath>
-      <AddPath>ÐÐ¾Ð´Ð°ÑÐ¸ ÑÐ»ÑÑ</AddPath>
+      <SelectFolderPath>Виберіть шлях до папки</SelectFolderPath>
+      <AddPath>Додати шлях</AddPath>
     </title>
   </UICLVConfigItemPathFormInputSet>
   <FolderPathSelectorPopupWindow>
     <title>
-      <UIContentSelectorFolder>ÐÐ³Ð»ÑÐ´ Ð¿Ð°Ð¿Ð¾Ðº</UIContentSelectorFolder>
+      <UIContentSelectorFolder>Огляд папок</UIContentSelectorFolder>
     </title>
   </FolderPathSelectorPopupWindow>
   <UICLVConfigOrderTypeFormSelectBox>
     <label>
       <option>
-        <OrderDesc>ÐÐ¾ ÑÐ¿Ð°Ð´Ð°Ð½Ð½Ñ</OrderDesc>
-        <OrderAsc>ÐÐ¾ Ð²Ð¸ÑÑÑÐ´Ð½ÑÐ¹</OrderAsc>
+        <OrderDesc>По спаданню</OrderDesc>
+        <OrderAsc>По висхідній</OrderAsc>
       </option>
     </label>
   </UICLVConfigOrderTypeFormSelectBox>
   <UICLVConfigTargetPageFormInputSet>
     <title>
-      <SelectBasePath>ÐÐ¸Ð±ÐµÑÑÑÑ Ð¾ÑÐ½Ð¾Ð²Ð½Ð¸Ð¹ ÑÐ»ÑÑ</SelectBasePath>
-      <SelectTargetPage>ÐÐ¸Ð±ÐµÑÑÑÑ Ð¾ÑÐ½Ð¾Ð²Ð½Ð¸Ð¹ ÑÐ»ÑÑ</SelectTargetPage>
+      <SelectBasePath>Виберіть основний шлях</SelectBasePath>
+      <SelectTargetPage>Виберіть основний шлях</SelectTargetPage>
     </title>
   </UICLVConfigTargetPageFormInputSet>
   <UICLVBasePathPopupWindow>
     <title>
-      <UIPageSelector>Ð¡ÑÐ¾ÑÑÐ½ÐºÐ° Ð²Ð¸Ð±Ð¾ÑÑ</UIPageSelector>
+      <UIPageSelector>Сторінка вибору</UIPageSelector>
     </title>
   </UICLVBasePathPopupWindow>
   <UICLVPresentation>
     <msg>
-      <confirm-delete>ÐÐ¸ Ð´ÑÐ¹ÑÐ½Ð¾ Ð±Ð°Ð¶Ð°ÑÑÐµ Ð²Ð¸Ð´Ð°Ð»Ð¸ÑÐ¸ ÑÐµÐ¹ ÐºÐ¾Ð½ÑÐµÐ½Ñ?</confirm-delete>
-      <delete-content-successfully>ÐÐ¾Ð½ÑÐµÐ½Ñ Ð²Ð¸Ð´Ð°Ð»ÐµÐ½Ð¸Ð¹ ÑÑÐ¿ÑÑÐ½Ð¾.</delete-content-successfully>
+      <confirm-delete>Ви дійсно бажаєте видалити цей контент?</confirm-delete>
+      <delete-content-successfully>Контент видалений успішно.</delete-content-successfully>
     </msg>
     <label>
       <readmore>Read more</readmore>
       <rssFeed>RSS Feed</rssFeed>
     </label>
     <action>
-      <refresh>ÐÐ½Ð¾Ð²Ð¸ÑÐ¸</refresh>
-      <edit>Ð ÐµÐ´Ð°Ð³ÑÐ²Ð°ÑÐ¸ Ð² ÐÐ³Ð»ÑÐ´Ð°ÑÑ ÐÐ¾Ð½ÑÐµÐ½ÑÐ°</edit>
-      <delete>ÐÐ¸Ð´Ð°Ð»Ð¸ÑÐ¸</delete>
-      <publish>ÐÑÐ±Ð»ÑÐºÑÐ²Ð°ÑÐ¸</publish>
+      <refresh>Оновити</refresh>
+      <edit>Редагувати в Оглядачі Контента</edit>
+      <delete>Видалити</delete>
+      <publish>Публікувати</publish>
     </action>
     <label>
-      <draft>Ð§ÐµÑÐ½ÐµÑÐºÐ°</draft>
+      <draft>Чернетка</draft>
     </label>
   </UICLVPresentation>
   <CorrectContentSelectorPopupWindow>
@@ -164,25 +164,25 @@
   </UIContentDialogFormPopupWindow>
   <UICLVConfigContextualFolderRadioBoxInput>
     <label>
-      <contextualEnable>ÐÐ²ÑÐ¼ÐºÐ½ÐµÐ½Ð¾</contextualEnable>
-      <contextualDisable>ÐÐ¸Ð¼ÐºÐ½ÐµÐ½Ð¸Ð¹</contextualDisable>
+      <contextualEnable>Ввімкнено</contextualEnable>
+      <contextualDisable>Вимкнений</contextualDisable>
     </label>
   </UICLVConfigContextualFolderRadioBoxInput>
   <PublicationStates>
-    <archived>ÐÑÑÑÐ²Ð½Ñ</archived>
-    <obsolete>ÐÐ°ÑÑÐ°ÑÑÐ»Ð¸Ð¹</obsolete>
-    <unpublished>ÐÐµÐ¾Ð¿ÑÐ±Ð»ÑÐºÐ¾Ð²Ð°Ð½Ñ</unpublished>
-    <enrolled>ÐÐ°ÑÐµÑÑÑÑÐ¾Ð²Ð°Ð½Ð¾</enrolled>
-    <draft>Ð§ÐµÑÐ½ÐµÑÐºÐ°</draft>
-    <pending>ÐÑÑÐºÑÐ²Ð°Ð½Ð½Ñ</pending>
-    <approved>Ð¡ÑÐ²Ð°Ð»ÐµÐ½Ð¾</approved>
-    <inreview>Ð Ð¾Ð³Ð»ÑÐ´Ñ</inreview>
-    <staged>Ð Ð¾Ð·Ð¼ÑÑÐµÐ½Ð¸Ð¹</staged>
-    <published>ÐÐ¿ÑÐ±Ð»ÑÐºÐ¾Ð²Ð°Ð½Ð¾</published>
+    <archived>Архівні</archived>
+    <obsolete>Застарілий</obsolete>
+    <unpublished>Неопубліковані</unpublished>
+    <enrolled>Зареєстровано</enrolled>
+    <draft>Чернетка</draft>
+    <pending>Очікування</pending>
+    <approved>Схвалено</approved>
+    <inreview>В огляді</inreview>
+    <staged>Розміщений</staged>
+    <published>Опубліковано</published>
   </PublicationStates>
   <UICLVConfigCacheEnableRadioBoxInput>
     <label>
-      <ENABLE>ÐÐ±Ð¼ÐµÐ¶ÑÑÑÑÑÑ Ð°Ð²ÑÐµÐ½ÑÐ¸ÑÑÐºÐ°ÑÑÑÑ</ENABLE>
+      <ENABLE>Обмежується автентифікацією</ENABLE>
       <DISABLE>Restricted by User Roles</DISABLE>
     </label>
   </UICLVConfigCacheEnableRadioBoxInput>

@@ -6,17 +6,17 @@
   <Ecm>
     <dialog>
       <label>
-        <end-time>Ð§Ð°Ñ Ð·Ð°Ð²ÐµÑÑÐµÐ½Ð½Ñ</end-time>
-        <start-time>Ð§Ð°Ñ Ð¿Ð¾ÑÐ°ÑÐºÑ</start-time>
-        <lifecycle>ÐÐ¸ÑÑÑÐ²Ð¸Ð¹ ÑÐ¸ÐºÐ»</lifecycle>
-        <mimeType>Mime ÑÐ¸Ð¿</mimeType>
-        <repeat-count>ÐÐ¾Ð²ÑÐ¾ÑÐ¸ÑÐ¸ Ð¿ÑÐ´ÑÐ°ÑÑÐ½Ð¾Ðº</repeat-count>
-        <time-interval>ÐÐ½ÑÐµÑÐ²Ð°Ð» ÑÐ°ÑÑ</time-interval>
-        <query-items>ÐÐ»ÐµÐ¼ÐµÐ½ÑÐ¸ Ð·Ð°Ð¿ÑÐ¾ÑÑ</query-items>
-        <schedule-type>ÑÐ¸Ð¿ ÑÐ¾Ð·ÐºÐ»Ð°Ð´Ñ</schedule-type>
-        <remove>ÐÐ¸Ð´Ð°Ð»Ð¸ÑÐ¸ ÐµÐ»ÐµÐ¼ÐµÐ½Ñ</remove>
-        <add>ÐÐ¾Ð´Ð°ÑÐ¸ ÐµÐ»ÐµÐ¼ÐµÐ½Ñ</add>
-        <expand>Ð Ð¾Ð·Ð³Ð¾ÑÐ½ÑÑÐ¸ ÑÐµ</expand>
+        <end-time>Час завершення</end-time>
+        <start-time>Час початку</start-time>
+        <lifecycle>Життєвий цикл</lifecycle>
+        <mimeType>Mime тип</mimeType>
+        <repeat-count>Повторити підрахунок</repeat-count>
+        <time-interval>Інтервал часу</time-interval>
+        <query-items>Елементи запросу</query-items>
+        <schedule-type>тип розкладу</schedule-type>
+        <remove>Видалити елемент</remove>
+        <add>Додати елемент</add>
+        <expand>Розгорнути це</expand>
       </label>
     </dialog>
   </Ecm>
@@ -24,12 +24,12 @@
   <UIDocumentForm>
     <label>
       <title>#{word.title}</title>
-      <link>ÐÐ¾ÑÐ¸Ð»Ð°Ð½Ð½Ñ</link>
+      <link>Посилання</link>
       <contentHtml>#{word.content}</contentHtml>
       <content>#{word.content}</content>
       <contentPlain>#{word.content}</contentPlain>
-      <name>ÐÐ¼âÑ</name>
-    <categories>ÐÐ°ÑÐµÐ³Ð¾ÑÑÑ</categories>
+      <name>Ім’я</name>
+    <categories>Категорії</categories>
     </label>
   </UIDocumentForm>
  
@@ -39,8 +39,8 @@
   <HtmlFile>
     <dialog>
       <label>
-        <name>ÐÐ¼âÑ</name>
-        <content>ÐÐ¾Ð½ÑÐµÐ½Ñ</content>
+        <name>Ім’я</name>
+        <content>Контент</content>
       </label>
     </dialog>
   </HtmlFile>
@@ -52,12 +52,12 @@
     <dialog>
       <label>
         <name>#{word.name}</name>
-        <categories>ÐÐ°ÑÐµÐ³Ð¾ÑÑÑ</categories>
+        <categories>Категорії</categories>
         <mimeType>#{Ecm.dialog.label.mimeType}</mimeType>
         <width>Width</width>
         <height>Height</height>
         <content>#{word.content}</content>
-        <re-upload>Ð¤Ð°Ð¹Ð» Ð²Ð¶Ðµ ÑÑÐ½ÑÑ. ÐÐ¸ Ð¼Ð¾Ð¶ÐµÑÐµ Ð²Ð¸Ð´Ð°Ð»Ð¸ÑÐ¸ Ð¹Ð¾Ð³Ð¾ Ñ Ð·Ð°Ð²Ð°Ð½ÑÐ°Ð¶Ð¸ÑÐ¸ ÑÐ½ÑÐ¸Ð¹ ÑÐ°Ð¹Ð».</re-upload>
+        <re-upload>Файл вже існує. Ви можете видалити його і завантажити інший файл.</re-upload>
       </label>
     </dialog>
   </File>
@@ -65,22 +65,22 @@
   <UIActionForm>
     <label>
       <description>#{word.description}</description>
-      <port>ÐÐ¾ÑÑ</port>
+      <port>Порт</port>
       <userName>#{word.userName}</userName>
-      <password>ÐÐ°ÑÐ¾Ð»Ñ</password>
-      <link>ÐÐ¾ÑÐ¸Ð»Ð°Ð½Ð½Ñ</link>
-      <to>ÐÐ°Ð´ÑÑÐ»Ð°ÑÐ¸ Ð¿Ð¾ÑÑÑ</to>
+      <password>Пароль</password>
+      <link>Посилання</link>
+      <to>Надіслати пошту</to>
       <actionName>#{word.name}</actionName>
     </label>
   </UIActionForm>
   <EditFormAction>
     <label>
       <description>#{word.description}</description>
-      <port>ÐÐ¾ÑÑ</port>
+      <port>Порт</port>
       <userName>#{word.userName}</userName>
-      <password>ÐÐ°ÑÐ¾Ð»Ñ</password>
-      <link>ÐÐ¾ÑÐ¸Ð»Ð°Ð½Ð½Ñ</link>
-      <to>ÐÐ°Ð´ÑÑÐ»Ð°ÑÐ¸ Ð¿Ð¾ÑÑÑ</to>
+      <password>Пароль</password>
+      <link>Посилання</link>
+      <to>Надіслати пошту</to>
       <actionName>#{word.name}</actionName>
     </label>
   </EditFormAction>
@@ -91,10 +91,10 @@
   <AddMetadata>
     <dialog>
       <label>
-        <id>ÐÐ´ÐµÐ½ÑÐ¸ÑÑÐºÐ°ÑÐ¾Ñ</id>
+        <id>Ідентифікатор</id>
         <name>#{word.name}</name>
         <lifecycle>#{Ecm.dialog.label.lifecycle}</lifecycle>
-        <metadata>ÐÐµÑÐ°Ð´Ð°Ð½Ñ</metadata>
+        <metadata>Метадані</metadata>
         <description>#{word.description}</description>
       </label>
     </dialog>
@@ -106,7 +106,7 @@
   <AutoVersioning>
     <dialog>
       <label>
-        <id>ÐÐ´ÐµÐ½ÑÐ¸ÑÑÐºÐ°ÑÐ¾Ñ</id>
+        <id>Ідентифікатор</id>
         <name>#{word.name}</name>
         <lifecycle>#{Ecm.dialog.label.lifecycle}</lifecycle>
         <schedule-type>#{Ecm.dialog.label.schedule-type}</schedule-type>
@@ -114,7 +114,7 @@
         <end-time>#{Ecm.dialog.label.end-time}</end-time>
         <repeat-count>#{Ecm.dialog.label.repeat-count}</repeat-count>
         <time-inteval>#{Ecm.dialog.label.time-interval}</time-inteval>
-        <cron-expression>ÐÐ¾Ð¼Ð°Ð½Ð´Ð° Ð¿Ð»Ð°Ð½ÑÐ²Ð°Ð»ÑÐ½Ð¸ÐºÐ° Ð·Ð°Ð²Ð´Ð°Ð½Ñ</cron-expression>
+        <cron-expression>Команда планувальника завдань</cron-expression>
         <description>#{word.description}</description>
       </label>
     </dialog>
@@ -125,7 +125,7 @@
   <EnableVersioning>
     <dialog>
       <label>
-        <id>ÐÐ´ÐµÐ½ÑÐ¸ÑÑÐºÐ°ÑÐ¾Ñ</id>
+        <id>Ідентифікатор</id>
         <name>#{word.name}</name>
         <lifecycle>#{Ecm.dialog.label.lifecycle}</lifecycle>
         <schedule-type>#{Ecm.dialog.label.schedule-type}</schedule-type>
@@ -145,20 +145,20 @@
     <dialog>
       <label>
         <title>#{word.title}:</title>
-        <creator>Ð Ð¾Ð·ÑÐ¾Ð±Ð½Ð¸Ðº:</creator>
+        <creator>Розробник:</creator>
         <subject>#{word.subject}:</subject>
-        <source>ÐÐ¶ÐµÑÐµÐ»Ð¾:</source>
-        <contributor>ÐÐ²ÑÐ¾Ñ:</contributor>
-        <resource-type>Ð¢Ð¸Ð¿ ÑÐµÑÑÑÑÑ:</resource-type>
+        <source>Джерело:</source>
+        <contributor>Автор:</contributor>
+        <resource-type>Тип ресурсу:</resource-type>
         <date>#{word.date}:</date>
-        <publisher>ÐÐ¸Ð´Ð°Ð²ÐµÑÑ:</publisher>
+        <publisher>Видавець:</publisher>
         <description>#{word.description}:</description>
-        <rights>ÐÑÐ°Ð²Ð°:</rights>
-        <relation>Ð¡Ð¿ÑÐ²Ð²ÑÐ´Ð½Ð¾ÑÐµÐ½Ð½Ñ:</relation>
+        <rights>Права:</rights>
+        <relation>Співвідношення:</relation>
         <format>#{word.format}:</format>
-        <coverage>ÐÐ¾ÐºÑÐ¸ÑÑÑ:</coverage>
-        <identifier>ÐÐ´ÐµÐ½ÑÐ¸ÑÑÐºÐ°ÑÐ¾Ñ:</identifier>
-        <language>ÐÐ¾Ð²Ð°:</language>
+        <coverage>Покриття:</coverage>
+        <identifier>Ідентифікатор:</identifier>
+        <language>Мова:</language>
       </label>
     </dialog>
   </ElementSet>
@@ -169,8 +169,8 @@
   <Actionable>
     <dialog>
       <label>
-        <primary-type>ÐÑÐ½Ð¾Ð²Ð½Ð¸Ð¹ ÑÐ¸Ð¿</primary-type>
-        <mixin-types>ÐÐ¼ÑÑÐ°Ð½Ñ ÑÐ¸Ð¿Ð¸</mixin-types>
+        <primary-type>Основний тип</primary-type>
+        <mixin-types>Змішані типи</mixin-types>
       </label>
     </dialog>
   </Actionable>
@@ -181,10 +181,10 @@
   <Move>
     <dialog>
       <label>
-        <destination-workpsace>ÐÑÐ¸Ð·Ð½Ð°ÑÐµÐ½Ð½Ñ ÑÐ¾Ð±Ð¾ÑÐ¾Ñ Ð¾Ð±Ð»Ð°ÑÑÑ</destination-workpsace>
-        <destination-path>Ð¨Ð»ÑÑ Ð¿ÑÐ¸Ð·Ð½Ð°ÑÐµÐ½Ð½Ñ</destination-path>
-        <primary-type>ÐÑÐ½Ð¾Ð²Ð½Ð¸Ð¹ ÑÐ¸Ð¿</primary-type>
-        <mixin-types>ÐÐ¼ÑÑÐ°Ð½Ñ ÑÐ¸Ð¿Ð¸</mixin-types>
+        <destination-workpsace>Призначення робочої області</destination-workpsace>
+        <destination-path>Шлях призначення</destination-path>
+        <primary-type>Основний тип</primary-type>
+        <mixin-types>Змішані типи</mixin-types>
       </label>
     </dialog>
   </Move>
@@ -194,8 +194,8 @@
   <Published>
     <dialog>
       <label>
-        <start-publication>ÐÐ¾ÑÐ°ÑÐ¾Ðº Ð¿ÑÐ±Ð»ÑÐºÐ°ÑÑÑ</start-publication>
-        <end-publication>ÐÐ°Ð²ÐµÑÑÐµÐ½Ð½Ñ Ð¿ÑÐ±Ð»ÑÐºÐ°ÑÑÑ</end-publication>
+        <start-publication>Початок публікації</start-publication>
+        <end-publication>Завершення публікації</end-publication>
       </label>
     </dialog>
   </Published>
@@ -216,7 +216,7 @@
   <Relationable>
     <dialog>
       <label>
-        <relation>Ð¡Ð¿ÑÐ²Ð²ÑÐ´Ð½Ð¾ÑÐµÐ½Ð½Ñ</relation>
+        <relation>Співвідношення</relation>
       </label>
     </dialog>
   </Relationable>
@@ -226,7 +226,7 @@
   <RssEnable>
     <dialog>
       <label>
-        <title>ÐÐ°Ð·Ð²Ð°</title>
+        <title>Назва</title>
         <summary>#{word.summary}</summary>
       </label>
     </dialog>
@@ -238,11 +238,11 @@
   <Versionable>
     <dialog>
       <label>
-        <version-history>ÐÑÑÐ¾ÑÑÑ Ð²ÐµÑÑÑÐ¹</version-history>
-        <base-version>ÐÐ°Ð·Ð¾Ð²Ð° Ð²ÐµÑÑÑÑ</base-version>
-        <is-checked-out>ÐÐ¸Ð´Ð°Ð½Ð°</is-checked-out>
-        <predecessors>ÐÐ¾Ð¿ÐµÑÐµÐ´Ð½Ð¸ÐºÐ¸</predecessors>
-        <merge-failed>ÐÐµ Ð²Ð´Ð°Ð»Ð¾ÑÑ Ð²Ð¸ÐºÐ¾Ð½Ð°ÑÐ¸ Ð·Ð»Ð¸ÑÑÑ</merge-failed>
+        <version-history>Історія версій</version-history>
+        <base-version>Базова версія</base-version>
+        <is-checked-out>Видана</is-checked-out>
+        <predecessors>Попередники</predecessors>
+        <merge-failed>Не вдалося виконати злиття</merge-failed>
         <uuid>UUID</uuid>
       </label>
     </dialog>
@@ -254,10 +254,10 @@
   <ResouceContainer>
     <dialog>
       <label>
-        <name>ÐÐ¼âÑ</name>
-        <autoload>ÐÐ²ÑÐ¾Ð·Ð°Ð²Ð°Ð½ÑÐ°Ð¶ÐµÐ½Ð½Ñ</autoload>
-        <minetype>Mime ÑÐ¸Ð¿</minetype>
-        <content>ÐÐ¾Ð½ÑÐµÐ½Ñ</content>
+        <name>Ім’я</name>
+        <autoload>Автозавантаження</autoload>
+        <minetype>Mime тип</minetype>
+        <content>Контент</content>
       </label>
     </dialog>
   </ResouceContainer>
@@ -266,17 +266,17 @@
   -->
   <EmailAddressValidator>
     <msg>
-      <Invalid-input>ÐÐ´ÑÐµÑÐ° ÐµÐ»ÐµÐºÑÑÐ¾Ð½Ð½Ð¾Ñ Ð¿Ð¾ÑÑÐ¸ Ð½ÐµÐ´ÑÐ¹ÑÐ½Ð°.</Invalid-input>
+      <Invalid-input>Адреса електронної пошти недійсна.</Invalid-input>
     </msg>
   </EmailAddressValidator>
   <EmptyFieldValidator>
     <msg>
-      <empty-input>ÐÐ¾Ð»Ðµ "{0}" Ð¾Ð±Ð¾Ð²'ÑÐ·ÐºÐ¾Ð²Ðµ. ÐÑÐ´Ñ Ð»Ð°ÑÐºÐ°, Ð²Ð²ÐµÐ´ÑÑÑ Ð²Ð°ÑÐµ Ð·Ð½Ð°ÑÐµÐ½Ð½Ñ.</empty-input>
+      <empty-input>Поле "{0}" обов'язкове. Будь ласка, введіть ваше значення.</empty-input>
     </msg>
   </EmptyFieldValidator>
   <NumberFormatValidator>
     <msg>
-      <Invalid-number>ÐÐ¾Ð»Ðµ "{0}" Ñ Ð½ÐµÐ¿ÑÐ¸Ð¿ÑÑÑÐ¸Ð¼Ð¸Ð¼.</Invalid-number>
+      <Invalid-number>Поле "{0}" є неприпустимим.</Invalid-number>
     </msg>
   </NumberFormatValidator>
   <!--
@@ -287,18 +287,18 @@
   <ScriptAction>
     <dialog>
       <label>
-        <id>ÐÐ´ÐµÐ½ÑÐ¸ÑÑÐºÐ°ÑÐ¾Ñ</id>
-        <name>ÐÐ¼âÑ</name>
-        <lifecycle>ÐÐ¸ÑÑÑÐ²Ð¸Ð¹ ÑÐ¸ÐºÐ»</lifecycle>
-        <homePath>ÐÐ°ÑÑÑÑÑ Ð¾ÑÐ¾Ð±Ð¸ÑÑÐ¾Ð³Ð¾ ÐºÐ°ÑÐ°Ð»Ð¾Ð³Ñ</homePath>
-        <targetWorkspace>Ð¦ÑÐ»ÑÐ¾Ð²Ð° ÑÐ¾Ð±Ð¾ÑÐ° Ð¾Ð±Ð»Ð°ÑÑÑ</targetWorkspace>
-        <targetPath>Ð¦ÑÐ»ÑÐ¾Ð²Ð¸Ð¹ ÑÐ»ÑÑ</targetPath>
+        <id>Ідентифікатор</id>
+        <name>Ім’я</name>
+        <lifecycle>Життєвий цикл</lifecycle>
+        <homePath>Маршрут особистого каталогу</homePath>
+        <targetWorkspace>Цільова робоча область</targetWorkspace>
+        <targetPath>Цільовий шлях</targetPath>
       </label>
     </dialog>
   </ScriptAction>
   <UIDialogForm>
    <form>
-   <DialogFormException>ÐÐµ Ð²Ð´Ð°Ð»Ð¾ÑÑ Ð·Ð±ÐµÑÐµÐ³ÑÐ¸ ÑÐµÐ¹ Ð´Ð¾ÐºÑÐ¼ÐµÐ½Ñ. Ð¢Ð°Ð¼ Ð¼Ð¾Ð¶Ðµ Ð±ÑÑÐ¸ Ð¿ÑÐ¾Ð±Ð»ÐµÐ¼Ð° Ð· Ð¿Ð¾Ð¿ÐµÑÐµÐ´Ð½ÑÐ¼ Ð·Ð±ÐµÑÐµÐ¶ÐµÐ½Ð½ÑÐ¼ Ð¼ÐµÑÐ¾Ð´Ð°-Ð¿ÐµÑÐµÑÐ¾Ð¿Ð»ÑÐ²Ð°ÑÐ°.</DialogFormException>
+   <DialogFormException>Не вдалося зберегти цей документ. Там може бути проблема з попереднім збереженням метода-перехоплювача.</DialogFormException>
    </form>
   </UIDialogForm>
 
@@ -307,36 +307,36 @@
 
   ###################### resoucebundle exo:taxonomyAction dialogs template ####
   -->
-<no>ÐÐ</no>
-<yes>Ð¢Ð°Ðº</yes>
-<true>ÐÑÑÐ½Ð¾</true>
-<false>ÐÐµÐ²ÑÑÐ½Ð¾</false>
-<Electronic>ÐÐ»ÐµÐºÑÑÐ¾Ð½Ð½Ð¸Ð¹</Electronic>
-<Paper>ÐÐ°Ð¿ÐµÑÐ¾Ð²Ð¸Ð¹</Paper>
-<NONE>ÐÐ¾Ð´ÐµÐ½</NONE>
-<CLASSIFIED>ÐÐ»Ð°ÑÐ¸ÑÑÐºÐ¾Ð²Ð°Ð½Ð¸Ð¹</CLASSIFIED>
-<UNCLASSIFIED>ÐÐµÐºÐ»Ð°ÑÐ¸ÑÑÐºÐ¾Ð²Ð°Ð½Ð¸Ð¹</UNCLASSIFIED>
-<NOCONTRACT>ÐÐµÐ¼Ð°Ñ ÐºÐ¾Ð½ÑÑÐ°ÐºÑÑ</NOCONTRACT>
-<one-minute>ÐÐ´Ð½Ð° ÑÐ²Ð¸Ð»Ð¸Ð½Ð°</one-minute>
-<hourly>ÐÐ¾Ð³Ð¾Ð´Ð¸Ð½Ð½Ð¾</hourly>
-<daily>Ð©Ð¾Ð´ÐµÐ½Ð½Ð¾</daily>
-<quarterly>Ð©Ð¾ÐºÐ²Ð°ÑÑÐ°Ð»ÑÐ½Ð¾</quarterly>
-<yearly>Ð©Ð¾ÑÐ¾ÐºÑ</yearly>
-<ten-years>ÐÐµÑÑÑÑ ÑÐ¾ÐºÑÐ²</ten-years>
-<read>ÐÑÑ ÐºÐ¾ÑÐ¸ÑÑÑÐ²Ð°ÑÐ°</read>
-  <schedule>ÐÐ»Ð°Ð½ÑÐ²Ð°Ð»ÑÐ½Ð¸Ðº</schedule>
-  <node_added>ÐÐ¾Ð¿Ð¾Ð²Ð½ÐµÐ½Ð½Ñ Ð²Ð¼ÑÑÑÑ</node_added>
-  <node_removed>ÐÐ¸Ð»ÑÑÐµÐ½Ð½Ñ Ð²Ð¼ÑÑÑÑ</node_removed>
-  <property_added>ÐÐ¾Ð¿Ð¾Ð²Ð½ÐµÐ½Ð½Ñ Ð²Ð»Ð°ÑÑÐ¸Ð²Ð¾ÑÑÑ</property_added>
-  <property_removed>ÐÐ¸Ð´Ð°Ð»ÐµÐ½Ð½Ñ Ð²Ð»Ð°ÑÐ½Ð¾ÑÑÑ</property_removed>
-  <property_changed>ÐÐ¾Ð´Ð¸ÑÑÐºÐ°ÑÑÑ Ð²Ð»Ð°ÑÐ½Ð¾ÑÑÑ</property_changed>
+<no>НІ</no>
+<yes>Так</yes>
+<true>Вірно</true>
+<false>Невірно</false>
+<Electronic>Електронний</Electronic>
+<Paper>Паперовий</Paper>
+<NONE>Жоден</NONE>
+<CLASSIFIED>Класифікований</CLASSIFIED>
+<UNCLASSIFIED>Некласифікований</UNCLASSIFIED>
+<NOCONTRACT>Немає контракту</NOCONTRACT>
+<one-minute>Одна хвилина</one-minute>
+<hourly>Погодинно</hourly>
+<daily>Щоденно</daily>
+<quarterly>Щоквартально</quarterly>
+<yearly>Щороку</yearly>
+<ten-years>Десять років</ten-years>
+<read>Дія користувача</read>
+  <schedule>Планувальник</schedule>
+  <node_added>Доповнення вмісту</node_added>
+  <node_removed>Вилучення вмісту</node_removed>
+  <property_added>Доповнення властивості</property_added>
+  <property_removed>Видалення власності</property_removed>
+  <property_changed>Модифікація власності</property_changed>
 
   <ScriptAction>
     <dialog>
       <label>
-        <isDeep>ÐÐ»Ð¸Ð±Ð¾ÐºÐµ</isDeep>
-        <nodetypes>Ð¢Ð¸Ð¿Ð¸ Ð²ÑÐ·Ð»Ð°</nodetypes>
-        <affectedNodeTypeNames>ÐÑÐ°Ð¶ÐµÐ½Ñ ÑÐ¸Ð¿Ð¸ Ð²ÑÐ·Ð»Ð°</affectedNodeTypeNames>
+        <isDeep>Глибоке</isDeep>
+        <nodetypes>Типи вузла</nodetypes>
+        <affectedNodeTypeNames>Вражені типи вузла</affectedNodeTypeNames>
       </label>
     </dialog>
   </ScriptAction>
@@ -344,9 +344,9 @@
   <AddMetadata>
     <dialog>
       <label>
-        <isDeep>ÐÐ»Ð¸Ð±Ð¾ÐºÐµ</isDeep>
-        <nodetypes>Ð¢Ð¸Ð¿Ð¸ Ð²ÑÐ·Ð»Ð°</nodetypes>
-        <affectedNodeTypeNames>ÐÑÐ°Ð¶ÐµÐ½Ñ ÑÐ¸Ð¿Ð¸ Ð²ÑÐ·Ð»Ð°</affectedNodeTypeNames>
+        <isDeep>Глибоке</isDeep>
+        <nodetypes>Типи вузла</nodetypes>
+        <affectedNodeTypeNames>Вражені типи вузла</affectedNodeTypeNames>
       </label>
     </dialog>
   </AddMetadata>
@@ -354,9 +354,9 @@
   <EnableVersioning>
     <dialog>
       <label>
-        <isDeep>ÐÐ»Ð¸Ð±Ð¾ÐºÐµ</isDeep>
-        <nodetypes>Ð¢Ð¸Ð¿Ð¸ Ð²ÑÐ·Ð»Ð°</nodetypes>
-        <affectedNodeTypeNames>ÐÑÐ°Ð¶ÐµÐ½Ñ ÑÐ¸Ð¿Ð¸ Ð²ÑÐ·Ð»Ð°</affectedNodeTypeNames>
+        <isDeep>Глибоке</isDeep>
+        <nodetypes>Типи вузла</nodetypes>
+        <affectedNodeTypeNames>Вражені типи вузла</affectedNodeTypeNames>
       </label>
     </dialog>
   </EnableVersioning>
@@ -364,9 +364,9 @@
   <AutoVersioning>
     <dialog>
       <label>
-        <isDeep>ÐÐ»Ð¸Ð±Ð¾ÐºÐµ</isDeep>
-        <nodetypes>Ð¢Ð¸Ð¿Ð¸ Ð²ÑÐ·Ð»Ð°</nodetypes>
-        <affectedNodeTypeNames>ÐÑÐ°Ð¶ÐµÐ½Ñ ÑÐ¸Ð¿Ð¸ Ð²ÑÐ·Ð»Ð°</affectedNodeTypeNames>
+        <isDeep>Глибоке</isDeep>
+        <nodetypes>Типи вузла</nodetypes>
+        <affectedNodeTypeNames>Вражені типи вузла</affectedNodeTypeNames>
       </label>
     </dialog>
   </AutoVersioning>
@@ -374,15 +374,15 @@
   <AccessibleMedia>
   <dialog>
   <label>
-  <captions>ÐÑÐ´Ð¿Ð¸ÑÐ¸</captions>
-<audioDescription>ÐÐ²ÑÐºÐ¾Ð²Ð¸Ð¹ Ð¾Ð¿Ð¸Ñ</audioDescription>
-<alternativeText>Ð¢ÐµÐºÑÑ Ð·Ð°Ð¼ÑÑÐµÐ½Ð½Ñ</alternativeText>
+  <captions>Підписи</captions>
+<audioDescription>Звуковий опис</audioDescription>
+<alternativeText>Текст заміщення</alternativeText>
 </label>
 </dialog>
 <help>
-<CaptionsHelp>ÐÑÐ´Ð¿Ð¸ÑÐ¸ Ð¿Ð¾Ð²Ð¸Ð½Ð½Ñ Ð½Ð°Ð´Ð°ÑÐ¸ ÑÐµÐºÑÑ Ð´ÑÐ°Ð»Ð¾Ð³Ñ Ñ Ð²Ð°Ð¶Ð»Ð¸Ð²Ð¸Ñ Ð·Ð²ÑÐºÑÐ²</CaptionsHelp>
-<AudioDescriptionHelp>ÐÐ²ÑÐºÐ¾Ð²Ð¸Ð¹ Ð¾Ð¿Ð¸Ñ - ÑÐµ ÐºÐ¾Ð¼ÐµÐ½ÑÐ°Ñ Ð´Ð¾ Ð²ÑÐ´ÐµÐ¾</AudioDescriptionHelp>
-<AlternativeTextHelp>ÐÐ°Ð±ÐµÐ·Ð¿ÐµÑÐ¸ÑÐ¸ Ð´Ð¾ÑÑÑÐ¿Ð½Ð¸Ð¼, Ð°Ð»ÑÑÐµÑÐ½Ð°ÑÐ¸Ð²Ð½Ð¸Ð¹ ÑÐ¿Ð¾ÑÑÐ± Ð¿ÑÐµÐ´ÑÑÐ°Ð²Ð¸ÑÐ¸ ÑÐ½ÑÐ¾ÑÐ¼Ð°ÑÑÑ</AlternativeTextHelp>
+<CaptionsHelp>Підписи повинні надати текст діалогу і важливих звуків</CaptionsHelp>
+<AudioDescriptionHelp>Звуковий опис - це коментар до відео</AudioDescriptionHelp>
+<AlternativeTextHelp>Забезпечити доступним, альтернативний спосіб представити інформацію</AlternativeTextHelp>
 </help>
 </AccessibleMedia>
   
