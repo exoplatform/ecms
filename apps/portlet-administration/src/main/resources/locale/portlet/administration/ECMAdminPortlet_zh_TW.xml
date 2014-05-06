@@ -785,7 +785,7 @@
       <ECMTemplate>資源管理器中的範本</ECMTemplate>
       <UIScriptForm>腳本</UIScriptForm>
       <UIDialogTab>對話</UIDialogTab>
-      <UIViewTab>查看</UIViewTab>
+      <UIViewTab>檢視</UIViewTab>
       <UITemplateEditForm>模板</UITemplateEditForm>
       <UITemplateForm>模板</UITemplateForm>
       <UITemplateContainer>文件</UITemplateContainer>
@@ -798,7 +798,7 @@
 <nodeTypeDefinition>節點類型</nodeTypeDefinition>
       <propertyDefinition>屬性</propertyDefinition>
       <childNodeDefinition>子節點</childNodeDefinition>
-      <SuperTypeTab>父類型</SuperTypeTab>
+      <SuperTypeTab>超級類型</SuperTypeTab>
       <DefaultTypeTab>主要預設</DefaultTypeTab>
       <RequiredTypeTab>主要所需</RequiredTypeTab>
       <Contraints>約束</Contraints>
@@ -811,7 +811,7 @@
   -->
   <UIViewList>
    <title>
-     <View>查看</View>
+     <View>檢視</View>
      <EditInfo>編輯</EditInfo>
      <Delete>刪除</Delete>
    </title>
@@ -833,7 +833,7 @@
   </UIViewList>
   <ViewPopup>
     <title>
-      <UIViewFormTabPane>查看</UIViewFormTabPane>
+      <UIViewFormTabPane>檢視</UIViewFormTabPane>
     </title>
   </ViewPopup>
   <AddPopup>
@@ -866,7 +866,7 @@
 </msg>
 <grid>
  <msg>
-  <empty>沒有標籤在這個視圖</empty>
+  <empty>在這個視圖上沒有標籤</empty>
  </msg>
 </grid>
 </UITabList>
@@ -974,10 +974,10 @@
       <importNode>匯入節點</importNode>
       <viewRelations>查看關係</viewRelations>
       <showJCRStructure>顯示 JCR 結構</showJCRStructure>
-      <watchDocument>觀注文檔</watchDocument>
+      <watchDocument>觀看文件</watchDocument>
       <taggingDocument>標記文件</taggingDocument>
       <viewMetadatas>查看中繼資料</viewMetadatas>
-      <overloadThumbnail>超載的縮略圖</overloadThumbnail>
+      <overloadThumbnail>超載的縮圖</overloadThumbnail>
       <manageHidden>隱藏/顯示內容</manageHidden>
       <comment>評論</comment>
       <vote>投票</vote>  
@@ -1086,9 +1086,9 @@
     </msg>
     <tab>
       <label>
-        <template>模板</template>
+        <template>範本</template>
         <defaultDialog>對話</defaultDialog>
-        <defaultView>查看</defaultView>
+        <defaultView>檢視</defaultView>
       </label>
     </tab>
     <label>
@@ -1549,7 +1549,7 @@
   <UIOthersTemplateList>
     <header>
       <name>類型</name>
-      <label>模板</label>
+      <label>範本</label>
       <icon>圖示</icon>
       <action>操作</action>
     </header>
@@ -2084,7 +2084,7 @@
   </PermissionButton>
   <nodeTypeDefinition>
     <title>
-      <AddSuperType>增加父類型</AddSuperType>
+      <AddSuperType>增加超級類型</AddSuperType>
     </title>
   </nodeTypeDefinition>
   <childNodeDefinition>
@@ -2515,7 +2515,7 @@
   </UIWorkspaceWizard>
   <UIRepositoryForm>
     <msg>
-      <not-complete-repository>正在創建存儲庫。你需要等待幾分鐘，然後創建另一個。</not-complete-repository>
+      <not-complete-repository>正在創建儲存庫。你需要等待幾分鐘，然後創建另一個。</not-complete-repository>
     </msg>
   </UIRepositoryForm>
   

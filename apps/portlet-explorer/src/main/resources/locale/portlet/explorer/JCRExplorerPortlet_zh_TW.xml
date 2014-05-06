@@ -76,7 +76,7 @@
       <Close>關閉側邊欄</Close>
       <TagExplorer>標籤雲</TagExplorer>
       <Clipboard>剪貼簿</Clipboard>
-      <SavedSearches>已保存的搜索</SavedSearches>
+      <SavedSearches>已儲存的搜尋</SavedSearches>
     </label>
     <title>
       <Control>Control Sidebar</Control>
@@ -95,7 +95,7 @@
       <setUpBrowser>設定您的瀏覽喜好</setUpBrowser>
       <refesh>重新整理</refesh>
       <currentDrive>當前磁碟機</currentDrive>
-      <selectView>選擇視圖</selectView>
+      <selectView>選擇檢視</selectView>
       <showSideBar>顯示側邊欄</showSideBar>
       <more>更多</more>
       <backTo>返回</backTo>
@@ -114,7 +114,7 @@
       <GeneralDrives>一般的磁碟機</GeneralDrives>
     </title>
     <msg>
-      <no-view-found>沒有視圖可根據您在磁碟機 '{0}' 中的存取權限。</no-view-found>
+      <no-view-found>在你的磁碟機中存取的權限沒有檢視到可用的依據 '{0}'.</no-view-found>
       <access-denied>訪問被拒絕。您可能沒有在工作區中的磁碟機權限 '{0}' 。</access-denied>
       <workspace-not-exist>磁碟機 '{0}' 存儲在一個無法識別的工作區中。請重新配置此磁碟機。</workspace-not-exist>
     </msg>
@@ -132,7 +132,7 @@
       <webDavView>在 MS Office 中打開</webDavView>
     </label>
     <msg>
-      <path-not-found>此元素被刪除或更改。請按一下刷新按鈕。</path-not-found>
+      <path-not-found>此元素被刪除或更改。請按一下更新按鈕。</path-not-found>
     </msg>
   </UITreeExplorer>
   <!--
@@ -161,10 +161,10 @@
       <showSideBar>顯示側邊欄：</showSideBar>
       <showHiddenNode>顯示隱藏的節點：</showHiddenNode>
       <showNonDocument>顯示非文件節點：</showNonDocument>
-      <showRefDocuments>顯示引用的文件：</showRefDocuments>
+      <showRefDocuments>顯示參考的文件：</showRefDocuments>
       <enableDragAndDrop>啟用拖拉 &amp; 拖放：</enableDragAndDrop>
       <sortBy>排序依據:</sortBy>
-      <order>排序依據:</order>
+      <order>按順序</order>
       <nodesPerPage>每頁的節點：</nodesPerPage>
     </label>
     <action>
@@ -178,7 +178,7 @@
   #########################################################################################
   -->
   <UIAllItemsPreferenceForm>
-    <title>將篩選器偏好設定</title>
+    <title>設定篩選器偏好</title>
     <action>
       <Cancel>#{word.cancel}</Cancel>
       <Save>#{word.save}</Save>
@@ -205,7 +205,7 @@
       <rename-denied>訪問被拒絕。您不能重新命名此節點。</rename-denied>
       <fileName-invalid>新名稱中包含一些不正確字元。</fileName-invalid>
       <newName-same-oldName>新的名稱已經存在。請再次檢查。</newName-same-oldName>
-      <version-exception>此節點 （或此節點的祖先） 未簽出。</version-exception>
+      <version-exception>此節點 （或此節點的始祖） 未檢查。</version-exception>
       <lock-exception>此節點將被鎖定。請在重新命名之前解鎖。</lock-exception>
       <constraintViolation-exception>重新命名節點"{0}"時出錯。請再次檢查。</constraintViolation-exception>
       <unknown-prefix>首碼 '{0}' 尚未註冊。</unknown-prefix>
@@ -218,7 +218,7 @@
       <UIActionContainer>編輯操作</UIActionContainer>
       <UIFolderForm>新資料夾</UIFolderForm>
       <UIUploadManager>上傳檔案</UIUploadManager>
-      <UIReferencesList>引用清單</UIReferencesList>
+      <UIReferencesList>參考清單</UIReferencesList>
       <UIExportNode>匯出</UIExportNode>
       <UINodeTypeInfo>節點類型資訊</UINodeTypeInfo>
       <UIVersionInfo>版本資訊</UIVersionInfo>
@@ -228,8 +228,8 @@
       <UIPermissionManager>權限管理</UIPermissionManager>
       <UIPropertiesManager>屬性管理</UIPropertiesManager>
       <UIECMSearch>進階搜尋</UIECMSearch>
-      <UISavedQuery>保存的查詢清單</UISavedQuery>
-      <UIWatchDocumentForm>觀注文件</UIWatchDocumentForm>
+      <UISavedQuery>儲存的查詢清單</UISavedQuery>
+      <UIWatchDocumentForm>觀看文件</UIWatchDocumentForm>
       <UIActionManager>管理操作</UIActionManager>
       <UIDocumentForm>編輯文件</UIDocumentForm>
       <UIDocumentFormController>增加新的文件</UIDocumentFormController>
@@ -247,7 +247,7 @@
       <UIDeleteFolderConfirmMessage>刪除資料夾嗎？</UIDeleteFolderConfirmMessage>
       <UIDeleteItemsConfirmMessage>刪除項目嗎？</UIDeleteItemsConfirmMessage>
       <UIRestoreConfirmMessage>確認還原</UIRestoreConfirmMessage>
-      <UIActivePublication>註冊過程註冊到出版物的生命週期</UIActivePublication>
+      <UIActivePublication>參加出版週期</UIActivePublication>
       <UITaggingForm>標記文件</UITaggingForm>
       <UIThumbnailForm>增加縮略圖圖像</UIThumbnailForm>
       <UIAllItemsPreferenceForm>偏好選項設定</UIAllItemsPreferenceForm>
@@ -269,8 +269,8 @@
     <title>編輯檔案內容</title>
     <label>
       <name>名稱</name>
-      <textToModify>修改的文本</textToModify>
-      <fileToUpload>上載新內容為該文件 （必須是相同的 mime 類型）</fileToUpload>
+      <textToModify>修改的文字</textToModify>
+      <fileToUpload>上傳新內容為該文件 （必須是相同的 mime 類型）</fileToUpload>
     </label>
   </UIResourceForm>
   <!--
@@ -285,7 +285,7 @@
       <EditDocument>編輯</EditDocument>
       <Upload>上傳</Upload>
       <Paste>貼上</Paste>
-      <Search>搜索</Search>
+      <Search>搜尋</Search>
       <WatchDocument>觀注/不觀注</WatchDocument>
       <TaggingDocument>標記</TaggingDocument>
       <Vote>投票</Vote>
@@ -298,9 +298,9 @@
       <ManageActions>操作</ManageActions>
       <ExportNode>匯出</ExportNode>
       <ImportNode>匯入</ImportNode>
-      <OverloadThumbnail>超載的縮略圖</OverloadThumbnail>
+      <OverloadThumbnail>超載的縮圖</OverloadThumbnail>
       <ManageHidden>顯示/隱藏內容</ManageHidden>
-      <ViewReferences>引用</ViewReferences>
+      <ViewReferences>参考</ViewReferences>
       <ViewNodeType>類型</ViewNodeType>
       <ViewPermissions>權限</ViewPermissions>
       <ViewProperties>屬性</ViewProperties>
@@ -310,12 +310,12 @@
     </tooltip>
     <msg>
       <cannot-action-in-rootnode>您不能在根節點中執行此操作。</cannot-action-in-rootnode>
-      <node-checkedin>您必須簽出第一次。</node-checkedin>
+      <node-checkedin>您必須檢查一次。</node-checkedin>
       <cannot-enable-version-rootnode>根節點不能啟用版本控制。</cannot-enable-version-rootnode>
       <cannot-enable-publication-rootnode>根節點不能啟用出版。</cannot-enable-publication-rootnode>
       <manage-publication>
         <not-supported-nodetype>發佈僅限支援文件節點。</not-supported-nodetype>
-        <no-publication-lifecycle>配置沒有發佈生命週期。</no-publication-lifecycle>
+        <no-publication-lifecycle>沒有發佈生命週期的配置。</no-publication-lifecycle>
       </manage-publication>
       <unsubcriber-lifecycle>該節點已經取消訂閱。</unsubcriber-lifecycle>
       <not-supported-nodetype>未訂閱的生命週期僅限支援文件節點。</not-supported-nodetype>
@@ -328,15 +328,15 @@
       <unable-edit>節點 '{0}' 與節點類型'{1}' 不支援編輯。</unable-edit>
       <not-support>不能編輯選定的節點。</not-support>
       <template-null>此節點有沒有可用的對話方塊。</template-null>
-      <keyword-null>沒有要搜索的關鍵字。</keyword-null>
+      <keyword-null>沒有要搜尋的關鍵字。</keyword-null>
       <not-found>沒有找到結果。</not-found>
       <keyword-not-allow>不允許使用此關鍵字。</keyword-not-allow>
       <is-not-referenable>節點"{0}"不能被引用。</is-not-referenable>
       <access-denied>訪問被拒絕。你在此節點中沒有編輯權限。</access-denied>
       <access-add-denied>訪問被拒絕。你在此節點中沒有增加權限。</access-add-denied>
       <item-existed>此節點已存在。它不能有相同名稱作為其兄弟。</item-existed>
-      <removed-hidden-mixin>您成功刪除隱藏廠拌。</removed-hidden-mixin>
-      <added-hidden-mixin>您成功增加隱藏廠拌了。</added-hidden-mixin>
+      <removed-hidden-mixin>您成功刪除隱藏混合。</removed-hidden-mixin>
+      <added-hidden-mixin>您成功增加隱藏混合。</added-hidden-mixin>
       <not-supported>文件類型僅支援此功能。</not-supported>
       <empty-file-type>您不能將文件增加到此節點。</empty-file-type>
       <unsupported-watch>只有文件節點可以看。</unsupported-watch>
@@ -669,14 +669,14 @@
     </confirm>
     <header>
       <name>名稱</name>
-      <multiValue>Multi Value</multiValue>
+      <multiValue>多值</multiValue>
       <value>值</value>
       <action>操作</action>
     </header>
     <label>
-      <binary>Binary Data</binary>
+      <binary>二進位資料</binary>
       <notavailable>N/A</notavailable>
-      <cannotget>Cannot get values</cannotget>
+      <cannotget>無法獲取值</cannotget>
     </label>
     <action>
       <Close>#{word.close}</Close>
@@ -693,26 +693,26 @@
   #############################################################################
   -->
   <UIPropertyForm>
-    <title>Add/Edit Property</title>
+    <title>添加/編輯屬性</title>
     <label>
       <name>名稱：</name>
       <type>類型：</type>
-      <value>Value:</value>
+      <value>值：</value>
       <upload>上傳:</upload>
-      <namespace>Namespace:</namespace>
-      <multiple>Multiple:</multiple>
-      <property_select>Add New Property:</property_select>
-      <value0>Value 0</value0>
-      <value1>Value 1</value1>
-      <value2>Value 2</value2>
-      <value3>Value 3</value3>
-      <value4>Value 4</value4>
-      <value5>Value 5</value5>
-      <value6>Value 6</value6>
-      <value7>Value 7</value7>
-      <value8>Value 8</value8>
-      <value9>Value 9</value9>
-      <value10>Value 10</value10>
+      <namespace>命名空間</namespace>
+      <multiple>多重的</multiple>
+      <property_select>添加新的屬性：</property_select>
+      <value0>值為 0</value0>
+      <value1>值為 1</value1>
+      <value2>值為 2</value2>
+      <value3>值為 3</value3>
+      <value4>值為 4</value4>
+      <value5>值為 5</value5>
+      <value6>值為 6</value6>
+      <value7>值為 7</value7>
+      <value8>值為 8</value8>
+      <value9>值為 9</value9>
+      <value10>值為 10</value10>
     </label>
     <action>
       <Save>#{word.save}</Save>
@@ -720,17 +720,17 @@
       <Reset>重置</Reset>
     </action>
     <msg>
-      <name-invalid>Please enter the property name.</name-invalid>
-      <unable-create>Cannot add properties.</unable-create>
-      <value-invalid>Please enter the value.</value-invalid>
-      <node-checkedin>You must check out this node before adding a property.</node-checkedin>
-      <can-not-add>You cannot add properties to this node. This is only allowed for the node type nt:unstructured.</can-not-add>
-      <propertyName-invalid>The property name must include namespace (e.g. namespace:name).</propertyName-invalid>
-      <propertyName-exist>The property '{0}' already exists.</propertyName-exist>
-      <propertyValu-null>Some values may be null.</propertyValu-null>
-      <valueFormatEx>You cannot assign a multiple-valued value to a single-valued property.</valueFormatEx>
-      <number-format-exception>Your input value has the wrong format.</number-format-exception>
-      <property-not-exist>The property {0} doesn't exist.</property-not-exist>
+      <name-invalid>請輸入屬性名稱。</name-invalid>
+      <unable-create>不能添加屬性。</unable-create>
+      <value-invalid>請輸入的值。</value-invalid>
+      <node-checkedin>添加一個屬性之前，您必須退出此節點。</node-checkedin>
+      <can-not-add>不能將屬性添加到此節點。這唯一允許的節點類型 nt： 非結構化。</can-not-add>
+      <propertyName-invalid>屬性名稱必須包括命名空間 （例如 命名空間:名字）。</propertyName-invalid>
+      <propertyName-exist>屬性"{0}"已經存在。</propertyName-exist>
+      <propertyValu-null>一些值可能為無效。</propertyValu-null>
+      <valueFormatEx>不能將一個多值的值分配給一個單值的屬性。</valueFormatEx>
+      <number-format-exception>您輸入的值具有錯誤的格式。</number-format-exception>
+      <property-not-exist>屬性 {0} 不存在。</property-not-exist>
     </msg>
   </UIPropertyForm>
 
@@ -743,28 +743,28 @@
     <action>
       <title>
         <Edit>編輯</Edit>
-        <Delete>Remove Permission</Delete>
+        <Delete>刪除權限</Delete>
       </title>
     </action>
     <header>
       <usersOrGroups>使用者或群組</usersOrGroups>
-      <read>Read</read>
-      <addNode>Modify</addNode>
+      <read>讀取</read>
+      <addNode>修改</addNode>
       <remove>刪除</remove>
       <action>操作</action>
     </header>
     <msg>
-      <confirm-delete-permission>Are you sure you want to remove this permission?</confirm-delete-permission>
-      <no-permission-tochange>You do not have the right to remove permission.</no-permission-tochange>
-      <no-permission-remove>You cannot remove the owner.</no-permission-remove>
-      <access-denied>Access denied. You cannot remove this permission.</access-denied>
+      <confirm-delete-permission>確定要刪除此權限嗎?</confirm-delete-permission>
+      <no-permission-tochange>您沒有刪除此權限的權利。</no-permission-tochange>
+      <no-permission-remove>您不能刪除所有者。</no-permission-remove>
+      <access-denied>訪問被拒絕。您不能刪除此權限。</access-denied>
     </msg>
   </UIPermissionInfo>
   <permission>
     <title>
       <SelectUser>選擇使用者</SelectUser>
       <SelectMember>選擇成員身份</SelectMember>
-      <AddAny>Select Everyone</AddAny>
+      <AddAny>選擇所有人</AddAny>
     </title>
   </permission>
   <!--
@@ -775,17 +775,17 @@
   <SelectUserOrGroup>
     <title>
       <UIGroupSelector>選擇使用者</UIGroupSelector>
-      <UIPermissionSelector>Select Member</UIPermissionSelector>
+      <UIPermissionSelector>選擇成員</UIPermissionSelector>
       <UIGroupMemberSelector>選擇成員身份</UIGroupMemberSelector>
     </title>
   </SelectUserOrGroup>
   <UIGroupSelector>
     <label>
-      <selectGroup>Browse and Select a Group</selectGroup>
+      <selectGroup>瀏覽並選擇一個群組</selectGroup>
       <selectUser>選擇使用者</selectUser>
     </label>
     <msg>
-      <not-change-owner>'{0}' is the owner of this node and has full control permission.</not-change-owner>
+      <not-change-owner>'{0}' 是此節點的擁有者和具有完全控制權限。</not-change-owner>
     </msg>
   </UIGroupSelector>
   <UIPermissionForm>
@@ -793,20 +793,20 @@
       <UIPopupWindow>選擇</UIPopupWindow>
       <permission>UIPermissionForm</permission>
       <userOrGroup>使用者或群組</userOrGroup>
-      <read>Read Right</read>
-      <add_node>Modify Right</add_node>
-      <remove>Remove Right</remove>
+      <read>閱讀權</read>
+      <add_node>修改權</add_node>
+      <remove>刪除的權利</remove>
     </label>
-    <title>Add a permission to that node</title>
+    <title>增加權限到該節點</title>
     <action>
       <Close>#{word.close}</Close>
       <Save>#{word.save}</Save>
       <Reset>重置</Reset>
     </action>
     <msg>
-      <checkbox-require>Please select at least one permission.</checkbox-require>
-      <userOrGroup-required>Please select a user or group before saving this permission.</userOrGroup-required>
-      <not-change-permission>You do not have the right to add a permission.</not-change-permission>
+      <checkbox-require>請至少選擇一個權限。</checkbox-require>
+      <userOrGroup-required>保存權限之前，請先選擇使用者或群組。</userOrGroup-required>
+      <not-change-permission>你並沒有增加權限的權利。</not-change-permission>
       <access-denied>訪問被拒絕。您不能刪除此權限。</access-denied>
     </msg>
   </UIPermissionForm>
@@ -818,26 +818,26 @@
   -->
   <UINodeTypeInfo>
     <label>
-      <node-type>Node Type</node-type>
+      <node-type>節點類型</node-type>
       <name>名稱</name>
-      <item>Primary Item Name</item>
-      <super-types>Parent Types</super-types>
-      <mixin>Mixin Node Type</mixin>
-      <orderable-children>Orderable Children</orderable-children>
-      <property-def>Node Property Definition</property-def>
+      <item>主要項目名稱</item>
+      <super-types>父類型</super-types>
+      <mixin>混合節點類型</mixin>
+      <orderable-children>兒童可訂購</orderable-children>
+      <property-def>節點屬性定義</property-def>
       <prop-name>名稱</prop-name>
       <prop-type>類型</prop-type>
       <prop-multiple>Mul</prop-multiple>
-      <prop-mandatory>Man</prop-mandatory>
-      <prop-protected>Pr</prop-protected>
+      <prop-mandatory>男子</prop-mandatory>
+      <prop-protected>PR</prop-protected>
       <prop-auto-create>AC</prop-auto-create>
       <prop-default-values><![CDATA[<span title="Default Values">DV</span>]]></prop-default-values>
       <prop-constraints><![CDATA[<span title="Constraints Values">CV</span>]]></prop-constraints>
-      <node-def>Child Node Definition</node-def>
+      <node-def>子節點定義</node-def>
       <node-def-name>名稱</node-def-name>
       <node-def-opv>OPV</node-def-opv>
       <node-def-ac>交流</node-def-ac>
-      <node-def-man>MAN</node-def-man>
+      <node-def-man>男子</node-def-man>
       <node-def-pr>PR</node-def-pr>
       <node-def-dnt>DNT</node-def-dnt>
     </label>
@@ -862,8 +862,8 @@
   </UICategoryManagerSearch>
   <UIContentNameSearch>
     <label>
-      <keyword>Content Name:</keyword>
-      <location>Search in this location:</location>
+      <keyword>內容名稱：</keyword>
+      <location>在此位置中搜尋：</location>
     </label>
     <action>
       <Search>搜索</Search>
@@ -875,39 +875,39 @@
   </UIContentNameSearch>
   <UISimpleSearch>
     <action>
-      <MoreConstraints>Show/Hide Constraint Form</MoreConstraints>
+      <MoreConstraints>顯示/隱藏約束表單</MoreConstraints>
       <Search>搜索</Search>
       <Save>#{word.save}</Save>
       <Cancel>#{word.cancel}</Cancel>
     </action>
     <label>
       <moreConstraints>UISimpleSearch</moreConstraints>
-      <firstOperator>Operator:</firstOperator>
-      <input>A word or phrase in content:</input>
-      <constraints>More Constraints:</constraints>
-      <nodePath>Current Location:</nodePath>
+      <firstOperator>運算子</firstOperator>
+      <input>單詞或短語的內容：</input>
+      <constraints>更多的限制：</constraints>
+      <nodePath>目前位置</nodePath>
     </label>
     <msg>
-      <keyword-null>Please enter your keyword.</keyword-null>
+      <keyword-null>請輸入您的關鍵字。</keyword-null>
       <not-found>沒有找到結果。</not-found>
       <keyword-not-allow>不允許使用此關鍵字。</keyword-not-allow>
-      <value-null>Please enter your keyword or constraints.</value-null>
-      <value-save-null>Please enter a keyword or constraints before saving this query.</value-save-null>
-      <inputSearch-invalid>There are invalid characters in the search input.</inputSearch-invalid>
-      <query-invalid>The query is invalid. Please check your constraint.</query-invalid>
+      <value-null>請輸入您的關鍵字或限制。</value-null>
+      <value-save-null>請儲存此查詢之前，輸入關鍵字或限制。</value-save-null>
+      <inputSearch-invalid>在搜尋輸入中有無效字元。</inputSearch-invalid>
+      <query-invalid>該查詢是不正確。請檢查您的限制。</query-invalid>
     </msg>
   </UISimpleSearch>
   <ViewSearch>
     <title>
-      <UIViewSearchResult>View Template</UIViewSearchResult>
+      <UIViewSearchResult>檢視範本：</UIViewSearchResult>
     </title>
   </ViewSearch>
   <UISearchResult>
     <msg>
-      <not-support>There is no View template for this node.</not-support>
+      <not-support>沒有此節點的檢視範本。</not-support>
       <empty>沒有找到結果。</empty>
-      <access-denied>You cannot open this folder, either because it no longer exists or because you do not have the right to access it.</access-denied>
-      <query-invalid>The query is invalid.</query-invalid>
+      <access-denied>你不能打開此資料夾，因為它已經不存在或者您沒有使用它的權利。</access-denied>
+      <query-invalid>該查詢不正確。</query-invalid>
     </msg>
     <header>
       <name>#{word.name}</name>
@@ -919,26 +919,26 @@
       <score>得分</score>
     </header>
     <title>
-      <typeASC>Sort by document type in ascending order</typeASC>
-      <typeDESC>Sort by document type in descending order</typeDESC>
-      <scoreASC>Sort by score in ascending order</scoreASC>
-      <scoreDESC>Sort by score in descending order</scoreDESC>
-      <nameASC>Sort by name in ascending order</nameASC>
-      <nameDESC>Sort by name in descending order</nameDESC>
-      <datecreatedASC>Sort by created date in ascending order</datecreatedASC>
-      <datecreatedDESC>Sort by created date in descending order</datecreatedDESC>
+      <typeASC>按文件類型升序排序</typeASC>
+      <typeDESC>按文件類型降序排序</typeDESC>
+      <scoreASC>按分數升序排序</scoreASC>
+      <scoreDESC>按分數降序排序</scoreDESC>
+      <nameASC>按名稱升序排序</nameASC>
+      <nameDESC>按名稱降序排序</nameDESC>
+      <datecreatedASC>按建立日期升序排序</datecreatedASC>
+      <datecreatedDESC>按建立日期降序排序</datecreatedDESC>
     </title>
     <tooltip>
-      <View>View this node</View>
-      <OpenFolder>Go to folder</OpenFolder>
+      <View>查看此節點</View>
+      <OpenFolder>轉到資料夾</OpenFolder>
     </tooltip>
   </UISearchResult>
   <UIShowAllOwnedByUserResult>
     <msg>
-      <not-support>There is no View template for this node</not-support>
+      <not-support>沒有此節點的檢視範本。</not-support>
       <empty>沒有找到結果。</empty>
-      <access-denied>You cannot view this node, either because this template is not supported or because access is denied.</access-denied>
-      <query-invalid>The query is invalid</query-invalid>
+      <access-denied>您不能查看此節點，因為此範本不受支援，或訪問被拒絕。</access-denied>
+      <query-invalid>查詢無效</query-invalid>
     </msg>
     <header>
       <name>#{word.name}</name>
@@ -956,18 +956,18 @@
       <scoreDESC>按分數降冪排序</scoreDESC>
       <nameASC>按名稱昇冪排序</nameASC>
       <nameDESC>按名稱降冪排序</nameDESC>
-      <datecreatedASC>Sort by Created date in ascending order</datecreatedASC>
-      <datecreatedDESC>Sort by Created date in descending order</datecreatedDESC>
+      <datecreatedASC>按建立日期升序排序</datecreatedASC>
+      <datecreatedDESC>按建立日期降序排序</datecreatedDESC>
     </title>
     <tooltip>
       <View>查看此節點</View>
-      <OpenFolder>Go to Folder</OpenFolder>
+      <OpenFolder>轉到資料夾</OpenFolder>
     </tooltip>
   </UIShowAllOwnedByUserResult>
   <UIShowAllFavouriteResult>
     <msg>
       <not-support>沒有此節點的視圖範本。</not-support>
-      <empty>No results found</empty>
+      <empty>沒找到結果。</empty>
       <access-denied>您不能查看此節點，因為此範本不受支援，或訪問被拒絕。</access-denied>
       <query-invalid>查詢無效</query-invalid>
     </msg>
@@ -1074,15 +1074,15 @@
       <Cancel>#{word.cancel}</Cancel>
     </action>
     <msg>
-      <properties-required>The Property name is required.</properties-required>
-      <value-required>The Value field is required.</value-required>
-      <date-invalid>The From date must be earlier than the To date.</date-invalid>
+      <properties-required>屬性名稱是必需的。</properties-required>
+      <value-required>值欄位是必需的。</value-required>
+      <date-invalid>開始日期必須早於結束日期。</date-invalid>
       <fromDate-required>開始日期是必需的。</fromDate-required>
-      <must-choose-one>You have to select at least one type.</must-choose-one>
-      <properties-null>Select properties first, then filter.</properties-null>
-      <exactly-require>You have to fill in the Value exactly before saving this constraint.</exactly-require>
-      <fromDate-invalid>Invalid type in the 'From' field. Please reselect or type correctly.</fromDate-invalid>
-      <toDate-invalid>Invalid type in the 'To' field. Please reselect or type correctly.</toDate-invalid>
+      <must-choose-one>您必須選擇至少一種類型。</must-choose-one>
+      <properties-null>首先，選擇屬性，然後篩選。</properties-null>
+      <exactly-require>您必須在儲存此限制之前準確填寫數值</exactly-require>
+      <fromDate-invalid>無效的類型在“從”字段中。請重新選擇或輸入正確。</fromDate-invalid>
+      <toDate-invalid>無效的類型在“從”字段中。請重新選擇或輸入正確。</toDate-invalid>
     </msg>
     <button>
       <label-Add>新增</label-Add>
@@ -1097,10 +1097,10 @@
   </ConstraintsForm>
   <UIConstraintForm>
     <tooltip>
-      <AddMetadataType>Add Property</AddMetadataType>
-      <AddNodeType>Add Node Type</AddNodeType>
+      <AddMetadataType>增加屬性</AddMetadataType>
+      <AddNodeType>增加節點類型</AddNodeType>
       <AddCategory>新增類別</AddCategory>
-      <FindExactly>Find Exactly</FindExactly>
+      <FindExactly>確切地找到</FindExactly>
     </tooltip>
     <label>
       <colon>:</colon>
@@ -2574,7 +2574,7 @@
       <nt_unstructured>內容資料夾</nt_unstructured>
       <exo_cssFolder>CSS 資料夾</exo_cssFolder>
       <exo_jsFolder>Javascript 資料夾</exo_jsFolder>
-      <exo_linkFolder>Link Folder</exo_linkFolder>
+      <exo_linkFolder>連結資料夾</exo_linkFolder>
       <exo_webFolder>Web 內容資料夾</exo_webFolder>
    </label>
   </UIFolderForm>
@@ -3057,9 +3057,9 @@
       <ShowDrives>顯示磁碟機</ShowDrives>
     </DrivesArea>
     <msg>
-      <no-view-found>There are no views applied for your access permission in drive '{0}'.</no-view-found>
+      <no-view-found>你的磁碟機中沒有檢視應用的權限 '{0}'.</no-view-found>
       <access-denied>訪問被拒絕。您可能沒有在工作區中的磁碟機權限 '{0}' 。</access-denied>
-      <empty-drives>Access denied. Either there is no drive in this repository or you do not have permission to access any drives in this repository.</empty-drives>
+      <empty-drives>訪問被拒絕。此資料庫中有沒有磁碟機，或者您沒有權限訪問此儲存庫中的任何磁碟機。</empty-drives>
       <workspace-not-exist>磁碟機 '{0}' 存儲在一個無法識別的工作區中。請重新配置此磁碟機。</workspace-not-exist>
     </msg>
   </UIDrivesArea>
@@ -3088,9 +3088,9 @@
   <true>對</true>
   <false>錯</false>
   <Electronic>電子</Electronic>
-  <Paper>Paper</Paper>
+  <Paper>紙張</Paper>
   <NONE>無</NONE>
-  <CLASSIFIED>Classified</CLASSIFIED>
+  <CLASSIFIED>分類</CLASSIFIED>
   <UNCLASSIFIED>未分類</UNCLASSIFIED>
   <NOCONTRACT>沒有合約</NOCONTRACT>
   <one-minute>一分鐘</one-minute>
