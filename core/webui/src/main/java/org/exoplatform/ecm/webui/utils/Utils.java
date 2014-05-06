@@ -47,6 +47,7 @@ import javax.jcr.nodetype.NodeTypeManager;
 import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
 
+import org.apache.commons.lang.StringEscapeUtils;
 import org.apache.commons.lang.StringUtils;
 import org.exoplatform.container.ExoContainer;
 import org.exoplatform.container.ExoContainerContext;
@@ -729,7 +730,7 @@ public class Utils {
         if(propertyName.equals(EXO_TITLE))
           return ContentReader.getXSSCompatibilityContent(orgNode.getProperty(propertyName).getString());
         if (org.exoplatform.wcm.webui.Utils.getCurrentMode().equals(WCMComposer.MODE_LIVE))
-          return StringUtils.replace(orgNode.getProperty(propertyName).getString(),"{portalName}",siteName);
+          return StringEscapeUtils.unescapeHtml(StringUtils.replace(orgNode.getProperty(propertyName).getString(),"{portalName}",siteName));
         else 
         	return "<div class=\"WCMInlineEditable\" contenteditable=\"true\" propertyName=\""+propertyName+"\" repo=\""+repo+"\" workspace=\""+workspace+"\"" +
         			" uuid=\""+uuid+"\" siteName=\""+siteName+"\" publishedMsg=\""+published+"\" draftMsg=\""+draft+"\" fastpublishlink=\""+publishLink+"\" language=\""+language+"\" >" + 
