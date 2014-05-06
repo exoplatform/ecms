@@ -2,35 +2,35 @@
 <bundle>
   <UIDefaultSearchForm>
     <label>
-      <keyword>Ключове слово</keyword>
-      <portal>Портал</portal>
-      <Page>Сторінка</Page>
-      <Document>Документ</Document>
+      <keyword>ÐÐ»ÑÑÐ¾Ð²Ðµ ÑÐ»Ð¾Ð²Ð¾</keyword>
+      <portal>ÐÐ¾ÑÑÐ°Ð»</portal>
+      <Page>Ð¡ÑÐ¾ÑÑÐ½ÐºÐ°</Page>
+      <Document>ÐÐ¾ÐºÑÐ¼ÐµÐ½Ñ</Document>
     </label>
     <action>
-      <Search>Пошук</Search>
+      <Search>ÐÐ¾ÑÑÐº</Search>
     </action>
   </UIDefaultSearchForm>
 
   <UIDefaultSearchResult>
     <label>
-      <Page>Сторінка</Page>
-      <Document>Документ</Document>
-      <DocumentAndPage>Документ та сторінка</DocumentAndPage>
-      <documentandpage>Документ та сторінка</documentandpage>
-      <resutlsCaption>Результати</resutlsCaption>
-      <ofAboutCaption>близько</ofAboutCaption>
-      <forCaption>для</forCaption>
-      <timeUnitCaption>секунд</timeUnitCaption>
-      <similar>Сторінки, де з'являється той же зміст</similar>
-      <editor>Редактор</editor>
-      <date>Дата</date>
-      <relevancy>Релевантність</relevancy>
-      <title>Назва</title>
-      <sortBy>Сортувати по:</sortBy>
+      <Page>Ð¡ÑÐ¾ÑÑÐ½ÐºÐ°</Page>
+      <Document>ÐÐ¾ÐºÑÐ¼ÐµÐ½Ñ</Document>
+      <DocumentAndPage>ÐÐ¾ÐºÑÐ¼ÐµÐ½Ñ ÑÐ° ÑÑÐ¾ÑÑÐ½ÐºÐ°</DocumentAndPage>
+      <documentandpage>ÐÐ¾ÐºÑÐ¼ÐµÐ½Ñ ÑÐ° ÑÑÐ¾ÑÑÐ½ÐºÐ°</documentandpage>
+      <resutlsCaption>Ð ÐµÐ·ÑÐ»ÑÑÐ°ÑÐ¸</resutlsCaption>
+      <ofAboutCaption>Ð±Ð»Ð¸Ð·ÑÐºÐ¾</ofAboutCaption>
+      <forCaption>Ð´Ð»Ñ</forCaption>
+      <timeUnitCaption>ÑÐµÐºÑÐ½Ð´</timeUnitCaption>
+      <similar>Ð¡ÑÐ¾ÑÑÐ½ÐºÐ¸, Ð´Ðµ Ð·'ÑÐ²Ð»ÑÑÑÑÑÑ ÑÐ¾Ð¹ Ð¶Ðµ Ð·Ð¼ÑÑÑ</similar>
+      <editor>Ð ÐµÐ´Ð°ÐºÑÐ¾Ñ</editor>
+      <date>ÐÐ°ÑÐ°</date>
+      <relevancy>Ð ÐµÐ»ÐµÐ²Ð°Ð½ÑÐ½ÑÑÑÑ</relevancy>
+      <title>ÐÐ°Ð·Ð²Ð°</title>
+      <sortBy>Ð¡Ð¾ÑÑÑÐ²Ð°ÑÐ¸ Ð¿Ð¾:</sortBy>
     </label>
     <action>
-      <edit>Редагувати</edit>
+      <edit>Ð ÐµÐ´Ð°Ð³ÑÐ²Ð°ÑÐ¸</edit>
     </action>
     <msg>
       <your-search>Your search</your-search>
@@ -40,17 +40,17 @@
   </UIDefaultSearchResult>
   <UISearchPageLayoutManager>
     <label>
-      <itemsPerPageSelector>Результатів на сторінці</itemsPerPageSelector>
-      <searchFormSelector>Форма пошуку шаблону</searchFormSelector>
-      <searchResultSelector>Шаблон результатів пошуку</searchResultSelector>
-      <searchPaginatorSelector>Пошук шаблону розбивки на сторінки</searchPaginatorSelector>
-      <searchPageLayoutSelector>Пошук макету сторінки-шаблону</searchPageLayoutSelector>
-      <searchResultBasePathInputSetAction>Основний шлях</searchResultBasePathInputSetAction>
-      <pageMode>Режим сторінки</pageMode>
+      <itemsPerPageSelector>Ð ÐµÐ·ÑÐ»ÑÑÐ°ÑÑÐ² Ð½Ð° ÑÑÐ¾ÑÑÐ½ÑÑ</itemsPerPageSelector>
+      <searchFormSelector>Ð¤Ð¾ÑÐ¼Ð° Ð¿Ð¾ÑÑÐºÑ ÑÐ°Ð±Ð»Ð¾Ð½Ñ</searchFormSelector>
+      <searchResultSelector>Ð¨Ð°Ð±Ð»Ð¾Ð½ ÑÐµÐ·ÑÐ»ÑÑÐ°ÑÑÐ² Ð¿Ð¾ÑÑÐºÑ</searchResultSelector>
+      <searchPaginatorSelector>ÐÐ¾ÑÑÐº ÑÐ°Ð±Ð»Ð¾Ð½Ñ ÑÐ¾Ð·Ð±Ð¸Ð²ÐºÐ¸ Ð½Ð° ÑÑÐ¾ÑÑÐ½ÐºÐ¸</searchPaginatorSelector>
+      <searchPageLayoutSelector>ÐÐ¾ÑÑÐº Ð¼Ð°ÐºÐµÑÑ ÑÑÐ¾ÑÑÐ½ÐºÐ¸-ÑÐ°Ð±Ð»Ð¾Ð½Ñ</searchPageLayoutSelector>
+      <searchResultBasePathInputSetAction>ÐÑÐ½Ð¾Ð²Ð½Ð¸Ð¹ ÑÐ»ÑÑ</searchResultBasePathInputSetAction>
+      <pageMode>Ð ÐµÐ¶Ð¸Ð¼ ÑÑÐ¾ÑÑÐ½ÐºÐ¸</pageMode>
       <option>
-        <none>Жоден</none>
-        <more>Більше</more>
-        <pagination>Розбивка на сторінки</pagination>
+        <none>ÐÐ¾Ð´ÐµÐ½</none>
+        <more>ÐÑÐ»ÑÑÐµ</more>
+        <pagination>Ð Ð¾Ð·Ð±Ð¸Ð²ÐºÐ° Ð½Ð° ÑÑÐ¾ÑÑÐ½ÐºÐ¸</pagination>
       </option>
     </label>
     <action>
@@ -60,38 +60,38 @@
   </UISearchPageLayoutManager>
   <searchResultBasePathInputSetAction>
     <title>
-      <SelectBasePath>Виберіть основний шлях</SelectBasePath>
+      <SelectBasePath>ÐÐ¸Ð±ÐµÑÑÑÑ Ð¾ÑÐ½Ð¾Ð²Ð½Ð¸Ð¹ ÑÐ»ÑÑ</SelectBasePath>
     </title>
   </searchResultBasePathInputSetAction>  
   <UISearchForm>  
    <message>
-     <keyword-not-support>Невірне ключове слово. Деякі символи не розпізнані.</keyword-not-support>
-     <not-checked>Будь ласка, виберіть тип пошуку.</not-checked>
-     <keyword-not-empty>Будь ласка, введіть ключове слово.</keyword-not-empty>
+     <keyword-not-support>ÐÐµÐ²ÑÑÐ½Ðµ ÐºÐ»ÑÑÐ¾Ð²Ðµ ÑÐ»Ð¾Ð²Ð¾. ÐÐµÑÐºÑ ÑÐ¸Ð¼Ð²Ð¾Ð»Ð¸ Ð½Ðµ ÑÐ¾Ð·Ð¿ÑÐ·Ð½Ð°Ð½Ñ.</keyword-not-support>
+     <not-checked>ÐÑÐ´Ñ Ð»Ð°ÑÐºÐ°, Ð²Ð¸Ð±ÐµÑÑÑÑ ÑÐ¸Ð¿ Ð¿Ð¾ÑÑÐºÑ.</not-checked>
+     <keyword-not-empty>ÐÑÐ´Ñ Ð»Ð°ÑÐºÐ°, Ð²Ð²ÐµÐ´ÑÑÑ ÐºÐ»ÑÑÐ¾Ð²Ðµ ÑÐ»Ð¾Ð²Ð¾.</keyword-not-empty>
    </message>
   </UISearchForm>
   <UIPaginatorDefault>
     <label>
-      <next>Далі</next>
-      <previous>Попередній</previous>
-      <more>Більше</more>
+      <next>ÐÐ°Ð»Ñ</next>
+      <previous>ÐÐ¾Ð¿ÐµÑÐµÐ´Ð½ÑÐ¹</previous>
+      <more>ÐÑÐ»ÑÑÐµ</more>
     </label>
   </UIPaginatorDefault>
   <UISearchPageLayoutDefault>
     <label>
-      <quickEditTitle>Швидке редагування</quickEditTitle>
+      <quickEditTitle>Ð¨Ð²Ð¸Ð´ÐºÐµ ÑÐµÐ´Ð°Ð³ÑÐ²Ð°Ð½Ð½Ñ</quickEditTitle>
     </label>
   </UISearchPageLayoutDefault>
   <searchOption>
     <label>
-      <pageCheckBox>на сторінках</pageCheckBox>
-      <documentCheckBox>за змістом</documentCheckBox>
+      <pageCheckBox>Ð½Ð° ÑÑÐ¾ÑÑÐ½ÐºÐ°Ñ</pageCheckBox>
+      <documentCheckBox>Ð·Ð° Ð·Ð¼ÑÑÑÐ¾Ð¼</documentCheckBox>
     </label>
   </searchOption>
   <ViewMode>
     <label>
       <option>
-        <all>пошук всіх сайтів</all>
+        <all>Ð¿Ð¾ÑÑÐº Ð²ÑÑÑ ÑÐ°Ð¹ÑÑÐ²</all>
       </option>  
     </label>  
   </ViewMode>

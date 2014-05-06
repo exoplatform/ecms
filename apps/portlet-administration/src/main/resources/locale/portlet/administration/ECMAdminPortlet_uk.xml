@@ -8,29 +8,29 @@
   <UIECMAdminControlPanel>
     <tab>
       <label>
-        <Templates>Шаблони</Templates>
+        <Templates>Ð¨Ð°Ð±Ð»Ð¾Ð½Ð¸</Templates>
         <Explorer>Explorer</Explorer>
-        <Repository>Репозиторій</Repository>
-        <Advanced>Розширені</Advanced>
+        <Repository>Ð ÐµÐ¿Ð¾Ð·Ð¸ÑÐ¾ÑÑÐ¹</Repository>
+        <Advanced>Ð Ð¾Ð·ÑÐ¸ÑÐµÐ½Ñ</Advanced>
       </label>
     </tab>    
     <label>     
-      <UITaxonomyManagerTrees>Категорії</UITaxonomyManagerTrees>
-      <UIMetadataManager>Метадані</UIMetadataManager>
-      <UINamespaceManager>Простори імен</UINamespaceManager>
-      <UINodeTypeManager>Типи вузла</UINodeTypeManager>
-      <UITemplatesManager>Документи</UITemplatesManager>
-   <UICLVTemplatesManager>Список</UICLVTemplatesManager>
-      <UIViewManager>Перегляди</UIViewManager>
-      <UIDriveManager>Диски</UIDriveManager>
-      <UIQueriesManager>Запити</UIQueriesManager>
-      <UIActionManager>Дії</UIActionManager>
-      <UIScriptManager>Скрипти</UIScriptManager>
-      <UIUnLockManager>Замки</UIUnLockManager>
-      <UIFolksonomyManager>Теги</UIFolksonomyManager>      
+      <UITaxonomyManagerTrees>ÐÐ°ÑÐµÐ³Ð¾ÑÑÑ</UITaxonomyManagerTrees>
+      <UIMetadataManager>ÐÐµÑÐ°Ð´Ð°Ð½Ñ</UIMetadataManager>
+      <UINamespaceManager>ÐÑÐ¾ÑÑÐ¾ÑÐ¸ ÑÐ¼ÐµÐ½</UINamespaceManager>
+      <UINodeTypeManager>Ð¢Ð¸Ð¿Ð¸ Ð²ÑÐ·Ð»Ð°</UINodeTypeManager>
+      <UITemplatesManager>ÐÐ¾ÐºÑÐ¼ÐµÐ½ÑÐ¸</UITemplatesManager>
+   <UICLVTemplatesManager>Ð¡Ð¿Ð¸ÑÐ¾Ðº</UICLVTemplatesManager>
+      <UIViewManager>ÐÐµÑÐµÐ³Ð»ÑÐ´Ð¸</UIViewManager>
+      <UIDriveManager>ÐÐ¸ÑÐºÐ¸</UIDriveManager>
+      <UIQueriesManager>ÐÐ°Ð¿Ð¸ÑÐ¸</UIQueriesManager>
+      <UIActionManager>ÐÑÑ</UIActionManager>
+      <UIScriptManager>Ð¡ÐºÑÐ¸Ð¿ÑÐ¸</UIScriptManager>
+      <UIUnLockManager>ÐÐ°Ð¼ÐºÐ¸</UIUnLockManager>
+      <UIFolksonomyManager>Ð¢ÐµÐ³Ð¸</UIFolksonomyManager>      
     </label>
     <msg>
-      <access-denied>Доступ заборонено. У вас не вистачає на це права доступу.</access-denied>
+      <access-denied>ÐÐ¾ÑÑÑÐ¿ Ð·Ð°Ð±Ð¾ÑÐ¾Ð½ÐµÐ½Ð¾. Ð£ Ð²Ð°Ñ Ð½Ðµ Ð²Ð¸ÑÑÐ°ÑÐ°Ñ Ð½Ð° ÑÐµ Ð¿ÑÐ°Ð²Ð° Ð´Ð¾ÑÑÑÐ¿Ñ.</access-denied>
     </msg>
   </UIECMAdminControlPanel>
   <!--
@@ -40,24 +40,24 @@
   -->
   <UITaxonomyWorkingArea>
     <msg>
-      <referential-integrity>Не вдалося прочитати з джерела файлу або потрібна вам категорія є підкатегорією.</referential-integrity>
-      <no-taxonomy-selected>Потрібно скопіювати чи вирізати принаймні одну категорію.</no-taxonomy-selected>
-      <node-is-cutting>Не можна вставити тут. Вузол категорії '{0}' може бути вирізаний.</node-is-cutting>
-      <can-not-paste>Немає даних в буфері обміну.</can-not-paste>
-      <reference-exception>Не можна видалити цю категорію, оскільки в даний час на неї посилається контент.</reference-exception>
-      <path-error>Помилка під час видалення цього вузла категорії.</path-error>
+      <referential-integrity>ÐÐµ Ð²Ð´Ð°Ð»Ð¾ÑÑ Ð¿ÑÐ¾ÑÐ¸ÑÐ°ÑÐ¸ Ð· Ð´Ð¶ÐµÑÐµÐ»Ð° ÑÐ°Ð¹Ð»Ñ Ð°Ð±Ð¾ Ð¿Ð¾ÑÑÑÐ±Ð½Ð° Ð²Ð°Ð¼ ÐºÐ°ÑÐµÐ³Ð¾ÑÑÑ Ñ Ð¿ÑÐ´ÐºÐ°ÑÐµÐ³Ð¾ÑÑÑÑ.</referential-integrity>
+      <no-taxonomy-selected>ÐÐ¾ÑÑÑÐ±Ð½Ð¾ ÑÐºÐ¾Ð¿ÑÑÐ²Ð°ÑÐ¸ ÑÐ¸ Ð²Ð¸ÑÑÐ·Ð°ÑÐ¸ Ð¿ÑÐ¸Ð½Ð°Ð¹Ð¼Ð½Ñ Ð¾Ð´Ð½Ñ ÐºÐ°ÑÐµÐ³Ð¾ÑÑÑ.</no-taxonomy-selected>
+      <node-is-cutting>ÐÐµ Ð¼Ð¾Ð¶Ð½Ð° Ð²ÑÑÐ°Ð²Ð¸ÑÐ¸ ÑÑÑ. ÐÑÐ·Ð¾Ð» ÐºÐ°ÑÐµÐ³Ð¾ÑÑÑ '{0}' Ð¼Ð¾Ð¶Ðµ Ð±ÑÑÐ¸ Ð²Ð¸ÑÑÐ·Ð°Ð½Ð¸Ð¹.</node-is-cutting>
+      <can-not-paste>ÐÐµÐ¼Ð°Ñ Ð´Ð°Ð½Ð¸Ñ Ð² Ð±ÑÑÐµÑÑ Ð¾Ð±Ð¼ÑÐ½Ñ.</can-not-paste>
+      <reference-exception>ÐÐµ Ð¼Ð¾Ð¶Ð½Ð° Ð²Ð¸Ð´Ð°Ð»Ð¸ÑÐ¸ ÑÑ ÐºÐ°ÑÐµÐ³Ð¾ÑÑÑ, Ð¾ÑÐºÑÐ»ÑÐºÐ¸ Ð² Ð´Ð°Ð½Ð¸Ð¹ ÑÐ°Ñ Ð½Ð° Ð½ÐµÑ Ð¿Ð¾ÑÐ¸Ð»Ð°ÑÑÑÑÑ ÐºÐ¾Ð½ÑÐµÐ½Ñ.</reference-exception>
+      <path-error>ÐÐ¾Ð¼Ð¸Ð»ÐºÐ° Ð¿ÑÐ´ ÑÐ°Ñ Ð²Ð¸Ð´Ð°Ð»ÐµÐ½Ð½Ñ ÑÑÐ¾Ð³Ð¾ Ð²ÑÐ·Ð»Ð° ÐºÐ°ÑÐµÐ³Ð¾ÑÑÑ.</path-error>
     </msg>
   </UITaxonomyWorkingArea>
   <UITaxonomyManager>
     <msg>
-      <confirm-delete>Ви дійсно бажаєте видалити цю категорію?</confirm-delete>
+      <confirm-delete>ÐÐ¸ Ð´ÑÐ¹ÑÐ½Ð¾ Ð±Ð°Ð¶Ð°ÑÑÐµ Ð²Ð¸Ð´Ð°Ð»Ð¸ÑÐ¸ ÑÑ ÐºÐ°ÑÐµÐ³Ð¾ÑÑÑ?</confirm-delete>
     </msg>
     <title>
-      <add>Додати</add>
-      <paste>Вставити</paste>
-      <cut>Вирізати</cut>
-      <copy>Копіювати</copy>
-      <remove>Видалити</remove>
+      <add>ÐÐ¾Ð´Ð°ÑÐ¸</add>
+      <paste>ÐÑÑÐ°Ð²Ð¸ÑÐ¸</paste>
+      <cut>ÐÐ¸ÑÑÐ·Ð°ÑÐ¸</cut>
+      <copy>ÐÐ¾Ð¿ÑÑÐ²Ð°ÑÐ¸</copy>
+      <remove>ÐÐ¸Ð´Ð°Ð»Ð¸ÑÐ¸</remove>
     </title>
   </UITaxonomyManager>
   
@@ -69,14 +69,14 @@
   <UITaxonomyTreeContainer>
     <tab>
       <info>
-        <UITaxonomyTreeMainForm>Вкажіть ім'я категорії, робочу область та шлях особистого каталогу.</UITaxonomyTreeMainForm>
-        <UIPermissionTreeManager>Установити дозвіл для дерева категорій.</UIPermissionTreeManager>
-        <UIActionTaxonomyManager>Додати дію до дерева категорій, щоб завершити створення або оновлення.</UIActionTaxonomyManager>
-        <UITaxonomyTreeCreateChild>Редагувати дерево класифікації шляхом додавання, копіювання, вирізання та вибора дозволів.</UITaxonomyTreeCreateChild>
+        <UITaxonomyTreeMainForm>ÐÐºÐ°Ð¶ÑÑÑ ÑÐ¼'Ñ ÐºÐ°ÑÐµÐ³Ð¾ÑÑÑ, ÑÐ¾Ð±Ð¾ÑÑ Ð¾Ð±Ð»Ð°ÑÑÑ ÑÐ° ÑÐ»ÑÑ Ð¾ÑÐ¾Ð±Ð¸ÑÑÐ¾Ð³Ð¾ ÐºÐ°ÑÐ°Ð»Ð¾Ð³Ñ.</UITaxonomyTreeMainForm>
+        <UIPermissionTreeManager>Ð£ÑÑÐ°Ð½Ð¾Ð²Ð¸ÑÐ¸ Ð´Ð¾Ð·Ð²ÑÐ» Ð´Ð»Ñ Ð´ÐµÑÐµÐ²Ð° ÐºÐ°ÑÐµÐ³Ð¾ÑÑÐ¹.</UIPermissionTreeManager>
+        <UIActionTaxonomyManager>ÐÐ¾Ð´Ð°ÑÐ¸ Ð´ÑÑ Ð´Ð¾ Ð´ÐµÑÐµÐ²Ð° ÐºÐ°ÑÐµÐ³Ð¾ÑÑÐ¹, ÑÐ¾Ð± Ð·Ð°Ð²ÐµÑÑÐ¸ÑÐ¸ ÑÑÐ²Ð¾ÑÐµÐ½Ð½Ñ Ð°Ð±Ð¾ Ð¾Ð½Ð¾Ð²Ð»ÐµÐ½Ð½Ñ.</UIActionTaxonomyManager>
+        <UITaxonomyTreeCreateChild>Ð ÐµÐ´Ð°Ð³ÑÐ²Ð°ÑÐ¸ Ð´ÐµÑÐµÐ²Ð¾ ÐºÐ»Ð°ÑÐ¸ÑÑÐºÐ°ÑÑÑ ÑÐ»ÑÑÐ¾Ð¼ Ð´Ð¾Ð´Ð°Ð²Ð°Ð½Ð½Ñ, ÐºÐ¾Ð¿ÑÑÐ²Ð°Ð½Ð½Ñ, Ð²Ð¸ÑÑÐ·Ð°Ð½Ð½Ñ ÑÐ° Ð²Ð¸Ð±Ð¾ÑÐ° Ð´Ð¾Ð·Ð²Ð¾Ð»ÑÐ².</UITaxonomyTreeCreateChild>
       </info>
     </tab>
     <msg>
-      <not-exist-tree>Дерево категорій не існує.</not-exist-tree>
+      <not-exist-tree>ÐÐµÑÐµÐ²Ð¾ ÐºÐ°ÑÐµÐ³Ð¾ÑÑÐ¹ Ð½Ðµ ÑÑÐ½ÑÑ.</not-exist-tree>
     </msg>
   </UITaxonomyTreeContainer>
   
@@ -87,28 +87,28 @@
 -->
   <UITaxonomyTreeMainForm>
     <action>
-      <Reset>Reset</Reset>
+      <Reset>Ð¡ÐºÐ¸Ð½ÑÑÐ¸</Reset>
     </action>
     <msg>
-      <name-not-allowed>Заборонене ім'я</name-not-allowed>
-      <name-emty>Потрібне ім'я дерева.</name-emty>
-      <homePath-emty>Потрібний шлях в головний директорій.</homePath-emty>
-      <targetPath-emty>Потрібен шлях призначення.</targetPath-emty>
-      <taxonomytree-existed>Ім'я дерева категорії вже існує.</taxonomytree-existed>
+      <name-not-allowed>ÐÐ°Ð±Ð¾ÑÐ¾Ð½ÐµÐ½Ðµ ÑÐ¼'Ñ</name-not-allowed>
+      <name-emty>ÐÐ¾ÑÑÑÐ±Ð½Ðµ ÑÐ¼'Ñ Ð´ÐµÑÐµÐ²Ð°.</name-emty>
+      <homePath-emty>ÐÐ¾ÑÑÑÐ±Ð½Ð¸Ð¹ ÑÐ»ÑÑ Ð² Ð³Ð¾Ð»Ð¾Ð²Ð½Ð¸Ð¹ Ð´Ð¸ÑÐµÐºÑÐ¾ÑÑÐ¹.</homePath-emty>
+      <targetPath-emty>ÐÐ¾ÑÑÑÐ±ÐµÐ½ ÑÐ»ÑÑ Ð¿ÑÐ¸Ð·Ð½Ð°ÑÐµÐ½Ð½Ñ.</targetPath-emty>
+      <taxonomytree-existed>ÐÐ¼'Ñ Ð´ÐµÑÐµÐ²Ð° ÐºÐ°ÑÐµÐ³Ð¾ÑÑÑ Ð²Ð¶Ðµ ÑÑÐ½ÑÑ.</taxonomytree-existed>
     </msg>
   </UITaxonomyTreeMainForm>
 
   <TaxonomyTreeMainForm>
     <label>
-      <TaxoTreeName>Ім’я</TaxoTreeName>
-      <TaxoTreeWorkspace>Робоча область</TaxoTreeWorkspace>
-      <TaxoTreeHomePath>Маршрут особистого каталогу</TaxoTreeHomePath>
+      <TaxoTreeName>ÐÐ¼âÑ</TaxoTreeName>
+      <TaxoTreeWorkspace>Ð Ð¾Ð±Ð¾ÑÐ° Ð¾Ð±Ð»Ð°ÑÑÑ</TaxoTreeWorkspace>
+      <TaxoTreeHomePath>ÐÐ°ÑÑÑÑÑ Ð¾ÑÐ¾Ð±Ð¸ÑÑÐ¾Ð³Ð¾ ÐºÐ°ÑÐ°Ð»Ð¾Ð³Ñ</TaxoTreeHomePath>
     </label>
   </TaxonomyTreeMainForm>
 
   <TaxonomyTreeHomePath>
     <title>
-      <AddPath>Додати шлях</AddPath>
+      <AddPath>ÐÐ¾Ð´Ð°ÑÐ¸ ÑÐ»ÑÑ</AddPath>
     </title>
   </TaxonomyTreeHomePath>
   
@@ -120,17 +120,17 @@
 <UIPermissionTreeInfo>
 <action>
 <title>
-<Delete>Видалити</Delete>
-<Edit>Редагувати</Edit>
+<Delete>ÐÐ¸Ð´Ð°Ð»Ð¸ÑÐ¸</Delete>
+<Edit>Ð ÐµÐ´Ð°Ð³ÑÐ²Ð°ÑÐ¸</Edit>
 </title>
 </action>
 <header>
-<usersOrGroups>Користувач або Група</usersOrGroups>
-<read>Читати</read>
-<addNode>Додати вузол</addNode>
-<setProperty>Встановити властивість</setProperty>
-<remove>Видалити</remove>
-<action>Дія</action>
+<usersOrGroups>ÐÐ¾ÑÐ¸ÑÑÑÐ²Ð°Ñ Ð°Ð±Ð¾ ÐÑÑÐ¿Ð°</usersOrGroups>
+<read>Ð§Ð¸ÑÐ°ÑÐ¸</read>
+<addNode>ÐÐ¾Ð´Ð°ÑÐ¸ Ð²ÑÐ·Ð¾Ð»</addNode>
+<setProperty>ÐÑÑÐ°Ð½Ð¾Ð²Ð¸ÑÐ¸ Ð²Ð»Ð°ÑÑÐ¸Ð²ÑÑÑÑ</setProperty>
+<remove>ÐÐ¸Ð´Ð°Ð»Ð¸ÑÐ¸</remove>
+<action>ÐÑÑ</action>
 </header>
 </UIPermissionTreeInfo>
 
@@ -141,7 +141,7 @@
 -->
   <UIPermissionTreeForm>
     <msg>
-      <have-not-any-permission>Будь ласка, вкажіть принаймні один з дозволів для цього вузла.</have-not-any-permission>
+      <have-not-any-permission>ÐÑÐ´Ñ Ð»Ð°ÑÐºÐ°, Ð²ÐºÐ°Ð¶ÑÑÑ Ð¿ÑÐ¸Ð½Ð°Ð¹Ð¼Ð½Ñ Ð¾Ð´Ð¸Ð½ Ð· Ð´Ð¾Ð·Ð²Ð¾Ð»ÑÐ² Ð´Ð»Ñ ÑÑÐ¾Ð³Ð¾ Ð²ÑÐ·Ð»Ð°.</have-not-any-permission>
     </msg>
   </UIPermissionTreeForm>
 
@@ -152,17 +152,17 @@
 -->
 
   <UIActionForm>
-    <title>Додати дію до дерева категорій</title>
+    <title>ÐÐ¾Ð´Ð°ÑÐ¸ Ð´ÑÑ Ð´Ð¾ Ð´ÐµÑÐµÐ²Ð° ÐºÐ°ÑÐµÐ³Ð¾ÑÑÐ¹</title>
     <action>
       <Save>#{word.save}</Save>
     </action>
     <msg>
-      <name-not-allowed>Порожнє  ім'я або спеціальні символи не допускаються в імені дії.</name-not-allowed>
-      <path-invalid>Неприпустимий шлях.</path-invalid>
-      <taxonomy-existed>Дерево категорій вже існує.</taxonomy-existed>
-      <taxonomy-node-existed>Вузол  категорії вже існує.</taxonomy-node-existed>
-      <no-permission-add>Ви не маєте право додати дію.</no-permission-add>
-      <not-created-tree>Дерево категорій поки ще не створено.</not-created-tree>
+      <name-not-allowed>ÐÐ¾ÑÐ¾Ð¶Ð½Ñ  ÑÐ¼'Ñ Ð°Ð±Ð¾ ÑÐ¿ÐµÑÑÐ°Ð»ÑÐ½Ñ ÑÐ¸Ð¼Ð²Ð¾Ð»Ð¸ Ð½Ðµ Ð´Ð¾Ð¿ÑÑÐºÐ°ÑÑÑÑÑ Ð² ÑÐ¼ÐµÐ½Ñ Ð´ÑÑ.</name-not-allowed>
+      <path-invalid>ÐÐµÐ¿ÑÐ¸Ð¿ÑÑÑÐ¸Ð¼Ð¸Ð¹ ÑÐ»ÑÑ.</path-invalid>
+      <taxonomy-existed>ÐÐµÑÐµÐ²Ð¾ ÐºÐ°ÑÐµÐ³Ð¾ÑÑÐ¹ Ð²Ð¶Ðµ ÑÑÐ½ÑÑ.</taxonomy-existed>
+      <taxonomy-node-existed>ÐÑÐ·Ð¾Ð»  ÐºÐ°ÑÐµÐ³Ð¾ÑÑÑ Ð²Ð¶Ðµ ÑÑÐ½ÑÑ.</taxonomy-node-existed>
+      <no-permission-add>ÐÐ¸ Ð½Ðµ Ð¼Ð°ÑÑÐµ Ð¿ÑÐ°Ð²Ð¾ Ð´Ð¾Ð´Ð°ÑÐ¸ Ð´ÑÑ.</no-permission-add>
+      <not-created-tree>ÐÐµÑÐµÐ²Ð¾ ÐºÐ°ÑÐµÐ³Ð¾ÑÑÐ¹ Ð¿Ð¾ÐºÐ¸ ÑÐµ Ð½Ðµ ÑÑÐ²Ð¾ÑÐµÐ½Ð¾.</not-created-tree>
     </msg>
   </UIActionForm>
 
@@ -173,8 +173,8 @@
   -->
   <UITemplatesList>
     <header>
-      <name>Ім'я шаблону</name>
-      <action>Дії</action>
+      <name>ÐÐ¼'Ñ ÑÐ°Ð±Ð»Ð¾Ð½Ñ</name>
+      <action>ÐÑÑ</action>
     </header>
   </UITemplatesList>
   <!--
@@ -184,13 +184,13 @@
   -->
   <NameSpacePopup>
     <title>
-      <UINamespaceForm>Форма простору імен</UINamespaceForm>
+      <UINamespaceForm>Ð¤Ð¾ÑÐ¼Ð° Ð¿ÑÐ¾ÑÑÐ¾ÑÑ ÑÐ¼ÐµÐ½</UINamespaceForm>
     </title>
   </NameSpacePopup>
   <UINamespaceForm>
-    <title>Зареєструвати новий простір імен</title>
+    <title>ÐÐ°ÑÐµÑÑÑÑÑÐ²Ð°ÑÐ¸ Ð½Ð¾Ð²Ð¸Ð¹ Ð¿ÑÐ¾ÑÑÑÑ ÑÐ¼ÐµÐ½</title>
     <label>
-      <namespace>Префікс простору імен</namespace>
+      <namespace>ÐÑÐµÑÑÐºÑ Ð¿ÑÐ¾ÑÑÐ¾ÑÑ ÑÐ¼ÐµÐ½</namespace>
       <uri>URI</uri>
     </label>
     <action>
@@ -198,9 +198,9 @@
       <Cancel>#{word.cancel}</Cancel>
     </action>
     <msg>
-      <register-unsuccessfull>Простір імен або URI вже існує.</register-unsuccessfull>
-      <prefix-null>Будь ласка, укажіть префікс простору  імен .</prefix-null>
-      <uri-null>Будь ласка, укажіть URI простору імен.</uri-null>
+      <register-unsuccessfull>ÐÑÐ¾ÑÑÑÑ ÑÐ¼ÐµÐ½ Ð°Ð±Ð¾ URI Ð²Ð¶Ðµ ÑÑÐ½ÑÑ.</register-unsuccessfull>
+      <prefix-null>ÐÑÐ´Ñ Ð»Ð°ÑÐºÐ°, ÑÐºÐ°Ð¶ÑÑÑ Ð¿ÑÐµÑÑÐºÑ Ð¿ÑÐ¾ÑÑÐ¾ÑÑ  ÑÐ¼ÐµÐ½ .</prefix-null>
+      <uri-null>ÐÑÐ´Ñ Ð»Ð°ÑÐºÐ°, ÑÐºÐ°Ð¶ÑÑÑ URI Ð¿ÑÐ¾ÑÑÐ¾ÑÑ ÑÐ¼ÐµÐ½.</uri-null>
     </msg>
   </UINamespaceForm>
   <!--
@@ -210,17 +210,17 @@
   -->
   <UINamespaceList>
     <header>
-      <prefix>Префікс</prefix>
-      <uri>URI простору імен</uri>
-      <action>Дія</action>
+      <prefix>ÐÑÐµÑÑÐºÑ</prefix>
+      <uri>URI Ð¿ÑÐ¾ÑÑÐ¾ÑÑ ÑÐ¼ÐµÐ½</uri>
+      <action>ÐÑÑ</action>
     </header>
     <action>
-      <AddNamespace>Реєстрація</AddNamespace>
+      <AddNamespace>Ð ÐµÑÑÑÑÐ°ÑÑÑ</AddNamespace>
     </action>
   </UINamespaceList>
   <NamespacePopup>
     <title>
-      <UINamespaceForm>Зареєструвати новий простір імен</UINamespaceForm>
+      <UINamespaceForm>ÐÐ°ÑÐµÑÑÑÑÑÐ²Ð°ÑÐ¸ Ð½Ð¾Ð²Ð¸Ð¹ Ð¿ÑÐ¾ÑÑÑÑ ÑÐ¼ÐµÐ½</UINamespaceForm>
     </title>
   </NamespacePopup>
   <!--
@@ -230,30 +230,30 @@
   -->
   <UIMetadataList>
     <label>
-      <false>Хибне значення</false>
-      <true>Правильне значення</true>
-      <True>Правильне значення</True>
-      <False>Хибне значення</False>
+      <false>Ð¥Ð¸Ð±Ð½Ðµ Ð·Ð½Ð°ÑÐµÐ½Ð½Ñ</false>
+      <true>ÐÑÐ°Ð²Ð¸Ð»ÑÐ½Ðµ Ð·Ð½Ð°ÑÐµÐ½Ð½Ñ</true>
+      <True>ÐÑÐ°Ð²Ð¸Ð»ÑÐ½Ðµ Ð·Ð½Ð°ÑÐµÐ½Ð½Ñ</True>
+      <False>Ð¥Ð¸Ð±Ð½Ðµ Ð·Ð½Ð°ÑÐµÐ½Ð½Ñ</False>
     </label>
     <title>
-      <view>Перегляд</view>
-      <edit>Редагувати</edit>
-      <delete>Видалити</delete>
+      <view>ÐÐµÑÐµÐ³Ð»ÑÐ´</view>
+      <edit>Ð ÐµÐ´Ð°Ð³ÑÐ²Ð°ÑÐ¸</edit>
+      <delete>ÐÐ¸Ð´Ð°Ð»Ð¸ÑÐ¸</delete>
     </title>
     <header>
-      <icon>Піктограма</icon>
-      <name>Метадані</name>
-      <type>Тип</type>
-      <internalUse>Внутрішнє застосування</internalUse>
-      <action>Дії</action>
+      <icon>ÐÑÐºÑÐ¾Ð³ÑÐ°Ð¼Ð°</icon>
+      <name>ÐÐµÑÐ°Ð´Ð°Ð½Ñ</name>
+      <type>Ð¢Ð¸Ð¿</type>
+      <internalUse>ÐÐ½ÑÑÑÑÑÐ½Ñ Ð·Ð°ÑÑÐ¾ÑÑÐ²Ð°Ð½Ð½Ñ</internalUse>
+      <action>ÐÑÑ</action>
     </header>
     <msg>
-      <confirm-delete>Ви дійсно бажаєте видалити ці метадані?</confirm-delete>
-      <delete-successful>Успішно видалено шаблони '{0}'.</delete-successful>
-      <path-not-found-exception>Ці метадані видалено або змінено. Будь ласка, натисніть кнопку Оновити.</path-not-found-exception>
+      <confirm-delete>ÐÐ¸ Ð´ÑÐ¹ÑÐ½Ð¾ Ð±Ð°Ð¶Ð°ÑÑÐµ Ð²Ð¸Ð´Ð°Ð»Ð¸ÑÐ¸ ÑÑ Ð¼ÐµÑÐ°Ð´Ð°Ð½Ñ?</confirm-delete>
+      <delete-successful>Ð£ÑÐ¿ÑÑÐ½Ð¾ Ð²Ð¸Ð´Ð°Ð»ÐµÐ½Ð¾ ÑÐ°Ð±Ð»Ð¾Ð½Ð¸ '{0}'.</delete-successful>
+      <path-not-found-exception>Ð¦Ñ Ð¼ÐµÑÐ°Ð´Ð°Ð½Ñ Ð²Ð¸Ð´Ð°Ð»ÐµÐ½Ð¾ Ð°Ð±Ð¾ Ð·Ð¼ÑÐ½ÐµÐ½Ð¾. ÐÑÐ´Ñ Ð»Ð°ÑÐºÐ°, Ð½Ð°ÑÐ¸ÑÐ½ÑÑÑ ÐºÐ½Ð¾Ð¿ÐºÑ ÐÐ½Ð¾Ð²Ð¸ÑÐ¸.</path-not-found-exception>
     </msg>
     <action>
-      <Add>Додати метадані</Add>
+      <Add>ÐÐ¾Ð´Ð°ÑÐ¸ Ð¼ÐµÑÐ°Ð´Ð°Ð½Ñ</Add>
       <Cancel>#{word.cancel}</Cancel>
     </action>
   </UIMetadataList>
@@ -264,13 +264,13 @@
   </MetadataPopupAddNew>
   <MetadataPopupEdit>
     <title>
-      <UIMetadataForm>Редагувати шаблон метаданих</UIMetadataForm>
+      <UIMetadataForm>Ð ÐµÐ´Ð°Ð³ÑÐ²Ð°ÑÐ¸ ÑÐ°Ð±Ð»Ð¾Ð½ Ð¼ÐµÑÐ°Ð´Ð°Ð½Ð¸Ñ</UIMetadataForm>
     </title>
   </MetadataPopupEdit>
   <MetataPermissionPopup>
     <title>
-      <MetadataPermission>Встановити дозволи</MetadataPermission>
-      <QueriesPermissionBrowse>Додати дозволи</QueriesPermissionBrowse>
+      <MetadataPermission>ÐÑÑÐ°Ð½Ð¾Ð²Ð¸ÑÐ¸ Ð´Ð¾Ð·Ð²Ð¾Ð»Ð¸</MetadataPermission>
+      <QueriesPermissionBrowse>ÐÐ¾Ð´Ð°ÑÐ¸ Ð´Ð¾Ð·Ð²Ð¾Ð»Ð¸</QueriesPermissionBrowse>
     </title>
   </MetataPermissionPopup>
   <!--
@@ -279,29 +279,29 @@
   ################################################################################
   -->
   <UIMetadataForm>
-    <title>Картографування пам'яті метаданих</title>
+    <title>ÐÐ°ÑÑÐ¾Ð³ÑÐ°ÑÑÐ²Ð°Ð½Ð½Ñ Ð¿Ð°Ð¼'ÑÑÑ Ð¼ÐµÑÐ°Ð´Ð°Ð½Ð¸Ñ</title>
     <action>
       <Cancel>#{word.cancel}</Cancel>
-      <Save>Застосувати</Save>
+      <Save>ÐÐ°ÑÑÐ¾ÑÑÐ²Ð°ÑÐ¸</Save>
     </action>
     <header>
-      <icon>Піктограма</icon>
-      <label>Ім'я вузла</label>
-      <input>Дія</input>
+      <icon>ÐÑÐºÑÐ¾Ð³ÑÐ°Ð¼Ð°</icon>
+      <label>ÐÐ¼'Ñ Ð²ÑÐ·Ð»Ð°</label>
+      <input>ÐÑÑ</input>
     </header>
     <label>
-      <dialogTemplate>Шаблон діалогового вікна :</dialogTemplate>
-      <viewTemplate>Перегляд шаблону:</viewTemplate>
-      <metadataName>Назва метаданих:</metadataName>
-      <viewPermission>Права доступу:</viewPermission>
+      <dialogTemplate>Ð¨Ð°Ð±Ð»Ð¾Ð½ Ð´ÑÐ°Ð»Ð¾Ð³Ð¾Ð²Ð¾Ð³Ð¾ Ð²ÑÐºÐ½Ð° :</dialogTemplate>
+      <viewTemplate>ÐÐµÑÐµÐ³Ð»ÑÐ´ ÑÐ°Ð±Ð»Ð¾Ð½Ñ:</viewTemplate>
+      <metadataName>ÐÐ°Ð·Ð²Ð° Ð¼ÐµÑÐ°Ð´Ð°Ð½Ð¸Ñ:</metadataName>
+      <viewPermission>ÐÑÐ°Ð²Ð° Ð´Ð¾ÑÑÑÐ¿Ñ:</viewPermission>
       <permission>UIMetadataForm</permission>
-      <metadataLabel>Позначка:</metadataLabel>
+      <metadataLabel>ÐÐ¾Ð·Ð½Ð°ÑÐºÐ°:</metadataLabel>
     </label>
     <tab>
       <label>
-        <metadataTypeTab>Тип метаданих</metadataTypeTab>
-        <dialogTab>Шаблон діалогового вікна</dialogTab>
-        <viewTab>Перегляд шаблону</viewTab>
+        <metadataTypeTab>Ð¢Ð¸Ð¿ Ð¼ÐµÑÐ°Ð´Ð°Ð½Ð¸Ñ</metadataTypeTab>
+        <dialogTab>Ð¨Ð°Ð±Ð»Ð¾Ð½ Ð´ÑÐ°Ð»Ð¾Ð³Ð¾Ð²Ð¾Ð³Ð¾ Ð²ÑÐºÐ½Ð°</dialogTab>
+        <viewTab>ÐÐµÑÐµÐ³Ð»ÑÐ´ ÑÐ°Ð±Ð»Ð¾Ð½Ñ</viewTab>
       </label>
     </tab>
   </UIMetadataForm>
@@ -312,18 +312,18 @@
   -->
   <UIMetadataView>
     <header>
-      <name>Ім'я елемента</name>
-      <type>Тип</type>
-      <description>Опис</description>
-      <isMixin>змішаного типу</isMixin>
-      <orderable>Впорядковує дочірні записи</orderable>
+      <name>ÐÐ¼'Ñ ÐµÐ»ÐµÐ¼ÐµÐ½ÑÐ°</name>
+      <type>Ð¢Ð¸Ð¿</type>
+      <description>ÐÐ¿Ð¸Ñ</description>
+      <isMixin>Ð·Ð¼ÑÑÐ°Ð½Ð¾Ð³Ð¾ ÑÐ¸Ð¿Ñ</isMixin>
+      <orderable>ÐÐ¿Ð¾ÑÑÐ´ÐºÐ¾Ð²ÑÑ Ð´Ð¾ÑÑÑÐ½Ñ Ð·Ð°Ð¿Ð¸ÑÐ¸</orderable>
     </header>
     <info>
-      <description>Опис</description>
+      <description>ÐÐ¿Ð¸Ñ</description>
     </info>
     <tab>
-      <element>Елементи</element>
-      <metadataView>Інформація про метадані</metadataView>
+      <element>ÐÐ»ÐµÐ¼ÐµÐ½ÑÐ¸</element>
+      <metadataView>ÐÐ½ÑÐ¾ÑÐ¼Ð°ÑÑÑ Ð¿ÑÐ¾ Ð¼ÐµÑÐ°Ð´Ð°Ð½Ñ</metadataView>
     </tab>
     <action>
       <Cancel>#{word.close}</Cancel>
@@ -332,7 +332,7 @@
   </UIMetadataView>
   <ViewMetadataPopup>
     <title>
-      <UIMetadataView>Інформація про метадані</UIMetadataView>
+      <UIMetadataView>ÐÐ½ÑÐ¾ÑÐ¼Ð°ÑÑÑ Ð¿ÑÐ¾ Ð¼ÐµÑÐ°Ð´Ð°Ð½Ñ</UIMetadataView>
     </title>
   </ViewMetadataPopup>
   <!--
@@ -342,26 +342,26 @@
   -->
   <UIDriveList>
     <header>
-      <icon>Піктограма</icon>
-      <name>Ім’я</name>
-      <workspace>Робоча область</workspace>
-      <homePath>Маршрут особистого каталогу</homePath>
-      <permissions>Права доступу</permissions>
-      <views>Перегляд</views>
-      <action>Дія</action>
+      <icon>ÐÑÐºÑÐ¾Ð³ÑÐ°Ð¼Ð°</icon>
+      <name>ÐÐ¼âÑ</name>
+      <workspace>Ð Ð¾Ð±Ð¾ÑÐ° Ð¾Ð±Ð»Ð°ÑÑÑ</workspace>
+      <homePath>ÐÐ°ÑÑÑÑÑ Ð¾ÑÐ¾Ð±Ð¸ÑÑÐ¾Ð³Ð¾ ÐºÐ°ÑÐ°Ð»Ð¾Ð³Ñ</homePath>
+      <permissions>ÐÑÐ°Ð²Ð° Ð´Ð¾ÑÑÑÐ¿Ñ</permissions>
+      <views>ÐÐµÑÐµÐ³Ð»ÑÐ´</views>
+      <action>ÐÑÑ</action>
     </header>
     <tooltip>
-      <Delete>Видалити</Delete>
-      <EditInfo>Редагувати</EditInfo>
+      <Delete>ÐÐ¸Ð´Ð°Ð»Ð¸ÑÐ¸</Delete>
+      <EditInfo>Ð ÐµÐ´Ð°Ð³ÑÐ²Ð°ÑÐ¸</EditInfo>
     </tooltip>
     <msg>
-      <confirm-delete>Ви дійсно бажаєте видалити цей диск?</confirm-delete>
+      <confirm-delete>ÐÐ¸ Ð´ÑÐ¹ÑÐ½Ð¾ Ð±Ð°Ð¶Ð°ÑÑÐµ Ð²Ð¸Ð´Ð°Ð»Ð¸ÑÐ¸ ÑÐµÐ¹ Ð´Ð¸ÑÐº?</confirm-delete>
     </msg>
     <action>
-      <AddDrive>Додати диск</AddDrive>
+      <AddDrive>ÐÐ¾Ð´Ð°ÑÐ¸ Ð´Ð¸ÑÐº</AddDrive>
     </action>
     <label>
-      <permission>{0} у {1}</permission>
+      <permission>{0} Ñ {1}</permission>
     </label>
   </UIDriveList>
   <UIDriveForm>
@@ -372,63 +372,63 @@
       <Refresh>#{word.refresh}</Refresh>
     </action>
     <msg>
-      <drive-exists>Диск уже існує.</drive-exists>
-      <workspace-path-invalid>Неприпустимий шлях до робочої області.</workspace-path-invalid>
-      <drive-views-invalid>Будь ласка виберіть вид.</drive-views-invalid>
-      <icon-not-found>Значок не знайдено.</icon-not-found>
-      <permission-null>Ви повинні встановити дозвіл для цього диска.</permission-null>
-      <allowCreateFolders>Виберіть тип папки.</allowCreateFolders>
-      <name-null>Будь ласка, введіть ім'я диска.</name-null>
-      <fileName-invalid>Ім'я диска має деякі неприпустимі символи.</fileName-invalid>
+      <drive-exists>ÐÐ¸ÑÐº ÑÐ¶Ðµ ÑÑÐ½ÑÑ.</drive-exists>
+      <workspace-path-invalid>ÐÐµÐ¿ÑÐ¸Ð¿ÑÑÑÐ¸Ð¼Ð¸Ð¹ ÑÐ»ÑÑ Ð´Ð¾ ÑÐ¾Ð±Ð¾ÑÐ¾Ñ Ð¾Ð±Ð»Ð°ÑÑÑ.</workspace-path-invalid>
+      <drive-views-invalid>ÐÑÐ´Ñ Ð»Ð°ÑÐºÐ° Ð²Ð¸Ð±ÐµÑÑÑÑ Ð²Ð¸Ð´.</drive-views-invalid>
+      <icon-not-found>ÐÐ½Ð°ÑÐ¾Ðº Ð½Ðµ Ð·Ð½Ð°Ð¹Ð´ÐµÐ½Ð¾.</icon-not-found>
+      <permission-null>ÐÐ¸ Ð¿Ð¾Ð²Ð¸Ð½Ð½Ñ Ð²ÑÑÐ°Ð½Ð¾Ð²Ð¸ÑÐ¸ Ð´Ð¾Ð·Ð²ÑÐ» Ð´Ð»Ñ ÑÑÐ¾Ð³Ð¾ Ð´Ð¸ÑÐºÐ°.</permission-null>
+      <allowCreateFolders>ÐÐ¸Ð±ÐµÑÑÑÑ ÑÐ¸Ð¿ Ð¿Ð°Ð¿ÐºÐ¸.</allowCreateFolders>
+      <name-null>ÐÑÐ´Ñ Ð»Ð°ÑÐºÐ°, Ð²Ð²ÐµÐ´ÑÑÑ ÑÐ¼'Ñ Ð´Ð¸ÑÐºÐ°.</name-null>
+      <fileName-invalid>ÐÐ¼'Ñ Ð´Ð¸ÑÐºÐ° Ð¼Ð°Ñ Ð´ÐµÑÐºÑ Ð½ÐµÐ¿ÑÐ¸Ð¿ÑÑÑÐ¸Ð¼Ñ ÑÐ¸Ð¼Ð²Ð¾Ð»Ð¸.</fileName-invalid>
     </msg>
     <tab>
       <label>
-        <DriveInputSet>Привід</DriveInputSet>
-        <ViewsInputSet>Застосувати відображення даних</ViewsInputSet>
-        <PermissionInputSet>Встановити дозволи</PermissionInputSet>
+        <DriveInputSet>ÐÑÐ¸Ð²ÑÐ´</DriveInputSet>
+        <ViewsInputSet>ÐÐ°ÑÑÐ¾ÑÑÐ²Ð°ÑÐ¸ Ð²ÑÐ´Ð¾Ð±ÑÐ°Ð¶ÐµÐ½Ð½Ñ Ð´Ð°Ð½Ð¸Ñ</ViewsInputSet>
+        <PermissionInputSet>ÐÑÑÐ°Ð½Ð¾Ð²Ð¸ÑÐ¸ Ð´Ð¾Ð·Ð²Ð¾Ð»Ð¸</PermissionInputSet>
       </label>
     </tab>
     <label>
-      <name>Ім'я:</name>
-      <workspace>Робоча область:</workspace>
-      <homePath>Маршрут особистого каталогу:</homePath>
-      <icon>Значок робочої області:</icon>
-      <viewPreferences>Показати посилальні документи:</viewPreferences>
-      <viewNonDocument>Показать вузли поза документів:</viewNonDocument>
-      <viewSideBar>Показати бічну панель:</viewSideBar>
-      <permissions>Дозволи:</permissions>
-      <showHiddenNode>Показувати приховані вузли:</showHiddenNode>
-      <allowCreateFolders>Дозволити створення папки:</allowCreateFolders>
-      <Admin>Адміністратор:</Admin>
-      <Categories>Категорії:</Categories>
-      <Icons>Значки:</Icons>
-      <List>Список:</List>
+      <name>ÐÐ¼'Ñ:</name>
+      <workspace>Ð Ð¾Ð±Ð¾ÑÐ° Ð¾Ð±Ð»Ð°ÑÑÑ:</workspace>
+      <homePath>ÐÐ°ÑÑÑÑÑ Ð¾ÑÐ¾Ð±Ð¸ÑÑÐ¾Ð³Ð¾ ÐºÐ°ÑÐ°Ð»Ð¾Ð³Ñ:</homePath>
+      <icon>ÐÐ½Ð°ÑÐ¾Ðº ÑÐ¾Ð±Ð¾ÑÐ¾Ñ Ð¾Ð±Ð»Ð°ÑÑÑ:</icon>
+      <viewPreferences>ÐÐ¾ÐºÐ°Ð·Ð°ÑÐ¸ Ð¿Ð¾ÑÐ¸Ð»Ð°Ð»ÑÐ½Ñ Ð´Ð¾ÐºÑÐ¼ÐµÐ½ÑÐ¸:</viewPreferences>
+      <viewNonDocument>ÐÐ¾ÐºÐ°Ð·Ð°ÑÑ Ð²ÑÐ·Ð»Ð¸ Ð¿Ð¾Ð·Ð° Ð´Ð¾ÐºÑÐ¼ÐµÐ½ÑÑÐ²:</viewNonDocument>
+      <viewSideBar>ÐÐ¾ÐºÐ°Ð·Ð°ÑÐ¸ Ð±ÑÑÐ½Ñ Ð¿Ð°Ð½ÐµÐ»Ñ:</viewSideBar>
+      <permissions>ÐÐ¾Ð·Ð²Ð¾Ð»Ð¸:</permissions>
+      <showHiddenNode>ÐÐ¾ÐºÐ°Ð·ÑÐ²Ð°ÑÐ¸ Ð¿ÑÐ¸ÑÐ¾Ð²Ð°Ð½Ñ Ð²ÑÐ·Ð»Ð¸:</showHiddenNode>
+      <allowCreateFolders>ÐÐ¾Ð·Ð²Ð¾Ð»Ð¸ÑÐ¸ ÑÑÐ²Ð¾ÑÐµÐ½Ð½Ñ Ð¿Ð°Ð¿ÐºÐ¸:</allowCreateFolders>
+      <Admin>ÐÐ´Ð¼ÑÐ½ÑÑÑÑÐ°ÑÐ¾Ñ:</Admin>
+      <Categories>ÐÐ°ÑÐµÐ³Ð¾ÑÑÑ:</Categories>
+      <Icons>ÐÐ½Ð°ÑÐºÐ¸:</Icons>
+      <List>Ð¡Ð¿Ð¸ÑÐ¾Ðº:</List>
       <Web>Web:</Web>
     </label>
   </UIDriveForm>
   <AddDriveManagerPopup>
     <title>
-      <UIDriveForm>Додати диск</UIDriveForm>
+      <UIDriveForm>ÐÐ¾Ð´Ð°ÑÐ¸ Ð´Ð¸ÑÐº</UIDriveForm>
     </title>
   </AddDriveManagerPopup>
   <EditDriveManagerPopup>
     <title>
-      <UIDriveForm>Редагувати диск</UIDriveForm>
+      <UIDriveForm>Ð ÐµÐ´Ð°Ð³ÑÐ²Ð°ÑÐ¸ Ð´Ð¸ÑÐº</UIDriveForm>
     </title>
   </EditDriveManagerPopup>
   <UITreeList>
     <info>
-      <child-not-found>Дочірній вузол не знайдено.</child-not-found>
+      <child-not-found>ÐÐ¾ÑÑÑÐ½ÑÐ¹ Ð²ÑÐ·Ð¾Ð» Ð½Ðµ Ð·Ð½Ð°Ð¹Ð´ÐµÐ½Ð¾.</child-not-found>
     </info>
     <header>
-      <name>Ім’я</name>
-      <action>Дія</action>
+      <name>ÐÐ¼âÑ</name>
+      <action>ÐÑÑ</action>
     </header>
   </UITreeList>
   
   <UIRepositoryList>
     <titlebar>
-      <label>Керування головними функціями ECM</label>
+      <label>ÐÐµÑÑÐ²Ð°Ð½Ð½Ñ Ð³Ð¾Ð»Ð¾Ð²Ð½Ð¸Ð¼Ð¸ ÑÑÐ½ÐºÑÑÑÐ¼Ð¸ ECM</label>
     </titlebar>
   </UIRepositoryList>
   
@@ -439,9 +439,9 @@
   -->
   <UINodeTypeManager>
     <header>
-      <icon>Піктограма</icon>
-      <label>Назва вузла</label>
-      <input>Дія</input>
+      <icon>ÐÑÐºÑÐ¾Ð³ÑÐ°Ð¼Ð°</icon>
+      <label>ÐÐ°Ð·Ð²Ð° Ð²ÑÐ·Ð»Ð°</label>
+      <input>ÐÑÑ</input>
     </header>
     <action>
       <Save>#{word.save}</Save>
@@ -454,28 +454,28 @@
   -->
   <UINodeTypeList>
     <label>
-      <true>Вірно</true>
-      <false>Невірно</false>
+      <true>ÐÑÑÐ½Ð¾</true>
+      <false>ÐÐµÐ²ÑÑÐ½Ð¾</false>
     </label>
     <header>
-      <icon>Піктограма</icon>
-      <nodeType>Тип вузла</nodeType>
-      <mixinType>Змішаний тип</mixinType>
-      <orderable>Впорядковані дочірні вузли</orderable>
-      <action>Дія</action>
+      <icon>ÐÑÐºÑÐ¾Ð³ÑÐ°Ð¼Ð°</icon>
+      <nodeType>Ð¢Ð¸Ð¿ Ð²ÑÐ·Ð»Ð°</nodeType>
+      <mixinType>ÐÐ¼ÑÑÐ°Ð½Ð¸Ð¹ ÑÐ¸Ð¿</mixinType>
+      <orderable>ÐÐ¿Ð¾ÑÑÐ´ÐºÐ¾Ð²Ð°Ð½Ñ Ð´Ð¾ÑÑÑÐ½Ñ Ð²ÑÐ·Ð»Ð¸</orderable>
+      <action>ÐÑÑ</action>
     </header>
     <action>
-      <Export>Експортувати</Export>
-      <Import>Імпорт</Import>
-      <Add>Додати</Add>
+      <Export>ÐÐºÑÐ¿Ð¾ÑÑÑÐ²Ð°ÑÐ¸</Export>
+      <Import>ÐÐ¼Ð¿Ð¾ÑÑ</Import>
+      <Add>ÐÐ¾Ð´Ð°ÑÐ¸</Add>
     </action>
     <tooltip>
-      <View>Перегляд</View>
-      <Edit>Редагувати</Edit>
-      <Delete>Видалити</Delete>
+      <View>ÐÐµÑÐµÐ³Ð»ÑÐ´</View>
+      <Edit>Ð ÐµÐ´Ð°Ð³ÑÐ²Ð°ÑÐ¸</Edit>
+      <Delete>ÐÐ¸Ð´Ð°Ð»Ð¸ÑÐ¸</Delete>
     </tooltip>
     <msg>
-      <confirm-delete>Ви дійсно бажаєте видалити цей тип вузла?</confirm-delete>
+      <confirm-delete>ÐÐ¸ Ð´ÑÐ¹ÑÐ½Ð¾ Ð±Ð°Ð¶Ð°ÑÑÐµ Ð²Ð¸Ð´Ð°Ð»Ð¸ÑÐ¸ ÑÐµÐ¹ ÑÐ¸Ð¿ Ð²ÑÐ·Ð»Ð°?</confirm-delete>
     </msg>
   </UINodeTypeList>
   <!--
@@ -486,12 +486,12 @@
   <UINodeTypeOptionList>
     <action>
       <Save>#{word.save}</Save>
-      <Add>Додати</Add>
+      <Add>ÐÐ¾Ð´Ð°ÑÐ¸</Add>
     </action>
     <header>
-      <icon>Піктограма</icon>
-      <label>Назва вузла</label>
-      <input>Дія</input>
+      <icon>ÐÑÐºÑÐ¾Ð³ÑÐ°Ð¼Ð°</icon>
+      <label>ÐÐ°Ð·Ð²Ð° Ð²ÑÐ·Ð»Ð°</label>
+      <input>ÐÑÑ</input>
     </header>
   </UINodeTypeOptionList>
   <!--
@@ -502,55 +502,55 @@
   <UINodeTypeForm>
     <tab>
       <label>
-        <nodeTypeDefinition>Тип вузла</nodeTypeDefinition>
-        <propertyDefinition>Властивість</propertyDefinition>
-        <childNodeDefinition>Дочірній вузол</childNodeDefinition>
-        <superTypeTab>Супер типи</superTypeTab>
-        <DefaultTypeTab>Первинне значення за замовчуванням</DefaultTypeTab>
-        <RequiredTypeTab>Необхідне первинне значення</RequiredTypeTab>
-        <Contraints>Обмеження</Contraints>
+        <nodeTypeDefinition>Ð¢Ð¸Ð¿ Ð²ÑÐ·Ð»Ð°</nodeTypeDefinition>
+        <propertyDefinition>ÐÐ»Ð°ÑÑÐ¸Ð²ÑÑÑÑ</propertyDefinition>
+        <childNodeDefinition>ÐÐ¾ÑÑÑÐ½ÑÐ¹ Ð²ÑÐ·Ð¾Ð»</childNodeDefinition>
+        <superTypeTab>Ð¡ÑÐ¿ÐµÑ ÑÐ¸Ð¿Ð¸</superTypeTab>
+        <DefaultTypeTab>ÐÐµÑÐ²Ð¸Ð½Ð½Ðµ Ð·Ð½Ð°ÑÐµÐ½Ð½Ñ Ð·Ð° Ð·Ð°Ð¼Ð¾Ð²ÑÑÐ²Ð°Ð½Ð½ÑÐ¼</DefaultTypeTab>
+        <RequiredTypeTab>ÐÐµÐ¾Ð±ÑÑÐ´Ð½Ðµ Ð¿ÐµÑÐ²Ð¸Ð½Ð½Ðµ Ð·Ð½Ð°ÑÐµÐ½Ð½Ñ</RequiredTypeTab>
+        <Contraints>ÐÐ±Ð¼ÐµÐ¶ÐµÐ½Ð½Ñ</Contraints>
       </label>
     </tab>
     <label>
-      <propertiesDefinitions>Визначення властивостей</propertiesDefinitions>
-      <childDefinitions>Визначення дочірніх вузлів</childDefinitions>
-      <namespace>Простір імен</namespace>
-      <propertyNamespace>Простір імен</propertyNamespace>
-      <nodeTypeName>Ім'я типу вузла</nodeTypeName>
-      <mixinType>змішаного типу</mixinType>
-      <hasOrderableChildNodes>Впорядковані дочірні вузли</hasOrderableChildNodes>
-      <primaryItemName>Ім'я первинного елемента</primaryItemName>
-      <superTypes>Супер типи</superTypes>
-      <propertyname>Ім'я визначення</propertyname>
-      <requiredType>Необхідний тип</requiredType>
-      <multiple>Є кілька</multiple>
-      <mandatory>Є обов'язковою</mandatory>
-      <autoCreated>Це створено автоматично</autoCreated>
-      <parentversion>Вихідна версія</parentversion>
-      <protected>Захищений</protected>
-      <constraints>Значення</constraints>
+      <propertiesDefinitions>ÐÐ¸Ð·Ð½Ð°ÑÐµÐ½Ð½Ñ Ð²Ð»Ð°ÑÑÐ¸Ð²Ð¾ÑÑÐµÐ¹</propertiesDefinitions>
+      <childDefinitions>ÐÐ¸Ð·Ð½Ð°ÑÐµÐ½Ð½Ñ Ð´Ð¾ÑÑÑÐ½ÑÑ Ð²ÑÐ·Ð»ÑÐ²</childDefinitions>
+      <namespace>ÐÑÐ¾ÑÑÑÑ ÑÐ¼ÐµÐ½</namespace>
+      <propertyNamespace>ÐÑÐ¾ÑÑÑÑ ÑÐ¼ÐµÐ½</propertyNamespace>
+      <nodeTypeName>ÐÐ¼'Ñ ÑÐ¸Ð¿Ñ Ð²ÑÐ·Ð»Ð°</nodeTypeName>
+      <mixinType>Ð·Ð¼ÑÑÐ°Ð½Ð¾Ð³Ð¾ ÑÐ¸Ð¿Ñ</mixinType>
+      <hasOrderableChildNodes>ÐÐ¿Ð¾ÑÑÐ´ÐºÐ¾Ð²Ð°Ð½Ñ Ð´Ð¾ÑÑÑÐ½Ñ Ð²ÑÐ·Ð»Ð¸</hasOrderableChildNodes>
+      <primaryItemName>ÐÐ¼'Ñ Ð¿ÐµÑÐ²Ð¸Ð½Ð½Ð¾Ð³Ð¾ ÐµÐ»ÐµÐ¼ÐµÐ½ÑÐ°</primaryItemName>
+      <superTypes>Ð¡ÑÐ¿ÐµÑ ÑÐ¸Ð¿Ð¸</superTypes>
+      <propertyname>ÐÐ¼'Ñ Ð²Ð¸Ð·Ð½Ð°ÑÐµÐ½Ð½Ñ</propertyname>
+      <requiredType>ÐÐµÐ¾Ð±ÑÑÐ´Ð½Ð¸Ð¹ ÑÐ¸Ð¿</requiredType>
+      <multiple>Ð ÐºÑÐ»ÑÐºÐ°</multiple>
+      <mandatory>Ð Ð¾Ð±Ð¾Ð²'ÑÐ·ÐºÐ¾Ð²Ð¾Ñ</mandatory>
+      <autoCreated>Ð¦Ðµ ÑÑÐ²Ð¾ÑÐµÐ½Ð¾ Ð°Ð²ÑÐ¾Ð¼Ð°ÑÐ¸ÑÐ½Ð¾</autoCreated>
+      <parentversion>ÐÐ¸ÑÑÐ´Ð½Ð° Ð²ÐµÑÑÑÑ</parentversion>
+      <protected>ÐÐ°ÑÐ¸ÑÐµÐ½Ð¸Ð¹</protected>
+      <constraints>ÐÐ½Ð°ÑÐµÐ½Ð½Ñ</constraints>
       <UIFormTableInputSet>UIFormTableInputSet</UIFormTableInputSet>
-      <sameNameSiblings>Таке ж ім'я, як і у спорідненого документа</sameNameSiblings>
-      <childNamespace>Простір імен</childNamespace>
-      <childMandatory>Є обов'язковою</childMandatory>
-      <childAutocreated>Це створено автоматично</childAutocreated>
-      <childParentversion>Вихідна версія</childParentversion>
-      <childProtected>Захищений</childProtected>
-      <childNodename>Ім'я визначення</childNodename>
-      <requiredPrimaryType>Необхідний первинний тип</requiredPrimaryType>
-      <defaultPrimaryType>Вихідний тип за замовчуванням</defaultPrimaryType>
-      <valueconstraints>Вимоги до значення</valueconstraints>
+      <sameNameSiblings>Ð¢Ð°ÐºÐµ Ð¶ ÑÐ¼'Ñ, ÑÐº Ñ Ñ ÑÐ¿Ð¾ÑÑÐ´Ð½ÐµÐ½Ð¾Ð³Ð¾ Ð´Ð¾ÐºÑÐ¼ÐµÐ½ÑÐ°</sameNameSiblings>
+      <childNamespace>ÐÑÐ¾ÑÑÑÑ ÑÐ¼ÐµÐ½</childNamespace>
+      <childMandatory>Ð Ð¾Ð±Ð¾Ð²'ÑÐ·ÐºÐ¾Ð²Ð¾Ñ</childMandatory>
+      <childAutocreated>Ð¦Ðµ ÑÑÐ²Ð¾ÑÐµÐ½Ð¾ Ð°Ð²ÑÐ¾Ð¼Ð°ÑÐ¸ÑÐ½Ð¾</childAutocreated>
+      <childParentversion>ÐÐ¸ÑÑÐ´Ð½Ð° Ð²ÐµÑÑÑÑ</childParentversion>
+      <childProtected>ÐÐ°ÑÐ¸ÑÐµÐ½Ð¸Ð¹</childProtected>
+      <childNodename>ÐÐ¼'Ñ Ð²Ð¸Ð·Ð½Ð°ÑÐµÐ½Ð½Ñ</childNodename>
+      <requiredPrimaryType>ÐÐµÐ¾Ð±ÑÑÐ´Ð½Ð¸Ð¹ Ð¿ÐµÑÐ²Ð¸Ð½Ð½Ð¸Ð¹ ÑÐ¸Ð¿</requiredPrimaryType>
+      <defaultPrimaryType>ÐÐ¸ÑÑÐ´Ð½Ð¸Ð¹ ÑÐ¸Ð¿ Ð·Ð° Ð·Ð°Ð¼Ð¾Ð²ÑÑÐ²Ð°Ð½Ð½ÑÐ¼</defaultPrimaryType>
+      <valueconstraints>ÐÐ¸Ð¼Ð¾Ð³Ð¸ Ð´Ð¾ Ð·Ð½Ð°ÑÐµÐ½Ð½Ñ</valueconstraints>
     </label>
     <action>
       <Cancel>#{word.cancel}</Cancel>
       <Save>#{word.save}</Save>
-      <SaveDraft>Зберегти як чернетку</SaveDraft>
-      <AddProperty>Додати властивість</AddProperty>
-      <AddChild>Додати дочірній елемент</AddChild>
-      <AddConstraints>Додати вимоги</AddConstraints>
+      <SaveDraft>ÐÐ±ÐµÑÐµÐ³ÑÐ¸ ÑÐº ÑÐµÑÐ½ÐµÑÐºÑ</SaveDraft>
+      <AddProperty>ÐÐ¾Ð´Ð°ÑÐ¸ Ð²Ð»Ð°ÑÑÐ¸Ð²ÑÑÑÑ</AddProperty>
+      <AddChild>ÐÐ¾Ð´Ð°ÑÐ¸ Ð´Ð¾ÑÑÑÐ½ÑÐ¹ ÐµÐ»ÐµÐ¼ÐµÐ½Ñ</AddChild>
+      <AddConstraints>ÐÐ¾Ð´Ð°ÑÐ¸ Ð²Ð¸Ð¼Ð¾Ð³Ð¸</AddConstraints>
       <Back>#{word.back}</Back>
-      <AddType>Додати тип</AddType>
-      <AddValue>Додати</AddValue>
+      <AddType>ÐÐ¾Ð´Ð°ÑÐ¸ ÑÐ¸Ð¿</AddType>
+      <AddValue>ÐÐ¾Ð´Ð°ÑÐ¸</AddValue>
       <CancelConstraints>#{word.cancel}</CancelConstraints>
       <CancelTab>#{word.cancel}</CancelTab>
       <UpdateChild>#{word.update}</UpdateChild>
@@ -560,62 +560,62 @@
       <Close>#{word.close}</Close>
     </action>
     <msg>
-      <register-successfully>Тип вузла '{0}' успішно зареєстровано.</register-successfully>
-      <supertype-is-madatory>Супер тип є обов'язковим при реєстрації нового типу вузла. Будь ласка, оберіть хоча б один супер тип.</supertype-is-madatory>
-      <register-failed>Реєстрація типу вузла була невдалою. Він або вже існує або супер тип є неприпустимий .</register-failed>
-      <nodeType-name>Потрібне ім'я вузла.</nodeType-name>
-      <fileName-invalid>Ім'я файлу містить деякі неприпустимі символи.</fileName-invalid>
-      <node-type-exists>Тип вузла '{0}' уже існує.</node-type-exists>
-      <node-type-name>Ім'я  типу вузла є неприпустимим.</node-type-name>
-      <values-error>Будь ласка, виберіть лише один тип вузла для первинного типу за замовчуванням.</values-error>
-      <confirm-delete-child>Ви дійсно бажаєте видалити цей дочірній вузол?</confirm-delete-child>
-      <confirm-delete-property>Ви дійсно бажаєте видалити цю властивість?</confirm-delete-property>
+      <register-successfully>Ð¢Ð¸Ð¿ Ð²ÑÐ·Ð»Ð° '{0}' ÑÑÐ¿ÑÑÐ½Ð¾ Ð·Ð°ÑÐµÑÑÑÑÐ¾Ð²Ð°Ð½Ð¾.</register-successfully>
+      <supertype-is-madatory>Ð¡ÑÐ¿ÐµÑ ÑÐ¸Ð¿ Ñ Ð¾Ð±Ð¾Ð²'ÑÐ·ÐºÐ¾Ð²Ð¸Ð¼ Ð¿ÑÐ¸ ÑÐµÑÑÑÑÐ°ÑÑÑ Ð½Ð¾Ð²Ð¾Ð³Ð¾ ÑÐ¸Ð¿Ñ Ð²ÑÐ·Ð»Ð°. ÐÑÐ´Ñ Ð»Ð°ÑÐºÐ°, Ð¾Ð±ÐµÑÑÑÑ ÑÐ¾ÑÐ° Ð± Ð¾Ð´Ð¸Ð½ ÑÑÐ¿ÐµÑ ÑÐ¸Ð¿.</supertype-is-madatory>
+      <register-failed>Ð ÐµÑÑÑÑÐ°ÑÑÑ ÑÐ¸Ð¿Ñ Ð²ÑÐ·Ð»Ð° Ð±ÑÐ»Ð° Ð½ÐµÐ²Ð´Ð°Ð»Ð¾Ñ. ÐÑÐ½ Ð°Ð±Ð¾ Ð²Ð¶Ðµ ÑÑÐ½ÑÑ Ð°Ð±Ð¾ ÑÑÐ¿ÐµÑ ÑÐ¸Ð¿ Ñ Ð½ÐµÐ¿ÑÐ¸Ð¿ÑÑÑÐ¸Ð¼Ð¸Ð¹ .</register-failed>
+      <nodeType-name>ÐÐ¾ÑÑÑÐ±Ð½Ðµ ÑÐ¼'Ñ Ð²ÑÐ·Ð»Ð°.</nodeType-name>
+      <fileName-invalid>ÐÐ¼'Ñ ÑÐ°Ð¹Ð»Ñ Ð¼ÑÑÑÐ¸ÑÑ Ð´ÐµÑÐºÑ Ð½ÐµÐ¿ÑÐ¸Ð¿ÑÑÑÐ¸Ð¼Ñ ÑÐ¸Ð¼Ð²Ð¾Ð»Ð¸.</fileName-invalid>
+      <node-type-exists>Ð¢Ð¸Ð¿ Ð²ÑÐ·Ð»Ð° '{0}' ÑÐ¶Ðµ ÑÑÐ½ÑÑ.</node-type-exists>
+      <node-type-name>ÐÐ¼'Ñ  ÑÐ¸Ð¿Ñ Ð²ÑÐ·Ð»Ð° Ñ Ð½ÐµÐ¿ÑÐ¸Ð¿ÑÑÑÐ¸Ð¼Ð¸Ð¼.</node-type-name>
+      <values-error>ÐÑÐ´Ñ Ð»Ð°ÑÐºÐ°, Ð²Ð¸Ð±ÐµÑÑÑÑ Ð»Ð¸ÑÐµ Ð¾Ð´Ð¸Ð½ ÑÐ¸Ð¿ Ð²ÑÐ·Ð»Ð° Ð´Ð»Ñ Ð¿ÐµÑÐ²Ð¸Ð½Ð½Ð¾Ð³Ð¾ ÑÐ¸Ð¿Ñ Ð·Ð° Ð·Ð°Ð¼Ð¾Ð²ÑÑÐ²Ð°Ð½Ð½ÑÐ¼.</values-error>
+      <confirm-delete-child>ÐÐ¸ Ð´ÑÐ¹ÑÐ½Ð¾ Ð±Ð°Ð¶Ð°ÑÑÐµ Ð²Ð¸Ð´Ð°Ð»Ð¸ÑÐ¸ ÑÐµÐ¹ Ð´Ð¾ÑÑÑÐ½ÑÐ¹ Ð²ÑÐ·Ð¾Ð»?</confirm-delete-child>
+      <confirm-delete-property>ÐÐ¸ Ð´ÑÐ¹ÑÐ½Ð¾ Ð±Ð°Ð¶Ð°ÑÑÐµ Ð²Ð¸Ð´Ð°Ð»Ð¸ÑÐ¸ ÑÑ Ð²Ð»Ð°ÑÑÐ¸Ð²ÑÑÑÑ?</confirm-delete-property>
     </msg>
   </UINodeTypeForm>
   <UIPropertyDefinitionForm>
     <tab>
       <label>
-        <constraints>Обмеження</constraints>
-        <UIFormMultiValueInputSet>Обмеження</UIFormMultiValueInputSet>
+        <constraints>ÐÐ±Ð¼ÐµÐ¶ÐµÐ½Ð½Ñ</constraints>
+        <UIFormMultiValueInputSet>ÐÐ±Ð¼ÐµÐ¶ÐµÐ½Ð½Ñ</UIFormMultiValueInputSet>
       </label>
     </tab>
     <msg>
-      <property-name>Ім'я визначення властивості є хибне.</property-name>
-      <not-supported-value-constraints>Цей необхідний тип не підтримує обмеження значень.</not-supported-value-constraints>
+      <property-name>ÐÐ¼'Ñ Ð²Ð¸Ð·Ð½Ð°ÑÐµÐ½Ð½Ñ Ð²Ð»Ð°ÑÑÐ¸Ð²Ð¾ÑÑÑ Ñ ÑÐ¸Ð±Ð½Ðµ.</property-name>
+      <not-supported-value-constraints>Ð¦ÐµÐ¹ Ð½ÐµÐ¾Ð±ÑÑÐ´Ð½Ð¸Ð¹ ÑÐ¸Ð¿ Ð½Ðµ Ð¿ÑÐ´ÑÑÐ¸Ð¼ÑÑ Ð¾Ð±Ð¼ÐµÐ¶ÐµÐ½Ð½Ñ Ð·Ð½Ð°ÑÐµÐ½Ñ.</not-supported-value-constraints>
     </msg>
   </UIPropertyDefinitionForm>
   <UIChildNodeDefinitionForm>
     <msg>
-      <child-name>Потрібна назва дочірнього вузла.</child-name>
-      <child-invalid>Ім'я дочірнього вузла містить недопустимі знаки.</child-invalid>
-      <default-node-type-not-found>Тип вузла за замовчуванням не знайдено.</default-node-type-not-found>
-      <requiredPrimaryType>Необхідно потрібний вихідний тип.</requiredPrimaryType>
-      <defaultPrimaryType>Потрібний вихідний тип за замовчуванням.</defaultPrimaryType>
+      <child-name>ÐÐ¾ÑÑÑÐ±Ð½Ð° Ð½Ð°Ð·Ð²Ð° Ð´Ð¾ÑÑÑÐ½ÑÐ¾Ð³Ð¾ Ð²ÑÐ·Ð»Ð°.</child-name>
+      <child-invalid>ÐÐ¼'Ñ Ð´Ð¾ÑÑÑÐ½ÑÐ¾Ð³Ð¾ Ð²ÑÐ·Ð»Ð° Ð¼ÑÑÑÐ¸ÑÑ Ð½ÐµÐ´Ð¾Ð¿ÑÑÑÐ¸Ð¼Ñ Ð·Ð½Ð°ÐºÐ¸.</child-invalid>
+      <default-node-type-not-found>Ð¢Ð¸Ð¿ Ð²ÑÐ·Ð»Ð° Ð·Ð° Ð·Ð°Ð¼Ð¾Ð²ÑÑÐ²Ð°Ð½Ð½ÑÐ¼ Ð½Ðµ Ð·Ð½Ð°Ð¹Ð´ÐµÐ½Ð¾.</default-node-type-not-found>
+      <requiredPrimaryType>ÐÐµÐ¾Ð±ÑÑÐ´Ð½Ð¾ Ð¿Ð¾ÑÑÑÐ±Ð½Ð¸Ð¹ Ð²Ð¸ÑÑÐ´Ð½Ð¸Ð¹ ÑÐ¸Ð¿.</requiredPrimaryType>
+      <defaultPrimaryType>ÐÐ¾ÑÑÑÐ±Ð½Ð¸Ð¹ Ð²Ð¸ÑÑÐ´Ð½Ð¸Ð¹ ÑÐ¸Ð¿ Ð·Ð° Ð·Ð°Ð¼Ð¾Ð²ÑÑÐ²Ð°Ð½Ð½ÑÐ¼.</defaultPrimaryType>
     </msg>
   </UIChildNodeDefinitionForm>
   <defaultPrimaryTypePopup>
     <title>
-      <FormdefaultPrimaryTypePopup>Виберіть вихідний тип за замовчуванням</FormdefaultPrimaryTypePopup>
+      <FormdefaultPrimaryTypePopup>ÐÐ¸Ð±ÐµÑÑÑÑ Ð²Ð¸ÑÑÐ´Ð½Ð¸Ð¹ ÑÐ¸Ð¿ Ð·Ð° Ð·Ð°Ð¼Ð¾Ð²ÑÑÐ²Ð°Ð½Ð½ÑÐ¼</FormdefaultPrimaryTypePopup>
     </title>
   </defaultPrimaryTypePopup>
   <requiredPrimaryTypePopup>
     <title>
-      <FormrequiredPrimaryTypePopup>Виберіть потрібний вихідний тип</FormrequiredPrimaryTypePopup>
+      <FormrequiredPrimaryTypePopup>ÐÐ¸Ð±ÐµÑÑÑÑ Ð¿Ð¾ÑÑÑÐ±Ð½Ð¸Ð¹ Ð²Ð¸ÑÑÐ´Ð½Ð¸Ð¹ ÑÐ¸Ð¿</FormrequiredPrimaryTypePopup>
     </title>
   </requiredPrimaryTypePopup>
   <superTypesPopup>
     <title>
-      <FormsuperTypesPopup>Виберіть супер типи</FormsuperTypesPopup>
+      <FormsuperTypesPopup>ÐÐ¸Ð±ÐµÑÑÑÑ ÑÑÐ¿ÐµÑ ÑÐ¸Ð¿Ð¸</FormsuperTypesPopup>
     </title>
   </superTypesPopup>
   <NodeTypePopup>
     <title>
-      <UINodeTypeForm>Додати/ Редагувати  визначення типу вузла</UINodeTypeForm>
+      <UINodeTypeForm>ÐÐ¾Ð´Ð°ÑÐ¸/ Ð ÐµÐ´Ð°Ð³ÑÐ²Ð°ÑÐ¸  Ð²Ð¸Ð·Ð½Ð°ÑÐµÐ½Ð½Ñ ÑÐ¸Ð¿Ñ Ð²ÑÐ·Ð»Ð°</UINodeTypeForm>
     </title>
   </NodeTypePopup>
   <ViewNodeTypePopup>
     <title>
-      <UINodeTypeForm>Показати інформацію про тип вузла</UINodeTypeForm>
+      <UINodeTypeForm>ÐÐ¾ÐºÐ°Ð·Ð°ÑÐ¸ ÑÐ½ÑÐ¾ÑÐ¼Ð°ÑÑÑ Ð¿ÑÐ¾ ÑÐ¸Ð¿ Ð²ÑÐ·Ð»Ð°</UINodeTypeForm>
     </title>
   </ViewNodeTypePopup>
   <!--
@@ -625,24 +625,24 @@
   -->
   <UINodeTypeExport>
     <header>
-      <icon>Піктограма</icon>
-      <label>Ім'я вузла</label>
-      <input>Дія</input>
+      <icon>ÐÑÐºÑÐ¾Ð³ÑÐ°Ð¼Ð°</icon>
+      <label>ÐÐ¼'Ñ Ð²ÑÐ·Ð»Ð°</label>
+      <input>ÐÑÑ</input>
     </header>
     <action>
       <Cancel>#{word.cancel}</Cancel>
-      <Export>Експорт</Export>
-      <UncheckAll>Зняти усі відмітки</UncheckAll>
-      <CheckAll>Виділити все</CheckAll>
+      <Export>ÐÐºÑÐ¿Ð¾ÑÑ</Export>
+      <UncheckAll>ÐÐ½ÑÑÐ¸ ÑÑÑ Ð²ÑÐ´Ð¼ÑÑÐºÐ¸</UncheckAll>
+      <CheckAll>ÐÐ¸Ð´ÑÐ»Ð¸ÑÐ¸ Ð²ÑÐµ</CheckAll>
     </action>
-    <title>Експорт типів вузлів</title>
+    <title>ÐÐºÑÐ¿Ð¾ÑÑ ÑÐ¸Ð¿ÑÐ² Ð²ÑÐ·Ð»ÑÐ²</title>
     <msg>
-      <item-null>Будь ласка, оберіть хоча б один вузол, який потрібно експортувати.</item-null>
+      <item-null>ÐÑÐ´Ñ Ð»Ð°ÑÐºÐ°, Ð¾Ð±ÐµÑÑÑÑ ÑÐ¾ÑÐ° Ð± Ð¾Ð´Ð¸Ð½ Ð²ÑÐ·Ð¾Ð», ÑÐºÐ¸Ð¹ Ð¿Ð¾ÑÑÑÐ±Ð½Ð¾ ÐµÐºÑÐ¿Ð¾ÑÑÑÐ²Ð°ÑÐ¸.</item-null>
     </msg>
   </UINodeTypeExport>
   <NodeTypeExportPopup>
     <title>
-      <UINodeTypeExport>Експорт типів вузлів</UINodeTypeExport>
+      <UINodeTypeExport>ÐÐºÑÐ¿Ð¾ÑÑ ÑÐ¸Ð¿ÑÐ² Ð²ÑÐ·Ð»ÑÐ²</UINodeTypeExport>
     </title>
   </NodeTypeExportPopup>
   <!--
@@ -657,19 +657,19 @@
   -->
   <UINodeTypeUpload>
     <label>
-      <upload>Ім'я файлу</upload>
+      <upload>ÐÐ¼'Ñ ÑÐ°Ð¹Ð»Ñ</upload>
     </label>
     <action>
       <Cancel>#{word.cancel}</Cancel>
-      <Upload>Завантажити</Upload>
+      <Upload>ÐÐ°Ð²Ð°Ð½ÑÐ°Ð¶Ð¸ÑÐ¸</Upload>
     </action>
-    <title>Імпортувати вузол файлу типу  XML</title>
+    <title>ÐÐ¼Ð¿Ð¾ÑÑÑÐ²Ð°ÑÐ¸ Ð²ÑÐ·Ð¾Ð» ÑÐ°Ð¹Ð»Ñ ÑÐ¸Ð¿Ñ  XML</title>
     <msg>
-      <filename-error>Огляд файлу типу вузла, який імпортується.</filename-error>
-      <data-file-error>Лише .xml або .zip файли можуть бути імпортовані.</data-file-error>
-      <data-invalid>Дані, є неприпустимими. Перевірте ваш тип файлу і повторіть спробу.</data-invalid>
-      <nodetype-exist>Тип вузла '{0}' уже існує.</nodetype-exist>
-      <namespace-invalid>Простір імен "{0}", є неприпустимим.</namespace-invalid>
+      <filename-error>ÐÐ³Ð»ÑÐ´ ÑÐ°Ð¹Ð»Ñ ÑÐ¸Ð¿Ñ Ð²ÑÐ·Ð»Ð°, ÑÐºÐ¸Ð¹ ÑÐ¼Ð¿Ð¾ÑÑÑÑÑÑÑÑ.</filename-error>
+      <data-file-error>ÐÐ¸ÑÐµ .xml Ð°Ð±Ð¾ .zip ÑÐ°Ð¹Ð»Ð¸ Ð¼Ð¾Ð¶ÑÑÑ Ð±ÑÑÐ¸ ÑÐ¼Ð¿Ð¾ÑÑÐ¾Ð²Ð°Ð½Ñ.</data-file-error>
+      <data-invalid>ÐÐ°Ð½Ñ, Ñ Ð½ÐµÐ¿ÑÐ¸Ð¿ÑÑÑÐ¸Ð¼Ð¸Ð¼Ð¸. ÐÐµÑÐµÐ²ÑÑÑÐµ Ð²Ð°Ñ ÑÐ¸Ð¿ ÑÐ°Ð¹Ð»Ñ Ñ Ð¿Ð¾Ð²ÑÐ¾ÑÑÑÑ ÑÐ¿ÑÐ¾Ð±Ñ.</data-invalid>
+      <nodetype-exist>Ð¢Ð¸Ð¿ Ð²ÑÐ·Ð»Ð° '{0}' ÑÐ¶Ðµ ÑÑÐ½ÑÑ.</nodetype-exist>
+      <namespace-invalid>ÐÑÐ¾ÑÑÑÑ ÑÐ¼ÐµÐ½ "{0}", Ñ Ð½ÐµÐ¿ÑÐ¸Ð¿ÑÑÑÐ¸Ð¼Ð¸Ð¼.</namespace-invalid>
     </msg>
   </UINodeTypeUpload>
   <!--
@@ -680,23 +680,23 @@
   <UINodeTypeImport>
     <action>
       <Cancel>#{word.cancel}</Cancel>
-      <Import>Імпорт</Import>
-      <Upload>Повторно завантажити</Upload>
+      <Import>ÐÐ¼Ð¿Ð¾ÑÑ</Import>
+      <Upload>ÐÐ¾Ð²ÑÐ¾ÑÐ½Ð¾ Ð·Ð°Ð²Ð°Ð½ÑÐ°Ð¶Ð¸ÑÐ¸</Upload>
     </action>
     <header>
-      <icon>Піктограма</icon>
-      <label>Назва вузла</label>
-      <input>Дія</input>
+      <icon>ÐÑÐºÑÐ¾Ð³ÑÐ°Ð¼Ð°</icon>
+      <label>ÐÐ°Ð·Ð²Ð° Ð²ÑÐ·Ð»Ð°</label>
+      <input>ÐÑÑ</input>
     </header>
-    <title>Виберіть тип вузла для імпорту</title>
+    <title>ÐÐ¸Ð±ÐµÑÑÑÑ ÑÐ¸Ð¿ Ð²ÑÐ·Ð»Ð° Ð´Ð»Ñ ÑÐ¼Ð¿Ð¾ÑÑÑ</title>
     <msg>
-      <no-nodetype-registered>Немає зареєстрованих типів вузлів.</no-nodetype-registered>
-      <nodetype-registered>Реєстрація успішна.</nodetype-registered>
+      <no-nodetype-registered>ÐÐµÐ¼Ð°Ñ Ð·Ð°ÑÐµÑÑÑÑÐ¾Ð²Ð°Ð½Ð¸Ñ ÑÐ¸Ð¿ÑÐ² Ð²ÑÐ·Ð»ÑÐ².</no-nodetype-registered>
+      <nodetype-registered>Ð ÐµÑÑÑÑÐ°ÑÑÑ ÑÑÐ¿ÑÑÐ½Ð°.</nodetype-registered>
     </msg>
   </UINodeTypeImport>
   <NodeTypeImportPopup>
     <title>
-      <UINodeTypeImportPopup>Імпортувати вузол файлу типу  XML</UINodeTypeImportPopup>
+      <UINodeTypeImportPopup>ÐÐ¼Ð¿Ð¾ÑÑÑÐ²Ð°ÑÐ¸ Ð²ÑÐ·Ð¾Ð» ÑÐ°Ð¹Ð»Ñ ÑÐ¸Ð¿Ñ  XML</UINodeTypeImportPopup>
     </title>
   </NodeTypeImportPopup>
   <!--
@@ -711,10 +711,10 @@
       <unstructuredFolder>Unstructured Folder</unstructuredFolder>
     </label>
     <title>
-      <AddPermission>Додати права доступу</AddPermission>
-      <RemovePermission>Remove Permission</RemovePermission>
-      <AddIcon>Додати значок</AddIcon>
-      <AddPath>Додати шлях</AddPath>
+      <AddPermission>ÐÐ¾Ð´Ð°ÑÐ¸ Ð¿ÑÐ°Ð²Ð° Ð´Ð¾ÑÑÑÐ¿Ñ</AddPermission>
+      <RemovePermission>ÐÐ¸Ð´Ð°Ð»Ð¸ÑÐ¸ Ð´Ð¾Ð·Ð²ÑÐ»</RemovePermission>
+      <AddIcon>ÐÐ¾Ð´Ð°ÑÐ¸ Ð·Ð½Ð°ÑÐ¾Ðº</AddIcon>
+      <AddPath>ÐÐ¾Ð´Ð°ÑÐ¸ ÑÐ»ÑÑ</AddPath>
     </title>
   </DriveInputSet>
   <!--
@@ -724,20 +724,20 @@
   -->
   <UIActionTypeList>
     <header>
-      <name>Скріпт</name>
-      <label>Ім’я</label>
-      <action>Дії</action>
+      <name>Ð¡ÐºÑÑÐ¿Ñ</name>
+      <label>ÐÐ¼âÑ</label>
+      <action>ÐÑÑ</action>
     </header>
     <title>
-      <Edit>Редагувати</Edit>
-      <Delete>Видалити</Delete>
+      <Edit>Ð ÐµÐ´Ð°Ð³ÑÐ²Ð°ÑÐ¸</Edit>
+      <Delete>ÐÐ¸Ð´Ð°Ð»Ð¸ÑÐ¸</Delete>
     </title>
     <action>
-      <AddAction>Додати тип дії</AddAction>
+      <AddAction>ÐÐ¾Ð´Ð°ÑÐ¸ ÑÐ¸Ð¿ Ð´ÑÑ</AddAction>
     </action>
 <msg>
- <confirm-delete>Ви дійсно бажаєте видалити цей тип дії?</confirm-delete>
-<cannot-delete>Цей тип дії не можна видалити, оскільки він ще використовується системою.</cannot-delete>
+ <confirm-delete>ÐÐ¸ Ð´ÑÐ¹ÑÐ½Ð¾ Ð±Ð°Ð¶Ð°ÑÑÐµ Ð²Ð¸Ð´Ð°Ð»Ð¸ÑÐ¸ ÑÐµÐ¹ ÑÐ¸Ð¿ Ð´ÑÑ?</confirm-delete>
+<cannot-delete>Ð¦ÐµÐ¹ ÑÐ¸Ð¿ Ð´ÑÑ Ð½Ðµ Ð¼Ð¾Ð¶Ð½Ð° Ð²Ð¸Ð´Ð°Ð»Ð¸ÑÐ¸, Ð¾ÑÐºÑÐ»ÑÐºÐ¸ Ð²ÑÐ½ ÑÐµ Ð²Ð¸ÐºÐ¾ÑÐ¸ÑÑÐ¾Ð²ÑÑÑÑÑÑ ÑÐ¸ÑÑÐµÐ¼Ð¾Ñ.</cannot-delete>
 </msg>
   </UIActionTypeList>
   <!--
@@ -747,31 +747,31 @@
   -->
   <ActionPopup>
     <title>
-      <UIActionTypeForm>Додати тип дії</UIActionTypeForm>
+      <UIActionTypeForm>ÐÐ¾Ð´Ð°ÑÐ¸ ÑÐ¸Ð¿ Ð´ÑÑ</UIActionTypeForm>
     </title>
   </ActionPopup>
   <UIActionTypeForm>
-    <title>Додати тип дії</title>
+    <title>ÐÐ¾Ð´Ð°ÑÐ¸ ÑÐ¸Ð¿ Ð´ÑÑ</title>
     <label>
-      <actionType>Розширити тип дії:</actionType>
-      <name>Ім'я:</name>
+      <actionType>Ð Ð¾Ð·ÑÐ¸ÑÐ¸ÑÐ¸ ÑÐ¸Ð¿ Ð´ÑÑ:</actionType>
+      <name>ÐÐ¼'Ñ:</name>
       <isMove>is Action Move:</isMove>
-      <variables>Змінні:</variables>
-      <exo_businessProcessAction>Бізнес-процеси:</exo_businessProcessAction>
-      <exo_scriptAction>Groovy скріпти:</exo_scriptAction>
-      <exo_ruleAction>Певні правила:</exo_ruleAction>
-      <script>Скріпт:</script>
+      <variables>ÐÐ¼ÑÐ½Ð½Ñ:</variables>
+      <exo_businessProcessAction>ÐÑÐ·Ð½ÐµÑ-Ð¿ÑÐ¾ÑÐµÑÐ¸:</exo_businessProcessAction>
+      <exo_scriptAction>Groovy ÑÐºÑÑÐ¿ÑÐ¸:</exo_scriptAction>
+      <exo_ruleAction>ÐÐµÐ²Ð½Ñ Ð¿ÑÐ°Ð²Ð¸Ð»Ð°:</exo_ruleAction>
+      <script>Ð¡ÐºÑÑÐ¿Ñ:</script>
     </label>
     <action>
       <Save>#{word.save}</Save>
       <Cancel>#{word.cancel}</Cancel>
     </action>
     <msg>
-      <action-type-added>Тип дії '{0}'  був успішно доданий.</action-type-added>
-      <action-type-create-error>Сталася помилка під час створення типу дії.</action-type-create-error>
-      <action-name-invalid>"{0}", є неприпустимим. Ім'я має починатися з "exo:'.</action-name-invalid>
-      <action-exist>Ця дія вже існує у системі ECM .</action-exist>
-      <fileName-invalid>Ім'я дії містить кілька неприпустимих символів.</fileName-invalid>
+      <action-type-added>Ð¢Ð¸Ð¿ Ð´ÑÑ '{0}'  Ð±ÑÐ² ÑÑÐ¿ÑÑÐ½Ð¾ Ð´Ð¾Ð´Ð°Ð½Ð¸Ð¹.</action-type-added>
+      <action-type-create-error>Ð¡ÑÐ°Ð»Ð°ÑÑ Ð¿Ð¾Ð¼Ð¸Ð»ÐºÐ° Ð¿ÑÐ´ ÑÐ°Ñ ÑÑÐ²Ð¾ÑÐµÐ½Ð½Ñ ÑÐ¸Ð¿Ñ Ð´ÑÑ.</action-type-create-error>
+      <action-name-invalid>"{0}", Ñ Ð½ÐµÐ¿ÑÐ¸Ð¿ÑÑÑÐ¸Ð¼Ð¸Ð¼. ÐÐ¼'Ñ Ð¼Ð°Ñ Ð¿Ð¾ÑÐ¸Ð½Ð°ÑÐ¸ÑÑ Ð· "exo:'.</action-name-invalid>
+      <action-exist>Ð¦Ñ Ð´ÑÑ Ð²Ð¶Ðµ ÑÑÐ½ÑÑ Ñ ÑÐ¸ÑÑÐµÐ¼Ñ ECM .</action-exist>
+      <fileName-invalid>ÐÐ¼'Ñ Ð´ÑÑ Ð¼ÑÑÑÐ¸ÑÑ ÐºÑÐ»ÑÐºÐ° Ð½ÐµÐ¿ÑÐ¸Ð¿ÑÑÑÐ¸Ð¼Ð¸Ñ ÑÐ¸Ð¼Ð²Ð¾Ð»ÑÐ².</fileName-invalid>
     </msg>
   </UIActionTypeForm>
   <!--
@@ -781,27 +781,27 @@
   -->
   <UITabPane>
     <title>
-      <UIViewContainer>Перегляди</UIViewContainer>
-      <ECMTemplate>Explorer шаблони</ECMTemplate>
-      <UIScriptForm>Скрипти</UIScriptForm>
-      <UIDialogTab>Діалогове вікно</UIDialogTab>
-      <UIViewTab>Перегляд</UIViewTab>
-      <UITemplateEditForm>Шаблон</UITemplateEditForm>
-      <UITemplateForm>Шаблон</UITemplateForm>
-      <UITemplateContainer>Документи</UITemplateContainer>
-      <UIActionsTemplateContainer>Дії</UIActionsTemplateContainer>
-      <UIOthersTemplateContainer>Інше</UIOthersTemplateContainer>
-  <UIActionScriptContainer>Дія</UIActionScriptContainer>
-  <UIWidgetScriptContainer>Віджети</UIWidgetScriptContainer>
-<UIInterceptorScriptContainer>Методи-перехоплювачі</UIInterceptorScriptContainer>
+      <UIViewContainer>ÐÐµÑÐµÐ³Ð»ÑÐ´Ð¸</UIViewContainer>
+      <ECMTemplate>Explorer ÑÐ°Ð±Ð»Ð¾Ð½Ð¸</ECMTemplate>
+      <UIScriptForm>Ð¡ÐºÑÐ¸Ð¿ÑÐ¸</UIScriptForm>
+      <UIDialogTab>ÐÑÐ°Ð»Ð¾Ð³Ð¾Ð²Ðµ Ð²ÑÐºÐ½Ð¾</UIDialogTab>
+      <UIViewTab>ÐÐµÑÐµÐ³Ð»ÑÐ´</UIViewTab>
+      <UITemplateEditForm>Ð¨Ð°Ð±Ð»Ð¾Ð½</UITemplateEditForm>
+      <UITemplateForm>Ð¨Ð°Ð±Ð»Ð¾Ð½</UITemplateForm>
+      <UITemplateContainer>ÐÐ¾ÐºÑÐ¼ÐµÐ½ÑÐ¸</UITemplateContainer>
+      <UIActionsTemplateContainer>ÐÑÑ</UIActionsTemplateContainer>
+      <UIOthersTemplateContainer>ÐÐ½ÑÐµ</UIOthersTemplateContainer>
+  <UIActionScriptContainer>ÐÑÑ</UIActionScriptContainer>
+  <UIWidgetScriptContainer>ÐÑÐ´Ð¶ÐµÑÐ¸</UIWidgetScriptContainer>
+<UIInterceptorScriptContainer>ÐÐµÑÐ¾Ð´Ð¸-Ð¿ÐµÑÐµÑÐ¾Ð¿Ð»ÑÐ²Ð°ÑÑ</UIInterceptorScriptContainer>
 
-<nodeTypeDefinition>Тип вузла</nodeTypeDefinition>
-      <propertyDefinition>Властивість</propertyDefinition>
-      <childNodeDefinition>Дочірній вузол</childNodeDefinition>
-      <SuperTypeTab>Супер типи</SuperTypeTab>
-      <DefaultTypeTab>Первинне значення за замовчуванням</DefaultTypeTab>
-      <RequiredTypeTab>Необхідне первинне значення</RequiredTypeTab>
-      <Contraints>Обмеження</Contraints>
+<nodeTypeDefinition>Ð¢Ð¸Ð¿ Ð²ÑÐ·Ð»Ð°</nodeTypeDefinition>
+      <propertyDefinition>ÐÐ»Ð°ÑÑÐ¸Ð²ÑÑÑÑ</propertyDefinition>
+      <childNodeDefinition>ÐÐ¾ÑÑÑÐ½ÑÐ¹ Ð²ÑÐ·Ð¾Ð»</childNodeDefinition>
+      <SuperTypeTab>Ð¡ÑÐ¿ÐµÑ ÑÐ¸Ð¿Ð¸</SuperTypeTab>
+      <DefaultTypeTab>ÐÐµÑÐ²Ð¸Ð½Ð½Ðµ Ð·Ð½Ð°ÑÐµÐ½Ð½Ñ Ð·Ð° Ð·Ð°Ð¼Ð¾Ð²ÑÑÐ²Ð°Ð½Ð½ÑÐ¼</DefaultTypeTab>
+      <RequiredTypeTab>ÐÐµÐ¾Ð±ÑÑÐ´Ð½Ðµ Ð¿ÐµÑÐ²Ð¸Ð½Ð½Ðµ Ð·Ð½Ð°ÑÐµÐ½Ð½Ñ</RequiredTypeTab>
+      <Contraints>ÐÐ±Ð¼ÐµÐ¶ÐµÐ½Ð½Ñ</Contraints>
     </title>
   </UITabPane>
   <!--
@@ -811,106 +811,106 @@
   -->
   <UIViewList>
    <title>
-     <View>Перегляд</View>
-     <EditInfo>Редагувати</EditInfo>
-     <Delete>Видалити</Delete>
+     <View>ÐÐµÑÐµÐ³Ð»ÑÐ´</View>
+     <EditInfo>Ð ÐµÐ´Ð°Ð³ÑÐ²Ð°ÑÐ¸</EditInfo>
+     <Delete>ÐÐ¸Ð´Ð°Ð»Ð¸ÑÐ¸</Delete>
    </title>
     <header>
-      <name>Ім’я</name>
-      <permissions>Права доступу</permissions>
-      <tabList>Вкладка «Дія»</tabList>
-      <baseVersion>Базова версія</baseVersion>
-      <action>Дія</action>
+      <name>ÐÐ¼âÑ</name>
+      <permissions>ÐÑÐ°Ð²Ð° Ð´Ð¾ÑÑÑÐ¿Ñ</permissions>
+      <tabList>ÐÐºÐ»Ð°Ð´ÐºÐ° Â«ÐÑÑÂ»</tabList>
+      <baseVersion>ÐÐ°Ð·Ð¾Ð²Ð° Ð²ÐµÑÑÑÑ</baseVersion>
+      <action>ÐÑÑ</action>
     </header>
     <action>
-      <AddView>Додати вид</AddView>
+      <AddView>ÐÐ¾Ð´Ð°ÑÐ¸ Ð²Ð¸Ð´</AddView>
     </action>
     <msg>
-      <access-denied>Доступ заборонено. Ви не маєте дозволу на використання цієї функції.</access-denied>
-      <template-in-use>Не вдалося видалити {0}. Він наразі використовується.</template-in-use>
-      <confirm-delete>Ви дійсно бажаєте видалити цей вид?</confirm-delete>
+      <access-denied>ÐÐ¾ÑÑÑÐ¿ Ð·Ð°Ð±Ð¾ÑÐ¾Ð½ÐµÐ½Ð¾. ÐÐ¸ Ð½Ðµ Ð¼Ð°ÑÑÐµ Ð´Ð¾Ð·Ð²Ð¾Ð»Ñ Ð½Ð° Ð²Ð¸ÐºÐ¾ÑÐ¸ÑÑÐ°Ð½Ð½Ñ ÑÑÑÑ ÑÑÐ½ÐºÑÑÑ.</access-denied>
+      <template-in-use>ÐÐµ Ð²Ð´Ð°Ð»Ð¾ÑÑ Ð²Ð¸Ð´Ð°Ð»Ð¸ÑÐ¸ {0}. ÐÑÐ½ Ð½Ð°ÑÐ°Ð·Ñ Ð²Ð¸ÐºÐ¾ÑÐ¸ÑÑÐ¾Ð²ÑÑÑÑÑÑ.</template-in-use>
+      <confirm-delete>ÐÐ¸ Ð´ÑÐ¹ÑÐ½Ð¾ Ð±Ð°Ð¶Ð°ÑÑÐµ Ð²Ð¸Ð´Ð°Ð»Ð¸ÑÐ¸ ÑÐµÐ¹ Ð²Ð¸Ð´?</confirm-delete>
     </msg>
   </UIViewList>
   <ViewPopup>
     <title>
-      <UIViewFormTabPane>Перегляд</UIViewFormTabPane>
+      <UIViewFormTabPane>ÐÐµÑÐµÐ³Ð»ÑÐ´</UIViewFormTabPane>
     </title>
   </ViewPopup>
   <AddPopup>
     <title>
-      <UIViewFormTabPane>Додати вид</UIViewFormTabPane>
-      <AddPopup>Додати шаблон</AddPopup>
+      <UIViewFormTabPane>ÐÐ¾Ð´Ð°ÑÐ¸ Ð²Ð¸Ð´</UIViewFormTabPane>
+      <AddPopup>ÐÐ¾Ð´Ð°ÑÐ¸ ÑÐ°Ð±Ð»Ð¾Ð½</AddPopup>
     </title>
   </AddPopup>
   <EditPopup>
     <title>
-      <UIViewFormTabPane>Редагувати вид</UIViewFormTabPane>
+      <UIViewFormTabPane>Ð ÐµÐ´Ð°Ð³ÑÐ²Ð°ÑÐ¸ Ð²Ð¸Ð´</UIViewFormTabPane>
     </title>
   </EditPopup>
 
 <UITabList>
                   <title>
-                    <Edit>Редагувати</Edit>
-                    <Delete>Видалити</Delete>
+                    <Edit>Ð ÐµÐ´Ð°Ð³ÑÐ²Ð°ÑÐ¸</Edit>
+                    <Delete>ÐÐ¸Ð´Ð°Ð»Ð¸ÑÐ¸</Delete>
                   </title>       
  <header>
-  <tabName>Таблиця</tabName>
-  <localizeButtons>Опис</localizeButtons>
-<action>Дії</action>
+  <tabName>Ð¢Ð°Ð±Ð»Ð¸ÑÑ</tabName>
+  <localizeButtons>ÐÐ¿Ð¸Ñ</localizeButtons>
+<action>ÐÑÑ</action>
 </header>
 <action>
- <AddTab>Додати</AddTab>
+ <AddTab>ÐÐ¾Ð´Ð°ÑÐ¸</AddTab>
 </action>
 <msg>
- <confirm-delete>Ви дійсно бажаєте видалити цю вкладку?</confirm-delete>
+ <confirm-delete>ÐÐ¸ Ð´ÑÐ¹ÑÐ½Ð¾ Ð±Ð°Ð¶Ð°ÑÑÐµ Ð²Ð¸Ð´Ð°Ð»Ð¸ÑÐ¸ ÑÑ Ð²ÐºÐ»Ð°Ð´ÐºÑ?</confirm-delete>
 </msg>
 <grid>
  <msg>
-  <empty>Немає вкладки в цьому режимі подання</empty>
+  <empty>ÐÐµÐ¼Ð°Ñ Ð²ÐºÐ»Ð°Ð´ÐºÐ¸ Ð² ÑÑÐ¾Ð¼Ñ ÑÐµÐ¶Ð¸Ð¼Ñ Ð¿Ð¾Ð´Ð°Ð½Ð½Ñ</empty>
  </msg>
 </grid>
 </UITabList>
 
 <UIViewPermissionList>
- <title>Виберіть власника з дозволи для цього подання:</title>
+ <title>ÐÐ¸Ð±ÐµÑÑÑÑ Ð²Ð»Ð°ÑÐ½Ð¸ÐºÐ° Ð· Ð´Ð¾Ð·Ð²Ð¾Ð»Ð¸ Ð´Ð»Ñ ÑÑÐ¾Ð³Ð¾ Ð¿Ð¾Ð´Ð°Ð½Ð½Ñ:</title>
 <label>
- <permission>{0} у {1}</permission>
+ <permission>{0} Ñ {1}</permission>
 </label>
 <msg>
- <confirm-delete>Ви дійсно бажаєте видалити цей дозвіл?</confirm-delete>
-  <permission-cannot-empty>Дозвіл на перегляд є обов'язковим та не може бути порожнім.</permission-cannot-empty>
+ <confirm-delete>ÐÐ¸ Ð´ÑÐ¹ÑÐ½Ð¾ Ð±Ð°Ð¶Ð°ÑÑÐµ Ð²Ð¸Ð´Ð°Ð»Ð¸ÑÐ¸ ÑÐµÐ¹ Ð´Ð¾Ð·Ð²ÑÐ»?</confirm-delete>
+  <permission-cannot-empty>ÐÐ¾Ð·Ð²ÑÐ» Ð½Ð° Ð¿ÐµÑÐµÐ³Ð»ÑÐ´ Ñ Ð¾Ð±Ð¾Ð²'ÑÐ·ÐºÐ¾Ð²Ð¸Ð¼ ÑÐ° Ð½Ðµ Ð¼Ð¾Ð¶Ðµ Ð±ÑÑÐ¸ Ð¿Ð¾ÑÐ¾Ð¶Ð½ÑÐ¼.</permission-cannot-empty>
 </msg>
 </UIViewPermissionList>
 
 <UIViewPermissionList>
                          <title>
-                           <Delete>Видалити</Delete>
+                           <Delete>ÐÐ¸Ð´Ð°Ð»Ð¸ÑÐ¸</Delete>
                          </title>
  <header>
-<friendlyPermission>Дозволи</friendlyPermission>
-     <action>Дія</action>
+<friendlyPermission>ÐÐ¾Ð·Ð²Ð¾Ð»Ð¸</friendlyPermission>
+     <action>ÐÑÑ</action>
  </header>
 <action>
  <title>
-  <Delete>Видалити</Delete>
+  <Delete>ÐÐ¸Ð´Ð°Ð»Ð¸ÑÐ¸</Delete>
  </title>
 </action>
 <grid>
  <msg>
-  <empty>Немає дозволу на цей вид</empty>
+  <empty>ÐÐµÐ¼Ð°Ñ Ð´Ð¾Ð·Ð²Ð¾Ð»Ñ Ð½Ð° ÑÐµÐ¹ Ð²Ð¸Ð´</empty>
  </msg>
 </grid>
 </UIViewPermissionList>
 
 <UIViewPermissionForm>
 <action>
- <Add>Додати</Add>
+ <Add>ÐÐ¾Ð´Ð°ÑÐ¸</Add>
 </action>
 <label>
- <userOrGroup>Користувач або Група</userOrGroup>
+ <userOrGroup>ÐÐ¾ÑÐ¸ÑÑÑÐ²Ð°Ñ Ð°Ð±Ð¾ ÐÑÑÐ¿Ð°</userOrGroup>
 </label>
 <msg>
- <permission-exist>Дозвіл '{0}' уже існує у списку.</permission-exist>
+ <permission-exist>ÐÐ¾Ð·Ð²ÑÐ» '{0}' ÑÐ¶Ðµ ÑÑÐ½ÑÑ Ñ ÑÐ¿Ð¸ÑÐºÑ.</permission-exist>
 </msg>
 </UIViewPermissionForm>
 
@@ -921,73 +921,73 @@
   -->
   <UIViewForm>
     <title>
-      <AddPermission>Додати права доступу</AddPermission>
-      <RemovePermission>Видалити дозвіл</RemovePermission>
+      <AddPermission>ÐÐ¾Ð´Ð°ÑÐ¸ Ð¿ÑÐ°Ð²Ð° Ð´Ð¾ÑÑÑÐ¿Ñ</AddPermission>
+      <RemovePermission>ÐÐ¸Ð´Ð°Ð»Ð¸ÑÐ¸ Ð´Ð¾Ð·Ð²ÑÐ»</RemovePermission>
     </title>
     <msg>
-      <view-name-invalid>Необхідне ім'я перегляду.</view-name-invalid>
-      <fileName-invalid>Ім'я перегляду містить кілька неприпустимих символів.</fileName-invalid>
-      <permission-not-empty>Будь ласка, виберіть дозволи для перегляду.</permission-not-empty>      
-      <mustbe-add-tab>Будь ласка, додайте вкладку.</mustbe-add-tab>
-<mustbe-add-permission>Будь ласка, виберіть дозвіл для цього перегляду</mustbe-add-permission>
-      <view-exist>Ім'я перегляду вже існує.</view-exist>
+      <view-name-invalid>ÐÐµÐ¾Ð±ÑÑÐ´Ð½Ðµ ÑÐ¼'Ñ Ð¿ÐµÑÐµÐ³Ð»ÑÐ´Ñ.</view-name-invalid>
+      <fileName-invalid>ÐÐ¼'Ñ Ð¿ÐµÑÐµÐ³Ð»ÑÐ´Ñ Ð¼ÑÑÑÐ¸ÑÑ ÐºÑÐ»ÑÐºÐ° Ð½ÐµÐ¿ÑÐ¸Ð¿ÑÑÑÐ¸Ð¼Ð¸Ñ ÑÐ¸Ð¼Ð²Ð¾Ð»ÑÐ².</fileName-invalid>
+      <permission-not-empty>ÐÑÐ´Ñ Ð»Ð°ÑÐºÐ°, Ð²Ð¸Ð±ÐµÑÑÑÑ Ð´Ð¾Ð·Ð²Ð¾Ð»Ð¸ Ð´Ð»Ñ Ð¿ÐµÑÐµÐ³Ð»ÑÐ´Ñ.</permission-not-empty>      
+      <mustbe-add-tab>ÐÑÐ´Ñ Ð»Ð°ÑÐºÐ°, Ð´Ð¾Ð´Ð°Ð¹ÑÐµ Ð²ÐºÐ»Ð°Ð´ÐºÑ.</mustbe-add-tab>
+<mustbe-add-permission>ÐÑÐ´Ñ Ð»Ð°ÑÐºÐ°, Ð²Ð¸Ð±ÐµÑÑÑÑ Ð´Ð¾Ð·Ð²ÑÐ» Ð´Ð»Ñ ÑÑÐ¾Ð³Ð¾ Ð¿ÐµÑÐµÐ³Ð»ÑÐ´Ñ</mustbe-add-permission>
+      <view-exist>ÐÐ¼'Ñ Ð¿ÐµÑÐµÐ³Ð»ÑÐ´Ñ Ð²Ð¶Ðµ ÑÑÐ½ÑÑ.</view-exist>
     </msg>
     <label>
-      <viewName>Ім’я</viewName>
-      <template>Шаблон</template>
-<version>Відновити версію</version>
-      <enableVersion>Ввімкнути версію</enableVersion>
-      <hideExplorerPanel>Приховання панелі провідника на бічній панелі</hideExplorerPanel>
+      <viewName>ÐÐ¼âÑ</viewName>
+      <template>Ð¨Ð°Ð±Ð»Ð¾Ð½</template>
+<version>ÐÑÐ´Ð½Ð¾Ð²Ð¸ÑÐ¸ Ð²ÐµÑÑÑÑ</version>
+      <enableVersion>ÐÐ²ÑÐ¼ÐºÐ½ÑÑÐ¸ Ð²ÐµÑÑÑÑ</enableVersion>
+      <hideExplorerPanel>ÐÑÐ¸ÑÐ¾Ð²Ð°Ð½Ð½Ñ Ð¿Ð°Ð½ÐµÐ»Ñ Ð¿ÑÐ¾Ð²ÑÐ´Ð½Ð¸ÐºÐ° Ð½Ð° Ð±ÑÑÐ½ÑÐ¹ Ð¿Ð°Ð½ÐµÐ»Ñ</hideExplorerPanel>
     </label>
   </UIViewForm>
   <UITabForm>
     <msg>
-      <button-select-error>Будь ласка, виберіть принаймні одну функцію зі списку.</button-select-error>
-      <tab-name-error>Ім'я вкладки потрібно.</tab-name-error>
-      <fileName-invalid>Нове Ім'я  містить кілька неприпустимих символів.</fileName-invalid>
+      <button-select-error>ÐÑÐ´Ñ Ð»Ð°ÑÐºÐ°, Ð²Ð¸Ð±ÐµÑÑÑÑ Ð¿ÑÐ¸Ð½Ð°Ð¹Ð¼Ð½Ñ Ð¾Ð´Ð½Ñ ÑÑÐ½ÐºÑÑÑ Ð·Ñ ÑÐ¿Ð¸ÑÐºÑ.</button-select-error>
+      <tab-name-error>ÐÐ¼'Ñ Ð²ÐºÐ»Ð°Ð´ÐºÐ¸ Ð¿Ð¾ÑÑÑÐ±Ð½Ð¾.</tab-name-error>
+      <fileName-invalid>ÐÐ¾Ð²Ðµ ÐÐ¼'Ñ  Ð¼ÑÑÑÐ¸ÑÑ ÐºÑÐ»ÑÐºÐ° Ð½ÐµÐ¿ÑÐ¸Ð¿ÑÑÑÐ¸Ð¼Ð¸Ñ ÑÐ¸Ð¼Ð²Ð¾Ð»ÑÐ².</fileName-invalid>
     </msg>
     <label>
-      <version>Відновити версію</version>
-      <viewName>Ім’я</viewName>
-      <tabName>Ім'я вкладки</tabName>
-      <permission>Права доступу</permission>
-      <tabs>Вкладки</tabs>
-      <template>Шаблони</template>
-      <enableVersion>Ввімкнути версію</enableVersion>
-      <addFolder>Додати папку</addFolder>
-      <addDocument>Додати документ</addDocument>
-      <editDocument>Редагувати документ</editDocument>
-      <upload>Завантажити</upload>
-      <paste>Вставити</paste>
-      <search>Пошук</search>
-      <viewReferences>Перегляд посилань</viewReferences>
-      <viewNodeType>Перегляд типу вузла</viewNodeType>
-      <viewPermissions>Перегляд дозволів</viewPermissions>
-      <viewProperties>Перегляд властивостей</viewProperties>
-      <manageVersions>Керування версіями</manageVersions>
-      <manageAuditing>Керувати аудитом</manageAuditing>
-      <managePublications>Керувати публікацією</managePublications>
-      <manageCategories>Керування категоріями</manageCategories>
-      <manageRelations>Керувати відносинами</manageRelations>
-      <manageActions>Керувати діями</manageActions>
-      <exportNode>Експорт вузла</exportNode>
-      <importNode>Імпорт вузла</importNode>
-      <viewRelations>Перегляд відносин</viewRelations>
-      <showJCRStructure>Показати структуру JCR</showJCRStructure>
-      <watchDocument>Дивитися документ</watchDocument>
-      <taggingDocument>Відмітити документ</taggingDocument>
-      <viewMetadatas>Перегляд метаданих</viewMetadatas>
-      <overloadThumbnail>Поєднати ескіз</overloadThumbnail>
-      <manageHidden>Сховати/Показати контент</manageHidden>
-      <comment>Коментар</comment>
-      <vote>Проголосувати</vote>  
-      <addCategory>Додати категорію</addCategory>
-      <addLocalizationLink>Додати переклад</addLocalizationLink>
-      <publicationRequestApproval>Затвердження запитів</publicationRequestApproval>
-      <publicationApproveContent>Затвердити контент</publicationApproveContent>
-      <publicationPublish>Публікувати</publicationPublish>
-<contentNavigation>Навігація по вмісту</contentNavigation>
-<addSymLink>Додати символьне посилання</addSymLink>
+      <version>ÐÑÐ´Ð½Ð¾Ð²Ð¸ÑÐ¸ Ð²ÐµÑÑÑÑ</version>
+      <viewName>ÐÐ¼âÑ</viewName>
+      <tabName>ÐÐ¼'Ñ Ð²ÐºÐ»Ð°Ð´ÐºÐ¸</tabName>
+      <permission>ÐÑÐ°Ð²Ð° Ð´Ð¾ÑÑÑÐ¿Ñ</permission>
+      <tabs>ÐÐºÐ»Ð°Ð´ÐºÐ¸</tabs>
+      <template>Ð¨Ð°Ð±Ð»Ð¾Ð½Ð¸</template>
+      <enableVersion>ÐÐ²ÑÐ¼ÐºÐ½ÑÑÐ¸ Ð²ÐµÑÑÑÑ</enableVersion>
+      <addFolder>ÐÐ¾Ð´Ð°ÑÐ¸ Ð¿Ð°Ð¿ÐºÑ</addFolder>
+      <addDocument>ÐÐ¾Ð´Ð°ÑÐ¸ Ð´Ð¾ÐºÑÐ¼ÐµÐ½Ñ</addDocument>
+      <editDocument>Ð ÐµÐ´Ð°Ð³ÑÐ²Ð°ÑÐ¸ Ð´Ð¾ÐºÑÐ¼ÐµÐ½Ñ</editDocument>
+      <upload>ÐÐ°Ð²Ð°Ð½ÑÐ°Ð¶Ð¸ÑÐ¸</upload>
+      <paste>ÐÑÑÐ°Ð²Ð¸ÑÐ¸</paste>
+      <search>ÐÐ¾ÑÑÐº</search>
+      <viewReferences>ÐÐµÑÐµÐ³Ð»ÑÐ´ Ð¿Ð¾ÑÐ¸Ð»Ð°Ð½Ñ</viewReferences>
+      <viewNodeType>ÐÐµÑÐµÐ³Ð»ÑÐ´ ÑÐ¸Ð¿Ñ Ð²ÑÐ·Ð»Ð°</viewNodeType>
+      <viewPermissions>ÐÐµÑÐµÐ³Ð»ÑÐ´ Ð´Ð¾Ð·Ð²Ð¾Ð»ÑÐ²</viewPermissions>
+      <viewProperties>ÐÐµÑÐµÐ³Ð»ÑÐ´ Ð²Ð»Ð°ÑÑÐ¸Ð²Ð¾ÑÑÐµÐ¹</viewProperties>
+      <manageVersions>ÐÐµÑÑÐ²Ð°Ð½Ð½Ñ Ð²ÐµÑÑÑÑÐ¼Ð¸</manageVersions>
+      <manageAuditing>ÐÐµÑÑÐ²Ð°ÑÐ¸ Ð°ÑÐ´Ð¸ÑÐ¾Ð¼</manageAuditing>
+      <managePublications>ÐÐµÑÑÐ²Ð°ÑÐ¸ Ð¿ÑÐ±Ð»ÑÐºÐ°ÑÑÑÑ</managePublications>
+      <manageCategories>ÐÐµÑÑÐ²Ð°Ð½Ð½Ñ ÐºÐ°ÑÐµÐ³Ð¾ÑÑÑÐ¼Ð¸</manageCategories>
+      <manageRelations>ÐÐµÑÑÐ²Ð°ÑÐ¸ Ð²ÑÐ´Ð½Ð¾ÑÐ¸Ð½Ð°Ð¼Ð¸</manageRelations>
+      <manageActions>ÐÐµÑÑÐ²Ð°ÑÐ¸ Ð´ÑÑÐ¼Ð¸</manageActions>
+      <exportNode>ÐÐºÑÐ¿Ð¾ÑÑ Ð²ÑÐ·Ð»Ð°</exportNode>
+      <importNode>ÐÐ¼Ð¿Ð¾ÑÑ Ð²ÑÐ·Ð»Ð°</importNode>
+      <viewRelations>ÐÐµÑÐµÐ³Ð»ÑÐ´ Ð²ÑÐ´Ð½Ð¾ÑÐ¸Ð½</viewRelations>
+      <showJCRStructure>ÐÐ¾ÐºÐ°Ð·Ð°ÑÐ¸ ÑÑÑÑÐºÑÑÑÑ JCR</showJCRStructure>
+      <watchDocument>ÐÐ¸Ð²Ð¸ÑÐ¸ÑÑ Ð´Ð¾ÐºÑÐ¼ÐµÐ½Ñ</watchDocument>
+      <taggingDocument>ÐÑÐ´Ð¼ÑÑÐ¸ÑÐ¸ Ð´Ð¾ÐºÑÐ¼ÐµÐ½Ñ</taggingDocument>
+      <viewMetadatas>ÐÐµÑÐµÐ³Ð»ÑÐ´ Ð¼ÐµÑÐ°Ð´Ð°Ð½Ð¸Ñ</viewMetadatas>
+      <overloadThumbnail>ÐÐ¾ÑÐ´Ð½Ð°ÑÐ¸ ÐµÑÐºÑÐ·</overloadThumbnail>
+      <manageHidden>Ð¡ÑÐ¾Ð²Ð°ÑÐ¸/ÐÐ¾ÐºÐ°Ð·Ð°ÑÐ¸ ÐºÐ¾Ð½ÑÐµÐ½Ñ</manageHidden>
+      <comment>ÐÐ¾Ð¼ÐµÐ½ÑÐ°Ñ</comment>
+      <vote>ÐÑÐ¾Ð³Ð¾Ð»Ð¾ÑÑÐ²Ð°ÑÐ¸</vote>  
+      <addCategory>ÐÐ¾Ð´Ð°ÑÐ¸ ÐºÐ°ÑÐµÐ³Ð¾ÑÑÑ</addCategory>
+      <addLocalizationLink>ÐÐ¾Ð´Ð°ÑÐ¸ Ð¿ÐµÑÐµÐºÐ»Ð°Ð´</addLocalizationLink>
+      <publicationRequestApproval>ÐÐ°ÑÐ²ÐµÑÐ´Ð¶ÐµÐ½Ð½Ñ Ð·Ð°Ð¿Ð¸ÑÑÐ²</publicationRequestApproval>
+      <publicationApproveContent>ÐÐ°ÑÐ²ÐµÑÐ´Ð¸ÑÐ¸ ÐºÐ¾Ð½ÑÐµÐ½Ñ</publicationApproveContent>
+      <publicationPublish>ÐÑÐ±Ð»ÑÐºÑÐ²Ð°ÑÐ¸</publicationPublish>
+<contentNavigation>ÐÐ°Ð²ÑÐ³Ð°ÑÑÑ Ð¿Ð¾ Ð²Ð¼ÑÑÑÑ</contentNavigation>
+<addSymLink>ÐÐ¾Ð´Ð°ÑÐ¸ ÑÐ¸Ð¼Ð²Ð¾Ð»ÑÐ½Ðµ Ð¿Ð¾ÑÐ¸Ð»Ð°Ð½Ð½Ñ</addSymLink>
     </label>
     <action>
       <Save>#{word.save}</Save>      
@@ -1002,36 +1002,36 @@
   <UIViewFormTabPane>
     <tab>
       <label>
-        <UITabContainer>Дія</UITabContainer>
-        <UIViewForm>Перегляд</UIViewForm>
-        <UIViewPermissionContainer>Права доступу</UIViewPermissionContainer>    
+        <UITabContainer>ÐÑÑ</UITabContainer>
+        <UIViewForm>ÐÐµÑÐµÐ³Ð»ÑÐ´</UIViewForm>
+        <UIViewPermissionContainer>ÐÑÐ°Ð²Ð° Ð´Ð¾ÑÑÑÐ¿Ñ</UIViewPermissionContainer>    
       </label>
     </tab>
     <action>
       <Save>#{word.save}</Save>
-      <Reset>Скинути</Reset>
+      <Reset>Ð¡ÐºÐ¸Ð½ÑÑÐ¸</Reset>
       <Cancel>#{word.cancel}</Cancel>
       <Close>#{word.close}</Close>
-      <Restore>Відновити</Restore>
+      <Restore>ÐÑÐ´Ð½Ð¾Ð²Ð¸ÑÐ¸</Restore>
     </action>
   </UIViewFormTabPane>
   <PopupViewPermission>
     <title>
-      <UIPermissionSelector>Вибрати права доступу</UIPermissionSelector>
+      <UIPermissionSelector>ÐÐ¸Ð±ÑÐ°ÑÐ¸ Ð¿ÑÐ°Ð²Ð° Ð´Ð¾ÑÑÑÐ¿Ñ</UIPermissionSelector>
     </title>
   </PopupViewPermission>
 
 <TabForm_Popup>
  <title>
-  <UITabForm>Додати/Редагувати вкладку</UITabForm>
+  <UITabForm>ÐÐ¾Ð´Ð°ÑÐ¸/Ð ÐµÐ´Ð°Ð³ÑÐ²Ð°ÑÐ¸ Ð²ÐºÐ»Ð°Ð´ÐºÑ</UITabForm>
  </title>
 </TabForm_Popup>
 
 <tab_permission>
  <title>
-  <SelectUser>Вибрати користувача</SelectUser>
-<SelectMember>Вибрати члена</SelectMember>
-<AddAny>Будь-які</AddAny>
+  <SelectUser>ÐÐ¸Ð±ÑÐ°ÑÐ¸ ÐºÐ¾ÑÐ¸ÑÑÑÐ²Ð°ÑÐ°</SelectUser>
+<SelectMember>ÐÐ¸Ð±ÑÐ°ÑÐ¸ ÑÐ»ÐµÐ½Ð°</SelectMember>
+<AddAny>ÐÑÐ´Ñ-ÑÐºÑ</AddAny>
  </title>
 </tab_permission>
   <!--
@@ -1041,24 +1041,24 @@
   -->
   <UIECMTemplateList>
     <title>
-      <View>Перегляд</View>
-      <EditInfo>Редагувати</EditInfo>
-      <Delete>Видалити</Delete>
+      <View>ÐÐµÑÐµÐ³Ð»ÑÐ´</View>
+      <EditInfo>Ð ÐµÐ´Ð°Ð³ÑÐ²Ð°ÑÐ¸</EditInfo>
+      <Delete>ÐÐ¸Ð´Ð°Ð»Ð¸ÑÐ¸</Delete>
     </title>
     <header>
-      <name>Ім’я</name>
-      <path>Значення</path>
-      <baseVersion>Базова версія</baseVersion>
-      <action>Дія</action>
+      <name>ÐÐ¼âÑ</name>
+      <path>ÐÐ½Ð°ÑÐµÐ½Ð½Ñ</path>
+      <baseVersion>ÐÐ°Ð·Ð¾Ð²Ð° Ð²ÐµÑÑÑÑ</baseVersion>
+      <action>ÐÑÑ</action>
     </header>
     <action>
-      <Add>Додати</Add>
+      <Add>ÐÐ¾Ð´Ð°ÑÐ¸</Add>
     </action>
     <msg>
-      <template-in-use>Не вдалося видалити {0}. Він наразі використовується.</template-in-use>
-      <confirm-delete>Ви дійсно бажаєте видалити цей шаблон?</confirm-delete>
-      <access-denied>Доступ заборонено. Ви не маєте дозволу на використання цієї функції.</access-denied>
-      <delete-permission-denied>У вас немає дозволу на видалення '{0}' шаблон.</delete-permission-denied>
+      <template-in-use>ÐÐµ Ð²Ð´Ð°Ð»Ð¾ÑÑ Ð²Ð¸Ð´Ð°Ð»Ð¸ÑÐ¸ {0}. ÐÑÐ½ Ð½Ð°ÑÐ°Ð·Ñ Ð²Ð¸ÐºÐ¾ÑÐ¸ÑÑÐ¾Ð²ÑÑÑÑÑÑ.</template-in-use>
+      <confirm-delete>ÐÐ¸ Ð´ÑÐ¹ÑÐ½Ð¾ Ð±Ð°Ð¶Ð°ÑÑÐµ Ð²Ð¸Ð´Ð°Ð»Ð¸ÑÐ¸ ÑÐµÐ¹ ÑÐ°Ð±Ð»Ð¾Ð½?</confirm-delete>
+      <access-denied>ÐÐ¾ÑÑÑÐ¿ Ð·Ð°Ð±Ð¾ÑÐ¾Ð½ÐµÐ½Ð¾. ÐÐ¸ Ð½Ðµ Ð¼Ð°ÑÑÐµ Ð´Ð¾Ð·Ð²Ð¾Ð»Ñ Ð½Ð° Ð²Ð¸ÐºÐ¾ÑÐ¸ÑÑÐ°Ð½Ð½Ñ ÑÑÑÑ ÑÑÐ½ÐºÑÑÑ.</access-denied>
+      <delete-permission-denied>Ð£ Ð²Ð°Ñ Ð½ÐµÐ¼Ð°Ñ Ð´Ð¾Ð·Ð²Ð¾Ð»Ñ Ð½Ð° Ð²Ð¸Ð´Ð°Ð»ÐµÐ½Ð½Ñ '{0}' ÑÐ°Ð±Ð»Ð¾Ð½.</delete-permission-denied>
     </msg>
   </UIECMTemplateList>
   <!--
@@ -1067,38 +1067,35 @@
   ################################################################################
   -->
   <UITemplateForm>
-    <title>
-      <AddPermission>Add Permission</AddPermission>
-    </title>
     <action>
       <Save>#{word.save}</Save>
       <Cancel>#{word.cancel}</Cancel>
-      <Reset>Скинути</Reset>
-      <Restore>Відновити</Restore>
+      <Reset>Ð¡ÐºÐ¸Ð½ÑÑÐ¸</Reset>
+      <Restore>ÐÑÐ´Ð½Ð¾Ð²Ð¸ÑÐ¸</Restore>
       <Refresh>#{word.refresh}</Refresh>
     </action>
     <msg>
-      <version-restored>Версія {0} була успішно відновлена.</version-restored>
-      <role-require>Будь ласка, виберіть дозвіл.</role-require>
-      <template-name-exist>Ім'я шаблону "{0}" уже існує.</template-name-exist>
-      <add-permission-denied>У вас немає дозволу на додавання нового шаблону.</add-permission-denied>
-      <edit-permission-denied>Ви немаєте дозволу змінювати '{0}' шаблон.</edit-permission-denied>
+      <version-restored>ÐÐµÑÑÑÑ {0} Ð±ÑÐ»Ð° ÑÑÐ¿ÑÑÐ½Ð¾ Ð²ÑÐ´Ð½Ð¾Ð²Ð»ÐµÐ½Ð°.</version-restored>
+      <role-require>ÐÑÐ´Ñ Ð»Ð°ÑÐºÐ°, Ð²Ð¸Ð±ÐµÑÑÑÑ Ð´Ð¾Ð·Ð²ÑÐ».</role-require>
+      <template-name-exist>ÐÐ¼'Ñ ÑÐ°Ð±Ð»Ð¾Ð½Ñ "{0}" ÑÐ¶Ðµ ÑÑÐ½ÑÑ.</template-name-exist>
+      <add-permission-denied>Ð£ Ð²Ð°Ñ Ð½ÐµÐ¼Ð°Ñ Ð´Ð¾Ð·Ð²Ð¾Ð»Ñ Ð½Ð° Ð´Ð¾Ð´Ð°Ð²Ð°Ð½Ð½Ñ Ð½Ð¾Ð²Ð¾Ð³Ð¾ ÑÐ°Ð±Ð»Ð¾Ð½Ñ.</add-permission-denied>
+      <edit-permission-denied>ÐÐ¸ Ð½ÐµÐ¼Ð°ÑÑÐµ Ð´Ð¾Ð·Ð²Ð¾Ð»Ñ Ð·Ð¼ÑÐ½ÑÐ²Ð°ÑÐ¸ '{0}' ÑÐ°Ð±Ð»Ð¾Ð½.</edit-permission-denied>
     </msg>
     <tab>
       <label>
-        <template>Шаблон</template>
-        <defaultDialog>Діалогове вікно</defaultDialog>
-        <defaultView>Перегляд</defaultView>
+        <template>Ð¨Ð°Ð±Ð»Ð¾Ð½</template>
+        <defaultDialog>ÐÑÐ°Ð»Ð¾Ð³Ð¾Ð²Ðµ Ð²ÑÐºÐ½Ð¾</defaultDialog>
+        <defaultView>ÐÐµÑÐµÐ³Ð»ÑÐ´</defaultView>
       </label>
     </tab>
     <label>
-      <name>Ім'я:</name>
-      <label>Позначка:</label>
-      <isDocumentTemplate>це шаблон документа:</isDocumentTemplate>
-      <dialog>Вміст діалогового вікна</dialog>
-      <view>Переглянути контент</view>
-      <permission>Права доступу:</permission>
-      <selectPemistion>Права доступу</selectPemistion>
+      <name>ÐÐ¼'Ñ:</name>
+      <label>ÐÐ¾Ð·Ð½Ð°ÑÐºÐ°:</label>
+      <isDocumentTemplate>ÑÐµ ÑÐ°Ð±Ð»Ð¾Ð½ Ð´Ð¾ÐºÑÐ¼ÐµÐ½ÑÐ°:</isDocumentTemplate>
+      <dialog>ÐÐ¼ÑÑÑ Ð´ÑÐ°Ð»Ð¾Ð³Ð¾Ð²Ð¾Ð³Ð¾ Ð²ÑÐºÐ½Ð°</dialog>
+      <view>ÐÐµÑÐµÐ³Ð»ÑÐ½ÑÑÐ¸ ÐºÐ¾Ð½ÑÐµÐ½Ñ</view>
+      <permission>ÐÑÐ°Ð²Ð° Ð´Ð¾ÑÑÑÐ¿Ñ:</permission>
+      <selectPemistion>ÐÑÐ°Ð²Ð° Ð´Ð¾ÑÑÑÐ¿Ñ</selectPemistion>
     </label>
   </UITemplateForm>
   <!--
@@ -1108,27 +1105,27 @@
   -->
   <ecmTempForm>
     <label>
-      <version>Виберіть версію:</version>
-      <content>Контент:</content>
-      <name>Ім'я:</name>
-      <homeTemplate>Тип шаблону:</homeTemplate>
-      <enableVersion>Включена версія:</enableVersion>
+      <version>ÐÐ¸Ð±ÐµÑÑÑÑ Ð²ÐµÑÑÑÑ:</version>
+      <content>ÐÐ¾Ð½ÑÐµÐ½Ñ:</content>
+      <name>ÐÐ¼'Ñ:</name>
+      <homeTemplate>Ð¢Ð¸Ð¿ ÑÐ°Ð±Ð»Ð¾Ð½Ñ:</homeTemplate>
+      <enableVersion>ÐÐºÐ»ÑÑÐµÐ½Ð° Ð²ÐµÑÑÑÑ:</enableVersion>
     </label>
   </ecmTempForm>
   <ecmTempFormPopup>
     <title>
-      <ecmTempForm>Додавання/Редагування шаблону подання</ecmTempForm>
+      <ecmTempForm>ÐÐ¾Ð´Ð°Ð²Ð°Ð½Ð½Ñ/Ð ÐµÐ´Ð°Ð³ÑÐ²Ð°Ð½Ð½Ñ ÑÐ°Ð±Ð»Ð¾Ð½Ñ Ð¿Ð¾Ð´Ð°Ð½Ð½Ñ</ecmTempForm>
     </title>
   </ecmTempFormPopup>
   <ecmTempFormAdd>
     <title>
-      <ecmTempForm>Додати шаблон Explorer</ecmTempForm>
-      <ecmTempFormAdd>Додати шаблон Explorer</ecmTempFormAdd>
+      <ecmTempForm>ÐÐ¾Ð´Ð°ÑÐ¸ ÑÐ°Ð±Ð»Ð¾Ð½ Explorer</ecmTempForm>
+      <ecmTempFormAdd>ÐÐ¾Ð´Ð°ÑÐ¸ ÑÐ°Ð±Ð»Ð¾Ð½ Explorer</ecmTempFormAdd>
     </title>
   </ecmTempFormAdd>
   <ecmTempFormEdit>
     <title>
-      <ecmTempForm>Редагувати Explorer шаблон</ecmTempForm>
+      <ecmTempForm>Ð ÐµÐ´Ð°Ð³ÑÐ²Ð°ÑÐ¸ Explorer ÑÐ°Ð±Ð»Ð¾Ð½</ecmTempForm>
     </title>
   </ecmTempFormEdit>
 
@@ -1144,7 +1141,7 @@
   -->
   <UIECMFilterForm>
     <label>
-      <selectScript>Вибрати категорію</selectScript>
+      <selectScript>ÐÐ¸Ð±ÑÐ°ÑÐ¸ ÐºÐ°ÑÐµÐ³Ð¾ÑÑÑ</selectScript>
     </label>
   </UIECMFilterForm>
   <!--
@@ -1156,20 +1153,20 @@
     <action>
       <Edit>#{word.edit}</Edit>
       <Delete>#{word.delete}</Delete>
-      <AddNew>Додати скріпт</AddNew>
+      <AddNew>ÐÐ¾Ð´Ð°ÑÐ¸ ÑÐºÑÑÐ¿Ñ</AddNew>
     </action>
     <msg>
-      <confirm-delete>Ви дійсно бажаєте видалити цей скріпт?</confirm-delete>
+      <confirm-delete>ÐÐ¸ Ð´ÑÐ¹ÑÐ½Ð¾ Ð±Ð°Ð¶Ð°ÑÑÐµ Ð²Ð¸Ð´Ð°Ð»Ð¸ÑÐ¸ ÑÐµÐ¹ ÑÐºÑÑÐ¿Ñ?</confirm-delete>
     </msg>
     <header>
-      <scriptName>Ім’я</scriptName>
-      <path>Скріпт</path>
-      <baseVersion>Базова версія</baseVersion>
-      <action>Дії</action>
+      <scriptName>ÐÐ¼âÑ</scriptName>
+      <path>Ð¡ÐºÑÑÐ¿Ñ</path>
+      <baseVersion>ÐÐ°Ð·Ð¾Ð²Ð° Ð²ÐµÑÑÑÑ</baseVersion>
+      <action>ÐÑÑ</action>
     </header>
     <tooltip>
-      <Edit>Редагувати</Edit>
-      <Delete>Видалити</Delete>
+      <Edit>Ð ÐµÐ´Ð°Ð³ÑÐ²Ð°ÑÐ¸</Edit>
+      <Delete>ÐÐ¸Ð´Ð°Ð»Ð¸ÑÐ¸</Delete>
     </tooltip>
   </UIScriptList>
   <!--
@@ -1189,13 +1186,13 @@
       <Restore>#{word.restore}</Restore>
       <Cancel>#{word.cancel}</Cancel>
       <Refresh>#{word.refresh}</Refresh>
-      <Change>Змінити</Change>
+      <Change>ÐÐ¼ÑÐ½Ð¸ÑÐ¸</Change>
     </action>
     <msg>
-      <version-restored>Версія {0} була успішно відновлена.</version-restored>
-      <name-null>Будь ласка, введіть ім'я скріпта.</name-null>
-      <name-exist>Ім'я скріпта "{0}" уже існує.</name-exist>
-      <fileName-invalid>Ім'я скріпта має деякі неприпустимі символи.</fileName-invalid>
+      <version-restored>ÐÐµÑÑÑÑ {0} Ð±ÑÐ»Ð° ÑÑÐ¿ÑÑÐ½Ð¾ Ð²ÑÐ´Ð½Ð¾Ð²Ð»ÐµÐ½Ð°.</version-restored>
+      <name-null>ÐÑÐ´Ñ Ð»Ð°ÑÐºÐ°, Ð²Ð²ÐµÐ´ÑÑÑ ÑÐ¼'Ñ ÑÐºÑÑÐ¿ÑÐ°.</name-null>
+      <name-exist>ÐÐ¼'Ñ ÑÐºÑÑÐ¿ÑÐ° "{0}" ÑÐ¶Ðµ ÑÑÐ½ÑÑ.</name-exist>
+      <fileName-invalid>ÐÐ¼'Ñ ÑÐºÑÑÐ¿ÑÐ° Ð¼Ð°Ñ Ð´ÐµÑÐºÑ Ð½ÐµÐ¿ÑÐ¸Ð¿ÑÑÑÐ¸Ð¼Ñ ÑÐ¸Ð¼Ð²Ð¾Ð»Ð¸.</fileName-invalid>
     </msg>
   </UIScriptForm>
   <!--
@@ -1205,16 +1202,16 @@
   -->
   <ScriptContainerPopup>
     <title>
-      <UIScriptForm>Додати/Редагувати скріпт</UIScriptForm>
+      <UIScriptForm>ÐÐ¾Ð´Ð°ÑÐ¸/Ð ÐµÐ´Ð°Ð³ÑÐ²Ð°ÑÐ¸ ÑÐºÑÑÐ¿Ñ</UIScriptForm>
     </title>
   </ScriptContainerPopup>
   <UIScriptForm>
     <label>
-      <selectVersion>Версії</selectVersion>
-      <scriptContent>Контент</scriptContent>
-      <scriptLabel>Ім’я</scriptLabel>
-      <scriptName>Скріпт</scriptName>
-      <enableVersion>Увімкнути відстеження версій</enableVersion>
+      <selectVersion>ÐÐµÑÑÑÑ</selectVersion>
+      <scriptContent>ÐÐ¾Ð½ÑÐµÐ½Ñ</scriptContent>
+      <scriptLabel>ÐÐ¼âÑ</scriptLabel>
+      <scriptName>Ð¡ÐºÑÑÐ¿Ñ</scriptName>
+      <enableVersion>Ð£Ð²ÑÐ¼ÐºÐ½ÑÑÐ¸ Ð²ÑÐ´ÑÑÐµÐ¶ÐµÐ½Ð½Ñ Ð²ÐµÑÑÑÐ¹</enableVersion>
     </label>
   </UIScriptForm>
   <!--
@@ -1225,11 +1222,11 @@
  
   <ecmScriptForm>
     <label>
-      <selectVersion>Версії</selectVersion>
-      <scriptContent>Контент</scriptContent>
-      <scriptLabel>Ім’я</scriptLabel>
-      <scriptName>Скріпт</scriptName>
-      <enableVersion>Увімкнути відстеження версій</enableVersion>
+      <selectVersion>ÐÐµÑÑÑÑ</selectVersion>
+      <scriptContent>ÐÐ¾Ð½ÑÐµÐ½Ñ</scriptContent>
+      <scriptLabel>ÐÐ¼âÑ</scriptLabel>
+      <scriptName>Ð¡ÐºÑÑÐ¿Ñ</scriptName>
+      <enableVersion>Ð£Ð²ÑÐ¼ÐºÐ½ÑÑÐ¸ Ð²ÑÐ´ÑÑÐµÐ¶ÐµÐ½Ð½Ñ Ð²ÐµÑÑÑÐ¹</enableVersion>
     </label>
   </ecmScriptForm>
   <!--
@@ -1242,34 +1239,34 @@
       <Save>#{word.save}</Save>
       <Cancel>#{word.cancel}</Cancel>
     </action>
-    <title>Додати категорію</title>
+    <title>ÐÐ¾Ð´Ð°ÑÐ¸ ÐºÐ°ÑÐµÐ³Ð¾ÑÑÑ</title>
     <label>
-      <taxonomyName>Ім'я категорії</taxonomyName>
-      <parentPath>Батьківський об'єкт</parentPath>
+      <taxonomyName>ÐÐ¼'Ñ ÐºÐ°ÑÐµÐ³Ð¾ÑÑÑ</taxonomyName>
+      <parentPath>ÐÐ°ÑÑÐºÑÐ²ÑÑÐºÐ¸Ð¹ Ð¾Ð±'ÑÐºÑ</parentPath>
     </label>
     <msg>
-      <exist>Категорія "{0}" уже існує.</exist>
-      <name-null>Будь ласка, вкажіть ім'я категорії.</name-null>
-      <name-invalid>Ім'я категорії має деякі неприпустимі символи.</name-invalid>
-      <name-too-long>Ім'я категорії має містити  менше 30 символів.</name-too-long>
+      <exist>ÐÐ°ÑÐµÐ³Ð¾ÑÑÑ "{0}" ÑÐ¶Ðµ ÑÑÐ½ÑÑ.</exist>
+      <name-null>ÐÑÐ´Ñ Ð»Ð°ÑÐºÐ°, Ð²ÐºÐ°Ð¶ÑÑÑ ÑÐ¼'Ñ ÐºÐ°ÑÐµÐ³Ð¾ÑÑÑ.</name-null>
+      <name-invalid>ÐÐ¼'Ñ ÐºÐ°ÑÐµÐ³Ð¾ÑÑÑ Ð¼Ð°Ñ Ð´ÐµÑÐºÑ Ð½ÐµÐ¿ÑÐ¸Ð¿ÑÑÑÐ¸Ð¼Ñ ÑÐ¸Ð¼Ð²Ð¾Ð»Ð¸.</name-invalid>
+      <name-too-long>ÐÐ¼'Ñ ÐºÐ°ÑÐµÐ³Ð¾ÑÑÑ Ð¼Ð°Ñ Ð¼ÑÑÑÐ¸ÑÐ¸  Ð¼ÐµÐ½ÑÐµ 30 ÑÐ¸Ð¼Ð²Ð¾Ð»ÑÐ².</name-too-long>
     </msg>
   </UITaxonomyForm>
     
   <EditTaxonomyTreePopup>
     <title>
-      <UITaxonomyTreeContainer>Редагування дерева категорій</UITaxonomyTreeContainer>
+      <UITaxonomyTreeContainer>Ð ÐµÐ´Ð°Ð³ÑÐ²Ð°Ð½Ð½Ñ Ð´ÐµÑÐµÐ²Ð° ÐºÐ°ÑÐµÐ³Ð¾ÑÑÐ¹</UITaxonomyTreeContainer>
     </title>
   </EditTaxonomyTreePopup>
 
   <AddTaxonomyTreePopup>
     <title>
-      <UITaxonomyTreeContainer>Додати дерево категорій</UITaxonomyTreeContainer>
+      <UITaxonomyTreeContainer>ÐÐ¾Ð´Ð°ÑÐ¸ Ð´ÐµÑÐµÐ²Ð¾ ÐºÐ°ÑÐµÐ³Ð¾ÑÑÐ¹</UITaxonomyTreeContainer>
     </title>
   </AddTaxonomyTreePopup>
   
   <TaxonomyPopupCreateChild>
     <title>
-      <UITaxonomyTreeCreateChildForm>Редагування дерева категорій</UITaxonomyTreeCreateChildForm>
+      <UITaxonomyTreeCreateChildForm>Ð ÐµÐ´Ð°Ð³ÑÐ²Ð°Ð½Ð½Ñ Ð´ÐµÑÐµÐ²Ð° ÐºÐ°ÑÐµÐ³Ð¾ÑÑÐ¹</UITaxonomyTreeCreateChildForm>
     </title>
   </TaxonomyPopupCreateChild>
 
@@ -1279,47 +1276,47 @@
       <Cancel>#{word.cancel}</Cancel>
     </action>
     <label>
-      <parentPath>Батьківський об'єкт:</parentPath>
-      <taxonomyName>Ім'я категорії:</taxonomyName>
+      <parentPath>ÐÐ°ÑÑÐºÑÐ²ÑÑÐºÐ¸Ð¹ Ð¾Ð±'ÑÐºÑ:</parentPath>
+      <taxonomyName>ÐÐ¼'Ñ ÐºÐ°ÑÐµÐ³Ð¾ÑÑÑ:</taxonomyName>
     </label>
     <msg>
-      <name-null>Ім'я категорії порожнє.</name-null>
-      <name-invalid>Ім'я категорії неприпустиме.</name-invalid>
-      <name-too-long>Ім'я категорії не може мати більше {0} символів.</name-too-long>
-      <exist>Ім'я категорії вже існує.</exist>
+      <name-null>ÐÐ¼'Ñ ÐºÐ°ÑÐµÐ³Ð¾ÑÑÑ Ð¿Ð¾ÑÐ¾Ð¶Ð½Ñ.</name-null>
+      <name-invalid>ÐÐ¼'Ñ ÐºÐ°ÑÐµÐ³Ð¾ÑÑÑ Ð½ÐµÐ¿ÑÐ¸Ð¿ÑÑÑÐ¸Ð¼Ðµ.</name-invalid>
+      <name-too-long>ÐÐ¼'Ñ ÐºÐ°ÑÐµÐ³Ð¾ÑÑÑ Ð½Ðµ Ð¼Ð¾Ð¶Ðµ Ð¼Ð°ÑÐ¸ Ð±ÑÐ»ÑÑÐµ {0} ÑÐ¸Ð¼Ð²Ð¾Ð»ÑÐ².</name-too-long>
+      <exist>ÐÐ¼'Ñ ÐºÐ°ÑÐµÐ³Ð¾ÑÑÑ Ð²Ð¶Ðµ ÑÑÐ½ÑÑ.</exist>
     </msg>
 </UITaxonomyTreeCreateChildForm>
 
   <PopupComponent>
     <title>
-      <UIOneNodePathSelector>Вибрати шлях</UIOneNodePathSelector>
+      <UIOneNodePathSelector>ÐÐ¸Ð±ÑÐ°ÑÐ¸ ÑÐ»ÑÑ</UIOneNodePathSelector>
     </title>
   </PopupComponent>
   
   <TaxoPopupUserSelector>
   <title>
-      <TaxoTreeSelectUserOrGroup>Вибрати користувача</TaxoTreeSelectUserOrGroup>
-      <UIPermissionTreeSelectUser>Вибрати користувача</UIPermissionTreeSelectUser>
+      <TaxoTreeSelectUserOrGroup>ÐÐ¸Ð±ÑÐ°ÑÐ¸ ÐºÐ¾ÑÐ¸ÑÑÑÐ²Ð°ÑÐ°</TaxoTreeSelectUserOrGroup>
+      <UIPermissionTreeSelectUser>ÐÐ¸Ð±ÑÐ°ÑÐ¸ ÐºÐ¾ÑÐ¸ÑÑÑÐ²Ð°ÑÐ°</UIPermissionTreeSelectUser>
     </title>
   </TaxoPopupUserSelector>
 
   <TaxoTreeSelectUserOrGroupPopup>
   <title>
-      <TaxoTreeSelectUserOrGroup>Виберіть Членство</TaxoTreeSelectUserOrGroup>
+      <TaxoTreeSelectUserOrGroup>ÐÐ¸Ð±ÐµÑÑÑÑ Ð§Ð»ÐµÐ½ÑÑÐ²Ð¾</TaxoTreeSelectUserOrGroup>
     </title>
   </TaxoTreeSelectUserOrGroupPopup>
   
   <TaxoTreeAnyPermission>
     <label>
-      <any>Будь-яке право доступа</any>
+      <any>ÐÑÐ´Ñ-ÑÐºÐµ Ð¿ÑÐ°Ð²Ð¾ Ð´Ð¾ÑÑÑÐ¿Ð°</any>
       <anyPermission>TaxoTreeAnyPermission</anyPermission>
     </label>
   </TaxoTreeAnyPermission>
   
   <TaxoTreeSelectUserOrGroup>
     <label>
-      <selectGroup>Вибрати групу</selectGroup>
-      <selectMembership>Виберіть Членство</selectMembership>
+      <selectGroup>ÐÐ¸Ð±ÑÐ°ÑÐ¸ Ð³ÑÑÐ¿Ñ</selectGroup>
+      <selectMembership>ÐÐ¸Ð±ÐµÑÑÑÑ Ð§Ð»ÐµÐ½ÑÑÐ²Ð¾</selectMembership>
     </label>
   </TaxoTreeSelectUserOrGroup>
   
@@ -1330,23 +1327,23 @@
   -->
   <UITaxonomyTreeList>
     <header>
-      <name>Дерево категорій</name>
-      <workspace>Робоча область</workspace>
-      <homePath>Шлях</homePath>
-      <action>Дія</action>
+      <name>ÐÐµÑÐµÐ²Ð¾ ÐºÐ°ÑÐµÐ³Ð¾ÑÑÐ¹</name>
+      <workspace>Ð Ð¾Ð±Ð¾ÑÐ° Ð¾Ð±Ð»Ð°ÑÑÑ</workspace>
+      <homePath>Ð¨Ð»ÑÑ</homePath>
+      <action>ÐÑÑ</action>
     </header>
     <action>
-      <AddTaxonomyTree>Додати дерево категорій</AddTaxonomyTree>
+      <AddTaxonomyTree>ÐÐ¾Ð´Ð°ÑÐ¸ Ð´ÐµÑÐµÐ²Ð¾ ÐºÐ°ÑÐµÐ³Ð¾ÑÑÐ¹</AddTaxonomyTree>
     </action>
     <tooltip>
-      <EditTaxonomyTree>Редагування дерева категорій</EditTaxonomyTree>
-      <Delete>Видалення дерева категорій</Delete>
+      <EditTaxonomyTree>Ð ÐµÐ´Ð°Ð³ÑÐ²Ð°Ð½Ð½Ñ Ð´ÐµÑÐµÐ²Ð° ÐºÐ°ÑÐµÐ³Ð¾ÑÑÐ¹</EditTaxonomyTree>
+      <Delete>ÐÐ¸Ð´Ð°Ð»ÐµÐ½Ð½Ñ Ð´ÐµÑÐµÐ²Ð° ÐºÐ°ÑÐµÐ³Ð¾ÑÑÐ¹</Delete>
     </tooltip>
-    <title>Перегляд дерева категорій</title>
+    <title>ÐÐµÑÐµÐ³Ð»ÑÐ´ Ð´ÐµÑÐµÐ²Ð° ÐºÐ°ÑÐµÐ³Ð¾ÑÑÐ¹</title>
     <msg>
-      <no-list>Жодне дерево категорій не було створене.</no-list>
-      <confirm-delete>Ви впевнені, що бажаєте видалити дерево категорій?</confirm-delete>
-      <is-in-trash>Це дерево категорій було переміщено в кошик.</is-in-trash>
+      <no-list>ÐÐ¾Ð´Ð½Ðµ Ð´ÐµÑÐµÐ²Ð¾ ÐºÐ°ÑÐµÐ³Ð¾ÑÑÐ¹ Ð½Ðµ Ð±ÑÐ»Ð¾ ÑÑÐ²Ð¾ÑÐµÐ½Ðµ.</no-list>
+      <confirm-delete>ÐÐ¸ Ð²Ð¿ÐµÐ²Ð½ÐµÐ½Ñ, ÑÐ¾ Ð±Ð°Ð¶Ð°ÑÑÐµ Ð²Ð¸Ð´Ð°Ð»Ð¸ÑÐ¸ Ð´ÐµÑÐµÐ²Ð¾ ÐºÐ°ÑÐµÐ³Ð¾ÑÑÐ¹?</confirm-delete>
+      <is-in-trash>Ð¦Ðµ Ð´ÐµÑÐµÐ²Ð¾ ÐºÐ°ÑÐµÐ³Ð¾ÑÑÐ¹ Ð±ÑÐ»Ð¾ Ð¿ÐµÑÐµÐ¼ÑÑÐµÐ½Ð¾ Ð² ÐºÐ¾ÑÐ¸Ðº.</is-in-trash>
     </msg>
   </UITaxonomyTreeList>
   
@@ -1357,97 +1354,97 @@
   -->
   <UITaxonomyTreeForm>
     <label>
-      <name>Ім’я</name>
-      <workspace>Робоча область</workspace>
-      <homePath>Шлях</homePath>
-      <permissions>Права доступу</permissions>
+      <name>ÐÐ¼âÑ</name>
+      <workspace>Ð Ð¾Ð±Ð¾ÑÐ° Ð¾Ð±Ð»Ð°ÑÑÑ</workspace>
+      <homePath>Ð¨Ð»ÑÑ</homePath>
+      <permissions>ÐÑÐ°Ð²Ð° Ð´Ð¾ÑÑÑÐ¿Ñ</permissions>
     </label>
     <msg>
-      <homapath-emty>Введіть шлях</homapath-emty>
+      <homapath-emty>ÐÐ²ÐµÐ´ÑÑÑ ÑÐ»ÑÑ</homapath-emty>
     </msg>
   </UITaxonomyTreeForm>
   
   <UIPermissionTreeForm>
     <label>
-      <UIPopupWindow>Вибрати</UIPopupWindow>
+      <UIPopupWindow>ÐÐ¸Ð±ÑÐ°ÑÐ¸</UIPopupWindow>
       <permission>UIPermissionTreeForm</permission>
-      <userOrGroup>Користувач або Група</userOrGroup>
-      <read>Право на читання</read>
-      <add_node>Право на додавання вузла</add_node>
-      <set_property>Встановити права власності</set_property>
-      <remove>Видалити права</remove>
+      <userOrGroup>ÐÐ¾ÑÐ¸ÑÑÑÐ²Ð°Ñ Ð°Ð±Ð¾ ÐÑÑÐ¿Ð°</userOrGroup>
+      <read>ÐÑÐ°Ð²Ð¾ Ð½Ð° ÑÐ¸ÑÐ°Ð½Ð½Ñ</read>
+      <add_node>ÐÑÐ°Ð²Ð¾ Ð½Ð° Ð´Ð¾Ð´Ð°Ð²Ð°Ð½Ð½Ñ Ð²ÑÐ·Ð»Ð°</add_node>
+      <set_property>ÐÑÑÐ°Ð½Ð¾Ð²Ð¸ÑÐ¸ Ð¿ÑÐ°Ð²Ð° Ð²Ð»Ð°ÑÐ½Ð¾ÑÑÑ</set_property>
+      <remove>ÐÐ¸Ð´Ð°Ð»Ð¸ÑÐ¸ Ð¿ÑÐ°Ð²Ð°</remove>
     </label>
-    <title>Додати дозвіл до цього вузла</title>
+    <title>ÐÐ¾Ð´Ð°ÑÐ¸ Ð´Ð¾Ð·Ð²ÑÐ» Ð´Ð¾ ÑÑÐ¾Ð³Ð¾ Ð²ÑÐ·Ð»Ð°</title>
     <action>
       <Close>#{word.close}</Close>
-      <Save>Save</Save>
-      <Reset>Reset</Reset>
+      <Save>ÐÐ±ÐµÑÐµÐ³ÑÐ¸</Save>
+      <Reset>Ð¡ÐºÐ¸Ð½ÑÑÐ¸</Reset>
     </action>
     <msg>
-      <checkbox-require>Будь ласка, оберіть хоча б один дозвіл.</checkbox-require>
-      <userOrGroup-required>Будь ласка, виберіть користувача або групу перед збереженням дозволу.</userOrGroup-required>
-      <not-change-permission>Ви не маєте права додати дозвіл.</not-change-permission>
-      <access-denied>Доступ заборонено. Не можна видалити цей дозвіл.</access-denied>
+      <checkbox-require>ÐÑÐ´Ñ Ð»Ð°ÑÐºÐ°, Ð¾Ð±ÐµÑÑÑÑ ÑÐ¾ÑÐ° Ð± Ð¾Ð´Ð¸Ð½ Ð´Ð¾Ð·Ð²ÑÐ».</checkbox-require>
+      <userOrGroup-required>ÐÑÐ´Ñ Ð»Ð°ÑÐºÐ°, Ð²Ð¸Ð±ÐµÑÑÑÑ ÐºÐ¾ÑÐ¸ÑÑÑÐ²Ð°ÑÐ° Ð°Ð±Ð¾ Ð³ÑÑÐ¿Ñ Ð¿ÐµÑÐµÐ´ Ð·Ð±ÐµÑÐµÐ¶ÐµÐ½Ð½ÑÐ¼ Ð´Ð¾Ð·Ð²Ð¾Ð»Ñ.</userOrGroup-required>
+      <not-change-permission>ÐÐ¸ Ð½Ðµ Ð¼Ð°ÑÑÐµ Ð¿ÑÐ°Ð²Ð° Ð´Ð¾Ð´Ð°ÑÐ¸ Ð´Ð¾Ð·Ð²ÑÐ».</not-change-permission>
+      <access-denied>ÐÐ¾ÑÑÑÐ¿ Ð·Ð°Ð±Ð¾ÑÐ¾Ð½ÐµÐ½Ð¾. ÐÐµ Ð¼Ð¾Ð¶Ð½Ð° Ð²Ð¸Ð´Ð°Ð»Ð¸ÑÐ¸ ÑÐµÐ¹ Ð´Ð¾Ð·Ð²ÑÐ».</access-denied>
     </msg>
   </UIPermissionTreeForm>
   
   <PopupTaxonomyJCRBrowser>
   <title>
-      <UIOneNodePathSelector>Вибрати шлях в головну директорію</UIOneNodePathSelector>
+      <UIOneNodePathSelector>ÐÐ¸Ð±ÑÐ°ÑÐ¸ ÑÐ»ÑÑ Ð² Ð³Ð¾Ð»Ð¾Ð²Ð½Ñ Ð´Ð¸ÑÐµÐºÑÐ¾ÑÑÑ</UIOneNodePathSelector>
     </title>
   </PopupTaxonomyJCRBrowser>
   
   <PopupTaxonomyTreePermission>
     <title>
-      <UIPermissionSelector>Вибрати права доступу</UIPermissionSelector>
+      <UIPermissionSelector>ÐÐ¸Ð±ÑÐ°ÑÐ¸ Ð¿ÑÐ°Ð²Ð° Ð´Ð¾ÑÑÑÐ¿Ñ</UIPermissionSelector>
     </title>
    </PopupTaxonomyTreePermission>
    
    <PopupDrivePermission>
     <title>
-      <AddDrivePermissionSelector>Додати права доступу</AddDrivePermissionSelector>
-      <UIPermissionSelector>Вибрати права доступу</UIPermissionSelector>
+      <AddDrivePermissionSelector>ÐÐ¾Ð´Ð°ÑÐ¸ Ð¿ÑÐ°Ð²Ð° Ð´Ð¾ÑÑÑÐ¿Ñ</AddDrivePermissionSelector>
+      <UIPermissionSelector>ÐÐ¸Ð±ÑÐ°ÑÐ¸ Ð¿ÑÐ°Ð²Ð° Ð´Ð¾ÑÑÑÐ¿Ñ</UIPermissionSelector>
     </title>
   </PopupDrivePermission>
   
   <UIPopupWindow>
     <title>
-      <UIPermissionManager>Керування дозволами</UIPermissionManager>
+      <UIPermissionManager>ÐÐµÑÑÐ²Ð°Ð½Ð½Ñ Ð´Ð¾Ð·Ð²Ð¾Ð»Ð°Ð¼Ð¸</UIPermissionManager>
     </title>
    </UIPopupWindow>
 
   <PopupUserSelector>
     <title>
-      <UIUserContainer>Керування дозволами</UIUserContainer>
+      <UIUserContainer>ÐÐµÑÑÐ²Ð°Ð½Ð½Ñ Ð´Ð¾Ð·Ð²Ð¾Ð»Ð°Ð¼Ð¸</UIUserContainer>
     </title>
    </PopupUserSelector>
    
   <UIPermissionInfo>
     <action>
       <title>
-        <Edit>Редагувати</Edit>
-        <Delete>Видалити дозвіл</Delete>
+        <Edit>Ð ÐµÐ´Ð°Ð³ÑÐ²Ð°ÑÐ¸</Edit>
+        <Delete>ÐÐ¸Ð´Ð°Ð»Ð¸ÑÐ¸ Ð´Ð¾Ð·Ð²ÑÐ»</Delete>
       </title>
     </action>
     <header>
-      <usersOrGroups>Користувач або Група</usersOrGroups>
-      <read>Читати</read>
-      <addNode>Змінити вузол</addNode>
-      <remove>Видалити</remove>
-      <action>Дія</action>
+      <usersOrGroups>ÐÐ¾ÑÐ¸ÑÑÑÐ²Ð°Ñ Ð°Ð±Ð¾ ÐÑÑÐ¿Ð°</usersOrGroups>
+      <read>Ð§Ð¸ÑÐ°ÑÐ¸</read>
+      <addNode>ÐÐ¼ÑÐ½Ð¸ÑÐ¸ Ð²ÑÐ·Ð¾Ð»</addNode>
+      <remove>ÐÐ¸Ð´Ð°Ð»Ð¸ÑÐ¸</remove>
+      <action>ÐÑÑ</action>
     </header>
     <msg>
-      <confirm-delete-permission>Ви дійсно бажаєте видалити цей дозвіл?</confirm-delete-permission>
-      <no-permission-tochange>Ви не маєте право видаляти цей дозвіл.</no-permission-tochange>
-      <no-permission-remove>Неможливо видалити власника або користувача системи.</no-permission-remove>
-      <access-denied>Доступ заборонено. Не можна видалити цей дозвіл.</access-denied>
+      <confirm-delete-permission>ÐÐ¸ Ð´ÑÐ¹ÑÐ½Ð¾ Ð±Ð°Ð¶Ð°ÑÑÐµ Ð²Ð¸Ð´Ð°Ð»Ð¸ÑÐ¸ ÑÐµÐ¹ Ð´Ð¾Ð·Ð²ÑÐ»?</confirm-delete-permission>
+      <no-permission-tochange>ÐÐ¸ Ð½Ðµ Ð¼Ð°ÑÑÐµ Ð¿ÑÐ°Ð²Ð¾ Ð²Ð¸Ð´Ð°Ð»ÑÑÐ¸ ÑÐµÐ¹ Ð´Ð¾Ð·Ð²ÑÐ».</no-permission-tochange>
+      <no-permission-remove>ÐÐµÐ¼Ð¾Ð¶Ð»Ð¸Ð²Ð¾ Ð²Ð¸Ð´Ð°Ð»Ð¸ÑÐ¸ Ð²Ð»Ð°ÑÐ½Ð¸ÐºÐ° Ð°Ð±Ð¾ ÐºÐ¾ÑÐ¸ÑÑÑÐ²Ð°ÑÐ° ÑÐ¸ÑÑÐµÐ¼Ð¸.</no-permission-remove>
+      <access-denied>ÐÐ¾ÑÑÑÐ¿ Ð·Ð°Ð±Ð¾ÑÐ¾Ð½ÐµÐ½Ð¾. ÐÐµ Ð¼Ð¾Ð¶Ð½Ð° Ð²Ð¸Ð´Ð°Ð»Ð¸ÑÐ¸ ÑÐµÐ¹ Ð´Ð¾Ð·Ð²ÑÐ».</access-denied>
     </msg>
   </UIPermissionInfo>
   <permission>
     <title>
-      <SelectUser>Вибрати користувача</SelectUser>
-      <SelectMember>Виберіть Членство</SelectMember>
-      <AddAny>Кожний</AddAny>
+      <SelectUser>ÐÐ¸Ð±ÑÐ°ÑÐ¸ ÐºÐ¾ÑÐ¸ÑÑÑÐ²Ð°ÑÐ°</SelectUser>
+      <SelectMember>ÐÐ¸Ð±ÐµÑÑÑÑ Ð§Ð»ÐµÐ½ÑÑÐ²Ð¾</SelectMember>
+      <AddAny>ÐÐ¾Ð¶Ð½Ð¸Ð¹</AddAny>
     </title>
   </permission>
   <!--
@@ -1457,52 +1454,52 @@
   -->
   <SelectUserOrGroup>
     <title>
-      <UIGroupSelector>Вибрати користувача</UIGroupSelector>
-      <UIPermissionSelector>Вибрати члена</UIPermissionSelector>
-      <UIGroupMemberSelector>Виберіть Членство</UIGroupMemberSelector>
+      <UIGroupSelector>ÐÐ¸Ð±ÑÐ°ÑÐ¸ ÐºÐ¾ÑÐ¸ÑÑÑÐ²Ð°ÑÐ°</UIGroupSelector>
+      <UIPermissionSelector>ÐÐ¸Ð±ÑÐ°ÑÐ¸ ÑÐ»ÐµÐ½Ð°</UIPermissionSelector>
+      <UIGroupMemberSelector>ÐÐ¸Ð±ÐµÑÑÑÑ Ð§Ð»ÐµÐ½ÑÑÐ²Ð¾</UIGroupMemberSelector>
     </title>
   </SelectUserOrGroup>
   <UIGroupSelector>
     <label>
-      <selectGroup>Вибрати групу</selectGroup>
-      <selectUser>Вибрати користувача</selectUser>
+      <selectGroup>ÐÐ¸Ð±ÑÐ°ÑÐ¸ Ð³ÑÑÐ¿Ñ</selectGroup>
+      <selectUser>ÐÐ¸Ð±ÑÐ°ÑÐ¸ ÐºÐ¾ÑÐ¸ÑÑÑÐ²Ð°ÑÐ°</selectUser>
     </label>
     <msg>
-      <not-change-owner>'{0}' є власником цього вузла та має доступ на повне керування.</not-change-owner>
+      <not-change-owner>'{0}' Ñ Ð²Ð»Ð°ÑÐ½Ð¸ÐºÐ¾Ð¼ ÑÑÐ¾Ð³Ð¾ Ð²ÑÐ·Ð»Ð° ÑÐ° Ð¼Ð°Ñ Ð´Ð¾ÑÑÑÐ¿ Ð½Ð° Ð¿Ð¾Ð²Ð½Ðµ ÐºÐµÑÑÐ²Ð°Ð½Ð½Ñ.</not-change-owner>
     </msg>
   </UIGroupSelector>
   <UIPermissionForm>
     <label>
-      <UIPopupWindow>Вибрати</UIPopupWindow>
+      <UIPopupWindow>ÐÐ¸Ð±ÑÐ°ÑÐ¸</UIPopupWindow>
       <permission>UIPermissionForm</permission>
-      <userOrGroup>Користувач або Група</userOrGroup>
-      <read>Читати</read>
-      <add_node>Змінити</add_node>
-      <remove>Видалити</remove>
+      <userOrGroup>ÐÐ¾ÑÐ¸ÑÑÑÐ²Ð°Ñ Ð°Ð±Ð¾ ÐÑÑÐ¿Ð°</userOrGroup>
+      <read>Ð§Ð¸ÑÐ°ÑÐ¸</read>
+      <add_node>ÐÐ¼ÑÐ½Ð¸ÑÐ¸</add_node>
+      <remove>ÐÐ¸Ð´Ð°Ð»Ð¸ÑÐ¸</remove>
     </label>
-    <title>Додати дозвіл до цього вузла</title>
+    <title>ÐÐ¾Ð´Ð°ÑÐ¸ Ð´Ð¾Ð·Ð²ÑÐ» Ð´Ð¾ ÑÑÐ¾Ð³Ð¾ Ð²ÑÐ·Ð»Ð°</title>
     <action>
       <Close>#{word.close}</Close>
       <Save>#{word.save}</Save>
-      <Reset>Скинути</Reset>
+      <Reset>Ð¡ÐºÐ¸Ð½ÑÑÐ¸</Reset>
     </action>
     <msg>
-      <checkbox-require>Будь ласка, оберіть хоча б один дозвіл.</checkbox-require>
-      <userOrGroup-required>Будь ласка, виберіть користувача або групу перед збереженням дозволу.</userOrGroup-required>
-      <not-change-permission>Ви не маєте право додати дозвіл.</not-change-permission>
-      <access-denied>Доступ заборонено. Не можна видалити цей дозвіл.</access-denied>
+      <checkbox-require>ÐÑÐ´Ñ Ð»Ð°ÑÐºÐ°, Ð¾Ð±ÐµÑÑÑÑ ÑÐ¾ÑÐ° Ð± Ð¾Ð´Ð¸Ð½ Ð´Ð¾Ð·Ð²ÑÐ».</checkbox-require>
+      <userOrGroup-required>ÐÑÐ´Ñ Ð»Ð°ÑÐºÐ°, Ð²Ð¸Ð±ÐµÑÑÑÑ ÐºÐ¾ÑÐ¸ÑÑÑÐ²Ð°ÑÐ° Ð°Ð±Ð¾ Ð³ÑÑÐ¿Ñ Ð¿ÐµÑÐµÐ´ Ð·Ð±ÐµÑÐµÐ¶ÐµÐ½Ð½ÑÐ¼ Ð´Ð¾Ð·Ð²Ð¾Ð»Ñ.</userOrGroup-required>
+      <not-change-permission>ÐÐ¸ Ð½Ðµ Ð¼Ð°ÑÑÐµ Ð¿ÑÐ°Ð²Ð¾ Ð´Ð¾Ð´Ð°ÑÐ¸ Ð´Ð¾Ð·Ð²ÑÐ».</not-change-permission>
+      <access-denied>ÐÐ¾ÑÑÑÐ¿ Ð·Ð°Ð±Ð¾ÑÐ¾Ð½ÐµÐ½Ð¾. ÐÐµ Ð¼Ð¾Ð¶Ð½Ð° Ð²Ð¸Ð´Ð°Ð»Ð¸ÑÐ¸ ÑÐµÐ¹ Ð´Ð¾Ð·Ð²ÑÐ».</access-denied>
     </msg>
   </UIPermissionForm>
   
   <TaxonomyPopup>
     <title>
-      <UITaxonomyForm>Додати категорію</UITaxonomyForm>
+      <UITaxonomyForm>ÐÐ¾Ð´Ð°ÑÐ¸ ÐºÐ°ÑÐµÐ³Ð¾ÑÑÑ</UITaxonomyForm>
     </title>
   </TaxonomyPopup>
   
   <UITaxonomyManager>
     <title>
-      <permission>Керування дозволами</permission>
+      <permission>ÐÐµÑÑÐ²Ð°Ð½Ð½Ñ Ð´Ð¾Ð·Ð²Ð¾Ð»Ð°Ð¼Ð¸</permission>
     </title>
   </UITaxonomyManager>
   <!--
@@ -1512,55 +1509,55 @@
   -->
   <UITemplateList>
     <header>
-      <name>Тип</name>
-      <action>Дія</action>
-      <label>Шаблон</label>
-      <icon>Піктограма</icon>
+      <name>Ð¢Ð¸Ð¿</name>
+      <action>ÐÑÑ</action>
+      <label>Ð¨Ð°Ð±Ð»Ð¾Ð½</label>
+      <icon>ÐÑÐºÑÐ¾Ð³ÑÐ°Ð¼Ð°</icon>
     </header>
     <action>
-      <AddNew>Додати шаблон</AddNew>
+      <AddNew>ÐÐ¾Ð´Ð°ÑÐ¸ ÑÐ°Ð±Ð»Ð¾Ð½</AddNew>
     </action>
     <msg>
-      <confirm-delete>Ви дійсно бажаєте видалити?</confirm-delete>
-      <access-denied>Доступ заборонено. Ви не маєте дозволу на використання цієї функції.</access-denied>
-      <editing-template>Доступ заборонено. Ви не можете видалити і змінити цей шаблон одночасно.</editing-template>
-      <template-not-exist>Шаблон, який ви маєте намір видалити, не існує.</template-not-exist>
+      <confirm-delete>ÐÐ¸ Ð´ÑÐ¹ÑÐ½Ð¾ Ð±Ð°Ð¶Ð°ÑÑÐµ Ð²Ð¸Ð´Ð°Ð»Ð¸ÑÐ¸?</confirm-delete>
+      <access-denied>ÐÐ¾ÑÑÑÐ¿ Ð·Ð°Ð±Ð¾ÑÐ¾Ð½ÐµÐ½Ð¾. ÐÐ¸ Ð½Ðµ Ð¼Ð°ÑÑÐµ Ð´Ð¾Ð·Ð²Ð¾Ð»Ñ Ð½Ð° Ð²Ð¸ÐºÐ¾ÑÐ¸ÑÑÐ°Ð½Ð½Ñ ÑÑÑÑ ÑÑÐ½ÐºÑÑÑ.</access-denied>
+      <editing-template>ÐÐ¾ÑÑÑÐ¿ Ð·Ð°Ð±Ð¾ÑÐ¾Ð½ÐµÐ½Ð¾. ÐÐ¸ Ð½Ðµ Ð¼Ð¾Ð¶ÐµÑÐµ Ð²Ð¸Ð´Ð°Ð»Ð¸ÑÐ¸ Ñ Ð·Ð¼ÑÐ½Ð¸ÑÐ¸ ÑÐµÐ¹ ÑÐ°Ð±Ð»Ð¾Ð½ Ð¾Ð´Ð½Ð¾ÑÐ°ÑÐ½Ð¾.</editing-template>
+      <template-not-exist>Ð¨Ð°Ð±Ð»Ð¾Ð½, ÑÐºÐ¸Ð¹ Ð²Ð¸ Ð¼Ð°ÑÑÐµ Ð½Ð°Ð¼ÑÑ Ð²Ð¸Ð´Ð°Ð»Ð¸ÑÐ¸, Ð½Ðµ ÑÑÐ½ÑÑ.</template-not-exist>
     </msg>
   </UITemplateList>
   
   <UIActionsTemplateList>
     <header>
-      <name>Тип</name>
-      <action>Дія</action>
-      <label>Шаблон</label>
-      <icon>Піктограма</icon>
+      <name>Ð¢Ð¸Ð¿</name>
+      <action>ÐÑÑ</action>
+      <label>Ð¨Ð°Ð±Ð»Ð¾Ð½</label>
+      <icon>ÐÑÐºÑÐ¾Ð³ÑÐ°Ð¼Ð°</icon>
     </header>
     <action>
-      <AddNew>Додати шаблон</AddNew>
+      <AddNew>ÐÐ¾Ð´Ð°ÑÐ¸ ÑÐ°Ð±Ð»Ð¾Ð½</AddNew>
     </action>
     <msg>
-      <confirm-delete>Ви дійсно бажаєте видалити?</confirm-delete>
-      <access-denied>Доступ заборонено. Ви не маєте дозволу на використання цієї функції.</access-denied>
-      <editing-template>Доступ заборонено. Ви не можете видалити і змінити цей шаблон одночасно.</editing-template>
-      <template-not-exist>Шаблон, який ви маєте намір видалити, не існує.</template-not-exist>
+      <confirm-delete>ÐÐ¸ Ð´ÑÐ¹ÑÐ½Ð¾ Ð±Ð°Ð¶Ð°ÑÑÐµ Ð²Ð¸Ð´Ð°Ð»Ð¸ÑÐ¸?</confirm-delete>
+      <access-denied>ÐÐ¾ÑÑÑÐ¿ Ð·Ð°Ð±Ð¾ÑÐ¾Ð½ÐµÐ½Ð¾. ÐÐ¸ Ð½Ðµ Ð¼Ð°ÑÑÐµ Ð´Ð¾Ð·Ð²Ð¾Ð»Ñ Ð½Ð° Ð²Ð¸ÐºÐ¾ÑÐ¸ÑÑÐ°Ð½Ð½Ñ ÑÑÑÑ ÑÑÐ½ÐºÑÑÑ.</access-denied>
+      <editing-template>ÐÐ¾ÑÑÑÐ¿ Ð·Ð°Ð±Ð¾ÑÐ¾Ð½ÐµÐ½Ð¾. ÐÐ¸ Ð½Ðµ Ð¼Ð¾Ð¶ÐµÑÐµ Ð²Ð¸Ð´Ð°Ð»Ð¸ÑÐ¸ Ñ Ð·Ð¼ÑÐ½Ð¸ÑÐ¸ ÑÐµÐ¹ ÑÐ°Ð±Ð»Ð¾Ð½ Ð¾Ð´Ð½Ð¾ÑÐ°ÑÐ½Ð¾.</editing-template>
+      <template-not-exist>Ð¨Ð°Ð±Ð»Ð¾Ð½, ÑÐºÐ¸Ð¹ Ð²Ð¸ Ð¼Ð°ÑÑÐµ Ð½Ð°Ð¼ÑÑ Ð²Ð¸Ð´Ð°Ð»Ð¸ÑÐ¸, Ð½Ðµ ÑÑÐ½ÑÑ.</template-not-exist>
     </msg>
   </UIActionsTemplateList>
   
   <UIOthersTemplateList>
     <header>
-      <name>Тип</name>
-      <label>Шаблон</label>
-      <icon>Піктограма</icon>
-      <action>Дія</action>
+      <name>Ð¢Ð¸Ð¿</name>
+      <label>Ð¨Ð°Ð±Ð»Ð¾Ð½</label>
+      <icon>ÐÑÐºÑÐ¾Ð³ÑÐ°Ð¼Ð°</icon>
+      <action>ÐÑÑ</action>
     </header>
     <action>
-      <AddNew>Додати шаблон</AddNew>
+      <AddNew>ÐÐ¾Ð´Ð°ÑÐ¸ ÑÐ°Ð±Ð»Ð¾Ð½</AddNew>
     </action>
     <msg>
-      <confirm-delete>Ви дійсно бажаєте видалити?</confirm-delete>
-      <access-denied>Доступ заборонено. Ви не маєте дозволу на використання цієї функції.</access-denied>
-      <editing-template>Доступ заборонено. Ви не можете видалити і змінити цей шаблон одночасно.</editing-template>
-      <template-not-exist>Шаблон, який ви маєте намір видалити, не існує.</template-not-exist>
+      <confirm-delete>ÐÐ¸ Ð´ÑÐ¹ÑÐ½Ð¾ Ð±Ð°Ð¶Ð°ÑÑÐµ Ð²Ð¸Ð´Ð°Ð»Ð¸ÑÐ¸?</confirm-delete>
+      <access-denied>ÐÐ¾ÑÑÑÐ¿ Ð·Ð°Ð±Ð¾ÑÐ¾Ð½ÐµÐ½Ð¾. ÐÐ¸ Ð½Ðµ Ð¼Ð°ÑÑÐµ Ð´Ð¾Ð·Ð²Ð¾Ð»Ñ Ð½Ð° Ð²Ð¸ÐºÐ¾ÑÐ¸ÑÑÐ°Ð½Ð½Ñ ÑÑÑÑ ÑÑÐ½ÐºÑÑÑ.</access-denied>
+      <editing-template>ÐÐ¾ÑÑÑÐ¿ Ð·Ð°Ð±Ð¾ÑÐ¾Ð½ÐµÐ½Ð¾. ÐÐ¸ Ð½Ðµ Ð¼Ð¾Ð¶ÐµÑÐµ Ð²Ð¸Ð´Ð°Ð»Ð¸ÑÐ¸ Ñ Ð·Ð¼ÑÐ½Ð¸ÑÐ¸ ÑÐµÐ¹ ÑÐ°Ð±Ð»Ð¾Ð½ Ð¾Ð´Ð½Ð¾ÑÐ°ÑÐ½Ð¾.</editing-template>
+      <template-not-exist>Ð¨Ð°Ð±Ð»Ð¾Ð½, ÑÐºÐ¸Ð¹ Ð²Ð¸ Ð¼Ð°ÑÑÐµ Ð½Ð°Ð¼ÑÑ Ð²Ð¸Ð´Ð°Ð»Ð¸ÑÐ¸, Ð½Ðµ ÑÑÐ½ÑÑ.</template-not-exist>
     </msg>
   </UIOthersTemplateList>
 
@@ -1572,155 +1569,155 @@
 
 <UITabPane>
  <title>
- <ContentTemplateContainer>Контент</ContentTemplateContainer>
-<CateTemplateContainer>Навігація</CateTemplateContainer>
-<PageTemplateContainer>Розбивка на сторінки</PageTemplateContainer>
+ <ContentTemplateContainer>ÐÐ¾Ð½ÑÐµÐ½Ñ</ContentTemplateContainer>
+<CateTemplateContainer>ÐÐ°Ð²ÑÐ³Ð°ÑÑÑ</CateTemplateContainer>
+<PageTemplateContainer>Ð Ð¾Ð·Ð±Ð¸Ð²ÐºÐ° Ð½Ð° ÑÑÐ¾ÑÑÐ½ÐºÐ¸</PageTemplateContainer>
  </title>
 </UITabPane>
 
   <UICLVTemplateList>
     <title>
-      <Edit>Редагувати</Edit>
-      <Delete>Видалити</Delete>
+      <Edit>Ð ÐµÐ´Ð°Ð³ÑÐ²Ð°ÑÐ¸</Edit>
+      <Delete>ÐÐ¸Ð´Ð°Ð»Ð¸ÑÐ¸</Delete>
     </title>
     <header>
-      <title>Ім’я</title>
-      <action>Дія</action>
-      <template>Шаблон</template>
+      <title>ÐÐ¼âÑ</title>
+      <action>ÐÑÑ</action>
+      <template>Ð¨Ð°Ð±Ð»Ð¾Ð½</template>
     </header>
     <action>
-      <AddTemplate>Додати шаблон</AddTemplate>
-<Edit>Редагувати</Edit>
-<Delete>Видалити</Delete>
+      <AddTemplate>ÐÐ¾Ð´Ð°ÑÐ¸ ÑÐ°Ð±Ð»Ð¾Ð½</AddTemplate>
+<Edit>Ð ÐµÐ´Ð°Ð³ÑÐ²Ð°ÑÐ¸</Edit>
+<Delete>ÐÐ¸Ð´Ð°Ð»Ð¸ÑÐ¸</Delete>
     </action>
     <msg>
-      <confirm-delete>Ви дійсно бажаєте видалити цей шаблон?</confirm-delete>
-      <access-denied>Доступ заборонено. Ви не маєте дозволу на використання цієї функції.</access-denied>
-      <editing-template>Доступ заборонено. Ви не можете видалити і змінити цей шаблон одночасно.</editing-template>
-      <template-not-exist>Шаблон, який ви маєте намір видалити, не існує.</template-not-exist>
+      <confirm-delete>ÐÐ¸ Ð´ÑÐ¹ÑÐ½Ð¾ Ð±Ð°Ð¶Ð°ÑÑÐµ Ð²Ð¸Ð´Ð°Ð»Ð¸ÑÐ¸ ÑÐµÐ¹ ÑÐ°Ð±Ð»Ð¾Ð½?</confirm-delete>
+      <access-denied>ÐÐ¾ÑÑÑÐ¿ Ð·Ð°Ð±Ð¾ÑÐ¾Ð½ÐµÐ½Ð¾. ÐÐ¸ Ð½Ðµ Ð¼Ð°ÑÑÐµ Ð´Ð¾Ð·Ð²Ð¾Ð»Ñ Ð½Ð° Ð²Ð¸ÐºÐ¾ÑÐ¸ÑÑÐ°Ð½Ð½Ñ ÑÑÑÑ ÑÑÐ½ÐºÑÑÑ.</access-denied>
+      <editing-template>ÐÐ¾ÑÑÑÐ¿ Ð·Ð°Ð±Ð¾ÑÐ¾Ð½ÐµÐ½Ð¾. ÐÐ¸ Ð½Ðµ Ð¼Ð¾Ð¶ÐµÑÐµ Ð²Ð¸Ð´Ð°Ð»Ð¸ÑÐ¸ Ñ Ð·Ð¼ÑÐ½Ð¸ÑÐ¸ ÑÐµÐ¹ ÑÐ°Ð±Ð»Ð¾Ð½ Ð¾Ð´Ð½Ð¾ÑÐ°ÑÐ½Ð¾.</editing-template>
+      <template-not-exist>Ð¨Ð°Ð±Ð»Ð¾Ð½, ÑÐºÐ¸Ð¹ Ð²Ð¸ Ð¼Ð°ÑÑÐµ Ð½Ð°Ð¼ÑÑ Ð²Ð¸Ð´Ð°Ð»Ð¸ÑÐ¸, Ð½Ðµ ÑÑÐ½ÑÑ.</template-not-exist>
     </msg>
   </UICLVTemplateList>
 
 <CateTemplateList>
     <header>
-      <title>Ім’я</title>
-      <action>Дія</action>
-      <template>Шаблон</template>
+      <title>ÐÐ¼âÑ</title>
+      <action>ÐÑÑ</action>
+      <template>Ð¨Ð°Ð±Ð»Ð¾Ð½</template>
     </header>
     <title>
-      <Edit>Редагувати</Edit>
-      <Delete>Видалити</Delete>
+      <Edit>Ð ÐµÐ´Ð°Ð³ÑÐ²Ð°ÑÐ¸</Edit>
+      <Delete>ÐÐ¸Ð´Ð°Ð»Ð¸ÑÐ¸</Delete>
     </title>
     <action>
-      <AddTemplate>Додати шаблон</AddTemplate>
-<Edit>Редагувати</Edit>
-<Delete>Видалити</Delete>
+      <AddTemplate>ÐÐ¾Ð´Ð°ÑÐ¸ ÑÐ°Ð±Ð»Ð¾Ð½</AddTemplate>
+<Edit>Ð ÐµÐ´Ð°Ð³ÑÐ²Ð°ÑÐ¸</Edit>
+<Delete>ÐÐ¸Ð´Ð°Ð»Ð¸ÑÐ¸</Delete>
     </action>
 </CateTemplateList>
 
 <PageTemplateList>
     <header>
-      <title>Ім’я</title>
-      <action>Дія</action>
-      <template>Шаблон</template>
+      <title>ÐÐ¼âÑ</title>
+      <action>ÐÑÑ</action>
+      <template>Ð¨Ð°Ð±Ð»Ð¾Ð½</template>
     </header>
     <action>
-      <AddTemplate>Додати шаблон</AddTemplate>
-<Edit>Редагувати</Edit>
-<Delete>Видалити</Delete>
+      <AddTemplate>ÐÐ¾Ð´Ð°ÑÐ¸ ÑÐ°Ð±Ð»Ð¾Ð½</AddTemplate>
+<Edit>Ð ÐµÐ´Ð°Ð³ÑÐ²Ð°ÑÐ¸</Edit>
+<Delete>ÐÐ¸Ð´Ð°Ð»Ð¸ÑÐ¸</Delete>
     </action>
 </PageTemplateList>
 
 <EditCLVTemplatePopup_ContentTemplateContainer>
  <title>
-   <UICLVTemplateForm_ContentTemplateContainer>Редагувати шаблон списку</UICLVTemplateForm_ContentTemplateContainer>   
+   <UICLVTemplateForm_ContentTemplateContainer>Ð ÐµÐ´Ð°Ð³ÑÐ²Ð°ÑÐ¸ ÑÐ°Ð±Ð»Ð¾Ð½ ÑÐ¿Ð¸ÑÐºÑ</UICLVTemplateForm_ContentTemplateContainer>   
  </title>
 </EditCLVTemplatePopup_ContentTemplateContainer>
 
 <EditCLVTemplatePopup_CateTemplateContainer>
  <title>
-   <UICLVTemplateForm_CateTemplateContainer>Редагувати шаблон списку</UICLVTemplateForm_CateTemplateContainer>   
+   <UICLVTemplateForm_CateTemplateContainer>Ð ÐµÐ´Ð°Ð³ÑÐ²Ð°ÑÐ¸ ÑÐ°Ð±Ð»Ð¾Ð½ ÑÐ¿Ð¸ÑÐºÑ</UICLVTemplateForm_CateTemplateContainer>   
  </title>
 </EditCLVTemplatePopup_CateTemplateContainer>
 
 <EditCLVTemplatePopup_PageTemplateContainer>
  <title>
-   <UICLVTemplateForm_PageTemplateContainer>Редагувати шаблон списку</UICLVTemplateForm_PageTemplateContainer>   
+   <UICLVTemplateForm_PageTemplateContainer>Ð ÐµÐ´Ð°Ð³ÑÐ²Ð°ÑÐ¸ ÑÐ°Ð±Ð»Ð¾Ð½ ÑÐ¿Ð¸ÑÐºÑ</UICLVTemplateForm_PageTemplateContainer>   
  </title>
 </EditCLVTemplatePopup_PageTemplateContainer>
 
 <CLVTemplatePopup_ContentTemplateContainer>
  <title>
-   <UICLVTemplateForm_ContentTemplateContainer>Додати шаблон списку</UICLVTemplateForm_ContentTemplateContainer>   
+   <UICLVTemplateForm_ContentTemplateContainer>ÐÐ¾Ð´Ð°ÑÐ¸ ÑÐ°Ð±Ð»Ð¾Ð½ ÑÐ¿Ð¸ÑÐºÑ</UICLVTemplateForm_ContentTemplateContainer>   
  </title>
 </CLVTemplatePopup_ContentTemplateContainer>
 
 <CLVTemplatePopup_CateTemplateContainer>
  <title>
-   <UICLVTemplateForm_CateTemplateContainer>Додати шаблон списку</UICLVTemplateForm_CateTemplateContainer>   
+   <UICLVTemplateForm_CateTemplateContainer>ÐÐ¾Ð´Ð°ÑÐ¸ ÑÐ°Ð±Ð»Ð¾Ð½ ÑÐ¿Ð¸ÑÐºÑ</UICLVTemplateForm_CateTemplateContainer>   
  </title>
 </CLVTemplatePopup_CateTemplateContainer>
 
 <CLVTemplatePopup_PageTemplateContainer>
  <title>
-   <UICLVTemplateForm_PageTemplateContainer>Додати шаблон списку</UICLVTemplateForm_PageTemplateContainer>   
+   <UICLVTemplateForm_PageTemplateContainer>ÐÐ¾Ð´Ð°ÑÐ¸ ÑÐ°Ð±Ð»Ð¾Ð½ ÑÐ¿Ð¸ÑÐºÑ</UICLVTemplateForm_PageTemplateContainer>   
  </title>
 </CLVTemplatePopup_PageTemplateContainer>
 
 <UICLVTemplateForm_ContentTemplateContainer>
  <action>
   <Save>#{word.save}</Save>
-<Reset>Скинути</Reset>
+<Reset>Ð¡ÐºÐ¸Ð½ÑÑÐ¸</Reset>
 <Cancel>#{word.cancel}</Cancel>
  </action>
 <label>
- <title>Ім’я</title>
-<template>Ім'я шаблону</template>
-<content>Контент</content>
-<type>Тип шаблону</type>
+ <title>ÐÐ¼âÑ</title>
+<template>ÐÐ¼'Ñ ÑÐ°Ð±Ð»Ð¾Ð½Ñ</template>
+<content>ÐÐ¾Ð½ÑÐµÐ½Ñ</content>
+<type>Ð¢Ð¸Ð¿ ÑÐ°Ð±Ð»Ð¾Ð½Ñ</type>
 </label>
 </UICLVTemplateForm_ContentTemplateContainer>
 
 <UICLVTemplateForm_PageTemplateContainer>
  <action>
   <Save>#{word.save}</Save>
-<Reset>Скинути</Reset>
+<Reset>Ð¡ÐºÐ¸Ð½ÑÑÐ¸</Reset>
 <Cancel>#{word.cancel}</Cancel>
  </action>
 <label>
- <title>Ім’я</title>
-<template>Ім'я шаблону</template>
-<content>Контент</content>
-<type>Тип шаблону</type>
+ <title>ÐÐ¼âÑ</title>
+<template>ÐÐ¼'Ñ ÑÐ°Ð±Ð»Ð¾Ð½Ñ</template>
+<content>ÐÐ¾Ð½ÑÐµÐ½Ñ</content>
+<type>Ð¢Ð¸Ð¿ ÑÐ°Ð±Ð»Ð¾Ð½Ñ</type>
 </label>
 </UICLVTemplateForm_PageTemplateContainer>
 
 <UICLVTemplateForm_CateTemplateContainer>
  <action>
   <Save>#{word.save}</Save>
-<Reset>Скинути</Reset>
+<Reset>Ð¡ÐºÐ¸Ð½ÑÑÐ¸</Reset>
 <Cancel>#{word.cancel}</Cancel>
  </action>
 <label>
- <title>Ім’я</title>
-<template>Ім'я шаблону</template>
-<content>Контент</content>
-<type>Тип шаблону</type>
+ <title>ÐÐ¼âÑ</title>
+<template>ÐÐ¼'Ñ ÑÐ°Ð±Ð»Ð¾Ð½Ñ</template>
+<content>ÐÐ¾Ð½ÑÐµÐ½Ñ</content>
+<type>Ð¢Ð¸Ð¿ ÑÐ°Ð±Ð»Ð¾Ð½Ñ</type>
 </label>
 </UICLVTemplateForm_CateTemplateContainer>
 <UICLVTemplateForm>
   <label>
-    <paginators>Розбивка на сторінки</paginators>
-<list>Контент</list>
-<navigation>Навігація</navigation>
+    <paginators>Ð Ð¾Ð·Ð±Ð¸Ð²ÐºÐ° Ð½Ð° ÑÑÐ¾ÑÑÐ½ÐºÐ¸</paginators>
+<list>ÐÐ¾Ð½ÑÐµÐ½Ñ</list>
+<navigation>ÐÐ°Ð²ÑÐ³Ð°ÑÑÑ</navigation>
   </label>
                           <action>
                             <Save>#{word.save}</Save>
-                            <Reset>Скинути</Reset> 
+                            <Reset>Ð¡ÐºÐ¸Ð½ÑÑÐ¸</Reset> 
                             <Cancel>#{word.cancel}</Cancel> 
                           </action> 
   <msg>
-  <template-existing>Таке ім'я шаблону вже існує. Будь ласка, введіть інше ім'я.</template-existing>
+  <template-existing>Ð¢Ð°ÐºÐµ ÑÐ¼'Ñ ÑÐ°Ð±Ð»Ð¾Ð½Ñ Ð²Ð¶Ðµ ÑÑÐ½ÑÑ. ÐÑÐ´Ñ Ð»Ð°ÑÐºÐ°, Ð²Ð²ÐµÐ´ÑÑÑ ÑÐ½ÑÐµ ÑÐ¼'Ñ.</template-existing>
   </msg>
 </UICLVTemplateForm>
 
@@ -1731,53 +1728,53 @@
   -->
   <AddNewTemplatePermission>
     <title>
-      <UIPermissionSelector>Вибрати права доступу</UIPermissionSelector>
+      <UIPermissionSelector>ÐÐ¸Ð±ÑÐ°ÑÐ¸ Ð¿ÑÐ°Ð²Ð° Ð´Ð¾ÑÑÑÐ¿Ñ</UIPermissionSelector>
     </title>
   </AddNewTemplatePermission>
   <TemplatePermission>
     <title>
-      <UIPermissionSelector>Вибрати права доступу</UIPermissionSelector>
+      <UIPermissionSelector>ÐÐ¸Ð±ÑÐ°ÑÐ¸ Ð¿ÑÐ°Ð²Ð° Ð´Ð¾ÑÑÑÐ¿Ñ</UIPermissionSelector>
     </title>
   </TemplatePermission>
   <TemplateContainerPopup>
     <title>
-      <UITemplateForm>Шаблон форми</UITemplateForm>
+      <UITemplateForm>Ð¨Ð°Ð±Ð»Ð¾Ð½ ÑÐ¾ÑÐ¼Ð¸</UITemplateForm>
     </title>
   </TemplateContainerPopup>
   <ViewForm>
     <label>
       <UITemplateContent>ViewForm</UITemplateContent>
-      <UIPopupWindow>Перегляд прав доступу</UIPopupWindow>
-      <selectVersion>Версії</selectVersion>
-      <content>Контент:</content>
-      <name>Ім'я:</name>
-      <isDocumentTemplate>це шаблон документа</isDocumentTemplate>
-      <viewPermission>Права доступу:</viewPermission>
-      <enableVersion>Керування версіями активоване</enableVersion>
+      <UIPopupWindow>ÐÐµÑÐµÐ³Ð»ÑÐ´ Ð¿ÑÐ°Ð² Ð´Ð¾ÑÑÑÐ¿Ñ</UIPopupWindow>
+      <selectVersion>ÐÐµÑÑÑÑ</selectVersion>
+      <content>ÐÐ¾Ð½ÑÐµÐ½Ñ:</content>
+      <name>ÐÐ¼'Ñ:</name>
+      <isDocumentTemplate>ÑÐµ ÑÐ°Ð±Ð»Ð¾Ð½ Ð´Ð¾ÐºÑÐ¼ÐµÐ½ÑÐ°</isDocumentTemplate>
+      <viewPermission>ÐÑÐ°Ð²Ð° Ð´Ð¾ÑÑÑÐ¿Ñ:</viewPermission>
+      <enableVersion>ÐÐµÑÑÐ²Ð°Ð½Ð½Ñ Ð²ÐµÑÑÑÑÐ¼Ð¸ Ð°ÐºÑÐ¸Ð²Ð¾Ð²Ð°Ð½Ðµ</enableVersion>
     </label>
-    <title>Додати/Редагувати вид</title>
+    <title>ÐÐ¾Ð´Ð°ÑÐ¸/Ð ÐµÐ´Ð°Ð³ÑÐ²Ð°ÑÐ¸ Ð²Ð¸Ð´</title>
   </ViewForm>
   <DialogForm>
     <label>
       <UITemplateContent>DialogForm</UITemplateContent>
-      <UIPopupWindow>Право доступа діалогового вікна</UIPopupWindow>
-      <selectVersion>Версії</selectVersion>
-      <content>Контент:</content>
-      <name>Ім'я:</name>
-      <isDocumentTemplate>це шаблон документа</isDocumentTemplate>
-      <viewPermission>Права доступу:</viewPermission>
-      <enableVersion>Увімкнути відстеження версій</enableVersion>
+      <UIPopupWindow>ÐÑÐ°Ð²Ð¾ Ð´Ð¾ÑÑÑÐ¿Ð° Ð´ÑÐ°Ð»Ð¾Ð³Ð¾Ð²Ð¾Ð³Ð¾ Ð²ÑÐºÐ½Ð°</UIPopupWindow>
+      <selectVersion>ÐÐµÑÑÑÑ</selectVersion>
+      <content>ÐÐ¾Ð½ÑÐµÐ½Ñ:</content>
+      <name>ÐÐ¼'Ñ:</name>
+      <isDocumentTemplate>ÑÐµ ÑÐ°Ð±Ð»Ð¾Ð½ Ð´Ð¾ÐºÑÐ¼ÐµÐ½ÑÐ°</isDocumentTemplate>
+      <viewPermission>ÐÑÐ°Ð²Ð° Ð´Ð¾ÑÑÑÐ¿Ñ:</viewPermission>
+      <enableVersion>Ð£Ð²ÑÐ¼ÐºÐ½ÑÑÐ¸ Ð²ÑÐ´ÑÑÐµÐ¶ÐµÐ½Ð½Ñ Ð²ÐµÑÑÑÐ¹</enableVersion>
     </label>
-    <title>Додати/редагувати діалогове вікно</title>
+    <title>ÐÐ¾Ð´Ð°ÑÐ¸/ÑÐµÐ´Ð°Ð³ÑÐ²Ð°ÑÐ¸ Ð´ÑÐ°Ð»Ð¾Ð³Ð¾Ð²Ðµ Ð²ÑÐºÐ½Ð¾</title>
   </DialogForm>
   <DialogFormTemplatePermission>
     <title>
-      <UIPermissionSelector>Вибрати права доступу</UIPermissionSelector>
+      <UIPermissionSelector>ÐÐ¸Ð±ÑÐ°ÑÐ¸ Ð¿ÑÐ°Ð²Ð° Ð´Ð¾ÑÑÑÐ¿Ñ</UIPermissionSelector>
     </title>
   </DialogFormTemplatePermission>
   <ViewFormTemplatePermission>
     <title>
-      <UIPermissionSelector>Вибрати права доступу</UIPermissionSelector>
+      <UIPermissionSelector>ÐÐ¸Ð±ÑÐ°ÑÐ¸ Ð¿ÑÐ°Ð²Ð° Ð´Ð¾ÑÑÑÐ¿Ñ</UIPermissionSelector>
     </title>
   </ViewFormTemplatePermission>
   <TemplateContainerPopup>
@@ -1789,8 +1786,8 @@
   </TemplateContainerPopup>
   <UITemplatesManager>
     <title>
-      <Edit>Редагувати</Edit>
-      <Delete>Видалити</Delete>
+      <Edit>Ð ÐµÐ´Ð°Ð³ÑÐ²Ð°ÑÐ¸</Edit>
+      <Delete>ÐÐ¸Ð´Ð°Ð»Ð¸ÑÐ¸</Delete>
     </title>
   </UITemplatesManager>
   <!--
@@ -1805,9 +1802,9 @@
   -->
   <UITemplateEditForm>
     <label>
-      <name>Ім'я:</name>
-      <label>Позначка:</label>
-      <isDocumentTemplate>це шаблон документа:</isDocumentTemplate>
+      <name>ÐÐ¼'Ñ:</name>
+      <label>ÐÐ¾Ð·Ð½Ð°ÑÐºÐ°:</label>
+      <isDocumentTemplate>ÑÐµ ÑÐ°Ð±Ð»Ð¾Ð½ Ð´Ð¾ÐºÑÐ¼ÐµÐ½ÑÐ°:</isDocumentTemplate>
     </label>
     <action>
       <Save>#{word.save}</Save>
@@ -1822,19 +1819,19 @@
   -->
   <UIDialogTab>
     <header>
-      <name>Ім’я</name>
-      <roles>Ролі</roles>
-      <baseVersion>Версія</baseVersion>
-      <action>Дії</action>
+      <name>ÐÐ¼âÑ</name>
+      <roles>Ð Ð¾Ð»Ñ</roles>
+      <baseVersion>ÐÐµÑÑÑÑ</baseVersion>
+      <action>ÐÑÑ</action>
     </header>
     <msg>
-      <undeletable>Не можна видалити '{0}' тому що він використовується за замовчуванням.</undeletable>
-      <confirm-delete>Ви впевнені, що бажаєте видалити це діалогове вікно?</confirm-delete>
+      <undeletable>ÐÐµ Ð¼Ð¾Ð¶Ð½Ð° Ð²Ð¸Ð´Ð°Ð»Ð¸ÑÐ¸ '{0}' ÑÐ¾Ð¼Ñ ÑÐ¾ Ð²ÑÐ½ Ð²Ð¸ÐºÐ¾ÑÐ¸ÑÑÐ¾Ð²ÑÑÑÑÑÑ Ð·Ð° Ð·Ð°Ð¼Ð¾Ð²ÑÑÐ²Ð°Ð½Ð½ÑÐ¼.</undeletable>
+      <confirm-delete>ÐÐ¸ Ð²Ð¿ÐµÐ²Ð½ÐµÐ½Ñ, ÑÐ¾ Ð±Ð°Ð¶Ð°ÑÑÐµ Ð²Ð¸Ð´Ð°Ð»Ð¸ÑÐ¸ ÑÐµ Ð´ÑÐ°Ð»Ð¾Ð³Ð¾Ð²Ðµ Ð²ÑÐºÐ½Ð¾?</confirm-delete>
     </msg>
     <action>
       <title>
-        <Edit>Редагувати</Edit>
-        <Delete>Видалити</Delete>
+        <Edit>Ð ÐµÐ´Ð°Ð³ÑÐ²Ð°ÑÐ¸</Edit>
+        <Delete>ÐÐ¸Ð´Ð°Ð»Ð¸ÑÐ¸</Delete>
       </title>
     </action>
   </UIDialogTab>
@@ -1845,19 +1842,19 @@
   -->
   <UIViewTab>
     <header>
-      <name>Ім’я</name>
-      <roles>Ролі</roles>
-      <baseVersion>Версія</baseVersion>
-      <action>Дії</action>
+      <name>ÐÐ¼âÑ</name>
+      <roles>Ð Ð¾Ð»Ñ</roles>
+      <baseVersion>ÐÐµÑÑÑÑ</baseVersion>
+      <action>ÐÑÑ</action>
     </header>
     <msg>
-      <undeletable>'{0}' неможливо видалити, він використовується за замовчуванням.</undeletable>
-      <confirm-delete>Ви дійсно бажаєте видалити?</confirm-delete>
+      <undeletable>'{0}' Ð½ÐµÐ¼Ð¾Ð¶Ð»Ð¸Ð²Ð¾ Ð²Ð¸Ð´Ð°Ð»Ð¸ÑÐ¸, Ð²ÑÐ½ Ð²Ð¸ÐºÐ¾ÑÐ¸ÑÑÐ¾Ð²ÑÑÑÑÑÑ Ð·Ð° Ð·Ð°Ð¼Ð¾Ð²ÑÑÐ²Ð°Ð½Ð½ÑÐ¼.</undeletable>
+      <confirm-delete>ÐÐ¸ Ð´ÑÐ¹ÑÐ½Ð¾ Ð±Ð°Ð¶Ð°ÑÑÐµ Ð²Ð¸Ð´Ð°Ð»Ð¸ÑÐ¸?</confirm-delete>
     </msg>
     <action>
       <title>
-        <Edit>Редагувати</Edit>
-        <Delete>Видалити</Delete>
+        <Edit>Ð ÐµÐ´Ð°Ð³ÑÐ²Ð°ÑÐ¸</Edit>
+        <Delete>ÐÐ¸Ð´Ð°Ð»Ð¸ÑÐ¸</Delete>
       </title>
     </action>
   </UIViewTab>
@@ -1874,14 +1871,14 @@
       <Refresh>#{word.refresh}</Refresh>
     </action>
     <msg>
-      <name-invalid>Ім'я поля не повинне містити спеціальних символів.</name-invalid>
-      <roles-invalid>Необхідно заповнити поле Права доступу.</roles-invalid>
-      <version-restored>Версія {0} була успішно відновлена.</version-restored>
-      <name-exist>Ім'я {0} уже існує.</name-exist>
+      <name-invalid>ÐÐ¼'Ñ Ð¿Ð¾Ð»Ñ Ð½Ðµ Ð¿Ð¾Ð²Ð¸Ð½Ð½Ðµ Ð¼ÑÑÑÐ¸ÑÐ¸ ÑÐ¿ÐµÑÑÐ°Ð»ÑÐ½Ð¸Ñ ÑÐ¸Ð¼Ð²Ð¾Ð»ÑÐ².</name-invalid>
+      <roles-invalid>ÐÐµÐ¾Ð±ÑÑÐ´Ð½Ð¾ Ð·Ð°Ð¿Ð¾Ð²Ð½Ð¸ÑÐ¸ Ð¿Ð¾Ð»Ðµ ÐÑÐ°Ð²Ð° Ð´Ð¾ÑÑÑÐ¿Ñ.</roles-invalid>
+      <version-restored>ÐÐµÑÑÑÑ {0} Ð±ÑÐ»Ð° ÑÑÐ¿ÑÑÐ½Ð¾ Ð²ÑÐ´Ð½Ð¾Ð²Ð»ÐµÐ½Ð°.</version-restored>
+      <name-exist>ÐÐ¼'Ñ {0} ÑÐ¶Ðµ ÑÑÐ½ÑÑ.</name-exist>
     </msg>
     <title>
-      <AddPermission>Додати права доступу</AddPermission>
-      <RemovePermission>Видалити дозвіл</RemovePermission>
+      <AddPermission>ÐÐ¾Ð´Ð°ÑÐ¸ Ð¿ÑÐ°Ð²Ð° Ð´Ð¾ÑÑÑÐ¿Ñ</AddPermission>
+      <RemovePermission>ÐÐ¸Ð´Ð°Ð»Ð¸ÑÐ¸ Ð´Ð¾Ð·Ð²ÑÐ»</RemovePermission>
     </title>
   </UITemplateContent>
   <!--
@@ -1901,12 +1898,12 @@
   -->
   <JCRBrowser>
     <title>
-      <UIOneNodePathSelector>Вибрати шлях в головну директорію</UIOneNodePathSelector>
+      <UIOneNodePathSelector>ÐÐ¸Ð±ÑÐ°ÑÐ¸ ÑÐ»ÑÑ Ð² Ð³Ð¾Ð»Ð¾Ð²Ð½Ñ Ð´Ð¸ÑÐµÐºÑÐ¾ÑÑÑ</UIOneNodePathSelector>
     </title>
   </JCRBrowser>
   <JCRBrowserAssets>
     <title>
-      <UIOneNodePathSelector>Вибір піктограми</UIOneNodePathSelector>
+      <UIOneNodePathSelector>ÐÐ¸Ð±ÑÑ Ð¿ÑÐºÑÐ¾Ð³ÑÐ°Ð¼Ð¸</UIOneNodePathSelector>
     </title>
   </JCRBrowserAssets>
   <!--
@@ -1916,32 +1913,32 @@
   -->
   <UIQueriesList>
     <header>
-      <name>Ім’я</name>
-      <type>Тип</type>
-      <statement>Опис</statement>
-      <permission>Права доступу</permission>
-      <action>Дії</action>
+      <name>ÐÐ¼âÑ</name>
+      <type>Ð¢Ð¸Ð¿</type>
+      <statement>ÐÐ¿Ð¸Ñ</statement>
+      <permission>ÐÑÐ°Ð²Ð° Ð´Ð¾ÑÑÑÐ¿Ñ</permission>
+      <action>ÐÑÑ</action>
     </header>
     <action>
-      <AddQuery>Додати запит</AddQuery>
+      <AddQuery>ÐÐ¾Ð´Ð°ÑÐ¸ Ð·Ð°Ð¿Ð¸Ñ</AddQuery>
     </action>
     <tooltip>
-      <Edit>Відредагувати цей запит</Edit>
-      <Delete>Видалити цей запит</Delete>
+      <Edit>ÐÑÐ´ÑÐµÐ´Ð°Ð³ÑÐ²Ð°ÑÐ¸ ÑÐµÐ¹ Ð·Ð°Ð¿Ð¸Ñ</Edit>
+      <Delete>ÐÐ¸Ð´Ð°Ð»Ð¸ÑÐ¸ ÑÐµÐ¹ Ð·Ð°Ð¿Ð¸Ñ</Delete>
     </tooltip>
     <msg>
-      <confirm-delete>Ви дійсно бажаєте видалити цей запит?</confirm-delete>
-      <query-not-existed>Запит більше не існує.</query-not-existed>
-      <can-not-remove>Сталася помилка під час видалення запиту. Для додаткової інформації, будь ласка, зв'яжіться з адміністратором.</can-not-remove>
+      <confirm-delete>ÐÐ¸ Ð´ÑÐ¹ÑÐ½Ð¾ Ð±Ð°Ð¶Ð°ÑÑÐµ Ð²Ð¸Ð´Ð°Ð»Ð¸ÑÐ¸ ÑÐµÐ¹ Ð·Ð°Ð¿Ð¸Ñ?</confirm-delete>
+      <query-not-existed>ÐÐ°Ð¿Ð¸Ñ Ð±ÑÐ»ÑÑÐµ Ð½Ðµ ÑÑÐ½ÑÑ.</query-not-existed>
+      <can-not-remove>Ð¡ÑÐ°Ð»Ð°ÑÑ Ð¿Ð¾Ð¼Ð¸Ð»ÐºÐ° Ð¿ÑÐ´ ÑÐ°Ñ Ð²Ð¸Ð´Ð°Ð»ÐµÐ½Ð½Ñ Ð·Ð°Ð¿Ð¸ÑÑ. ÐÐ»Ñ Ð´Ð¾Ð´Ð°ÑÐºÐ¾Ð²Ð¾Ñ ÑÐ½ÑÐ¾ÑÐ¼Ð°ÑÑÑ, Ð±ÑÐ´Ñ Ð»Ð°ÑÐºÐ°, Ð·Ð²'ÑÐ¶ÑÑÑÑÑ Ð· Ð°Ð´Ð¼ÑÐ½ÑÑÑÑÐ°ÑÐ¾ÑÐ¾Ð¼.</can-not-remove>
     </msg>
   </UIQueriesList>
   <UIQueriesForm>
     <label>
-      <name>Ім'я запиту</name>
-      <type>Тип запиту</type>
-      <statement>Опис</statement>
-      <cache>Увімкнути кеш результатів</cache>
-      <permissions>Права доступу</permissions>
+      <name>ÐÐ¼'Ñ Ð·Ð°Ð¿Ð¸ÑÑ</name>
+      <type>Ð¢Ð¸Ð¿ Ð·Ð°Ð¿Ð¸ÑÑ</type>
+      <statement>ÐÐ¿Ð¸Ñ</statement>
+      <cache>Ð£Ð²ÑÐ¼ÐºÐ½ÑÑÐ¸ ÐºÐµÑ ÑÐµÐ·ÑÐ»ÑÑÐ°ÑÑÐ²</cache>
+      <permissions>ÐÑÐ°Ð²Ð° Ð´Ð¾ÑÑÑÐ¿Ñ</permissions>
       <PermissionButton>UIQueriesForm</PermissionButton>
     </label>
     <action>
@@ -1949,26 +1946,26 @@
       <Cancel>#{word.cancel}</Cancel>
     </action>
     <msg>
-      <permission-require>Будь ласка, виберіть права доступу.</permission-require>
-      <name-invalid>Поле Ім'я не може містити спеціальних символів.</name-invalid>
-      <name-existing>Це ім'я запиту вже існує. Будь ласка, виберіть інше.</name-existing>
-      <invalid-query>Запит є неприпустимим. Будь ласка, перевірте формулювання запиту.</invalid-query>
-      <access-denied>Доступ заборонено. У вас не вистачає на це права доступу.</access-denied>
+      <permission-require>ÐÑÐ´Ñ Ð»Ð°ÑÐºÐ°, Ð²Ð¸Ð±ÐµÑÑÑÑ Ð¿ÑÐ°Ð²Ð° Ð´Ð¾ÑÑÑÐ¿Ñ.</permission-require>
+      <name-invalid>ÐÐ¾Ð»Ðµ ÐÐ¼'Ñ Ð½Ðµ Ð¼Ð¾Ð¶Ðµ Ð¼ÑÑÑÐ¸ÑÐ¸ ÑÐ¿ÐµÑÑÐ°Ð»ÑÐ½Ð¸Ñ ÑÐ¸Ð¼Ð²Ð¾Ð»ÑÐ².</name-invalid>
+      <name-existing>Ð¦Ðµ ÑÐ¼'Ñ Ð·Ð°Ð¿Ð¸ÑÑ Ð²Ð¶Ðµ ÑÑÐ½ÑÑ. ÐÑÐ´Ñ Ð»Ð°ÑÐºÐ°, Ð²Ð¸Ð±ÐµÑÑÑÑ ÑÐ½ÑÐµ.</name-existing>
+      <invalid-query>ÐÐ°Ð¿Ð¸Ñ Ñ Ð½ÐµÐ¿ÑÐ¸Ð¿ÑÑÑÐ¸Ð¼Ð¸Ð¼. ÐÑÐ´Ñ Ð»Ð°ÑÐºÐ°, Ð¿ÐµÑÐµÐ²ÑÑÑÐµ ÑÐ¾ÑÐ¼ÑÐ»ÑÐ²Ð°Ð½Ð½Ñ Ð·Ð°Ð¿Ð¸ÑÑ.</invalid-query>
+      <access-denied>ÐÐ¾ÑÑÑÐ¿ Ð·Ð°Ð±Ð¾ÑÐ¾Ð½ÐµÐ½Ð¾. Ð£ Ð²Ð°Ñ Ð½Ðµ Ð²Ð¸ÑÑÐ°ÑÐ°Ñ Ð½Ð° ÑÐµ Ð¿ÑÐ°Ð²Ð° Ð´Ð¾ÑÑÑÐ¿Ñ.</access-denied>
     </msg>
   </UIQueriesForm>
   <AddQueryForm>
     <title>
-      <UIQueriesForm>Додати запит</UIQueriesForm>
+      <UIQueriesForm>ÐÐ¾Ð´Ð°ÑÐ¸ Ð·Ð°Ð¿Ð¸Ñ</UIQueriesForm>
     </title>
   </AddQueryForm>
   <EditQueryForm>
     <title>
-      <UIQueriesForm>Редагувати запит</UIQueriesForm>
+      <UIQueriesForm>Ð ÐµÐ´Ð°Ð³ÑÐ²Ð°ÑÐ¸ Ð·Ð°Ð¿Ð¸Ñ</UIQueriesForm>
     </title>
   </EditQueryForm>
 <PermissionPopup>
   <title>
-    <UIGroupMemberSelector>Вибрати права доступу</UIGroupMemberSelector>
+    <UIGroupMemberSelector>ÐÐ¸Ð±ÑÐ°ÑÐ¸ Ð¿ÑÐ°Ð²Ð° Ð´Ð¾ÑÑÑÐ¿Ñ</UIGroupMemberSelector>
   </title>
 </PermissionPopup>
   <!--
@@ -1978,45 +1975,45 @@
   -->
   <UITagManager>
     <title>
-      <EditStyle>Редагувати стиль</EditStyle>
-      <RemoveStyle>Видалити стиль</RemoveStyle>
+      <EditStyle>Ð ÐµÐ´Ð°Ð³ÑÐ²Ð°ÑÐ¸ ÑÑÐ¸Ð»Ñ</EditStyle>
+      <RemoveStyle>ÐÐ¸Ð´Ð°Ð»Ð¸ÑÐ¸ ÑÑÐ¸Ð»Ñ</RemoveStyle>
     </title>    
   </UITagManager>
   <UITagStyleList>
     <header>
-      <name>Ім'я стилю</name>
-      <documentRange>Кількість випадків</documentRange>
-      <tagHTML>Стиль тега</tagHTML>
-      <action>Дія</action>
+      <name>ÐÐ¼'Ñ ÑÑÐ¸Ð»Ñ</name>
+      <documentRange>ÐÑÐ»ÑÐºÑÑÑÑ Ð²Ð¸Ð¿Ð°Ð´ÐºÑÐ²</documentRange>
+      <tagHTML>Ð¡ÑÐ¸Ð»Ñ ÑÐµÐ³Ð°</tagHTML>
+      <action>ÐÑÑ</action>
     </header>
     <title>
-      <Edit>Редагувати</Edit>
-      <Delete>Видалити</Delete>
-      <Remove>Видалити</Remove>
+      <Edit>Ð ÐµÐ´Ð°Ð³ÑÐ²Ð°ÑÐ¸</Edit>
+      <Delete>ÐÐ¸Ð´Ð°Ð»Ð¸ÑÐ¸</Delete>
+      <Remove>ÐÐ¸Ð´Ð°Ð»Ð¸ÑÐ¸</Remove>
     </title>
     <action>
-      <AddStyle>Додати стиль</AddStyle>
+      <AddStyle>ÐÐ¾Ð´Ð°ÑÐ¸ ÑÑÐ¸Ð»Ñ</AddStyle>
     </action>
   </UITagStyleList>
   <UITagStyleForm>
     <label>
-      <styleName>Ім'я стилю:</styleName>
-      <documentRange>Кількість випадків:</documentRange>
-      <styleHTML>Стиль HTML :</styleHTML>
+      <styleName>ÐÐ¼'Ñ ÑÑÐ¸Ð»Ñ:</styleName>
+      <documentRange>ÐÑÐ»ÑÐºÑÑÑÑ Ð²Ð¸Ð¿Ð°Ð´ÐºÑÐ²:</documentRange>
+      <styleHTML>Ð¡ÑÐ¸Ð»Ñ HTML :</styleHTML>
     </label>
     <action>
-      <UpdateStyle>Поновити</UpdateStyle>
+      <UpdateStyle>ÐÐ¾Ð½Ð¾Ð²Ð¸ÑÐ¸</UpdateStyle>
       <Cancel>#{word.cancel}</Cancel>
     </action>
     <msg>
-      <range-validator>Неприпустимий діапазон. Формат повинен бути: a...b , де a і b - позитивні цілі числа. Ви можете використовувати * замість b, щоб показати, що діапазон необмежений.</range-validator>
-      <error-update>Не вдалося оновити. Ваша інформація є неприпустимою.</error-update>
-      <item-not-existing>Не можна зберегти зміни до цього тегу, оскільки він більше не існує в базі даних.</item-not-existing>
+      <range-validator>ÐÐµÐ¿ÑÐ¸Ð¿ÑÑÑÐ¸Ð¼Ð¸Ð¹ Ð´ÑÐ°Ð¿Ð°Ð·Ð¾Ð½. Ð¤Ð¾ÑÐ¼Ð°Ñ Ð¿Ð¾Ð²Ð¸Ð½ÐµÐ½ Ð±ÑÑÐ¸: a...b , Ð´Ðµ a Ñ b - Ð¿Ð¾Ð·Ð¸ÑÐ¸Ð²Ð½Ñ ÑÑÐ»Ñ ÑÐ¸ÑÐ»Ð°. ÐÐ¸ Ð¼Ð¾Ð¶ÐµÑÐµ Ð²Ð¸ÐºÐ¾ÑÐ¸ÑÑÐ¾Ð²ÑÐ²Ð°ÑÐ¸ * Ð·Ð°Ð¼ÑÑÑÑ b, ÑÐ¾Ð± Ð¿Ð¾ÐºÐ°Ð·Ð°ÑÐ¸, ÑÐ¾ Ð´ÑÐ°Ð¿Ð°Ð·Ð¾Ð½ Ð½ÐµÐ¾Ð±Ð¼ÐµÐ¶ÐµÐ½Ð¸Ð¹.</range-validator>
+      <error-update>ÐÐµ Ð²Ð´Ð°Ð»Ð¾ÑÑ Ð¾Ð½Ð¾Ð²Ð¸ÑÐ¸. ÐÐ°ÑÐ° ÑÐ½ÑÐ¾ÑÐ¼Ð°ÑÑÑ Ñ Ð½ÐµÐ¿ÑÐ¸Ð¿ÑÑÑÐ¸Ð¼Ð¾Ñ.</error-update>
+      <item-not-existing>ÐÐµ Ð¼Ð¾Ð¶Ð½Ð° Ð·Ð±ÐµÑÐµÐ³ÑÐ¸ Ð·Ð¼ÑÐ½Ð¸ Ð´Ð¾ ÑÑÐ¾Ð³Ð¾ ÑÐµÐ³Ñ, Ð¾ÑÐºÑÐ»ÑÐºÐ¸ Ð²ÑÐ½ Ð±ÑÐ»ÑÑÐµ Ð½Ðµ ÑÑÐ½ÑÑ Ð² Ð±Ð°Ð·Ñ Ð´Ð°Ð½Ð¸Ñ.</item-not-existing>
     </msg>
   </UITagStyleForm>
   <FolksonomyPopup>
     <title>
-      <UITagStyleForm>Змінити конфігурацію стилю тега</UITagStyleForm>
+      <UITagStyleForm>ÐÐ¼ÑÐ½Ð¸ÑÐ¸ ÐºÐ¾Ð½ÑÑÐ³ÑÑÐ°ÑÑÑ ÑÑÐ¸Ð»Ñ ÑÐµÐ³Ð°</UITagStyleForm>
     </title>
   </FolksonomyPopup>
   <!--
@@ -2026,13 +2023,13 @@
   -->
   <ECMNameValidator>
     <msg>
-      <Invalid-char>Поле "{0}" має деякі неприпустимі символи. Будь ласка, введіть інше значення.</Invalid-char>
-      <empty-input>Пусте значення поля "{0}".</empty-input>
+      <Invalid-char>ÐÐ¾Ð»Ðµ "{0}" Ð¼Ð°Ñ Ð´ÐµÑÐºÑ Ð½ÐµÐ¿ÑÐ¸Ð¿ÑÑÑÐ¸Ð¼Ñ ÑÐ¸Ð¼Ð²Ð¾Ð»Ð¸. ÐÑÐ´Ñ Ð»Ð°ÑÐºÐ°, Ð²Ð²ÐµÐ´ÑÑÑ ÑÐ½ÑÐµ Ð·Ð½Ð°ÑÐµÐ½Ð½Ñ.</Invalid-char>
+      <empty-input>ÐÑÑÑÐµ Ð·Ð½Ð°ÑÐµÐ½Ð½Ñ Ð¿Ð¾Ð»Ñ "{0}".</empty-input>
     </msg>
   </ECMNameValidator>
   <EmptyFieldValidator>
     <msg>
-      <empty-input>Будь ласка, введіть значення у поле "{0}".</empty-input>
+      <empty-input>ÐÑÐ´Ñ Ð»Ð°ÑÐºÐ°, Ð²Ð²ÐµÐ´ÑÑÑ Ð·Ð½Ð°ÑÐµÐ½Ð½Ñ Ñ Ð¿Ð¾Ð»Ðµ "{0}".</empty-input>
     </msg>
   </EmptyFieldValidator>
   <!--
@@ -2042,7 +2039,7 @@
   -->
   <PermissionValidator>
   <msg>
-      <permission-path-invalid>Дозвіл "{0}", є неприпустимим.</permission-path-invalid>
+      <permission-path-invalid>ÐÐ¾Ð·Ð²ÑÐ» "{0}", Ñ Ð½ÐµÐ¿ÑÐ¸Ð¿ÑÑÑÐ¸Ð¼Ð¸Ð¼.</permission-path-invalid>
   </msg>
   </PermissionValidator>
   <!--
@@ -2052,9 +2049,9 @@
   -->
   <UIWorkspaceList>
     <label>
-      <workspaceName>Робоча область:</workspaceName>
+      <workspaceName>Ð Ð¾Ð±Ð¾ÑÐ° Ð¾Ð±Ð»Ð°ÑÑÑ:</workspaceName>
       <rootNodeInfo>UIWorkspaceList</rootNodeInfo>
-      <rootNodePath>Кореневий шлях:</rootNodePath>
+      <rootNodePath>ÐÐ¾ÑÐµÐ½ÐµÐ²Ð¸Ð¹ ÑÐ»ÑÑ:</rootNodePath>
     </label>
   </UIWorkspaceList>
   <!--
@@ -2064,43 +2061,43 @@
   -->
   <UIFormInputSetWithAction>
     <msg>
-      <confirm-delete>Ви впевнені, що бажаєте видалити?</confirm-delete>
+      <confirm-delete>ÐÐ¸ Ð²Ð¿ÐµÐ²Ð½ÐµÐ½Ñ, ÑÐ¾ Ð±Ð°Ð¶Ð°ÑÑÐµ Ð²Ð¸Ð´Ð°Ð»Ð¸ÑÐ¸?</confirm-delete>
     </msg>
   </UIFormInputSetWithAction>
   <template>
     <title>
-      <AddPermission>Додати права доступу</AddPermission>
+      <AddPermission>ÐÐ¾Ð´Ð°ÑÐ¸ Ð¿ÑÐ°Ð²Ð° Ð´Ð¾ÑÑÑÐ¿Ñ</AddPermission>
     </title>
   </template>
   <metadataTypeTab>
     <title>
-      <AddPermission>Додати права доступу</AddPermission>
+      <AddPermission>ÐÐ¾Ð´Ð°ÑÐ¸ Ð¿ÑÐ°Ð²Ð° Ð´Ð¾ÑÑÑÐ¿Ñ</AddPermission>
     </title>
   </metadataTypeTab>
   <PermissionButton>
     <title>
-      <AddPermission>Додати права доступу</AddPermission>
+      <AddPermission>ÐÐ¾Ð´Ð°ÑÐ¸ Ð¿ÑÐ°Ð²Ð° Ð´Ð¾ÑÑÑÐ¿Ñ</AddPermission>
     </title>
   </PermissionButton>
   <nodeTypeDefinition>
     <title>
-      <AddSuperType>Додати супер тип</AddSuperType>
+      <AddSuperType>ÐÐ¾Ð´Ð°ÑÐ¸ ÑÑÐ¿ÐµÑ ÑÐ¸Ð¿</AddSuperType>
     </title>
   </nodeTypeDefinition>
   <childNodeDefinition>
     <title>
-      <AddRequiredType>Додатипотрібний тип</AddRequiredType>
-      <AddDefaultType>Додати тип за замовчуванням</AddDefaultType>
+      <AddRequiredType>ÐÐ¾Ð´Ð°ÑÐ¸Ð¿Ð¾ÑÑÑÐ±Ð½Ð¸Ð¹ ÑÐ¸Ð¿</AddRequiredType>
+      <AddDefaultType>ÐÐ¾Ð´Ð°ÑÐ¸ ÑÐ¸Ð¿ Ð·Ð° Ð·Ð°Ð¼Ð¾Ð²ÑÑÐ²Ð°Ð½Ð½ÑÐ¼</AddDefaultType>
     </title>
   </childNodeDefinition>
   <propertyDefinition>
     <title>
-      <AddConstraints>Додати вимоги</AddConstraints>
+      <AddConstraints>ÐÐ¾Ð´Ð°ÑÐ¸ Ð²Ð¸Ð¼Ð¾Ð³Ð¸</AddConstraints>
     </title>
   </propertyDefinition>
   <authInputSet>
     <title>
-      <Select>Вибрати</Select>
+      <Select>ÐÐ¸Ð±ÑÐ°ÑÐ¸</Select>
     </title>
   </authInputSet>
   <!--
@@ -2108,83 +2105,83 @@
   -->
   <UIViewContainer>
     <title>
-      <View>Перегляд</View>
-      <EditInfo>Редагувати</EditInfo>
-      <Delete>Видалити</Delete>
+      <View>ÐÐµÑÐµÐ³Ð»ÑÐ´</View>
+      <EditInfo>Ð ÐµÐ´Ð°Ð³ÑÐ²Ð°ÑÐ¸</EditInfo>
+      <Delete>ÐÐ¸Ð´Ð°Ð»Ð¸ÑÐ¸</Delete>
     </title>
 <label>
-  <permission>{0} у {1}</permission>
+  <permission>{0} Ñ {1}</permission>
 </label>
   </UIViewContainer>
   <ECMTemplate>
     <title>
-      <EditInfo>Редагувати</EditInfo>
-      <Delete>Видалити</Delete>
+      <EditInfo>Ð ÐµÐ´Ð°Ð³ÑÐ²Ð°ÑÐ¸</EditInfo>
+      <Delete>ÐÐ¸Ð´Ð°Ð»Ð¸ÑÐ¸</Delete>
     </title>
   </ECMTemplate>
   <step1>
     <title>
-      <AddPermission>Додати права доступу</AddPermission>
+      <AddPermission>ÐÐ¾Ð´Ð°ÑÐ¸ Ð¿ÑÐ°Ð²Ð° Ð´Ð¾ÑÑÑÐ¿Ñ</AddPermission>
     </title>
   </step1>
   <step2>
     <title>
-      <SelectContainer>Виберіть контейнер</SelectContainer>
-      <SelectStore>Виберіть склад</SelectStore>
+      <SelectContainer>ÐÐ¸Ð±ÐµÑÑÑÑ ÐºÐ¾Ð½ÑÐµÐ¹Ð½ÐµÑ</SelectContainer>
+      <SelectStore>ÐÐ¸Ð±ÐµÑÑÑÑ ÑÐºÐ»Ð°Ð´</SelectStore>
     </title>
   </step2>
   <step3>
     <title>
-      <SelectQueryHandler>Виберіть обробник запитів</SelectQueryHandler>
+      <SelectQueryHandler>ÐÐ¸Ð±ÐµÑÑÑÑ Ð¾Ð±ÑÐ¾Ð±Ð½Ð¸Ðº Ð·Ð°Ð¿Ð¸ÑÑÐ²</SelectQueryHandler>
     </title>
   </step3>
   <UIDrivePermissionSelector>
     <label>
-      <selectGroup>Вибрати групу</selectGroup>
-      <selectUser>Вибрати користувача</selectUser>
-      <selectMembership>Виберіть Членство</selectMembership>
+      <selectGroup>ÐÐ¸Ð±ÑÐ°ÑÐ¸ Ð³ÑÑÐ¿Ñ</selectGroup>
+      <selectUser>ÐÐ¸Ð±ÑÐ°ÑÐ¸ ÐºÐ¾ÑÐ¸ÑÑÑÐ²Ð°ÑÐ°</selectUser>
+      <selectMembership>ÐÐ¸Ð±ÐµÑÑÑÑ Ð§Ð»ÐµÐ½ÑÑÐ²Ð¾</selectMembership>
     </label>
   </UIDrivePermissionSelector>
   
   <UIPermissionSelector>
     <label>
-      <selectGroup>Вибрати групу</selectGroup>
-      <selectUser>Вибрати користувача</selectUser>
-      <selectMembership>Виберіть Членство</selectMembership>
+      <selectGroup>ÐÐ¸Ð±ÑÐ°ÑÐ¸ Ð³ÑÑÐ¿Ñ</selectGroup>
+      <selectUser>ÐÐ¸Ð±ÑÐ°ÑÐ¸ ÐºÐ¾ÑÐ¸ÑÑÑÐ²Ð°ÑÐ°</selectUser>
+      <selectMembership>ÐÐ¸Ð±ÐµÑÑÑÑ Ð§Ð»ÐµÐ½ÑÑÐ²Ð¾</selectMembership>
     </label>
   </UIPermissionSelector>
   
   <UIAnyPermission>
     <label>
-      <anyPermission>Будь-яке право доступа</anyPermission>
+      <anyPermission>ÐÑÐ´Ñ-ÑÐºÐµ Ð¿ÑÐ°Ð²Ð¾ Ð´Ð¾ÑÑÑÐ¿Ð°</anyPermission>
     </label>
   </UIAnyPermission>
   
   <UIMDriveAnyPermission>
     <label>
-      <anyPermission>Будь-яке право доступа</anyPermission>
+      <anyPermission>ÐÑÐ´Ñ-ÑÐºÐµ Ð¿ÑÐ°Ð²Ð¾ Ð´Ð¾ÑÑÑÐ¿Ð°</anyPermission>
     </label>
   </UIMDriveAnyPermission>
   
   <UIQueriesAnyPermission>
     <label>
-      <anyPermission>Будь-яке право доступа</anyPermission>
+      <anyPermission>ÐÑÐ´Ñ-ÑÐºÐµ Ð¿ÑÐ°Ð²Ð¾ Ð´Ð¾ÑÑÑÐ¿Ð°</anyPermission>
     </label>
   </UIQueriesAnyPermission>
   
   <MetadataPermission>
     <label>
-      <selectGroup>Вибрати групу</selectGroup>
+      <selectGroup>ÐÐ¸Ð±ÑÐ°ÑÐ¸ Ð³ÑÑÐ¿Ñ</selectGroup>
     </label>
   </MetadataPermission>  
   <MetadataPermission>
     <label>
-      <selectMembership>Виберіть Членство</selectMembership>
+      <selectMembership>ÐÐ¸Ð±ÐµÑÑÑÑ Ð§Ð»ÐµÐ½ÑÑÐ²Ð¾</selectMembership>
     </label>
   </MetadataPermission>
   <anyPermission>
     <title>
-      <AddAnyPermission>Встановити будь-яке право доступу</AddAnyPermission>
+      <AddAnyPermission>ÐÑÑÐ°Ð½Ð¾Ð²Ð¸ÑÐ¸ Ð±ÑÐ´Ñ-ÑÐºÐµ Ð¿ÑÐ°Ð²Ð¾ Ð´Ð¾ÑÑÑÐ¿Ñ</AddAnyPermission>
     </title>
   </anyPermission>
   <!--
@@ -2192,9 +2189,9 @@
   -->
   <QueriesPermissionBrowse>
     <label>
-      <selectGroup>Вибрати групу</selectGroup>
-      <selectUser>Вибрати користувача</selectUser>
-      <selectMembership>Виберіть Членство</selectMembership>
+      <selectGroup>ÐÐ¸Ð±ÑÐ°ÑÐ¸ Ð³ÑÑÐ¿Ñ</selectGroup>
+      <selectUser>ÐÐ¸Ð±ÑÐ°ÑÐ¸ ÐºÐ¾ÑÐ¸ÑÑÑÐ²Ð°ÑÐ°</selectUser>
+      <selectMembership>ÐÐ¸Ð±ÐµÑÑÑÑ Ð§Ð»ÐµÐ½ÑÑÐ²Ð¾</selectMembership>
     </label>
   </QueriesPermissionBrowse>
   <!--
@@ -2202,7 +2199,7 @@
   -->  
   <UIViewFormTabPane>
     <label>
-      <addSymLink>Додати символьне посилання</addSymLink>
+      <addSymLink>ÐÐ¾Ð´Ð°ÑÐ¸ ÑÐ¸Ð¼Ð²Ð¾Ð»ÑÐ½Ðµ Ð¿Ð¾ÑÐ¸Ð»Ð°Ð½Ð½Ñ</addSymLink>
     </label>
   </UIViewFormTabPane>
   <!--
@@ -2211,19 +2208,19 @@
   
   <UIDriveForm>
 <msg>
-  <permission-path-invalid>Дозвіл "{0}", є неприпустимим.</permission-path-invalid>
+  <permission-path-invalid>ÐÐ¾Ð·Ð²ÑÐ» "{0}", Ñ Ð½ÐµÐ¿ÑÐ¸Ð¿ÑÑÑÐ¸Ð¼Ð¸Ð¼.</permission-path-invalid>
   </msg>
   </UIDriveForm>
   
   <UITaxonomyTreeMainForm>
     <msg>
-      <homepath-emty>Потрібний шлях в головний директорій.</homepath-emty>
-      <targetpath-emty>Потрібен шлях призначення.</targetpath-emty>
+      <homepath-emty>ÐÐ¾ÑÑÑÐ±Ð½Ð¸Ð¹ ÑÐ»ÑÑ Ð² Ð³Ð¾Ð»Ð¾Ð²Ð½Ð¸Ð¹ Ð´Ð¸ÑÐµÐºÑÐ¾ÑÑÐ¹.</homepath-emty>
+      <targetpath-emty>ÐÐ¾ÑÑÑÐ±ÐµÐ½ ÑÐ»ÑÑ Ð¿ÑÐ¸Ð·Ð½Ð°ÑÐµÐ½Ð½Ñ.</targetpath-emty>
     </msg>
   </UITaxonomyTreeMainForm>
   <UITaxonomyWorkingArea>
   <msg>
-  <exist>Цей вузол дерева вже існує.</exist>
+  <exist>Ð¦ÐµÐ¹ Ð²ÑÐ·Ð¾Ð» Ð´ÐµÑÐµÐ²Ð° Ð²Ð¶Ðµ ÑÑÐ½ÑÑ.</exist>
   </msg>
   </UITaxonomyWorkingArea>
 
@@ -2235,8 +2232,8 @@
         <firstName>#{word.firstName}</firstName>
         <email>#{word.email}</email>
       </option>
-      <group>Група</group>
-      <searchUser>Користувач</searchUser>
+      <group>ÐÑÑÐ¿Ð°</group>
+      <searchUser>ÐÐ¾ÑÐ¸ÑÑÑÐ²Ð°Ñ</searchUser>
       <userName>#{word.userName}</userName>
       <lastName>#{word.lastName}</lastName>
       <firstName>#{word.firstName}</firstName>
@@ -2252,37 +2249,37 @@
   -->   
   <DriveInputSet>
     <label>
-      <nt_folder>Папка для документа</nt_folder>
-      <nt_unstructured>Папка контента</nt_unstructured>
-      <exo_cssFolder>Папка CSS</exo_cssFolder>
-      <exo_jsFolder>Папка JavaScript</exo_jsFolder>
-      <exo_linkFolder>Папка посилання</exo_linkFolder>
-      <exo_webFolder>Папка веб-контенту</exo_webFolder>
+      <nt_folder>ÐÐ°Ð¿ÐºÐ° Ð´Ð»Ñ Ð´Ð¾ÐºÑÐ¼ÐµÐ½ÑÐ°</nt_folder>
+      <nt_unstructured>ÐÐ°Ð¿ÐºÐ° ÐºÐ¾Ð½ÑÐµÐ½ÑÐ°</nt_unstructured>
+      <exo_cssFolder>ÐÐ°Ð¿ÐºÐ° CSS</exo_cssFolder>
+      <exo_jsFolder>ÐÐ°Ð¿ÐºÐ° JavaScript</exo_jsFolder>
+      <exo_linkFolder>ÐÐ°Ð¿ÐºÐ° Ð¿Ð¾ÑÐ¸Ð»Ð°Ð½Ð½Ñ</exo_linkFolder>
+      <exo_webFolder>ÐÐ°Ð¿ÐºÐ° Ð²ÐµÐ±-ÐºÐ¾Ð½ÑÐµÐ½ÑÑ</exo_webFolder>
    </label>
   </DriveInputSet>
   <UIPermissionTreeInfo>
   <msg>
-      <confirm-delete-permission>Ви дійсно бажаєте видалити цей дозвіл?</confirm-delete-permission>
-      <no-permission-remove>Неможливо видалити власника або користувача системи.</no-permission-remove>  
+      <confirm-delete-permission>ÐÐ¸ Ð´ÑÐ¹ÑÐ½Ð¾ Ð±Ð°Ð¶Ð°ÑÑÐµ Ð²Ð¸Ð´Ð°Ð»Ð¸ÑÐ¸ ÑÐµÐ¹ Ð´Ð¾Ð·Ð²ÑÐ»?</confirm-delete-permission>
+      <no-permission-remove>ÐÐµÐ¼Ð¾Ð¶Ð»Ð¸Ð²Ð¾ Ð²Ð¸Ð´Ð°Ð»Ð¸ÑÐ¸ Ð²Ð»Ð°ÑÐ½Ð¸ÐºÐ° Ð°Ð±Ð¾ ÐºÐ¾ÑÐ¸ÑÑÑÐ²Ð°ÑÐ° ÑÐ¸ÑÑÐµÐ¼Ð¸.</no-permission-remove>  
   </msg>
   </UIPermissionTreeInfo>  
   <UITaxonomyTreeMainForm>
 <msg>
-      <no-right-target-path>Будь ласка, виберіть інший шлях в головну директорію.</no-right-target-path>
+      <no-right-target-path>ÐÑÐ´Ñ Ð»Ð°ÑÐºÐ°, Ð²Ð¸Ð±ÐµÑÑÑÑ ÑÐ½ÑÐ¸Ð¹ ÑÐ»ÑÑ Ð² Ð³Ð¾Ð»Ð¾Ð²Ð½Ñ Ð´Ð¸ÑÐµÐºÑÐ¾ÑÑÑ.</no-right-target-path>
 </msg>
 </UITaxonomyTreeMainForm>
 
 <UIECMAdminControlPanel>
     <tab>
       <label>        
-        <ManageUnLock>Керувати замками</ManageUnLock>
+        <ManageUnLock>ÐÐµÑÑÐ²Ð°ÑÐ¸ Ð·Ð°Ð¼ÐºÐ°Ð¼Ð¸</ManageUnLock>
       </label>
     </tab>        
 </UIECMAdminControlPanel>
 <UIUnLockForm>
     <label>
-      <name>Шлях вузла</name>      
-      <permissions>Дозволи</permissions>
+      <name>Ð¨Ð»ÑÑ Ð²ÑÐ·Ð»Ð°</name>      
+      <permissions>ÐÐ¾Ð·Ð²Ð¾Ð»Ð¸</permissions>
       <PermissionButton>UI Unlock Form</PermissionButton>
     </label>
     <action>
@@ -2290,37 +2287,37 @@
       <Cancel>#{word.cancel}</Cancel>
     </action>
     <msg>
-      <permission-require>Ви повинні вибрати дозволи.</permission-require>      
+      <permission-require>ÐÐ¸ Ð¿Ð¾Ð²Ð¸Ð½Ð½Ñ Ð²Ð¸Ð±ÑÐ°ÑÐ¸ Ð´Ð¾Ð·Ð²Ð¾Ð»Ð¸.</permission-require>      
     </msg>
   </UIUnLockForm>
   <UILockHolderList>
   <header>
-  <name>Групи або користувачі</name>
-  <action>Дія</action>
+  <name>ÐÑÑÐ¿Ð¸ Ð°Ð±Ð¾ ÐºÐ¾ÑÐ¸ÑÑÑÐ²Ð°ÑÑ</name>
+  <action>ÐÑÑ</action>
   </header>
   <tooltip>
-<DeleteLock>Видалити групу</DeleteLock>
+<DeleteLock>ÐÐ¸Ð´Ð°Ð»Ð¸ÑÐ¸ Ð³ÑÑÐ¿Ñ</DeleteLock>
   </tooltip>
   <msg>
-  <can-not-delete-lock-holder>Не вдалося видалити групу {0}.</can-not-delete-lock-holder>
+  <can-not-delete-lock-holder>ÐÐµ Ð²Ð´Ð°Ð»Ð¾ÑÑ Ð²Ð¸Ð´Ð°Ð»Ð¸ÑÐ¸ Ð³ÑÑÐ¿Ñ {0}.</can-not-delete-lock-holder>
   </msg>
   </UILockHolderList>
   <UILockNodeList>
   <header>
-  <name>Назва</name>
-  <hoderLock>Власник блокування</hoderLock>
-  <action>Дія</action>
+  <name>ÐÐ°Ð·Ð²Ð°</name>
+  <hoderLock>ÐÐ»Ð°ÑÐ½Ð¸Ðº Ð±Ð»Ð¾ÐºÑÐ²Ð°Ð½Ð½Ñ</hoderLock>
+  <action>ÐÑÑ</action>
   </header>
   <tooltip>
-<UnLock>Розблокування</UnLock>
+<UnLock>Ð Ð¾Ð·Ð±Ð»Ð¾ÐºÑÐ²Ð°Ð½Ð½Ñ</UnLock>
   </tooltip>
   <msg>
-  <access-denied-exception>Ви не маєте дозволу на доступ до вузла зі шляхом {0}, або цей вузол видалили.</access-denied-exception>
+  <access-denied-exception>ÐÐ¸ Ð½Ðµ Ð¼Ð°ÑÑÐµ Ð´Ð¾Ð·Ð²Ð¾Ð»Ñ Ð½Ð° Ð´Ð¾ÑÑÑÐ¿ Ð´Ð¾ Ð²ÑÐ·Ð»Ð° Ð·Ñ ÑÐ»ÑÑÐ¾Ð¼ {0}, Ð°Ð±Ð¾ ÑÐµÐ¹ Ð²ÑÐ·Ð¾Ð» Ð²Ð¸Ð´Ð°Ð»Ð¸Ð»Ð¸.</access-denied-exception>
   </msg>
   </UILockNodeList>
   <EditUnLockForm>
     <title>
-      <UIUnLockForm>Керувати блокуванням</UIUnLockForm>
+      <UIUnLockForm>ÐÐµÑÑÐ²Ð°ÑÐ¸ Ð±Ð»Ð¾ÐºÑÐ²Ð°Ð½Ð½ÑÐ¼</UIUnLockForm>
     </title>
   </EditUnLockForm>  
   <UITabPane>
@@ -2328,16 +2325,16 @@
       <Close>#{word.close}</Close>
     </action>
     <title>
-    <UILockHolderContainer>Керувати блокуванням</UILockHolderContainer>
-    <UILockNodeList>Заблокований вузол</UILockNodeList>
+    <UILockHolderContainer>ÐÐµÑÑÐ²Ð°ÑÐ¸ Ð±Ð»Ð¾ÐºÑÐ²Ð°Ð½Ð½ÑÐ¼</UILockHolderContainer>
+    <UILockNodeList>ÐÐ°Ð±Ð»Ð¾ÐºÐ¾Ð²Ð°Ð½Ð¸Ð¹ Ð²ÑÐ·Ð¾Ð»</UILockNodeList>
     </title>
   </UITabPane>
   
   <UIViewFormTabPane>
     <action>
-      <AddTabForm>Додати вкладку</AddTabForm>
+      <AddTabForm>ÐÐ¾Ð´Ð°ÑÐ¸ Ð²ÐºÐ»Ð°Ð´ÐºÑ</AddTabForm>
       <AddTab>#{word.save}</AddTab>
-      <BackViewForm>Назад</BackViewForm>
+      <BackViewForm>ÐÐ°Ð·Ð°Ð´</BackViewForm>
     </action>
   </UIViewFormTabPane>
   
@@ -2357,19 +2354,19 @@
   
   <UISkinTab>
     <header>
-      <name>Ім’я</name>
-      <roles>Ролі</roles>
-      <baseVersion>Версія</baseVersion>
-      <action>Дії</action>
+      <name>ÐÐ¼âÑ</name>
+      <roles>Ð Ð¾Ð»Ñ</roles>
+      <baseVersion>ÐÐµÑÑÑÑ</baseVersion>
+      <action>ÐÑÑ</action>
     </header>
     <msg>
-      <undeletable>Не можна видалити '{0}' тому що він використовується за замовчуванням.</undeletable>
-      <confirm-delete>Ви впевнені, що хочете видалити цей скін?</confirm-delete>
+      <undeletable>ÐÐµ Ð¼Ð¾Ð¶Ð½Ð° Ð²Ð¸Ð´Ð°Ð»Ð¸ÑÐ¸ '{0}' ÑÐ¾Ð¼Ñ ÑÐ¾ Ð²ÑÐ½ Ð²Ð¸ÐºÐ¾ÑÐ¸ÑÑÐ¾Ð²ÑÑÑÑÑÑ Ð·Ð° Ð·Ð°Ð¼Ð¾Ð²ÑÑÐ²Ð°Ð½Ð½ÑÐ¼.</undeletable>
+      <confirm-delete>ÐÐ¸ Ð²Ð¿ÐµÐ²Ð½ÐµÐ½Ñ, ÑÐ¾ ÑÐ¾ÑÐµÑÐµ Ð²Ð¸Ð´Ð°Ð»Ð¸ÑÐ¸ ÑÐµÐ¹ ÑÐºÑÐ½?</confirm-delete>
     </msg>
     <action>
       <title>
-        <Edit>Редагувати</Edit>
-        <Delete>Видалити</Delete>
+        <Edit>Ð ÐµÐ´Ð°Ð³ÑÐ²Ð°ÑÐ¸</Edit>
+        <Delete>ÐÐ¸Ð´Ð°Ð»Ð¸ÑÐ¸</Delete>
       </title>
     </action>
   </UISkinTab>
@@ -2377,26 +2374,26 @@
   <SkinForm>
     <label>
       <UITemplateContent>SkinForm</UITemplateContent>
-      <UIPopupWindow>Дозвіл скіна</UIPopupWindow>
-      <selectVersion>Версії</selectVersion>
-      <content>Контент:</content>
-      <name>Ім'я:</name>
-      <isDocumentTemplate>це шаблон документа</isDocumentTemplate>
-      <viewPermission>Права доступу:</viewPermission>
-      <enableVersion>Увімкнути відстеження версій</enableVersion>
+      <UIPopupWindow>ÐÐ¾Ð·Ð²ÑÐ» ÑÐºÑÐ½Ð°</UIPopupWindow>
+      <selectVersion>ÐÐµÑÑÑÑ</selectVersion>
+      <content>ÐÐ¾Ð½ÑÐµÐ½Ñ:</content>
+      <name>ÐÐ¼'Ñ:</name>
+      <isDocumentTemplate>ÑÐµ ÑÐ°Ð±Ð»Ð¾Ð½ Ð´Ð¾ÐºÑÐ¼ÐµÐ½ÑÐ°</isDocumentTemplate>
+      <viewPermission>ÐÑÐ°Ð²Ð° Ð´Ð¾ÑÑÑÐ¿Ñ:</viewPermission>
+      <enableVersion>Ð£Ð²ÑÐ¼ÐºÐ½ÑÑÐ¸ Ð²ÑÐ´ÑÑÐµÐ¶ÐµÐ½Ð½Ñ Ð²ÐµÑÑÑÐ¹</enableVersion>
     </label>
-    <title>Додати/Редагувати скін</title>
+    <title>ÐÐ¾Ð´Ð°ÑÐ¸/Ð ÐµÐ´Ð°Ð³ÑÐ²Ð°ÑÐ¸ ÑÐºÑÐ½</title>
   </SkinForm>
 
  <UITagManager>
    <action>
      <title>
-       <RemoveStyle>Видалити</RemoveStyle>
-         <AddStyle>Додати стиль</AddStyle>
+       <RemoveStyle>ÐÐ¸Ð´Ð°Ð»Ð¸ÑÐ¸</RemoveStyle>
+         <AddStyle>ÐÐ¾Ð´Ð°ÑÐ¸ ÑÑÐ¸Ð»Ñ</AddStyle>
      </title>
    </action>
    <msg>
-     <confirm-delete>Ви дійсно бажаєте видалити цей стиль тега?</confirm-delete>
+     <confirm-delete>ÐÐ¸ Ð´ÑÐ¹ÑÐ½Ð¾ Ð±Ð°Ð¶Ð°ÑÑÐµ Ð²Ð¸Ð´Ð°Ð»Ð¸ÑÐ¸ ÑÐµÐ¹ ÑÑÐ¸Ð»Ñ ÑÐµÐ³Ð°?</confirm-delete>
    </msg>
  </UITagManager>
 
@@ -2407,7 +2404,7 @@
 </UITaxonomyTreeContainer>
 <UITaxonomyTreeMainForm>
 <action>
-<NextViewPermission>Далі</NextViewPermission>
+<NextViewPermission>ÐÐ°Ð»Ñ</NextViewPermission>
 <Reset>Reset</Reset>
 </action>
 </UITaxonomyTreeMainForm>
@@ -2416,101 +2413,101 @@
 <action>
 <Save>Save</Save>
 <Reset>Reset</Reset>
-<NextAddAction>Далі</NextAddAction>
-<Previous>Попередній</Previous>
+<NextAddAction>ÐÐ°Ð»Ñ</NextAddAction>
+<Previous>ÐÐ¾Ð¿ÐµÑÐµÐ´Ð½ÑÐ¹</Previous>
 </action>
 </UIPermissionTreeForm>
 
 <UIActionForm>
 <action>
-<PreviousViewPermission>Попередній</PreviousViewPermission>
-<NextViewTree>Далі</NextViewTree>
+<PreviousViewPermission>ÐÐ¾Ð¿ÐµÑÐµÐ´Ð½ÑÐ¹</PreviousViewPermission>
+<NextViewTree>ÐÐ°Ð»Ñ</NextViewTree>
 </action>
   <msg>
-    <xss-vulnerability-character>Поле "{0}" містить символи уразливості XSS</xss-vulnerability-character>
-<xss-vulnerability-character-wo-label>Ваші внесені дані можуть містити символи уразливості XSS</xss-vulnerability-character-wo-label>
+    <xss-vulnerability-character>ÐÐ¾Ð»Ðµ "{0}" Ð¼ÑÑÑÐ¸ÑÑ ÑÐ¸Ð¼Ð²Ð¾Ð»Ð¸ ÑÑÐ°Ð·Ð»Ð¸Ð²Ð¾ÑÑÑ XSS</xss-vulnerability-character>
+<xss-vulnerability-character-wo-label>ÐÐ°ÑÑ Ð²Ð½ÐµÑÐµÐ½Ñ Ð´Ð°Ð½Ñ Ð¼Ð¾Ð¶ÑÑÑ Ð¼ÑÑÑÐ¸ÑÐ¸ ÑÐ¸Ð¼Ð²Ð¾Ð»Ð¸ ÑÑÐ°Ð·Ð»Ð¸Ð²Ð¾ÑÑÑ XSS</xss-vulnerability-character-wo-label>
   </msg>
 </UIActionForm>
 
 <UITaxonomyTreeWorkingArea>
 <action>
-<Previous>Попередній</Previous>
+<Previous>ÐÐ¾Ð¿ÐµÑÐµÐ´Ð½ÑÐ¹</Previous>
 </action>
 </UITaxonomyTreeWorkingArea>
 
   <UITabPane>
     <title>
-      <UITagManager>Керування тегом</UITagManager>
-      <UITagPermissionManager>Управління дозволами тегів</UITagPermissionManager>
+      <UITagManager>ÐÐµÑÑÐ²Ð°Ð½Ð½Ñ ÑÐµÐ³Ð¾Ð¼</UITagManager>
+      <UITagPermissionManager>Ð£Ð¿ÑÐ°Ð²Ð»ÑÐ½Ð½Ñ Ð´Ð¾Ð·Ð²Ð¾Ð»Ð°Ð¼Ð¸ ÑÐµÐ³ÑÐ²</UITagPermissionManager>
     </title>
   </UITabPane>
   
   <UITagPermissionInfo>
     <header>
-      <usersOrGroups>Користувач або Група</usersOrGroups>
-      <action>Дія</action>
+      <usersOrGroups>ÐÐ¾ÑÐ¸ÑÑÑÐ²Ð°Ñ Ð°Ð±Ð¾ ÐÑÑÐ¿Ð°</usersOrGroups>
+      <action>ÐÑÑ</action>
     </header>
     <action>
       <title>
-        <Delete>Видалити</Delete>
+        <Delete>ÐÐ¸Ð´Ð°Ð»Ð¸ÑÐ¸</Delete>
       </title>
     </action>
     <msg>
-      <confirm-delete-permission>Ви дійсно бажаєте видалити цей дозвіл?</confirm-delete-permission>
+      <confirm-delete-permission>ÐÐ¸ Ð´ÑÐ¹ÑÐ½Ð¾ Ð±Ð°Ð¶Ð°ÑÑÐµ Ð²Ð¸Ð´Ð°Ð»Ð¸ÑÐ¸ ÑÐµÐ¹ Ð´Ð¾Ð·Ð²ÑÐ»?</confirm-delete-permission>
     </msg>   
   </UITagPermissionInfo>
   <UITagPermissionForm>
-    <title>Додати права доступу</title>
+    <title>ÐÐ¾Ð´Ð°ÑÐ¸ Ð¿ÑÐ°Ð²Ð° Ð´Ð¾ÑÑÑÐ¿Ñ</title>
     <action>
       <Save>#{word.save}</Save>
-      <Add>Додати</Add>
+      <Add>ÐÐ¾Ð´Ð°ÑÐ¸</Add>
     </action>
     <label>
-      <userOrGroup>Членство:</userOrGroup>
+      <userOrGroup>Ð§Ð»ÐµÐ½ÑÑÐ²Ð¾:</userOrGroup>
     </label>
     <msg>
-      <userOrGroup-alreadyExists>Це членство вже існує. Будь ласка, виберіть інше.</userOrGroup-alreadyExists>
+      <userOrGroup-alreadyExists>Ð¦Ðµ ÑÐ»ÐµÐ½ÑÑÐ²Ð¾ Ð²Ð¶Ðµ ÑÑÐ½ÑÑ. ÐÑÐ´Ñ Ð»Ð°ÑÐºÐ°, Ð²Ð¸Ð±ÐµÑÑÑÑ ÑÐ½ÑÐµ.</userOrGroup-alreadyExists>
     </msg>    
   </UITagPermissionForm>
   
   <UIGroupMemberSelector>
     <label>
-      <selectGroup>Вибрати групу</selectGroup>
-      <selectMembership>Виберіть Членство</selectMembership>
+      <selectGroup>ÐÐ¸Ð±ÑÐ°ÑÐ¸ Ð³ÑÑÐ¿Ñ</selectGroup>
+      <selectMembership>ÐÐ¸Ð±ÐµÑÑÑÑ Ð§Ð»ÐµÐ½ÑÑÐ²Ð¾</selectMembership>
     </label>
   </UIGroupMemberSelector>
   
   <UIFolksonomyManager>
   <msg>
-      <confirm-delete>Ви дійсно бажаєте видалити цей стиль?</confirm-delete>
+      <confirm-delete>ÐÐ¸ Ð´ÑÐ¹ÑÐ½Ð¾ Ð±Ð°Ð¶Ð°ÑÑÐµ Ð²Ð¸Ð´Ð°Ð»Ð¸ÑÐ¸ ÑÐµÐ¹ ÑÑÐ¸Ð»Ñ?</confirm-delete>
   </msg>
     <action>
       <title>
-        <AddStyle>Додати стиль</AddStyle>
+        <AddStyle>ÐÐ¾Ð´Ð°ÑÐ¸ ÑÑÐ¸Ð»Ñ</AddStyle>
       </title>
     </action>
   </UIFolksonomyManager>  
 <UIActionForm>
   <title>
-  <ShowComponent>Відкрити вікно</ShowComponent>
-  <removeReference>Видалити</removeReference>
+  <ShowComponent>ÐÑÐ´ÐºÑÐ¸ÑÐ¸ Ð²ÑÐºÐ½Ð¾</ShowComponent>
+  <removeReference>ÐÐ¸Ð´Ð°Ð»Ð¸ÑÐ¸</removeReference>
   </title>
   </UIActionForm> 
   <NodeTypeNameValidator>
     <msg>
-      <Invalid-char>Існують деякі неприпустимі символи. Будь ласка, введіть інше значення.</Invalid-char>
-      <empty-input>Значення поля є порожнім.</empty-input>
+      <Invalid-char>ÐÑÐ½ÑÑÑÑ Ð´ÐµÑÐºÑ Ð½ÐµÐ¿ÑÐ¸Ð¿ÑÑÑÐ¸Ð¼Ñ ÑÐ¸Ð¼Ð²Ð¾Ð»Ð¸. ÐÑÐ´Ñ Ð»Ð°ÑÐºÐ°, Ð²Ð²ÐµÐ´ÑÑÑ ÑÐ½ÑÐµ Ð·Ð½Ð°ÑÐµÐ½Ð½Ñ.</Invalid-char>
+      <empty-input>ÐÐ½Ð°ÑÐµÐ½Ð½Ñ Ð¿Ð¾Ð»Ñ Ñ Ð¿Ð¾ÑÐ¾Ð¶Ð½ÑÐ¼.</empty-input>
     </msg>
   </NodeTypeNameValidator>
   <UIActionForm>
     <msg>
-      <constraint-violation-exception>Вузол '{0}' не можна додати до '{1}' у робочій області '{2}'.  Існує проблема з дозволами або обмеженнями умовою.</constraint-violation-exception>
+      <constraint-violation-exception>ÐÑÐ·Ð¾Ð» '{0}' Ð½Ðµ Ð¼Ð¾Ð¶Ð½Ð° Ð´Ð¾Ð´Ð°ÑÐ¸ Ð´Ð¾ '{1}' Ñ ÑÐ¾Ð±Ð¾ÑÑÐ¹ Ð¾Ð±Ð»Ð°ÑÑÑ '{2}'.  ÐÑÐ½ÑÑ Ð¿ÑÐ¾Ð±Ð»ÐµÐ¼Ð° Ð· Ð´Ð¾Ð·Ð²Ð¾Ð»Ð°Ð¼Ð¸ Ð°Ð±Ð¾ Ð¾Ð±Ð¼ÐµÐ¶ÐµÐ½Ð½ÑÐ¼Ð¸ ÑÐ¼Ð¾Ð²Ð¾Ñ.</constraint-violation-exception>
     </msg>
   </UIActionForm>
   
   <UIWorkspaceWizard>
     <msg>
-      <name-not-allowed>Заборонене ім'я</name-not-allowed>
+      <name-not-allowed>ÐÐ°Ð±Ð¾ÑÐ¾Ð½ÐµÐ½Ðµ ÑÐ¼'Ñ</name-not-allowed>
     </msg>
   </UIWorkspaceWizard>
   <UIRepositoryForm>
@@ -2521,62 +2518,62 @@
   
   <UIViewFormTabPane>
   <label>
-  <addCategory>Додати категорію</addCategory>
-          <addLocalizationLink>Додати переклад</addLocalizationLink>
+  <addCategory>ÐÐ¾Ð´Ð°ÑÐ¸ ÐºÐ°ÑÐµÐ³Ð¾ÑÑÑ</addCategory>
+          <addLocalizationLink>ÐÐ¾Ð´Ð°ÑÐ¸ Ð¿ÐµÑÐµÐºÐ»Ð°Ð´</addLocalizationLink>
   </label>
   </UIViewFormTabPane>
 
 <UIDriveForm>
 <label>
-<allowNodeTypesOnTree>Дозвіл типу вузла в лівому дереві:</allowNodeTypesOnTree>
+<allowNodeTypesOnTree>ÐÐ¾Ð·Ð²ÑÐ» ÑÐ¸Ð¿Ñ Ð²ÑÐ·Ð»Ð° Ð² Ð»ÑÐ²Ð¾Ð¼Ñ Ð´ÐµÑÐµÐ²Ñ:</allowNodeTypesOnTree>
 </label>
 </UIDriveForm>
 <DriveInputSet>
 <title>
 <RemovePermission>Remove Permission</RemovePermission>
-<ChooseNodeType>Виберіть типи вузлів</ChooseNodeType>
-<RemoveNodeType>Видалити</RemoveNodeType>
+<ChooseNodeType>ÐÐ¸Ð±ÐµÑÑÑÑ ÑÐ¸Ð¿Ð¸ Ð²ÑÐ·Ð»ÑÐ²</ChooseNodeType>
+<RemoveNodeType>ÐÐ¸Ð´Ð°Ð»Ð¸ÑÐ¸</RemoveNodeType>
 </title>
 </DriveInputSet>
 <PopupNodeTypeSelector>
 <title>
-<UINodeTypeSelector>Виберіть типи вузлів</UINodeTypeSelector>
-<PopupNodeTypeSelector>Виберіть типи вузлів</PopupNodeTypeSelector>
+<UINodeTypeSelector>ÐÐ¸Ð±ÐµÑÑÑÑ ÑÐ¸Ð¿Ð¸ Ð²ÑÐ·Ð»ÑÐ²</UINodeTypeSelector>
+<PopupNodeTypeSelector>ÐÐ¸Ð±ÐµÑÑÑÑ ÑÐ¸Ð¿Ð¸ Ð²ÑÐ·Ð»ÑÐ²</PopupNodeTypeSelector>
 </title>
 </PopupNodeTypeSelector>
   <UINodeTypeSelector>
     <label>
-      <selectedAllNodeTypes>Вибрати всі типи вузлів</selectedAllNodeTypes>
+      <selectedAllNodeTypes>ÐÐ¸Ð±ÑÐ°ÑÐ¸ Ð²ÑÑ ÑÐ¸Ð¿Ð¸ Ð²ÑÐ·Ð»ÑÐ²</selectedAllNodeTypes>
     </label>
   </UINodeTypeSelector>
   <UIScriptForm>
     <msg>
-      <PathNotFoundException>Скріпт уже існує в папці '{0}'.</PathNotFoundException>      
+      <PathNotFoundException>Ð¡ÐºÑÑÐ¿Ñ ÑÐ¶Ðµ ÑÑÐ½ÑÑ Ð² Ð¿Ð°Ð¿ÑÑ '{0}'.</PathNotFoundException>      
     </msg>
   </UIScriptForm>
  <UINodeTypeList>
    <msg>
-   <no-list>Немає типу вузла, що відповідає вашому пошуку.</no-list>
+   <no-list>ÐÐµÐ¼Ð°Ñ ÑÐ¸Ð¿Ñ Ð²ÑÐ·Ð»Ð°, ÑÐ¾ Ð²ÑÐ´Ð¿Ð¾Ð²ÑÐ´Ð°Ñ Ð²Ð°ÑÐ¾Ð¼Ñ Ð¿Ð¾ÑÑÐºÑ.</no-list>
    </msg>
  </UINodeTypeList>
   <UIActionForm>
     <msg>
-      <canotChangeActionId>Не можна змінити ідентифікатор дії.</canotChangeActionId>
+      <canotChangeActionId>ÐÐµ Ð¼Ð¾Ð¶Ð½Ð° Ð·Ð¼ÑÐ½Ð¸ÑÐ¸ ÑÐ´ÐµÐ½ÑÐ¸ÑÑÐºÐ°ÑÐ¾Ñ Ð´ÑÑ.</canotChangeActionId>
     </msg>
   </UIActionForm>
   <PopupComponent>
     <title>
-      <UINodeTypeSelector>Вибір типу вузла</UINodeTypeSelector>
+      <UINodeTypeSelector>ÐÐ¸Ð±ÑÑ ÑÐ¸Ð¿Ñ Ð²ÑÐ·Ð»Ð°</UINodeTypeSelector>
     </title>
   </PopupComponent>
   <UIPageIterator>
     <label>
-      <maxPageSize>Максимальний розмір сторінки</maxPageSize>
+      <maxPageSize>ÐÐ°ÐºÑÐ¸Ð¼Ð°Ð»ÑÐ½Ð¸Ð¹ ÑÐ¾Ð·Ð¼ÑÑ ÑÑÐ¾ÑÑÐ½ÐºÐ¸</maxPageSize>
     </label>
   </UIPageIterator>
   <UILockNodeList>
     <msg>
-      <can-not-unlock-node>Вам не дозволено розблокувати цей вузол. Зверніться до адміністратора, щоб отримати необхідне право.</can-not-unlock-node>
+      <can-not-unlock-node>ÐÐ°Ð¼ Ð½Ðµ Ð´Ð¾Ð·Ð²Ð¾Ð»ÐµÐ½Ð¾ ÑÐ¾Ð·Ð±Ð»Ð¾ÐºÑÐ²Ð°ÑÐ¸ ÑÐµÐ¹ Ð²ÑÐ·Ð¾Ð». ÐÐ²ÐµÑÐ½ÑÑÑÑÑ Ð´Ð¾ Ð°Ð´Ð¼ÑÐ½ÑÑÑÑÐ°ÑÐ¾ÑÐ°, ÑÐ¾Ð± Ð¾ÑÑÐ¸Ð¼Ð°ÑÐ¸ Ð½ÐµÐ¾Ð±ÑÑÐ´Ð½Ðµ Ð¿ÑÐ°Ð²Ð¾.</can-not-unlock-node>
     </msg>
  </UILockNodeList>
 </bundle>

@@ -55,7 +55,6 @@ import javax.ws.rs.core.MediaType;
 import org.apache.commons.lang.StringEscapeUtils;
 import org.apache.commons.lang.StringUtils;
 import org.exoplatform.container.component.ComponentPlugin;
-import org.exoplatform.portal.webui.util.Util;
 import org.exoplatform.services.cms.BasePath;
 import org.exoplatform.services.cms.documents.TrashService;
 import org.exoplatform.services.cms.link.LinkManager;
@@ -352,7 +351,7 @@ public class Utils {
         }
       }
     }
-    if (title == null) {
+    if (StringUtils.isBlank(title)) {
       if (node.isNodeType("nt:frozenNode")) {
         String uuid = node.getProperty("jcr:frozenUuid").getString();
         Node originalNode = node.getSession().getNodeByUUID(uuid);
@@ -864,5 +863,29 @@ public class Utils {
       strSize = "0" + strSize;
     }
     return "," + Math.round(Double.valueOf(Integer.valueOf(strSize) / 100.0));
+  }
+  /**
+   * Use escapeIllegalJcrChars from JCR to escape a path
+   * @param path to escape
+   * @return escaped path
+   */
+  public static String escapeIllegalJcrPath (String path) {
+    if (path == null) return null;
+    if (path.length() == 0) return "";
+    StringBuilder encoded = new StringBuilder();
+    StringBuilder currentItem = new StringBuilder();
+    for (int i = 0; i < path.length(); i++) {
+      if (path.charAt(i) == '/') {
+        if (currentItem != null && currentItem.length() > 0) {
+          encoded.append(Text.escapeIllegalJcrChars(currentItem.toString()));
+          currentItem = new StringBuilder();
+        }
+        encoded.append('/');
+      } else {
+        currentItem.append(path.charAt(i));
+      }
+    }
+    if (currentItem != null && currentItem.length() > 0) encoded.append(Text.escapeIllegalJcrChars(currentItem.toString()));
+    return encoded.toString();
   }
 }

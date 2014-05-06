@@ -40,12 +40,14 @@ import javax.jcr.PathNotFoundException;
 import javax.jcr.RepositoryException;
 import javax.jcr.ValueFormatException;
 import javax.jcr.Value;
+import javax.jcr.Session;
 import javax.jcr.nodetype.NodeDefinition;
 import javax.jcr.nodetype.NodeType;
 import javax.jcr.nodetype.NodeTypeManager;
 import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
 
+import org.apache.commons.lang.StringEscapeUtils;
 import org.apache.commons.lang.StringUtils;
 import org.exoplatform.container.ExoContainer;
 import org.exoplatform.container.ExoContainerContext;
@@ -276,6 +278,47 @@ public class Utils {
     return false;
   }
 
+  /** check if we can restore a node */
+  public static boolean isAbleToRestore(Node currentNode) throws Exception{
+    String restorePath;
+    String restoreWorkspace;
+    Node restoreLocationNode;
+    
+    if(!Utils.isInTrash(currentNode)){
+      return false;
+    }
+    
+    // return false if the node is exo:actions
+    if (Utils.EXO_ACTIONS.equals(currentNode.getName()) && Utils.isInTrash(currentNode)) {
+      return false;
+    }
+    
+    // return false if the target has been already in Trash.
+    if ( Utils.targetNodeAndLinkInTrash(currentNode) ) {
+      return false;
+    }
+    
+    if (ConversationState.getCurrent().getIdentity().getUserId().equalsIgnoreCase(WCMCoreUtils.getSuperUser())) { 
+      return true;
+    }
+
+    if ( currentNode.isNodeType(TrashService.EXO_RESTORE_LOCATION)) {
+        restorePath = currentNode.getProperty(TrashService.RESTORE_PATH).getString();
+        restoreWorkspace = currentNode.getProperty(TrashService.RESTORE_WORKSPACE).getString();
+        restorePath = restorePath.substring(0, restorePath.lastIndexOf("/"));
+    } else {
+        //Is not a deleted node, may be groovy action, hidden node,...
+        return false;
+    }
+    Session session = WCMCoreUtils.getUserSessionProvider().getSession(restoreWorkspace, WCMCoreUtils.getRepository());
+    try {
+        restoreLocationNode = (Node) session.getItem(restorePath);
+    } catch(Exception e) {
+        return false;
+    }
+    return PermissionUtil.canAddNode(restoreLocationNode);
+  }
+  
   public static boolean isReferenceable(Node node) throws RepositoryException {
     return node.isNodeType(MIX_REFERENCEABLE);
   }
@@ -687,10 +730,11 @@ public class Utils {
         if(propertyName.equals(EXO_TITLE))
           return ContentReader.getXSSCompatibilityContent(orgNode.getProperty(propertyName).getString());
         if (org.exoplatform.wcm.webui.Utils.getCurrentMode().equals(WCMComposer.MODE_LIVE))
-          return StringUtils.replace(orgNode.getProperty(propertyName).getString(),"{portalName}",siteName);
+          return StringEscapeUtils.unescapeHtml(StringUtils.replace(orgNode.getProperty(propertyName).getString(),"{portalName}",siteName));
         else 
         	return "<div class=\"WCMInlineEditable\" contenteditable=\"true\" propertyName=\""+propertyName+"\" repo=\""+repo+"\" workspace=\""+workspace+"\"" +
-        			" uuid=\""+uuid+"\" siteName=\""+siteName+"\" publishedMsg=\""+published+"\" draftMsg=\""+draft+"\" fastpublishlink=\""+publishLink+"\" language=\""+language+"\" >" + orgNode.getProperty(propertyName).getString() + "</div>";
+        			" uuid=\""+uuid+"\" siteName=\""+siteName+"\" publishedMsg=\""+published+"\" draftMsg=\""+draft+"\" fastpublishlink=\""+publishLink+"\" language=\""+language+"\" >" + 
+        			ContentReader.getXSSCompatibilityContent(orgNode.getProperty(propertyName).getString()) + "</div>";
       } catch (Exception e) {
       	if (org.exoplatform.wcm.webui.Utils.getCurrentMode().equals(WCMComposer.MODE_LIVE))
           return currentValue;
