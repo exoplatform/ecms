@@ -20,7 +20,6 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collections;
 import java.util.Comparator;
-import java.util.Iterator;
 import java.util.List;
 
 import javax.jcr.Node;
@@ -234,6 +233,46 @@ public class UICLVConfig extends UIFormTabPane  implements UISelectable {
   public String getSavedPath () {
     return savedPath;
   }
+
+  /**
+   * check if the content in the path is alive and return only alive content
+   * 
+   * @return
+   */
+  public String getAliveSavedPath () {
+    //check if the path is alive
+    if(savedPath != null && !savedPath.isEmpty()){
+      StringBuffer itemsBuffer = new StringBuffer();
+      if(savedPath.contains(";")){
+        List<String> tmpItems = Arrays.asList(savedPath.split(";"));
+	    //only add exist Node
+        for(String item:tmpItems) {
+          try{
+            if(getRealNode(item) != null){
+              itemsBuffer.append(item).append(";");
+            }
+          }catch(RepositoryException e){
+            if(LOG.isDebugEnabled()){
+              LOG.debug(e.getMessage());
+            }
+          }
+        }
+      }else{
+        try{
+          if(getRealNode(savedPath) != null){
+            itemsBuffer.append(savedPath);
+          }
+        }catch(RepositoryException e){
+          if(LOG.isDebugEnabled()){
+            LOG.debug(e.getMessage());
+          }
+        }
+      }
+      return itemsBuffer.toString();
+    }
+    return savedPath;
+  }
+  
   /**
    * Gets the popup id.
    *

@@ -17,6 +17,7 @@
 package org.exoplatform.wcm.webui.clv;
 
 import javax.jcr.Node;
+import javax.jcr.PathNotFoundException;
 import javax.jcr.Session;
 import javax.jcr.query.Row;
 import javax.portlet.PortletPreferences;
@@ -94,6 +95,11 @@ public abstract class UICLVContainer extends UIContainer {
 
   public String getEditLink(boolean isEditable, boolean isNew) throws Exception {
     String folderPath = this.getAncestorOfType(UICLVPortlet.class).getFolderPath();
+    try{
+      getFolderNode(folderPath);
+    }catch(PathNotFoundException e){
+      folderPath = "";
+    }
     if (folderPath==null) folderPath="";
     return Utils.getEditLink(getFolderNode(folderPath), isEditable, isNew);
   }
