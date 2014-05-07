@@ -47,6 +47,7 @@ import java.io.InputStream;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Calendar;
+import java.util.Collection;
 import java.util.HashSet;
 import java.util.Iterator;
 import java.util.List;
@@ -565,9 +566,10 @@ public class JCRLocalGoogleDrive extends JCRLocalCloudDrive implements UserToken
       // Update existing file metadata and parent (location).
       File gf = api.file(getId(fileNode));
       gf.setTitle(getTitle(fileNode));
-      // TODO merge parents (in case of move replace source on destination)
-      gf.setParents(Arrays.asList(new ParentReference().setId(getParentId(fileNode))));
       gf.setModifiedDate(new DateTime(modified.getTime()));
+
+      // merge parents (in case of move replace source on destination)
+      gf.setParents(mergeParents(getParentId(fileNode), gf.getParents(), findParents(fileNode)));
 
       try {
         api.update(gf);
@@ -586,9 +588,10 @@ public class JCRLocalGoogleDrive extends JCRLocalCloudDrive implements UserToken
       // Update existing folder metadata and parent (location).
       File gf = api.file(getId(folderNode));
       gf.setTitle(getTitle(folderNode));
-      // TODO merge parents (in case of move replace source on destination)
-      gf.setParents(Arrays.asList(new ParentReference().setId(getParentId(folderNode))));
       gf.setModifiedDate(new DateTime(modified.getTime()));
+
+      // merge parents (in case of move replace source on destination)
+      gf.setParents(mergeParents(getParentId(folderNode), gf.getParents(), findParents(folderNode)));
 
       try {
         api.update(gf);
@@ -975,6 +978,29 @@ public class JCRLocalGoogleDrive extends JCRLocalCloudDrive implements UserToken
                                         SyncNotSupportedException,
                                         RepositoryException {
     return new FileAPI();
+  }
+
+  /**
+   * Merge file's local and cloud parents (in case of move replace source on destination).
+   * 
+   * @param parentId {@link String} current local parent id
+   * @param cloudParents {@link List} of {@link ParentReference} on cloud side
+   * @param localParentIds {@link List} of parent ids locally
+   * @return
+   */
+  protected List<ParentReference> mergeParents(String parentId,
+                                               List<ParentReference> cloudParents,
+                                               Collection<String> localParentIds) {
+    List<ParentReference> parents = new ArrayList<ParentReference>();
+    if (cloudParents != null && cloudParents.size() > 1) {
+      for (ParentReference cp : cloudParents) {
+        if (localParentIds.contains(cp.getId())) {
+          parents.add(cp);
+        }
+      }
+    }
+    parents.add(new ParentReference().setId(parentId));
+    return parents;
   }
 
 }

@@ -1676,7 +1676,7 @@ public abstract class JCRLocalCloudDrive extends CloudDrive {
 
         begin();
 
-        // TODO it's possible we need to rename item to a 'cleanName' of the title,
+        // It's possible we need to rename item to a 'cleanName' of the title,
         // as the ECMS uses another name format for JCR nodes.
         // April 22, this problem solved by searching by file id in sync algo.
 
@@ -1716,6 +1716,7 @@ public abstract class JCRLocalCloudDrive extends CloudDrive {
 
       // TODO if creation failed, we need rollback all the changes and remove local node from the drive folder
       synchronizer(file).create(file, fileAPI);
+
       // we can know the id after the sync
       fileId = fileAPI.getId(file);
 
@@ -2057,7 +2058,7 @@ public abstract class JCRLocalCloudDrive extends CloudDrive {
     rootNode.setProperty("ecd:initDate", Calendar.getInstance());
     // TODO how to store provider properly? need store its API version?
     rootNode.setProperty("ecd:provider", getUser().getProvider().getId());
-    
+
     // set current format of the drive
     rootNode.setProperty(ECD_LOCALFORMAT, CURRENT_LOCALFORMAT);
   }
@@ -2862,8 +2863,8 @@ public abstract class JCRLocalCloudDrive extends CloudDrive {
             synchronizer(node).create(node, fileAPI);
             break;
           } catch (SyncNotSupportedException e) {
-            throw new CloudDriveException("Cannot open cloud file. Another node exists in the drive with "
-                + "the same name and synchronization not supported for its nodetype ("
+            throw new CloudDriveException("Cannot create file in cloud. Another node exists in the "
+                + "drive with the same name and synchronization not supported for its nodetype ("
                 + node.getPrimaryNodeType().getName() + "): " + parentPath + "/" + name, e);
           }
         }

@@ -96,15 +96,6 @@ public final class LostRemovalSynchronizer implements CloudFileSynchronizer {
   /**
    * {@inheritDoc}
    */
-  @Override
-  @Deprecated
-  public boolean synchronize(Node file, CloudFileAPI api) throws CloudDriveException, RepositoryException {
-    throw new SyncNotSupportedException("Not supported");
-  }
-
-  /**
-   * {@inheritDoc}
-   */
   public boolean create(Node file, CloudFileAPI api) throws RepositoryException, CloudDriveException {
     throw new SyncNotSupportedException("Not supported");
   }

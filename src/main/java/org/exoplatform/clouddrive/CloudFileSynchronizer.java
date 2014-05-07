@@ -51,20 +51,6 @@ public interface CloudFileSynchronizer {
   boolean accept(Node file) throws RepositoryException, SkipSyncException;
 
   /**
-   * Synchronize local node with cloud using given API. This method doesn't check if the file can be handled
-   * by
-   * the synchronizer - use {@link #accept(Node)} to perform such check before calling the method.
-   * 
-   * @param file {@link Node}
-   * @param api {@link CloudFileAPI}
-   * @return boolean, <code>true</code> if file was successfully processed (e.g. created on the cloud),
-   *         <code>false</code> otherwise.
-   * @see #accept(Node)
-   */
-  @Deprecated
-  boolean synchronize(Node file, CloudFileAPI api) throws CloudDriveException, RepositoryException;
-
-  /**
    * Remove cloud file represented by given path and/or id using given API. This method doesn't check if
    * the file can be handled by the synchronizer - use {@link #accept(Node)} to perform such check before
    * calling the method.

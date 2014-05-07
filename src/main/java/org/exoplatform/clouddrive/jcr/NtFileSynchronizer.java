@@ -76,22 +76,6 @@ public class NtFileSynchronizer implements CloudFileSynchronizer {
   /**
    * {@inheritDoc}
    */
-  @Override
-  @Deprecated
-  public boolean synchronize(Node file, CloudFileAPI api) throws CloudDriveException, RepositoryException {
-    if (file.isNodeType(JCRLocalCloudDrive.ECD_CLOUDFILE)
-        || file.isNodeType(JCRLocalCloudDrive.ECD_CLOUDDRIVE)) {
-      // XXX do nothing for the moment, use drive sync for this purpose
-      LOG.warn("Synchronization of already existing cloud file not supported for the moment. Use drive synchronization instead.");
-      return false;
-    } else {
-      return create(file, api);
-    }
-  }
-
-  /**
-   * {@inheritDoc}
-   */
   public boolean create(Node file, CloudFileAPI api) throws RepositoryException, CloudDriveException {
     String title = api.getTitle(file);
     Calendar created = file.getProperty("jcr:created").getDate();
