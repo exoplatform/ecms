@@ -360,6 +360,10 @@
 	background-image: url("icons/oxygen/32/status/dialog-information.png")
 }
 
+.picon-32.picon-dialog-warning {
+	background-image: url("icons/oxygen/32/status/dialog-warning.png")
+}
+
 .picon-32.picon-process-stop {
 	background-image: url("icons/oxygen/32/actions/process-stop.png")
 }
@@ -378,6 +382,10 @@
 
 .picon.picon-dialog-information {
 	background-image: url("icons/oxygen/16/status/dialog-information.png")
+}
+
+.picon.picon-dialog-warning {
+	background-image: url("icons/oxygen/16/status/dialog-warning.png")
 }
 
 .picon.picon-process-stop {

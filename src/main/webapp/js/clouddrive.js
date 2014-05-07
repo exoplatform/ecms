@@ -483,6 +483,7 @@
 						});
 						syncProcess.fail(function() {
 							delete autoSyncs[syncName]; // cancel and cleanup
+							utils.log("Auto-sync canceled " + syncName);
 						});
 					}
 					var syncTimeout;
@@ -603,7 +604,7 @@
 					}
 				});
 				sync.fail(function(response, status, err) {
-					utils.log("ERROR: synchronization error: " + err + ", " + status + ", " + response);
+					utils.log("ERROR: synchronization error: " + err + ", " + status + ", " + JSON.stringify(response));
 					if (status == 403 && response.id) {
 						updateProvider = response;
 					}
@@ -623,9 +624,19 @@
 			// start work here (registered done() will be called)
 			if (updateProvider) {
 				// previous attempt tells us we have to update access keys - reconnect
+				if (updateProvider.process) {
+					// previous sync already updating the keys - return it here
+					return updateProvider.process;
+				}
 				var connect = connectDrive(updateProvider.id, updateProvider.authUrl);
+				updateProvider.process = process.promise(); // mark as active
 				connect.done(function(state) {
+					updateProvider = null;
 					initiator.resolve();
+				});
+				connect.fail(function(error) {
+					updateProvider.process = null;
+					process.reject(error);
 				});
 			} else {
 				initiator.resolve();
@@ -848,7 +859,7 @@
 	 * WebUI integration.
 	 */
 	function CloudDriveUI() {
-		var NOTICE_WIDTH = "320px";
+		var NOTICE_WIDTH = "380px";
 
 		var MENU_OPEN_FILE = "OpenCloudFile";
 		var MENU_REFRESH_DRIVE = "RefreshCloudDrive";
@@ -1359,9 +1370,9 @@
 			process.fail(function(response, status, err) {
 				if (status == 403 && response.name) {
 					// assuming provider object in response
-					cloudDriveUI.showWarn("Error Synchronizing with " + response.name
-					    + "<span>Access rewoked or outdated. Start <a class='cdSynchronizeProcessAction' href='javascript:void(0);'>"
-					    + "Synchronization</a> again to renew access.</span>", function(pnotify) {
+					cloudDriveUI.showWarn("Renew access to your " + response.name,
+					    "Start <a class='cdSynchronizeProcessAction' href='javascript:void(0);' style='curson: pointer; border-bottom: 1px dashed #999; display: inline;'>"
+					    + " synchronization</a> to update access permissions.</div>", function(pnotify) {
 						$(pnotify.text_container).find("a.cdSynchronizeProcessAction").click(function() {
 							cloudDrive.synchronize(this);
 						});
@@ -1793,9 +1804,9 @@
 		 * Show warning notice to user. Info will be show for 8sec and hided then.
 		 */
 		this.showWarn = function(title, text, onInit) {
-			return cloudDriveUI.showNotice("info", title, text, {
-			  hide : true,
-			  delay : 8000,
+			return cloudDriveUI.showNotice("exclamation", title, text, {
+			  hide : false,
+			  delay : 30000,
 			  icon : "picon-dialog-warning",
 			  onInit : onInit
 			});
