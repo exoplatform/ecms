@@ -70,11 +70,11 @@
 						def curNode = uicomponent.getNode() ;
 						if(curNode.hasNode("jcr:content")) {
 							def content = curNode.getNode("jcr:content") ;                                      
-							String[] fieldSummary = ["jcrPath=/node/jcr:content/jcr:data", ""] ;
+							String[] fieldSummary = ["jcrPath=/node/jcr:content/jcr:data", "options=noSanitization"] ;
 							uicomponent.addTextAreaField("contentHtml", fieldSummary) ;                                                       
 							}
 						} else {                           
-						String[] fieldSummary = ["jcrPath=/node/jcr:content/jcr:data", ""] ;
+						String[] fieldSummary = ["jcrPath=/node/jcr:content/jcr:data", "options=noSanitization"] ;
 						uicomponent.addTextAreaField("contentHtml", fieldSummary) ;                
 					}
 				%>      

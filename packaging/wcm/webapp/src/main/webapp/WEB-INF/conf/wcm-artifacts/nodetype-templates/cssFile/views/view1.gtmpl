@@ -19,7 +19,7 @@
 <div class="fileContent">     
 	<h6 class="topTitle"><%=org.exoplatform.services.cms.impl.Utils.getTitle(originalNode)%></h6>
 	<div class="textContent">
-		<% println "<pre>" + contentNode.getProperty("jcr:data").getString() + "</pre>"; %>
+		<% println "<pre>" + uicomponent.encodeHTML(contentNode.getProperty("jcr:data").getString()) + "</pre>"; %>
 	</div>
   <div class="uiAction">                                          
 		<button type="button" class="btn" onclick="javascript:eXo.ecm.ECMUtils.generateWebDAVLink('','<%=uicomponent.getPortalName()%>','<%=restContextName%>','${repository}','<%=uicomponent.getWorkspaceName()%>','<%=formatNodeName(originalNode.getPath())%>','<%=mimeType%>')">
