@@ -374,7 +374,7 @@
       <can-not-paste-node>你並沒有將節點移動的權限。請與管理員聯繫。</can-not-paste-node>
       <can-not-move-node>你並沒有將節點移動的權限。請與管理員聯繫。</can-not-move-node>
       <does-not-support-versioning>你並沒有將節點移動的權限。請與管理員聯繫。</does-not-support-versioning>
-      <path-not-found>此元素被刪除或更改。請按一下刷新按鈕。</path-not-found>
+      <path-not-found>此元素被刪除或更改。請按一下更新按鈕。</path-not-found>
       <paste-lock-exception>你不能貼上 '{0}' 到此節點，因為來源或目標節點處於鎖定狀態或有關係的鎖定節點。</paste-lock-exception>
       <can-not-checkin-node>您不能簽入此節點。請檢查您具有正確的權限。</can-not-checkin-node>
       <can-not-checkout-node>您不能簽出此節點。請檢查您具有正確的權限。</can-not-checkout-node>
@@ -538,7 +538,7 @@
       <confirm-deleteattachment>確定要刪除此附件檔案嗎?</confirm-deleteattachment>
       <confirm-deleteattcomment>是否確定要刪除此評論?</confirm-deleteattcomment>
       <access-denied-exception>訪問被拒絕。您可能沒有讀取權限，或者該節點可能已刪除或更改。</access-denied-exception>
-      <path-not-found>此元素被刪除或更改。請按一下刷新按鈕。</path-not-found>
+      <path-not-found>此元素被刪除或更改。請按一下更新按鈕。</path-not-found>
     </msg>
     <tooltip>
       <remove-attachment>刪除此附件檔案</remove-attachment>
@@ -575,12 +575,12 @@
       <Paste>貼上</Paste>
       <CheckOut>簽出</CheckOut>
       <CheckIn>簽入</CheckIn>
-      <WebDAV>視圖 WebDAV</WebDAV>
+      <WebDAV>檢視 WebDAV</WebDAV>
       <autoversion>自動版本控制</autoversion>
       <Custom>自訂</Custom>
       <AddFolder>新資料夾</AddFolder>
       <AddDocument>新內容</AddDocument>
-      <Upload>上載檔案</Upload>
+      <Upload>上傳檔案</Upload>
       <MoveNode>移動</MoveNode>
       <UnLock>解鎖</UnLock>
       <ViewProperties>查看屬性</ViewProperties>
@@ -629,7 +629,7 @@
       <UIPropertyTab>屬性</UIPropertyTab>
       <UIMetadataTab>中繼資料</UIMetadataTab>
       <UIPropertyForm>增加新的屬性</UIPropertyForm>
-      <UIUploadContent>上載檔案的資訊</UIUploadContent>
+      <UIUploadContent>上傳檔案的資訊</UIUploadContent>
       <UIJCRAdvancedSearch>新查詢</UIJCRAdvancedSearch>
       <UISavedQuery>儲存的查詢</UISavedQuery>
       <AdvancedSearchResult>搜尋結果</AdvancedSearchResult>
@@ -649,8 +649,8 @@
       <UINonPublishedForm>狀態</UINonPublishedForm>
       <UIPublishedForm>狀態</UIPublishedForm>
       <UIPublicationLogList>歷史紀錄</UIPublicationLogList>
-      <UIDocumentWithTree>檔案視圖</UIDocumentWithTree>
-      <UIDocumentInfo>文件視圖</UIDocumentInfo>
+      <UIDocumentWithTree>檔案檢視</UIDocumentWithTree>
+      <UIDocumentInfo>文件檢視</UIDocumentInfo>
       <UICategoriesSelectPanel>選擇類別</UICategoriesSelectPanel>
       <UISelectedCategoriesGrid>引用的類別</UISelectedCategoriesGrid>
       <UIWorkflowPublicationActionForm>Workflow Publication Action</UIWorkflowPublicationActionForm>
