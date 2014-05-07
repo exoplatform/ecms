@@ -18,9 +18,6 @@
  */
 package org.exoplatform.clouddrive.box;
 
-import com.google.api.client.util.DateTime;
-import com.google.api.services.drive.model.File;
-import com.google.api.services.drive.model.ParentReference;
 import com.box.boxjavalibv2.BoxClient;
 import com.box.boxjavalibv2.authorization.OAuthRefreshListener;
 import com.box.boxjavalibv2.dao.BoxCollection;
@@ -52,6 +49,7 @@ import com.box.restclientv2.exceptions.BoxRestException;
 import org.exoplatform.clouddrive.CloudDriveException;
 import org.exoplatform.clouddrive.FileTrashRemovedException;
 import org.exoplatform.clouddrive.NotFoundException;
+import org.exoplatform.clouddrive.RefreshAccessException;
 import org.exoplatform.clouddrive.oauth2.UserToken;
 import org.exoplatform.clouddrive.utils.ChunkIterator;
 import org.exoplatform.services.log.ExoLogger;
@@ -61,7 +59,6 @@ import java.io.InputStream;
 import java.io.UnsupportedEncodingException;
 import java.text.ParseException;
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.HashSet;
@@ -80,7 +77,7 @@ import java.util.Set;
  */
 public class BoxAPI {
 
-  class BoxToken extends UserToken implements OAuthRefreshListener, IAuthSecureStorage {
+  class StoredToken extends UserToken implements OAuthRefreshListener, IAuthSecureStorage {
 
     void store(BoxOAuthToken btoken) throws CloudDriveException {
       this.store(btoken.getAccessToken(), btoken.getRefreshToken(), btoken.getExpiresIn());
@@ -149,7 +146,7 @@ public class BoxAPI {
       this.iter = nextChunk();
     }
 
-    protected Iterator<BoxItem> nextChunk() throws AuthTokenException, CloudDriveException {
+    protected Iterator<BoxItem> nextChunk() throws CloudDriveException {
       BoxFolderRequestObject obj = BoxFolderRequestObject.getFolderItemsRequestObject(limit, offset);
       obj.addField("id");
       obj.addField("parent");
@@ -189,7 +186,7 @@ public class BoxAPI {
       } catch (AuthFatalFailureException e) {
         if (e.isCallerResponsibleForFix()) {
           // we need new access token (refresh token already expired here)
-          throw new AuthTokenException("Authentication failure. Reauthenticate.");
+          throw new RefreshAccessException("Authentication failure. Reauthenticate.");
         }
         throw new BoxException("Authentication error on folder items: " + e.getMessage(), e);
       }
@@ -212,7 +209,7 @@ public class BoxAPI {
 
     List<BoxEvent> nextChunk;
 
-    EventsIterator(long streamPosition) throws BoxException, AuthTokenException {
+    EventsIterator(long streamPosition) throws BoxException, RefreshAccessException {
       this.streamPosition = streamPosition;
       this.limit = 1000;
 
@@ -220,7 +217,7 @@ public class BoxAPI {
       this.iter = nextChunk();
     }
 
-    BoxEventCollection events(long position) throws BoxException, AuthTokenException {
+    BoxEventCollection events(long position) throws BoxException, RefreshAccessException {
       try {
         BoxEventRequestObject request = BoxEventRequestObject.getEventsRequestObject(position <= -1 ? BoxEventRequestObject.STREAM_POSITION_NOW
                                                                                                    : position);
@@ -237,7 +234,7 @@ public class BoxAPI {
       } catch (AuthFatalFailureException e) {
         if (e.isCallerResponsibleForFix()) {
           // we need new access token (refresh token already expired here)
-          throw new AuthTokenException("Authentication failure. Reauthenticate.");
+          throw new RefreshAccessException("Authentication failure. Reauthenticate.");
         }
         throw new BoxException("Authentication error for Events service: " + e.getMessage(), e);
       }
@@ -245,8 +242,10 @@ public class BoxAPI {
 
     /**
      * {@inheritDoc}
+     * 
+     * @throws RefreshAccessException
      */
-    protected Iterator<BoxEvent> nextChunk() throws BoxException, AuthTokenException {
+    protected Iterator<BoxEvent> nextChunk() throws BoxException, RefreshAccessException {
       List<BoxEvent> events;
       if (nextChunk == null) {
         BoxEventCollection ec = events(streamPosition);
@@ -421,7 +420,7 @@ public class BoxAPI {
     BOX_EVENTS.add(BoxEvent.EVENT_TYPE_ITEM_RENAME);
   }
 
-  private BoxToken                token;
+  private StoredToken             token;
 
   private BoxClient               client;
 
@@ -440,7 +439,7 @@ public class BoxAPI {
       CloudDriveException {
 
     this.client = new BoxClient(key, clientSecret);
-    this.token = new BoxToken();
+    this.token = new StoredToken();
     this.client.addOAuthRefreshListener(token);
 
     try {
@@ -475,19 +474,16 @@ public class BoxAPI {
    */
   BoxAPI(String key, String clientSecret, String accessToken, String refreshToken, long expirationTime) throws CloudDriveException {
     this.client = new BoxClient(key, clientSecret);
-    this.token = new BoxToken();
+    this.token = new StoredToken();
     this.token.load(accessToken, refreshToken, expirationTime);
     this.client.addOAuthRefreshListener(token);
     this.client.authenticateFromSecureStorage(token);
-
-    // XXX changes link will be loaded on demand
-    // updateChangesLink();
   }
 
   /**
-   * Update OAuth2 tokens to a new one.
+   * Update OAuth2 token to a new one.
    * 
-   * @param newToken {@link BoxToken}
+   * @param newToken {@link StoredToken}
    * @throws CloudDriveException
    */
   void updateToken(UserToken newToken) throws CloudDriveException {
@@ -497,9 +493,9 @@ public class BoxAPI {
   /**
    * Current OAuth2 token associated with this API instance.
    * 
-   * @return {@link BoxToken}
+   * @return {@link StoredToken}
    */
-  UserToken getToken() {
+  StoredToken getToken() {
     return token;
   }
 
@@ -710,13 +706,13 @@ public class BoxAPI {
     }
   }
 
-  EventsIterator getEvents(long streamPosition) throws BoxException, AuthTokenException {
+  EventsIterator getEvents(long streamPosition) throws BoxException, RefreshAccessException {
     return new EventsIterator(streamPosition);
   }
 
   BoxFile createFile(String parentId, String name, Calendar created, InputStream data) throws BoxException,
-                                                                                      AuthTokenException,
-                                                                                      NotFoundException {
+                                                                                      NotFoundException,
+                                                                                      RefreshAccessException {
     try {
       // TODO You can optionally specify a Content-MD5 header with the SHA1 hash of the file to ensure that
       // the file is not corrupted in transit.
@@ -745,7 +741,7 @@ public class BoxAPI {
     } catch (AuthFatalFailureException e) {
       if (e.isCallerResponsibleForFix()) {
         // we need new access token (refresh token already expired here)
-        throw new AuthTokenException("Authentication failure. Reauthenticate.");
+        throw new RefreshAccessException("Authentication failure. Reauthenticate.");
       }
       throw new BoxException("Authentication error when uploading file: " + e.getMessage(), e);
     } catch (InterruptedException e) {
@@ -755,8 +751,8 @@ public class BoxAPI {
   }
 
   BoxFolder createFolder(String parentId, String name, Calendar created) throws BoxException,
-                                                                        AuthTokenException,
-                                                                        NotFoundException {
+                                                                        NotFoundException,
+                                                                        RefreshAccessException {
     try {
       BoxFolderRequestObject obj = BoxFolderRequestObject.createFolderRequestObject(name, parentId);
       obj.put("created_at", formatDate(created));
@@ -778,7 +774,7 @@ public class BoxAPI {
     } catch (AuthFatalFailureException e) {
       if (e.isCallerResponsibleForFix()) {
         // we need new access token (refresh token already expired here)
-        throw new AuthTokenException("Authentication failure. Reauthenticate.");
+        throw new RefreshAccessException("Authentication failure. Reauthenticate.");
       }
       throw new BoxException("Authentication error when creating folder: " + e.getMessage(), e);
     }
@@ -790,10 +786,10 @@ public class BoxAPI {
    * 
    * @param id {@link String}
    * @throws BoxException
-   * @throws AuthTokenException
    * @throws NotFoundException
+   * @throws RefreshAccessException
    */
-  void deleteFile(String id) throws BoxException, AuthTokenException, NotFoundException {
+  void deleteFile(String id) throws BoxException, NotFoundException, RefreshAccessException {
     try {
       BoxFileRequestObject obj = BoxFileRequestObject.deleteFileRequestObject();
       // obj.setIfMatch(etag); // // TODO use it!
@@ -812,7 +808,7 @@ public class BoxAPI {
     } catch (AuthFatalFailureException e) {
       if (e.isCallerResponsibleForFix()) {
         // we need new access token (refresh token already expired here)
-        throw new AuthTokenException("Authentication failure. Reauthenticate.");
+        throw new RefreshAccessException("Authentication failure. Reauthenticate.");
       }
       throw new BoxException("Authentication error when deleting file: " + e.getMessage(), e);
     }
@@ -825,10 +821,10 @@ public class BoxAPI {
    * 
    * @param id {@link String}
    * @throws BoxException
-   * @throws AuthTokenException
    * @throws NotFoundException
+   * @throws RefreshAccessException
    */
-  void deleteFolder(String id) throws BoxException, AuthTokenException, NotFoundException {
+  void deleteFolder(String id) throws BoxException, NotFoundException, RefreshAccessException {
     try {
       BoxFolderRequestObject obj = BoxFolderRequestObject.deleteFolderRequestObject(true);
       // obj.setIfMatch(etag); // TODO use it!
@@ -847,7 +843,7 @@ public class BoxAPI {
     } catch (AuthFatalFailureException e) {
       if (e.isCallerResponsibleForFix()) {
         // we need new access token (refresh token already expired here)
-        throw new AuthTokenException("Authentication failure. Reauthenticate.");
+        throw new RefreshAccessException("Authentication failure. Reauthenticate.");
       }
       throw new BoxException("Authentication error when deleting folder: " + e.getMessage(), e);
     }
@@ -862,14 +858,14 @@ public class BoxAPI {
    * @param id {@link String}
    * @return {@link BoxFile} of the file successfully moved to Box Trash
    * @throws BoxException
-   * @throws AuthTokenException
    * @throws FileTrashRemovedException if file was permanently removed.
    * @throws NotFoundException
+   * @throws RefreshAccessException
    */
   BoxFile trashFile(String id) throws BoxException,
-                              AuthTokenException,
                               FileTrashRemovedException,
-                              NotFoundException {
+                              NotFoundException,
+                              RefreshAccessException {
     try {
       BoxFileRequestObject deleteObj = BoxFileRequestObject.deleteFileRequestObject();
       // deleteObj.setIfMatch(etag); // TODO use it!
@@ -905,7 +901,7 @@ public class BoxAPI {
     } catch (AuthFatalFailureException e) {
       if (e.isCallerResponsibleForFix()) {
         // we need new access token (refresh token already expired here)
-        throw new AuthTokenException("Authentication failure. Reauthenticate.");
+        throw new RefreshAccessException("Authentication failure. Reauthenticate.");
       }
       throw new BoxException("Authentication error when trashing file: " + e.getMessage(), e);
     }
@@ -920,14 +916,14 @@ public class BoxAPI {
    * @param id {@link String}
    * @return {@link BoxFolder} of the folder successfully moved to Box Trash
    * @throws BoxException
-   * @throws AuthTokenException
    * @throws FileTrashRemovedException if folder was permanently removed.
    * @throws NotFoundException
+   * @throws RefreshAccessException
    */
   BoxFolder trashFolder(String id) throws BoxException,
-                                  AuthTokenException,
                                   FileTrashRemovedException,
-                                  NotFoundException {
+                                  NotFoundException,
+                                  RefreshAccessException {
     try {
       BoxFolderRequestObject deleteObj = BoxFolderRequestObject.deleteFolderRequestObject(true);
       // deleteObj.setIfMatch(etag); // TODO use it!
@@ -963,13 +959,13 @@ public class BoxAPI {
     } catch (AuthFatalFailureException e) {
       if (e.isCallerResponsibleForFix()) {
         // we need new access token (refresh token already expired here)
-        throw new AuthTokenException("Authentication failure. Reauthenticate.");
+        throw new RefreshAccessException("Authentication failure. Reauthenticate.");
       }
       throw new BoxException("Authentication error when trashing foler: " + e.getMessage(), e);
     }
   }
 
-  BoxFile untrashFile(String id) throws BoxException, AuthTokenException, NotFoundException {
+  BoxFile untrashFile(String id) throws BoxException, NotFoundException, RefreshAccessException {
     try {
       BoxItemRestoreRequestObject obj = BoxItemRestoreRequestObject.restoreItemRequestObject();
       return client.getFilesManager().restoreTrashFile(id, obj);
@@ -991,13 +987,13 @@ public class BoxAPI {
     } catch (AuthFatalFailureException e) {
       if (e.isCallerResponsibleForFix()) {
         // we need new access token (refresh token already expired here)
-        throw new AuthTokenException("Authentication failure. Reauthenticate.");
+        throw new RefreshAccessException("Authentication failure. Reauthenticate.");
       }
       throw new BoxException("Authentication error when untrashing file: " + e.getMessage(), e);
     }
   }
 
-  BoxFolder untrashFolder(String id) throws BoxException, AuthTokenException, NotFoundException {
+  BoxFolder untrashFolder(String id) throws BoxException, NotFoundException, RefreshAccessException {
     try {
       BoxItemRestoreRequestObject obj = BoxItemRestoreRequestObject.restoreItemRequestObject();
       return client.getFoldersManager().restoreTrashFolder(id, obj);
@@ -1019,7 +1015,7 @@ public class BoxAPI {
     } catch (AuthFatalFailureException e) {
       if (e.isCallerResponsibleForFix()) {
         // we need new access token (refresh token already expired here)
-        throw new AuthTokenException("Authentication failure. Reauthenticate.");
+        throw new RefreshAccessException("Authentication failure. Reauthenticate.");
       }
       throw new BoxException("Authentication error when untrashing folder: " + e.getMessage(), e);
     }
@@ -1038,12 +1034,12 @@ public class BoxAPI {
    * @return {@link BoxFile} of actually changed file or <code>null</code> if file already exists with
    *         such name and parent.
    * @throws BoxException
-   * @throws AuthTokenException
    * @throws NotFoundException
+   * @throws RefreshAccessException
    */
   BoxFile updateFile(String parentId, String id, String name, Calendar modified) throws BoxException,
-                                                                                AuthTokenException,
-                                                                                NotFoundException {
+                                                                                NotFoundException,
+                                                                                RefreshAccessException {
 
     BoxFile existing = readFile(id);
     int attemts = 0;
@@ -1090,7 +1086,7 @@ public class BoxAPI {
       } catch (AuthFatalFailureException e) {
         if (e.isCallerResponsibleForFix()) {
           // we need new access token (refresh token already expired here)
-          throw new AuthTokenException("Authentication failure. Reauthenticate.");
+          throw new RefreshAccessException("Authentication failure. Reauthenticate.");
         }
         throw new BoxException("Authentication error when updating file: " + e.getMessage(), e);
       }
@@ -1100,8 +1096,8 @@ public class BoxAPI {
   }
 
   BoxFile updateFileContent(String parentId, String id, String name, Calendar modified, InputStream data) throws BoxException,
-                                                                                                         AuthTokenException,
-                                                                                                         NotFoundException {
+                                                                                                         NotFoundException,
+                                                                                                         RefreshAccessException {
     try {
       BoxFileUploadRequestObject obj = BoxFileUploadRequestObject.uploadFileRequestObject(parentId,
                                                                                           name,
@@ -1123,7 +1119,7 @@ public class BoxAPI {
     } catch (AuthFatalFailureException e) {
       if (e.isCallerResponsibleForFix()) {
         // we need new access token (refresh token already expired here)
-        throw new AuthTokenException("Authentication failure. Reauthenticate.");
+        throw new RefreshAccessException("Authentication failure. Reauthenticate.");
       }
       throw new BoxException("Authentication error when uploading new version of file: " + e.getMessage(), e);
     } catch (InterruptedException e) {
@@ -1144,12 +1140,12 @@ public class BoxAPI {
    * @return {@link BoxFolder} of actually changed folder or <code>null</code> if folder already exists with
    *         such name and parent.
    * @throws BoxException
-   * @throws AuthTokenException
    * @throws NotFoundException
+   * @throws RefreshAccessException
    */
   BoxFolder updateFolder(String parentId, String id, String name, Calendar modified) throws BoxException,
-                                                                                    AuthTokenException,
-                                                                                    NotFoundException {
+                                                                                    NotFoundException,
+                                                                                    RefreshAccessException {
     BoxFolder existing = readFolder(id);
     int attemts = 0;
     boolean nameChanged = !existing.getName().equals(name);
@@ -1188,7 +1184,7 @@ public class BoxAPI {
       } catch (AuthFatalFailureException e) {
         if (e.isCallerResponsibleForFix()) {
           // we need new access token (refresh token already expired here)
-          throw new AuthTokenException("Authentication failure. Reauthenticate.");
+          throw new RefreshAccessException("Authentication failure. Reauthenticate.");
         }
         throw new BoxException("Authentication error when updating folder: " + e.getMessage(), e);
       }
@@ -1197,7 +1193,7 @@ public class BoxAPI {
     return null;
   }
 
-  BoxFile readFile(String id) throws BoxException, AuthTokenException, NotFoundException {
+  BoxFile readFile(String id) throws BoxException, NotFoundException, RefreshAccessException {
     try {
       return client.getFilesManager().getFile(id, new BoxDefaultRequestObject());
     } catch (BoxRestException e) {
@@ -1212,13 +1208,13 @@ public class BoxAPI {
     } catch (AuthFatalFailureException e) {
       if (e.isCallerResponsibleForFix()) {
         // we need new access token (refresh token already expired here)
-        throw new AuthTokenException("Authentication failure. Reauthenticate.");
+        throw new RefreshAccessException("Authentication failure. Reauthenticate.");
       }
       throw new BoxException("Authentication error when reading file: " + e.getMessage(), e);
     }
   }
 
-  BoxFolder readFolder(String id) throws BoxException, AuthTokenException, NotFoundException {
+  BoxFolder readFolder(String id) throws BoxException, NotFoundException, RefreshAccessException {
     try {
       return client.getFoldersManager().getFolder(id, new BoxDefaultRequestObject());
     } catch (BoxRestException e) {
@@ -1233,7 +1229,7 @@ public class BoxAPI {
     } catch (AuthFatalFailureException e) {
       if (e.isCallerResponsibleForFix()) {
         // we need new access token (refresh token already expired here)
-        throw new AuthTokenException("Authentication failure. Reauthenticate.");
+        throw new RefreshAccessException("Authentication failure. Reauthenticate.");
       }
       throw new BoxException("Authentication error when reading folder: " + e.getMessage(), e);
     }

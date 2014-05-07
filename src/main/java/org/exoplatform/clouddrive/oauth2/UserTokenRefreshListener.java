@@ -19,7 +19,7 @@
  */
 package org.exoplatform.clouddrive.oauth2;
 
-import org.exoplatform.clouddrive.box.BoxException;
+import org.exoplatform.clouddrive.CloudDriveException;
 
 /**
  * Listen for user token updates caused by provider service.
@@ -37,6 +37,6 @@ public interface UserTokenRefreshListener {
    * 
    * @param token {@link UserToken}
    */
-  void onUserTokenRefresh(UserToken token) throws  BoxException;
+  void onUserTokenRefresh(UserToken token) throws CloudDriveException;
   
 }

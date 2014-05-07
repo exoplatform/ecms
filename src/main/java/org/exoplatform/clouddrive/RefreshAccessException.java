@@ -1,6 +1,5 @@
-
 /*
- * Copyright (C) 2003-2013 eXo Platform SAS.
+ * Copyright (C) 2012 eXo Platform SAS.
  *
  * This is free software; you can redistribute it and/or modify it
  * under the terms of the GNU Lesser General Public License as
@@ -17,25 +16,25 @@
  * Software Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA
  * 02110-1301 USA, or see the FSF site: http://www.fsf.org.
  */
-package org.exoplatform.clouddrive.box;
-
-import org.exoplatform.clouddrive.CloudDriveAccessException;
+package org.exoplatform.clouddrive;
 
 /**
- * Error to authenticate to Box service (access and refresh tokens may be expired). Need user re-authentication.
- * 
- * Created by The eXo Platform SAS
- * 
- * @author <a href="mailto:pnedonosko@exoplatform.com">Peter Nedonosko</a>
- * @version $Id: AuthTokenException.java 00000 Dec 18, 2013 pnedonosko $
- * 
+ * No refresh token has been found, it was revoked or access scope changed and an access
+ * should be granted by the user again.
  */
-public class AuthTokenException extends CloudDriveAccessException {
+public class RefreshAccessException extends CloudDriveAccessException {
 
   /**
-   * @param message
+   * 
    */
-  public AuthTokenException(String message) {
+  private static final long serialVersionUID = -4277752230592873022L;
+
+  /**
+   * Construct a NoRefreshTokenException.
+   * 
+   * @param message.
+   */
+  public RefreshAccessException(String message) {
     super(message);
   }
 
@@ -43,7 +42,7 @@ public class AuthTokenException extends CloudDriveAccessException {
    * @param message
    * @param cause
    */
-  public AuthTokenException(String message, Throwable cause) {
+  public RefreshAccessException(String message, Throwable cause) {
     super(message, cause);
   }
 

@@ -18,10 +18,8 @@
  */
 package org.exoplatform.clouddrive.box;
 
-import org.exoplatform.clouddrive.CloudDriveException;
 import org.exoplatform.clouddrive.CloudProvider;
 import org.exoplatform.clouddrive.CloudUser;
-import org.exoplatform.clouddrive.oauth2.UserToken;
 
 /**
  * Created by The eXo Platform SAS
@@ -56,24 +54,4 @@ public class BoxUser extends CloudUser {
   BoxAPI api() {
     return api;
   }
-
-  /**
-   * Current authorization token used to communicate with the Cloud Drive services.
-   * 
-   * @return {@link UserToken}
-   */
-  UserToken getToken() {
-    return api.getToken();
-  }
-  
-  /**
-   * Update authorization token for communication with the Cloud Drive services.
-   * 
-   * @param newToken {@link UserToken}
-   * @throws CloudDriveException
-   */
-  void updateToken(UserToken newToken) throws CloudDriveException {
-    api.updateToken(newToken);
-  }
-  
 }

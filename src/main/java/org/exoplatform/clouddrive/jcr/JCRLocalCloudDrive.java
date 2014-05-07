@@ -815,7 +815,7 @@ public abstract class JCRLocalCloudDrive extends CloudDrive {
                 throw e;
               } else {
                 rollback(rootNode);
-                LOG.warn("Error running " + getName() + " command: " + e.getMessage()
+                LOG.warn("Error running " + getName() + " command. " + e.getMessage()
                     + ". Rolled back and will run next attempt in "
                     + CloudDriveConnector.PROVIDER_REQUEST_ATTEMPT_TIMEOUT + "ms.");
                 Thread.sleep(CloudDriveConnector.PROVIDER_REQUEST_ATTEMPT_TIMEOUT);
@@ -2057,6 +2057,9 @@ public abstract class JCRLocalCloudDrive extends CloudDrive {
     rootNode.setProperty("ecd:initDate", Calendar.getInstance());
     // TODO how to store provider properly? need store its API version?
     rootNode.setProperty("ecd:provider", getUser().getProvider().getId());
+    
+    // set current format of the drive
+    rootNode.setProperty(ECD_LOCALFORMAT, CURRENT_LOCALFORMAT);
   }
 
   protected List<CloudFile> listFiles(Node parentNode) throws RepositoryException {
@@ -2178,7 +2181,6 @@ public abstract class JCRLocalCloudDrive extends CloudDrive {
   public Command synchronize() throws SyncNotSupportedException,
                               DriveRemovedException,
                               CloudDriveException,
-                              CloudDriveAccessException,
                               RepositoryException {
 
     // if other sync in progress, use that process (as a current)
@@ -2186,7 +2188,7 @@ public abstract class JCRLocalCloudDrive extends CloudDrive {
     // if file sync in progress, wait for it and then start a new sync
 
     if (isConnected()) {
-      checkAccess();
+      refreshAccess();
 
       SyncCommand sync;
       if (!currentSync.compareAndSet(noSyncCommand, sync = getSyncCommand())) {
@@ -3583,6 +3585,7 @@ public abstract class JCRLocalCloudDrive extends CloudDrive {
         Session session = node.getSession();
         try {
           session.move(node.getPath(), node.getParent().getPath() + '/' + cleanName(name));
+          node.setProperty(ECD_LOCALFORMAT, CURRENT_LOCALFORMAT); // set current version
           session.save();
         } catch (RepositoryException e) {
           try {

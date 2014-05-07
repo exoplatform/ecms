@@ -17,11 +17,17 @@
 
 package org.exoplatform.clouddrive.googledrive;
 
+import com.google.api.client.auth.oauth2.AuthorizationCodeFlow.CredentialCreatedListener;
 import com.google.api.client.auth.oauth2.Credential;
+import com.google.api.client.auth.oauth2.CredentialRefreshListener;
 import com.google.api.client.auth.oauth2.CredentialStore;
+import com.google.api.client.auth.oauth2.StoredCredential;
+import com.google.api.client.auth.oauth2.TokenErrorResponse;
+import com.google.api.client.auth.oauth2.TokenResponse;
 import com.google.api.client.googleapis.auth.oauth2.GoogleAuthorizationCodeFlow;
 import com.google.api.client.googleapis.auth.oauth2.GoogleTokenResponse;
 import com.google.api.client.googleapis.json.GoogleJsonError;
+import com.google.api.client.googleapis.json.GoogleJsonError.ErrorInfo;
 import com.google.api.client.googleapis.json.GoogleJsonResponseException;
 import com.google.api.client.http.AbstractInputStreamContent;
 import com.google.api.client.http.HttpRequest;
@@ -32,6 +38,8 @@ import com.google.api.client.http.HttpTransport;
 import com.google.api.client.http.HttpUnsuccessfulResponseHandler;
 import com.google.api.client.http.javanet.NetHttpTransport;
 import com.google.api.client.json.jackson2.JacksonFactory;
+import com.google.api.client.util.store.DataStore;
+import com.google.api.client.util.store.DataStoreFactory;
 import com.google.api.services.drive.Drive;
 import com.google.api.services.drive.Drive.Changes;
 import com.google.api.services.drive.Drive.Children;
@@ -45,11 +53,13 @@ import com.google.api.services.drive.model.ChildReference;
 import com.google.api.services.drive.model.File;
 import com.google.api.services.oauth2.Oauth2;
 import com.google.api.services.oauth2.Oauth2Scopes;
-import com.google.api.services.oauth2.model.Userinfo;
+import com.google.api.services.oauth2.model.Userinfoplus;
 
+import org.exoplatform.clouddrive.CloudDriveAccessException;
 import org.exoplatform.clouddrive.CloudDriveConnector;
 import org.exoplatform.clouddrive.CloudDriveException;
 import org.exoplatform.clouddrive.NotFoundException;
+import org.exoplatform.clouddrive.oauth2.UserToken;
 import org.exoplatform.clouddrive.utils.ChunkIterator;
 import org.exoplatform.services.log.ExoLogger;
 import org.exoplatform.services.log.Log;
@@ -59,11 +69,13 @@ import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Arrays;
 import java.util.Calendar;
+import java.util.Collection;
 import java.util.Date;
+import java.util.HashSet;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
-import java.util.NoSuchElementException;
+import java.util.Set;
 import java.util.concurrent.ConcurrentHashMap;
 
 /**
@@ -73,7 +85,9 @@ import java.util.concurrent.ConcurrentHashMap;
  * @author <a href="mailto:pnedonosko@exoplatform.com">Peter Nedonosko</a>
  * @version $Id: GoogleDriveAPI.java 00000 Jan 5, 2013 pnedonosko $
  */
-class GoogleDriveAPI {
+class GoogleDriveAPI implements DataStoreFactory {
+
+  public static final String       APP_NAME        = "eXo Cloud Drive";
 
   public static final String       FOLDER_MIMETYPE = "application/vnd.google-apps.folder";
 
@@ -93,11 +107,14 @@ class GoogleDriveAPI {
 
   public static final String       NO_STATE        = "__no_state_set__";
 
+  protected static final String    USER_ID         = "user_id";
+
   protected static final Log       LOG             = ExoLogger.getLogger(GoogleDriveAPI.class);
 
   /**
    * Single user credentials store. Should be used per session as transient store.
    */
+  @Deprecated
   class UserCredentialStore implements CredentialStore {
 
     class Tokens {
@@ -171,81 +188,187 @@ class GoogleDriveAPI {
     }
   }
 
-  /**
-   * Iterator over whole set of items from Google Drive service. This iterator hides next-page-token logic on
-   * request to the service. <br>
-   * Iterator methods can throw {@link GoogleDriveException} in case of remote or communication errors.
-   */
-  @Deprecated
-  abstract class PageIterator<C> {
+  class AuthToken extends UserToken implements CredentialRefreshListener, CredentialCreatedListener {
 
-    Iterator<C>  iter;
+    class Store implements DataStore<StoredCredential> {
 
-    C            next;
+      /**
+       * {@inheritDoc}
+       */
+      @Override
+      public DataStoreFactory getDataStoreFactory() {
+        return GoogleDriveAPI.this;
+      }
 
-    /**
-     * Forecast of available items in the iterator. Calculated on each {@link #nextPage()}. Used for progress
-     * indicator.
-     */
-    volatile int available;
+      /**
+       * {@inheritDoc}
+       */
+      @Override
+      public String getId() {
+        return GoogleDriveAPI.class.getSimpleName();
+      }
 
-    /**
-     * Totally fetched items. Changes on each {@link #next()}. Used for progress indicator.
-     */
-    volatile int fetched;
+      /**
+       * {@inheritDoc}
+       */
+      @Override
+      public int size() throws IOException {
+        // Only one item possible - current user token
+        return isEmpty() ? 0 : 1;
+      }
 
-    abstract Iterator<C> nextPage() throws GoogleDriveException;
+      /**
+       * {@inheritDoc}
+       */
+      @Override
+      public boolean isEmpty() throws IOException {
+        return getAccessToken() == null || getRefreshToken() == null;
+      }
 
-    abstract boolean hasNextPage();
+      /**
+       * {@inheritDoc}
+       */
+      @Override
+      public boolean containsKey(String userId) throws IOException {
+        return USER_ID.equals(userId);
+      }
 
-    boolean hasNext() throws GoogleDriveException {
-      if (next == null) {
-        if (iter.hasNext()) {
-          next = iter.next();
-        } else {
-          // try to fetch next portion of changes
-          while (hasNextPage()) {
-            iter = nextPage();
-            if (iter.hasNext()) {
-              next = iter.next();
-              break;
-            }
-          }
-        }
-        return next != null;
-      } else {
-        return true;
+      /**
+       * {@inheritDoc}
+       */
+      @Override
+      public boolean containsValue(StoredCredential value) throws IOException {
+        return value.getAccessToken().equals(getAccessToken())
+            && value.getRefreshToken().equals(getRefreshToken())
+            && value.getExpirationTimeMilliseconds() == getExpirationTime();
+      }
+
+      /**
+       * {@inheritDoc}
+       */
+      @Override
+      public Set<String> keySet() throws IOException {
+        Set<String> keys = new HashSet<String>();
+        keys.add(USER_ID);
+        return keys;
+      }
+
+      /**
+       * {@inheritDoc}
+       */
+      @Override
+      public Collection<StoredCredential> values() throws IOException {
+        StoredCredential[] single = new StoredCredential[] { get(USER_ID) };
+        return Arrays.asList(single);
+      }
+
+      /**
+       * {@inheritDoc}
+       */
+      @Override
+      public StoredCredential get(String userId) throws IOException {
+        // Need return StoredCredential...
+        StoredCredential stored = new StoredCredential();
+        stored.setAccessToken(getAccessToken());
+        stored.setRefreshToken(getRefreshToken());
+        stored.setExpirationTimeMilliseconds(getExpirationTime());
+        return stored;
+      }
+
+      /**
+       * {@inheritDoc}
+       */
+      @Override
+      public DataStore<StoredCredential> set(String userId, StoredCredential value) throws IOException {
+        store(value);
+        return this;
+      }
+
+      /**
+       * {@inheritDoc}
+       */
+      @Override
+      public DataStore<StoredCredential> clear() throws IOException {
+        // TODO clear the token keys
+        return this;
+      }
+
+      /**
+       * {@inheritDoc}
+       */
+      @Override
+      public DataStore<StoredCredential> delete(String userId) throws IOException {
+        // TODO clear the token keys
+        return this;
       }
     }
 
-    C next() throws NoSuchElementException {
-      if (next == null) {
-        throw new NoSuchElementException("No more data on the Google Drive");
-      } else {
-        C c = next;
-        next = null;
-        fetched++;
-        return c;
+    /**
+     * Facade-implementation of {@link DataStore} to actual value stored in enclosing {@link UserToken}.
+     */
+    final Store store = new Store();
+
+    void store(StoredCredential credential) {
+      try {
+        store(credential.getAccessToken(),
+              credential.getRefreshToken(),
+              credential.getExpirationTimeMilliseconds());
+      } catch (CloudDriveException e) {
+        LOG.error("Error storing credential", e);
+      }
+    }
+
+    void store(Credential credential) {
+      try {
+        store(credential.getAccessToken(),
+              credential.getRefreshToken(),
+              credential.getExpirationTimeMilliseconds());
+      } catch (CloudDriveException e) {
+        LOG.error("Error storing credential", e);
       }
     }
 
     /**
-     * Calculate a forecast of items available to fetch. Call it on each {@link #nextPage()}.
-     * 
-     * @param newValue int
+     * {@inheritDoc}
      */
-    void available(int newValue) {
-      if (available == 0) {
-        // magic here as we're in indeterminate progress during the fetching
-        // logic based on page bundles we're getting from the drive
-        // first page it's 100%, assume the second is filled on 25%
-        available = hasNextPage() ? Math.round(newValue * 1.25f) : newValue;
-      } else {
-        // All previously set newValue was fetched.
-        // Assuming the next page is filled on 25%.
-        int newFetched = available;
-        available += hasNextPage() ? Math.round(newValue * 1.25f) : newValue;
-        fetched = newFetched;
+    @Override
+    public void onCredentialCreated(Credential credential, TokenResponse tokenResponse) throws IOException {
+      store(credential);
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public void onTokenResponse(Credential credential, TokenResponse tokenResponse) throws IOException {
+      store(credential);
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public void onTokenErrorResponse(Credential credential, TokenErrorResponse tokenErrorResponse) throws IOException {
+      // TODO clean token keys to let them be re-requested to the user
+      String errDescription = tokenErrorResponse.getErrorDescription();
+      String errURI = tokenErrorResponse.getErrorUri();
+      LOG.error("Error refreshing credentials: " + tokenErrorResponse.getError()
+          + (errDescription != null ? " " + errDescription : "")
+          + (errURI != null ? ". Error URI: " + errURI : ""));
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public void merge(UserToken newToken) throws CloudDriveException {
+      super.merge(newToken);
+      
+      // explicitly apply token keys to currently used credential
+      if (credential != null) {
+        credential.setAccessToken(newToken.getAccessToken());
+        credential.setExpirationTimeMilliseconds(newToken.getExpirationTime());
+        credential.setRefreshToken(newToken.getRefreshToken());
       }
     }
   }
@@ -379,10 +502,11 @@ class GoogleDriveAPI {
    */
   final Drive      drive;
 
+  final AuthToken  token;
+
   /**
    * User info API.
    */
-  // TODO cleanup
   final Oauth2     oauth2;
 
   /**
@@ -396,8 +520,16 @@ class GoogleDriveAPI {
    */
   GoogleDriveAPI(String clientId, String clientSecret, String authCode, String redirectUri) throws GoogleDriveException,
       CloudDriveException {
+    // use clean token, it will be populated with actual credentials as CredentialRefreshListener
+    this.token = new AuthToken();
 
-    GoogleAuthorizationCodeFlow authFlow = createFlow(clientId, clientSecret, new UserCredentialStore());
+    GoogleAuthorizationCodeFlow authFlow;
+    try {
+      authFlow = createFlow(clientId, clientSecret, token);
+    } catch (IOException e) {
+      throw new GoogleDriveException("Error creating authentication flow: " + e.getMessage(), e);
+    }
+
     GoogleTokenResponse response;
     try {
       // Exchange an authorization code for OAuth 2.0 credentials.
@@ -407,15 +539,16 @@ class GoogleDriveAPI {
     }
 
     try {
-      this.credential = authFlow.createAndStoreCredential(response, authCode); // authCode as userId
-      // this.credential = authFlow.loadCredential(authCode);
+      this.credential = authFlow.createAndStoreCredential(response, USER_ID);
     } catch (IOException e) {
       throw new CloudDriveException("Error storing user credential: " + e.getMessage(), e);
     }
 
     // XXX .setHttpRequestInitializer(new RequestInitializer() this causes OAuth2 401 Unauthorized
-    this.drive = new Drive.Builder(new NetHttpTransport(), new JacksonFactory(), this.credential).build();
-    this.oauth2 = new Oauth2.Builder(new NetHttpTransport(), new JacksonFactory(), this.credential).build();
+    this.drive = new Drive.Builder(new NetHttpTransport(), new JacksonFactory(), this.credential).setApplicationName(APP_NAME)
+                                                                                                 .build();
+    this.oauth2 = new Oauth2.Builder(new NetHttpTransport(), new JacksonFactory(), this.credential).setApplicationName(APP_NAME)
+                                                                                                   .build();
   }
 
   /**
@@ -423,7 +556,6 @@ class GoogleDriveAPI {
    * 
    * @param clientId {@link String}
    * @param clientSecret {@link String}
-   * @param userId {@link String}
    * @param accessToken {@link String}
    * @param refreshToken {@link String}
    * @param expirationTime long, token expiration time on milliseconds
@@ -431,26 +563,39 @@ class GoogleDriveAPI {
    */
   GoogleDriveAPI(String clientId,
                  String clientSecret,
-                 String userId,
                  String accessToken,
                  String refreshToken,
                  long expirationTime) throws CloudDriveException {
-    GoogleAuthorizationCodeFlow authFlow = createFlow(clientId,
-                                                      clientSecret,
-                                                      new UserCredentialStore(userId,
-                                                                              accessToken,
-                                                                              refreshToken,
-                                                                              expirationTime));
+    this.token = new AuthToken();
+    this.token.load(accessToken, refreshToken, expirationTime);
+
+    GoogleAuthorizationCodeFlow authFlow;
+    try {
+      authFlow = createFlow(clientId, clientSecret, token);
+    } catch (IOException e) {
+      throw new GoogleDriveException("Error creating authentication flow: " + e.getMessage(), e);
+    }
 
     try {
-      this.credential = authFlow.loadCredential(userId);
+      this.credential = authFlow.loadCredential(USER_ID);
     } catch (IOException e) {
       throw new CloudDriveException("Error loading Google user credentials: " + e.getMessage(), e);
     }
 
     // XXX .setHttpRequestInitializer(new RequestInitializer() this causes OAuth2 401 Unauthorized
-    this.drive = new Drive.Builder(new NetHttpTransport(), new JacksonFactory(), credential).build();
-    this.oauth2 = new Oauth2.Builder(new NetHttpTransport(), new JacksonFactory(), credential).build();
+    this.drive = new Drive.Builder(new NetHttpTransport(), new JacksonFactory(), credential).setApplicationName(APP_NAME)
+                                                                                            .build();
+    this.oauth2 = new Oauth2.Builder(new NetHttpTransport(), new JacksonFactory(), credential).setApplicationName(APP_NAME)
+                                                                                              .build();
+  }
+
+  /**
+   * {@inheritDoc}
+   */
+  @SuppressWarnings("unchecked")
+  @Override
+  public DataStore<StoredCredential> getDataStore(String id) throws IOException {
+    return token.store;
   }
 
   private static String scopes() {
@@ -470,10 +615,12 @@ class GoogleDriveAPI {
    * @param clientSecret
    * @param tokenStore
    * @return GoogleAuthorizationCodeFlow instance.
+   * @throws IOException
    */
-  GoogleAuthorizationCodeFlow createFlow(String clientId, String clientSecret, CredentialStore tokenStore) {
+  GoogleAuthorizationCodeFlow createFlow(String clientId, String clientSecret, AuthToken storedToken) throws IOException {
     HttpTransport httpTransport = new NetHttpTransport();
     JacksonFactory jsonFactory = new JacksonFactory();
+
     // (access_type=offline) if application needs to refresh access tokens
     // when the user is not present at the browser.
     // If the value "approval_prompt" is force, then the user sees a
@@ -481,38 +628,31 @@ class GoogleDriveAPI {
     // application for a given set of scopes.
     // was setApprovalPrompt("force")
 
-    GoogleAuthorizationCodeFlow.Builder builder = new GoogleAuthorizationCodeFlow.Builder(httpTransport,
-                                                                                          jsonFactory,
-                                                                                          clientId,
-                                                                                          clientSecret,
-                                                                                          SCOPES);
+    GoogleAuthorizationCodeFlow.Builder flow = new GoogleAuthorizationCodeFlow.Builder(httpTransport,
+                                                                                       jsonFactory,
+                                                                                       clientId,
+                                                                                       clientSecret,
+                                                                                       SCOPES);
 
-    builder.setAccessType(ACCESS_TYPE).setApprovalPrompt(APPOVAl_PROMT);
-    if (tokenStore != null) {
-      builder.setCredentialStore(tokenStore);
+    flow.setAccessType(ACCESS_TYPE).setApprovalPrompt(APPOVAl_PROMT);
+    if (storedToken != null) {
+      flow.setCredentialDataStore(storedToken.store);
+      flow.setCredentialCreatedListener(storedToken);
+      flow.addRefreshListener(storedToken);
     }
 
-    return builder.build();
-  }
-
-  /**
-   * Update to new refresh token.
-   * 
-   * @param refreshToken String with new token
-   */
-  void setRefreshToken(String refreshToken) {
-    credential.setRefreshToken(refreshToken);
+    return flow.build();
   }
 
   /**
    * Return Userinfo service.
    * 
-   * @return {@link Userinfo}
+   * @return {@link Userinfoplus}
    * @throws GoogleDriveException on error from OAuth2 service
    * @throws CloudDriveException if no Userinfo found
    */
-  Userinfo userInfo() throws GoogleDriveException, CloudDriveException {
-    Userinfo userInfo;
+  Userinfoplus userInfo() throws GoogleDriveException, CloudDriveException {
+    Userinfoplus userInfo;
     try {
       // XXX FYI this caused Unauthorized: >>> .setHttpRequestInitializer(new RequestInitializer()
       // Oauth2 oauth2 = new Oauth2.Builder(new NetHttpTransport(), new JacksonFactory(),
@@ -521,14 +661,14 @@ class GoogleDriveAPI {
     } catch (GoogleJsonResponseException e) {
       GoogleJsonError error = e.getDetails();
       // More error information can be retrieved with error.getErrors().
-      throw new GoogleDriveException("Authentication error: " + error.getMessage() + " (" + error.getCode()
+      throw new GoogleDriveException("Error getting userinfo: " + error.getMessage() + " (" + error.getCode()
           + ").", e);
     } catch (HttpResponseException e) {
       // No Json body was returned by the API.
-      throw new GoogleDriveException("Authentication error: " + e.getMessage() + " (" + e.getStatusCode()
-          + ").", e);
+      throw new GoogleDriveException("Error handling userinfo response: " + e.getMessage() + " ("
+          + e.getStatusCode() + ").", e);
     } catch (IOException e) {
-      throw new GoogleDriveException("Authentication error: " + e.getMessage(), e);
+      throw new GoogleDriveException("Error requesting userinfo: " + e.getMessage(), e);
     }
     if (userInfo != null && userInfo.getId() != null) {
       return userInfo;
@@ -542,10 +682,17 @@ class GoogleDriveAPI {
    * 
    * @return {@link About}
    * @throws GoogleDriveException
+   * @throws CloudDriveAccessException
    */
-  About about() throws GoogleDriveException {
+  About about() throws GoogleDriveException, CloudDriveAccessException {
     try {
       return drive.about().get().execute();
+    } catch (GoogleJsonResponseException e) {
+      if (e.getStatusCode() == 403) {
+        throw new CloudDriveAccessException("Error accessing About service: " + e.getMessage(), e);
+      } else {
+        throw new GoogleDriveException("Error reading About service: " + e.getMessage(), e);
+      }
     } catch (IOException e) {
       throw new GoogleDriveException("Error requesting About service: " + e.getMessage(), e);
     }
@@ -577,7 +724,7 @@ class GoogleDriveAPI {
         throw new GoogleDriveException("Error getting file from Files service: " + e.getMessage(), e);
       }
     } catch (IOException e) {
-      throw new GoogleDriveException("Error getting file from Files service: " + e.getMessage(), e);
+      throw new GoogleDriveException("Error requesting file from Files service: " + e.getMessage(), e);
     }
   }
 
@@ -588,10 +735,20 @@ class GoogleDriveAPI {
    * @param file {@link AbstractInputStreamContent} file content
    * @return {@link File} resulting file
    * @throws GoogleDriveException
+   * @throws CloudDriveAccessException
    */
-  File insert(File file, AbstractInputStreamContent content) throws GoogleDriveException {
+  File insert(File file, AbstractInputStreamContent content) throws GoogleDriveException,
+                                                            CloudDriveAccessException {
     try {
       return drive.files().insert(file, content).execute();
+    } catch (GoogleJsonResponseException e) {
+      if (isInsufficientPermissions(e)) {
+        throw new CloudDriveAccessException("Insufficient permissions to inserting file with content in Files service. "
+            + e.getStatusMessage() + " (" + e.getStatusCode() + ")");
+      } else {
+        throw new GoogleDriveException("Error inserting file with content to Files service: "
+            + e.getMessage(), e);
+      }
     } catch (IOException e) {
       throw new GoogleDriveException("Error inserting file with content to Files service: " + e.getMessage(),
                                      e);
@@ -605,10 +762,18 @@ class GoogleDriveAPI {
    * @param file {@link File} file metadata
    * @return {@link File} resulting file
    * @throws GoogleDriveException
+   * @throws CloudDriveAccessException
    */
-  File insert(File file) throws GoogleDriveException {
+  File insert(File file) throws GoogleDriveException, CloudDriveAccessException {
     try {
       return drive.files().insert(file).execute();
+    } catch (GoogleJsonResponseException e) {
+      if (isInsufficientPermissions(e)) {
+        throw new CloudDriveAccessException("Insufficient permissions to insert file to Files service. "
+            + e.getStatusMessage() + " (" + e.getStatusCode() + ")");
+      } else {
+        throw new GoogleDriveException("Error inserting file to Files service: " + e.getMessage(), e);
+      }
     } catch (IOException e) {
       throw new GoogleDriveException("Error inserting file to Files service: " + e.getMessage(), e);
     }
@@ -622,8 +787,11 @@ class GoogleDriveAPI {
    * @return {@link File} resulting file
    * @throws GoogleDriveException
    * @throws NotFoundException
+   * @throws CloudDriveAccessException
    */
-  void update(File file, AbstractInputStreamContent content) throws GoogleDriveException, NotFoundException {
+  void update(File file, AbstractInputStreamContent content) throws GoogleDriveException,
+                                                            NotFoundException,
+                                                            CloudDriveAccessException {
     // TODO use If-Match with local ETag to esnure consistency
     // http://stackoverflow.com/questions/15723284/google-drive-sdk-check-etag-when-uploading-synchronizing
     String fileId = file.getId();
@@ -631,7 +799,10 @@ class GoogleDriveAPI {
       // file id update not assumed in this context
       drive.files().update(fileId, file, content).execute();
     } catch (GoogleJsonResponseException e) {
-      if (e.getStatusCode() == 404) {
+      if (isInsufficientPermissions(e)) {
+        throw new CloudDriveAccessException("Insufficient permissions to update file in Files service. "
+            + e.getStatusMessage() + " (" + e.getStatusCode() + ")");
+      } else if (e.getStatusCode() == 404) {
         throw new NotFoundException("Cloud file not found for updating: " + fileId, e);
       } else {
         throw new GoogleDriveException("Error updating file in Files service: " + e.getMessage(), e);
@@ -648,8 +819,9 @@ class GoogleDriveAPI {
    * @return {@link File} resulting file
    * @throws GoogleDriveException
    * @throws NotFoundException
+   * @throws CloudDriveAccessException
    */
-  void update(File file) throws GoogleDriveException, NotFoundException {
+  void update(File file) throws GoogleDriveException, NotFoundException, CloudDriveAccessException {
     // TODO use If-Match with local ETag to esnure consistency
     // http://stackoverflow.com/questions/15723284/google-drive-sdk-check-etag-when-uploading-synchronizing
     String fileId = file.getId();
@@ -657,7 +829,10 @@ class GoogleDriveAPI {
       // file id update not assumed in this context
       drive.files().update(fileId, file).execute();
     } catch (GoogleJsonResponseException e) {
-      if (e.getStatusCode() == 404) {
+      if (isInsufficientPermissions(e)) {
+        throw new CloudDriveAccessException("Insufficient permissions to update file in Files service. "
+            + e.getStatusMessage() + " (" + e.getStatusCode() + ")");
+      } else if (e.getStatusCode() == 404) {
         throw new NotFoundException("Cloud file not found for updating: " + fileId, e);
       } else {
         throw new GoogleDriveException("Error updating file in Files service: " + e.getMessage(), e);
@@ -674,12 +849,16 @@ class GoogleDriveAPI {
    * @return {@link Delete} resulting object
    * @throws GoogleDriveException
    * @throws NotFoundException
+   * @throws CloudDriveAccessException
    */
-  void delete(String fileId) throws GoogleDriveException, NotFoundException {
+  void delete(String fileId) throws GoogleDriveException, NotFoundException, CloudDriveAccessException {
     try {
       drive.files().delete(fileId).execute();
     } catch (GoogleJsonResponseException e) {
-      if (e.getStatusCode() == 404) {
+      if (isInsufficientPermissions(e)) {
+        throw new CloudDriveAccessException("Insufficient permissions to delete file in Files service. "
+            + e.getStatusMessage() + " (" + e.getStatusCode() + ")");
+      } else if (e.getStatusCode() == 404) {
         throw new NotFoundException("Cloud file not found for deleting: " + fileId, e);
       } else {
         throw new GoogleDriveException("Error deleting file in Files service: " + e.getMessage(), e);
@@ -696,12 +875,16 @@ class GoogleDriveAPI {
    * @return {@link File} resulting object
    * @throws GoogleDriveException
    * @throws NotFoundException
+   * @throws CloudDriveAccessException
    */
-  File trash(String fileId) throws GoogleDriveException, NotFoundException {
+  File trash(String fileId) throws GoogleDriveException, NotFoundException, CloudDriveAccessException {
     try {
       return drive.files().trash(fileId).execute();
     } catch (GoogleJsonResponseException e) {
-      if (e.getStatusCode() == 404) {
+      if (isInsufficientPermissions(e)) {
+        throw new CloudDriveAccessException("Insufficient permissions to trash file in Files service. "
+            + e.getStatusMessage() + " (" + e.getStatusCode() + ")");
+      } else if (e.getStatusCode() == 404) {
         throw new NotFoundException("Cloud file not found for trashing: " + fileId, e);
       } else {
         throw new GoogleDriveException("Error trashing file in Files service: " + e.getMessage(), e);
@@ -718,12 +901,16 @@ class GoogleDriveAPI {
    * @return {@link File} resulting object
    * @throws GoogleDriveException
    * @throws NotFoundException
+   * @throws CloudDriveAccessException
    */
-  File untrash(String fileId) throws GoogleDriveException, NotFoundException {
+  File untrash(String fileId) throws GoogleDriveException, NotFoundException, CloudDriveAccessException {
     try {
       return drive.files().untrash(fileId).execute();
     } catch (GoogleJsonResponseException e) {
-      if (e.getStatusCode() == 404) {
+      if (isInsufficientPermissions(e)) {
+        throw new CloudDriveAccessException("Insufficient permissions to untrash file in Files service. "
+            + e.getStatusMessage() + " (" + e.getStatusCode() + ")");
+      } else if (e.getStatusCode() == 404) {
         throw new NotFoundException("Cloud file not found for untrashing: " + fileId, e);
       } else {
         throw new GoogleDriveException("Error untrashing file in Files service: " + e.getMessage(), e);
@@ -738,7 +925,7 @@ class GoogleDriveAPI {
    * 
    * @throws GoogleDriveException if error during communication with the provider
    */
-  void checkAccess() throws GoogleDriveException {
+  void refreshAccess() throws GoogleDriveException {
     Long expirationTime = credential.getExpiresInSeconds();
     if (expirationTime != null && expirationTime < 0) {
       try {
@@ -752,6 +939,8 @@ class GoogleDriveAPI {
   /**
    * Update current credentials with new refresh token from given API instance.
    */
+  @Deprecated
+  // TODO not used
   void updateToken(GoogleDriveAPI refreshApi) throws GoogleDriveException {
     credential.setRefreshToken(refreshApi.credential.getRefreshToken());
     try {
@@ -761,16 +950,24 @@ class GoogleDriveAPI {
     }
   }
 
-  String getAccessToken() {
-    return credential.getAccessToken();
+  /**
+   * Update OAuth2 token to a new one.
+   * 
+   * @param newToken {@link AuthToken}
+   * @throws CloudDriveException
+   */
+  void updateToken(UserToken newToken) throws CloudDriveException {
+    this.token.merge(newToken);
+
   }
 
-  String getRefreshToken() {
-    return credential.getRefreshToken();
-  }
-
-  long getExpirationTime() {
-    return credential.getExpirationTimeMilliseconds();
+  /**
+   * Current OAuth2 token associated with this API instance.
+   * 
+   * @return {@link AuthToken}
+   */
+  AuthToken getToken() {
+    return token;
   }
 
   // ********** helpers ***********
@@ -827,4 +1024,22 @@ class GoogleDriveAPI {
     calendar.setTime(d);
     return calendar;
   }
+
+  // **** internals *****
+
+  private boolean isInsufficientPermissions(GoogleJsonResponseException e) {
+    GoogleJsonError details = e.getDetails();
+    if (e.getStatusCode() == 403 && details != null) {
+      List<ErrorInfo> errors = details.getErrors();
+      if (errors != null) {
+        for (ErrorInfo ei : errors) {
+          if (ei.getReason().equals("insufficientPermissions")) {
+            return true;
+          }
+        }
+      }
+    }
+    return false;
+  }
+
 }

@@ -157,7 +157,6 @@ public class BoxConnector extends CloudDriveConnector {
     if (user instanceof BoxUser) {
       BoxUser boxUser = (BoxUser) user;
       JCRLocalBoxDrive drive = new JCRLocalBoxDrive(boxUser, driveNode, sessionProviders, jcrFinder);
-      boxUser.api().getToken().addListener(drive);
       return drive;
     } else {
       throw new CloudDriveException("Not Box user: " + user);
@@ -175,7 +174,6 @@ public class BoxConnector extends CloudDriveConnector {
                                                   driveNode,
                                                   sessionProviders,
                                                   jcrFinder);
-    drive.getUser().api().getToken().addListener(drive);
     return drive;
   }
 

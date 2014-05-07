@@ -457,13 +457,11 @@ public abstract class CloudDrive {
    * @throws SyncNotSupportedException if synchronization not supported
    * @throws DriveRemovedException
    * @throws CloudDriveException
-   * @throws CloudDriveAccessException
    * @throws RepositoryException
    */
   public abstract Command synchronize() throws SyncNotSupportedException,
                                        DriveRemovedException,
                                        CloudDriveException,
-                                       CloudDriveAccessException,
                                        RepositoryException;
   /**
    * Answers if drive is connected.
@@ -502,11 +500,11 @@ public abstract class CloudDrive {
   protected abstract void disconnect() throws DriveRemovedException, CloudDriveException, RepositoryException;
 
   /**
-   * Check access to the cloud provider using locally stored keys by authenticating with the cloud service.
+   * Refresh access to the cloud provider services using locally stored refresh keys.
    * 
    * @throws CloudDriveException if cloud provider error
    */
-  protected abstract void checkAccess() throws CloudDriveException;
+  protected abstract void refreshAccess() throws CloudDriveException;
 
   /**
    * Renew access using given user credentials.

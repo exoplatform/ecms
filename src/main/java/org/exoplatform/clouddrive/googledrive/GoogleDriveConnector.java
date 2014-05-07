@@ -16,7 +16,7 @@
  */
 package org.exoplatform.clouddrive.googledrive;
 
-import com.google.api.services.oauth2.model.Userinfo;
+import com.google.api.services.oauth2.model.Userinfoplus;
 
 import org.exoplatform.clouddrive.CloudDrive;
 import org.exoplatform.clouddrive.CloudDriveConnector;
@@ -24,7 +24,6 @@ import org.exoplatform.clouddrive.CloudDriveException;
 import org.exoplatform.clouddrive.CloudProvider;
 import org.exoplatform.clouddrive.CloudUser;
 import org.exoplatform.clouddrive.ConfigurationException;
-import org.exoplatform.clouddrive.DriveRemovedException;
 import org.exoplatform.clouddrive.jcr.JCRLocalCloudDrive;
 import org.exoplatform.clouddrive.jcr.NodeFinder;
 import org.exoplatform.container.xml.InitParams;
@@ -48,7 +47,7 @@ public class GoogleDriveConnector extends CloudDriveConnector {
   class API {
     String code;
 
-    String userId, refreshToken, accessToken;
+    String refreshToken, accessToken;
 
     long   expirationTime;
 
@@ -73,7 +72,6 @@ public class GoogleDriveConnector extends CloudDriveConnector {
      * @return this API
      */
     API load(String userId, String refreshToken, String accessToken, long expirationTime) {
-      this.userId = userId;
       this.refreshToken = refreshToken;
       this.accessToken = accessToken;
       this.expirationTime = expirationTime;
@@ -93,12 +91,7 @@ public class GoogleDriveConnector extends CloudDriveConnector {
         return new GoogleDriveAPI(getClientId(), getClientSecret(), code, getProvider().getRedirectUrl());
       } else {
         // build API based on locally stored tokens
-        return new GoogleDriveAPI(getClientId(),
-                                  getClientSecret(),
-                                  userId,
-                                  accessToken,
-                                  refreshToken,
-                                  expirationTime);
+        return new GoogleDriveAPI(getClientId(), getClientSecret(), accessToken, refreshToken, expirationTime);
       }
     }
   }
@@ -165,7 +158,7 @@ public class GoogleDriveConnector extends CloudDriveConnector {
   public GoogleUser authenticate(String code) throws CloudDriveException {
     if (code != null && code.length() > 0) {
       GoogleDriveAPI driveAPI = new API().auth(code).build();
-      Userinfo userInfo = driveAPI.userInfo();
+      Userinfoplus userInfo = driveAPI.userInfo();
       GoogleUser user = new GoogleUser(userInfo.getId(),
                                        userInfo.getName(),
                                        userInfo.getEmail(),

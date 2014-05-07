@@ -47,7 +47,6 @@ import org.exoplatform.services.jcr.ext.app.SessionProviderService;
 
 import java.io.InputStream;
 import java.text.ParseException;
-import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Collection;
 import java.util.Iterator;
@@ -107,7 +106,6 @@ public class JCRLocalBoxDrive extends JCRLocalCloudDrive implements UserTokenRef
       rootNode.setProperty("ecd:url", api.getLink(boxRoot));
 
       // sync stream
-      // TODO cleanup rootNode.setProperty("box:streamPosition", eventsInit.streamPosition);
       setChangeId(eventsInit.streamPosition);
       rootNode.setProperty("box:streamHistory", "");
     }
@@ -159,7 +157,7 @@ public class JCRLocalBoxDrive extends JCRLocalCloudDrive implements UserTokenRef
      * {@inheritDoc}
      */
     @Override
-    protected void syncFiles() throws RepositoryException, AuthTokenException, CloudDriveException {
+    protected void syncFiles() throws RepositoryException, CloudDriveException {
       // real all local nodes of this drive
       readLocalNodes();
 
@@ -172,7 +170,6 @@ public class JCRLocalBoxDrive extends JCRLocalCloudDrive implements UserTokenRef
       initBoxItem(rootNode, boxRoot); // init parent
 
       // sync stream
-      // TODO cleanup rootNode.setProperty("box:streamPosition", eventsInit.streamPosition);
       setChangeId(eventsInit.streamPosition);
       rootNode.setProperty("box:streamHistory", "");
 
@@ -888,7 +885,7 @@ public class JCRLocalBoxDrive extends JCRLocalCloudDrive implements UserTokenRef
       return postponed.size() > 0 && (lastPostponed != null ? prevPostponedNumber > postponedNumber : true);
     }
 
-    protected BoxEvent nextEvent() throws NoSuchElementException, AuthTokenException, CloudDriveException {
+    protected BoxEvent nextEvent() throws NoSuchElementException, CloudDriveException {
       BoxEvent event = null;
       if (nextEvent != null) {
         event = nextEvent;
@@ -998,11 +995,12 @@ public class JCRLocalBoxDrive extends JCRLocalCloudDrive implements UserTokenRef
    * @throws CloudDriveException
    * @throws RepositoryException
    */
-  public JCRLocalBoxDrive(CloudUser user,
+  public JCRLocalBoxDrive(BoxUser user,
                           Node driveNode,
                           SessionProviderService sessionProviders,
                           NodeFinder finder) throws CloudDriveException, RepositoryException {
     super(user, driveNode, sessionProviders, finder);
+    getUser().api().getToken().addListener(this);
   }
 
   protected JCRLocalBoxDrive(API apiBuilder,
@@ -1013,6 +1011,7 @@ public class JCRLocalBoxDrive extends JCRLocalCloudDrive implements UserTokenRef
       GoogleDriveException,
       CloudDriveException {
     super(loadUser(apiBuilder, provider, driveNode), driveNode, sessionProviders, finder);
+    getUser().api().getToken().addListener(this);
   }
 
   /**
@@ -1065,7 +1064,7 @@ public class JCRLocalBoxDrive extends JCRLocalCloudDrive implements UserTokenRef
    * @throws BoxException
    */
   @Override
-  public void onUserTokenRefresh(UserToken token) throws BoxException {
+  public void onUserTokenRefresh(UserToken token) throws CloudDriveException {
     try {
       jcrListener.disable();
       Node driveNode = rootNode();
@@ -1077,12 +1076,12 @@ public class JCRLocalBoxDrive extends JCRLocalCloudDrive implements UserTokenRef
         driveNode.save();
       } catch (RepositoryException e) {
         rollback(driveNode);
-        throw new BoxException("Error updating access key: " + e.getMessage(), e);
+        throw new CloudDriveException("Error updating access key: " + e.getMessage(), e);
       }
     } catch (DriveRemovedException e) {
-      throw new BoxException("Error openning drive node: " + e.getMessage(), e);
+      throw new CloudDriveException("Error openning drive node: " + e.getMessage(), e);
     } catch (RepositoryException e) {
-      throw new BoxException("Error reading drive node: " + e.getMessage(), e);
+      throw new CloudDriveException("Error reading drive node: " + e.getMessage(), e);
     } finally {
       jcrListener.enable();
     }
@@ -1180,7 +1179,7 @@ public class JCRLocalBoxDrive extends JCRLocalCloudDrive implements UserTokenRef
    * {@inheritDoc}
    */
   @Override
-  protected void checkAccess() throws CloudDriveException {
+  protected void refreshAccess() throws CloudDriveException {
     // Not used. Box API does this internally and fires UserTokenRefreshListener.
     // See UserTokenRefreshListener implementation in this local drive.
   }
@@ -1190,7 +1189,7 @@ public class JCRLocalBoxDrive extends JCRLocalCloudDrive implements UserTokenRef
    */
   @Override
   protected void updateAccess(CloudUser newUser) throws CloudDriveException, RepositoryException {
-    getUser().updateToken(((BoxUser) newUser).getToken());
+    getUser().api().updateToken(((BoxUser) newUser).api().getToken());
   }
 
   /**

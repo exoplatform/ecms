@@ -18,13 +18,13 @@ package org.exoplatform.clouddrive.rest;
 
 import org.exoplatform.clouddrive.CloudDrive;
 import org.exoplatform.clouddrive.CloudDrive.Command;
-import org.exoplatform.clouddrive.CloudDriveAccessException;
 import org.exoplatform.clouddrive.CloudDriveException;
 import org.exoplatform.clouddrive.CloudDriveService;
 import org.exoplatform.clouddrive.CloudFile;
 import org.exoplatform.clouddrive.CloudProvider;
 import org.exoplatform.clouddrive.DriveRemovedException;
 import org.exoplatform.clouddrive.NotCloudFileException;
+import org.exoplatform.clouddrive.RefreshAccessException;
 import org.exoplatform.clouddrive.jcr.JCRNodeFinder;
 import org.exoplatform.clouddrive.jcr.NodeFinder;
 import org.exoplatform.services.jcr.RepositoryService;
@@ -34,7 +34,6 @@ import org.exoplatform.services.log.ExoLogger;
 import org.exoplatform.services.log.Log;
 import org.exoplatform.services.rest.resource.ResourceContainer;
 
-import java.lang.reflect.UndeclaredThrowableException;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.HashSet;
@@ -204,31 +203,33 @@ public class DriveService implements ResourceContainer {
                                .build();
               } catch (ExecutionException e) {
                 Throwable err = e.getCause();
-                if (err instanceof CloudDriveException) {
-                  LOG.error("Error synchrinizing the drive: " + err.getMessage(), err);
+                if (err instanceof RefreshAccessException) {
+                  Throwable cause = err.getCause();
+                  LOG.warn("Access to cloud drive expired, forbidden or revoked. " + err.getMessage()
+                      + (cause != null ? ". " + cause.getMessage() : ""));
+                  // client should treat this status in special way and obtain new credentials using given
+                  // provider
+                  return Response.status(Status.FORBIDDEN).entity(local.getUser().getProvider()).build();
+                } else if (err instanceof CloudDriveException) {
+                  LOG.error("Error synchrinizing the drive. " + err.getMessage(), err);
                   return Response.status(Status.INTERNAL_SERVER_ERROR)
                                  .entity("Error synchrinizing the drive. Try again later.")
                                  .build();
                 } else if (err instanceof RepositoryException) {
-                  LOG.error("Storage error: " + err.getMessage(), err);
+                  LOG.error("Storage error. " + err.getMessage(), err);
                   return Response.status(Status.INTERNAL_SERVER_ERROR)
                                  .entity("Storage error. Synchronization canceled.")
                                  .build();
                 } else if (err instanceof RuntimeException) {
-                  LOG.error("Runtime error: " + err.getMessage(), err);
+                  LOG.error("Runtime error. " + err.getMessage(), err);
                   return Response.status(Status.INTERNAL_SERVER_ERROR)
                                  .entity("Internal server error. Synchronization canceled. Try again later.")
                                  .build();
                 }
-                LOG.error("Unexpected error: " + err.getMessage(), err);
+                LOG.error("Unexpected error. " + err.getMessage(), err);
                 return Response.status(Status.INTERNAL_SERVER_ERROR)
                                .entity("Unexpected server error. Synchronization canceled. Try again later.")
                                .build();
-              } catch (CloudDriveAccessException e) {
-                LOG.warn("Request to cloud drive expired, forbidden or revoked.", e);
-                // client should treat this status in special way and obtain new credentials using given
-                // provider
-                return Response.status(Status.FORBIDDEN).entity(local.getUser().getProvider()).build();
               } catch (CloudDriveException e) {
                 LOG.error("Error synchronizing drive " + workspace + ":" + path, e);
                 return Response.status(Status.INTERNAL_SERVER_ERROR)

@@ -24,6 +24,7 @@ import org.exoplatform.clouddrive.CloudDriveAccessException;
 import org.exoplatform.clouddrive.CloudDriveException;
 import org.exoplatform.clouddrive.CloudDriveService;
 import org.exoplatform.clouddrive.DriveRemovedException;
+import org.exoplatform.clouddrive.RefreshAccessException;
 import org.exoplatform.clouddrive.jcr.NodeFinder;
 import org.exoplatform.services.jcr.RepositoryService;
 import org.exoplatform.services.jcr.ext.app.SessionProviderService;
@@ -131,7 +132,7 @@ public class ChangesService implements ResourceContainer {
                                      + sync.getStartTime() + "\",\"finishTime\":\"" + sync.getFinishTime()
                                      + "\"}")
                                  .build();
-                } catch (CloudDriveAccessException e) {
+                } catch (RefreshAccessException e) { // TODO this will happen in async command, not here
                   LOG.warn("Request to cloud drive forbidden or revoked.", e);
                   // client should treat this status in special way and obtain new credentials using
                   // given provider

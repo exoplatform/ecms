@@ -24,11 +24,13 @@ import com.google.api.services.drive.model.ChildReference;
 import com.google.api.services.drive.model.File;
 import com.google.api.services.drive.model.ParentReference;
 
+import org.exoplatform.clouddrive.CloudDriveAccessException;
 import org.exoplatform.clouddrive.CloudDriveException;
 import org.exoplatform.clouddrive.CloudFileAPI;
 import org.exoplatform.clouddrive.CloudProviderException;
 import org.exoplatform.clouddrive.CloudUser;
 import org.exoplatform.clouddrive.DriveRemovedException;
+import org.exoplatform.clouddrive.RefreshAccessException;
 import org.exoplatform.clouddrive.SyncNotSupportedException;
 import org.exoplatform.clouddrive.googledrive.GoogleDriveAPI.ChangesIterator;
 import org.exoplatform.clouddrive.googledrive.GoogleDriveAPI.ChildIterator;
@@ -36,6 +38,8 @@ import org.exoplatform.clouddrive.googledrive.GoogleDriveConnector.API;
 import org.exoplatform.clouddrive.jcr.JCRLocalCloudDrive;
 import org.exoplatform.clouddrive.jcr.JCRLocalCloudFile;
 import org.exoplatform.clouddrive.jcr.NodeFinder;
+import org.exoplatform.clouddrive.oauth2.UserToken;
+import org.exoplatform.clouddrive.oauth2.UserTokenRefreshListener;
 import org.exoplatform.services.jcr.ext.app.SessionProviderService;
 
 import java.io.IOException;
@@ -58,7 +62,7 @@ import javax.jcr.RepositoryException;
  * @author <a href="mailto:pnedonosko@exoplatform.com">Peter Nedonosko</a>
  * @version $Id: JCRLocalGoogleDrive.java 00000 Sep 13, 2012 pnedonosko $
  */
-public class JCRLocalGoogleDrive extends JCRLocalCloudDrive {
+public class JCRLocalGoogleDrive extends JCRLocalCloudDrive implements UserTokenRefreshListener {
 
   /**
    * Connect algorithm for Google Drive.
@@ -93,9 +97,6 @@ public class JCRLocalGoogleDrive extends JCRLocalCloudDrive {
       fetchChilds(id, rootNode);
 
       // connect metadata
-      rootNode.setProperty("gdrive:oauth2AccessToken", api.getAccessToken());
-      rootNode.setProperty("gdrive:oauth2RefreshToken", api.getRefreshToken());
-      rootNode.setProperty("gdrive:oauth2TokenExpirationTime", api.getExpirationTime());
       setChangeId(about.getLargestChangeId());
     }
 
@@ -208,13 +209,14 @@ public class JCRLocalGoogleDrive extends JCRLocalCloudDrive {
       try {
         About about = api.about();
         largestChangeId = about.getLargestChangeId();
-      } catch (Exception e) {
-        // TODO can we have more precise exception from Google API?
-        throw new NoRefreshTokenException("Error calling About service of Google Drive: " + e.getMessage(), e);
+      } catch (CloudDriveAccessException e) {
+        if (!isAccessScopeMatch()) {
+          throw new RefreshAccessException("Renew access key to Google Drive", e);
+        }
+        throw e;
       }
 
-      long localChangeId = getChangeId(); // TODO cleanup
-                                          // rootNode.getProperty("gdrive:largestChangeId").getString();
+      long localChangeId = getChangeId();
       if (largestChangeId == localChangeId) {
         // nothing changed
         return;
@@ -496,7 +498,12 @@ public class JCRLocalGoogleDrive extends JCRLocalCloudDrive {
 
       InputStreamContent fileContent = new InputStreamContent(mimeType, content);
 
-      gf = api.insert(gf, fileContent);
+      try {
+        gf = api.insert(gf, fileContent);
+      } catch (CloudDriveAccessException e) {
+        checkAccessScope(e);
+        throw e;
+      }
 
       modified = api.parseDate(gf.getModifiedDate().toStringRfc3339()); // use actual from Google
 
@@ -528,7 +535,12 @@ public class JCRLocalGoogleDrive extends JCRLocalCloudDrive {
       gf.setParents(Arrays.asList(new ParentReference().setId(getParentId(folderNode))));
       gf.setCreatedDate(new DateTime(created.getTime()));
 
-      gf = api.insert(gf);
+      try {
+        gf = api.insert(gf);
+      } catch (CloudDriveAccessException e) {
+        checkAccessScope(e);
+        throw e;
+      }
 
       Calendar modified = api.parseDate(gf.getModifiedDate().toStringRfc3339());
 
@@ -557,7 +569,12 @@ public class JCRLocalGoogleDrive extends JCRLocalCloudDrive {
       gf.setParents(Arrays.asList(new ParentReference().setId(getParentId(fileNode))));
       gf.setModifiedDate(new DateTime(modified.getTime()));
 
-      api.update(gf);
+      try {
+        api.update(gf);
+      } catch (CloudDriveAccessException e) {
+        checkAccessScope(e);
+        throw e;
+      }
     }
 
     /**
@@ -573,7 +590,12 @@ public class JCRLocalGoogleDrive extends JCRLocalCloudDrive {
       gf.setParents(Arrays.asList(new ParentReference().setId(getParentId(folderNode))));
       gf.setModifiedDate(new DateTime(modified.getTime()));
 
-      api.update(gf);
+      try {
+        api.update(gf);
+      } catch (CloudDriveAccessException e) {
+        checkAccessScope(e);
+        throw e;
+      }
     }
 
     /**
@@ -589,7 +611,12 @@ public class JCRLocalGoogleDrive extends JCRLocalCloudDrive {
 
       InputStreamContent fileContent = new InputStreamContent(mimeType, content);
 
-      api.update(gf, fileContent);
+      try {
+        api.update(gf, fileContent);
+      } catch (CloudDriveAccessException e) {
+        checkAccessScope(e);
+        throw e;
+      }
     }
 
     /**
@@ -597,7 +624,12 @@ public class JCRLocalGoogleDrive extends JCRLocalCloudDrive {
      */
     @Override
     public void removeFile(String id) throws CloudDriveException, RepositoryException {
-      api.delete(id);
+      try {
+        api.delete(id);
+      } catch (CloudDriveAccessException e) {
+        checkAccessScope(e);
+        throw e;
+      }
     }
 
     /**
@@ -605,7 +637,12 @@ public class JCRLocalGoogleDrive extends JCRLocalCloudDrive {
      */
     @Override
     public void removeFolder(String id) throws CloudDriveException, RepositoryException {
-      api.delete(id);
+      try {
+        api.delete(id);
+      } catch (CloudDriveAccessException e) {
+        checkAccessScope(e);
+        throw e;
+      }
     }
 
     /**
@@ -613,8 +650,13 @@ public class JCRLocalGoogleDrive extends JCRLocalCloudDrive {
      */
     @Override
     public boolean trashFile(String id) throws CloudDriveException, RepositoryException {
-      File file = api.trash(id);
-      return file.getLabels().getTrashed();
+      try {
+        File file = api.trash(id);
+        return file.getLabels().getTrashed();
+      } catch (CloudDriveAccessException e) {
+        checkAccessScope(e);
+        throw e;
+      }
     }
 
     /**
@@ -622,8 +664,13 @@ public class JCRLocalGoogleDrive extends JCRLocalCloudDrive {
      */
     @Override
     public boolean trashFolder(String id) throws CloudDriveException, RepositoryException {
-      File file = api.trash(id);
-      return file.getLabels().getTrashed();
+      try {
+        File file = api.trash(id);
+        return file.getLabels().getTrashed();
+      } catch (CloudDriveAccessException e) {
+        checkAccessScope(e);
+        throw e;
+      }
     }
 
     /**
@@ -631,8 +678,13 @@ public class JCRLocalGoogleDrive extends JCRLocalCloudDrive {
      */
     @Override
     public boolean untrashFile(Node fileNode) throws CloudDriveException, RepositoryException {
-      File file = api.untrash(getId(fileNode));
-      return !file.getLabels().getTrashed();
+      try {
+        File file = api.untrash(getId(fileNode));
+        return !file.getLabels().getTrashed();
+      } catch (CloudDriveAccessException e) {
+        checkAccessScope(e);
+        throw e;
+      }
     }
 
     /**
@@ -640,8 +692,13 @@ public class JCRLocalGoogleDrive extends JCRLocalCloudDrive {
      */
     @Override
     public boolean untrashFolder(Node folderNode) throws CloudDriveException, RepositoryException {
-      File file = api.untrash(getId(folderNode));
-      return !file.getLabels().getTrashed();
+      try {
+        File file = api.untrash(getId(folderNode));
+        return !file.getLabels().getTrashed();
+      } catch (CloudDriveAccessException e) {
+        checkAccessScope(e);
+        throw e;
+      }
     }
 
     /**
@@ -667,6 +724,7 @@ public class JCRLocalGoogleDrive extends JCRLocalCloudDrive {
                                 SessionProviderService sessionProviders,
                                 NodeFinder finder) throws CloudDriveException, RepositoryException {
     super(user, driveNode, sessionProviders, finder);
+    getUser().api().getToken().addListener(this);
   }
 
   /**
@@ -688,6 +746,7 @@ public class JCRLocalGoogleDrive extends JCRLocalCloudDrive {
       GoogleDriveException,
       CloudDriveException {
     super(loadUser(apiBuilder, provider, driveNode), driveNode, sessionProviders, finder);
+    getUser().api().getToken().addListener(this);
   }
 
   /**
@@ -748,10 +807,39 @@ public class JCRLocalGoogleDrive extends JCRLocalCloudDrive {
 
   /**
    * {@inheritDoc}
+   * 
+   * @throws GoogleDriveException
    */
   @Override
-  protected void checkAccess() throws GoogleDriveException {
-    getUser().api().checkAccess();
+  public void onUserTokenRefresh(UserToken token) throws CloudDriveException {
+    try {
+      jcrListener.disable();
+      Node driveNode = rootNode();
+      try {
+        driveNode.setProperty("gdrive:oauth2AccessToken", token.getAccessToken());
+        driveNode.setProperty("gdrive:oauth2RefreshToken", token.getRefreshToken());
+        driveNode.setProperty("gdrive:oauth2TokenExpirationTime", token.getExpirationTime());
+
+        driveNode.save();
+      } catch (RepositoryException e) {
+        rollback(driveNode);
+        throw new CloudDriveException("Error updating access key: " + e.getMessage(), e);
+      }
+    } catch (DriveRemovedException e) {
+      throw new CloudDriveException("Error openning drive node: " + e.getMessage(), e);
+    } catch (RepositoryException e) {
+      throw new CloudDriveException("Error reading drive node: " + e.getMessage(), e);
+    } finally {
+      jcrListener.enable();
+    }
+  }
+
+  /**
+   * {@inheritDoc}
+   */
+  @Override
+  protected void refreshAccess() throws GoogleDriveException {
+    getUser().api().refreshAccess();
   }
 
   /**
@@ -759,24 +847,71 @@ public class JCRLocalGoogleDrive extends JCRLocalCloudDrive {
    */
   @Override
   protected void updateAccess(CloudUser newUser) throws CloudDriveException, RepositoryException {
-    GoogleDriveAPI api = getUser().api();
-    api.updateToken(((GoogleUser) newUser).api());
+    getUser().api().updateToken(((GoogleUser) newUser).api().getToken());
 
+    // manage access scopes update
+    try {
+      Node driveNode = rootNode();
+
+      boolean updateScopes;
+      try {
+        updateScopes = !GoogleDriveAPI.SCOPES_STRING.equals(driveNode.getProperty("gdrive:scopes")
+                                                                     .getString());
+      } catch (PathNotFoundException e) {
+        updateScopes = true;
+      }
+
+      if (updateScopes) {
+        jcrListener.disable();
+        try {
+          driveNode.setProperty("gdrive:scopes", GoogleDriveAPI.SCOPES_STRING);
+          driveNode.save();
+        } catch (RepositoryException e) {
+          rollback(driveNode);
+          throw new CloudDriveException("Error updating access scopes: " + e.getMessage(), e);
+        } finally {
+          jcrListener.enable();
+        }
+      }
+    } catch (DriveRemovedException e) {
+      throw new CloudDriveException("Error openning drive node: " + e.getMessage(), e);
+    } catch (RepositoryException e) {
+      throw new CloudDriveException("Error reading drive node: " + e.getMessage(), e);
+    }
+  }
+
+  /**
+   * Check if currently coded scope match the one used by the drive access tokens.
+   * 
+   * @throws DriveRemovedException
+   */
+  protected boolean isAccessScopeMatch() throws RepositoryException, DriveRemovedException {
     Node driveNode = rootNode();
     try {
-      jcrListener.disable();
-
-      driveNode.setProperty("gdrive:oauth2AccessToken", api.getAccessToken());
-      driveNode.setProperty("gdrive:oauth2RefreshToken", api.getRefreshToken());
-      driveNode.setProperty("gdrive:oauth2TokenExpirationTime", api.getExpirationTime());
-
-      driveNode.save();
-    } catch (RepositoryException e) {
-      rollback(driveNode);
-      throw new GoogleDriveException("Error updating access key: " + e.getMessage(), e);
-    } finally {
-      jcrListener.enable();
+      return GoogleDriveAPI.SCOPES_STRING.equals(driveNode.getProperty("gdrive:scopes").getString());
+    } catch (PathNotFoundException e) {
+      return false;
     }
+  }
+
+  /**
+   * Throw {@link RefreshAccessException} if currently coded scope doesn't match the one used by the drive
+   * access tokens.
+   * 
+   * @param cause {@link CloudDriveAccessException}
+   * @return <code>false</code> if access coded and currently used access scopes match, otherwise
+   *         {@link RefreshAccessException} will be thrown with given cause {@link CloudDriveAccessException}
+   * @throws RepositoryException
+   * @throws RefreshAccessException
+   * @throws DriveRemovedException
+   */
+  protected boolean checkAccessScope(CloudDriveAccessException cause) throws RepositoryException,
+                                                                     RefreshAccessException,
+                                                                     DriveRemovedException {
+    if (cause != null && !isAccessScopeMatch()) {
+      throw new RefreshAccessException("Renew access key to Google Drive", cause);
+    }
+    return false;
   }
 
   /**
@@ -811,6 +946,7 @@ public class JCRLocalGoogleDrive extends JCRLocalCloudDrive {
     About about = getUser().api().about();
     driveNode.setProperty("ecd:id", about.getRootFolderId());
     driveNode.setProperty("ecd:url", about.getSelfLink());
+    driveNode.setProperty("gdrive:scopes", GoogleDriveAPI.SCOPES_STRING);
   }
 
   /**

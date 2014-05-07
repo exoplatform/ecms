@@ -71,7 +71,7 @@ public abstract class UserToken {
     this.refreshToken = refreshToken;
     this.expirationTime = expirationTime;
   }
-  
+
   /**
    * Store new OAuth2 token data.
    * 
@@ -80,9 +80,7 @@ public abstract class UserToken {
    * @param expirationTime
    */
   public void store(String accessToken, String refreshToken, long expirationTime) throws CloudDriveException {
-    this.accessToken = accessToken;
-    this.refreshToken = refreshToken;
-    this.expirationTime = expirationTime;
+    load(accessToken, refreshToken, expirationTime);
     fireListeners();
   }
 
@@ -93,7 +91,7 @@ public abstract class UserToken {
    * @throws CloudDriveException
    */
   public void merge(UserToken newToken) throws CloudDriveException {
-    removeListeners();
+    newToken.removeListeners(); // May 4 2014, remove listeners on newToken (was on this instance)
     store(newToken.getAccessToken(), newToken.getRefreshToken(), newToken.getExpirationTime());
   }
 
@@ -118,20 +116,20 @@ public abstract class UserToken {
     return expirationTime;
   }
 
-  // internals
-
   void unregisterListeners() {
     listeners.clear();
   }
+
+  void removeListeners() throws CloudDriveException {
+    listeners.clear();
+  }
+
+  // internals
 
   private void fireListeners() throws CloudDriveException {
     for (UserTokenRefreshListener listener : listeners) {
       listener.onUserTokenRefresh(this);
     }
-  }
-
-  void removeListeners() throws CloudDriveException {
-    listeners.clear();
   }
 
 }
