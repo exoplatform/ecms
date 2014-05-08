@@ -286,7 +286,7 @@
 				ret += oldName[i];
 			}
 		}
-		return ret;
+		return encodeURIComponent(ret);
 	};
 
 	MultiUpload.prototype.changeStatusValue = function(id, delta) {
@@ -575,7 +575,7 @@
 		  "&currentFolder=" + eXo.ecm.MultiUpload.pathMap[id] +
 		  "&currentPortal="+ eXo.ecm.MultiUpload.portalName +
 		  "&userId=" + eXo.ecm.MultiUpload.userId +
-		  "&fileName=" + encodeURIComponent(cleanName(eXo.ecm.MultiUpload.uploadingFileIds[id].name)) + 
+		  "&fileName=" + cleanName(eXo.ecm.MultiUpload.uploadingFileIds[id].name) + 
 		  "&language=" + eXo.ecm.MultiUpload.userLanguage;
 		  
 		gj.ajax({url: uri, 
@@ -843,7 +843,7 @@
 		    "&currentPortal="+ eXo.ecm.MultiUpload.portalName +
 		    "&userId=" + eXo.ecm.MultiUpload.userId +
 		    "&action=save&uploadId=" + progressID +
-		    "&fileName=" + encodeURIComponent(cleanName(file.name)) + 
+		    "&fileName=" + cleanName(file.name) + 
 		    "&language=" + eXo.ecm.MultiUpload.userLanguage +
 		    "&existenceAction=" + eXo.ecm.MultiUpload.existingBehavior[progressID];
 		    gj.ajax({url: uri, 
@@ -890,7 +890,7 @@
 		  	  //load image thumbnail
 		  	  var nodePath = (eXo.ecm.MultiUpload.drivePath.length <= 1 ? "":"/" + eXo.ecm.MultiUpload.drivePath) + 
 		  	  (eXo.ecm.MultiUpload.pathMap[progressID].length <= 1 ? "" : "/" + eXo.ecm.MultiUpload.pathMap[progressID]) +
-		  	  "/" + encodeURIComponent(cleanName(file.name));
+		  	  "/" + cleanName(file.name);
 				var icon = gj("#icon" + progressID, eXo.ecm.MultiUpload.document)[0];
 		  	  if (icon && eXo.ecm.MultiUpload.fileType[progressID].indexOf("image") != -1) {
 		  		  var iconHTMLForImageLoadFail = gj(icon).html();
@@ -1057,7 +1057,7 @@
 		formUpload.action = uri;
 		  //formUpload.submit();
 		  eXo.ecm.MultiUpload.formUpload = formUpload;
-		  var file = {name:cleanName(input.value.substring(input.value.lastIndexOf('\\') + 1)),type: " ", size:0};
+		  var file = {name:decodeURIComponent(cleanName(input.value.substring(input.value.lastIndexOf('\\') + 1))),type: " ", size:0};
 		  eXo.ecm.MultiUpload.pathMap[progressId] = eXo.ecm.MultiUpload.path;
 		  eXo.ecm.MultiUpload.connectionFailed[progressId] = 0;
 	//	eXo.ecm.MultiUpload.insertFileNameWithMessage(eXo.ecm.MultiUpload.WAIT, file, progressId, eXo.ecm.MultiUpload.WAITING_TXT);
