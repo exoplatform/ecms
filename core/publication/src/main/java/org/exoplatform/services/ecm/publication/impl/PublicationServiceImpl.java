@@ -39,6 +39,10 @@ import org.exoplatform.services.ecm.publication.PublicationService;
 import org.exoplatform.services.jcr.core.ManageableRepository;
 import org.exoplatform.services.log.ExoLogger;
 import org.exoplatform.services.log.Log;
+import org.exoplatform.services.cms.CmsService;
+import org.exoplatform.services.listener.ListenerService;
+import org.exoplatform.services.wcm.publication.WCMPublicationService;
+import org.exoplatform.services.wcm.utils.WCMCoreUtils;
 
 /**
  * Created by The eXo Platform SAS
@@ -55,6 +59,8 @@ public class PublicationServiceImpl implements PublicationService {
 
   private static final Log LOG = ExoLogger.getLogger(PublicationServiceImpl.class.getName());
   private PublicationPresentationService publicationPresentationService;
+  private ListenerService listenerService;
+  private CmsService cmsService;
 
   private final String localeFile = "locale.portlet.publication.PublicationService";
 
@@ -65,6 +71,8 @@ public class PublicationServiceImpl implements PublicationService {
       LOG.info("# PublicationService initialization #");
     }
     this.publicationPresentationService = presentationService;
+    this.listenerService = WCMCoreUtils.getService(ListenerService.class);
+    this.cmsService = WCMCoreUtils.getService(CmsService.class);
     publicationPlugins_ = new HashMap<String, PublicationPlugin>();
   }
 
@@ -116,6 +124,8 @@ public class PublicationServiceImpl implements PublicationService {
     String lifecycleName=getNodeLifecycleName(node);
     PublicationPlugin nodePlugin = this.publicationPlugins_.get(lifecycleName);
     nodePlugin.changeState(node, newState, context);
+    listenerService.broadcast(WCMPublicationService.UPDATE_EVENT, cmsService, node);
+
   }
 
   /*
