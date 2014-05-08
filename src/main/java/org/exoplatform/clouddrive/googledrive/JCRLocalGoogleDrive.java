@@ -27,7 +27,6 @@ import com.google.api.services.drive.model.ParentReference;
 import org.exoplatform.clouddrive.CloudDriveAccessException;
 import org.exoplatform.clouddrive.CloudDriveException;
 import org.exoplatform.clouddrive.CloudFileAPI;
-import org.exoplatform.clouddrive.CloudProviderException;
 import org.exoplatform.clouddrive.CloudUser;
 import org.exoplatform.clouddrive.DriveRemovedException;
 import org.exoplatform.clouddrive.RefreshAccessException;
@@ -795,7 +794,7 @@ public class JCRLocalGoogleDrive extends JCRLocalCloudDrive implements UserToken
    * {@inheritDoc}
    */
   @Override
-  public String getChangesLink() throws DriveRemovedException, RepositoryException {
+  public String getChangesLink() {
     // long-polling of changes not supported by Google as for Nov 10 2013
     return null;
   }
@@ -804,7 +803,7 @@ public class JCRLocalGoogleDrive extends JCRLocalCloudDrive implements UserToken
    * {@inheritDoc}
    */
   @Override
-  public void updateChangesLink() throws DriveRemovedException, CloudProviderException, RepositoryException {
+  public void updateChangesLink() {
     // do nothing for Google
   }
 

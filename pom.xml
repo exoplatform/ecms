@@ -74,6 +74,13 @@
     <dependency>
       <groupId>org.exoplatform.ws</groupId>
       <artifactId>exo.ws.commons</artifactId>
+      <scope>provided</scope>
+      <type>jar</type>
+    </dependency>
+    <!-- we need this as *compile* to get Apache HTTP core and client dependencies from the Platform -->
+    <dependency>
+      <groupId>org.exoplatform.platform</groupId>
+      <artifactId>platform-component-common</artifactId>
       <scope>compile</scope>
       <type>jar</type>
     </dependency>
@@ -90,6 +97,17 @@
       <artifactId>google-http-client-jackson2</artifactId>
       <scope>compile</scope>
       <type>jar</type>
+      <exclusions>
+        <!-- exclude Apache HTTP as Google uses lower (4.0.1), than the Platform 4.0 (4.1.2)-->
+        <exclusion>
+          <groupId>org.apache.httpcomponents</groupId>
+          <artifactId>httpclient</artifactId>
+        </exclusion>
+        <exclusion>
+          <groupId>org.apache.httpcomponents</groupId>
+          <artifactId>httpcore</artifactId>
+        </exclusion>
+      </exclusions>
     </dependency>
     <dependency>
       <groupId>com.google.apis</groupId>
@@ -106,10 +124,21 @@
     
     <!-- Box API -->
     <dependency>
-      <groupId>com.box.boxjavalibv2</groupId>
-      <artifactId>BoxJavaLibraryV2</artifactId>
+      <groupId>net.box</groupId>
+      <artifactId>boxjavalibv2</artifactId>
       <scope>compile</scope>
       <type>jar</type>
+      <exclusions>
+        <!-- exclude Apache HTTP as Box uses higher version (4.2.5) than the Platform 4.0 (4.1.2)-->
+        <exclusion>
+          <groupId>org.apache.httpcomponents</groupId>
+          <artifactId>httpclient</artifactId>
+        </exclusion>
+        <exclusion>
+          <groupId>org.apache.httpcomponents</groupId>
+          <artifactId>httpcore</artifactId>
+        </exclusion>
+      </exclusions>
     </dependency>
 
     <!-- Others third party -->

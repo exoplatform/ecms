@@ -19,6 +19,10 @@
 package org.exoplatform.clouddrive.box;
 
 import com.box.boxjavalibv2.BoxClient;
+import com.box.boxjavalibv2.BoxConfigBuilder;
+import com.box.boxjavalibv2.BoxRESTClient;
+import com.box.boxjavalibv2.authorization.IAuthSecureStorage;
+import com.box.boxjavalibv2.authorization.OAuthDataController.OAuthTokenState;
 import com.box.boxjavalibv2.authorization.OAuthRefreshListener;
 import com.box.boxjavalibv2.dao.BoxCollection;
 import com.box.boxjavalibv2.dao.BoxEvent;
@@ -30,23 +34,35 @@ import com.box.boxjavalibv2.dao.BoxOAuthToken;
 import com.box.boxjavalibv2.dao.BoxServerError;
 import com.box.boxjavalibv2.dao.BoxSharedLink;
 import com.box.boxjavalibv2.dao.BoxTypedObject;
+import com.box.boxjavalibv2.dao.IAuthData;
 import com.box.boxjavalibv2.exceptions.AuthFatalFailureException;
+import com.box.boxjavalibv2.exceptions.BoxJSONException;
 import com.box.boxjavalibv2.exceptions.BoxServerException;
-import com.box.boxjavalibv2.interfaces.IAuthData;
-import com.box.boxjavalibv2.interfaces.IAuthSecureStorage;
-import com.box.boxjavalibv2.requests.requestobjects.BoxDefaultRequestObject;
+import com.box.boxjavalibv2.jsonparsing.BoxJSONParser;
+import com.box.boxjavalibv2.jsonparsing.BoxResourceHub;
 import com.box.boxjavalibv2.requests.requestobjects.BoxEventRequestObject;
 import com.box.boxjavalibv2.requests.requestobjects.BoxFileRequestObject;
-import com.box.boxjavalibv2.requests.requestobjects.BoxFileUploadRequestObject;
+import com.box.boxjavalibv2.requests.requestobjects.BoxFolderDeleteRequestObject;
 import com.box.boxjavalibv2.requests.requestobjects.BoxFolderRequestObject;
 import com.box.boxjavalibv2.requests.requestobjects.BoxItemRestoreRequestObject;
-import com.box.boxjavalibv2.requests.requestobjects.BoxOAuthRequestObject;
-import com.box.boxjavalibv2.resourcemanagers.BoxFilesManager;
-import com.box.boxjavalibv2.resourcemanagers.BoxFoldersManager;
+import com.box.boxjavalibv2.requests.requestobjects.BoxRequestExtras;
 import com.box.boxjavalibv2.utils.ISO8601DateParser;
+import com.box.boxjavalibv2.utils.Utils;
 import com.box.restclientv2.exceptions.BoxRestException;
+import com.box.restclientv2.requestsbase.BoxDefaultRequestObject;
+import com.box.restclientv2.requestsbase.BoxFileUploadRequestObject;
 
+import org.apache.http.client.HttpClient;
+import org.apache.http.conn.ClientConnectionManager;
+import org.apache.http.conn.scheme.PlainSocketFactory;
+import org.apache.http.conn.scheme.Scheme;
+import org.apache.http.conn.scheme.SchemeRegistry;
+import org.apache.http.conn.ssl.SSLSocketFactory;
+import org.apache.http.impl.client.DefaultHttpClient;
+import org.apache.http.impl.conn.tsccm.ThreadSafeClientConnManager;
+import org.apache.http.params.BasicHttpParams;
 import org.exoplatform.clouddrive.CloudDriveException;
+import org.exoplatform.clouddrive.ConflictException;
 import org.exoplatform.clouddrive.FileTrashRemovedException;
 import org.exoplatform.clouddrive.NotFoundException;
 import org.exoplatform.clouddrive.RefreshAccessException;
@@ -61,9 +77,11 @@ import java.text.ParseException;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
+import java.util.HashMap;
 import java.util.HashSet;
 import java.util.Iterator;
 import java.util.List;
+import java.util.Map;
 import java.util.Set;
 
 /**
@@ -113,12 +131,12 @@ public class BoxAPI {
      */
     @Override
     public IAuthData getAuth() {
-      BoxOAuthToken auth = new BoxOAuthToken();
-      auth.put(BoxOAuthToken.FIELD_ACCESS_TOKEN, getAccessToken());
-      auth.put(BoxOAuthToken.FIELD_REFRESH_TOKEN, getRefreshToken());
-      auth.put(BoxOAuthToken.FIELD_EXPIRES_IN, getExpirationTime());
-      auth.put(BoxOAuthToken.FIELD_TOKEN_TYPE, "bearer");
-      return auth;
+      Map<String, Object> data = new HashMap<String, Object>();
+      data.put(BoxOAuthToken.FIELD_ACCESS_TOKEN, getAccessToken());
+      data.put(BoxOAuthToken.FIELD_REFRESH_TOKEN, getRefreshToken());
+      data.put(BoxOAuthToken.FIELD_EXPIRES_IN, getExpirationTime());
+      data.put(BoxOAuthToken.FIELD_TOKEN_TYPE, "bearer");
+      return new BoxOAuthToken(data);
     }
   }
 
@@ -147,23 +165,29 @@ public class BoxAPI {
     }
 
     protected Iterator<BoxItem> nextChunk() throws CloudDriveException {
-      BoxFolderRequestObject obj = BoxFolderRequestObject.getFolderItemsRequestObject(limit, offset);
-      obj.addField("id");
-      obj.addField("parent");
-      obj.addField("name");
-      obj.addField("type");
-      obj.addField("etag");
-      obj.addField("sequence_id");
-      obj.addField("created_at");
-      obj.addField("modified_at");
-      obj.addField("description");
-      obj.addField("size");
-      obj.addField("created_by");
-      obj.addField("modified_by");
-      obj.addField("owned_by");
-      obj.addField("shared_link");
-      obj.addField("item_status");
-      obj.addField("item_collection");
+      // TODO pagination!
+      // BoxFolderRequestObject obj = BoxFolderRequestObject.getFolderItemsRequestObject(limit, offset);
+
+      BoxDefaultRequestObject obj = new BoxDefaultRequestObject();
+      BoxRequestExtras ext = obj.getRequestExtras();
+      ext.addField(BoxItem.FIELD_ID);
+      ext.addField(BoxItem.FIELD_PARENT);
+      ext.addField(BoxItem.FIELD_NAME);
+      ext.addField(BoxItem.FIELD_TYPE);
+      ext.addField(BoxItem.FIELD_ETAG);
+      ext.addField(BoxItem.FIELD_SEQUENCE_ID);
+      ext.addField(BoxItem.FIELD_CREATED_AT);
+      ext.addField(BoxItem.FIELD_MODIFIED_AT);
+      ext.addField(BoxItem.FIELD_DESCRIPTION);
+      ext.addField(BoxItem.FIELD_SIZE);
+      ext.addField(BoxItem.FIELD_CREATED_BY);
+      ext.addField(BoxItem.FIELD_MODIFIED_BY);
+      ext.addField(BoxItem.FIELD_OWNED_BY);
+      ext.addField(BoxItem.FIELD_SHARED_LINK);
+      ext.addField(BoxItem.FIELD_ITEM_STATUS);
+      ext.addField(BoxItem.FIELD_PATH_COLLECTION);
+      ext.addField(BoxFolder.FIELD_ITEM_COLLECTION);
+
       try {
         // TODO handle big drives in several requests with chunk_size
         // BoxCollection items = client.getFoldersManager().getFolderItems(folderId, obj);
@@ -176,18 +200,15 @@ public class BoxAPI {
 
         ArrayList<BoxItem> oitems = new ArrayList<BoxItem>();
         // put folders first, then files
-        oitems.addAll(BoxFoldersManager.getFolders(items));
-        oitems.addAll(BoxFilesManager.getFiles(items));
+        oitems.addAll(Utils.getTypedObjects(items, BoxFolder.class));
+        oitems.addAll(Utils.getTypedObjects(items, BoxFile.class));
         return oitems.iterator();
       } catch (BoxRestException e) {
         throw new BoxException("Error getting folder items: " + e.getMessage(), e);
       } catch (BoxServerException e) {
         throw new BoxException("Error reading folder items: " + e.getMessage(), e);
       } catch (AuthFatalFailureException e) {
-        if (e.isCallerResponsibleForFix()) {
-          // we need new access token (refresh token already expired here)
-          throw new RefreshAccessException("Authentication failure. Reauthenticate.");
-        }
+        checkTokenState();
         throw new BoxException("Authentication error on folder items: " + e.getMessage(), e);
       }
     }
@@ -232,10 +253,7 @@ public class BoxAPI {
       } catch (BoxServerException e) {
         throw new BoxException("Error reading Events service: " + e.getMessage(), e);
       } catch (AuthFatalFailureException e) {
-        if (e.isCallerResponsibleForFix()) {
-          // we need new access token (refresh token already expired here)
-          throw new RefreshAccessException("Authentication failure. Reauthenticate.");
-        }
+        checkTokenState();
         throw new BoxException("Authentication error for Events service: " + e.getMessage(), e);
       }
     }
@@ -356,6 +374,50 @@ public class BoxAPI {
     }
   }
 
+  /**
+   * Box REST client adopted to Apache HTTP 4.1 (from Platform 4.0) and using allow-all hostname validator.
+   * Purpose of this client is to workaround <a href=
+   * "http://stackoverflow.com/questions/23529852/multiple-files-upload-to-box-fails-with-http-client-error-connection-still-allo"
+   * >multiple files upload problem</a>.
+   */
+  class RESTClient extends BoxRESTClient {
+
+    final HttpClient httpClient;
+
+    @SuppressWarnings("deprecation")
+    RESTClient() {
+      super();
+
+      SchemeRegistry schemeReg = new SchemeRegistry();
+      schemeReg.register(new Scheme("http", PlainSocketFactory.getSocketFactory(), 80));
+      SSLSocketFactory socketFactory;
+      try {
+        socketFactory = new SSLSocketFactory(SSLSocketFactory.TLS,
+                                             null,
+                                             null,
+                                             null,
+                                             null,
+                                             null,
+                                             SSLSocketFactory.ALLOW_ALL_HOSTNAME_VERIFIER);
+      } catch (Exception ex) {
+        throw new IllegalStateException("Failure initializing default SSL context for Box REST client", ex);
+      }
+      schemeReg.register(new Scheme("https", socketFactory, 443));
+
+      ClientConnectionManager connectionManager = new ThreadSafeClientConnManager(new BasicHttpParams(),
+                                                                                  schemeReg);
+      this.httpClient = new DefaultHttpClient(connectionManager);
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public HttpClient getRawHttpClient() {
+      return httpClient;
+    }
+  }
+
   protected static final Log      LOG                      = ExoLogger.getLogger(BoxAPI.class);
 
   public static final String      NO_STATE                 = "__no_state_set__";
@@ -438,16 +500,27 @@ public class BoxAPI {
   BoxAPI(String key, String clientSecret, String authCode, String redirectUri) throws BoxException,
       CloudDriveException {
 
-    this.client = new BoxClient(key, clientSecret);
+    BoxResourceHub hub = new BoxResourceHub();
+    BoxJSONParser parser = new BoxJSONParser(hub);
+    this.client = new BoxClient(key,
+                                clientSecret,
+                                hub,
+                                parser,
+                                new RESTClient(),
+                                new BoxConfigBuilder().build());
+
+    // this.client = new BoxClient(key, clientSecret);
     this.token = new StoredToken();
     this.client.addOAuthRefreshListener(token);
 
     try {
-      BoxOAuthRequestObject obj = BoxOAuthRequestObject.createOAuthRequestObject(authCode,
-                                                                                 key,
-                                                                                 clientSecret,
-                                                                                 redirectUri);
-      BoxOAuthToken bt = client.getOAuthManager().createOAuth(obj);
+      // BoxOAuthRequestObject obj = BoxOAuthRequestObject.createOAuthRequestObject(authCode,
+      // key,
+      // clientSecret,
+      // redirectUri);
+      BoxOAuthToken bt = this.client.getOAuthManager().createOAuth(authCode, key, clientSecret, redirectUri);
+
+      // BoxOAuthToken bt = client.getOAuthManager().createOAuth(obj);
       this.token.store(bt);
       this.client.authenticate(bt);
     } catch (BoxRestException e) {
@@ -473,7 +546,16 @@ public class BoxAPI {
    * @throws CloudDriveException if credentials store exception happen
    */
   BoxAPI(String key, String clientSecret, String accessToken, String refreshToken, long expirationTime) throws CloudDriveException {
-    this.client = new BoxClient(key, clientSecret);
+    // this.client = new BoxClient(key, clientSecret);
+    BoxResourceHub hub = new BoxResourceHub();
+    BoxJSONParser parser = new BoxJSONParser(hub);
+    this.client = new BoxClient(key,
+                                clientSecret,
+                                hub,
+                                parser,
+                                new RESTClient(),
+                                new BoxConfigBuilder().build());
+
     this.token = new StoredToken();
     this.token.load(accessToken, refreshToken, expirationTime);
     this.client.addOAuthRefreshListener(token);
@@ -634,7 +716,7 @@ public class BoxAPI {
     return String.format(BOX_EMBED_URL, linkValue.toString());
   }
 
-  String getChangesLink() throws BoxException {
+  String getChangesLink() throws BoxException, RefreshAccessException {
     if (changesLink != null) {
       return changesLink.getUrl();
     } else {
@@ -642,7 +724,7 @@ public class BoxAPI {
     }
   }
 
-  String updateChangesLink() throws BoxException {
+  String updateChangesLink() throws BoxException, RefreshAccessException {
     BoxDefaultRequestObject obj = new BoxDefaultRequestObject();
     try {
       BoxCollection changesPoll = client.getEventsManager().getEventOptions(obj);
@@ -702,6 +784,7 @@ public class BoxAPI {
     } catch (BoxServerException e) {
       throw new BoxException("Error reading changes long poll URL: " + e.getMessage(), e);
     } catch (AuthFatalFailureException e) {
+      checkTokenState();
       throw new BoxException("Authentication error for changes long poll URL: " + e.getMessage(), e);
     }
   }
@@ -712,7 +795,8 @@ public class BoxAPI {
 
   BoxFile createFile(String parentId, String name, Calendar created, InputStream data) throws BoxException,
                                                                                       NotFoundException,
-                                                                                      RefreshAccessException {
+                                                                                      RefreshAccessException,
+                                                                                      ConflictException {
     try {
       // TODO You can optionally specify a Content-MD5 header with the SHA1 hash of the file to ensure that
       // the file is not corrupted in transit.
@@ -722,6 +806,8 @@ public class BoxAPI {
       obj.setLocalFileCreatedAt(created.getTime());
       obj.put("created_at", formatDate(created));
       return client.getFilesManager().uploadFile(obj);
+    } catch (BoxJSONException e) {
+      throw new BoxException("Error uploading file: " + e.getMessage(), e);
     } catch (UnsupportedEncodingException e) {
       throw new BoxException("Error uploading file: " + e.getMessage(), e);
     } catch (BoxRestException e) {
@@ -735,14 +821,11 @@ public class BoxAPI {
         throw new NotFoundException("The user doesn’t have access to upload a file " + name, e);
       } else if (status == 409) {
         // conflict - the same name file exists
-        throw new NotFoundException("File with the same name as creating already exists " + name, e);
+        throw new ConflictException("File with the same name as creating already exists " + name, e);
       }
       throw new BoxException("Error uploading file: " + e.getMessage(), e);
     } catch (AuthFatalFailureException e) {
-      if (e.isCallerResponsibleForFix()) {
-        // we need new access token (refresh token already expired here)
-        throw new RefreshAccessException("Authentication failure. Reauthenticate.");
-      }
+      checkTokenState();
       throw new BoxException("Authentication error when uploading file: " + e.getMessage(), e);
     } catch (InterruptedException e) {
       Thread.currentThread().interrupt();
@@ -752,7 +835,8 @@ public class BoxAPI {
 
   BoxFolder createFolder(String parentId, String name, Calendar created) throws BoxException,
                                                                         NotFoundException,
-                                                                        RefreshAccessException {
+                                                                        RefreshAccessException,
+                                                                        ConflictException {
     try {
       BoxFolderRequestObject obj = BoxFolderRequestObject.createFolderRequestObject(name, parentId);
       obj.put("created_at", formatDate(created));
@@ -768,14 +852,11 @@ public class BoxAPI {
         throw new NotFoundException("The user doesn’t have access to create a folder " + name, e);
       } else if (status == 409) {
         // conflict - the same name file exists
-        throw new NotFoundException("File with the same name as creating already exists " + name, e);
+        throw new ConflictException("File with the same name as creating already exists " + name, e);
       }
       throw new BoxException("Error creating folder: " + e.getMessage(), e);
     } catch (AuthFatalFailureException e) {
-      if (e.isCallerResponsibleForFix()) {
-        // we need new access token (refresh token already expired here)
-        throw new RefreshAccessException("Authentication failure. Reauthenticate.");
-      }
+      checkTokenState();
       throw new BoxException("Authentication error when creating folder: " + e.getMessage(), e);
     }
   }
@@ -791,7 +872,7 @@ public class BoxAPI {
    */
   void deleteFile(String id) throws BoxException, NotFoundException, RefreshAccessException {
     try {
-      BoxFileRequestObject obj = BoxFileRequestObject.deleteFileRequestObject();
+      BoxDefaultRequestObject obj = new BoxDefaultRequestObject();
       // obj.setIfMatch(etag); // // TODO use it!
       client.getFilesManager().deleteFile(id, obj);
     } catch (BoxRestException e) {
@@ -806,10 +887,7 @@ public class BoxAPI {
       }
       throw new BoxException("Error deleting file: " + e.getMessage(), e);
     } catch (AuthFatalFailureException e) {
-      if (e.isCallerResponsibleForFix()) {
-        // we need new access token (refresh token already expired here)
-        throw new RefreshAccessException("Authentication failure. Reauthenticate.");
-      }
+      checkTokenState();
       throw new BoxException("Authentication error when deleting file: " + e.getMessage(), e);
     }
   }
@@ -826,7 +904,7 @@ public class BoxAPI {
    */
   void deleteFolder(String id) throws BoxException, NotFoundException, RefreshAccessException {
     try {
-      BoxFolderRequestObject obj = BoxFolderRequestObject.deleteFolderRequestObject(true);
+      BoxFolderDeleteRequestObject obj = BoxFolderDeleteRequestObject.deleteFolderRequestObject(true);
       // obj.setIfMatch(etag); // TODO use it!
       client.getFoldersManager().deleteFolder(id, obj);
     } catch (BoxRestException e) {
@@ -841,10 +919,7 @@ public class BoxAPI {
       }
       throw new BoxException("Error deleting folder: " + e.getMessage(), e);
     } catch (AuthFatalFailureException e) {
-      if (e.isCallerResponsibleForFix()) {
-        // we need new access token (refresh token already expired here)
-        throw new RefreshAccessException("Authentication failure. Reauthenticate.");
-      }
+      checkTokenState();
       throw new BoxException("Authentication error when deleting folder: " + e.getMessage(), e);
     }
   }
@@ -867,14 +942,14 @@ public class BoxAPI {
                               NotFoundException,
                               RefreshAccessException {
     try {
-      BoxFileRequestObject deleteObj = BoxFileRequestObject.deleteFileRequestObject();
+      BoxDefaultRequestObject deleteObj = new BoxDefaultRequestObject();
       // deleteObj.setIfMatch(etag); // TODO use it!
       client.getFilesManager().deleteFile(id, deleteObj);
 
       // check if file actually removed or in the trash
       try {
         BoxDefaultRequestObject trashObj = new BoxDefaultRequestObject();
-        return client.getFilesManager().getTrashFile(id, trashObj);
+        return client.getTrashManager().getTrashFile(id, trashObj);
       } catch (BoxRestException e) {
         throw new BoxException("Error reading trashed file: " + e.getMessage(), e);
       } catch (BoxServerException e) {
@@ -899,10 +974,7 @@ public class BoxAPI {
       }
       throw new BoxException("Error trashing file: " + e.getMessage(), e);
     } catch (AuthFatalFailureException e) {
-      if (e.isCallerResponsibleForFix()) {
-        // we need new access token (refresh token already expired here)
-        throw new RefreshAccessException("Authentication failure. Reauthenticate.");
-      }
+      checkTokenState();
       throw new BoxException("Authentication error when trashing file: " + e.getMessage(), e);
     }
   }
@@ -925,14 +997,14 @@ public class BoxAPI {
                                   NotFoundException,
                                   RefreshAccessException {
     try {
-      BoxFolderRequestObject deleteObj = BoxFolderRequestObject.deleteFolderRequestObject(true);
+      BoxFolderDeleteRequestObject deleteObj = BoxFolderDeleteRequestObject.deleteFolderRequestObject(true);
       // deleteObj.setIfMatch(etag); // TODO use it!
       client.getFoldersManager().deleteFolder(id, deleteObj);
 
       // check if file actually removed or in the trash
       try {
         BoxDefaultRequestObject trashObj = new BoxDefaultRequestObject();
-        return client.getFoldersManager().getTrashFolder(id, trashObj);
+        return client.getTrashManager().getTrashFolder(id, trashObj);
       } catch (BoxRestException e) {
         throw new BoxException("Error reading trashed foler: " + e.getMessage(), e);
       } catch (BoxServerException e) {
@@ -957,18 +1029,21 @@ public class BoxAPI {
       }
       throw new BoxException("Error trashing foler: " + e.getMessage(), e);
     } catch (AuthFatalFailureException e) {
-      if (e.isCallerResponsibleForFix()) {
-        // we need new access token (refresh token already expired here)
-        throw new RefreshAccessException("Authentication failure. Reauthenticate.");
-      }
+      checkTokenState();
       throw new BoxException("Authentication error when trashing foler: " + e.getMessage(), e);
     }
   }
 
-  BoxFile untrashFile(String id) throws BoxException, NotFoundException, RefreshAccessException {
+  BoxFile untrashFile(String id, String name) throws BoxException,
+                                NotFoundException,
+                                RefreshAccessException,
+                                ConflictException {
     try {
       BoxItemRestoreRequestObject obj = BoxItemRestoreRequestObject.restoreItemRequestObject();
-      return client.getFilesManager().restoreTrashFile(id, obj);
+      if (name != null) {
+        obj.setNewName(name);
+      }
+      return client.getTrashManager().restoreTrashFile(id, obj);
     } catch (BoxRestException e) {
       throw new BoxException("Error untrashing file: " + e.getMessage(), e);
     } catch (BoxServerException e) {
@@ -981,22 +1056,25 @@ public class BoxAPI {
         throw new NotFoundException("File not in the trash " + id, e);
       } else if (status == 409) {
         // conflict
-        throw new NotFoundException("File with the same name as untrashed already exists " + id, e);
+        throw new ConflictException("File with the same name as untrashed already exists " + id, e);
       }
       throw new BoxException("Error untrashing file: " + e.getMessage(), e);
     } catch (AuthFatalFailureException e) {
-      if (e.isCallerResponsibleForFix()) {
-        // we need new access token (refresh token already expired here)
-        throw new RefreshAccessException("Authentication failure. Reauthenticate.");
-      }
+      checkTokenState();
       throw new BoxException("Authentication error when untrashing file: " + e.getMessage(), e);
     }
   }
 
-  BoxFolder untrashFolder(String id) throws BoxException, NotFoundException, RefreshAccessException {
+  BoxFolder untrashFolder(String id, String name) throws BoxException,
+                                                 NotFoundException,
+                                                 RefreshAccessException,
+                                                 ConflictException {
     try {
       BoxItemRestoreRequestObject obj = BoxItemRestoreRequestObject.restoreItemRequestObject();
-      return client.getFoldersManager().restoreTrashFolder(id, obj);
+      if (name != null) {
+        obj.setNewName(name);
+      }
+      return client.getTrashManager().restoreTrashFolder(id, obj);
     } catch (BoxRestException e) {
       throw new BoxException("Error untrashing folder: " + e.getMessage(), e);
     } catch (BoxServerException e) {
@@ -1009,14 +1087,11 @@ public class BoxAPI {
         throw new NotFoundException("Folder not in the trash " + id, e);
       } else if (status == 409) {
         // conflict
-        throw new NotFoundException("Folder with the same name as untrashed already exists " + id, e);
+        throw new ConflictException("Folder with the same name as untrashed already exists " + id, e);
       }
       throw new BoxException("Error untrashing folder: " + e.getMessage(), e);
     } catch (AuthFatalFailureException e) {
-      if (e.isCallerResponsibleForFix()) {
-        // we need new access token (refresh token already expired here)
-        throw new RefreshAccessException("Authentication failure. Reauthenticate.");
-      }
+      checkTokenState();
       throw new BoxException("Authentication error when untrashing folder: " + e.getMessage(), e);
     }
   }
@@ -1036,10 +1111,12 @@ public class BoxAPI {
    * @throws BoxException
    * @throws NotFoundException
    * @throws RefreshAccessException
+   * @throws ConflictException
    */
   BoxFile updateFile(String parentId, String id, String name, Calendar modified) throws BoxException,
                                                                                 NotFoundException,
-                                                                                RefreshAccessException {
+                                                                                RefreshAccessException,
+                                                                                ConflictException {
 
     BoxFile existing = readFile(id);
     int attemts = 0;
@@ -1050,7 +1127,7 @@ public class BoxAPI {
       try {
         // if name of parent changed - we do actual update, we ignore modified date changes
         // otherwise, if name the same, Box service will respond with error 409 (conflict)
-        BoxFileRequestObject obj = BoxFileRequestObject.updateFileRequestObject();
+        BoxFileRequestObject obj = BoxFileRequestObject.getRequestObject();
         // obj.setIfMatch(etag); // TODO use it
         if (nameChanged) {
           obj.setName(name);
@@ -1077,17 +1154,14 @@ public class BoxAPI {
             nameChanged = !existing.getName().equals(name);
             parentChanged = !existing.getParent().getId().equals(parentId);
           } else {
-            throw new NotFoundException("File with the same name as updated already exists " + id);
+            throw new ConflictException("File with the same name as updated already exists " + id);
           }
         }
         throw new BoxException("Error updating file: " + e.getMessage(), e);
       } catch (UnsupportedEncodingException e) {
         throw new BoxException("Error updating file: " + e.getMessage(), e);
       } catch (AuthFatalFailureException e) {
-        if (e.isCallerResponsibleForFix()) {
-          // we need new access token (refresh token already expired here)
-          throw new RefreshAccessException("Authentication failure. Reauthenticate.");
-        }
+        checkTokenState();
         throw new BoxException("Authentication error when updating file: " + e.getMessage(), e);
       }
     }
@@ -1105,6 +1179,8 @@ public class BoxAPI {
       obj.setLocalFileLastModifiedAt(modified.getTime());
       obj.put("modified_at", formatDate(modified));
       return client.getFilesManager().uploadNewVersion(id, obj);
+    } catch (BoxJSONException e) {
+      throw new BoxException("Error uploading new version of file: " + e.getMessage(), e);
     } catch (BoxRestException e) {
       throw new BoxException("Error uploading new version of file: " + e.getMessage(), e);
     } catch (BoxServerException e) {
@@ -1117,10 +1193,7 @@ public class BoxAPI {
     } catch (UnsupportedEncodingException e) {
       throw new BoxException("Error uploading new version of file: " + e.getMessage(), e);
     } catch (AuthFatalFailureException e) {
-      if (e.isCallerResponsibleForFix()) {
-        // we need new access token (refresh token already expired here)
-        throw new RefreshAccessException("Authentication failure. Reauthenticate.");
-      }
+      checkTokenState();
       throw new BoxException("Authentication error when uploading new version of file: " + e.getMessage(), e);
     } catch (InterruptedException e) {
       Thread.currentThread().interrupt();
@@ -1142,10 +1215,12 @@ public class BoxAPI {
    * @throws BoxException
    * @throws NotFoundException
    * @throws RefreshAccessException
+   * @throws ConflictException
    */
   BoxFolder updateFolder(String parentId, String id, String name, Calendar modified) throws BoxException,
                                                                                     NotFoundException,
-                                                                                    RefreshAccessException {
+                                                                                    RefreshAccessException,
+                                                                                    ConflictException {
     BoxFolder existing = readFolder(id);
     int attemts = 0;
     boolean nameChanged = !existing.getName().equals(name);
@@ -1175,17 +1250,14 @@ public class BoxAPI {
             nameChanged = !existing.getName().equals(name);
             parentChanged = !existing.getParent().getId().equals(parentId);
           } else {
-            throw new NotFoundException("Folder with the same name as updated already exists " + id);
+            throw new ConflictException("Folder with the same name as updated already exists " + id);
           }
         }
         throw new BoxException("Error updating folder: " + e.getMessage(), e);
       } catch (UnsupportedEncodingException e) {
         throw new BoxException("Error updating folder: " + e.getMessage(), e);
       } catch (AuthFatalFailureException e) {
-        if (e.isCallerResponsibleForFix()) {
-          // we need new access token (refresh token already expired here)
-          throw new RefreshAccessException("Authentication failure. Reauthenticate.");
-        }
+        checkTokenState();
         throw new BoxException("Authentication error when updating folder: " + e.getMessage(), e);
       }
     }
@@ -1206,10 +1278,7 @@ public class BoxAPI {
       }
       throw new BoxException("Error reading file: " + e.getMessage(), e);
     } catch (AuthFatalFailureException e) {
-      if (e.isCallerResponsibleForFix()) {
-        // we need new access token (refresh token already expired here)
-        throw new RefreshAccessException("Authentication failure. Reauthenticate.");
-      }
+      checkTokenState();
       throw new BoxException("Authentication error when reading file: " + e.getMessage(), e);
     }
   }
@@ -1227,10 +1296,7 @@ public class BoxAPI {
       }
       throw new BoxException("Error reading folder: " + e.getMessage(), e);
     } catch (AuthFatalFailureException e) {
-      if (e.isCallerResponsibleForFix()) {
-        // we need new access token (refresh token already expired here)
-        throw new RefreshAccessException("Authentication failure. Reauthenticate.");
-      }
+      checkTokenState();
       throw new BoxException("Authentication error when reading folder: " + e.getMessage(), e);
     }
   }
@@ -1243,7 +1309,7 @@ public class BoxAPI {
    * @param e {@link BoxServerException}
    * @return int
    */
-  int getErrorStatus(BoxServerException e) {
+  private int getErrorStatus(BoxServerException e) {
     BoxServerError se = e.getError();
     if (se != null) {
       int status = se.getStatus();
@@ -1252,5 +1318,17 @@ public class BoxAPI {
       }
     }
     return e.getStatusCode();
+  }
+
+  /**
+   * Check if need new access token from user (refresh token already expired).
+   * 
+   * @throws RefreshAccessException if client failed to refresh the access token and need new new token
+   */
+  private void checkTokenState() throws RefreshAccessException {
+    if (OAuthTokenState.FAIL.equals(client.getAuthState())) {
+      // we need new access token (refresh token already expired here)
+      throw new RefreshAccessException("Authentication failure. Reauthenticate.");
+    }
   }
 }

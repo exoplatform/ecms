@@ -31,11 +31,13 @@ import org.exoplatform.clouddrive.CloudFileSynchronizer;
 import org.exoplatform.clouddrive.CloudProviderException;
 import org.exoplatform.clouddrive.CloudUser;
 import org.exoplatform.clouddrive.CommandPoolExecutor;
+import org.exoplatform.clouddrive.ConflictException;
 import org.exoplatform.clouddrive.DriveRemovedException;
 import org.exoplatform.clouddrive.FileTrashRemovedException;
 import org.exoplatform.clouddrive.NotCloudFileException;
 import org.exoplatform.clouddrive.NotConnectedException;
 import org.exoplatform.clouddrive.NotFoundException;
+import org.exoplatform.clouddrive.RefreshAccessException;
 import org.exoplatform.clouddrive.SkipSyncException;
 import org.exoplatform.clouddrive.SyncNotSupportedException;
 import org.exoplatform.clouddrive.jcr.JCRLocalCloudDrive.JCRListener.AddTrashListener;
@@ -381,7 +383,9 @@ public abstract class JCRLocalCloudDrive extends CloudDrive {
                   if (driveRoot == null) {
                     try {
                       driveRoot = session.getNodeByUUID(rootUUID);
-                      LOG.info("Cloud Drive trashed " + path); // TODO cleanup
+                      if (LOG.isDebugEnabled()) {
+                        LOG.debug("Cloud Drive trashed " + path);
+                      }
                     } catch (ItemNotFoundException e) {
                       // node already deleted
                       LOG.warn("Cloud Drive " + title() + " node already removed directly from JCR: "
@@ -480,7 +484,9 @@ public abstract class JCRLocalCloudDrive extends CloudDrive {
               }
 
               if (event.getType() == Event.NODE_REMOVED) {
-                LOG.info("Cloud file removed " + eventPath); // TODO cleanup
+                if (LOG.isDebugEnabled()) {
+                  LOG.debug("Cloud file removed " + eventPath);
+                }
                 // Removal should be initiated by initRemove() before this event happening and in the same
                 // thread.
                 // For direct JCR removals this should be done by RemoveCloudFileAction. Then this removal
@@ -500,12 +506,15 @@ public abstract class JCRLocalCloudDrive extends CloudDrive {
                 } // otherwise it's not removal (may be a move or ordering)
               } else {
                 if (event.getType() == Event.NODE_ADDED) {
-                  // TODO info -> debug
-                  LOG.info("Cloud file added. User: " + event.getUserID() + ". Path: " + eventPath);
+                  if (LOG.isDebugEnabled()) {
+                    LOG.debug("Cloud file added. User: " + event.getUserID() + ". Path: " + eventPath);
+                  }
                   changes.add(new FileChange(eventPath, FileChange.CREATE));
                 } else if (event.getType() == Event.PROPERTY_CHANGED) {
-                  // TODO info -> debug
-                  LOG.info("Cloud file property changed. User: " + event.getUserID() + ". Path: " + eventPath);
+                  if (LOG.isDebugEnabled()) {
+                    LOG.debug("Cloud file property changed. User: " + event.getUserID() + ". Path: "
+                        + eventPath);
+                  }
                   changes.add(new FileChange(eventPath, FileChange.UPDATE));
                 } // otherwise, we skip the event
               }
@@ -530,7 +539,13 @@ public abstract class JCRLocalCloudDrive extends CloudDrive {
       public void onError(CloudDriveEvent event, Throwable error, String operationName) {
         // act on file sync errors only
         if (operationName.equals(SyncFilesCommand.NAME)) {
-          LOG.error("Error running " + operationName + " in drive " + title(), error);
+          if (error instanceof RefreshAccessException) {
+            Throwable cause = error.getCause();
+            LOG.error("Error running " + operationName + " in drive " + title() + ". " + error.getMessage()
+                + (cause != null ? ". " + cause.getMessage() : ""));
+          } else {
+            LOG.error("Error running " + operationName + " in drive " + title(), error);
+          }
         }
       }
     }
@@ -1647,6 +1662,22 @@ public abstract class JCRLocalCloudDrive extends CloudDrive {
       }
     }
 
+    private void fixNameConflict(Node file) throws RepositoryException {
+      Session session = file.getSession();
+      Node parent = file.getParent();
+      String baseTitle = fileAPI.getTitle(file);
+      int index = 1;
+      do {
+        String newTitle = baseTitle + " (" + index++ + ")";
+        String newName = cleanName(newTitle);
+        if (!parent.hasNode(newName)) {
+          session.move(file.getPath(), parent.getPath() + "/" + newName);
+          file.setProperty("exo:title", newTitle);
+          break;
+        }
+      } while (true);
+    }
+
     private void untrash(Node file) throws SkipSyncException,
                                    SyncNotSupportedException,
                                    CloudDriveException,
@@ -1659,7 +1690,18 @@ public abstract class JCRLocalCloudDrive extends CloudDrive {
 
       begin();
 
-      synchronizer(file).untrash(file, fileAPI);
+      // we do in a loop to handle name conflicts (by renaming the file)
+      do {
+        try {
+          synchronizer(file).untrash(file, fileAPI);
+          break;
+        } catch (ConflictException e) {
+          // if untrash conflicted, it's the same name already in use and we guess a new name for the
+          // untrashed
+          fixNameConflict(file);
+        }
+      } while (true);
+
       file.setProperty("ecd:trashed", (String) null); // clean the marker set in AddTrashListener
     }
 
@@ -1680,7 +1722,16 @@ public abstract class JCRLocalCloudDrive extends CloudDrive {
         // as the ECMS uses another name format for JCR nodes.
         // April 22, this problem solved by searching by file id in sync algo.
 
-        synchronizer(file).update(file, fileAPI);
+        // we do in a loop to handle name conflicts (by renaming the file)
+        do {
+          try {
+            synchronizer(file).update(file, fileAPI);
+            break;
+          } catch (ConflictException e) {
+            // if update conflicted, it's the same name already in use and we guess a new name for the updated
+            fixNameConflict(file);
+          }
+        } while (true);
 
         addUpdated(fileId);
       } // else, we skip a change of already listed for update file

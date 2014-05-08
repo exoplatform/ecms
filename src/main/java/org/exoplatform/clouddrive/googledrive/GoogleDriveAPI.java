@@ -1041,5 +1041,4 @@ class GoogleDriveAPI implements DataStoreFactory {
     }
     return false;
   }
-
 }

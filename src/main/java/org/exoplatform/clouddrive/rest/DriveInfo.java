@@ -22,6 +22,7 @@ import org.exoplatform.clouddrive.CloudFile;
 import org.exoplatform.clouddrive.CloudProvider;
 import org.exoplatform.clouddrive.CloudProviderException;
 import org.exoplatform.clouddrive.DriveRemovedException;
+import org.exoplatform.clouddrive.RefreshAccessException;
 
 import java.util.ArrayList;
 import java.util.Collection;
@@ -80,7 +81,8 @@ public class DriveInfo {
 
   static DriveInfo create(CloudDrive drive, Collection<CloudFile> files, Collection<String> removed) throws DriveRemovedException,
                                                                                                     CloudProviderException,
-                                                                                                    RepositoryException {
+                                                                                                    RepositoryException,
+                                                                                                    RefreshAccessException {
     Map<String, CloudFile> driveFiles = new HashMap<String, CloudFile>();
     for (CloudFile cf : files) {
       driveFiles.put(cf.getPath(), cf);
@@ -98,13 +100,15 @@ public class DriveInfo {
 
   static DriveInfo create(CloudDrive drive, Collection<CloudFile> files) throws DriveRemovedException,
                                                                         CloudProviderException,
-                                                                        RepositoryException {
+                                                                        RepositoryException,
+                                                                        RefreshAccessException {
     return create(drive, files, new HashSet<String>());
   }
 
   static DriveInfo create(CloudDrive drive) throws DriveRemovedException,
                                            CloudProviderException,
-                                           RepositoryException {
+                                           RepositoryException,
+                                           RefreshAccessException {
     return create(drive, new ArrayList<CloudFile>(), new HashSet<String>());
   }
 

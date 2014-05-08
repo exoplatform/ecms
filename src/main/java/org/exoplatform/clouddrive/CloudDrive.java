@@ -316,6 +316,7 @@ public abstract class CloudDrive {
    *         service not supported.
    */
   public abstract String getChangesLink() throws DriveRemovedException,
+                                         RefreshAccessException,
                                          CloudProviderException,
                                          RepositoryException;
 
@@ -326,6 +327,7 @@ public abstract class CloudDrive {
    * 
    */
   public abstract void updateChangesLink() throws DriveRemovedException,
+                                          RefreshAccessException,
                                           CloudProviderException,
                                           RepositoryException;
 
@@ -463,6 +465,7 @@ public abstract class CloudDrive {
                                        DriveRemovedException,
                                        CloudDriveException,
                                        RepositoryException;
+
   /**
    * Answers if drive is connected.
    * 

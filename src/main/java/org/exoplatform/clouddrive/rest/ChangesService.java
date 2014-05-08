@@ -20,7 +20,6 @@ package org.exoplatform.clouddrive.rest;
 
 import org.exoplatform.clouddrive.CloudDrive;
 import org.exoplatform.clouddrive.CloudDrive.Command;
-import org.exoplatform.clouddrive.CloudDriveAccessException;
 import org.exoplatform.clouddrive.CloudDriveException;
 import org.exoplatform.clouddrive.CloudDriveService;
 import org.exoplatform.clouddrive.DriveRemovedException;
@@ -164,9 +163,9 @@ public class ChangesService implements ResourceContainer {
         } catch (LoginException e) {
           LOG.warn("Error login to read drive " + workspace + ":" + path + ". " + e.getMessage());
           return Response.status(Status.UNAUTHORIZED).entity("Authentication error.").build();
-        } catch(PathNotFoundException e) {
-          LOG.warn("Cannot run asynchronous syncronization for not existing node " + workspace + ":"
-              + path + ". " + e.getMessage());
+        } catch (PathNotFoundException e) {
+          LOG.warn("Cannot run asynchronous syncronization for not existing node " + workspace + ":" + path
+              + ". " + e.getMessage());
           return Response.status(Status.NOT_FOUND)
                          .entity("Synchronization canceled. " + e.getMessage())
                          .build();
@@ -226,6 +225,13 @@ public class ChangesService implements ResourceContainer {
                   } else {
                     return Response.status(Status.NOT_FOUND).entity("Changes link not provided").build();
                   }
+                } catch (RefreshAccessException e) {
+                  Throwable cause = e.getCause();
+                  LOG.warn("Access to cloud drive expired, forbidden or revoked. " + e.getMessage()
+                      + (cause != null ? ". " + cause.getMessage() : ""));
+                  // client should treat this status in special way and obtain new credentials using given
+                  // provider
+                  return Response.status(Status.FORBIDDEN).entity(local.getUser().getProvider()).build();
                 } catch (CloudDriveException e) {
                   LOG.error("Error getting changes link for drive " + workspace + ":" + path, e);
                   return Response.status(Status.INTERNAL_SERVER_ERROR)

@@ -31,6 +31,7 @@ import org.exoplatform.clouddrive.CloudFileAPI;
 import org.exoplatform.clouddrive.CloudProviderException;
 import org.exoplatform.clouddrive.CloudUser;
 import org.exoplatform.clouddrive.DriveRemovedException;
+import org.exoplatform.clouddrive.RefreshAccessException;
 import org.exoplatform.clouddrive.SyncNotSupportedException;
 import org.exoplatform.clouddrive.box.BoxAPI.EventsIterator;
 import org.exoplatform.clouddrive.box.BoxAPI.ItemsIterator;
@@ -457,7 +458,7 @@ public class JCRLocalBoxDrive extends JCRLocalCloudDrive implements UserTokenRef
      */
     @Override
     public boolean untrashFile(Node fileNode) throws CloudDriveException, RepositoryException {
-      BoxFile untrashed = api.untrashFile(fileAPI.getId(fileNode));
+      BoxFile untrashed = api.untrashFile(fileAPI.getId(fileNode), fileAPI.getTitle(fileNode));
       return !untrashed.getItemStatus().equals(BoxAPI.BOX_ITEM_STATE_TRASHED);
     }
 
@@ -466,7 +467,7 @@ public class JCRLocalBoxDrive extends JCRLocalCloudDrive implements UserTokenRef
      */
     @Override
     public boolean untrashFolder(Node folderNode) throws CloudDriveException, RepositoryException {
-      BoxFolder untrashed = api.untrashFolder(fileAPI.getId(folderNode));
+      BoxFolder untrashed = api.untrashFolder(fileAPI.getId(folderNode), fileAPI.getTitle(folderNode));
       return !untrashed.getItemStatus().equals(BoxAPI.BOX_ITEM_STATE_TRASHED);
     }
 
@@ -1163,7 +1164,10 @@ public class JCRLocalBoxDrive extends JCRLocalCloudDrive implements UserTokenRef
    * {@inheritDoc}
    */
   @Override
-  public String getChangesLink() throws DriveRemovedException, CloudProviderException, RepositoryException {
+  public String getChangesLink() throws DriveRemovedException,
+                                CloudProviderException,
+                                RepositoryException,
+                                RefreshAccessException {
     return getUser().api().getChangesLink();
   }
 
@@ -1171,7 +1175,10 @@ public class JCRLocalBoxDrive extends JCRLocalCloudDrive implements UserTokenRef
    * {@inheritDoc}
    */
   @Override
-  public void updateChangesLink() throws DriveRemovedException, CloudProviderException, RepositoryException {
+  public void updateChangesLink() throws DriveRemovedException,
+                                 CloudProviderException,
+                                 RepositoryException,
+                                 RefreshAccessException {
     getUser().api().updateChangesLink();
   }
 
@@ -1208,8 +1215,10 @@ public class JCRLocalBoxDrive extends JCRLocalCloudDrive implements UserTokenRef
     try {
       String sequenceIdStr = item.getSequenceId();
       if (sequenceIdStr != null) {
-        LOG.info(">>> initBoxItem: " + localNode.getPath() + " = " + item.getId() + " " + item.getName()
-            + " " + item.getSequenceId());
+        if (LOG.isDebugEnabled()) {
+          LOG.debug(">>> initBoxItem: " + localNode.getPath() + " = " + item.getId() + " " + item.getName()
+              + " " + item.getSequenceId());
+        }
         localNode.setProperty("box:sequenceId", Long.parseLong(sequenceIdStr));
       } // else, it's null (root or trash)
     } catch (NumberFormatException e) {
