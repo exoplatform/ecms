@@ -950,12 +950,12 @@
       <score>得分</score>
     </header>
     <title>
-      <typeASC>按文件類型降冪排序</typeASC>
-      <typeDESC>按文件類型降冪排序</typeDESC>
-      <scoreASC>按積分昇冪排序</scoreASC>
-      <scoreDESC>按分數降冪排序</scoreDESC>
-      <nameASC>按名稱昇冪排序</nameASC>
-      <nameDESC>按名稱降冪排序</nameDESC>
+      <typeASC>按文件類型升序排序</typeASC>
+      <typeDESC>按文件類型降序排序</typeDESC>
+      <scoreASC>按分數升序排序</scoreASC>
+      <scoreDESC>按分數降序排序</scoreDESC>
+      <nameASC>按名稱升序排序</nameASC>
+      <nameDESC>按名稱降序排序</nameDESC>
       <datecreatedASC>按建立日期升序排序</datecreatedASC>
       <datecreatedDESC>按建立日期降序排序</datecreatedDESC>
     </title>
@@ -981,14 +981,14 @@
       <score>得分</score>
     </header>
     <title>
-      <typeASC>按文件類型降冪排序</typeASC>
-      <typeDESC>按文件類型降冪排序</typeDESC>
-      <scoreASC>按分數昇冪排序</scoreASC>
-      <scoreDESC>按分數降冪排序</scoreDESC>
-      <nameASC>按名稱昇冪排序</nameASC>
-      <nameDESC>按名稱降冪排序</nameDESC>
-      <datecreatedASC>按建立日期昇冪排序</datecreatedASC>
-      <datecreatedDESC>按建立日期降冪排序</datecreatedDESC>
+      <typeASC>按文件類型升序排序</typeASC>
+      <typeDESC>按文件類型降序排序</typeDESC>
+      <scoreASC>按分數升序排序</scoreASC>
+      <scoreDESC>按分數降序排序</scoreDESC>
+      <nameASC>按名稱升序排序</nameASC>
+      <nameDESC>按名稱降序排序</nameDESC>
+      <datecreatedASC>按建立日期升序排序</datecreatedASC>
+      <datecreatedDESC>按建立日期降序排序</datecreatedDESC>
     </title>
     <tooltip>
       <View>View this Node</View>
@@ -1013,14 +1013,14 @@
       <AddRemoveFavourite>Add/Remove to Favorite</AddRemoveFavourite>
     </header>
     <title>
-      <typeASC>按文件類型昇冪排序</typeASC>
-      <typeDESC>按文件類型降冪排序</typeDESC>
-      <scoreASC>按分數昇冪排序</scoreASC>
-      <scoreDESC>按分數降冪排序</scoreDESC>
-      <nameASC>按名稱昇冪排序</nameASC>
-      <nameDESC>按名稱降冪排序</nameDESC>
-      <datecreatedASC>按建立日期昇冪排序</datecreatedASC>
-      <datecreatedDESC>按建立日期降冪排序</datecreatedDESC>
+      <typeASC>按文件類型升序排序</typeASC>
+      <typeDESC>按文件類型降序排序</typeDESC>
+      <scoreASC>按分數升序排序</scoreASC>
+      <scoreDESC>按分數降序排序</scoreDESC>
+      <nameASC>按名稱升序排序</nameASC>
+      <nameDESC>按名稱降序排序</nameDESC>
+      <datecreatedASC>按建立日期升序排序</datecreatedASC>
+      <datecreatedDESC>按建立日期降序排序</datecreatedDESC>
     </title>
     <tooltip>
       <View>查看此節點</View>
@@ -1030,7 +1030,7 @@
   </UIShowAllHiddenResult>
   <UIShowAllTrashResult>
     <msg>
-      <not-support>沒有此節點的視圖範本。</not-support>
+      <not-support>沒有此節點的檢視範本。</not-support>
       <empty>未找到任何結果</empty>
       <access-denied>您不能查看此節點，因為此範本不受支援，或訪問被拒絕。</access-denied>
       <query-invalid>該查詢不正確。</query-invalid>
@@ -1045,14 +1045,14 @@
       <score>得分</score>
     </header>
     <title>
-      <typeASC>按文件類型昇冪排序</typeASC>
-      <typeDESC>按文件類型降冪排序</typeDESC>
+      <typeASC>按文件類型升序排序</typeASC>
+      <typeDESC>按文件類型降序排序</typeDESC>
       <scoreASC>按分數昇冪排序</scoreASC>
-      <scoreDESC>按分數降冪排序</scoreDESC>
-      <nameASC>按名稱昇冪排序</nameASC>
-      <nameDESC>按名稱降冪排序</nameDESC>
-      <datecreatedASC>按建立日期昇冪排序</datecreatedASC>
-      <datecreatedDESC>按建立日期降冪排序</datecreatedDESC>
+      <scoreDESC>按分數降序排序</scoreDESC>
+      <nameASC>按名稱升序排序</nameASC>
+      <nameDESC>按名稱降序排序</nameDESC>
+      <datecreatedASC>按建立日期升序排序</datecreatedASC>
+      <datecreatedDESC>按建立日期降序排序</datecreatedDESC>
     </title>
     <tooltip>
       <View>查看此節點</View>
@@ -1168,7 +1168,7 @@
     <action>
       <Save>#{word.save}</Save>
       <Cancel>#{word.cancel}</Cancel>
-      <Search>搜索</Search>
+      <Search>搜尋</Search>
     </action>
     <msg>
       <!--DMS 2.4.x ECM-3566-->
@@ -1305,7 +1305,7 @@
       <nodePath>匯出的路徑</nodePath>
       <zip>Zip</zip>
       <systemView>系統檢視</systemView>
-      <documentView>文件視圖</documentView>
+      <documentView>文件檢視</documentView>
     </label>
     <action>
       <Cancel>#{word.cancel}</Cancel>
@@ -1352,7 +1352,7 @@
     </msg>
     <action>
       <close>#{word.close}</close>
-      <close-view>關閉視圖</close-view>
+      <close-view>關閉檢視</close-view>
     </action>
   </UIVersionInfo>
   <!--
@@ -1378,7 +1378,7 @@
       <e_1024>克隆</e_1024>
       <e_2048>更新</e_2048>
       <e_4096>匯入</e_4096>
-      <e_8192>登記</e_8192>
+      <e_8192>簽入</e_8192>
       <e_16384>簽出</e_16384>
       <e_32768>還原</e_32768>
       <e_65536>合併</e_65536>
@@ -1565,7 +1565,7 @@
     </action>
     <tab>
       <label>
-        <UICategoriesAddedList>引用的類別</UICategoriesAddedList>
+        <UICategoriesAddedList>參考的類別</UICategoriesAddedList>
         <UIOneNodePathSelector>選擇類別</UIOneNodePathSelector>
       </label>
     </tab>
@@ -1669,8 +1669,8 @@
   <UISelectDocumentForm>
     <label>
       <selectTemplate>從下面的清單中選擇您的範本</selectTemplate>
-      <ThumbnailView>縮略圖視圖</ThumbnailView>
-      <ListView>清單視圖</ListView>
+      <ThumbnailView>縮圖檢視</ThumbnailView>
+      <ListView>清單檢視</ListView>
       <Cancel>#{word.cancel}</Cancel>
     </label>
   </UISelectDocumentForm>
