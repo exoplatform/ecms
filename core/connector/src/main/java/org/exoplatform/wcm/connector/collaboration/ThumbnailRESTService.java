@@ -37,6 +37,7 @@ import javax.ws.rs.PathParam;
 import javax.ws.rs.core.Response;
 
 import org.exoplatform.container.component.ComponentPlugin;
+import org.exoplatform.ecm.utils.text.Text;
 import org.exoplatform.services.cms.link.LinkManager;
 import org.exoplatform.services.cms.link.NodeFinder;
 import org.exoplatform.services.cms.thumbnail.ThumbnailPlugin;
@@ -47,7 +48,6 @@ import org.exoplatform.services.jcr.core.ManageableRepository;
 import org.exoplatform.services.jcr.ext.app.SessionProviderService;
 import org.exoplatform.services.jcr.ext.common.SessionProvider;
 import org.exoplatform.services.jcr.impl.core.NodeImpl;
-import org.exoplatform.services.jcr.util.Text;
 import org.exoplatform.services.rest.resource.ResourceContainer;
 import org.exoplatform.services.wcm.utils.WCMCoreUtils;
 import org.exoplatform.services.log.ExoLogger;
