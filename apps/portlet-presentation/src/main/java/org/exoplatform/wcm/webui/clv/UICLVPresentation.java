@@ -381,13 +381,13 @@ public class UICLVPresentation extends UIContainer {
       Node content = node.getNode("jcr:content");
       if (content.hasProperty("dc:description")) {
         try {
-          desc = content.getProperty("dc:description").getValues()[0].getString();
+          desc = ContentReader.getXSSCompatibilityContent(content.getProperty("dc:description").getValues()[0].getString());
         } catch (Exception ex) {
           return null;
         }
       }
     }
-    return ContentReader.getXSSCompatibilityContent(desc);
+    return desc;
   }
   public static String getInlineEditingField(Node orgNode, String propertyName, String defaultValue, String inputType,
       String idGenerator, String cssClass, boolean isGenericProperty, String... arguments) throws Exception {
