@@ -1,0 +1,439 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+
+    Copyright (C) 2009 eXo Platform SAS.
+    
+    This is free software; you can redistribute it and/or modify it
+    under the terms of the GNU Lesser General Public License as
+    published by the Free Software Foundation; either version 2.1 of
+    the License, or (at your option) any later version.
+    
+    This software is distributed in the hope that it will be useful,
+    but WITHOUT ANY WARRANTY; without even the implied warranty of
+    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the GNU
+    Lesser General Public License for more details.
+    
+    You should have received a copy of the GNU Lesser General Public
+    License along with this software; if not, write to the Free
+    Software Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA
+    02110-1301 USA, or see the FSF site: http://www.fsf.org.
+
+-->
+<bundle>
+  <UIExoStart>
+    <tooltip>
+      <homepage>Домашня сторінка</homepage>
+    </tooltip>
+  </UIExoStart>
+
+  <UIFormInputSetWithAction>
+    <msg>
+      <confirm-delete>Ви дійсно бажаєте видалити цей елемент?</confirm-delete>
+    </msg>
+  </UIFormInputSetWithAction>
+
+  <Drives>
+    <label>
+      <ManagedSites>Керування сайтами</ManagedSites>
+      <SharedSite>Сайт спільного користування</SharedSite>
+    </label>
+  </Drives>
+
+  <Views>
+    <label>
+      <wcm-view>Веб</wcm-view>
+      <admin-view>Адміністратор</admin-view>
+      <icon-view>Піктограми</icon-view>
+      <thumbails-view>Ескізи</thumbails-view>
+      <list-view>Список</list-view>
+      <authoring-view>Авторська розробка</authoring-view>
+      <wcm-category-view>Категорії</wcm-category-view>
+      <file-view>Вид управління файлами</file-view>
+    </label>
+  </Views>
+
+  <UIActionBar>
+    <obtion>
+      <Publication>Публікація</Publication>
+      <System>Система</System>
+    </obtion>
+  </UIActionBar>
+
+  <UIPageSelectorPanel>
+    <header>
+      <path>Шлях</path>
+      <action>#{word.action}</action>
+    </header>
+    <msg>
+      <child-not-found>Сторінка не знайдена.</child-not-found>
+    </msg>
+    <title>
+      <select>Виберіть</select>
+    </title>
+  </UIPageSelectorPanel>
+
+  <UIContentDialogFormPopupWindow>
+    <title>
+      <UIContentDialogPreference>Налаштування Веб-контенту</UIContentDialogPreference>
+    </title>
+  </UIContentDialogFormPopupWindow>
+
+  <UITabPane>
+    <title>
+      <UIContentBrowsePanelOne>Огляд контента</UIContentBrowsePanelOne>
+      <UIContentBrowsePanelMulti>Огляд контента</UIContentBrowsePanelMulti>
+      <UIContentBrowsePanelFolder>Огляд папок</UIContentBrowsePanelFolder>
+      <UIContentSearchForm>Форма пошуку контенту</UIContentSearchForm>
+      <UIContentSearchResult>Результат пошуку</UIContentSearchResult>
+      <UIContentViewer>Попередній перегляд контенту</UIContentViewer>
+      <WebContentMetadataPopup>Вибір властивості</WebContentMetadataPopup>
+      <WebContentNodeTypePopup>Вибір типу вузла</WebContentNodeTypePopup>
+      <UIPermissionManager>Керування правом доступа</UIPermissionManager>
+    </title>
+  </UITabPane>
+
+  <UIContentBrowsePanelOne>
+    <selectBoxValues>
+      <FilterBy>Фільтрувати за</FilterBy>
+      <WebContent>Веб-контент</WebContent>
+      <DMSDocument>Документ</DMSDocument>
+      <Media>Медіа</Media>
+    </selectBoxValues>
+    <msg>
+      <node-checkout>Вузол узято на редагування. Будь ласка, перевірте вузол, перш ніж виконувати цю функцію.</node-checkout>
+    </msg>
+  </UIContentBrowsePanelOne>
+
+  <UIContentBrowsePanelMulti>
+    <selectBoxValues>
+      <FilterBy>Фільтрувати за</FilterBy>
+      <WebContent>Веб-контент</WebContent>
+      <DMSDocument>Документ</DMSDocument>
+      <Media>Media</Media>
+    </selectBoxValues>
+  </UIContentBrowsePanelMulti>
+
+  <UIContentBrowsePanelOne>
+    <label>
+      <LeftColumn>Виберіть папку, щоб відобразити її дочерні елементи в якості вмісту.</LeftColumn>
+      <RightColumn>Можна вибрати контент поданий  нижче.</RightColumn>
+    </label>
+  </UIContentBrowsePanelOne>
+
+  <UIContentBrowsePanelMulti>
+    <label>
+      <LeftColumn>Виберіть папку, щоб відобразити її дочерні елементи в якості вмісту.</LeftColumn>
+      <RightColumn>Можна вибрати контент поданий  нижче.</RightColumn>
+    </label>
+  </UIContentBrowsePanelMulti>
+
+  <UIContentBrowsePanelFolder>
+    <label>
+      <LeftColumn>Виберіть папку, щоб відобразити її дочерні елементи в якості вмісту.</LeftColumn>
+      <RightColumn>Можна вибрати папку нижче.</RightColumn>
+    </label>
+  </UIContentBrowsePanelFolder>
+
+  <UISelectedContentGrid>
+    <label>
+      <name>#{word.name}</name>
+      <add>Додати</add>
+      <delete>Видалити</delete>
+    </label>
+    <msg>
+      <no-content-found>Контент не знайдено.</no-content-found>
+      <non-content>Ви не вибрали контент.</non-content>
+    </msg>
+  </UISelectedContentGrid>
+
+  <UICLVContentSelectedGrid>
+    <action>
+      <SaveCategories>#{word.save}</SaveCategories>
+      <Cancel>#{word.cancel}</Cancel>
+    </action>
+  </UICLVContentSelectedGrid>
+
+  <UIContentBrowsePathSelector>
+    <header>
+      <name>#{word.name}</name>
+      <publicationstate>Стан публікації</publicationstate>
+      <action>Дія</action>
+    </header>
+    <msg>
+      <child-not-found>Контент не знайдено</child-not-found>
+    </msg>
+  </UIContentBrowsePathSelector>
+
+  <UIContentBrowsePathSelectorFolder>
+    <header>
+      <name>#{word.name}</name>
+      <publicationstate>Стан публікації</publicationstate>
+      <action>Дія</action>
+    </header>
+    <msg>
+      <child-not-found>Папка не знайдена</child-not-found>
+    </msg>
+  </UIContentBrowsePathSelectorFolder>
+
+  <UIContentSearchForm>
+    <title>
+      <Location>Ім'я сайту</Location>
+      <SearchByName>Пошук за іменем</SearchByName>
+      <Fulltext>Слово або фраза в контексті</Fulltext>
+      <Property>Властивість</Property>
+      <Contain>Містить</Contain>
+      <FromDate>Дата Від</FromDate>
+      <ToDate>Дата До</ToDate>
+      <DocumentType>Тип документа</DocumentType>
+    </title>
+    <tooltip>
+      <AddMetadataType>Додати властивість</AddMetadataType>
+      <AddNodeType>Додати тип вузла</AddNodeType>
+    </tooltip>    
+    <label>
+      <option>
+        <CREATED>Створено</CREATED>
+        <MODIFIED>Змінено</MODIFIED>
+      </option>
+    </label>
+    <action>
+      <SearchWebContent>Пошук</SearchWebContent>
+    </action>
+    <msg>
+      <time-to-late>Задовгий час пошуку.</time-to-late>
+      <empty-field>Будь ласка, введіть припустиме ключове слово для пошуку.</empty-field>
+      <invalid-format>Неприпустимий формат дата/час у поля "{0}".</invalid-format>
+      <invalid-date>"Дата До" повинна бути пізніше ніж "Дата Від"</invalid-date>
+      <invalid-nodeType>Вузол типу "{0}" є неприпустимим. Будь ласка, перевірте ще раз.</invalid-nodeType>
+      <invalid-keyword>Невірне ключове слово. Деякі символи не розпізнані.</invalid-keyword>
+    </msg>
+  </UIContentSearchForm>
+
+  <WebContentMetadataPopup>
+    <title>
+      <UIContentPropertySelector>Вибір властивості</UIContentPropertySelector>
+    </title>
+  </WebContentMetadataPopup>
+
+  <UIContentPropertySelector>
+    <action>
+      <Add>Додати</Add>
+      <Cancel>#{word.cancel}</Cancel>
+    </action>
+    <label>
+      <metadataType>Тип метаданих</metadataType>
+      <property_select>Властивість</property_select>
+    </label>
+  </UIContentPropertySelector>
+
+  <WebContentNodeTypePopup>
+    <title>
+      <UIContentNodeTypeSelector>Вибір типу вузла</UIContentNodeTypeSelector>
+    </title>
+  </WebContentNodeTypePopup>
+
+  <UIContentNodeTypeSelector>
+    <action>
+      <Save>#{word.save}</Save>
+      <Cancel>#{word.cancel}</Cancel>
+    </action>
+  </UIContentNodeTypeSelector>
+
+  <UIContentSearchResult>
+    <header>
+      <title>Назва</title>
+      <score>Оцінка</score>
+      <publicationstate>Стан публікації</publicationstate>
+      <action>Дія</action>
+    </header>
+    <title>
+      <Select>Виберіть</Select>
+      <View>Перегляд</View>
+    </title>
+    <msg>
+    <template-not-support>Не вдається попередньо переглянути цей контент. Шаблон не підтримується</template-not-support>
+    </msg>
+  </UIContentSearchResult>
+
+  <UIContentDialogForm>
+    <action>
+      <SaveDraft>Зберегти чернетку</SaveDraft>
+      <FastPublish>Швидко опублікувати</FastPublish>
+      <Preferences>Налаштування</Preferences>
+      <Close>#{word.close}</Close>
+    </action>
+    <msg>
+      <access-denied>у вас немає права доступу на додавання категорій до цього документа.</access-denied>
+      <exception>Сталася помилка під час додавання категорії до цього документа.</exception>
+      <non-categories>Невірні категорії. Будь ласка, виберіть відповідні категорії.</non-categories>
+    </msg>
+  </UIContentDialogForm>
+
+  <UIPermissionManager>
+    <label>
+      <UIPermissionInputSetWithAction>Права доступу</UIPermissionInputSetWithAction>
+      <UIAccessibleCheckboxInput>Право доступу</UIAccessibleCheckboxInput>
+      <UIEditableCheckboxInput>Право на редагування</UIEditableCheckboxInput>
+    </label>
+    <action>
+      <Save>#{word.save}</Save>
+      <Clear>Очистити</Clear>
+      <title>
+        <Edit>Редагувати</Edit>
+        <Delete>Видалити</Delete>
+      </title>
+    </action>
+  </UIPermissionManager>
+
+  <UIPermissionManagerGrid>
+    <header>
+      <owner>Права доступу</owner>
+      <accessible>Доступні</accessible>
+      <editable>Редагований</editable>
+      <action>Дія</action>
+    </header>
+    <msg>
+      <confirm-delete-permission>Ви дійсно бажаєте видалити цей дозвіл?</confirm-delete-permission>
+      <no-permission-remove>Ви не маєте дозволу.</no-permission-remove>
+      <access-denied>Доступ заборонено.</access-denied>
+      <node-locked>Елемент шляху {0} або один з його дочірних елементів заблокований.</node-locked>
+      <userOrGroup-required>Потрібно вибрати користувача або групу.</userOrGroup-required>
+      <checkbox-require>Ви повинні встановити права.</checkbox-require>
+      <node-checkedin>Спочатку відмітьте.</node-checkedin>
+    </msg>
+  </UIPermissionManagerGrid>
+
+  <UIPermissionInputSetWithAction>
+    <title>
+      <SelectUser>Виберіть Користувача</SelectUser>
+      <SelectMember>Вибрати члена</SelectMember>
+      <AddAny>Додати будь-який дозвіл</AddAny>
+    </title>
+  </UIPermissionInputSetWithAction>
+
+  <UIUserSelectorPopupWindow>
+    <title>
+      <UIUserContainer>Вибір користувача</UIUserContainer>
+    </title>
+  </UIUserSelectorPopupWindow>
+
+  <UIGroupSelectorPopupWindow>
+    <title>
+      <UIGroupMemberSelector>Селектор групи</UIGroupMemberSelector>
+    </title>
+  </UIGroupSelectorPopupWindow>
+
+  <UIGroupMemberSelector>
+    <label>
+      <selectGroup>Виберіть групу</selectGroup>
+      <selectMembership>Виберіть членство</selectMembership>
+    </label>
+  </UIGroupMemberSelector>
+
+  <UIContentDialogPreference>
+    <action>
+      <Back>Назад</Back>
+    </action>
+  </UIContentDialogPreference>
+
+  <ZeroValidator>
+    <msg>
+      <Invalid-number>Нуль не прийнято в полі "{0}".</Invalid-number>
+    </msg>
+  </ZeroValidator>
+
+  <UIDropDownPageTemp>
+    <item>
+      <WCMPageConfigs>Сторінка конфігурації  WCM</WCMPageConfigs>
+      <ColumnPageConfigs>Конфігурація стовпчиків</ColumnPageConfigs>
+      <RowPageConfigs>Конфігурація рядків</RowPageConfigs>
+      <TabsPageConfigs>Конфігурація вкладок</TabsPageConfigs>
+      <MixPageConfigs>Конфігурація змішаної сторінки</MixPageConfigs>
+    </item>
+  </UIDropDownPageTemp>
+
+  <UIWizardPageSelectLayoutForm>
+    <label>
+      <SingleContentViewer>Перегляд єдиного контенту</SingleContentViewer>
+      <ContentListViewer>Перегляд списку контента</ContentListViewer>
+      <Search>Пошук</Search>
+      <Sitemap>Мапа сайту</Sitemap>
+      <TwoColumnsLayout>Макет з двома стовпцями</TwoColumnsLayout>
+      <ThreeColumnsLayout>Макет з трьома стовпчиками</ThreeColumnsLayout>
+      <TwoRowsLayout>Макет з двома рядками</TwoRowsLayout>
+      <ThreeRowsLayout>Макет з трьома рядками</ThreeRowsLayout>
+      <TwoTabsLayout>Макет з двома вкладками</TwoTabsLayout>
+      <ThreeTabsLayout>Макет з трьома вкладками</ThreeTabsLayout>
+      <TwoColumnsOneRowLayout>Макет з двома стовпчиками і одним рядком</TwoColumnsOneRowLayout>
+      <OneRowTwoColumnsLayout>Макет з одним рядком і двома стовпчиками</OneRowTwoColumnsLayout>
+      <ThreeRowsTwoColumnsLayout>Макет з трьома рядками і двома стовпчиками</ThreeRowsTwoColumnsLayout>
+    </label>
+  </UIWizardPageSelectLayoutForm>
+
+  <Signin>
+    <welcome>Вітаємо</welcome>
+    <login>Логін</login>
+    <logout>Вийти</logout>
+    <language>Змінити мову</language>
+    <register>Зареєструватися</register>
+  </Signin>
+  <UIDriveForm>
+<label>
+<wcm-category-view>перегляд за категоріями</wcm-category-view>
+<wcm-view>Перегляд WCM контенту</wcm-view>
+</label>
+  </UIDriveForm>
+  
+  <ContentSelector>
+    <title>
+      <PersonalDrives>Особисті диски</PersonalDrives>
+      <GeneralDrives>Загальні диски</GeneralDrives>
+      <GroupDrives>Диски групи</GroupDrives>
+      <Private>Приватний</Private>
+      <Public>Відкритий</Public>
+      <BackupCenter>Центр резервного копіювання</BackupCenter>
+      <CategorizedDocumentsCenter>Центр впорядкованих за категоріями документів</CategorizedDocumentsCenter>
+      <CollaborationCenter>Центр співпраці</CollaborationCenter>
+      <DigitalAssetsManagementCenter>Центр системи управління цифровими ресурсами</DigitalAssetsManagementCenter>
+      <DMSAdministration>Адміністрування DMS</DMSAdministration>
+      <DocumentsManagementCenter>Центр управління документами</DocumentsManagementCenter>
+      <LiveDocumentsCenter>Центр поточних документів</LiveDocumentsCenter>
+      <PendingDocumentsCenter>Центр документів на розгляді</PendingDocumentsCenter>
+      <RecordsManagementCenter>Центр управління записів</RecordsManagementCenter>
+      <SharedUsersSpace>Простір спільних користувачів</SharedUsersSpace>
+      <Systemfiles>Системні файли</Systemfiles>
+      <ValidationRequestsDocumentsCenter>Центр документів по затвердженню запитів</ValidationRequestsDocumentsCenter>
+      <ManagedSites>Керування сайтами</ManagedSites>
+      <SharedSite>Сайт спільного користування</SharedSite>
+    </title>
+  </ContentSelector>
+  
+  <UICategoryNavigationTargetPathPopupWindow>
+    <title>
+      <UIPageSelector>Селектор сторінок</UIPageSelector>
+    </title>
+  </UICategoryNavigationTargetPathPopupWindow>
+  
+  <UIDocumentInfo>
+    <msg>
+      <access-denied-exception>Доступ заборонено. Можливо у вас немає дозволу на читання, або вузол втрачений або змінений.</access-denied-exception>
+    </msg>
+  </UIDocumentInfo>
+  <UIPortalApplication>
+    <title>
+      <abort>Припинити</abort>
+    </title>
+  </UIPortalApplication>    
+  
+  <CategoryNavigationTemplate>
+  <label>
+  <home>Головна</home>
+  </label>
+  </CategoryNavigationTemplate>
+  
+  <Breadcrumb>
+  <label>
+  <home>Головна</home>
+  </label>  
+  </Breadcrumb>
+</bundle>

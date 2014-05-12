@@ -187,8 +187,8 @@ public class NodeLocation extends ItemLocation {
                                           (Node)session.getItem(location.getPath());
            ret.add(node);
           } catch (Exception e) {
-            if (LOG.isWarnEnabled()) {
-              LOG.warn(e.getMessage());
+            if (LOG.isDebugEnabled()) {
+              LOG.debug(e.getMessage(), e);
             }
           }
         } else {

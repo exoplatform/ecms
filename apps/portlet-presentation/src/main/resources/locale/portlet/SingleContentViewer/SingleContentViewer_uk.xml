@@ -1,0 +1,119 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<bundle>
+  <UIPresentationContainer>
+    <title>
+      <QuickEdit>Редагувати в Оглядачі Контента</QuickEdit>
+      <print>Роздрукуйте цю сторінку</print>
+      <FastPublish>Публікувати</FastPublish>
+    </title>
+    <label>
+      <draft>Чернетка</draft>
+      <print>Друкувати</print>
+    </label>
+    <msg>
+      <no-content>Вміст не знайдено.</no-content>
+      <internal-server-error>Помилка під час запиту даних з серверу.</internal-server-error>
+      <empty-title-error>Будь ласка, вкажіть нову назву.</empty-title-error>
+    </msg>
+  </UIPresentationContainer>
+  <CorrectContentSelectorPopupWindow>
+    <title>
+      <UIContentSelectorOne>Виберіть вміст</UIContentSelectorOne>
+    </title>
+  </CorrectContentSelectorPopupWindow>
+  <UISingleContentViewerPortlet>
+    <msg>
+      <AccessControlException>У вас немає дозволу на доступ до режиму Редагування.</AccessControlException>
+    </msg>
+  </UISingleContentViewerPortlet>
+  <UISCVContextualRadioBox>
+    <label>
+      <Enable>Ввімкнено</Enable>
+      <Disable>Вимкнено</Disable>
+    </label>
+  </UISCVContextualRadioBox>
+  <UIPreferencesPopupWindows>
+    <title>
+      <UISCVPreferences>Налаштування деталей вмісту</UISCVPreferences>
+    </title>
+  </UIPreferencesPopupWindows>
+  <UISCVPreferences>
+    <action>
+      <Save>#{word.save}</Save>
+      <Abort>Припинити</Abort>
+      <Cancel>#{word.cancel}</Cancel>
+      <Print>Друкувати</Print>
+      <Close>#{word.close}</Close>
+    </action>
+    <title>Налаштування деталей вмісту</title>
+    <label>
+      <Back>Повернутися до попередньої сторінки</Back>
+      <Edit>Редагувати</Edit>
+      <Preferences>Налаштування</Preferences>
+      <Title>Налаштування деталей вмісту</Title>
+      <UISCVShowTitleConfigurationCheckBox>Показувати назву</UISCVShowTitleConfigurationCheckBox>
+      <UISCVShowDateConfigurationCheckBox>Показати дату</UISCVShowDateConfigurationCheckBox>
+      <UISCVShowOptionBarConfigurationCheckBox>Показати панель параметрів</UISCVShowOptionBarConfigurationCheckBox>
+      <DisplaySettingBlock>Налаштування відображення</DisplaySettingBlock>
+      <ContentPathBlock>Вибір контенту</ContentPathBlock>
+      <UISCVConfigItemPathFormInputSet>Шлях до змісту</UISCVConfigItemPathFormInputSet>
+    <UISCVContentPathConfigurationInputBox>Шлях до змісту</UISCVContentPathConfigurationInputBox>
+      <Advance>Розширені налаштування</Advance>
+      <ContextCaption>Динамічна навігація</ContextCaption>
+      <UISCVContextualRadioBox>Контекстуальний зміст</UISCVContextualRadioBox>
+      <UISCVParameterInputBox>за</UISCVParameterInputBox>
+      <PrintSettingBlock>Параметри друку</PrintSettingBlock>
+      <UISCVPrintPageParameter>з</UISCVPrintPageParameter>
+      <UISCVConfigPrintPageFormInputSet>Показати на сторінці</UISCVConfigPrintPageFormInputSet>
+      <LockStatus>Блокування</LockStatus>
+      <CacheManagement>Видимість контенту</CacheManagement>
+      <UISCVCacheRadioBox>Спільний доступ до вмісту</UISCVCacheRadioBox>
+    </label>
+    <help>
+      <ContentPathBlock>Виберіть вміст, який ви хочете показати. Вибір за замовчуванням буде замінено динамічно , якщо активувати опцію Динамічні навігації (див. нижче режим Розширених налаштувань).</ContentPathBlock>
+      <DisplaySettingBlock>Можна показати або приховати панель Параметри, що використовується для відображення посилання на друк. Відображення Заголовка і Дати є необов'язковим.</DisplaySettingBlock>
+      <ContextualHelp>Активує Динамічну навігацію. Контент може бути змінений динамічно іншим параметром  на основі URL-адреси.</ContextualHelp>
+      <ParameterHelp>Цей параметр буде використовуватися для отримання вмісту, якщо активована опція Динамічна навігація.</ParameterHelp>
+    </help>
+    <msg>
+      <not-valid-path>Неприпустимий шлях до елемента.</not-valid-path>
+    </msg>
+    <tab>
+      <label>
+        <UISCVConfigContentFormInputSet>Вибір контенту</UISCVConfigContentFormInputSet>
+        <UISCVConfigDisplayFormInputSet>Налаштування відображення</UISCVConfigDisplayFormInputSet>
+        <UISCVConfigPrintFormInputSet>Параметри друку</UISCVConfigPrintFormInputSet>
+        <UISCVConfigAdvancedFormInputSet>Розширений</UISCVConfigAdvancedFormInputSet>
+      </label>
+    </tab>
+  </UISCVPreferences>
+  <UISCVConfigItemPathFormInputSet>
+    <title>
+      <SelectFolderPath>Виберіть шлях до папки</SelectFolderPath>
+      <AddPath>Додати шлях</AddPath>
+    </title>
+  </UISCVConfigItemPathFormInputSet>
+  <UISCVConfigPrintPageFormInputSet>
+    <title>
+      <SelectTargetPage>Показати на сторінці</SelectTargetPage>
+    </title>
+  </UISCVConfigPrintPageFormInputSet>
+  <PublicationStates>
+    <archived>Архівні</archived>
+    <obsolete>Застарілий</obsolete>
+    <unpublished>Неопубліковані</unpublished>
+    <enrolled>Зареєстровано</enrolled>
+    <draft>Чернетка</draft>
+    <pending>Очікування</pending>
+    <approved>Схвалено</approved>
+    <inreview>В огляді</inreview>
+    <staged>Розміщений</staged>
+    <published>Опубліковано</published>
+  </PublicationStates>
+  <UISCVCacheRadioBox>
+    <label>
+      <Enable>Обмежується автентифікацією</Enable>
+      <Disable>Обмежується ролями користувачів</Disable>
+    </label>
+  </UISCVCacheRadioBox>
+</bundle>
