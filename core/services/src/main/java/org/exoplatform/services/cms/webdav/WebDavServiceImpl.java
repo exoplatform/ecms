@@ -19,6 +19,7 @@ package org.exoplatform.services.cms.webdav;
 import java.io.InputStream;
 import java.net.URI;
 import java.net.URISyntaxException;
+import java.util.GregorianCalendar;
 import java.util.LinkedList;
 import java.util.Queue;
 
@@ -47,6 +48,7 @@ import org.exoplatform.common.util.HierarchicalProperty;
 import org.exoplatform.commons.utils.MimeTypeResolver;
 import org.exoplatform.container.xml.InitParams;
 import org.exoplatform.ecm.utils.text.Text;
+import org.exoplatform.services.cms.CmsService;
 import org.exoplatform.services.cms.impl.Utils;
 import org.exoplatform.services.cms.jcrext.activity.ActivityCommonService;
 import org.exoplatform.services.cms.link.LinkUtils;
@@ -650,7 +652,15 @@ public class WebDavServiceImpl extends org.exoplatform.services.jcr.webdav.WebDa
       Node content = destNode.getNode("jcr:content");
       String mimeType = mimeTypeResolver.getMimeType(nodeName);
       content.setProperty("jcr:mimeType", mimeType);
+      // Change publication status
+      ListenerService listenerService =  WCMCoreUtils.getService(ListenerService.class);
+      if (destNode.isNodeType("exo:datetime")) {
+        destNode.setProperty("exo:dateModified", new GregorianCalendar());
+      }
+      listenerService.broadcast(CmsService.POST_EDIT_CONTENT_EVENT, destNode.getParent(), destNode);
       destNode.save();
+
+      
     } catch (Exception e) {
       if (LOG.isWarnEnabled()) {
         LOG.warn("Cannot change property of destNode" + destinationHeader, e);
@@ -798,6 +808,7 @@ public class WebDavServiceImpl extends org.exoplatform.services.jcr.webdav.WebDa
       Item item = nodeFinder.getItem(workspaceName(repoPath), path(Text.escapeIllegalJcrChars(repoPath)), giveTarget);
       return item.getSession().getWorkspace().getName() + item.getPath();
     }
-  }  
+  }
+
 
 }
