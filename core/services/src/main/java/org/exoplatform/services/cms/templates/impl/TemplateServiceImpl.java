@@ -44,6 +44,7 @@ import org.exoplatform.services.cms.BasePath;
 import org.exoplatform.services.cms.impl.DMSConfiguration;
 import org.exoplatform.services.cms.impl.DMSRepositoryConfiguration;
 import org.exoplatform.services.cms.impl.Utils;
+import org.exoplatform.services.cms.jcrext.activity.ActivityCommonService;
 import org.exoplatform.services.cms.templates.ContentTypeFilterPlugin;
 import org.exoplatform.services.cms.templates.ContentTypeFilterPlugin.FolderFilterConfig;
 import org.exoplatform.services.cms.templates.TemplateService;
@@ -78,6 +79,8 @@ public class TemplateServiceImpl implements TemplateService, Startable {
   private List<TemplatePlugin> plugins_ = new ArrayList<TemplatePlugin>();
   private Set<String> configuredNodeTypes;
 
+  private ActivityCommonService activityService = null;
+  
   /**
    * The key is a folder type, the value is the List of content types.
    */
@@ -823,7 +826,11 @@ public class TemplateServiceImpl implements TemplateService, Startable {
    */
   public String createTemplate(Node templateFolder, String title, String templateName, InputStream data, String[] roles) {
     try {
+      if (activityService==null) {
+        activityService = WCMCoreUtils.getService(ActivityCommonService.class);
+      }
       Node contentNode = templateFolder.addNode(templateName, NodetypeConstant.NT_FILE);
+      activityService.setCreating(contentNode, true);
       Node resourceNode = contentNode.addNode(NodetypeConstant.JCR_CONTENT, NodetypeConstant.EXO_RESOURCES);
       resourceNode.setProperty(NodetypeConstant.JCR_ENCODING, "UTF-8");
       resourceNode.setProperty(NodetypeConstant.JCR_MIME_TYPE, "application/x-groovy+html");
@@ -834,6 +841,7 @@ public class TemplateServiceImpl implements TemplateService, Startable {
         resourceNode.addMixin(NodetypeConstant.DC_ELEMENT_SET);
       }
       resourceNode.setProperty(NodetypeConstant.DC_TITLE, new String[] {title});
+      activityService.setCreating(contentNode, false);
       resourceNode.getSession().save();
       return contentNode.getPath();
     } catch (Exception e) {
@@ -849,10 +857,15 @@ public class TemplateServiceImpl implements TemplateService, Startable {
    */
   public String updateTemplate(Node template, InputStream data, String[] roles) {
     try {
+      if (activityService==null) {
+        activityService = WCMCoreUtils.getService(ActivityCommonService.class);
+      }
       Node resourceNode = template.getNode(NodetypeConstant.JCR_CONTENT);
+      activityService.setCreating(template, true);
       resourceNode.setProperty(NodetypeConstant.EXO_ROLES, roles);
       resourceNode.setProperty(NodetypeConstant.JCR_LAST_MODIFIED, new GregorianCalendar());
       resourceNode.setProperty(NodetypeConstant.JCR_DATA, data);
+      activityService.setCreating(template, false);
       resourceNode.getSession().save();
 
       // Add to edited predefined node type list
