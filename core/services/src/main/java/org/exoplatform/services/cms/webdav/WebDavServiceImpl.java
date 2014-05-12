@@ -649,15 +649,17 @@ public class WebDavServiceImpl extends org.exoplatform.services.jcr.webdav.WebDa
       String nodeName = Text.escapeIllegalJcrChars(destNode.getName());
       destNode.setProperty("exo:name", nodeName);
       destNode.setProperty("exo:title", nodeName);
-      Node content = destNode.getNode("jcr:content");
-      String mimeType = mimeTypeResolver.getMimeType(nodeName);
-      content.setProperty("jcr:mimeType", mimeType);
-      // Change publication status
-      ListenerService listenerService =  WCMCoreUtils.getService(ListenerService.class);
-      if (destNode.isNodeType("exo:datetime")) {
-        destNode.setProperty("exo:dateModified", new GregorianCalendar());
+      if (!Utils.isFolder(destNode)) {
+        Node content = destNode.getNode("jcr:content");
+        String mimeType = mimeTypeResolver.getMimeType(nodeName);
+        content.setProperty("jcr:mimeType", mimeType);
+        // Change publication status
+        ListenerService listenerService =  WCMCoreUtils.getService(ListenerService.class);
+        if (destNode.isNodeType("exo:datetime")) {
+          destNode.setProperty("exo:dateModified", new GregorianCalendar());
+        }
+        listenerService.broadcast(CmsService.POST_EDIT_CONTENT_EVENT, destNode.getParent(), destNode);
       }
-      listenerService.broadcast(CmsService.POST_EDIT_CONTENT_EVENT, destNode.getParent(), destNode);
       destNode.save();
 
       
