@@ -16,26 +16,12 @@
  */
 package org.exoplatform.services.cms.webdav;
 
-import org.exoplatform.common.http.HTTPStatus;
-import org.exoplatform.common.util.HierarchicalProperty;
-import org.exoplatform.commons.utils.MimeTypeResolver;
-import org.exoplatform.container.xml.InitParams;
-import org.exoplatform.ecm.utils.text.Text;
-import org.exoplatform.services.cms.impl.Utils;
-import org.exoplatform.services.cms.jcrext.activity.ActivityCommonService;
-import org.exoplatform.services.cms.link.LinkUtils;
-import org.exoplatform.services.cms.link.NodeFinder;
-import org.exoplatform.services.jcr.RepositoryService;
-import org.exoplatform.services.jcr.ext.app.ThreadLocalSessionProviderService;
-import org.exoplatform.services.jcr.webdav.util.InitParamsDefaults;
-import org.exoplatform.services.jcr.webdav.util.TextUtil;
-import org.exoplatform.services.listener.ListenerService;
-import org.exoplatform.services.log.ExoLogger;
-import org.exoplatform.services.log.Log;
-import org.exoplatform.services.rest.ExtHttpHeaders;
-import org.exoplatform.services.rest.ext.webdav.method.*;
-import org.exoplatform.services.wcm.core.NodetypeConstant;
-import org.exoplatform.services.wcm.utils.WCMCoreUtils;
+import java.io.InputStream;
+import java.net.URI;
+import java.net.URISyntaxException;
+import java.util.GregorianCalendar;
+import java.util.LinkedList;
+import java.util.Queue;
 
 import javax.jcr.Item;
 import javax.jcr.NoSuchWorkspaceException;
@@ -56,11 +42,43 @@ import javax.ws.rs.core.Context;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 import javax.ws.rs.core.UriInfo;
-import java.io.InputStream;
-import java.net.URI;
-import java.net.URISyntaxException;
-import java.util.LinkedList;
-import java.util.Queue;
+
+import org.exoplatform.common.http.HTTPStatus;
+import org.exoplatform.common.util.HierarchicalProperty;
+import org.exoplatform.commons.utils.MimeTypeResolver;
+import org.exoplatform.container.xml.InitParams;
+import org.exoplatform.ecm.utils.text.Text;
+import org.exoplatform.services.cms.CmsService;
+import org.exoplatform.services.cms.impl.Utils;
+import org.exoplatform.services.cms.jcrext.activity.ActivityCommonService;
+import org.exoplatform.services.cms.link.LinkUtils;
+import org.exoplatform.services.cms.link.NodeFinder;
+import org.exoplatform.services.jcr.RepositoryService;
+import org.exoplatform.services.jcr.ext.app.ThreadLocalSessionProviderService;
+import org.exoplatform.services.jcr.webdav.util.InitParamsDefaults;
+import org.exoplatform.services.jcr.webdav.util.TextUtil;
+import org.exoplatform.services.listener.ListenerService;
+import org.exoplatform.services.log.ExoLogger;
+import org.exoplatform.services.log.Log;
+import org.exoplatform.services.rest.ExtHttpHeaders;
+import org.exoplatform.services.rest.ext.webdav.method.ACL;
+import org.exoplatform.services.rest.ext.webdav.method.CHECKIN;
+import org.exoplatform.services.rest.ext.webdav.method.CHECKOUT;
+import org.exoplatform.services.rest.ext.webdav.method.COPY;
+import org.exoplatform.services.rest.ext.webdav.method.LOCK;
+import org.exoplatform.services.rest.ext.webdav.method.MKCOL;
+import org.exoplatform.services.rest.ext.webdav.method.MOVE;
+import org.exoplatform.services.rest.ext.webdav.method.OPTIONS;
+import org.exoplatform.services.rest.ext.webdav.method.ORDERPATCH;
+import org.exoplatform.services.rest.ext.webdav.method.PROPFIND;
+import org.exoplatform.services.rest.ext.webdav.method.PROPPATCH;
+import org.exoplatform.services.rest.ext.webdav.method.REPORT;
+import org.exoplatform.services.rest.ext.webdav.method.SEARCH;
+import org.exoplatform.services.rest.ext.webdav.method.UNCHECKOUT;
+import org.exoplatform.services.rest.ext.webdav.method.UNLOCK;
+import org.exoplatform.services.rest.ext.webdav.method.VERSIONCONTROL;
+import org.exoplatform.services.wcm.core.NodetypeConstant;
+import org.exoplatform.services.wcm.utils.WCMCoreUtils;
 
 /**
  * This class is used to override the default WebDavServiceImpl in order to support symlinks
@@ -635,10 +653,18 @@ public class WebDavServiceImpl extends org.exoplatform.services.jcr.webdav.WebDa
       String nodeName = Text.escapeIllegalJcrChars(destNode.getName());
       destNode.setProperty("exo:name", nodeName);
       destNode.setProperty("exo:title", nodeName);
-      Node content = destNode.getNode("jcr:content");
-      String mimeType = mimeTypeResolver.getMimeType(nodeName);
-      content.setProperty("jcr:mimeType", mimeType);
-      destNode.save();
+      if (!Utils.isFolder(destNode)) {
+        Node content = destNode.getNode("jcr:content");
+        String mimeType = mimeTypeResolver.getMimeType(nodeName);
+        content.setProperty("jcr:mimeType", mimeType);
+        // Change publication status
+        ListenerService listenerService =  WCMCoreUtils.getService(ListenerService.class);
+        if (destNode.isNodeType("exo:datetime")) {
+          destNode.setProperty("exo:dateModified", new GregorianCalendar());
+        }
+        listenerService.broadcast(CmsService.POST_EDIT_CONTENT_EVENT, destNode.getParent(), destNode);
+      }
+      destNode.save();     
     } catch (Exception e) {
       if (LOG.isWarnEnabled()) {
         LOG.warn("Cannot change property of destNode" + destinationHeader, e);
@@ -782,6 +808,5 @@ public class WebDavServiceImpl extends org.exoplatform.services.jcr.webdav.WebDa
       Item item = nodeFinder.getItem(workspaceName(repoPath), path(Text.escapeIllegalJcrChars(repoPath)), giveTarget);
       return item.getSession().getWorkspace().getName() + item.getPath();
     }
-  }  
-
+  }
 }
