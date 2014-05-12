@@ -660,9 +660,7 @@ public class WebDavServiceImpl extends org.exoplatform.services.jcr.webdav.WebDa
         }
         listenerService.broadcast(CmsService.POST_EDIT_CONTENT_EVENT, destNode.getParent(), destNode);
       }
-      destNode.save();
-
-      
+      destNode.save();     
     } catch (Exception e) {
       if (LOG.isWarnEnabled()) {
         LOG.warn("Cannot change property of destNode" + destinationHeader, e);
@@ -811,6 +809,4 @@ public class WebDavServiceImpl extends org.exoplatform.services.jcr.webdav.WebDa
       return item.getSession().getWorkspace().getName() + item.getPath();
     }
   }
-
-
 }
