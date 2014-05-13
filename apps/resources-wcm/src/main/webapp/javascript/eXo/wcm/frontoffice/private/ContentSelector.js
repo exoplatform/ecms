@@ -5,8 +5,7 @@
 		this.accessMode = eXo.env.portal.accessMode;
 		this.userLanguage = eXo.env.portal.language;
 		this.userId = eXo.env.portal.userName;
-		var parentLocation = window.parent.location;
-		this.hostName = parentLocation.href.substring(0, parentLocation.href.indexOf(parentLocation.pathname));
+		this.hostName = eXo.ecm.WCMUtils.getHostName();
 		this.repositoryName = "repository";
 		this.workspaceName	= "collaboration";
 		this.cmdEcmBundle = "/bundle/";

@@ -206,6 +206,11 @@ public class TaxonomyPlugin extends BaseComponentPlugin {
           if (taxonomyNode.canAddMixin("mix:referenceable")) {
             taxonomyNode.addMixin("mix:referenceable");
           }
+
+          if(taxonomy.getTitle() != null && !taxonomy.getTitle().isEmpty()) {
+            taxonomyNode.setProperty("exo:title", taxonomy.getTitle());
+          }
+
           taxonomyNode.getSession().save();
         }
       } else if (objectParam.getName().equals("predefined.actions")) {
