@@ -6,6 +6,8 @@
   import javax.servlet.http.HttpSession;
   import org.exoplatform.services.wcm.publication.WCMComposer;
   import org.exoplatform.wcm.webui.Utils;
+  import org.apache.commons.lang.StringUtils;
+
 
 
   def rcontext = _ctx.getRequestContext() ;
@@ -32,6 +34,15 @@
     if (country != null && country.length() > 0) {
     language += "_" + country;
   }   
+    
+  int frequency = 15;
+  int delay = 60;
+  if(StringUtils.isNotEmpty(System.getProperty("user.status.ping.frequency"))) {
+    frequency = Integer.parseInt(System.getProperty("user.status.ping.frequency"));
+  }
+  if(StringUtils.isNotEmpty(System.getProperty("user.status.offline.delay"))) {
+    delay = Integer.parseInt(System.getProperty("user.status.offline.delay"));
+  }
 %>
 <script type="text/javascript">
   eXo.env.portal.userName='<%= userName %>';
@@ -45,9 +56,14 @@
 <div id="UIWorkingWorkspace" class="UIWorkingWorkspace" style="position: relative; z-index: 0;">
   <%uicomponent.renderChildren()%>
 </div>
+<div id="user-status" user-status-ping-frequency="<%=frequency%>" user-status-offline-delay="<%=delay%>" style="display: none;"></div>
+
+
 <%
+def jsManager = rcontext.getJavascriptManager();
+jsManager.require("SHARED/wcm-utils", "wcmutils").addScripts("wcmutils.WCMUtils.pingUserStatus();");
 if (rcontext.getRemoteUser() != null && WCMComposer.MODE_EDIT.equals(Utils.getCurrentMode())) {
-  def jsManager = rcontext.getJavascriptManager(); 
+   
   %>
     <script type="text/javascript">
       require(['/CommonsResources/ckeditor/ckeditor.js'], function() {      
@@ -60,6 +76,6 @@ if (rcontext.getRemoteUser() != null && WCMComposer.MODE_EDIT.equals(Utils.getCu
       });
     </script>
   <%
-  jsManager.require("SHARED/quick-edit", "quickEdit").addScripts("if(CKEDITOR) {for(var instanceName in CKEDITOR.instances) { var editor = CKEDITOR.instances[instanceName]; editor.on( 'focus', function( e ) {quickEdit.InlineEditor.removeHoverClass();} ); editor.on('change', function(e) {quickEdit.InlineEditor.modifyInlineContent();}); editor.on('blur', (function(tmp) { return function() {quickEdit.InlineEditor.saveInlineContent(tmp);}})(editor)); }}");
+  jsManager.require("SHARED/quick-edit", "quickEdit").addScripts("if(CKEDITOR) {for(var instanceName in CKEDITOR.instances) { var editor = CKEDITOR.instances[instanceName]; editor.on( 'focus', function( e ) {quickEdit.InlineEditor.removeHoverClass();} ); editor.on('change', function(e) {quickEdit.InlineEditor.modifyInlineContent();}); editor.on('blur', (function(tmp) { return function() {quickEdit.InlineEditor.saveInlineContent(tmp);}})(editor)); }}");  
 }
 %>

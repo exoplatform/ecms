@@ -295,11 +295,10 @@
                 value="conf/exo.portal.component.test.jcr-jbosscache-config.xml" />
             </properties>
           </cache>
-          <query-handler
-            class="org.exoplatform.services.jcr.impl.core.query.lucene.SearchIndex">
+          <query-handler class="org.exoplatform.services.jcr.impl.core.query.lucene.SearchIndex">
             <properties>
-              <property name="index-dir"
-                value="${gatein.test.tmp.dir}/jcr/jcrlucenedb/collaboration" />
+              <property name="index-dir" value="${gatein.test.tmp.dir}/jcr/jcrlucenedb/collaboration" />
+              <property name="indexing-configuration-path" value="jar:/conf/standalone/jcr/indexing-configuration.xml" />
             </properties>
           </query-handler>
           <lock-manager
@@ -310,6 +309,7 @@
                 value="conf/exo.portal.component.test.jcr-jbosscache-lock-config.xml" />
             </properties>
           </lock-manager>
+          
         </workspace>
 
          <!-- Portal system data -->
