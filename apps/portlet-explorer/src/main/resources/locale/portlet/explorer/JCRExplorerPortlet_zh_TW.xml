@@ -991,7 +991,7 @@
       <datecreatedDESC>按建立日期降序排序</datecreatedDESC>
     </title>
     <tooltip>
-      <View>View this Node</View>
+      <View>查看此節點</View>
       <OpenFolder>轉到資料夾</OpenFolder>
     </tooltip>
   </UIShowAllFavouriteResult>
@@ -1010,7 +1010,7 @@
       <type>類型</type>
       <dateCreated>建立日期</dateCreated>
       <score>得分</score>
-      <AddRemoveFavourite>Add/Remove to Favorite</AddRemoveFavourite>
+      <AddRemoveFavourite>從最愛的增加/刪除</AddRemoveFavourite>
     </header>
     <title>
       <typeASC>按文件類型升序排序</typeASC>
@@ -1025,7 +1025,7 @@
     <tooltip>
       <View>查看此節點</View>
       <OpenFolder>轉到資料夾</OpenFolder>
-      <RemoveHiddenAttribute>Remove Hidden Attribute</RemoveHiddenAttribute>
+      <RemoveHiddenAttribute>刪除隱藏的屬性</RemoveHiddenAttribute>
     </tooltip>
   </UIShowAllHiddenResult>
   <UIShowAllTrashResult>
@@ -1057,7 +1057,7 @@
     <tooltip>
       <View>查看此節點</View>
       <OpenFolder>轉到資料夾</OpenFolder>
-      <DeletePermanently>Delete permanently</DeletePermanently>
+      <DeletePermanently>永久刪除</DeletePermanently>
       <RestoreFromTrash>從垃圾桶中還原</RestoreFromTrash>
     </tooltip>
   </UIShowAllTrashResult>
@@ -1065,9 +1065,9 @@
     <label>
       <constraints>UIConstraintsForm</constraints>
       <metadataProperty>屬性</metadataProperty>
-      <operator>Operator</operator>
-      <contains>Contain Value</contains>
-      <notcontains>Not Contain Value</notcontains>
+      <operator>操作員</operator>
+      <contains>包含的值</contains>
+      <notcontains>不包含值</notcontains>
     </label>
     <action>
       <Add>新增</Add>
@@ -1731,7 +1731,7 @@
   #############################################################################
   -->
   <UIQuerySaveForm>
-    <title>保存查詢表單</title>
+    <title>儲存查詢表單</title>
     <label>
       <query>查詢</query>
       <name>查詢名稱</name>
@@ -1775,7 +1775,7 @@
     </msg>
     <action>
       <Close>#{word.close}</Close>
-      <View>查看</View>
+      <View>檢視</View>
       <Edit>編輯</Edit>
       <Delete>刪除</Delete>
     </action>
@@ -1853,10 +1853,10 @@
   -->
   <UIWatchDocumentForm>
     <action>
-      <Watch>觀注</Watch>
+      <Watch>觀看</Watch>
       <Cancel>#{word.cancel}</Cancel>
       <Continue>繼續</Continue>
-      <Unwatch>不觀注</Unwatch>
+      <Unwatch>不觀看</Unwatch>
     </action>
     <label>
       <notificationType>通知類型：</notificationType>
@@ -1886,7 +1886,7 @@
     <msg>
       <name-exist>'{0}' 的標籤名稱已經存在。</name-exist>
       <tagName-invalid>標籤名稱中包含一些不正確字元。</tagName-invalid>
-      <tagName-empty-or-invalid>The tag name is empty or contains some invalid characters.</tagName-empty-or-invalid>
+      <tagName-empty-or-invalid>標記名稱為空或包含一些不正確字元。</tagName-empty-or-invalid>
       <tag-name-empty>您的標籤名稱為空</tag-name-empty>
       <tag-name-duplicate>輸入的標籤名稱是重複的。</tag-name-duplicate>
       <tagName-too-long>輸入的標籤太長。標籤名稱必須少於 30 個字元。</tagName-too-long>
