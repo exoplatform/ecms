@@ -95,13 +95,14 @@ public abstract class UICLVContainer extends UIContainer {
 
   public String getEditLink(boolean isEditable, boolean isNew) throws Exception {
     String folderPath = this.getAncestorOfType(UICLVPortlet.class).getFolderPath();
-    try{
-      getFolderNode(folderPath);
-    }catch(PathNotFoundException e){
-      folderPath = "";
-    }
     if (folderPath==null) folderPath="";
-    return Utils.getEditLink(getFolderNode(folderPath), isEditable, isNew);
+    Node folderNode = null;
+    try{
+      folderNode = getFolderNode(folderPath);
+    }catch(PathNotFoundException e){
+      folderNode = getFolderNode("");
+    }
+    return Utils.getEditLink(folderNode, isEditable, isNew);
   }
 
   public Node getFolderNode() {
