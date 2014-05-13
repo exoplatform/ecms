@@ -34,6 +34,7 @@ import javax.ws.rs.core.Response;
 
 import org.exoplatform.container.component.ComponentPlugin;
 import org.exoplatform.ecm.utils.text.Text;
+import org.exoplatform.services.cms.impl.Utils;
 import org.exoplatform.services.cms.link.LinkManager;
 import org.exoplatform.services.cms.link.NodeFinder;
 import org.exoplatform.services.cms.thumbnail.ThumbnailPlugin;
@@ -334,7 +335,7 @@ public class ThumbnailRESTService implements ResourceContainer {
     if(!nodePath.equals("/")) {
       for(String name : nodePath.split("/")) {
         if(name.length() > 0) {
-          encodeNameArr.add(Text.escapeIllegalJcrChars(name));
+          encodeNameArr.add(Utils.improveIllegalJcrCharactersEscapeInPath(name));
         }
       }
       StringBuilder encodedPath = new StringBuilder();

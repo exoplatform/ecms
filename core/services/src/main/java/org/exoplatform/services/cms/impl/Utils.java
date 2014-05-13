@@ -850,4 +850,15 @@ public class Utils {
     }
     return "," + Math.round(Double.valueOf(Integer.valueOf(strSize) / 100.0));
   }
+  /**
+   * Use escapeIllegalJcrChars from JCR to escape a path
+   * @param path to escape
+   * @return escaped path
+   */
+  public static String improveIllegalJcrCharactersEscapeInPath (String path) {
+    String encodedPath = "";
+    encodedPath = org.exoplatform.ecm.utils.text.Text.escapeIllegalJcrChars(path);
+    encodedPath = encodedPath.replace("%40", "@");
+    return encodedPath;
+  }
 }
