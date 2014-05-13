@@ -8,10 +8,25 @@
 		
 		this.showRightContent = true;
 	}
-
-    WCMUtils.prototype.getHostName = function() {
-		var parentLocation = window.parent.location;
-		return parentLocation.href.substring(0, parentLocation.href.indexOf(parentLocation.pathname));
+	
+	WCMUtils.prototype.getHostName = function() {
+    var hostName;
+    if(self == top){
+      var parentLocation = window.parent.location;
+       hostName = parentLocation.href.substring(0, parentLocation.href.indexOf(parentLocation.pathname));
+    } else {
+      // If window is iframe, location should be parsing from src property
+      var url; 
+      if (eXo.core.Browser.ie) {
+        url = window.frameElement.src;
+      } else {
+        url = window.src;
+      }
+      var parser = document.createElement('a');
+      parser.href = url;
+      hostName =  parser.protocol + "//" + parser.hostname + ":" + parser.port;
+    }
+    return hostName;
 	};
 	
 	WCMUtils.prototype.request = function(url) {

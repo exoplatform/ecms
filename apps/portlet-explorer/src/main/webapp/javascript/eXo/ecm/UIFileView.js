@@ -523,6 +523,7 @@ UIFileView.prototype.showItemContextMenu = function (event, element) {
 	var checkLinkAndTargetInTrash = false;
 	var checkExoActionNode = false;
 	var checkInStatus = false;
+	var isAbleToRestore = true;
 	
 	for (var i in Self.itemsSelected) {
 	  if (Array.prototype[i]) continue;
@@ -534,6 +535,11 @@ UIFileView.prototype.showItemContextMenu = function (event, element) {
 	  //check symlink and target are in trash to show Delete button only on action bar.
 	  else if (Self.itemsSelected[i].getAttribute('isLinkWithTarget') == "true") {
 		checkLinkAndTargetInTrash = true; 
+		continue;
+	  }
+	  //check if one of the node can be restored
+	  else if (Self.itemsSelected[i].getAttribute('isAbleToRestore') == "false") {
+		isAbleToRestore = false; 
 		continue;
 	  }
 	  if (Self.itemsSelected[i].getAttribute('locked') == "true") checkUnlock = true;
@@ -611,7 +617,7 @@ UIFileView.prototype.showItemContextMenu = function (event, element) {
 		  removeFavouriteAction.parentNode.style.display = "none";
 		}
 	   
-		if (!checkInTrash) {
+		if (!checkInTrash || !isAbleToRestore) {
 		  restoreFromTrashAction.parentNode.style.display = "none";
 		} else {
 		  restoreFromTrashAction.parentNode.style.display = "block";

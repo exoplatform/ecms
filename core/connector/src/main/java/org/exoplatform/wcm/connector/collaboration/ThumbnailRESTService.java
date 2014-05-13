@@ -17,12 +17,16 @@
 package org.exoplatform.wcm.connector.collaboration;
 
 import java.awt.image.BufferedImage;
+import java.io.BufferedInputStream;
+import java.io.File;
+import java.io.FileInputStream;
 import java.io.InputStream;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 
+import javax.activation.MimetypesFileTypeMap;
 import javax.jcr.ItemNotFoundException;
 import javax.jcr.Node;
 import javax.jcr.Session;
@@ -46,6 +50,9 @@ import org.exoplatform.services.jcr.ext.common.SessionProvider;
 import org.exoplatform.services.jcr.impl.core.NodeImpl;
 import org.exoplatform.services.rest.resource.ResourceContainer;
 import org.exoplatform.services.wcm.utils.WCMCoreUtils;
+import org.exoplatform.services.log.ExoLogger;
+import org.exoplatform.services.log.Log;
+import org.exoplatform.wcm.connector.viewer.PDFViewerRESTService;
 
 /**
  * Returns a responding data as a thumbnail image.
@@ -62,6 +69,9 @@ import org.exoplatform.services.wcm.utils.WCMCoreUtils;
 @Path("/thumbnailImage/")
 public class ThumbnailRESTService implements ResourceContainer {
 
+  /** The log **/
+  private static final Log LOG  = ExoLogger.getLogger(ThumbnailRESTService.class.getName());
+  
   /** The Constant LAST_MODIFIED_PROPERTY. */
   private static final String LAST_MODIFIED_PROPERTY = "Last-Modified";
 
@@ -241,6 +251,40 @@ public class ThumbnailRESTService implements ResourceContainer {
       }
     }
 
+    return Response.ok().header(LAST_MODIFIED_PROPERTY, dateFormat.format(new Date())).build();
+  }
+  
+  /**
+   * Return an image at an original size from local machine.
+   *
+   * @param nodePath The node path.
+   * @return Response data stream.
+   * @throws Exception
+   *
+   * @anchor ThumbnailRESTService.getOriginImage
+   */
+  @Path("/originImage/{nodePath:.*}/")
+  @GET
+  public Response getLocalImage(@PathParam("nodePath") String nodePath,
+                                @HeaderParam("If-Modified-Since") String ifModifiedSince) throws Exception {
+    DateFormat dateFormat = new SimpleDateFormat(IF_MODIFIED_SINCE_DATE_FORMAT);
+    if (!thumbnailService_.isEnableThumbnail())
+      return Response.ok().header(LAST_MODIFIED_PROPERTY, dateFormat.format(new Date())).build();
+
+    
+    try {
+      File file = new File(nodePath);
+      FileInputStream inputStream = new FileInputStream(file);
+      BufferedInputStream buf = new BufferedInputStream(inputStream);
+      String mimeType = new MimetypesFileTypeMap().getContentType(file);
+      
+      return Response.ok(buf, "image").header(LAST_MODIFIED_PROPERTY,
+                                                          dateFormat.format(new Date())).build();
+    } catch (Exception e) {
+      if (LOG.isErrorEnabled()) {
+        LOG.error(e);
+      }
+    }
     return Response.ok().header(LAST_MODIFIED_PROPERTY, dateFormat.format(new Date())).build();
   }
 

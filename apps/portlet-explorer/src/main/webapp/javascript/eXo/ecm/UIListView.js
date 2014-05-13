@@ -1019,7 +1019,7 @@
       var event = event || window.event;
       event.cancelBubble = true;
       var columnClass = Self.objResizingHeader.className;
-      columnClass = columnClass.replace(" column", "").trim();
+      columnClass = gj.trim(columnClass.replace(" column", ""));
       var resizeValue = event.clientX - eXo.ecm.UIListView.currentMouseX;
       var newWidth    = Self.objResizeValue + resizeValue + "px";
       var div2Resize  = gj(Self.listGrid).find("div." + columnClass);

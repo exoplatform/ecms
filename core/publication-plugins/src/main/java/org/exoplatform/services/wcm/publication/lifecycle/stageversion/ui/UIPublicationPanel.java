@@ -135,7 +135,7 @@ public class UIPublicationPanel extends UIForm {
     if(viewedRevisions.size() == 1 && revisionsDataMap.size()>1) {
       node.setProperty(StageAndVersionPublicationConstant.REVISION_DATA_PROP,new Value[] {});
       node.setProperty(StageAndVersionPublicationConstant.HISTORY,new Value[] {});
-      node.setProperty(StageAndVersionPublicationConstant.LIVE_REVISION_PROP,"");
+      node.setProperty(StageAndVersionPublicationConstant.LIVE_REVISION_PROP,(javax.jcr.Value)null);
       node.save();
       this.revisionsDataMap = getRevisionData(node);
     }

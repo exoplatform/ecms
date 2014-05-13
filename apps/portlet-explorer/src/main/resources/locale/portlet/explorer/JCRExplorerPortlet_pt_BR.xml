@@ -79,7 +79,7 @@
       <SavedSearches>Pesquisas salvas</SavedSearches>
     </label>
     <title>
-      <Control>Control Sidebar</Control>
+      <Control>Controle da barra lateral</Control>
       <Close>Fechar barra lateral</Close>
     </title>
   </UISideBar>
@@ -129,7 +129,7 @@
     <title>Explorador</title>
     <label>
       <Root>Raíz</Root>
-      <webDavView>Baixar e permitir edição</webDavView>
+      <webDavView>Abrir no MS Office</webDavView>
     </label>
     <msg>
       <path-not-found>Este elemento foi excluído ou alterado. Por favor, clique no botão atualizar.</path-not-found>
@@ -591,7 +591,7 @@
       <MoveToTrash>Mover para a Lixeira</MoveToTrash>
       <RestoreFromTrash>Restaurar da Lixeira</RestoreFromTrash>
       <EmptyTrash>Esvaziar a lixeira</EmptyTrash>
-      <WebDavView>Edit in MS Office</WebDavView>
+      <WebDavView>Abrir no MS Office</WebDavView>
     </event>
   </ECMContextMenu>
  

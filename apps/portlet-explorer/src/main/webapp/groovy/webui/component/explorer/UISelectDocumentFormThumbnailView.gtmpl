@@ -1,3 +1,6 @@
+<%
+import org.exoplatform.wcm.webui.reader.ContentReader;
+%>
 <div id="$uicomponent.id" class="$uicomponent.id">
 	<div class="selectTemplateArea">	
 		<% 
@@ -6,6 +9,7 @@
 				for (int i = 0; i < templates.size(); i++) {
 					def label = templates.get(i);
 					def contentType = uicomponent.getContentType(label);
+					label = ContentReader.getXSSCompatibilityContent(label);
 					def actionLink = uicomponent.event("SelectTemplate", contentType);
 					def cssClass = uicomponent.getTemplateIconStylesheet(contentType);
 		%>

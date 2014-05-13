@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<bundle>
+<UIPopupWindow>
+<title>
+<UIViewInfoManager>Перегляд інформації</UIViewInfoManager>
+</title>
+</UIPopupWindow>
+    
+<ECMContextMenu>
+<event>
+<ViewInfo>Перегляд інформації</ViewInfo>
+</event>
+</ECMContextMenu>
+<UIViewInfoContainer>
+<label>
+      <name>Ім’я</name>
+      <title>Назва</title>
+      <type>Тип</type>
+      <size>Розміром</size>
+      <owner>Власник</owner>
+      <lastModifier>Останній модифікатор</lastModifier>
+      <created>Датою створення</created>
+      <lastModified>Дата останніх змін</lastModified>
+      <publicationState>Стан публікації</publicationState>
+</label>
+<value>
+      <folder>Папка</folder>
+</value>
+<action>
+<Close>#{word.close}</Close>
+</action>
+</UIViewInfoContainer>
+</bundle>

@@ -245,8 +245,10 @@ public class AuthoringPublicationPlugin extends  WebpagePublicationPlugin {
       addRevisionData(node, revisionsMap.values());
     } else if (PublicationDefaultStates.ARCHIVED.equalsIgnoreCase(newState)) {
       Value value = valueFactory.createValue(selectedRevision);
-      Value liveRevision = node.getProperty(AuthoringPublicationConstant.LIVE_REVISION_PROP)
-                               .getValue();
+      Value liveRevision = null;
+      if (node.hasProperty(AuthoringPublicationConstant.LIVE_REVISION_PROP)) {
+        liveRevision = node.getProperty(AuthoringPublicationConstant.LIVE_REVISION_PROP).getValue();
+      }
       if (liveRevision != null && value.getString().equals(liveRevision.getString())) {
         node.setProperty(AuthoringPublicationConstant.LIVE_REVISION_PROP,
                          valueFactory.createValue(""));
@@ -288,7 +290,12 @@ public class AuthoringPublicationPlugin extends  WebpagePublicationPlugin {
       }
       revisionsMap.put(node.getUUID(), versionData);
       addRevisionData(node, revisionsMap.values());
-    } else if (PublicationDefaultStates.PUBLISHED.equals(newState)) {      
+    } else if (PublicationDefaultStates.PUBLISHED.equals(newState)) {
+      if (!node.isCheckedOut()) {
+        node.checkout();
+      }
+      node.setProperty(AuthoringPublicationConstant.LIVE_DATE_PROP, new GregorianCalendar());
+      node.save();
       Version liveVersion = node.checkin();
       node.checkout();
       // Change current live revision to unpublished
@@ -347,7 +354,6 @@ public class AuthoringPublicationPlugin extends  WebpagePublicationPlugin {
                                   AuthoringPublicationConstant.ENROLLED_TO_LIFECYCLE);
       Value liveVersionValue = valueFactory.createValue(liveVersion);
       node.setProperty(AuthoringPublicationConstant.LIVE_REVISION_PROP, liveVersionValue);
-      node.setProperty(AuthoringPublicationConstant.LIVE_DATE_PROP, new GregorianCalendar());
       VersionData liveRevisionData = new VersionData(liveVersion.getUUID(),
                                                      PublicationDefaultStates.PUBLISHED,
                                                      userId);
@@ -550,7 +556,7 @@ public class AuthoringPublicationPlugin extends  WebpagePublicationPlugin {
       return null;
 
     // if current mode is edit mode
-    if (context==null || context.get(WCMComposer.FILTER_MODE).equals(WCMComposer.MODE_EDIT) ||
+    if (context==null || WCMComposer.MODE_EDIT.equals(context.get(WCMComposer.FILTER_MODE)) ||
         PortletMode.EDIT.toString().equals(context.get(WCMComposer.PORTLET_MODE)))
       return node;
 

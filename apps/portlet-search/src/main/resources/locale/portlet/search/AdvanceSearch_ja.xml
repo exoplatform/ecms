@@ -33,9 +33,7 @@
       <edit>編集</edit>
     </action>
     <msg>
-      <your-search>あなたの検索</your-search>
-      <did-not-match>検索と一致しませんでした</did-not-match>
-      <new-suggestion>お勧め</new-suggestion>
+      <search-not-match-type>Your search {0} does not match any {1}.</search-not-match-type>
     </msg>
   </UIDefaultSearchResult>
   <UISearchPageLayoutManager>

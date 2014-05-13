@@ -10,6 +10,12 @@
 
 /******** UIContentBrowserPanel **************/
 
+#UIContentSelectorOne {
+	.uiWCMSearchContainer, .uiContentSearchForm, .uiContentSearchResult {
+		height: 400px;
+	}
+}
+
 #UIContentSelectorMulti {
 	.uiWCMSearchContainer, .uiContentSearchResult {
 		height: 400px;
@@ -462,6 +468,18 @@
 	}
 }
 
+.ie8 {
+  .UICLVPortlet {
+    .CLV {
+      .Contents {
+        .Image img{
+          padding-right: 51px;
+        }
+      }
+    }
+  }
+}
+
 .UIWCMSearchPortlet{
 	.result{
 		border-top: 1px solid #D7D7D7;
@@ -537,4 +555,8 @@
 			}
 		}
 	}
+}
+
+.cke_show_borders ul li { 
+    list-style-type: disc;
 }

@@ -1,6 +1,7 @@
 package org.exoplatform.wcm.connector.collaboration;
 
 import java.io.InputStream;
+import java.net.URLEncoder;
 
 import javax.jcr.AccessDeniedException;
 import javax.jcr.Node;
@@ -60,8 +61,12 @@ public class DownloadConnector implements ResourceContainer{
 
     try {
       node = (Node) session.getItem(path);
-      fileName = Text.unescapeIllegalJcrChars(node.getName());
-
+      fileName = node.getName();
+      if (node.hasProperty("exo:title")){
+        fileName = node.getProperty("exo:title").getString();
+      }
+      fileName = Text.unescapeIllegalJcrChars(fileName);
+      fileName = URLEncoder.encode(fileName,"utf-8");
       // In case version is specified, get file from version history
       if (version != null) {
         node = node.getVersionHistory().getVersion(version).getNode("jcr:frozenNode");
@@ -78,7 +83,7 @@ public class DownloadConnector implements ResourceContainer{
       mimeType = node.getNode("jcr:content").getProperty("jcr:mimeType").getString();
     }
     return Response.ok(is, mimeType)
-          .header("Content-Disposition","attachment; filename=\"" + fileName+"\"")
+          .header("Content-Disposition","attachment; filename=\"" + fileName + "\"; filename*=UTF-8''" + fileName)
             .build();
   }
 }
