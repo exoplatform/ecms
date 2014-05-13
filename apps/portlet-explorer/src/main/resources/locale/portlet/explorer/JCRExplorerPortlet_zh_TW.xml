@@ -1700,9 +1700,9 @@
       <repository-exception>保存文件時出錯。</repository-exception>
       <!--DMS 2.4.x; ECM-3543-->
       <repository-exception-permission>你並沒有到此節點增加一個新文件的權限。</repository-exception-permission>
-      <not-allowed-same-name-sibling>您不能保存此文件。它不允許具有相同的名稱作為其兄弟。</not-allowed-same-name-sibling>
-      <numberformat-exception>您不能保存此文件。提供的名稱必須是數字格式。</numberformat-exception>
-      <item-not-found>找不到項目。此節點 （或其祖先） 可能已被刪除。請按一下刷新按鈕。</item-not-found>
+      <not-allowed-same-name-sibling>您不能儲存此文件。它不允許具有相同的名稱作為其兄弟。</not-allowed-same-name-sibling>
+      <numberformat-exception>您不能儲存此文件。提供的名稱必須是數字格式。</numberformat-exception>
+      <item-not-found>找不到項目。此節點 （或其原始檔） 可能已被刪除。請按一下更新按鈕。</item-not-found>
     </msg>
   </UIDocumentForm>
   <!--
@@ -1836,11 +1836,11 @@
       <keyword-not-support>關鍵字不正確。不支援某些字元。</keyword-not-support>
     </msg>
     <label>
-      <exeButton>轉到</exeButton>
+      <exeButton>進行</exeButton>
       <address>位址：</address>
     </label>
     <title>
-      <exeButton>轉到</exeButton>
+      <exeButton>進行</exeButton>
       <backButton>返回到前一個節點</backButton>
       <showHistory>顯示歷史記錄位址</showHistory>
       <changeNode>更改節點</changeNode>
@@ -1863,9 +1863,9 @@
     </label>
     <msg>
       <not-support>這種通知類型不受支援。請選擇另一種類型。</not-support>
-      <watching-successfully>您正在觀注此文件。</watching-successfully>
-      <unwatching-successfully>你已經成功地離開觀注清單。</unwatching-successfully>
-      <node-iswatching>本文件已觀注。</node-iswatching>
+      <watching-successfully>您正在觀看此文件。</watching-successfully>
+      <unwatching-successfully>你已經成功地離開觀看清單。</unwatching-successfully>
+      <node-iswatching>本文件已觀看。</node-iswatching>
     </msg>
   </UIWatchDocumentForm>
   <!--
@@ -1890,7 +1890,7 @@
       <tag-name-empty>您的標籤名稱為空</tag-name-empty>
       <tag-name-duplicate>輸入的標籤名稱是重複的。</tag-name-duplicate>
       <tagName-too-long>輸入的標籤太長。標籤名稱必須少於 30 個字元。</tagName-too-long>
-      <path-not-found>此標籤已被刪除或更改。請按一下刷新按鈕。</path-not-found>
+      <path-not-found>此標籤已被刪除或更改。請按一下更新按鈕。</path-not-found>
     </msg>
     <introduction>
       <tagName>用逗號分隔多個標籤"、"</tagName>
@@ -1904,7 +1904,7 @@
   -->
   <UIViewMetadataContainer>
     <msg>
-      <path-not-found>節點不支援這一視圖。</path-not-found>
+      <path-not-found>節點不支援這一觀點。</path-not-found>
     </msg>
   </UIViewMetadataContainer>
   <!--
@@ -1925,7 +1925,7 @@
   </metadataForm>
   <UIViewMetadataTemplate>
     <msg>
-      <access-denied>訪問被拒絕。你不是擁有者或做不有此節點中的編輯權限。</access-denied>
+      <access-denied>訪問被拒絕。你不是擁有者或沒有此節點的編輯權限。</access-denied>
     </msg>
   </UIViewMetadataTemplate>
   <!--
@@ -1963,7 +1963,7 @@
   ###################################################################################
   -->
   <ReferentialIntegrityException>
-    <msg>操作失敗。在工作區中仍有一些引用項目。</msg>
+    <msg>操作失敗。在工作區中仍有一些參考項目。</msg>
   </ReferentialIntegrityException>
   <ItemExistsException>
     <msg>這一項目已經存在。</msg>
@@ -2120,21 +2120,21 @@
     <action>
       <Save>#{word.save}</Save>
       <Cancel>#{word.cancel}</Cancel>
-      <RemoveThumbnail>刪除縮略圖</RemoveThumbnail>
+      <RemoveThumbnail>刪除縮圖</RemoveThumbnail>
     </action>
     <label>
-      <mediumSize>縮略圖圖片</mediumSize>
-      <SelectFile>選擇縮略圖圖片</SelectFile>
+      <mediumSize>縮圖圖片</mediumSize>
+      <SelectFile>選擇縮圖圖片</SelectFile>
     </label>
     <msg>
       <mimetype-incorrect>不正確的檔案類型。僅可以從建立縮略圖。JPG。PNG 或。GIF 檔。</mimetype-incorrect>
       <access-denied>訪問被拒絕。您沒有權限增加一個縮略圖到此節點。</access-denied>
-      <confirm-delete>確定要刪除此縮略圖嗎?</confirm-delete>
+      <confirm-delete>確定要刪除此縮圖嗎?</confirm-delete>
       <is-checked-in>此節點被簽入。請在執行任何操作之前檢查。</is-checked-in>
-      <fileName-error>請選擇要上載的檔案。</fileName-error>
+      <fileName-error>請選擇要上傳的檔案。</fileName-error>
     </msg>
     <title>
-      <remove-thumbnail>刪除此縮略圖</remove-thumbnail>
+      <remove-thumbnail>刪除此縮圖</remove-thumbnail>
     </title>
   </UIThumbnailForm>
   <!--
@@ -2188,14 +2188,14 @@
   </UIJCRExplorerPortlet>
 
   <UIJcrExplorerEditForm>
-    <title>編輯檔資源管理器</title>
+    <title>編輯文件資源管理器</title>
     <action>
       <Edit>編輯</Edit>
       <Save>#{word.save}</Save>
       <Cancel>#{word.cancel}</Cancel>
     </action>
     <label>
-      <uploadFileSizeLimitMB>上載檔案的大小限制(MB)</uploadFileSizeLimitMB>
+      <uploadFileSizeLimitMB>上傳檔案的大小限制(MB)</uploadFileSizeLimitMB>
       <isDirectlyDrive>直接驅動</isDirectlyDrive>
       <driveName>磁碟機的名稱</driveName>
       <usecase>選擇類型</usecase>
@@ -2382,7 +2382,7 @@
   <UISimpleCategoryManager>
     <tab>
       <label>
-        <UICategoriesAddedList>引用的類別</UICategoriesAddedList>
+        <UICategoriesAddedList>參考的類別</UICategoriesAddedList>
         <UIOneNodePathSelector>選擇類別</UIOneNodePathSelector>
       </label>
     </tab>
@@ -2462,7 +2462,7 @@
       <type0>建立新的</type0>
       <type1>刪除現有的</type1>
       <type2>替換現有的</type2>
-      <type3>拋出異常</type3>
+      <type3>引發的異常</type3>
     </Behavior>
   </Import>
 
@@ -2503,7 +2503,7 @@
       <Info>資訊</Info>
       <Actions>操作</Actions>
       <Collaboration>合作</Collaboration>
-      <Search>搜索</Search>
+      <Search>搜尋</Search>
     </obtion>
   </UIActionBar>
 
@@ -2528,7 +2528,7 @@
   </UIPopupMenu>
   <UIUploadForm>
     <msg>
-      <upload-not-null>上載檔案前請先增加類別。</upload-not-null>
+      <upload-not-null>上傳檔案前請先增加類別。</upload-not-null>
     </msg>
   </UIUploadForm>
   <UIActionBar>
@@ -2640,14 +2640,14 @@
           <Type>類型</Type>
           <CreatedDate>建立日期</CreatedDate>
           <ModifiedDate>修改日期</ModifiedDate>
-          <Ascending>昇冪</Ascending>
-          <Descending>降冪</Descending>
+          <Ascending>升序</Ascending>
+          <Descending>降序：</Descending>
       </label>
   </UIPreferencesForm>
 
   <UISavedSearches>
     <title>
-      <savedSearches>已保存的搜索</savedSearches>
+      <savedSearches>已儲存的搜尋</savedSearches>
     </title>
   </UISavedSearches>
   <DocumentType>
