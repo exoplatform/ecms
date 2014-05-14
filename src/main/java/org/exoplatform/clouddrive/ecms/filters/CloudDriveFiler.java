@@ -16,15 +16,15 @@
  */
 package org.exoplatform.clouddrive.ecms.filters;
 
-import javax.jcr.Node;
-import javax.jcr.RepositoryException;
-
+import org.exoplatform.clouddrive.CloudDrive;
 import org.exoplatform.clouddrive.CloudDriveService;
-import org.exoplatform.services.cms.link.NodeFinder;
+import org.exoplatform.clouddrive.DriveRemovedException;
 import org.exoplatform.services.log.ExoLogger;
 import org.exoplatform.services.log.Log;
 import org.exoplatform.services.wcm.utils.WCMCoreUtils;
 
+import javax.jcr.Node;
+import javax.jcr.RepositoryException;
 
 /**
  * Accept only ecd:cloudDrive nodes.<br>
@@ -38,18 +38,20 @@ import org.exoplatform.services.wcm.utils.WCMCoreUtils;
 public class CloudDriveFiler extends AbstractCloudDriveNodeFilter {
 
   protected static final Log LOG = ExoLogger.getLogger(CloudDriveFiler.class);
-  
+
   /**
    * {@inheritDoc}
    */
   @Override
   protected boolean accept(Node node) throws RepositoryException {
     CloudDriveService driveService = WCMCoreUtils.getService(CloudDriveService.class);
-    NodeFinder finder = WCMCoreUtils.getService(NodeFinder.class);
-
-    // doing this we are taking symlinks in account also
-    Node actualNode = (Node) finder.getItem(node.getSession(), node.getPath(), true);
-
-    return driveService.isDrive(actualNode);
+    CloudDrive drive = driveService.findDrive(node);
+    try {
+      // accept only exactly the drive node
+      return drive != null && drive.getPath().equals(node.getPath());
+    } catch (DriveRemovedException e) {
+      // doesn't accept removed
+      return false;
+    }
   }
 }

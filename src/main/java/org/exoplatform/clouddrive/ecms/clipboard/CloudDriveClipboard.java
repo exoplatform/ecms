@@ -1,0 +1,91 @@
+/*
+ * Copyright (C) 2003-2014 eXo Platform SAS.
+ *
+ * This is free software; you can redistribute it and/or modify it
+ * under the terms of the GNU Lesser General Public License as
+ * published by the Free Software Foundation; either version 2.1 of
+ * the License, or (at your option) any later version.
+ *
+ * This software is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the GNU
+ * Lesser General Public License for more details.
+ *
+ * You should have received a copy of the GNU Lesser General Public
+ * License along with this software; if not, write to the Free
+ * Software Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA
+ * 02110-1301 USA, or see the FSF site: http://www.fsf.org.
+ */
+package org.exoplatform.clouddrive.ecms.clipboard;
+
+import org.exoplatform.ecm.jcr.model.ClipboardCommand;
+import org.exoplatform.ecm.webui.component.explorer.UIJCRExplorer;
+import org.exoplatform.ecm.webui.component.explorer.sidebar.UIClipboard;
+import org.exoplatform.services.log.ExoLogger;
+import org.exoplatform.services.log.Log;
+import org.exoplatform.webui.config.annotation.ComponentConfig;
+import org.exoplatform.webui.config.annotation.EventConfig;
+import org.exoplatform.webui.event.Event;
+
+import javax.jcr.Node;
+
+/**
+ * Extended ECMS clipboard with support of Cloud Drive files pasting as symlinks. This class used as component
+ * config for actual {@link UIClipboard} in {@link CloudDriveClipboardActionComponent}.<br>
+ * 
+ * Created by The eXo Platform SAS.
+ * 
+ * @author <a href="mailto:pnedonosko@exoplatform.com">Peter Nedonosko</a>
+ * @version $Id: UICloudDriveClipboard.java 00000 May 13, 2014 pnedonosko $
+ * 
+ */
+@ComponentConfig(template = "app:/groovy/webui/component/explorer/sidebar/UIClipboard.gtmpl", events = {
+    @EventConfig(listeners = CloudDriveClipboard.PasteActionListener.class),
+    @EventConfig(listeners = UIClipboard.DeleteActionListener.class),
+    @EventConfig(listeners = UIClipboard.ClearAllActionListener.class) })
+public class CloudDriveClipboard extends UIClipboard {
+
+  protected static final Log LOG = ExoLogger.getLogger(CloudDriveClipboard.class);
+
+  public static class PasteActionListener
+                                         extends
+                                         org.exoplatform.ecm.webui.component.explorer.sidebar.UIClipboard.PasteActionListener {
+    public void execute(Event<UIClipboard> event) throws Exception {
+      // TODO cleanup
+      UIClipboard uiClipboard = event.getSource();
+      UIJCRExplorer uiExplorer = uiClipboard.getAncestorOfType(UIJCRExplorer.class);
+      // UIWorkingArea uiWorkingArea = uiExplorer.findFirstComponentOfType(UIWorkingArea.class);
+      String indexParam = event.getRequestContext().getRequestParameter(OBJECTID);
+      int index = Integer.parseInt(indexParam);
+      ClipboardCommand selectedClipboard = uiClipboard.getClipboardData().get(index - 1);
+      Node destNode = uiExplorer.getCurrentNode();
+      // String destPath = destNode.getPath();
+      // String destWorkspace = destNode.getSession().getWorkspace().getName();
+      // UIApplication app = uiClipboard.getAncestorOfType(UIApplication.class);
+      try {
+        if (CloudDrivePasteManageComponent.processCreateLink(selectedClipboard, destNode, uiExplorer)) {
+          destNode.getSession().save();
+          if (ClipboardCommand.CUT.equals(selectedClipboard.getType())) {
+            uiClipboard.getClipboardData().remove(selectedClipboard);
+          }
+          uiExplorer.updateAjax(event);
+          return;
+        }
+      } catch (Exception e) {
+        // let original coe to work
+        LOG.warn("Error creating link of cloud file. Default behaviour will be applied (file Paste).", e);
+      }
+
+      // else... original behaviour
+      super.execute(event);
+    }
+  }
+
+  /**
+   * @throws Exception
+   */
+  public CloudDriveClipboard() throws Exception {
+    super();
+  }
+
+}

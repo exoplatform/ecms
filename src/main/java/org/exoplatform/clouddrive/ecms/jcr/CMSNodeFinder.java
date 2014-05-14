@@ -23,9 +23,11 @@ import org.exoplatform.services.cms.link.LinkManager;
 import org.exoplatform.services.cms.link.impl.NodeFinderImpl;
 import org.exoplatform.services.jcr.RepositoryService;
 
+import javax.jcr.Item;
 import javax.jcr.Node;
 import javax.jcr.PathNotFoundException;
 import javax.jcr.RepositoryException;
+import javax.jcr.Session;
 
 /**
  * Node finder based on original implementation from ECMS.<br>
@@ -61,4 +63,11 @@ public class CMSNodeFinder extends NodeFinderImpl implements NodeFinder {
     return jcrName;
   }
 
+  /**
+   * {@inheritDoc}
+   */
+  @Override
+  public Item findItem(Session session, String absPath) throws PathNotFoundException, RepositoryException {
+    return getItem(session, absPath, true);
+  }
 }

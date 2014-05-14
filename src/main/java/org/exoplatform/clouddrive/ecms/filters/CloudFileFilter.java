@@ -18,17 +18,16 @@
  */
 package org.exoplatform.clouddrive.ecms.filters;
 
-import javax.jcr.Node;
-import javax.jcr.RepositoryException;
-
 import org.exoplatform.clouddrive.CloudDrive;
 import org.exoplatform.clouddrive.CloudDriveService;
 import org.exoplatform.clouddrive.DriveRemovedException;
-import org.exoplatform.services.cms.link.NodeFinder;
 import org.exoplatform.services.log.ExoLogger;
 import org.exoplatform.services.log.Log;
 import org.exoplatform.services.wcm.utils.WCMCoreUtils;
 import org.exoplatform.webui.application.WebuiRequestContext;
+
+import javax.jcr.Node;
+import javax.jcr.RepositoryException;
 
 /**
  * Filter for cloud files.
@@ -43,24 +42,18 @@ public class CloudFileFilter extends AbstractCloudDriveNodeFilter {
   @Override
   protected boolean accept(Node node) throws RepositoryException {
     CloudDriveService driveService = WCMCoreUtils.getService(CloudDriveService.class);
-    NodeFinder finder = WCMCoreUtils.getService(NodeFinder.class);
-
-    // doing this we are taking symlinks in account also
-    Node actualNode = (Node) finder.getItem(node.getSession(), node.getPath(), true);
-
-    CloudDrive drive = driveService.findDrive(actualNode);
+    CloudDrive drive = driveService.findDrive(node);
     if (drive != null) {
       try {
-        if (drive.hasFile(actualNode.getPath())) {
+        if (drive.hasFile(node.getPath())) {
           // attribute used in CloudFileViewer.gtmpl
           WebuiRequestContext.getCurrentInstance().setAttribute(CloudDrive.class, drive);
           return true;
         }
       } catch (DriveRemovedException e) {
-        // not accepted
-      }
+        // doesn't accept
+      } 
     }
-
     return false;
   }
 }
