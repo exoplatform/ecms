@@ -478,20 +478,38 @@ public abstract class CloudDrive {
   // ********** internal stuff **********
 
   /**
-   * Tells whether given node instance denotes this Cloud Drive. <br/>
-   * A node denote a cloud drive if it represents this drive's storage root node and the drive connected. If
-   * {@code includeFiles} is {@code true} then given node also will be tested whether it is a file on this
+   * Tells whether given node instance belongs to this Cloud Drive. <br/>
+   * A node belong to a cloud drive if it represents this drive's storage root node and the drive connected.
+   * If {@code includeFiles} is {@code true} then given node also will be tested whether it is a file in this
    * drive, and if it is, {@code true} will be returned.
    * 
    * @param node {@link Node}
    * @param includeFiles boolean, if {@code true} then given node also will be tested as a possible file of
    *          this drive and thus {@code true} will be returned for the file on this drive.
-   * @return boolean, {@code true} if given object denotes this Cloud Drive, {@code false} otherwise.
+   * @return boolean, {@code true} if given node belongs to this Cloud Drive, {@code false} otherwise.
    * @throws DriveRemovedException
    * @throws RepositoryException
    */
   protected abstract boolean isDrive(Node node, boolean includeFiles) throws DriveRemovedException,
                                                                      RepositoryException;
+
+  /**
+   * Tells whether given path belongs to this Cloud Drive. <br/>
+   * A path belong a cloud drive if it represents this drive's storage root node and the drive connected. If
+   * {@code includeFiles} is {@code true} then given path also will be tested whether it is a path of file in
+   * this drive, and if it is, {@code true} will be returned.
+   * 
+   * @param workspace TODO
+   * @param path {@link String}
+   * @param includeFiles boolean, if {@code true} then given path also will be tested as a possible file of
+   *          this drive and thus {@code true} will be returned for the file on this drive.
+   * 
+   * @return boolean, {@code true} if given path belongs to this Cloud Drive., {@code false} otherwise.
+   * @throws DriveRemovedException
+   * @throws RepositoryException
+   */
+  protected abstract boolean isDrive(String workspace, String path, boolean includeFiles) throws DriveRemovedException,
+                                                                                         RepositoryException;
 
   /**
    * Disconnects cloud drive from local storage. Clean (remove) metadata of remote files from the local.
@@ -533,4 +551,30 @@ public abstract class CloudDrive {
    *          synchronization.
    */
   protected abstract void configure(CloudDriveEnvironment env, Collection<CloudFileSynchronizer> synchronizers);
+
+  /**
+   * Initialize future cloud file removal. This operation will complete on parent node save. This method
+   * created for use from JCR pre-remove action.
+   * 
+   * @param file {@link Node} a node representing a file in the drive.
+   * @throws SyncNotSupportedException
+   * @throws CloudDriveException
+   * @throws RepositoryException
+   */
+  protected abstract void initRemove(Node file) throws SyncNotSupportedException,
+                                               CloudDriveException,
+                                               RepositoryException;
+
+  /**
+   * Initialize future cloud file copying.
+   * 
+   * @param srcNode {@link Node}
+   * @param destNode {@link Node}
+   * @throws SyncNotSupportedException
+   * @throws CloudDriveException
+   * @throws RepositoryException
+   */
+  protected abstract void initCopy(Node srcNode, Node destNode) throws SyncNotSupportedException,
+                                                               CloudDriveException,
+                                                               RepositoryException;
 }

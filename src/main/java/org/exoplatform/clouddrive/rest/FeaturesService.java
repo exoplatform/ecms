@@ -24,22 +24,16 @@ import org.exoplatform.clouddrive.CloudDriveService;
 import org.exoplatform.clouddrive.CloudProvider;
 import org.exoplatform.clouddrive.ProviderNotAvailableException;
 import org.exoplatform.clouddrive.features.CloudDriveFeatures;
-import org.exoplatform.clouddrive.jcr.JCRNodeFinder;
-import org.exoplatform.clouddrive.jcr.NodeFinder;
 import org.exoplatform.services.jcr.RepositoryService;
 import org.exoplatform.services.jcr.ext.app.SessionProviderService;
-import org.exoplatform.services.jcr.ext.common.SessionProvider;
 import org.exoplatform.services.log.ExoLogger;
 import org.exoplatform.services.log.Log;
 import org.exoplatform.services.rest.resource.ResourceContainer;
 import org.exoplatform.services.security.ConversationState;
 
 import javax.annotation.security.RolesAllowed;
-import javax.jcr.Item;
 import javax.jcr.LoginException;
-import javax.jcr.Node;
 import javax.jcr.RepositoryException;
-import javax.jcr.Session;
 import javax.ws.rs.GET;
 import javax.ws.rs.Path;
 import javax.ws.rs.Produces;
@@ -73,24 +67,6 @@ public class FeaturesService implements ResourceContainer {
 
   protected final SessionProviderService sessionProviders;
 
-  protected final NodeFinder             finder;
-
-  /**
-   * 
-   */
-  public FeaturesService(CloudDriveService cloudDrives,
-                         CloudDriveFeatures features,
-                         RepositoryService jcrService,
-                         SessionProviderService sessionProviders,
-                         NodeFinder finder) {
-    this.cloudDrives = cloudDrives;
-    this.features = features;
-
-    this.jcrService = jcrService;
-    this.sessionProviders = sessionProviders;
-    this.finder = finder;
-  }
-
   /**
    * 
    */
@@ -103,7 +79,6 @@ public class FeaturesService implements ResourceContainer {
 
     this.jcrService = jcrService;
     this.sessionProviders = sessionProviders;
-    this.finder = new JCRNodeFinder(jcrService);
   }
 
   @GET
@@ -136,7 +111,9 @@ public class FeaturesService implements ResourceContainer {
                                                    provider);
           return Response.ok().entity("{\"result\":\"" + result + "\"}").build();
         } catch (CannotCreateDriveException e) {
-          return Response.ok().entity("{\"result\":\"false\", \"message\":\"" + e.getMessage() + "\"}").build();
+          return Response.ok()
+                         .entity("{\"result\":\"false\", \"message\":\"" + e.getMessage() + "\"}")
+                         .build();
         }
       } else {
         return Response.status(Status.BAD_REQUEST).entity("Null path.").build();
@@ -155,27 +132,13 @@ public class FeaturesService implements ResourceContainer {
     if (workspace != null) {
       if (path != null) {
         try {
-          SessionProvider sp = sessionProviders.getSessionProvider(null);
-          Session userSession = sp.getSession(workspace, jcrService.getCurrentRepository());
-
-          try {
-            Item item = finder.getItem(userSession, path, true);
-            if (item.isNode()) {
-              Node userNode = (Node) item;
-              CloudDrive local = cloudDrives.findDrive(userNode);
-              if (local != null) {
-                boolean result = features.isAutosyncEnabled(local);
-                return Response.ok().entity("{\"result\":\"" + result + "\"}").build();
-              } else {
-                LOG.warn("Item " + workspace + ":" + path + " not a cloud file or drive not connected.");
-                return Response.status(Status.NO_CONTENT).build();
-              }
-            } else {
-              LOG.warn("Item " + workspace + ":" + path + " not a node.");
-              return Response.status(Status.PRECONDITION_FAILED).entity("Not a node.").build();
-            }
-          } finally {
-            userSession.logout();
+          CloudDrive local = cloudDrives.findDrive(workspace, path);
+          if (local != null) {
+            boolean result = features.isAutosyncEnabled(local);
+            return Response.ok().entity("{\"result\":\"" + result + "\"}").build();
+          } else {
+            LOG.warn("Item " + workspace + ":" + path + " not a cloud file or drive not connected.");
+            return Response.status(Status.NO_CONTENT).build();
           }
         } catch (LoginException e) {
           LOG.warn("Error login to read drive " + workspace + ":" + path + ". " + e.getMessage());

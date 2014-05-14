@@ -269,6 +269,26 @@ public class JCRLocalExoDrive extends JCRLocalCloudDrive {
      * {@inheritDoc}
      */
     @Override
+    public String copyFile(Node srcFileNode, Node destFileNode) throws CloudDriveException,
+                                                               RepositoryException {
+      // TODO Auto-generated method stub
+      return null;
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public String copyFolder(Node srcFolderNode, Node destFolderNode) throws CloudDriveException,
+                                                                     RepositoryException {
+      // TODO Auto-generated method stub
+      return null;
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
     public void removeFile(String id) throws CloudDriveException, RepositoryException {
       // TODO Auto-generated method stub
 

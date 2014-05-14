@@ -44,6 +44,7 @@ import com.box.boxjavalibv2.requests.requestobjects.BoxEventRequestObject;
 import com.box.boxjavalibv2.requests.requestobjects.BoxFileRequestObject;
 import com.box.boxjavalibv2.requests.requestobjects.BoxFolderDeleteRequestObject;
 import com.box.boxjavalibv2.requests.requestobjects.BoxFolderRequestObject;
+import com.box.boxjavalibv2.requests.requestobjects.BoxItemCopyRequestObject;
 import com.box.boxjavalibv2.requests.requestobjects.BoxItemRestoreRequestObject;
 import com.box.boxjavalibv2.requests.requestobjects.BoxRequestExtras;
 import com.box.boxjavalibv2.utils.ISO8601DateParser;
@@ -1035,9 +1036,9 @@ public class BoxAPI {
   }
 
   BoxFile untrashFile(String id, String name) throws BoxException,
-                                NotFoundException,
-                                RefreshAccessException,
-                                ConflictException {
+                                             NotFoundException,
+                                             RefreshAccessException,
+                                             ConflictException {
     try {
       BoxItemRestoreRequestObject obj = BoxItemRestoreRequestObject.restoreItemRequestObject();
       if (name != null) {
@@ -1125,7 +1126,7 @@ public class BoxAPI {
     while ((nameChanged || parentChanged) && attemts < 3) {
       attemts++;
       try {
-        // if name of parent changed - we do actual update, we ignore modified date changes
+        // if name or parent changed - we do actual update, we ignore modified date changes
         // otherwise, if name the same, Box service will respond with error 409 (conflict)
         BoxFileRequestObject obj = BoxFileRequestObject.getRequestObject();
         // obj.setIfMatch(etag); // TODO use it
@@ -1227,7 +1228,7 @@ public class BoxAPI {
     boolean parentChanged = !existing.getParent().getId().equals(parentId);
     while ((nameChanged || parentChanged) && attemts < 3) {
       attemts++;
-      // if name of parent changed - we do actual update, we ignore modified date changes
+      // if name or parent changed - we do actual update, we ignore modified date changes
       // otherwise, if name the same, Box service will respond with error 409 (conflict)
       try {
         BoxFolderRequestObject obj = BoxFolderRequestObject.createFolderRequestObject(name, parentId);
@@ -1263,6 +1264,92 @@ public class BoxAPI {
     }
     // else we return null, it means existing folder wasn't changed
     return null;
+  }
+
+  /**
+   * Copy file to a new one. If file was successfully copied this method return new file object.
+   * 
+   * 
+   * @param id {@link String}
+   * @param parentId {@link String}
+   * @param name {@link String}
+   * @param modified {@link Calendar}
+   * @return {@link BoxFile} of actually copied file.
+   * @throws BoxException
+   * @throws NotFoundException
+   * @throws RefreshAccessException
+   * @throws ConflictException
+   */
+  BoxFile copyFile(String id, String parentId, String name) throws BoxException,
+                                                           NotFoundException,
+                                                           RefreshAccessException,
+                                                           ConflictException {
+    try {
+      BoxItemCopyRequestObject obj = BoxItemCopyRequestObject.copyItemRequestObject(parentId);
+      // obj.setIfMatch(etag); // TODO use it
+      obj.setName(name);
+      return client.getFilesManager().copyFile(id, obj);
+    } catch (BoxRestException e) {
+      throw new BoxException("Error copying file: " + e.getMessage(), e);
+    } catch (BoxServerException e) {
+      int status = getErrorStatus(e);
+      if (status == 404 || status == 412) {
+        // not_found or precondition_failed - then item not found
+        throw new NotFoundException("File not found " + id, e);
+      } else if (status == 409) {
+        // conflict, try again
+        if (LOG.isDebugEnabled()) {
+          LOG.debug("File with the same name as copying already exists " + id + ". Trying again.");
+        }
+        throw new ConflictException("File with the same name as copying already exists " + id);
+      }
+      throw new BoxException("Error copying file: " + e.getMessage(), e);
+    } catch (AuthFatalFailureException e) {
+      checkTokenState();
+      throw new BoxException("Authentication error when copying file: " + e.getMessage(), e);
+    }
+  }
+
+  /**
+   * Copy folder to a new one. If folder was successfully copied this method return new folder object.
+   * 
+   * @param id {@link String}
+   * @param parentId {@link String}
+   * @param name {@link String}
+   * @return {@link BoxFile} of actually copied folder.
+   * @throws BoxException
+   * @throws NotFoundException
+   * @throws RefreshAccessException
+   * @throws ConflictException
+   */
+  BoxFolder copyFolder(String id, String parentId, String name) throws BoxException,
+                                                               NotFoundException,
+                                                               RefreshAccessException,
+                                                               ConflictException {
+    try {
+      BoxItemCopyRequestObject obj = BoxItemCopyRequestObject.copyItemRequestObject(parentId);
+      // obj.setIfMatch(etag); // TODO use it
+      obj.setName(name);
+      return client.getFoldersManager().copyFolder(id, obj);
+    } catch (BoxRestException e) {
+      throw new BoxException("Error copying folder: " + e.getMessage(), e);
+    } catch (BoxServerException e) {
+      int status = getErrorStatus(e);
+      if (status == 404 || status == 412) {
+        // not_found or precondition_failed - then item not found
+        throw new NotFoundException("Folder not found " + id, e);
+      } else if (status == 409) {
+        // conflict, try again
+        if (LOG.isDebugEnabled()) {
+          LOG.debug("Folder with the same name as copying already exists " + id + ". Trying again.");
+        }
+        throw new ConflictException("Folder with the same name as copying already exists " + id);
+      }
+      throw new BoxException("Error copying folder: " + e.getMessage(), e);
+    } catch (AuthFatalFailureException e) {
+      checkTokenState();
+      throw new BoxException("Authentication error when copying folder: " + e.getMessage(), e);
+    }
   }
 
   BoxFile readFile(String id) throws BoxException, NotFoundException, RefreshAccessException {

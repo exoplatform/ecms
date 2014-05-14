@@ -51,7 +51,7 @@ public interface CloudFileAPI {
   boolean isFileResource(Node node) throws RepositoryException;
 
   boolean isIgnored(Node node) throws RepositoryException;
-  
+
   String createFile(Node fileNode, Calendar created, Calendar modified, String mimeType, InputStream content) throws CloudDriveException,
                                                                                                              RepositoryException;
 
@@ -63,6 +63,10 @@ public interface CloudFileAPI {
 
   void updateFileContent(Node fileNode, Calendar modified, String mimeType, InputStream content) throws CloudDriveException,
                                                                                                 RepositoryException;
+
+  String copyFile(Node srcFileNode, Node destFileNode) throws CloudDriveException, RepositoryException;
+
+  String copyFolder(Node srcFolderNode, Node destFolderNode) throws CloudDriveException, RepositoryException;
 
   void removeFile(String id) throws CloudDriveException, RepositoryException;
 

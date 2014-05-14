@@ -230,24 +230,21 @@ public class CloudDriveServiceImpl implements CloudDriveService, Startable {
     }
     return null;
   }
-
+  
   /**
    * {@inheritDoc}
    */
   @Override
-  public boolean isDrive(Node node) throws RepositoryException {
+  public CloudDrive findDrive(String workspace, String path) throws RepositoryException {
     ConversationState convState = ConversationState.getCurrent();
-    if (convState != null && convState.getIdentity().getUserId().equals(node.getSession().getUserID())) {
-
-      String repoName = ((ManageableRepository) node.getSession().getRepository()).getConfiguration()
-                                                                                  .getName();
-
+    if (convState != null) {
+      String repoName = jcrService.getCurrentRepository().getConfiguration().getName();
       Map<CloudUser, CloudDrive> drives = repositoryDrives.get(repoName);
       if (drives != null) {
         for (CloudDrive local : drives.values()) {
           try {
-            if (local.isDrive(node, false)) {
-              return true; // we found it
+            if (local.isDrive(workspace, path, true)) {
+              return local; // we found it
             }
           } catch (AccessDeniedException e) {
             // skip other users nodes, can be thrown on isConnected() - try next
@@ -257,7 +254,7 @@ public class CloudDriveServiceImpl implements CloudDriveService, Startable {
         }
       }
     }
-    return false;
+    return null;
   }
 
   /**
@@ -307,7 +304,8 @@ public class CloudDriveServiceImpl implements CloudDriveService, Startable {
             // given user already connected to another node (possible if node was renamed in JCR), we cannot
             // proceed
             // TODO should we point an user email in the message?
-            LOG.warn("User " + user.getEmail() + " already connected to another node " + localPath);
+            LOG.warn("User " + user.getEmail() + " already connected to another node " + localPath
+                + ", cannot connect it to " + driveNode.getPath());
             throw new UserAlreadyConnectedException("User " + user.getEmail()
                 + " already connected to another node " + localPath);
           }

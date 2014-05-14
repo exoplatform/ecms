@@ -44,7 +44,7 @@ import javax.jcr.RepositoryException;
  */
 public final class LostRemovalSynchronizer implements CloudFileSynchronizer {
 
-  protected static final Log              LOG         = ExoLogger.getLogger(LostRemovalSynchronizer.class);
+  protected static final Log LOG = ExoLogger.getLogger(LostRemovalSynchronizer.class);
 
   /**
    * 
@@ -122,4 +122,14 @@ public final class LostRemovalSynchronizer implements CloudFileSynchronizer {
   public boolean updateContent(Node file, CloudFileAPI api) throws CloudDriveException, RepositoryException {
     throw new SyncNotSupportedException("Not supported");
   }
+
+  /**
+   * {@inheritDoc}
+   */
+  @Override
+  public boolean copy(Node srcFile, Node destFile, CloudFileAPI api) throws CloudDriveException,
+                                                                    RepositoryException {
+    throw new SyncNotSupportedException("Not supported");
+  }
+
 }

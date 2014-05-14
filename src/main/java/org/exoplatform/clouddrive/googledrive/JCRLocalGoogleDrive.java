@@ -625,6 +625,78 @@ public class JCRLocalGoogleDrive extends JCRLocalCloudDrive implements UserToken
      * {@inheritDoc}
      */
     @Override
+    public String copyFile(Node srcFileNode, Node destFileNode) throws CloudDriveException,
+                                                               RepositoryException {
+      File gf = new File(); // new file
+      gf.setId(getId(srcFileNode));
+      gf.setTitle(getTitle(destFileNode));
+      gf.setParents(Arrays.asList(new ParentReference().setId(getParentId(destFileNode))));
+
+      try {
+        gf = api.copy(gf);
+      } catch (CloudDriveAccessException e) {
+        checkAccessScope(e);
+        throw e;
+      }
+
+      // use actual dates from Google
+      Calendar created = api.parseDate(gf.getCreatedDate().toStringRfc3339());
+      Calendar modified = api.parseDate(gf.getModifiedDate().toStringRfc3339());
+
+      initFile(destFileNode,
+               gf.getId(),
+               gf.getTitle(),
+               gf.getMimeType(),
+               gf.getAlternateLink(),
+               gf.getEmbedLink(),
+               gf.getThumbnailLink(),
+               gf.getOwnerNames().get(0),
+               gf.getLastModifyingUserName(),
+               created,
+               modified);
+
+      return gf.getId();
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public String copyFolder(Node srcFolderNode, Node destFolderNode) throws CloudDriveException,
+                                                                     RepositoryException {
+      File gf = new File(); // new file
+      gf.setId(getId(srcFolderNode));
+      gf.setTitle(getTitle(destFolderNode));
+      gf.setParents(Arrays.asList(new ParentReference().setId(getParentId(destFolderNode))));
+
+      try {
+        gf = api.copy(gf);
+      } catch (CloudDriveAccessException e) {
+        checkAccessScope(e);
+        throw e;
+      }
+
+      // use actual dates from Google
+      Calendar created = api.parseDate(gf.getCreatedDate().toStringRfc3339());
+      Calendar modified = api.parseDate(gf.getModifiedDate().toStringRfc3339());
+      
+      initFolder(destFolderNode,
+                 gf.getId(),
+                 gf.getTitle(),
+                 gf.getMimeType(),
+                 gf.getAlternateLink(),
+                 gf.getOwnerNames().get(0),
+                 gf.getLastModifyingUserName(),
+                 created,
+                 modified);
+
+      return gf.getId();
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
     public void removeFile(String id) throws CloudDriveException, RepositoryException {
       try {
         api.delete(id);

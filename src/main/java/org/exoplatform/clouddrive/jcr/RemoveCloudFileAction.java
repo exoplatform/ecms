@@ -18,6 +18,7 @@ package org.exoplatform.clouddrive.jcr;
 
 import org.apache.commons.chain.Context;
 import org.exoplatform.clouddrive.CloudDrive;
+import org.exoplatform.clouddrive.CloudDriveManager;
 import org.exoplatform.clouddrive.CloudDriveService;
 import org.exoplatform.clouddrive.SyncNotSupportedException;
 import org.exoplatform.services.ext.action.InvocationContext;
@@ -55,16 +56,11 @@ public class RemoveCloudFileAction extends AbstractJCRAction {
             try {
               start(localDrive);
 
-              // XXX works with JCR impl only
               try {
-                ((JCRLocalCloudDrive) localDrive).initRemove(fileNode);
+                new CloudDriveManager(localDrive).initRemove(fileNode);
               } catch (SyncNotSupportedException e) {
                 LOG.error("Cannor remove file " + fileNode.getPath() + ": " + e.getMessage());
               }
-              // TODO remove file from the cloud drive and set this action on nt:file
-              // LOG.error("***** Cloud Drive file removed: " + cloudFile.getPath() + " *****");
-              // throw new IllegalStateException(localDrive.getUser().getProvider().getName()
-              // + " file cannot be locally removed: " + fileNode.getPath());
             } finally {
               done();
             }

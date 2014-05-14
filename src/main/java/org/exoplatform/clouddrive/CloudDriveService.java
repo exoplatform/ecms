@@ -16,12 +16,12 @@
  */
 package org.exoplatform.clouddrive;
 
+import org.exoplatform.services.security.ConversationState;
+
 import java.util.Set;
 
 import javax.jcr.Node;
 import javax.jcr.RepositoryException;
-
-import org.exoplatform.services.security.ConversationState;
 
 /**
  * Created by The eXo Platform SAS
@@ -71,16 +71,8 @@ public interface CloudDriveService {
    * @throws RepositoryException if storage exception happened
    */
   CloudDrive findDrive(Node node) throws RepositoryException;
-
-  /**
-   * Tells whether given node denotes some {@link CloudDrive}. Some {@link Node} denote a cloud drive if such
-   * drive connected to this node (node is a storage of this drive).
-   * 
-   * @param node {@link Node}
-   * @return boolean, {@code true} if given node is a cloud drive
-   * @throws RepositoryException
-   */
-  boolean isDrive(Node node) throws RepositoryException;
+  
+  CloudDrive findDrive(String workspace, String path) throws RepositoryException;
 
   /**
    * Find provider by given id.

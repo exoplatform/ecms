@@ -31,6 +31,7 @@ import java.util.Calendar;
 
 import javax.jcr.Node;
 import javax.jcr.NodeIterator;
+import javax.jcr.PathNotFoundException;
 import javax.jcr.RepositoryException;
 
 /**
@@ -77,7 +78,17 @@ public class NtFileSynchronizer implements CloudFileSynchronizer {
    * {@inheritDoc}
    */
   public boolean create(Node file, CloudFileAPI api) throws RepositoryException, CloudDriveException {
-    String title = api.getTitle(file);
+    String title;
+    try {
+      title = api.getTitle(file);
+    } catch (PathNotFoundException e) {
+      try {
+        title = file.getProperty("exo:name").getString();
+      } catch (PathNotFoundException e1) {
+        title = file.getName();
+      }
+    }
+
     Calendar created = file.getProperty("jcr:created").getDate();
 
     if (file.isNodeType(JCRLocalCloudDrive.NT_FILE)) { // use JCR, this node not yet a cloud file
@@ -218,4 +229,23 @@ public class NtFileSynchronizer implements CloudFileSynchronizer {
     }
   }
 
+  /**
+   * {@inheritDoc}
+   */
+  @Override
+  public boolean copy(Node srcFile, Node destFile, CloudFileAPI api) throws CloudDriveException,
+                                                                    RepositoryException {
+    if (api.isFolder(destFile)) {
+      api.copyFolder(srcFile, destFile);
+      return true;
+    } else if (api.isFile(destFile)) {
+      api.copyFile(srcFile, destFile);
+      return true;
+    } else {
+      // it's smth not expected
+      LOG.warn("Unexpected type of copied node in nt:file or nt:folder hierarchy: "
+          + destFile.getPrimaryNodeType().getName() + ". Location: " + destFile.getPath());
+      return false;
+    }
+  }
 }

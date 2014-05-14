@@ -25,11 +25,8 @@ import org.exoplatform.clouddrive.CloudProvider;
 import org.exoplatform.clouddrive.DriveRemovedException;
 import org.exoplatform.clouddrive.NotCloudFileException;
 import org.exoplatform.clouddrive.RefreshAccessException;
-import org.exoplatform.clouddrive.jcr.JCRNodeFinder;
-import org.exoplatform.clouddrive.jcr.NodeFinder;
 import org.exoplatform.services.jcr.RepositoryService;
 import org.exoplatform.services.jcr.ext.app.SessionProviderService;
-import org.exoplatform.services.jcr.ext.common.SessionProvider;
 import org.exoplatform.services.log.ExoLogger;
 import org.exoplatform.services.log.Log;
 import org.exoplatform.services.rest.resource.ResourceContainer;
@@ -40,11 +37,8 @@ import java.util.HashSet;
 import java.util.concurrent.ExecutionException;
 
 import javax.annotation.security.RolesAllowed;
-import javax.jcr.Item;
 import javax.jcr.LoginException;
-import javax.jcr.Node;
 import javax.jcr.RepositoryException;
-import javax.jcr.Session;
 import javax.ws.rs.FormParam;
 import javax.ws.rs.GET;
 import javax.ws.rs.POST;
@@ -77,27 +71,6 @@ public class DriveService implements ResourceContainer {
 
   protected final SessionProviderService sessionProviders;
 
-  protected final NodeFinder             finder;
-
-  /**
-   * REST cloudDrives uses {@link CloudDriveService} for actual job. This service will use {@link NodeFinder}
-   * injected from container.
-   * 
-   * @param cloudDrives {@link CloudDriveService}
-   * @param jcrService {@link RepositoryService}
-   * @param sessionProviders {@link SessionProviderService}
-   * @param finder {@link NodeFinder}
-   */
-  public DriveService(CloudDriveService cloudDrives,
-                      RepositoryService jcrService,
-                      SessionProviderService sessionProviders,
-                      NodeFinder finder) {
-    this.cloudDrives = cloudDrives;
-    this.jcrService = jcrService;
-    this.sessionProviders = sessionProviders;
-    this.finder = finder;
-  }
-
   /**
    * REST cloudDrives uses {@link CloudDriveService} for actual job.
    * 
@@ -111,7 +84,6 @@ public class DriveService implements ResourceContainer {
     this.cloudDrives = cloudDrives;
     this.jcrService = jcrService;
     this.sessionProviders = sessionProviders;
-    this.finder = new JCRNodeFinder(jcrService);
   }
 
   /**
@@ -177,95 +149,79 @@ public class DriveService implements ResourceContainer {
    */
   protected Response readDrive(String workspace, String path, boolean synchronize) {
     try {
-      SessionProvider sp = sessionProviders.getSessionProvider(null);
-      Session userSession = sp.getSession(workspace, jcrService.getCurrentRepository());
-
-      try {
-        Item item = finder.getItem(userSession, path, true);
-        if (item.isNode()) {
-          Node userNode = (Node) item;
-
-          CloudDrive local = cloudDrives.findDrive(userNode);
-          if (local != null) {
-            Collection<CloudFile> files;
-            Collection<String> removed;
-            if (synchronize) {
-              try {
-                Command sync = local.synchronize();
-                sync.await(); // wait for sync process
-                files = sync.getFiles();
-                removed = sync.getRemoved();
-              } catch (InterruptedException e) {
-                LOG.warn("Caller of synchronization command interrupted.", e);
-                Thread.currentThread().interrupt();
-                return Response.status(Status.SERVICE_UNAVAILABLE)
-                               .entity("Synchrinization interrupted. Try again later.")
-                               .build();
-              } catch (ExecutionException e) {
-                Throwable err = e.getCause();
-                if (err instanceof RefreshAccessException) {
-                  Throwable cause = err.getCause();
-                  LOG.warn("Access to cloud drive expired, forbidden or revoked. " + err.getMessage()
-                      + (cause != null ? ". " + cause.getMessage() : ""));
-                  // client should treat this status in special way and obtain new credentials using given
-                  // provider
-                  return Response.status(Status.FORBIDDEN).entity(local.getUser().getProvider()).build();
-                } else if (err instanceof CloudDriveException) {
-                  LOG.error("Error synchrinizing the drive. " + err.getMessage(), err);
-                  return Response.status(Status.INTERNAL_SERVER_ERROR)
-                                 .entity("Error synchrinizing the drive. Try again later.")
-                                 .build();
-                } else if (err instanceof RepositoryException) {
-                  LOG.error("Storage error. " + err.getMessage(), err);
-                  return Response.status(Status.INTERNAL_SERVER_ERROR)
-                                 .entity("Storage error. Synchronization canceled.")
-                                 .build();
-                } else if (err instanceof RuntimeException) {
-                  LOG.error("Runtime error. " + err.getMessage(), err);
-                  return Response.status(Status.INTERNAL_SERVER_ERROR)
-                                 .entity("Internal server error. Synchronization canceled. Try again later.")
-                                 .build();
-                }
-                LOG.error("Unexpected error. " + err.getMessage(), err);
-                return Response.status(Status.INTERNAL_SERVER_ERROR)
-                               .entity("Unexpected server error. Synchronization canceled. Try again later.")
-                               .build();
-              } catch (CloudDriveException e) {
-                LOG.error("Error synchronizing drive " + workspace + ":" + path, e);
-                return Response.status(Status.INTERNAL_SERVER_ERROR)
-                               .entity("Error synchronizing drive. " + e.getMessage())
-                               .build();
-              }
-            } else {
-              files = new ArrayList<CloudFile>();
-              removed = new HashSet<String>();
-              try {
-                String userPath = userNode.getPath();
-                if (!local.getPath().equals(userPath)) {
-                  // if path not the drive itself
-                  CloudFile file = local.getFile(userPath);
-                  files.add(file);
-                  if (!file.getPath().equals(path)) {
-                    files.add(new LinkedCloudFile(file, path)); // it's symlink, add it also
-                  }
-                }
-              } catch (NotCloudFileException e) {
-                LOG.warn("Item " + workspace + ":" + path + " not a cloud file : " + e.getMessage());
-                return Response.status(Status.NO_CONTENT).build();
-              }
+      CloudDrive local = cloudDrives.findDrive(workspace, path);
+      if (local != null) {
+        Collection<CloudFile> files;
+        Collection<String> removed;
+        if (synchronize) {
+          try {
+            Command sync = local.synchronize();
+            sync.await(); // wait for sync process
+            files = sync.getFiles();
+            removed = sync.getRemoved();
+          } catch (InterruptedException e) {
+            LOG.warn("Caller of synchronization command interrupted.", e);
+            Thread.currentThread().interrupt();
+            return Response.status(Status.SERVICE_UNAVAILABLE)
+                           .entity("Synchrinization interrupted. Try again later.")
+                           .build();
+          } catch (ExecutionException e) {
+            Throwable err = e.getCause();
+            if (err instanceof RefreshAccessException) {
+              Throwable cause = err.getCause();
+              LOG.warn("Access to cloud drive expired, forbidden or revoked. " + err.getMessage()
+                  + (cause != null ? ". " + cause.getMessage() : ""));
+              // client should treat this status in special way and obtain new credentials using given
+              // provider
+              return Response.status(Status.FORBIDDEN).entity(local.getUser().getProvider()).build();
+            } else if (err instanceof CloudDriveException) {
+              LOG.error("Error synchrinizing the drive. " + err.getMessage(), err);
+              return Response.status(Status.INTERNAL_SERVER_ERROR)
+                             .entity("Error synchrinizing the drive. Try again later.")
+                             .build();
+            } else if (err instanceof RepositoryException) {
+              LOG.error("Storage error. " + err.getMessage(), err);
+              return Response.status(Status.INTERNAL_SERVER_ERROR)
+                             .entity("Storage error. Synchronization canceled.")
+                             .build();
+            } else if (err instanceof RuntimeException) {
+              LOG.error("Runtime error. " + err.getMessage(), err);
+              return Response.status(Status.INTERNAL_SERVER_ERROR)
+                             .entity("Internal server error. Synchronization canceled. Try again later.")
+                             .build();
             }
-
-            return Response.ok().entity(DriveInfo.create(local, files, removed)).build();
-          } else {
-            LOG.warn("Item " + workspace + ":" + path + " not a cloud file or drive not connected.");
-            return Response.status(Status.NO_CONTENT).build();
+            LOG.error("Unexpected error. " + err.getMessage(), err);
+            return Response.status(Status.INTERNAL_SERVER_ERROR)
+                           .entity("Unexpected server error. Synchronization canceled. Try again later.")
+                           .build();
+          } catch (CloudDriveException e) {
+            LOG.error("Error synchronizing drive " + workspace + ":" + path, e);
+            return Response.status(Status.INTERNAL_SERVER_ERROR)
+                           .entity("Error synchronizing drive. " + e.getMessage())
+                           .build();
           }
         } else {
-          LOG.warn("Item " + workspace + ":" + path + " not a node.");
-          return Response.status(Status.PRECONDITION_FAILED).entity("Not a node.").build();
+          files = new ArrayList<CloudFile>();
+          removed = new HashSet<String>();
+          try {
+            if (!local.getPath().equals(path)) {
+              // if path not the drive itself
+              CloudFile file = local.getFile(path);
+              files.add(file);
+              if (!file.getPath().equals(path)) {
+                files.add(new LinkedCloudFile(file, path)); // it's symlink, add it also
+              }
+            }
+          } catch (NotCloudFileException e) {
+            LOG.warn("Item " + workspace + ":" + path + " not a cloud file : " + e.getMessage());
+            return Response.status(Status.NO_CONTENT).build();
+          }
         }
-      } finally {
-        userSession.logout();
+
+        return Response.ok().entity(DriveInfo.create(local, files, removed)).build();
+      } else {
+        LOG.warn("Item " + workspace + ":" + path + " not a cloud file or drive not connected.");
+        return Response.status(Status.NO_CONTENT).build();
       }
     } catch (LoginException e) {
       LOG.warn("Error login to read drive " + workspace + ":" + path + ". " + e.getMessage());
@@ -302,31 +258,21 @@ public class DriveService implements ResourceContainer {
     if (workspace != null) {
       if (path != null) {
         try {
-          SessionProvider sp = sessionProviders.getSessionProvider(null);
-          Session userSession = sp.getSession(workspace, jcrService.getCurrentRepository());
-          Item item = finder.getItem(userSession, path, true);
-          if (item.isNode()) {
-            Node userNode = (Node) item;
-
-            CloudDrive local = cloudDrives.findDrive(userNode);
-            if (local != null) {
-              try {
-                CloudFile file = local.getFile(userNode.getPath());
-                if (!file.getPath().equals(path)) {
-                  file = new LinkedCloudFile(file, path); // it's symlink
-                }
-
-                return Response.ok().entity(file).build();
-              } catch (NotCloudFileException e) {
-                LOG.warn("Item " + workspace + ":" + path + " not a cloud file: " + e.getMessage());
+          CloudDrive local = cloudDrives.findDrive(workspace, path);
+          if (local != null) {
+            try {
+              CloudFile file = local.getFile(path);
+              if (!file.getPath().equals(path)) {
+                file = new LinkedCloudFile(file, path); // it's symlink
               }
+
+              return Response.ok().entity(file).build();
+            } catch (NotCloudFileException e) {
+              LOG.warn("Item " + workspace + ":" + path + " not a cloud file: " + e.getMessage());
             }
-            LOG.warn("Item " + workspace + ":" + path + " not a cloud file or drive not connected.");
-            return Response.status(Status.NO_CONTENT).build();
-          } else {
-            LOG.warn("Item " + workspace + ":" + path + " not a node.");
-            return Response.status(Status.PRECONDITION_FAILED).entity("Not a node.").build();
           }
+          LOG.warn("Item " + workspace + ":" + path + " not a cloud file or drive not connected.");
+          return Response.status(Status.NO_CONTENT).build();
         } catch (LoginException e) {
           LOG.warn("Error login to read drive file " + workspace + ":" + path + ": " + e.getMessage());
           return Response.status(Status.UNAUTHORIZED).entity("Authentication error.").build();

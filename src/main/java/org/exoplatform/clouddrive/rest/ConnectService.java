@@ -28,6 +28,7 @@ import org.exoplatform.clouddrive.DriveRemovedException;
 import org.exoplatform.clouddrive.ProviderNotAvailableException;
 import org.exoplatform.clouddrive.UserAlreadyConnectedException;
 import org.exoplatform.clouddrive.jcr.JCRLocalCloudDrive;
+import org.exoplatform.clouddrive.jcr.NodeFinder;
 import org.exoplatform.services.jcr.RepositoryService;
 import org.exoplatform.services.jcr.ext.app.SessionProviderService;
 import org.exoplatform.services.jcr.ext.common.SessionProvider;
@@ -307,6 +308,8 @@ public class ConnectService implements ResourceContainer {
 
   protected final RepositoryService           jcrService;
 
+  protected final NodeFinder                  finder;
+
   protected final Map<UUID, CloudUser>        authenticated = new ConcurrentHashMap<UUID, CloudUser>();
 
   protected final Map<UUID, ConnectInit>      initiated     = new ConcurrentHashMap<UUID, ConnectInit>();
@@ -328,11 +331,13 @@ public class ConnectService implements ResourceContainer {
   public ConnectService(CloudDriveService cloudDrives,
                         DriveServiceLocator locator,
                         RepositoryService jcrService,
-                        SessionProviderService sessionProviders) {
+                        SessionProviderService sessionProviders,
+                        NodeFinder finder) {
     this.cloudDrives = cloudDrives;
     this.locator = locator;
     this.jcrService = jcrService;
     this.sessionProviders = sessionProviders;
+    this.finder = finder;
 
     this.connectsCleaner = new Thread("Cloud Drive connections cleaner") {
       @Override
@@ -419,10 +424,22 @@ public class ConnectService implements ResourceContainer {
               SessionProvider sp = sessionProviders.getSessionProvider(null);
               userSession = sp.getSession(workspace, jcrService.getCurrentRepository());
 
-              Item item = userSession.getItem(path);
+              Item item = finder.findItem(userSession, path);
               if (item.isNode()) {
                 userNode = (Node) item;
-                String name = JCRLocalCloudDrive.rootName(user);
+
+                String name;
+                // search drive by found node to take in account symlinks!
+                CloudDrive existing = cloudDrives.findDrive(userNode);
+                if (existing != null) {
+                  // drive already exists - it's re-connect to update access keys
+                  driveNode = (Node) userSession.getItem(existing.getPath());
+                  userNode = driveNode.getParent();
+                  name = driveNode.getName();
+                } else {
+                  name = JCRLocalCloudDrive.rootName(user);
+                }
+
                 String processId = processId(workspace, userNode.getPath(), name);
 
                 // rest it by expire = 0
@@ -431,22 +448,25 @@ public class ConnectService implements ResourceContainer {
                 ConnectProcess connect = active.get(processId);
                 if (connect == null || connect.error != null) {
                   // initiate connect process if it is not already active or a previous had an exception
-                  try {
-                    driveNode = userNode.getNode(name);
-                  } catch (PathNotFoundException pnte) {
-                    // node not found - add it
+
+                  if (driveNode == null) {
                     try {
-                      driveNode = userNode.addNode(name, JCRLocalCloudDrive.NT_FOLDER);
-                      userNode.save();
-                    } catch (RepositoryException e) {
-                      rollback(userNode, null);
-                      LOG.error("Error creating node for the drive of user " + user.getEmail()
-                          + ". Cannot create node under " + path, e);
-                      return resp.connectError("Error creating node for the drive: storage error.",
-                                               cid.toString(),
-                                               host)
-                                 .status(Status.INTERNAL_SERVER_ERROR)
-                                 .build();
+                      driveNode = userNode.getNode(name);
+                    } catch (PathNotFoundException pnte) {
+                      // node not found - add it
+                      try {
+                        driveNode = userNode.addNode(name, JCRLocalCloudDrive.NT_FOLDER);
+                        userNode.save();
+                      } catch (RepositoryException e) {
+                        rollback(userNode, null);
+                        LOG.error("Error creating node for the drive of user " + user.getEmail()
+                            + ". Cannot create node under " + path, e);
+                        return resp.connectError("Error creating node for the drive: storage error.",
+                                                 cid.toString(),
+                                                 host)
+                                   .status(Status.INTERNAL_SERVER_ERROR)
+                                   .build();
+                      }
                     }
                   }
 
@@ -461,7 +481,6 @@ public class ConnectService implements ResourceContainer {
                     CloudDrive local = cloudDrives.createDrive(user, driveNode);
                     if (local.isConnected()) {
                       // exists and already connected
-
                       resp.status(Status.CREATED); // OK vs CREATED?
                       DriveInfo drive = DriveInfo.create(local);
                       resp.drive(drive);
@@ -470,7 +489,6 @@ public class ConnectService implements ResourceContainer {
                       // a new or exist but not connected - connect it
                       connect = new ConnectProcess(workspace, local, convo);
                       active.put(processId, connect);
-
                       resp.status(connect.process.isDone() ? Status.CREATED : Status.ACCEPTED);
                       resp.progress(connect.process.getProgress());
                       DriveInfo drive = DriveInfo.create(local, connect.process.getFiles());
@@ -491,7 +509,6 @@ public class ConnectService implements ResourceContainer {
                   String message = "Connect to " + connect.title
                       + " already posted and currently in progress.";
                   LOG.warn(message);
-
                   try {
                     // do response with that process lock as done in state()
                     connect.lock.lock();
@@ -615,36 +632,23 @@ public class ConnectService implements ResourceContainer {
       } else {
         // logic for those who will ask the service to check if drive connected
         try {
-          SessionProvider sp = sessionProviders.getSessionProvider(null);
-          Session userSession = sp.getSession(workspace, jcrService.getCurrentRepository());
-
-          try {
-            Item item = userSession.getItem(path);
-            if (item.isNode()) {
-              Node driveNode = (Node) item;
-              CloudDrive drive = cloudDrives.findDrive(driveNode);
-              if (drive != null) {
-                // return OK: connected
-                resp.progress(Command.COMPLETE).drive(DriveInfo.create(drive)).ok();
-              } else {
-                // return OK: drive not found, disconnected or belong to another user
-                LOG.warn("Item " + workspace + ":" + path + " not a cloud file or drive not connected.");
-                resp.status(Status.NO_CONTENT);
-              }
-            } else {
-              LOG.warn("Not a Node '" + item.getPath() + "'");
-              // KO:not a Node
-              resp.error("Not a node.").status(Status.PRECONDITION_FAILED);
-            }
-          } catch (PathNotFoundException e) {
-            LOG.warn("Node not found " + processId, e);
-            // KO:not found
-            resp.error("Node not found.").status(Status.NOT_FOUND);
-          } catch (DriveRemovedException e) {
-            LOG.warn("Drive removed " + processId, e);
-            // KO:removed
-            resp.error("Drive removed.").status(Status.BAD_REQUEST);
+          CloudDrive drive = cloudDrives.findDrive(workspace, path);
+          if (drive != null) {
+            // return OK: connected
+            resp.progress(Command.COMPLETE).drive(DriveInfo.create(drive)).ok();
+          } else {
+            // return OK: drive not found, disconnected or belong to another user
+            LOG.warn("Item " + workspace + ":" + path + " not a cloud file or drive not connected.");
+            resp.status(Status.NO_CONTENT);
           }
+        } catch (DriveRemovedException e) {
+          LOG.warn("Drive removed " + processId, e);
+          // KO:removed
+          resp.error("Drive removed.").status(Status.BAD_REQUEST);
+        } catch (PathNotFoundException e) {
+          LOG.warn("Node not found " + processId, e);
+          // KO:not found
+          resp.error("Node not found.").status(Status.NOT_FOUND);
         } catch (RepositoryException e) {
           LOG.error("Error reading connected drive '" + processId + "'", e);
           // KO:storage error

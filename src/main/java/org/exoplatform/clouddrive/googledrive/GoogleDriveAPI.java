@@ -841,6 +841,35 @@ class GoogleDriveAPI implements DataStoreFactory {
       throw new GoogleDriveException("Error upating file metadata in Files service: " + e.getMessage(), e);
     }
   }
+  
+  /**
+   * Copy a file in Files service.
+   * 
+   * @param file {@link File} file metadata
+   * @return {@link File} resulting file
+   * @throws GoogleDriveException
+   * @throws NotFoundException
+   * @throws CloudDriveAccessException
+   */
+  File copy(File file) throws GoogleDriveException, NotFoundException, CloudDriveAccessException {
+    // TODO use If-Match with local ETag to esnure consistency
+    // http://stackoverflow.com/questions/15723284/google-drive-sdk-check-etag-when-uploading-synchronizing
+    String fileId = file.getId();
+    try {
+      return drive.files().copy(fileId, file).execute();
+    } catch (GoogleJsonResponseException e) {
+      if (isInsufficientPermissions(e)) {
+        throw new CloudDriveAccessException("Insufficient permissions to copy file in Files service. "
+            + e.getStatusMessage() + " (" + e.getStatusCode() + ")");
+      } else if (e.getStatusCode() == 404) {
+        throw new NotFoundException("Cloud file not found for copying: " + fileId, e);
+      } else {
+        throw new GoogleDriveException("Error copying file in Files service: " + e.getMessage(), e);
+      }
+    } catch (IOException e) {
+      throw new GoogleDriveException("Error copying file metadata in Files service: " + e.getMessage(), e);
+    }
+  }
 
   /**
    * Delete a file in Files service.

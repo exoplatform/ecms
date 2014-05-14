@@ -311,7 +311,6 @@ public class JCRLocalBoxDrive extends JCRLocalCloudDrive implements UserTokenRef
                  created,
                  created); // created as modified here
       initBoxItem(folderNode, folder);
-
       return id;
     }
 
@@ -322,7 +321,6 @@ public class JCRLocalBoxDrive extends JCRLocalCloudDrive implements UserTokenRef
     public void updateFile(Node fileNode, Calendar modified) throws CloudDriveException, RepositoryException {
       // Update existing file metadata and parent (location).
       BoxFile file = api.updateFile(getParentId(fileNode), getId(fileNode), getTitle(fileNode), modified);
-
       if (file != null) {
         try {
           String id = file.getId();
@@ -359,7 +357,6 @@ public class JCRLocalBoxDrive extends JCRLocalCloudDrive implements UserTokenRef
                                           getId(folderNode),
                                           getTitle(folderNode),
                                           modified);
-
       if (folder != null) {
         try {
           String id = folder.getId();
@@ -396,7 +393,6 @@ public class JCRLocalBoxDrive extends JCRLocalCloudDrive implements UserTokenRef
                                            getTitle(fileNode),
                                            modified,
                                            content);
-
       try {
         String id = file.getId();
         String name = file.getName();
@@ -416,6 +412,68 @@ public class JCRLocalBoxDrive extends JCRLocalCloudDrive implements UserTokenRef
         initBoxItem(fileNode, file);
       } catch (ParseException e) {
         throw new BoxFormatException("Error parsing date of file " + fileNode.getPath(), e);
+      }
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public String copyFile(Node srcFileNode, Node destFileNode) throws CloudDriveException,
+                                                               RepositoryException {
+      BoxFile file = api.copyFile(getId(srcFileNode), getParentId(destFileNode), getTitle(destFileNode));
+      try {
+        String id = file.getId();
+        String name = file.getName();
+        String link = api.getLink(file);
+        String embedLink = api.getEmbedLink(file);
+        String createdBy = file.getCreatedBy().getLogin();
+        String modifiedBy = file.getModifiedBy().getLogin();
+        Calendar created = api.parseDate(file.getCreatedAt());
+        Calendar modified = api.parseDate(file.getModifiedAt());
+
+        initFile(destFileNode, id, name, findMimetype(name), link, embedLink, //
+                 link, // downloadLink
+                 createdBy, // author
+                 modifiedBy, // lastUser
+                 created,
+                 modified);
+        initBoxItem(destFileNode, file);
+        return id;
+      } catch (ParseException e) {
+        throw new BoxFormatException("Error parsing date of file " + destFileNode.getPath(), e);
+      }
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public String copyFolder(Node srcFolderNode, Node destFolderNode) throws CloudDriveException,
+                                                                     RepositoryException {
+      BoxFolder folder = api.copyFolder(getId(srcFolderNode),
+                                        getParentId(destFolderNode),
+                                        getTitle(destFolderNode));
+      try {
+        String id = folder.getId();
+        String name = folder.getName();
+        String type = folder.getType();
+        String link = api.getLink(folder);
+        String createdBy = folder.getCreatedBy().getLogin();
+        String modifiedBy = folder.getModifiedBy().getLogin();
+        Calendar created = api.parseDate(folder.getCreatedAt());
+        Calendar modified = api.parseDate(folder.getModifiedAt());
+
+        initFolder(destFolderNode, id, name, type, //
+                   link, // link
+                   createdBy, // author
+                   modifiedBy, // lastUser
+                   created,
+                   modified);
+        initBoxItem(destFolderNode, folder);
+        return id;
+      } catch (ParseException e) {
+        throw new BoxFormatException("Error parsing date of folder " + destFolderNode.getPath(), e);
       }
     }
 

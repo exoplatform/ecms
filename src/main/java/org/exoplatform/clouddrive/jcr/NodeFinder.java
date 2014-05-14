@@ -34,7 +34,7 @@ import javax.jcr.Session;
 public interface NodeFinder {
 
   /**
-   * Find JCR item by given path.
+   * Return JCR item by given path.
    * 
    * @param userSession {@link Session}
    * @param path {@link String}
@@ -47,11 +47,22 @@ public interface NodeFinder {
                                                                        RepositoryException;
 
   /**
+   * Find JCR item by given path, if the path points to a symlink this method return a target node of the
+   * link.
+   * 
+   * @param userSession {@link Session}
+   * @param path {@link String}
+   * @throws RepositoryException if repository error eccurs
+   * @throws PathNotFoundException if item not found by given path
+   */
+  Item findItem(Session userSession, String path) throws PathNotFoundException, RepositoryException;
+
+  /**
    * Align given name to current repository conventions by removing or escaping forbidden characters.
    * 
    * @param name {@link String}
    * @return {@link String} cleaned name
    */
   String cleanName(String name);
-  
+
 }

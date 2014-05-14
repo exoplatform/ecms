@@ -17,13 +17,12 @@
 
 package org.exoplatform.clouddrive.jcr;
 
+import org.exoplatform.services.jcr.RepositoryService;
+
 import javax.jcr.Item;
-import javax.jcr.Node;
 import javax.jcr.PathNotFoundException;
 import javax.jcr.RepositoryException;
 import javax.jcr.Session;
-
-import org.exoplatform.services.jcr.RepositoryService;
 
 /**
  * Created by The eXo Platform SAS.
@@ -46,6 +45,14 @@ public class JCRNodeFinder implements NodeFinder {
   @Override
   public Item getItem(Session userSession, String path, boolean symlinkTarget) throws PathNotFoundException,
                                                                               RepositoryException {
+    return userSession.getItem(path);
+  }
+
+  /**
+   * @inherritDoc
+   */
+  @Override
+  public Item findItem(Session userSession, String path) throws PathNotFoundException, RepositoryException {
     return userSession.getItem(path);
   }
 

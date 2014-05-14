@@ -70,6 +70,8 @@ public interface CloudFileSynchronizer {
   boolean untrash(Node file, CloudFileAPI api) throws CloudDriveException, RepositoryException;
 
   boolean create(Node file, CloudFileAPI api) throws CloudDriveException, RepositoryException;
+  
+  boolean copy(Node srcFile, Node destFile, CloudFileAPI api) throws CloudDriveException, RepositoryException;
 
   boolean update(Node file, CloudFileAPI api) throws CloudDriveException, RepositoryException;
 
