@@ -830,7 +830,9 @@ public class TemplateServiceImpl implements TemplateService, Startable {
         activityService = WCMCoreUtils.getService(ActivityCommonService.class);
       }
       Node contentNode = templateFolder.addNode(templateName, NodetypeConstant.NT_FILE);
-      activityService.setCreating(contentNode, true);
+      if(activityService != null){
+        activityService.setCreating(contentNode, true);
+      }
       Node resourceNode = contentNode.addNode(NodetypeConstant.JCR_CONTENT, NodetypeConstant.EXO_RESOURCES);
       resourceNode.setProperty(NodetypeConstant.JCR_ENCODING, "UTF-8");
       resourceNode.setProperty(NodetypeConstant.JCR_MIME_TYPE, "application/x-groovy+html");
@@ -841,7 +843,9 @@ public class TemplateServiceImpl implements TemplateService, Startable {
         resourceNode.addMixin(NodetypeConstant.DC_ELEMENT_SET);
       }
       resourceNode.setProperty(NodetypeConstant.DC_TITLE, new String[] {title});
-      activityService.setCreating(contentNode, false);
+      if(activityService != null){
+        activityService.setCreating(contentNode, false);
+      }
       resourceNode.getSession().save();
       return contentNode.getPath();
     } catch (Exception e) {
