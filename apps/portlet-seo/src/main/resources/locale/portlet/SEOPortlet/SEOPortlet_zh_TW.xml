@@ -9,7 +9,7 @@
       <robots>機器人：</robots>
       <sitemap>網站地圖：</sitemap>
       <sitemapvisible>在網站地圖中可見</sitemapvisible>
-    <isInherited>繼承自父頁面</isInherited>
+    <isInherited>承接上層頁面</isInherited>
       <priority>優先:</priority>
       <frequency>頻率：</frequency>
       <select-language>選擇一種語言</select-language>
