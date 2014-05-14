@@ -281,6 +281,8 @@
 				  auth.done(function() {
 					  utils.log(provider.name + " user authenticated.");
 					  // 3 and finally connect the drive
+					  // XXX if it is a re-connect (via providerUpdate), context node may point to a file inside the existing drive
+					  // Connect service will care about it and apply correct drive path.
 					  var userNode = contextNode;
 					  if (userNode) {
 						  utils.log("Connecting Cloud Drive to node " + userNode.path + " in " + userNode.workspace);
@@ -315,7 +317,6 @@
 						  });
 						  post.fail(function(state, error, errorText) {
 							  utils.log("ERROR: " + provider.name + " connect failed: " + error + ". ");
-							  // JSON.stringify(state));
 							  if (typeof state === "string") {
 								  process.reject(state);
 							  } else {
@@ -563,44 +564,56 @@
 						// drive was removed
 						process.reject("Cloud Drive removed", status);
 					} else {
-						var files = 0;
-						var folders = 0;
+						var files = 0; // TODO not used
+						var folders = 0; // TODO not used
 						var changed = 0;
+						var updated = 0; // updated in context node
+						
+						var currentPath = contextNode ? contextNode.path : null;
+						
+						// calculate the whole drive changes and updated in current folder
 						for (fpath in drive.files) {
 							if (drive.files.hasOwnProperty(fpath)) {
 								changed++;
-								if (drive.files[fpath].folder) {
-									folders++;
-								} else {
-									files++;
+								if (currentPath && fpath.indexOf(currentPath) == 0) {
+									updated++;
 								}
+								// if (drive.files[fpath].folder) {
+									// folders++;
+								// } else {
+									// files++;
+								// }
 							}
 						}
-
-						changed += drive.removed.length; // count removed as changed
+						// count removed as changed
+						changed += drive.removed.length; 
+						for (var i = 0; i < drive.removed.length; i++) {
+							if (currentPath && drive.removed[i].indexOf(currentPath) == 0) {
+								updated++;
+							}
+						}
 
 						// copy already cached but not synced files to the new drive
 						nextCached: for (fpath in sync.contextDrive.files) {
 							if (!drive.files[fpath]) {
 								for (var fi = 0; fi < drive.removed.length; fi++) {
 									if (drive.removed[fi] === fpath) {
-										continue nextCached; // skip alreay removed
+										continue nextCached; // skip already removed
 									}
-									;
 								}
 								drive.files[fpath] = sync.contextDrive.files[fpath];
 							}
 						}
 
 						utils.log("DONE: Synchronized " + changed + " changes from Cloud Drive associated with " + nodeWorkspace + ":"
-						    + nodePath);
+						    + nodePath + ". " + updated + " updated in current folder.");
 
 						if (changed > 0 && sync.contextDrive == contextDrive) {
 							// using new drive in the context (only if context wasn't changed)
 							contextDrive = drive;
 						}
 
-						process.resolve(files, folders, drive);
+						process.resolve(updated, drive);
 					}
 				});
 				sync.fail(function(response, status, err) {
@@ -861,19 +874,21 @@
 	function CloudDriveUI() {
 		var NOTICE_WIDTH = "380px";
 
+		// Menu items managed via uiRightClickPopupMenu menu interception
 		var MENU_OPEN_FILE = "OpenCloudFile";
 		var MENU_REFRESH_DRIVE = "RefreshCloudDrive";
 		var DRIVE_MENU_ACTIONS = [ MENU_OPEN_FILE, MENU_REFRESH_DRIVE ];
 		var ALLOWED_DRIVE_MENU_ACTIONS = [ MENU_OPEN_FILE, MENU_REFRESH_DRIVE, "Delete", "AddToFavourite", "RemoveFromFavourite",
 		    "ViewInfo" ];
-		var ALLOWED_FILE_MENU_ACTIONS = [ MENU_OPEN_FILE, MENU_REFRESH_DRIVE, "Delete", "Rename", "AddToFavourite", "RemoveFromFavourite", "ViewInfo" ];
+		var ALLOWED_FILE_MENU_ACTIONS = [ MENU_OPEN_FILE, MENU_REFRESH_DRIVE, "Delete", "Rename", "Copy", "Cut", "Paste", "AddToFavourite", "RemoveFromFavourite", "ViewInfo" ];
 		var ALLOWED_SYMLINK_MENU_ACTIONS = [ "Delete" ];
 
+		// Menu items managed via view's showItemContextMenu() method (multi-selection)
 		var ALLOWED_DMS_MENU_COMMON_ACTION_CLASSES = [ "uiIconEcmsUpload", "uiIconEcmsAddFolder", "uiIconEcmsAddToFavourite", "uiIconEcmsRemoveFromFavourite",
 		    "uiIconEcmsManageActions", "uiIconEcmsManageRelations", "uiIconEcmsViewProperties", "uiIconEcmsManageAuditing",
 		    "uiIconEcmsOverloadThumbnail" ];
 		var ALLOWED_DMS_MENU_FILE_ACTION_CLASSES = [ "uiIconEcmsOpenCloudFile", "uiIconEcmsTaggingDocument",
-		    "uiIconEcmsWatchDocument", "uiIconEcmsViewMetadatas", "uiIconEcmsVote", "uiIconEcmsComment" ];
+		    "uiIconEcmsWatchDocument", "uiIconEcmsViewMetadatas", "uiIconEcmsVote", "uiIconEcmsComment", "uiIconEcmsCopy", "uiIconEcmsPaste", "uiIconEcmsCut", "uiIconEcmsDelete", "uiIconEcmsRename" ];
 		var ALLOWED_DMS_MENU_DRIVE_ACTION_CLASSES = [ "uiIconEcmsRefreshCloudDrive", "DeleteNodeIcon" ];
 
 		var initLock = null;
@@ -973,9 +988,6 @@
 							$(this).parent().attr("href", link);
 							$(this).parent().attr("onclick", "eXo.ecm.WCMUtils.hideContextMenu(this);eXo.ecm.UIFileView.clearCheckboxes();");
 						});
-						// TODO ?
-						// $(this).find("i.uiIconEcmsViewDocument").each(function() {
-						// });
 						$(this).find("i.uiIconEcmsCopyUrlToClipboard").each(function() {
 							$(this).parent().attr("path", link);
 							$(this).parent().click(function() {
@@ -991,6 +1003,35 @@
 			} else {
 				// if not cloud file on context path - remove OpenCloudFile from the menu
 				return removeCloudItems(menuItems);
+			}
+		};
+
+		var initMultiContextMenu = function() {
+			var drive = cloudDrive.getContextDrive();
+			if (drive) {
+				// Fix group Context Menu items using CSS
+				var classes;
+				if (cloudDrive.isContextFile()) {
+					// it's drive's file
+					classes = ALLOWED_DMS_MENU_COMMON_ACTION_CLASSES.concat(ALLOWED_DMS_MENU_FILE_ACTION_CLASSES);
+				} else if (cloudDrive.isContextDrive()) {
+					// it's drive in the context
+					classes = ALLOWED_DMS_MENU_COMMON_ACTION_CLASSES.concat(ALLOWED_DMS_MENU_DRIVE_ACTION_CLASSES);
+				} else {
+					// selected node not a cloud drive or its file
+					classes = null;
+				}
+
+				if (classes) {
+					var allowed = "";
+					$.each(classes, function(i, action) {
+						allowed += (allowed ? ", ." : ".") + action;
+					});
+					// filter Context Menu common items: JCRContextMenu located in action bar
+					$("#JCRContextMenu li.menuItem a i").not(allowed).each(function() {
+						$(this).parent().css("display", "none");
+					});
+				}
 			}
 		};
 
@@ -1015,8 +1056,7 @@
 					allowed += (allowed ? ", ." : ".") + action;
 				});
 
-				// filter Action Bar items (depends on file/folder or the drive
-				// itself in the context)
+				// filter Action Bar items (depends on file/folder or the drive itself in the context)
 				$("#uiActionsBarContainer li a.actionIcon i").not(allowed).each(function() { // div ul li
 					$(this).parent().css("display", "none");
 				});
@@ -1334,23 +1374,26 @@
 		 * UI support for synchronization deferred process.
 		 */
 		this.synchronizeProcess = function(process) {
-			process.done(function(files, folders, drive) {
-				function doneAction(pnotify) {
+			process.done(function(updated, drive) {
+				/*function doneAction(pnotify) {
 					$(pnotify.text_container).find("a.cdSynchronizeProcessAction").click(function() {
 						// TODO cloudDriveUI.openDrive(drive.title);
 						refresh(true);
 					});
-				}
+				}*/
 				var alink = "<a class='cdSynchronizeProcessAction' href='javascript:void(0);'";
 				var driveLink = "<span>" + alink + " style=\"curson: pointer; border-bottom: 1px dashed #999; display: inline;\">"
 				    + drive.email + "</a></span>";
 				var details;
-				if (files + folders > 0 || drive.removed.length > 0) {
-					// Don't refresh at all, as user can change the
-					// view. Istead we show a link on the message.
+				if (updated > 0) {
+					// try refresh on success
+					refresh(true);
+					
+					// TODO Don't refresh at all, as user can change the
+					// view. Instead we show a link on the message.
 
 					// Show number of changes in the drive on Refresh icon
-					var changes = files + folders + drive.removed.length;
+					/*var changes = files + folders + drive.removed.length;
 					var refreshChanges = $("span.uiCloudDriveChanges");
 					if (refreshChanges.size() > 0) {
 						var prevChanges = parseInt($(refreshChanges).text());
@@ -1364,7 +1407,7 @@
 						$("<span class='uiCloudDriveChanges' title='" + drive.provider.name + " has updates.'>" + changes + "</span>")
 						    .appendTo("a.refreshIcon i");
 					}
-					$("span.uiCloudDriveChanges").data("timestamp", new Date());
+					$("span.uiCloudDriveChanges").data("timestamp", new Date());*/
 				}
 			});
 			process.fail(function(response, status, err) {
@@ -1528,10 +1571,9 @@
 				return params;
 			}
 
-			// tuning of on-file context menu
+			// tuning of single-selection context menu (used in Simple/Icon view)
 			if (typeof uiRightClickPopupMenu.__cw_overridden == "undefined") {
 				uiRightClickPopupMenu.clickRightMouse_orig = uiRightClickPopupMenu.clickRightMouse;
-				// event, elemt, menuId, objId, whiteList, opt
 				uiRightClickPopupMenu.clickRightMouse = function(event, elemt, menuId, objId, params, opt) {
 					uiRightClickPopupMenu.clickRightMouse_orig(event, elemt, menuId, objId, filterActions(objId, elemt, params), opt);
 				};
@@ -1544,76 +1586,24 @@
 			var simpleView = uiSimpleView.UISimpleView;
 
 			if (typeof fileView.__cw_overridden == "undefined") {
+				// clickRightMouse will be invoked on single-selection in List/Admin view
 				fileView.clickRightMouse_orig = fileView.clickRightMouse;
 				fileView.clickRightMouse = function(event, elemt, menuId, objId, whiteList, opt) {
 					fileView.clickRightMouse_orig(event, elemt, menuId, objId, filterActions(objId, elemt, whiteList), opt);
 				};
 
+				// showItemContextMenu will be invoked on multi-selection in List/Admin view
 				fileView.showItemContextMenu_orig = fileView.showItemContextMenu;
 				fileView.showItemContextMenu = function(event, element) {
 					// run original
 					fileView.showItemContextMenu_orig(event, element);
-
-					var drive = cloudDrive.getContextDrive();
-					if (drive) {
-						// Fix group Context Menu items in Action Bar
-						var classes;
-						if (cloudDrive.isContextFile()) {
-							// it's drive's file
-							classes = ALLOWED_DMS_MENU_COMMON_ACTION_CLASSES.concat(ALLOWED_DMS_MENU_FILE_ACTION_CLASSES);
-						} else if (cloudDrive.isContextDrive()) {
-							// it's drive in the context
-							classes = ALLOWED_DMS_MENU_COMMON_ACTION_CLASSES.concat(ALLOWED_DMS_MENU_DRIVE_ACTION_CLASSES);
-						} else {
-							// selected node not a cloud drive or its file
-							classes = null;
-						}
-
-						if (classes) {
-							var allowed = "";
-							$.each(classes, function(i, action) {
-								allowed += (allowed ? ", ." : ".") + action;
-							});
-							// filter Context Menu common items: JCRContextMenu
-							// located in action bar
-							$("#JCRContextMenu li.menuItem a i").not(allowed).each(function() {
-								$(this).parent().css("display", "none");
-							});
-							// seems we need this
-							eXo.ecm.ECMUtils.loadContainerWidth();
-						}
-					}
+					// and hide all not allowed
+					initMultiContextMenu();
+					// seems we need this
+					eXo.ecm.ECMUtils.loadContainerWidth();
 				};
 
 				fileView.__cw_overridden = true;
-			}
-
-			// TODO Deprectaed. Gather currently selected files
-			function selectedFiles(drivePath, view) {
-				var itemsSelected = view.itemsSelected;
-				// this check based on code from UIListView.js
-				if (!itemsSelected || itemsSelected.length == 0) {
-					itemsSelected = simpleView ? simpleView.itemsSelected : undefined;
-				}
-
-				var files = [];
-				if (itemsSelected && itemsSelected.length) {
-					for (i in itemsSelected) {
-						if (Array.prototype[i]) {
-							continue;
-						}
-						var currentNode = itemsSelected[i];
-						var path = currentNode.getAttribute("objectId");
-						if (path) {
-							path = decodeURIComponent(path).split("+").join(" ");
-							if (drive && path.indexOf(drivePath) == 0) {
-								// add file if its path starts with the drive root
-								files.push(currentNode);
-							}
-						}
-					}
-				}
-				return files;
 			}
 
 			function actionAllowed(view) {
@@ -1624,7 +1614,6 @@
 					var leftClick = !((actionEvent.which && actionEvent.which > 1) || (actionEvent.button && actionEvent.button == 2));
 					var drive = cloudDrive.getContextDrive();
 					if (leftClick && drive) {
-						// var files = selectedFiles(drive.path, view);
 						var itemsSelected = view.itemsSelected;
 						// this check based on code from UIListView.js
 						if (!itemsSelected || itemsSelected.length == 0) {
@@ -1646,8 +1635,7 @@
 										currentNode.isSelect = false;
 										currentNode.selected = null;
 										currentNode.style.background = "none";
-										allowed = false; // ...and cancel
-										// action
+										allowed = false; // ...and cancel action
 									}
 								}
 							}
@@ -1658,12 +1646,9 @@
 			}
 
 			if (typeof listView.__cw_overridden == "undefined") {
-				// don't move files outside the drive but allow to symlink them
-				// (drag with ctrl+shift)
+				// don't move files outside the drive but allow to symlink them (drag with ctrl+shift)
 				listView.postGroupAction_orig = listView.postGroupAction;
 				listView.postGroupAction = function(moveActionNode, ext) {
-					// utils.log("listView.postGroupAction: " + moveActionNode +
-					// ", " + ext);
 					if (listView.enableDragAndDrop && actionAllowed(listView)) {
 						listView.postGroupAction_orig(moveActionNode, ext);
 					}
@@ -1682,17 +1667,36 @@
 			}
 
 			if (typeof simpleView.__cw_overridden == "undefined") {
-				// don't move files outside the drive but allow to symlink them
-				// (drag with ctrl+shift)
+				// don't move files outside the drive but allow to symlink them (drag with ctrl+shift)
 				simpleView.postGroupAction_orig = simpleView.postGroupAction;
 				simpleView.postGroupAction = function(moveActionNode, ext) {
-					// utils.log("simpleView.postGroupAction: " + moveActionNode
-					// + ", " + ext);
 					if (simpleView.enableDragAndDrop && actionAllowed(simpleView)) {
 						simpleView.postGroupAction_orig(moveActionNode, ext);
 					}
 				};
 
+				// tune multi-selection menu
+				// showItemContextMenu will be invoked on multi-selection in Simple/Icon view
+				simpleView.showItemContextMenu_orig = simpleView.showItemContextMenu;
+				simpleView.showItemContextMenu = function (event, element) {
+					// run original
+					simpleView.showItemContextMenu_orig(event, element);
+					// and hide all not allowed
+					initMultiContextMenu();
+					// and fix menu position
+					// code adopted from original showItemContextMenu() in UISimpleView.js
+					var X = event.pageX || event.clientX;
+					var Y = event.pageY || event.clientY;
+					var portWidth = $(window).width();
+					var portHeight = $(window).height();
+					var contextMenu = $("#JCRContextMenu");
+					var contentMenu = contextMenu.children("div.uiRightClickPopupMenu:first")[0];
+					if (event.clientX + contentMenu.offsetWidth > portWidth) X -= contentMenu.offsetWidth;
+					if (event.clientY + contentMenu.offsetHeight > portHeight) Y -= contentMenu.offsetHeight + 5;
+					contextMenu.css("top", Y + 5 + "px");
+					contextMenu.css("left", X + 5 + "px");
+				};
+				
 				// hide ground-context menu for drive folder
 				simpleView.showGroundContextMenu_orig = simpleView.showGroundContextMenu;
 				simpleView.showGroundContextMenu = function(event, element) {
