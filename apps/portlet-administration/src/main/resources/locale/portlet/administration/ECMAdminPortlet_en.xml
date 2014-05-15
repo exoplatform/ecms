@@ -1211,9 +1211,9 @@
   <UIScriptForm>
     <label>
       <selectVersion>Versions</selectVersion>
-      <scriptContent>Content:</scriptContent>
-      <scriptLabel>Name:</scriptLabel>
-      <scriptName>Script:</scriptName>
+      <scriptContent>Content</scriptContent>
+      <scriptLabel>Name</scriptLabel>
+      <scriptName>Script</scriptName>
       <enableVersion>Enable Versioning</enableVersion>
     </label>
   </UIScriptForm>
@@ -1380,7 +1380,7 @@
     <title>Add a permission to that node</title>
     <action>
       <Close>#{word.close}</Close>
-      <Save>#{word.save}</Save>
+      <Save>Save</Save>
       <Reset>Reset</Reset>
     </action>
     <msg>
@@ -1937,11 +1937,11 @@
   </UIQueriesList>
   <UIQueriesForm>
     <label>
-      <name>Query Name:</name>
-      <type>Query Type:</type>
-      <statement>Statement:</statement>
-      <cache>Enable Cache Results:</cache>
-      <permissions>Permissions:</permissions>
+      <name>Query Name</name>
+      <type>Query Type</type>
+      <statement>Statement</statement>
+      <cache>Enable Cache Results</cache>
+      <permissions>Permissions</permissions>
       <PermissionButton>UIQueriesForm</PermissionButton>
     </label>
     <action>

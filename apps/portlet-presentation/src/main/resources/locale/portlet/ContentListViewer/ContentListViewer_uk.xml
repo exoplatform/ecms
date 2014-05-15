@@ -60,8 +60,8 @@
       <UICLVConfigTargetPageFormInputSet>Показати на сторінці</UICLVConfigTargetPageFormInputSet>
       <content-not-found>Content not found.</content-not-found>
       <ContentPath>Шлях до змісту</ContentPath>
-      <Up>Up</Up>
-      <Down>Down</Down>
+      <Up>Вгору</Up>
+      <Down>Вниз</Down>
       <UICLVConfigCacheManagementLabel>Видимість контенту</UICLVConfigCacheManagementLabel>
       <UICLVContentByQueryLabel>Content by Query</UICLVContentByQueryLabel>
       <UICLVConfigWorkspaceFormSelectBox>Робоча область</UICLVConfigWorkspaceFormSelectBox>

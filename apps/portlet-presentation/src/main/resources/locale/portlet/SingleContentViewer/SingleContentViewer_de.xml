@@ -41,7 +41,7 @@
     <action>
       <Save>#{word.save}</Save>
       <Abort>Abbrechen</Abort>
-      <Cancel>Abbrechen</Cancel>
+      <Cancel>#{word.cancel}</Cancel>
       <Print>Drucken</Print>
       <Close>#{word.close}</Close>
     </action>

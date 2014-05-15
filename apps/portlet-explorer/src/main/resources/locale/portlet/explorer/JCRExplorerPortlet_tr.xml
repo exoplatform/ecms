@@ -702,6 +702,17 @@
       <namespace>Namespace:</namespace>
       <multiple>Multiple:</multiple>
       <property_select>Add New Property:</property_select>
+      <value0>Value 0</value0>
+      <value1>Value 1</value1>
+      <value2>Value 2</value2>
+      <value3>Value 3</value3>
+      <value4>Value 4</value4>
+      <value5>Value 5</value5>
+      <value6>Value 6</value6>
+      <value7>Value 7</value7>
+      <value8>Value 8</value8>
+      <value9>Value 9</value9>
+      <value10>Value 10</value10>
     </label>
     <action>
       <Save>#{word.save}</Save>
@@ -736,7 +747,7 @@
       </title>
     </action>
     <header>
-      <usersOrGroups>User or Group</usersOrGroups>
+      <usersOrGroups>Kullanıcı veya Grup</usersOrGroups>
       <read>Read</read>
       <addNode>Modify</addNode>
       <remove>Kaldır</remove>
@@ -751,8 +762,8 @@
   </UIPermissionInfo>
   <permission>
     <title>
-      <SelectUser>Select User</SelectUser>
-      <SelectMember>Select Membership</SelectMember>
+      <SelectUser>Kullanıcı Seçin</SelectUser>
+      <SelectMember>Üyelik seçin</SelectMember>
       <AddAny>Select Everyone</AddAny>
     </title>
   </permission>
@@ -779,7 +790,7 @@
   </UIGroupSelector>
   <UIPermissionForm>
     <label>
-      <UIPopupWindow>Select</UIPopupWindow>
+      <UIPopupWindow>Seçin</UIPopupWindow>
       <permission>UIPermissionForm</permission>
       <userOrGroup>Kullanıcı veya Grup</userOrGroup>
       <read>Read Right</read>
@@ -842,7 +853,7 @@
   <UICategoryManagerSearch>
     <tab>
       <label>
-        <UIOneNodePathSelector>Select Category</UIOneNodePathSelector>
+        <UIOneNodePathSelector>Kategori Seçin</UIOneNodePathSelector>
       </label>
     </tab>
     <action>
@@ -905,7 +916,7 @@
       <shortcutPath>Yol</shortcutPath>
       <type>Türü</type>
       <dateCreated>Oluşturma Tarihi</dateCreated>
-      <score>Score</score>
+      <score>Puan</score>
     </header>
     <title>
       <typeASC>Sort by document type in ascending order</typeASC>
@@ -1066,7 +1077,7 @@
       <properties-required>The Property name is required.</properties-required>
       <value-required>The Value field is required.</value-required>
       <date-invalid>The From date must be earlier than the To date.</date-invalid>
-      <fromDate-required>The From date is required.</fromDate-required>
+      <fromDate-required>Başlangıç tarihi gereklidir.</fromDate-required>
       <must-choose-one>You have to select at least one type.</must-choose-one>
       <properties-null>Select properties first, then filter.</properties-null>
       <exactly-require>You have to fill in the Value exactly before saving this constraint.</exactly-require>
@@ -1875,6 +1886,7 @@
     <msg>
       <name-exist>'{0}' Etiket adı zaten var.</name-exist>
       <tagName-invalid>Etiket adı bazı geçersiz karakterler içeriyor.</tagName-invalid>
+      <tagName-empty-or-invalid>The tag name is empty or contains some invalid characters.</tagName-empty-or-invalid>
       <tag-name-empty>Etiket adı yok</tag-name-empty>
       <tag-name-duplicate>Girilen etiket adı çift.</tag-name-duplicate>
       <tagName-too-long>Girilen etiketlerden biri çok uzun. Etiket adı 30'dan az karakter olmalıdır.</tagName-too-long>
@@ -3044,6 +3056,12 @@
     <DrivesArea>
       <ShowDrives>Sürücüleri Göster</ShowDrives>
     </DrivesArea>
+    <msg>
+      <no-view-found>There are no views applied for your access permission in drive '{0}'.</no-view-found>
+      <access-denied>Erişim engellendi. Sürücü '{0}' çalışma alanında izniniz olmayabilir.</access-denied>
+      <empty-drives>Access denied. Either there is no drive in this repository or you do not have permission to access any drives in this repository.</empty-drives>
+      <workspace-not-exist>'{0}' sürücü tanınmayan bir çalışma alanında depolanmış. Lütfen bu sürücüyü yeniden yapılandırın.</workspace-not-exist>
+    </msg>
   </UIDrivesArea>
   <UIJcrExplorerEditForm>
     <msg>

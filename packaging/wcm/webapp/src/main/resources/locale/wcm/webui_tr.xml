@@ -203,7 +203,7 @@
       <time-to-late>Arama süresi çok uzun.</time-to-late>
       <empty-field>Lütfen arama için  geçerli bir anahtar kelime girin.</empty-field>
       <invalid-format>'{0}' Alanda geçersiz tarih/saat biçimindedir.</invalid-format>
-      <invalid-date>"Bitiş Tarihi" "Başlangıç Tarihinden" sonra olmalıdır</invalid-date>
+      <invalid-date>""Bitiş Tarihi" "Başlangıç Tarihinden" sonra olmalıdır"</invalid-date>
       <invalid-nodeType>Düğüm türü "{0}" geçersiz. Lütfen tekrar kontrol edin.</invalid-nodeType>
       <invalid-keyword>Anahtar geçersiz. Bazı karakterler desteklenmez.</invalid-keyword>
     </msg>

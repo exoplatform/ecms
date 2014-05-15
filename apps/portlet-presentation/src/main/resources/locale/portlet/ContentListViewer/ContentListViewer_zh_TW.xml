@@ -33,13 +33,13 @@
         <publication:liveDate>出版日期</publication:liveDate>
         <exo:startEvent>事件日期</exo:startEvent>
         <exo:index>索引</exo:index>
-        <DESC>降冪</DESC>
-        <ASC>升冪</ASC>
+        <DESC>降序</DESC>
+        <ASC>升序</ASC>
       </option>
       <DisplaySettingBlock>顯示設定</DisplaySettingBlock>
-      <UICLVConfigHeaderFormStringInput>標題</UICLVConfigHeaderFormStringInput>
+      <UICLVConfigHeaderFormStringInput>標頭</UICLVConfigHeaderFormStringInput>
       <UICLVConfigDisplayTemplateFormSelectBox>範本</UICLVConfigDisplayTemplateFormSelectBox>
-      <UICLVConfigPaginatorTemplateFormSelectBox>分頁</UICLVConfigPaginatorTemplateFormSelectBox>
+      <UICLVConfigPaginatorTemplateFormSelectBox>分頁程式</UICLVConfigPaginatorTemplateFormSelectBox>
       <UICLVConfigItemsPerPageFormStringInput>每頁項目</UICLVConfigItemsPerPageFormStringInput>
       <UICLVConfigShowIllustrationFormCheckboxInput>顯示圖像</UICLVConfigShowIllustrationFormCheckboxInput>
       <UICLVConfigShowSummaryFormCheckboxInput>顯示摘要</UICLVConfigShowSummaryFormCheckboxInput>
@@ -70,7 +70,7 @@
     </label>
     <help>
       <ModeSelectionHelp>兩種模式可顯示內容。"按資料夾"將您所選的資料夾類別中可用的所有內容。"按內容"允許您手動選擇你想要顯示的內容。</ModeSelectionHelp>
-      <FolderPathHelp>請選擇您想要顯示的內容。如果您啟動動態導航選項，將動態替換預設選擇 （可看見下文進階選項的模式）。</FolderPathHelp>
+      <FolderPathHelp>請選擇您想要顯示的內容。如果您啟動動態導航選項，將動態替換此預設內容 （請參閱下面的進階選項）。</FolderPathHelp>
       <HeaderOptionHelp>顯示在內容清單上的標題。如果您啟動自動檢測選項，它將嘗試找尋基於當前選定內容的標題。</HeaderOptionHelp>
       <GeneralOptionHelp>選擇您想要在您的清單中顯示的圖形元素。請注意根據您所選的範本，某些元素可能不可用。</GeneralOptionHelp>
       <ContextualHelp>啟動動態導航選項。其他人可以動態更改基於 URL 參數內容。</ContextualHelp>
@@ -117,8 +117,8 @@
   <UICLVConfigOrderTypeFormSelectBox>
     <label>
       <option>
-        <OrderDesc>降幕</OrderDesc>
-        <OrderAsc>升幕</OrderAsc>
+        <OrderDesc>降序</OrderDesc>
+        <OrderAsc>升序</OrderAsc>
       </option>
     </label>
   </UICLVConfigOrderTypeFormSelectBox>

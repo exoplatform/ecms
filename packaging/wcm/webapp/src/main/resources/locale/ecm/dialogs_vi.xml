@@ -51,10 +51,12 @@
   <File>
     <dialog>
       <label>
-        <name>#{word.name}</name>
+        <name>Tên</name>
         <categories>Danh mục</categories>
-        <mimeType>#{Ecm.dialog.label.mimeType}</mimeType>
-        <content>#{word.content}</content>
+        <mimeType>MimeType</mimeType>
+        <width>Width</width>
+        <height>Height</height>
+        <content>Nội dung</content>
         <re-upload>Tệp tin đã tồn tại. Bạn có thể xóa nó và tải lên tệp tin khác.</re-upload>
       </label>
     </dialog>
@@ -68,7 +70,7 @@
       <password>Mật khẩu</password>
       <link>Liên kết</link>
       <to>Gửi Thư Đến</to>
-      <actionName>#{word.name}</actionName>
+      <actionName>Tên</actionName>
     </label>
   </UIActionForm>
   <EditFormAction>
@@ -79,7 +81,7 @@
       <password>Mật khẩu</password>
       <link>Liên kết</link>
       <to>Gửi Thư Đến</to>
-      <actionName>#{word.name}</actionName>
+      <actionName>Tên</actionName>
     </label>
   </EditFormAction>
  
@@ -90,10 +92,10 @@
     <dialog>
       <label>
         <id>Mã</id>
-        <name>#{word.name}</name>
+        <name>Tên</name>
         <lifecycle>Chu kỳ</lifecycle>
         <metadata>Siêu dữ liệu</metadata>
-        <description>#{word.description}</description>
+        <description>Mô tả</description>
       </label>
     </dialog>
   </AddMetadata>
@@ -105,15 +107,15 @@
     <dialog>
       <label>
         <id>Mã</id>
-        <name>#{word.name}</name>
-        <lifecycle>#{Ecm.dialog.label.lifecycle}</lifecycle>
-        <schedule-type>#{Ecm.dialog.label.schedule-type}</schedule-type>
-        <start-time>#{Ecm.dialog.label.start-time}</start-time>
-        <end-time>#{Ecm.dialog.label.end-time}</end-time>
-        <repeat-count>#{Ecm.dialog.label.repeat-count}</repeat-count>
-        <time-inteval>#{Ecm.dialog.label.time-interval}</time-inteval>
+        <name>Tên</name>
+        <lifecycle>Vòng đời</lifecycle>
+        <schedule-type>Lập biểu</schedule-type>
+        <start-time>Thời gian bắt đầu</start-time>
+        <end-time>Thời gian kết thúc</end-time>
+        <repeat-count>Số lần lặp</repeat-count>
+        <time-inteval>Khoảng thời gian</time-inteval>
         <cron-expression>Lệnh Cron</cron-expression>
-        <description>#{word.description}</description>
+        <description>Mô tả</description>
       </label>
     </dialog>
   </AutoVersioning>
@@ -124,15 +126,15 @@
     <dialog>
       <label>
         <id>Mã</id>
-        <name>#{word.name}</name>
-        <lifecycle>#{Ecm.dialog.label.lifecycle}</lifecycle>
-        <schedule-type>#{Ecm.dialog.label.schedule-type}</schedule-type>
-        <start-time>#{Ecm.dialog.label.start-time}</start-time>
-        <end-time>#{Ecm.dialog.label.end-time}</end-time>
-        <repeat-count>#{Ecm.dialog.label.repeat-count}</repeat-count>
-        <time-inteval>#{Ecm.dialog.label.time-interval}</time-inteval>
-        <cron-expression>Cron Expression</cron-expression>
-        <description>#{word.description}</description>
+        <name>Tên</name>
+        <lifecycle>Vòng đời</lifecycle>
+        <schedule-type>Lập biểu</schedule-type>
+        <start-time>Thời gian bắt đầu</start-time>
+        <end-time>Thời gian kết thúc</end-time>
+        <repeat-count>Số lần lặp</repeat-count>
+        <time-inteval>Khoảng thời gian</time-inteval>
+        <cron-expression>Cron expression</cron-expression>
+        <description>Mô tả</description>
       </label>
     </dialog>
   </EnableVersioning>
@@ -142,18 +144,18 @@
   <ElementSet>
     <dialog>
       <label>
-        <title>#{word.title}:</title>
+        <title>Tiêu đề</title>
         <creator>Người tạo:</creator>
-        <subject>#{word.subject}:</subject>
+        <subject>Chủ đề</subject>
         <source>Nguồn:</source>
         <contributor>Người cộng tác</contributor>
         <resource-type>Kiểu Tài nguyên:</resource-type>
-        <date>#{word.date}:</date>
+        <date>Ngày</date>
         <publisher>Người đăng tải:</publisher>
-        <description>#{word.description}:</description>
+        <description>Mô tả</description>
         <rights>Các Quyền:</rights>
         <relation>Quan hệ:</relation>
-        <format>#{word.format}:</format>
+        <format>Định dạng</format>
         <coverage>Mức độ bao phủ</coverage>
         <identifier>Người Định danh:</identifier>
         <language>Ngôn ngữ:</language>
@@ -225,7 +227,7 @@
     <dialog>
       <label>
         <title>Tiêu đề</title>
-        <summary>#{word.summary}</summary>
+        <summary>Tóm tắt</summary>
       </label>
     </dialog>
   </RssEnable>

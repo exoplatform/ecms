@@ -148,7 +148,7 @@
     <title>
       <UIOneNodePathSelector>Vybrat umístění</UIOneNodePathSelector>
       <UIPermissionSelector>Prohlížeč oprávnění</UIPermissionSelector>
-      <UICategoriesSelector>Přidat kategorie</UICategoriesSelector>
+      <UICategoriesSelector>Add Categories</UICategoriesSelector>
     </title>
   </PopupComponent>
 

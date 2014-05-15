@@ -44,7 +44,7 @@
       <no-taxonomy-selected>您必須複製或剪下至少一個類別。</no-taxonomy-selected>
       <node-is-cutting>不能在這裡貼上。類別節點 '{0}' 可能被剪下。</node-is-cutting>
       <can-not-paste>剪貼簿中沒有任何資料。</can-not-paste>
-      <reference-exception>無法刪除該目錄，因為它的內容正被引用中。</reference-exception>
+      <reference-exception>不能刪除此類別，因為它的內容正被引用中。</reference-exception>
       <path-error>刪除此類別節點時出錯。</path-error>
     </msg>
   </UITaxonomyWorkingArea>
@@ -230,10 +230,10 @@
   -->
   <UIMetadataList>
     <label>
-      <false>false</false>
-      <true>true</true>
-      <True>true</True>
-      <False>false</False>
+      <false>錯</false>
+      <true>對</true>
+      <True>對</True>
+      <False>錯</False>
     </label>
     <title>
       <view>查看</view>
@@ -279,7 +279,7 @@
   ################################################################################
   -->
   <UIMetadataForm>
-    <title>核對Metadata</title>
+    <title>核對中繼資料</title>
     <action>
       <Cancel>#{word.cancel}</Cancel>
       <Save>套用</Save>
@@ -301,7 +301,7 @@
       <label>
         <metadataTypeTab>中繼資料類型</metadataTypeTab>
         <dialogTab>對話方塊範本</dialogTab>
-        <viewTab>檢視範本</viewTab>
+        <viewTab>檢視範本：</viewTab>
       </label>
     </tab>
   </UIMetadataForm>
@@ -399,7 +399,7 @@
       <permissions>權限：</permissions>
       <showHiddenNode>顯示隱藏的節點：</showHiddenNode>
       <allowCreateFolders>允許建立資料夾：</allowCreateFolders>
-      <Admin>Admin：</Admin>
+      <Admin>管理員</Admin>
       <Categories>類別：</Categories>
       <Icons>圖示：</Icons>
       <List>清單：</List>
@@ -454,8 +454,8 @@
   -->
   <UINodeTypeList>
     <label>
-      <true>true</true>
-      <false>false</false>
+      <true>對</true>
+      <false>錯</false>
     </label>
     <header>
       <icon>圖示</icon>
@@ -505,7 +505,7 @@
         <nodeTypeDefinition>節點類型</nodeTypeDefinition>
         <propertyDefinition>屬性</propertyDefinition>
         <childNodeDefinition>子節點</childNodeDefinition>
-        <superTypeTab>超級類型</superTypeTab>
+        <superTypeTab>父類型</superTypeTab>
         <DefaultTypeTab>主要預設</DefaultTypeTab>
         <RequiredTypeTab>主要所需</RequiredTypeTab>
         <Contraints>約束</Contraints>
@@ -520,13 +520,13 @@
       <mixinType>是混合類型</mixinType>
       <hasOrderableChildNodes>可訂購的子節點</hasOrderableChildNodes>
       <primaryItemName>主要項目名稱</primaryItemName>
-      <superTypes>超級類型</superTypes>
+      <superTypes>父類型</superTypes>
       <propertyname>定義名稱</propertyname>
       <requiredType>所需的類型</requiredType>
       <multiple>是多個</multiple>
       <mandatory>是強制性的</mandatory>
       <autoCreated>是自動建立</autoCreated>
-      <parentversion>在母版上</parentversion>
+      <parentversion>在原始版上</parentversion>
       <protected>是受保護</protected>
       <constraints>值</constraints>
       <UIFormTableInputSet>UIFormTableInputSet</UIFormTableInputSet>
@@ -534,7 +534,7 @@
       <childNamespace>名稱空間</childNamespace>
       <childMandatory>是強制性的</childMandatory>
       <childAutocreated>是自動建立</childAutocreated>
-      <childParentversion>在母版上</childParentversion>
+      <childParentversion>在原始版上</childParentversion>
       <childProtected>是受保護</childProtected>
       <childNodename>定義名稱</childNodename>
       <requiredPrimaryType>所需的主要類型</requiredPrimaryType>
@@ -547,7 +547,7 @@
       <SaveDraft>保存為草稿</SaveDraft>
       <AddProperty>增加屬性</AddProperty>
       <AddChild>增加子</AddChild>
-      <AddConstraints>增加限制</AddConstraints>
+      <AddConstraints>增加約束</AddConstraints>
       <Back>#{word.back}</Back>
       <AddType>增加類型</AddType>
       <AddValue>新增</AddValue>
@@ -561,8 +561,8 @@
     </action>
     <msg>
       <register-successfully>'{0}' 節點類型已成功註冊。</register-successfully>
-      <supertype-is-madatory>父類型是強制性的當你註冊一個新的節點類型。請選擇至少一個父類型。</supertype-is-madatory>
-      <register-failed>節點類型註冊不成功。它已經存在或父類型無效。</register-failed>
+      <supertype-is-madatory>超級類型是強制性的當你註冊一個新的節點類型。請選擇至少一個超級類型。</supertype-is-madatory>
+      <register-failed>節點類型註冊不成功。它已經存在或超級類型無效。</register-failed>
       <nodeType-name>節點類型名稱是必填的。</nodeType-name>
       <fileName-invalid>檔案名稱中有一些不正確字元。</fileName-invalid>
       <node-type-exists>'{0}' 節點類型已經存在。</node-type-exists>
@@ -605,7 +605,7 @@
   </requiredPrimaryTypePopup>
   <superTypesPopup>
     <title>
-      <FormsuperTypesPopup>選擇超級類型</FormsuperTypesPopup>
+      <FormsuperTypesPopup>選擇父類型</FormsuperTypesPopup>
     </title>
   </superTypesPopup>
   <NodeTypePopup>
@@ -785,9 +785,9 @@
       <ECMTemplate>資源管理器中的範本</ECMTemplate>
       <UIScriptForm>腳本</UIScriptForm>
       <UIDialogTab>對話</UIDialogTab>
-      <UIViewTab>查看</UIViewTab>
-      <UITemplateEditForm>範本</UITemplateEditForm>
-      <UITemplateForm>範本</UITemplateForm>
+      <UIViewTab>檢視</UIViewTab>
+      <UITemplateEditForm>模板</UITemplateEditForm>
+      <UITemplateForm>模板</UITemplateForm>
       <UITemplateContainer>文件</UITemplateContainer>
       <UIActionsTemplateContainer>操作</UIActionsTemplateContainer>
       <UIOthersTemplateContainer>其他人</UIOthersTemplateContainer>
@@ -811,7 +811,7 @@
   -->
   <UIViewList>
    <title>
-     <View>查看</View>
+     <View>檢視</View>
      <EditInfo>編輯</EditInfo>
      <Delete>刪除</Delete>
    </title>
@@ -833,7 +833,7 @@
   </UIViewList>
   <ViewPopup>
     <title>
-      <UIViewFormTabPane>查看</UIViewFormTabPane>
+      <UIViewFormTabPane>檢視</UIViewFormTabPane>
     </title>
   </ViewPopup>
   <AddPopup>
@@ -866,7 +866,7 @@
 </msg>
 <grid>
  <msg>
-  <empty>沒有標籤在這個視圖</empty>
+  <empty>在這個視圖上沒有標籤</empty>
  </msg>
 </grid>
 </UITabList>
@@ -986,7 +986,7 @@
       <publicationRequestApproval>請求批准</publicationRequestApproval>
       <publicationApproveContent>批准內容</publicationApproveContent>
       <publicationPublish>發佈</publicationPublish>
-<contentNavigation>內容導引</contentNavigation>
+<contentNavigation>內容導航</contentNavigation>
 <addSymLink>增加符號連結</addSymLink>
     </label>
     <action>
@@ -1041,7 +1041,7 @@
   -->
   <UIECMTemplateList>
     <title>
-      <View>檢視</View>
+      <View>查看</View>
       <EditInfo>編輯</EditInfo>
       <Delete>刪除</Delete>
     </title>
@@ -1067,6 +1067,9 @@
   ################################################################################
   -->
   <UITemplateForm>
+    <title>
+      <AddPermission>增加權限</AddPermission>
+    </title>
     <action>
       <Save>#{word.save}</Save>
       <Cancel>#{word.cancel}</Cancel>
@@ -1570,8 +1573,8 @@
 <UITabPane>
  <title>
  <ContentTemplateContainer>內容</ContentTemplateContainer>
-<CateTemplateContainer>引導</CateTemplateContainer>
-<PageTemplateContainer>分頁</PageTemplateContainer>
+<CateTemplateContainer>導航</CateTemplateContainer>
+<PageTemplateContainer>分頁程式</PageTemplateContainer>
  </title>
 </UITabPane>
 
@@ -1707,9 +1710,9 @@
 </UICLVTemplateForm_CateTemplateContainer>
 <UICLVTemplateForm>
   <label>
-    <paginators>分頁</paginators>
+    <paginators>分頁程式</paginators>
 <list>內容</list>
-<navigation>引導</navigation>
+<navigation>導航</navigation>
   </label>
                           <action>
                             <Save>#{word.save}</Save>
@@ -2081,7 +2084,7 @@
   </PermissionButton>
   <nodeTypeDefinition>
     <title>
-      <AddSuperType>增加父類型</AddSuperType>
+      <AddSuperType>增加超級類型</AddSuperType>
     </title>
   </nodeTypeDefinition>
   <childNodeDefinition>
@@ -2501,7 +2504,7 @@
   </NodeTypeNameValidator>
   <UIActionForm>
     <msg>
-      <constraint-violation-exception>節點"{0}"不能增加到 '{1}' 在工作區中 '{2}'。有權限或限制條件的問題。</constraint-violation-exception>
+      <constraint-violation-exception>節點"{0}"不能增加到 '{1}' 在工作區中 '{2}'。有權限或約束條件的問題。</constraint-violation-exception>
     </msg>
   </UIActionForm>
   
@@ -2512,7 +2515,7 @@
   </UIWorkspaceWizard>
   <UIRepositoryForm>
     <msg>
-      <not-complete-repository>正在創建存儲庫。你需要等待幾分鐘，然後創建另一個。</not-complete-repository>
+      <not-complete-repository>正在創建儲存庫。你需要等待幾分鐘，然後創建另一個。</not-complete-repository>
     </msg>
   </UIRepositoryForm>
   

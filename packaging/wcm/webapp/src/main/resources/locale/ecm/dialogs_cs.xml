@@ -54,6 +54,8 @@
         <name>#{word.name}</name>
         <categories>Kategorie</categories>
         <mimeType>#{Ecm.dialog.label.mimeType}</mimeType>
+        <width>Width</width>
+        <height>Height</height>
         <content>#{word.content}</content>
         <re-upload>Soubor již existuje. Můžete jej odstranit a nahrát jiný soubor.</re-upload>
       </label>

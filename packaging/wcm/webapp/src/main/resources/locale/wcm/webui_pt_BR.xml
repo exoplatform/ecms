@@ -251,8 +251,7 @@
       <View>Visualizar</View>
     </title>
     <msg>
-    <template-not-support>Cannot preview this content. The template is not supported.
-Não é possível pré-visualizar este conteúdo. Este modelo não é suportado</template-not-support>
+    <template-not-support>Cannot preview this content. The template is not supported. Não é possível pré-visualizar este conteúdo. Este modelo não é suportado</template-not-support>
     </msg>
   </UIContentSearchResult>
 

@@ -42,7 +42,7 @@
   <Views>
     <label>
       <wcm-view>Web</wcm-view>
-      <admin-view>Admin</admin-view>
+      <admin-view>管理員</admin-view>
       <icon-view>圖示</icon-view>
       <thumbails-view>縮略圖</thumbails-view>
       <list-view>清單</list-view>
@@ -203,7 +203,7 @@
       <time-to-late>搜索時間過長。</time-to-late>
       <empty-field>請輸入有效的關鍵字進行搜索。</empty-field>
       <invalid-format>欄位"{0}"不正確的日期/時間格式。</invalid-format>
-      <invalid-date>結束日期必須晚於開始日期</invalid-date>
+      <invalid-date>"結束日期必須晚於開始日期"</invalid-date>
       <invalid-nodeType>節點類型"{0}"無效。請再次檢查。</invalid-nodeType>
       <invalid-keyword>關鍵字不正確。無法識別某些字元。</invalid-keyword>
     </msg>

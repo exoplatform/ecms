@@ -107,7 +107,7 @@
     <pending>等待中</pending>
     <approved>核准</approved>
     <inreview>回顧</inreview>
-    <staged>上演</staged>
+    <staged>階段</staged>
     <published>已發佈</published>
   </PublicationStates>
   <UISCVCacheRadioBox>
