@@ -19,8 +19,15 @@ package org.exoplatform.clouddrive.jcr;
 
 import org.exoplatform.services.jcr.RepositoryService;
 
+import java.util.Collection;
+import java.util.LinkedHashSet;
+import java.util.Set;
+
 import javax.jcr.Item;
+import javax.jcr.ItemNotFoundException;
+import javax.jcr.Node;
 import javax.jcr.PathNotFoundException;
+import javax.jcr.PropertyIterator;
 import javax.jcr.RepositoryException;
 import javax.jcr.Session;
 
@@ -54,6 +61,24 @@ public class JCRNodeFinder implements NodeFinder {
   @Override
   public Item findItem(Session userSession, String path) throws PathNotFoundException, RepositoryException {
     return userSession.getItem(path);
+  }
+
+  /**
+   * {@inheritDoc}
+   */
+  @Override
+  public Collection<Node> findLinked(Session session, String uuid) throws PathNotFoundException,
+                                                                  RepositoryException {
+    Set<Node> res = new LinkedHashSet<Node>();
+    try {
+      Node target = session.getNodeByUUID(uuid);
+      for (PropertyIterator piter = target.getReferences(); piter.hasNext();) {
+        res.add(piter.nextProperty().getParent());
+      }
+    } catch (ItemNotFoundException e) {
+      // nothing
+    }
+    return res;
   }
 
   /**

@@ -17,6 +17,8 @@
 
 package org.exoplatform.clouddrive.jcr;
 
+import java.util.Collection;
+
 import javax.jcr.Item;
 import javax.jcr.Node;
 import javax.jcr.PathNotFoundException;
@@ -56,6 +58,17 @@ public interface NodeFinder {
    * @throws PathNotFoundException if item not found by given path
    */
   Item findItem(Session userSession, String path) throws PathNotFoundException, RepositoryException;
+
+  /**
+   * Find nodes linked to given node.
+   * 
+   * @param userSession {@link Session}
+   * @param uuid {@link String}
+   * @return {@link Collection} of nodes
+   * @throws PathNotFoundException
+   * @throws RepositoryException
+   */
+  Collection<Node> findLinked(Session session, String uuid) throws PathNotFoundException, RepositoryException;
 
   /**
    * Align given name to current repository conventions by removing or escaping forbidden characters.

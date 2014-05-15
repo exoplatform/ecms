@@ -1349,6 +1349,11 @@ public abstract class JCRLocalCloudDrive extends CloudDrive {
 
     String                     fileId;
 
+    /**
+     * Referenceable file UUID for removal (optional for other operations).
+     */
+    String                     fileUUID;
+
     FileChange                 next;
 
     CloudFileSynchronizer      synchronizer;
@@ -1407,6 +1412,10 @@ public abstract class JCRLocalCloudDrive extends CloudDrive {
 
     FileChange(String filePath, String changeType) throws RepositoryException, CloudDriveException {
       this(filePath, null, false, changeType, null);
+    }
+
+    void setFileUUID(String fileUUID) {
+      this.fileUUID = fileUUID;
     }
 
     void initUpdated(Set<String> updated) {
@@ -1662,6 +1671,17 @@ public abstract class JCRLocalCloudDrive extends CloudDrive {
       begin();
 
       synchronizer.remove(path, fileId, isFolder, fileAPI);
+
+      if (fileUUID != null) {
+        // remove also file links (e.g. ECMS symlinks)
+        for (Node linked : finder.findLinked(session(), fileUUID)) {
+          Node parent = linked.getParent();
+          linked.remove();
+          // save immediately: in case of future error (cloud or JCR), the file node already removed in the
+          // drive
+          parent.save();
+        }
+      }
     }
 
     private void trash() throws PathNotFoundException,
@@ -2385,6 +2405,11 @@ public abstract class JCRLocalCloudDrive extends CloudDrive {
                                        fileAPI.isFolder(file),
                                        FileChange.REMOVE,
                                        synchronizer(file));
+    // remember UUID for links removal
+    if (file.isNodeType("mix:referenceable")) {
+      remove.setFileUUID(file.getUUID());
+    }
+
     Map<String, FileChange> planned = fileRemovals.get();
     if (planned != null) {
       FileChange existing = planned.get(filePath);
