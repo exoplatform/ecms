@@ -99,7 +99,7 @@ public class Text {
     for (int i = 0; i < name.length(); i++) {
       char ch = name.charAt(i);
       if (ch == '&' || ch == '#'
-        || ch == '*' || ch == '@' || ch == '\'' || ch == '"' || ch == '|'
+        || ch == '*' || ch == '\'' || ch == '"' || ch == '|'
           || (ch == '.' && name.length() < 3) || (ch == ' ' && (i == 0 || i == name.length() - 1))
           || ch == '\t' || ch == '\r' || ch == '\n' || ch == '\\' || ch == '>' || ch == '<') {
         buffer.append('%');
