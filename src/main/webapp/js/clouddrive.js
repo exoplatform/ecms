@@ -527,17 +527,17 @@
 						scheduleSync();
 						utils.log("Long-polling synchronization enabled for Cloud Drive on " + syncName);
 					} else {
-						// run sync periodically for some period
-						var syncPeriod = 60000 * 15;
+						// run sync periodically for some period (30min)
+						var syncPeriod = 60000 * 30;
 						syncTimeout = 30000;
 						syncFunc = doSync;
 						scheduleSync();
 						utils.log("Periodical synchronization enabled for Cloud Drive on " + syncName);
 
 						setTimeout(function() {
-							// ... increase timeout after a half of a period
+							// ... increase timeout after a 1/3 of a period
 							syncTimeout = 60000;
-						}, Math.round(syncPeriod / 2));
+						}, Math.round(syncPeriod / 3));
 
 						setTimeout(function() {
 							// ... and stop auto-sync after some period, user will enable it again by page
@@ -1149,25 +1149,11 @@
 		 */
 		var refresh = function(allowRefresh) {
 			if (allowRefresh) {
-				// try reuse Refresh action but w/o popup
+				// refresh view w/ popup
 				$("a.refreshIcon i.uiIconRefresh").click();
 			} else {
-				var personalDocs = $("div.breadcrumbLink a.nodeLabel:first");
-				if (personalDocs.size() > 0) {
-					// in List view
-					personalDocs.click();
-				} else {
-					personalDocs = $("#UISideBar .title");
-					if (personalDocs.size() > 0) {
-						// in Icon view with tree sidebar
-						personalDocs.click();
-					} else {
-						// try click on address bar view icon
-						$(".detailViewIcon a.active").click();
-						// click RefreshSession
-						// $("a.refreshIcon i.uiIconRefresh").click();
-					}
-				}
+				// refresh view w/o popup
+				$("#ECMContextMenu a[exo\\:attr='RefreshView'] i").click();
 			}
 		};
 
@@ -1386,8 +1372,8 @@
 				    + drive.email + "</a></span>";
 				var details;
 				if (updated > 0) {
-					// try refresh on success
-					refresh(true);
+					// refresh on success
+					refresh();
 					
 					// TODO Don't refresh at all, as user can change the
 					// view. Instead we show a link on the message.
