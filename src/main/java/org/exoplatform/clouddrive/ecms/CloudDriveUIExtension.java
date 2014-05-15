@@ -53,17 +53,6 @@ public class CloudDriveUIExtension extends BaseComponentPlugin {
       for (Object ov : params.getValues()) {
         if (ov instanceof String) {
           defaultActions.add((String) ov);
-          // TODO cleanup
-          // try {
-          // Class<?> extClass = Class.forName(className);
-          // if (UIComponent.class.isAssignableFrom(extClass)) {
-          // defaultActions.add(extClass);
-          // } else {
-          // LOG.warn("Action class " + className + " not an UIExtension.");
-          // }
-          // } catch (ClassNotFoundException e) {
-          // LOG.warn("Cannot load extension class " + className + " : " + e.getMessage());
-          // }
         }
       }
     } else {

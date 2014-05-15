@@ -19,7 +19,7 @@ package org.exoplatform.clouddrive.ecms;
 import java.util.Arrays;
 import java.util.List;
 
-import org.exoplatform.clouddrive.ecms.filters.CloudDriveFiler;
+import org.exoplatform.clouddrive.ecms.filters.CloudDriveFilter;
 import org.exoplatform.services.log.ExoLogger;
 import org.exoplatform.services.log.Log;
 import org.exoplatform.web.application.Parameter;
@@ -41,7 +41,7 @@ public class RefreshCloudDriveManagerComponent extends BaseCloudDriveManagerComp
 
   public static final String                     EVENT_NAME = "RefreshCloudDrive";
 
-  protected static final List<UIExtensionFilter> FILTERS    = Arrays.asList(new UIExtensionFilter[] { new CloudDriveFiler() });
+  protected static final List<UIExtensionFilter> FILTERS    = Arrays.asList(new UIExtensionFilter[] { new CloudDriveFilter() });
 
   @UIExtensionFilters
   public List<UIExtensionFilter> getFilters() {

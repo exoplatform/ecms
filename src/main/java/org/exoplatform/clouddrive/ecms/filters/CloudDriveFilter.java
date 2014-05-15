@@ -35,9 +35,9 @@ import javax.jcr.RepositoryException;
  * @version $Id: CloudDriveFiler.java 00000 Nov 5, 2012 pnedonosko $
  * 
  */
-public class CloudDriveFiler extends AbstractCloudDriveNodeFilter {
+public class CloudDriveFilter extends AbstractCloudDriveNodeFilter {
 
-  protected static final Log LOG = ExoLogger.getLogger(CloudDriveFiler.class);
+  protected static final Log LOG = ExoLogger.getLogger(CloudDriveFilter.class);
 
   /**
    * {@inheritDoc}

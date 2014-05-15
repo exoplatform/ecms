@@ -23,11 +23,20 @@ import org.exoplatform.services.cms.link.LinkManager;
 import org.exoplatform.services.cms.link.impl.NodeFinderImpl;
 import org.exoplatform.services.jcr.RepositoryService;
 
+import java.util.Collection;
+import java.util.LinkedHashSet;
+import java.util.Set;
+
 import javax.jcr.Item;
+import javax.jcr.ItemNotFoundException;
 import javax.jcr.Node;
+import javax.jcr.NodeIterator;
 import javax.jcr.PathNotFoundException;
 import javax.jcr.RepositoryException;
 import javax.jcr.Session;
+import javax.jcr.query.Query;
+import javax.jcr.query.QueryManager;
+import javax.jcr.query.QueryResult;
 
 /**
  * Node finder based on original implementation from ECMS.<br>
@@ -43,7 +52,7 @@ public class CMSNodeFinder extends NodeFinderImpl implements NodeFinder {
   public CMSNodeFinder(RepositoryService repositoryService, LinkManager linkManager) {
     super(repositoryService, linkManager);
   }
-  
+
   /**
    * {@inheritDoc}
    */
@@ -70,4 +79,26 @@ public class CMSNodeFinder extends NodeFinderImpl implements NodeFinder {
   public Item findItem(Session session, String absPath) throws PathNotFoundException, RepositoryException {
     return getItem(session, absPath, true);
   }
+
+  /**
+   * {@inheritDoc}
+   */
+  @Override
+  public Collection<Node> findLinked(Session session, String uuid) throws PathNotFoundException,
+                                                                  RepositoryException {
+    Set<Node> res = new LinkedHashSet<Node>();
+    try {
+      Node target = session.getNodeByUUID(uuid);
+      QueryManager qm = session.getWorkspace().getQueryManager();
+      Query q = qm.createQuery("SELECT * FROM exo:symlink WHERE exo:uuid=" + target.getUUID(), Query.SQL);
+      QueryResult qr = q.execute();
+      for (NodeIterator niter = qr.getNodes(); niter.hasNext();) {
+        res.add(niter.nextNode());
+      }
+    } catch (ItemNotFoundException e) {
+      // nothing
+    }
+    return res;
+  }
+
 }

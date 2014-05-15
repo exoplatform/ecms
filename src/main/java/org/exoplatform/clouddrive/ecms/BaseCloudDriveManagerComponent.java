@@ -17,7 +17,9 @@
 package org.exoplatform.clouddrive.ecms;
 
 import org.exoplatform.clouddrive.CloudProvider;
+import org.exoplatform.ecm.webui.component.explorer.UIDocumentWorkspace;
 import org.exoplatform.ecm.webui.component.explorer.UIJCRExplorer;
+import org.exoplatform.ecm.webui.component.explorer.UIWorkingArea;
 import org.exoplatform.services.log.ExoLogger;
 import org.exoplatform.services.log.Log;
 import org.exoplatform.webui.application.WebuiRequestContext;
@@ -56,8 +58,27 @@ public abstract class BaseCloudDriveManagerComponent extends UIAbstractManagerCo
       LOG.error("Cannot find ancestor of type UIJCRExplorer in component " + this);
     }
   }
-  
+
   protected void initContext() throws Exception {
     initContext(null);
+  }
+
+  @Deprecated // TODO not used, see RefreshViewManagerComponent
+  protected void initView() throws Exception {
+    UIWorkingArea workingArea = getAncestorOfType(UIWorkingArea.class);
+    if (workingArea != null) {
+      UIDocumentWorkspace document = workingArea.getChild(UIDocumentWorkspace.class);
+      if (document != null) {
+        // add RefreshView component
+        RefreshViewForm refresh = document.getChild(RefreshViewForm.class);
+        if (refresh == null) {
+          document.addChild(RefreshViewForm.class, null, null);
+          // TODO cleanup
+          LOG.info(">>>> RefreshViewForm added " + workingArea.getChild(RefreshViewForm.class));
+        }
+      }
+    } else {
+      LOG.error("Cannot find ancestor of type UIWorkingArea in component " + this);
+    }
   }
 }

@@ -21,7 +21,6 @@ package org.exoplatform.clouddrive.ecms.clipboard;
 import org.exoplatform.clouddrive.CloudDrive;
 import org.exoplatform.clouddrive.CloudDriveManager;
 import org.exoplatform.clouddrive.CloudDriveService;
-import org.exoplatform.clouddrive.ecms.filters.CloudFileFilter;
 import org.exoplatform.clouddrive.jcr.JCRLocalCloudDrive;
 import org.exoplatform.ecm.jcr.model.ClipboardCommand;
 import org.exoplatform.ecm.webui.component.explorer.UIJCRExplorer;
@@ -38,7 +37,6 @@ import org.exoplatform.webui.config.annotation.ComponentConfig;
 import org.exoplatform.webui.config.annotation.EventConfig;
 import org.exoplatform.webui.core.UIApplication;
 import org.exoplatform.webui.event.Event;
-import org.exoplatform.webui.ext.filter.UIExtensionFilter;
 
 import java.util.Iterator;
 import java.util.LinkedList;
@@ -63,8 +61,6 @@ import javax.jcr.Session;
 public class CloudDrivePasteManageComponent extends PasteManageComponent {
 
   protected static final Log       LOG         = ExoLogger.getLogger(CloudDrivePasteManageComponent.class);
-
-  protected static CloudFileFilter FILE_FILTER = new CloudFileFilter();
 
   public static class PasteActionListener extends UIWorkingAreaActionListener<PasteManageComponent> {
     public void processEvent(Event<PasteManageComponent> event) throws Exception {
@@ -165,19 +161,6 @@ public class CloudDrivePasteManageComponent extends PasteManageComponent {
    */
   public CloudDrivePasteManageComponent() {
     super();
-  }
-
-  /**
-   * {@inheritDoc}
-   */
-  @Override
-  public List<UIExtensionFilter> getFilters() {
-    LOG.info(">>> getFilters...");
-    // TODO cleanup
-    // List<UIExtensionFilter> filters = new ArrayList<UIExtensionFilter>();
-    // filters.add(FILE_FILTER); // let it be a first
-    // filters.addAll(super.getFilters());
-    return super.getFilters();
   }
 
   static boolean processCreateLink(ClipboardCommand clipboard, Node destNode, UIJCRExplorer uiExplorer) throws Exception {

@@ -16,9 +16,6 @@
  */
 package org.exoplatform.clouddrive.ecms;
 
-import java.util.Arrays;
-import java.util.List;
-
 import org.exoplatform.clouddrive.ecms.filters.CloudFileFilter;
 import org.exoplatform.services.log.ExoLogger;
 import org.exoplatform.services.log.Log;
@@ -27,6 +24,9 @@ import org.exoplatform.webui.config.annotation.ComponentConfig;
 import org.exoplatform.webui.core.lifecycle.UIContainerLifecycle;
 import org.exoplatform.webui.ext.filter.UIExtensionFilter;
 import org.exoplatform.webui.ext.filter.UIExtensionFilters;
+
+import java.util.Arrays;
+import java.util.List;
 
 /**
  * Created by The eXo Platform SAS
@@ -56,8 +56,6 @@ public class OpenCloudFileManagerComponent extends BaseCloudDriveManagerComponen
     if (EVENT_NAME.equals(name)) {
       initContext();
       return "javascript:void(0);//objectId";
-    } else if (EVENT_NAME.equals(name)) {
-      LOG.info(EVENT_NAME + ": " + name + " " + beanId + " " + params);
     }
     return super.renderEventURL(ajax, name, beanId, params);
   }
