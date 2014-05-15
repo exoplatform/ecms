@@ -63,6 +63,9 @@ public class PageSearchServiceConnector extends BaseSearchServiceConnector {
     criteria.setLimit(limit);
     criteria.setSortBy(sort);
     criteria.setOrderBy(order);
+    if(query.contains("~")) {
+      criteria.setFuzzySearch(true);
+    }
     return criteria;
   }
 

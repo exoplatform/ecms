@@ -403,6 +403,34 @@
         return placement;
     };
 
+    WCMUtils.prototype.pingUserStatus = function() {
+      var userStatus = gj("#user-status");
+      var frequency = 15;
+      var delay = 60;
+      if(userStatus.html() != undefined) {
+        frequency = gj(userStatus).attr("user-status-ping-frequency");
+        delay = gj(userStatus).attr("user-status-offline-delay");
+      }
+      var pingEvent = window.clearInterval(pingEvent);
+      pingEvent = setInterval(gj.proxy(eXo.ecm.WCMUtils.sendPing, eXo.ecm.WCMUtils), frequency*1000);
+      eXo.ecm.WCMUtils.sendPing();
+    }
+
+    WCMUtils.prototype.sendPing = function() {
+      gj.ajax({
+        url: "/rest/state/ping/",
+        dataType: "json",
+        context: this,
+        success: function(data){
+
+        },
+        error: function(){
+     
+        }
+     });
+   };
+
+
     WCMUtils.prototype.showPopover = function (element) {
         gj(element).popover({template: '<div class="popover"><div class="arrow"></div><div class="inner"><h3 class="popover-title" style="display:none;"></h3><div class="popover-content"><p></p></div></div></div>'});
         gj(element).popover('show');

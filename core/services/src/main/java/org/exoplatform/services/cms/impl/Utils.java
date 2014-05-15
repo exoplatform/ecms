@@ -49,6 +49,8 @@ import javax.jcr.RepositoryException;
 import javax.jcr.Session;
 import javax.jcr.ValueFormatException;
 import javax.jcr.nodetype.NodeType;
+import javax.jcr.nodetype.NodeTypeIterator;
+import javax.jcr.nodetype.NodeTypeManager;
 import javax.jcr.nodetype.PropertyDefinition;
 import javax.ws.rs.core.MediaType;
 
@@ -95,6 +97,7 @@ public class Utils {
   public static final String PRIVATE = "Private";
 
   public static final String PUBLIC = "Public";
+
 
   public static final long KB = 1024L;
   public static final long MB = 1024L*KB;
