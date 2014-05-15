@@ -712,7 +712,7 @@
     </label>
     <title>
       <AddPermission>添加权限</AddPermission>
-      <RemovePermission>删除权限</RemovePermission>
+      <RemovePermission>Remove Permission</RemovePermission>
       <AddIcon>添加图标</AddIcon>
       <AddPath>添加路径</AddPath>
     </title>
@@ -1067,6 +1067,9 @@
   ################################################################################
   -->
   <UITemplateForm>
+    <title>
+      <AddPermission>添加权限</AddPermission>
+    </title>
     <action>
       <Save>#{word.save}</Save>
       <Cancel>#{word.cancel}</Cancel>

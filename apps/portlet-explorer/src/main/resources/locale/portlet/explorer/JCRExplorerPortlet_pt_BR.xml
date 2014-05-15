@@ -41,7 +41,7 @@
     </label>
     <button>
       <label>
-        <confirm>OK</confirm>
+        <confirm>Ok</confirm>
       </label>
     </button>
     <msg>
@@ -287,7 +287,7 @@
       <Paste>Colar</Paste>
       <Search>Buscar</Search>
       <WatchDocument>Acompanhar/Deixar de acompanhar</WatchDocument>
-      <TaggingDocument>Tag</TaggingDocument>
+      <TaggingDocument>Marcação</TaggingDocument>
       <Vote>Votar para esse documento</Vote>
       <Comment>Comentar</Comment>
       <ManageVersions>Versões</ManageVersions>
@@ -619,7 +619,7 @@
   -->
   <UITabPane>
     <title>
-      <UIPublishingPanel>Publication Pane</UIPublishingPanel>
+      <UIPublishingPanel>Painel de Publicação</UIPublishingPanel>
       <UIPublicationPanel>Revisão</UIPublicationPanel>
       <UIPublicationSchedule>Agendado</UIPublicationSchedule>
       <UIPublicationPagesContainer>Páginas</UIPublicationPagesContainer>
@@ -653,8 +653,8 @@
       <UIDocumentInfo>Visualização de documentos</UIDocumentInfo>
       <UICategoriesSelectPanel>Selecionar categorias</UICategoriesSelectPanel>
       <UISelectedCategoriesGrid>Categorias referenciadas</UISelectedCategoriesGrid>
-      <UIWorkflowPublicationActionForm>Workflow Publication Action</UIWorkflowPublicationActionForm>
-      <UIWorkflowPublicationViewForm>Workflow Publication View</UIWorkflowPublicationViewForm>
+      <UIWorkflowPublicationActionForm>Ação de Publicação do fluxo</UIWorkflowPublicationActionForm>
+      <UIWorkflowPublicationViewForm>View de Publicação do fluxo</UIWorkflowPublicationViewForm>
       <metadatasitemetadata>Metadado do site</metadatasitemetadata>
       <dcelementset>O core do Dublin</dcelementset>
     </title>
@@ -669,14 +669,14 @@
     </confirm>
     <header>
       <name>Nome</name>
-      <multiValue>Multi Value</multiValue>
+      <multiValue>Multi Valor</multiValue>
       <value>Valor</value>
       <action>Ação</action>
     </header>
     <label>
-      <binary>Binary Data</binary>
+      <binary>Dado binário</binary>
       <notavailable>N/A</notavailable>
-      <cannotget>Cannot get values</cannotget>
+      <cannotget>Não pode pegar os valores</cannotget>
     </label>
     <action>
       <Close>#{word.close}</Close>
@@ -693,15 +693,26 @@
   #############################################################################
   -->
   <UIPropertyForm>
-    <title>Add/Edit Property</title>
+    <title>Adicionar ou editar propriedade</title>
     <label>
       <name>Nome:</name>
       <type>Tipo:</type>
-      <value>Value:</value>
+      <value>Valor</value>
       <upload>Arquivo:</upload>
-      <namespace>Namespace:</namespace>
-      <multiple>Multiple:</multiple>
+      <namespace>Namespace</namespace>
+      <multiple>Multiplo</multiple>
       <property_select>Adicione nova propriedade:</property_select>
+      <value0>Value 0</value0>
+      <value1>Value 1</value1>
+      <value2>Value 2</value2>
+      <value3>Value 3</value3>
+      <value4>Value 4</value4>
+      <value5>Value 5</value5>
+      <value6>Value 6</value6>
+      <value7>Value 7</value7>
+      <value8>Value 8</value8>
+      <value9>Value 9</value9>
+      <value10>Value 10</value10>
     </label>
     <action>
       <Save>#{word.save}</Save>
@@ -709,16 +720,16 @@
       <Reset>Redefinir</Reset>
     </action>
     <msg>
-      <name-invalid>Please enter the property name.</name-invalid>
-      <unable-create>Cannot add properties.</unable-create>
-      <value-invalid>Please enter the value.</value-invalid>
-      <node-checkedin>You must check out this node before adding a property.</node-checkedin>
-      <can-not-add>You cannot add properties to this node. This is only allowed for the node type nt:unstructured.</can-not-add>
-      <propertyName-invalid>The property name must include namespace (e.g. namespace:name).</propertyName-invalid>
-      <propertyName-exist>The property '{0}' already exists.</propertyName-exist>
-      <propertyValu-null>Some values may be null.</propertyValu-null>
+      <name-invalid>Você deve colocar o nome !</name-invalid>
+      <unable-create>Não pode adicionar propriedades !</unable-create>
+      <value-invalid>Você deve colocar valor !</value-invalid>
+      <node-checkedin>Você deve fazer checkout deste node antes de adicionar uma propriedade</node-checkedin>
+      <can-not-add>Você não pode adicionar propriedades para este node. Apenas para nodes de tipo nt:unstructured</can-not-add>
+      <propertyName-invalid>Nome da propriedade deve incluir namespace (ex: namespace:nome)</propertyName-invalid>
+      <propertyName-exist>A propriedade '{0}' já existe.</propertyName-exist>
+      <propertyValu-null>Talvez alguns valores estejam nulos</propertyValu-null>
       <valueFormatEx>Você não pode atribuir múltiplos valores a uma propriedade de valor único.</valueFormatEx>
-      <number-format-exception>Your input value has the wrong format.</number-format-exception>
+      <number-format-exception>Seu valor de entrada tem um formato errado</number-format-exception>
       <property-not-exist>A propriedade {0} não existe.</property-not-exist>
     </msg>
   </UIPropertyForm>
@@ -737,23 +748,23 @@
     </action>
     <header>
       <usersOrGroups>Usuário ou Grupo</usersOrGroups>
-      <read>Read</read>
+      <read>Ler</read>
       <addNode>Modificar</addNode>
       <remove>Remover</remove>
       <action>Ação</action>
     </header>
     <msg>
       <confirm-delete-permission>Deseja remover esta permissão?</confirm-delete-permission>
-      <no-permission-tochange>You do not have the right to remove permission.</no-permission-tochange>
-      <no-permission-remove>You cannot remove the owner.</no-permission-remove>
-      <access-denied>Access denied. You cannot remove this permission.</access-denied>
+      <no-permission-tochange>Você não tem direto de remover a permissão</no-permission-tochange>
+      <no-permission-remove>Você não pode remover o dono</no-permission-remove>
+      <access-denied>Acesso negado! Você não pode remover esta pemissão.</access-denied>
     </msg>
   </UIPermissionInfo>
   <permission>
     <title>
       <SelectUser>Selecionar usuário</SelectUser>
-      <SelectMember>Select Membership</SelectMember>
-      <AddAny>Select Everyone</AddAny>
+      <SelectMember>Selecionar membership</SelectMember>
+      <AddAny>Selecionar todos</AddAny>
     </title>
   </permission>
   <!--
@@ -770,11 +781,11 @@
   </SelectUserOrGroup>
   <UIGroupSelector>
     <label>
-      <selectGroup>Browse and Select a Group</selectGroup>
+      <selectGroup>Navegar e selecionar um grupo</selectGroup>
       <selectUser>Selecionar usuário</selectUser>
     </label>
     <msg>
-      <not-change-owner>'{0}' is the owner of this node and has full control permission.</not-change-owner>
+      <not-change-owner>'{0}' é dono deste node e possui permissão de controle total</not-change-owner>
     </msg>
   </UIGroupSelector>
   <UIPermissionForm>
@@ -782,20 +793,20 @@
       <UIPopupWindow>Selecionar</UIPopupWindow>
       <permission>UIPermissionForm</permission>
       <userOrGroup>Usuário ou grupo</userOrGroup>
-      <read>Read Right</read>
-      <add_node>Modify Right</add_node>
-      <remove>Remove Right</remove>
+      <read>Direito de Leitura</read>
+      <add_node>Modificar o direito</add_node>
+      <remove>Remover Direito</remove>
     </label>
-    <title>Add a permission to that node</title>
+    <title>Adicionar uma permissão a esse node</title>
     <action>
       <Close>#{word.close}</Close>
       <Save>#{word.save}</Save>
       <Reset>Limpar</Reset>
     </action>
     <msg>
-      <checkbox-require>Please select at least one permission.</checkbox-require>
-      <userOrGroup-required>Please select a user or group before saving this permission.</userOrGroup-required>
-      <not-change-permission>You do not have the right to add a permission.</not-change-permission>
+      <checkbox-require>Você deve selecionar ao menos uma permissão</checkbox-require>
+      <userOrGroup-required>Você deve selecionar usuário ou grupo antes de salvar esta permissão</userOrGroup-required>
+      <not-change-permission>Você não tem direito de adicionar permissão</not-change-permission>
       <access-denied>Acesso negado. Você não pode remover esta permissão.</access-denied>
     </msg>
   </UIPermissionForm>
@@ -807,22 +818,22 @@
   -->
   <UINodeTypeInfo>
     <label>
-      <node-type>Node Type</node-type>
+      <node-type>Tipo de Node</node-type>
       <name>Nome</name>
-      <item>Primary Item Name</item>
-      <super-types>Parent Types</super-types>
-      <mixin>Mixin Node Type</mixin>
-      <orderable-children>Orderable Children</orderable-children>
-      <property-def>Node Property Definition</property-def>
+      <item>Nome do Item Primário</item>
+      <super-types>Tipos dos Pais</super-types>
+      <mixin>Tipo de Node Mixin</mixin>
+      <orderable-children>Filhos Ordenáveis</orderable-children>
+      <property-def>Definição de Propriedade do Node</property-def>
       <prop-name>Nome</prop-name>
       <prop-type>Tipo</prop-type>
-      <prop-multiple>Mul</prop-multiple>
-      <prop-mandatory>Man</prop-mandatory>
+      <prop-multiple>Mult</prop-multiple>
+      <prop-mandatory>Mand</prop-mandatory>
       <prop-protected>Pr</prop-protected>
       <prop-auto-create>AC</prop-auto-create>
       <prop-default-values><![CDATA[<span title="Default Values">DV</span>]]></prop-default-values>
       <prop-constraints><![CDATA[<span title="Constraints Values">CV</span>]]></prop-constraints>
-      <node-def>Child Node Definition</node-def>
+      <node-def>Definição de Node Filho</node-def>
       <node-def-name>Nome</node-def-name>
       <node-def-opv>OPV</node-def-opv>
       <node-def-ac>AC</node-def-ac>
@@ -851,8 +862,8 @@
   </UICategoryManagerSearch>
   <UIContentNameSearch>
     <label>
-      <keyword>Content Name:</keyword>
-      <location>Search in this location:</location>
+      <keyword>Nome do Conteúdo</keyword>
+      <location>Procure nesta localização:</location>
     </label>
     <action>
       <Search>Buscar</Search>
@@ -864,39 +875,39 @@
   </UIContentNameSearch>
   <UISimpleSearch>
     <action>
-      <MoreConstraints>Show/Hide Constraint Form</MoreConstraints>
+      <MoreConstraints>Mostrar/Esconder formulário de restrições</MoreConstraints>
       <Search>Buscar</Search>
       <Save>#{word.save}</Save>
       <Cancel>#{word.cancel}</Cancel>
     </action>
     <label>
       <moreConstraints>UISimpleSearch</moreConstraints>
-      <firstOperator>Operator:</firstOperator>
-      <input>A word or phrase in content:</input>
-      <constraints>More Constraints:</constraints>
-      <nodePath>Current Location:</nodePath>
+      <firstOperator>Operador</firstOperator>
+      <input>Uma palavra ou frase no conteúdo</input>
+      <constraints>Mais restrições</constraints>
+      <nodePath>Localização corrente</nodePath>
     </label>
     <msg>
-      <keyword-null>Please enter your keyword.</keyword-null>
+      <keyword-null>Por favor coloque sua palavra chave.</keyword-null>
       <not-found>Nenhum resultado encontrado.</not-found>
       <keyword-not-allow>Esta palavra chave não é permitida.</keyword-not-allow>
-      <value-null>Please enter your keyword or constraints.</value-null>
-      <value-save-null>Please enter a keyword or constraints before saving this query.</value-save-null>
-      <inputSearch-invalid>There are invalid characters in the search input.</inputSearch-invalid>
-      <query-invalid>The query is invalid. Please check your constraint.</query-invalid>
+      <value-null>Por favor coloque a palavra chave ou restrições.</value-null>
+      <value-save-null>Por favor coloque uma palavra chave ou restrições antes de salvar a query.</value-save-null>
+      <inputSearch-invalid>Há um caracter inválido na palavra buscada</inputSearch-invalid>
+      <query-invalid>A query é inválida. Por favor verifique suas restrições</query-invalid>
     </msg>
   </UISimpleSearch>
   <ViewSearch>
     <title>
-      <UIViewSearchResult>View Template</UIViewSearchResult>
+      <UIViewSearchResult>Modelo de View</UIViewSearchResult>
     </title>
   </ViewSearch>
   <UISearchResult>
     <msg>
-      <not-support>There is no View template for this node.</not-support>
+      <not-support>Não há modelo de View para este node</not-support>
       <empty>Nenhum resultado encontrado.</empty>
-      <access-denied>You cannot open this folder, either because it no longer exists or because you do not have the right to access it.</access-denied>
-      <query-invalid>The query is invalid.</query-invalid>
+      <access-denied>Você não pode ver este node porque este modelo não está suportado ou o acesso foi negado!</access-denied>
+      <query-invalid>A query é inválida</query-invalid>
     </msg>
     <header>
       <name>#{word.name}</name>
@@ -908,26 +919,26 @@
       <score>Pontuação</score>
     </header>
     <title>
-      <typeASC>Sort by document type in ascending order</typeASC>
-      <typeDESC>Sort by document type in descending order</typeDESC>
-      <scoreASC>Sort by score in ascending order</scoreASC>
-      <scoreDESC>Sort by score in descending order</scoreDESC>
-      <nameASC>Sort by name in ascending order</nameASC>
-      <nameDESC>Sort by name in descending order</nameDESC>
-      <datecreatedASC>Sort by created date in ascending order</datecreatedASC>
-      <datecreatedDESC>Sort by created date in descending order</datecreatedDESC>
+      <typeASC>Ordenar por tipo de documento ascendente</typeASC>
+      <typeDESC>Ordenar por tipo de documento descendente</typeDESC>
+      <scoreASC>Ordenar por score ascendente</scoreASC>
+      <scoreDESC>Ordenar por score descendente</scoreDESC>
+      <nameASC>Ordenar por nome ascendente</nameASC>
+      <nameDESC>Ordenar por nome descendente</nameDESC>
+      <datecreatedASC>Ordenar por data de criação ascendente</datecreatedASC>
+      <datecreatedDESC>Ordenar por data de criação descendente</datecreatedDESC>
     </title>
     <tooltip>
-      <View>View this node</View>
-      <OpenFolder>Go to folder</OpenFolder>
+      <View>Ver este node</View>
+      <OpenFolder>Ir para pasta</OpenFolder>
     </tooltip>
   </UISearchResult>
   <UIShowAllOwnedByUserResult>
     <msg>
-      <not-support>There is no View template for this node</not-support>
+      <not-support>Não há modelo de View para este node</not-support>
       <empty>Nenhum resultado encontrado.</empty>
-      <access-denied>You cannot view this node, either because this template is not supported or because access is denied.</access-denied>
-      <query-invalid>The query is invalid</query-invalid>
+      <access-denied>Você não pode ver este node porque este modelo não está suportado ou o acesso foi negado!</access-denied>
+      <query-invalid>A query é inválida</query-invalid>
     </msg>
     <header>
       <name>#{word.name}</name>
@@ -945,18 +956,18 @@
       <scoreDESC>Ordenar por pontuação descendente</scoreDESC>
       <nameASC>Ordenar por nome ascendente</nameASC>
       <nameDESC>Ordenar por nome descendente</nameDESC>
-      <datecreatedASC>Sort by Created date in ascending order</datecreatedASC>
-      <datecreatedDESC>Sort by Created date in descending order</datecreatedDESC>
+      <datecreatedASC>Ordenar por data de criação ascendente</datecreatedASC>
+      <datecreatedDESC>Ordenar por data de criação descendente</datecreatedDESC>
     </title>
     <tooltip>
       <View>Ver este nó</View>
-      <OpenFolder>Go to Folder</OpenFolder>
+      <OpenFolder>Ir para pasta</OpenFolder>
     </tooltip>
   </UIShowAllOwnedByUserResult>
   <UIShowAllFavouriteResult>
     <msg>
       <not-support>Não há modelo de visualização para este nó</not-support>
-      <empty>No results found</empty>
+      <empty>Nenhum resultado encontrado!</empty>
       <access-denied>Você não pode ver este nó, porque este modelo não é suportado ou o acesso foi negado.</access-denied>
       <query-invalid>A consulta é inválida</query-invalid>
     </msg>
@@ -980,7 +991,7 @@
       <datecreatedDESC>Ordenar por data de criação descendente</datecreatedDESC>
     </title>
     <tooltip>
-      <View>View this Node</View>
+      <View>Ver este node</View>
       <OpenFolder>Ir para pasta</OpenFolder>
     </tooltip>
   </UIShowAllFavouriteResult>
@@ -999,7 +1010,7 @@
       <type>Tipo</type>
       <dateCreated>Data de criação</dateCreated>
       <score>Pontuação</score>
-      <AddRemoveFavourite>Add/Remove to Favorite</AddRemoveFavourite>
+      <AddRemoveFavourite>Adicionar/remover dos favoritos</AddRemoveFavourite>
     </header>
     <title>
       <typeASC>Ordenar por tipo de documento ascendente</typeASC>
@@ -1014,7 +1025,7 @@
     <tooltip>
       <View>Ver este nó</View>
       <OpenFolder>Ir para pasta</OpenFolder>
-      <RemoveHiddenAttribute>Remove Hidden Attribute</RemoveHiddenAttribute>
+      <RemoveHiddenAttribute>Remover atributo oculto</RemoveHiddenAttribute>
     </tooltip>
   </UIShowAllHiddenResult>
   <UIShowAllTrashResult>
@@ -1066,12 +1077,12 @@
       <properties-required>Nome da propriedade é requerido</properties-required>
       <value-required>Campo valor é requerido.</value-required>
       <date-invalid>Data de origem deve ser menor que data destino.</date-invalid>
-      <fromDate-required>The From date is required.</fromDate-required>
-      <must-choose-one>You have to select at least one type.</must-choose-one>
-      <properties-null>Select properties first, then filter.</properties-null>
-      <exactly-require>You have to fill in the Value exactly before saving this constraint.</exactly-require>
-      <fromDate-invalid>Invalid type in the 'From' field. Please reselect or type correctly.</fromDate-invalid>
-      <toDate-invalid>Invalid type in the 'To' field. Please reselect or type correctly.</toDate-invalid>
+      <fromDate-required>Data de origem é requerida</fromDate-required>
+      <must-choose-one>Você deve selecionar ao menos um tipo.</must-choose-one>
+      <properties-null>Selecione propriedades primeiro, e então filtre</properties-null>
+      <exactly-require>Você deve preencher o valor exatamente antes de salvar esta restrição</exactly-require>
+      <fromDate-invalid>Tipo inválido no campo 'Data de origem'. Por favor escolha ou coloque corretamente.</fromDate-invalid>
+      <toDate-invalid>Tipo inválido no campo 'Data de destino'. Por favor escolha ou e coloque corretamente.</toDate-invalid>
     </msg>
     <button>
       <label-Add>Adicionar</label-Add>
@@ -1086,10 +1097,10 @@
   </ConstraintsForm>
   <UIConstraintForm>
     <tooltip>
-      <AddMetadataType>Add Property</AddMetadataType>
-      <AddNodeType>Add Node Type</AddNodeType>
+      <AddMetadataType>Adicionar propriedade</AddMetadataType>
+      <AddNodeType>Adicionar tipo de node</AddNodeType>
       <AddCategory>Adicionar categoria</AddCategory>
-      <FindExactly>Find Exactly</FindExactly>
+      <FindExactly>Encontrar exatamente</FindExactly>
     </tooltip>
     <label>
       <colon>:</colon>
@@ -1875,6 +1886,7 @@
     <msg>
       <name-exist>Nome da tag '{0}' existe.</name-exist>
       <tagName-invalid>Há alguns caracteres inválidos no nome da tag.</tagName-invalid>
+      <tagName-empty-or-invalid>The tag name is empty or contains some invalid characters.</tagName-empty-or-invalid>
       <tag-name-empty>Seu nome de tag está vazio</tag-name-empty>
       <tag-name-duplicate>Você informou tags duplicadas.</tag-name-duplicate>
       <tagName-too-long>Uma das tags inseridas é muito longa. As tags devem ter menos de 30 caracteres.</tagName-too-long>
@@ -2205,7 +2217,7 @@
   </UIDriveSelector>
   <UIJcrExplorerEditForm>
     <label>
-      <DriveNameInput>UI JCR Explorer Edit Form</DriveNameInput>
+      <DriveNameInput>UIJcrExplorerEditForm</DriveNameInput>
     </label>
     <msg>
       <personal-usecase>A unidade privada do usuário atual será usada quando você escolher um caso de uso pessoal.</personal-usecase>
@@ -2413,7 +2425,7 @@
   <UIRestoreConfirmMessage>
     <label>
       <Close>#{word.close}</Close>
-      <OK>OK</OK>
+      <OK>Ok</OK>
       <ReplaceData>Substituir dado</ReplaceData>
       <Back>Voltar para renomear</Back>
       <Keepfile>Manter ambos arquivos</Keepfile>
@@ -2562,7 +2574,7 @@
       <nt_unstructured>Pasta de conteúdo</nt_unstructured>
       <exo_cssFolder>Pasta de CSS</exo_cssFolder>
       <exo_jsFolder>Pasta de javascript</exo_jsFolder>
-      <exo_linkFolder>Link Folder</exo_linkFolder>
+      <exo_linkFolder>Pasta de link</exo_linkFolder>
       <exo_webFolder>Pasta de conteúdo Web</exo_webFolder>
    </label>
   </UIFolderForm>
@@ -2785,7 +2797,7 @@
 
   <TagPopup>
     <title>
-      <UITagForm>Tag</UITagForm>
+      <UITagForm>Marcação</UITagForm>
     </title>
   </TagPopup>
 
@@ -3044,6 +3056,12 @@
     <DrivesArea>
       <ShowDrives>Mostrar unidades</ShowDrives>
     </DrivesArea>
+    <msg>
+      <no-view-found>There are no views applied for your access permission in drive '{0}'.</no-view-found>
+      <access-denied>Acesso negado. Talvez você não tenha permissão na área de trabalho da unidade '{0}'.</access-denied>
+      <empty-drives>Access denied. Either there is no drive in this repository or you do not have permission to access any drives in this repository.</empty-drives>
+      <workspace-not-exist>Unidade '{0}' foi armazenada em um espaço de trabalho não reconhecido. Por favor reconfigure esta unidade.</workspace-not-exist>
+    </msg>
   </UIDrivesArea>
   <UIJcrExplorerEditForm>
     <msg>
@@ -3070,9 +3088,9 @@
   <true>Verdadeiro</true>
   <false>Falso</false>
   <Electronic>Eletrônico</Electronic>
-  <Paper>Paper</Paper>
+  <Paper>Papel</Paper>
   <NONE>Nenhum</NONE>
-  <CLASSIFIED>Classified</CLASSIFIED>
+  <CLASSIFIED>Classificado</CLASSIFIED>
   <UNCLASSIFIED>Não classificado</UNCLASSIFIED>
   <NOCONTRACT>Sem Contrato</NOCONTRACT>
   <one-minute>Um minuto</one-minute>

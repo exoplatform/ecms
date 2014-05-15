@@ -9,7 +9,7 @@
     <tab>
       <label>
         <Templates>Mallar</Templates>
-        <Explorer>Explorer</Explorer>
+        <Explorer>Utforskaren</Explorer>
         <Repository>Repository</Repository>
         <Advanced>Avancerad</Advanced>
       </label>
@@ -466,7 +466,7 @@
     </header>
     <action>
       <Export>Exportera</Export>
-      <Import>Import</Import>
+      <Import>Importera</Import>
       <Add>Lägg till</Add>
     </action>
     <tooltip>
@@ -680,7 +680,7 @@
   <UINodeTypeImport>
     <action>
       <Cancel>#{word.cancel}</Cancel>
-      <Import>Import</Import>
+      <Import>Importera</Import>
       <Upload>Ladda upp igen</Upload>
     </action>
     <header>
@@ -1067,6 +1067,9 @@
   ################################################################################
   -->
   <UITemplateForm>
+    <title>
+      <AddPermission>Lägg till behörighet</AddPermission>
+    </title>
     <action>
       <Save>#{word.save}</Save>
       <Cancel>#{word.cancel}</Cancel>

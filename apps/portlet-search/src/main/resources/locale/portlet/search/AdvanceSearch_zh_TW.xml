@@ -8,7 +8,7 @@
       <Document>文件</Document>
     </label>
     <action>
-      <Search>搜索</Search>
+      <Search>搜尋</Search>
     </action>
   </UIDefaultSearchForm>
 
@@ -33,7 +33,7 @@
       <edit>編輯</edit>
     </action>
     <msg>
-      <search-not-match-type>Your search {0} does not match any {1}.</search-not-match-type>
+      <search-not-match-type>您搜索 {0} 不匹配任何 {1}。</search-not-match-type>
     </msg>
   </UIDefaultSearchResult>
   <UISearchPageLayoutManager>
@@ -64,7 +64,7 @@
   <UISearchForm>  
    <message>
      <keyword-not-support>關鍵字不正確。無法識別某些字元。</keyword-not-support>
-     <not-checked>請選擇搜索類型。</not-checked>
+     <not-checked>請選擇搜尋類型。</not-checked>
      <keyword-not-empty>請輸入一個關鍵字。</keyword-not-empty>
    </message>
   </UISearchForm>
@@ -89,7 +89,7 @@
   <ViewMode>
     <label>
       <option>
-        <all>搜索所有網站</all>
+        <all>搜尋所有網站</all>
       </option>  
     </label>  
   </ViewMode>

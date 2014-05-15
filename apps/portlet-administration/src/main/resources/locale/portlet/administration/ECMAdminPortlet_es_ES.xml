@@ -548,7 +548,7 @@
       <AddProperty>Añadir propiedad</AddProperty>
       <AddChild>Agregar subnodo</AddChild>
       <AddConstraints>Añadir restricciones</AddConstraints>
-      <Back>#{word.back}</Back>
+      <Back>#{palabra.atrás}</Back>
       <AddType>Agregar tipo</AddType>
       <AddValue>Añadir</AddValue>
       <CancelConstraints>#{word.cancel}</CancelConstraints>
@@ -557,7 +557,7 @@
       <CancelChild>#{word.cancel}</CancelChild>
       <UpdateProperty>#{palabra.actualizar}</UpdateProperty>
       <CancelProperty>#{word.cancel}</CancelProperty>
-      <Close>#{word.close}</Close>
+      <Close>#{word.cancel}</Close>
     </action>
     <msg>
       <register-successfully>El tipo de nodo '{0}' se registró correctamente.</register-successfully>
@@ -1067,6 +1067,9 @@
   ################################################################################
   -->
   <UITemplateForm>
+    <title>
+      <AddPermission>Añadir Permisos</AddPermission>
+    </title>
     <action>
       <Save>#{word.save}</Save>
       <Cancel>#{word.cancel}</Cancel>
@@ -2512,7 +2515,7 @@
   </UIWorkspaceWizard>
   <UIRepositoryForm>
     <msg>
-      <not-complete-repository>The repository is being created. You need to wait a few minutes before creating another one.</not-complete-repository>
+      <not-complete-repository>Se está creando el repositorio. Tiene que esperar unos minutos antes de crear otro.</not-complete-repository>
     </msg>
   </UIRepositoryForm>
   

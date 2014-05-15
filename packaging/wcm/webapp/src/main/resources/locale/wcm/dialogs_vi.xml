@@ -28,7 +28,7 @@
         <jsFile>default.js</jsFile>
         <Advanced>Nâng cao</Advanced>
         <Summary>Tóm tắt</Summary>
-        <name>#{word.name}</name>
+        <name>Tên</name>
         <title>Tiêu đề</title>
         <ContentCSS>Dữ liệu CSS</ContentCSS>
         <hintCSS>Bạn có thể định nghĩa CSS cho nội dung này. Giá trị này sẽ ghi đè lên CSS của Site.</hintCSS>
@@ -51,7 +51,7 @@
   <CSSFile>
     <dialog>
       <label>
-        <name>#{word.name}</name>
+        <name>Tên</name>
         <active>Bật</active>
         <priority>Mức ưu tiên</priority>
         <content>Dữ liệu CSS</content>
@@ -62,7 +62,7 @@
   <JSFile>
     <dialog>
       <label>
-        <name>#{word.name}</name>
+        <name>Tên</name>
         <active>Bật</active>
         <priority>Độ ưu tiên</priority>
         <content>Dữ liệu Javascript</content>
@@ -73,7 +73,7 @@
   <WebLink>
     <dialog>
       <label>
-        <name>#{word.name}</name>
+        <name>Tên</name>
         <url>Đường dẫn</url>
         <description>Mô tả</description>
       </label>

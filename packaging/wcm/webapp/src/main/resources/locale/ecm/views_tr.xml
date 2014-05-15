@@ -101,7 +101,7 @@
       <label>
         <action-name>Eylem Adı</action-name>
         <lifecycle>Ömrü</lifecycle>
-        <metadata>Metadata</metadata>
+        <metadata>Metaveri</metadata>
         <description>Açıklama</description>
       </label>
     </view>
