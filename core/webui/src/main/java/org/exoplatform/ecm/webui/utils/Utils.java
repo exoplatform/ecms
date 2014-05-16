@@ -734,7 +734,7 @@ public class Utils {
         else 
         	return "<div class=\"WCMInlineEditable\" contenteditable=\"true\" propertyName=\""+propertyName+"\" repo=\""+repo+"\" workspace=\""+workspace+"\"" +
         			" uuid=\""+uuid+"\" siteName=\""+siteName+"\" publishedMsg=\""+published+"\" draftMsg=\""+draft+"\" fastpublishlink=\""+publishLink+"\" language=\""+language+"\" >" + 
-        			ContentReader.getXSSCompatibilityContent(orgNode.getProperty(propertyName).getString()) + "</div>";
+        			orgNode.getProperty(propertyName).getString() + "</div>";
       } catch (Exception e) {
       	if (org.exoplatform.wcm.webui.Utils.getCurrentMode().equals(WCMComposer.MODE_LIVE))
           return currentValue;
