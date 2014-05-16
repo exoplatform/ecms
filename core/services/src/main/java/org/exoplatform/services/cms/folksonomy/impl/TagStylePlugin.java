@@ -16,12 +16,6 @@
  */
 package org.exoplatform.services.cms.folksonomy.impl;
 
-import java.util.Iterator;
-import java.util.List;
-
-import javax.jcr.Node;
-import javax.jcr.Session;
-
 import org.exoplatform.container.component.BaseComponentPlugin;
 import org.exoplatform.container.xml.InitParams;
 import org.exoplatform.container.xml.ObjectParameter;
@@ -34,6 +28,11 @@ import org.exoplatform.services.jcr.RepositoryService;
 import org.exoplatform.services.jcr.core.ManageableRepository;
 import org.exoplatform.services.jcr.ext.hierarchy.NodeHierarchyCreator;
 import org.exoplatform.services.wcm.utils.WCMCoreUtils;
+
+import javax.jcr.Node;
+import javax.jcr.Session;
+import java.util.Iterator;
+import java.util.List;
 
 public class TagStylePlugin extends BaseComponentPlugin{
 
@@ -101,6 +100,8 @@ public class TagStylePlugin extends BaseComponentPlugin{
     Node exoTagStyleHomeNode = (Node)session.getItem(exoTagStylePath) ;
     List<HtmlTagStyle> htmlStyle4Tag = tagConfig.getTagStyleList() ;
     for(HtmlTagStyle style: htmlStyle4Tag) {
+      if(Utils.getAllEditedConfiguredData(
+        "TagStyle", "EditedConfiguredTagStyle", true).contains(style.getName())) continue;
       Node tagStyleNode = Utils.makePath(exoTagStyleHomeNode,"/"+style.getName(),EXO_TAG_STYLE) ;
       tagStyleNode.setProperty(TAG_RATE_PROP,style.getTagRate()) ;
       tagStyleNode.setProperty(HTML_STYLE_PROP,style.getHtmlStyle()) ;
@@ -111,7 +112,6 @@ public class TagStylePlugin extends BaseComponentPlugin{
 
   /**
   * Get session in system workspace from current repository name
-  * @param repository        repository name
   * @return                  Session
   * @throws Exception
   */

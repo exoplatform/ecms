@@ -16,14 +16,6 @@
  */
 package org.exoplatform.ecm.webui.component.admin.metadata;
 
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.List;
-
-import javax.jcr.PathNotFoundException;
-import javax.jcr.nodetype.NodeType;
-import javax.jcr.nodetype.PropertyDefinition;
-
 import org.exoplatform.commons.utils.LazyPageList;
 import org.exoplatform.commons.utils.ListAccess;
 import org.exoplatform.commons.utils.ListAccessImpl;
@@ -36,6 +28,13 @@ import org.exoplatform.webui.config.annotation.EventConfig;
 import org.exoplatform.webui.core.UIApplication;
 import org.exoplatform.webui.event.Event;
 import org.exoplatform.webui.event.EventListener;
+
+import javax.jcr.PathNotFoundException;
+import javax.jcr.nodetype.NodeType;
+import javax.jcr.nodetype.PropertyDefinition;
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.List;
 
 /**
  * Created by The eXo Platform SARL
@@ -61,14 +60,13 @@ public class UIMetadataList extends UIPagingGridDecorator {
   }
 
   public void refresh(int currentPage) throws Exception {
-    ListAccess<Metadata> metaDataList = new ListAccessImpl<Metadata>(Metadata.class,
-        getAllMetadatas());
+    ListAccess<Metadata> metaDataList = new ListAccessImpl<Metadata>(Metadata.class, getAllMetadatas());
     LazyPageList<Metadata> pageList = new LazyPageList<Metadata>(metaDataList, getUIPageIterator().getItemsPerPage());
     getUIPageIterator().setPageList(pageList);
     if (currentPage > getUIPageIterator().getAvailablePage())
       getUIPageIterator().setCurrentPage(getUIPageIterator().getAvailablePage());
     else
-      getUIPageIterator().setCurrentPage(currentPage);    
+      getUIPageIterator().setCurrentPage(currentPage);
   }
 
   public List<Metadata> getAllMetadatas() throws Exception {
@@ -132,8 +130,10 @@ public class UIMetadataList extends UIPagingGridDecorator {
       UIApplication uiApp = uiMetaList.getAncestorOfType(UIApplication.class);
       try {
         metadataService.removeMetadata(metadataName);
+        org.exoplatform.services.cms.impl.Utils.addEditedConfiguredData(metadataName, "ContentTemplateList",
+          "EditedConfiguredTemplateList", true);
       } catch(PathNotFoundException ex) {
-        uiApp.addMessage(new ApplicationMessage("UIMetadataList.msg.path-not-found-exception", null, ApplicationMessage.WARNING));
+      	uiApp.addMessage(new ApplicationMessage("UIMetadataList.msg.path-not-found-exception", null, ApplicationMessage.WARNING));
         return;
       }
       uiMetaList.refresh(uiMetaList.getUIPageIterator().getCurrentPage());
@@ -157,9 +157,11 @@ public class UIMetadataList extends UIPagingGridDecorator {
     public void setInternalUse(String inter) { internalUse = inter ; }
 
     public boolean hasTemplate() { return hasTemplate ; }
+
     public void isTemplate(boolean isTemplate) { hasTemplate = isTemplate ; }
 
     public String getLabel() { return label; }
+
     public void setLabel(String label) { this.label = label; }
   }
 }

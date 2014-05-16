@@ -31,11 +31,13 @@ import java.util.Collection;
 import java.util.Collections;
 import java.util.Comparator;
 import java.util.Date;
+import java.util.HashSet;
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
+import java.util.Set;
 import java.util.Queue;
 import java.util.Set;
 import java.util.zip.ZipEntry;
@@ -538,6 +540,17 @@ public class Utils {
     }
     session.save();
     return serviceLogContentNode;
+  }
+  /**
+   * Get Service Log Content Node of specific service.
+   *
+   * @param serviceName
+   * @return
+   * @throws Exception
+   */
+  
+  public static Node getServiceLogContentNode(String serviceName, String logType) throws Exception {
+    return getServiceLogContentNode(WCMCoreUtils.getSystemSessionProvider(), serviceName, logType);
   }
 
   /**

@@ -16,11 +16,6 @@
  */
 package org.exoplatform.ecm.webui.component.admin.folksonomy;
 
-import java.util.ArrayList;
-import java.util.List;
-
-import javax.jcr.Node;
-
 import org.exoplatform.commons.utils.LazyPageList;
 import org.exoplatform.commons.utils.ListAccess;
 import org.exoplatform.commons.utils.ListAccessImpl;
@@ -31,6 +26,10 @@ import org.exoplatform.webui.config.annotation.ComponentConfig;
 import org.exoplatform.webui.config.annotation.EventConfig;
 import org.exoplatform.webui.event.Event;
 import org.exoplatform.webui.event.EventListener;
+
+import javax.jcr.Node;
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * Created by The eXo Platform SARL
@@ -138,6 +137,8 @@ public class UITagStyleList extends UIPagingGrid {
       Node parentNode = selectedTagStyle.getParent();
       selectedTagStyle.remove();
       parentNode.getSession().save();
+      org.exoplatform.services.cms.impl.Utils.addEditedConfiguredData(selectedName, "TagStyle",
+        "EditedConfiguredTagStyle", true);
       uiTagStyleList.refresh(uiTagStyleList.getUIPageIterator().getCurrentPage());
       event.getRequestContext().addUIComponentToUpdateByAjax(uiManager);
     }

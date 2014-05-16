@@ -16,14 +16,6 @@
  */
 package org.exoplatform.services.cms.views.impl;
 
-import java.io.InputStream;
-import java.util.HashSet;
-import java.util.Iterator;
-import java.util.Set;
-
-import javax.jcr.Node;
-import javax.jcr.Session;
-
 import org.exoplatform.container.component.BaseComponentPlugin;
 import org.exoplatform.container.configuration.ConfigurationManager;
 import org.exoplatform.container.xml.InitParams;
@@ -32,6 +24,7 @@ import org.exoplatform.container.xml.ValueParam;
 import org.exoplatform.services.cms.BasePath;
 import org.exoplatform.services.cms.impl.DMSConfiguration;
 import org.exoplatform.services.cms.impl.DMSRepositoryConfiguration;
+import org.exoplatform.services.cms.impl.Utils;
 import org.exoplatform.services.cms.templates.TemplateService;
 import org.exoplatform.services.cms.views.TemplateConfig;
 import org.exoplatform.services.cms.views.ViewConfig;
@@ -41,9 +34,18 @@ import org.exoplatform.services.jcr.core.ManageableRepository;
 import org.exoplatform.services.jcr.ext.hierarchy.NodeHierarchyCreator;
 import org.exoplatform.services.wcm.utils.WCMCoreUtils;
 
+import javax.jcr.Node;
+import javax.jcr.Session;
+import java.io.InputStream;
+import java.util.HashSet;
+import java.util.Iterator;
+import java.util.Set;
+
 public class ManageViewPlugin extends BaseComponentPlugin {
 
   private static String ECM_EXPLORER_TEMPLATE = "ecmExplorerTemplate" ;
+  private static final String EDITED_CONFIGURED_VIEWS = "EditedConfiguredViews";
+  private static final String EDITED_CONFIGURED_VIEWS_TEMPLATES = "EditedConfiguredViewsTemplate";
   private InitParams params_ ;
   private RepositoryService repositoryService_ ;
   private NodeHierarchyCreator nodeHierarchyCreator_ ;
@@ -100,16 +102,17 @@ public class ManageViewPlugin extends BaseComponentPlugin {
         viewObject = (ViewConfig)object ;
         String viewNodeName = viewObject.getName();
         configuredViews_.add(viewNodeName);
-        if(viewHomeNode.hasNode(viewNodeName)) continue ;
+        if(viewHomeNode.hasNode(viewNodeName) || Utils.getAllEditedConfiguredData(
+          this.getClass().getSimpleName(), EDITED_CONFIGURED_VIEWS, true).contains(viewNodeName)) continue ;
         Node viewNode = addView(viewHomeNode,viewNodeName,viewObject.getPermissions(),
                                 viewObject.isHideExplorerPanel(), viewObject.getTemplate()) ;
+        Utils.addEditedConfiguredData(viewNodeName, this.getClass().getSimpleName(), EDITED_CONFIGURED_VIEWS, true);
         for(Tab tab:viewObject.getTabList()) {
           addTab(viewNode,tab.getTabName(),tab.getButtons()) ;
         }
       }else if(object instanceof TemplateConfig) {
         templateObject = (TemplateConfig) object;
         addTemplate(templateObject,session,warViewPath) ;
-        configuredTemplate_.add(templateObject.getName());
       }
     }
     session.save();
@@ -148,10 +151,13 @@ public class ManageViewPlugin extends BaseComponentPlugin {
     String templateHomePath = nodeHierarchyCreator_.getJcrPath(alias) ;
     Node templateHomeNode = (Node)session.getItem(templateHomePath) ;
     String templateName = tempObject.getName() ;
-    if(templateHomeNode.hasNode(templateName)) return  ;
+    if(templateHomeNode.hasNode(templateName) || Utils.getAllEditedConfiguredData(
+      this.getClass().getSimpleName(), EDITED_CONFIGURED_VIEWS_TEMPLATES, true).contains(templateName)) return;
     String warPath = warViewPath + tempObject.getWarPath() ;
     InputStream in = cservice_.getInputStream(warPath) ;
     templateService.createTemplate(templateHomeNode, templateName, templateName, in, new String[] {"*"});
+    configuredTemplate_.add(templateName);
+    Utils.addEditedConfiguredData(templateName, this.getClass().getSimpleName(), EDITED_CONFIGURED_VIEWS_TEMPLATES, true);
   }
   
   public Set<String> getConfiguredTemplates() {
