@@ -49,8 +49,13 @@ public class PropertyValueComparator implements Comparator<Node> {
   }
 
   public int compare(Node node0, Node node1) {
+    int flipFlop = ASCENDING_ORDER.equals(orderType) ? 1 : -1;    
+    int requireType = getRequireType(node0);    
+    int requireType2 = getRequireType(node1);     
+    if (requireType == -1 && requireType2 == -1) return 0;    
+    if (requireType == -1 && requireType2 != -1) return -1 * flipFlop;    
+    if (requireType != -1 && requireType2 == -1) return 1 * flipFlop; 
     try {
-      int requireType = getRequireType(node0);
       switch (requireType) {
       case PropertyType.BINARY:
         return compareString(node0, node1);
