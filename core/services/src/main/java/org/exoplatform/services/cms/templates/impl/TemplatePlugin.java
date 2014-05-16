@@ -16,26 +16,6 @@
  */
 package org.exoplatform.services.cms.templates.impl;
 
-import java.io.InputStream;
-import java.util.ArrayList;
-import java.util.HashSet;
-import java.util.Iterator;
-import java.util.List;
-import java.util.Set;
-
-import javax.jcr.Node;
-import javax.jcr.PathNotFoundException;
-import javax.jcr.PropertyType;
-import javax.jcr.RepositoryException;
-import javax.jcr.Session;
-import javax.jcr.Value;
-import javax.jcr.ValueFormatException;
-import javax.jcr.nodetype.NodeDefinition;
-import javax.jcr.nodetype.NodeType;
-import javax.jcr.nodetype.NodeTypeIterator;
-import javax.jcr.nodetype.NodeTypeManager;
-import javax.jcr.nodetype.PropertyDefinition;
-
 import org.exoplatform.container.component.BaseComponentPlugin;
 import org.exoplatform.container.configuration.ConfigurationManager;
 import org.exoplatform.container.xml.InitParams;
@@ -52,6 +32,25 @@ import org.exoplatform.services.jcr.ext.hierarchy.NodeHierarchyCreator;
 import org.exoplatform.services.log.ExoLogger;
 import org.exoplatform.services.log.Log;
 import org.exoplatform.services.wcm.utils.WCMCoreUtils;
+
+import javax.jcr.Node;
+import javax.jcr.PathNotFoundException;
+import javax.jcr.PropertyType;
+import javax.jcr.RepositoryException;
+import javax.jcr.Session;
+import javax.jcr.Value;
+import javax.jcr.ValueFormatException;
+import javax.jcr.nodetype.NodeDefinition;
+import javax.jcr.nodetype.NodeType;
+import javax.jcr.nodetype.NodeTypeIterator;
+import javax.jcr.nodetype.NodeTypeManager;
+import javax.jcr.nodetype.PropertyDefinition;
+import java.io.InputStream;
+import java.util.ArrayList;
+import java.util.HashSet;
+import java.util.Iterator;
+import java.util.List;
+import java.util.Set;
 
 public class TemplatePlugin extends BaseComponentPlugin {
 
@@ -259,9 +258,11 @@ public class TemplatePlugin extends BaseComponentPlugin {
     Iterator iter = nodetypes.iterator() ;
     while(iter.hasNext()) {
       nodeType = (TemplateConfig.NodeType) iter.next();
-      if (!listNodeTypeName.contains(nodeType.getNodetypeName())) {
+      if(Utils.getAllEditedConfiguredData(
+        "ContentTemplateList", "EditedConfiguredTemplateList", true).contains(nodeType.getNodetypeName())
+        || !listNodeTypeName.contains(nodeType.getNodetypeName())) {
         if (LOG.isErrorEnabled()) {
-          LOG.error("The nodetype: " + nodeType.getNodetypeName() + " doesn't exist!");
+          LOG.error("The nodetype: " + nodeType.getNodetypeName() + " or its templates doesn't exist!");
         }
         continue;
       }
