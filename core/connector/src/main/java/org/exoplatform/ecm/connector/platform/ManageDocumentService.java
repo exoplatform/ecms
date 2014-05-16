@@ -16,6 +16,7 @@
  */
 package org.exoplatform.ecm.connector.platform;
 
+import java.net.URLDecoder;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -124,6 +125,8 @@ public class ManageDocumentService implements ResourceContainer {
   final static public String   NT_UNSTRUCTURED      = "nt:unstructured";
 
   final static public String   NT_FOLDER            = "nt:folder";
+
+  final static public String   DEFAULT_NAME = "untitled";
 
   final static public String[] SPECIFIC_FOLDERS = { EXO_MUSICFOLDER,
     EXO_VIDEOFOLDER, EXO_PICTUREFOLDER, EXO_DOCUMENTFOLDER, EXO_SEARCHFOLDER };
@@ -316,9 +319,22 @@ public class ManageDocumentService implements ResourceContainer {
                                @QueryParam("currentFolder") String currentFolder,
                                @QueryParam("folderName") String folderName) throws Exception {
     try {
+
+      String title = URLDecoder.decode(folderName, "UTF-8");
+      // The name automatically determined from the title according to the current algorithm.
+      String name = Text.escapeIllegalJcrChars(org.exoplatform.services.cms.impl.Utils.cleanString(title));
+
+      // Set default name if new title contain no valid character
+      name = (StringUtils.isEmpty(name)) ? DEFAULT_NAME : name;
+      
       Node node = getNode(driveName, workspaceName, currentFolder);
-      Node newNode = node.addNode(Text.escapeIllegalJcrChars(folderName),
-                                  NodetypeConstant.NT_UNSTRUCTURED);
+      Node newNode = node.addNode(name, NodetypeConstant.NT_UNSTRUCTURED);
+      // Set title
+      if (!newNode.hasProperty(org.exoplatform.ecm.webui.utils.Utils.EXO_TITLE)) {
+          newNode.addMixin(org.exoplatform.ecm.webui.utils.Utils.EXO_RSS_ENABLE);
+      }
+      newNode.setProperty(org.exoplatform.ecm.webui.utils.Utils.EXO_TITLE, title);
+
       node.save();
       Document document = createNewDocument();
       String childFolder = StringUtils.isEmpty(currentFolder) ? newNode.getName() : currentFolder.concat("/")
