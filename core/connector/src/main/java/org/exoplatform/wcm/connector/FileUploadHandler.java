@@ -19,7 +19,6 @@ package org.exoplatform.wcm.connector;
 import java.io.BufferedInputStream;
 import java.io.File;
 import java.io.FileInputStream;
-import java.net.URLDecoder;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.Date;
@@ -43,8 +42,8 @@ import org.apache.commons.lang.StringUtils;
 import org.exoplatform.common.http.HTTPStatus;
 import org.exoplatform.ecm.connector.fckeditor.FCKMessage;
 import org.exoplatform.ecm.connector.fckeditor.FCKUtils;
-import org.exoplatform.ecm.utils.text.Text;
 import org.exoplatform.ecm.utils.lock.LockUtil;
+import org.exoplatform.ecm.utils.text.Text;
 import org.exoplatform.services.cms.impl.Utils;
 import org.exoplatform.services.cms.jcrext.activity.ActivityCommonService;
 import org.exoplatform.services.cms.mimetype.DMSMimeTypeResolver;
@@ -58,7 +57,6 @@ import org.exoplatform.services.wcm.utils.WCMCoreUtils;
 import org.exoplatform.upload.UploadResource;
 import org.exoplatform.upload.UploadService;
 import org.exoplatform.upload.UploadService.UploadLimit;
-import org.exoplatform.upload.UploadService.UploadUnit;
 import org.w3c.dom.Document;
 import org.w3c.dom.Element;
 
@@ -350,7 +348,6 @@ public class FileUploadHandler {
       if(parent.isLocked()) {
         parent.getSession().addLockToken(LockUtil.getLockToken(parent));
       }
-      fileName = Text.escapeIllegalJcrChars(URLDecoder.decode(fileName,"UTF-8"));
       if (parent.hasNode(fileName)) {
   //      Object args[] = { fileName, parent.getPath() };
   //      Document fileExisted = fckMessage.createMessage(FCKMessage.FILE_EXISTED,

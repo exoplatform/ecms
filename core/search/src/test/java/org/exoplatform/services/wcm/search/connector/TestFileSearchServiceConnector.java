@@ -110,7 +110,7 @@ public class TestFileSearchServiceConnector extends BaseSearchTest {
     Collection<String> sites = new ArrayList<String>();
     sites.add("classic");
     Collection<SearchResult> ret 
-          = fileSearch_.search(null, "anthony", 
+          = fileSearch_.search(null, "anthony~", 
                                    sites, 
                                    0, 20, "title", "asc");
     assertEquals(4, ret.size());//2
@@ -120,7 +120,7 @@ public class TestFileSearchServiceConnector extends BaseSearchTest {
     Collection<String> sites = new ArrayList<String>();
     sites.add("classic");
     Collection<SearchResult> ret 
-          = fileSearch_.search(null, "anthony", 
+          = fileSearch_.search(null, "anthony~", 
                                    sites, 
                                    1, 20, "title", "asc");
     assertEquals(3, ret.size());//1
@@ -130,7 +130,7 @@ public class TestFileSearchServiceConnector extends BaseSearchTest {
     Collection<String> sites = new ArrayList<String>();
     sites.add("classic");
     Collection<SearchResult> ret 
-          = fileSearch_.search(null, "anthony", 
+          = fileSearch_.search(null, "anthony~", 
                                    sites, 
                                    0, 1, "title", "asc");
     assertEquals(1, ret.size());
@@ -140,7 +140,7 @@ public class TestFileSearchServiceConnector extends BaseSearchTest {
     Collection<String> sites = new ArrayList<String>();
     sites.add("classic");
     Collection<SearchResult> ret 
-          = fileSearch_.search(null, "anthony cjohn", 
+          = fileSearch_.search(null, "anthony cjohn~", 
                                    sites, 
                                    0, 20, "title", "asc");
     assertEquals(2, ret.size());//3
@@ -150,7 +150,7 @@ public class TestFileSearchServiceConnector extends BaseSearchTest {
     Collection<String> sites = new ArrayList<String>();
     sites.add("classic");
     Collection<SearchResult> ret 
-          = fileSearch_.search(null, "anthony cjohn", 
+          = fileSearch_.search(null, "anthony cjohn~", 
                                    sites, 
                                    1, 20, "title", "asc");
     assertEquals(1, ret.size());//2
@@ -160,7 +160,7 @@ public class TestFileSearchServiceConnector extends BaseSearchTest {
     Collection<String> sites = new ArrayList<String>();
     sites.add("classic");
     Collection<SearchResult> ret 
-          = fileSearch_.search(null, "anthony cjohn", 
+          = fileSearch_.search(null, "anthony cjohn~", 
                                    sites, 
                                    0, 1, "title", "asc");
     assertEquals(1, ret.size());

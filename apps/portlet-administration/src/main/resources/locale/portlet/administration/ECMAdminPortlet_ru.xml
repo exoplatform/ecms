@@ -87,7 +87,7 @@
 -->
   <UITaxonomyTreeMainForm>
     <action>
-      <Reset>Сбросить</Reset>
+      <Reset>Сброс</Reset>
     </action>
     <msg>
       <name-not-allowed>Запрещенное имя</name-not-allowed>
@@ -403,7 +403,7 @@
       <Categories>Категории:</Categories>
       <Icons>Иконки:</Icons>
       <List>Список:</List>
-      <Web>Web:</Web>
+      <Web>Веб:</Web>
     </label>
   </UIDriveForm>
   <AddDriveManagerPopup>
@@ -708,11 +708,11 @@
     <label>
       <both>Both</both>
       <folderOnly>Folder</folderOnly>
-      <unstructuredFolder>Unstructured Folder</unstructuredFolder>
+      <unstructuredFolder>Неструктурированная папка</unstructuredFolder>
     </label>
     <title>
       <AddPermission>Добавить разрешение</AddPermission>
-      <RemovePermission>Удалить разрешение</RemovePermission>
+      <RemovePermission>Удалить права доступа</RemovePermission>
       <AddIcon>Добавить иконку</AddIcon>
       <AddPath>Добавить путь</AddPath>
     </title>
@@ -1067,6 +1067,9 @@
   ################################################################################
   -->
   <UITemplateForm>
+    <title>
+      <AddPermission>Добавить права</AddPermission>
+    </title>
     <action>
       <Save>#{word.save}</Save>
       <Cancel>#{word.cancel}</Cancel>
@@ -1176,7 +1179,7 @@
   -->
   <uiECMScriptsPopup>
     <title>
-      <ecmScriptForm>ECM Script</ecmScriptForm>
+      <ecmScriptForm>Сценарий ECM</ecmScriptForm>
     </title>
   </uiECMScriptsPopup>
 
@@ -2512,7 +2515,7 @@
   </UIWorkspaceWizard>
   <UIRepositoryForm>
     <msg>
-      <not-complete-repository>The repository is being created. You need to wait a few minutes before creating another one.</not-complete-repository>
+      <not-complete-repository>В настоящее время создается хранилище. Вам нужно подождать несколько минут, прежде чем создавать еще одно.</not-complete-repository>
     </msg>
   </UIRepositoryForm>
   

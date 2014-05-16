@@ -203,7 +203,7 @@
       <time-to-late>The searching time is too long.</time-to-late>
       <empty-field>正しい検索キーワードを入力してください</empty-field>
       <invalid-format>不正な日時フォーマットです '{0}'</invalid-format>
-      <invalid-date>終了日は開始日より大きい必要があります</invalid-date>
+      <invalid-date>"終了日は開始日より大きい必要があります"</invalid-date>
       <invalid-nodeType>ノードタイプ "{0}" が不正です。確認してください</invalid-nodeType>
       <invalid-keyword>検索キーワードが有効ではありません。文字列が認識されていません。</invalid-keyword>
     </msg>

@@ -54,6 +54,8 @@
         <name>#{word.name}</name>
         <categories>Kategorijos</categories>
         <mimeType>#{Ecm.dialog.label.mimeType}</mimeType>
+        <width>Width</width>
+        <height>Height</height>
         <content>#{word.content}</content>
         <re-upload>Failas jau egzistuoja. Jūs galėtumėte jį ištrinti ir įkelti kitą failą.</re-upload>
       </label>

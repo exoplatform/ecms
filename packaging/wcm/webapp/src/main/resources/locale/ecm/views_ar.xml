@@ -40,8 +40,8 @@
   <File>
     <view>
       <label>
-        <not-viewable>العرض المُسبق لهذا الملفّ غير متوفّر</not-viewable>
-        <using-webDAV>أو فتحه بواسطة "MS Office"</using-webDAV>
+        <not-viewable>The preview of this document is not available.</not-viewable>
+        <using-webDAV>or Open in MS Office</using-webDAV>
         <file-size-too-big>محتوى هذا الملف كبير جدا. لتتمكن من عرضه يُرجى تنزيله</file-size-too-big>
         <webDAV>مشهد WebDAV</webDAV>
         <download>تنزيل هذا الملف</download>
@@ -138,7 +138,7 @@
     <view>
       <label>
         <not-avaliable>غير متوفرة</not-avaliable>
-        <core-elements>العناصر الأساسية</core-elements>
+        <core-elements>Core Elements</core-elements>
         <title>العنوان</title>
         <creator>الصانع</creator>
         <subject>الموضوع</subject>

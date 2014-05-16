@@ -243,7 +243,7 @@
     <header>
       <icon>Icône</icon>
       <name>Métadonnées</name>
-      <type>Type</type>
+      <type>Nom</type>
       <internalUse>Usage interne</internalUse>
       <action>Actions</action>
     </header>
@@ -295,7 +295,7 @@
       <metadataName>Nom du jeu de Metdonnées</metadataName>
       <viewPermission>Permission:</viewPermission>
       <permission>UIMetadataForm</permission>
-      <metadataLabel>Label:</metadataLabel>
+      <metadataLabel>Libellé :</metadataLabel>
     </label>
     <tab>
       <label>
@@ -313,7 +313,7 @@
   <UIMetadataView>
     <header>
       <name>Nom de l'élement</name>
-      <type>Type</type>
+      <type>Nom</type>
       <description>Description</description>
       <isMixin>Mixin</isMixin>
       <orderable>Sous-Noeuds Ordonnables</orderable>
@@ -520,7 +520,7 @@
       <mixinType>Mixin</mixinType>
       <hasOrderableChildNodes>Sous-Noeuds Ordonnables</hasOrderableChildNodes>
       <primaryItemName>Nom de l'Element Primaire</primaryItemName>
-      <superTypes>Super Types</superTypes>
+      <superTypes>Super types</superTypes>
       <propertyname>Nom</propertyname>
       <requiredType>Type</requiredType>
       <multiple>Multi</multiple>
@@ -712,7 +712,7 @@
     </label>
     <title>
       <AddPermission>Ajouter une Permission</AddPermission>
-      <RemovePermission>Supprimer permission</RemovePermission>
+      <RemovePermission>Supprimer la permission</RemovePermission>
       <AddIcon>Ajouter une icône</AddIcon>
       <AddPath>Ajouter un emplacement</AddPath>
     </title>
@@ -769,7 +769,7 @@
     <msg>
       <action-type-added>'{0}' a été ajouté.</action-type-added>
       <action-type-create-error>Création du type d'action impossible.</action-type-create-error>
-      <action-name-invalid>'{0}' invalide! Le nom doit débuter par 'exo:'</action-name-invalid>
+      <action-name-invalid>{0}' invalide! Le nom doit débuter par 'exo:</action-name-invalid>
       <action-exist>Ce type d'action existe déjà</action-exist>
       <fileName-invalid>Le nom de l'action comporte des caractères invalides</fileName-invalid>
     </msg>
@@ -798,7 +798,7 @@
 <nodeTypeDefinition>Type de nœud</nodeTypeDefinition>
       <propertyDefinition>Propriété</propertyDefinition>
       <childNodeDefinition>Sous-Noeud</childNodeDefinition>
-      <SuperTypeTab>Super Types</SuperTypeTab>
+      <SuperTypeTab>Super types</SuperTypeTab>
       <DefaultTypeTab>Type primaire par défaut</DefaultTypeTab>
       <RequiredTypeTab>Type primaire obligatoire</RequiredTypeTab>
       <Contraints>Contraintes</Contraints>
@@ -1067,6 +1067,9 @@
   ################################################################################
   -->
   <UITemplateForm>
+    <title>
+      <AddPermission>Ajouter une permission</AddPermission>
+    </title>
     <action>
       <Save>#{word.save}</Save>
       <Cancel>#{word.cancel}</Cancel>
@@ -1509,7 +1512,7 @@
   -->
   <UITemplateList>
     <header>
-      <name>Type</name>
+      <name>Nom</name>
       <action>Action</action>
       <label>Nom</label>
       <icon>Icône</icon>
@@ -1527,7 +1530,7 @@
   
   <UIActionsTemplateList>
     <header>
-      <name>Type</name>
+      <name>Nom</name>
       <action>Action</action>
       <label>Nom</label>
       <icon>Icône</icon>
@@ -1545,7 +1548,7 @@
   
   <UIOthersTemplateList>
     <header>
-      <name>Type</name>
+      <name>Nom</name>
       <label>Nom</label>
       <icon>Icône</icon>
       <action>Action</action>
@@ -1914,7 +1917,7 @@
   <UIQueriesList>
     <header>
       <name>Nom</name>
-      <type>Type</type>
+      <type>Nom</type>
       <statement>Requêtes</statement>
       <permission>Permissions</permission>
       <action>Actions</action>

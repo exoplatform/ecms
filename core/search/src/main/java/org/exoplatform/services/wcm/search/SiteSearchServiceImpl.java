@@ -461,13 +461,17 @@ public class SiteSearchServiceImpl implements SiteSearchService {
     if (isEnabledFuzzySearch) {
       if (keyword.contains("*") || keyword.contains("?") || keyword.contains("~") || keyword.contains("\"")) {
         queryTerm = queryTermHelper.contains(keyword).buildTerm();
-      } else {
+      } else if(queryCriteria.isFuzzySearch()) {
         queryTerm = queryTermHelper.contains(keyword).allowFuzzySearch(fuzzySearchIndex).buildTerm();
-      }      
+      } else {
+        queryTerm = queryTermHelper.contains(keyword).buildTerm();
+      }
     } else {
-      keyword = keyword.replace("~", "\\~");
-      keyword = keyword.replace("*", "\\*");
-      keyword = keyword.replace("?", "\\?");
+      if(!queryCriteria.isFuzzySearch()) {
+        keyword = keyword.replace("~", "\\~");
+        keyword = keyword.replace("*", "\\*");
+        keyword = keyword.replace("?", "\\?");
+      }
       queryTerm = queryTermHelper.contains(keyword).buildTerm();
     }
     String[] props = queryCriteria.getFulltextSearchProperty();
@@ -637,7 +641,7 @@ public class SiteSearchServiceImpl implements SiteSearchService {
                                                           templateService.getDocumentTemplates();
     queryBuilder.openGroup(LOGICAL.AND);
     if (selectedNodeTypes.contains("nt:file")) {
-      queryBuilder.equal("jcr:primaryType", "nt:resource", LOGICAL.NULL);
+      queryBuilder.equal("jcr:primaryType", NodetypeConstant.NT_FILE, LOGICAL.NULL);
     } else {
       //searching only document, not file. In this case, search nt:resource with exo:webContentChild mixin
       queryBuilder.openGroup(null);
@@ -646,7 +650,7 @@ public class SiteSearchServiceImpl implements SiteSearchService {
       queryBuilder.closeGroup();
     }
     // query on exo:rss-enable nodetypes for title, summary field
-    queryBuilder.equal("jcr:mixinTypes", "exo:rss-enable", LOGICAL.OR);
+    //queryBuilder.equal("jcr:mixinTypes", "exo:rss-enable", LOGICAL.OR);
     for (String type : selectedNodeTypes) {
       NodeType nodetype = manager.getNodeType(type);
       if (nodetype.isMixin()) {
@@ -663,10 +667,14 @@ public class SiteSearchServiceImpl implements SiteSearchService {
           queryBuilder.closeGroup();
         }
       } else {
-        queryBuilder.equal("jcr:primaryType", type, LOGICAL.OR);
+        if(!type.equals(NodetypeConstant.NT_FILE)) {
+          queryBuilder.equal("jcr:primaryType", type, LOGICAL.OR);
+        }
       }
     }
     queryBuilder.closeGroup();
+    
+    
     //unwanted document types: exo:cssFile, exo:jsFile
     if(excludeMimeTypes.size()<1) return;
     queryBuilder.openGroup(LOGICAL.AND_NOT);
@@ -745,14 +753,13 @@ public class SiteSearchServiceImpl implements SiteSearchService {
         if (parent.isNodeType("exo:webContent")) return parent;
         return displayNode;
       }
-      //
-      String[] contentTypes = queryCriteria.getContentTypes();
-      if(contentTypes != null && contentTypes.length>0) {
-        String primaryNodeType = displayNode.getPrimaryNodeType().getName();
-        if(!ArrayUtils.contains(contentTypes,primaryNodeType))
-          return null;
-      }
-      return displayNode;
+     String[] contentTypes = queryCriteria.getContentTypes();
+      for (String contentType : contentTypes) {
+        if(displayNode.isNodeType(contentType)) {
+          return displayNode;
+        }
+      }     
+      return null;
     }
     
   }

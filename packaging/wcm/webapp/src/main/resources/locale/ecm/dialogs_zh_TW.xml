@@ -54,6 +54,8 @@
         <name>#{word.name}</name>
         <categories>類別</categories>
         <mimeType>#{Ecm.dialog.label.mimeType}</mimeType>
+        <width>Width</width>
+        <height>Height</height>
         <content>#{word.content}</content>
         <re-upload>該檔案已經存在。您可以刪除它，並將另一個檔案上傳。</re-upload>
       </label>
@@ -307,8 +309,8 @@
   -->
 <no>否</no>
 <yes>是</yes>
-<true>True</true>
-<false>False</false>
+<true>對</true>
+<false>錯</false>
 <Electronic>電子</Electronic>
 <Paper>紙</Paper>
 <NONE>無</NONE>
@@ -325,7 +327,7 @@
   <schedule>調度</schedule>
   <node_added>內容增加</node_added>
   <node_removed>內容刪除</node_removed>
-  <property_added>屬性增加</property_added>
+  <property_added>屬性加法</property_added>
   <property_removed>屬性刪除</property_removed>
   <property_changed>屬性修改</property_changed>
 
@@ -374,7 +376,7 @@
   <label>
   <captions>標題</captions>
 <audioDescription>音訊描述</audioDescription>
-<alternativeText>替代文字</alternativeText>
+<alternativeText>替代文本</alternativeText>
 </label>
 </dialog>
 <help>

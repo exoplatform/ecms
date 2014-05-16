@@ -755,7 +755,7 @@
     <label>
       <actionType>Aktionstyp erweitern</actionType>
       <name>Name:</name>
-      <isMove>is Action Move:</isMove>
+      <isMove>Aktion Verschieben ist</isMove>
       <variables>Variablen:</variables>
       <exo_businessProcessAction>Geschäftsprozesse:</exo_businessProcessAction>
       <exo_scriptAction>Groovy-Skripte:</exo_scriptAction>
@@ -996,7 +996,7 @@
   </UITabForm>
   <UIPermissionForm>
     <label>
-      <permission>UIPermissionForm</permission>
+      <permission>UIGenehmigungsForm</permission>
     </label>
   </UIPermissionForm>
   <UIViewFormTabPane>
@@ -1067,6 +1067,9 @@
   ################################################################################
   -->
   <UITemplateForm>
+    <title>
+      <AddPermission>Berechtigung hinzufügen</AddPermission>
+    </title>
     <action>
       <Save>#{word.save}</Save>
       <Cancel>#{word.cancel}</Cancel>
@@ -1756,7 +1759,7 @@
   </ViewForm>
   <DialogForm>
     <label>
-      <UITemplateContent>DialogForm</UITemplateContent>
+      <UITemplateContent>Dialogform</UITemplateContent>
       <UIPopupWindow>Dialogberechtigung</UIPopupWindow>
       <selectVersion>Versionen</selectVersion>
       <content>Inhalt</content>
@@ -1939,7 +1942,7 @@
       <statement>Aussage/Anweisung</statement>
       <cache>Cache-Ergebnisse aktivieren</cache>
       <permissions>Berechtigungen</permissions>
-      <PermissionButton>UIQueriesForm</PermissionButton>
+      <PermissionButton>UIAbfrageForm</PermissionButton>
     </label>
     <action>
       <Save>#{word.save}</Save>
@@ -2239,8 +2242,8 @@
       <firstName>#{word.firstName}</firstName>
     <email>#{word.email}</email>
       <action>#{word.action}</action>
-      <Add>#{word.Add}</Add>
-      <Close>#{word.Close}</Close>
+      <Add>#{word.add}</Add>
+      <Close>#{word.close}</Close>
     </label>
   </PermissionTreeSelectUser>
   
@@ -2280,7 +2283,7 @@
     <label>
       <name>Pfad zum Knoten</name>      
       <permissions>Berechtigungen</permissions>
-      <PermissionButton>UI Unlock Form</PermissionButton>
+      <PermissionButton>UIUnLockForm</PermissionButton>
     </label>
     <action>
       <Save>#{word.save}</Save>

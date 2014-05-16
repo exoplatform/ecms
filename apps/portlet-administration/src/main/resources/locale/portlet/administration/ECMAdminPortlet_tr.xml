@@ -712,7 +712,7 @@
     </label>
     <title>
       <AddPermission>İzin Ekle</AddPermission>
-      <RemovePermission>İznini Kaldırma</RemovePermission>
+      <RemovePermission>Remove Permission</RemovePermission>
       <AddIcon>Simge Ekle</AddIcon>
       <AddPath>Yol Ekle</AddPath>
     </title>
@@ -1067,6 +1067,9 @@
   ################################################################################
   -->
   <UITemplateForm>
+    <title>
+      <AddPermission>İzin Ekle</AddPermission>
+    </title>
     <action>
       <Save>#{word.save}</Save>
       <Cancel>#{word.cancel}</Cancel>

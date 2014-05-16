@@ -15,7 +15,7 @@
 		<label>
 			<name>Nom</name>
 			<title>Titre</title>
-			<type>Type</type>
+      <type>Nom</type>
 			<size>Taille</size>
 			<owner>Propriétaire</owner>
       <lastModifier>Dernière modification par</lastModifier>
