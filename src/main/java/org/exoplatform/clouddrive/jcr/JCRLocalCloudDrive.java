@@ -43,6 +43,7 @@ import org.exoplatform.clouddrive.SyncNotSupportedException;
 import org.exoplatform.clouddrive.jcr.JCRLocalCloudDrive.JCRListener.AddTrashListener;
 import org.exoplatform.clouddrive.jcr.JCRLocalCloudDrive.JCRListener.DriveChangesListener;
 import org.exoplatform.clouddrive.utils.ChunkIterator;
+import org.exoplatform.clouddrive.utils.IdentityHelper;
 import org.exoplatform.container.ExoContainer;
 import org.exoplatform.container.ExoContainerContext;
 import org.exoplatform.services.jcr.core.ManageableRepository;
@@ -2995,7 +2996,7 @@ public abstract class JCRLocalCloudDrive extends CloudDrive {
       rootNode = rootNodeRef.get();
       ConversationState cs = ConversationState.getCurrent();
       if (rootNode != null && rootNode.getSession().isLive() && cs != null
-          && rootNode.getSession().getUserID().equals(cs.getIdentity().getUserId())) {
+          && IdentityHelper.isUserMatch(rootNode.getSession().getUserID(), cs.getIdentity().getUserId())) {
         try {
           // XXX as more light alternative rootNode.getIndex() can be used to
           // force state check, but refresh is good for long living nodes (and

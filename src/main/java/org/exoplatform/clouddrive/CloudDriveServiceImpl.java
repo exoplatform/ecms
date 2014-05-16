@@ -20,6 +20,7 @@ import org.exoplatform.clouddrive.features.CloudDriveFeatures;
 import org.exoplatform.clouddrive.features.PermissiveFeatures;
 import org.exoplatform.clouddrive.jcr.JCRLocalCloudDrive;
 import org.exoplatform.clouddrive.jcr.NtFileSynchronizer;
+import org.exoplatform.clouddrive.utils.IdentityHelper;
 import org.exoplatform.container.component.ComponentPlugin;
 import org.exoplatform.services.jcr.RepositoryService;
 import org.exoplatform.services.jcr.config.WorkspaceEntry;
@@ -208,7 +209,8 @@ public class CloudDriveServiceImpl implements CloudDriveService, Startable {
   @Override
   public CloudDrive findDrive(Node node) throws RepositoryException {
     ConversationState convState = ConversationState.getCurrent();
-    if (convState != null && convState.getIdentity().getUserId().equals(node.getSession().getUserID())) {
+    if (convState != null
+        && IdentityHelper.isUserMatch(convState.getIdentity().getUserId(), node.getSession().getUserID())) {
 
       String repoName = ((ManageableRepository) node.getSession().getRepository()).getConfiguration()
                                                                                   .getName();
@@ -230,7 +232,7 @@ public class CloudDriveServiceImpl implements CloudDriveService, Startable {
     }
     return null;
   }
-  
+
   /**
    * {@inheritDoc}
    */
