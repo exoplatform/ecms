@@ -127,7 +127,7 @@ public class WCMPublicationDeploymentPlugin extends DeploymentPlugin{
            */    
           
           Node parent = (Node)session.getItem(deploymentDescriptor.getTarget().getNodePath() + "/" + nodeName);
-          cleanPublication(parent, cleanupPublicationType);          
+          cleanPublication(parent, cleanupPublicationType, true);
         }
 
         if (versionHistoryPath != null && versionHistoryPath.length() > 0) {
@@ -167,7 +167,7 @@ public class WCMPublicationDeploymentPlugin extends DeploymentPlugin{
    * @throws Exception 
    * @throws NotInPublicationLifecycleException 
    */
-  private void cleanPublication(Node node, String cleanupPublicationType) throws NotInPublicationLifecycleException, Exception  {
+  private void cleanPublication(Node node, String cleanupPublicationType, boolean updateLifecycle) throws NotInPublicationLifecycleException, Exception  {
     if (node.hasProperty("publication:liveRevision")
         && node.hasProperty("publication:currentState")) {
       if (LOG.isInfoEnabled()) {
@@ -177,7 +177,7 @@ public class WCMPublicationDeploymentPlugin extends DeploymentPlugin{
       node.setProperty("publication:currentState", "published");
     }
     node.getSession().save();
-    if(PUBLISH_FIRST_PUBLICATION.equalsIgnoreCase(cleanupPublicationType) && 
+    if(updateLifecycle && PUBLISH_FIRST_PUBLICATION.equalsIgnoreCase(cleanupPublicationType) && 
         org.exoplatform.services.cms.impl.Utils.isDocument(node)) {
       if(publicationService.isNodeEnrolledInLifecycle(node)) publicationService.unsubcribeLifecycle(node);
       wcmPublicationService.updateLifecyleOnChangeContent(node, "default", "__system", "published");
@@ -186,7 +186,7 @@ public class WCMPublicationDeploymentPlugin extends DeploymentPlugin{
     NodeIterator iter = node.getNodes(); 
     while (iter.hasNext()) {
       Node childNode = iter.nextNode();
-      cleanPublication(childNode, cleanupPublicationType);
+      cleanPublication(childNode, cleanupPublicationType, false);
     }
   }  
   
