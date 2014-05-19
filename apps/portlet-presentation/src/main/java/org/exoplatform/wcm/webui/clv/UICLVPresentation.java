@@ -42,6 +42,7 @@ import org.exoplatform.portal.mop.SiteType;
 import org.exoplatform.portal.webui.container.UIContainer;
 import org.exoplatform.portal.webui.util.Util;
 import org.exoplatform.resolver.ResourceResolver;
+import org.exoplatform.services.cms.documents.TrashService;
 import org.exoplatform.services.cms.folksonomy.NewFolksonomyService;
 import org.exoplatform.services.ecm.publication.PublicationService;
 import org.exoplatform.services.jcr.access.PermissionType;
@@ -829,8 +830,8 @@ public class UICLVPresentation extends UIContainer {
       String itemPath = event.getRequestContext().getRequestParameter(OBJECTID);
       Node node = NodeLocation.getNodeByExpression(itemPath);
       Node parent = node.getParent();
-      node.remove();
-      parent.getSession().save();
+      TrashService trashService = WCMCoreUtils.getService(TrashService.class);
+      trashService.moveToTrash(node, WCMCoreUtils.getUserSessionProvider());
       event.getRequestContext().addUIComponentToUpdateByAjax(contentListPresentation);
       Utils.createPopupMessage(contentListPresentation,
                                "UICLVPresentation.msg.delete-content-successfully",
