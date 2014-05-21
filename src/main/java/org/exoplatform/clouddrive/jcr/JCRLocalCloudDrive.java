@@ -2382,6 +2382,14 @@ public abstract class JCRLocalCloudDrive extends CloudDrive {
     return rootNode().getProperty("ecd:connected").getBoolean();
   }
 
+  /**
+   * {@inheritDoc}
+   */
+  @Override
+  public boolean isDrive(Node node) throws DriveRemovedException, RepositoryException {
+    return isDrive(node, false);
+  }
+
   // ============== JCR impl specific methods ==============
 
   /**

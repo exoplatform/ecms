@@ -395,7 +395,7 @@ public abstract class CloudDrive {
    * Tells if file with given path exists in this cloud drive.
    * 
    * @param path String
-   * @return boolean, {@code true} if given path denotes a cloud file from this drive, {@code false} otherwise
+   * @return boolean, {@code true} if given path points to a cloud file from this drive, {@code false} otherwise
    * @throws DriveRemovedException
    * @throws RepositoryException
    */
@@ -475,6 +475,17 @@ public abstract class CloudDrive {
    */
   public abstract boolean isConnected() throws DriveRemovedException, RepositoryException;
 
+  /**
+   * Tells whether given node instance represents this Cloud Drive. <br/>
+   * A node represents a cloud drive if it is a root node of the drive storage and the drive connected.
+   * 
+   * @param node {@link Node}
+   * @return boolean, {@code true} if given node belongs to this Cloud Drive, {@code false} otherwise.
+   * @throws DriveRemovedException
+   * @throws RepositoryException
+   */
+  public abstract boolean isDrive(Node node) throws DriveRemovedException, RepositoryException;
+  
   // ********** internal stuff **********
 
   /**
