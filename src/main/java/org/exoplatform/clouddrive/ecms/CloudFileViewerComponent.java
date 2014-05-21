@@ -69,7 +69,8 @@ public class CloudFileViewerComponent extends UIComponent {
         String workspace = uiExplorer.getCurrentNode().getSession().getWorkspace().getName();
         CloudDriveContext.init(WebuiRequestContext.getCurrentInstance(), workspace, nodePath);
       } else {
-        LOG.error("Cannot find ancestor of type UIJCRExplorer in viwer component " + this);
+        LOG.error("Cannot find ancestor of type UIJCRExplorer in viwer component " + this + ", parent: "
+            + this.getParent());
       }
 
       return "javascript:void(0);//objectId";

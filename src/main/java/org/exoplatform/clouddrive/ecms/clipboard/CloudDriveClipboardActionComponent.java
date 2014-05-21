@@ -21,7 +21,6 @@ package org.exoplatform.clouddrive.ecms.clipboard;
 import org.exoplatform.ecm.webui.component.explorer.sidebar.UIClipboard;
 import org.exoplatform.ecm.webui.component.explorer.sidebar.UISideBar;
 import org.exoplatform.ecm.webui.component.explorer.sidebar.action.ClipboardActionComponent;
-import org.exoplatform.webui.application.WebuiRequestContext;
 import org.exoplatform.webui.config.annotation.ComponentConfig;
 import org.exoplatform.webui.config.annotation.EventConfig;
 import org.exoplatform.webui.event.Event;
@@ -33,7 +32,7 @@ import org.exoplatform.webui.event.Event;
  * Created by The eXo Platform SAS.
  * 
  * @author <a href="mailto:pnedonosko@exoplatform.com">Peter Nedonosko</a>
- * @version $Id: CloudDriveClipboardActionComponent.java 00000 May 12, 2014 pnedonosko $
+ * @version $Id: ClipboardActionComponent.java 00000 May 12, 2014 pnedonosko $
  * 
  */
 @ComponentConfig(
@@ -41,9 +40,7 @@ import org.exoplatform.webui.event.Event;
                                          listeners = CloudDriveClipboardActionComponent.ClipboardActionListener.class) })
 public class CloudDriveClipboardActionComponent extends ClipboardActionComponent {
 
-  public static class ClipboardActionListener
-                                             extends
-                                             org.exoplatform.ecm.webui.component.explorer.sidebar.action.ClipboardActionComponent.ClipboardActionListener {
+  public static class ClipboardActionListener extends ClipboardActionComponent.ClipboardActionListener {
 
     @Override
     protected void processEvent(Event<ClipboardActionComponent> event) throws Exception {
@@ -52,7 +49,7 @@ public class CloudDriveClipboardActionComponent extends ClipboardActionComponent
       UISideBar uiSideBar = event.getSource().getAncestorOfType(UISideBar.class);
       UIClipboard clipboard = uiSideBar.getChild(UIClipboard.class);
       // patch clipboard with Cloud Drive config
-      clipboard.setComponentConfig(CloudDriveClipboard.class, null); 
+      clipboard.setComponentConfig(CloudDriveClipboard.class, null);
 
       // let original code to continue
       super.processEvent(event);
@@ -64,14 +61,5 @@ public class CloudDriveClipboardActionComponent extends ClipboardActionComponent
    */
   public CloudDriveClipboardActionComponent() {
     super();
-  }
-
-  /**
-   * {@inheritDoc}
-   */
-  @Override
-  public void processRender(WebuiRequestContext context) throws Exception {
-    // TODO what override here??
-    super.processRender(context);
   }
 }

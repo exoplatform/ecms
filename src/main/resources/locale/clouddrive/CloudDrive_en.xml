@@ -50,15 +50,21 @@
       <ViewFile>View</ViewFile>
     </event>
   </CloudFileViewer>
-  <CloudDriveClipboard>
+  <CloudFile>
     <msg>
-      <CloudFilePasteToAnotherDriveNotSupported>Cannot paste cloud file to another cloud drive</CloudFilePasteToAnotherDriveNotSupported>
+      <MoveToAnotherDriveNotSupported>Cannot move file to another cloud drive</MoveToAnotherDriveNotSupported>
     </msg>
     <msg>
-      <CloudFilePasteMoveToOutsideNotSupported>Cannot cut-paste (move) cloud file to outside its cloud drive</CloudFilePasteMoveToOutsideNotSupported>
+      <MoveToOutsideDriveNotSupported>Cannot move file to outside its cloud drive</MoveToOutsideDriveNotSupported>
     </msg>
     <msg>
-      <CloudFilePasteBetweenWorkspacesNotSupported>Cannot paste (move) cloud file from different workspace</CloudFilePasteBetweenWorkspacesNotSupported>
+      <MoveBetweenWorkspacesNotSupported>Cannot move cloud file to different workspace</MoveBetweenWorkspacesNotSupported>
     </msg>
-  </CloudDriveClipboard>
+    <msg>
+      <LinkCreated>Link{0} created</LinkCreated>
+    </msg>
+    <msg>
+      <FileLinksCreated>File{0} linked in {1}</FileLinksCreated>
+    </msg>
+  </CloudFile>
 </bundle>

@@ -31,6 +31,8 @@ import org.exoplatform.web.application.RequireJS;
 import org.exoplatform.webui.application.WebuiRequestContext;
 
 import java.util.HashSet;
+import java.util.LinkedHashMap;
+import java.util.Map;
 import java.util.Set;
 
 import javax.jcr.Node;
@@ -81,6 +83,14 @@ public class CloudDriveContext {
         // add provider's default params
         context.addProvider(provider);
       }
+      
+      Map<String, String> contextMessages = messages.get();
+      if (contextMessages != null) {
+        for (Map.Entry<String, String> msg : contextMessages.entrySet()) {
+          context.showInfo(msg.getKey(), msg.getValue());
+        }
+        contextMessages.clear();
+      }
 
       requestContext.setAttribute(JAVASCRIPT, context);
       return true;
@@ -120,7 +130,7 @@ public class CloudDriveContext {
    * @see {@link #init(RequestContext, String, String, CloudProvider)}
    */
   public static boolean initNodes(RequestContext requestContext, Node parent) throws RepositoryException,
-                                                                          CloudDriveException {
+                                                                             CloudDriveException {
     Object obj = requestContext.getAttribute(JAVASCRIPT);
     if (obj != null) {
       CloudDriveContext context = (CloudDriveContext) obj;
@@ -157,13 +167,46 @@ public class CloudDriveContext {
     }
   }
 
+  /**
+   * Show info notification to the user.
+   * 
+   * @param title {@link String}
+   * @param message {@link String}
+   * @throws RepositoryException
+   * @throws CloudDriveException
+   */
+  public static void showInfo(RequestContext requestContext, String title, String message) throws RepositoryException,
+                                                                                             CloudDriveException {
+    Object obj = requestContext.getAttribute(JAVASCRIPT);
+    if (obj != null) {
+      CloudDriveContext context = (CloudDriveContext) obj;
+      context.showInfo(title, message);
+    } else {
+      // store the message in thread local
+      if (LOG.isDebugEnabled()) {
+        LOG.debug("Context not initialized. Adding info message to local cache.");
+      }
+      
+      Map<String, String> contextMessages = messages.get();
+      if (contextMessages == null) {
+        contextMessages = new LinkedHashMap<String, String>();
+        messages.set(contextMessages);
+      }
+      contextMessages.put(title, message);
+    }
+  }
+
+  // static variables
+
+  private final static ThreadLocal<Map<String, String>> messages  = new ThreadLocal<Map<String, String>>();
+
   // instance methods
 
-  private final RequireJS   require;
+  private final RequireJS                               require;
 
-  private final Set<String> nodes     = new HashSet<String>();
+  private final Set<String>                             nodes     = new HashSet<String>();
 
-  private final Set<String> providers = new HashSet<String>();
+  private final Set<String>                             providers = new HashSet<String>();
 
   /**
    * Internal constructor.
@@ -221,6 +264,11 @@ public class CloudDriveContext {
       require.addScripts("\ncloudDrive.initProvider('" + id + "', '" + provider.getAuthUrl() + "');\n");
       providers.add(id);
     }
+    return this;
+  }
+
+  private CloudDriveContext showInfo(String title, String text) {
+    require.addScripts("\ncloudDrive.showInfo('" + title + "','" + text + "');\n");
     return this;
   }
 }

@@ -55,30 +55,11 @@ public abstract class BaseCloudDriveManagerComponent extends UIAbstractManagerCo
       String workspace = uiExplorer.getCurrentNode().getSession().getWorkspace().getName();
       CloudDriveContext.init(WebuiRequestContext.getCurrentInstance(), workspace, nodePath, provider);
     } else {
-      LOG.error("Cannot find ancestor of type UIJCRExplorer in component " + this);
+      LOG.error("Cannot find ancestor of type UIJCRExplorer in component " + this + ", parent: " + this.getParent());
     }
   }
 
   protected void initContext() throws Exception {
     initContext(null);
-  }
-
-  @Deprecated // TODO not used, see RefreshViewManagerComponent
-  protected void initView() throws Exception {
-    UIWorkingArea workingArea = getAncestorOfType(UIWorkingArea.class);
-    if (workingArea != null) {
-      UIDocumentWorkspace document = workingArea.getChild(UIDocumentWorkspace.class);
-      if (document != null) {
-        // add RefreshView component
-        RefreshViewForm refresh = document.getChild(RefreshViewForm.class);
-        if (refresh == null) {
-          document.addChild(RefreshViewForm.class, null, null);
-          // TODO cleanup
-          LOG.info(">>>> RefreshViewForm added " + workingArea.getChild(RefreshViewForm.class));
-        }
-      }
-    } else {
-      LOG.error("Cannot find ancestor of type UIWorkingArea in component " + this);
-    }
   }
 }

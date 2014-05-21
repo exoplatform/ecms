@@ -18,38 +18,31 @@
  */
 package org.exoplatform.clouddrive.ecms.clipboard;
 
-import org.exoplatform.clouddrive.CloudDrive;
-import org.exoplatform.clouddrive.CloudDriveManager;
-import org.exoplatform.clouddrive.CloudDriveService;
-import org.exoplatform.clouddrive.jcr.JCRLocalCloudDrive;
+import org.exoplatform.clouddrive.ecms.symlink.CloudFileSymlink;
+import org.exoplatform.clouddrive.ecms.symlink.CloudFileSymlinkException;
 import org.exoplatform.ecm.jcr.model.ClipboardCommand;
 import org.exoplatform.ecm.webui.component.explorer.UIJCRExplorer;
 import org.exoplatform.ecm.webui.component.explorer.UIWorkingArea;
-import org.exoplatform.ecm.webui.component.explorer.control.listener.UIWorkingAreaActionListener;
 import org.exoplatform.ecm.webui.component.explorer.rightclick.manager.PasteManageComponent;
-import org.exoplatform.ecm.webui.utils.PermissionUtil;
-import org.exoplatform.services.cms.link.LinkManager;
 import org.exoplatform.services.log.ExoLogger;
 import org.exoplatform.services.log.Log;
-import org.exoplatform.services.wcm.utils.WCMCoreUtils;
-import org.exoplatform.web.application.ApplicationMessage;
 import org.exoplatform.webui.config.annotation.ComponentConfig;
 import org.exoplatform.webui.config.annotation.EventConfig;
 import org.exoplatform.webui.core.UIApplication;
 import org.exoplatform.webui.event.Event;
 
 import java.util.Iterator;
+import java.util.LinkedHashSet;
 import java.util.LinkedList;
 import java.util.List;
-import java.util.regex.Matcher;
-
-import javax.jcr.Node;
-import javax.jcr.Session;
+import java.util.Set;
 
 /**
  * Support of Cloud Drive files pasting from ECMS Clipboard. If not a cloud file then original behaviour of
- * {@link PasteManageComponent} will be applied. <br>
- * Code parts of this class based on original {@link PasteManageComponent} (state of ECMS 4.0.4).<br>
+ * {@link PasteManageComponent} will be
+ * applied. <br>
+ * Code parts of this class based on original {@link PasteManageComponent} (state of ECMS
+ * 4.0.4).<br>
  * Created by The eXo Platform SAS.
  * 
  * @author <a href="mailto:pnedonosko@exoplatform.com">Peter Nedonosko</a>
@@ -60,99 +53,112 @@ import javax.jcr.Session;
                  events = { @EventConfig(listeners = CloudDrivePasteManageComponent.PasteActionListener.class) })
 public class CloudDrivePasteManageComponent extends PasteManageComponent {
 
-  protected static final Log       LOG         = ExoLogger.getLogger(CloudDrivePasteManageComponent.class);
+  protected static final Log LOG = ExoLogger.getLogger(CloudDrivePasteManageComponent.class);
 
-  public static class PasteActionListener extends UIWorkingAreaActionListener<PasteManageComponent> {
+  public static class PasteActionListener extends PasteManageComponent.PasteActionListener {
     public void processEvent(Event<PasteManageComponent> event) throws Exception {
       UIJCRExplorer uiExplorer = event.getSource().getAncestorOfType(UIJCRExplorer.class);
+
+      CloudFileSymlink symlinks = new CloudFileSymlink(uiExplorer);
       try {
         String destParam = event.getRequestContext().getRequestParameter(OBJECTID);
-        String destPath;
-        Session destSession;
-        String destWorkspace;
-        if (destParam != null) {
-          Matcher matcher = UIWorkingArea.FILE_EXPLORER_URL_SYNTAX.matcher(destParam);
-          if (matcher.find()) {
-            destWorkspace = matcher.group(1);
-            destPath = matcher.group(2);
-            destSession = uiExplorer.getSessionByWorkspace(destWorkspace);
-          } else {
-            destPath = null;
-            destSession = null;
-            destWorkspace = null;
-          }
+        if (destParam == null) {
+          symlinks.setDestination(uiExplorer.getCurrentNode());
         } else {
-          destPath = null;
-          destSession = null;
-          destWorkspace = null;
+          symlinks.setDestination(destParam);
         }
 
         LinkedList<ClipboardCommand> allClipboards = uiExplorer.getAllClipBoard();
         if (allClipboards.size() > 0) {
-          // Use the method getNodeByPath because it is link aware
-          Node destNode = destPath == null ? uiExplorer.getCurrentNode()
-                                          : uiExplorer.getNodeByPath(destPath, destSession);
-          destSession = destNode.getSession();
-
           UIWorkingArea uiWorkingArea = event.getSource().getParent();
           List<ClipboardCommand> virtClipboards = uiWorkingArea.getVirtualClipboards();
           ClipboardCommand current = null; // will refer to last attempted to link
-          ClipboardCommand lastLinked = null; // will refer to last successfully pasted-linked
           if (virtClipboards.isEmpty()) { // single file
             current = allClipboards.getLast();
-            if (processCreateLink(current, destNode, uiExplorer)) {
-              destSession.save();
+            boolean isCut = ClipboardCommand.CUT.equals(current.getType());
+            symlinks.addSource(current.getWorkspace(), current.getSrcPath());
+            if (isCut) {
+              symlinks.move();
+            }
+            if (symlinks.create()) {
+              symlinks.getDestinationNode().getSession().save();
               // file was successfully linked
-              lastLinked = current;
-              if (ClipboardCommand.CUT.equals(current.getType())) {
+              if (isCut) {
+                // TODO should not happen until we will support cut-paste between drives
+                virtClipboards.clear();
                 allClipboards.remove(current);
               }
+              // complete the event here
+              uiExplorer.updateAjax(event);
+              return;
             }
           } else { // multiple files
             final int virtSize = virtClipboards.size();
-            int linked = 0;
+            Set<ClipboardCommand> linked = new LinkedHashSet<ClipboardCommand>();
+            Boolean isCut = null;
             for (Iterator<ClipboardCommand> iter = virtClipboards.iterator(); iter.hasNext();) {
               current = iter.next();
-              if (processCreateLink(current, destNode, uiExplorer)) {
-                lastLinked = current;
-                linked++;
+              boolean isThisCut = ClipboardCommand.CUT.equals(current.getType());
+              if (isCut == null) {
+                isCut = isThisCut;
+              }
+              if (isCut.equals(isThisCut)) {
+                symlinks.addSource(current.getWorkspace(), current.getSrcPath());
+                linked.add(current);
               } else {
+                // we have unexpected state when items in group clipboard have different types of operation
+                LOG.warn("Cannot handle different types of clipboard operations for group action. Files "
+                    + (isCut ? " cut-paste" : " copy-paste") + " already started but "
+                    + (isThisCut ? " cut-paste" : " copy-paste") + " found for " + current.getSrcPath());
+                // let default logic deal with this
                 break;
               }
             }
 
-            if (virtSize == linked) {
-              destSession.save();
-              // all files were linked successfully
-              if (lastLinked != null && ClipboardCommand.CUT.equals(lastLinked.getType())) {
-                virtClipboards.clear();
+            if (virtSize == linked.size()) {
+              if (isCut != null && isCut) {
+                symlinks.move();
+              }
+              if (symlinks.create()) {
+                symlinks.getDestinationNode().getSession().save();
+                // files was successfully linked
+                if (isCut) {
+                  // TODO should not happen until we will support cut-paste between drives
+                  virtClipboards.clear();
+                  for (ClipboardCommand c : linked) {
+                    allClipboards.remove(c);
+                  }
+                }
+                // complete the event here
+                uiExplorer.updateAjax(event);
+                return;
               }
             } else {
-              // something goes wrong and we will let original code work (paste files)
-              destSession.refresh(false);
-              lastLinked = null;
-              LOG.warn("Links created not for all cloud files. Destenation " + destNode.getPath() + "."
-                  + (current != null ? "Last file " + current.getSrcPath() + "." : "")
+              // something goes wrong and we will let default code to work
+              symlinks.getDestinationNode().getSession().refresh(false);
+              LOG.warn("Links cannot be created for all cloud files. Destination "
+                  + symlinks.getDestonationPath() + "."
+                  + (current != null ? " Last file " + current.getSrcPath() + "." : "")
                   + " Default behaviour will be applied (files Paste).");
             }
           }
-
-          if (lastLinked != null) {
-            // TODO do we need this?
-            // listenerService.broadcast(ActivityCommonService.NODE_MOVED_ACTIVITY, desNode,
-            // desNode.getPath());
-
-            // complete the event here
-            uiExplorer.updateAjax(event);
-            return;
-          } 
         }
+      } catch (CloudFileSymlinkException e) {
+        // this exception is a part of logic and it interrupts the operation
+        LOG.warn(e.getMessage());
+        UIApplication uiApp = uiExplorer.getAncestorOfType(UIApplication.class);
+        uiApp.addMessage(e.getUIMessage());
+        symlinks.getDestinationNode().getSession().refresh(false);
+        // complete the event here
+        uiExplorer.updateAjax(event);
+        return;
       } catch (Exception e) {
         // ignore and return false
         LOG.warn("Error creating link of cloud file. Default behaviour will be applied (file Paste).", e);
       }
+
       // else... call PasteManageComponent in all other cases
-      pasteManage(event, uiExplorer);
+      super.processEvent(event);
     }
   }
 
@@ -163,80 +169,4 @@ public class CloudDrivePasteManageComponent extends PasteManageComponent {
     super();
   }
 
-  static boolean processCreateLink(ClipboardCommand clipboard, Node destNode, UIJCRExplorer uiExplorer) throws Exception {
-    if (PermissionUtil.canAddNode(destNode) && !uiExplorer.nodeIsLocked(destNode) && destNode.isCheckedOut()) {
-      String srcPath = clipboard.getSrcPath();
-      String srcWorkspace = clipboard.getWorkspace();
-      Session srcSession = uiExplorer.getSessionByWorkspace(srcWorkspace);
-      // Use the method getNodeByPath because it is link aware
-      Node srcNode = uiExplorer.getNodeByPath(srcPath, srcSession, false);
-      // Reset the path to manage the links that potentially create virtual path
-      srcPath = srcNode.getPath();
-      // Reset the session to manage the links that potentially change of workspace
-      srcSession = srcNode.getSession();
-      // Reset the workspace name to manage the links that potentially change of workspace
-      srcWorkspace = srcSession.getWorkspace().getName();
-
-      UIApplication uiApp = uiExplorer.getAncestorOfType(UIApplication.class);
-
-      CloudDriveService driveService = WCMCoreUtils.getService(CloudDriveService.class);
-      CloudDrive destLocal = driveService.findDrive(destNode);
-      if (destLocal == null) {
-        // paste outside a cloud drive
-        if (srcNode.isNodeType(JCRLocalCloudDrive.ECD_CLOUDFILE)) {
-          // if cloud file...
-          // but cut not supported!
-          if (ClipboardCommand.CUT.equals(clipboard.getType())) {
-            LOG.warn("Move (by cut-paste) of cloud file to outside the cloud drive not supported: "
-                + srcNode.getPath() + " -> " + destNode.getPath());
-            uiApp.addMessage(new ApplicationMessage("CloudDriveClipboard.msg.CloudFilePasteMoveToOutsideNotSupported",
-                                                    null,
-                                                    ApplicationMessage.WARNING));
-            return true;
-          }
-
-          // check if it is the same workspace
-          String destWorkspace = destNode.getSession().getWorkspace().getName();
-          if (srcWorkspace.equals(destWorkspace)) {
-            // create symlink on destNode
-            LinkManager linkManager = WCMCoreUtils.getService(LinkManager.class);
-            String linkName = srcNode.getName();
-            String linkTitle = srcNode.hasProperty("exo:title") ? srcNode.getProperty("exo:title")
-                                                                         .getString() : linkName;
-            Node link = linkManager.createLink(destNode, null, srcNode, linkName, linkTitle);
-            LOG.info("Cloud file linked as " + link.getPath()); // TODO info -> debug
-          } else {
-            // else, we don't support cross-workspaces paste for cloud drive
-            LOG.warn("Linking between workspaces not supported for Cloud Drive files. " + srcWorkspace + ":"
-                + srcNode.getPath() + " -> " + destWorkspace + ":" + destNode.getPath());
-            uiApp.addMessage(new ApplicationMessage("CloudDriveClipboard.msg.CloudFilePasteBetweenWorkspacesNotSupported",
-                                                    null,
-                                                    ApplicationMessage.WARNING));
-          }
-          return true;
-        }
-      } else {
-        // it's paste to a cloud drive sub-tree...
-        CloudDrive srcLocal = driveService.findDrive(srcNode);
-        if (srcLocal != null) {
-          if (srcLocal.equals(destLocal)) {
-            if (ClipboardCommand.COPY.equals(clipboard.getType())) {
-              // track "paste" fact for copy-bahaviour and then let original code work
-              new CloudDriveManager(destLocal).initCopy(srcNode, destNode);
-            }
-          } else {
-            // TODO implement support copy/move to another drive
-            LOG.warn("Copy or move of cloud file to another cloud drive not supported: " + srcNode.getPath()
-                + " -> " + destNode.getPath());
-            uiApp.addMessage(new ApplicationMessage("CloudDriveClipboard.msg.CloudFilePasteToAnotherDriveNotSupported",
-                                                    null,
-                                                    ApplicationMessage.WARNING));
-            return true;
-          }
-        }
-      }
-    }
-    // everything else - original behaviour
-    return false;
-  }
 }

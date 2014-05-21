@@ -18,6 +18,8 @@
  */
 package org.exoplatform.clouddrive.ecms.clipboard;
 
+import org.exoplatform.clouddrive.ecms.symlink.CloudFileSymlink;
+import org.exoplatform.clouddrive.ecms.symlink.CloudFileSymlinkException;
 import org.exoplatform.ecm.jcr.model.ClipboardCommand;
 import org.exoplatform.ecm.webui.component.explorer.UIJCRExplorer;
 import org.exoplatform.ecm.webui.component.explorer.sidebar.UIClipboard;
@@ -25,6 +27,7 @@ import org.exoplatform.services.log.ExoLogger;
 import org.exoplatform.services.log.Log;
 import org.exoplatform.webui.config.annotation.ComponentConfig;
 import org.exoplatform.webui.config.annotation.EventConfig;
+import org.exoplatform.webui.core.UIApplication;
 import org.exoplatform.webui.event.Event;
 
 import javax.jcr.Node;
@@ -47,32 +50,41 @@ public class CloudDriveClipboard extends UIClipboard {
 
   protected static final Log LOG = ExoLogger.getLogger(CloudDriveClipboard.class);
 
-  public static class PasteActionListener
-                                         extends
-                                         org.exoplatform.ecm.webui.component.explorer.sidebar.UIClipboard.PasteActionListener {
+  public static class PasteActionListener extends UIClipboard.PasteActionListener {
     public void execute(Event<UIClipboard> event) throws Exception {
-      // TODO cleanup
       UIClipboard uiClipboard = event.getSource();
       UIJCRExplorer uiExplorer = uiClipboard.getAncestorOfType(UIJCRExplorer.class);
-      // UIWorkingArea uiWorkingArea = uiExplorer.findFirstComponentOfType(UIWorkingArea.class);
       String indexParam = event.getRequestContext().getRequestParameter(OBJECTID);
       int index = Integer.parseInt(indexParam);
       ClipboardCommand selectedClipboard = uiClipboard.getClipboardData().get(index - 1);
       Node destNode = uiExplorer.getCurrentNode();
-      // String destPath = destNode.getPath();
-      // String destWorkspace = destNode.getSession().getWorkspace().getName();
-      // UIApplication app = uiClipboard.getAncestorOfType(UIApplication.class);
+
+      CloudFileSymlink symlinks = new CloudFileSymlink(uiExplorer);
       try {
-        if (CloudDrivePasteManageComponent.processCreateLink(selectedClipboard, destNode, uiExplorer)) {
+        symlinks.setDestination(destNode);
+        symlinks.addSource(selectedClipboard.getWorkspace(), selectedClipboard.getSrcPath());
+        boolean isCut = ClipboardCommand.CUT.equals(selectedClipboard.getType());
+        if (isCut) {
+          symlinks.move();
+        }
+        if (symlinks.create()) {
           destNode.getSession().save();
-          if (ClipboardCommand.CUT.equals(selectedClipboard.getType())) {
+          if (isCut) {
             uiClipboard.getClipboardData().remove(selectedClipboard);
           }
           uiExplorer.updateAjax(event);
           return;
         }
+      } catch (CloudFileSymlinkException e) {
+        // this exception is a part of logic and it interrupts the move operation
+        LOG.warn(e.getMessage());
+        UIApplication uiApp = uiExplorer.getAncestorOfType(UIApplication.class);
+        uiApp.addMessage(e.getUIMessage());
+        destNode.getSession().refresh(false);
+        uiExplorer.updateAjax(event);
+        return;
       } catch (Exception e) {
-        // let original coe to work
+        // let original code to work
         LOG.warn("Error creating link of cloud file. Default behaviour will be applied (file Paste).", e);
       }
 
@@ -87,5 +99,4 @@ public class CloudDriveClipboard extends UIClipboard {
   public CloudDriveClipboard() throws Exception {
     super();
   }
-
 }
