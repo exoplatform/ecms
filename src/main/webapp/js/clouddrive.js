@@ -866,6 +866,10 @@
 				utils.log("No context path to open as Cloud File");
 			}
 		};
+		
+		this.showInfo = function(title, text) {
+			cloudDriveUI.showInfo(title, text);
+		};
 	}
 
 	/**
@@ -1633,33 +1637,47 @@
 
 			if (typeof listView.__cw_overridden == "undefined") {
 				// don't move files outside the drive but allow to symlink them (drag with ctrl+shift)
-				listView.postGroupAction_orig = listView.postGroupAction;
-				listView.postGroupAction = function(moveActionNode, ext) {
-					if (listView.enableDragAndDrop && actionAllowed(listView)) {
-						listView.postGroupAction_orig(moveActionNode, ext);
-					}
-				};
+				//listView.postGroupAction_orig = listView.postGroupAction;
+				//listView.postGroupAction = function(moveActionNode, ext) {
+				//	if (listView.enableDragAndDrop && actionAllowed(listView)) {
+				//		listView.postGroupAction_orig(moveActionNode, ext);
+				//	}
+				//};
 
 				// XXX ListView doesn't have context menu
 				// hide ground-context menu for drive folder
-				listView.showGroundContextMenu_orig = listView.showGroundContextMenu;
-				listView.showGroundContextMenu = function(event, element) {
-					if (!(cloudDrive.isContextDrive() || cloudDrive.isContextFile())) {
-						listView.showGroundContextMenu_orig(event, element);
-					} // else don't show ground context for drive's stuff
-				};
+				// listView.showGroundContextMenu_orig = listView.showGroundContextMenu;
+				// listView.showGroundContextMenu = function(event, element) {
+					// if (!(cloudDrive.isContextDrive() || cloudDrive.isContextFile())) {
+						// listView.showGroundContextMenu_orig(event, element);
+					// } // else don't show ground context for drive's stuff
+				// };
 
 				listView.__cw_overridden = true;
 			}
 
+			function fixContextMenuPosition() {
+				// code adopted from original showItemContextMenu() in UISimpleView.js
+				var X = event.pageX || event.clientX;
+				var Y = event.pageY || event.clientY;
+				var portWidth = $(window).width();
+				var portHeight = $(window).height();
+				var contextMenu = $("#JCRContextMenu");
+				var contentMenu = contextMenu.children("div.uiRightClickPopupMenu:first")[0];
+				if (event.clientX + contentMenu.offsetWidth > portWidth) X -= contentMenu.offsetWidth;
+				if (event.clientY + contentMenu.offsetHeight > portHeight) Y -= contentMenu.offsetHeight + 5;
+				contextMenu.css("top", Y + 5 + "px");
+				contextMenu.css("left", X + 5 + "px");
+			}
+
 			if (typeof simpleView.__cw_overridden == "undefined") {
 				// don't move files outside the drive but allow to symlink them (drag with ctrl+shift)
-				simpleView.postGroupAction_orig = simpleView.postGroupAction;
-				simpleView.postGroupAction = function(moveActionNode, ext) {
-					if (simpleView.enableDragAndDrop && actionAllowed(simpleView)) {
-						simpleView.postGroupAction_orig(moveActionNode, ext);
-					}
-				};
+				//simpleView.postGroupAction_orig = simpleView.postGroupAction;
+				//simpleView.postGroupAction = function(moveActionNode, ext) {
+				//	if (simpleView.enableDragAndDrop && actionAllowed(simpleView)) {
+				//		simpleView.postGroupAction_orig(moveActionNode, ext);
+				//	}
+				//};
 
 				// tune multi-selection menu
 				// showItemContextMenu will be invoked on multi-selection in Simple/Icon view
@@ -1670,25 +1688,22 @@
 					// and hide all not allowed
 					initMultiContextMenu();
 					// and fix menu position
-					// code adopted from original showItemContextMenu() in UISimpleView.js
-					var X = event.pageX || event.clientX;
-					var Y = event.pageY || event.clientY;
-					var portWidth = $(window).width();
-					var portHeight = $(window).height();
-					var contextMenu = $("#JCRContextMenu");
-					var contentMenu = contextMenu.children("div.uiRightClickPopupMenu:first")[0];
-					if (event.clientX + contentMenu.offsetWidth > portWidth) X -= contentMenu.offsetWidth;
-					if (event.clientY + contentMenu.offsetHeight > portHeight) Y -= contentMenu.offsetHeight + 5;
-					contextMenu.css("top", Y + 5 + "px");
-					contextMenu.css("left", X + 5 + "px");
+					fixContextMenuPosition();
 				};
 				
 				// hide ground-context menu for drive folder
 				simpleView.showGroundContextMenu_orig = simpleView.showGroundContextMenu;
 				simpleView.showGroundContextMenu = function(event, element) {
-					if (!(cloudDrive.isContextDrive() || cloudDrive.isContextFile())) {
-						simpleView.showGroundContextMenu_orig(event, element);
-					} // else don't show ground context for drive's stuff
+					// if (!(cloudDrive.isContextDrive() || cloudDrive.isContextFile())) {
+						// simpleView.showGroundContextMenu_orig(event, element);
+					// } // else don't show ground context for drive's stuff
+					simpleView.showGroundContextMenu_orig(event, element);
+					if (cloudDrive.isContextDrive() || cloudDrive.isContextFile()) {
+						// hide all not allowed for cloud drive
+						initMultiContextMenu();
+						// and fix menu position
+						fixContextMenuPosition();
+					}
 				};
 
 				simpleView.__cw_overridden = true;
@@ -1779,7 +1794,7 @@
 		};
 
 		/**
-		 * Show info notice to user. Info will be show for 8sec and hided then.
+		 * Show info notice to user. Info will be shown for 8sec and hidden then.
 		 */
 		this.showInfo = function(title, text, onInit) {
 			return cloudDriveUI.showNotice("info", title, text, {
@@ -1791,7 +1806,7 @@
 		};
 
 		/**
-		 * Show warning notice to user. Info will be show for 8sec and hided then.
+		 * Show warning notice to user. Info will be shown for 8sec and hidden then.
 		 */
 		this.showWarn = function(title, text, onInit) {
 			return cloudDriveUI.showNotice("exclamation", title, text, {
