@@ -14,7 +14,7 @@
       <label class="control-label" for="<%=uicomponent.getChild(0).getId()%>"><%=_ctx.appRes("UICompareExactlyForm.label.filter")%></label>
       <div class="controls">
         <%uiform.renderField(uicomponent.getChild(0))%>
-        <a class="actionIcon" onclick="javascript:eXo.ecm.ECMUtils.filterValue('$uicomponent.id')" rel="tooltip" data-placement="bottom" title="<%=_ctx.appRes("UICompareExactlyForm.title.result")%>"><i class="uiIconPlus"></i></a>
+        <a class="actionIcon" onclick="javascript:eXo.ecm.ECMUtils.filterValue('$uicomponent.id')" rel="tooltip" data-placement="bottom" title="<%=_ctx.appRes("UICompareExactlyForm.title.result")%>"><i class="uiIconPlus uiIconLightGray"></i></a>
       </div>
     </div>
     <div class="control-group">

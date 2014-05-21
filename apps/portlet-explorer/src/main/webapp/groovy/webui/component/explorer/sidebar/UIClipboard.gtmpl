@@ -49,7 +49,7 @@
 				      <td class="text"><div rel="tooltip" data-placement="bottom" title="<%=fullPath%>"><%=path%></div></td>
 				      <td class="actionContainer center">
 				          <%for(action in beanActions) { %>
-		                <a class="actionIcon" onclick="<%=uicomponent.event(action, index.toString())%>" rel="tooltip" data-placement="bottom" title="${action}"><i class="uiIconEcms${action} uiIconEcmsLightGrey"></i></a>
+		                <a class="actionIcon" onclick="<%=uicomponent.event(action, index.toString())%>" rel="tooltip" data-placement="bottom" title="${action}"><i class="uiIconEcms${action} uiIconEcmsLightGray"></i></a>
 				          <%}%> 
 							</td>
 				    </tr>

@@ -51,12 +51,12 @@
             <td>$meta.name</td>
             
             <td class="center">
-	                <a class="actionIcon" onclick="<%=uicomponent.event("View", meta.getName())%>" rel="tooltip" data-placement="bottom" title="<%=_ctx.appRes("UIMetadataList.title.view")%>" ><i class="uiIconView"></i><a>
-	                <a class="actionIcon" onclick="<%=uicomponent.event("Edit", meta.getName())%>" rel="tooltip" data-placement="bottom" title="<%=_ctx.appRes("UIMetadataList.title.edit")%>"><i  class="uiIconEdit"></i></a>
+	                <a class="actionIcon" onclick="<%=uicomponent.event("View", meta.getName())%>" rel="tooltip" data-placement="bottom" title="<%=_ctx.appRes("UIMetadataList.title.view")%>" ><i class="uiIconView uiIconLightGray"></i><a>
+	                <a class="actionIcon" onclick="<%=uicomponent.event("Edit", meta.getName())%>" rel="tooltip" data-placement="bottom" title="<%=_ctx.appRes("UIMetadataList.title.edit")%>"><i  class="uiIconEdit uiIconLightGray"></i></a>
 	              <%
 	              	if(meta.hasTemplate()) {
 	              	%>
-	              	<a class="actionIcon" onclick="<%=uicomponent.event("Delete", meta.getName())%>" rel="tooltip" data-placement="bottom" title="<%=_ctx.appRes("UIMetadataList.title.delete")%>"><i  class="uiIconDelete"></i></a>
+	              	<a class="actionIcon" onclick="<%=uicomponent.event("Delete", meta.getName())%>" rel="tooltip" data-placement="bottom" title="<%=_ctx.appRes("UIMetadataList.title.delete")%>"><i  class="uiIconDelete uiIconLightGray"></i></a>
 	              	<%
 	              	}
 	              %>

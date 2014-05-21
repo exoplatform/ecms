@@ -66,12 +66,12 @@
 	          	  <%
 	          	  if (uicomponent.canEditNode(node)) {
 	          	  %>
-			        <a class="actionIcon" onclick="<%=uicomponent.event("Edit", node.getPath())%>" rel="tooltip" data-placement="bottom" title="<%=_ctx.appRes("UIQueriesList.tooltip.Edit")%>" ><i class="uiIconEditInfo"></i></a>
+			        <a class="actionIcon" onclick="<%=uicomponent.event("Edit", node.getPath())%>" rel="tooltip" data-placement="bottom" title="<%=_ctx.appRes("UIQueriesList.tooltip.Edit")%>" ><i class="uiIconEditInfo uiIconLightGray"></i></a>
 			      <%
 	          	  }
 	          	  if (uicomponent.canRemoveNode(node)) {
 	          	  %>	          	
-	                 <a class="actionIcon" onclick="<%=uicomponent.event("Delete", node.getPath())%>" rel="tooltip" data-placement="bottom" title="<%=_ctx.appRes("UIQueriesList.tooltip.Delete")%>" ><i class="uiIconDelete"></i></a>
+	                 <a class="actionIcon" onclick="<%=uicomponent.event("Delete", node.getPath())%>" rel="tooltip" data-placement="bottom" title="<%=_ctx.appRes("UIQueriesList.tooltip.Delete")%>" ><i class="uiIconDelete uiIconLightGray"></i></a>
 	              <%  
 	          	  }%>
 	          </td>	                    

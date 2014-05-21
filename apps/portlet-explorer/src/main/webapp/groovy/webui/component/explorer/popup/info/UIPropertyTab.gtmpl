@@ -66,10 +66,10 @@ import org.exoplatform.wcm.webui.reader.ContentReader;
 						<td class="center actionContainer">
 								<%
 								if(uicomponent.isCanbeEdit(bean)) {%> 			    
-									<a class="actionIcon" onclick="<%=uicomponent.event("Edit", bean.getName())%>" rel="tooltip" data-placement="bottom" title="<%=_ctx.appRes("UIPropertyTab.title.edit")%>" ><i class="uiIconEdit uiIconLightGrey"></i></a>
+									<a class="actionIcon" onclick="<%=uicomponent.event("Edit", bean.getName())%>" rel="tooltip" data-placement="bottom" title="<%=_ctx.appRes("UIPropertyTab.title.edit")%>" ><i class="uiIconEdit uiIconLightGray"></i></a>
 								<%}%>
 								<%if(uicomponent.isCanbeRemoved(bean.getName())) {%>
-									<a class="actionIcon" onclick="<%=uicomponent.event("Delete", bean.getName())%>" rel="tooltip" data-placement="bottom" title="<%=_ctx.appRes("UIPropertyTab.title.delete")%>" ><i class="uiIconDelete uiIconLightGrey"></i></a>
+									<a class="actionIcon" onclick="<%=uicomponent.event("Delete", bean.getName())%>" rel="tooltip" data-placement="bottom" title="<%=_ctx.appRes("UIPropertyTab.title.delete")%>" ><i class="uiIconDelete uiIconLightGray"></i></a>
 								<%}%>  
 						</td>
 					</tr>    

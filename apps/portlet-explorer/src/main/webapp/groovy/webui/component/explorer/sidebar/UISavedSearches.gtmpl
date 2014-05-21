@@ -27,11 +27,11 @@
 									def queryName =  storedQueryPath.substring(storedQueryPath.lastIndexOf("/") + 1) ;
 									selectedCss = (storedQueryPath.equals(uicomponent.getQueryPath()) ? "selectedNode" : "");
 						
-									println("<i class=\"uiIconArrowRightMini\"></i><a class=\"$selectedCss\" href=\"" + uicomponent.event("Execute", Utils.formatNodeName(storedQueryPath)) + "\" rel=\"tooltip\" data-placement=\"bottom\" title=\"" + _ctx.appRes("UISavedQuery.tooltip.Execute") + "\">" + queryName +"</a>");			  			  
+									println("<i class=\"uiIconArrowRightMini uiIconLightGray\"></i><a class=\"$selectedCss\" href=\"" + uicomponent.event("Execute", Utils.formatNodeName(storedQueryPath)) + "\" rel=\"tooltip\" data-placement=\"bottom\" title=\"" + _ctx.appRes("UISavedQuery.tooltip.Execute") + "\">" + queryName +"</a>");			  			  
 						
 								} else if(object instanceof NodeData) {			
 									selectedCss = object.getPath().equals(uicomponent.getQueryPath()) ? "selectedNode" : "";	          
-									println("<i class=\"uiIconArrowRightMini\"></i><a class=\"$selectedCss\" href=\"" + uicomponent.event("Execute", object.getPath()) + "\" rel=\"tooltip\" data-placement=\"bottom\" title=\"" + _ctx.appRes("UISavedQuery.tooltip.Execute") + "\">" + object.getName() +"</a>");
+									println("<i class=\"uiIconArrowRightMini uiIconLightGray\"></i><a class=\"$selectedCss\" href=\"" + uicomponent.event("Execute", object.getPath()) + "\" rel=\"tooltip\" data-placement=\"bottom\" title=\"" + _ctx.appRes("UISavedQuery.tooltip.Execute") + "\">" + object.getName() +"</a>");
 								}
 							%>
 							</li>

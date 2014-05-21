@@ -67,11 +67,11 @@ import org.exoplatform.ecm.webui.component.explorer.UIWorkingArea;
 			
 			<% if(currentPage +1 <= totalPage) { %>
 				<li>
-					 <a href="javascript:void(0);" onclick="<%=uicomponent.event("ShowPage","${currentPage + 1}")%>" class="Next Page" rel="tooltip" data-placement="bottom" title="<%=_ctx.appRes("UIPageIterator.label.next")%>"><i class="uiIconArrowRightMini"></i></a>
+					 <a href="javascript:void(0);" onclick="<%=uicomponent.event("ShowPage","${currentPage + 1}")%>" class="Next Page" rel="tooltip" data-placement="bottom" title="<%=_ctx.appRes("UIPageIterator.label.next")%>"><i class="uiIconArrowRightMini uiIconLightGray"></i></a>
 				</li>
 			<% } else { %>
 				<li class="disabled">
-					 <a class="Next Page" rel="tooltip" data-placement="bottom" title="<%=_ctx.appRes("UIPageIterator.label.next")%>"><i class="uiIconArrowRightMini"></i></a>
+					 <a class="Next Page" rel="tooltip" data-placement="bottom" title="<%=_ctx.appRes("UIPageIterator.label.next")%>"><i class="uiIconArrowRightMini uiIconLightGray"></i></a>
 				</li>
 			<%}%>
 	</ul>

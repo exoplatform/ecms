@@ -65,9 +65,9 @@
 	                if(action != null) { 
 	                  if(uicomponent.isUseAjax()){
 	             %>             
-	                <a class="actionIcon" onclick="<%=uicomponent.event(action, beanId)%>" rel="tooltip" data-placement="bottom" title = "<%=_ctx.appRes(uicomponent.getId() + ".action." + action)%>" ><i class="uiIcon${action}"></i></a>
+	                <a class="actionIcon" onclick="<%=uicomponent.event(action, beanId)%>" rel="tooltip" data-placement="bottom" title = "<%=_ctx.appRes(uicomponent.getId() + ".action." + action)%>" ><i class="uiIcon${action} uiIconLightGray"></i></a>
 	              <%  }else{ %>
-	                <a class="actionIcon" onclick="<%=uicomponent.url(action, beanId)%>" rel="tooltip" data-placement="bottom" title = "<%=_ctx.appRes(uicomponent.getId() + ".action." + action)%>" ><i class="uiIcon${action}"></i></a>
+	                <a class="actionIcon" onclick="<%=uicomponent.url(action, beanId)%>" rel="tooltip" data-placement="bottom" title = "<%=_ctx.appRes(uicomponent.getId() + ".action." + action)%>" ><i class="uiIcon${action} uiIconLightGray"></i></a>
 	              <%  } %> 
 	              <%} %> 
 	            <%}%>      

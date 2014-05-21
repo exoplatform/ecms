@@ -40,7 +40,7 @@
   	      <%
 	          if (selectedSortType.equals("Alphabetic")) {
 	            %>
-	              <i class="uiIconArrow${sortOrder} uiIconLightGrey pull-right"></i>
+	              <i class="uiIconArrow${sortOrder} uiIconLightGray pull-right"></i>
 	              <%=_ctx.appRes("UILockNodeList.header.name")%>
 	            <%
 	          } else { 
@@ -52,7 +52,7 @@
 		  	  <%
 		        if (selectedSortType.equals("Owner")) {
 		          %>
-		            <i class="uiIconArrow${sortOrder} uiIconLightGrey pull-right"></i>
+		            <i class="uiIconArrow${sortOrder} uiIconLightGray pull-right"></i>
 		            <%=_ctx.appRes("UILockNodeList.header.hoderLock")%>
 		          <%
 		        } else { 
@@ -72,7 +72,7 @@
             <td><div class="text"><%= Utils.getTitle(node); %></div></td>
             <td><div class="text"><%= node.getLock().getLockOwner(); %></div></td>
 			<td class="center">	          	
-				<a onclick="<%=uicomponent.event("UnLock", node.getPath())%>" rel="tooltip" data-placement="bottom" title="<%=_ctx.appRes("UILockNodeList.tooltip.UnLock")%>" class="actionIcon"><i class="uiIconUnlockMini"></i></a>
+				<a onclick="<%=uicomponent.event("UnLock", node.getPath())%>" rel="tooltip" data-placement="bottom" title="<%=_ctx.appRes("UILockNodeList.tooltip.UnLock")%>" class="actionIcon"><i class="uiIconUnlockMini uiIconLightGray"></i></a>
 			</td>	                    
           </tr>
       <%}

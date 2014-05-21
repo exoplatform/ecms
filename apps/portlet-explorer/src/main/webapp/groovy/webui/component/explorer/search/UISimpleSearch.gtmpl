@@ -35,9 +35,9 @@
 			<%
 			String actionMoreConstraintsLabel = _ctx.appRes(uicomponent.getName() + ".action.MoreConstraints");
 			String moreConstraintsLink = uicomponent.event("MoreConstraints");
-			String arrowClass = "uiIconArrowRightMini";
+			String arrowClass = "uiIconArrowRightMini uiIconLightGray";
 			if (uiform.getChildById(uiform.CONSTRAINTS_FORM).isRendered()) {
-				arrowClass = "uiIconArrowDownMini";
+				arrowClass = "uiIconArrowDownMini uiIconLightGray";
 			}
 			%>
 			

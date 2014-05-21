@@ -75,7 +75,7 @@
 						</div>
 						<div class="btn-group pull-right">
 								<a class="btn" onclick = "eXo.ecm.CLV.addURL(this)" href="<%= uicomponent.getQuickEditLink(node) %>">
-									<i class="uiIconEdit" rel="tooltip" data-placement="bottom" title="<%= _ctx.appRes("UIPresentationContainer.title.QuickEdit")%>"></i>
+									<i class="uiIconEdit uiIconLightGray" rel="tooltip" data-placement="bottom" title="<%= _ctx.appRes("UIPresentationContainer.title.QuickEdit")%>"></i>
 								</a>           
 
 								<%
