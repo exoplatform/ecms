@@ -1,0 +1,119 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<bundle>
+  <UIPresentationContainer>
+    <title>
+      <QuickEdit>ویرایش در مرورگر محتوا</QuickEdit>
+      <print>چاپ این صفحه</print>
+      <FastPublish>انتشار</FastPublish>
+    </title>
+    <label>
+      <draft>پیش‌نویس</draft>
+      <print>چاپ</print>
+    </label>
+    <msg>
+      <no-content>هیچ محتوایی پیدا نشد.</no-content>
+      <internal-server-error>به هنگام درخواست اطلاعات از سرور خطایی رخ داده است.</internal-server-error>
+      <empty-title-error>عنوان جدید را مشخص کنید.</empty-title-error>
+    </msg>
+  </UIPresentationContainer>
+  <CorrectContentSelectorPopupWindow>
+    <title>
+      <UIContentSelectorOne>انتخاب محتوا</UIContentSelectorOne>
+    </title>
+  </CorrectContentSelectorPopupWindow>
+  <UISingleContentViewerPortlet>
+    <msg>
+      <AccessControlException>شما مجوز برای دسترسی به حالت ویرایش را ندارید.</AccessControlException>
+    </msg>
+  </UISingleContentViewerPortlet>
+  <UISCVContextualRadioBox>
+    <label>
+      <Enable>فعال</Enable>
+      <Disable>غیر فعال</Disable>
+    </label>
+  </UISCVContextualRadioBox>
+  <UIPreferencesPopupWindows>
+    <title>
+      <UISCVPreferences>تنظیمات ریزِ محتوا</UISCVPreferences>
+    </title>
+  </UIPreferencesPopupWindows>
+  <UISCVPreferences>
+    <action>
+      <Save>#{word.save}</Save>
+      <Abort>لغو</Abort>
+      <Cancel>#{word.cancel}</Cancel>
+      <Print>چاپ</Print>
+      <Close>#{word.close}</Close>
+    </action>
+    <title>تنظیمات ریزِ محتوا</title>
+    <label>
+      <Back>بازگشت به صفحه قبلی</Back>
+      <Edit>ویرایش</Edit>
+      <Preferences>تنظیمات</Preferences>
+      <Title>تنظیمات ریزِ محتوا</Title>
+      <UISCVShowTitleConfigurationCheckBox>نمایش عنوان</UISCVShowTitleConfigurationCheckBox>
+      <UISCVShowDateConfigurationCheckBox>نمایش تاریخ</UISCVShowDateConfigurationCheckBox>
+      <UISCVShowOptionBarConfigurationCheckBox>نمایش نوار گزینه ها</UISCVShowOptionBarConfigurationCheckBox>
+      <DisplaySettingBlock>تنظیمات نمایش</DisplaySettingBlock>
+      <ContentPathBlock>انتخاب محتوا</ContentPathBlock>
+      <UISCVConfigItemPathFormInputSet>مسیر محتوا</UISCVConfigItemPathFormInputSet>
+    <UISCVContentPathConfigurationInputBox>مسیر محتوا</UISCVContentPathConfigurationInputBox>
+      <Advance>پیشرفته</Advance>
+      <ContextCaption>لینک لیستِ پویا</ContextCaption>
+      <UISCVContextualRadioBox>محتوا های متنی</UISCVContextualRadioBox>
+      <UISCVParameterInputBox>توسط</UISCVParameterInputBox>
+      <PrintSettingBlock>تنظیمات چاپ</PrintSettingBlock>
+      <UISCVPrintPageParameter>با</UISCVPrintPageParameter>
+      <UISCVConfigPrintPageFormInputSet>نمایش در صفحه</UISCVConfigPrintPageFormInputSet>
+      <LockStatus>قفل</LockStatus>
+      <CacheManagement>قابل مشاهده بودن محتوا</CacheManagement>
+      <UISCVCacheRadioBox>اشتراک محتوا</UISCVCacheRadioBox>
+    </label>
+    <help>
+      <ContentPathBlock>محتوایی را که می خواهید نمایش دهید را انتخاب کنید. اگر شما ناوبری پویا را فعال کنید، این محتوای پیش فرض به صورت پویا جایگزین این محتوا می شود (حالت پیشرفته را در زیر نگاه کنید).</ContentPathBlock>
+      <DisplaySettingBlock>شما می توانید نمایش یا عدم نمایش نوار گزینه ها را که برای نمایش لینک نسخه قابل چاپ استفاده شده است را تعیین کنید. نمایش عنوان و تاریخ نیز اختیاری است.</DisplaySettingBlock>
+      <ContextualHelp>فعال کردن لینک لیست پویا. محتوا توسط یک پارامتر لینکی می توانند به صورت پویا تغییر کنند.</ContextualHelp>
+      <ParameterHelp>در صورتی که لینک لیست پویا فعال شده باشد، از این پارامتر برای دریافت محتوا استفاده خواهد شد.</ParameterHelp>
+    </help>
+    <msg>
+      <not-valid-path>مسیر مورد نامعتبر است.</not-valid-path>
+    </msg>
+    <tab>
+      <label>
+        <UISCVConfigContentFormInputSet>انتخاب محتوا</UISCVConfigContentFormInputSet>
+        <UISCVConfigDisplayFormInputSet>تنظیمات نمایش</UISCVConfigDisplayFormInputSet>
+        <UISCVConfigPrintFormInputSet>تنظیمات چاپ</UISCVConfigPrintFormInputSet>
+        <UISCVConfigAdvancedFormInputSet>پیشرفته</UISCVConfigAdvancedFormInputSet>
+      </label>
+    </tab>
+  </UISCVPreferences>
+  <UISCVConfigItemPathFormInputSet>
+    <title>
+      <SelectFolderPath>مسیر پوشه را انتخاب کنید</SelectFolderPath>
+      <AddPath>افزودن مسیر</AddPath>
+    </title>
+  </UISCVConfigItemPathFormInputSet>
+  <UISCVConfigPrintPageFormInputSet>
+    <title>
+      <SelectTargetPage>نمایش در صفحه</SelectTargetPage>
+    </title>
+  </UISCVConfigPrintPageFormInputSet>
+  <PublicationStates>
+    <archived>آرشیو شده</archived>
+    <obsolete>منسوخ</obsolete>
+    <unpublished>منتشر نشده</unpublished>
+    <enrolled>ثبت شده</enrolled>
+    <draft>پیش‌نویس</draft>
+    <pending>در انتظار</pending>
+    <approved>تایید شده</approved>
+    <inreview>در حال بررسی</inreview>
+    <staged>صحنه</staged>
+    <published>منتشرشده</published>
+  </PublicationStates>
+  <UISCVCacheRadioBox>
+    <label>
+      <Enable>محدودیت بر اساس تایید اعتبار</Enable>
+      <Disable>محدود شده توسط نقش های کاربری</Disable>
+    </label>
+  </UISCVCacheRadioBox>
+</bundle>

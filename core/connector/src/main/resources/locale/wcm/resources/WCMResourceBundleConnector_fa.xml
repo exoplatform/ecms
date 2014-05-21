@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<bundle>
+  <ContentSelector>
+    <msg>
+      <no-file-selected>هیچ محتوایی انتخاب نشده است. لطفا حداقل یکی را انتخاب کنید.</no-file-selected>
+    </msg>
+  </ContentSelector>
+  <RenameConnector>
+    <label>
+      <rename>تغییر نام</rename>
+      <cancel>انصراف</cancel>
+    </label>
+    <msg>
+      <renaming>در حال تغییر نام...</renaming>
+    </msg>
+  </RenameConnector>
+</bundle>

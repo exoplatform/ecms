@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<bundle>
+<UIPopupWindow>
+<title>
+<UIViewInfoManager>مشاهده اطلاعات</UIViewInfoManager>
+</title>
+</UIPopupWindow>
+    
+<ECMContextMenu>
+<event>
+<ViewInfo>مشاهده اطلاعات</ViewInfo>
+</event>
+</ECMContextMenu>
+<UIViewInfoContainer>
+<label>
+      <name>نام</name>
+      <title>عنوان</title>
+      <type>نوع</type>
+      <size>اندازه</size>
+      <owner>مالک</owner>
+      <lastModifier>آخرین اصلاح کننده</lastModifier>
+      <created>تاریخ ایجاد</created>
+      <lastModified>تاریخ آخرین تغییر</lastModified>
+      <publicationState>وضعیت انتشار</publicationState>
+</label>
+<value>
+      <folder>پوشه</folder>
+</value>
+<action>
+<Close>#{word.close}</Close>
+</action>
+</UIViewInfoContainer>
+</bundle>

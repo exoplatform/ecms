@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<bundle>
+  <!--
+  #####################################################################
+  # org.exoplatform.ecm.webui.tree.selectmany.UICategoriesSelectPanel #
+  #####################################################################
+  -->
+  <UITreeList>
+    <header>
+      <name>نام</name>
+      <action>افزودن</action>
+    </header>
+    <info>
+      <child-not-found>فرزند یافت نشد!</child-not-found>
+    </info>
+  </UITreeList>
+  <!--
+  ######################################################################
+  # org.exoplatform.ecm.webui.tree.selectmany.UISelectedCategoriesGrid #
+  ######################################################################
+  -->
+  <UISelectedCategoriesGrid>
+    <header>
+      <categoryName>نام دسته</categoryName>
+      <categoryPath>مسیر دسته</categoryPath>
+      <action>#{word.action}</action>
+    </header>
+    <action>
+      <SaveCategories>#{word.save}</SaveCategories>
+      <Cancel>#{word.cancel}</Cancel>
+    </action>
+    <msg>
+      <cannot-save>دسته ها ذخیره نشدند.</cannot-save>
+      <have-saved>دسته ها با موفقیت ذخیره شدند</have-saved>
+      <non-categories>دسته ها اشتباه هستند. لطفاً دسته های مناسب را انتخاب کنید.</non-categories>
+      <confirm-delete>آیا می خواهید که این دسته را حذف کنید؟</confirm-delete>
+    </msg>
+  </UISelectedCategoriesGrid>
+  <!--
+  ######################################################################
+  # org.exoplatform.ecm.webui.selector.UIPermissionSelector           #
+  ######################################################################
+  -->
+  <SelectUserOrGroup>
+    <title>
+      <UIPermissionUser>انتخاب کاربر</UIPermissionUser>
+      <UIPermissionMembership>انتخاب عضویت</UIPermissionMembership>
+    </title>
+  </SelectUserOrGroup>
+  <UIPermissionUser>
+    <label>
+      <selectUser>انتخاب کاربر</selectUser>
+      <selectGroup>مرور و انتخاب یک گروه</selectGroup>
+    </label>
+  </UIPermissionUser>
+  <UIPermissionMembership>
+    <label>
+      <selectUser>انتخاب عضویت</selectUser>
+      <selectGroup>مرور و انتخاب یک گروه</selectGroup>
+    </label>
+  </UIPermissionMembership>
+</bundle>

@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<bundle>
+  <!--
+  #####################################################################
+  # org.exoplatform.ecm.webui.tree.selectmany.UICategoriesSelectPanel #
+  #####################################################################
+  -->
+  <UITreeList>
+    <header>
+      <name>Όνομα</name>
+      <action>Προσθήκη</action>
+    </header>
+    <info>
+      <child-not-found>Δεν βρέθηκαν θυγατρικοί κόμβοι!</child-not-found>
+    </info>
+  </UITreeList>
+  <!--
+  ######################################################################
+  # org.exoplatform.ecm.webui.tree.selectmany.UISelectedCategoriesGrid #
+  ######################################################################
+  -->
+  <UISelectedCategoriesGrid>
+    <header>
+      <categoryName>Όνομα κατηγορίας</categoryName>
+      <categoryPath>Διαδρομή Κατηγορίας</categoryPath>
+      <action>#{word.action}</action>
+    </header>
+    <action>
+      <SaveCategories>#{word.save}</SaveCategories>
+      <Cancel>#{word.cancel}</Cancel>
+    </action>
+    <msg>
+      <cannot-save>Οι Κατηγορίες δεν αποθηκεύτηκαν.</cannot-save>
+      <have-saved>Οι Κατηγορίες αποθηκεύτηκαν με επιτυχία</have-saved>
+      <non-categories>Οι κατηγορίες είναι λάθος. Παρακαλώ επιλέξτε τις κατάλληλες κατηγορίες.</non-categories>
+      <confirm-delete>Θέλετε να διαγράψετε αυτήν την κατηγορία;</confirm-delete>
+    </msg>
+  </UISelectedCategoriesGrid>
+  <!--
+  ######################################################################
+  # org.exoplatform.ecm.webui.selector.UIPermissionSelector           #
+  ######################################################################
+  -->
+  <SelectUserOrGroup>
+    <title>
+      <UIPermissionUser>Επιλογή χρήστη</UIPermissionUser>
+      <UIPermissionMembership>Επιλέξτε την ιδιότητα του μέλους</UIPermissionMembership>
+    </title>
+  </SelectUserOrGroup>
+  <UIPermissionUser>
+    <label>
+      <selectUser>Επιλογή χρήστη</selectUser>
+      <selectGroup>Περιηγηθείτε και επιλέξτε μια ομάδα</selectGroup>
+    </label>
+  </UIPermissionUser>
+  <UIPermissionMembership>
+    <label>
+      <selectUser>Επιλογή ρόλου</selectUser>
+      <selectGroup>Περιηγηθείτε και επιλέξτε μια ομάδα</selectGroup>
+    </label>
+  </UIPermissionMembership>
+</bundle>
