@@ -1596,6 +1596,7 @@
 				fileView.__cw_overridden = true;
 			}
 
+			// TODO Deprecated. Not used.
 			function actionAllowed(view) {
 				var allowed = true;
 				var actionEvent = window.event;
@@ -1636,22 +1637,13 @@
 			}
 
 			if (typeof listView.__cw_overridden == "undefined") {
-				// don't move files outside the drive but allow to symlink them (drag with ctrl+shift)
+				// TODO don't move files outside the drive but allow to symlink them (drag with ctrl+shift)
 				//listView.postGroupAction_orig = listView.postGroupAction;
 				//listView.postGroupAction = function(moveActionNode, ext) {
 				//	if (listView.enableDragAndDrop && actionAllowed(listView)) {
 				//		listView.postGroupAction_orig(moveActionNode, ext);
 				//	}
 				//};
-
-				// XXX ListView doesn't have context menu
-				// hide ground-context menu for drive folder
-				// listView.showGroundContextMenu_orig = listView.showGroundContextMenu;
-				// listView.showGroundContextMenu = function(event, element) {
-					// if (!(cloudDrive.isContextDrive() || cloudDrive.isContextFile())) {
-						// listView.showGroundContextMenu_orig(event, element);
-					// } // else don't show ground context for drive's stuff
-				// };
 
 				listView.__cw_overridden = true;
 			}
@@ -1671,7 +1663,7 @@
 			}
 
 			if (typeof simpleView.__cw_overridden == "undefined") {
-				// don't move files outside the drive but allow to symlink them (drag with ctrl+shift)
+				// TODO don't move files outside the drive but allow to symlink them (drag with ctrl+shift)
 				//simpleView.postGroupAction_orig = simpleView.postGroupAction;
 				//simpleView.postGroupAction = function(moveActionNode, ext) {
 				//	if (simpleView.enableDragAndDrop && actionAllowed(simpleView)) {
@@ -1694,9 +1686,6 @@
 				// hide ground-context menu for drive folder
 				simpleView.showGroundContextMenu_orig = simpleView.showGroundContextMenu;
 				simpleView.showGroundContextMenu = function(event, element) {
-					// if (!(cloudDrive.isContextDrive() || cloudDrive.isContextFile())) {
-						// simpleView.showGroundContextMenu_orig(event, element);
-					// } // else don't show ground context for drive's stuff
 					simpleView.showGroundContextMenu_orig(event, element);
 					if (cloudDrive.isContextDrive() || cloudDrive.isContextFile()) {
 						// hide all not allowed for cloud drive
