@@ -41,7 +41,7 @@
 											if(viewCount < 8) {
 									%>
 								
-									<a onclick="<%=uicomponent.event("ChangeView", viewStyle)%>" class="btn $activeClass" rel="tooltip" data-placement="bottom" title="$label"><i  class="$defaultView $viewIcon"></i></a>
+									<a onclick="<%=uicomponent.event("ChangeView", viewStyle)%>" class="btn $activeClass" rel="tooltip" data-placement="bottom" title="$label"><i  class="$defaultView $viewIcon uiIconEcmsLightGray"></i></a>
 								
 										<%  } else {
 											extendMap.put(viewStyle, label + ";" + viewIcon);
@@ -80,8 +80,8 @@
 				<%}%>
 			</td>
 			<td class="backAndRefreshBlock">
-				<a class="backIcon actionIcon pull-left" href="<%=uicomponent.event("Back")%>" rel="tooltip" data-placement="bottom" title="<%=_ctx.appRes("UIAddressBar.title.backButton")%>"><i class="uiIconEcmsGoBack"></i></a>	
-				<a class="refreshIcon actionIcon pull-left" href="<%=uicomponent.event("RefreshSession")%>" rel="tooltip" data-placement="bottom" title="<%=_ctx.appRes("UIViewBar.label.refesh")%>"><i class="uiIconRefresh"></i></a>
+				<a class="backIcon actionIcon pull-left" href="<%=uicomponent.event("Back")%>" rel="tooltip" data-placement="bottom" title="<%=_ctx.appRes("UIAddressBar.title.backButton")%>"><i class="uiIconEcmsGoBack uiIconEcmsLightGray"></i></a>	
+				<a class="refreshIcon actionIcon pull-left" href="<%=uicomponent.event("RefreshSession")%>" rel="tooltip" data-placement="bottom" title="<%=_ctx.appRes("UIViewBar.label.refesh")%>"><i class="uiIconRefresh uiIconLightGray"></i></a>
 			</td>	
 			<%
 				 def viewSize = "";
@@ -110,7 +110,7 @@
 			</td>
 			<td class="right">
 				<div class="advance" id="SimpleSearchControl">
-					<a href="<%=uicomponent.event("SimpleSearch")%>" rel="tooltip" data-placement="bottom" title="<%=_ctx.appRes("UIActionBar.title.SimpleSearch")%>" class="searchBtn" id="SimpleSearch"><i class="uiIconSearch uiIconLightGrey"></i></a>
+					<a href="<%=uicomponent.event("SimpleSearch")%>" rel="tooltip" data-placement="bottom" title="<%=_ctx.appRes("UIActionBar.title.SimpleSearch")%>" class="searchBtn" id="SimpleSearch"><i class="uiIconSearch uiIconLightGray"></i></a>
 					<% uicomponent.renderChild(1); %>
 				</div>
 			</td>

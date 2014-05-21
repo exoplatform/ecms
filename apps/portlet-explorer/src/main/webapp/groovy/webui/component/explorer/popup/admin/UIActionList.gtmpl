@@ -64,7 +64,7 @@
 			        <%
 			          for(act in uicomponent.getActions()) { 
 			        %>
-	            	<a class="actionIcon"><i class="uiIcon${act}" onclick="<%=uicomponent.event(act, action.getName())%>" rel="tooltip" data-placement="bottom" title="<%=_ctx.appRes("UIActionList.action." + act)%>"></i></a>
+	            	<a class="actionIcon"><i class="uiIcon${act} uiIconLightGray" onclick="<%=uicomponent.event(act, action.getName())%>" rel="tooltip" data-placement="bottom" title="<%=_ctx.appRes("UIActionList.action." + act)%>"></i></a>
 			        <%} %>
 	           	
 		        </td>
