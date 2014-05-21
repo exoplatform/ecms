@@ -61,6 +61,9 @@
       <MoveBetweenWorkspacesNotSupported>Cannot move cloud file to different workspace</MoveBetweenWorkspacesNotSupported>
     </msg>
     <msg>
+      <CloudDriveCopyMoveNotSupported>Cannot copy or move cloud drive folder</CloudDriveCopyMoveNotSupported>
+    </msg>
+    <msg>
       <LinkCreated>Link{0} created</LinkCreated>
     </msg>
     <msg>

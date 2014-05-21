@@ -238,11 +238,21 @@ public class CloudFileSymlink {
             && destNode.isCheckedOut()) {
 
           CloudDriveService driveService = WCMCoreUtils.getService(CloudDriveService.class);
+          
+          CloudDrive srcLocal = driveService.findDrive(srcNode);
+          if (srcLocal != null && srcLocal.isDrive(srcNode)) {
+            // it is a drive node as source - reject it
+            throw new CloudFileSymlinkException("Copy or move of cloud drive not supported: " + srcPath
+                + " -> " + destPath, new ApplicationMessage("CloudFile.msg.CloudDriveCopyMoveNotSupported",
+                                                            null,
+                                                            ApplicationMessage.WARNING));
+          }
+          
           CloudDrive destLocal = driveService.findDrive(destNode);
           if (destLocal == null) {
             // paste outside a cloud drive
-            if (srcNode.isNodeType(JCRLocalCloudDrive.ECD_CLOUDFILE)) {
-              // if cloud file...
+            if (srcLocal != null) {
+              // if cloud file... (it is not a cloud drive node as we already checked above)
               // then move not supported for the moment!
               if (move) {
                 throw new CloudFileSymlinkException("Move of cloud file to outside the cloud drive not supported: "
@@ -277,7 +287,6 @@ public class CloudFileSymlink {
             }
           } else {
             // it's paste to a cloud drive sub-tree...
-            CloudDrive srcLocal = driveService.findDrive(srcNode);
             if (srcLocal != null) {
               if (srcLocal.equals(destLocal)) {
                 if (!move) {
@@ -294,6 +303,7 @@ public class CloudFileSymlink {
                 // }
                 // TODO for support of move also need refresh paths of all items in clipboard to reflect the
                 // moved parents, see PasteManageComponent.updateClipboard()
+
                 throw new CloudFileSymlinkException("Copy or move of cloud file to another cloud drive not supported: "
                                                         + srcPath + " -> " + destPath,
                                                     new ApplicationMessage("CloudFile.msg.MoveToAnotherDriveNotSupported",
