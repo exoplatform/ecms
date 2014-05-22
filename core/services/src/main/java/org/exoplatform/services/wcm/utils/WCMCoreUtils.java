@@ -43,6 +43,10 @@ import javax.jcr.query.QueryManager;
 import javax.jcr.query.QueryResult;
 
 import org.apache.commons.lang.StringUtils;
+import org.exoplatform.commons.api.settings.SettingService;
+import org.exoplatform.commons.api.settings.SettingValue;
+import org.exoplatform.commons.api.settings.data.Context;
+import org.exoplatform.commons.api.settings.data.Scope;
 import org.exoplatform.commons.utils.ListAccess;
 import org.exoplatform.container.ExoContainer;
 import org.exoplatform.container.ExoContainerContext;
@@ -93,6 +97,7 @@ public class WCMCoreUtils {
       + "and jcr:mixinTypes <> 'exo:restoreLocation' "
       + "order by exo:priority ASC";
 
+  private static final String BAR_NAVIGATION_STYLE_KEY = "bar_navigation_style";
 
   /**
    * Gets the service.
@@ -670,5 +675,22 @@ public class WCMCoreUtils {
     TemplateService templateService = WCMCoreUtils.getService(TemplateService.class);
     isDocument = templateService.getAllDocumentNodeTypes().contains(node.getPrimaryNodeType().getName()); 
     return isDocument;
+  }
+  
+  /**
+   * Get the bar navigation style of UIToolbarContainer.gtmpl
+   * 
+   * @return The String is style of bar navigation style
+   */
+  public static String getBarNavigationStyle() {
+    SettingService settingService = getService(SettingService.class);
+    String barNavigationStyle = "Dark";
+    SettingValue<?> value = settingService.get(Context.GLOBAL, Scope.GLOBAL, BAR_NAVIGATION_STYLE_KEY);
+    if (value != null) {
+      barNavigationStyle = (String) value.getValue();
+    } else {
+      settingService.set(Context.GLOBAL, Scope.GLOBAL, BAR_NAVIGATION_STYLE_KEY, SettingValue.create(barNavigationStyle));
+    }
+    return barNavigationStyle;
   }
 }
