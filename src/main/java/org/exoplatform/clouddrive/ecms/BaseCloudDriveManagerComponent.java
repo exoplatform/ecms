@@ -17,9 +17,7 @@
 package org.exoplatform.clouddrive.ecms;
 
 import org.exoplatform.clouddrive.CloudProvider;
-import org.exoplatform.ecm.webui.component.explorer.UIDocumentWorkspace;
 import org.exoplatform.ecm.webui.component.explorer.UIJCRExplorer;
-import org.exoplatform.ecm.webui.component.explorer.UIWorkingArea;
 import org.exoplatform.services.log.ExoLogger;
 import org.exoplatform.services.log.Log;
 import org.exoplatform.webui.application.WebuiRequestContext;

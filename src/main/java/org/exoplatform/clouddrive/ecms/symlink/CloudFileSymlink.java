@@ -22,7 +22,6 @@ import org.exoplatform.clouddrive.CloudDrive;
 import org.exoplatform.clouddrive.CloudDriveManager;
 import org.exoplatform.clouddrive.CloudDriveService;
 import org.exoplatform.clouddrive.ecms.CloudDriveContext;
-import org.exoplatform.clouddrive.jcr.JCRLocalCloudDrive;
 import org.exoplatform.ecm.webui.component.explorer.UIJCRExplorer;
 import org.exoplatform.ecm.webui.component.explorer.UIWorkingArea;
 import org.exoplatform.ecm.webui.component.explorer.rightclick.manager.MoveNodeManageComponent;
@@ -41,7 +40,6 @@ import java.util.regex.Matcher;
 
 import javax.jcr.Node;
 import javax.jcr.PathNotFoundException;
-import javax.jcr.RepositoryException;
 import javax.jcr.Session;
 
 /**
@@ -101,7 +99,7 @@ public class CloudFileSymlink {
    * @throws Exception if cannot find node by given path
    */
   public CloudFileSymlink addSource(String srcInfo) throws Exception {
-    return addSource(getNodeByPath(srcInfo));
+    return addSource(getNodeByInfo(srcInfo));
   }
 
   /**
@@ -121,12 +119,12 @@ public class CloudFileSymlink {
    * 
    * @param destNode {@link Node}
    * @return
-   * @throws RepositoryException
+   * @throws Exception
    */
-  public CloudFileSymlink setDestination(Node destNode) throws RepositoryException {
+  public CloudFileSymlink setDestination(Node destNode) throws Exception {
     this.destWorkspace = destNode.getSession().getWorkspace().getName();
-    this.destNode = destNode;
-    this.destPath = destNode.getPath();
+    this.destNode = getNodeByPath(this.destWorkspace, destNode.getPath());
+    this.destPath = this.destNode.getPath();
     return this;
   }
 
@@ -139,7 +137,7 @@ public class CloudFileSymlink {
    * @throws Exception if cannot find node by given path or cannot read its metadata
    */
   public CloudFileSymlink setDestination(String destInfo) throws Exception {
-    return setDestination(getNodeByPath(destInfo));
+    return setDestination(getNodeByInfo(destInfo));
   }
 
   /**
@@ -238,7 +236,7 @@ public class CloudFileSymlink {
             && destNode.isCheckedOut()) {
 
           CloudDriveService driveService = WCMCoreUtils.getService(CloudDriveService.class);
-          
+
           CloudDrive srcLocal = driveService.findDrive(srcNode);
           if (srcLocal != null && srcLocal.isDrive(srcNode)) {
             // it is a drive node as source - reject it
@@ -247,7 +245,7 @@ public class CloudFileSymlink {
                                                             null,
                                                             ApplicationMessage.WARNING));
           }
-          
+
           CloudDrive destLocal = driveService.findDrive(destNode);
           if (destLocal == null) {
             // paste outside a cloud drive
@@ -322,7 +320,7 @@ public class CloudFileSymlink {
     return false;
   }
 
-  protected Node getNodeByPath(String pathInfo) throws Exception {
+  protected Node getNodeByInfo(String pathInfo) throws Exception {
     Matcher matcher = UIWorkingArea.FILE_EXPLORER_URL_SYNTAX.matcher(pathInfo);
     String workspace, path;
     if (matcher.find()) {
@@ -336,7 +334,7 @@ public class CloudFileSymlink {
 
   protected Node getNodeByPath(String workspace, String path) throws Exception {
     Session srcSession = uiExplorer.getSessionByWorkspace(workspace);
-    return uiExplorer.getNodeByPath(path, srcSession, false);
+    return uiExplorer.getNodeByPath(path, srcSession, true);
   }
 
 }
