@@ -888,9 +888,9 @@
 		var ALLOWED_SYMLINK_MENU_ACTIONS = [ "Delete" ];
 
 		// Menu items managed via view's showItemContextMenu() method (multi-selection)
+		// 21.05.2014 "uiIconEcmsOverloadThumbnail" removed from allowed
 		var ALLOWED_DMS_MENU_COMMON_ACTION_CLASSES = [ "uiIconEcmsUpload", "uiIconEcmsAddFolder", "uiIconEcmsAddToFavourite", "uiIconEcmsRemoveFromFavourite",
-		    "uiIconEcmsManageActions", "uiIconEcmsManageRelations", "uiIconEcmsViewProperties", "uiIconEcmsManageAuditing",
-		    "uiIconEcmsOverloadThumbnail" ];
+		    "uiIconEcmsManageActions", "uiIconEcmsManageRelations", "uiIconEcmsViewProperties", "uiIconEcmsManageAuditing" ];
 		var ALLOWED_DMS_MENU_FILE_ACTION_CLASSES = [ "uiIconEcmsOpenCloudFile", "uiIconEcmsTaggingDocument",
 		    "uiIconEcmsWatchDocument", "uiIconEcmsViewMetadatas", "uiIconEcmsVote", "uiIconEcmsComment", "uiIconEcmsCopy", "uiIconEcmsPaste", "uiIconEcmsCut", "uiIconEcmsDelete", "uiIconEcmsRename" ];
 		var ALLOWED_DMS_MENU_DRIVE_ACTION_CLASSES = [ "uiIconEcmsRefreshCloudDrive", "DeleteNodeIcon" ];
@@ -1410,6 +1410,9 @@
 							cloudDrive.synchronize(this);
 						});
 					});
+				} else if (status == 404) {
+					// context file not found, warn user
+					cloudDriveUI.showInfo("Your session updated", response);
 				} else if (status == 204) {
 					// do nothing for no content - drive was removed
 				} else {
@@ -1636,7 +1639,7 @@
 				return allowed;
 			}
 
-			if (typeof listView.__cw_overridden == "undefined") {
+			//if (typeof listView.__cw_overridden == "undefined") {
 				// TODO don't move files outside the drive but allow to symlink them (drag with ctrl+shift)
 				//listView.postGroupAction_orig = listView.postGroupAction;
 				//listView.postGroupAction = function(moveActionNode, ext) {
@@ -1645,8 +1648,8 @@
 				//	}
 				//};
 
-				listView.__cw_overridden = true;
-			}
+				//listView.__cw_overridden = true;
+			//}
 
 			function fixContextMenuPosition() {
 				// code adopted from original showItemContextMenu() in UISimpleView.js
