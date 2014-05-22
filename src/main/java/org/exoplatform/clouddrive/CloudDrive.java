@@ -392,10 +392,13 @@ public abstract class CloudDrive {
                                                 RepositoryException;
 
   /**
-   * Tells if file with given path exists in this cloud drive.
+   * Tells if cloud file with given path exists in this cloud drive. Note that local node existing in a cloud
+   * drive, and not yet added to the cloud, will be treated as not a file and <code>false</code> will be
+   * returned. <br/>
+   * This method also works with links to files from the drive.
    * 
-   * @param path String
-   * @return boolean, {@code true} if given path points to a cloud file from this drive, {@code false} otherwise
+   * @param path {@link String}
+   * @return boolean, {@code true} if given path points to a cloud file in this drive, {@code false} otherwise
    * @throws DriveRemovedException
    * @throws RepositoryException
    */
@@ -477,7 +480,9 @@ public abstract class CloudDrive {
 
   /**
    * Tells whether given node instance represents this Cloud Drive. <br/>
-   * A node represents a cloud drive if it is a root node of the drive storage and the drive connected.
+   * A node represents a cloud drive if it is a root node of the drive storage and the drive connected, or it
+   * represents a file on path of this drive. <br/>
+   * This method also works with links to files of the drive.
    * 
    * @param node {@link Node}
    * @return boolean, {@code true} if given node belongs to this Cloud Drive, {@code false} otherwise.
@@ -485,14 +490,15 @@ public abstract class CloudDrive {
    * @throws RepositoryException
    */
   public abstract boolean isDrive(Node node) throws DriveRemovedException, RepositoryException;
-  
+
   // ********** internal stuff **********
 
   /**
    * Tells whether given node instance belongs to this Cloud Drive. <br/>
    * A node belong to a cloud drive if it represents this drive's storage root node and the drive connected.
    * If {@code includeFiles} is {@code true} then given node also will be tested whether it is a file in this
-   * drive, and if it is, {@code true} will be returned.
+   * drive, and if it is, {@code true} will be returned.<br/>
+   * This method also works with links to files of the drive.
    * 
    * @param node {@link Node}
    * @param includeFiles boolean, if {@code true} then given node also will be tested as a possible file of
@@ -507,10 +513,11 @@ public abstract class CloudDrive {
   /**
    * Tells whether given path belongs to this Cloud Drive. <br/>
    * A path belong a cloud drive if it represents this drive's storage root node and the drive connected. If
-   * {@code includeFiles} is {@code true} then given path also will be tested whether it is a path of file in
-   * this drive, and if it is, {@code true} will be returned.
+   * {@code includeFiles} is {@code true} then given path also will be tested whether it is a path of a file
+   * in this drive, and if it is, {@code true} will be returned.<br/> 
+   * This method also works with links to files of the drive.
    * 
-   * @param workspace TODO
+   * @param workspace {@link String}
    * @param path {@link String}
    * @param includeFiles boolean, if {@code true} then given path also will be tested as a possible file of
    *          this drive and thus {@code true} will be returned for the file on this drive.

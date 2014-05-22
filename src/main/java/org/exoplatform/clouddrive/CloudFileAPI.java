@@ -52,6 +52,14 @@ public interface CloudFileAPI {
 
   boolean isIgnored(Node node) throws RepositoryException;
 
+  /**
+   * Mark given file as ignored by adding ecd:ignored mixin to it.
+   * 
+   * @param node {@link Node}
+   * @throws RepositoryException
+   */
+  void ignoreFile(Node node) throws RepositoryException;
+
   String createFile(Node fileNode, Calendar created, Calendar modified, String mimeType, InputStream content) throws CloudDriveException,
                                                                                                              RepositoryException;
 

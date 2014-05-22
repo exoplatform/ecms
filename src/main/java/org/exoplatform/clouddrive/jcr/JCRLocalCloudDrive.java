@@ -142,6 +142,10 @@ public abstract class JCRLocalCloudDrive extends CloudDrive {
 
   public static final String     EXO_TRASHFOLDER       = "exo:trashFolder";
 
+  public static final String     EXO_THUMBNAILS        = "exo:thumbnails";
+
+  public static final String     EXO_THUMBNAIL         = "exo:thumbnail";
+
   public static final String     NT_FOLDER             = "nt:folder";
 
   public static final String     NT_FILE               = "nt:file";
@@ -844,6 +848,8 @@ public abstract class JCRLocalCloudDrive extends CloudDrive {
 
         if (Thread.currentThread().isInterrupted()) {
           throw new InterruptedException("Drive " + getName() + " interrupted in " + title());
+        } else {
+          LOG.warn("Drive " + getName() + " finished unexpectedly.");
         }
       } catch (CloudDriveException e) {
         handleError(rootNode, e, getName());
@@ -1207,7 +1213,6 @@ public abstract class JCRLocalCloudDrive extends CloudDrive {
         FileChange change = chiter.next();
         for (String ipath : ignoredPaths) {
           if (change.getPath().startsWith(ipath)) {
-            chiter.remove();
             continue next; // skip parts of ignored (not supported by sync) nodes
           }
         }
@@ -1217,14 +1222,19 @@ public abstract class JCRLocalCloudDrive extends CloudDrive {
           change.apply();
         } catch (SyncNotSupportedException e) {
           // remember to skip sub-files
-          chiter.remove();
+          // chiter.remove();
           ignoredPaths.add(change.getPath());
         } catch (PathNotFoundException e) {
-          // XXX hardcode ignorance of exo:thumbnails here also,
-          // it's possible that thumbnails' child nodes will disappear, thus we ignore them
-          if (e.getMessage().indexOf("/exo:thumbnails") > 0
+          if (change.changeType.equals(FileChange.REMOVE)) {
+            // well... it is already removed - ignore it
+            LOG.warn("Ignoring already removed item removal: " + change.fileId + " " + change.getPath());
+          } else if (change.changeType.equals(FileChange.CREATE)) {
+            // well... it was existing and need add to the cloud, but already removed locally - ignore it
+            LOG.warn("Ignoring already removed item creation: " + change.getPath());
+          } else if (e.getMessage().indexOf("/exo:thumbnails") > 0
               && change.getPath().indexOf("/exo:thumbnails") > 0) {
-            chiter.remove();
+            // XXX hardcode ignorance of exo:thumbnails here also,
+            // it's possible that thumbnails' child nodes will disappear, thus we ignore them
             ignoredPaths.add(change.getPath());
           } else {
             throw e;
@@ -1282,6 +1292,16 @@ public abstract class JCRLocalCloudDrive extends CloudDrive {
     @Override
     public boolean isIgnored(Node node) throws RepositoryException {
       return node.isNodeType(ECD_IGNORED);
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public void ignoreFile(Node node) throws RepositoryException {
+      if (!node.isNodeType(ECD_IGNORED)) {
+        node.addMixin(ECD_IGNORED);
+      }
     }
 
     /**
@@ -1560,7 +1580,7 @@ public abstract class JCRLocalCloudDrive extends CloudDrive {
                     LOG.warn("Cannot synchronize cloud file " + changeName + ": " + e.getMessage()
                         + ". Ignoring the file.");
                     try {
-                      ignoreFile(file);
+                      fileAPI.ignoreFile(file);
                     } catch (Throwable t) {
                       LOG.error("Error ignoring not a cloud item " + getPath(), t);
                     }
@@ -1718,22 +1738,6 @@ public abstract class JCRLocalCloudDrive extends CloudDrive {
       } finally {
         fileTrash.remove(fileId, confirmation);
       }
-    }
-
-    private void fixNameConflict(Node file) throws RepositoryException {
-      Session session = file.getSession();
-      Node parent = file.getParent();
-      String baseTitle = fileAPI.getTitle(file);
-      int index = 1;
-      do {
-        String newTitle = baseTitle + " (" + index++ + ")";
-        String newName = cleanName(newTitle);
-        if (!parent.hasNode(newName)) {
-          session.move(file.getPath(), parent.getPath() + "/" + newName);
-          file.setProperty("exo:title", newTitle);
-          break;
-        }
-      } while (true);
     }
 
     private void untrash(Node file) throws SkipSyncException,
@@ -2157,6 +2161,7 @@ public abstract class JCRLocalCloudDrive extends CloudDrive {
     Item target = finder.findItem(driveNode.getSession(), path); // take symlinks in account
     if (target.getPath().startsWith(driveNode.getPath())) {
       if (target.isNode()) {
+        // here we check that the node is of cloud file type
         return fileNode((Node) target) != null;
       }
     }
@@ -2487,8 +2492,7 @@ public abstract class JCRLocalCloudDrive extends CloudDrive {
 
   CloudFileSynchronizer synchronizer(Node file) throws RepositoryException,
                                                SkipSyncException,
-                                               SyncNotSupportedException,
-                                               CloudDriveException {
+                                               SyncNotSupportedException {
     for (CloudFileSynchronizer s : fileSynchronizers) {
       if (s.accept(file)) {
         return s;
@@ -2500,8 +2504,7 @@ public abstract class JCRLocalCloudDrive extends CloudDrive {
 
   CloudFileSynchronizer synchronizer(Class<?> clazz) throws RepositoryException,
                                                     SkipSyncException,
-                                                    SyncNotSupportedException,
-                                                    CloudDriveException {
+                                                    SyncNotSupportedException {
     for (CloudFileSynchronizer s : fileSynchronizers) {
       if (clazz.isAssignableFrom(s.getClass())) {
         return s;
@@ -2723,7 +2726,7 @@ public abstract class JCRLocalCloudDrive extends CloudDrive {
       if (ch.fileId != null) {
         addChanged(ch.fileId, ch.changeType);
       } else {
-        LOG.warn("Cannot save file change with null file id: " + ch.changeType + ", " + ch.getPath());
+        LOG.warn("Cannot cache file change with null file id: " + ch.changeType + ", " + ch.getPath());
       }
     }
   }
@@ -2920,7 +2923,8 @@ public abstract class JCRLocalCloudDrive extends CloudDrive {
         Item target = finder.findItem(node.getSession(), node.getPath()); // take symlinks in account
         if (target.isNode()) {
           node = (Node) target;
-          return node.getPath().startsWith(driveNode.getPath()) && fileNode(node) != null;
+          // XXX 22.05.2014 removed check: && fileNode(node) != null
+          return node.getPath().startsWith(driveNode.getPath());
         }
       }
     }
@@ -2941,7 +2945,8 @@ public abstract class JCRLocalCloudDrive extends CloudDrive {
         if (isConnected() && isSameDrive(driveNode, node)) {
           return true;
         } else if (includeFiles) {
-          return node.getPath().startsWith(driveNode.getPath()) && fileNode(node) != null;
+          // XXX 22.05.2014 removed check: && fileNode(node) != null
+          return node.getPath().startsWith(driveNode.getPath());
         }
       }
     }
@@ -3109,15 +3114,19 @@ public abstract class JCRLocalCloudDrive extends CloudDrive {
             siblingNumber++;
           }
         } else {
-          // try convert node to cloud file
-          try {
-            synchronizer(node).create(node, fileAPI);
+          // try convert this another existing local node to cloud file
+          tryCreateCloudFile(node);
+          if (fileAPI.isFile(node) && fileId.equals(fileAPI.getId(node))) {
+            // it is a required file... not possible situation in general, but can be provider specific
             break;
-          } catch (SyncNotSupportedException e) {
-            throw new CloudDriveException("Cannot create file in cloud. Another node exists in the "
-                + "drive with the same name and synchronization not supported for its nodetype ("
-                + node.getPrimaryNodeType().getName() + "): " + parentPath + "/" + name, e);
           }
+          // otherwise this node stays only local (ignored) and we need a new name for the file node
+          StringBuilder newName = new StringBuilder();
+          newName.append(cleanName);
+          newName.append('-');
+          newName.append(siblingNumber);
+          name = newName.toString();
+          siblingNumber++;
         }
       } catch (PathNotFoundException e) {
         if (internalName == null) {
@@ -3237,6 +3246,8 @@ public abstract class JCRLocalCloudDrive extends CloudDrive {
    * @param deep boolean, if <code>true</code> read nodes recursive, <code>false</code> read only direct
    *          child nodes.
    * @throws RepositoryException if JCR error happen
+   * @throws CloudDriveException
+   * @throws SkipSyncException
    */
   protected void readNodes(Node parent, Map<String, List<Node>> nodes, boolean deep) throws RepositoryException {
     for (NodeIterator niter = parent.getNodes(); niter.hasNext();) {
@@ -3253,42 +3264,16 @@ public abstract class JCRLocalCloudDrive extends CloudDrive {
           readNodes(cn, nodes, deep);
         }
       } else {
-        if (!fileAPI.isIgnored(cn)) {
-          LOG.warn("Not a cloud file detected " + cn.getPath());
+        String path = cn.getPath();
+        LOG.warn("Not a cloud file detected " + path);
+        try {
+          tryCreateCloudFile(cn);
+        } catch (CloudDriveException e) {
+          // XXX we ignore this kind of error here on nodes reading
+          LOG.warn("Error converting to cloud file " + path + ". Following error ignored: ", e);
         }
       }
     }
-  }
-
-  /**
-   * Read local node from the given parent using file title and its id.
-   * 
-   * @param parent {@link Node} parent
-   * @param title {@link String}
-   * @param id {@link String}
-   * @return {@link Node}
-   * @throws RepositoryException
-   */
-  @Deprecated
-  protected Node readNode0(Node parent, String title, String id) throws RepositoryException {
-    String name = cleanName(title);
-    try {
-      Node n = parent.getNode(name);
-      if (fileAPI.isFile(n) && id.equals(fileAPI.getId(n))) {
-        return n;
-      }
-    } catch (PathNotFoundException e) {
-    }
-
-    // will try find among childs with ending wildcard *
-    for (NodeIterator niter = parent.getNodes(name + "*"); niter.hasNext();) {
-      Node n = niter.nextNode();
-      if (fileAPI.isFile(n) && id.equals(fileAPI.getId(n))) {
-        return n;
-      }
-    }
-
-    return null;
   }
 
   /**
@@ -3545,18 +3530,6 @@ public abstract class JCRLocalCloudDrive extends CloudDrive {
   }
 
   /**
-   * Mark given file as ignored by adding ecd:ignored mixin to it.
-   * 
-   * @param file {@link Node}
-   * @throws RepositoryException
-   */
-  protected void ignoreFile(Node file) throws RepositoryException {
-    if (!file.isNodeType(ECD_IGNORED)) {
-      file.addMixin(ECD_IGNORED);
-    }
-  }
-
-  /**
    * Internal access to Cloud Drive title without throwing an Exception.
    * 
    * @return {@link String}
@@ -3627,6 +3600,99 @@ public abstract class JCRLocalCloudDrive extends CloudDrive {
   protected void configure(CloudDriveEnvironment env, Collection<CloudFileSynchronizer> synchronizers) {
     commandEnv.chain(env);
     fileSynchronizers.addAll(synchronizers);
+  }
+
+  /**
+   * Do nasty thing: remove predefined node (nodetypes) from the drive. This method doesn't check if node
+   * belongs to the drive (it assumes it does). The method also doesn't check if the node ignored (it assumes
+   * it doesn't).<br/>
+   * This method doesn't throw any exception: operation will be performed in system session and saved
+   * immediately. In case of a problem it will be logged to system log.
+   * 
+   * @param node {@link Node}
+   * @return boolean, <code>true</code> if node was removed, <code>false</code> otherwise
+   */
+  protected boolean cleanup(Node node) {
+    try {
+      // XXX hardcoded Thumbnails nodetypes
+      if (node.isNodeType(EXO_THUMBNAILS) || node.isNodeType(EXO_THUMBNAIL)) {
+        String path = node.getPath();
+        Item cleanIt = systemSession().getItem(path);
+        Node parent = cleanIt.getParent();
+        cleanIt.remove();
+        parent.save();
+        LOG.info("Not a cloud file node removed from the drive: " + path);
+        return true;
+      }
+    } catch (Throwable e) {
+      LOG.error("Error removing not a cloud file node", e);
+    }
+    return false;
+  }
+
+  /**
+   * Try create file in the cloud from local node. Method assumes this not not An attempt will be performed if
+   * this node not yet ignored
+   * and cannot be cleaned (removed). If synchronization not supported for the node type, then this node will
+   * be marked as ignored.<br/>
+   * This method designed for use when a node found in the drive and it is not a cloud file yet (e.g. in
+   * result of previous synchronization error). Such node can be found during a next sync initiated by client.
+   * 
+   * @param node {@link Node} local node, not a cloud file yet
+   * @return boolean, <code>true</code> if cloud file was successfully created, <code>false</code> otherwise
+   * @throws RepositoryException
+   * @throws CloudDriveException
+   */
+  protected boolean tryCreateCloudFile(Node node) throws RepositoryException, CloudDriveException {
+    if (!fileAPI.isIgnored(node)) {
+      if (!cleanup(node)) {
+        // try convert node to cloud file
+        // we do in a loop to handle name conflicts (by renaming this node)
+        do {
+          try {
+            // TODO this node can be just added and be already in process of file sync, but periodical drive
+            // sync invoked readNodes() in // and we are here
+            // TODO handle all CloudDriveException to do not interrupt the node(s) reading?
+            synchronizer(node).create(node, fileAPI);
+            return true;
+          } catch (SyncNotSupportedException e) {
+            String path = node.getPath();
+            LOG.warn("Cannot create file in cloud - it will be ignored: " + path + " ("
+                + node.getPrimaryNodeType().getName() + "). " + e.getMessage());
+            try {
+              node.refresh(false); // rollback possible changes
+              fileAPI.ignoreFile(node); // and ignore the node
+            } catch (Throwable t) {
+              LOG.error("Error ignoring not a cloud item " + path, t);
+            }
+            break;
+          } catch (ConflictException e) {
+            // such file already exists in the cloud - rename local to avoid conflicts
+            fixNameConflict(node);
+          } catch (SkipSyncException e) {
+            // skip this file (it can be a part of top level NT supported by the sync)
+            break;
+          }
+        } while (true);
+      }
+    }
+    return false;
+  }
+
+  private void fixNameConflict(Node file) throws RepositoryException {
+    Session session = file.getSession();
+    Node parent = file.getParent();
+    String baseTitle = fileAPI.getTitle(file);
+    int index = 1;
+    do {
+      String newTitle = baseTitle + " (" + index++ + ")";
+      String newName = cleanName(newTitle);
+      if (!parent.hasNode(newName)) {
+        session.move(file.getPath(), parent.getPath() + "/" + newName);
+        file.setProperty("exo:title", newTitle);
+        break;
+      }
+    } while (true);
   }
 
   // ============== abstract ==============

@@ -38,6 +38,7 @@ import java.util.concurrent.ExecutionException;
 
 import javax.annotation.security.RolesAllowed;
 import javax.jcr.LoginException;
+import javax.jcr.PathNotFoundException;
 import javax.jcr.RepositoryException;
 import javax.ws.rs.FormParam;
 import javax.ws.rs.GET;
@@ -229,6 +230,9 @@ public class DriveService implements ResourceContainer {
     } catch (DriveRemovedException e) {
       LOG.error("Drive removed " + workspace + ":" + path, e);
       return Response.status(Status.NOT_FOUND).entity("Drive removed.").build();
+    } catch (PathNotFoundException e) {
+      LOG.warn("Error reading file " + workspace + ":" + path + ". " + e.getMessage());
+      return Response.status(Status.NOT_FOUND).entity("Current file was removed or renamed.").build();
     } catch (RepositoryException e) {
       LOG.error("Error reading drive " + workspace + ":" + path, e);
       return Response.status(Status.INTERNAL_SERVER_ERROR)
