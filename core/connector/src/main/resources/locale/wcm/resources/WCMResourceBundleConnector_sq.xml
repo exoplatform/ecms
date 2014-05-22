@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<bundle>
+  <ContentSelector>
+    <msg>
+      <no-file-selected>crwdns6791775:0crwdne6791775:0</no-file-selected>
+    </msg>
+  </ContentSelector>
+  <RenameConnector>
+    <label>
+      <rename>crwdns6791776:0crwdne6791776:0</rename>
+      <cancel>crwdns6791777:0crwdne6791777:0</cancel>
+    </label>
+    <msg>
+      <renaming>crwdns6791778:0crwdne6791778:0</renaming>
+    </msg>
+  </RenameConnector>
+</bundle>

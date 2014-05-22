@@ -1,0 +1,389 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<bundle>
+  <!--
+  ###################### global word for ECM dialogs resoucebundle ####
+  -->
+  <Ecm>
+    <dialog>
+      <label>
+        <end-time>crwdns6793463:0crwdne6793463:0</end-time>
+        <start-time>crwdns6793464:0crwdne6793464:0</start-time>
+        <lifecycle>crwdns6793465:0crwdne6793465:0</lifecycle>
+        <mimeType>crwdns6793466:0crwdne6793466:0</mimeType>
+        <repeat-count>crwdns6793467:0crwdne6793467:0</repeat-count>
+        <time-interval>crwdns6793468:0crwdne6793468:0</time-interval>
+        <query-items>crwdns6793469:0crwdne6793469:0</query-items>
+        <schedule-type>crwdns6793470:0crwdne6793470:0</schedule-type>
+        <remove>crwdns6793471:0crwdne6793471:0</remove>
+        <add>crwdns6793472:0crwdne6793472:0</add>
+        <expand>crwdns6793473:0crwdne6793473:0</expand>
+      </label>
+    </dialog>
+  </Ecm>
+  
+  <UIDocumentForm>
+    <label>
+      <title>crwdns6793474:0{word.title}crwdne6793474:0</title>
+      <link>crwdns6793475:0crwdne6793475:0</link>
+      <contentHtml>crwdns6793476:0{word.content}crwdne6793476:0</contentHtml>
+      <content>crwdns6793477:0{word.content}crwdne6793477:0</content>
+      <contentPlain>crwdns6793478:0{word.content}crwdne6793478:0</contentPlain>
+      <name>crwdns6793479:0crwdne6793479:0</name>
+    <categories>crwdns6793480:0crwdne6793480:0</categories>
+    </label>
+  </UIDocumentForm>
+ 
+  <!--
+  ###################### resoucebundle for HTMLFile dialogs template ####
+  -->
+  <HtmlFile>
+    <dialog>
+      <label>
+        <name>crwdns6793481:0crwdne6793481:0</name>
+        <content>crwdns6793482:0crwdne6793482:0</content>
+      </label>
+    </dialog>
+  </HtmlFile>
+
+  <!--
+  ###################### resoucebundle for nt:file dialogs template ####
+  -->
+  <File>
+    <dialog>
+      <label>
+        <name>crwdns6793483:0{word.name}crwdne6793483:0</name>
+        <categories>crwdns6793484:0crwdne6793484:0</categories>
+        <mimeType>crwdns6793485:0{Ecm.dialog.label.mimeType}crwdne6793485:0</mimeType>
+        <width>crwdns6793486:0crwdne6793486:0</width>
+        <height>crwdns6793487:0crwdne6793487:0</height>
+        <content>crwdns6793488:0{word.content}crwdne6793488:0</content>
+        <re-upload>crwdns6793489:0crwdne6793489:0</re-upload>
+      </label>
+    </dialog>
+  </File>
+
+  <UIActionForm>
+    <label>
+      <description>crwdns6793490:0{word.description}crwdne6793490:0</description>
+      <port>crwdns6793491:0crwdne6793491:0</port>
+      <userName>crwdns6793492:0{word.userName}crwdne6793492:0</userName>
+      <password>crwdns6793493:0crwdne6793493:0</password>
+      <link>crwdns6793494:0crwdne6793494:0</link>
+      <to>crwdns6793495:0crwdne6793495:0</to>
+      <actionName>crwdns6793496:0{word.name}crwdne6793496:0</actionName>
+    </label>
+  </UIActionForm>
+  <EditFormAction>
+    <label>
+      <description>crwdns6793497:0{word.description}crwdne6793497:0</description>
+      <port>crwdns6793498:0crwdne6793498:0</port>
+      <userName>crwdns6793499:0{word.userName}crwdne6793499:0</userName>
+      <password>crwdns6793500:0crwdne6793500:0</password>
+      <link>crwdns6793501:0crwdne6793501:0</link>
+      <to>crwdns6793502:0crwdne6793502:0</to>
+      <actionName>crwdns6793503:0{word.name}crwdne6793503:0</actionName>
+    </label>
+  </EditFormAction>
+
+  <!--
+  ###################### resoucebundle for exo:addMetadataAction dialogs template ####
+  -->
+  <AddMetadata>
+    <dialog>
+      <label>
+        <id>crwdns6793504:0crwdne6793504:0</id>
+        <name>crwdns6793505:0{word.name}crwdne6793505:0</name>
+        <lifecycle>crwdns6793506:0{Ecm.dialog.label.lifecycle}crwdne6793506:0</lifecycle>
+        <metadata>crwdns6793507:0crwdne6793507:0</metadata>
+        <description>crwdns6793508:0{word.description}crwdne6793508:0</description>
+      </label>
+    </dialog>
+  </AddMetadata>
+
+  <!--
+  ###################### resoucebundle for exo:autoVersioning dialogs template ####
+  -->
+  <AutoVersioning>
+    <dialog>
+      <label>
+        <id>crwdns6793509:0crwdne6793509:0</id>
+        <name>crwdns6793510:0{word.name}crwdne6793510:0</name>
+        <lifecycle>crwdns6793511:0{Ecm.dialog.label.lifecycle}crwdne6793511:0</lifecycle>
+        <schedule-type>crwdns6793512:0{Ecm.dialog.label.schedule-type}crwdne6793512:0</schedule-type>
+        <start-time>crwdns6793513:0{Ecm.dialog.label.start-time}crwdne6793513:0</start-time>
+        <end-time>crwdns6793514:0{Ecm.dialog.label.end-time}crwdne6793514:0</end-time>
+        <repeat-count>crwdns6793515:0{Ecm.dialog.label.repeat-count}crwdne6793515:0</repeat-count>
+        <time-inteval>crwdns6793516:0{Ecm.dialog.label.time-interval}crwdne6793516:0</time-inteval>
+        <cron-expression>crwdns6793517:0crwdne6793517:0</cron-expression>
+        <description>crwdns6793518:0{word.description}crwdne6793518:0</description>
+      </label>
+    </dialog>
+  </AutoVersioning>
+  <!--
+  ###################### resoucebundle for exo:enableVersiong dialogs template ####
+  -->
+  <EnableVersioning>
+    <dialog>
+      <label>
+        <id>crwdns6793519:0crwdne6793519:0</id>
+        <name>crwdns6793520:0{word.name}crwdne6793520:0</name>
+        <lifecycle>crwdns6793521:0{Ecm.dialog.label.lifecycle}crwdne6793521:0</lifecycle>
+        <schedule-type>crwdns6793522:0{Ecm.dialog.label.schedule-type}crwdne6793522:0</schedule-type>
+        <start-time>crwdns6793523:0{Ecm.dialog.label.start-time}crwdne6793523:0</start-time>
+        <end-time>crwdns6793524:0{Ecm.dialog.label.end-time}crwdne6793524:0</end-time>
+        <repeat-count>crwdns6793525:0{Ecm.dialog.label.repeat-count}crwdne6793525:0</repeat-count>
+        <time-inteval>crwdns6793526:0{Ecm.dialog.label.time-interval}crwdne6793526:0</time-inteval>
+        <cron-expression>crwdns6793527:0crwdne6793527:0</cron-expression>
+        <description>crwdns6793528:0{word.description}crwdne6793528:0</description>
+      </label>
+    </dialog>
+  </EnableVersioning>
+  <!--
+  ###################### resoucebundle for dc:elementSet dialogs template ####
+  -->
+  <ElementSet>
+    <dialog>
+      <label>
+        <title>crwdns6793529:0{word.title}crwdne6793529:0</title>
+        <creator>crwdns6793530:0crwdne6793530:0</creator>
+        <subject>crwdns6793531:0{word.subject}crwdne6793531:0</subject>
+        <source>crwdns6793532:0crwdne6793532:0</source>
+        <contributor>crwdns6793533:0crwdne6793533:0</contributor>
+        <resource-type>crwdns6793534:0crwdne6793534:0</resource-type>
+        <date>crwdns6793535:0{word.date}crwdne6793535:0</date>
+        <publisher>crwdns6793536:0crwdne6793536:0</publisher>
+        <description>crwdns6793537:0{word.description}crwdne6793537:0</description>
+        <rights>crwdns6793538:0crwdne6793538:0</rights>
+        <relation>crwdns6793539:0crwdne6793539:0</relation>
+        <format>crwdns6793540:0{word.format}crwdne6793540:0</format>
+        <coverage>crwdns6793541:0crwdne6793541:0</coverage>
+        <identifier>crwdns6793542:0crwdne6793542:0</identifier>
+        <language>crwdns6793543:0crwdne6793543:0</language>
+      </label>
+    </dialog>
+  </ElementSet>
+
+  <!--
+  ###################### resoucebundle for exo:actionable dialogs template ####
+  -->
+  <Actionable>
+    <dialog>
+      <label>
+        <primary-type>crwdns6793544:0crwdne6793544:0</primary-type>
+        <mixin-types>crwdns6793545:0crwdne6793545:0</mixin-types>
+      </label>
+    </dialog>
+  </Actionable>
+
+  <!--
+  ###################### resoucebundle for exo:move dialogs template ####
+  -->
+  <Move>
+    <dialog>
+      <label>
+        <destination-workpsace>crwdns6793546:0crwdne6793546:0</destination-workpsace>
+        <destination-path>crwdns6793547:0crwdne6793547:0</destination-path>
+        <primary-type>crwdns6793548:0crwdne6793548:0</primary-type>
+        <mixin-types>crwdns6793549:0crwdne6793549:0</mixin-types>
+      </label>
+    </dialog>
+  </Move>
+  <!--
+  ###################### resoucebundle for exo:published dialogs template ####
+  -->
+  <Published>
+    <dialog>
+      <label>
+        <start-publication>crwdns6793550:0crwdne6793550:0</start-publication>
+        <end-publication>crwdns6793551:0crwdne6793551:0</end-publication>
+      </label>
+    </dialog>
+  </Published>
+ 
+  <!--
+  ###################### resoucebundle mix:referenceable dialogs template ####
+  -->
+  <Referenceable>
+    <dialog>
+      <label>
+        <uuid>crwdns6793552:0crwdne6793552:0</uuid>
+      </label>
+    </dialog>
+  </Referenceable>
+  <!--
+  ###################### resoucebundle exo:relationable dialogs template ####
+  -->
+  <Relationable>
+    <dialog>
+      <label>
+        <relation>crwdns6793553:0crwdne6793553:0</relation>
+      </label>
+    </dialog>
+  </Relationable>
+  <!--
+  ###################### resoucebundle exo:rss-enable dialogs template ####
+  -->
+  <RssEnable>
+    <dialog>
+      <label>
+        <title>crwdns6793554:0crwdne6793554:0</title>
+        <summary>crwdns6793555:0{word.summary}crwdne6793555:0</summary>
+      </label>
+    </dialog>
+  </RssEnable>
+
+  <!--
+  ###################### resoucebundle mix:versionable dialogs template ####
+  -->
+  <Versionable>
+    <dialog>
+      <label>
+        <version-history>crwdns6793556:0crwdne6793556:0</version-history>
+        <base-version>crwdns6793557:0crwdne6793557:0</base-version>
+        <is-checked-out>crwdns6793558:0crwdne6793558:0</is-checked-out>
+        <predecessors>crwdns6793559:0crwdne6793559:0</predecessors>
+        <merge-failed>crwdns6793560:0crwdne6793560:0</merge-failed>
+        <uuid>crwdns6793561:0crwdne6793561:0</uuid>
+      </label>
+    </dialog>
+  </Versionable>
+
+  <!--
+  ##################### resoucebundle for resouce container dialogs template#####
+  -->
+  <ResouceContainer>
+    <dialog>
+      <label>
+        <name>crwdns6793562:0crwdne6793562:0</name>
+        <autoload>crwdns6793563:0crwdne6793563:0</autoload>
+        <minetype>crwdns6793564:0crwdne6793564:0</minetype>
+        <content>crwdns6793565:0crwdne6793565:0</content>
+      </label>
+    </dialog>
+  </ResouceContainer>
+  <!--
+  ###################### resoucebundle for validator ####
+  -->
+  <EmailAddressValidator>
+    <msg>
+      <Invalid-input>crwdns6793566:0crwdne6793566:0</Invalid-input>
+    </msg>
+  </EmailAddressValidator>
+  <EmptyFieldValidator>
+    <msg>
+      <empty-input>crwdns6793567:0{0}crwdne6793567:0</empty-input>
+    </msg>
+  </EmptyFieldValidator>
+  <NumberFormatValidator>
+    <msg>
+      <Invalid-number>crwdns6793568:0{0}crwdne6793568:0</Invalid-number>
+    </msg>
+  </NumberFormatValidator>
+  <!--
+  #####Since version 2.4#######
+
+  ###################### resoucebundle exo:taxonomyAction dialogs template ####
+  -->
+  <ScriptAction>
+    <dialog>
+      <label>
+        <id>crwdns6793569:0crwdne6793569:0</id>
+        <name>crwdns6793570:0crwdne6793570:0</name>
+        <lifecycle>crwdns6793571:0crwdne6793571:0</lifecycle>
+        <homePath>crwdns6793572:0crwdne6793572:0</homePath>
+        <targetWorkspace>crwdns6793573:0crwdne6793573:0</targetWorkspace>
+        <targetPath>crwdns6793574:0crwdne6793574:0</targetPath>
+      </label>
+    </dialog>
+  </ScriptAction>
+  <UIDialogForm>
+   <form>
+   <DialogFormException>crwdns6793575:0crwdne6793575:0</DialogFormException>
+   </form>
+  </UIDialogForm>
+
+  <!--
+  #####Since version 2.6#######
+
+  ###################### resoucebundle exo:taxonomyAction dialogs template ####
+  -->
+<no>crwdns6793576:0crwdne6793576:0</no>
+<yes>crwdns6793577:0crwdne6793577:0</yes>
+<true>crwdns6793578:0crwdne6793578:0</true>
+<false>crwdns6793579:0crwdne6793579:0</false>
+<Electronic>crwdns6793580:0crwdne6793580:0</Electronic>
+<Paper>crwdns6793581:0crwdne6793581:0</Paper>
+<NONE>crwdns6793582:0crwdne6793582:0</NONE>
+<CLASSIFIED>crwdns6793583:0crwdne6793583:0</CLASSIFIED>
+<UNCLASSIFIED>crwdns6793584:0crwdne6793584:0</UNCLASSIFIED>
+<NOCONTRACT>crwdns6793585:0crwdne6793585:0</NOCONTRACT>
+<one-minute>crwdns6793586:0crwdne6793586:0</one-minute>
+<hourly>crwdns6793587:0crwdne6793587:0</hourly>
+<daily>crwdns6793588:0crwdne6793588:0</daily>
+<quarterly>crwdns6793589:0crwdne6793589:0</quarterly>
+<yearly>crwdns6793590:0crwdne6793590:0</yearly>
+<ten-years>crwdns6793591:0crwdne6793591:0</ten-years>
+<read>crwdns6793592:0crwdne6793592:0</read>
+  <schedule>crwdns6793593:0crwdne6793593:0</schedule>
+  <node_added>crwdns6793594:0crwdne6793594:0</node_added>
+  <node_removed>crwdns6793595:0crwdne6793595:0</node_removed>
+  <property_added>crwdns6793596:0crwdne6793596:0</property_added>
+  <property_removed>crwdns6793597:0crwdne6793597:0</property_removed>
+  <property_changed>crwdns6793598:0crwdne6793598:0</property_changed>
+
+  <ScriptAction>
+    <dialog>
+      <label>
+        <isDeep>crwdns6793599:0crwdne6793599:0</isDeep>
+        <nodetypes>crwdns6793600:0crwdne6793600:0</nodetypes>
+        <affectedNodeTypeNames>crwdns6793601:0crwdne6793601:0</affectedNodeTypeNames>
+      </label>
+    </dialog>
+  </ScriptAction>
+
+  <AddMetadata>
+    <dialog>
+      <label>
+        <isDeep>crwdns6793602:0crwdne6793602:0</isDeep>
+        <nodetypes>crwdns6793603:0crwdne6793603:0</nodetypes>
+        <affectedNodeTypeNames>crwdns6793604:0crwdne6793604:0</affectedNodeTypeNames>
+      </label>
+    </dialog>
+  </AddMetadata>
+
+  <EnableVersioning>
+    <dialog>
+      <label>
+        <isDeep>crwdns6793605:0crwdne6793605:0</isDeep>
+        <nodetypes>crwdns6793606:0crwdne6793606:0</nodetypes>
+        <affectedNodeTypeNames>crwdns6793607:0crwdne6793607:0</affectedNodeTypeNames>
+      </label>
+    </dialog>
+  </EnableVersioning>
+  
+  <AutoVersioning>
+    <dialog>
+      <label>
+        <isDeep>crwdns6793608:0crwdne6793608:0</isDeep>
+        <nodetypes>crwdns6793609:0crwdne6793609:0</nodetypes>
+        <affectedNodeTypeNames>crwdns6793610:0crwdne6793610:0</affectedNodeTypeNames>
+      </label>
+    </dialog>
+  </AutoVersioning>
+
+  <AccessibleMedia>
+  <dialog>
+  <label>
+  <captions>crwdns6793611:0crwdne6793611:0</captions>
+<audioDescription>crwdns6793612:0crwdne6793612:0</audioDescription>
+<alternativeText>crwdns6793613:0crwdne6793613:0</alternativeText>
+</label>
+</dialog>
+<help>
+<CaptionsHelp>crwdns6793614:0crwdne6793614:0</CaptionsHelp>
+<AudioDescriptionHelp>crwdns6793615:0crwdne6793615:0</AudioDescriptionHelp>
+<AlternativeTextHelp>crwdns6793616:0crwdne6793616:0</AlternativeTextHelp>
+</help>
+</AccessibleMedia>
+  
+</bundle>

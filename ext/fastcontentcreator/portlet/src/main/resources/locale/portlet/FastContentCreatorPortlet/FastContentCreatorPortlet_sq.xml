@@ -1,0 +1,197 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<bundle>
+  <UIFCCForm>
+    <msg>
+      <name-not-allowed>crwdns6793382:0crwdne6793382:0</name-not-allowed>
+      <in-versioning>crwdns6793383:0crwdne6793383:0</in-versioning>
+      <cannot-save>crwdns6793384:0crwdne6793384:0</cannot-save>
+      <saved-successfully>crwdns6793385:0{0}crwdne6793385:0</saved-successfully>
+      <not-support>crwdns6793386:0{0}crwdne6793386:0</not-support>
+      <not-add-folder>crwdns6793387:0crwdne6793387:0</not-add-folder>
+      <access-denied>crwdns6793388:0{0}crwdne6793388:0</access-denied>
+      <path-not-found>crwdns6793389:0{0}crwdne6793389:0</path-not-found>
+      <node-locked>crwdns6793390:0{0}crwdne6793390:0</node-locked>
+      <node-isExist>crwdns6793391:0{0}crwdne6793391:0</node-isExist>
+      <get-dialog-path>crwdns6793392:0crwdne6793392:0</get-dialog-path>
+      <new-jcr-template>crwdns6793393:0crwdne6793393:0</new-jcr-template>
+    </msg>
+    <action>
+      <Save>crwdns6793394:0{word.save}crwdne6793394:0</Save>
+      <Cancel>crwdns6793395:0{word.cancel}crwdne6793395:0</Cancel>
+    </action>
+  </UIFCCForm>
+
+  <UIFCCConfig>
+    <label>
+      <UIFCCSaveLocationField>crwdns6793396:0crwdne6793396:0</UIFCCSaveLocationField>
+      <UIFCCWorkspaceFormSelectBox>crwdns6793397:0crwdne6793397:0</UIFCCWorkspaceFormSelectBox>
+      <UIFCCTemplateField>crwdns6793398:0crwdne6793398:0</UIFCCTemplateField>
+      <UIFCCLocationFormInputAction>crwdns6793399:0crwdne6793399:0</UIFCCLocationFormInputAction>
+      <UIFCCTemplateFormSelectBox>crwdns6793400:0crwdne6793400:0</UIFCCTemplateFormSelectBox>
+      <UIFCCSaveFormStringInput>crwdns6793401:0crwdne6793401:0</UIFCCSaveFormStringInput>
+      <UIFCCMessageFormTextareaInput>crwdns6793402:0crwdne6793402:0</UIFCCMessageFormTextareaInput>
+      <UIFCCRedirectFormCheckboxInput>crwdns6793403:0crwdne6793403:0</UIFCCRedirectFormCheckboxInput>
+      <UIFCCRedirectPathFormStringInput>crwdns6793404:0crwdne6793404:0</UIFCCRedirectPathFormStringInput>
+      <UIFCCActionField>crwdns6793405:0crwdne6793405:0</UIFCCActionField>
+    </label>
+    <msg>
+      <save-successfully>crwdns6793406:0crwdne6793406:0</save-successfully>
+      <item-not-found>crwdns6793407:0crwdne6793407:0</item-not-found>
+      <fileType-empty>crwdns6793408:0crwdne6793408:0</fileType-empty>
+      <ws-empty>crwdns6793409:0crwdne6793409:0</ws-empty>
+      <action-empty>crwdns6793410:0crwdne6793410:0</action-empty>
+      <message-empty>crwdns6793411:0crwdne6793411:0</message-empty>
+      <get-template>crwdns6793412:0crwdne6793412:0</get-template>
+      <set-template-option>crwdns6793413:0crwdne6793413:0</set-template-option>
+      <do-select>crwdns6793414:0crwdne6793414:0</do-select>
+      </msg>
+    <action>
+      <Save>crwdns6793415:0{word.save}crwdne6793415:0</Save>
+    </action>
+  </UIFCCConfig>
+
+  <UIFCCLocationFormInputAction>
+    <title>
+      <SelectPath>crwdns6793416:0crwdne6793416:0</SelectPath>
+    </title>
+  </UIFCCLocationFormInputAction>
+
+  <UIFCCActionList>
+    <header>
+      <name>crwdns6793417:0crwdne6793417:0</name>
+      <description>crwdns6793418:0crwdne6793418:0</description>
+      <instanceOf>crwdns6793419:0crwdne6793419:0</instanceOf>
+      <action>crwdns6793420:0crwdne6793420:0</action>
+    </header>
+    <action>
+      <Add>crwdns6793421:0crwdne6793421:0</Add>
+    </action>
+    <msg>
+      <empty>crwdns6793422:0crwdne6793422:0</empty>
+      <remove-popup-first>crwdns6793423:0crwdne6793423:0</remove-popup-first>
+      <confirm-delete-action>crwdns6793424:0crwdne6793424:0</confirm-delete-action>
+      <template-empty>crwdns6793425:0{0}crwdne6793425:0</template-empty>
+      <template-null>crwdns6793426:0crwdne6793426:0</template-null>
+      <access-denied>crwdns6793427:0crwdne6793427:0</access-denied>
+    </msg>
+  </UIFCCActionList>
+
+  <UIFCCSelectorPopupWindow>
+    <title>
+      <UIOneNodePathSelector>crwdns6793428:0crwdne6793428:0</UIOneNodePathSelector>
+    </title>
+  </UIFCCSelectorPopupWindow>
+
+  <UIWorkspaceList>
+    <label>
+      <workspaceName>crwdns6793429:0crwdne6793429:0</workspaceName>
+      <rootNodePath>crwdns6793430:0crwdne6793430:0</rootNodePath>
+      <rootNodeInfo>crwdns6793431:0crwdne6793431:0</rootNodeInfo>
+    </label>
+  </UIWorkspaceList>
+
+  <rootNodeInfo>
+    <title>
+      <AddRootNode>crwdns6793432:0crwdne6793432:0</AddRootNode>
+    </title>
+  </rootNodeInfo>
+
+  <UITreeList>
+    <info>
+      <child-not-found>crwdns6793433:0crwdne6793433:0</child-not-found>
+    </info>
+    <header>
+      <name>crwdns6793434:0crwdne6793434:0</name>
+      <action>crwdns6793435:0crwdne6793435:0</action>
+    </header>
+  </UITreeList>
+
+  <UIFCCActionPopupWindow>
+    <title>
+      <UIFCCActionContainer>crwdns6793436:0crwdne6793436:0</UIFCCActionContainer>
+    </title>
+  </UIFCCActionPopupWindow>
+
+  <UIFCCActionForm>
+    <title>crwdns6793437:0crwdne6793437:0</title>
+    <action>
+      <Save>crwdns6793438:0{word.save}crwdne6793438:0</Save>
+      <Close>crwdns6793439:0{word.close}crwdne6793439:0</Close>
+    </action>
+    <msg>
+      <repository-exception>crwdns6793440:0crwdne6793440:0</repository-exception>
+      <numberformat-exception>crwdns6793441:0crwdne6793441:0</numberformat-exception>
+      <existed-action>crwdns6793442:0{0}crwdne6793442:0</existed-action>
+      <unable-add-action>crwdns6793443:0crwdne6793443:0</unable-add-action>
+      <unable-add>crwdns6793444:0crwdne6793444:0</unable-add>
+      <not-support>crwdns6793445:0{0}crwdne6793445:0</not-support>
+      <no-permission-add>crwdns6793446:0crwdne6793446:0</no-permission-add>
+      <access-denied>crwdns6793447:0crwdne6793447:0</access-denied>
+    </msg>
+    <validator>
+      <validator>crwdns6793448:0crwdne6793448:0</validator>
+      <destPath>crwdns6793449:0crwdne6793449:0</destPath>
+    </validator>
+  </UIFCCActionForm>
+
+  <UIFCCActionTypeForm>
+    <label>
+      <actionType>crwdns6793450:0crwdne6793450:0</actionType>
+    </label>
+    <msg>
+      <not-support>crwdns6793451:0{0}crwdne6793451:0</not-support>
+      <do-not-permission>crwdns6793452:0{0}crwdne6793452:0</do-not-permission>
+    </msg>
+  </UIFCCActionTypeForm>
+
+  <PopupComponent>
+    <title>
+      <UIOneNodePathSelector>crwdns6793453:0crwdne6793453:0</UIOneNodePathSelector>
+      <UIPermissionSelector>crwdns6793454:0crwdne6793454:0</UIPermissionSelector>
+      <UICategoriesSelector>crwdns6793455:0crwdne6793455:0</UICategoriesSelector>
+    </title>
+  </PopupComponent>
+
+  <DateTimeValidator>
+    <msg>
+      <Invalid-input>crwdns6793456:0{0}crwdnd6793456:0{1}crwdne6793456:0</Invalid-input>
+    </msg>
+  </DateTimeValidator>
+
+  <UITabPane>
+    <title>
+      <UICategoriesSelectPanel>crwdns6793457:0crwdne6793457:0</UICategoriesSelectPanel>
+      <UISelectedCategoriesGrid>crwdns6793458:0crwdne6793458:0</UISelectedCategoriesGrid>
+    </title>
+  </UITabPane>
+
+  <PopupComponent>
+    <title>
+      <UICategoriesSelector>Add Categories</UICategoriesSelector>
+    </title>
+  </PopupComponent>
+
+  <UICategoriesSelector>
+    <action>
+      <close>crwdns6793459:0{word.close}crwdne6793459:0</close>
+    </action>
+  </UICategoriesSelector>
+
+  <PopupComponent>
+    <title>
+      <UIOneTaxonomySelector>crwdns6793460:0crwdne6793460:0</UIOneTaxonomySelector>
+    </title>
+  </PopupComponent>
+
+  <UITreeTaxonomyList>
+    <label>
+      <taxonomyTree>crwdns6793461:0crwdne6793461:0</taxonomyTree>
+    </label>
+  </UITreeTaxonomyList>
+
+  <UIFCCTaxonomyPopupWindow>
+    <title>
+      <UIOneTaxonomySelector>crwdns6793462:0crwdne6793462:0</UIOneTaxonomySelector>
+    </title>
+  </UIFCCTaxonomyPopupWindow>
+</bundle>
