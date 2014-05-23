@@ -829,6 +829,7 @@ public class UICLVPresentation extends UIContainer {
       String itemPath = event.getRequestContext().getRequestParameter(OBJECTID);
       Node node = NodeLocation.getNodeByExpression(itemPath);
       Node parent = node.getParent();
+      org.exoplatform.services.cms.impl.Utils.removeDeadSymlinks(node, false);
       node.remove();
       parent.getSession().save();
       event.getRequestContext().addUIComponentToUpdateByAjax(contentListPresentation);
