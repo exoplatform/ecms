@@ -28,6 +28,8 @@ import java.io.InputStream;
 import javax.jcr.Node;
 
 /**
+ * TODO not finished! not used.
+ * 
  * Created by The eXo Platform SAS
  * 
  * @author <a href="mailto:pnedonosko@exoplatform.com">Peter Nedonosko</a>
