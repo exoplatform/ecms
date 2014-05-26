@@ -306,9 +306,6 @@ public class UIViewSearchResult extends UIBaseNodePresentation {
   }
 
   public String getImage(Node node, String nodeTypeName) throws Exception {
-    if (nodeTypeName.equals(Utils.JCR_CONTENT)) {
-      return Utils.getDownloadRestServiceLink(node);
-    }
     DownloadService dservice = getApplicationComponent(DownloadService.class) ;
     InputStreamDownloadResource dresource ;
     Node imageNode = node.getNode(nodeTypeName) ;
