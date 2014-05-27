@@ -17,6 +17,7 @@
 package org.exoplatform.ecm.webui.utils;
 
 import java.io.InputStream;
+import java.net.URLEncoder;
 import java.text.DecimalFormat;
 import java.util.ArrayList;
 import java.util.Comparator;
@@ -51,6 +52,7 @@ import org.apache.commons.lang.StringUtils;
 import org.exoplatform.container.ExoContainer;
 import org.exoplatform.container.ExoContainerContext;
 import org.exoplatform.container.definition.PortalContainerConfig;
+import org.exoplatform.container.xml.PortalContainerInfo;
 import org.exoplatform.download.DownloadService;
 import org.exoplatform.download.InputStreamDownloadResource;
 import org.exoplatform.portal.webui.util.Util;
@@ -978,6 +980,36 @@ public class Utils {
       if (cookie1.getName().equals(cookieName)) return cookie1.getValue();
     }
     return null;
+  }
+  
+  /**
+   *
+   * @param     :  node: nt:file node with have the data stream
+   * @return    :  Link to download the jcr:data of the given node
+   * @throws       Exception
+   */
+  public static String getDownloadRestServiceLink(Node node) throws Exception{
+    ExoContainer container = ExoContainerContext.getCurrentContainer() ;
+    PortalContainerInfo containerInfo = (PortalContainerInfo)container.
+        getComponentInstanceOfType(PortalContainerInfo.class) ;
+    String portalName = containerInfo.getContainerName() ;
+    PortalContainerConfig portalContainerConfig = (PortalContainerConfig) container.
+        getComponentInstance(PortalContainerConfig.class);
+    String restContextName = portalContainerConfig.getRestContextName(portalName);
+    StringBuilder sb = new StringBuilder();
+    Node currentNode = org.exoplatform.wcm.webui.Utils.getRealNode(node);
+    String ndPath = currentNode.getPath();
+    if (ndPath.startsWith("/")) {
+      ndPath = ndPath.substring(1);
+    }
+    String encodedPath = URLEncoder.encode(ndPath, "utf-8");
+    encodedPath = encodedPath.replaceAll ("%2F", "/"); //we won't encode the slash characters in the path
+    sb.append("/").append(restContextName).append("/contents/download/");
+    sb.append(currentNode.getSession().getWorkspace().getName()).append("/").append(encodedPath);
+    if (node.isNodeType("nt:frozenNode")) {
+      sb.append("?version=" + node.getParent().getName());
+   }
+    return sb.toString();
   }
 
   /**
