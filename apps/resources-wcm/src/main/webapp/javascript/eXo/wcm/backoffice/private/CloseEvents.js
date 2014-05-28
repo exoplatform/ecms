@@ -82,7 +82,7 @@
 	    }
 	  }
 	 } catch(e) {}
-	
+	 form.elements['formOp'].value = action ;
 	 try {
 	  
 	  if (CKEDITOR && typeof CKEDITOR == "object") {
@@ -93,6 +93,7 @@
 	        if (oEditor && document.getElementById(name)) {
 	            var rendered = gj(document.getElementById(name)).nextAll('span:first')[0].id.indexOf('cke');
 	            if (rendered == 0) document.getElementById(name).value = oEditor.getData();
+	            if (action.toLowerCase() == "saveandclose" || action.toLowerCase() == "close") oEditor.destroy();
 	        }
 	      } catch(e) {
 	        continue ;

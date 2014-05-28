@@ -89,7 +89,7 @@
       var tagName = this.$element.val() || ''
       //This line used for separating the keywords for lookup in case user want to add multi tags
       if(tagName.lastIndexOf(",") >= 0) tagName = tagName.substring(tagName.lastIndexOf(",") + 1, tagName.length);  
-      tagName = tagName.trim();                
+      tagName = $.trim(tagName);                
       this.query = tagName;
       //Remove condition 
       if (this.query.length < this.options.minLength) {
