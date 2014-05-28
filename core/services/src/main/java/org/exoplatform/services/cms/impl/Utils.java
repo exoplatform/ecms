@@ -325,7 +325,7 @@ public class Utils {
         }
       }
     }
-    if (title == null) {
+    if (StringUtils.isBlank(title)) {
       if (node.isNodeType("nt:frozenNode")) {
         String uuid = node.getProperty("jcr:frozenUuid").getString();
         Node originalNode = node.getSession().getNodeByUUID(uuid);
@@ -333,7 +333,6 @@ public class Utils {
       } else {
         title = node.getName();
       }
-
     }
     return StringEscapeUtils.escapeHtml(Text.unescapeIllegalJcrChars(title));
   }
