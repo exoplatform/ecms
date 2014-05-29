@@ -60,29 +60,23 @@ public class CloudDriveContext {
    * @param workspace {@link String}
    * @param nodePath {@link String}
    * @param provider {@link CloudProvider} optional, if <code>null</code> then any provider will be assumed
-   * @return boolean <code>true</code> if request successfully initialized, <code>false</code> if request
-   *         already
-   *         initialized
    * @throws CloudDriveException if cannot auth url from the provider
    */
-  public static boolean init(RequestContext requestContext,
+  public static void init(RequestContext requestContext,
                              String workspace,
                              String nodePath,
                              CloudProvider provider) throws CloudDriveException {
+    
     Object obj = requestContext.getAttribute(JAVASCRIPT);
+    CloudDriveContext context;
     if (obj == null) {
-      CloudDriveContext context = new CloudDriveContext(requestContext);
+      context = new CloudDriveContext(requestContext);
 
       CloudDriveFeatures features = WCMCoreUtils.getService(CloudDriveFeatures.class);
       // init cloud drive if we can connect to this user
       if (features.canCreateDrive(workspace, nodePath, requestContext.getRemoteUser(), provider)) {
         context.init(workspace, nodePath);
       } // else, drive will be not initialized - thus not able to connect
-
-      if (provider != null) {
-        // add provider's default params
-        context.addProvider(provider);
-      }
 
       Map<String, String> contextMessages = messages.get();
       if (contextMessages != null) {
@@ -93,12 +87,16 @@ public class CloudDriveContext {
       }
 
       requestContext.setAttribute(JAVASCRIPT, context);
-      return true;
     } else {
       if (LOG.isDebugEnabled()) {
         LOG.debug("Request context already initialized");
       }
-      return false;
+      context = (CloudDriveContext) obj;
+    }
+    
+    if (provider != null) {
+      // add provider's default params
+      context.addProvider(provider);
     }
   }
 
@@ -108,12 +106,10 @@ public class CloudDriveContext {
    * @param requestContext {@link RequestContext}
    * @param workspace {@link String}
    * @param nodePath {@link String}
-   * @return boolean <code>true</code> if request successfully initialized, <code>false</code> if request
-   *         already initialized
    * @throws CloudDriveException if cannot auth url from the provider
    */
-  public static boolean init(RequestContext requestContext, String workspace, String nodePath) throws CloudDriveException {
-    return init(requestContext, workspace, nodePath, null);
+  public static void init(RequestContext requestContext, String workspace, String nodePath) throws CloudDriveException {
+     init(requestContext, workspace, nodePath, null);
   }
 
   /**

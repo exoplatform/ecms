@@ -19,6 +19,7 @@
 package org.exoplatform.clouddrive.ecms;
 
 import org.exoplatform.clouddrive.CloudDriveService;
+import org.exoplatform.clouddrive.CloudProvider;
 import org.exoplatform.clouddrive.ProviderNotAvailableException;
 import org.exoplatform.ecm.webui.component.explorer.control.listener.UIActionBarActionListener;
 import org.exoplatform.services.log.ExoLogger;
@@ -55,11 +56,12 @@ public class ConnectGoogleDriveActionComponent extends BaseCloudDriveManagerComp
     if (drivesService != null) {
       try {
         // XXX gdrive - Google Drive id from configuration
-        initContext(drivesService.getProvider("gdrive"));
+        CloudProvider provider = drivesService.getProvider("gdrive");
+        initContext(provider);
 
         // XXX do workaround here, need point an id of the provider for this Connect component
         // this could be better to do by HTML attribute, but we cannot do this for the moment
-        return "javascript:void(0);//objectId";
+        return "javascript:void(0);//" + provider.getId() + "//objectId";
       } catch (ProviderNotAvailableException e) {
         // if no such provider, cannot do anything - default link
         LOG.error("Error rendering Connect to Google Drive component: " + e.getMessage());

@@ -19,6 +19,7 @@
 package org.exoplatform.clouddrive.ecms;
 
 import org.exoplatform.clouddrive.CloudDriveService;
+import org.exoplatform.clouddrive.CloudProvider;
 import org.exoplatform.clouddrive.ProviderNotAvailableException;
 import org.exoplatform.ecm.webui.component.explorer.control.listener.UIActionBarActionListener;
 import org.exoplatform.services.log.ExoLogger;
@@ -31,7 +32,8 @@ import org.exoplatform.webui.event.Event;
 
 @ComponentConfig(
                  events = { @EventConfig(listeners = ConnectBoxActionComponent.ConnectBoxActionListener.class) })
-public class ConnectBoxActionComponent extends BaseCloudDriveManagerComponent implements CloudDriveUIMenuAction {
+public class ConnectBoxActionComponent extends BaseCloudDriveManagerComponent implements
+    CloudDriveUIMenuAction {
 
   protected static final Log LOG = ExoLogger.getLogger(ConnectBoxActionComponent.class);
 
@@ -51,11 +53,12 @@ public class ConnectBoxActionComponent extends BaseCloudDriveManagerComponent im
     if (drivesService != null) {
       try {
         // XXX box - Box id from configuration
-        initContext(drivesService.getProvider("box"));
+        CloudProvider provider = drivesService.getProvider("box");
+        initContext(provider);
 
         // XXX do workaround here, need point an id of the provider for this Connect component
         // this could be better to do by HTML attribute, but we cannot do this for the moment
-        return "javascript:void(0);//objectId";
+        return "javascript:void(0);//" + provider.getId() + "//objectId";
       } catch (ProviderNotAvailableException e) {
         // if no such provider, cannot do anything - default link
         LOG.error("Error rendering Connect to Box component: " + e.getMessage());
