@@ -129,7 +129,7 @@
     <title>Trình duyệt</title>
     <label>
       <Root>Gốc</Root>
-      <webDavView>Mở bằng MS Office</webDavView>
+      <webDavView>Download and allow edition</webDavView>
     </label>
     <msg>
       <path-not-found>Thành phần này đã bị xóa hoặc thay đổi. Hãy nhấp nút Làm mới.</path-not-found>
@@ -591,7 +591,7 @@
       <MoveToTrash>Chuyển vào Thư mục Rác</MoveToTrash>
       <RestoreFromTrash>Khôi phục từ Thư mục Rác</RestoreFromTrash>
       <EmptyTrash>Xóa sạch Thư mục Rác?</EmptyTrash>
-      <WebDavView>Mở bằng MS Office</WebDavView>
+      <WebDavView>Download and allow edition</WebDavView>
     </event>
   </ECMContextMenu>
  

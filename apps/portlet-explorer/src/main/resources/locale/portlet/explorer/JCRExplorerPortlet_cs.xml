@@ -129,7 +129,7 @@
     <title>Průzkumník</title>
     <label>
       <Root>Kořen</Root>
-      <webDavView>Otevřít v MS Office</webDavView>
+      <webDavView>Download and allow edition</webDavView>
     </label>
     <msg>
       <path-not-found>Tento prvek byl odstraněn nebo změněn. Prosím klikněte na tlačítko Obnovit.</path-not-found>
@@ -591,7 +591,7 @@
       <MoveToTrash>Přesunout do koše</MoveToTrash>
       <RestoreFromTrash>Obnovit z koše</RestoreFromTrash>
       <EmptyTrash>Vysypat koš</EmptyTrash>
-      <WebDavView>Otevřít v MS Office</WebDavView>
+      <WebDavView>Download and allow edition</WebDavView>
     </event>
   </ECMContextMenu>
  

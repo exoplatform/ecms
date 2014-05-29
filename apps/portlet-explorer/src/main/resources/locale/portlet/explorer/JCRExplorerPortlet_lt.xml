@@ -129,7 +129,7 @@
     <title>Naršyklė</title>
     <label>
       <Root>Šaknis</Root>
-      <webDavView>Atidaryti su MS Office</webDavView>
+      <webDavView>Download and allow edition</webDavView>
     </label>
     <msg>
       <path-not-found>Šis elementas buvo ištrintas arba pakeistas. Spustelėkite mygtuką atnaujinti.</path-not-found>
@@ -591,7 +591,7 @@
       <MoveToTrash>Perkelti į šiukšliadėžę</MoveToTrash>
       <RestoreFromTrash>Atkurti iš šiukšliadėžės</RestoreFromTrash>
       <EmptyTrash>Išvalyti šiukšliadėžę</EmptyTrash>
-      <WebDavView>Atidaryti su MS Office</WebDavView>
+      <WebDavView>Download and allow edition</WebDavView>
     </event>
   </ECMContextMenu>
  

@@ -129,7 +129,7 @@
     <title>Explorer</title>
     <label>
       <Root>Корень</Root>
-      <webDavView>Открыть в MS Office</webDavView>
+      <webDavView>Загрузить и разрешить редактирование</webDavView>
     </label>
     <msg>
       <path-not-found>Этот элемент был удален или изменен. Пожалуйста, нажмите кнопку Обновить.</path-not-found>
@@ -591,7 +591,7 @@
       <MoveToTrash>Переместить в корзину</MoveToTrash>
       <RestoreFromTrash>Восстановить из корзины</RestoreFromTrash>
       <EmptyTrash>Очистить Корзину</EmptyTrash>
-      <WebDavView>Открыть в MS Office</WebDavView>
+      <WebDavView>Загрузить и разрешить редактирование</WebDavView>
     </event>
   </ECMContextMenu>
  

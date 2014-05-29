@@ -129,7 +129,7 @@
     <title>資源管理器</title>
     <label>
       <Root>根</Root>
-      <webDavView>在 MS Office 中打開</webDavView>
+      <webDavView>Download and allow edition</webDavView>
     </label>
     <msg>
       <path-not-found>此元素被刪除或更改。請按一下刷新按鈕。</path-not-found>
@@ -591,7 +591,7 @@
       <MoveToTrash>移到垃圾桶</MoveToTrash>
       <RestoreFromTrash>從垃圾桶中還原</RestoreFromTrash>
       <EmptyTrash>清空垃圾桶</EmptyTrash>
-      <WebDavView>在 MS Office 中打開</WebDavView>
+      <WebDavView>Download and allow edition</WebDavView>
     </event>
   </ECMContextMenu>
  

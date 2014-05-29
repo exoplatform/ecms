@@ -129,7 +129,7 @@
     <title>Explorer</title>
     <label>
       <Root>Root</Root>
-      <webDavView>Apra in MS Office</webDavView>
+      <webDavView>Download and allow edition</webDavView>
     </label>
     <msg>
       <path-not-found>Elemento cancellato o modificato. Clicca il bottone Aggiorna.</path-not-found>
@@ -591,7 +591,7 @@
       <MoveToTrash>Sposta nel Cestino</MoveToTrash>
       <RestoreFromTrash>Ripristina dal Cestino</RestoreFromTrash>
       <EmptyTrash>Svuota Cestino</EmptyTrash>
-      <WebDavView>Apra in MS Office</WebDavView>
+      <WebDavView>Download and allow edition</WebDavView>
     </event>
   </ECMContextMenu>
  

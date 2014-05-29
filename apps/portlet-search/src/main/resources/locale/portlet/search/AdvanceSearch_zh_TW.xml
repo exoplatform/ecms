@@ -33,7 +33,7 @@
       <edit>編輯</edit>
     </action>
     <msg>
-      <search-not-match-type>Your search {0} does not match any {1}.</search-not-match-type>
+      <search-not-match-type>您的搜尋 {0} 無法配對任何 {1}.</search-not-match-type>
     </msg>
   </UIDefaultSearchResult>
   <UISearchPageLayoutManager>

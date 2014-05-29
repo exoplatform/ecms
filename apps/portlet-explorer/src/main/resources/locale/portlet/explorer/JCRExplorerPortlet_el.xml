@@ -129,7 +129,7 @@
     <title>Περιηγητής</title>
     <label>
       <Root>Ρίζα</Root>
-      <webDavView>Άνοιγμα στο Office</webDavView>
+      <webDavView>Download and allow edition</webDavView>
     </label>
     <msg>
       <path-not-found>Αυτό το στοιχείο έχει διαγραφεί ή έχει αλλάξει. Παρακαλώ κάντε κλικ στο κουμπί Ανανέωση.</path-not-found>
@@ -591,7 +591,7 @@
       <MoveToTrash>Μετακίνηση στον κάδο απορριμμάτων</MoveToTrash>
       <RestoreFromTrash>Επαναφορά από κάδο</RestoreFromTrash>
       <EmptyTrash>Άδειασμα κάδου διαγραμμένων</EmptyTrash>
-      <WebDavView>Άνοιγμα στο Office</WebDavView>
+      <WebDavView>Download and allow edition</WebDavView>
     </event>
   </ECMContextMenu>
  

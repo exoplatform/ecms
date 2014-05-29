@@ -129,7 +129,7 @@
     <title>Gezgin</title>
     <label>
       <Root>Kök</Root>
-      <webDavView>MS Office de Aç</webDavView>
+      <webDavView>Download and allow edition</webDavView>
     </label>
     <msg>
       <path-not-found>Bu öğe silinmiş veya değişmiş. Lütfen Yenile düğmesini tıklayın.</path-not-found>
@@ -591,7 +591,7 @@
       <MoveToTrash>Çöp Kutusu'na Taşıyın</MoveToTrash>
       <RestoreFromTrash>Çöp kutusundan geri yükleyin</RestoreFromTrash>
       <EmptyTrash>Çöpü Boşalt</EmptyTrash>
-      <WebDavView>MS Office de Aç</WebDavView>
+      <WebDavView>Download and allow edition</WebDavView>
     </event>
   </ECMContextMenu>
  
