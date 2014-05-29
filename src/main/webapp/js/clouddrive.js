@@ -6,8 +6,12 @@
 	function CloudDrive() {
 		var prefixUrl = utils.pageBaseUrl(location);
 
-		var contextNode; // for Node's workspace and path
+		// Node workspace and path currently open in ECMS explorer view
+		var currentNode; 
+		// Node workspace and path currently selected in ECMS explorer (currently open or clicked in context menu)
+		var contextNode; 
 		var connectProvider = {}; // for Provider's id and authUrl
+		// Cloud Drive associated with current context node
 		var contextDrive;
 		var excluded = {};
 		var updateProvider;
@@ -375,35 +379,26 @@
 			var serviceUrl = checkUrl;
 			// if Accepted start Interval to wait for Created
 			var intervalId = setInterval(function() {
-				// use serviceUrl to check until 201/200 will be
-				// returned or an error
+				// use serviceUrl to check until 201/200 will be returned or an error
 				var check = serviceGet(serviceUrl);
 				check.done(function(state, status) {
 					if (status == "204") {
-						// No content - not a cloud drive or
-						// drive not connected, or not to this
-						// user.
-						// This also might mean an error as
-						// connect not active but the drive not
+						// No content - not a cloud drive or drive not connected, or not to this
+						// user. This also might mean an error as connect not active but the drive not
 						// connected.
 						process.reject("Drive not connected. Check if no other connection active and try again.");
 					} else if (state && state.serviceUrl) {
 						serviceUrl = state.serviceUrl;
 						if (status == "201" || status == "200") {
-							// created or ok - drive
-							// successfully connected
-							// or appears as already connected
-							// (by another request)
+							// created or ok - drive successfully connected or appears as already connected (by another request)
 							process.resolve(state);
 							utils.log("DONE: " + status + " " + state.drive.provider.name + " connected successfully.");
 						} else if (status == "202") {
-							// else inform progress and continue
-							// to wait created
+							// else inform progress and continue 
 							process.notify(state);
 							utils.log("PROGRESS: " + status + " " + state.drive.provider.name + " connectCheck progress " + state.progress);
 						} else {
-							// unexpected status, wait for
-							// created
+							// unexpected status, wait for created
 							utils.log("WARN: unexpected status in connectCheck:" + status);
 						}
 					} else {
@@ -496,7 +491,7 @@
 						// use long-polling from cloud provider
 						// we starting from initial sync
 						synchronize(driveWorkspace, drivePath);
-						syncTimeout = 10000; // first polling check in 10sec
+						syncTimeout = 5000; // first polling check in 5sec
 						syncFunc = function() {
 							var changes = serviceGet(drive.changesLink);
 							changes.done(function(info) {
@@ -559,17 +554,14 @@
 				var sync = synchronizePost(nodeWorkspace, nodePath);
 				sync.contextDrive = contextDrive;
 				activeSyncs.push(sync);
+				var currentPath = currentNode ? currentNode.path : nodePath;
 				sync.done(function(drive, status) {
 					if (status == 204) {
 						// drive was removed
 						process.reject("Cloud Drive removed", status);
 					} else {
-						var files = 0; // TODO not used
-						var folders = 0; // TODO not used
 						var changed = 0;
 						var updated = 0; // updated in context node
-						
-						var currentPath = contextNode ? contextNode.path : null;
 						
 						// calculate the whole drive changes and updated in current folder
 						for (fpath in drive.files) {
@@ -578,11 +570,6 @@
 								if (currentPath && fpath.indexOf(currentPath) == 0) {
 									updated++;
 								}
-								// if (drive.files[fpath].folder) {
-									// folders++;
-								// } else {
-									// files++;
-								// }
 							}
 						}
 						// count removed as changed
@@ -717,8 +704,8 @@
 		/**
 		 * Initialize connected drive nodes for UI rendering.
 		 */
-		this.initNodes = function(map) {
-			cloudDriveUI.initNodes(map);
+		this.initConnected = function(map) {
+			cloudDriveUI.initConnected(map);
 		};
 
 		/**
@@ -733,7 +720,12 @@
 		 */
 		this.init = function(nodeWorkspace, nodePath) {
 			try {
-				cloudDrive.initContext(nodeWorkspace, nodePath);
+				// currently open node in ECMS explorer
+				currentNode = {
+				  workspace : nodeWorkspace,
+				  path : nodePath
+				};
+			 	cloudDrive.initContext(nodeWorkspace, nodePath);
 				// and on-page-ready initialization of Cloud Drive UI
 				$(function() {
 					try {
@@ -763,9 +755,9 @@
 				// XXX do this to support symlinks outside the drive
 				if (contextDrive && nodePath.indexOf(contextDrive.path) == 0 && nodePath != contextDrive.path) {
 					var file = contextDrive.files[nodePath];
-					if (!file) {
-						// file not cached, get the file from the server and
-						// cache it locally
+					if (!file || file.syncing) {
+						// file not cached, get the file from the server and cache it locally
+						// or file was syncing (creating), recheck its state
 						getFile(nodeWorkspace, nodePath, {
 						  fail : function(err, status) {
 							  utils.log("ERROR: Cloud Drive file " + nodeWorkspace + ":" + nodePath + " cannot be read: " + err + " (" + status
@@ -773,57 +765,53 @@
 							  cloudDriveUI.showError("Error reading drive file", err ? err : "Internal error. Try again later.");
 						  },
 						  done : function(file, status) {
-							  if (status != 204) {
-								  contextDrive.files[nodePath] = file;
-							  } else {
+						  	if (status == 204) {
 								  addExcluded(nodePath);
+							  } else {
+							  	// 200 - file exists,
+							  	// 202 - file accepted to be a cloud file, but not yet created in cloud
+								  contextDrive.files[nodePath] = file;
 							  }
 						  }
 						});
 					}
 				} else {
-					// load all files related to this drive
-					getDrive(nodeWorkspace, nodePath,
-					    {
-					      fail : function(err, status) {
-						      utils.log("ERROR: Cloud Drive " + nodeWorkspace + ":" + nodePath + " cannot be read: " + err + " (" + status
-						          + ")");
-						      cloudDriveUI.showError("Error reading drive", err ? err : "Internal error. Try again later.");
-					      },
-					      done : function(drive, status) {
-						      if (status != 204) {
-							      if (contextDrive && contextDrive.path == drive.path) {
-								      // XXX same drive, probably nodePath is a symlink path,
-								      // use already cached files with new drive
-								      for (fpath in contextDrive.files) {
-									      if (contextDrive.files.hasOwnProperty(fpath) && !drive.files.hasOwnProperty(fpath)) {
-										      drive.files[fpath] = contextDrive.files[fpath];
-									      }
-								      }
+					getDrive(nodeWorkspace, nodePath, {
+			      fail : function(err, status) {
+				      utils.log("ERROR: Cloud Drive " + nodeWorkspace + ":" + nodePath + " cannot be read: " + err + " (" + status
+				          + ")");
+				      cloudDriveUI.showError("Error reading drive", err ? err : "Internal error. Try again later.");
+			      },
+			      done : function(drive, status) {
+				      if (status != 204) {
+					      if (contextDrive && contextDrive.path == drive.path) {
+						      // XXX same drive, probably nodePath is a symlink path,
+						      // use already cached files with new drive
+						      for (fpath in contextDrive.files) {
+							      if (contextDrive.files.hasOwnProperty(fpath) && !drive.files.hasOwnProperty(fpath)) {
+								      drive.files[fpath] = contextDrive.files[fpath];
 							      }
-							      contextDrive = drive;
-						      } else {
-							      // utils.log("Not a cloud drive: " + nodePath); // it's not a Cloud Drive
-							      addExcluded(nodePath);
 						      }
 					      }
-					    });
-				}
-				if (contextDrive) {
-					var autosync = featuresIsAutosync(nodeWorkspace, nodePath);
-					autosync.done(function(check) {
-						if (check && check.result) {
-							autoSynchronize();
-						} else {
-							stopAutoSynchronize();
-						}
-					});
-					autosync.fail(function(response, status, err) {
-						// in case of error: don't enable/disable autosync
-						utils.log("ERROR: features autosync: " + err + ", " + status + ", " + response);
-					});
-				} else {
-					stopAutoSynchronize();
+					      contextDrive = drive;
+								var autosync = featuresIsAutosync(nodeWorkspace, nodePath);
+								autosync.done(function(check) {
+									if (check && check.result) {
+										autoSynchronize();
+									} else {
+										stopAutoSynchronize();
+									}
+								});
+								autosync.fail(function(response, status, err) {
+									// in case of error: don't enable/disable autosync
+									utils.log("ERROR: features autosync: " + err + ", " + status + ", " + response);
+								});
+				      } else {
+					      addExcluded(nodePath);
+					      stopAutoSynchronize();
+				      }
+			      }
+			    });
 				}
 			} else {
 				// else already cached as not in drive
@@ -850,6 +838,14 @@
 			return false;
 		};
 
+		this.isContextSyncing = function() {
+			if (contextNode && contextDrive) {
+				var file = contextDrive.files[contextNode.path];
+				return file && file.syncing;
+			}
+			return false;
+		};
+
 		this.isContextFile = function() {
 			return contextNode && contextDrive && contextDrive.files[contextNode.path] != null;
 		};
@@ -860,7 +856,7 @@
 
 		this.openFile = function(elem, objectId) {
 			var file = cloudDrive.getContextFile();
-			if (file) {
+			if (file && !file.syncing) {
 				window.open(file.link);
 			} else {
 				utils.log("No context path to open as Cloud File");
@@ -882,7 +878,7 @@
 		var MENU_OPEN_FILE = "OpenCloudFile";
 		var MENU_REFRESH_DRIVE = "RefreshCloudDrive";
 		var DRIVE_MENU_ACTIONS = [ MENU_OPEN_FILE, MENU_REFRESH_DRIVE ];
-		var ALLOWED_DRIVE_MENU_ACTIONS = [ MENU_OPEN_FILE, MENU_REFRESH_DRIVE, "Delete", "AddToFavourite", "RemoveFromFavourite",
+		var ALLOWED_DRIVE_MENU_ACTIONS = [ MENU_OPEN_FILE, MENU_REFRESH_DRIVE, "Delete", "Paste", "AddToFavourite", "RemoveFromFavourite",
 		    "ViewInfo" ];
 		var ALLOWED_FILE_MENU_ACTIONS = [ MENU_OPEN_FILE, MENU_REFRESH_DRIVE, "Delete", "Rename", "Copy", "Cut", "Paste", "AddToFavourite", "RemoveFromFavourite", "ViewInfo" ];
 		var ALLOWED_SYMLINK_MENU_ACTIONS = [ "Delete" ];
@@ -944,17 +940,21 @@
 				$("#ECMContextMenu a[exo\\:attr='" + MENU_OPEN_FILE + "']").each(function() {
 					var text = $(this).data("cd_action_prefix");
 					if (!text) {
-						$(this).click(function() {
+						text = $(this).text();
+						$(this).data("cd_action_prefix", text).click(function() {
 							cloudDrive.openFile();
 							uiFileView.UIFileView.clearCheckboxes();
 						});
-						text = $(this).text();
-						$(this).data("cd_action_prefix", text);
 					}
 					var i = $(this).find("i");
 					text = text + drive.provider.name;
 					$(this).text(text);
 					$(this).prepend(i);
+					if (cloudDrive.isContextSyncing()) {
+						$(this).addClass("cloudFileDisabled");
+					} else {
+						$(this).removeClass("cloudFileDisabled");
+					}
 				});
 				$("#ECMContextMenu a[exo\\:attr='" + MENU_REFRESH_DRIVE + "']").each(function() {
 					var text = $(this).data("cd_action_prefix");
@@ -989,8 +989,10 @@
 					$(menu).find("li.menuItem").each(function() {
 						$(this).find("i.uiIconDownload").each(function() {
 							$(this).parent().attr("target", "_new");
-							$(this).parent().attr("href", link);
-							$(this).parent().attr("onclick", "eXo.ecm.WCMUtils.hideContextMenu(this);eXo.ecm.UIFileView.clearCheckboxes();");
+							// XXX need ?at the end to deal with ECMS's objectId added on click
+							$(this).parent().attr("href", link + "?"); 
+							// May 29 2014 was also eXo.ecm.WCMUtils.hideContextMenu(this);
+							$(this).parent().attr("onclick", "eXo.ecm.UIFileView.clearCheckboxes();");
 						});
 						$(this).find("i.uiIconEcmsCopyUrlToClipboard").each(function() {
 							$(this).parent().attr("path", link);
@@ -1067,7 +1069,7 @@
 				// hack to prevent empty menu bar
 				$("#uiActionsBarContainer ul").append(
 				    "<li style='display: block;'><a class='actionIcon' style='height: 18px;'><i></i> </a></li>");
-
+				
 				// add sync call to Refresh action
 				// TODO call actualRefreshSession after sync done as a callback
 				$("a.refreshIcon").click(function() {
@@ -1525,7 +1527,6 @@
 			$(".PORTLET-FRAGMENT").on(domEvent, ".LeftCotainer, .RightCotainer", function(event) { // #UIJCRExplorerPortlet
 				if (!initLock) {
 					initLock = setTimeout(function() {
-						utils.log(">>>>>>>>> initDocument");
 						initDocument();
 						setTimeout(function() {
 							initLock = null;
@@ -1706,7 +1707,7 @@
 		 * Render given connected drive nodes in ECM documents view with branded styles of drive
 		 * providers.
 		 */
-		this.initNodes = function(map) {
+		this.initConnected = function(map) {
 			// map: name = providerId
 			var files = [];
 			var styleSize;

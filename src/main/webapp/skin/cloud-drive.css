@@ -343,6 +343,13 @@
 	background: url('https://ssl.gstatic.com/docs/doclist/images/icon_10_generic_list.png') no-repeat right center !important; /* orientation=rt */
 }
 
+/**** menu ****/
+.cloudFileDisabled {
+	opacity : 0.7; 
+	pointer-events : none;
+	cursor : not-allowed !important;
+}
+
 /******** Pnotify icons ********/
 .picon-32.picon-task-complete {
 	background-image: url("icons/oxygen/32/status/task-complete.png")
