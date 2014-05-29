@@ -22,12 +22,15 @@ import org.exoplatform.clouddrive.CloudDrive;
 import org.exoplatform.clouddrive.CloudDriveManager;
 import org.exoplatform.clouddrive.CloudDriveService;
 import org.exoplatform.clouddrive.ecms.CloudDriveContext;
+import org.exoplatform.clouddrive.utils.IdentityHelper;
 import org.exoplatform.ecm.webui.component.explorer.UIJCRExplorer;
 import org.exoplatform.ecm.webui.component.explorer.UIWorkingArea;
 import org.exoplatform.ecm.webui.component.explorer.rightclick.manager.MoveNodeManageComponent;
 import org.exoplatform.ecm.webui.component.explorer.rightclick.manager.PasteManageComponent;
 import org.exoplatform.ecm.webui.utils.PermissionUtil;
 import org.exoplatform.services.cms.link.LinkManager;
+import org.exoplatform.services.jcr.core.ManageableRepository;
+import org.exoplatform.services.jcr.ext.app.SessionProviderService;
 import org.exoplatform.services.wcm.utils.WCMCoreUtils;
 import org.exoplatform.web.application.ApplicationMessage;
 import org.exoplatform.web.application.RequestContext;
@@ -268,6 +271,14 @@ public class CloudFileSymlink {
                   String linkTitle = srcNode.hasProperty("exo:title") ? srcNode.getProperty("exo:title")
                                                                                .getString() : linkName;
                   this.link = linkManager.createLink(destNode, null, srcNode, linkName, linkTitle);
+
+                  // TODO ensure the link is owned by the user
+                  // SessionProviderService sessions = WCMCoreUtils.getService(SessionProviderService.class);
+                  // Session systemSession = sessions.getSystemSessionProvider(null)
+                  // .getSession(destWorkspace,
+                  // (ManageableRepository) destNode.getSession()
+                  // .getRepository());
+                  // IdentityHelper.ensureOwned(this.link, systemSession);
                 } else {
                   // else, we don't support cross-workspaces paste for cloud drive
                   throw new CloudFileSymlinkException("Linking between workspaces not supported for Cloud Drive files. "

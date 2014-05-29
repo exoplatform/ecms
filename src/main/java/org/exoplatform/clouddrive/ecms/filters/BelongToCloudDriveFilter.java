@@ -21,6 +21,8 @@ package org.exoplatform.clouddrive.ecms.filters;
 import org.exoplatform.clouddrive.CloudDrive;
 import org.exoplatform.clouddrive.CloudDriveService;
 import org.exoplatform.clouddrive.DriveRemovedException;
+import org.exoplatform.clouddrive.NotCloudFileException;
+import org.exoplatform.clouddrive.NotYetCloudFileException;
 import org.exoplatform.services.log.ExoLogger;
 import org.exoplatform.services.log.Log;
 import org.exoplatform.services.wcm.utils.WCMCoreUtils;
@@ -32,9 +34,9 @@ import javax.jcr.RepositoryException;
 /**
  * Filter for cloud files.
  */
-public class CloudFileFilter extends AbstractCloudDriveNodeFilter {
+public class BelongToCloudDriveFilter extends AbstractCloudDriveNodeFilter {
 
-  protected static final Log LOG = ExoLogger.getLogger(CloudFileFilter.class);
+  protected static final Log LOG = ExoLogger.getLogger(BelongToCloudDriveFilter.class);
 
   /**
    * {@inheritDoc}
@@ -45,13 +47,17 @@ public class CloudFileFilter extends AbstractCloudDriveNodeFilter {
     CloudDrive drive = driveService.findDrive(node);
     if (drive != null) {
       try {
-        if (drive.hasFile(node.getPath())) {
-          // attribute used in CloudFileViewer.gtmpl
-          WebuiRequestContext.getCurrentInstance().setAttribute(CloudDrive.class, drive);
-          return true;
+        try {
+          drive.getFile(node.getPath());
+        } catch (NotYetCloudFileException e) {
+          // file creation in progress... we accept it
         }
+        WebuiRequestContext.getCurrentInstance().setAttribute(CloudDrive.class, drive);
+        return true;
       } catch (DriveRemovedException e) {
-        // doesn't accept
+        // doesn't accept removed drive
+      } catch (NotCloudFileException e) {
+        // doesn't accept not cloud file
       }
     }
     return false;

@@ -63,11 +63,11 @@ public class PersonalDocumentsFilter implements UIExtensionFilter {
     // additionally we initialize all already connected drives in the context, they can be used for drive
     // folder icons rendering or other similar purpose
     if (isRoot) {
-      CloudDriveContext.initNodes(WebuiRequestContext.getCurrentInstance(), currentNode);
+      CloudDriveContext.initConnected(WebuiRequestContext.getCurrentInstance(), currentNode);
     } else if (currentNode.getPath().startsWith(driveRootPath)) {
       Item personalDocs = userNode.getSession().getItem(driveRootPath);
       if (personalDocs.isNode()) {
-        CloudDriveContext.initNodes(WebuiRequestContext.getCurrentInstance(), (Node) personalDocs);
+        CloudDriveContext.initConnected(WebuiRequestContext.getCurrentInstance(), (Node) personalDocs);
       } else {
         // this should not happen
         LOG.warn("Personal Documents not a Node: " + personalDocs.getPath());

@@ -83,7 +83,7 @@ public class CloudDriveContext {
         // add provider's default params
         context.addProvider(provider);
       }
-      
+
       Map<String, String> contextMessages = messages.get();
       if (contextMessages != null) {
         for (Map.Entry<String, String> msg : contextMessages.entrySet()) {
@@ -129,12 +129,12 @@ public class CloudDriveContext {
    * @see {@link #init(RequestContext, String, String)}
    * @see {@link #init(RequestContext, String, String, CloudProvider)}
    */
-  public static boolean initNodes(RequestContext requestContext, Node parent) throws RepositoryException,
-                                                                             CloudDriveException {
+  public static boolean initConnected(RequestContext requestContext, Node parent) throws RepositoryException,
+                                                                                 CloudDriveException {
     Object obj = requestContext.getAttribute(JAVASCRIPT);
     if (obj != null) {
       CloudDriveContext context = (CloudDriveContext) obj;
-      context.addNodes(parent.getNodes());
+      context.addConnected(parent.getNodes());
       return true;
     } else {
       if (LOG.isDebugEnabled()) {
@@ -176,7 +176,7 @@ public class CloudDriveContext {
    * @throws CloudDriveException
    */
   public static void showInfo(RequestContext requestContext, String title, String message) throws RepositoryException,
-                                                                                             CloudDriveException {
+                                                                                          CloudDriveException {
     Object obj = requestContext.getAttribute(JAVASCRIPT);
     if (obj != null) {
       CloudDriveContext context = (CloudDriveContext) obj;
@@ -186,7 +186,7 @@ public class CloudDriveContext {
       if (LOG.isDebugEnabled()) {
         LOG.debug("Context not initialized. Adding info message to local cache.");
       }
-      
+
       Map<String, String> contextMessages = messages.get();
       if (contextMessages == null) {
         contextMessages = new LinkedHashMap<String, String>();
@@ -223,22 +223,21 @@ public class CloudDriveContext {
     return this;
   }
 
-  private CloudDriveContext addNodes(NodeIterator nodes) throws CloudDriveException, RepositoryException {
+  private CloudDriveContext addConnected(NodeIterator nodes) throws CloudDriveException, RepositoryException {
     if (nodes.hasNext()) {
       CloudDriveService driveService = WCMCoreUtils.getService(CloudDriveService.class);
       StringBuilder map = new StringBuilder();
       // we construct JSON object on the fly
       map.append('{');
       int count = 0;
-      do {
+      while (nodes.hasNext()) {
         Node child = nodes.nextNode();
         CloudDrive drive = driveService.findDrive(child);
         if (drive != null) {
           String title = child.getProperty("exo:title").getString();
           if (!this.nodes.contains(title)) {
             map.append('"');
-            // map.append(child.getName()); // exo:title required for js side
-            map.append(title);
+            map.append(title); // exo:title required for js side
             map.append("\":\"");
             map.append(drive.getUser().getProvider().getId());
             map.append("\",");
@@ -246,13 +245,13 @@ public class CloudDriveContext {
             this.nodes.add(title);
           }
         }
-      } while (nodes.hasNext());
+      };
       if (count >= 1) {
         map.deleteCharAt(map.length() - 1); // remove last semicolon
         map.append('}');
 
         // we already "required" cloudDrive as AMD dependency in init()
-        require.addScripts("\ncloudDrive.initNodes(" + map.toString() + ");\n");
+        require.addScripts("\ncloudDrive.initConnected(" + map.toString() + ");\n");
       }
     }
     return this;
