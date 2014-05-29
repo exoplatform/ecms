@@ -543,6 +543,25 @@
 				}
 			}
 		};
+		
+		var checkAutoSynchronize = function() {
+			if (contextNode && contextDrive) {
+				var autosync = featuresIsAutosync(contextNode.workspace, contextDrive.path);
+				autosync.done(function(check) {
+					if (check && check.result) {
+						autoSynchronize();
+					} else {
+						stopAutoSynchronize();
+					}
+				});
+				autosync.fail(function(response, status, err) {
+					// in case of error: don't enable/disable autosync
+					utils.log("ERROR: features autosync: " + err + ", " + status + ", " + response);
+				});
+				return autosync;
+			}
+			return null;
+		};
 
 		var synchronize = function(nodeWorkspace, nodePath) {
 			var process = $.Deferred();
@@ -599,6 +618,8 @@
 							// using new drive in the context (only if context wasn't changed)
 							contextDrive = drive;
 						}
+
+						checkAutoSynchronize();
 
 						process.resolve(updated, drive);
 					}
@@ -794,18 +815,7 @@
 						      }
 					      }
 					      contextDrive = drive;
-								var autosync = featuresIsAutosync(nodeWorkspace, nodePath);
-								autosync.done(function(check) {
-									if (check && check.result) {
-										autoSynchronize();
-									} else {
-										stopAutoSynchronize();
-									}
-								});
-								autosync.fail(function(response, status, err) {
-									// in case of error: don't enable/disable autosync
-									utils.log("ERROR: features autosync: " + err + ", " + status + ", " + response);
-								});
+								checkAutoSynchronize();
 				      } else {
 					      addExcluded(nodePath);
 					      stopAutoSynchronize();
