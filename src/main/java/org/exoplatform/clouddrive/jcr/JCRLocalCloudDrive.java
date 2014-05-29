@@ -3152,10 +3152,12 @@ public abstract class JCRLocalCloudDrive extends CloudDrive {
         }
       } catch (PathNotFoundException e) {
         if (internalName == null) {
-          // try NodeFinder name (storage specific, e.g. ECMS)
           internalName = name;
-          name = finder.cleanName(fileTitle);
-          if (name.length() > 0) {
+          // try NodeFinder name (storage specific, e.g. ECMS)
+          String finderName = finder.cleanName(fileTitle);
+          // finder doesn't work with single symbol names when they are special characters (like '.') 
+          if (finderName.length() > 1) {
+            name = finderName;
             continue;
           }
         }

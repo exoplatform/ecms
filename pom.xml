@@ -38,37 +38,37 @@
     <dependency>
       <groupId>org.exoplatform.kernel</groupId>
       <artifactId>exo.kernel.container</artifactId>
-      <scope>compile</scope>
+      <scope>provided</scope>
       <type>jar</type>
     </dependency>
     <dependency>
       <groupId>org.exoplatform.kernel</groupId>
       <artifactId>exo.kernel.component.common</artifactId>
-      <scope>compile</scope>
+      <scope>provided</scope>
       <type>jar</type>
     </dependency>
     <dependency>
       <groupId>org.exoplatform.core</groupId>
       <artifactId>exo.core.component.organization.api</artifactId>
-      <scope>compile</scope>
+      <scope>provided</scope>
       <type>jar</type>
     </dependency>
     <dependency>
       <groupId>org.exoplatform.jcr</groupId>
       <artifactId>exo.jcr.component.core</artifactId>
-      <scope>compile</scope>
+      <scope>provided</scope>
       <type>jar</type>
     </dependency>
     <dependency>
       <groupId>org.exoplatform.jcr</groupId>
       <artifactId>exo.jcr.component.ext</artifactId>
-      <scope>compile</scope>
+      <scope>provided</scope>
       <type>jar</type>
     </dependency>
     <dependency>
       <groupId>org.exoplatform.jcr</groupId>
       <artifactId>exo.jcr.framework.web</artifactId>
-      <scope>compile</scope>
+      <scope>provided</scope>
       <type>jar</type>
     </dependency>
     <dependency>
@@ -81,7 +81,7 @@
     <dependency>
       <groupId>org.exoplatform.platform</groupId>
       <artifactId>platform-component-common</artifactId>
-      <scope>compile</scope>
+      <scope>provided</scope>
       <type>jar</type>
     </dependency>
 
