@@ -30,7 +30,9 @@ import org.exoplatform.clouddrive.CloudDriveException;
 import org.exoplatform.clouddrive.CloudFileAPI;
 import org.exoplatform.clouddrive.CloudProviderException;
 import org.exoplatform.clouddrive.CloudUser;
+import org.exoplatform.clouddrive.ConflictException;
 import org.exoplatform.clouddrive.DriveRemovedException;
+import org.exoplatform.clouddrive.NotFoundException;
 import org.exoplatform.clouddrive.RefreshAccessException;
 import org.exoplatform.clouddrive.SyncNotSupportedException;
 import org.exoplatform.clouddrive.box.BoxAPI.EventsIterator;
@@ -270,7 +272,33 @@ public class JCRLocalBoxDrive extends JCRLocalCloudDrive implements UserTokenRef
                              String mimeType,
                              InputStream content) throws CloudDriveException, RepositoryException {
 
-      BoxFile file = api.createFile(getParentId(fileNode), getTitle(fileNode), created, content);
+      String parentId = getParentId(fileNode);
+      String title = getTitle(fileNode);
+      BoxFile file;
+      try {
+        file = api.createFile(parentId, title, created, content);
+      } catch (ConflictException e) {
+        // XXX we assume name as factor of equality here and make local file to reflect the cloud side
+        BoxFile existing = null;
+        ItemsIterator files = api.getFolderItems(parentId);
+        while (files.hasNext()) {
+          BoxItem item = files.next();
+          if (item instanceof BoxFile && title.equals(item.getName())) {
+            existing = (BoxFile) item;
+            break;
+          }
+        }
+        if (existing == null) {
+          throw e; // we cannot do anything at this level
+        } else {
+          file = existing;
+          // and erase local file data here
+          // TODO check data checksum before erasing to ensure it is actually the same
+          if (fileNode.hasNode("jcr:content")) {
+            fileNode.getNode("jcr:content").setProperty("jcr:data", DUMMY_DATA); // empty data by default
+          }
+        }
+      }
 
       String id = file.getId();
       String name = file.getName();
@@ -296,7 +324,30 @@ public class JCRLocalBoxDrive extends JCRLocalCloudDrive implements UserTokenRef
     @Override
     public String createFolder(Node folderNode, Calendar created) throws CloudDriveException,
                                                                  RepositoryException {
-      BoxFolder folder = api.createFolder(getParentId(folderNode), getTitle(folderNode), created);
+
+      String parentId = getParentId(folderNode);
+      String title = getTitle(folderNode);
+      BoxFolder folder;
+      try {
+        folder = api.createFolder(getParentId(folderNode), getTitle(folderNode), created);
+      } catch (ConflictException e) {
+        // XXX we assume name as factor of equality here
+        BoxFolder existing = null;
+        ItemsIterator files = api.getFolderItems(parentId);
+        while (files.hasNext()) {
+          BoxItem item = files.next();
+          if (item instanceof BoxFolder && title.equals(item.getName())) {
+            existing = (BoxFolder) item;
+            break;
+          }
+        }
+        if (existing == null) {
+          throw e; // we cannot do anything at this level
+        } else {
+          folder = existing;
+        }
+      }
+
       String id = folder.getId();
       String name = folder.getName();
       String type = folder.getType();
@@ -844,10 +895,22 @@ public class JCRLocalBoxDrive extends JCRLocalCloudDrive implements UserTokenRef
                 } else {
                   // read the only copied node from the Box
                   local = updateItem(api, item, parent, null);
-                  apply(local);
                   if (local.isFolder()) {
                     // and fetch child files
-                    fetchChilds(local.getId(), local.getNode());
+                    try {
+                      fetchChilds(local.getId(), local.getNode());
+                      apply(local);
+                    } catch (NotFoundException e) {
+                      // this node not found...
+                      local.getNode().remove();
+                      remove(id, local.getPath());
+                      if (LOG.isDebugEnabled()) {
+                        LOG.debug("Copied node already removed in cloud - remove it locally. "
+                            + e.getMessage());
+                      }
+                    }
+                  } else {
+                    apply(local);
                   }
                 }
               }

@@ -53,7 +53,9 @@ public class JCRLocalCloudFile implements CloudFile {
 
   private final transient boolean  changed;
 
-  private final boolean            isFolder;
+  private final boolean            folder;
+
+  private final boolean            syncing;
 
   public JCRLocalCloudFile(String path,
                            String id,
@@ -66,7 +68,8 @@ public class JCRLocalCloudFile implements CloudFile {
                            String author,
                            Calendar createdDate,
                            Calendar modifiedDate,
-                           boolean isFolder,
+                           boolean folder,
+                           boolean syncing,
                            Node node,
                            boolean changed) {
     this.path = path;
@@ -80,7 +83,8 @@ public class JCRLocalCloudFile implements CloudFile {
     this.author = author;
     this.createdDate = createdDate;
     this.modifiedDate = modifiedDate;
-    this.isFolder = isFolder;
+    this.folder = folder;
+    this.syncing = syncing;
     this.node = node;
     this.changed = changed;
   }
@@ -96,7 +100,9 @@ public class JCRLocalCloudFile implements CloudFile {
                            String author,
                            Calendar createdDate,
                            Calendar modifiedDate,
-                           boolean isFolder) {
+                           boolean folder,
+                           Node node,
+                           boolean changed) {
     this(path,
          id,
          title,
@@ -108,7 +114,37 @@ public class JCRLocalCloudFile implements CloudFile {
          author,
          createdDate,
          modifiedDate,
-         isFolder,
+         folder,
+         false,
+         node,
+         changed);
+  }
+
+  public JCRLocalCloudFile(String path,
+                           String id,
+                           String title,
+                           String link,
+                           String previewLink,
+                           String thumbnailLink,
+                           String type,
+                           String lastUser,
+                           String author,
+                           Calendar createdDate,
+                           Calendar modifiedDate,
+                           boolean folder) {
+    this(path,
+         id,
+         title,
+         link,
+         previewLink,
+         thumbnailLink,
+         type,
+         lastUser,
+         author,
+         createdDate,
+         modifiedDate,
+         folder,
+         false,
          null,
          false);
   }
@@ -195,7 +231,7 @@ public class JCRLocalCloudFile implements CloudFile {
 
   @Override
   public boolean isFolder() {
-    return isFolder;
+    return folder;
   }
 
   /**
@@ -217,4 +253,11 @@ public class JCRLocalCloudFile implements CloudFile {
     return changed;
   }
 
+  /**
+   * {@inheritDoc}
+   */
+  @Override
+  public boolean isSyncing() {
+    return syncing;
+  }
 }

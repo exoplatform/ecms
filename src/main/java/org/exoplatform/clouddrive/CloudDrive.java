@@ -384,11 +384,13 @@ public abstract class CloudDrive {
    * @see #hasFile(String)
    * @return local cloud file in the drive.
    * @throws DriveRemovedException
-   * @throws NotCloudFileException
+   * @throws NotCloudFileException if given path doesn't belong to this cloud drive
+   * @throws NotYetCloudFileException if file not yet a cloud file in this drive (e.g. in process of creation)
    * @throws RepositoryException
    */
   public abstract CloudFile getFile(String path) throws DriveRemovedException,
                                                 NotCloudFileException,
+                                                NotYetCloudFileException,
                                                 RepositoryException;
 
   /**
@@ -514,7 +516,7 @@ public abstract class CloudDrive {
    * Tells whether given path belongs to this Cloud Drive. <br/>
    * A path belong a cloud drive if it represents this drive's storage root node and the drive connected. If
    * {@code includeFiles} is {@code true} then given path also will be tested whether it is a path of a file
-   * in this drive, and if it is, {@code true} will be returned.<br/> 
+   * in this drive, and if it is, {@code true} will be returned.<br/>
    * This method also works with links to files of the drive.
    * 
    * @param workspace {@link String}

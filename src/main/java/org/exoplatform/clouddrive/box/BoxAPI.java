@@ -54,14 +54,12 @@ import com.box.restclientv2.requestsbase.BoxDefaultRequestObject;
 import com.box.restclientv2.requestsbase.BoxFileUploadRequestObject;
 
 import org.apache.http.client.HttpClient;
-import org.apache.http.conn.ClientConnectionManager;
 import org.apache.http.conn.scheme.PlainSocketFactory;
 import org.apache.http.conn.scheme.Scheme;
 import org.apache.http.conn.scheme.SchemeRegistry;
 import org.apache.http.conn.ssl.SSLSocketFactory;
 import org.apache.http.impl.client.DefaultHttpClient;
 import org.apache.http.impl.conn.tsccm.ThreadSafeClientConnManager;
-import org.apache.http.params.BasicHttpParams;
 import org.exoplatform.clouddrive.CloudDriveException;
 import org.exoplatform.clouddrive.ConflictException;
 import org.exoplatform.clouddrive.FileTrashRemovedException;
@@ -74,6 +72,7 @@ import org.exoplatform.services.log.Log;
 
 import java.io.InputStream;
 import java.io.UnsupportedEncodingException;
+import java.security.KeyStore;
 import java.text.ParseException;
 import java.util.ArrayList;
 import java.util.Calendar;
@@ -84,6 +83,13 @@ import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
+
+import javax.net.ssl.KeyManager;
+import javax.net.ssl.KeyManagerFactory;
+import javax.net.ssl.SSLContext;
+import javax.net.ssl.TrustManager;
+import javax.net.ssl.TrustManagerFactory;
+import javax.net.ssl.X509TrustManager;
 
 /**
  * All calls to Box API here.
@@ -207,6 +213,11 @@ public class BoxAPI {
       } catch (BoxRestException e) {
         throw new BoxException("Error getting folder items: " + e.getMessage(), e);
       } catch (BoxServerException e) {
+        int status = getErrorStatus(e);
+        if (status == 404 || status == 412) {
+          // not_found or precondition_failed - then folder not found
+          throw new NotFoundException("Folder not found " + folderId, e);
+        }
         throw new BoxException("Error reading folder items: " + e.getMessage(), e);
       } catch (AuthFatalFailureException e) {
         checkTokenState();
@@ -385,28 +396,33 @@ public class BoxAPI {
 
     final HttpClient httpClient;
 
-    @SuppressWarnings("deprecation")
     RESTClient() {
       super();
 
       SchemeRegistry schemeReg = new SchemeRegistry();
-      schemeReg.register(new Scheme("http", PlainSocketFactory.getSocketFactory(), 80));
+      schemeReg.register(new Scheme("http", 80, PlainSocketFactory.getSocketFactory()));
       SSLSocketFactory socketFactory;
       try {
-        socketFactory = new SSLSocketFactory(SSLSocketFactory.TLS,
-                                             null,
-                                             null,
-                                             null,
-                                             null,
-                                             null,
-                                             SSLSocketFactory.ALLOW_ALL_HOSTNAME_VERIFIER);
+        SSLContext sslContext = SSLContext.getInstance(SSLSocketFactory.TLS);
+        KeyManagerFactory kmfactory = KeyManagerFactory.getInstance(KeyManagerFactory.getDefaultAlgorithm());
+        kmfactory.init(null, null);
+        KeyManager[] keymanagers = kmfactory.getKeyManagers();
+        TrustManagerFactory tmfactory = TrustManagerFactory.getInstance(TrustManagerFactory.getDefaultAlgorithm());
+        tmfactory.init((KeyStore) null);
+        TrustManager[] trustmanagers = tmfactory.getTrustManagers();
+        sslContext.init(keymanagers, trustmanagers, null);
+        socketFactory = new SSLSocketFactory(sslContext, SSLSocketFactory.ALLOW_ALL_HOSTNAME_VERIFIER);
       } catch (Exception ex) {
         throw new IllegalStateException("Failure initializing default SSL context for Box REST client", ex);
       }
-      schemeReg.register(new Scheme("https", socketFactory, 443));
+      schemeReg.register(new Scheme("https", 443, socketFactory));
 
-      ClientConnectionManager connectionManager = new ThreadSafeClientConnManager(new BasicHttpParams(),
-                                                                                  schemeReg);
+      ThreadSafeClientConnManager connectionManager = new ThreadSafeClientConnManager(schemeReg);
+      // XXX 2 recommended by RFC 2616 sec 8.1.4, we make it bigger for quicker // upload
+      connectionManager.setDefaultMaxPerRoute(4);
+      // 20 by default, we twice it also
+      connectionManager.setMaxTotal(40);
+
       this.httpClient = new DefaultHttpClient(connectionManager);
     }
 
@@ -799,6 +815,16 @@ public class BoxAPI {
                                                                                       RefreshAccessException,
                                                                                       ConflictException {
     try {
+      // To speedup the process we check if parent exists first.
+      // How this speedups: if parent not found we will not wait for the content upload to the Box side.
+      try {
+        readFolder(parentId);
+      } catch (NotFoundException e) {
+        // parent not found
+        throw new NotFoundException("Parent not found " + parentId + ". Cannot start file uploading " + name,
+                                    e);
+      }
+
       // TODO You can optionally specify a Content-MD5 header with the SHA1 hash of the file to ensure that
       // the file is not corrupted in transit.
       BoxFileUploadRequestObject obj = BoxFileUploadRequestObject.uploadFileRequestObject(parentId,
@@ -817,7 +843,8 @@ public class BoxAPI {
       int status = getErrorStatus(e);
       if (status == 404 || status == 412) {
         // not_found or precondition_failed - then parent not found
-        throw new NotFoundException("Parent not found " + parentId, e);
+        throw new NotFoundException("Parent not found " + parentId + ". File uploading canceled for " + name,
+                                    e);
       } else if (status == 403) {
         throw new NotFoundException("The user doesn’t have access to upload a file " + name, e);
       } else if (status == 409) {

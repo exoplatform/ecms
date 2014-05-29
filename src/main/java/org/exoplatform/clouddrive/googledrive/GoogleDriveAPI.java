@@ -363,7 +363,7 @@ class GoogleDriveAPI implements DataStoreFactory {
     @Override
     public void merge(UserToken newToken) throws CloudDriveException {
       super.merge(newToken);
-      
+
       // explicitly apply token keys to currently used credential
       if (credential != null) {
         credential.setAccessToken(newToken.getAccessToken());
@@ -740,6 +740,9 @@ class GoogleDriveAPI implements DataStoreFactory {
   File insert(File file, AbstractInputStreamContent content) throws GoogleDriveException,
                                                             CloudDriveAccessException {
     try {
+      // TODO ensure the parent exists before content uploading, otherwise it fill be slow with large sets of
+      // files. See BoxAPI.createFile().
+
       return drive.files().insert(file, content).execute();
     } catch (GoogleJsonResponseException e) {
       if (isInsufficientPermissions(e)) {
@@ -841,7 +844,7 @@ class GoogleDriveAPI implements DataStoreFactory {
       throw new GoogleDriveException("Error upating file metadata in Files service: " + e.getMessage(), e);
     }
   }
-  
+
   /**
    * Copy a file in Files service.
    * 

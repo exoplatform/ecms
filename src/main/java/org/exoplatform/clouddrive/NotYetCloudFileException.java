@@ -14,49 +14,30 @@
  * You should have received a copy of the GNU Affero General Public License
  * along with this program. If not, see <http://www.gnu.org/licenses/>.
  */
+
 package org.exoplatform.clouddrive;
 
-import java.util.Calendar;
-
 /**
- *  General abstraction for cloud file.
- *
+ * Indicates that some file (usually designated by path) does belong to a Cloud Drive path but not yet created
+ * in the cloud. Such file can be in progress of creation (upload) or be postponed due to failed creation.
+ * 
+ * <br>
+ * Created by The eXo Platform SAS.
+ * 
+ * @author <a href="mailto:pnedonosko@exoplatform.com">Peter Nedonosko</a>
+ * @version $Id: NotYetCloudFileException.java 00000. 2014 peter $
  */
-public interface CloudFile {
-  
-  String getId();
-  
-  String getTitle();
-  
-  String getLink();
-  
-  String getPreviewLink();
-  
-  String getThumbnailLink();
-  
-  String getType();
+public class NotYetCloudFileException extends NotCloudFileException {
 
-  String getLastUser();
-
-  String getAuthor();
-
-  Calendar getCreatedDate();
-  
-  Calendar getModifiedDate();
-  
-  boolean isFolder();
-  
   /**
-   * Path to the cloud file in local storage.
    * 
-   * @return {@link String}
    */
-  String getPath();
-  
+  private static final long serialVersionUID = 4743059040181964693L;
+
   /**
-   * Tell if this file currently synchronizing. 
-   * 
-   * @return <code>true</code> if file is synchronizing currently, <code>false</code> otherwise. 
+   * @param message
    */
-  boolean isSyncing();
+  public NotYetCloudFileException(String message) {
+    super(message);
+  }
 }

@@ -20,6 +20,11 @@ package org.exoplatform.clouddrive.utils;
 
 import org.exoplatform.services.security.IdentityConstants;
 
+import javax.jcr.Node;
+import javax.jcr.PathNotFoundException;
+import javax.jcr.RepositoryException;
+import javax.jcr.Session;
+
 /**
  * Created by The eXo Platform SAS
  * 
@@ -51,4 +56,36 @@ public class IdentityHelper {
     return user1.equals(user2)
         || (ROOT_USER_ID.equals(user1) || SYSTEM_USER_ID.equals(user1) || ROOT_USER_ID.equals(user2) || SYSTEM_USER_ID.equals(user2));
   }
+
+  /**
+   * Make the node owned by the current user (user of the node session).
+   * 
+   * @param node {@link Node} target node, its session will be used to set a new (current) owner
+   * @param systemSession {@link Session} system session, it will be used to reset the current owner
+   * @return {@link Node} fixed node (same as in the given in the parameter)
+   * @throws RepositoryException
+   * @throws PathNotFoundException if exo:owner property cannot be found on exo:owneable node, or if the node
+   *           cannot be found by path via system session.
+   */
+  public static Node ensureOwned(Node node, Session systemSession) throws PathNotFoundException,
+                                                                  RepositoryException {
+    String currentUser = node.getSession().getUserID();
+    // don't allow system account be an owner
+    if (!currentUser.equals(IdentityHelper.SYSTEM_USER_ID)) {
+      if (node.isNodeType("exo:owneable") && !node.getProperty("exo:owner").getString().equals(currentUser)) {
+        // owned not by the drive user
+        // we need this as it may happen with ECMS that the node will be owned by system account
+        // remove in system session
+        Node snode = (Node) systemSession.getItem(node.getPath());
+        snode.removeMixin("exo:owneable");
+        snode.save();
+        node.refresh(true);
+        // add in current user session
+        node.addMixin("exo:owneable");
+        node.save();
+      }
+    }
+    return node;
+  }
+
 }

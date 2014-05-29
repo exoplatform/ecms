@@ -20,146 +20,103 @@ import org.exoplatform.clouddrive.CloudFile;
 
 import java.util.Calendar;
 
-import javax.jcr.Node;
-
 /**
- * Wraps fields from another {@link CloudFile} and replace its path with a path of that file {@link Node}
- * symlink node.<br>
- * NOTE: we cannot wrap instance of another another {@link CloudFile} as it leads to StackOverflowError in WS
- * JsonGeneratorImpl. Created by The eXo Platform SAS.<br>
+ * Not yet cloud file. It is a file that accepted to be a cloud file, but currently is creating (uploading) to
+ * the cloud and this operation not completed.<br>
  * 
  * @author <a href="mailto:pnedonosko@exoplatform.com">Peter Nedonosko</a>
- * @version $Id: LinkedCloudFile.java 00000 Jan 24, 2013 pnedonosko $
+ * @version $Id: LinkedCloudFile.java 00000 May 26, 2014 pnedonosko $
  */
-public class LinkedCloudFile implements CloudFile {
+public class AcceptedCloudFile implements CloudFile {
 
-  private final String             id;
+  private final String path;
 
-  private final String             title;
-
-  private final String             link;
-
-  private final String             previewLink;
-
-  private final String             thumbnailLink;
-
-  private final String             type;
-
-  private final String             lastUser;
-
-  private final String             author;
-
-  private final transient Calendar createdDate;
-
-  private final transient Calendar modifiedDate;
-
-  private final boolean            folder;
-
-  private final boolean            syncing;
-
-  private final String             path;
-
-  private final boolean            isSymlink;
-
-  public LinkedCloudFile(CloudFile file, String path) {
-    this.id = file.getId();
-    this.title = file.getTitle();
-    this.link = file.getLink();
-    this.previewLink = file.getPreviewLink();
-    this.thumbnailLink = file.getThumbnailLink();
-    this.type = file.getType();
-    this.lastUser = file.getLastUser();
-    this.author = file.getAuthor();
-    this.folder = file.isFolder();
-    this.createdDate = file.getCreatedDate();
-    this.modifiedDate = file.getModifiedDate();
+  public AcceptedCloudFile(String path) {
     this.path = path;
-    this.isSymlink = true;
-    this.syncing = file.isSyncing();
   }
 
   /**
    * @return the isSymlink
    */
   public boolean isSymlink() {
-    return isSymlink;
+    return false;
   }
 
   /**
    * @return the id
    */
   public String getId() {
-    return id;
+    return null;
   }
 
   /**
    * @return the title
    */
   public String getTitle() {
-    return title;
+    return null;
   }
 
   /**
    * @return the link
    */
   public String getLink() {
-    return link;
+    return null;
   }
 
   /**
    * @return the previewLink
    */
   public String getPreviewLink() {
-    return previewLink;
+    return null;
   }
 
   /**
    * @return the thumbnailLink
    */
   public String getThumbnailLink() {
-    return thumbnailLink;
+    return null;
   }
 
   /**
    * @return the type
    */
   public String getType() {
-    return type;
+    return null;
   }
 
   /**
    * @return the lastUser
    */
   public String getLastUser() {
-    return lastUser;
+    return null;
   }
 
   /**
    * @return the author
    */
   public String getAuthor() {
-    return author;
+    return null;
   }
 
   /**
    * @return the createdDate
    */
   public Calendar getCreatedDate() {
-    return createdDate;
+    return null;
   }
 
   /**
    * @return the modifiedDate
    */
   public Calendar getModifiedDate() {
-    return modifiedDate;
+    return null;
   }
 
   /**
    * @return the isFolder
    */
   public boolean isFolder() {
-    return folder;
+    return false;
   }
 
   /**
@@ -174,6 +131,6 @@ public class LinkedCloudFile implements CloudFile {
    */
   @Override
   public boolean isSyncing() {
-    return syncing;
+    return true;
   }
 }

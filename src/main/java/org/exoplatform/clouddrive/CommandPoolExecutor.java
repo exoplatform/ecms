@@ -56,6 +56,11 @@ public class CommandPoolExecutor {
    */
   public static final long             STOP_TIMEOUT = 4 * SYNC_PERIOD;
 
+  /**
+   * Minimum number of threads to start.
+   */
+  public static final int              MIN_THREADS  = 2;
+
   protected static final Log           LOG          = ExoLogger.getLogger(CommandPoolExecutor.class);
 
   protected static CommandPoolExecutor singleton;
@@ -136,10 +141,10 @@ public class CommandPoolExecutor {
       if (executor.isShutdown()) {
         if (!executor.isTerminated()) {
           stopSheduller();
-            if (!executor.awaitTermination(STOP_TIMEOUT, TimeUnit.SECONDS)) {
-              LOG.warn("Cloud Drive scheduler (" + drives.size()
-                  + ") already shutdown but not yet terminated " + executor);
-            }
+          if (!executor.awaitTermination(STOP_TIMEOUT, TimeUnit.SECONDS)) {
+            LOG.warn("Cloud Drive scheduler (" + drives.size() + ") already shutdown but not yet terminated "
+                + executor);
+          }
         }
       } else {
         // scheduler already initialized and running - do nothing
@@ -147,15 +152,24 @@ public class CommandPoolExecutor {
       }
     }
 
-    // Executor will queue all commands and run them in maximum six threads. Two threads will be maintained
+    // Executor will queue all commands and run them in maximum ten threads. Two threads will be maintained
     // online even idle, other inactive will be stopped in two minutes.
-    // TODO calculate max pool size taking in account actual CPU of the machine
-    executor = new ThreadPoolExecutor(2,
-                                      10,
+    int cpus = Runtime.getRuntime().availableProcessors();
+    // use scale factor 25... we know our threads will not create high CPU load, as they are HTTP callers
+    // mainly and we want good parallelization
+    int maxThreads = Math.round(cpus * 25f);
+    maxThreads = maxThreads > 0 ? maxThreads : 1;
+    maxThreads = maxThreads < MIN_THREADS ? MIN_THREADS : maxThreads;
+    int queueSize = cpus * 4;
+    queueSize = queueSize < 4 ? 4 : queueSize;
+    LOG.info("Initializing command executor for max " + maxThreads + " threads, queue size " + queueSize);
+    executor = new ThreadPoolExecutor(MIN_THREADS,
+                                      maxThreads,
                                       120,
                                       TimeUnit.SECONDS,
-                                      new LinkedBlockingQueue<Runnable>(),
-                                      new CommandThreadFactory());
+                                      new LinkedBlockingQueue<Runnable>(queueSize),
+                                      new CommandThreadFactory(),
+                                      new ThreadPoolExecutor.CallerRunsPolicy());
   }
 
   private void stopSheduller() {

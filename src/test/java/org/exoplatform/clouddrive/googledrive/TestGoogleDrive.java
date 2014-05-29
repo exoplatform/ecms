@@ -18,27 +18,25 @@
  */
 package org.exoplatform.clouddrive.googledrive;
 
-import java.io.IOException;
-import java.util.ArrayList;
-import java.util.List;
+import com.google.api.client.auth.oauth2.Credential;
+import com.google.api.client.googleapis.auth.oauth2.GoogleAuthorizationCodeFlow;
+import com.google.api.client.googleapis.auth.oauth2.GoogleAuthorizationCodeTokenRequest;
 
 import org.exoplatform.clouddrive.CloudDriveException;
 import org.exoplatform.clouddrive.CloudFile;
-import org.exoplatform.clouddrive.googledrive.GoogleProvider;
-import org.exoplatform.clouddrive.googledrive.GoogleUser;
 import org.exoplatform.services.log.ExoLogger;
 import org.exoplatform.services.log.Log;
 import org.testng.Assert;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Test;
 
-import com.google.api.client.auth.oauth2.Credential;
-import com.google.api.client.googleapis.auth.oauth2.GoogleAuthorizationCodeFlow;
-import com.google.api.client.googleapis.auth.oauth2.GoogleAuthorizationCodeTokenRequest;
+import java.io.IOException;
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * TODO Test should be adopted to API rework.
- *
+ * 
  */
 public class TestGoogleDrive {
   protected static final Log                  LOG           = ExoLogger.getLogger(TestGoogleDrive.class);
@@ -69,26 +67,24 @@ public class TestGoogleDrive {
 
   private final String                        PROVIDER_NAME = "Google Drive";
 
-  //private GoogleDrive                         gDrive;
-
   @BeforeClass
-  public void init() throws IOException, CloudDriveException, CodeExchangeException {
+  public void init() throws IOException, CloudDriveException {
     credentialHelper = new CredentialUtils();
     flow = credentialHelper.getFlow();
     tokenRequest = flow.newTokenRequest(CODE1);
 
     credential = credentialHelper.getCredential(CODE2);
     provider = new GoogleProvider(PROVIDER_ID, PROVIDER_NAME, "", "");
-    //googleUser = new GoogleUser("name", "email", CODE2, provider, credential, "");
-    //gDrive = new GoogleDrive(googleUser, "");
+    // googleUser = new GoogleUser("name", "email", CODE2, provider, credential, "");
+    // gDrive = new GoogleDrive(googleUser, "");
 
   }
 
   @Test
   public void testListOfFiles() throws CloudDriveException {
-    //List<CloudFile> listOfFiles = gDrive.listFiles();
+    // List<CloudFile> listOfFiles = gDrive.listFiles();
     List<CloudFile> listOfFiles = new ArrayList<CloudFile>();
-    
+
     CloudFile first = listOfFiles.get(0);
     LOG.info("Number files in list: " + listOfFiles.size());
     Assert.assertNotNull(listOfFiles);
@@ -106,9 +102,9 @@ public class TestGoogleDrive {
 
   @Test
   public void testListOfFilesInFolder() throws CloudDriveException {
-    //List<CloudFile> listOfFiles = gDrive.listFiles();
+    // List<CloudFile> listOfFiles = gDrive.listFiles();
     List<CloudFile> listOfFiles = new ArrayList<CloudFile>();
-    
+
     CloudFile folder = null;
     CloudFile file = null;
     int i = 0;
@@ -117,9 +113,9 @@ public class TestGoogleDrive {
       if (file.isFolder()) {
         folder = file;
         LOG.info("Folder ----" + folder.getTitle());
-        //List<CloudFile> filesInFolder = gDrive.listFiles(folder);
+        // List<CloudFile> filesInFolder = gDrive.listFiles(folder);
         List<CloudFile> filesInFolder = new ArrayList<CloudFile>();
-        
+
         Assert.assertNotNull(folder.getAuthor());
         Assert.assertNotNull(folder.getCreatedDate());
         Assert.assertNotNull(folder.getId());

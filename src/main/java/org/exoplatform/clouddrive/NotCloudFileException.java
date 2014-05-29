@@ -19,9 +19,10 @@ package org.exoplatform.clouddrive;
 
 /**
  * Indicates that some file (usually designated by path) does not belong to a Cloud Drive or cannot be treated
- * as such. 
+ * as such.
  * 
- * <br>Created by The eXo Platform SAS.
+ * <br>
+ * Created by The eXo Platform SAS.
  * 
  * @author <a href="mailto:pnedonosko@exoplatform.com">Peter Nedonosko</a>
  * @version $Id: NotCloudFileException.java 00000. 2012 peter $

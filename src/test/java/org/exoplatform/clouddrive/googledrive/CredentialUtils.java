@@ -56,23 +56,20 @@ public class CredentialUtils {
   // https://www.googleapis.com/auth/userinfo.profile
   // https://www.googleapis.com/auth/drive.readonly
 
+  CredentialUtils() {
+
+  }
+
   /**
    * Exchange an authorization code for OAuth 2.0 credentials.
    * 
    * @return OAuth 2.0 credentials.
    * @throws CodeExchangeException An error occurred.
    */
-  public Credential getCredential(String code) throws CodeExchangeException {
-    try {
-      GoogleAuthorizationCodeFlow flow = getFlow();
-      GoogleTokenResponse response = flow.newTokenRequest(code)
-                                         .setRedirectUri(REDIRECT_URI)
-                                         .execute();
-      return flow.createAndStoreCredential(response, null);
-    } catch (IOException e) {
-      LOG.error("An error occurred: ", e);
-      throw new CodeExchangeException((String) null);
-    }
+  public Credential getCredential(String code) throws IOException {
+    GoogleAuthorizationCodeFlow flow = getFlow();
+    GoogleTokenResponse response = flow.newTokenRequest(code).setRedirectUri(REDIRECT_URI).execute();
+    return flow.createAndStoreCredential(response, null);
   }
 
   /**

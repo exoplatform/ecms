@@ -172,8 +172,7 @@ public class DriveService implements ResourceContainer {
               Throwable cause = err.getCause();
               LOG.warn("Access to cloud drive expired, forbidden or revoked. " + err.getMessage()
                   + (cause != null ? ". " + cause.getMessage() : ""));
-              // client should treat this status in special way and obtain new credentials using given
-              // provider
+              // client should treat this status in special way and obtain new credentials using given provider
               return Response.status(Status.FORBIDDEN).entity(local.getUser().getProvider()).build();
             } else if (err instanceof CloudDriveException) {
               LOG.error("Error synchrinizing the drive. " + err.getMessage(), err);
@@ -214,8 +213,8 @@ public class DriveService implements ResourceContainer {
               }
             }
           } catch (NotCloudFileException e) {
-            LOG.warn("Item " + workspace + ":" + path + " not a cloud file : " + e.getMessage());
-            return Response.status(Status.NO_CONTENT).build();
+            LOG.warn("Item " + workspace + ":" + path + " not yet a cloud file : " + e.getMessage());
+            files.add(new AcceptedCloudFile(path));
           }
         }
 
@@ -269,10 +268,10 @@ public class DriveService implements ResourceContainer {
               if (!file.getPath().equals(path)) {
                 file = new LinkedCloudFile(file, path); // it's symlink
               }
-
               return Response.ok().entity(file).build();
             } catch (NotCloudFileException e) {
-              LOG.warn("Item " + workspace + ":" + path + " not a cloud file: " + e.getMessage());
+              //LOG.warn("Item " + workspace + ":" + path + " not yet a cloud file: " + e.getMessage());
+              return Response.status(Status.ACCEPTED).entity(new AcceptedCloudFile(path)).build();
             }
           }
           LOG.warn("Item " + workspace + ":" + path + " not a cloud file or drive not connected.");
