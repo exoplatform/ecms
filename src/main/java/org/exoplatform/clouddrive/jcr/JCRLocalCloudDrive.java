@@ -155,6 +155,8 @@ public abstract class JCRLocalCloudDrive extends CloudDrive {
 
   public static final String     NT_UNSTRUCTURED       = "nt:unstructured";
 
+  public static final String     MIX_REFERENCEABLE     = "mix:referenceable";
+
   public static final String     ECD_LOCALFORMAT       = "ecd:localFormat";
 
   public static final double     CURRENT_LOCALFORMAT   = 1.1d;
@@ -305,6 +307,7 @@ public abstract class JCRLocalCloudDrive extends CloudDrive {
           trash = trashed.getParent().getParent();
         }
 
+        // otherwise try find and remove all trashed with this file id
         QueryManager qm = session.getWorkspace().getQueryManager();
         Query q = qm.createQuery("SELECT * FROM " + ECD_CLOUDFILE + " WHERE ecd:id=" + fileId
             + " AND jcr:path LIKE '" + trash.getPath() + "/%'", Query.SQL);
@@ -577,28 +580,41 @@ public abstract class JCRLocalCloudDrive extends CloudDrive {
 
     synchronized void checkTrashed(Node driveRoot) throws RepositoryException {
       if (trashed && added) {
-        if (driveRoot.getParent().isNodeType(EXO_TRASHFOLDER)) {
-          // drive in the Trash, so disconnect and remove it from the JCR
-          Session session = driveRoot.getSession();
-          try {
-            startAction(JCRLocalCloudDrive.this);
+        try {
+          if (driveRoot.getParent().isNodeType(EXO_TRASHFOLDER)) {
+            // drive in the Trash, so disconnect and remove it from the JCR
+            Session session = driveRoot.getSession();
             try {
-              disconnect();
-            } catch (Throwable e) {
-              // error of disconnect - don't care much here
-              LOG.error("Error disconnecting Cloud Drive " + title() + " before its removal. "
-                            + e.getMessage(),
-                        e);
-            }
+              startAction(JCRLocalCloudDrive.this);
+              try {
+                disconnect();
+              } catch (Throwable e) {
+                // error of disconnect - don't care much here
+                LOG.error("Error disconnecting Cloud Drive " + title() + " before its removal. "
+                              + e.getMessage(),
+                          e);
+              }
 
-            finishTrashed(session, driveRoot.getPath());
-          } finally {
-            // ...just JCR
-            driveRoot.remove();
-            session.save();
-            doneAction();
-            LOG.info("Cloud Drive " + title() + " successfully removed from the Trash.");
+              finishTrashed(session, driveRoot.getPath());
+            } finally {
+              doneAction(); // done in this thread
+              // and remove JCR node, do with a delay in dedicated thread
+              Thread remover = new Thread("cloud-drive-remover (" + title() + ")") {
+                /**
+                 * {@inheritDoc}
+                 */
+                @Override
+                public void run() {
+                  removeDriveNode();
+                }
+              };
+              remover.start();
+            }
           }
+        } catch (ItemNotFoundException e) {
+          // drive is in root of the workspace
+          // should not happen in current implementation, but possible in general
+          // do nothing!
         }
       }
     }
@@ -615,6 +631,63 @@ public abstract class JCRLocalCloudDrive extends CloudDrive {
 
       // fire listeners
       listeners.fireOnRemove(new CloudDriveEvent(getUser(), rootWorkspace, rootPath));
+    }
+
+    void removeDriveNode() {
+      boolean interrupted = false;
+      try {
+        Session session = systemSession();
+        try {
+          Node driveNode = session.getNodeByUUID(rootUUID);
+
+          try {
+            Thread.sleep(1000 * 5); // wait a bit for ECMS actions
+          } catch (InterruptedException e) {
+            LOG.warn("Cloud Drive remover interrupted " + e.getMessage());
+            interrupted = true;
+          }
+
+          startAction(JCRLocalCloudDrive.this);
+
+          try {
+            // remove all symlinks to files of this drive
+            // this query will work only for drive in the trash, as for already removed drives it
+            // find nothing
+            QueryManager qm = session.getWorkspace().getQueryManager();
+            Query q = qm.createQuery("SELECT * FROM " + MIX_REFERENCEABLE + " WHERE jcr:path LIKE '"
+                + driveNode.getPath() + "/%'", Query.SQL);
+            QueryResult qr = q.execute();
+            for (NodeIterator niter = qr.getNodes(); niter.hasNext();) {
+              Node file = niter.nextNode();
+              if (fileAPI.isFile(file)) {
+                String fileUUID = file.getUUID();
+                for (Node linked : finder.findLinked(session, fileUUID)) {
+                  Node parent = linked.getParent();
+                  linked.remove();
+                  parent.save(); // save immediately
+                }
+              }
+            }
+          } catch (RepositoryException e) {
+            LOG.error("Error removing file symlinks of Cloud Drive '" + title() + "'", e);
+          }
+
+          driveNode.remove();
+          session.save();
+          LOG.info("Cloud Drive " + title() + " successfully removed from the Trash.");
+        } catch (ItemNotFoundException e) {
+          // node already deleted
+          LOG.warn("Cloud Drive " + title() + " node already removed directly from JCR: " + e.getMessage());
+        } finally {
+          doneAction();
+        }
+      } catch (Throwable e) {
+        LOG.error("Error removing trashed Cloud Drive", e);
+      } finally {
+        if (interrupted) {
+          Thread.currentThread().interrupt();
+        }
+      }
     }
 
     public void enable() {
@@ -2901,17 +2974,20 @@ public abstract class JCRLocalCloudDrive extends CloudDrive {
   }
 
   protected void setChangeId(Long id) throws CloudDriveException, RepositoryException {
+    // FIXME indeed, it was possible to get interrupted thread for Box connector,
+    // as result, drive change Id wasn't properly set and further work blocked.
+    
     // only not interrupted (canceled) thread can do this
-    if (!Thread.currentThread().isInterrupted()) {
-      // save in persistent store
-      saveChangeId(id);
+    // if (!Thread.currentThread().isInterrupted()) {
+    // save in persistent store
+    saveChangeId(id);
 
-      // maintain runtime cache and sequencer
-      currentChangeId.set(id);
-      fileChangeSequencer.addAndGet(1 - fileChangeSequencer.get()); // reset sequencer
-    } else {
-      LOG.warn("Ignored attempt to set drive change id by interrupted thread.");
-    }
+    // maintain runtime cache and sequencer
+    currentChangeId.set(id);
+    fileChangeSequencer.addAndGet(1 - fileChangeSequencer.get()); // reset sequencer
+    // } else {
+    // LOG.warn("Ignored attempt to set drive change id by interrupted thread.");
+    // }
   }
 
   protected Long getChangeId() throws RepositoryException, CloudDriveException {
@@ -2935,7 +3011,7 @@ public abstract class JCRLocalCloudDrive extends CloudDrive {
                                                             RepositoryException {
     Node driveNode = rootNode();
     if (driveNode.getSession().getWorkspace().getName().equals(node.getSession().getWorkspace().getName())) {
-      if (isConnected() && isSameDrive(driveNode, node)) {
+      if (isConnected() && isSameDrive(node)) {
         return true;
       } else if (includeFiles) {
         Item target = finder.findItem(node.getSession(), node.getPath()); // take symlinks in account
@@ -2960,7 +3036,7 @@ public abstract class JCRLocalCloudDrive extends CloudDrive {
       Item target = finder.findItem(driveNode.getSession(), path); // take symlinks in account
       if (target.isNode()) {
         Node node = (Node) target;
-        if (isConnected() && isSameDrive(driveNode, node)) {
+        if (isConnected() && isSameDrive(node)) {
           return true;
         } else if (includeFiles) {
           // XXX 22.05.2014 removed check: && fileNode(node) != null
@@ -2971,11 +3047,10 @@ public abstract class JCRLocalCloudDrive extends CloudDrive {
     return false;
   }
 
-  protected boolean isSameDrive(Node driveNode, Node anotherNode) throws RepositoryException {
+  protected boolean isSameDrive(Node anotherNode) throws RepositoryException {
     if (anotherNode.isNodeType(ECD_CLOUDDRIVE)) {
-      return driveNode.getProperty("ecd:id")
-                      .getString()
-                      .equals(anotherNode.getProperty("ecd:id").getString());
+      // we cannot compare ecd:id here as they can be equal for some providers (e.g. Box) 
+      return this.rootUUID.equals(anotherNode.getUUID());
     }
     return false;
   }
@@ -3155,7 +3230,7 @@ public abstract class JCRLocalCloudDrive extends CloudDrive {
           internalName = name;
           // try NodeFinder name (storage specific, e.g. ECMS)
           String finderName = finder.cleanName(fileTitle);
-          // finder doesn't work with single symbol names when they are special characters (like '.') 
+          // finder doesn't work with single symbol names when they are special characters (like '.')
           if (finderName.length() > 1) {
             name = finderName;
             continue;
@@ -3581,7 +3656,7 @@ public abstract class JCRLocalCloudDrive extends CloudDrive {
                                  driveNode.getParent().getPath(),
                                  false,
                                  null,
-                                 new String[] { ECD_CLOUDDRIVE },
+                                 null,
                                  false);
     observation.addEventListener(handler.addListener,
                                  Event.NODE_ADDED,

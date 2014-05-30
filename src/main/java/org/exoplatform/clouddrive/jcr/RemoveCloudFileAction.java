@@ -26,6 +26,7 @@ import org.exoplatform.services.jcr.observation.ExtendedEvent;
 import org.exoplatform.services.log.ExoLogger;
 import org.exoplatform.services.log.Log;
 
+import javax.jcr.ItemNotFoundException;
 import javax.jcr.Node;
 
 /**
@@ -45,7 +46,6 @@ public class RemoveCloudFileAction extends AbstractJCRAction {
   @Override
   public boolean execute(Context context) throws Exception {
     Node fileNode = (Node) context.get(InvocationContext.CURRENT_ITEM);
-
     // we work only with node removal (no matter what set in the action config)
     if (ExtendedEvent.NODE_REMOVED == (Integer) context.get(InvocationContext.EVENT)) {
       CloudDriveService drives = drives(context);
@@ -55,7 +55,6 @@ public class RemoveCloudFileAction extends AbstractJCRAction {
           if (accept(localDrive)) {
             try {
               start(localDrive);
-
               try {
                 new CloudDriveManager(localDrive).initRemove(fileNode);
               } catch (SyncNotSupportedException e) {
@@ -67,6 +66,15 @@ public class RemoveCloudFileAction extends AbstractJCRAction {
           }
           return true;
         } else {
+          try {
+            Node driveParent = fileNode.getSession().getItem(localDrive.getPath()).getParent();
+            if (driveParent.isNodeType(JCRLocalCloudDrive.EXO_TRASHFOLDER)) {
+              // we ignore files of trashed drives
+              return true;
+            }
+          } catch (ItemNotFoundException e) {
+            // file in the root of workspace
+          }
           LOG.warn("Cloud Drive not connected " + localDrive.getPath());
         }
       } // drive not found, may be this file in Trash folder and user is cleaning it, do nothing
