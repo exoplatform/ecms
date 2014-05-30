@@ -351,6 +351,7 @@ a {
 
 .UploadForm .Abort  .Delete {
 	display: none;
+	background: none;
 }
 
 .UploadForm .Delete  .Abort {
@@ -359,6 +360,7 @@ a {
 
 .UploadForm .Delete  .Delete {
 	display: block;
+	background: none;
 }
 
 .UploadForm input {
