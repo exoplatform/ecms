@@ -121,3 +121,14 @@
 .UIJCRExplorer .UIDocumentWorkspace .UITabContent ul li {
     list-style-type: disc !important;
 }
+
+.UIJCRExplorer .UIDocumentWorkspace div#UIDocumentContainer > ul, .UIJCRExplorer .UIDocumentWorkspace div#UIDocumentContainer > ol, .UIJCRExplorer .UIDocumentWorkspace div#UIDocumentContainer > dl {
+    padding: 0 40px;
+    margin-top: 15px;
+}
+
+
+.UIJCRExplorer .UIDocumentWorkspace div#UIDocumentContainer > ul li {
+    list-style-type: disc !important;
+}
+
