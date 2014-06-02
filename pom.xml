@@ -280,7 +280,7 @@
             <java.security.auth.login.config>${project.build.directory}/test-classes/conf/jaas.conf</java.security.auth.login.config>
           </systemPropertyVariables>
           <includes>
-            <include>**/**/Test*.java</include>
+            <include>**/**/NoTest*.java</include>
           </includes>
           <excludes>
             <exclude>**/**/TestGoogle*.java</exclude>
@@ -308,7 +308,7 @@
                 <java.security.auth.login.config>${project.build.directory}/test-classes/conf/jaas.conf</java.security.auth.login.config>
               </systemPropertyVariables>
               <includes>
-                <include>**/**/*Spec.java</include>
+                <include>**/**/*No_Spec.java</include>
               </includes>
               <forkCount>0</forkCount>
             </configuration>
