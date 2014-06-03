@@ -189,7 +189,10 @@ public class WCMComposerImpl implements WCMComposer, Startable {
     String version = filters.get(FILTER_VERSION);
     String orderBy = filters.get(FILTER_ORDER_BY);
     String orderType = filters.get(FILTER_ORDER_TYPE);
-    String visibility = filters.get(FILTER_VISIBILITY);    
+    String visibility = filters.get(FILTER_VISIBILITY); 
+    String primaryType = filters.get(FILTER_PRIMARY_TYPE);
+    ManageableRepository manageableRepository = repositoryService.getCurrentRepository();
+    Session session = sessionProvider.getSession(workspace, manageableRepository);
     String remoteUser = null;
     if (WCMComposer.VISIBILITY_PUBLIC.equals(visibility)) {
       remoteUser = "##PUBLIC##VISIBILITY";
@@ -202,7 +205,12 @@ public class WCMComposerImpl implements WCMComposer, Startable {
       filters.put(FILTER_ORDER_BY, orderBy);
     }
     if (MODE_LIVE.equals(mode) && "exo:title".equals(orderBy)) {
-      orderBy = "exo:titlePublished "+orderType+", exo:title";
+      primaryType = this.getRightPrimaryType(primaryType, path, session);
+      if ("exo:taxonomyLink".equals(primaryType)) {
+        orderBy = "exo:name "+orderType+", exo:title";
+      } else {
+        orderBy = "exo:titlePublished "+orderType+", exo:title";
+      }
       filters.put(FILTER_ORDER_BY, orderBy);
     }
 
@@ -242,6 +250,9 @@ public class WCMComposerImpl implements WCMComposer, Startable {
     String orderBy = filters.get(FILTER_ORDER_BY);
     String orderType = filters.get(FILTER_ORDER_TYPE);
     String visibility = filters.get(FILTER_VISIBILITY);
+    String primaryType = filters.get(FILTER_PRIMARY_TYPE);
+    ManageableRepository manageableRepository = repositoryService.getCurrentRepository();
+    Session session = sessionProvider.getSession(workspace, manageableRepository);
     long offset = (filters.get(FILTER_OFFSET)!=null)?new Long(filters.get(FILTER_OFFSET)):0;
     long totalSize = (filters.get(FILTER_TOTAL)!=null)?new Long(filters.get(FILTER_TOTAL)):0;
     
@@ -252,7 +263,12 @@ public class WCMComposerImpl implements WCMComposer, Startable {
       filters.put(FILTER_ORDER_BY, orderBy);
     }
     if (MODE_LIVE.equals(mode) && "exo:title".equals(orderBy)) {
-      orderBy = "exo:titlePublished "+orderType+", exo:title";
+      primaryType = this.getRightPrimaryType(primaryType, path, session);
+      if ("exo:taxonomyLink".equals(primaryType)) {
+        orderBy = "exo:name "+orderType+", exo:title";
+      } else {
+        orderBy = "exo:titlePublished "+orderType+", exo:title";
+      }
       filters.put(FILTER_ORDER_BY, orderBy);
     }
 
@@ -318,19 +334,8 @@ public class WCMComposerImpl implements WCMComposer, Startable {
     } else {
       addUsedPrimaryTypes(primaryType);
       if (primaryType == null) {
-        primaryType = "nt:base";
-        Node currentFolder = null;
-        if ("/".equals(path)) {
-          currentFolder = session.getRootNode();
-        } else if (session.getRootNode().hasNode(path.substring(1))) {
-          currentFolder = session.getRootNode().getNode(path.substring(1));
-        } else {
-          return null;
-        }
-               
-        if (currentFolder != null && currentFolder.isNodeType("exo:taxonomy")) {
-          primaryType = "exo:taxonomyLink";
-        }
+        primaryType = this.getRightPrimaryType(primaryType, path, session);
+        if (primaryType == null) return null;
       } else {
         filterTemplates = false;
       }
@@ -702,4 +707,19 @@ public class WCMComposerImpl implements WCMComposer, Startable {
     }
   }
   
+  static private String getRightPrimaryType (String primaryType, String path, Session session) throws Exception {
+    primaryType = "nt:base";
+    Node currentFolder = null;
+    if ("/".equals(path)) {
+      currentFolder = session.getRootNode();
+    } else if (session.getRootNode().hasNode(path.substring(1))) {
+      currentFolder = session.getRootNode().getNode(path.substring(1));
+    } else {
+      return null;
+    }
+    if (currentFolder != null && currentFolder.isNodeType("exo:taxonomy")) {
+      primaryType = "exo:taxonomyLink";
+    }
+    return primaryType;
+  }
 }
