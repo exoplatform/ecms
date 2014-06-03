@@ -90,7 +90,8 @@ public class CMSNodeFinder extends NodeFinderImpl implements NodeFinder {
     try {
       Node target = session.getNodeByUUID(uuid);
       QueryManager qm = session.getWorkspace().getQueryManager();
-      Query q = qm.createQuery("SELECT * FROM exo:symlink WHERE exo:uuid=" + target.getUUID(), Query.SQL);
+      Query q = qm.createQuery("SELECT * FROM exo:symlink WHERE exo:uuid='" + target.getUUID() + "'",
+                               Query.SQL);
       QueryResult qr = q.execute();
       for (NodeIterator niter = qr.getNodes(); niter.hasNext();) {
         res.add(niter.nextNode());
