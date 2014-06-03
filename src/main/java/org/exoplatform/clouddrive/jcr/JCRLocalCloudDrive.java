@@ -93,6 +93,8 @@ import javax.jcr.Property;
 import javax.jcr.PropertyIterator;
 import javax.jcr.RepositoryException;
 import javax.jcr.Session;
+import javax.jcr.lock.LockException;
+import javax.jcr.nodetype.ConstraintViolationException;
 import javax.jcr.nodetype.NodeDefinition;
 import javax.jcr.nodetype.NodeType;
 import javax.jcr.nodetype.PropertyDefinition;
@@ -103,6 +105,7 @@ import javax.jcr.observation.ObservationManager;
 import javax.jcr.query.Query;
 import javax.jcr.query.QueryManager;
 import javax.jcr.query.QueryResult;
+import javax.jcr.version.VersionException;
 
 /**
  * JCR storage for local cloud drive. Created by The eXo Platform SAS
@@ -457,17 +460,19 @@ public abstract class JCRLocalCloudDrive extends CloudDrive {
       void disable() {
         AtomicLong requests = lock.get();
         if (requests == null) {
-          lock.set(requests = new AtomicLong(0));
+          lock.set(requests = new AtomicLong(1));
+        } else {
+          requests.incrementAndGet();
         }
-        requests.incrementAndGet();
       }
 
       void enable() {
         AtomicLong requests = lock.get();
         if (requests == null) {
           lock.set(requests = new AtomicLong(0));
+        } else if (requests.get() > 0) {
+          requests.decrementAndGet();
         }
-        requests.decrementAndGet();
       }
 
       boolean enabled() {
@@ -582,34 +587,61 @@ public abstract class JCRLocalCloudDrive extends CloudDrive {
       if (trashed && added) {
         try {
           if (driveRoot.getParent().isNodeType(EXO_TRASHFOLDER)) {
-            // drive in the Trash, so disconnect and remove it from the JCR
-            Session session = driveRoot.getSession();
-            try {
-              startAction(JCRLocalCloudDrive.this);
-              try {
-                disconnect();
-              } catch (Throwable e) {
-                // error of disconnect - don't care much here
-                LOG.error("Error disconnecting Cloud Drive " + title() + " before its removal. "
-                              + e.getMessage(),
-                          e);
-              }
+            // drive in the Trash
+            finishTrashed(driveRoot.getSession(), driveRoot.getPath());
 
-              finishTrashed(session, driveRoot.getPath());
-            } finally {
-              doneAction(); // done in this thread
-              // and remove JCR node, do with a delay in dedicated thread
-              Thread remover = new Thread("cloud-drive-remover (" + title() + ")") {
-                /**
-                 * {@inheritDoc}
-                 */
-                @Override
-                public void run() {
-                  removeDriveNode();
+            // disconnect and remove with a delay in dedicated thread
+            Thread remover = new Thread("cloud-drive-remover (" + title() + ")") {
+              /**
+               * {@inheritDoc}
+               */
+              @Override
+              public void run() {
+                boolean interrupted = false;
+                try {
+                  final Session session = systemSession();
+                  final Node driveRoot = session.getNodeByUUID(rootUUID);
+
+                  try {
+                    Thread.sleep(1000 * 2); // wait a bit for ECMS actions
+                  } catch (InterruptedException e) {
+                    LOG.warn("Cloud Drive remover interrupted " + e.getMessage());
+                    interrupted = true;
+                  }
+
+                  startAction(JCRLocalCloudDrive.this);
+
+                  try {
+                    disconnect(driveRoot); // disconnect under system session!
+                  } catch (Throwable e) {
+                    // error of disconnect - don't care much here
+                    LOG.error("Error disconnecting Cloud Drive " + title() + " before its removal. "
+                                  + e.getMessage(),
+                              e);
+                  }
+
+                  try {
+                    driveRoot.remove();
+                    session.save();
+                    LOG.info("Cloud Drive " + title() + " successfully removed from the Trash.");
+                  } catch (ItemNotFoundException e) {
+                    // node already deleted
+                    LOG.warn("Cloud Drive " + title() + " node already removed directly from JCR: "
+                        + e.getMessage());
+                  }
+
+                } catch (Throwable e) {
+                  LOG.error("Error removing node of Cloud Drive " + title() + ". " + e.getMessage(), e);
+                } finally {
+                  doneAction(); // done in this thread
+
+                  if (interrupted) {
+                    Thread.currentThread().interrupt();
+                  }
                 }
-              };
-              remover.start();
-            }
+              }
+            };
+            remover.start();
           }
         } catch (ItemNotFoundException e) {
           // drive is in root of the workspace
@@ -633,60 +665,38 @@ public abstract class JCRLocalCloudDrive extends CloudDrive {
       listeners.fireOnRemove(new CloudDriveEvent(getUser(), rootWorkspace, rootPath));
     }
 
-    void removeDriveNode() {
-      boolean interrupted = false;
+    @Deprecated
+    // NOT USED
+    void removeDriveNode(Node driveNode) throws RepositoryException {
       try {
-        Session session = systemSession();
-        try {
-          Node driveNode = session.getNodeByUUID(rootUUID);
+        // TODO cleanup. symlinks will be cleaned by ECMS itself
+        // try {
+        // // remove all symlinks to files of this drive
+        // // this query will work only for drive in the trash, as for already removed drives it
+        // // find nothing
+        // QueryManager qm = driveNode.getSession().getWorkspace().getQueryManager();
+        // Query q = qm.createQuery("SELECT * FROM " + MIX_REFERENCEABLE + " WHERE jcr:path LIKE '"
+        // + driveNode.getPath() + "/%'", Query.SQL);
+        // QueryResult qr = q.execute();
+        // for (NodeIterator niter = qr.getNodes(); niter.hasNext();) {
+        // Node file = niter.nextNode();
+        // if (fileAPI.isFile(file)) {
+        // String fileUUID = file.getUUID();
+        // for (Node linked : finder.findLinked(driveNode.getSession(), fileUUID)) {
+        // Node parent = linked.getParent();
+        // linked.remove();
+        // parent.save(); // save immediately
+        // }
+        // }
+        // }
+        // } catch (RepositoryException e) {
+        // LOG.error("Error removing file symlinks of Cloud Drive '" + title() + "'", e);
+        // }
 
-          try {
-            Thread.sleep(1000 * 5); // wait a bit for ECMS actions
-          } catch (InterruptedException e) {
-            LOG.warn("Cloud Drive remover interrupted " + e.getMessage());
-            interrupted = true;
-          }
-
-          startAction(JCRLocalCloudDrive.this);
-
-          try {
-            // remove all symlinks to files of this drive
-            // this query will work only for drive in the trash, as for already removed drives it
-            // find nothing
-            QueryManager qm = session.getWorkspace().getQueryManager();
-            Query q = qm.createQuery("SELECT * FROM " + MIX_REFERENCEABLE + " WHERE jcr:path LIKE '"
-                + driveNode.getPath() + "/%'", Query.SQL);
-            QueryResult qr = q.execute();
-            for (NodeIterator niter = qr.getNodes(); niter.hasNext();) {
-              Node file = niter.nextNode();
-              if (fileAPI.isFile(file)) {
-                String fileUUID = file.getUUID();
-                for (Node linked : finder.findLinked(session, fileUUID)) {
-                  Node parent = linked.getParent();
-                  linked.remove();
-                  parent.save(); // save immediately
-                }
-              }
-            }
-          } catch (RepositoryException e) {
-            LOG.error("Error removing file symlinks of Cloud Drive '" + title() + "'", e);
-          }
-
-          driveNode.remove();
-          session.save();
-          LOG.info("Cloud Drive " + title() + " successfully removed from the Trash.");
-        } catch (ItemNotFoundException e) {
-          // node already deleted
-          LOG.warn("Cloud Drive " + title() + " node already removed directly from JCR: " + e.getMessage());
-        } finally {
-          doneAction();
-        }
-      } catch (Throwable e) {
-        LOG.error("Error removing trashed Cloud Drive", e);
-      } finally {
-        if (interrupted) {
-          Thread.currentThread().interrupt();
-        }
+        driveNode.remove();
+      } catch (ItemNotFoundException e) {
+        // node already deleted
+        LOG.warn("Cloud Drive " + title() + " node already removed directly from JCR: " + e.getMessage());
       }
     }
 
@@ -1101,6 +1111,13 @@ public abstract class JCRLocalCloudDrive extends CloudDrive {
      */
     @Override
     protected void process() throws CloudDriveException, RepositoryException, InterruptedException {
+      // reset all possible previous attempts metadata
+      String empty = "".intern();
+      rootNode.setProperty("ecd:localChanges", empty);
+      rootNode.setProperty("ecd:localHistory", empty);
+      rootNode.setProperty("ecd:connected", false);
+      rootNode.save();
+
       // fetch all files to local storage
       fetchFiles();
 
@@ -1304,6 +1321,14 @@ public abstract class JCRLocalCloudDrive extends CloudDrive {
           } else if (change.changeType.equals(FileChange.CREATE)) {
             // well... it was existing and need add to the cloud, but already removed locally - ignore it
             LOG.warn("Ignoring already removed item creation: " + change.getPath(), e);
+          } else if (change.changeType.equals(FileChange.UPDATE)) {
+            Node existing = findNode(change.fileId);
+            if (existing != null) {
+              // XXX workaround file name change when fixNameConflict() was used and moved the node - ignore
+              // this change
+              LOG.warn("Item already updated (file renamed) " + change.getPath() + " belongs to "
+                  + existing.getPath() + ". Change faced with this: " + e.getMessage());
+            }
           } else if (e.getMessage().indexOf("/exo:thumbnails") > 0
               && change.getPath().indexOf("/exo:thumbnails") > 0) {
             // XXX hardcode ignorance of exo:thumbnails here also,
@@ -2397,40 +2422,54 @@ public abstract class JCRLocalCloudDrive extends CloudDrive {
                                                  RepositoryException;
 
   /**
+   * Disconnect drive connected to given node. This method doesn't check if the node represents the drive root
+   * node. This method also doesn't fire onDisconnect event to drive listeners.
+   * 
+   * @param rootNode {@link Node}
+   * @throws CloudDriveException
+   * @throws RepositoryException
+   */
+  private synchronized void disconnect(Node rootNode) throws CloudDriveException, RepositoryException {
+    try {
+      try {
+        // save disconnected status immediately
+        rootNode.setProperty("ecd:connected", false);
+        rootNode.getProperty("ecd:connected").save(); // only this property
+
+        // TODO stop commands running by this drive only
+        // commandExecutor.stop();
+
+        // remove all existing cloud files
+        for (NodeIterator niter = rootNode.getNodes(); niter.hasNext();) {
+          niter.nextNode().remove();
+        }
+
+        rootNode.save();
+      } catch (RepositoryException e) {
+        rollback(rootNode);
+        throw e;
+      } catch (RuntimeException e) {
+        rollback(rootNode);
+        throw e;
+      }
+    } catch (ItemNotFoundException e) {
+      // it is already removed
+      throw new DriveRemovedException("Drive '" + title() + "' was removed.", e);
+    }
+  }
+
+  /**
    * {@inheritDoc}
    */
   @Override
-  protected synchronized void disconnect() throws CloudDriveException, RepositoryException {
+  protected void disconnect() throws CloudDriveException, RepositoryException {
     // mark as disconnected and clean local storage
     if (isConnected()) {
-      try {
-        Node rootNode = rootNode();
-        try {
-          // stop commands pool
-          commandExecutor.stop();
+      Node driveRoot = rootNode();
+      disconnect(driveRoot);
 
-          rootNode.setProperty("ecd:connected", false);
-
-          // remove all existing cloud files
-          for (NodeIterator niter = rootNode.getNodes(); niter.hasNext();) {
-            niter.nextNode().remove();
-          }
-
-          rootNode.save();
-
-          // finally fire listeners
-          listeners.fireOnDisconnect(new CloudDriveEvent(getUser(), rootWorkspace, rootNode.getPath()));
-        } catch (RepositoryException e) {
-          rollback(rootNode);
-          throw e;
-        } catch (RuntimeException e) {
-          rollback(rootNode);
-          throw e;
-        }
-      } catch (ItemNotFoundException e) {
-        // it is already removed
-        throw new DriveRemovedException("Drive '" + title() + "' was removed.", e);
-      }
+      // finally fire listeners
+      listeners.fireOnDisconnect(new CloudDriveEvent(getUser(), rootWorkspace, driveRoot.getPath()));
     }
   }
 
@@ -2976,7 +3015,7 @@ public abstract class JCRLocalCloudDrive extends CloudDrive {
   protected void setChangeId(Long id) throws CloudDriveException, RepositoryException {
     // FIXME indeed, it was possible to get interrupted thread for Box connector,
     // as result, drive change Id wasn't properly set and further work blocked.
-    
+
     // only not interrupted (canceled) thread can do this
     // if (!Thread.currentThread().isInterrupted()) {
     // save in persistent store
@@ -3049,7 +3088,7 @@ public abstract class JCRLocalCloudDrive extends CloudDrive {
 
   protected boolean isSameDrive(Node anotherNode) throws RepositoryException {
     if (anotherNode.isNodeType(ECD_CLOUDDRIVE)) {
-      // we cannot compare ecd:id here as they can be equal for some providers (e.g. Box) 
+      // we cannot compare ecd:id here as they can be equal for some providers (e.g. Box)
       return this.rootUUID.equals(anotherNode.getUUID());
     }
     return false;

@@ -65,7 +65,8 @@ public class CloudDriveServiceImpl implements CloudDriveService, Startable {
     void cleanUserCaches(CloudUser user) {
       Map<CloudUser, CloudDrive> drives = userDrives.get(user);
       if (drives != null) {
-        drives.remove(user);
+        CloudDrive cleaned = drives.remove(user);
+        repositoryDrives.values().remove(cleaned);
       }
     }
 
@@ -74,7 +75,6 @@ public class CloudDriveServiceImpl implements CloudDriveService, Startable {
      */
     @Override
     public void onRemove(CloudDriveEvent event) {
-      // for a case if onDisconnect didn't do the job
       cleanUserCaches(event.getUser());
     }
 
@@ -83,7 +83,7 @@ public class CloudDriveServiceImpl implements CloudDriveService, Startable {
      */
     @Override
     public void onDisconnect(CloudDriveEvent event) {
-      cleanUserCaches(event.getUser());
+      // XXX don't do this on disconnect // cleanUserCaches(event.getUser());
     }
 
     /**

@@ -89,7 +89,6 @@ import javax.net.ssl.KeyManagerFactory;
 import javax.net.ssl.SSLContext;
 import javax.net.ssl.TrustManager;
 import javax.net.ssl.TrustManagerFactory;
-import javax.net.ssl.X509TrustManager;
 
 /**
  * All calls to Box API here.
@@ -1179,13 +1178,14 @@ public class BoxAPI {
               LOG.debug("File with the same name as updated already exists " + id + ". Trying again.");
             }
             existing = readFile(id);
-            nameChanged = !existing.getName().equals(name);
+            nameChanged = !existing.getName().equalsIgnoreCase(name);
             parentChanged = !existing.getParent().getId().equals(parentId);
           } else {
             throw new ConflictException("File with the same name as updated already exists " + id);
           }
+        } else {
+          throw new BoxException("Error updating file: " + e.getMessage(), e);
         }
-        throw new BoxException("Error updating file: " + e.getMessage(), e);
       } catch (UnsupportedEncodingException e) {
         throw new BoxException("Error updating file: " + e.getMessage(), e);
       } catch (AuthFatalFailureException e) {
@@ -1275,13 +1275,14 @@ public class BoxAPI {
               LOG.debug("Folder with the same name as updated already exists " + id + ". Trying again.");
             }
             existing = readFolder(id);
-            nameChanged = !existing.getName().equals(name);
+            nameChanged = !existing.getName().equalsIgnoreCase(name);
             parentChanged = !existing.getParent().getId().equals(parentId);
           } else {
             throw new ConflictException("Folder with the same name as updated already exists " + id);
           }
+        } else {
+          throw new BoxException("Error updating folder: " + e.getMessage(), e);
         }
-        throw new BoxException("Error updating folder: " + e.getMessage(), e);
       } catch (UnsupportedEncodingException e) {
         throw new BoxException("Error updating folder: " + e.getMessage(), e);
       } catch (AuthFatalFailureException e) {

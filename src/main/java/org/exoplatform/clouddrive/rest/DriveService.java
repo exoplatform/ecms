@@ -24,6 +24,7 @@ import org.exoplatform.clouddrive.CloudFile;
 import org.exoplatform.clouddrive.CloudProvider;
 import org.exoplatform.clouddrive.DriveRemovedException;
 import org.exoplatform.clouddrive.NotCloudFileException;
+import org.exoplatform.clouddrive.NotConnectedException;
 import org.exoplatform.clouddrive.RefreshAccessException;
 import org.exoplatform.services.jcr.RepositoryService;
 import org.exoplatform.services.jcr.ext.app.SessionProviderService;
@@ -172,8 +173,12 @@ public class DriveService implements ResourceContainer {
               Throwable cause = err.getCause();
               LOG.warn("Access to cloud drive expired, forbidden or revoked. " + err.getMessage()
                   + (cause != null ? ". " + cause.getMessage() : ""));
-              // client should treat this status in special way and obtain new credentials using given provider
+              // client should treat this status in special way and obtain new credentials using given
+              // provider
               return Response.status(Status.FORBIDDEN).entity(local.getUser().getProvider()).build();
+            } else if (err instanceof NotConnectedException) {
+              LOG.warn("Cannot synchronize not connected drive. " + err.getMessage(), err);
+              return Response.status(Status.BAD_REQUEST).entity("Drive not connected.").build();
             } else if (err instanceof CloudDriveException) {
               LOG.error("Error synchrinizing the drive. " + err.getMessage(), err);
               return Response.status(Status.INTERNAL_SERVER_ERROR)
@@ -270,7 +275,7 @@ public class DriveService implements ResourceContainer {
               }
               return Response.ok().entity(file).build();
             } catch (NotCloudFileException e) {
-              //LOG.warn("Item " + workspace + ":" + path + " not yet a cloud file: " + e.getMessage());
+              // LOG.warn("Item " + workspace + ":" + path + " not yet a cloud file: " + e.getMessage());
               return Response.status(Status.ACCEPTED).entity(new AcceptedCloudFile(path)).build();
             }
           }

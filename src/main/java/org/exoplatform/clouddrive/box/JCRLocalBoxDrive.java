@@ -243,10 +243,15 @@ public class JCRLocalBoxDrive extends JCRLocalCloudDrive implements UserTokenRef
       // at this point we know all changes already applied - we don't need history anymore
       fileHistory.clear();
       try {
-        rootNode.setProperty("ecd:localHistory", "".intern());
+        jcrListener.disable();
+        String empty = "".intern();
+        rootNode.setProperty("ecd:localHistory", empty);
+        rootNode.setProperty("ecd:localChanges", empty);
         rootNode.save();
       } catch (Throwable e) {
         LOG.error("Error cleaning local history in " + title(), e);
+      } finally {
+        jcrListener.enable();
       }
     }
   }
