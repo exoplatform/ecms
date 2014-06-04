@@ -850,4 +850,21 @@ public class Utils {
     }
     return "," + Math.round(Double.valueOf(Integer.valueOf(strSize) / 100.0));
   }
+  
+  /**
+   * Check whether current node has MixinTypes name = noteTypeName
+   * @param node
+   * @param nodeTypeName
+   * @return  true: if exist noteTypeName in MixtinTypes
+   *          false: if not exist
+   * @throws Exception
+   */
+  public static boolean hasMixin(Node node, String nodeTypeName) throws Exception {
+    NodeType[] mixinTypes = node.getMixinNodeTypes() ;
+    for(NodeType nodeType : mixinTypes) {
+      if(nodeType.getName().equals(nodeTypeName)) return true ;
+    }
+    return false ;
+  }
+
 }
