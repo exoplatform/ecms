@@ -39,6 +39,7 @@ import org.exoplatform.ecm.webui.utils.LockUtil;
 import org.exoplatform.ecm.webui.utils.Utils;
 import org.exoplatform.services.cms.CmsService;
 import org.exoplatform.services.cms.relations.RelationsService;
+import org.exoplatform.services.ecm.publication.PublicationService;
 import org.exoplatform.services.listener.ListenerService;
 import org.exoplatform.services.wcm.core.NodeLocation;
 import org.exoplatform.web.application.ApplicationMessage;
@@ -223,7 +224,8 @@ public class UIRenameForm extends UIForm implements UIPopupComponent {
           }
         }
         nodeSession.save();
-        if (changed){//if the name or title has changed, broadcast to change publication state
+        PublicationService publicationService = uiRenameForm.getApplicationComponent(PublicationService.class);
+        if (changed && publicationService.isNodeEnrolledInLifecycle(currentNode)){//if the name or title has changed, broadcast to change publication state
           ListenerService listenerService = uiRenameForm.getApplicationComponent(ListenerService.class);
           if (currentNode.isNodeType("exo:datetime")) {
             currentNode.setProperty("exo:dateModified", new GregorianCalendar());
