@@ -101,8 +101,8 @@
   
 	<!-- exo:actions property will be used to store all actions that reference to this node -->
   <nodeType name="exo:actionable" isMixin="true" hasOrderableChildNodes="false" primaryItemName="">
-  	<propertyDefinitions>
-      <propertyDefinition name="exo:actions" requiredType="Reference" autoCreated="false" mandatory="true"
+    <propertyDefinitions>
+      <propertyDefinition name="exo:actions" requiredType="Reference" autoCreated="false" mandatory="false"
         onParentVersion="COPY" protected="false" multiple="false">
         <valueConstraints/>
       </propertyDefinition>
