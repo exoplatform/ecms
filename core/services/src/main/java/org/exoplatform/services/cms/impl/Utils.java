@@ -881,5 +881,4 @@ public class Utils {
     return node.isNodeType(NodetypeConstant.NT_FOLDER)
         || node.isNodeType(NodetypeConstant.NT_UNSTRUCTURED);
  }
-
 }
