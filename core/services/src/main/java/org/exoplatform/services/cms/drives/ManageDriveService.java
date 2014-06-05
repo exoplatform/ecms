@@ -17,6 +17,7 @@
 package org.exoplatform.services.cms.drives;
 
 import java.util.List;
+import java.util.Set;
 
 /**
  * Function to manage Drive to be able to add, remove or manage them.
@@ -192,4 +193,12 @@ public interface ManageDriveService {
    * @param newRoleUpdated
    */
   public void setNewRoleUpdated(boolean newRoleUpdated);
+
+  /**
+   * Get deleted drive names.
+   *
+   * @return list of deleted drive names
+   * @throws Exception
+   */
+  public Set<String> getDeletedDriveNames() throws Exception;
 }
