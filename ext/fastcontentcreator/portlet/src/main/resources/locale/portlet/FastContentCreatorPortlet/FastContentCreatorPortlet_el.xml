@@ -148,7 +148,7 @@
     <title>
       <UIOneNodePathSelector>Επιλογή τοποθεσίας</UIOneNodePathSelector>
       <UIPermissionSelector>Περιηγητής Δικαιωμάτων</UIPermissionSelector>
-      <UICategoriesSelector>Προσθήκη Κατηγοριών</UICategoriesSelector>
+      <UICategoriesSelector>Add Categories</UICategoriesSelector>
     </title>
   </PopupComponent>
 
