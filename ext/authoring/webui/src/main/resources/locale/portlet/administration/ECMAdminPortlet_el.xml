@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<bundle>
+  <UIViewFormTabPane>
+  <label>
+          <publicationRequestApproval>Δημοσίευση &gt; Ζητήστε έγκριση</publicationRequestApproval>
+          <publicationApproveContent>Δημοσίευση &gt; Έγκριση περιεχομένου</publicationApproveContent>
+          <publicationPublish>Δημοσίευση &gt; Δημοσιοποιήστε το</publicationPublish>
+  </label>
+  </UIViewFormTabPane>
+</bundle>
