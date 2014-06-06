@@ -148,7 +148,7 @@
     <title>
       <UIOneNodePathSelector>Velg plassering</UIOneNodePathSelector>
       <UIPermissionSelector>Rettighetsutforsker</UIPermissionSelector>
-      <UICategoriesSelector>Legg til kategorier</UICategoriesSelector>
+      <UICategoriesSelector>Add Categories</UICategoriesSelector>
     </title>
   </PopupComponent>
 
