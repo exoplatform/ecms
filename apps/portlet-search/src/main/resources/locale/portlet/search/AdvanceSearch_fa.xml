@@ -1,0 +1,96 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<bundle>
+  <UIDefaultSearchForm>
+    <label>
+      <keyword>کلمه کلیدی</keyword>
+      <portal>پرتال</portal>
+      <Page>صفحه</Page>
+      <Document>سند</Document>
+    </label>
+    <action>
+      <Search>جستجو</Search>
+    </action>
+  </UIDefaultSearchForm>
+
+  <UIDefaultSearchResult>
+    <label>
+      <Page>صفحه</Page>
+      <Document>سند</Document>
+      <DocumentAndPage>سند و صفحه</DocumentAndPage>
+      <documentandpage>سند و صفحه</documentandpage>
+      <resutlsCaption>نتایج</resutlsCaption>
+      <ofAboutCaption>حدود</ofAboutCaption>
+      <forCaption>برای</forCaption>
+      <timeUnitCaption>ثانیه</timeUnitCaption>
+      <similar>صفحاتی که در آن محتوای مشابه وجود دارد</similar>
+      <editor>ویرایشگر</editor>
+      <date>تاریخ</date>
+      <relevancy>مرتبط</relevancy>
+      <title>عنوان</title>
+      <sortBy>مرتب سازی بر اساس:</sortBy>
+    </label>
+    <action>
+      <edit>ویرایش</edit>
+    </action>
+    <msg>
+      <search-not-match-type>جستجوی شما {0} با هیچ کدام از {1} مطابقت نمی کند.</search-not-match-type>
+    </msg>
+  </UIDefaultSearchResult>
+  <UISearchPageLayoutManager>
+    <label>
+      <itemsPerPageSelector>مورد در هر صفحه</itemsPerPageSelector>
+      <searchFormSelector>قالب فرم جستجو</searchFormSelector>
+      <searchResultSelector>قالب نتیجه جستجو</searchResultSelector>
+      <searchPaginatorSelector>قالب صفحه بندی جستجو</searchPaginatorSelector>
+      <searchPageLayoutSelector>قالب چیدمان صفحه جستجو</searchPageLayoutSelector>
+      <searchResultBasePathInputSetAction>مسیر پایه</searchResultBasePathInputSetAction>
+      <pageMode>حالت صفحه</pageMode>
+      <option>
+        <none>هیچ کدام</none>
+        <more>بیشتر</more>
+        <pagination>صفحه بندي</pagination>
+      </option>
+    </label>
+    <action>
+      <Save>#{word.save}</Save>
+      <Cancel>#{word.cancel}</Cancel>
+    </action>
+  </UISearchPageLayoutManager>
+  <searchResultBasePathInputSetAction>
+    <title>
+      <SelectBasePath>انتخاب مسیر پایه</SelectBasePath>
+    </title>
+  </searchResultBasePathInputSetAction>  
+  <UISearchForm>  
+   <message>
+     <keyword-not-support>کلمه کلیدی نامعتبر است. برخی از کاراکترها شناخته شده نیستند.</keyword-not-support>
+     <not-checked>لطفا نوع جستجو را انتخاب کنید.</not-checked>
+     <keyword-not-empty>لطفا یک کلمه کلیدی را وارد کنید.</keyword-not-empty>
+   </message>
+  </UISearchForm>
+  <UIPaginatorDefault>
+    <label>
+      <next>بعدی</next>
+      <previous>قبلی</previous>
+      <more>بیشتر</more>
+    </label>
+  </UIPaginatorDefault>
+  <UISearchPageLayoutDefault>
+    <label>
+      <quickEditTitle>ویرایش سریع</quickEditTitle>
+    </label>
+  </UISearchPageLayoutDefault>
+  <searchOption>
+    <label>
+      <pageCheckBox>در صفحات</pageCheckBox>
+      <documentCheckBox>در محتوا</documentCheckBox>
+    </label>
+  </searchOption>
+  <ViewMode>
+    <label>
+      <option>
+        <all>جستجوی همه سایت ها</all>
+      </option>  
+    </label>  
+  </ViewMode>
+</bundle>

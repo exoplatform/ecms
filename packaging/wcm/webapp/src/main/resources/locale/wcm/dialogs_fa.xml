@@ -1,0 +1,93 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+
+    Copyright (C) 2009 eXo Platform SAS.
+    
+    This is free software; you can redistribute it and/or modify it
+    under the terms of the GNU Lesser General Public License as
+    published by the Free Software Foundation; either version 2.1 of
+    the License, or (at your option) any later version.
+    
+    This software is distributed in the hope that it will be useful,
+    but WITHOUT ANY WARRANTY; without even the implied warranty of
+    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the GNU
+    Lesser General Public License for more details.
+    
+    You should have received a copy of the GNU Lesser General Public
+    License along with this software; if not, write to the Free
+    Software Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA
+    02110-1301 USA, or see the FSF site: http://www.fsf.org.
+
+-->
+<bundle>
+  <WebContent>
+    <dialog>
+      <label>
+        <MainContent>محتوای اصلی</MainContent>
+        <cssFile>default.css</cssFile>
+        <jsFile>default.js</jsFile>
+        <Advanced>پیشرفته</Advanced>
+        <Summary>خلاصه</Summary>
+        <name>#{word.name}</name>
+        <title>عنوان</title>
+        <ContentCSS>داده های CSS</ContentCSS>
+        <hintCSS>You can specify the main style sheet for your web content. This style will override the style sheets defined at the site level and at the shared level.</hintCSS>
+        <ContentJS>داده های JS</ContentJS>
+        <hintJS>You can specify some JavaScript codes that can be executed before your web content is rendered.</hintJS>
+        <WebContentHtml>محتوای اصلی</WebContentHtml>
+        <Illustration>توصیف</Illustration>
+        <hintIllustration>You can specify an image that will be shown when your web content is displayed in the list. You can also specify some summary texts to go with this image.</hintIllustration>
+        <confirm-delete>Are you sure you want to delete this illustration?</confirm-delete>
+        <illustrationImage>تصویر توضیحی</illustrationImage>
+        <imageMimeType>نوع تصویر</imageMimeType>
+        <image>آپلود تصویر</image>
+        <imageWidth>عرض تصویر</imageWidth>
+        <imageHeight>ارتفاع تصویر</imageHeight>
+        <Synchronize>همگام سازی با HTML و CSS</Synchronize>
+      </label>
+    </dialog>
+  </WebContent>
+
+  <CSSFile>
+    <dialog>
+      <label>
+        <name>#{word.name}</name>
+        <active>فعال</active>
+        <priority>اولویت</priority>
+        <content>داده های CSS</content>
+      </label>
+    </dialog>
+  </CSSFile>
+
+  <JSFile>
+    <dialog>
+      <label>
+        <name>#{word.name}</name>
+        <active>فعال</active>
+        <priority>اولویت</priority>
+        <content>داده های JS</content>
+      </label>
+    </dialog>
+  </JSFile>
+
+  <WebLink>
+    <dialog>
+      <label>
+        <name>#{word.name}</name>
+        <url>آدرس</url>
+        <description>توضیحات</description>
+      </label>
+    </dialog>
+  </WebLink>
+
+  <SiteMetadata>
+    <dialog>
+      <label>
+        <title>عنوان سایت</title>
+        <description>توضیحات سایت</description>
+        <keywords>کلمات کلیدی سایت</keywords>
+        <robots>رفتار موتور جستجو</robots>
+      </label>
+    </dialog>
+  </SiteMetadata>
+</bundle>

@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<bundle>
+  <PublicationService>
+    <AuthoringPublicationPlugin>
+      <changeState>
+        <obsoleted>Το περιεχόμενο είναι παρωχημένο</obsoleted>
+        <published>Το περιεχόμενο είναι δημοσιευμένο</published>
+<unpublished>Το περιεχόμενο είναι αδημοσίευτο</unpublished>
+<archived>Το περιεχόμενο είναι αρχειοθετημένο</archived>
+<staged>Το περιεχόμενο είναι έτοιμο για δημοσίευση</staged>
+<approved>Το περιεχόμενο είναι εγκεκριμένο</approved>
+<pending>Το περιεχόμενο είναι σε εκκρεμότητα</pending>
+<draft>Το περιεχόμενο βρίσκεται σε μορφή προσχεδίου</draft>
+      </changeState>
+    </AuthoringPublicationPlugin>
+  </PublicationService>
+  <Publication>
+    <log>
+      <description>
+        <enrolled>Το περιεχόμενο καταχωρείται στον κύκλο ζωής δημοσιευμένων</enrolled>
+      </description>
+    </log>
+  </Publication>
+</bundle>

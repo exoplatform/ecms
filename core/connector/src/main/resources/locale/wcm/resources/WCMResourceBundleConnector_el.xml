@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<bundle>
+  <ContentSelector>
+    <msg>
+      <no-file-selected>Δεν υπάρχει επιλεγμένο περιεχόμενο. Παρακαλώ επιλέξτε κάτι.</no-file-selected>
+    </msg>
+  </ContentSelector>
+  <RenameConnector>
+    <label>
+      <rename>Μετονομασία</rename>
+      <cancel>Ακύρωση</cancel>
+    </label>
+    <msg>
+      <renaming>Πραγματοποιείται η μετονομασία...</renaming>
+    </msg>
+  </RenameConnector>
+</bundle>

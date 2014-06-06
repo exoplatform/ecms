@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<bundle>
+<UIPopupWindow>
+<title>
+<UIViewInfoManager>Προβολή πληροφοριών</UIViewInfoManager>
+</title>
+</UIPopupWindow>
+    
+<ECMContextMenu>
+<event>
+<ViewInfo>Προβολή πληροφοριών</ViewInfo>
+</event>
+</ECMContextMenu>
+<UIViewInfoContainer>
+<label>
+      <name>Όνομα</name>
+      <title>Τίτλος</title>
+      <type>Τύπος</type>
+      <size>Μέγεθος</size>
+      <owner>Ιδιοκτήτης</owner>
+      <lastModifier>Τελευταία τροποποίηση από</lastModifier>
+      <created>Ημερομηνία δημιουργίας</created>
+      <lastModified>Τελευταία ημερομηνία τροποποίησης</lastModified>
+      <publicationState>Κατάσταση Δημοσίευσης</publicationState>
+</label>
+<value>
+      <folder>Φάκελος</folder>
+</value>
+<action>
+<Close>#{word.close}</Close>
+</action>
+</UIViewInfoContainer>
+</bundle>

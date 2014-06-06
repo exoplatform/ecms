@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<bundle>
+  <UIDashboardForm>
+    <label>
+      <title>Author Dashboard</title>
+      <nocontent>Δεν υπάρχει περιεχόμενο</nocontent>
+      <mydraft>Τα προσχέδια μου</mydraft>
+      <waitingapproval>Εν αναμονή της έγκρισης μου</waitingapproval>
+      <approve>Έγκριση</approve>
+      <publishedtomorrow>Προς δημοσίευση αύριο</publishedtomorrow>
+      <refresh>#{word.refresh}</refresh>
+    </label>
+  </UIDashboardForm>
+</bundle>
