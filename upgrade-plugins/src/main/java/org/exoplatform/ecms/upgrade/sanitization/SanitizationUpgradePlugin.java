@@ -21,6 +21,7 @@ package org.exoplatform.ecms.upgrade.sanitization;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.HashMap;
+import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 
@@ -90,6 +91,11 @@ public class SanitizationUpgradePlugin extends UpgradeProductPlugin {
      * Migrate portlet preferences which contains the "/sites content/live" path to "/sites"
      */
     migratePortletPreferences();
+
+    /**
+     * Migrate binary data jcr:data which still contains "/sites content/live" in its values
+     */
+    migrateJCRDataContents();
 
     /**
      * Migrate exo:links which still contains "/sites content/live" in its properties
@@ -332,6 +338,59 @@ public class SanitizationUpgradePlugin extends UpgradeProductPlugin {
     } catch (Exception e) {
       if (LOG.isErrorEnabled()) {
         LOG.error("An unexpected error occurs when migrating old preferences: ", e);
+      }
+    }
+  }
+
+  /**
+   * Migrate binnary data jcr:data which still contains "/sites content/live" in its values
+   */
+  private void migrateJCRDataContents() {
+    if (LOG.isInfoEnabled()) {
+      LOG.info("Start " + this.getClass().getName() + ".............");
+    }
+    try {
+      Session session = WCMCoreUtils.getSystemSessionProvider().getSession("collaboration",repoService_.getCurrentRepository());
+      if (LOG.isInfoEnabled()) {
+        LOG.info("=====Start migrate old links from jcr data====");
+      }
+      List<String> documentMixinTypes = new ArrayList<String>();
+      // for performance reason we limit search to js,html and csscontents
+      documentMixinTypes.add("exo:jsFile");
+      documentMixinTypes.add("exo:htmlFile");
+      documentMixinTypes.add("exo:cssFile");
+      for (String type : documentMixinTypes) {
+        StringBuilder statement = new StringBuilder().append("select * from ").append(type).append(" ORDER BY exo:name DESC ");
+        QueryResult result = session.getWorkspace().getQueryManager().createQuery(statement.toString(), Query.SQL).execute();
+        NodeIterator nodeIter = result.getNodes();
+        while (nodeIter.hasNext()) {
+          Node node = nodeIter.nextNode();
+          if (node.hasNode("jcr:content")) {
+            Node content = node.getNode("jcr:content");
+            if (content.hasProperty("jcr:mimeType")) {
+              String mimeType = content.getProperty("jcr:mimeType").getString();
+              if (mimeType.startsWith("text")) {
+                String jcrData = content.getProperty("jcr:data").getString();
+                if (jcrData.contains("/sites content/live/")|| jcrData.contains("/sites%20content/live/")) {
+                  LOG.info("=====Migrating data contents '"+ content.getParent().getPath()+ "' =====");
+                  String newData = StringUtils.replaceEachRepeatedly(jcrData,
+                                                                     new String[] {"/sites content/live/","/sites%20content/live/" },
+                                                                     new String[] { "/sites/","/sites/" });
+                  content.setProperty("jcr:data", newData);
+                  session.save();
+                }
+              }
+            }
+          }
+        }
+      }
+
+      if (LOG.isInfoEnabled()) {
+        LOG.info("===== Migrate data in contents completed =====");
+      }
+    } catch (Exception e) {
+      if (LOG.isErrorEnabled()) {
+        LOG.error("An unexpected error occurs when migrating JCR Data Contents: ",e);
       }
     }
   }
