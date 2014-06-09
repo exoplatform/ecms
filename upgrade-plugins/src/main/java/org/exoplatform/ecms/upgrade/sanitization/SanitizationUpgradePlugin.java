@@ -92,6 +92,11 @@ public class SanitizationUpgradePlugin extends UpgradeProductPlugin {
     migratePortletPreferences();
 
     /**
+     * Migrate binary data jcr:data which still contains "/sites content/live" in its values
+     */
+    migrateJCRDataContents();
+
+    /**
      * Migrate exo:links which still contains "/sites content/live" in its properties
      */
     migrateLinkInContents();
@@ -332,6 +337,45 @@ public class SanitizationUpgradePlugin extends UpgradeProductPlugin {
     } catch (Exception e) {
       if (LOG.isErrorEnabled()) {
         LOG.error("An unexpected error occurs when migrating old preferences: ", e);
+      }
+    }
+  }
+
+  /**
+   * Migrate binnary data jcr:data which still contains "/sites content/live" in its values
+   */
+  private void migrateJCRDataContents() {
+    if (LOG.isInfoEnabled()) {
+      LOG.info("Start " + this.getClass().getName() + ".............");
+    }
+    try {
+      Session session = WCMCoreUtils.getSystemSessionProvider().getSession("collaboration", repoService_.getCurrentRepository());
+      if (LOG.isInfoEnabled()) {
+        LOG.info("=====Start migrate old links from jcr data====");
+      }
+      String statement = "select * from nt:resource ORDER BY exo:name DESC";
+      QueryResult result = session.getWorkspace().getQueryManager().createQuery(statement, Query.SQL).execute();
+      NodeIterator nodeIter = result.getNodes();
+      while(nodeIter.hasNext()) {
+    	Node ntResource = nodeIter.nextNode();
+		String mimeType = ntResource.getProperty("jcr:mimeType").getString();
+		if (mimeType.startsWith("text")) {
+			String jcrData = ntResource.getProperty("jcr:data").getString();
+			if (jcrData.contains("/sites content/live/")){
+				LOG.info("=====Migrating data contents '"+ntResource.getParent().getPath()+"' =====");
+				String newData = StringUtils.replace(jcrData, "/sites content/live/", "/sites/");
+				ntResource.setProperty("jcr:data", newData);
+				session.save();
+			}
+		}
+
+    }
+      if (LOG.isInfoEnabled()) {
+          LOG.info("===== Migrate data in contents completed =====");
+        }
+      } catch (Exception e) {
+      if (LOG.isErrorEnabled()) {
+        LOG.error("An unexpected error occurs when migrating JCR Data Contents: ", e);
       }
     }
   }
