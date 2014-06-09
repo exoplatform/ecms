@@ -86,8 +86,8 @@
     	if(beanActions != null && beanActions.length > 0) { 
     %>
           <td class="action center">
-              <img onclick="<%= uicomponent.event("Select", nodeExpression) %>" src="/eXoResources/skin/sharedImages/Blank.gif" class="SelectIcon" rel="tooltip" data-placement="bottom" title="<%=_ctx.appRes("UIContentSearchResult.title.Select")%>" alt="<%=_ctx.appRes("UIContentSearchResult.title.Select")%>" />
-              <img onclick="<%= uicomponent.event("View", nodeExpression) %>" src="/eXoResources/skin/sharedImages/Blank.gif" class="ViewIcon" rel="tooltip" data-placement="bottom" title="<%=_ctx.appRes("UIContentSearchResult.title.View")%>" alt="<%=_ctx.appRes("UIContentSearchResult.title.View")%>" />                 
+            <a href="javascript: void(0)" onclick="<%= uicomponent.event("Select", nodeExpression) %>" class="SelectIcon" rel="tooltip" data-placement="bottom" title="<%=_ctx.appRes("UIContentSearchResult.title.Select")%>"><i class="uiIconValidate uiIconLightGray"></i></a>
+			<a href="javascript: void(0)" onclick="<%= uicomponent.event("View", nodeExpression) %>" class="ViewIcon" rel="tooltip" data-placement="bottom" title="<%=_ctx.appRes("UIContentSearchResult.title.View")%>"><i class="uiIconPreview uiIconLightGray"></i></a>                 
             </td>
     <%
     	}
