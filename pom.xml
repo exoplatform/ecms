@@ -49,7 +49,7 @@
     <!-- GateIn Project Dependencies -->
     <org.gatein.wci.version>2.3.0.Final</org.gatein.wci.version>
     <org.gatein.pc.version>2.4.0.Final</org.gatein.pc.version>
-    <org.gatein.portal.version>3.5.10.Final-SNAPSHOT</org.gatein.portal.version>
+    <org.gatein.portal.version>3.5.11.Final-SNAPSHOT</org.gatein.portal.version>
     <!-- Platform Project Dependencies -->
     <org.exoplatform.commons.version>4.1.x-commons-stabilization-SNAPSHOT</org.exoplatform.commons.version>
     <org.exoplatform.platform-ui.version>4.1.x-plfui-stabilization-SNAPSHOT</org.exoplatform.platform-ui.version>
