@@ -91,6 +91,17 @@
       <artifactId>google-api-client</artifactId>
       <scope>compile</scope>
       <type>jar</type>
+      <exclusions>
+        <!-- exclude Apache HTTP as Google uses lower (4.0.1), than the Platform 4.0 (4.1.2)-->
+        <exclusion>
+          <groupId>org.apache.httpcomponents</groupId>
+          <artifactId>httpclient</artifactId>
+        </exclusion>
+        <exclusion>
+          <groupId>org.apache.httpcomponents</groupId>
+          <artifactId>httpcore</artifactId>
+        </exclusion>
+      </exclusions>
     </dependency>
     <dependency>
       <groupId>com.google.http-client</groupId>
