@@ -18,6 +18,7 @@
   }		
 
   def originalNode = uiParent.getOriginalNode();  
+  def downloadLink = Utils.getDownloadRestServiceLink(originalNode);
   def currentNode = uicomponent.getFileLangNode(uiParent.getNode());
   def contentNode = currentNode.getNode("jcr:content") ;
   def mimeType = contentNode.getProperty("jcr:mimeType").getString() ;
