@@ -81,6 +81,9 @@ public class NodetypeConstant {
   public static final String EXO_OWNEABLE                     = "exo:owneable";
 
   public static final String EXO_DATETIME                     = "exo:datetime";
+  
+  public static final String EXO_MODIFY = "exo:modify";
+  public static final String EXO_SORTABLE = "exo:sortable";
 
   public static final String EXO_RSS_ENABLE                   = "exo:rss-enable";
 
@@ -229,6 +232,8 @@ public class NodetypeConstant {
   public static final String EXO_TARGET_DATA = "exo:targetData";
   
   public static final String EXO_WORKSPACE = "exo:workspace";
+  
+  public static final String EXO_NAME = "exo:name";
   
   public static final String JCR_UUID = "jcr:uuid";
   // public static final String PUBLICATION_STATE_AND_VERSION_BASED_PUBLICATION

@@ -20,12 +20,19 @@ import java.util.Calendar;
 import java.util.GregorianCalendar;
 
 import javax.jcr.Node;
+import javax.jcr.RepositoryException;
+import javax.jcr.lock.LockException;
+import javax.jcr.nodetype.ConstraintViolationException;
+import javax.jcr.nodetype.NoSuchNodeTypeException;
+import javax.jcr.version.VersionException;
 
 import org.exoplatform.services.jcr.access.PermissionType;
 import org.exoplatform.services.jcr.core.ExtendedNode;
 import org.exoplatform.services.jcr.ext.common.SessionProvider;
+import org.exoplatform.services.security.ConversationState;
 import org.exoplatform.services.security.IdentityConstants;
 import org.exoplatform.services.wcm.core.BaseWebSchemaHandler;
+import org.exoplatform.services.wcm.core.NodetypeConstant;
 
 /**
  * Created by The eXo Platform SAS.
@@ -150,6 +157,23 @@ public class PortalFolderSchemaHandler extends BaseWebSchemaHandler {
    */
   protected String getParentNodeType() { return "nt:unstructured"; }
 
+  protected void updateNode(Node node) throws NoSuchNodeTypeException, VersionException, ConstraintViolationException, LockException, RepositoryException {
+    addMixin(node, NodetypeConstant.EXO_OWNEABLE); 
+    addMixin(node, NodetypeConstant.EXO_DATETIME); 
+    addMixin(node, NodetypeConstant.EXO_MODIFY);
+    addMixin(node, NodetypeConstant.EXO_SORTABLE);
+    
+    node.setProperty(NodetypeConstant.EXO_DATE_CREATED, new GregorianCalendar());
+    node.setProperty(NodetypeConstant.EXO_LAST_MODIFIED_DATE, new GregorianCalendar());
+    
+    ConversationState conversationState = ConversationState.getCurrent();
+    String userName = (conversationState == null) ? node.getSession().getUserID() :
+                                                    conversationState.getIdentity().getUserId();
+    node.setProperty(NodetypeConstant.EXO_LAST_MODIFIER, userName);
+    
+    node.setProperty(NodetypeConstant.EXO_NAME, node.getName());    
+  }
+  
   /* (non-Javadoc)
    * @see org.exoplatform.services.wcm.core.BaseWebSchemaHandler#process(javax.jcr.Node)
    */
@@ -157,104 +181,75 @@ public class PortalFolderSchemaHandler extends BaseWebSchemaHandler {
     Calendar calendar = new GregorianCalendar();
     if (!portalFolder.hasNode("js")) {
       Node jsFolder = portalFolder.addNode("js","exo:jsFolder");
-      addMixin(jsFolder,"exo:owneable");
-      addMixin(jsFolder,"exo:datetime");
-      jsFolder.setProperty("exo:dateCreated",calendar);
+      updateNode(jsFolder);
     }
 
     if (!portalFolder.hasNode("css")) {
       Node cssFolder = portalFolder.addNode("css","exo:cssFolder");
-      addMixin(cssFolder,"exo:owneable");
-      addMixin(cssFolder,"exo:datetime");
-      cssFolder.setProperty("exo:dateCreated",calendar);
+      updateNode(cssFolder);
     }
 
     if (!portalFolder.hasNode("medias")) {
       Node multimedia = portalFolder.addNode("medias","exo:multimediaFolder");
-      addMixin(multimedia,"exo:owneable");
-      addMixin(multimedia,"exo:datetime");
-      multimedia.setProperty("exo:dateCreated",calendar);
+      updateNode(multimedia);
+      
       Node images = multimedia.addNode("images",NT_FOLDER);
       addMixin(images, "exo:pictureFolder");
-      addMixin(images,"exo:owneable");
-      addMixin(images,"exo:datetime");
-      images.setProperty("exo:dateCreated",calendar);
+      updateNode(images);
 
       Node video = multimedia.addNode("videos",NT_FOLDER);
       addMixin(video, "exo:videoFolder");
-      addMixin(video,"exo:owneable");
-      addMixin(video,"exo:datetime");
-      video.setProperty("exo:dateCreated",calendar);
-
+      updateNode(video);
+      
       Node audio = multimedia.addNode("audio",NT_FOLDER);
       addMixin(audio, "exo:musicFolder");
-      addMixin(audio,"exo:owneable");
-      addMixin(audio,"exo:datetime");
-      audio.setProperty("exo:dateCreated",calendar);
+      updateNode(audio);
     }
 
     if (!portalFolder.hasNode("documents")) {
       Node document = portalFolder.addNode("documents",NT_UNSTRUCTURED);
       addMixin(document, "exo:documentFolder");
-      addMixin(document,"exo:owneable");
-      addMixin(document,"exo:datetime");
-      document.setProperty("exo:dateCreated",calendar);
+      
+      updateNode(document);
+      
       document.addMixin("exo:privilegeable");
       ((ExtendedNode)document).setPermission(IdentityConstants.ANY, PermissionType.ALL);
     }
 
     if (!portalFolder.hasNode("web contents")) {
       Node webContents = portalFolder.addNode("web contents","exo:webFolder");
-      addMixin(webContents,"exo:owneable");
-      addMixin(webContents,"exo:datetime");
-      webContents.setProperty("exo:dateCreated",calendar);
+      updateNode(webContents);
 
       Node themes = webContents.addNode("site artifacts","exo:themeFolder");
-      addMixin(themes,"exo:owneable");
-      addMixin(themes,"exo:datetime");
-      themes.setProperty("exo:dateCreated",calendar);
+      updateNode(themes);
     }
 
     if (!portalFolder.hasNode("links")) {
       Node links = portalFolder.addNode("links", "exo:linkFolder");
-      addMixin(links,"exo:owneable");
-      addMixin(links,"exo:datetime");
-      links.setProperty("exo:dateCreated",calendar);
+      updateNode(links);
     }
 
     if (!portalFolder.hasNode("categories")) {
       Node categoryFolder = portalFolder.addNode("categories", NT_UNSTRUCTURED);
-      addMixin(categoryFolder, "exo:owneable");
-      addMixin(categoryFolder,"exo:datetime");
-      categoryFolder.setProperty("exo:dateCreated", calendar);
+      updateNode(categoryFolder);
     }
 
     if (!portalFolder.hasNode("ApplicationData")) {
       Node applicationDataFolder = portalFolder.addNode("ApplicationData", NT_UNSTRUCTURED);
-      addMixin(applicationDataFolder, "exo:owneable");
-      addMixin(applicationDataFolder,"exo:datetime");
+      updateNode(applicationDataFolder);      
       addMixin(applicationDataFolder, "exo:hiddenable");
-      applicationDataFolder.setProperty("exo:dateCreated", calendar);
 
       Node newsletterApplicationFolder = applicationDataFolder.addNode("NewsletterApplication", NT_UNSTRUCTURED);
-      addMixin(newsletterApplicationFolder, "exo:owneable");
-      addMixin(newsletterApplicationFolder,"exo:datetime");
-      newsletterApplicationFolder.setProperty("exo:dateCreated", calendar);
+      updateNode(newsletterApplicationFolder);
 
       Node defaultTemplatesFolder = newsletterApplicationFolder.addNode("DefaultTemplates", NT_UNSTRUCTURED);
-      addMixin(defaultTemplatesFolder, "exo:owneable");
-      addMixin(defaultTemplatesFolder,"exo:datetime");
-      defaultTemplatesFolder.setProperty("exo:dateCreated", calendar);
+      updateNode(defaultTemplatesFolder);
 
       Node newsletterCategoriesFolder = newsletterApplicationFolder.addNode("Categories", NT_UNSTRUCTURED);
-      addMixin(newsletterCategoriesFolder, "exo:owneable");
-      addMixin(newsletterCategoriesFolder,"exo:datetime");
-      newsletterCategoriesFolder.setProperty("exo:dateCreated", calendar);
+      updateNode(newsletterCategoriesFolder);
 
       Node newsletterUserFolder = newsletterApplicationFolder.addNode("Users", NT_UNSTRUCTURED);
-      addMixin(newsletterUserFolder, "exo:owneable");
-      addMixin(newsletterUserFolder,"exo:datetime");
-      newsletterUserFolder.setProperty("exo:dateCreated", calendar);
+      updateNode(newsletterUserFolder);
     }
 
     portalFolder.getSession().save();
