@@ -68,9 +68,9 @@ public class PropertyValueComparator implements Comparator<Node> {
       case PropertyType.STRING:
         return compareString(node0, node1);
       case PropertyType.LONG:
-        return compareString(node0, node1);
+        return compareLong(node0, node1);
       case PropertyType.DOUBLE:
-        return compareString(node0, node1);
+        return compareLong(node0, node1);
       case PropertyType.DATE:
         return compareDate(node0, node1);
       case PropertyType.REFERENCE:
@@ -79,6 +79,37 @@ public class PropertyValueComparator implements Comparator<Node> {
         throw new RepositoryException("Unknown type " + requireType);
       }
     } catch (Exception e) {
+      if (LOG.isErrorEnabled()) {
+        LOG.error("Unexpected error", e);
+      }
+      return 0;
+    }
+  }
+  
+  private int compareLong(Node node0, Node node1) {
+    try {
+      Long propertyValue0 = node0.getProperty(propertyName) == null ? -1 : node0.getProperty(propertyName)
+              .getLong();
+      Long propertyValue1 = node1.getProperty(propertyName) == null ? -1 : node1.getProperty(propertyName)
+              .getLong();
+      if (ASCENDING_ORDER.equals(orderType)) {
+        if (propertyValue0 < propertyValue1) {
+          return -1;
+        } else if (propertyValue0 == propertyValue1) {
+          return 0;
+        } else {
+          return 1;
+        }
+      } else {
+        if (propertyValue0 < propertyValue1) {
+          return 1;
+        } else if (propertyValue0 == propertyValue1) {
+          return 0;
+        } else {
+          return -1;
+        }
+      }
+    } catch (RepositoryException e) {
       if (LOG.isErrorEnabled()) {
         LOG.error("Unexpected error", e);
       }
