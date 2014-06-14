@@ -28,6 +28,7 @@ import javax.jcr.PathNotFoundException;
 import org.apache.commons.lang.StringUtils;
 import org.exoplatform.ecm.webui.form.validator.ECMNameValidator;
 import org.exoplatform.ecm.webui.utils.Utils;
+import org.exoplatform.services.cms.jcrext.activity.ActivityCommonService;
 import org.exoplatform.services.cms.templates.TemplateService;
 import org.exoplatform.services.cms.views.ApplicationTemplateManagerService;
 import org.exoplatform.services.wcm.core.NodetypeConstant;
@@ -74,6 +75,7 @@ public class UICLVTemplateForm extends UIForm {
   
   private boolean isAddNew;
   private String selectedCategory;
+  private ActivityCommonService activityService = null;
   
   public UICLVTemplateForm() throws Exception {
     
@@ -96,6 +98,9 @@ public class UICLVTemplateForm extends UIForm {
     templateOptions.add(new SelectItemOption<String>(
             res.getString("UICLVTemplateForm.label." + ApplicationTemplateManagerService.CLV_PAGINATOR_TEMPLATE_CATEGORY), 
             ApplicationTemplateManagerService.CLV_PAGINATOR_TEMPLATE_CATEGORY ));
+    if (activityService==null) {
+      activityService = WCMCoreUtils.getService(ActivityCommonService.class);
+    }
     UIFormSelectBox templateType = new UIFormSelectBox(FIELD_CONTENT_TYPE, FIELD_CONTENT_TYPE, templateOptions);
     addUIFormInput(templateType);
   }
@@ -145,9 +150,11 @@ public class UICLVTemplateForm extends UIForm {
       if(hasTemplate(category, template)) {
         Node templateNode = getCategoryByName(category).getNode(template);
         Node contentNode = templateNode.getNode(NodetypeConstant.JCR_CONTENT);
+        activityService.setCreating(templateNode, true);
         contentNode.setProperty(NodetypeConstant.JCR_DATA, new ByteArrayInputStream(content.getBytes()));
         if(title == null || title.length() == 0) title = templateNode.getName();
         contentNode.setProperty(NodetypeConstant.DC_TITLE, new String[] { title });
+        activityService.setCreating(templateNode, false);
         templateNode.save();
       } else {
         templateService.createTemplate(getCategoryByName(category), title, 
