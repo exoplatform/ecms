@@ -52,11 +52,13 @@ public class WCMSkinResourceResolver implements ResourceResolver {
   public Resource resolve(String path) {
     if(!path.matches(XSkinService.SKIN_PATH_REGEXP)) return null;
     String[] elements = path.split("/");
-    String portalName = elements[4];
+    String skinModule = elements[4];
     String skinName = elements[5];
-    String skinModule = portalName;
+    if (!skinModule.matches(XSkinService.MODULE_NAME_REGEXP)) return null;
+    String portalName = skinModule.split("-")[1];
     String cssPath = null;
-    SkinConfig portalSkinConfig = skinService.getSkin(portalName,skinName);
+
+    SkinConfig portalSkinConfig = skinService.getSkin(skinModule,skinName);
     if(portalSkinConfig != null) {
       cssPath = portalSkinConfig.getCSSPath();
     }
