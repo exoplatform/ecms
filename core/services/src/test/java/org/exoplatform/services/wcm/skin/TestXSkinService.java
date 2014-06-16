@@ -26,6 +26,7 @@ import java.util.Map;
 
 import javax.jcr.Node;
 import javax.jcr.NodeIterator;
+import javax.jcr.RepositoryException;
 import javax.servlet.ServletContext;
 
 import org.exoplatform.commons.xml.DocumentSource;
@@ -33,6 +34,7 @@ import org.exoplatform.component.test.web.ServletContextImpl;
 import org.exoplatform.component.test.web.WebAppImpl;
 import org.exoplatform.portal.resource.SkinService;
 import org.exoplatform.portal.resource.config.xml.SkinConfigParser;
+import org.exoplatform.services.jcr.RepositoryService;
 import org.exoplatform.services.jcr.ext.common.SessionProvider;
 import org.exoplatform.services.wcm.BaseWCMTestCase;
 import org.exoplatform.services.wcm.core.WCMConfigurationService;
@@ -280,8 +282,7 @@ public class TestXSkinService extends BaseWCMTestCase {
       skinService.updatePortalSkinOnModify(portal, cssNode);
       session.save();
       
-      
-      String resource = "/portal/css/jcr/classic/Default/Stylesheet.css";
+      String resource = "/portal/css/jcr/"+XSkinService.getModuleName("classic")+"/Default/Stylesheet.css";
       String url = newSimpleSkin(resource).createURL(controllerCtx).toString();
       
       resResolver.addResource(resource, "foo");
@@ -309,8 +310,7 @@ public class TestXSkinService extends BaseWCMTestCase {
       configService.addSkin("", "Default", "");
       skinService.updatePortalSkinOnModify(portal, cssNode);
       session.save();
-      
-      String resource = "/portal/css/jcr/classic/Default/Stylesheet.css";
+      String resource = "/portal/css/jcr/"+XSkinService.getModuleName("classic")+"/Default/Stylesheet.css";
       String url = newSimpleSkin(resource).createURL(controllerCtx).toString();
       
       resResolver.addResource(resource, "foo");
@@ -383,11 +383,11 @@ public class TestXSkinService extends BaseWCMTestCase {
       Node cssNode = webcontent.getNode("css").getNode("default.css");
       createSharedCssNode(sharedCssNode);
       configService = getService(SkinService.class);
-      configService.removeSkin(portal.getName(), "Default");
+      configService.removeSkin(XSkinService.getModuleName(portal.getName()), "Default");
       skinService.updatePortalSkinOnRemove(portal, cssNode);
       session.save();
       
-      String resource = "/portal/css/jcr/classic/Default/Stylesheet.css";
+      String resource = "/portal/css/jcr/"+XSkinService.getModuleName("classic")+"/Default/Stylesheet.css";
       String url = newSimpleSkin(resource).createURL(controllerCtx).toString();
       
       resResolver.addResource(resource, "foo");
@@ -413,12 +413,11 @@ public class TestXSkinService extends BaseWCMTestCase {
       createSharedCssNode(sharedCssNode);
       session.save();
       configService = getService(SkinService.class);
-      configService.invalidateCachedSkin("/portal/css/jcr/classic/Default/Stylesheet.css");
+      configService.invalidateCachedSkin("/portal/css/jcr/"+XSkinService.getModuleName("classic")+"/Default/Stylesheet.css");
       configService.addSkin(portal.getName(), "Default", "");
       skinService.updatePortalSkinOnRemove(portal, cssNode);
       session.save();
-
-      String resource = "/portal/css/jcr/classic/Default/Stylesheet.css";
+      String resource = "/portal/css/jcr/"+XSkinService.getModuleName("classic")+"/Default/Stylesheet.css";
       String url = newSimpleSkin(resource).createURL(controllerCtx).toString();
       
       resResolver.addResource(resource, "foo");
@@ -444,11 +443,11 @@ public class TestXSkinService extends BaseWCMTestCase {
       SkinService configService = getService(SkinService.class);
       Node sharedNode = (Node) session.getItem("/sites content/live/" + sharedPortalName + "/css");
       createSharedCssNode(sharedNode);
-      configService.invalidateCachedSkin("/portal/css/jcr/" + sharedPortalName + "/Default/Stylesheet.css");
+      configService.invalidateCachedSkin("/portal/css/jcr/" + XSkinService.getModuleName(sharedPortalName) + "/Default/Stylesheet.css");
       skinService.updatePortalSkinOnRemove(portal, null);
       session.save();
 
-      String resource = "/portal/css/jcr/" + sharedPortalName + "/Default/Stylesheet.css";
+      String resource = "/portal/css/jcr/" + XSkinService.getModuleName(sharedPortalName) + "/Default/Stylesheet.css";
       String url = newSimpleSkin(resource).createURL(controllerCtx).toString();
       
       resResolver.addResource(resource, "foo");
@@ -565,7 +564,5 @@ public class TestXSkinService extends BaseWCMTestCase {
   
   public SimpleSkin newSimpleSkin(String uri) {
     return new SimpleSkin(configService, "module", null, uri);
-}
-
-
+  }
 }

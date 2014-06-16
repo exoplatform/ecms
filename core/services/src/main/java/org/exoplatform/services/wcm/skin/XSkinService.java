@@ -16,14 +16,23 @@
  */
 package org.exoplatform.services.wcm.skin;
 
+import java.util.Collection;
+import java.util.HashSet;
 import java.util.Iterator;
 import java.util.List;
+import java.util.Map.Entry;
 
 import javax.jcr.Node;
+import javax.jcr.RepositoryException;
 import javax.servlet.ServletContext;
 
+import org.apache.commons.httpclient.methods.GetMethod;
 import org.apache.commons.lang.StringUtils;
+import org.exoplatform.portal.resource.SkinConfig;
+import org.exoplatform.portal.resource.SkinKey;
 import org.exoplatform.portal.resource.SkinService;
+import org.exoplatform.portal.resource.SkinVisitor;
+import org.exoplatform.services.jcr.RepositoryService;
 import org.exoplatform.services.jcr.ext.common.SessionProvider;
 import org.exoplatform.services.log.ExoLogger;
 import org.exoplatform.services.log.Log;
@@ -38,11 +47,14 @@ import org.picocontainer.Startable;
  */
 public class XSkinService implements Startable {
 
+  public final static String     MODULE_NAME_PATTERN    = "{repositoryName}-{portalName}";
+  public final static String     MODULE_NAME_REGEXP    = "(.*)-(.*)";
+
   /** The Constant SKIN_PATH_REGEXP. */
-  public final static String      SKIN_PATH_REGEXP     = "/(.*)/css/jcr/(.*)/(.*)/(.*).css";
+  public final static String      SKIN_PATH_REGEXP     = "/(.*)/css/jcr/"+MODULE_NAME_REGEXP+"/(.*)/(.*).css";
 
   /** The Constant SKIN_PATH_PATTERN. */
-  private final static String     SKIN_PATH_PATTERN    = "/{docBase}/css/jcr/(.*)/(.*)/Stylesheet.css";
+  private final static String     SKIN_PATH_PATTERN    = "/{docBase}/css/jcr/{moduleName}/(.*)/Stylesheet.css";
 
   /** The log. */
   private static final Log LOG = ExoLogger.getLogger(XSkinService.class.getName());
@@ -126,20 +138,21 @@ public class XSkinService implements Startable {
    * @throws Exception the exception
    */
   private void addPortalSkin(Node portalNode) throws Exception {
-    String skinPath = StringUtils.replaceOnce(SKIN_PATH_PATTERN, "(.*)", portalNode.getName())
+    String moduleName = getModuleName(portalNode.getName());
+    String skinPath = StringUtils.replaceOnce(SKIN_PATH_PATTERN, "{moduleName}",moduleName)
                                  .replaceFirst("\\{docBase\\}",
                                                servletContext.getServletContextName());
     Iterator<String> iterator = skinService.getAvailableSkinNames().iterator();
     if (iterator.hasNext() == false) {
       skinPath = StringUtils.replaceOnce(skinPath,"(.*)", "Default");
       skinService.invalidateCachedSkin(skinPath);
-      skinService.addSkin(portalNode.getName(), "Default", skinPath);
+      skinService.addSkin(moduleName, "Default", skinPath);
     } else {
       while (iterator.hasNext()) {
         String skinName = iterator.next();
         skinPath = StringUtils.replaceOnce(skinPath,"(.*)",skinName);
         skinService.invalidateCachedSkin(skinPath);        
-        skinService.addSkin(portalNode.getName(), skinName, skinPath);
+        skinService.addSkin(moduleName, skinName, skinPath);
       }
     }
   }
@@ -152,14 +165,15 @@ public class XSkinService implements Startable {
    * @throws Exception the exception
    */
   private void addSharedPortalSkin(Node portalNode) throws Exception {
-    String skinPath = StringUtils.replaceOnce(SKIN_PATH_PATTERN, "(.*)", portalNode.getName())
+    String moduleName = getModuleName(portalNode.getName());
+    String skinPath = StringUtils.replaceOnce(SKIN_PATH_PATTERN, "{moduleName}", moduleName)
                                  .replaceFirst("\\{docBase\\}",
                                                servletContext.getServletContextName());
     for (Iterator<String> iterator = skinService.getAvailableSkinNames().iterator(); iterator.hasNext();) {
       String skinName = iterator.next();
       skinPath = StringUtils.replaceOnce(skinPath, "(.*)", skinName);
       skinService.invalidateCachedSkin(skinPath);
-      skinService.addPortalSkin(portalNode.getName(), skinName, skinPath);
+      skinService.addPortalSkin(moduleName, skinName, skinPath);
     }
   }
 
@@ -191,4 +205,15 @@ public class XSkinService implements Startable {
   public void stop() {
   }
 
+  public static String getModuleName(String siteName){
+    String repoName;
+    try{
+      repoName = WCMCoreUtils.getRepository().getConfiguration().getName();
+    }catch(NullPointerException e){
+      repoName = WCMCoreUtils.getService(RepositoryService.class).getConfig().getDefaultRepositoryName();
+    }
+    String moduleName = StringUtils.replaceOnce(MODULE_NAME_PATTERN, "{repositoryName}", repoName);
+    moduleName = StringUtils.replaceOnce(moduleName,"{portalName}",siteName);
+    return moduleName;
+  }
 }
