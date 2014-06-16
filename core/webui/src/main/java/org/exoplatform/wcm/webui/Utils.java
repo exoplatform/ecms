@@ -16,6 +16,7 @@
  */
 package org.exoplatform.wcm.webui;
 
+import java.io.InputStream;
 import java.security.AccessControlException;
 import java.util.HashMap;
 import java.util.HashSet;
@@ -33,6 +34,10 @@ import javax.portlet.PortletMode;
 import javax.portlet.PortletPreferences;
 
 import org.exoplatform.container.PortalContainer;
+import org.exoplatform.container.configuration.ConfigurationManager;
+import org.exoplatform.download.DownloadService;
+import org.exoplatform.download.InputStreamDownloadResource;
+
 import org.exoplatform.ecm.utils.text.Text;
 import org.exoplatform.ecm.utils.lock.LockUtil;
 import org.exoplatform.portal.application.PortalRequestContext;
@@ -56,6 +61,7 @@ import org.exoplatform.portal.webui.workspace.UIWorkingWorkspace;
 import org.exoplatform.services.cms.drives.DriveData;
 import org.exoplatform.services.cms.drives.ManageDriveService;
 import org.exoplatform.services.cms.link.LinkManager;
+import org.exoplatform.services.cms.mimetype.DMSMimeTypeResolver;
 import org.exoplatform.services.jcr.RepositoryService;
 import org.exoplatform.services.jcr.access.PermissionType;
 import org.exoplatform.services.jcr.core.ExtendedNode;
@@ -93,6 +99,12 @@ public class Utils {
   public static final String TURN_ON_QUICK_EDIT = "turnOnQuickEdit";
 
   private static final String SQL_PARAM_PATTERN = "\\$\\{([^\\$\\{\\}])+\\}";
+  
+  private static final String JCR_CONTENT = "jcr:content";
+
+  private static final String JCR_DATA = "jcr:data";
+
+  private static final String JCR_MIMETYPE = "jcr:mimeType";  
 
   private static final String NT_FILE = "nt:file";
 
@@ -880,8 +892,8 @@ public class Utils {
     UserACL userACL = portalApp.getApplicationComponent(UserACL.class);
 
     if (uiPage != null) {
-      return userACL.hasEditPermissionOnPage(uiPage.getSiteKey().getTypeName(),
-                                             uiPage.getSiteKey().getName(),
+      return userACL.hasEditPermissionOnPage(uiPage.getOwnerType(),
+                                             uiPage.getOwnerId(),
                                              uiPage.getEditPermission());
     }
     UIPortal currentUIPortal = portalApp.<UIWorkingWorkspace> findComponentById(UIPortalApplication.UI_WORKING_WS_ID)
@@ -1022,7 +1034,29 @@ public class Utils {
   public static String getDownloadLink(Node node) throws Exception {
 
     if (!Utils.getRealNode(node).isNodeType(NT_FILE)) return null;
-    return org.exoplatform.ecm.webui.utils.Utils.getDownloadRestServiceLink(node);
+
+    // Get binary data from node
+    DownloadService dservice = WCMCoreUtils.getService(DownloadService.class);
+    Node jcrContentNode = node.getNode(JCR_CONTENT);
+    InputStream input = jcrContentNode.getProperty(JCR_DATA).getStream();
+
+    // Get mimeType of binary data
+    String mimeType = jcrContentNode.getProperty(JCR_MIMETYPE).getString() ;
+
+    // Make download stream
+    InputStreamDownloadResource dresource = new InputStreamDownloadResource(input, mimeType);
+
+    // Make extension part for file if it have not yet
+    DMSMimeTypeResolver mimeTypeSolver = DMSMimeTypeResolver.getInstance();
+    String ext = "." + mimeTypeSolver.getExtension(mimeType) ;
+    String fileName = Utils.getRealNode(node).getName();
+    if (fileName.lastIndexOf(ext) < 0 && !mimeTypeSolver.getMimeType(fileName).equals(mimeType)) {
+      dresource.setDownloadName(fileName + ext);
+    } else {
+      dresource.setDownloadName(fileName);
+    }
+
+    return dservice.getDownloadLink(dservice.addDownloadResource(dresource)) ;
   }
 
   /**

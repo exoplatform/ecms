@@ -11,7 +11,7 @@
       <action>新增</action>
     </header>
     <info>
-      <child-not-found>找不到的孩子 ！</child-not-found>
+      <child-not-found>孩子沒找到！</child-not-found>
     </info>
   </UITreeList>
   <!--
@@ -30,7 +30,7 @@
       <Cancel>#{word.cancel}</Cancel>
     </action>
     <msg>
-      <cannot-save>類別未被保存。</cannot-save>
+      <cannot-save>類別未被儲存。</cannot-save>
       <have-saved>類別已成功保存</have-saved>
       <non-categories>類別是錯誤的。請選擇適當的類別。</non-categories>
       <confirm-delete>你想要刪除此類別嗎？</confirm-delete>

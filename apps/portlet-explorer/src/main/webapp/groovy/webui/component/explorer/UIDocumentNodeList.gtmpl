@@ -198,7 +198,7 @@ public void writeNodes(level, i, data, uiWorkingArea, linkManager, restContextNa
     $strActs
     <% def folderIcon = "noArrow";
        if (data.isNodeType(NodetypeConstant.NT_FOLDER) || data.isNodeType(NodetypeConstant.NT_UNSTRUCTURED)) { 
-         folderIcon = uiDocumentInfo.getExpandedFolders().contains(data.path)? "uiIconArrowDown" : "uiIconArrowRight";
+         folderIcon = uiDocumentInfo.getExpandedFolders().contains(data.path)? "uiIconArrowDown uiIconLightGray" : "uiIconArrowRight uiIconLightGray";
        }
        String expandLink = uicomponent.event("ExpandNode", Utils.formatNodeName(data.path), new Parameter("workspaceName", preferenceWS)) ;
        String collapseLink = uicomponent.event("CollapseNode", Utils.formatNodeName(data.path), new Parameter("workspaceName", preferenceWS)) ;

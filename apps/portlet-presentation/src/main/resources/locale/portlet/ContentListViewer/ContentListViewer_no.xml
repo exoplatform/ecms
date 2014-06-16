@@ -60,8 +60,8 @@
       <UICLVConfigTargetPageFormInputSet>Vis i side</UICLVConfigTargetPageFormInputSet>
       <content-not-found>Content not found.</content-not-found>
       <ContentPath>Innholds sti</ContentPath>
-      <Up>Up</Up>
-      <Down>Down</Down>
+      <Up>Opp</Up>
+      <Down>Ned</Down>
       <UICLVConfigCacheManagementLabel>Innholdets synlighet</UICLVConfigCacheManagementLabel>
       <UICLVContentByQueryLabel>Content by Query</UICLVContentByQueryLabel>
       <UICLVConfigWorkspaceFormSelectBox>Arbeidsområde</UICLVConfigWorkspaceFormSelectBox>

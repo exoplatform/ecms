@@ -56,6 +56,7 @@ import org.exoplatform.container.xml.PortalContainerInfo;
 import org.exoplatform.download.DownloadService;
 import org.exoplatform.download.InputStreamDownloadResource;
 import org.exoplatform.portal.webui.util.Util;
+import org.exoplatform.portal.webui.workspace.UIPortalApplication;
 import org.exoplatform.services.cms.documents.TrashService;
 import org.exoplatform.services.cms.drives.DriveData;
 import org.exoplatform.services.cms.link.LinkManager;
@@ -82,6 +83,10 @@ import org.exoplatform.webui.core.UIComponent;
 import org.exoplatform.webui.core.UIContainer;
 import org.exoplatform.webui.ext.UIExtension;
 import org.exoplatform.webui.ext.UIExtensionManager;
+import java.util.Iterator;
+import org.exoplatform.services.resources.LocaleConfig;
+import org.exoplatform.services.resources.LocaleConfigService;
+import org.exoplatform.webui.core.model.SelectItemOption;
 
 /**
  * Created by The eXo Platform SARL Author : Dang Van Minh
@@ -976,8 +981,7 @@ public class Utils {
     }
     return null;
   }
-
-
+  
   /**
    *
    * @param     :  node: nt:file node with have the data stream
@@ -1004,7 +1008,7 @@ public class Utils {
     sb.append(currentNode.getSession().getWorkspace().getName()).append("/").append(encodedPath);
     if (node.isNodeType("nt:frozenNode")) {
       sb.append("?version=" + node.getParent().getName());
-    }
+   }
     return sb.toString();
   }
 

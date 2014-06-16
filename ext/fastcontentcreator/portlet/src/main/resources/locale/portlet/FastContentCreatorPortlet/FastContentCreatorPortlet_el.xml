@@ -1,0 +1,197 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<bundle>
+  <UIFCCForm>
+    <msg>
+      <name-not-allowed>Αυτό το όνομα δεν επιτρέπεται.</name-not-allowed>
+      <in-versioning>Παρακαλώ επιβεβαιώστε τον τρέχοντα κόμβο πριν από την προσθήκη ενός νέου κόμβου.</in-versioning>
+      <cannot-save>Παρουσιάστηκε σφάλμα κατά την αποθήκευση του κόμβου.</cannot-save>
+      <saved-successfully>{0}</saved-successfully>
+      <not-support>Δεν μπορεί να φορτωθεί το πρότυπο '{0}'.</not-support>
+      <not-add-folder>Μόνο αρχεία μπορούν να προστεθούν σε αυτόν το φάκελο.</not-add-folder>
+      <access-denied>Δεν επιτρέπεται η πρόσβαση. Δεν έχετε άδεια προσθήκης στο '{0}'.</access-denied>
+      <path-not-found>Η διαδρομή '{0}' έχει διαγραφεί ή δεν είναι έγκυρη.</path-not-found>
+      <node-locked>Ο κόμβος '{0}' είναι κλειδωμένος. Παρακαλώ ξεκλειδώστε αυτόν τον κόμβο πριν από τη δημιουργία εγγράφων.</node-locked>
+      <node-isExist>Αυτός ο κόμβος υπάρχει ήδη στο '{0}' και δεν επιτρέπεται δύο συγγενικοί κόμβοι να μοιράζονται την ίδια ονομασία.</node-isExist>
+      <get-dialog-path>Παρουσιάστηκε σφάλμα κατά τη λήψη της διαδρομής του διαλόγου.</get-dialog-path>
+      <new-jcr-template>Παρουσιάστηκε σφάλμα κατά τη δημιουργία νέου προτύπου.</new-jcr-template>
+    </msg>
+    <action>
+      <Save>#{word.save}</Save>
+      <Cancel>#{word.cancel}</Cancel>
+    </action>
+  </UIFCCForm>
+
+  <UIFCCConfig>
+    <label>
+      <UIFCCSaveLocationField>Αποθήκευση τοποθεσίας</UIFCCSaveLocationField>
+      <UIFCCWorkspaceFormSelectBox>Επιλέξτε το χώρο εργασίας</UIFCCWorkspaceFormSelectBox>
+      <UIFCCTemplateField>Επιλογές προτύπου</UIFCCTemplateField>
+      <UIFCCLocationFormInputAction>Θέση αποθήκευσης</UIFCCLocationFormInputAction>
+      <UIFCCTemplateFormSelectBox>Επιλέξτε πρότυπο</UIFCCTemplateFormSelectBox>
+      <UIFCCSaveFormStringInput>Προσαρμοσμένο πλήκτρο "Αποθήκευση"</UIFCCSaveFormStringInput>
+      <UIFCCMessageFormTextareaInput>Προσαρμοσμένο μήνυμα Αποθήκευσης</UIFCCMessageFormTextareaInput>
+      <UIFCCRedirectFormCheckboxInput>Ανακατεύθυνση:</UIFCCRedirectFormCheckboxInput>
+      <UIFCCRedirectPathFormStringInput>Διαδρομή ανακατεύθυνσης:</UIFCCRedirectPathFormStringInput>
+      <UIFCCActionField>Ενέργειες</UIFCCActionField>
+    </label>
+    <msg>
+      <save-successfully>Αποθηκεύτηκαν οι επιλογές με επιτυχία στο συστατικό στοιχείο πύλης.</save-successfully>
+      <item-not-found>Η διαδρομή δεν είναι έγκυρη.</item-not-found>
+      <fileType-empty>Επιλέξτε έναν τύπο αρχείου πριν να αποθηκεύσετε αυτήν τη ρύθμιση.</fileType-empty>
+      <ws-empty>Παρακαλώ επιλέξτε ένα χώρο εργασίας.</ws-empty>
+      <action-empty>Παρακαλώ επιλέξτε ένα φάκελο με ενέργειες.</action-empty>
+      <message-empty>Το πεδίο "Προσαρμοσμένο μήνυμα Αποθήκευσης" πρέπει να συμπληρωθεί στην περίπτωση που δεν επιλέξετε την επιλογή της "Ανακατεύθυνσης" ή η διαδρομή είναι κενή.</message-empty>
+      <get-template>Παρουσιάστηκε σφάλμα κατά την πρόσβαση στο πρότυπο.</get-template>
+      <set-template-option>Παρουσιάστηκε σφάλμα κατά τη ρύθμιση της επιλογής στο πρότυπο.</set-template-option>
+      <do-select>Παρουσιάστηκε σφάλμα κατά την επιλογή της τοποθεσίας.</do-select>
+      </msg>
+    <action>
+      <Save>#{word.save}</Save>
+    </action>
+  </UIFCCConfig>
+
+  <UIFCCLocationFormInputAction>
+    <title>
+      <SelectPath>Επιλέξτε διαδρομή</SelectPath>
+    </title>
+  </UIFCCLocationFormInputAction>
+
+  <UIFCCActionList>
+    <header>
+      <name>Όνομα</name>
+      <description>Περιγραφή</description>
+      <instanceOf>Παρουσία του</instanceOf>
+      <action>Ενέργεια</action>
+    </header>
+    <action>
+      <Add>Προσθήκη</Add>
+    </action>
+    <msg>
+      <empty>Καμία ενέργεια</empty>
+      <remove-popup-first>Πρέπει να κλείσετε το παράθυρο της επεξεργασίας πριν από τη διαγραφή αυτού του κόμβου.</remove-popup-first>
+      <confirm-delete-action>Είστε βέβαιοι ότι θέλετε να διαγράψετε αυτήν την ενέργεια;</confirm-delete-action>
+      <template-empty>Το πρότυπο '{0}' είναι κενό ή δεν έχει οριστεί.</template-empty>
+      <template-null>Το πρότυπο είναι είτε είναι κενό είτε δεν έχει οριστεί ή δεν έχετε δικαίωμα πρόσβασης σε αυτό.</template-null>
+      <access-denied>Δεν επιτρέπεται η πρόσβαση. Δεν έχετε άδεια για να εκτελέσετε αυτήν την ενέργεια.</access-denied>
+    </msg>
+  </UIFCCActionList>
+
+  <UIFCCSelectorPopupWindow>
+    <title>
+      <UIOneNodePathSelector>Επιλογή τοποθεσίας</UIOneNodePathSelector>
+    </title>
+  </UIFCCSelectorPopupWindow>
+
+  <UIWorkspaceList>
+    <label>
+      <workspaceName>Χώρος Εργασίας:</workspaceName>
+      <rootNodePath>Διαδρομή εκκίνησης:</rootNodePath>
+      <rootNodeInfo>Κόμβος-Ρίζα</rootNodeInfo>
+    </label>
+  </UIWorkspaceList>
+
+  <rootNodeInfo>
+    <title>
+      <AddRootNode>Προσθήκη κόμβου-ρίζα</AddRootNode>
+    </title>
+  </rootNodeInfo>
+
+  <UITreeList>
+    <info>
+      <child-not-found>Αυτός ο κόμβος δεν εμπεριέχει άλλους κόμβους.</child-not-found>
+    </info>
+    <header>
+      <name>Όνομα</name>
+      <action>Ενέργεια</action>
+    </header>
+  </UITreeList>
+
+  <UIFCCActionPopupWindow>
+    <title>
+      <UIFCCActionContainer>Προσθήκη ενέργειας</UIFCCActionContainer>
+    </title>
+  </UIFCCActionPopupWindow>
+
+  <UIFCCActionForm>
+    <title>Προσθήκη/Επεξεργασία Ενέργειας</title>
+    <action>
+      <Save>#{word.save}</Save>
+      <Close>#{word.close}</Close>
+    </action>
+    <msg>
+      <repository-exception>Δεν μπορεί να αποθηκευτεί αυτή η ενέργεια. Το όνομα που παρέχεται δεν πρέπει να έχει ένα ευρετήριο ως το τελευταίο στοιχείο.</repository-exception>
+      <numberformat-exception>Δεν μπορεί να αποθηκευτεί αυτή η ενέργεια. Το όνομα δεν πρέπει να περιέχει τους χαρακτήρες «[» και «]».</numberformat-exception>
+      <existed-action>Το όνομα της ενέργειας '{0}' υπάρχει ήδη. Παρακαλώ επιλέξτε ένα άλλο όνομα.</existed-action>
+      <unable-add-action>Δεν είναι δυνατή η προσθήκη αυτής της ενέργειας.</unable-add-action>
+      <unable-add>Δεν είναι δυνατή η προσθήκη αυτής της ενέργειας. Αυτός ο κόμβος είτε είναι ρίζα είτε δεν έχετε δικαιώματα.</unable-add>
+      <not-support>Το παράθυρο διαλόγου '{0}' δεν υποστηρίζεται.</not-support>
+      <no-permission-add>Δεν επιτρέπεται η πρόσβαση. Δεν έχετε το δικαίωμα να προσθέσετε μια ενέργεια εδώ.</no-permission-add>
+      <access-denied>Δεν επιτρέπεται η πρόσβαση. Δεν έχετε δικαίωμα πρόσβασης σε αυτό το πρότυπο.</access-denied>
+    </msg>
+    <validator>
+      <validator>Επαληθευτής</validator>
+      <destPath>Με διαδρομή</destPath>
+    </validator>
+  </UIFCCActionForm>
+
+  <UIFCCActionTypeForm>
+    <label>
+      <actionType>Δημιουργήστε μια ενέργεια του τύπου</actionType>
+    </label>
+    <msg>
+      <not-support>Δεν μπορεί να φορτωθεί το πρότυπο του '{0}'.</not-support>
+      <do-not-permission>Δεν έχετε άδεια για να φορτώσετε το πρότυπο του '{0}'.</do-not-permission>
+    </msg>
+  </UIFCCActionTypeForm>
+
+  <PopupComponent>
+    <title>
+      <UIOneNodePathSelector>Επιλογή τοποθεσίας</UIOneNodePathSelector>
+      <UIPermissionSelector>Περιηγητής Δικαιωμάτων</UIPermissionSelector>
+      <UICategoriesSelector>Add Categories</UICategoriesSelector>
+    </title>
+  </PopupComponent>
+
+  <DateTimeValidator>
+    <msg>
+      <Invalid-input>Το πεδίο '{0}' με την τιμή '{1}' δεν είναι έγκυρο.</Invalid-input>
+    </msg>
+  </DateTimeValidator>
+
+  <UITabPane>
+    <title>
+      <UICategoriesSelectPanel>Επιλογή Κατηγοριών</UICategoriesSelectPanel>
+      <UISelectedCategoriesGrid>Αναφερόμενες Κατηγορίες</UISelectedCategoriesGrid>
+    </title>
+  </UITabPane>
+
+  <PopupComponent>
+    <title>
+      <UICategoriesSelector>Add Categories</UICategoriesSelector>
+    </title>
+  </PopupComponent>
+
+  <UICategoriesSelector>
+    <action>
+      <close>#{word.close}</close>
+    </action>
+  </UICategoriesSelector>
+
+  <PopupComponent>
+    <title>
+      <UIOneTaxonomySelector>Προσθήκη Κατηγοριών</UIOneTaxonomySelector>
+    </title>
+  </PopupComponent>
+
+  <UITreeTaxonomyList>
+    <label>
+      <taxonomyTree>Δέντρο Κατηγοριών</taxonomyTree>
+    </label>
+  </UITreeTaxonomyList>
+
+  <UIFCCTaxonomyPopupWindow>
+    <title>
+      <UIOneTaxonomySelector>Επιλογέας Κατηγοριών</UIOneTaxonomySelector>
+    </title>
+  </UIFCCTaxonomyPopupWindow>
+</bundle>

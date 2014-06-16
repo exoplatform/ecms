@@ -33,8 +33,8 @@
             <td><div class="text"><%=node.getLabel()%></div></td>
             <td><div class="text" rel="tooltip" data-placement="bottom" title="<%=node.getName()%>"><%=node.getName();%></div></td>
 			<td class="center">
-				<a class="actionIcon" onclick="<%=uicomponent.event("Edit", node.getName())%>" rel="tooltip" data-placement="bottom" title="<%=_ctx.appRes("UIScriptList.tooltip.Edit")%>" ><i class="uiIconEditInfo"></i></a>
-				<a class="actionIcon" onclick="<%=uicomponent.event("Delete", node.getName())%>" rel="tooltip" data-placement="bottom" title="<%=_ctx.appRes("UIScriptList.tooltip.Delete")%>" ><i class="uiIconDelete"></i></a>
+				<a class="actionIcon" onclick="<%=uicomponent.event("Edit", node.getName())%>" rel="tooltip" data-placement="bottom" title="<%=_ctx.appRes("UIScriptList.tooltip.Edit")%>" ><i class="uiIconEditInfo uiIconLightGray"></i></a>
+				<a class="actionIcon" onclick="<%=uicomponent.event("Delete", node.getName())%>" rel="tooltip" data-placement="bottom" title="<%=_ctx.appRes("UIScriptList.tooltip.Delete")%>" ><i class="uiIconDelete uiIconLightGray"></i></a>
 			</td>	                    
           </tr>
       <%}%>  

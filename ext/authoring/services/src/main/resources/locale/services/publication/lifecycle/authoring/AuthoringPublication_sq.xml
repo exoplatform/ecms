@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<bundle>
+  <PublicationService>
+    <AuthoringPublicationPlugin>
+      <changeState>
+        <obsoleted>crwdns6791766:0crwdne6791766:0</obsoleted>
+        <published>crwdns6791767:0crwdne6791767:0</published>
+<unpublished>crwdns6791768:0crwdne6791768:0</unpublished>
+<archived>crwdns6791769:0crwdne6791769:0</archived>
+<staged>crwdns6791770:0crwdne6791770:0</staged>
+<approved>crwdns6791771:0crwdne6791771:0</approved>
+<pending>crwdns6791772:0crwdne6791772:0</pending>
+<draft>crwdns6791773:0crwdne6791773:0</draft>
+      </changeState>
+    </AuthoringPublicationPlugin>
+  </PublicationService>
+  <Publication>
+    <log>
+      <description>
+        <enrolled>crwdns6791774:0crwdne6791774:0</enrolled>
+      </description>
+    </log>
+  </Publication>
+</bundle>

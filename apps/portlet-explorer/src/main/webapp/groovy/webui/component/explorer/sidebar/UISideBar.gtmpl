@@ -27,14 +27,14 @@
 								def action = itemContext.getUIExtensionName();
 					%>
 						<div class="<%=getCSSClassName(action)%>" onclick="<%=itemContext.event(action)%>" rel="tooltip" data-placement="bottom" title="<%=_ctx.appRes(uicomponent.getId() + ".label." + action)%>">
-							<i class="uiIconEcms${action}Mini"></i>
+							<i class="uiIconEcms${action}Mini uiIconEcmsLightGray"></i>
 						</div>
 					<% } %>
 				</div>
 			</div>
 			<% if (uicomponent.getAncestorOfType(UIJCRExplorerPortlet.class).isShowFilterBar()) { %>   
 	    <div class="resizeTreeExplorer">
-				<i class="uiIconArrowDown" onclick="eXo.ecm.ECMUtils.showHideItemsInSideBar(this)"></i>
+				<i class="uiIconArrowDown uiIconLightGray" onclick="eXo.ecm.ECMUtils.showHideItemsInSideBar(this)"></i>
 			</div>
       <div class="selectItem" id ="SelectItemArea">
         <% 

@@ -54,8 +54,8 @@
         <name>#{word.name}</name>
         <categories>類別</categories>
         <mimeType>#{Ecm.dialog.label.mimeType}</mimeType>
-        <width>Width</width>
-        <height>Height</height>
+        <width>寬</width>
+        <height>高</height>
         <content>#{word.content}</content>
         <re-upload>該檔案已經存在。您可以刪除它，並將另一個檔案上傳。</re-upload>
       </label>
@@ -316,7 +316,7 @@
 <NONE>無</NONE>
 <CLASSIFIED>分類</CLASSIFIED>
 <UNCLASSIFIED>未分類</UNCLASSIFIED>
-<NOCONTRACT>沒有合同</NOCONTRACT>
+<NOCONTRACT>沒有合約</NOCONTRACT>
 <one-minute>一分鐘</one-minute>
 <hourly>每小時</hourly>
 <daily>每日</daily>
@@ -376,11 +376,11 @@
   <label>
   <captions>標題</captions>
 <audioDescription>音訊描述</audioDescription>
-<alternativeText>替代文本</alternativeText>
+<alternativeText>替代文字</alternativeText>
 </label>
 </dialog>
 <help>
-<CaptionsHelp>標題應提供對話的方塊和重要聲音的文本</CaptionsHelp>
+<CaptionsHelp>標題應提供對話的方塊和重要聲音的文字</CaptionsHelp>
 <AudioDescriptionHelp>音訊描述是講述軌道的視頻</AudioDescriptionHelp>
 <AlternativeTextHelp>提供可訪問、 替代性方式呈現資訊</AlternativeTextHelp>
 </help>

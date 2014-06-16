@@ -141,7 +141,7 @@
 							<div class="control-group">
 					 			<div class="control-label">
 									<%=_ctx.appRes("WebContent.dialog.label.WebContentHtml")%>
-					 				<a class="actionIcon" rel="tooltip" title="<%=_ctx.appRes("WebContent.dialog.label.Synchronize")%>" onclick="eXo.ecm.CKEditor.insertCSS('<%= htmlWYSIWYGFormId %>', '<%= cssFormId %>')"><i class="uiIconRefresh"></i></a>
+					 				<a class="actionIcon" rel="tooltip" title="<%=_ctx.appRes("WebContent.dialog.label.Synchronize")%>" onclick="eXo.ecm.CKEditor.insertCSS('<%= htmlWYSIWYGFormId %>', '<%= cssFormId %>')"><i class="uiIconRefresh uiIconLightGray"></i></a>
 					 			</div>
 				  			<div class="controls">
 								<%

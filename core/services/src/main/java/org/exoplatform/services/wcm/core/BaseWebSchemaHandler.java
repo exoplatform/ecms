@@ -19,6 +19,11 @@ package org.exoplatform.services.wcm.core;
 import java.util.Calendar;
 
 import javax.jcr.Node;
+import javax.jcr.RepositoryException;
+import javax.jcr.lock.LockException;
+import javax.jcr.nodetype.ConstraintViolationException;
+import javax.jcr.nodetype.NoSuchNodeTypeException;
+import javax.jcr.version.VersionException;
 
 import org.exoplatform.commons.utils.MimeTypeResolver;
 import org.exoplatform.container.ExoContainer;
@@ -86,9 +91,14 @@ public abstract class BaseWebSchemaHandler extends BaseComponentPlugin implement
    *
    * @param node the node
    * @param mixin the mixin
+   * @throws RepositoryException 
+   * @throws LockException 
+   * @throws ConstraintViolationException 
+   * @throws VersionException 
+   * @throws NoSuchNodeTypeException 
    * @throws Exception the exception
    */
-  protected void addMixin(Node node, String mixin) throws Exception {
+  protected void addMixin(Node node, String mixin) throws NoSuchNodeTypeException, VersionException, ConstraintViolationException, LockException, RepositoryException {
     if (!node.isNodeType(mixin)) node.addMixin(mixin);
   }
 

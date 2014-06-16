@@ -1,0 +1,389 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<bundle>
+  <!--
+  ###################### global word for ECM dialogs resoucebundle ####
+  -->
+  <Ecm>
+    <dialog>
+      <label>
+        <end-time>Ώρα λήξης</end-time>
+        <start-time>Ώρα έναρξης</start-time>
+        <lifecycle>Κύκλος ζωής</lifecycle>
+        <mimeType>Τύπος MIME</mimeType>
+        <repeat-count>Πλήθος επαναλήψεων</repeat-count>
+        <time-interval>Χρονικό διάστημα</time-interval>
+        <query-items>Στοιχεία ερωτήματος</query-items>
+        <schedule-type>Τύπος Χρονοδιαγράμματος</schedule-type>
+        <remove>Κατάργηση αντικειμένου</remove>
+        <add>Προσθήκη αντικειμένου</add>
+        <expand>Επέκταση αυτού</expand>
+      </label>
+    </dialog>
+  </Ecm>
+  
+  <UIDocumentForm>
+    <label>
+      <title>#{word.title}</title>
+      <link>Σύνδεσμος (link)</link>
+      <contentHtml>#{word.content}</contentHtml>
+      <content>#{word.content}</content>
+      <contentPlain>#{word.content}</contentPlain>
+      <name>Όνομα</name>
+    <categories>Κατηγορίες</categories>
+    </label>
+  </UIDocumentForm>
+ 
+  <!--
+  ###################### resoucebundle for HTMLFile dialogs template ####
+  -->
+  <HtmlFile>
+    <dialog>
+      <label>
+        <name>Όνομα</name>
+        <content>Περιεχόμενο</content>
+      </label>
+    </dialog>
+  </HtmlFile>
+
+  <!--
+  ###################### resoucebundle for nt:file dialogs template ####
+  -->
+  <File>
+    <dialog>
+      <label>
+        <name>#{word.name}</name>
+        <categories>Κατηγορίες</categories>
+        <mimeType>#{Ecm.dialog.label.mimeType}</mimeType>
+        <width>Width</width>
+        <height>Height</height>
+        <content>#{word.content}</content>
+        <re-upload>Το αρχείο υπάρχει ήδη. Μπορείτε να το διαγράψετε και να φορτώσετε ένα άλλο αρχείο.</re-upload>
+      </label>
+    </dialog>
+  </File>
+
+  <UIActionForm>
+    <label>
+      <description>#{word.description}</description>
+      <port>Θύρα</port>
+      <userName>#{word.userName}</userName>
+      <password>Κωδικός πρόσβασης</password>
+      <link>Σύνδεσμος (link)</link>
+      <to>Στείλτε μήνυμα</to>
+      <actionName>#{word.name}</actionName>
+    </label>
+  </UIActionForm>
+  <EditFormAction>
+    <label>
+      <description>#{word.description}</description>
+      <port>Θύρα</port>
+      <userName>#{word.userName}</userName>
+      <password>Κωδικός πρόσβασης</password>
+      <link>Σύνδεσμος (link)</link>
+      <to>Στείλτε μήνυμα</to>
+      <actionName>#{word.name}</actionName>
+    </label>
+  </EditFormAction>
+
+  <!--
+  ###################### resoucebundle for exo:addMetadataAction dialogs template ####
+  -->
+  <AddMetadata>
+    <dialog>
+      <label>
+        <id>Αναγνωριστικό</id>
+        <name>#{word.name}</name>
+        <lifecycle>#{Ecm.dialog.label.lifecycle}</lifecycle>
+        <metadata>Μεταδεδομένα</metadata>
+        <description>#{word.description}</description>
+      </label>
+    </dialog>
+  </AddMetadata>
+
+  <!--
+  ###################### resoucebundle for exo:autoVersioning dialogs template ####
+  -->
+  <AutoVersioning>
+    <dialog>
+      <label>
+        <id>Αναγνωριστικό</id>
+        <name>#{word.name}</name>
+        <lifecycle>#{Ecm.dialog.label.lifecycle}</lifecycle>
+        <schedule-type>#{Ecm.dialog.label.schedule-type}</schedule-type>
+        <start-time>#{Ecm.dialog.label.start-time}</start-time>
+        <end-time>#{Ecm.dialog.label.end-time}</end-time>
+        <repeat-count>#{Ecm.dialog.label.repeat-count}</repeat-count>
+        <time-inteval>#{Ecm.dialog.label.time-interval}</time-inteval>
+        <cron-expression>Έκφραση cron</cron-expression>
+        <description>#{word.description}</description>
+      </label>
+    </dialog>
+  </AutoVersioning>
+  <!--
+  ###################### resoucebundle for exo:enableVersiong dialogs template ####
+  -->
+  <EnableVersioning>
+    <dialog>
+      <label>
+        <id>Αναγνωριστικό</id>
+        <name>#{word.name}</name>
+        <lifecycle>#{Ecm.dialog.label.lifecycle}</lifecycle>
+        <schedule-type>#{Ecm.dialog.label.schedule-type}</schedule-type>
+        <start-time>#{Ecm.dialog.label.start-time}</start-time>
+        <end-time>#{Ecm.dialog.label.end-time}</end-time>
+        <repeat-count>#{Ecm.dialog.label.repeat-count}</repeat-count>
+        <time-inteval>#{Ecm.dialog.label.time-interval}</time-inteval>
+        <cron-expression>Cron Expression</cron-expression>
+        <description>#{word.description}</description>
+      </label>
+    </dialog>
+  </EnableVersioning>
+  <!--
+  ###################### resoucebundle for dc:elementSet dialogs template ####
+  -->
+  <ElementSet>
+    <dialog>
+      <label>
+        <title>#{word.title}:</title>
+        <creator>Δημιουργός:</creator>
+        <subject>#{word.subject}:</subject>
+        <source>Πηγή:</source>
+        <contributor>Συνεισφέρων:</contributor>
+        <resource-type>Τύπος πόρου:</resource-type>
+        <date>#{word.date}:</date>
+        <publisher>Εκδότης:</publisher>
+        <description>#{word.description}:</description>
+        <rights>Δικαιώματα:</rights>
+        <relation>Σχέση:</relation>
+        <format>#{word.format}:</format>
+        <coverage>Κάλυψη:</coverage>
+        <identifier>Αναγνωριστικό:</identifier>
+        <language>Γλώσσα:</language>
+      </label>
+    </dialog>
+  </ElementSet>
+
+  <!--
+  ###################### resoucebundle for exo:actionable dialogs template ####
+  -->
+  <Actionable>
+    <dialog>
+      <label>
+        <primary-type>Πρωτεύων τύπος</primary-type>
+        <mixin-types>Μεικτοί τύποι</mixin-types>
+      </label>
+    </dialog>
+  </Actionable>
+
+  <!--
+  ###################### resoucebundle for exo:move dialogs template ####
+  -->
+  <Move>
+    <dialog>
+      <label>
+        <destination-workpsace>Χώρος εργασίας προορισμού</destination-workpsace>
+        <destination-path>Διαδρομή προορισμού</destination-path>
+        <primary-type>Πρωτεύων τύπος</primary-type>
+        <mixin-types>Μεικτός τύπος</mixin-types>
+      </label>
+    </dialog>
+  </Move>
+  <!--
+  ###################### resoucebundle for exo:published dialogs template ####
+  -->
+  <Published>
+    <dialog>
+      <label>
+        <start-publication>Έναρξη δημοσίευσης</start-publication>
+        <end-publication>Τέλος δημοσίευσης</end-publication>
+      </label>
+    </dialog>
+  </Published>
+ 
+  <!--
+  ###################### resoucebundle mix:referenceable dialogs template ####
+  -->
+  <Referenceable>
+    <dialog>
+      <label>
+        <uuid>Αποκλειστικό αναγνωριστικό ταυτοποίησης (UUID)</uuid>
+      </label>
+    </dialog>
+  </Referenceable>
+  <!--
+  ###################### resoucebundle exo:relationable dialogs template ####
+  -->
+  <Relationable>
+    <dialog>
+      <label>
+        <relation>Σχέση</relation>
+      </label>
+    </dialog>
+  </Relationable>
+  <!--
+  ###################### resoucebundle exo:rss-enable dialogs template ####
+  -->
+  <RssEnable>
+    <dialog>
+      <label>
+        <title>Τίτλος</title>
+        <summary>#{word.summary}</summary>
+      </label>
+    </dialog>
+  </RssEnable>
+
+  <!--
+  ###################### resoucebundle mix:versionable dialogs template ####
+  -->
+  <Versionable>
+    <dialog>
+      <label>
+        <version-history>Ιστορικό εκδόσεων</version-history>
+        <base-version>Βασική έκδοση</base-version>
+        <is-checked-out>Έχει ολοκληρωθεί</is-checked-out>
+        <predecessors>Προαπαιτούμενα</predecessors>
+        <merge-failed>Απέτυχε η συγχώνευση</merge-failed>
+        <uuid>Αποκλειστικό αναγνωριστικό ταυτοποίησης (UUID)</uuid>
+      </label>
+    </dialog>
+  </Versionable>
+
+  <!--
+  ##################### resoucebundle for resouce container dialogs template#####
+  -->
+  <ResouceContainer>
+    <dialog>
+      <label>
+        <name>Όνομα</name>
+        <autoload>Αυτόματη φόρτωση</autoload>
+        <minetype>Τύπος MIME</minetype>
+        <content>Περιεχόμενο</content>
+      </label>
+    </dialog>
+  </ResouceContainer>
+  <!--
+  ###################### resoucebundle for validator ####
+  -->
+  <EmailAddressValidator>
+    <msg>
+      <Invalid-input>Η διεύθυνση ηλεκτρονικού ταχυδρομείου δεν είναι έγκυρη.</Invalid-input>
+    </msg>
+  </EmailAddressValidator>
+  <EmptyFieldValidator>
+    <msg>
+      <empty-input>Το πεδίο '{0}' απαιτείται. Παρακαλούμε εισάγετε μια τιμή.</empty-input>
+    </msg>
+  </EmptyFieldValidator>
+  <NumberFormatValidator>
+    <msg>
+      <Invalid-number>Το πεδίο '{0}' δεν είναι έγκυρο.</Invalid-number>
+    </msg>
+  </NumberFormatValidator>
+  <!--
+  #####Since version 2.4#######
+
+  ###################### resoucebundle exo:taxonomyAction dialogs template ####
+  -->
+  <ScriptAction>
+    <dialog>
+      <label>
+        <id>Αναγνωριστικό</id>
+        <name>Όνομα</name>
+        <lifecycle>Κύκλος ζωής</lifecycle>
+        <homePath>Αρχική διαδρομή</homePath>
+        <targetWorkspace>Χώρος εργασίας προορισμού</targetWorkspace>
+        <targetPath>Διαδρομή προορισμού</targetPath>
+      </label>
+    </dialog>
+  </ScriptAction>
+  <UIDialogForm>
+   <form>
+   <DialogFormException>Δεν μπορεί να αποθηκευτεί το έγγραφο αυτό. Μπορεί να υπάρχει κάποιο πρόβλημα με την διαδικασία πριν από την αποθήκευση.</DialogFormException>
+   </form>
+  </UIDialogForm>
+
+  <!--
+  #####Since version 2.6#######
+
+  ###################### resoucebundle exo:taxonomyAction dialogs template ####
+  -->
+<no>Όχι</no>
+<yes>Ναι</yes>
+<true>Αληθές</true>
+<false>Ψευδές</false>
+<Electronic>Ηλεκτρονικό</Electronic>
+<Paper>Χαρτί</Paper>
+<NONE>Κανένα</NONE>
+<CLASSIFIED>Ταξινομημένα</CLASSIFIED>
+<UNCLASSIFIED>Μη ταξινομημένο</UNCLASSIFIED>
+<NOCONTRACT>Καμία σύμβαση</NOCONTRACT>
+<one-minute>Ένα λεπτό</one-minute>
+<hourly>Ωριαία</hourly>
+<daily>Καθημερινά</daily>
+<quarterly>Τριμηνιαία</quarterly>
+<yearly>Ετήσια</yearly>
+<ten-years>Δέκα χρόνια</ten-years>
+<read>Ενέργεια χρήστη</read>
+  <schedule>Χρονοδιάγραμμα</schedule>
+  <node_added>Προσθήκη περιεχομένου</node_added>
+  <node_removed>Αφαίρεση περιεχομένου</node_removed>
+  <property_added>Προσθήκη ιδιοτήτων</property_added>
+  <property_removed>Αφαίρεση ιδιοτήτων</property_removed>
+  <property_changed>Τροποποίηση ιδιοτήτων</property_changed>
+
+  <ScriptAction>
+    <dialog>
+      <label>
+        <isDeep>Αναδρομικό</isDeep>
+        <nodetypes>Τύποι κόμβων</nodetypes>
+        <affectedNodeTypeNames>Επηρεαζόμενοι τύποι κόμβων</affectedNodeTypeNames>
+      </label>
+    </dialog>
+  </ScriptAction>
+
+  <AddMetadata>
+    <dialog>
+      <label>
+        <isDeep>Αναδρομικό</isDeep>
+        <nodetypes>Τύποι κόμβων</nodetypes>
+        <affectedNodeTypeNames>Επηρεαζόμενοι τύποι κόμβων</affectedNodeTypeNames>
+      </label>
+    </dialog>
+  </AddMetadata>
+
+  <EnableVersioning>
+    <dialog>
+      <label>
+        <isDeep>Αναδρομικό</isDeep>
+        <nodetypes>Τύποι κόμβων</nodetypes>
+        <affectedNodeTypeNames>Επηρεαζόμενοι τύποι κόμβων</affectedNodeTypeNames>
+      </label>
+    </dialog>
+  </EnableVersioning>
+  
+  <AutoVersioning>
+    <dialog>
+      <label>
+        <isDeep>Αναδρομικό</isDeep>
+        <nodetypes>Τύποι κόμβων</nodetypes>
+        <affectedNodeTypeNames>Επηρεαζόμενοι τύποι κόμβων</affectedNodeTypeNames>
+      </label>
+    </dialog>
+  </AutoVersioning>
+
+  <AccessibleMedia>
+  <dialog>
+  <label>
+  <captions>Λεζάντες</captions>
+<audioDescription>Ηχητική περιγραφή</audioDescription>
+<alternativeText>Εναλλακτικό κείμενο</alternativeText>
+</label>
+</dialog>
+<help>
+<CaptionsHelp>Οι λεζάντες πρέπει να περιλαμβάνουν κείμενο του παράθυρου διαλόγου και σημαντικούς ήχους</CaptionsHelp>
+<AudioDescriptionHelp>Μια ακουστική περιγραφή είναι μια αφήγηση του βίντεο</AudioDescriptionHelp>
+<AlternativeTextHelp>Παρέχουν έναν εναλλακτικό προσιτό τρόπο για την παρουσίαση της πληροφορίας</AlternativeTextHelp>
+</help>
+</AccessibleMedia>
+  
+</bundle>

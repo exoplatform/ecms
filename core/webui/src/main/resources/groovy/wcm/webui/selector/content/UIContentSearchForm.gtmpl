@@ -94,7 +94,7 @@
       <div class="controls">
 				<label class="txt"><%= _ctx.appRes("UIContentSearchForm.title.DocumentType")%>:</label>
 				<%uiform.renderField(uiform.getChildById(uicomponent.DOC_TYPE));%>
-				<a class="actionIcon" onclick="<%=uicomponent.event("AddNodeType")%>" rel="tooltip" data-placement="bottom" title="<%= _ctx.appRes("UIContentSearchForm.tooltip.AddNodeType")%>"><i class="uiIconPlus" ></i></a>
+				<a class="actionIcon" onclick="<%=uicomponent.event("AddNodeType")%>" rel="tooltip" data-placement="bottom" title="<%= _ctx.appRes("UIContentSearchForm.tooltip.AddNodeType")%>"><i class="uiIconPlus uiIconLightGray" ></i></a>
 			</div>
     </div>
 	</div> 

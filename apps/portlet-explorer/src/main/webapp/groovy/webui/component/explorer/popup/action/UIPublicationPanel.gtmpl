@@ -157,13 +157,13 @@
               %>
             </td>
             <td class="center actionContainer">
-              <a class="actionIcon" rel="tooltip" data-placement="bottom" title="<%=_ctx.appRes("UIPublicationPanel.title.preview")%>" onclick="<%= uicomponent.event("PreviewVersion", revision.getUUID()) %>"><i class="uiIconPreview"></i></a>
+              <a class="actionIcon" rel="tooltip" data-placement="bottom" title="<%=_ctx.appRes("UIPublicationPanel.title.preview")%>" onclick="<%= uicomponent.event("PreviewVersion", revision.getUUID()) %>"><i class="uiIconPreview uiIconLightGray"></i></a>
               <%
                 if (revisions.indexOf(revision) != 0) {
                   if (PublicationDefaultStates.DRAFT.equals(uicomponent.getRevisionState(revisions.get(0)))) {
-                    %><a class="actionIcon" rel="tooltip" data-placement="bottom" title="<%=_ctx.appRes("UIPublicationPanel.title.restore")%>" onclick="if (confirm('<%=_ctx.appRes("UIPublicationPanel.revisions.confirm")%>')) <%= uicomponent.event("RestoreVersion", revision.getUUID()) %>"><i class="uiIconRestore"></i></a><%
+                    %><a class="actionIcon" rel="tooltip" data-placement="bottom" title="<%=_ctx.appRes("UIPublicationPanel.title.restore")%>" onclick="if (confirm('<%=_ctx.appRes("UIPublicationPanel.revisions.confirm")%>')) <%= uicomponent.event("RestoreVersion", revision.getUUID()) %>"><i class="uiIconRestore uiIconLightGray"></i></a><%
                   } else {
-                    %><a class="actionIcon" rel="tooltip" data-placement="bottom" title="<%=_ctx.appRes("UIPublicationPanel.title.restore")%>" onclick="<%= uicomponent.event("RestoreVersion", revision.getUUID()) %>"><i class="uiIconRestore"></i></a><%
+                    %><a class="actionIcon" rel="tooltip" data-placement="bottom" title="<%=_ctx.appRes("UIPublicationPanel.title.restore")%>" onclick="<%= uicomponent.event("RestoreVersion", revision.getUUID()) %>"><i class="uiIconRestore uiIconLightGray"></i></a><%
                   }
                 }
               %>

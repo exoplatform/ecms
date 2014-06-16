@@ -16,6 +16,9 @@
  */
 package org.exoplatform.ecm.webui.viewer;
 
+import java.io.BufferedInputStream;
+import java.io.File;
+import java.io.FileInputStream;
 import java.lang.reflect.Method;
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -30,10 +33,14 @@ import javax.jcr.RepositoryException;
 
 import org.exoplatform.container.ExoContainer;
 import org.exoplatform.container.ExoContainerContext;
+import org.exoplatform.download.DownloadService;
+import org.exoplatform.download.InputStreamDownloadResource;
 import org.exoplatform.portal.webui.util.Util;
 import org.exoplatform.portal.webui.workspace.UIPortalApplication;
+import org.exoplatform.services.cms.mimetype.DMSMimeTypeResolver;
 import org.exoplatform.services.pdfviewer.PDFViewerService;
 import org.exoplatform.services.resources.ResourceBundleService;
+import org.exoplatform.web.application.RequireJS;
 import org.exoplatform.services.wcm.utils.WCMCoreUtils;
 import org.exoplatform.webui.config.annotation.ComponentConfig;
 import org.exoplatform.webui.config.annotation.EventConfig;
@@ -66,6 +73,7 @@ import org.icepdf.core.pobjects.PInfo;
         @EventConfig(listeners = PDFViewer.RotateRightPageActionListener.class, phase = Phase.DECODE),
         @EventConfig(listeners = PDFViewer.RotateLeftPageActionListener.class, phase = Phase.DECODE),
         @EventConfig(listeners = PDFViewer.ScalePageActionListener.class, phase = Phase.DECODE),
+        @EventConfig(listeners = PDFViewer.DownloadFileActionListener.class, phase = Phase.DECODE),
         @EventConfig(listeners = PDFViewer.ZoomInPageActionListener.class, phase = Phase.DECODE),
         @EventConfig(listeners = PDFViewer.ZoomOutPageActionListener.class, phase = Phase.DECODE)
     }
@@ -260,6 +268,38 @@ public class PDFViewer extends UIForm {
       PDFViewer pdfViewer = event.getSource();
       String scale = pdfViewer.getUIFormSelectBox(SCALE_PAGE).getValue();
       pdfViewer.setScale(Float.parseFloat(scale));
+      event.getRequestContext().addUIComponentToUpdateByAjax(pdfViewer);
+    }
+  }
+
+  static public class DownloadFileActionListener extends EventListener<PDFViewer> {
+    public void execute(Event<PDFViewer> event) throws Exception {
+      PDFViewer pdfViewer = event.getSource();
+      UIComponent uiParent = pdfViewer.getParent();
+      Method methodGetNode = pdfViewer.getMethod(uiParent, "getNode");
+      Node node = (Node)methodGetNode.invoke(uiParent, (Object[]) null);
+      node = getFileLangNode(node);
+      String repository = (String) pdfViewer.getMethod(uiParent, "getRepository").invoke(uiParent, (Object[]) null);
+      PDFViewerService pdfViewerService = pdfViewer.getApplicationComponent(PDFViewerService.class);
+      File file = pdfViewerService.getPDFDocumentFile(node, repository);
+      String fileName = node.getName();
+      int index = fileName.lastIndexOf('.');
+      if (index < 0) {
+        fileName += ".pdf";
+      } else if (index == fileName.length() - 1) {
+        fileName += "pdf";
+      } else {
+        String extension = fileName.substring(index + 1);
+        fileName = fileName.replace(extension, "pdf");
+      }
+      DownloadService dservice = pdfViewer.getApplicationComponent(DownloadService.class) ;
+      InputStreamDownloadResource dresource = new InputStreamDownloadResource(
+          new BufferedInputStream(new FileInputStream(file)), DMSMimeTypeResolver.getInstance().getMimeType(".pdf"));
+      dresource.setDownloadName(fileName) ;
+      String downloadLink = dservice.getDownloadLink(dservice.addDownloadResource(dresource)) ;
+
+      RequireJS requireJS = event.getRequestContext().getJavascriptManager().getRequireJS();
+      requireJS.require("SHARED/ecm-utils", "ecmutil").addScripts("ecmutil.ECMUtils.ajaxRedirect('" + downloadLink + "');");
       event.getRequestContext().addUIComponentToUpdateByAjax(pdfViewer);
     }
   }

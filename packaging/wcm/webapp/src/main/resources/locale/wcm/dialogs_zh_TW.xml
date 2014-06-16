@@ -36,7 +36,7 @@
         <hintJS>您可以指定一些 JavaScript 代碼呈現在您的 web 內容之前。</hintJS>
         <WebContentHtml>主要內容</WebContentHtml>
         <Illustration>插圖</Illustration>
-        <hintIllustration>您可以指定您的 web 內容顯示在清單中時將顯示的圖像。您還可以指定一些摘要文本和此圖像一起。</hintIllustration>
+        <hintIllustration>您可以指定您的 web 內容顯示在清單中時將顯示的圖像。您還可以指定一些摘要文字和此圖像一起。</hintIllustration>
         <confirm-delete>確定要刪除此插圖嗎?</confirm-delete>
         <illustrationImage>插圖圖片</illustrationImage>
         <imageMimeType>圖片類型</imageMimeType>

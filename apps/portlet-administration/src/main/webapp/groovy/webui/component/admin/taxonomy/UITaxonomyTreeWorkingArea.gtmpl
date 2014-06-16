@@ -38,17 +38,17 @@
 		                if(uicomponent.isRootNode()) {
 		              %>
 					<td class="span2 center">
-		               	<a class="actionIcon" onclick="<%=uicomponent.event("Add", node.getPath())%>" rel="tooltip" data-placement="bottom" title="<%=_ctx.appRes("UITaxonomyManager.title.add")%>"><i class="uiIconAddPermission"></i></a>
-						<a class="actionIcon" onclick="<%=uicomponent.event("Paste", node.getPath())%>" rel="tooltip" data-placement="bottom" title="<%=_ctx.appRes("UITaxonomyManager.title.paste")%>" ><i class="uiIconEcmsPatse"></i></a>
+		               	<a class="actionIcon" onclick="<%=uicomponent.event("Add", node.getPath())%>" rel="tooltip" data-placement="bottom" title="<%=_ctx.appRes("UITaxonomyManager.title.add")%>"><i class="uiIconAddPermission uiIconLightGray"></i></a>
+						<a class="actionIcon" onclick="<%=uicomponent.event("Paste", node.getPath())%>" rel="tooltip" data-placement="bottom" title="<%=_ctx.appRes("UITaxonomyManager.title.paste")%>" ><i class="uiIconEcmsPatse uiIconEcmsLightGray"></i></a>
 					</td>
 					 <%} else {%>
 					 <td class="span4 center">
-		                <a class="actionIcon" onclick="<%=uicomponent.event("Add", node.getPath())%>"  rel="tooltip" data-placement="bottom" title="<%=_ctx.appRes("UITaxonomyManager.title.add")%>" ><i class="uiIconAddPermission"></i></a>
-						<a class="actionIcon" onclick="<%=uicomponent.event("Copy", node.getPath())%>" rel="tooltip" data-placement="bottom" title="<%=_ctx.appRes("UITaxonomyManager.title.copy")%>" ><i class="uiIconEcmsCopy"></i></a>	
-		               <a class="actionIcon"onclick="<%=uicomponent.event("Cut", node.getPath())%>"  rel="tooltip" data-placement="bottom" title="<%=_ctx.appRes("UITaxonomyManager.title.cut")%>" ><i class="uiIconEcmsCut"></i></a>
-		               <a class="actionIcon" onclick="<%=uicomponent.event("Paste", node.getPath())%>" rel="tooltip" data-placement="bottom" title="<%=_ctx.appRes("UITaxonomyManager.title.paste")%>" ><i class="uiIconEcmsPatse"></i></a>
-		                <a class="actionIcon" onclick="<%=uicomponent.event("ViewPermission", node.getPath())%>" rel="tooltip" data-placement="bottom" title="<%=_ctx.appRes("UITaxonomyManager.title.permission")%>"><i class="uiIconEcmsViewPermissions"></i></a>
-						<a class="actionIcon" onclick="<%=uicomponent.event("Remove", node.getPath())%>" rel="tooltip" data-placement="bottom" title="<%=_ctx.appRes("UITaxonomyManager.title.remove")%>"><i class="uiIconDelete"></i></a>
+		                <a class="actionIcon" onclick="<%=uicomponent.event("Add", node.getPath())%>"  rel="tooltip" data-placement="bottom" title="<%=_ctx.appRes("UITaxonomyManager.title.add")%>" ><i class="uiIconAddPermission uiIconLightGray"></i></a>
+						<a class="actionIcon" onclick="<%=uicomponent.event("Copy", node.getPath())%>" rel="tooltip" data-placement="bottom" title="<%=_ctx.appRes("UITaxonomyManager.title.copy")%>" ><i class="uiIconEcmsCopy uiIconEcmsLightGray"></i></a>	
+		               <a class="actionIcon"onclick="<%=uicomponent.event("Cut", node.getPath())%>"  rel="tooltip" data-placement="bottom" title="<%=_ctx.appRes("UITaxonomyManager.title.cut")%>" ><i class="uiIconEcmsCut uiIconEcmsLightGray"></i></a>
+		               <a class="actionIcon" onclick="<%=uicomponent.event("Paste", node.getPath())%>" rel="tooltip" data-placement="bottom" title="<%=_ctx.appRes("UITaxonomyManager.title.paste")%>" ><i class="uiIconEcmsPatse uiIconEcmsLightGray"></i></a>
+		                <a class="actionIcon" onclick="<%=uicomponent.event("ViewPermission", node.getPath())%>" rel="tooltip" data-placement="bottom" title="<%=_ctx.appRes("UITaxonomyManager.title.permission")%>"><i class="uiIconEcmsViewPermissions uiIconEcmsLightGray"></i></a>
+						<a class="actionIcon" onclick="<%=uicomponent.event("Remove", node.getPath())%>" rel="tooltip" data-placement="bottom" title="<%=_ctx.appRes("UITaxonomyManager.title.remove")%>"><i class="uiIconDelete uiIconLightGray"></i></a>
 					 </td>
 					  <%}%>
 		           

@@ -69,7 +69,7 @@
 	              </div>
               </td>
               <td class="center">
-                <a class="actionIcon"  onclick="<%=uicomponent.event("View", node.getName())%>" rel="tooltip" data-placement="bottom" title="<%=_ctx.appRes("UINodeTypeList.tooltip.View")%>"><i class="uiIconPreview"></i></a>
+                <a class="actionIcon"  onclick="<%=uicomponent.event("View", node.getName())%>" rel="tooltip" data-placement="bottom" title="<%=_ctx.appRes("UINodeTypeList.tooltip.View")%>"><i class="uiIconPreview uiIconLightGray"></i></a>
               </td>
             <% } else {%>
               <td>
@@ -103,8 +103,8 @@
                 </div>
               </td>
               <td class="center">                                
-                <a class="actionIcon" onclick="<%=uicomponent.event("Edit", node.getName())%>" rel="tooltip" data-placement="bottom" title="<%=_ctx.appRes("UINodeTypeList.tooltip.Edit")%>" ><i class="uiIconEdit"></i></a>
-                <a class="actionIcon"  onclick="<%=uicomponent.event("Delete", node.getName())%>" rel="tooltip" data-placement="bottom" title="<%=_ctx.appRes("UINodeTypeList.tooltip.Delete")%>"><i class="uiIconDelete"></i></a>
+                <a class="actionIcon" onclick="<%=uicomponent.event("Edit", node.getName())%>" rel="tooltip" data-placement="bottom" title="<%=_ctx.appRes("UINodeTypeList.tooltip.Edit")%>" ><i class="uiIconEdit uiIconLightGray"></i></a>
+                <a class="actionIcon"  onclick="<%=uicomponent.event("Delete", node.getName())%>" rel="tooltip" data-placement="bottom" title="<%=_ctx.appRes("UINodeTypeList.tooltip.Delete")%>"><i class="uiIconDelete uiIconLightGray"></i></a>
               </td>	                    
             <% } %>
           </tr>

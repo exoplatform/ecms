@@ -1,0 +1,119 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<bundle>
+  <UIPresentationContainer>
+    <title>
+      <QuickEdit>Επεξεργασία στον περιηγητή περιεχομένου</QuickEdit>
+      <print>Εκτύπωση σελίδας</print>
+      <FastPublish>Δημοσίευση</FastPublish>
+    </title>
+    <label>
+      <draft>Προσχέδιο</draft>
+      <print>Εκτύπωση</print>
+    </label>
+    <msg>
+      <no-content>Δεν βρέθηκαν περιεχόμενα.</no-content>
+      <internal-server-error>Παρουσιάστηκε σφάλμα κατά την μεταφορά δεδομένων από το διακομιστή.</internal-server-error>
+      <empty-title-error>Παρακαλώ καταχωρήστε το νέο τίτλο.</empty-title-error>
+    </msg>
+  </UIPresentationContainer>
+  <CorrectContentSelectorPopupWindow>
+    <title>
+      <UIContentSelectorOne>Επιλογή Περιεχομένου</UIContentSelectorOne>
+    </title>
+  </CorrectContentSelectorPopupWindow>
+  <UISingleContentViewerPortlet>
+    <msg>
+      <AccessControlException>Δεν έχετε δικαίωμα πρόσβασης στη λειτουργία επεξεργασίας.</AccessControlException>
+    </msg>
+  </UISingleContentViewerPortlet>
+  <UISCVContextualRadioBox>
+    <label>
+      <Enable>Ενεργοποιημένο</Enable>
+      <Disable>Απενεργοποιημένο</Disable>
+    </label>
+  </UISCVContextualRadioBox>
+  <UIPreferencesPopupWindows>
+    <title>
+      <UISCVPreferences>Προτιμήσεις Λεπτομερειών Περιεχομένου</UISCVPreferences>
+    </title>
+  </UIPreferencesPopupWindows>
+  <UISCVPreferences>
+    <action>
+      <Save>#{word.save}</Save>
+      <Abort>Ματαίωση</Abort>
+      <Cancel>#{word.cancel}</Cancel>
+      <Print>Εκτύπωση</Print>
+      <Close>#{word.close}</Close>
+    </action>
+    <title>Προτιμήσεις Λεπτομερειών Περιεχομένου</title>
+    <label>
+      <Back>Επιστροφή στην προηγούμενη σελίδα</Back>
+      <Edit>Επεξεργασία</Edit>
+      <Preferences>Προτιμήσεις</Preferences>
+      <Title>Προτιμήσεις Λεπτομερειών Περιεχομένου</Title>
+      <UISCVShowTitleConfigurationCheckBox>Εμφάνιση τίτλου</UISCVShowTitleConfigurationCheckBox>
+      <UISCVShowDateConfigurationCheckBox>Εμφάνιση ημερομηνίας</UISCVShowDateConfigurationCheckBox>
+      <UISCVShowOptionBarConfigurationCheckBox>Εμφάνιση γραμμής επιλογών</UISCVShowOptionBarConfigurationCheckBox>
+      <DisplaySettingBlock>Ρυθμίσεις εμφάνισης</DisplaySettingBlock>
+      <ContentPathBlock>Επιλογή του περιεχομένου</ContentPathBlock>
+      <UISCVConfigItemPathFormInputSet>Διαδρομή περιεχομένου</UISCVConfigItemPathFormInputSet>
+    <UISCVContentPathConfigurationInputBox>Διαδρομή περιεχομένου</UISCVContentPathConfigurationInputBox>
+      <Advance>Για προχωρημένους</Advance>
+      <ContextCaption>Δυναμική πλοήγηση</ContextCaption>
+      <UISCVContextualRadioBox>Συμφραζόμενα περιεχομένου</UISCVContextualRadioBox>
+      <UISCVParameterInputBox>από</UISCVParameterInputBox>
+      <PrintSettingBlock>Ρυθμίσεις εκτύπωσης</PrintSettingBlock>
+      <UISCVPrintPageParameter>με</UISCVPrintPageParameter>
+      <UISCVConfigPrintPageFormInputSet>Εμφάνιση στη σελίδα</UISCVConfigPrintPageFormInputSet>
+      <LockStatus>Κλείδωμα</LockStatus>
+      <CacheManagement>Ορατότητα περιεχομένου</CacheManagement>
+      <UISCVCacheRadioBox>Κοινή χρήση περιεχομένου</UISCVCacheRadioBox>
+    </label>
+    <help>
+      <ContentPathBlock>Επιλέξτε το περιεχόμενο που θέλετε να εμφανίζεται. Η προεπιλεγμένη επιλογή θα αντικατασταθεί δυναμικά αν ενεργοποιήσετε την λειτουργία "Δυναμική πλοήγηση" (δείτε την επιλογή για προχωρημένους παρακάτω).</ContentPathBlock>
+      <DisplaySettingBlock>Μπορείτε να εμφανίσετε ή να αποκρύψετε τη γραμμή επιλογών η οποία χρησιμοποιείται για την εμφάνιση του συνδέσμου της εκτύπωσης. Η εμφάνιση του τίτλου και της ημερομηνίας είναι επίσης προαιρετική.</DisplaySettingBlock>
+      <ContextualHelp>Ενεργοποιεί τη Δυναμική Πλοήγηση. Το περιεχόμενο μπορεί να μεταβάλλεται δυναμικά από κάποια παράμετρο URL.</ContextualHelp>
+      <ParameterHelp>Αυτή η παράμετρος θα χρησιμοποιηθεί για να ληφθεί το περιεχόμενο αν είναι ενεργοποιημένη η δυναμική πλοήγηση.</ParameterHelp>
+    </help>
+    <msg>
+      <not-valid-path>Το στοιχείο διαδρομής δεν είναι έγκυρο.</not-valid-path>
+    </msg>
+    <tab>
+      <label>
+        <UISCVConfigContentFormInputSet>Επιλογή του περιεχομένου</UISCVConfigContentFormInputSet>
+        <UISCVConfigDisplayFormInputSet>Ρυθμίσεις εμφάνισης</UISCVConfigDisplayFormInputSet>
+        <UISCVConfigPrintFormInputSet>Ρυθμίσεις εκτύπωσης</UISCVConfigPrintFormInputSet>
+        <UISCVConfigAdvancedFormInputSet>Για προχωρημένους</UISCVConfigAdvancedFormInputSet>
+      </label>
+    </tab>
+  </UISCVPreferences>
+  <UISCVConfigItemPathFormInputSet>
+    <title>
+      <SelectFolderPath>Επιλέξτε διαδρομή φακέλου</SelectFolderPath>
+      <AddPath>Προσθήκη διαδρομής</AddPath>
+    </title>
+  </UISCVConfigItemPathFormInputSet>
+  <UISCVConfigPrintPageFormInputSet>
+    <title>
+      <SelectTargetPage>Εμφάνιση στη σελίδα</SelectTargetPage>
+    </title>
+  </UISCVConfigPrintPageFormInputSet>
+  <PublicationStates>
+    <archived>Αρχειοθετημένο</archived>
+    <obsolete>Ξεπερασμένο</obsolete>
+    <unpublished>Αδημοσίευτο</unpublished>
+    <enrolled>Εγγεγραμμένο</enrolled>
+    <draft>Προσχέδιο</draft>
+    <pending>Σε εκκρεμότητα</pending>
+    <approved>Εγκεκριμένο</approved>
+    <inreview>Σε αναθεώρηση</inreview>
+    <staged>Έτοιμο για δημοσίευση</staged>
+    <published>Δημοσιευμένο</published>
+  </PublicationStates>
+  <UISCVCacheRadioBox>
+    <label>
+      <Enable>Περιορίζεται από τον έλεγχο ταυτότητας</Enable>
+      <Disable>Περιορίζεται από τους ρόλους χρήστη</Disable>
+    </label>
+  </UISCVCacheRadioBox>
+</bundle>

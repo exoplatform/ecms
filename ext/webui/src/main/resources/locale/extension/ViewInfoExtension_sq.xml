@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<bundle>
+<UIPopupWindow>
+<title>
+<UIViewInfoManager>crwdns6793135:0crwdne6793135:0</UIViewInfoManager>
+</title>
+</UIPopupWindow>
+    
+<ECMContextMenu>
+<event>
+<ViewInfo>crwdns6793136:0crwdne6793136:0</ViewInfo>
+</event>
+</ECMContextMenu>
+<UIViewInfoContainer>
+<label>
+      <name>crwdns6793137:0crwdne6793137:0</name>
+      <title>crwdns6793138:0crwdne6793138:0</title>
+      <type>crwdns6793139:0crwdne6793139:0</type>
+      <size>crwdns6793140:0crwdne6793140:0</size>
+      <owner>crwdns6793141:0crwdne6793141:0</owner>
+      <lastModifier>crwdns6793142:0crwdne6793142:0</lastModifier>
+      <created>crwdns6793143:0crwdne6793143:0</created>
+      <lastModified>crwdns6793144:0crwdne6793144:0</lastModified>
+      <publicationState>crwdns6793145:0crwdne6793145:0</publicationState>
+</label>
+<value>
+      <folder>crwdns6793146:0crwdne6793146:0</folder>
+</value>
+<action>
+<Close>crwdns6793147:0{word.close}crwdne6793147:0</Close>
+</action>
+</UIViewInfoContainer>
+</bundle>

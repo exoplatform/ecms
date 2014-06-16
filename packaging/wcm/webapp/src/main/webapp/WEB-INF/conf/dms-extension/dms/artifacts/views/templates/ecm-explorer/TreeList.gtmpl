@@ -166,7 +166,7 @@
 						</div>
             <!--Breadcrumb links-->
             <div class="breadcrumbLink">
-							<i class="uiIconTree"></i> 
+							<i class="uiIconTree uiIconLightGray"></i> 
               <a class="nodeLabel" data-placement="bottom" rel="tooltip"
                  onclick="<%=uicomponent.event("ChangeNode", drivePath.toString(), new Parameter("workspaceName", uiExplorer.getDriveData().getWorkspace()))%>"
                  title="<%=uiExplorer.findFirstComponentOfType(UITreeExplorer.class).getLabel()%>">

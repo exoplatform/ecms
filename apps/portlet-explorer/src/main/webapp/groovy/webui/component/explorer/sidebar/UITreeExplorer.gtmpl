@@ -89,7 +89,7 @@
         if (permLinkComponent != null) {
           strActs +=  "<li class='menuItem'>";
           strActs +=  "<a exo:attr='ViewDocument' style='display: block;' href=\"" + permLinkComponent.getPermlink(node) + "\" target='_new' onclick=\"return eXo.ecm.WCMUtils.hideContextMenu(this);\">";
-          strActs +=  " <i class='uiIconEcmsViewDocument uiIconEcmsLightGrey'>" ;
+          strActs +=  " <i class='uiIconEcmsViewDocument uiIconEcmsLightGray'>" ;
           strActs +=  " </i> ";    
           strActs +=    _ctx.appRes("ECMContextMenu.event." + permLinkComponent.getUIExtensionName());
           strActs +=  "</a>";
@@ -146,7 +146,7 @@
         if (!node.isNodeType(Utils.EXO_RESTORELOCATION) && !Utils.isTrashHomeNode(node)) {
           strActs +=  "<li class='menuItem'>";
           strActs +=  "<a exo:attr='CopyUrlToClipboard' style='display: block;' id='${drive}_treeclip_button$depthChild$counter' path='$clipboardLink'>" ;
-          strActs +=  " <i class='uiIconEcmsCopyUrlToClipboard uiIconEcmsLightGrey'>" ;
+          strActs +=  " <i class='uiIconEcmsCopyUrlToClipboard uiIconEcmsLightGray'>" ;
           strActs +=  " </i> ";
 	  			strActs +=	  _ctx.appRes("ECMContextMenu.event.GetURL");
 	  			strActs +=  "</a>";
@@ -215,7 +215,7 @@
 
  
 	<h6 class="title" style="cursor: pointer;" rel="tooltip" data-placement="bottom" title="$label" onclick="<%=uicomponent.event("Expand",treeNodeRoot.getPath())%>" $contextMenuEvent>
-		<i class="uiIconEcmsHome"></i> ${label}
+		<i class="uiIconEcmsHome uiIconEcmsLightGray"></i> ${label}
 	</h6>			  	
 			  	
 

@@ -393,7 +393,7 @@
       <workspace>工作區：</workspace>
       <homePath>首頁路徑：</homePath>
       <icon>工作區的圖示：</icon>
-      <viewPreferences>顯示引用的文件：</viewPreferences>
+      <viewPreferences>顯示參考的文件：</viewPreferences>
       <viewNonDocument>顯示非文件節點：</viewNonDocument>
       <viewSideBar>顯示側欄：</viewSideBar>
       <permissions>權限：</permissions>
@@ -505,7 +505,7 @@
         <nodeTypeDefinition>節點類型</nodeTypeDefinition>
         <propertyDefinition>屬性</propertyDefinition>
         <childNodeDefinition>子節點</childNodeDefinition>
-        <superTypeTab>父類型</superTypeTab>
+        <superTypeTab>超級類型</superTypeTab>
         <DefaultTypeTab>主要預設</DefaultTypeTab>
         <RequiredTypeTab>主要所需</RequiredTypeTab>
         <Contraints>約束</Contraints>
@@ -520,7 +520,7 @@
       <mixinType>是混合類型</mixinType>
       <hasOrderableChildNodes>可訂購的子節點</hasOrderableChildNodes>
       <primaryItemName>主要項目名稱</primaryItemName>
-      <superTypes>父類型</superTypes>
+      <superTypes>超級類型</superTypes>
       <propertyname>定義名稱</propertyname>
       <requiredType>所需的類型</requiredType>
       <multiple>是多個</multiple>
@@ -866,7 +866,7 @@
 </msg>
 <grid>
  <msg>
-  <empty>在這個視圖上沒有標籤</empty>
+  <empty>在這個檢視上沒有標籤</empty>
  </msg>
 </grid>
 </UITabList>

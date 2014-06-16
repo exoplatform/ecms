@@ -1,0 +1,189 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<bundle>
+  <UICLVContainer>
+    <label>
+      <Preferences>Προτιμήσεις</Preferences>
+      <AddContent>Προσθέστε περιεχόμενο</AddContent>
+      <ManageContent>Διαχείριση περιεχομένου</ManageContent>
+    </label>
+    <msg>
+      <non-contents>Συγνώμη, δεν υπάρχουν διαθέσιμα άρθρα.</non-contents>
+      <item-not-found>Δεν βρέθηκαν στοιχεία.</item-not-found>
+      <no-permission>Δεν έχετε δικαίωμα πρόσβασης σε αυτόν τον κόμβο.</no-permission>
+      <category-back>Πηγαίνετε στο προηγούμενο</category-back>
+    </msg>
+  </UICLVContainer>
+  <UIViewerManagementPopupWindow>
+    <title>
+      <UICLVConfig>Προτιμήσεις λίστας περιεχομένου</UICLVConfig>
+    </title>
+  </UIViewerManagementPopupWindow>
+  <UICLVConfig>
+    <label>
+      <Title>Προτιμήσεις λίστας περιεχομένου</Title>
+      <ContentSelectionBlock>Επιλογή του περιεχομένου</ContentSelectionBlock>
+      <UICLVConfigDisplayModeFormRadioBoxInput>Λειτουργία</UICLVConfigDisplayModeFormRadioBoxInput>
+      <UICLVConfigItemPathFormInputSet>Διαδρομή φακέλου</UICLVConfigItemPathFormInputSet>
+    <UICLVConfigItemPathFormStringInput>Διαδρομή φακέλου</UICLVConfigItemPathFormStringInput>
+      <UICLVConfigOrderByFormSelectBox>Ταξινόμιση</UICLVConfigOrderByFormSelectBox>
+      <option>
+        <exo:title>Τίτλος</exo:title>
+        <exo:dateCreated>Ημερομηνία δημιουργίας</exo:dateCreated>
+        <exo:lastModifiedDate>Ημερομηνία τροποποίησης</exo:lastModifiedDate>
+        <publication:liveDate>Ημερομηνία δημοσίευσης</publication:liveDate>
+        <exo:startEvent>Ημερομηνία γεγονότος</exo:startEvent>
+        <exo:index>Πίνακας ευρετηρίου</exo:index>
+        <DESC>Απόγονος</DESC>
+        <ASC>Γονικό</ASC>
+      </option>
+      <DisplaySettingBlock>Ρυθμίσεις εμφάνισης</DisplaySettingBlock>
+      <UICLVConfigHeaderFormStringInput>Κεφαλίδα</UICLVConfigHeaderFormStringInput>
+      <UICLVConfigDisplayTemplateFormSelectBox>Πρότυπο</UICLVConfigDisplayTemplateFormSelectBox>
+      <UICLVConfigPaginatorTemplateFormSelectBox>Σελιδοποίηση</UICLVConfigPaginatorTemplateFormSelectBox>
+      <UICLVConfigItemsPerPageFormStringInput>Αντικείμενα ανά σελίδα</UICLVConfigItemsPerPageFormStringInput>
+      <UICLVConfigShowIllustrationFormCheckboxInput>Show Image</UICLVConfigShowIllustrationFormCheckboxInput>
+      <UICLVConfigShowSummaryFormCheckboxInput>Show Summary</UICLVConfigShowSummaryFormCheckboxInput>
+      <UICLVConfigShowHeaderFormCheckboxInput>Show Header</UICLVConfigShowHeaderFormCheckboxInput>
+      <UICLVConfigShowRefreshFormCheckboxInput>Show Refresh</UICLVConfigShowRefreshFormCheckboxInput>
+      <UICLVConfigShowTitleFormCheckboxInput>Εμφάνιση τίτλου</UICLVConfigShowTitleFormCheckboxInput>
+      <UICLVConfigShowDateCreatedFormCheckboxInput>Εμφάνιση ημερομηνίας</UICLVConfigShowDateCreatedFormCheckboxInput>
+      <UICLVConfigShowLinkFormCheckboxInput>Show Link</UICLVConfigShowLinkFormCheckboxInput>
+      <UICLVConfigShowReadmoreFormCheckboxInput>Show More Links</UICLVConfigShowReadmoreFormCheckboxInput>
+      <UICLVConfigAllowDynamicUrlStringInput>Allow Dynamic URL</UICLVConfigAllowDynamicUrlStringInput>
+      <UICLVConfigShowRssLinkFormCheckboxInput>Show RSS Link</UICLVConfigShowRssLinkFormCheckboxInput>
+      <UICLVConfigShowAutomaticDetectionCheckboxInput>Automatic Detection</UICLVConfigShowAutomaticDetectionCheckboxInput>
+      <AdvancedBlock>Προχωρημένα</AdvancedBlock>
+      <UICLVConfigDynamicNavigationLabel>Δυναμική πλοήγηση</UICLVConfigDynamicNavigationLabel>
+      <UICLVConfigContextualFolderRadioBoxInput>Contextual Folder</UICLVConfigContextualFolderRadioBoxInput>
+      <UICLVConfigShowCLVByStringInput>από</UICLVConfigShowCLVByStringInput>
+      <UICLVConfigshowSCVWithStringInput>με</UICLVConfigshowSCVWithStringInput>
+      <UICLVConfigTargetPageFormInputSet>Εμφάνιση στη σελίδα</UICLVConfigTargetPageFormInputSet>
+      <content-not-found>Content not found.</content-not-found>
+      <ContentPath>Διαδρομή περιεχομένου</ContentPath>
+      <Up>Επάνω</Up>
+      <Down>Κάτω</Down>
+      <UICLVConfigCacheManagementLabel>Ορατότητα περιεχομένου</UICLVConfigCacheManagementLabel>
+      <UICLVContentByQueryLabel>Content by Query</UICLVContentByQueryLabel>
+      <UICLVConfigWorkspaceFormSelectBox>Χώρος Εργασίας</UICLVConfigWorkspaceFormSelectBox>
+      <UICLVConfigContentByQueryTextArea>by query</UICLVConfigContentByQueryTextArea>
+      <UICLVConfigCacheEnableRadioBoxInput>Share content between users</UICLVConfigCacheEnableRadioBoxInput>
+    </label>
+    <help>
+      <ModeSelectionHelp>Δύο καταστάσεις λειτουργίας είναι διαθέσιμες για την εμφάνιση του περιεχομένου. "Από τον φάκελο" όπου θα πάρει όλο το περιεχόμενο που είναι διαθέσιμο στον επιλεγμένο φάκελο/κατηγορία και "Από το περιεχόμενο" όπου σας επιτρέπει να επιλέξετε με μη αυτόματο τρόπο το περιεχόμενο που θέλετε να εμφανίζεται.</ModeSelectionHelp>
+      <FolderPathHelp>Επιλέξτε το περιεχόμενο που θέλετε να εμφανίζεται. Η προεπιλεγμένη επιλογή θα αντικατασταθεί δυναμικά αν ενεργοποιήσετε την λειτουργία "Δυναμική πλοήγηση" (δείτε την επιλογή για προχωρημένους παρακάτω).</FolderPathHelp>
+      <HeaderOptionHelp>Εμφάνιση κεφαλίδας στην κορυφή της λίστας του περιεχομένου. Εάν ενεργοποιήσετε την επιλογή "Αυτόματη ανίχνευση", θα προσπαθήσει να βρει την κατάλληλη κεφαλίδα με βάση την τρέχουσα επιλογή.</HeaderOptionHelp>
+      <GeneralOptionHelp>Select the graphical elements you want to show in your list. Note that, depending on your selected template, some elements may not be available.</GeneralOptionHelp>
+      <ContextualHelp>Ενεργοποιεί την επιλογή "Δυναμική πλοήγηση". Μπορεί να τροποποιηθεί το περιεχόμενο δυναμικά από τρίτους με βάση μια παράμετρο URL.</ContextualHelp>
+      <ParameterHelp>Αυτή η παράμετρος θα απαιτείται για την πρόσβαση στο περιεχόμενο, εφόσον είναι ενεργοποιημένη η δυναμική πλοήγηση.</ParameterHelp>
+      <ShowDetailInPageHelp>Κάνοντας κλικ στο περιεχόμενο ανακατευθύνει το χρήστη σε μια σελίδα με λεπτομέρειες. Πρέπει να έχετε ένα portlet "Περιεχόμενο από URL" με ενεργοποιημένη τη Δυναμική πλοήγηση στη σελίδα-στόχο ώστε να εμφανιστεί το περιεχόμενο.</ShowDetailInPageHelp>
+      <DetailParameterHelp>Αυτή η παράμετρος θα περιέχει τη διαδρομή για το περιεχόμενο στο σύνδεσμο της σελίδας λεπτομερειών. Αυτή η παράμετρος πρέπει να ταιριάζει με την παράμετρο που χρησιμοποιείται στο portlet "Περιεχόμενο από URL" της σελίδας.</DetailParameterHelp>
+      <ContentByQueryHelp>Μπορείτε να ορίσετε ένα ερώτημα SQL για να λάβετε το περιεχόμενο δυναμικά. Επιτρέπονται οι ακόλουθες παράμετροι: ${user}, ${lang} ή οποιαδήποτε get παράμετρος (PARAM) περιβάλλεται από ${PARAM}.</ContentByQueryHelp>
+      <ContentsVisibilityHelp>"Απορριπτέο από τον έλεγχο ταυτότητας" θα φιλτράρει το περιεχόμενο με βάση την πιστοποίηση του χρήστη (εάν δηλαδή έχει εισέλθει στο σύστημα με έγκυρο κωδικό). Εάν ο χρήστης δεν έχει πιστοποιηθεί θα του είναι ορατό μόνο το δημόσιο περιεχόμενο. Εάν έχει πιστοποιηθεί θα του είναι ορατό όλο το περιεχόμενο που έχουν μοιραστεί δημόσια οι χρήστες του συστήματος. "Περιορισμένο κατά κατηγορία χρηστών" σημαίνει ότι ο χρήστης θα βλέπει το περιεχόμενο με βάση τα δικαιώματα του. Στις περισσότερες περιπτώσεις, αυτή η επιλογή δεν θα πρέπει να χρησιμοποιείται γιατί επηρεάζει αρνητικά τις επιδόσεις του συστήματος.</ContentsVisibilityHelp>
+    </help>
+    <action>
+      <Save>#{word.save}</Save>
+      <Cancel>#{word.cancel}</Cancel>
+      <delete>Διαγραφή</delete>
+    </action>
+    <msg>
+      <not-valid-path>The Folder Path is invalid.</not-valid-path>
+      <saving-success>The portlet's preferences are saved.</saving-success>
+    </msg>
+    <tab>
+      <label>
+        <clvContentTab>Επιλογή του περιεχομένου</clvContentTab>
+        <clvDisplayTab>Ρυθμίσεις εμφάνισης</clvDisplayTab>
+        <clvAdvancedTab>Προχωρημένα</clvAdvancedTab>
+      </label>
+    </tab>
+  </UICLVConfig>
+  <UICLVConfigDisplayModeFormRadioBoxInput>
+    <label>
+      <AutoViewerMode>By Folder</AutoViewerMode>
+      <ManualViewerMode>By Content</ManualViewerMode>
+    </label>
+  </UICLVConfigDisplayModeFormRadioBoxInput>
+  <UICLVConfigItemPathFormInputSet>
+    <title>
+      <SelectFolderPath>Επιλέξτε διαδρομή φακέλου</SelectFolderPath>
+      <AddPath>Προσθήκη διαδρομής</AddPath>
+    </title>
+  </UICLVConfigItemPathFormInputSet>
+  <FolderPathSelectorPopupWindow>
+    <title>
+      <UIContentSelectorFolder>Περιηγητής φακέλων</UIContentSelectorFolder>
+    </title>
+  </FolderPathSelectorPopupWindow>
+  <UICLVConfigOrderTypeFormSelectBox>
+    <label>
+      <option>
+        <OrderDesc>Απόγονος</OrderDesc>
+        <OrderAsc>Γονικό</OrderAsc>
+      </option>
+    </label>
+  </UICLVConfigOrderTypeFormSelectBox>
+  <UICLVConfigTargetPageFormInputSet>
+    <title>
+      <SelectBasePath>Επιλέξτε διαδρομή βάσης</SelectBasePath>
+      <SelectTargetPage>Επιλέξτε διαδρομή βάσης</SelectTargetPage>
+    </title>
+  </UICLVConfigTargetPageFormInputSet>
+  <UICLVBasePathPopupWindow>
+    <title>
+      <UIPageSelector>Επιλογέας σελίδας</UIPageSelector>
+    </title>
+  </UICLVBasePathPopupWindow>
+  <UICLVPresentation>
+    <msg>
+      <confirm-delete>Είστε βέβαιοι ότι θέλετε να διαγράψετε αυτό το περιεχόμενο;</confirm-delete>
+      <delete-content-successfully>Το περιεχόμενο διαγράφηκε επιτυχώς.</delete-content-successfully>
+    </msg>
+    <label>
+      <readmore>Read more</readmore>
+      <rssFeed>RSS Feed</rssFeed>
+    </label>
+    <action>
+      <refresh>Ανανέωση</refresh>
+      <edit>Επεξεργασία στον περιηγητή περιεχομένου</edit>
+      <delete>Διαγραφή</delete>
+      <publish>Δημοσίευση</publish>
+    </action>
+    <label>
+      <draft>Προσχέδιο</draft>
+    </label>
+  </UICLVPresentation>
+  <CorrectContentSelectorPopupWindow>
+    <title>
+      <UIContentSelectorMulti>Multiple Content Selector Pane</UIContentSelectorMulti>
+    </title>
+  </CorrectContentSelectorPopupWindow>
+  <UIContentDialogFormPopupWindow>
+    <title>
+      <UIContentDialogForm>Web Content Form</UIContentDialogForm>
+    </title>
+  </UIContentDialogFormPopupWindow>
+  <UICLVConfigContextualFolderRadioBoxInput>
+    <label>
+      <contextualEnable>Ενεργό</contextualEnable>
+      <contextualDisable>Ανενεργό</contextualDisable>
+    </label>
+  </UICLVConfigContextualFolderRadioBoxInput>
+  <PublicationStates>
+    <archived>Αρχειοθετημένο</archived>
+    <obsolete>Ξεπερασμένο</obsolete>
+    <unpublished>Αδημοσίευτο</unpublished>
+    <enrolled>Εγγεγραμμένοι</enrolled>
+    <draft>Προσχέδιο</draft>
+    <pending>Σε εκκρεμότητα</pending>
+    <approved>Εγκεκριμένο</approved>
+    <inreview>Σε αναθεώρηση</inreview>
+    <staged>Έτοιμο για δημοσίευση</staged>
+    <published>Δημοσιευμένο</published>
+  </PublicationStates>
+  <UICLVConfigCacheEnableRadioBoxInput>
+    <label>
+      <ENABLE>Αποριπτέο από τον έλεγχο ταυτότητας</ENABLE>
+      <DISABLE>Restricted by User Roles</DISABLE>
+    </label>
+  </UICLVConfigCacheEnableRadioBoxInput>
+</bundle>

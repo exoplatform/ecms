@@ -1,0 +1,227 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<bundle>
+ 
+  <View>
+    <label>
+      <languages>
+        <en>crwdns6793265:0crwdne6793265:0</en>
+        <fr>crwdns6793266:0crwdne6793266:0</fr>
+        <ru>crwdns6793267:0crwdne6793267:0</ru>
+        <vi>crwdns6793268:0crwdne6793268:0</vi>
+        <nl>crwdns6793269:0crwdne6793269:0</nl>
+        <de>crwdns6793270:0crwdne6793270:0</de>
+        <uk>crwdns6793271:0crwdne6793271:0</uk>
+        <ar>crwdns6793272:0crwdne6793272:0</ar>
+      </languages>
+    </label>
+  </View>
+ 
+  <!--
+  ################resoucebundle FOR EXO:COMMENT VIEW TEMPLATE#############
+  -->
+  <Comment>
+    <view>
+      <label>
+        <postedBy>crwdns6793273:0crwdne6793273:0</postedBy>
+        <at>crwdns6793274:0crwdne6793274:0</at>
+        <comments>crwdns6793275:0crwdne6793275:0</comments>
+        <show-comments>crwdns6793276:0crwdne6793276:0</show-comments>
+        <hide-comments>crwdns6793277:0crwdne6793277:0</hide-comments>
+        <comment-by>crwdns6793278:0crwdne6793278:0</comment-by>
+        <email>crwdns6793279:0crwdne6793279:0</email>
+        <site>crwdns6793280:0crwdne6793280:0</site>
+      </label>
+    </view>
+  </Comment>
+ 
+  <!--
+  ################resoucebundle FOR NT:FILE VIEW TEMPLATE##############
+  -->
+  <File>
+    <view>
+      <label>
+        <not-viewable>crwdns6793281:0crwdne6793281:0</not-viewable>
+        <using-webDAV>crwdns6793282:0crwdne6793282:0</using-webDAV>
+        <file-size-too-big>crwdns6793283:0crwdne6793283:0</file-size-too-big>
+        <webDAV>crwdns6793284:0crwdne6793284:0</webDAV>
+        <download>crwdns6793285:0crwdne6793285:0</download>
+        <htmlview>crwdns6793286:0crwdne6793286:0</htmlview>
+        <plaintextview>crwdns6793287:0crwdne6793287:0</plaintextview>
+      </label>
+    </view>
+  </File>
+ 
+  <!--
+  ################resoucebundle FOR MAIL:DOCUMENT VIEW TEMPLATE##############
+  -->
+  <Mail>
+    <view>
+      <label>
+        <from>crwdns6793288:0crwdne6793288:0</from>
+        <to>crwdns6793289:0crwdne6793289:0</to>
+        <cc>crwdns6793290:0crwdne6793290:0</cc>
+        <date>crwdns6793291:0crwdne6793291:0</date>
+        <subject>crwdns6793292:0crwdne6793292:0</subject>
+        <attachment>crwdns6793293:0crwdne6793293:0</attachment>
+      </label>
+    </view>
+  </Mail>
+  <!--
+  ################resoucebundle FOR EXO:VOTE VIEW TEMPLATE##############
+  -->
+  <Vote>
+    <view>
+      <label>
+        <avg-rating>crwdns6793294:0crwdne6793294:0</avg-rating>
+        <subscription>crwdns6793295:0crwdne6793295:0</subscription>
+      </label>
+    </view>
+  </Vote>
+  <!--
+  ################resoucebundle FOR LISTVIEW VIEW TEMPLATE##############
+  -->
+  <ListView>
+    <view>
+      <label>
+        <name>crwdns6793296:0crwdne6793296:0</name>
+        <versionable>crwdns6793297:0crwdne6793297:0</versionable>
+        <exo_owner>crwdns6793298:0crwdne6793298:0</exo_owner>
+        <exo_dateCreated>crwdns6793299:0crwdne6793299:0</exo_dateCreated>
+        <exo_dateModified>crwdns6793300:0crwdne6793300:0</exo_dateModified>
+        <auditing>crwdns6793301:0crwdne6793301:0</auditing>
+      </label>
+    </view>
+  </ListView>
+
+  <!--
+  ###################### resoucebundle for exo:addMetadataAction view template ####
+  -->
+  <AddMetadata>
+    <view>
+      <label>
+        <action-name>crwdns6793302:0crwdne6793302:0</action-name>
+        <lifecycle>crwdns6793303:0crwdne6793303:0</lifecycle>
+        <metadata>crwdns6793304:0crwdne6793304:0</metadata>
+        <description>crwdns6793305:0crwdne6793305:0</description>
+      </label>
+    </view>
+  </AddMetadata>
+
+  <!--
+  ###################### resoucebundle for exo:autoVersioning view template ####
+  -->
+  <AutoVersioning>
+    <view>
+      <label>
+        <action-name>crwdns6793306:0crwdne6793306:0</action-name>
+        <lifecycle>crwdns6793307:0crwdne6793307:0</lifecycle>
+        <description>crwdns6793308:0crwdne6793308:0</description>
+      </label>
+    </view>
+  </AutoVersioning>
+  <!--
+  ###################### resoucebundle for exo:enableVersiong view template ####
+  -->
+  <EnableVersioning>
+    <view>
+      <label>
+        <action-name>crwdns6793309:0crwdne6793309:0</action-name>
+        <lifecycle>crwdns6793310:0crwdne6793310:0</lifecycle>
+        <description>crwdns6793311:0crwdne6793311:0</description>
+      </label>
+    </view>
+  </EnableVersioning>
+  <!--
+  ###################### resoucebundle for dc:elementSet view template ####
+  -->
+  <ElementSet>
+    <view>
+      <label>
+        <not-avaliable>crwdns6793312:0crwdne6793312:0</not-avaliable>
+        <core-elements>crwdns6793313:0crwdne6793313:0</core-elements>
+        <title>crwdns6793314:0crwdne6793314:0</title>
+        <creator>crwdns6793315:0crwdne6793315:0</creator>
+        <subject>crwdns6793316:0crwdne6793316:0</subject>
+        <source>crwdns6793317:0crwdne6793317:0</source>
+        <contributor>crwdns6793318:0crwdne6793318:0</contributor>
+        <resource-type>crwdns6793319:0crwdne6793319:0</resource-type>
+        <date>crwdns6793320:0crwdne6793320:0</date>
+        <publisher>crwdns6793321:0crwdne6793321:0</publisher>
+        <description>crwdns6793322:0crwdne6793322:0</description>
+        <rights>crwdns6793323:0crwdne6793323:0</rights>
+        <relation>crwdns6793324:0crwdne6793324:0</relation>
+        <format>crwdns6793325:0crwdne6793325:0</format>
+        <coverage>crwdns6793326:0crwdne6793326:0</coverage>
+        <identifier>crwdns6793327:0crwdne6793327:0</identifier>
+        <languages>crwdns6793328:0crwdne6793328:0</languages>
+      </label>
+      <action>
+        <add-edit>crwdns6793329:0crwdne6793329:0</add-edit>
+        <cancel>crwdns6793330:0{word.cancel}crwdne6793330:0</cancel>
+      </action>
+      <tooltip>
+        <cancel>crwdns6793331:0{word.cancel}crwdne6793331:0</cancel>
+        <add-edit>crwdns6793332:0crwdne6793332:0</add-edit>
+      </tooltip>
+    </view>
+  </ElementSet>
+
+  <ScriptAction>
+    <view>
+      <label> 
+        <isDeep>crwdns6793333:0crwdne6793333:0</isDeep>
+        <nodetypes>crwdns6793334:0crwdne6793334:0</nodetypes>
+        <affectedNodeTypeNames>crwdns6793335:0crwdne6793335:0</affectedNodeTypeNames>
+        <nodeTypeName>crwdns6793336:0crwdne6793336:0</nodeTypeName>
+      </label> 
+    </view>
+  </ScriptAction>
+  
+  <AddMetadata>
+    <view>
+      <label>
+        <isDeep>crwdns6793337:0crwdne6793337:0</isDeep>
+        <nodetypes>crwdns6793338:0crwdne6793338:0</nodetypes>
+        <affectedNodeTypeNames>crwdns6793339:0crwdne6793339:0</affectedNodeTypeNames>
+        <nodeTypeName>crwdns6793340:0crwdne6793340:0</nodeTypeName>
+      </label> 
+    </view>
+  </AddMetadata>
+
+  <EnableVersioning>
+    <view>
+      <label>
+        <isDeep>crwdns6793341:0crwdne6793341:0</isDeep>
+        <nodetypes>crwdns6793342:0crwdne6793342:0</nodetypes> 
+        <affectedNodeTypeNames>crwdns6793343:0crwdne6793343:0</affectedNodeTypeNames>
+        <nodeTypeName>crwdns6793344:0crwdne6793344:0</nodeTypeName>
+      </label> 
+    </view>
+  </EnableVersioning>
+  
+  <AutoVersioning>
+    <view>
+      <label>
+        <isDeep>crwdns6793345:0crwdne6793345:0</isDeep>
+        <nodetypes>crwdns6793346:0crwdne6793346:0</nodetypes>
+        <affectedNodeTypeNames>crwdns6793347:0crwdne6793347:0</affectedNodeTypeNames>
+        <nodeTypeName>crwdns6793348:0crwdne6793348:0</nodeTypeName>
+      </label> 
+    </view>
+  </AutoVersioning>
+  
+   <AccessibleMedia>
+    <view>
+      <label>
+      <Play-audio-description-of-this-video>crwdns6793349:0crwdne6793349:0</Play-audio-description-of-this-video>
+      <Read-more>crwdns6793350:0crwdne6793350:0</Read-more>
+      <Read-less>crwdns6793351:0crwdne6793351:0</Read-less>
+      <Switch-back-to-original-video>crwdns6793352:0crwdne6793352:0</Switch-back-to-original-video>
+      </label>
+      <tooltip>
+      <A-second-media-file-is-available-as-audio-description>crwdns6793353:0crwdne6793353:0</A-second-media-file-is-available-as-audio-description>
+      </tooltip>
+    </view>
+  </AccessibleMedia>
+ 
+</bundle>
