@@ -489,8 +489,6 @@
 
 					if (drive.changesLink) {
 						// use long-polling from cloud provider
-						// we starting from initial sync
-						synchronize(driveWorkspace, drivePath);
 						syncTimeout = 5000; // first polling check in 5sec
 						syncFunc = function() {
 							var changes = serviceGet(drive.changesLink);
@@ -515,6 +513,7 @@
 								}
 							});
 							changes.fail(function(response, status, err) {
+								// TODO catch retry_error and re-schedule the sync <<<<<<<< 
 								delete autoSyncs[syncName]; // cancel and cleanup
 								utils.log("ERROR: changes long-polling error: " + err + ", " + status + ", " + response);
 							});
