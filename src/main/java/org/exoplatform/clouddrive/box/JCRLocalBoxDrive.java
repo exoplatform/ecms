@@ -109,7 +109,8 @@ public class JCRLocalBoxDrive extends JCRLocalCloudDrive implements UserTokenRef
       rootNode.setProperty("ecd:url", api.getLink(boxRoot));
 
       // sync stream
-      setChangeId(eventsInit.streamPosition);
+      // TODO run first sync here
+      setChangeId(eventsInit.getNextStreamPosition());
       rootNode.setProperty("box:streamHistory", "");
     }
 
@@ -173,7 +174,7 @@ public class JCRLocalBoxDrive extends JCRLocalCloudDrive implements UserTokenRef
       initBoxItem(rootNode, boxRoot); // init parent
 
       // sync stream
-      setChangeId(eventsInit.streamPosition);
+      setChangeId(eventsInit.getNextStreamPosition());
       rootNode.setProperty("box:streamHistory", "");
 
       // remove local nodes of files not existing remotely, except of root
@@ -962,7 +963,7 @@ public class JCRLocalBoxDrive extends JCRLocalCloudDrive implements UserTokenRef
         rootNode.setProperty("box:streamHistory", newHistoryData.toString());
 
         // update sync position
-        setChangeId(events.streamPosition);
+        setChangeId(events.getNextStreamPosition());
       }
     }
 
