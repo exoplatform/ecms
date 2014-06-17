@@ -72,7 +72,7 @@
 		      <td><%=nodeType%></td>
 	 	      <td class="center">
 					<a class="actionIcon" href="<%=uicomponent.event("Edit", nodeType)%>" rel="tooltip" data-placement="bottom" title="<%=_ctx.appRes("UIUploadContent.tooltip.Edit")%>">
-						<i class="uiIconEditInfo"></i>
+						<i class="uiIconEditInfo uiIconLightGray"></i>
 					</a>
 	 	      </td>
 		    </tr>

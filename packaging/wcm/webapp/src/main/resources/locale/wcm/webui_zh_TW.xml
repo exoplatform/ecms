@@ -83,7 +83,7 @@
       <UIContentBrowsePanelOne>內容瀏覽器</UIContentBrowsePanelOne>
       <UIContentBrowsePanelMulti>內容瀏覽器</UIContentBrowsePanelMulti>
       <UIContentBrowsePanelFolder>資料夾瀏覽器</UIContentBrowsePanelFolder>
-      <UIContentSearchForm>內容搜索表單</UIContentSearchForm>
+      <UIContentSearchForm>內容搜尋表單</UIContentSearchForm>
       <UIContentSearchResult>搜尋結果</UIContentSearchResult>
       <UIContentViewer>預覽內容</UIContentViewer>
       <WebContentMetadataPopup>屬性選擇器</WebContentMetadataPopup>
@@ -178,7 +178,7 @@
   <UIContentSearchForm>
     <title>
       <Location>網站名稱</Location>
-      <SearchByName>按名稱搜索</SearchByName>
+      <SearchByName>按名稱搜尋</SearchByName>
       <Fulltext>單詞或短語在上下文中</Fulltext>
       <Property>屬性</Property>
       <Contain>包含</Contain>
@@ -197,10 +197,10 @@
       </option>
     </label>
     <action>
-      <SearchWebContent>搜索</SearchWebContent>
+      <SearchWebContent>搜尋</SearchWebContent>
     </action>
     <msg>
-      <time-to-late>搜索時間過長。</time-to-late>
+      <time-to-late>搜尋時間過長。</time-to-late>
       <empty-field>請輸入有效的關鍵字進行搜索。</empty-field>
       <invalid-format>欄位"{0}"不正確的日期/時間格式。</invalid-format>
       <invalid-date>"結束日期必須晚於開始日期"</invalid-date>
@@ -248,7 +248,7 @@
     </header>
     <title>
       <Select>選擇</Select>
-      <View>查看</View>
+      <View>檢視</View>
     </title>
     <msg>
     <template-not-support>無法預覽此內容。該範本不受支援</template-not-support>
@@ -263,8 +263,8 @@
       <Close>#{word.close}</Close>
     </action>
     <msg>
-      <access-denied>你並沒有將類別增加到此文檔的權限。</access-denied>
-      <exception>將類別增加到此文檔時出錯。</exception>
+      <access-denied>你並沒有將類別增加到此文件的權限。</access-denied>
+      <exception>將類別增加到此文件時出錯。</exception>
       <non-categories>類別是錯誤的。請選擇適當的類別。</non-categories>
     </msg>
   </UIContentDialogForm>
@@ -356,7 +356,7 @@
     <label>
       <SingleContentViewer>單一內容檢視器</SingleContentViewer>
       <ContentListViewer>內容清單檢視器</ContentListViewer>
-      <Search>搜索</Search>
+      <Search>搜尋</Search>
       <Sitemap>網站導覽</Sitemap>
       <TwoColumnsLayout>兩列佈局</TwoColumnsLayout>
       <ThreeColumnsLayout>三列佈局</ThreeColumnsLayout>
@@ -393,7 +393,7 @@
       <Public>公開</Public>
       <BackupCenter>備份中心</BackupCenter>
       <CategorizedDocumentsCenter>分類文件中心</CategorizedDocumentsCenter>
-      <CollaborationCenter>協作中心</CollaborationCenter>
+      <CollaborationCenter>合作中心</CollaborationCenter>
       <DigitalAssetsManagementCenter>數位資產管理中心</DigitalAssetsManagementCenter>
       <DMSAdministration>DMS 管理員</DMSAdministration>
       <DocumentsManagementCenter>文件管理中心</DocumentsManagementCenter>

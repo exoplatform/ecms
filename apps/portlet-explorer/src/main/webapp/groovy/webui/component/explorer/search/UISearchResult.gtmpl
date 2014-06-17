@@ -128,7 +128,7 @@
             </td>
             <td class="center">$score</td>
             <td class="center actionContainer">
-                            <a class="actionIcon" onclick="<%=uicomponent.event("View", Utils.formatNodeName(node.getPath()))%>" alt="<%=_ctx.appRes("UISearchResult.tooltip.View")%>" rel="tooltip" data-placement="bottom" title="<%=_ctx.appRes("UISearchResult.tooltip.View")%>"><i class="uiIconPreview"></i></a>
+                            <a class="actionIcon" onclick="<%=uicomponent.event("View", Utils.formatNodeName(node.getPath()))%>" alt="<%=_ctx.appRes("UISearchResult.tooltip.View")%>" rel="tooltip" data-placement="bottom" title="<%=_ctx.appRes("UISearchResult.tooltip.View")%>"><i class="uiIconPreview uiIconLightGray"></i></a>
                             <a class="actionIcon" onclick="<%=uicomponent.event("OpenFolder", Utils.formatNodeName(node.getPath()))%>" rel="tooltip" data-placement="bottom" title="<%=_ctx.appRes("UISearchResult.tooltip.OpenFolder")%>" alt="<%=_ctx.appRes("UISearchResult.tooltip.OpenFolder")%>"><i class="uiIconEcmsGotoFolder"></i></a>
                         </td>
           </tr>

@@ -38,7 +38,7 @@
           <tr>            
             <td><div class="text">$settingLock</div></td>
 	          	<td class="center">
-				          <a class="actionIcon" onclick="<%=uicomponent.event("DeleteLock", settingLock)%>" rel="tooltip" data-placement="bottom" title="<%=_ctx.appRes("UILockHolderList.tooltip.DeleteLock")%>" ><i class="uiIconDelete"></i></a>	
+				          <a class="actionIcon" onclick="<%=uicomponent.event("DeleteLock", settingLock)%>" rel="tooltip" data-placement="bottom" title="<%=_ctx.appRes("UILockHolderList.tooltip.DeleteLock")%>" ><i class="uiIconDelete uiIconLightGray"></i></a>	
 			         
 	          	</td>	                    
           </tr>

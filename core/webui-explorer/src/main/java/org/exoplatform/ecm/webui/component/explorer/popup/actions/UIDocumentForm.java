@@ -284,7 +284,7 @@ public class UIDocumentForm extends UIDialogForm implements UIPopupComponent, UI
     .append(fullscreen)
     .append("\" id=\"")
     .append(contextID)
-    .append("\" class=\"uiIconEcmsExpand uiIconEcmsLightGrey\"></i></a>");
+    .append("\" class=\"uiIconEcmsExpand uiIconEcmsLightGray\"></i></a>");
 
     writer.append("</div>");
     writer.append("<span class='uiDialogTitle'>" + ContentReader.getXSSCompatibilityContent(getTemplateLabel()) + " " + getChangeTypeActionLink () + "</span>");

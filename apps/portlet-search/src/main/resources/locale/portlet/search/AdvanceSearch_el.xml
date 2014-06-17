@@ -1,0 +1,96 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<bundle>
+  <UIDefaultSearchForm>
+    <label>
+      <keyword>Λέξη-κλειδί</keyword>
+      <portal>Πύλη</portal>
+      <Page>Σελίδα</Page>
+      <Document>Έγγραφο</Document>
+    </label>
+    <action>
+      <Search>Αναζήτηση</Search>
+    </action>
+  </UIDefaultSearchForm>
+
+  <UIDefaultSearchResult>
+    <label>
+      <Page>Σελίδα</Page>
+      <Document>Έγγραφο</Document>
+      <DocumentAndPage>Έγγραφο και σελίδα</DocumentAndPage>
+      <documentandpage>Έγγραφο και σελίδα</documentandpage>
+      <resutlsCaption>Αποτελέσματα</resutlsCaption>
+      <ofAboutCaption>από περίπου</ofAboutCaption>
+      <forCaption>για</forCaption>
+      <timeUnitCaption>δευτερόλεπτα</timeUnitCaption>
+      <similar>Σελίδες όπου εμφανίζεται το ίδιο περιεχόμενο</similar>
+      <editor>Πρόγραμμα επεξεργασίας</editor>
+      <date>Ημερομηνία</date>
+      <relevancy>Συνάφεια</relevancy>
+      <title>Τίτλος</title>
+      <sortBy>Ταξινόμηση κατά:</sortBy>
+    </label>
+    <action>
+      <edit>Επεξεργασία</edit>
+    </action>
+    <msg>
+      <search-not-match-type>Το κριτήριο σας {0} δεν ταιριάζει με κανένα {1}.</search-not-match-type>
+    </msg>
+  </UIDefaultSearchResult>
+  <UISearchPageLayoutManager>
+    <label>
+      <itemsPerPageSelector>Αντικείμενα ανά σελίδα</itemsPerPageSelector>
+      <searchFormSelector>Πρότυπο φόρμας αναζήτησης</searchFormSelector>
+      <searchResultSelector>Πρότυπο αποτελεσμάτων αναζήτησης</searchResultSelector>
+      <searchPaginatorSelector>Πρότυπο σελιδοποίησης αναζήτησης</searchPaginatorSelector>
+      <searchPageLayoutSelector>Πρότυπο διάταξης σελίδας αναζήτησης</searchPageLayoutSelector>
+      <searchResultBasePathInputSetAction>Διαδρομή βάσης</searchResultBasePathInputSetAction>
+      <pageMode>Λειτουργία σελίδας</pageMode>
+      <option>
+        <none>Κανένα</none>
+        <more>Περισσότερα</more>
+        <pagination>Σελιδοποίηση</pagination>
+      </option>
+    </label>
+    <action>
+      <Save>#{word.save}</Save>
+      <Cancel>#{word.cancel}</Cancel>
+    </action>
+  </UISearchPageLayoutManager>
+  <searchResultBasePathInputSetAction>
+    <title>
+      <SelectBasePath>Επιλέξτε διαδρομή βάσης</SelectBasePath>
+    </title>
+  </searchResultBasePathInputSetAction>  
+  <UISearchForm>  
+   <message>
+     <keyword-not-support>Η λέξη-κλειδί δεν είναι έγκυρη. Ορισμένοι χαρακτήρες δεν αναγνωρίζονται.</keyword-not-support>
+     <not-checked>Επιλέξτε ένα τύπο αναζήτησης.</not-checked>
+     <keyword-not-empty>Παρακαλώ εισάγετε μια λέξη-κλειδί.</keyword-not-empty>
+   </message>
+  </UISearchForm>
+  <UIPaginatorDefault>
+    <label>
+      <next>Επόμενη</next>
+      <previous>Προηγούμενη</previous>
+      <more>Περισσότερα</more>
+    </label>
+  </UIPaginatorDefault>
+  <UISearchPageLayoutDefault>
+    <label>
+      <quickEditTitle>Γρήγορη επεξεργασία</quickEditTitle>
+    </label>
+  </UISearchPageLayoutDefault>
+  <searchOption>
+    <label>
+      <pageCheckBox>στις σελίδες</pageCheckBox>
+      <documentCheckBox>στο περιεχόμενο</documentCheckBox>
+    </label>
+  </searchOption>
+  <ViewMode>
+    <label>
+      <option>
+        <all>Αναζήτηση σε όλους τους ιστότοπους</all>
+      </option>  
+    </label>  
+  </ViewMode>
+</bundle>

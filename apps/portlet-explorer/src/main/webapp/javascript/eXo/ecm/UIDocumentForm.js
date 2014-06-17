@@ -76,15 +76,15 @@
 
 		element = gj(element).find("i")[0];
 		
-		if (element.className == "uiIconEcmsExpand uiIconEcmsLightGrey") {
-			element.className = "uiIconEcmsCollapse uiIconEcmsLightGrey";
+		if (element.className == "uiIconEcmsExpand uiIconEcmsLightGray") {
+			element.className = "uiIconEcmsCollapse uiIconEcmsLightGray";
 			eXo.ecm.ECMUtils.editFullScreen = true;
 		} else {
-			element.className = "uiIconEcmsExpand uiIconEcmsLightGrey";
+			element.className = "uiIconEcmsExpand uiIconEcmsLightGray";
 			eXo.ecm.ECMUtils.editFullScreen = false;
 		}
 		
-		if (element.className == "uiIconEcmsCollapse uiIconEcmsLightGrey") {
+		if (element.className == "uiIconEcmsCollapse uiIconEcmsLightGray") {
 			if (changeTypeLink) {
 				changeTypeLink.style.display = "none";
 			}

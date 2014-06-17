@@ -1,0 +1,439 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+
+    Copyright (C) 2009 eXo Platform SAS.
+    
+    This is free software; you can redistribute it and/or modify it
+    under the terms of the GNU Lesser General Public License as
+    published by the Free Software Foundation; either version 2.1 of
+    the License, or (at your option) any later version.
+    
+    This software is distributed in the hope that it will be useful,
+    but WITHOUT ANY WARRANTY; without even the implied warranty of
+    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the GNU
+    Lesser General Public License for more details.
+    
+    You should have received a copy of the GNU Lesser General Public
+    License along with this software; if not, write to the Free
+    Software Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA
+    02110-1301 USA, or see the FSF site: http://www.fsf.org.
+
+-->
+<bundle>
+  <UIExoStart>
+    <tooltip>
+      <homepage>Αρχική σελίδα</homepage>
+    </tooltip>
+  </UIExoStart>
+
+  <UIFormInputSetWithAction>
+    <msg>
+      <confirm-delete>Είστε βέβαιοι ότι θέλετε να διαγράψετε αυτό το στοιχείο;</confirm-delete>
+    </msg>
+  </UIFormInputSetWithAction>
+
+  <Drives>
+    <label>
+      <ManagedSites>Διαχείριση τοποθεσιών</ManagedSites>
+      <SharedSite>Κοινόχρηστη τοποθεσία</SharedSite>
+    </label>
+  </Drives>
+
+  <Views>
+    <label>
+      <wcm-view>Ιστός</wcm-view>
+      <admin-view>Διαχειριστής</admin-view>
+      <icon-view>Εικονίδια</icon-view>
+      <thumbails-view>Μικρογραφίες</thumbails-view>
+      <list-view>Λίστα</list-view>
+      <authoring-view>Συγγραφή</authoring-view>
+      <wcm-category-view>Κατηγορίες</wcm-category-view>
+      <file-view>Προβολή διαχείρισης αρχείων</file-view>
+    </label>
+  </Views>
+
+  <UIActionBar>
+    <obtion>
+      <Publication>Δημοσίευση</Publication>
+      <System>Σύστημα</System>
+    </obtion>
+  </UIActionBar>
+
+  <UIPageSelectorPanel>
+    <header>
+      <path>Διαδρομή</path>
+      <action>#{word.action}</action>
+    </header>
+    <msg>
+      <child-not-found>Δεν βρέθηκαν σελίδες.</child-not-found>
+    </msg>
+    <title>
+      <select>Επιλογή</select>
+    </title>
+  </UIPageSelectorPanel>
+
+  <UIContentDialogFormPopupWindow>
+    <title>
+      <UIContentDialogPreference>Προτιμήσεις περιεχομένου web</UIContentDialogPreference>
+    </title>
+  </UIContentDialogFormPopupWindow>
+
+  <UITabPane>
+    <title>
+      <UIContentBrowsePanelOne>Περιηγητής περιεχομένου</UIContentBrowsePanelOne>
+      <UIContentBrowsePanelMulti>Περιηγητής περιεχομένου</UIContentBrowsePanelMulti>
+      <UIContentBrowsePanelFolder>Περιηγητής φακέλων</UIContentBrowsePanelFolder>
+      <UIContentSearchForm>Φόρμα αναζήτησης περιεχομένου</UIContentSearchForm>
+      <UIContentSearchResult>Αποτέλεσμα αναζήτησης</UIContentSearchResult>
+      <UIContentViewer>Προεπισκόπηση περιεχομένου</UIContentViewer>
+      <WebContentMetadataPopup>Επιλογέας ιδιοτήτων</WebContentMetadataPopup>
+      <WebContentNodeTypePopup>Επιλογέας τύπου κόμβου</WebContentNodeTypePopup>
+      <UIPermissionManager>Διαχειριστής δικαιωμάτων</UIPermissionManager>
+    </title>
+  </UITabPane>
+
+  <UIContentBrowsePanelOne>
+    <selectBoxValues>
+      <FilterBy>Φιλτράρισμα κατά</FilterBy>
+      <WebContent>Περιεχόμενο Web</WebContent>
+      <DMSDocument>Έγγραφο</DMSDocument>
+      <Media>Οπτικοακουστικά μέσα</Media>
+    </selectBoxValues>
+    <msg>
+      <node-checkout>Ο κόμβος έχει αποδεσμευτεί. Παρακαλώ δεσμεύστε τον κόμβο πριν από την εκτέλεση αυτής της λειτουργίας.</node-checkout>
+    </msg>
+  </UIContentBrowsePanelOne>
+
+  <UIContentBrowsePanelMulti>
+    <selectBoxValues>
+      <FilterBy>Φιλτράρισμα κατά</FilterBy>
+      <WebContent>Περιεχόμενο Web</WebContent>
+      <DMSDocument>Έγγραφο</DMSDocument>
+      <Media>Οπτικοακουστικά μέσα</Media>
+    </selectBoxValues>
+  </UIContentBrowsePanelMulti>
+
+  <UIContentBrowsePanelOne>
+    <label>
+      <LeftColumn>Επιλέξτε ένα φάκελο για να εμφανίζουν οι θυγατρικοί κόμβοι ως περιεχόμενο.</LeftColumn>
+      <RightColumn>Το παρακάτω περιεχόμενο μπορεί να επιλεγεί.</RightColumn>
+    </label>
+  </UIContentBrowsePanelOne>
+
+  <UIContentBrowsePanelMulti>
+    <label>
+      <LeftColumn>Επιλέξτε ένα φάκελο για να εμφανίζουν οι θυγατρικοί κόμβοι ως περιεχόμενο.</LeftColumn>
+      <RightColumn>Το παρακάτω περιεχόμενο μπορεί να επιλεγεί.</RightColumn>
+    </label>
+  </UIContentBrowsePanelMulti>
+
+  <UIContentBrowsePanelFolder>
+    <label>
+      <LeftColumn>Επιλέξτε ένα φάκελο για να εμφανίζουν οι θυγατρικοί κόμβοι ως περιεχόμενο.</LeftColumn>
+      <RightColumn>Ο παρακάτω φάκελος μπορεί να επιλεγεί.</RightColumn>
+    </label>
+  </UIContentBrowsePanelFolder>
+
+  <UISelectedContentGrid>
+    <label>
+      <name>#{word.name}</name>
+      <add>Προσθήκη</add>
+      <delete>Διαγραφή</delete>
+    </label>
+    <msg>
+      <no-content-found>Δεν βρέθηκε περιεχόμενο.</no-content-found>
+      <non-content>Δεν έχετε επιλέξει κανένα περιεχόμενο.</non-content>
+    </msg>
+  </UISelectedContentGrid>
+
+  <UICLVContentSelectedGrid>
+    <action>
+      <SaveCategories>#{word.save}</SaveCategories>
+      <Cancel>#{word.cancel}</Cancel>
+    </action>
+  </UICLVContentSelectedGrid>
+
+  <UIContentBrowsePathSelector>
+    <header>
+      <name>#{word.name}</name>
+      <publicationstate>Κατάσταση Δημοσίευσης</publicationstate>
+      <action>Ενέργεια</action>
+    </header>
+    <msg>
+      <child-not-found>Δεν βρέθηκε περιεχόμενο</child-not-found>
+    </msg>
+  </UIContentBrowsePathSelector>
+
+  <UIContentBrowsePathSelectorFolder>
+    <header>
+      <name>#{word.name}</name>
+      <publicationstate>Κατάσταση Δημοσίευσης</publicationstate>
+      <action>Ενέργεια</action>
+    </header>
+    <msg>
+      <child-not-found>Δεν βρέθηκαν φάκελοι</child-not-found>
+    </msg>
+  </UIContentBrowsePathSelectorFolder>
+
+  <UIContentSearchForm>
+    <title>
+      <Location>Όνομα τοποθεσίας</Location>
+      <SearchByName>Αναζήτηση με βάση το όνομα</SearchByName>
+      <Fulltext>Μια λέξη ή φράση που συνοψίζει το νόημα</Fulltext>
+      <Property>Ιδιότητα</Property>
+      <Contain>Περιέχει</Contain>
+      <FromDate>Από την ημερομηνία</FromDate>
+      <ToDate>Έως την ημερομηνία</ToDate>
+      <DocumentType>Τύπος εγγράφου</DocumentType>
+    </title>
+    <tooltip>
+      <AddMetadataType>Προσθήκη ιδιότητας</AddMetadataType>
+      <AddNodeType>Προσθήκη τύπου κόμβου</AddNodeType>
+    </tooltip>    
+    <label>
+      <option>
+        <CREATED>Δημιουργήθηκε</CREATED>
+        <MODIFIED>Τροποποιήθηκε</MODIFIED>
+      </option>
+    </label>
+    <action>
+      <SearchWebContent>Αναζήτηση</SearchWebContent>
+    </action>
+    <msg>
+      <time-to-late>Ο χρόνος έρευνας είναι πολύ μεγάλος.</time-to-late>
+      <empty-field>Εισάγετε μια έγκυρη λέξη-κλειδί για την αναζήτηση.</empty-field>
+      <invalid-format>Μη έγκυρη μορφή ημερομηνίας/ώρας στο πεδίο '{0}'.</invalid-format>
+      <invalid-date>"Η τελική ημερομηνία πρέπει να είναι μεταγενέστερη της αρχικής"</invalid-date>
+      <invalid-nodeType>Ο τύπος κόμβου "{0}" δεν είναι έγκυρος. Ελέγξτε και πάλι.</invalid-nodeType>
+      <invalid-keyword>Η λέξη-κλειδί δεν είναι έγκυρη. Ορισμένοι χαρακτήρες δεν υποστηρίζονται.</invalid-keyword>
+    </msg>
+  </UIContentSearchForm>
+
+  <WebContentMetadataPopup>
+    <title>
+      <UIContentPropertySelector>Επιλογέας ιδιοτήτων</UIContentPropertySelector>
+    </title>
+  </WebContentMetadataPopup>
+
+  <UIContentPropertySelector>
+    <action>
+      <Add>Προσθήκη</Add>
+      <Cancel>#{word.cancel}</Cancel>
+    </action>
+    <label>
+      <metadataType>Τύπος μεταδεδομένων</metadataType>
+      <property_select>Ιδιότητα</property_select>
+    </label>
+  </UIContentPropertySelector>
+
+  <WebContentNodeTypePopup>
+    <title>
+      <UIContentNodeTypeSelector>Επιλογέας τύπων κόμβου</UIContentNodeTypeSelector>
+    </title>
+  </WebContentNodeTypePopup>
+
+  <UIContentNodeTypeSelector>
+    <action>
+      <Save>#{word.save}</Save>
+      <Cancel>#{word.cancel}</Cancel>
+    </action>
+  </UIContentNodeTypeSelector>
+
+  <UIContentSearchResult>
+    <header>
+      <title>Τίτλος</title>
+      <score>Βαθμολογία</score>
+      <publicationstate>Κατάσταση Δημοσίευσης</publicationstate>
+      <action>Ενέργεια</action>
+    </header>
+    <title>
+      <Select>Επιλογή</Select>
+      <View>Προβολή</View>
+    </title>
+    <msg>
+    <template-not-support>Δεν είναι δυνατή η προεπισκόπηση αυτού του περιεχομένου. Το πρότυπο δεν υποστηρίζεται</template-not-support>
+    </msg>
+  </UIContentSearchResult>
+
+  <UIContentDialogForm>
+    <action>
+      <SaveDraft>Αποθήκευση πρόχειρου σχεδίου</SaveDraft>
+      <FastPublish>Γρήγορη Δημοσίευση</FastPublish>
+      <Preferences>Προτιμήσεις</Preferences>
+      <Close>#{word.close}</Close>
+    </action>
+    <msg>
+      <access-denied>Δεν έχετε άδεια για να προσθέσετε κατηγορίες σε αυτό το έγγραφο.</access-denied>
+      <exception>Παρουσιάστηκε σφάλμα κατά την προσθήκη κατηγοριών σε αυτό το έγγραφο.</exception>
+      <non-categories>Οι κατηγορίες είναι λάθος. Παρακαλώ επιλέξτε τις κατάλληλες κατηγορίες.</non-categories>
+    </msg>
+  </UIContentDialogForm>
+
+  <UIPermissionManager>
+    <label>
+      <UIPermissionInputSetWithAction>Δικαιώματα</UIPermissionInputSetWithAction>
+      <UIAccessibleCheckboxInput>Δικαίωμα πρόσβασης</UIAccessibleCheckboxInput>
+      <UIEditableCheckboxInput>Δικαίωμα επεξεργασίας</UIEditableCheckboxInput>
+    </label>
+    <action>
+      <Save>#{word.save}</Save>
+      <Clear>Καθαρισμός</Clear>
+      <title>
+        <Edit>Επεξεργασία</Edit>
+        <Delete>Διαγραφή</Delete>
+      </title>
+    </action>
+  </UIPermissionManager>
+
+  <UIPermissionManagerGrid>
+    <header>
+      <owner>Δικαιώματα</owner>
+      <accessible>Προσβάσιμο</accessible>
+      <editable>Επεξεργάσιμο</editable>
+      <action>Ενέργεια</action>
+    </header>
+    <msg>
+      <confirm-delete-permission>Είστε βέβαιοι ότι θέλετε να διαγράψετε αυτό το δικαίωμα;</confirm-delete-permission>
+      <no-permission-remove>Δεν έχετε άδεια.</no-permission-remove>
+      <access-denied>Δεν επιτρέπεται η πρόσβαση.</access-denied>
+      <node-locked>Το στοιχείο διαδρομής {0} ή κάποιο ανώτερο στοιχείο είναι κλειδωμένο.</node-locked>
+      <userOrGroup-required>Πρέπει να επιλέξετε έναν χρήστη ή ομάδα.</userOrGroup-required>
+      <checkbox-require>Πρέπει να ορίσετε δικαιώματα.</checkbox-require>
+      <node-checkedin>Θα πρέπει πρώτα να δηλώσετε ότι ολοκληρώσατε.</node-checkedin>
+    </msg>
+  </UIPermissionManagerGrid>
+
+  <UIPermissionInputSetWithAction>
+    <title>
+      <SelectUser>Επιλογή χρήστη</SelectUser>
+      <SelectMember>Επιλέξτε μέλος</SelectMember>
+      <AddAny>Όλοι</AddAny>
+    </title>
+  </UIPermissionInputSetWithAction>
+
+  <UIUserSelectorPopupWindow>
+    <title>
+      <UIUserContainer>Επιλογέας χρηστών</UIUserContainer>
+    </title>
+  </UIUserSelectorPopupWindow>
+
+  <UIGroupSelectorPopupWindow>
+    <title>
+      <UIGroupMemberSelector>Επιλογέας ομάδας</UIGroupMemberSelector>
+    </title>
+  </UIGroupSelectorPopupWindow>
+
+  <UIGroupMemberSelector>
+    <label>
+      <selectGroup>Επιλέξτε ομάδα</selectGroup>
+      <selectMembership>Επιλογή ρόλου</selectMembership>
+    </label>
+  </UIGroupMemberSelector>
+
+  <UIContentDialogPreference>
+    <action>
+      <Back>Πίσω</Back>
+    </action>
+  </UIContentDialogPreference>
+
+  <ZeroValidator>
+    <msg>
+      <Invalid-number>Το μηδέν δεν επιτρέπεται στο πεδίο '{0}'.</Invalid-number>
+    </msg>
+  </ZeroValidator>
+
+  <UIDropDownPageTemp>
+    <item>
+      <WCMPageConfigs>WCM διαμορφώσεις σελίδων</WCMPageConfigs>
+      <ColumnPageConfigs>Διαμορφώσεις στηλών σελίδων</ColumnPageConfigs>
+      <RowPageConfigs>Διαμορφώσεις γραμμών σελίδων</RowPageConfigs>
+      <TabsPageConfigs>Διαμορφώσεις καρτελών σελίδων</TabsPageConfigs>
+      <MixPageConfigs>Διαμορφώσεις μεικτών σελίδων</MixPageConfigs>
+    </item>
+  </UIDropDownPageTemp>
+
+  <UIWizardPageSelectLayoutForm>
+    <label>
+      <SingleContentViewer>Προβολή μεμονομένου περιεχομένου</SingleContentViewer>
+      <ContentListViewer>Προβολή λίστας περιεχομένου</ContentListViewer>
+      <Search>Αναζήτηση</Search>
+      <Sitemap>Χάρτης ιστότοπου</Sitemap>
+      <TwoColumnsLayout>Διάταξη δύο στηλών</TwoColumnsLayout>
+      <ThreeColumnsLayout>Διάταξη τριών στηλών</ThreeColumnsLayout>
+      <TwoRowsLayout>Διάταξη δύο γραμμών</TwoRowsLayout>
+      <ThreeRowsLayout>Διάταξη τριών σειρών</ThreeRowsLayout>
+      <TwoTabsLayout>Διάταξη δύο καρτελών</TwoTabsLayout>
+      <ThreeTabsLayout>Διάταξη τριών καρτελών</ThreeTabsLayout>
+      <TwoColumnsOneRowLayout>Διάταξη δύο στηλών και μιας γραμμής</TwoColumnsOneRowLayout>
+      <OneRowTwoColumnsLayout>Διάταξη μιας γραμμής &amp; δύο στηλών</OneRowTwoColumnsLayout>
+      <ThreeRowsTwoColumnsLayout>Διάταξη τριών σειρών &amp; δύο στηλών</ThreeRowsTwoColumnsLayout>
+    </label>
+  </UIWizardPageSelectLayoutForm>
+
+  <Signin>
+    <welcome>Καλώς ήρθατε</welcome>
+    <login>Είσοδος</login>
+    <logout>Αποσύνδεση</logout>
+    <language>Αλλαγή γλώσσας</language>
+    <register>Εγγραφή</register>
+  </Signin>
+  <UIDriveForm>
+<label>
+<wcm-category-view>Προβολή κατηγοριών</wcm-category-view>
+<wcm-view>Προβολή περιεχομένου WCM</wcm-view>
+</label>
+  </UIDriveForm>
+  
+  <ContentSelector>
+    <title>
+      <PersonalDrives>Προσωπικές μονάδες αποθήκευσης</PersonalDrives>
+      <GeneralDrives>Γενικές μονάδες αποθήκευσης</GeneralDrives>
+      <GroupDrives>Δίσκοι Ομάδας</GroupDrives>
+      <Private>Ιδιωτικό</Private>
+      <Public>Δημόσιο</Public>
+      <BackupCenter>Κέντρο αντιγράφων ασφαλείας</BackupCenter>
+      <CategorizedDocumentsCenter>Κέντρο κατηγοριοποιημένων εγγράφων</CategorizedDocumentsCenter>
+      <CollaborationCenter>Κέντρο συνεργασίας</CollaborationCenter>
+      <DigitalAssetsManagementCenter>Κέντρο Διαχείρισης ψηφιακών δεδομένων</DigitalAssetsManagementCenter>
+      <DMSAdministration>Διαχείριση συστήματος διαχείρισης εγγράφων (DMS)</DMSAdministration>
+      <DocumentsManagementCenter>Κέντρο διαχείρισης εγγράφων</DocumentsManagementCenter>
+      <LiveDocumentsCenter>Κέντρο δημοσιευμένων εγγράφων</LiveDocumentsCenter>
+      <PendingDocumentsCenter>Κέντρο εκκρεμών εγγράφων</PendingDocumentsCenter>
+      <RecordsManagementCenter>Κέντρο διαχείρισης εγγραφών</RecordsManagementCenter>
+      <SharedUsersSpace>Κοινόχρηστος χώρος χρηστών</SharedUsersSpace>
+      <Systemfiles>Αρχεία συστήματος</Systemfiles>
+      <ValidationRequestsDocumentsCenter>Κέντρο αιτημάτων επικύρωσης εγγράφων</ValidationRequestsDocumentsCenter>
+      <ManagedSites>Διαχείριση τοποθεσιών</ManagedSites>
+      <SharedSite>Κοινόχρηστη τοποθεσία</SharedSite>
+    </title>
+  </ContentSelector>
+  
+  <UICategoryNavigationTargetPathPopupWindow>
+    <title>
+      <UIPageSelector>Επιλογέας σελίδας</UIPageSelector>
+    </title>
+  </UICategoryNavigationTargetPathPopupWindow>
+  
+  <UIDocumentInfo>
+    <msg>
+      <access-denied-exception>Δεν επιτρέπεται η πρόσβαση. Ίσως δεν έχετε άδεια ανάγνωσης ή ο κόμβος μπορεί να έχει καταργηθεί/τροποποιηθεί.</access-denied-exception>
+    </msg>
+  </UIDocumentInfo>
+  <UIPortalApplication>
+    <title>
+      <abort>Ματαίωση</abort>
+    </title>
+  </UIPortalApplication>    
+  
+  <CategoryNavigationTemplate>
+  <label>
+  <home>Αρχική</home>
+  </label>
+  </CategoryNavigationTemplate>
+  
+  <Breadcrumb>
+  <label>
+  <home>Αρχική</home>
+  </label>  
+  </Breadcrumb>
+</bundle>

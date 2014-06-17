@@ -16,11 +16,22 @@
  */
 package org.exoplatform.services.cms.actions.impl;
 
-import java.util.ArrayList;
-import java.util.Collection;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import org.exoplatform.container.component.ComponentPlugin;
+import org.exoplatform.services.cms.CmsService;
+import org.exoplatform.services.cms.JcrInputProperty;
+import org.exoplatform.services.cms.actions.ActionPlugin;
+import org.exoplatform.services.cms.actions.ActionServiceContainer;
+import org.exoplatform.services.cms.actions.DMSEvent;
+import org.exoplatform.services.cms.impl.Utils;
+import org.exoplatform.services.jcr.RepositoryService;
+import org.exoplatform.services.jcr.config.RepositoryConfigurationException;
+import org.exoplatform.services.jcr.core.ManageableRepository;
+import org.exoplatform.services.jcr.core.nodetype.ExtendedNodeTypeManager;
+import org.exoplatform.services.jcr.core.nodetype.NodeTypeValue;
+import org.exoplatform.services.jcr.core.nodetype.PropertyDefinitionValue;
+import org.exoplatform.services.log.ExoLogger;
+import org.exoplatform.services.log.Log;
+import org.picocontainer.Startable;
 
 import javax.jcr.Node;
 import javax.jcr.NodeIterator;
@@ -38,22 +49,11 @@ import javax.jcr.query.Query;
 import javax.jcr.query.QueryManager;
 import javax.jcr.query.QueryResult;
 import javax.jcr.version.OnParentVersionAction;
-
-import org.exoplatform.container.component.ComponentPlugin;
-import org.exoplatform.services.cms.CmsService;
-import org.exoplatform.services.cms.JcrInputProperty;
-import org.exoplatform.services.cms.actions.ActionPlugin;
-import org.exoplatform.services.cms.actions.ActionServiceContainer;
-import org.exoplatform.services.cms.actions.DMSEvent;
-import org.exoplatform.services.jcr.RepositoryService;
-import org.exoplatform.services.jcr.config.RepositoryConfigurationException;
-import org.exoplatform.services.jcr.core.ManageableRepository;
-import org.exoplatform.services.jcr.core.nodetype.ExtendedNodeTypeManager;
-import org.exoplatform.services.jcr.core.nodetype.NodeTypeValue;
-import org.exoplatform.services.jcr.core.nodetype.PropertyDefinitionValue;
-import org.exoplatform.services.log.ExoLogger;
-import org.exoplatform.services.log.Log;
-import org.picocontainer.Startable;
+import java.util.ArrayList;
+import java.util.Collection;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 
 /**
  * Process with action for node
@@ -165,7 +165,6 @@ public class ActionServiceContainerImpl implements ActionServiceContainer, Start
 
   /**
    * Constructor method
-   * @param params            init parameter
    * @param repositoryService RepositoryService
    * @param cmsService        CmsService
    * @throws Exception
@@ -249,7 +248,6 @@ public class ActionServiceContainerImpl implements ActionServiceContainer, Start
    * @param executable            String value of executable
    * @param variableNames         List name of variable
    * @param isMoveType            is moved or not
-   * @param repository            repository name
    * @throws Exception
    */
   @SuppressWarnings("unchecked")
@@ -324,7 +322,8 @@ public class ActionServiceContainerImpl implements ActionServiceContainer, Start
     for(NodeTypeIterator iter = ntmanager.getAllNodeTypes();iter.hasNext();) {
       NodeType nt = (NodeType) iter.next();
       String name = nt.getName();
-      if (nt.isNodeType(ACTION) && !isAbstractType(name)) {
+      if (nt.isNodeType(ACTION) && !isAbstractType(name) &&
+        !Utils.getAllEditedConfiguredData("ActionTypeList", "EditedConfiguredActionType", true).contains(name)) {
         createsActions.add(nt);
       }
     }
@@ -551,9 +550,7 @@ public class ActionServiceContainerImpl implements ActionServiceContainer, Start
    * @param userId user identify
    * @param node current node
    * @param actionName name of action
-   * @param repository current repository
    * @throws Exception
-   * @see {@link #executeAction(String, Node, String, Map, String)}
    */
   public void executeAction(String userId, Node node, String actionName) throws Exception {
     Map<String, String> variables = new HashMap<String, String>();
@@ -608,7 +605,6 @@ public class ActionServiceContainerImpl implements ActionServiceContainer, Start
    * @param node        current node
    * @param actionName  name of action
    * @param variables   Map with variables and value
-   * @param repository  current repository
    * @throws Exception
    */
   public void executeAction(String userId, Node node, String actionName, Map variables) throws Exception {
@@ -648,9 +644,7 @@ public class ActionServiceContainerImpl implements ActionServiceContainer, Start
   /**
    * Get QueryManager, call initAction(QueryManager queryManager, String repository, String workspace)
    * to initialize action listener for all available repositories and workspaces
-   * @param repository  repository name
    * @throws Exception
-   * @see {@link #initAction(QueryManager, String, String)}
    */
   private void initiateActionConfiguration() throws Exception {
     ManageableRepository jcrRepository = null ;
@@ -679,9 +673,7 @@ public class ActionServiceContainerImpl implements ActionServiceContainer, Start
   /**
    * Get QueryManager, call initAction(QueryManager queryManager, String repository, String workspace)
    * to initialize action listener
-   * @param repository  repository name
    * @throws Exception
-   * @see {@link #initAction(QueryManager, String, String)}
    */
   private void reInitiateActionConfiguration() throws Exception {
     ManageableRepository jcrRepository = repositoryService_.getCurrentRepository();
@@ -709,7 +701,6 @@ public class ActionServiceContainerImpl implements ActionServiceContainer, Start
    * Initialize the action listener for all node in repository
    * All node is got by query following ACTION_QUERY
    * @param queryManager QueryManager
-   * @param repository   repository name
    * @param workspace    workspace name
    * @throws Exception
    */

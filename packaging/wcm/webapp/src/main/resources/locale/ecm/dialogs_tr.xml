@@ -94,7 +94,7 @@
         <id>Kimlik</id>
         <name>#{word.name}</name>
         <lifecycle>#{Ecm.dialog.label.lifecycle}</lifecycle>
-        <metadata>Metaveri</metadata>
+        <metadata>Metadata</metadata>
         <description>#{word.description}</description>
       </label>
     </dialog>

@@ -702,6 +702,17 @@
       <namespace>Namespace:</namespace>
       <multiple>Multiple:</multiple>
       <property_select>Add New Property:</property_select>
+      <value0>Value 0</value0>
+      <value1>Value 1</value1>
+      <value2>Value 2</value2>
+      <value3>Value 3</value3>
+      <value4>Value 4</value4>
+      <value5>Value 5</value5>
+      <value6>Value 6</value6>
+      <value7>Value 7</value7>
+      <value8>Value 8</value8>
+      <value9>Value 9</value9>
+      <value10>Value 10</value10>
     </label>
     <action>
       <Save>#{word.save}</Save>
@@ -1875,6 +1886,7 @@
     <msg>
       <name-exist>Taggen '{0}' eksisterer alt.</name-exist>
       <tagName-invalid>Tagg navnet inneholder ugyldige tegn.</tagName-invalid>
+      <tagName-empty-or-invalid>The tag name is empty or contains some invalid characters.</tagName-empty-or-invalid>
       <tag-name-empty>Tagg navnet er tomt</tag-name-empty>
       <tag-name-duplicate>Tagg navnet er et duplikat.</tag-name-duplicate>
       <tagName-too-long>En av taggene var for lang. Tagg navnet må være mindre enn 30 tegn.</tagName-too-long>
@@ -3044,6 +3056,12 @@
     <DrivesArea>
       <ShowDrives>Vis stasjoner</ShowDrives>
     </DrivesArea>
+    <msg>
+      <no-view-found>There are no views applied for your access permission in drive '{0}'.</no-view-found>
+      <access-denied>Access denied. You may not have permission in the workspace of drive '{0}'.</access-denied>
+      <empty-drives>Access denied. Either there is no drive in this repository or you do not have permission to access any drives in this repository.</empty-drives>
+      <workspace-not-exist>Drive '{0}' was stored in one unrecognized workspace. Please reconfigure this drive.</workspace-not-exist>
+    </msg>
   </UIDrivesArea>
   <UIJcrExplorerEditForm>
     <msg>

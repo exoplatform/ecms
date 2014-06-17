@@ -16,24 +16,18 @@
  */
 package org.exoplatform.ecm.webui.component.admin.action;
 
-import java.util.ArrayList;
-import java.util.Collection;
-import java.util.Collections;
-import java.util.Comparator;
-import java.util.List;
-
-import javax.jcr.nodetype.NodeType;
-import javax.jcr.nodetype.NodeTypeManager;
-
 import org.apache.commons.lang.StringUtils;
 import org.exoplatform.commons.utils.LazyPageList;
 import org.exoplatform.commons.utils.ListAccessImpl;
 import org.exoplatform.ecm.webui.component.admin.UIECMAdminPortlet;
 import org.exoplatform.ecm.webui.core.UIPagingGrid;
 import org.exoplatform.services.cms.actions.ActionServiceContainer;
+import org.exoplatform.services.cms.impl.Utils;
 import org.exoplatform.services.cms.scripts.impl.ScriptServiceImpl;
 import org.exoplatform.services.jcr.RepositoryService;
 import org.exoplatform.services.jcr.core.nodetype.ExtendedNodeTypeManager;
+import org.exoplatform.services.log.ExoLogger;
+import org.exoplatform.services.log.Log;
 import org.exoplatform.services.wcm.utils.WCMCoreUtils;
 import org.exoplatform.web.application.ApplicationMessage;
 import org.exoplatform.webui.application.WebuiRequestContext;
@@ -42,6 +36,14 @@ import org.exoplatform.webui.config.annotation.EventConfig;
 import org.exoplatform.webui.core.UIApplication;
 import org.exoplatform.webui.event.Event;
 import org.exoplatform.webui.event.EventListener;
+
+import javax.jcr.nodetype.NodeType;
+import javax.jcr.nodetype.NodeTypeManager;
+import java.util.ArrayList;
+import java.util.Collection;
+import java.util.Collections;
+import java.util.Comparator;
+import java.util.List;
 
 /**
  * Created by The eXo Platform SARL
@@ -64,6 +66,7 @@ public class UIActionTypeList extends UIPagingGrid {
 
   private static String[] ACTIONTYPE_BEAN_FIELD = {"label", "name"} ;
   private static String[] ACTIONTYPE_ACTION = {"Edit", "Delete"} ;
+  private static final Log LOG = ExoLogger.getLogger(UIActionTypeList.class);
 
   public UIActionTypeList() throws Exception {
     getUIPageIterator().setId("ActionTypeListIterator");
@@ -147,9 +150,11 @@ public class UIActionTypeList extends UIPagingGrid {
       ExtendedNodeTypeManager ntManager = repoService.getCurrentRepository().getNodeTypeManager();
       try {
         ntManager.unregisterNodeType(nodeTypeName);
+        Utils.addEditedConfiguredData(nodeTypeName, "ActionTypeList", "EditedConfiguredActionType", true);
       } catch(Exception e) {
         UIApplication uiApp = event.getSource().getAncestorOfType(UIApplication.class) ;
         uiApp.addMessage(new ApplicationMessage("UIActionTypeList.msg.cannot-delete", null, ApplicationMessage.WARNING)) ;
+        LOG.error("An error occurs while unregister node type "+nodeTypeName+"", e);
         return;
       }
       uiList.refresh(uiList.getUIPageIterator().getCurrentPage());

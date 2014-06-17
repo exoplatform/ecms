@@ -2,7 +2,7 @@
 <bundle>
   <UIDashboardForm>
     <label>
-      <title>Dashboard forfatter</title>
+      <title>Author Dashboard</title>
       <nocontent>Ingen innhold</nocontent>
       <mydraft>Mitt utkast</mydraft>
       <waitingapproval>Venter på godkjenning</waitingapproval>

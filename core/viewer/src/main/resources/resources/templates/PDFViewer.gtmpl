@@ -18,8 +18,10 @@
   }		
 
   def originalNode = uiParent.getOriginalNode();  
-  def currentNode = uicomponent.getFileLangNode(uiParent.getNode());
   def downloadLink = Utils.getDownloadRestServiceLink(originalNode);
+  def currentNode = uicomponent.getFileLangNode(uiParent.getNode());
+  def contentNode = currentNode.getNode("jcr:content") ;
+  def mimeType = contentNode.getProperty("jcr:mimeType").getString() ;
    public String formatNodeName(String text) {
     return text.replaceAll("'", "\\\\'") ;
   }
@@ -211,7 +213,8 @@
 		<div class="ControlButton" rel="tooltip" data-placement="bottom" title="<%=uicomponent.getResourceBundle("PDFViewer.label.viewInfor")%>">
 			<div class="InfoIcon" onclick="javascript:eXo.ecm.ECMUtils.showDocumentInformation(this, event);"><span></span></div>
 		</div>
-		<div class="DownLoadIcon"><a href="$downloadLink"><%=uicomponent.getResourceBundle("PDFViewer.label.downloadFile")%></a></div>
+		<a href="javascript: void(0)"><div class="DownLoadIcon" onclick="<%=uicomponent.event("DownloadFile")%>"><%=uicomponent.getResourceBundle("PDFViewer.label.downloadFile")%></div></a>
+		
 	</div>
 	<div class="InfoPopup" id="metadatas" style="display: none;position: absolute;">
 		<div class="Metadata"><span class="metaKey"><%=uicomponent.getResourceBundle("PDFViewer.metadata.fileName")%></span>: <span class="metaValue"><%=ContentReader.getXSSCompatibilityContent(originalNode.getName())%></span></div>

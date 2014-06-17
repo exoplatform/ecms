@@ -2425,7 +2425,7 @@
   <UIRestoreConfirmMessage>
     <label>
       <Close>#{word.close}</Close>
-      <OK>Ok</OK>
+      <OK>OK</OK>
       <ReplaceData>Substituir dado</ReplaceData>
       <Back>Voltar para renomear</Back>
       <Keepfile>Manter ambos arquivos</Keepfile>
@@ -3058,7 +3058,7 @@
     </DrivesArea>
     <msg>
       <no-view-found>There are no views applied for your access permission in drive '{0}'.</no-view-found>
-      <access-denied>Acesso negado. Talvez você não tenha permissão na área de trabalho da unidade '{0}'.</access-denied>
+      <access-denied>Access denied. You may not have permission in the workspace of drive '{0}'.</access-denied>
       <empty-drives>Access denied. Either there is no drive in this repository or you do not have permission to access any drives in this repository.</empty-drives>
       <workspace-not-exist>Unidade '{0}' foi armazenada em um espaço de trabalho não reconhecido. Por favor reconfigure esta unidade.</workspace-not-exist>
     </msg>

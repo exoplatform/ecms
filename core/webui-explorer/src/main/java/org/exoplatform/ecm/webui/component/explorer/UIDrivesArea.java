@@ -275,7 +275,6 @@ public class UIDrivesArea extends UIContainer {
       uiJCRExplorer.setWorkspaceName(drive.getWorkspace());
       uiJCRExplorer.setRootPath(homePath);
       uiJCRExplorer.setSelectNode(drive.getWorkspace(), homePath);
-      uiJCRExplorer.refreshExplorer();
       String selectedView = viewList.get(0);
       UIControl uiControl = uiJCRExplorer.getChild(UIControl.class).setRendered(true);
       UIWorkingArea uiWorkingArea = uiJCRExplorer.getChild(UIWorkingArea.class);

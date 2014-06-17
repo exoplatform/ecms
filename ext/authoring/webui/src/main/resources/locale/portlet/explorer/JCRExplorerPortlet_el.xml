@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<bundle>
+  <!--
+  ###################################################################################
+  #             org.exoplatform.ecm.webui.component.explorer.UIActionBar      #
+  ###################################################################################
+  -->
+  <UIActionBar>
+    <tooltip>
+      <PublicationRequestApproval>Αίτηση έγκρισης</PublicationRequestApproval>
+      <PublicationApproveContent>Έγκριση Περιεχομένου</PublicationApproveContent>
+      <PublicationPublish>Δημοσίευση</PublicationPublish>
+    </tooltip>
+  </UIActionBar>
+</bundle>

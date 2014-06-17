@@ -154,7 +154,11 @@ public class FileUploadHandler {
     DocumentBuilderFactory factory = DocumentBuilderFactory.newInstance();
     DocumentBuilder builder = factory.newDocumentBuilder();
     Document doc = builder.newDocument();
-    Element rootElement = doc.createElement("<html><head></head><body></body></html");
+    Element rootElement = doc.createElement("html");
+    Element head = doc.createElement("head");
+    Element body = doc.createElement("body");
+    rootElement.appendChild(head);
+    rootElement.appendChild(body);
     doc.appendChild(rootElement);
     
     return Response.ok(new DOMSource(doc), MediaType.TEXT_XML)

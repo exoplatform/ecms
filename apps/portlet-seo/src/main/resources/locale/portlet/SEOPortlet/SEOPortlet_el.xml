@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<bundle>
+  <UISEOForm>
+    <label>  
+      <title>Τίτλος:</title>
+      <description>Περιγραφή:</description>
+      <keywords>Λέξεις-κλειδιά:</keywords>
+      <language>Γλώσσα:</language>
+      <robots>Ρομπότ ιστού:</robots>
+      <sitemap>Χάρτης ιστότοπου:</sitemap>
+      <sitemapvisible>Ορατό στο χάρτη του ιστότοπου</sitemapvisible>
+    <isInherited>Κληρονoμήθηκαν από τη γονική σελίδα</isInherited>
+      <priority>Προτεραιότητα:</priority>
+      <frequency>Συχνότητα:</frequency>
+      <select-language>Επιλέξτε μια γλώσσα</select-language>
+      <option>
+        <Always>Πάντα</Always>
+        <Hourly>Ωριαία</Hourly>
+        <Daily>Καθημερινά</Daily>
+        <Weekly>Εβδομαδιαία</Weekly>
+        <Monthly>Μηνιαία</Monthly>
+        <Yearly>Ετήσια</Yearly>
+        <Never>Ποτέ</Never>
+      </option> 
+    </label>
+    <tip>
+  <priority>Έγκυρες τιμές από 0.0 έως 1.0</priority>
+  </tip>   
+    <action>
+      <Save>#{word.save}</Save>
+      <Cancel>#{word.cancel}</Cancel>
+    </action>
+    <msg>
+      <repository-exception>Παρουσιάστηκε μη αναμενόμενο σφάλμα κατά την αποθήκευση των μεταδεδομένων της σελίδας.</repository-exception>
+      <confirm-delete>Είστε βέβαιοι ότι θέλετε να διαγράψετε αυτά τα δεδομένα που αφορούν τις βελτιστοποιήσεις για τις μηχανές αναζήτησης (SEO);</confirm-delete>      
+    </msg>
+    <title>
+    <seo-delete>Διαγραφή</seo-delete>
+    </title>
+  <help> 
+  <priority>Έγκυρες τιμές από 0.0 έως 1.0.</priority>
+  <description>Βοηθήστε τις αναζητήσεις: Κάντε γνωστό ότι στη σελίδα υπάρχει ένας σύνδεσμος που ψάχνουν.</description>
+  <keywords>Οι πιο σημαντικοί όροι που χαρακτηρίζουν τη σελίδα. Χρησιμοποιήστε το κόμμα ως διαχωριστικό.</keywords>  
+  </help>  
+  </UISEOForm>
+  <UISEOPopupWindow>
+  <title>
+      <UISEOForm>Διαχείριση βελτιστοποιήσεων για τις μηχανές αναζήτησης</UISEOForm>
+  </title>
+  </UISEOPopupWindow>    
+  <UISEOToolbarForm>
+  <title>
+      <seo>Διαχείριση βελτιστοποιήσεων για τις μηχανές αναζήτησης</seo>
+  </title>
+  <label>
+    <seo>Βελτιστοποίηση για μηχανή αναζήτησης</seo>
+  </label>
+  </UISEOToolbarForm>  
+  <FloatNumberValidator>
+    <msg>
+      <Invalid-number>Η τιμή του πεδίου προτεραιότητα πρέπει να είναι σε αριθμητική μορφή. Οι έγκυρες τιμές είναι από 0.0 έως 1.0.</Invalid-number>
+    </msg>
+  </FloatNumberValidator>  
+  
+</bundle>

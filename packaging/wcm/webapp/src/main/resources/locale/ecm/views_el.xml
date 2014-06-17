@@ -1,0 +1,227 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<bundle>
+ 
+  <View>
+    <label>
+      <languages>
+        <en>Αγγλικά</en>
+        <fr>Γαλλικά</fr>
+        <ru>Ρωσικά</ru>
+        <vi>Βιετναμικά</vi>
+        <nl>Ολλανδικά</nl>
+        <de>Γερμανικά</de>
+        <uk>Ουκρανικά</uk>
+        <ar>Αραβικά</ar>
+      </languages>
+    </label>
+  </View>
+ 
+  <!--
+  ################resoucebundle FOR EXO:COMMENT VIEW TEMPLATE#############
+  -->
+  <Comment>
+    <view>
+      <label>
+        <postedBy>Τελευταίος σχολιασμός από</postedBy>
+        <at>στο</at>
+        <comments>Σχόλια</comments>
+        <show-comments>Προβολή σχολίων</show-comments>
+        <hide-comments>Απόκρυψη σχολίων</hide-comments>
+        <comment-by>Σχολιάστηκε από</comment-by>
+        <email>Διεύθυνση ηλεκτρονικού ταχυδρομείου</email>
+        <site>Τοποθεσία</site>
+      </label>
+    </view>
+  </Comment>
+ 
+  <!--
+  ################resoucebundle FOR NT:FILE VIEW TEMPLATE##############
+  -->
+  <File>
+    <view>
+      <label>
+        <not-viewable>Η προεπισκόπηση αυτού του εγγράφου δεν είναι διαθέσιμη.</not-viewable>
+        <using-webDAV>ή άνοιγμα στο Office</using-webDAV>
+        <file-size-too-big>Το περιεχόμενο αυτού του αρχείου είναι πολύ μεγάλο. Θα πρέπει να το κατεβάσετε και να το ανοίξετε στη συσκευή σας.</file-size-too-big>
+        <webDAV>Προβολή WebDAV</webDAV>
+        <download>Μεταφόρτωση</download>
+        <htmlview>Προβολή ως κώδικα HTML</htmlview>
+        <plaintextview>Προβολή ως απλό κείμενο</plaintextview>
+      </label>
+    </view>
+  </File>
+ 
+  <!--
+  ################resoucebundle FOR MAIL:DOCUMENT VIEW TEMPLATE##############
+  -->
+  <Mail>
+    <view>
+      <label>
+        <from>Από:</from>
+        <to>Έως:</to>
+        <cc>Cc:</cc>
+        <date>Ημερομηνία:</date>
+        <subject>Θέμα:</subject>
+        <attachment>Συνημμένα:</attachment>
+      </label>
+    </view>
+  </Mail>
+  <!--
+  ################resoucebundle FOR EXO:VOTE VIEW TEMPLATE##############
+  -->
+  <Vote>
+    <view>
+      <label>
+        <avg-rating>Μέση βαθμολογία</avg-rating>
+        <subscription>Ψήφοι</subscription>
+      </label>
+    </view>
+  </Vote>
+  <!--
+  ################resoucebundle FOR LISTVIEW VIEW TEMPLATE##############
+  -->
+  <ListView>
+    <view>
+      <label>
+        <name>Όνομα</name>
+        <versionable>Διαχείριση εκδόσεων</versionable>
+        <exo_owner>Ιδιοκτήτης</exo_owner>
+        <exo_dateCreated>Ημερομηνία δημιουργίας</exo_dateCreated>
+        <exo_dateModified>Ημερομηνία τροποποίησης</exo_dateModified>
+        <auditing>Έλεγχος</auditing>
+      </label>
+    </view>
+  </ListView>
+
+  <!--
+  ###################### resoucebundle for exo:addMetadataAction view template ####
+  -->
+  <AddMetadata>
+    <view>
+      <label>
+        <action-name>Όνομα ενέργειας</action-name>
+        <lifecycle>Κύκλος ζωής</lifecycle>
+        <metadata>Μεταδεδομένα</metadata>
+        <description>Περιγραφή</description>
+      </label>
+    </view>
+  </AddMetadata>
+
+  <!--
+  ###################### resoucebundle for exo:autoVersioning view template ####
+  -->
+  <AutoVersioning>
+    <view>
+      <label>
+        <action-name>Όνομα ενέργειας</action-name>
+        <lifecycle>Κύκλος ζωής</lifecycle>
+        <description>Περιγραφή</description>
+      </label>
+    </view>
+  </AutoVersioning>
+  <!--
+  ###################### resoucebundle for exo:enableVersiong view template ####
+  -->
+  <EnableVersioning>
+    <view>
+      <label>
+        <action-name>Όνομα</action-name>
+        <lifecycle>Κύκλος ζωής</lifecycle>
+        <description>Περιγραφή</description>
+      </label>
+    </view>
+  </EnableVersioning>
+  <!--
+  ###################### resoucebundle for dc:elementSet view template ####
+  -->
+  <ElementSet>
+    <view>
+      <label>
+        <not-avaliable>Δ/Υ</not-avaliable>
+        <core-elements>Βασικά στοιχεία</core-elements>
+        <title>Τίτλος</title>
+        <creator>Δημιουργός</creator>
+        <subject>Θέμα</subject>
+        <source>Πηγή</source>
+        <contributor>Συνεισφέρων</contributor>
+        <resource-type>Τύπος πόρου</resource-type>
+        <date>Ημερομηνία</date>
+        <publisher>Εκδότης</publisher>
+        <description>Περιγραφή</description>
+        <rights>Δικαιώματα</rights>
+        <relation>Σχέση</relation>
+        <format>Μορφή</format>
+        <coverage>Κάλυψη</coverage>
+        <identifier>Αναγνωριστικό</identifier>
+        <languages>Γλώσσες</languages>
+      </label>
+      <action>
+        <add-edit>Προσθήκη/επεξεργασία</add-edit>
+        <cancel>#{word.cancel}</cancel>
+      </action>
+      <tooltip>
+        <cancel>#{word.cancel}</cancel>
+        <add-edit>Προσθήκη/επεξεργασία ιδιοτήτων</add-edit>
+      </tooltip>
+    </view>
+  </ElementSet>
+
+  <ScriptAction>
+    <view>
+      <label> 
+        <isDeep>Αναδρομικό</isDeep>
+        <nodetypes>Τύποι κόμβων</nodetypes>
+        <affectedNodeTypeNames>Επηρεαζόμενοι τύποι κόμβων</affectedNodeTypeNames>
+        <nodeTypeName>Ονόματα τύπων κόμβων</nodeTypeName>
+      </label> 
+    </view>
+  </ScriptAction>
+  
+  <AddMetadata>
+    <view>
+      <label>
+        <isDeep>Αναδρομικό</isDeep>
+        <nodetypes>Τύποι κόμβων</nodetypes>
+        <affectedNodeTypeNames>Επηρεαζόμενοι τύποι κόμβων</affectedNodeTypeNames>
+        <nodeTypeName>Ονόματα τύπων κόμβων</nodeTypeName>
+      </label> 
+    </view>
+  </AddMetadata>
+
+  <EnableVersioning>
+    <view>
+      <label>
+        <isDeep>Αναδρομικό</isDeep>
+        <nodetypes>Τύποι κόμβων</nodetypes> 
+        <affectedNodeTypeNames>Επηρεαζόμενοι τύποι κόμβων</affectedNodeTypeNames>
+        <nodeTypeName>Ονόματα τύπων κόμβων</nodeTypeName>
+      </label> 
+    </view>
+  </EnableVersioning>
+  
+  <AutoVersioning>
+    <view>
+      <label>
+        <isDeep>Αναδρομικό</isDeep>
+        <nodetypes>Τύποι κόμβων</nodetypes>
+        <affectedNodeTypeNames>Επηρεαζόμενοι τύποι κόμβων</affectedNodeTypeNames>
+        <nodeTypeName>Ονόματα τύπων κόμβων</nodeTypeName>
+      </label> 
+    </view>
+  </AutoVersioning>
+  
+   <AccessibleMedia>
+    <view>
+      <label>
+      <Play-audio-description-of-this-video>Ηχητική περιγραφή</Play-audio-description-of-this-video>
+      <Read-more>Διαβάστε περισσότερα</Read-more>
+      <Read-less>Διαβάστε λιγότερα</Read-less>
+      <Switch-back-to-original-video>Πρωτότυπο βίντεο</Switch-back-to-original-video>
+      </label>
+      <tooltip>
+      <A-second-media-file-is-available-as-audio-description>Ένα δεύτερο αρχείο πολυμέσων είναι διαθέσιμο ως ηχητική περιγραφή</A-second-media-file-is-available-as-audio-description>
+      </tooltip>
+    </view>
+  </AccessibleMedia>
+ 
+</bundle>

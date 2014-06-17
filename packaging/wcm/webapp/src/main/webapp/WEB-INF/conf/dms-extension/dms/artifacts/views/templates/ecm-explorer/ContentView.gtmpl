@@ -76,7 +76,7 @@
           <%
             if (selectedSortType.equals("Type")) {
               %>
-								<i class="uiIconArrow${sortOrder} uiIconLightGrey"></i>
+								<i class="uiIconArrow${sortOrder} uiIconLightGray"></i>
               <%
             }
           %>
@@ -87,7 +87,7 @@
           <%
             if (selectedSortType.equals("Alphabetic")) {
               %>
-                <i class="uiIconArrow${sortOrder} uiIconLightGrey pull-right"></i>
+                <i class="uiIconArrow${sortOrder} uiIconLightGray pull-right"></i>
 								<%=_ctx.appRes("WCMContentView.header.title")%>
               <%
             } else { 
@@ -102,7 +102,7 @@
           <%
             if (selectedSortType.equals("exo:dateCreated")) {
               %>
-                <i class="uiIconArrow${sortOrder} uiIconLightGrey pull-right"></i>
+                <i class="uiIconArrow${sortOrder} uiIconLightGray pull-right"></i>
 								<%=_ctx.appRes("WCMContentView.header.date")%>
               <%
             } else { 
@@ -117,7 +117,7 @@
           <%
             if (selectedSortType.equals("exo:owner")) {
               %>
-                <i class="uiIconArrow${sortOrder} uiIconLightGrey pull-right"></i>
+                <i class="uiIconArrow${sortOrder} uiIconLightGray pull-right"></i>
 								<%=_ctx.appRes("WCMContentView.header.author")%>
               <%
             } else { 
@@ -132,7 +132,7 @@
           <%
             if (selectedSortType.equals("publication:lastUser")) {
               %>
-                <i class="uiIconArrow${sortOrder} uiIconLightGrey pull-right"></i>
+                <i class="uiIconArrow${sortOrder} uiIconLightGray pull-right"></i>
 								<%=_ctx.appRes("WCMContentView.header.lastUser")%>
               <%
             } else { 
@@ -147,7 +147,7 @@
           <%
             if (selectedSortType.equals("publication:currentState")) {
               %>
-                <i class="uiIconArrow${sortOrder} uiIconLightGrey pull-right"></i>
+                <i class="uiIconArrow${sortOrder} uiIconLightGray pull-right"></i>
 								<%=_ctx.appRes("WCMContentView.header.status")%>
               <%
             } else { 
@@ -261,7 +261,7 @@
             permlink = permLinkComponent.getUIExtensionName();
             strActs +=  "<li class='menuItem'>";
             strActs +=  "<a exo:attr='ViewDocument' style='display: block;' href=\"" + permLinkComponent.getPermlink(data) + "\" target='_new' onclick=\"return eXo.ecm.WCMUtils.hideContextMenu(this);\">" ;
-            strActs +=  " <i class='uiIconEcmsViewDocument uiIconEcmsLightGrey'>" ;
+            strActs +=  " <i class='uiIconEcmsViewDocument uiIconEcmsLightGray'>" ;
             strActs +=  " </i> ";            
             strActs +=    _ctx.appRes("ECMContextMenu.event." + permlink);
             strActs +=  "</a>";
@@ -316,7 +316,7 @@
           	String clipboardLink = serverUrl + "/" + restContextName + "/private/jcr/" + repository + "/" + preferenceWS + data.getPath();
           	strActs +=  "<li class='menuItem'>";
           	strActs +=  "<a exo:attr='CopyUrlToClipboard' style='display: block;' id='clip_button1$i' path='$clipboardLink'>" ;
-          	strActs +=  " <i class='uiIconEcmsCopyUrlToClipboard uiIconEcmsLightGrey'>" ;
+          	strActs +=  " <i class='uiIconEcmsCopyUrlToClipboard uiIconEcmsLightGray'>" ;
           	strActs +=  " </i> " ;
             strActs +=    _ctx.appRes("ECMContextMenu.event.GetURL");
             strActs +=  "</a>";

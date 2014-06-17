@@ -1,0 +1,2582 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<bundle>
+  <!--
+  ################################################################################
+  #             org.exoplatform.ecm.webui.component.admin.UIECMAdminControlPanel #
+  ################################################################################
+  -->
+  <UIECMAdminControlPanel>
+    <tab>
+      <label>
+        <Templates>Πρότυπα</Templates>
+        <Explorer>Περιηγητής</Explorer>
+        <Repository>Αποθετήριο</Repository>
+        <Advanced>Προχωρημένα</Advanced>
+      </label>
+    </tab>    
+    <label>     
+      <UITaxonomyManagerTrees>Κατηγορίες</UITaxonomyManagerTrees>
+      <UIMetadataManager>Μεταδεδομένα</UIMetadataManager>
+      <UINamespaceManager>Χώροι ονομάτων</UINamespaceManager>
+      <UINodeTypeManager>Τύποι κόμβων</UINodeTypeManager>
+      <UITemplatesManager>Έγγραφα</UITemplatesManager>
+   <UICLVTemplatesManager>Λίστα</UICLVTemplatesManager>
+      <UIViewManager>Προβολές</UIViewManager>
+      <UIDriveManager>Μονάδες</UIDriveManager>
+      <UIQueriesManager>Ερωτήματα</UIQueriesManager>
+      <UIActionManager>Ενέργειες</UIActionManager>
+      <UIScriptManager>Σενάρια</UIScriptManager>
+      <UIUnLockManager>Κλειδώματα</UIUnLockManager>
+      <UIFolksonomyManager>Ετικέτες</UIFolksonomyManager>      
+    </label>
+    <msg>
+      <access-denied>Δεν επιτρέπεται η πρόσβαση. Δεν έχετε άδεια για να εκτελέσετε αυτήν την ενέργεια.</access-denied>
+    </msg>
+  </UIECMAdminControlPanel>
+  <!--
+  ################################################################################
+  #             org.exoplatform.ecm.webui.component.admin.UITaxonomy #
+  ################################################################################
+  -->
+  <UITaxonomyWorkingArea>
+    <msg>
+      <referential-integrity>Δεν μπορεί να γίνει ανάγνωση από το αρχείο προέλευσης ή η κατηγορία προορισμού είναι μια υπό-κατηγορία.</referential-integrity>
+      <no-taxonomy-selected>Πρέπει να αντιγράψετε ή να αποκόψετε τουλάχιστον μία κατηγορία.</no-taxonomy-selected>
+      <node-is-cutting>Δεν μπορείτε να επικολλήσετε εδώ. Ο κόμβος της κατηγορίας '{0}' μπορεί να κοπεί.</node-is-cutting>
+      <can-not-paste>Δεν υπάρχει κανένα στοιχείο στην προσωρινή μνήμη για να επικολλήσετε.</can-not-paste>
+      <reference-exception>Δεν μπορείτε να διαγράψετε αυτήν την κατηγορία, επειδή υπάρχει αναφορά σε αυτή από το περιεχόμενο.</reference-exception>
+      <path-error>Παρουσιάστηκε σφάλμα κατά την κατάργηση αυτού του κόμβου της κατηγορίας.</path-error>
+    </msg>
+  </UITaxonomyWorkingArea>
+  <UITaxonomyManager>
+    <msg>
+      <confirm-delete>Είστε βέβαιοι ότι θέλετε να διαγράψετε αυτήν την κατηγορία;</confirm-delete>
+    </msg>
+    <title>
+      <add>Προσθήκη</add>
+      <paste>Επικόλληση</paste>
+      <cut>Αποκοπή</cut>
+      <copy>Αντιγραφή</copy>
+      <remove>Διαγραφή</remove>
+    </title>
+  </UITaxonomyManager>
+  
+  <!--
+  ################################################################################
+  #    org.exoplatform.ecm.webui.component.admin.taxonomy.UITaxonomyTreeContainer#
+  ################################################################################
+  -->
+  <UITaxonomyTreeContainer>
+    <tab>
+      <info>
+        <UITaxonomyTreeMainForm>Καθορίστε το όνομα της κατηγορίας, το χώρο εργασίας και την αρχική διαδρομή.</UITaxonomyTreeMainForm>
+        <UIPermissionTreeManager>Ρυθμίστε τα δικαιώματα για το δέντρο κατηγοριών.</UIPermissionTreeManager>
+        <UIActionTaxonomyManager>Προσθέστε μια ενέργεια στο δέντρο κατηγοριών για να ολοκληρώσετε τη δημιουργία ή την ενημέρωση.</UIActionTaxonomyManager>
+        <UITaxonomyTreeCreateChild>Επεξεργαστείτε το δέντρο ταξινομίας προσθέτοντας, αντιγράφοντας, αποκόβοντας και την επιλέγοντας δικαιώματα.</UITaxonomyTreeCreateChild>
+      </info>
+    </tab>
+    <msg>
+      <not-exist-tree>Το δέντρο κατηγοριών δεν υπάρχει.</not-exist-tree>
+    </msg>
+  </UITaxonomyTreeContainer>
+  
+  <!--
+##########################################################################################
+#     org.exoplatform.ecm.webui.component.admin.taxonomy.UITaxonomyTreeMainForm          #
+##########################################################################################
+-->
+  <UITaxonomyTreeMainForm>
+    <action>
+      <Reset>Reset</Reset>
+    </action>
+    <msg>
+      <name-not-allowed>Απαγορευμένο όνομα</name-not-allowed>
+      <name-emty>Το όνομα για το δέντρο απαιτείται.</name-emty>
+      <homePath-emty>Η αρχική διαδρομή απαιτείται.</homePath-emty>
+      <targetPath-emty>Η διαδρομή προορισμού απαιτείται.</targetPath-emty>
+      <taxonomytree-existed>Το όνομα για το δέντρο κατηγοριών υπάρχει ήδη.</taxonomytree-existed>
+    </msg>
+  </UITaxonomyTreeMainForm>
+
+  <TaxonomyTreeMainForm>
+    <label>
+      <TaxoTreeName>Όνομα</TaxoTreeName>
+      <TaxoTreeWorkspace>Χώρος Εργασίας</TaxoTreeWorkspace>
+      <TaxoTreeHomePath>Αρχική διαδρομή</TaxoTreeHomePath>
+    </label>
+  </TaxonomyTreeMainForm>
+
+  <TaxonomyTreeHomePath>
+    <title>
+      <AddPath>Προσθήκη διαδρομής</AddPath>
+    </title>
+  </TaxonomyTreeHomePath>
+  
+  <!--
+##########################################################################################
+#     org.exoplatform.ecm.webui.component.admin.taxonomy.tree.info.UIPermissionTreeInfo  #
+##########################################################################################
+-->
+<UIPermissionTreeInfo>
+<action>
+<title>
+<Delete>Διαγραφή</Delete>
+<Edit>Επεξεργασία</Edit>
+</title>
+</action>
+<header>
+<usersOrGroups>Χρήστης ή Ομάδα</usersOrGroups>
+<read>Ανάγνωση</read>
+<addNode>Προσθήκη κόμβου</addNode>
+<setProperty>Ορισμός ιδιότητας</setProperty>
+<remove>Κατάργηση</remove>
+<action>Ενέργεια</action>
+</header>
+</UIPermissionTreeInfo>
+
+<!--
+##########################################################################################
+#     org.exoplatform.ecm.webui.component.admin.taxonomy.tree.info.UIPermissionTreeForm  #
+##########################################################################################
+-->
+  <UIPermissionTreeForm>
+    <msg>
+      <have-not-any-permission>Καθορίστε τουλάχιστον ένα δικαίωμα για αυτόν τον κόμβο.</have-not-any-permission>
+    </msg>
+  </UIPermissionTreeForm>
+
+<!--
+################################################################################
+#     org.exoplatform.ecm.webui.component.admin.taxonomy.UIActionForm          #
+################################################################################
+-->
+
+  <UIActionForm>
+    <title>Προσθέστε μια ενέργεια στο δέντρο κατηγοριών</title>
+    <action>
+      <Save>#{word.save}</Save>
+    </action>
+    <msg>
+      <name-not-allowed>Κενό όνομα ή ειδικοί χαρακτήρες δεν επιτρέπονται στο όνομα της ενέργειας.</name-not-allowed>
+      <path-invalid>Η διαδρομή δεν είναι έγκυρη.</path-invalid>
+      <taxonomy-existed>Το δέντρο κατηγοριών υπάρχει ήδη.</taxonomy-existed>
+      <taxonomy-node-existed>Ο κόμβος κατηγορίας υπάρχει ήδη.</taxonomy-node-existed>
+      <no-permission-add>Δεν έχετε το δικαίωμα να προσθέσετε μια ενέργεια.</no-permission-add>
+      <not-created-tree>Το δέντρο κατηγοριών δεν έχει ακόμα δημιουργηθεί.</not-created-tree>
+    </msg>
+  </UIActionForm>
+
+  <!--
+  ################################################################################
+  #             org.exoplatform.ecm.webui.component.admin.UITemplatesManager #
+  ################################################################################
+  -->
+  <UITemplatesList>
+    <header>
+      <name>Όνομα προτύπου</name>
+      <action>Ενέργειες</action>
+    </header>
+  </UITemplatesList>
+  <!--
+  ################################################################################
+  #             org.exoplatform.ecm.webui.component.admin.UINamespaceForm  #
+  ################################################################################
+  -->
+  <NameSpacePopup>
+    <title>
+      <UINamespaceForm>Φόρμα Χώρου Ονομάτων</UINamespaceForm>
+    </title>
+  </NameSpacePopup>
+  <UINamespaceForm>
+    <title>Δημιουργία νέου χώρου ονομάτων</title>
+    <label>
+      <namespace>Πρόθεμα χώρου ονομάτων</namespace>
+      <uri>Ενιαίο Αναγνωριστικό Πόρου (URI)</uri>
+    </label>
+    <action>
+      <Save>#{word.save}</Save>
+      <Cancel>#{word.cancel}</Cancel>
+    </action>
+    <msg>
+      <register-unsuccessfull>Το όνομα χώρου ή το ενιαίο αναγνωριστικό πόρου (URI) υπάρχει ήδη.</register-unsuccessfull>
+      <prefix-null>Παρακαλούμε ορίστε το πρόθεμα για το χώρο ονομάτων.</prefix-null>
+      <uri-null>Παρακαλούμε ορίστε το ενιαίο αναγνωριστικό πόρου (URI) για το χώρο ονομάτων.</uri-null>
+    </msg>
+  </UINamespaceForm>
+  <!--
+  ################################################################################
+  #      org.exoplatform.ecm.webui.component.admin.namespace.UINamespaceList #
+  ################################################################################
+  -->
+  <UINamespaceList>
+    <header>
+      <prefix>Πρόθεμα</prefix>
+      <uri>Ενιαίο Αναγνωριστικό Πόρου (URI) για το χώρο ονομάτων</uri>
+      <action>Ενέργεια</action>
+    </header>
+    <action>
+      <AddNamespace>Εγγραφή</AddNamespace>
+    </action>
+  </UINamespaceList>
+  <NamespacePopup>
+    <title>
+      <UINamespaceForm>Δημιουργία νέου χώρου ονομάτων</UINamespaceForm>
+    </title>
+  </NamespacePopup>
+  <!--
+  ################################################################################
+  #             org.exoplatform.ecm.webui.component.admin.UIMetadataList #
+  ################################################################################
+  -->
+  <UIMetadataList>
+    <label>
+      <false>ψευδές</false>
+      <true>αληθές</true>
+      <True>αληθές</True>
+      <False>ψευδές</False>
+    </label>
+    <title>
+      <view>Προβολή</view>
+      <edit>Επεξεργασία</edit>
+      <delete>Διαγραφή</delete>
+    </title>
+    <header>
+      <icon>Εικονίδιο</icon>
+      <name>Μεταδεδομένα</name>
+      <type>Τύπος</type>
+      <internalUse>Εσωτερική χρήση</internalUse>
+      <action>Ενέργειες</action>
+    </header>
+    <msg>
+      <confirm-delete>Είστε βέβαιοι ότι θέλετε να διαγράψετε αυτά τα μεταδεδομένα;</confirm-delete>
+      <delete-successful>Τα πρότυπα του '{0}' διαγράφηκαν με επιτυχία.</delete-successful>
+      <path-not-found-exception>Αυτά τα μεταδεδομένα έχουν διαγραφεί ή αλλάξει. Παρακαλώ κάντε κλικ στο κουμπί Ανανέωση.</path-not-found-exception>
+    </msg>
+    <action>
+      <Add>Προσθήκη μεταδεδομένων</Add>
+      <Cancel>#{word.cancel}</Cancel>
+    </action>
+  </UIMetadataList>
+  <MetadataPopupAddNew>
+    <title>
+      <UIMetadataForm>Add New Metadata's Template</UIMetadataForm>
+    </title>
+  </MetadataPopupAddNew>
+  <MetadataPopupEdit>
+    <title>
+      <UIMetadataForm>Επεξεργασία προτύπου μεταδεδομένων</UIMetadataForm>
+    </title>
+  </MetadataPopupEdit>
+  <MetataPermissionPopup>
+    <title>
+      <MetadataPermission>Ορισμός δικαιωμάτων</MetadataPermission>
+      <QueriesPermissionBrowse>Προσθήκη δικαιωμάτων</QueriesPermissionBrowse>
+    </title>
+  </MetataPermissionPopup>
+  <!--
+  ################################################################################
+  #    org.exoplatform.ecm.webui.component.admin.metadata.UIMetadataForm #
+  ################################################################################
+  -->
+  <UIMetadataForm>
+    <title>Χαρτογράφηση Μεταδεδομένων</title>
+    <action>
+      <Cancel>#{word.cancel}</Cancel>
+      <Save>Εφαρμογή</Save>
+    </action>
+    <header>
+      <icon>Εικονίδιο</icon>
+      <label>Όνομα κόμβου</label>
+      <input>Ενέργεια</input>
+    </header>
+    <label>
+      <dialogTemplate>Πρότυπο διαλόγου:</dialogTemplate>
+      <viewTemplate>Πρότυπο Προβολής:</viewTemplate>
+      <metadataName>Όνομα μεταδεδομένων:</metadataName>
+      <viewPermission>Δικαιώματα:</viewPermission>
+      <permission>UIMetadataForm</permission>
+      <metadataLabel>Ετικέτα:</metadataLabel>
+    </label>
+    <tab>
+      <label>
+        <metadataTypeTab>Τύπος μεταδεδομένων</metadataTypeTab>
+        <dialogTab>Πρότυπο διαλόγου</dialogTab>
+        <viewTab>Πρότυπο Προβολής</viewTab>
+      </label>
+    </tab>
+  </UIMetadataForm>
+  <!--
+  ################################################################################
+  #    org.exoplatform.ecm.webui.component.admin.metadata.UIMetadataView #
+  ################################################################################
+  -->
+  <UIMetadataView>
+    <header>
+      <name>Όνομα στοιχείου</name>
+      <type>Τύπος</type>
+      <description>Περιγραφή</description>
+      <isMixin>Μεικτός (Mixin) τύπος</isMixin>
+      <orderable>Οι εξαρτημένοι κόμβοι μπορούν να ταξινομηθούν</orderable>
+    </header>
+    <info>
+      <description>Περιγραφή</description>
+    </info>
+    <tab>
+      <element>Στοιχεία</element>
+      <metadataView>Πληροφορίες μεταδεδομένων</metadataView>
+    </tab>
+    <action>
+      <Cancel>#{word.close}</Cancel>
+      <Back>#{word.back}</Back>
+    </action>
+  </UIMetadataView>
+  <ViewMetadataPopup>
+    <title>
+      <UIMetadataView>Πληροφορίες μεταδεδομένων</UIMetadataView>
+    </title>
+  </ViewMetadataPopup>
+  <!--
+  ################################################################################
+  #             org.exoplatform.ecm.webui.component.admin.UIDriveManager #
+  ################################################################################
+  -->
+  <UIDriveList>
+    <header>
+      <icon>Εικονίδιο</icon>
+      <name>Όνομα</name>
+      <workspace>Χώρος Εργασίας</workspace>
+      <homePath>Αρχική διαδρομή</homePath>
+      <permissions>Δικαιώματα</permissions>
+      <views>Προβολή</views>
+      <action>Ενέργεια</action>
+    </header>
+    <tooltip>
+      <Delete>Διαγραφή</Delete>
+      <EditInfo>Επεξεργασία</EditInfo>
+    </tooltip>
+    <msg>
+      <confirm-delete>Είστε βέβαιοι ότι θέλετε να διαγράψετε αυτήν τη μονάδα δίσκου;</confirm-delete>
+    </msg>
+    <action>
+      <AddDrive>Προσθήκη μονάδας δίσκου</AddDrive>
+    </action>
+    <label>
+      <permission>{0} στο {1}</permission>
+    </label>
+  </UIDriveList>
+  <UIDriveForm>
+    <action>
+      <Cancel>#{word.cancel}</Cancel>
+      <Save>#{word.save}</Save>
+      <Back>#{word.back}</Back>
+      <Refresh>#{word.refresh}</Refresh>
+    </action>
+    <msg>
+      <drive-exists>Η μονάδα δίσκου υπάρχει ήδη.</drive-exists>
+      <workspace-path-invalid>Η διαδρομή του χώρου εργασίας δεν είναι έγκυρη.</workspace-path-invalid>
+      <drive-views-invalid>Παρακαλώ επιλέξτε μια προβολή.</drive-views-invalid>
+      <icon-not-found>Το εικονίδιο δεν βρέθηκε.</icon-not-found>
+      <permission-null>Πρέπει να ορίσετε τα δικαιώματα για αυτό το δίσκο.</permission-null>
+      <allowCreateFolders>Πρέπει να επιλέξετε τον τύπο φακέλου.</allowCreateFolders>
+      <name-null>Παρακαλούμε εισάγετε το όνομα της μονάδας δίσκου.</name-null>
+      <fileName-invalid>Το όνομα της μονάδας δίσκου έχει κάποιους μη έγκυρους χαρακτήρες.</fileName-invalid>
+    </msg>
+    <tab>
+      <label>
+        <DriveInputSet>Μονάδα δίσκου</DriveInputSet>
+        <ViewsInputSet>Εφαρμογή Προβολών</ViewsInputSet>
+        <PermissionInputSet>Ορισμός δικαιωμάτων</PermissionInputSet>
+      </label>
+    </tab>
+    <label>
+      <name>Όνομα:</name>
+      <workspace>Χώρος Εργασίας:</workspace>
+      <homePath>Αρχική διαδρομή:</homePath>
+      <icon>Εικονίδιο χώρου εργασίας:</icon>
+      <viewPreferences>Εμφάνιση αναφερόμενων εγγράφων:</viewPreferences>
+      <viewNonDocument>Εμφάνιση κόμβων που δεν αφορούν έγγραφα:</viewNonDocument>
+      <viewSideBar>Εμφάνιση πλευρικής μπάρας:</viewSideBar>
+      <permissions>Δικαιώματα:</permissions>
+      <showHiddenNode>Εμφάνιση κρυφών κόμβων:</showHiddenNode>
+      <allowCreateFolders>Επιτρέπεται η δημιουργία φακέλων:</allowCreateFolders>
+      <Admin>Διαχειριστής:</Admin>
+      <Categories>Κατηγορίες:</Categories>
+      <Icons>Εικονίδια:</Icons>
+      <List>Λίστα:</List>
+      <Web>Ιστός:</Web>
+    </label>
+  </UIDriveForm>
+  <AddDriveManagerPopup>
+    <title>
+      <UIDriveForm>Προσθήκη μονάδας δίσκου</UIDriveForm>
+    </title>
+  </AddDriveManagerPopup>
+  <EditDriveManagerPopup>
+    <title>
+      <UIDriveForm>Επεξεργασία μονάδας δίσκου</UIDriveForm>
+    </title>
+  </EditDriveManagerPopup>
+  <UITreeList>
+    <info>
+      <child-not-found>Ο θυγατρικός κόμβος δεν βρέθηκε.</child-not-found>
+    </info>
+    <header>
+      <name>Όνομα</name>
+      <action>Ενέργεια</action>
+    </header>
+  </UITreeList>
+  
+  <UIRepositoryList>
+    <titlebar>
+      <label>Διαχείριση κυρίων λειτουργιών της Εταιρικής Διαχείρισης Περιεχομένου (ECM)</label>
+    </titlebar>
+  </UIRepositoryList>
+  
+  <!--
+  ################################################################################
+  #    org.exoplatform.ecm.webui.component.admin.nodetype.UINodeTypeManager #
+  ################################################################################
+  -->
+  <UINodeTypeManager>
+    <header>
+      <icon>Εικονίδιο</icon>
+      <label>Όνομα κόμβου</label>
+      <input>Ενέργεια</input>
+    </header>
+    <action>
+      <Save>#{word.save}</Save>
+    </action>
+  </UINodeTypeManager>
+  <!--
+  ################################################################################
+  #    org.exoplatform.ecm.webui.component.admin.nodetype.UINodeTypeList #
+  ################################################################################
+  -->
+  <UINodeTypeList>
+    <label>
+      <true>Αληθές</true>
+      <false>Ψευδές</false>
+    </label>
+    <header>
+      <icon>Εικονίδιο</icon>
+      <nodeType>Τύπος κόμβου</nodeType>
+      <mixinType>Μεικτός τύπος</mixinType>
+      <orderable>Εξαρτημένοι κόμβοι που μπορούν να ταξινομηθούν</orderable>
+      <action>Ενέργεια</action>
+    </header>
+    <action>
+      <Export>Εξαγωγή</Export>
+      <Import>Εισαγωγή</Import>
+      <Add>Προσθήκη</Add>
+    </action>
+    <tooltip>
+      <View>Προβολή</View>
+      <Edit>Επεξεργασία</Edit>
+      <Delete>Διαγραφή</Delete>
+    </tooltip>
+    <msg>
+      <confirm-delete>Είστε βέβαιοι ότι θέλετε να διαγράψετε αυτόν τον τύπο κόμβου;</confirm-delete>
+    </msg>
+  </UINodeTypeList>
+  <!--
+  ################################################################################
+  #    org.exoplatform.ecm.webui.component.admin.nodetype.UINodeTypeOptionList #
+  ################################################################################
+  -->
+  <UINodeTypeOptionList>
+    <action>
+      <Save>#{word.save}</Save>
+      <Add>Προσθήκη</Add>
+    </action>
+    <header>
+      <icon>Εικονίδιο</icon>
+      <label>Όνομα κόμβου</label>
+      <input>Ενέργεια</input>
+    </header>
+  </UINodeTypeOptionList>
+  <!--
+  ################################################################################
+  #    org.exoplatform.ecm.webui.component.admin.nodetype.UINodeTypeForm #
+  ################################################################################
+  -->
+  <UINodeTypeForm>
+    <tab>
+      <label>
+        <nodeTypeDefinition>Τύπος κόμβου</nodeTypeDefinition>
+        <propertyDefinition>Ιδιότητα</propertyDefinition>
+        <childNodeDefinition>Θυγατρικός κόμβος</childNodeDefinition>
+        <superTypeTab>Σούπερ Τύποι</superTypeTab>
+        <DefaultTypeTab>Προεπιλογή πρωτεύοντα τύπου</DefaultTypeTab>
+        <RequiredTypeTab>Απαιτούμενος πρωτεύον τύπος</RequiredTypeTab>
+        <Contraints>Περιορισμοί</Contraints>
+      </label>
+    </tab>
+    <label>
+      <propertiesDefinitions>Ορισμοί ιδιοτήτων</propertiesDefinitions>
+      <childDefinitions>Ορισμοί εξαρτημένων κόμβων</childDefinitions>
+      <namespace>Χώρος Ονομάτων</namespace>
+      <propertyNamespace>Χώρος Ονομάτων</propertyNamespace>
+      <nodeTypeName>Όνομα τύπου κόμβου</nodeTypeName>
+      <mixinType>Μεικτός (Mixin) τύπος</mixinType>
+      <hasOrderableChildNodes>Εξαρτημένοι κόμβοι που μπορούν να ταξινομηθούν</hasOrderableChildNodes>
+      <primaryItemName>Όνομα πρωταρχικού στοιχείου</primaryItemName>
+      <superTypes>Σούπερ Τύποι</superTypes>
+      <propertyname>Όνομα ορισμού</propertyname>
+      <requiredType>Απαιτούμενος τύπος</requiredType>
+      <multiple>Πολλαπλό</multiple>
+      <mandatory>Υποχρεωτικό</mandatory>
+      <autoCreated>Δημιουργείται αυτόματα</autoCreated>
+      <parentversion>Κληρονομική έκδοση</parentversion>
+      <protected>Προστατευμένο</protected>
+      <constraints>Τιμές</constraints>
+      <UIFormTableInputSet>UIFormTableInputSet</UIFormTableInputSet>
+      <sameNameSiblings>Κοινό όνομα στους κόμβους του ίδιου επιπέδου</sameNameSiblings>
+      <childNamespace>Χώρος ονομάτων</childNamespace>
+      <childMandatory>Υποχρεωτικό</childMandatory>
+      <childAutocreated>Δημιουργείται αυτόματα</childAutocreated>
+      <childParentversion>Κληρονομική έκδοση</childParentversion>
+      <childProtected>Προστατευμένο</childProtected>
+      <childNodename>Όνομα ορισμού</childNodename>
+      <requiredPrimaryType>Απαιτούμενος πρωτεύον τύπος</requiredPrimaryType>
+      <defaultPrimaryType>Προεπιλεγμένος πρωτεύον τύπος</defaultPrimaryType>
+      <valueconstraints>Περιορισμοί τιμής</valueconstraints>
+    </label>
+    <action>
+      <Cancel>#{word.cancel}</Cancel>
+      <Save>#{word.save}</Save>
+      <SaveDraft>Αποθήκευση ως πρoσχέδιο</SaveDraft>
+      <AddProperty>Προσθήκη ιδιότητας</AddProperty>
+      <AddChild>Προσθήκη απότοκου</AddChild>
+      <AddConstraints>Προσθήκη περιορισμών</AddConstraints>
+      <Back>#{word.back}</Back>
+      <AddType>Προσθήκη τύπου</AddType>
+      <AddValue>Προσθήκη</AddValue>
+      <CancelConstraints>#{word.cancel}</CancelConstraints>
+      <CancelTab>#{word.cancel}</CancelTab>
+      <UpdateChild>#{word.update}</UpdateChild>
+      <CancelChild>#{word.cancel}</CancelChild>
+      <UpdateProperty>#{word.update}</UpdateProperty>
+      <CancelProperty>#{word.cancel}</CancelProperty>
+      <Close>#{word.close}</Close>
+    </action>
+    <msg>
+      <register-successfully>Ο τύπος κόμβου '{0}' καταχωρήθηκε με επιτυχία.</register-successfully>
+      <supertype-is-madatory>Ο υπερκείμενος τύπος είναι υποχρεωτικός όταν εγγράφετε ένα νέο τύπο κόμβου. Παρακαλώ επιλέξτε τουλάχιστον έναν υπερκείμενο τύπο.</supertype-is-madatory>
+      <register-failed>Η εγγραφή του τύπου κόμβου ήταν ανεπιτυχής. Είτε γιατί υπάρχει ήδη είτε γιατί ο υπερκείμενος τύπος δεν είναι έγκυρος.</register-failed>
+      <nodeType-name>Απαιτείται το όνομα του τύπου κόμβου.</nodeType-name>
+      <fileName-invalid>Το όνομα αρχείου έχει κάποιους μη έγκυρους χαρακτήρες.</fileName-invalid>
+      <node-type-exists>Ο τύπος κόμβου '{0}' υπάρχει ήδη.</node-type-exists>
+      <node-type-name>Το όνομα του τύπου κόμβου δεν είναι έγκυρο.</node-type-name>
+      <values-error>Παρακαλώ επιλέξτε μόνο έναν τύπο κόμβου για τον πρωτεύοντα προεπιλεγμένο τύπο.</values-error>
+      <confirm-delete-child>Είστε σίγουροι ότι θέλετε να διαγράψετε αυτόν τον θυγατρικό κόμβο;</confirm-delete-child>
+      <confirm-delete-property>Είστε βέβαιοι ότι θέλετε να διαγράψετε αυτήν την ιδιότητα;</confirm-delete-property>
+    </msg>
+  </UINodeTypeForm>
+  <UIPropertyDefinitionForm>
+    <tab>
+      <label>
+        <constraints>Περιορισμοί</constraints>
+        <UIFormMultiValueInputSet>Περιορισμοί</UIFormMultiValueInputSet>
+      </label>
+    </tab>
+    <msg>
+      <property-name>Το όνομα του ορισμού ιδιότητας δεν είναι έγκυρο.</property-name>
+      <not-supported-value-constraints>Αυτός ο απαιτούμενος τύπος δεν υποστηρίζει περιορισμούς τιμών.</not-supported-value-constraints>
+    </msg>
+  </UIPropertyDefinitionForm>
+  <UIChildNodeDefinitionForm>
+    <msg>
+      <child-name>Το όνομα του θυγατρικού κόμβου είναι απαιτούμενο.</child-name>
+      <child-invalid>Το όνομα του θυγατρικού κόμβου περιέχει κάποιους μη έγκυρους χαρακτήρες.</child-invalid>
+      <default-node-type-not-found>Ο προεπιλεγμένος τύπος κόμβου δεν βρέθηκε.</default-node-type-not-found>
+      <requiredPrimaryType>Ο απαιτούμενος πρωτεύον τύπος είναι απαραίτητος.</requiredPrimaryType>
+      <defaultPrimaryType>Ο προεπιλεγμένος πρωτεύον τύπος είναι απαραίτητος.</defaultPrimaryType>
+    </msg>
+  </UIChildNodeDefinitionForm>
+  <defaultPrimaryTypePopup>
+    <title>
+      <FormdefaultPrimaryTypePopup>Επιλέξτε προεπιλεγμένο πρωτεύων τύπο</FormdefaultPrimaryTypePopup>
+    </title>
+  </defaultPrimaryTypePopup>
+  <requiredPrimaryTypePopup>
+    <title>
+      <FormrequiredPrimaryTypePopup>Επιλέξτε τον απαιτούμενο πρωτεύων τύπο</FormrequiredPrimaryTypePopup>
+    </title>
+  </requiredPrimaryTypePopup>
+  <superTypesPopup>
+    <title>
+      <FormsuperTypesPopup>Επιλέξτε υπέρ τύπους</FormsuperTypesPopup>
+    </title>
+  </superTypesPopup>
+  <NodeTypePopup>
+    <title>
+      <UINodeTypeForm>Προσθήκη/επεξεργασία ορισμών τύπου κόμβου</UINodeTypeForm>
+    </title>
+  </NodeTypePopup>
+  <ViewNodeTypePopup>
+    <title>
+      <UINodeTypeForm>Προβολή πληροφοριών τύπου κόμβου</UINodeTypeForm>
+    </title>
+  </ViewNodeTypePopup>
+  <!--
+  ################################################################################
+  #    org.exoplatform.ecm.webui.component.admin.nodetype.UINodeTypeExport   #
+  ################################################################################
+  -->
+  <UINodeTypeExport>
+    <header>
+      <icon>Εικονίδιο</icon>
+      <label>Όνομα κόμβου</label>
+      <input>Ενέργεια</input>
+    </header>
+    <action>
+      <Cancel>#{word.cancel}</Cancel>
+      <Export>Εξαγωγή</Export>
+      <UncheckAll>Αποεπιλογή όλων</UncheckAll>
+      <CheckAll>Επιλογή όλων</CheckAll>
+    </action>
+    <title>Εξαγωγή τύπων κόμβoυ</title>
+    <msg>
+      <item-null>Παρακαλώ επιλέξτε τουλάχιστον έναν κόμβο που θέλετε να εξάγετε.</item-null>
+    </msg>
+  </UINodeTypeExport>
+  <NodeTypeExportPopup>
+    <title>
+      <UINodeTypeExport>Εξαγωγή τύπων κόμβoυ</UINodeTypeExport>
+    </title>
+  </NodeTypeExportPopup>
+  <!--
+  ################################################################################
+  #    org.exoplatform.ecm.webui.component.admin.nodetype.UINodeTypeOptionList   #
+  ################################################################################
+  -->
+  <!--
+  ################################################################################
+  #    org.exoplatform.ecm.webui.component.admin.nodetype.UINodeTypeUpload   #
+  ################################################################################
+  -->
+  <UINodeTypeUpload>
+    <label>
+      <upload>Όνομα αρχείου</upload>
+    </label>
+    <action>
+      <Cancel>#{word.cancel}</Cancel>
+      <Upload>Ανέβασμα αρχείων</Upload>
+    </action>
+    <title>Εισαγωγή τύπου κόμβου από αρχείο XML</title>
+    <msg>
+      <filename-error>Επιλέξτε ένα αρχείο τύπου κόμβου για να εισαχθεί.</filename-error>
+      <data-file-error>Μπορούν να εισαχθούν μόνο αρχεία .xml ή .zip.</data-file-error>
+      <data-invalid>Τα δεδομένα δεν είναι έγκυρα. Παρακαλώ ελέγξτε τον τύπο του αρχείου και προσπαθήστε ξανά.</data-invalid>
+      <nodetype-exist>Ο τύπος κόμβου '{0}' υπάρχει ήδη.</nodetype-exist>
+      <namespace-invalid>Ο χώρος ονομάτων '{0}' δεν είναι έγκυρος.</namespace-invalid>
+    </msg>
+  </UINodeTypeUpload>
+  <!--
+  ################################################################################
+  #    org.exoplatform.ecm.webui.component.admin.nodetype.UINodeTypeImport   #
+  ################################################################################
+  -->
+  <UINodeTypeImport>
+    <action>
+      <Cancel>#{word.cancel}</Cancel>
+      <Import>Εισαγωγή</Import>
+      <Upload>Ανεβάστε ξανά</Upload>
+    </action>
+    <header>
+      <icon>Εικονίδιο</icon>
+      <label>Όνομα κόμβου</label>
+      <input>Ενέργεια</input>
+    </header>
+    <title>Επιλέξτε τύπο κόμβου για εισαγωγή</title>
+    <msg>
+      <no-nodetype-registered>Δεν υπάρχουν τύποι κόμβου καταχωρημένοι.</no-nodetype-registered>
+      <nodetype-registered>Επιτυχής εγγραφή.</nodetype-registered>
+    </msg>
+  </UINodeTypeImport>
+  <NodeTypeImportPopup>
+    <title>
+      <UINodeTypeImportPopup>Εισαγωγή τύπου κόμβου από αρχείο XML</UINodeTypeImportPopup>
+    </title>
+  </NodeTypeImportPopup>
+  <!--
+  ################################################################################
+  #             org.exoplatform.ecm.webui.component.admin.UIDriveForm #
+  ################################################################################
+  -->
+  <DriveInputSet>
+    <label>
+      <both>Both</both>
+      <folderOnly>Folder</folderOnly>
+      <unstructuredFolder>Unstructured Folder</unstructuredFolder>
+    </label>
+    <title>
+      <AddPermission>Προσθήκη δικαιώματος</AddPermission>
+      <RemovePermission>Remove Permission</RemovePermission>
+      <AddIcon>Προσθέστε εικονίδιο</AddIcon>
+      <AddPath>Προσθήκη διαδρομής</AddPath>
+    </title>
+  </DriveInputSet>
+  <!--
+  ###################################################################################
+  #             org.exoplatform.ecm.webui.component.admin.action.UIActionTypeList#
+  ###################################################################################
+  -->
+  <UIActionTypeList>
+    <header>
+      <name>Δέσμη ενεργειών</name>
+      <label>Όνομα</label>
+      <action>Ενέργειες</action>
+    </header>
+    <title>
+      <Edit>Επεξεργασία</Edit>
+      <Delete>Διαγραφή</Delete>
+    </title>
+    <action>
+      <AddAction>Προσθήκη τύπου Ενέργειας</AddAction>
+    </action>
+<msg>
+ <confirm-delete>Είστε βέβαιοι ότι θέλετε να διαγράψετε αυτόν τον τύπο ενέργειας;</confirm-delete>
+<cannot-delete>Δεν μπορείτε να καταργήσετε αυτό το είδος ενέργειας, επειδή το σύστημα εξακολουθεί να τον χρησιμοποιεί.</cannot-delete>
+</msg>
+  </UIActionTypeList>
+  <!--
+  ######################################################################################
+  #             org.exoplatform.ecm.webui.component.admin.action.UIActionTypeForm #
+  ######################################################################################
+  -->
+  <ActionPopup>
+    <title>
+      <UIActionTypeForm>Προσθήκη τύπου Ενέργειας</UIActionTypeForm>
+    </title>
+  </ActionPopup>
+  <UIActionTypeForm>
+    <title>Προσθήκη τύπου Ενέργειας</title>
+    <label>
+      <actionType>Επέκταση τύπου ενέργειας:</actionType>
+      <name>Όνομα:</name>
+      <isMove>is Action Move:</isMove>
+      <variables>Μεταβλητές:</variables>
+      <exo_businessProcessAction>Επιχειρηματικές διαδικασίες:</exo_businessProcessAction>
+      <exo_scriptAction>Δέσμες ενεργειών Groovy:</exo_scriptAction>
+      <exo_ruleAction>Καθορισμένοι κανόνες:</exo_ruleAction>
+      <script>Δέσμη ενεργειών:</script>
+    </label>
+    <action>
+      <Save>#{word.save}</Save>
+      <Cancel>#{word.cancel}</Cancel>
+    </action>
+    <msg>
+      <action-type-added>Ο τύπος '{0}' ενέργειας προστέθηκε με επιτυχία.</action-type-added>
+      <action-type-create-error>Παρουσιάστηκε σφάλμα κατά τη δημιουργία του τύπου ενέργειας.</action-type-create-error>
+      <action-name-invalid>'{0}' δεν είναι έγκυρο. Το όνομα πρέπει να αρχίζει με 'exo:'.</action-name-invalid>
+      <action-exist>Αυτός ο τύπος ενέργειας υπάρχει ήδη στο σύστημα.</action-exist>
+      <fileName-invalid>Το όνομα της ενέργειας περιέχει κάποιους μη έγκυρους χαρακτήρες.</fileName-invalid>
+    </msg>
+  </UIActionTypeForm>
+  <!--
+  ######################################################################################
+  #             org.exoplatform.ecm.webui.component.admin.view.UIViewManager     #
+  ######################################################################################
+  -->
+  <UITabPane>
+    <title>
+      <UIViewContainer>Προβολές</UIViewContainer>
+      <ECMTemplate>Πρότυπα Εξερευνητή</ECMTemplate>
+      <UIScriptForm>Σενάρια</UIScriptForm>
+      <UIDialogTab>Διάλογος</UIDialogTab>
+      <UIViewTab>Προβολή</UIViewTab>
+      <UITemplateEditForm>Πρότυπο</UITemplateEditForm>
+      <UITemplateForm>Πρότυπο</UITemplateForm>
+      <UITemplateContainer>Έγγραφα</UITemplateContainer>
+      <UIActionsTemplateContainer>Ενέργειες</UIActionsTemplateContainer>
+      <UIOthersTemplateContainer>Υπόλοιποι</UIOthersTemplateContainer>
+  <UIActionScriptContainer>Ενέργεια</UIActionScriptContainer>
+  <UIWidgetScriptContainer>Γραφικά στοιχεία</UIWidgetScriptContainer>
+<UIInterceptorScriptContainer>Αναχαιτιστικά</UIInterceptorScriptContainer>
+
+<nodeTypeDefinition>Τύπος κόμβου</nodeTypeDefinition>
+      <propertyDefinition>Ιδιότητα</propertyDefinition>
+      <childNodeDefinition>Θυγατρικός κόμβος</childNodeDefinition>
+      <SuperTypeTab>Σούπερ Τύποι</SuperTypeTab>
+      <DefaultTypeTab>Προεπιλογή πρωτεύοντα τύπου</DefaultTypeTab>
+      <RequiredTypeTab>Απαιτούμενος πρωτεύον τύπος</RequiredTypeTab>
+      <Contraints>Περιορισμοί</Contraints>
+    </title>
+  </UITabPane>
+  <!--
+  ######################################################################################
+  #             org.exoplatform.ecm.webui.component.admin.view.UIViewList    #
+  ######################################################################################
+  -->
+  <UIViewList>
+   <title>
+     <View>Προβολή</View>
+     <EditInfo>Επεξεργασία</EditInfo>
+     <Delete>Διαγραφή</Delete>
+   </title>
+    <header>
+      <name>Όνομα</name>
+      <permissions>Δικαιώματα</permissions>
+      <tabList>Καρτέλα Ενεργειών</tabList>
+      <baseVersion>Βασική έκδοση</baseVersion>
+      <action>Ενέργεια</action>
+    </header>
+    <action>
+      <AddView>Προσθήκη προβολής</AddView>
+    </action>
+    <msg>
+      <access-denied>Δεν επιτρέπεται η πρόσβαση. Δεν έχετε άδεια να χρησιμοποιήσετε αυτή τη λειτουργία.</access-denied>
+      <template-in-use>Δεν μπορεί να διαγραφεί το {0}. Είναι αυτή τη στιγμή σε χρήση.</template-in-use>
+      <confirm-delete>Είστε βέβαιοι ότι θέλετε να διαγράψετε αυτήν τη προβολή;</confirm-delete>
+    </msg>
+  </UIViewList>
+  <ViewPopup>
+    <title>
+      <UIViewFormTabPane>Προβολή</UIViewFormTabPane>
+    </title>
+  </ViewPopup>
+  <AddPopup>
+    <title>
+      <UIViewFormTabPane>Προσθήκη προβολής</UIViewFormTabPane>
+      <AddPopup>Προσθήκη Προτύπου</AddPopup>
+    </title>
+  </AddPopup>
+  <EditPopup>
+    <title>
+      <UIViewFormTabPane>Επεξεργασία προβολής</UIViewFormTabPane>
+    </title>
+  </EditPopup>
+
+<UITabList>
+                  <title>
+                    <Edit>Επεξεργασία</Edit>
+                    <Delete>Διαγραφή</Delete>
+                  </title>       
+ <header>
+  <tabName>Καρτέλα</tabName>
+  <localizeButtons>Περιγραφή</localizeButtons>
+<action>Ενέργειες</action>
+</header>
+<action>
+ <AddTab>Προσθήκη</AddTab>
+</action>
+<msg>
+ <confirm-delete>Είστε βέβαιοι ότι θέλετε να διαγράψετε αυτή την καρτέλα;</confirm-delete>
+</msg>
+<grid>
+ <msg>
+  <empty>Δεν υπάρχει καμία καρτέλα σε αυτή την προβολή</empty>
+ </msg>
+</grid>
+</UITabList>
+
+<UIViewPermissionList>
+ <title>Επιλέξτε ιδιοκτήτη με δικαιώματα σε αυτήν την προβολή:</title>
+<label>
+ <permission>{0} στο {1}</permission>
+</label>
+<msg>
+ <confirm-delete>Είστε βέβαιοι ότι θέλετε να διαγράψετε αυτό το δικαίωμα;</confirm-delete>
+  <permission-cannot-empty>Το δικαίωμα προβολής είναι απαραίτητο και δεν μπορεί να είναι κενό.</permission-cannot-empty>
+</msg>
+</UIViewPermissionList>
+
+<UIViewPermissionList>
+                         <title>
+                           <Delete>Διαγραφή</Delete>
+                         </title>
+ <header>
+<friendlyPermission>Δικαιώματα</friendlyPermission>
+     <action>Ενέργεια</action>
+ </header>
+<action>
+ <title>
+  <Delete>Διαγραφή</Delete>
+ </title>
+</action>
+<grid>
+ <msg>
+  <empty>Δεν υπάρχουν δικαιώματα σε αυτή την προβολή</empty>
+ </msg>
+</grid>
+</UIViewPermissionList>
+
+<UIViewPermissionForm>
+<action>
+ <Add>Προσθήκη</Add>
+</action>
+<label>
+ <userOrGroup>Χρήστης ή Ομάδα</userOrGroup>
+</label>
+<msg>
+ <permission-exist>Το δικαίωμα '{0}' υπάρχει ήδη στη λίστα.</permission-exist>
+</msg>
+</UIViewPermissionForm>
+
+  <!--
+  ######################################################################################
+  #             org.exoplatform.ecm.webui.component.admin.view.UIViewFormTabPane   #
+  ######################################################################################
+  -->
+  <UIViewForm>
+    <title>
+      <AddPermission>Προσθήκη δικαιώματος</AddPermission>
+      <RemovePermission>Αφαίρεση δικαιώματος</RemovePermission>
+    </title>
+    <msg>
+      <view-name-invalid>Απαιτείται το όνομα της προβολής.</view-name-invalid>
+      <fileName-invalid>Το όνομα προβολής περιέχει κάποιους μη έγκυρους χαρακτήρες.</fileName-invalid>
+      <permission-not-empty>Παρακαλώ επιλέξτε ένα δικαίωμα για την προβολή.</permission-not-empty>      
+      <mustbe-add-tab>Παρακαλούμε προσθέστε μια καρτέλα.</mustbe-add-tab>
+<mustbe-add-permission>Παρακαλώ επιλέξτε δικαιώματα για αυτήν την προβολή</mustbe-add-permission>
+      <view-exist>Το όνομα της προβολής υπάρχει ήδη.</view-exist>
+    </msg>
+    <label>
+      <viewName>Όνομα</viewName>
+      <template>Πρότυπο</template>
+<version>Επαναφορά Έκδοσης</version>
+      <enableVersion>Ενεργοποίηση έκδοσης</enableVersion>
+      <hideExplorerPanel>Απόκρυψη πίνακα περιηγητή στην πλευρική μπάρα</hideExplorerPanel>
+    </label>
+  </UIViewForm>
+  <UITabForm>
+    <msg>
+      <button-select-error>Παρακαλώ επιλέξτε τουλάχιστον μία λειτουργία από τη λίστα.</button-select-error>
+      <tab-name-error>Απαιτείται το όνομα της καρτέλας.</tab-name-error>
+      <fileName-invalid>Το όνομα της καρτέλας περιέχει κάποιους μη έγκυρους χαρακτήρες.</fileName-invalid>
+    </msg>
+    <label>
+      <version>Επαναφορά Έκδοσης</version>
+      <viewName>Όνομα</viewName>
+      <tabName>Όνομα καρτέλας</tabName>
+      <permission>Δικαιώματα</permission>
+      <tabs>Καρτέλες</tabs>
+      <template>Πρότυπα</template>
+      <enableVersion>Ενεργοποίηση έκδοσης</enableVersion>
+      <addFolder>Προσθήκη φακέλου</addFolder>
+      <addDocument>Προσθήκη εγγράφου</addDocument>
+      <editDocument>Επεξεργασία εγγράφου</editDocument>
+      <upload>Ανέβασμα αρχείων</upload>
+      <paste>Επικόλληση</paste>
+      <search>Αναζήτηση</search>
+      <viewReferences>Προβολή παραπομπών</viewReferences>
+      <viewNodeType>Προβολή τύπου κόμβου</viewNodeType>
+      <viewPermissions>Προβολή δικαιωμάτων</viewPermissions>
+      <viewProperties>Προβολή ιδιοτήτων</viewProperties>
+      <manageVersions>Διαχείριση εκδόσεων</manageVersions>
+      <manageAuditing>Διαχείριση ελέγχου</manageAuditing>
+      <managePublications>Διαχείριση δημοσίευσης</managePublications>
+      <manageCategories>Διαχείριση κατηγοριών</manageCategories>
+      <manageRelations>Διαχείριση σχέσεων</manageRelations>
+      <manageActions>Διαχείριση ενεργειών</manageActions>
+      <exportNode>Εξαγωγή κόμβου</exportNode>
+      <importNode>Εισαγωγή κόμβου</importNode>
+      <viewRelations>Προβολή σχέσεων</viewRelations>
+      <showJCRStructure>Εμφάνιση δομής αποθετηρίου περιεχομένου (JCR)</showJCRStructure>
+      <watchDocument>Παρακολούθηση εγγράφου</watchDocument>
+      <taggingDocument>Ετικέτες εγγράφου</taggingDocument>
+      <viewMetadatas>Προβολή μεταδεδομένων</viewMetadatas>
+      <overloadThumbnail>Υπερφόρτωση μικρογραφίας</overloadThumbnail>
+      <manageHidden>Απόκρυψη/Εμφάνιση περιεχομένου</manageHidden>
+      <comment>Σχόλιο</comment>
+      <vote>Ψηφοφορία</vote>  
+      <addCategory>Προσθήκη κατηγορίας</addCategory>
+      <addLocalizationLink>Προσθέστε μετάφραση</addLocalizationLink>
+      <publicationRequestApproval>Αίτηση έγκρισης</publicationRequestApproval>
+      <publicationApproveContent>Έγκριση Περιεχομένου</publicationApproveContent>
+      <publicationPublish>Δημοσίευση</publicationPublish>
+<contentNavigation>Πλοήγηση Περιεχομένου</contentNavigation>
+<addSymLink>Προσθήκη συντόμευσης</addSymLink>
+    </label>
+    <action>
+      <Save>#{word.save}</Save>      
+      <Cancel>#{word.cancel}</Cancel>      
+    </action>
+  </UITabForm>
+  <UIPermissionForm>
+    <label>
+      <permission>UIPermissionForm</permission>
+    </label>
+  </UIPermissionForm>
+  <UIViewFormTabPane>
+    <tab>
+      <label>
+        <UITabContainer>Ενέργεια</UITabContainer>
+        <UIViewForm>Προβολή</UIViewForm>
+        <UIViewPermissionContainer>Δικαιώματα</UIViewPermissionContainer>    
+      </label>
+    </tab>
+    <action>
+      <Save>#{word.save}</Save>
+      <Reset>Αρχικοποίηση</Reset>
+      <Cancel>#{word.cancel}</Cancel>
+      <Close>#{word.close}</Close>
+      <Restore>Επαναφορά</Restore>
+    </action>
+  </UIViewFormTabPane>
+  <PopupViewPermission>
+    <title>
+      <UIPermissionSelector>Επιλογή δικαιώματος</UIPermissionSelector>
+    </title>
+  </PopupViewPermission>
+
+<TabForm_Popup>
+ <title>
+  <UITabForm>Προσθήκη/επεξεργασία καρτέλας</UITabForm>
+ </title>
+</TabForm_Popup>
+
+<tab_permission>
+ <title>
+  <SelectUser>Επιλογή χρήστη</SelectUser>
+<SelectMember>Επιλέξτε μέλος</SelectMember>
+<AddAny>Όλοι</AddAny>
+ </title>
+</tab_permission>
+  <!--
+  ######################################################################################
+  #             org.exoplatform.ecm.webui.component.admin.view.UIECMTemplateList   #
+  ######################################################################################
+  -->
+  <UIECMTemplateList>
+    <title>
+      <View>Προβολή</View>
+      <EditInfo>Επεξεργασία</EditInfo>
+      <Delete>Διαγραφή</Delete>
+    </title>
+    <header>
+      <name>Όνομα</name>
+      <path>Τιμή</path>
+      <baseVersion>Βασική έκδοση</baseVersion>
+      <action>Ενέργεια</action>
+    </header>
+    <action>
+      <Add>Προσθήκη</Add>
+    </action>
+    <msg>
+      <template-in-use>Δεν μπορεί να διαγραφεί το {0}. Είναι αυτή τη στιγμή σε χρήση.</template-in-use>
+      <confirm-delete>Είστε βέβαιοι ότι θέλετε να διαγράψετε αυτό το πρότυπο;</confirm-delete>
+      <access-denied>Δεν επιτρέπεται η πρόσβαση. Δεν έχετε άδεια να χρησιμοποιήσετε αυτή τη λειτουργία.</access-denied>
+      <delete-permission-denied>Δεν έχετε δικαίωμα να διαγράψετε το πρότυπο '{0}'.</delete-permission-denied>
+    </msg>
+  </UIECMTemplateList>
+  <!--
+  ################################################################################
+  #             org.exoplatform.ecm.webui.component.admin.view.UITemplateForm #
+  ################################################################################
+  -->
+  <UITemplateForm>
+    <title>
+      <AddPermission>Add Permission</AddPermission>
+    </title>
+    <action>
+      <Save>#{word.save}</Save>
+      <Cancel>#{word.cancel}</Cancel>
+      <Reset>Αρχικοποίηση</Reset>
+      <Restore>Επαναφορά</Restore>
+      <Refresh>#{word.refresh}</Refresh>
+    </action>
+    <msg>
+      <version-restored>Η έκδοση {0} αποκαταστάθηκε επιτυχώς.</version-restored>
+      <role-require>Παρακαλώ επιλέξτε ένα δικαίωμα.</role-require>
+      <template-name-exist>Το όνομα προτύπου '{0}' υπάρχει ήδη.</template-name-exist>
+      <add-permission-denied>Δεν έχετε άδεια για να προσθέσετε ένα νέο πρότυπο.</add-permission-denied>
+      <edit-permission-denied>Δεν έχετε δικαίωμα να τροποποιήσετε το πρότυπο '{0}'.</edit-permission-denied>
+    </msg>
+    <tab>
+      <label>
+        <template>Πρότυπο</template>
+        <defaultDialog>Διάλογος</defaultDialog>
+        <defaultView>Προβολή</defaultView>
+      </label>
+    </tab>
+    <label>
+      <name>Όνομα:</name>
+      <label>Ετικέτα:</label>
+      <isDocumentTemplate>είναι πρότυπο εγγράφου:</isDocumentTemplate>
+      <dialog>Περιεχόμενο του παράθυρου διαλόγου</dialog>
+      <view>Προβολή περιεχομένου</view>
+      <permission>Δικαιώματα:</permission>
+      <selectPemistion>Δικαιώματα</selectPemistion>
+    </label>
+  </UITemplateForm>
+  <!--
+  ################################################################################
+  #             org.exoplatform.ecm.webui.component.admin.view.ecmTempForm #
+  ################################################################################
+  -->
+  <ecmTempForm>
+    <label>
+      <version>Επιλέξτε έκδοση:</version>
+      <content>Περιεχόμενο:</content>
+      <name>Όνομα:</name>
+      <homeTemplate>Τύπος προτύπου:</homeTemplate>
+      <enableVersion>Ενεργοποιημένη έκδοση:</enableVersion>
+    </label>
+  </ecmTempForm>
+  <ecmTempFormPopup>
+    <title>
+      <ecmTempForm>Προσθήκη/επεξεργασία προτύπου προβολής</ecmTempForm>
+    </title>
+  </ecmTempFormPopup>
+  <ecmTempFormAdd>
+    <title>
+      <ecmTempForm>Προσθήκη προτύπου περιηγητή</ecmTempForm>
+      <ecmTempFormAdd>Προσθήκη προτύπου περιηγητή</ecmTempFormAdd>
+    </title>
+  </ecmTempFormAdd>
+  <ecmTempFormEdit>
+    <title>
+      <ecmTempForm>Επεξεργασία προτύπου περιηγητή</ecmTempForm>
+    </title>
+  </ecmTempFormEdit>
+
+  <!--
+  ######################################################################################
+  #             org.exoplatform.ecm.webui.component.admin.script.UIScriptManager #
+  ######################################################################################
+  -->
+  <!--
+  ######################################################################################
+  #             org.exoplatform.ecm.webui.component.admin.script.UIECMFilterForm #
+  ######################################################################################
+  -->
+  <UIECMFilterForm>
+    <label>
+      <selectScript>Επιλογή κατηγορίας</selectScript>
+    </label>
+  </UIECMFilterForm>
+  <!--
+  ######################################################################################
+  #             org.exoplatform.ecm.webui.component.admin.script.UIScriptList #
+  ######################################################################################
+  -->
+  <UIScriptList>
+    <action>
+      <Edit>#{word.edit}</Edit>
+      <Delete>#{word.delete}</Delete>
+      <AddNew>Προσθήκη δέσμης ενεργειών</AddNew>
+    </action>
+    <msg>
+      <confirm-delete>Είστε βέβαιοι ότι θέλετε να διαγράψετε αυτήν τη δέσμη ενεργειών;</confirm-delete>
+    </msg>
+    <header>
+      <scriptName>Όνομα</scriptName>
+      <path>Δέσμη ενεργειών</path>
+      <baseVersion>Βασική έκδοση</baseVersion>
+      <action>Ενέργειες</action>
+    </header>
+    <tooltip>
+      <Edit>Επεξεργασία</Edit>
+      <Delete>Διαγραφή</Delete>
+    </tooltip>
+  </UIScriptList>
+  <!--
+  ######################################################################################
+  #             org.exoplatform.ecm.webui.component.admin.script.UIScriptForm #
+  ######################################################################################
+  -->
+  <uiECMScriptsPopup>
+    <title>
+      <ecmScriptForm>ECM Script</ecmScriptForm>
+    </title>
+  </uiECMScriptsPopup>
+
+  <UIScriptForm>
+    <action>
+      <Save>#{word.save}</Save>
+      <Restore>#{word.restore}</Restore>
+      <Cancel>#{word.cancel}</Cancel>
+      <Refresh>#{word.refresh}</Refresh>
+      <Change>Τροποποίηση</Change>
+    </action>
+    <msg>
+      <version-restored>Η έκδοση {0} αποκαταστάθηκε επιτυχώς.</version-restored>
+      <name-null>Παρακαλούμε εισάγετε το όνομα της δέσμης ενεργειών.</name-null>
+      <name-exist>Το όνομα της δέσμης ενεργειών '{0}' υπάρχει ήδη.</name-exist>
+      <fileName-invalid>Το όνομα της δέσμης ενεργειών έχει κάποιους μη έγκυρους χαρακτήρες.</fileName-invalid>
+    </msg>
+  </UIScriptForm>
+  <!--
+  ######################################################################################
+  #             org.exoplatform.ecm.webui.component.admin.script.CBScriptForm #
+  ######################################################################################
+  -->
+  <ScriptContainerPopup>
+    <title>
+      <UIScriptForm>Προσθήκη/επεξεργασία δέσμης ενεργειών</UIScriptForm>
+    </title>
+  </ScriptContainerPopup>
+  <UIScriptForm>
+    <label>
+      <selectVersion>Εκδόσεις</selectVersion>
+      <scriptContent>Περιεχόμενο</scriptContent>
+      <scriptLabel>Όνομα</scriptLabel>
+      <scriptName>Δέσμη ενεργειών</scriptName>
+      <enableVersion>Ενεργοποιήστε την τήρηση ιστορικού εκδόσεων</enableVersion>
+    </label>
+  </UIScriptForm>
+  <!--
+  ######################################################################################
+  #             org.exoplatform.ecm.webui.component.admin.script.ecmScriptForm #
+  ######################################################################################
+  -->
+ 
+  <ecmScriptForm>
+    <label>
+      <selectVersion>Εκδόσεις</selectVersion>
+      <scriptContent>Περιεχόμενο</scriptContent>
+      <scriptLabel>Όνομα</scriptLabel>
+      <scriptName>Δέσμη ενεργειών</scriptName>
+      <enableVersion>Ενεργοποιήστε την τήρηση ιστορικού εκδόσεων</enableVersion>
+    </label>
+  </ecmScriptForm>
+  <!--
+  ######################################################################################
+  #             org.exoplatform.ecm.webui.component.admin.taxonomy.UITaxonomyForm #
+  ######################################################################################
+  -->
+  <UITaxonomyForm>
+    <action>
+      <Save>#{word.save}</Save>
+      <Cancel>#{word.cancel}</Cancel>
+    </action>
+    <title>Προσθήκη κατηγορίας</title>
+    <label>
+      <taxonomyName>Όνομα κατηγορίας</taxonomyName>
+      <parentPath>Γονικός</parentPath>
+    </label>
+    <msg>
+      <exist>Η κατηγορία "{0}" υπάρχει ήδη.</exist>
+      <name-null>Παρακαλούμε να προσδιορίσετε το όνομα της κατηγορίας.</name-null>
+      <name-invalid>Το όνομα της κατηγορίας έχει κάποιους μη έγκυρους χαρακτήρες.</name-invalid>
+      <name-too-long>Το όνομα της κατηγορίας πρέπει να έχει λιγότερους από 30 χαρακτήρες.</name-too-long>
+    </msg>
+  </UITaxonomyForm>
+    
+  <EditTaxonomyTreePopup>
+    <title>
+      <UITaxonomyTreeContainer>Επεξεργαστείτε το δέντρο κατηγοριών</UITaxonomyTreeContainer>
+    </title>
+  </EditTaxonomyTreePopup>
+
+  <AddTaxonomyTreePopup>
+    <title>
+      <UITaxonomyTreeContainer>Προσθήκη δέντρου κατηγοριών</UITaxonomyTreeContainer>
+    </title>
+  </AddTaxonomyTreePopup>
+  
+  <TaxonomyPopupCreateChild>
+    <title>
+      <UITaxonomyTreeCreateChildForm>Επεξεργαστείτε το δέντρο κατηγοριών</UITaxonomyTreeCreateChildForm>
+    </title>
+  </TaxonomyPopupCreateChild>
+
+<UITaxonomyTreeCreateChildForm>
+  <action>
+      <Save>#{word.save}</Save>
+      <Cancel>#{word.cancel}</Cancel>
+    </action>
+    <label>
+      <parentPath>Γονικός:</parentPath>
+      <taxonomyName>Όνομα κατηγορίας:</taxonomyName>
+    </label>
+    <msg>
+      <name-null>Το όνομα της κατηγορίας είναι κενό.</name-null>
+      <name-invalid>Το όνομα της κατηγορίας δεν είναι έγκυρο.</name-invalid>
+      <name-too-long>Το όνομα της κατηγορίας δεν πρέπει να έχει περισσότερους από {0} χαρακτήρες.</name-too-long>
+      <exist>Το όνομα της κατηγορίας υπάρχει ήδη.</exist>
+    </msg>
+</UITaxonomyTreeCreateChildForm>
+
+  <PopupComponent>
+    <title>
+      <UIOneNodePathSelector>Επιλέξτε διαδρομή</UIOneNodePathSelector>
+    </title>
+  </PopupComponent>
+  
+  <TaxoPopupUserSelector>
+  <title>
+      <TaxoTreeSelectUserOrGroup>Επιλογή χρήστη</TaxoTreeSelectUserOrGroup>
+      <UIPermissionTreeSelectUser>Επιλογή χρήστη</UIPermissionTreeSelectUser>
+    </title>
+  </TaxoPopupUserSelector>
+
+  <TaxoTreeSelectUserOrGroupPopup>
+  <title>
+      <TaxoTreeSelectUserOrGroup>Επιλέξτε την ιδιότητα του μέλους</TaxoTreeSelectUserOrGroup>
+    </title>
+  </TaxoTreeSelectUserOrGroupPopup>
+  
+  <TaxoTreeAnyPermission>
+    <label>
+      <any>Όλοι</any>
+      <anyPermission>TaxoTreeAnyPermission</anyPermission>
+    </label>
+  </TaxoTreeAnyPermission>
+  
+  <TaxoTreeSelectUserOrGroup>
+    <label>
+      <selectGroup>Επιλογή ομάδας</selectGroup>
+      <selectMembership>Επιλέξτε την ιδιότητα του μέλους</selectMembership>
+    </label>
+  </TaxoTreeSelectUserOrGroup>
+  
+  <!--
+  ######################################################################################
+  #             org.exoplatform.ecm.webui.component.admin.taxonomy.UITaxonomyTreeList #
+  ######################################################################################
+  -->
+  <UITaxonomyTreeList>
+    <header>
+      <name>Δέντρο Κατηγοριών</name>
+      <workspace>Χώρος Εργασίας</workspace>
+      <homePath>Διαδρομή</homePath>
+      <action>Ενέργεια</action>
+    </header>
+    <action>
+      <AddTaxonomyTree>Προσθήκη δέντρου κατηγοριών</AddTaxonomyTree>
+    </action>
+    <tooltip>
+      <EditTaxonomyTree>Επεξεργαστείτε το δέντρο κατηγοριών</EditTaxonomyTree>
+      <Delete>Διαγραφή δέντρου κατηγοριών</Delete>
+    </tooltip>
+    <title>Περιήγηση στο δέντρο κατηγοριών</title>
+    <msg>
+      <no-list>Δεν έχουν δημιουργηθεί δέντρα κατηγοριών.</no-list>
+      <confirm-delete>Είστε βέβαιοι ότι θέλετε να διαγράψετε το δέντρο κατηγοριών;</confirm-delete>
+      <is-in-trash>Αυτό το δέντρο κατηγοριών έχει μεταφερθεί στον κάδο απορριμμάτων.</is-in-trash>
+    </msg>
+  </UITaxonomyTreeList>
+  
+  <!--
+  ######################################################################################
+  #             org.exoplatform.ecm.webui.component.admin.taxonomy.UITaxonomyTreeForm  #
+  ######################################################################################
+  -->
+  <UITaxonomyTreeForm>
+    <label>
+      <name>Όνομα</name>
+      <workspace>Χώρος Εργασίας</workspace>
+      <homePath>Διαδρομή</homePath>
+      <permissions>Δικαιώματα</permissions>
+    </label>
+    <msg>
+      <homapath-emty>Διαδρομή εισαγωγής</homapath-emty>
+    </msg>
+  </UITaxonomyTreeForm>
+  
+  <UIPermissionTreeForm>
+    <label>
+      <UIPopupWindow>Επιλογή</UIPopupWindow>
+      <permission>UIPermissionTreeForm</permission>
+      <userOrGroup>Χρήστης ή Ομάδα</userOrGroup>
+      <read>Δικαίωμα ανάγνωσης</read>
+      <add_node>Δικαίωμα προσθήκης κόμβου</add_node>
+      <set_property>Δικαίωμα ορισμού ιδιότητας</set_property>
+      <remove>Δικαίωμα διαγραφής</remove>
+    </label>
+    <title>Προσθήκη δικαιωμάτων σε αυτόν τον κόμβο</title>
+    <action>
+      <Close>#{word.close}</Close>
+      <Save>Save</Save>
+      <Reset>Reset</Reset>
+    </action>
+    <msg>
+      <checkbox-require>Παρακαλώ επιλέξτε τουλάχιστον ένα δικαίωμα.</checkbox-require>
+      <userOrGroup-required>Παρακαλώ επιλέξτε ένα χρήστη ή ομάδα πριν να αποθηκεύσετε το δικαίωμα.</userOrGroup-required>
+      <not-change-permission>Δεν έχετε άδεια να προσθέσετε το δικαίωμα.</not-change-permission>
+      <access-denied>Δεν επιτρέπεται η πρόσβαση. Δεν μπορείτε να καταργήσετε αυτό το δικαίωμα.</access-denied>
+    </msg>
+  </UIPermissionTreeForm>
+  
+  <PopupTaxonomyJCRBrowser>
+  <title>
+      <UIOneNodePathSelector>Επιλέξτε Αρχική διαδρομή</UIOneNodePathSelector>
+    </title>
+  </PopupTaxonomyJCRBrowser>
+  
+  <PopupTaxonomyTreePermission>
+    <title>
+      <UIPermissionSelector>Επιλογή δικαιώματος</UIPermissionSelector>
+    </title>
+   </PopupTaxonomyTreePermission>
+   
+   <PopupDrivePermission>
+    <title>
+      <AddDrivePermissionSelector>Προσθήκη δικαιώματος</AddDrivePermissionSelector>
+      <UIPermissionSelector>Επιλογή δικαιώματος</UIPermissionSelector>
+    </title>
+  </PopupDrivePermission>
+  
+  <UIPopupWindow>
+    <title>
+      <UIPermissionManager>Διαχείριση δικαιωμάτων</UIPermissionManager>
+    </title>
+   </UIPopupWindow>
+
+  <PopupUserSelector>
+    <title>
+      <UIUserContainer>Διαχείριση δικαιωμάτων</UIUserContainer>
+    </title>
+   </PopupUserSelector>
+   
+  <UIPermissionInfo>
+    <action>
+      <title>
+        <Edit>Επεξεργασία</Edit>
+        <Delete>Αφαίρεση δικαιώματος</Delete>
+      </title>
+    </action>
+    <header>
+      <usersOrGroups>Χρήστης ή Ομάδα</usersOrGroups>
+      <read>Ανάγνωση</read>
+      <addNode>Τροποποίηση κόμβου</addNode>
+      <remove>Κατάργηση</remove>
+      <action>Ενέργεια</action>
+    </header>
+    <msg>
+      <confirm-delete-permission>Είστε βέβαιοι ότι θέλετε να καταργήσετε αυτό το δικαίωμα;</confirm-delete-permission>
+      <no-permission-tochange>Δεν έχετε άδεια να αφαιρέσετε αυτό το δικαίωμα.</no-permission-tochange>
+      <no-permission-remove>Δεν μπορείτε να καταργήσετε τον ιδιοκτήτη ή τον χρήστη του συστήματος.</no-permission-remove>
+      <access-denied>Δεν επιτρέπεται η πρόσβαση. Δεν μπορείτε να καταργήσετε αυτό το δικαίωμα.</access-denied>
+    </msg>
+  </UIPermissionInfo>
+  <permission>
+    <title>
+      <SelectUser>Επιλογή χρήστη</SelectUser>
+      <SelectMember>Επιλέξτε την ιδιότητα του μέλους</SelectMember>
+      <AddAny>Όλοι</AddAny>
+    </title>
+  </permission>
+  <!--
+  #############################################################################
+  #             org.exoplatform.ecm.webui.component.explorer.UIPermissionForm #
+  #############################################################################
+  -->
+  <SelectUserOrGroup>
+    <title>
+      <UIGroupSelector>Επιλογή χρήστη</UIGroupSelector>
+      <UIPermissionSelector>Επιλέξτε μέλος</UIPermissionSelector>
+      <UIGroupMemberSelector>Επιλέξτε την ιδιότητα του μέλους</UIGroupMemberSelector>
+    </title>
+  </SelectUserOrGroup>
+  <UIGroupSelector>
+    <label>
+      <selectGroup>Επιλογή ομάδας</selectGroup>
+      <selectUser>Επιλογή χρήστη</selectUser>
+    </label>
+    <msg>
+      <not-change-owner>'{0}' είναι ο ιδιοκτήτης αυτού του κόμβου και έχει τον πλήρη έλεγχο.</not-change-owner>
+    </msg>
+  </UIGroupSelector>
+  <UIPermissionForm>
+    <label>
+      <UIPopupWindow>Επιλογή</UIPopupWindow>
+      <permission>UIPermissionForm</permission>
+      <userOrGroup>Χρήστης ή Ομάδα</userOrGroup>
+      <read>Ανάγνωση</read>
+      <add_node>Επεξεργασία</add_node>
+      <remove>Κατάργηση</remove>
+    </label>
+    <title>Προσθήκη δικαιωμάτων σε αυτόν τον κόμβο</title>
+    <action>
+      <Close>#{word.close}</Close>
+      <Save>#{word.save}</Save>
+      <Reset>Αρχικοποίηση</Reset>
+    </action>
+    <msg>
+      <checkbox-require>Παρακαλώ επιλέξτε τουλάχιστον ένα δικαίωμα.</checkbox-require>
+      <userOrGroup-required>Παρακαλώ επιλέξτε ένα χρήστη ή ομάδα πριν να αποθηκεύσετε το δικαίωμα.</userOrGroup-required>
+      <not-change-permission>Δεν έχετε άδεια να προσθέσετε το δικαίωμα.</not-change-permission>
+      <access-denied>Δεν επιτρέπεται η πρόσβαση. Δεν μπορείτε να καταργήσετε αυτό το δικαίωμα.</access-denied>
+    </msg>
+  </UIPermissionForm>
+  
+  <TaxonomyPopup>
+    <title>
+      <UITaxonomyForm>Προσθήκη κατηγορίας</UITaxonomyForm>
+    </title>
+  </TaxonomyPopup>
+  
+  <UITaxonomyManager>
+    <title>
+      <permission>Διαχείριση δικαιωμάτων</permission>
+    </title>
+  </UITaxonomyManager>
+  <!--
+  ######################################################################################
+  #             org.exoplatform.ecm.webui.component.admin.templates.UITemplateList #
+  ######################################################################################
+  -->
+  <UITemplateList>
+    <header>
+      <name>Τύπος</name>
+      <action>Ενέργεια</action>
+      <label>Πρότυπο</label>
+      <icon>Εικονίδιο</icon>
+    </header>
+    <action>
+      <AddNew>Προσθήκη Προτύπου</AddNew>
+    </action>
+    <msg>
+      <confirm-delete>Θέλετε πραγματικά να το διαγράψετε;</confirm-delete>
+      <access-denied>Δεν επιτρέπεται η πρόσβαση. Δεν έχετε άδεια να χρησιμοποιήσετε αυτή τη λειτουργία.</access-denied>
+      <editing-template>Δεν επιτρέπεται η πρόσβαση. Δεν μπορείτε να διαγράψετε και να επεξεργαστείτε αυτό το πρότυπο ταυτόχρονα.</editing-template>
+      <template-not-exist>Το πρότυπο που προσπαθείτε να διαγράψετε δεν υπάρχει.</template-not-exist>
+    </msg>
+  </UITemplateList>
+  
+  <UIActionsTemplateList>
+    <header>
+      <name>Τύπος</name>
+      <action>Ενέργεια</action>
+      <label>Πρότυπο</label>
+      <icon>Εικονίδιο</icon>
+    </header>
+    <action>
+      <AddNew>Προσθήκη Προτύπου</AddNew>
+    </action>
+    <msg>
+      <confirm-delete>Θέλετε πραγματικά να το διαγράψετε;</confirm-delete>
+      <access-denied>Δεν επιτρέπεται η πρόσβαση. Δεν έχετε άδεια να χρησιμοποιήσετε αυτή τη λειτουργία.</access-denied>
+      <editing-template>Δεν επιτρέπεται η πρόσβαση. Δεν μπορείτε να διαγράψετε και να επεξεργαστείτε αυτό το πρότυπο ταυτόχρονα.</editing-template>
+      <template-not-exist>Το πρότυπο που προσπαθείτε να διαγράψετε δεν υπάρχει.</template-not-exist>
+    </msg>
+  </UIActionsTemplateList>
+  
+  <UIOthersTemplateList>
+    <header>
+      <name>Τύπος</name>
+      <label>Πρότυπο</label>
+      <icon>Εικονίδιο</icon>
+      <action>Ενέργεια</action>
+    </header>
+    <action>
+      <AddNew>Προσθήκη Προτύπου</AddNew>
+    </action>
+    <msg>
+      <confirm-delete>Θέλετε πραγματικά να το διαγράψετε;</confirm-delete>
+      <access-denied>Δεν επιτρέπεται η πρόσβαση. Δεν έχετε άδεια να χρησιμοποιήσετε αυτή τη λειτουργία.</access-denied>
+      <editing-template>Δεν επιτρέπεται η πρόσβαση. Δεν μπορείτε να διαγράψετε και να επεξεργαστείτε αυτό το πρότυπο ταυτόχρονα.</editing-template>
+      <template-not-exist>Το πρότυπο που προσπαθείτε να διαγράψετε δεν υπάρχει.</template-not-exist>
+    </msg>
+  </UIOthersTemplateList>
+
+ <!--
+  ######################################################################################
+  #             org.exoplatform.ecm.webui.component.admin.templates.clv package #
+  ######################################################################################
+  -->
+
+<UITabPane>
+ <title>
+ <ContentTemplateContainer>Περιεχόμενο</ContentTemplateContainer>
+<CateTemplateContainer>Πλοήγηση</CateTemplateContainer>
+<PageTemplateContainer>Σελιδοποίηση</PageTemplateContainer>
+ </title>
+</UITabPane>
+
+  <UICLVTemplateList>
+    <title>
+      <Edit>Επεξεργασία</Edit>
+      <Delete>Διαγραφή</Delete>
+    </title>
+    <header>
+      <title>Όνομα</title>
+      <action>Ενέργεια</action>
+      <template>Πρότυπο</template>
+    </header>
+    <action>
+      <AddTemplate>Προσθήκη Προτύπου</AddTemplate>
+<Edit>Επεξεργασία</Edit>
+<Delete>Διαγραφή</Delete>
+    </action>
+    <msg>
+      <confirm-delete>Είστε βέβαιοι ότι θέλετε να διαγράψετε αυτό το πρότυπο;</confirm-delete>
+      <access-denied>Δεν επιτρέπεται η πρόσβαση. Δεν έχετε άδεια να χρησιμοποιήσετε αυτή τη λειτουργία.</access-denied>
+      <editing-template>Δεν επιτρέπεται η πρόσβαση. Δεν μπορείτε να διαγράψετε και να επεξεργαστείτε αυτό το πρότυπο ταυτόχρονα.</editing-template>
+      <template-not-exist>Το πρότυπο που προσπαθείτε να διαγράψετε δεν υπάρχει.</template-not-exist>
+    </msg>
+  </UICLVTemplateList>
+
+<CateTemplateList>
+    <header>
+      <title>Όνομα</title>
+      <action>Ενέργεια</action>
+      <template>Πρότυπο</template>
+    </header>
+    <title>
+      <Edit>Επεξεργασία</Edit>
+      <Delete>Διαγραφή</Delete>
+    </title>
+    <action>
+      <AddTemplate>Προσθήκη Προτύπου</AddTemplate>
+<Edit>Επεξεργασία</Edit>
+<Delete>Διαγραφή</Delete>
+    </action>
+</CateTemplateList>
+
+<PageTemplateList>
+    <header>
+      <title>Όνομα</title>
+      <action>Ενέργεια</action>
+      <template>Πρότυπο</template>
+    </header>
+    <action>
+      <AddTemplate>Προσθήκη Προτύπου</AddTemplate>
+<Edit>Επεξεργασία</Edit>
+<Delete>Διαγραφή</Delete>
+    </action>
+</PageTemplateList>
+
+<EditCLVTemplatePopup_ContentTemplateContainer>
+ <title>
+   <UICLVTemplateForm_ContentTemplateContainer>Επεξεργαστείτε το πρότυπο λίστας</UICLVTemplateForm_ContentTemplateContainer>   
+ </title>
+</EditCLVTemplatePopup_ContentTemplateContainer>
+
+<EditCLVTemplatePopup_CateTemplateContainer>
+ <title>
+   <UICLVTemplateForm_CateTemplateContainer>Επεξεργαστείτε το πρότυπο λίστας</UICLVTemplateForm_CateTemplateContainer>   
+ </title>
+</EditCLVTemplatePopup_CateTemplateContainer>
+
+<EditCLVTemplatePopup_PageTemplateContainer>
+ <title>
+   <UICLVTemplateForm_PageTemplateContainer>Επεξεργαστείτε το πρότυπο λίστας</UICLVTemplateForm_PageTemplateContainer>   
+ </title>
+</EditCLVTemplatePopup_PageTemplateContainer>
+
+<CLVTemplatePopup_ContentTemplateContainer>
+ <title>
+   <UICLVTemplateForm_ContentTemplateContainer>Προσθέστε το πρότυπο λίστας</UICLVTemplateForm_ContentTemplateContainer>   
+ </title>
+</CLVTemplatePopup_ContentTemplateContainer>
+
+<CLVTemplatePopup_CateTemplateContainer>
+ <title>
+   <UICLVTemplateForm_CateTemplateContainer>Προσθέστε το πρότυπο λίστας</UICLVTemplateForm_CateTemplateContainer>   
+ </title>
+</CLVTemplatePopup_CateTemplateContainer>
+
+<CLVTemplatePopup_PageTemplateContainer>
+ <title>
+   <UICLVTemplateForm_PageTemplateContainer>Προσθέστε το πρότυπο λίστας</UICLVTemplateForm_PageTemplateContainer>   
+ </title>
+</CLVTemplatePopup_PageTemplateContainer>
+
+<UICLVTemplateForm_ContentTemplateContainer>
+ <action>
+  <Save>#{word.save}</Save>
+<Reset>Αρχικοποίηση</Reset>
+<Cancel>#{word.cancel}</Cancel>
+ </action>
+<label>
+ <title>Όνομα</title>
+<template>Όνομα προτύπου</template>
+<content>Περιεχόμενο</content>
+<type>Τύπος προτύπου</type>
+</label>
+</UICLVTemplateForm_ContentTemplateContainer>
+
+<UICLVTemplateForm_PageTemplateContainer>
+ <action>
+  <Save>#{word.save}</Save>
+<Reset>Αρχικοποίηση</Reset>
+<Cancel>#{word.cancel}</Cancel>
+ </action>
+<label>
+ <title>Όνομα</title>
+<template>Όνομα προτύπου</template>
+<content>Περιεχόμενο</content>
+<type>Τύπος προτύπου</type>
+</label>
+</UICLVTemplateForm_PageTemplateContainer>
+
+<UICLVTemplateForm_CateTemplateContainer>
+ <action>
+  <Save>#{word.save}</Save>
+<Reset>Αρχικοποίηση</Reset>
+<Cancel>#{word.cancel}</Cancel>
+ </action>
+<label>
+ <title>Όνομα</title>
+<template>Όνομα προτύπου</template>
+<content>Περιεχόμενο</content>
+<type>Τύπος προτύπου</type>
+</label>
+</UICLVTemplateForm_CateTemplateContainer>
+<UICLVTemplateForm>
+  <label>
+    <paginators>Σελιδοποίηση</paginators>
+<list>Περιεχόμενο</list>
+<navigation>Πλοήγηση</navigation>
+  </label>
+                          <action>
+                            <Save>#{word.save}</Save>
+                            <Reset>Αρχικοποίηση</Reset> 
+                            <Cancel>#{word.cancel}</Cancel> 
+                          </action> 
+  <msg>
+  <template-existing>Αυτό το όνομα προτύπου υπάρχει ήδη. Παρακαλώ επιλέξτε ένα άλλο.</template-existing>
+  </msg>
+</UICLVTemplateForm>
+
+  <!--
+  ######################################################################################
+  #             org.exoplatform.ecm.webui.component.admin.templates.UITemplateForm #
+  ######################################################################################
+  -->
+  <AddNewTemplatePermission>
+    <title>
+      <UIPermissionSelector>Επιλογή δικαιώματος</UIPermissionSelector>
+    </title>
+  </AddNewTemplatePermission>
+  <TemplatePermission>
+    <title>
+      <UIPermissionSelector>Επιλογή δικαιώματος</UIPermissionSelector>
+    </title>
+  </TemplatePermission>
+  <TemplateContainerPopup>
+    <title>
+      <UITemplateForm>Πρότυπο φόρμας</UITemplateForm>
+    </title>
+  </TemplateContainerPopup>
+  <ViewForm>
+    <label>
+      <UITemplateContent>ViewForm</UITemplateContent>
+      <UIPopupWindow>Άδεια Προβολής</UIPopupWindow>
+      <selectVersion>Εκδόσεις</selectVersion>
+      <content>Περιεχόμενο:</content>
+      <name>Όνομα:</name>
+      <isDocumentTemplate>είναι πρότυπο εγγράφου</isDocumentTemplate>
+      <viewPermission>Δικαιώματα:</viewPermission>
+      <enableVersion>Η τήρηση ιστορικού εκδόσεων ενεργοποιήθηκε</enableVersion>
+    </label>
+    <title>Προσθήκη/επεξεργασία προβολής</title>
+  </ViewForm>
+  <DialogForm>
+    <label>
+      <UITemplateContent>DialogForm</UITemplateContent>
+      <UIPopupWindow>Δικαιώματα του παράθυρου διαλόγου</UIPopupWindow>
+      <selectVersion>Εκδόσεις</selectVersion>
+      <content>Περιεχόμενο:</content>
+      <name>Όνομα:</name>
+      <isDocumentTemplate>είναι πρότυπο εγγράφου</isDocumentTemplate>
+      <viewPermission>Δικαιώματα:</viewPermission>
+      <enableVersion>Ενεργοποιήστε την τήρηση ιστορικού εκδόσεων</enableVersion>
+    </label>
+    <title>Προσθήκη/επεξεργασία παράθυρου διαλόγου</title>
+  </DialogForm>
+  <DialogFormTemplatePermission>
+    <title>
+      <UIPermissionSelector>Επιλογή δικαιώματος</UIPermissionSelector>
+    </title>
+  </DialogFormTemplatePermission>
+  <ViewFormTemplatePermission>
+    <title>
+      <UIPermissionSelector>Επιλογή δικαιώματος</UIPermissionSelector>
+    </title>
+  </ViewFormTemplatePermission>
+  <TemplateContainerPopup>
+    <title>
+      <UIViewTemplate_UITemplateContainer><![CDATA[View & Edit Template]]></UIViewTemplate_UITemplateContainer>
+      <UIViewTemplate_UIActionsTemplateContainer><![CDATA[View & Edit Template]]></UIViewTemplate_UIActionsTemplateContainer>
+      <UIViewTemplate_UIOthersTemplateContainer><![CDATA[View & Edit Template]]></UIViewTemplate_UIOthersTemplateContainer>
+    </title>
+  </TemplateContainerPopup>
+  <UITemplatesManager>
+    <title>
+      <Edit>Επεξεργασία</Edit>
+      <Delete>Διαγραφή</Delete>
+    </title>
+  </UITemplatesManager>
+  <!--
+  ######################################################################################
+  #             org.exoplatform.ecm.webui.component.admin.templates.UIViewTemplate #
+  ######################################################################################
+  -->
+  <!--
+  ######################################################################################
+  #             org.exoplatform.ecm.webui.component.admin.templates.UITemplateEditForm #
+  ######################################################################################
+  -->
+  <UITemplateEditForm>
+    <label>
+      <name>Όνομα:</name>
+      <label>Ετικέτα:</label>
+      <isDocumentTemplate>είναι πρότυπο εγγράφου:</isDocumentTemplate>
+    </label>
+    <action>
+      <Save>#{word.save}</Save>
+      <Cancel>#{word.cancel}</Cancel>
+      <Refresh>#{word.refresh}</Refresh>
+    </action>
+  </UITemplateEditForm>
+  <!--
+  ######################################################################################
+  #             org.exoplatform.ecm.webui.component.admin.templates.UIDialogTab #
+  ######################################################################################
+  -->
+  <UIDialogTab>
+    <header>
+      <name>Όνομα</name>
+      <roles>Ρόλοι</roles>
+      <baseVersion>Έκδοση</baseVersion>
+      <action>Ενέργειες</action>
+    </header>
+    <msg>
+      <undeletable>Δεν μπορείτε να διαγράψετε το '{0}' επειδή είναι προεπιλεγμένο.</undeletable>
+      <confirm-delete>Είστε βέβαιοι ότι θέλετε να διαγράψετε αυτό το παράθυρο διαλόγου;</confirm-delete>
+    </msg>
+    <action>
+      <title>
+        <Edit>Επεξεργασία</Edit>
+        <Delete>Διαγραφή</Delete>
+      </title>
+    </action>
+  </UIDialogTab>
+  <!--
+  ######################################################################################
+  #             org.exoplatform.ecm.webui.component.admin.templates.UIViewTab #
+  ######################################################################################
+  -->
+  <UIViewTab>
+    <header>
+      <name>Όνομα</name>
+      <roles>Ρόλοι</roles>
+      <baseVersion>Έκδοση</baseVersion>
+      <action>Ενέργειες</action>
+    </header>
+    <msg>
+      <undeletable>Το '{0}' δεν μπορεί να διαγραφεί γιατί είναι προεπιλεγμένο.</undeletable>
+      <confirm-delete>Θέλετε πραγματικά να προχωρήσετε στη διαγραφή;</confirm-delete>
+    </msg>
+    <action>
+      <title>
+        <Edit>Επεξεργασία</Edit>
+        <Delete>Διαγραφή</Delete>
+      </title>
+    </action>
+  </UIViewTab>
+  <!--
+  ######################################################################################
+  #             org.exoplatform.ecm.webui.component.admin.templates.UITemplateContent #
+  ######################################################################################
+  -->
+  <UITemplateContent>
+    <action>
+      <Save>#{word.save}</Save>
+      <Restore>#{word.restore}</Restore>
+      <Cancel>#{word.cancel}</Cancel>
+      <Refresh>#{word.refresh}</Refresh>
+    </action>
+    <msg>
+      <name-invalid>Το όνομα του πεδίου δεν μπορεί να περιέχει ειδικούς χαρακτήρες.</name-invalid>
+      <roles-invalid>Το πεδίο δικαιωμάτων είναι υποχρεωτικό.</roles-invalid>
+      <version-restored>Η έκδοση {0} αποκαταστάθηκε επιτυχώς.</version-restored>
+      <name-exist>Το όνομα {0} υπάρχει ήδη.</name-exist>
+    </msg>
+    <title>
+      <AddPermission>Προσθήκη δικαιώματος</AddPermission>
+      <RemovePermission>Αφαίρεση δικαιώματος</RemovePermission>
+    </title>
+  </UITemplateContent>
+  <!--
+  ######################################################################################
+  #             org.exoplatform.ecm.webui.component.admin.templates.DialogForm #
+  ######################################################################################
+  -->
+  <!--
+  ######################################################################################
+  #             org.exoplatform.ecm.webui.component.admin.templates.ViewForm #
+  ######################################################################################
+  -->
+  <!--
+  ######################################################################################
+  #             org.exoplatform.ecm.webui.component.UIJCRBrowser #
+  ######################################################################################
+  -->
+  <JCRBrowser>
+    <title>
+      <UIOneNodePathSelector>Επιλέξτε Αρχική διαδρομή</UIOneNodePathSelector>
+    </title>
+  </JCRBrowser>
+  <JCRBrowserAssets>
+    <title>
+      <UIOneNodePathSelector>Επιλέξτε το εικονίδιο</UIOneNodePathSelector>
+    </title>
+  </JCRBrowserAssets>
+  <!--
+  ######################################################################################
+  #             org.exoplatform.ecm.webui.component.admin.queries #
+  ######################################################################################
+  -->
+  <UIQueriesList>
+    <header>
+      <name>Όνομα</name>
+      <type>Τύπος</type>
+      <statement>Δήλωση</statement>
+      <permission>Δικαιώματα</permission>
+      <action>Ενέργειες</action>
+    </header>
+    <action>
+      <AddQuery>Προσθήκη ερωτήματος</AddQuery>
+    </action>
+    <tooltip>
+      <Edit>Επεξεργαστείτε αυτό το ερώτημα</Edit>
+      <Delete>Διαγραφή ερωτήματος</Delete>
+    </tooltip>
+    <msg>
+      <confirm-delete>Είστε βέβαιοι ότι θέλετε να διαγράψετε αυτό το ερώτημα;</confirm-delete>
+      <query-not-existed>Το ερώτημα δεν υπάρχει πια.</query-not-existed>
+      <can-not-remove>Παρουσιάστηκε σφάλμα κατά τη διαγραφή του ερωτήματος. Για πληροφορίες επικοινωνήστε με το διαχειριστή.</can-not-remove>
+    </msg>
+  </UIQueriesList>
+  <UIQueriesForm>
+    <label>
+      <name>Όνομα του ερωτήματος</name>
+      <type>Τύπος ερωτήματος</type>
+      <statement>Δήλωση</statement>
+      <cache>Ενεργοποίηση αποτελεσμάτων από λανθάνουσα μνήμη</cache>
+      <permissions>Δικαιώματα</permissions>
+      <PermissionButton>UIQueriesForm</PermissionButton>
+    </label>
+    <action>
+      <Save>#{word.save}</Save>
+      <Cancel>#{word.cancel}</Cancel>
+    </action>
+    <msg>
+      <permission-require>Παρακαλώ επιλέξτε τα δικαιώματα.</permission-require>
+      <name-invalid>Το πεδίο του ονόματος δεν μπορεί να περιέχει ειδικούς χαρακτήρες.</name-invalid>
+      <name-existing>Αυτό το όνομα ερωτήματος υπάρχει ήδη. Παρακαλώ επιλέξτε ένα άλλο.</name-existing>
+      <invalid-query>Το ερώτημα δεν είναι έγκυρο. Ελέγξτε τη δήλωση του ερωτήματος.</invalid-query>
+      <access-denied>Δεν επιτρέπεται η πρόσβαση. Δεν έχετε άδεια για να εκτελέσετε αυτήν την ενέργεια.</access-denied>
+    </msg>
+  </UIQueriesForm>
+  <AddQueryForm>
+    <title>
+      <UIQueriesForm>Προσθήκη ερωτήματος</UIQueriesForm>
+    </title>
+  </AddQueryForm>
+  <EditQueryForm>
+    <title>
+      <UIQueriesForm>Επεξεργασία ερωτήματος</UIQueriesForm>
+    </title>
+  </EditQueryForm>
+<PermissionPopup>
+  <title>
+    <UIGroupMemberSelector>Επιλογή δικαιώματος</UIGroupMemberSelector>
+  </title>
+</PermissionPopup>
+  <!--
+  ######################################################################################
+  #             org.exoplatform.ecm.webui.component.admin.folksonomy #
+  ######################################################################################
+  -->
+  <UITagManager>
+    <title>
+      <EditStyle>Επεξεργασία στυλ</EditStyle>
+      <RemoveStyle>Κατάργηση στυλ</RemoveStyle>
+    </title>    
+  </UITagManager>
+  <UITagStyleList>
+    <header>
+      <name>Όνομα στυλ</name>
+      <documentRange>Πλήθος εμφανίσεων</documentRange>
+      <tagHTML>Στυλ ετικέτας</tagHTML>
+      <action>Ενέργεια</action>
+    </header>
+    <title>
+      <Edit>Επεξεργασία</Edit>
+      <Delete>Διαγραφή</Delete>
+      <Remove>Κατάργηση</Remove>
+    </title>
+    <action>
+      <AddStyle>Προσθήκη στυλ</AddStyle>
+    </action>
+  </UITagStyleList>
+  <UITagStyleForm>
+    <label>
+      <styleName>Όνομα στυλ:</styleName>
+      <documentRange>Πλήθος εμφανίσεων:</documentRange>
+      <styleHTML>Στυλ HTML:</styleHTML>
+    </label>
+    <action>
+      <UpdateStyle>Ενημέρωση</UpdateStyle>
+      <Cancel>#{word.cancel}</Cancel>
+    </action>
+    <msg>
+      <range-validator>Το εύρος δεν είναι έγκυρο. Η μορφή πρέπει να είναι: α..ω, όπου α και ω θετικοί ακέραιοι. Μπορείτε όπου ω να ορίσετε * το οποίο αφήνει το εύρος ανοικτό.</range-validator>
+      <error-update>Απέτυχε η ενημέρωση. Τα στοιχεία σας δεν είναι έγκυρα.</error-update>
+      <item-not-existing>Δεν μπορείτε να αποθηκεύσετε αλλαγές σε αυτή την ετικέτα, δεδομένου ότι δεν υπάρχει πια στη βάση δεδομένων.</item-not-existing>
+    </msg>
+  </UITagStyleForm>
+  <FolksonomyPopup>
+    <title>
+      <UITagStyleForm>Επεξεργαστείτε το στυλ διαμόρφωσης της ετικέτας</UITagStyleForm>
+    </title>
+  </FolksonomyPopup>
+  <!--
+  ###################################################################################
+  # org.exoplatform.ecm.jcr.ECMNameValidator  #
+  ###################################################################################
+  -->
+  <ECMNameValidator>
+    <msg>
+      <Invalid-char>Το πεδίο '{0}' έχει κάποιους μη έγκυρους χαρακτήρες. Παρακαλώ πληκτρολογήστε μια άλλη τιμή.</Invalid-char>
+      <empty-input>Η τιμή του πεδίου '{0}' είναι κενή.</empty-input>
+    </msg>
+  </ECMNameValidator>
+  <EmptyFieldValidator>
+    <msg>
+      <empty-input>Παρακαλώ εισάγετε την τιμή στο πεδίο '{0}'.</empty-input>
+    </msg>
+  </EmptyFieldValidator>
+  <!--
+  ###################################################################################
+  # org.exoplatform.ecm.jcr.PermissionValidator  #
+  ###################################################################################
+  -->
+  <PermissionValidator>
+  <msg>
+      <permission-path-invalid>Το δικαίωμα '{0}' δεν είναι έγκυρο.</permission-path-invalid>
+  </msg>
+  </PermissionValidator>
+  <!--
+  ###################################################################################
+  # Repository  #
+  ###################################################################################
+  -->
+  <UIWorkspaceList>
+    <label>
+      <workspaceName>Χώρος Εργασίας:</workspaceName>
+      <rootNodeInfo>UIWorkspaceList</rootNodeInfo>
+      <rootNodePath>Διαδρομή εκκίνησης:</rootNodePath>
+    </label>
+  </UIWorkspaceList>
+  <!--
+  ###################################################################################
+  # Others  #
+  ###################################################################################
+  -->
+  <UIFormInputSetWithAction>
+    <msg>
+      <confirm-delete>Είστε βέβαιοι ότι θέλετε να διαγράψετε;</confirm-delete>
+    </msg>
+  </UIFormInputSetWithAction>
+  <template>
+    <title>
+      <AddPermission>Προσθήκη δικαιώματος</AddPermission>
+    </title>
+  </template>
+  <metadataTypeTab>
+    <title>
+      <AddPermission>Προσθήκη δικαιώματος</AddPermission>
+    </title>
+  </metadataTypeTab>
+  <PermissionButton>
+    <title>
+      <AddPermission>Προσθήκη δικαιώματος</AddPermission>
+    </title>
+  </PermissionButton>
+  <nodeTypeDefinition>
+    <title>
+      <AddSuperType>Προσθήκη υπέρ τύπου</AddSuperType>
+    </title>
+  </nodeTypeDefinition>
+  <childNodeDefinition>
+    <title>
+      <AddRequiredType>Προσθήκη απαιτούμενου τύπου</AddRequiredType>
+      <AddDefaultType>Προσθήκη προεπιλεγμένου τύπου</AddDefaultType>
+    </title>
+  </childNodeDefinition>
+  <propertyDefinition>
+    <title>
+      <AddConstraints>Προσθήκη περιορισμών</AddConstraints>
+    </title>
+  </propertyDefinition>
+  <authInputSet>
+    <title>
+      <Select>Επιλογή</Select>
+    </title>
+  </authInputSet>
+  <!--
+  #grid with action
+  -->
+  <UIViewContainer>
+    <title>
+      <View>Προβολή</View>
+      <EditInfo>Επεξεργασία</EditInfo>
+      <Delete>Διαγραφή</Delete>
+    </title>
+<label>
+  <permission>{0} στο {1}</permission>
+</label>
+  </UIViewContainer>
+  <ECMTemplate>
+    <title>
+      <EditInfo>Επεξεργασία</EditInfo>
+      <Delete>Διαγραφή</Delete>
+    </title>
+  </ECMTemplate>
+  <step1>
+    <title>
+      <AddPermission>Προσθήκη δικαιώματος</AddPermission>
+    </title>
+  </step1>
+  <step2>
+    <title>
+      <SelectContainer>Επιλογή Περιέκτη</SelectContainer>
+      <SelectStore>Επιλογή αποθηκευτικού χώρου</SelectStore>
+    </title>
+  </step2>
+  <step3>
+    <title>
+      <SelectQueryHandler>Επιλογή χειριστή ερωτήματος</SelectQueryHandler>
+    </title>
+  </step3>
+  <UIDrivePermissionSelector>
+    <label>
+      <selectGroup>Επιλογή ομάδας</selectGroup>
+      <selectUser>Επιλογή χρήστη</selectUser>
+      <selectMembership>Επιλέξτε την ιδιότητα του μέλους</selectMembership>
+    </label>
+  </UIDrivePermissionSelector>
+  
+  <UIPermissionSelector>
+    <label>
+      <selectGroup>Επιλογή ομάδας</selectGroup>
+      <selectUser>Επιλογή χρήστη</selectUser>
+      <selectMembership>Επιλέξτε την ιδιότητα του μέλους</selectMembership>
+    </label>
+  </UIPermissionSelector>
+  
+  <UIAnyPermission>
+    <label>
+      <anyPermission>Όλοι</anyPermission>
+    </label>
+  </UIAnyPermission>
+  
+  <UIMDriveAnyPermission>
+    <label>
+      <anyPermission>Όλοι</anyPermission>
+    </label>
+  </UIMDriveAnyPermission>
+  
+  <UIQueriesAnyPermission>
+    <label>
+      <anyPermission>Όλοι</anyPermission>
+    </label>
+  </UIQueriesAnyPermission>
+  
+  <MetadataPermission>
+    <label>
+      <selectGroup>Επιλογή ομάδας</selectGroup>
+    </label>
+  </MetadataPermission>  
+  <MetadataPermission>
+    <label>
+      <selectMembership>Επιλέξτε την ιδιότητα του μέλους</selectMembership>
+    </label>
+  </MetadataPermission>
+  <anyPermission>
+    <title>
+      <AddAnyPermission>Ορισμός ελεύθερης πρόσβασης</AddAnyPermission>
+    </title>
+  </anyPermission>
+  <!--
+  #########Since ECM 2.3##################
+  -->
+  <QueriesPermissionBrowse>
+    <label>
+      <selectGroup>Επιλογή ομάδας</selectGroup>
+      <selectUser>Επιλογή χρήστη</selectUser>
+      <selectMembership>Επιλέξτε την ιδιότητα του μέλους</selectMembership>
+    </label>
+  </QueriesPermissionBrowse>
+  <!--
+  #########Since ECM 2.4##################
+  -->  
+  <UIViewFormTabPane>
+    <label>
+      <addSymLink>Προσθήκη συντόμευσης</addSymLink>
+    </label>
+  </UIViewFormTabPane>
+  <!--
+  #########Since ECM 2.5##################
+  --> 
+  
+  <UIDriveForm>
+<msg>
+  <permission-path-invalid>Το δικαίωμα '{0}' δεν είναι έγκυρο.</permission-path-invalid>
+  </msg>
+  </UIDriveForm>
+  
+  <UITaxonomyTreeMainForm>
+    <msg>
+      <homepath-emty>Η αρχική διαδρομή απαιτείται.</homepath-emty>
+      <targetpath-emty>Η διαδρομή προορισμού απαιτείται.</targetpath-emty>
+    </msg>
+  </UITaxonomyTreeMainForm>
+  <UITaxonomyWorkingArea>
+  <msg>
+  <exist>Αυτός ο κόμβος δέντρου υπάρχει ήδη.</exist>
+  </msg>
+  </UITaxonomyWorkingArea>
+
+  <PermissionTreeSelectUser>
+    <label>
+      <option>
+        <userName>#{word.userName}</userName>
+        <lastName>#{word.lastName}</lastName>
+        <firstName>#{word.firstName}</firstName>
+        <email>#{word.email}</email>
+      </option>
+      <group>Ομάδα</group>
+      <searchUser>Χρήστης</searchUser>
+      <userName>#{word.userName}</userName>
+      <lastName>#{word.lastName}</lastName>
+      <firstName>#{word.firstName}</firstName>
+    <email>#{word.email}</email>
+      <action>#{word.action}</action>
+      <Add>#{word.Add}</Add>
+      <Close>#{word.Close}</Close>
+    </label>
+  </PermissionTreeSelectUser>
+  
+  <!--
+  #########Since ECM 2.6 ##################
+  -->   
+  <DriveInputSet>
+    <label>
+      <nt_folder>Φάκελος εγγράφων</nt_folder>
+      <nt_unstructured>Φάκελος περιεχομένου</nt_unstructured>
+      <exo_cssFolder>Φάκελος CSS</exo_cssFolder>
+      <exo_jsFolder>Φάκελος Javascript</exo_jsFolder>
+      <exo_linkFolder>Φάκελος συνδέσμων</exo_linkFolder>
+      <exo_webFolder>Φάκελος περιεχομένου Web</exo_webFolder>
+   </label>
+  </DriveInputSet>
+  <UIPermissionTreeInfo>
+  <msg>
+      <confirm-delete-permission>Είστε βέβαιοι ότι θέλετε να διαγράψετε αυτό το δικαίωμα;</confirm-delete-permission>
+      <no-permission-remove>Δεν μπορείτε να καταργήσετε τον ιδιοκτήτη ή τον χρήστη του συστήματος.</no-permission-remove>  
+  </msg>
+  </UIPermissionTreeInfo>  
+  <UITaxonomyTreeMainForm>
+<msg>
+      <no-right-target-path>Παρακαλώ επιλέξτε μια άλλη αρχική διαδρομή.</no-right-target-path>
+</msg>
+</UITaxonomyTreeMainForm>
+
+<UIECMAdminControlPanel>
+    <tab>
+      <label>        
+        <ManageUnLock>Διαχείριση κλειδωμάτων</ManageUnLock>
+      </label>
+    </tab>        
+</UIECMAdminControlPanel>
+<UIUnLockForm>
+    <label>
+      <name>Διαδρομή κόμβου</name>      
+      <permissions>Δικαιώματα</permissions>
+      <PermissionButton>UI Unlock Form</PermissionButton>
+    </label>
+    <action>
+      <Save>#{word.save}</Save>
+      <Cancel>#{word.cancel}</Cancel>
+    </action>
+    <msg>
+      <permission-require>Πρέπει να επιλέξετε τα δικαιώματα.</permission-require>      
+    </msg>
+  </UIUnLockForm>
+  <UILockHolderList>
+  <header>
+  <name>Ομάδες ή χρήστες</name>
+  <action>Ενέργεια</action>
+  </header>
+  <tooltip>
+<DeleteLock>Διαγραφή ομάδας</DeleteLock>
+  </tooltip>
+  <msg>
+  <can-not-delete-lock-holder>Δεν μπορείτε να διαγράψετε την ομάδα {0}.</can-not-delete-lock-holder>
+  </msg>
+  </UILockHolderList>
+  <UILockNodeList>
+  <header>
+  <name>Τίτλος</name>
+  <hoderLock>Κλείδωμα ιδιοκτήτη</hoderLock>
+  <action>Ενέργεια</action>
+  </header>
+  <tooltip>
+<UnLock>Ξεκλείδωμα</UnLock>
+  </tooltip>
+  <msg>
+  <access-denied-exception>Δεν έχετε δικαίωμα πρόσβασης στον κόμβο με τη διαδρομή {0} ή αυτός ο κόμβος έχει διαγραφεί.</access-denied-exception>
+  </msg>
+  </UILockNodeList>
+  <EditUnLockForm>
+    <title>
+      <UIUnLockForm>Διαχείριση κλειδώματος</UIUnLockForm>
+    </title>
+  </EditUnLockForm>  
+  <UITabPane>
+    <action>
+      <Close>#{word.close}</Close>
+    </action>
+    <title>
+    <UILockHolderContainer>Διαχείριση κλειδώματος</UILockHolderContainer>
+    <UILockNodeList>Κλειδωμένος κόμβος</UILockNodeList>
+    </title>
+  </UITabPane>
+  
+  <UIViewFormTabPane>
+    <action>
+      <AddTabForm>Προσθήκη καρτέλας</AddTabForm>
+      <AddTab>#{word.save}</AddTab>
+      <BackViewForm>Πίσω</BackViewForm>
+    </action>
+  </UIViewFormTabPane>
+  
+ <UITemplateForm>
+<tab>
+<label>
+<defaultSkin>CSS</defaultSkin>
+</label>
+</tab>
+</UITemplateForm>
+ 
+  <UITabPane>
+    <title>
+      <UISkinTab>CSS</UISkinTab>
+    </title>
+  </UITabPane>
+  
+  <UISkinTab>
+    <header>
+      <name>Όνομα</name>
+      <roles>Ρόλοι</roles>
+      <baseVersion>Έκδοση</baseVersion>
+      <action>Ενέργειες</action>
+    </header>
+    <msg>
+      <undeletable>Δεν μπορείτε να διαγράψετε το '{0}' επειδή είναι προεπιλεγμένο.</undeletable>
+      <confirm-delete>Θέλετε σίγουρα να διαγράψετε αυτό το θέμα εμφάνισης;</confirm-delete>
+    </msg>
+    <action>
+      <title>
+        <Edit>Επεξεργασία</Edit>
+        <Delete>Διαγραφή</Delete>
+      </title>
+    </action>
+  </UISkinTab>
+  
+  <SkinForm>
+    <label>
+      <UITemplateContent>SkinForm</UITemplateContent>
+      <UIPopupWindow>Δικαίωμα θέματος εμφάνισης</UIPopupWindow>
+      <selectVersion>Εκδόσεις</selectVersion>
+      <content>Περιεχόμενο:</content>
+      <name>Όνομα:</name>
+      <isDocumentTemplate>είναι πρότυπο εγγράφου</isDocumentTemplate>
+      <viewPermission>Δικαιώματα:</viewPermission>
+      <enableVersion>Ενεργοποιήστε την τήρηση ιστορικού εκδόσεων</enableVersion>
+    </label>
+    <title>Προσθήκη/επεξεργασία θέματος εμφάνισης</title>
+  </SkinForm>
+
+ <UITagManager>
+   <action>
+     <title>
+       <RemoveStyle>Κατάργηση</RemoveStyle>
+         <AddStyle>Προσθήκη στυλ</AddStyle>
+     </title>
+   </action>
+   <msg>
+     <confirm-delete>Είστε βέβαιοι ότι θέλετε να διαγράψετε αυτό το στυλ ετικέτας;</confirm-delete>
+   </msg>
+ </UITagManager>
+
+<UITaxonomyTreeContainer>
+<action>
+<Cancel>#{word.close}</Cancel>
+</action>
+</UITaxonomyTreeContainer>
+<UITaxonomyTreeMainForm>
+<action>
+<NextViewPermission>Επόμενο</NextViewPermission>
+<Reset>Reset</Reset>
+</action>
+</UITaxonomyTreeMainForm>
+
+<UIPermissionTreeForm>
+<action>
+<Save>Save</Save>
+<Reset>Reset</Reset>
+<NextAddAction>Επόμενο</NextAddAction>
+<Previous>Προηγούμενο</Previous>
+</action>
+</UIPermissionTreeForm>
+
+<UIActionForm>
+<action>
+<PreviousViewPermission>Προηγούμενο</PreviousViewPermission>
+<NextViewTree>Επόμενο</NextViewTree>
+</action>
+  <msg>
+    <xss-vulnerability-character>Το πεδίο '{0}' περιέχει χαρακτήρες υπεύθυνους για ευπάθεια XSS</xss-vulnerability-character>
+<xss-vulnerability-character-wo-label>Η εισαγωγή σας μπορεί να περιέχει χαρακτήρες ευπάθειας XSS</xss-vulnerability-character-wo-label>
+  </msg>
+</UIActionForm>
+
+<UITaxonomyTreeWorkingArea>
+<action>
+<Previous>Προηγούμενο</Previous>
+</action>
+</UITaxonomyTreeWorkingArea>
+
+  <UITabPane>
+    <title>
+      <UITagManager>Διαχειριστής ετικετών</UITagManager>
+      <UITagPermissionManager>Διαχειριστής δικαιωμάτων ετικετών</UITagPermissionManager>
+    </title>
+  </UITabPane>
+  
+  <UITagPermissionInfo>
+    <header>
+      <usersOrGroups>Χρήστης ή Ομάδα</usersOrGroups>
+      <action>Ενέργεια</action>
+    </header>
+    <action>
+      <title>
+        <Delete>Διαγραφή</Delete>
+      </title>
+    </action>
+    <msg>
+      <confirm-delete-permission>Είστε βέβαιοι ότι θέλετε να διαγράψετε αυτό το δικαίωμα;</confirm-delete-permission>
+    </msg>   
+  </UITagPermissionInfo>
+  <UITagPermissionForm>
+    <title>Προσθήκη δικαιώματος</title>
+    <action>
+      <Save>#{word.save}</Save>
+      <Add>Προσθήκη</Add>
+    </action>
+    <label>
+      <userOrGroup>Συμμετοχές:</userOrGroup>
+    </label>
+    <msg>
+      <userOrGroup-alreadyExists>Αυτή η ιδιότητα μέλους υπάρχει ήδη. Παρακαλώ επιλέξτε μια άλλη.</userOrGroup-alreadyExists>
+    </msg>    
+  </UITagPermissionForm>
+  
+  <UIGroupMemberSelector>
+    <label>
+      <selectGroup>Επιλογή ομάδας</selectGroup>
+      <selectMembership>Επιλέξτε την ιδιότητα του μέλους</selectMembership>
+    </label>
+  </UIGroupMemberSelector>
+  
+  <UIFolksonomyManager>
+  <msg>
+      <confirm-delete>Είστε βέβαιοι ότι θέλετε να διαγράψετε αυτό το στυλ ετικέτας;</confirm-delete>
+  </msg>
+    <action>
+      <title>
+        <AddStyle>Προσθήκη στυλ</AddStyle>
+      </title>
+    </action>
+  </UIFolksonomyManager>  
+<UIActionForm>
+  <title>
+  <ShowComponent>Άνοιγμα παράθυρου</ShowComponent>
+  <removeReference>Κατάργηση</removeReference>
+  </title>
+  </UIActionForm> 
+  <NodeTypeNameValidator>
+    <msg>
+      <Invalid-char>Υπάρχουν κάποιοι μη έγκυροι χαρακτήρες. Εισάγετε μια άλλη τιμή.</Invalid-char>
+      <empty-input>Η τιμή του πεδίου είναι κενή.</empty-input>
+    </msg>
+  </NodeTypeNameValidator>
+  <UIActionForm>
+    <msg>
+      <constraint-violation-exception>Ο κόμβος '{0}' δεν μπορεί να προστεθεί στο '{1}' στον χώρο εργασίας '{2}'.  Υπάρχει ένα πρόβλημα με τα δικαιώματα ή με τις συνθήκες περιορισμών.</constraint-violation-exception>
+    </msg>
+  </UIActionForm>
+  
+  <UIWorkspaceWizard>
+    <msg>
+      <name-not-allowed>Απαγορευμένο όνομα</name-not-allowed>
+    </msg>
+  </UIWorkspaceWizard>
+  <UIRepositoryForm>
+    <msg>
+      <not-complete-repository>The repository is being created. You need to wait a few minutes before creating another one.</not-complete-repository>
+    </msg>
+  </UIRepositoryForm>
+  
+  <UIViewFormTabPane>
+  <label>
+  <addCategory>Προσθήκη κατηγορίας</addCategory>
+          <addLocalizationLink>Προσθέστε μετάφραση</addLocalizationLink>
+  </label>
+  </UIViewFormTabPane>
+
+<UIDriveForm>
+<label>
+<allowNodeTypesOnTree>Επιτρεπόμενοι τύποι κόμβων αριστερού δέντρου:</allowNodeTypesOnTree>
+</label>
+</UIDriveForm>
+<DriveInputSet>
+<title>
+<RemovePermission>Remove Permission</RemovePermission>
+<ChooseNodeType>Επιλέξτε τύπους κόμβων</ChooseNodeType>
+<RemoveNodeType>Κατάργηση</RemoveNodeType>
+</title>
+</DriveInputSet>
+<PopupNodeTypeSelector>
+<title>
+<UINodeTypeSelector>Επιλέξτε τύπους κόμβων</UINodeTypeSelector>
+<PopupNodeTypeSelector>Επιλέξτε τύπους κόμβων</PopupNodeTypeSelector>
+</title>
+</PopupNodeTypeSelector>
+  <UINodeTypeSelector>
+    <label>
+      <selectedAllNodeTypes>Επιλέξτε όλα τα είδη του κόμβου</selectedAllNodeTypes>
+    </label>
+  </UINodeTypeSelector>
+  <UIScriptForm>
+    <msg>
+      <PathNotFoundException>Η δέσμη ενεργειών υπάρχει ήδη στο φάκελο '{0}'.</PathNotFoundException>      
+    </msg>
+  </UIScriptForm>
+ <UINodeTypeList>
+   <msg>
+   <no-list>Δεν υπάρχει κανένας τύπος κόμβου που να ταιριάζει στην αναζήτηση σας.</no-list>
+   </msg>
+ </UINodeTypeList>
+  <UIActionForm>
+    <msg>
+      <canotChangeActionId>Δεν μπορείτε να αλλάξετε το αναγνωριστικό της ενέργειας.</canotChangeActionId>
+    </msg>
+  </UIActionForm>
+  <PopupComponent>
+    <title>
+      <UINodeTypeSelector>Επιλογέας τύπων κόμβου</UINodeTypeSelector>
+    </title>
+  </PopupComponent>
+  <UIPageIterator>
+    <label>
+      <maxPageSize>Μέγιστο μέγεθος σελίδας</maxPageSize>
+    </label>
+  </UIPageIterator>
+  <UILockNodeList>
+    <msg>
+      <can-not-unlock-node>Δεν έχετε άδεια για να ξεκλειδώσετε αυτόν τον κόμβο. Παρακαλώ επικοινωνήστε με το διαχειριστή για να πάρετε τη σχετική άδεια.</can-not-unlock-node>
+    </msg>
+ </UILockNodeList>
+</bundle>

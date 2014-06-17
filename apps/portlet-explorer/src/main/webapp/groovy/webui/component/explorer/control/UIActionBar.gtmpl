@@ -106,7 +106,7 @@
 								 String idUpload = (action instanceof UploadActionComponent) ? "id='UploadButtonDiv'" : "";
 							 %>
 								 <li <%=idUpload%> onclick="<%= actionOnClick %>">
-									 <a class="actionIcon"><i class="uiIconEcms${button}"></i> $title</a>
+									 <a class="actionIcon"><i class="uiIconEcms${button} uiIconEcmsLightGray"></i> $title</a>
 								 </li>
 								 <% if (action instanceof UploadActionComponent) {
 	  						   showUploadInput = true;
@@ -115,7 +115,7 @@
 								 if (action instanceof UploadActionComponent) {
 		             %>		              	             
 		               <li id="UploadButtonDivIE" onclick="eXo.ecm.MultiUpload.uploadFileForIE(document);">
-								     <a class="actionIcon"><i class="uiIconEcms${button}"></i> $title</a>
+								     <a class="actionIcon"><i class="uiIconEcms${button} uiIconEcmsLightGray"></i> $title</a>
 							     </li>		               
 		             <%
 		             } 
@@ -131,7 +131,7 @@
   		<div class="uiViewBarContainer clearfix" id="UIViewBarContainer">
   		  <%
   		  if (uicomponent.hasBackButton()) {%>
-  		  <a class ="urlBackToButton actionIcon pull-right" href="<%=uicomponent.event("BackTo")%>" rel="tooltip" data-placement="bottom" title="<%=_ctx.appRes("UIViewBar.label.backTo")%>"><i class="uiIconEcmsReturn uiIconEcmsLightGrey"></i></a>
+  		  <a class ="urlBackToButton actionIcon pull-right" href="<%=uicomponent.event("BackTo")%>" rel="tooltip" data-placement="bottom" title="<%=_ctx.appRes("UIViewBar.label.backTo")%>"><i class="uiIconEcmsReturn uiIconEcmsLightGray"></i></a>
   		  <%}%>  	      
   	    <a class="setupPreferencesButton actionIcon pull-right" href="<%=uicomponent.event("Preferences")%>" rel="tooltip" data-placement="bottom" title="<%=_ctx.appRes("UIViewBar.label.setUpBrowser")%>"><i class="uiIconSetting uiIconLightGray"></i></a>
 
@@ -149,7 +149,7 @@
 				   }
 				   styleDrive = styleDrive.replace(" ","");
 			 %>
-	  	     <a id="driveAction" class="<%=getCSSClassOfDrivesButton()%> actionIcon pull-right" href="<%=uicomponent.event("ShowDrives")%>" rel="tooltip" data-placement="bottom" title="<%=_ctx.appRes("UIDrivesArea.DrivesArea.ShowDrives")%>"><i class="uiIconEcmsGeneralDrive uiIconEcms16x16Drive${styleDrive}"></i> <%=uicomponent.getDriveLabel();%> <i class="uiIconArrowDown"></i></a>
+	  	     <a id="driveAction" class="<%=getCSSClassOfDrivesButton()%> actionIcon pull-right" href="<%=uicomponent.event("ShowDrives")%>" rel="tooltip" data-placement="bottom" title="<%=_ctx.appRes("UIDrivesArea.DrivesArea.ShowDrives")%>"><i class="uiIconEcmsGeneralDrive uiIconEcms16x16Drive${styleDrive}"></i> <%=uicomponent.getDriveLabel();%> <i class="uiIconArrowDown uiIconLightGray"></i></a>
   	   <%}%>
   		</div>
 		</div>

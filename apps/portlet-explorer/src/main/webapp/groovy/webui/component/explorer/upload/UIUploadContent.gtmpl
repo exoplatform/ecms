@@ -39,7 +39,7 @@
 		            <%if (index == 6) {%>
 						<% String valuePath = Utils.formatNodeName(value); %>
 							<a class="actionIcon" href="<%=uicomponent.event("ManageMetadata", valuePath)%>" rel="tooltip" data-placement="bottom" title="<%=_ctx.appRes("UIUploadContent.tooltip.ManageMetadata")%>">
-								<i class="uiIconEditInfo"></i>
+								<i class="uiIconEditInfo uiIconLightGray"></i>
 							</a>
 		            <%} else {%>
 		              <span rel="tooltip" data-placement="bottom" title="$value"><%=ContentReader.getEscapeHtmlContent(subValue)%></span>
