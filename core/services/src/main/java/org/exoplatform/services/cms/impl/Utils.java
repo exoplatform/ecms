@@ -872,4 +872,14 @@ public class Utils {
     }
     return "," + Math.round(Double.valueOf(Integer.valueOf(strSize) / 100.0));
   }
+  
+  /* check if a specific node is folder 
+   * @param node node to cieck
+   * @return folder or not
+   */
+  public static boolean isFolder(Node node) throws RepositoryException  {
+    return node.isNodeType(NodetypeConstant.NT_FOLDER)
+        || node.isNodeType(NodetypeConstant.NT_UNSTRUCTURED);
+ }
+
 }
