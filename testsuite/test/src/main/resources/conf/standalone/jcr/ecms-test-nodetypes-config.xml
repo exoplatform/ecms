@@ -178,7 +178,7 @@
 
   	<propertyDefinitions>
 
-      <propertyDefinition name="exo:actions" requiredType="Reference" autoCreated="false" mandatory="true"
+      <propertyDefinition name="exo:actions" requiredType="Reference" autoCreated="false" mandatory="false"
 
         onParentVersion="COPY" protected="false" multiple="false">
 
