@@ -19,7 +19,6 @@ package org.exoplatform.services.cms.jcrext;
 import javax.jcr.Node;
 
 import org.apache.commons.chain.Context;
-import org.exoplatform.services.cms.impl.Utils;
 import org.exoplatform.services.cms.thumbnail.ThumbnailService;
 import org.exoplatform.services.command.action.Action;
 import org.exoplatform.services.wcm.utils.WCMCoreUtils;
@@ -37,8 +36,8 @@ public class RemoveNodeAction implements Action {
   public boolean execute(Context context) throws Exception {
     thumbnailService = WCMCoreUtils.getService(ThumbnailService.class);
     
-    Node node = (Node)context.get("currentItem");
     //remove thumbnail of node
+    Node node = (Node)context.get("currentItem");
     if(thumbnailService.isEnableThumbnail()) {
       try {
         thumbnailService.processRemoveThumbnail(node);
@@ -46,15 +45,6 @@ public class RemoveNodeAction implements Action {
         return false;
       }
     }
-    // remove exo:actionable when removing exo:actions
-    if (node.isNodeType("exo:actionStorage") && node.getProperty("exo:name").getString().equals("exo:actions")) {
-      Node parentNode = node.getParent();
-      if (parentNode != null && Utils.hasMixin(parentNode, "exo:actionable")){
-        parentNode.removeMixin("exo:actionable");
-        parentNode.save();
-      }
-    }
-    
     return false;
   }
 
