@@ -1,0 +1,96 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<bundle>
+  <UIDefaultSearchForm>
+    <label>
+      <keyword>Słowo kluczowe</keyword>
+      <portal>Portal</portal>
+      <Page>Strona</Page>
+      <Document>Dokument</Document>
+    </label>
+    <action>
+      <Search>Szukaj</Search>
+    </action>
+  </UIDefaultSearchForm>
+
+  <UIDefaultSearchResult>
+    <label>
+      <Page>Strona</Page>
+      <Document>Dokument</Document>
+      <DocumentAndPage>Dokument i strona</DocumentAndPage>
+      <documentandpage>Dokument i strona</documentandpage>
+      <resutlsCaption>Wyniki</resutlsCaption>
+      <ofAboutCaption>o</ofAboutCaption>
+      <forCaption>dla</forCaption>
+      <timeUnitCaption>sekund</timeUnitCaption>
+      <similar>Strony, gdzie pojawia się ta sama treść</similar>
+      <editor>Edytor</editor>
+      <date>Data</date>
+      <relevancy>Znaczenie</relevancy>
+      <title>Tytuł</title>
+      <sortBy>Sortuj według:</sortBy>
+    </label>
+    <action>
+      <edit>Edytuj</edit>
+    </action>
+    <msg>
+      <search-not-match-type>Twoje wyszukiwania {0} nie odpowiada żadnej {1}.</search-not-match-type>
+    </msg>
+  </UIDefaultSearchResult>
+  <UISearchPageLayoutManager>
+    <label>
+      <itemsPerPageSelector>Elementów na stronie</itemsPerPageSelector>
+      <searchFormSelector>Szablon formularza wyszukiwania</searchFormSelector>
+      <searchResultSelector>Szablon wyników wyszukiwania</searchResultSelector>
+      <searchPaginatorSelector>Szablon stronicowania wyszukiwania</searchPaginatorSelector>
+      <searchPageLayoutSelector>Szablon strony wyszukiwania</searchPageLayoutSelector>
+      <searchResultBasePathInputSetAction>Ścieżka bazowa</searchResultBasePathInputSetAction>
+      <pageMode>Tryb strony</pageMode>
+      <option>
+        <none>Brak</none>
+        <more>Więcej</more>
+        <pagination>Podział na strony</pagination>
+      </option>
+    </label>
+    <action>
+      <Save>#{word.save}</Save>
+      <Cancel>#{word.cancel}</Cancel>
+    </action>
+  </UISearchPageLayoutManager>
+  <searchResultBasePathInputSetAction>
+    <title>
+      <SelectBasePath>Wybierz ścieżkę bazową</SelectBasePath>
+    </title>
+  </searchResultBasePathInputSetAction>  
+  <UISearchForm>  
+   <message>
+     <keyword-not-support>Słowo kluczowe jest nieprawidłowe. Niektóre znaki nie są rozpoznawane.</keyword-not-support>
+     <not-checked>Wybierz typ wyszukiwania.</not-checked>
+     <keyword-not-empty>Wpisz słowo kluczowe.</keyword-not-empty>
+   </message>
+  </UISearchForm>
+  <UIPaginatorDefault>
+    <label>
+      <next>Następny</next>
+      <previous>Poprzedni</previous>
+      <more>Więcej</more>
+    </label>
+  </UIPaginatorDefault>
+  <UISearchPageLayoutDefault>
+    <label>
+      <quickEditTitle>Szybka edycja</quickEditTitle>
+    </label>
+  </UISearchPageLayoutDefault>
+  <searchOption>
+    <label>
+      <pageCheckBox>na stronach</pageCheckBox>
+      <documentCheckBox>w treści</documentCheckBox>
+    </label>
+  </searchOption>
+  <ViewMode>
+    <label>
+      <option>
+        <all>przeszukaj wszystkie strony</all>
+      </option>  
+    </label>  
+  </ViewMode>
+</bundle>

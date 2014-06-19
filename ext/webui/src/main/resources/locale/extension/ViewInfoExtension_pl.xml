@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<bundle>
+<UIPopupWindow>
+<title>
+<UIViewInfoManager>Wyświetl informacjie</UIViewInfoManager>
+</title>
+</UIPopupWindow>
+    
+<ECMContextMenu>
+<event>
+<ViewInfo>Wyświetl informacjie</ViewInfo>
+</event>
+</ECMContextMenu>
+<UIViewInfoContainer>
+<label>
+      <name>Nazwa</name>
+      <title>Tytuł</title>
+      <type>Typ</type>
+      <size>Rozmiar</size>
+      <owner>Właściciel</owner>
+      <lastModifier>Ostatnio zmodyfikowane przez</lastModifier>
+      <created>Data utworzenia</created>
+      <lastModified>Data ostatniej modyfikacji</lastModified>
+      <publicationState>Status publikacji</publicationState>
+</label>
+<value>
+      <folder>Katalog</folder>
+</value>
+<action>
+<Close>#{word.close}</Close>
+</action>
+</UIViewInfoContainer>
+</bundle>

@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<bundle>
+  <UISEOForm>
+    <label>  
+      <title>Tytuł:</title>
+      <description>Opis:</description>
+      <keywords>Słowa kluczowe:</keywords>
+      <language>Język:</language>
+      <robots>Roboty:</robots>
+      <sitemap>Mapa strony:</sitemap>
+      <sitemapvisible>Widoczne w Mapie strony</sitemapvisible>
+    <isInherited>Dziedzicz ze strony nadrzędnej</isInherited>
+      <priority>Priorytet:</priority>
+      <frequency>Częstotliwość:</frequency>
+      <select-language>Wybierz język</select-language>
+      <option>
+        <Always>Zawsze</Always>
+        <Hourly>Co godzinę</Hourly>
+        <Daily>Co dzień</Daily>
+        <Weekly>Co tydzień</Weekly>
+        <Monthly>Co miesiąc</Monthly>
+        <Yearly>Co rok</Yearly>
+        <Never>Nigdy</Never>
+      </option> 
+    </label>
+    <tip>
+  <priority>Prawidłowe wartości to od 0.0 do 1.0</priority>
+  </tip>   
+    <action>
+      <Save>#{word.save}</Save>
+      <Cancel>#{word.cancel}</Cancel>
+    </action>
+    <msg>
+      <repository-exception>Wystąpił nieoczekiwany błąd podczas zapisywania metadanych strony.</repository-exception>
+      <confirm-delete>Czy na pewno chcesz usunąć te dane SEO?</confirm-delete>      
+    </msg>
+    <title>
+    <seo-delete>Usuń</seo-delete>
+    </title>
+  <help> 
+  <priority>Prawidłowe wartości to od 0.0 do 1.0.</priority>
+  <description>Pomocy dla wyszukujących: niech wiedzą, że ta strona ma odnośnik którego szukają.</description>
+  <keywords>Najważniejsze wyrażenia na stronie oddzielone przecinkami.</keywords>  
+  </help>  
+  </UISEOForm>
+  <UISEOPopupWindow>
+  <title>
+      <UISEOForm>Zarządzanie SEO</UISEOForm>
+  </title>
+  </UISEOPopupWindow>    
+  <UISEOToolbarForm>
+  <title>
+      <seo>Zarządzanie SEO</seo>
+  </title>
+  <label>
+    <seo>SEO</seo>
+  </label>
+  </UISEOToolbarForm>  
+  <FloatNumberValidator>
+    <msg>
+      <Invalid-number>Wartość pola Priorytet musi być w formacie liczbowym. Zakres prawidłowych wartości jest od 0.0 do 1.0.</Invalid-number>
+    </msg>
+  </FloatNumberValidator>  
+  
+</bundle>
