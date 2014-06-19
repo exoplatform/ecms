@@ -181,7 +181,7 @@
     <view>
       <label>
         <isDeep>Is Deep</isDeep>
-        <nodetypes>Typy węzłów</nodetypes>
+        <nodetypes>Node Types</nodetypes>
         <affectedNodeTypeNames>Affected Node Types</affectedNodeTypeNames>
         <nodeTypeName>Node Type Names</nodeTypeName>
       </label> 
@@ -192,7 +192,7 @@
     <view>
       <label>
         <isDeep>Is Deep</isDeep>
-        <nodetypes>Typy węzłów</nodetypes> 
+        <nodetypes>Node Types</nodetypes> 
         <affectedNodeTypeNames>Affected Node Types</affectedNodeTypeNames>
         <nodeTypeName>Node Type Names</nodeTypeName>
       </label> 
@@ -203,7 +203,7 @@
     <view>
       <label>
         <isDeep>Is Deep</isDeep>
-        <nodetypes>Typy węzłów</nodetypes>
+        <nodetypes>Node Types</nodetypes>
         <affectedNodeTypeNames>Affected Node Types</affectedNodeTypeNames>
         <nodeTypeName>Node Type Names</nodeTypeName>
       </label> 

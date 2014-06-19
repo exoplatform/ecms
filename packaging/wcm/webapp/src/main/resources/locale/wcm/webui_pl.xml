@@ -45,7 +45,7 @@
       <admin-view>Admin</admin-view>
       <icon-view>Icons</icon-view>
       <thumbails-view>Thumbnails</thumbails-view>
-      <list-view>Lista</list-view>
+      <list-view>List</list-view>
       <authoring-view>Authoring</authoring-view>
       <wcm-category-view>Categories</wcm-category-view>
       <file-view>File Management View</file-view>
@@ -279,7 +279,7 @@
       <Save>#{word.save}</Save>
       <Clear>Clear</Clear>
       <title>
-        <Edit>Edytuj</Edit>
+        <Edit>Edit</Edit>
         <Delete>Delete</Delete>
       </title>
     </action>
@@ -390,7 +390,7 @@
       <GeneralDrives>General Drives</GeneralDrives>
       <GroupDrives>Group Drives</GroupDrives>
       <Private>Private</Private>
-      <Public>Publiczne</Public>
+      <Public>Public</Public>
       <BackupCenter>Backup Center</BackupCenter>
       <CategorizedDocumentsCenter>Categorized Documents Center</CategorizedDocumentsCenter>
       <CollaborationCenter>Collaboration Center</CollaborationCenter>

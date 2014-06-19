@@ -290,7 +290,7 @@
         <id>Id</id>
         <name>Name</name>
         <lifecycle>Lifecycle</lifecycle>
-        <homePath>Główna ścieżka</homePath>
+        <homePath>Home Path</homePath>
         <targetWorkspace>Target Workspace</targetWorkspace>
         <targetPath>Target Path</targetPath>
       </label>
@@ -335,7 +335,7 @@
     <dialog>
       <label>
         <isDeep>Is Deep</isDeep>
-        <nodetypes>Typy węzłów</nodetypes>
+        <nodetypes>Node Types</nodetypes>
         <affectedNodeTypeNames>Affected Node Types</affectedNodeTypeNames>
       </label>
     </dialog>
@@ -345,7 +345,7 @@
     <dialog>
       <label>
         <isDeep>Is Deep</isDeep>
-        <nodetypes>Typy węzłów</nodetypes>
+        <nodetypes>Node Types</nodetypes>
         <affectedNodeTypeNames>Affected Node Types</affectedNodeTypeNames>
       </label>
     </dialog>
@@ -355,7 +355,7 @@
     <dialog>
       <label>
         <isDeep>Is Deep</isDeep>
-        <nodetypes>Typy węzłów</nodetypes>
+        <nodetypes>Node Types</nodetypes>
         <affectedNodeTypeNames>Affected Node Types</affectedNodeTypeNames>
       </label>
     </dialog>
@@ -365,7 +365,7 @@
     <dialog>
       <label>
         <isDeep>Is Deep</isDeep>
-        <nodetypes>Typy węzłów</nodetypes>
+        <nodetypes>Node Types</nodetypes>
         <affectedNodeTypeNames>Affected Node Types</affectedNodeTypeNames>
       </label>
     </dialog>

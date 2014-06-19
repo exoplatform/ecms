@@ -129,7 +129,7 @@
     <title>Explorer</title>
     <label>
       <Root>Root</Root>
-      <webDavView>Download and allow edition</webDavView>
+      <webDavView>Open in MS Office</webDavView>
     </label>
     <msg>
       <path-not-found>This element was deleted or changed. Please click the Refresh button.</path-not-found>
@@ -282,7 +282,7 @@
     <tooltip>
       <AddFolder>New Folder</AddFolder>
       <AddDocument>New Content</AddDocument>
-      <EditDocument>Edytuj</EditDocument>
+      <EditDocument>Edit</EditDocument>
       <Upload>Upload</Upload>
       <Paste>Paste</Paste>
       <Search>Search</Search>
@@ -526,7 +526,7 @@
       <Checkout>Checkout</Checkout>
       <Lock>Lock</Lock>
       <Unlock>Unlock</Unlock>
-      <EditDocument>Edytuj</EditDocument>
+      <EditDocument>Edit</EditDocument>
       <Paste>Paste</Paste>
       <LockedBy>Locked by</LockedBy>
     </tooltip>
@@ -566,7 +566,7 @@
     <event>
       <Lock>Lock</Lock>
       <Unlock>UnLock</Unlock>
-      <EditDocument>Edytuj</EditDocument>
+      <EditDocument>Edit</EditDocument>
       <Copy>Copy</Copy>
       <Rename>Rename</Rename>
       <Delete>Delete</Delete>
@@ -591,7 +591,7 @@
       <MoveToTrash>Move to Trash</MoveToTrash>
       <RestoreFromTrash>Restore from Trash</RestoreFromTrash>
       <EmptyTrash>Empty Trash</EmptyTrash>
-      <WebDavView>Download and allow edition</WebDavView>
+      <WebDavView>Open in MS Office</WebDavView>
     </event>
   </ECMContextMenu>
  
@@ -742,7 +742,7 @@
   <UIPermissionInfo>
     <action>
       <title>
-        <Edit>Edytuj</Edit>
+        <Edit>Edit</Edit>
         <Delete>Remove Permission</Delete>
       </title>
     </action>
@@ -1276,7 +1276,7 @@
     </header>
     <tooltip>
       <Execute>Execute</Execute>
-      <Edit>Edytuj</Edit>
+      <Edit>Edit</Edit>
       <Delete>Delete</Delete>
     </tooltip>
     <label>
@@ -1776,7 +1776,7 @@
     <action>
       <Close>#{word.close}</Close>
       <View>View</View>
-      <Edit>Edytuj</Edit>
+      <Edit>Edit</Edit>
       <Delete>Delete</Delete>
     </action>
   </UIActionList>
@@ -1992,7 +1992,7 @@
     <label>
       <published>Published</published>
       <non-published>Unpublished</non-published>
-      <public>Publiczne</public>
+      <public>Public</public>
       <private>Private</private>
       <state>State</state>
       <visibility>Visibility</visibility>
@@ -2190,7 +2190,7 @@
   <UIJcrExplorerEditForm>
     <title>Edit File Explorer</title>
     <action>
-      <Edit>Edytuj</Edit>
+      <Edit>Edit</Edit>
       <Save>#{word.save}</Save>
       <Cancel>#{word.cancel}</Cancel>
     </action>
@@ -2625,7 +2625,7 @@
     <label>
       <OwnedByMe>Owned by me</OwnedByMe>
       <Favourites>Favorites</Favourites>
-      <Hidden>Ukryte</Hidden>
+      <Hidden>Hidden</Hidden>
       <Trash>Trash</Trash>
       <Configuration>Set Up Preferences</Configuration>
     </label>
@@ -2709,7 +2709,7 @@
     <label>
       <showOwnedByUser>Owned by me</showOwnedByUser>
       <showFavourites>Favorites</showFavourites>
-      <showHiddens>Ukryte</showHiddens>
+      <showHiddens>Hidden</showHiddens>
       <showTrash>Trash</showTrash>
     </label>
     <action>
@@ -2745,7 +2745,7 @@
 
    <UITaggingForm>
     <label>
-      <Public>Publiczne</Public>
+      <Public>Public</Public>
       <Private>Private</Private>
       <tagScopes>Tag Scopes</tagScopes>
     </label>
@@ -2948,7 +2948,7 @@
       <unpublished>Unpublished</unpublished>
       <enrolled>Enrolled</enrolled>
       <draft>Draft</draft>
-      <pending>Oczekuje</pending>
+      <pending>Pending</pending>
       <approved>Approved</approved>
       <inreview>In Review</inreview>
       <staged>Staged</staged>
