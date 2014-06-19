@@ -50,6 +50,7 @@ public class ActionableNodeTypeUpgradePlugin extends UpgradeProductPlugin {
       for (PropertyDefinitionValue propValue : propValues) {
         if (exoActionsProperty.equalsIgnoreCase(propValue.getName())) {
           propValue.setMandatory(false);
+          break;
         }
       }
       nodeTypeValue.setDeclaredPropertyDefinitionValues(propValues);
