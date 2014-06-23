@@ -1,0 +1,96 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<bundle>
+  <UIDefaultSearchForm>
+    <label>
+      <keyword>Keyword</keyword>
+      <portal>Portal</portal>
+      <Page>Page</Page>
+      <Document>Document</Document>
+    </label>
+    <action>
+      <Search>Search</Search>
+    </action>
+  </UIDefaultSearchForm>
+
+  <UIDefaultSearchResult>
+    <label>
+      <Page>Page</Page>
+      <Document>Document</Document>
+      <DocumentAndPage>Document and Page</DocumentAndPage>
+      <documentandpage>Document and Page</documentandpage>
+      <resutlsCaption>Results</resutlsCaption>
+      <ofAboutCaption>of about</ofAboutCaption>
+      <forCaption>for</forCaption>
+      <timeUnitCaption>seconds</timeUnitCaption>
+      <similar>Pages where the same content appears</similar>
+      <editor>Editor</editor>
+      <date>Date</date>
+      <relevancy>Relevance</relevancy>
+      <title>Title</title>
+      <sortBy>Sort By:</sortBy>
+    </label>
+    <action>
+      <edit>Edit</edit>
+    </action>
+    <msg>
+      <search-not-match-type>Your search {0} does not match any {1}.</search-not-match-type>
+    </msg>
+  </UIDefaultSearchResult>
+  <UISearchPageLayoutManager>
+    <label>
+      <itemsPerPageSelector>Items per Page</itemsPerPageSelector>
+      <searchFormSelector>Search Form Template</searchFormSelector>
+      <searchResultSelector>Search Result Template</searchResultSelector>
+      <searchPaginatorSelector>Search Paginator Template</searchPaginatorSelector>
+      <searchPageLayoutSelector>Search Page Layout Template</searchPageLayoutSelector>
+      <searchResultBasePathInputSetAction>Base Path</searchResultBasePathInputSetAction>
+      <pageMode>Page Mode</pageMode>
+      <option>
+        <none>None</none>
+        <more>More</more>
+        <pagination>Pagination</pagination>
+      </option>
+    </label>
+    <action>
+      <Save>#{word.save}</Save>
+      <Cancel>#{word.cancel}</Cancel>
+    </action>
+  </UISearchPageLayoutManager>
+  <searchResultBasePathInputSetAction>
+    <title>
+      <SelectBasePath>Select Base Path</SelectBasePath>
+    </title>
+  </searchResultBasePathInputSetAction>  
+  <UISearchForm>  
+   <message>
+     <keyword-not-support>The keyword is invalid. Some characters are not recognized.</keyword-not-support>
+     <not-checked>Please select a search type.</not-checked>
+     <keyword-not-empty>Please enter a keyword.</keyword-not-empty>
+   </message>
+  </UISearchForm>
+  <UIPaginatorDefault>
+    <label>
+      <next>Next</next>
+      <previous>Previous</previous>
+      <more>More</more>
+    </label>
+  </UIPaginatorDefault>
+  <UISearchPageLayoutDefault>
+    <label>
+      <quickEditTitle>Quick Edit</quickEditTitle>
+    </label>
+  </UISearchPageLayoutDefault>
+  <searchOption>
+    <label>
+      <pageCheckBox>in Pages</pageCheckBox>
+      <documentCheckBox>in Content</documentCheckBox>
+    </label>
+  </searchOption>
+  <ViewMode>
+    <label>
+      <option>
+        <all>search all sites</all>
+      </option>  
+    </label>  
+  </ViewMode>
+</bundle>
