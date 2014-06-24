@@ -46,6 +46,12 @@
       <scope>provided</scope>
       <type>jar</type>
     </dependency>
+    <dependency>
+      <groupId>org.exoplatform.addons</groupId>
+      <artifactId>exo-clouddrive-connectors-gdrive</artifactId>
+      <scope>provided</scope>
+      <type>jar</type>
+    </dependency>
 
     <!-- Portal & ECMS -->
     <dependency>

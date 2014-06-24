@@ -1108,7 +1108,6 @@
 
 						// fix Download icon, text and link
 						var i = title.find("i.uiIconDownload");
-						// TODO cleanup i.attr("class", "uiIconEcmsOpenCloudFile");
 						i.attr("class", "uiIcon16x16CloudFile-" + drive.provider.id);
 						var a = title.find("a");
 						a.text(" " + openOnProvider);

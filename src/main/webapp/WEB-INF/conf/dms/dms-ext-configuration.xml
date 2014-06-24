@@ -107,7 +107,7 @@ xmlns="http://www.exoplatform.org/xml/ns/kernel_1_2.xsd">
             </field>
           </object>
         </object-param>
-        <object-param>
+        <!-- object-param>
           <name>ConnectGoogleDrive</name>
           <object type="org.exoplatform.webui.ext.UIExtension">
             <field name="type">
@@ -127,7 +127,7 @@ xmlns="http://www.exoplatform.org/xml/ns/kernel_1_2.xsd">
               </collection>
             </field>
           </object>
-        </object-param>
+        </object-param -->
         <object-param>
           <name>ConnectBox</name>
           <object type="org.exoplatform.webui.ext.UIExtension">
@@ -155,7 +155,6 @@ xmlns="http://www.exoplatform.org/xml/ns/kernel_1_2.xsd">
             <field name="type">
               <string>org.exoplatform.ecm.dms.UIWorkingArea</string>
             </field>
-            <!-- field name="type"><string>org.exoplatform.ecm.dms.FileViewer</string></field -->
             <field name="name">
               <string>OpenCloudFile</string>
             </field>
