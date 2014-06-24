@@ -30,7 +30,7 @@
 
   <artifactId>exo-clouddrive-services-core</artifactId>
   <packaging>jar</packaging>
-  <name>eXo Cloud Drive Extension :: Services Core</name>
+  <name>eXo Cloud Drive Extension :: Services :: Core</name>
   <description>eXo Cloud Drive extension core services</description>
 
   <dependencies>
@@ -77,7 +77,7 @@
       <scope>provided</scope>
       <type>jar</type>
     </dependency>
-    <!-- we need this as *compile* to get Apache HTTP core and client dependencies from the Platform -->
+    <!-- we need this as *provided* to get Apache HTTP core and client dependencies from the Platform -->
     <dependency>
       <groupId>org.exoplatform.platform</groupId>
       <artifactId>platform-component-common</artifactId>
@@ -86,13 +86,12 @@
     </dependency>
 
     <!-- Google API -->
-    <dependency>
+    <!-- dependency>
       <groupId>com.google.api-client</groupId>
       <artifactId>google-api-client</artifactId>
       <scope>compile</scope>
       <type>jar</type>
       <exclusions>
-        <!-- exclude Apache HTTP as Google uses lower (4.0.1), than the Platform 4.0 (4.1.2)-->
         <exclusion>
           <groupId>org.apache.httpcomponents</groupId>
           <artifactId>httpclient</artifactId>
@@ -109,7 +108,6 @@
       <scope>compile</scope>
       <type>jar</type>
       <exclusions>
-        <!-- exclude Apache HTTP as Google uses lower (4.0.1), than the Platform 4.0 (4.1.2)-->
         <exclusion>
           <groupId>org.apache.httpcomponents</groupId>
           <artifactId>httpclient</artifactId>
@@ -131,7 +129,7 @@
       <artifactId>google-api-services-oauth2</artifactId>
       <scope>compile</scope>
       <type>jar</type>
-    </dependency>
+    </dependency -->
     
     <!-- Box API -->
     <dependency>

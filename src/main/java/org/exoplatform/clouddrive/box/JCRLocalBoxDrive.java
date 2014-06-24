@@ -38,8 +38,6 @@ import org.exoplatform.clouddrive.SyncNotSupportedException;
 import org.exoplatform.clouddrive.box.BoxAPI.EventsIterator;
 import org.exoplatform.clouddrive.box.BoxAPI.ItemsIterator;
 import org.exoplatform.clouddrive.box.BoxConnector.API;
-import org.exoplatform.clouddrive.googledrive.GoogleDriveException;
-import org.exoplatform.clouddrive.googledrive.GoogleUser;
 import org.exoplatform.clouddrive.jcr.JCRLocalCloudDrive;
 import org.exoplatform.clouddrive.jcr.JCRLocalCloudFile;
 import org.exoplatform.clouddrive.jcr.NodeFinder;
@@ -1135,9 +1133,7 @@ public class JCRLocalBoxDrive extends JCRLocalCloudDrive implements UserTokenRef
                              BoxProvider provider,
                              Node driveNode,
                              SessionProviderService sessionProviders,
-                             NodeFinder finder) throws RepositoryException,
-      GoogleDriveException,
-      CloudDriveException {
+                             NodeFinder finder) throws RepositoryException, CloudDriveException {
     super(loadUser(apiBuilder, provider, driveNode), driveNode, sessionProviders, finder);
     getUser().api().getToken().addListener(this);
   }

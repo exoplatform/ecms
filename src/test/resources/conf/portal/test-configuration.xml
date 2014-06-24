@@ -111,7 +111,7 @@
     <component-plugin>
       <name>add.clouddriveprovider</name>
       <set-method>addPlugin</set-method>
-      <type>org.exoplatform.clouddrive.googledrive.GoogleDriveConnector</type>
+      <type>org.exoplatform.clouddrive.gdrive.GoogleDriveConnector</type>
       <init-params>
         <properties-param>
           <name>drive-configuration</name>

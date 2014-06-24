@@ -24,6 +24,8 @@ import com.google.api.client.googleapis.auth.oauth2.GoogleAuthorizationCodeToken
 
 import org.exoplatform.clouddrive.CloudDriveException;
 import org.exoplatform.clouddrive.CloudFile;
+import org.exoplatform.clouddrive.gdrive.GoogleProvider;
+import org.exoplatform.clouddrive.gdrive.GoogleUser;
 import org.exoplatform.services.log.ExoLogger;
 import org.exoplatform.services.log.Log;
 import org.testng.Assert;
