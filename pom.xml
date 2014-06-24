@@ -29,7 +29,7 @@
 
   <artifactId>exo-clouddrive-services-ecms</artifactId>
   <packaging>jar</packaging>
-  <name>eXo Cloud Drive Extension :: Services ECMS Integration</name>
+  <name>eXo Cloud Drive Extension :: Services :: ECMS Integration</name>
   <description>eXo Cloud Drive extension integration in eXo WCM (ECMS)</description>
 
   <dependencies>

@@ -55,14 +55,13 @@ def connectYour = _ctx.appRes("UIPopupWindow.title.ConnectYour")
 			<%
 			  for(provider in driveService.providers) {
 			    CloudDriveContext.initProviders(rcontext, provider)
-				def driveSuffix = provider.name.replace(' ', '') 
 			%>
 			<div class="UIAction">
 				<div class="tab-content">
 					<ul>
 						<li>
 							<a class="actionIcon">
-								<i style="vertical-align:middle;" class="uiIconEcmsConnectDialog${driveSuffix}" provider-id="${provider.id}"></i>
+								<i style="vertical-align:middle;" class="uiIconEcmsConnectDialog-${provider.id}" provider-id="${provider.id}"></i>
 								<span style="vertical-align:middle;">${connectYour} ${provider.name}</span>
 							</a>
 						</li>

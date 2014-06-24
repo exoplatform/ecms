@@ -18,24 +18,19 @@
  */
 package org.exoplatform.clouddrive.ecms;
 
-import org.exoplatform.clouddrive.CloudDriveService;
-import org.exoplatform.clouddrive.CloudProvider;
-import org.exoplatform.clouddrive.ProviderNotAvailableException;
 import org.exoplatform.ecm.webui.component.explorer.control.listener.UIActionBarActionListener;
-import org.exoplatform.services.log.ExoLogger;
-import org.exoplatform.services.log.Log;
-import org.exoplatform.services.wcm.utils.WCMCoreUtils;
-import org.exoplatform.web.application.Parameter;
 import org.exoplatform.webui.config.annotation.ComponentConfig;
 import org.exoplatform.webui.config.annotation.EventConfig;
 import org.exoplatform.webui.event.Event;
 
 @ComponentConfig(
                  events = { @EventConfig(listeners = ConnectBoxActionComponent.ConnectBoxActionListener.class) })
-public class ConnectBoxActionComponent extends BaseCloudDriveManagerComponent implements
-    CloudDriveUIMenuAction {
+public class ConnectBoxActionComponent extends BaseConnectActionComponent {
 
-  protected static final Log LOG = ExoLogger.getLogger(ConnectBoxActionComponent.class);
+  /**
+   * Box.com id from configuration - box.
+   * */
+  protected static final String PROVIDER_ID = "box";
 
   public static class ConnectBoxActionListener extends UIActionBarActionListener<ConnectBoxActionComponent> {
 
@@ -44,37 +39,10 @@ public class ConnectBoxActionComponent extends BaseCloudDriveManagerComponent im
   }
 
   /**
-   * @inherritDoc
+   * {@inheritDoc}
    */
   @Override
-  public String renderEventURL(boolean ajax, String name, String beanId, Parameter[] params) throws Exception {
-    // this action hasn't a template, so we initialize request context on rendering phase
-    CloudDriveService drivesService = WCMCoreUtils.getService(CloudDriveService.class);
-    if (drivesService != null) {
-      try {
-        // XXX box - Box id from configuration
-        CloudProvider provider = drivesService.getProvider("box");
-        initContext(provider);
-
-        // XXX do workaround here, need point an id of the provider for this Connect component
-        // this could be better to do by HTML attribute, but we cannot do this for the moment
-        return "javascript:void(0);//" + provider.getId() + "//objectId";
-      } catch (ProviderNotAvailableException e) {
-        // if no such provider, cannot do anything - default link
-        LOG.error("Error rendering Connect to Box component: " + e.getMessage());
-        return super.renderEventURL(ajax, name, beanId, params);
-      }
-    } else {
-      LOG.error("CloudDriveService not registred in the container.");
-      return super.renderEventURL(ajax, name, beanId, params);
-    }
-  }
-
-  /**
-   * @inherritDoc
-   */
-  @Override
-  public String getName() {
-    return "Connect your Box";
+  protected String getProviderId() {
+    return PROVIDER_ID;
   }
 }
