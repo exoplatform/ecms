@@ -18,6 +18,7 @@ package org.exoplatform.services.wcm.skin;
 
 import java.io.Reader;
 import java.io.StringReader;
+import java.util.Map;
 
 import javax.jcr.Node;
 import javax.jcr.PathNotFoundException;
@@ -51,13 +52,15 @@ public class WCMSkinResourceResolver implements ResourceResolver {
 
   public Resource resolve(String path) {
     if(!path.matches(XSkinService.SKIN_PATH_REGEXP)) return null;
-    String[] elements = path.split("/");
-    String skinModule = elements[4];
-    String skinName = elements[5];
+    
+    Map<String,String> params = XSkinService.getSkinParams(path);    
+    String skinModule = params.get(XSkinService.MODULE_PARAM);
+    String siteName = params.get(XSkinService.SITENAME_PARAM);
+    String skinName = params.get(XSkinService.SKIN_PARAM);
+    
     if (!skinModule.matches(XSkinService.MODULE_NAME_REGEXP)) return null;
-    String portalName = skinModule.split("-")[1];
+    
     String cssPath = null;
-
     SkinConfig portalSkinConfig = skinService.getSkin(skinModule,skinName);
     if(portalSkinConfig != null) {
       cssPath = portalSkinConfig.getCSSPath();
@@ -72,7 +75,7 @@ public class WCMSkinResourceResolver implements ResourceResolver {
       }
     }
     try {
-      Node portalNode = livePortalService.getLivePortal(WCMCoreUtils.getSystemSessionProvider(), portalName);
+      Node portalNode = livePortalService.getLivePortal(WCMCoreUtils.getSystemSessionProvider(), siteName);
       final String cssData = WCMCoreUtils.getSiteGlobalActiveStylesheet(portalNode);
       if(cssData == null)
         return null;

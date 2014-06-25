@@ -17,9 +17,11 @@
 package org.exoplatform.services.wcm.skin;
 
 import java.util.Collection;
+import java.util.HashMap;
 import java.util.HashSet;
 import java.util.Iterator;
 import java.util.List;
+import java.util.Map;
 import java.util.Map.Entry;
 
 import javax.jcr.Node;
@@ -46,15 +48,20 @@ import org.picocontainer.Startable;
  * Apr 9, 2008
  */
 public class XSkinService implements Startable {
-
-  public final static String     MODULE_NAME_PATTERN    = "{repositoryName}-{portalName}";
-  public final static String     MODULE_NAME_REGEXP    = "(.*)-(.*)";
-
+  /* Don't use "-", "_", ":" "#" "%" */
+  final static String     SEPARATOR             = "/"; 
+  final static String     MODULE_NAME_PATTERN   = "{repositoryName}"+SEPARATOR+"{portalName}";
+  final static String     MODULE_NAME_REGEXP    = "(.*)"+SEPARATOR+"(.*)";
+  final static String     MODULE_PARAM          = "moduleName";
+  final static String     SKIN_PARAM            = "skinName";
+  final static String     CONTEXT_PARAM         = "context";
+  final static String     SITENAME_PARAM        = "siteName";
+  
   /** The Constant SKIN_PATH_REGEXP. */
   public final static String      SKIN_PATH_REGEXP     = "/(.*)/css/jcr/"+MODULE_NAME_REGEXP+"/(.*)/(.*).css";
 
   /** The Constant SKIN_PATH_PATTERN. */
-  private final static String     SKIN_PATH_PATTERN    = "/{docBase}/css/jcr/{moduleName}/(.*)/Stylesheet.css";
+  private final static String     SKIN_PATH_PATTERN    = "/{docBase}/css/jcr/{moduleName}/(.*)/Stylesheet.css";  
 
   /** The log. */
   private static final Log LOG = ExoLogger.getLogger(XSkinService.class.getName());
@@ -138,7 +145,7 @@ public class XSkinService implements Startable {
    * @throws Exception the exception
    */
   private void addPortalSkin(Node portalNode) throws Exception {
-    String moduleName = getModuleName(portalNode.getName());
+    String moduleName = createModuleName(portalNode.getName());
     String skinPath = StringUtils.replaceOnce(SKIN_PATH_PATTERN, "{moduleName}",moduleName)
                                  .replaceFirst("\\{docBase\\}",
                                                servletContext.getServletContextName());
@@ -165,7 +172,7 @@ public class XSkinService implements Startable {
    * @throws Exception the exception
    */
   private void addSharedPortalSkin(Node portalNode) throws Exception {
-    String moduleName = getModuleName(portalNode.getName());
+    String moduleName = createModuleName(portalNode.getName());
     String skinPath = StringUtils.replaceOnce(SKIN_PATH_PATTERN, "{moduleName}", moduleName)
                                  .replaceFirst("\\{docBase\\}",
                                                servletContext.getServletContextName());
@@ -205,7 +212,7 @@ public class XSkinService implements Startable {
   public void stop() {
   }
 
-  public static String getModuleName(String siteName){
+  static String createModuleName(String siteName){
     String repoName;
     try{
       repoName = WCMCoreUtils.getRepository().getConfiguration().getName();
@@ -216,4 +223,33 @@ public class XSkinService implements Startable {
     moduleName = StringUtils.replaceOnce(moduleName,"{portalName}",siteName);
     return moduleName;
   }
+  
+  static Map<String,String> getSkinParams(String path){
+    if (!path.matches(SKIN_PATH_REGEXP)) return null;
+    String moduleName;
+    String skinName;
+    String siteName;
+    String context;
+    String[] elements = path.split("/");
+    if (XSkinService.SEPARATOR.equals("/")){
+      context = elements[4];
+      siteName = elements[5];
+      skinName = elements[6];      
+    }else{
+      context = elements[4].split(XSkinService.SEPARATOR)[0];
+      siteName = elements[4].split(XSkinService.SEPARATOR)[1];
+      skinName = elements[5];
+    }
+    
+    moduleName = StringUtils.replaceOnce(MODULE_NAME_PATTERN, "{repositoryName}", context);
+    moduleName = StringUtils.replaceOnce(moduleName,"{portalName}",siteName);
+    Map<String,String> params = new HashMap<String,String>();
+    params.put(MODULE_PARAM, moduleName);
+    params.put(SKIN_PARAM, skinName);
+    params.put(SITENAME_PARAM, siteName);
+    params.put(CONTEXT_PARAM, context);    
+    return params;  
+  }
+  
+  
 }
