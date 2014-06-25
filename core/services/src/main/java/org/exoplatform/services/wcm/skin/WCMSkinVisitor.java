@@ -22,6 +22,7 @@ import java.util.Collections;
 import java.util.Comparator;
 import java.util.LinkedList;
 import java.util.List;
+import java.util.Map;
 import java.util.Map.Entry;
 
 import org.exoplatform.portal.resource.SkinConfig;
@@ -45,7 +46,7 @@ public class WCMSkinVisitor implements SkinVisitor{
 
     public WCMSkinVisitor(String siteName,String skinName){
       this.skinName = skinName;
-      this.moduleName = XSkinService.getModuleName(siteName);
+      this.moduleName = XSkinService.createModuleName(siteName);
     }
 
     @Override
@@ -84,10 +85,13 @@ public class WCMSkinVisitor implements SkinVisitor{
     private void visit(Collection<SkinConfig> skins, Entry<SkinKey, SkinConfig> entry){
       String currentContext = WCMCoreUtils.getRepository().getConfiguration().getName();
       String cssPath = entry.getValue().getCSSPath();
+      Map<String,String> params = XSkinService.getSkinParams(cssPath);
       if (cssPath.matches(XSkinService.SKIN_PATH_REGEXP)){
-        if (!cssPath.split("/")[4].split("-")[0].equals(currentContext))
+        if (!params.get(XSkinService.CONTEXT_PARAM).equals(currentContext))
           return;
       }
       skins.add(entry.getValue());
     }
 }
+
+
