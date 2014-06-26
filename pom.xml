@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!--
 
-    Copyright (C) 2013 eXo Platform SAS.
+    Copyright (C) 2014 eXo Platform SAS.
     
     This is free software; you can redistribute it and/or modify it
     under the terms of the GNU Lesser General Public License as
@@ -19,14 +19,15 @@
     02110-1301 USA, or see the FSF site: http://www.fsf.org.
 
 -->
-<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
   <modelVersion>4.0.0</modelVersion>
   <parent>
     <groupId>org.exoplatform.addons</groupId>
     <artifactId>exo-clouddrive-parent</artifactId>
     <version>1.1.0-SNAPSHOT</version>
   </parent>
- 
+
   <artifactId>exo-clouddrive-webapp</artifactId>
   <packaging>war</packaging>
   <name>eXo Cloud Drive Extension :: Webapp</name>
@@ -43,12 +44,6 @@
     <dependency>
       <groupId>org.exoplatform.addons</groupId>
       <artifactId>exo-clouddrive-services-ecms</artifactId>
-      <scope>provided</scope>
-      <type>jar</type>
-    </dependency>
-    <dependency>
-      <groupId>org.exoplatform.addons</groupId>
-      <artifactId>exo-clouddrive-connectors-gdrive</artifactId>
       <scope>provided</scope>
       <type>jar</type>
     </dependency>

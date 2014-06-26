@@ -349,14 +349,10 @@ xmlns="http://www.exoplatform.org/xml/ns/kernel_1_2.xsd">
     </component-plugin>
   </external-component-plugins>
   <external-component-plugins>
-    <!-- The full qualified name of the ResourceBundleService -->
     <target-component>org.exoplatform.services.resources.ResourceBundleService</target-component>
     <component-plugin>
-      <!-- The name of the plugin -->
       <name>ResourceBundle Plugin</name>
-      <!-- The name of the method to call on the ResourceBundleService in order to register the ResourceBundles -->
       <set-method>addResourceBundle</set-method>
-      <!-- The full qualified name of the BaseResourceBundlePlugin -->
       <type>org.exoplatform.services.resources.impl.BaseResourceBundlePlugin</type>
       <init-params>
         <values-param>
