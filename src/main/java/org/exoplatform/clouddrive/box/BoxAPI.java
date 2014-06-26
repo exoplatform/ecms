@@ -865,6 +865,34 @@ public class BoxAPI {
     }
   }
 
+  BoxFolder createSharedFolder(String parentId, String name, Calendar created) throws BoxException,
+                                                                        NotFoundException,
+                                                                        RefreshAccessException,
+                                                                        ConflictException {
+    try {
+      BoxFolderRequestObject obj = BoxFolderRequestObject.createSharedLinkRequestObject(null); // TODO
+      obj.put("created_at", formatDate(created));
+      return client.getSharedFoldersManager("sharedLink", "password").createFolder(obj); // TODO
+    } catch (BoxRestException e) {
+      throw new BoxException("Error creating folder: " + e.getMessage(), e);
+    } catch (BoxServerException e) {
+      int status = getErrorStatus(e);
+      if (status == 404 || status == 412) {
+        // not_found or precondition_failed - then parent not found
+        throw new NotFoundException("Parent not found " + parentId, e);
+      } else if (status == 403) {
+        throw new NotFoundException("The user doesn’t have access to create a folder " + name, e);
+      } else if (status == 409) {
+        // conflict - the same name file exists
+        throw new ConflictException("File with the same name as creating already exists " + name, e);
+      }
+      throw new BoxException("Error creating folder: " + e.getMessage(), e);
+    } catch (AuthFatalFailureException e) {
+      checkTokenState();
+      throw new BoxException("Authentication error when creating folder: " + e.getMessage(), e);
+    }
+  }
+
   /**
    * Delete a cloud file by given fileId. Depending on Box enterprise settings for this user, the file will
    * either be actually deleted from Box or moved to the Trash.
@@ -1376,7 +1404,7 @@ public class BoxAPI {
   }
 
   BoxFolder readFolder(String id) throws BoxException, NotFoundException, RefreshAccessException {
-    try {
+    try {// client.getSharedFoldersManager("", "").createFolder(requestObject)
       return client.getFoldersManager().getFolder(id, new BoxDefaultRequestObject());
     } catch (BoxRestException e) {
       throw new BoxException("Error reading folder: " + e.getMessage(), e);
