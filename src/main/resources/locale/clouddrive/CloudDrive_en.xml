@@ -3,7 +3,6 @@
   <UITabForm>
     <label>
       <showConnectCloudDrive>Connect Cloud Documents</showConnectCloudDrive>
-      <connectGoogleDrive>Connect Google Drive</connectGoogleDrive>
       <connectBox>Connect Box</connectBox>
     </label>
   </UITabForm>
@@ -16,11 +15,6 @@
   <UIActionBar>
     <tooltip>
       <ShowConnectCloudDrive>Connect Cloud Documents</ShowConnectCloudDrive>
-    </tooltip>
-  </UIActionBar>
-  <UIActionBar>
-    <tooltip>
-      <ConnectGoogleDrive>Connect your Google Drive</ConnectGoogleDrive>
     </tooltip>
   </UIActionBar>
   <UIActionBar>

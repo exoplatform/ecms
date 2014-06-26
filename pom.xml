@@ -45,6 +45,7 @@
       <groupId>org.exoplatform.commons</groupId>
       <artifactId>commons-webui-ext</artifactId>
       <scope>provided</scope>
+      <type>jar</type>
     </dependency>
 
     <!-- ECMS -->
@@ -59,11 +60,13 @@
       <groupId>org.exoplatform.ecms</groupId>
       <artifactId>ecms-core-webui-explorer</artifactId>
       <scope>provided</scope>
+      <type>jar</type>
     </dependency>
     <dependency>
       <groupId>org.exoplatform.ecms</groupId>
       <artifactId>ecms-core-webui</artifactId>
       <scope>provided</scope>
+      <type>jar</type>
     </dependency>
   </dependencies>
 
