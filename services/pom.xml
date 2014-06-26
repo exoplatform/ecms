@@ -90,6 +90,12 @@
       <scope>provided</scope>
       <type>jar</type>
     </dependency>
+    <dependency>
+      <groupId>org.exoplatform.ecms</groupId>
+      <artifactId>ecms-core-webui-explorer</artifactId>
+      <scope>provided</scope>
+      <type>jar</type>
+    </dependency>
     <!-- we need this as *provided* to get Apache HTTP core and client dependencies from the Platform -->
     <dependency>
       <groupId>org.exoplatform.platform</groupId>
