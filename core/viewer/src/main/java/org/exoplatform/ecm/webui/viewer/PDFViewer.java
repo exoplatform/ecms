@@ -23,6 +23,8 @@ import java.util.List;
 import java.util.Locale;
 import java.util.Map;
 import java.util.ResourceBundle;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 import javax.jcr.Node;
 import javax.jcr.NodeIterator;
@@ -77,6 +79,7 @@ public class PDFViewer extends UIForm {
 
   final static private String PAGE_NUMBER = "pageNumber";
   final static private String SCALE_PAGE = "scalePage";
+  private static final Logger logger = Logger.getLogger(PDFViewer.class.toString());
 
   final private String localeFile = "locale.portlet.viewer.PDFViewer";
 
@@ -148,7 +151,8 @@ public class PDFViewer extends UIForm {
   }
 
   private void putDocumentInfo(PInfo documentInfo) {
-    if (documentInfo != null) {
+   try{
+     if (documentInfo != null) {
       if(documentInfo.getTitle() != null && documentInfo.getTitle().length() > 0) {
         metadatas.put("title", documentInfo.getTitle());
       }
@@ -173,6 +177,10 @@ public class PDFViewer extends UIForm {
       if(documentInfo.getModDate() != null) {
         metadatas.put("modDate", documentInfo.getModDate().toString());
       }
+     }}catch (Exception e){
+        if (logger.isLoggable(Level.WARNING)) {
+            logger.warning("An error occurred while creating the document metadata");
+        }
     }
   }
 
