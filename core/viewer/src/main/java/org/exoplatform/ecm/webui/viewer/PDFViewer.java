@@ -34,6 +34,8 @@ import org.exoplatform.container.ExoContainer;
 import org.exoplatform.container.ExoContainerContext;
 import org.exoplatform.portal.webui.util.Util;
 import org.exoplatform.portal.webui.workspace.UIPortalApplication;
+import org.exoplatform.services.log.ExoLogger;
+import org.exoplatform.services.log.Log;
 import org.exoplatform.services.pdfviewer.PDFViewerService;
 import org.exoplatform.services.resources.ResourceBundleService;
 import org.exoplatform.services.wcm.utils.WCMCoreUtils;
@@ -79,7 +81,7 @@ public class PDFViewer extends UIForm {
 
   final static private String PAGE_NUMBER = "pageNumber";
   final static private String SCALE_PAGE = "scalePage";
-  private static final Logger logger = Logger.getLogger(PDFViewer.class.toString());
+  private static final Log logger = ExoLogger.getLogger(PDFViewer.class.toString());
 
   final private String localeFile = "locale.portlet.viewer.PDFViewer";
 
@@ -177,9 +179,10 @@ public class PDFViewer extends UIForm {
       if(documentInfo.getModDate() != null) {
         metadatas.put("modDate", documentInfo.getModDate().toString());
       }
-     }}catch (Exception e){
-        if (logger.isLoggable(Level.WARNING)) {
-            logger.warning("An error occurred while creating the document metadata");
+     }
+   }catch (Exception e){
+        if (logger.isWarnEnabled()) {
+            logger.warn("An error occurred while creating the document metadata");
         }
     }
   }
