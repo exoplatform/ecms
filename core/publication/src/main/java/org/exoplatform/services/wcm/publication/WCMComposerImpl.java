@@ -12,6 +12,7 @@ import javax.jcr.ItemNotFoundException;
 import javax.jcr.Node;
 import javax.jcr.NodeIterator;
 import javax.jcr.RepositoryException;
+import javax.jcr.PathNotFoundException;
 import javax.jcr.Session;
 import javax.jcr.query.Query;
 import javax.jcr.query.QueryManager;
@@ -714,13 +715,11 @@ public class WCMComposerImpl implements WCMComposer, Startable {
     ManageableRepository manageableRepository = repositoryService.getCurrentRepository();
     Session session = sessionProvider.getSession(workspace, manageableRepository);
     Node currentFolder = null;
-    if ("/".equals(path)) {
-      currentFolder = session.getRootNode();
-    } else if (session.getRootNode().hasNode(path.substring(1))) {
-      currentFolder = session.getRootNode().getNode(path.substring(1));
-    } else {
+    try {
+       Node node = (Node)session.getItem(path);
+       return node.getPrimaryNodeType().getName();
+    } catch(PathNotFoundException pne) {
       return null;
     }
-    return currentFolder.getPrimaryNodeType().getName();
   }
 }
