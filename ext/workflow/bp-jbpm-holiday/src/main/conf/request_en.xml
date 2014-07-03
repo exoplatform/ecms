@@ -8,11 +8,11 @@
   -->
   <start>
     <title>Start of vacations:</title>
-    <label>Start (dd/mm/yyyy):</label>
+    <label>Start:</label>
   </start>
   <end>
     <title>End of vacations:</title>
-    <label>End (dd/mm/yyyy):</label>
+    <label>End:</label>
   </end>
   
   <cancel>Cancel</cancel>

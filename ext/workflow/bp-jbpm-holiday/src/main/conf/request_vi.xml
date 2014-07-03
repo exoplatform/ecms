@@ -8,11 +8,11 @@
   -->
   <start>
     <title>Ngày bắt đầu kỳ nghỉ:</title>
-    <label>Bắt đầu (dd/mm/yyyy) :</label>
+    <label>Bắt đầu :</label>
   </start>
   <end>
     <title>Ngày kết thúc kỳ nghỉ:</title>
-    <label>Kết thúc (dd/mm/yyyy) :</label>
+    <label>Kết thúc :</label>
   </end>
   
   <cancel>Thoát</cancel>

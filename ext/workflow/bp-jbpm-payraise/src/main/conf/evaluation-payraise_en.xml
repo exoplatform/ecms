@@ -18,10 +18,10 @@
     <label>Initiator:</label>
   </initiator>
   <start>
-    <label>Start (dd/mm/yyyy):</label>
+    <label>Start:</label>
   </start>
   <end>
-    <label>End (dd/mm/yyyy):</label>
+    <label>End:</label>
   </end>
   <reason>
     <title>Reason given by the initiator</title>

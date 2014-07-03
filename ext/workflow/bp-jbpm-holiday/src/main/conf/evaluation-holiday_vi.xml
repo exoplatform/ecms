@@ -23,11 +23,11 @@
   </initiator>
   <start>
     <title>Bắt đầu các kỳ nghỉ :</title>
-    <label>Bắt đầu (dd/mm/yyyy) :</label>
+    <label>Bắt đầu :</label>
   </start>
   <end>
     <title>Kết thúc các kỳ nghỉ :</title>
-    <label>Kết thúc (dd/mm/yyyy) :</label>
+    <label>Kết thúc :</label>
   </end>
   
   <grant>
