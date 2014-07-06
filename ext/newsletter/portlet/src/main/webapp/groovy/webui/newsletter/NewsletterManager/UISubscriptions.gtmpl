@@ -195,7 +195,7 @@ if(categoryTitle != null && categoryTitle.length() > 30)
 								%>
 									<tr class="$classTr">
 										<td style="width:auto; overflow: hidden; max-width: 500px;">
-											<a href="<%=uicomponent.event("SelectSubscription", subScription.getName())%>" title="<%=subScription.getTitle()%>">
+											<a href="javascript:void(0);" onclick="<%=uicomponent.event("SelectSubscription", subScription.getName())%>" title="<%=subScription.getTitle()%>">
 												<%=subScription.getTitle()%>
 											</a>
 										</td>

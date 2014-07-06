@@ -40,7 +40,7 @@
          					for(itemContext in uicomponent.getLstHiddenComp()) {
          						def action = itemContext.getUIExtensionName();
        					%>
-								<a title="<%=_ctx.appRes(uicomponent.getId() + ".label." + action)%>" class="IconPopup ${action}Icon" href="<%=itemContext.event(action)%>">&nbsp;</a>
+								<a title="<%=_ctx.appRes(uicomponent.getId() + ".label." + action)%>" class="IconPopup ${action}Icon" href="javascript:void(0);" onclick="<%=itemContext.event(action)%>">&nbsp;</a>
 					<% } %>
 					</div>
 				</div>

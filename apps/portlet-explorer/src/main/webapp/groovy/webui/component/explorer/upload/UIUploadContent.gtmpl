@@ -38,7 +38,7 @@
 	                  <td style="text-align: center;overflow:hidden">
 		            <%if (index == 6) {%>
 								<% String valuePath = Utils.formatNodeName(value); %>
-		              <a href="<%=uicomponent.event("ManageMetadata", valuePath)%>" title="<%=_ctx.appRes("UIUploadContent.tooltip.ManageMetadata")%>">
+		              <a href="javascript:void(0);" onclick="<%=uicomponent.event("ManageMetadata", valuePath)%>" title="<%=_ctx.appRes("UIUploadContent.tooltip.ManageMetadata")%>">
 		              <div class="Icon16x16 Edit16x16Icon" style="margin-left: 30px;" title="<%=_ctx.appRes("UIUploadContent.tooltip.ManageMetadata")%>"><span></span></div>
 	                </a>
 		            <%} else {%>

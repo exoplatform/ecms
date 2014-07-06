@@ -21,11 +21,11 @@ if(subscriptionTitle != null && subscriptionTitle.length() > 100)
 <% uiform.begin() %>
 	<div class="NewsletterBoxContent">
 		<div class="BreadCumbs">
-			<a class="Selected" style="color:blue;" href="<%=uicomponent.event("BackToCategories")%>">
+			<a class="Selected" style="color:blue;" href="javascript:void(0);" onclick="<%=uicomponent.event("BackToCategories")%>">
 				<%=_ctx.appRes("NewsletterPortlet.title.newsletter")%>
 			</a>
 			>
-			<a title="<%=uicomponent.categoryConfig.getTitle()%>" class="Selected" style="color:blue;" href="<%=uicomponent.event("BackToSubcriptions")%>">
+			<a title="<%=uicomponent.categoryConfig.getTitle()%>" class="Selected" style="color:blue;" href="javascript:void(0);" onclick="<%=uicomponent.event("BackToSubcriptions")%>">
 				<%=categoryTitle%>
 			</a>
 			>
@@ -169,7 +169,7 @@ if(subscriptionTitle != null && subscriptionTitle.length() > 100)
 							%>
 								<tr style="$color">
 									<td style="width:auto; overflow: hidden; max-width: 500px;">
-										<a title="<%=newsletter.getNewsletterTitle()%>" href="<%=uicomponent.event("SelectNewsletter", newsletter.getNewsletterName())%>">
+										<a title="<%=newsletter.getNewsletterTitle()%>" href="javascript:void(0);" onclick="<%=uicomponent.event("SelectNewsletter", newsletter.getNewsletterName())%>">
 											<%=newsletter.getNewsletterTitle()%>
 										</a>
 									</td>

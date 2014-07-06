@@ -78,7 +78,7 @@
 				  <tr class="EvenRow">
 			      <td class="Text" colspan="3">
 			        <div class="ClearAllBlock ClearFix" style="text-align: center">
-								<a  class="Icon ScissorsEraserWarning16x16Icon" href="<%=uicomponent.event('ClearAll', 'All')%>">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+								<a  class="Icon ScissorsEraserWarning16x16Icon" href="javascript:void(0);" onclick="<%=uicomponent.event('ClearAll', 'All')%>">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 								  <%=_ctx.appRes(name+".action.clearall")%>
 								</a>
 							 

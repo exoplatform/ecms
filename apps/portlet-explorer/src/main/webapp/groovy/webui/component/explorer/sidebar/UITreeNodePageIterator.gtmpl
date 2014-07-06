@@ -28,7 +28,7 @@ import org.exoplatform.ecm.webui.component.explorer.UIWorkingArea;
 		<tr>
 			<td>
 		    <%if( currentPage - 1 > 0 ){%>        
-		    	  <a href="<%=uicomponent.event("ShowPage","${currentPage - 1}")%>" class="Icon LastPage" title="<%=_ctx.appRes("UIPageIterator.label.previous")%>"><span></span></a>
+		    	  <a href="javascript:void(0);" onclick="<%=uicomponent.event("ShowPage","${currentPage - 1}")%>" class="Icon LastPage" title="<%=_ctx.appRes("UIPageIterator.label.previous")%>"><span></span></a>
 		    <% } else {%>
 		    	  <a class="Icon LastPage DisablePage" title="<%=_ctx.appRes("UIPageIterator.label.previous")%>"><span></span></a>
 		    <%}%>
@@ -50,15 +50,15 @@ import org.exoplatform.ecm.webui.component.explorer.UIWorkingArea;
       for( i in min..max) { %>
       	<td>
 	      <%if( i == currentPage) { %>
-	          <a href="<%=uicomponent.event("ShowPage","$i")%>" class="PageSelected"><%=i%></a>
+	          <a href="javascript:void(0);" onclick="<%=uicomponent.event("ShowPage","$i")%>" class="PageSelected"><%=i%></a>
 	      <%} else { %>
-	          <a href="<%=uicomponent.event("ShowPage","$i")%>"><%=i%></a>
+	          <a href="javascript:void(0);" onclick="<%=uicomponent.event("ShowPage","$i")%>"><%=i%></a>
 	      <%} %>
       	</td> 
       <%}%>
 	    <td>
 		    <% if(currentPage +1 <= totalPage) { %>
-		    	   <a href="<%=uicomponent.event("ShowPage","${currentPage + 1}")%>" class="Icon NextPage" title="<%=_ctx.appRes("UIPageIterator.label.next")%>"><span></span></a>
+		    	   <a href="javascript:void(0);" onclick="<%=uicomponent.event("ShowPage","${currentPage + 1}")%>" class="Icon NextPage" title="<%=_ctx.appRes("UIPageIterator.label.next")%>"><span></span></a>
 		    <% } else { %>
 		    	   <a class="Icon NextPage DisablePage" title="<%=_ctx.appRes("UIPageIterator.label.next")%>"><span></span></a>
 		    <%}%>
