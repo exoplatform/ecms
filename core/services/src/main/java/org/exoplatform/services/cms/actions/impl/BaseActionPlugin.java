@@ -405,27 +405,19 @@ abstract public class BaseActionPlugin implements ActionPlugin {
     Node srcNode = (Node) session.getItem(action.getSrcPath());
     Node actionNode = null;
     boolean firstImport = false;
-    ActionServiceContainer actionContainer = WCMCoreUtils.getService(ActionServiceContainer.class);
-    RepositoryService repositoryService = WCMCoreUtils.getService(RepositoryService.class);
-    ManageableRepository manageRepo = repositoryService.getCurrentRepository();
-    Node actionNodeName = null;
-    try {
-      actionNodeName = actionContainer.getAction(srcNode, action.getName()) ;
-    } catch (Exception e) {
-      if (LOG.isWarnEnabled()) {
-        LOG.warn(e.getMessage());
-      }
-    }
-
+    String actionsNodeName = EXO_ACTIONS + "/" + action.getName();
     Node actionsNode = null;
-    if (actionNodeName == null) {
+    if (!srcNode.hasNode(actionsNodeName)) {
+      RepositoryService repositoryService = WCMCoreUtils.getService(RepositoryService.class);
+      ManageableRepository manageRepo = repositoryService.getCurrentRepository();
+    
       firstImport = true;
       if (!srcNode.isNodeType("exo:actionable")) {
         srcNode.addMixin("exo:actionable");
       }
-      try {
-        actionsNode = srcNode.getNodes(EXO_ACTIONS).nextNode();
-      } catch (Exception e) {
+      if(srcNode.hasNode(EXO_ACTIONS)) {
+        actionsNode = srcNode.getNode(EXO_ACTIONS);
+      }else {
         actionsNode = srcNode.addNode(EXO_ACTIONS,ACTION_STORAGE);
         srcNode.save();
       }
@@ -470,7 +462,7 @@ abstract public class BaseActionPlugin implements ActionPlugin {
         }
       }
     } else {
-      actionNodeName = actionContainer.getAction(srcNode, action.getName());
+      actionNode = srcNode.getNode(actionsNodeName);
     }
 
     String unparsedVariables = action.getVariables();
