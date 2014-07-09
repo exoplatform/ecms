@@ -18,6 +18,9 @@
 		var activeSyncs = []; // array of drives doing synchronization
 		var autoSyncs = {}; // active auto-synchronization jobs
 
+		/** 
+		 * Deprecated initialization of ajax request. Use initRequest() instead.
+		 * */
 		var initRequestDefaults = function(request, callbacks) {
 			// stuff in textStatus is less interesting: it can be "timeout",
 			// "error", "abort", and "parsererror",
@@ -107,19 +110,23 @@
 				process.resolve(data, jqXHR.status, textStatus);
 			});
 
-			request.always(function(data_jqXHR, textStatus, jqXHR_errorThrown) {
+			request.always(function(data, textStatus, errorThrown) {
 				var status;
-				if (data_jqXHR && data_jqXHR.status) {
-					status = data_jqXHR.status;
-				} else if (jqXHR_errorThrown && jqXHR_errorThrown.status) {
-					status = jqXHR_errorThrown.status;
+				if (data && data.status) {
+					status = data.status;
+				} else if (errorThrown && errorThrown.status) {
+					status = errorThrown.status;
 				} else {
 					status = 200; // what else we could to do
 				}
 				process.always(status, textStatus);
 			});
-
-			return process.promise();
+			
+			// custom Promise target to provide an access to jqXHR object 
+			var processTarget = {
+				request : request
+			};
+			return process.promise(processTarget);
 		};
 
 		// TODO not used currently
@@ -189,6 +196,21 @@
 			});
 			initRequestDefaults(request, callbacks);
 		};
+		
+		var getState = function(workspace, path) {
+			var request = $.ajax({
+			  async : true,
+			  type : "GET",
+			  url : prefixUrl + "/portal/rest/clouddrive/drive/state",
+			  dataType : "json",
+			  data : {
+			    workspace : workspace,
+			    path : path
+			  }
+			});
+
+			return initRequest(request);
+		};
 
 		var synchronizePost = function(workspace, path) {
 			var request = $.ajax({
@@ -205,43 +227,13 @@
 			return initRequest(request);
 		};
 
-		/** TODO deprecated */
-		var changesPost = function(workspace, path) {
-			var request = $.ajax({
-			  async : true,
-			  type : "POST",
-			  url : prefixUrl + "/portal/rest/clouddrive/changes",
-			  dataType : "json",
-			  data : {
-			    workspace : workspace,
-			    path : path
-			  }
-			});
-
-			return initRequest(request);
-		};
-
-		var changesLinkGet = function(workspace, path) {
-			var request = $.ajax({
-			  async : true,
-			  type : "GET",
-			  url : prefixUrl + "/portal/rest/clouddrive/changes/link",
-			  dataType : "json",
-			  data : {
-			    workspace : workspace,
-			    path : path
-			  }
-			});
-
-			return initRequest(request);
-		};
-
-		var serviceGet = function(url) {
+		var serviceGet = function(url, data) {
 			var request = $.ajax({
 			  async : true,
 			  type : "GET",
 			  url : url,
-			  dataType : "json"
+			  dataType : "json",
+			  data : data ? data : {}
 			});
 			return initRequest(request);
 		};
@@ -290,7 +282,6 @@
 					  var userNode = contextNode;
 					  if (userNode) {
 						  utils.log("Connecting Cloud Drive to node " + userNode.path + " in " + userNode.workspace);
-
 						  var post = connectPost(userNode.workspace, userNode.path);
 						  post.done(function(state, status) {
 							  utils.log("Connect requested: " + status + ". ");
@@ -462,90 +453,131 @@
 		};
 
 		var autoSynchronize = function() {
-			if (contextNode && contextDrive) {
-				var driveWorkspace = contextNode.workspace;
+			if (contextDrive) {
 				var drive = contextDrive;
-				var drivePath = drive.path;
-				var syncName = driveWorkspace + ":" + drivePath;
+				var syncName = drive.workspace + ":" + drive.path;
 
 				if (!autoSyncs[syncName]) {
+					// by default we do periodic sync, but the provider connector can offer own auto-sync function
+					
 					var syncFunc;
-					function doSync() {
-						var syncProcess = synchronize(driveWorkspace, drivePath);
-						syncProcess.done(function() {
-							if (autoSyncs[syncName]) {
-								scheduleSync(); // re-schedule only if enabled
-							}
-						});
-						syncProcess.fail(function() {
-							delete autoSyncs[syncName]; // cancel and cleanup
-							utils.log("Auto-sync canceled " + syncName);
-						});
-					}
 					var syncTimeout;
 					function scheduleSync() {
-						autoSyncs[syncName] = setTimeout(syncFunc, syncTimeout);
-					}
-
-					if (drive.changesLink) {
-						// use long-polling from cloud provider
-						syncTimeout = 5000; // first polling check in 5sec
-						syncFunc = function() {
-							var changes = serviceGet(drive.changesLink);
-							changes.done(function(info) {
-								if (info.message) {
-									// XXX hardcode for Box only now
-									// http://developers.box.com/using-long-polling-to-monitor-events/
-									if (info.message == "new_change") {
-										doSync();
-									} else if (info.message == "reconnect") {
-										// update change link and re-schedule
-										var newLink = changesLinkGet(driveWorkspace, drivePath);
-										newLink.done(function(res) {
-											utils.log("New changes link: " + res.changesLink);
-											drive.changesLink = res.changesLink;
-											scheduleSync();
-										});
-										newLink.fail(function(response, status, err) {
-											utils.log("ERROR: error getting new changes link: " + err + ", " + status + ", " + response);
-										});
-									}
+						autoSyncs[syncName] = setTimeout(function() {
+							var syncProcess = syncFunc();
+							syncProcess.done(function() {
+								if (autoSyncs[syncName]) {
+									scheduleSync(); // re-schedule only if enabled
 								}
 							});
-							changes.fail(function(response, status, err) {
-								// TODO catch retry_error and re-schedule the sync <<<<<<<< 
+							syncProcess.fail(function(e) {
 								delete autoSyncs[syncName]; // cancel and cleanup
-								utils.log("ERROR: changes long-polling error: " + err + ", " + status + ", " + response);
+								utils.log("ERROR: " + e + ". Auto-sync canceled for " + syncName + ".");
 							});
-						};
-						scheduleSync();
-						utils.log("Long-polling synchronization enabled for Cloud Drive on " + syncName);
-					} else {
-						// run sync periodically for some period (30min)
-						var syncPeriod = 60000 * 30;
-						syncTimeout = 30000;
-						syncFunc = doSync;
+						}, syncTimeout);
+					}
+					// sync function
+					var doSync = function() {
+						return synchronize(drive.workspace, drive.path);
+					};
+
+					// try load provider client
+					var client;
+					try {
+						// load client module and work with it asynchronously
+						client = window.require(["SHARED/cloudDrive." + drive.provider.id], function(client) {
+							if (client && client.hasChanges && client.hasOwnProperty("hasChanges")) {
+								syncTimeout = 5000; // sync in 5sec
+								syncFunc = function() {
+									// We chain actual sync to the sync initiator from client.
+									// The initiator should return jQuery Promise: it will be resolved if changes appear and rejected on error. 
+									var process = $.Deferred(); 
+									var initiator = client.hasChanges(drive);
+									initiator.done(function() {
+										var sync = doSync(); // it's time to sync
+										sync.done(function() {
+											process.resolve();	
+										});
+										sync.fail(function(e) {
+											process.reject(e);	
+										});
+									});
+									initiator.fail(function(e) {
+										process.reject(e);
+									});
+									return process.promise();
+								};
+								scheduleSync();
+								utils.log("Client synchronization enabled for Cloud Drive on " + syncName);
+							}
+						});
+					} catch(e) {
+						// module not available? anything else - default behaviour
+						utils.log("ERROR: " + e, e);
+						client = null;
+					}
+
+					if (!client) {
+						// module not available - run default periodic auto-sync
+						syncTimeout = 20000; // sync each 20sec
+						// use default sync function
+						syncFunc = doSync; 
 						scheduleSync();
 						utils.log("Periodical synchronization enabled for Cloud Drive on " + syncName);
-
+						
+						// run periodical sync for some period (30min)
+						var syncPeriod = 60000 * 30;
+						// ... increase timeout after a 1/3 of a period
 						setTimeout(function() {
-							// ... increase timeout after a 1/3 of a period
-							syncTimeout = 60000;
+							syncTimeout = 40000;
 						}, Math.round(syncPeriod / 3));
-
+						// ... and stop sync after some period, user can enable it again by page refreshing/navigation
 						setTimeout(function() {
-							// ... and stop auto-sync after some period, user will enable it again by page
-							// refreshing/navigation
 							stopAutoSynchronize();
+							utils.log("Periodical synchronization stopped for Cloud Drive on " + syncName);
 						}, syncPeriod);
-					}
+					} 
+
+					// if (drive.changesLink) {
+						// // use long-polling from cloud provider
+						// syncFunc = function() {
+							// var changes = serviceGet(drive.changesLink);
+							// changes.done(function(info) {
+								// if (info.message) {
+									// // XXX hardcode for Box only now
+									// // http://developers.box.com/using-long-polling-to-monitor-events/
+									// if (info.message == "new_change") {
+										// doSync();
+									// } else if (info.message == "reconnect") {
+										// // update change link and re-schedule
+										// var newLink = changesLinkGet(driveWorkspace, drivePath);
+										// newLink.done(function(res) {
+											// utils.log("New changes link: " + res.changesLink);
+											// drive.changesLink = res.changesLink;
+											// scheduleSync();
+										// });
+										// newLink.fail(function(response, status, err) {
+											// utils.log("ERROR: error getting new changes link: " + err + ", " + status + ", " + response);
+										// });
+									// }
+								// }
+							// });
+							// changes.fail(function(response, status, err) {
+								// // TODO catch retry_error and re-schedule the sync <<<<<<<< 
+								// delete autoSyncs[syncName]; // cancel and cleanup
+								// utils.log("ERROR: changes long-polling error: " + err + ", " + status + ", " + response);
+							// });
+						// };
+						// scheduleSync();
+						// utils.log("Long-polling synchronization enabled for Cloud Drive on " + syncName);
+					// }
 				}
 			}
 		};
 		
 		var checkAutoSynchronize = function() {
-			if (contextNode && contextDrive) {
-				var autosync = featuresIsAutosync(contextNode.workspace, contextDrive.path);
+			if (contextDrive) {
+				var autosync = featuresIsAutosync(contextDrive.workspace, contextDrive.path);
 				autosync.done(function(check) {
 					if (check && check.result) {
 						autoSynchronize();
@@ -669,9 +701,9 @@
 		 * Synchronize documents view.
 		 */
 		this.synchronize = function(elem, objectId) {
-			if (contextNode) {
-				var nodePath = contextNode.path;
-				var nodeWorkspace = contextNode.workspace;
+			if (contextDrive) {
+				var nodePath = contextDrive.path;
+				var nodeWorkspace = contextDrive.workspace;
 				utils.log("Synchronizing Cloud Drive on " + nodeWorkspace + ":" + nodePath);
 				synchronize(nodeWorkspace, nodePath);
 			} else {
@@ -687,9 +719,11 @@
 			utils.log("Connecting Cloud Drive...");
 
 			if (!authUrl) {
-				authUrl = connectProvider[providerId];
-				if (!authUrl) {
-					utils.log("ERROR: Authentication URL not found for " + providerId);
+				var provider = connectProvider[providerId];
+				if (provider) {
+					authUrl = provider.authUrl;
+				} else {
+					utils.log("ERROR: Provider cannot be for id " + providerId);
 					return;
 				}
 			}
@@ -717,8 +751,17 @@
 		/**
 		 * Initialize provider for connect operation.
 		 */
-		this.initProvider = function(id, authUrl) {
-			connectProvider[id] = authUrl;
+		this.initProvider = function(id, provider) {
+			connectProvider[id] = provider;
+			
+			if (window == top) {
+				try {
+					// load provider styles
+					utils.loadStyle("/cloud-drive-" + id + "/skin/cloud-drive.css");
+				} catch(e) {
+					utils.log("Error loading provider (" + id + ") style.", e);
+				}
+			}
 		};
 
 		/**
@@ -726,13 +769,6 @@
 		 */
 		this.initConnected = function(map) {
 			cloudDriveUI.initConnected(map);
-		};
-
-		/**
-		 * Auth URL for given Id of a provider.
-		 */
-		this.getAuthUrl = function(id) {
-			return connectProvider[id];
 		};
 
 		/**
@@ -874,6 +910,20 @@
 		
 		this.showInfo = function(title, text) {
 			cloudDriveUI.showInfo(title, text);
+		};
+		
+		/** 
+		 * Helper for AJAX GET requests.
+		 * */
+		this.ajaxGet = function(url, data) {
+			return serviceGet(url, data);
+		};
+		
+		/** 
+		 * Request current state of given drive. This method doesn't update the drive object state.
+		 * */
+		this.getState = function(drive) {
+			return getState(drive.workspace, drive.path);
 		};
 	}
 

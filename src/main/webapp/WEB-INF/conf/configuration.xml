@@ -46,29 +46,11 @@
     <type>org.exoplatform.clouddrive.rest.DriveService</type>
   </component>
   <component>
-    <type>org.exoplatform.clouddrive.rest.ChangesService</type>
-  </component>
-  <component>
     <type>org.exoplatform.clouddrive.rest.FeaturesService</type>
   </component>
   <component>
     <type>org.exoplatform.clouddrive.rest.DriveServiceLocator</type>
   </component>
-
-  <!-- component>
-  <key>org.exoplatform.clouddrive.exodrive.service.ExoDriveService</key>
-  <type>org.exoplatform.clouddrive.exodrive.service.ExoDriveService</type>
-  <init-params>
-  <properties-param>
-  <name>storage-configuration</name>
-  <property name="root-dir" value="${exo.shared.dir}/filedrive" />
-  <property name="base-url" value="http://REPOSITORY_CURRENT_NAME.${tenant.masterhost}/rest/exodrive" />
-  </properties-param>
-  </init-params>
-  </component>
-  <component>
-  <type>org.exoplatform.clouddrive.exodrive.service.rest.ExoDrivePublicService</type>
-  </component -->
 
   <external-component-plugins>
     <target-component>org.exoplatform.services.jcr.impl.ext.action.SessionActionCatalog</target-component>
@@ -99,22 +81,6 @@
                     </field>
                   </object>
                 </value>
-                <!-- value>
-                <object type="org.exoplatform.services.jcr.impl.ext.action.ActionConfiguration">
-                <field name="eventTypes">
-                <string>addProperty,changeProperty</string>
-                </field>
-                <field name="nodeTypes">
-                <string>nt:resource</string>
-                </field>
-                <field name="isDeep">
-                <boolean>true</boolean>
-                </field>
-                <field name="actionClassName">
-                <string>org.exoplatform.clouddrive.jcr.CloudFileAction</string>
-                </field>
-                </object>
-                </value -->
               </collection>
             </field>
           </object>
@@ -132,8 +98,6 @@
         <properties-param>
           <name>namespaces</name>
           <property name="ecd" value="http://www.exoplatform.com/jcr/clouddrive/1.0/" />
-          <!-- property name="gdrive" value="http://www.exoplatform.com/jcr/googledrive/1.0/" / -->
-          <property name="box" value="http://www.exoplatform.com/jcr/boxplatform/1.0/" />
         </properties-param>
       </init-params>
     </component-plugin>
@@ -155,51 +119,6 @@
   <!-- use this plugin in external configuration, e.g. an extension -->
   <external-component-plugins>
     <target-component>org.exoplatform.clouddrive.CloudDriveService</target-component>
-    <!-- component-plugin>
-    <name>add.clouddriveprovider</name>
-    <set-method>addPlugin</set-method>
-    <type>org.exoplatform.clouddrive.gdrive.GoogleDriveConnector</type>
-    <init-params>
-    <properties-param>
-    <name>drive-configuration</name>
-    <property name="provider-id" value="gdrive" />
-    <property name="provider-name" value="Google Drive" />
-    <property name="provider-client-id" value="${clouddrive.google.client.id}" />
-    <property name="provider-client-secret" value="${clouddrive.google.client.secret}" />
-    <property name="connector-host" value="${clouddrive.service.host}" />
-    <property name="connector-schema" value="${clouddrive.service.schema:http}" />
-    </properties-param>
-    </init-params>
-    </component-plugin -->
-    <component-plugin>
-      <name>add.clouddriveprovider</name>
-      <set-method>addPlugin</set-method>
-      <type>org.exoplatform.clouddrive.box.BoxConnector</type>
-      <init-params>
-        <properties-param>
-          <name>drive-configuration</name>
-          <property name="provider-id" value="box" />
-          <property name="provider-name" value="Box" />
-          <property name="provider-client-id" value="${clouddrive.box.client.id}" />
-          <property name="provider-client-secret" value="${clouddrive.box.client.secret}" />
-          <property name="connector-host" value="${clouddrive.service.host}" />
-          <property name="connector-schema" value="${clouddrive.service.schema:http}" />
-        </properties-param>
-      </init-params>
-    </component-plugin>
-    <!-- component-plugin>
-    <name>add.clouddriveprovider</name>
-    <set-method>addPlugin</set-method>
-    <type>org.exoplatform.clouddrive.exodrive.ExoDriveConnector</type>
-    <init-params>
-    <properties-param>
-    <name>drive-configuration</name>
-    <property name="provider-id" value="exo" />
-    <property name="provider-name" value="eXo Public Drive" />
-    <property name="connector-host" value="${tenant.masterhost}" />
-    </properties-param>
-    </init-params>
-    </component-plugin -->
     <component-plugin>
       <name>add.portalenv</name>
       <set-method>addPlugin</set-method>

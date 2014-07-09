@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="ISO-8859-1"?>
 <!--
 
-Copyright (C) 2013 eXo Platform SAS.
+Copyright (C) 2014 eXo Platform SAS.
 
 This is free software; you can redistribute it and/or modify it
 under the terms of the GNU Lesser General Public License as
@@ -127,7 +127,7 @@ xmlns="http://www.exoplatform.org/xml/ns/kernel_1_2.xsd">
               </collection>
             </field>
           </object>
-        </object-param -->
+        </object-param>
         <object-param>
           <name>ConnectBox</name>
           <object type="org.exoplatform.webui.ext.UIExtension">
@@ -148,7 +148,7 @@ xmlns="http://www.exoplatform.org/xml/ns/kernel_1_2.xsd">
               </collection>
             </field>
           </object>
-        </object-param>
+        </object-param -->
         <object-param>
           <name>OpenCloudFile</name>
           <object type="org.exoplatform.webui.ext.UIExtension">
@@ -228,63 +228,6 @@ xmlns="http://www.exoplatform.org/xml/ns/kernel_1_2.xsd">
             <field name="rank">
               <int>50</int>
             </field>
-            <!-- field name="extendedFilters">
-            <collection type="java.util.ArrayList">
-            <value>
-            <object type="org.exoplatform.webui.ext.filter.impl.FileFilter">
-            <field name="mimeTypes">
-            <collection type="java.util.ArrayList">
-            <value>
-            <string>application/vnd.google-apps.audio</string>
-            </value>
-            <value>
-            <string>application/vnd.google-apps.video</string>
-            </value>
-            <value>
-            <string>application/vnd.google-apps.drawing</string>
-            </value>
-            <value>
-            <string>application/vnd.google-apps.photo</string>
-            </value>
-            <value>
-            <string>application/vnd.google-apps.document</string>
-            </value>
-            <value>
-            <string>application/vnd.google-apps.spreadsheet</string>
-            </value>
-            <value>
-            <string>application/vnd.google-apps.presentation</string>
-            </value>
-            <value>
-            <string>application/vnd.google-apps.form</string>
-            </value>
-            <value>
-            <string>application/vnd.google-apps.fusiontable</string>
-            </value>
-            <value>
-            <string>application/vnd.google-apps.kix</string>
-            </value>
-            <value>
-            <string>application/vnd.google-apps.script</string>
-            </value>
-            <value>
-            <string>application/vnd.google-apps.sites</string>
-            </value>
-            <value>
-            <string>application/vnd.google-apps.unknown</string>
-            </value>
-            <value>
-            <string>application/vnd.google-apps.folder</string>
-            </value>
-            <value>
-            <string>application/vnd.google-apps.file</string>
-            </value>
-            </collection>
-            </field>
-            </object>
-            </value>
-            </collection>
-            </field -->
           </object>
         </object-param>
         <object-param>
