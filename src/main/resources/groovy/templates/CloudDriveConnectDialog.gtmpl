@@ -24,7 +24,7 @@
 */
 import org.exoplatform.clouddrive.CloudDriveService
 import org.exoplatform.clouddrive.CloudProvider
-import org.exoplatform.clouddrive.ecms.CloudDriveContext
+import org.exoplatform.clouddrive.box.ecms.CloudDriveContext
 import org.exoplatform.ecm.webui.component.explorer.UIJCRExplorer
 import org.exoplatform.services.wcm.utils.WCMCoreUtils
 import org.exoplatform.web.application.JavascriptManager
@@ -43,8 +43,6 @@ def rcontext = _ctx.getRequestContext()
 CloudDriveContext.init(rcontext, workspace, nodePath)
 
 def connectYour = _ctx.appRes("UIPopupWindow.title.ConnectYour")
-
-%>
 <div class="UIForm $uicomponent.id">
 	<%
 	  uiform.begin()
@@ -54,7 +52,6 @@ def connectYour = _ctx.appRes("UIPopupWindow.title.ConnectYour")
 			<div id="CloudDriveConnectDialogMessage" style="display: none;"></div>
 			<%
 			  for(provider in driveService.providers) {
-			    CloudDriveContext.initProviders(rcontext, provider)
 			%>
 			<div class="UIAction">
 				<div class="tab-content">

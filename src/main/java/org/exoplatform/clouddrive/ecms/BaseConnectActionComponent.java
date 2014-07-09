@@ -49,7 +49,7 @@ public abstract class BaseConnectActionComponent extends BaseCloudDriveManagerCo
     if (drivesService != null) {
       try {
         CloudProvider provider = drivesService.getProvider(getProviderId());
-        initContext(provider);
+        initContext();
 
         // XXX do workaround here, need point an id of the provider for this Connect component
         // this could be better to do by HTML attribute, but we cannot do this for the moment

@@ -3,7 +3,6 @@
   <UITabForm>
     <label>
       <showConnectCloudDrive>Connect Cloud Documents</showConnectCloudDrive>
-      <connectBox>Connect Box</connectBox>
     </label>
   </UITabForm>
   <UIPopupWindow>
@@ -15,11 +14,6 @@
   <UIActionBar>
     <tooltip>
       <ShowConnectCloudDrive>Connect Cloud Documents</ShowConnectCloudDrive>
-    </tooltip>
-  </UIActionBar>
-  <UIActionBar>
-    <tooltip>
-      <ConnectBox>Connect your Box</ConnectBox>
     </tooltip>
   </UIActionBar>
   <ECMContextMenu>

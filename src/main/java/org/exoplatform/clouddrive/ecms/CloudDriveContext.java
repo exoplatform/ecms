@@ -29,6 +29,7 @@ import org.exoplatform.web.application.JavascriptManager;
 import org.exoplatform.web.application.RequestContext;
 import org.exoplatform.web.application.RequireJS;
 import org.exoplatform.webui.application.WebuiRequestContext;
+import org.json.JSONObject;
 
 import java.util.HashSet;
 import java.util.LinkedHashMap;
@@ -59,24 +60,29 @@ public class CloudDriveContext {
    * @param requestContext {@link RequestContext}
    * @param workspace {@link String}
    * @param nodePath {@link String}
-   * @param provider {@link CloudProvider} optional, if <code>null</code> then any provider will be assumed
    * @throws CloudDriveException if cannot auth url from the provider
    */
-  public static void init(RequestContext requestContext,
-                             String workspace,
-                             String nodePath,
-                             CloudProvider provider) throws CloudDriveException {
-    
+  public static void init(RequestContext requestContext, String workspace, String nodePath) throws CloudDriveException {
+
     Object obj = requestContext.getAttribute(JAVASCRIPT);
     CloudDriveContext context;
     if (obj == null) {
       context = new CloudDriveContext(requestContext);
 
+      boolean initContext = true;
       CloudDriveFeatures features = WCMCoreUtils.getService(CloudDriveFeatures.class);
-      // init cloud drive if we can connect to this user
-      if (features.canCreateDrive(workspace, nodePath, requestContext.getRemoteUser(), provider)) {
-        context.init(workspace, nodePath);
-      } // else, drive will be not initialized - thus not able to connect
+      CloudDriveService service = WCMCoreUtils.getService(CloudDriveService.class);
+      // add all providers to let related UI works for already connected and linked files
+      for (CloudProvider provider : service.getProviders()) {
+        // init cloud drive if we can connect to this user
+        if (features.canCreateDrive(workspace, nodePath, requestContext.getRemoteUser(), provider)) {
+          if (initContext) {
+            context.init(workspace, nodePath);
+            initContext = false;
+          }
+          context.addProvider(provider);
+        } // else, drive will be not initialized - thus not able to connect
+      }
 
       Map<String, String> contextMessages = messages.get();
       if (contextMessages != null) {
@@ -93,23 +99,6 @@ public class CloudDriveContext {
       }
       context = (CloudDriveContext) obj;
     }
-    
-    if (provider != null) {
-      // add provider's default params
-      context.addProvider(provider);
-    }
-  }
-
-  /**
-   * Initialize request with Cloud Drive support for given JCR location.
-   * 
-   * @param requestContext {@link RequestContext}
-   * @param workspace {@link String}
-   * @param nodePath {@link String}
-   * @throws CloudDriveException if cannot auth url from the provider
-   */
-  public static void init(RequestContext requestContext, String workspace, String nodePath) throws CloudDriveException {
-     init(requestContext, workspace, nodePath, null);
   }
 
   /**
@@ -135,29 +124,6 @@ public class CloudDriveContext {
     } else {
       if (LOG.isDebugEnabled()) {
         LOG.debug("Context not initialized for adding of drive nodes.");
-      }
-      return false;
-    }
-  }
-
-  /**
-   * Initialize request with Cloud Drive providers {@link CloudProvider}.
-   * 
-   * @param requestContext {@link RequestContext}
-   * @param providers array of {@link CloudProvider} to add to the request context
-   * @throws CloudDriveException if cannot auth url from the provider
-   */
-  public static boolean initProviders(RequestContext requestContext, CloudProvider... providers) throws CloudDriveException {
-    Object obj = requestContext.getAttribute(JAVASCRIPT);
-    if (obj != null) {
-      CloudDriveContext context = (CloudDriveContext) obj;
-      for (CloudProvider p : providers) {
-        context.addProvider(p);
-      }
-      return true;
-    } else {
-      if (LOG.isDebugEnabled()) {
-        LOG.debug("Context not initialized for adding of providers.");
       }
       return false;
     }
@@ -241,7 +207,8 @@ public class CloudDriveContext {
             this.nodes.add(title);
           }
         }
-      };
+      }
+      ;
       if (count >= 1) {
         map.deleteCharAt(map.length() - 1); // remove last semicolon
         map.append('}');
@@ -256,8 +223,14 @@ public class CloudDriveContext {
   private CloudDriveContext addProvider(CloudProvider provider) throws CloudDriveException {
     String id = provider.getId();
     if (!providers.contains(id)) {
-      require.addScripts("\ncloudDrive.initProvider('" + id + "', '" + provider.getAuthUrl() + "');\n");
-      providers.add(id);
+      // if provider cannot be converted to JSON then null will be
+      String providerJson = new JSONObject(provider).toString();
+      if (providerJson != null) {
+        require.addScripts("\ncloudDrive.initProvider('" + id + "', " + providerJson.toString() + ");\n");
+        providers.add(id);
+      } else {
+        LOG.error("Error converting cloud provider (" + provider.getName() + ") to JSON object (null).");
+      }
     }
     return this;
   }
