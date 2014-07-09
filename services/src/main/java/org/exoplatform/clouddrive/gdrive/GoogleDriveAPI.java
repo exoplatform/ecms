@@ -111,83 +111,6 @@ class GoogleDriveAPI implements DataStoreFactory {
 
   protected static final Log       LOG             = ExoLogger.getLogger(GoogleDriveAPI.class);
 
-  /**
-   * Single user credentials store. Should be used per session as transient store.
-   */
-  @Deprecated
-  class UserCredentialStore implements CredentialStore {
-
-    class Tokens {
-      final String accessToken;
-
-      final String refreshToken;
-
-      final long   expirationTime;
-
-      Tokens(String accessToken, String refreshToken, long expirationTime) {
-        this.accessToken = accessToken;
-        this.refreshToken = refreshToken;
-        this.expirationTime = expirationTime;
-      }
-    }
-
-    final Map<String, Tokens> store = new ConcurrentHashMap<String, Tokens>();
-
-    /**
-     * Create store with given user and his/her credentials.
-     * 
-     * @param id
-     * @param accessToken
-     * @param refreshToken
-     * @param expirationTime
-     */
-    UserCredentialStore(String id, String accessToken, String refreshToken, long expirationTime) {
-      store.put(id, new Tokens(accessToken, refreshToken, expirationTime));
-    }
-
-    /**
-     * Create empty store.
-     * 
-     * @param id
-     */
-    UserCredentialStore() {
-    }
-
-    /**
-     * {@inheritDoc}
-     */
-    @Override
-    public boolean load(String userId, Credential credential) throws IOException {
-      Tokens uc = store.get(userId);
-      if (uc != null) {
-        credential.setAccessToken(uc.accessToken);
-        credential.setRefreshToken(uc.refreshToken);
-        credential.setExpirationTimeMilliseconds(uc.expirationTime);
-        return true;
-      }
-      return false;
-    }
-
-    /**
-     * {@inheritDoc}
-     */
-    @Override
-    public void store(String userId, Credential credential) throws IOException {
-      store.put(userId,
-                new Tokens(credential.getAccessToken(),
-                           credential.getRefreshToken(),
-                           credential.getExpirationTimeMilliseconds()));
-    }
-
-    /**
-     * {@inheritDoc}
-     */
-    @Override
-    public void delete(String userId, Credential credential) throws IOException {
-      store.remove(userId);
-    }
-  }
-
   class AuthToken extends UserToken implements CredentialRefreshListener, CredentialCreatedListener {
 
     class Store implements DataStore<StoredCredential> {
@@ -602,7 +525,7 @@ class GoogleDriveAPI implements DataStoreFactory {
     StringBuilder s = new StringBuilder();
     for (String scope : SCOPES) {
       s.append(scope);
-      s.append('+');
+      s.append(' ');
     }
     return s.toString();
   }

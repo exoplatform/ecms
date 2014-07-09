@@ -32,9 +32,9 @@ import org.exoplatform.services.jcr.RepositoryService;
  */
 public class GoogleProvider extends CloudProvider {
   
-  protected final String            authUrl;
+  protected final String            authURL;
 
-  protected final String            redirectUrl;
+  protected final String            redirectURL;
 
   protected final RepositoryService jcrService;
 
@@ -44,12 +44,12 @@ public class GoogleProvider extends CloudProvider {
    */
   public GoogleProvider(String id,
                         String name,
-                        String authUrl,
-                        String redirectUrl,
+                        String authURL,
+                        String redirectURL,
                         RepositoryService jcrService) {
     super(id, name);
-    this.authUrl = authUrl;
-    this.redirectUrl = redirectUrl;
+    this.authURL = authURL;
+    this.redirectURL = redirectURL;
     this.jcrService = jcrService;
   }
 
@@ -60,31 +60,31 @@ public class GoogleProvider extends CloudProvider {
    * @param name
    */
   @Deprecated
-  GoogleProvider(String id, String name, String authUrl, String redirectUrl) {
-    this(id, name, authUrl, redirectUrl, null);
+  GoogleProvider(String id, String name, String authURL, String redirectURL) {
+    this(id, name, authURL, redirectURL, null);
   }
 
   /**
    * @inherritDoc
    */
-  public String getAuthUrl() throws CloudDriveException {
+  public String getAuthURL() throws CloudDriveException {
     if (jcrService != null) {
       try {
         String currentRepo = jcrService.getCurrentRepository().getConfiguration().getName();
-        return authUrl.replace(GoogleDriveAPI.NO_STATE, currentRepo);
+        return authURL.replace(GoogleDriveAPI.NO_STATE, currentRepo);
       } catch (RepositoryException e) {
         throw new CloudDriveException(e);
       }
     } else {
-      return authUrl;
+      return authURL;
     }
   }
 
   /**
-   * @return the redirectUrl
+   * @return the redirectURL
    */
-  public String getRedirectUrl() {
-    return redirectUrl;
+  public String getRedirectURL() {
+    return redirectURL;
   }
 
   // ********* internals ***********

@@ -679,7 +679,7 @@ public class JCRLocalGoogleDrive extends JCRLocalCloudDrive implements UserToken
       // use actual dates from Google
       Calendar created = api.parseDate(gf.getCreatedDate().toStringRfc3339());
       Calendar modified = api.parseDate(gf.getModifiedDate().toStringRfc3339());
-      
+
       initFolder(destFolderNode,
                  gf.getId(),
                  gf.getTitle(),
@@ -866,17 +866,9 @@ public class JCRLocalGoogleDrive extends JCRLocalCloudDrive implements UserToken
    * {@inheritDoc}
    */
   @Override
-  public String getChangesLink() {
-    // long-polling of changes not supported by Google as for Nov 10 2013
+  public String getState() {
+    // no special state provided
     return null;
-  }
-
-  /**
-   * {@inheritDoc}
-   */
-  @Override
-  public void updateChangesLink() {
-    // do nothing for Google
   }
 
   /**
@@ -1074,4 +1066,12 @@ public class JCRLocalGoogleDrive extends JCRLocalCloudDrive implements UserToken
     return parents;
   }
 
+  /**
+   * {@inheritDoc}
+   */
+  @Override
+  protected String previewLink(String link) {
+    // KUDOS nothing special required for Google
+    return link;
+  }
 }

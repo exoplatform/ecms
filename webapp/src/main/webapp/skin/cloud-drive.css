@@ -218,3 +218,21 @@
 	background: url('https://ssl.gstatic.com/docs/doclist/images/icon_10_generic_list.png') no-repeat left center !important; /* orientation=lt */
 	background: url('https://ssl.gstatic.com/docs/doclist/images/icon_10_generic_list.png') no-repeat right center !important; /* orientation=rt */
 }
+
+.uiIcon24x24applicationvndms-excel,.uiIcon16x16applicationvndms-excel {
+	background: url('https://ssl.gstatic.com/docs/doclist/images/icon_10_excel_list.png') no-repeat left center !important; /* orientation=lt */
+	background: url('https://ssl.gstatic.com/docs/doclist/images/icon_10_excel_list.png') no-repeat right center !important; /* orientation=rt */
+}
+
+.uiIcon64x64applicationvndms-excel {
+	width: auto;
+	height: 128px;
+	-webkit-transform: scale(0.5);
+    -moz-transform: scale(0.5);
+    -o-transform: scale(0.5);
+    -ms-transform: scale(0.5);
+    transform: scale(0.5);
+	background: url('https://ssl.gstatic.com/docs/doclist/images/icon_10_excel_xl128.png') no-repeat left center !important; /* orientation=lt */
+	background: url('https://ssl.gstatic.com/docs/doclist/images/icon_10_excel_xl128.png') no-repeat right center !important; /* orientation=rt */
+}
+

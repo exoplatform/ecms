@@ -30,6 +30,9 @@ import org.exoplatform.container.xml.InitParams;
 import org.exoplatform.services.jcr.RepositoryService;
 import org.exoplatform.services.jcr.ext.app.SessionProviderService;
 
+import java.io.UnsupportedEncodingException;
+import java.net.URLEncoder;
+
 import javax.jcr.Node;
 import javax.jcr.RepositoryException;
 
@@ -88,7 +91,7 @@ public class GoogleDriveConnector extends CloudDriveConnector {
     GoogleDriveAPI build() throws GoogleDriveException, CloudDriveException {
       if (code != null && code.length() > 0) {
         // build API based on OAuth2 code
-        return new GoogleDriveAPI(getClientId(), getClientSecret(), code, getProvider().getRedirectUrl());
+        return new GoogleDriveAPI(getClientId(), getClientSecret(), code, getProvider().getRedirectURL());
       } else {
         // build API based on locally stored tokens
         return new GoogleDriveAPI(getClientId(), getClientSecret(), accessToken, refreshToken, expirationTime);
@@ -114,32 +117,55 @@ public class GoogleDriveConnector extends CloudDriveConnector {
    */
   @Override
   protected CloudProvider createProvider() {
-    StringBuilder redirectUrl = new StringBuilder();
-    redirectUrl.append(getConnectorSchema());
-    redirectUrl.append("://");
-    redirectUrl.append(getConnectorHost());
-    redirectUrl.append("/portal/rest/clouddrive/connect/");
-    redirectUrl.append(getProviderId());
+    StringBuilder redirectURL = new StringBuilder();
+    redirectURL.append(getConnectorSchema());
+    redirectURL.append("://");
+    redirectURL.append(getConnectorHost());
+    redirectURL.append("/portal/rest/clouddrive/connect/");
+    redirectURL.append(getProviderId());
 
-    StringBuilder authUrl = new StringBuilder();
-    authUrl.append("https://accounts.google.com/o/oauth2/auth?");
-    authUrl.append("response_type=code&client_id=");
-    authUrl.append(getClientId());
-    authUrl.append("&approval_prompt=");
-    authUrl.append(GoogleDriveAPI.APPOVAl_PROMT);
-    authUrl.append("&scope=");
-    authUrl.append(GoogleDriveAPI.SCOPES_STRING);
-    authUrl.append("&access_type=");
-    authUrl.append(GoogleDriveAPI.ACCESS_TYPE);
-    authUrl.append("&state=");
-    authUrl.append(GoogleDriveAPI.NO_STATE);
-    authUrl.append("&redirect_uri=");
-    authUrl.append(redirectUrl);
+    StringBuilder authURL = new StringBuilder();
+    authURL.append("https://accounts.google.com/o/oauth2/auth?");
+    authURL.append("response_type=code&client_id=");
+    String clientId = getClientId();
+    try {
+      authURL.append(URLEncoder.encode(clientId, "UTF-8"));
+    } catch (UnsupportedEncodingException e) {
+      LOG.warn("Cannot encode client id " + clientId + ":" + e);
+      authURL.append(clientId);
+    }
+    authURL.append("&approval_prompt=");
+    // TODO in case of SSO - don't force the approval?
+    authURL.append(GoogleDriveAPI.APPOVAl_PROMT);
+    authURL.append("&scope=");
+    try {
+      // TODO in case of SSO add openid scope?
+      authURL.append(URLEncoder.encode(GoogleDriveAPI.SCOPES_STRING, "UTF-8"));
+    } catch (UnsupportedEncodingException e) {
+      LOG.warn("Cannot encode scopes " + GoogleDriveAPI.SCOPES_STRING + ":" + e);
+      authURL.append(GoogleDriveAPI.SCOPES_STRING);
+    }
+    authURL.append("&access_type=");
+    authURL.append(GoogleDriveAPI.ACCESS_TYPE);
+    authURL.append("&state=");
+    try {
+      authURL.append(URLEncoder.encode(GoogleDriveAPI.NO_STATE, "UTF-8"));
+    } catch (UnsupportedEncodingException e) {
+      LOG.warn("Cannot encode state " + GoogleDriveAPI.NO_STATE + ":" + e);
+      authURL.append(GoogleDriveAPI.NO_STATE);
+    }
+    authURL.append("&redirect_uri=");
+    try {
+      authURL.append(URLEncoder.encode(redirectURL.toString(), "UTF-8"));
+    } catch (UnsupportedEncodingException e) {
+      LOG.warn("Cannot encode redirect URL " + redirectURL.toString() + ":" + e);
+      authURL.append(redirectURL);
+    }
 
     return new GoogleProvider(getProviderId(),
                               getProviderName(),
-                              authUrl.toString(),
-                              redirectUrl.toString(),
+                              authURL.toString(),
+                              redirectURL.toString(),
                               jcrService);
   }
 

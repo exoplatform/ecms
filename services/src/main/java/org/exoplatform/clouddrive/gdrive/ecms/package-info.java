@@ -19,4 +19,4 @@
 /**
  * ECMS customizations for Google Drive support.
  */
-package org.exoplatform.clouddrive.ecms;
+package org.exoplatform.clouddrive.gdrive.ecms;
