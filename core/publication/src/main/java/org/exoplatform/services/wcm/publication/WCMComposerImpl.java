@@ -202,11 +202,12 @@ public class WCMComposerImpl implements WCMComposer, Startable {
       orderBy = "exo:dateModified";
       filters.put(FILTER_ORDER_BY, orderBy);
     }
-    if (MODE_LIVE.equals(mode) && "exo:title".equals(orderBy)) {
-      if ("exo:taxonomy".equals(this.getTypeFromPath(workspace, path, sessionProvider))) {
-        orderBy = "exo:name "+orderType+", exo:title";
-      } else {
+    if ("exo:title".equals(orderBy)) {
+      if(MODE_LIVE.equals(mode)) {
         orderBy = "exo:titlePublished "+orderType+", exo:title";
+      }
+      if ("exo:taxonomy".equals(this.getTypeFromPath(workspace, path, sessionProvider))) {
+        orderBy = "exo:name "+orderType+", " + orderBy;
       }
       filters.put(FILTER_ORDER_BY, orderBy);
     }
