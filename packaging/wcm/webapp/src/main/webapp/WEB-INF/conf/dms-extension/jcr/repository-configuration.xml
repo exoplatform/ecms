@@ -71,6 +71,7 @@
               <property name="jbosscache-cl-cache.jdbc.node.column" value="node" />
               <property name="jbosscache-cl-cache.jdbc.parent.column" value="parent" />
               <property name="jbosscache-cl-cache.jdbc.datasource" value="${gatein.jcr.datasource.name}${container.name.suffix}" />
+              <property name="jbosscache-cl-cache.jdbc.dialect" value="${gatein.jcr.datasource.dialect}"/>
             </properties>
           </lock-manager>
         </workspace>
@@ -148,6 +149,7 @@
               <property name="jbosscache-cl-cache.jdbc.node.column" value="node" />
               <property name="jbosscache-cl-cache.jdbc.parent.column" value="parent" />
               <property name="jbosscache-cl-cache.jdbc.datasource" value="${gatein.jcr.datasource.name}${container.name.suffix}" />
+              <property name="jbosscache-cl-cache.jdbc.dialect" value="${gatein.jcr.datasource.dialect}"/>
             </properties>
           </lock-manager>
         </workspace>
@@ -221,6 +223,7 @@
               <property name="jbosscache-cl-cache.jdbc.node.column" value="node" />
               <property name="jbosscache-cl-cache.jdbc.parent.column" value="parent" />
               <property name="jbosscache-cl-cache.jdbc.datasource" value="${gatein.jcr.datasource.name}${container.name.suffix}" />
+              <property name="jbosscache-cl-cache.jdbc.dialect" value="${gatein.jcr.datasource.dialect}"/>
             </properties>
           </lock-manager>
         </workspace>
