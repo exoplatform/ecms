@@ -53,7 +53,7 @@ public class ExoDriveConnector extends CloudDriveConnector {
 
   public static final String EMPTY     = "".intern();
 
-  class AuthUrlBuilder {
+  class AuthURLBuilder {
     /**
      * Build Exo Drive authentication url.
      * 
@@ -109,7 +109,7 @@ public class ExoDriveConnector extends CloudDriveConnector {
 
   protected final OrganizationService orgService;
 
-  protected final AuthUrlBuilder      authUrlBuilder;
+  protected final AuthURLBuilder      authUrlBuilder;
 
   /**
    * @param params
@@ -126,7 +126,7 @@ public class ExoDriveConnector extends CloudDriveConnector {
     this.service = service;
     this.orgService = orgService;
 
-    this.authUrlBuilder = new AuthUrlBuilder();
+    this.authUrlBuilder = new AuthURLBuilder();
 
     this.systemUser = new ExoDriveUser(SYSTEM, EMPTY, provider);
     this.anonymousUser = new ExoDriveUser(ANONYMOUS, EMPTY, provider);

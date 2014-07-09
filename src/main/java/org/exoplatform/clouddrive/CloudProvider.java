@@ -38,7 +38,7 @@ public abstract class CloudProvider {
   protected final String     name;
 
   protected final int        hashCode;
-
+  
   protected CloudProvider(String id, String name) {
     // intern strings for fast comparison
     this.id = id.intern();
@@ -56,7 +56,7 @@ public abstract class CloudProvider {
    * @return String with valid authentication URL.
    * @throws CloudDriveException when cannot build the auth url (e.g. cannot obtain current repository name)
    */
-  public abstract String getAuthUrl() throws CloudDriveException;
+  public abstract String getAuthURL() throws CloudDriveException;
 
   /**
    * CloudProvider id used in URLs.

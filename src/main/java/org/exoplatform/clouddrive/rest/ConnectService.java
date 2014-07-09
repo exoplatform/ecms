@@ -482,7 +482,7 @@ public class ConnectService implements ResourceContainer {
                     if (local.isConnected()) {
                       // exists and already connected
                       resp.status(Status.CREATED); // OK vs CREATED?
-                      DriveInfo drive = DriveInfo.create(local);
+                      DriveInfo drive = DriveInfo.create(workspace, local);
                       resp.drive(drive);
                       LOG.info(drive.getEmail() + " already connected.");
                     } else {
@@ -491,7 +491,7 @@ public class ConnectService implements ResourceContainer {
                       active.put(processId, connect);
                       resp.status(connect.process.isDone() ? Status.CREATED : Status.ACCEPTED);
                       resp.progress(connect.process.getProgress());
-                      DriveInfo drive = DriveInfo.create(local, connect.process.getFiles());
+                      DriveInfo drive = DriveInfo.create(workspace, local, connect.process.getFiles());
                       resp.drive(drive);
                     }
                   } catch (UserAlreadyConnectedException e) {
@@ -519,7 +519,7 @@ public class ConnectService implements ResourceContainer {
                                            .build(new Object[0])
                                            .toASCIIString());
                     resp.progress(connect.process.getProgress());
-                    resp.drive(DriveInfo.create(connect.drive));
+                    resp.drive(DriveInfo.create(workspace, connect.drive));
                     resp.connectError(message, cid.toString(), host).status(Status.CONFLICT);
                   } finally {
                     connect.lock.unlock();
@@ -609,11 +609,11 @@ public class ConnectService implements ResourceContainer {
             // OK:connected or accepted (in progress)
             // don't send files each time but on done only
             if (connect.process.isDone()) {
-              DriveInfo drive = DriveInfo.create(connect.drive, connect.process.getFiles());
+              DriveInfo drive = DriveInfo.create(workspace, connect.drive, connect.process.getFiles());
               resp.drive(drive);
               resp.status(Status.CREATED);
             } else {
-              DriveInfo drive = DriveInfo.create(connect.drive);
+              DriveInfo drive = DriveInfo.create(workspace, connect.drive);
               resp.drive(drive);
               resp.status(Status.ACCEPTED);
             }
@@ -635,7 +635,7 @@ public class ConnectService implements ResourceContainer {
           CloudDrive drive = cloudDrives.findDrive(workspace, path);
           if (drive != null) {
             // return OK: connected
-            resp.progress(Command.COMPLETE).drive(DriveInfo.create(drive)).ok();
+            resp.progress(Command.COMPLETE).drive(DriveInfo.create(workspace, drive)).ok();
           } else {
             // return OK: drive not found, disconnected or belong to another user
             LOG.warn("Item " + workspace + ":" + path + " not a cloud file or drive not connected.");

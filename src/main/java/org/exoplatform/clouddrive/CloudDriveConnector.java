@@ -66,6 +66,12 @@ public abstract class CloudDriveConnector extends BaseComponentPlugin {
    */
   public static final String             CONFIG_PROVIDER_CLIENT_SECRET    = "provider-client-secret";
 
+  /**
+   * Force SSO for user login. It is optional parameter for those providers that need force SSO explicitly
+   * (e.g. Box).
+   */
+  public static final String             CONFIG_LOGIN_SSO                 = "login-sso";
+
   // CLDINT-1051 increased from 3 to 5, later decreased to 3 again (due to closed JCR session in case of
   // retry)
   public static final int                PROVIDER_REQUEST_ATTEMPTS        = 3;
@@ -89,6 +95,8 @@ public abstract class CloudDriveConnector extends BaseComponentPlugin {
 
   protected final String                 connectorSchema;
 
+  protected final boolean                loginSSO;
+
   protected CloudDriveConnector(RepositoryService jcrService,
                                 SessionProviderService sessionProviders,
                                 NodeFinder jcrFinder,
@@ -107,13 +115,13 @@ public abstract class CloudDriveConnector extends BaseComponentPlugin {
     }
 
     String connectorSchema = config.get(CONFIG_CONNECTOR_SCHEMA);
-    if (connectorSchema == null || connectorSchema.trim().length() == 0) {
+    if (connectorSchema == null || (connectorSchema = connectorSchema.trim()).length() == 0) {
       connectorSchema = "http";
     }
     this.connectorSchema = connectorSchema;
 
     String connectorHost = config.get(CONFIG_CONNECTOR_HOST);
-    if (connectorHost != null && connectorHost.length() > 0) {
+    if (connectorHost != null && (connectorHost = connectorHost.trim()).length() > 0) {
       this.connectorHost = connectorHost;
     } else {
       try {
@@ -143,6 +151,9 @@ public abstract class CloudDriveConnector extends BaseComponentPlugin {
       this.connectorHost = connectorHost;
       LOG.warn("Configuration of " + CONFIG_CONNECTOR_HOST + " is not set, will use " + connectorHost);
     }
+
+    String loginSSOStr = config.get(CONFIG_LOGIN_SSO);
+    this.loginSSO = loginSSOStr != null ? Boolean.parseBoolean(loginSSOStr.trim()) : false;
 
     this.provider = createProvider();
 

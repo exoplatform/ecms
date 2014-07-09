@@ -47,6 +47,8 @@ public class DriveInfo {
 
   final Collection<String>     removed;
 
+  final String                 workspace;
+
   final String                 path;
 
   final String                 user;
@@ -55,61 +57,67 @@ public class DriveInfo {
 
   final String                 title;
 
-  final String                 changesLink;
+  final Object                 state;
 
   final boolean                connected;
 
   DriveInfo(String title,
+            String workspace,
             String path,
             String user,
             String email,
-            String changesLink,
+            Object state,
             boolean connected,
             CloudProvider provider,
             Map<String, CloudFile> files,
             Collection<String> removed) {
     this.title = title;
+    this.workspace = workspace;
     this.path = path;
     this.user = user;
     this.email = email;
-    this.changesLink = changesLink;
+    this.state = state;
     this.connected = connected;
     this.provider = provider;
     this.files = files;
     this.removed = removed;
   }
 
-  static DriveInfo create(CloudDrive drive, Collection<CloudFile> files, Collection<String> removed) throws DriveRemovedException,
-                                                                                                    CloudProviderException,
-                                                                                                    RepositoryException,
-                                                                                                    RefreshAccessException {
+  static DriveInfo create(String workspaces,
+                          CloudDrive drive,
+                          Collection<CloudFile> files,
+                          Collection<String> removed) throws DriveRemovedException,
+                                                     CloudProviderException,
+                                                     RepositoryException,
+                                                     RefreshAccessException {
     Map<String, CloudFile> driveFiles = new HashMap<String, CloudFile>();
     for (CloudFile cf : files) {
       driveFiles.put(cf.getPath(), cf);
     }
     return new DriveInfo(drive.getTitle(),
+                         workspaces,
                          drive.getPath(),
                          drive.getUser().getUsername(),
                          drive.getUser().getEmail(),
-                         drive.getChangesLink(),
+                         drive.getState(),
                          drive.isConnected(),
                          drive.getUser().getProvider(),
                          driveFiles,
                          removed);
   }
 
-  static DriveInfo create(CloudDrive drive, Collection<CloudFile> files) throws DriveRemovedException,
-                                                                        CloudProviderException,
-                                                                        RepositoryException,
-                                                                        RefreshAccessException {
-    return create(drive, files, new HashSet<String>());
+  static DriveInfo create(String workspaces, CloudDrive drive, Collection<CloudFile> files) throws DriveRemovedException,
+                                                                                           CloudProviderException,
+                                                                                           RepositoryException,
+                                                                                           RefreshAccessException {
+    return create(workspaces, drive, files, new HashSet<String>());
   }
 
-  static DriveInfo create(CloudDrive drive) throws DriveRemovedException,
-                                           CloudProviderException,
-                                           RepositoryException,
-                                           RefreshAccessException {
-    return create(drive, new ArrayList<CloudFile>(), new HashSet<String>());
+  static DriveInfo create(String workspaces, CloudDrive drive) throws DriveRemovedException,
+                                                              CloudProviderException,
+                                                              RepositoryException,
+                                                              RefreshAccessException {
+    return create(workspaces, drive, new ArrayList<CloudFile>(), new HashSet<String>());
   }
 
   public CloudProvider getProvider() {
@@ -136,12 +144,16 @@ public class DriveInfo {
     return email;
   }
 
-  public String getChangesLink() {
-    return changesLink;
+  public Object getState() {
+    return state;
   }
 
   public String getTitle() {
     return title;
+  }
+
+  public String getWorkspace() {
+    return workspace;
   }
 
   public boolean isConnected() {

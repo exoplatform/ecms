@@ -52,7 +52,9 @@ import org.exoplatform.services.jcr.ext.app.SessionProviderService;
 import org.exoplatform.services.jcr.ext.common.SessionProvider;
 import org.exoplatform.services.security.ConversationState;
 
+import java.io.UnsupportedEncodingException;
 import java.lang.ref.SoftReference;
+import java.net.URLEncoder;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Calendar;
@@ -3535,7 +3537,7 @@ public abstract class JCRLocalCloudDrive extends CloudDrive {
     String fileUrl = fileNode.getProperty("ecd:url").getString();
     String previewUrl;
     try {
-      previewUrl = fileNode.getProperty("ecd:previewUrl").getString();
+      previewUrl = previewLink(fileNode.getProperty("ecd:previewUrl").getString());
     } catch (PathNotFoundException e) {
       previewUrl = null;
     }
@@ -3925,6 +3927,10 @@ public abstract class JCRLocalCloudDrive extends CloudDrive {
    * @throws RepositoryException
    */
   protected abstract void saveChangeId(Long id) throws CloudDriveException, RepositoryException;
+  
+  
+  protected abstract String previewLink(String link);
+  
 
   // ============== static ================
 

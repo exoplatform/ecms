@@ -18,7 +18,6 @@ package org.exoplatform.clouddrive.exodrive;
 
 import org.exoplatform.clouddrive.CloudDriveException;
 import org.exoplatform.clouddrive.CloudFileAPI;
-import org.exoplatform.clouddrive.CloudProviderException;
 import org.exoplatform.clouddrive.CloudUser;
 import org.exoplatform.clouddrive.DriveRemovedException;
 import org.exoplatform.clouddrive.SyncNotSupportedException;
@@ -414,128 +413,10 @@ public class JCRLocalExoDrive extends JCRLocalCloudDrive {
    * {@inheritDoc}
    */
   @Override
-  public String getChangesLink() throws DriveRemovedException, RepositoryException {
+  public Object getState() throws DriveRemovedException, RepositoryException {
     // not required, changes will be populated to storage automatically by the drive implementation
     return null;
   }
-
-  /**
-   * {@inheritDoc}
-   */
-  @Override
-  public void updateChangesLink() throws DriveRemovedException, CloudProviderException, RepositoryException {
-    // do nothing for eXo
-  }
-
-  // TODO reuse for upload/update algo!
-  // /**
-  // * {@inheritDoc}
-  // */
-  // @Override
-  // protected Node syncFile(CloudFile cfile, Node parent) throws SyncNotSupportedException,
-  // CloudDriveException,
-  // RepositoryException {
-  // if (cfile instanceof ExoDriveFile) {
-  // if (cfile.isFolder()) {
-  // // TODO support only files sync currently
-  // throw new SyncNotSupportedException("Synchronization of folders isn't supported for "
-  // + cfile.getClass());
-  // } else {
-  // ExoDriveFile cloudFile = (ExoDriveFile) cfile;
-  // try {
-  // Node localNode;
-  // try {
-  // localNode = parent.getNode(cloudFile.getTitle());
-  // } catch (PathNotFoundException e) {
-  // // no such node, we'll fetch it from the provider
-  // localNode = null;
-  // }
-  //
-  // boolean local;
-  // boolean remote;
-  //
-  // if (cloudFile.isNew()) {
-  // // it's a new file creating on the provider drive (local -> remote)
-  // localNode = parent.getNode(cloudFile.getTitle());
-  // local = true;
-  // remote = false;
-  // } else {
-  // if (localNode == null || localNode.isNew()) {
-  // // it's initial fetch of the whole drive...
-  // // need fetch the file from the provider (local <- remote)
-  // local = false;
-  // remote = true;
-  // } else {
-  // // getting actual state of the file
-  // Calendar lastSyncDate = localNode.getProperty("ecd:synchronized").getDate();
-  // Calendar localModified = localNode.getNode("jcr:content").getProperty("ecd:modified").getDate();
-  // Calendar remoteModified = cloudFile.getModifiedDate();
-  //
-  // remote = lastSyncDate.before(remoteModified) || lastSyncDate.equals(remoteModified);
-  // local = lastSyncDate.before(localModified) || lastSyncDate.equals(localModified);
-  //
-  // if (remote & local) {
-  // if (localModified.equals(remoteModified)) {
-  // // nothing changed
-  // remote = false;
-  // local = false;
-  // } else {
-  // // both remote and local changed
-  // String resolutionText;
-  // // TODO timezone offsets?
-  // if (remoteModified.after(localModified)) {
-  // resolutionText = "remote";
-  // remote = true;
-  // local = false;
-  // } else {
-  // resolutionText = "local";
-  // remote = false;
-  // local = true;
-  // }
-  //
-  // LOG.warn("Conflict found in contnet between local and cloud versions of file "
-  // + cloudFile.getTitle() + " (local node: " + localNode.getPath()
-  // + "). Conflict resolved to most recent by date file: " + resolutionText);
-  // }
-  // }
-  // }
-  // }
-  //
-  // // do sync
-  // if (remote) {
-  // // local node not changed or not exists and file was changed remotely
-  // // create or update local JCR node and fetch metadata
-  // localNode = fetchFile(cloudFile, parent);
-  // // and get content from the provider
-  // InputStream data = cloudFile.getStore().read();
-  // localNode.getNode("jcr:content").setProperty("jcr:data", data);
-  // data.close();
-  // } else if (local) {
-  // // local node is new or have changes and no changes remotely
-  // // add/update Cloud Drive mixins on local JCR node
-  // initFile(cloudFile, localNode);
-  // // add push content to provider store
-  // Node content = localNode.getNode("jcr:content");
-  // InputStream dataStream = content.getProperty("jcr:data").getStream();
-  // cloudFile.getStore().write(dataStream);
-  // setContent(content, cloudFile.getType()); // and reset local content
-  // dataStream.close();
-  // } // else do nothing if nothings changed
-  //
-  // // TODO care about sync of *moved* files (ADDED + REMOVED states)
-  //
-  // return localNode;
-  // } catch (ExoDriveException e) {
-  // throw new CloudDriveException("Cannot write to eXo Drive file", e);
-  // } catch (IOException e) {
-  // throw new CloudDriveException("Cannot store file content to eXo Drive file", e);
-  // }
-  // }
-  // } else {
-  // throw new SyncNotSupportedException("Synchronization of content isn't supported for "
-  // + cfile.getClass());
-  // }
-  // }
 
   /**
    * {@inheritDoc}
@@ -595,4 +476,11 @@ public class JCRLocalExoDrive extends JCRLocalCloudDrive {
     return new FileAPI();
   }
 
+  /**
+   * {@inheritDoc}
+   */
+  @Override
+  protected String previewLink(String link) {
+    return link;
+  }
 }

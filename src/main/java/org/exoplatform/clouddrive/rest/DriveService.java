@@ -25,9 +25,11 @@ import org.exoplatform.clouddrive.CloudProvider;
 import org.exoplatform.clouddrive.DriveRemovedException;
 import org.exoplatform.clouddrive.NotCloudFileException;
 import org.exoplatform.clouddrive.NotConnectedException;
+import org.exoplatform.clouddrive.NotYetCloudFileException;
 import org.exoplatform.clouddrive.RefreshAccessException;
 import org.exoplatform.services.jcr.RepositoryService;
 import org.exoplatform.services.jcr.ext.app.SessionProviderService;
+import org.exoplatform.services.jcr.ext.common.SessionProvider;
 import org.exoplatform.services.log.ExoLogger;
 import org.exoplatform.services.log.Log;
 import org.exoplatform.services.rest.resource.ResourceContainer;
@@ -35,12 +37,16 @@ import org.exoplatform.services.rest.resource.ResourceContainer;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.HashSet;
+import java.util.List;
 import java.util.concurrent.ExecutionException;
 
 import javax.annotation.security.RolesAllowed;
 import javax.jcr.LoginException;
+import javax.jcr.Node;
+import javax.jcr.NodeIterator;
 import javax.jcr.PathNotFoundException;
 import javax.jcr.RepositoryException;
+import javax.jcr.Session;
 import javax.ws.rs.FormParam;
 import javax.ws.rs.GET;
 import javax.ws.rs.POST;
@@ -50,6 +56,7 @@ import javax.ws.rs.QueryParam;
 import javax.ws.rs.core.Context;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
+import javax.ws.rs.core.Response.ResponseBuilder;
 import javax.ws.rs.core.Response.Status;
 import javax.ws.rs.core.UriInfo;
 
@@ -223,7 +230,7 @@ public class DriveService implements ResourceContainer {
           }
         }
 
-        return Response.ok().entity(DriveInfo.create(local, files, removed)).build();
+        return Response.ok().entity(DriveInfo.create(workspace, local, files, removed)).build();
       } else {
         LOG.warn("Item " + workspace + ":" + path + " not a cloud file or drive not connected.");
         return Response.status(Status.NO_CONTENT).build();
@@ -251,7 +258,8 @@ public class DriveService implements ResourceContainer {
   }
 
   /**
-   * Return file information.
+   * Return file information. Returned file may be not yet created in cloud (accepted for
+   * creation), then this service response will be with status ACCEPTED, otherwise it's OK response.
    * 
    * @param workspace {@link String} Drive Node workspace
    * @param path {@link String} File Node path
@@ -279,7 +287,6 @@ public class DriveService implements ResourceContainer {
               return Response.status(Status.ACCEPTED).entity(new AcceptedCloudFile(path)).build();
             }
           }
-          LOG.warn("Item " + workspace + ":" + path + " not a cloud file or drive not connected.");
           return Response.status(Status.NO_CONTENT).build();
         } catch (LoginException e) {
           LOG.warn("Error login to read drive file " + workspace + ":" + path + ": " + e.getMessage());
@@ -305,4 +312,156 @@ public class DriveService implements ResourceContainer {
       return Response.status(Status.BAD_REQUEST).entity("Null workspace.").build();
     }
   }
+
+  /**
+   * Return list of files in given folder. Returned files may be not yet created in cloud (accepted for
+   * creation), then this service response will be with status ACCEPTED, otherwise it's OK response. This
+   * service will not return files for nodes that do not belong to the cloud drive associated with this path.
+   * 
+   * @param workspace {@link String} Drive Node workspace
+   * @param path {@link String} Folder Node path
+   * @return {@link Response} REST response
+   */
+  @GET
+  @Path("/files/")
+  @RolesAllowed("users")
+  public Response getFiles(@Context UriInfo uriInfo,
+                           @QueryParam("workspace") String workspace,
+                           @QueryParam("path") String path) {
+    if (workspace != null) {
+      if (path != null) {
+        try {
+          CloudDrive local = cloudDrives.findDrive(workspace, path);
+          if (local != null) {
+            String parentPath;
+            if (local.getPath().equals(path)) {
+              parentPath = path;
+            } else {
+              try {
+                // take node path from parent to unlink if the parent is symlink
+                parentPath = local.getFile(path).getPath();
+              } catch (NotYetCloudFileException e) {
+                // use path as is
+                parentPath = path; 
+              }
+            }
+
+            SessionProvider sp = sessionProviders.getSessionProvider(null);
+            Session userSession = sp.getSession(workspace, jcrService.getCurrentRepository());
+            Node parentNode = (Node) userSession.getItem(parentPath);
+
+            List<CloudFile> files = new ArrayList<CloudFile>();
+            boolean hasAccepted = false;
+            for (NodeIterator childs = parentNode.getNodes(); childs.hasNext();) {
+              Node fileNode = childs.nextNode();
+              String filePath = fileNode.getPath();
+              try {
+                CloudFile file = local.getFile(filePath);
+                if (file != null) {
+                  if (!file.getPath().equals(filePath)) {
+                    file = new LinkedCloudFile(file, filePath); // it's symlink
+                  }
+                  files.add(file);
+                } // not a cloud file - skip it
+              } catch (NotYetCloudFileException e) {
+                hasAccepted = true;
+                files.add(new AcceptedCloudFile(filePath));
+              }
+            }
+
+            ResponseBuilder resp;
+            if (hasAccepted) {
+              resp = Response.status(Status.ACCEPTED);
+            } else {
+              resp = Response.ok();
+            }
+            return resp.entity(files).build();
+          }
+          return Response.status(Status.NO_CONTENT).build();
+        } catch (LoginException e) {
+          LOG.warn("Error login to read drive files in " + workspace + ":" + path + ": " + e.getMessage());
+          return Response.status(Status.UNAUTHORIZED).entity("Authentication error.").build();
+        } catch (CloudDriveException e) {
+          LOG.warn("Error reading files in " + workspace + ":" + path, e);
+          return Response.status(Status.BAD_REQUEST).entity("Error reading files. " + e.getMessage()).build();
+        } catch (RepositoryException e) {
+          LOG.error("Error reading files in " + workspace + ":" + path, e);
+          return Response.status(Status.INTERNAL_SERVER_ERROR)
+                         .entity("Error reading files: storage error.")
+                         .build();
+        } catch (Throwable e) {
+          LOG.error("Error reading files in " + workspace + ":" + path, e);
+          return Response.status(Status.INTERNAL_SERVER_ERROR)
+                         .entity("Error reading file: runtime error.")
+                         .build();
+        }
+      } else {
+        return Response.status(Status.BAD_REQUEST).entity("Null path.").build();
+      }
+    } else {
+      return Response.status(Status.BAD_REQUEST).entity("Null workspace.").build();
+    }
+  }
+
+  /**
+   * State of a drive pointed by given workspace and path.
+   * 
+   * @param uriInfo - request info
+   * @param workspace
+   * @param path
+   * @return {@link Response}
+   */
+  @GET
+  @Path("/state/")
+  @RolesAllowed("users")
+  public Response getState(@Context UriInfo uriInfo,
+                           @QueryParam("workspace") String workspace,
+                           @QueryParam("path") String path) {
+
+    if (workspace != null) {
+      if (path != null) {
+        try {
+          CloudDrive local = cloudDrives.findDrive(workspace, path);
+          if (local != null) {
+            try {
+              return Response.status(Status.OK).entity(local.getState()).build();
+            } catch (RefreshAccessException e) {
+              Throwable cause = e.getCause();
+              LOG.warn("Access to cloud drive expired, forbidden or revoked. " + e.getMessage()
+                  + (cause != null ? ". " + cause.getMessage() : ""));
+              // client should treat this status in special way and obtain new credentials using given
+              // provider
+              return Response.status(Status.FORBIDDEN).entity(local.getUser().getProvider()).build();
+            } catch (CloudDriveException e) {
+              LOG.error("Error getting changes link for drive " + workspace + ":" + path, e);
+              return Response.status(Status.INTERNAL_SERVER_ERROR)
+                             .entity("Error getting changes link. " + e.getMessage())
+                             .build();
+            }
+          } else {
+            LOG.warn("Item " + workspace + ":" + path + " not a cloud file or drive not connected.");
+            return Response.status(Status.NO_CONTENT).build();
+          }
+        } catch (LoginException e) {
+          LOG.warn("Error login to read drive " + workspace + ":" + path + ". " + e.getMessage());
+          return Response.status(Status.UNAUTHORIZED).entity("Authentication error.").build();
+        } catch (RepositoryException e) {
+          LOG.error("Error reading drive " + workspace + ":" + path, e);
+          return Response.status(Status.INTERNAL_SERVER_ERROR)
+                         .entity("Error reading drive: storage error.")
+                         .build();
+        } catch (Throwable e) {
+          LOG.error("Error reading drive " + workspace + ":" + path, e);
+          return Response.status(Status.INTERNAL_SERVER_ERROR)
+                         .entity("Error reading drive: runtime error.")
+                         .build();
+        }
+      } else {
+        return Response.status(Status.BAD_REQUEST).entity("Null path.").build();
+      }
+    } else {
+      return Response.status(Status.BAD_REQUEST).entity("Null workspace.").build();
+    }
+  }
+
 }

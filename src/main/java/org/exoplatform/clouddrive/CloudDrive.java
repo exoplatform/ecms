@@ -308,28 +308,17 @@ public abstract class CloudDrive {
   public abstract String getLink() throws DriveRemovedException, RepositoryException;
 
   /**
-   * Link to the drive's long-polling changes notification service. This kind of service optional and may not
-   * be supported. If long-polling changes notification not supported then this link will be <code>null</code>
-   * .
+   * State object is vendor specific and describe the drive's current state including changes notification and
+   * other internal mechanisms. This kind of service optional and may not be supported. If state not supported
+   * then this object will be <code>null</code> .
    * 
-   * @return {@link String} a link to long-polling changes notification service or <code>null</code> if such
-   *         service not supported.
+   * @return {@link String} an object instance that can be used to monitor the drive current state or
+   *         <code>null</code> if such service not supported.
    */
-  public abstract String getChangesLink() throws DriveRemovedException,
-                                         RefreshAccessException,
-                                         CloudProviderException,
-                                         RepositoryException;
-
-  /**
-   * Update link to the drive's long-polling changes notification service. This kind of service optional and
-   * may not be supported. If long-polling changes notification not supported then this method will do
-   * nothing.
-   * 
-   */
-  public abstract void updateChangesLink() throws DriveRemovedException,
-                                          RefreshAccessException,
-                                          CloudProviderException,
-                                          RepositoryException;
+  public abstract Object getState() throws DriveRemovedException,
+                                   RefreshAccessException,
+                                   CloudProviderException,
+                                   RepositoryException;
 
   /**
    * Local user related to this Cloud Drive.
