@@ -10,7 +10,7 @@
 		var currentNode; 
 		// Node workspace and path currently selected in ECMS explorer (currently open or clicked in context menu)
 		var contextNode; 
-		var connectProvider = {}; // for Provider's id and authUrl
+		var connectProvider = {}; // for Provider's id and authURL
 		// Cloud Drive associated with current context node
 		var contextDrive;
 		var excluded = {};
@@ -253,14 +253,14 @@
 			return initRequest(request);
 		};
 
-		var connectDrive = function(providerId, authUrl) {
+		var connectDrive = function(providerId, authURL) {
 			var authWindow;
 			var authService;
-			if (authUrl) {
+			if (authURL) {
 				// use user interaction for authentication
-				authWindow = cloudDriveUI.connectDriveWindow(authUrl);
+				authWindow = cloudDriveUI.connectDriveWindow(authURL);
 			} else {
-				// function to call for auth using authUrl from provider
+				// function to call for auth using authURL from provider
 				authService = serviceGet;
 			}
 
@@ -270,7 +270,7 @@
 			  done : function(provider) {
 				  utils.log(provider.name + " connect initialized.");
 				  if (authService) {
-					  authService(provider.authUrl);
+					  authService(provider.authURL);
 				  }
 				  // 2 wait for authentication
 				  var auth = waitAuth(authWindow);
@@ -482,42 +482,47 @@
 					};
 
 					// try load provider client
-					var client;
-					try {
-						// load client module and work with it asynchronously
-						client = window.require(["SHARED/cloudDrive." + drive.provider.id], function(client) {
-							if (client && client.hasChanges && client.hasOwnProperty("hasChanges")) {
-								syncTimeout = 5000; // sync in 5sec
-								syncFunc = function() {
-									// We chain actual sync to the sync initiator from client.
-									// The initiator should return jQuery Promise: it will be resolved if changes appear and rejected on error. 
-									var process = $.Deferred(); 
-									var initiator = client.hasChanges(drive);
-									initiator.done(function() {
-										var sync = doSync(); // it's time to sync
-										sync.done(function() {
-											process.resolve();	
+					var moduleId = "SHARED/cloudDrive." + drive.provider.id;
+					var hasClient = window.require.s.contexts._.config.paths[moduleId]; 
+					if (hasClient) {
+						try {
+							// load client module and work with it asynchronously
+							window.require([moduleId], function(client) {
+								if (client && client.hasChanges && client.hasOwnProperty("hasChanges")) {
+									syncTimeout = 5000; // sync in 5sec
+									syncFunc = function() {
+										// We chain actual sync to the sync initiator from client.
+										// The initiator should return jQuery Promise: it will be resolved if changes appear and rejected on error. 
+										var process = $.Deferred(); 
+										var initiator = client.hasChanges(drive);
+										initiator.done(function() {
+											var sync = doSync(); // it's time to sync
+											sync.done(function() {
+												process.resolve();	
+											});
+											sync.fail(function(e) {
+												process.reject(e);	
+											});
 										});
-										sync.fail(function(e) {
-											process.reject(e);	
+										initiator.fail(function(e) {
+											process.reject(e);
 										});
-									});
-									initiator.fail(function(e) {
-										process.reject(e);
-									});
-									return process.promise();
-								};
-								scheduleSync();
-								utils.log("Client synchronization enabled for Cloud Drive on " + syncName);
-							}
-						});
-					} catch(e) {
-						// module not available? anything else - default behaviour
-						utils.log("ERROR: " + e, e);
-						client = null;
-					}
-
-					if (!client) {
+										return process.promise();
+									};
+									scheduleSync();
+									utils.log("Client synchronization enabled for Cloud Drive on " + syncName);
+								}
+							}, function(err) {
+								utils.log("ERROR: Cannot load client synchronization module for Cloud Drive on " + syncName + ". " + JSON.stringify(err));
+							});
+						} catch(e) {
+							// cannot load the module - default behaviour
+							utils.log("ERROR: " + e, e);
+							hasClient = false;
+						}
+					} 
+					
+					if (!hasClient) {
 						// module not available - run default periodic auto-sync
 						syncTimeout = 20000; // sync each 20sec
 						// use default sync function
@@ -537,40 +542,6 @@
 							utils.log("Periodical synchronization stopped for Cloud Drive on " + syncName);
 						}, syncPeriod);
 					} 
-
-					// if (drive.changesLink) {
-						// // use long-polling from cloud provider
-						// syncFunc = function() {
-							// var changes = serviceGet(drive.changesLink);
-							// changes.done(function(info) {
-								// if (info.message) {
-									// // XXX hardcode for Box only now
-									// // http://developers.box.com/using-long-polling-to-monitor-events/
-									// if (info.message == "new_change") {
-										// doSync();
-									// } else if (info.message == "reconnect") {
-										// // update change link and re-schedule
-										// var newLink = changesLinkGet(driveWorkspace, drivePath);
-										// newLink.done(function(res) {
-											// utils.log("New changes link: " + res.changesLink);
-											// drive.changesLink = res.changesLink;
-											// scheduleSync();
-										// });
-										// newLink.fail(function(response, status, err) {
-											// utils.log("ERROR: error getting new changes link: " + err + ", " + status + ", " + response);
-										// });
-									// }
-								// }
-							// });
-							// changes.fail(function(response, status, err) {
-								// // TODO catch retry_error and re-schedule the sync <<<<<<<< 
-								// delete autoSyncs[syncName]; // cancel and cleanup
-								// utils.log("ERROR: changes long-polling error: " + err + ", " + status + ", " + response);
-							// });
-						// };
-						// scheduleSync();
-						// utils.log("Long-polling synchronization enabled for Cloud Drive on " + syncName);
-					// }
 				}
 			}
 		};
@@ -680,7 +651,7 @@
 					// previous sync already updating the keys - return it here
 					return updateProvider.process;
 				}
-				var connect = connectDrive(updateProvider.id, updateProvider.authUrl);
+				var connect = connectDrive(updateProvider.id, updateProvider.authURL);
 				updateProvider.process = process.promise(); // mark as active
 				connect.done(function(state) {
 					updateProvider = null;
@@ -715,13 +686,13 @@
 		/**
 		 * Connect to Cloud Drive.
 		 */
-		this.connect = function(providerId, authUrl, userNode, userWorkspace) {
+		this.connect = function(providerId, authURL, userNode, userWorkspace) {
 			utils.log("Connecting Cloud Drive...");
 
-			if (!authUrl) {
+			if (!authURL) {
 				var provider = connectProvider[providerId];
 				if (provider) {
-					authUrl = provider.authUrl;
+					authURL = provider.authURL;
 				} else {
 					utils.log("ERROR: Provider cannot be for id " + providerId);
 					return;
@@ -740,7 +711,7 @@
 			contextDrive = null;
 			excluded = {};
 
-			var process = connectDrive(providerId, authUrl);
+			var process = connectDrive(providerId, authURL);
 			cloudDriveUI.connectProcess(process);
 		};
 
@@ -1167,14 +1138,14 @@
 						a.css("font-weight", "normal");
 
 						var iframe = viewer.find("iframe");
-						if (file.previewLink) {
+						if (file.editLink && file.editLink != file.previewLink) {
 							// init Edit/View mode
 							iframe.attr("src", file.previewLink);
 							vswitch.find("a").click(function() {
 								var currentLink = iframe.attr("src");
 								if (currentLink == file.previewLink) {
 									// switch to editor
-									iframe.attr("src", file.link);
+									iframe.attr("src", file.editLink);
 									var viewerTitle = vswitch.attr("view-title");
 									$(this).text(viewerTitle);
 								} else {
@@ -1187,7 +1158,7 @@
 							titleText.append(vswitch);
 							viewer.find("div").show();
 						} else {
-							viewer.find("iframe").attr("src", file.link);
+							viewer.find("iframe").attr("src", file.previewLink ? file.previewLink : file.link);
 							vswitch.remove();
 							viewer.find("div").show();
 						}
@@ -1531,12 +1502,12 @@
 		/**
 		 * Open pop-up for Cloud Drive authentication.
 		 */
-		this.connectDriveWindow = function(authUrl) {
+		this.connectDriveWindow = function(authURL) {
 			var w = 850;
 			var h = 600;
 			var left = (screen.width / 2) - (w / 2);
 			var top = (screen.height / 2) - (h / 2);
-			return window.open(authUrl, 'contacts', 'width=' + w + ',height=' + h + ',top=' + top + ',left=' + left);
+			return window.open(authURL, 'contacts', 'width=' + w + ',height=' + h + ',top=' + top + ',left=' + left);
 		};
 
 		/**
