@@ -158,6 +158,7 @@ public class JCRLocalGoogleDrive extends JCRLocalCloudDrive implements UserToken
                                             gf.getId(),
                                             gf.getTitle(),
                                             gf.getAlternateLink(),
+                                            editLink(gf.getAlternateLink()),
                                             gf.getEmbedLink(),
                                             gf.getThumbnailLink(),
                                             gf.getMimeType(),
@@ -426,6 +427,7 @@ public class JCRLocalGoogleDrive extends JCRLocalCloudDrive implements UserToken
                                             gf.getId(),
                                             gf.getTitle(),
                                             gf.getAlternateLink(),
+                                            editLink(gf.getAlternateLink()),
                                             gf.getEmbedLink(),
                                             gf.getThumbnailLink(),
                                             gf.getMimeType(),
@@ -1071,6 +1073,15 @@ public class JCRLocalGoogleDrive extends JCRLocalCloudDrive implements UserToken
    */
   @Override
   protected String previewLink(String link) {
+    // KUDOS nothing special required for Google
+    return link;
+  }
+
+  /**
+   * {@inheritDoc}
+   */
+  @Override
+  protected String editLink(String link) {
     // KUDOS nothing special required for Google
     return link;
   }
