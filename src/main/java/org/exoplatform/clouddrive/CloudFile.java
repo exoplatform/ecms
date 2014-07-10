@@ -32,6 +32,8 @@ public interface CloudFile {
   
   String getPreviewLink();
   
+  String getEditLink();
+  
   String getThumbnailLink();
   
   String getType();

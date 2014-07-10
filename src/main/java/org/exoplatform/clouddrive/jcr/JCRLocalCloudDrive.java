@@ -3534,25 +3534,26 @@ public abstract class JCRLocalCloudDrive extends CloudDrive {
   }
 
   protected JCRLocalCloudFile readFile(Node fileNode) throws RepositoryException {
-    String fileUrl = fileNode.getProperty("ecd:url").getString();
-    String previewUrl;
+    String fileURL = fileNode.getProperty("ecd:url").getString();
+    String previewURL;
     try {
-      previewUrl = previewLink(fileNode.getProperty("ecd:previewUrl").getString());
+      previewURL = previewLink(fileNode.getProperty("ecd:previewUrl").getString());
     } catch (PathNotFoundException e) {
-      previewUrl = null;
+      previewURL = null;
     }
-    String downloadUrl;
+    String downloadURL;
     try {
-      downloadUrl = fileNode.getProperty("ecd:downloadUrl").getString();
+      downloadURL = fileNode.getProperty("ecd:downloadUrl").getString();
     } catch (PathNotFoundException e) {
-      downloadUrl = null;
+      downloadURL = null;
     }
     return new JCRLocalCloudFile(fileNode.getPath(),
                                  fileNode.getProperty("ecd:id").getString(),
                                  fileNode.getProperty("exo:title").getString(),
-                                 fileUrl,
-                                 previewUrl,
-                                 downloadUrl,
+                                 fileURL,
+                                 editLink(fileURL),
+                                 previewURL,
+                                 downloadURL,
                                  fileNode.getProperty("ecd:type").getString(),
                                  fileNode.getProperty("ecd:lastUser").getString(),
                                  fileNode.getProperty("ecd:author").getString(),
@@ -3927,10 +3928,22 @@ public abstract class JCRLocalCloudDrive extends CloudDrive {
    * @throws RepositoryException
    */
   protected abstract void saveChangeId(Long id) throws CloudDriveException, RepositoryException;
-  
-  
+
+  /**
+   * Return provider specific link for a file preview.
+   * 
+   * @param link {@link String} existing link to a cloud file
+   * @return String with a link should be used for file preview.
+   */
   protected abstract String previewLink(String link);
-  
+
+  /**
+   * Return provider specific link for file editing.
+   * 
+   * @param link {@link String} existing link to a cloud file
+   * @return String with a link should be used for file editing.
+   */
+  protected abstract String editLink(String link);
 
   // ============== static ================
 

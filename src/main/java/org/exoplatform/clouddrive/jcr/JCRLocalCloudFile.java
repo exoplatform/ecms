@@ -37,6 +37,8 @@ public class JCRLocalCloudFile implements CloudFile {
 
   private final String             previewLink;
 
+  private final String             editLink;
+
   private final String             thumbnailLink;
 
   private final String             type;
@@ -61,6 +63,7 @@ public class JCRLocalCloudFile implements CloudFile {
                            String id,
                            String title,
                            String link,
+                           String editLink,
                            String previewLink,
                            String thumbnailLink,
                            String type,
@@ -76,6 +79,7 @@ public class JCRLocalCloudFile implements CloudFile {
     this.id = id;
     this.title = title;
     this.link = link;
+    this.editLink = editLink;
     this.previewLink = previewLink;
     this.thumbnailLink = thumbnailLink;
     this.type = type;
@@ -93,6 +97,7 @@ public class JCRLocalCloudFile implements CloudFile {
                            String id,
                            String title,
                            String link,
+                           String editLink,
                            String previewLink,
                            String thumbnailLink,
                            String type,
@@ -107,6 +112,7 @@ public class JCRLocalCloudFile implements CloudFile {
          id,
          title,
          link,
+         editLink,
          previewLink,
          thumbnailLink,
          type,
@@ -124,6 +130,7 @@ public class JCRLocalCloudFile implements CloudFile {
                            String id,
                            String title,
                            String link,
+                           String editLink,
                            String previewLink,
                            String thumbnailLink,
                            String type,
@@ -136,6 +143,7 @@ public class JCRLocalCloudFile implements CloudFile {
          id,
          title,
          link,
+         editLink,
          previewLink,
          thumbnailLink,
          type,
@@ -175,6 +183,14 @@ public class JCRLocalCloudFile implements CloudFile {
   @Override
   public String getLink() {
     return link;
+  }
+
+  /**
+   * {@inheritDoc}
+   */
+  @Override
+  public String getEditLink() {
+    return editLink;
   }
 
   /**

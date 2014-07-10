@@ -85,6 +85,7 @@ public class JCRLocalExoDrive extends JCRLocalCloudDrive {
                                             f.getName(),
                                             f.getType(),
                                             f.getLink(),
+                                            editLink(f.getLink()),
                                             f.getLink(),
                                             f.getLink(),
                                             f.getAuthor(),
@@ -152,6 +153,7 @@ public class JCRLocalExoDrive extends JCRLocalCloudDrive {
                                             f.getName(),
                                             f.getType(),
                                             f.getLink(),
+                                            editLink(f.getLink()),
                                             f.getLink(),
                                             f.getLink(),
                                             f.getAuthor(),
@@ -483,4 +485,13 @@ public class JCRLocalExoDrive extends JCRLocalCloudDrive {
   protected String previewLink(String link) {
     return link;
   }
+
+  /**
+   * {@inheritDoc}
+   */
+  @Override
+  protected String editLink(String link) {
+    return null;
+  }
+  
 }

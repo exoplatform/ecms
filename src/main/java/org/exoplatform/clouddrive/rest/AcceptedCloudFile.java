@@ -69,6 +69,13 @@ public class AcceptedCloudFile implements CloudFile {
   public String getPreviewLink() {
     return null;
   }
+  
+  /**
+   * @return the editLink
+   */
+  public String getEditLink() {
+    return null;
+  }
 
   /**
    * @return the thumbnailLink
