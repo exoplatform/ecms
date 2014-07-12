@@ -277,6 +277,8 @@ public class AuthoringPublicationPlugin extends StageAndVersionPublicationPlugin
       if (!node.isCheckedOut()) {
         node.checkout();
       }
+      node.setProperty(StageAndVersionPublicationConstant.LIVE_DATE_PROP, new GregorianCalendar());
+      node.save();
       Version liveVersion = node.checkin();
       node.checkout();
       // Change current live revision to unpublished
@@ -335,7 +337,6 @@ public class AuthoringPublicationPlugin extends StageAndVersionPublicationPlugin
                                   StageAndVersionPublicationConstant.PUBLICATION_LOG_LIFECYCLE);
       Value liveVersionValue = valueFactory.createValue(liveVersion);
       node.setProperty(StageAndVersionPublicationConstant.LIVE_REVISION_PROP, liveVersionValue);
-      node.setProperty(StageAndVersionPublicationConstant.LIVE_DATE_PROP, new GregorianCalendar());
       VersionData liveRevisionData = new VersionData(liveVersion.getUUID(),
                                                      PublicationDefaultStates.PUBLISHED,
                                                      userId);
