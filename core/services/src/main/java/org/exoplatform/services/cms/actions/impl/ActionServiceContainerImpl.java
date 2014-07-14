@@ -375,16 +375,10 @@ public class ActionServiceContainerImpl implements ActionServiceContainer, Start
    * {@inheritDoc}
    */  
   public Node getAction(Node node, String actionName) throws Exception {
-    NodeIterator nodeIter = node.getNodes(EXO_ACTIONS);
-    while(nodeIter.hasNext()) {
-      Node child = nodeIter.nextNode();
-      try {
-        return child.getNode(actionName);
-      } catch(Exception e) {
-        return null;
-      }
-    }
-    return null;
+    if (node.hasNode(EXO_ACTIONS + "/"+actionName)) {
+      return node.getNode(EXO_ACTIONS + "/"+ actionName);
+    } 
+    return null;  
   }
   
   /**
@@ -419,7 +413,7 @@ public class ActionServiceContainerImpl implements ActionServiceContainer, Start
     List<Node> actions = new ArrayList<Node>();
     Node actionStorage = null;
     try{
-      actionStorage = node.getNodes(EXO_ACTIONS).nextNode();
+      actionStorage = node.getNode(EXO_ACTIONS);
     }catch (Exception e) {
       return actions;
     }
@@ -450,7 +444,7 @@ public class ActionServiceContainerImpl implements ActionServiceContainer, Start
    */
   public void removeAction(Node node, String actionName, String repository) throws Exception {
     if(!node.isNodeType(ACTIONABLE)) return  ;
-    Node action2Remove = getAction(node, actionName);
+    Node action2Remove = node.getNode(EXO_ACTIONS+ "/" + actionName);
     String[] lifecyclePhase = parseValuesToArray(action2Remove.getProperty(LIFECYCLE_PHASE_PROP)
         .getValues());
     String jobName = null, jobGroup = null, jobClassName = null;

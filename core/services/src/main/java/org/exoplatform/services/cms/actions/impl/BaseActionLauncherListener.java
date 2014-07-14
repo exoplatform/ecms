@@ -106,8 +106,7 @@ public abstract class BaseActionLauncherListener implements ECMEventListener {
           } catch (Exception e) {
             if (path.contains("exo:actions")) {
               Node tempnode = (Node) jcrSession.getItem(path.substring(0, path.indexOf("exo:actions") - 1));
-              node = tempnode.getNodes("exo:actions")
-                             .nextNode()
+              node = tempnode.getNode("exo:actions")
                              .getNode(path.substring(path.indexOf("exo:actions") + "exo:actions".length() + 1));
             }
           }

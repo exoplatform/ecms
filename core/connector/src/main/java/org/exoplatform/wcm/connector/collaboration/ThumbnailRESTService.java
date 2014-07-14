@@ -408,8 +408,6 @@ public class ThumbnailRESTService implements ResourceContainer {
     ManageableRepository repository = repositoryService_.getCurrentRepository();
     Session session = getSystemProvider().getSession(workspaceName, repository);
     Node showingNode = null;
-    Node root = session.getRootNode();
-    root.getNodes();
     if(nodePath.equals("/")) showingNode = session.getRootNode();
     else {
       showingNode = (Node) nodeFinder_.getItem(session, nodePath);

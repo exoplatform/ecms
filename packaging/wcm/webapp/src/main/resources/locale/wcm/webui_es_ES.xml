@@ -97,7 +97,7 @@
       <FilterBy>Filtrar por</FilterBy>
       <WebContent>Contenido Web</WebContent>
       <DMSDocument>Documento</DMSDocument>
-      <Media>Media</Media>
+      <Media>Multimedia</Media>
     </selectBoxValues>
     <msg>
       <node-checkout>El nodo está desmarcado. Por favor seleccione el nodo antes de realizar esta función.</node-checkout>
@@ -109,7 +109,7 @@
       <FilterBy>Filtrar por</FilterBy>
       <WebContent>Contenido Web</WebContent>
       <DMSDocument>Documento</DMSDocument>
-      <Media>Media</Media>
+      <Media>Multimedia</Media>
     </selectBoxValues>
   </UIContentBrowsePanelMulti>
 
