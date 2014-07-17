@@ -23,8 +23,6 @@ import java.util.List;
 import java.util.Locale;
 import java.util.Map;
 import java.util.ResourceBundle;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 
 import javax.jcr.Node;
 import javax.jcr.NodeIterator;
