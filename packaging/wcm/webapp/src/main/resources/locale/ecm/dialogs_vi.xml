@@ -54,8 +54,8 @@
         <name>Tên</name>
         <categories>Danh mục</categories>
         <mimeType>MimeType</mimeType>
-        <width>Width</width>
-        <height>Height</height>
+        <width>Chiều rộng</width>
+        <height>Chiều cao</height>
         <content>Nội dung</content>
         <re-upload>Tệp tin đã tồn tại. Bạn có thể xóa nó và tải lên tệp tin khác.</re-upload>
       </label>
