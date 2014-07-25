@@ -236,6 +236,39 @@ public class UICLVConfig extends UIFormTabPane  implements UISelectable {
   public String getSavedPath () {
     return savedPath;
   }
+
+  /**
+   * check if the content in the path is alive and return only alive content
+   * 
+   * @return
+   */
+  public String getAliveSavedPath () {
+    //check if the path is alive
+    if(savedPath != null && !savedPath.isEmpty()){
+      List<String> tmpItems = new ArrayList<String>();
+      StringBuffer itemsBuffer = new StringBuffer();
+      if(savedPath.contains(";")){
+        tmpItems = Arrays.asList(savedPath.split(";"));
+      } else {
+        tmpItems.add(savedPath);
+      }
+	    //only add exist Node
+      for(String item:tmpItems) {
+        try{
+          if(getRealNode(item) != null){
+            itemsBuffer.append(item).append(";");
+          }
+        }catch(RepositoryException e){
+          if(LOG.isDebugEnabled()){
+            LOG.debug(e.getMessage());
+          }
+        }
+      }
+      return itemsBuffer.toString();
+    }
+    return savedPath;
+  }
+  
   /**
    * Gets the popup id.
    *

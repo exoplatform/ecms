@@ -92,6 +92,9 @@ public class ManageDocumentService implements ResourceContainer {
 
   /** The log. */
   private static final Log LOG = ExoLogger.getLogger(ManageDocumentService.class.getName());
+  
+  /** Default folder name if the original is null */ 
+  private static final String DEFAULT_NAME = "untitled";
 
   private ManageDriveService    manageDriveService;
 
@@ -324,8 +327,16 @@ public class ManageDocumentService implements ResourceContainer {
                                @QueryParam("folderName") String folderName) throws Exception {
     try {
       Node node = getNode(driveName, workspaceName, currentFolder);
-      Node newNode = node.addNode(Text.escapeIllegalJcrChars(folderName),
+      // The name automatically determined from the title according to the current algorithm.
+      String name = Text.escapeIllegalJcrChars(org.exoplatform.services.cms.impl.Utils.cleanString(folderName));
+      // Set default name if new title contain no valid character
+      name = (StringUtils.isEmpty(name)) ? DEFAULT_NAME : name;
+      Node newNode = node.addNode(name,
                                   NodetypeConstant.NT_UNSTRUCTURED);
+      if (!newNode.hasProperty("exo:title")) {
+        newNode.addMixin("exo:rss-enable");
+      }
+      newNode.setProperty("exo:title", folderName);
       node.save();
       Document document = createNewDocument();
       String childFolder = StringUtils.isEmpty(currentFolder) ? newNode.getName() : currentFolder.concat("/")
@@ -731,7 +742,7 @@ public class ManageDocumentService implements ResourceContainer {
       CacheControl cacheControl = new CacheControl();
       cacheControl.setNoCache(true);
       DocumentContext.getCurrent().getAttributes().put(DocumentContext.IS_SKIP_RAISE_ACT, true);
-      return fileUploadHandler.saveAsNTFile(currentFolderNode, uploadId, fileName, language, siteName, userId);
+      return fileUploadHandler.saveAsNTFile(currentFolderNode, uploadId, org.exoplatform.services.cms.impl.Utils.cleanName(fileName), language, siteName, userId);
     }
     return fileUploadHandler.control(uploadId, action);
   }

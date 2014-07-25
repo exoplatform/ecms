@@ -26,7 +26,7 @@ import javax.jcr.query.Query;
 import javax.portlet.PortletPreferences;
 
 import org.exoplatform.ecm.utils.text.Text;
-import org.exoplatform.ecm.webui.comparator.PropertyValueComparator;
+import org.exoplatform.ecm.utils.comparator.PropertyValueComparator;
 import org.exoplatform.portal.webui.application.UIPortlet;
 import org.exoplatform.portal.webui.util.Util;
 import org.exoplatform.resolver.ResourceResolver;

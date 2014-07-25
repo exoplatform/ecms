@@ -10,6 +10,8 @@
 <%
   import org.exoplatform.webui.form.UIFormRadioBoxInput ;
   import org.exoplatform.webui.form.input.UICheckBoxInput;
+  import org.exoplatform.webui.form.UIFormCheckBoxInput;
+  import org.exoplatform.wcm.webui.reader.ContentReader;
 
   def rcontext = _ctx.getRequestContext();
   rcontext.getJavascriptManager().require("SHARED/jquery", "gj").addScripts("gj(document).ready(function() { gj(\"*[rel='tooltip']\").tooltip();});");
@@ -54,7 +56,7 @@
               <%for(j in 0..listInfor.size()-1) {
                   if(uicomponent.isDeleteOnly()) { %>
                    <div class="inforField">
-                     <span class="actionField"><%=listInfor[j]%></span>
+                     <span class="actionField"><%=ContentReader.getXSSCompatibilityContent(listInfor[j])%></span>  
                      <a href="javascript:eXo.webui.UIForm.submitEvent('<%=formName%>', '<%=actionInfo[0]%>', '&objectId=<%=j%>');" onclick="return confirm('<%=confirm%>');">
                         <i class="uiIconTrash"></i>
                      </a>

@@ -667,7 +667,29 @@ public class Utils {
 
     return clean;
   }
+  
+  /**
+   * Clean string. Replace specialChar by "-"
+   *
+   * @param str the str
+   *
+   * @return the string
+   */
 
+  public static String cleanName(String oldName) {
+    if (oldName == null || oldName == "") return oldName;
+    String specialChar = "[]/'\":;";
+    StringBuilder ret = new StringBuilder();
+    for (int i = 0; i < oldName.length(); i++) {
+      char currentChar = oldName.charAt(i);
+      if (specialChar.indexOf(currentChar) > -1) {
+        ret.append('-');
+      } else {
+        ret.append(currentChar);
+      }
+    }
+    return ret.toString();
+  }
   public static List<String> getMemberships() throws Exception {
     List<String> userMemberships = new ArrayList<String>();
     String userId = ConversationState.getCurrent().getIdentity().getUserId();
@@ -876,4 +898,14 @@ public class Utils {
     }
     return "," + Math.round(Double.valueOf(Integer.valueOf(strSize) / 100.0));
   }
+  
+  /* check if a node is folder 
+   * @param node node to check
+   * @return folder or not
+   */
+  public static boolean isFolder(Node node) throws RepositoryException  {
+    return node.isNodeType(NodetypeConstant.NT_FOLDER)
+        || node.isNodeType(NodetypeConstant.NT_UNSTRUCTURED);
+ }
+
 }

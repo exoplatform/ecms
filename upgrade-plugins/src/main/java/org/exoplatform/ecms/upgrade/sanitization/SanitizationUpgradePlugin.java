@@ -18,16 +18,6 @@
  **************************************************************************/
 package org.exoplatform.ecms.upgrade.sanitization;
 
-import java.util.ArrayList;
-import java.util.List;
-
-import javax.jcr.Node;
-import javax.jcr.NodeIterator;
-import javax.jcr.Session;
-import javax.jcr.Value;
-import javax.jcr.query.Query;
-import javax.jcr.query.QueryResult;
-
 import org.apache.commons.lang.StringUtils;
 import org.exoplatform.commons.upgrade.UpgradeProductPlugin;
 import org.exoplatform.commons.version.util.VersionComparator;
@@ -39,6 +29,16 @@ import org.exoplatform.services.jcr.RepositoryService;
 import org.exoplatform.services.jcr.ext.common.SessionProvider;
 import org.exoplatform.services.log.ExoLogger;
 import org.exoplatform.services.log.Log;
+import org.exoplatform.services.wcm.utils.WCMCoreUtils;
+
+import javax.jcr.Node;
+import javax.jcr.NodeIterator;
+import javax.jcr.Session;
+import javax.jcr.Value;
+import javax.jcr.query.Query;
+import javax.jcr.query.QueryResult;
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * This upgrade plugin will be used to migrate all the old data to the new one which related to
@@ -78,6 +78,11 @@ public class SanitizationUpgradePlugin extends UpgradeProductPlugin {
      * Migrate portlet preferences which contains the "/sites content/live" path to "/sites"
      */
     migratePortletPreferences();
+
+    /**
+     * Migrate binary data jcr:data which still contains "/sites content/live" in its values
+     */
+    migrateJCRDataContents();
 
     /**
      * Migrate exo:links which still contains "/sites content/live" in its properties
@@ -346,6 +351,59 @@ public class SanitizationUpgradePlugin extends UpgradeProductPlugin {
     } finally {
       if (sessionProvider != null) {
         sessionProvider.close();
+      }
+    }
+  }
+
+  /**
+   * Migrate binnary data jcr:data which still contains "/sites content/live" in its values
+   */
+  private void migrateJCRDataContents() {
+    if (LOG.isInfoEnabled()) {
+      LOG.info("Start " + this.getClass().getName() + ".............");
+    }
+    try {
+      Session session = WCMCoreUtils.getSystemSessionProvider().getSession("collaboration",repoService_.getCurrentRepository());
+      if (LOG.isInfoEnabled()) {
+        LOG.info("=====Start migrate old links from jcr data====");
+      }
+      List<String> documentMixinTypes = new ArrayList<String>();
+      // for performance reason we limit search to js,html and csscontents
+      documentMixinTypes.add("exo:jsFile");
+      documentMixinTypes.add("exo:htmlFile");
+      documentMixinTypes.add("exo:cssFile");
+      for (String type : documentMixinTypes) {
+        StringBuilder statement = new StringBuilder().append("select * from ").append(type).append(" ORDER BY exo:name DESC ");
+        QueryResult result = session.getWorkspace().getQueryManager().createQuery(statement.toString(), Query.SQL).execute();
+        NodeIterator nodeIter = result.getNodes();
+        while (nodeIter.hasNext()) {
+          Node node = nodeIter.nextNode();
+          if (node.hasNode("jcr:content")) {
+            Node content = node.getNode("jcr:content");
+            if (content.hasProperty("jcr:mimeType")) {
+              String mimeType = content.getProperty("jcr:mimeType").getString();
+              if (mimeType.startsWith("text")) {
+                String jcrData = content.getProperty("jcr:data").getString();
+                if (jcrData.contains("/sites content/live/")|| jcrData.contains("/sites%20content/live/")) {
+                  LOG.info("=====Migrating data contents '"+ content.getParent().getPath()+ "' =====");
+                  String newData = StringUtils.replaceEachRepeatedly(jcrData,
+                                                                     new String[] {"/sites content/live/","/sites%20content/live/" },
+                                                                     new String[] { "/sites/","/sites/" });
+                  content.setProperty("jcr:data", newData);
+                  session.save();
+                }
+              }
+            }
+          }
+        }
+      }
+
+      if (LOG.isInfoEnabled()) {
+        LOG.info("===== Migrate data in contents completed =====");
+      }
+    } catch (Exception e) {
+      if (LOG.isErrorEnabled()) {
+        LOG.error("An unexpected error occurs when migrating JCR Data Contents: ",e);
       }
     }
   }

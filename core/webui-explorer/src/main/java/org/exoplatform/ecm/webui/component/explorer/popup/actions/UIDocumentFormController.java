@@ -25,6 +25,7 @@ import java.util.ResourceBundle;
 import java.util.TreeMap;
 
 import javax.jcr.Node;
+import javax.jcr.PathNotFoundException;
 
 import org.exoplatform.ecm.webui.component.explorer.optionblocks.UIOptionBlockPanel;
 import org.exoplatform.portal.webui.util.Util;
@@ -110,8 +111,8 @@ public class UIDocumentFormController extends UIContainer implements UIPopupComp
     if(acceptableContentTypes.size() == 0) return;
     String userName = Util.getPortalRequestContext().getRemoteUser();
     for(String contentType: acceptableContentTypes) {
-      String label = templateService.getTemplateLabel(contentType);
       try {
+        String label = templateService.getTemplateLabel(contentType);
         String templatePath = templateService.getTemplatePathByUser(true, contentType, userName);
         if ((templatePath != null) && (templatePath.length() > 0)) {
           templates.put(label, contentType);
@@ -119,6 +120,10 @@ public class UIDocumentFormController extends UIContainer implements UIPopupComp
       } catch (AccessControlException e) {
         if (LOG.isDebugEnabled()) {
           LOG.warn(userName + " do not have sufficient permission to access " + contentType + " template.");
+        }
+      } catch (PathNotFoundException e) {
+        if (LOG.isWarnEnabled()) {
+          LOG.warn("Node type template %s does not exist!", contentType);
         }
       } catch (Exception e) {
         if (LOG.isWarnEnabled()) {

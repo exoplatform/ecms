@@ -121,7 +121,7 @@ public abstract class UIBaseNodePresentation extends UIContainer implements Node
    * @see org.exoplatform.ecm.webui.presentation.NodePresentation#getComments()
    */
   public List<Node> getComments() throws Exception {
-    return getApplicationComponent(CommentsService.class).getComments(getNode(), getLanguage()) ;
+    return getApplicationComponent(CommentsService.class).getComments(getOriginalNode(), getLanguage()) ;
   }
 
   /* (non-Javadoc)

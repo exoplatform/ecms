@@ -12,6 +12,7 @@ import javax.jcr.ItemNotFoundException;
 import javax.jcr.Node;
 import javax.jcr.NodeIterator;
 import javax.jcr.RepositoryException;
+import javax.jcr.PathNotFoundException;
 import javax.jcr.Session;
 import javax.jcr.query.Query;
 import javax.jcr.query.QueryManager;
@@ -189,7 +190,7 @@ public class WCMComposerImpl implements WCMComposer, Startable {
     String version = filters.get(FILTER_VERSION);
     String orderBy = filters.get(FILTER_ORDER_BY);
     String orderType = filters.get(FILTER_ORDER_TYPE);
-    String visibility = filters.get(FILTER_VISIBILITY);
+    String visibility = filters.get(FILTER_VISIBILITY); 
     String remoteUser = null;
     if (WCMComposer.VISIBILITY_PUBLIC.equals(visibility)) {
       remoteUser = "##PUBLIC##VISIBILITY";
@@ -201,8 +202,13 @@ public class WCMComposerImpl implements WCMComposer, Startable {
       orderBy = "exo:dateModified";
       filters.put(FILTER_ORDER_BY, orderBy);
     }
-    if (MODE_LIVE.equals(mode) && "exo:title".equals(orderBy)) {
-      orderBy = "exo:titlePublished "+orderType+", exo:title";
+    if ("exo:title".equals(orderBy)) {
+      if(MODE_LIVE.equals(mode)) {
+        orderBy = "exo:titlePublished "+orderType+", exo:title";
+      }
+      if ("exo:taxonomy".equals(this.getTypeFromPath(workspace, path, sessionProvider))) {
+        orderBy = "exo:name "+orderType+", " + orderBy;
+      }
       filters.put(FILTER_ORDER_BY, orderBy);
     }
 
@@ -676,5 +682,16 @@ public class WCMComposerImpl implements WCMComposer, Startable {
       }
     }
   }
-
+  
+  private String getTypeFromPath (String workspace, String path, SessionProvider sessionProvider) throws Exception {
+    ManageableRepository manageableRepository = repositoryService.getCurrentRepository();
+    Session session = sessionProvider.getSession(workspace, manageableRepository);
+    Node currentFolder = null;
+    try {
+       Node node = (Node)session.getItem(path);
+       return node.getPrimaryNodeType().getName();
+    } catch(PathNotFoundException pne) {
+      return null;
+    }
+  }
 }

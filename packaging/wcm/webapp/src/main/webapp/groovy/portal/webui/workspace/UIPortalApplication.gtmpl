@@ -21,19 +21,19 @@
   import org.exoplatform.services.wcm.utils.WCMCoreUtils;
   import org.exoplatform.wcm.webui.reader.ContentReader;
   import org.exoplatform.services.wcm.portal.LivePortalManagerService;
-  import org.exoplatform.wcm.webui.Utils;
-  import org.exoplatform.services.wcm.publication.WCMComposer;
+  import org.exoplatform.services.wcm.skin.WCMSkinVisitor;
   
   def rcontext = _ctx.getRequestContext() ;
   String docBase =  rcontext.getRequestContextPath() ;  
   String skin = uicomponent.getSkin();
-  def portalSkins = uicomponent.getPortalSkins() ;
-  def portletSkins = uicomponent.getPortletSkins() ;
   def scriptsURLs = uicomponent.getScripts();
   def headerScripts = new LinkedList(); 
   def jsConfig = uicomponent.getJSConfig(); 
   def remoteScripts = new JSONArray();
   def portalName = Util.getPortalRequestContext().getUserPortalConfig().getPortalName();
+  WCMSkinVisitor wcmSkinVisitor = new WCMSkinVisitor(Util.getUIPortal().getName(), skin);
+  def portalSkins = uicomponent.getPortalSkins(wcmSkinVisitor);
+  def portletSkins = uicomponent.getPortletSkins();  
   livePortalManagerService_ = WCMCoreUtils.getService(LivePortalManagerService.class);
   def portalNode = livePortalManagerService_.getLivePortal(WCMCoreUtils.getSystemSessionProvider(), portalName);
   def livePortalScript = WCMCoreUtils.getSiteGlobalActiveJs(portalNode);
@@ -54,6 +54,7 @@
   def pcontext = (PortalRequestContext)rcontext;  
   
   UserNode currentNode = Util.getUIPortal().getSelectedUserNode();
+
   String pageReference = currentNode.getPageRef().format();
   
   def contentParam = "";
