@@ -1,10 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <bundle>
+  <!-- Used in Administration-Content-Explorer in Views settings a popup with actions list -->
   <UITabForm>
     <label>
       <connectGoogleDrive>Connect Google Drive</connectGoogleDrive>
     </label>
   </UITabForm>
+  <!-- For menu caption in Action Bar -->
   <UIActionBar>
     <tooltip>
       <ConnectGoogleDrive>Connect your Google Drive</ConnectGoogleDrive>

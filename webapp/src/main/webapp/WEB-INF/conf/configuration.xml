@@ -82,7 +82,7 @@
               <string>ConnectGoogleDrive</string>
             </field>
             <field name="component">
-              <string>org.exoplatform.clouddrive.gdrive.ecms.ConnectGoogleDriveActionComponent</string>
+              <string>org.exoplatform.clouddrive.gdrive.ecms.ConnectGDriveActionComponent</string>
             </field>
             <field name="extendedFilters">
               <collection type="java.util.ArrayList">

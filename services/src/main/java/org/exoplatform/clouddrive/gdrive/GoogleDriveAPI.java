@@ -20,7 +20,6 @@ package org.exoplatform.clouddrive.gdrive;
 import com.google.api.client.auth.oauth2.AuthorizationCodeFlow.CredentialCreatedListener;
 import com.google.api.client.auth.oauth2.Credential;
 import com.google.api.client.auth.oauth2.CredentialRefreshListener;
-import com.google.api.client.auth.oauth2.CredentialStore;
 import com.google.api.client.auth.oauth2.StoredCredential;
 import com.google.api.client.auth.oauth2.TokenErrorResponse;
 import com.google.api.client.auth.oauth2.TokenResponse;
@@ -74,9 +73,7 @@ import java.util.Date;
 import java.util.HashSet;
 import java.util.Iterator;
 import java.util.List;
-import java.util.Map;
 import java.util.Set;
-import java.util.concurrent.ConcurrentHashMap;
 
 /**
  * Covers calls to Google Drive services and handles related exceptions. <br>
@@ -531,7 +528,7 @@ class GoogleDriveAPI implements DataStoreFactory {
   }
 
   /**
-   * Build an authorization flow optionally using provided {@link CredentialStore}, then store it as a static
+   * Build an authorization flow optionally using provided {@link AuthToken}, then store it as a static
    * class attribute.
    * 
    * @param clientId

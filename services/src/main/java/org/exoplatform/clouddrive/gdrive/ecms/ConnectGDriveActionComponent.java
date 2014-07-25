@@ -26,19 +26,19 @@ import org.exoplatform.webui.event.Event;
 
 @ComponentConfig(
                  events = { @EventConfig(
-                                         listeners = ConnectGoogleDriveActionComponent.ConnectGoogleDriveActionListener.class) })
-public class ConnectGoogleDriveActionComponent extends BaseConnectActionComponent {
+                                         listeners = ConnectGDriveActionComponent.ConnectGDriveActionListener.class) })
+public class ConnectGDriveActionComponent extends BaseConnectActionComponent {
 
   /**
    * Google Drive id from configuration - gdrive.
    * */
   protected static final String PROVIDER_ID = "gdrive";
 
-  public static class ConnectGoogleDriveActionListener
+  public static class ConnectGDriveActionListener
                                                       extends
-                                                      UIActionBarActionListener<ConnectGoogleDriveActionComponent> {
+                                                      UIActionBarActionListener<ConnectGDriveActionComponent> {
 
-    public void processEvent(Event<ConnectGoogleDriveActionComponent> event) throws Exception {
+    public void processEvent(Event<ConnectGDriveActionComponent> event) throws Exception {
     }
   }
 

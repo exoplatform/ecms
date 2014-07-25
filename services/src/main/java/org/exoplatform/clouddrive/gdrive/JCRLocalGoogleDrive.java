@@ -876,7 +876,6 @@ public class JCRLocalGoogleDrive extends JCRLocalCloudDrive implements UserToken
   /**
    * {@inheritDoc}
    * 
-   * @throws GoogleDriveException
    */
   @Override
   public void onUserTokenRefresh(UserToken token) throws CloudDriveException {
@@ -1066,23 +1065,5 @@ public class JCRLocalGoogleDrive extends JCRLocalCloudDrive implements UserToken
     }
     parents.add(new ParentReference().setId(parentId));
     return parents;
-  }
-
-  /**
-   * {@inheritDoc}
-   */
-  @Override
-  protected String previewLink(String link) {
-    // KUDOS nothing special required for Google
-    return link;
-  }
-
-  /**
-   * {@inheritDoc}
-   */
-  @Override
-  protected String editLink(String link) {
-    // KUDOS nothing special required for Google
-    return link;
   }
 }
