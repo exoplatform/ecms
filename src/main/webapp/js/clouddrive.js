@@ -1,7 +1,10 @@
+/**
+ * Cloud Drive Connector's client.
+ */
 (function($, utils, tasks, uiRightClickPopupMenu, uiListView, uiSimpleView, uiFileView) {
 
 	/**
-	 * Connector class.
+	 * Connector core class.
 	 */
 	function CloudDrive() {
 		var prefixUrl = utils.pageBaseUrl(location);
@@ -488,14 +491,15 @@
 						try {
 							// load client module and work with it asynchronously
 							window.require([moduleId], function(client) {
-								if (client && client.hasChanges && client.hasOwnProperty("hasChanges")) {
+								if (client && client.onChange && client.hasOwnProperty("onChange")) {
 									syncTimeout = 5000; // sync in 5sec
-									syncFunc = function() {
+									syncFunc = function() { 
 										// We chain actual sync to the sync initiator from client.
 										// The initiator should return jQuery Promise: it will be resolved if changes appear and rejected on error. 
+										// We use jQuery.when() to deal if not Promise returned (it's bad case - sync will run each 5sec forever).
 										var process = $.Deferred(); 
-										var initiator = client.hasChanges(drive);
-										initiator.done(function() {
+										var initiator = client.onChange(drive);
+										$.when(initiator).done(function() {
 											var sync = doSync(); // it's time to sync
 											sync.done(function() {
 												process.resolve();	
@@ -504,7 +508,7 @@
 												process.reject(e);	
 											});
 										});
-										initiator.fail(function(e) {
+										$.when(initiator).fail(function(e) {
 											process.reject(e);
 										});
 										return process.promise();
@@ -522,8 +526,8 @@
 						}
 					} 
 					
-					if (!hasClient) {
-						// module not available - run default periodic auto-sync
+					if (!hasClient || !syncFunc) {
+						// module not available or it doesn't provide onChange() method - run default periodic auto-sync
 						syncTimeout = 20000; // sync each 20sec
 						// use default sync function
 						syncFunc = doSync; 
@@ -899,7 +903,7 @@
 	}
 
 	/**
-	 * WebUI integration.
+	 * Cloud Drive WebUI integration.
 	 */
 	function CloudDriveUI() {
 		var NOTICE_WIDTH = "380px";
