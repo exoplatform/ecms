@@ -2,6 +2,7 @@
 <bundle>
   <UITabForm>
     <label>
+      <!-- Used in Administration-Content-Explorer in Views settings a popup with actions list -->
       <showConnectCloudDrive>Connect Cloud Documents</showConnectCloudDrive>
     </label>
   </UITabForm>
