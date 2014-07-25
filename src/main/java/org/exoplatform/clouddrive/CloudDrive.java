@@ -30,7 +30,7 @@ import javax.jcr.Node;
 import javax.jcr.RepositoryException;
 
 /**
- * Local mirror of cloud drive to JCR sub-tree. All nodes of this sub-tree contain metadata such as name,
+ * Local mirror of cloud drive. All files of this drive contain metadata such as name,
  * author, dates and link to actual drive on the cloud provider. <br/>
  * <p>
  * Created by The eXo Platform SAS.

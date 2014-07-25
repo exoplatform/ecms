@@ -19,46 +19,107 @@ package org.exoplatform.clouddrive;
 import java.util.Calendar;
 
 /**
- *  General abstraction for cloud file.
- *
+ * General abstraction of a cloud file.
+ * 
  */
 public interface CloudFile {
-  
+
+  /**
+   * File ID as in cloud provider API.
+   * 
+   * @return {@link String}
+   */
   String getId();
-  
+
+  /**
+   * File title (can be also its name) as in cloud provider API.
+   * 
+   * @return {@link String}
+   */
   String getTitle();
-  
+
+  /**
+   * Link to a file on cloud provider. This link can be used for opening a file in new window or access it via
+   * the provider API.
+   * 
+   * @return {@link String}
+   */
   String getLink();
-  
+
+  /**
+   * Preview link of a file if cloud provider supports such feature.
+   * 
+   * @return {@link String} a preview link or <code>null</code>
+   */
   String getPreviewLink();
-  
+
+  /**
+   * File editing link if cloud provider supports such feature.
+   * 
+   * @return {@link String} a editing link or <code>null</code>
+   */
   String getEditLink();
-  
+
+  /**
+   * File thumbnail link if cloud provider supports such feature.
+   * 
+   * @return {@link String} a thumbnail link or <code>null</code>
+   * 
+   * @return
+   */
   String getThumbnailLink();
-  
+
+  /**
+   * File type as in cloud provider API.
+   * 
+   * @return {@link String}
+   */
   String getType();
 
+  /**
+   * Last user changed the file as in cloud provider API.
+   * 
+   * @return {@link String}
+   */
   String getLastUser();
 
+  /**
+   * File author as in cloud provider API.
+   * 
+   * @return {@link String}
+   */
   String getAuthor();
 
+  /**
+   * File creation date as in cloud provider API.
+   * 
+   * @return {@link Calendar}
+   */
   Calendar getCreatedDate();
-  
+
+  /**
+   * File modification date as in cloud provider API.
+   * 
+   * @return {@link Calendar}
+   */
   Calendar getModifiedDate();
-  
+
+  /**
+   * @return
+   */
   boolean isFolder();
-  
+
   /**
    * Path to the cloud file in local storage.
    * 
    * @return {@link String}
    */
   String getPath();
-  
+
   /**
-   * Tell if this file currently synchronizing. 
+   * Tell if this file currently synchronizing (e.g. uploading to a cloud).
    * 
-   * @return <code>true</code> if file is synchronizing currently, <code>false</code> otherwise. 
+   * @return <code>true</code> if file is synchronizing currently, <code>false</code> otherwise.
    */
   boolean isSyncing();
 }

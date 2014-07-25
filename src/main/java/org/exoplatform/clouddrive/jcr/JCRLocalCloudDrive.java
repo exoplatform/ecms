@@ -52,9 +52,7 @@ import org.exoplatform.services.jcr.ext.app.SessionProviderService;
 import org.exoplatform.services.jcr.ext.common.SessionProvider;
 import org.exoplatform.services.security.ConversationState;
 
-import java.io.UnsupportedEncodingException;
 import java.lang.ref.SoftReference;
-import java.net.URLEncoder;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Calendar;
@@ -95,8 +93,6 @@ import javax.jcr.Property;
 import javax.jcr.PropertyIterator;
 import javax.jcr.RepositoryException;
 import javax.jcr.Session;
-import javax.jcr.lock.LockException;
-import javax.jcr.nodetype.ConstraintViolationException;
 import javax.jcr.nodetype.NodeDefinition;
 import javax.jcr.nodetype.NodeType;
 import javax.jcr.nodetype.PropertyDefinition;
@@ -107,7 +103,6 @@ import javax.jcr.observation.ObservationManager;
 import javax.jcr.query.Query;
 import javax.jcr.query.QueryManager;
 import javax.jcr.query.QueryResult;
-import javax.jcr.version.VersionException;
 
 /**
  * JCR storage for local cloud drive. Created by The eXo Platform SAS
@@ -3907,6 +3902,29 @@ public abstract class JCRLocalCloudDrive extends CloudDrive {
     } while (true);
   }
 
+
+  /**
+   * Return provider specific link for a file preview. By default this method returns the same as given link.
+   * Actual connector implementation may override its logic.
+   * 
+   * @param link {@link String} existing link to a cloud file
+   * @return String with a link should be used for file preview.
+   */
+  protected String previewLink(String link) {
+    return link;
+  }
+
+  /**
+   * Return provider specific link for file editing. By default this method returns the same as given link.
+   * Actual connector implementation may override its logic.
+   * 
+   * @param link {@link String} existing link to a cloud file or <code>null</code> if editing not supported 
+   * @return String with a link should be used for file editing.
+   */
+  protected String editLink(String link) {
+    return link;
+  }
+
   // ============== abstract ==============
 
   /**
@@ -3928,22 +3946,6 @@ public abstract class JCRLocalCloudDrive extends CloudDrive {
    * @throws RepositoryException
    */
   protected abstract void saveChangeId(Long id) throws CloudDriveException, RepositoryException;
-
-  /**
-   * Return provider specific link for a file preview.
-   * 
-   * @param link {@link String} existing link to a cloud file
-   * @return String with a link should be used for file preview.
-   */
-  protected abstract String previewLink(String link);
-
-  /**
-   * Return provider specific link for file editing.
-   * 
-   * @param link {@link String} existing link to a cloud file
-   * @return String with a link should be used for file editing.
-   */
-  protected abstract String editLink(String link);
 
   // ============== static ================
 

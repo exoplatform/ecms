@@ -237,7 +237,7 @@ public abstract class CloudDriveConnector extends BaseComponentPlugin {
   protected abstract CloudProvider createProvider();
 
   /**
-   * Authenticated an user by an access code from its cloud provider (OAuth usecase). As result an
+   * Authenticate an user by an access code from its cloud provider (OAuth usecase). As result an
    * instance of {@link CloudUser} will be returned, in case of fail an exception will be thrown
    * {@link CloudDriveException}.
    * 
