@@ -351,6 +351,21 @@ public class DriverConnector extends BaseConnector implements ResourceContainer 
     DateFormat dateFormat = new SimpleDateFormat(IF_MODIFIED_SINCE_DATE_FORMAT);
     return Response.ok().header(LAST_MODIFIED_PROPERTY, dateFormat.format(new Date())).build();
   }
+  
+  /**
+   * Clean file name
+   * 
+   * @param fileName original file name
+   * @return the response
+   */
+  
+  
+  @GET
+  @Path("/uploadFile/cleanName")
+  @RolesAllowed("users")
+  public Response cleanName (@QueryParam("fileName") String fileName) throws Exception{
+    return fileUploadHandler.cleanName(fileName);
+  }
 
   /**
    * Controls the process of uploading a file, such as aborting, deleting or progressing the file.
