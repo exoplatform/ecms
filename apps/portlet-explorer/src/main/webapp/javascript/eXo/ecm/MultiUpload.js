@@ -900,9 +900,20 @@
 		  	  //change uploaded files value
 		  	  eXo.ecm.MultiUpload.changeStatusValue(eXo.ecm.MultiUpload.UPLOADED, 1);
 		  	  //load image thumbnail
+			  var fileName = cleanName(file.name);
+			  var uri = eXo.ecm.MultiUpload.restContext + "/wcmDriver/uploadFile/cleanName?" + "fileName=" + fileName;
+			  gj.ajax({url: uri, 
+			      async: false, //blocks window close
+			      success: function(result, status, xhr) {
+			      var fileNameRet = result.getElementsByTagName("name");
+			      if(fileNameRet && fileNameRet.length > 0) {
+			         fileName = fileNameRet[0].innerHTML;
+			      }
+			    }
+			  });
 		  	  var nodePath = (eXo.ecm.MultiUpload.drivePath.length <= 1 ? "":"/" + eXo.ecm.MultiUpload.drivePath) + 
 		  	  (eXo.ecm.MultiUpload.pathMap[progressID].length <= 1 ? "" : "/" + eXo.ecm.MultiUpload.pathMap[progressID]) +
-		  	  "/" + cleanName(file.name);
+		  	  "/" + fileName;
 				var icon = gj("#icon" + progressID, eXo.ecm.MultiUpload.document)[0];
 		  	  if (icon && eXo.ecm.MultiUpload.fileType[progressID].indexOf("image") != -1) {
 		  		  var iconHTMLForImageLoadFail = gj(icon).html();

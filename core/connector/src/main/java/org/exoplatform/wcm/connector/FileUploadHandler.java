@@ -270,6 +270,7 @@ public class FileUploadHandler {
     DocumentBuilder builder = factory.newDocumentBuilder();
     Document fileExistence = builder.newDocument();
     fileName = Text.escapeIllegalJcrChars(fileName);
+    fileName = cleanNameUtil(fileName);
     Element rootElement = fileExistence.createElement(
                               parent.hasNode(fileName) ? "Existed" : "NotExisted");
     fileExistence.appendChild(rootElement);
@@ -278,6 +279,30 @@ public class FileUploadHandler {
                    .cacheControl(cacheControl)
                    .header(LAST_MODIFIED_PROPERTY, dateFormat.format(new Date()))
                    .build();
+  }
+  
+  /**
+   * Clean name using Transliterator
+   * @param fileName original file name
+   * 
+   * @return Response
+   */
+  public Response cleanName(String fileName) throws Exception {
+    CacheControl cacheControl = new CacheControl();
+    cacheControl.setNoCache(true);
+    DateFormat dateFormat = new SimpleDateFormat(IF_MODIFIED_SINCE_DATE_FORMAT);
+    
+    DocumentBuilderFactory factory = DocumentBuilderFactory.newInstance();
+    DocumentBuilder builder = factory.newDocumentBuilder();
+    Document cleanedFilename = builder.newDocument(); 
+    fileName = cleanNameUtil(fileName);
+    Element rootElement = cleanedFilename.createElement("name");
+    cleanedFilename.appendChild(rootElement);
+    rootElement.setTextContent(fileName);
+    return Response.ok(new DOMSource(cleanedFilename), MediaType.TEXT_XML)
+            .cacheControl(cacheControl)
+            .header(LAST_MODIFIED_PROPERTY, dateFormat.format(new Date()))
+            .build();
   }
   
   /**
@@ -376,12 +401,7 @@ public class FileUploadHandler {
       boolean fileCreated = false;
       String exoTitle = fileName;
       
-      if (fileName.indexOf('.') > 0) {
-        String ext = fileName.substring(fileName.lastIndexOf('.'));
-        fileName = Utils.cleanString(fileName.substring(0, fileName.lastIndexOf('.'))).concat(ext);
-      } else {
-        fileName = Utils.cleanString(fileName);
-      }
+      fileName = cleanNameUtil(fileName);
       
       String nodeName = fileName;
       int count = 0;
@@ -530,6 +550,21 @@ public class FileUploadHandler {
     rootElement.setAttribute("mimetype", mimeType);
     doc.appendChild(rootElement);
     return new DOMSource(doc);
+  }
+
+  /** Return name after cleaning
+   * @param fileName file name
+   * @return cleaned name
+   */
+  private String cleanNameUtil(String fileName) {
+    if (fileName.indexOf('.') > 0) {
+      String ext = fileName.substring(fileName.lastIndexOf('.'));
+      fileName = Utils.cleanString(fileName.substring(0, fileName.lastIndexOf('.'))).concat(".").concat(ext);
+    } else {
+      fileName = Utils.cleanString(fileName);
+    }
+    return fileName;
+
   }
   
 }
