@@ -865,7 +865,7 @@ public class UICLVPresentation extends UIContainer {
       parent.getSession().save();
       event.getRequestContext().getJavascriptManager().getRequireJS().addScripts("location.reload(true);");
       Utils.createPopupMessage(contentListPresentation,
-                               "UICLVPresentation.msg.delete-content-successfull",
+                               "UICLVPresentation.msg.delete-content-successfully",
                                null,
                                ApplicationMessage.INFO);
     }
