@@ -27,22 +27,6 @@
 
   <!-- WCMAdvanceSearchPortlet skins -->
 
-  <portlet-skin>
-    <application-name>searches</application-name>
-    <portlet-name>WCMAdvanceSearchPortlet</portlet-name>
-    <skin-name>Default</skin-name>
-    <css-path>/skin/css/ecms-search.css</css-path>
-  </portlet-skin>
-  
-   <!-- Order should be modified
-  <portlet-skin>
-    <application-name>searches</application-name>
-    <portlet-name>WCMAdvanceSearchPortlet</portlet-name>
-    <skin-name>Default</skin-name>
-    <css-path>/skin/ecms-search.css</css-path>
-    <css-priority>1</css-priority>
-  </portlet-skin> 
-   -->
   <portlet>
   	<name>WCMAdvanceSearchPortlet</name>
   	<module>
