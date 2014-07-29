@@ -559,7 +559,7 @@ public class FileUploadHandler {
   private String cleanNameUtil(String fileName) {
     if (fileName.indexOf('.') > 0) {
       String ext = fileName.substring(fileName.lastIndexOf('.'));
-      fileName = Utils.cleanString(fileName.substring(0, fileName.lastIndexOf('.'))).concat(".").concat(ext);
+      fileName = Utils.cleanString(fileName.substring(0, fileName.lastIndexOf('.'))).concat(ext);
     } else {
       fileName = Utils.cleanString(fileName);
     }
