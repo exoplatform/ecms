@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<bundle>
+  <PublicationService>
+    <AuthoringPublicationPlugin>
+      <changeState>
+        <obsoleted>محتوا منسوخ شده است</obsoleted>
+        <published>محتوا منتشر شده است</published>
+<unpublished>محتوا منتشر نشده است</unpublished>
+<archived>محتوا آرشیو شده است</archived>
+<staged>محتوا آماده انتشار است</staged>
+<approved>محتوا تایید شده است</approved>
+<pending>محتوا در حال انتظار است</pending>
+<draft>محتوا در حالت پیش نویس است</draft>
+      </changeState>
+    </AuthoringPublicationPlugin>
+  </PublicationService>
+  <Publication>
+    <log>
+      <description>
+        <enrolled>محتوا در چرخه انتشار دائمی است</enrolled>
+      </description>
+    </log>
+  </Publication>
+</bundle>

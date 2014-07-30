@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<bundle>
+  <UIDashboardForm>
+    <label>
+      <title>Author Dashboard</title>
+      <nocontent>هیچ محتوایی وجود ندارد</nocontent>
+      <mydraft>محتوای پیش نویس من</mydraft>
+      <waitingapproval>در انتظار تایید من</waitingapproval>
+      <approve>تایید</approve>
+      <publishedtomorrow>فردا منتشر خواهد شد</publishedtomorrow>
+      <refresh>#{word.refresh}</refresh>
+    </label>
+  </UIDashboardForm>
+</bundle>

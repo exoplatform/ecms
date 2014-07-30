@@ -1,0 +1,227 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<bundle>
+ 
+  <View>
+    <label>
+      <languages>
+        <en>انگلیسی</en>
+        <fr>فرانسوی</fr>
+        <ru>روسی</ru>
+        <vi>ویتنامی</vi>
+        <nl>هلندی</nl>
+        <de>آلمانی</de>
+        <uk>اوکراینی</uk>
+        <ar>عربی</ar>
+      </languages>
+    </label>
+  </View>
+ 
+  <!--
+  ################resoucebundle FOR EXO:COMMENT VIEW TEMPLATE#############
+  -->
+  <Comment>
+    <view>
+      <label>
+        <postedBy>آخرین نظر ارسال شده توسط</postedBy>
+        <at>در</at>
+        <comments>نظر (ها)</comments>
+        <show-comments>نمایش نظرات</show-comments>
+        <hide-comments>پنهان کردن نظرات</hide-comments>
+        <comment-by>نظر توسط</comment-by>
+        <email>ایمیل</email>
+        <site>سایت</site>
+      </label>
+    </view>
+  </Comment>
+ 
+  <!--
+  ################resoucebundle FOR NT:FILE VIEW TEMPLATE##############
+  -->
+  <File>
+    <view>
+      <label>
+        <not-viewable>پیش نمایش این نوشتار موجود نمی باشد.</not-viewable>
+        <using-webDAV>و یا باز کردن در مایکروسافت آفیس</using-webDAV>
+        <file-size-too-big>اندازه این فایل بیش از حد بزرگ است. شما باید آنرا دانلود و در سیستم خود باز کنید.</file-size-too-big>
+        <webDAV>نمای WebDAV</webDAV>
+        <download>دانلود</download>
+        <htmlview>مشاهده بصورت HTML</htmlview>
+        <plaintextview>نمایش بعنوان متن ساده</plaintextview>
+      </label>
+    </view>
+  </File>
+ 
+  <!--
+  ################resoucebundle FOR MAIL:DOCUMENT VIEW TEMPLATE##############
+  -->
+  <Mail>
+    <view>
+      <label>
+        <from>از:</from>
+        <to>به:</to>
+        <cc>Cc:</cc>
+        <date>تاریخ:</date>
+        <subject>موضوع:</subject>
+        <attachment>پیوست‌‌‌‌‌‌ ها:</attachment>
+      </label>
+    </view>
+  </Mail>
+  <!--
+  ################resoucebundle FOR EXO:VOTE VIEW TEMPLATE##############
+  -->
+  <Vote>
+    <view>
+      <label>
+        <avg-rating>امتیاز میانگین</avg-rating>
+        <subscription>رأی ها</subscription>
+      </label>
+    </view>
+  </Vote>
+  <!--
+  ################resoucebundle FOR LISTVIEW VIEW TEMPLATE##############
+  -->
+  <ListView>
+    <view>
+      <label>
+        <name>نام</name>
+        <versionable>قابل نسخه بندی</versionable>
+        <exo_owner>مالک</exo_owner>
+        <exo_dateCreated>تاریخ ایجاد</exo_dateCreated>
+        <exo_dateModified>تاریخ اصلاح</exo_dateModified>
+        <auditing>ممیزی</auditing>
+      </label>
+    </view>
+  </ListView>
+
+  <!--
+  ###################### resoucebundle for exo:addMetadataAction view template ####
+  -->
+  <AddMetadata>
+    <view>
+      <label>
+        <action-name>نام عمل</action-name>
+        <lifecycle>چرخه عمر</lifecycle>
+        <metadata>فراداده</metadata>
+        <description>توضیحات</description>
+      </label>
+    </view>
+  </AddMetadata>
+
+  <!--
+  ###################### resoucebundle for exo:autoVersioning view template ####
+  -->
+  <AutoVersioning>
+    <view>
+      <label>
+        <action-name>نام عمل</action-name>
+        <lifecycle>چرخه عمر</lifecycle>
+        <description>توضیحات</description>
+      </label>
+    </view>
+  </AutoVersioning>
+  <!--
+  ###################### resoucebundle for exo:enableVersiong view template ####
+  -->
+  <EnableVersioning>
+    <view>
+      <label>
+        <action-name>نام</action-name>
+        <lifecycle>چرخه عمر</lifecycle>
+        <description>توضیحات</description>
+      </label>
+    </view>
+  </EnableVersioning>
+  <!--
+  ###################### resoucebundle for dc:elementSet view template ####
+  -->
+  <ElementSet>
+    <view>
+      <label>
+        <not-avaliable>N/A</not-avaliable>
+        <core-elements>عناصر اصلی</core-elements>
+        <title>عنوان</title>
+        <creator>ایجادکننده</creator>
+        <subject>موضوع</subject>
+        <source>منبع</source>
+        <contributor>مشارکت کننده</contributor>
+        <resource-type>نوع منبع</resource-type>
+        <date>تاریخ</date>
+        <publisher>ناشر</publisher>
+        <description>توضیحات</description>
+        <rights>حقوق</rights>
+        <relation>ارتباط</relation>
+        <format>فرمت</format>
+        <coverage>پوشش</coverage>
+        <identifier>شناسه</identifier>
+        <languages>زبان‌‌‌‌‌‌ها</languages>
+      </label>
+      <action>
+        <add-edit>افزودن/ویرایش</add-edit>
+        <cancel>#{word.cancel}</cancel>
+      </action>
+      <tooltip>
+        <cancel>#{word.cancel}</cancel>
+        <add-edit>افزودن/ویرایش ویژگی ها</add-edit>
+      </tooltip>
+    </view>
+  </ElementSet>
+
+  <ScriptAction>
+    <view>
+      <label> 
+        <isDeep>عمیق است</isDeep>
+        <nodetypes>انواع گره</nodetypes>
+        <affectedNodeTypeNames>انواع گره های تآثیر دیده</affectedNodeTypeNames>
+        <nodeTypeName>نام نوع گره</nodeTypeName>
+      </label> 
+    </view>
+  </ScriptAction>
+  
+  <AddMetadata>
+    <view>
+      <label>
+        <isDeep>عمیق است</isDeep>
+        <nodetypes>انواع گره</nodetypes>
+        <affectedNodeTypeNames>انواع گره های تاثیر دیده</affectedNodeTypeNames>
+        <nodeTypeName>نام نوع گره</nodeTypeName>
+      </label> 
+    </view>
+  </AddMetadata>
+
+  <EnableVersioning>
+    <view>
+      <label>
+        <isDeep>عمیق است</isDeep>
+        <nodetypes>انواع گره</nodetypes> 
+        <affectedNodeTypeNames>انواع گره های تاثیر دیده</affectedNodeTypeNames>
+        <nodeTypeName>نام نوع گره</nodeTypeName>
+      </label> 
+    </view>
+  </EnableVersioning>
+  
+  <AutoVersioning>
+    <view>
+      <label>
+        <isDeep>عمیق است</isDeep>
+        <nodetypes>انواع گره</nodetypes>
+        <affectedNodeTypeNames>انواع گره های تاثیر دیده</affectedNodeTypeNames>
+        <nodeTypeName>نام نوع گره</nodeTypeName>
+      </label> 
+    </view>
+  </AutoVersioning>
+  
+   <AccessibleMedia>
+    <view>
+      <label>
+      <Play-audio-description-of-this-video>توضیح صوتی</Play-audio-description-of-this-video>
+      <Read-more>بیشتر</Read-more>
+      <Read-less>کمتر</Read-less>
+      <Switch-back-to-original-video>فیلم اصلی</Switch-back-to-original-video>
+      </label>
+      <tooltip>
+      <A-second-media-file-is-available-as-audio-description>فایل رسانه ای دوم به عنوان توضیح صوتی موجود است</A-second-media-file-is-available-as-audio-description>
+      </tooltip>
+    </view>
+  </AccessibleMedia>
+ 
+</bundle>

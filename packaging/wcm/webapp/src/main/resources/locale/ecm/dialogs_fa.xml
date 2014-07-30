@@ -1,0 +1,389 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<bundle>
+  <!--
+  ###################### global word for ECM dialogs resoucebundle ####
+  -->
+  <Ecm>
+    <dialog>
+      <label>
+        <end-time>زمان پایان</end-time>
+        <start-time>زمان شروع</start-time>
+        <lifecycle>چرخه عمر</lifecycle>
+        <mimeType>نوع mime</mimeType>
+        <repeat-count>تعداد دفعات تکرار</repeat-count>
+        <time-interval>فاصله زمانی</time-interval>
+        <query-items>آیتم های پرس و جو</query-items>
+        <schedule-type>نوع برنامه</schedule-type>
+        <remove>حذف آیتم</remove>
+        <add>افزودن آیتم</add>
+        <expand>گسترش این</expand>
+      </label>
+    </dialog>
+  </Ecm>
+  
+  <UIDocumentForm>
+    <label>
+      <title>#{word.title}</title>
+      <link>لینک</link>
+      <contentHtml>#{word.content}</contentHtml>
+      <content>#{word.content}</content>
+      <contentPlain>#{word.content}</contentPlain>
+      <name>نام</name>
+    <categories>دسته ها</categories>
+    </label>
+  </UIDocumentForm>
+ 
+  <!--
+  ###################### resoucebundle for HTMLFile dialogs template ####
+  -->
+  <HtmlFile>
+    <dialog>
+      <label>
+        <name>نام</name>
+        <content>محتوا</content>
+      </label>
+    </dialog>
+  </HtmlFile>
+
+  <!--
+  ###################### resoucebundle for nt:file dialogs template ####
+  -->
+  <File>
+    <dialog>
+      <label>
+        <name>#{word.name}</name>
+        <categories>دسته ها</categories>
+        <mimeType>#{Ecm.dialog.label.mimeType}</mimeType>
+        <width>Width</width>
+        <height>Height</height>
+        <content>#{word.content}</content>
+        <re-upload>پرونده در حال حاضر موجود می باشد. شما می توانید آن را حذف کنید و فایل دیگری آپلود کنید.</re-upload>
+      </label>
+    </dialog>
+  </File>
+
+  <UIActionForm>
+    <label>
+      <description>#{word.description}</description>
+      <port>شماره پورت</port>
+      <userName>#{word.userName}</userName>
+      <password>رمز عبور</password>
+      <link>لینک</link>
+      <to>ارسال نامه به</to>
+      <actionName>#{word.name}</actionName>
+    </label>
+  </UIActionForm>
+  <EditFormAction>
+    <label>
+      <description>#{word.description}</description>
+      <port>شماره پورت</port>
+      <userName>#{word.userName}</userName>
+      <password>رمز عبور</password>
+      <link>لینک</link>
+      <to>ارسال نامه به</to>
+      <actionName>#{word.name}</actionName>
+    </label>
+  </EditFormAction>
+
+  <!--
+  ###################### resoucebundle for exo:addMetadataAction dialogs template ####
+  -->
+  <AddMetadata>
+    <dialog>
+      <label>
+        <id>شناسه</id>
+        <name>#{word.name}</name>
+        <lifecycle>#{Ecm.dialog.label.lifecycle}</lifecycle>
+        <metadata>فراداده</metadata>
+        <description>#{word.description}</description>
+      </label>
+    </dialog>
+  </AddMetadata>
+
+  <!--
+  ###################### resoucebundle for exo:autoVersioning dialogs template ####
+  -->
+  <AutoVersioning>
+    <dialog>
+      <label>
+        <id>شناسه</id>
+        <name>#{word.name}</name>
+        <lifecycle>#{Ecm.dialog.label.lifecycle}</lifecycle>
+        <schedule-type>#{Ecm.dialog.label.schedule-type}</schedule-type>
+        <start-time>#{Ecm.dialog.label.start-time}</start-time>
+        <end-time>#{Ecm.dialog.label.end-time}</end-time>
+        <repeat-count>#{Ecm.dialog.label.repeat-count}</repeat-count>
+        <time-inteval>#{Ecm.dialog.label.time-interval}</time-inteval>
+        <cron-expression>عبارت Cron</cron-expression>
+        <description>#{word.description}</description>
+      </label>
+    </dialog>
+  </AutoVersioning>
+  <!--
+  ###################### resoucebundle for exo:enableVersiong dialogs template ####
+  -->
+  <EnableVersioning>
+    <dialog>
+      <label>
+        <id>شناسه</id>
+        <name>#{word.name}</name>
+        <lifecycle>#{Ecm.dialog.label.lifecycle}</lifecycle>
+        <schedule-type>#{Ecm.dialog.label.schedule-type}</schedule-type>
+        <start-time>#{Ecm.dialog.label.start-time}</start-time>
+        <end-time>#{Ecm.dialog.label.end-time}</end-time>
+        <repeat-count>#{Ecm.dialog.label.repeat-count}</repeat-count>
+        <time-inteval>#{Ecm.dialog.label.time-interval}</time-inteval>
+        <cron-expression>Cron Expression</cron-expression>
+        <description>#{word.description}</description>
+      </label>
+    </dialog>
+  </EnableVersioning>
+  <!--
+  ###################### resoucebundle for dc:elementSet dialogs template ####
+  -->
+  <ElementSet>
+    <dialog>
+      <label>
+        <title>#{word.title}:</title>
+        <creator>ایجادکننده:</creator>
+        <subject>#{word.subject}:</subject>
+        <source>منبع:</source>
+        <contributor>مشارکت کننده:</contributor>
+        <resource-type>نوع منبع:</resource-type>
+        <date>#{word.date}:</date>
+        <publisher>ناشر:</publisher>
+        <description>#{word.description}:</description>
+        <rights>حقوق:</rights>
+        <relation>ارتباط:</relation>
+        <format>#{word.format}:</format>
+        <coverage>پوشش:</coverage>
+        <identifier>شناسه:</identifier>
+        <language>زبان:</language>
+      </label>
+    </dialog>
+  </ElementSet>
+
+  <!--
+  ###################### resoucebundle for exo:actionable dialogs template ####
+  -->
+  <Actionable>
+    <dialog>
+      <label>
+        <primary-type>نوع اصلی</primary-type>
+        <mixin-types>انواع mixin</mixin-types>
+      </label>
+    </dialog>
+  </Actionable>
+
+  <!--
+  ###################### resoucebundle for exo:move dialogs template ####
+  -->
+  <Move>
+    <dialog>
+      <label>
+        <destination-workpsace>فضای کار مقصد</destination-workpsace>
+        <destination-path>مسیر مقصد</destination-path>
+        <primary-type>نوع اصلی</primary-type>
+        <mixin-types>انواع mixin</mixin-types>
+      </label>
+    </dialog>
+  </Move>
+  <!--
+  ###################### resoucebundle for exo:published dialogs template ####
+  -->
+  <Published>
+    <dialog>
+      <label>
+        <start-publication>شروع انتشار</start-publication>
+        <end-publication>پایان انتشار</end-publication>
+      </label>
+    </dialog>
+  </Published>
+ 
+  <!--
+  ###################### resoucebundle mix:referenceable dialogs template ####
+  -->
+  <Referenceable>
+    <dialog>
+      <label>
+        <uuid>شماره شناسایی یکتا (UUID)</uuid>
+      </label>
+    </dialog>
+  </Referenceable>
+  <!--
+  ###################### resoucebundle exo:relationable dialogs template ####
+  -->
+  <Relationable>
+    <dialog>
+      <label>
+        <relation>ارتباط</relation>
+      </label>
+    </dialog>
+  </Relationable>
+  <!--
+  ###################### resoucebundle exo:rss-enable dialogs template ####
+  -->
+  <RssEnable>
+    <dialog>
+      <label>
+        <title>عنوان</title>
+        <summary>#{word.summary}</summary>
+      </label>
+    </dialog>
+  </RssEnable>
+
+  <!--
+  ###################### resoucebundle mix:versionable dialogs template ####
+  -->
+  <Versionable>
+    <dialog>
+      <label>
+        <version-history>تاریخچه نسخه</version-history>
+        <base-version>نسخه پایه</base-version>
+        <is-checked-out>انتخاب شده است</is-checked-out>
+        <predecessors>پیشینیان</predecessors>
+        <merge-failed>ادغام انجام نشد</merge-failed>
+        <uuid>شماره شناسایی یکتا (UUID)</uuid>
+      </label>
+    </dialog>
+  </Versionable>
+
+  <!--
+  ##################### resoucebundle for resouce container dialogs template#####
+  -->
+  <ResouceContainer>
+    <dialog>
+      <label>
+        <name>نام</name>
+        <autoload>بارگذاری خودکار</autoload>
+        <minetype>نوع mime</minetype>
+        <content>محتوا</content>
+      </label>
+    </dialog>
+  </ResouceContainer>
+  <!--
+  ###################### resoucebundle for validator ####
+  -->
+  <EmailAddressValidator>
+    <msg>
+      <Invalid-input>آدرس ایمیل اشتباه است.</Invalid-input>
+    </msg>
+  </EmailAddressValidator>
+  <EmptyFieldValidator>
+    <msg>
+      <empty-input>فیلد '{0}' مورد نیاز است. لطفا مقدار خود را وارد کنید.</empty-input>
+    </msg>
+  </EmptyFieldValidator>
+  <NumberFormatValidator>
+    <msg>
+      <Invalid-number>فیلد '{0}' نامعتبر است.</Invalid-number>
+    </msg>
+  </NumberFormatValidator>
+  <!--
+  #####Since version 2.4#######
+
+  ###################### resoucebundle exo:taxonomyAction dialogs template ####
+  -->
+  <ScriptAction>
+    <dialog>
+      <label>
+        <id>شناسه</id>
+        <name>نام</name>
+        <lifecycle>چرخه عمر</lifecycle>
+        <homePath>مسیر خانه</homePath>
+        <targetWorkspace>فضای کار مقصد</targetWorkspace>
+        <targetPath>مسیر مقصد</targetPath>
+      </label>
+    </dialog>
+  </ScriptAction>
+  <UIDialogForm>
+   <form>
+   <DialogFormException>قادر به ذخیره این مستند نمی باشد. ممکن است یک مشکل با رهگیر پیش ذخیره بوجود آمده باشد.</DialogFormException>
+   </form>
+  </UIDialogForm>
+
+  <!--
+  #####Since version 2.6#######
+
+  ###################### resoucebundle exo:taxonomyAction dialogs template ####
+  -->
+<no>خیر</no>
+<yes>بله</yes>
+<true>درست</true>
+<false>نادرست</false>
+<Electronic>الکترونیکی</Electronic>
+<Paper>کاغذ</Paper>
+<NONE>هیچ کدام</NONE>
+<CLASSIFIED>طبقه بندی شده</CLASSIFIED>
+<UNCLASSIFIED>طبقه بندی نشده</UNCLASSIFIED>
+<NOCONTRACT>بدون قرارداد</NOCONTRACT>
+<one-minute>یک دقیقه</one-minute>
+<hourly>ساعتی</hourly>
+<daily>روزانه</daily>
+<quarterly>فصلی</quarterly>
+<yearly>سالانه</yearly>
+<ten-years>ده سال</ten-years>
+<read>اقدام کاربر</read>
+  <schedule>زمان بند</schedule>
+  <node_added>افزودن محتوا</node_added>
+  <node_removed>حذف محتوا</node_removed>
+  <property_added>افزودن ویژگی</property_added>
+  <property_removed>حذف ویژگی</property_removed>
+  <property_changed>اصلاح ويژگی</property_changed>
+
+  <ScriptAction>
+    <dialog>
+      <label>
+        <isDeep>عمیق است</isDeep>
+        <nodetypes>انواع گره</nodetypes>
+        <affectedNodeTypeNames>انواع گره های تاثیر دیده</affectedNodeTypeNames>
+      </label>
+    </dialog>
+  </ScriptAction>
+
+  <AddMetadata>
+    <dialog>
+      <label>
+        <isDeep>عمیق است</isDeep>
+        <nodetypes>انواع گره</nodetypes>
+        <affectedNodeTypeNames>انواع گره های تاثیر دیده</affectedNodeTypeNames>
+      </label>
+    </dialog>
+  </AddMetadata>
+
+  <EnableVersioning>
+    <dialog>
+      <label>
+        <isDeep>عمیق است</isDeep>
+        <nodetypes>انواع گره</nodetypes>
+        <affectedNodeTypeNames>انواع گره های تاثیر دیده</affectedNodeTypeNames>
+      </label>
+    </dialog>
+  </EnableVersioning>
+  
+  <AutoVersioning>
+    <dialog>
+      <label>
+        <isDeep>عمیق است</isDeep>
+        <nodetypes>انواع گره</nodetypes>
+        <affectedNodeTypeNames>انواع گره های تاثیر دیده</affectedNodeTypeNames>
+      </label>
+    </dialog>
+  </AutoVersioning>
+
+  <AccessibleMedia>
+  <dialog>
+  <label>
+  <captions>عناوین</captions>
+<audioDescription>توضیح صوتی</audioDescription>
+<alternativeText>متن جایگزین</alternativeText>
+</label>
+</dialog>
+<help>
+<CaptionsHelp>عناوین باید متن محاوره ای و صداهای مهم را ارائه دهند</CaptionsHelp>
+<AudioDescriptionHelp>شرح صوتی شامل فایل صدای فیلم است</AudioDescriptionHelp>
+<AlternativeTextHelp>روشی قابل دسترس و جایگزین برای نمایش اطلاعات ارائه کنید</AlternativeTextHelp>
+</help>
+</AccessibleMedia>
+  
+</bundle>

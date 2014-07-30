@@ -1,0 +1,3187 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<bundle>
+  <!--
+  #############################################################################
+  #             org.exoplatform.ecm.webui.component.UICommentForm             #
+  #############################################################################
+  -->
+  <UICommentForm>
+    <label>
+      <name>نام</name>
+      <email>ایمیل</email>
+      <website>وب سایت</website>
+      <comment>نظر</comment>
+    </label>
+    <action>
+      <Save>#{word.save}</Save>
+      <Cancel>#{word.cancel}</Cancel>
+    </action>
+    <msg>
+      <not-support>شما مجاز به ثبت نظر در مورد این نوع سند نیستید.</not-support>
+      <not-checkedout>شما باید گره را قبل از ثبت نظر در مورد آن، ترخیص کنید.</not-checkedout>
+      <content-null>شما مجاز به ارسال نظر خالی نمی باشید.</content-null>
+    </msg>
+  </UICommentForm>
+  <!--
+  #############################################################
+  # org.exoplatform.ecm.webui.component.UIVoteForm.gtmpl    #
+  #############################################################
+  -->
+  <UIVoteForm>
+    <title>
+      <normal>ضعیف</normal>
+      <good>پایین تر از متوسط</good>
+      <verygood>متوسط</verygood>
+      <excellent>بالاتر از متوسط</excellent>
+      <best>خوب</best>
+      <no-value>هنوز مقدار ندارد</no-value>
+    </title>
+    <label>
+      <my-rating>امتیاز من:</my-rating>
+    </label>
+    <button>
+      <label>
+        <confirm>تایید</confirm>
+      </label>
+    </button>
+    <msg>
+      <not-support>شما نمی توانید به این نوع سند رای بدهید.</not-support>
+      <not-checkedout>شما باید گره را قبل از ثبت رای در مورد آن، ترخیص کنید.</not-checkedout>
+      <vote-restriction>شما نمی توانید بیش از یک بار رای بدهید.</vote-restriction>
+    </msg>
+  </UIVoteForm>
+ 
+  <!--
+  #############################################################################
+  #             org.exoplatform.ecm.webui.component.explorer.UIJCRExplorer    #
+  #############################################################################
+  -->
+  <UIJCRExplorer>
+    <msg>
+      <refresh-session-success>جلسه با موفقیت تازه سازی شد.</refresh-session-success>
+      <no-node-history>شما در گره ريشه هستید.</no-node-history>
+      <save-session-success>تمامی تغییرات ذخیره شده اند.</save-session-success>
+      <target-path-not-found>شما به این گره دسترسی ندارید، زیرا این گره وجود ندارد و یا شما مجوز دسترسی به آن را ندارید.</target-path-not-found>
+    </msg>
+  </UIJCRExplorer>
+  <!--
+  #############################################################################
+  #             org.exoplatform.ecm.webui.component.explorer.UISideBar        #
+  #############################################################################
+  -->
+  <UISideBar>
+    <label>
+      <Relation>ارتباط</Relation>
+      <Explorer>مرورگر فایل</Explorer>
+      <Close>بستن نوار جانبی</Close>
+      <TagExplorer>برچسب ابری</TagExplorer>
+      <Clipboard>کلیپ برد</Clipboard>
+      <SavedSearches>جستجوهای ذخیره شده</SavedSearches>
+    </label>
+    <title>
+      <Control>Control Sidebar</Control>
+      <Close>بستن نوار جانبی</Close>
+    </title>
+  </UISideBar>
+  <!--
+  ################################################################################
+  #             org.exoplatform.ecm.webui.component.explorer.UIExplorerActionBar #
+  ################################################################################
+  -->
+  <UIViewBar>
+    <label>
+      <driveWorkspace>درایو فضای کار:</driveWorkspace>
+      <backToJCR>بازگشت به درایو اصلی JCR</backToJCR>
+      <setUpBrowser>تنظیم مشخصات نحوه نمایش خود</setUpBrowser>
+      <refesh>تازه سازی</refesh>
+      <currentDrive>درایو فعلی</currentDrive>
+      <selectView>انتخاب نما</selectView>
+      <showSideBar>نمایش نوار جانبی</showSideBar>
+      <more>بیشتر</more>
+      <backTo>بازگشت</backTo>
+    </label>
+  </UIViewBar>
+
+  <!--
+  #############################################################################
+  #             org.exoplatform.ecm.webui.component.explorer.UIDrivesArea  #
+  #############################################################################
+  -->
+  <UIDrivesBrowser>
+    <title>
+      <PersonalDrives>درایوهای شخصی</PersonalDrives>
+      <GroupDrives>درایوهای گروه</GroupDrives>
+      <GeneralDrives>درایوهای عمومی</GeneralDrives>
+    </title>
+    <msg>
+      <no-view-found>مجوز دسترسی شما شامل هیچ نمایی در درایو '{0}' نمی شود.</no-view-found>
+      <access-denied>دسترسی رد شد. شما ممکن است در فضای درایو '{0}' مجوز لازم را نداشته باشید.</access-denied>
+      <workspace-not-exist>درایو '{0}' در یک فضای کاری نامشخص ذخیره شده است. لطفا این درایو را دوباره تنظیم کنید.</workspace-not-exist>
+    </msg>
+  </UIDrivesBrowser>
+
+  <!--
+  #############################################################################
+  #             org.exoplatform.ecm.webui.component.explorer.UITreeExplorer    #
+  #############################################################################
+  -->
+  <UITreeExplorer>
+    <title>مرورگر</title>
+    <label>
+      <Root>ریشه</Root>
+      <webDavView>Download and allow edition</webDavView>
+    </label>
+    <msg>
+      <path-not-found>این اِلمان حذف و یا تغییر کرده است. لطفاً روی دکمه تازه سازی کلیک کنید.</path-not-found>
+    </msg>
+  </UITreeExplorer>
+  <!--
+  ##################################################################################
+  #             org.exoplatform.ecm.webui.component.explorer.UIViewRelationList    #
+  ##################################################################################
+  -->
+  <UIViewRelationList>
+    <label>
+      <languages-list>ترجمه ها</languages-list>
+      <relation-list>ارتباطات</relation-list>
+      <references-list>مراجع</references-list>
+      <no-related-document>هیچ سند مرتبطی موجود نیست</no-related-document>
+      <related-document>اسناد مرتبط</related-document>
+    </label>
+  </UIViewRelationList>
+  <!--
+  #########################################################################################
+  #             org.exoplatform.ecm.webui.component.explorer.control.UIPreferencesForm  #
+  #########################################################################################
+  -->
+  <UIPreferencesForm>
+    <title>تنظیم مشخصات نحوه نمایش خود</title>
+    <label>
+      <enableStructure>فعالسازی ساختار DMS.</enableStructure>
+      <showSideBar>نمایش نوار جانبی:</showSideBar>
+      <showHiddenNode>نمایش گره های پنهان:</showHiddenNode>
+      <showNonDocument>نمایش گره های غیر سندی:</showNonDocument>
+      <showRefDocuments>نمایش اسناد مرجع:</showRefDocuments>
+      <enableDragAndDrop>فعال کردن کشیدن و رها کردن:</enableDragAndDrop>
+      <sortBy>مرتب سازی بر اساس:</sortBy>
+      <order>مرتب کردن:</order>
+      <nodesPerPage>گره در هر صفحه:</nodesPerPage>
+    </label>
+    <action>
+      <Back>#{word.close}</Back>
+      <Save>#{word.save}</Save>
+    </action>
+  </UIPreferencesForm>
+  <!--
+  #########################################################################################
+  #             org.exoplatform.ecm.webui.component.explorer.control.UIPreferencesForm  #
+  #########################################################################################
+  -->
+  <UIAllItemsPreferenceForm>
+    <title>تنظیمات فیلتر</title>
+    <action>
+      <Cancel>#{word.cancel}</Cancel>
+      <Save>#{word.save}</Save>
+    </action>
+  </UIAllItemsPreferenceForm>
+  <!--
+  #########################################################################################
+  #             org.exoplatform.ecm.webui.component.explorer.UIRenameForm  #
+  #########################################################################################
+  -->
+  <UIRenameForm>
+    <title>تغییر نام</title>
+    <label>
+      <nameField>نام</nameField>
+      <titleField>عنوان</titleField>
+    </label>
+    <action>
+      <Cancel>#{word.cancel}</Cancel>
+      <Save>#{word.save}</Save>
+      <Back>#{word.back}</Back>
+    </action>
+    <msg>
+      <rename-successfull>گره '{0}' به '{1}' با موفقیت تغییر نام یافت.</rename-successfull>
+      <rename-denied>دسترسی رد شد. نام این گره را تغییر دهید.</rename-denied>
+      <fileName-invalid>نام جدید شامل کاراکترهای نامعتبر است.</fileName-invalid>
+      <newName-same-oldName>نام جدید در حال حاضر وجود دارد. لطفا دوباره چک کنید.</newName-same-oldName>
+      <version-exception>این گره (یا والد این گره) هنوز ترخیص نشده است.</version-exception>
+      <lock-exception>این گره قفل شده است. لطفا آن را قبل از تغییر نام باز کنید.</lock-exception>
+      <constraintViolation-exception>در حین تغییر نام گره '{0}' خطایی رخ داده است. لطفا دوباره چک کنید.</constraintViolation-exception>
+      <unknown-prefix>پیشوند '{0}' هنوز ثبت نشده است.</unknown-prefix>
+      <rename-error>در حین تغییر نام این گره خطایی رخ داده است. لطفا دوباره چک کنید.</rename-error>
+    </msg>
+  </UIRenameForm>
+  <UIPopupWindow>
+    <title>
+      <UIRenameForm>تغییر نام</UIRenameForm>
+      <UIActionContainer>ویرایش اقدام</UIActionContainer>
+      <UIFolderForm>پوشه جدید</UIFolderForm>
+      <UIUploadManager>آپلود فایل</UIUploadManager>
+      <UIReferencesList>فهرست مراجع</UIReferencesList>
+      <UIExportNode>استخراج</UIExportNode>
+      <UINodeTypeInfo>اطلاعات نوع گره</UINodeTypeInfo>
+      <UIVersionInfo>اطلاعات نسخه</UIVersionInfo>
+      <UIActivateVersion>فعال کردن نسخه</UIActivateVersion>
+      <UIAuditingInfo>اطلاعات ممیزی</UIAuditingInfo>
+      <UIActivateAuditing>فعال کردن ممیزی</UIActivateAuditing>
+      <UIPermissionManager>مدیریت مجوز</UIPermissionManager>
+      <UIPropertiesManager>مدیریت ویژگی ها</UIPropertiesManager>
+      <UIECMSearch>جستجوی پیشرفته</UIECMSearch>
+      <UISavedQuery>لیست پرس وجو های ذخیره شده</UISavedQuery>
+      <UIWatchDocumentForm>پاییدن سند</UIWatchDocumentForm>
+      <UIActionManager>مدیریت اقدامات</UIActionManager>
+      <UIDocumentForm>ویرایش سند</UIDocumentForm>
+      <UIDocumentFormController>افزودن سند جدید</UIDocumentFormController>
+      <EditFormController>ویرایش سند</EditFormController>
+      <UIRelationManager>افزودن ارتباط</UIRelationManager>
+      <UICategoryManager>افزودن دسته</UICategoryManager>
+      <UIImportNode>وارد کردن</UIImportNode>
+      <UIViewMetadataManager>مشاهده فراداده</UIViewMetadataManager>
+      <UIVoteForm>رای دادن به سند</UIVoteForm>
+      <UICommentForm>نظر</UICommentForm>
+      <UIPreferencesForm>تنظیمات</UIPreferencesForm>
+      <UIPublicationManager>مدیریت انتشار</UIPublicationManager>
+      <UIConfirmMessage>حذف؟</UIConfirmMessage>
+      <UIDeleteFileConfirmMessage>فایل حذف شود؟</UIDeleteFileConfirmMessage>
+      <UIDeleteFolderConfirmMessage>پوشه حذف شود؟</UIDeleteFolderConfirmMessage>
+      <UIDeleteItemsConfirmMessage>موارد حذف شوند؟</UIDeleteItemsConfirmMessage>
+      <UIRestoreConfirmMessage>تأیید بازیابی</UIRestoreConfirmMessage>
+      <UIActivePublication>ثبت در چرخه انتشار</UIActivePublication>
+      <UITaggingForm>برچسب سند</UITaggingForm>
+      <UIThumbnailForm>اضافه کردن تصویر بند انگشتی</UIThumbnailForm>
+      <UIAllItemsPreferenceForm>تنظیمات</UIAllItemsPreferenceForm>
+      <UISelectRestorePath>انتخاب مسیر بازیابی</UISelectRestorePath>
+      <UISEOForm>مدیریت جستجوگرها</UISEOForm>
+      <UISEOToolbarForm>مدیریت جستجوگرها</UISEOToolbarForm>
+    </title>
+    <header>
+      <workspace>فضای کار</workspace>
+      <path>مسیر</path>
+    </header>
+  </UIPopupWindow>
+  <!--
+  #########################################################################################
+  #             org.exoplatform.ecm.webui.component.explorer.UIResourceForm #
+  #########################################################################################
+  -->
+  <UIResourceForm>
+    <title>ویرایش محتویات فایل</title>
+    <label>
+      <name>نام</name>
+      <textToModify>ویرایش متن</textToModify>
+      <fileToUpload>آپلود محتوای جدید برای سند (باید از همان نوع mime فعلی باشد)</fileToUpload>
+    </label>
+  </UIResourceForm>
+  <!--
+  ###################################################################################
+  #             org.exoplatform.ecm.webui.component.explorer.UIActionBar      #
+  ###################################################################################
+  -->
+  <UIActionBar>
+    <tooltip>
+      <AddFolder>پوشه جدید</AddFolder>
+      <AddDocument>محتوای جدید</AddDocument>
+      <EditDocument>ویرایش</EditDocument>
+      <Upload>آپلود</Upload>
+      <Paste>الحاق</Paste>
+      <Search>جستجو</Search>
+      <WatchDocument>پاییدن/نپاییدن</WatchDocument>
+      <TaggingDocument>برچسب</TaggingDocument>
+      <Vote>رای</Vote>
+      <Comment>نظر</Comment>
+      <ManageVersions>نسخه ها</ManageVersions>
+      <ManageAuditing>ممیزی</ManageAuditing>
+      <ManagePublications>انتشارات</ManagePublications>
+      <ManageCategories>دسته ها</ManageCategories>
+      <ManageRelations>ارتباطات</ManageRelations>
+      <ManageActions>اقدامات</ManageActions>
+      <ExportNode>استخراج</ExportNode>
+      <ImportNode>وارد کردن</ImportNode>
+      <OverloadThumbnail>بیش از حد کوچک</OverloadThumbnail>
+      <ManageHidden>نمایش/پنهان کردن محتوا</ManageHidden>
+      <ViewReferences>مراجع</ViewReferences>
+      <ViewNodeType>انواع</ViewNodeType>
+      <ViewPermissions>مجوزها</ViewPermissions>
+      <ViewProperties>مشخصات</ViewProperties>
+      <ViewMetadatas>فراداده</ViewMetadatas>
+      <ViewRelations>نمایش/پنهان کردن ارتباطات</ViewRelations>
+      <ShowJCRStructure>نمایش/پنهان کردن ساختار محتوا</ShowJCRStructure>
+    </tooltip>
+    <msg>
+      <cannot-action-in-rootnode>قادر به انجام این اقدام در گره ریشه نیستید.</cannot-action-in-rootnode>
+      <node-checkedin>شما باید اول ترخیص کنید.</node-checkedin>
+      <cannot-enable-version-rootnode>نسخه بندی برای گره ریشه را نمی توان فعال کرد.</cannot-enable-version-rootnode>
+      <cannot-enable-publication-rootnode>قابلیت انتشار برای گره ریشه را نمی توان فعال کرد.</cannot-enable-publication-rootnode>
+      <manage-publication>
+        <not-supported-nodetype>قابلیت انتشار تنها از گره سندی پشتیبانی می کند.</not-supported-nodetype>
+        <no-publication-lifecycle>چرخه انتشار پیکربندی نشده است.</no-publication-lifecycle>
+      </manage-publication>
+      <unsubcriber-lifecycle>گره لغو عضویت شده است.</unsubcriber-lifecycle>
+      <not-supported-nodetype>چرخه لغو عضویت تنها از گره سندی پشتیبانی می کند.</not-supported-nodetype>
+      <unsubcriber-lifecycle-finish>گره با موفقیت لغو عضویت شد.</unsubcriber-lifecycle-finish>
+      <access-false>گره یک مقاله نیست و یا ترخیص نشده است.</access-false>
+      <unsupported-action>این عملکرد پشتیبانی نمی شود.</unsupported-action>
+      <not-relationable>این گره در حال حاضر هیچ پیوندی با گره دیگر ندارد.</not-relationable>
+      <node-pasted>گره '{0}' به محل "{1}" جابجا شده است. این عملیات ذخیره شده است.</node-pasted>
+      <no-node-selected>هیچ گره ای کپی نشده است.</no-node-selected>
+      <unable-edit>گره '{0}' با نوع گره '{1}' از ویرایش پشتیبانی نمی کند.</unable-edit>
+      <not-support>قادر به ویرایش گره انتخاب شده نمی باشید.</not-support>
+      <template-null>در این گره هیچ گفتگوی موجود نیست.</template-null>
+      <keyword-null>هیچ کلمه کلیدی برای جستجو وجود ندارد.</keyword-null>
+      <not-found>هیچ نتیجه ای در بر نداشت.</not-found>
+      <keyword-not-allow>این کلمه مجاز نمی باشد.</keyword-not-allow>
+      <is-not-referenable>گره '{0}' نمی تواند قابل ارجاع باشد.</is-not-referenable>
+      <access-denied>دسترسی رد شد. شما دسترسی ویرایش در این گره را ندارید.</access-denied>
+      <access-add-denied>دسترسی رد شد. شما دسترسی افزودن مجوز در این گره را ندارید.</access-add-denied>
+      <item-existed>این گره در حال حاضر وجود دارد. نامگذاری مشابه با گره های همرده مجاز نیست.</item-existed>
+      <removed-hidden-mixin>شما mixin پنهان را با موفقیت حذف نمودید.</removed-hidden-mixin>
+      <added-hidden-mixin>شما mixin پنهان را با موفقیت اضافه نمودید.</added-hidden-mixin>
+      <not-supported>این عملکرد تنها توسط نوع سندی پشتیبانی می شود.</not-supported>
+      <empty-file-type>افزودن سند به این گره  مجاز نیست.</empty-file-type>
+      <unsupported-watch>تنها گره سندی قابلیت پاییده شدن را دارد.</unsupported-watch>
+      <watch-checkedin>گره باید قبل از پاییده شدن ترخیص گردد.</watch-checkedin>
+      <unsupported-tagging>تنها می توان به گره سندی بر چسب زد.</unsupported-tagging>
+      <tagnode-checkedin>گره قبل از برچسب خوردن باید ترخیص شود.</tagnode-checkedin>
+    </msg>
+    <title>
+      <select-tab>انتخاب برگه</select-tab>
+      <SimpleSearch>جستجوی سریع</SimpleSearch>
+      <AdvanceSearch>جستجوی پیشرفته</AdvanceSearch>
+      <SavedQueries>جستارهای ذخیره شده</SavedQueries>
+      <ShowAllOwnedByUser>نمایش همه آیتم های من</ShowAllOwnedByUser>
+      <ShowAllFavourite>نمایش همه آیتم های مورد علاقه</ShowAllFavourite>
+      <ShowAllHidden>نمایش همه آیتم های پنهان</ShowAllHidden>
+      <ShowAllFromTrash>نمایش همه آیتم ها از سطل زباله</ShowAllFromTrash>
+    </title>
+  </UIActionBar>
+  <UIPopupMenu>
+    <msg>
+      <has-not-permission>دسترسی رد شد. شما دسترسی افزودن مجوز در این گره را ندارید.</has-not-permission>
+      <has-not-edit-permission>دسترسی رد شد. شما مجوز ویرایش در این گره را ندارید. لطفا با سرپرست تماس بگیرید.</has-not-edit-permission>
+      <cannot-login-node>شما نمی توانید در اینجا به گره دسترسی داشته و یا آن را به اینجا منتقل کنید.</cannot-login-node>
+      <cannot-paste-nodetype>شما نمی توانید گره را به اینجا منتقل کنید.</cannot-paste-nodetype>
+      <has-not-permission-unlok>شما مجوز لازم را برای باز کردن این گره ندارید.</has-not-permission-unlok>
+      <bound-exception>شما دارای مجوز تغییر نام این گره نیستید. لطفا با سرپرست تماس بگیرید.</bound-exception>
+      <bound-move-exception>امکان انتقال گره به خود آن و یا گره های فرزند آن وجود ندارد.</bound-move-exception>
+      <does-not-support-auditing>شما نمی توانید در این گره ممیزی را فعال کنید.</does-not-support-auditing>
+      <can-not-rename-node>شما مجوز لازم برای تغییر نام این گره را ندارید. لطفا برای گرفتن مجوز درست با مدیر سیستم تماس بگیرید.</can-not-rename-node>
+      <can-not-cut-node>شما دارای مجوز جابجایی این گره نیستید. لطفا با سرپرست تماس بگیرید.</can-not-cut-node>
+      <can-not-remove-node>شما دارای مجوز حذف این گره نیستید. لطفا با سرپرست تماس بگیرید.</can-not-remove-node>
+      <can-not-lock-node>شما مجوز لازم برای قفل کردن گره {0} را ندارید. لطفا با سرپرست تماس بگیرید.</can-not-lock-node>
+      <can-not-unlock-node>شما دارای مجوز باز کردن این گره نیستید. لطفا با سرپرست تماس بگیرید.</can-not-unlock-node>
+      <no-node>لطفا یک گره را قبل از اتمام عمل انتقال انتخاب نمایید.</no-node>
+      <can-not-paste-node>شما دارای مجوز جابجایی این گره نیستید. لطفا با سرپرست تماس بگیرید.</can-not-paste-node>
+      <can-not-move-node>شما دارای مجوز جابجایی این گره نیستید. لطفا با سرپرست تماس بگیرید.</can-not-move-node>
+      <does-not-support-versioning>شما دارای مجوز انتقال به این گره نیستید. لطفا با سرپرست تماس بگیرید.</does-not-support-versioning>
+      <path-not-found>این اِلمان حذف و یا تغییر کرده است. لطفاً روی دکمه تازه سازی کلیک کنید.</path-not-found>
+      <paste-lock-exception>نمی توان '{0}' را در این گره قرار داد، زیرا گره منبع یا مقصد قفل شده و یا با یک گره قفل شده ازتباط دارد.</paste-lock-exception>
+      <can-not-checkin-node>شما نمی توانید این گره را وارد کنید. لطفا دسترسی های خود را بررسی نمایید.</can-not-checkin-node>
+      <can-not-checkout-node>شما نمی توانید این گره را ترخیص کنید. لطفا دسترسی های خود را بررسی نمایید.</can-not-checkout-node>
+      <move-constraint-exception>در حین جابجایی گره خطایی رخ داده است.</move-constraint-exception>
+      <not-lock-owner>شما نمی توانید این گره را باز کنید زیرا مالک قفل آن نیستید.</not-lock-owner>
+      <is-checked-in>لطفا قبل از تغییر نام گره را ترخیص کنید.</is-checked-in>
+      <is-checked-in-lock>لطفا قبل از قفل کردن گره، آن را ترخیص کنید.</is-checked-in-lock>
+      <cant-lock>شما نمی توانید این گره را قفل کنید.</cant-lock>
+      <node-locked>آیتم با مسیر {0} یا آیتمی در سطح بالاتر قفل شده است.</node-locked>
+      <can-not-delete>لطفا این گره را قبل از حذف قفل کنید.</can-not-delete>
+      <can-not-delete-version>نمی توانید این گره را حذف کنید. زیرا در حال نسخه بندی است.</can-not-delete-version>
+      <not-support>گره انتخاب شده حذف نمی شود. لطفا گره دیگری را انتخاب کنید.</not-support>
+      <current-node-not-allow-paste>نوع گره کپی شده را نمی توان به گره جاری منتقل کرد.</current-node-not-allow-paste>
+      <copied-node-in-versioning>گره کپی شده را نمی توان منتقل کرد. زیرا در حال نسخه بندی است.</copied-node-in-versioning>
+      <parent-node-locked>شما مجوز لازم را برای باز کردن گره '{0}' ندارید.</parent-node-locked>
+      <this-node-locked-by-parent>شما نمی توانید این گره را باز کنید. این گره توسط گره والد قفل شده است.</this-node-locked-by-parent>
+      <paste-node-same-name>گره با نام یکسان را نمی توان به عنوان یک گره به پوشه مقصد منتقل کرد.</paste-node-same-name>
+      <has-not-add-permission>شما مجوز لازم برای اضافه کردن یک گره جدید را ندارید.</has-not-add-permission>
+      <node-cutting>گره آماده جابجایی است. ولی نمی توانید آن را به اینجا منتقل کنید.</node-cutting>
+      <access-denied>دسترسی رد شد. شما ممکن است مجوز لازم در این گره را نداشته باشید.</access-denied>
+      <remove-verion-exception>گره حذف نمی شود، زیرا خود آن (و یا گره والد آن) رزرو شده است.</remove-verion-exception>
+      <remove-referentialIntegrityException>این گره حذف نمی شود، زیرا در حال حاضر مقصد یک ارجاع می باشد.</remove-referentialIntegrityException>
+      <constraintviolation-exception>آیتم اجباری Jcr:uuid پیدا شد. گره تغییر داده یا حذف شده است. لطفاً روی دکمه تازه سازی کلیک کنید.</constraintviolation-exception>
+      <path-not-found-exception>این اِلمان حذف و یا تغییر کرده است. لطفاً روی دکمه تازه سازی کلیک کنید.</path-not-found-exception>
+      <not-exist-categories>دسته وجود ندارد.</not-exist-categories>
+    </msg>
+  </UIPopupMenu>
+  <!--
+  #############################################################################
+  #     org.exoplatform.ecm.webui.component.explorer.actions.UIFolderForm     #
+  #############################################################################
+  -->
+  <UIFolderForm>
+    <action>
+      <Cancel>#{word.cancel}</Cancel>
+      <Save>ایجاد پوشه</Save>
+    </action>
+    <label>
+      <titleTextBox>نام پوشه:</titleTextBox>
+      <customTypeCheckBox>استفاده از یک نوع سفارشی از پوشه</customTypeCheckBox>
+    </label>
+    <title>افزودن/ویرایش پوشه</title>
+    <msg>
+      <addFolder-successful>پوشه '{0}' با موفقیت اضافه شد.</addFolder-successful>
+      <name-invalid>لطفاً نام پوشه را وارد کنید.</name-invalid>
+      <title-invalid>لطفا عنوان پوشه را وارد کنید.</title-invalid>
+      <name-not-allowed>این نام مجاز نیست.</name-not-allowed>
+      <fileName-error>نام فایل نامعتبر است.</fileName-error>
+      <constraint-violation>گره فعلی به شما اجازه افزودن نوع گره '{0}' را نمی دهد.</constraint-violation>
+      <repository-exception>یک خطای غیر منتظره رخ داده است. لطفا برای کسب اطلاعات بیشتر با سرپرست تماس بگیرید.</repository-exception>
+      <repository-exception-permission>شما دارای مجوز برای افزودن یک پوشه جدید به این گره نیستید.</repository-exception-permission>
+      <numberformat-exception>پوشه ذخیره نمی شود. نام تعیین شده باید به فرمت عددی باشد.</numberformat-exception>
+      <!--DMS 2.4.x; ECM-3553-->
+      <not-allow-sameNameSibling>پوشه ذخیره نمی شود. این گره، دو گره با نام یکسان را قبول نمی کند.</not-allow-sameNameSibling>
+      <ntFolder-not-avaiable>شما باید یک نوع سفارشی از پوشه را انتخاب کنید</ntFolder-not-avaiable>
+    </msg>
+    <help>
+      <customTypeCheckBoxHelp>در صورت تمایل برای ذخیره کردن محتوای وب و یا انواع سند سفارشی در این پوشه، گزینه را انتخاب کنید.</customTypeCheckBoxHelp>
+    </help>
+  </UIFolderForm>
+  <!--
+  ###################################################################################
+  #             org.exoplatform.ecm.webui.component.explorer.UIDocumentWorkspace    #
+  ###################################################################################
+  -->
+  <UIWorkingArea>
+    <title>
+      <Icon>آیکن</Icon>
+    </title>
+    <msg>
+      <!-- Delte one node is not in trash and have no relation -->
+      <confirm-delete>مطمئن هستید که می خواهید آیتم '{0}' را حذف کنید؟</confirm-delete>
+      <confirm-delete-file>آیا مطمئن هستید که میخواهید فایل '{0}' را حذف کنید؟</confirm-delete-file>
+      <confirm-delete-folder>آیا مطمئنید که می خواهید پوشه '{0}' و پوشه های فرعی آن را حذف کنید؟</confirm-delete-folder>
+      
+      <!-- Delte one node is in trash and have no relation -->
+      <confirm-delete-permanently>آیا مطمئن هستید که می خواهید آیتم '{0}' به طور دایمی حذف شود؟</confirm-delete-permanently>
+      <confirm-delete-file-permanently>آیا مطمئن هستید که می خواهید فایل '{0}' به طور دایمی حذف شود؟</confirm-delete-file-permanently>
+      <confirm-delete-folder-permanently>آیا مطمئن هستید که می خواهید پوشه '{0}' و پوشه های فرعی آن به طور دایمی حذف شوند؟</confirm-delete-folder-permanently>
+      
+      <!-- Delte one node is not in trash and have relations -->
+      <confirm-delete-has-relations>آیا مطمئن هستید که می خواهید آیتم '{0}' و ارجاعات آن به طور دایمی حذف شوند؟</confirm-delete-has-relations>
+      <confirm-delete-file-has-relations>آیا مطمئن هستید که می خواهید فایل '{0}' و ارجاعات آن به طور دایمی حذف شوند؟</confirm-delete-file-has-relations>
+      <confirm-delete-folder-has-relations>آیا مطمئن هستید که می خواهید پوشه '{0}' و ارجاعات آن به طور دایمی حذف شوند؟</confirm-delete-folder-has-relations>
+      
+      <!-- Delte multiple nodes, not in Trash, have no relations -->
+      <confirm-delete-multi-nodes-generic>آیا مطمئن هستید که می خواهید آیتم های {0} انتخاب شده را حذف کنید؟</confirm-delete-multi-nodes-generic>  
+      <confirm-delete-multi-nodes-file>آیا مطمئن هستید که می خواهید فایل های {0} انتخاب شده را حذف کنید؟</confirm-delete-multi-nodes-file>
+      <confirm-delete-multi-nodes-folder>آیا مطمئن هستید که می خواهید پوشه های {0} انتخاب شده و پوشه های فرعی آنها را حذف کنید؟</confirm-delete-multi-nodes-folder>
+      <confirm-delete-multi-nodes-generic-and-file>آیا مطمئن هستید که می خواهید آیتم ها و فایل های {0} انتخاب شده را حذف کنید؟</confirm-delete-multi-nodes-generic-and-file>
+      <confirm-delete-multi-nodes-generic-and-folder>آیا مطمئن هستید که می خواهید آیتم ها، پوشه ها و پوشه های فرعی {0} انتخاب شده را حذف کنید؟</confirm-delete-multi-nodes-generic-and-folder>
+      <confirm-delete-multi-nodes-file-and-folder>آیا مطمئن هستید که می خواهید فایل ها، پوشه ها و پوشه های فرعی {0} انتخاب شده را حذف کنید؟</confirm-delete-multi-nodes-file-and-folder>
+      <confirm-delete-multi-nodes-generic-and-file-and-folder>آیا مطمئن هستید که می خواهید آیتم ها، فایل ها،پوشه ها و پوشه های فرعی {0} انتخاب شده را حذف کنید؟</confirm-delete-multi-nodes-generic-and-file-and-folder>
+      
+      <!-- Delte multiple nodes, in Trash -->
+      <confirm-delete-multi-nodes-generic-permanently>آیا مطمئن هستید که می خواهید آیتم های {0} انتخاب شده را به طور دایمی حذف کنید؟</confirm-delete-multi-nodes-generic-permanently>  
+      <confirm-delete-multi-nodes-file-permanently>آیا مطمئن هستید که می خواهید فایل های {0} انتخاب شده را به طور دایمی حذف کنید؟</confirm-delete-multi-nodes-file-permanently>
+      <confirm-delete-multi-nodes-folder-permanently>آیا مطمئن هستید که می خواهید پوشه ها و پوشه های فرعی {0} انتخاب شده را به طور دایمی حذف کنید؟</confirm-delete-multi-nodes-folder-permanently>
+      <confirm-delete-multi-nodes-generic-and-file-permanently>آیا مطمئن هستید که می خواهید آیتم ها و فایل های {0} انتخاب شده را به طور دایمی حذف کنید؟</confirm-delete-multi-nodes-generic-and-file-permanently>
+      <confirm-delete-multi-nodes-generic-and-folder-permanently>آیا مطمئن هستید که می خواهید آیتم ها و پوشه ها و پوشه های فرعی {0} انتخاب شده را به طور دایمی حذف کنید؟</confirm-delete-multi-nodes-generic-and-folder-permanently>
+      <confirm-delete-multi-nodes-file-and-folder-permanently>آیا مطمئن هستید که می خواهید فایل ها و پوشه ها و پوشه های فرعی {0} انتخاب شده را به طور دایمی حذف کنید؟</confirm-delete-multi-nodes-file-and-folder-permanently>
+      <confirm-delete-multi-nodes-generic-and-file-and-folder-permanently>آیا مطمئن هستید که می خواهید آیتم ها، فایل ها، پوشه ها و پوشه های فرعی {0} انتخاب شده را به طور دایمی حذف کنید؟</confirm-delete-multi-nodes-generic-and-file-and-folder-permanently>
+      
+      <!-- Delte multiple nodes, have relations -->
+      <confirm-delete-multi-nodes-generic-have-relations>آیا مطمئن هستید که می خواهید آیتم های {0} انتخاب شده را به به همراه ارجاعات آن ها حذف کنید؟</confirm-delete-multi-nodes-generic-have-relations>  
+      <confirm-delete-multi-nodes-file-have-relations>آیا مطمئن هستید که می خواهید فایل های {0} انتخاب شده را به به همراه ارجاعات آن ها حذف کنید؟</confirm-delete-multi-nodes-file-have-relations>
+      <confirm-delete-multi-nodes-folder-have-relations>آیا مطمئن هستید که می خواهید پوشه ها و پوشه های فرعی {0} انتخاب شده را به به همراه ارجاعات آن ها حذف کنید؟</confirm-delete-multi-nodes-folder-have-relations>
+      <confirm-delete-multi-nodes-generic-and-file-have-relations>آیا مطمئن هستید که می خواهید آیتم ها و فایل های {0} انتخاب شده را به به همراه ارجاعات آن ها حذف کنید؟</confirm-delete-multi-nodes-generic-and-file-have-relations>
+      <confirm-delete-multi-nodes-generic-and-folder-have-relations>آیا مطمئن هستید که می خواهید آیتم ها، پوشه ها و پوشه های فرعی {0} انتخاب شده را به به همراه ارجاعات آن ها حذف کنید؟</confirm-delete-multi-nodes-generic-and-folder-have-relations>
+      <confirm-delete-multi-nodes-file-and-folder-have-relations>آیا مطمئن هستید که می خواهید فایل ها، پوشه ها و پوشه های فرعی {0} انتخاب شده را به به همراه ارجاعات آن ها حذف کنید؟</confirm-delete-multi-nodes-file-and-folder-have-relations>
+      <confirm-delete-multi-nodes-generic-and-file-and-folder-have-relations>آیا مطمئن هستید که می خواهید آیتم ها، فایل ها، پوشه ها و پوشه های فرعی {0} انتخاب شده را به به همراه ارجاعات آن ها حذف کنید؟</confirm-delete-multi-nodes-generic-and-file-and-folder-have-relations>
+      
+      <feedback-delete>'{0}' با موفقیت حذف شد.</feedback-delete>
+      <feedback-delete-multi>آیتم های {0} با موفقیت حذف شدند.</feedback-delete-multi>      
+      <feedback-delete-permanently>'{0}' برای همیشه حذف شد.</feedback-delete-permanently>
+      <feedback-delete-permanently-multi>آیتم های {0} برای همیشه حذف شدند.</feedback-delete-permanently-multi>
+      <undo-delete>عقبگرد</undo-delete>
+      <feedback-restore>'{0}' با موفقیت برگردانده شد.</feedback-restore>
+      <feedback-restore-multi>آیتم های {0} با موفقیت بازیابی شدند.</feedback-restore-multi>
+      
+      <confirm-restore>گره ای با همین نام در محل قبلی گره '{0}' وجود دارد. آیا از بازیابی این گره اطمینان دارید؟</confirm-restore>
+      <confirm-move>آیا می خواهید منتقل شود؟</confirm-move>
+      <node-cut>گره '{0}' قطع شده است.</node-cut>
+      <execute-successfully>اقدام سفارشی '{0}' اجرا شده است.</execute-successfully>
+      <save-node-success>گره '{0}' ذخیره شده است.</save-node-success>
+      <move-problem>گره '{0}' به '{1}' انتقال نمی یابد، زیرا مشکلی در مورد مجوز  و یا محدودیت ها وجود دارد.</move-problem>
+    </msg>
+  </UIWorkingArea>
+  <UIDocumentWorkspace>
+    <label>
+      <no-children>این گره هیچ گره فرزندی ندارد.</no-children>
+      <no-children-but-has-hidden>این گره هیچ گره فرزندی ندارد، اما تعدادی پرونده پنهان در آن وجود دارد.</no-children-but-has-hidden>
+    </label>
+    <msg>
+      <unable-save-node>گره '{0}' تازه ایجاد شده است. لطفا قبل از انجام این عمل جلسه را ذخیره کنید.</unable-save-node>
+      <save-node-success>گره '{0}' ذخیره شده است.</save-node-success>
+      <node-copied>گره '{0}' کپی شده است.</node-copied>
+      <node-cut>گره '{0}' قطع شده است.</node-cut>
+      <remove-root>قادر به حذف گره ریشه نیستید.</remove-root>
+      <node-remove-success>گره '{0}' حذف شده است.</node-remove-success>
+    </msg>
+    <tooltip>
+      <Rename>تغییر نام</Rename>
+      <Cut>برش</Cut>
+      <Copy>کپی</Copy>
+      <Save>#{word.save}</Save>
+      <RemoveNode>حذف</RemoveNode>
+      <Checkin>رزرو</Checkin>
+      <Checkout>ترخیص</Checkout>
+      <Lock>قفل</Lock>
+      <Unlock>باز کردن قفل</Unlock>
+      <EditDocument>ویرایش</EditDocument>
+      <Paste>الحاق</Paste>
+      <LockedBy>قفل شده توسط</LockedBy>
+    </tooltip>
+  </UIDocumentWorkspace>
+  <UIDocumentInfo>
+    <msg>
+      <access-denied>دسترسی رد شد. به گره '{0}' دسترسی ندارید.</access-denied>
+      <null-exception>موردی یافت نشد. تغییر داده یا حذف شده و یا شما اجازه دسترسی به این گره را ندارید.</null-exception>
+      <confirm-deleteattachment>آیا از حذف این فایل پیوست اطمینان دارید؟</confirm-deleteattachment>
+      <confirm-deleteattcomment>آیا از حذف این نظر اطمینان دارید؟</confirm-deleteattcomment>
+      <access-denied-exception>دسترسی رد شد. شما ممکن است دارای مجوز خواندن  نبوده و یا گره حذف شده یا تغییر داده شده است.</access-denied-exception>
+      <path-not-found>این اِلمان حذف و یا تغییر کرده است. لطفاً روی دکمه تازه سازی کلیک کنید.</path-not-found>
+    </msg>
+    <tooltip>
+      <remove-attachment>حذف این فایل پیوست</remove-attachment>
+      <remove-comment>حذف این نظر</remove-comment>
+    </tooltip>
+  </UIDocumentInfo>
+  <ListView>
+    <view>
+      <label>
+        <name>نام</name>
+        <versionable>قابل نسخه بندی</versionable>
+        <exo_owner>صاحب</exo_owner>
+        <auditing>ممیزی</auditing>
+        <exo_dateCreated>تاریخ ایجاد</exo_dateCreated>
+        <exo_dateModified>تاریخ اصلاح</exo_dateModified>
+      </label>
+    </view>
+  </ListView>
+  <!--
+  #############################################################################
+  #             org.exoplatform.ecm.webui.component.explorer.ECMContextMenu   #
+  #############################################################################
+  -->
+  <ECMContextMenu>
+    <event>
+      <Lock>قفل</Lock>
+      <Unlock>باز کردن قفل</Unlock>
+      <EditDocument>ویرایش</EditDocument>
+      <Copy>کپی</Copy>
+      <Rename>تغییر نام</Rename>
+      <Delete>حذف</Delete>
+      <Save>#{word.save}</Save>
+      <Cut>برش</Cut>
+      <Paste>الحاق</Paste>
+      <CheckOut>ترخیص</CheckOut>
+      <CheckIn>رزرو</CheckIn>
+      <WebDAV>مشاهده WebDAV</WebDAV>
+      <autoversion>نسخه بندی خودکار</autoversion>
+      <Custom>سفارشی</Custom>
+      <AddFolder>پوشه جدید</AddFolder>
+      <AddDocument>محتوای جدید</AddDocument>
+      <Upload>آپلود فایل</Upload>
+      <MoveNode>انتقال</MoveNode>
+      <UnLock>باز کردن قفل</UnLock>
+      <ViewProperties>مشاهده ویژگی ها</ViewProperties>
+      <GetURL>کپی URL در کلیپ برد</GetURL>
+      <AddThumbnail>افزودن/حذف کردن تصویر بند انگشتی</AddThumbnail>
+      <AddToFavourite>افزودن به لیست علاقه مندی ها</AddToFavourite>
+      <RemoveFromFavourite>حذف از لیست علاقه مندی ها</RemoveFromFavourite>
+      <MoveToTrash>انتقال به سطل زباله</MoveToTrash>
+      <RestoreFromTrash>بازیابی از سطل زباله</RestoreFromTrash>
+      <EmptyTrash>خالی کردن سطل زباله</EmptyTrash>
+      <WebDavView>Download and allow edition</WebDavView>
+    </event>
+  </ECMContextMenu>
+ 
+  <!--
+  #############################################################################
+  #     org.exoplatform.ecm.webui.component.explorer.UIReferencesList         #
+  #############################################################################
+  -->
+  <UIReferencesList>
+    <msg>
+      <no-references>ارجاعات یافت نشد</no-references>
+    </msg>
+    <header>
+      <workspace>فضای کار</workspace>
+      <path>مسیر</path>
+    </header>
+    <action>
+      <Close>#{word.close}</Close>
+    </action>
+  </UIReferencesList>
+  <!--
+  #############################################################################
+  #         org.exoplatform.ecm.webui.component.explorer.UIPropertiesManager  #
+  #############################################################################
+  -->
+  <UITabPane>
+    <title>
+      <UIPublishingPanel>Publication Pane</UIPublishingPanel>
+      <UIPublicationPanel>نسخه جدید</UIPublicationPanel>
+      <UIPublicationSchedule>زمان بندی شده</UIPublicationSchedule>
+      <UIPublicationPagesContainer>صفحات</UIPublicationPagesContainer>
+      <UIPublicationHistory>تاريخچه</UIPublicationHistory>
+      <UIVersionViewer>نمایشگر نسخه</UIVersionViewer>
+
+      <UIPropertyTab>ویژگیها</UIPropertyTab>
+      <UIMetadataTab>فراداده</UIMetadataTab>
+      <UIPropertyForm>افزودن ویژگی جدید</UIPropertyForm>
+      <UIUploadContent>اطلاعات مربوط به فایل آپلود شده</UIUploadContent>
+      <UIJCRAdvancedSearch>جستار جدید</UIJCRAdvancedSearch>
+      <UISavedQuery>جستار ذخیره شده</UISavedQuery>
+      <AdvancedSearchResult>نتایج جستجو</AdvancedSearchResult>
+      <UISimpleSearch>جستجوی ساده</UISimpleSearch>
+      <UISearchContainer>جستجوی پیشرفته</UISearchContainer>
+      <UICategoryManagerSearch>افزودن دسته به جستجو</UICategoryManagerSearch>
+      <UIConstraintsForm>فرم محدودیت ها</UIConstraintsForm>
+      <UIViewSearchResult>مشاهده محتوا</UIViewSearchResult>
+      <UIContentNameSearch>جستجو بر اساس نام</UIContentNameSearch>
+      <UINodeInfo>اطلاعات نسخه</UINodeInfo>
+      <UINodeProperty>ویژگی گره</UINodeProperty>
+      <UIActionListContainer>اقدامات موجود</UIActionListContainer>
+      <UIActionContainer>اضافه کردن اقدام</UIActionContainer>
+      <UIActionViewContainer>اطلاعات اقدام</UIActionViewContainer>
+      <UIMultiLanguageForm>مشاهده زبان</UIMultiLanguageForm>
+      <UIAddLanguageContainer>افزودن زبان</UIAddLanguageContainer>
+      <UINonPublishedForm>حالت</UINonPublishedForm>
+      <UIPublishedForm>حالت</UIPublishedForm>
+      <UIPublicationLogList>تاریخچه</UIPublicationLogList>
+      <UIDocumentWithTree>نمای فایل</UIDocumentWithTree>
+      <UIDocumentInfo>نمای سند</UIDocumentInfo>
+      <UICategoriesSelectPanel>انتخاب دسته بندی</UICategoriesSelectPanel>
+      <UISelectedCategoriesGrid>دسته بندی های مورد ارجاع</UISelectedCategoriesGrid>
+      <UIWorkflowPublicationActionForm>Workflow Publication Action</UIWorkflowPublicationActionForm>
+      <UIWorkflowPublicationViewForm>Workflow Publication View</UIWorkflowPublicationViewForm>
+      <metadatasitemetadata>فراداده سایت</metadatasitemetadata>
+      <dcelementset>هسته دوبلین</dcelementset>
+    </title>
+  </UITabPane>
+  <UIPropertyTab>
+    <title>
+      <edit>ویرایش این ویژگی</edit>
+      <delete>حذف این ویژگی</delete>
+    </title>
+    <confirm>
+      <remove-property>آیا از حذف این ویژگی اطمینان دارید؟</remove-property>
+    </confirm>
+    <header>
+      <name>نام</name>
+      <multiValue>Multi Value</multiValue>
+      <value>مقدار</value>
+      <action>اقدام</action>
+    </header>
+    <label>
+      <binary>Binary Data</binary>
+      <notavailable>N/A</notavailable>
+      <cannotget>Cannot get values</cannotget>
+    </label>
+    <action>
+      <Close>#{word.close}</Close>
+    </action>
+  </UIPropertyTab>
+  <!--
+  #############################################################################
+  #         org.exoplatform.ecm.webui.component.explorer.UIPropertyTab     #
+  #############################################################################
+  -->
+  <!--
+  #############################################################################
+  #           org.exoplatform.ecm.webui.component.explorer.UIPropertyForm     #
+  #############################################################################
+  -->
+  <UIPropertyForm>
+    <title>Add/Edit Property</title>
+    <label>
+      <name>نام:</name>
+      <type>نوع:</type>
+      <value>Value:</value>
+      <upload>آپلود:</upload>
+      <namespace>Namespace:</namespace>
+      <multiple>Multiple:</multiple>
+      <property_select>Add New Property:</property_select>
+      <value0>Value 0</value0>
+      <value1>Value 1</value1>
+      <value2>Value 2</value2>
+      <value3>Value 3</value3>
+      <value4>Value 4</value4>
+      <value5>Value 5</value5>
+      <value6>Value 6</value6>
+      <value7>Value 7</value7>
+      <value8>Value 8</value8>
+      <value9>Value 9</value9>
+      <value10>Value 10</value10>
+    </label>
+    <action>
+      <Save>#{word.save}</Save>
+      <Cancel>#{word.cancel}</Cancel>
+      <Reset>تنظیم مجدد</Reset>
+    </action>
+    <msg>
+      <name-invalid>Please enter the property name.</name-invalid>
+      <unable-create>Cannot add properties.</unable-create>
+      <value-invalid>Please enter the value.</value-invalid>
+      <node-checkedin>You must check out this node before adding a property.</node-checkedin>
+      <can-not-add>You cannot add properties to this node. This is only allowed for the node type nt:unstructured.</can-not-add>
+      <propertyName-invalid>The property name must include namespace (e.g. namespace:name).</propertyName-invalid>
+      <propertyName-exist>The property '{0}' already exists.</propertyName-exist>
+      <propertyValu-null>Some values may be null.</propertyValu-null>
+      <valueFormatEx>You cannot assign a multiple-valued value to a single-valued property.</valueFormatEx>
+      <number-format-exception>Your input value has the wrong format.</number-format-exception>
+      <property-not-exist>The property {0} doesn't exist.</property-not-exist>
+    </msg>
+  </UIPropertyForm>
+
+  <!--
+  #############################################################################
+  #             org.exoplatform.ecm.webui.component.explorer.UIPermissionInfo #
+  #############################################################################
+  -->
+  <UIPermissionInfo>
+    <action>
+      <title>
+        <Edit>ویرایش</Edit>
+        <Delete>Remove Permission</Delete>
+      </title>
+    </action>
+    <header>
+      <usersOrGroups>User or Group</usersOrGroups>
+      <read>Read</read>
+      <addNode>Modify</addNode>
+      <remove>حذف</remove>
+      <action>اقدام</action>
+    </header>
+    <msg>
+      <confirm-delete-permission>Are you sure you want to remove this permission?</confirm-delete-permission>
+      <no-permission-tochange>You do not have the right to remove permission.</no-permission-tochange>
+      <no-permission-remove>You cannot remove the owner.</no-permission-remove>
+      <access-denied>Access denied. You cannot remove this permission.</access-denied>
+    </msg>
+  </UIPermissionInfo>
+  <permission>
+    <title>
+      <SelectUser>Select User</SelectUser>
+      <SelectMember>Select Membership</SelectMember>
+      <AddAny>Select Everyone</AddAny>
+    </title>
+  </permission>
+  <!--
+  #############################################################################
+  #             org.exoplatform.ecm.webui.component.explorer.UIPermissionForm #
+  #############################################################################
+  -->
+  <SelectUserOrGroup>
+    <title>
+      <UIGroupSelector>انتخاب کاربر</UIGroupSelector>
+      <UIPermissionSelector>Select Member</UIPermissionSelector>
+      <UIGroupMemberSelector>انتخاب عضویت</UIGroupMemberSelector>
+    </title>
+  </SelectUserOrGroup>
+  <UIGroupSelector>
+    <label>
+      <selectGroup>Browse and Select a Group</selectGroup>
+      <selectUser>انتخاب کاربر</selectUser>
+    </label>
+    <msg>
+      <not-change-owner>'{0}' is the owner of this node and has full control permission.</not-change-owner>
+    </msg>
+  </UIGroupSelector>
+  <UIPermissionForm>
+    <label>
+      <UIPopupWindow>Select</UIPopupWindow>
+      <permission>UIPermissionForm</permission>
+      <userOrGroup>کاربر یا گروه</userOrGroup>
+      <read>Read Right</read>
+      <add_node>Modify Right</add_node>
+      <remove>Remove Right</remove>
+    </label>
+    <title>Add a permission to that node</title>
+    <action>
+      <Close>#{word.close}</Close>
+      <Save>#{word.save}</Save>
+      <Reset>تنظیم مجدد</Reset>
+    </action>
+    <msg>
+      <checkbox-require>Please select at least one permission.</checkbox-require>
+      <userOrGroup-required>Please select a user or group before saving this permission.</userOrGroup-required>
+      <not-change-permission>You do not have the right to add a permission.</not-change-permission>
+      <access-denied>دسترسی رد شد. شما نمی توانید این مجوز را حذف کنید.</access-denied>
+    </msg>
+  </UIPermissionForm>
+
+  <!--
+  ###############################################################################
+  #             org.exoplatform.ecm.webui.component.explorer.UINodeTypeInfo     #
+  ###############################################################################
+  -->
+  <UINodeTypeInfo>
+    <label>
+      <node-type>Node Type</node-type>
+      <name>نام</name>
+      <item>Primary Item Name</item>
+      <super-types>Parent Types</super-types>
+      <mixin>Mixin Node Type</mixin>
+      <orderable-children>Orderable Children</orderable-children>
+      <property-def>Node Property Definition</property-def>
+      <prop-name>نام</prop-name>
+      <prop-type>نوع</prop-type>
+      <prop-multiple>Mul</prop-multiple>
+      <prop-mandatory>Man</prop-mandatory>
+      <prop-protected>Pr</prop-protected>
+      <prop-auto-create>AC</prop-auto-create>
+      <prop-default-values><![CDATA[<span title="Default Values">DV</span>]]></prop-default-values>
+      <prop-constraints><![CDATA[<span title="Constraints Values">CV</span>]]></prop-constraints>
+      <node-def>Child Node Definition</node-def>
+      <node-def-name>نام</node-def-name>
+      <node-def-opv>OPV</node-def-opv>
+      <node-def-ac>ایجاد خودکار</node-def-ac>
+      <node-def-man>MAN</node-def-man>
+      <node-def-pr>PR</node-def-pr>
+      <node-def-dnt>DNT</node-def-dnt>
+    </label>
+    <action>
+      <Close>#{word.close}</Close>
+    </action>
+  </UINodeTypeInfo>
+  <!--
+  ###############################################################################
+  #                    org.exoplatform.ecm.webui.component.explorer.search      #
+  ###############################################################################
+  -->
+  <UICategoryManagerSearch>
+    <tab>
+      <label>
+        <UIOneNodePathSelector>Select Category</UIOneNodePathSelector>
+      </label>
+    </tab>
+    <action>
+      <Close>#{word.close}</Close>
+    </action>
+  </UICategoryManagerSearch>
+  <UIContentNameSearch>
+    <label>
+      <keyword>Content Name:</keyword>
+      <location>Search in this location:</location>
+    </label>
+    <action>
+      <Search>جستجو</Search>
+      <Cancel>#{word.cancel}</Cancel>
+    </action>
+    <msg>
+      <keyword-not-allowed>این کلمه مجاز نمی باشد.</keyword-not-allowed>
+    </msg>
+  </UIContentNameSearch>
+  <UISimpleSearch>
+    <action>
+      <MoreConstraints>Show/Hide Constraint Form</MoreConstraints>
+      <Search>جستجو</Search>
+      <Save>#{word.save}</Save>
+      <Cancel>#{word.cancel}</Cancel>
+    </action>
+    <label>
+      <moreConstraints>UISimpleSearch</moreConstraints>
+      <firstOperator>Operator:</firstOperator>
+      <input>A word or phrase in content:</input>
+      <constraints>More Constraints:</constraints>
+      <nodePath>Current Location:</nodePath>
+    </label>
+    <msg>
+      <keyword-null>Please enter your keyword.</keyword-null>
+      <not-found>هیچ نتیجه ای در بر نداشت.</not-found>
+      <keyword-not-allow>این کلمه مجاز نمی باشد.</keyword-not-allow>
+      <value-null>Please enter your keyword or constraints.</value-null>
+      <value-save-null>Please enter a keyword or constraints before saving this query.</value-save-null>
+      <inputSearch-invalid>There are invalid characters in the search input.</inputSearch-invalid>
+      <query-invalid>The query is invalid. Please check your constraint.</query-invalid>
+    </msg>
+  </UISimpleSearch>
+  <ViewSearch>
+    <title>
+      <UIViewSearchResult>View Template</UIViewSearchResult>
+    </title>
+  </ViewSearch>
+  <UISearchResult>
+    <msg>
+      <not-support>There is no View template for this node.</not-support>
+      <empty>هیچ نتیجه ای در بر نداشت.</empty>
+      <access-denied>You cannot open this folder, either because it no longer exists or because you do not have the right to access it.</access-denied>
+      <query-invalid>The query is invalid.</query-invalid>
+    </msg>
+    <header>
+      <name>#{word.name}</name>
+      <path>مسیر</path>
+      <action>اقدام</action>
+      <shortcutPath>مسیر</shortcutPath>
+      <type>نوع</type>
+      <dateCreated>تاریخ ایجاد</dateCreated>
+      <score>Score</score>
+    </header>
+    <title>
+      <typeASC>Sort by document type in ascending order</typeASC>
+      <typeDESC>Sort by document type in descending order</typeDESC>
+      <scoreASC>Sort by score in ascending order</scoreASC>
+      <scoreDESC>Sort by score in descending order</scoreDESC>
+      <nameASC>Sort by name in ascending order</nameASC>
+      <nameDESC>Sort by name in descending order</nameDESC>
+      <datecreatedASC>Sort by created date in ascending order</datecreatedASC>
+      <datecreatedDESC>Sort by created date in descending order</datecreatedDESC>
+    </title>
+    <tooltip>
+      <View>View this node</View>
+      <OpenFolder>Go to folder</OpenFolder>
+    </tooltip>
+  </UISearchResult>
+  <UIShowAllOwnedByUserResult>
+    <msg>
+      <not-support>There is no View template for this node</not-support>
+      <empty>هیچ نتیجه ای در بر نداشت.</empty>
+      <access-denied>You cannot view this node, either because this template is not supported or because access is denied.</access-denied>
+      <query-invalid>The query is invalid</query-invalid>
+    </msg>
+    <header>
+      <name>#{word.name}</name>
+      <path>مسیر</path>
+      <action>اقدام</action>
+      <shortcutPath>مسیر</shortcutPath>
+      <type>نوع</type>
+      <dateCreated>تاریخ ایجاد</dateCreated>
+      <score>امتیاز</score>
+    </header>
+    <title>
+      <typeASC>مرتب سازی بر اساس نوع سند به ترتیب صعودی</typeASC>
+      <typeDESC>مرتب سازی بر اساس نوع سند به ترتیب نزولی</typeDESC>
+      <scoreASC>مرتب سازی بر اساس امتیاز به ترتیب صعودی</scoreASC>
+      <scoreDESC>مرتب سازی بر اساس امتیاز به ترتیب نزولی</scoreDESC>
+      <nameASC>مرتب سازی بر اساس نام به ترتیب صعودی</nameASC>
+      <nameDESC>مرتب سازی بر اساس نام به ترتیب نزولی</nameDESC>
+      <datecreatedASC>Sort by Created date in ascending order</datecreatedASC>
+      <datecreatedDESC>Sort by Created date in descending order</datecreatedDESC>
+    </title>
+    <tooltip>
+      <View>مشاهده این گره</View>
+      <OpenFolder>Go to Folder</OpenFolder>
+    </tooltip>
+  </UIShowAllOwnedByUserResult>
+  <UIShowAllFavouriteResult>
+    <msg>
+      <not-support>هیچ قالب نمایی برای این گره وجود ندارد</not-support>
+      <empty>No results found</empty>
+      <access-denied>شما قادر به مشاهده این گره نیستید، زیرا این قالب پشتیبانی نمی شود یا اینکه دسترسی رد شده است.</access-denied>
+      <query-invalid>جستار غیرمعتبر می باشد</query-invalid>
+    </msg>
+    <header>
+      <name>#{word.name}</name>
+      <path>مسیر</path>
+      <action>اقدام</action>
+      <shortcutPath>مسیر</shortcutPath>
+      <type>نوع</type>
+      <dateCreated>تاریخ ایجاد</dateCreated>
+      <score>امتیاز</score>
+    </header>
+    <title>
+      <typeASC>مرتب سازی بر اساس نوع سند به ترتیب صعودی</typeASC>
+      <typeDESC>مرتب سازی بر اساس نوع سند به ترتیب نزولی</typeDESC>
+      <scoreASC>مرتب سازی بر اساس امتیاز به ترتیب صعودی</scoreASC>
+      <scoreDESC>مرتب سازی بر اساس امتیاز به ترتیب نزولی</scoreDESC>
+      <nameASC>مرتب سازی بر اساس نام به ترتیب صعودی</nameASC>
+      <nameDESC>مرتب سازی بر اساس نام به ترتیب نزولی</nameDESC>
+      <datecreatedASC>مرتب سازی بر اساس تاریخ ایجاد به ترتیب صعودی</datecreatedASC>
+      <datecreatedDESC>مرتب سازی بر اساس تاریخ ایجاد به ترتیب نزولی</datecreatedDESC>
+    </title>
+    <tooltip>
+      <View>View this Node</View>
+      <OpenFolder>برو به پوشه</OpenFolder>
+    </tooltip>
+  </UIShowAllFavouriteResult>
+  <UIShowAllHiddenResult>
+    <msg>
+      <not-support>هیچ قالب نمایی برای این گره وجود ندارد.</not-support>
+      <empty>هیچ نتیجه ای در بر نداشت.</empty>
+      <access-denied>شما قادر به مشاهده این گره نیستید، زیرا این قالب پشتیبانی نمی شود یا اینکه دسترسی رد شده است.</access-denied>
+      <query-invalid>جستار غیرمعتبر می باشد.</query-invalid>
+    </msg>
+    <header>
+      <name>#{word.name}</name>
+      <path>مسیر</path>
+      <action>اقدام</action>
+      <shortcutPath>مسیر</shortcutPath>
+      <type>نوع</type>
+      <dateCreated>تاریخ ایجاد</dateCreated>
+      <score>امتیاز</score>
+      <AddRemoveFavourite>Add/Remove to Favorite</AddRemoveFavourite>
+    </header>
+    <title>
+      <typeASC>مرتب سازی بر اساس نوع سند به ترتیب صعودی</typeASC>
+      <typeDESC>مرتب سازی بر اساس نوع سند به ترتیب نزولی</typeDESC>
+      <scoreASC>مرتب سازی بر اساس امتیاز به ترتیب صعودی</scoreASC>
+      <scoreDESC>مرتب سازی بر اساس امتیاز به ترتیب نزولی</scoreDESC>
+      <nameASC>مرتب سازی بر اساس نام به ترتیب صعودی</nameASC>
+      <nameDESC>مرتب سازی بر اساس نام به ترتیب نزولی</nameDESC>
+      <datecreatedASC>مرتب سازی بر اساس تاریخ ایجاد به ترتیب صعودی</datecreatedASC>
+      <datecreatedDESC>مرتب سازی بر اساس تاریخ ایجاد به ترتیب نزولی</datecreatedDESC>
+    </title>
+    <tooltip>
+      <View>مشاهده این گره</View>
+      <OpenFolder>برو به پوشه</OpenFolder>
+      <RemoveHiddenAttribute>Remove Hidden Attribute</RemoveHiddenAttribute>
+    </tooltip>
+  </UIShowAllHiddenResult>
+  <UIShowAllTrashResult>
+    <msg>
+      <not-support>هیچ قالب نمایی برای این گره وجود ندارد.</not-support>
+      <empty>هیچ نتیجه ای در بر نداشت</empty>
+      <access-denied>شما قادر به مشاهده این گره نیستید، زیرا این قالب پشتیبانی نمی شود یا اینکه دسترسی رد شده است.</access-denied>
+      <query-invalid>جستار غیرمعتبر می باشد.</query-invalid>
+    </msg>
+    <header>
+      <name>#{word.name}</name>
+      <path>مسیر</path>
+      <action>اقدام</action>
+      <shortcutPath>مسیر</shortcutPath>
+      <type>نوع</type>
+      <dateCreated>تاریخ ایجاد</dateCreated>
+      <score>امتیاز</score>
+    </header>
+    <title>
+      <typeASC>مرتب سازی بر اساس نوع سند به ترتیب صعودی</typeASC>
+      <typeDESC>مرتب سازی بر اساس نوع سند به ترتیب نزولی</typeDESC>
+      <scoreASC>مرتب سازی بر اساس امتیاز به ترتیب صعودی</scoreASC>
+      <scoreDESC>مرتب سازی بر اساس امتیاز به ترتیب نزولی</scoreDESC>
+      <nameASC>مرتب سازی بر اساس نام به ترتیب صعودی</nameASC>
+      <nameDESC>مرتب سازی بر اساس نام به ترتیب نزولی</nameDESC>
+      <datecreatedASC>مرتب سازی بر اساس تاریخ ایجاد به ترتیب صعودی</datecreatedASC>
+      <datecreatedDESC>مرتب سازی بر اساس تاریخ ایجاد به ترتیب نزولی</datecreatedDESC>
+    </title>
+    <tooltip>
+      <View>مشاهده این گره</View>
+      <OpenFolder>برو به پوشه</OpenFolder>
+      <DeletePermanently>Delete permanently</DeletePermanently>
+      <RestoreFromTrash>بازیابی از سطل زباله</RestoreFromTrash>
+    </tooltip>
+  </UIShowAllTrashResult>
+  <UIConstraintsForm>
+    <label>
+      <constraints>UIConstraintsForm</constraints>
+      <metadataProperty>ویژگیها</metadataProperty>
+      <operator>Operator</operator>
+      <contains>Contain Value</contains>
+      <notcontains>Not Contain Value</notcontains>
+    </label>
+    <action>
+      <Add>افزودن</Add>
+      <Cancel>#{word.cancel}</Cancel>
+    </action>
+    <msg>
+      <properties-required>The Property name is required.</properties-required>
+      <value-required>The Value field is required.</value-required>
+      <date-invalid>The From date must be earlier than the To date.</date-invalid>
+      <fromDate-required>The From date is required.</fromDate-required>
+      <must-choose-one>You have to select at least one type.</must-choose-one>
+      <properties-null>Select properties first, then filter.</properties-null>
+      <exactly-require>You have to fill in the Value exactly before saving this constraint.</exactly-require>
+      <fromDate-invalid>Invalid type in the 'From' field. Please reselect or type correctly.</fromDate-invalid>
+      <toDate-invalid>Invalid type in the 'To' field. Please reselect or type correctly.</toDate-invalid>
+    </msg>
+    <button>
+      <label-Add>افزودن</label-Add>
+      <label-Cancel>#{word.cancel}</label-Cancel>
+    </button>
+  </UIConstraintsForm>
+  <ConstraintsForm>
+    <action>
+      <Add>افزودن</Add>
+      <Cancel>#{word.cancel}</Cancel>
+    </action>
+  </ConstraintsForm>
+  <UIConstraintForm>
+    <tooltip>
+      <AddMetadataType>Add Property</AddMetadataType>
+      <AddNodeType>Add Node Type</AddNodeType>
+      <AddCategory>افزودن دسته</AddCategory>
+      <FindExactly>Find Exactly</FindExactly>
+    </tooltip>
+    <label>
+      <colon>:</colon>
+      <operator>عملگر</operator>
+      <exactlyPro-properties>ویژگی</exactlyPro-properties>
+      <exactlyPro-ContainExactly>دقیقا شامل</exactlyPro-ContainExactly>
+      <containPro-properties>ویژگی</containPro-properties>
+      <containPro-Contain>شامل</containPro-Contain>
+      <notContainPro-properties>ویژگی</notContainPro-properties>
+      <notContainPro-notContain>شامل نمی شود</notContainPro-notContain>
+      <ConstraintOption-From>از</ConstraintOption-From>
+      <ConstraintOption-To>به</ConstraintOption-To>
+      <DocumentType-label>نوع سند</DocumentType-label>
+      <Category-label>دسته</Category-label>
+      <created>ایجاد شده</created>
+      <modified>تغییر یافته</modified>
+      <and>و</and>
+      <or>یا</or>
+    </label>
+  </UIConstraintForm>
+  <NodeTypePopup>
+    <title>
+      <UINodeTypeSelectForm>انتخاب نوع گره</UINodeTypeSelectForm>
+    </title>
+  </NodeTypePopup>
+  <CategoryPopup>
+    <title>
+      <UICategoryManagerSearch>افزودن دسته به جستجو</UICategoryManagerSearch>
+      <UIOneNodePathSelector>انتخاب دسته</UIOneNodePathSelector>
+    </title>
+  </CategoryPopup>
+  <SaveQueryPopup>
+    <title>
+      <UISaveQueryForm>فرم جستار</UISaveQueryForm>
+    </title>
+  </SaveQueryPopup>
+  <UINodeTypeSelectForm>
+    <action>
+      <Cancel>#{word.cancel}</Cancel>
+      <Save>#{word.save}</Save>
+    </action>
+  </UINodeTypeSelectForm>
+  <UICompareExactlyForm>
+    <label>
+      <filter>فیلتر:</filter>
+      <result>نتایج:</result>
+    </label>
+    <title>
+      <result>فیلتر</result>
+    </title>
+    <button>
+      <label-Select>انتخاب</label-Select>
+      <label-Cancel>#{word.cancel}</label-Cancel>
+    </button>
+    <msg>
+      <not-result-found>هیچ نتیجه ای در بر نداشت.</not-result-found>
+    </msg>
+  </UICompareExactlyForm>
+  <UIJCRAdvancedSearch>
+    <label>
+      <name>نام:</name>
+      <selectBox>استیل جستار را انتخاب کنید:</selectBox>
+      <query>جستار:</query>
+    </label>
+    <action>
+      <Save>#{word.save}</Save>
+      <Cancel>#{word.cancel}</Cancel>
+      <Search>جستجو</Search>
+    </action>
+    <msg>
+      <!--DMS 2.4.x ECM-3566-->
+      <name-invalid>نام نا معتبر است.</name-invalid>
+      <query-added>جستار با موفقیت اضافه شد.</query-added>
+      <save_unSuccessful>جستار ذخیره نمی شود. عبارت وارد شده نامعتبر بوده و یا نام جستار در حال حاضر وجود دارد.</save_unSuccessful>
+      <invalid-queryStatement>عبارت ورودی جستار نامعتبر است.</invalid-queryStatement>
+      <value-save-null>لطفاً عبارت جستار خود را وارد کنید.</value-save-null>
+      <query-name-null>لطفاً نام جستار خود را وارد کنید.</query-name-null>
+    </msg>
+  </UIJCRAdvancedSearch>
+  <EditQueryForm>
+    <label>
+      <name>نام</name>
+      <selectBox>استیل جستار را انتخاب کنید</selectBox>
+      <query>جستار</query>
+    </label>
+    <action>
+      <Save>#{word.save}</Save>
+      <Cancel>#{word.cancel}</Cancel>
+    </action>
+  </EditQueryForm>
+  <EditSavedQueryForm>
+    <title>
+      <EditQueryForm>ویرایش فرم جستار</EditQueryForm>
+    </title>
+  </EditSavedQueryForm>
+  <UIMetadataSelectForm>
+    <label>
+      <metadataType>نوع فراداده</metadataType>
+    </label>
+    <action>
+      <Cancel>#{word.cancel}</Cancel>
+      <Add>افزودن</Add>
+    </action>
+  </UIMetadataSelectForm>
+  <property1MetadataPopup>
+    <title>
+      <UISelectPropertyForm>انتخاب ویژگی</UISelectPropertyForm>
+    </title>
+  </property1MetadataPopup>
+  <property2MetadataPopup>
+    <title>
+      <UISelectPropertyForm>انتخاب ویژگی</UISelectPropertyForm>
+    </title>
+  </property2MetadataPopup>
+  <property3MetadataPopup>
+    <title>
+      <UISelectPropertyForm>انتخاب ویژگی</UISelectPropertyForm>
+    </title>
+  </property3MetadataPopup>
+  <UISelectPropertyForm>
+    <label>
+      <metadataType>نوع فراداده</metadataType>
+    </label>
+    <pLabel>ویژگیها:</pLabel>
+    <action>
+      <Add>افزودن</Add>
+      <Cancel>#{word.cancel}</Cancel>
+    </action>
+  </UISelectPropertyForm>
+  <ExactlyFormPopup>
+    <title>
+      <UICompareExactlyForm>فرم فیلتر</UICompareExactlyForm>
+    </title>
+  </ExactlyFormPopup>
+  <UIECMSearch>
+    <header>
+      <name>نام</name>
+      <language>زبان</language>
+      <query>جستار</query>
+      <action>اقدامات</action>
+      <path>مسیر</path>
+    </header>
+  </UIECMSearch>
+  <UIResult>
+    <msg>
+      <not-found>داده یافت نشد.</not-found>
+    </msg>
+    <header>
+      <action>اقدام</action>
+    </header>
+  </UIResult>
+  <UISaveQueryForm>
+    <msg>
+      <query-name-null>لطفا نام جستار را برای ذخیره کردن وارد نمایید.</query-name-null>
+      <access-denied>دسترسی رد شد. شما اجازه افزودن دسترسی ذخیره کردن در این جستار را ندارید.</access-denied>
+      <save-failed>جستار ذخیره نشد، عبارت ورودی جستار نامعتبر بوده و یا نام جستار وجود دارد.</save-failed>
+    </msg>
+    <label>
+      <queryName>نام جستار</queryName>
+    </label>
+    <action>
+      <Save>#{word.save}</Save>
+      <Cancel>#{word.cancel}</Cancel>
+    </action>
+  </UISaveQueryForm>
+  <UISavedQuery>
+    <header>
+      <name>نام</name>
+      <type>نوع</type>
+      <statement>عبارت</statement>
+      <permission>مجوزها</permission>
+      <action>اقدامات</action>
+    </header>
+    <tooltip>
+      <Execute>اجرا</Execute>
+      <Edit>ویرایش</Edit>
+      <Delete>حذف</Delete>
+    </tooltip>
+    <label>
+      <no-children>هیچ جستاری ذخیره نشده است.</no-children>
+    </label>
+    <msg>
+      <confirm-delete-query>آیا از حذف این جستار اطمینان دارید؟</confirm-delete-query>
+      <not-result-found>هیچ نتیجه ای در بر نداشت.</not-result-found>
+    </msg>
+  </UISavedQuery>
+  <UIQueryResultPageIterator>
+    <label>
+      <results>نتایج</results>
+      <of-about>حدود</of-about>
+      <of>از</of>
+    </label>
+  </UIQueryResultPageIterator>
+  <!--
+  ###############################################################################
+  #             org.exoplatform.ecm.webui.component.explorer.admin.UIExportNode #
+  ###############################################################################
+  -->
+  <UIExportNode>
+    <label>
+      <format>فرمت</format>
+      <nodePath>مسیر استخراج</nodePath>
+      <zip>فایل های فشرده</zip>
+      <systemView>نمای سیستم</systemView>
+      <documentView>نمای سند</documentView>
+    </label>
+    <action>
+      <Cancel>#{word.cancel}</Cancel>
+      <Export>استخراج</Export>
+    </action>
+    <title>استخراج گره</title>
+  </UIExportNode>
+  <!--
+  ###############################################################################
+  #             org.exoplatform.ecm.webui.component.explorer.UIPopupAction     #
+  ###############################################################################
+  -->
+  <PopupUserSelector>
+    <title>
+      <UIUserContainer>مجوز کاربر را انتخاب کنید</UIUserContainer>
+    </title>
+  </PopupUserSelector>
+  <UIPopupTaxonomy>
+    <title>
+      <UICategoriesSelector>افزودن دسته</UICategoriesSelector>
+      <UIOneNodePathSelector>افزودن دسته</UIOneNodePathSelector>
+    </title>
+  </UIPopupTaxonomy>
+  <!--
+  ###############################################################################
+  #   org.exoplatform.ecm.webui.component.explorer.versions.UIVersionInfo       #
+  ###############################################################################
+  -->
+  <UIVersionInfo>
+    <tooltip>
+      <addLabel>افزودن برچسب</addLabel>
+      <removeLable>حذف برچسب</removeLable>
+      <restoreVersion>بازیابی نسخه</restoreVersion>
+      <viewVersion>مشاهده اطلاعات نسخه</viewVersion>
+      <deleteVersion>حذف نسخه</deleteVersion>
+      <compareVersion>مقایسه با نسخه پایه</compareVersion>
+    </tooltip>
+    <msg>
+      <have-no-view-template>مشاهده قالب پشتیبانی نمی شود.</have-no-view-template>
+      <cannot-remove-version>قادر به حذف نسخه پایه نمی باشید.</cannot-remove-version>
+      <confirm-delete>آیا از حذف این نسخه اطمینان دارید؟</confirm-delete>
+      <not-checked-out>لطفا قبل از بازیابی گره، آن را ترخیص کنید.</not-checked-out>
+      <invalid-item-state>شما نمی توانید این نسخه را بازیابی نمایید، چون یک یا چند آیتم آن حذف شده و یا به جلسه دیگری منتقل شده اند.</invalid-item-state>
+    </msg>
+    <action>
+      <close>#{word.close}</close>
+      <close-view>بستن نما</close-view>
+    </action>
+  </UIVersionInfo>
+  <!--
+  ################################################################################
+  #  org.exoplatform.ecm.webui.component.explorer.auditing.UIAuditingInfo
+  ################################################################################
+  -->
+  <UIAuditingInfo>
+    <msg>
+      <noVersion>بدون نسخه</noVersion>
+    </msg>
+    <eventName>
+      <e_1>گره اضافه شده</e_1>
+      <e_2>حذف گره</e_2>
+      <e_4>ویژگی اضافه شده</e_4>
+      <e_16>تغییر ويژگي</e_16>
+      <e_8>حذف ویژگی</e_8>
+      <e_32>#{word.save}</e_32>
+      <e_64>انتقال</e_64>
+      <e_128>کپی</e_128>
+      <e_256>افزودن Mixin</e_256>
+      <e_512>حذف Mixin</e_512>
+      <e_1024>نمونه سازی</e_1024>
+      <e_2048>به روز رسانی</e_2048>
+      <e_4096>وارد کردن</e_4096>
+      <e_8192>رزرو</e_8192>
+      <e_16384>ترخیص</e_16384>
+      <e_32768>بازيابي</e_32768>
+      <e_65536>ادغام</e_65536>
+      <e_131072>لغو ادغام</e_131072>
+      <e_262144>اتمام ادغام</e_262144>
+      <e_524288>افزودن برچسب نسخه</e_524288>
+      <e_1048576>حذف برچسب نسخه</e_1048576>
+      <e_2097152>حذف نسخه</e_2097152>
+      <e_4194304>قفل</e_4194304>
+      <e_8388608>باز کردن قفل</e_8388608>
+      <e_16777216>خواندن</e_16777216>
+    </eventName>
+    <label>
+      <operation>عملیات</operation>
+      <userName>نام کاربری</userName>
+      <date>تاریخ</date>
+      <version>نسخه</version>
+    </label>
+  </UIAuditingInfo>
+
+  <!--
+  ###############################################################################
+  #   org.exoplatform.ecm.webui.component.explorer.versions.UIActivateVersion   #
+  ###############################################################################
+  -->
+  <UIActivateVersion>
+    <label>
+      <note>نسخه بندی برای این گره فعال شده است.</note>
+      <question>آیا مطمئنید که می خواهید آن را فعال کنید؟</question>
+      <button-active>فعال کردن</button-active>
+      <button-cancel>#{word.cancel}</button-cancel>
+    </label>
+    <msg>
+      <access-denied>شما مچوز لازم برای فعال کردن نسخه بندی در این گره را ندارید</access-denied>
+    </msg>
+  </UIActivateVersion>
+  <!--
+  ###############################################################################
+  #   org.exoplatform.ecm.webui.component.explorer.versions.UIActivePublication #
+  ###############################################################################
+  -->
+  <UIActivePublication>
+    <header>
+      <LifecycleName>نام</LifecycleName>
+      <LifecycleDesc>شرح</LifecycleDesc>
+      <action>اقدام</action>
+    </header>
+    <action>
+      <Cancel>#{word.close}</Cancel>
+    </action>
+    <grid>
+      <msg>
+        <empty>هیچ افزونه انتشاری یافت نشد.</empty>
+      </msg>
+    </grid>
+    <msg>
+      <node-type-invalid>تنها نوع گره سند را می توان ثبت نمود.</node-type-invalid>
+      <already-enroled>این سند در حال حاضر ثبت شده است.</already-enroled>
+    </msg>
+  </UIActivePublication>
+  <!--
+  ###############################################################################
+  #   org.exoplatform.ecm.webui.component.explorer.versions.UIActivateAuditing  #
+  ###############################################################################
+  -->
+  <UIActivateAuditing>
+    <label>
+      <note>ممیزی برای این گره فعال نشده است.</note>
+      <question>آیا مطمئنید که می خواهید آن را فعال کنید؟</question>
+    </label>
+    <action>
+      <activate>فعال کردن</activate>
+      <cancel>#{word.cancel}</cancel>
+    </action>
+  </UIActivateAuditing>
+  <!--
+  ###############################################################################
+  #   org.exoplatform.ecm.webui.component.explorer.versions.UIDiff   #
+  ###############################################################################
+  -->
+  <UIDiff>
+    <label>
+      <diffTitle>مقایسه بین دو نسخه</diffTitle>
+      <noChange>بدون تغییر بین دو نسخه</noChange>
+      <baseVerion>نسخه پایه</baseVerion>
+      <compareVerion>نسخه</compareVerion>
+      <can-not-compare>عدم موفقیت در مقایسه دو نسخه</can-not-compare>
+    </label>
+  </UIDiff>
+  <!--
+  ###############################################################################
+  #       org.exoplatform.ecm.webui.component.explorer.admin.UIImportNode      #
+  ###############################################################################
+  -->
+  <UIImportNode>
+    <label>
+      <format>فرمت</format>
+      <systemView>نمای سیستم</systemView>
+      <documentView>نمای سند</documentView>
+      <upload>آپلود فایل</upload>
+    </label>
+    <action>
+      <Cancel>#{word.cancel}</Cancel>
+      <Import>وارد کردن</Import>
+    </action>
+    <title>وارد کردن گره</title>
+    <msg>
+      <import-successful>با موفقیت وارد شده.</import-successful>
+      <filename-invalid>برای وارد کردن، یک فایل .xml را در فیلد 'آپلود فایل' جایگذاری نمایید.</filename-invalid>
+      <filetype-error>قادر به وارد کردن فایل آپلود شده نمی باشید. فایل xml ممکن است نامعتبر باشد.</filetype-error>
+      <mimetype-invalid>فقط فایل های .xml یا فایل های فشرده را می توان وارد کرد.</mimetype-invalid>
+      <access-denied>دسترسی رد شد. مجوز وارد کردن وجود ندارد.</access-denied>
+      <constraint-violation-exception>وارد کردن داده ممکن نیست. نوع '{0}' در این محل مجاز نیست.</constraint-violation-exception>
+      <item-exists-exception>یک گره قابل ارجاع ورودی، UUID یکسان با گره موجود در فضای کار را دارد.</item-exists-exception>
+    </msg>
+  </UIImportNode>
+  <!--
+  ###############################################################################
+  #         org.exoplatform.ecm.webui.component.explorer.versions.UILabelForm   #
+  ###############################################################################
+  -->
+  <UILabelForm>
+    <label>
+      <label>برچسب</label>
+    </label>
+    <action>
+      <Save>#{word.save}</Save>
+      <Cancel>#{word.cancel}</Cancel>
+    </action>
+    <title>افزودن برچسب</title>
+    <msg>
+      <label-invalid>برچسب حاوی کاراکتر های نامعتبر است.</label-invalid>
+      <label-exist>'{0}' در حال حاضر وجود دارد.</label-exist>
+    </msg>
+  </UILabelForm>
+  <!--
+  ###############################################################################
+  #   org.exoplatform.ecm.webui.component.explorer.versions.UIRemoveLabelForm   #
+  ###############################################################################
+  -->
+  <UIRemoveLabelForm>
+    <title>حذف برچسب</title>
+    <label>
+      <label>انتخاب برچسب</label>
+    </label>
+    <action>
+      <Remove>حذف</Remove>
+      <Cancel>#{word.cancel}</Cancel>
+    </action>
+  </UIRemoveLabelForm>
+  <!--
+  ###############################################################################
+  #    org.exoplatform.ecm.webui.component.explorer.versions.UIViewVersion      #
+  ###############################################################################
+  -->
+  <UIVersionTree>
+    <title>درخت فرزند ها</title>
+  </UIVersionTree>
+  <UIViewVersion>
+    <label>
+      <nodeType>نوع گره</nodeType>
+      <nodeName>نام گره</nodeName>
+      <VersionNumber>شماره نسخه</VersionNumber>
+      <VersionLabels>برچسب های نسخه</VersionLabels>
+      <VersionDate>تاریخ نسخه</VersionDate>
+      <PropertyName>نام ويژگي</PropertyName>
+      <PropertyValue>مقادیر ویژگی</PropertyValue>
+    </label>
+    <msg>
+      <not-supported>این عملکرد برای نسخه بندی پشتیبانی نمی شود.</not-supported>
+    </msg>
+  </UIViewVersion>
+  <UIVersionList>
+    <title>نام فرزندان</title>
+  </UIVersionList>
+  <!--
+  ################################################################################
+  #       org.exoplatform.ecm.webui.component.explorer.admin.UICategoryManager #
+  ################################################################################
+  -->
+  <UICategoryManager>
+    <action>
+      <Close>#{word.close}</Close>
+    </action>
+    <tab>
+      <label>
+        <UICategoriesAddedList>دسته بندی های مورد ارجاع</UICategoriesAddedList>
+        <UIOneNodePathSelector>انتخاب دسته</UIOneNodePathSelector>
+      </label>
+    </tab>
+  </UICategoryManager>
+  <UICategoriesAddedList>
+    <header>
+      <path>دسته</path>
+      <action>اقدامات</action>
+    </header>
+    <msg>
+      <access-denied>دسترسی رد شد. شما مجوز دسترسی به این گره را ندارید.</access-denied>
+      <confirm-delete>آیا از حذف این ارجاع اطمینان دارید؟</confirm-delete>
+    </msg>
+    <action>
+      <title>
+        <Delete>حذف</Delete>
+      </title>
+    </action>
+    <label>
+      <category>دسته</category>
+      <actions>اقدام</actions>
+      <delete>حذف</delete>
+    </label>
+  </UICategoriesAddedList>
+  <UITreeList>
+    <header>
+      <name>نام</name>
+      <action>اقدام</action>
+    </header>
+    <info>
+      <child-not-found>این گره هیچ گره فرزندی ندارد.</child-not-found>
+    </info>
+  </UITreeList>
+  <!--
+  ################################################################################
+  #       org.exoplatform.ecm.webui.component.explorer.admin.UIRelationManager #
+  ################################################################################
+  -->
+  <UIRelationManager>
+    <action>
+      <Close>#{word.close}</Close>
+    </action>
+    <tab>
+      <label>
+        <UIOneNodePathSelector>انتخاب ارتباط</UIOneNodePathSelector>
+      </label>
+    </tab>
+    <tab>
+      <label>
+        <UIRelationsAddedList>لیست ارتباطات</UIRelationsAddedList>
+      </label>
+    </tab>
+  </UIRelationManager>
+  <UIRelationsAddedList>
+    <header>
+      <path>ارتباطات</path>
+      <action>اقدامات</action>
+    </header>
+    <action>
+      <title>
+        <Delete>حذف</Delete>
+      </title>
+    </action>
+    <msg>
+      <confirm-delete>آیا از حذف این ارتباط اطمینان دارید؟</confirm-delete>
+      <can-not-add-itself>نمی توانید یک رابطه را به خود آن اضافه کنید.</can-not-add-itself>
+    </msg>
+  </UIRelationsAddedList>
+  <!--
+  ###################################################################
+  #       org.exoplatform.ecm.webui.component.explorer.UIClipboard  #
+  ###################################################################
+  -->
+  <UIClipboard>
+    <header>
+      <path>مسیر</path>
+      <command>Cm</command>
+      <action>اقدام</action>
+    </header>
+    <label>
+      <nocommand>هیچ موردی در کلیپ برد وجود ندارد.</nocommand>
+    </label>
+    <action>
+      <clearall>پاک کردن همه</clearall>
+    </action>
+    <msg>
+      <unable-pasted>این گره قابل انتقال نیست.</unable-pasted>
+      <node-pasted>گره '{0}' به محل "{1}" جابجا شده است. این عملیات ذخیره شده است.</node-pasted>
+    </msg>
+  </UIClipboard>
+  <!--
+  ###################################################################
+  #       org.exoplatform.ecm.webui.component.explorer.UIPopupMenu  #
+  ###################################################################
+  -->
+  <!--
+  ###################################################################################
+  #org.exoplatform.ecm.webui.component.explorer.popup.actions.UISelectDocumentForm  #
+  ###################################################################################
+  -->
+  <UISelectDocumentForm>
+    <label>
+      <selectTemplate>قالب خود را از لیست زیر انتخاب کنید</selectTemplate>
+      <ThumbnailView>نمای بندانگشتی</ThumbnailView>
+      <ListView>نمای لیست</ListView>
+      <Cancel>#{word.cancel}</Cancel>
+    </label>
+  </UISelectDocumentForm>
+  <!--
+  #######################################################################
+  #org.exoplatform.ecm.webui.component.explorerpopup.actions.UIDocumentForm  #
+  #######################################################################
+  -->
+  <UIDocumentForm>
+    <title>افزودن سند جدید</title>
+    <action>
+      <Save>#{word.save}</Save>
+      <SaveAndClose>ذخیره کن و ببند</SaveAndClose>
+      <ChangeType>تغییر نوع محتوا</ChangeType>
+      <Fullscreen>تمام صفحه</Fullscreen>
+      <Cancel>#{word.cancel}</Cancel>
+      <Close>#{word.close}</Close>
+    </action>
+<tooltip>
+<FullScreen>بزرگنمایی/کوچک نمایی</FullScreen>
+</tooltip>
+    <msg>
+      <cannot-save>خطایی هنگام ذخیره سند رخ داده است.</cannot-save>
+      <in-versioning>لطفاً گره حاضر را قبل از افزودن گره جدید ترخیص نمایید.</in-versioning>
+      <not-support>قالب '{0}' را نمی توان بارگذاری کرد.</not-support>
+      <value-invalid>'{0}' باید مقدار داشته باشد.</value-invalid>
+      <repository-exception>خطایی هنگام ذخیره سند رخ داده است.</repository-exception>
+      <!--DMS 2.4.x; ECM-3543-->
+      <repository-exception-permission>شما مجوز افزودن یک سند جدید به این گره را ندارید.</repository-exception-permission>
+      <not-allowed-same-name-sibling>قادر به ذخیره این نوشتار نمی باشید. نمی توان از یک نام یکسان در گره های هم رده استفاده نمود.</not-allowed-same-name-sibling>
+      <numberformat-exception>سند ذخیره نمی شود. نام تعیین شده باید به فرمت عددی باشد.</numberformat-exception>
+      <item-not-found>آیتم یافت نشد. این گره (یا گره والد آن) حذف شده است. لطفاً روی دکمه تازه سازی کلیک کنید.</item-not-found>
+    </msg>
+  </UIDocumentForm>
+  <!--
+  #################################################################################
+  #org.exoplatform.ecm.webui.component.explorer.actions.UIViewDocumentController  #
+  #################################################################################
+  -->
+  <UIViewDocumentController>
+    <tab>
+      <label>
+        <UIViewDocumentInfo>اطلاعات</UIViewDocumentInfo>
+      </label>
+    </tab>
+    <action>
+      <Close>#{word.close}</Close>
+    </action>
+  </UIViewDocumentController>
+  <!--
+  #############################################################################
+  #       org.exoplatform.ecm.webui.component.explorer.search.UI  #
+  #############################################################################
+  -->
+  <!--
+  #############################################################################
+  #    org.exoplatform.ecm.webui.component.explorer.search.UIQuerySaveForm    #
+  #############################################################################
+  -->
+  <UIQuerySaveForm>
+    <title>ذخیره فرم جستار</title>
+    <label>
+      <query>جستار</query>
+      <name>نام جستار</name>
+    </label>
+    <action>
+      <Save>#{word.save}</Save>
+      <Cancel>#{word.cancel}</Cancel>
+    </action>
+  </UIQuerySaveForm>
+  <!--
+  #############################################################################
+  #       org.exoplatform.ecm.webui.component.explorer.admin.UIActionManager  #
+  #############################################################################
+  -->
+  <editActionPopup>
+    <title>
+      <UIActionForm>ویرایش اقدام</UIActionForm>
+      <EditFormAction>ویرایش اقدام</EditFormAction>
+    </title>
+  </editActionPopup>
+  <UIActionViewContainer>
+    <action>
+      <Cancel>#{word.cancel}</Cancel>
+    </action>
+  </UIActionViewContainer>
+  <UIActionList>
+    <header>
+      <name>#{word.name}</name>
+      <description>شرح</description>
+  <lifecycle>چرخه</lifecycle>
+  <triggeredaction>اقدام در حال انجام</triggeredaction>
+      <instanceOf>نمونه ای از نوع اقدام</instanceOf>
+      <action>اقدام</action>
+    </header>
+    <msg>
+      <remove-popup-first>قبل از حذف نود باید پنجره pop-up ویرایش را ببندید.</remove-popup-first>
+      <confirm-delete-action>آیا مطمئنید که می خواهید این اقدام را حذف کنید؟</confirm-delete-action>
+      <template-empty>قالب '{0}' خالی است.</template-empty>
+      <template-null>قالب خالی است و یا شما به آن دسترسی ندارید.</template-null>
+      <access-denied>دسترسی رد شد. برای انجام این عمل مجوز ندارید.</access-denied>
+    </msg>
+    <action>
+      <Close>#{word.close}</Close>
+      <View>مشاهده</View>
+      <Edit>ویرایش</Edit>
+      <Delete>حذف</Delete>
+    </action>
+  </UIActionList>
+  <UIActionForm>
+    <action>
+      <Save>#{word.save}</Save>
+      <Back>#{word.back}</Back>
+    </action>
+    <label>
+      <name>فرم اقدام</name>
+    </label>
+    <msg>
+      <repository-exception>نمی توانید این اقدام را ذخیره کنید. نام وارد شده شامل کاراکترهای ویژه است.</repository-exception>
+      <numberformat-exception>اقدام ذخیره نمی شود. نام تعیین شده باید به فرمت عددی باشد.</numberformat-exception>
+      <existed-action>نام اقدام '{0}' در حال حاضر وجود دارد. لطفاً یکی دیگر را انتخاب کنید.</existed-action>
+      <unable-add-action>این اقدام را نمی توان اضافه کرد.</unable-add-action>
+      <unable-add>این اقدام را نمی توان اضافه کرد. این گره ریشه یا است یا شما به آن دسترسی ندارید.</unable-add>
+      <not-support>گفتگوی '{0}' پشتیبانی نمی شود.</not-support>
+      <no-permission-add>دسترسی رد شد. شما مجوز افزودن اقدام در اینجا را ندارید.</no-permission-add>
+      <access-denied>دسترسی رد شد. شما مجوز لازم برای دسترسی به این قالب را ندارید.</access-denied>
+      <lifecycle-invalid>نمی توانید این اقدام را اضافه کنید. مرحله چرخه اقدام نامعتبر است.</lifecycle-invalid>
+    </msg>
+    <title>افزودن/ویرایش اقدام</title>
+    <validator>
+      <validator>اعتبار سنج</validator>
+      <destPath>با مسیر</destPath>
+    </validator>
+  </UIActionForm>
+  <UIActionTypeForm>
+    <label>
+      <actionType>ایجاد اقدام از نوع</actionType>
+    </label>
+  </UIActionTypeForm>
+  <PopupComponent>
+    <title>
+      <UIOneNodePathSelector>انتخاب مکان</UIOneNodePathSelector>
+      <UIPermissionSelector>مرورگر مجوزها</UIPermissionSelector>
+      <UICategoriesSelector>افزودن دسته</UICategoriesSelector>
+    </title>
+  </PopupComponent>
+  <EditFormAction>
+    <validator>
+      <validator>اعتبار سنج</validator>
+      <destPath>با مسیر</destPath>
+    </validator>
+    <title>فرم اقدام</title>
+  </EditFormAction>
+  <!--
+  #############################################################################
+  #       org.exoplatform.ecm.webui.component.explorer.control.UIAddressBar   #
+  #############################################################################
+  -->
+  <UIAddressBar>
+    <msg>
+      <path-not-found>مسیر یافت نشد.</path-not-found>
+      <access-denied>دسترسی رد شد. شما حق خواندن این گره را ندارید.</access-denied>
+      <keyword-not-support>کلمه کلیدی نامعتبر است. برخی از کاراکترها معتبر نیستند.</keyword-not-support>
+    </msg>
+    <label>
+      <exeButton>برو</exeButton>
+      <address>آدرس:</address>
+    </label>
+    <title>
+      <exeButton>برو</exeButton>
+      <backButton>به گره قبلی</backButton>
+      <showHistory>نمایش آدرس تاریخچه</showHistory>
+      <changeNode>تغییر گره</changeNode>
+    </title>
+  </UIAddressBar>
+  <!--
+  ###################################################################################
+  # org.exoplatform.ecm.webui.component.explorer.popup.actions.UIWatchDocumentForm  #
+  ###################################################################################
+  -->
+  <UIWatchDocumentForm>
+    <action>
+      <Watch>پاییدن</Watch>
+      <Cancel>#{word.cancel}</Cancel>
+      <Continue>ادامه</Continue>
+      <Unwatch>نپاییدن</Unwatch>
+    </action>
+    <label>
+      <notificationType>نوع اطلاع رسانی:</notificationType>
+    </label>
+    <msg>
+      <not-support>این نوع اطلاع رسانی پشتیبانی نمی شود. لطفا نوع دیگری را انتخاب کنید.</not-support>
+      <watching-successfully>شما این سند را می پایید.</watching-successfully>
+      <unwatching-successfully>شما از لیست پاییدن با موفقیت خارج شده اید.</unwatching-successfully>
+      <node-iswatching>این سند در حال پاییده شدن است.</node-iswatching>
+    </msg>
+  </UIWatchDocumentForm>
+  <!--
+  ###################################################################################
+  #   org.exoplatform.ecm.webui.component.explorer.popup.actions.UITaggingForm      #
+  ###################################################################################
+  -->
+  <UITaggingForm>
+    <label>
+      <names>نام برچسب ها:</names>
+      <linked>برچسب های مرتبط:</linked>
+      <tagSet>UITaggingForm</tagSet>
+    </label>
+    <action>
+      <AddTag>افزودن</AddTag>
+      <Cancel>#{word.close}</Cancel>
+    </action>
+    <msg>
+      <name-exist>نام برچسب '{0}' در حال حاضر وجود دارد.</name-exist>
+      <tagName-invalid>نام برچسب شامل کاراکترهای نامعتبر است.</tagName-invalid>
+      <tagName-empty-or-invalid>The tag name is empty or contains some invalid characters.</tagName-empty-or-invalid>
+      <tag-name-empty>نام برچسب خالی است</tag-name-empty>
+      <tag-name-duplicate>نام برچسب ورودی تکراری است.</tag-name-duplicate>
+      <tagName-too-long>یکی از برچسب های وارد شده بیش از حد طولانی است. نام برچسب باید کمتر از 30 کاراکتر باشد.</tagName-too-long>
+      <path-not-found>این برچسب تغییر داده یا حذف شده است. روی دکمه تازه سازی کلیک کنید.</path-not-found>
+    </msg>
+    <introduction>
+      <tagName>برچسب های چندتایی را با "،" از هم جدا کنید.</tagName>
+    </introduction>
+  </UITaggingForm>
+
+  <!--
+  ###################################################################################
+  # org.exoplatform.ecm.webui.component.explorer.popup.info.UIMetadataContainer     #
+  ###################################################################################
+  -->
+  <UIViewMetadataContainer>
+    <msg>
+      <path-not-found>گره این نما را پشتیبانی نمی کند.</path-not-found>
+    </msg>
+  </UIViewMetadataContainer>
+  <!--
+  ###################################################################################
+  # org.exoplatform.ecm.webui.component.explorer.popup.info.UIViewMetadataForm      #
+  ###################################################################################
+  -->
+  <UIViewMetadataForm>
+    <action>
+      <Save>#{word.save}</Save>
+      <Cancel>#{word.cancel}</Cancel>
+    </action>
+  </UIViewMetadataForm>
+  <metadataForm>
+    <title>
+      <UIViewMetadataForm>افزودن/ویرایش ویژگی ها</UIViewMetadataForm>
+    </title>
+  </metadataForm>
+  <UIViewMetadataTemplate>
+    <msg>
+      <access-denied>دسترسی رد شد. شما یا مالک این گره نیستید و یا مجوز ویرایش آن را ندارید.</access-denied>
+    </msg>
+  </UIViewMetadataTemplate>
+  <!--
+  ###################################################################################
+  # Validator messages                                                              #
+  ###################################################################################
+  -->
+  <ECMNameValidator>
+    <msg>
+      <Invalid-char>فیلد '{0}' شامل کاراکترهای نامعتبر است. لطفاً مقدار دیگری وارد کنید.</Invalid-char>
+      <empty-input>مقدار فیلد '{0}' خالي است.</empty-input>
+    </msg>
+  </ECMNameValidator>
+  <DateTimeValidator>
+    <msg>
+      <Invalid-input>فیلد '{0}' با مقدار '{1}' نامعتبر است.</Invalid-input>
+    </msg>
+  </DateTimeValidator>
+  <CronExpressionValidator>
+    <invalid-input>عبارت cron شما نامعتبر است. لطفا آن را از نظر نحوی بررسی کنید.</invalid-input>
+  </CronExpressionValidator>
+  <EmptyFieldValidator>
+    <msg>
+      <empty-input>لطفا فیلد '{0}' را پر کنید.</empty-input>
+    </msg>
+  </EmptyFieldValidator>
+  <CategoryValidator>
+    <msg>
+      <non-categories>دسته ها اشتباه هستند. لطفاً دسته های درست را انتخاب کنید.</non-categories>
+    </msg>
+  </CategoryValidator>
+  <!--
+  ###################################################################################
+  # JCR Exceptions manager                                                              #
+  ###################################################################################
+  -->
+  <ReferentialIntegrityException>
+    <msg>اقدام انجام نشد. هنوز تعدادی ارجاع به آیتم در فضای کار وجود دارد.</msg>
+  </ReferentialIntegrityException>
+  <ItemExistsException>
+    <msg>این آیتم در حال حاضر وجود دارد.</msg>
+  </ItemExistsException>
+  <AccessControlException>
+    <msg>دسترسی رد شد. برای انجام این عمل مجوز ندارید.</msg>
+  </AccessControlException>
+  <AccessDeniedException>
+    <msg>دسترسی ممنوع.</msg>
+  </AccessDeniedException>
+  <ItemNotFoundException>
+    <msg>موردی یافت نشد. ممکن است حذف و یا تغییر داده شده است.</msg>
+  </ItemNotFoundException>
+  <PathNotFoundException>
+    <msg>مسیر یافت نشد. ممکن است حذف و یا تغییر داده شده است.</msg>
+  </PathNotFoundException>
+  <ConstraintViolationException>
+    <msg>به دلیل برخی محدودیت ها قادر به انجام این کار نیستید.</msg>
+  </ConstraintViolationException>
+  <!--
+  ###################################################################################
+  # Publication Manage                                                              #
+  ###################################################################################
+  -->
+  <UIPublicationForm>
+    <label>
+      <published>منتشرشده</published>
+      <non-published>منتشر نشده</non-published>
+      <public>عمومی</public>
+      <private>خصوصی</private>
+      <state>حالت</state>
+      <visibility>وضعیت نمایش</visibility>
+      <nodeName>نام گره:</nodeName>
+      <lifecycleName>نام چرخه</lifecycleName>
+      <stateName>نام وضعیت</stateName>
+    </label>
+    <action>
+      <Save>#{word.save}</Save>
+      <UnsubcriberLifeCycle>لغو عضویت کننده</UnsubcriberLifeCycle>
+      <Cancel>#{word.cancel}</Cancel>
+    </action>
+  </UIPublicationForm>
+  <!--
+  ###################################################################################
+  # JCR Browser                                                             #
+  ###################################################################################
+  -->
+  <UIWorkspaceList>
+    <label>
+      <workspaceName>فضای کار:</workspaceName>
+      <rootNodeInfo>مسیر ریشه:</rootNodeInfo>
+      <rootPath>مسیر ریشه:</rootPath>
+    </label>
+  </UIWorkspaceList>
+  <pathSelector>
+    <title>
+      <UIOneNodePathSelector>انتخاب گر گره</UIOneNodePathSelector>
+    </title>
+  </pathSelector>
+  <!--
+  ###################################################################################
+  # Others                                                                          #
+  ###################################################################################
+  -->
+  <EmailAddressValidator>
+    <msg>
+      <Invalid-input>آدرس ایمیل اشتباه است.</Invalid-input>
+    </msg>
+  </EmailAddressValidator>
+  <UIFormInputSetWithAction>
+    <msg>
+      <confirm-delete>آیا مطمئنید که می خواهید حذف کنید؟</confirm-delete>
+    </msg>
+  </UIFormInputSetWithAction>
+  <RepeatCountValidator>
+    <msg>
+      <invalid-value>مقدار فیلد 'تعداد تکرار' نامعتبر است. فقط اعداد صحیح یا -1 مجاز هستند.</invalid-value>
+    </msg>
+  </RepeatCountValidator>
+  <RepeatIntervalValidator>
+    <msg>
+      <invalid-value>مقدار فیلد 'فاصله' نامعتبر است. فقط اعداد صحیح مجاز هستند.</invalid-value>
+    </msg>
+  </RepeatIntervalValidator>
+  <UIPermissionSelector>
+    <label>
+      <selectGroup>انتخاب گروه</selectGroup>
+      <selectUser>انتخاب کاربر</selectUser>
+      <selectMembership>انتخاب عضویت</selectMembership>
+    </label>
+  </UIPermissionSelector>
+  <!--
+  ###################################################################################
+  # org.exoplatform.ecm.jcr.ECMStandardPropertyNameValidator                        #
+  ###################################################################################
+  -->
+  <ECMStandardPropertyNameValidator>
+    <msg>
+      <empty-input>مقدار فیلد '{0}' خالي است.</empty-input>
+      <Invalid-char>فیلد '{0}' شامل کاراکترهای نامعتبر است. لطفاً مقدار دیگری وارد کنید.</Invalid-char>
+    </msg>
+  </ECMStandardPropertyNameValidator>
+  <!--
+  ###################################################################################
+  # org.exoplatform.ecm.jcr.SearchValidator                                     #
+  ###################################################################################
+  -->
+  <SearchValidator>
+    <msg>
+      <empty-input>مقدار این فیلد خالي است.</empty-input>
+      <Invalid-char>فیلد '{0}' شامل کاراکترهای نامعتبر است. لطفاً مقدار دیگری وارد کنید.</Invalid-char>
+      <Invalid-char2>مقدار عددی باید با کاراکتر '~' دنبال شود.</Invalid-char2>
+      <Invalid-char1>مقدار عددی که با '~' دنبال شده است باید بین 0 و 1 باشد.</Invalid-char1>
+      <Invalid-char3>مقدار عددی باید با کاراکتر '^' دنبال شود.</Invalid-char3>
+      <Invalid-char4>گذاشتن فاصله در اطراف '~' مجاز نیست.</Invalid-char4>
+      <Invalid-char5>گذاشتن فاصله در اطراف '^' مجاز نیست.</Invalid-char5>
+    </msg>
+  </SearchValidator>
+  <!--
+  ###################################################################################
+  # PublicationService                                                              #
+  ###################################################################################
+  -->
+  <UIPublicationLogList>
+    <header>
+      <date>تاریخ</date>
+      <newState>وضعیت جدید</newState>
+      <user>کاربر</user>
+      <description>شرح</description>
+      <version>نسخه</version>
+      <visibility>وضعیت نمایش</visibility>
+    </header>
+    <action>
+      <Close>#{word.close}</Close>
+    </action>
+  </UIPublicationLogList>
+  <!--
+  ###################################################################################
+  # UIVersionTreeList                                                             #
+  ###################################################################################
+  -->
+  <UIVersionTreeList>
+    <header>
+      <version>نسخه</version>
+      <state>وضعیت</state>
+    </header>
+  </UIVersionTreeList>
+  <!--
+  ###################################################################################
+  # UIThumbnailForm                                                             #
+  ###################################################################################
+  -->
+  <UIThumbnailForm>
+    <action>
+      <Save>#{word.save}</Save>
+      <Cancel>#{word.cancel}</Cancel>
+      <RemoveThumbnail>حذف بندانگشتی</RemoveThumbnail>
+    </action>
+    <label>
+      <mediumSize>تصویر بندانگشتی</mediumSize>
+      <SelectFile>انتخاب تصویر بند انگشتی</SelectFile>
+    </label>
+    <msg>
+      <mimetype-incorrect>نوع فایل نادرست. تصاویر بندانگشتی تنها می توانند از فایل های .JPG، .PNG و یا .GIF درست شوند.</mimetype-incorrect>
+      <access-denied>دسترسی رد شد. شما مجوز برای افزودن تصویر بند انگشتی به این گره را ندارید.</access-denied>
+      <confirm-delete>آیا مایل به حذف این تصویر بند انگشتی هستید؟</confirm-delete>
+      <is-checked-in>این گره رزرو شده است. لطفا قبل از انجام هر گونه اقدام آن را ترخیص کنید.</is-checked-in>
+      <fileName-error>لطفاً فایلی برای آپلود انتخاب کنید.</fileName-error>
+    </msg>
+    <title>
+      <remove-thumbnail>حذف این تصویر بند انگشتی</remove-thumbnail>
+    </title>
+  </UIThumbnailForm>
+  <!--
+  ###################################################################################
+  # UIAnyPermission                                                                 #
+  ###################################################################################
+  -->
+  <UIAnyPermission>
+    <label>
+      <anyPermission>هر گونه مجوز</anyPermission>
+    </label>
+  </UIAnyPermission>
+
+  <anyPermission>
+    <title>
+      <AddAnyPermission>تنظیم هر گونه مجوز</AddAnyPermission>
+    </title>
+  </anyPermission>
+  <!--
+  ###################################################################################
+  # UICategoriesAddedList                                                           #
+  ###################################################################################
+  -->
+  <UICategoriesSelector>
+    <action>
+      <close>#{word.close}</close>
+    </action>
+  </UICategoriesSelector>
+  <!--
+  ###################################################################################
+  # Since ECM version 2.2                                                             #
+  ###################################################################################
+  -->
+  <UIGroupMemberSelector>
+    <label>
+      <selectGroup>انتخاب گروه</selectGroup>
+      <selectUser>انتخاب کاربر</selectUser>
+      <selectMembership>انتخاب عضویت</selectMembership>
+    </label>
+  </UIGroupMemberSelector>
+  <!--
+  ###Since ECM version 2.2##############
+  -->
+ 
+  <!--
+  ### Since ECM version 2.3 Alpha##############
+  Access directly a JCR FE drive
+  -->
+  <UIJCRExplorerPortlet>
+    <nopermission>هیچ درایوی وجود ندارد و یا شما اجازه دسترسی به این درایو را ندارید.</nopermission>
+  </UIJCRExplorerPortlet>
+
+  <UIJcrExplorerEditForm>
+    <title>ویرایش مرورگر فایل</title>
+    <action>
+      <Edit>ویرایش</Edit>
+      <Save>#{word.save}</Save>
+      <Cancel>#{word.cancel}</Cancel>
+    </action>
+    <label>
+      <uploadFileSizeLimitMB>محدودیت اندازه فایل آپلود شده (مگابایت)</uploadFileSizeLimitMB>
+      <isDirectlyDrive>درایو مستقیم</isDirectlyDrive>
+      <driveName>نام درایو</driveName>
+      <usecase>نوع را انتخاب کنید</usecase>
+      <SelectNodePath>انتخاب مسیر</SelectNodePath>
+      <showTopBar>نمایش نوار بالا</showTopBar>
+      <showActionBar>نمایش نوار اقدامات</showActionBar>
+      <showSideBar>نمایش نوار سمت چپ</showSideBar>
+      <showFilterBar>نمایش نوار فیلتر</showFilterBar>
+      <nodePath>انتخاب مسیر</nodePath>
+    </label>
+  </UIJcrExplorerEditForm>
+
+  <UIDriveSelector>
+    <label>
+      <driveName>نام درایو</driveName>
+      <action>اقدام</action>
+      <adddrives>افزودن درایو</adddrives>
+    </label>
+  </UIDriveSelector>
+  <UIJcrExplorerEditForm>
+    <label>
+      <DriveNameInput>UI JCR Explorer Edit Form</DriveNameInput>
+    </label>
+    <msg>
+      <personal-usecase>درایو شخصی کاربر فعلی وقتیکه موردکاربری شخصی را انتخاب کنید استفاده خواهد شد.</personal-usecase>
+      <drive-edit-permission>قادر به ویرایش نام درایو نمی باشید. لطفا دکمه ویرایش را کلیک کنید.</drive-edit-permission>
+      <path-edit-permission>قادر به ویرایش مسیر نمی باشید. لطفا دکمه ویرایش را کلیک کنید.</path-edit-permission>
+    </msg>
+  </UIJcrExplorerEditForm>
+
+  <PopUpSelectDrive>
+    <title>
+      <UIDriveSelector>انتخاب درایو</UIDriveSelector>
+    </title>
+  </PopUpSelectDrive>
+
+  <PopupSelectPath>
+    <title>
+      <UIOneNodePathSelector>انتخاب گره</UIOneNodePathSelector>
+    </title>
+  </PopupSelectPath>
+
+  <DriveNameInput>
+    <title>
+      <SelectDrive>انتخاب درایو</SelectDrive>
+    </title>
+  </DriveNameInput>
+
+  <!--
+  ### Since ECM version 2.4.x ##############
+  -->
+  <UIActionBar>
+    <tooltip>
+      <AddSymLink>افزودن Symlink</AddSymLink>
+      <AddLocalizationLink>افزودن ترجمه</AddLocalizationLink>
+    </tooltip>
+  </UIActionBar>
+
+  <UIPopupWindow>
+    <title>
+      <UISymLinkManager>مدیر Symlink</UISymLinkManager>
+      <UIAddTranslationManager>افزودن ترجمه</UIAddTranslationManager>
+    </title>
+  </UIPopupWindow>
+
+  <UISymLinkForm>
+    <label>
+      <symLinkName>نام Symlink</symLinkName>
+      <pathNode>مسیر گره</pathNode>
+    </label>
+    <action>
+      <Save>#{word.save}</Save>
+      <Cancel>#{word.cancel}</Cancel>
+    </action>
+    <msg>
+      <addFolder-successful>Symlink '{0}' با موفقیت اضافه شد.</addFolder-successful>
+      <name-invalid>لطفا نام symlink را وارد کنید.</name-invalid>
+      <name-not-allowed>این نام مجاز نیست.</name-not-allowed>
+      <fileName-error>نام فایل نامعتبر است.</fileName-error>
+      <constraint-violation>قادر به افزودن نوع گره '{0}' به گره فعلی نیستید.</constraint-violation>
+      <repository-exception>دسترسی رد شد. شما مجوز برای اضافه کردن symlink به این گره را ندارید.</repository-exception>
+      <numberformat-exception>پوشه ذخیره نمی شود. نام تعیین شده باید به فرمت عددی باشد.</numberformat-exception>
+      <path-node-invalid>لطفا گره مسیر را وارد کنید.</path-node-invalid>
+      <path-node-not-allowed>این نام مجاز نیست.</path-node-not-allowed>
+      <non-node>لطفا گره مقصد مناسب را انتخاب نمایید، شما مجوز خواندن این گره را ندارید.</non-node>
+      <cannot-save>شما نمی توانید یک symlink به این نوع گره اضافه کنید.</cannot-save>
+      <item-exists-exception>نام گره در حال حاضر وجود دارد.</item-exists-exception>
+      <translation-node-same-language-default>گره ترجمه دارای زبان یکسان با زبان پیش فرض گره جاری است.</translation-node-same-language-default>
+      <UnsupportedRepositoryOperationException>به این گره هدف هیچ ارجاعی وجود ندارد.</UnsupportedRepositoryOperationException>
+    </msg>
+  </UISymLinkForm>
+  
+  <UIAddTranslationForm>
+    <label>
+      <symLinkName>نام Symlink</symLinkName>
+      <pathNode>مسیر سند:</pathNode>
+      <note>سند دیگری را که به عنوان ترجمه عمل کند انتخاب کنید</note>
+    </label>
+    <action>
+      <Save>#{word.save}</Save>
+      <Cancel>#{word.cancel}</Cancel>
+      <SelectDocument>انتخاب سند</SelectDocument>
+    </action>
+    <msg>
+      <addFolder-successful>Symlink '{0}' با موفقیت اضافه شده است.</addFolder-successful>
+      <name-invalid>لطفا نام symlink را وارد کنید.</name-invalid>
+      <name-not-allowed>این نام مجاز نیست.</name-not-allowed>
+      <fileName-error>نام فایل نامعتبر است.</fileName-error>
+      <constraint-violation>قادر به افزودن نوع گره '{0}' به گره فعلی نیستید.</constraint-violation>
+      <repository-exception>دسترسی رد شد. شما مجوز برای اضافه کردن symlink به این گره را ندارید.</repository-exception>
+      <numberformat-exception>پوشه ذخیره نمی شود. نام تعیین شده باید به فرمت عددی باشد.</numberformat-exception>
+      <path-node-invalid>لطفا گره مسیر را وارد کنید.</path-node-invalid>
+      <path-node-not-allowed>این نام مجاز نیست.</path-node-not-allowed>
+      <non-node>لطفا گره مقصد مناسب را انتخاب نمایید، شما مجوز خواندن این گره را ندارید.</non-node>
+      <cannot-save>در هنگام ایجاد symlink خطایی رخ داده است.</cannot-save>
+      <item-exists-exception>نام گره در حال حاضر وجود دارد.</item-exists-exception>
+      <translation-node-same-language-default>گره ترجمه دارای زبان یکسان با زبان پیش فرض گره جاری است.</translation-node-same-language-default>
+      <UnsupportedRepositoryOperationException>به این گره هدف هیچ ارجاعی وجود ندارد.</UnsupportedRepositoryOperationException>
+    </msg>
+  </UIAddTranslationForm>
+
+  <UIPopupSymLink>
+    <title>
+      <UIOneNodePathSelector>انتخاب گره هدف</UIOneNodePathSelector>
+    </title>
+  </UIPopupSymLink>
+  <UIPopupSymLink>
+    <title>
+      <UIContentSelectorOne>انتخاب سند</UIContentSelectorOne>
+    </title>
+  </UIPopupSymLink>
+
+  <ECMContextMenu>
+    <event>
+      <AddSymLink>افزودن Symlink</AddSymLink>
+      <AddLocalizationLink>افزودن ترجمه</AddLocalizationLink>
+    </event>
+  </ECMContextMenu>
+
+  <UIWorkingArea>
+    <msg>
+      <create-link-problem>قادر به ایجاد لینک برای گره '{0}' در '{1}' نمی باشید.</create-link-problem>
+      <dest-node-is-link>گره مقصد '{0}' در حال حاضر symlink است، بنابراین شما قادر به ایجاد symlink داخل آن نیستید.</dest-node-is-link>
+      <selected-is-link>گره انتخاب شده '{0}' در حال حاضر یک لینک است، بنابراین نمی توانید یک لینک اشاره گر به لینک دیگر ایجاد کنید.</selected-is-link>
+      <confirm-create-link>آیا می خواهید یک لینک به این مکان ایجاد کنید؟</confirm-create-link>
+    </msg>
+  </UIWorkingArea>
+
+  <ECMContextMenu>
+    <event>
+      <CreateLink>ایجاد لینک</CreateLink>
+    </event>
+  </ECMContextMenu>
+
+  <UIWorkspaceList>
+    <msg>
+      <AccessDeniedException>دسترسی رد شد. شما در این فضای کار دسترسی خواندن ندارید.</AccessDeniedException>
+    </msg>
+    <label>
+      <taxonomyTree>درخت دسته بندی</taxonomyTree>
+    </label>
+  </UIWorkspaceList>
+
+  <UIPopupTaxonomy>
+    <title>
+      <UIOneTaxonomySelector>افزودن دسته</UIOneTaxonomySelector>
+    </title>
+  </UIPopupTaxonomy>
+
+  <UITreeTaxonomyList>
+    <label>
+      <taxonomyTree>درخت دسته بندی:</taxonomyTree>
+      <rootNodePath>ریشه درخت:</rootNodePath>
+      <rootNodeInfo>UITreeTaxonomyList</rootNodeInfo>
+    </label>
+  </UITreeTaxonomyList>
+
+  <UIActionBar>
+    <tooltip>
+      <ManageSimpleCategories>مدیریت دسته بندی های ساده</ManageSimpleCategories>
+    </tooltip>
+  </UIActionBar>
+
+  <UISimpleCategoryManager>
+    <tab>
+      <label>
+        <UICategoriesAddedList>دسته بندی های مورد ارجاع</UICategoriesAddedList>
+        <UIOneNodePathSelector>انتخاب دسته</UIOneNodePathSelector>
+      </label>
+    </tab>
+  </UISimpleCategoryManager>
+
+  <UICategoryManager>
+    <tab>
+      <label>
+        <UIOneTaxonomySelector>انتخاب دسته</UIOneTaxonomySelector>
+      </label>
+    </tab>
+  </UICategoryManager>
+
+  <UISimpleCategoryManager>
+    <action>
+      <Close>#{word.close}</Close>
+    </action>
+  </UISimpleCategoryManager>
+  <UIPopupWindow>
+    <title>
+      <UISimpleCategoryManager>افزودن دسته</UISimpleCategoryManager>
+    </title>
+  </UIPopupWindow>
+  <UICategoriesAddedList>
+    <msg>
+      <ItemExistsException>نام دسته در حال حاضر وجود دارد.</ItemExistsException>
+    </msg>
+  </UICategoriesAddedList>
+
+  <UIConfirmMessage>
+    <label>
+      <Close>#{word.cancel}</Close>
+      <OK>حذف</OK>
+      <ReplaceData>جایگزین کردن داده ها</ReplaceData>
+      <Back>بازگشت به تغییر نام</Back>
+      <Keepfile>هر دو پرونده حفظ شود</Keepfile>
+    </label>
+  </UIConfirmMessage>
+
+  <UIRestoreConfirmMessage>
+    <label>
+      <Close>#{word.close}</Close>
+      <OK>تایید</OK>
+      <ReplaceData>جایگزین کردن داده ها</ReplaceData>
+      <Back>بازگشت به تغییر نام</Back>
+      <Keepfile>هر دو پرونده حفظ شود</Keepfile>
+    </label>
+  </UIRestoreConfirmMessage>
+
+
+  <PopupComponent>
+    <title>
+      <UIOneTaxonomySelector>افزودن دسته</UIOneTaxonomySelector>
+    </title>
+  </PopupComponent>
+
+  <UIWorkingArea>
+    <msg>
+      <can-not-move-to-itself>فایل منتقل نمی شود. زیرا پوشه مبداء و مقصد یکسان هستند.</can-not-move-to-itself>
+      <is-editing>نمی توانید سندی را که در حال ویرایش است منتقل کنید. لطفاً ابتدا آن را ببندید.</is-editing>
+    </msg>
+  </UIWorkingArea>
+
+  <UIImportNode>
+    <label>
+      <behavior>رفتار UUID</behavior>
+      <versionHistory>تاریخچه نسخه</versionHistory>
+    </label>
+    <msg>
+      <history-invalid-type>نوع فایل نامعتبر در تاریخ نسخه. تنها فایل های فشرده پشتیبانی می شوند.</history-invalid-type>
+      <history-invalid-content>محتوای نامعتبر در داده های تاریخچه نسخه. لطفا یک نوع فایل پشتیبانی شده را برای وارد کردن انتخاب کنید.</history-invalid-content>
+    </msg>
+  </UIImportNode>
+
+  <Import>
+    <Behavior>
+      <type0>ایجاد جدید</type0>
+      <type1>حذف موجود</type1>
+      <type2>جایگزین موجود</type2>
+      <type3>اعلام خطا</type3>
+    </Behavior>
+  </Import>
+
+  <UIExportNode>
+    <action>
+      <ExportHistory>استخراج تاریخچه نسخه بندی</ExportHistory>
+    </action>
+  </UIExportNode>
+
+  <UIPopupMenu>
+    <msg>
+      <node-locked-other-person>این گره و یا گره والد آن توسط کاربر دیگری قفل شده است، شما نمی توانید آن راحذف نمایید.</node-locked-other-person>
+    </msg>
+  </UIPopupMenu>
+
+  <Import>
+    <label>
+      <docview>نمای سند</docview>
+      <sysview>نمای سیستم</sysview>
+    </label>
+  </Import>
+
+  <UIDocumentForm>
+    <msg>
+      <do-not-permission>شما مجوز بارگذاری قالب '{0}' را ندارید.</do-not-permission>
+    </msg>
+  </UIDocumentForm>
+
+  <!--
+  ###################################################################################
+  #             org.exoplatform.ecm.webui.component.explorer.UIActionBar                #
+  #                           Localize tab                                                                                    #
+  ###################################################################################
+  -->
+  <UIActionBar>
+    <obtion>
+      <Admin>مدیر</Admin>
+      <Info>اطلاعات</Info>
+      <Actions>اقدامات</Actions>
+      <Collaboration>همکاری</Collaboration>
+      <Search>جستجو</Search>
+    </obtion>
+  </UIActionBar>
+
+  <UIPopupMenu>
+    <msg>
+      <can-not-unlock-node-is-checked-in>شما نمی توانید گره '{0}' (و یا گره والد آن) را باز کنید، زیرا رزرو شده است.</can-not-unlock-node-is-checked-in>
+    </msg>
+  </UIPopupMenu>
+
+  <!--
+   #############  From DMS 2.5 #############
+  -->
+  <UIActionBar>
+    <msg>
+      <cannot-enable-version>گره نسخه بندی را نمی توان فعال کرد.</cannot-enable-version>
+    </msg>
+  </UIActionBar>
+  <UIPopupMenu>
+    <msg>
+        <cannot-readsource>قادر به خواندن داده ها از گره منبع نیستید.</cannot-readsource>
+    </msg>
+  </UIPopupMenu>
+  <UIUploadForm>
+    <msg>
+      <upload-not-null>لطفا فایل را قبل از افزودن دسته آپلود کنید.</upload-not-null>
+    </msg>
+  </UIUploadForm>
+  <UIActionBar>
+    <msg>
+      <allow-setProperty>یک ویژگی را برای این گروه باید تنظیم کنید.</allow-setProperty>
+    </msg>
+  </UIActionBar>
+
+  <UIActionForm>
+    <msg>
+      <name-not-allowed>این نام اقدام مجاز نمی باشد.</name-not-allowed>
+    </msg>
+  </UIActionForm>
+
+  <UISaveQueryForm>
+    <msg>
+      <name-not-allowed>این نام جستار مجاز نمی باشد.</name-not-allowed>
+    </msg>
+  </UISaveQueryForm>
+  <UISimpleSearch>
+    <msg>
+      <name-not-allowed>یک کلمه یا عبارت موجود در محتوا مجاز نمی باشد.</name-not-allowed>
+    </msg>
+  </UISimpleSearch>
+
+ 
+    <!--
+   #############  From DMS 2.6 #############
+   -->
+  <ECMContextMenu>
+      <event>
+        <Permlink>مشاهده سند</Permlink>
+      </event>
+  </ECMContextMenu>
+  
+
+  <!--
+    ############  From DMS 2.6 ##############
+   -->
+  <UIFolderForm>
+    <label>
+      <nt_folder>پوشه اسناد</nt_folder>
+      <nt_unstructured>پوشه محتوا</nt_unstructured>
+      <exo_cssFolder>پوشه CSS</exo_cssFolder>
+      <exo_jsFolder>پوشه جاوا اسکریپت</exo_jsFolder>
+      <exo_linkFolder>Link Folder</exo_linkFolder>
+      <exo_webFolder>پوشه محتویات وب</exo_webFolder>
+   </label>
+  </UIFolderForm>
+
+  <Comments>
+    <tooltip>
+      <remove-comment>حذف این نظر</remove-comment>
+      <edit-comment>ویرایش این نظر</edit-comment>
+    </tooltip>
+  </Comments>
+  <UIDocumentInfo>
+    <msg>
+      <confirm-deletecomment>آیا مطمئنید که می خواهید این نظر را حذف کنید؟</confirm-deletecomment>
+    </msg>
+  </UIDocumentInfo>
+
+ <UIExportNode>
+  <msg>
+    <OutOfMemoryError>در هنگام مشاهده داده های حجیم باید نمای سیستم را انتخاب نمایید.</OutOfMemoryError>
+  </msg>
+ </UIExportNode>
+ <Taxonomy>
+    <msg>
+      <AccessDeniedException>شما دارای مجوز برای دسترسی به این درخت های دسته بندی نیستید.</AccessDeniedException>
+    </msg>
+  </Taxonomy>
+
+  <UIJcrExplorerEditForm>
+    <msg>
+      <notNullDriveName>نام درایو خالي است. لطفا فیلد متناظر را مقداردهی نمایید.</notNullDriveName>
+      <notNullPath>مسیر خالي است. لطفا فیلد متناظر را مقداردهی نمایید.</notNullPath>
+    </msg>
+  </UIJcrExplorerEditForm>
+
+  <UIViewSearchResult>
+    <tooltip>
+      <remove-attachment>آیا از حذف این فایل پیوست اطمینان دارید؟</remove-attachment>
+    </tooltip>
+  </UIViewSearchResult>
+
+  <SameNamePopup>
+    <title>
+      <UIUploadBehaviorWithSameName>آپلود فایل</UIUploadBehaviorWithSameName>
+    </title>
+  </SameNamePopup>
+
+  <UIAllItems>
+    <label>
+      <OwnedByMe>متعلق به من</OwnedByMe>
+      <Favourites>علاقه مندیها</Favourites>
+      <Hidden>مخفی</Hidden>
+      <Trash>سطل آشغال</Trash>
+      <Configuration>تنظیمات</Configuration>
+    </label>
+    <title>
+      <allItems>همه آیتم ها</allItems>
+    </title>
+  </UIAllItems>
+
+  <UIPreferencesForm>
+      <label>
+          <Alphabetic>الفبایی</Alphabetic>
+          <Type>نوع</Type>
+          <CreatedDate>تاریخ ایجاد</CreatedDate>
+          <ModifiedDate>تاریخ اصلاح</ModifiedDate>
+          <Ascending>صعودی</Ascending>
+          <Descending>نزولی</Descending>
+      </label>
+  </UIPreferencesForm>
+
+  <UISavedSearches>
+    <title>
+      <savedSearches>جستجوهای ذخیره شده</savedSearches>
+    </title>
+  </UISavedSearches>
+  <DocumentType>
+    <label>
+       <Images>تصویر</Images>
+       <Video>ویدیو</Video>
+       <Music>موسیقی</Music>
+       <Documents>سند</Documents>
+       <Content>محتوا</Content>
+    </label>
+  </DocumentType>
+
+  <UIDocumentFilterForm>
+    <label>
+      <Images>تصویر</Images>
+      <Video>ویدیو</Video>
+      <Music>موسیقی</Music>
+      <Documents>سند</Documents>
+      <Content>محتوا</Content>
+    </label>
+    <title>تنظیمات فیلتر</title>
+    <action>
+      <Save>#{word.save}</Save>
+      <Cancel>#{word.cancel}</Cancel>
+    </action>
+  </UIDocumentFilterForm>
+
+  <UIAllItemsByType>
+    <label>
+    <ByType>فیلتر شده توسط نوع</ByType>
+      <DocumentFilterConfiguration>تنظیمات فیلتر</DocumentFilterConfiguration>
+    </label>
+    <title>
+      <ShowVideo>نمایش همه فایل های ویدئویی</ShowVideo>
+      <ShowMusic>نمایش همه فایل های موسیقی</ShowMusic>
+      <ShowImages>نمایش تمام فایل های تصویری</ShowImages>
+      <ShowDocuments>نمایش تمام فایل های سند</ShowDocuments>
+      <ShowContent>نمایش انواع سند</ShowContent>
+    </title>
+  </UIAllItemsByType>
+
+  <Views>
+    <label>
+      <slide-show>نمایش اسلاید</slide-show>
+    </label>
+  </Views>
+  <ECMContextMenu>
+    <event>
+      <PlayMedia>اجرای مدیا</PlayMedia>
+    </event>
+  </ECMContextMenu>
+  <UIPopupWindow>
+    <title>
+      <UIDocumentFilterForm>فیلتر نوع اسناد</UIDocumentFilterForm>
+    </title>
+  </UIPopupWindow>
+
+  <UIAllItemsPreferenceForm>
+    <label>
+      <showOwnedByUser>متعلق به من</showOwnedByUser>
+      <showFavourites>علاقه مندیها</showFavourites>
+      <showHiddens>مخفی</showHiddens>
+      <showTrash>سطل آشغال</showTrash>
+    </label>
+    <action>
+      <Save>#{word.save}</Save>
+      <Cancel>#{word.cancel}</Cancel>
+    </action>
+  </UIAllItemsPreferenceForm>
+
+  <EmptyTrashManageComponent>
+    <msg>
+      <confirm-delete>آیا مطمئنید که می خواهید همه موارد را از سطل زباله را خالی کنید؟</confirm-delete>
+    </msg>
+  </EmptyTrashManageComponent>
+  <UICategoryForm>
+    <label>
+      <name>نام دسته</name>
+    </label>
+    <action>
+      <Save>#{word.save}</Save>
+      <Cancel>#{word.cancel}</Cancel>
+    </action>
+  </UICategoryForm>
+  <UIPopupWindow>
+    <title>
+      <UICategoryForm>افزودن دسته</UICategoryForm>
+    </title>
+  </UIPopupWindow>
+  <UIActionBar>
+    <tooltip>
+      <AddCategory>افزودن دسته</AddCategory>
+    </tooltip>
+   </UIActionBar>
+
+   <UITaggingForm>
+    <label>
+      <Public>عمومی</Public>
+      <Private>خصوصی</Private>
+      <tagScopes>محدوده های برچسب</tagScopes>
+    </label>
+   </UITaggingForm>
+
+  <UITagExplorer>
+    <title>
+      <PublicTags>برچسب ها</PublicTags>
+      <EditPublicTags>ویرایش برچسب ها</EditPublicTags>
+      <PrivateTags>برچسب ها</PrivateTags>
+    </title>
+  </UITagExplorer>
+
+  <UIEditingTagsForm>
+    <header>
+      <name>نام</name>
+      <relatedDocuments>اسناد مرتبط</relatedDocuments>
+      <action>اقدام</action>
+    </header>
+    <action>
+      <title>
+        <EditTag>ویرایش برچسب</EditTag>
+        <RemoveTag>حذف برچسب</RemoveTag>
+        <AddTag>افزودن برچسب</AddTag>
+      </title>
+    </action>
+    <msg>
+      <confirm-remove>مطمئن هستید که می خواهید این برچسب را حذف کنید؟</confirm-remove>
+    </msg>
+  </UIEditingTagsForm>
+
+
+  <UIPopupWindow>
+    <title>
+      <UIEditingTagsForm>ویرایش برچسب</UIEditingTagsForm>
+    </title>
+  </UIPopupWindow>
+
+  <UITagForm>
+    <action>
+      <UpdateTag>#{word.save}</UpdateTag>
+      <Cancel>#{word.close}</Cancel>
+    </action>
+    <label>
+      <tagName>نام برچسب:</tagName>
+      <relatedDocuments>اسناد مرتبط</relatedDocuments>
+    </label>
+  </UITagForm>
+
+  <TagPopup>
+    <title>
+      <UITagForm>برچسب</UITagForm>
+    </title>
+  </TagPopup>
+
+    <UIPopupMenu>
+    <msg>
+      <node-locked-editing>قادر به ویرایش این گره با مسیر {0} نمی باشید. این گره توسط کاربر دیگری قفل شده است.</node-locked-editing>
+    </msg>
+  </UIPopupMenu>
+  <UITagStyleForm>
+    <msg>
+      <error-update>در هنگام بروزرسانی استیل برچسب خطایی رخ داده است.</error-update>
+    </msg>
+  </UITagStyleForm>
+
+  <UIPopupMenu>
+    <msg>
+      <editTagAccessDenied>دسترسی ممنوع.</editTagAccessDenied>
+    </msg>
+  </UIPopupMenu>
+
+  <UIPopupWindow>
+    <title>
+      <UITaggingFormContainer>مدير برچسب</UITaggingFormContainer>
+    </title>
+  </UIPopupWindow>
+
+    <PopupComponent>
+    <title>
+      <UINodeTypeSelector>انتخاب نوع گره</UINodeTypeSelector>
+    </title>
+  </PopupComponent>
+
+    <UIActionForm>
+    <title>
+      <ShowComponent>مشاهده کامپوننت</ShowComponent>
+      <removeReference>حذف</removeReference>
+    </title>
+  </UIActionForm>
+
+  <EditFormAction>
+    <title>
+      <ShowComponent>مشاهده کامپوننت</ShowComponent>
+      <removeReference>حذف</removeReference>
+    </title>
+  </EditFormAction>
+
+  <NodeTypeNameValidator>
+    <msg>
+      <Invalid-char>کاراکتر نامعتبر وجود دارد. لطفاً مقدار دیگری وارد کنید.</Invalid-char>
+      <empty-input>مقدار این فیلد خالي است.</empty-input>
+    </msg>
+  </NodeTypeNameValidator>
+
+  <UIPreferencesForm>
+      <label>
+            <queryType>نوع جستار:</queryType>
+            <SQL>SQL</SQL>
+            <XPATH>XPATH</XPATH>
+      </label>
+  </UIPreferencesForm>
+
+  <UIDocumentInfo>
+    <msg>
+      <repository-error>خطایی رخ داده است. اطلاعات در مورد مخزن از دست رفته است.</repository-error>
+    </msg>
+  </UIDocumentInfo>
+
+  <UITreeExplorer>
+    <msg>
+      <repository-error>خطایی رخ داده است. اطلاعات در مورد مخزن از دست رفته است.</repository-error>
+    </msg>
+  </UITreeExplorer>
+  <UIDocumentForm>
+    <msg>
+      <constraintviolation-exception>قادر به ذخیره سند نمی باشید. داده های ورودی گم شده يا نامعتبر هستند.</constraintviolation-exception>
+    </msg>
+  </UIDocumentForm>
+  <UIActionForm>
+    <msg>
+      <constraintviolation-exception>قادر به ذخیره سند نمی باشید. داده های ورودی گم شده يا نامعتبر هستند.</constraintviolation-exception>
+    </msg>
+  </UIActionForm>
+
+  <UISelectRestorePath>
+    <action>
+      <Save>#{word.save}</Save>
+      <Cancel>#{word.cancel}</Cancel>
+    </action>
+    <label>
+      <formInput>مسیر قبلی گم شده است. لطفا مسیر جدیدی انتخاب کنید.</formInput>
+    </label>
+  </UISelectRestorePath>
+  <PathNode>
+    <title>
+      <Add>افزودن</Add>
+    </title>
+  </PathNode>
+  <UIPopupPathFoRestore>
+    <title>
+      <UIOneNodePathSelector>گره والد را انتخاب کنید</UIOneNodePathSelector>
+    </title>
+  </UIPopupPathFoRestore>
+  <rootNodeInfo>
+    <title>
+      <AddRootNode>افزودن گره ریشه</AddRootNode>
+    </title>
+  </rootNodeInfo>
+
+  <UIActionForm>
+    <msg>
+      <homePath-emty>مسیر خانه خالی است.</homePath-emty>
+      <targetPath-emty>مسیر هدف خالی است.</targetPath-emty>
+    </msg>
+    </UIActionForm>
+    <UIActionBar>
+      <msg>
+        <not-exist-categories>دسته بندی وجود ندارد.</not-exist-categories>
+      </msg>
+    </UIActionBar>
+
+  <UIPublicationContainer>
+   <action>
+    <Close>#{word.close}</Close>
+   </action>
+  </UIPublicationContainer>
+
+  <UIPublicationPanel>
+    <button>
+      <Close>#{word.close}</Close>
+    </button>
+    <revisions>
+      <version>نسخه بندی جدید</version>
+      <date>تاریخ</date>
+      <author>مولف</author>
+      <status>وضعیت</status>
+      <action>اقدام</action>
+      <label>نسخه جدید</label>
+      <none>نسخه بندی وجود ندارد</none>
+      <seeall>مشاهدهٔ تمام نسخه ها</seeall>
+      <currentVersion>نسخه فعلی</currentVersion>
+      <confirm>پیش نویس خود را از دست می دهید. آیا می خواهید جایگزین نسخه فعلی شود؟</confirm>
+    </revisions>
+    <status>
+      <version>نسخه جدید</version>
+      <title>وضعیت</title>
+      <archived>آرشیو شده</archived>
+      <obsolete>منسوخ</obsolete>
+      <unpublished>منتشر نشده</unpublished>
+      <enrolled>ثبت شده</enrolled>
+      <draft>پیش‌نویس</draft>
+      <pending>در انتظار</pending>
+      <approved>تایید شده</approved>
+      <inreview>در حال بررسی</inreview>
+      <staged>صحنه</staged>
+      <published>منتشرشده</published>
+      <live>منتشرشده</live>
+    </status>
+    <scheduled>
+      <title>زمان بندی شده</title>
+      <from>از</from>
+      <to>به</to>
+    </scheduled>
+    <title>
+      <preview>پیش نمایش</preview>
+      <restore>بازیابی</restore>
+    </title>
+    <msg>
+      <have-no-view-template>مشاهده قالب پشتیبانی نمی شود.</have-no-view-template>
+      <restore-complete>بازیابی کامل شد.</restore-complete>
+    </msg>
+  </UIPublicationPanel>
+  <UIPublicationHistory>
+    <header>
+      <date>تاریخ</date>
+      <versionName>نام نسخه جدید</versionName>
+      <currentState>وضعیت کنونی</currentState>
+      <user>مولف</user>
+      <description>شرح</description>
+    </header>
+  </UIPublicationHistory>
+  
+  <UIPublicationSchedule>
+    <label>
+      <introduction>شما می توانید برای انتشار سند خود زمانبندی کنید. تاریخ های مورد نظر خود را برای زمان انتشار سند انتخاب نمایید</introduction>
+      <no-schedule-info>هیچ زمانبندی برای انتشار سند شما وجود ندارد</no-schedule-info>
+    </label>
+    <msg>
+      <save-finished>زمانبندی انتشار شما با موفقیت ذخیره شد.</save-finished>
+    </msg>
+    <action>
+      <Save>#{word.save}</Save>
+      <Reset>تنظیم مجدد</Reset>
+    </action>
+  </UIPublicationSchedule>
+
+  <UIPublicationPanel>
+    <label>
+      <header>تاریخ انتشار</header>
+      <start>شروع انتشار</start>
+      <end>پایان انتشار</end>
+    </label>
+    <msg>
+      <invalid-format>فرمت تاريخ نامعتبر است. لطفا دوباره چک کنید.</invalid-format>
+      <fromDate-after-toDate>تاریخ شروع باید پیش از تاریخ پایان باشد.</fromDate-after-toDate>
+    </msg>
+  </UIPublicationPanel>
+  <UIPopupWindow>
+    <title>
+      <UIPublicationContainer>مدیریت انتشار</UIPublicationContainer>
+      <UIPublishingPanel>مدیریت انتشار</UIPublishingPanel>
+    </title>
+  </UIPopupWindow>
+  <WCMContentView>
+    <header>
+      <status>وضعیت</status>
+      <author>مولف</author>
+      <date>تاریخ ایجاد</date>
+      <title>عنوان سند</title>
+      <lastUser>آخرین کاربر</lastUser>
+    </header>
+  </WCMContentView>
+  <UITagForm>
+    <msg>
+      <NameAlreadyExist>نام برچسب در حال حاضر وجود دارد.</NameAlreadyExist>
+    </msg>
+  </UITagForm>
+
+  <!--
+  ############  From WCM 2.1.0 ##############
+  -->
+  <UICategoryManagerSearch>
+    <tab>
+      <label>
+        <UIOneTaxonomySelector>انتخاب دسته</UIOneTaxonomySelector>
+      </label>
+    </tab>
+  </UICategoryManagerSearch>
+
+  <UIPreferencesForm>
+   <action>
+     <HideAdvance>مخفی کردن پیشرفته</HideAdvance>
+     <ShowAdvance>نمایش پیشرفته</ShowAdvance>
+    </action>
+    <label>
+    <Advance>پیشرفته</Advance>
+    </label>
+  </UIPreferencesForm>
+
+  <UIJCRExplorerPortlet>
+<msg>
+  <file-access-denied>دسترسی فایل رد شد.</file-access-denied>
+  <anonymous-access-denied>کاربر ناشناس اجازه استفاده از این عملکرد را ندارد.</anonymous-access-denied>
+</msg>
+  </UIJCRExplorerPortlet>
+  <UIDrivesArea>
+    <DrivesArea>
+      <ShowDrives>نمایش درایوها</ShowDrives>
+    </DrivesArea>
+    <msg>
+      <no-view-found>There are no views applied for your access permission in drive '{0}'.</no-view-found>
+      <access-denied>Access denied. You may not have permission in the workspace of drive '{0}'.</access-denied>
+      <empty-drives>Access denied. Either there is no drive in this repository or you do not have permission to access any drives in this repository.</empty-drives>
+      <workspace-not-exist>Drive '{0}' was stored in one unrecognized workspace. Please reconfigure this drive.</workspace-not-exist>
+    </msg>
+  </UIDrivesArea>
+  <UIJcrExplorerEditForm>
+    <msg>
+      <fields-saved>همه مقادیر فیلدها ذخیره شد.</fields-saved>
+      <fields-cancelled>لغو همه مقادیر فیلدها.</fields-cancelled>
+    </msg>
+  </UIJcrExplorerEditForm>
+  <UIDocumentForm>
+  <msg>
+  <confirm-close>در صورت بستن این فرم همه تغییرات انجام شده از دست خواهد رفت.</confirm-close>
+  <confirm-changeType>در صورت تغییر نوع محتوا همه تغییرات انجام شده از دست خواهد رفت.</confirm-changeType>
+  <confirm-navigate>در صورت خارج شدن از این صفحه همه تغییرات انجام شده از دست خواهد رفت.</confirm-navigate>
+  </msg>
+  </UIDocumentForm>
+  <UploadFileMimeTypesValidator>
+    <msg>
+      <wrong-mimetype>نوعMime  {0} در فیلد {1} مجاز نمی باشد. لطفا فایل دیگری آپلود کنید</wrong-mimetype>
+    </msg>
+  </UploadFileMimeTypesValidator>
+  <lifecyclePhase>
+    <label>
+    <no>خیر</no>
+  <yes>بله</yes>
+  <true>درست</true>
+  <false>نادرست</false>
+  <Electronic>الکترونیکی</Electronic>
+  <Paper>Paper</Paper>
+  <NONE>هیچ کدام</NONE>
+  <CLASSIFIED>Classified</CLASSIFIED>
+  <UNCLASSIFIED>طبقه بندی نشده</UNCLASSIFIED>
+  <NOCONTRACT>بدون قرارداد</NOCONTRACT>
+  <one-minute>یک دقیقه</one-minute>
+  <hourly>ساعتی</hourly>
+  <daily>روزانه</daily>
+  <quarterly>فصلی</quarterly>
+  <yearly>سالانه</yearly>
+  <ten-years>ده سال</ten-years>
+  <read>اقدام کاربر</read>
+  <schedule>زمان بند</schedule>
+  <node_added>افزودن محتوا</node_added>
+  <node_removed>حذف محتوا</node_removed>
+  <property_added>افزودن ویژگی</property_added>
+  <property_removed>حذف ویژگی</property_removed>
+  <property_changed>اصلاح ويژگی</property_changed>
+</label>
+  </lifecyclePhase>
+  <UIPopupMenu>
+  <msg>
+<can-not-remove-locked-node>گره {0} قفل شده است. نمی توانید آن را به سطل زباله انتقال دهید.</can-not-remove-locked-node>
+<can-not-remove-checked-in-node>گره {0} یا گره والد آن رزرو شده است. شما نمی توانید آن را به سطل زباله انتقال دهید.</can-not-remove-checked-in-node>
+<access-denied-to-delete>دسترسی رد شد. نمی توانیدگره  {0} را به سطل زباله انتقال دهید.</access-denied-to-delete>
+  </msg>
+  </UIPopupMenu>
+  <UIPropertyForm>
+  <msg>
+  <unknown-error>در حین اصلاح این ویژگی خطایی رخ داده است.</unknown-error>
+    </msg>
+  </UIPropertyForm>
+  <UIWatchDocumentForm>
+    <msg>
+      <node-is-locked>این گره قفل شده است. شما نمی توانید آن را بپایید.</node-is-locked>
+      <unknown-error>خطایی رخ داده است. شما نمی توانید این گره را بپایید.</unknown-error>
+    </msg>
+  </UIWatchDocumentForm>   
+  <UIActionForm>
+    <msg>
+      <xss-vulnerability-character>فیلد '{0}' شامل کاراکترهای نا منطبق با XSS است</xss-vulnerability-character>
+    </msg>
+  </UIActionForm>
+  <UIMultiUpload>
+  <label>
+    <AbortAll>لغو همه</AbortAll>
+    <AbortAllFiles>لغو همه فایل ها</AbortAllFiles>
+    <MaxFileSize>حداکثر اندازه فایل</MaxFileSize>
+    <InvalidCharacters>کاراکترهای نامعتبر با '-' جایگزین خواهند شد</InvalidCharacters>
+    <DropFileMessage>فایل های خود را در اینجا در پوشه جاری قرار دهید</DropFileMessage>
+    <Close>#{word.close}</Close>
+    <in>در</in>
+    <MaxFileSizeAlert>اندازه فایل بیشتر از حد مجاز</MaxFileSizeAlert>
+    <Waiting>در حال انتظار</Waiting>
+    <Error>خطا</Error>
+    <or>یا</or>
+    <AlreadyInUse>در حال حاضر در حال استفاده</AlreadyInUse>
+    <Keep>نگه داشتن هر دو</Keep>
+    <Replace>جایگزین</Replace>
+    <Canceled>لغو شد</Canceled>
+    <Cancel>#{word.cancel}</Cancel>
+    <AbortAllConfirmation>آیا مایلید که تمام فایل های در حال انجام لغو شوند؟</AbortAllConfirmation>
+  </label>
+  </UIMultiUpload>
+  <UIDocumentNodeList>
+  <label>
+  <CreatedOn>ایجاد شده در</CreatedOn>
+  <Updated>به روز شده</Updated>
+  <by>توسط</by>
+  <you>شما</you>
+  </label>
+  </UIDocumentNodeList>
+  <FileView>
+    <label>
+      <name>نام</name>
+      <date>تاریخ</date>
+      <size>اندازه</size>
+      <sortBy>مرتب سازی بر اساس:</sortBy>
+      <filesAreSelected>فایل ها انتخاب شده اند.</filesAreSelected>
+      <ClearSelection>پاک کردن انتخاب</ClearSelection>
+      <more>بیشتر</more>
+    </label>
+  </FileView>
+  <UIPropertyForm>
+  <msg>
+  <property-name-incorrect>نام ويژگي نادرست است، لطفا مقدار دیگری برای آن وارد کنید!</property-name-incorrect>
+    </msg>
+  </UIPropertyForm>
+  <!--
+  ###################################################################################
+  # JCR Exceptions manager                                                              #
+  ###################################################################################
+  -->
+  <VersionException>
+  <msg>امکان ویرایش اسناد رزرو شده وجود ندارد.</msg>  
+  </VersionException>
+</bundle>
