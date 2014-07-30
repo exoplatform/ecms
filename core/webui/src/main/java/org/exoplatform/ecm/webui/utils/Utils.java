@@ -703,9 +703,9 @@ public class Utils {
     String siteName = org.exoplatform.portal.webui.util.Util.getPortalRequestContext().getPortalOwner();
     String currentValue =  StringUtils.replace(defaultValue,"{portalName}",siteName);
     try {
-      strSuggestion = resourceBundle.getString("UIPresentation.label.EditingSuggestion");
-      acceptButton = resourceBundle.getString("UIPresentation.title.AcceptButton");
-      cancelButton = resourceBundle.getString("UIPresentation.title.CancelButton");
+      strSuggestion = StringEscapeUtils.escapeHtml(resourceBundle.getString("UIPresentation.label.EditingSuggestion"));
+      acceptButton = StringEscapeUtils.escapeHtml(resourceBundle.getString("UIPresentation.title.AcceptButton"));
+      cancelButton = StringEscapeUtils.escapeHtml(resourceBundle.getString("UIPresentation.title.CancelButton"));
     } catch (MissingResourceException e){
       if (LOG.isWarnEnabled()) {
         LOG.warn("MissingResourceException of EditingSuggestion/Accept/Cancel buttons.", e);
