@@ -1,0 +1,197 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<bundle>
+  <UIFCCForm>
+    <msg>
+      <name-not-allowed>این نام مجاز نیست.</name-not-allowed>
+      <in-versioning>لطفاً گره فعلی را قبل از افزودن گره جدید تیک بزنید.</in-versioning>
+      <cannot-save>در حین ذخیره کردن گره خطایی رخ داده است.</cannot-save>
+      <saved-successfully>{0}</saved-successfully>
+      <not-support>قالب '{0}' را نمی توان بارگذاری کرد.</not-support>
+      <not-add-folder>فقط فایلها می توانند به این پوشه اضافه شوند.</not-add-folder>
+      <access-denied>دسترسی رد شد. شما مجوز اضافه کردن در '{0}' را ندارید.</access-denied>
+      <path-not-found>مسیر '{0}' حذف شده یا نامعتبر است.</path-not-found>
+      <node-locked>گره '{0}' قفل شده است. لطفا قبل از ساخت مستندات جدید این گره را از حالت قفل خارج کنید.</node-locked>
+      <node-isExist>این گره در حال حاضر در '{0}' وجود دارد و نمی توانید گره ای به همین نام ایجاد کنید.</node-isExist>
+      <get-dialog-path>به هنگام دریافت مسیر فرم ساخت محتوا خطایی رخ داده است.</get-dialog-path>
+      <new-jcr-template>به هنگام ساخت قالب جدید خطایی رخ داده است.</new-jcr-template>
+    </msg>
+    <action>
+      <Save>#{word.save}</Save>
+      <Cancel>#{word.cancel}</Cancel>
+    </action>
+  </UIFCCForm>
+
+  <UIFCCConfig>
+    <label>
+      <UIFCCSaveLocationField>ذخیره مکان</UIFCCSaveLocationField>
+      <UIFCCWorkspaceFormSelectBox>انتخاب فضای کاری</UIFCCWorkspaceFormSelectBox>
+      <UIFCCTemplateField>گزینه های قالب</UIFCCTemplateField>
+      <UIFCCLocationFormInputAction>مکان ذخیره</UIFCCLocationFormInputAction>
+      <UIFCCTemplateFormSelectBox>انتخاب قالب</UIFCCTemplateFormSelectBox>
+      <UIFCCSaveFormStringInput>دکمه سفارشی ذخیره</UIFCCSaveFormStringInput>
+      <UIFCCMessageFormTextareaInput>پیغام سفارشی ذخیره</UIFCCMessageFormTextareaInput>
+      <UIFCCRedirectFormCheckboxInput>هدایت شدن:</UIFCCRedirectFormCheckboxInput>
+      <UIFCCRedirectPathFormStringInput>مسیر هدایت:</UIFCCRedirectPathFormStringInput>
+      <UIFCCActionField>اقدامات</UIFCCActionField>
+    </label>
+    <msg>
+      <save-successfully>تنظیمات پورتلت با موفقیت ذخیره شد.</save-successfully>
+      <item-not-found>مسیر نامعتبر است.</item-not-found>
+      <fileType-empty>لطفاً نوع فایل را برای ذخیره این تنظیمات انتخاب کنید.</fileType-empty>
+      <ws-empty>لطفاً یک فضای کاری را انتخاب کنید.</ws-empty>
+      <action-empty>لطفاً یک پوشه با یک اقدام را انتخاب کنید.</action-empty>
+      <message-empty>در صورتی که مسیر خالی باشد و یا شما گزینه تغییر مسیر را انتخاب نکرده باشید، فیلد پیغام سفارشی ذخیره الزامی می باشد.</message-empty>
+      <get-template>خطایی هنگام دسترسی به قالب رخ داده است.</get-template>
+      <set-template-option>به هنگام تنظیم گزینه الگو خطایی رخ داده است.</set-template-option>
+      <do-select>به هنگام انتخاب محل خطایی رخ داده است.</do-select>
+      </msg>
+    <action>
+      <Save>#{word.save}</Save>
+    </action>
+  </UIFCCConfig>
+
+  <UIFCCLocationFormInputAction>
+    <title>
+      <SelectPath>انتخاب مسیر</SelectPath>
+    </title>
+  </UIFCCLocationFormInputAction>
+
+  <UIFCCActionList>
+    <header>
+      <name>نام</name>
+      <description>توضیحات</description>
+      <instanceOf>نمونه ای از</instanceOf>
+      <action>اقدام</action>
+    </header>
+    <action>
+      <Add>افزودن</Add>
+    </action>
+    <msg>
+      <empty>بدون اقدامات</empty>
+      <remove-popup-first>قبل از حذف نود باید پنجره pop-up ویرایش را ببندید.</remove-popup-first>
+      <confirm-delete-action>آیا مطمئنید که می خواهید این اقدام را حذف کنید؟</confirm-delete-action>
+      <template-empty>الگوی '{0}' تهی و یا خالي است.</template-empty>
+      <template-null>قالب تهي يا خالي می باشد و یا شما اجازه دسترسی به این الگو را ندارید.</template-null>
+      <access-denied>دسترسی رد شد. برای انجام این عمل مجوز ندارید.</access-denied>
+    </msg>
+  </UIFCCActionList>
+
+  <UIFCCSelectorPopupWindow>
+    <title>
+      <UIOneNodePathSelector>انتخاب مکان</UIOneNodePathSelector>
+    </title>
+  </UIFCCSelectorPopupWindow>
+
+  <UIWorkspaceList>
+    <label>
+      <workspaceName>فضای کار:</workspaceName>
+      <rootNodePath>مسیر ریشه:</rootNodePath>
+      <rootNodeInfo>گره ریشه</rootNodeInfo>
+    </label>
+  </UIWorkspaceList>
+
+  <rootNodeInfo>
+    <title>
+      <AddRootNode>افزودن گره ریشه</AddRootNode>
+    </title>
+  </rootNodeInfo>
+
+  <UITreeList>
+    <info>
+      <child-not-found>این گره هیچ گره فرزندی ندارد.</child-not-found>
+    </info>
+    <header>
+      <name>نام</name>
+      <action>اقدام</action>
+    </header>
+  </UITreeList>
+
+  <UIFCCActionPopupWindow>
+    <title>
+      <UIFCCActionContainer>اضافه کردن اقدام</UIFCCActionContainer>
+    </title>
+  </UIFCCActionPopupWindow>
+
+  <UIFCCActionForm>
+    <title>افزودن/ویرایش اقدام</title>
+    <action>
+      <Save>#{word.save}</Save>
+      <Close>#{word.close}</Close>
+    </action>
+    <msg>
+      <repository-exception>این اقدام را نمی توان ذخیره کرد. نام ارائه شده به عنوان عنصر نهایی نباید شاخص داشته باشد.</repository-exception>
+      <numberformat-exception>این اقدام را نمی توان ذخیره کرد. نام ارائه شده نباید دارای ' [' و یا ']' باشد.</numberformat-exception>
+      <existed-action>نام اقدام '{0}' در حال حاضر وجود دارد. لطفاً یکی دیگر را انتخاب کنید.</existed-action>
+      <unable-add-action>قادر به افزودن این اقدام نیست.</unable-add-action>
+      <unable-add>قادر به افزودن این اقدام نیست. این گره ریشه است یا شما مجوز ندارید.</unable-add>
+      <not-support>گفتگوی '{0}' پشتیبانی نمی شود.</not-support>
+      <no-permission-add>دسترسی رد شد. شما مجوز افزودن اقدام در اینجا را ندارید.</no-permission-add>
+      <access-denied>دسترسی رد شد. شما مجوز لازم برای دسترسی به این قالب را ندارید.</access-denied>
+    </msg>
+    <validator>
+      <validator>اعتبار سنج</validator>
+      <destPath>با مسیر</destPath>
+    </validator>
+  </UIFCCActionForm>
+
+  <UIFCCActionTypeForm>
+    <label>
+      <actionType>ایجاد یک اقدام از نوع</actionType>
+    </label>
+    <msg>
+      <not-support>قالب '{0}' را نمی توان بارگذاری کرد.</not-support>
+      <do-not-permission>شما مجوز بارگذاری قالب '{0}' را ندارید.</do-not-permission>
+    </msg>
+  </UIFCCActionTypeForm>
+
+  <PopupComponent>
+    <title>
+      <UIOneNodePathSelector>انتخاب مکان</UIOneNodePathSelector>
+      <UIPermissionSelector>مرورگر مجوزها</UIPermissionSelector>
+      <UICategoriesSelector>Add Categories</UICategoriesSelector>
+    </title>
+  </PopupComponent>
+
+  <DateTimeValidator>
+    <msg>
+      <Invalid-input>فیلد '{0}' با مقدار '{1}' نامعتبر است.</Invalid-input>
+    </msg>
+  </DateTimeValidator>
+
+  <UITabPane>
+    <title>
+      <UICategoriesSelectPanel>انتخاب دسته بندی</UICategoriesSelectPanel>
+      <UISelectedCategoriesGrid>دسته بندی های مورد ارجاع</UISelectedCategoriesGrid>
+    </title>
+  </UITabPane>
+
+  <PopupComponent>
+    <title>
+      <UICategoriesSelector>Add Categories</UICategoriesSelector>
+    </title>
+  </PopupComponent>
+
+  <UICategoriesSelector>
+    <action>
+      <close>#{word.close}</close>
+    </action>
+  </UICategoriesSelector>
+
+  <PopupComponent>
+    <title>
+      <UIOneTaxonomySelector>افزودن دسته</UIOneTaxonomySelector>
+    </title>
+  </PopupComponent>
+
+  <UITreeTaxonomyList>
+    <label>
+      <taxonomyTree>درخت دسته بندی</taxonomyTree>
+    </label>
+  </UITreeTaxonomyList>
+
+  <UIFCCTaxonomyPopupWindow>
+    <title>
+      <UIOneTaxonomySelector>انتخابگر دسته بندی</UIOneTaxonomySelector>
+    </title>
+  </UIFCCTaxonomyPopupWindow>
+</bundle>

@@ -1,0 +1,439 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+
+    Copyright (C) 2009 eXo Platform SAS.
+    
+    This is free software; you can redistribute it and/or modify it
+    under the terms of the GNU Lesser General Public License as
+    published by the Free Software Foundation; either version 2.1 of
+    the License, or (at your option) any later version.
+    
+    This software is distributed in the hope that it will be useful,
+    but WITHOUT ANY WARRANTY; without even the implied warranty of
+    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the GNU
+    Lesser General Public License for more details.
+    
+    You should have received a copy of the GNU Lesser General Public
+    License along with this software; if not, write to the Free
+    Software Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA
+    02110-1301 USA, or see the FSF site: http://www.fsf.org.
+
+-->
+<bundle>
+  <UIExoStart>
+    <tooltip>
+      <homepage>صفحه اصلی</homepage>
+    </tooltip>
+  </UIExoStart>
+
+  <UIFormInputSetWithAction>
+    <msg>
+      <confirm-delete>آیا مطمئن هستید می خواهید این آیتم را حذف کنید؟</confirm-delete>
+    </msg>
+  </UIFormInputSetWithAction>
+
+  <Drives>
+    <label>
+      <ManagedSites>مدیریت سایت</ManagedSites>
+      <SharedSite>سایت مشترک</SharedSite>
+    </label>
+  </Drives>
+
+  <Views>
+    <label>
+      <wcm-view>وب سایت</wcm-view>
+      <admin-view>مدیر</admin-view>
+      <icon-view>آیکن‌ها</icon-view>
+      <thumbails-view>تصاویر بند انگشتی</thumbails-view>
+      <list-view>لیست</list-view>
+      <authoring-view>Authoring</authoring-view>
+      <wcm-category-view>دسته ها</wcm-category-view>
+      <file-view>نمای مدیریت فایل</file-view>
+    </label>
+  </Views>
+
+  <UIActionBar>
+    <obtion>
+      <Publication>انتشار</Publication>
+      <System>سیستم</System>
+    </obtion>
+  </UIActionBar>
+
+  <UIPageSelectorPanel>
+    <header>
+      <path>مسیر</path>
+      <action>#{word.action}</action>
+    </header>
+    <msg>
+      <child-not-found>صفحه ای پیدا نشد.</child-not-found>
+    </msg>
+    <title>
+      <select>انتخاب</select>
+    </title>
+  </UIPageSelectorPanel>
+
+  <UIContentDialogFormPopupWindow>
+    <title>
+      <UIContentDialogPreference>تنظیمات محتوای سایت</UIContentDialogPreference>
+    </title>
+  </UIContentDialogFormPopupWindow>
+
+  <UITabPane>
+    <title>
+      <UIContentBrowsePanelOne>مرورگر مطلب</UIContentBrowsePanelOne>
+      <UIContentBrowsePanelMulti>مرورگر مطلب</UIContentBrowsePanelMulti>
+      <UIContentBrowsePanelFolder>مرورگر پوشه</UIContentBrowsePanelFolder>
+      <UIContentSearchForm>فرم جستجو محتوا</UIContentSearchForm>
+      <UIContentSearchResult>نتیجه جستجو</UIContentSearchResult>
+      <UIContentViewer>پیش نمایش محتوا</UIContentViewer>
+      <WebContentMetadataPopup>انتخابگر خصیصه ها</WebContentMetadataPopup>
+      <WebContentNodeTypePopup>انتخابگر نوع گره</WebContentNodeTypePopup>
+      <UIPermissionManager>مدیر مجوز</UIPermissionManager>
+    </title>
+  </UITabPane>
+
+  <UIContentBrowsePanelOne>
+    <selectBoxValues>
+      <FilterBy>فیلتر توسط</FilterBy>
+      <WebContent>محتویات وب</WebContent>
+      <DMSDocument>سند</DMSDocument>
+      <Media>رسانه</Media>
+    </selectBoxValues>
+    <msg>
+      <node-checkout>گره قبلا انتخاب شده است. لطفا گره را قبل از انجام این عمل بررسی کنید.</node-checkout>
+    </msg>
+  </UIContentBrowsePanelOne>
+
+  <UIContentBrowsePanelMulti>
+    <selectBoxValues>
+      <FilterBy>فیلتر توسط</FilterBy>
+      <WebContent>محتویات وب</WebContent>
+      <DMSDocument>سند</DMSDocument>
+      <Media>رسانه</Media>
+    </selectBoxValues>
+  </UIContentBrowsePanelMulti>
+
+  <UIContentBrowsePanelOne>
+    <label>
+      <LeftColumn>Select a folder to display its children as content.</LeftColumn>
+      <RightColumn>The content below can be selected.</RightColumn>
+    </label>
+  </UIContentBrowsePanelOne>
+
+  <UIContentBrowsePanelMulti>
+    <label>
+      <LeftColumn>Select a folder to display its children as content.</LeftColumn>
+      <RightColumn>The content below can be selected.</RightColumn>
+    </label>
+  </UIContentBrowsePanelMulti>
+
+  <UIContentBrowsePanelFolder>
+    <label>
+      <LeftColumn>Select a folder to display its children as content.</LeftColumn>
+      <RightColumn>The folder below can be selected.</RightColumn>
+    </label>
+  </UIContentBrowsePanelFolder>
+
+  <UISelectedContentGrid>
+    <label>
+      <name>#{word.name}</name>
+      <add>افزودن</add>
+      <delete>حذف</delete>
+    </label>
+    <msg>
+      <no-content-found>مطلبی یافت نشد.</no-content-found>
+      <non-content>شما هیچ محتوایی انتخاب نکرده اید.</non-content>
+    </msg>
+  </UISelectedContentGrid>
+
+  <UICLVContentSelectedGrid>
+    <action>
+      <SaveCategories>#{word.save}</SaveCategories>
+      <Cancel>#{word.cancel}</Cancel>
+    </action>
+  </UICLVContentSelectedGrid>
+
+  <UIContentBrowsePathSelector>
+    <header>
+      <name>#{word.name}</name>
+      <publicationstate>وضعیت انتشار</publicationstate>
+      <action>اقدام</action>
+    </header>
+    <msg>
+      <child-not-found>مطلبی یافت نشد</child-not-found>
+    </msg>
+  </UIContentBrowsePathSelector>
+
+  <UIContentBrowsePathSelectorFolder>
+    <header>
+      <name>#{word.name}</name>
+      <publicationstate>وضعیت انتشار</publicationstate>
+      <action>اقدام</action>
+    </header>
+    <msg>
+      <child-not-found>هیچ پوشه ای یافت نشد</child-not-found>
+    </msg>
+  </UIContentBrowsePathSelectorFolder>
+
+  <UIContentSearchForm>
+    <title>
+      <Location>نام سایت</Location>
+      <SearchByName>جستجو بر اساس نام</SearchByName>
+      <Fulltext>یک کلمه یا عبارت در متن</Fulltext>
+      <Property>ویژگی</Property>
+      <Contain>شامل</Contain>
+      <FromDate>از تاریخ</FromDate>
+      <ToDate>تا تاریخ</ToDate>
+      <DocumentType>نوع سند</DocumentType>
+    </title>
+    <tooltip>
+      <AddMetadataType>اضافه کردن خصیصه</AddMetadataType>
+      <AddNodeType>افزودن نوع گره</AddNodeType>
+    </tooltip>    
+    <label>
+      <option>
+        <CREATED>ایجاد شده</CREATED>
+        <MODIFIED>تغییر یافته</MODIFIED>
+      </option>
+    </label>
+    <action>
+      <SearchWebContent>جستجو</SearchWebContent>
+    </action>
+    <msg>
+      <time-to-late>زمان جستجو بسیار طولانی است.</time-to-late>
+      <empty-field>لطفا کلمه کلیدی معتبر برای جستجو وارد کنید.</empty-field>
+      <invalid-format>فرمت غیرمعتبر تاریخ/زمان در فیلد '{0}'.</invalid-format>
+      <invalid-date>""تا تاریخ" باید بعد از "از تاریخ" باشد"</invalid-date>
+      <invalid-nodeType>نوع گره "{0}" معتبر نیست. لطفا دوباره چک کنید.</invalid-nodeType>
+      <invalid-keyword>کلمه کلیدی نامعتبر است. برخی از کاراکترها پشتیباتی نمی شوند.</invalid-keyword>
+    </msg>
+  </UIContentSearchForm>
+
+  <WebContentMetadataPopup>
+    <title>
+      <UIContentPropertySelector>انتخابگر خصیصه ها</UIContentPropertySelector>
+    </title>
+  </WebContentMetadataPopup>
+
+  <UIContentPropertySelector>
+    <action>
+      <Add>افزودن</Add>
+      <Cancel>#{word.cancel}</Cancel>
+    </action>
+    <label>
+      <metadataType>نوع فراداده</metadataType>
+      <property_select>خصیصه</property_select>
+    </label>
+  </UIContentPropertySelector>
+
+  <WebContentNodeTypePopup>
+    <title>
+      <UIContentNodeTypeSelector>انتخابگر نوع گره</UIContentNodeTypeSelector>
+    </title>
+  </WebContentNodeTypePopup>
+
+  <UIContentNodeTypeSelector>
+    <action>
+      <Save>#{word.save}</Save>
+      <Cancel>#{word.cancel}</Cancel>
+    </action>
+  </UIContentNodeTypeSelector>
+
+  <UIContentSearchResult>
+    <header>
+      <title>عنوان</title>
+      <score>امتیاز</score>
+      <publicationstate>وضعیت انتشار</publicationstate>
+      <action>اقدام</action>
+    </header>
+    <title>
+      <Select>Select</Select>
+      <View>مشاهده</View>
+    </title>
+    <msg>
+    <template-not-support>Cannot preview this content. The template is not supported</template-not-support>
+    </msg>
+  </UIContentSearchResult>
+
+  <UIContentDialogForm>
+    <action>
+      <SaveDraft>Save Draft</SaveDraft>
+      <FastPublish>Fast Publish</FastPublish>
+      <Preferences>تنظیمات</Preferences>
+      <Close>#{word.close}</Close>
+    </action>
+    <msg>
+      <access-denied>You do not have permission to add categories to this document.</access-denied>
+      <exception>An error occurred while adding categories to this document.</exception>
+      <non-categories>Categories are wrong. Please select appropriate categories.</non-categories>
+    </msg>
+  </UIContentDialogForm>
+
+  <UIPermissionManager>
+    <label>
+      <UIPermissionInputSetWithAction>مجوز</UIPermissionInputSetWithAction>
+      <UIAccessibleCheckboxInput>Access Right</UIAccessibleCheckboxInput>
+      <UIEditableCheckboxInput>Edit Right</UIEditableCheckboxInput>
+    </label>
+    <action>
+      <Save>#{word.save}</Save>
+      <Clear>Clear</Clear>
+      <title>
+        <Edit>ویرایش</Edit>
+        <Delete>حذف</Delete>
+      </title>
+    </action>
+  </UIPermissionManager>
+
+  <UIPermissionManagerGrid>
+    <header>
+      <owner>مجوز</owner>
+      <accessible>Accessible</accessible>
+      <editable>Editable</editable>
+      <action>اقدام</action>
+    </header>
+    <msg>
+      <confirm-delete-permission>آیا از حذف این مجوز اطمینان دارید؟</confirm-delete-permission>
+      <no-permission-remove>You do not have permission.</no-permission-remove>
+      <access-denied>دسترسی ممنوع.</access-denied>
+      <node-locked>The path element {0} or one of its parents is locked.</node-locked>
+      <userOrGroup-required>You must select a user or group.</userOrGroup-required>
+      <checkbox-require>You must set rights.</checkbox-require>
+      <node-checkedin>شما باید اول ترخیص کنید.</node-checkedin>
+    </msg>
+  </UIPermissionManagerGrid>
+
+  <UIPermissionInputSetWithAction>
+    <title>
+      <SelectUser>Select User</SelectUser>
+      <SelectMember>Select Member</SelectMember>
+      <AddAny>Add Any Permission</AddAny>
+    </title>
+  </UIPermissionInputSetWithAction>
+
+  <UIUserSelectorPopupWindow>
+    <title>
+      <UIUserContainer>User Selector</UIUserContainer>
+    </title>
+  </UIUserSelectorPopupWindow>
+
+  <UIGroupSelectorPopupWindow>
+    <title>
+      <UIGroupMemberSelector>انتخابگر گروه</UIGroupMemberSelector>
+    </title>
+  </UIGroupSelectorPopupWindow>
+
+  <UIGroupMemberSelector>
+    <label>
+      <selectGroup>انتخاب گروه</selectGroup>
+      <selectMembership>انتخاب عضویت</selectMembership>
+    </label>
+  </UIGroupMemberSelector>
+
+  <UIContentDialogPreference>
+    <action>
+      <Back>بازگشت</Back>
+    </action>
+  </UIContentDialogPreference>
+
+  <ZeroValidator>
+    <msg>
+      <Invalid-number>صفر در فیلد '{0}' پذیرفته نیست.</Invalid-number>
+    </msg>
+  </ZeroValidator>
+
+  <UIDropDownPageTemp>
+    <item>
+      <WCMPageConfigs>تنظیمات صفحه WCM</WCMPageConfigs>
+      <ColumnPageConfigs>تنظیمات ستون صفحه</ColumnPageConfigs>
+      <RowPageConfigs>تنظیمات ردیف صفحه</RowPageConfigs>
+      <TabsPageConfigs>تنظیمات زبانه صفحه</TabsPageConfigs>
+      <MixPageConfigs>تنظیمات ترکیب صفحه</MixPageConfigs>
+    </item>
+  </UIDropDownPageTemp>
+
+  <UIWizardPageSelectLayoutForm>
+    <label>
+      <SingleContentViewer>نمایش دهنده یک محتوا</SingleContentViewer>
+      <ContentListViewer>نمایش دهنده لیستی از محتواها</ContentListViewer>
+      <Search>جستجو</Search>
+      <Sitemap>نقشه سایت</Sitemap>
+      <TwoColumnsLayout>طرح دو ستونی</TwoColumnsLayout>
+      <ThreeColumnsLayout>طرح سه ستونی</ThreeColumnsLayout>
+      <TwoRowsLayout>طرح دو ردیفی</TwoRowsLayout>
+      <ThreeRowsLayout>طرح سه ردیفی</ThreeRowsLayout>
+      <TwoTabsLayout>طرح دو زبانه ای</TwoTabsLayout>
+      <ThreeTabsLayout>طرح سه زبانه ای</ThreeTabsLayout>
+      <TwoColumnsOneRowLayout>طرح دو ستونی و یک ردیفی</TwoColumnsOneRowLayout>
+      <OneRowTwoColumnsLayout>طرح یک ردیفی و دو ستونی</OneRowTwoColumnsLayout>
+      <ThreeRowsTwoColumnsLayout>طرح سه ردیفی و دو ستونی</ThreeRowsTwoColumnsLayout>
+    </label>
+  </UIWizardPageSelectLayoutForm>
+
+  <Signin>
+    <welcome>خوش آمدید</welcome>
+    <login>ورود</login>
+    <logout>خروج</logout>
+    <language>تغییر زبان</language>
+    <register>ثبت نام</register>
+  </Signin>
+  <UIDriveForm>
+<label>
+<wcm-category-view>نمای دسته</wcm-category-view>
+<wcm-view>مشاهده محتوای WCM</wcm-view>
+</label>
+  </UIDriveForm>
+  
+  <ContentSelector>
+    <title>
+      <PersonalDrives>درایوهای شخصی</PersonalDrives>
+      <GeneralDrives>درایوهای عمومی</GeneralDrives>
+      <GroupDrives>درایوهای گروهی</GroupDrives>
+      <Private>خصوصی</Private>
+      <Public>عمومی</Public>
+      <BackupCenter>مرکز پشتیبانی</BackupCenter>
+      <CategorizedDocumentsCenter>مرکز اسناد دسته بندی شده</CategorizedDocumentsCenter>
+      <CollaborationCenter>مرکز همکاری و تعامل</CollaborationCenter>
+      <DigitalAssetsManagementCenter>مرکز مدیریت دارایی های دیجیتال</DigitalAssetsManagementCenter>
+      <DMSAdministration>مدیریت DMS</DMSAdministration>
+      <DocumentsManagementCenter>مرکز مدیریت اسناد</DocumentsManagementCenter>
+      <LiveDocumentsCenter>مرکز اسناد زنده</LiveDocumentsCenter>
+      <PendingDocumentsCenter>مرکز اسناد معوق</PendingDocumentsCenter>
+      <RecordsManagementCenter>مرکز مدیریت سوابق</RecordsManagementCenter>
+      <SharedUsersSpace>فضای مشترک کاربران</SharedUsersSpace>
+      <Systemfiles>فایل های سیستمی</Systemfiles>
+      <ValidationRequestsDocumentsCenter>مرکز اسناد درخواست اعتبار سنجی</ValidationRequestsDocumentsCenter>
+      <ManagedSites>مدیریت سایت</ManagedSites>
+      <SharedSite>سایت مشترک</SharedSite>
+    </title>
+  </ContentSelector>
+  
+  <UICategoryNavigationTargetPathPopupWindow>
+    <title>
+      <UIPageSelector>انتخابگر صفحه</UIPageSelector>
+    </title>
+  </UICategoryNavigationTargetPathPopupWindow>
+  
+  <UIDocumentInfo>
+    <msg>
+      <access-denied-exception>دسترسی رد شد. شما شاید اجازه خواندن ندارید، یا ممکن است گره حذف شده یا تغییر کرده است.</access-denied-exception>
+    </msg>
+  </UIDocumentInfo>
+  <UIPortalApplication>
+    <title>
+      <abort>لغو</abort>
+    </title>
+  </UIPortalApplication>    
+  
+  <CategoryNavigationTemplate>
+  <label>
+  <home>Home</home>
+  </label>
+  </CategoryNavigationTemplate>
+  
+  <Breadcrumb>
+  <label>
+  <home>Home</home>
+  </label>  
+  </Breadcrumb>
+</bundle>

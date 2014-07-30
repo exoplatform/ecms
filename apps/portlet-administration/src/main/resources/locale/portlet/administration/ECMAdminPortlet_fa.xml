@@ -1,0 +1,2582 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<bundle>
+  <!--
+  ################################################################################
+  #             org.exoplatform.ecm.webui.component.admin.UIECMAdminControlPanel #
+  ################################################################################
+  -->
+  <UIECMAdminControlPanel>
+    <tab>
+      <label>
+        <Templates>قالب ها</Templates>
+        <Explorer>مرورگر</Explorer>
+        <Repository>مخزن</Repository>
+        <Advanced>پیشرفته</Advanced>
+      </label>
+    </tab>    
+    <label>     
+      <UITaxonomyManagerTrees>دسته ها</UITaxonomyManagerTrees>
+      <UIMetadataManager>فراداده</UIMetadataManager>
+      <UINamespaceManager>فضاهای نام</UINamespaceManager>
+      <UINodeTypeManager>انواع گره</UINodeTypeManager>
+      <UITemplatesManager>اسناد</UITemplatesManager>
+   <UICLVTemplatesManager>لیست</UICLVTemplatesManager>
+      <UIViewManager>حالت های نمایش</UIViewManager>
+      <UIDriveManager>درایوها</UIDriveManager>
+      <UIQueriesManager>پرس و جو ها</UIQueriesManager>
+      <UIActionManager>اقدامات</UIActionManager>
+      <UIScriptManager>اسکریپت ها</UIScriptManager>
+      <UIUnLockManager>قفل ها</UIUnLockManager>
+      <UIFolksonomyManager>برچسب ها</UIFolksonomyManager>      
+    </label>
+    <msg>
+      <access-denied>دسترسی رد شد. برای انجام این عمل مجوز ندارید.</access-denied>
+    </msg>
+  </UIECMAdminControlPanel>
+  <!--
+  ################################################################################
+  #             org.exoplatform.ecm.webui.component.admin.UITaxonomy #
+  ################################################################################
+  -->
+  <UITaxonomyWorkingArea>
+    <msg>
+      <referential-integrity>خواندن از فایل منبع مقدور نیست و یا دسته مقصد یک زیر دسته می باشد.</referential-integrity>
+      <no-taxonomy-selected>شما باید حداقل یک دسته را کپی کنید و یا برش دهید.</no-taxonomy-selected>
+      <node-is-cutting>نمی توانید در اینجا بچسبانید. دسته '{0}' باید برش داده شود.</node-is-cutting>
+      <can-not-paste>هیچ داده ای در کلیپ بورد برای چسباندن وجود دارد.</can-not-paste>
+      <reference-exception>به علت اینکه این دسته در حال حاضر توسط یک محتوا مورد ارجاع واقع شده است، نمی توانید آن را حذف کنید.</reference-exception>
+      <path-error>در هنگام حذف دسته خطایی رخ داده است.</path-error>
+    </msg>
+  </UITaxonomyWorkingArea>
+  <UITaxonomyManager>
+    <msg>
+      <confirm-delete>آیا از حذف این دسته مطمئن هستید؟</confirm-delete>
+    </msg>
+    <title>
+      <add>افزودن</add>
+      <paste>چسباندن</paste>
+      <cut>برش</cut>
+      <copy>کپی</copy>
+      <remove>حذف</remove>
+    </title>
+  </UITaxonomyManager>
+  
+  <!--
+  ################################################################################
+  #    org.exoplatform.ecm.webui.component.admin.taxonomy.UITaxonomyTreeContainer#
+  ################################################################################
+  -->
+  <UITaxonomyTreeContainer>
+    <tab>
+      <info>
+        <UITaxonomyTreeMainForm>نام دسته، فضای کار و مسیر خانه را مشخص کنید.</UITaxonomyTreeMainForm>
+        <UIPermissionTreeManager>تنظیم مجوز برای درخت دسته ها.</UIPermissionTreeManager>
+        <UIActionTaxonomyManager>به منظور تکمیل فرآیند ایجاد و یا به روز رسانی، یک اقدام به درخت دسته ها اضافه کنید.</UIActionTaxonomyManager>
+        <UITaxonomyTreeCreateChild>درخت طبقه بندی را با افزودن، کپی کردن، برش دادن و یا انتخاب مجوزها ویرایش نمایید.</UITaxonomyTreeCreateChild>
+      </info>
+    </tab>
+    <msg>
+      <not-exist-tree>درخت دسته ها وجود ندارد.</not-exist-tree>
+    </msg>
+  </UITaxonomyTreeContainer>
+  
+  <!--
+##########################################################################################
+#     org.exoplatform.ecm.webui.component.admin.taxonomy.UITaxonomyTreeMainForm          #
+##########################################################################################
+-->
+  <UITaxonomyTreeMainForm>
+    <action>
+      <Reset>Reset</Reset>
+    </action>
+    <msg>
+      <name-not-allowed>نام ممنوع</name-not-allowed>
+      <name-emty>نام درخت مورد نیاز است.</name-emty>
+      <homePath-emty>مسیر خانه مورد نیاز است.</homePath-emty>
+      <targetPath-emty>مسیر هدف مورد نیاز است.</targetPath-emty>
+      <taxonomytree-existed>این نام درخت دسته وجود دارد.</taxonomytree-existed>
+    </msg>
+  </UITaxonomyTreeMainForm>
+
+  <TaxonomyTreeMainForm>
+    <label>
+      <TaxoTreeName>نام</TaxoTreeName>
+      <TaxoTreeWorkspace>فضای کار</TaxoTreeWorkspace>
+      <TaxoTreeHomePath>مسیر خانه</TaxoTreeHomePath>
+    </label>
+  </TaxonomyTreeMainForm>
+
+  <TaxonomyTreeHomePath>
+    <title>
+      <AddPath>افزودن مسیر</AddPath>
+    </title>
+  </TaxonomyTreeHomePath>
+  
+  <!--
+##########################################################################################
+#     org.exoplatform.ecm.webui.component.admin.taxonomy.tree.info.UIPermissionTreeInfo  #
+##########################################################################################
+-->
+<UIPermissionTreeInfo>
+<action>
+<title>
+<Delete>حذف</Delete>
+<Edit>ویرایش</Edit>
+</title>
+</action>
+<header>
+<usersOrGroups>کاربر یا گروه</usersOrGroups>
+<read>خواندن</read>
+<addNode>اضافه کردن گره</addNode>
+<setProperty>تنظیم ویژگی</setProperty>
+<remove>حذف</remove>
+<action>اقدام</action>
+</header>
+</UIPermissionTreeInfo>
+
+<!--
+##########################################################################################
+#     org.exoplatform.ecm.webui.component.admin.taxonomy.tree.info.UIPermissionTreeForm  #
+##########################################################################################
+-->
+  <UIPermissionTreeForm>
+    <msg>
+      <have-not-any-permission>لطفا برای این گره حداقل یک مجوز مشخص کنید.</have-not-any-permission>
+    </msg>
+  </UIPermissionTreeForm>
+
+<!--
+################################################################################
+#     org.exoplatform.ecm.webui.component.admin.taxonomy.UIActionForm          #
+################################################################################
+-->
+
+  <UIActionForm>
+    <title>افزودن یک اقدام به درخت دسته ها</title>
+    <action>
+      <Save>#{word.save}</Save>
+    </action>
+    <msg>
+      <name-not-allowed>نام خالی یا حروف خاص در نام اقدام مجاز نمی باشد.</name-not-allowed>
+      <path-invalid>مسیر نامعتبر است.</path-invalid>
+      <taxonomy-existed>درخت دسته وجود دارد.</taxonomy-existed>
+      <taxonomy-node-existed>گره دسته وجود دارد.</taxonomy-node-existed>
+      <no-permission-add>شما مجوز لازم برای افزودن اقدام را ندارید.</no-permission-add>
+      <not-created-tree>درخت دسته ها هنوز ایجاد نشده است.</not-created-tree>
+    </msg>
+  </UIActionForm>
+
+  <!--
+  ################################################################################
+  #             org.exoplatform.ecm.webui.component.admin.UITemplatesManager #
+  ################################################################################
+  -->
+  <UITemplatesList>
+    <header>
+      <name>نام قالب</name>
+      <action>اقدامات</action>
+    </header>
+  </UITemplatesList>
+  <!--
+  ################################################################################
+  #             org.exoplatform.ecm.webui.component.admin.UINamespaceForm  #
+  ################################################################################
+  -->
+  <NameSpacePopup>
+    <title>
+      <UINamespaceForm>فرم فضای نام</UINamespaceForm>
+    </title>
+  </NameSpacePopup>
+  <UINamespaceForm>
+    <title>ثبت فضای نام جدید</title>
+    <label>
+      <namespace>پیشوند فضای نام</namespace>
+      <uri>آدرس</uri>
+    </label>
+    <action>
+      <Save>#{word.save}</Save>
+      <Cancel>#{word.cancel}</Cancel>
+    </action>
+    <msg>
+      <register-unsuccessfull>فضای نام یا آدرس در حال حاضر موجود است.</register-unsuccessfull>
+      <prefix-null>پیشوند فضای نام را مشخص کنید.</prefix-null>
+      <uri-null>آدرس مربوط به فضای نام را مشخص کنید.</uri-null>
+    </msg>
+  </UINamespaceForm>
+  <!--
+  ################################################################################
+  #      org.exoplatform.ecm.webui.component.admin.namespace.UINamespaceList #
+  ################################################################################
+  -->
+  <UINamespaceList>
+    <header>
+      <prefix>پیشوند</prefix>
+      <uri>آدرس فضای نام</uri>
+      <action>اقدام</action>
+    </header>
+    <action>
+      <AddNamespace>ثبت نام</AddNamespace>
+    </action>
+  </UINamespaceList>
+  <NamespacePopup>
+    <title>
+      <UINamespaceForm>ثبت فضای نام جدید</UINamespaceForm>
+    </title>
+  </NamespacePopup>
+  <!--
+  ################################################################################
+  #             org.exoplatform.ecm.webui.component.admin.UIMetadataList #
+  ################################################################################
+  -->
+  <UIMetadataList>
+    <label>
+      <false>نادرست</false>
+      <true>درست</true>
+      <True>درست</True>
+      <False>نادرست</False>
+    </label>
+    <title>
+      <view>نما</view>
+      <edit>ویرایش</edit>
+      <delete>حذف</delete>
+    </title>
+    <header>
+      <icon>آیکن</icon>
+      <name>فراداده</name>
+      <type>نوع</type>
+      <internalUse>استفاده داخلی</internalUse>
+      <action>اقدامات</action>
+    </header>
+    <msg>
+      <confirm-delete>آیا از حذف این فراداده اطمینان دارید؟</confirm-delete>
+      <delete-successful>قالب های '{0}' با موفقیت حذف شدند.</delete-successful>
+      <path-not-found-exception>اين فراداده حذف یا تغییرداده شده است. لطفاً روی دکمه تازه سازی کلیک کنید.</path-not-found-exception>
+    </msg>
+    <action>
+      <Add>افزودن فراداده</Add>
+      <Cancel>#{word.cancel}</Cancel>
+    </action>
+  </UIMetadataList>
+  <MetadataPopupAddNew>
+    <title>
+      <UIMetadataForm>Add New Metadata's Template</UIMetadataForm>
+    </title>
+  </MetadataPopupAddNew>
+  <MetadataPopupEdit>
+    <title>
+      <UIMetadataForm>ویرایش قالب فراداده</UIMetadataForm>
+    </title>
+  </MetadataPopupEdit>
+  <MetataPermissionPopup>
+    <title>
+      <MetadataPermission>تعیین مجوزها</MetadataPermission>
+      <QueriesPermissionBrowse>افزودن مجوز</QueriesPermissionBrowse>
+    </title>
+  </MetataPermissionPopup>
+  <!--
+  ################################################################################
+  #    org.exoplatform.ecm.webui.component.admin.metadata.UIMetadataForm #
+  ################################################################################
+  -->
+  <UIMetadataForm>
+    <title>نگاشت فراداده</title>
+    <action>
+      <Cancel>#{word.cancel}</Cancel>
+      <Save>اعمال</Save>
+    </action>
+    <header>
+      <icon>آیکن</icon>
+      <label>نام گره</label>
+      <input>اقدام</input>
+    </header>
+    <label>
+      <dialogTemplate>قالب گفتگو:</dialogTemplate>
+      <viewTemplate>مشاهده قالب:</viewTemplate>
+      <metadataName>نام فراداده:</metadataName>
+      <viewPermission>مجوز:</viewPermission>
+      <permission>UIMetadataForm</permission>
+      <metadataLabel>برچسب:</metadataLabel>
+    </label>
+    <tab>
+      <label>
+        <metadataTypeTab>نوع فراداده</metadataTypeTab>
+        <dialogTab>قالب گفتگو</dialogTab>
+        <viewTab>قالب نما</viewTab>
+      </label>
+    </tab>
+  </UIMetadataForm>
+  <!--
+  ################################################################################
+  #    org.exoplatform.ecm.webui.component.admin.metadata.UIMetadataView #
+  ################################################################################
+  -->
+  <UIMetadataView>
+    <header>
+      <name>نام اِلمان</name>
+      <type>نوع</type>
+      <description>شرح</description>
+      <isMixin>نوع Mixin است</isMixin>
+      <orderable>فرزندان قابل مرتب سازی</orderable>
+    </header>
+    <info>
+      <description>شرح</description>
+    </info>
+    <tab>
+      <element>اِلمان ها</element>
+      <metadataView>اطلاعات فراداده</metadataView>
+    </tab>
+    <action>
+      <Cancel>#{word.close}</Cancel>
+      <Back>#{word.back}</Back>
+    </action>
+  </UIMetadataView>
+  <ViewMetadataPopup>
+    <title>
+      <UIMetadataView>اطلاعات فراداده</UIMetadataView>
+    </title>
+  </ViewMetadataPopup>
+  <!--
+  ################################################################################
+  #             org.exoplatform.ecm.webui.component.admin.UIDriveManager #
+  ################################################################################
+  -->
+  <UIDriveList>
+    <header>
+      <icon>آیکن</icon>
+      <name>نام</name>
+      <workspace>فضای کار</workspace>
+      <homePath>مسیر خانه</homePath>
+      <permissions>مجوزها</permissions>
+      <views>نما</views>
+      <action>اقدام</action>
+    </header>
+    <tooltip>
+      <Delete>حذف</Delete>
+      <EditInfo>ویرایش</EditInfo>
+    </tooltip>
+    <msg>
+      <confirm-delete>آیا از حذف این درایو اطمینان دارید؟</confirm-delete>
+    </msg>
+    <action>
+      <AddDrive>افزودن درایو</AddDrive>
+    </action>
+    <label>
+      <permission>{0} در {1}</permission>
+    </label>
+  </UIDriveList>
+  <UIDriveForm>
+    <action>
+      <Cancel>#{word.cancel}</Cancel>
+      <Save>#{word.save}</Save>
+      <Back>#{word.back}</Back>
+      <Refresh>#{word.refresh}</Refresh>
+    </action>
+    <msg>
+      <drive-exists>درایو در حال حاضر وجود دارد.</drive-exists>
+      <workspace-path-invalid>مسیر فضای کار نا معتبر است.</workspace-path-invalid>
+      <drive-views-invalid>لطفا یک نما را انتخاب کنید.</drive-views-invalid>
+      <icon-not-found>آیکن یافت نشد.</icon-not-found>
+      <permission-null>شما باید مجوز این درایو را تنظیم کنید.</permission-null>
+      <allowCreateFolders>شما باید نوع پوشه را انتخاب کنید.</allowCreateFolders>
+      <name-null>لطفا نام درایو را وارد کنید.</name-null>
+      <fileName-invalid>در نام درایو تعدادی حرف نامعتبر وجود دارد.</fileName-invalid>
+    </msg>
+    <tab>
+      <label>
+        <DriveInputSet>درایو</DriveInputSet>
+        <ViewsInputSet>اعمال نماها</ViewsInputSet>
+        <PermissionInputSet>تعیین مجوزها</PermissionInputSet>
+      </label>
+    </tab>
+    <label>
+      <name>نام:</name>
+      <workspace>فضای کار:</workspace>
+      <homePath>مسیر خانه:</homePath>
+      <icon>آیکن فضای کار:</icon>
+      <viewPreferences>نمایش اسناد مرجع:</viewPreferences>
+      <viewNonDocument>نمایش گره های غیر سندی:</viewNonDocument>
+      <viewSideBar>نمایش نوار جانبی:</viewSideBar>
+      <permissions>مجوزها:</permissions>
+      <showHiddenNode>نمایش گره های پنهان:</showHiddenNode>
+      <allowCreateFolders>امکان ایجاد پوشه:</allowCreateFolders>
+      <Admin>مدیر:</Admin>
+      <Categories>دسته ها:</Categories>
+      <Icons>آیکن ها:</Icons>
+      <List>لیست:</List>
+      <Web>وب سایت:</Web>
+    </label>
+  </UIDriveForm>
+  <AddDriveManagerPopup>
+    <title>
+      <UIDriveForm>افزودن درایو</UIDriveForm>
+    </title>
+  </AddDriveManagerPopup>
+  <EditDriveManagerPopup>
+    <title>
+      <UIDriveForm>ویرایش درایو</UIDriveForm>
+    </title>
+  </EditDriveManagerPopup>
+  <UITreeList>
+    <info>
+      <child-not-found>گره فرزند یافت نشد.</child-not-found>
+    </info>
+    <header>
+      <name>نام</name>
+      <action>اقدام</action>
+    </header>
+  </UITreeList>
+  
+  <UIRepositoryList>
+    <titlebar>
+      <label>مدیریت عملکرد اصلی ECM</label>
+    </titlebar>
+  </UIRepositoryList>
+  
+  <!--
+  ################################################################################
+  #    org.exoplatform.ecm.webui.component.admin.nodetype.UINodeTypeManager #
+  ################################################################################
+  -->
+  <UINodeTypeManager>
+    <header>
+      <icon>آیکن</icon>
+      <label>نام گره</label>
+      <input>اقدام</input>
+    </header>
+    <action>
+      <Save>#{word.save}</Save>
+    </action>
+  </UINodeTypeManager>
+  <!--
+  ################################################################################
+  #    org.exoplatform.ecm.webui.component.admin.nodetype.UINodeTypeList #
+  ################################################################################
+  -->
+  <UINodeTypeList>
+    <label>
+      <true>درست</true>
+      <false>نادرست</false>
+    </label>
+    <header>
+      <icon>آیکن</icon>
+      <nodeType>نوع گره</nodeType>
+      <mixinType>نوع mixin</mixinType>
+      <orderable>گره های فرزند به ترتیب</orderable>
+      <action>اقدام</action>
+    </header>
+    <action>
+      <Export>استخراج</Export>
+      <Import>وارد کردن</Import>
+      <Add>افزودن</Add>
+    </action>
+    <tooltip>
+      <View>نما</View>
+      <Edit>ویرایش</Edit>
+      <Delete>حذف</Delete>
+    </tooltip>
+    <msg>
+      <confirm-delete>آیا از حذف این نوع گره مطمئن هستید؟</confirm-delete>
+    </msg>
+  </UINodeTypeList>
+  <!--
+  ################################################################################
+  #    org.exoplatform.ecm.webui.component.admin.nodetype.UINodeTypeOptionList #
+  ################################################################################
+  -->
+  <UINodeTypeOptionList>
+    <action>
+      <Save>#{word.save}</Save>
+      <Add>افزودن</Add>
+    </action>
+    <header>
+      <icon>آیکن</icon>
+      <label>نام گره</label>
+      <input>اقدام</input>
+    </header>
+  </UINodeTypeOptionList>
+  <!--
+  ################################################################################
+  #    org.exoplatform.ecm.webui.component.admin.nodetype.UINodeTypeForm #
+  ################################################################################
+  -->
+  <UINodeTypeForm>
+    <tab>
+      <label>
+        <nodeTypeDefinition>نوع گره</nodeTypeDefinition>
+        <propertyDefinition>خصیصه</propertyDefinition>
+        <childNodeDefinition>گره فرزند</childNodeDefinition>
+        <superTypeTab>اَبَر نوع ها</superTypeTab>
+        <DefaultTypeTab>پیش فرض اولیه</DefaultTypeTab>
+        <RequiredTypeTab>نوع اولیه اجباری</RequiredTypeTab>
+        <Contraints>محدودیت ها</Contraints>
+      </label>
+    </tab>
+    <label>
+      <propertiesDefinitions>تعریف مشخصات</propertiesDefinitions>
+      <childDefinitions>تعریف گره فرزند</childDefinitions>
+      <namespace>فضای نام</namespace>
+      <propertyNamespace>فضای نام</propertyNamespace>
+      <nodeTypeName>نام نوع گره</nodeTypeName>
+      <mixinType>نوع Mixin است</mixinType>
+      <hasOrderableChildNodes>گره های فرزند به ترتیب</hasOrderableChildNodes>
+      <primaryItemName>نام آیتم اولیه</primaryItemName>
+      <superTypes>اَبَر نوع ها</superTypes>
+      <propertyname>تعریف نام</propertyname>
+      <requiredType>نوع مورد نیاز</requiredType>
+      <multiple>چندگانه است</multiple>
+      <mandatory>الزامی است</mandatory>
+      <autoCreated>خودکار ایجاد شده است</autoCreated>
+      <parentversion>در نسخه پدر</parentversion>
+      <protected>محافظت شده</protected>
+      <constraints>مقادیر</constraints>
+      <UIFormTableInputSet>UIFormTableInputSet</UIFormTableInputSet>
+      <sameNameSiblings>همان روش نامگذاری است</sameNameSiblings>
+      <childNamespace>فضای نام</childNamespace>
+      <childMandatory>الزامی است</childMandatory>
+      <childAutocreated>خودکار ایجاد شده است</childAutocreated>
+      <childParentversion>در نسخه قبلی</childParentversion>
+      <childProtected>محافظت شده</childProtected>
+      <childNodename>تعریف نام</childNodename>
+      <requiredPrimaryType>نوع اولیه الزامی</requiredPrimaryType>
+      <defaultPrimaryType>نوع اولیه پیش فرض</defaultPrimaryType>
+      <valueconstraints>محدودیت های مقادیر</valueconstraints>
+    </label>
+    <action>
+      <Cancel>#{word.cancel}</Cancel>
+      <Save>#{word.save}</Save>
+      <SaveDraft>ذخیره به عنوان پیش نویس</SaveDraft>
+      <AddProperty>اضافه کردن مشخصه</AddProperty>
+      <AddChild>اضافه کردن فرزند</AddChild>
+      <AddConstraints>افزودن محدودیت</AddConstraints>
+      <Back>#{word.back}</Back>
+      <AddType>افزودن نوع</AddType>
+      <AddValue>افزودن</AddValue>
+      <CancelConstraints>#{word.cancel}</CancelConstraints>
+      <CancelTab>#{word.cancel}</CancelTab>
+      <UpdateChild>#{word.update}</UpdateChild>
+      <CancelChild>#{word.cancel}</CancelChild>
+      <UpdateProperty>#{word.update}</UpdateProperty>
+      <CancelProperty>#{word.cancel}</CancelProperty>
+      <Close>#{word.close}</Close>
+    </action>
+    <msg>
+      <register-successfully>نوع گره '{0}' با موفقیت ثبت شد.</register-successfully>
+      <supertype-is-madatory>ابر نوع در حین ثبت نوع گره الزامی است. حداقل یک ابر نوع را انتخاب کنید.</supertype-is-madatory>
+      <register-failed>ثبت نوع گره ناموفق بود. یا در حال حاضر موجود بوده و یا ابر نوع نامعتبر است.</register-failed>
+      <nodeType-name>نام نوع گره مورد نیاز است.</nodeType-name>
+      <fileName-invalid>نام فایل حاوی کاراکترهای نامعتبر است.</fileName-invalid>
+      <node-type-exists>نوع گره '{0}' در حال حاضر وجود دارد.</node-type-exists>
+      <node-type-name>نام نوع گره نامعتبر است.</node-type-name>
+      <values-error>لطفا تنها یک نوع گره را به عنوان نوع گره پیش فرض انتخاب کنید.</values-error>
+      <confirm-delete-child>آیا از حذف این گره فرزند مطمئن هستید؟</confirm-delete-child>
+      <confirm-delete-property>آیا از خذف این ویژگی مطمئن هستید؟</confirm-delete-property>
+    </msg>
+  </UINodeTypeForm>
+  <UIPropertyDefinitionForm>
+    <tab>
+      <label>
+        <constraints>شرایط</constraints>
+        <UIFormMultiValueInputSet>شرایط</UIFormMultiValueInputSet>
+      </label>
+    </tab>
+    <msg>
+      <property-name>نام تعریف ویژگی نامعتبر است.</property-name>
+      <not-supported-value-constraints>این نوع مورد نیاز، محدودیت ارزش را پشتیبانی نمی کند.</not-supported-value-constraints>
+    </msg>
+  </UIPropertyDefinitionForm>
+  <UIChildNodeDefinitionForm>
+    <msg>
+      <child-name>نام گره فرزند مورد نیاز است.</child-name>
+      <child-invalid>نام گره فرزند شامل حروف نامعتبر است.</child-invalid>
+      <default-node-type-not-found>نوع گره پیش فرض یافت نمی شود.</default-node-type-not-found>
+      <requiredPrimaryType>نوع اولیه مورد نیاز است.</requiredPrimaryType>
+      <defaultPrimaryType>نوع اولیه پیش فرض مورد نیاز است.</defaultPrimaryType>
+    </msg>
+  </UIChildNodeDefinitionForm>
+  <defaultPrimaryTypePopup>
+    <title>
+      <FormdefaultPrimaryTypePopup>نوع اولیه پیش فرض را انتخاب کنید</FormdefaultPrimaryTypePopup>
+    </title>
+  </defaultPrimaryTypePopup>
+  <requiredPrimaryTypePopup>
+    <title>
+      <FormrequiredPrimaryTypePopup>نوع اولیه مورد نیاز را انتخاب کنید</FormrequiredPrimaryTypePopup>
+    </title>
+  </requiredPrimaryTypePopup>
+  <superTypesPopup>
+    <title>
+      <FormsuperTypesPopup>انتخاب اَبَر نوع</FormsuperTypesPopup>
+    </title>
+  </superTypesPopup>
+  <NodeTypePopup>
+    <title>
+      <UINodeTypeForm>افزودن/ویرایش تعاریف نوع گره</UINodeTypeForm>
+    </title>
+  </NodeTypePopup>
+  <ViewNodeTypePopup>
+    <title>
+      <UINodeTypeForm>مشاهده اطلاعات نوع گره</UINodeTypeForm>
+    </title>
+  </ViewNodeTypePopup>
+  <!--
+  ################################################################################
+  #    org.exoplatform.ecm.webui.component.admin.nodetype.UINodeTypeExport   #
+  ################################################################################
+  -->
+  <UINodeTypeExport>
+    <header>
+      <icon>آیکن</icon>
+      <label>نام گره</label>
+      <input>اقدام</input>
+    </header>
+    <action>
+      <Cancel>#{word.cancel}</Cancel>
+      <Export>استخراج</Export>
+      <UncheckAll>عدم انتخاب همه</UncheckAll>
+      <CheckAll>انتخاب همه</CheckAll>
+    </action>
+    <title>استخراج انواع گره</title>
+    <msg>
+      <item-null>لطفا حداقل یک گره را برای استخراج انتخاب کنید.</item-null>
+    </msg>
+  </UINodeTypeExport>
+  <NodeTypeExportPopup>
+    <title>
+      <UINodeTypeExport>استخراج انواع گره</UINodeTypeExport>
+    </title>
+  </NodeTypeExportPopup>
+  <!--
+  ################################################################################
+  #    org.exoplatform.ecm.webui.component.admin.nodetype.UINodeTypeOptionList   #
+  ################################################################################
+  -->
+  <!--
+  ################################################################################
+  #    org.exoplatform.ecm.webui.component.admin.nodetype.UINodeTypeUpload   #
+  ################################################################################
+  -->
+  <UINodeTypeUpload>
+    <label>
+      <upload>نام فایل</upload>
+    </label>
+    <action>
+      <Cancel>#{word.cancel}</Cancel>
+      <Upload>آپلود</Upload>
+    </action>
+    <title>وارد کردن نوع گره از فایل XML</title>
+    <msg>
+      <filename-error>مرور یک فایل نوع گره برای وارد کردن.</filename-error>
+      <data-file-error>فقط فایل های xml یا zip را می توان وارد کرد.</data-file-error>
+      <data-invalid>داده نامعتبر است. نوع فایل را بررسی و دوباره سعی کنید.</data-invalid>
+      <nodetype-exist>نوع گره '{0}' در حال حاضر وجود دارد.</nodetype-exist>
+      <namespace-invalid>فضای نام '{0}' نامعتبر است.</namespace-invalid>
+    </msg>
+  </UINodeTypeUpload>
+  <!--
+  ################################################################################
+  #    org.exoplatform.ecm.webui.component.admin.nodetype.UINodeTypeImport   #
+  ################################################################################
+  -->
+  <UINodeTypeImport>
+    <action>
+      <Cancel>#{word.cancel}</Cancel>
+      <Import>وارد کردن</Import>
+      <Upload>دوباره آپلود کنید</Upload>
+    </action>
+    <header>
+      <icon>آیکن</icon>
+      <label>نام گره</label>
+      <input>اقدام</input>
+    </header>
+    <title>نوع گره برای وارد کردن را انتخاب کنید</title>
+    <msg>
+      <no-nodetype-registered>هیچ نوع گره ثبت شده ای وجود ندارد.</no-nodetype-registered>
+      <nodetype-registered>ثبت‌ نام موفقیت‌ آمیز بود.</nodetype-registered>
+    </msg>
+  </UINodeTypeImport>
+  <NodeTypeImportPopup>
+    <title>
+      <UINodeTypeImportPopup>وارد کردن نوع گره از فایل XML</UINodeTypeImportPopup>
+    </title>
+  </NodeTypeImportPopup>
+  <!--
+  ################################################################################
+  #             org.exoplatform.ecm.webui.component.admin.UIDriveForm #
+  ################################################################################
+  -->
+  <DriveInputSet>
+    <label>
+      <both>Both</both>
+      <folderOnly>Folder</folderOnly>
+      <unstructuredFolder>Unstructured Folder</unstructuredFolder>
+    </label>
+    <title>
+      <AddPermission>اضافه کردن مجوز</AddPermission>
+      <RemovePermission>Remove Permission</RemovePermission>
+      <AddIcon>افزودن آیکن</AddIcon>
+      <AddPath>افزودن مسیر</AddPath>
+    </title>
+  </DriveInputSet>
+  <!--
+  ###################################################################################
+  #             org.exoplatform.ecm.webui.component.admin.action.UIActionTypeList#
+  ###################################################################################
+  -->
+  <UIActionTypeList>
+    <header>
+      <name>اسکریپت</name>
+      <label>نام</label>
+      <action>اقدامات</action>
+    </header>
+    <title>
+      <Edit>ویرایش</Edit>
+      <Delete>حذف</Delete>
+    </title>
+    <action>
+      <AddAction>افزودن نوع اقدام</AddAction>
+    </action>
+<msg>
+ <confirm-delete>آیا از حذف این نوع اقدام اطمینان دارید؟</confirm-delete>
+<cannot-delete>شما نمی توانید این نوع اقدام را حذف کنید، زیرا سیستم در حال استفاده از آن است.</cannot-delete>
+</msg>
+  </UIActionTypeList>
+  <!--
+  ######################################################################################
+  #             org.exoplatform.ecm.webui.component.admin.action.UIActionTypeForm #
+  ######################################################################################
+  -->
+  <ActionPopup>
+    <title>
+      <UIActionTypeForm>افزودن نوع اقدام</UIActionTypeForm>
+    </title>
+  </ActionPopup>
+  <UIActionTypeForm>
+    <title>افزودن نوع اقدام</title>
+    <label>
+      <actionType>گسترش نوع عمل:</actionType>
+      <name>نام:</name>
+      <isMove>is Action Move:</isMove>
+      <variables>متغیرها:</variables>
+      <exo_businessProcessAction>فرآیندهای کسب و کار:</exo_businessProcessAction>
+      <exo_scriptAction>اسکریپت های Groovy:</exo_scriptAction>
+      <exo_ruleAction>قوانین تعریف شده:</exo_ruleAction>
+      <script>اسکریپت:</script>
+    </label>
+    <action>
+      <Save>#{word.save}</Save>
+      <Cancel>#{word.cancel}</Cancel>
+    </action>
+    <msg>
+      <action-type-added>نوع عمل '{0}' با موفقیت اضافه شد.</action-type-added>
+      <action-type-create-error>در ایجاد نوع عمل خطایی رخ داده است.</action-type-create-error>
+      <action-name-invalid>'{0}' نامعتبر است. نام باید با 'exo:' آغاز شود.</action-name-invalid>
+      <action-exist>این اقدام در حال حاضر در سیستم ECM وجود دارد.</action-exist>
+      <fileName-invalid>نام اقدام شامل کاراکترهای نامعتبر است.</fileName-invalid>
+    </msg>
+  </UIActionTypeForm>
+  <!--
+  ######################################################################################
+  #             org.exoplatform.ecm.webui.component.admin.view.UIViewManager     #
+  ######################################################################################
+  -->
+  <UITabPane>
+    <title>
+      <UIViewContainer>حالت های نمایش</UIViewContainer>
+      <ECMTemplate>قالب های مرورگر</ECMTemplate>
+      <UIScriptForm>اسکریپت ها</UIScriptForm>
+      <UIDialogTab>گفتگو</UIDialogTab>
+      <UIViewTab>نما</UIViewTab>
+      <UITemplateEditForm>قالب</UITemplateEditForm>
+      <UITemplateForm>قالب</UITemplateForm>
+      <UITemplateContainer>اسناد</UITemplateContainer>
+      <UIActionsTemplateContainer>اقدامات</UIActionsTemplateContainer>
+      <UIOthersTemplateContainer>دیگران</UIOthersTemplateContainer>
+  <UIActionScriptContainer>اقدام</UIActionScriptContainer>
+  <UIWidgetScriptContainer>ویجت ﻫﺎ</UIWidgetScriptContainer>
+<UIInterceptorScriptContainer>سیستم رهگیری</UIInterceptorScriptContainer>
+
+<nodeTypeDefinition>نوع گره</nodeTypeDefinition>
+      <propertyDefinition>مشخصه</propertyDefinition>
+      <childNodeDefinition>گره فرزند</childNodeDefinition>
+      <SuperTypeTab>ابر نوع ها</SuperTypeTab>
+      <DefaultTypeTab>اولیه پیش فرض</DefaultTypeTab>
+      <RequiredTypeTab>اولیه اجباری</RequiredTypeTab>
+      <Contraints>محدودیت ها</Contraints>
+    </title>
+  </UITabPane>
+  <!--
+  ######################################################################################
+  #             org.exoplatform.ecm.webui.component.admin.view.UIViewList    #
+  ######################################################################################
+  -->
+  <UIViewList>
+   <title>
+     <View>نما</View>
+     <EditInfo>ويرايش</EditInfo>
+     <Delete>حذف</Delete>
+   </title>
+    <header>
+      <name>نام</name>
+      <permissions>مجوزها</permissions>
+      <tabList>برگه اقدام</tabList>
+      <baseVersion>نسخه پایه</baseVersion>
+      <action>اقدام</action>
+    </header>
+    <action>
+      <AddView>افزودن نما</AddView>
+    </action>
+    <msg>
+      <access-denied>دسترسی رد شد. شما مجوز لازم برای استفاده از این ویژگی را ندارید.</access-denied>
+      <template-in-use>{0} حذف نمی‌شود. در حال حاضر در حال استفاده است.</template-in-use>
+      <confirm-delete>آیا از حذف این نما اطمینان دارید؟</confirm-delete>
+    </msg>
+  </UIViewList>
+  <ViewPopup>
+    <title>
+      <UIViewFormTabPane>نما</UIViewFormTabPane>
+    </title>
+  </ViewPopup>
+  <AddPopup>
+    <title>
+      <UIViewFormTabPane>افزودن نما</UIViewFormTabPane>
+      <AddPopup>افزودن قالب</AddPopup>
+    </title>
+  </AddPopup>
+  <EditPopup>
+    <title>
+      <UIViewFormTabPane>ویرایش نما</UIViewFormTabPane>
+    </title>
+  </EditPopup>
+
+<UITabList>
+                  <title>
+                    <Edit>ویرایش</Edit>
+                    <Delete>حذف</Delete>
+                  </title>       
+ <header>
+  <tabName>برگه</tabName>
+  <localizeButtons>شرح</localizeButtons>
+<action>اقدامات</action>
+</header>
+<action>
+ <AddTab>افزودن</AddTab>
+</action>
+<msg>
+ <confirm-delete>آیا از حذف این برگه اطمینان دارید؟</confirm-delete>
+</msg>
+<grid>
+ <msg>
+  <empty>هیچ برگه‌ای در این نما وجود ندارد</empty>
+ </msg>
+</grid>
+</UITabList>
+
+<UIViewPermissionList>
+ <title>مالک این نما را با مجوز مناسب انتخاب کنید:</title>
+<label>
+ <permission>{0} در {1}</permission>
+</label>
+<msg>
+ <confirm-delete>آیا از حذف این مجوز اطمینان دارید؟</confirm-delete>
+  <permission-cannot-empty>مجوز مربوط به نما اجباری است و نمی‌تواند خالی باشد.</permission-cannot-empty>
+</msg>
+</UIViewPermissionList>
+
+<UIViewPermissionList>
+                         <title>
+                           <Delete>حذف</Delete>
+                         </title>
+ <header>
+<friendlyPermission>مجوزها</friendlyPermission>
+     <action>اقدام</action>
+ </header>
+<action>
+ <title>
+  <Delete>حذف</Delete>
+ </title>
+</action>
+<grid>
+ <msg>
+  <empty>هیچ مجوزی برای این نما وجود ندارد</empty>
+ </msg>
+</grid>
+</UIViewPermissionList>
+
+<UIViewPermissionForm>
+<action>
+ <Add>افزودن</Add>
+</action>
+<label>
+ <userOrGroup>کاربر یا گروه</userOrGroup>
+</label>
+<msg>
+ <permission-exist>مجوز '{0}' در حال حاضر در لیست وجود دارد.</permission-exist>
+</msg>
+</UIViewPermissionForm>
+
+  <!--
+  ######################################################################################
+  #             org.exoplatform.ecm.webui.component.admin.view.UIViewFormTabPane   #
+  ######################################################################################
+  -->
+  <UIViewForm>
+    <title>
+      <AddPermission>افزودن مجوز</AddPermission>
+      <RemovePermission>حذف مجوز</RemovePermission>
+    </title>
+    <msg>
+      <view-name-invalid>نام نما مورد نیاز است.</view-name-invalid>
+      <fileName-invalid>نام نما شامل کاراکترهای نامعتبر است.</fileName-invalid>
+      <permission-not-empty>لطفاً مجوزی را برای نما انتخاب کنید.</permission-not-empty>      
+      <mustbe-add-tab>لطفا یک برگه اضافه کنید.</mustbe-add-tab>
+<mustbe-add-permission>لطفاً مجوزی را برای نما انتخاب کنید</mustbe-add-permission>
+      <view-exist>نام نما در حال حاضر وجود دارد.</view-exist>
+    </msg>
+    <label>
+      <viewName>نام</viewName>
+      <template>قالب</template>
+<version>بازیابی نسخه</version>
+      <enableVersion>فعال کردن نسخه</enableVersion>
+      <hideExplorerPanel>مخفی کردن پنل مرورگر در نوار جانبی</hideExplorerPanel>
+    </label>
+  </UIViewForm>
+  <UITabForm>
+    <msg>
+      <button-select-error>لطفا حداقل یک عملکرد را از لیست انتخاب کنید.</button-select-error>
+      <tab-name-error>نام برگه لازم است.</tab-name-error>
+      <fileName-invalid>نام برگه شامل کاراکترهای نامعتبر است.</fileName-invalid>
+    </msg>
+    <label>
+      <version>بازیابی نسخه</version>
+      <viewName>نام</viewName>
+      <tabName>نام برگه</tabName>
+      <permission>مجوز</permission>
+      <tabs>برگه ها</tabs>
+      <template>قالب ها</template>
+      <enableVersion>فعال کردن نسخه</enableVersion>
+      <addFolder>افزودن پوشه</addFolder>
+      <addDocument>افزودن سند</addDocument>
+      <editDocument>ویرایش سند</editDocument>
+      <upload>آپلود</upload>
+      <paste>الحاق</paste>
+      <search>جستجو</search>
+      <viewReferences>مشاهده منابع</viewReferences>
+      <viewNodeType>مشاهده نوع گره</viewNodeType>
+      <viewPermissions>مشاهده مجوزها</viewPermissions>
+      <viewProperties>مشاهده ویژگی ها</viewProperties>
+      <manageVersions>مدیریت نسخه ها</manageVersions>
+      <manageAuditing>مدیریت ممیزی</manageAuditing>
+      <managePublications>مدیریت انتشار</managePublications>
+      <manageCategories>مديريت دسته ها</manageCategories>
+      <manageRelations>مدیریت روابط</manageRelations>
+      <manageActions>مدیریت اقدامات</manageActions>
+      <exportNode>استخراج گره</exportNode>
+      <importNode>وارد کردن گره</importNode>
+      <viewRelations>مشاهده روابط</viewRelations>
+      <showJCRStructure>نشان دادن ساختار JCR</showJCRStructure>
+      <watchDocument>پاییدن سند</watchDocument>
+      <taggingDocument>برچسب سند</taggingDocument>
+      <viewMetadatas>مشاهده فراداده</viewMetadatas>
+      <overloadThumbnail>بیش از حد کوچک</overloadThumbnail>
+      <manageHidden>مخفی کردن/نمایش محتوا</manageHidden>
+      <comment>نظر</comment>
+      <vote>رای</vote>  
+      <addCategory>افزودن دسته</addCategory>
+      <addLocalizationLink>افزودن ترجمه</addLocalizationLink>
+      <publicationRequestApproval>درخواست تأیید</publicationRequestApproval>
+      <publicationApproveContent>تایید محتوا</publicationApproveContent>
+      <publicationPublish>انتشار</publicationPublish>
+<contentNavigation>هدایت محتوا</contentNavigation>
+<addSymLink>افزودن Symlink</addSymLink>
+    </label>
+    <action>
+      <Save>#{word.save}</Save>      
+      <Cancel>#{word.cancel}</Cancel>      
+    </action>
+  </UITabForm>
+  <UIPermissionForm>
+    <label>
+      <permission>UIPermissionForm</permission>
+    </label>
+  </UIPermissionForm>
+  <UIViewFormTabPane>
+    <tab>
+      <label>
+        <UITabContainer>اقدام</UITabContainer>
+        <UIViewForm>نما</UIViewForm>
+        <UIViewPermissionContainer>مجوز</UIViewPermissionContainer>    
+      </label>
+    </tab>
+    <action>
+      <Save>#{word.save}</Save>
+      <Reset>تنظیم مجدد</Reset>
+      <Cancel>#{word.cancel}</Cancel>
+      <Close>#{word.close}</Close>
+      <Restore>بازیابی</Restore>
+    </action>
+  </UIViewFormTabPane>
+  <PopupViewPermission>
+    <title>
+      <UIPermissionSelector>انتخاب مجوز</UIPermissionSelector>
+    </title>
+  </PopupViewPermission>
+
+<TabForm_Popup>
+ <title>
+  <UITabForm>افزودن/ویرایش برگه</UITabForm>
+ </title>
+</TabForm_Popup>
+
+<tab_permission>
+ <title>
+  <SelectUser>انتخاب کاربر</SelectUser>
+<SelectMember>انتخاب عضو</SelectMember>
+<AddAny>هر</AddAny>
+ </title>
+</tab_permission>
+  <!--
+  ######################################################################################
+  #             org.exoplatform.ecm.webui.component.admin.view.UIECMTemplateList   #
+  ######################################################################################
+  -->
+  <UIECMTemplateList>
+    <title>
+      <View>نما</View>
+      <EditInfo>ویرایش</EditInfo>
+      <Delete>حذف</Delete>
+    </title>
+    <header>
+      <name>نام</name>
+      <path>مقدار</path>
+      <baseVersion>نسخه پایه</baseVersion>
+      <action>اقدام</action>
+    </header>
+    <action>
+      <Add>افزودن</Add>
+    </action>
+    <msg>
+      <template-in-use>{0} حذف نمی‌شود. در حال حاضر در حال استفاده است.</template-in-use>
+      <confirm-delete>آیا از حذف این قالب اطمینان دارید؟</confirm-delete>
+      <access-denied>دسترسی رد شد. شما مجوز لازم برای استفاده از این ویژگی را ندارید.</access-denied>
+      <delete-permission-denied>شما مجوز حذف قالب '{0}' را ندارید.</delete-permission-denied>
+    </msg>
+  </UIECMTemplateList>
+  <!--
+  ################################################################################
+  #             org.exoplatform.ecm.webui.component.admin.view.UITemplateForm #
+  ################################################################################
+  -->
+  <UITemplateForm>
+    <title>
+      <AddPermission>Add Permission</AddPermission>
+    </title>
+    <action>
+      <Save>#{word.save}</Save>
+      <Cancel>#{word.cancel}</Cancel>
+      <Reset>تنظیم مجدد</Reset>
+      <Restore>بازیابی</Restore>
+      <Refresh>#{word.refresh}</Refresh>
+    </action>
+    <msg>
+      <version-restored>نسخهٔ {0} با موفقیت بازیابی شد.</version-restored>
+      <role-require>لطفاً مجوز را انتخاب کنید.</role-require>
+      <template-name-exist>نام قالب '{0}' در حال حاضر وجود دارد.</template-name-exist>
+      <add-permission-denied>شما مجوز لازم برای اضافه کردن یک قالب جدید را ندارید.</add-permission-denied>
+      <edit-permission-denied>شما مجوز لازم برای تغییر قالب '{0}' را ندارید.</edit-permission-denied>
+    </msg>
+    <tab>
+      <label>
+        <template>قالب</template>
+        <defaultDialog>گفتگو</defaultDialog>
+        <defaultView>نما</defaultView>
+      </label>
+    </tab>
+    <label>
+      <name>نام:</name>
+      <label>برچسب:</label>
+      <isDocumentTemplate>قالب سند است:</isDocumentTemplate>
+      <dialog>محتوای گفتگو</dialog>
+      <view>مشاهده محتوا</view>
+      <permission>مجوز:</permission>
+      <selectPemistion>مجوز</selectPemistion>
+    </label>
+  </UITemplateForm>
+  <!--
+  ################################################################################
+  #             org.exoplatform.ecm.webui.component.admin.view.ecmTempForm #
+  ################################################################################
+  -->
+  <ecmTempForm>
+    <label>
+      <version>نسخه را انتخاب کنید:</version>
+      <content>محتوا:</content>
+      <name>نام:</name>
+      <homeTemplate>نوع قالب:</homeTemplate>
+      <enableVersion>نسخه را فعال کنید:</enableVersion>
+    </label>
+  </ecmTempForm>
+  <ecmTempFormPopup>
+    <title>
+      <ecmTempForm>افزودن/ویرایش قالب نما</ecmTempForm>
+    </title>
+  </ecmTempFormPopup>
+  <ecmTempFormAdd>
+    <title>
+      <ecmTempForm>افزودن قالب مرورگر</ecmTempForm>
+      <ecmTempFormAdd>افزودن قالب مرورگر</ecmTempFormAdd>
+    </title>
+  </ecmTempFormAdd>
+  <ecmTempFormEdit>
+    <title>
+      <ecmTempForm>ویرایش قالب مرورگر</ecmTempForm>
+    </title>
+  </ecmTempFormEdit>
+
+  <!--
+  ######################################################################################
+  #             org.exoplatform.ecm.webui.component.admin.script.UIScriptManager #
+  ######################################################################################
+  -->
+  <!--
+  ######################################################################################
+  #             org.exoplatform.ecm.webui.component.admin.script.UIECMFilterForm #
+  ######################################################################################
+  -->
+  <UIECMFilterForm>
+    <label>
+      <selectScript>انتخاب دسته</selectScript>
+    </label>
+  </UIECMFilterForm>
+  <!--
+  ######################################################################################
+  #             org.exoplatform.ecm.webui.component.admin.script.UIScriptList #
+  ######################################################################################
+  -->
+  <UIScriptList>
+    <action>
+      <Edit>#{word.edit}</Edit>
+      <Delete>#{word.delete}</Delete>
+      <AddNew>افزودن اسکریپت</AddNew>
+    </action>
+    <msg>
+      <confirm-delete>آیا از حذف این اسکریپت اطمینان دارید؟</confirm-delete>
+    </msg>
+    <header>
+      <scriptName>نام</scriptName>
+      <path>اسکریپت</path>
+      <baseVersion>نسخه پایه</baseVersion>
+      <action>اقدامات</action>
+    </header>
+    <tooltip>
+      <Edit>ویرایش</Edit>
+      <Delete>حذف</Delete>
+    </tooltip>
+  </UIScriptList>
+  <!--
+  ######################################################################################
+  #             org.exoplatform.ecm.webui.component.admin.script.UIScriptForm #
+  ######################################################################################
+  -->
+  <uiECMScriptsPopup>
+    <title>
+      <ecmScriptForm>ECM Script</ecmScriptForm>
+    </title>
+  </uiECMScriptsPopup>
+
+  <UIScriptForm>
+    <action>
+      <Save>#{word.save}</Save>
+      <Restore>#{word.restore}</Restore>
+      <Cancel>#{word.cancel}</Cancel>
+      <Refresh>#{word.refresh}</Refresh>
+      <Change>تغییر</Change>
+    </action>
+    <msg>
+      <version-restored>نسخهٔ {0} با موفقیت بازیابی شد.</version-restored>
+      <name-null>لطفا نام اسکریپت را وارد کنید.</name-null>
+      <name-exist>نام اسکریپت '{0}' در حال حاضر وجود دارد.</name-exist>
+      <fileName-invalid>نام اسکریپت شامل کاراکترهای نامعتبر است.</fileName-invalid>
+    </msg>
+  </UIScriptForm>
+  <!--
+  ######################################################################################
+  #             org.exoplatform.ecm.webui.component.admin.script.CBScriptForm #
+  ######################################################################################
+  -->
+  <ScriptContainerPopup>
+    <title>
+      <UIScriptForm>افزودن/ویرایش اسکریپت</UIScriptForm>
+    </title>
+  </ScriptContainerPopup>
+  <UIScriptForm>
+    <label>
+      <selectVersion>نسخه ها</selectVersion>
+      <scriptContent>محتوا</scriptContent>
+      <scriptLabel>نام</scriptLabel>
+      <scriptName>اسکریپت</scriptName>
+      <enableVersion>فعال سازی نسخه بندی</enableVersion>
+    </label>
+  </UIScriptForm>
+  <!--
+  ######################################################################################
+  #             org.exoplatform.ecm.webui.component.admin.script.ecmScriptForm #
+  ######################################################################################
+  -->
+ 
+  <ecmScriptForm>
+    <label>
+      <selectVersion>نسخه ها</selectVersion>
+      <scriptContent>محتوا</scriptContent>
+      <scriptLabel>نام</scriptLabel>
+      <scriptName>اسکریپت</scriptName>
+      <enableVersion>فعال سازی نسخه بندی</enableVersion>
+    </label>
+  </ecmScriptForm>
+  <!--
+  ######################################################################################
+  #             org.exoplatform.ecm.webui.component.admin.taxonomy.UITaxonomyForm #
+  ######################################################################################
+  -->
+  <UITaxonomyForm>
+    <action>
+      <Save>#{word.save}</Save>
+      <Cancel>#{word.cancel}</Cancel>
+    </action>
+    <title>افزودن دسته</title>
+    <label>
+      <taxonomyName>نام دسته</taxonomyName>
+      <parentPath>پدر</parentPath>
+    </label>
+    <msg>
+      <exist>دسته "{0}" وجود دارد.</exist>
+      <name-null>لطفا نام دسته را مشخص کنید.</name-null>
+      <name-invalid>نام دسته شامل کاراکترهای نامعتبر است.</name-invalid>
+      <name-too-long>نام دسته در کل باید کمتر از 30 کاراکتر داشته باشد.</name-too-long>
+    </msg>
+  </UITaxonomyForm>
+    
+  <EditTaxonomyTreePopup>
+    <title>
+      <UITaxonomyTreeContainer>ویرایش درخت دسته بندی</UITaxonomyTreeContainer>
+    </title>
+  </EditTaxonomyTreePopup>
+
+  <AddTaxonomyTreePopup>
+    <title>
+      <UITaxonomyTreeContainer>افزودن درخت دسته بندی</UITaxonomyTreeContainer>
+    </title>
+  </AddTaxonomyTreePopup>
+  
+  <TaxonomyPopupCreateChild>
+    <title>
+      <UITaxonomyTreeCreateChildForm>ویرایش درخت دسته بندی</UITaxonomyTreeCreateChildForm>
+    </title>
+  </TaxonomyPopupCreateChild>
+
+<UITaxonomyTreeCreateChildForm>
+  <action>
+      <Save>#{word.save}</Save>
+      <Cancel>#{word.cancel}</Cancel>
+    </action>
+    <label>
+      <parentPath>پدر:</parentPath>
+      <taxonomyName>نام دسته:</taxonomyName>
+    </label>
+    <msg>
+      <name-null>نام دسته خالی است.</name-null>
+      <name-invalid>نام دسته معتبر نیست.</name-invalid>
+      <name-too-long>نام دسته نباید بیش از {0} کاراکتر داشته باشد.</name-too-long>
+      <exist>نام دسته در حال حاضر وجود دارد.</exist>
+    </msg>
+</UITaxonomyTreeCreateChildForm>
+
+  <PopupComponent>
+    <title>
+      <UIOneNodePathSelector>انتخاب مسیر</UIOneNodePathSelector>
+    </title>
+  </PopupComponent>
+  
+  <TaxoPopupUserSelector>
+  <title>
+      <TaxoTreeSelectUserOrGroup>انتخاب کاربر</TaxoTreeSelectUserOrGroup>
+      <UIPermissionTreeSelectUser>انتخاب کاربر</UIPermissionTreeSelectUser>
+    </title>
+  </TaxoPopupUserSelector>
+
+  <TaxoTreeSelectUserOrGroupPopup>
+  <title>
+      <TaxoTreeSelectUserOrGroup>انتخاب عضویت</TaxoTreeSelectUserOrGroup>
+    </title>
+  </TaxoTreeSelectUserOrGroupPopup>
+  
+  <TaxoTreeAnyPermission>
+    <label>
+      <any>هر گونه مجوز</any>
+      <anyPermission>TaxoTreeAnyPermission</anyPermission>
+    </label>
+  </TaxoTreeAnyPermission>
+  
+  <TaxoTreeSelectUserOrGroup>
+    <label>
+      <selectGroup>انتخاب گروه</selectGroup>
+      <selectMembership>انتخاب عضویت</selectMembership>
+    </label>
+  </TaxoTreeSelectUserOrGroup>
+  
+  <!--
+  ######################################################################################
+  #             org.exoplatform.ecm.webui.component.admin.taxonomy.UITaxonomyTreeList #
+  ######################################################################################
+  -->
+  <UITaxonomyTreeList>
+    <header>
+      <name>درخت دسته بندی</name>
+      <workspace>فضای کار</workspace>
+      <homePath>مسیر</homePath>
+      <action>اقدام</action>
+    </header>
+    <action>
+      <AddTaxonomyTree>افزودن درخت دسته بندی</AddTaxonomyTree>
+    </action>
+    <tooltip>
+      <EditTaxonomyTree>ویرایش درخت دسته بندی</EditTaxonomyTree>
+      <Delete>حذف درخت دسته</Delete>
+    </tooltip>
+    <title>مشاهده درخت دسته</title>
+    <msg>
+      <no-list>هیچ درخت دسته ای ایجاد نشده است.</no-list>
+      <confirm-delete>آیا از حذف درخت دسته اطمینان دارید؟</confirm-delete>
+      <is-in-trash>این درخت دسته به سطل زباله منتقل شده است.</is-in-trash>
+    </msg>
+  </UITaxonomyTreeList>
+  
+  <!--
+  ######################################################################################
+  #             org.exoplatform.ecm.webui.component.admin.taxonomy.UITaxonomyTreeForm  #
+  ######################################################################################
+  -->
+  <UITaxonomyTreeForm>
+    <label>
+      <name>نام</name>
+      <workspace>فضای کار</workspace>
+      <homePath>مسیر</homePath>
+      <permissions>مجوزها</permissions>
+    </label>
+    <msg>
+      <homapath-emty>مسیر ورودی</homapath-emty>
+    </msg>
+  </UITaxonomyTreeForm>
+  
+  <UIPermissionTreeForm>
+    <label>
+      <UIPopupWindow>انتخاب</UIPopupWindow>
+      <permission>UIPermissionTreeForm</permission>
+      <userOrGroup>کاربر یا گروه</userOrGroup>
+      <read>مجوز خواندن</read>
+      <add_node>مجوز اضافه کردن گره</add_node>
+      <set_property>مجوز تنظیم ویژگی</set_property>
+      <remove>حذف مجوز</remove>
+    </label>
+    <title>افزودن مجوز به آن گره</title>
+    <action>
+      <Close>#{word.close}</Close>
+      <Save>Save</Save>
+      <Reset>Reset</Reset>
+    </action>
+    <msg>
+      <checkbox-require>لطفا حداقل یک مجوز را انتخاب کنید.</checkbox-require>
+      <userOrGroup-required>لطفاً یک کاربر یا گروه را قبل از ذخیره مجوز انتخاب کنید.</userOrGroup-required>
+      <not-change-permission>شما حق افزودن مجوز ندارید.</not-change-permission>
+      <access-denied>دسترسی رد شد. شما نمی توانید این مجوز را حذف کنید.</access-denied>
+    </msg>
+  </UIPermissionTreeForm>
+  
+  <PopupTaxonomyJCRBrowser>
+  <title>
+      <UIOneNodePathSelector>مسیر اصلی را انتخاب کنید</UIOneNodePathSelector>
+    </title>
+  </PopupTaxonomyJCRBrowser>
+  
+  <PopupTaxonomyTreePermission>
+    <title>
+      <UIPermissionSelector>مجوز را انتخاب کنید</UIPermissionSelector>
+    </title>
+   </PopupTaxonomyTreePermission>
+   
+   <PopupDrivePermission>
+    <title>
+      <AddDrivePermissionSelector>افزودن مجوز</AddDrivePermissionSelector>
+      <UIPermissionSelector>انتخاب مجوز</UIPermissionSelector>
+    </title>
+  </PopupDrivePermission>
+  
+  <UIPopupWindow>
+    <title>
+      <UIPermissionManager>مدیریت مجوز</UIPermissionManager>
+    </title>
+   </UIPopupWindow>
+
+  <PopupUserSelector>
+    <title>
+      <UIUserContainer>مدیریت مجوز</UIUserContainer>
+    </title>
+   </PopupUserSelector>
+   
+  <UIPermissionInfo>
+    <action>
+      <title>
+        <Edit>ویرایش</Edit>
+        <Delete>حذف مجوز</Delete>
+      </title>
+    </action>
+    <header>
+      <usersOrGroups>کاربر یا گروه</usersOrGroups>
+      <read>خواندن</read>
+      <addNode>اصلاح گره</addNode>
+      <remove>حذف</remove>
+      <action>اقدام</action>
+    </header>
+    <msg>
+      <confirm-delete-permission>آیا از حذف این مجوز اطمینان دارید؟</confirm-delete-permission>
+      <no-permission-tochange>شما حق حذف این مجوز را ندارید.</no-permission-tochange>
+      <no-permission-remove>شما نمی توانید مالک یا کاربر سیستم را حذف کنید.</no-permission-remove>
+      <access-denied>دسترسی رد شد. شما نمی توانید این مجوز را حذف کنید.</access-denied>
+    </msg>
+  </UIPermissionInfo>
+  <permission>
+    <title>
+      <SelectUser>انتخاب کاربر</SelectUser>
+      <SelectMember>انتخاب عضویت</SelectMember>
+      <AddAny>همه</AddAny>
+    </title>
+  </permission>
+  <!--
+  #############################################################################
+  #             org.exoplatform.ecm.webui.component.explorer.UIPermissionForm #
+  #############################################################################
+  -->
+  <SelectUserOrGroup>
+    <title>
+      <UIGroupSelector>انتخاب کاربر</UIGroupSelector>
+      <UIPermissionSelector>انتخاب عضو</UIPermissionSelector>
+      <UIGroupMemberSelector>انتخاب عضویت</UIGroupMemberSelector>
+    </title>
+  </SelectUserOrGroup>
+  <UIGroupSelector>
+    <label>
+      <selectGroup>انتخاب گروه</selectGroup>
+      <selectUser>انتخاب کاربر</selectUser>
+    </label>
+    <msg>
+      <not-change-owner>'{0}' مالک این گره است و مجوز کنترل کامل دارد.</not-change-owner>
+    </msg>
+  </UIGroupSelector>
+  <UIPermissionForm>
+    <label>
+      <UIPopupWindow>انتخاب</UIPopupWindow>
+      <permission>UIPermissionForm</permission>
+      <userOrGroup>کاربر یا گروه</userOrGroup>
+      <read>خواندن</read>
+      <add_node>اصلاح</add_node>
+      <remove>حذف</remove>
+    </label>
+    <title>افزودن مجوز به آن گره</title>
+    <action>
+      <Close>#{word.close}</Close>
+      <Save>#{word.save}</Save>
+      <Reset>تنظیم مجدد</Reset>
+    </action>
+    <msg>
+      <checkbox-require>لطفا حداقل یک مجوز را انتخاب کنید.</checkbox-require>
+      <userOrGroup-required>لطفاً یک کاربر یا گروه را قبل از ذخیره مجوز انتخاب کنید.</userOrGroup-required>
+      <not-change-permission>شما حق افزودن مجوز ندارید.</not-change-permission>
+      <access-denied>دسترسی رد شد. شما نمی توانید این مجوز را حذف کنید.</access-denied>
+    </msg>
+  </UIPermissionForm>
+  
+  <TaxonomyPopup>
+    <title>
+      <UITaxonomyForm>افزودن دسته</UITaxonomyForm>
+    </title>
+  </TaxonomyPopup>
+  
+  <UITaxonomyManager>
+    <title>
+      <permission>مدیریت مجوز</permission>
+    </title>
+  </UITaxonomyManager>
+  <!--
+  ######################################################################################
+  #             org.exoplatform.ecm.webui.component.admin.templates.UITemplateList #
+  ######################################################################################
+  -->
+  <UITemplateList>
+    <header>
+      <name>نوع</name>
+      <action>اقدام</action>
+      <label>قالب</label>
+      <icon>آیکن</icon>
+    </header>
+    <action>
+      <AddNew>افزودن قالب</AddNew>
+    </action>
+    <msg>
+      <confirm-delete>آیا شما واقعا می خواهید حذف کنید؟</confirm-delete>
+      <access-denied>دسترسی رد شد. شما مجوز لازم برای استفاده از این ویژگی را ندارید.</access-denied>
+      <editing-template>دسترسی رد شد. شما نمی توانید حذف و ویرایش این قالب را به طور همزمان انجام دهید.</editing-template>
+      <template-not-exist>قالبی که شما می خواهید حذف کنید وجود ندارد.</template-not-exist>
+    </msg>
+  </UITemplateList>
+  
+  <UIActionsTemplateList>
+    <header>
+      <name>نوع</name>
+      <action>اقدام</action>
+      <label>قالب</label>
+      <icon>آیکن</icon>
+    </header>
+    <action>
+      <AddNew>افزودن قالب</AddNew>
+    </action>
+    <msg>
+      <confirm-delete>آیا شما واقعا می خواهید حذف کنید؟</confirm-delete>
+      <access-denied>دسترسی رد شد. شما مجوز لازم برای استفاده از این ویژگی را ندارید.</access-denied>
+      <editing-template>دسترسی رد شد. شما نمی توانید حذف و ویرایش این قالب را به طور همزمان انجام دهید.</editing-template>
+      <template-not-exist>قالبی که شما می خواهید حذف کنید وجود ندارد.</template-not-exist>
+    </msg>
+  </UIActionsTemplateList>
+  
+  <UIOthersTemplateList>
+    <header>
+      <name>نوع</name>
+      <label>قالب</label>
+      <icon>آیکن</icon>
+      <action>اقدام</action>
+    </header>
+    <action>
+      <AddNew>افزودن قالب</AddNew>
+    </action>
+    <msg>
+      <confirm-delete>آیا شما واقعا می خواهید حذف کنید؟</confirm-delete>
+      <access-denied>دسترسی رد شد. شما مجوز لازم برای استفاده از این ویژگی را ندارید.</access-denied>
+      <editing-template>دسترسی رد شد. شما نمی توانید حذف و ویرایش این قالب را به طور همزمان انجام دهید.</editing-template>
+      <template-not-exist>قالبی که شما می خواهید حذف کنید وجود ندارد.</template-not-exist>
+    </msg>
+  </UIOthersTemplateList>
+
+ <!--
+  ######################################################################################
+  #             org.exoplatform.ecm.webui.component.admin.templates.clv package #
+  ######################################################################################
+  -->
+
+<UITabPane>
+ <title>
+ <ContentTemplateContainer>محتوا</ContentTemplateContainer>
+<CateTemplateContainer>هدایت</CateTemplateContainer>
+<PageTemplateContainer>صفحه بند</PageTemplateContainer>
+ </title>
+</UITabPane>
+
+  <UICLVTemplateList>
+    <title>
+      <Edit>ویرایش</Edit>
+      <Delete>حذف</Delete>
+    </title>
+    <header>
+      <title>نام</title>
+      <action>اقدام</action>
+      <template>قالب</template>
+    </header>
+    <action>
+      <AddTemplate>افزودن قالب</AddTemplate>
+<Edit>ویرایش</Edit>
+<Delete>حذف</Delete>
+    </action>
+    <msg>
+      <confirm-delete>آیا از حذف این قالب اطمینان دارید؟</confirm-delete>
+      <access-denied>دسترسی رد شد. شما مجوز لازم برای استفاده از این ویژگی را ندارید.</access-denied>
+      <editing-template>دسترسی رد شد. شما نمی توانید حذف و ویرایش این قالب را به طور همزمان انجام دهید.</editing-template>
+      <template-not-exist>قالبی که شما می خواهید حذف کنید وجود ندارد.</template-not-exist>
+    </msg>
+  </UICLVTemplateList>
+
+<CateTemplateList>
+    <header>
+      <title>نام</title>
+      <action>اقدام</action>
+      <template>قالب</template>
+    </header>
+    <title>
+      <Edit>ویرایش</Edit>
+      <Delete>حذف</Delete>
+    </title>
+    <action>
+      <AddTemplate>افزودن قالب</AddTemplate>
+<Edit>ویرایش</Edit>
+<Delete>حذف</Delete>
+    </action>
+</CateTemplateList>
+
+<PageTemplateList>
+    <header>
+      <title>نام</title>
+      <action>اقدام</action>
+      <template>قالب</template>
+    </header>
+    <action>
+      <AddTemplate>افزودن قالب</AddTemplate>
+<Edit>ویرایش</Edit>
+<Delete>حذف</Delete>
+    </action>
+</PageTemplateList>
+
+<EditCLVTemplatePopup_ContentTemplateContainer>
+ <title>
+   <UICLVTemplateForm_ContentTemplateContainer>ویرایش لیست قالب</UICLVTemplateForm_ContentTemplateContainer>   
+ </title>
+</EditCLVTemplatePopup_ContentTemplateContainer>
+
+<EditCLVTemplatePopup_CateTemplateContainer>
+ <title>
+   <UICLVTemplateForm_CateTemplateContainer>ویرایش لیست قالب</UICLVTemplateForm_CateTemplateContainer>   
+ </title>
+</EditCLVTemplatePopup_CateTemplateContainer>
+
+<EditCLVTemplatePopup_PageTemplateContainer>
+ <title>
+   <UICLVTemplateForm_PageTemplateContainer>ویرایش لیست قالب</UICLVTemplateForm_PageTemplateContainer>   
+ </title>
+</EditCLVTemplatePopup_PageTemplateContainer>
+
+<CLVTemplatePopup_ContentTemplateContainer>
+ <title>
+   <UICLVTemplateForm_ContentTemplateContainer>افزودن لیست قالب</UICLVTemplateForm_ContentTemplateContainer>   
+ </title>
+</CLVTemplatePopup_ContentTemplateContainer>
+
+<CLVTemplatePopup_CateTemplateContainer>
+ <title>
+   <UICLVTemplateForm_CateTemplateContainer>افزودن لیست قالب</UICLVTemplateForm_CateTemplateContainer>   
+ </title>
+</CLVTemplatePopup_CateTemplateContainer>
+
+<CLVTemplatePopup_PageTemplateContainer>
+ <title>
+   <UICLVTemplateForm_PageTemplateContainer>افزودن لیست قالب</UICLVTemplateForm_PageTemplateContainer>   
+ </title>
+</CLVTemplatePopup_PageTemplateContainer>
+
+<UICLVTemplateForm_ContentTemplateContainer>
+ <action>
+  <Save>#{word.save}</Save>
+<Reset>تنظیم مجدد</Reset>
+<Cancel>#{word.cancel}</Cancel>
+ </action>
+<label>
+ <title>نام</title>
+<template>نام قالب</template>
+<content>محتوا</content>
+<type>نوع قالب</type>
+</label>
+</UICLVTemplateForm_ContentTemplateContainer>
+
+<UICLVTemplateForm_PageTemplateContainer>
+ <action>
+  <Save>#{word.save}</Save>
+<Reset>تنظیم مجدد</Reset>
+<Cancel>#{word.cancel}</Cancel>
+ </action>
+<label>
+ <title>نام</title>
+<template>نام قالب</template>
+<content>محتوا</content>
+<type>نوع قالب</type>
+</label>
+</UICLVTemplateForm_PageTemplateContainer>
+
+<UICLVTemplateForm_CateTemplateContainer>
+ <action>
+  <Save>#{word.save}</Save>
+<Reset>تنظیم مجدد</Reset>
+<Cancel>#{word.cancel}</Cancel>
+ </action>
+<label>
+ <title>نام</title>
+<template>نام قالب</template>
+<content>محتوا</content>
+<type>نوع قالب</type>
+</label>
+</UICLVTemplateForm_CateTemplateContainer>
+<UICLVTemplateForm>
+  <label>
+    <paginators>صفحه بند</paginators>
+<list>محتوا</list>
+<navigation>هدایت</navigation>
+  </label>
+                          <action>
+                            <Save>#{word.save}</Save>
+                            <Reset>تنظیم مجدد</Reset> 
+                            <Cancel>#{word.cancel}</Cancel> 
+                          </action> 
+  <msg>
+  <template-existing>نام این قالب در حال حاضر وجود دارد. لطفاً نام دیگری را انتخاب کنید.</template-existing>
+  </msg>
+</UICLVTemplateForm>
+
+  <!--
+  ######################################################################################
+  #             org.exoplatform.ecm.webui.component.admin.templates.UITemplateForm #
+  ######################################################################################
+  -->
+  <AddNewTemplatePermission>
+    <title>
+      <UIPermissionSelector>مجوز را انتخاب کنید</UIPermissionSelector>
+    </title>
+  </AddNewTemplatePermission>
+  <TemplatePermission>
+    <title>
+      <UIPermissionSelector>مجوز را انتخاب کنید</UIPermissionSelector>
+    </title>
+  </TemplatePermission>
+  <TemplateContainerPopup>
+    <title>
+      <UITemplateForm>فرم قالب</UITemplateForm>
+    </title>
+  </TemplateContainerPopup>
+  <ViewForm>
+    <label>
+      <UITemplateContent>ViewForm</UITemplateContent>
+      <UIPopupWindow>مشاهده مجوز</UIPopupWindow>
+      <selectVersion>نسخه ها</selectVersion>
+      <content>محتوا:</content>
+      <name>نام:</name>
+      <isDocumentTemplate>قالب سند است</isDocumentTemplate>
+      <viewPermission>مجوز:</viewPermission>
+      <enableVersion>نسخه بندی فعال است</enableVersion>
+    </label>
+    <title>افزودن/ویرایش نما</title>
+  </ViewForm>
+  <DialogForm>
+    <label>
+      <UITemplateContent>DialogForm</UITemplateContent>
+      <UIPopupWindow>مجوز گفتگو</UIPopupWindow>
+      <selectVersion>نسخه ها</selectVersion>
+      <content>محتوا:</content>
+      <name>نام:</name>
+      <isDocumentTemplate>قالب سند است</isDocumentTemplate>
+      <viewPermission>مجوز:</viewPermission>
+      <enableVersion>فعال سازی نسخه بندی</enableVersion>
+    </label>
+    <title>افزودن/ویرایش گفتگو</title>
+  </DialogForm>
+  <DialogFormTemplatePermission>
+    <title>
+      <UIPermissionSelector>انتخاب مجوز</UIPermissionSelector>
+    </title>
+  </DialogFormTemplatePermission>
+  <ViewFormTemplatePermission>
+    <title>
+      <UIPermissionSelector>انتخاب مجوز</UIPermissionSelector>
+    </title>
+  </ViewFormTemplatePermission>
+  <TemplateContainerPopup>
+    <title>
+      <UIViewTemplate_UITemplateContainer><![CDATA[View & Edit Template]]></UIViewTemplate_UITemplateContainer>
+      <UIViewTemplate_UIActionsTemplateContainer><![CDATA[View & Edit Template]]></UIViewTemplate_UIActionsTemplateContainer>
+      <UIViewTemplate_UIOthersTemplateContainer><![CDATA[View & Edit Template]]></UIViewTemplate_UIOthersTemplateContainer>
+    </title>
+  </TemplateContainerPopup>
+  <UITemplatesManager>
+    <title>
+      <Edit>ویرایش</Edit>
+      <Delete>حذف</Delete>
+    </title>
+  </UITemplatesManager>
+  <!--
+  ######################################################################################
+  #             org.exoplatform.ecm.webui.component.admin.templates.UIViewTemplate #
+  ######################################################################################
+  -->
+  <!--
+  ######################################################################################
+  #             org.exoplatform.ecm.webui.component.admin.templates.UITemplateEditForm #
+  ######################################################################################
+  -->
+  <UITemplateEditForm>
+    <label>
+      <name>نام:</name>
+      <label>برچسب:</label>
+      <isDocumentTemplate>قالب سند است:</isDocumentTemplate>
+    </label>
+    <action>
+      <Save>#{word.save}</Save>
+      <Cancel>#{word.cancel}</Cancel>
+      <Refresh>#{word.refresh}</Refresh>
+    </action>
+  </UITemplateEditForm>
+  <!--
+  ######################################################################################
+  #             org.exoplatform.ecm.webui.component.admin.templates.UIDialogTab #
+  ######################################################################################
+  -->
+  <UIDialogTab>
+    <header>
+      <name>نام</name>
+      <roles>نقش</roles>
+      <baseVersion>نسخه</baseVersion>
+      <action>اقدامات</action>
+    </header>
+    <msg>
+      <undeletable>شما نمی توانید '{0}' را حذف کنید زیرا پیش فرض است.</undeletable>
+      <confirm-delete>آیا از حذف این گفتگو اطمینان دارید؟</confirm-delete>
+    </msg>
+    <action>
+      <title>
+        <Edit>ویرایش</Edit>
+        <Delete>حذف</Delete>
+      </title>
+    </action>
+  </UIDialogTab>
+  <!--
+  ######################################################################################
+  #             org.exoplatform.ecm.webui.component.admin.templates.UIViewTab #
+  ######################################################################################
+  -->
+  <UIViewTab>
+    <header>
+      <name>نام</name>
+      <roles>نقش</roles>
+      <baseVersion>نسخه</baseVersion>
+      <action>اقدامات</action>
+    </header>
+    <msg>
+      <undeletable>'{0}' حذف نمی شوند، زیرا پیش فرض است.</undeletable>
+      <confirm-delete>آیا شما واقعا می خواهید حذف کنید؟</confirm-delete>
+    </msg>
+    <action>
+      <title>
+        <Edit>ویرایش</Edit>
+        <Delete>حذف</Delete>
+      </title>
+    </action>
+  </UIViewTab>
+  <!--
+  ######################################################################################
+  #             org.exoplatform.ecm.webui.component.admin.templates.UITemplateContent #
+  ######################################################################################
+  -->
+  <UITemplateContent>
+    <action>
+      <Save>#{word.save}</Save>
+      <Restore>#{word.restore}</Restore>
+      <Cancel>#{word.cancel}</Cancel>
+      <Refresh>#{word.refresh}</Refresh>
+    </action>
+    <msg>
+      <name-invalid>نام فیلد نباید حاوی کاراکترهای خاص باشد.</name-invalid>
+      <roles-invalid>فیلد مجوز الزامی است.</roles-invalid>
+      <version-restored>نسخهٔ {0} با موفقیت بازیابی شد.</version-restored>
+      <name-exist>نام {0} از قبل وجود دارد.</name-exist>
+    </msg>
+    <title>
+      <AddPermission>اضافه کردن مجوز</AddPermission>
+      <RemovePermission>حذف مجوز</RemovePermission>
+    </title>
+  </UITemplateContent>
+  <!--
+  ######################################################################################
+  #             org.exoplatform.ecm.webui.component.admin.templates.DialogForm #
+  ######################################################################################
+  -->
+  <!--
+  ######################################################################################
+  #             org.exoplatform.ecm.webui.component.admin.templates.ViewForm #
+  ######################################################################################
+  -->
+  <!--
+  ######################################################################################
+  #             org.exoplatform.ecm.webui.component.UIJCRBrowser #
+  ######################################################################################
+  -->
+  <JCRBrowser>
+    <title>
+      <UIOneNodePathSelector>مسیر اصلی را انتخاب کنید</UIOneNodePathSelector>
+    </title>
+  </JCRBrowser>
+  <JCRBrowserAssets>
+    <title>
+      <UIOneNodePathSelector>انتخاب آیکن</UIOneNodePathSelector>
+    </title>
+  </JCRBrowserAssets>
+  <!--
+  ######################################################################################
+  #             org.exoplatform.ecm.webui.component.admin.queries #
+  ######################################################################################
+  -->
+  <UIQueriesList>
+    <header>
+      <name>نام</name>
+      <type>نوع</type>
+      <statement>عبارت</statement>
+      <permission>مجوزها</permission>
+      <action>اقدامات</action>
+    </header>
+    <action>
+      <AddQuery>افزودن جستار</AddQuery>
+    </action>
+    <tooltip>
+      <Edit>ویرایش این جستار</Edit>
+      <Delete>حذف این جستار</Delete>
+    </tooltip>
+    <msg>
+      <confirm-delete>آیا از حذف این جستار اطمینان دارید؟</confirm-delete>
+      <query-not-existed>این جستار دیگر وجود ندارد.</query-not-existed>
+      <can-not-remove>در حذف جستار خطایی رخ داده است. برای کسب اطلاعات با سرپرست تماس بگیرید.</can-not-remove>
+    </msg>
+  </UIQueriesList>
+  <UIQueriesForm>
+    <label>
+      <name>نام جستار</name>
+      <type>نوع جستار</type>
+      <statement>عبارت</statement>
+      <cache>فعال کردن کش نتایج</cache>
+      <permissions>مجوزها</permissions>
+      <PermissionButton>UIQueriesForm</PermissionButton>
+    </label>
+    <action>
+      <Save>#{word.save}</Save>
+      <Cancel>#{word.cancel}</Cancel>
+    </action>
+    <msg>
+      <permission-require>لطفاً مجوز را انتخاب کنید.</permission-require>
+      <name-invalid>نام نمی تواند دارای کاراکترهای خاص باشد.</name-invalid>
+      <name-existing>این نام جستار در حال حاضر وجود دارد. لطفاً نام دیگری را انتخاب کنید.</name-existing>
+      <invalid-query>جستار غیرمعتبر می باشد. لطفا عبارت خود را بررسی کنید.</invalid-query>
+      <access-denied>دسترسی رد شد. برای انجام این عمل مجوز ندارید.</access-denied>
+    </msg>
+  </UIQueriesForm>
+  <AddQueryForm>
+    <title>
+      <UIQueriesForm>افزودن جستار</UIQueriesForm>
+    </title>
+  </AddQueryForm>
+  <EditQueryForm>
+    <title>
+      <UIQueriesForm>ویرایش جستار</UIQueriesForm>
+    </title>
+  </EditQueryForm>
+<PermissionPopup>
+  <title>
+    <UIGroupMemberSelector>مجوز را انتخاب کنید</UIGroupMemberSelector>
+  </title>
+</PermissionPopup>
+  <!--
+  ######################################################################################
+  #             org.exoplatform.ecm.webui.component.admin.folksonomy #
+  ######################################################################################
+  -->
+  <UITagManager>
+    <title>
+      <EditStyle>ویرایش استیل</EditStyle>
+      <RemoveStyle>حذف استیل</RemoveStyle>
+    </title>    
+  </UITagManager>
+  <UITagStyleList>
+    <header>
+      <name>نام استیل</name>
+      <documentRange>تعداد وقوع</documentRange>
+      <tagHTML>برچسب استیل</tagHTML>
+      <action>اقدام</action>
+    </header>
+    <title>
+      <Edit>ویرایش</Edit>
+      <Delete>حذف</Delete>
+      <Remove>حذف</Remove>
+    </title>
+    <action>
+      <AddStyle>افزودن استیل</AddStyle>
+    </action>
+  </UITagStyleList>
+  <UITagStyleForm>
+    <label>
+      <styleName>نام استیل:</styleName>
+      <documentRange>تعداد وقوع:</documentRange>
+      <styleHTML>استیل HTML:</styleHTML>
+    </label>
+    <action>
+      <UpdateStyle>به روز رسانی</UpdateStyle>
+      <Cancel>#{word.cancel}</Cancel>
+    </action>
+    <msg>
+      <range-validator>محدوده نامعتبر است. فرمت باید به شکل a..b باشد که بین این دو اعداد صحیح مثبت قرار می گیرند. در صورتیکه بخواهید محدوده را بینهایت تعریف کنید بجای b از علامت * استفاده نمایید.</range-validator>
+      <error-update>به روز رسانی انجام نشد. اطلاعات شما نامعتبر می باشد.</error-update>
+      <item-not-existing>شما نمی توانید تغییرات این برچسب را ذخیره کنید. این برچسب در پایگاه داده وجود ندارد.</item-not-existing>
+    </msg>
+  </UITagStyleForm>
+  <FolksonomyPopup>
+    <title>
+      <UITagStyleForm>تنظیمات استیل ویرایش برچسب</UITagStyleForm>
+    </title>
+  </FolksonomyPopup>
+  <!--
+  ###################################################################################
+  # org.exoplatform.ecm.jcr.ECMNameValidator  #
+  ###################################################################################
+  -->
+  <ECMNameValidator>
+    <msg>
+      <Invalid-char>فیلد '{0}' شامل کارکترهای نامعتبر است. لطفاً مقدار دیگری وارد کنید.</Invalid-char>
+      <empty-input>مقدار فیلد '{0}' خالی است.</empty-input>
+    </msg>
+  </ECMNameValidator>
+  <EmptyFieldValidator>
+    <msg>
+      <empty-input>لطفا مقدار فیلد '{0}' را وارد کنید.</empty-input>
+    </msg>
+  </EmptyFieldValidator>
+  <!--
+  ###################################################################################
+  # org.exoplatform.ecm.jcr.PermissionValidator  #
+  ###################################################################################
+  -->
+  <PermissionValidator>
+  <msg>
+      <permission-path-invalid>مجوز '{0}' نامعتبر است.</permission-path-invalid>
+  </msg>
+  </PermissionValidator>
+  <!--
+  ###################################################################################
+  # Repository  #
+  ###################################################################################
+  -->
+  <UIWorkspaceList>
+    <label>
+      <workspaceName>فضای کار:</workspaceName>
+      <rootNodeInfo>UIWorkspaceList</rootNodeInfo>
+      <rootNodePath>مسیر ریشه:</rootNodePath>
+    </label>
+  </UIWorkspaceList>
+  <!--
+  ###################################################################################
+  # Others  #
+  ###################################################################################
+  -->
+  <UIFormInputSetWithAction>
+    <msg>
+      <confirm-delete>آیا از حذف اطمینان دارید؟</confirm-delete>
+    </msg>
+  </UIFormInputSetWithAction>
+  <template>
+    <title>
+      <AddPermission>افزودن مجوز</AddPermission>
+    </title>
+  </template>
+  <metadataTypeTab>
+    <title>
+      <AddPermission>افزودن مجوز</AddPermission>
+    </title>
+  </metadataTypeTab>
+  <PermissionButton>
+    <title>
+      <AddPermission>افزودن مجوز</AddPermission>
+    </title>
+  </PermissionButton>
+  <nodeTypeDefinition>
+    <title>
+      <AddSuperType>افزودن ابر نوع</AddSuperType>
+    </title>
+  </nodeTypeDefinition>
+  <childNodeDefinition>
+    <title>
+      <AddRequiredType>افزودن نوع مورد نیاز</AddRequiredType>
+      <AddDefaultType>افزودن نوع پیش فرض</AddDefaultType>
+    </title>
+  </childNodeDefinition>
+  <propertyDefinition>
+    <title>
+      <AddConstraints>افزودن محدودیت</AddConstraints>
+    </title>
+  </propertyDefinition>
+  <authInputSet>
+    <title>
+      <Select>انتخاب</Select>
+    </title>
+  </authInputSet>
+  <!--
+  #grid with action
+  -->
+  <UIViewContainer>
+    <title>
+      <View>نما</View>
+      <EditInfo>ویرایش</EditInfo>
+      <Delete>حذف</Delete>
+    </title>
+<label>
+  <permission>{0} در {1}</permission>
+</label>
+  </UIViewContainer>
+  <ECMTemplate>
+    <title>
+      <EditInfo>ویرایش</EditInfo>
+      <Delete>حذف</Delete>
+    </title>
+  </ECMTemplate>
+  <step1>
+    <title>
+      <AddPermission>اضافه کردن مجوز</AddPermission>
+    </title>
+  </step1>
+  <step2>
+    <title>
+      <SelectContainer>انتخاب ظرف</SelectContainer>
+      <SelectStore>انتخاب محل ذخیره</SelectStore>
+    </title>
+  </step2>
+  <step3>
+    <title>
+      <SelectQueryHandler>انتخاب کنترل کننده پرس و جو</SelectQueryHandler>
+    </title>
+  </step3>
+  <UIDrivePermissionSelector>
+    <label>
+      <selectGroup>انتخاب گروه</selectGroup>
+      <selectUser>انتخاب کاربر</selectUser>
+      <selectMembership>انتخاب عضویت</selectMembership>
+    </label>
+  </UIDrivePermissionSelector>
+  
+  <UIPermissionSelector>
+    <label>
+      <selectGroup>انتخاب گروه</selectGroup>
+      <selectUser>انتخاب کاربر</selectUser>
+      <selectMembership>انتخاب عضویت</selectMembership>
+    </label>
+  </UIPermissionSelector>
+  
+  <UIAnyPermission>
+    <label>
+      <anyPermission>هر گونه مجوز</anyPermission>
+    </label>
+  </UIAnyPermission>
+  
+  <UIMDriveAnyPermission>
+    <label>
+      <anyPermission>هر گونه مجوز</anyPermission>
+    </label>
+  </UIMDriveAnyPermission>
+  
+  <UIQueriesAnyPermission>
+    <label>
+      <anyPermission>هر گونه مجوز</anyPermission>
+    </label>
+  </UIQueriesAnyPermission>
+  
+  <MetadataPermission>
+    <label>
+      <selectGroup>انتخاب گروه</selectGroup>
+    </label>
+  </MetadataPermission>  
+  <MetadataPermission>
+    <label>
+      <selectMembership>انتخاب عضویت</selectMembership>
+    </label>
+  </MetadataPermission>
+  <anyPermission>
+    <title>
+      <AddAnyPermission>تنظیم هر گونه مجوز</AddAnyPermission>
+    </title>
+  </anyPermission>
+  <!--
+  #########Since ECM 2.3##################
+  -->
+  <QueriesPermissionBrowse>
+    <label>
+      <selectGroup>انتخاب گروه</selectGroup>
+      <selectUser>انتخاب کاربر</selectUser>
+      <selectMembership>انتخاب عضویت</selectMembership>
+    </label>
+  </QueriesPermissionBrowse>
+  <!--
+  #########Since ECM 2.4##################
+  -->  
+  <UIViewFormTabPane>
+    <label>
+      <addSymLink>افزودن Symlink</addSymLink>
+    </label>
+  </UIViewFormTabPane>
+  <!--
+  #########Since ECM 2.5##################
+  --> 
+  
+  <UIDriveForm>
+<msg>
+  <permission-path-invalid>مجوز '{0}' نامعتبر است.</permission-path-invalid>
+  </msg>
+  </UIDriveForm>
+  
+  <UITaxonomyTreeMainForm>
+    <msg>
+      <homepath-emty>مسیر خانه مورد نیاز است.</homepath-emty>
+      <targetpath-emty>مسیر هدف مورد نیاز است.</targetpath-emty>
+    </msg>
+  </UITaxonomyTreeMainForm>
+  <UITaxonomyWorkingArea>
+  <msg>
+  <exist>این گره درخت وجود دارد.</exist>
+  </msg>
+  </UITaxonomyWorkingArea>
+
+  <PermissionTreeSelectUser>
+    <label>
+      <option>
+        <userName>#{word.userName}</userName>
+        <lastName>#{word.lastName}</lastName>
+        <firstName>#{word.firstName}</firstName>
+        <email>#{word.email}</email>
+      </option>
+      <group>گروه</group>
+      <searchUser>کاربر</searchUser>
+      <userName>#{word.userName}</userName>
+      <lastName>#{word.lastName}</lastName>
+      <firstName>#{word.firstName}</firstName>
+    <email>#{word.email}</email>
+      <action>#{word.action}</action>
+      <Add>#{word.Add}</Add>
+      <Close>#{word.Close}</Close>
+    </label>
+  </PermissionTreeSelectUser>
+  
+  <!--
+  #########Since ECM 2.6 ##################
+  -->   
+  <DriveInputSet>
+    <label>
+      <nt_folder>پوشه اسناد</nt_folder>
+      <nt_unstructured>پوشه محتوا</nt_unstructured>
+      <exo_cssFolder>پوشه CSS</exo_cssFolder>
+      <exo_jsFolder>پوشه جاوا اسکریپت</exo_jsFolder>
+      <exo_linkFolder>پوشه لینک</exo_linkFolder>
+      <exo_webFolder>پوشه محتویات وب</exo_webFolder>
+   </label>
+  </DriveInputSet>
+  <UIPermissionTreeInfo>
+  <msg>
+      <confirm-delete-permission>آیا از حذف این مجوز اطمینان دارید؟</confirm-delete-permission>
+      <no-permission-remove>شما نمی توانید مالک یا کاربر سیستم را حذف کنید.</no-permission-remove>  
+  </msg>
+  </UIPermissionTreeInfo>  
+  <UITaxonomyTreeMainForm>
+<msg>
+      <no-right-target-path>لطفاً مسیر اصلی دیگری را انتخاب کنید.</no-right-target-path>
+</msg>
+</UITaxonomyTreeMainForm>
+
+<UIECMAdminControlPanel>
+    <tab>
+      <label>        
+        <ManageUnLock>مدیریت قفل</ManageUnLock>
+      </label>
+    </tab>        
+</UIECMAdminControlPanel>
+<UIUnLockForm>
+    <label>
+      <name>مسیر گره</name>      
+      <permissions>مجوزها</permissions>
+      <PermissionButton>UI Unlock Form</PermissionButton>
+    </label>
+    <action>
+      <Save>#{word.save}</Save>
+      <Cancel>#{word.cancel}</Cancel>
+    </action>
+    <msg>
+      <permission-require>شما باید مجوز را انتخاب کنید.</permission-require>      
+    </msg>
+  </UIUnLockForm>
+  <UILockHolderList>
+  <header>
+  <name>کاربران یا گروه ها</name>
+  <action>اقدام</action>
+  </header>
+  <tooltip>
+<DeleteLock>حذف گروه</DeleteLock>
+  </tooltip>
+  <msg>
+  <can-not-delete-lock-holder>گروه {0} را نمی توان حذف کرد.</can-not-delete-lock-holder>
+  </msg>
+  </UILockHolderList>
+  <UILockNodeList>
+  <header>
+  <name>عنوان</name>
+  <hoderLock>مالک قفل</hoderLock>
+  <action>اقدام</action>
+  </header>
+  <tooltip>
+<UnLock>باز کردن قفل</UnLock>
+  </tooltip>
+  <msg>
+  <access-denied-exception>شما مجوز لازم برای دسترسی به گره با مسیر {0} را ندارید و یا این گره حذف شده است.</access-denied-exception>
+  </msg>
+  </UILockNodeList>
+  <EditUnLockForm>
+    <title>
+      <UIUnLockForm>مدیریت قفل</UIUnLockForm>
+    </title>
+  </EditUnLockForm>  
+  <UITabPane>
+    <action>
+      <Close>#{word.close}</Close>
+    </action>
+    <title>
+    <UILockHolderContainer>مدیریت قفل</UILockHolderContainer>
+    <UILockNodeList>گره قفل شده</UILockNodeList>
+    </title>
+  </UITabPane>
+  
+  <UIViewFormTabPane>
+    <action>
+      <AddTabForm>افزودن برگه</AddTabForm>
+      <AddTab>#{word.save}</AddTab>
+      <BackViewForm>برگشت</BackViewForm>
+    </action>
+  </UIViewFormTabPane>
+  
+ <UITemplateForm>
+<tab>
+<label>
+<defaultSkin>CSS</defaultSkin>
+</label>
+</tab>
+</UITemplateForm>
+ 
+  <UITabPane>
+    <title>
+      <UISkinTab>CSS</UISkinTab>
+    </title>
+  </UITabPane>
+  
+  <UISkinTab>
+    <header>
+      <name>نام</name>
+      <roles>نقش ها</roles>
+      <baseVersion>نسخه</baseVersion>
+      <action>اقدامات</action>
+    </header>
+    <msg>
+      <undeletable>شما نمی توانید '{0}' را حذف کنید زیرا پیش فرض است.</undeletable>
+      <confirm-delete>آیا از حذف این پوسته اطمینان دارید؟</confirm-delete>
+    </msg>
+    <action>
+      <title>
+        <Edit>ویرایش</Edit>
+        <Delete>حذف</Delete>
+      </title>
+    </action>
+  </UISkinTab>
+  
+  <SkinForm>
+    <label>
+      <UITemplateContent>SkinForm</UITemplateContent>
+      <UIPopupWindow>مجوز پوسته</UIPopupWindow>
+      <selectVersion>نسخه ها</selectVersion>
+      <content>محتوا:</content>
+      <name>نام:</name>
+      <isDocumentTemplate>قالب سند است</isDocumentTemplate>
+      <viewPermission>مجوز:</viewPermission>
+      <enableVersion>فعال سازی نسخه بندی</enableVersion>
+    </label>
+    <title>افزودن/ویرایش پوسته</title>
+  </SkinForm>
+
+ <UITagManager>
+   <action>
+     <title>
+       <RemoveStyle>حذف</RemoveStyle>
+         <AddStyle>افزودن استیل</AddStyle>
+     </title>
+   </action>
+   <msg>
+     <confirm-delete>آیا از حذف tag این استیل اطمینان دارید؟</confirm-delete>
+   </msg>
+ </UITagManager>
+
+<UITaxonomyTreeContainer>
+<action>
+<Cancel>#{word.close}</Cancel>
+</action>
+</UITaxonomyTreeContainer>
+<UITaxonomyTreeMainForm>
+<action>
+<NextViewPermission>بعدی</NextViewPermission>
+<Reset>Reset</Reset>
+</action>
+</UITaxonomyTreeMainForm>
+
+<UIPermissionTreeForm>
+<action>
+<Save>Save</Save>
+<Reset>Reset</Reset>
+<NextAddAction>بعدی</NextAddAction>
+<Previous>قبلی</Previous>
+</action>
+</UIPermissionTreeForm>
+
+<UIActionForm>
+<action>
+<PreviousViewPermission>قبلی</PreviousViewPermission>
+<NextViewTree>بعدی</NextViewTree>
+</action>
+  <msg>
+    <xss-vulnerability-character>فیلد '{0}' شامل کاراکترهای آسیب پذیری XSS است</xss-vulnerability-character>
+<xss-vulnerability-character-wo-label>ورودی شما ممکن است حاوی کاراکترهای آسیب پذیری XSS باشد</xss-vulnerability-character-wo-label>
+  </msg>
+</UIActionForm>
+
+<UITaxonomyTreeWorkingArea>
+<action>
+<Previous>قبلی</Previous>
+</action>
+</UITaxonomyTreeWorkingArea>
+
+  <UITabPane>
+    <title>
+      <UITagManager>مديريت برچسب</UITagManager>
+      <UITagPermissionManager>مدیر مجوز برچسب</UITagPermissionManager>
+    </title>
+  </UITabPane>
+  
+  <UITagPermissionInfo>
+    <header>
+      <usersOrGroups>کاربر یا گروه</usersOrGroups>
+      <action>اقدام</action>
+    </header>
+    <action>
+      <title>
+        <Delete>حذف</Delete>
+      </title>
+    </action>
+    <msg>
+      <confirm-delete-permission>آیا از حذف این مجوز اطمینان دارید؟</confirm-delete-permission>
+    </msg>   
+  </UITagPermissionInfo>
+  <UITagPermissionForm>
+    <title>افزودن مجوز</title>
+    <action>
+      <Save>#{word.save}</Save>
+      <Add>افزودن</Add>
+    </action>
+    <label>
+      <userOrGroup>عضویت ها:</userOrGroup>
+    </label>
+    <msg>
+      <userOrGroup-alreadyExists>این عضویت در حال حاضر وجود دارد. لطفاً عضویت دیگری را انتخاب کنید.</userOrGroup-alreadyExists>
+    </msg>    
+  </UITagPermissionForm>
+  
+  <UIGroupMemberSelector>
+    <label>
+      <selectGroup>انتخاب گروه</selectGroup>
+      <selectMembership>انتخاب عضویت</selectMembership>
+    </label>
+  </UIGroupMemberSelector>
+  
+  <UIFolksonomyManager>
+  <msg>
+      <confirm-delete>آیا از حذف این استیل اطمینان دارید؟</confirm-delete>
+  </msg>
+    <action>
+      <title>
+        <AddStyle>افزودن استیل</AddStyle>
+      </title>
+    </action>
+  </UIFolksonomyManager>  
+<UIActionForm>
+  <title>
+  <ShowComponent>باز کردن پنجره</ShowComponent>
+  <removeReference>حذف</removeReference>
+  </title>
+  </UIActionForm> 
+  <NodeTypeNameValidator>
+    <msg>
+      <Invalid-char>کاراکتر نامعتبر وجود دارد. لطفاً مقدار دیگری وارد کنید.</Invalid-char>
+      <empty-input>مقدار فیلد خالی می باشد.</empty-input>
+    </msg>
+  </NodeTypeNameValidator>
+  <UIActionForm>
+    <msg>
+      <constraint-violation-exception>گره '{0}' را نمی توان به "{1}" در فضای کاری '{2}' اضافه کرد.  در مورد مجوزها و یا محدودیت ها مشکلی وجود دارد.</constraint-violation-exception>
+    </msg>
+  </UIActionForm>
+  
+  <UIWorkspaceWizard>
+    <msg>
+      <name-not-allowed>نام ممنوع</name-not-allowed>
+    </msg>
+  </UIWorkspaceWizard>
+  <UIRepositoryForm>
+    <msg>
+      <not-complete-repository>The repository is being created. You need to wait a few minutes before creating another one.</not-complete-repository>
+    </msg>
+  </UIRepositoryForm>
+  
+  <UIViewFormTabPane>
+  <label>
+  <addCategory>افزودن دسته</addCategory>
+          <addLocalizationLink>اضافه کردن ترجمه</addLocalizationLink>
+  </label>
+  </UIViewFormTabPane>
+
+<UIDriveForm>
+<label>
+<allowNodeTypesOnTree>اجازه قرار دادن نوع گره در درخت سمت چپ:</allowNodeTypesOnTree>
+</label>
+</UIDriveForm>
+<DriveInputSet>
+<title>
+<RemovePermission>Remove Permission</RemovePermission>
+<ChooseNodeType>انتخاب نوع گره</ChooseNodeType>
+<RemoveNodeType>حذف</RemoveNodeType>
+</title>
+</DriveInputSet>
+<PopupNodeTypeSelector>
+<title>
+<UINodeTypeSelector>انتخاب نوع گره</UINodeTypeSelector>
+<PopupNodeTypeSelector>انتخاب نوع گره</PopupNodeTypeSelector>
+</title>
+</PopupNodeTypeSelector>
+  <UINodeTypeSelector>
+    <label>
+      <selectedAllNodeTypes>انتخاب تمام انواع گره</selectedAllNodeTypes>
+    </label>
+  </UINodeTypeSelector>
+  <UIScriptForm>
+    <msg>
+      <PathNotFoundException>اسکریپت در پوشه '{0}' وجود دارد.</PathNotFoundException>      
+    </msg>
+  </UIScriptForm>
+ <UINodeTypeList>
+   <msg>
+   <no-list>هیچ نوع گره مطابق با جستجوی شما وجود ندارد.</no-list>
+   </msg>
+ </UINodeTypeList>
+  <UIActionForm>
+    <msg>
+      <canotChangeActionId>شما می توانید شناسه اقدام را تغییر دهید.</canotChangeActionId>
+    </msg>
+  </UIActionForm>
+  <PopupComponent>
+    <title>
+      <UINodeTypeSelector>انتخابگر نوع گره</UINodeTypeSelector>
+    </title>
+  </PopupComponent>
+  <UIPageIterator>
+    <label>
+      <maxPageSize>حداکثر اندازه صفحه</maxPageSize>
+    </label>
+  </UIPageIterator>
+  <UILockNodeList>
+    <msg>
+      <can-not-unlock-node>شما مجوز لازم برای باز کردن این گره را ندارید. لطفا برای گرفتن مجوز درست با مدیر سیستم تماس بگیرید.</can-not-unlock-node>
+    </msg>
+ </UILockNodeList>
+</bundle>

@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<bundle>
+  <UIViewFormTabPane>
+  <label>
+          <publicationRequestApproval>انتشار &gt; تایید درخواست</publicationRequestApproval>
+          <publicationApproveContent>انتشار &gt; تایید محتوای</publicationApproveContent>
+          <publicationPublish>انتشار &gt; نشر</publicationPublish>
+  </label>
+  </UIViewFormTabPane>
+</bundle>

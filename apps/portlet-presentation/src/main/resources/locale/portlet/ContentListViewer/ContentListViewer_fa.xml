@@ -1,0 +1,189 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<bundle>
+  <UICLVContainer>
+    <label>
+      <Preferences>تنظیمات</Preferences>
+      <AddContent>افزودن محتوا</AddContent>
+      <ManageContent>مدیریت محتوا</ManageContent>
+    </label>
+    <msg>
+      <non-contents>با عرض پوزش، هیچ مقاله ای در دسترس نیست.</non-contents>
+      <item-not-found>موردی یافت نشد.</item-not-found>
+      <no-permission>شما مجوز لازم برای دسترسی به این بخش را ندارید.</no-permission>
+      <category-back>رفتن به قبلی</category-back>
+    </msg>
+  </UICLVContainer>
+  <UIViewerManagementPopupWindow>
+    <title>
+      <UICLVConfig>تنظیمات فهرست مطالب</UICLVConfig>
+    </title>
+  </UIViewerManagementPopupWindow>
+  <UICLVConfig>
+    <label>
+      <Title>تنظیمات فهرست مطالب</Title>
+      <ContentSelectionBlock>انتخاب محتوا</ContentSelectionBlock>
+      <UICLVConfigDisplayModeFormRadioBoxInput>حالت</UICLVConfigDisplayModeFormRadioBoxInput>
+      <UICLVConfigItemPathFormInputSet>مسیر پوشه</UICLVConfigItemPathFormInputSet>
+    <UICLVConfigItemPathFormStringInput>مسیر پوشه</UICLVConfigItemPathFormStringInput>
+      <UICLVConfigOrderByFormSelectBox>مرتب کردن بر اساس</UICLVConfigOrderByFormSelectBox>
+      <option>
+        <exo:title>عنوان</exo:title>
+        <exo:dateCreated>تاریخ ایجاد</exo:dateCreated>
+        <exo:lastModifiedDate>تاریخ تغییر</exo:lastModifiedDate>
+        <publication:liveDate>زمان انتشار</publication:liveDate>
+        <exo:startEvent>تاریخ رویداد</exo:startEvent>
+        <exo:index>اندیس</exo:index>
+        <DESC>نزولی</DESC>
+        <ASC>صعودی</ASC>
+      </option>
+      <DisplaySettingBlock>تنظیمات نمایش</DisplaySettingBlock>
+      <UICLVConfigHeaderFormStringInput>سربرگ</UICLVConfigHeaderFormStringInput>
+      <UICLVConfigDisplayTemplateFormSelectBox>قالب</UICLVConfigDisplayTemplateFormSelectBox>
+      <UICLVConfigPaginatorTemplateFormSelectBox>صفحه بند</UICLVConfigPaginatorTemplateFormSelectBox>
+      <UICLVConfigItemsPerPageFormStringInput>مورد در هر صفحه</UICLVConfigItemsPerPageFormStringInput>
+      <UICLVConfigShowIllustrationFormCheckboxInput>Show Image</UICLVConfigShowIllustrationFormCheckboxInput>
+      <UICLVConfigShowSummaryFormCheckboxInput>Show Summary</UICLVConfigShowSummaryFormCheckboxInput>
+      <UICLVConfigShowHeaderFormCheckboxInput>Show Header</UICLVConfigShowHeaderFormCheckboxInput>
+      <UICLVConfigShowRefreshFormCheckboxInput>Show Refresh</UICLVConfigShowRefreshFormCheckboxInput>
+      <UICLVConfigShowTitleFormCheckboxInput>نمایش عنوان</UICLVConfigShowTitleFormCheckboxInput>
+      <UICLVConfigShowDateCreatedFormCheckboxInput>نمایش تاریخ</UICLVConfigShowDateCreatedFormCheckboxInput>
+      <UICLVConfigShowLinkFormCheckboxInput>Show Link</UICLVConfigShowLinkFormCheckboxInput>
+      <UICLVConfigShowReadmoreFormCheckboxInput>Show More Links</UICLVConfigShowReadmoreFormCheckboxInput>
+      <UICLVConfigAllowDynamicUrlStringInput>Allow Dynamic URL</UICLVConfigAllowDynamicUrlStringInput>
+      <UICLVConfigShowRssLinkFormCheckboxInput>Show RSS Link</UICLVConfigShowRssLinkFormCheckboxInput>
+      <UICLVConfigShowAutomaticDetectionCheckboxInput>Automatic Detection</UICLVConfigShowAutomaticDetectionCheckboxInput>
+      <AdvancedBlock>پیشرفته</AdvancedBlock>
+      <UICLVConfigDynamicNavigationLabel>ناوبری پویا</UICLVConfigDynamicNavigationLabel>
+      <UICLVConfigContextualFolderRadioBoxInput>Contextual Folder</UICLVConfigContextualFolderRadioBoxInput>
+      <UICLVConfigShowCLVByStringInput>توسط</UICLVConfigShowCLVByStringInput>
+      <UICLVConfigshowSCVWithStringInput>با</UICLVConfigshowSCVWithStringInput>
+      <UICLVConfigTargetPageFormInputSet>نمایش در صفحه</UICLVConfigTargetPageFormInputSet>
+      <content-not-found>Content not found.</content-not-found>
+      <ContentPath>مسیر محتوا</ContentPath>
+      <Up>بالا</Up>
+      <Down>پایین</Down>
+      <UICLVConfigCacheManagementLabel>قابل مشاهده بودن محتوا</UICLVConfigCacheManagementLabel>
+      <UICLVContentByQueryLabel>Content by Query</UICLVContentByQueryLabel>
+      <UICLVConfigWorkspaceFormSelectBox>فضای کار</UICLVConfigWorkspaceFormSelectBox>
+      <UICLVConfigContentByQueryTextArea>by query</UICLVConfigContentByQueryTextArea>
+      <UICLVConfigCacheEnableRadioBoxInput>Share content between users</UICLVConfigCacheEnableRadioBoxInput>
+    </label>
+    <help>
+      <ModeSelectionHelp>دو حالت برای نمایش محتوا وجود دارد. "بر اساس پوشه" که همه محتوای موجود در پوشه/دسته انتخاب شده را نمایش می دهد. "بر اساس محتوا" که با انتخاب آن می توانید محتوای دلخواه خود را برای نماش برگزینید.</ModeSelectionHelp>
+      <FolderPathHelp>محتوای دلخواه خود را برگزینید. در صورت فعال نمودن ناوبری پویا لیست محتوای پیش فرض جایگزین خواهد شد (حالت پیشرفته زیر را ببینید).</FolderPathHelp>
+      <HeaderOptionHelp>نمایش سربرگ در بالای لیست محتوا. در صورت فعال نمودن تشخیص خودکار، سیستم بر اساس انتخاب فعلی سربرگ را خواهد یافت.</HeaderOptionHelp>
+      <GeneralOptionHelp>Select the graphical elements you want to show in your list. Note that, depending on your selected template, some elements may not be available.</GeneralOptionHelp>
+      <ContextualHelp>گزینه ناوبری پویا را فعال می کند. دیگران می توانند محتوا را به صورت پویا و بر اساس یک آدرس تغییر دهند.</ContextualHelp>
+      <ParameterHelp>این پارامتر در صورت فعال بودن ناوبری پویا به منظور دسترسی به محتوا مورد استفاده قرار می گیرد.</ParameterHelp>
+      <ShowDetailInPageHelp>کلیک نمودن بر روی محتوا، کاربر را به صفحه جزئیات منتقل می کند. برای نمایش محتوا نیازمند یک پورتلت "محتوا بر اساس آدرس" می باشید. ضمنا حالت ناوبری پویا باید بر روی صفحه مورد نظر فعال باشد.</ShowDetailInPageHelp>
+      <DetailParameterHelp>این پارامتر مسیر محتوا را در لینکی که به صفحه جزئیات محتوا منتهی می شود در خود نگهداری می کند. مقدار این پارامتر باید با مقدار پارامتری که در پورتلت "محتوا بر اساس آدرس" صفحه مورد نظر وجود دارد منطبق باشد.</DetailParameterHelp>
+      <ContentByQueryHelp>شما می توانید برای دریافت محتوا به صورت پویا یک SQL Query تنظیم نمایید. پارامترهای زیر مجاز می باشند:  ${user}، ${lang} و یا هر پارامتری که به صورت  ${PARAM} باشد.</ContentByQueryHelp>
+      <ContentsVisibilityHelp>"محدودیت بر اساس تایید اعتبار" محتوا را بر اساس نتیجه تایید اعتبار فیلتر می کند. اگر وارد حساب کاربری خود نشده باشید، فقط محتوای عمومی را مشاهده خواهید کرد. در صورتیکه وارد شده باشید، تمامی محتوای قابل مشاهده توسط کاربران Intranet را خواهید دید (که برای همه به اشتراک گذاشته شده اند). "محدودیت بر اساس نقش" بدین معنی است که شما محتوا را بر اساس مجوزهای خود مشاهده خواهید کرد. در بیشتر موارد، استفاده از این گزینه به دلیل تاثیر منفی در کارایی و سرعت پاسخگویی سیستم پیشنهاد نمی شود.</ContentsVisibilityHelp>
+    </help>
+    <action>
+      <Save>#{word.save}</Save>
+      <Cancel>#{word.cancel}</Cancel>
+      <delete>حذف</delete>
+    </action>
+    <msg>
+      <not-valid-path>The Folder Path is invalid.</not-valid-path>
+      <saving-success>The portlet's preferences are saved.</saving-success>
+    </msg>
+    <tab>
+      <label>
+        <clvContentTab>انتخاب محتوا</clvContentTab>
+        <clvDisplayTab>تنظیمات نمایش</clvDisplayTab>
+        <clvAdvancedTab>پیشرفته</clvAdvancedTab>
+      </label>
+    </tab>
+  </UICLVConfig>
+  <UICLVConfigDisplayModeFormRadioBoxInput>
+    <label>
+      <AutoViewerMode>By Folder</AutoViewerMode>
+      <ManualViewerMode>By Content</ManualViewerMode>
+    </label>
+  </UICLVConfigDisplayModeFormRadioBoxInput>
+  <UICLVConfigItemPathFormInputSet>
+    <title>
+      <SelectFolderPath>مسیر پوشه را انتخاب کنید</SelectFolderPath>
+      <AddPath>افزودن مسیر</AddPath>
+    </title>
+  </UICLVConfigItemPathFormInputSet>
+  <FolderPathSelectorPopupWindow>
+    <title>
+      <UIContentSelectorFolder>مرورگر پوشه</UIContentSelectorFolder>
+    </title>
+  </FolderPathSelectorPopupWindow>
+  <UICLVConfigOrderTypeFormSelectBox>
+    <label>
+      <option>
+        <OrderDesc>نزولی</OrderDesc>
+        <OrderAsc>صعودی</OrderAsc>
+      </option>
+    </label>
+  </UICLVConfigOrderTypeFormSelectBox>
+  <UICLVConfigTargetPageFormInputSet>
+    <title>
+      <SelectBasePath>انتخاب مسیر پایه</SelectBasePath>
+      <SelectTargetPage>انتخاب مسیر پایه</SelectTargetPage>
+    </title>
+  </UICLVConfigTargetPageFormInputSet>
+  <UICLVBasePathPopupWindow>
+    <title>
+      <UIPageSelector>انتخاب صفحه</UIPageSelector>
+    </title>
+  </UICLVBasePathPopupWindow>
+  <UICLVPresentation>
+    <msg>
+      <confirm-delete>آیا از حذف این محتوا مطمئن هستید؟</confirm-delete>
+      <delete-content-successfully>محتوا با موفقیت حذف شد.</delete-content-successfully>
+    </msg>
+    <label>
+      <readmore>Read more</readmore>
+      <rssFeed>RSS Feed</rssFeed>
+    </label>
+    <action>
+      <refresh>تازه سازی</refresh>
+      <edit>ویرایش در مرورگر محتوا</edit>
+      <delete>حذف</delete>
+      <publish>انتشار</publish>
+    </action>
+    <label>
+      <draft>پیش‌نویس</draft>
+    </label>
+  </UICLVPresentation>
+  <CorrectContentSelectorPopupWindow>
+    <title>
+      <UIContentSelectorMulti>Multiple Content Selector Pane</UIContentSelectorMulti>
+    </title>
+  </CorrectContentSelectorPopupWindow>
+  <UIContentDialogFormPopupWindow>
+    <title>
+      <UIContentDialogForm>Web Content Form</UIContentDialogForm>
+    </title>
+  </UIContentDialogFormPopupWindow>
+  <UICLVConfigContextualFolderRadioBoxInput>
+    <label>
+      <contextualEnable>فعال</contextualEnable>
+      <contextualDisable>غیر فعال</contextualDisable>
+    </label>
+  </UICLVConfigContextualFolderRadioBoxInput>
+  <PublicationStates>
+    <archived>آرشیو شده</archived>
+    <obsolete>منسوخ</obsolete>
+    <unpublished>منتشر نشده</unpublished>
+    <enrolled>ثبت شده</enrolled>
+    <draft>پیش‌ نویس</draft>
+    <pending>در انتظار</pending>
+    <approved>تایید شده</approved>
+    <inreview>در حال بررسی</inreview>
+    <staged>آماده انتشار</staged>
+    <published>منتشرشده</published>
+  </PublicationStates>
+  <UICLVConfigCacheEnableRadioBoxInput>
+    <label>
+      <ENABLE>محدودیت بر اساس تایید اعتبار</ENABLE>
+      <DISABLE>Restricted by User Roles</DISABLE>
+    </label>
+  </UICLVConfigCacheEnableRadioBoxInput>
+</bundle>
