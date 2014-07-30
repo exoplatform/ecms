@@ -87,7 +87,7 @@
 -->
   <UITaxonomyTreeMainForm>
     <action>
-      <Reset>تنظیم مجدد</Reset>
+      <Reset>Reset</Reset>
     </action>
     <msg>
       <name-not-allowed>نام ممنوع</name-not-allowed>
@@ -712,7 +712,7 @@
     </label>
     <title>
       <AddPermission>اضافه کردن مجوز</AddPermission>
-      <RemovePermission>حذف مجوز</RemovePermission>
+      <RemovePermission>Remove Permission</RemovePermission>
       <AddIcon>افزودن آیکن</AddIcon>
       <AddPath>افزودن مسیر</AddPath>
     </title>
@@ -1381,7 +1381,7 @@
     <action>
       <Close>#{word.close}</Close>
       <Save>Save</Save>
-      <Reset>تنظیم مجدد</Reset>
+      <Reset>Reset</Reset>
     </action>
     <msg>
       <checkbox-require>لطفا حداقل یک مجوز را انتخاب کنید.</checkbox-require>
