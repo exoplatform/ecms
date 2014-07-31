@@ -3529,26 +3529,31 @@ public abstract class JCRLocalCloudDrive extends CloudDrive {
   }
 
   protected JCRLocalCloudFile readFile(Node fileNode) throws RepositoryException {
-    String fileURL = fileNode.getProperty("ecd:url").getString();
-    String previewURL;
+    String link = fileNode.getProperty("ecd:url").getString();
+    String previewLink;
     try {
-      previewURL = previewLink(fileNode.getProperty("ecd:previewUrl").getString());
+      previewLink = previewLink(fileNode.getProperty("ecd:previewUrl").getString());
     } catch (PathNotFoundException e) {
-      previewURL = null;
+      previewLink = null;
     }
-    String downloadURL;
+    String thumbnailLink;
     try {
-      downloadURL = fileNode.getProperty("ecd:downloadUrl").getString();
+      thumbnailLink = fileNode.getProperty("ecd:thumbnailUrl").getString();
     } catch (PathNotFoundException e) {
-      downloadURL = null;
+      try {
+        // prior 1.1.0-RC2 we have used ecd:downloadUrl for thumbnails
+        thumbnailLink = fileNode.getProperty("ecd:downloadUrl").getString();
+      } catch (PathNotFoundException e1) {
+        thumbnailLink = null;
+      }
     }
     return new JCRLocalCloudFile(fileNode.getPath(),
                                  fileNode.getProperty("ecd:id").getString(),
                                  fileNode.getProperty("exo:title").getString(),
-                                 fileURL,
-                                 editLink(fileURL),
-                                 previewURL,
-                                 downloadURL,
+                                 link,
+                                 editLink(link),
+                                 previewLink,
+                                 thumbnailLink,
                                  fileNode.getProperty("ecd:type").getString(),
                                  fileNode.getProperty("ecd:lastUser").getString(),
                                  fileNode.getProperty("ecd:author").getString(),
@@ -3566,7 +3571,7 @@ public abstract class JCRLocalCloudDrive extends CloudDrive {
    * @param type
    * @param link
    * @param previewLink, optional, can be null
-   * @param downloadLink, optional, can be null
+   * @param thumbnailLink, optional, can be null
    * @param author
    * @param lastUser
    * @param created
@@ -3579,7 +3584,7 @@ public abstract class JCRLocalCloudDrive extends CloudDrive {
                           String type,
                           String link,
                           String previewLink,
-                          String downloadLink,
+                          String thumbnailLink,
                           String author,
                           String lastUser,
                           Calendar created,
@@ -3603,7 +3608,10 @@ public abstract class JCRLocalCloudDrive extends CloudDrive {
 
     // optional properties, if null, ones will be removed by JCR core
     localNode.setProperty("ecd:previewUrl", previewLink);
-    localNode.setProperty("ecd:downloadUrl", downloadLink);
+
+    // since 1.1.0-RC2 we use dedicated ecd:thumbnailUrl
+    localNode.setProperty("ecd:downloadUrl", (String) null);
+    localNode.setProperty("ecd:thumbnailUrl", thumbnailLink);
   }
 
   /**
@@ -3902,7 +3910,6 @@ public abstract class JCRLocalCloudDrive extends CloudDrive {
     } while (true);
   }
 
-
   /**
    * Return provider specific link for a file preview. By default this method returns the same as given link.
    * Actual connector implementation may override its logic.
@@ -3918,7 +3925,7 @@ public abstract class JCRLocalCloudDrive extends CloudDrive {
    * Return provider specific link for file editing. By default this method returns the same as given link.
    * Actual connector implementation may override its logic.
    * 
-   * @param link {@link String} existing link to a cloud file or <code>null</code> if editing not supported 
+   * @param link {@link String} existing link to a cloud file or <code>null</code> if editing not supported
    * @return String with a link should be used for file editing.
    */
   protected String editLink(String link) {
