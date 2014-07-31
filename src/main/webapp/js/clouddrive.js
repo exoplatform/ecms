@@ -1142,7 +1142,7 @@
 						a.css("font-weight", "normal");
 
 						var iframe = viewer.find("iframe");
-						if (file.editLink && file.editLink != file.previewLink) {
+						if (file.editLink && file.previewLink && file.editLink != file.previewLink) {
 							// init Edit/View mode
 							iframe.attr("src", file.previewLink);
 							vswitch.find("a").click(function() {
