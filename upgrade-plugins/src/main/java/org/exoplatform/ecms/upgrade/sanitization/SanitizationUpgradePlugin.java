@@ -43,6 +43,7 @@ import org.exoplatform.services.cms.actions.ActionServiceContainer;
 import org.exoplatform.services.cms.impl.DMSConfiguration;
 import org.exoplatform.services.cms.scripts.ScriptService;
 import org.exoplatform.services.cms.views.ManageViewService;
+import org.exoplatform.services.ecm.publication.PublicationService;
 import org.exoplatform.services.jcr.RepositoryService;
 import org.exoplatform.services.jcr.core.nodetype.ExtendedNodeTypeManager;
 import org.exoplatform.services.jcr.core.nodetype.NodeTypeValue;
@@ -51,7 +52,10 @@ import org.exoplatform.services.jcr.ext.common.SessionProvider;
 import org.exoplatform.services.log.ExoLogger;
 import org.exoplatform.services.log.Log;
 import org.exoplatform.services.wcm.core.NodetypeConstant;
+import org.exoplatform.services.wcm.core.WebSchemaConfigService;
+import org.exoplatform.services.wcm.publication.PublicationDefaultStates;
 import org.exoplatform.services.wcm.utils.WCMCoreUtils;
+import org.exoplatform.services.wcm.webcontent.WebContentSchemaHandler;
 
 /**
  * This upgrade plugin will be used to migrate all the old data to the new one which related to
@@ -62,14 +66,16 @@ public class SanitizationUpgradePlugin extends UpgradeProductPlugin {
   private DMSConfiguration dmsConfiguration_;
   private RepositoryService repoService_;
   private ManageViewService viewService_;
+  private PublicationService  publicationService_;
   private static final Log LOG = ExoLogger.getLogger(SanitizationUpgradePlugin.class.getName());
   
   public SanitizationUpgradePlugin(RepositoryService repoService, DMSConfiguration dmsConfiguration, 
-          ManageViewService viewService, InitParams initParams) {
+          ManageViewService viewService, PublicationService publicationService, InitParams initParams) {
     super(initParams);
     repoService_ = repoService;
     dmsConfiguration_ = dmsConfiguration;
     viewService_ = viewService;
+    publicationService_ = publicationService;
   }
 
   @Override
@@ -377,6 +383,14 @@ public class SanitizationUpgradePlugin extends UpgradeProductPlugin {
                                                                      new String[] {"/sites content/live/","/sites%20content/live/" },
                                                                      new String[] { "/sites/","/sites/" });
                   content.setProperty("jcr:data", newData);
+                  WebSchemaConfigService schemaConfigService = WCMCoreUtils.getService(WebSchemaConfigService.class);
+                  WebContentSchemaHandler webContentSchemaHandler = schemaConfigService.
+                      getWebSchemaHandlerByType(WebContentSchemaHandler.class);
+                  if(webContentSchemaHandler.isWebcontentChildNode(node)){
+                    republishNode(node.getParent().getParent());
+                  } else {
+                    republishNode(node);
+                  }                
                   session.save();
                 }
               }
@@ -392,6 +406,16 @@ public class SanitizationUpgradePlugin extends UpgradeProductPlugin {
       if (LOG.isErrorEnabled()) {
         LOG.error("An unexpected error occurs when migrating JCR Data Contents: ",e);
       }
+    }
+  }
+  
+  /* Republish node */
+  private void republishNode(Node checkedNode) throws Exception {
+    if (publicationService_.isNodeEnrolledInLifecycle(checkedNode) && PublicationDefaultStates.PUBLISHED.equalsIgnoreCase(publicationService_.getCurrentState(checkedNode))){
+      HashMap<String, String> context = new HashMap<String, String>();
+      LOG.info("=====Republish '"+ checkedNode.getPath()+ "' =====");
+      publicationService_.changeState(checkedNode,PublicationDefaultStates.DRAFT,context);
+      publicationService_.changeState(checkedNode,PublicationDefaultStates.PUBLISHED,context);
     }
   }
 
