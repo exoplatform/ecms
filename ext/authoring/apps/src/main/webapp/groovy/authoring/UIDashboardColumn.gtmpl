@@ -22,7 +22,9 @@
       if (node.hasProperty("exo:title")) name = node.getProperty("exo:title").getString();
       name = ContentReader.getEscapeHtmlContent(name);
     %>
-      <div class="element"><a href="<%= uicomponent.event("ShowDocument", path) %>" rel="tooltip" data-placement="bottom" title="<%=path%>"><%=name%></a><br/></div>
+      <div class="element clearfix">
+      <i class="uiIconEcmsDottedArrow pull-left"></i>
+      <a href="<%= uicomponent.event("ShowDocument", path) %>" rel="tooltip" data-placement="bottom" title="<%=path%>"><%=name%></a></div>
     <%
     }
     %>
