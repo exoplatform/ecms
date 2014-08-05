@@ -20,9 +20,9 @@ package org.exoplatform.clouddrive.ecms.clipboard;
 
 import org.exoplatform.clouddrive.ecms.symlink.CloudFileSymlink;
 import org.exoplatform.clouddrive.ecms.symlink.CloudFileSymlinkException;
-import org.exoplatform.ecm.jcr.model.ClipboardCommand;
 import org.exoplatform.ecm.webui.component.explorer.UIJCRExplorer;
 import org.exoplatform.ecm.webui.component.explorer.sidebar.UIClipboard;
+import org.exoplatform.services.cms.clipboard.jcr.model.ClipboardCommand;
 import org.exoplatform.services.log.ExoLogger;
 import org.exoplatform.services.log.Log;
 import org.exoplatform.webui.config.annotation.ComponentConfig;
