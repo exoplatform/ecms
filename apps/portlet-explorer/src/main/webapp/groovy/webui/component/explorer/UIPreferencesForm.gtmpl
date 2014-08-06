@@ -31,7 +31,7 @@
 			<%String advanceLink = uicomponent.event("Advance");%>
 			<% if (!uicomponent.isAdvancePreferences()) { %>
 			<div class="control-group">
-				<a class="advancePreferences" onclick="$advanceLink" href="javascript:window.scroll(0,0);"><%=_ctx.appRes("UIPreferencesForm.label.Advance")%> <i class="uiIconArrowDown"></i></a>
+				<a class="advancePreferences" onclick="$advanceLink" href="javascript:window.scroll(0,0);"><%=_ctx.appRes("UIPreferencesForm.label.Advance")%> <i class="uiIconArrowDown uiIconLightGray"></i></a>
 			</div>
 			<% } %>
 			<% 
@@ -40,7 +40,7 @@
 			  
 			<div class="advanceContent" style="$advancedLinkDisplay">
 				<div class="control-group">
-					<a class="advancePreferences" href="$advanceLink"><%=_ctx.appRes("UIPreferencesForm.label.Advance")%> <i class="uiIconArrowUp"></i></a></h5>
+					<a class="advancePreferences" href="$advanceLink"><%=_ctx.appRes("UIPreferencesForm.label.Advance")%> <i class="uiIconArrowUp uiIconLightGray"></i></a></h5>
 				</div>
 				<div class="row-fluid">
 					<div class="span6"><label class="control-label"><%=_ctx.appRes("UIPreferencesForm.label.showNonDocument")%></label><% uiform.renderField(FIELD_SHOWNONDOCUMENT) %></div>

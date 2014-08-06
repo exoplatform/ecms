@@ -79,9 +79,9 @@
 	                  String title = _ctx.appRes(uicomponent.getName() + ".title." + action);
 	                  if(uicomponent.isUseAjax()){
 	             %>             
-	                <a class="actionIcon" onclick="<%=uicomponent.event(action, beanId)%>" rel="tooltip" data-placement="bottom" title = "$title" ><i class="uiIcon${action}"></i></a>
+	                <a class="actionIcon" onclick="<%=uicomponent.event(action, beanId)%>" rel="tooltip" data-placement="bottom" title = "$title" ><i class="uiIcon${action} uiIconLightGray"></i></a>
 	              <%  }else{ %>
-	                <a class="actionIcon" onclick="<%=uicomponent.url(action, beanId)%>" rel="tooltip" data-placement="bottom" title = "$title" ><i class="uiIcon${action}"></i></a>
+	                <a class="actionIcon" onclick="<%=uicomponent.url(action, beanId)%>" rel="tooltip" data-placement="bottom" title = "$title" ><i class="uiIcon${action} uiIconLightGray"></i></a>
 	              <%  } %> 
 	              <%} %> 
 	            <%}%>      

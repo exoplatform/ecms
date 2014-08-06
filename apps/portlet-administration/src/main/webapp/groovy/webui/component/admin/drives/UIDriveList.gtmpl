@@ -67,8 +67,8 @@
             <td><div class="text" rel="tooltip" data-placement="bottom" title="$drive.permissions"><%=bufPermission.toString()%></div></td>
             <td><div class="text" rel="tooltip" data-placement="bottom" title="<%=uicomponent.getDriveViews(drive)%>"><%=views%></div></td>
 	          <td class="center">
-	            <a class="actionIcon" onclick="<%=uicomponent.event("EditInfo", Utils.formatNodeName(drive.getName()))%>" rel="tooltip" data-placement="bottom" title="<%=_ctx.appRes("UIDriveList.tooltip.EditInfo")%>" ><i class="uiIconEditInfo"></i></a>
-					    <a class="actionIcon" onclick="<%=uicomponent.event("Delete", Utils.formatNodeName(drive.getName()))%>" rel="tooltip" data-placement="bottom" title="<%=_ctx.appRes("UIDriveList.tooltip.Delete")%>" ><i class="uiIconDelete"></i></a>
+	            <a class="actionIcon" onclick="<%=uicomponent.event("EditInfo", Utils.formatNodeName(drive.getName()))%>" rel="tooltip" data-placement="bottom" title="<%=_ctx.appRes("UIDriveList.tooltip.EditInfo")%>" ><i class="uiIconEditInfo uiIconLightGray"></i></a>
+					    <a class="actionIcon" onclick="<%=uicomponent.event("Delete", Utils.formatNodeName(drive.getName()))%>" rel="tooltip" data-placement="bottom" title="<%=_ctx.appRes("UIDriveList.tooltip.Delete")%>" ><i class="uiIconDelete uiIconLightGray"></i></a>
 		        </td>	                    
           </tr>
       <%}%>  

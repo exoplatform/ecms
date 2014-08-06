@@ -67,7 +67,7 @@
 			        					<%
 			          						for(act in uicomponent.getActions()) { 
 			        							%>
-	            									<a class="actionIcon" onclick="<%=uicomponent.event(act, action.getName())%>" rel="tooltip" data-placement="bottom"  title="$act"><i class="uiIcon${act}" ></i></a>
+	            									<a class="actionIcon" onclick="<%=uicomponent.event(act, action.getName())%>" rel="tooltip" data-placement="bottom"  title="$act"><i class="uiIcon${act} uiIconLightGray" ></i></a>
 	            								<%
 	            							} 
 	            						%>

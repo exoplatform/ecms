@@ -53,11 +53,11 @@
               <td><div class="text" rel="tooltip" data-placement="bottom" title="<%=taxonomyTree.getTaxoTreeHomePath().replace("/", " /")%>"><%=taxonomyTree.getTaxoTreeHomePath().replace("/", " /")%></div></td>
               <td class="center">
                   <% if (taxonomyTree.isEdit()) { %>
-					<a class="actionIcon" onclick="<%=uicomponent.event("EditTaxonomyTree", Utils.formatNodeName(taxonomyTree.getTaxoTreeName()))%>" rel="tooltip" data-placement="bottom" title="<%=_ctx.appRes("UITaxonomyTreeList.tooltip.EditTaxonomyTree")%>" ><i class="uiIconEditInfo"></i></a>
+					<a class="actionIcon" onclick="<%=uicomponent.event("EditTaxonomyTree", Utils.formatNodeName(taxonomyTree.getTaxoTreeName()))%>" rel="tooltip" data-placement="bottom" title="<%=_ctx.appRes("UITaxonomyTreeList.tooltip.EditTaxonomyTree")%>" ><i class="uiIconEditInfo uiIconLightGray"></i></a>
                   <% } else { %>
                     <img src="/eXoResources/skin/sharedImages/Blank.gif" alt="None Edit" />
                   <% } %>
-					<a class="actionIcon" onclick="<%=uicomponent.event("Delete", Utils.formatNodeName(taxonomyTree.getTaxoTreeName()))%>" rel="tooltip" data-placement="bottom" title="<%=_ctx.appRes("UITaxonomyTreeList.tooltip.Delete")%>" ><i class="uiIconDelete"></i></a>
+					<a class="actionIcon" onclick="<%=uicomponent.event("Delete", Utils.formatNodeName(taxonomyTree.getTaxoTreeName()))%>" rel="tooltip" data-placement="bottom" title="<%=_ctx.appRes("UITaxonomyTreeList.tooltip.Delete")%>" ><i class="uiIconDelete uiIconLightGray"></i></a>
                 </td>                     
             </tr>
         <%
