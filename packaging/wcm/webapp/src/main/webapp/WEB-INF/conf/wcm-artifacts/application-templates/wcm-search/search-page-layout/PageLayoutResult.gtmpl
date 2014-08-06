@@ -15,10 +15,8 @@ import org.exoplatform.wcm.webui.Utils;
 		addScripts('edit.QuickEdit.insertQuickeditingBlock("' + portletId + '","' + quickEditingBlockId + '");');
 		if(Utils.isShowQuickEdit()) {		
 	%>
-		<div style="position: relative; height: 0px;" id="<%=quickEditingBlockId%>">
-			<div style="position: absolute; right: 0px; top: 0px; height: 0px">
-				<a href="<%=uicomponent.event("QuickEdit")%>" rel="tooltip" data-placement="bottom" title="<%= _ctx.appRes("UISearchPageLayoutDefault.title");%>"><div class="QuickEdit"><span></span></div></a>
-			</div>
+		<div id="<%=quickEditingBlockId%>" class="quickEdit">
+			<a href="<%=uicomponent.event("QuickEdit")%>" rel="tooltip" data-placement="bottom" title="<%= _ctx.appRes("UISearchPageLayoutDefault.title");%>"  class="quickEdit"><i class="uiIconEdit uiIconLightGray"></i></a>
 		</div>
 	<% } %>		
 	<% uicomponent.renderChild(UISearchResult.class) %>		
