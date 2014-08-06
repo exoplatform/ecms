@@ -18,7 +18,7 @@
 		<thead>
 			<tr>
 	      		<th><%=_ctx.appRes("UIPageSelectorPanel.header.path")%></th>
-		    	<th style="width: 35px;"><%=_ctx.appRes("UIPageSelectorPanel.header.action")%></th>
+		    	<th style="width: 35px;" class="center"><%=_ctx.appRes("UIPageSelectorPanel.header.action")%></th>
 	    	</tr>
 	  	</thead>
 	  	<tbody>
@@ -44,9 +44,9 @@
 				        		<td>
 				          			<div class=""><%= page.getURI() %></div>
 				        		</td>
-				        		<td>
-			              			<a href="javascript:void(0);" onclick="<%=uicomponent.event("Select", page.getURI())%>" rel="tooltip" data-placement="bottom" title="<%=_ctx.appRes("UIPageSelectorPanel.title.select")%>">
-			                			<div class="Select16x16Icon" style="margin: auto;"></div>
+				        		<td class="center">
+			              			<a class="actionIcon" href="javascript:void(0);" onclick="<%=uicomponent.event("Select", page.getURI())%>" rel="tooltip" data-placement="bottom" title="<%=_ctx.appRes("UIPageSelectorPanel.title.select")%>">
+			                			<i class="uiIconLightGray uiIconSelectPage" ></i>
 			              			</a>
 				        		</td>
 				      		</tr>
