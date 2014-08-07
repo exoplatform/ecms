@@ -91,6 +91,12 @@ public class AuthoringPublicationPlugin extends  WebpagePublicationPlugin {
       node.addMixin(Utils.MIX_VERSIONABLE);
       node.save();
     }
+    if (node.hasProperty(AuthoringPublicationConstant.CURRENT_STATE) && node.getProperty(AuthoringPublicationConstant.CURRENT_STATE)
+    		.getString().equals(PublicationDefaultStates.UNPUBLISHED) && node.hasProperty("exo:titlePublished")) {
+      node.setProperty("exo:titlePublished",(Value)null);
+      
+    }
+
     
     String versionName = context.get(AuthoringPublicationConstant.CURRENT_REVISION_NAME);
     String logItemName = versionName;
@@ -213,6 +219,9 @@ public class AuthoringPublicationPlugin extends  WebpagePublicationPlugin {
       
       addLog(node, versionLog);
       // change base version to unpublished state
+      if (node.hasProperty("exo:titlePublished")) {
+        node.setProperty("exo:titlePublished",(Value)null);
+      }
       node.setProperty(AuthoringPublicationConstant.CURRENT_STATE,
                        PublicationDefaultStates.UNPUBLISHED);
       Value value = valueFactory.createValue(selectedRevision);
