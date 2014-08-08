@@ -74,12 +74,13 @@ public class OfficeDocumentThumbnailPlugin implements ComponentPlugin, Thumbnail
     Document pdfDocument = new Document();
     if(contentNode.isNodeType(NodetypeConstant.NT_RESOURCE)) contentNode = contentNode.getParent();
     PDFViewerService pdfViewerService = WCMCoreUtils.getService(PDFViewerService.class);
-    pdfDocument = pdfViewerService.initDocument(contentNode,repository);    
-    BufferedImage image = (BufferedImage) pdfDocument.getPageImage(0, GraphicsRenderingHints.SCREEN,
+    pdfDocument = pdfViewerService.initDocument(contentNode,repository);
+    if (pdfDocument != null) {
+      BufferedImage image = (BufferedImage) pdfDocument.getPageImage(0, GraphicsRenderingHints.SCREEN,
                                                                    Page.BOUNDARY_CROPBOX, 0.0f, 1.0f);
-    pdfDocument.dispose();
-    return image;
-
+      pdfDocument.dispose();
+      return image;
+    } else return null;
   }
 
 

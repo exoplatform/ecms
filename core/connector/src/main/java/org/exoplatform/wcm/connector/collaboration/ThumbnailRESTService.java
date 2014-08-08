@@ -276,7 +276,6 @@ public class ThumbnailRESTService implements ResourceContainer {
       File file = new File(nodePath);
       FileInputStream inputStream = new FileInputStream(file);
       BufferedInputStream buf = new BufferedInputStream(inputStream);
-      String mimeType = new MimetypesFileTypeMap().getContentType(file);
       
       return Response.ok(buf, "image").header(LAST_MODIFIED_PROPERTY,
                                                           dateFormat.format(new Date())).build();
@@ -309,8 +308,12 @@ public class ThumbnailRESTService implements ResourceContainer {
             Node thumbnailNode = ThumbnailUtils.getThumbnailNode(thumbnailFolder, identifier);
 
             if(!thumbnailNode.hasProperty(propertyName)) {
-              BufferedImage image = thumbnailPlugin.getBufferedImage(content, targetNode.getPath());
-              thumbnailService_.addThumbnailImage(thumbnailNode, image, propertyName);
+              try {
+                BufferedImage image = thumbnailPlugin.getBufferedImage(content, targetNode.getPath());
+                thumbnailService_.addThumbnailImage(thumbnailNode, image, propertyName);
+              } catch (Exception e) {
+            	throw new Exception("Failed to get image.", e);            	
+              }
             }
 
             if(ifModifiedSince != null && thumbnailNode.hasProperty(ThumbnailService.THUMBNAIL_LAST_MODIFIED)) {
@@ -357,7 +360,7 @@ public class ThumbnailRESTService implements ResourceContainer {
           // get last modified date of node
           Date lastModifiedDate = thumbnailNode.getProperty("exo:dateModified").getDate().getTime();
 
-          // Check if cached resource has not been modifed, return 304 code
+          // Check if cached resource has not been modified, return 304 code
           if (ifModifiedSinceDate.getTime() >= lastModifiedDate.getTime()) {
             return Response.notModified().build();
           }

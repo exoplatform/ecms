@@ -166,11 +166,16 @@ public class JodConverterServiceImpl implements JodConverterService, Startable {
     }
     if (officeManager != null && officeManager.isRunning()) {
       if (documentConverter != null) {
-        documentConverter.convert(input,
+    	try {
+          documentConverter.convert(input,
                                   output,
                                   documentConverter.getFormatRegistry()
                                                    .getFormatByExtension(outputFormat));
-        return true;
+          return true;
+    	} catch (Exception e){
+    	  if (LOG.isTraceEnabled()) LOG.trace("Failed to convert file: " + input.getPath(), e);
+    	  return false;
+    	}
       }
       return false;
     } 
