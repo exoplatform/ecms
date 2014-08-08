@@ -1,33 +1,22 @@
 <%
 	import org.exoplatform.web.application.JavascriptManager;
 	import org.exoplatform.portal.webui.workspace.UIPortalApplication;
-	import org.exoplatform.commons.api.settings.SettingService;
-	import org.exoplatform.commons.api.settings.SettingValue;
-	import org.exoplatform.commons.api.settings.data.Context;
-	import org.exoplatform.commons.api.settings.data.Scope;
 	import org.exoplatform.services.wcm.utils.WCMCoreUtils;
 
 	def rcontext = _ctx.getRequestContext();
-	UIPortalApplication uiPortalApp = rcontext.getUIApplication();
-	boolean hasPermission = uicomponent.hasPermission();
- 
-	if(!uiPortalApp.isEditing() && !hasPermission) return;
-
-/* ADDED PART BY PLF */
-	def settingService =WCMCoreUtils.getService(SettingService.class);
- 	String barNavigationStyle = "Dark";
-    if (settingService.get(Context.GLOBAL,
-                           Scope.GLOBAL,
-                           "bar_navigation_style")!=null) {
-    barNavigationStyle=(String) settingService.get(Context.GLOBAL,Scope.GLOBAL,"bar_navigation_style").getValue();
-    }
-barNavigationStyle="UIToolbarContainer"+barNavigationStyle;
-/* END ADDED PART BY PLF */
-
-
 	/* ADDED PART BY ECMS */
 	if (rcontext.getRequestParameter("noadminbar")!=null) return;
 	/* END ADDED PART BY ECMS */
+	
+	UIPortalApplication uiPortalApp = rcontext.getUIApplication();
+	boolean hasPermission = uicomponent.hasPermission();
+	
+	if(!uiPortalApp.isEditing() && !hasPermission) return;
+	
+	/* ADDED PART BY PLF */
+	String barNavigationStyle = WCMCoreUtils.getBarNavigationStyle();
+	barNavigationStyle = "UIToolbarContainer" + barNavigationStyle;
+	/* END ADDED PART BY PLF */
 
 	JavascriptManager jsmanager = rcontext.getJavascriptManager();
 //	jsmanager.loadScriptResource('portal');
