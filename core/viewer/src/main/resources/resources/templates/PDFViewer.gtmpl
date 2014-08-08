@@ -9,30 +9,10 @@
   import org.exoplatform.wcm.webui.reader.ContentReader;
   
 	
-	UIComponent uiParent = uicomponent.getParent();
+  UIComponent uiParent = uicomponent.getParent();
   RepositoryService rService = uicomponent.getApplicationComponent(RepositoryService.class);
   String repository = rService.getCurrentRepository().getConfiguration().getName();	
-	
-	public boolean isVersionable(Node node) throws Exception {
-    return node.isNodeType("mix:versionable");
-  }		
 
-  def originalNode = uiParent.getOriginalNode();  
-  def downloadLink = Utils.getDownloadRestServiceLink(originalNode);
-  def currentNode = uicomponent.getFileLangNode(uiParent.getNode());
-  def contentNode = currentNode.getNode("jcr:content") ;
-  def mimeType = contentNode.getProperty("jcr:mimeType").getString() ;
-   public String formatNodeName(String text) {
-    return text.replaceAll("'", "\\\\'") ;
-  }
-  def currentPage = uicomponent.getPageNumber();
-  def maximumPage = uicomponent.getMaximumOfPage();
-  def currentRotation = uicomponent.getCurrentRotation();
-  def currentScale = uicomponent.getCurrentScale();
-  def metadatas = uicomponent.getMetadataExtraction();
-  def rqcontext = _ctx.getRequestContext();
-  rqcontext.getJavascriptManager().require("SHARED/ecm-utils", "ecmutil").
-  addScripts('ecmutil.ECMUtils.onKeyPDFViewerPress();') ;
 %>
 <head>
   <style>
@@ -164,7 +144,23 @@
 </head>
 <%uiform.begin()%>
 <%
-	if (maximumPage > 0) {
+
+if (uiParent != null) {
+  def originalNode = uiParent.getOriginalNode();  
+  def downloadLink = Utils.getDownloadRestServiceLink(originalNode);
+  def currentNode = uicomponent.getFileLangNode(uiParent.getNode());
+  def contentNode = currentNode.getNode("jcr:content") ;
+  def mimeType = contentNode.getProperty("jcr:mimeType").getString() ;
+  def currentPage = uicomponent.getPageNumber();
+  def maximumPage = uicomponent.getMaximumOfPage();
+  def currentRotation = uicomponent.getCurrentRotation();
+  def currentScale = uicomponent.getCurrentScale();
+  def metadatas = uicomponent.getMetadataExtraction();
+  def rqcontext = _ctx.getRequestContext();
+  rqcontext.getJavascriptManager().require("SHARED/ecm-utils", "ecmutil").
+  addScripts('ecmutil.ECMUtils.onKeyPDFViewerPress();') ;	
+	
+  if (maximumPage > 0 && maximumPage < 100) {	
 %>    
 	<div class="UIPDFViewerContainer">   
  	 <div class="PDFViewerBar clearfix">
@@ -246,5 +242,5 @@
           <span><%=_ctx.appRes("File.view.label.using-webDAV")%></span>
         </div>
       </div>
-<% }%>
+<% } }%>
 <%uiform.end()%>		

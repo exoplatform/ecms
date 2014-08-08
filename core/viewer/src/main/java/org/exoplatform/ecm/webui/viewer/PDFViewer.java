@@ -31,8 +31,6 @@ import javax.jcr.Node;
 import javax.jcr.NodeIterator;
 import javax.jcr.RepositoryException;
 
-import org.exoplatform.container.ExoContainer;
-import org.exoplatform.container.ExoContainerContext;
 import org.exoplatform.download.DownloadService;
 import org.exoplatform.download.InputStreamDownloadResource;
 import org.exoplatform.portal.webui.util.Util;
@@ -108,18 +106,20 @@ public class PDFViewer extends UIForm {
 
   public void initDatas() throws Exception {
     UIComponent uiParent = getParent();
+    
     Method method = getMethod(uiParent, "getOriginalNode");
     Node originalNode = null;
     if(method != null) originalNode = (Node) method.invoke(uiParent, (Object[]) null);
 
     if(originalNode != null) {
       Document document = getDocument(originalNode);
-      if(document != null) maximumOfPage_ = document.getNumberOfPages();
-      metadatas.clear();
-      putDocumentInfo(document.getInfo());
-      document.dispose();
+      if (document != null) {
+    	maximumOfPage_ = document.getNumberOfPages();
+        metadatas.clear();
+        putDocumentInfo(document.getInfo());
+        document.dispose();
+      } else maximumOfPage_ = -1;
     }
-
   }
 
   public Map getMetadataExtraction() { return metadatas; }
@@ -142,7 +142,6 @@ public class PDFViewer extends UIForm {
   public void setPageNumber(int pageNum) { currentPageNumber_ = pageNum; };
 
   public String getResourceBundle(String key) {
-    ExoContainer container = ExoContainerContext.getCurrentContainer();
     Locale locale = Util.getUIPortal().getAncestorOfType(UIPortalApplication.class).getLocale() ;
     ResourceBundleService resourceBundleService = WCMCoreUtils.getService(ResourceBundleService.class);
     ResourceBundle resourceBundle=resourceBundleService.getResourceBundle(localeFile, locale, this.getClass().getClassLoader());

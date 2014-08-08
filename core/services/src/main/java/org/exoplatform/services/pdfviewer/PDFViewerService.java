@@ -55,6 +55,7 @@ public class PDFViewerService {
   private static final Log LOG  = ExoLogger.getLogger(PDFViewerService.class.getName());
   private JodConverterService jodConverter_;
   private ExoCache<Serializable, Object> pdfCache;
+  private static final long MAX_FILE_SIZE = 5 * 1024 * 1024;//5MB
   
   public PDFViewerService(RepositoryService repositoryService,
                           CacheService caService,
@@ -84,31 +85,21 @@ public class PDFViewerService {
     // TODO: Remove this statement after IcePDF fix this
     Logger.getLogger(Document.class.toString()).setLevel(Level.OFF);
 
+    if (input == null) return null;
+    
     // Capture the page image to file
     try {
       // cut the file name if name is too long, because OS allows only file with name < 250 characters
       name = reduceFileNameSize(name);
-      document.setInputStream(new BufferedInputStream(new FileInputStream(input)), name);
-    } catch (PDFException ex) {
-      if (LOG.isDebugEnabled()) {
-        LOG.error("Error parsing PDF document " + ex);
-      }
-    } catch (PDFSecurityException ex) {
-      if (LOG.isDebugEnabled()) {
-        LOG.error("Error encryption not supported " + ex);
-      }
-    } catch (FileNotFoundException ex) {
-      if (LOG.isDebugEnabled()) {
-        LOG.error("Error file not found " + ex);
-      }
-    } catch (IOException ex) {
-      if (LOG.isDebugEnabled()) {
-        LOG.debug("Error handling PDF document: {} {}", name, ex.toString());
-      }
+      FileInputStream fis = new FileInputStream(input);
+      document.setInputStream(new BufferedInputStream(fis), name);
+      return document;
+    } catch (Exception ex) {
+      LOG.error("Failed to build Document image", ex);
+      return null;
     }
-
-    return document;
   }
+  
   /**
    * Write PDF data to file
    * @param currentNode
@@ -138,11 +129,7 @@ public class PDFViewerService {
       // cut the file name if name is too long, because OS allows only file with name < 250 characters
       name = reduceFileNameSize(name);
       content = File.createTempFile(name + "_tmp", ".pdf");
-      /*
-      file.deleteOnExit();
-        PM Comment : I removed this line because each deleteOnExit creates a reference in the JVM for future removal
-        Each JVM reference takes 1KB of system memory and leads to a memleak
-       */
+
       // Convert to pdf if need
       String extension = DMSMimeTypeResolver.getInstance().getExtension(mimeType);
       if ("pdf".equals(extension)) {
@@ -151,22 +138,34 @@ public class PDFViewerService {
         // create temp file to store original data of nt:file node
         File in = File.createTempFile(name + "_tmp", null);
         read(input, new BufferedOutputStream(new FileOutputStream(in)));
-        try {
+        long fileSize = in.length(); // size in byte
+        LOG.info("File size: " + fileSize + " B. Size limit for preview: " + (MAX_FILE_SIZE/(1024*1024)) + " MB");
+        if (fileSize < MAX_FILE_SIZE) { // ECMS-6329 only converts small file
+        try {          	
           boolean success = jodConverter_.convert(in, content, "pdf");
-          // If the converting was failure then delete the content temporary file
+          // If the converting failed then delete the content of temporary file
           if (!success) {
             content.delete();
+            content = null;
           }
+          
         } catch (OfficeException connection) {
           content.delete();
+          content = null;
           if (LOG.isErrorEnabled()) {
-            LOG.error("Exception when using Office Service");
+            LOG.error("Exception when using Office Service", connection);
           }
         } finally {
           in.delete();
         }
+        } else {
+          LOG.info("File is too big for preview.");	
+          content.delete();
+          content = null;
+          in.delete();
+        }
       }
-      if (content.exists()) {
+      if (content != null && content.exists()) {
         if (contentNode.hasProperty("jcr:lastModified")) {
           pdfCache.put(new ObjectKey(bd.toString()), content.getPath());
           pdfCache.put(new ObjectKey(bd1.toString()), lastModified);
