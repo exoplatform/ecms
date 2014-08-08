@@ -21,9 +21,11 @@ package org.exoplatform.ecms.upgrade.sanitization;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.HashMap;
+import java.util.HashSet;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
+import java.util.Set;
 
 import javax.jcr.Node;
 import javax.jcr.NodeIterator;
@@ -361,6 +363,10 @@ public class SanitizationUpgradePlugin extends UpgradeProductPlugin {
         LOG.info("=====Start migrate old links from jcr data====");
       }
       List<String> documentMixinTypes = new ArrayList<String>();
+      Set<String> nodesToRepublish = new HashSet<String>();
+      WebSchemaConfigService schemaConfigService = WCMCoreUtils.getService(WebSchemaConfigService.class);
+      WebContentSchemaHandler webContentSchemaHandler = schemaConfigService.
+          getWebSchemaHandlerByType(WebContentSchemaHandler.class);
       // for performance reason we limit search to js,html and csscontents
       documentMixinTypes.add("exo:jsFile");
       documentMixinTypes.add("exo:htmlFile");
@@ -370,35 +376,46 @@ public class SanitizationUpgradePlugin extends UpgradeProductPlugin {
         QueryResult result = session.getWorkspace().getQueryManager().createQuery(statement.toString(), Query.SQL).execute();
         NodeIterator nodeIter = result.getNodes();
         while (nodeIter.hasNext()) {
-          Node node = nodeIter.nextNode();
-          if (node.hasNode("jcr:content")) {
-            Node content = node.getNode("jcr:content");
-            if (content.hasProperty("jcr:mimeType")) {
-              String mimeType = content.getProperty("jcr:mimeType").getString();
-              if (mimeType.startsWith("text")) {
-                String jcrData = content.getProperty("jcr:data").getString();
-                if (jcrData.contains("/sites content/live/")|| jcrData.contains("/sites%20content/live/")) {
-                  LOG.info("=====Migrating data contents '"+ content.getParent().getPath()+ "' =====");
-                  String newData = StringUtils.replaceEachRepeatedly(jcrData,
-                                                                     new String[] {"/sites content/live/","/sites%20content/live/" },
-                                                                     new String[] { "/sites/","/sites/" });
-                  content.setProperty("jcr:data", newData);
-                  WebSchemaConfigService schemaConfigService = WCMCoreUtils.getService(WebSchemaConfigService.class);
-                  WebContentSchemaHandler webContentSchemaHandler = schemaConfigService.
-                      getWebSchemaHandlerByType(WebContentSchemaHandler.class);
-                  if(webContentSchemaHandler.isWebcontentChildNode(node)){
-                    republishNode(node.getParent().getParent());
-                  } else {
-                    republishNode(node);
-                  }                
-                  session.save();
+          try {
+            Node node = nodeIter.nextNode();
+            if (node.hasNode("jcr:content")) {
+              Node content = node.getNode("jcr:content");
+              if (content.hasProperty("jcr:mimeType")) {
+                String mimeType = content.getProperty("jcr:mimeType").getString();
+                if (mimeType.startsWith("text")) {
+                  String jcrData = content.getProperty("jcr:data").getString();
+                  if (jcrData.contains("/sites content/live/")|| jcrData.contains("/sites%20content/live/")) {
+                    LOG.info("=====Migrating data contents '"+ content.getParent().getPath()+ "' =====");
+                    String newData = StringUtils.replaceEachRepeatedly(jcrData,
+                                                                       new String[] {"/sites content/live/","/sites%20content/live/" },
+                                                                       new String[] { "/sites/","/sites/" });
+                    content.setProperty("jcr:data", newData);
+                    if(webContentSchemaHandler.isWebcontentChildNode(node)){
+                      nodesToRepublish.add(node.getParent().getParent().getUUID());
+                      republishNode(node.getParent().getParent());
+                    } else {
+                      nodesToRepublish.add(node.getUUID());
+                      republishNode(node);
+                    }
+                    
+                    session.save();
+                  }
                 }
               }
             }
+          } catch (Exception e) {
+            LOG.error("An unexpected error occurs when migrating JCR Data Content: ",e);
           }
+
         }
       }
-
+      for (String nodeUUID : nodesToRepublish) {
+        try {
+          republishNode(session.getNodeByUUID(nodeUUID));
+        } catch (Exception e) {
+          LOG.error("An unexpected error occurs when republishing content: ",e);
+        }
+      }
       if (LOG.isInfoEnabled()) {
         LOG.info("===== Migrate data in contents completed =====");
       }
