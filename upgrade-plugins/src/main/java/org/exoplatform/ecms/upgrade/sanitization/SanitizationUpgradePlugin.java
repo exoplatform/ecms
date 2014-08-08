@@ -397,17 +397,17 @@ public class SanitizationUpgradePlugin extends UpgradeProductPlugin {
                       continue;
                     }
                     
-                    Node grantParent = parent.getParent();
-                    if(grantParent.isNodeType("exo:webContent")) {
-                      nodesToRepublish.add(grantParent.getPath());
+                    Node grandParent = parent.getParent();
+                    if(grandParent.isNodeType("exo:webContent")) {
+                      nodesToRepublish.add(grandParent.getPath());
                       continue;
                     }
                     //for subnodes in some folders like images, videos, audio
-                    if(grantParent.getPath().equals("/")){
+                    if(grandParent.getPath().equals("/")){
                       nodesToRepublish.add(node.getPath());
                       continue;
                     }
-                    Node ancestor = grantParent.getParent();
+                    Node ancestor = grandParent.getParent();
                     if(ancestor.isNodeType("exo:webContent")) {
                       nodesToRepublish.add(ancestor.getPath());
                       continue;
