@@ -388,31 +388,31 @@ public class SanitizationUpgradePlugin extends UpgradeProductPlugin {
                     session.save();
                     Node parent = node.getParent();
                     if(parent.isNodeType("exo:webContent")) {
-                      nodesToRepublish.add(parent.getUUID());
+                      nodesToRepublish.add(parent.getPath());
                       continue;
                     }
                     //for subnodes in some folders like css, js, documents, medias
                     if(parent.getPath().equals("/")) {
-                      nodesToRepublish.add(node.getUUID());
+                      nodesToRepublish.add(node.getPath());
                       continue;
                     }
                     
                     Node grantParent = parent.getParent();
                     if(grantParent.isNodeType("exo:webContent")) {
-                      nodesToRepublish.add(grantParent.getUUID());
+                      nodesToRepublish.add(grantParent.getPath());
                       continue;
                     }
                     //for subnodes in some folders like images, videos, audio
                     if(grantParent.getPath().equals("/")){
-                      nodesToRepublish.add(node.getUUID());
+                      nodesToRepublish.add(node.getPath());
                       continue;
                     }
                     Node ancestor = grantParent.getParent();
                     if(ancestor.isNodeType("exo:webContent")) {
-                      nodesToRepublish.add(ancestor.getUUID());
+                      nodesToRepublish.add(ancestor.getPath());
                       continue;
                     }
-                    nodesToRepublish.add(node.getUUID());
+                    nodesToRepublish.add(node.getPath());
                   }
                 }
               }
@@ -423,9 +423,9 @@ public class SanitizationUpgradePlugin extends UpgradeProductPlugin {
 
         }
       }
-      for (String nodeUUID : nodesToRepublish) {
+      for (String nodePath : nodesToRepublish) {
         try {
-          republishNode(session.getNodeByUUID(nodeUUID));
+          republishNode((Node)session.getItem(nodePath));
         } catch (Exception e) {
           LOG.error("An unexpected error occurs when republishing content: ",e);
         }
