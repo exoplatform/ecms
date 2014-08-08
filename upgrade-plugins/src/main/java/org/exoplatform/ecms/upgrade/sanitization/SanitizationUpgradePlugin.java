@@ -54,10 +54,8 @@ import org.exoplatform.services.jcr.ext.common.SessionProvider;
 import org.exoplatform.services.log.ExoLogger;
 import org.exoplatform.services.log.Log;
 import org.exoplatform.services.wcm.core.NodetypeConstant;
-import org.exoplatform.services.wcm.core.WebSchemaConfigService;
 import org.exoplatform.services.wcm.publication.PublicationDefaultStates;
 import org.exoplatform.services.wcm.utils.WCMCoreUtils;
-import org.exoplatform.services.wcm.webcontent.WebContentSchemaHandler;
 
 /**
  * This upgrade plugin will be used to migrate all the old data to the new one which related to
@@ -364,9 +362,6 @@ public class SanitizationUpgradePlugin extends UpgradeProductPlugin {
       }
       List<String> documentMixinTypes = new ArrayList<String>();
       Set<String> nodesToRepublish = new HashSet<String>();
-      WebSchemaConfigService schemaConfigService = WCMCoreUtils.getService(WebSchemaConfigService.class);
-      WebContentSchemaHandler webContentSchemaHandler = schemaConfigService.
-          getWebSchemaHandlerByType(WebContentSchemaHandler.class);
       // for performance reason we limit search to js,html and csscontents
       documentMixinTypes.add("exo:jsFile");
       documentMixinTypes.add("exo:htmlFile");
@@ -390,15 +385,34 @@ public class SanitizationUpgradePlugin extends UpgradeProductPlugin {
                                                                        new String[] {"/sites content/live/","/sites%20content/live/" },
                                                                        new String[] { "/sites/","/sites/" });
                     content.setProperty("jcr:data", newData);
-                    if(webContentSchemaHandler.isWebcontentChildNode(node)){
-                      nodesToRepublish.add(node.getParent().getParent().getUUID());
-                      republishNode(node.getParent().getParent());
-                    } else {
+                    session.save();
+                    Node parent = node.getParent();
+                    if(parent.isNodeType("exo:webContent")) {
+                      nodesToRepublish.add(parent.getUUID());
+                      continue;
+                    }
+                    //for subnodes in some folders like css, js, documents, medias
+                    if(parent.getPath().equals("/")) {
                       nodesToRepublish.add(node.getUUID());
-                      republishNode(node);
+                      continue;
                     }
                     
-                    session.save();
+                    Node grantParent = parent.getParent();
+                    if(grantParent.isNodeType("exo:webContent")) {
+                      nodesToRepublish.add(grantParent.getUUID());
+                      continue;
+                    }
+                    //for subnodes in some folders like images, videos, audio
+                    if(grantParent.getPath().equals("/")){
+                      nodesToRepublish.add(node.getUUID());
+                      continue;
+                    }
+                    Node ancestor = grantParent.getParent();
+                    if(ancestor.isNodeType("exo:webContent")) {
+                      nodesToRepublish.add(ancestor.getUUID());
+                      continue;
+                    }
+                    nodesToRepublish.add(node.getUUID());
                   }
                 }
               }
