@@ -87,21 +87,27 @@
 						<field name="mimeTypes">
 							<collection type="java.util.ArrayList">
                                 <value><string>application/msword</string></value>
-                                <value><string>application/ppt</string></value>
+                                <!--value><string>application/ppt</string></value-->
                                 <value><string>application/rtf</string></value>
                                 <value><string>application/vnd.oasis.opendocument.graphics</string></value>
-                                <value><string>application/vnd.oasis.opendocument.presentation</string></value>
+                                <!--value><string>application/vnd.oasis.opendocument.presentation</string></value-->
+                                <!-- No Thumbnail of Spreadsheets
                                 <value><string>application/vnd.oasis.opendocument.spreadsheet</string></value>
                                 <value><string>application/vnd.oasis.opendocument.spreadsheet-template</string></value>
+                                -->
                                 <value><string>application/vnd.oasis.opendocument.text</string></value>
-                                <value><string>application/vnd.openxmlformats-officedocument.presentationml.presentation</string></value>
+                                <!--value><string>application/vnd.openxmlformats-officedocument.presentationml.presentation</string></value-->
+                                <!-- No Thumbnail of Spreadsheets
                                 <value><string>application/vnd.openxmlformats-officedocument.spreadsheetml.sheet</string></value>
+                                -->  
                                 <value><string>application/vnd.openxmlformats-officedocument.wordprocessingml.document</string></value>
                                 <value><string>application/vnd.sun.xml.impress</string></value>
                                 <value><string>application/vnd.sun.xml.writer</string></value>
                                 <value><string>application/wordperfect</string></value>
+                                <!-- No Thumbnail of MS Excel files 
                                 <value><string>application/xls</string></value>
                                 <value><string>application/xlt</string></value>
+                                -->
 							</collection>
 						</field>
 	        </object>
