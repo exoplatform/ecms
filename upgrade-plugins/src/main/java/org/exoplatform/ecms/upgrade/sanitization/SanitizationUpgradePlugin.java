@@ -318,9 +318,6 @@ public class SanitizationUpgradePlugin extends UpgradeProductPlugin {
    * Migrate portlet preferences which contains the "/sites content/live" path to "/sites"
    */
   private void migratePortletPreferences() {
-    if (LOG.isInfoEnabled()) {
-      LOG.info("Start " + this.getClass().getName() + ".............");
-    }
     try {
       Session session = WCMCoreUtils.getSystemSessionProvider().getSession("portal-system",
           repoService_.getCurrentRepository());
@@ -352,9 +349,6 @@ public class SanitizationUpgradePlugin extends UpgradeProductPlugin {
    * Migrate binnary data jcr:data which still contains "/sites content/live" in its values
    */
   private void migrateJCRDataContents() {
-    if (LOG.isInfoEnabled()) {
-      LOG.info("Start " + this.getClass().getName() + ".............");
-    }
     try {
       Session session = WCMCoreUtils.getSystemSessionProvider().getSession("collaboration",repoService_.getCurrentRepository());
       if (LOG.isInfoEnabled()) {
@@ -454,9 +448,6 @@ public class SanitizationUpgradePlugin extends UpgradeProductPlugin {
    * Migrate exo:links which still contains "/sites content/live" in its properties
    */
   private void migrateLinkInContents() {
-    if (LOG.isInfoEnabled()) {
-      LOG.info("Start " + this.getClass().getName() + ".............");
-    }
     try {
       Session session = WCMCoreUtils.getSystemSessionProvider().getSession("collaboration", repoService_.getCurrentRepository());
       if (LOG.isInfoEnabled()) {
@@ -492,9 +483,6 @@ public class SanitizationUpgradePlugin extends UpgradeProductPlugin {
    * Migrate activities which contains "/sites content/live" in the url
    */
   private void migrateSocialActivities() {
-    if (LOG.isInfoEnabled()) {
-      LOG.info("Start " + this.getClass().getName() + ".............");
-    }
     SessionProvider sessionProvider = null;
     try {
       sessionProvider = SessionProvider.createSystemProvider();
@@ -530,9 +518,6 @@ public class SanitizationUpgradePlugin extends UpgradeProductPlugin {
    * Migrate taxonomy actions which contains some properties which still point to old path related to "/sites content/live"
    */
   private void migrateTaxonomyAction() {
-	  if (LOG.isInfoEnabled()) {
-		  LOG.info("Start " + this.getClass().getName() + ".............");
-	  }
 	  SessionProvider sessionProvider = null;
 	  try {
 		  sessionProvider = SessionProvider.createSystemProvider();
@@ -590,9 +575,6 @@ public class SanitizationUpgradePlugin extends UpgradeProductPlugin {
    * Migrate preference 'Drive name' of site explorer portlet which should be changed to Collaboration instead of collaboration"
    */
   private void migrateDriveNameOfPortletPreferences() {
-    if (LOG.isInfoEnabled()) {
-      LOG.info("Start " + this.getClass().getName() + ".............");
-    }
     SessionProvider sessionProvider = null;
     try {
       sessionProvider = SessionProvider.createSystemProvider();
