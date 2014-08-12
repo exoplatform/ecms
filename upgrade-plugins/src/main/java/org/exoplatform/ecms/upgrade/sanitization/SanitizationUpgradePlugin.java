@@ -21,11 +21,9 @@ package org.exoplatform.ecms.upgrade.sanitization;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.HashMap;
-import java.util.HashSet;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
-import java.util.Set;
 
 import javax.jcr.Node;
 import javax.jcr.NodeIterator;
@@ -45,7 +43,6 @@ import org.exoplatform.services.cms.actions.ActionServiceContainer;
 import org.exoplatform.services.cms.impl.DMSConfiguration;
 import org.exoplatform.services.cms.scripts.ScriptService;
 import org.exoplatform.services.cms.views.ManageViewService;
-import org.exoplatform.services.ecm.publication.PublicationService;
 import org.exoplatform.services.jcr.RepositoryService;
 import org.exoplatform.services.jcr.core.nodetype.ExtendedNodeTypeManager;
 import org.exoplatform.services.jcr.core.nodetype.NodeTypeValue;
@@ -54,7 +51,6 @@ import org.exoplatform.services.jcr.ext.common.SessionProvider;
 import org.exoplatform.services.log.ExoLogger;
 import org.exoplatform.services.log.Log;
 import org.exoplatform.services.wcm.core.NodetypeConstant;
-import org.exoplatform.services.wcm.publication.PublicationDefaultStates;
 import org.exoplatform.services.wcm.utils.WCMCoreUtils;
 
 /**
@@ -66,16 +62,14 @@ public class SanitizationUpgradePlugin extends UpgradeProductPlugin {
   private DMSConfiguration dmsConfiguration_;
   private RepositoryService repoService_;
   private ManageViewService viewService_;
-  private PublicationService  publicationService_;
   private static final Log LOG = ExoLogger.getLogger(SanitizationUpgradePlugin.class.getName());
   
   public SanitizationUpgradePlugin(RepositoryService repoService, DMSConfiguration dmsConfiguration, 
-          ManageViewService viewService, PublicationService publicationService, InitParams initParams) {
+          ManageViewService viewService, InitParams initParams) {
     super(initParams);
     repoService_ = repoService;
     dmsConfiguration_ = dmsConfiguration;
     viewService_ = viewService;
-    publicationService_ = publicationService;
   }
 
   @Override
@@ -97,11 +91,6 @@ public class SanitizationUpgradePlugin extends UpgradeProductPlugin {
      * Migrate portlet preferences which contains the "/sites content/live" path to "/sites"
      */
     migratePortletPreferences();
-
-    /**
-     * Migrate binary data jcr:data which still contains "/sites content/live" in its values
-     */
-    migrateJCRDataContents();
 
     /**
      * Migrate exo:links which still contains "/sites content/live" in its properties
@@ -342,105 +331,6 @@ public class SanitizationUpgradePlugin extends UpgradeProductPlugin {
       if (LOG.isErrorEnabled()) {
         LOG.error("An unexpected error occurs when migrating old preferences: ", e);
       }
-    }
-  }
-
-  /**
-   * Migrate binnary data jcr:data which still contains "/sites content/live" in its values
-   */
-  private void migrateJCRDataContents() {
-    try {
-      Session session = WCMCoreUtils.getSystemSessionProvider().getSession("collaboration",repoService_.getCurrentRepository());
-      if (LOG.isInfoEnabled()) {
-        LOG.info("=====Start migrate old links from jcr data====");
-      }
-      List<String> documentMixinTypes = new ArrayList<String>();
-      Set<String> nodesToRepublish = new HashSet<String>();
-      // for performance reason we limit search to js,html and csscontents
-      documentMixinTypes.add("exo:jsFile");
-      documentMixinTypes.add("exo:htmlFile");
-      documentMixinTypes.add("exo:cssFile");
-      for (String type : documentMixinTypes) {
-        StringBuilder statement = new StringBuilder().append("select * from ").append(type).append(" ORDER BY exo:name DESC ");
-        QueryResult result = session.getWorkspace().getQueryManager().createQuery(statement.toString(), Query.SQL).execute();
-        NodeIterator nodeIter = result.getNodes();
-        while (nodeIter.hasNext()) {
-          try {
-            Node node = nodeIter.nextNode();
-            if (node.hasNode("jcr:content")) {
-              Node content = node.getNode("jcr:content");
-              if (content.hasProperty("jcr:mimeType")) {
-                String mimeType = content.getProperty("jcr:mimeType").getString();
-                if (mimeType.startsWith("text")) {
-                  String jcrData = content.getProperty("jcr:data").getString();
-                  if (jcrData.contains("/sites content/live/")|| jcrData.contains("/sites%20content/live/")) {
-                    LOG.info("=====Migrating data contents '"+ content.getParent().getPath()+ "' =====");
-                    String newData = StringUtils.replaceEachRepeatedly(jcrData,
-                                                                       new String[] {"/sites content/live/","/sites%20content/live/" },
-                                                                       new String[] { "/sites/","/sites/" });
-                    content.setProperty("jcr:data", newData);
-                    session.save();
-                    Node parent = node.getParent();
-                    if(parent.isNodeType("exo:webContent")) {
-                      nodesToRepublish.add(parent.getPath());
-                      continue;
-                    }
-                    //for subnodes in some folders like css, js, documents, medias
-                    if(parent.getPath().equals("/")) {
-                      nodesToRepublish.add(node.getPath());
-                      continue;
-                    }
-                    
-                    Node grandParent = parent.getParent();
-                    if(grandParent.isNodeType("exo:webContent")) {
-                      nodesToRepublish.add(grandParent.getPath());
-                      continue;
-                    }
-                    //for subnodes in some folders like images, videos, audio
-                    if(grandParent.getPath().equals("/")){
-                      nodesToRepublish.add(node.getPath());
-                      continue;
-                    }
-                    Node ancestor = grandParent.getParent();
-                    if(ancestor.isNodeType("exo:webContent")) {
-                      nodesToRepublish.add(ancestor.getPath());
-                      continue;
-                    }
-                    nodesToRepublish.add(node.getPath());
-                  }
-                }
-              }
-            }
-          } catch (Exception e) {
-            LOG.error("An unexpected error occurs when migrating JCR Data Content: ",e);
-          }
-
-        }
-      }
-      for (String nodePath : nodesToRepublish) {
-        try {
-          republishNode((Node)session.getItem(nodePath));
-        } catch (Exception e) {
-          LOG.error("An unexpected error occurs when republishing content: ",e);
-        }
-      }
-      if (LOG.isInfoEnabled()) {
-        LOG.info("===== Migrate data in contents completed =====");
-      }
-    } catch (Exception e) {
-      if (LOG.isErrorEnabled()) {
-        LOG.error("An unexpected error occurs when migrating JCR Data Contents: ",e);
-      }
-    }
-  }
-  
-  /* Republish node */
-  private void republishNode(Node checkedNode) throws Exception {
-    if (publicationService_.isNodeEnrolledInLifecycle(checkedNode) && PublicationDefaultStates.PUBLISHED.equalsIgnoreCase(publicationService_.getCurrentState(checkedNode))){
-      HashMap<String, String> context = new HashMap<String, String>();
-      LOG.info("=====Republish '"+ checkedNode.getPath()+ "' =====");
-      publicationService_.changeState(checkedNode,PublicationDefaultStates.DRAFT,context);
-      publicationService_.changeState(checkedNode,PublicationDefaultStates.PUBLISHED,context);
     }
   }
 
