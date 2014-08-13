@@ -903,11 +903,24 @@
 			  var fileName = cleanName(file.name);
 			  var uri = eXo.ecm.MultiUpload.restContext + "/wcmDriver/uploadFile/cleanName?" + "fileName=" + fileName;
 			  gj.ajax({url: uri, 
-			      async: false, //blocks window close
-			      success: function(result, status, xhr) {
-			      var fileNameRet = result.getElementsByTagName("name");
-			      if(fileNameRet && fileNameRet.length > 0) {
-			         fileName = fileNameRet[0].innerHTML;
+			    async: false, //blocks window close
+			    dataType: (gj.browser.msie) ? "text" : "xml",
+			    accepts: {
+			      xml: "text/xml",
+			      text: "text/xml"
+			    },
+			    success: function(result, status, xhr) {
+			      var xml;
+			      if (gj.browser.msie) {
+			        xml = new ActiveXObject("Microsoft.XMLDOM");
+			        xml.async = false;
+			        xml.loadXML(result);
+			      } else {
+			        xml = result;
+			      }
+			      var newFileName = gj(xml).find("name").text();
+			      if (newFileName) {
+			        fileName = newFileName;
 			      }
 			    }
 			  });
