@@ -30,6 +30,7 @@ import javax.jcr.Session;
 import org.exoplatform.container.configuration.ConfigurationManager;
 import org.exoplatform.container.xml.InitParams;
 import org.exoplatform.container.xml.ObjectParameter;
+import org.exoplatform.services.cms.documents.TrashService;
 import org.exoplatform.services.deployment.DeploymentPlugin;
 import org.exoplatform.services.deployment.Utils;
 import org.exoplatform.services.deployment.DeploymentUtils;
@@ -61,6 +62,8 @@ public class WCMPublicationDeploymentPlugin extends DeploymentPlugin{
   
   /** The publication service */
   private WCMPublicationService wcmPublicationService;
+  
+  private TrashService trashService;
 
   /** The log. */
   private static final Log LOG = ExoLogger.getLogger(WCMPublicationDeploymentPlugin.class.getName());
@@ -81,12 +84,14 @@ public class WCMPublicationDeploymentPlugin extends DeploymentPlugin{
                              ConfigurationManager configurationManager,
                              RepositoryService repositoryService,
                              PublicationService publicationService,
-                             WCMPublicationService wcmPublicationService) {
+                             WCMPublicationService wcmPublicationService,
+                             TrashService trashService) {
     super(initParams);
     this.configurationManager = configurationManager;
     this.repositoryService = repositoryService;
     this.publicationService = publicationService;
     this.wcmPublicationService = wcmPublicationService;
+    this.trashService = trashService;
   }
   
   /*
@@ -99,8 +104,8 @@ public class WCMPublicationDeploymentPlugin extends DeploymentPlugin{
     ManageableRepository repository = repositoryService.getCurrentRepository();
     Iterator iterator = initParams.getObjectParamIterator();
     WCMPublicationDeploymentDescriptor deploymentDescriptor = null;
-    try {
-      while (iterator.hasNext()) {
+    while (iterator.hasNext()) {
+      try {
         ObjectParameter objectParameter = (ObjectParameter) iterator.next();
         deploymentDescriptor = (WCMPublicationDeploymentDescriptor) objectParameter.getObject();
         String sourcePath = deploymentDescriptor.getSourcePath();
@@ -111,11 +116,18 @@ public class WCMPublicationDeploymentPlugin extends DeploymentPlugin{
         InputStream inputStream = configurationManager.getInputStream(sourcePath);
         Session session = sessionProvider.getSession(deploymentDescriptor.getTarget().getWorkspace(), repository);       
         
-               
+        String nodeName = DeploymentUtils.getNodeName(configurationManager.getInputStream(sourcePath));
+        //remove old resources
+        if (this.isOverride()) {
+          Node parent = (Node)session.getItem(deploymentDescriptor.getTarget().getNodePath());
+          if (parent.hasNode(nodeName)) {
+            trashService.moveToTrash(parent.getNode(nodeName), sessionProvider);
+          }
+        }
+        
         session.importXML(deploymentDescriptor.getTarget().getNodePath(),
                           inputStream,
                           ImportUUIDBehavior.IMPORT_UUID_CREATE_NEW);
-        String nodeName = DeploymentUtils.getNodeName(configurationManager.getInputStream(sourcePath));
         if (CLEAN_PUBLICATION.equalsIgnoreCase(cleanupPublicationType) || 
             PUBLISH_FIRST_PUBLICATION.equalsIgnoreCase(cleanupPublicationType)) {
           /**
@@ -141,18 +153,18 @@ public class WCMPublicationDeploymentPlugin extends DeploymentPlugin{
                                      mapHistoryValue);
         }
         session.save();
-        if (LOG.isInfoEnabled()) {
-          LOG.info(deploymentDescriptor.getSourcePath() + " is deployed succesfully into "
-              + deploymentDescriptor.getTarget().getNodePath());
-        }
+      } catch (Exception ex) {
+        if (LOG.isErrorEnabled()) {
+          LOG.error("deploy " + deploymentDescriptor.getSourcePath() + " into "
+                      + deploymentDescriptor.getTarget().getNodePath() + " is FAILURE at "
+                      + new Date().toString() + "\n",
+                  ex);
+        }      
       }
-    } catch (Exception ex) {
-      if (LOG.isErrorEnabled()) {
-        LOG.error("deploy " + deploymentDescriptor.getSourcePath() + " into "
-                    + deploymentDescriptor.getTarget().getNodePath() + " is FAILURE at "
-                    + new Date().toString() + "\n",
-                ex);
-      }      
+    }
+    if (LOG.isInfoEnabled()) {
+      LOG.info(deploymentDescriptor.getSourcePath() + " is deployed succesfully into "
+          + deploymentDescriptor.getTarget().getNodePath());
     }
   }
   
