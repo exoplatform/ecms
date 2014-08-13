@@ -414,16 +414,16 @@
         
         <component-plugin>
             <name>
-                JCRDataSanitizationUpgradePlugin
+                InternalLinksUpgradePlugin
             </name>
             <set-method>
                 addUpgradePlugin
             </set-method>
             <type>
-                org.exoplatform.ecms.upgrade.sanitization.JCRDataSanitizationUpgradePlugin
+                org.exoplatform.ecms.upgrade.sanitization.InternalLinksUpgradePlugin
             </type>
             <description>
-                Upgrade Plugin which used to migrate all the things related to the changing via sanitization specification
+                Update internal links in exo:jsFile, exo:htmlFile, exo:cssFile and exo:webContent
             </description>
             <init-params>
                 <value-param>

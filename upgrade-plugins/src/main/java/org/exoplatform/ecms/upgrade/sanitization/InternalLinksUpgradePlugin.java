@@ -24,11 +24,11 @@ import org.exoplatform.services.wcm.publication.PublicationDefaultStates;
 import org.exoplatform.services.wcm.utils.WCMCoreUtils;
 
 
-public class JCRDataSanitizationUpgradePlugin extends UpgradeProductPlugin {
+public class InternalLinksUpgradePlugin extends UpgradeProductPlugin {
   private RepositoryService repoService_;
-  private static final Log LOG = ExoLogger.getLogger(JCRDataSanitizationUpgradePlugin.class.getName());
+  private static final Log LOG = ExoLogger.getLogger(InternalLinksUpgradePlugin.class.getName());
 
-  public JCRDataSanitizationUpgradePlugin(RepositoryService repoService, InitParams initParams){
+  public InternalLinksUpgradePlugin(RepositoryService repoService, InitParams initParams){
     super(initParams);
     repoService_ = repoService;
   }
