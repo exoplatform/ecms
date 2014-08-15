@@ -465,6 +465,7 @@
 					
 					var syncFunc;
 					var syncTimeout;
+					// sync scheduller
 					function scheduleSync() {
 						autoSyncs[syncName] = setTimeout(function() {
 							var syncProcess = syncFunc();
@@ -483,7 +484,27 @@
 					var doSync = function() {
 						return synchronize(drive.workspace, drive.path);
 					};
-
+					// default algorithm
+					var defaultSync = function() {
+						syncTimeout = 20000; // sync each 20sec
+						// use default sync function
+						syncFunc = doSync; 
+						scheduleSync();
+						utils.log("Periodical synchronization enabled for Cloud Drive on " + syncName);
+						
+						// run periodical sync for some period (30min)
+						var syncPeriod = 60000 * 30;
+						// ... increase timeout after a 1/3 of a period
+						setTimeout(function() {
+							syncTimeout = 40000;
+						}, Math.round(syncPeriod / 3));
+						// ... and stop sync after some period, user can enable it again by page refreshing/navigation
+						setTimeout(function() {
+							stopAutoSynchronize();
+							utils.log("Periodical synchronization stopped for Cloud Drive on " + syncName);
+						}, syncPeriod);
+					};
+					
 					// try load provider client
 					var moduleId = "SHARED/cloudDrive." + drive.provider.id;
 					var hasClient = window.require.s.contexts._.config.paths[moduleId]; 
@@ -492,6 +513,7 @@
 							// load client module and work with it asynchronously
 							window.require([moduleId], function(client) {
 								if (client && client.onChange && client.hasOwnProperty("onChange")) {
+									// apply custom client algorithm
 									syncTimeout = 5000; // sync in 5sec
 									syncFunc = function() { 
 										// We chain actual sync to the sync initiator from client.
@@ -515,6 +537,9 @@
 									};
 									scheduleSync();
 									utils.log("Client synchronization enabled for Cloud Drive on " + syncName);
+								} else {
+									// client doesn't provide onChange() method - apply default algorithm (in this async callback)
+									defaultSync();
 								}
 							}, function(err) {
 								utils.log("ERROR: Cannot load client synchronization module for Cloud Drive on " + syncName + ". " + JSON.stringify(err));
@@ -526,25 +551,9 @@
 						}
 					} 
 					
-					if (!hasClient || !syncFunc) {
-						// module not available or it doesn't provide onChange() method - run default periodic auto-sync
-						syncTimeout = 20000; // sync each 20sec
-						// use default sync function
-						syncFunc = doSync; 
-						scheduleSync();
-						utils.log("Periodical synchronization enabled for Cloud Drive on " + syncName);
-						
-						// run periodical sync for some period (30min)
-						var syncPeriod = 60000 * 30;
-						// ... increase timeout after a 1/3 of a period
-						setTimeout(function() {
-							syncTimeout = 40000;
-						}, Math.round(syncPeriod / 3));
-						// ... and stop sync after some period, user can enable it again by page refreshing/navigation
-						setTimeout(function() {
-							stopAutoSynchronize();
-							utils.log("Periodical synchronization stopped for Cloud Drive on " + syncName);
-						}, syncPeriod);
+					if (!hasClient) {
+						// module not available - run default periodic auto-sync
+						defaultSync();
 					} 
 				}
 			}
@@ -1633,58 +1642,6 @@
 				fileView.__cw_overridden = true;
 			}
 
-			// TODO Deprecated. Not used.
-			function actionAllowed(view) {
-				var allowed = true;
-				var actionEvent = window.event;
-				// if not ctrl+shift (create symlink)...
-				if (!(actionEvent.ctrlKey && actionEvent.shiftKey)) {
-					var leftClick = !((actionEvent.which && actionEvent.which > 1) || (actionEvent.button && actionEvent.button == 2));
-					var drive = cloudDrive.getContextDrive();
-					if (leftClick && drive) {
-						var itemsSelected = view.itemsSelected;
-						// this check based on code from UIListView.js
-						if (!itemsSelected || itemsSelected.length == 0) {
-							itemsSelected = simpleView ? simpleView.itemsSelected : undefined;
-						}
-
-						if (itemsSelected && itemsSelected.length) {
-							for (i in itemsSelected) {
-								if (Array.prototype[i]) {
-									continue;
-								}
-								var currentNode = itemsSelected[i];
-								var path = currentNode.getAttribute("objectId");
-								if (path) {
-									path = decodeURIComponent(path).split("+").join(" ");
-									if (path.indexOf(drive.path) == 0) {
-										// if node path starts with the drive root if left click (dragging) with
-										// selected cloud files, unselected cloud file elements
-										currentNode.isSelect = false;
-										currentNode.selected = null;
-										currentNode.style.background = "none";
-										allowed = false; // ...and cancel action
-									}
-								}
-							}
-						}
-					}
-				}
-				return allowed;
-			}
-
-			//if (typeof listView.__cw_overridden == "undefined") {
-				// TODO don't move files outside the drive but allow to symlink them (drag with ctrl+shift)
-				//listView.postGroupAction_orig = listView.postGroupAction;
-				//listView.postGroupAction = function(moveActionNode, ext) {
-				//	if (listView.enableDragAndDrop && actionAllowed(listView)) {
-				//		listView.postGroupAction_orig(moveActionNode, ext);
-				//	}
-				//};
-
-				//listView.__cw_overridden = true;
-			//}
-
 			function fixContextMenuPosition() {
 				// code adopted from original showItemContextMenu() in UISimpleView.js
 				var X = event.pageX || event.clientX;
@@ -1700,14 +1657,6 @@
 			}
 
 			if (typeof simpleView.__cw_overridden == "undefined") {
-				// TODO don't move files outside the drive but allow to symlink them (drag with ctrl+shift)
-				//simpleView.postGroupAction_orig = simpleView.postGroupAction;
-				//simpleView.postGroupAction = function(moveActionNode, ext) {
-				//	if (simpleView.enableDragAndDrop && actionAllowed(simpleView)) {
-				//		simpleView.postGroupAction_orig(moveActionNode, ext);
-				//	}
-				//};
-
 				// tune multi-selection menu
 				// showItemContextMenu will be invoked on multi-selection in Simple/Icon view
 				simpleView.showItemContextMenu_orig = simpleView.showItemContextMenu;
