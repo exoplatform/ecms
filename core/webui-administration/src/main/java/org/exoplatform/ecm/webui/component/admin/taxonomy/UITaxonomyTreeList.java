@@ -17,14 +17,6 @@
  **************************************************************************/
 package org.exoplatform.ecm.webui.component.admin.taxonomy;
 
-import java.util.ArrayList;
-import java.util.List;
-
-import javax.jcr.Node;
-import javax.jcr.RepositoryException;
-import javax.jcr.Value;
-import javax.jcr.ValueFormatException;
-
 import org.exoplatform.commons.utils.LazyPageList;
 import org.exoplatform.commons.utils.ListAccess;
 import org.exoplatform.commons.utils.ListAccessImpl;
@@ -42,6 +34,13 @@ import org.exoplatform.webui.config.annotation.EventConfig;
 import org.exoplatform.webui.core.UIApplication;
 import org.exoplatform.webui.event.Event;
 import org.exoplatform.webui.event.EventListener;
+
+import javax.jcr.Node;
+import javax.jcr.RepositoryException;
+import javax.jcr.Value;
+import javax.jcr.ValueFormatException;
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * Created by The eXo Platform SARL Author : Hoang Van Hung hunghvit@gmail.com
@@ -171,6 +170,8 @@ public class UITaxonomyTreeList extends UIPagingGridDecorator {
         Node taxonomyTreeNode = taxonomyService.getTaxonomyTree(taxoTreeName,true);
         actionService.removeAction(taxonomyTreeNode, repository);
         taxonomyService.removeTaxonomyTree(taxoTreeName);
+        org.exoplatform.services.cms.impl.Utils.addEditedConfiguredData(taxoTreeName, "TaxonomyTree",
+          "EditedConfiguredTaxonomyTree", true);
       } catch(RepositoryException e) {
         uiApp.addMessage(new ApplicationMessage("UITaxonomyTreeList.msg.remove-exception",
             null, ApplicationMessage.WARNING));

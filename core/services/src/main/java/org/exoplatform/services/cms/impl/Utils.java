@@ -31,11 +31,13 @@ import java.util.Collection;
 import java.util.Collections;
 import java.util.Comparator;
 import java.util.Date;
+import java.util.HashSet;
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
+import java.util.Set;
 import java.util.Queue;
 import java.util.Set;
 import java.util.zip.ZipEntry;
@@ -520,6 +522,17 @@ public class Utils {
     session.save();
     return serviceLogContentNode;
   }
+  /**
+   * Get Service Log Content Node of specific service.
+   *
+   * @param serviceName
+   * @return
+   * @throws Exception
+   */
+  
+  public static Node getServiceLogContentNode(String serviceName, String logType) throws Exception {
+    return getServiceLogContentNode(WCMCoreUtils.getSystemSessionProvider(), serviceName, logType);
+  }
 
   /**
    * Get all the templates which have been added into the system
@@ -562,6 +575,30 @@ public class Utils {
         String logData = serviceLogContentNode.getProperty(NodetypeConstant.JCR_DATA).getString();
         if (StringUtils.isEmpty(logData)) logData = template;
         else if (logData.indexOf(template) == -1) logData = logData.concat(";").concat(template);
+        serviceLogContentNode.setProperty(NodetypeConstant.JCR_DATA, logData);
+        serviceLogContentNode.getSession().save();
+      }
+    } finally {
+      systemProvider.close();
+    }
+  }
+
+  public static void removeEditedConfiguredData(String template,
+                                                String className,
+                                                String id,
+                                                boolean skipActivities) throws Exception {
+    SessionProvider systemProvider = SessionProvider.createSystemProvider();
+    try {
+      DocumentContext.getCurrent()
+                     .getAttributes()
+                     .put(DocumentContext.IS_SKIP_RAISE_ACT, skipActivities);
+      Node serviceLogContentNode = getServiceLogContentNode(systemProvider, className, id);
+      if (serviceLogContentNode == null)
+        return;
+      String logData = serviceLogContentNode.getProperty(NodetypeConstant.JCR_DATA).getString();
+      if (StringUtils.isNotBlank(logData)) {
+        logData = ";".concat(logData).replace(";".concat(template), StringUtils.EMPTY);
+        logData = StringUtils.substring(logData, 1);
         serviceLogContentNode.setProperty(NodetypeConstant.JCR_DATA, logData);
         serviceLogContentNode.getSession().save();
       }
