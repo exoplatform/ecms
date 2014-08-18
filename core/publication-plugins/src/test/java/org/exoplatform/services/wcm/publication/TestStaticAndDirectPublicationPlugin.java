@@ -32,13 +32,15 @@ import org.exoplatform.services.security.Identity;
 import org.exoplatform.services.wcm.core.NodetypeConstant;
 import org.exoplatform.services.wcm.utils.WCMCoreUtils;
 
+import org.junit.Ignore;
+
 /**
  * Created by The eXo Platform SAS
  * Author : eXoPlatform
  *          exo@exoplatform.com
  * Jul 24, 2012  
  */
-public class TestStaticAndDirectPublicationPlugin extends BasePublicationPluginTestCase {
+@Ignore public class TestStaticAndDirectPublicationPlugin extends BasePublicationPluginTestCase {
   
   private static final String CURRENT_STATE = "publication:currentState";
   private static final String TEST = "test";

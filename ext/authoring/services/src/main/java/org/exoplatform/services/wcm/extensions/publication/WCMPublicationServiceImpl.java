@@ -136,7 +136,6 @@ public class WCMPublicationServiceImpl
             node.addMixin("publication:authoring");
             node.setProperty("publication:lastUser", remoteUser);
             node.setProperty("publication:lifecycle", lifecycle.getName());
-            node.getSession().save();
 
           }
           enrollNodeInLifecycle(node, lifecycleName);
@@ -189,16 +188,14 @@ public class WCMPublicationServiceImpl
             }
             node.unlock();
             node.removeMixin(Utils.MIX_LOCKABLE);
-            node.getSession().save();
             // remove lock from Cache
             LockUtil.removeLock(node);
           }
         }
 
         context.put(AuthoringPublicationConstant.IS_INITIAL_PHASE, "true");
-        publicationPlugin.changeState(node, initialState, context);
         node.setProperty("publication:lastUser", remoteUser);
-        node.getSession().save();
+        publicationPlugin.changeState(node, initialState, context);         
       } catch (Exception e) {
         if (LOG.isErrorEnabled()) {
           LOG.error("Error setting staged state : ", e);
