@@ -25,6 +25,7 @@ def escapeChar = '%' as char
 	float: left;
 	width: 30%;
 	margin-left: 20px;
+	min-width: 225px;
 }
 
 .uiAuthoringDashboard .elements {
@@ -53,7 +54,7 @@ def escapeChar = '%' as char
 }
 
 .uiAuthoringDashboard .noContent {
-	color: #f9f9f9;
+	color: #999999;
 }
 
 .uiAuthoringDashboard .uiPageIterator {
@@ -64,6 +65,7 @@ def escapeChar = '%' as char
 
 .uiAuthoringDashboard .refresh {
 	margin-left: 20px;
+	 text-transform: capitalize;
 }
 
 </style>
