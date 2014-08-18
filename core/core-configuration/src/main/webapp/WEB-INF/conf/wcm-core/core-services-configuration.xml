@@ -333,13 +333,14 @@
     </component-plugin>
   </external-component-plugins>
 
+  <!-- Configures live time for drive service cache - Standalone mode -->
   <external-component-plugins>
     <target-component>org.exoplatform.services.cache.CacheService</target-component>
-    <component-plugin  profiles="cluster">
+    <component-plugin>
       <name>addExoCacheConfig</name>
       <set-method>addExoCacheConfig</set-method>
       <type>org.exoplatform.services.cache.ExoCacheConfigPlugin</type>
-      <description>Configures the cache for query service</description>
+      <description>Configures the cache for drive service</description>
       <init-params>
 	      <object-param>
 	        <name>cache.config.default</name>
@@ -355,13 +356,37 @@
     </component-plugin>
   </external-component-plugins>
   
+  <!-- Configures live time for drive service cache - Cluster mode -->  
+  <external-component-plugins>
+    <target-component>org.exoplatform.services.cache.CacheService</target-component>
+    <component-plugin  profiles="cluster">
+      <name>addExoCacheConfig</name>
+      <set-method>addExoCacheConfig</set-method>
+      <type>org.exoplatform.services.cache.ExoCacheConfigPlugin</type>
+      <description>Configures the cache for drive service</description>
+      <init-params>
+        <object-param>
+          <name>cache.config.default</name>
+          <description>The clustered cache configuration</description>
+          <object type="org.exoplatform.services.cache.impl.jboss.ea.EAExoCacheConfig">
+            <field name="name"><string>wcm.drive</string></field>
+            <field name="expirationTimeout"><long>${wcm.cache.managedrive.expirationtimeout.cluster:600000}</long></field>
+            <field name="maxNodes"><int>${wcm.cache.managedrive.maxnodes.cluster:5000}</int></field>
+            <field name="distributed"><boolean>true</boolean></field>
+          </object>
+        </object-param>
+      </init-params>
+    </component-plugin>
+  </external-component-plugins>
+  
+  <!-- Configures live time for service caches - Standalone mode -->
   <external-component-plugins>
     <target-component>org.exoplatform.services.cache.CacheService</target-component>
     <component-plugin>
       <name>addExoCacheConfig</name>
       <set-method>addExoCacheConfig</set-method>
       <type>org.exoplatform.services.cache.ExoCacheConfigPlugin</type>
-      <description>Configures the cache for Template Service</description>
+      <description>Configures the cache for Services</description>
       <init-params>
         <!-- ECMS | Scripts -->
         <object-param>
@@ -401,14 +426,63 @@
       </init-params>
     </component-plugin>
   </external-component-plugins>
+  
+  <!-- Configures live time for service caches - Cluster mode -->
+  <external-component-plugins>
+    <target-component>org.exoplatform.services.cache.CacheService</target-component>
+    <component-plugin  profiles="cluster">
+      <name>addExoCacheConfig</name>
+      <set-method>addExoCacheConfig</set-method>
+      <type>org.exoplatform.services.cache.ExoCacheConfigPlugin</type>
+      <description>Configures the cache for Services</description>
+      <init-params>
+        <!-- ECMS | Scripts -->
+        <object-param>
+          <name>org.exoplatform.services.cms.scripts.impl.ScriptServiceImpl</name>
+          <description></description>
+          <object type="org.exoplatform.services.cache.ExoCacheConfig">
+            <field name="name"><string>org.exoplatform.services.cms.scripts.impl.ScriptServiceImpl</string></field>
+            <field name="maxSize"><int>${wcm.cache.scriptservice.capacity.cluster:300}</int></field>
+            <field name="liveTime"><long>${wcm.cache.scriptservice.timetolive.cluster:600000}</long></field>
+            <field name="implementation"><string>org.exoplatform.services.cache.concurrent.ConcurrentFIFOExoCache</string></field>
+          </object>
+        </object-param>
+      
+        <!-- ECMS | Templates -->
+        <object-param>
+          <name>org.exoplatform.services.cms.templates.TemplateService</name>
+          <description></description>
+          <object type="org.exoplatform.services.cache.ExoCacheConfig">
+            <field name="name"><string>org.exoplatform.services.cms.templates.TemplateService</string></field>
+          <field name="maxSize"><int>${wcm.cache.templateservice.capacity.cluster:300}</int></field>
+          <field name="liveTime"><long>${wcm.cache.templateservice.timetolive.cluster:600000}</long></field>
+          <field name="implementation"><string>org.exoplatform.services.cache.concurrent.ConcurrentFIFOExoCache</string></field>
+          </object>
+        </object-param>
+        
+        <!-- ECMS | Webcontent -->
+        <object-param>
+          <name>org.exoplatform.services.wcm.webcontent.InitialWebContentPlugin</name>
+          <description></description>
+          <object type="org.exoplatform.services.cache.ExoCacheConfig">
+           <field name="name"><string>org.exoplatform.services.wcm.webcontent.InitialWebContentPlugin</string></field>
+            <field name="maxSize"><int>${wcm.cache.webcontent.initialwebcontentplugin.capacity.cluster:300}</int></field>
+            <field name="liveTime"><long>${wcm.cache.webcontent.initialwebcontentplugin.timetolive.cluster:600000}</long></field>
+            <field name="implementation"><string>org.exoplatform.services.cache.concurrent.ConcurrentFIFOExoCache</string></field>
+          </object>
+        </object-param>
+      </init-params>
+    </component-plugin>
+  </external-component-plugins>  
 
+  <!-- Configures live time for Fragment service caches - Standalone mode -->
   <external-component-plugins>
     <target-component>org.exoplatform.services.cache.CacheService</target-component>
     <component-plugin>
       <name>addExoCacheConfig</name>
       <set-method>addExoCacheConfig</set-method>
       <type>org.exoplatform.services.cache.ExoCacheConfigPlugin</type>
-      <description>Configures the cache for Template Service</description>
+      <description>Configures the cache for FragmentCache Service</description>
       <init-params>
         <!-- Markup Cache -->
       	<object-param>
@@ -418,6 +492,30 @@
            <field name="name"><string>FragmentCacheService</string></field>
             <field name="maxSize"><int>${wcm.cache.fragmentcacheservice.capacity:10000}</int></field>
             <field name="liveTime"><long>${wcm.cache.fragmentcacheservice.timetolive:30}</long></field>
+            <field name="implementation"><string>org.exoplatform.services.cache.concurrent.ConcurrentFIFOExoCache</string></field>
+          </object>
+        </object-param>
+      </init-params>
+    </component-plugin>
+  </external-component-plugins>
+
+  <!-- Configures live time for Fragment service caches - Cluster mode -->
+  <external-component-plugins>
+    <target-component>org.exoplatform.services.cache.CacheService</target-component>
+    <component-plugin  profiles="cluster">
+      <name>addExoCacheConfig</name>
+      <set-method>addExoCacheConfig</set-method>
+      <type>org.exoplatform.services.cache.ExoCacheConfigPlugin</type>
+      <description>Configures the cache for FragmentCache Service</description>
+      <init-params>
+        <!-- Markup Cache -->
+        <object-param>
+          <name>cache.config.FragmentCacheService</name>
+          <description></description>
+          <object type="org.exoplatform.services.cache.ExoCacheConfig">
+           <field name="name"><string>FragmentCacheService</string></field>
+            <field name="maxSize"><int>${wcm.cache.fragmentcacheservice.capacity.cluster:10000}</int></field>
+            <field name="liveTime"><long>${wcm.cache.fragmentcacheservice.timetolive.cluster:30}</long></field>
             <field name="implementation"><string>org.exoplatform.services.cache.concurrent.ConcurrentFIFOExoCache</string></field>
           </object>
         </object-param>
@@ -452,6 +550,7 @@
 		</component-plugin>
 	</external-component-plugins>
 	
+	<!-- Configures live time for PDF service caches - Standalone mode -->
   <external-component-plugins>
     <target-component>org.exoplatform.services.cache.CacheService</target-component>
     <component-plugin>
@@ -467,6 +566,29 @@
             <field name="name"><string>org.exoplatform.services.pdfviewer.PDFViewerService</string></field>
             <field name="maxSize"><int>${wcm.cache.pdfviewer.capacity:300}</int></field>
             <field name="liveTime"><long>${wcm.cache.pdfviewer.timetolive:600000}</long></field>
+            <field name="implementation"><string>org.exoplatform.services.cache.concurrent.ConcurrentFIFOExoCache</string></field>
+          </object>
+        </object-param>
+      </init-params>
+    </component-plugin>
+  </external-component-plugins>
+  
+  <!-- Configures live time for PDF service caches - Cluster mode -->
+  <external-component-plugins>
+    <target-component>org.exoplatform.services.cache.CacheService</target-component>
+    <component-plugin  profiles="cluster">
+      <name>addExoCacheConfig</name>
+      <set-method>addExoCacheConfig</set-method>
+      <type>org.exoplatform.services.cache.ExoCacheConfigPlugin</type>
+      <description>Configures the cache for PDF Viewer Service</description>
+      <init-params>
+        <object-param>
+          <name>org.exoplatform.services.pdfviewer.PDFViewerService</name>
+          <description></description>
+          <object type="org.exoplatform.services.cache.ExoCacheConfig">
+            <field name="name"><string>org.exoplatform.services.pdfviewer.PDFViewerService</string></field>
+            <field name="maxSize"><int>${wcm.cache.pdfviewer.capacity.cluster:300}</int></field>
+            <field name="liveTime"><long>${wcm.cache.pdfviewer.timetolive.cluster:600000}</long></field>
             <field name="implementation"><string>org.exoplatform.services.cache.concurrent.ConcurrentFIFOExoCache</string></field>
           </object>
         </object-param>
