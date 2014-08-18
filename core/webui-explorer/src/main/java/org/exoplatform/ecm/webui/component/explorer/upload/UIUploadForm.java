@@ -134,7 +134,7 @@ public class UIUploadForm extends UIForm implements UIPopupComponent, UISelectab
   final static public String FIELD_TAXONOMY = "fieldTaxonomy";
   final static public String FIELD_LISTTAXONOMY = "fieldListTaxonomy";
   final static public String POPUP_TAXONOMY = "UIPopupTaxonomy";
-  final static public String ACCESSIBLE_MEDIA = "accessibleMedia";
+  final static public String ACCESSIBLE_MEDIA = "accessibleMedia";  
 
   private boolean isMultiLanguage_;
   private String language_;
@@ -633,7 +633,10 @@ public class UIUploadForm extends UIForm implements UIPopupComponent, UISelectab
               uploadedNode = newNode;
             }
           }
-
+          if(mimeType.indexOf(Utils.FLASH_MIMETYPE) >= 0 && uploadedNode.canAddMixin(Utils.EXO_RISIZEABLE)) {
+          	uploadedNode.addMixin(Utils.EXO_RISIZEABLE);
+          	uploadedNode.save();
+          }
           //get file size
           double size = 0;
           if (uploadedNode.hasNode(Utils.JCR_CONTENT)) {

@@ -1,5 +1,5 @@
-<% 
-  import org.exoplatform.ecm.webui.utils.Utils;
+<%
+  import org.exoplatform.ecm.webui.utils.Utils ;
   
   String[] hiddenField1 = ["jcrPath=/node/jcr:content", "nodetype=nt:resource", "mixintype=dc:elementSet", "visible=false"] ; 
   String[] hiddenField2 = ["jcrPath=/node/jcr:content/jcr:encoding", "visible=false", "UTF-8"] ;
@@ -10,62 +10,61 @@
   uicomponent.addCalendarField("hiddenInput4", hiddenField4) ;
   uicomponent.addCalendarField("hiddenInput5", hiddenField5) ;
 %>
-<div class="UIForm FormLayout FormScrollLayout">
+<div class="UIForm FormLayout FormScrollLayout">  
   <% uiform.begin() %>
-
-	<div class="uiBox">
   <%/* start render action*/%>
   <% if (uiform.isShowActionsOnTop()) {
-            uiform.processRenderAction();
+            uiform.processRenderAction()
          }
   %>
   <%/* end render action*/%>
-    <div class="form-horizontal uiContentBox">
-        <div class="control-group">
-          <label class="control-label" for="name"><%=_ctx.appRes("File.dialog.label.name")%>:</label>
-          <div class="controls">
+  <div class="HorizontalLayout">
+    <table class="UIFormGrid">
+        <tr>
+          <td class="FieldLabel"><label for="name"><%=_ctx.appRes("File.dialog.label.name")%></label></td>
+          <td class="FieldComponent">
             <%
               String[] fieldName = ["jcrPath=/node", "mixintype=mix:votable,mix:commentable,mix:i18n,dc:elementSet", "editable=if-null", "validate=empty,name"];
               uicomponent.addTextField("name", fieldName) ; 
             %>
-          </div>
-        </div>
+          </td>
+        </tr>
 				<%if(!uicomponent.getId().equals("UILanguageDialogForm")){%>
-					<div class="control-group">
-			      <label class="control-label" for="categories"><%=_ctx.appRes("File.dialog.label.categories")%>:</label>
-			      <div class="controls">
+					<tr>
+			      <td class="FieldLabel"><label for="categories"><%=_ctx.appRes("File.dialog.label.categories")%></label></td>
+			      <td class="FieldComponent">
 				      <% 
 				        String[] fieldCategories = ["jcrPath=/node/exo:category", "multiValues=true", "reference=true", "editable=false"];
 				        uicomponent.addTextField("categories", fieldCategories);
 				      %>
-				    </div>
-				  </div>
+				    </td>
+				  </tr>
 			  <%}%>
         <%
         if(!uicomponent.isEditing()){%>
-            <div class="control-group">                      
-              <label class="control-label" for="mimetype"><%=_ctx.appRes("File.dialog.label.mimeType")%>:</label>
-              <div class="controls">
+            <tr>                        
+              <td class="FieldLabel"><label for="mimetype"><%=_ctx.appRes("File.dialog.label.mimeType")%></label></td>
+              <td class="FieldComponent">
                 <%
                   String[] mimetype = ["jcrPath=/node/jcr:content/jcr:mimeType", "text/html", "options=text/html,text/plain,application/x-groovy+html", "onchange=true"] ;
                   uicomponent.addSelectBoxField("mimetype", mimetype) ;
                 %>
-              </div>
-            </div>
+              </td>
+            </tr>
         <%}%>
-				<div class="control-group">
-					<label class="control-label" for="content-lang"><%=_ctx.appRes("ElementSet.dialog.label.language")%></label>
-					<div class="controls">
-						<%
-							String lang = org.exoplatform.portal.webui.util.Util.getPortalRequestContext().getLocale().toString();
-							String[] fieldLang = ["jcrPath=/node/exo:language", "script=ecm-explorer/widget/FillSelectBoxWithLanguage.groovy", lang] ;
-							uicomponent.addSelectBoxField("content-lang", fieldLang) ;
-						%>
-					</div>
-				</div>
-        <div class="control-group">
-          <label class="control-label" for="content"><%=_ctx.appRes("File.dialog.label.content")%>:</label>
-          <div class="controls">
+		<tr>
+        	<td class="FieldLabel"><label for="content-lang"><%=_ctx.appRes("ElementSet.dialog.label.language")%></label></td>
+			<td class="FieldComponent">
+			<%
+			  String lang = org.exoplatform.portal.webui.util.Util.getPortalRequestContext().getLocale().toString();
+			  String[] fieldLang = ["jcrPath=/node/exo:language", "script=ecm-explorer/widget/FillSelectBoxWithLanguage.groovy", lang] ;
+			  uicomponent.addSelectBoxField("content-lang", fieldLang) ;
+			%>
+			</td>
+		</tr>
+        <tr>
+          <td class="FieldLabel"><label for="content"><%=_ctx.appRes("File.dialog.label.content")%></label></td>
+          <td class="FieldComponent">
               <%
                 if(uicomponent.isEditing()) { 
                   def curNode = uicomponent.getNode() ;
@@ -82,18 +81,21 @@
                               uicomponent.addTextAreaField("content", fieldSummary) ;
                       }
                     } else {
-                    if (content.getProperty("jcr:data").getStream().available() > 0 && !uicomponent.isDataRemoved("/jcr:content")) {
+                    if (content.getProperty("jcr:data").getStream().available() > 0) {
                         def actionLink = uicomponent.event("RemoveData", "/jcr:content");
                         def fileName = Utils.getTitle(curNode);
                         %> 
-										
-											<a class="nameInfo" rel="tooltip" data-placement="bottom" title="$fileName">
-												 $fileName
-											</a>
-											<a class="actionIcon" href="$actionLink">
-												<i class="uiIconDelete uiIconLightGray" rel="tooltip" data-placement="bottom" title="<%=_ctx.appRes("Ecm.dialog.label.remove")%>" alt="<%=_ctx.appRes("Ecm.dialog.label.remove")%>"></i>
-											</a>
-										
+                          <div>
+                          <div style="font-size:12px; font-weight: bold; line-height: 17px;">
+                       	   <%=_ctx.appRes("File.dialog.label.re-upload")%>
+                          </div>
+                          <a style="font-size:12px; font-weight: bold; line-height: 17px;">
+                             $fileName
+                          </a>
+                          <a href="$actionLink">
+							 <img src="/eXoResources/skin/DefaultSkin/background/Blank.gif" alt="<%=_ctx.appRes("Ecm.dialog.label.remove")%>" class="ActionIcon Remove16x16Icon"/>
+						  </a>
+						  </div>
                        <%
                     }else{
  			        String[] fieldData = ["jcrPath=/node/jcr:content/jcr:data"] ;
@@ -121,51 +123,80 @@
                   }
                 }
               %>
-          </div>
-        </div>     
-          <div class="control-group">
-            <label class="control-label" for="title"><%=_ctx.appRes("ElementSet.dialog.label.title")%></label>
-            <div class="controls">
+          </td>
+        </tr>       
+        <%
+        	def curNode = uicomponent.getNode() ;
+        	if(curNode != null && curNode.hasNode("jcr:content")) {
+        	  def content = curNode.getNode("jcr:content") ;
+            String mimeType = content.getProperty("jcr:mimeType").getString() ;
+            if(mimeType.indexOf(Utils.FLASH_MIMETYPE) >= 0){
+        %>
+		        	<tr>
+					      <td class="FieldLabel"><%=_ctx.appRes("File.dialog.label.width")%></td>
+					      <td class="FieldComponent">
+						      <% 
+						        String[] fieldWidth = ["jcrPath=/node/exo:documentWidth", "validate=number"];
+						        uicomponent.addTextField("width", fieldWidth);
+						      %>
+						    </td>
+						  </tr>	
+						  
+						   <tr>
+					      <td class="FieldLabel"><%=_ctx.appRes("File.dialog.label.height")%></td>
+					      <td class="FieldComponent">
+						      <% 
+						        String[] fieldHeight = ["jcrPath=/node/exo:documentHeight", "validate=number"];
+						        uicomponent.addTextField("height", fieldHeight);
+						      %>
+						    </td>
+						  </tr> 		
+        <%    
+            }
+        	}
+        %> 
+          <tr>
+            <td class="FieldLabel"><label for="title"><%=_ctx.appRes("ElementSet.dialog.label.title")%></label></td>
+            <td class="FieldComponent">
               <%
                 String[] fieldTitle = ["jcrPath=/node/jcr:content/dc:title", "multiValues=true"] ;
                 uicomponent.addTextField("title", fieldTitle) ;
               %>
-            </div>
-          </div>
-          <div class="control-group">
-            <label class="control-label" for="description"><%=_ctx.appRes("ElementSet.dialog.label.description")%></label>
-            <div class="controls">
+            </td>
+          </tr>
+          <tr>
+            <td class="FieldLabel"><label for="description"><%=_ctx.appRes("ElementSet.dialog.label.description")%></label></td>
+            <td class="FieldComponent">
               <%
                 String[] fieldDescription = ["jcrPath=/node/jcr:content/dc:description", "multiValues=true"] ;
                 uicomponent.addTextField("description", fieldDescription) ; ;
               %>
-            </div>
-          </div>
-          <div class="control-group">
-            <label class="control-label" for="creator"><%=_ctx.appRes("ElementSet.dialog.label.creator")%></label>
-            <div class="controls">
+            </td>
+          </tr>
+          <tr>
+            <td class="FieldLabel"><label for="creator"><%=_ctx.appRes("ElementSet.dialog.label.creator")%></label></td>
+            <td class="FieldComponent">
               <%
                 String[] fieldCreator = ["jcrPath=/node/jcr:content/dc:creator", "multiValues=true"] ;
                 uicomponent.addTextField("creator", fieldCreator) ;
               %>
-            </div>
-          </div>
-          <div class="control-group">
-           <label class="control-label" for="source"><%=_ctx.appRes("ElementSet.dialog.label.source")%></label>
-            <div class="controls">
+            </td>
+          </tr>
+          <tr>
+            <td class="FieldLabel"><label for="source"><%=_ctx.appRes("ElementSet.dialog.label.source")%></label></td>
+            <td class="FieldComponent">
               <%
                 String[] fieldSource = ["jcrPath=/node/jcr:content/dc:source", "multiValues=true"] ;
                 uicomponent.addTextField("source", fieldSource) ;
               %>
-            </div>
-          </div>
+            </td>
+          </tr>
           
-    </div>
-
+    </table>       
+  </div>
   <% if (!uiform.isShowActionsOnTop()) {
             uiform.processRenderAction()
          }
   %>
-  </div>
   <%uiform.end()%>
 </div>
