@@ -31,14 +31,17 @@ import org.exoplatform.commons.api.search.data.SearchContext;
 import org.exoplatform.commons.api.search.data.SearchResult;
 import org.exoplatform.container.ExoContainerContext;
 import org.exoplatform.container.xml.InitParams;
+import org.exoplatform.services.cms.BasePath;
 import org.exoplatform.services.cms.drives.DriveData;
 import org.exoplatform.services.cms.drives.ManageDriveService;
 import org.exoplatform.services.cms.impl.Utils;
 import org.exoplatform.services.jcr.RepositoryService;
+import org.exoplatform.services.jcr.ext.hierarchy.NodeHierarchyCreator;
 import org.exoplatform.services.log.ExoLogger;
 import org.exoplatform.services.log.Log;
 import org.exoplatform.services.security.ConversationState;
 import org.exoplatform.services.security.IdentityConstants;
+import org.exoplatform.services.wcm.core.NodeLocation;
 import org.exoplatform.services.wcm.core.NodetypeConstant;
 import org.exoplatform.services.wcm.search.QueryCriteria;
 import org.exoplatform.services.wcm.search.ResultNode;
@@ -220,10 +223,17 @@ public abstract class BaseSearchServiceConnector extends SearchServiceConnector 
    * @throws Exception
    */
   protected DriveData getDriveData(Node node) throws Exception {
+    String nodePath = node.getPath();
+    NodeLocation nodeLocation = NodeLocation.getNodeLocationByNode(node);
+    String workspaceName = nodeLocation.getWorkspace();
+    NodeHierarchyCreator nodeHierarchyCreator = WCMCoreUtils.getService(NodeHierarchyCreator.class);
+    String userPath = nodeHierarchyCreator.getUserNode(WCMCoreUtils.getSystemSessionProvider(), WCMCoreUtils.getRemoteUser()).getPath();
     List<DriveData> dataList = getDriveDataList();
     DriveData ret = null;
     for (DriveData data : dataList) {
-      if (node.getPath().startsWith(data.getHomePath())) {
+      if (!data.getWorkspace().equalsIgnoreCase(workspaceName)) continue;
+      if (nodePath.startsWith(userPath) && (data.getHomePath().startsWith(nodeHierarchyCreator.getJcrPath(BasePath.CMS_USERS_PATH) + "/${userId}"))
+          || (node.getPath().startsWith(data.getHomePath()))) {
         if (ret == null || ret.getHomePath().length() < data.getHomePath().length()) {
           ret = data;
         }
