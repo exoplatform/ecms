@@ -350,8 +350,10 @@ public class PasteManageComponent extends UIAbstractManagerComponent {
         destNode = (Node) destSession.getItem(destPath);
       }
 
-      // Update thumbnail for the node after pasting
-      thumbnailService.copyThumbnailNode(srcThumbnailNode, destNode);
+      if (!srcWorkspace.equals(destWorkspace) || !srcPath.equals(destPath)) {
+        // Update thumbnail for the node after pasting
+        thumbnailService.copyThumbnailNode(srcThumbnailNode, destNode);
+      }
     } catch (ConstraintViolationException ce) {
       uiApp.addMessage(new ApplicationMessage("UIPopupMenu.msg.current-node-not-allow-paste", null,
           ApplicationMessage.WARNING));

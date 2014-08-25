@@ -153,9 +153,9 @@ public class TrashServiceImpl implements TrashService {
       cache.remove(seoService.getHash(nodeUUID));
     }
     if (!node.isNodeType(EXO_RESTORE_LOCATION)) {
-      addRestorePathInfo(node);
       ManageableRepository manageableRepository = repositoryService.getCurrentRepository();
       Session trashSession = WCMCoreUtils.getSystemSessionProvider().getSession(this.trashWorkspace_, manageableRepository);
+      
       String actualTrashPath = this.trashHome_ + (this.trashHome_.endsWith("/") ? "" : "/")
           + fixRestorePath(nodeName);
       if (trashSession.getWorkspace().getName().equals(
@@ -185,8 +185,29 @@ public class TrashServiceImpl implements TrashService {
         }
         node.remove();
       }
-
       trashSession.save();
+      Node nodeInTrash = null;
+      if (nodeUUID != null) {
+        nodeInTrash = trashSession.getNodeByUUID(nodeUUID);
+      } else {
+        Node nodeSameName = (Node)trashSession.getItem(actualTrashPath);
+        Node parent = nodeSameName.getParent();
+        NodeIterator nodesInTrash = null;
+        nodesInTrash = parent.getNodes(nodeSameName.getName());
+        while (nodesInTrash.hasNext()) {
+          Node trashChild = nodesInTrash.nextNode();
+          if (nodeInTrash == null) {
+            nodeInTrash = trashChild;
+          }
+          if (nodeInTrash.getIndex() < trashChild.getIndex()) {
+            nodeInTrash = trashChild;
+          }
+        }
+      }
+      nodeInTrash.addMixin(EXO_RESTORE_LOCATION);
+      nodeInTrash.setProperty(RESTORE_PATH, fixRestorePath(originalPath));
+      nodeInTrash.setProperty(RESTORE_WORKSPACE, nodeWorkspaceName);
+
       
       //check and delete target node when there is no its symlink
       if (deep == 0 && taxonomyLinkUUID != null && taxonomyLinkWS != null) {
@@ -215,25 +236,6 @@ public class TrashServiceImpl implements TrashService {
       
       trashSession.save();
     }
-  }
- 
-  /* Store original path of deleted node.
-  * 
-  * @param node
-  * @throws RepositoryException 
-  * @throws LockException 
-  * @throws ConstraintViolationException 
-  * @throws VersionException 
-  * @throws NoSuchNodeTypeException 
-  */
-  private void addRestorePathInfo(Node node) throws Exception {
-    String originWorkspace = node.getSession().getWorkspace().getName();
-    Session sysSession = WCMCoreUtils.getSystemSessionProvider().getSession(originWorkspace, WCMCoreUtils.getRepository());
-    Node sysSessionNode = (Node)sysSession.getItem(node.getPath());
-    sysSessionNode.addMixin(EXO_RESTORE_LOCATION);
-    sysSessionNode.setProperty(RESTORE_PATH, fixRestorePath(node.getPath()));
-    sysSessionNode.setProperty(RESTORE_WORKSPACE, originWorkspace);
-    sysSession.save();
   }
   
   /**
