@@ -185,7 +185,6 @@ public class TrashServiceImpl implements TrashService {
         }
         node.remove();
       }
-      
       trashSession.save();
       Node nodeInTrash = null;
       if (nodeUUID != null) {
@@ -193,7 +192,7 @@ public class TrashServiceImpl implements TrashService {
       } else {
         Node nodeSameName = (Node)trashSession.getItem(actualTrashPath);
         Node parent = nodeSameName.getParent();
-    	NodeIterator nodesInTrash = null;
+        NodeIterator nodesInTrash = null;
         nodesInTrash = parent.getNodes(nodeSameName.getName());
         while (nodesInTrash.hasNext()) {
           Node trashChild = nodesInTrash.nextNode();
