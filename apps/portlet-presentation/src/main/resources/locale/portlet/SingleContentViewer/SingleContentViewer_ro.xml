@@ -1,0 +1,119 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<bundle>
+  <UIPresentationContainer>
+    <title>
+      <QuickEdit>Editare în Explorerul de Conținut</QuickEdit>
+      <print>Tipărește această pagină</print>
+      <FastPublish>Publică</FastPublish>
+    </title>
+    <label>
+      <draft>Ciornă</draft>
+      <print>Tipărește</print>
+    </label>
+    <msg>
+      <no-content>Nu a fost găsit conținut.</no-content>
+      <internal-server-error>Eroare în timp ce solicită date de la sever.</internal-server-error>
+      <empty-title-error>Vă rugăm să specificaţi noul titlu.</empty-title-error>
+    </msg>
+  </UIPresentationContainer>
+  <CorrectContentSelectorPopupWindow>
+    <title>
+      <UIContentSelectorOne>Selectaţi conţinutul</UIContentSelectorOne>
+    </title>
+  </CorrectContentSelectorPopupWindow>
+  <UISingleContentViewerPortlet>
+    <msg>
+      <AccessControlException>Nu aveţi permisiunea de a intra în modul de editare.</AccessControlException>
+    </msg>
+  </UISingleContentViewerPortlet>
+  <UISCVContextualRadioBox>
+    <label>
+      <Enable>Activat</Enable>
+      <Disable>Dezactivat</Disable>
+    </label>
+  </UISCVContextualRadioBox>
+  <UIPreferencesPopupWindows>
+    <title>
+      <UISCVPreferences>Preferințe detalii ale conținutului</UISCVPreferences>
+    </title>
+  </UIPreferencesPopupWindows>
+  <UISCVPreferences>
+    <action>
+      <Save>#{word.save}</Save>
+      <Abort>Renunță</Abort>
+      <Cancel>#{word.cancel}</Cancel>
+      <Print>Tipărește</Print>
+      <Close>#{word.close}</Close>
+    </action>
+    <title>Preferințe detalii ale conținutului</title>
+    <label>
+      <Back>Înapoi la pagina anterioară</Back>
+      <Edit>Modifică</Edit>
+      <Preferences>Preferinţe</Preferences>
+      <Title>Preferințe detalii ale conținutului</Title>
+      <UISCVShowTitleConfigurationCheckBox>Arată Titlul</UISCVShowTitleConfigurationCheckBox>
+      <UISCVShowDateConfigurationCheckBox>Arată data</UISCVShowDateConfigurationCheckBox>
+      <UISCVShowOptionBarConfigurationCheckBox>Arată bara de opțiuni</UISCVShowOptionBarConfigurationCheckBox>
+      <DisplaySettingBlock>Setările de afişare</DisplaySettingBlock>
+      <ContentPathBlock>Selecție conținut</ContentPathBlock>
+      <UISCVConfigItemPathFormInputSet>Calea conţinutului</UISCVConfigItemPathFormInputSet>
+    <UISCVContentPathConfigurationInputBox>Calea conţinutului</UISCVContentPathConfigurationInputBox>
+      <Advance>Setări avansate</Advance>
+      <ContextCaption>Navigare dinamică</ContextCaption>
+      <UISCVContextualRadioBox>Conținut contextual</UISCVContextualRadioBox>
+      <UISCVParameterInputBox>de</UISCVParameterInputBox>
+      <PrintSettingBlock>Setările de imprimare</PrintSettingBlock>
+      <UISCVPrintPageParameter>cu</UISCVPrintPageParameter>
+      <UISCVConfigPrintPageFormInputSet>Arată în pagină</UISCVConfigPrintPageFormInputSet>
+      <LockStatus>Blocare</LockStatus>
+      <CacheManagement>Vizibilitatea conținutului</CacheManagement>
+      <UISCVCacheRadioBox>Partajaţi conţinut</UISCVCacheRadioBox>
+    </label>
+    <help>
+      <ContentPathBlock>Selectați conținutul pe care doriți să-l afișați. Selecţia implicită va fi înlocuită dinamic dacă activezi opţiunea de navigare dinamică (a se vedea modul avansat mai jos).</ContentPathBlock>
+      <DisplaySettingBlock>Puteţi afișa sau ascunde bara de opţiune utilizată pentru a afişa link-ul de imprimare. Afișarea titlului și datei sunt, de asemenea, opţionale.</DisplaySettingBlock>
+      <ContextualHelp>Activează navigarea dinamică. Conţinutul poate fi schimbat dinamic de un alt parametru bazat pe URL.</ContextualHelp>
+      <ParameterHelp>Acest parametru va fi folosit pentru a obţine conţinut dacă este activat-navigare dinamică.</ParameterHelp>
+    </help>
+    <msg>
+      <not-valid-path>Calea elementului este invalidă.</not-valid-path>
+    </msg>
+    <tab>
+      <label>
+        <UISCVConfigContentFormInputSet>Selecție conținut</UISCVConfigContentFormInputSet>
+        <UISCVConfigDisplayFormInputSet>Setările de afişare</UISCVConfigDisplayFormInputSet>
+        <UISCVConfigPrintFormInputSet>Setările de imprimare</UISCVConfigPrintFormInputSet>
+        <UISCVConfigAdvancedFormInputSet>Setări avansate</UISCVConfigAdvancedFormInputSet>
+      </label>
+    </tab>
+  </UISCVPreferences>
+  <UISCVConfigItemPathFormInputSet>
+    <title>
+      <SelectFolderPath>Selectaţi calea folderului</SelectFolderPath>
+      <AddPath>Adaugă cale</AddPath>
+    </title>
+  </UISCVConfigItemPathFormInputSet>
+  <UISCVConfigPrintPageFormInputSet>
+    <title>
+      <SelectTargetPage>Arată în pagină</SelectTargetPage>
+    </title>
+  </UISCVConfigPrintPageFormInputSet>
+  <PublicationStates>
+    <archived>Arhivată</archived>
+    <obsolete>Învechite</obsolete>
+    <unpublished>Nepublicate</unpublished>
+    <enrolled>Înscrişi</enrolled>
+    <draft>Ciornă</draft>
+    <pending>În așteptare</pending>
+    <approved>Aprobat</approved>
+    <inreview>În revizuire</inreview>
+    <staged>În practică</staged>
+    <published>Publicat</published>
+  </PublicationStates>
+  <UISCVCacheRadioBox>
+    <label>
+      <Enable>Limitat de autentificare</Enable>
+      <Disable>Limitat de rolurile de utilizator</Disable>
+    </label>
+  </UISCVCacheRadioBox>
+</bundle>

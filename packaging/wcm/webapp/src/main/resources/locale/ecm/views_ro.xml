@@ -1,0 +1,227 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<bundle>
+ 
+  <View>
+    <label>
+      <languages>
+        <en>Engleză</en>
+        <fr>Franceză</fr>
+        <ru>Rusă</ru>
+        <vi>Vietnameză</vi>
+        <nl>Olandeză</nl>
+        <de>Germană</de>
+        <uk>Ucraineană</uk>
+        <ar>Arabă</ar>
+      </languages>
+    </label>
+  </View>
+ 
+  <!--
+  ################resoucebundle FOR EXO:COMMENT VIEW TEMPLATE#############
+  -->
+  <Comment>
+    <view>
+      <label>
+        <postedBy>Ultimul comentariu postat de</postedBy>
+        <at>la</at>
+        <comments>Comentariu(i)</comments>
+        <show-comments>Afişează Comentarii</show-comments>
+        <hide-comments>Ascunde Comentarii</hide-comments>
+        <comment-by>Comentat de către</comment-by>
+        <email>E-mail</email>
+        <site>Site-ul</site>
+      </label>
+    </view>
+  </Comment>
+ 
+  <!--
+  ################resoucebundle FOR NT:FILE VIEW TEMPLATE##############
+  -->
+  <File>
+    <view>
+      <label>
+        <not-viewable>Acest document nu poate fi previzualizat.</not-viewable>
+        <using-webDAV>sau deschide în Office</using-webDAV>
+        <file-size-too-big>Conținutul acestui fișier este prea mare. Ar trebui să-l salvați și să-l deschideți pe calculator.</file-size-too-big>
+        <webDAV>Vizualizare WebDAV</webDAV>
+        <download>Descarcă</download>
+        <htmlview>Vezi HTML</htmlview>
+        <plaintextview>Vezi text simplu</plaintextview>
+      </label>
+    </view>
+  </File>
+ 
+  <!--
+  ################resoucebundle FOR MAIL:DOCUMENT VIEW TEMPLATE##############
+  -->
+  <Mail>
+    <view>
+      <label>
+        <from>De la:</from>
+        <to>La:</to>
+        <cc>Cc:</cc>
+        <date>Data:</date>
+        <subject>Subiect:</subject>
+        <attachment>Ataşamente:</attachment>
+      </label>
+    </view>
+  </Mail>
+  <!--
+  ################resoucebundle FOR EXO:VOTE VIEW TEMPLATE##############
+  -->
+  <Vote>
+    <view>
+      <label>
+        <avg-rating>Rating mediu</avg-rating>
+        <subscription>Voturi</subscription>
+      </label>
+    </view>
+  </Vote>
+  <!--
+  ################resoucebundle FOR LISTVIEW VIEW TEMPLATE##############
+  -->
+  <ListView>
+    <view>
+      <label>
+        <name>Nume</name>
+        <versionable>Cu versiuni</versionable>
+        <exo_owner>Proprietar</exo_owner>
+        <exo_dateCreated>Data creării</exo_dateCreated>
+        <exo_dateModified>Data modificării</exo_dateModified>
+        <auditing>Audit</auditing>
+      </label>
+    </view>
+  </ListView>
+
+  <!--
+  ###################### resoucebundle for exo:addMetadataAction view template ####
+  -->
+  <AddMetadata>
+    <view>
+      <label>
+        <action-name>Nume acţiune</action-name>
+        <lifecycle>Ciclul de viaţă</lifecycle>
+        <metadata>Metadate</metadata>
+        <description>Descriere</description>
+      </label>
+    </view>
+  </AddMetadata>
+
+  <!--
+  ###################### resoucebundle for exo:autoVersioning view template ####
+  -->
+  <AutoVersioning>
+    <view>
+      <label>
+        <action-name>Nume acţiune</action-name>
+        <lifecycle>Ciclul de viaţă</lifecycle>
+        <description>Descriere</description>
+      </label>
+    </view>
+  </AutoVersioning>
+  <!--
+  ###################### resoucebundle for exo:enableVersiong view template ####
+  -->
+  <EnableVersioning>
+    <view>
+      <label>
+        <action-name>Nume</action-name>
+        <lifecycle>Ciclul de viaţă</lifecycle>
+        <description>Descriere</description>
+      </label>
+    </view>
+  </EnableVersioning>
+  <!--
+  ###################### resoucebundle for dc:elementSet view template ####
+  -->
+  <ElementSet>
+    <view>
+      <label>
+        <not-avaliable>N/A</not-avaliable>
+        <core-elements>Elementele de bază</core-elements>
+        <title>Titlu</title>
+        <creator>Creator</creator>
+        <subject>Subiect</subject>
+        <source>Sursa</source>
+        <contributor>Colaborator</contributor>
+        <resource-type>Tipul resursei</resource-type>
+        <date>Data</date>
+        <publisher>Editor</publisher>
+        <description>Descriere</description>
+        <rights>Drepturi</rights>
+        <relation>Relaţia</relation>
+        <format>Formatul</format>
+        <coverage>Acoperire</coverage>
+        <identifier>Identificator</identifier>
+        <languages>Limbi</languages>
+      </label>
+      <action>
+        <add-edit>Adăugare/Editare</add-edit>
+        <cancel>#{word.cancel}</cancel>
+      </action>
+      <tooltip>
+        <cancel>#{word.cancel}</cancel>
+        <add-edit>Adăugare/Editare proprietăţi</add-edit>
+      </tooltip>
+    </view>
+  </ElementSet>
+
+  <ScriptAction>
+    <view>
+      <label> 
+        <isDeep>Este recursiv</isDeep>
+        <nodetypes>Tipuri de module</nodetypes>
+        <affectedNodeTypeNames>Tipuri de module afectate</affectedNodeTypeNames>
+        <nodeTypeName>Nume tip de modul</nodeTypeName>
+      </label> 
+    </view>
+  </ScriptAction>
+  
+  <AddMetadata>
+    <view>
+      <label>
+        <isDeep>Este recursiv</isDeep>
+        <nodetypes>Tipuri de module</nodetypes>
+        <affectedNodeTypeNames>Tipuri de module afectate</affectedNodeTypeNames>
+        <nodeTypeName>Nume tip modul</nodeTypeName>
+      </label> 
+    </view>
+  </AddMetadata>
+
+  <EnableVersioning>
+    <view>
+      <label>
+        <isDeep>Este recursiv</isDeep>
+        <nodetypes>Tipuri de module</nodetypes> 
+        <affectedNodeTypeNames>Tipuri de module afectate</affectedNodeTypeNames>
+        <nodeTypeName>Nume tip modul</nodeTypeName>
+      </label> 
+    </view>
+  </EnableVersioning>
+  
+  <AutoVersioning>
+    <view>
+      <label>
+        <isDeep>Este recursiv</isDeep>
+        <nodetypes>Tipuri de module</nodetypes>
+        <affectedNodeTypeNames>Tipuri de module afectate</affectedNodeTypeNames>
+        <nodeTypeName>Nume tip modul</nodeTypeName>
+      </label> 
+    </view>
+  </AutoVersioning>
+  
+   <AccessibleMedia>
+    <view>
+      <label>
+      <Play-audio-description-of-this-video>Descriere audio</Play-audio-description-of-this-video>
+      <Read-more>Citește mai mult</Read-more>
+      <Read-less>Citește mai puţin</Read-less>
+      <Switch-back-to-original-video>Video original</Switch-back-to-original-video>
+      </label>
+      <tooltip>
+      <A-second-media-file-is-available-as-audio-description>Un al doilea fişier media este disponibil ca și descriere audio</A-second-media-file-is-available-as-audio-description>
+      </tooltip>
+    </view>
+  </AccessibleMedia>
+ 
+</bundle>

@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<bundle>
+  <!--
+  #####################################################################
+  # org.exoplatform.ecm.webui.tree.selectmany.UICategoriesSelectPanel #
+  #####################################################################
+  -->
+  <UITreeList>
+    <header>
+      <name>Nume</name>
+      <action>Adaugă</action>
+    </header>
+    <info>
+      <child-not-found>Nu a fost găsită o subcategorie!</child-not-found>
+    </info>
+  </UITreeList>
+  <!--
+  ######################################################################
+  # org.exoplatform.ecm.webui.tree.selectmany.UISelectedCategoriesGrid #
+  ######################################################################
+  -->
+  <UISelectedCategoriesGrid>
+    <header>
+      <categoryName>Numele categoriei</categoryName>
+      <categoryPath>Cale categorie</categoryPath>
+      <action>#{word.action}</action>
+    </header>
+    <action>
+      <SaveCategories>#{word.save}</SaveCategories>
+      <Cancel>#{word.cancel}</Cancel>
+    </action>
+    <msg>
+      <cannot-save>Categoriile nu au fost salvate.</cannot-save>
+      <have-saved>Categoriile au fost salvate cu succes</have-saved>
+      <non-categories>Categoriile sunt greşite. Vă rugăm să selectaţi categoriile potrivite.</non-categories>
+      <confirm-delete>Doriţi să ştergeţi această categorie?</confirm-delete>
+    </msg>
+  </UISelectedCategoriesGrid>
+  <!--
+  ######################################################################
+  # org.exoplatform.ecm.webui.selector.UIPermissionSelector           #
+  ######################################################################
+  -->
+  <SelectUserOrGroup>
+    <title>
+      <UIPermissionUser>Selectaţi utilizatorul</UIPermissionUser>
+      <UIPermissionMembership>Selectaţi statutul de membru</UIPermissionMembership>
+    </title>
+  </SelectUserOrGroup>
+  <UIPermissionUser>
+    <label>
+      <selectUser>Selectaţi utilizatorul</selectUser>
+      <selectGroup>Răsfoiți şi selectaţi un grup</selectGroup>
+    </label>
+  </UIPermissionUser>
+  <UIPermissionMembership>
+    <label>
+      <selectUser>Selectaţi statutul de membru</selectUser>
+      <selectGroup>Răsfoiți şi selectaţi un grup</selectGroup>
+    </label>
+  </UIPermissionMembership>
+</bundle>

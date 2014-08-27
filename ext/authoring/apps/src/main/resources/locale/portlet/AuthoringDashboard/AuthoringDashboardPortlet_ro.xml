@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<bundle>
+  <UIDashboardForm>
+    <label>
+      <title>Author Dashboard</title>
+      <nocontent>Nu există conținut</nocontent>
+      <mydraft>Ciornă conținut</mydraft>
+      <waitingapproval>Aşteptă pentru aprobarea mea</waitingapproval>
+      <approve>Aprobă</approve>
+      <publishedtomorrow>Pentru a fi publicate mâine</publishedtomorrow>
+      <refresh>#{word.refresh}</refresh>
+    </label>
+  </UIDashboardForm>
+</bundle>

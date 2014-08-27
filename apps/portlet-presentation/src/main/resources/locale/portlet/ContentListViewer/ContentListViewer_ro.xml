@@ -1,0 +1,189 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<bundle>
+  <UICLVContainer>
+    <label>
+      <Preferences>Preferinţe</Preferences>
+      <AddContent>Adăugaţi conţinut</AddContent>
+      <ManageContent>Gestionează conţinutul</ManageContent>
+    </label>
+    <msg>
+      <non-contents>Ne pare rău,  nu sunt articole disponibile.</non-contents>
+      <item-not-found>Nu am găsit elementul.</item-not-found>
+      <no-permission>Nu aveți drepturi de acces la acest modul.</no-permission>
+      <category-back>Du-te la anterioară</category-back>
+    </msg>
+  </UICLVContainer>
+  <UIViewerManagementPopupWindow>
+    <title>
+      <UICLVConfig>Preferințe lista conținut</UICLVConfig>
+    </title>
+  </UIViewerManagementPopupWindow>
+  <UICLVConfig>
+    <label>
+      <Title>Preferințe lista conținut</Title>
+      <ContentSelectionBlock>Selecție conținut</ContentSelectionBlock>
+      <UICLVConfigDisplayModeFormRadioBoxInput>Mod</UICLVConfigDisplayModeFormRadioBoxInput>
+      <UICLVConfigItemPathFormInputSet>Calea folderului</UICLVConfigItemPathFormInputSet>
+    <UICLVConfigItemPathFormStringInput>Calea folderului</UICLVConfigItemPathFormStringInput>
+      <UICLVConfigOrderByFormSelectBox>Ordonat după</UICLVConfigOrderByFormSelectBox>
+      <option>
+        <exo:title>Titlu</exo:title>
+        <exo:dateCreated>Dată creere</exo:dateCreated>
+        <exo:lastModifiedDate>Data modificării</exo:lastModifiedDate>
+        <publication:liveDate>Data publicării</publication:liveDate>
+        <exo:startEvent>Data evenimentului</exo:startEvent>
+        <exo:index>Index</exo:index>
+        <DESC>Descendent</DESC>
+        <ASC>Ascendent</ASC>
+      </option>
+      <DisplaySettingBlock>Setările de afişare</DisplaySettingBlock>
+      <UICLVConfigHeaderFormStringInput>Antet</UICLVConfigHeaderFormStringInput>
+      <UICLVConfigDisplayTemplateFormSelectBox>Şablon</UICLVConfigDisplayTemplateFormSelectBox>
+      <UICLVConfigPaginatorTemplateFormSelectBox>Paginație</UICLVConfigPaginatorTemplateFormSelectBox>
+      <UICLVConfigItemsPerPageFormStringInput>Elemente pe pagină</UICLVConfigItemsPerPageFormStringInput>
+      <UICLVConfigShowIllustrationFormCheckboxInput>Show Image</UICLVConfigShowIllustrationFormCheckboxInput>
+      <UICLVConfigShowSummaryFormCheckboxInput>Show Summary</UICLVConfigShowSummaryFormCheckboxInput>
+      <UICLVConfigShowHeaderFormCheckboxInput>Show Header</UICLVConfigShowHeaderFormCheckboxInput>
+      <UICLVConfigShowRefreshFormCheckboxInput>Show Refresh</UICLVConfigShowRefreshFormCheckboxInput>
+      <UICLVConfigShowTitleFormCheckboxInput>Arată Titlul</UICLVConfigShowTitleFormCheckboxInput>
+      <UICLVConfigShowDateCreatedFormCheckboxInput>Arată data</UICLVConfigShowDateCreatedFormCheckboxInput>
+      <UICLVConfigShowLinkFormCheckboxInput>Show Link</UICLVConfigShowLinkFormCheckboxInput>
+      <UICLVConfigShowReadmoreFormCheckboxInput>Show More Links</UICLVConfigShowReadmoreFormCheckboxInput>
+      <UICLVConfigAllowDynamicUrlStringInput>Allow Dynamic URL</UICLVConfigAllowDynamicUrlStringInput>
+      <UICLVConfigShowRssLinkFormCheckboxInput>Show RSS Link</UICLVConfigShowRssLinkFormCheckboxInput>
+      <UICLVConfigShowAutomaticDetectionCheckboxInput>Automatic Detection</UICLVConfigShowAutomaticDetectionCheckboxInput>
+      <AdvancedBlock>Avansate</AdvancedBlock>
+      <UICLVConfigDynamicNavigationLabel>Navigare dinamică</UICLVConfigDynamicNavigationLabel>
+      <UICLVConfigContextualFolderRadioBoxInput>Contextual Folder</UICLVConfigContextualFolderRadioBoxInput>
+      <UICLVConfigShowCLVByStringInput>de</UICLVConfigShowCLVByStringInput>
+      <UICLVConfigshowSCVWithStringInput>cu</UICLVConfigshowSCVWithStringInput>
+      <UICLVConfigTargetPageFormInputSet>Arată în pagină</UICLVConfigTargetPageFormInputSet>
+      <content-not-found>Content not found.</content-not-found>
+      <ContentPath>Calea conţinutului</ContentPath>
+      <Up>Sus</Up>
+      <Down>Jos</Down>
+      <UICLVConfigCacheManagementLabel>Vizibilitatea conținutului</UICLVConfigCacheManagementLabel>
+      <UICLVContentByQueryLabel>Content by Query</UICLVContentByQueryLabel>
+      <UICLVConfigWorkspaceFormSelectBox>Spațiu de lucru</UICLVConfigWorkspaceFormSelectBox>
+      <UICLVConfigContentByQueryTextArea>by query</UICLVConfigContentByQueryTextArea>
+      <UICLVConfigCacheEnableRadioBoxInput>Share content between users</UICLVConfigCacheEnableRadioBoxInput>
+    </label>
+    <help>
+      <ModeSelectionHelp>Două moduri sunt disponibile pentru a arăta conținutul. "După Dosare" va lua toate elementele disponibile în folderul/categoria selectată. "După Conținut" vă permite să selectaţi manual conținutul pe care doriți să-l afișați.</ModeSelectionHelp>
+      <FolderPathHelp>Selectați conținutul pe care doriți să-l afișați. Selecţia implicită va fi înlocuită dinamic dacă activezi opţiunea de navigare dinamică (a se vedea modul avansat mai jos).</FolderPathHelp>
+      <HeaderOptionHelp>Arată un antet pe lista de conţinut. Dacă activezi opţiunea de detectare automată, acesta va încerca să găsească antetul pe baza selecţiei curente.</HeaderOptionHelp>
+      <GeneralOptionHelp>Select the graphical elements you want to show in your list. Note that, depending on your selected template, some elements may not be available.</GeneralOptionHelp>
+      <ContextualHelp>Activează opţiunea de navigare dinamică. Alţii pot schimba conţinutul dinamic bazat pe un parametru URL.</ContextualHelp>
+      <ParameterHelp>Acest parametru va fi folosit pentru a accesa conţinutul dacă este activată navigarea dinamică.</ParameterHelp>
+      <ShowDetailInPageHelp>Făcând clic pe conţinut redirecţionează utilizatorul la o pagină de detaliu. Trebuie să aveţi un portlet de "Conţinut după URL" cu navigare dinamică activată pe pagina ţintă pentru a arăta conținutul.</ShowDetailInPageHelp>
+      <DetailParameterHelp>Acest parametru va conţine calea către conţinutul din link-ul la pagina de detalii. Acest parametru trebuie să corespundă cu parametrul utilizat în portlet-ul "Conţinut după URL" al paginii.</DetailParameterHelp>
+      <ContentByQueryHelp>Aveţi posibilitatea să setaţi o interogare SQL pentru a obţine conţinut dinamic. Următorii parametri sunt permiși: ${user}, ${lang} sau orice parametru PARAM înconjurat de ${PARAM}.</ContentByQueryHelp>
+      <ContentsVisibilityHelp>"Restricționat de către autentificare" va filtra conţinutul bazat pe autentificare. Dacă nu faceţi sign in, veţi vedea  numai conținutul public. Dacă sunteţi conectat, veţi vedea tot conţinutul vizibile de către utilizatorii intranetului (partajat de toţi). "Restricționat după rolurile de utilizator" înseamnă veţi vedea conţinutul în funcţie de drepturile tale. În majoritatea cazurilor, această opţiune nu trebuie utilizată, deoarece reduce performanţa generală.</ContentsVisibilityHelp>
+    </help>
+    <action>
+      <Save>#{word.save}</Save>
+      <Cancel>#{word.cancel}</Cancel>
+      <delete>Ştergeţi</delete>
+    </action>
+    <msg>
+      <not-valid-path>The Folder Path is invalid.</not-valid-path>
+      <saving-success>The portlet's preferences are saved.</saving-success>
+    </msg>
+    <tab>
+      <label>
+        <clvContentTab>Selecție conținut</clvContentTab>
+        <clvDisplayTab>Setările de afişare</clvDisplayTab>
+        <clvAdvancedTab>Avansat</clvAdvancedTab>
+      </label>
+    </tab>
+  </UICLVConfig>
+  <UICLVConfigDisplayModeFormRadioBoxInput>
+    <label>
+      <AutoViewerMode>By Folder</AutoViewerMode>
+      <ManualViewerMode>By Content</ManualViewerMode>
+    </label>
+  </UICLVConfigDisplayModeFormRadioBoxInput>
+  <UICLVConfigItemPathFormInputSet>
+    <title>
+      <SelectFolderPath>Selectaţi calea folderului</SelectFolderPath>
+      <AddPath>Adaugă cale</AddPath>
+    </title>
+  </UICLVConfigItemPathFormInputSet>
+  <FolderPathSelectorPopupWindow>
+    <title>
+      <UIContentSelectorFolder>Browser Foldere</UIContentSelectorFolder>
+    </title>
+  </FolderPathSelectorPopupWindow>
+  <UICLVConfigOrderTypeFormSelectBox>
+    <label>
+      <option>
+        <OrderDesc>Descendent</OrderDesc>
+        <OrderAsc>Ascendent</OrderAsc>
+      </option>
+    </label>
+  </UICLVConfigOrderTypeFormSelectBox>
+  <UICLVConfigTargetPageFormInputSet>
+    <title>
+      <SelectBasePath>Selectaţi calea de pornire</SelectBasePath>
+      <SelectTargetPage>Selectaţi calea de pornire</SelectTargetPage>
+    </title>
+  </UICLVConfigTargetPageFormInputSet>
+  <UICLVBasePathPopupWindow>
+    <title>
+      <UIPageSelector>Selector de Pagini</UIPageSelector>
+    </title>
+  </UICLVBasePathPopupWindow>
+  <UICLVPresentation>
+    <msg>
+      <confirm-delete>Sunteţi sigur că doriţi să ştergeţi acest conținut?</confirm-delete>
+      <delete-content-successfully>Conţinutul şters cu succes.</delete-content-successfully>
+    </msg>
+    <label>
+      <readmore>Read more</readmore>
+      <rssFeed>RSS Feed</rssFeed>
+    </label>
+    <action>
+      <refresh>Reîncarcă</refresh>
+      <edit>Editare în Explorerul de Conținut</edit>
+      <delete>Ştergeţi</delete>
+      <publish>Publică</publish>
+    </action>
+    <label>
+      <draft>Ciornă</draft>
+    </label>
+  </UICLVPresentation>
+  <CorrectContentSelectorPopupWindow>
+    <title>
+      <UIContentSelectorMulti>Multiple Content Selector Pane</UIContentSelectorMulti>
+    </title>
+  </CorrectContentSelectorPopupWindow>
+  <UIContentDialogFormPopupWindow>
+    <title>
+      <UIContentDialogForm>Web Content Form</UIContentDialogForm>
+    </title>
+  </UIContentDialogFormPopupWindow>
+  <UICLVConfigContextualFolderRadioBoxInput>
+    <label>
+      <contextualEnable>Activat</contextualEnable>
+      <contextualDisable>Dezactivat</contextualDisable>
+    </label>
+  </UICLVConfigContextualFolderRadioBoxInput>
+  <PublicationStates>
+    <archived>Arhivată</archived>
+    <obsolete>Învechite</obsolete>
+    <unpublished>Nepublicate</unpublished>
+    <enrolled>Înscrişi</enrolled>
+    <draft>Ciornă</draft>
+    <pending>În aşteptare</pending>
+    <approved>Aprobat</approved>
+    <inreview>În revizuire</inreview>
+    <staged>În practică</staged>
+    <published>Publicat</published>
+  </PublicationStates>
+  <UICLVConfigCacheEnableRadioBoxInput>
+    <label>
+      <ENABLE>Limitat de autentificare</ENABLE>
+      <DISABLE>Restricted by User Roles</DISABLE>
+    </label>
+  </UICLVConfigCacheEnableRadioBoxInput>
+</bundle>

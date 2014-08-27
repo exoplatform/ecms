@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<bundle>
+  <!--
+  ###################################################################################
+  #             org.exoplatform.ecm.webui.component.explorer.UIActionBar      #
+  ###################################################################################
+  -->
+  <UIActionBar>
+    <tooltip>
+      <PublicationRequestApproval>Cere aprobare</PublicationRequestApproval>
+      <PublicationApproveContent>Aprobă conţinutul</PublicationApproveContent>
+      <PublicationPublish>Publică</PublicationPublish>
+    </tooltip>
+  </UIActionBar>
+</bundle>

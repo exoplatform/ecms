@@ -1,0 +1,389 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<bundle>
+  <!--
+  ###################### global word for ECM dialogs resoucebundle ####
+  -->
+  <Ecm>
+    <dialog>
+      <label>
+        <end-time>Ora terminării</end-time>
+        <start-time>Ora începerii</start-time>
+        <lifecycle>Ciclul de viaţă</lifecycle>
+        <mimeType>Tip MIME</mimeType>
+        <repeat-count>Numărul de repetări</repeat-count>
+        <time-interval>Intervalul de timp</time-interval>
+        <query-items>Elementele interogării</query-items>
+        <schedule-type>Tipul de planificare</schedule-type>
+        <remove>Înlătură elementul</remove>
+        <add>Adaugă Element</add>
+        <expand>Extinde acesta</expand>
+      </label>
+    </dialog>
+  </Ecm>
+  
+  <UIDocumentForm>
+    <label>
+      <title>#{word.title}</title>
+      <link>Link-ul</link>
+      <contentHtml>#{word.content}</contentHtml>
+      <content>#{word.content}</content>
+      <contentPlain>#{word.content}</contentPlain>
+      <name>Nume</name>
+    <categories>Categorii</categories>
+    </label>
+  </UIDocumentForm>
+ 
+  <!--
+  ###################### resoucebundle for HTMLFile dialogs template ####
+  -->
+  <HtmlFile>
+    <dialog>
+      <label>
+        <name>Nume</name>
+        <content>Conţinut</content>
+      </label>
+    </dialog>
+  </HtmlFile>
+
+  <!--
+  ###################### resoucebundle for nt:file dialogs template ####
+  -->
+  <File>
+    <dialog>
+      <label>
+        <name>#{word.name}</name>
+        <categories>Categorii</categories>
+        <mimeType>#{Ecm.dialog.label.mimeType}</mimeType>
+        <width>Lăţime</width>
+        <height>Înălțime</height>
+        <content>#{word.content}</content>
+        <re-upload>Fişierul există deja. Puteţi să-l ştergeți şi să încărcaţi un alt fişier.</re-upload>
+      </label>
+    </dialog>
+  </File>
+
+  <UIActionForm>
+    <label>
+      <description>#{word.description}</description>
+      <port>Port</port>
+      <userName>#{word.userName}</userName>
+      <password>Parola</password>
+      <link>Link-ul</link>
+      <to>Trimite Mail la</to>
+      <actionName>#{word.name}</actionName>
+    </label>
+  </UIActionForm>
+  <EditFormAction>
+    <label>
+      <description>#{word.description}</description>
+      <port>Port</port>
+      <userName>#{word.userName}</userName>
+      <password>Parola</password>
+      <link>Link-ul</link>
+      <to>Trimite Mail la</to>
+      <actionName>#{word.name}</actionName>
+    </label>
+  </EditFormAction>
+
+  <!--
+  ###################### resoucebundle for exo:addMetadataAction dialogs template ####
+  -->
+  <AddMetadata>
+    <dialog>
+      <label>
+        <id>ID-ul</id>
+        <name>#{word.name}</name>
+        <lifecycle>#{Ecm.dialog.label.lifecycle}</lifecycle>
+        <metadata>Metadate</metadata>
+        <description>#{word.description}</description>
+      </label>
+    </dialog>
+  </AddMetadata>
+
+  <!--
+  ###################### resoucebundle for exo:autoVersioning dialogs template ####
+  -->
+  <AutoVersioning>
+    <dialog>
+      <label>
+        <id>ID-ul</id>
+        <name>#{word.name}</name>
+        <lifecycle>#{Ecm.dialog.label.lifecycle}</lifecycle>
+        <schedule-type>#{Ecm.dialog.label.schedule-type}</schedule-type>
+        <start-time>#{Ecm.dialog.label.start-time}</start-time>
+        <end-time>#{Ecm.dialog.label.end-time}</end-time>
+        <repeat-count>#{Ecm.dialog.label.repeat-count}</repeat-count>
+        <time-inteval>#{Ecm.dialog.label.time-interval}</time-inteval>
+        <cron-expression>Comenzi Cron</cron-expression>
+        <description>#{word.description}</description>
+      </label>
+    </dialog>
+  </AutoVersioning>
+  <!--
+  ###################### resoucebundle for exo:enableVersiong dialogs template ####
+  -->
+  <EnableVersioning>
+    <dialog>
+      <label>
+        <id>ID-ul</id>
+        <name>#{word.name}</name>
+        <lifecycle>#{Ecm.dialog.label.lifecycle}</lifecycle>
+        <schedule-type>#{Ecm.dialog.label.schedule-type}</schedule-type>
+        <start-time>#{Ecm.dialog.label.start-time}</start-time>
+        <end-time>#{Ecm.dialog.label.end-time}</end-time>
+        <repeat-count>#{Ecm.dialog.label.repeat-count}</repeat-count>
+        <time-inteval>#{Ecm.dialog.label.time-interval}</time-inteval>
+        <cron-expression>Cron Expression</cron-expression>
+        <description>#{word.description}</description>
+      </label>
+    </dialog>
+  </EnableVersioning>
+  <!--
+  ###################### resoucebundle for dc:elementSet dialogs template ####
+  -->
+  <ElementSet>
+    <dialog>
+      <label>
+        <title>#{word.title}:</title>
+        <creator>Creator:</creator>
+        <subject>#{word.subject}:</subject>
+        <source>Sursa:</source>
+        <contributor>Colaborator:</contributor>
+        <resource-type>Tipul resursei:</resource-type>
+        <date>#{word.date}:</date>
+        <publisher>Editor:</publisher>
+        <description>#{word.description}:</description>
+        <rights>Drepturi:</rights>
+        <relation>Relaţia:</relation>
+        <format>#{word.format}:</format>
+        <coverage>Acoperire:</coverage>
+        <identifier>Identificator:</identifier>
+        <language>Limba:</language>
+      </label>
+    </dialog>
+  </ElementSet>
+
+  <!--
+  ###################### resoucebundle for exo:actionable dialogs template ####
+  -->
+  <Actionable>
+    <dialog>
+      <label>
+        <primary-type>Tip primar</primary-type>
+        <mixin-types>Tip mixin</mixin-types>
+      </label>
+    </dialog>
+  </Actionable>
+
+  <!--
+  ###################### resoucebundle for exo:move dialogs template ####
+  -->
+  <Move>
+    <dialog>
+      <label>
+        <destination-workpsace>Spațiul de lucru destinaţie</destination-workpsace>
+        <destination-path>Cale destinație</destination-path>
+        <primary-type>Tip primar</primary-type>
+        <mixin-types>Tip mixin</mixin-types>
+      </label>
+    </dialog>
+  </Move>
+  <!--
+  ###################### resoucebundle for exo:published dialogs template ####
+  -->
+  <Published>
+    <dialog>
+      <label>
+        <start-publication>Începere publicare</start-publication>
+        <end-publication>Terminare publicare</end-publication>
+      </label>
+    </dialog>
+  </Published>
+ 
+  <!--
+  ###################### resoucebundle mix:referenceable dialogs template ####
+  -->
+  <Referenceable>
+    <dialog>
+      <label>
+        <uuid>UUID</uuid>
+      </label>
+    </dialog>
+  </Referenceable>
+  <!--
+  ###################### resoucebundle exo:relationable dialogs template ####
+  -->
+  <Relationable>
+    <dialog>
+      <label>
+        <relation>Relaţia</relation>
+      </label>
+    </dialog>
+  </Relationable>
+  <!--
+  ###################### resoucebundle exo:rss-enable dialogs template ####
+  -->
+  <RssEnable>
+    <dialog>
+      <label>
+        <title>Titlu</title>
+        <summary>#{word.summary}</summary>
+      </label>
+    </dialog>
+  </RssEnable>
+
+  <!--
+  ###################### resoucebundle mix:versionable dialogs template ####
+  -->
+  <Versionable>
+    <dialog>
+      <label>
+        <version-history>Istoric versiuni</version-history>
+        <base-version>Versiunea de bază</base-version>
+        <is-checked-out>Este eliberat</is-checked-out>
+        <predecessors>Predecesorii</predecessors>
+        <merge-failed>Îmbinarea nu a reușit</merge-failed>
+        <uuid>UUID</uuid>
+      </label>
+    </dialog>
+  </Versionable>
+
+  <!--
+  ##################### resoucebundle for resouce container dialogs template#####
+  -->
+  <ResouceContainer>
+    <dialog>
+      <label>
+        <name>Nume</name>
+        <autoload>Încărcare automată</autoload>
+        <minetype>Tip MIME</minetype>
+        <content>Conţinut</content>
+      </label>
+    </dialog>
+  </ResouceContainer>
+  <!--
+  ###################### resoucebundle for validator ####
+  -->
+  <EmailAddressValidator>
+    <msg>
+      <Invalid-input>Adresa de e-mail invalidă.</Invalid-input>
+    </msg>
+  </EmailAddressValidator>
+  <EmptyFieldValidator>
+    <msg>
+      <empty-input>Câmpul "{0}" este necesar. Vă rugăm să introduceţi valoarea.</empty-input>
+    </msg>
+  </EmptyFieldValidator>
+  <NumberFormatValidator>
+    <msg>
+      <Invalid-number>Câmpul "{0}" este invalid.</Invalid-number>
+    </msg>
+  </NumberFormatValidator>
+  <!--
+  #####Since version 2.4#######
+
+  ###################### resoucebundle exo:taxonomyAction dialogs template ####
+  -->
+  <ScriptAction>
+    <dialog>
+      <label>
+        <id>ID-ul</id>
+        <name>Nume</name>
+        <lifecycle>Ciclul de viaţă</lifecycle>
+        <homePath>Adresa de pornire</homePath>
+        <targetWorkspace>Spațiu de lucru ţintă</targetWorkspace>
+        <targetPath>Calea țintă</targetPath>
+      </label>
+    </dialog>
+  </ScriptAction>
+  <UIDialogForm>
+   <form>
+   <DialogFormException>Imposibil de salvat acest document. Poate fi o problemă cu interceptorul pre-salvare.</DialogFormException>
+   </form>
+  </UIDialogForm>
+
+  <!--
+  #####Since version 2.6#######
+
+  ###################### resoucebundle exo:taxonomyAction dialogs template ####
+  -->
+<no>Nu</no>
+<yes>Da</yes>
+<true>Adevărat</true>
+<false>Fals</false>
+<Electronic>Electronic</Electronic>
+<Paper>Hârtie</Paper>
+<NONE>Nici unul</NONE>
+<CLASSIFIED>Clasificate</CLASSIFIED>
+<UNCLASSIFIED>Neclasificat</UNCLASSIFIED>
+<NOCONTRACT>Nici un Contract</NOCONTRACT>
+<one-minute>un minut</one-minute>
+<hourly>Pe oră</hourly>
+<daily>Zilnic</daily>
+<quarterly>Trimestrial</quarterly>
+<yearly>Anual</yearly>
+<ten-years>Zece ani</ten-years>
+<read>Acțiune utilizator</read>
+  <schedule>Programator</schedule>
+  <node_added>Adăugare conținut</node_added>
+  <node_removed>Ștergere conținut</node_removed>
+  <property_added>Adăugare proprietate</property_added>
+  <property_removed>Ștergere proprietate</property_removed>
+  <property_changed>Modificare proprietate</property_changed>
+
+  <ScriptAction>
+    <dialog>
+      <label>
+        <isDeep>Este recursiv</isDeep>
+        <nodetypes>Tipuri de module</nodetypes>
+        <affectedNodeTypeNames>Tipuri de module afectate</affectedNodeTypeNames>
+      </label>
+    </dialog>
+  </ScriptAction>
+
+  <AddMetadata>
+    <dialog>
+      <label>
+        <isDeep>Este recursiv</isDeep>
+        <nodetypes>Tipuri de module</nodetypes>
+        <affectedNodeTypeNames>Tipuri de module afectate</affectedNodeTypeNames>
+      </label>
+    </dialog>
+  </AddMetadata>
+
+  <EnableVersioning>
+    <dialog>
+      <label>
+        <isDeep>Este recursiv</isDeep>
+        <nodetypes>Tipuri de module</nodetypes>
+        <affectedNodeTypeNames>Tipuri de module afectate</affectedNodeTypeNames>
+      </label>
+    </dialog>
+  </EnableVersioning>
+  
+  <AutoVersioning>
+    <dialog>
+      <label>
+        <isDeep>Este recursiv</isDeep>
+        <nodetypes>Tipuri de module</nodetypes>
+        <affectedNodeTypeNames>Tipuri de module afectate</affectedNodeTypeNames>
+      </label>
+    </dialog>
+  </AutoVersioning>
+
+  <AccessibleMedia>
+  <dialog>
+  <label>
+  <captions>Legendă</captions>
+<audioDescription>Descriere audio</audioDescription>
+<alternativeText>Text alternativ</alternativeText>
+</label>
+</dialog>
+<help>
+<CaptionsHelp>Legenda ar trebui să furnizeze textul de dialog şi sunete importante</CaptionsHelp>
+<AudioDescriptionHelp>O descriere audio este o pistă video narată</AudioDescriptionHelp>
+<AlternativeTextHelp>Oferă un mod accesibil, alternative de prezentare a informaţiilor</AlternativeTextHelp>
+</help>
+</AccessibleMedia>
+  
+</bundle>

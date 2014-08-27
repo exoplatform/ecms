@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<bundle>
+  <ContentSelector>
+    <msg>
+      <no-file-selected>Nu există nici un conţinut selectat. Vă rugăm să selectaţi cel puţin unul.</no-file-selected>
+    </msg>
+  </ContentSelector>
+  <RenameConnector>
+    <label>
+      <rename>Redenumiți</rename>
+      <cancel>Anulează</cancel>
+    </label>
+    <msg>
+      <renaming>Redenumire...</renaming>
+    </msg>
+  </RenameConnector>
+</bundle>

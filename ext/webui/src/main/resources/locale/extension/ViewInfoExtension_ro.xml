@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<bundle>
+<UIPopupWindow>
+<title>
+<UIViewInfoManager>Afișare informații</UIViewInfoManager>
+</title>
+</UIPopupWindow>
+    
+<ECMContextMenu>
+<event>
+<ViewInfo>Afișare informații</ViewInfo>
+</event>
+</ECMContextMenu>
+<UIViewInfoContainer>
+<label>
+      <name>Nume</name>
+      <title>Titlu</title>
+      <type>Tip</type>
+      <size>Dimensiune</size>
+      <owner>Proprietar</owner>
+      <lastModifier>Data ultimei modificări</lastModifier>
+      <created>Dată creare</created>
+      <lastModified>Data ultimei modificări</lastModified>
+      <publicationState>Starea publicării</publicationState>
+</label>
+<value>
+      <folder>Folder</folder>
+</value>
+<action>
+<Close>#{word.close}</Close>
+</action>
+</UIViewInfoContainer>
+</bundle>

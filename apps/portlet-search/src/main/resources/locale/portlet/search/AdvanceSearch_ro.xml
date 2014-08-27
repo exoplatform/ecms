@@ -1,0 +1,96 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<bundle>
+  <UIDefaultSearchForm>
+    <label>
+      <keyword>Cuvânt cheie</keyword>
+      <portal>Portal</portal>
+      <Page>Pagină</Page>
+      <Document>Document</Document>
+    </label>
+    <action>
+      <Search>Căutare</Search>
+    </action>
+  </UIDefaultSearchForm>
+
+  <UIDefaultSearchResult>
+    <label>
+      <Page>Pagină</Page>
+      <Document>Document</Document>
+      <DocumentAndPage>Document şi pagină</DocumentAndPage>
+      <documentandpage>Document şi pagină</documentandpage>
+      <resutlsCaption>Rezultate</resutlsCaption>
+      <ofAboutCaption>de aproximativ</ofAboutCaption>
+      <forCaption>pentru</forCaption>
+      <timeUnitCaption>secunde</timeUnitCaption>
+      <similar>Pagini în care apare același conținut</similar>
+      <editor>Editor</editor>
+      <date>Data</date>
+      <relevancy>Relevanţa</relevancy>
+      <title>Titlu</title>
+      <sortBy>Sortează după:</sortBy>
+    </label>
+    <action>
+      <edit>Modifică</edit>
+    </action>
+    <msg>
+      <search-not-match-type>Căutarea {0} nu corespunde niciunui {1}.</search-not-match-type>
+    </msg>
+  </UIDefaultSearchResult>
+  <UISearchPageLayoutManager>
+    <label>
+      <itemsPerPageSelector>Elemente pe pagină</itemsPerPageSelector>
+      <searchFormSelector>Șablonul formular căutare</searchFormSelector>
+      <searchResultSelector>Șablon rezultate căutare</searchResultSelector>
+      <searchPaginatorSelector>Șablog paginator căutare</searchPaginatorSelector>
+      <searchPageLayoutSelector>Șablon aspect pagină căutare</searchPageLayoutSelector>
+      <searchResultBasePathInputSetAction>Calea de pornire</searchResultBasePathInputSetAction>
+      <pageMode>Modul paginii</pageMode>
+      <option>
+        <none>Niciunul</none>
+        <more>Mai mult</more>
+        <pagination>Paginaţie</pagination>
+      </option>
+    </label>
+    <action>
+      <Save>#{word.save}</Save>
+      <Cancel>#{word.cancel}</Cancel>
+    </action>
+  </UISearchPageLayoutManager>
+  <searchResultBasePathInputSetAction>
+    <title>
+      <SelectBasePath>Selectaţi calea de pornire</SelectBasePath>
+    </title>
+  </searchResultBasePathInputSetAction>  
+  <UISearchForm>  
+   <message>
+     <keyword-not-support>Cuvântul cheie este invalid. Unele caractere nu sunt recunoscute.</keyword-not-support>
+     <not-checked>Vă rugăm să selectaţi un mod de căutare.</not-checked>
+     <keyword-not-empty>Vă rugăm să introduceţi un cuvânt cheie.</keyword-not-empty>
+   </message>
+  </UISearchForm>
+  <UIPaginatorDefault>
+    <label>
+      <next>Următorul</next>
+      <previous>Precedent</previous>
+      <more>Mai mult</more>
+    </label>
+  </UIPaginatorDefault>
+  <UISearchPageLayoutDefault>
+    <label>
+      <quickEditTitle>Editare rapidă</quickEditTitle>
+    </label>
+  </UISearchPageLayoutDefault>
+  <searchOption>
+    <label>
+      <pageCheckBox>în paginile</pageCheckBox>
+      <documentCheckBox>în conţinut</documentCheckBox>
+    </label>
+  </searchOption>
+  <ViewMode>
+    <label>
+      <option>
+        <all>căutare în toate site-urile</all>
+      </option>  
+    </label>  
+  </ViewMode>
+</bundle>
