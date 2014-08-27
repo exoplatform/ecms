@@ -1,0 +1,227 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<bundle>
+ 
+  <View>
+    <label>
+      <languages>
+        <en>English</en>
+        <fr>French</fr>
+        <ru>Russian</ru>
+        <vi>Vietnamese</vi>
+        <nl>Dutch</nl>
+        <de>German</de>
+        <uk>Ukrainian</uk>
+        <ar>Arabic</ar>
+      </languages>
+    </label>
+  </View>
+ 
+  <!--
+  ################resoucebundle FOR EXO:COMMENT VIEW TEMPLATE#############
+  -->
+  <Comment>
+    <view>
+      <label>
+        <postedBy>Last comment posted by</postedBy>
+        <at>at</at>
+        <comments>Comment(s)</comments>
+        <show-comments>Show comments</show-comments>
+        <hide-comments>Hide comments</hide-comments>
+        <comment-by>Commented by</comment-by>
+        <email>Email</email>
+        <site>Site</site>
+      </label>
+    </view>
+  </Comment>
+ 
+  <!--
+  ################resoucebundle FOR NT:FILE VIEW TEMPLATE##############
+  -->
+  <File>
+    <view>
+      <label>
+        <not-viewable>The preview of this document is not available.</not-viewable>
+        <using-webDAV>or Open in MS Office</using-webDAV>
+        <file-size-too-big>The content of this file is too big. You should download and open in the client.</file-size-too-big>
+        <webDAV>WebDAV View</webDAV>
+        <download>Download</download>
+        <htmlview>View as HTML</htmlview>
+        <plaintextview>View as Plain text</plaintextview>
+      </label>
+    </view>
+  </File>
+ 
+  <!--
+  ################resoucebundle FOR MAIL:DOCUMENT VIEW TEMPLATE##############
+  -->
+  <Mail>
+    <view>
+      <label>
+        <from>From:</from>
+        <to>To:</to>
+        <cc>Cc:</cc>
+        <date>Date:</date>
+        <subject>Subject:</subject>
+        <attachment>Attachments:</attachment>
+      </label>
+    </view>
+  </Mail>
+  <!--
+  ################resoucebundle FOR EXO:VOTE VIEW TEMPLATE##############
+  -->
+  <Vote>
+    <view>
+      <label>
+        <avg-rating>Avg. Rating</avg-rating>
+        <subscription>Votes</subscription>
+      </label>
+    </view>
+  </Vote>
+  <!--
+  ################resoucebundle FOR LISTVIEW VIEW TEMPLATE##############
+  -->
+  <ListView>
+    <view>
+      <label>
+        <name>Name</name>
+        <versionable>Versionable</versionable>
+        <exo_owner>Owner</exo_owner>
+        <exo_dateCreated>Date Created</exo_dateCreated>
+        <exo_dateModified>Date Modified</exo_dateModified>
+        <auditing>Auditing</auditing>
+      </label>
+    </view>
+  </ListView>
+
+  <!--
+  ###################### resoucebundle for exo:addMetadataAction view template ####
+  -->
+  <AddMetadata>
+    <view>
+      <label>
+        <action-name>Action Name</action-name>
+        <lifecycle>Lifecycle</lifecycle>
+        <metadata>Metadata</metadata>
+        <description>Description</description>
+      </label>
+    </view>
+  </AddMetadata>
+
+  <!--
+  ###################### resoucebundle for exo:autoVersioning view template ####
+  -->
+  <AutoVersioning>
+    <view>
+      <label>
+        <action-name>Action Name</action-name>
+        <lifecycle>Lifecycle</lifecycle>
+        <description>Description</description>
+      </label>
+    </view>
+  </AutoVersioning>
+  <!--
+  ###################### resoucebundle for exo:enableVersiong view template ####
+  -->
+  <EnableVersioning>
+    <view>
+      <label>
+        <action-name>Name</action-name>
+        <lifecycle>Lifecycle</lifecycle>
+        <description>Description</description>
+      </label>
+    </view>
+  </EnableVersioning>
+  <!--
+  ###################### resoucebundle for dc:elementSet view template ####
+  -->
+  <ElementSet>
+    <view>
+      <label>
+        <not-avaliable>N/A</not-avaliable>
+        <core-elements>Core Elements</core-elements>
+        <title>Title</title>
+        <creator>Creator</creator>
+        <subject>Subject</subject>
+        <source>Source</source>
+        <contributor>Contributor</contributor>
+        <resource-type>Resource Type</resource-type>
+        <date>Date</date>
+        <publisher>Publisher</publisher>
+        <description>Description</description>
+        <rights>Rights</rights>
+        <relation>Relation</relation>
+        <format>Format</format>
+        <coverage>Coverage</coverage>
+        <identifier>Identifier</identifier>
+        <languages>Languages</languages>
+      </label>
+      <action>
+        <add-edit>Add/Edit</add-edit>
+        <cancel>#{word.cancel}</cancel>
+      </action>
+      <tooltip>
+        <cancel>#{word.cancel}</cancel>
+        <add-edit>Add/Edit Properties</add-edit>
+      </tooltip>
+    </view>
+  </ElementSet>
+
+  <ScriptAction>
+    <view>
+      <label> 
+        <isDeep>Is Deep</isDeep>
+        <nodetypes>Node types</nodetypes>
+        <affectedNodeTypeNames>Affected node types</affectedNodeTypeNames>
+        <nodeTypeName>Node type names</nodeTypeName>
+      </label> 
+    </view>
+  </ScriptAction>
+  
+  <AddMetadata>
+    <view>
+      <label>
+        <isDeep>Is Deep</isDeep>
+        <nodetypes>Node Types</nodetypes>
+        <affectedNodeTypeNames>Affected Node Types</affectedNodeTypeNames>
+        <nodeTypeName>Node Type Names</nodeTypeName>
+      </label> 
+    </view>
+  </AddMetadata>
+
+  <EnableVersioning>
+    <view>
+      <label>
+        <isDeep>Is Deep</isDeep>
+        <nodetypes>Node Types</nodetypes> 
+        <affectedNodeTypeNames>Affected Node Types</affectedNodeTypeNames>
+        <nodeTypeName>Node Type Names</nodeTypeName>
+      </label> 
+    </view>
+  </EnableVersioning>
+  
+  <AutoVersioning>
+    <view>
+      <label>
+        <isDeep>Is Deep</isDeep>
+        <nodetypes>Node Types</nodetypes>
+        <affectedNodeTypeNames>Affected Node Types</affectedNodeTypeNames>
+        <nodeTypeName>Node Type Names</nodeTypeName>
+      </label> 
+    </view>
+  </AutoVersioning>
+  
+   <AccessibleMedia>
+    <view>
+      <label>
+      <Play-audio-description-of-this-video>Audio description</Play-audio-description-of-this-video>
+      <Read-more>Read more</Read-more>
+      <Read-less>Read less</Read-less>
+      <Switch-back-to-original-video>Original video</Switch-back-to-original-video>
+      </label>
+      <tooltip>
+      <A-second-media-file-is-available-as-audio-description>A second media file is available as an audio description</A-second-media-file-is-available-as-audio-description>
+      </tooltip>
+    </view>
+  </AccessibleMedia>
+ 
+</bundle>
