@@ -2,7 +2,7 @@
 /**************** uiFileView ****************/
 .uiFileView, .MoveItem {
 	margin: -4px;
-	
+
 	.columnCheckbox {
 		padding: 3px 10px;
 		float: right;
@@ -10,50 +10,50 @@
 			width: 16px;
 		}
 	}
-	
+
 	.columnArrow {
 		width: 35px;
 		min-height: 30px;
 		float: left;
 		text-align: center;
-		
+
 		[class^="uiIconArrow"] {
 			margin-top: 5px;
 		}
 	}
-	
+
 	.columnNodeType {
 		width: 30px;
 		float: left;
 	}
-	
+
 	.columnText {
 		margin: 0px 45px 0px 75px;
 	}
-	
+
 	.sortByLabel {
 		margin-right: 5px;
 		line-height: 27px;
 	}
-	
+
 	.fileViewRowView {
 		border-bottom: 1px solid @borderColor;
 		padding: 10px 0px;
-		
+
 		.nodeName {
 			font-weight: bold;
 			color: @grayDark;
 		}
-		
+
 		.nodeLabel {
 			color: @grayLight;
 		}
-		
+
 		.fileInfoBottom {
 			color: @grayLight;
 			font-size: 12px;
 		}
-		
+
 		.fileInfoVersion {
 			background-color: @grayDark;
 			border-radius: 4px 4px 4px 4px;
@@ -64,79 +64,79 @@
 			width: auto;
 			padding: 2px 5px;
 		}
-		
+
 		.columnCheckbox {
 			position: relative;
 			padding-top: 10px;
 		}
 	}
-	
+
 	.uiListGrid .titleTable {
 		font-weight: lighter;
 		padding: 5px 0px;
-		background: @grayLighter;
-    border-bottom: 1px solid @borderColor;
-    font-weight: normal;
+		background: @componentBackgroundLight;
+	    border-bottom: 1px solid @borderColor;
+	    font-weight: normal;
 		height: auto;
 
 		.breadcrumbLink {
 			margin-right: 200px;
 			overflow: hidden;
 			white-space: nowrap;
-			line-height: 28px;	
+			line-height: 28px;
 			padding-left: 15px;
 			text-overflow: ellipsis;
-			
+
 			.uiIconTree {
 				margin: 0px;
 			}
-		
+
 			.nodeLabel {
 				color: @grayDark;
 				&:hover {
 					color: @linkColor;
 				}
 			}
-		
+
 			.nodeLabel:last-child {
 				color: @linkColor;
 			}
 		}
-		
+
 		.btn-group .btn,.btn-group .dropdown-menu a {
 			font-size: 12px;
 		}
-		
+
 		.btn-group .dropdown-menu .active a,
 		.btn-group .dropdown-menu .active a:hover	{
 			color: @white;
-			
+
 			i {
-				background-image: url("/eXoResources/skin/images/Icons/uiIconsWhite.png");
+				background-image: url("@{images-path}/Icons/uiIconsWhite.png");
 				margin: 0px 0px 0px 7px;
 			}
 		}
 	}
-	
+
 	.fileViewPageIterator {
 		margin-left: 10px;
-		
+
 		.nextPageIcon, .prevPageIcon {
 			color: @grayDark;
-			
+
 			&:hover {
 				color: @linkColor;
 			}
 		}
 	}
-	
+
 	.caret {
 		margin-left: 4px;
 	}
 }
 
 .uiFileView .MoreButton {
-	color: @blue;
+	color: @primaryColor;
 	font-weight:bold;
 	margin-right:20px;
 	text-decoration:underline;
@@ -147,13 +147,13 @@
 .ActionMenuPlaceHolder {
 	position: relative;
 	z-index: 8;
-	
+
 	.uiFileViewActionBar {
-		background: @grayWhiteSmoke;
+		background: @componentBackground;
 		border: 1px solid @borderColor;
 		.border-radius(3px 3px 0px 0px);
 		height: 36px;
-	
+
 		.uiRightPopupMenuContainer {
 			margin: 0px;
 			padding: 0px 10px;
@@ -161,11 +161,11 @@
 			background: none;
 			border: none;
 			box-shadow: none;
-			
+
 			li {
 				float: left;
 				padding: 4px 0px;
-				
+
 				a {
 					padding: 4px 6px;
 					border: 1px solid transparent;
@@ -174,30 +174,30 @@
 					background: none;
 					color: @grayDark;
 				}
-				
+
 				> a:hover {
-					#gradient > .vertical(@white, @grayMediumWhiteSmoke);
+					#gradient > .vertical(@white, @componentBackgroundHover);
 					border: 1px solid @borderColor;
 					.border-radius(@borderRadiusSmall);
 					color: @grayDark;
 					padding: 4px 6px;
 					background-color: none;
-					
+
 					> i {
 						background-image: url("/eXoWCMResources/skin/images/Icons/uiIconsEcmsBlue.png");
 					}
-					
+
 					.uiIconEcmsEditDocument,
 					.uiIconEcmsDelete,
 					.uiIconEcmsMoveNode,
 					.uiIconEcmsRestoreFromTrash,
 					.uiIconEcmsUpload,
 					.uiIconEcmsViewInfo {
-						background-image: url("/eXoResources/skin/images/Icons/uiIconsBlue.png");
+						background-image: url("@{images-path}/Icons/uiIconsBlue.png");
 					}
 				}
 			}
-			
+
 			.open > a, .open > a:hover,.open > a:focus,.active > a, .active > a:hover,.active > a:focus {
 				background: none;
 				box-shadow: 0px 2px 6px rgba(0,0,0,0.15) inset;
@@ -205,28 +205,28 @@
 				.border-radius(@borderRadiusSmall);
 				color: @grayDark;
 			}
-			
+
 			.RightClickCustomItem {
 				padding: 0px;
 				a:hover .uiIconDownload {
-					background-image: url("/eXoResources/skin/images/Icons/uiIconsBlue.png");
+					background-image: url("@{images-path}/Icons/uiIconsBlue.png");
 				}
 			}
-			
+
 			.dropdown-menu {
-				
+
 				li {
 					float: none;
 					padding: 0px;
-					
+
 					a {
 						border: none;
 						.border-radius(0);
 						line-height: 20px;
 						padding: 5px 10px;
-						
+
 						.uiIconEcmsViewInfo,.uiIconEcmsDelete {
-							background-image: url("/eXoResources/skin/images/Icons/uiIconsLightGray.png");
+							background-image: url("@{images-path}/Icons/uiIconsLightGray.png");
 						}
 						.uiIconEcmsViewInfo {
 							background-position: -140px -60px;
@@ -235,36 +235,36 @@
 							background-position: -20px 0px;
 						}
 					}
-					
+
 					a:hover {
-						#gradient > .vertical(@blueLighter, darken(@blueLighter, 15%));
+						#gradient > .vertical(@primaryLighterColor, darken(@primaryLighterColor, 15%));
 						color: @white;
-						
+
 						> i {
 							background-image: url("/eXoWCMResources/skin/images/Icons/uiIconsEcmsWhite.png");
 						}
-						
+
 						.uiIconEcmsDelete,
 						.uiIconDownload,
 						.uiIconEcmsViewInfo {
-							background-image: url("/eXoResources/skin/images/Icons/uiIconsWhite.png");
+							background-image: url("@{images-path}/Icons/uiIconsWhite.png");
 						}
 					}
 				}
 			}
 		}
 	}
-	
+
 	.fileViewStatus {
 		position: absolute;
 		right: 0px;
 		line-height: 27px;
 		padding: 5px 10px 0px 0px;
-		
+
 		.text {
 			margin: 0px 5px;
 		}
-		
+
 		.fileViewItemCount {
 			font-weight: bold;
 		}
