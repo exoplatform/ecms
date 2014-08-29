@@ -87,7 +87,7 @@ public class InternalLinksUpgradePlugin extends UpgradeProductPlugin {
                     Node content = node.getNode("jcr:content");
                     if (content.hasProperty("jcr:mimeType")) {
                         String mimeType = content.getProperty("jcr:mimeType").getString();
-                        if (mimeType.startsWith("text") || (type.equals("exo:jsFile") && mimeType.equals("application/x-javascript"))) {
+                        if (mimeType.startsWith("text") || mimeType.contains("javascript")) {
                             String jcrData = content.getProperty("jcr:data").getString();
                             if (jcrData.contains("/sites content/live/") || jcrData.contains("/sites%20content/live/")) {
                                 LOG.info("=====Migrating data contents '" + content.getParent().getPath() + "' =====");
