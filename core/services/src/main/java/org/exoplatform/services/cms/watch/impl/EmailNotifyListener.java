@@ -123,7 +123,7 @@ public class EmailNotifyListener implements EventListener {
     binding.put("user_name", WCMCoreUtils.getService(OrganizationService.class)
                                          .getUserHandler()
                                          .findUsersByQuery(query)
-                                         .load(0, 1)[0].getFullName());
+                                         .load(0, 1)[0].getFullName()); // TODO update the deprecated getFullName() to getDisplayName() but after changes made in GTNPORTAL-3482 are applied thus once update gatein portal version to 3.7
 
     Node node = NodeLocation.getNodeByLocation(observedNode_);
     binding.put("doc_title", org.exoplatform.services.cms.impl.Utils.getTitle(node));
