@@ -2053,7 +2053,7 @@
   <UIWorkspaceList>
     <label>
       <workspaceName>Không gian lưu trữ:</workspaceName>
-      <rootNodeInfo>Vùng làm việc</rootNodeInfo>
+      <rootNodeInfo>UIWorkspaceList</rootNodeInfo>
       <rootNodePath>Đường dẫn Gốc:</rootNodePath>
     </label>
   </UIWorkspaceList>
