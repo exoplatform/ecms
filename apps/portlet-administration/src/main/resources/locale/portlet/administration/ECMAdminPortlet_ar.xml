@@ -2053,7 +2053,7 @@
   <UIWorkspaceList>
     <label>
       <workspaceName>فضاء العمل:</workspaceName>
-      <rootNodeInfo>قائمة مساحات العمل</rootNodeInfo>
+      <rootNodeInfo>UIWorkspaceList</rootNodeInfo>
       <rootNodePath>مسار الجذر:</rootNodePath>
     </label>
   </UIWorkspaceList>
