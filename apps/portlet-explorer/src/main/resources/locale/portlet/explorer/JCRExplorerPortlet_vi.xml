@@ -656,7 +656,7 @@
       <UIWorkflowPublicationActionForm>Workflow Publication Action</UIWorkflowPublicationActionForm>
       <UIWorkflowPublicationViewForm>Workflow Publication View</UIWorkflowPublicationViewForm>
       <metadatasitemetadata>Siêu dữ liệu của trang web</metadatasitemetadata>
-      <dcelementset>Dublin Core</dcelementset>
+      <dcelementset>Chuẩn Dublin Core</dcelementset>
     </title>
   </UITabPane>
   <UIPropertyTab>
@@ -1886,7 +1886,7 @@
     <msg>
       <name-exist>Tên nhãn '{0}' đã tồn tại.</name-exist>
       <tagName-invalid>Có một số kí tự không hợp lệ trong tên nhãn.</tagName-invalid>
-      <tagName-empty-or-invalid>The tag name is empty or contains some invalid characters.</tagName-empty-or-invalid>
+      <tagName-empty-or-invalid>Nhãn trống hoặc chứa kí tự không hợp lệ.</tagName-empty-or-invalid>
       <tag-name-empty>Tên thẻ của bạn là rỗng</tag-name-empty>
       <tag-name-duplicate>Tên thẻ bạn nhập bị trùng nhau.</tag-name-duplicate>
       <tagName-too-long>Một trong các thẻ nhập là quá dài. Tên thẻ phải là ít hơn 30 ký tự.</tagName-too-long>
@@ -3057,9 +3057,9 @@
       <ShowDrives>Hiển thị các ổ đĩa</ShowDrives>
     </DrivesArea>
     <msg>
-      <no-view-found>There are no views applied for your access permission in drive '{0}'.</no-view-found>
+      <no-view-found>Bạn không có quyền truy cập khung nhìn nào cho ổ đĩa '{0}'.</no-view-found>
       <access-denied>Truy cập bị từ chối. Có thể bạn không có quyền trong không gian làm việc của ổ đĩa '{0}'.</access-denied>
-      <empty-drives>Access denied. Either there is no drive in this repository or you do not have permission to access any drives in this repository.</empty-drives>
+      <empty-drives>Không có ổ đĩa nào hoặc bạn không có quyền truy cập ổ đĩa nào trong kho dữ liệu này.</empty-drives>
       <workspace-not-exist>Không thể nhận biết được không gian lưu trữ của ổ đĩa '{0}'. Vui lòng cấu hình lại ổ đĩa này.</workspace-not-exist>
     </msg>
   </UIDrivesArea>

@@ -2053,7 +2053,7 @@
   <UIWorkspaceList>
     <label>
       <workspaceName>ワークスペース</workspaceName>
-      <rootNodeInfo>UIワークスペースリスト</rootNodeInfo>
+      <rootNodeInfo>UIWorkspaceList</rootNodeInfo>
       <rootNodePath>ルートパス</rootNodePath>
     </label>
   </UIWorkspaceList>
