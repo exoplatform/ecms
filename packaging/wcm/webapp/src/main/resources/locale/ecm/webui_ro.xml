@@ -7,11 +7,11 @@
   -->
   <UITreeList>
     <header>
-      <name>Name</name>
-      <action>Add</action>
+      <name>Nume</name>
+      <action>Adaugă</action>
     </header>
     <info>
-      <child-not-found>Child not found!</child-not-found>
+      <child-not-found>Nu a fost găsită o subcategorie!</child-not-found>
     </info>
   </UITreeList>
   <!--
@@ -21,8 +21,8 @@
   -->
   <UISelectedCategoriesGrid>
     <header>
-      <categoryName>Category name</categoryName>
-      <categoryPath>Category path</categoryPath>
+      <categoryName>Numele categoriei</categoryName>
+      <categoryPath>Cale categorie</categoryPath>
       <action>#{word.action}</action>
     </header>
     <action>
@@ -30,10 +30,10 @@
       <Cancel>#{word.cancel}</Cancel>
     </action>
     <msg>
-      <cannot-save>Categories were not saved.</cannot-save>
-      <have-saved>Categories were saved successfully</have-saved>
-      <non-categories>Categories are wrong. Please select the appropriate categories.</non-categories>
-      <confirm-delete>Do you want to delete this category?</confirm-delete>
+      <cannot-save>Categoriile nu au fost salvate.</cannot-save>
+      <have-saved>Categoriile au fost salvate cu succes</have-saved>
+      <non-categories>Categoriile sunt greşite. Vă rugăm să selectaţi categoriile potrivite.</non-categories>
+      <confirm-delete>Doriţi să ştergeţi această categorie?</confirm-delete>
     </msg>
   </UISelectedCategoriesGrid>
   <!--
@@ -43,20 +43,20 @@
   -->
   <SelectUserOrGroup>
     <title>
-      <UIPermissionUser>Select User</UIPermissionUser>
-      <UIPermissionMembership>Select Membership</UIPermissionMembership>
+      <UIPermissionUser>Selectaţi utilizatorul</UIPermissionUser>
+      <UIPermissionMembership>Selectaţi statutul de membru</UIPermissionMembership>
     </title>
   </SelectUserOrGroup>
   <UIPermissionUser>
     <label>
-      <selectUser>Select User</selectUser>
-      <selectGroup>Browse and select a group</selectGroup>
+      <selectUser>Selectaţi utilizatorul</selectUser>
+      <selectGroup>Răsfoiți şi selectaţi un grup</selectGroup>
     </label>
   </UIPermissionUser>
   <UIPermissionMembership>
     <label>
-      <selectUser>Select Membership</selectUser>
-      <selectGroup>Browse and select a group</selectGroup>
+      <selectUser>Selectaţi statutul de membru</selectUser>
+      <selectGroup>Răsfoiți şi selectaţi un grup</selectGroup>
     </label>
   </UIPermissionMembership>
 </bundle>

@@ -24,7 +24,7 @@
     <view>
       <label>
         <url>URL</url>
-        <description>Description</description>
+        <description>Descriere</description>
       </label>
     </view>
   </WebLink>
@@ -32,17 +32,17 @@
   <SiteMetadata>
     <view>
       <label>
-        <title>Site Title</title>
-        <description>Site Description</description>
-        <keywords>Site Keywords</keywords>
-        <robots>Search Engine Behavior</robots>
+        <title>Titlul Site-ului</title>
+        <description>Descrierea site-ului</description>
+        <keywords>Cuvinte cheie site</keywords>
+        <robots>Comportament motor de căutare</robots>
       </label>
       <tooltip>
-        <add-edit>Add/Edit Metadata</add-edit>
+        <add-edit>Adăugare/Editare metadate</add-edit>
         <cancel>#{word.cancel}</cancel>
       </tooltip>
       <action>
-        <add-edit>Add/Edit</add-edit>
+        <add-edit>Adăugare/Editare</add-edit>
         <cancel>#{word.cancel}</cancel>
       </action>
     </view>
@@ -50,13 +50,13 @@
 
   <Category>
     <view>
-      <label>Category</label>
+      <label>Categorie</label>
     </view>
   </Category>
 
   <Tag>
     <view>
-      <label>Tag</label>
+      <label>Etichetă</label>
     </view>
   </Tag>
 </bundle>

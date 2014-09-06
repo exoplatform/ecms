@@ -23,27 +23,27 @@
   <WebContent>
     <dialog>
       <label>
-        <MainContent>Main Content</MainContent>
+        <MainContent>Conţinutul principal</MainContent>
         <cssFile>default.css</cssFile>
         <jsFile>default.js</jsFile>
-        <Advanced>Advanced</Advanced>
-        <Summary>Summary</Summary>
+        <Advanced>Setări avansate</Advanced>
+        <Summary>Rezumat</Summary>
         <name>#{word.name}</name>
-        <title>Title</title>
+        <title>Titlu</title>
         <ContentCSS>CSS Data</ContentCSS>
-        <hintCSS>You can specify the main style sheet for your web content. This style will override the style sheets defined at the site level and at the shared level.</hintCSS>
+        <hintCSS>Puteţi specifica stilul principal pentru conţinutul web. Acest stil va suprascrie stilurile definite la nivel de site şi la nivel partajat.</hintCSS>
         <ContentJS>JS Data</ContentJS>
-        <hintJS>You can specify some JavaScript codes that can be executed before your web content is rendered.</hintJS>
-        <WebContentHtml>Main Content</WebContentHtml>
-        <Illustration>Illustration</Illustration>
-        <hintIllustration>You can specify an image that will be shown when your web content is displayed in the list. You can also specify some summary texts to go with this image.</hintIllustration>
-        <confirm-delete>Are you sure you want to delete this illustration?</confirm-delete>
-        <illustrationImage>Illustration Image</illustrationImage>
-        <imageMimeType>Image Type</imageMimeType>
-        <image>Upload Image</image>
-        <imageWidth>Image Width</imageWidth>
-        <imageHeight>Image Height</imageHeight>
-        <Synchronize>Synchronize with CSS and HTML</Synchronize>
+        <hintJS>Puteţi specifica unele coduri JavaScript care pot fi executate înainte de a fi afișat conținutul Web.</hintJS>
+        <WebContentHtml>Conţinutul principal</WebContentHtml>
+        <Illustration>Ilustraţie</Illustration>
+        <hintIllustration>Puteţi specifica o imagine care va fi afişată când conţinutul web este afişat în listă. Puteţi specifica, de asemenea, unele texte rezumat pentru această imagine.</hintIllustration>
+        <confirm-delete>Sigur ștergeți această ilustraţie?</confirm-delete>
+        <illustrationImage>Imagine ilustrație</illustrationImage>
+        <imageMimeType>Tipul de imagine</imageMimeType>
+        <image>Încărcare imagine</image>
+        <imageWidth>Lățimea imaginii</imageWidth>
+        <imageHeight>Înălțimea imaginii</imageHeight>
+        <Synchronize>Sincronizare cu HTML şi CSS</Synchronize>
       </label>
     </dialog>
   </WebContent>
@@ -52,8 +52,8 @@
     <dialog>
       <label>
         <name>#{word.name}</name>
-        <active>Active</active>
-        <priority>Priority</priority>
+        <active>Activ</active>
+        <priority>Prioritate</priority>
         <content>CSS Data</content>
       </label>
     </dialog>
@@ -63,8 +63,8 @@
     <dialog>
       <label>
         <name>#{word.name}</name>
-        <active>Active</active>
-        <priority>Priority</priority>
+        <active>Activ</active>
+        <priority>Prioritate</priority>
         <content>JS Data</content>
       </label>
     </dialog>
@@ -75,7 +75,7 @@
       <label>
         <name>#{word.name}</name>
         <url>URL</url>
-        <description>Description</description>
+        <description>Descriere</description>
       </label>
     </dialog>
   </WebLink>
@@ -83,10 +83,10 @@
   <SiteMetadata>
     <dialog>
       <label>
-        <title>Site Title</title>
-        <description>Site Description</description>
-        <keywords>Site Keywords</keywords>
-        <robots>Search Engine Behavior</robots>
+        <title>Titlul Site-ului</title>
+        <description>Descrierea site-ului</description>
+        <keywords>Cuvinte cheie site</keywords>
+        <robots>Comportament motor de căutare</robots>
       </label>
     </dialog>
   </SiteMetadata>

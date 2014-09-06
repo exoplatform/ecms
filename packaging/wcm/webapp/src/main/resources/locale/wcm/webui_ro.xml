@@ -22,92 +22,92 @@
 <bundle>
   <UIExoStart>
     <tooltip>
-      <homepage>Homepage</homepage>
+      <homepage>Pagina de start</homepage>
     </tooltip>
   </UIExoStart>
 
   <UIFormInputSetWithAction>
     <msg>
-      <confirm-delete>Are you sure you want to delete this item?</confirm-delete>
+      <confirm-delete>Sigur ştergeţi acest element?</confirm-delete>
     </msg>
   </UIFormInputSetWithAction>
 
   <Drives>
     <label>
-      <ManagedSites>Sites Management</ManagedSites>
-      <SharedSite>Shared Site</SharedSite>
+      <ManagedSites>Management site-uri</ManagedSites>
+      <SharedSite>Site partajat</SharedSite>
     </label>
   </Drives>
 
   <Views>
     <label>
       <wcm-view>Web</wcm-view>
-      <admin-view>Admin</admin-view>
-      <icon-view>Icons</icon-view>
-      <thumbails-view>Thumbnails</thumbails-view>
-      <list-view>List</list-view>
-      <authoring-view>Authoring</authoring-view>
-      <wcm-category-view>Categories</wcm-category-view>
-      <file-view>File Management View</file-view>
+      <admin-view>Administrator</admin-view>
+      <icon-view>Icon-uri</icon-view>
+      <thumbails-view>Miniaturi</thumbails-view>
+      <list-view>Listă</list-view>
+      <authoring-view>Autor</authoring-view>
+      <wcm-category-view>Categorii</wcm-category-view>
+      <file-view>Afișare manager fișiere</file-view>
     </label>
   </Views>
 
   <UIActionBar>
     <obtion>
-      <Publication>Publication</Publication>
-      <System>System</System>
+      <Publication>Publicare</Publication>
+      <System>Sistem</System>
     </obtion>
   </UIActionBar>
 
   <UIPageSelectorPanel>
     <header>
-      <path>Path</path>
+      <path>Cale</path>
       <action>#{word.action}</action>
     </header>
     <msg>
-      <child-not-found>No Page Found.</child-not-found>
+      <child-not-found>Pagina nu a fost găsită.</child-not-found>
     </msg>
     <title>
-      <select>Select</select>
+      <select>Selectaţi</select>
     </title>
   </UIPageSelectorPanel>
 
   <UIContentDialogFormPopupWindow>
     <title>
-      <UIContentDialogPreference>Web Content Preference</UIContentDialogPreference>
+      <UIContentDialogPreference>Preferințe conţinut web</UIContentDialogPreference>
     </title>
   </UIContentDialogFormPopupWindow>
 
   <UITabPane>
     <title>
-      <UIContentBrowsePanelOne>Content Browser</UIContentBrowsePanelOne>
-      <UIContentBrowsePanelMulti>Content Browser</UIContentBrowsePanelMulti>
-      <UIContentBrowsePanelFolder>Folder Browser</UIContentBrowsePanelFolder>
-      <UIContentSearchForm>Content Search Form</UIContentSearchForm>
-      <UIContentSearchResult>Search Result</UIContentSearchResult>
-      <UIContentViewer>Preview Content</UIContentViewer>
-      <WebContentMetadataPopup>Property Selector</WebContentMetadataPopup>
-      <WebContentNodeTypePopup>Nodetype Selector</WebContentNodeTypePopup>
-      <UIPermissionManager>Permission Manager</UIPermissionManager>
+      <UIContentBrowsePanelOne>Browser conținut</UIContentBrowsePanelOne>
+      <UIContentBrowsePanelMulti>Browser conținut</UIContentBrowsePanelMulti>
+      <UIContentBrowsePanelFolder>Browser Foldere</UIContentBrowsePanelFolder>
+      <UIContentSearchForm>Formularul de căutare conţinut</UIContentSearchForm>
+      <UIContentSearchResult>Rezultatul căutării</UIContentSearchResult>
+      <UIContentViewer>Examinare conţinut</UIContentViewer>
+      <WebContentMetadataPopup>Selectorul de proprietăți</WebContentMetadataPopup>
+      <WebContentNodeTypePopup>Selectorul de tip module</WebContentNodeTypePopup>
+      <UIPermissionManager>Manager permisiuni</UIPermissionManager>
     </title>
   </UITabPane>
 
   <UIContentBrowsePanelOne>
     <selectBoxValues>
-      <FilterBy>Filter by</FilterBy>
-      <WebContent>Web Content</WebContent>
+      <FilterBy>Filtrează după</FilterBy>
+      <WebContent>Conţinut web</WebContent>
       <DMSDocument>Document</DMSDocument>
       <Media>Media</Media>
     </selectBoxValues>
     <msg>
-      <node-checkout>The node is checked out. Please check the node before performing this function.</node-checkout>
+      <node-checkout>Modulul nu este înregistrat. Vă rugăm înregistrați modulul înainte de a folosi această funcție.</node-checkout>
     </msg>
   </UIContentBrowsePanelOne>
 
   <UIContentBrowsePanelMulti>
     <selectBoxValues>
-      <FilterBy>Filter by</FilterBy>
-      <WebContent>Web Content</WebContent>
+      <FilterBy>Filtrează după</FilterBy>
+      <WebContent>Conţinut web</WebContent>
       <DMSDocument>Document</DMSDocument>
       <Media>Media</Media>
     </selectBoxValues>
@@ -115,34 +115,34 @@
 
   <UIContentBrowsePanelOne>
     <label>
-      <LeftColumn>Select a folder to display its children as content.</LeftColumn>
-      <RightColumn>The content below can be selected.</RightColumn>
+      <LeftColumn>Selectați un folder pentru a afișa subfolderele ca și conținut.</LeftColumn>
+      <RightColumn>Conținutul de mai jos poate fi selectat.</RightColumn>
     </label>
   </UIContentBrowsePanelOne>
 
   <UIContentBrowsePanelMulti>
     <label>
-      <LeftColumn>Select a folder to display its children as content.</LeftColumn>
-      <RightColumn>The content below can be selected.</RightColumn>
+      <LeftColumn>Selectați un folder pentru a afișa subfolderele ca și conținut.</LeftColumn>
+      <RightColumn>Conținutul de mai jos poate fi selectat.</RightColumn>
     </label>
   </UIContentBrowsePanelMulti>
 
   <UIContentBrowsePanelFolder>
     <label>
-      <LeftColumn>Select a folder to display its children as content.</LeftColumn>
-      <RightColumn>The folder below can be selected.</RightColumn>
+      <LeftColumn>Selectați un folder pentru a afișa subfolderele ca și conținut.</LeftColumn>
+      <RightColumn>Dosarul de mai jos poate fi selectat.</RightColumn>
     </label>
   </UIContentBrowsePanelFolder>
 
   <UISelectedContentGrid>
     <label>
       <name>#{word.name}</name>
-      <add>Add</add>
-      <delete>Delete</delete>
+      <add>Adaugă</add>
+      <delete>Ştergeţi</delete>
     </label>
     <msg>
-      <no-content-found>No content found.</no-content-found>
-      <non-content>You have not selected any content.</non-content>
+      <no-content-found>Nu a fost găsit conținut.</no-content-found>
+      <non-content>Nu aţi selectat nici un conţinut.</non-content>
     </msg>
   </UISelectedContentGrid>
 
@@ -156,79 +156,79 @@
   <UIContentBrowsePathSelector>
     <header>
       <name>#{word.name}</name>
-      <publicationstate>Publication State</publicationstate>
-      <action>Action</action>
+      <publicationstate>Starea publicării</publicationstate>
+      <action>Acțiune</action>
     </header>
     <msg>
-      <child-not-found>No Content Found</child-not-found>
+      <child-not-found>Nu a fost găsit conținut</child-not-found>
     </msg>
   </UIContentBrowsePathSelector>
 
   <UIContentBrowsePathSelectorFolder>
     <header>
       <name>#{word.name}</name>
-      <publicationstate>Publication State</publicationstate>
-      <action>Action</action>
+      <publicationstate>Starea publicării</publicationstate>
+      <action>Acțiune</action>
     </header>
     <msg>
-      <child-not-found>No Folder Found</child-not-found>
+      <child-not-found>Nu a fost găsit niciun folder</child-not-found>
     </msg>
   </UIContentBrowsePathSelectorFolder>
 
   <UIContentSearchForm>
     <title>
-      <Location>Site Name</Location>
-      <SearchByName>Search by Name</SearchByName>
-      <Fulltext>A word or phrase in context</Fulltext>
-      <Property>Property</Property>
-      <Contain>Contain</Contain>
-      <FromDate>From Date</FromDate>
-      <ToDate>To Date</ToDate>
-      <DocumentType>Document Type</DocumentType>
+      <Location>Numele site-ului</Location>
+      <SearchByName>Căutare după nume</SearchByName>
+      <Fulltext>Un cuvânt sau o frază în context</Fulltext>
+      <Property>Proprietate</Property>
+      <Contain>Conţin</Contain>
+      <FromDate>De la data</FromDate>
+      <ToDate>La data de</ToDate>
+      <DocumentType>Tipul de document</DocumentType>
     </title>
     <tooltip>
-      <AddMetadataType>Add Property</AddMetadataType>
-      <AddNodeType>Add Node Type</AddNodeType>
+      <AddMetadataType>Adăugaţi proprietate</AddMetadataType>
+      <AddNodeType>Adaugă tip de modul</AddNodeType>
     </tooltip>    
     <label>
       <option>
-        <CREATED>Created</CREATED>
-        <MODIFIED>Modified</MODIFIED>
+        <CREATED>Creat</CREATED>
+        <MODIFIED>Modificat</MODIFIED>
       </option>
     </label>
     <action>
-      <SearchWebContent>Search</SearchWebContent>
+      <SearchWebContent>Căutare</SearchWebContent>
     </action>
     <msg>
-      <time-to-late>The searching time is too long.</time-to-late>
-      <empty-field>Please input a valid keyword for search.</empty-field>
-      <invalid-format>Invalid date/time format in field '{0}'.</invalid-format>
-      <invalid-date>"To Date" must be later than "From Date"</invalid-date>
-      <invalid-nodeType>The node type "{0}" is invalid. Please check again.</invalid-nodeType>
-      <invalid-keyword>The keyword is invalid. Some characters are not supported.</invalid-keyword>
+      <time-to-late>Timpul de căutare este prea lung.</time-to-late>
+      <empty-field>Vă rugăm să introduceți o expresie validă pentru căutare.</empty-field>
+      <invalid-format>Format dată/oră invalid în câmpul '{0}'.</invalid-format>
+      <invalid-date>"La data de" trebuie să fie mai târziu decât "De la data"</invalid-date>
+      <invalid-nodeType>Tipul "{0}" al modulului este invalid. Vă rugăm să verificaţi din nou.</invalid-nodeType>
+      <invalid-keyword>Cuvântul cheie este invalid. Unele caractere nu sunt recunoscute.</invalid-keyword>
     </msg>
   </UIContentSearchForm>
 
   <WebContentMetadataPopup>
     <title>
-      <UIContentPropertySelector>Property Selector</UIContentPropertySelector>
+      <UIContentPropertySelector>Selectorul de proprietăți</UIContentPropertySelector>
     </title>
   </WebContentMetadataPopup>
 
   <UIContentPropertySelector>
     <action>
-      <Add>Add</Add>
+      <Add>Adaugă</Add>
       <Cancel>#{word.cancel}</Cancel>
     </action>
     <label>
-      <metadataType>Metadata Type</metadataType>
-      <property_select>Property</property_select>
+      <metadataType>Tip metadate</metadataType>
+      <property_select>Proprietate</property_select>
     </label>
   </UIContentPropertySelector>
 
   <WebContentNodeTypePopup>
     <title>
-      <UIContentNodeTypeSelector>Node Type Selector</UIContentNodeTypeSelector>
+      <UIContentNodeTypeSelector>Selector tip modul</UIContentNodeTypeSelector>
     </title>
   </WebContentNodeTypePopup>
 
@@ -241,199 +241,199 @@
 
   <UIContentSearchResult>
     <header>
-      <title>Title</title>
-      <score>Score</score>
-      <publicationstate>Publication State</publicationstate>
-      <action>Action</action>
+      <title>Titlu</title>
+      <score>Scor</score>
+      <publicationstate>Starea publicării</publicationstate>
+      <action>Acțiune</action>
     </header>
     <title>
-      <Select>Select</Select>
-      <View>View</View>
+      <Select>Selectaţi</Select>
+      <View>Afișare</View>
     </title>
     <msg>
-    <template-not-support>Cannot preview this content. The template is not supported</template-not-support>
+    <template-not-support>Nu se poate vizualiza acest conţinut. Şablonul nu este acceptat</template-not-support>
     </msg>
   </UIContentSearchResult>
 
   <UIContentDialogForm>
     <action>
-      <SaveDraft>Save Draft</SaveDraft>
-      <FastPublish>Fast Publish</FastPublish>
-      <Preferences>Preferences</Preferences>
+      <SaveDraft>Salvează ciorna</SaveDraft>
+      <FastPublish>Publicare rapidă</FastPublish>
+      <Preferences>Preferinţe</Preferences>
       <Close>#{word.close}</Close>
     </action>
     <msg>
-      <access-denied>You do not have permission to add categories to this document.</access-denied>
-      <exception>An error occurred while adding categories to this document.</exception>
-      <non-categories>Categories are wrong. Please select appropriate categories.</non-categories>
+      <access-denied>Nu aveţi permisiunea de a adăuga categorii la acest document.</access-denied>
+      <exception>Eroare la adăugarea categoriilor de acest document.</exception>
+      <non-categories>Categoriile sunt greşite. Vă rugăm să selectaţi categoriile corespunzătoare.</non-categories>
     </msg>
   </UIContentDialogForm>
 
   <UIPermissionManager>
     <label>
-      <UIPermissionInputSetWithAction>Permission</UIPermissionInputSetWithAction>
-      <UIAccessibleCheckboxInput>Access Right</UIAccessibleCheckboxInput>
-      <UIEditableCheckboxInput>Edit Right</UIEditableCheckboxInput>
+      <UIPermissionInputSetWithAction>Permisiunea</UIPermissionInputSetWithAction>
+      <UIAccessibleCheckboxInput>Dreptul de acces</UIAccessibleCheckboxInput>
+      <UIEditableCheckboxInput>Drept editare</UIEditableCheckboxInput>
     </label>
     <action>
       <Save>#{word.save}</Save>
-      <Clear>Clear</Clear>
+      <Clear>Elimină</Clear>
       <title>
-        <Edit>Edit</Edit>
-        <Delete>Delete</Delete>
+        <Edit>Modifică</Edit>
+        <Delete>Ştergeţi</Delete>
       </title>
     </action>
   </UIPermissionManager>
 
   <UIPermissionManagerGrid>
     <header>
-      <owner>Permission</owner>
-      <accessible>Accessible</accessible>
-      <editable>Editable</editable>
-      <action>Action</action>
+      <owner>Permisiunea</owner>
+      <accessible>Accesibil</accessible>
+      <editable>Editabil</editable>
+      <action>Acțiune</action>
     </header>
     <msg>
-      <confirm-delete-permission>Are you sure you want to delete this permission?</confirm-delete-permission>
-      <no-permission-remove>You do not have permission.</no-permission-remove>
-      <access-denied>Access denied.</access-denied>
-      <node-locked>The path element {0} or one of its parents is locked.</node-locked>
-      <userOrGroup-required>You must select a user or group.</userOrGroup-required>
-      <checkbox-require>You must set rights.</checkbox-require>
-      <node-checkedin>You must check out first.</node-checkedin>
+      <confirm-delete-permission>Sigur ștergeți aceste drepturi?</confirm-delete-permission>
+      <no-permission-remove>Nu aveţi dreptul.</no-permission-remove>
+      <access-denied>Acces refuzat.</access-denied>
+      <node-locked>Elementul {0} de cale sau un ancestru este blocat.</node-locked>
+      <userOrGroup-required>Trebuie să selectaţi un utilizator sau un grup.</userOrGroup-required>
+      <checkbox-require>Trebuie să setați drepturi.</checkbox-require>
+      <node-checkedin>Trebuie să deblocați mai întâi.</node-checkedin>
     </msg>
   </UIPermissionManagerGrid>
 
   <UIPermissionInputSetWithAction>
     <title>
-      <SelectUser>Select User</SelectUser>
-      <SelectMember>Select Member</SelectMember>
-      <AddAny>Add Any Permission</AddAny>
+      <SelectUser>Selectaţi utilizator</SelectUser>
+      <SelectMember>Selectaţi membru</SelectMember>
+      <AddAny>Adauga orice permisiune</AddAny>
     </title>
   </UIPermissionInputSetWithAction>
 
   <UIUserSelectorPopupWindow>
     <title>
-      <UIUserContainer>User Selector</UIUserContainer>
+      <UIUserContainer>Selector de utilizator</UIUserContainer>
     </title>
   </UIUserSelectorPopupWindow>
 
   <UIGroupSelectorPopupWindow>
     <title>
-      <UIGroupMemberSelector>Group Selector</UIGroupMemberSelector>
+      <UIGroupMemberSelector>Selector de grup</UIGroupMemberSelector>
     </title>
   </UIGroupSelectorPopupWindow>
 
   <UIGroupMemberSelector>
     <label>
-      <selectGroup>Select Group</selectGroup>
-      <selectMembership>Select Membership</selectMembership>
+      <selectGroup>Selectaţi grupul</selectGroup>
+      <selectMembership>Selectaţi statutul de membru</selectMembership>
     </label>
   </UIGroupMemberSelector>
 
   <UIContentDialogPreference>
     <action>
-      <Back>Back</Back>
+      <Back>Înapoi</Back>
     </action>
   </UIContentDialogPreference>
 
   <ZeroValidator>
     <msg>
-      <Invalid-number>Zero is not accepted in the field '{0}'.</Invalid-number>
+      <Invalid-number>Zero nu este acceptat în câmpul "{0}".</Invalid-number>
     </msg>
   </ZeroValidator>
 
   <UIDropDownPageTemp>
     <item>
-      <WCMPageConfigs>WCM Page Configurations</WCMPageConfigs>
-      <ColumnPageConfigs>Column Page Configurations</ColumnPageConfigs>
-      <RowPageConfigs>Row Page Configurations</RowPageConfigs>
-      <TabsPageConfigs>Tabs Page Configurations</TabsPageConfigs>
-      <MixPageConfigs>Mix Page Configurations</MixPageConfigs>
+      <WCMPageConfigs>Configurare pagină WCM</WCMPageConfigs>
+      <ColumnPageConfigs>Configurare pagină de coloană</ColumnPageConfigs>
+      <RowPageConfigs>Configurare pagină de rând</RowPageConfigs>
+      <TabsPageConfigs>Configurare pagină TAB-uri</TabsPageConfigs>
+      <MixPageConfigs>Configurare pagina MIX</MixPageConfigs>
     </item>
   </UIDropDownPageTemp>
 
   <UIWizardPageSelectLayoutForm>
     <label>
-      <SingleContentViewer>Single Content Viewer</SingleContentViewer>
-      <ContentListViewer>Content List Viewer</ContentListViewer>
-      <Search>Search</Search>
-      <Sitemap>Site Map</Sitemap>
-      <TwoColumnsLayout>Two-column Layout</TwoColumnsLayout>
-      <ThreeColumnsLayout>Three-column Layout</ThreeColumnsLayout>
-      <TwoRowsLayout>Two-row Layout</TwoRowsLayout>
-      <ThreeRowsLayout>Three-row Layout</ThreeRowsLayout>
-      <TwoTabsLayout>Two-tab layout</TwoTabsLayout>
-      <ThreeTabsLayout>Three-tab Layout</ThreeTabsLayout>
-      <TwoColumnsOneRowLayout>Two-column &amp; One-row Layout</TwoColumnsOneRowLayout>
-      <OneRowTwoColumnsLayout>One-row &amp; Two-column Layout</OneRowTwoColumnsLayout>
-      <ThreeRowsTwoColumnsLayout>Three-row &amp; Two-column Layout</ThreeRowsTwoColumnsLayout>
+      <SingleContentViewer>Vizualizator de conținut individual</SingleContentViewer>
+      <ContentListViewer>Vizualizator de liste</ContentListViewer>
+      <Search>Căutare</Search>
+      <Sitemap>Harta site-ului</Sitemap>
+      <TwoColumnsLayout>Afișare pe două coloane</TwoColumnsLayout>
+      <ThreeColumnsLayout>Afișare pe 3 coloane</ThreeColumnsLayout>
+      <TwoRowsLayout>Afisare pe două rânduri</TwoRowsLayout>
+      <ThreeRowsLayout>Afișare pe 3 rânduri</ThreeRowsLayout>
+      <TwoTabsLayout>Afișare pe 2 TAB-uri</TwoTabsLayout>
+      <ThreeTabsLayout>Afișare pe 3 TAB-uri</ThreeTabsLayout>
+      <TwoColumnsOneRowLayout>Afisare pe 2 coloane și un rând</TwoColumnsOneRowLayout>
+      <OneRowTwoColumnsLayout>Afișare pe un rând și 2 coloane</OneRowTwoColumnsLayout>
+      <ThreeRowsTwoColumnsLayout>Afișare pe 3 rânduri și 2 coloane</ThreeRowsTwoColumnsLayout>
     </label>
   </UIWizardPageSelectLayoutForm>
 
   <Signin>
-    <welcome>Welcome</welcome>
-    <login>Login</login>
-    <logout>Logout</logout>
-    <language>Change Language</language>
-    <register>Register</register>
+    <welcome>Bun venit</welcome>
+    <login>Autentificare</login>
+    <logout>Deconectare</logout>
+    <language>Schimbă limba</language>
+    <register>Înregistrează</register>
   </Signin>
   <UIDriveForm>
 <label>
-<wcm-category-view>Category View</wcm-category-view>
-<wcm-view>WCM Content View</wcm-view>
+<wcm-category-view>Afișare categorie</wcm-category-view>
+<wcm-view>Vezi conţinut  WCM</wcm-view>
 </label>
   </UIDriveForm>
   
   <ContentSelector>
     <title>
-      <PersonalDrives>Personal Drives</PersonalDrives>
-      <GeneralDrives>General Drives</GeneralDrives>
-      <GroupDrives>Group Drives</GroupDrives>
-      <Private>Private</Private>
+      <PersonalDrives>Drive-uri personale</PersonalDrives>
+      <GeneralDrives>Drive-urile generale</GeneralDrives>
+      <GroupDrives>Drive-uri de grup</GroupDrives>
+      <Private>Privat</Private>
       <Public>Public</Public>
-      <BackupCenter>Backup Center</BackupCenter>
-      <CategorizedDocumentsCenter>Categorized Documents Center</CategorizedDocumentsCenter>
-      <CollaborationCenter>Collaboration Center</CollaborationCenter>
-      <DigitalAssetsManagementCenter>Digital Assets Management Center</DigitalAssetsManagementCenter>
-      <DMSAdministration>DMS Administration</DMSAdministration>
-      <DocumentsManagementCenter>Documents Management Center</DocumentsManagementCenter>
-      <LiveDocumentsCenter>Live Documents Center</LiveDocumentsCenter>
-      <PendingDocumentsCenter>Pending Documents Center</PendingDocumentsCenter>
-      <RecordsManagementCenter>Records Management Center</RecordsManagementCenter>
-      <SharedUsersSpace>Shared Users Space</SharedUsersSpace>
-      <Systemfiles>System Files</Systemfiles>
-      <ValidationRequestsDocumentsCenter>Validation Requests Documents Center</ValidationRequestsDocumentsCenter>
-      <ManagedSites>Sites Management</ManagedSites>
-      <SharedSite>Shared Site</SharedSite>
+      <BackupCenter>Centru Backup</BackupCenter>
+      <CategorizedDocumentsCenter>Centrul de documente clasificate</CategorizedDocumentsCenter>
+      <CollaborationCenter>Centrul de colaborare</CollaborationCenter>
+      <DigitalAssetsManagementCenter>Centrul de Management active digitale</DigitalAssetsManagementCenter>
+      <DMSAdministration>Administrare DMS</DMSAdministration>
+      <DocumentsManagementCenter>Centrul de Management documente</DocumentsManagementCenter>
+      <LiveDocumentsCenter>Centrul de documente active</LiveDocumentsCenter>
+      <PendingDocumentsCenter>Centrul de documente în aşteptare</PendingDocumentsCenter>
+      <RecordsManagementCenter>Centrul de management înregistrări</RecordsManagementCenter>
+      <SharedUsersSpace>Spațiu partajat între utilizatori</SharedUsersSpace>
+      <Systemfiles>Fișiere sistem</Systemfiles>
+      <ValidationRequestsDocumentsCenter>Centrul de validare al cererilor</ValidationRequestsDocumentsCenter>
+      <ManagedSites>Management site-uri</ManagedSites>
+      <SharedSite>Site partajat</SharedSite>
     </title>
   </ContentSelector>
   
   <UICategoryNavigationTargetPathPopupWindow>
     <title>
-      <UIPageSelector>Page Selector</UIPageSelector>
+      <UIPageSelector>Selector de Pagini</UIPageSelector>
     </title>
   </UICategoryNavigationTargetPathPopupWindow>
   
   <UIDocumentInfo>
     <msg>
-      <access-denied-exception>Access denied. You maybe not have read permission, or the node may have been removed or changed.</access-denied-exception>
+      <access-denied-exception>Acces refuzat. Poate nu aveți drepturi de citire sau modulul a fost șters.</access-denied-exception>
     </msg>
   </UIDocumentInfo>
   <UIPortalApplication>
     <title>
-      <abort>Abort</abort>
+      <abort>Renunță</abort>
     </title>
   </UIPortalApplication>    
   
   <CategoryNavigationTemplate>
   <label>
-  <home>Home</home>
+  <home>Acasă</home>
   </label>
   </CategoryNavigationTemplate>
   
   <Breadcrumb>
   <label>
-  <home>Home</home>
+  <home>Acasă</home>
   </label>  
   </Breadcrumb>
 </bundle>
