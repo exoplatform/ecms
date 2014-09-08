@@ -37,8 +37,8 @@
         <WebContentHtml>Contenido principal</WebContentHtml>
         <Illustration>Ilustración</Illustration>
         <hintIllustration>En este panel, puede especificar una imagen que será mostrada cuando el contenido web sea mostrado en las listas. Puede también especificar algunos textos resumidos para ir con esta imagen.</hintIllustration>
-        <confirm-delete>¿Está seguro que desea eliminar esta ilustración?</confirm-delete>
-        <illustrationImage>Imagen de la ilustración</illustrationImage>
+        <confirm-delete>¿Está seguro que desea eliminar esta miniatura?</confirm-delete>
+        <illustrationImage>Miniatura de imagen</illustrationImage>
         <imageMimeType>Tipo de imagen</imageMimeType>
         <image>Subir imagen</image>
         <imageWidth>Ancho de la imagen</imageWidth>
