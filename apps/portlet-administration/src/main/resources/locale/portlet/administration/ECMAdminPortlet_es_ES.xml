@@ -184,7 +184,7 @@
   -->
   <NameSpacePopup>
     <title>
-      <UINamespaceForm>Formulario del Nombre del Espacio</UINamespaceForm>
+      <UINamespaceForm>Formulario del Espacio de nombres</UINamespaceForm>
     </title>
   </NameSpacePopup>
   <UINamespaceForm>
@@ -506,8 +506,8 @@
         <propertyDefinition>Propiedad</propertyDefinition>
         <childNodeDefinition>Subnodo</childNodeDefinition>
         <superTypeTab>Super tipos</superTypeTab>
-        <DefaultTypeTab>Por defecto primario</DefaultTypeTab>
-        <RequiredTypeTab>Requerido Primaria</RequiredTypeTab>
+        <DefaultTypeTab>Tipo primario por defecto</DefaultTypeTab>
+        <RequiredTypeTab>Tipo primario obligatorio</RequiredTypeTab>
         <Contraints>Limitaciones</Contraints>
       </label>
     </tab>
@@ -548,7 +548,7 @@
       <AddProperty>Añadir propiedad</AddProperty>
       <AddChild>Agregar subnodo</AddChild>
       <AddConstraints>Añadir restricciones</AddConstraints>
-      <Back>#{palabra.atrás}</Back>
+      <Back>#{word.back}</Back>
       <AddType>Agregar tipo</AddType>
       <AddValue>Añadir</AddValue>
       <CancelConstraints>#{word.cancel}</CancelConstraints>
@@ -760,7 +760,7 @@
       <exo_businessProcessAction>Procesos de Negocio:</exo_businessProcessAction>
       <exo_scriptAction>Guiones Groovy:</exo_scriptAction>
       <exo_ruleAction>Reglas Definidas:</exo_ruleAction>
-      <script>Guión:</script>
+      <script>Script:</script>
     </label>
     <action>
       <Save>#{word.save}</Save>
@@ -792,7 +792,7 @@
       <UIActionsTemplateContainer>Acciones</UIActionsTemplateContainer>
       <UIOthersTemplateContainer>Otros</UIOthersTemplateContainer>
   <UIActionScriptContainer>Acción</UIActionScriptContainer>
-  <UIWidgetScriptContainer>Accesorios</UIWidgetScriptContainer>
+  <UIWidgetScriptContainer>Widgets</UIWidgetScriptContainer>
 <UIInterceptorScriptContainer>Interceptores</UIInterceptorScriptContainer>
 
 <nodeTypeDefinition>Tipo de Nodo</nodeTypeDefinition>
@@ -878,7 +878,7 @@
 </label>
 <msg>
  <confirm-delete>¿Está seguro que desea eliminar este permiso?</confirm-delete>
-  <permission-cannot-empty>Ver permiso se requiere y no puede estar vacío.</permission-cannot-empty>
+  <permission-cannot-empty>Por favor, Indique un permiso.</permission-cannot-empty>
 </msg>
 </UIViewPermissionList>
 

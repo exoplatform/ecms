@@ -148,7 +148,7 @@
         <creator>Creador:</creator>
         <subject>#{word.subject}:</subject>
         <source>Fuente:</source>
-        <contributor>Contribuyente:</contributor>
+        <contributor>Colaborador:</contributor>
         <resource-type>Tipo de Recursos:</resource-type>
         <date>#{word.date}:</date>
         <publisher>Editorial:</publisher>

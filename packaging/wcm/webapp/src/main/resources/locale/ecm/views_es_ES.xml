@@ -61,7 +61,7 @@
         <to>Para:</to>
         <cc>Cc:</cc>
         <date>Fecha:</date>
-        <subject>Tema:</subject>
+        <subject>Asunto:</subject>
         <attachment>Archivos adjuntos:</attachment>
       </label>
     </view>
@@ -143,7 +143,7 @@
         <creator>Creador</creator>
         <subject>Asunto</subject>
         <source>Fuente</source>
-        <contributor>Contribuyente</contributor>
+        <contributor>Colaborador</contributor>
         <resource-type>Tipo de Recursos</resource-type>
         <date>Fecha</date>
         <publisher>Editor</publisher>
