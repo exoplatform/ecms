@@ -184,7 +184,7 @@
   -->
   <NameSpacePopup>
     <title>
-      <UINamespaceForm>Formulario del Nombre del Espacio</UINamespaceForm>
+      <UINamespaceForm>Formulario del Espacio de nombres</UINamespaceForm>
     </title>
   </NameSpacePopup>
   <UINamespaceForm>
@@ -760,7 +760,7 @@
       <exo_businessProcessAction>Procesos de Negocio:</exo_businessProcessAction>
       <exo_scriptAction>Guiones Groovy:</exo_scriptAction>
       <exo_ruleAction>Reglas Definidas:</exo_ruleAction>
-      <script>Guión:</script>
+      <script>Script:</script>
     </label>
     <action>
       <Save>#{word.save}</Save>
@@ -792,7 +792,7 @@
       <UIActionsTemplateContainer>Acciones</UIActionsTemplateContainer>
       <UIOthersTemplateContainer>Otros</UIOthersTemplateContainer>
   <UIActionScriptContainer>Acción</UIActionScriptContainer>
-  <UIWidgetScriptContainer>Accesorios</UIWidgetScriptContainer>
+  <UIWidgetScriptContainer>Widgets</UIWidgetScriptContainer>
 <UIInterceptorScriptContainer>Interceptores</UIInterceptorScriptContainer>
 
 <nodeTypeDefinition>Tipo de Nodo</nodeTypeDefinition>

@@ -160,7 +160,7 @@
       <enableStructure>Activar la Estructura de DMS</enableStructure>
       <showSideBar>Mostrar barra lateral</showSideBar>
       <showHiddenNode>Mostrar los nodos ocultos</showHiddenNode>
-      <showNonDocument>Mostrar nodos no documentados</showNonDocument>
+      <showNonDocument>Mostrar todo tipo de nodos:</showNonDocument>
       <showRefDocuments>Mostrar documentos referenciados</showRefDocuments>
       <enableDragAndDrop>Activar el Arrastrar y Soltar</enableDragAndDrop>
       <sortBy>Clasificar por:</sortBy>
