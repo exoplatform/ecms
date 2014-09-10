@@ -345,7 +345,7 @@
       <tagnode-checkedin>Debe verificar el nodo antes de etiquetarlo.</tagnode-checkedin>
     </msg>
     <title>
-      <select-tab>Seleccionar ficha</select-tab>
+      <select-tab>Seleccionar pestaña</select-tab>
       <SimpleSearch>Búsqueda Rápida</SimpleSearch>
       <AdvanceSearch>Búsqueda Avanzada</AdvanceSearch>
       <SavedQueries>Consultas guardadas</SavedQueries>
@@ -359,7 +359,7 @@
     <msg>
       <has-not-permission>Acceso denegado No tienes el permiso de agregar en este nodo.</has-not-permission>
       <has-not-edit-permission>Acceso denegado. No tienes el permiso de edición en este nodo. Póngase en contacto con el administrador para obtener el derecho correcto.</has-not-edit-permission>
-      <cannot-login-node>No puede accesar y pegar el nodo aquí.</cannot-login-node>
+      <cannot-login-node>No puede acceder y pegar el nodo aquí.</cannot-login-node>
       <cannot-paste-nodetype>No se puede pegar el nodo aquí.</cannot-paste-nodetype>
       <has-not-permission-unlok>No tiene permiso para desbloquear este nodo.</has-not-permission-unlok>
       <bound-exception>No tiene permiso para cambiar el nombre de este nodo. Por favorPóngase en contacto con el administrador.</bound-exception>
@@ -636,7 +636,7 @@
       <UISimpleSearch>Búsqueda Simple</UISimpleSearch>
       <UISearchContainer>Búsqueda Avanzada</UISearchContainer>
       <UICategoryManagerSearch>Agregar categoría a la búsqueda</UICategoryManagerSearch>
-      <UIConstraintsForm>Forma de restricciones</UIConstraintsForm>
+      <UIConstraintsForm>Formulario de restricciones</UIConstraintsForm>
       <UIViewSearchResult>Ver contenido</UIViewSearchResult>
       <UIContentNameSearch>Buscar por Nombre</UIContentNameSearch>
       <UINodeInfo>Información de la Versión</UINodeInfo>

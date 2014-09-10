@@ -506,8 +506,8 @@
         <propertyDefinition>Propiedad</propertyDefinition>
         <childNodeDefinition>Subnodo</childNodeDefinition>
         <superTypeTab>Super tipos</superTypeTab>
-        <DefaultTypeTab>Por defecto primario</DefaultTypeTab>
-        <RequiredTypeTab>Requerido Primaria</RequiredTypeTab>
+        <DefaultTypeTab>Tipo primario por defecto</DefaultTypeTab>
+        <RequiredTypeTab>Tipo primario obligatorio</RequiredTypeTab>
         <Contraints>Limitaciones</Contraints>
       </label>
     </tab>
@@ -878,7 +878,7 @@
 </label>
 <msg>
  <confirm-delete>¿Está seguro que desea eliminar este permiso?</confirm-delete>
-  <permission-cannot-empty>Ver permiso se requiere y no puede estar vacío.</permission-cannot-empty>
+  <permission-cannot-empty>Por favor, Indique un permiso.</permission-cannot-empty>
 </msg>
 </UIViewPermissionList>
 
