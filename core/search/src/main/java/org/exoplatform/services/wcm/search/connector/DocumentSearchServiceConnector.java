@@ -50,6 +50,7 @@ import org.exoplatform.services.security.ConversationState;
 import org.exoplatform.services.wcm.core.NodetypeConstant;
 import org.exoplatform.services.wcm.search.ResultNode;
 import org.exoplatform.services.wcm.utils.WCMCoreUtils;
+import org.exoplatform.portal.config.model.Container;
 
 /**
  * Documents are nodes whose nodetype was declared as a Document Type in ECM admin.
@@ -164,15 +165,33 @@ public class DocumentSearchServiceConnector extends BaseContentSearchServiceConn
     DataStorage ds = WCMCoreUtils.getService(DataStorage.class);
     try {
       for (ModelObject mo : ds.getPage(pageCt.getState().getPageRef().format()).getChildren()) {
-        if (mo instanceof Application<?>) {
-          if (ds.getId(((Application<?>)mo).getState()).contains(plName)) {
-            return true;
-          }
+        if (containApp(mo, plName)) {
+          return true;
         }
-      }
+      } //of for
     } catch(Exception ex) {
       return false;
     }
+    return false;
+  }
+  
+  private boolean containApp(ModelObject mo, String plName) {
+    DataStorage ds = WCMCoreUtils.getService(DataStorage.class);
+    if (mo instanceof Application<?>) {
+      try {
+        if (ds.getId(((Application<?>)mo).getState()).contains(plName)) {
+          return true;
+        }
+      } catch (Exception e) {
+        return false;
+      }
+    } else if (mo instanceof Container) {
+      for (ModelObject m : ((Container)mo).getChildren()) {
+        if (containApp(m, plName)) {
+          return true;
+        }// of if
+      }// of for
+    } // of flse
     return false;
   }
   
