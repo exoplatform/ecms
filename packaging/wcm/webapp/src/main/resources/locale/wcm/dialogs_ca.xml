@@ -1,0 +1,93 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+
+    Copyright (C) 2009 eXo Platform SAS.
+    
+    This is free software; you can redistribute it and/or modify it
+    under the terms of the GNU Lesser General Public License as
+    published by the Free Software Foundation; either version 2.1 of
+    the License, or (at your option) any later version.
+    
+    This software is distributed in the hope that it will be useful,
+    but WITHOUT ANY WARRANTY; without even the implied warranty of
+    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the GNU
+    Lesser General Public License for more details.
+    
+    You should have received a copy of the GNU Lesser General Public
+    License along with this software; if not, write to the Free
+    Software Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA
+    02110-1301 USA, or see the FSF site: http://www.fsf.org.
+
+-->
+<bundle>
+  <WebContent>
+    <dialog>
+      <label>
+        <MainContent>Contingut principal</MainContent>
+        <cssFile>default.css</cssFile>
+        <jsFile>default.js</jsFile>
+        <Advanced>Avançat</Advanced>
+        <Summary>Resum</Summary>
+        <name>#{word.name}</name>
+        <title>Títol</title>
+        <ContentCSS>Dades CSS</ContentCSS>
+        <hintCSS>Pot especificar el full d'estil principal per al contingut del seu web. Aquest estil invalidarà l'estil definit al nivell del lloc i al nivell compartit.</hintCSS>
+        <ContentJS>Dades JS</ContentJS>
+        <hintJS>Pot especificar algun codi JavaScript per ser executat abans de que sigui carregat el contingut de la web.</hintJS>
+        <WebContentHtml>Contingut principal</WebContentHtml>
+        <Illustration>Miniatura</Illustration>
+        <hintIllustration>Pot especificar una imatge que es mostrarà quan el contingut del seu web surti a la llista. També pot especificar alguns textos de resum per anar junt amb l'imatge.</hintIllustration>
+        <confirm-delete>Està segur que vol suprimir aquesta miniatura?</confirm-delete>
+        <illustrationImage>Imatge de la miniatura</illustrationImage>
+        <imageMimeType>Tipus d'imatge</imageMimeType>
+        <image>Puja l'imatge</image>
+        <imageWidth>Amplada d'imatge</imageWidth>
+        <imageHeight>Altura d'imatge</imageHeight>
+        <Synchronize>Sincronitzar amb CSS i HTML</Synchronize>
+      </label>
+    </dialog>
+  </WebContent>
+
+  <CSSFile>
+    <dialog>
+      <label>
+        <name>#{word.name}</name>
+        <active>Actiu</active>
+        <priority>Prioritat</priority>
+        <content>Dades CSS</content>
+      </label>
+    </dialog>
+  </CSSFile>
+
+  <JSFile>
+    <dialog>
+      <label>
+        <name>#{word.name}</name>
+        <active>Actiu</active>
+        <priority>Prioritat</priority>
+        <content>Dades JS</content>
+      </label>
+    </dialog>
+  </JSFile>
+
+  <WebLink>
+    <dialog>
+      <label>
+        <name>#{word.name}</name>
+        <url>URL</url>
+        <description>Descripció</description>
+      </label>
+    </dialog>
+  </WebLink>
+
+  <SiteMetadata>
+    <dialog>
+      <label>
+        <title>Títol del Lloc</title>
+        <description>Descripció del Lloc</description>
+        <keywords>Paraules clau del Lloc</keywords>
+        <robots>Comportament del motor de Cerca</robots>
+      </label>
+    </dialog>
+  </SiteMetadata>
+</bundle>

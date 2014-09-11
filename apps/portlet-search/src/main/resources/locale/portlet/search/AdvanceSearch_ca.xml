@@ -1,0 +1,96 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<bundle>
+  <UIDefaultSearchForm>
+    <label>
+      <keyword>Paraula clau</keyword>
+      <portal>Portal</portal>
+      <Page>Pàgina</Page>
+      <Document>Document</Document>
+    </label>
+    <action>
+      <Search>Cerca</Search>
+    </action>
+  </UIDefaultSearchForm>
+
+  <UIDefaultSearchResult>
+    <label>
+      <Page>Pàgina</Page>
+      <Document>Document</Document>
+      <DocumentAndPage>Document i Pàgina</DocumentAndPage>
+      <documentandpage>Document i Pàgina</documentandpage>
+      <resutlsCaption>Resultats</resutlsCaption>
+      <ofAboutCaption>d'uns</ofAboutCaption>
+      <forCaption>per</forCaption>
+      <timeUnitCaption>segons</timeUnitCaption>
+      <similar>Pàgines on apareix el mateix contingut</similar>
+      <editor>Editor</editor>
+      <date>Data</date>
+      <relevancy>Rellevància</relevancy>
+      <title>Títol</title>
+      <sortBy>Ordena per:</sortBy>
+    </label>
+    <action>
+      <edit>Edita</edit>
+    </action>
+    <msg>
+      <search-not-match-type>La seva cerca {0} no coincideix amb cap {1}.</search-not-match-type>
+    </msg>
+  </UIDefaultSearchResult>
+  <UISearchPageLayoutManager>
+    <label>
+      <itemsPerPageSelector>Elements per Pàgina</itemsPerPageSelector>
+      <searchFormSelector>Plantilla del Formulari de Cerca</searchFormSelector>
+      <searchResultSelector>Plantilla de Resultats de Cerca</searchResultSelector>
+      <searchPaginatorSelector>Plantilla de Paginació de Cerca</searchPaginatorSelector>
+      <searchPageLayoutSelector>Plantilla de disposició de la Pàgina de Cerca</searchPageLayoutSelector>
+      <searchResultBasePathInputSetAction>Ruta Base</searchResultBasePathInputSetAction>
+      <pageMode>Mode de Pàgina</pageMode>
+      <option>
+        <none>Cap</none>
+        <more>Més</more>
+        <pagination>Paginació</pagination>
+      </option>
+    </label>
+    <action>
+      <Save>#{word.save}</Save>
+      <Cancel>#{word.cancel}</Cancel>
+    </action>
+  </UISearchPageLayoutManager>
+  <searchResultBasePathInputSetAction>
+    <title>
+      <SelectBasePath>Selecciona la Ruta de la Base</SelectBasePath>
+    </title>
+  </searchResultBasePathInputSetAction>  
+  <UISearchForm>  
+   <message>
+     <keyword-not-support>La paraula clau no és vàlida. No es reconeixen alguns caràcters.</keyword-not-support>
+     <not-checked>Si us plau, selecciona un tipus de cerca.</not-checked>
+     <keyword-not-empty>Si us plau, introdueix una paraula clau.</keyword-not-empty>
+   </message>
+  </UISearchForm>
+  <UIPaginatorDefault>
+    <label>
+      <next>Següent</next>
+      <previous>Anterior</previous>
+      <more>Més</more>
+    </label>
+  </UIPaginatorDefault>
+  <UISearchPageLayoutDefault>
+    <label>
+      <quickEditTitle>Edició Ràpida</quickEditTitle>
+    </label>
+  </UISearchPageLayoutDefault>
+  <searchOption>
+    <label>
+      <pageCheckBox>en les Pàgines</pageCheckBox>
+      <documentCheckBox>en el Contingut</documentCheckBox>
+    </label>
+  </searchOption>
+  <ViewMode>
+    <label>
+      <option>
+        <all>cerca a tots els llocs</all>
+      </option>  
+    </label>  
+  </ViewMode>
+</bundle>

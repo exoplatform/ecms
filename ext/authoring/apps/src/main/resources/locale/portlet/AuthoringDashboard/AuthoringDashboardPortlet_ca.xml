@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<bundle>
+  <UIDashboardForm>
+    <label>
+      <title>Author Dashboard</title>
+      <nocontent>Sense contingut</nocontent>
+      <mydraft>Els meus Esborranys</mydraft>
+      <waitingapproval>Esperant la meva aprovació</waitingapproval>
+      <approve>Aprova</approve>
+      <publishedtomorrow>Que es publicarà demà</publishedtomorrow>
+      <refresh>#{word.refresh}</refresh>
+    </label>
+  </UIDashboardForm>
+</bundle>

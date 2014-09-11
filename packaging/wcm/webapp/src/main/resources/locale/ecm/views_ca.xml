@@ -1,0 +1,227 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<bundle>
+ 
+  <View>
+    <label>
+      <languages>
+        <en>Anglès</en>
+        <fr>Francès</fr>
+        <ru>Rús</ru>
+        <vi>Vietnamita</vi>
+        <nl>Holandès</nl>
+        <de>Alemany</de>
+        <uk>Ucraïnès</uk>
+        <ar>Àrab</ar>
+      </languages>
+    </label>
+  </View>
+ 
+  <!--
+  ################resoucebundle FOR EXO:COMMENT VIEW TEMPLATE#############
+  -->
+  <Comment>
+    <view>
+      <label>
+        <postedBy>Últim comentari publicat per</postedBy>
+        <at>a</at>
+        <comments>Comentari(s)</comments>
+        <show-comments>Mostra els comentaris</show-comments>
+        <hide-comments>Amaga els comentaris</hide-comments>
+        <comment-by>Comentat per</comment-by>
+        <email>Correu electrònic</email>
+        <site>Lloc</site>
+      </label>
+    </view>
+  </Comment>
+ 
+  <!--
+  ################resoucebundle FOR NT:FILE VIEW TEMPLATE##############
+  -->
+  <File>
+    <view>
+      <label>
+        <not-viewable>La vista prèvia d'aquest document no està disponible.</not-viewable>
+        <using-webDAV>o obre en MS Office</using-webDAV>
+        <file-size-too-big>El contingut d'aquest fitxer és massa gran. Hauria de descarregar-lo i obrir-lo per veure'l.</file-size-too-big>
+        <webDAV>Vista WebDAV</webDAV>
+        <download>Descarrega</download>
+        <htmlview>Visualitza en HTML</htmlview>
+        <plaintextview>Mostra com a text</plaintextview>
+      </label>
+    </view>
+  </File>
+ 
+  <!--
+  ################resoucebundle FOR MAIL:DOCUMENT VIEW TEMPLATE##############
+  -->
+  <Mail>
+    <view>
+      <label>
+        <from>Des de:</from>
+        <to>Al:</to>
+        <cc>Cc:</cc>
+        <date>Data:</date>
+        <subject>Assumpte:</subject>
+        <attachment>Fitxers adjunts:</attachment>
+      </label>
+    </view>
+  </Mail>
+  <!--
+  ################resoucebundle FOR EXO:VOTE VIEW TEMPLATE##############
+  -->
+  <Vote>
+    <view>
+      <label>
+        <avg-rating>Qualificació mitjana</avg-rating>
+        <subscription>Vots</subscription>
+      </label>
+    </view>
+  </Vote>
+  <!--
+  ################resoucebundle FOR LISTVIEW VIEW TEMPLATE##############
+  -->
+  <ListView>
+    <view>
+      <label>
+        <name>Nom</name>
+        <versionable>Versionable</versionable>
+        <exo_owner>Propietari</exo_owner>
+        <exo_dateCreated>Data de creació</exo_dateCreated>
+        <exo_dateModified>Data de modificació</exo_dateModified>
+        <auditing>Auditoria</auditing>
+      </label>
+    </view>
+  </ListView>
+
+  <!--
+  ###################### resoucebundle for exo:addMetadataAction view template ####
+  -->
+  <AddMetadata>
+    <view>
+      <label>
+        <action-name>Nom de l'acció</action-name>
+        <lifecycle>Cicle de vida</lifecycle>
+        <metadata>Metadades</metadata>
+        <description>Descripció</description>
+      </label>
+    </view>
+  </AddMetadata>
+
+  <!--
+  ###################### resoucebundle for exo:autoVersioning view template ####
+  -->
+  <AutoVersioning>
+    <view>
+      <label>
+        <action-name>Nom de l'acció</action-name>
+        <lifecycle>Cicle de vida</lifecycle>
+        <description>Descripció</description>
+      </label>
+    </view>
+  </AutoVersioning>
+  <!--
+  ###################### resoucebundle for exo:enableVersiong view template ####
+  -->
+  <EnableVersioning>
+    <view>
+      <label>
+        <action-name>Nom</action-name>
+        <lifecycle>Cicle de vida</lifecycle>
+        <description>Descripció</description>
+      </label>
+    </view>
+  </EnableVersioning>
+  <!--
+  ###################### resoucebundle for dc:elementSet view template ####
+  -->
+  <ElementSet>
+    <view>
+      <label>
+        <not-avaliable>N/D</not-avaliable>
+        <core-elements>Elements bàsics</core-elements>
+        <title>Títol</title>
+        <creator>Autor</creator>
+        <subject>Assumpte</subject>
+        <source>Font</source>
+        <contributor>Col·laborador</contributor>
+        <resource-type>Tipus de Recurs</resource-type>
+        <date>Data</date>
+        <publisher>Editor</publisher>
+        <description>Descripció</description>
+        <rights>Drets</rights>
+        <relation>Relació</relation>
+        <format>Format</format>
+        <coverage>Cobertura</coverage>
+        <identifier>Identificador</identifier>
+        <languages>Idiomes</languages>
+      </label>
+      <action>
+        <add-edit>Afegeix/Edita</add-edit>
+        <cancel>#{word.cancel}</cancel>
+      </action>
+      <tooltip>
+        <cancel>#{word.cancel}</cancel>
+        <add-edit>Afegeix/Edita les propietats</add-edit>
+      </tooltip>
+    </view>
+  </ElementSet>
+
+  <ScriptAction>
+    <view>
+      <label> 
+        <isDeep>Recursiu</isDeep>
+        <nodetypes>Tipus de node</nodetypes>
+        <affectedNodeTypeNames>Tipus de node afectats</affectedNodeTypeNames>
+        <nodeTypeName>Nom del tipus node</nodeTypeName>
+      </label> 
+    </view>
+  </ScriptAction>
+  
+  <AddMetadata>
+    <view>
+      <label>
+        <isDeep>Recursiu</isDeep>
+        <nodetypes>Tipus de node</nodetypes>
+        <affectedNodeTypeNames>Tipus de Node afectats</affectedNodeTypeNames>
+        <nodeTypeName>Noms de tipus node</nodeTypeName>
+      </label> 
+    </view>
+  </AddMetadata>
+
+  <EnableVersioning>
+    <view>
+      <label>
+        <isDeep>Recursiu</isDeep>
+        <nodetypes>Tipus de node</nodetypes> 
+        <affectedNodeTypeNames>Tipus de Node afectats</affectedNodeTypeNames>
+        <nodeTypeName>Noms de tipus node</nodeTypeName>
+      </label> 
+    </view>
+  </EnableVersioning>
+  
+  <AutoVersioning>
+    <view>
+      <label>
+        <isDeep>Recursiu</isDeep>
+        <nodetypes>Tipus de node</nodetypes>
+        <affectedNodeTypeNames>Tipus de Node afectats</affectedNodeTypeNames>
+        <nodeTypeName>Noms de tipus node</nodeTypeName>
+      </label> 
+    </view>
+  </AutoVersioning>
+  
+   <AccessibleMedia>
+    <view>
+      <label>
+      <Play-audio-description-of-this-video>Descripció audio</Play-audio-description-of-this-video>
+      <Read-more>Llegeix més</Read-more>
+      <Read-less>Llegir menys</Read-less>
+      <Switch-back-to-original-video>Vídeo original</Switch-back-to-original-video>
+      </label>
+      <tooltip>
+      <A-second-media-file-is-available-as-audio-description>Un segon fitxer multimèdia està disponible com una descripció audio</A-second-media-file-is-available-as-audio-description>
+      </tooltip>
+    </view>
+  </AccessibleMedia>
+ 
+</bundle>

@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<bundle>
+  <!--
+  #####################################################################
+  # org.exoplatform.ecm.webui.tree.selectmany.UICategoriesSelectPanel #
+  #####################################################################
+  -->
+  <UITreeList>
+    <header>
+      <name>Nom</name>
+      <action>Afegeix</action>
+    </header>
+    <info>
+      <child-not-found>No s'ha trobat el node secundari!</child-not-found>
+    </info>
+  </UITreeList>
+  <!--
+  ######################################################################
+  # org.exoplatform.ecm.webui.tree.selectmany.UISelectedCategoriesGrid #
+  ######################################################################
+  -->
+  <UISelectedCategoriesGrid>
+    <header>
+      <categoryName>Nom de la categoria</categoryName>
+      <categoryPath>Ruta de la categoria</categoryPath>
+      <action>#{word.action}</action>
+    </header>
+    <action>
+      <SaveCategories>#{word.save}</SaveCategories>
+      <Cancel>#{word.cancel}</Cancel>
+    </action>
+    <msg>
+      <cannot-save>Les categories no s'han desat.</cannot-save>
+      <have-saved>Les categories s'han desat correctament</have-saved>
+      <non-categories>Les categories estan equivocades. Si us plau, selecciona les categories adients.</non-categories>
+      <confirm-delete>Vol suprimir aquesta categoria?</confirm-delete>
+    </msg>
+  </UISelectedCategoriesGrid>
+  <!--
+  ######################################################################
+  # org.exoplatform.ecm.webui.selector.UIPermissionSelector           #
+  ######################################################################
+  -->
+  <SelectUserOrGroup>
+    <title>
+      <UIPermissionUser>Selecciona usuari/a</UIPermissionUser>
+      <UIPermissionMembership>Selecciona l'Afiliació</UIPermissionMembership>
+    </title>
+  </SelectUserOrGroup>
+  <UIPermissionUser>
+    <label>
+      <selectUser>Selecciona usuari/a</selectUser>
+      <selectGroup>Examina i selecciona un grup</selectGroup>
+    </label>
+  </UIPermissionUser>
+  <UIPermissionMembership>
+    <label>
+      <selectUser>Selecciona l'Afiliació</selectUser>
+      <selectGroup>Examina i selecciona un grup</selectGroup>
+    </label>
+  </UIPermissionMembership>
+</bundle>

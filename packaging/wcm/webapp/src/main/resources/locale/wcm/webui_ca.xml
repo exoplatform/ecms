@@ -1,0 +1,439 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+
+    Copyright (C) 2009 eXo Platform SAS.
+    
+    This is free software; you can redistribute it and/or modify it
+    under the terms of the GNU Lesser General Public License as
+    published by the Free Software Foundation; either version 2.1 of
+    the License, or (at your option) any later version.
+    
+    This software is distributed in the hope that it will be useful,
+    but WITHOUT ANY WARRANTY; without even the implied warranty of
+    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the GNU
+    Lesser General Public License for more details.
+    
+    You should have received a copy of the GNU Lesser General Public
+    License along with this software; if not, write to the Free
+    Software Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA
+    02110-1301 USA, or see the FSF site: http://www.fsf.org.
+
+-->
+<bundle>
+  <UIExoStart>
+    <tooltip>
+      <homepage>Pàgina d'inici</homepage>
+    </tooltip>
+  </UIExoStart>
+
+  <UIFormInputSetWithAction>
+    <msg>
+      <confirm-delete>Segur de vol suprimir aquest element?</confirm-delete>
+    </msg>
+  </UIFormInputSetWithAction>
+
+  <Drives>
+    <label>
+      <ManagedSites>Gestió de Llocs</ManagedSites>
+      <SharedSite>Lloc Compartit</SharedSite>
+    </label>
+  </Drives>
+
+  <Views>
+    <label>
+      <wcm-view>Web</wcm-view>
+      <admin-view>Admin</admin-view>
+      <icon-view>Icones</icon-view>
+      <thumbails-view>Miniatures</thumbails-view>
+      <list-view>Llista</list-view>
+      <authoring-view>Autoria</authoring-view>
+      <wcm-category-view>Categories</wcm-category-view>
+      <file-view>Vista de gestió de fitxer</file-view>
+    </label>
+  </Views>
+
+  <UIActionBar>
+    <obtion>
+      <Publication>Publicació</Publication>
+      <System>Sistema</System>
+    </obtion>
+  </UIActionBar>
+
+  <UIPageSelectorPanel>
+    <header>
+      <path>Ruta</path>
+      <action>#{word.action}</action>
+    </header>
+    <msg>
+      <child-not-found>No s'ha trobat la pàgina.</child-not-found>
+    </msg>
+    <title>
+      <select>Selecciona</select>
+    </title>
+  </UIPageSelectorPanel>
+
+  <UIContentDialogFormPopupWindow>
+    <title>
+      <UIContentDialogPreference>Preferència de Continguts web</UIContentDialogPreference>
+    </title>
+  </UIContentDialogFormPopupWindow>
+
+  <UITabPane>
+    <title>
+      <UIContentBrowsePanelOne>Navegador de continguts</UIContentBrowsePanelOne>
+      <UIContentBrowsePanelMulti>Navegador de continguts</UIContentBrowsePanelMulti>
+      <UIContentBrowsePanelFolder>Navegador de carpetes</UIContentBrowsePanelFolder>
+      <UIContentSearchForm>Formulari de cerca de continguts</UIContentSearchForm>
+      <UIContentSearchResult>Resultat de la cerca</UIContentSearchResult>
+      <UIContentViewer>Vista prèvia del contingut</UIContentViewer>
+      <WebContentMetadataPopup>Selector de Propietat</WebContentMetadataPopup>
+      <WebContentNodeTypePopup>Selector del Tipus de Node</WebContentNodeTypePopup>
+      <UIPermissionManager>Gestor de Permisos</UIPermissionManager>
+    </title>
+  </UITabPane>
+
+  <UIContentBrowsePanelOne>
+    <selectBoxValues>
+      <FilterBy>Filtra per</FilterBy>
+      <WebContent>Contingut Web</WebContent>
+      <DMSDocument>Document</DMSDocument>
+      <Media>Mèdia</Media>
+    </selectBoxValues>
+    <msg>
+      <node-checkout>El node està desprotegit. Si us plau comprovi'l abans de realitzar aquesta funció.</node-checkout>
+    </msg>
+  </UIContentBrowsePanelOne>
+
+  <UIContentBrowsePanelMulti>
+    <selectBoxValues>
+      <FilterBy>Filtra per</FilterBy>
+      <WebContent>Contingut Web</WebContent>
+      <DMSDocument>Document</DMSDocument>
+      <Media>Mèdia</Media>
+    </selectBoxValues>
+  </UIContentBrowsePanelMulti>
+
+  <UIContentBrowsePanelOne>
+    <label>
+      <LeftColumn>Selecciona una carpeta per mostrar les seves subcarpetes com a contingut.</LeftColumn>
+      <RightColumn>El contingut a continuació pot ser seleccionat.</RightColumn>
+    </label>
+  </UIContentBrowsePanelOne>
+
+  <UIContentBrowsePanelMulti>
+    <label>
+      <LeftColumn>Selecciona una carpeta per mostrar les seves subcarpetes com a contingut.</LeftColumn>
+      <RightColumn>El contingut a continuació pot ser seleccionat.</RightColumn>
+    </label>
+  </UIContentBrowsePanelMulti>
+
+  <UIContentBrowsePanelFolder>
+    <label>
+      <LeftColumn>Selecciona una carpeta per mostrar les seves subcarpetes com a contingut.</LeftColumn>
+      <RightColumn>La següent carpeta es pot seleccionar.</RightColumn>
+    </label>
+  </UIContentBrowsePanelFolder>
+
+  <UISelectedContentGrid>
+    <label>
+      <name>#{word.name}</name>
+      <add>Afegeix</add>
+      <delete>Suprimeix</delete>
+    </label>
+    <msg>
+      <no-content-found>Cap contingut trobat.</no-content-found>
+      <non-content>No ha seleccionat cap contingut.</non-content>
+    </msg>
+  </UISelectedContentGrid>
+
+  <UICLVContentSelectedGrid>
+    <action>
+      <SaveCategories>#{word.save}</SaveCategories>
+      <Cancel>#{word.cancel}</Cancel>
+    </action>
+  </UICLVContentSelectedGrid>
+
+  <UIContentBrowsePathSelector>
+    <header>
+      <name>#{word.name}</name>
+      <publicationstate>Estat de Publicació</publicationstate>
+      <action>Acció</action>
+    </header>
+    <msg>
+      <child-not-found>No s'ha trobat cap contingut</child-not-found>
+    </msg>
+  </UIContentBrowsePathSelector>
+
+  <UIContentBrowsePathSelectorFolder>
+    <header>
+      <name>#{word.name}</name>
+      <publicationstate>Estat de Publicació</publicationstate>
+      <action>Acció</action>
+    </header>
+    <msg>
+      <child-not-found>No es troba la carpeta</child-not-found>
+    </msg>
+  </UIContentBrowsePathSelectorFolder>
+
+  <UIContentSearchForm>
+    <title>
+      <Location>Nom del Lloc</Location>
+      <SearchByName>Cerca per nom</SearchByName>
+      <Fulltext>Paraula o frase en context</Fulltext>
+      <Property>Propietat</Property>
+      <Contain>Parcialment</Contain>
+      <FromDate>Del dia</FromDate>
+      <ToDate>Fins a</ToDate>
+      <DocumentType>Tipus Document</DocumentType>
+    </title>
+    <tooltip>
+      <AddMetadataType>Afegeix Propietat</AddMetadataType>
+      <AddNodeType>Afegeix un tipus de Node</AddNodeType>
+    </tooltip>    
+    <label>
+      <option>
+        <CREATED>Creat</CREATED>
+        <MODIFIED>Modificat</MODIFIED>
+      </option>
+    </label>
+    <action>
+      <SearchWebContent>Cerca</SearchWebContent>
+    </action>
+    <msg>
+      <time-to-late>El temps cercant és massa llarg.</time-to-late>
+      <empty-field>Si us plau, introdueix una paraula clau vàlida per a la cerca.</empty-field>
+      <invalid-format>Format invàlid de data/hora en el camp "{0}".</invalid-format>
+      <invalid-date>"Des del" ha de ser posterior a "Fins al"</invalid-date>
+      <invalid-nodeType>El tipus de node "{0}" no és vàlid. Si us plau comprovi-ho de nou.</invalid-nodeType>
+      <invalid-keyword>La paraula clau és invàlida. Alguns caràcters no són compatibles.</invalid-keyword>
+    </msg>
+  </UIContentSearchForm>
+
+  <WebContentMetadataPopup>
+    <title>
+      <UIContentPropertySelector>Selector de Propietat</UIContentPropertySelector>
+    </title>
+  </WebContentMetadataPopup>
+
+  <UIContentPropertySelector>
+    <action>
+      <Add>Afegeix</Add>
+      <Cancel>#{word.cancel}</Cancel>
+    </action>
+    <label>
+      <metadataType>Tipus de metadades</metadataType>
+      <property_select>Propietat</property_select>
+    </label>
+  </UIContentPropertySelector>
+
+  <WebContentNodeTypePopup>
+    <title>
+      <UIContentNodeTypeSelector>Selector de Tipus Node</UIContentNodeTypeSelector>
+    </title>
+  </WebContentNodeTypePopup>
+
+  <UIContentNodeTypeSelector>
+    <action>
+      <Save>#{word.save}</Save>
+      <Cancel>#{word.cancel}</Cancel>
+    </action>
+  </UIContentNodeTypeSelector>
+
+  <UIContentSearchResult>
+    <header>
+      <title>Títol</title>
+      <score>Puntuació</score>
+      <publicationstate>Estat de publicació</publicationstate>
+      <action>Acció</action>
+    </header>
+    <title>
+      <Select>Selecciona</Select>
+      <View>Veure</View>
+    </title>
+    <msg>
+    <template-not-support>No pot tenir una vista prèvia d'aquest contingut. La plantilla no és compatible</template-not-support>
+    </msg>
+  </UIContentSearchResult>
+
+  <UIContentDialogForm>
+    <action>
+      <SaveDraft>Desa l'esborrany</SaveDraft>
+      <FastPublish>Publicació Ràpida</FastPublish>
+      <Preferences>Preferències</Preferences>
+      <Close>#{word.close}</Close>
+    </action>
+    <msg>
+      <access-denied>No té permís per afegir categories a aquest document.</access-denied>
+      <exception>S'ha produït un error al afegir categories a aquest document.</exception>
+      <non-categories>Les categories estan equivocades. Si us plau, selecciona les categories adients.</non-categories>
+    </msg>
+  </UIContentDialogForm>
+
+  <UIPermissionManager>
+    <label>
+      <UIPermissionInputSetWithAction>Permisos</UIPermissionInputSetWithAction>
+      <UIAccessibleCheckboxInput>Dret d'accés</UIAccessibleCheckboxInput>
+      <UIEditableCheckboxInput>Dret d'Edició</UIEditableCheckboxInput>
+    </label>
+    <action>
+      <Save>#{word.save}</Save>
+      <Clear>Neteja</Clear>
+      <title>
+        <Edit>Edita</Edit>
+        <Delete>Suprimeix</Delete>
+      </title>
+    </action>
+  </UIPermissionManager>
+
+  <UIPermissionManagerGrid>
+    <header>
+      <owner>Permisos</owner>
+      <accessible>Accessible</accessible>
+      <editable>Editable</editable>
+      <action>Acció</action>
+    </header>
+    <msg>
+      <confirm-delete-permission>Està segur que vol suprimir aquest permís?</confirm-delete-permission>
+      <no-permission-remove>No té permís.</no-permission-remove>
+      <access-denied>Accés denegat.</access-denied>
+      <node-locked>La ruta al element {0} o a uns dels seus parents està bloquejada.</node-locked>
+      <userOrGroup-required>Ha de seleccionar un usuari o grup.</userOrGroup-required>
+      <checkbox-require>Cal definir els drets.</checkbox-require>
+      <node-checkedin>Ha de desprotegir primer.</node-checkedin>
+    </msg>
+  </UIPermissionManagerGrid>
+
+  <UIPermissionInputSetWithAction>
+    <title>
+      <SelectUser>Selecciona usuari/a</SelectUser>
+      <SelectMember>Selecciona un membre</SelectMember>
+      <AddAny>Afegeix qualsevol permís</AddAny>
+    </title>
+  </UIPermissionInputSetWithAction>
+
+  <UIUserSelectorPopupWindow>
+    <title>
+      <UIUserContainer>Selector d'usuari</UIUserContainer>
+    </title>
+  </UIUserSelectorPopupWindow>
+
+  <UIGroupSelectorPopupWindow>
+    <title>
+      <UIGroupMemberSelector>Selector de grup</UIGroupMemberSelector>
+    </title>
+  </UIGroupSelectorPopupWindow>
+
+  <UIGroupMemberSelector>
+    <label>
+      <selectGroup>Selecciona Grup</selectGroup>
+      <selectMembership>Selecciona l'Afiliació</selectMembership>
+    </label>
+  </UIGroupMemberSelector>
+
+  <UIContentDialogPreference>
+    <action>
+      <Back>Enrere</Back>
+    </action>
+  </UIContentDialogPreference>
+
+  <ZeroValidator>
+    <msg>
+      <Invalid-number>El cero no és acceptat en el camp '{0}'.</Invalid-number>
+    </msg>
+  </ZeroValidator>
+
+  <UIDropDownPageTemp>
+    <item>
+      <WCMPageConfigs>Configuracions WCM de Pàgina</WCMPageConfigs>
+      <ColumnPageConfigs>Configuracions de Columnes de Pàgina</ColumnPageConfigs>
+      <RowPageConfigs>Configuracions de Files de Pàgina</RowPageConfigs>
+      <TabsPageConfigs>Configuracions de Pestanyes de Pàgina</TabsPageConfigs>
+      <MixPageConfigs>Configuracions Combinades de Pàgina</MixPageConfigs>
+    </item>
+  </UIDropDownPageTemp>
+
+  <UIWizardPageSelectLayoutForm>
+    <label>
+      <SingleContentViewer>Visor de Contingut Únic</SingleContentViewer>
+      <ContentListViewer>Visor de Contingut de Llista</ContentListViewer>
+      <Search>Cerca</Search>
+      <Sitemap>Mapa del Lloc</Sitemap>
+      <TwoColumnsLayout>Distribució de Dues-columnes</TwoColumnsLayout>
+      <ThreeColumnsLayout>Distribució de Tres-columnes</ThreeColumnsLayout>
+      <TwoRowsLayout>Distribució de Dues-files</TwoRowsLayout>
+      <ThreeRowsLayout>Distribució de Tres-files</ThreeRowsLayout>
+      <TwoTabsLayout>Distribució de Dues-pestanyes</TwoTabsLayout>
+      <ThreeTabsLayout>Distribució de Tres-pestanyes</ThreeTabsLayout>
+      <TwoColumnsOneRowLayout>Distribució de Dues-columnes i Una-fila</TwoColumnsOneRowLayout>
+      <OneRowTwoColumnsLayout>Distribució d'Una-fila i Dues-columnes</OneRowTwoColumnsLayout>
+      <ThreeRowsTwoColumnsLayout>Distribució de Tres-file i Dues-columnes</ThreeRowsTwoColumnsLayout>
+    </label>
+  </UIWizardPageSelectLayoutForm>
+
+  <Signin>
+    <welcome>Benvingut/da</welcome>
+    <login>Inicia la sessió</login>
+    <logout>Tanca la sessió</logout>
+    <language>Canvia d'idioma</language>
+    <register>Registrar-se</register>
+  </Signin>
+  <UIDriveForm>
+<label>
+<wcm-category-view>Vista de Categoria</wcm-category-view>
+<wcm-view>Vista de contingut WCM</wcm-view>
+</label>
+  </UIDriveForm>
+  
+  <ContentSelector>
+    <title>
+      <PersonalDrives>Unitats personals</PersonalDrives>
+      <GeneralDrives>Unitats Generals</GeneralDrives>
+      <GroupDrives>Grups d'unitats</GroupDrives>
+      <Private>Privat</Private>
+      <Public>Públic</Public>
+      <BackupCenter>Centre de còpies de seguretat</BackupCenter>
+      <CategorizedDocumentsCenter>Centre de Documents Categoritzats</CategorizedDocumentsCenter>
+      <CollaborationCenter>Centre de Col·laboració</CollaborationCenter>
+      <DigitalAssetsManagementCenter>Centre de Gestió de Continguts Digitals</DigitalAssetsManagementCenter>
+      <DMSAdministration>Administració DMS</DMSAdministration>
+      <DocumentsManagementCenter>Centre de Gestió de Documents</DocumentsManagementCenter>
+      <LiveDocumentsCenter>Centre de Documents Actius</LiveDocumentsCenter>
+      <PendingDocumentsCenter>Centre de Documents Pendents</PendingDocumentsCenter>
+      <RecordsManagementCenter>Centre de Gestió de Registres</RecordsManagementCenter>
+      <SharedUsersSpace>Espai Compartit d'Usuaris</SharedUsersSpace>
+      <Systemfiles>Fitxers del sistema</Systemfiles>
+      <ValidationRequestsDocumentsCenter>Centre de Documents de Validació de Peticions</ValidationRequestsDocumentsCenter>
+      <ManagedSites>Gestió de Llocs</ManagedSites>
+      <SharedSite>Lloc Compartit</SharedSite>
+    </title>
+  </ContentSelector>
+  
+  <UICategoryNavigationTargetPathPopupWindow>
+    <title>
+      <UIPageSelector>Selector de pàgina</UIPageSelector>
+    </title>
+  </UICategoryNavigationTargetPathPopupWindow>
+  
+  <UIDocumentInfo>
+    <msg>
+      <access-denied-exception>Accés denegat. Potser no té permís de lectura, o el node s'ha eliminat o canviat.</access-denied-exception>
+    </msg>
+  </UIDocumentInfo>
+  <UIPortalApplication>
+    <title>
+      <abort>Anul·la</abort>
+    </title>
+  </UIPortalApplication>    
+  
+  <CategoryNavigationTemplate>
+  <label>
+  <home>Inici</home>
+  </label>
+  </CategoryNavigationTemplate>
+  
+  <Breadcrumb>
+  <label>
+  <home>Inici</home>
+  </label>  
+  </Breadcrumb>
+</bundle>

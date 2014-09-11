@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<bundle>
+  <ContentSelector>
+    <msg>
+      <no-file-selected>No hi ha cap contingut seleccionat. Si us plau seleccioni almenys un.</no-file-selected>
+    </msg>
+  </ContentSelector>
+  <RenameConnector>
+    <label>
+      <rename>Reanomena</rename>
+      <cancel>Cancel·la</cancel>
+    </label>
+    <msg>
+      <renaming>Canviant el nom...</renaming>
+    </msg>
+  </RenameConnector>
+</bundle>

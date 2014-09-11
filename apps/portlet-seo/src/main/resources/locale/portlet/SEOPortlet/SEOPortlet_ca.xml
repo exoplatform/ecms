@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<bundle>
+  <UISEOForm>
+    <label>  
+      <title>Títol:</title>
+      <description>Descripció:</description>
+      <keywords>Paraules clau:</keywords>
+      <language>Idioma:</language>
+      <robots>Robots:</robots>
+      <sitemap>Mapa del lloc:</sitemap>
+      <sitemapvisible>Visible al Mapa del Lloc</sitemapvisible>
+    <isInherited>Heretat de la pàgina principal</isInherited>
+      <priority>Prioritat:</priority>
+      <frequency>Freqüència:</frequency>
+      <select-language>Selecciona un idioma</select-language>
+      <option>
+        <Always>Sempre</Always>
+        <Hourly>Per hora</Hourly>
+        <Daily>Diàriament</Daily>
+        <Weekly>Setmanalment</Weekly>
+        <Monthly>Mensualment</Monthly>
+        <Yearly>Anualment</Yearly>
+        <Never>Mai</Never>
+      </option> 
+    </label>
+    <tip>
+  <priority>Gamma de valors vàlids de 0.0 a 1.0</priority>
+  </tip>   
+    <action>
+      <Save>#{word.save}</Save>
+      <Cancel>#{word.cancel}</Cancel>
+    </action>
+    <msg>
+      <repository-exception>S'ha produït un error inesperat mentre es desava les metadades de la pàgina.</repository-exception>
+      <confirm-delete>Està segur que vol suprimir aquestes dades SEO?</confirm-delete>      
+    </msg>
+    <title>
+    <seo-delete>Suprimeix</seo-delete>
+    </title>
+  <help> 
+  <priority>Gamma de valors vàlids de 0.0 a 1.0.</priority>
+  <description>Ajuda als usuaris de motors de recerca mostrant-los que aquesta pàgina conté el que estan buscant.</description>
+  <keywords>Termes més importants de la pàgina separats per una coma.</keywords>  
+  </help>  
+  </UISEOForm>
+  <UISEOPopupWindow>
+  <title>
+      <UISEOForm>Gestió de SEO</UISEOForm>
+  </title>
+  </UISEOPopupWindow>    
+  <UISEOToolbarForm>
+  <title>
+      <seo>Gestió de SEO</seo>
+  </title>
+  <label>
+    <seo>SEO</seo>
+  </label>
+  </UISEOToolbarForm>  
+  <FloatNumberValidator>
+    <msg>
+      <Invalid-number>El valor del camp prioritat ha de ser en un format numèric. La gamma de valors vàlids és de 0.0 a 1.0.</Invalid-number>
+    </msg>
+  </FloatNumberValidator>  
+  
+</bundle>
