@@ -1,0 +1,119 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<bundle>
+  <UIPresentationContainer>
+    <title>
+      <QuickEdit>Edita-ho a l'Explorador de contingut</QuickEdit>
+      <print>Imprimeix aquesta pàgina</print>
+      <FastPublish>Publica-ho</FastPublish>
+    </title>
+    <label>
+      <draft>Esborrany</draft>
+      <print>Imprimeix</print>
+    </label>
+    <msg>
+      <no-content>No hi ha continguts.</no-content>
+      <internal-server-error>S'ha produït un error sol·licitant dades del servidor.</internal-server-error>
+      <empty-title-error>Si us plau, especifica el nou títol.</empty-title-error>
+    </msg>
+  </UIPresentationContainer>
+  <CorrectContentSelectorPopupWindow>
+    <title>
+      <UIContentSelectorOne>Selecciona un contingut</UIContentSelectorOne>
+    </title>
+  </CorrectContentSelectorPopupWindow>
+  <UISingleContentViewerPortlet>
+    <msg>
+      <AccessControlException>No té permís per accedir al mode d'edició.</AccessControlException>
+    </msg>
+  </UISingleContentViewerPortlet>
+  <UISCVContextualRadioBox>
+    <label>
+      <Enable>Activat</Enable>
+      <Disable>Desactivat</Disable>
+    </label>
+  </UISCVContextualRadioBox>
+  <UIPreferencesPopupWindows>
+    <title>
+      <UISCVPreferences>Preferències del Destall del Contingut</UISCVPreferences>
+    </title>
+  </UIPreferencesPopupWindows>
+  <UISCVPreferences>
+    <action>
+      <Save>#{word.save}</Save>
+      <Abort>Anul·la</Abort>
+      <Cancel>#{word.cancel}</Cancel>
+      <Print>Imprimeix</Print>
+      <Close>#{word.close}</Close>
+    </action>
+    <title>Preferències del Destall del Contingut</title>
+    <label>
+      <Back>Torna a la pàgina anterior</Back>
+      <Edit>Edita</Edit>
+      <Preferences>Preferències</Preferences>
+      <Title>Preferències del Destall del Contingut</Title>
+      <UISCVShowTitleConfigurationCheckBox>Mostra el títol</UISCVShowTitleConfigurationCheckBox>
+      <UISCVShowDateConfigurationCheckBox>Mostra la data</UISCVShowDateConfigurationCheckBox>
+      <UISCVShowOptionBarConfigurationCheckBox>Mostra barra d'opcions</UISCVShowOptionBarConfigurationCheckBox>
+      <DisplaySettingBlock>Configuració de la visualització</DisplaySettingBlock>
+      <ContentPathBlock>Selecció del contingut</ContentPathBlock>
+      <UISCVConfigItemPathFormInputSet>Ruta  del contingut</UISCVConfigItemPathFormInputSet>
+    <UISCVContentPathConfigurationInputBox>Ruta  del contingut</UISCVContentPathConfigurationInputBox>
+      <Advance>Avançat</Advance>
+      <ContextCaption>Navegació Dinàmica</ContextCaption>
+      <UISCVContextualRadioBox>Contingut contextual</UISCVContextualRadioBox>
+      <UISCVParameterInputBox>per</UISCVParameterInputBox>
+      <PrintSettingBlock>Configuració d'impressió</PrintSettingBlock>
+      <UISCVPrintPageParameter>amb</UISCVPrintPageParameter>
+      <UISCVConfigPrintPageFormInputSet>Mostra a la pàgina</UISCVConfigPrintPageFormInputSet>
+      <LockStatus>Bloqueja</LockStatus>
+      <CacheManagement>Visibilitat del Contingut</CacheManagement>
+      <UISCVCacheRadioBox>Comparteix el contingut</UISCVCacheRadioBox>
+    </label>
+    <help>
+      <ContentPathBlock>Selecciona el contingut que vol mostrar. Aquesta selecció per defecte es canviarà dinàmicament si s'activa la opció de navegació dinàmica (vegeu el mode avançat a sota).</ContentPathBlock>
+      <DisplaySettingBlock>Pot mostrar o amagar la barra d'opcions per mostrar el vincle d'impressió. Mostrar el títol i la data també són opcionals.</DisplaySettingBlock>
+      <ContextualHelp>Activa la navegació dinàmica. El contingut es pot canviar dinàmicament per un altre paràmetre URL base.</ContextualHelp>
+      <ParameterHelp>Aquest paràmetre s'utilitzarà per obtenir el contingut si s'activa la navegació dinàmica.</ParameterHelp>
+    </help>
+    <msg>
+      <not-valid-path>La ruta de l'element no és vàlida.</not-valid-path>
+    </msg>
+    <tab>
+      <label>
+        <UISCVConfigContentFormInputSet>Selecció del contingut</UISCVConfigContentFormInputSet>
+        <UISCVConfigDisplayFormInputSet>Configuració de la visualització</UISCVConfigDisplayFormInputSet>
+        <UISCVConfigPrintFormInputSet>Impressió</UISCVConfigPrintFormInputSet>
+        <UISCVConfigAdvancedFormInputSet>Avançat</UISCVConfigAdvancedFormInputSet>
+      </label>
+    </tab>
+  </UISCVPreferences>
+  <UISCVConfigItemPathFormInputSet>
+    <title>
+      <SelectFolderPath>Selecciona la Ruta de la carpeta</SelectFolderPath>
+      <AddPath>Afegeix una ruta</AddPath>
+    </title>
+  </UISCVConfigItemPathFormInputSet>
+  <UISCVConfigPrintPageFormInputSet>
+    <title>
+      <SelectTargetPage>Mostra a la pàgina</SelectTargetPage>
+    </title>
+  </UISCVConfigPrintPageFormInputSet>
+  <PublicationStates>
+    <archived>Arxivat</archived>
+    <obsolete>Obsolet</obsolete>
+    <unpublished>No publicat</unpublished>
+    <enrolled>Inscrit</enrolled>
+    <draft>Esborrany</draft>
+    <pending>Pendent</pending>
+    <approved>Aprovat</approved>
+    <inreview>Sota Revisió</inreview>
+    <staged>Llest per publicar</staged>
+    <published>Publicat</published>
+  </PublicationStates>
+  <UISCVCacheRadioBox>
+    <label>
+      <Enable>Restringit per l'Autenticació</Enable>
+      <Disable>Restringit per Rols d'usuari</Disable>
+    </label>
+  </UISCVCacheRadioBox>
+</bundle>

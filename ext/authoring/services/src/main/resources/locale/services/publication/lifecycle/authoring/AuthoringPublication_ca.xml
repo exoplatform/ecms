@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<bundle>
+  <PublicationService>
+    <AuthoringPublicationPlugin>
+      <changeState>
+        <obsoleted>El contingut està obsolet</obsoleted>
+        <published>El contingut està publicat</published>
+<unpublished>El contingut no està publicat</unpublished>
+<archived>El contingut està archivat</archived>
+<staged>El contingut està llest per publicar</staged>
+<approved>El contingut és aprovat</approved>
+<pending>El contingut està pendent</pending>
+<draft>El contingut està en forma d'esborrany</draft>
+      </changeState>
+    </AuthoringPublicationPlugin>
+  </PublicationService>
+  <Publication>
+    <log>
+      <description>
+        <enrolled>El contingut s'inscriu en un cicle de llançament</enrolled>
+      </description>
+    </log>
+  </Publication>
+</bundle>

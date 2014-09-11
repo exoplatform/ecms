@@ -1,0 +1,389 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<bundle>
+  <!--
+  ###################### global word for ECM dialogs resoucebundle ####
+  -->
+  <Ecm>
+    <dialog>
+      <label>
+        <end-time>Hora de finalització</end-time>
+        <start-time>Hora d'inici</start-time>
+        <lifecycle>Cicle de vida</lifecycle>
+        <mimeType>Tipus MIME</mimeType>
+        <repeat-count>Nombre de repeticions</repeat-count>
+        <time-interval>Interval de temps</time-interval>
+        <query-items>Elements de la consulta</query-items>
+        <schedule-type>Tipus de planificació</schedule-type>
+        <remove>Elimina l'element</remove>
+        <add>Afegeix un element</add>
+        <expand>Desplega això</expand>
+      </label>
+    </dialog>
+  </Ecm>
+  
+  <UIDocumentForm>
+    <label>
+      <title>#{word.title}</title>
+      <link>Enllaç</link>
+      <contentHtml>#{word.content}</contentHtml>
+      <content>#{word.content}</content>
+      <contentPlain>#{word.content}</contentPlain>
+      <name>Nom</name>
+    <categories>Categories</categories>
+    </label>
+  </UIDocumentForm>
+ 
+  <!--
+  ###################### resoucebundle for HTMLFile dialogs template ####
+  -->
+  <HtmlFile>
+    <dialog>
+      <label>
+        <name>Nom</name>
+        <content>Contingut</content>
+      </label>
+    </dialog>
+  </HtmlFile>
+
+  <!--
+  ###################### resoucebundle for nt:file dialogs template ####
+  -->
+  <File>
+    <dialog>
+      <label>
+        <name>#{word.name}</name>
+        <categories>Categories</categories>
+        <mimeType>#{Ecm.dialog.label.mimeType}</mimeType>
+        <width>Amplada</width>
+        <height>Alçada</height>
+        <content>#{word.content}</content>
+        <re-upload>El fitxer ja existeix. Pot suprimir-lo i pujar un de nou.</re-upload>
+      </label>
+    </dialog>
+  </File>
+
+  <UIActionForm>
+    <label>
+      <description>#{word.description}</description>
+      <port>Port</port>
+      <userName>#{word.userName}</userName>
+      <password>Contrasenya</password>
+      <link>Enllaç</link>
+      <to>Envia un correu a</to>
+      <actionName>#{word.name}</actionName>
+    </label>
+  </UIActionForm>
+  <EditFormAction>
+    <label>
+      <description>#{word.description}</description>
+      <port>Port</port>
+      <userName>#{word.userName}</userName>
+      <password>Contrasenya</password>
+      <link>Enllaç</link>
+      <to>Envia un correu a</to>
+      <actionName>#{word.name}</actionName>
+    </label>
+  </EditFormAction>
+
+  <!--
+  ###################### resoucebundle for exo:addMetadataAction dialogs template ####
+  -->
+  <AddMetadata>
+    <dialog>
+      <label>
+        <id>Id</id>
+        <name>#{word.name}</name>
+        <lifecycle>#{Ecm.dialog.label.lifecycle}</lifecycle>
+        <metadata>Metadades</metadata>
+        <description>#{word.description}</description>
+      </label>
+    </dialog>
+  </AddMetadata>
+
+  <!--
+  ###################### resoucebundle for exo:autoVersioning dialogs template ####
+  -->
+  <AutoVersioning>
+    <dialog>
+      <label>
+        <id>Id</id>
+        <name>#{word.name}</name>
+        <lifecycle>#{Ecm.dialog.label.lifecycle}</lifecycle>
+        <schedule-type>#{Ecm.dialog.label.schedule-type}</schedule-type>
+        <start-time>#{Ecm.dialog.label.start-time}</start-time>
+        <end-time>#{Ecm.dialog.label.end-time}</end-time>
+        <repeat-count>#{Ecm.dialog.label.repeat-count}</repeat-count>
+        <time-inteval>#{Ecm.dialog.label.time-interval}</time-inteval>
+        <cron-expression>Expressió Cron</cron-expression>
+        <description>#{word.description}</description>
+      </label>
+    </dialog>
+  </AutoVersioning>
+  <!--
+  ###################### resoucebundle for exo:enableVersiong dialogs template ####
+  -->
+  <EnableVersioning>
+    <dialog>
+      <label>
+        <id>Id</id>
+        <name>#{word.name}</name>
+        <lifecycle>#{Ecm.dialog.label.lifecycle}</lifecycle>
+        <schedule-type>#{Ecm.dialog.label.schedule-type}</schedule-type>
+        <start-time>#{Ecm.dialog.label.start-time}</start-time>
+        <end-time>#{Ecm.dialog.label.end-time}</end-time>
+        <repeat-count>#{Ecm.dialog.label.repeat-count}</repeat-count>
+        <time-inteval>#{Ecm.dialog.label.time-interval}</time-inteval>
+        <cron-expression>Cron Expression</cron-expression>
+        <description>#{word.description}</description>
+      </label>
+    </dialog>
+  </EnableVersioning>
+  <!--
+  ###################### resoucebundle for dc:elementSet dialogs template ####
+  -->
+  <ElementSet>
+    <dialog>
+      <label>
+        <title>#{word.title}:</title>
+        <creator>Autor:</creator>
+        <subject>#{word.subject}:</subject>
+        <source>Font:</source>
+        <contributor>Col·laborador:</contributor>
+        <resource-type>Tipus de Recurs:</resource-type>
+        <date>#{word.date}:</date>
+        <publisher>Editor:</publisher>
+        <description>#{word.description}:</description>
+        <rights>Drets:</rights>
+        <relation>Relació:</relation>
+        <format>#{word.format}:</format>
+        <coverage>Cobertura:</coverage>
+        <identifier>Identificador:</identifier>
+        <language>Idioma:</language>
+      </label>
+    </dialog>
+  </ElementSet>
+
+  <!--
+  ###################### resoucebundle for exo:actionable dialogs template ####
+  -->
+  <Actionable>
+    <dialog>
+      <label>
+        <primary-type>Tipus Primari</primary-type>
+        <mixin-types>Tipus de mixin</mixin-types>
+      </label>
+    </dialog>
+  </Actionable>
+
+  <!--
+  ###################### resoucebundle for exo:move dialogs template ####
+  -->
+  <Move>
+    <dialog>
+      <label>
+        <destination-workpsace>Destí de l'àrea de treball</destination-workpsace>
+        <destination-path>Ruta de destí</destination-path>
+        <primary-type>Tipus Primari</primary-type>
+        <mixin-types>Tipus de mixin</mixin-types>
+      </label>
+    </dialog>
+  </Move>
+  <!--
+  ###################### resoucebundle for exo:published dialogs template ####
+  -->
+  <Published>
+    <dialog>
+      <label>
+        <start-publication>Inici de publicació</start-publication>
+        <end-publication>Fi de Publicació</end-publication>
+      </label>
+    </dialog>
+  </Published>
+ 
+  <!--
+  ###################### resoucebundle mix:referenceable dialogs template ####
+  -->
+  <Referenceable>
+    <dialog>
+      <label>
+        <uuid>UUID</uuid>
+      </label>
+    </dialog>
+  </Referenceable>
+  <!--
+  ###################### resoucebundle exo:relationable dialogs template ####
+  -->
+  <Relationable>
+    <dialog>
+      <label>
+        <relation>Relació</relation>
+      </label>
+    </dialog>
+  </Relationable>
+  <!--
+  ###################### resoucebundle exo:rss-enable dialogs template ####
+  -->
+  <RssEnable>
+    <dialog>
+      <label>
+        <title>Títol</title>
+        <summary>#{word.summary}</summary>
+      </label>
+    </dialog>
+  </RssEnable>
+
+  <!--
+  ###################### resoucebundle mix:versionable dialogs template ####
+  -->
+  <Versionable>
+    <dialog>
+      <label>
+        <version-history>Històric de versions</version-history>
+        <base-version>Versió de base</base-version>
+        <is-checked-out>Està desprotegit</is-checked-out>
+        <predecessors>Predecessors</predecessors>
+        <merge-failed>Ha fallat la combinació</merge-failed>
+        <uuid>UUID</uuid>
+      </label>
+    </dialog>
+  </Versionable>
+
+  <!--
+  ##################### resoucebundle for resouce container dialogs template#####
+  -->
+  <ResouceContainer>
+    <dialog>
+      <label>
+        <name>Nom</name>
+        <autoload>Càrrega automàtica</autoload>
+        <minetype>Tipus MIME</minetype>
+        <content>Contingut</content>
+      </label>
+    </dialog>
+  </ResouceContainer>
+  <!--
+  ###################### resoucebundle for validator ####
+  -->
+  <EmailAddressValidator>
+    <msg>
+      <Invalid-input>L'adreça de correu no és vàlida.</Invalid-input>
+    </msg>
+  </EmailAddressValidator>
+  <EmptyFieldValidator>
+    <msg>
+      <empty-input>El camp "{0}" es necessari. Si us plau, introdueixi un valor.</empty-input>
+    </msg>
+  </EmptyFieldValidator>
+  <NumberFormatValidator>
+    <msg>
+      <Invalid-number>El camp '{0}' no és vàlid.</Invalid-number>
+    </msg>
+  </NumberFormatValidator>
+  <!--
+  #####Since version 2.4#######
+
+  ###################### resoucebundle exo:taxonomyAction dialogs template ####
+  -->
+  <ScriptAction>
+    <dialog>
+      <label>
+        <id>Id</id>
+        <name>Nom</name>
+        <lifecycle>Cicle de vida</lifecycle>
+        <homePath>Ruta al Inici</homePath>
+        <targetWorkspace>Àrea de treball de destí</targetWorkspace>
+        <targetPath>Ruta de destí</targetPath>
+      </label>
+    </dialog>
+  </ScriptAction>
+  <UIDialogForm>
+   <form>
+   <DialogFormException>Impossible de desar aquest document. Hi pot haver un problema amb l'interceptor de pre-desat.</DialogFormException>
+   </form>
+  </UIDialogForm>
+
+  <!--
+  #####Since version 2.6#######
+
+  ###################### resoucebundle exo:taxonomyAction dialogs template ####
+  -->
+<no>No</no>
+<yes>Sí</yes>
+<true>Cert</true>
+<false>Fals</false>
+<Electronic>Electrònica</Electronic>
+<Paper>Paper</Paper>
+<NONE>Cap</NONE>
+<CLASSIFIED>Classificat</CLASSIFIED>
+<UNCLASSIFIED>Desclassificat</UNCLASSIFIED>
+<NOCONTRACT>Cap contracte</NOCONTRACT>
+<one-minute>Un minut</one-minute>
+<hourly>Per hora</hourly>
+<daily>Diàriament</daily>
+<quarterly>Trimestralment</quarterly>
+<yearly>Anualment</yearly>
+<ten-years>Deu anys</ten-years>
+<read>Acció d'Usuari</read>
+  <schedule>Planificador</schedule>
+  <node_added>Addició de contingut</node_added>
+  <node_removed>Eliminació de contingut</node_removed>
+  <property_added>Addició de Propietat</property_added>
+  <property_removed>Eliminació de Propietat</property_removed>
+  <property_changed>Modificació de Propietat</property_changed>
+
+  <ScriptAction>
+    <dialog>
+      <label>
+        <isDeep>Recursiu</isDeep>
+        <nodetypes>Tipus de node</nodetypes>
+        <affectedNodeTypeNames>Tipus de Node afectats</affectedNodeTypeNames>
+      </label>
+    </dialog>
+  </ScriptAction>
+
+  <AddMetadata>
+    <dialog>
+      <label>
+        <isDeep>Recursiu</isDeep>
+        <nodetypes>Tipus de node</nodetypes>
+        <affectedNodeTypeNames>Tipus de Node afectats</affectedNodeTypeNames>
+      </label>
+    </dialog>
+  </AddMetadata>
+
+  <EnableVersioning>
+    <dialog>
+      <label>
+        <isDeep>Recursiu</isDeep>
+        <nodetypes>Tipus de node</nodetypes>
+        <affectedNodeTypeNames>Tipus de Node afectats</affectedNodeTypeNames>
+      </label>
+    </dialog>
+  </EnableVersioning>
+  
+  <AutoVersioning>
+    <dialog>
+      <label>
+        <isDeep>Recursiu</isDeep>
+        <nodetypes>Tipus de node</nodetypes>
+        <affectedNodeTypeNames>Tipus de Node afectats</affectedNodeTypeNames>
+      </label>
+    </dialog>
+  </AutoVersioning>
+
+  <AccessibleMedia>
+  <dialog>
+  <label>
+  <captions>Subtítols</captions>
+<audioDescription>Descripció audio</audioDescription>
+<alternativeText>Text alternatiu</alternativeText>
+</label>
+</dialog>
+<help>
+<CaptionsHelp>Els subtítols haurien  de proporcionar el text del diàleg i sons importants</CaptionsHelp>
+<AudioDescriptionHelp>Narració afegida a una banda sonora per descriure detalls visuals importants</AudioDescriptionHelp>
+<AlternativeTextHelp>Proporciona una manera accessible, una alternativa de presentar la informació</AlternativeTextHelp>
+</help>
+</AccessibleMedia>
+  
+</bundle>

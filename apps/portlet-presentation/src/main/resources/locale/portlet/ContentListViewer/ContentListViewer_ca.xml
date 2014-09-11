@@ -1,0 +1,189 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<bundle>
+  <UICLVContainer>
+    <label>
+      <Preferences>Preferències</Preferences>
+      <AddContent>Afegeix Continguts</AddContent>
+      <ManageContent>Gestiona el contingut</ManageContent>
+    </label>
+    <msg>
+      <non-contents>Ho sentim, no hi ha articles disponibles.</non-contents>
+      <item-not-found>No s'ha trobat l'element.</item-not-found>
+      <no-permission>No té permís per accedir a aquest node.</no-permission>
+      <category-back>Anar a l'anterior</category-back>
+    </msg>
+  </UICLVContainer>
+  <UIViewerManagementPopupWindow>
+    <title>
+      <UICLVConfig>Preferències del Llistat de Contingut</UICLVConfig>
+    </title>
+  </UIViewerManagementPopupWindow>
+  <UICLVConfig>
+    <label>
+      <Title>Preferències del Llistat de Contingut</Title>
+      <ContentSelectionBlock>Selecció del contingut</ContentSelectionBlock>
+      <UICLVConfigDisplayModeFormRadioBoxInput>Mode</UICLVConfigDisplayModeFormRadioBoxInput>
+      <UICLVConfigItemPathFormInputSet>Ruta de la Carpeta</UICLVConfigItemPathFormInputSet>
+    <UICLVConfigItemPathFormStringInput>Ruta de la Carpeta</UICLVConfigItemPathFormStringInput>
+      <UICLVConfigOrderByFormSelectBox>Ordena per</UICLVConfigOrderByFormSelectBox>
+      <option>
+        <exo:title>Títol</exo:title>
+        <exo:dateCreated>Data de creació</exo:dateCreated>
+        <exo:lastModifiedDate>Data de modificació</exo:lastModifiedDate>
+        <publication:liveDate>Data de publicació</publication:liveDate>
+        <exo:startEvent>Data de l'esdeveniment</exo:startEvent>
+        <exo:index>Índex</exo:index>
+        <DESC>Descendent</DESC>
+        <ASC>Ascendent</ASC>
+      </option>
+      <DisplaySettingBlock>Configuració de la visualització</DisplaySettingBlock>
+      <UICLVConfigHeaderFormStringInput>Capçalera</UICLVConfigHeaderFormStringInput>
+      <UICLVConfigDisplayTemplateFormSelectBox>Plantilla</UICLVConfigDisplayTemplateFormSelectBox>
+      <UICLVConfigPaginatorTemplateFormSelectBox>Paginació</UICLVConfigPaginatorTemplateFormSelectBox>
+      <UICLVConfigItemsPerPageFormStringInput>Elements per Pàgina</UICLVConfigItemsPerPageFormStringInput>
+      <UICLVConfigShowIllustrationFormCheckboxInput>Mostra la imatge</UICLVConfigShowIllustrationFormCheckboxInput>
+      <UICLVConfigShowSummaryFormCheckboxInput>Show Summary</UICLVConfigShowSummaryFormCheckboxInput>
+      <UICLVConfigShowHeaderFormCheckboxInput>Show Header</UICLVConfigShowHeaderFormCheckboxInput>
+      <UICLVConfigShowRefreshFormCheckboxInput>Show Refresh</UICLVConfigShowRefreshFormCheckboxInput>
+      <UICLVConfigShowTitleFormCheckboxInput>Mostra el títol</UICLVConfigShowTitleFormCheckboxInput>
+      <UICLVConfigShowDateCreatedFormCheckboxInput>Mostra la Data</UICLVConfigShowDateCreatedFormCheckboxInput>
+      <UICLVConfigShowLinkFormCheckboxInput>Show Link</UICLVConfigShowLinkFormCheckboxInput>
+      <UICLVConfigShowReadmoreFormCheckboxInput>Show More Links</UICLVConfigShowReadmoreFormCheckboxInput>
+      <UICLVConfigAllowDynamicUrlStringInput>Allow Dynamic URL</UICLVConfigAllowDynamicUrlStringInput>
+      <UICLVConfigShowRssLinkFormCheckboxInput>Show RSS Link</UICLVConfigShowRssLinkFormCheckboxInput>
+      <UICLVConfigShowAutomaticDetectionCheckboxInput>Automatic Detection</UICLVConfigShowAutomaticDetectionCheckboxInput>
+      <AdvancedBlock>Avançat</AdvancedBlock>
+      <UICLVConfigDynamicNavigationLabel>Navegació dinàmica</UICLVConfigDynamicNavigationLabel>
+      <UICLVConfigContextualFolderRadioBoxInput>Contextual Folder</UICLVConfigContextualFolderRadioBoxInput>
+      <UICLVConfigShowCLVByStringInput>per</UICLVConfigShowCLVByStringInput>
+      <UICLVConfigshowSCVWithStringInput>amb</UICLVConfigshowSCVWithStringInput>
+      <UICLVConfigTargetPageFormInputSet>Mostra a la pàgina</UICLVConfigTargetPageFormInputSet>
+      <content-not-found>Content not found.</content-not-found>
+      <ContentPath>Ruta  del contingut</ContentPath>
+      <Up>Amunt</Up>
+      <Down>Avall</Down>
+      <UICLVConfigCacheManagementLabel>Visibilitat del Contingut</UICLVConfigCacheManagementLabel>
+      <UICLVContentByQueryLabel>Content by Query</UICLVContentByQueryLabel>
+      <UICLVConfigWorkspaceFormSelectBox>Àrea de treball</UICLVConfigWorkspaceFormSelectBox>
+      <UICLVConfigContentByQueryTextArea>by query</UICLVConfigContentByQueryTextArea>
+      <UICLVConfigCacheEnableRadioBoxInput>Share content between users</UICLVConfigCacheEnableRadioBoxInput>
+    </label>
+    <help>
+      <ModeSelectionHelp>Hi ha dues maneres de mostrar els continguts. "Per carpeta" aquest mode agafarà tots els continguts disponibles a les carpetes i/o categories seleccionades. "Per Contingut" et fa seleccionar manualment els continguts que vols mostrar.</ModeSelectionHelp>
+      <FolderPathHelp>Selecciona el contingut que vol mostrar. Aquesta selecció per defecte es canviarà dinàmicament si s'activa la opció de navegació dinàmica (vegeu el mode avançat a sota).</FolderPathHelp>
+      <HeaderOptionHelp>Mostra una capçalera a la part superior de la llista de contingut. Si activa l'opció de detecció automàtica, intentarà trobar la capçalera basada en la selecció actual.</HeaderOptionHelp>
+      <GeneralOptionHelp>Select the graphical elements you want to show in your list. Note that, depending on your selected template, some elements may not be available.</GeneralOptionHelp>
+      <ContextualHelp>Activa l'opció de navegació dinàmica. Els demés poden canviar el contingut dinàmicament basat en un paràmetre URL.</ContextualHelp>
+      <ParameterHelp>Aquest paràmetre s'utilitzarà per accedir al contingut si s'activa la navegació dinàmica.</ParameterHelp>
+      <ShowDetailInPageHelp>Fent clic al contingut redirigeix al usuari a la pàgina de detalls. Has de tenir el portlet "Contingut per URL"  amb la navegació dinàmica activada a la pàgina de destí per mostrar el contingut.</ShowDetailInPageHelp>
+      <DetailParameterHelp>Aquest paràmetre contindrà la ruta al contingut en l'enllaç a la pàgina de detalls. Aquest paràmetre ha de coincidir amb el paràmetre utilitzat en el portlet "Contingut per URL" de la pàgina.</DetailParameterHelp>
+      <ContentByQueryHelp>Pot configurar una consulta de SQL per obtenir el contingut dinàmicament. S'admeten els següents paràmetres: ${user}, ${lang} o qualsevol paràmetre d'obtenció de dades (PARAM) envoltat per ${PARAM}.</ContentByQueryHelp>
+      <ContentsVisibilityHelp>"Restringit per l'Autenticació" filtrarà el contingut basat en l'autenticació. Si no inicia la sessió, només veurà els continguts públics. Si heu iniciat la sessió, veureu tot el contingut visible per usuaris de la intranet (compartit amb tothom). "Restringit per rols d'usuari" significa que podràs veure el contingut en funció dels seus drets. En la majoria dels casos, aquesta opció no ha no ser utilitzada ja que redueix el rendiment global.</ContentsVisibilityHelp>
+    </help>
+    <action>
+      <Save>#{word.save}</Save>
+      <Cancel>#{word.cancel}</Cancel>
+      <delete>Suprimeix</delete>
+    </action>
+    <msg>
+      <not-valid-path>The Folder Path is invalid.</not-valid-path>
+      <saving-success>The portlet's preferences are saved.</saving-success>
+    </msg>
+    <tab>
+      <label>
+        <clvContentTab>Selecció del contingut</clvContentTab>
+        <clvDisplayTab>Configuració de la visualització</clvDisplayTab>
+        <clvAdvancedTab>Avançat</clvAdvancedTab>
+      </label>
+    </tab>
+  </UICLVConfig>
+  <UICLVConfigDisplayModeFormRadioBoxInput>
+    <label>
+      <AutoViewerMode>By Folder</AutoViewerMode>
+      <ManualViewerMode>By Content</ManualViewerMode>
+    </label>
+  </UICLVConfigDisplayModeFormRadioBoxInput>
+  <UICLVConfigItemPathFormInputSet>
+    <title>
+      <SelectFolderPath>Selecciona la Ruta de la carpeta</SelectFolderPath>
+      <AddPath>Afegeix una ruta</AddPath>
+    </title>
+  </UICLVConfigItemPathFormInputSet>
+  <FolderPathSelectorPopupWindow>
+    <title>
+      <UIContentSelectorFolder>Navegador de Carpetes</UIContentSelectorFolder>
+    </title>
+  </FolderPathSelectorPopupWindow>
+  <UICLVConfigOrderTypeFormSelectBox>
+    <label>
+      <option>
+        <OrderDesc>Descendent</OrderDesc>
+        <OrderAsc>Ascendent</OrderAsc>
+      </option>
+    </label>
+  </UICLVConfigOrderTypeFormSelectBox>
+  <UICLVConfigTargetPageFormInputSet>
+    <title>
+      <SelectBasePath>Selecciona la Ruta de la Base</SelectBasePath>
+      <SelectTargetPage>Selecciona la Ruta de la Base</SelectTargetPage>
+    </title>
+  </UICLVConfigTargetPageFormInputSet>
+  <UICLVBasePathPopupWindow>
+    <title>
+      <UIPageSelector>Selector de pàgina</UIPageSelector>
+    </title>
+  </UICLVBasePathPopupWindow>
+  <UICLVPresentation>
+    <msg>
+      <confirm-delete>Està segur que vol suprimir aquest contingut?</confirm-delete>
+      <delete-content-successfully>Contingut suprimit correctament.</delete-content-successfully>
+    </msg>
+    <label>
+      <readmore>Llegeix més</readmore>
+      <rssFeed>Canal RSS</rssFeed>
+    </label>
+    <action>
+      <refresh>RecarregaRecarrega</refresh>
+      <edit>Edita-ho a l'Explorador de contingut</edit>
+      <delete>Suprimeix</delete>
+      <publish>Publica-ho</publish>
+    </action>
+    <label>
+      <draft>Esborrany</draft>
+    </label>
+  </UICLVPresentation>
+  <CorrectContentSelectorPopupWindow>
+    <title>
+      <UIContentSelectorMulti>Multiple Content Selector Pane</UIContentSelectorMulti>
+    </title>
+  </CorrectContentSelectorPopupWindow>
+  <UIContentDialogFormPopupWindow>
+    <title>
+      <UIContentDialogForm>Web Content Form</UIContentDialogForm>
+    </title>
+  </UIContentDialogFormPopupWindow>
+  <UICLVConfigContextualFolderRadioBoxInput>
+    <label>
+      <contextualEnable>Activat</contextualEnable>
+      <contextualDisable>Desactivat</contextualDisable>
+    </label>
+  </UICLVConfigContextualFolderRadioBoxInput>
+  <PublicationStates>
+    <archived>Arxivat</archived>
+    <obsolete>Obsolet</obsolete>
+    <unpublished>No publicat</unpublished>
+    <enrolled>Inscrit</enrolled>
+    <draft>Esborrany</draft>
+    <pending>Pendent</pending>
+    <approved>Aprovada</approved>
+    <inreview>En  revisió</inreview>
+    <staged>Llest per publicar</staged>
+    <published>Publicat</published>
+  </PublicationStates>
+  <UICLVConfigCacheEnableRadioBoxInput>
+    <label>
+      <ENABLE>Restringit per l'Autenticació</ENABLE>
+      <DISABLE>Restricted by User Roles</DISABLE>
+    </label>
+  </UICLVConfigCacheEnableRadioBoxInput>
+</bundle>

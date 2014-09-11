@@ -1,0 +1,3187 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<bundle>
+  <!--
+  #############################################################################
+  #             org.exoplatform.ecm.webui.component.UICommentForm             #
+  #############################################################################
+  -->
+  <UICommentForm>
+    <label>
+      <name>Nom</name>
+      <email>Correu electrònic</email>
+      <website>Plana Web</website>
+      <comment>Comentari</comment>
+    </label>
+    <action>
+      <Save>#{word.save}</Save>
+      <Cancel>#{word.cancel}</Cancel>
+    </action>
+    <msg>
+      <not-support>No es pot comentar sobre aquest tipus de document.</not-support>
+      <not-checkedout>Ha de desprotegir el node abans de comentar.</not-checkedout>
+      <content-null>No es pot publicar un comentari buit.</content-null>
+    </msg>
+  </UICommentForm>
+  <!--
+  #############################################################
+  # org.exoplatform.ecm.webui.component.UIVoteForm.gtmpl    #
+  #############################################################
+  -->
+  <UIVoteForm>
+    <title>
+      <normal>Pobre</normal>
+      <good>Per sota de la mitjana</good>
+      <verygood>Mitjana</verygood>
+      <excellent>Per sobre de la mitjana</excellent>
+      <best>Bo</best>
+      <no-value>encara cap valoració</no-value>
+    </title>
+    <label>
+      <my-rating>La meva Valoració:</my-rating>
+    </label>
+    <button>
+      <label>
+        <confirm>Acceptar</confirm>
+      </label>
+    </button>
+    <msg>
+      <not-support>No pot votar aquest tipus de document.</not-support>
+      <not-checkedout>Ha de desprotegir el node abans de votar.</not-checkedout>
+      <vote-restriction>No pot votar més d'un cop.</vote-restriction>
+    </msg>
+  </UIVoteForm>
+ 
+  <!--
+  #############################################################################
+  #             org.exoplatform.ecm.webui.component.explorer.UIJCRExplorer    #
+  #############################################################################
+  -->
+  <UIJCRExplorer>
+    <msg>
+      <refresh-session-success>La sessió va ser refrescada amb èxit.</refresh-session-success>
+      <no-node-history>Està al node arrel.</no-node-history>
+      <save-session-success>S'han desat tots els canvis.</save-session-success>
+      <target-path-not-found>No pot accedir a aquest node, perquè ja no existeix o perquè no té permisos per accedir-hi.</target-path-not-found>
+    </msg>
+  </UIJCRExplorer>
+  <!--
+  #############################################################################
+  #             org.exoplatform.ecm.webui.component.explorer.UISideBar        #
+  #############################################################################
+  -->
+  <UISideBar>
+    <label>
+      <Relation>Relació</Relation>
+      <Explorer>Explorador d'Arxius</Explorer>
+      <Close>Tanca Barra Lateral</Close>
+      <TagExplorer>Núvol d'Etiquetes</TagExplorer>
+      <Clipboard>Porta-retalls</Clipboard>
+      <SavedSearches>Cerques Desades</SavedSearches>
+    </label>
+    <title>
+      <Control>Control Sidebar</Control>
+      <Close>Tanca Barra Lateral</Close>
+    </title>
+  </UISideBar>
+  <!--
+  ################################################################################
+  #             org.exoplatform.ecm.webui.component.explorer.UIExplorerActionBar #
+  ################################################################################
+  -->
+  <UIViewBar>
+    <label>
+      <driveWorkspace>Unitat del Espai de Treball:</driveWorkspace>
+      <backToJCR>Torna a les Unitats JCR principals</backToJCR>
+      <setUpBrowser>Establir les preferències de navegació</setUpBrowser>
+      <refesh>Recarrega</refesh>
+      <currentDrive>Unitat actual</currentDrive>
+      <selectView>Selecciona Vista</selectView>
+      <showSideBar>Mostra Barra Lateral</showSideBar>
+      <more>Més</more>
+      <backTo>Enrere</backTo>
+    </label>
+  </UIViewBar>
+
+  <!--
+  #############################################################################
+  #             org.exoplatform.ecm.webui.component.explorer.UIDrivesArea  #
+  #############################################################################
+  -->
+  <UIDrivesBrowser>
+    <title>
+      <PersonalDrives>Unitats Personals</PersonalDrives>
+      <GroupDrives>Unitats per Grup</GroupDrives>
+      <GeneralDrives>Unitats Generals</GeneralDrives>
+    </title>
+    <msg>
+      <no-view-found>No te cap visualització disponible segons el seus permisos d'accés a la unitat "{0}".</no-view-found>
+      <access-denied>Accés denegat. Potser no te permisos sobre la Unitat del Espai de Treball "{0}".</access-denied>
+      <workspace-not-exist>La unitat '{0}' ha estat emmagatzemada en una àrea de treball no reconeguda. Si us plau, configura la untat de nou.</workspace-not-exist>
+    </msg>
+  </UIDrivesBrowser>
+
+  <!--
+  #############################################################################
+  #             org.exoplatform.ecm.webui.component.explorer.UITreeExplorer    #
+  #############################################################################
+  -->
+  <UITreeExplorer>
+    <title>Explorador</title>
+    <label>
+      <Root>Arrel</Root>
+      <webDavView>Obre-ho a MS Office</webDavView>
+    </label>
+    <msg>
+      <path-not-found>Aquest element ha sigut suprimit o canviat. Si us plau, feu clic al botó Recarrega.</path-not-found>
+    </msg>
+  </UITreeExplorer>
+  <!--
+  ##################################################################################
+  #             org.exoplatform.ecm.webui.component.explorer.UIViewRelationList    #
+  ##################################################################################
+  -->
+  <UIViewRelationList>
+    <label>
+      <languages-list>Traduccions</languages-list>
+      <relation-list>Relacions</relation-list>
+      <references-list>Referències</references-list>
+      <no-related-document>Cap Document relacionat</no-related-document>
+      <related-document>Documents relacionats</related-document>
+    </label>
+  </UIViewRelationList>
+  <!--
+  #########################################################################################
+  #             org.exoplatform.ecm.webui.component.explorer.control.UIPreferencesForm  #
+  #########################################################################################
+  -->
+  <UIPreferencesForm>
+    <title>Establir les preferències de navegació</title>
+    <label>
+      <enableStructure>Activa l'Estructura DMS:</enableStructure>
+      <showSideBar>Mostra Barra Lateral:</showSideBar>
+      <showHiddenNode>Mostra els Nodes ocults:</showHiddenNode>
+      <showNonDocument>Mostra tot tipus de nodes:</showNonDocument>
+      <showRefDocuments>Mostra els documents referenciats:</showRefDocuments>
+      <enableDragAndDrop>Permetre Arrossegar i Deixar:</enableDragAndDrop>
+      <sortBy>Ordenar per:</sortBy>
+      <order>Ordena per:</order>
+      <nodesPerPage>Nodes Per pàgina:</nodesPerPage>
+    </label>
+    <action>
+      <Back>#{word.close}</Back>
+      <Save>#{word.save}</Save>
+    </action>
+  </UIPreferencesForm>
+  <!--
+  #########################################################################################
+  #             org.exoplatform.ecm.webui.component.explorer.control.UIPreferencesForm  #
+  #########################################################################################
+  -->
+  <UIAllItemsPreferenceForm>
+    <title>Configura les preferències de filtre</title>
+    <action>
+      <Cancel>#{word.cancel}</Cancel>
+      <Save>#{word.save}</Save>
+    </action>
+  </UIAllItemsPreferenceForm>
+  <!--
+  #########################################################################################
+  #             org.exoplatform.ecm.webui.component.explorer.UIRenameForm  #
+  #########################################################################################
+  -->
+  <UIRenameForm>
+    <title>Reanomena</title>
+    <label>
+      <nameField>Nom</nameField>
+      <titleField>Títol</titleField>
+    </label>
+    <action>
+      <Cancel>#{word.cancel}</Cancel>
+      <Save>#{word.save}</Save>
+      <Back>#{word.back}</Back>
+    </action>
+    <msg>
+      <rename-successfull>El Node '{0}', s'ha reanomenat com '{1}' correctament.</rename-successfull>
+      <rename-denied>Accés denegat. No pot canviar el nom d'aquest node.</rename-denied>
+      <fileName-invalid>El nou nom conté alguns caràcters no vàlids.</fileName-invalid>
+      <newName-same-oldName>El nou nom ja existeix. Si us plau comprovi-ho de nou.</newName-same-oldName>
+      <version-exception>Aquest node (o el superior d'aquest node) no està desprotegit.</version-exception>
+      <lock-exception>Aquest node està bloquetjat. Desbloquejeu-lo abans de reanomenar.</lock-exception>
+      <constraintViolation-exception>S'ha produït un error en reanomenar el node "{0}". Si us plau intenti-ho de nou.</constraintViolation-exception>
+      <unknown-prefix>El Prefix "{0}" no està inscrit encara.</unknown-prefix>
+      <rename-error>S'ha produït un error en reanomenar aquest node. Si us plau intenti-ho de nou.</rename-error>
+    </msg>
+  </UIRenameForm>
+  <UIPopupWindow>
+    <title>
+      <UIRenameForm>Reanomena</UIRenameForm>
+      <UIActionContainer>Editar Acció</UIActionContainer>
+      <UIFolderForm>Nova Carpeta</UIFolderForm>
+      <UIUploadManager>Puja un fitxer</UIUploadManager>
+      <UIReferencesList>Llista de Referències</UIReferencesList>
+      <UIExportNode>Exporta</UIExportNode>
+      <UINodeTypeInfo>Informació de tipus node</UINodeTypeInfo>
+      <UIVersionInfo>Informació de la versió</UIVersionInfo>
+      <UIActivateVersion>Activar versió</UIActivateVersion>
+      <UIAuditingInfo>Audita informació</UIAuditingInfo>
+      <UIActivateAuditing>Activa l'Auditoria</UIActivateAuditing>
+      <UIPermissionManager>Gestió de permisos</UIPermissionManager>
+      <UIPropertiesManager>Gestió de Propietats</UIPropertiesManager>
+      <UIECMSearch>Cerca Avançada</UIECMSearch>
+      <UISavedQuery>Llista de Consultes Desada</UISavedQuery>
+      <UIWatchDocumentForm>Segueix el Document</UIWatchDocumentForm>
+      <UIActionManager>Gestiona les Accions</UIActionManager>
+      <UIDocumentForm>Edita el Document</UIDocumentForm>
+      <UIDocumentFormController>Afegeix un nou Document</UIDocumentFormController>
+      <EditFormController>Edita el Document</EditFormController>
+      <UIRelationManager>Afegeix Relació</UIRelationManager>
+      <UICategoryManager>Afegeix una categoria</UICategoryManager>
+      <UIImportNode>Importa</UIImportNode>
+      <UIViewMetadataManager>Veure metadades</UIViewMetadataManager>
+      <UIVoteForm>Vota el Document</UIVoteForm>
+      <UICommentForm>Comentari</UICommentForm>
+      <UIPreferencesForm>Preferències</UIPreferencesForm>
+      <UIPublicationManager>Gestiona la Publicació</UIPublicationManager>
+      <UIConfirmMessage>Confirma la supressió ?</UIConfirmMessage>
+      <UIDeleteFileConfirmMessage>Suprimeix el Fitxer ?</UIDeleteFileConfirmMessage>
+      <UIDeleteFolderConfirmMessage>Suprimeix la Carpeta ?</UIDeleteFolderConfirmMessage>
+      <UIDeleteItemsConfirmMessage>Suprimeix els Elements ?</UIDeleteItemsConfirmMessage>
+      <UIRestoreConfirmMessage>Confirma la Restauració</UIRestoreConfirmMessage>
+      <UIActivePublication>Inscriure's a la publicació del cicle de vida</UIActivePublication>
+      <UITaggingForm>Etiqueta aquest document</UITaggingForm>
+      <UIThumbnailForm>Afegeix una imatge en miniatura</UIThumbnailForm>
+      <UIAllItemsPreferenceForm>Configuració de preferències</UIAllItemsPreferenceForm>
+      <UISelectRestorePath>Selecciona la Ruta de Restauració</UISelectRestorePath>
+      <UISEOForm>Gestiona el SEO</UISEOForm>
+      <UISEOToolbarForm>Gestiona el SEO</UISEOToolbarForm>
+    </title>
+    <header>
+      <workspace>Àrea de treball</workspace>
+      <path>Ruta</path>
+    </header>
+  </UIPopupWindow>
+  <!--
+  #########################################################################################
+  #             org.exoplatform.ecm.webui.component.explorer.UIResourceForm #
+  #########################################################################################
+  -->
+  <UIResourceForm>
+    <title>Edita el contingut del fitxer</title>
+    <label>
+      <name>Nom</name>
+      <textToModify>Text a modificar</textToModify>
+      <fileToUpload>Puja nous continguts per aquest document (ha de tenir el mateix mime-type)</fileToUpload>
+    </label>
+  </UIResourceForm>
+  <!--
+  ###################################################################################
+  #             org.exoplatform.ecm.webui.component.explorer.UIActionBar      #
+  ###################################################################################
+  -->
+  <UIActionBar>
+    <tooltip>
+      <AddFolder>Nova Carpeta</AddFolder>
+      <AddDocument>Nou Contingut</AddDocument>
+      <EditDocument>Edita</EditDocument>
+      <Upload>Puja</Upload>
+      <Paste>Enganxa</Paste>
+      <Search>Cerca</Search>
+      <WatchDocument>Segueix/Deixa de Seguir</WatchDocument>
+      <TaggingDocument>Etiqueta</TaggingDocument>
+      <Vote>Vota</Vote>
+      <Comment>Comentari</Comment>
+      <ManageVersions>Versions</ManageVersions>
+      <ManageAuditing>Auditoria</ManageAuditing>
+      <ManagePublications>Publicacions</ManagePublications>
+      <ManageCategories>Categories</ManageCategories>
+      <ManageRelations>Relacions</ManageRelations>
+      <ManageActions>Accions</ManageActions>
+      <ExportNode>Exporta</ExportNode>
+      <ImportNode>Importa</ImportNode>
+      <OverloadThumbnail>Sobrecàrrega la miniatura</OverloadThumbnail>
+      <ManageHidden>Mostra/Amaga el contingut</ManageHidden>
+      <ViewReferences>Referències</ViewReferences>
+      <ViewNodeType>Tipus</ViewNodeType>
+      <ViewPermissions>Permisos</ViewPermissions>
+      <ViewProperties>Propietats</ViewProperties>
+      <ViewMetadatas>Metadades</ViewMetadatas>
+      <ViewRelations>Mostra/Amaga les relacions</ViewRelations>
+      <ShowJCRStructure>Mostra/Amaga l'Estructuració de Continguts</ShowJCRStructure>
+    </tooltip>
+    <msg>
+      <cannot-action-in-rootnode>No pot realitzar aquesta acció al node arrel.</cannot-action-in-rootnode>
+      <node-checkedin>Ha de desprotegir primer.</node-checkedin>
+      <cannot-enable-version-rootnode>No es pot activar el control de versions del node arrel.</cannot-enable-version-rootnode>
+      <cannot-enable-publication-rootnode>No es pot activar la publicació al node arrel.</cannot-enable-publication-rootnode>
+      <manage-publication>
+        <not-supported-nodetype>S'admeten només els continguts de tipus de document.</not-supported-nodetype>
+        <no-publication-lifecycle>No s'ha configurat cap cicle de publicació.</no-publication-lifecycle>
+      </manage-publication>
+      <unsubcriber-lifecycle>Aquest node ja no estava en cap cicle de publicació.</unsubcriber-lifecycle>
+      <not-supported-nodetype>Només el contingut del tipus de document pot ser suprimit d'un cicle de vida.</not-supported-nodetype>
+      <unsubcriber-lifecycle-finish>El node ha cancel·lat la subscripció amb èxit.</unsubcriber-lifecycle-finish>
+      <access-false>El node no és un article o està protegit.</access-false>
+      <unsupported-action>Aquesta acció no és suportada.</unsupported-action>
+      <not-relationable>Aquest node encara no ha tingut enllaços relacionats a un altre node.</not-relationable>
+      <node-pasted>El node '{0}' ha estat enganxat a la localització '{1}'. Aquesta operació ja s'ha desat.</node-pasted>
+      <no-node-selected>No s'ha copiat cap node.</no-node-selected>
+      <unable-edit>El Node '{0}' és del tipus '{1}' i no està suportada la seva edició.</unable-edit>
+      <not-support>No pot editar el node seleccionat.</not-support>
+      <template-null>Aquest node no té disponible cap diàleg.</template-null>
+      <keyword-null>No hi han paraules clau per cercar.</keyword-null>
+      <not-found>No s'han trobat resultats.</not-found>
+      <keyword-not-allow>No es permet aquesta paraula clau.</keyword-not-allow>
+      <is-not-referenable>El node '{0}' no es pot referenciar.</is-not-referenable>
+      <access-denied>Accés denegat. No té permís d'edició d'aquest node.</access-denied>
+      <access-add-denied>Accés denegat. No té permís d'addició d'aquest node.</access-add-denied>
+      <item-existed>Ja existeix un node associat amb aquest nom.</item-existed>
+      <removed-hidden-mixin>El node es fa visible.</removed-hidden-mixin>
+      <added-hidden-mixin>El node s'ha ocultat.</added-hidden-mixin>
+      <not-supported>Aquesta funció només és compatible amb el tipus document.</not-supported>
+      <empty-file-type>No pot afegir un document a aquest node.</empty-file-type>
+      <unsupported-watch>Només el node del document pot ser seguit.</unsupported-watch>
+      <watch-checkedin>Ha de desprotegir el node abans d'observar.</watch-checkedin>
+      <unsupported-tagging>Només el node document pot ser etiquetat.</unsupported-tagging>
+      <tagnode-checkedin>Ha de desprotegir el node abans d'etiquetar.</tagnode-checkedin>
+    </msg>
+    <title>
+      <select-tab>Selecciona la pestanya</select-tab>
+      <SimpleSearch>Cerca Ràpida</SimpleSearch>
+      <AdvanceSearch>Cerca Avançada</AdvanceSearch>
+      <SavedQueries>Consultes desades</SavedQueries>
+      <ShowAllOwnedByUser>On soc el propietari</ShowAllOwnedByUser>
+      <ShowAllFavourite>Mostra tots els elements preferits</ShowAllFavourite>
+      <ShowAllHidden>Mostrar tots els elements ocults</ShowAllHidden>
+      <ShowAllFromTrash>Mostra tots els elements de la paperera</ShowAllFromTrash>
+    </title>
+  </UIActionBar>
+  <UIPopupMenu>
+    <msg>
+      <has-not-permission>Accés denegat. No té permís d'addició d'aquest node.</has-not-permission>
+      <has-not-edit-permission>Accés denegat. No té permís per d'edició d'aquest node. Contacteu amb l'administrador.</has-not-edit-permission>
+      <cannot-login-node>No pot accedir i enganxar el node aquí.</cannot-login-node>
+      <cannot-paste-nodetype>No pot enganxar el node aquí.</cannot-paste-nodetype>
+      <has-not-permission-unlok>No té permís per desbloquejar aquest node.</has-not-permission-unlok>
+      <bound-exception>No té permís per eliminar aquest node. Contacta amb l'administrador.</bound-exception>
+      <bound-move-exception>No pot desplaçar el node a si mateix o en al seu node secundari.</bound-move-exception>
+      <does-not-support-auditing>No pot activar l'auditoria en aquest node.</does-not-support-auditing>
+      <can-not-rename-node>No té permís per canviar el nom d'aquest node. Contacteu amb l'administrador per obtenir el permís correcte.</can-not-rename-node>
+      <can-not-cut-node>No té permís per tallar aquest node. Contacta amb l'administrador.</can-not-cut-node>
+      <can-not-remove-node>No té permís per eliminar aquest node. Contacta amb l'administrador.</can-not-remove-node>
+      <can-not-lock-node>No té permís per bloquejar el node {0}. Contacta amb l'administrador.</can-not-lock-node>
+      <can-not-unlock-node>No té permís per desbloquejar aquest node. Contacta amb l'administrador.</can-not-unlock-node>
+      <no-node>Si us plau, selecciona almenys un node abans d'enganxar-lo.</no-node>
+      <can-not-paste-node>No té permís per desplaçar aquest node. Si us plau, contacta amb l'administrador.</can-not-paste-node>
+      <can-not-move-node>No té permís per moure aquest node. Si us plau, contacta amb l'administrador.</can-not-move-node>
+      <does-not-support-versioning>No té permís per desplaçar aquest node. Contacta amb l'administrador.</does-not-support-versioning>
+      <path-not-found>Aquest element ha sigut suprimit o canviat. Si us plau, feu clic al botó Recarrega.</path-not-found>
+      <paste-lock-exception>No pot enganxar '{0}' a aquest node perquè la font o el node de destí està bloquejat o està relacionat amb el node bloquejat.</paste-lock-exception>
+      <can-not-checkin-node>No pot protegir aquest node. Si us plau, comprova que té els permisos adequats.</can-not-checkin-node>
+      <can-not-checkout-node>No pot desprotegir aquest node. Si us plau, comprova que té els permisos adequats.</can-not-checkout-node>
+      <move-constraint-exception>S'ha produït un error mentre es movia el node.</move-constraint-exception>
+      <not-lock-owner>No pot obrir aquest node perquè no ets el propietari del bloqueig.</not-lock-owner>
+      <is-checked-in>Si us plau comprovi aquest node abans de reanomenar.</is-checked-in>
+      <is-checked-in-lock>Si us plau comprovi aquest node abans de bloquejar.</is-checked-in-lock>
+      <cant-lock>No pot bloquejar aquest node.</cant-lock>
+      <node-locked>L'element amb la ruta {0} o d'una carpeta superior, està bloquejat.</node-locked>
+      <can-not-delete>Si us plau, tancar aquest node abans de suprimir-lo.</can-not-delete>
+      <can-not-delete-version>No pot suprimir aquest node. Es una versió.</can-not-delete-version>
+      <not-support>No pot suprimir el node seleccionat. Si us plau seleccioni un altre.</not-support>
+      <current-node-not-allow-paste>No pot enganxar el tipus node copiat en el node actual.</current-node-not-allow-paste>
+      <copied-node-in-versioning>No pot enganxar el node copiat. Té control de versions.</copied-node-in-versioning>
+      <parent-node-locked>No té permís per desbloquejar el node '{0}'.</parent-node-locked>
+      <this-node-locked-by-parent>No pot desprotegir aquest node. Està bloquejat pel seu parent o node superior.</this-node-locked-by-parent>
+      <paste-node-same-name>No pot enganxar un node amb el mateix nom que un a la carpeta de destí.</paste-node-same-name>
+      <has-not-add-permission>No té permís per afegir un nou node.</has-not-add-permission>
+      <node-cutting>El node està sent tallat. No pot enganxar-lo aquí.</node-cutting>
+      <access-denied>Accés denegat. Potser no té permís en aquest node.</access-denied>
+      <remove-verion-exception>No pot suprimir el node perquè aquest (o el seu node superior) està protegit.</remove-verion-exception>
+      <remove-referentialIntegrityException>No pot suprimir aquest node perquè actualment és apuntat per una Propietat de Referència.</remove-referentialIntegrityException>
+      <constraintviolation-exception>No s'ha trobat l'element obligatori jcr:uuid . El node pot haver estat suprimit o canviat. Si us plau, fes clic al botó Recarrega.</constraintviolation-exception>
+      <path-not-found-exception>El node pot haver estat suprimit o canviat. Si us plau, fes clic al botó Recarrega.</path-not-found-exception>
+      <not-exist-categories>La categoria no existeix.</not-exist-categories>
+    </msg>
+  </UIPopupMenu>
+  <!--
+  #############################################################################
+  #     org.exoplatform.ecm.webui.component.explorer.actions.UIFolderForm     #
+  #############################################################################
+  -->
+  <UIFolderForm>
+    <action>
+      <Cancel>#{word.cancel}</Cancel>
+      <Save>Crea una carpeta</Save>
+    </action>
+    <label>
+      <titleTextBox>Nom de la carpeta:</titleTextBox>
+      <customTypeCheckBox>Utilitzar un tipus personalitzat de carpeta</customTypeCheckBox>
+    </label>
+    <title>Afegeix/Edita el directori</title>
+    <msg>
+      <addFolder-successful>La carpeta '{0}' s'ha afegit correctament.</addFolder-successful>
+      <name-invalid>Si us plau, introdueix el nom de la carpeta.</name-invalid>
+      <title-invalid>Si us plau, introdueix el títol de la carpeta.</title-invalid>
+      <name-not-allowed>Aquest nom no està permès.</name-not-allowed>
+      <fileName-error>El nom del fitxer no és vàlid.</fileName-error>
+      <constraint-violation>El node actual no permet afegir el tipus de node '{0}'.</constraint-violation>
+      <repository-exception>S'ha produït un error inesperat. Contacta amb l'administrador per obtenir més detalls.</repository-exception>
+      <repository-exception-permission>No té permís per afegir una nova carpeta en aquest node.</repository-exception-permission>
+      <numberformat-exception>No pot desar aquesta carpeta. El nom proporcionat ha de ser en format numèric.</numberformat-exception>
+      <!--DMS 2.4.x; ECM-3553-->
+      <not-allow-sameNameSibling>No pot desar la carpeta. Aquest node no accepta dos nodes del mateix nom.</not-allow-sameNameSibling>
+      <ntFolder-not-avaiable>Ha de seleccionar un tipus personalitzat de carpeta</ntFolder-not-avaiable>
+    </msg>
+    <help>
+      <customTypeCheckBoxHelp>Comprova si es pretenen emmagatzemar continguts web o tipus de documents personalitzats en aquesta carpeta</customTypeCheckBoxHelp>
+    </help>
+  </UIFolderForm>
+  <!--
+  ###################################################################################
+  #             org.exoplatform.ecm.webui.component.explorer.UIDocumentWorkspace    #
+  ###################################################################################
+  -->
+  <UIWorkingArea>
+    <title>
+      <Icon>Icona</Icon>
+    </title>
+    <msg>
+      <!-- Delte one node is not in trash and have no relation -->
+      <confirm-delete>Està segur que vol suprimir l'element '{0}'?</confirm-delete>
+      <confirm-delete-file>Està segur que vol suprimir el fitxer '{0}'?</confirm-delete-file>
+      <confirm-delete-folder>Està segur que vol suprimir la carpeta '{0}? i totes les subcarpetes?</confirm-delete-folder>
+      
+      <!-- Delte one node is in trash and have no relation -->
+      <confirm-delete-permanently>Està segur que vol suprimir permanentment l'element '{0}'?</confirm-delete-permanently>
+      <confirm-delete-file-permanently>Està segur que vol suprimir permanentment el fitxer '{0}'?</confirm-delete-file-permanently>
+      <confirm-delete-folder-permanently>Està segur que vol suprimir permanentment la carpeta '{0}' i totes les subcarpetes?</confirm-delete-folder-permanently>
+      
+      <!-- Delte one node is not in trash and have relations -->
+      <confirm-delete-has-relations>Està segur que vol suprimir l'element '{0}' i les seves referències?</confirm-delete-has-relations>
+      <confirm-delete-file-has-relations>Està segur que vol suprimir el fitxer '{0}' i les seves referències?</confirm-delete-file-has-relations>
+      <confirm-delete-folder-has-relations>Està segur que vol suprimir la carpeta '{0}' i les seves referències?</confirm-delete-folder-has-relations>
+      
+      <!-- Delte multiple nodes, not in Trash, have no relations -->
+      <confirm-delete-multi-nodes-generic>Està segur que vol suprimir els {0} elements seleccionats?</confirm-delete-multi-nodes-generic>  
+      <confirm-delete-multi-nodes-file>Està segur que vol suprimir els {0} fitxers seleccionats?</confirm-delete-multi-nodes-file>
+      <confirm-delete-multi-nodes-folder>Està segur que vol suprimir les {0} carpetes i subcarpetes seleccionades?</confirm-delete-multi-nodes-folder>
+      <confirm-delete-multi-nodes-generic-and-file>Està segur que vol suprimir els {0} fitxers i elements seleccionats?</confirm-delete-multi-nodes-generic-and-file>
+      <confirm-delete-multi-nodes-generic-and-folder>Està segur que vol suprimir els {0} elements, carpetes i fitxers seleccionats?</confirm-delete-multi-nodes-generic-and-folder>
+      <confirm-delete-multi-nodes-file-and-folder>Està segur que vol suprimir els {0} fitxers, carpetes i subcarpetes seleccionats?</confirm-delete-multi-nodes-file-and-folder>
+      <confirm-delete-multi-nodes-generic-and-file-and-folder>Està segur que vol suprimir els {0} elements, fitxers, carpetes i subcarpetes seleccionats?</confirm-delete-multi-nodes-generic-and-file-and-folder>
+      
+      <!-- Delte multiple nodes, in Trash -->
+      <confirm-delete-multi-nodes-generic-permanently>Està segur que vol suprimir permanentment els '{0}' elements seleccionats?</confirm-delete-multi-nodes-generic-permanently>  
+      <confirm-delete-multi-nodes-file-permanently>Està segur que vol suprimir permanentment els '{0}' fitxers seleccionats?</confirm-delete-multi-nodes-file-permanently>
+      <confirm-delete-multi-nodes-folder-permanently>Està segur que vol suprimir permanentment les '{0}' carpetes i subcarpetes seleccionades?</confirm-delete-multi-nodes-folder-permanently>
+      <confirm-delete-multi-nodes-generic-and-file-permanently>Està segur que vol suprimir permanentment els '{0}' elements seleccionats?</confirm-delete-multi-nodes-generic-and-file-permanently>
+      <confirm-delete-multi-nodes-generic-and-folder-permanently>Està segur que vol suprimir permanentment els '{0}' elements, carpetes i subcarpetes seleccionats?</confirm-delete-multi-nodes-generic-and-folder-permanently>
+      <confirm-delete-multi-nodes-file-and-folder-permanently>Està segur que vol suprimir permanentment els '{0}' fitxers, carpetes i subcarpetes seleccionats?</confirm-delete-multi-nodes-file-and-folder-permanently>
+      <confirm-delete-multi-nodes-generic-and-file-and-folder-permanently>Està segur que vol suprimir permanentment els '{0}' elements, fitxers, carpetes i subcarpetes seleccionats?</confirm-delete-multi-nodes-generic-and-file-and-folder-permanently>
+      
+      <!-- Delte multiple nodes, have relations -->
+      <confirm-delete-multi-nodes-generic-have-relations>Està segur que vol suprimir els {0} elements seleccionats i les seves referències?</confirm-delete-multi-nodes-generic-have-relations>  
+      <confirm-delete-multi-nodes-file-have-relations>Està segur que vol suprimir els {0} fitxers seleccionats i les seves referències?</confirm-delete-multi-nodes-file-have-relations>
+      <confirm-delete-multi-nodes-folder-have-relations>Està segur que vol suprimir les {0} carpetes seleccionades, totes les subcarpetes i les seves referències?</confirm-delete-multi-nodes-folder-have-relations>
+      <confirm-delete-multi-nodes-generic-and-file-have-relations>Està segur que vol suprimir els {0} elements seleccionats, fitxers i les seves referències?</confirm-delete-multi-nodes-generic-and-file-have-relations>
+      <confirm-delete-multi-nodes-generic-and-folder-have-relations>Està segur que vol suprimir els {0} elements seleccionats, les seves referències, carpetes i totes les subcarpetes?</confirm-delete-multi-nodes-generic-and-folder-have-relations>
+      <confirm-delete-multi-nodes-file-and-folder-have-relations>Està segur que vol suprimir els {0} elements seleccionats, les seves referències, carpetes i totes les subcarpetes?</confirm-delete-multi-nodes-file-and-folder-have-relations>
+      <confirm-delete-multi-nodes-generic-and-file-and-folder-have-relations>Està segur que vol suprimir els {0} elements seleccionats, fitxers, les seves referències, carpetes i totes les subcarpetes?</confirm-delete-multi-nodes-generic-and-file-and-folder-have-relations>
+      
+      <feedback-delete>'{0}' s'ha suprimit correctament.</feedback-delete>
+      <feedback-delete-multi>{0} elements s'han suprimit correctament.</feedback-delete-multi>      
+      <feedback-delete-permanently>'{0}' s'ha eliminat definitivament.</feedback-delete-permanently>
+      <feedback-delete-permanently-multi>'{0}' elements s'han eliminat definitivament.</feedback-delete-permanently-multi>
+      <undo-delete>Desfer</undo-delete>
+      <feedback-restore>'{0}' ha estat restaurat correctament.</feedback-restore>
+      <feedback-restore-multi>{0} elements s'han restaurat correctament.</feedback-restore-multi>
+      
+      <confirm-restore>Un node amb el mateix nom ja existeix a la ubicació anterior del node '{0}'. Està segur que vol restaurar aquest node?</confirm-restore>
+      <confirm-move>Esta segur que vol moure?</confirm-move>
+      <node-cut>El node '{0}' ha estat tallat.</node-cut>
+      <execute-successfully>L'acció personalitzada '{0}' ha estat executada.</execute-successfully>
+      <save-node-success>El node '{0}' s'ha desat.</save-node-success>
+      <move-problem>No pots desplaçar el node '{0}' a "{1}" perquè hi havia un problema amb els permisos o amb una restricció d'una limitació.</move-problem>
+    </msg>
+  </UIWorkingArea>
+  <UIDocumentWorkspace>
+    <label>
+      <no-children>Aquest node encara no te cap de secundari.</no-children>
+      <no-children-but-has-hidden>Aquest node encara no te cap node secundari, però hi han alguns fitxers ocults.</no-children-but-has-hidden>
+    </label>
+    <msg>
+      <unable-save-node>El node '{0}' s'ha creat recentment. Desa la sessió abans de realitzar aquesta acció.</unable-save-node>
+      <save-node-success>El node '{0}' s'ha desat.</save-node-success>
+      <node-copied>EL node '{0}' s'ha copiat.</node-copied>
+      <node-cut>El node '{0}' ha estat tallat.</node-cut>
+      <remove-root>No es pot eliminar el node principal.</remove-root>
+      <node-remove-success>El node '{0}' ha estat eliminat.</node-remove-success>
+    </msg>
+    <tooltip>
+      <Rename>Reanomena</Rename>
+      <Cut>Talla</Cut>
+      <Copy>Copia</Copy>
+      <Save>#{word.save}</Save>
+      <RemoveNode>Suprimeix</RemoveNode>
+      <Checkin>Protegir</Checkin>
+      <Checkout>Desprotegir</Checkout>
+      <Lock>Bloqueja</Lock>
+      <Unlock>Desbloqueja</Unlock>
+      <EditDocument>Edita</EditDocument>
+      <Paste>Enganxa</Paste>
+      <LockedBy>Bloquejat per</LockedBy>
+    </tooltip>
+  </UIDocumentWorkspace>
+  <UIDocumentInfo>
+    <msg>
+      <access-denied>Accés denegat. No pots accedir al node '{0}'.</access-denied>
+      <null-exception>No s'ha trobat l'element. O be s'ha suprimit o canviat, o no té permís per accedir a aquest node.</null-exception>
+      <confirm-deleteattachment>Està segur que vol suprimir aquest fitxer adjunt?</confirm-deleteattachment>
+      <confirm-deleteattcomment>Està segur que vol suprimir aquest comentari?</confirm-deleteattcomment>
+      <access-denied-exception>Accés denegat. Potser no té privilegis de lectura, o el node s'ha eliminat o canviat.</access-denied-exception>
+      <path-not-found>Aquest element ha sigut suprimit o canviat. Si us plau, feu clic al botó Recarrega.</path-not-found>
+    </msg>
+    <tooltip>
+      <remove-attachment>Elimina aquest fitxer adjunt</remove-attachment>
+      <remove-comment>Elimina aquest comentari</remove-comment>
+    </tooltip>
+  </UIDocumentInfo>
+  <ListView>
+    <view>
+      <label>
+        <name>Nom</name>
+        <versionable>Versionable</versionable>
+        <exo_owner>Propietari</exo_owner>
+        <auditing>Auditoria</auditing>
+        <exo_dateCreated>Data de creació</exo_dateCreated>
+        <exo_dateModified>Data de modificaicó</exo_dateModified>
+      </label>
+    </view>
+  </ListView>
+  <!--
+  #############################################################################
+  #             org.exoplatform.ecm.webui.component.explorer.ECMContextMenu   #
+  #############################################################################
+  -->
+  <ECMContextMenu>
+    <event>
+      <Lock>Bloqueja</Lock>
+      <Unlock>Desbloqueja</Unlock>
+      <EditDocument>Edita</EditDocument>
+      <Copy>Copia</Copy>
+      <Rename>Reanomena</Rename>
+      <Delete>Suprimeix</Delete>
+      <Save>#{word.save}</Save>
+      <Cut>Talla</Cut>
+      <Paste>Enganxa</Paste>
+      <CheckOut>Desprotegir</CheckOut>
+      <CheckIn>Protegir</CheckIn>
+      <WebDAV>Mostra per WebDAV</WebDAV>
+      <autoversion>Control de Versions automàtic</autoversion>
+      <Custom>Personalitza</Custom>
+      <AddFolder>Nova Carpeta</AddFolder>
+      <AddDocument>Nou Contingut</AddDocument>
+      <Upload>Puja Fitxers</Upload>
+      <MoveNode>Moure</MoveNode>
+      <UnLock>Desbloqueja</UnLock>
+      <ViewProperties>Mostra les propietats</ViewProperties>
+      <GetURL>Copia l'URL al porta-retalls</GetURL>
+      <AddThumbnail>Afegeix/Elimina Vinyeta</AddThumbnail>
+      <AddToFavourite>Afegeix als Marcadors</AddToFavourite>
+      <RemoveFromFavourite>Treure de Favorits</RemoveFromFavourite>
+      <MoveToTrash>Mou a la paperera</MoveToTrash>
+      <RestoreFromTrash>Recupera de la Paperera</RestoreFromTrash>
+      <EmptyTrash>Buida la Paperera</EmptyTrash>
+      <WebDavView>Obre-ho a MS Office</WebDavView>
+    </event>
+  </ECMContextMenu>
+ 
+  <!--
+  #############################################################################
+  #     org.exoplatform.ecm.webui.component.explorer.UIReferencesList         #
+  #############################################################################
+  -->
+  <UIReferencesList>
+    <msg>
+      <no-references>No s'han trobat les referències</no-references>
+    </msg>
+    <header>
+      <workspace>Àrea de treball</workspace>
+      <path>Ruta</path>
+    </header>
+    <action>
+      <Close>#{word.close}</Close>
+    </action>
+  </UIReferencesList>
+  <!--
+  #############################################################################
+  #         org.exoplatform.ecm.webui.component.explorer.UIPropertiesManager  #
+  #############################################################################
+  -->
+  <UITabPane>
+    <title>
+      <UIPublishingPanel>Publication Pane</UIPublishingPanel>
+      <UIPublicationPanel>Revisió</UIPublicationPanel>
+      <UIPublicationSchedule>Programat</UIPublicationSchedule>
+      <UIPublicationPagesContainer>Pàgines</UIPublicationPagesContainer>
+      <UIPublicationHistory>Històric</UIPublicationHistory>
+      <UIVersionViewer>Visor de la versió</UIVersionViewer>
+
+      <UIPropertyTab>Propietats</UIPropertyTab>
+      <UIMetadataTab>Metadades</UIMetadataTab>
+      <UIPropertyForm>Afegeix una nova propietat</UIPropertyForm>
+      <UIUploadContent>Informació del fitxer pujat</UIUploadContent>
+      <UIJCRAdvancedSearch>Nova consulta</UIJCRAdvancedSearch>
+      <UISavedQuery>Consulta desada</UISavedQuery>
+      <AdvancedSearchResult>Resultats de la cerca</AdvancedSearchResult>
+      <UISimpleSearch>Cerca simple</UISimpleSearch>
+      <UISearchContainer>Cerca Avançada</UISearchContainer>
+      <UICategoryManagerSearch>Afegeix categoria a la cerca</UICategoryManagerSearch>
+      <UIConstraintsForm>Formulari de filtre</UIConstraintsForm>
+      <UIViewSearchResult>Veure contingut</UIViewSearchResult>
+      <UIContentNameSearch>Cerca per nom</UIContentNameSearch>
+      <UINodeInfo>Informació de la versió</UINodeInfo>
+      <UINodeProperty>Propietat del node</UINodeProperty>
+      <UIActionListContainer>Accions disponibles</UIActionListContainer>
+      <UIActionContainer>Afegeix una acció</UIActionContainer>
+      <UIActionViewContainer>Informació de l'acció</UIActionViewContainer>
+      <UIMultiLanguageForm>Veure idioma</UIMultiLanguageForm>
+      <UIAddLanguageContainer>Afegeix un idioma</UIAddLanguageContainer>
+      <UINonPublishedForm>Estat</UINonPublishedForm>
+      <UIPublishedForm>Estat</UIPublishedForm>
+      <UIPublicationLogList>Històric</UIPublicationLogList>
+      <UIDocumentWithTree>Vista de fitxers</UIDocumentWithTree>
+      <UIDocumentInfo>Vista de documents</UIDocumentInfo>
+      <UICategoriesSelectPanel>Selecciona les categories</UICategoriesSelectPanel>
+      <UISelectedCategoriesGrid>Categories Referenciades</UISelectedCategoriesGrid>
+      <UIWorkflowPublicationActionForm>Workflow Publication Action</UIWorkflowPublicationActionForm>
+      <UIWorkflowPublicationViewForm>Workflow Publication View</UIWorkflowPublicationViewForm>
+      <metadatasitemetadata>Metadades del Lloc</metadatasitemetadata>
+      <dcelementset>Dublin Core</dcelementset>
+    </title>
+  </UITabPane>
+  <UIPropertyTab>
+    <title>
+      <edit>Edita aquesta propietat</edit>
+      <delete>Elimina aquesta propietat</delete>
+    </title>
+    <confirm>
+      <remove-property>Està segur que vol suprimir aquesta propietat?</remove-property>
+    </confirm>
+    <header>
+      <name>Nom</name>
+      <multiValue>Valor Múltiple</multiValue>
+      <value>Valor</value>
+      <action>Acció</action>
+    </header>
+    <label>
+      <binary>Dades binàries</binary>
+      <notavailable>N/D</notavailable>
+      <cannotget>No es poden obtenir valors</cannotget>
+    </label>
+    <action>
+      <Close>#{word.close}</Close>
+    </action>
+  </UIPropertyTab>
+  <!--
+  #############################################################################
+  #         org.exoplatform.ecm.webui.component.explorer.UIPropertyTab     #
+  #############################################################################
+  -->
+  <!--
+  #############################################################################
+  #           org.exoplatform.ecm.webui.component.explorer.UIPropertyForm     #
+  #############################################################################
+  -->
+  <UIPropertyForm>
+    <title>Afegeix/Edita la propietat</title>
+    <label>
+      <name>Nom:</name>
+      <type>Tipus:</type>
+      <value>Valor:</value>
+      <upload>Puja:</upload>
+      <namespace>Espai de noms:</namespace>
+      <multiple>Múltiple:</multiple>
+      <property_select>Afegeix una nova propietat:</property_select>
+      <value0>Valor 0</value0>
+      <value1>Valor 1</value1>
+      <value2>Valor 2</value2>
+      <value3>Valor 3</value3>
+      <value4>Valor 4</value4>
+      <value5>Valor 5</value5>
+      <value6>Valor 6</value6>
+      <value7>Valor 7</value7>
+      <value8>Valor 8</value8>
+      <value9>Valor 9</value9>
+      <value10>Valor 10</value10>
+    </label>
+    <action>
+      <Save>#{word.save}</Save>
+      <Cancel>#{word.cancel}</Cancel>
+      <Reset>Restablir</Reset>
+    </action>
+    <msg>
+      <name-invalid>Si us plau, introdueix el nom de la propietat.</name-invalid>
+      <unable-create>No es poden afegir les propietats.</unable-create>
+      <value-invalid>Si us plau, introdueix el valor.</value-invalid>
+      <node-checkedin>Ha de desprotegir aquest node abans d'afegir una propietat.</node-checkedin>
+      <can-not-add>No pot afegir propietats a aquest node. Això només és permès al tipus de node nt:unstructured.</can-not-add>
+      <propertyName-invalid>El nom de la propietat ha d'incloure l'espai de noms (p,ex. namespace:name).</propertyName-invalid>
+      <propertyName-exist>La propietat '{0}' ja existeix.</propertyName-exist>
+      <propertyValu-null>Alguns valors poden ser nuls.</propertyValu-null>
+      <valueFormatEx>No es pot assignar un valor múltiple a una propietat de valor únic.</valueFormatEx>
+      <number-format-exception>El seu valor d'entrada té el format incorrecte.</number-format-exception>
+      <property-not-exist>La propietat {0} no existeix.</property-not-exist>
+    </msg>
+  </UIPropertyForm>
+
+  <!--
+  #############################################################################
+  #             org.exoplatform.ecm.webui.component.explorer.UIPermissionInfo #
+  #############################################################################
+  -->
+  <UIPermissionInfo>
+    <action>
+      <title>
+        <Edit>Edita</Edit>
+        <Delete>Elimina Permisos</Delete>
+      </title>
+    </action>
+    <header>
+      <usersOrGroups>Usuari o grup</usersOrGroups>
+      <read>Lectura</read>
+      <addNode>Modificar</addNode>
+      <remove>Elimina</remove>
+      <action>Acció</action>
+    </header>
+    <msg>
+      <confirm-delete-permission>Està segur que vol suprimir aquest permís?</confirm-delete-permission>
+      <no-permission-tochange>No té drets per eliminar permisos.</no-permission-tochange>
+      <no-permission-remove>No es pot eliminar el propietari.</no-permission-remove>
+      <access-denied>Accés denegat. No es pot eliminat aquest permís.</access-denied>
+    </msg>
+  </UIPermissionInfo>
+  <permission>
+    <title>
+      <SelectUser>Selecciona usuari/a</SelectUser>
+      <SelectMember>Selecciona la pertinença</SelectMember>
+      <AddAny>Selecciona tots</AddAny>
+    </title>
+  </permission>
+  <!--
+  #############################################################################
+  #             org.exoplatform.ecm.webui.component.explorer.UIPermissionForm #
+  #############################################################################
+  -->
+  <SelectUserOrGroup>
+    <title>
+      <UIGroupSelector>Selecciona usuari/a</UIGroupSelector>
+      <UIPermissionSelector>Selecciona un membre</UIPermissionSelector>
+      <UIGroupMemberSelector>Selecciona l'Afiliació</UIGroupMemberSelector>
+    </title>
+  </SelectUserOrGroup>
+  <UIGroupSelector>
+    <label>
+      <selectGroup>Examina i selecciona un Grup</selectGroup>
+      <selectUser>Selecciona usuari/a</selectUser>
+    </label>
+    <msg>
+      <not-change-owner>'{0}' és el propietari d'aquest node i té ple permís de control.</not-change-owner>
+    </msg>
+  </UIGroupSelector>
+  <UIPermissionForm>
+    <label>
+      <UIPopupWindow>Selecciona</UIPopupWindow>
+      <permission>UIPermissionForm</permission>
+      <userOrGroup>Usuari o Grup</userOrGroup>
+      <read>Drets de lectura</read>
+      <add_node>Drets d'escriptura</add_node>
+      <remove>Elimina Drets</remove>
+    </label>
+    <title>Afegeix un permís a aquell node</title>
+    <action>
+      <Close>#{word.close}</Close>
+      <Save>#{word.save}</Save>
+      <Reset>Restablir</Reset>
+    </action>
+    <msg>
+      <checkbox-require>Si us plau seleccioni almenys un permís.</checkbox-require>
+      <userOrGroup-required>si us plau, selecciona un usuari o grup abans de desar aquest permís.</userOrGroup-required>
+      <not-change-permission>No té els drets per afegir un permís.</not-change-permission>
+      <access-denied>Accés denegat. No es pot eliminat aquest permís.</access-denied>
+    </msg>
+  </UIPermissionForm>
+
+  <!--
+  ###############################################################################
+  #             org.exoplatform.ecm.webui.component.explorer.UINodeTypeInfo     #
+  ###############################################################################
+  -->
+  <UINodeTypeInfo>
+    <label>
+      <node-type>Tipus de node</node-type>
+      <name>Nom</name>
+      <item>Nom de l'Element Primari</item>
+      <super-types>Tipus Principals</super-types>
+      <mixin>Tipus de node mixin</mixin>
+      <orderable-children>Nodes secundaris ordenables</orderable-children>
+      <property-def>Definició de la propietat del node</property-def>
+      <prop-name>Nom</prop-name>
+      <prop-type>Tipus</prop-type>
+      <prop-multiple>Mul</prop-multiple>
+      <prop-mandatory>Man</prop-mandatory>
+      <prop-protected>Pr</prop-protected>
+      <prop-auto-create>AC</prop-auto-create>
+      <prop-default-values><![CDATA[<span title="Default Values">DV</span>]]></prop-default-values>
+      <prop-constraints><![CDATA[<span title="Constraints Values">CV</span>]]></prop-constraints>
+      <node-def>Definició del node secundari</node-def>
+      <node-def-name>Nom</node-def-name>
+      <node-def-opv>OPV</node-def-opv>
+      <node-def-ac>AC</node-def-ac>
+      <node-def-man>MAN</node-def-man>
+      <node-def-pr>PR</node-def-pr>
+      <node-def-dnt>DNT</node-def-dnt>
+    </label>
+    <action>
+      <Close>#{word.close}</Close>
+    </action>
+  </UINodeTypeInfo>
+  <!--
+  ###############################################################################
+  #                    org.exoplatform.ecm.webui.component.explorer.search      #
+  ###############################################################################
+  -->
+  <UICategoryManagerSearch>
+    <tab>
+      <label>
+        <UIOneNodePathSelector>Selecciona una categoria</UIOneNodePathSelector>
+      </label>
+    </tab>
+    <action>
+      <Close>#{word.close}</Close>
+    </action>
+  </UICategoryManagerSearch>
+  <UIContentNameSearch>
+    <label>
+      <keyword>Nom del contingut:</keyword>
+      <location>Cercar en la ubicació:</location>
+    </label>
+    <action>
+      <Search>Cerca</Search>
+      <Cancel>#{word.cancel}</Cancel>
+    </action>
+    <msg>
+      <keyword-not-allowed>No es permet aquesta paraula clau.</keyword-not-allowed>
+    </msg>
+  </UIContentNameSearch>
+  <UISimpleSearch>
+    <action>
+      <MoreConstraints>Mostra/Amaga Formulari de Restriccions</MoreConstraints>
+      <Search>Cerca</Search>
+      <Save>#{word.save}</Save>
+      <Cancel>#{word.cancel}</Cancel>
+    </action>
+    <label>
+      <moreConstraints>UISimpleSearch</moreConstraints>
+      <firstOperator>Operador:</firstOperator>
+      <input>Paraula o frase en el contingut:</input>
+      <constraints>Més limitacions:</constraints>
+      <nodePath>Ubicació actual:</nodePath>
+    </label>
+    <msg>
+      <keyword-null>Si us plau, escriu la paraula clau.</keyword-null>
+      <not-found>No s'han trobat resultats.</not-found>
+      <keyword-not-allow>No es permet aquesta paraula clau.</keyword-not-allow>
+      <value-null>Si us plau, introdueixi la paraula clau o limitacions.</value-null>
+      <value-save-null>Si us plau, introdueix una paraula clau o unes limitacions abans de desar aquesta consulta.</value-save-null>
+      <inputSearch-invalid>Hi han caràcters invàlids a l'entrada de la cerca.</inputSearch-invalid>
+      <query-invalid>La consulta no és vàlida. Si us plau comprovi-la.</query-invalid>
+    </msg>
+  </UISimpleSearch>
+  <ViewSearch>
+    <title>
+      <UIViewSearchResult>Veure plantilla</UIViewSearchResult>
+    </title>
+  </ViewSearch>
+  <UISearchResult>
+    <msg>
+      <not-support>No hi ha cap plantilla de visualització per a aquest node.</not-support>
+      <empty>No s'han trobat resultats.</empty>
+      <access-denied>No pot obrir aquesta carpeta, o be ja no existeix o no té dret a accedir-hi.</access-denied>
+      <query-invalid>La consulta no és vàlida.</query-invalid>
+    </msg>
+    <header>
+      <name>#{word.name}</name>
+      <path>Ruta</path>
+      <action>Acció</action>
+      <shortcutPath>Ruta</shortcutPath>
+      <type>Tipus</type>
+      <dateCreated>Data de creació</dateCreated>
+      <score>Puntuació</score>
+    </header>
+    <title>
+      <typeASC>Ordena per tipus de document en ordre ascendent</typeASC>
+      <typeDESC>Ordena per tipus de document en ordre descendent</typeDESC>
+      <scoreASC>Ordena per la puntuació en ordre ascendent</scoreASC>
+      <scoreDESC>Ordena per la puntuació en ordre descendent</scoreDESC>
+      <nameASC>Ordena pel nom en ordre ascendent</nameASC>
+      <nameDESC>Ordena pel nom en ordre descendent</nameDESC>
+      <datecreatedASC>Ordena per la data de creació en ordre ascendent</datecreatedASC>
+      <datecreatedDESC>Ordena per la data de creació en ordre descendent</datecreatedDESC>
+    </title>
+    <tooltip>
+      <View>Veure aquest node</View>
+      <OpenFolder>Vés a la carpeta</OpenFolder>
+    </tooltip>
+  </UISearchResult>
+  <UIShowAllOwnedByUserResult>
+    <msg>
+      <not-support>No hi ha cap plantilla de visualització per a aquest node</not-support>
+      <empty>No s'han trobat resultats.</empty>
+      <access-denied>No pot veure aquest node, perquè no s'admet aquesta plantilla o perquè es nega l'accés.</access-denied>
+      <query-invalid>La consulta no és vàlida</query-invalid>
+    </msg>
+    <header>
+      <name>#{word.name}</name>
+      <path>Ruta</path>
+      <action>Acció</action>
+      <shortcutPath>Ruta</shortcutPath>
+      <type>Tipus</type>
+      <dateCreated>Data de creació</dateCreated>
+      <score>Puntuació</score>
+    </header>
+    <title>
+      <typeASC>Ordena per tipus de document en ordre ascendent</typeASC>
+      <typeDESC>Ordena per tipus de document en ordre descendent</typeDESC>
+      <scoreASC>Ordena per la puntuació en ordre ascendent</scoreASC>
+      <scoreDESC>Ordena per la puntuació en ordre descendent</scoreDESC>
+      <nameASC>Ordena pel nom en ordre ascendent</nameASC>
+      <nameDESC>Ordena pel nom en ordre descendent</nameDESC>
+      <datecreatedASC>Ordena per la data de creació en ordre ascendent</datecreatedASC>
+      <datecreatedDESC>Ordena per la data de creació en ordre descendent</datecreatedDESC>
+    </title>
+    <tooltip>
+      <View>Veure aquest node</View>
+      <OpenFolder>Vés a la carpeta</OpenFolder>
+    </tooltip>
+  </UIShowAllOwnedByUserResult>
+  <UIShowAllFavouriteResult>
+    <msg>
+      <not-support>No hi ha cap plantilla de visualització per a aquest node</not-support>
+      <empty>No s'han trobat resultats</empty>
+      <access-denied>No pot veure aquest node, perquè no s'admet aquesta plantilla o perquè es nega l'accés.</access-denied>
+      <query-invalid>La consulta no és vàlida</query-invalid>
+    </msg>
+    <header>
+      <name>#{word.name}</name>
+      <path>Ruta</path>
+      <action>Acció</action>
+      <shortcutPath>Ruta</shortcutPath>
+      <type>Tipus</type>
+      <dateCreated>Data de creació</dateCreated>
+      <score>Puntuació</score>
+    </header>
+    <title>
+      <typeASC>Ordena per tipus de document en ordre ascendent</typeASC>
+      <typeDESC>Ordena per tipus de document en ordre descendent</typeDESC>
+      <scoreASC>Ordena per la puntuació en ordre ascendent</scoreASC>
+      <scoreDESC>Ordena per la puntuació en ordre descendent</scoreDESC>
+      <nameASC>Ordena pel nom en ordre ascendent</nameASC>
+      <nameDESC>Ordena pel nom en ordre descendent</nameDESC>
+      <datecreatedASC>Ordena per la data de creació en ordre ascendent</datecreatedASC>
+      <datecreatedDESC>Ordena per la data de creació en ordre descendent</datecreatedDESC>
+    </title>
+    <tooltip>
+      <View>Veure aquest node</View>
+      <OpenFolder>Vés a la carpeta</OpenFolder>
+    </tooltip>
+  </UIShowAllFavouriteResult>
+  <UIShowAllHiddenResult>
+    <msg>
+      <not-support>No hi ha cap plantilla de visualització per a aquest node.</not-support>
+      <empty>No s'han trobat resultats.</empty>
+      <access-denied>No pot veure aquest node, perquè no s'admet aquesta plantilla o perquè es nega l'accés.</access-denied>
+      <query-invalid>La consulta no és vàlida.</query-invalid>
+    </msg>
+    <header>
+      <name>#{word.name}</name>
+      <path>Ruta</path>
+      <action>Acció</action>
+      <shortcutPath>Ruta</shortcutPath>
+      <type>Tipus</type>
+      <dateCreated>Data de creació</dateCreated>
+      <score>Puntuació</score>
+      <AddRemoveFavourite>Afegeix/Elimina a Favorits</AddRemoveFavourite>
+    </header>
+    <title>
+      <typeASC>Ordena per tipus de document en ordre ascendent</typeASC>
+      <typeDESC>Ordena per tipus de document en ordre descendent</typeDESC>
+      <scoreASC>Ordena per la puntuació en ordre ascendent</scoreASC>
+      <scoreDESC>Ordena per la puntuació en ordre descendent</scoreDESC>
+      <nameASC>Ordena pel nom en ordre ascendent</nameASC>
+      <nameDESC>Ordena pel nom en ordre descendent</nameDESC>
+      <datecreatedASC>Ordena per la data de creació en ordre ascendent</datecreatedASC>
+      <datecreatedDESC>Ordena per la data de creació en ordre descendent</datecreatedDESC>
+    </title>
+    <tooltip>
+      <View>Veure aquest node</View>
+      <OpenFolder>Vés a la carpeta</OpenFolder>
+      <RemoveHiddenAttribute>Fer-ho visible</RemoveHiddenAttribute>
+    </tooltip>
+  </UIShowAllHiddenResult>
+  <UIShowAllTrashResult>
+    <msg>
+      <not-support>No hi ha cap plantilla de visualització per a aquest node.</not-support>
+      <empty>No s'han trobat resultats</empty>
+      <access-denied>No pot veure aquest node, perquè no s'admet aquesta plantilla o perquè es nega l'accés.</access-denied>
+      <query-invalid>La consulta no és vàlida.</query-invalid>
+    </msg>
+    <header>
+      <name>#{word.name}</name>
+      <path>Ruta</path>
+      <action>Acció</action>
+      <shortcutPath>Ruta</shortcutPath>
+      <type>Tipus</type>
+      <dateCreated>Data de creació</dateCreated>
+      <score>Puntuació</score>
+    </header>
+    <title>
+      <typeASC>Ordena per tipus de document en ordre ascendent</typeASC>
+      <typeDESC>Ordena per tipus de document en ordre descendent</typeDESC>
+      <scoreASC>Ordena per la puntuació en ordre ascendent</scoreASC>
+      <scoreDESC>Ordena per la puntuació en ordre descendent</scoreDESC>
+      <nameASC>Ordena pel nom en ordre ascendent</nameASC>
+      <nameDESC>Ordena pel nom en ordre descendent</nameDESC>
+      <datecreatedASC>Ordena per la data de creació en ordre ascendent</datecreatedASC>
+      <datecreatedDESC>Ordena per la data de creació en ordre descendent</datecreatedDESC>
+    </title>
+    <tooltip>
+      <View>Veure aquest node</View>
+      <OpenFolder>Vés a la carpeta</OpenFolder>
+      <DeletePermanently>Suprimeix permanentment</DeletePermanently>
+      <RestoreFromTrash>Recupera de la Paperera</RestoreFromTrash>
+    </tooltip>
+  </UIShowAllTrashResult>
+  <UIConstraintsForm>
+    <label>
+      <constraints>UIConstraintsForm</constraints>
+      <metadataProperty>Propietats</metadataProperty>
+      <operator>Operador</operator>
+      <contains>Conté el valor</contains>
+      <notcontains>No conté cap valor</notcontains>
+    </label>
+    <action>
+      <Add>Afegeix</Add>
+      <Cancel>#{word.cancel}</Cancel>
+    </action>
+    <msg>
+      <properties-required>Cal el nom de la propietat.</properties-required>
+      <value-required>El camp valor es necessari.</value-required>
+      <date-invalid>La data inicial ha de ser anterior a la data final.</date-invalid>
+      <fromDate-required>La data inicial és necessària.</fromDate-required>
+      <must-choose-one>Ha de seleccionar almenys un tipus.</must-choose-one>
+      <properties-null>Ha de seleccionar les propietats abans del filtre.</properties-null>
+      <exactly-require>Ha d'omplir el valor exactament abans de desar aquesta condició.</exactly-require>
+      <fromDate-invalid>Tipus invàlid en el camp 'Des de'. Si us plau, torneu a seleccionar-lo o escriviu-lo correctament.</fromDate-invalid>
+      <toDate-invalid>Tipus invàlid en el camp 'Des de'. Si us plau, torneu a seleccionar-lo o escriviu-lo correctament.</toDate-invalid>
+    </msg>
+    <button>
+      <label-Add>Afegeix</label-Add>
+      <label-Cancel>#{word.cancel}</label-Cancel>
+    </button>
+  </UIConstraintsForm>
+  <ConstraintsForm>
+    <action>
+      <Add>Afegeix</Add>
+      <Cancel>#{word.cancel}</Cancel>
+    </action>
+  </ConstraintsForm>
+  <UIConstraintForm>
+    <tooltip>
+      <AddMetadataType>Afegeix Propietat</AddMetadataType>
+      <AddNodeType>Afegeix un tipus de Node</AddNodeType>
+      <AddCategory>Afegeix una categoria</AddCategory>
+      <FindExactly>Cerca coincidència exacta</FindExactly>
+    </tooltip>
+    <label>
+      <colon>:</colon>
+      <operator>Operador</operator>
+      <exactlyPro-properties>Propietat</exactlyPro-properties>
+      <exactlyPro-ContainExactly>Exactament</exactlyPro-ContainExactly>
+      <containPro-properties>Propietat</containPro-properties>
+      <containPro-Contain>Parcialment</containPro-Contain>
+      <notContainPro-properties>Propietat</notContainPro-properties>
+      <notContainPro-notContain>No conté</notContainPro-notContain>
+      <ConstraintOption-From>Des de</ConstraintOption-From>
+      <ConstraintOption-To>A</ConstraintOption-To>
+      <DocumentType-label>Tipus Document</DocumentType-label>
+      <Category-label>Categoria</Category-label>
+      <created>Creat</created>
+      <modified>Modificat</modified>
+      <and>I</and>
+      <or>O</or>
+    </label>
+  </UIConstraintForm>
+  <NodeTypePopup>
+    <title>
+      <UINodeTypeSelectForm>Selecciona un tipus de node</UINodeTypeSelectForm>
+    </title>
+  </NodeTypePopup>
+  <CategoryPopup>
+    <title>
+      <UICategoryManagerSearch>Afegeix categoria a la cerca</UICategoryManagerSearch>
+      <UIOneNodePathSelector>Selecciona una categoria</UIOneNodePathSelector>
+    </title>
+  </CategoryPopup>
+  <SaveQueryPopup>
+    <title>
+      <UISaveQueryForm>Formulari de consulta</UISaveQueryForm>
+    </title>
+  </SaveQueryPopup>
+  <UINodeTypeSelectForm>
+    <action>
+      <Cancel>#{word.cancel}</Cancel>
+      <Save>#{word.save}</Save>
+    </action>
+  </UINodeTypeSelectForm>
+  <UICompareExactlyForm>
+    <label>
+      <filter>Filtre:</filter>
+      <result>Resultats:</result>
+    </label>
+    <title>
+      <result>Filtre</result>
+    </title>
+    <button>
+      <label-Select>Selecciona</label-Select>
+      <label-Cancel>#{word.cancel}</label-Cancel>
+    </button>
+    <msg>
+      <not-result-found>No s'han trobat resultats.</not-result-found>
+    </msg>
+  </UICompareExactlyForm>
+  <UIJCRAdvancedSearch>
+    <label>
+      <name>Nom:</name>
+      <selectBox>Estil de consulta:</selectBox>
+      <query>Consulta:</query>
+    </label>
+    <action>
+      <Save>#{word.save}</Save>
+      <Cancel>#{word.cancel}</Cancel>
+      <Search>Cerca</Search>
+    </action>
+    <msg>
+      <!--DMS 2.4.x ECM-3566-->
+      <name-invalid>El nom és invàlid.</name-invalid>
+      <query-added>La consulta s'ha afegit correctament.</query-added>
+      <save_unSuccessful>No es pot desar la consulta. La declaració pot ser invàlida o el nom de la consulta ja existeix.</save_unSuccessful>
+      <invalid-queryStatement>La declaració de la consulta es invàlida.</invalid-queryStatement>
+      <value-save-null>Si us plau, introdueix la declaració de la consulta.</value-save-null>
+      <query-name-null>Si us plau, introdueix el nom de la consulta.</query-name-null>
+    </msg>
+  </UIJCRAdvancedSearch>
+  <EditQueryForm>
+    <label>
+      <name>Nom</name>
+      <selectBox>Estil de consulta</selectBox>
+      <query>Consulta</query>
+    </label>
+    <action>
+      <Save>#{word.save}</Save>
+      <Cancel>#{word.cancel}</Cancel>
+    </action>
+  </EditQueryForm>
+  <EditSavedQueryForm>
+    <title>
+      <EditQueryForm>Edita el formulari de consulta</EditQueryForm>
+    </title>
+  </EditSavedQueryForm>
+  <UIMetadataSelectForm>
+    <label>
+      <metadataType>Tipus de metadades</metadataType>
+    </label>
+    <action>
+      <Cancel>#{word.cancel}</Cancel>
+      <Add>Afegeix</Add>
+    </action>
+  </UIMetadataSelectForm>
+  <property1MetadataPopup>
+    <title>
+      <UISelectPropertyForm>Selecciona Propietat</UISelectPropertyForm>
+    </title>
+  </property1MetadataPopup>
+  <property2MetadataPopup>
+    <title>
+      <UISelectPropertyForm>Selecciona Propietat</UISelectPropertyForm>
+    </title>
+  </property2MetadataPopup>
+  <property3MetadataPopup>
+    <title>
+      <UISelectPropertyForm>Selecciona Propietat</UISelectPropertyForm>
+    </title>
+  </property3MetadataPopup>
+  <UISelectPropertyForm>
+    <label>
+      <metadataType>Tipus de metadades</metadataType>
+    </label>
+    <pLabel>Propietats:</pLabel>
+    <action>
+      <Add>Afegeix</Add>
+      <Cancel>#{word.cancel}</Cancel>
+    </action>
+  </UISelectPropertyForm>
+  <ExactlyFormPopup>
+    <title>
+      <UICompareExactlyForm>Formulari de Filtre</UICompareExactlyForm>
+    </title>
+  </ExactlyFormPopup>
+  <UIECMSearch>
+    <header>
+      <name>Nom</name>
+      <language>Idioma</language>
+      <query>Consulta</query>
+      <action>Accions</action>
+      <path>Ruta</path>
+    </header>
+  </UIECMSearch>
+  <UIResult>
+    <msg>
+      <not-found>No s'han trobat dades.</not-found>
+    </msg>
+    <header>
+      <action>Acció</action>
+    </header>
+  </UIResult>
+  <UISaveQueryForm>
+    <msg>
+      <query-name-null>Introdueix el nom de la consulta a desar.</query-name-null>
+      <access-denied>Accés denegat. No els permisos necessaris per desar aquesta consulta.</access-denied>
+      <save-failed>No pot desar la consulta, o bé perquè la declaració no és vàlida o perquè ja existeix el una amb aquest nom.</save-failed>
+    </msg>
+    <label>
+      <queryName>Nom de la consulta</queryName>
+    </label>
+    <action>
+      <Save>#{word.save}</Save>
+      <Cancel>#{word.cancel}</Cancel>
+    </action>
+  </UISaveQueryForm>
+  <UISavedQuery>
+    <header>
+      <name>Nom</name>
+      <type>Tipus</type>
+      <statement>Declaració</statement>
+      <permission>Permisos</permission>
+      <action>Accions</action>
+    </header>
+    <tooltip>
+      <Execute>Executa</Execute>
+      <Edit>Edita</Edit>
+      <Delete>Suprimeix</Delete>
+    </tooltip>
+    <label>
+      <no-children>Cap consulta està desada.</no-children>
+    </label>
+    <msg>
+      <confirm-delete-query>Està segur que vol suprimir aquesta consulta?</confirm-delete-query>
+      <not-result-found>No s'han trobat resultats.</not-result-found>
+    </msg>
+  </UISavedQuery>
+  <UIQueryResultPageIterator>
+    <label>
+      <results>Resultats</results>
+      <of-about>d'uns</of-about>
+      <of>de</of>
+    </label>
+  </UIQueryResultPageIterator>
+  <!--
+  ###############################################################################
+  #             org.exoplatform.ecm.webui.component.explorer.admin.UIExportNode #
+  ###############################################################################
+  -->
+  <UIExportNode>
+    <label>
+      <format>Format</format>
+      <nodePath>Ruta a Exportar</nodePath>
+      <zip>Zip</zip>
+      <systemView>Vista de sistema</systemView>
+      <documentView>Vista de documents</documentView>
+    </label>
+    <action>
+      <Cancel>#{word.cancel}</Cancel>
+      <Export>Exporta</Export>
+    </action>
+    <title>Exporta un node</title>
+  </UIExportNode>
+  <!--
+  ###############################################################################
+  #             org.exoplatform.ecm.webui.component.explorer.UIPopupAction     #
+  ###############################################################################
+  -->
+  <PopupUserSelector>
+    <title>
+      <UIUserContainer>Selecciona Permisos d'Usuari</UIUserContainer>
+    </title>
+  </PopupUserSelector>
+  <UIPopupTaxonomy>
+    <title>
+      <UICategoriesSelector>Afegeix Categories</UICategoriesSelector>
+      <UIOneNodePathSelector>Afegeix Categories</UIOneNodePathSelector>
+    </title>
+  </UIPopupTaxonomy>
+  <!--
+  ###############################################################################
+  #   org.exoplatform.ecm.webui.component.explorer.versions.UIVersionInfo       #
+  ###############################################################################
+  -->
+  <UIVersionInfo>
+    <tooltip>
+      <addLabel>Afegeix una Etiqueta</addLabel>
+      <removeLable>Elimina l'Etiqueta</removeLable>
+      <restoreVersion>Restaurar aquesta Versió</restoreVersion>
+      <viewVersion>Veure informació de la versió</viewVersion>
+      <deleteVersion>Suprimeix aquesta versió</deleteVersion>
+      <compareVersion>Compara amb la versió de base</compareVersion>
+    </tooltip>
+    <msg>
+      <have-no-view-template>La plantilla de vista no és compatible.</have-no-view-template>
+      <cannot-remove-version>No es pot eliminar la versió base.</cannot-remove-version>
+      <confirm-delete>Està segur que vol suprimir aquesta versió?</confirm-delete>
+      <not-checked-out>Ha de comprovar aquest node abans de restaurar.</not-checked-out>
+      <invalid-item-state>No pot restaurar aquesta versió, ja sigui perquè un o més elements han estat suprimits o traslladats en una altra sessió.</invalid-item-state>
+    </msg>
+    <action>
+      <close>#{word.close}</close>
+      <close-view>Tanca la visualització</close-view>
+    </action>
+  </UIVersionInfo>
+  <!--
+  ################################################################################
+  #  org.exoplatform.ecm.webui.component.explorer.auditing.UIAuditingInfo
+  ################################################################################
+  -->
+  <UIAuditingInfo>
+    <msg>
+      <noVersion>Cap versió</noVersion>
+    </msg>
+    <eventName>
+      <e_1>Node afegit</e_1>
+      <e_2>Node eliminat</e_2>
+      <e_4>Propietat afegida</e_4>
+      <e_16>Propietat canviada</e_16>
+      <e_8>Propietat eliminada</e_8>
+      <e_32>#{word.save}</e_32>
+      <e_64>Moure</e_64>
+      <e_128>Copia</e_128>
+      <e_256>Afegeix un Mixin</e_256>
+      <e_512>Elimina un Mixin</e_512>
+      <e_1024>Clona</e_1024>
+      <e_2048>Actualitza</e_2048>
+      <e_4096>Importa</e_4096>
+      <e_8192>Check In</e_8192>
+      <e_16384>Check out</e_16384>
+      <e_32768>Restaura</e_32768>
+      <e_65536>Unir</e_65536>
+      <e_131072>Cancel·lar la combinació</e_131072>
+      <e_262144>Combinació feta</e_262144>
+      <e_524288>Afegeix una etiqueta de versió</e_524288>
+      <e_1048576>Elimina l'Etiqueta de Versió</e_1048576>
+      <e_2097152>Elimina la Versió</e_2097152>
+      <e_4194304>Bloqueja</e_4194304>
+      <e_8388608>Desbloqueja</e_8388608>
+      <e_16777216>Lectura</e_16777216>
+    </eventName>
+    <label>
+      <operation>Operació</operation>
+      <userName>Nom d'usuari</userName>
+      <date>Data</date>
+      <version>Versió</version>
+    </label>
+  </UIAuditingInfo>
+
+  <!--
+  ###############################################################################
+  #   org.exoplatform.ecm.webui.component.explorer.versions.UIActivateVersion   #
+  ###############################################################################
+  -->
+  <UIActivateVersion>
+    <label>
+      <note>No ha estat activat el control de versions per a aquest node.</note>
+      <question>Esta segur que vol activar-la?</question>
+      <button-active>Activa</button-active>
+      <button-cancel>#{word.cancel}</button-cancel>
+    </label>
+    <msg>
+      <access-denied>No té permís per activar el control de versions en aquest node</access-denied>
+    </msg>
+  </UIActivateVersion>
+  <!--
+  ###############################################################################
+  #   org.exoplatform.ecm.webui.component.explorer.versions.UIActivePublication #
+  ###############################################################################
+  -->
+  <UIActivePublication>
+    <header>
+      <LifecycleName>Nom</LifecycleName>
+      <LifecycleDesc>Descripció</LifecycleDesc>
+      <action>Acció</action>
+    </header>
+    <action>
+      <Cancel>#{word.close}</Cancel>
+    </action>
+    <grid>
+      <msg>
+        <empty>No s'ha trobat cap plugin de publicació.</empty>
+      </msg>
+    </grid>
+    <msg>
+      <node-type-invalid>Només el tipus de node de document pot ser registrat en un cicle de llançament.</node-type-invalid>
+      <already-enroled>Aquest document ja ha estat registrat en un cicle de llançament.</already-enroled>
+    </msg>
+  </UIActivePublication>
+  <!--
+  ###############################################################################
+  #   org.exoplatform.ecm.webui.component.explorer.versions.UIActivateAuditing  #
+  ###############################################################################
+  -->
+  <UIActivateAuditing>
+    <label>
+      <note>L'auditoria no s'ha activat per a aquest node.</note>
+      <question>Està segur que vol activar-la?</question>
+    </label>
+    <action>
+      <activate>Activa</activate>
+      <cancel>#{word.cancel}</cancel>
+    </action>
+  </UIActivateAuditing>
+  <!--
+  ###############################################################################
+  #   org.exoplatform.ecm.webui.component.explorer.versions.UIDiff   #
+  ###############################################################################
+  -->
+  <UIDiff>
+    <label>
+      <diffTitle>Compara entre dues versions</diffTitle>
+      <noChange>Cap canvi entre dues versions</noChange>
+      <baseVerion>Versió de base</baseVerion>
+      <compareVerion>Versió</compareVerion>
+      <can-not-compare>No s'han pogut comparar dues versions</can-not-compare>
+    </label>
+  </UIDiff>
+  <!--
+  ###############################################################################
+  #       org.exoplatform.ecm.webui.component.explorer.admin.UIImportNode      #
+  ###############################################################################
+  -->
+  <UIImportNode>
+    <label>
+      <format>Format</format>
+      <systemView>Vista de sistema</systemView>
+      <documentView>Vista de documents</documentView>
+      <upload>Puja una Fitxer</upload>
+    </label>
+    <action>
+      <Cancel>#{word.cancel}</Cancel>
+      <Import>Importa</Import>
+    </action>
+    <title>Importa node</title>
+    <msg>
+      <import-successful>Importat correctament.</import-successful>
+      <filename-invalid>Selecciona un fitxer xml per importar-lo.</filename-invalid>
+      <filetype-error>No es pot importar el fitxer pujat. El fitxer .xml pot ser invàlid.</filetype-error>
+      <mimetype-invalid>Només pot importar fitxers .XML o.zip.</mimetype-invalid>
+      <access-denied>Accés denegat. No té permís per importar-hi.</access-denied>
+      <constraint-violation-exception>Impossible d'importar les dades. El tipus '{0}' no està permès en aquesta ubicació.</constraint-violation-exception>
+      <item-exists-exception>Un node referenciable entrant té el mateix UUID que un preexistent a l'àrea de treball.</item-exists-exception>
+    </msg>
+  </UIImportNode>
+  <!--
+  ###############################################################################
+  #         org.exoplatform.ecm.webui.component.explorer.versions.UILabelForm   #
+  ###############################################################################
+  -->
+  <UILabelForm>
+    <label>
+      <label>Etiqueta</label>
+    </label>
+    <action>
+      <Save>#{word.save}</Save>
+      <Cancel>#{word.cancel}</Cancel>
+    </action>
+    <title>Afegeix una Etiqueta</title>
+    <msg>
+      <label-invalid>L'etiqueta conté alguns caràcters no vàlids.</label-invalid>
+      <label-exist>'{0}' ja existeix.</label-exist>
+    </msg>
+  </UILabelForm>
+  <!--
+  ###############################################################################
+  #   org.exoplatform.ecm.webui.component.explorer.versions.UIRemoveLabelForm   #
+  ###############################################################################
+  -->
+  <UIRemoveLabelForm>
+    <title>Elimina l'Etiqueta</title>
+    <label>
+      <label>Selecciona una Etiqueta</label>
+    </label>
+    <action>
+      <Remove>Elimina</Remove>
+      <Cancel>#{word.cancel}</Cancel>
+    </action>
+  </UIRemoveLabelForm>
+  <!--
+  ###############################################################################
+  #    org.exoplatform.ecm.webui.component.explorer.versions.UIViewVersion      #
+  ###############################################################################
+  -->
+  <UIVersionTree>
+    <title>Arbre de nodes decundaris</title>
+  </UIVersionTree>
+  <UIViewVersion>
+    <label>
+      <nodeType>Tipus de node</nodeType>
+      <nodeName>Nom del Node</nodeName>
+      <VersionNumber>Número de versió</VersionNumber>
+      <VersionLabels>Etiquetes de versió</VersionLabels>
+      <VersionDate>Data de versió</VersionDate>
+      <PropertyName>Nom de Propietat</PropertyName>
+      <PropertyValue>Valors</PropertyValue>
+    </label>
+    <msg>
+      <not-supported>Aquesta funció no està suportada pel control de versions.</not-supported>
+    </msg>
+  </UIViewVersion>
+  <UIVersionList>
+    <title>Nom dels subnodes</title>
+  </UIVersionList>
+  <!--
+  ################################################################################
+  #       org.exoplatform.ecm.webui.component.explorer.admin.UICategoryManager #
+  ################################################################################
+  -->
+  <UICategoryManager>
+    <action>
+      <Close>#{word.close}</Close>
+    </action>
+    <tab>
+      <label>
+        <UICategoriesAddedList>Categories Referenciades</UICategoriesAddedList>
+        <UIOneNodePathSelector>Selecciona una categoria</UIOneNodePathSelector>
+      </label>
+    </tab>
+  </UICategoryManager>
+  <UICategoriesAddedList>
+    <header>
+      <path>Categoria</path>
+      <action>Accions</action>
+    </header>
+    <msg>
+      <access-denied>Accés denegat. No té permís d'accés en aquest node.</access-denied>
+      <confirm-delete>Està segur que vol suprimir aquesta referència?</confirm-delete>
+    </msg>
+    <action>
+      <title>
+        <Delete>Suprimeix</Delete>
+      </title>
+    </action>
+    <label>
+      <category>Categoria</category>
+      <actions>Acció</actions>
+      <delete>Suprimeix</delete>
+    </label>
+  </UICategoriesAddedList>
+  <UITreeList>
+    <header>
+      <name>Nom</name>
+      <action>Acció</action>
+    </header>
+    <info>
+      <child-not-found>Aquest node encara no te cap de secundari.</child-not-found>
+    </info>
+  </UITreeList>
+  <!--
+  ################################################################################
+  #       org.exoplatform.ecm.webui.component.explorer.admin.UIRelationManager #
+  ################################################################################
+  -->
+  <UIRelationManager>
+    <action>
+      <Close>#{word.close}</Close>
+    </action>
+    <tab>
+      <label>
+        <UIOneNodePathSelector>Selecciona una Relació</UIOneNodePathSelector>
+      </label>
+    </tab>
+    <tab>
+      <label>
+        <UIRelationsAddedList>Llista de Relacions</UIRelationsAddedList>
+      </label>
+    </tab>
+  </UIRelationManager>
+  <UIRelationsAddedList>
+    <header>
+      <path>Relacions</path>
+      <action>Accions</action>
+    </header>
+    <action>
+      <title>
+        <Delete>Suprimeix</Delete>
+      </title>
+    </action>
+    <msg>
+      <confirm-delete>Està segur que vol suprimir aquesta relació?</confirm-delete>
+      <can-not-add-itself>No es pot afegir una relació a si mateixa.</can-not-add-itself>
+    </msg>
+  </UIRelationsAddedList>
+  <!--
+  ###################################################################
+  #       org.exoplatform.ecm.webui.component.explorer.UIClipboard  #
+  ###################################################################
+  -->
+  <UIClipboard>
+    <header>
+      <path>Ruta</path>
+      <command>Cm</command>
+      <action>Acció</action>
+    </header>
+    <label>
+      <nocommand>No hi ha elements al porta-retalls.</nocommand>
+    </label>
+    <action>
+      <clearall>Neteja-ho Tot</clearall>
+    </action>
+    <msg>
+      <unable-pasted>No puc enganxar aquest node.</unable-pasted>
+      <node-pasted>El node {0} ha estat enganxat a la localització {1}. Aquesta operació ja s'ha desat.</node-pasted>
+    </msg>
+  </UIClipboard>
+  <!--
+  ###################################################################
+  #       org.exoplatform.ecm.webui.component.explorer.UIPopupMenu  #
+  ###################################################################
+  -->
+  <!--
+  ###################################################################################
+  #org.exoplatform.ecm.webui.component.explorer.popup.actions.UISelectDocumentForm  #
+  ###################################################################################
+  -->
+  <UISelectDocumentForm>
+    <label>
+      <selectTemplate>Selecciona la teva plantilla de la llista següent</selectTemplate>
+      <ThumbnailView>Visualització en miniatura</ThumbnailView>
+      <ListView>Vista de llista</ListView>
+      <Cancel>#{word.cancel}</Cancel>
+    </label>
+  </UISelectDocumentForm>
+  <!--
+  #######################################################################
+  #org.exoplatform.ecm.webui.component.explorerpopup.actions.UIDocumentForm  #
+  #######################################################################
+  -->
+  <UIDocumentForm>
+    <title>Afegeix un nou Document</title>
+    <action>
+      <Save>#{word.save}</Save>
+      <SaveAndClose>Desa i Tanca</SaveAndClose>
+      <ChangeType>Canvia el Tipus de Contingut</ChangeType>
+      <Fullscreen>Pantalla completa</Fullscreen>
+      <Cancel>#{word.cancel}</Cancel>
+      <Close>#{word.close}</Close>
+    </action>
+<tooltip>
+<FullScreen>Maximitza/Minimitza</FullScreen>
+</tooltip>
+    <msg>
+      <cannot-save>S'ha produït un error en desar el document.</cannot-save>
+      <in-versioning>Si us plau comprovi el node actual abans d'afegir un de nou.</in-versioning>
+      <not-support>No es pot carregar la plantilla de '{0}'.</not-support>
+      <value-invalid>'{0}' és un valor necessari.</value-invalid>
+      <repository-exception>S'ha produït un error en desar el document.</repository-exception>
+      <!--DMS 2.4.x; ECM-3543-->
+      <repository-exception-permission>No té permís per afegir un nou document en aquest node.</repository-exception-permission>
+      <not-allowed-same-name-sibling>No pot desar aquest document. Un element del mateix nom ja existeix.</not-allowed-same-name-sibling>
+      <numberformat-exception>No pot desar aquesta carpeta. El nom proporcionat ha de ser en format numèric.</numberformat-exception>
+      <item-not-found>Element no trobat. Aquest node (o el seu superior) s'ha pogut suprimir. Si us plau, feu clic al botó Recarrega.</item-not-found>
+    </msg>
+  </UIDocumentForm>
+  <!--
+  #################################################################################
+  #org.exoplatform.ecm.webui.component.explorer.actions.UIViewDocumentController  #
+  #################################################################################
+  -->
+  <UIViewDocumentController>
+    <tab>
+      <label>
+        <UIViewDocumentInfo>Informació</UIViewDocumentInfo>
+      </label>
+    </tab>
+    <action>
+      <Close>#{word.close}</Close>
+    </action>
+  </UIViewDocumentController>
+  <!--
+  #############################################################################
+  #       org.exoplatform.ecm.webui.component.explorer.search.UI  #
+  #############################################################################
+  -->
+  <!--
+  #############################################################################
+  #    org.exoplatform.ecm.webui.component.explorer.search.UIQuerySaveForm    #
+  #############################################################################
+  -->
+  <UIQuerySaveForm>
+    <title>Desa la consulta</title>
+    <label>
+      <query>Consulta</query>
+      <name>Nom de la consulta</name>
+    </label>
+    <action>
+      <Save>#{word.save}</Save>
+      <Cancel>#{word.cancel}</Cancel>
+    </action>
+  </UIQuerySaveForm>
+  <!--
+  #############################################################################
+  #       org.exoplatform.ecm.webui.component.explorer.admin.UIActionManager  #
+  #############################################################################
+  -->
+  <editActionPopup>
+    <title>
+      <UIActionForm>Editar Acció</UIActionForm>
+      <EditFormAction>Editar Acció</EditFormAction>
+    </title>
+  </editActionPopup>
+  <UIActionViewContainer>
+    <action>
+      <Cancel>#{word.cancel}</Cancel>
+    </action>
+  </UIActionViewContainer>
+  <UIActionList>
+    <header>
+      <name>#{word.name}</name>
+      <description>Descripció</description>
+  <lifecycle>Cicle de vida</lifecycle>
+  <triggeredaction>Acció provocada</triggeredaction>
+      <instanceOf>Instancia del tipus d'acció</instanceOf>
+      <action>Acció</action>
+    </header>
+    <msg>
+      <remove-popup-first>Ha de tancar la finestra d'edició abans de suprimir aquest node.</remove-popup-first>
+      <confirm-delete-action>Està segur que vol suprimir aquesta acció?</confirm-delete-action>
+      <template-empty>La plantilla '{0}' es nul·la o està buida.</template-empty>
+      <template-null>O bé és nul·la, o bé no té permís per accedir a aquesta plantilla.</template-null>
+      <access-denied>Accés denegat. No té permís per realitzar aquesta operació.</access-denied>
+    </msg>
+    <action>
+      <Close>#{word.close}</Close>
+      <View>Veure</View>
+      <Edit>Edita</Edit>
+      <Delete>Suprimeix</Delete>
+    </action>
+  </UIActionList>
+  <UIActionForm>
+    <action>
+      <Save>#{word.save}</Save>
+      <Back>#{word.back}</Back>
+    </action>
+    <label>
+      <name>Formulari d'Acció</name>
+    </label>
+    <msg>
+      <repository-exception>No pot desar aquesta acció. El nom proporcionat té alguns caràcters especials.</repository-exception>
+      <numberformat-exception>No pot desar aquesta acció. El nom proporcionat ha de ser en format numèric.</numberformat-exception>
+      <existed-action>El nom de l'acció '{0}' ja existeix. Selecciona una altre.</existed-action>
+      <unable-add-action>No es pot afegir aquesta acció.</unable-add-action>
+      <unable-add>No es pot afegir aquesta acció. Aquest node o bé és l'arrel o no té permisos.</unable-add>
+      <not-support>El formulari d'edició '{0}' no és suportat.</not-support>
+      <no-permission-add>Accés denegat. No té permisos per afegir una acció aquí.</no-permission-add>
+      <access-denied>Accés denegat. No té permís per accedir a aquesta plantilla.</access-denied>
+      <lifecycle-invalid>No pot afegir aquesta acció. La fase del cicle de vida de l'acció no és vàlida.</lifecycle-invalid>
+    </msg>
+    <title>Afegeix/Edita Acció</title>
+    <validator>
+      <validator>Validador</validator>
+      <destPath>Amb la ruta</destPath>
+    </validator>
+  </UIActionForm>
+  <UIActionTypeForm>
+    <label>
+      <actionType>Crea una acció d'aquest tipus</actionType>
+    </label>
+  </UIActionTypeForm>
+  <PopupComponent>
+    <title>
+      <UIOneNodePathSelector>Selecciona l'ubicació</UIOneNodePathSelector>
+      <UIPermissionSelector>Navegador de Permisos</UIPermissionSelector>
+      <UICategoriesSelector>Afegeix Categories</UICategoriesSelector>
+    </title>
+  </PopupComponent>
+  <EditFormAction>
+    <validator>
+      <validator>Validador</validator>
+      <destPath>Amb la ruta</destPath>
+    </validator>
+    <title>Formulari d'Acció</title>
+  </EditFormAction>
+  <!--
+  #############################################################################
+  #       org.exoplatform.ecm.webui.component.explorer.control.UIAddressBar   #
+  #############################################################################
+  -->
+  <UIAddressBar>
+    <msg>
+      <path-not-found>No s'ha trobat la ruta.</path-not-found>
+      <access-denied>Accés denegat. No té el dret a llegir el node.</access-denied>
+      <keyword-not-support>La paraula clau és invàlida. Alguns caràcters no són compatibles.</keyword-not-support>
+    </msg>
+    <label>
+      <exeButton>Anar</exeButton>
+      <address>Adreça:</address>
+    </label>
+    <title>
+      <exeButton>Anar</exeButton>
+      <backButton>Torna al node anterior</backButton>
+      <showHistory>Mostra l'històric d'adreces</showHistory>
+      <changeNode>Canvia Node</changeNode>
+    </title>
+  </UIAddressBar>
+  <!--
+  ###################################################################################
+  # org.exoplatform.ecm.webui.component.explorer.popup.actions.UIWatchDocumentForm  #
+  ###################################################################################
+  -->
+  <UIWatchDocumentForm>
+    <action>
+      <Watch>Segueix</Watch>
+      <Cancel>#{word.cancel}</Cancel>
+      <Continue>Continua</Continue>
+      <Unwatch>Deixa de Seguir</Unwatch>
+    </action>
+    <label>
+      <notificationType>Tipus de notificació:</notificationType>
+    </label>
+    <msg>
+      <not-support>Aquest tipus de notificació no està suportat. Selecciona un altre tipus.</not-support>
+      <watching-successfully>Està seguint aquest document.</watching-successfully>
+      <unwatching-successfully>Ha deixat la llista de seguiments amb èxit.</unwatching-successfully>
+      <node-iswatching>Aquest document té seguiment.</node-iswatching>
+    </msg>
+  </UIWatchDocumentForm>
+  <!--
+  ###################################################################################
+  #   org.exoplatform.ecm.webui.component.explorer.popup.actions.UITaggingForm      #
+  ###################################################################################
+  -->
+  <UITaggingForm>
+    <label>
+      <names>Etiquetes:</names>
+      <linked>Etiquetes enllaçades:</linked>
+      <tagSet>UITaggingForm</tagSet>
+    </label>
+    <action>
+      <AddTag>Afegeix</AddTag>
+      <Cancel>#{word.close}</Cancel>
+    </action>
+    <msg>
+      <name-exist>El nom d'etiqueta '{0}' ja existeix.</name-exist>
+      <tagName-invalid>El nom de l'etiqueta conté alguns caràcters invàlids.</tagName-invalid>
+      <tagName-empty-or-invalid>El nom d'etiqueta és buit o té alguns caràcters no vàlids.</tagName-empty-or-invalid>
+      <tag-name-empty>El nom de l'etiqueta està buit</tag-name-empty>
+      <tag-name-duplicate>Els noms de les etiquetes d'entrada estan duplicats.</tag-name-duplicate>
+      <tagName-too-long>Una de les etiquetes introduïdes era massa llarga. El nom de l'etiqueta ha de ser de menys de 30 caràcters.</tagName-too-long>
+      <path-not-found>Aquesta etiqueta s'ha suprimit o canviat. Si us plau, feu clic al botó Recarrega.</path-not-found>
+    </msg>
+    <introduction>
+      <tagName>Separar les etiquetes múltiples amb comes ","</tagName>
+    </introduction>
+  </UITaggingForm>
+
+  <!--
+  ###################################################################################
+  # org.exoplatform.ecm.webui.component.explorer.popup.info.UIMetadataContainer     #
+  ###################################################################################
+  -->
+  <UIViewMetadataContainer>
+    <msg>
+      <path-not-found>El node no admet aquesta vista.</path-not-found>
+    </msg>
+  </UIViewMetadataContainer>
+  <!--
+  ###################################################################################
+  # org.exoplatform.ecm.webui.component.explorer.popup.info.UIViewMetadataForm      #
+  ###################################################################################
+  -->
+  <UIViewMetadataForm>
+    <action>
+      <Save>#{word.save}</Save>
+      <Cancel>#{word.cancel}</Cancel>
+    </action>
+  </UIViewMetadataForm>
+  <metadataForm>
+    <title>
+      <UIViewMetadataForm>Afegeix/Edita les propietats</UIViewMetadataForm>
+    </title>
+  </metadataForm>
+  <UIViewMetadataTemplate>
+    <msg>
+      <access-denied>Accés denegat. O bé no ets el propietari, o bé no té permís d'edició en aquest node.</access-denied>
+    </msg>
+  </UIViewMetadataTemplate>
+  <!--
+  ###################################################################################
+  # Validator messages                                                              #
+  ###################################################################################
+  -->
+  <ECMNameValidator>
+    <msg>
+      <Invalid-char>El camp '{0}' conté alguns caràcters no vàlids. Si us plau, introdueix un altre valor.</Invalid-char>
+      <empty-input>El valor del camp '{0}' és nul o està buit.</empty-input>
+    </msg>
+  </ECMNameValidator>
+  <DateTimeValidator>
+    <msg>
+      <Invalid-input>El camp '{0}' amb el valor '{1}' no és vàlid.</Invalid-input>
+    </msg>
+  </DateTimeValidator>
+  <CronExpressionValidator>
+    <invalid-input>L'expressió cron no és vàlida. Si us plau comprovi la sintaxi.</invalid-input>
+  </CronExpressionValidator>
+  <EmptyFieldValidator>
+    <msg>
+      <empty-input>Si us plau, omple el camp '{0}'.</empty-input>
+    </msg>
+  </EmptyFieldValidator>
+  <CategoryValidator>
+    <msg>
+      <non-categories>Les categories estan equivocades. Si us plau, selecciona una categoria bona.</non-categories>
+    </msg>
+  </CategoryValidator>
+  <!--
+  ###################################################################################
+  # JCR Exceptions manager                                                              #
+  ###################################################################################
+  -->
+  <ReferentialIntegrityException>
+    <msg>L'acció ha fallat. Encara hi han alguns elements referenciats en l'àrea de treball.</msg>
+  </ReferentialIntegrityException>
+  <ItemExistsException>
+    <msg>Aquest element ja existeix.</msg>
+  </ItemExistsException>
+  <AccessControlException>
+    <msg>Accés denegat. No té permís per fer aquesta acció.</msg>
+  </AccessControlException>
+  <AccessDeniedException>
+    <msg>Accés denegat.</msg>
+  </AccessDeniedException>
+  <ItemNotFoundException>
+    <msg>No s'ha trobat l'element. Ha pogut haver estat eliminat o canviat.</msg>
+  </ItemNotFoundException>
+  <PathNotFoundException>
+    <msg>No s'ha trobat la ruta. Ha pogut haver estat eliminada o canviada.</msg>
+  </PathNotFoundException>
+  <ConstraintViolationException>
+    <msg>No pots realitzar aquesta acció degut a algunes limitacions.</msg>
+  </ConstraintViolationException>
+  <!--
+  ###################################################################################
+  # Publication Manage                                                              #
+  ###################################################################################
+  -->
+  <UIPublicationForm>
+    <label>
+      <published>Publicat</published>
+      <non-published>No publicat</non-published>
+      <public>Públic</public>
+      <private>Privat</private>
+      <state>Estat</state>
+      <visibility>Visibilitat</visibility>
+      <nodeName>Nom del Node:</nodeName>
+      <lifecycleName>Nom del cicle de vida</lifecycleName>
+      <stateName>Nom de l'estat</stateName>
+    </label>
+    <action>
+      <Save>#{word.save}</Save>
+      <UnsubcriberLifeCycle>Donar-se de baixa</UnsubcriberLifeCycle>
+      <Cancel>#{word.cancel}</Cancel>
+    </action>
+  </UIPublicationForm>
+  <!--
+  ###################################################################################
+  # JCR Browser                                                             #
+  ###################################################################################
+  -->
+  <UIWorkspaceList>
+    <label>
+      <workspaceName>Àrea de treball:</workspaceName>
+      <rootNodeInfo>Ruta a l'Arrel:</rootNodeInfo>
+      <rootPath>Ruta a l'Arrel:</rootPath>
+    </label>
+  </UIWorkspaceList>
+  <pathSelector>
+    <title>
+      <UIOneNodePathSelector>Selector de node</UIOneNodePathSelector>
+    </title>
+  </pathSelector>
+  <!--
+  ###################################################################################
+  # Others                                                                          #
+  ###################################################################################
+  -->
+  <EmailAddressValidator>
+    <msg>
+      <Invalid-input>L'adreça de correu no és vàlida.</Invalid-input>
+    </msg>
+  </EmailAddressValidator>
+  <UIFormInputSetWithAction>
+    <msg>
+      <confirm-delete>Està segur que ho vol suprimir?</confirm-delete>
+    </msg>
+  </UIFormInputSetWithAction>
+  <RepeatCountValidator>
+    <msg>
+      <invalid-value>El valor del camp 'Nombre de repeticions' no és vàlid. S'admeten només enters o -1.</invalid-value>
+    </msg>
+  </RepeatCountValidator>
+  <RepeatIntervalValidator>
+    <msg>
+      <invalid-value>El valor del camp 'Interval de temps' no és vàlid. S'admeten només enters o -1.</invalid-value>
+    </msg>
+  </RepeatIntervalValidator>
+  <UIPermissionSelector>
+    <label>
+      <selectGroup>Selecciona Grup</selectGroup>
+      <selectUser>Selecciona usuari/a</selectUser>
+      <selectMembership>Selecciona l'Afiliació</selectMembership>
+    </label>
+  </UIPermissionSelector>
+  <!--
+  ###################################################################################
+  # org.exoplatform.ecm.jcr.ECMStandardPropertyNameValidator                        #
+  ###################################################################################
+  -->
+  <ECMStandardPropertyNameValidator>
+    <msg>
+      <empty-input>El valor del camp '{0}' és nul o està buit.</empty-input>
+      <Invalid-char>El camp '{0}' conté alguns caràcters no vàlids. Si us plau, introdueix un altre valor.</Invalid-char>
+    </msg>
+  </ECMStandardPropertyNameValidator>
+  <!--
+  ###################################################################################
+  # org.exoplatform.ecm.jcr.SearchValidator                                     #
+  ###################################################################################
+  -->
+  <SearchValidator>
+    <msg>
+      <empty-input>El valor d'aquest camp és nul o està buit.</empty-input>
+      <Invalid-char>Aquest camp conté alguns caràcters invàlids. Si us plau, introdueix un altre valor.</Invalid-char>
+      <Invalid-char2>Al número ha de seguir-li el caràcter '~'.</Invalid-char2>
+      <Invalid-char1>El número seguit pel caràcter '~' ha de estar entre 0 i 1.</Invalid-char1>
+      <Invalid-char3>Al número ha de seguir-li el caràcter '^'.</Invalid-char3>
+      <Invalid-char4>Cap espai està permès a prop del caràcter '~'.</Invalid-char4>
+      <Invalid-char5>Cap espai està permès a prop del caràcter '^'.</Invalid-char5>
+    </msg>
+  </SearchValidator>
+  <!--
+  ###################################################################################
+  # PublicationService                                                              #
+  ###################################################################################
+  -->
+  <UIPublicationLogList>
+    <header>
+      <date>Data</date>
+      <newState>Nou estat</newState>
+      <user>Usuari</user>
+      <description>Descripció</description>
+      <version>Versió</version>
+      <visibility>Visibilitat</visibility>
+    </header>
+    <action>
+      <Close>#{word.close}</Close>
+    </action>
+  </UIPublicationLogList>
+  <!--
+  ###################################################################################
+  # UIVersionTreeList                                                             #
+  ###################################################################################
+  -->
+  <UIVersionTreeList>
+    <header>
+      <version>Versió</version>
+      <state>Estat</state>
+    </header>
+  </UIVersionTreeList>
+  <!--
+  ###################################################################################
+  # UIThumbnailForm                                                             #
+  ###################################################################################
+  -->
+  <UIThumbnailForm>
+    <action>
+      <Save>#{word.save}</Save>
+      <Cancel>#{word.cancel}</Cancel>
+      <RemoveThumbnail>Treure miniatura</RemoveThumbnail>
+    </action>
+    <label>
+      <mediumSize>Imatge en miniatura</mediumSize>
+      <SelectFile>Tria la imatge en miniatura</SelectFile>
+    </label>
+    <msg>
+      <mimetype-incorrect>Tipus de fitxer incorrecte. Les miniatures només es poden crear a partir de .JPG, .PNG o arxius en format GIF.</mimetype-incorrect>
+      <access-denied>Accés denegat. No té permís per afegir una miniatura a aquest node.</access-denied>
+      <confirm-delete>Està segur que vol suprimir aquesta miniatura?</confirm-delete>
+      <is-checked-in>Aquest node està protegit. Si us plau, desprotegeix-lo abans de realitzar qualsevol acció.</is-checked-in>
+      <fileName-error>Si us plau, selecciona el fitxer a pujar.</fileName-error>
+    </msg>
+    <title>
+      <remove-thumbnail>Elimina aquesta vinyeta</remove-thumbnail>
+    </title>
+  </UIThumbnailForm>
+  <!--
+  ###################################################################################
+  # UIAnyPermission                                                                 #
+  ###################################################################################
+  -->
+  <UIAnyPermission>
+    <label>
+      <anyPermission>Qualsevol Permís</anyPermission>
+    </label>
+  </UIAnyPermission>
+
+  <anyPermission>
+    <title>
+      <AddAnyPermission>Estableix Qualsevol Permís</AddAnyPermission>
+    </title>
+  </anyPermission>
+  <!--
+  ###################################################################################
+  # UICategoriesAddedList                                                           #
+  ###################################################################################
+  -->
+  <UICategoriesSelector>
+    <action>
+      <close>#{word.close}</close>
+    </action>
+  </UICategoriesSelector>
+  <!--
+  ###################################################################################
+  # Since ECM version 2.2                                                             #
+  ###################################################################################
+  -->
+  <UIGroupMemberSelector>
+    <label>
+      <selectGroup>Selecciona Grup</selectGroup>
+      <selectUser>Selecciona usuari/a</selectUser>
+      <selectMembership>Selecciona l'Afiliació</selectMembership>
+    </label>
+  </UIGroupMemberSelector>
+  <!--
+  ###Since ECM version 2.2##############
+  -->
+ 
+  <!--
+  ### Since ECM version 2.3 Alpha##############
+  Access directly a JCR FE drive
+  -->
+  <UIJCRExplorerPortlet>
+    <nopermission>O bé no hi ha una unitat, o bé no té permís per accedir-hi.</nopermission>
+  </UIJCRExplorerPortlet>
+
+  <UIJcrExplorerEditForm>
+    <title>Edita l'Explorador de fitxers</title>
+    <action>
+      <Edit>Edita</Edit>
+      <Save>#{word.save}</Save>
+      <Cancel>#{word.cancel}</Cancel>
+    </action>
+    <label>
+      <uploadFileSizeLimitMB>Limitar la mida dels fitxers afegits (MB)</uploadFileSizeLimitMB>
+      <isDirectlyDrive>Accés directe als lectors</isDirectlyDrive>
+      <driveName>Nom de la unitat</driveName>
+      <usecase>Selecciona un tipus</usecase>
+      <SelectNodePath>Selecciona la ruta</SelectNodePath>
+      <showTopBar>Mostra la barra de dalt</showTopBar>
+      <showActionBar>Mostra la barra d'acció</showActionBar>
+      <showSideBar>Mostra el Panell de l'esquerra</showSideBar>
+      <showFilterBar>Mostra la barra de filtres</showFilterBar>
+      <nodePath>Selecciona la ruta</nodePath>
+    </label>
+  </UIJcrExplorerEditForm>
+
+  <UIDriveSelector>
+    <label>
+      <driveName>Nom de la unitat</driveName>
+      <action>Acció</action>
+      <adddrives>Afegeix unitats</adddrives>
+    </label>
+  </UIDriveSelector>
+  <UIJcrExplorerEditForm>
+    <label>
+      <DriveNameInput>UI JCR Explorer Edit Form</DriveNameInput>
+    </label>
+    <msg>
+      <personal-usecase>La unitat privada de l'usuari actual s'utilitzarà quan seleccionis el cas d'utilització Personal.</personal-usecase>
+      <drive-edit-permission>No pot editar el nom de la unitat. Si us plau, faci clic al botó Edita.</drive-edit-permission>
+      <path-edit-permission>No pot editar la ruta. Si us plau, fes clic al botó Edita.</path-edit-permission>
+    </msg>
+  </UIJcrExplorerEditForm>
+
+  <PopUpSelectDrive>
+    <title>
+      <UIDriveSelector>Selecciona unitat</UIDriveSelector>
+    </title>
+  </PopUpSelectDrive>
+
+  <PopupSelectPath>
+    <title>
+      <UIOneNodePathSelector>Selecciona el Node</UIOneNodePathSelector>
+    </title>
+  </PopupSelectPath>
+
+  <DriveNameInput>
+    <title>
+      <SelectDrive>Selecciona unitat</SelectDrive>
+    </title>
+  </DriveNameInput>
+
+  <!--
+  ### Since ECM version 2.4.x ##############
+  -->
+  <UIActionBar>
+    <tooltip>
+      <AddSymLink>Afegeix un enllaç simbòlic</AddSymLink>
+      <AddLocalizationLink>Afegeix una traducció</AddLocalizationLink>
+    </tooltip>
+  </UIActionBar>
+
+  <UIPopupWindow>
+    <title>
+      <UISymLinkManager>Gestor d'Enllaços simbòlics</UISymLinkManager>
+      <UIAddTranslationManager>Afegeix una traducció</UIAddTranslationManager>
+    </title>
+  </UIPopupWindow>
+
+  <UISymLinkForm>
+    <label>
+      <symLinkName>Nom del enllaç simbòlic</symLinkName>
+      <pathNode>Ruta al Node</pathNode>
+    </label>
+    <action>
+      <Save>#{word.save}</Save>
+      <Cancel>#{word.cancel}</Cancel>
+    </action>
+    <msg>
+      <addFolder-successful>L'enllaç simbòlic '{0}' s'ha afegit correctament.</addFolder-successful>
+      <name-invalid>Si us plau, introdueix el nom de l'enllaç simbòlic.</name-invalid>
+      <name-not-allowed>Aquest nom no està permès.</name-not-allowed>
+      <fileName-error>El nom del fitxer no és vàlid.</fileName-error>
+      <constraint-violation>No pots afegir el tipus de node '{0}' al node actual.</constraint-violation>
+      <repository-exception>Accés denegat. No té permís per afegir l'enllaç simbòlic a aquest node.</repository-exception>
+      <numberformat-exception>No pot desar aquesta carpeta. El nom proporcionat ha de ser en format numèric.</numberformat-exception>
+      <path-node-invalid>Si us plau introdueix la ruta al node.</path-node-invalid>
+      <path-node-not-allowed>Aquest nom no està permès.</path-node-not-allowed>
+      <non-node>No té drets d'accés al node de destí.</non-node>
+      <cannot-save>No pot afegir un enllaç simbòlic per a aquest tipus de node.</cannot-save>
+      <item-exists-exception>El nom del node ja existeix.</item-exists-exception>
+      <translation-node-same-language-default>El node de traducció té el mateix idioma que l'idioma per defecte del node actual.</translation-node-same-language-default>
+      <UnsupportedRepositoryOperationException>Aquest node de destí no es referenciat.</UnsupportedRepositoryOperationException>
+    </msg>
+  </UISymLinkForm>
+  
+  <UIAddTranslationForm>
+    <label>
+      <symLinkName>Nom del enllaç simbòlic</symLinkName>
+      <pathNode>Ruta del document:</pathNode>
+      <note>Selecciona un altre document que servirà com traducció</note>
+    </label>
+    <action>
+      <Save>#{word.save}</Save>
+      <Cancel>#{word.cancel}</Cancel>
+      <SelectDocument>Seleccioni el Document</SelectDocument>
+    </action>
+    <msg>
+      <addFolder-successful>L'enllaç simbòlic '{0}' s'ha afegit correctament.</addFolder-successful>
+      <name-invalid>Si us plau, introdueix el nom de l'enllaç simbòlic.</name-invalid>
+      <name-not-allowed>Aquest nom no està permès.</name-not-allowed>
+      <fileName-error>El nom del fitxer no és vàlid.</fileName-error>
+      <constraint-violation>No pots afegir el tipus de node '{0}' al node actual.</constraint-violation>
+      <repository-exception>Accés denegat. No té permís per afegir l'enllaç simbòlic a aquest node.</repository-exception>
+      <numberformat-exception>No pot desar aquesta carpeta. El nom proporcionat ha de ser en format numèric.</numberformat-exception>
+      <path-node-invalid>Si us plau introdueix la ruta al node.</path-node-invalid>
+      <path-node-not-allowed>Aquest nom no està permès.</path-node-not-allowed>
+      <non-node>No té drets d'accés al node de destí.</non-node>
+      <cannot-save>S'ha produït un error en crear l'enllaç simbòlic.</cannot-save>
+      <item-exists-exception>El nom del node ja existeix.</item-exists-exception>
+      <translation-node-same-language-default>El node de traducció té el mateix idioma que l'idioma per defecte del node actual.</translation-node-same-language-default>
+      <UnsupportedRepositoryOperationException>Aquest node de destí no es referenciat.</UnsupportedRepositoryOperationException>
+    </msg>
+  </UIAddTranslationForm>
+
+  <UIPopupSymLink>
+    <title>
+      <UIOneNodePathSelector>Selecciona el node de destí</UIOneNodePathSelector>
+    </title>
+  </UIPopupSymLink>
+  <UIPopupSymLink>
+    <title>
+      <UIContentSelectorOne>Seleccioni el Document</UIContentSelectorOne>
+    </title>
+  </UIPopupSymLink>
+
+  <ECMContextMenu>
+    <event>
+      <AddSymLink>Afegeix un enllaç simbòlic</AddSymLink>
+      <AddLocalizationLink>Afegeix una traducció</AddLocalizationLink>
+    </event>
+  </ECMContextMenu>
+
+  <UIWorkingArea>
+    <msg>
+      <create-link-problem>No pot crear un enllaç pel node '{0}' a "{1}".</create-link-problem>
+      <dest-node-is-link>El node de destí '{0}' ja és un enllaç simbòlic, pel que no pot crear un enllaç simbòlic al seu interior.</dest-node-is-link>
+      <selected-is-link>El node seleccionat '{0}' ja és un vincle, pel que no es pot crear un punt d'enllaç a un altre enllaç.</selected-is-link>
+      <confirm-create-link>Vol crear un enllaç a aquesta ubicació?</confirm-create-link>
+    </msg>
+  </UIWorkingArea>
+
+  <ECMContextMenu>
+    <event>
+      <CreateLink>Crea un enllaç</CreateLink>
+    </event>
+  </ECMContextMenu>
+
+  <UIWorkspaceList>
+    <msg>
+      <AccessDeniedException>Accés denegat. No té permís de lectura per a aquesta àrea de treball.</AccessDeniedException>
+    </msg>
+    <label>
+      <taxonomyTree>Arbre de Categories</taxonomyTree>
+    </label>
+  </UIWorkspaceList>
+
+  <UIPopupTaxonomy>
+    <title>
+      <UIOneTaxonomySelector>Afegeix Categories</UIOneTaxonomySelector>
+    </title>
+  </UIPopupTaxonomy>
+
+  <UITreeTaxonomyList>
+    <label>
+      <taxonomyTree>Arbre de Categories:</taxonomyTree>
+      <rootNodePath>Arbre Arrel:</rootNodePath>
+      <rootNodeInfo>UITreeTaxonomyList</rootNodeInfo>
+    </label>
+  </UITreeTaxonomyList>
+
+  <UIActionBar>
+    <tooltip>
+      <ManageSimpleCategories>Gestió Simple de les Categories</ManageSimpleCategories>
+    </tooltip>
+  </UIActionBar>
+
+  <UISimpleCategoryManager>
+    <tab>
+      <label>
+        <UICategoriesAddedList>Categories Referenciades</UICategoriesAddedList>
+        <UIOneNodePathSelector>Selecciona una categoria</UIOneNodePathSelector>
+      </label>
+    </tab>
+  </UISimpleCategoryManager>
+
+  <UICategoryManager>
+    <tab>
+      <label>
+        <UIOneTaxonomySelector>Selecciona una categoria</UIOneTaxonomySelector>
+      </label>
+    </tab>
+  </UICategoryManager>
+
+  <UISimpleCategoryManager>
+    <action>
+      <Close>#{word.close}</Close>
+    </action>
+  </UISimpleCategoryManager>
+  <UIPopupWindow>
+    <title>
+      <UISimpleCategoryManager>Afegeix una categoria</UISimpleCategoryManager>
+    </title>
+  </UIPopupWindow>
+  <UICategoriesAddedList>
+    <msg>
+      <ItemExistsException>El nom de la categoria ja existeix.</ItemExistsException>
+    </msg>
+  </UICategoriesAddedList>
+
+  <UIConfirmMessage>
+    <label>
+      <Close>#{word.cancel}</Close>
+      <OK>Suprimeix</OK>
+      <ReplaceData>Substitueix les dades</ReplaceData>
+      <Back>Torna a canviar el nom</Back>
+      <Keepfile>Manté tots dos fitxers</Keepfile>
+    </label>
+  </UIConfirmMessage>
+
+  <UIRestoreConfirmMessage>
+    <label>
+      <Close>#{word.close}</Close>
+      <OK>Accepta</OK>
+      <ReplaceData>Substitueix les dades</ReplaceData>
+      <Back>Torna a canviar el nom</Back>
+      <Keepfile>Manté tots dos fitxers</Keepfile>
+    </label>
+  </UIRestoreConfirmMessage>
+
+
+  <PopupComponent>
+    <title>
+      <UIOneTaxonomySelector>Afegeix Categories</UIOneTaxonomySelector>
+    </title>
+  </PopupComponent>
+
+  <UIWorkingArea>
+    <msg>
+      <can-not-move-to-itself>No pot moure el fitxer, perquè la carpeta de destí és la mateixa que la carpeta origen.</can-not-move-to-itself>
+      <is-editing>No pot desplaçar un document mentre s'està editant. Si us plau tanqueu-lo primer.</is-editing>
+    </msg>
+  </UIWorkingArea>
+
+  <UIImportNode>
+    <label>
+      <behavior>Comportament UUID</behavior>
+      <versionHistory>Històric de versions</versionHistory>
+    </label>
+    <msg>
+      <history-invalid-type>Tipus de fitxer invàlid en l'històric de versions. S'admeten només fitxers .zip.</history-invalid-type>
+      <history-invalid-content>Contingut invàlid a l'històric de versions. Si us plau, selecciona per importar un tipus de fitxer que estigui admès.</history-invalid-content>
+    </msg>
+  </UIImportNode>
+
+  <Import>
+    <Behavior>
+      <type0>Crea un nou node</type0>
+      <type1>Elimina l'Existent</type1>
+      <type2>Substitueix el node existent</type2>
+      <type3>Llança una excepció</type3>
+    </Behavior>
+  </Import>
+
+  <UIExportNode>
+    <action>
+      <ExportHistory>Exporta l'històric</ExportHistory>
+    </action>
+  </UIExportNode>
+
+  <UIPopupMenu>
+    <msg>
+      <node-locked-other-person>Aquest node o seu node principal és bloquejat per un altre usuari, per tant no es pot suprimir.</node-locked-other-person>
+    </msg>
+  </UIPopupMenu>
+
+  <Import>
+    <label>
+      <docview>Vista de documents</docview>
+      <sysview>Vista de sistema</sysview>
+    </label>
+  </Import>
+
+  <UIDocumentForm>
+    <msg>
+      <do-not-permission>No té permís per carregar la plantilla '{0}'.</do-not-permission>
+    </msg>
+  </UIDocumentForm>
+
+  <!--
+  ###################################################################################
+  #             org.exoplatform.ecm.webui.component.explorer.UIActionBar                #
+  #                           Localize tab                                                                                    #
+  ###################################################################################
+  -->
+  <UIActionBar>
+    <obtion>
+      <Admin>Admin</Admin>
+      <Info>Informació</Info>
+      <Actions>Accions</Actions>
+      <Collaboration>Col. laboració</Collaboration>
+      <Search>Cerca</Search>
+    </obtion>
+  </UIActionBar>
+
+  <UIPopupMenu>
+    <msg>
+      <can-not-unlock-node-is-checked-in>No pot desbloquejar perquè el node '{0}' (o el seu superior) està protegit.</can-not-unlock-node-is-checked-in>
+    </msg>
+  </UIPopupMenu>
+
+  <!--
+   #############  From DMS 2.5 #############
+  -->
+  <UIActionBar>
+    <msg>
+      <cannot-enable-version>No es pot activar el control de versions del node.</cannot-enable-version>
+    </msg>
+  </UIActionBar>
+  <UIPopupMenu>
+    <msg>
+        <cannot-readsource>No pots llegir dades des del node d'origen.</cannot-readsource>
+    </msg>
+  </UIPopupMenu>
+  <UIUploadForm>
+    <msg>
+      <upload-not-null>Si us plau puja l'arxiu abans d'afegir una categoria.</upload-not-null>
+    </msg>
+  </UIUploadForm>
+  <UIActionBar>
+    <msg>
+      <allow-setProperty>Cal definir una propietat per aquest grup.</allow-setProperty>
+    </msg>
+  </UIActionBar>
+
+  <UIActionForm>
+    <msg>
+      <name-not-allowed>Aquest nom d'acció no està permès.</name-not-allowed>
+    </msg>
+  </UIActionForm>
+
+  <UISaveQueryForm>
+    <msg>
+      <name-not-allowed>Aquest nom de consulta no està permès.</name-not-allowed>
+    </msg>
+  </UISaveQueryForm>
+  <UISimpleSearch>
+    <msg>
+      <name-not-allowed>No està permès una paraula o frase en el contingut.</name-not-allowed>
+    </msg>
+  </UISimpleSearch>
+
+ 
+    <!--
+   #############  From DMS 2.6 #############
+   -->
+  <ECMContextMenu>
+      <event>
+        <Permlink>Veure Document</Permlink>
+      </event>
+  </ECMContextMenu>
+  
+
+  <!--
+    ############  From DMS 2.6 ##############
+   -->
+  <UIFolderForm>
+    <label>
+      <nt_folder>Carpeta de Documents</nt_folder>
+      <nt_unstructured>Contingut</nt_unstructured>
+      <exo_cssFolder>Carpeta CSS</exo_cssFolder>
+      <exo_jsFolder>Carpeta de Javascript</exo_jsFolder>
+      <exo_linkFolder>Link Folder</exo_linkFolder>
+      <exo_webFolder>Carpeta de contingut web</exo_webFolder>
+   </label>
+  </UIFolderForm>
+
+  <Comments>
+    <tooltip>
+      <remove-comment>Elimina aquest comentari</remove-comment>
+      <edit-comment>Edita aquest comentari</edit-comment>
+    </tooltip>
+  </Comments>
+  <UIDocumentInfo>
+    <msg>
+      <confirm-deletecomment>Està segur que vol suprimir aquest comentari?</confirm-deletecomment>
+    </msg>
+  </UIDocumentInfo>
+
+ <UIExportNode>
+  <msg>
+    <OutOfMemoryError>Ha de seleccionar la vista de sistema mentre exporta una gran quantitat de dades.</OutOfMemoryError>
+  </msg>
+ </UIExportNode>
+ <Taxonomy>
+    <msg>
+      <AccessDeniedException>No té permís per accedir a aquests arbres de categoria.</AccessDeniedException>
+    </msg>
+  </Taxonomy>
+
+  <UIJcrExplorerEditForm>
+    <msg>
+      <notNullDriveName>El nom de la unitat és nul o està buit. Ompli el camp Nom d'Unitat.</notNullDriveName>
+      <notNullPath>La ruta és buida o invàlida. Si us plau, introduïu un valor.</notNullPath>
+    </msg>
+  </UIJcrExplorerEditForm>
+
+  <UIViewSearchResult>
+    <tooltip>
+      <remove-attachment>Està segur que vol suprimir aquest fitxer adjunt?</remove-attachment>
+    </tooltip>
+  </UIViewSearchResult>
+
+  <SameNamePopup>
+    <title>
+      <UIUploadBehaviorWithSameName>Puja un Fitxer</UIUploadBehaviorWithSameName>
+    </title>
+  </SameNamePopup>
+
+  <UIAllItems>
+    <label>
+      <OwnedByMe>Soc el propietari</OwnedByMe>
+      <Favourites>Favorits</Favourites>
+      <Hidden>Ocults</Hidden>
+      <Trash>Paperera</Trash>
+      <Configuration>Configura les preferències</Configuration>
+    </label>
+    <title>
+      <allItems>Tots els elements</allItems>
+    </title>
+  </UIAllItems>
+
+  <UIPreferencesForm>
+      <label>
+          <Alphabetic>Ordre alfabètic</Alphabetic>
+          <Type>Tipus</Type>
+          <CreatedDate>Data de creació</CreatedDate>
+          <ModifiedDate>Data de modificació</ModifiedDate>
+          <Ascending>Ascendent</Ascending>
+          <Descending>Descendent</Descending>
+      </label>
+  </UIPreferencesForm>
+
+  <UISavedSearches>
+    <title>
+      <savedSearches>Cerques Desades</savedSearches>
+    </title>
+  </UISavedSearches>
+  <DocumentType>
+    <label>
+       <Images>Imatge</Images>
+       <Video>Vídeo</Video>
+       <Music>Música</Music>
+       <Documents>Document</Documents>
+       <Content>Contingut</Content>
+    </label>
+  </DocumentType>
+
+  <UIDocumentFilterForm>
+    <label>
+      <Images>Imatge</Images>
+      <Video>Vídeo</Video>
+      <Music>Música</Music>
+      <Documents>Document</Documents>
+      <Content>Contingut</Content>
+    </label>
+    <title>Configura les preferències de filtre</title>
+    <action>
+      <Save>#{word.save}</Save>
+      <Cancel>#{word.cancel}</Cancel>
+    </action>
+  </UIDocumentFilterForm>
+
+  <UIAllItemsByType>
+    <label>
+    <ByType>Filtrar per tipus</ByType>
+      <DocumentFilterConfiguration>Configura les preferències de filtre</DocumentFilterConfiguration>
+    </label>
+    <title>
+      <ShowVideo>Mostra tots els arxius de tipus vídeo</ShowVideo>
+      <ShowMusic>Mostra tots els arxius de tipus audio</ShowMusic>
+      <ShowImages>Mostra tots els arxius de tipus imatge</ShowImages>
+      <ShowDocuments>Mostra tots els arxius de tipus document</ShowDocuments>
+      <ShowContent>Mostra tots els documents d'aquest tipus</ShowContent>
+    </title>
+  </UIAllItemsByType>
+
+  <Views>
+    <label>
+      <slide-show>Presentació de diapositives</slide-show>
+    </label>
+  </Views>
+  <ECMContextMenu>
+    <event>
+      <PlayMedia>Reproduir Mitjans</PlayMedia>
+    </event>
+  </ECMContextMenu>
+  <UIPopupWindow>
+    <title>
+      <UIDocumentFilterForm>Filtra els tipus de documents</UIDocumentFilterForm>
+    </title>
+  </UIPopupWindow>
+
+  <UIAllItemsPreferenceForm>
+    <label>
+      <showOwnedByUser>Soc el propietari</showOwnedByUser>
+      <showFavourites>Favorits</showFavourites>
+      <showHiddens>Ocult</showHiddens>
+      <showTrash>Paperera</showTrash>
+    </label>
+    <action>
+      <Save>#{word.save}</Save>
+      <Cancel>#{word.cancel}</Cancel>
+    </action>
+  </UIAllItemsPreferenceForm>
+
+  <EmptyTrashManageComponent>
+    <msg>
+      <confirm-delete>Està segur que vol buidar tots els elements de la paperera?</confirm-delete>
+    </msg>
+  </EmptyTrashManageComponent>
+  <UICategoryForm>
+    <label>
+      <name>Nom de la categoria</name>
+    </label>
+    <action>
+      <Save>#{word.save}</Save>
+      <Cancel>#{word.cancel}</Cancel>
+    </action>
+  </UICategoryForm>
+  <UIPopupWindow>
+    <title>
+      <UICategoryForm>Afegeix una categoria</UICategoryForm>
+    </title>
+  </UIPopupWindow>
+  <UIActionBar>
+    <tooltip>
+      <AddCategory>Afegeix una categoria</AddCategory>
+    </tooltip>
+   </UIActionBar>
+
+   <UITaggingForm>
+    <label>
+      <Public>Públic</Public>
+      <Private>Privat</Private>
+      <tagScopes>Àmbits d'etiqueta</tagScopes>
+    </label>
+   </UITaggingForm>
+
+  <UITagExplorer>
+    <title>
+      <PublicTags>Etiquetes</PublicTags>
+      <EditPublicTags>Editar Etiquetes</EditPublicTags>
+      <PrivateTags>Etiquetes</PrivateTags>
+    </title>
+  </UITagExplorer>
+
+  <UIEditingTagsForm>
+    <header>
+      <name>Nom</name>
+      <relatedDocuments>Documents relacionats</relatedDocuments>
+      <action>Acció</action>
+    </header>
+    <action>
+      <title>
+        <EditTag>Editar l'etiqueta</EditTag>
+        <RemoveTag>Elimina l'Etiqueta</RemoveTag>
+        <AddTag>Afegeix una etiqueta</AddTag>
+      </title>
+    </action>
+    <msg>
+      <confirm-remove>Està segur que vol suprimir aquesta etiqueta?</confirm-remove>
+    </msg>
+  </UIEditingTagsForm>
+
+
+  <UIPopupWindow>
+    <title>
+      <UIEditingTagsForm>Editar l'etiqueta</UIEditingTagsForm>
+    </title>
+  </UIPopupWindow>
+
+  <UITagForm>
+    <action>
+      <UpdateTag>#{word.save}</UpdateTag>
+      <Cancel>#{word.close}</Cancel>
+    </action>
+    <label>
+      <tagName>Nom d'etiqueta:</tagName>
+      <relatedDocuments>Documents relacionats</relatedDocuments>
+    </label>
+  </UITagForm>
+
+  <TagPopup>
+    <title>
+      <UITagForm>Etiqueta</UITagForm>
+    </title>
+  </TagPopup>
+
+    <UIPopupMenu>
+    <msg>
+      <node-locked-editing>No pot editar el node amb la ruta {0}. Està sent bloquejat per un altre usuari.</node-locked-editing>
+    </msg>
+  </UIPopupMenu>
+  <UITagStyleForm>
+    <msg>
+      <error-update>S'ha produït un error en actualitzar l'estil d'etiqueta.</error-update>
+    </msg>
+  </UITagStyleForm>
+
+  <UIPopupMenu>
+    <msg>
+      <editTagAccessDenied>Accés denegat.</editTagAccessDenied>
+    </msg>
+  </UIPopupMenu>
+
+  <UIPopupWindow>
+    <title>
+      <UITaggingFormContainer>Gestor d'Etiquetes</UITaggingFormContainer>
+    </title>
+  </UIPopupWindow>
+
+    <PopupComponent>
+    <title>
+      <UINodeTypeSelector>Selecciona un tipus de node</UINodeTypeSelector>
+    </title>
+  </PopupComponent>
+
+    <UIActionForm>
+    <title>
+      <ShowComponent>Mostra el component</ShowComponent>
+      <removeReference>Elimina</removeReference>
+    </title>
+  </UIActionForm>
+
+  <EditFormAction>
+    <title>
+      <ShowComponent>Mostra el component</ShowComponent>
+      <removeReference>Elimina</removeReference>
+    </title>
+  </EditFormAction>
+
+  <NodeTypeNameValidator>
+    <msg>
+      <Invalid-char>Hi ha alguns caràcters invàlids. Si us plau, introdueix un altre valor.</Invalid-char>
+      <empty-input>El valor d'aquest camp és nul o està buit.</empty-input>
+    </msg>
+  </NodeTypeNameValidator>
+
+  <UIPreferencesForm>
+      <label>
+            <queryType>Tipus de consulta:</queryType>
+            <SQL>SQL</SQL>
+            <XPATH>XPATH</XPATH>
+      </label>
+  </UIPreferencesForm>
+
+  <UIDocumentInfo>
+    <msg>
+      <repository-error>S'ha produït un error. La informació sobre el repositori s'ha perdut.</repository-error>
+    </msg>
+  </UIDocumentInfo>
+
+  <UITreeExplorer>
+    <msg>
+      <repository-error>S'ha produït un error. La informació sobre el repositori s'ha perdut.</repository-error>
+    </msg>
+  </UITreeExplorer>
+  <UIDocumentForm>
+    <msg>
+      <constraintviolation-exception>No pot desar el document. Les dades d'entrada falten o son invàlides.</constraintviolation-exception>
+    </msg>
+  </UIDocumentForm>
+  <UIActionForm>
+    <msg>
+      <constraintviolation-exception>No pot desar el document. Les dades d'entrada falten o son invàlides.</constraintviolation-exception>
+    </msg>
+  </UIActionForm>
+
+  <UISelectRestorePath>
+    <action>
+      <Save>#{word.save}</Save>
+      <Cancel>#{word.cancel}</Cancel>
+    </action>
+    <label>
+      <formInput>La ruta anterior s'ha perdut. Si us plau, selecciona una nova.</formInput>
+    </label>
+  </UISelectRestorePath>
+  <PathNode>
+    <title>
+      <Add>Afegeix</Add>
+    </title>
+  </PathNode>
+  <UIPopupPathFoRestore>
+    <title>
+      <UIOneNodePathSelector>Selecciona el Node principal</UIOneNodePathSelector>
+    </title>
+  </UIPopupPathFoRestore>
+  <rootNodeInfo>
+    <title>
+      <AddRootNode>Afegeix el Node Arrel</AddRootNode>
+    </title>
+  </rootNodeInfo>
+
+  <UIActionForm>
+    <msg>
+      <homePath-emty>La ruta al inici està buida.</homePath-emty>
+      <targetPath-emty>La ruta de destí està buida.</targetPath-emty>
+    </msg>
+    </UIActionForm>
+    <UIActionBar>
+      <msg>
+        <not-exist-categories>No hi han categories.</not-exist-categories>
+      </msg>
+    </UIActionBar>
+
+  <UIPublicationContainer>
+   <action>
+    <Close>#{word.close}</Close>
+   </action>
+  </UIPublicationContainer>
+
+  <UIPublicationPanel>
+    <button>
+      <Close>#{word.close}</Close>
+    </button>
+    <revisions>
+      <version>Revisions</version>
+      <date>Data</date>
+      <author>Autor</author>
+      <status>Estat</status>
+      <action>Acció</action>
+      <label>Revisió</label>
+      <none>Cap revisió</none>
+      <seeall>Veure totes les versions</seeall>
+      <currentVersion>Revisió actual</currentVersion>
+      <confirm>Perdrà lo treballat al esborrany. Està segur que vol substituir la revisió actual?</confirm>
+    </revisions>
+    <status>
+      <version>Revisió</version>
+      <title>Estat</title>
+      <archived>Arxivat</archived>
+      <obsolete>Obsolet</obsolete>
+      <unpublished>No publicat</unpublished>
+      <enrolled>Inscrit</enrolled>
+      <draft>Esborrany</draft>
+      <pending>Pendent</pending>
+      <approved>Aprovat</approved>
+      <inreview>En  revisió</inreview>
+      <staged>Llest per publicar</staged>
+      <published>Publicat</published>
+      <live>Publicat</live>
+    </status>
+    <scheduled>
+      <title>Programat</title>
+      <from>Des de</from>
+      <to>A</to>
+    </scheduled>
+    <title>
+      <preview>Vista prèvia</preview>
+      <restore>Restaura</restore>
+    </title>
+    <msg>
+      <have-no-view-template>La plantilla de visualització no és compatible.</have-no-view-template>
+      <restore-complete>Recuperació completada.</restore-complete>
+    </msg>
+  </UIPublicationPanel>
+  <UIPublicationHistory>
+    <header>
+      <date>Data</date>
+      <versionName>Nom de la revisió</versionName>
+      <currentState>Estat actual</currentState>
+      <user>Autor</user>
+      <description>Descripció</description>
+    </header>
+  </UIPublicationHistory>
+  
+  <UIPublicationSchedule>
+    <label>
+      <introduction>Pot planificar la publicació del document. Selecciona la data que desitja veure el document publicat</introduction>
+      <no-schedule-info>No hi ha cap calendari de publicació pel document</no-schedule-info>
+    </label>
+    <msg>
+      <save-finished>El seu nou calendari de publicació s'ha desat correctament.</save-finished>
+    </msg>
+    <action>
+      <Save>#{word.save}</Save>
+      <Reset>Restablir</Reset>
+    </action>
+  </UIPublicationSchedule>
+
+  <UIPublicationPanel>
+    <label>
+      <header>Data de publicació</header>
+      <start>Inici de publicació</start>
+      <end>Fi de Publicació</end>
+    </label>
+    <msg>
+      <invalid-format>El format de data no és vàlid. Si us plau comprovi-ho de nou.</invalid-format>
+      <fromDate-after-toDate>La data inicial ha de ser anterior a la data final.</fromDate-after-toDate>
+    </msg>
+  </UIPublicationPanel>
+  <UIPopupWindow>
+    <title>
+      <UIPublicationContainer>Gestiona la Publicació</UIPublicationContainer>
+      <UIPublishingPanel>Gestiona la Publicació</UIPublishingPanel>
+    </title>
+  </UIPopupWindow>
+  <WCMContentView>
+    <header>
+      <status>Estat</status>
+      <author>Autor</author>
+      <date>Data de creació</date>
+      <title>Títol del document</title>
+      <lastUser>Darrer usuari</lastUser>
+    </header>
+  </WCMContentView>
+  <UITagForm>
+    <msg>
+      <NameAlreadyExist>El nom d'etiqueta ja existeix.</NameAlreadyExist>
+    </msg>
+  </UITagForm>
+
+  <!--
+  ############  From WCM 2.1.0 ##############
+  -->
+  <UICategoryManagerSearch>
+    <tab>
+      <label>
+        <UIOneTaxonomySelector>Selecciona una Categoria</UIOneTaxonomySelector>
+      </label>
+    </tab>
+  </UICategoryManagerSearch>
+
+  <UIPreferencesForm>
+   <action>
+     <HideAdvance>Amaga els Paràmetres Avançats</HideAdvance>
+     <ShowAdvance>Mostra els Paràmetres Avançats</ShowAdvance>
+    </action>
+    <label>
+    <Advance>Avançat</Advance>
+    </label>
+  </UIPreferencesForm>
+
+  <UIJCRExplorerPortlet>
+<msg>
+  <file-access-denied>Accés al fitxer denegat.</file-access-denied>
+  <anonymous-access-denied>L'usuari anònim no té permís per utilitzar aquesta funció.</anonymous-access-denied>
+</msg>
+  </UIJCRExplorerPortlet>
+  <UIDrivesArea>
+    <DrivesArea>
+      <ShowDrives>Mostra Unitats</ShowDrives>
+    </DrivesArea>
+    <msg>
+      <no-view-found>No hi ha cap visualització assignada als seus permisos d'accés a la unitat '{0}'.</no-view-found>
+      <access-denied>Accés denegat. Potser no te permisos sobre la Unitat del Espai de Treball "{0}".</access-denied>
+      <empty-drives>Accés denegat. O bé no hi ha una unitat, o bé no té permís per accedir a algunes unitats en aquest repositori.</empty-drives>
+      <workspace-not-exist>La unitat '{0}' ha estat emmagatzemada en una àrea de treball no reconeguda. Si us plau, configura la untat de nou.</workspace-not-exist>
+    </msg>
+  </UIDrivesArea>
+  <UIJcrExplorerEditForm>
+    <msg>
+      <fields-saved>Tots els valors s'han salvat.</fields-saved>
+      <fields-cancelled>Tots els valors s'han cancel·lat.</fields-cancelled>
+    </msg>
+  </UIJcrExplorerEditForm>
+  <UIDocumentForm>
+  <msg>
+  <confirm-close>Els canvis que ha fet es perdran si tanca aquest formulari.</confirm-close>
+  <confirm-changeType>Els canvis que ha fet es perdran si canvia el tipus de contingut.</confirm-changeType>
+  <confirm-navigate>Els canvis que has fet es perdran si marxes d'aquesta pàgina.</confirm-navigate>
+  </msg>
+  </UIDocumentForm>
+  <UploadFileMimeTypesValidator>
+    <msg>
+      <wrong-mimetype>El Mime type {0} no és permès per aquest camp {1}. Si us plau carregui un altre fitxer</wrong-mimetype>
+    </msg>
+  </UploadFileMimeTypesValidator>
+  <lifecyclePhase>
+    <label>
+    <no>No</no>
+  <yes>Sí</yes>
+  <true>Cert</true>
+  <false>Fals</false>
+  <Electronic>Electrònica</Electronic>
+  <Paper>Paper</Paper>
+  <NONE>Cap</NONE>
+  <CLASSIFIED>Classificat</CLASSIFIED>
+  <UNCLASSIFIED>Desclassificat</UNCLASSIFIED>
+  <NOCONTRACT>Cap contracte</NOCONTRACT>
+  <one-minute>Un minut</one-minute>
+  <hourly>Per hora</hourly>
+  <daily>Diàriament</daily>
+  <quarterly>Trimestralment</quarterly>
+  <yearly>Anualment</yearly>
+  <ten-years>Deu anys</ten-years>
+  <read>Acció d'Usuari</read>
+  <schedule>Planificador</schedule>
+  <node_added>Addició de contingut</node_added>
+  <node_removed>Eliminació de contingut</node_removed>
+  <property_added>Addició de Propietat</property_added>
+  <property_removed>Eliminació de Propietat</property_removed>
+  <property_changed>Modificació de Propietat</property_changed>
+</label>
+  </lifecyclePhase>
+  <UIPopupMenu>
+  <msg>
+<can-not-remove-locked-node>El node {0} està bloquejat. No es mou a la paperera.</can-not-remove-locked-node>
+<can-not-remove-checked-in-node>El Node {0} o el seu parent està protegit. No pot moure'l a la paperera.</can-not-remove-checked-in-node>
+<access-denied-to-delete>Accés denegat. No pot desplaçar el node {0} a la paperera.</access-denied-to-delete>
+  </msg>
+  </UIPopupMenu>
+  <UIPropertyForm>
+  <msg>
+  <unknown-error>S'ha produït un error editant aquesta propietat.</unknown-error>
+    </msg>
+  </UIPropertyForm>
+  <UIWatchDocumentForm>
+    <msg>
+      <node-is-locked>Aquest node està bloquejat. No pot fer-li seguiment.</node-is-locked>
+      <unknown-error>S'han produït alguns errors. No pot fer seguiment a aquest node.</unknown-error>
+    </msg>
+  </UIWatchDocumentForm>   
+  <UIActionForm>
+    <msg>
+      <xss-vulnerability-character>El camp '{0}' conté caràcters de vulnerables a XSS</xss-vulnerability-character>
+    </msg>
+  </UIActionForm>
+  <UIMultiUpload>
+  <label>
+    <AbortAll>Anul·la-ho Tot</AbortAll>
+    <AbortAllFiles>Anul·la tots els fitxes</AbortAllFiles>
+    <MaxFileSize>La mida màxima del fitxer és</MaxFileSize>
+    <InvalidCharacters>Els caràcters no vàlids seran canviats per '-'</InvalidCharacters>
+    <DropFileMessage>Deixa aquí els fitxers a la carpeta actual</DropFileMessage>
+    <Close>#{word.close}</Close>
+    <in>en</in>
+    <MaxFileSizeAlert>La mida del fitxer excedeix el límit de mida atorgada de</MaxFileSizeAlert>
+    <Waiting>Esperant</Waiting>
+    <Error>Error</Error>
+    <or>o</or>
+    <AlreadyInUse>Ja està fent-se servir</AlreadyInUse>
+    <Keep>Conserva'ls ambdós</Keep>
+    <Replace>Substitueix</Replace>
+    <Canceled>Cancel·lat</Canceled>
+    <Cancel>#{word.cancel}</Cancel>
+    <AbortAllConfirmation>Vol anul·lar tots els arxius en curs?</AbortAllConfirmation>
+  </label>
+  </UIMultiUpload>
+  <UIDocumentNodeList>
+  <label>
+  <CreatedOn>Creat el</CreatedOn>
+  <Updated>Actualitzat el</Updated>
+  <by>per</by>
+  <you>tu</you>
+  </label>
+  </UIDocumentNodeList>
+  <FileView>
+    <label>
+      <name>Nom</name>
+      <date>Data</date>
+      <size>Mida</size>
+      <sortBy>Ordenar per:</sortBy>
+      <filesAreSelected>Els fitxers estan seleccionats.</filesAreSelected>
+      <ClearSelection>Neteja la selecció</ClearSelection>
+      <more>Més</more>
+    </label>
+  </FileView>
+  <UIPropertyForm>
+  <msg>
+  <property-name-incorrect>El nom de la propietat és incorrecta, si us plau, introdueix un altre valor per a això!</property-name-incorrect>
+    </msg>
+  </UIPropertyForm>
+  <!--
+  ###################################################################################
+  # JCR Exceptions manager                                                              #
+  ###################################################################################
+  -->
+  <VersionException>
+  <msg>No podeu modificar documents que estan protegits.</msg>  
+  </VersionException>
+</bundle>
