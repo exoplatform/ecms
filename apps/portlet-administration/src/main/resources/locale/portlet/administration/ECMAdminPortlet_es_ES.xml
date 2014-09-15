@@ -548,7 +548,7 @@
       <AddProperty>Añadir propiedad</AddProperty>
       <AddChild>Agregar subnodo</AddChild>
       <AddConstraints>Añadir restricciones</AddConstraints>
-      <Back>#{palabra.atrás}</Back>
+      <Back>#{word.back}</Back>
       <AddType>Agregar tipo</AddType>
       <AddValue>Añadir</AddValue>
       <CancelConstraints>#{word.cancel}</CancelConstraints>

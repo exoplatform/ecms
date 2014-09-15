@@ -13,8 +13,8 @@
       <comment>Comentario</comment>
     </label>
     <action>
-      <Save>#{palabra.guardar}</Save>
-      <Cancel>#{palabra.cancelar}</Cancel>
+      <Save>#{word.save}</Save>
+      <Cancel>#{word.cancel}</Cancel>
     </action>
     <msg>
       <not-support>No puede comentar en este tipo de documento.</not-support>
@@ -168,8 +168,8 @@
       <nodesPerPage>Nodos Por Página</nodesPerPage>
     </label>
     <action>
-      <Back>#{palabra.cerrar}</Back>
-      <Save>#{palabra.guardar}</Save>
+      <Back>#{word.close}</Back>
+      <Save>#{word.save}</Save>
     </action>
   </UIPreferencesForm>
   <!--
@@ -196,9 +196,9 @@
       <titleField>Título</titleField>
     </label>
     <action>
-      <Cancel>#{palabra.cancelar}</Cancel>
-      <Save>#{palabra.guardar}</Save>
-      <Back>#{palabra.atrás}</Back>
+      <Cancel>#{word.cancel}</Cancel>
+      <Save>#{word.save}</Save>
+      <Back>#{word.back}</Back>
     </action>
     <msg>
       <rename-successfull>El nodo '{0}' fué renombrado a '{1}' exitosamente.</rename-successfull>
@@ -409,7 +409,7 @@
   -->
   <UIFolderForm>
     <action>
-      <Cancel>#{palabra.cancelar}</Cancel>
+      <Cancel>#{word.cancel}</Cancel>
       <Save>Crear carpeta</Save>
     </action>
     <label>
@@ -679,7 +679,7 @@
       <cannotget>No se puede obtener valores</cannotget>
     </label>
     <action>
-      <Close>#{palabra.cerrar}</Close>
+      <Close>#{word.close}</Close>
     </action>
   </UIPropertyTab>
   <!--
@@ -715,7 +715,7 @@
       <value10>Valor 10</value10>
     </label>
     <action>
-      <Save>#{palabra.guardar}</Save>
+      <Save>#{word.save}</Save>
       <Cancel>#{word.cancel}</Cancel>
       <Reset>Reajustar</Reset>
     </action>
@@ -799,8 +799,8 @@
     </label>
     <title>Añadir un permiso a ese nodo</title>
     <action>
-      <Close>#{palabra.cerrar}</Close>
-      <Save>#{palabra.guardar}</Save>
+      <Close>#{word.close}</Close>
+      <Save>#{word.save}</Save>
       <Reset>Reajustar</Reset>
     </action>
     <msg>
@@ -1783,7 +1783,7 @@
   <UIActionForm>
     <action>
       <Save>#{word.save}</Save>
-      <Back>#{palabra.atrás}</Back>
+      <Back>#{word.back}</Back>
     </action>
     <label>
       <name>Formulario de acción</name>
@@ -1915,7 +1915,7 @@
   <UIViewMetadataForm>
     <action>
       <Save>#{word.save}</Save>
-      <Cancel>#{palabra.cancelar}</Cancel>
+      <Cancel>#{word.cancel}</Cancel>
     </action>
   </UIViewMetadataForm>
   <metadataForm>
@@ -2118,8 +2118,8 @@
   -->
   <UIThumbnailForm>
     <action>
-      <Save>#{palabra.guardar}</Save>
-      <Cancel>#{palabra.cancelar}</Cancel>
+      <Save>#{word.save}</Save>
+      <Cancel>#{word.cancel}</Cancel>
       <RemoveThumbnail>Quitar miniatura</RemoveThumbnail>
     </action>
     <label>
@@ -2267,8 +2267,8 @@
       <pathNode>Nodo de la Ruta</pathNode>
     </label>
     <action>
-      <Save>#{palabra.guardar}</Save>
-      <Cancel>#{palabra.cancelar}</Cancel>
+      <Save>#{word.save}</Save>
+      <Cancel>#{word.cancel}</Cancel>
     </action>
     <msg>
       <addFolder-successful>El symlink '{0}' se agregó correctamente.</addFolder-successful>
@@ -2295,8 +2295,8 @@
       <note>Seleccione otro documento que servirá como la traducción</note>
     </label>
     <action>
-      <Save>#{palabra.guardar}</Save>
-      <Cancel>#{palabra.cancelar}</Cancel>
+      <Save>#{word.save}</Save>
+      <Cancel>#{word.cancel}</Cancel>
       <SelectDocument>Seleccione documento</SelectDocument>
     </action>
     <msg>
@@ -2414,7 +2414,7 @@
 
   <UIConfirmMessage>
     <label>
-      <Close>#{palabra.cancelar}</Close>
+      <Close>#{word.cancel}</Close>
       <OK>OK</OK>
       <ReplaceData>Reemplazar la data</ReplaceData>
       <Back>Regresar al cambio de nombre</Back>
@@ -2424,7 +2424,7 @@
 
   <UIRestoreConfirmMessage>
     <label>
-      <Close>#{palabra.cerrar}</Close>
+      <Close>#{word.close}</Close>
       <OK>Confirmar</OK>
       <ReplaceData>Reemplazar la data</ReplaceData>
       <Back>Regresar al cambio de nombre</Back>
@@ -2670,8 +2670,8 @@
     </label>
     <title>Configurar preferencias de filtro</title>
     <action>
-      <Save>#{palabra.guardar}</Save>
-      <Cancel>#{palabra.cancelar}</Cancel>
+      <Save>#{word.save}</Save>
+      <Cancel>#{word.cancel}</Cancel>
     </action>
   </UIDocumentFilterForm>
 
@@ -2786,8 +2786,8 @@
 
   <UITagForm>
     <action>
-      <UpdateTag>#{palabra.guardar}</UpdateTag>
-      <Cancel>#{palabra.cerrar}</Cancel>
+      <UpdateTag>#{word.save}</UpdateTag>
+      <Cancel>#{word.close}</Cancel>
     </action>
     <label>
       <tagName>Nombre de la etiqueta</tagName>
