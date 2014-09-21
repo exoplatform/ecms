@@ -741,7 +741,7 @@
 			if (window == top) {
 				try {
 					// load provider styles
-					utils.loadStyle("/cloud-drive-" + id + "/skin/cloud-drive.css");
+					utils.loadStyle("/cloud-drive-" + id + "/skin/clouddrive.css");
 				} catch(e) {
 					utils.log("Error loading provider (" + id + ") style.", e);
 				}
@@ -1803,7 +1803,7 @@
 			utils.loadStyle("/cloud-drive/skin/jquery-ui.css");
 			utils.loadStyle("/cloud-drive/skin/jquery.pnotify.default.css");
 			utils.loadStyle("/cloud-drive/skin/jquery.pnotify.default.icons.css");
-			utils.loadStyle("/cloud-drive/skin/cloud-drive.css");
+			utils.loadStyle("/cloud-drive/skin/clouddrive.css");
 
 			// configure Pnotify
 			$.pnotify.defaults.styling = "jqueryui"; // use jQuery UI css

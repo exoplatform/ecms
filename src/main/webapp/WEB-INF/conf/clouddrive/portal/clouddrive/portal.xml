@@ -28,6 +28,7 @@
   <locale>en</locale>
   <access-permissions>*:/platform/users</access-permissions>
   <edit-permission>*:/platform/administrators</edit-permission>
+  <skin>Default</skin>
 
   <properties>
     <entry key="sessionAlive">onDemand</entry>
