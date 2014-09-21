@@ -216,7 +216,7 @@
     <title>
       <UIRenameForm>Renombrar</UIRenameForm>
       <UIActionContainer>Editar acción</UIActionContainer>
-      <UIFolderForm>Archivo nuevo</UIFolderForm>
+      <UIFolderForm>Nueva Carpeta</UIFolderForm>
       <UIUploadManager>Subir Archivo</UIUploadManager>
       <UIReferencesList>Listado de Referencias</UIReferencesList>
       <UIExportNode>Exportar</UIExportNode>
@@ -280,7 +280,7 @@
   -->
   <UIActionBar>
     <tooltip>
-      <AddFolder>Archivo nuevo</AddFolder>
+      <AddFolder>Nueva carpeta</AddFolder>
       <AddDocument>Nuevo contenido</AddDocument>
       <EditDocument>Editar</EditDocument>
       <Upload>Subir</Upload>
