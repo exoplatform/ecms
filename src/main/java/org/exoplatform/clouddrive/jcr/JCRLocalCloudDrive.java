@@ -1388,6 +1388,14 @@ public abstract class JCRLocalCloudDrive extends CloudDrive {
     public boolean isIgnored(Node node) throws RepositoryException {
       return node.isNodeType(ECD_IGNORED);
     }
+    
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public boolean isDrive(Node node) throws RepositoryException {
+      return node.isNodeType(ECD_CLOUDDRIVE);
+    }
 
     /**
      * {@inheritDoc}
