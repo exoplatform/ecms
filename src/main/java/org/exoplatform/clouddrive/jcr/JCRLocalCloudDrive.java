@@ -1388,7 +1388,7 @@ public abstract class JCRLocalCloudDrive extends CloudDrive {
     public boolean isIgnored(Node node) throws RepositoryException {
       return node.isNodeType(ECD_IGNORED);
     }
-    
+
     /**
      * {@inheritDoc}
      */
@@ -1436,8 +1436,12 @@ public abstract class JCRLocalCloudDrive extends CloudDrive {
      * {@inheritDoc}
      */
     public Collection<String> findParents(Node fileNode) throws DriveRemovedException, RepositoryException {
+      return findParents(getId(fileNode));
+    }
+
+    protected Collection<String> findParents(String fileId) throws DriveRemovedException, RepositoryException {
       Set<String> parentIds = new LinkedHashSet<String>();
-      for (NodeIterator niter = findNodes(Arrays.asList(getId(fileNode))); niter.hasNext();) {
+      for (NodeIterator niter = findNodes(Arrays.asList(fileId)); niter.hasNext();) {
         Node p = niter.nextNode().getParent(); // parent it is a cloud file or a cloud drive
         parentIds.add(p.getProperty("ecd:id").getString());
       }
@@ -1622,8 +1626,8 @@ public abstract class JCRLocalCloudDrive extends CloudDrive {
                           // it is a move or copy inside the drive...
                           String srcFileId = fileAPI.getId(file);
                           // Find the srcFile location. Note that the same file can exists in several places
-                          // on some drives (e.g. Google), but actual source location has no big matter - we
-                          // only need a source for a copy.
+                          // on some drives (e.g. Google, CMIS), but actual source location has no big matter
+                          // - we only need a source for a copy.
                           Node srcFile = null;
                           String srcPath = fileCopies.remove(srcFileId);
                           if (srcPath != null) {
@@ -1977,11 +1981,7 @@ public abstract class JCRLocalCloudDrive extends CloudDrive {
         }
       } else {
         try {
-          // Property creation = file.setProperty("ecd:creation", DUMMY_DATA);
-          // file.save(); // TODO save creation flag immediately to see it in fail handler
-          // if creation will fail, it will be handled by later on drive sync
           synchronizer(file).create(file, fileAPI);
-          // creation.remove();
         } catch (NotFoundException e) {
           // XXX parent not found in the cloud... it can be already removed there and not yet synced
           filePath = file.getPath();
