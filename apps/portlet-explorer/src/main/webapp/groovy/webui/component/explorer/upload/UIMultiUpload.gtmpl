@@ -1,8 +1,9 @@
 <%
   import java.net.URLEncoder;
+  import org.apache.commons.lang.StringEscapeUtils;
   
   public String getMsg(String msg) {
-    return _ctx.appRes(uicomponent.getId() + ".label." + msg);
+    return StringEscapeUtils.escapeJavaScript(_ctx.appRes(uicomponent.getId() + ".label." + msg));
   }
 
   def rcontext = _ctx.getRequestContext() ;
