@@ -469,12 +469,9 @@ public class ManageDocumentService implements ResourceContainer {
       Node child = iterator.nextNode();
       if (child.isNodeType(FCKUtils.EXO_HIDDENABLE) && !showHidden)
         continue;
-      if (child.isNodeType("exo:symlink") && child.hasProperty("exo:uuid") && child.hasProperty("exo:workspace")) {
-        sourceNode = linkManager.getTarget(child);
-      }
       referNode = sourceNode != null ? sourceNode : child;
 
-      if (isFolder(referNode)) {
+      if (isFolder(referNode) || child.isNodeType("exo:symlink")) {
         // Get current folder from folder path to fix same name problem (ECMS-3586)
         String folderPath = referNode.getPath();
         folderPath = folderPath.substring(folderPath.lastIndexOf("/") + 1, folderPath.length());
