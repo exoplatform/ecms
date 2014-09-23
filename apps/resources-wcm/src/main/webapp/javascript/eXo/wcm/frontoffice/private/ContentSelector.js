@@ -599,7 +599,7 @@
 					var clazzItem = eXo.ecm.ECS.getClazzIcon(list[i].getAttribute("nodeType"));
 					var newRow = tblRWS.tBodies[0].insertRow(i);
 					newRow.className = clazz;
-					gj(newRow.insertCell(0)).html('<a url="'+decodeURIComponent(url)+'" path="'+path+'" nodeType="'+nodeType+'" style = "overflow:hidden;" rel="tooltip" data-placement="bottom" title="'+decodeURIComponent(node)+'" onclick="eXo.ecm.ECS.insertContent(this);">'+'<i class="'+clazzItem+'"></i>&nbsp;'+decodeURIComponent(node)+'</a>');
+					gj(newRow.insertCell(0)).html('<a class="Item" url="'+decodeURIComponent(url)+'" path="'+path+'" nodeType="'+nodeType+'" style = "overflow:hidden;" rel="tooltip" data-placement="bottom" title="'+decodeURIComponent(node)+'" onclick="eXo.ecm.ECS.insertContent(this);">'+'<i class="'+clazzItem+'"></i>&nbsp;'+decodeURIComponent(node)+'</a>');
 					gj(newRow.insertCell(1)).html('<div class="Item">'+ list[i].getAttribute("dateCreated") +'</div>');
 					gj(newRow.insertCell(2)).html('<div class="Item">'+ size +'</div>');
 				} else {				  
