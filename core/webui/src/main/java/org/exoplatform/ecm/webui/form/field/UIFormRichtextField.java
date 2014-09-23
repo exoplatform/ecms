@@ -16,16 +16,16 @@
  */
 package org.exoplatform.ecm.webui.form.field;
 
-import java.util.Collection;
-
 import org.exoplatform.ecm.webui.form.DialogFormField;
 import org.exoplatform.ecm.webui.utils.DialogFormUtil;
 import org.exoplatform.portal.resource.SkinConfig;
 import org.exoplatform.portal.resource.SkinService;
 import org.exoplatform.portal.webui.util.Util;
 import org.exoplatform.services.wcm.utils.WCMCoreUtils;
-import org.exoplatform.webui.form.UIFormRichtextInput;
 import org.exoplatform.webui.form.UIFormInputBase;
+import org.exoplatform.webui.form.UIFormRichtextInput;
+
+import java.util.Collection;
 
 /**
  * Created by The eXo Platform SAS
@@ -39,11 +39,13 @@ public class UIFormRichtextField extends DialogFormField {
   private final String WIDTH = "width";
   private final String HEIGHT = "height";
   private final String ENTERMODE = "enterMode";
+  private final String SHIFT_ENTER_MODE = "shiftEnterMode";
 
   private String toolbar;
   private String width;
   private String height;
   private String enterMode;
+  private String shiftEnterMode;
 
   public UIFormRichtextField(String name, String label, String[] arguments) {
     super(name, label, arguments);
@@ -57,7 +59,8 @@ public class UIFormRichtextField extends DialogFormField {
     richtext.setWidth(width);
     richtext.setHeight(height);
     richtext.setEnterMode(enterMode);
-    
+    richtext.setShiftEnterMode(shiftEnterMode);
+
     StringBuffer contentsCss = new StringBuffer();
     contentsCss.append("[");
     SkinService skinService = WCMCoreUtils.getService(SkinService.class);
@@ -94,6 +97,8 @@ public class UIFormRichtextField extends DialogFormField {
         height = entry[1];
       } else if(ENTERMODE.equals(entry[0])) {
         enterMode = entry[1];
+      } else if(SHIFT_ENTER_MODE.equals(entry[0])) {
+        shiftEnterMode = entry[1];
       }
     }
   }
