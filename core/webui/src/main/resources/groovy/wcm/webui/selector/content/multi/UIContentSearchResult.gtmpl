@@ -88,11 +88,10 @@
             <div class="text">$publicationState</div>
           </td>
     
-          <td class="action">
-            <div class="ActionContainer"> 
-            <img alt="<%=_ctx.appRes("UIContentSearchResult.title.Select")%>" onclick="eXo.ecm.ECS.addFile2ListContent(this);" nodeType="<%= node.getPrimaryNodeType().getName() %>" path="<%= nodePath %>" src="/eXoResources/skin/sharedImages/Blank.gif" class="SelectIcon" rel="tooltip" data-placement="bottom" title="$titleNode"/>
-              <img rel="tooltip" data-placement="bottom" title="<%=_ctx.appRes("UIContentSearchResult.title.View")%>" alt="<%=_ctx.appRes("UIContentSearchResult.title.View")%>" onclick="<%= uicomponent.event("View", nodeExpression) %>" src="/eXoResources/skin/sharedImages/Blank.gif" class="ViewIcon" />
-            </div>
+          <td class="actionContainer center">
+            <a  href="javascript: void(0)" onclick="eXo.ecm.ECS.addFile2ListContent(this);" nodeType="<%= node.getPrimaryNodeType().getName() %>" path="<%= nodePath %>" rel="tooltip" data-placement="bottom" title="<%=_ctx.appRes("UIContentSearchResult.title.Select")%>"  class="selectIcon actionIcon" ><i class="uiIconValidate uiIconLightGray"></i></a>
+            <a  href="javascript: void(0)" onclick="<%= uicomponent.event("View", nodeExpression) %>"  rel="tooltip" data-placement="bottom" title="<%=_ctx.appRes("UIContentSearchResult.title.View")%>" class="viewIcon actionIcon "  ><i class="uiIconPreview uiIconLightGray"></i></a>   
+           
           </td>
         </tr>
     <%
