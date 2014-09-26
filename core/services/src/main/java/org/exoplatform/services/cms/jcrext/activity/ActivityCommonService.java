@@ -18,6 +18,7 @@ package org.exoplatform.services.cms.jcrext.activity;
 
 import java.util.HashMap;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Map;
 import java.util.Set;
 
@@ -26,6 +27,7 @@ import javax.jcr.Node;
 import javax.jcr.RepositoryException;
 
 import org.exoplatform.container.xml.InitParams;
+import org.exoplatform.services.cms.link.LinkManager;
 import org.exoplatform.services.cms.templates.TemplateService;
 import org.exoplatform.services.jcr.impl.core.NodeImpl;
 import org.exoplatform.services.wcm.core.NodeLocation;
@@ -92,6 +94,7 @@ public class ActivityCommonService {
   public Map<String, Object> getPreProperties() { return properties; }
   
   public void setPreProperties(Map<String, Object> preProperties) { properties = preProperties; }
+  public LinkManager linkManager = null;
   
   public ActivityCommonService(InitParams initParams) {
     this.acceptedNodeTypes = initParams.getValueParam("acceptedNodeTypes").getValue();
@@ -100,6 +103,7 @@ public class ActivityCommonService {
     if (acceptedNodeTypes==null) acceptedNodeTypes = "";
     if (acceptedProperties==null) acceptedProperties =""; 
     if (acceptedFileProperties==null) acceptedFileProperties ="";
+    linkManager = WCMCoreUtils.getService(LinkManager.class);
   }
   
   /**
@@ -145,10 +149,27 @@ public class ActivityCommonService {
    *   true if the node is creating
    */
   public boolean isCreating(Node node){
-    boolean isCreating = false;
-    NodeLocation nodeLocation = NodeLocation.getNodeLocationByNode(node);
-    isCreating = creatingNodes.contains(nodeLocation.hashCode());
-    return isCreating;
+    Node realNode = node;
+    try {
+      if (linkManager.isLink(node)) {
+        realNode = linkManager.getTarget(node);
+      }
+      NodeLocation nodeLocation = NodeLocation.getNodeLocationByNode(realNode);
+      if (creatingNodes.contains(nodeLocation.hashCode())) {
+        return true;
+      } 
+      List<Node> allLinks = linkManager.getAllLinks(realNode, "exo:symlink");
+      for (Node link : allLinks) {
+        nodeLocation = NodeLocation.getNodeLocationByNode(link);
+        nodeLocation.setUUID(realNode.getUUID());
+        if (creatingNodes.contains(nodeLocation.hashCode())){
+          return true;
+        }
+      }
+      return false;
+    } catch (Exception e) {
+      return false;
+    }
   }
 
   /**
