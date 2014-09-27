@@ -129,7 +129,7 @@
     <title>Explorador</title>
     <label>
       <Root>Raíz</Root>
-      <webDavView>Abierto en MS Office</webDavView>
+      <webDavView>Abrir en MS Office</webDavView>
     </label>
     <msg>
       <path-not-found>Este elemento fue eliminado o cambiado. Por favor haga clic en el botón de Actualizar.</path-not-found>
@@ -157,11 +157,11 @@
   <UIPreferencesForm>
     <title>Establecer su preferencia de navegación</title>
     <label>
-      <enableStructure>Activar la Estructura de DMS</enableStructure>
+      <enableStructure>Activar la Estructura de DMS:</enableStructure>
       <showSideBar>Mostrar barra lateral</showSideBar>
-      <showHiddenNode>Mostrar los nodos ocultos</showHiddenNode>
+      <showHiddenNode>Mostrar los nodos ocultos:</showHiddenNode>
       <showNonDocument>Mostrar todo tipo de nodos:</showNonDocument>
-      <showRefDocuments>Mostrar documentos referenciados</showRefDocuments>
+      <showRefDocuments>Mostrar documentos referenciados:</showRefDocuments>
       <enableDragAndDrop>Activar el Arrastrar y Soltar</enableDragAndDrop>
       <sortBy>Clasificar por:</sortBy>
       <order>Ordenar por</order>
@@ -564,10 +564,10 @@
   -->
   <ECMContextMenu>
     <event>
-      <Lock>Bloqueo</Lock>
+      <Lock>Bloquear</Lock>
       <Unlock>Desbloquear</Unlock>
       <EditDocument>Editar</EditDocument>
-      <Copy>Copia</Copy>
+      <Copy>Copiar</Copy>
       <Rename>Renombrar</Rename>
       <Delete>Borrar</Delete>
       <Save>#{word.save}</Save>
@@ -591,7 +591,7 @@
       <MoveToTrash>Mover al zafacón</MoveToTrash>
       <RestoreFromTrash>Recuperar del zafacón</RestoreFromTrash>
       <EmptyTrash>Vaciar zafacón</EmptyTrash>
-      <WebDavView>Abierto en MS Office</WebDavView>
+      <WebDavView>Abrir en MS Office</WebDavView>
     </event>
   </ECMContextMenu>
  
@@ -793,15 +793,15 @@
       <UIPopupWindow>Seleccionar</UIPopupWindow>
       <permission>UIPermissionForm</permission>
       <userOrGroup>Usuario o Grupo</userOrGroup>
-      <read>Derecho de Leer</read>
-      <add_node>Modificar el derecho</add_node>
-      <remove>Quitar el derecho</remove>
+      <read>Permisos de lectura</read>
+      <add_node>Modificar permisos</add_node>
+      <remove>Quitar permisos</remove>
     </label>
-    <title>Añadir un permiso a ese nodo</title>
+    <title>Añadir permisos al nodo</title>
     <action>
       <Close>#{word.close}</Close>
       <Save>#{word.save}</Save>
-      <Reset>Reajustar</Reset>
+      <Reset>Restablecer</Reset>
     </action>
     <msg>
       <checkbox-require>Por favor, seleccione al menos un permiso.</checkbox-require>
@@ -2853,7 +2853,7 @@
 
   <UIPreferencesForm>
       <label>
-            <queryType>Tipo de Consulta</queryType>
+            <queryType>Tipo de Consulta:</queryType>
             <SQL>SQL</SQL>
             <XPATH>XPATH</XPATH>
       </label>
@@ -3154,7 +3154,7 @@
   </UIMultiUpload>
   <UIDocumentNodeList>
   <label>
-  <CreatedOn>Creado en</CreatedOn>
+  <CreatedOn>Creado el</CreatedOn>
   <Updated>Actualizado</Updated>
   <by>por</by>
   <you>usted</you>
