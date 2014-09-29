@@ -318,9 +318,13 @@ public class Utils {
     }
     Session session = WCMCoreUtils.getUserSessionProvider().getSession(restoreWorkspace, WCMCoreUtils.getRepository());
     try {
+      if (restorePath == null || restorePath.length() == 0 ) {
+        restoreLocationNode = session.getRootNode();
+      } else {
         restoreLocationNode = (Node) session.getItem(restorePath);
+      }
     } catch(Exception e) {
-        return false;
+      return false;
     }
     return PermissionUtil.canAddNode(restoreLocationNode);
   }
