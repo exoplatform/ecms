@@ -259,14 +259,16 @@
 		var connectDrive = function(providerId, authURL) {
 			var authWindow;
 			var authService;
+
 			if (authURL) {
 				// use user interaction for authentication
+				utils.log("authURL: " + authURL);
 				authWindow = cloudDriveUI.connectDriveWindow(authURL);
 			} else {
 				// function to call for auth using authURL from provider
 				authService = serviceGet;
 			}
-
+			
 			// 1 initialize connect workflow
 			var process = $.Deferred();
 			connectInit(providerId, {
@@ -280,6 +282,13 @@
 				  auth.done(function() {
 					  utils.log(provider.name + " user authenticated.");
 					  // 3 and finally connect the drive
+					  // set initial progress	with dummy state object
+						process.notify({ 
+							progress : 0,
+							drive : {
+								provider : provider
+							}
+						});
 					  // XXX if it is a re-connect (via providerUpdate), context node may point to a file inside the existing drive
 					  // Connect service will care about it and apply correct drive path.
 					  var userNode = contextNode;
@@ -706,6 +715,10 @@
 				var provider = connectProvider[providerId];
 				if (provider) {
 					authURL = provider.authURL;
+					if (authURL.indexOf(prefixUrl) == 0) {
+						// XXX warm-up the portal with its ajax request :)
+						serviceGet(authURL + "&ajaxRequest=true");
+					}
 				} else {
 					utils.log("ERROR: Provider cannot be for id " + providerId);
 					return;
@@ -726,6 +739,7 @@
 
 			var process = connectDrive(providerId, authURL);
 			cloudDriveUI.connectProcess(process);
+			return process;
 		};
 
 		this.state = function(checkUrl) {
@@ -1536,9 +1550,26 @@
 						// in Connect Cloud Documents popup
 						$(this).data("cd-connect", true);
 						$(this).parent().parent().click(function() {
-							cloudDrive.connect(providerId);
-							$("div.UIPopupWindow").hide();
+							var formId = $("div.UIForm.ConnectCloudDriveForm").attr("form-id");
+							if (formId) {
+								var submited = false;
+								var process = cloudDrive.connect(providerId);
+								process.progress(function() {
+									if (!submited) {
+										submited = true;
+										eXo.webui.UIForm.submitForm(formId, 'Connect', true);
+									}
+								});
+								process.fail(function(e) {
+									//submited = true;
+									//eXo.webui.UIForm.submitForm(formId, 'Cancel', true);
+									utils.log("ConnectCloudDriveForm canceled");
+								});
+							} else {
+								utils.log("ERROR: Attribute form-id not found on ConnectCloudDriveForm");
+							}
 						});
+						// $("div.UIPopupWindow").hide();
 					} else {
 						// in Action bar
 						var t = $(this).parent().parent().attr("onclick");
@@ -1548,8 +1579,8 @@
 								var providerId = c[1];
 								$(this).data("cd-connect", true);
 								$(this).parent().parent().click(function() {
-									$("div.UIPopupWindow").hide();
 									cloudDrive.connect(providerId);
+									// TODO not required: $("div.UIPopupWindow").hide();
 								});
 							}
 						}
