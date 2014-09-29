@@ -229,7 +229,7 @@
       <UIPropertiesManager>Gestión de Propiedades</UIPropertiesManager>
       <UIECMSearch>Búsqueda Avanzada</UIECMSearch>
       <UISavedQuery>Guardar listado de consultas</UISavedQuery>
-      <UIWatchDocumentForm>Ver Documento</UIWatchDocumentForm>
+      <UIWatchDocumentForm>Vigilar Documento</UIWatchDocumentForm>
       <UIActionManager>Gestionar las acciones</UIActionManager>
       <UIDocumentForm>Editar Documento</UIDocumentForm>
       <UIDocumentFormController>Añadir Nuevo Documento</UIDocumentFormController>
@@ -1864,7 +1864,7 @@
     <msg>
       <not-support>No se admite este tipo de notificación. Por favor, seleccione otra.</not-support>
       <watching-successfully>Usted está vigilando este documento.</watching-successfully>
-      <unwatching-successfully>Ha dejado la lista de observadores con éxito.</unwatching-successfully>
+      <unwatching-successfully>Ha dejado la lista de vigilancias con éxito.</unwatching-successfully>
       <node-iswatching>El documento está siendo vigilado.</node-iswatching>
     </msg>
   </UIWatchDocumentForm>
@@ -3122,7 +3122,7 @@
   </UIPropertyForm>
   <UIWatchDocumentForm>
     <msg>
-      <node-is-locked>¡Este nodo está bloqueado, no es visible!</node-is-locked>
+      <node-is-locked>Este nodo está bloqueado, no puede ser vigilado.</node-is-locked>
       <unknown-error>¡Se produjeron algunos errores, no puede ver este nodo!</unknown-error>
     </msg>
   </UIWatchDocumentForm>   

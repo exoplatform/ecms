@@ -974,7 +974,7 @@
       <importNode>Importar Nodo</importNode>
       <viewRelations>Ver Relaciones</viewRelations>
       <showJCRStructure>Mostrar la Estructura JCR</showJCRStructure>
-      <watchDocument>Ver Documento</watchDocument>
+      <watchDocument>Vigilar Documento</watchDocument>
       <taggingDocument>Etiquetar este documento</taggingDocument>
       <viewMetadatas>Ver metadatos</viewMetadatas>
       <overloadThumbnail>Miniatura de sobrecarga</overloadThumbnail>
