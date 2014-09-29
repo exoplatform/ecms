@@ -31,7 +31,10 @@
    UIForm uiForm = uicomponent.getAncestorOfType(UIForm.class);
    
    // Get owner of current node
-   Node currentNode = uicomponent.getParent().getCurrentNode();
+   Node currentNode;
+	 try{
+		currentNode = uicomponent.getParent().getCurrentNode();
+	 }catch(Exception ex){}
    String ownerId = Utils.getNodeOwner(currentNode);
    boolean canChangePermission = (currentNode == null) || (!currentNode.isLocked() && PermissionUtil.canChangePermission(currentNode)) || (currentNode.isLocked() && Utils.isLockTokenHolder(currentNode));
    def beanIdField = uicomponent.getBeanIdField();
