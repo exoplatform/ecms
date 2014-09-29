@@ -40,6 +40,7 @@
 	
 	<external-component-plugins>
     <target-component>org.exoplatform.services.cache.CacheService</target-component>
+    <!-- standalone configuration for seo cache  -->
     <component-plugin>
       <name>addExoCacheConfig</name>
       <set-method>addExoCacheConfig</set-method>
@@ -81,8 +82,8 @@
           <description>The cache configuration for SEO in clustering mode</description>
           <object type="org.exoplatform.services.cache.impl.jboss.ea.EAExoCacheConfig">
             <field name="name"><string>wcm.seo</string></field>
-            <field name="expirationTimeout"><long>${wcm.cache.seoservice.expirationTimeout:-1}</long></field>
-            <field name="maxNodes"><int>${wcm.cache.seoservice.maxNodes:300}</int></field>
+            <field name="expirationTimeout"><long>${wcm.cache.seoservice.expirationtimeout:-1}</long></field>
+            <field name="maxNodes"><int>${wcm.cache.seoservice.maxnodes:300}</int></field>
             <field name="distributed"><boolean>true</boolean></field>
           </object>
         </object-param>
