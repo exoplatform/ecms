@@ -33,17 +33,25 @@ import org.exoplatform.webui.event.EventListener;
 import org.exoplatform.webui.form.UIForm;
 
 @ComponentConfig(lifecycle = UIFormLifecycle.class,
-                 template = "classpath:groovy/templates/CloudDriveConnectDialog.gtmpl",
-                 events = { @EventConfig(listeners = ConnectCloudDriveForm.CancelActionListener.class,
-                                         phase = Phase.DECODE) })
+                 template = "classpath:groovy/templates/CloudDriveConnectDialog.gtmpl", events = {
+                     @EventConfig(listeners = ConnectCloudDriveForm.ConnectActionListener.class),
+                     @EventConfig(listeners = ConnectCloudDriveForm.CancelActionListener.class,
+                                  phase = Phase.DECODE) })
 public class ConnectCloudDriveForm extends UIForm implements UIPopupComponent {
 
   protected static final Log LOG = ExoLogger.getLogger(ConnectCloudDriveForm.class);
-  
+
   public static class CancelActionListener extends EventListener<ConnectCloudDriveForm> {
     public void execute(Event<ConnectCloudDriveForm> event) throws Exception {
       UIJCRExplorer uiExplorer = event.getSource().getAncestorOfType(UIJCRExplorer.class);
       uiExplorer.cancelAction();
+    }
+  }
+
+  public static class ConnectActionListener extends EventListener<ConnectCloudDriveForm> {
+    public void execute(Event<ConnectCloudDriveForm> event) throws Exception {
+      UIJCRExplorer uiExplorer = event.getSource().getAncestorOfType(UIJCRExplorer.class);
+      uiExplorer.updateAjax(event);
     }
   }
 

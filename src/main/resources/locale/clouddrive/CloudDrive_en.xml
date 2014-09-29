@@ -59,4 +59,9 @@
       <FileLinksCreated>File{0} linked in {1}</FileLinksCreated>
     </msg>
   </CloudFile>
+  <ConnectCloudDriveForm>
+    <action>
+      <Cancel>#{word.cancel}</Cancel>
+    </action>
+  </ConnectCloudDriveForm>
 </bundle>
