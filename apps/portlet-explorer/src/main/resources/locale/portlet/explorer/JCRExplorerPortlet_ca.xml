@@ -797,7 +797,7 @@
       <add_node>Drets d'escriptura</add_node>
       <remove>Elimina Drets</remove>
     </label>
-    <title>Afegeix un permís a aquell node</title>
+    <title>Afegeix un permisos al node</title>
     <action>
       <Close>#{word.close}</Close>
       <Save>#{word.save}</Save>

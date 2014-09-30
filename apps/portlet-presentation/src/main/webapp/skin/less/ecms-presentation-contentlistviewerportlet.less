@@ -1,11 +1,11 @@
-@import "variables.less"; 
+@import "variables.less";
 @import "mixins.less";
 
 /*---------------------------UIFolderPathSelectorForm------------------------------------*/
 
 .UICLVPortlet {
 	.TitleBox {
-	  background: @grayWhiteSmoke;
+	  background: @componentBackground;
 	  border: 1px solid @borderColor;
 	  font-weight: bold;
 	  padding: 0 4px;
@@ -31,7 +31,7 @@
 		  cursor: pointer;
 		  .square(16px);
 		}
-		
+
 	}
 }
 
@@ -64,7 +64,7 @@
 	  border-top: 1px solid @borderColor;
 	  border-left: 1px solid @borderColor;
 	  border-right: 1px solid @borderColor;
-	  color: #424242;
+	  color: @textColor;
 	  font-weight: bold;
 	  line-height: 25px;
 	  padding-left: 10px;
@@ -103,7 +103,7 @@
   select{
   	width: auto;
   }
-   
+
 }
 
 
@@ -112,7 +112,7 @@
   padding: 20px;
    a:hover {
 	  font-size: @baseFontSize - 1;
-	  color: @blue;
+	  color: @primaryColor;
 	}
 }
 
@@ -122,7 +122,7 @@
   margin: auto;
   padding-left: 1px;
   	.OddRow {
-	  background: @grayWhiteSmoke ;
+	  background: @componentBackground ;
 	}
 	.EvenRow {
 	  background: #F5F5F5 ;
@@ -136,7 +136,7 @@
 	  padding: 4px;
 	}
 	th {
-	   background: @grayWhiteSmoke;
+	   background: @componentBackground;
 		  border: 1px solid @borderColor;
 	  font-weight: normal;
 	  line-height: 19px;
@@ -199,7 +199,7 @@
 		  display: block;
 		  padding: 0 3px 3px 25px;
 		  background: url('../images/ContentListViewer/icons/RefreshIcon.gif') no-repeat;
-		  color: #ff4200;
+		  color: @linkColor;
 		  font-weight: bold;
 		 font-size: @baseFontSize;
 		}
@@ -253,7 +253,7 @@
 	  line-height: 16px;
 	  font-size: @baseFontSize - 2;
 	}
-	
+
 }
 
 
@@ -305,11 +305,11 @@
 			.heading {
 				font-weight: bold;
 				a {
-					color: #333;
+					color: @textColor;
 				}
 			}
 			.dateAndMail {
-				color: #999;
+				color: @grayLight;
 			}
 			.summary p {
 				margin-bottom: 0;

@@ -15,6 +15,12 @@ def escapeChar = '%' as char
 .uiAuthoringDashboard .element a {
   color: #333;
   text-decoration:none;
+  display: block;
+  overflow: hidden;
+}
+
+.uiAuthoringDashboard .element .uiIconEcmsDottedArrow  {
+	margin-top:2px;
 }
 
 .uiAuthoringDashboard .element a:hover {
@@ -35,10 +41,6 @@ def escapeChar = '%' as char
 	font-size:12px;
 }
 
-.uiAuthoringDashboard .element {
-  background: url('/ecmexplorer/skin/webui/component/explorer/sidebar/DefaultSkin/icons/ArrowSideBar.gif') no-repeat left 8px;
-  padding-left: 15px;
-}
 
 .uiAuthoringDashboard .total {
 	background-color: #D0D0D0;

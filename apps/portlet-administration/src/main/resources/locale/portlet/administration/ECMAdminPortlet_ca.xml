@@ -1377,7 +1377,7 @@
       <set_property>Dret per definir propietat</set_property>
       <remove>Elimina Drets</remove>
     </label>
-    <title>Afegeix un permís a aquell node</title>
+    <title>Afegeix un permisos al node</title>
     <action>
       <Close>#{word.close}</Close>
       <Save>Desa</Save>

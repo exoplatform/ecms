@@ -8,13 +8,13 @@
 		padding: 0px;
 		margin: -10px -10px 0px -10px;
 	}
-	
+
 	#UIAllItems {
 		margin-bottom: 20px;
 	}
-	
+
 	.uiBox .title {
-		
+
 		.sideGeneratal{
 			cursor: pointer;
 			float: right;
@@ -23,32 +23,32 @@
 			display: block;
 		}
 	}
-	
+
 	.uiBox .uiContentBox {
 		padding: 10px;
 	}
-	
+
 	.uiSelectContent {
-		background: @grayWhiteSmoke;
+		background: @componentBackground;
 		border-top: 1px solid @borderColor;
 		height: 30px;
 		line-height: 16px;
 		padding: 0px 3px;
 		.border-bottom-radius(3px);
-		
+
 		.normalItem {
 			cursor: pointer;
 			padding: 8px 8px 0px 8px;
 			.size(23px,14px);
 			float: left;
 			margin-top: -1px;
-			
+
 			&:hover [class^="uiIconEcms"] {
 				background-image: url("/eXoWCMResources/skin/images/Icons/uiIconsEcmsBlue.png");
 			}
-			
+
 			&:hover .uiIconEcmsTagExplorerMini {
-				background-image: url("/eXoResources/skin/images/Icons/uiIconsBlue.png");
+				background-image: url("@{images-path}/Icons/uiIconsBlue.png");
 			}
 		}
 
@@ -61,13 +61,13 @@
 			border-left: 1px solid @borderColor;
 			border-right: 1px solid @borderColor;
 			margin-top: -1px;
-			
+
 			[class^="uiIconEcms"] {
 				background-image: url("/eXoWCMResources/skin/images/Icons/uiIconsEcmsBlue.png");
 			}
-			
+
 			.uiIconEcmsTagExplorerMini {
-				background-image: url("/eXoResources/skin/images/Icons/uiIconsBlue.png");
+				background-image: url("@{images-path}/Icons/uiIconsBlue.png");
 			}
 		}
 
@@ -80,13 +80,13 @@
 			width: 14px;
 			margin-top: -1px;
 		}
-		
+
 		.itemIcon {
 			margin: auto;
 			.size(15px, 16px);
 			display: block;
 		}
-		
+
 		.defaultIcon {
 			background: url('/ecmexplorer/skin/webui/component/explorer/sidebar/DefaultSkin/icons/Generatal.png') no-repeat center;
 		}
@@ -94,14 +94,14 @@
 			background: url('/ecmexplorer/skin/webui/component/explorer/sidebar/DefaultSkin/icons/ActionItem.gif') no-repeat center;
 		}
 	}
-	
+
 	.selectItem {
     overflow: auto;
 	}
 }
 
 .uiSideBar  {
-	
+
 	.resizeTreeExplorer {
 		height: 18px;
 		text-align: center;
@@ -111,7 +111,7 @@
 			cursor : pointer;
 		}
 	}
-	
+
 	.DriversButton {
 		background: url('/ecmexplorer/skin/webui/component/explorer/sidebar/DefaultSkin/icons/DriversButton.png') no-repeat left center;
 		cursor: pointer;
@@ -134,7 +134,7 @@
 .uiSideBar  {
 
 	.ListExtendedItem {
-			background: none repeat scroll 0 0 @grayLighter;
+			background: none repeat scroll 0 0 @componentBackgroundLight;
 			border: 1px solid @borderColor;
 			padding: 5px;
 			position: absolute;
@@ -155,15 +155,15 @@
 .uiSideBar .UITagExplorer {
 	text-align: left;
 	line-height: 22px;
-	
+
 	.title .actionIcon {
 		margin: -3px;
 	}
-	
+
 	.tagContainer a {
 		color: @grayDark;
 		margin: 0px 15px 7px 0px;
-		
+
 		&:hover {
 		color: @linkColorHover;
 		}

@@ -194,8 +194,8 @@
       <uri>URI</uri>
     </label>
     <action>
-      <Save>#{palabra.guardar}</Save>
-      <Cancel>#{palabra.cancelar}</Cancel>
+      <Save>#{word.save}</Save>
+      <Cancel>#{word.cancel}</Cancel>
     </action>
     <msg>
       <register-unsuccessfull>El nombre del espacio o URI ya existe.</register-unsuccessfull>
@@ -254,7 +254,7 @@
     </msg>
     <action>
       <Add>Agregar metadatos</Add>
-      <Cancel>#{palabra.cancelar}</Cancel>
+      <Cancel>#{word.cancel}</Cancel>
     </action>
   </UIMetadataList>
   <MetadataPopupAddNew>
@@ -281,7 +281,7 @@
   <UIMetadataForm>
     <title>Trazar Metadatos</title>
     <action>
-      <Cancel>#{palabra.cancelar}</Cancel>
+      <Cancel>#{word.cancel}</Cancel>
       <Save>Aplicar</Save>
     </action>
     <header>
@@ -327,7 +327,7 @@
     </tab>
     <action>
       <Cancel>#{word.close}</Cancel>
-      <Back>#{palabra.atrás}</Back>
+      <Back>#{word.back}</Back>
     </action>
   </UIMetadataView>
   <ViewMetadataPopup>
@@ -366,10 +366,10 @@
   </UIDriveList>
   <UIDriveForm>
     <action>
-      <Cancel>#{palabra.cancelar}</Cancel>
-      <Save>#{palabra.guardar}</Save>
-      <Back>#{palabra.atrás}</Back>
-      <Refresh>#{palabra.actualizar}</Refresh>
+      <Cancel>#{word.cancel}</Cancel>
+      <Save>#{word.save}</Save>
+      <Back>#{word.back}</Back>
+      <Refresh>#{word.refresh}</Refresh>
     </action>
     <msg>
       <drive-exists>La unidad ya existe.</drive-exists>
@@ -553,9 +553,9 @@
       <AddValue>Añadir</AddValue>
       <CancelConstraints>#{word.cancel}</CancelConstraints>
       <CancelTab>#{word.cancel}</CancelTab>
-      <UpdateChild>#{palabra.actualizar}</UpdateChild>
+      <UpdateChild>#{word.update}</UpdateChild>
       <CancelChild>#{word.cancel}</CancelChild>
-      <UpdateProperty>#{palabra.actualizar}</UpdateProperty>
+      <UpdateProperty>#{word.update}</UpdateProperty>
       <CancelProperty>#{word.cancel}</CancelProperty>
       <Close>#{word.cancel}</Close>
     </action>
@@ -974,7 +974,7 @@
       <importNode>Importar Nodo</importNode>
       <viewRelations>Ver Relaciones</viewRelations>
       <showJCRStructure>Mostrar la Estructura JCR</showJCRStructure>
-      <watchDocument>Ver Documento</watchDocument>
+      <watchDocument>Vigilar Documento</watchDocument>
       <taggingDocument>Etiquetar este documento</taggingDocument>
       <viewMetadatas>Ver metadatos</viewMetadatas>
       <overloadThumbnail>Miniatura de sobrecarga</overloadThumbnail>
@@ -1075,7 +1075,7 @@
       <Cancel>#{word.cancel}</Cancel>
       <Reset>Resetear</Reset>
       <Restore>Restaurar</Restore>
-      <Refresh>#{palabra.actualizar}</Refresh>
+      <Refresh>#{word.refresh}</Refresh>
     </action>
     <msg>
       <version-restored>Versión {0} fue restaurada con éxito.</version-restored>
@@ -1188,7 +1188,7 @@
       <Save>#{word.save}</Save>
       <Restore>#{word.restore}</Restore>
       <Cancel>#{word.cancel}</Cancel>
-      <Refresh>#{palabra.actualizar}</Refresh>
+      <Refresh>#{word.refresh}</Refresh>
       <Change>Cambiar</Change>
     </action>
     <msg>
@@ -1812,7 +1812,7 @@
     <action>
       <Save>#{word.save}</Save>
       <Cancel>#{word.cancel}</Cancel>
-      <Refresh>#{palabra.actualizar}</Refresh>
+      <Refresh>#{word.refresh}</Refresh>
     </action>
   </UITemplateEditForm>
   <!--
@@ -1871,7 +1871,7 @@
       <Save>#{word.save}</Save>
       <Restore>#{word.restore}</Restore>
       <Cancel>#{word.cancel}</Cancel>
-      <Refresh>#{palabra.actualizar}</Refresh>
+      <Refresh>#{word.refresh}</Refresh>
     </action>
     <msg>
       <name-invalid>El nombre del campo no debe contener caracteres especiales.</name-invalid>

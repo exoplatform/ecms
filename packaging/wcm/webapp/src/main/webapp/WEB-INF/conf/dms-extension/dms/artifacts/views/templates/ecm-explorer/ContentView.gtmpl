@@ -83,7 +83,7 @@
         </div>
         <div class="lineLeft" style="cursor:default;"><span></span></div>
 <!-- Title -->
-        <div class="columnName" style="width: 200px;" onclick="<%=uicomponent.event("Sort", typeActionLink + "Alphabetic")%>">
+        <div class="columnName" style="width: 160px;" onclick="<%=uicomponent.event("Sort", typeActionLink + "Alphabetic")%>">
           <%
             if (selectedSortType.equals("Alphabetic")) {
               %>
@@ -98,7 +98,7 @@
         <div class="lineLeft" onmousedown="eXo.ecm.UIListView.resizeColumn(this, event);"
         onkeydown="eXo.ecm.UIListView.resizeColumn(this, event);"><span></span></div>
 <!-- Date created -->
-        <div class="columnDatetime column" style="width: 105px;" onclick="<%=uicomponent.event("Sort", typeActionLink + "exo:dateCreated")%>">
+        <div class="columnDatetime column" style="width: 110px;" onclick="<%=uicomponent.event("Sort", typeActionLink + "exo:dateCreated")%>">
           <%
             if (selectedSortType.equals("exo:dateCreated")) {
               %>
@@ -113,7 +113,7 @@
         <div class="lineLeft" onmousedown="eXo.ecm.UIListView.resizeColumn(this, event);"
         onkeydown="eXo.ecm.UIListView.resizeColumn(this, event);"><span></span></div>
 <!-- Author --> 
-        <div class="columnAuthor column" style="width: 93px;" onclick="<%=uicomponent.event("Sort", typeActionLink + "exo:owner")%>">
+        <div class="columnAuthor column" style="width: 90px;" onclick="<%=uicomponent.event("Sort", typeActionLink + "exo:owner")%>">
           <%
             if (selectedSortType.equals("exo:owner")) {
               %>
@@ -128,7 +128,7 @@
         <div class="lineLeft" onmousedown="eXo.ecm.UIListView.resizeColumn(this, event);"
         onkeydown="eXo.ecm.UIListView.resizeColumn(this, event);"><span></span></div>
 <!-- Last User --> 
-        <div class="columnLastUser column" style="width: 93px;" onclick="<%=uicomponent.event("Sort", typeActionLink + "publication:lastUser")%>">
+        <div class="columnLastUser column" style="width: 90px;" onclick="<%=uicomponent.event("Sort", typeActionLink + "publication:lastUser")%>">
           <%
             if (selectedSortType.equals("publication:lastUser")) {
               %>
@@ -143,7 +143,7 @@
         <div class="lineLeft" onmousedown="eXo.ecm.UIListView.resizeColumn(this, event);"
         onkeydown="eXo.ecm.UIListView.resizeColumn(this, event);"><span></span></div>
 <!-- Status -->
-        <div class="columnStatus column" style="width: 93px;" onclick="<%=uicomponent.event("Sort", typeActionLink + "publication:currentState")%>">
+        <div class="columnStatus column" style="width: 60px;" onclick="<%=uicomponent.event("Sort", typeActionLink + "publication:currentState")%>">
           <%
             if (selectedSortType.equals("publication:currentState")) {
               %>
@@ -349,27 +349,27 @@
               </div>
               <div class="lineLeftItem"><span></span></div>
 <!-- Title-->
-              <div class="columnName" style="width: 200px;">
+              <div class="columnName" style="width: 160px;">
                   <div class="nodeLabel" style="$hiddenStyle" rel="tooltip" data-placement="bottom" title="$title $lockedLabel"><span class="nodeName"><%=title%></span></div>
               </div>
               <div class="lineLeftItem"><span></span></div>
 <!-- Date created -->
-              <div class="columnDatetime column" style="width: 105px;">
+              <div class="columnDatetime column" style="width: 110px;">
                   <div class="nodeLabel" rel="tooltip" data-placement="bottom" title="<%= datetime %>"><%= datetime %></div>
               </div>
               <div class="lineLeftItem"><span></span></div>
 <!-- Author -->
-              <div class="columnAuthor column" style="width: 93px;">
+              <div class="columnAuthor column" style="width: 90px;">
                   <div class="nodeLabel" rel="tooltip" data-placement="bottom" title="<%= author %>"><%= author %></div>
               </div>
               <div class="lineLeftItem"><span></span></div>
 <!-- Last User -->
-              <div class="columnLastUser column" style="width: 93px;">
+              <div class="columnLastUser column" style="width: 90px;">
                   <div class="nodeLabel" rel="tooltip" data-placement="bottom" title="<%= lastUser %>"><%= lastUser %></div>
               </div>
               <div class="lineLeftItem"><span></span></div>
 <!-- Status-->
-              <div class="columnStatus column" style="width: 93px;">
+              <div class="columnStatus column" style="width: 60px;">
                   <div class="nodeLabel" rel="tooltip" data-placement="bottom" title="<%=_ctx.appRes("UIPublicationPanel.status." + status) %>"><%=_ctx.appRes("UIPublicationPanel.status." + status) %></div>
               </div>
             </div>

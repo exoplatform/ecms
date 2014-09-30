@@ -16,14 +16,18 @@
  */
 package org.exoplatform.services.seo;
 
+import java.io.Serializable;
+
 /**
  * Created by The eXo Platform SAS
  * Author : eXoPlatform
  *          exo@exoplatform.com
  * Jun 17, 2011  
  */
-public class PageMetadataModel {
+public class PageMetadataModel implements Serializable {
  
+  private static final long serialVersionUID = -2765258183491567699L;
+
   private String uri = null;
   
   //private String pageParent = null;

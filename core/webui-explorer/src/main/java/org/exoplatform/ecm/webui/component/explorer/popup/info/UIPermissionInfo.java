@@ -16,11 +16,6 @@
  */
 package org.exoplatform.ecm.webui.component.explorer.popup.info;
 
-import java.util.List;
-
-import javax.jcr.AccessDeniedException;
-import javax.jcr.Node;
-
 import org.exoplatform.ecm.webui.component.explorer.UIJCRExplorer;
 import org.exoplatform.ecm.webui.component.explorer.UIJCRExplorerPortlet;
 import org.exoplatform.ecm.webui.core.UIPermissionInfoBase;
@@ -43,6 +38,10 @@ import org.exoplatform.webui.core.UIPopupContainer;
 import org.exoplatform.webui.core.lifecycle.UIContainerLifecycle;
 import org.exoplatform.webui.event.Event;
 import org.exoplatform.webui.event.EventListener;
+
+import javax.jcr.AccessDeniedException;
+import javax.jcr.Node;
+import java.util.List;
 
 @ComponentConfig(lifecycle = UIContainerLifecycle.class, events = {
     @EventConfig(listeners = UIPermissionInfo.DeleteActionListener.class,
@@ -71,21 +70,20 @@ public class UIPermissionInfo extends UIPermissionInfoBase {
       if (uicomp.getSizeOfListPermission() < 2 + iSystemOwner) {
         uiApp.addMessage(new ApplicationMessage("UIPermissionInfo.msg.no-permission-remove",
             null, ApplicationMessage.WARNING));
-        
+
         return;
       }
       String name = event.getRequestContext().getRequestParameter(OBJECTID) ;
       if(!currentNode.isCheckedOut()) {
         uiApp.addMessage(new ApplicationMessage("UIActionBar.msg.node-checkedin", null,
             ApplicationMessage.WARNING)) ;
-        
+
         return ;
       }
       String nodeOwner = Utils.getNodeOwner(node);
       if(name.equals(nodeOwner)) {
         uiApp.addMessage(new ApplicationMessage("UIPermissionInfo.msg.no-permission-remove", null,
-                                                ApplicationMessage.WARNING)) ;
-        
+                ApplicationMessage.WARNING)) ;
         return ;
       }
       if(PermissionUtil.canChangePermission(node)) {
@@ -100,7 +98,7 @@ public class UIPermissionInfo extends UIPermissionInfoBase {
           node.getSession().refresh(false) ;
           uiApp.addMessage(new ApplicationMessage("UIPermissionInfo.msg.access-denied", null,
                                                   ApplicationMessage.WARNING)) ;
-          
+
           return ;
         }
         if(uiJCRExplorer.getRootNode().equals(node)) {
@@ -113,7 +111,7 @@ public class UIPermissionInfo extends UIPermissionInfoBase {
       } else {
         uiApp.addMessage(new ApplicationMessage("UIPermissionInfo.msg.no-permission-tochange", null,
             ApplicationMessage.WARNING)) ;
-        
+
         return ;
       }
       UIPopupContainer uiPopup = uicomp.getAncestorOfType(UIPopupContainer.class) ;
@@ -130,7 +128,7 @@ public class UIPermissionInfo extends UIPermissionInfoBase {
         // Reset the permissions
         linkManager.updateLink(realNode, currentNode);
       }
-      
+
       if(currentNode.isNodeType(NodetypeConstant.MIX_REFERENCEABLE)){
         List<Node> symlinks = linkManager.getAllLinks(currentNode, "exo:symlink");
         for (Node symlink : symlinks) {
@@ -144,9 +142,14 @@ public class UIPermissionInfo extends UIPermissionInfoBase {
         }
       }
       currentNode.getSession().save();
-
       uiJCRExplorer.setIsHidePopup(true) ;
-      event.getRequestContext().addUIComponentToUpdateByAjax(uicomp) ;
+      if(!PermissionUtil.canRead(currentNode)){
+        uiPopup.cancelPopupAction();
+        uiJCRExplorer.refreshExplorer(currentNode.getSession().getRootNode(), true);
+      }else {
+        uiJCRExplorer.refreshExplorer(currentNode, false);
+      }
+      event.getRequestContext().addUIComponentToUpdateByAjax(uiJCRExplorer) ;
     }
   }
 

@@ -85,9 +85,9 @@
     <%
     	if(beanActions != null && beanActions.length > 0) { 
     %>
-          <td class="action center">
-            <a href="javascript: void(0)" onclick="<%= uicomponent.event("Select", nodeExpression) %>" class="SelectIcon" rel="tooltip" data-placement="bottom" title="<%=_ctx.appRes("UIContentSearchResult.title.Select")%>"><i class="uiIconValidate uiIconLightGray"></i></a>
-			<a href="javascript: void(0)" onclick="<%= uicomponent.event("View", nodeExpression) %>" class="ViewIcon" rel="tooltip" data-placement="bottom" title="<%=_ctx.appRes("UIContentSearchResult.title.View")%>"><i class="uiIconPreview uiIconLightGray"></i></a>                 
+          <td class="actionContainer center">
+            <a href="javascript: void(0)" onclick="<%= uicomponent.event("Select", nodeExpression) %>" class="selectIcon actionIcon" rel="tooltip" data-placement="bottom" title="<%=_ctx.appRes("UIContentSearchResult.title.Select")%>"><i class="uiIconValidate uiIconLightGray"></i></a>
+			<a href="javascript: void(0)" onclick="<%= uicomponent.event("View", nodeExpression) %>" class="viewIcon actionIcon" rel="tooltip" data-placement="bottom" title="<%=_ctx.appRes("UIContentSearchResult.title.View")%>"><i class="uiIconPreview uiIconLightGray"></i></a>                 
             </td>
     <%
     	}

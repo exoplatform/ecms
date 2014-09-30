@@ -31,17 +31,17 @@
 			top: 30%;
 		}
 	}
-	
+
 	.uiBox {
 		margin: 0px;
 		width: 650px;
 		float: right;
 	}
-	
+
 	.uploadIconContainer {
 		float: left;
 		width: 30px;
-		
+
 		img {
 			width: 20px;
 			.border-radius(2px);
@@ -61,24 +61,24 @@
 
 	.loadContent {
 		padding: 10px !important;
-		
+
 		&:hover {
-			background: @grayLighter;
+			background: @componentBackgroundLight;
 		}
-		
+
 		.fileName {
 			cursor: pointer;
 			overflow: hidden;
 			text-overflow: ellipsis;
 			white-space: nowrap;
-			
+
 			a {
 				color: @textColor;
 			}
 		}
 
 		.fileSize {
-			width: 100px; 
+			width: 100px;
 			text-align: right;
 			font-weight: bold;
 			font-style: normal;
@@ -86,14 +86,14 @@
 		.warningContainer {
 			margin-right: 10px;
 		}
-		
+
 		.action {
 			margin-left: 5px;
 		}
 
 		.loaddingPercent {
-			width: 270px; 
-			height: 15px; 
+			width: 270px;
+			height: 15px;
 			text-align: center;
 			background: white;
 			border: 1px solid @borderColor;
@@ -101,7 +101,7 @@
 		}
 
 		.loadding {
-			background: @grayWhiteSmoke;
+			background: @componentBackground;
 			height: 15px;
 			display: block;
 		}
@@ -115,7 +115,7 @@
 			top: -3px;
 			left: 40%;
 		}
-		
+
 		.progress {
 			width: 270px;
 			position: relative;
@@ -142,40 +142,39 @@
 		border-top: 1px solid @borderColor;
 		display: block;
 	}
-	
+
 	.multiUploadFileList {
 		overflow-y: auto;
 		max-height: 163px;
-		
+
 		.loadContent .Action {
-			color: @blue;
+			color: @primaryColor;
 			height: 20px;
 			text-align: center;
 			cursor: pointer;
 		}
 	}
-	
+
 	.multiUploadFilesShortInfo {
 		[class^="uiIcon"] {
 			margin: 2px 0px 0px 8px;
 		}
 	}
-	
+
 	.uiIconWarning {
-			background: url("/eXoResources/skin/images/Icons/uiIconColor.png") no-repeat -20px 0px;
+			background: url("@{images-path}/Icons/uiIconColor.png") no-repeat -20px 0px;
 		}
-		
+
 	.uiIconMultiUploadClose {
-		background: url("/eXoResources/skin/images/Icons/uiIconColor.png") no-repeat 0px 0px;
+		background: url("@{images-path}/Icons/uiIconColor.png") no-repeat 0px 0px;
 		cursor: pointer;
 	}
-		
+
 	.uiIconNoneClose {
-		background: url("/eXoResources/skin/images/Icons/uiIconColor.png") no-repeat -180px 0px;
+		background: url("@{images-path}/Icons/uiIconColor.png") no-repeat -180px 0px;
 	}
 }
 
 .noShow {
 	display:none;
 }
-	

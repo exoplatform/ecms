@@ -1,4 +1,4 @@
-@import "variables.less"; 
+@import "variables.less";
 @import "mixins.less";
 @import "Seo/Style.less";
 @import "Sprites/Style.less";
@@ -26,64 +26,64 @@
 
 	.breadcumbsPortlet {
 		height: 30px;
-		
+
 		.breadcumbTab {
 			display: inline-block;
 			font-size: 13px;
-			
+
 			a.normal {
 				color: @grayDark;
-				
+
 				&:hover {
 					color: @grayLight;
 				}
 			}
-			
+
 			a.active {
 				color: @grayLight;
 				font-weight: bold;
 			}
 		}
 	}
-	
+
 	.actionBar {
 		.control-label {
 			width: auto;
 			margin-right: 20px;
 		}
-		
+
 		.controls {
 			margin: 0px;
-			
+
 			.uiSelectbox {
 				width: 120px;
-				
+
 				.selectbox {
 					width: 123px;
 				}
 			}
 		}
 	}
-	
+
 	.listContainer {
 		padding-bottom: 10px;
 	}
-	
+
 	.leftWorkspace {
 		width: 210px;
 		float: left;
 		border: 1px solid @borderColor;
-		background: @grayLighter;
+		background: @componentBackgroundLight;
 		overflow: auto;
 		height: 461px;
 		.ChildrenContainer{
 			margin-left: 15px;
 		}
 	}
-	
+
 	.rightWorkspace{
 		 margin-left: 230px;
-		 
+
 		.multiListContainer .listFileContainer {
 			margin-top:6px;
 			overflow: auto;
@@ -99,29 +99,29 @@
 }
 
 .uiContentSearchForm {
-	
+
 	.dateInput {
 		margin: 10px 10px 0px 0px;
-		
+
 		input {
 			width: 125px;
 		}
 	}
-	
+
 	.uiRadio {
 		margin: 0px;
 	}
-	
+
 	.txt {
 		margin: 5px 0px;
 	}
-	
+
 	.inputGroup {
 		input {
 			width: 125px;
 		}
 	}
-	
+
 	.uiSelectbox {
 		width: 123px;
 		.selectbox {
@@ -147,7 +147,7 @@
 			}
 		}
 	}
-	
+
 }
 
 .uiContentSearchResult {
@@ -159,7 +159,7 @@
 			white-space: nowrap;
 		}
 	}
-	
+
 	.noContent{
 		color: @grayLight;
 	}
@@ -193,38 +193,38 @@
 	top: 0;
 	width: 160px;
 	z-index: 1;
-	
+
 	.edittingToolBar {
-		background: @blueLight;
+		background: @primaryLightColor;
 		padding: 5px;
 		.border-radius(3px 3px 0px 0px);
     position: absolute;
     right: -1px;
     top: -36px;
-		
+
 		.btn-group .btn {
 			padding: 3px 5px;
-			border: 1px solid @blueDark;
-			background: @blueLight;
+			border: 1px solid @primaryDarkColor;
+			background: @primaryLightColor;
 			box-shadow: none;
 			margin-left: -5px;
 			&:hover {
-				#gradient .vertical(@blueLighter, @blue);
+				#gradient .vertical(@primaryLighterColor, @primaryColor);
 				box-shadow: 0 1px 0 rgba(255, 255, 255, 0.2) inset, 0 1px 2px rgba(0, 0, 0, 0.05);
 			}
 		}
-		
+
 		.btn-group > .btn:first-child{
 			margin-left: 0px;
 		}
-		
+
 		[class^="uiIcon"] {
-			background-image: url("/eXoResources/skin/images/Icons/uiIconsWhite.png");
+			background-image: url("@{images-path}/Icons/uiIconsWhite.png");
 		}
 		[class^="uiIconEcms"] {
 			background-image: url("/eXoWCMResources/skin/images/Icons/uiIconsEcmsWhite.png");
 		}
-		
+
 		.edittingCurrentState .publishText,
 		.edittingCurrentState .draftText {
 			color: @white;
@@ -232,9 +232,9 @@
 			font-weight: bold;
 			display: block;
 		}
-		
+
 		.edittingCurrentState .draftText {
-			color: @blueLighter;
+			color: @primaryLighterColor;
 		}
 	}
 }
@@ -247,15 +247,15 @@
 }
 
 .containerHoverClass {
-  border:1px solid @blueLight !important;
-	
+  border:1px solid @primaryLightColor !important;
+
 	.edittingToolBarContainer {
 		display: block;
 	}
 }
 
 .containerHoverClassInner:hover {
-  border:1px solid @blueLight !important;
+  border:1px solid @primaryLightColor !important;
 	.edittingContent {
 		display: block;
 	}
@@ -272,9 +272,9 @@
 .uiThumbnailsView {
 	overflow-y: auto;
 	overflow-x: hidden;
-	
+
 	.actionIconsContainer {
-	
+
 		.actionIconBox {
 			.size(200px, 148px);
 			float: left;
@@ -282,41 +282,41 @@
 			padding: 0px !important;
 			overflow: hidden;
 			cursor: pointer;
-			
+
 			&:hover {
 				.nodeLabel {
-					background: @grayWhiteSmoke;
+					background: @componentBackground;
 				}
 			}
 		}
-		
+
 		.selectedBox {
 			.nodeLabel {
-				background: @grayDarkWhiteSmoke;
+				background: @borderColor;
 			}
-			
+
 			.actionIconLabel {
-				background: @blue;
-				
+				background: @primaryColor;
+
 				> a {
 					color: @white;
 				}
 			}
 		}
-		
+
 		.bgThumbnailImage {
 			padding: 5px;
 			background: @white;
 			box-shadow: 1px 1px 3px 1px rgba(25,44,48,0.2);
 			display: inline-block;
 		}
-		
+
 		.loadingProgressIcon {
 			.size(64px,64px);
-			background: url('/ecmexplorer/skin/webui/component/explorer/UIJCRExplorer/DefaultSkin/background/LoadingProgress.gif') no-repeat center center;
+			background: url('/eXoWCMResources/skin/images/Icons/LoadingProgress.gif') no-repeat center center;
 			position: relative;
 			margin: auto;
-			
+
 			img {
 				display: none;
 				max-width: 116px;
@@ -325,7 +325,7 @@
 				border: 1px solid @borderColor;
 			}
 		}
-		
+
 		.nodeLabel {
 			.size(148px,148px);
 			.border-radius(3px);
@@ -356,18 +356,18 @@
 			text-align: center;
 			padding: 5px;
 			.border-radius(3px);
-			
+
 			> a {
 				color: @textColor;
 			}
 		}
 	}
-	
+
 	[class^="uiIcon64x64"] {
 		margin: auto;
 		position: relative;
 	}
-	
+
 	.Link,.IconLocked {
 		background: url("/ecmexplorer/skin/images/Icons/IconBigLink.png") no-repeat right top;
 		position: absolute;
@@ -376,7 +376,7 @@
 		right: -5px;
 		bottom: 0;
 	}
-	
+
 	.IconLocked {
 		background: url("/ecmexplorer/skin/images/Icons/IconBigLock.png") no-repeat right top;
 		top: 0;
@@ -388,7 +388,7 @@
 /******** UIRelationManager **************/
 .uiOneNodePathSelector {
 	.breadcrumb {
-		background: @grayLighter;
+		background: @componentBackgroundLight;
 		border: 1px solid @borderColor;
 		padding: 5px 10px;
 		margin-bottom: 20px;
@@ -409,7 +409,7 @@
 				.controls{
 					margin: 0px;
 				}
-			}	
+			}
 		}
 	}
 }
@@ -523,7 +523,7 @@
 		    	}
 		    }
 		}
-	} 
+	}
 	.UISearchForm{
 		.controls{
 			line-height: 25px;
@@ -534,20 +534,21 @@
 .UISingleContentViewerPortlet{
 	.UIPresentationContainer{
 		.title{
-			color: #262626;
+			color: @textColor;
 		    padding: 20px 0 0 0;
 		    margin: 0 0 2px 0;
+		    text-shadow: none;
 		}
 		.dateAndMail {
-		    color: #444;
+		    color: @textColor;
 		    padding: 5px 0 0 0;
 		}
 		.uiOptionBar{
-			background: none repeat scroll 0 0 #F8F8F8;
-		    border: 1px solid #ECECEC;
+			background: none repeat scroll 0 0 @componentBackgroundLight;
+		    border: 1px solid @borderColor;
 		    padding: 4px 8px 4px 4px;
 		    margin: 8px 0;
-		    a{color:#262626;}
+		    a{color:@textColor;}
 		}
 		.BigNews{
 			.Title{
@@ -557,6 +558,12 @@
 	}
 }
 
-.cke_show_borders ul li { 
+.cke_show_borders ul li {
     list-style-type: disc;
+}
+
+/**************** Quick edit ************/
+.quickEdit {
+	float: right;
+    margin: 10px 10px 0 0;
 }
