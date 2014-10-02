@@ -77,8 +77,8 @@
 						<a href="<%=uicomponent.event("ChangeView", key)%>" class="$defaultView $viewIcon viewIcon" rel="tooltip" data-placement="bottom" title="$label"><span></span></a>
 					<%}%>
 				</div>
+				</td>
 				<%}%>
-			</td>
 			<td class="backAndRefreshBlock">
 				<a class="backIcon actionIcon pull-left" href="<%=uicomponent.event("Back")%>" rel="tooltip" data-placement="bottom" title="<%=_ctx.appRes("UIAddressBar.title.backButton")%>"><i class="uiIconEcmsGoBack uiIconEcmsLightGray"></i></a>	
 				<a class="refreshIcon actionIcon pull-left" href="<%=uicomponent.event("RefreshSession")%>" rel="tooltip" data-placement="bottom" title="<%=_ctx.appRes("UIViewBar.label.refesh")%>"><i class="uiIconRefresh uiIconLightGray"></i></a>

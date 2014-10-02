@@ -281,7 +281,7 @@ public class UIDocumentForm extends UIDialogForm implements UIPopupComponent, UI
     }
     String fullscreen = res.getString(getName() + ".tooltip.FullScreen");
     writer.append("<a class=\"actionIcon\" onclick='eXo.webui.UIDocForm.FullScreenToggle(this); return false;'><i ")
-    .append(fullscreen)
+    .append("title=\"").append(fullscreen)
     .append("\" id=\"")
     .append(contextID)
     .append("\" class=\"uiIconEcmsExpand uiIconEcmsLightGray\"></i></a>");
