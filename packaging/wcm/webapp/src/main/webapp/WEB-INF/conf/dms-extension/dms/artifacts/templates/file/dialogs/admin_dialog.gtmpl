@@ -90,8 +90,8 @@
                           <a style="font-size:12px; font-weight: bold; line-height: 17px;">
                              $fileName
                           </a>
-                          <a href="$actionLink">
-							 <img src="/eXoResources/skin/DefaultSkin/background/Blank.gif" alt="<%=_ctx.appRes("Ecm.dialog.label.remove")%>" class="ActionIcon Remove16x16Icon"/>
+                          <a href="$actionLink"  class="actionIcon" rel="tooltip" data-placement="bottom" data-original-title="<%=_ctx.appRes("Ecm.dialog.label.remove")%>" >
+							  <i class="uiIconDelete uiIconLightGray"></i>
 						  </a>
 						  </div>
                        <%
