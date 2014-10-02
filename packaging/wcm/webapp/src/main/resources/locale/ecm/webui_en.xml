@@ -13,6 +13,11 @@
     <info>
       <child-not-found>Child not found!</child-not-found>
     </info>
+    <action>
+      <title>
+        <select>Select</select>
+      </title>
+    </action>
   </UITreeList>
   <!--
   ######################################################################
@@ -76,4 +81,24 @@
       <UIPageSelector>Page Selector</UIPageSelector>
     </title>
   </UICLVConfigTargetPageSelectorPopupWindow>
+  <!--
+  ###################################################################################
+  # Repository                                        #
+  ###################################################################################
+  -->
+  <rootNodeInfo>
+    <title>
+      <AddRootNode>Add Root Node</AddRootNode>
+    </title>
+  </rootNodeInfo>
+  <!--
+  ################################################################################
+  #             org.exoplatform.ecm.webui.component.admin.UIMetadataList         #
+  ################################################################################
+  -->
+  <UIMetadataAnyPermission>
+    <label>
+      <anyPermission>Any Permission</anyPermission>
+    </label>
+  </UIMetadataAnyPermission>
 </bundle>
