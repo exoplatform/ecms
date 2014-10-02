@@ -41,7 +41,6 @@
 					<a href="javascript:void(0);" onclick="<%=uicomponent.event("ClickFilter", favorite)%>" rel="tooltip" data-placement="bottom" title="<%=_ctx.appRes("UIActionBar.title.ShowAllFavourite")%>">
 						<%=_ctx.appRes("UIAllItems.label.Favourites")%>
 					</a>
-				</a>
 			<% } %>
 					
 			<% if (pref.isShowHiddenDoc()) {
