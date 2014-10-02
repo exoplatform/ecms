@@ -13,6 +13,11 @@
     <info>
       <child-not-found>Child not found!</child-not-found>
     </info>
+    <action>
+      <title>
+        <select>Select</select>
+      </title>
+    </action>
   </UITreeList>
   <!--
   ######################################################################
@@ -59,4 +64,24 @@
       <selectGroup>Browse and select a group</selectGroup>
     </label>
   </UIPermissionMembership>
+  <!--
+  ###################################################################################
+  # Repository                                        #
+  ###################################################################################
+  -->
+  <rootNodeInfo>
+    <title>
+      <AddRootNode>Add Root Node</AddRootNode>
+    </title>
+  </rootNodeInfo>
+  <!--
+  ################################################################################
+  #             org.exoplatform.ecm.webui.component.admin.UIMetadataList         #
+  ################################################################################
+  -->
+  <UIMetadataAnyPermission>
+    <label>
+      <anyPermission>Any Permission</anyPermission>
+    </label>
+  </UIMetadataAnyPermission>
 </bundle>
