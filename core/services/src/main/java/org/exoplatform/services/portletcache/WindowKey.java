@@ -34,14 +34,16 @@ import javax.portlet.WindowState;
 class WindowKey implements Serializable
 {
 
+  private static final long serialVersionUID = 924996837199587159L;
+
   /** . */
   private final String windowId;
 
   /** . */
-  private final WindowState windowState;
+  private final String windowState;
 
   /** . */
-  private final PortletMode portletMode;
+  private final String portletMode;
 
   /** . */
   private final Locale locale;
@@ -78,8 +80,8 @@ class WindowKey implements Serializable
 
     //
     this.windowId = windowId;
-    this.windowState = windowState;
-    this.portletMode = portletMode;
+    this.windowState = windowState.toString();
+    this.portletMode = portletMode.toString();
     this.parameters = parameters;
     this.locale = locale;
     this.hashCode = hashCode;
