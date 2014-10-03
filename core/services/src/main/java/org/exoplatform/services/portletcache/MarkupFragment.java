@@ -19,13 +19,16 @@
 
 package org.exoplatform.services.portletcache;
 
+import java.io.Serializable;
+
 /**
  * @author <a href="mailto:julien.viet@exoplatform.com">Julien Viet</a>
  * @version $Revision$
  */
-class MarkupFragment
+class MarkupFragment implements Serializable
 {
 
+  private static final long serialVersionUID = -7496999592382053294L;
 
   /** . */
   final long expirationTimeMillis;

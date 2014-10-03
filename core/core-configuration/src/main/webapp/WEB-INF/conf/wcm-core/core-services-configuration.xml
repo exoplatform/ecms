@@ -444,18 +444,6 @@
       <description>add Exo Cache Config</description>
       <init-params>
       
-        <!-- ECMS | Scripts -->
-        <object-param>
-          <name>org.exoplatform.services.cms.scripts.impl.ScriptServiceImpl</name>
-          <description></description>
-          <object type="org.exoplatform.services.cache.impl.jboss.ea.EAExoCacheConfig">
-            <field name="name"><string>org.exoplatform.services.cms.scripts.impl.ScriptServiceImpl</string></field>
-            <field name="expirationTimeout"><long>${wcm.cache.scriptservice.expirationtimeout:600000000}</long></field>
-            <field name="maxNodes"><int>${wcm.cache.scriptservice.maxnodes:300}</int></field>
-            <field name="distributed"><boolean>true</boolean></field>
-          </object>
-        </object-param>
-
         <!-- ECMS | Templates -->
         <object-param>
           <name>org.exoplatform.services.cms.templates.TemplateService</name>
