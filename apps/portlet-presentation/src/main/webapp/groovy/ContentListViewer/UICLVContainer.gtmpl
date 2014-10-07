@@ -36,18 +36,18 @@
         if (uicomponent.isShowAddContent()) {          
 		def addContentLink = uicomponent.getEditLink(false, true);
         %>
-          <a id="<%=addContentBlockId%>" class="btn" onclick = "eXo.ecm.CLV.addURL(this)" href="<%=addContentLink%>"><i class="uiIconPlus" rel="tooltip" data-placement="bottom" title="<%= _ctx.appRes("UICLVContainer.label.AddContent");%>"></i></a>
+          <a id="<%=addContentBlockId%>" class="btn" onclick = "eXo.ecm.CLV.addURL(this)" href="<%=addContentLink%>" rel="tooltip" data-placement="bottom" title="<%= _ctx.appRes("UICLVContainer.label.AddContent");%>"><i class="uiIconPlus"></i></a>
         <% }
         
         if (uicomponent.isShowManageContent()) {
 		def manageContentsLink = uicomponent.getEditLink(false, false);
         %>
-          <a id="<%=manageContentBlockId%>" class="btn" onclick = "eXo.ecm.CLV.addURL(this)" href="<%=manageContentsLink%>"><i class="uiIconEcmsManageContent" rel="tooltip" data-placement="bottom" title="<%= _ctx.appRes("UICLVContainer.label.ManageContent");%>"></i></a>
+          <a id="<%=manageContentBlockId%>" class="btn" onclick = "eXo.ecm.CLV.addURL(this)" href="<%=manageContentsLink%>" rel="tooltip" data-placement="bottom" title="<%= _ctx.appRes("UICLVContainer.label.ManageContent");%>"><i class="uiIconEcmsManageContent"></i></a>
         <% }
         
         if (uicomponent.isShowPreferences()) {          
         %>
-          <a id="<%=quickEditingBlockId%>" class="btn" onclick="<%=uicomponent.event("Preferences")%>"><i class="uiIconSetting" rel="tooltip" data-placement="bottom" title="<%= _ctx.appRes("UICLVContainer.label.Preferences");%>"></i></a>
+          <a id="<%=quickEditingBlockId%>" class="btn" onclick="<%=uicomponent.event("Preferences")%>" rel="tooltip" data-placement="bottom" title="<%= _ctx.appRes("UICLVContainer.label.Preferences");%>"><i class="uiIconSetting"></i></a>
         <% } %>
       </div>
     </div>

@@ -74,23 +74,23 @@
 							 <% } %>
 						</div>
 						<div class="btn-group pull-right">
-								<a class="btn" onclick = "eXo.ecm.CLV.addURL(this)" href="<%= uicomponent.getQuickEditLink(node) %>">
-									<i class="uiIconEdit uiIconLightGray" rel="tooltip" data-placement="bottom" title="<%= _ctx.appRes("UIPresentationContainer.title.QuickEdit")%>"></i>
+								<a class="btn" onclick = "eXo.ecm.CLV.addURL(this)" href="<%= uicomponent.getQuickEditLink(node) %>" rel="tooltip" data-placement="bottom" title="<%= _ctx.appRes("UIPresentationContainer.title.QuickEdit")%>">
+									<i class="uiIconEdit uiIconLightGray"></i>
 								</a>           
 
 								<%
 									if (org.exoplatform.wcm.webui.utils.Utils.isShowFastPublish(node)) {
 								%>
 
-								<a class="btn" href="<%= uicomponent.event("FastPublish")%>">
-									<i class="uiIconEcmsPublish" rel="tooltip" data-placement="bottom" title="<%= _ctx.appRes("UIPresentationContainer.title.FastPublish")%>"></i>
+								<a class="btn" href="<%= uicomponent.event("FastPublish")%>" rel="tooltip" data-placement="bottom" title="<%= _ctx.appRes("UIPresentationContainer.title.FastPublish")%>">
+									<i class="uiIconEcmsPublish"></i>
 								</a>
 
 								<%}							
 							  if((!Utils.isPortalEditMode()) && rcontext.getRemoteUser() && Utils.hasEditPermissionOnPage()) {
 								%>
-								<a class="btn" href="<%= uicomponent.event("Preferences")%>">
-									<i class="uiIconSetting" rel="tooltip" data-placement="bottom" title="<%= _ctx.appRes("UISCVPreferences.label.Preferences")%>"></i>
+								<a class="btn" href="<%= uicomponent.event("Preferences")%>" rel="tooltip" data-placement="bottom" title="<%= _ctx.appRes("UISCVPreferences.label.Preferences")%>">
+									<i class="uiIconSetting"></i>
 								</a>
 								<%}%>
 						</div>
