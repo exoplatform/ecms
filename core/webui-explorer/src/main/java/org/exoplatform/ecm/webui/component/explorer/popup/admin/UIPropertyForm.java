@@ -433,6 +433,9 @@ public class UIPropertyForm extends UIForm {
         value = checkbox.isChecked();
       } else if(type == 5) {
         UIFormDateTimeInput dateInput = (UIFormDateTimeInput)uiChild;
+        if(!dateInput.getValue().matches("(0?[1-9]|1[012])/(0?[1-9]|[12][0-9]|3[01])/((19|20)\\d\\d) ([01][0-9]|2[0-3]):([0-5][0-9]):([0-5][0-9])")) {
+            throw new NumberFormatException();
+        }
         value = dateInput.getCalendar();
       } else if(type == 2) {
         UIUploadInput binaryInput = (UIUploadInput)uiChild;
@@ -461,6 +464,9 @@ public class UIPropertyForm extends UIForm {
     } else if(type == 5) {
       for(UIComponent child : multiValueInputSet.getChildren()) {
         UIFormDateTimeInput dateInput = (UIFormDateTimeInput)child;
+        if (!dateInput.getValue().matches("(0?[1-9]|1[012])/(0?[1-9]|[12][0-9]|3[01])/((19|20)\\d\\d)")) {
+            throw new NumberFormatException() ;
+        }
         valueList.add(dateInput.getCalendar());
       }
     } else if(type == 2) {
