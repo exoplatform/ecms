@@ -7,7 +7,7 @@ CKEDITOR.plugins.add('insertGadget',
 			editor.ui.addButton(
 				'insertGadget.btn',
 				{
-					label : editor.lang.WCMInsertGadgetPlugins,
+					label : editor.lang.insertGadget.WCMInsertGadgetPlugins,
 					command : 'gadget.cmd',
 					icon : mypath + '/images/insertGadget.png'
 				}
