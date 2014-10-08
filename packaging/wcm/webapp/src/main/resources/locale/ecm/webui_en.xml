@@ -45,6 +45,7 @@
     <title>
       <UIPermissionUser>Select User</UIPermissionUser>
       <UIPermissionMembership>Select Membership</UIPermissionMembership>
+      <TaxoSelectUserOrGroup>Select Membership</TaxoSelectUserOrGroup>
     </title>
   </SelectUserOrGroup>
   <UIPermissionUser>
@@ -59,4 +60,10 @@
       <selectGroup>Browse and select a group</selectGroup>
     </label>
   </UIPermissionMembership>
+  <TaxoSelectUserOrGroup>
+    <label>
+      <selectGroup>Select Group</selectGroup>
+      <selectMembership> Select Membership</selectMembership>
+    </label>
+  </TaxoSelectUserOrGroup>
 </bundle>

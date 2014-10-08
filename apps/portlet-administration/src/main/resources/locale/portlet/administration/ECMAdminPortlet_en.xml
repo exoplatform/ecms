@@ -1480,7 +1480,7 @@
       <add_node>Modify</add_node>
       <remove>Remove</remove>
     </label>
-    <title>Add permission to that node</title>
+    <title>Add permission to this node</title>
     <action>
       <Close>#{word.close}</Close>
       <Save>#{word.save}</Save>
