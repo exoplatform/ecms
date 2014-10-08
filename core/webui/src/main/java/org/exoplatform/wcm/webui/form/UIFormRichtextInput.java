@@ -129,7 +129,7 @@ public class UIFormRichtextInput extends UIFormInputBase<String> {
     buffer.append("  //<![CDATA[\n");
     buffer.append("    var instances = CKEDITOR.instances['" + name + "']; if (instances) instances.destroy(true);\n");
     buffer.append("    CKEDITOR.replace('" + name + "', {toolbar:'" + toolbar + "', height:"
-    		+ height + ", contentsCss:" + contentsCss + ", enterMode:" + enterMode + ", shiftEnterMode:" + enterMode + "});\n");
+    		+ height + ", contentsCss:" + contentsCss + ", enterMode:" + enterMode + "});\n");
     buffer.append("       });");
     buffer.append("  //]]>\n");
     buffer.append("</script>\n");
