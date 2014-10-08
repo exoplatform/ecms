@@ -18,7 +18,16 @@
     def jsManager = rcontext.getJavascriptManager();
     jsManager.require("SHARED/wcm-utils", "wcmutil")
         .addScripts("wcmutil.WCMUtils.onLoadComments();");
-    
+    def lastCommentLabel = _ctx.appRes("Comment.view.label.lastComment");
+    def userLink = org.exoplatform.wcm.webui.Utils.getProfileLink(lastComment.getProperty("exo:commentor").getString());
+    def userName = lastComment.getProperty("exo:commentorFullName").getString();
+    def user = "<a href=" + userLink + ">" + userName + "</a>";
+    def timeComment = "";
+    if (lastComment.hasProperty("exo:commentDate")) {
+      timeComment = commentDateFormat.format(lastComment.getProperty("exo:commentDate").getDate().getTime());
+    }
+    lastCommentLabel = lastCommentLabel.replace("{user}",user);
+    lastCommentLabel = lastCommentLabel.replace("{time}",timeComment);
 %>
   <style>
 		<% _ctx.include(uicomponent.getTemplateSkin("exo:comments", "Stylesheet")); %>
@@ -30,14 +39,7 @@
 			</div>
 			<label class="viewLabel"><i class="uiIconForum"></i> <%=commentsList.size()%> <%=_ctx.appRes("Comment.view.label.comments")%></label>
 			<div class="labelPostedComment">
-				<%=_ctx.appRes("Comment.view.label.postedBy")%>
-				<a href="<%=org.exoplatform.wcm.webui.Utils.getProfileLink(lastComment.getProperty("exo:commentor").getString())%>">
-					<%=lastComment.getProperty("exo:commentorFullName").getString()%>
-				</a>		  			  
-				<%=_ctx.appRes("Comment.view.label.at")%> 
-				<%if(lastComment.hasProperty("exo:commentDate")){%>
-					<%=commentDateFormat.format(lastComment.getProperty("exo:commentDate").getDate().getTime())%>
-				<%}%>  
+				$lastCommentLabel
 			</div>
 		</div>
 		<div class="showHideComponent" style="display: none;">
