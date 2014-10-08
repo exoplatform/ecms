@@ -75,7 +75,7 @@ public class UICLVFolderMode extends UICLVContainer {
       return;
     } catch (AccessDeniedException e) {
       messageKey = "UICLVContainer.msg.no-permission";
-      return;
+      result = new Result(new ArrayList<Node>(), 0, 0, null, null);
     }
     if (result.getNumTotal() == 0) {
       messageKey = "UICLVContainer.msg.non-contents";
