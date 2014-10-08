@@ -10,7 +10,7 @@ CKEDITOR.plugins.add('cancelInline',
 			editor.ui.addButton(
 				'cancelInline.btn',
 				{
-					label : editor.lang.CancelUpdateInline,
+					label : editor.lang.cancelInline.CancelUpdateInline,
 					command : 'cancelInline.cmd',
 					icon : mypath + '/images/cancel.png'
 				}
