@@ -63,7 +63,7 @@
   <TaxoSelectUserOrGroup>
     <label>
       <selectGroup>Select Group</selectGroup>
-      <selectMembership> Select Membership</selectMembership>
+      <selectMembership>Select Membership</selectMembership>
     </label>
   </TaxoSelectUserOrGroup>
 </bundle>
