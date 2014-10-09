@@ -9,7 +9,7 @@ CKEDITOR.dialog.add( 'insertPortalLink.dlg', function( editor )
 	curInstance = editor.name;
 	var title = '';
 	return {
-		title : editor.lang.WCMInsertPortalLinkDialogTitle,
+		title : editor.lang.insertPortalLink.WCMInsertPortalLinkDialogTitle,
 		minWidth : 390,
 		minHeight : 230,
 		contents : [
@@ -72,7 +72,7 @@ CKEDITOR.dialog.add( 'insertPortalLink.dlg', function( editor )
 									'<tbody>' +
 										'<tr>' +
 											'<td class="fieldLabel">'+
-												'<label for="inputTitle">' + editor.lang.WCMInsertPortalLinkInputTitle + '</label>'+
+												'<label for="inputTitle">' + editor.lang.insertPortalLink.WCMInsertPortalLinkInputTitle + '</label>'+
 											'</td>'+
 											'<td colspan="2" class="fieldComponent">'+
 												'<input type="text" id="inputTitle" value="'+ title +'" />'+
@@ -80,7 +80,7 @@ CKEDITOR.dialog.add( 'insertPortalLink.dlg', function( editor )
 										'</tr>'+
 										'<tr>'+
 											'<td class="fieldLabel">'+
-												'<label >' + editor.lang.WCMInsertPortalLinkInputUrl + '</label>'+
+												'<label >' + editor.lang.insertPortalLink.WCMInsertPortalLinkInputUrl + '</label>'+
 											'</td>'+
 											'<td class="fieldComponent">'+
 												'<input  type="text" id="txtUrl" />'+
@@ -92,7 +92,7 @@ CKEDITOR.dialog.add( 'insertPortalLink.dlg', function( editor )
 															'<tr>'+
 																'<td align="center">'+
 																	'<a class="btn" onclick="getPortalLink();"  src="http://www.w3.org/1999/xhtml">'+
-																		editor.lang.WCMInsertPortalLinkButtonGet +
+																		editor.lang.insertPortalLink.WCMInsertPortalLinkButtonGet +
 																	'</a>'+
 																					
 																'</td>'+
@@ -107,10 +107,10 @@ CKEDITOR.dialog.add( 'insertPortalLink.dlg', function( editor )
 								
 								'<div class="uiAction ">'+
 									'<a fcklang="WCMInsertPortalLinkButtonSave" class="btn"  onclick="addURL();"  src="http://www.w3.org/1999/xhtml">'+
-										editor.lang.WCMInsertPortalLinkButtonSave +
+										editor.lang.insertPortalLink.WCMInsertPortalLinkButtonSave +
 									'</a>'+	 								
 									'<a class="btn"  onclick="previewLink();" src="http://www.w3.org/1999/xhtml">'+
-										editor.lang.WCMInsertPortalLinkButtonPreview +
+										editor.lang.insertPortalLink.WCMInsertPortalLinkButtonPreview +
 									'</a>'+								             						
 					      				
 	    					'</div>'+
