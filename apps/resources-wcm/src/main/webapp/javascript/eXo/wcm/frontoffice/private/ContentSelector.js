@@ -599,7 +599,7 @@
 					var clazzItem = eXo.ecm.ECS.getClazzIcon(list[i].getAttribute("nodeType"));
 					var newRow = tblRWS.tBodies[0].insertRow(i);
 					newRow.className = clazz;
-					gj(newRow.insertCell(0)).html('<a url="'+decodeURIComponent(url)+'" path="'+path+'" nodeType="'+nodeType+'" style = "overflow:hidden;" rel="tooltip" data-placement="bottom" title="'+decodeURIComponent(node)+'" onclick="eXo.ecm.ECS.insertContent(this);">'+decodeURIComponent(node)+'</a>');
+					gj(newRow.insertCell(0)).html('<a url="'+decodeURIComponent(url)+'" path="'+path+'" nodeType="'+nodeType+'" style = "overflow:hidden;" rel="tooltip" data-placement="bottom" title="'+decodeURIComponent(node)+'" onclick="eXo.ecm.ECS.insertContent(this);">'+'<i class="'+clazzItem+'"></i>&nbsp;'+decodeURIComponent(node)+'</a>');
 					gj(newRow.insertCell(1)).html('<div class="Item">'+ list[i].getAttribute("dateCreated") +'</div>');
 					gj(newRow.insertCell(2)).html('<div class="Item">'+ size +'</div>');
 				} else {				  
@@ -678,15 +678,15 @@
 		}
 		var listItem = '';
 		for(var i = 0; i < list.length; i++) {
-			var clazzItem = eXo.ecm.ECS.getClazzIcon(list[i].getAttribute("nodeType"));
 			var url 			= list[i].getAttribute("url");
 			var path 			= list[i].getAttribute("path");
 			var nodeType	= list[i].getAttribute("folderType");
+			var nodeTypeCssClass = list[i].getAttribute("nodeTypeCssClass");
 			var node = list[i].getAttribute("title");
 			var label = list[i].getAttribute("label");
 			if (!label) label = node;
 			var newRow = tblRWS.tBodies[0].insertRow(i);
-			gj(newRow.insertCell(0)).html('<a class="Item" url="'+url+'" path="'+path+'" nodeType="'+nodeType+'" onclick="eXo.ecm.ECS.insertContent(this);">'+decodeURIComponent(label)+'</a>');
+			gj(newRow.insertCell(0)).html('<a class="Item" url="'+url+'" path="'+path+'" nodeType="'+nodeType+'" onclick="eXo.ecm.ECS.insertContent(this);">'+'<i class="'+nodeTypeCssClass+'"></i>&nbsp;'+decodeURIComponent(label)+'</a>');
 					
 		}
 		
@@ -728,7 +728,7 @@
 			var nodeType	= list[i].getAttribute("nodeType");
 			var node = list[i].getAttribute("name");
 			var newRow = tblRWS.tBodies[0].insertRow(i);
-			gj(newRow.insertCell(0)).html('<a class="Item" url="'+url+'" linkTarget ="' + linkTarget + '" path="'+path+'" nodeType="'+nodeType+'" style = "overflow:hidden;" rel="tooltip" data-placement="bottom" title="'+decodeURIComponent(node)+'" onclick="eXo.ecm.ECS.addFile2ListContent(this);">'+decodeURIComponent(node)+'</a>');
+			gj(newRow.insertCell(0)).html('<a class="Item" url="'+url+'" linkTarget ="' + linkTarget + '" path="'+path+'" nodeType="'+nodeType+'" style = "overflow:hidden;" rel="tooltip" data-placement="bottom" title="'+decodeURIComponent(node)+'" onclick="eXo.ecm.ECS.addFile2ListContent(this);">'+'<i class="'+clazzItem+'"></i>&nbsp;'+decodeURIComponent(node)+'</a>');
 					
 		}
 		
@@ -746,10 +746,10 @@
 	EcmContentSelector.prototype.getClazzIcon = function(nodeType) {
 		var strClassIcon = '';
 		if(!nodeType) {
-			strClassIcon = "DefaultPageIcon";	
+			strClassIcon = "uiIcon16x16 uiIcon16x16FilePage";	
 			return strClassIcon;	
 		}
-		strClassIcon = nodeType.replace("/", "_").replace(":", "_") + "16x16Icon";
+		strClassIcon = "uiIcon16x16 uiIcon16x16" + nodeType.replace("/", "").replace(":", "_");
 		return strClassIcon;
 		
 	};
