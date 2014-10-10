@@ -1,6 +1,6 @@
 var UserLanguage = {
 	Filter							:	"Filtre",
-	All									: "tout",
+	All									: "Tout",
 	WebContents						:   "Contenu Web",
 	DMSDocuments					:	"Document DMS",
 	Medias							:	"Medias",
@@ -16,6 +16,8 @@ var UserLanguage = {
 	
 	ViewThumbnail					: 	"Thumbnail",
 	ViewList						: 	"Liste",
+  ViewThumbnailLabel    : "Vue de Thumbnail",
+  ViewListLabel         : "Vue de Liste",
 	
 	Home							:	"Accueil",
 

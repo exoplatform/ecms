@@ -16,6 +16,8 @@ var UserLanguage = {
 	
 	ViewThumbnail						: 	"Thumbnail",
 	ViewList							: 	"List",
+  ViewThumbnailLabel    : "Thumbnail View",
+  ViewListLabel         : "List View",
 	
 	Home								:	"Home",
 	
