@@ -2978,6 +2978,7 @@
       <user>Author</user>
       <description>Description</description>
     </header>
+    <create-version>New version is created</create-version>
   </UIPublicationHistory>
   
   <UIPublicationSchedule>
