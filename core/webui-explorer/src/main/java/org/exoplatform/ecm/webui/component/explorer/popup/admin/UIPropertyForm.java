@@ -36,6 +36,7 @@ import javax.jcr.nodetype.NodeType;
 import javax.jcr.nodetype.PropertyDefinition;
 
 import org.apache.commons.lang.StringUtils;
+import org.exoplatform.ecm.webui.form.validator.DateValidator;
 import org.exoplatform.ecm.webui.form.validator.ECMNameValidator;
 import org.exoplatform.ecm.webui.utils.JCRExceptionManager;
 import org.exoplatform.ecm.utils.lock.LockUtil;
@@ -163,6 +164,7 @@ public class UIPropertyForm extends UIForm {
     removeChildById(FIELD_VALUE);
     Node currentNode = getCurrentNode();
     if (currentNode != null){
+
       if (currentNode.isNodeType(Utils.NT_UNSTRUCTURED) ){
         getUIStringInput(FIELD_PROPERTY).setReadOnly(!isAddNew_);
         getUIFormSelectBox(FIELD_NAMESPACE).setDisabled(!isAddNew_);
@@ -478,19 +480,20 @@ public class UIPropertyForm extends UIForm {
     return valueList;
   }
 
-  private void changeMultipleType(UIFormMultiValueInputSet uiFormMultiValue, int type) {
+  private void changeMultipleType(UIFormMultiValueInputSet uiFormMultiValue, int type) throws Exception {
     if(PropertyType.BINARY == type) {
       uiFormMultiValue.setType(UIUploadInput.class);
     } else if(PropertyType.BOOLEAN == type) {
       uiFormMultiValue.setType(UICheckBoxInput.class);
     } else if(PropertyType.DATE == type) {
       uiFormMultiValue.setType(UIFormDateTimeInput.class);
+      uiFormMultiValue.addValidator(DateValidator.class);
     } else {
       uiFormMultiValue.setType(UIFormStringInput.class);
     }
   }
 
-  private void changeSingleType(int type) {
+  private void changeSingleType(int type) throws Exception {
     removeChildById(FIELD_VALUE);
     if(PropertyType.BINARY == type) {
       UIUploadInput uiUploadInput = new UIUploadInput(FIELD_VALUE, FIELD_VALUE);
@@ -498,7 +501,9 @@ public class UIPropertyForm extends UIForm {
     } else if(PropertyType.BOOLEAN == type) {
       addUIFormInput(new UICheckBoxInput(FIELD_VALUE, FIELD_VALUE, null));
     } else if(PropertyType.DATE == type) {
-      addUIFormInput(new UIFormDateTimeInput(FIELD_VALUE, FIELD_VALUE, null));
+      UIFormDateTimeInput uiFormDateTimeInput = new UIFormDateTimeInput(FIELD_VALUE, FIELD_VALUE, null);
+      uiFormDateTimeInput.addValidator(DateValidator.class);
+      addUIFormInput(uiFormDateTimeInput);
     } else {
       addUIFormInput(new UIFormStringInput(FIELD_VALUE, FIELD_VALUE, null));
     }
