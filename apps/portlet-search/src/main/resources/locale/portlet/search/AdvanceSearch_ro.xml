@@ -39,9 +39,9 @@
   <UISearchPageLayoutManager>
     <label>
       <itemsPerPageSelector>Elemente pe pagină</itemsPerPageSelector>
-      <searchFormSelector>Șablonul formular căutare</searchFormSelector>
+      <searchFormSelector>Șablon formular căutare</searchFormSelector>
       <searchResultSelector>Șablon rezultate căutare</searchResultSelector>
-      <searchPaginatorSelector>Șablog paginator căutare</searchPaginatorSelector>
+      <searchPaginatorSelector>Șablon paginator căutare</searchPaginatorSelector>
       <searchPageLayoutSelector>Șablon aspect pagină căutare</searchPageLayoutSelector>
       <searchResultBasePathInputSetAction>Calea de pornire</searchResultBasePathInputSetAction>
       <pageMode>Modul paginii</pageMode>

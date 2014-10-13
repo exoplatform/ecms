@@ -800,7 +800,9 @@
     <title>Añadir permisos al nodo</title>
     <action>
       <Close>#{word.close}</Close>
-      <Save>#{word.save}</Save><Reset>Restablecer</Reset></action>
+      <Save>#{word.save}</Save>
+      <Reset>Restablecer</Reset>
+    </action>
     <msg>
       <checkbox-require>Por favor, seleccione al menos un permiso.</checkbox-require>
       <userOrGroup-required>Por favor, seleccione un usuario o un grupo antes de guardar este permiso.</userOrGroup-required>
