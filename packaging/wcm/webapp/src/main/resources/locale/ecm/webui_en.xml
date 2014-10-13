@@ -66,4 +66,14 @@
       <selectMembership>Select Membership</selectMembership>
     </label>
   </TaxoSelectUserOrGroup>
+  <!--
+  ######################################################################
+  #	 org.exoplatform.wcm.webui.clv.UICLVConfig        #
+  ######################################################################
+  -->
+  <UICLVConfigTargetPageSelectorPopupWindow>
+    <title>
+      <UIPageSelector>Page Selector</UIPageSelector>
+    </title>
+  </UICLVConfigTargetPageSelectorPopupWindow>
 </bundle>
