@@ -113,6 +113,7 @@ public class DriverConnector extends BaseConnector implements ResourceContainer 
   /** The Constant MEDIA_MIMETYPE. */
   public static final String[] IMAGE_MIMETYPE = new String[]{"image"};
 
+  public static final String TYPE_FOLDER = "folder";
   /** The log. */
   private static final Log LOG = ExoLogger.getLogger(DriverConnector.class.getName());
 
@@ -223,7 +224,8 @@ public class DriverConnector extends BaseConnector implements ResourceContainer 
       @QueryParam("currentPortal") String currentPortal,
       @QueryParam("repositoryName") String repositoryName,
       @QueryParam("workspaceName") String workspaceName,
-      @QueryParam("filterBy") String filterBy)
+      @QueryParam("filterBy") String filterBy,
+      @QueryParam("type") String type)
       throws Exception {
     try {
       RepositoryService repositoryService = WCMCoreUtils.getService(RepositoryService.class);
@@ -248,7 +250,7 @@ public class DriverConnector extends BaseConnector implements ResourceContainer 
                                          filterBy,
                                          session,
                                          currentPortal,
-                                         Text.escapeIllegalJcrChars(driverName));
+                                         Text.escapeIllegalJcrChars(driverName), type);
 
     } catch (Exception e) {
       if (LOG.isErrorEnabled()) {
@@ -622,7 +624,9 @@ public class DriverConnector extends BaseConnector implements ResourceContainer 
                                                String filterBy,
                                                Session session,
                                                String currentPortal,
-                                               String nodeDriveName) throws Exception {
+                                               String nodeDriveName,
+                                               String type) throws Exception {
+      TemplateService templateService = WCMCoreUtils.getService(TemplateService.class);
       Element rootElement = FCKUtils.createRootElement(command, node, folderHandler.getFolderType(node));
       NodeList nodeList = rootElement.getElementsByTagName("CurrentFolder");
       Element currentFolder = (Element) nodeList.item(0);
@@ -642,6 +646,8 @@ public class DriverConnector extends BaseConnector implements ResourceContainer 
       for (Node child:childList) {
         String fileType = null;
         if (child.isNodeType(FCKUtils.EXO_HIDDENABLE))
+          continue;
+        if(TYPE_FOLDER.equals(type) && templateService.isManagedNodeType(child.getPrimaryNodeType().getName()))
           continue;
 
         if(child.isNodeType("exo:symlink") && child.hasProperty("exo:uuid")) {
