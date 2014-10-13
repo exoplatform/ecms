@@ -59,4 +59,14 @@
       <selectGroup>Browse and select a group</selectGroup>
     </label>
   </UIPermissionMembership>
+  <!--
+  ######################################################################
+  #	 org.exoplatform.wcm.webui.clv.UICLVConfig        #
+  ######################################################################
+  -->
+  <UICLVConfigTargetPageSelectorPopupWindow>
+    <title>
+      <UIPageSelector>Page Selector</UIPageSelector>
+    </title>
+  </UICLVConfigTargetPageSelectorPopupWindow>
 </bundle>
