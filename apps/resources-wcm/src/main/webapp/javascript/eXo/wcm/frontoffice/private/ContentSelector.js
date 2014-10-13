@@ -162,7 +162,7 @@
 		gj(document).ready(function() { gj("*[rel='tooltip']").tooltip();});
 	};
 	
-	EcmContentSelector.prototype.getDir = function(currentNode, event) {  
+	EcmContentSelector.prototype.getDir = function(currentNode, event) {
 		var ECS = eXo.ecm.ECS;
 		if (event)
 			eXo.ecm.ECS.eventNode = event;
@@ -174,8 +174,8 @@
 		var currentFolder;
 		var driverName;	
 		var driverPath = currentNode.getAttribute("driverPath");
-		var nodeDriveName = currentNode.getAttribute("nodedrivename");  
-		if(driverPath && driverPath != "") {		
+		var nodeDriveName = currentNode.getAttribute("nodedrivename");
+		if(driverPath && driverPath != "") {
 			driverName =	currentNode.getAttribute('name');
 			eXo.ecm.ECS.driverName = driverName;
 			currentFolder = '';		
@@ -219,7 +219,8 @@
 		}	else filter = 'All';
 	
 		var command = ECS.cmdEcmDriver+ECS.cmdGetFolderAndFile+"driverName="+driverName+"&currentFolder="+encodeURIComponent(currentFolder)+"&currentPortal="+ECS.portalName+"&repositoryName="+ECS.repositoryName+"&workspaceName="+ECS.workspaceName;
-		var url = ECS.hostName + ECS.connector+command+"&filterBy="+filter;	
+		var url = ECS.hostName + ECS.connector+command+"&filterBy="+filter+"&type="+eXo.ecm.ECS.typeObj;
+
 		//if(eXo.ecm.ECS.strConnection == url) return;	
 		eXo.ecm.ECS.strConnection = url;
 		eXo.ecm.ECS.renderSubTrees(currentNode, event, url);
