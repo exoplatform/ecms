@@ -275,6 +275,8 @@
 			} else {		    
 				eXo.ecm.ECS.listFiles(null);
 			}
+      //Reload language labels after listing root folders
+      this.languageInit();
 			return;
 		}	
 		
@@ -401,7 +403,8 @@
 		} else {		    
 			eXo.ecm.ECS.listFiles(fileList);
 		}
-		
+    //Reload language labels once the Right space list is initialized
+    this.languageInit();
 	};
 	
 	EcmContentSelector.prototype.actionColExp = function(objNode, event) {
@@ -540,7 +543,7 @@
 				gj(tdNoContent).html("There is no content");
 				tdNoContent.className = "item noContent empty center";
 				tdNoContent.setAttribute("colspan",3);
-				tdNoContent.userLanguage = "UserLanguage.NoContent";	
+        tdNoContent.setAttribute("userLanguage", "UserLanguage.NoContent");
 				gj("#pageNavPosition").html("");
 			} else {
 				var container = gj(rightWS).find('div.actionIconsContainer:first')[0];
@@ -1146,8 +1149,6 @@
 	
 	EcmContentSelector.prototype.changeViewType = function(viewType) {  
 	  eXo.ecm.ECS.viewType = viewType;  
-	  var view = document.getElementById("view");
-		gj(view).html("");  
 	  if(viewType=="list") {
 		  gj("#enableListViewBtn").attr('class', 'btn active'); gj('#enableThumbnailViewBtn').attr('class', 'btn');
 	  }
@@ -1174,8 +1175,10 @@
 				strViewPresent += "<div class=\"PageIterator\" id=\"pageNavPosition\"></div><div style=\"clear: left;\"><span></span></div>";
 				gj(rightWS).html(strViewPresent);
 			}
-		}
-	  eXo.ecm.ECS.switchView = false;
+    }
+    // Replace the localized labels after a view type change
+    this.languageInit();
+    eXo.ecm.ECS.switchView = false;
 		var filter = document.getElementById('Filter');
 		var action = filter.getAttribute("action");
 		if(action) {
@@ -1183,7 +1186,7 @@
 			action += '&objectId=' + filter.options[filter.selectedIndex].value + '\')';    
 			eval(action);
 		}	
-	}
+	};
 	
 	EcmContentSelector.prototype.generateIdDriver = function(objNode) {
 		if(!objNode) return;

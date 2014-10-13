@@ -17,6 +17,9 @@ var UserLanguage = {
 	ViewThumbnail					: 	"Hình ảnh",
 	ViewList						: 	"Danh sách",
 
+  ViewThumbnailLabel  : "Hình ảnh",
+  ViewListLabel       : "Danh sách",
+
 	Home							:	"Trang chủ",
 
 	FileName						:	"Tên",
