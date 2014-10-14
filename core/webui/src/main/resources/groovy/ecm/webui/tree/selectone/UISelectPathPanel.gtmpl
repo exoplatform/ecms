@@ -32,12 +32,13 @@
 				        <td>
 				        <%
                   String nodeTitle = Utils.getTitle(node);
-                  String nodeTypeIcon = Utils.getNodeTypeIcon(node,"16x16Icon");
+                  String nodeTypeIcon = Utils.getNodeTypeIcon(node,"uiIcon16x16");
 				          def clazz = "Text"
 				          if(Utils.isSymLink(node)) clazz = "TextSymLink";
 				        %>
 				          
-				          <div class="$clazz <%=nodeTypeIcon%>">
+				          <div class="$clazz">
+				          <i class="<%=nodeTypeIcon%>"></i>&nbsp;
 				          <%if(Utils.isSymLink(node)) {%>
 	                  <img class="LinkSmall" alt="<%=nodeTitle%>" />
 	                <%}%>

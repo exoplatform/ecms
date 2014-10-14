@@ -42,7 +42,11 @@
 	      				%>
 				      		<tr class="$rowClass">
 				        		<td>
-				          			<div class=""><%= page.getURI() %></div>
+				        		  <%
+				        		    String pageLabel = page.getResolvedLabel();
+				        		  %>
+				        		  <i class="uiIconLightGray DefaultPageIcon uiIconGroup" title="$pageLabel"></i>&nbsp;
+				        		  $pageLabel
 				        		</td>
 				        		<td class="center">
 			              			<a class="actionIcon" href="javascript:void(0);" onclick="<%=uicomponent.event("Select", page.getURI())%>" rel="tooltip" data-placement="bottom" title="<%=_ctx.appRes("UIPageSelectorPanel.title.select")%>">
