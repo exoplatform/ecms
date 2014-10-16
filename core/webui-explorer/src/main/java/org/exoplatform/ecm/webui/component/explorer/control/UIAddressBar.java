@@ -274,9 +274,9 @@ public class UIAddressBar extends UIForm {
         queryStatement = StringUtils.replace(SQL_QUERY,"$0",currentNode.getPath());
       }
       String escapedText = org.exoplatform.services.cms.impl.Utils.escapeIllegalCharacterInQuery(text);
-      queryStatement = StringUtils.replace(queryStatement,"$1", escapedText.replaceAll("'", "''"));
-      queryStatement = StringUtils.replace(queryStatement,"$2", escapedText.replaceAll("'", "''").toLowerCase());
-      queryStatement = StringUtils.replace(queryStatement,"$3", escapedText.replaceAll("'", "''").toLowerCase());
+      queryStatement = StringUtils.replace(queryStatement,"$1", escapedText);
+      queryStatement = StringUtils.replace(queryStatement,"$2", escapedText.toLowerCase());
+      queryStatement = StringUtils.replace(queryStatement,"$3", escapedText.toLowerCase());
       uiExplorer.removeChildById("ViewSearch");
       UIWorkingArea uiWorkingArea = uiExplorer.getChild(UIWorkingArea.class);
       UIDocumentWorkspace uiDocumentWorkspace = uiWorkingArea.getChild(UIDocumentWorkspace.class);

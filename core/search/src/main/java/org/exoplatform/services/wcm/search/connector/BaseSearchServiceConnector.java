@@ -96,6 +96,7 @@ public abstract class BaseSearchServiceConnector extends SearchServiceConnector 
     //prepare input parameters for search
     if (query != null) {
       query = query.trim();
+      query = Utils.escapeIllegalCharacterInQuery(query);
     }
     QueryCriteria criteria = createQueryCriteria(query, offset, limit, sort, order);
     //query search result

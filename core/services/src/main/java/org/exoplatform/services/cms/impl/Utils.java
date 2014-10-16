@@ -372,6 +372,7 @@ public class Utils {
         ret = ret.replace(c + "", "\\" + c);
       }
     }
+    ret = ret.replace("'", "''");
     return ret;
   }
 

@@ -248,7 +248,7 @@ public class UISearchForm extends UIForm {
         uiKeywordInput.setValue(newKey);
       }
       keyword = Normalizer.normalize(keyword, Normalizer.Form.NFD).replaceAll("\\p{InCombiningDiacriticalMarks}+", "");
-      keyword = keyword.replaceAll("'","''");
+      //keyword = keyword.replaceAll("'","''");
       uiSearchResult.setResultType(resultType);
       String selectedPortal = uiPortalSelectBox.getValue();
       QueryCriteria queryCriteria = new QueryCriteria();
