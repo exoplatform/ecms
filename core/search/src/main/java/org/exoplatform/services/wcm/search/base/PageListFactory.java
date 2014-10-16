@@ -75,14 +75,7 @@ public class PageListFactory {
     }
     ((QueryImpl)query).setLimit(AbstractPageList.RESULT_SIZE_SEPARATOR + 1);
     QueryResult result = query.execute();
-    int totalNodes = (int)result.getNodes().getSize();
-    if (totalNodes <= AbstractPageList.RESULT_SIZE_SEPARATOR) {
-      return new ArrayNodePageList<E>(result, pageSize, filter, dataCreator);
-    } else {
-      QueryData queryData = new QueryData(queryStatement, workspace, language, isSystemSession);
-      QueryResultPageList<E> ret = new QueryResultPageList<E>(pageSize, queryData, totalNodes, bufferSize, filter, dataCreator);
-      return ret;        
-    }
+    return new ArrayNodePageList<E>(result, pageSize, filter, dataCreator);
   }
   
   public static <E> AbstractPageList<E> createPageList(String queryStatement,
