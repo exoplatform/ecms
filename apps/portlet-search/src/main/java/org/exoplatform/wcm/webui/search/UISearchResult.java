@@ -170,7 +170,6 @@ public class UISearchResult extends UIContainer {
       }
       setKeyword(keyword);
       keyword = Normalizer.normalize(keyword, Normalizer.Form.NFD).replaceAll("\\p{InCombiningDiacriticalMarks}+", "");
-      keyword = keyword.replaceAll("'","''");
 
       SiteSearchService siteSearchService = getApplicationComponent(SiteSearchService.class);
       QueryCriteria queryCriteria = new QueryCriteria();

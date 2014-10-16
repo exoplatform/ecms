@@ -174,7 +174,7 @@ public class UISimpleSearch extends UIForm {
       } else {
         statement.append(StringUtils.replace(XPATH_QUERY, "$0", currentNode.getPath()));
       }
-      statement.append("[(jcr:contains(.,'").append(escapedText.replaceAll("'", "''")).append("'))]");
+      statement.append("[(jcr:contains(.,'").append(escapedText).append("'))]");
     } else if(constraints_.size() > 0) {
       if(text == null) {
         if ("/".equals(currentNode.getPath())) {
@@ -216,7 +216,7 @@ public class UISimpleSearch extends UIForm {
         statement.append(StringUtils.replace(SQL_QUERY, "$0", currentNode.getPath()));
       }
       statement.append(LINK_REQUIREMENT).append(" OR ( CONTAINS(*,'").
-                append(escapedText.replaceAll("'", "''")).append("') ) )");
+                append(escapedText).append("') ) )");
     } else if(constraints_.size() > 0) {//constraint != null
       //get constraint statement
       StringBuilder tmpStatement = new StringBuilder();

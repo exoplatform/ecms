@@ -82,7 +82,6 @@ public class UIContentNameSearch extends UIForm {
         String keyword = contentNameSearch.getUIStringInput(KEYWORD).getValue();
         keyword = keyword.trim();
         String escapedText = org.exoplatform.services.cms.impl.Utils.escapeIllegalCharacterInQuery(keyword);
-        escapedText = escapedText.replaceAll("'", "''");
         UIJCRExplorer explorer = contentNameSearch.getAncestorOfType(UIJCRExplorer.class);
         String currentNodePath = explorer.getCurrentNode().getPath();
         String statement = null;
