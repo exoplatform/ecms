@@ -242,7 +242,7 @@ public class WCMPublicationServiceImpl
     while(!path.equals("/") && path.length() > 0) {
       parentNode = (Node)node.getSession().getItem(path);
       if(parentNode.isNodeType(nodeType)) return false;
-      path = StringUtils.substringBefore(path, path.substring(path.lastIndexOf("/"), path.length()));
+      path = StringUtils.substringBeforeLast(path, path.substring(path.lastIndexOf("/"), path.length()));
     }
     return true;
   }
