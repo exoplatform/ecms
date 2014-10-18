@@ -20,11 +20,13 @@ import java.util.List;
 
 import javax.jcr.Node;
 import javax.jcr.NodeIterator;
+import javax.jcr.PathNotFoundException;
 
 import org.exoplatform.services.cms.folksonomy.NewFolksonomyService;
 import org.exoplatform.services.cms.link.LinkManager;
 import org.exoplatform.services.ecm.dms.BaseDMSTestCase;
 import org.exoplatform.services.jcr.ext.common.SessionProvider;
+import org.exoplatform.services.jcr.ext.distribution.DataDistributionType;
 import org.exoplatform.services.wcm.utils.WCMCoreUtils;
 
 /**
@@ -49,6 +51,7 @@ public class TestNewFolksonomyService extends BaseDMSTestCase {
   private Node groupBFolksonomyNode;
   private Node publicFolksonomyNode;
   private Node siteFolksonomyNode;
+  private DataDistributionType dataDistributionType;
 
   @Override
   public void setUp() throws Exception {
@@ -106,6 +109,7 @@ public class TestNewFolksonomyService extends BaseDMSTestCase {
 
     publicFolksonomyNode = tagsNode;
     session.save();
+    dataDistributionType = newFolksonomyService_.getDataDistributionType();
   }
 
   /**
@@ -122,15 +126,27 @@ public class TestNewFolksonomyService extends BaseDMSTestCase {
   public void testAddPrivateTag() throws Exception {
     String[] tags = { "sport", "weather" };
     newFolksonomyService_.addPrivateTag(tags, test, COLLABORATION_WS, session.getUserID());
-    assertTrue("testAddPrivateTag failed! ", folksonomyNode.hasNode("sport"));
-    assertTrue("testAddPrivateTag failed! ", folksonomyNode.hasNode("weather"));
+    //-------get sportTagNode and weatherTagNode----------------
+    Node sportTagNode = null;
+    try {
+      sportTagNode = dataDistributionType.getDataNode(folksonomyNode, "sport");
+    } catch (PathNotFoundException e) {
+      sportTagNode = null;
+    }
+    Node weatherTagNode = null;
+    try {
+      weatherTagNode = dataDistributionType.getDataNode(folksonomyNode, "weather");
+    } catch (PathNotFoundException e) {
+      weatherTagNode = null;
+    }
+    //----------------------------------------------------------
+    assertNotNull("testAddPrivateTag failed! ", sportTagNode);
+    assertNotNull("testAddPrivateTag failed! ", weatherTagNode);
 
-    Node sportTagNode = folksonomyNode.getNode("sport");
     Node link = sportTagNode.getNodes().nextNode();
     Node targetNode = linkManager.getTarget(link);
     assertTrue("testAddPrivateTag failed! ", test.isSame(targetNode));
 
-    Node weatherTagNode = folksonomyNode.getNode("weather");
     link = weatherTagNode.getNodes().nextNode();
     targetNode = linkManager.getTarget(link);
     assertTrue("testAddPrivateTag failed! ", test.isSame(targetNode));
@@ -154,34 +170,58 @@ public class TestNewFolksonomyService extends BaseDMSTestCase {
   public void testAddGroupsTag() throws Exception {
     String[] tags = { "sport", "weather" };
     newFolksonomyService_.addGroupsTag(tags, test, COLLABORATION_WS, groups);
-
+    
+    //--------------------------TEST FOR GROUP A----------------------------------
     System.out.println("Group A:" + groupAFolksonomyNode.getPath());
+    //-------get sportTagNode and weatherTagNode----------------
+    Node sportTagNode = null;
+    try {
+      sportTagNode = dataDistributionType.getDataNode(groupAFolksonomyNode, "sport");
+    } catch (PathNotFoundException e) {
+      sportTagNode = null;
+    }
+    Node weatherTagNode = null;
+    try {
+      weatherTagNode = dataDistributionType.getDataNode(groupAFolksonomyNode, "weather");
+    } catch (PathNotFoundException e) {
+      weatherTagNode = null;
+    }
+    //----------------------------------------------------------
 
-    assertTrue("testAddGroupsTag failed! ", groupAFolksonomyNode.hasNode("sport"));
-    assertTrue("testAddGroupsTag failed! ", groupAFolksonomyNode.hasNode("weather"));
+    assertNotNull("testAddGroupsTag failed! ", sportTagNode);
+    assertNotNull("testAddGroupsTag failed! ", weatherTagNode);
 
-    Node sportTagNode = groupAFolksonomyNode.getNode("sport");
     Node link = sportTagNode.getNodes().nextNode();
     Node targetNode = linkManager.getTarget(link);
     assertTrue("testAddGroupsTag failed! ", test.isSame(targetNode));
 
-    Node weatherTagNode = groupAFolksonomyNode.getNode("weather");
     link = weatherTagNode.getNodes().nextNode();
     targetNode = linkManager.getTarget(link);
     assertTrue("testAddGroupsTag failed! ", test.isSame(targetNode));
 
     assertEquals("testAddGroupsTag failed! ", 1L, sportTagNode.getProperty(EXO_TOTAL).getLong());
     assertEquals("testAddGroupsTag failed! ", 1L, weatherTagNode.getProperty(EXO_TOTAL).getLong());
-    //--------------------------
-    assertTrue("testAddGroupsTag failed! ", groupBFolksonomyNode.hasNode("sport"));
-    assertTrue("testAddGroupsTag failed! ", groupBFolksonomyNode.hasNode("weather"));
+    //--------------------------TEST FOR GROUP B----------------------------------
+    //-------get sportTagNode and weatherTagNode----------------
+    try {
+      sportTagNode = dataDistributionType.getDataNode(groupBFolksonomyNode, "sport");
+    } catch (PathNotFoundException e) {
+      sportTagNode = null;
+    }
+    try {
+      weatherTagNode = dataDistributionType.getDataNode(groupBFolksonomyNode, "weather");
+    } catch (PathNotFoundException e) {
+      weatherTagNode = null;
+    }
+    //----------------------------------------------------------
+    
+    assertNotNull("testAddGroupsTag failed! ", sportTagNode);
+    assertNotNull("testAddGroupsTag failed! ", weatherTagNode);
 
-    sportTagNode = groupBFolksonomyNode.getNode("sport");
     link = sportTagNode.getNodes().nextNode();
     targetNode = linkManager.getTarget(link);
     assertTrue("testAddGroupsTag failed! ", test.isSame(targetNode));
 
-    weatherTagNode = groupBFolksonomyNode.getNode("weather");
     link = weatherTagNode.getNodes().nextNode();
     targetNode = linkManager.getTarget(link);
     assertTrue("testAddGroupsTag failed! ", test.isSame(targetNode));
@@ -208,15 +248,28 @@ public class TestNewFolksonomyService extends BaseDMSTestCase {
                                        tags,
                                        test,
                                        COLLABORATION_WS);
-    assertTrue("testAddPublicTag failed! ", publicFolksonomyNode.hasNode("sport"));
-    assertTrue("testAddPublicTag failed! ", publicFolksonomyNode.hasNode("weather"));
+    
+    //---------------get sportTagNode and weatherTagNode---------------------------
+    Node sportTagNode = null;
+    try {
+      sportTagNode = dataDistributionType.getDataNode(publicFolksonomyNode, "sport");
+    } catch (PathNotFoundException e) {
+      sportTagNode = null;
+    }
+    Node weatherTagNode = null;
+    try {
+      weatherTagNode = dataDistributionType.getDataNode(publicFolksonomyNode, "weather");
+    } catch (PathNotFoundException e) {
+      weatherTagNode = null;
+    }
+    //-------------------------------------------------------------------------------
+    assertNotNull("testAddPublicTag failed! ", sportTagNode);
+    assertNotNull("testAddPublicTag failed! ", weatherTagNode);
 
-    Node sportTagNode = publicFolksonomyNode.getNode("sport");
     Node link = sportTagNode.getNodes().nextNode();
     Node targetNode = linkManager.getTarget(link);
     assertTrue("testAddPublicTag failed! ", test.isSame(targetNode));
 
-    Node weatherTagNode = publicFolksonomyNode.getNode("weather");
     link = weatherTagNode.getNodes().nextNode();
     targetNode = linkManager.getTarget(link);
     assertTrue("testAddPublicTag failed! ", test.isSame(targetNode));
@@ -250,15 +303,27 @@ public class TestNewFolksonomyService extends BaseDMSTestCase {
                                      tags,
                                      test,
                                      COLLABORATION_WS);
-    assertTrue("testAddSiteTag failed! ", siteFolksonomyNode.hasNode("sport"));
-    assertTrue("testAddSiteTag failed! ", siteFolksonomyNode.hasNode("weather"));
+    //----------------------get sportTagNode and weatherTagNode------------------
+    Node sportTagNode = null;
+    try {
+      sportTagNode = dataDistributionType.getDataNode(siteFolksonomyNode, "sport");
+    } catch (PathNotFoundException e) {
+      sportTagNode = null;
+    }
+    Node weatherTagNode = null;
+    try {
+      weatherTagNode = dataDistributionType.getDataNode(siteFolksonomyNode, "weather");
+    } catch (PathNotFoundException e) {
+      weatherTagNode = null;
+    }
+    //---------------------------------------------------------------------------
+    assertNotNull("testAddSiteTag failed! ", sportTagNode);
+    assertNotNull("testAddSiteTag failed! ", weatherTagNode);
 
-    Node sportTagNode = siteFolksonomyNode.getNode("sport");
     Node link = sportTagNode.getNodes().nextNode();
     Node targetNode = linkManager.getTarget(link);
     assertTrue("testAddSiteTag failed! ", test.isSame(targetNode));
 
-    Node weatherTagNode = siteFolksonomyNode.getNode("weather");
     link = weatherTagNode.getNodes().nextNode();
     targetNode = linkManager.getTarget(link);
     assertTrue("testAddSiteTag failed! ", test.isSame(targetNode));
@@ -293,10 +358,23 @@ public class TestNewFolksonomyService extends BaseDMSTestCase {
                                        test2,
                                        COLLABORATION_WS,
                                        user);
-    assertTrue("testGetAllDocumentsByTag failed! ", folksonomyNode.hasNode("sport"));
-    assertTrue("testGetAllDocumentsByTag failed! ", folksonomyNode.hasNode("weather"));
-
-    Node sportTagNode = folksonomyNode.getNode("sport");
+    //----------------------get sportTagNode and weatherTagNode------------------
+    Node sportTagNode = null;
+    try {
+      sportTagNode = dataDistributionType.getDataNode(folksonomyNode, "sport");
+    } catch (PathNotFoundException e) {
+      sportTagNode = null;
+    }
+    Node weatherTagNode = null;
+    try {
+      weatherTagNode = dataDistributionType.getDataNode(folksonomyNode, "weather");
+    } catch (PathNotFoundException e) {
+      weatherTagNode = null;
+    }
+    //---------------------------------------------------------------------------
+    
+    assertNotNull("testGetAllDocumentsByTag failed! ", sportTagNode);
+    assertNotNull("testGetAllDocumentsByTag failed! ", weatherTagNode);
 
     int count = 0;
     SessionProvider sessionProvider = WCMCoreUtils.getSystemSessionProvider();
@@ -473,12 +551,26 @@ public class TestNewFolksonomyService extends BaseDMSTestCase {
                                        tags,
                                        test,
                                        COLLABORATION_WS);
-    Node sportNode = publicFolksonomyNode.getNode("sport");
-    Node football = newFolksonomyService_.modifyTagName(sportNode.getPath()  , "football", COLLABORATION_WS);
-
-    assertTrue("testModifyTagName failed! ", publicFolksonomyNode.hasNode("football"));
-    assertTrue("testModifyTagName failed! ", publicFolksonomyNode.getNode("football").isSame(football));
-    assertFalse("testModifyTagName failed! ", publicFolksonomyNode.hasNode("sport"));
+    Node sportNode = dataDistributionType.getDataNode(publicFolksonomyNode, "sport");
+    Node football = newFolksonomyService_.modifyPublicTagName(sportNode.getPath()  , "football", 
+                                                              COLLABORATION_WS, publicFolksonomyTreePath);
+    //----------------------get footballTagNode, newSportTagNode--------------------------
+    Node footballTagNode = null;
+    try {
+      footballTagNode = dataDistributionType.getDataNode(publicFolksonomyNode, "football");
+    } catch (PathNotFoundException e) {
+      footballTagNode = null;
+    }    
+    Node newSportTagNode = null;
+    try {
+      newSportTagNode = dataDistributionType.getDataNode(publicFolksonomyNode, "sport");
+    } catch (PathNotFoundException e) {
+      newSportTagNode = null;
+    }
+    //------------------------------------------------------------------------------------
+    assertNotNull("testModifyTagName failed! ", footballTagNode);
+    assertTrue("testModifyTagName failed! ", footballTagNode.isSame(football));
+    assertNull("testModifyTagName failed! ", newSportTagNode);
 
     assertTrue("testModifyTagName failed! ", test.isSame(
         linkManager.getTarget(football.getNodes().nextNode())));
@@ -500,10 +592,26 @@ public class TestNewFolksonomyService extends BaseDMSTestCase {
                                        tags,
                                        test,
                                        COLLABORATION_WS);
-    Node sportNode = publicFolksonomyNode.getNode("sport");
-    newFolksonomyService_.removeTag(sportNode.getPath(), COLLABORATION_WS);
+    //-------------------------get sportTagNode-------------------------------
+    Node sportTagNode = null;
+    try {
+      sportTagNode = dataDistributionType.getDataNode(publicFolksonomyNode, "sport");
+    } catch (PathNotFoundException e) {
+      sportTagNode = null;
+    }
+    //------------------------------------------------------------------------
 
-    assertFalse("testRemoveTag failed! ", publicFolksonomyNode.hasNode("sport"));
+    newFolksonomyService_.removeTag(sportTagNode.getPath(), COLLABORATION_WS);
+
+    //-------------------------get sportTagNode-------------------------------
+    sportTagNode = null;
+    try {
+      sportTagNode = dataDistributionType.getDataNode(publicFolksonomyNode, "sport");
+    } catch (PathNotFoundException e) {
+      sportTagNode = null;
+    }
+    //------------------------------------------------------------------------
+    assertNull("testRemoveTag failed! ", sportTagNode);
 
     List<Node> tagList = newFolksonomyService_.getAllPublicTags(publicFolksonomyTreePath, COLLABORATION_WS);
     int count = 0;
@@ -527,10 +635,24 @@ public class TestNewFolksonomyService extends BaseDMSTestCase {
     String[] tags = { "sport", "weather" };
     newFolksonomyService_.addPrivateTag(tags, test, COLLABORATION_WS, session.getUserID());
 
-    Node sportTagNode = folksonomyNode.getNode("sport");
+    //--------------get sportTagNode----------------
+    Node sportTagNode = null;
+    try {
+      sportTagNode = dataDistributionType.getDataNode(folksonomyNode, "sport");
+    } catch (PathNotFoundException e) {
+      sportTagNode = null;
+    }
+    //----------------------------------------------
     newFolksonomyService_.removeTagOfDocument(sportTagNode.getPath(), test, COLLABORATION_WS);
 
-    assertFalse(test.hasNode("sport"));
+    //--------------get sportTagNode----------------
+    try {
+      sportTagNode = dataDistributionType.getDataNode(folksonomyNode, "sport");
+    } catch (PathNotFoundException e) {
+      sportTagNode = null;
+    }
+    //----------------------------------------------
+    assertNull("test removeTagOfDocument failed!", sportTagNode);
   }
   /**
    * Clean data test

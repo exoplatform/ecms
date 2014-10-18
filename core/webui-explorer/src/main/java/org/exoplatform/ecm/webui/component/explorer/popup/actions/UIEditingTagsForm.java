@@ -24,7 +24,9 @@ import org.exoplatform.container.ExoContainer;
 import org.exoplatform.container.ExoContainerContext;
 import org.exoplatform.ecm.jcr.model.Preference;
 import org.exoplatform.ecm.webui.component.explorer.UIJCRExplorer;
+import org.exoplatform.ecm.webui.component.explorer.UIWorkingArea;
 import org.exoplatform.ecm.webui.component.explorer.sidebar.UISideBar;
+import org.exoplatform.ecm.webui.component.explorer.sidebar.UITagExplorer;
 import org.exoplatform.services.cms.folksonomy.NewFolksonomyService;
 import org.exoplatform.services.jcr.RepositoryService;
 import org.exoplatform.services.jcr.core.ManageableRepository;
@@ -153,14 +155,17 @@ public class UIEditingTagsForm extends UIContainer implements UIPopupComponent {
 
       String tagPath = "";
       if (NewFolksonomyService.PUBLIC == scope) {
-        tagPath = nodeHierarchyCreator.getJcrPath(PUBLIC_TAG_NODE_PATH) + '/'
-            + tagName;
+        tagPath = newFolksonomyService.getDataDistributionType().getDataNode(
+                     (Node)(WCMCoreUtils.getUserSessionProvider().getSession(workspace, WCMCoreUtils.getRepository()).getItem(
+                             nodeHierarchyCreator.getJcrPath(PUBLIC_TAG_NODE_PATH))),
+                     tagName).getPath();
         newFolksonomyService.removeTag(tagPath, workspace);
       } else if (NewFolksonomyService.PRIVATE == scope) {
         Node userFolksonomyNode = getUserFolksonomyFolder(userID, uiForm);
-        tagPath = userFolksonomyNode.getNode(tagName).getPath();
+        tagPath = newFolksonomyService.getDataDistributionType().getDataNode(userFolksonomyNode, tagName).getPath();
         newFolksonomyService.removeTag(tagPath, workspace);
       }
+      uiForm.getAncestorOfType(UIJCRExplorer.class).findFirstComponentOfType(UITagExplorer.class).updateTagList();
     }
 
     private Node getUserFolksonomyFolder(String userName, UIEditingTagsForm uiForm) throws Exception {
