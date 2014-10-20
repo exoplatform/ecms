@@ -725,6 +725,7 @@ public class SiteSearchServiceImpl implements SiteSearchService {
     @Override
     public Node filterNodeToDisplay(Node node) {
       try {
+        if (node == null || node.getPath().contains("/jcr:system/")) return null;
         Node displayNode = getNodeToCheckState(node);
         if(displayNode == null) return null;
         if (isSearchContent) return displayNode;
