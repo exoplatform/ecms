@@ -405,6 +405,7 @@ public class UISearchResult extends UIContainer {
     }
     public Node filterNodeToDisplay(Node node) {
       try {
+        if (node == null || node.getPath().contains("/jcr:system/")) return null;
         if (node != null) {
           if ((categoryPathList != null) && (categoryPathList.size() > 0)){
             for (String categoryPath : categoryPathList) {
