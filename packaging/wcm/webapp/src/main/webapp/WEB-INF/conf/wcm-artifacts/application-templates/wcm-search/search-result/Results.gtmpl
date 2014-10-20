@@ -71,7 +71,7 @@
 	           <a class="btn dropdown-toggle" data-toggle="dropdown">
 	           <span id="sortField" sort="$sortField" order="$orderType"><%=uicomponent.getLabel("UIDefaultSearchResult.label." + sortField)%></span>
 	           <span class="spiter"></span>
-	           <span class="caret"></span>
+	           <i class="uiIconArrowDown uiIconLightGray"></i>
 	           </a>
 	           <ul class="dropdown-menu" id="sortOptions">
 	              <li><a sort="relevancy" href="#"><%=uicomponent.getLabel("UIDefaultSearchResult.label.relevancy")%><%=getSortTypeCss("relevancy");%></a></li>

@@ -91,7 +91,7 @@
                     <div class="btn-group">
                       <button data-toggle="dropdown" class="btn dropdown-toggle">
                         $currentPage of $availablePage  
-                        <span class="caret"></span>
+                        <i class="uiIconMiniArrowDown uiIconLightGray"></i>
                       </button>
                       <ul class="dropdown-menu" style="max-height:290px;min-width:80px;overflow:auto">
                         <% for (int i = 1; i <= availablePage; i++) {%>
@@ -133,7 +133,7 @@
                      if ("Size".equals(selectedSortType)) sortTypeName = "size";
                   %>
                   <%=_ctx.appRes("FileView.label." + sortTypeName)%>
-                  <span class="caret"></span>
+                  <i class="uiIconMiniArrowDown uiIconLightGray"></i>
                 </button>
                 <ul class="dropdown-menu" style="max-height:290px;min-width:80px;overflow:auto">
                     <li class="$nameClass">
@@ -204,7 +204,7 @@
 
 						<ul>
   					  <li id="hiddenMoreButton" class="dropdown pull-right listHiddenActionsContainer">
-    					  <a data-toggle="dropdown" class="dropdown-toggle" href="#"><%=_ctx.appRes("UIViewBar.label.more")%>  <b class="caret"></b></a>
+    					  <a data-toggle="dropdown" class="dropdown-toggle" href="#"><%=_ctx.appRes("UIViewBar.label.more")%>  <i class="uiIconMiniArrowDown uiIconLightGray"></i></a>
     					  <ul class="dropdown-menu">
     					    <!-- <li><a data-toggle="tab" href="#dropdown1_4">Tab demo1</a></li> -->
     					  </ul>
@@ -233,7 +233,7 @@
                         }
                       %>
                       <li class="dropdown pull-right listHiddenActionsContainer">
-                        <a data-toggle="dropdown" class="dropdown-toggle" href="#"><%=_ctx.appRes("UIViewBar.label.more")%> <b class="caret"></b></a>
+                        <a data-toggle="dropdown" class="dropdown-toggle" href="#"><%=_ctx.appRes("UIViewBar.label.more")%> <i class="uiIconMiniArrowDown uiIconLightGray"></i></a>
                         <ul class="dropdown-menu">
                           <!-- <li><a data-toggle="tab" href="#dropdown1_4">Tab demo1</a></li> -->
                         </ul>
@@ -267,7 +267,7 @@
                 </li>
                 <%}%>
                 <li class="dropdown pull-right listHiddenActionsContainer">
-                  <a data-toggle="dropdown" class="dropdown-toggle" href="#"><%=_ctx.appRes("UIViewBar.label.more")%> <b class="caret"></b></a>
+                  <a data-toggle="dropdown" class="dropdown-toggle" href="#"><%=_ctx.appRes("UIViewBar.label.more")%> <i class="uiIconMiniArrowDown uiIconLightGray"></i></a>
                   <ul class="dropdown-menu">
                     <!-- <li><a data-toggle="tab" href="#dropdown1_4">Tab demo1</a></li> -->
                   </ul>

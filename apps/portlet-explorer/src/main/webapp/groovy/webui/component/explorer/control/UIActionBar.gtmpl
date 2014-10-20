@@ -87,7 +87,7 @@
 					</li>                                                                                           <%
 				}/*for tabs loops*/                                                                                   %>
 					<li class="dropdown pull-right listHiddenTabsContainer">
-						<a data-toggle="dropdown" class="dropdown-toggle" href="#"><%=_ctx.appRes("UIViewBar.label.more")%> <b class="caret"></b></a>
+						<a data-toggle="dropdown" class="dropdown-toggle" href="#"><%=_ctx.appRes("UIViewBar.label.more")%> <i class="uiIconMiniArrowDown uiIconLightGray"></i></a>
 							<ul class="dropdown-menu">
 								<!-- <li><a data-toggle="tab" href="#dropdown1_4">Tab demo1</a></li> -->
 							</ul>
@@ -123,7 +123,7 @@
 						 } //for loop
 					 %>
 					 <li class="dropdown pull-right listHiddenActionsContainer" style="display: none;">
-						 <a data-toggle="dropdown" class="dropdown-toggle" href="#"><%=_ctx.appRes("UIViewBar.label.more")%> <b class="caret"></b></a>
+						 <a data-toggle="dropdown" class="dropdown-toggle" href="#"><%=_ctx.appRes("UIViewBar.label.more")%> <i class="uiIconMiniArrowDown uiIconLightGray"></i></a>
 						 <ul class="dropdown-menu" id="ListHideContainer"></ul>
 					 </li>
 				 </ul>
