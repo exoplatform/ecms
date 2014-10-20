@@ -747,6 +747,7 @@ public class SiteSearchServiceImpl implements SiteSearchService {
     public Node filterNodeToDisplay(Node node) {
       try {
         if(trashService.isInTrash(node)) return null;
+        if (node == null || node.getPath().contains("/jcr:system/")) return null;
         Node displayNode = getNodeToCheckState(node);
         if(displayNode == null) return null;
         if (isSearchContent) return displayNode;
