@@ -1,0 +1,89 @@
+diff --git a/core/search/src/main/java/org/exoplatform/services/wcm/search/SiteSearchServiceImpl.java b/core/search/src/main/java/org/exoplatform/services/wcm/search/SiteSearchServiceImpl.java
+index b34176a..ba28795 100644
+--- a/core/search/src/main/java/org/exoplatform/services/wcm/search/SiteSearchServiceImpl.java
++++ b/core/search/src/main/java/org/exoplatform/services/wcm/search/SiteSearchServiceImpl.java
+@@ -28,21 +28,16 @@ import javax.jcr.RepositoryException;
+ import javax.jcr.Session;
+ import javax.jcr.Value;
+ import javax.jcr.nodetype.NodeType;
+-import javax.jcr.nodetype.NodeTypeIterator;
+ import javax.jcr.nodetype.NodeTypeManager;
+ import javax.jcr.query.Query;
+ import javax.jcr.query.QueryManager;
+ import javax.jcr.query.Row;
+ import javax.jcr.query.RowIterator;
+-import javax.portlet.PortletRequest;
+ 
+-import org.apache.commons.lang.ArrayUtils;
+ import org.apache.commons.lang.StringUtils;
+ import org.exoplatform.container.xml.InitParams;
+ import org.exoplatform.container.xml.ValueParam;
+-import org.exoplatform.portal.application.PortalRequestContext;
+ import org.exoplatform.portal.config.UserACL;
+-import org.exoplatform.portal.webui.util.Util;
+ import org.exoplatform.services.cms.templates.TemplateService;
+ import org.exoplatform.services.jcr.RepositoryService;
+ import org.exoplatform.services.jcr.core.ManageableRepository;
+@@ -64,15 +59,13 @@ import org.exoplatform.services.wcm.search.base.NodeSearchFilter;
+ import org.exoplatform.services.wcm.search.base.PageListFactory;
+ import org.exoplatform.services.wcm.search.base.SearchDataCreator;
+ import org.exoplatform.services.wcm.search.connector.BaseSearchServiceConnector;
+-import org.exoplatform.services.wcm.utils.SQLQueryBuilder;
+-import org.exoplatform.services.wcm.utils.WCMCoreUtils;
+ import org.exoplatform.services.wcm.utils.AbstractQueryBuilder.COMPARISON_TYPE;
+ import org.exoplatform.services.wcm.utils.AbstractQueryBuilder.LOGICAL;
+ import org.exoplatform.services.wcm.utils.AbstractQueryBuilder.ORDERBY;
+ import org.exoplatform.services.wcm.utils.AbstractQueryBuilder.PATH_TYPE;
+ import org.exoplatform.services.wcm.utils.AbstractQueryBuilder.QueryTermHelper;
+-import org.exoplatform.webui.application.WebuiRequestContext;
+-import org.exoplatform.webui.application.portlet.PortletRequestContext;
++import org.exoplatform.services.wcm.utils.SQLQueryBuilder;
++import org.exoplatform.services.wcm.utils.WCMCoreUtils;
+ 
+ /**
+  * The SiteSearchService component is used in the Search portlet that allows users
+diff --git a/core/search/src/main/java/org/exoplatform/services/wcm/search/base/QueryResultPageList.java b/core/search/src/main/java/org/exoplatform/services/wcm/search/base/QueryResultPageList.java
+index 3d0e864..7ab4743 100644
+--- a/core/search/src/main/java/org/exoplatform/services/wcm/search/base/QueryResultPageList.java
++++ b/core/search/src/main/java/org/exoplatform/services/wcm/search/base/QueryResultPageList.java
+@@ -141,17 +141,15 @@ public class QueryResultPageList<E> extends AbstractPageList<E> {
+     ((QueryImpl)query).setOffset(offset_);  
+     long prevSize = 0;
+     int bufSize = bufferSize_;
+-    int offset = 0;
+-    int count = 0;
+-    buffer.clear();
+-    dataSet.clear();
+     while (true) {
+-      ((QueryImpl)query).setOffset(offset);
+       ((QueryImpl)query).setLimit(bufSize);      
+       QueryResult queryResult = query.execute();
+       NodeIterator iter = queryResult.getNodes();
+       RowIterator rowIter = queryResult.getRows();
+       long size = iter.getSize();
++      int count = 0;
++      buffer.clear();
++      dataSet.clear();
+       
+       while (iter.hasNext() && count < bufferSize_) {
+         Node newNode = iter.nextNode();
+@@ -172,7 +170,6 @@ public class QueryResultPageList<E> extends AbstractPageList<E> {
+       if (count == bufferSize_) break;
+       /* already query all data */
+       if (size == prevSize) break;
+-      offset = bufSize;
+       bufSize = 2 * bufSize;
+       prevSize = size;
+     }
+diff --git a/upgrade-plugins/src/main/java/org/exoplatform/ecms/upgrade/sites/SiteDataUpgradePlugin.java b/upgrade-plugins/src/main/java/org/exoplatform/ecms/upgrade/sites/SiteDataUpgradePlugin.java
+index 5ed41c4..f33d951 100644
+--- a/upgrade-plugins/src/main/java/org/exoplatform/ecms/upgrade/sites/SiteDataUpgradePlugin.java
++++ b/upgrade-plugins/src/main/java/org/exoplatform/ecms/upgrade/sites/SiteDataUpgradePlugin.java
+@@ -34,7 +34,6 @@ import org.exoplatform.services.jcr.core.ExtendedNode;
+ import org.exoplatform.services.log.ExoLogger;
+ import org.exoplatform.services.log.Log;
+ import org.exoplatform.services.security.ConversationState;
+-import org.exoplatform.services.security.IdentityConstants;
+ import org.exoplatform.services.wcm.core.NodeLocation;
+ import org.exoplatform.services.wcm.core.NodetypeConstant;
+ import org.exoplatform.services.wcm.core.WCMConfigurationService;
