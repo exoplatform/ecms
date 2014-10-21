@@ -20,6 +20,9 @@ import javax.jcr.Node;
 
 import org.apache.commons.lang.StringUtils;
 import org.exoplatform.ecm.webui.utils.Utils;
+import org.exoplatform.services.pdfviewer.ObjectKey;
+import org.exoplatform.services.pdfviewer.PDFViewerService;
+import org.exoplatform.services.wcm.utils.WCMCoreUtils;
 import org.exoplatform.web.application.ApplicationMessage;
 import org.exoplatform.webui.event.Event;
 import org.exoplatform.webui.event.EventListener;
@@ -73,8 +76,21 @@ public class DialogFormActionListeners {
 //          uiForm.setDataRemoved(true);
         }
       }
-      
+      clearPDFCached(uiForm.getNode());
       event.getRequestContext().addUIComponentToUpdateByAjax(uiForm);
+    }
+
+    private void clearPDFCached(Node currentNode) throws Exception{
+      PDFViewerService pdfViewerService = WCMCoreUtils.getService(PDFViewerService.class);
+      String wsName = currentNode.getSession().getWorkspace().getName();
+      String repoName = WCMCoreUtils.getRepository().getConfiguration().getName();
+      String uuid = currentNode.getUUID();
+      StringBuilder bd = new StringBuilder();
+      StringBuilder bd1 = new StringBuilder();
+      bd.append(repoName).append("/").append(wsName).append("/").append(uuid);
+      bd1.append(bd).append("/jcr:lastModified");
+      pdfViewerService.getCache().remove(new ObjectKey(bd.toString()));
+      pdfViewerService.getCache().remove(new ObjectKey(bd1.toString()));
     }
   }
 
