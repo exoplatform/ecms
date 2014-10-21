@@ -62,11 +62,11 @@ public class QueryResultPageList<E> extends AbstractPageList<E> {
   private Set<E> dataSet;
   
   public QueryResultPageList(int pageSize, QueryData queryData, int total, int bufferSize,
-                             NodeSearchFilter filter, SearchDataCreator creator) {
+                             NodeSearchFilter filter, SearchDataCreator creator,int offset) {
     super(pageSize);
     setTotalNodes(total);
     queryData_ = queryData.clone();
-    offset_ = 0;
+    offset_ = offset;
     bufferSize_ = bufferSize;
     this.filter = filter;
     this.searchDataCreator = creator;
@@ -105,28 +105,11 @@ public class QueryResultPageList<E> extends AbstractPageList<E> {
     if (buffer == null || buffer.size() == 0) {
       queryDataForBuffer();
     }
-    int firstBufferPage = offset_ / getPageSize() + 1;
-    int lastBufferPage = (offset_ + buffer.size() - 1) / getPageSize() + 1;
-    int bufferPage = bufferSize_ / getPageSize();
-        
-    int offsetPage = firstBufferPage;
-    if (page < firstBufferPage || page > lastBufferPage || buffer.size() == 0) {
-      if (page < firstBufferPage) {
-        offsetPage = Math.max(1, page - (bufferPage / 3 * 2));
-      } else if (page > lastBufferPage) {
-        offsetPage = page;
-      }
-      
-      offset_ = (offsetPage - 1) * getPageSize();
-      queryDataForBuffer();
-    }
-    
+
     currentListPage_ = new ArrayList<E>();
     for (int i = getFrom(); i < getTo(); i++) {
-      if (i - offset_ < buffer.size()) {
-        E data = buffer.get(i - offset_);
+        E data = buffer.get(i);
         currentListPage_.add(data);
-      }
     }
   }
   
@@ -141,12 +124,11 @@ public class QueryResultPageList<E> extends AbstractPageList<E> {
     ((QueryImpl)query).setOffset(offset_);  
     long prevSize = 0;
     int bufSize = bufferSize_;
-    int offset = 0;
     int count = 0;
     buffer.clear();
     dataSet.clear();
     while (true) {
-      ((QueryImpl)query).setOffset(offset);
+      ((QueryImpl)query).setOffset(offset_);
       ((QueryImpl)query).setLimit(bufSize);      
       QueryResult queryResult = query.execute();
       NodeIterator iter = queryResult.getNodes();
@@ -172,7 +154,7 @@ public class QueryResultPageList<E> extends AbstractPageList<E> {
       if (count == bufferSize_) break;
       /* already query all data */
       if (size == prevSize) break;
-      offset = bufSize;
+      offset_ = bufSize;
       bufSize = 2 * bufSize;
       prevSize = size;
     }
