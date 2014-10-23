@@ -35,7 +35,7 @@ import org.apache.lucene.util.Version;
 public class IgnoreAccentAnalyzer extends Analyzer {
 
   public TokenStream tokenStream(String fieldName, Reader reader) {
-    TokenStream result = new WhitespaceTokenizerWithDot(Version.LUCENE_35, reader);
+    TokenStream result = new WhitespaceTokenizer(Version.LUCENE_35, reader);
     result = new StandardFilter(Version.LUCENE_35, result);
     result = new UnescapeHTMLFilter(result);
     result = new IgnoreSentencesEndFilter(result);
