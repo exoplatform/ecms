@@ -413,9 +413,11 @@ public class WebDavServiceImpl extends org.exoplatform.services.jcr.webdav.WebDa
                       @HeaderParam(ExtHttpHeaders.USER_AGENT) String userAgent,
                       InputStream inputStream,
                       @Context UriInfo uriInfo) {
-
     Session session = null;
     Item item = null;
+    Node currentNode = null;
+    boolean isCreating = false;
+    ActivityCommonService activityService = null;
     try {
       repoName = repositoryService.getCurrentRepository().getConfiguration().getName();
       try {
@@ -432,6 +434,10 @@ public class WebDavServiceImpl extends org.exoplatform.services.jcr.webdav.WebDa
         repoPath = item.getSession().getWorkspace().getName()
             + LinkUtils.createPath(item.getPath(), Text.escapeIllegalJcrChars(LinkUtils.getItemName(path(repoPath))));
         session = item.getSession();
+      }
+      activityService = WCMCoreUtils.getService(ActivityCommonService.class);
+      if (!session.itemExists(path(repoPath))) {
+        isCreating = true;
       }
     } catch (PathNotFoundException exc) {
       return Response.status(HTTPStatus.NOT_FOUND).entity(exc.getMessage()).build();
@@ -456,10 +462,20 @@ public class WebDavServiceImpl extends org.exoplatform.services.jcr.webdav.WebDa
                              inputStream,
                              uriInfo);
     try {
-      Node currentNode = (Node) session.getItem(path(repoPath));
-      if (currentNode.isCheckedOut())
+      currentNode = (Node) session.getItem(path(repoPath));
+      if (isCreating) {
+        // Since ECMS-6474:
+        // Windows webdav calls *put* function twice during uploading a file.
+        // As the result, this node must be in creating list of nodes during those calls.
+        if (userAgent.contains("Microsoft")) {
+          activityService.setCreating(currentNode, true);
+        }
+      } else {
+        activityService.setCreating(currentNode, false);
+      }
+      if (currentNode.isCheckedOut() && !activityService.isCreating(currentNode))
         listenerService.broadcast(this.POST_UPLOAD_CONTENT_EVENT, this, currentNode);
-      if(currentNode != null) {
+      if(currentNode != null && isCreating) {
         ListenerService listenerService = WCMCoreUtils.getService(ListenerService.class);
         try {
           listenerService.broadcast(ActivityCommonService.FILE_CREATED_ACTIVITY, null, currentNode);
@@ -470,6 +486,7 @@ public class WebDavServiceImpl extends org.exoplatform.services.jcr.webdav.WebDa
           }
         }
       }
+
     } catch (PathNotFoundException npfe) {
       return Response.status(HTTPStatus.NOT_FOUND).entity(npfe.getMessage()).build();
     } catch (RepositoryException re) {
