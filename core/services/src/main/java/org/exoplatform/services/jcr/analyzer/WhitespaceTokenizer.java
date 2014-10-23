@@ -39,9 +39,14 @@ import org.apache.lucene.util.Version;
  * {@link CharTokenizer#normalize(int)} for details.</li>
  * </ul>
  */
-public class WhitespaceTokenizerWithDot extends CharTokenizer {
+public class WhitespaceTokenizer extends CharTokenizer {
 
-    
+  private static String searchCharacters;
+
+  static {
+    searchCharacters = (System.getProperty("search.excluded-characters")!=null?
+                        System.getProperty("search.excluded-characters"):"");
+  }
     /**
      * Construct a new WhitespaceTokenizer. * @param matchVersion Lucene version
      * to match See {@link <a href="#version">above</a>}
@@ -49,7 +54,7 @@ public class WhitespaceTokenizerWithDot extends CharTokenizer {
      * @param in
      *          the input to split up into tokens
      */
-    public WhitespaceTokenizerWithDot(Version matchVersion, Reader in) {
+    public WhitespaceTokenizer(Version matchVersion, Reader in) {
       super(matchVersion, in);
     }
 
@@ -63,7 +68,7 @@ public class WhitespaceTokenizerWithDot extends CharTokenizer {
      * @param in
      *          the input to split up into tokens
      */
-    public WhitespaceTokenizerWithDot(Version matchVersion, AttributeSource source, Reader in) {
+    public WhitespaceTokenizer(Version matchVersion, AttributeSource source, Reader in) {
       super(matchVersion, source, in);
     }
 
@@ -79,7 +84,7 @@ public class WhitespaceTokenizerWithDot extends CharTokenizer {
      * @param in
      *          the input to split up into tokens
      */
-    public WhitespaceTokenizerWithDot(Version matchVersion, AttributeFactory factory, Reader in) {
+    public WhitespaceTokenizer(Version matchVersion, AttributeFactory factory, Reader in) {
       super(matchVersion, factory, in);
     }
     
@@ -87,6 +92,10 @@ public class WhitespaceTokenizerWithDot extends CharTokenizer {
      * {@link Character#isWhitespace(int)}.*/
     @Override
     protected boolean isTokenChar(int c) {
-      return !Character.isWhitespace(c) && c != '\u002e' && c!= '\u002d';
+
+      if(!Character.isWhitespace(c) && searchCharacters.indexOf(c) != -1){
+        return true;
+      }
+      return false;
     }
   }
