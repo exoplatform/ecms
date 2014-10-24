@@ -55,6 +55,9 @@ public class QueryResultPageList<E> extends AbstractPageList<E> {
   private int bufferSize_;
   /** The offset */
   private int offset_;
+
+    /** the user's offset */
+    private int realOffset_;
   
   /** The nodes. */
   protected List<E> buffer;
@@ -62,11 +65,12 @@ public class QueryResultPageList<E> extends AbstractPageList<E> {
   private Set<E> dataSet;
   
   public QueryResultPageList(int pageSize, QueryData queryData, int total, int bufferSize,
-                             NodeSearchFilter filter, SearchDataCreator creator) {
+                             NodeSearchFilter filter, SearchDataCreator creator, int offset) {
     super(pageSize);
     setTotalNodes(total);
     queryData_ = queryData.clone();
     offset_ = 0;
+    realOffset_=offset;
     bufferSize_ = bufferSize;
     this.filter = filter;
     this.searchDataCreator = creator;
@@ -131,6 +135,68 @@ public class QueryResultPageList<E> extends AbstractPageList<E> {
   }
   
   private void queryDataForBuffer() throws Exception {
+
+      /**
+       * ECMS-6444 :
+       * this make pagination not correct, the first page of results is always displayed when user asks for more results.
+       * In fact the first solution is to said : use the offset sent by unifiedSearch portlet and make the query from this offset.
+       * BUT : in this function, we can do newNode = filter.filterNodeToDisplay(newNode);
+       * This instruction can removes a node if he not match a criteria of the current search.
+       * For example : when searching Files (aka nt:file), nt:file can be founded by query
+       * because, we found default.html which is nt:file
+       * filterNodeToDisplay(newNode) will transform this node to parent webcontent, and remove it form the list
+       * because it is not nt:file.
+       *
+       * So if just use offset, this leads to potential problems :
+       * for example :
+       * we search for Files (nt:file)
+       * if query(offset=0, limit=20) returns results R1 R2 R3 R4 R5 R6 R7 R8 R9 R10 R11 R12 R13 R14 R15 R16 R17 R18 R19 R20
+       * and R2 is a webContent, removed by filterNodeToDisplay
+       * So first page sent is
+       * R1 R3 R4 R5 R6 (assuming pageSize is 5)
+       *
+       * Now, when querying second page, the query will be done with offset = pageSize (5) and limit=20
+       * And list of results will be
+       * R6 R7 R8 R9 R10 R11 R12 R13 R14 R15 R16 R17 R18 R19 R20
+       * So first page sent is
+       * R6 R7 R8 R9 R10 (assuming pageSize is 5)
+       * R6 result is displayed twice.
+       *
+       * So what to do this fix this ?
+       * The idea is to redo the query from offset zero, and use the real offset of the user to track results removed.
+       * With last example :
+       * at first call, realOffset is 0
+       * dataBuffer will be filled with result
+       * R1 R3 R4 R5 R6 (assuming pageSize is 5)
+       *
+       * When user choose "More results"
+       * realOffset is 5
+       * query(offset=0, limit =20) returns
+       * R1 R2 R3 R4 R5 R6 R7 R8 R9 R10 R11 R12 R13 R14 R15 R16 R17 R18 R19 R20
+       * we loop on theses results :
+       * R1 index (1) is before realOffset (5) => so ignore it
+       * R2 index (2) is ignored => increase realOffset => realOffset=6
+       * R3 index (3) is before realOffset (6) => so ignore it
+       * R4 index (4) is before realOffset (6) => so ignore it
+       * R5 index (5) is before realOffset (6) => so ignore it
+       * R6 index (6) is before realOffset (6) => so ignore it
+       * R7 index (7) is greater than realoffset => start to fill the buffer
+       * databuffer will be filled with
+       * R7 R8 R9 R10 R11
+       *
+       * This time, results are not displayed twice.
+       *
+       * Now these approach leads to a potential performances problem
+       * even if we want page i, we redo query for all page < i.
+       * This is mandatory because else we cannot know which node is removed by filterNodeToDisplay.
+       *
+       * To prevent this, we have to find a solution to create a query that returns exactly nodes we want to display.
+       *
+       * Sorry for the long comment, but necessary to understand the problem
+       * R. Dénarié
+       *
+        */
+
     buffer = new ArrayList<E>();
     dataSet = new HashSet<E>();
     SessionProvider sessionProvider = queryData_.isSystemSession() ? WCMCoreUtils.getSystemSessionProvider() :
@@ -143,6 +209,7 @@ public class QueryResultPageList<E> extends AbstractPageList<E> {
     int bufSize = bufferSize_;
     int offset = 0;
     int count = 0;
+    int currentIndex=0;
     buffer.clear();
     dataSet.clear();
     while (true) {
@@ -154,10 +221,19 @@ public class QueryResultPageList<E> extends AbstractPageList<E> {
       long size = iter.getSize();
       
       while (iter.hasNext() && count < bufferSize_) {
-        Node newNode = iter.nextNode();
+          currentIndex++;
+          Node newNode = iter.nextNode();
+
+
         if (filter != null) {
           newNode = filter.filterNodeToDisplay(newNode);
-        }        
+        }
+        if (newNode == null) {
+          realOffset_++;
+        }
+        if (currentIndex<=realOffset_) {
+          continue;
+        }
         if (newNode != null && searchDataCreator != null) {
           Row newRow = rowIter.nextRow();
           E data = searchDataCreator.createData(newNode, newRow);
@@ -172,7 +248,7 @@ public class QueryResultPageList<E> extends AbstractPageList<E> {
       if (count == bufferSize_) break;
       /* already query all data */
       if (size == prevSize) break;
-      offset = bufSize;
+      offset += bufSize;
       bufSize = 2 * bufSize;
       prevSize = size;
     }

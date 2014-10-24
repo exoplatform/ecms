@@ -70,8 +70,11 @@ public class PageListFactory {
     Session session = sessionProvider.getSession(workspace, WCMCoreUtils.getRepository());
     QueryManager queryManager = session.getWorkspace().getQueryManager();
     Query query = queryManager.createQuery(queryStatement, language);
+      int offset=0;
     if (criteria != null) {
-      if (criteria.getOffset() > 0) { ((QueryImpl)query).setOffset(criteria.getOffset()); }
+      if (criteria.getOffset() > 0) { ((QueryImpl)query).setOffset(criteria.getOffset());
+        offset= (int) criteria.getOffset();
+      }
     }
     ((QueryImpl)query).setLimit(AbstractPageList.RESULT_SIZE_SEPARATOR + 1);
     QueryResult result = query.execute();
@@ -80,7 +83,7 @@ public class PageListFactory {
       return new ArrayNodePageList<E>(result, pageSize, filter, dataCreator);
     } else {
       QueryData queryData = new QueryData(queryStatement, workspace, language, isSystemSession);
-      QueryResultPageList<E> ret = new QueryResultPageList<E>(pageSize, queryData, totalNodes, bufferSize, filter, dataCreator);
+      QueryResultPageList<E> ret = new QueryResultPageList<E>(pageSize, queryData, totalNodes, bufferSize, filter, dataCreator, offset);
       return ret;        
     }
   }

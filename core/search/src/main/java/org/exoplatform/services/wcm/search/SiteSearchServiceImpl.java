@@ -789,8 +789,9 @@ public class SiteSearchServiceImpl implements SiteSearchService {
       //return exo:webContent when exo:htmlFile found
       if (displayNode.isNodeType("exo:htmlFile")) {
         Node parent = displayNode.getParent();
-        if (parent.isNodeType("exo:webContent")) return parent;
-        return displayNode;
+        if (parent.isNodeType("exo:webContent")) {
+            displayNode = parent;
+        }
       }
      String[] contentTypes = queryCriteria.getContentTypes();
       for (String contentType : contentTypes) {

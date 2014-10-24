@@ -18,6 +18,7 @@ package org.exoplatform.services.wcm.search;
 
 import java.util.Date;
 import java.util.HashMap;
+import java.util.List;
 
 import javax.jcr.Node;
 
@@ -29,6 +30,8 @@ import org.exoplatform.portal.mop.page.PageContext;
 import org.exoplatform.portal.mop.page.PageKey;
 import org.exoplatform.portal.mop.page.PageService;
 import org.exoplatform.portal.mop.page.PageState;
+import org.exoplatform.services.cms.templates.TemplateService;
+import org.exoplatform.services.wcm.core.NodetypeConstant;
 import org.exoplatform.services.wcm.publication.PublicationDefaultStates;
 import org.exoplatform.services.wcm.search.base.AbstractPageList;
 import org.exoplatform.services.wcm.search.base.BaseSearchTest;
@@ -112,6 +115,9 @@ public class TestSearchService extends BaseSearchTest {
       htmlData = "This is the default.html file.";
     htmlContent.setProperty("jcr:data", htmlData);
 
+    if (!htmlContent.isNodeType("exo:webContentChild"))
+      htmlContent.addMixin("exo:webContentChild");
+
     Node jsFolder;
     try {
       jsFolder = webcontent.getNode("js");
@@ -142,6 +148,8 @@ public class TestSearchService extends BaseSearchTest {
     if (jsData == null)
       jsData = "This is the default.js file.";
     jsContent.setProperty("jcr:data", jsData);
+    if (!jsContent.isNodeType("exo:webContentChild"))
+      jsContent.addMixin("exo:webContentChild");
 
     Node cssFolder;
     try {
@@ -173,6 +181,9 @@ public class TestSearchService extends BaseSearchTest {
     if (cssData == null)
       cssData = "This is the default.css file.";
     cssContent.setProperty("jcr:data", cssData);
+    if (!cssContent.isNodeType("exo:webContentChild"))
+      cssContent.addMixin("exo:webContentChild");
+
 
     Node mediaFolder;
     try {
@@ -190,10 +201,20 @@ public class TestSearchService extends BaseSearchTest {
     return webcontent;
   }
   
-  private AbstractPageList<ResultNode> getSearchResult() throws Exception{
+  private AbstractPageList<ResultNode> getSearchResult(boolean isSearchContent, int searchItemPerPage) throws Exception{
     return siteSearchService.searchSiteContents(WCMCoreUtils.getSystemSessionProvider(),
-                                                queryCriteria, seachItemsPerPage, false);
+                                                queryCriteria, searchItemPerPage, isSearchContent);
   }
+
+    protected String[] getWebContentSearchedDocTypes() {
+        List<String> docTypes = null;
+        try {
+            docTypes = WCMCoreUtils.getService(TemplateService.class).getDocumentTemplates();
+        } catch (Exception e) {
+        }
+        return docTypes.toArray(new String[]{});
+    }
+
 
   /**
    * Test case 1: search all node (includes have or don't have publication property)
@@ -202,7 +223,7 @@ public class TestSearchService extends BaseSearchTest {
    * searchDocumentChecked = true<br>
    * searchSelectedPortal = shared<br>
    * searchIsLiveMode = false<br>
-   *
+   *B
    * @throws Exception the exception
    */
   public void testSearchSharedPortalNotLiveMode() throws Exception {
@@ -214,7 +235,8 @@ public class TestSearchService extends BaseSearchTest {
     queryCriteria.setLiveMode(false);
     queryCriteria.setSearchWebpage(false);
     queryCriteria.setFuzzySearch(true);
-    AbstractPageList<ResultNode> pageList = getSearchResult();
+    queryCriteria.setContentTypes(getWebContentSearchedDocTypes());
+    AbstractPageList<ResultNode> pageList = getSearchResult(true, seachItemsPerPage);
     assertEquals(2, pageList.getPage(1).size());
   }
 
@@ -237,7 +259,9 @@ public class TestSearchService extends BaseSearchTest {
     queryCriteria.setLiveMode(true);
     queryCriteria.setSearchWebpage(false);
     queryCriteria.setFuzzySearch(true);
-    AbstractPageList<ResultNode> pageList = getSearchResult();
+      queryCriteria.setContentTypes(getWebContentSearchedDocTypes());
+      int searchItemPerPage = 1;
+    AbstractPageList<ResultNode> pageList = getSearchResult(true,searchItemPerPage);
     assertEquals(1, pageList.getPage(1).size());
     assertEquals(2, pageList.getTotalNodes());
   }
@@ -261,7 +285,8 @@ public class TestSearchService extends BaseSearchTest {
     queryCriteria.setLiveMode(false);
     queryCriteria.setSearchWebpage(false);
     queryCriteria.setFuzzySearch(true);
-    AbstractPageList<ResultNode> pageList = getSearchResult();
+      queryCriteria.setContentTypes(getWebContentSearchedDocTypes());
+    AbstractPageList<ResultNode> pageList = getSearchResult(true, seachItemsPerPage);
     assertEquals(4, pageList.getTotalNodes());
     assertEquals(4, pageList.getPage(1).size());
   }
@@ -285,7 +310,12 @@ public class TestSearchService extends BaseSearchTest {
     queryCriteria.setLiveMode(true);
     queryCriteria.setSearchWebpage(false);
     queryCriteria.setFuzzySearch(true);
-    AbstractPageList<ResultNode> pageList = getSearchResult();
+
+    queryCriteria.setContentTypes(getWebContentSearchedDocTypes());
+
+    int searchItemPerPage = 2;
+    AbstractPageList<ResultNode> pageList = getSearchResult(true, searchItemPerPage);
+
     assertEquals(2, pageList.getPage(1).size());
     assertEquals(4, pageList.getTotalNodes());
   }
@@ -308,7 +338,9 @@ public class TestSearchService extends BaseSearchTest {
     queryCriteria.setLiveMode(true);
     queryCriteria.setSearchWebpage(false);
     queryCriteria.setFuzzySearch(true);
-    AbstractPageList<ResultNode> pageList = getSearchResult();
+    queryCriteria.setContentTypes(getWebContentSearchedDocTypes());
+    int searchItemsPerPage = 2;
+    AbstractPageList<ResultNode> pageList = getSearchResult(true, searchItemsPerPage);
     assertEquals(2, pageList.getPage(1).size());
   }
 
@@ -329,7 +361,8 @@ public class TestSearchService extends BaseSearchTest {
     queryCriteria.setLiveMode(false);
     queryCriteria.setSearchWebpage(false);
     queryCriteria.setFuzzySearch(true);
-    AbstractPageList<ResultNode> pageList = getSearchResult();
+      queryCriteria.setContentTypes(getWebContentSearchedDocTypes());
+    AbstractPageList<ResultNode> pageList = getSearchResult(true, seachItemsPerPage);
     assertEquals(4, pageList.getTotalNodes());
   }
 
@@ -350,7 +383,8 @@ public class TestSearchService extends BaseSearchTest {
     queryCriteria.setLiveMode(false);
     queryCriteria.setSearchWebpage(false);
     queryCriteria.setFuzzySearch(true);
-    AbstractPageList<ResultNode> pageList = getSearchResult();
+    queryCriteria.setContentTypes(getWebContentSearchedDocTypes());
+    AbstractPageList<ResultNode> pageList = getSearchResult(true, seachItemsPerPage);
     assertEquals(2, pageList.getTotalNodes());
   }
 
@@ -371,7 +405,9 @@ public class TestSearchService extends BaseSearchTest {
     queryCriteria.setLiveMode(true);
     queryCriteria.setSearchWebpage(false);
     queryCriteria.setFuzzySearch(true);
-    AbstractPageList<ResultNode> pageList = getSearchResult();
+    queryCriteria.setContentTypes(getWebContentSearchedDocTypes());
+    int searchItemsPerPage = 1;
+    AbstractPageList<ResultNode> pageList = getSearchResult(true, searchItemsPerPage);
     assertEquals(1, pageList.getPage(1).size());
     assertEquals(2, pageList.getTotalNodes());
   }
@@ -389,7 +425,7 @@ public class TestSearchService extends BaseSearchTest {
 //    this.searchDocumentChecked = false;
 //    this.searchIsLiveMode = true;
 //    this.searchSelectedPortal = null;
-//    AbstractPageList<ResultNode> pageList = getSearchResult();
+//    AbstractPageList<ResultNode> pageList = getSearchResult(false);
 //    assertEquals(5, pageList.getPage(1).size());
 //  }
 
@@ -404,7 +440,7 @@ public class TestSearchService extends BaseSearchTest {
 //  public void testSearchPages() throws Exception {
 //    this.searchDocumentChecked = false;
 //    this.searchSelectedPortal = null;
-//    AbstractPageList<ResultNode> pageList = getSearchResult();
+//    AbstractPageList<ResultNode> pageList = getSearchResult(false);
 //    assertEquals(10, pageList.getTotalNodes());
 //  }
 
@@ -419,7 +455,7 @@ public class TestSearchService extends BaseSearchTest {
 //  public void testSearchPagesSharedLiveMode() throws Exception {
 //    this.searchDocumentChecked = false;
 //    this.searchIsLiveMode = true;
-//    AbstractPageList<ResultNode> pageList = getSearchResult();
+//    AbstractPageList<ResultNode> pageList = getSearchResult(false);
 //    assertEquals(5, pageList.getPage(1).size());
 //    assertEquals(10, pageList.getTotalNodes());
 //  }
@@ -434,7 +470,7 @@ public class TestSearchService extends BaseSearchTest {
    */
 //  public void testSearchPagesShared() throws Exception {
 //    this.searchDocumentChecked = false;
-//    AbstractPageList<ResultNode> pageList = getSearchResult();
+//    AbstractPageList<ResultNode> pageList = getSearchResult(false);
 //    assertEquals(5, pageList.getPage(1).size());
 //    assertEquals(10, pageList.getTotalNodes());
 //  }
@@ -454,7 +490,7 @@ public class TestSearchService extends BaseSearchTest {
 //    this.searchPageChecked = false;
 //    this.searchIsLiveMode = true;
 //    this.searchSelectedPortal = null;
-//    AbstractPageList<ResultNode> pageList = getSearchResult();
+//    AbstractPageList<ResultNode> pageList = getSearchResult(false);
 //    assertEquals(5, pageList.getPage(1).size());
 //    assertEquals(10, pageList.getTotalNodes());
 //  }
@@ -471,7 +507,7 @@ public class TestSearchService extends BaseSearchTest {
 //    this.searchDocumentChecked = false;
 //    this.searchPageChecked = false;
 //    this.searchSelectedPortal = null;
-//    AbstractPageList<ResultNode> pageList = getSearchResult();
+//    AbstractPageList<ResultNode> pageList = getSearchResult(false);
 //    assertEquals(5, pageList.getPage(1).size());
 //    assertEquals(10, pageList.getTotalNodes());
 //  }
@@ -488,7 +524,7 @@ public class TestSearchService extends BaseSearchTest {
 //    this.searchDocumentChecked = false;
 //    this.searchPageChecked = false;
 //    this.searchIsLiveMode = true;
-//    AbstractPageList<ResultNode> pageList = getSearchResult();
+//    AbstractPageList<ResultNode> pageList = getSearchResult(false);
 //    assertEquals(5, pageList.getPage(1).size());
 //    assertEquals(10, pageList.getTotalNodes());
 //  }
@@ -504,7 +540,7 @@ public class TestSearchService extends BaseSearchTest {
 //  public void testSearchNotPagesDocument_SharedNoLiveMode() throws Exception {
 //    this.searchDocumentChecked = false;
 //    this.searchPageChecked = false;
-//    AbstractPageList<ResultNode> pageList = getSearchResult();
+//    AbstractPageList<ResultNode> pageList = getSearchResult(false);
 //    assertEquals(5, pageList.getPage(1).size());
 //    assertEquals(10, pageList.getTotalNodes());
 //  }
@@ -532,7 +568,7 @@ public class TestSearchService extends BaseSearchTest {
 //    queryCriteria.setCreatedDateRange(datetimeRange);
 //    queryCriteria.setSearchWebpage(false);
 //    queryCriteria.setSiteName(null);
-//    AbstractPageList<ResultNode> pageList = getSearchResult();
+//    AbstractPageList<ResultNode> pageList = getSearchResult(false);
 //    assertEquals(5, pageList.getPage(1).size());
 //    assertEquals(10, pageList.getTotalNodes());
 //  }
@@ -551,7 +587,7 @@ public class TestSearchService extends BaseSearchTest {
 //    this.searchSelectedPortal = null;
 //    queryCriteria.setFulltextSearch(false);
 //    queryCriteria.setSearchWebpage(false);
-//    AbstractPageList<ResultNode> pageList = getSearchResult();
+//    AbstractPageList<ResultNode> pageList = getSearchResult(false);
 //    assertEquals(0, pageList.getPage(1).size());
 //  }
 
@@ -571,7 +607,7 @@ public class TestSearchService extends BaseSearchTest {
 //    queryCriteria.setSearchWebpage(false);
 //    queryCriteria.setContentTypes(new String[]{"exo:webContent", "exo:htmlFile"});
 //    queryCriteria.setKeyword(null);
-//    AbstractPageList<ResultNode> pageList = getSearchResult();
+//    AbstractPageList<ResultNode> pageList = getSearchResult(false);
 //    assertEquals(5, pageList.getPage(1).size());
 //  }
 
@@ -597,7 +633,7 @@ public class TestSearchService extends BaseSearchTest {
 //    queryProperty2.setValue("the default.css file");
 //    queryCriteria.setQueryMetadatas(new QueryProperty[]{queryProperty1, queryProperty2});
 //    queryCriteria.setSearchWebpage(false);
-//    AbstractPageList<ResultNode> pageList = getSearchResult();
+//    AbstractPageList<ResultNode> pageList = getSearchResult(false);
 //    assertEquals(0, pageList.getPage(1).size());
 //  }
 
@@ -618,7 +654,7 @@ public class TestSearchService extends BaseSearchTest {
 //    Node livenode = ((Node)session.getItem("/sites content/live/classic/web contents")).getNode("webcontent0");
 //    queryCriteria.setSearchWebpage(false);
 //    queryCriteria.setCategoryUUIDs(new String[]{documentNode.getUUID(), livenode.getUUID()});
-//    AbstractPageList<ResultNode> pageList = getSearchResult();
+//    AbstractPageList<ResultNode> pageList = getSearchResult(false);
 //    assertEquals(0, pageList.getAvailable());
 //  }
 
