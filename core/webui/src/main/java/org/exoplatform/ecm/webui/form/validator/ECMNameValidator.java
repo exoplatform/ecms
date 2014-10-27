@@ -51,7 +51,7 @@ public class ECMNameValidator implements Validator {
     for(int i = 0; i < s.length(); i ++){
       char c = s.charAt(i);
       if(Character.isLetter(c) || Character.isDigit(c) || Character.isSpaceChar(c) || c=='_'
-        || c=='-' || c=='.' || c==':' || c=='@' || c=='^' || c=='[' || c==']' || c==',' || c=='%' || c=='\'') {
+        || c=='-' || c=='.' || c==':' || c=='@' || c=='^' || c==',' || c=='%' || c=='\'') {
         continue ;
       }
       Object[] args = { label };
