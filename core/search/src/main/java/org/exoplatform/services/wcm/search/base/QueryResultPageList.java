@@ -223,8 +223,7 @@ public class QueryResultPageList<E> extends AbstractPageList<E> {
       while (iter.hasNext() && count < bufferSize_) {
           currentIndex++;
           Node newNode = iter.nextNode();
-
-
+          Row newRow = rowIter.nextRow();
         if (filter != null) {
           newNode = filter.filterNodeToDisplay(newNode);
         }
@@ -235,7 +234,6 @@ public class QueryResultPageList<E> extends AbstractPageList<E> {
           continue;
         }
         if (newNode != null && searchDataCreator != null) {
-          Row newRow = rowIter.nextRow();
           E data = searchDataCreator.createData(newNode, newRow);
           if (data != null && !dataSet.contains(data)) {
             buffer.add(data);
