@@ -2336,7 +2336,7 @@ public abstract class JCRLocalCloudDrive extends CloudDrive {
     rootNode.addMixin(ECD_CLOUDDRIVE);
     if (!rootNode.hasProperty("exo:title")) {
       // default title
-      rootNode.setProperty("exo:title", titleCached = rootTitle(getUser()));
+      rootNode.setProperty("exo:title", titleCached = getUser().createDriveTitle());
     } else {
       titleCached = rootNode.getProperty("exo:title").getString();
     }
@@ -3965,12 +3965,12 @@ public abstract class JCRLocalCloudDrive extends CloudDrive {
   // ============== static ================
 
   /**
-   * Clean up string for JCR compatible name.
+   * Make JCR compatible item name.
    * 
    * @param String str
    * @return String - JCR compatible name of local file
    */
-  protected static String cleanName(String name) {
+  public static String cleanName(String name) {
     String str = accentsConverter.transliterate(name.trim());
     // the character ? seems to not be changed to d by the transliterate function
     StringBuilder cleanedStr = new StringBuilder(str.trim());
@@ -4128,29 +4128,5 @@ public abstract class JCRLocalCloudDrive extends CloudDrive {
     } else {
       LOG.warn("Not a Cloud Drive root node: " + node.getPath());
     }
-  }
-
-  /**
-   * Create a name for Cloud Drive root node.
-   * 
-   * @param user {@link CloudUser}
-   * @return String with a text of root node for given user
-   * @throws RepositoryException
-   * @throws DriveRemovedException
-   */
-  public static String rootName(CloudUser user) throws RepositoryException, DriveRemovedException {
-    return cleanName(rootTitle(user));
-  }
-
-  /**
-   * Create a title for Cloud Drive root node.
-   * 
-   * @param user {@link CloudUser}
-   * @return String with a text of root node for given user
-   * @throws RepositoryException
-   * @throws DriveRemovedException
-   */
-  public static String rootTitle(CloudUser user) throws RepositoryException, DriveRemovedException {
-    return user.getProvider().getName() + " - " + user.getEmail();
   }
 }

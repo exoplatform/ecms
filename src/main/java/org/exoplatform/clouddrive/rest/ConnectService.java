@@ -437,7 +437,7 @@ public class ConnectService implements ResourceContainer {
                   userNode = driveNode.getParent();
                   name = driveNode.getName();
                 } else {
-                  name = JCRLocalCloudDrive.rootName(user);
+                  name = JCRLocalCloudDrive.cleanName(user.createDriveTitle());
                 }
 
                 String processId = processId(workspace, userNode.getPath(), name);

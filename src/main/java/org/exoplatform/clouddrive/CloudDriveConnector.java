@@ -203,20 +203,6 @@ public abstract class CloudDriveConnector extends BaseComponentPlugin {
     }
 
     this.provider = createProvider();
-
-    // Below examples of plugin can be configured
-    /*
-     * Iterator<ValuesParam> vparams = params.getValuesParamIterator(); while (vparams.hasNext()) {
-     * ValuesParam nodeTypeParam = vparams.next(); nodeTypes.put(nodeTypeParam.getName(),
-     * nodeTypeParam.getValues()); } PropertiesParam param =
-     * params.getPropertiesParam("namespaces"); if (param != null) { namespaces =
-     * param.getProperties(); } if (params != null) { ValueParam valueParam =
-     * params.getValueParam("repository-name"); if (valueParam != null) { repositoryName =
-     * valueParam.getValue(); } valueParam = params.getValueParam("workspaces"); if (valueParam !=
-     * null) { workspaces = valueParam.getValue(); } valueParam =
-     * params.getValueParam("component-class-name"); if (valueParam != null) { listenerClassName =
-     * valueParam.getValue(); } }
-     */
   }
 
   protected SessionProvider sessionProvider() throws RepositoryException {
@@ -281,7 +267,7 @@ public abstract class CloudDriveConnector extends BaseComponentPlugin {
    * 
    * @return {@link CloudProvider}
    */
-  protected abstract CloudProvider createProvider();
+  protected abstract CloudProvider createProvider() throws ConfigurationException;
 
   /**
    * Authenticate an user by an access code from its cloud provider (OAuth usecase). As result an

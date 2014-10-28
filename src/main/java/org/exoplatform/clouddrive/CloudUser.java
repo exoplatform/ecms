@@ -16,6 +16,7 @@
  */
 package org.exoplatform.clouddrive;
 
+import javax.jcr.RepositoryException;
 
 /**
  * General abstraction for an user of cloud drive. It provides integration points between cloud provider and
@@ -35,7 +36,7 @@ public abstract class CloudUser {
   protected final String        email;
 
   protected final CloudProvider provider;
-  
+
   protected final int           hashCode;
 
   /**
@@ -88,6 +89,18 @@ public abstract class CloudUser {
    */
   public String getId() {
     return id;
+  }
+
+  /**
+   * Create a title for Cloud Drive root node. By default it is 'PROVIDER_NAME - EMAIL', but implementation
+   * may change it for more detailed.
+   * 
+   * @return String with a text of root node for the user
+   * @throws RepositoryException
+   * @throws DriveRemovedException
+   */
+  public String createDriveTitle() throws RepositoryException, DriveRemovedException, CloudDriveException {
+    return provider.getName() + " - " + email;
   }
 
   /**
