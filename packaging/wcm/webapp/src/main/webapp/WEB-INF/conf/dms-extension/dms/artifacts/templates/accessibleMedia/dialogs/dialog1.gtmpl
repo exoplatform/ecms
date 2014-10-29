@@ -219,7 +219,8 @@
       <div class="control-group">
         <label class="control-label" for="alternativeText"><%=_ctx.appRes("AccessibleMedia.dialog.label.alternativeText")%>:</label>
         <div class="controls">
-          <% String[] fieldAltText = ["jcrPath=/node/exo:alternativeText", "fillJcrDataOfFile=false"] ;
+          <% String alternativeContent = "";
+             String[] fieldAltText = ["jcrPath=/node/exo:alternativeText", "fillJcrDataOfFile=false",alternativeContent] ;
              uicomponent.addRichtextField("alternativeText", fieldAltText) ;            
           %>
           <div style="display:inline-block;" onmouseover="(function(elm) {eXo.ecm.WCMUtils.showPopover(elm);})(this)"
