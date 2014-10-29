@@ -93,7 +93,7 @@ public class WhitespaceTokenizer extends CharTokenizer {
     @Override
     protected boolean isTokenChar(int c) {
 
-      if(!Character.isWhitespace(c) && searchCharacters.indexOf(c) != -1){
+      if(!Character.isWhitespace(c) && searchCharacters.indexOf(c) == -1){
         return true;
       }
       return false;
