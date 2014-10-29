@@ -16,12 +16,6 @@
  */
 package org.exoplatform.services.wcm.search;
 
-import java.util.Date;
-import java.util.HashMap;
-import java.util.List;
-
-import javax.jcr.Node;
-
 import org.exoplatform.component.test.ConfigurationUnit;
 import org.exoplatform.component.test.ConfiguredBy;
 import org.exoplatform.component.test.ContainerScope;
@@ -31,11 +25,19 @@ import org.exoplatform.portal.mop.page.PageKey;
 import org.exoplatform.portal.mop.page.PageService;
 import org.exoplatform.portal.mop.page.PageState;
 import org.exoplatform.services.cms.templates.TemplateService;
-import org.exoplatform.services.wcm.core.NodetypeConstant;
+import org.exoplatform.services.jcr.impl.core.NodeImpl;
 import org.exoplatform.services.wcm.publication.PublicationDefaultStates;
 import org.exoplatform.services.wcm.search.base.AbstractPageList;
 import org.exoplatform.services.wcm.search.base.BaseSearchTest;
 import org.exoplatform.services.wcm.utils.WCMCoreUtils;
+
+import javax.jcr.Node;
+import javax.jcr.NodeIterator;
+import javax.jcr.RepositoryException;
+import java.util.ArrayList;
+import java.util.Date;
+import java.util.HashMap;
+import java.util.List;
 
 /**
  * Created by The eXo Platform SAS
@@ -51,10 +53,13 @@ import org.exoplatform.services.wcm.utils.WCMCoreUtils;
 })
 public class TestSearchService extends BaseSearchTest {
 
+  private static final int POPULATED_NODES_COUNT = 102;
+  protected List<Node> populatedNodes;
+
   public void setUp() throws Exception {
     super.setUp();
   }
-  
+
   protected void addChildNodes(Node parentNode)throws Exception{
     PageService pageService = getService(PageService.class);
     pomSession = pomManager.getSession();
@@ -69,22 +74,85 @@ public class TestSearchService extends BaseSearchTest {
 
     Node webContentNode = null;
     HashMap<String, String> context = null;
-      webContentNode = createWebcontentNode(parentNode, "webcontent0" , null, null, null);
-      if(!webContentNode.isNodeType("metadata:siteMetadata"))webContentNode.addMixin("metadata:siteMetadata");
-      wcmPublicationService.enrollNodeInLifecycle(webContentNode, DumpPublicationPlugin.LIFECYCLE_NAME);
-      context = new HashMap<String, String>();
+    webContentNode = createWebcontentNode(parentNode, "webcontent0", null, null, null);
+    if (!webContentNode.isNodeType("metadata:siteMetadata")) webContentNode.addMixin("metadata:siteMetadata");
+    wcmPublicationService.enrollNodeInLifecycle(webContentNode, DumpPublicationPlugin.LIFECYCLE_NAME);
+    context = new HashMap<String, String>();
 //      context.put(DumpPublicationPlugin.CURRENT_REVISION_NAME, webContentNode.getName());
-      publicationPlugin.changeState(webContentNode, PublicationDefaultStates.PUBLISHED, context);
+    publicationPlugin.changeState(webContentNode, PublicationDefaultStates.PUBLISHED, context);
 
-      webContentNode = createWebcontentNode(parentNode, "webcontent1", null, null, null);
-      if(!webContentNode.isNodeType("metadata:siteMetadata"))webContentNode.addMixin("metadata:siteMetadata");
-      wcmPublicationService.enrollNodeInLifecycle(webContentNode, DumpPublicationPlugin.LIFECYCLE_NAME);
-      context = new HashMap<String, String>();
+    webContentNode = createWebcontentNode(parentNode, "webcontent1", null, null, null);
+    if (!webContentNode.isNodeType("metadata:siteMetadata")) webContentNode.addMixin("metadata:siteMetadata");
+    wcmPublicationService.enrollNodeInLifecycle(webContentNode, DumpPublicationPlugin.LIFECYCLE_NAME);
+    context = new HashMap<String, String>();
 //      context.put(DumpPublicationPlugin.CURRENT_REVISION_NAME, webContentNode.getName());
-      publicationPlugin.changeState(webContentNode, PublicationDefaultStates.DRAFT, context);
+    publicationPlugin.changeState(webContentNode, PublicationDefaultStates.DRAFT, context);
 
     session.save();
     pomSession.close();
+  }
+
+  protected void populateAdditionalSearchData(Node parentNode) {
+
+    long totalNodes = 0l;
+    try {
+      totalNodes = ((NodeImpl) parentNode).getNodesCount();
+    } catch (RepositoryException re) {
+    }
+
+    populatedNodes = new ArrayList<Node>();
+
+    // Avoid creating nodes at each test case fixture.
+    // Only create new nodes when the first test case is run.
+    if ( totalNodes == 0l) {
+      String webContentNamePrefix = "dummyWebContent";
+      // html data for web content node: Must hold a common keyword "searchKey"
+      String htmlData = "The default.html file and yes it holds duplication searchKey.";
+      String cssData = "The default.css file.";
+      String jsData = "The default.js file.";
+      StringBuilder webContentName;
+      // Create 102 new webContent nodes
+      for (int i = 0; i < 102; i++) {
+        webContentName = new StringBuilder();
+        try {
+          Node populatedNode = createWebcontentNode(parentNode,
+              webContentName.append(webContentNamePrefix).append(i).toString(),
+              htmlData,
+              cssData,
+              jsData);
+          if (!populatedNode.isNodeType("metadata:siteMetadata")) {
+            populatedNode.addMixin("metadata:siteMetadata");
+          }
+          Node imageFolder = populatedNode.getNode("medias").getNode("images");
+          Node fakeImage = imageFolder.addNode("image with spaces", "nt:file");
+          Node imageContent = fakeImage.addNode("jcr:content", "nt:resource");
+          imageContent.setProperty("jcr:encoding", "UTF-8");
+          imageContent.setProperty("jcr:mimeType", "text/html");
+          imageContent.setProperty("jcr:lastModified", new Date().getTime());
+          imageContent.setProperty("jcr:data", "An image with spaces.");
+//          wcmPublicationService.enrollNodeInLifecycle(populatedNode, DumpPublicationPlugin.LIFECYCLE_NAME);
+//          publicationPlugin.changeState(populatedNode, PublicationDefaultStates.DRAFT, new HashMap<String, String>());
+          try {
+            session.save();
+          } catch (RepositoryException e) {
+            // Do nothing
+          }
+          populatedNodes.add(populatedNode);
+        } catch (Exception e) {
+          // Do nothing
+        }
+      }
+    } else {
+      // Populate available 102 nodes into data holder property
+      NodeIterator iterator = null;
+      try {
+        iterator = parentNode.getNodes();
+      } catch (RepositoryException e) {
+      }
+      while ((iterator != null) && iterator.hasNext()) {
+        populatedNodes.add(iterator.nextNode());
+      }
+    }
   }
 
   protected Node createWebcontentNode(Node parentNode,
@@ -200,20 +268,22 @@ public class TestSearchService extends BaseSearchTest {
     session.save();
     return webcontent;
   }
-  
+
   private AbstractPageList<ResultNode> getSearchResult(boolean isSearchContent, int searchItemPerPage) throws Exception{
-    return siteSearchService.searchSiteContents(WCMCoreUtils.getSystemSessionProvider(),
-                                                queryCriteria, searchItemPerPage, isSearchContent);
+    return siteSearchService.searchSiteContents(sessionProvider,
+        queryCriteria,
+        searchItemPerPage,
+        isSearchContent);
   }
 
-    protected String[] getWebContentSearchedDocTypes() {
-        List<String> docTypes = null;
-        try {
-            docTypes = WCMCoreUtils.getService(TemplateService.class).getDocumentTemplates();
-        } catch (Exception e) {
-        }
-        return docTypes.toArray(new String[]{});
+  protected String[] getWebContentSearchedDocTypes() {
+    List<String> docTypes = null;
+    try {
+      docTypes = WCMCoreUtils.getService(TemplateService.class).getDocumentTemplates();
+    } catch (Exception e) {
     }
+    return docTypes.toArray(new String[]{});
+  }
 
 
   /**
@@ -223,7 +293,7 @@ public class TestSearchService extends BaseSearchTest {
    * searchDocumentChecked = true<br>
    * searchSelectedPortal = shared<br>
    * searchIsLiveMode = false<br>
-   *B
+   *
    * @throws Exception the exception
    */
   public void testSearchSharedPortalNotLiveMode() throws Exception {
@@ -731,6 +801,74 @@ public class TestSearchService extends BaseSearchTest {
     String uuid = node.getUUID();
     queryCriteria.setTagUUIDs(new String[]{uuid});
     assertEquals(4, siteSearchService.searchSiteContents(sessionProvider, queryCriteria, 10, true).getTotalNodes());
+  }
+
+  /**
+   * Test case 26: Search all nodes (includes have or don't have publication property)
+   * in acme portal and not live mode.
+   * This test case aims to check items duplication when the page list size is higher
+   * than the default AbstractPageList.DEFAULT_BUFFER_SIZE. No item available in current
+   * is allowed to be duplicated in the successive page list.
+   * Parameters are set tp:<br>
+   * searchSelectedPortal = acme<br>
+   * keyword = "duplication searchKey"<br>
+   * searchPageChecked = false<br>
+   * searchDocumentChecked = true<br>
+   * searchWebContentChecked = true<br>
+   * searchIsLiveMode = false<br>
+   * searchFuzzySearch = true<br>
+   *
+   * @throws Exception the exception
+   */
+  public void testSearchAcmePortalNotLiveModeWithNoDuplication() throws Exception {
+    int totalResults = POPULATED_NODES_COUNT;
+    int pageSize = 10;
+    int offset = 0;
+    int limit = pageSize;
+    boolean isItemDuplicated = false;
+
+    queryCriteria = new QueryCriteria();
+    queryCriteria.setSiteName("acme");
+    queryCriteria.setKeyword(duplicationSearchKeyword);
+    queryCriteria.setSearchDocument(true);
+    queryCriteria.setSearchWebContent(true);
+    queryCriteria.setLiveMode(false);
+    queryCriteria.setSearchWebpage(false);
+    queryCriteria.setFuzzySearch(true);
+    // First query should retrieve from offset to limit
+    queryCriteria.setOffset(offset);
+    queryCriteria.setLimit(limit);
+    queryCriteria.setContentTypes(getWebContentSearchedDocTypes());
+
+    /* Temp ResultNodes list which is aimed to hold always the
+      previous page result. Those should then be used for comparison */
+    List<ResultNode> auxList = getSearchResult(true, 10).getPage(1);
+
+    while(limit < totalResults) {
+      offset = limit;
+      if ((limit + pageSize) > totalResults) {
+        limit += (totalResults % limit);
+      } else {
+        limit += pageSize;
+      }
+      // Update query offset and limit to retrieve a new page.
+      queryCriteria.setOffset(offset);
+      queryCriteria.setLimit(limit);
+      AbstractPageList<ResultNode> pageList = getSearchResult(true, 10);
+      List<ResultNode> resultNodes = pageList.getPage(1);
+      outerLoop:
+      for (ResultNode inCurrentPage : resultNodes) {
+        for (ResultNode inPreviousPage : auxList) {
+          if ((inCurrentPage != null) && inCurrentPage.equals(inPreviousPage)) {
+            isItemDuplicated = true;
+            break outerLoop;
+          }
+        }
+      }
+      auxList = resultNodes;
+    }
+
+    assertFalse("Returned search results should have no duplicates in different pages", isItemDuplicated);
   }
 
   public void tearDown() throws Exception {

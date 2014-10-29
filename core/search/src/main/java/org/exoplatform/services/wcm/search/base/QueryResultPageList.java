@@ -16,10 +16,11 @@
  */
 package org.exoplatform.services.wcm.search.base;
 
-import java.util.ArrayList;
-import java.util.HashSet;
-import java.util.List;
-import java.util.Set;
+import org.exoplatform.services.jcr.ext.common.SessionProvider;
+import org.exoplatform.services.jcr.impl.core.query.QueryImpl;
+import org.exoplatform.services.log.ExoLogger;
+import org.exoplatform.services.log.Log;
+import org.exoplatform.services.wcm.utils.WCMCoreUtils;
 
 import javax.jcr.Node;
 import javax.jcr.NodeIterator;
@@ -29,12 +30,10 @@ import javax.jcr.query.QueryManager;
 import javax.jcr.query.QueryResult;
 import javax.jcr.query.Row;
 import javax.jcr.query.RowIterator;
-
-import org.exoplatform.services.jcr.ext.common.SessionProvider;
-import org.exoplatform.services.jcr.impl.core.query.QueryImpl;
-import org.exoplatform.services.log.ExoLogger;
-import org.exoplatform.services.log.Log;
-import org.exoplatform.services.wcm.utils.WCMCoreUtils;
+import java.util.ArrayList;
+import java.util.HashSet;
+import java.util.List;
+import java.util.Set;
 
 /**
  * Created by The eXo Platform SAS
@@ -51,13 +50,15 @@ public class QueryResultPageList<E> extends AbstractPageList<E> {
   
   /** The query data */
   private QueryData queryData_;
+
   /** The buffer size */
   private int bufferSize_;
+
   /** The offset */
   private int offset_;
 
-    /** the user's offset */
-    private int realOffset_;
+  /** The user's offset */
+  private int realOffset_;
   
   /** The nodes. */
   protected List<E> buffer;
@@ -65,12 +66,26 @@ public class QueryResultPageList<E> extends AbstractPageList<E> {
   private Set<E> dataSet;
   
   public QueryResultPageList(int pageSize, QueryData queryData, int total, int bufferSize,
+                             NodeSearchFilter filter, SearchDataCreator creator) {
+    super(pageSize);
+    setTotalNodes(total);
+    queryData_ = queryData.clone();
+    offset_ = 0;
+    bufferSize_ = bufferSize;
+    this.filter = filter;
+    this.searchDataCreator = creator;
+    this.setAvailablePage(total);
+    removeRedundantPages(Math.min(bufferSize_ / pageSize, 5));
+    dataSet = new HashSet<E>();
+  }
+
+  public QueryResultPageList(int pageSize, QueryData queryData, int total, int bufferSize,
                              NodeSearchFilter filter, SearchDataCreator creator, int offset) {
     super(pageSize);
     setTotalNodes(total);
     queryData_ = queryData.clone();
     offset_ = 0;
-    realOffset_=offset;
+    realOffset_= offset;
     bufferSize_ = bufferSize;
     this.filter = filter;
     this.searchDataCreator = creator;
@@ -209,7 +224,7 @@ public class QueryResultPageList<E> extends AbstractPageList<E> {
     int bufSize = bufferSize_;
     int offset = 0;
     int count = 0;
-    int currentIndex=0;
+    int currentIndex = 0;
     buffer.clear();
     dataSet.clear();
     while (true) {
@@ -219,18 +234,18 @@ public class QueryResultPageList<E> extends AbstractPageList<E> {
       NodeIterator iter = queryResult.getNodes();
       RowIterator rowIter = queryResult.getRows();
       long size = iter.getSize();
-      
+
       while (iter.hasNext() && count < bufferSize_) {
-          currentIndex++;
-          Node newNode = iter.nextNode();
-          Row newRow = rowIter.nextRow();
+        currentIndex++;
+        Node newNode = iter.nextNode();
+        Row newRow = rowIter.nextRow();
         if (filter != null) {
           newNode = filter.filterNodeToDisplay(newNode);
         }
         if (newNode == null) {
           realOffset_++;
         }
-        if (currentIndex<=realOffset_) {
+        if (currentIndex <= realOffset_) {
           continue;
         }
         if (newNode != null && searchDataCreator != null) {

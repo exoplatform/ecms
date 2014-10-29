@@ -16,32 +16,23 @@
  */
 package org.exoplatform.services.wcm.search.base;
 
-import java.util.Date;
-import java.util.HashMap;
-
-import javax.jcr.Node;
-import javax.jcr.NodeIterator;
-
 import org.exoplatform.component.test.ConfigurationUnit;
 import org.exoplatform.component.test.ConfiguredBy;
 import org.exoplatform.component.test.ContainerScope;
 import org.exoplatform.ecms.test.BaseECMSTestCase;
 import org.exoplatform.portal.config.UserPortalConfigService;
-import org.exoplatform.portal.mop.SiteKey;
-import org.exoplatform.portal.mop.page.PageContext;
-import org.exoplatform.portal.mop.page.PageKey;
-import org.exoplatform.portal.mop.page.PageService;
-import org.exoplatform.portal.mop.page.PageState;
 import org.exoplatform.portal.pom.config.POMSession;
 import org.exoplatform.portal.pom.config.POMSessionManager;
 import org.exoplatform.services.jcr.ext.common.SessionProvider;
-import org.exoplatform.services.wcm.publication.PublicationDefaultStates;
 import org.exoplatform.services.wcm.publication.WCMPublicationService;
 import org.exoplatform.services.wcm.publication.WebpagePublicationPlugin;
 import org.exoplatform.services.wcm.search.DumpPublicationPlugin;
 import org.exoplatform.services.wcm.search.QueryCriteria;
 import org.exoplatform.services.wcm.search.SiteSearchService;
 import org.exoplatform.services.wcm.utils.WCMCoreUtils;
+
+import javax.jcr.Node;
+import javax.jcr.NodeIterator;
 
 /**
  * Created by The eXo Platform SAS
@@ -63,6 +54,7 @@ public class BaseSearchTest extends BaseECMSTestCase {
   protected WebpagePublicationPlugin publicationPlugin ;
   protected UserPortalConfigService userPortalConfigService;
   protected final String searchKeyword = "This is";
+  protected final String duplicationSearchKeyword = "duplication searchKey";
   protected SessionProvider sessionProvider;
   protected POMSessionManager pomManager;
   protected POMSession  pomSession;
@@ -87,6 +79,10 @@ public class BaseSearchTest extends BaseECMSTestCase {
     Node classicPortal = getNode("sites content/live/classic/web contents");
     addChildNodes(classicPortal);
 
+    // Populate 101 webContent nodes under classic site without being enrolled in publication lifecycle
+    Node acmePortal = getNode("sites content/live/acme/web contents");
+    populateAdditionalSearchData(acmePortal);
+
     Node sharedPortal = getNode("sites content/live/shared/documents");
     addChildNodes(sharedPortal);
   }
@@ -108,6 +104,8 @@ public class BaseSearchTest extends BaseECMSTestCase {
   protected void addChildNodes(Node parentNode)throws Exception{
   }
 
+  protected void populateAdditionalSearchData(Node parentNode) {}
+
   public void tearDown() throws Exception {
     NodeIterator iterator = null;
     if (session.itemExists("/sites content/live/classic/web contents")) {
@@ -120,6 +118,13 @@ public class BaseSearchTest extends BaseECMSTestCase {
     if (session.itemExists("/sites content/live/shared/documents")) {
       Node sharedPortal = (Node)session.getItem("/sites content/live/shared/documents");
       iterator = sharedPortal.getNodes();
+      while (iterator.hasNext()) {
+        iterator.nextNode().remove();
+      }
+    }
+    if (session.itemExists("/sites content/live/acme/documents")) {
+      Node acmePortal = (Node)session.getItem("/sites content/live/acme/documents");
+      iterator = acmePortal.getNodes();
       while (iterator.hasNext()) {
         iterator.nextNode().remove();
       }

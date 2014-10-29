@@ -69,7 +69,7 @@ public class PageListFactory {
     Session session = sessionProvider.getSession(workspace, WCMCoreUtils.getRepository());
     QueryManager queryManager = session.getWorkspace().getQueryManager();
     Query query = queryManager.createQuery(queryStatement, language);
-      int offset=0;
+    int offset = 0;
     if (criteria != null) {
       if (criteria.getOffset() > 0) {
         ((QueryImpl)query).setOffset(criteria.getOffset());
