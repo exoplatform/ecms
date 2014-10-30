@@ -261,6 +261,7 @@ public class QueryResultPageList<E> extends AbstractPageList<E> {
       if (count == bufferSize_) break;
       /* already query all data */
       if (size == prevSize) break;
+      if (size<bufSize) break; //we found less results than asked => we are at the end of the results list
       offset += bufSize;
       bufSize = 2 * bufSize;
       prevSize = size;
