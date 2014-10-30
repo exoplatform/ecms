@@ -79,6 +79,7 @@ public class PageListFactory {
     ((QueryImpl)query).setLimit(AbstractPageList.RESULT_SIZE_SEPARATOR + 1);
     QueryResult result = query.execute();
     int totalNodes = (int)result.getNodes().getSize();
+    totalNodes = totalNodes < 0 ? 0 : totalNodes;
     if (totalNodes <= AbstractPageList.RESULT_SIZE_SEPARATOR && offset==0) {
       return new ArrayNodePageList<E>(result, pageSize, filter, dataCreator);
     } else {
