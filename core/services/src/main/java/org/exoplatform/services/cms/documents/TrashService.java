@@ -16,12 +16,11 @@
  */
 package org.exoplatform.services.cms.documents;
 
-import java.util.List;
+import org.exoplatform.services.jcr.ext.common.SessionProvider;
 
 import javax.jcr.Node;
 import javax.jcr.RepositoryException;
-
-import org.exoplatform.services.jcr.ext.common.SessionProvider;
+import java.util.List;
 
 /**
  * Created by The eXo Platform SARL
@@ -40,18 +39,29 @@ public interface TrashService {
   final static public String EXO_RESTORE_LOCATION = "exo:restoreLocation";
   final static public String RESTORE_PATH = "exo:restorePath";
   final static public String RESTORE_WORKSPACE = "exo:restoreWorkspace";
-
+  final static public String TRASH_ID = "exo:trashId";
     
   /**
    * Move node to trash location
    * @param node Node will be moved to trash
    * @param sessionProvider User session provider which will be used to get session
    * @throws Exception
+   * @return -1: move failed.
+   *          trashId if moved succesfully
    */
-  public void moveToTrash(Node node,
-                          SessionProvider sessionProvider) throws Exception;  
+  public String moveToTrash(Node node,
+                          SessionProvider sessionProvider) throws Exception;
 
-  public void moveToTrash(Node node, SessionProvider sessionProvider, int deep) throws Exception;  
+  /**
+   * Move node to trash location with deep
+   * @param node
+   * @param sessionProvider
+   * @param deep
+   * @return -1: move failed.
+   *          trashId if moved succesfully
+   * @throws Exception
+   */
+  public String moveToTrash(Node node, SessionProvider sessionProvider, int deep) throws Exception;
   
   /**
    * Restore node from trash
