@@ -16,6 +16,7 @@
  */
 package org.exoplatform.services.wcm.search;
 
+import org.apache.commons.lang.StringUtils;
 import org.exoplatform.component.test.ConfigurationUnit;
 import org.exoplatform.component.test.ConfiguredBy;
 import org.exoplatform.component.test.ContainerScope;
@@ -25,6 +26,7 @@ import org.exoplatform.portal.mop.page.PageKey;
 import org.exoplatform.portal.mop.page.PageService;
 import org.exoplatform.portal.mop.page.PageState;
 import org.exoplatform.services.cms.templates.TemplateService;
+import org.exoplatform.services.ecm.publication.IncorrectStateUpdateLifecycleException;
 import org.exoplatform.services.jcr.impl.core.NodeImpl;
 import org.exoplatform.services.wcm.publication.PublicationDefaultStates;
 import org.exoplatform.services.wcm.search.base.AbstractPageList;
@@ -32,7 +34,6 @@ import org.exoplatform.services.wcm.search.base.BaseSearchTest;
 import org.exoplatform.services.wcm.utils.WCMCoreUtils;
 
 import javax.jcr.Node;
-import javax.jcr.NodeIterator;
 import javax.jcr.RepositoryException;
 import java.util.ArrayList;
 import java.util.Date;
@@ -53,8 +54,7 @@ import java.util.List;
 })
 public class TestSearchService extends BaseSearchTest {
 
-  private static final int POPULATED_NODES_COUNT = 102;
-  protected List<Node> populatedNodes;
+  private static int POPULATED_NODES_COUNT = 0;
 
   public void setUp() throws Exception {
     super.setUp();
@@ -92,15 +92,59 @@ public class TestSearchService extends BaseSearchTest {
     pomSession.close();
   }
 
-  protected void populateAdditionalSearchData(Node parentNode) {
+  protected void populateAdditionalSearchData(Node siteNode, String parentNode, int nodesCount) {
+
+    Node resolvedParentNode = siteNode;
+
+    if (!StringUtils.isEmpty(parentNode) && ("documents".equals(parentNode) || "web contents".equals(parentNode))) {
+      try {
+        resolvedParentNode = siteNode.getNode(parentNode);
+      } catch (RepositoryException e) {
+        // Do nothing
+      }
+    }
+
+    if (("documents".equals(parentNode))) {
+      populateDocumentNodes(resolvedParentNode, nodesCount);
+    } else {
+      populateWebContentNodes(resolvedParentNode, nodesCount);
+    }
+
+    // Increment the nodes count to hold the total amount of nodes created
+    POPULATED_NODES_COUNT += nodesCount;
+  }
+
+  private void populateDocumentNodes(Node parentNode, int nodesCount)
+  {
+    for (int i = 0; i < nodesCount; i++) {
+      Node dummyFile;
+      String fileNamePrefix = "dummyFile";
+      try {
+        dummyFile = parentNode.addNode(fileNamePrefix + i, "nt:file");
+        Node imageContent = dummyFile.addNode("jcr:content", "nt:resource");
+        imageContent.setProperty("jcr:encoding", "UTF-8");
+        imageContent.setProperty("jcr:mimeType", "text/html");
+        imageContent.setProperty("jcr:lastModified", new Date().getTime());
+        imageContent.setProperty("jcr:data", "A file with duplication searchKey.");
+        wcmPublicationService.enrollNodeInLifecycle(dummyFile, DumpPublicationPlugin.LIFECYCLE_NAME);
+        publicationPlugin.changeState(dummyFile, PublicationDefaultStates.PUBLISHED, new HashMap<String, String>());
+      } catch (RepositoryException e) {
+        // Do nothing
+      } catch (IncorrectStateUpdateLifecycleException e) {
+        // Do nothing
+      } catch (Exception e) {
+        // Do nothing
+      }
+    }
+  }
+
+  protected  void populateWebContentNodes(Node parentNode, int nodesCount) {
 
     long totalNodes = 0l;
     try {
       totalNodes = ((NodeImpl) parentNode).getNodesCount();
     } catch (RepositoryException re) {
     }
-
-    populatedNodes = new ArrayList<Node>();
 
     // Avoid creating nodes at each test case fixture.
     // Only create new nodes when the first test case is run.
@@ -112,7 +156,7 @@ public class TestSearchService extends BaseSearchTest {
       String jsData = "The default.js file.";
       StringBuilder webContentName;
       // Create 102 new webContent nodes
-      for (int i = 0; i < 102; i++) {
+      for (int i = 0; i < nodesCount; i++) {
         webContentName = new StringBuilder();
         try {
           Node populatedNode = createWebcontentNode(parentNode,
@@ -123,34 +167,11 @@ public class TestSearchService extends BaseSearchTest {
           if (!populatedNode.isNodeType("metadata:siteMetadata")) {
             populatedNode.addMixin("metadata:siteMetadata");
           }
-          Node imageFolder = populatedNode.getNode("medias").getNode("images");
-          Node fakeImage = imageFolder.addNode("image with spaces", "nt:file");
-          Node imageContent = fakeImage.addNode("jcr:content", "nt:resource");
-          imageContent.setProperty("jcr:encoding", "UTF-8");
-          imageContent.setProperty("jcr:mimeType", "text/html");
-          imageContent.setProperty("jcr:lastModified", new Date().getTime());
-          imageContent.setProperty("jcr:data", "An image with spaces.");
-//          wcmPublicationService.enrollNodeInLifecycle(populatedNode, DumpPublicationPlugin.LIFECYCLE_NAME);
-//          publicationPlugin.changeState(populatedNode, PublicationDefaultStates.DRAFT, new HashMap<String, String>());
-          try {
-            session.save();
-          } catch (RepositoryException e) {
-            // Do nothing
-          }
-          populatedNodes.add(populatedNode);
+          wcmPublicationService.enrollNodeInLifecycle(populatedNode, DumpPublicationPlugin.LIFECYCLE_NAME);
+          publicationPlugin.changeState(populatedNode, PublicationDefaultStates.PUBLISHED, new HashMap<String, String>());
         } catch (Exception e) {
           // Do nothing
         }
-      }
-    } else {
-      // Populate available 102 nodes into data holder property
-      NodeIterator iterator = null;
-      try {
-        iterator = parentNode.getNodes();
-      } catch (RepositoryException e) {
-      }
-      while ((iterator != null) && iterator.hasNext()) {
-        populatedNodes.add(iterator.nextNode());
       }
     }
   }
@@ -807,8 +828,9 @@ public class TestSearchService extends BaseSearchTest {
    * Test case 26: Search all nodes (includes have or don't have publication property)
    * in acme portal and not live mode.
    * This test case aims to check items duplication when the page list size is higher
-   * than the default AbstractPageList.DEFAULT_BUFFER_SIZE. No item available in current
-   * is allowed to be duplicated in the successive page list.
+   * than the default AbstractPageList.DEFAULT_BUFFER_SIZE.
+   * Search page update are based on offset an limit of the QueryCriteria updates. Then
+   * results are paginated using a pageSize local variable
    * Parameters are set tp:<br>
    * searchSelectedPortal = acme<br>
    * keyword = "duplication searchKey"<br>
@@ -820,7 +842,7 @@ public class TestSearchService extends BaseSearchTest {
    *
    * @throws Exception the exception
    */
-  public void testSearchAcmePortalNotLiveModeWithNoDuplication() throws Exception {
+  public void testSearchByOffsetAndLimitWithNoDuplication() throws Exception {
     int totalResults = POPULATED_NODES_COUNT;
     int pageSize = 10;
     int offset = 0;
@@ -832,7 +854,7 @@ public class TestSearchService extends BaseSearchTest {
     queryCriteria.setKeyword(duplicationSearchKeyword);
     queryCriteria.setSearchDocument(true);
     queryCriteria.setSearchWebContent(true);
-    queryCriteria.setLiveMode(false);
+    queryCriteria.setLiveMode(true);
     queryCriteria.setSearchWebpage(false);
     queryCriteria.setFuzzySearch(true);
     // First query should retrieve from offset to limit
@@ -840,10 +862,17 @@ public class TestSearchService extends BaseSearchTest {
     queryCriteria.setLimit(limit);
     queryCriteria.setContentTypes(getWebContentSearchedDocTypes());
 
+    String assertionMsg = "Returned search results should have no duplicates in different pages: %s";
+    
+    // Keep reference off all paginated results lists
+    List<List> previousPagesList = new ArrayList<List>();
+    
     /* Temp ResultNodes list which is aimed to hold always the
       previous page result. Those should then be used for comparison */
-    List<ResultNode> auxList = getSearchResult(true, 10).getPage(1);
+    List auxList = getSearchResult(true, 10).currentPage();
+    previousPagesList.add(auxList);
 
+    outerLoop:
     while(limit < totalResults) {
       offset = limit;
       if ((limit + pageSize) > totalResults) {
@@ -854,21 +883,101 @@ public class TestSearchService extends BaseSearchTest {
       // Update query offset and limit to retrieve a new page.
       queryCriteria.setOffset(offset);
       queryCriteria.setLimit(limit);
-      AbstractPageList<ResultNode> pageList = getSearchResult(true, 10);
-      List<ResultNode> resultNodes = pageList.getPage(1);
-      outerLoop:
-      for (ResultNode inCurrentPage : resultNodes) {
-        for (ResultNode inPreviousPage : auxList) {
-          if ((inCurrentPage != null) && inCurrentPage.equals(inPreviousPage)) {
-            isItemDuplicated = true;
-            break outerLoop;
+      List resultNodes = getSearchResult(true, 10).currentPage();
+
+      for (int previousPageIdx = 0; previousPageIdx < previousPagesList.size(); previousPageIdx++) {
+        for (Object inCurrentPage : resultNodes) {
+          for (Object inPreviousPage : auxList) {
+            if ((inCurrentPage != null) && inCurrentPage.equals(inPreviousPage)) {
+              isItemDuplicated = true;
+              ResultNode ambiguousNode = (ResultNode) inCurrentPage;
+              String nodePath = ambiguousNode.getPath();
+              int currentPageIdx = limit / pageSize;
+              assertionMsg = String.format(assertionMsg,
+                  "Node: \"" + nodePath + "\" is duplicated in page (" + previousPageIdx + ") and (" + currentPageIdx + ")");
+              break outerLoop;
+            }
           }
         }
       }
-      auxList = resultNodes;
+      
+      previousPagesList.add(resultNodes);
     }
 
-    assertFalse("Returned search results should have no duplicates in different pages", isItemDuplicated);
+    assertFalse(assertionMsg, isItemDuplicated);
+  }
+
+  /**
+   * Test case 27: Search all nodes (includes have or don't have publication property)
+   * in acme portal and not live mode.
+   * This test case aims to check items duplication when the page list size is higher
+   * than the default AbstractPageList.DEFAULT_BUFFER_SIZE.
+   * Search page update are based on the PageList#getPage which internally will populate
+   * the new page nodes and increment the current page index: ECMS-6444
+   * Parameters are set tp:<br>
+   * searchSelectedPortal = acme<br>
+   * keyword = "duplication searchKey"<br>
+   * searchPageChecked = false<br>
+   * searchDocumentChecked = true<br>
+   * searchWebContentChecked = true<br>
+   * searchIsLiveMode = false<br>
+   * searchFuzzySearch = true<br>
+   *
+   * @throws Exception the exception
+   */
+  public void testSearchByPageUpdateWithNoDuplication() throws Exception {
+    int currentPageIndex = 1;
+    boolean isItemDuplicated = false;
+
+    queryCriteria = new QueryCriteria();
+    queryCriteria.setSiteName("acme");
+    queryCriteria.setKeyword(duplicationSearchKeyword);
+    queryCriteria.setSearchDocument(true);
+    queryCriteria.setSearchWebContent(true);
+    queryCriteria.setLiveMode(true);
+    queryCriteria.setSearchWebpage(false);
+    queryCriteria.setFuzzySearch(true);
+    // Retrieve all nodes from 0 to 20
+    queryCriteria.setOffset(0);
+    queryCriteria.setLimit(20);
+    queryCriteria.setContentTypes(getWebContentSearchedDocTypes());
+
+    // Keep reference off all paginated results lists
+    List<List<ResultNode>> previousPagesList = new ArrayList<List<ResultNode>>();
+
+    // Variable holding all the search query results with page size 10
+    AbstractPageList<ResultNode> queryResults = getSearchResult(false, 10);
+
+    String assertionMsg = "Returned search results should have no duplicates in different pages: %s";
+
+    outerLoop:
+    while(currentPageIndex < queryResults.getAvailablePage()) {
+
+      // Retrieve the previous page and push it to all previous pages holder list
+      List<ResultNode> previousPageResultsList = queryResults.getPage(currentPageIndex);
+      previousPagesList.add(previousPageResultsList);
+
+      // Retrieve next page results to be compared with previous one.
+      currentPageIndex++;
+      List<ResultNode> resultNodes = queryResults.getPage(currentPageIndex);
+
+      for (int previousPageIdx = 0; previousPageIdx < previousPagesList.size(); previousPageIdx++) {
+        for (ResultNode inCurrentPage : resultNodes) {
+          for (ResultNode inPreviousPage : previousPagesList.get(previousPageIdx)) {
+            if ((inCurrentPage != null) && inCurrentPage.equals(inPreviousPage)) {
+              isItemDuplicated = true;
+              String nodePath = inCurrentPage.getPath();
+              int currentPageIdx = queryResults.getCurrentPage();
+              assertionMsg = String.format(assertionMsg,
+                  "Node: \"" + nodePath + "\" is duplicated in page (" + (previousPageIdx + 1) + ") and (" + currentPageIdx + ")");
+              break outerLoop;
+            }
+          }
+        }
+      }
+    }
+
+    assertFalse(assertionMsg, isItemDuplicated);
   }
 
   public void tearDown() throws Exception {

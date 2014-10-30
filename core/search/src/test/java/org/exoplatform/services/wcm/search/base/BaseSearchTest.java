@@ -79,9 +79,11 @@ public class BaseSearchTest extends BaseECMSTestCase {
     Node classicPortal = getNode("sites content/live/classic/web contents");
     addChildNodes(classicPortal);
 
-    // Populate 101 webContent nodes under classic site without being enrolled in publication lifecycle
     Node acmePortal = getNode("sites content/live/acme/web contents");
-    populateAdditionalSearchData(acmePortal);
+    // Populate 20 webContent nodes under classic site without being enrolled in publication lifecycle
+    populateAdditionalSearchData(acmePortal, "web contents", 20);
+    // Populate 101 document nodes under classic site without being enrolled in publication lifecycle
+    populateAdditionalSearchData(acmePortal, "documents", 101);
 
     Node sharedPortal = getNode("sites content/live/shared/documents");
     addChildNodes(sharedPortal);
@@ -104,7 +106,10 @@ public class BaseSearchTest extends BaseECMSTestCase {
   protected void addChildNodes(Node parentNode)throws Exception{
   }
 
-  protected void populateAdditionalSearchData(Node parentNode) {}
+  /*
+   * Create additional data for search under a specific site and a specific node.
+   */
+  protected void populateAdditionalSearchData(Node siteNode, String parentNode, int nodesCount) {}
 
   public void tearDown() throws Exception {
     NodeIterator iterator = null;
@@ -122,8 +127,8 @@ public class BaseSearchTest extends BaseECMSTestCase {
         iterator.nextNode().remove();
       }
     }
-    if (session.itemExists("/sites content/live/acme/documents")) {
-      Node acmePortal = (Node)session.getItem("/sites content/live/acme/documents");
+    if (session.itemExists("/sites content/live/acme")) {
+      Node acmePortal = (Node)session.getItem("/sites content/live/acme");
       iterator = acmePortal.getNodes();
       while (iterator.hasNext()) {
         iterator.nextNode().remove();
