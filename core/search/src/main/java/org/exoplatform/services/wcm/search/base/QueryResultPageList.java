@@ -245,15 +245,16 @@ public class QueryResultPageList<E> extends AbstractPageList<E> {
         if (newNode == null) {
           realOffset_++;
         }
-        if (currentIndex <= realOffset_) {
-          continue;
-        }
         if (newNode != null && searchDataCreator != null) {
           E data = searchDataCreator.createData(newNode, newRow);
           if (data != null && !dataSet.contains(data)) {
-            buffer.add(data);
+            if (currentIndex > realOffset_) {
+              buffer.add(data);
+              count ++;
+            }
+
+            //add the node to dataset each time, to prevent duplication of web content results
             dataSet.add(data);
-            count ++;
           }
         }
       }

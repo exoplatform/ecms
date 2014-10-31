@@ -863,47 +863,33 @@ public class TestSearchService extends BaseSearchTest {
     queryCriteria.setContentTypes(getWebContentSearchedDocTypes());
 
     String assertionMsg = "Returned search results should have no duplicates in different pages: %s";
-    
-    // Keep reference off all paginated results lists
-    List<List> previousPagesList = new ArrayList<List>();
-    
     /* Temp ResultNodes list which is aimed to hold always the
       previous page result. Those should then be used for comparison */
     List auxList = getSearchResult(true, 10).currentPage();
-    previousPagesList.add(auxList);
 
-    outerLoop:
-    while(limit < totalResults) {
-      offset = limit;
-      if ((limit + pageSize) > totalResults) {
-        limit += (totalResults % limit);
-      } else {
-        limit += pageSize;
-      }
-      // Update query offset and limit to retrieve a new page.
+    List<Integer> hashResults = new ArrayList<Integer>();
+
+
+    int nbResultForCurrentPage = auxList.size();
+    while (nbResultForCurrentPage==limit && !isItemDuplicated) {
+      offset+=limit;
       queryCriteria.setOffset(offset);
       queryCriteria.setLimit(limit);
-      List resultNodes = getSearchResult(true, 10).currentPage();
-
-      for (int previousPageIdx = 0; previousPageIdx < previousPagesList.size(); previousPageIdx++) {
-        for (Object inCurrentPage : resultNodes) {
-          for (Object inPreviousPage : auxList) {
-            if ((inCurrentPage != null) && inCurrentPage.equals(inPreviousPage)) {
-              isItemDuplicated = true;
-              ResultNode ambiguousNode = (ResultNode) inCurrentPage;
-              String nodePath = ambiguousNode.getPath();
-              int currentPageIdx = limit / pageSize;
-              assertionMsg = String.format(assertionMsg,
-                  "Node: \"" + nodePath + "\" is duplicated in page (" + previousPageIdx + ") and (" + currentPageIdx + ")");
-              break outerLoop;
-            }
-          }
+      List<ResultNode> resultNodes = getSearchResult(true, 10).currentPage();
+      nbResultForCurrentPage = resultNodes.size();
+      int i=0;
+      while (i<resultNodes.size() && !isItemDuplicated){
+        ResultNode node = resultNodes.get(i);
+        Integer hash = new Integer(node.hashCode());
+        if (hashResults.contains(hash)) {
+          isItemDuplicated=true;
+          assertionMsg = String.format(assertionMsg,"Node: \"" + node.getPath() + "\" is duplicated at offset "+(offset-limit));
+        } else {
+          hashResults.add(new Integer(hash));
         }
+        i++;
       }
-      
-      previousPagesList.add(resultNodes);
     }
-
     assertFalse(assertionMsg, isItemDuplicated);
   }
 
@@ -926,8 +912,10 @@ public class TestSearchService extends BaseSearchTest {
    * @throws Exception the exception
    */
   public void testSearchByPageUpdateWithNoDuplication() throws Exception {
-    int currentPageIndex = 1;
     boolean isItemDuplicated = false;
+    int pageSize = 10;
+    int offset = 0;
+    int limit = pageSize;
 
     queryCriteria = new QueryCriteria();
     queryCriteria.setSiteName("acme");
@@ -942,41 +930,34 @@ public class TestSearchService extends BaseSearchTest {
     queryCriteria.setLimit(20);
     queryCriteria.setContentTypes(getWebContentSearchedDocTypes());
 
-    // Keep reference off all paginated results lists
-    List<List<ResultNode>> previousPagesList = new ArrayList<List<ResultNode>>();
-
-    // Variable holding all the search query results with page size 10
-    AbstractPageList<ResultNode> queryResults = getSearchResult(false, 10);
-
     String assertionMsg = "Returned search results should have no duplicates in different pages: %s";
+    /* Temp ResultNodes list which is aimed to hold always the
+      previous page result. Those should then be used for comparison */
+    List auxList = getSearchResult(false, 10).currentPage();
 
-    outerLoop:
-    while(currentPageIndex < queryResults.getAvailablePage()) {
+    List<Integer> hashResults = new ArrayList<Integer>();
 
-      // Retrieve the previous page and push it to all previous pages holder list
-      List<ResultNode> previousPageResultsList = queryResults.getPage(currentPageIndex);
-      previousPagesList.add(previousPageResultsList);
 
-      // Retrieve next page results to be compared with previous one.
-      currentPageIndex++;
-      List<ResultNode> resultNodes = queryResults.getPage(currentPageIndex);
-
-      for (int previousPageIdx = 0; previousPageIdx < previousPagesList.size(); previousPageIdx++) {
-        for (ResultNode inCurrentPage : resultNodes) {
-          for (ResultNode inPreviousPage : previousPagesList.get(previousPageIdx)) {
-            if ((inCurrentPage != null) && inCurrentPage.equals(inPreviousPage)) {
-              isItemDuplicated = true;
-              String nodePath = inCurrentPage.getPath();
-              int currentPageIdx = queryResults.getCurrentPage();
-              assertionMsg = String.format(assertionMsg,
-                  "Node: \"" + nodePath + "\" is duplicated in page (" + (previousPageIdx + 1) + ") and (" + currentPageIdx + ")");
-              break outerLoop;
-            }
-          }
+    int nbResultForCurrentPage = auxList.size();
+    while (nbResultForCurrentPage==limit && !isItemDuplicated) {
+      offset+=limit;
+      queryCriteria.setOffset(offset);
+      queryCriteria.setLimit(limit);
+      List<ResultNode> resultNodes = getSearchResult(false, 10).currentPage();
+      nbResultForCurrentPage = resultNodes.size();
+      int i=0;
+      while (i<resultNodes.size() && !isItemDuplicated){
+        ResultNode node = resultNodes.get(i);
+        Integer hash = new Integer(node.hashCode());
+        if (hashResults.contains(hash)) {
+          isItemDuplicated=true;
+          assertionMsg = String.format(assertionMsg,"Node: \"" + node.getPath() + "\" is duplicated at offset "+(offset-limit));
+        } else {
+          hashResults.add(new Integer(hash));
         }
+        i++;
       }
     }
-
     assertFalse(assertionMsg, isItemDuplicated);
   }
 
