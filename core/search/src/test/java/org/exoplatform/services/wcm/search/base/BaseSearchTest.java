@@ -59,6 +59,7 @@ public class BaseSearchTest extends BaseECMSTestCase {
   protected POMSessionManager pomManager;
   protected POMSession  pomSession;
   protected int seachItemsPerPage = 100;
+  private static int numberOfRunTests = 0;
 
   public void setUp() throws Exception {
     super.setUp();
@@ -73,17 +74,20 @@ public class BaseSearchTest extends BaseECMSTestCase {
     wcmPublicationService.addPublicationPlugin(publicationPlugin);
     applySystemSession();
     addDocuments();
+    numberOfRunTests++;
   }
 
   protected void addDocuments() throws Exception {
     Node classicPortal = getNode("sites content/live/classic/web contents");
     addChildNodes(classicPortal);
 
-    Node acmePortal = getNode("sites content/live/acme/web contents");
-    // Populate 20 webContent nodes under classic site without being enrolled in publication lifecycle
-    populateAdditionalSearchData(acmePortal, "web contents", 20);
-    // Populate 101 document nodes under classic site without being enrolled in publication lifecycle
-    populateAdditionalSearchData(acmePortal, "documents", 101);
+    Node acmePortal = getNode("sites content/live/acme");
+    if (numberOfRunTests == 0) {
+      // Populate 20 webContent nodes under classic site without being enrolled in publication lifecycle
+      populateAdditionalSearchData(acmePortal, "web contents", 20);
+      // Populate 101 document nodes under classic site without being enrolled in publication lifecycle
+      populateAdditionalSearchData(acmePortal, "documents", 101);
+    }
 
     Node sharedPortal = getNode("sites content/live/shared/documents");
     addChildNodes(sharedPortal);
