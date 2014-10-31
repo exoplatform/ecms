@@ -432,9 +432,9 @@ public class UIViewForm extends UIForm implements UISelectable {
     }
   }
 
-  static public class ChangeVersionActionListener extends EventListener<UIViewFormTabPane> {
-    public void execute(Event<UIViewFormTabPane> event) throws Exception {
-      UIViewFormTabPane uiFormTab = event.getSource();
+  static public class ChangeVersionActionListener extends EventListener<UIViewForm> {
+    public void execute(Event<UIViewForm> event) throws Exception {
+      UIViewFormTabPane uiFormTab = event.getSource().getParent();
       UIViewForm uiForm = uiFormTab.getChild(UIViewForm.class);
       uiForm.changeVersion();
       UIViewContainer uiViewContainer = uiFormTab.getAncestorOfType(UIViewContainer.class) ;
