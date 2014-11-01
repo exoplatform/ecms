@@ -237,9 +237,7 @@ public class Utils {
     PortalRequestContext portalRequestContext = (PortalRequestContext) context.getParentAppRequestContext();
     UIWorkingWorkspace uiWorkingWS = portalApplication.getChildById(UIPortalApplication.UI_WORKING_WS_ID);
     portalRequestContext.addUIComponentToUpdateByAjax(uiWorkingWS);
-    UIMaskWorkspace uiMaskWS = portalApplication.getChildById(UIPortalApplication.UI_MASK_WS_ID);
-    portalRequestContext.addUIComponentToUpdateByAjax(uiMaskWS);
-    portalRequestContext.setFullRender(true);
+    portalRequestContext.ignoreAJAXUpdateOnPortlets(true);
   }
 
   /**
