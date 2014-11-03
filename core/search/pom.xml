@@ -119,4 +119,14 @@
       <scope>test</scope>
     </dependency>
   </dependencies>
+  <build>
+    <testResources>
+      <testResource>
+        <directory>${project.basedir}/src/test/resources</directory>
+      </testResource>
+      <testResource>
+        <directory>../../testsuite/test/src/main/resources</directory>
+      </testResource>
+    </testResources>
+  </build>
 </project>
