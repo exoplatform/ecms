@@ -255,6 +255,8 @@ public class QueryResultPageList<E> extends AbstractPageList<E> {
 
             //add the node to dataset each time, to prevent duplication of web content results
             dataSet.add(data);
+          } else if (data!=null && dataSet.contains(data)) {
+              realOffset_++;
           }
         }
       }
