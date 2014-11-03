@@ -663,7 +663,7 @@ public class DriverConnector extends BaseConnector implements ResourceContainer 
           // Get node name from node path to fix same name problem (ECMS-3586)
           String nodePath = child.getPath();
           Element folder = createFolderElement(document, checkNode, checkNode.getPrimaryNodeType().getName(),
-                        nodePath.substring(nodePath.lastIndexOf("/") + 1, nodePath.length()), nodeDriveName);
+                        nodePath.substring(nodePath.lastIndexOf("/") + 1, nodePath.length()), nodeDriveName, type);
           folders.appendChild(folder);
         }
 
@@ -932,22 +932,54 @@ public class DriverConnector extends BaseConnector implements ResourceContainer 
                                       Node child,
                                       String folderType,
                                       String childName,
-                                      String nodeDriveName) throws Exception {
+                                      String nodeDriveName,
+                                      String type) throws Exception {
       Element folder = document.createElement("Folder");
+
       folder.setAttribute("name", childName.replaceAll("%", "%25"));
       folder.setAttribute("title", Utils.getTitle(child).replaceAll("%", "%25"));
       folder.setAttribute("url", FCKUtils.createWebdavURL(child));
       folder.setAttribute("folderType", folderType);
+
+      if(TYPE_FOLDER.equals(type)) {
+        boolean hasFolderChild = (getChildOfType(child, NodetypeConstant.NT_UNSTRUCTURED) != null)
+                || (getChildOfType(child, NodetypeConstant.NT_FOLDER) != null);
+        folder.setAttribute("hasFolderChild", String.valueOf(hasFolderChild));
+      }else{
+        folder.setAttribute("hasFolderChild", String.valueOf(this.hasFolderChild(child)));
+      }
       folder.setAttribute("path", child.getPath());
       folder.setAttribute("isUpload", "true");
-      folder.setAttribute("hasFolderChild", String.valueOf(this.hasFolderChild(child)));
       folder.setAttribute("nodeTypeCssClass", Utils.getNodeTypeIcon(child, "uiIcon16x16"));
-
 
       if (nodeDriveName!=null && nodeDriveName.length()>0) folder.setAttribute("nodeDriveName", nodeDriveName);
       return folder;
     }
 
+  /**
+   * Check isFolder (skip all templateNodetype)
+   * @param node
+   * @param childType
+   * @return
+   * @throws Exception
+   */
+  private Node getChildOfType(Node node, String childType) throws Exception {
+    TemplateService templateService = WCMCoreUtils.getService(TemplateService.class);
+    if (node == null) {
+      return null;
+    }
+    NodeIterator iter = node.getNodes();
+    while (iter.hasNext()) {
+      Node child = iter.nextNode();
+      if (!isDocument(child) && child.isNodeType(childType)
+              && !templateService.isManagedNodeType(child.getPrimaryNodeType().getName())
+              && !"exo:thumbnails".equals(child.getPrimaryNodeType().getName()))
+      {
+        return child;
+      }
+    }
+    return null;
+  }
 
   /**
    * returns a DOMSource object containing given message
