@@ -16,6 +16,8 @@
  */
 package org.exoplatform.services.wcm.search;
 
+import java.util.Map;
+
 import org.exoplatform.services.jcr.ext.common.SessionProvider;
 import org.exoplatform.services.wcm.search.base.AbstractPageList;
 
@@ -103,4 +105,23 @@ public interface SiteSearchService {
                                                       QueryCriteria queryCriteria,
                                                       int pageSize,
                                                       boolean isSearchContent) throws Exception;
+  
+  /**
+   * Gets map containing list of found nodes
+   * @param userId user name
+   * @param queryStatement the query statement
+   * @return
+   */
+  public Map<?, Integer> getFoundNodes(String userId, String queryStatement);
+  
+  /**
+   * Gets map containing list of dropped nodes
+   * @param userId user name
+   * @param queryStatement the query statement
+   * @return
+   */
+  public Map<Integer, Integer> getDropNodes(String userId, String queryStatement);
+  
+  public void clearCache(String userId, String queryStatement);
+  
 }

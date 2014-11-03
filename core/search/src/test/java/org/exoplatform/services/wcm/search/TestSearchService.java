@@ -29,6 +29,8 @@ import org.exoplatform.portal.mop.page.PageContext;
 import org.exoplatform.portal.mop.page.PageKey;
 import org.exoplatform.portal.mop.page.PageService;
 import org.exoplatform.portal.mop.page.PageState;
+import org.exoplatform.services.security.ConversationState;
+import org.exoplatform.services.security.Identity;
 import org.exoplatform.services.wcm.publication.PublicationDefaultStates;
 import org.exoplatform.services.wcm.search.base.AbstractPageList;
 import org.exoplatform.services.wcm.search.base.BaseSearchTest;
@@ -50,6 +52,8 @@ public class TestSearchService extends BaseSearchTest {
 
   public void setUp() throws Exception {
     super.setUp();
+    ConversationState c = new ConversationState(new Identity(session.getUserID()));
+    ConversationState.setCurrent(c);
   }
   
   protected void addChildNodes(Node parentNode)throws Exception{
