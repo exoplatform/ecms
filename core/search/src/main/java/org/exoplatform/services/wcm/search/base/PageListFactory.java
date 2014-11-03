@@ -16,8 +16,12 @@
  */
 package org.exoplatform.services.wcm.search.base;
 
-import java.util.ArrayList;
-import java.util.List;
+import org.exoplatform.services.jcr.ext.common.SessionProvider;
+import org.exoplatform.services.jcr.impl.core.query.QueryImpl;
+import org.exoplatform.services.log.ExoLogger;
+import org.exoplatform.services.log.Log;
+import org.exoplatform.services.wcm.search.QueryCriteria;
+import org.exoplatform.services.wcm.utils.WCMCoreUtils;
 
 import javax.jcr.LoginException;
 import javax.jcr.NoSuchWorkspaceException;
@@ -30,13 +34,8 @@ import javax.jcr.query.QueryManager;
 import javax.jcr.query.QueryResult;
 import javax.jcr.query.Row;
 import javax.jcr.query.RowIterator;
-
-import org.exoplatform.services.jcr.ext.common.SessionProvider;
-import org.exoplatform.services.jcr.impl.core.query.QueryImpl;
-import org.exoplatform.services.log.ExoLogger;
-import org.exoplatform.services.log.Log;
-import org.exoplatform.services.wcm.search.QueryCriteria;
-import org.exoplatform.services.wcm.utils.WCMCoreUtils;
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * Created by The eXo Platform SAS
@@ -70,17 +69,22 @@ public class PageListFactory {
     Session session = sessionProvider.getSession(workspace, WCMCoreUtils.getRepository());
     QueryManager queryManager = session.getWorkspace().getQueryManager();
     Query query = queryManager.createQuery(queryStatement, language);
+    int offset = 0;
     if (criteria != null) {
-      if (criteria.getOffset() > 0) { ((QueryImpl)query).setOffset(criteria.getOffset()); }
+      if (criteria.getOffset() > 0) {
+        ((QueryImpl)query).setOffset(criteria.getOffset());
+        offset= (int) criteria.getOffset();
+      }
     }
     ((QueryImpl)query).setLimit(AbstractPageList.RESULT_SIZE_SEPARATOR + 1);
     QueryResult result = query.execute();
     int totalNodes = (int)result.getNodes().getSize();
-    if (totalNodes <= AbstractPageList.RESULT_SIZE_SEPARATOR) {
+    totalNodes = totalNodes < 0 ? 0 : totalNodes;
+    if (totalNodes <= AbstractPageList.RESULT_SIZE_SEPARATOR && offset==0) {
       return new ArrayNodePageList<E>(result, pageSize, filter, dataCreator);
     } else {
       QueryData queryData = new QueryData(queryStatement, workspace, language, isSystemSession);
-      QueryResultPageList<E> ret = new QueryResultPageList<E>(pageSize, queryData, totalNodes, bufferSize, filter, dataCreator);
+      QueryResultPageList<E> ret = new QueryResultPageList<E>(pageSize, queryData, totalNodes, bufferSize, filter, dataCreator, offset);
       return ret;        
     }
   }

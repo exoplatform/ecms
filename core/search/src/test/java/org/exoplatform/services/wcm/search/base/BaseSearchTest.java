@@ -16,32 +16,23 @@
  */
 package org.exoplatform.services.wcm.search.base;
 
-import java.util.Date;
-import java.util.HashMap;
-
-import javax.jcr.Node;
-import javax.jcr.NodeIterator;
-
 import org.exoplatform.component.test.ConfigurationUnit;
 import org.exoplatform.component.test.ConfiguredBy;
 import org.exoplatform.component.test.ContainerScope;
 import org.exoplatform.ecms.test.BaseECMSTestCase;
 import org.exoplatform.portal.config.UserPortalConfigService;
-import org.exoplatform.portal.mop.SiteKey;
-import org.exoplatform.portal.mop.page.PageContext;
-import org.exoplatform.portal.mop.page.PageKey;
-import org.exoplatform.portal.mop.page.PageService;
-import org.exoplatform.portal.mop.page.PageState;
 import org.exoplatform.portal.pom.config.POMSession;
 import org.exoplatform.portal.pom.config.POMSessionManager;
 import org.exoplatform.services.jcr.ext.common.SessionProvider;
-import org.exoplatform.services.wcm.publication.PublicationDefaultStates;
 import org.exoplatform.services.wcm.publication.WCMPublicationService;
 import org.exoplatform.services.wcm.publication.WebpagePublicationPlugin;
 import org.exoplatform.services.wcm.search.DumpPublicationPlugin;
 import org.exoplatform.services.wcm.search.QueryCriteria;
 import org.exoplatform.services.wcm.search.SiteSearchService;
 import org.exoplatform.services.wcm.utils.WCMCoreUtils;
+
+import javax.jcr.Node;
+import javax.jcr.NodeIterator;
 
 /**
  * Created by The eXo Platform SAS
@@ -63,10 +54,12 @@ public class BaseSearchTest extends BaseECMSTestCase {
   protected WebpagePublicationPlugin publicationPlugin ;
   protected UserPortalConfigService userPortalConfigService;
   protected final String searchKeyword = "This is";
+  protected final String duplicationSearchKeyword = "duplication searchKey";
   protected SessionProvider sessionProvider;
   protected POMSessionManager pomManager;
   protected POMSession  pomSession;
   protected int seachItemsPerPage = 100;
+  private static int numberOfRunTests = 0;
 
   public void setUp() throws Exception {
     super.setUp();
@@ -81,11 +74,20 @@ public class BaseSearchTest extends BaseECMSTestCase {
     wcmPublicationService.addPublicationPlugin(publicationPlugin);
     applySystemSession();
     addDocuments();
+    numberOfRunTests++;
   }
 
   protected void addDocuments() throws Exception {
     Node classicPortal = getNode("sites content/live/classic/web contents");
     addChildNodes(classicPortal);
+
+    Node acmePortal = getNode("sites content/live/acme");
+    if (numberOfRunTests == 0) {
+      // Populate 20 webContent nodes under classic site without being enrolled in publication lifecycle
+      populateAdditionalSearchData(acmePortal, "web contents", 20);
+      // Populate 101 document nodes under classic site without being enrolled in publication lifecycle
+      populateAdditionalSearchData(acmePortal, "documents", 101);
+    }
 
     Node sharedPortal = getNode("sites content/live/shared/documents");
     addChildNodes(sharedPortal);
@@ -108,6 +110,11 @@ public class BaseSearchTest extends BaseECMSTestCase {
   protected void addChildNodes(Node parentNode)throws Exception{
   }
 
+  /*
+   * Create additional data for search under a specific site and a specific node.
+   */
+  protected void populateAdditionalSearchData(Node siteNode, String parentNode, int nodesCount) {}
+
   public void tearDown() throws Exception {
     NodeIterator iterator = null;
     if (session.itemExists("/sites content/live/classic/web contents")) {
@@ -120,6 +127,13 @@ public class BaseSearchTest extends BaseECMSTestCase {
     if (session.itemExists("/sites content/live/shared/documents")) {
       Node sharedPortal = (Node)session.getItem("/sites content/live/shared/documents");
       iterator = sharedPortal.getNodes();
+      while (iterator.hasNext()) {
+        iterator.nextNode().remove();
+      }
+    }
+    if (session.itemExists("/sites content/live/acme")) {
+      Node acmePortal = (Node)session.getItem("/sites content/live/acme");
+      iterator = acmePortal.getNodes();
       while (iterator.hasNext()) {
         iterator.nextNode().remove();
       }

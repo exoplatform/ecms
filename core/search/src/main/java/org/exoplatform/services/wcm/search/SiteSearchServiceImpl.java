@@ -16,33 +16,10 @@
  */
 package org.exoplatform.services.wcm.search;
 
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.HashMap;
-import java.util.HashSet;
-import java.util.List;
-import java.util.concurrent.CopyOnWriteArraySet;
-
-import javax.jcr.Node;
-import javax.jcr.RepositoryException;
-import javax.jcr.Session;
-import javax.jcr.Value;
-import javax.jcr.nodetype.NodeType;
-import javax.jcr.nodetype.NodeTypeIterator;
-import javax.jcr.nodetype.NodeTypeManager;
-import javax.jcr.query.Query;
-import javax.jcr.query.QueryManager;
-import javax.jcr.query.Row;
-import javax.jcr.query.RowIterator;
-import javax.portlet.PortletRequest;
-
-import org.apache.commons.lang.ArrayUtils;
 import org.apache.commons.lang.StringUtils;
 import org.exoplatform.container.xml.InitParams;
 import org.exoplatform.container.xml.ValueParam;
-import org.exoplatform.portal.application.PortalRequestContext;
 import org.exoplatform.portal.config.UserACL;
-import org.exoplatform.portal.webui.util.Util;
 import org.exoplatform.services.cms.templates.TemplateService;
 import org.exoplatform.services.jcr.RepositoryService;
 import org.exoplatform.services.jcr.core.ManageableRepository;
@@ -64,15 +41,30 @@ import org.exoplatform.services.wcm.search.base.NodeSearchFilter;
 import org.exoplatform.services.wcm.search.base.PageListFactory;
 import org.exoplatform.services.wcm.search.base.SearchDataCreator;
 import org.exoplatform.services.wcm.search.connector.BaseSearchServiceConnector;
-import org.exoplatform.services.wcm.utils.SQLQueryBuilder;
-import org.exoplatform.services.wcm.utils.WCMCoreUtils;
 import org.exoplatform.services.wcm.utils.AbstractQueryBuilder.COMPARISON_TYPE;
 import org.exoplatform.services.wcm.utils.AbstractQueryBuilder.LOGICAL;
 import org.exoplatform.services.wcm.utils.AbstractQueryBuilder.ORDERBY;
 import org.exoplatform.services.wcm.utils.AbstractQueryBuilder.PATH_TYPE;
 import org.exoplatform.services.wcm.utils.AbstractQueryBuilder.QueryTermHelper;
-import org.exoplatform.webui.application.WebuiRequestContext;
-import org.exoplatform.webui.application.portlet.PortletRequestContext;
+import org.exoplatform.services.wcm.utils.SQLQueryBuilder;
+import org.exoplatform.services.wcm.utils.WCMCoreUtils;
+
+import javax.jcr.Node;
+import javax.jcr.RepositoryException;
+import javax.jcr.Session;
+import javax.jcr.Value;
+import javax.jcr.nodetype.NodeType;
+import javax.jcr.nodetype.NodeTypeManager;
+import javax.jcr.query.Query;
+import javax.jcr.query.QueryManager;
+import javax.jcr.query.Row;
+import javax.jcr.query.RowIterator;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.HashMap;
+import java.util.HashSet;
+import java.util.List;
+import java.util.concurrent.CopyOnWriteArraySet;
 
 /**
  * The SiteSearchService component is used in the Search portlet that allows users
@@ -193,7 +185,7 @@ public class SiteSearchServiceImpl implements SiteSearchService {
     long startTime = System.currentTimeMillis();
     Query query = createQuery(queryCriteria, queryManager);
     String suggestion = getSpellSuggestion(queryCriteria.getKeyword(),currentRepository);
-    AbstractPageList<ResultNode> pageList = null;
+    AbstractPageList<ResultNode> pageList;
     if (LOG.isDebugEnabled()) {
       LOG.debug("execute query: " + query.getStatement().toLowerCase());
     }
@@ -789,8 +781,9 @@ public class SiteSearchServiceImpl implements SiteSearchService {
       //return exo:webContent when exo:htmlFile found
       if (displayNode.isNodeType("exo:htmlFile")) {
         Node parent = displayNode.getParent();
-        if (parent.isNodeType("exo:webContent")) return parent;
-        return displayNode;
+        if (parent.isNodeType("exo:webContent")) {
+            displayNode = parent;
+        }
       }
      String[] contentTypes = queryCriteria.getContentTypes();
       for (String contentType : contentTypes) {
