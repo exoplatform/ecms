@@ -267,6 +267,10 @@ public class QueryResultPageList<E> extends AbstractPageList<E> {
       bufSize = 2 * bufSize;
       prevSize = size;
     }
+    if (buffer.size() < this.getPageSize()) {
+        setTotalNodes(buffer.size());
+        this.setAvailablePage(buffer.size());
+    }
   }
   
   public void sortData() {
