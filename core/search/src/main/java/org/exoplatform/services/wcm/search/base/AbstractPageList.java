@@ -57,6 +57,8 @@ public abstract class AbstractPageList<E> extends PageList<E> {
   protected String order;
   /** total nodes returned by query, (have not passed the filter yet) */
   protected long totalNodes;
+  /** The offset */
+  protected int offset_;
   
   public Comparator<E> getComparator() {
     return comparator;
@@ -145,7 +147,7 @@ public abstract class AbstractPageList<E> extends PageList<E> {
   protected void checkAndSetPage(int page) throws Exception
   {
      currentPage_ = page;
-     if (page < 1 || page > availablePage_)
+     if (page < 1 || page > availablePage_ + offset_/getPageSize())
      {
         Object[] args = {Integer.toString(page), Integer.toString(availablePage_)};
         throw new ExoMessageException("PageList.page-out-of-range", args);
@@ -154,6 +156,8 @@ public abstract class AbstractPageList<E> extends PageList<E> {
   
   
   public abstract void sortData();
+  
+  public abstract List<E> getPageWithOffsetCare(int page) throws Exception;
   
   protected void removeRedundantPages(int availablePage) {
     for (int i = 1; i < Math.min(availablePage, this.getAvailablePage()); i++) {
@@ -174,7 +178,7 @@ public abstract class AbstractPageList<E> extends PageList<E> {
       }
     }
     try {
-      getPage(1);
+      getPageWithOffsetCare(1);
     } catch (Exception e) {
       if (LOG.isWarnEnabled()) {
         LOG.warn(e.getMessage());

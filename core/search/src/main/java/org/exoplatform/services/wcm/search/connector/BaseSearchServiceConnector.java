@@ -102,7 +102,7 @@ public abstract class BaseSearchServiceConnector extends SearchServiceConnector 
     //query search result
     try {
         criteria.setSiteName(getSitesStr(sites));
-        ret = convertResult(searchNodes(criteria), limit, context);
+        ret = convertResult(searchNodes(criteria), limit, offset, context);
     } catch (Exception e) {
       if (LOG.isErrorEnabled()) {
         LOG.error(e.getMessage(), e);
@@ -154,12 +154,14 @@ public abstract class BaseSearchServiceConnector extends SearchServiceConnector 
    * @param pageList
    * @return
    */
-  protected List<SearchResult> convertResult(AbstractPageList<ResultNode> pageList, int limit, SearchContext context) {
+  protected List<SearchResult> convertResult(AbstractPageList<ResultNode> pageList, int limit, int offset, SearchContext context) {
     List<SearchResult> ret = new ArrayList<SearchResult>();
     try {
       if (pageList != null) {
         for (int i = 1; i <= pageList.getAvailablePage(); i++) {
-          for (Object obj : pageList.getPage(i)) {
+          List<ResultNode> list = pageList.getPageWithOffsetCare(i);
+          if (list == null || list.size() == 0) return ret;
+          for (Object obj : list) {
             try {
               if (obj instanceof ResultNode) {
                 ResultNode retNode = filterNode((ResultNode)obj);

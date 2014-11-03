@@ -30,12 +30,18 @@ public class QueryData {
   private String workSpace_;
   private String language_ = Query.SQL;
   private boolean isSystemSession_ = false;
+  private long offset_ = 0;
   
   public QueryData(String queryStatement, String workspace, String language, boolean isSystemSession) {
     queryStatement_ = queryStatement;
     workSpace_ = workspace;
     language_ = language;
     isSystemSession_ = isSystemSession;
+  }
+  
+  public QueryData(String queryStatement, String workspace, String language, boolean isSystemSession, long offset) {
+    this(queryStatement, workspace, language, isSystemSession);
+    this.offset_ = offset;
   }
   
   public String getQueryStatement() {
@@ -63,8 +69,16 @@ public class QueryData {
     language_ = language;
   }
   
-  public QueryData clone() {
-    return new QueryData(queryStatement_, workSpace_, language_, isSystemSession_);
+  public long getOffset() {
+    return offset_;
   }
   
+  public void setOffset(long offset) {
+    this.offset_ = offset;
+  }
+  
+  public QueryData clone() {
+    return new QueryData(queryStatement_, workSpace_, language_, isSystemSession_, offset_);
+  }
+
 }
