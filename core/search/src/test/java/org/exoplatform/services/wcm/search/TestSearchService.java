@@ -27,7 +27,6 @@ import org.exoplatform.portal.mop.page.PageService;
 import org.exoplatform.portal.mop.page.PageState;
 import org.exoplatform.services.cms.templates.TemplateService;
 import org.exoplatform.services.ecm.publication.IncorrectStateUpdateLifecycleException;
-import org.exoplatform.services.jcr.impl.core.NodeImpl;
 import org.exoplatform.services.wcm.publication.PublicationDefaultStates;
 import org.exoplatform.services.wcm.search.base.AbstractPageList;
 import org.exoplatform.services.wcm.search.base.BaseSearchTest;
@@ -53,8 +52,6 @@ import java.util.List;
   @ConfigurationUnit(scope = ContainerScope.PORTAL, path = "conf/wcm/test-search-configuration.xml")
 })
 public class TestSearchService extends BaseSearchTest {
-
-  private static int POPULATED_NODES_COUNT = 0;
 
   public void setUp() throws Exception {
     super.setUp();
@@ -98,10 +95,17 @@ public class TestSearchService extends BaseSearchTest {
 
     if (!StringUtils.isEmpty(parentNode) && ("documents".equals(parentNode) || "web contents".equals(parentNode))) {
       try {
-        resolvedParentNode = siteNode.getNode(parentNode);
+        if (siteNode.hasNode(parentNode)) {
+          resolvedParentNode = siteNode.getNode(parentNode);
+        } else {
+          resolvedParentNode = siteNode.addNode(parentNode);
+          session.save();
+        }
       } catch (RepositoryException e) {
         // Do nothing
       }
+    } else {
+      return;
     }
 
     if (("documents".equals(parentNode))) {
@@ -109,9 +113,6 @@ public class TestSearchService extends BaseSearchTest {
     } else {
       populateWebContentNodes(resolvedParentNode, nodesCount);
     }
-
-    // Increment the nodes count to hold the total amount of nodes created
-    POPULATED_NODES_COUNT += nodesCount;
   }
 
   private void populateDocumentNodes(Node parentNode, int nodesCount)
@@ -140,38 +141,28 @@ public class TestSearchService extends BaseSearchTest {
 
   protected  void populateWebContentNodes(Node parentNode, int nodesCount) {
 
-    long totalNodes = 0l;
-    try {
-      totalNodes = ((NodeImpl) parentNode).getNodesCount();
-    } catch (RepositoryException re) {
-    }
+    String webContentNamePrefix = "dummyWebContent";
+    // html data for web content node: Must hold a common keyword "searchKey"
+    String htmlData = "The default.html file and yes it holds duplication searchKey.";
+    String cssData = "The default.css file.";
+    String jsData = "The default.js file.";
+    StringBuilder webContentName;
 
-    // Avoid creating nodes at each test case fixture.
-    // Only create new nodes when the first test case is run.
-    if ( totalNodes == 0l) {
-      String webContentNamePrefix = "dummyWebContent";
-      // html data for web content node: Must hold a common keyword "searchKey"
-      String htmlData = "The default.html file and yes it holds duplication searchKey.";
-      String cssData = "The default.css file.";
-      String jsData = "The default.js file.";
-      StringBuilder webContentName;
-      // Create 102 new webContent nodes
-      for (int i = 0; i < nodesCount; i++) {
-        webContentName = new StringBuilder();
-        try {
-          Node populatedNode = createWebcontentNode(parentNode,
-              webContentName.append(webContentNamePrefix).append(i).toString(),
-              htmlData,
-              cssData,
-              jsData);
-          if (!populatedNode.isNodeType("metadata:siteMetadata")) {
-            populatedNode.addMixin("metadata:siteMetadata");
-          }
-          wcmPublicationService.enrollNodeInLifecycle(populatedNode, DumpPublicationPlugin.LIFECYCLE_NAME);
-          publicationPlugin.changeState(populatedNode, PublicationDefaultStates.PUBLISHED, new HashMap<String, String>());
-        } catch (Exception e) {
-          // Do nothing
+    for (int i = 0; i < nodesCount; i++) {
+      webContentName = new StringBuilder();
+      try {
+        Node populatedNode = createWebcontentNode(parentNode,
+            webContentName.append(webContentNamePrefix).append(i).toString(),
+            htmlData,
+            cssData,
+            jsData);
+        if (!populatedNode.isNodeType("metadata:siteMetadata")) {
+          populatedNode.addMixin("metadata:siteMetadata");
         }
+        wcmPublicationService.enrollNodeInLifecycle(populatedNode, DumpPublicationPlugin.LIFECYCLE_NAME);
+        publicationPlugin.changeState(populatedNode, PublicationDefaultStates.PUBLISHED, new HashMap<String, String>());
+      } catch (Exception e) {
+        // Do nothing
       }
     }
   }
@@ -843,7 +834,6 @@ public class TestSearchService extends BaseSearchTest {
    * @throws Exception the exception
    */
   public void testSearchByOffsetAndLimitWithNoDuplication() throws Exception {
-    int totalResults = POPULATED_NODES_COUNT;
     int pageSize = 10;
     int offset = 0;
     int limit = pageSize;
