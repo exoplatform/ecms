@@ -169,11 +169,11 @@ public class QueryResultPageList<E> extends AbstractPageList<E> {
       
       while (iter.hasNext() && count < bufferSize_) {
         Node newNode = iter.nextNode();
+        Row newRow = rowIter.nextRow();
         if (filter != null) {
           newNode = filter.filterNodeToDisplay(newNode);
-        }        
+        }
         if (newNode != null && searchDataCreator != null) {
-          Row newRow = rowIter.nextRow();
           E data = searchDataCreator.createData(newNode, newRow);
           if (data != null && !dataSet.containsKey(data) && (found == null || !found.containsKey(data) || ((Integer)found.get(data)) >= page)) {
             buffer.add(data);

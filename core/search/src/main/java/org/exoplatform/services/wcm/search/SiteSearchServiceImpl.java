@@ -793,22 +793,23 @@ public class SiteSearchServiceImpl implements SiteSearchService {
     
     protected Node getNodeToCheckState(Node node)throws Exception{
       Node displayNode = node;
-      if (displayNode.isNodeType("nt:resource")) {
-        displayNode = node.getParent();
-      }
-      //return exo:webContent when exo:htmlFile found
-      if (displayNode.isNodeType("exo:htmlFile")) {
-        Node parent = displayNode.getParent();
-        if (parent.isNodeType("exo:webContent")) return parent;
-        return displayNode;
-      }
-     String[] contentTypes = queryCriteria.getContentTypes();
-      for (String contentType : contentTypes) {
-        if(displayNode.isNodeType(contentType)) {
-          return displayNode;
+        if (displayNode.isNodeType("nt:resource")) {
+          displayNode = node.getParent();
         }
-      }     
-      return null;
+        //return exo:webContent when exo:htmlFile found
+        if (displayNode.isNodeType("exo:htmlFile")) {
+          Node parent = displayNode.getParent();
+          if (parent.isNodeType("exo:webContent")) {
+            displayNode = parent;
+          }
+        }
+        String[] contentTypes = queryCriteria.getContentTypes();
+        for (String contentType : contentTypes) {
+          if(displayNode.isNodeType(contentType)) {
+            return displayNode;
+          }
+        }
+        return null;
     }
     
   }
