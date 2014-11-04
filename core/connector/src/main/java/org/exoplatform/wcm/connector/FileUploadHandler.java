@@ -38,6 +38,7 @@ import javax.xml.parsers.DocumentBuilder;
 import javax.xml.parsers.DocumentBuilderFactory;
 import javax.xml.transform.dom.DOMSource;
 
+import com.ibm.icu.text.Transliterator;
 import org.apache.commons.lang.StringUtils;
 import org.exoplatform.common.http.HTTPStatus;
 import org.exoplatform.ecm.connector.fckeditor.FCKMessage;
@@ -269,7 +270,6 @@ public class FileUploadHandler {
     DocumentBuilderFactory factory = DocumentBuilderFactory.newInstance();
     DocumentBuilder builder = factory.newDocumentBuilder();
     Document fileExistence = builder.newDocument();
-    fileName = Text.escapeIllegalJcrChars(fileName);
     fileName = cleanNameUtil(fileName);
     Element rootElement = fileExistence.createElement(
                               parent.hasNode(fileName) ? "Existed" : "NotExisted");
@@ -557,13 +557,14 @@ public class FileUploadHandler {
    * @return cleaned name
    */
   private String cleanNameUtil(String fileName) {
+    Transliterator accentsconverter = Transliterator.getInstance("Latin; NFD; [:Nonspacing Mark:] Remove; NFC;");
     if (fileName.indexOf('.') > 0) {
       String ext = fileName.substring(fileName.lastIndexOf('.'));
-      fileName = Utils.cleanString(fileName.substring(0, fileName.lastIndexOf('.'))).concat(ext);
+      fileName = accentsconverter.transliterate(fileName.substring(0, fileName.lastIndexOf('.'))).concat(ext);
     } else {
-      fileName = Utils.cleanString(fileName);
+      fileName = accentsconverter.transliterate(fileName);
     }
-    return fileName;
+    return Text.escapeIllegalJcrChars(fileName);
 
   }
   
