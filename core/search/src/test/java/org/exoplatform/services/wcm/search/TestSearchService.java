@@ -847,32 +847,30 @@ public class TestSearchService extends BaseSearchTest {
     queryCriteria.setContentTypes(getWebContentSearchedDocTypes());
 
     String assertionMsg = "Returned search results should have no duplicates in different pages: %s";
-    /* Temp ResultNodes list which is aimed to hold always the
-      previous page result. Those should then be used for comparison */
-    List auxList = getSearchResult(true, 10).currentPage();
 
-    int nbResultForCurrentPage = auxList.size();
+    int nbResultForCurrentPage = 10;
 
-    List<Integer> hashResults = new ArrayList<Integer>();
-
+    List<ResultNode> hashResults = new ArrayList<ResultNode>();
+    int currentPage=1;
     while (nbResultForCurrentPage==limit && !isItemDuplicated) {
-      offset+=limit;
       queryCriteria.setOffset(offset);
       queryCriteria.setLimit(limit);
-      List<ResultNode> resultNodes = getSearchResult(true, 10).currentPage();
+      List<ResultNode> resultNodes = getSearchResult(true, 10).getPageWithOffsetCare(currentPage);
       nbResultForCurrentPage = resultNodes.size();
       int i=0;
       while (i<resultNodes.size() && !isItemDuplicated){
         ResultNode node = resultNodes.get(i);
-        Integer hash = new Integer(node.hashCode());
-        if (hashResults.contains(hash)) {
+        if (hashResults.contains(node)) {
           isItemDuplicated=true;
-          assertionMsg = String.format(assertionMsg,"Node: \"" + node.getPath() + "\" is duplicated at offset "+(offset-limit));
+          assertionMsg = String.format(assertionMsg,"Node: \"" + node.getPath() + "\" is duplicated at offset "+offset);
         } else {
-          hashResults.add(new Integer(hash));
+          hashResults.add(node);
         }
         i++;
       }
+      offset+=limit;
+      currentPage++;
+
     }
     assertFalse(assertionMsg, isItemDuplicated);
   }
@@ -919,28 +917,28 @@ public class TestSearchService extends BaseSearchTest {
     String assertionMsg = "Returned search results should have no duplicates in different pages: %s";
     /* Temp ResultNodes list which is aimed to hold always the
       previous page result. Those should then be used for comparison */
-    List auxList = getSearchResult(false, 10).currentPage();
-    List<Integer> hashResults = new ArrayList<Integer>();
+    List<ResultNode> hashResults = new ArrayList<ResultNode>();
 
-    int nbResultForCurrentPage = auxList.size();
+    int nbResultForCurrentPage = 10;
+    int currentPage=1;
     while (nbResultForCurrentPage==limit && !isItemDuplicated) {
-      offset+=limit;
       queryCriteria.setOffset(offset);
       queryCriteria.setLimit(limit);
-      List<ResultNode> resultNodes = getSearchResult(false, 10).currentPage();
+      List<ResultNode> resultNodes = getSearchResult(false, 10).getPageWithOffsetCare(currentPage);
       nbResultForCurrentPage = resultNodes.size();
       int i=0;
       while (i<resultNodes.size() && !isItemDuplicated){
         ResultNode node = resultNodes.get(i);
-        Integer hash = new Integer(node.hashCode());
-        if (hashResults.contains(hash)) {
+        if (hashResults.contains(node)) {
           isItemDuplicated=true;
-          assertionMsg = String.format(assertionMsg,"Node: \"" + node.getPath() + "\" is duplicated at offset "+(offset-limit));
+          assertionMsg = String.format(assertionMsg,"Node: \"" + node.getPath() + "\" is duplicated at offset "+offset);
         } else {
-          hashResults.add(new Integer(hash));
+          hashResults.add(node);
         }
         i++;
       }
+      offset+=limit;
+      currentPage++;
     }
     assertFalse(assertionMsg, isItemDuplicated);
   }

@@ -195,12 +195,10 @@ public class QueryResultPageList<E> extends AbstractPageList<E> {
             buffer.add(data);
             dataSet.put(data, page);
             count ++;
-//            page = (position-1)/getPageSize() + 1;
-//            if (page != prevPage) {
-//              prevPage = page;
-//              drop.put(page, 0);
-//            }
+          } else if (data!= null && dataSet.containsKey(data)) {
+            drop.put(page, drop.get(page) + 1) ;
           }
+
         } else if (newNode == null) {
             drop.put(page, drop.get(page) + 1);
         }
