@@ -146,28 +146,44 @@ public class QueryResultPageList<E> extends AbstractPageList<E> {
                                                                 queryData_.getQueryStatement());
     Map<Integer, Integer> drop = siteSearchService.getDropNodes(ConversationState.getCurrent().getIdentity().getUserId(),
                                                                   queryData_.getQueryStatement());
-    for (int i = 0; i < queryPage; i++) {
-      if (drop.containsKey(i))
-        offset += drop.get(i);
+    offset = 0;
+    int nbResultFound = 0;
+    int currentPage = 1;
+    while (nbResultFound<(queryPage-1)*getPageSize()) {
+        int droppedOnPage = 0;
+        if (drop.containsKey(currentPage)) {
+            droppedOnPage=drop.get(currentPage);
+        }
+        nbResultFound += getPageSize()-droppedOnPage;
+        currentPage++;
     }
-    ((QueryImpl)query).setOffset(offset);  
+
+    int page = currentPage == 1 ? currentPage :  currentPage-1;
+    offset=(page-1)*getPageSize();
     long prevSize = 0;
     int bufSize = bufferSize_;
+    int count = 0;
+
+    buffer.clear();
+    dataSet.clear();
+
+
     while (true) {
-      int position = offset_;
-      int page = position/getPageSize() + 1;
+      int position = offset;
+      page = position/getPageSize() + 1;
       int prevPage = -1;
       drop.put(page, 0);
-      ((QueryImpl)query).setLimit(bufSize);      
+      ((QueryImpl)query).setOffset(offset);
+
+      ((QueryImpl)query).setLimit(bufSize);
       QueryResult queryResult = query.execute();
       NodeIterator iter = queryResult.getNodes();
       RowIterator rowIter = queryResult.getRows();
       long size = iter.getSize();
-      int count = 0;
-      buffer.clear();
-      dataSet.clear();
-      
+
       while (iter.hasNext() && count < bufferSize_) {
+
+        position++;
         Node newNode = iter.nextNode();
         Row newRow = rowIter.nextRow();
         if (filter != null) {
@@ -175,28 +191,34 @@ public class QueryResultPageList<E> extends AbstractPageList<E> {
         }
         if (newNode != null && searchDataCreator != null) {
           E data = searchDataCreator.createData(newNode, newRow);
-          if (data != null && !dataSet.containsKey(data) && (found == null || !found.containsKey(data) || ((Integer)found.get(data)) >= page)) {
+          if (data != null && !dataSet.containsKey(data) && (found == null || !found.containsKey(data) || ((Integer)found.get(data)) > page)) {
             buffer.add(data);
             dataSet.put(data, page);
             count ++;
-            position++;
-            page = (position-1)/getPageSize() + 1;
-            if (page != prevPage) {
-              prevPage = page;
-              drop.put(page, 0);
-            }
-          } else { drop.put(page, drop.get(page) + 1); }
-        } else if (newNode == null) { drop.put(page, drop.get(page) + 1); }
+//            page = (position-1)/getPageSize() + 1;
+//            if (page != prevPage) {
+//              prevPage = page;
+//              drop.put(page, 0);
+//            }
+          }
+        } else if (newNode == null) {
+            drop.put(page, drop.get(page) + 1);
+        }
       }
       /* enough data to process*/
       if (count == bufferSize_) break;
+      if (size<bufSize) break; //we found less results than asked => we are at the end of the results list
+
       /* already query all data */
-      if (size == prevSize) break;
-      bufSize = 2 * bufSize;
-      prevSize = size;
+      offset+=bufSize;
     }
     for (Map.Entry<E, Integer> e : dataSet.entrySet())
       found.put(e.getKey(), e.getValue());
+
+    setTotalNodes(found.size());
+    this.setAvailablePage(found.size());
+    this.checkAndSetPage(queryPage);
+
   }
   
   public void sortData() {

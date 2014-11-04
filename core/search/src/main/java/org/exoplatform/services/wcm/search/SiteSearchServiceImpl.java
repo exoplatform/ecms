@@ -146,8 +146,8 @@ public class SiteSearchServiceImpl implements SiteSearchService {
     this.templateService = templateService;
     this.repositoryService = repositoryService;
     this.configurationService = configurationService;
-    this.foundNodeCache = caService.getCacheInstance(SiteSearchService.class.getName());
-    this.dropNodeCache = caService.getCacheInstance(SiteSearchService.class.getName());
+    this.foundNodeCache = caService.getCacheInstance(SiteSearchService.class.getName()+"-founded");
+    this.dropNodeCache = caService.getCacheInstance(SiteSearchService.class.getName()+"-dropped");
     if (initParams != null) {
       ValueParam isEnabledFuzzySearchValue = initParams.getValueParam(IS_ENABLED_FUZZY_SEARCH);
       if (isEnabledFuzzySearchValue != null)
