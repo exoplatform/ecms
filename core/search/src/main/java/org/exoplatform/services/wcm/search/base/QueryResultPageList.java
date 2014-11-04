@@ -125,7 +125,7 @@ public class QueryResultPageList<E> extends AbstractPageList<E> {
     
     currentListPage_ = new ArrayList<E>();
     for (int i = getFrom(); i < getTo(); i++) {
-      if (i - offset_ < buffer.size()) {
+      if (i - offset_ < buffer.size() && i - offset_ >= 0 ) {
         E data = buffer.get(i - offset_);
         currentListPage_.add(data);
       }

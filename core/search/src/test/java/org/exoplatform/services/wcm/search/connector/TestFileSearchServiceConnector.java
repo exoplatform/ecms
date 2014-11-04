@@ -90,7 +90,7 @@ public class TestFileSearchServiceConnector extends BaseSearchTest {
     addFile(parentNode, "file2", "cjohn Felix Anthony Cena");
     addFile(parentNode, "file3", "anthony Hopkins");
   }
-  
+
   private void addFile(Node parentNode, String name, String data) throws Exception {
     Node file = parentNode.addNode(name, "nt:file");
     file.addMixin("exo:sortable");
@@ -105,27 +105,26 @@ public class TestFileSearchServiceConnector extends BaseSearchTest {
     file.setProperty("exo:dateModified",new GregorianCalendar());
     session.save();
   }
-    
+
+    public void testSearchSingleWithOffset() throws Exception {
+        Collection<String> sites = new ArrayList<String>();
+        sites.add("classic");
+        Collection<SearchResult> ret = fileSearch_.search(null, "anthon~",
+                sites,
+                1, 20, "title", "asc");
+        assertEquals(3, ret.size());//1
+    }
+
   public void testSearchSingle() throws Exception {
     Collection<String> sites = new ArrayList<String>();
     sites.add("classic");
-    Collection<SearchResult> ret 
-          = fileSearch_.search(null, "anthony~", 
-                                   sites, 
+    Collection<SearchResult> ret
+          = fileSearch_.search(null, "anthony~",
+                                   sites,
                                    0, 20, "title", "asc");
     assertEquals(4, ret.size());//2
   }
-  
-  public void testSearchSingleWithOffset() throws Exception {
-    Collection<String> sites = new ArrayList<String>();
-    sites.add("classic");
-    Collection<SearchResult> ret 
-          = fileSearch_.search(null, "anthony~", 
-                                   sites, 
-                                   1, 20, "title", "asc");
-    assertEquals(3, ret.size());//1
-  }
-  
+
   public void testSearchSingleWithLimit() throws Exception {
     Collection<String> sites = new ArrayList<String>();
     sites.add("classic");
@@ -135,27 +134,27 @@ public class TestFileSearchServiceConnector extends BaseSearchTest {
                                    0, 1, "title", "asc");
     assertEquals(1, ret.size());
   }
-  
+
+    public void testSearchMultipleWithOffset() throws Exception {
+        Collection<String> sites = new ArrayList<String>();
+        sites.add("classic");
+        Collection<SearchResult> ret
+                = fileSearch_.search(null, "anthony cjohn~",
+                sites,
+                1, 20, "title", "asc");
+        assertEquals(1, ret.size());//2
+    }
+
   public void testSearchMultiple() throws Exception {
     Collection<String> sites = new ArrayList<String>();
     sites.add("classic");
-    Collection<SearchResult> ret 
-          = fileSearch_.search(null, "anthony cjohn~", 
-                                   sites, 
+    Collection<SearchResult> ret
+          = fileSearch_.search(null, "anthony cjohn~",
+                                   sites,
                                    0, 20, "title", "asc");
     assertEquals(2, ret.size());//3
   }
-  
-  public void testSearchMultipleWithOffset() throws Exception {
-    Collection<String> sites = new ArrayList<String>();
-    sites.add("classic");
-    Collection<SearchResult> ret 
-          = fileSearch_.search(null, "anthony cjohn~", 
-                                   sites, 
-                                   1, 20, "title", "asc");
-    assertEquals(1, ret.size());//2
-  }
-  
+
   public void testSearchMultipleWithLimit() throws Exception {
     Collection<String> sites = new ArrayList<String>();
     sites.add("classic");
@@ -179,8 +178,8 @@ public class TestFileSearchServiceConnector extends BaseSearchTest {
   public void testSearchPhraseWithOffset() throws Exception {
     Collection<String> sites = new ArrayList<String>();
     sites.add("classic");
-    Collection<SearchResult> ret 
-          = fileSearch_.search(null, "\"anthony cena\"", 
+    Collection<SearchResult> ret
+          = fileSearch_.search(null, "\"anthony cena\"",
                                    sites, 
                                    1, 20, "title", "asc");
     assertEquals(1, ret.size());//0

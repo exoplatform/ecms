@@ -103,7 +103,7 @@ public class TestDocumentSearchServiceConnector extends BaseSearchTest {
     Collection<String> sites = new ArrayList<String>();
     sites.add("classic");
     Collection<SearchResult> ret 
-          = documentSearch_.search(new SearchContext(new Router(new ControllerDescriptor()), "intranet"), "anthony~", 
+          = documentSearch_.search(new SearchContext(new Router(new ControllerDescriptor()), "intranet"), "anthon~",
                                    sites, 
                                    1, 20, "title", "asc");
     assertEquals(3, ret.size());//1
