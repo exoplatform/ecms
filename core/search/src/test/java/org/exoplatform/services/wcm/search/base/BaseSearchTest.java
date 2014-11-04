@@ -63,10 +63,12 @@ public class BaseSearchTest extends BaseECMSTestCase {
   protected WebpagePublicationPlugin publicationPlugin ;
   protected UserPortalConfigService userPortalConfigService;
   protected final String searchKeyword = "This is";
+  protected final String duplicationSearchKeyword = "duplication searchKey";
   protected SessionProvider sessionProvider;
   protected POMSessionManager pomManager;
   protected POMSession  pomSession;
   protected int seachItemsPerPage = 100;
+  protected static int numberOfRunTests = 0;
 
   public void setUp() throws Exception {
     super.setUp();
@@ -81,6 +83,7 @@ public class BaseSearchTest extends BaseECMSTestCase {
     wcmPublicationService.addPublicationPlugin(publicationPlugin);
     applySystemSession();
     addDocuments();
+    numberOfRunTests++;
   }
 
   protected void addDocuments() throws Exception {
@@ -89,6 +92,13 @@ public class BaseSearchTest extends BaseECMSTestCase {
 
     Node sharedPortal = getNode("sites content/live/shared/documents");
     addChildNodes(sharedPortal);
+    Node acmePortal = getNode("sites content/live/acme");
+    if (numberOfRunTests == 0) {
+      // Populate 20 webContent nodes under classic site without being enrolled in publication lifecycle
+      populateAdditionalSearchData(acmePortal, "web contents", 20);
+      // Populate 101 document nodes under classic site without being enrolled in publication lifecycle
+      populateAdditionalSearchData(acmePortal, "documents", 101);
+    }
   }
   
   protected Node getNode(String path) throws Exception {
@@ -107,6 +117,11 @@ public class BaseSearchTest extends BaseECMSTestCase {
 
   protected void addChildNodes(Node parentNode)throws Exception{
   }
+
+  /*
+   * Create additional data for search under a specific site and a specific node.
+   */
+  protected void populateAdditionalSearchData(Node siteNode, String parentNode, int nodesCount) {}
 
   public void tearDown() throws Exception {
     NodeIterator iterator = null;

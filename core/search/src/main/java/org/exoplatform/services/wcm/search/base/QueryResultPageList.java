@@ -17,8 +17,10 @@
 package org.exoplatform.services.wcm.search.base;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.HashSet;
 import java.util.List;
+import java.util.Map;
 import java.util.Set;
 
 import javax.jcr.Node;
@@ -34,6 +36,8 @@ import org.exoplatform.services.jcr.ext.common.SessionProvider;
 import org.exoplatform.services.jcr.impl.core.query.QueryImpl;
 import org.exoplatform.services.log.ExoLogger;
 import org.exoplatform.services.log.Log;
+import org.exoplatform.services.security.ConversationState;
+import org.exoplatform.services.wcm.search.SiteSearchService;
 import org.exoplatform.services.wcm.utils.WCMCoreUtils;
 
 /**
@@ -53,26 +57,24 @@ public class QueryResultPageList<E> extends AbstractPageList<E> {
   private QueryData queryData_;
   /** The buffer size */
   private int bufferSize_;
-  /** The offset */
-  private int offset_;
   
   /** The nodes. */
   protected List<E> buffer;
   
-  private Set<E> dataSet;
+  private Map<E, Integer> dataSet;
   
   public QueryResultPageList(int pageSize, QueryData queryData, int total, int bufferSize,
                              NodeSearchFilter filter, SearchDataCreator creator) {
     super(pageSize);
     setTotalNodes(total);
     queryData_ = queryData.clone();
-    offset_ = 0;
+    offset_ = (int)queryData.getOffset();
     bufferSize_ = bufferSize;
     this.filter = filter;
     this.searchDataCreator = creator;
     this.setAvailablePage(total);
     removeRedundantPages(Math.min(bufferSize_ / pageSize, 5));
-    dataSet = new HashSet<E>();
+    dataSet = new HashMap<E, Integer>();
   }
   
   public int getBufferSize() { return bufferSize_; }
@@ -103,7 +105,7 @@ public class QueryResultPageList<E> extends AbstractPageList<E> {
   @Override
   protected void populateCurrentPage(int page) throws Exception {
     if (buffer == null || buffer.size() == 0) {
-      queryDataForBuffer();
+      queryDataForBuffer(page);
     }
     int firstBufferPage = offset_ / getPageSize() + 1;
     int lastBufferPage = (offset_ + buffer.size() - 1) / getPageSize() + 1;
@@ -118,64 +120,103 @@ public class QueryResultPageList<E> extends AbstractPageList<E> {
       }
       
       offset_ = (offsetPage - 1) * getPageSize();
-      queryDataForBuffer();
+      queryDataForBuffer(page);
     }
     
     currentListPage_ = new ArrayList<E>();
     for (int i = getFrom(); i < getTo(); i++) {
-      if (i - offset_ < buffer.size()) {
+      if (i - offset_ < buffer.size() && i - offset_ >= 0 ) {
         E data = buffer.get(i - offset_);
         currentListPage_.add(data);
       }
     }
   }
   
-  private void queryDataForBuffer() throws Exception {
+  private void queryDataForBuffer(int queryPage) throws Exception {
     buffer = new ArrayList<E>();
-    dataSet = new HashSet<E>();
+    dataSet = new HashMap<E, Integer>();
     SessionProvider sessionProvider = queryData_.isSystemSession() ? WCMCoreUtils.getSystemSessionProvider() :
                                                                      WCMCoreUtils.getUserSessionProvider();
     Session session = sessionProvider.getSession(queryData_.getWorkSpace(), WCMCoreUtils.getRepository());
     QueryManager queryManager = session.getWorkspace().getQueryManager();
     Query query = queryManager.createQuery(queryData_.getQueryStatement(), queryData_.getLanguage_());
-    ((QueryImpl)query).setOffset(offset_);  
+    int offset = offset_;
+    SiteSearchService siteSearchService = WCMCoreUtils.getService(SiteSearchService.class);
+    Map found = siteSearchService.getFoundNodes(ConversationState.getCurrent().getIdentity().getUserId(),
+                                                                queryData_.getQueryStatement());
+    Map<Integer, Integer> drop = siteSearchService.getDropNodes(ConversationState.getCurrent().getIdentity().getUserId(),
+                                                                  queryData_.getQueryStatement());
+    offset = 0;
+    int nbResultFound = 0;
+    int currentPage = 1;
+    while (nbResultFound<(queryPage-1)*getPageSize()) {
+        int droppedOnPage = 0;
+        if (drop.containsKey(currentPage)) {
+            droppedOnPage=drop.get(currentPage);
+        }
+        nbResultFound += getPageSize()-droppedOnPage;
+        currentPage++;
+    }
+
+    int page = currentPage == 1 ? currentPage :  currentPage-1;
+    offset=(page-1)*getPageSize();
     long prevSize = 0;
     int bufSize = bufferSize_;
-    int offset = 0;
     int count = 0;
+
     buffer.clear();
     dataSet.clear();
+
+
     while (true) {
+      int position = offset;
+      page = position/getPageSize() + 1;
+      int prevPage = -1;
+      drop.put(page, 0);
       ((QueryImpl)query).setOffset(offset);
-      ((QueryImpl)query).setLimit(bufSize);      
+
+      ((QueryImpl)query).setLimit(bufSize);
       QueryResult queryResult = query.execute();
       NodeIterator iter = queryResult.getNodes();
       RowIterator rowIter = queryResult.getRows();
       long size = iter.getSize();
-      
+
       while (iter.hasNext() && count < bufferSize_) {
+
+        position++;
         Node newNode = iter.nextNode();
+        Row newRow = rowIter.nextRow();
         if (filter != null) {
           newNode = filter.filterNodeToDisplay(newNode);
-        }        
+        }
         if (newNode != null && searchDataCreator != null) {
-          Row newRow = rowIter.nextRow();
           E data = searchDataCreator.createData(newNode, newRow);
-          if (data != null && !dataSet.contains(data)) {
+          if (data != null && !dataSet.containsKey(data) && (found == null || !found.containsKey(data) || ((Integer)found.get(data)) > page)) {
             buffer.add(data);
-            dataSet.add(data);
+            dataSet.put(data, page);
             count ++;
+          } else if (data!= null && dataSet.containsKey(data)) {
+            drop.put(page, drop.get(page) + 1) ;
           }
+
+        } else if (newNode == null) {
+            drop.put(page, drop.get(page) + 1);
         }
       }
       /* enough data to process*/
       if (count == bufferSize_) break;
+      if (size<bufSize) break; //we found less results than asked => we are at the end of the results list
+
       /* already query all data */
-      if (size == prevSize) break;
-      offset = bufSize;
-      bufSize = 2 * bufSize;
-      prevSize = size;
+      offset+=bufSize;
     }
+    for (Map.Entry<E, Integer> e : dataSet.entrySet())
+      found.put(e.getKey(), e.getValue());
+
+    setTotalNodes(found.size());
+    this.setAvailablePage(found.size());
+    this.checkAndSetPage(queryPage);
+
   }
   
   public void sortData() {
@@ -221,5 +262,10 @@ public class QueryResultPageList<E> extends AbstractPageList<E> {
     } else {
       return order.toUpperCase().startsWith("A") ? "ascending" : "descending";
     }
+  }
+
+  @Override
+  public List<E> getPageWithOffsetCare(int page) throws Exception {
+    return getPage(offset_/getPageSize() + page);
   }
 }
