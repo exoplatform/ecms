@@ -248,4 +248,19 @@ public class QueryResultPageList<E> extends AbstractPageList<E> {
   public List<E> getPageWithOffsetCare(int page) throws Exception {
     return getPage(offset_/getPageSize() + page);
   }
+  
+  /**
+   * Returns the to index.
+   *
+   * @return the to index
+   */
+  @Override
+  public int getTo()
+  {
+     int to = currentPage_ * getPageSize();
+     if (to > available_ + offset_)
+        to = available_ + offset_;
+     return to;
+  }
+  
 }

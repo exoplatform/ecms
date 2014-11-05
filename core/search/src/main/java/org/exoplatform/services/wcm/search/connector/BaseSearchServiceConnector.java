@@ -158,7 +158,9 @@ public abstract class BaseSearchServiceConnector extends SearchServiceConnector 
     try {
       if (pageList != null) {
         for (int i = 1; i <= pageList.getAvailablePage(); i++) {
-          for (Object obj : pageList.getPageWithOffsetCare(i)) {
+          List<ResultNode> list = pageList.getPageWithOffsetCare(i);
+          if (list == null || list.size() == 0) return ret;
+          for (Object obj : list) {
             try {
               if (obj instanceof ResultNode) {
                 ResultNode retNode = filterNode((ResultNode)obj);
