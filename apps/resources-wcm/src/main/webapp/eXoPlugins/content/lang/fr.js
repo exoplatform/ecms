@@ -14,11 +14,11 @@ var UserLanguage = {
 	SortDate						: 	"Date",
 	SortSize						: 	"Taille",
 	
-	ViewThumbnail					: 	"Thumbnail",
+	ViewThumbnail						: 	"Vignette",
 	ViewList						: 	"Liste",
 
-  ViewThumbnailLabel  : "Vue de Thumbnail",
-  ViewListLabel       : "Vue de Liste",
+	ViewThumbnailLabel  					:	"Vue de Vignette",
+	ViewListLabel       					:	"Vue de Liste",
 	
 	Home							:	"Accueil",
 
