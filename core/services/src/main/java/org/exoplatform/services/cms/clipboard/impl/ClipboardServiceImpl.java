@@ -17,15 +17,23 @@
 package org.exoplatform.services.cms.clipboard.impl;
 
 import java.util.HashMap;
+import java.util.HashSet;
+import java.util.Iterator;
 import java.util.LinkedHashSet;
 import java.util.Map;
 import java.util.Set;
+
+import javax.jcr.PathNotFoundException;
+import javax.jcr.RepositoryException;
 
 import org.exoplatform.container.xml.InitParams;
 import org.exoplatform.services.cache.CacheService;
 import org.exoplatform.services.cache.ExoCache;
 import org.exoplatform.services.cms.clipboard.ClipboardService;
 import org.exoplatform.services.cms.clipboard.jcr.model.ClipboardCommand;
+import org.exoplatform.services.jcr.ext.common.SessionProvider;
+import org.exoplatform.services.log.ExoLogger;
+import org.exoplatform.services.log.Log;
 import org.exoplatform.services.wcm.utils.WCMCoreUtils;
 
 /**
@@ -36,6 +44,7 @@ import org.exoplatform.services.wcm.utils.WCMCoreUtils;
  */
 public class ClipboardServiceImpl implements ClipboardService {
   
+  private static final Log       LOG  = ExoLogger.getLogger(ClipboardServiceImpl.class.getName());
   private static final String CLIPBOARD_CACHE = "ClipboardServiceCache";
   private static final String CLIPBOARD_CACHE_VIRTUAL = "ClipboardServiceCacheVirtual";
   
@@ -85,7 +94,19 @@ public class ClipboardServiceImpl implements ClipboardService {
     
     ExoCache<String, Set<ClipboardCommand>> cache = isVirtual ? virtualCache_ : cache_;
     Set<ClipboardCommand> ret = cache.get(userId);
-    return ret != null ? ret : new LinkedHashSet<ClipboardCommand>();
+    if (ret != null){
+      Set<ClipboardCommand> removedCommands = new HashSet<ClipboardCommand>();
+      for (Iterator<ClipboardCommand> commands = ret.iterator();commands.hasNext();){
+        ClipboardCommand command = commands.next();
+        if (!isExistingNode(command)) {
+          removedCommands.add(command);
+        }
+      }
+      ret.removeAll(removedCommands);
+      return new LinkedHashSet<ClipboardCommand>(ret);
+    } else {
+      return new LinkedHashSet<ClipboardCommand>();
+    } 
   }
 
   @Override
@@ -128,5 +149,24 @@ public class ClipboardServiceImpl implements ClipboardService {
   private String getRepoName() {
     return WCMCoreUtils.getRepository().getConfiguration().getName();
   }
-
+  /**
+   * check the node in a ClipboardComand is existing or not
+   * @param ClipboardCommand
+   * @return true if the node exist else false ( node was deleted)
+   */
+  private boolean isExistingNode(ClipboardCommand command) {
+    SessionProvider sessionProvider = SessionProvider.createSystemProvider();
+    String wsName = command.getWorkspace();
+    String nodePath = command.getSrcPath();
+    try {
+      sessionProvider.getSession(wsName,WCMCoreUtils.getRepository()).getItem(nodePath);
+    } catch(PathNotFoundException e) {
+      return false;
+    } catch (RepositoryException re) {
+      LOG.debug("problem while checking the existing of Node");
+    } finally {
+      sessionProvider.close();
+    }
+    return true;
+  }
 }
