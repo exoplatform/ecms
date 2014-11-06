@@ -185,6 +185,8 @@ public class QueryResultPageList<E> extends AbstractPageList<E> {
               prevPage = page;
               drop.put(page, 0);
             }
+            // increase page number for the last item
+            if (position % getPageSize() == 0) { page++; }
           } else { drop.put(page, drop.get(page) + 1); }
         } else if (newNode == null) { drop.put(page, drop.get(page) + 1); }
       }

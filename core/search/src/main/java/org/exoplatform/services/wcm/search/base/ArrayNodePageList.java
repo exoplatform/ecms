@@ -124,6 +124,8 @@ public class ArrayNodePageList<E> extends AbstractPageList<E> {
             page = (position-1)/getPageSize() + 1;
             dataList.add(data);
             found.put(data, page);
+            // increase page number for the last item
+            if (position % getPageSize() == 0) { page++; }
           }
         }
       }
