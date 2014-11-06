@@ -31,16 +31,24 @@ import org.exoplatform.services.wcm.utils.WCMCoreUtils;
 public class TestClipboardService extends BaseWCMTestCase {
   
   ClipboardService clipboardService_ = null;
-  
+  /**
+   * add some nodes for testing because getClipboardList check the existing of node
+   * some nodes will not be found if workspace is not defined
+   */
   public void setUp() throws Exception {
     super.setUp();
+    session.getRootNode().addNode("documents");
+    session.getRootNode().addNode("music");
+    session.getRootNode().addNode("public");
+    session.getRootNode().addNode("pictures");
+    session.save();
     clipboardService_ = WCMCoreUtils.getService(ClipboardService.class);
     clipboardService_.addClipboardCommand("john", 
       new ClipboardCommand(ClipboardCommand.CUT, "/documents", "collaboration"), false);
     clipboardService_.addClipboardCommand("john", 
-      new ClipboardCommand(ClipboardCommand.CUT, "/favorites", "collaboration"), false);
-    clipboardService_.addClipboardCommand("john", 
       new ClipboardCommand(ClipboardCommand.CUT, "/music", "collaboration"), false);
+    clipboardService_.addClipboardCommand("john", 
+      new ClipboardCommand(ClipboardCommand.CUT, "/public", "collaboration"), true);
     //duplication
     clipboardService_.addClipboardCommand("john", 
       new ClipboardCommand(ClipboardCommand.CUT, "/documents", "collaboration"), false);
@@ -49,7 +57,7 @@ public class TestClipboardService extends BaseWCMTestCase {
     clipboardService_.addClipboardCommand("john", 
       new ClipboardCommand(ClipboardCommand.COPY, "/documents", "dms-system"), false);
     clipboardService_.addClipboardCommand("mary", 
-      new ClipboardCommand(ClipboardCommand.CUT, "/documents", "collaboration"), true);
+      new ClipboardCommand(ClipboardCommand.CUT, "/pictures", "collaboration"), true);
   }
   
   public void tearDown() throws Exception {
@@ -62,7 +70,7 @@ public class TestClipboardService extends BaseWCMTestCase {
   public void testAddClipboardCommand() throws Exception {
     clipboardService_.addClipboardCommand("john", 
       new ClipboardCommand(ClipboardCommand.CUT, "/pictures", "collaboration"), false);
-    assertEquals(5, clipboardService_.getClipboardList("john", false).size());
+    assertEquals(3, clipboardService_.getClipboardList("john", false).size());
     clipboardService_.addClipboardCommand("john", 
       new ClipboardCommand(ClipboardCommand.CUT, "/public", "collaboration"), true);
     assertEquals(2, clipboardService_.getClipboardList("john", true).size());
@@ -87,9 +95,9 @@ public class TestClipboardService extends BaseWCMTestCase {
 
   public void testGetClipboardList() {
     Set<ClipboardCommand> commands = clipboardService_.getClipboardList("john", false);
-    assertEquals(4, commands.size());
+    assertEquals(2, commands.size());
     commands = clipboardService_.getClipboardList("john", true);
-    assertEquals(1, commands.size());
+    assertEquals(2, commands.size());
     commands = clipboardService_.getClipboardList("mary", true);
     assertEquals(1, commands.size());
     commands = clipboardService_.getClipboardList("mary", false);
