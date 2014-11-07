@@ -100,6 +100,8 @@ public class UISimpleSearch extends UIForm {
   private static final String XPATH_QUERY      = "/jcr:root$0//*";
 
   private static final String ROOT_SQL_QUERY   = "SELECT * FROM nt:base WHERE jcr:path LIKE '/%' ";
+  
+  private static final String NT_RESOURCE_EXCLUDE = "AND ( not jcr:primaryType like 'nt:resource') ";
 
   private static final String LINK_REQUIREMENT = "AND ( (jcr:primaryType like 'exo:symlink' or " +
                                                         "jcr:primaryType like 'exo:taxonomyLink') ";
@@ -215,6 +217,7 @@ public class UISimpleSearch extends UIForm {
       } else {
         statement.append(StringUtils.replace(SQL_QUERY, "$0", currentNode.getPath()));
       }
+      statement.append(NT_RESOURCE_EXCLUDE);
       statement.append(LINK_REQUIREMENT).append(" OR ( CONTAINS(*,'").
                 append(escapedText).append("') ) )");
     } else if(constraints_.size() > 0) {//constraint != null
@@ -237,6 +240,7 @@ public class UISimpleSearch extends UIForm {
         } else {
           statement.append(StringUtils.replace(SQL_QUERY, "$0", currentNode.getPath()));
         }
+        statement.append(NT_RESOURCE_EXCLUDE);
         if (constraintsStatement.length() > 0)
           statement.append(constraintsStatement);
       } else {
@@ -245,6 +249,7 @@ public class UISimpleSearch extends UIForm {
         } else {
           statement.append(StringUtils.replace(SQL_QUERY, "$0", currentNode.getPath()));
         }
+        statement.append(NT_RESOURCE_EXCLUDE);
         statement.append(LINK_REQUIREMENT).append("OR ( CONTAINS(*,'").
                   append(escapedText.replaceAll("'", "''")).append("') ");
         if (constraintsStatement.length() > 0)
