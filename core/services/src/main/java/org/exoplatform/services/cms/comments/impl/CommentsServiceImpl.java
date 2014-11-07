@@ -29,6 +29,9 @@ import javax.jcr.NodeIterator;
 import javax.jcr.Session;
 
 import org.exoplatform.commons.utils.ActivityTypeUtils;
+import org.exoplatform.commons.utils.CommonsUtils;
+import org.exoplatform.container.component.ComponentRequestLifecycle;
+import org.exoplatform.container.component.RequestLifeCycle;
 import org.exoplatform.services.cache.CacheService;
 import org.exoplatform.services.cache.ExoCache;
 import org.exoplatform.services.cms.comments.CommentsService;
@@ -126,8 +129,7 @@ public class CommentsServiceImpl implements CommentsService {
       Node newComment = commentNode.addNode(name,EXO_COMMENTS) ;
       newComment.setProperty(COMMENTOR,commentor) ;
 
-      OrganizationService organizationService = WCMCoreUtils.getService(OrganizationService.class);
-      User user = organizationService.getUserHandler().findUserByName(commentor);
+      User user = getUser(commentor);
      
       if(user == null)
         newComment.setProperty(COMMENTOR_FULLNAME,"ANONYMOUS") ;
@@ -303,4 +305,15 @@ public class CommentsServiceImpl implements CommentsService {
     return false ;
   }
 
+  private User getUser(String id) throws Exception {
+    OrganizationService organizationService = WCMCoreUtils.getService(OrganizationService.class);
+    CommonsUtils.startRequest(organizationService);
+    try {
+      User ret = organizationService.getUserHandler().findUserByName(id);
+      return ret;
+    } finally {
+      CommonsUtils.endRequest(organizationService);
+    }
+  }
+  
 }

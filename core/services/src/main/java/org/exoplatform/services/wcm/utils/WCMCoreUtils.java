@@ -47,6 +47,7 @@ import org.exoplatform.commons.api.settings.SettingService;
 import org.exoplatform.commons.api.settings.SettingValue;
 import org.exoplatform.commons.api.settings.data.Context;
 import org.exoplatform.commons.api.settings.data.Scope;
+import org.exoplatform.commons.utils.CommonsUtils;
 import org.exoplatform.commons.utils.ListAccess;
 import org.exoplatform.container.ExoContainer;
 import org.exoplatform.container.ExoContainerContext;
@@ -180,9 +181,9 @@ public class WCMCoreUtils {
    * @return true is user has permissions, otherwise return false
    */
   public static boolean hasPermission(String userId, List<String> permissions, boolean isNeedFullAccess) {
+    OrganizationService organizationService = WCMCoreUtils.getService(OrganizationService.class);
     try {
-      OrganizationService organizationService = WCMCoreUtils.getService(OrganizationService.class);
-      startRequest(organizationService);
+      CommonsUtils.startRequest(organizationService);
       Collection<?> memberships = organizationService.getMembershipHandler().findMembershipsByUser(userId);
       String userMembershipTmp;
       Membership userMembership;
@@ -219,11 +220,12 @@ public class WCMCoreUtils {
         }
         permissionTmp = permission;
       }
-      endRequest(organizationService);
     } catch (Exception e) {
       if (LOG.isErrorEnabled()) {
         LOG.error("hasPermission() failed because of ", e);
       }
+    } finally {
+      CommonsUtils.endRequest(organizationService);
     }
     return false;
   }
@@ -254,20 +256,6 @@ public class WCMCoreUtils {
       }
     }
     return null;
-  }
-
-  public static void startRequest(OrganizationService orgService) throws Exception
-  {
-    if(orgService instanceof ComponentRequestLifecycle) {
-      ((ComponentRequestLifecycle) orgService).startRequest(ExoContainerContext.getCurrentContainer());
-    }
-  }
-
-  public static void endRequest(OrganizationService orgService) throws Exception
-  {
-    if(orgService instanceof ComponentRequestLifecycle) {
-      ((ComponentRequestLifecycle) orgService).endRequest(ExoContainerContext.getCurrentContainer());
-    }
   }
 
   public static String getProjectVersion() throws Exception {
