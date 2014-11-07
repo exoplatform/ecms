@@ -32,6 +32,9 @@ import javax.jcr.observation.EventIterator;
 import javax.jcr.observation.EventListener;
 import javax.portlet.PortletRequest;
 
+import org.exoplatform.commons.utils.CommonsUtils;
+import org.exoplatform.container.component.ComponentRequestLifecycle;
+import org.exoplatform.container.component.RequestLifeCycle;
 import org.exoplatform.portal.application.PortalRequestContext;
 import org.exoplatform.portal.mop.SiteType;
 import org.exoplatform.portal.mop.user.UserNavigation;
@@ -120,11 +123,16 @@ public class EmailNotifyListener implements EventListener {
     Map<String, String> binding = new HashMap<String, String>();
     Query query = new Query();
     query.setEmail(receiver);
-    binding.put("user_name", WCMCoreUtils.getService(OrganizationService.class)
-                                         .getUserHandler()
-                                         .findUsersByQuery(query)
-                                         .load(0, 1)[0].getDisplayName());
-
+    OrganizationService orgService = WCMCoreUtils.getService(OrganizationService.class);
+    CommonsUtils.startRequest(orgService);
+    try {
+      binding.put("user_name", WCMCoreUtils.getService(OrganizationService.class)
+                                           .getUserHandler()
+                                           .findUsersByQuery(query)
+                                           .load(0, 1)[0].getDisplayName());
+    } finally {
+      CommonsUtils.endRequest(orgService);
+    }
     Node node = NodeLocation.getNodeByLocation(observedNode_);
     binding.put("doc_title", org.exoplatform.services.cms.impl.Utils.getTitle(node));
     binding.put("doc_name", node.getName());
@@ -264,6 +272,7 @@ public class EmailNotifyListener implements EventListener {
   private List<String> getEmailList(Node observedNode) {
     List<String> emailList = new ArrayList<String>() ;
     OrganizationService orgService = WCMCoreUtils.getService(OrganizationService.class);
+    RequestLifeCycle.begin((ComponentRequestLifecycle)orgService);
     try{
       if(observedNode.hasProperty(EMAIL_WATCHERS_PROP)) {
         Value[] watcherNames = observedNode.getProperty(EMAIL_WATCHERS_PROP).getValues() ;
@@ -279,6 +288,8 @@ public class EmailNotifyListener implements EventListener {
       if (LOG.isErrorEnabled()) {
         LOG.error("Unexpected error", e);
       }
+    } finally {
+      RequestLifeCycle.end();
     }
     return emailList ;
   }

@@ -27,6 +27,7 @@ import javax.jcr.NodeIterator;
 import javax.jcr.PathNotFoundException;
 import javax.jcr.RepositoryException;
 
+import org.exoplatform.commons.utils.CommonsUtils;
 import org.exoplatform.services.cms.documents.FavoriteService;
 import org.exoplatform.services.cms.link.LinkManager;
 import org.exoplatform.services.jcr.access.PermissionType;
@@ -34,6 +35,7 @@ import org.exoplatform.services.jcr.core.ExtendedNode;
 import org.exoplatform.services.jcr.ext.app.SessionProviderService;
 import org.exoplatform.services.jcr.ext.hierarchy.NodeHierarchyCreator;
 import org.exoplatform.services.organization.OrganizationService;
+import org.exoplatform.services.organization.User;
 import org.exoplatform.services.wcm.core.NodetypeConstant;
 import org.exoplatform.services.wcm.utils.WCMCoreUtils;
 
@@ -177,13 +179,22 @@ public class FavoriteServiceImpl implements FavoriteService {
   }
 
   private Node getUserFavoriteFolder(String userName) throws Exception {
-    if (organizationService.getUserHandler().findUserByName(userName) == null) {
+    if (getUser(userName) == null) {
       return null;
     }
     Node userNode =
       nodeHierarchyCreator.getUserNode(sessionProviderService.getSessionProvider(null), userName);
     String favoritePath = nodeHierarchyCreator.getJcrPath(FAVORITE_ALIAS);
     return userNode.getNode(favoritePath);
+  }
+  
+  private User getUser(String id) throws Exception {
+    CommonsUtils.startRequest(organizationService);
+    try {
+      return organizationService.getUserHandler().findUserByName(id);
+    } finally {
+      CommonsUtils.endRequest(organizationService);
+    }
   }
 
   private Node createFavoriteFolder(String userName) throws Exception {

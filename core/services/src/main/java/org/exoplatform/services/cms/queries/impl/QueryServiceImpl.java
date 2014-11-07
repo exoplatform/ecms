@@ -16,7 +16,10 @@
  */
 package org.exoplatform.services.cms.queries.impl;
 
+import org.exoplatform.commons.utils.CommonsUtils;
 import org.exoplatform.commons.utils.ISO8601;
+import org.exoplatform.container.component.ComponentRequestLifecycle;
+import org.exoplatform.container.component.RequestLifeCycle;
 import org.exoplatform.container.xml.InitParams;
 import org.exoplatform.container.xml.PortalContainerInfo;
 import org.exoplatform.services.cache.CacheService;
@@ -571,6 +574,7 @@ public class QueryServiceImpl implements QueryService, Startable{
       return true;
     String membershipType = roleExpression.substring(0, roleExpression.indexOf(":"));
     String groupName = roleExpression.substring(roleExpression.indexOf(":") + 1);
+    CommonsUtils.startRequest(organizationService_);
     try {
       MembershipHandler membershipHandler = organizationService_.getMembershipHandler();
       if ("*".equals(membershipType)) {
@@ -579,9 +583,10 @@ public class QueryServiceImpl implements QueryService, Startable{
       }
       // Determine if there exists the membership of specified type
       return membershipHandler.findMembershipByUserGroupAndType(userId,groupName,membershipType) != null;
-    }
-    catch(Exception e) {
+    } catch(Exception e) {
       return false;
+    } finally {
+      CommonsUtils.endRequest(organizationService_);
     }
   }
 

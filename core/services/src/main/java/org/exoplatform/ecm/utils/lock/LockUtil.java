@@ -16,6 +16,7 @@
  */
 package org.exoplatform.ecm.utils.lock;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -28,6 +29,9 @@ import javax.jcr.query.Query;
 import javax.jcr.query.QueryManager;
 import javax.jcr.query.QueryResult;
 
+import org.exoplatform.commons.utils.CommonsUtils;
+import org.exoplatform.container.component.ComponentRequestLifecycle;
+import org.exoplatform.container.component.RequestLifeCycle;
 import org.exoplatform.services.cms.documents.TrashService;
 import org.exoplatform.services.cms.lock.LockService;
 import org.exoplatform.services.jcr.core.ManageableRepository;
@@ -137,9 +141,7 @@ public class LockUtil {
   public static void updateLockCache(String membership) throws Exception {
     ManageableRepository repo = WCMCoreUtils.getRepository();
     Session session = null;
-    OrganizationService service = WCMCoreUtils.getService(OrganizationService.class);
-    List<MembershipType> memberships = (List<MembershipType>) service.getMembershipTypeHandler().findMembershipTypes();
-
+    List<MembershipType> memberships = getMemberships();
     //get all locked nodes
     for (String ws : repo.getWorkspaceNames()) {
       session = WCMCoreUtils.getSystemSessionProvider().getSession(ws, repo);
@@ -174,9 +176,8 @@ public class LockUtil {
    */
   @SuppressWarnings("unchecked")
   public static void removeLockCache(String removedMembership, List<String> ignoredMemberships) throws Exception {
-    OrganizationService organizationService = WCMCoreUtils.getService(OrganizationService.class);
-    List<MembershipType> availMembershipTypes =
-        (List<MembershipType>) organizationService.getMembershipTypeHandler().findMembershipTypes();
+    List<MembershipType> availMembershipTypes = getMemberships();
+        
     HashMap<String, Map<String, String>> lockHolding = WCMCoreUtils.getService(LockService.class).getLockHolding();
 
     // Remove lock cache for specific membership
@@ -190,6 +191,17 @@ public class LockUtil {
           lockHolding.remove(membership);
         }
       }
+    }
+  }
+  
+  private static List<MembershipType> getMemberships() throws Exception {
+    OrganizationService service = WCMCoreUtils.getService(OrganizationService.class);
+    CommonsUtils.startRequest(service);
+    try {
+      List<MembershipType> ret = (List<MembershipType>) service.getMembershipTypeHandler().findMembershipTypes();
+      return ret;
+    } finally {
+      CommonsUtils.endRequest(service);
     }
   }
 }

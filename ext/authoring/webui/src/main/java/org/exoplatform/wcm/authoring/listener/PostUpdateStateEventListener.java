@@ -21,6 +21,7 @@ import java.util.Iterator;
 
 import javax.jcr.Node;
 
+import org.exoplatform.commons.utils.CommonsUtils;
 import org.exoplatform.commons.utils.ListAccess;
 import org.exoplatform.portal.application.PortalRequestContext;
 import org.exoplatform.portal.webui.util.Util;
@@ -127,55 +128,61 @@ public class PostUpdateStateEventListener extends Listener<CmsService, Node> {
                         boolean isNextState,
                         boolean isPublished) throws Exception {
     if (state.getMembership().contains(":")) {
-      String[] membership = state.getMembership().split(":");
-      String membershipType = membership[0];
-      String group = membership[1];
       OrganizationService orgService = WCMCoreUtils.getService(OrganizationService.class);
-      UserHandler userh = orgService.getUserHandler();
-      MembershipHandler msh = orgService.getMembershipHandler();
-
-      ListAccess<User> userList = userh.findUsersByGroupId(group);
-      User currentUser = null;
+      CommonsUtils.startRequest(orgService);
       try {
-        currentUser = userh.findUserByName(userId);
-      } catch (Exception e) {
-        if (LOG.isWarnEnabled()) {
-          LOG.warn(e.getMessage());
-        }
-      }
-      String username = userId;
-      if (currentUser != null)
-        username = currentUser.getFirstName() + " " + currentUser.getLastName();
-      for (User user : userList.load(0, userList.getSize())) {
-        Collection<Membership> mss = msh.findMembershipsByUserAndGroup(user.getUserName(), group);
-        for (Membership ms : mss) {
-          if (membershipType.equals(ms.getMembershipType())) {
-            String from = "\"" + username + "\" <exocontent@exoplatform.com>";
-            String to = user.getEmail();
-            String subject, body;
-            String editUrl = "http://localhost:8080/ecmdemo/private/classic/siteExplorer/repository/collaboration"
-                + node.getPath();
-            if (isPublished) {
-              subject = "[eXo Content] Published : (published) " + node.getName();
-            } else {
-              if (isNextState) {
-                subject = "[eXo Content] Request : (" + state.getState() + ") " + node.getName();
-              } else {
-                subject = "[eXo Content] Updated : (" + state.getState() + ") " + node.getName();
-              }
-            }
-            body = "[ <a href=\"" + editUrl + "\">" + editUrl + "</a> ]<br/>" + "updated by "
-                + username;
-            // mailService.sendMessage(from, to, subject, body);
-            if (LOG.isInfoEnabled()) {
-              LOG.info("\n################ SEND MAIL TO USER :: " + user.getUserName() + "\nfrom: "
-                  + from + "\nto: " + to + "\nsubject: " + subject + "\nbody: " + body
-                  + "\n######################################################");
-            }
-
+        String[] membership = state.getMembership().split(":");
+        String membershipType = membership[0];
+        String group = membership[1];
+        UserHandler userh = orgService.getUserHandler();
+        MembershipHandler msh = orgService.getMembershipHandler();
+  
+        ListAccess<User> userList = userh.findUsersByGroupId(group);
+        User currentUser = null;
+        try {
+          currentUser = userh.findUserByName(userId);
+        } catch (Exception e) {
+          if (LOG.isWarnEnabled()) {
+            LOG.warn(e.getMessage());
           }
         }
+        String username = userId;
+        if (currentUser != null)
+          username = currentUser.getFirstName() + " " + currentUser.getLastName();
+        for (User user : userList.load(0, userList.getSize())) {
+          Collection<Membership> mss = msh.findMembershipsByUserAndGroup(user.getUserName(), group);
+          for (Membership ms : mss) {
+            if (membershipType.equals(ms.getMembershipType())) {
+              String from = "\"" + username + "\" <exocontent@exoplatform.com>";
+              String to = user.getEmail();
+              String subject, body;
+              String editUrl = "http://localhost:8080/ecmdemo/private/classic/siteExplorer/repository/collaboration"
+                  + node.getPath();
+              if (isPublished) {
+                subject = "[eXo Content] Published : (published) " + node.getName();
+              } else {
+                if (isNextState) {
+                  subject = "[eXo Content] Request : (" + state.getState() + ") " + node.getName();
+                } else {
+                  subject = "[eXo Content] Updated : (" + state.getState() + ") " + node.getName();
+                }
+              }
+              body = "[ <a href=\"" + editUrl + "\">" + editUrl + "</a> ]<br/>" + "updated by "
+                  + username;
+              // mailService.sendMessage(from, to, subject, body);
+              if (LOG.isInfoEnabled()) {
+                LOG.info("\n################ SEND MAIL TO USER :: " + user.getUserName() + "\nfrom: "
+                    + from + "\nto: " + to + "\nsubject: " + subject + "\nbody: " + body
+                    + "\n######################################################");
+              }
+  
+            }
+          }
+        }
+      } finally {
+        CommonsUtils.endRequest(orgService);
       }
+      
     }
 
   }
