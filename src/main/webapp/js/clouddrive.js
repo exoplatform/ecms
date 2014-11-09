@@ -280,15 +280,15 @@
 				  // 2 wait for authentication
 				  var auth = waitAuth(authWindow);
 				  auth.done(function() {
-					  utils.log(provider.name + " user authenticated.");
+					  utils.log(provider.serviceName + " user authenticated.");
 					  // 3 and finally connect the drive
 					  // set initial progress	with dummy state object
-						process.notify({ 
+						/*process.notify({ 
 							progress : 0,
 							drive : {
 								provider : provider
 							}
-						});
+						});*/
 					  // XXX if it is a re-connect (via providerUpdate), context node may point to a file inside the existing drive
 					  // Connect service will care about it and apply correct drive path.
 					  var userNode = contextNode;
@@ -299,7 +299,7 @@
 							  utils.log("Connect requested: " + status + ". ");
 							  if (state) {
 								  if (status == 201) {
-									  utils.log("DONE: " + provider.name + " successfully connected.");
+									  utils.log("DONE: " + provider.serviceName + " successfully connected.");
 									  contextDrive = state.drive;
 									  process.resolve(state);
 								  } else if (status == 202) {
@@ -318,12 +318,12 @@
 									  utils.log("WARN: unexpected state returned from connect service " + status);
 								  }
 							  } else {
-								  utils.log("ERROR: " + provider.name + " connect return null state.");
-								  process.reject("Cannot connect " + provider.name + ". Server return empty response.");
+								  utils.log("ERROR: " + provider.serviceName + " connect return null state.");
+								  process.reject("Cannot connect " + provider.serviceName + ". Server return empty response.");
 							  }
 						  });
 						  post.fail(function(state, error, errorText) {
-							  utils.log("ERROR: " + provider.name + " connect failed: " + error + ". ");
+							  utils.log("ERROR: " + provider.serviceName + " connect failed: " + error + ". ");
 							  if (typeof state === "string") {
 								  process.reject(state);
 							  } else {
@@ -331,11 +331,11 @@
 							  }
 						  });
 					  } else {
-						  process.reject("Connect to " + provider.name + " canceled.");
+						  process.reject("Connect to " + provider.serviceName + " canceled.");
 					  }
 				  });
 				  auth.fail(function(error) {
-					  utils.log("ERROR: " + provider.name + " authentication error: " + error);
+					  utils.log("ERROR: " + provider.serviceName + " authentication error: " + error);
 					  process.reject(error);
 				  });
 			  },
@@ -395,11 +395,11 @@
 						if (status == "201" || status == "200") {
 							// created or ok - drive successfully connected or appears as already connected (by another request)
 							process.resolve(state);
-							utils.log("DONE: " + status + " " + state.drive.provider.name + " connected successfully.");
+							utils.log("DONE: " + status + " " + state.drive.provider.serviceName + " connected successfully.");
 						} else if (status == "202") {
 							// else inform progress and continue 
 							process.notify(state);
-							utils.log("PROGRESS: " + status + " " + state.drive.provider.name + " connectCheck progress " + state.progress);
+							utils.log("PROGRESS: " + status + " " + state.drive.provider.serviceName + " connectCheck progress " + state.progress);
 						} else {
 							// unexpected status, wait for created
 							utils.log("WARN: unexpected status in connectCheck:" + status);
@@ -407,8 +407,8 @@
 					} else {
 						utils.log("ERROR: " + status + " connectCheck return wrong state.");
 						var driveName;
-						if (state.drive && state.drive.provider && state.drive.provider.name) {
-							driveName = state.drive.provider.name;
+						if (state.drive && state.drive.provider && state.drive.provider.serviceName) {
+							driveName = state.drive.provider.serviceName;
 						} else {
 							driveName = "Cloud Drive";
 						}
@@ -1004,7 +1004,7 @@
 						});
 					}
 					var i = $(this).find("i");
-					text = text + drive.provider.name;
+					text = text + drive.provider.serviceName;
 					$(this).text(text);
 					$(this).prepend(i);
 					if (cloudDrive.isContextSyncing()) {
@@ -1024,7 +1024,7 @@
 						$(this).data("cd_action_prefix", text);
 					}
 					var i = $(this).find("i");
-					text = text + drive.provider.name;
+					text = text + drive.provider.serviceName;
 					$(this).text(text);
 					$(this).prepend(i);
 				});
@@ -1244,7 +1244,7 @@
 				}
 
 				$.pnotify({
-				  title : "Your " + state.drive.provider.name + " connected!",
+				  title : "Your " + state.drive.provider.serviceName + " connected!",
 				  type : "success",
 				  text : message,
 				  icon : "picon picon-task-complete",
@@ -1259,7 +1259,7 @@
 			state.fail(function(state) {
 				var message;
 				if (state.drive && state.drive.provider) {
-					message = "Error connecting your " + state.drive.provider.name;
+					message = "Error connecting your " + state.drive.provider.serviceName;
 				} else {
 					message = "Error connecting your drive";
 				}
@@ -1316,6 +1316,7 @@
 
 			var update = function() {
 				var options = {
+					title : "Connecting Your " + driveName,
 					text : progress + "% complete."
 				};
 				if (progress >= 75) {
@@ -1341,20 +1342,20 @@
 				if (!task) {
 					// start progress
 					progress = state.progress;
-					driveName = state.drive.provider.name;
+					driveName = state.drive.provider.serviceName;
 
 					notice.pnotify({
 					  title : "Connecting Your " + driveName,
 					  text : progress + "% complete."
 					});
 
-					// hide title in 4sec
+					// hide title in 5sec
 					hideTimeout = setTimeout(function() {
 						notice.pnotify({
 						  title : false,
 						  width : "200px"
 						});
-					}, 4000);
+					}, 5000);
 
 					// add as tasks also
 					if (tasks) {
@@ -1369,6 +1370,7 @@
 					}
 				} else {
 					// continue progress
+					driveName = state.drive.provider.serviceName; // need update drive name
 					progress = state.progress < 100 ? state.progress : 99;
 				}
 				update();
@@ -1423,39 +1425,9 @@
 		 */
 		this.synchronizeProcess = function(process) {
 			process.done(function(updated, drive) {
-				/*function doneAction(pnotify) {
-					$(pnotify.text_container).find("a.cdSynchronizeProcessAction").click(function() {
-						// TODO cloudDriveUI.openDrive(drive.title);
-						refresh(true);
-					});
-				}*/
-				var alink = "<a class='cdSynchronizeProcessAction' href='javascript:void(0);'";
-				var driveLink = "<span>" + alink + " style=\"curson: pointer; border-bottom: 1px dashed #999; display: inline;\">"
-				    + drive.email + "</a></span>";
-				var details;
 				if (updated > 0) {
 					// refresh on success
 					refresh();
-					
-					// TODO Don't refresh at all, as user can change the
-					// view. Instead we show a link on the message.
-
-					// Show number of changes in the drive on Refresh icon
-					/*var changes = files + folders + drive.removed.length;
-					var refreshChanges = $("span.uiCloudDriveChanges");
-					if (refreshChanges.size() > 0) {
-						var prevChanges = parseInt($(refreshChanges).text());
-						if (!isNaN(prevChanges)) {
-							changes = changes + prevChanges;
-						}
-						changes = changes > 9 ? "9+" : changes;
-						$(refreshChanges).text(changes);
-					} else {
-						changes = changes > 9 ? "9+" : changes;
-						$("<span class='uiCloudDriveChanges' title='" + drive.provider.name + " has updates.'>" + changes + "</span>")
-						    .appendTo("a.refreshIcon i");
-					}
-					$("span.uiCloudDriveChanges").data("timestamp", new Date());*/
 				}
 			});
 			process.fail(function(response, status, err) {
@@ -1561,7 +1533,6 @@
 									}
 								});
 								process.fail(function(e) {
-									//submited = true;
 									//eXo.webui.UIForm.submitForm(formId, 'Cancel', true);
 									utils.log("ConnectCloudDriveForm canceled");
 								});
@@ -1580,7 +1551,6 @@
 								$(this).data("cd-connect", true);
 								$(this).parent().parent().click(function() {
 									cloudDrive.connect(providerId);
-									// TODO not required: $("div.UIPopupWindow").hide();
 								});
 							}
 						}
