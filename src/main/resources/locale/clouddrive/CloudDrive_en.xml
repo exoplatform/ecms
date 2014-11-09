@@ -27,7 +27,7 @@
   </ECMContextMenu>
   <CloudFileViewer>
     <event>
-      <OpenFileOn>Open $fileUrl on $providerName</OpenFileOn>
+      <OpenFileOn>Open $fileUrl on $serviceName</OpenFileOn>
     </event>
     <event>
       <OpenOn>Open on</OpenOn>
