@@ -39,6 +39,8 @@ public abstract class CloudUser {
 
   protected final int           hashCode;
 
+  protected String              serviceName;
+
   /**
    * {@link CloudUser} constructor.
    * 
@@ -92,7 +94,19 @@ public abstract class CloudUser {
   }
 
   /**
-   * Create a title for Cloud Drive root node. By default it is 'PROVIDER_NAME - EMAIL', but implementation
+   * Connected service name for human-readable uses. Service name is the same as the provider name by default,
+   * but it also can be more precise description of the app the user connected to. For instance: the
+   * same type of provider can connect to different instances of the app and the service name may
+   * describe each one connected in runtime.<br>
+   * 
+   * @return String with the provider's service name (app instance name)
+   */
+  public String getServiceName() {
+    return serviceName != null ? serviceName : provider.getName();
+  }
+
+  /**
+   * Create a title for Cloud Drive root node. By default it is 'SERVICE_NAME - EMAIL', but implementation
    * may change it for more detailed.
    * 
    * @return String with a text of root node for the user
@@ -100,7 +114,7 @@ public abstract class CloudUser {
    * @throws DriveRemovedException
    */
   public String createDriveTitle() throws RepositoryException, DriveRemovedException, CloudDriveException {
-    return provider.getName() + " - " + email;
+    return getServiceName() + " - " + email;
   }
 
   /**
@@ -139,4 +153,16 @@ public abstract class CloudUser {
     return hashCode;
   }
 
+  // *********** internals ************
+
+  /**
+   * Set servide name connected by this user.<br>
+   * 
+   * @see {@link #getServiceName()} for details
+   * 
+   * @param serviceName
+   */
+  protected void setServiceName(String serviceName) {
+    this.serviceName = serviceName;
+  }
 }

@@ -484,7 +484,7 @@ public class ConnectService implements ResourceContainer {
                       resp.status(Status.CREATED); // OK vs CREATED?
                       DriveInfo drive = DriveInfo.create(workspace, local);
                       resp.drive(drive);
-                      LOG.info(drive.getEmail() + " already connected.");
+                      LOG.info(drive.getTitle() + " already connected.");
                     } else {
                       // a new or exist but not connected - connect it
                       connect = new ConnectProcess(workspace, local, convo);
@@ -712,13 +712,13 @@ public class ConnectService implements ResourceContainer {
         timeline.remove(iid);
 
         if (connect != null) {
-          CloudProvider cloudProvider = connect.provider;
-          if (cloudProvider.getId().equals(providerId)) {
+          CloudProvider provider = connect.provider;
+          if (provider.getId().equals(providerId)) {
             if (error == null) {
               // it's the same as initiated request
               if (key != null) {
                 try {
-                  CloudUser user = cloudDrives.authenticate(cloudProvider, key);
+                  CloudUser user = cloudDrives.authenticate(provider, key);
 
                   UUID connectId = generateId(user.getEmail() + key);
                   authenticated.put(connectId, user);
@@ -744,14 +744,14 @@ public class ConnectService implements ResourceContainer {
                               false);
 
                   resp.entity("<!doctype html><html><head><script type='text/javascript'> window.close();</script></head><body><div id='messageString'>Connecting to "
-                      + cloudProvider.getName() + "</div></body></html>");
+                      + user.getServiceName() + "</div></body></html>");
 
                   return resp.ok().build();
                 } catch (CloudDriveException e) {
-                  LOG.warn("Error authenticating user to access " + cloudProvider.getName(), e);
-                  return resp.authError("Authentication error on " + cloudProvider.getName(),
+                  LOG.warn("Error authenticating user to access " + provider.getName(), e);
+                  return resp.authError("Authentication error on " + provider.getName(),
                                         connect.host,
-                                        cloudProvider.getName(),
+                                        provider.getName(),
                                         iid.toString(),
                                         baseHost)
                              // TODO UNAUTHORIZED ?
@@ -759,10 +759,10 @@ public class ConnectService implements ResourceContainer {
                              .build();
                 }
               } else {
-                LOG.warn("Key required for " + cloudProvider.getName());
-                return resp.authError("Key required for " + cloudProvider.getName(),
+                LOG.warn("Key required for " + provider.getName());
+                return resp.authError("Key required for " + provider.getName(),
                                       connect.host,
-                                      cloudProvider.getName(),
+                                      provider.getName(),
                                       iid.toString(),
                                       baseHost)
                            .status(Status.BAD_REQUEST)
@@ -770,17 +770,14 @@ public class ConnectService implements ResourceContainer {
               }
             } else {
               // we have an error from provider
-              LOG.warn(cloudProvider.getName() + " error: " + error);
+              LOG.warn(provider.getName() + " error: " + error);
 
               // TODO hack for access_denied from Google, move this logic to Google connector
               if (error.indexOf("access_denied") >= 0) {
-                resp.authError("Acccess denied.",
-                               connect.host,
-                               cloudProvider.getName(),
-                               iid.toString(),
-                               baseHost).status(Status.FORBIDDEN);
+                resp.authError("Acccess denied.", connect.host, provider.getName(), iid.toString(), baseHost)
+                    .status(Status.FORBIDDEN);
               } else {
-                resp.authError(error, connect.host, cloudProvider.getName(), iid.toString(), baseHost)
+                resp.authError(error, connect.host, provider.getName(), iid.toString(), baseHost)
                     .status(Status.BAD_REQUEST);
               }
 
@@ -788,10 +785,10 @@ public class ConnectService implements ResourceContainer {
             }
           } else {
             LOG.error("Authentication was not initiated for " + providerId + " but request to "
-                + cloudProvider.getId() + " recorded with id " + initId);
-            return resp.authError("Authentication not initiated to " + cloudProvider.getName(),
+                + provider.getId() + " recorded with id " + initId);
+            return resp.authError("Authentication not initiated to " + provider.getName(),
                                   connect.host,
-                                  cloudProvider.getName(),
+                                  provider.getName(),
                                   iid.toString(),
                                   baseHost)
                        .status(Status.INTERNAL_SERVER_ERROR)
@@ -842,14 +839,14 @@ public class ConnectService implements ResourceContainer {
 
     ConnectResponse resp = new ConnectResponse();
     try {
-      CloudProvider cloudProvider = cloudDrives.getProvider(providerId);
+      CloudProvider provider = cloudDrives.getProvider(providerId);
       ConversationState convo = ConversationState.getCurrent();
       if (convo != null) {
         String localUser = convo.getIdentity().getUserId();
         String host = locator.getServiceHost(uriInfo.getRequestUri().getHost());
 
         UUID initId = generateId(localUser);
-        initiated.put(initId, new ConnectInit(localUser, cloudProvider, host));
+        initiated.put(initId, new ConnectInit(localUser, provider, host));
         timeline.put(initId, System.currentTimeMillis() + (INIT_COOKIE_EXPIRE * 1000) + 5000);
 
         resp.cookie(INIT_COOKIE,
@@ -859,10 +856,10 @@ public class ConnectService implements ResourceContainer {
                     "Cloud Drive init ID",
                     INIT_COOKIE_EXPIRE,
                     false);
-        return resp.entity(cloudProvider).ok().build();
+        return resp.entity(new ProviderInfo(provider)).ok().build();
       } else {
-        LOG.warn("ConversationState not set to initialize connect to " + cloudProvider.getName());
-        return resp.error("User not authenticated to connect " + cloudProvider.getName())
+        LOG.warn("ConversationState not set to initialize connect to " + provider.getName());
+        return resp.error("User not authenticated to connect " + provider.getName())
                    .status(Status.UNAUTHORIZED)
                    .build();
       }
