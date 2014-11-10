@@ -718,7 +718,7 @@ public class DriverConnector extends BaseConnector implements ResourceContainer 
       }
     }
     return
-        checkNode.isNodeType(NodetypeConstant.NT_UNSTRUCTURED)
+        (checkNode.isNodeType(NodetypeConstant.NT_UNSTRUCTURED)&& !checkNode.isNodeType(NodetypeConstant.EXO_WEBCONTENT))
         || checkNode.isNodeType(NodetypeConstant.NT_FOLDER)
         || checkNode.isNodeType(NodetypeConstant.EXO_TAXONOMY);
   }
