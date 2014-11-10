@@ -1307,7 +1307,7 @@
 			  width : NOTICE_WIDTH
 			});
 
-			// show close buton in 20s
+			// show close button in 20s
 			var removeNonblock = setTimeout(function() {
 				notice.pnotify({
 					nonblock : false
@@ -1316,7 +1316,7 @@
 
 			var update = function() {
 				var options = {
-					title : "Connecting Your " + driveName,
+					//title : "Connecting Your " + driveName,
 					text : progress + "% complete."
 				};
 				if (progress >= 75) {
