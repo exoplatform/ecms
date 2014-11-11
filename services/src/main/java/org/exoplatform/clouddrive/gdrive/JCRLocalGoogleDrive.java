@@ -319,7 +319,7 @@ public class JCRLocalGoogleDrive extends JCRLocalCloudDrive implements UserToken
               }
             } // else will be removed below
           }
-          removed.add(en.getPath());
+          removed.add(enpath);
           en.remove();
         }
         nodes.remove(fileId);
@@ -389,7 +389,7 @@ public class JCRLocalGoogleDrive extends JCRLocalCloudDrive implements UserToken
 
             // add created Node to list of existing
             existing.add(localNode);
-          } else if (!localNode.getProperty("exo:title").getString().equals(gf.getTitle())) {
+          } else if (!fileAPI.getTitle(localNode).equals(gf.getTitle())) {
             // file was renamed, rename (move) its Node also
             localNode = moveFile(gf.getId(), gf.getTitle(), localNode, fp);
           }
