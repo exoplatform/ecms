@@ -16,22 +16,10 @@
  */
 package org.exoplatform.clouddrive;
 
-import java.net.InetAddress;
-import java.net.NetworkInterface;
-import java.net.SocketException;
-import java.net.UnknownHostException;
-import java.util.Collections;
-import java.util.Enumeration;
-import java.util.HashSet;
-import java.util.Map;
-import java.util.Set;
-
-import javax.jcr.Node;
-import javax.jcr.RepositoryException;
-
 import org.exoplatform.clouddrive.jcr.NodeFinder;
 import org.exoplatform.container.component.BaseComponentPlugin;
 import org.exoplatform.container.xml.InitParams;
+import org.exoplatform.container.xml.ObjectParameter;
 import org.exoplatform.container.xml.PropertiesParam;
 import org.exoplatform.services.jcr.RepositoryService;
 import org.exoplatform.services.jcr.core.ManageableRepository;
@@ -40,6 +28,20 @@ import org.exoplatform.services.jcr.ext.common.SessionProvider;
 import org.exoplatform.services.log.ExoLogger;
 import org.exoplatform.services.log.Log;
 
+import java.net.InetAddress;
+import java.net.NetworkInterface;
+import java.net.SocketException;
+import java.net.UnknownHostException;
+import java.util.Collections;
+import java.util.Enumeration;
+import java.util.HashSet;
+import java.util.LinkedHashSet;
+import java.util.Map;
+import java.util.Set;
+
+import javax.jcr.Node;
+import javax.jcr.RepositoryException;
+
 /**
  * Base class for {@link CloudDrive} implementations. It's eXo Container plugin to {@link CloudDriveService}.
  * 
@@ -47,6 +49,34 @@ import org.exoplatform.services.log.Log;
  * @version $Id: CloudDriveConnector.java 00000 Sep 13, 2012 pnedonosko $
  */
 public abstract class CloudDriveConnector extends BaseComponentPlugin {
+
+  /**
+   * Predefined cloud provider configuration. Can be used for hosted providers that require point the service
+   * host URL and related settings. Predefined configuration is designed for use in final connector
+   * implementation. The configuration it is a set of objects describing the service, type of an object can be
+   * any and should reflect the final provider needs.
+   */
+  public static class PredefinedServices {
+    Set<Object> services = new LinkedHashSet<Object>();
+
+    /**
+     * Set of predefined services available for the provider.
+     * 
+     * @return the services
+     */
+    public Set<?> getServices() {
+      return services;
+    }
+
+    /**
+     * Initialize set of predefined services available for the provider.
+     * 
+     * @param services the services to set
+     */
+    public void setServices(Set<?> services) {
+      this.services.addAll(services);
+    }
+  }
 
   public static final String             CONFIG_PROVIDER_NAME             = "provider-name";
 
@@ -72,6 +102,8 @@ public abstract class CloudDriveConnector extends BaseComponentPlugin {
    */
   public static final String             CONFIG_LOGIN_SSO                 = "login-sso";
 
+  public static final String             CONFIG_PREDEFINED_SERVICES       = "predefined-services";
+
   // CLDINT-1051 increased from 3 to 5, later decreased to 3 again (due to closed JCR session in case of
   // retry)
   public static final int                PROVIDER_REQUEST_ATTEMPTS        = 3;
@@ -96,6 +128,8 @@ public abstract class CloudDriveConnector extends BaseComponentPlugin {
   protected final String                 connectorSchema;
 
   protected final boolean                loginSSO;
+
+  protected final PredefinedServices     predefinedServices;
 
   protected CloudDriveConnector(RepositoryService jcrService,
                                 SessionProviderService sessionProviders,
@@ -155,21 +189,20 @@ public abstract class CloudDriveConnector extends BaseComponentPlugin {
     String loginSSOStr = config.get(CONFIG_LOGIN_SSO);
     this.loginSSO = loginSSOStr != null ? Boolean.parseBoolean(loginSSOStr.trim()) : false;
 
-    this.provider = createProvider();
+    ObjectParameter objParam = params.getObjectParam(CONFIG_PREDEFINED_SERVICES);
+    if (objParam != null) {
+      Object obj = objParam.getObject();
+      if (obj != null) {
+        this.predefinedServices = (PredefinedServices) obj;
+      } else {
+        LOG.warn("Predefined services configuration found but null object returned.");
+        this.predefinedServices = new PredefinedServices();
+      }
+    } else {
+      this.predefinedServices = new PredefinedServices();
+    }
 
-    // Below examples of plugin can be configured
-    /*
-     * Iterator<ValuesParam> vparams = params.getValuesParamIterator(); while (vparams.hasNext()) {
-     * ValuesParam nodeTypeParam = vparams.next(); nodeTypes.put(nodeTypeParam.getName(),
-     * nodeTypeParam.getValues()); } PropertiesParam param =
-     * params.getPropertiesParam("namespaces"); if (param != null) { namespaces =
-     * param.getProperties(); } if (params != null) { ValueParam valueParam =
-     * params.getValueParam("repository-name"); if (valueParam != null) { repositoryName =
-     * valueParam.getValue(); } valueParam = params.getValueParam("workspaces"); if (valueParam !=
-     * null) { workspaces = valueParam.getValue(); } valueParam =
-     * params.getValueParam("component-class-name"); if (valueParam != null) { listenerClassName =
-     * valueParam.getValue(); } }
-     */
+    this.provider = createProvider();
   }
 
   protected SessionProvider sessionProvider() throws RepositoryException {
@@ -234,7 +267,7 @@ public abstract class CloudDriveConnector extends BaseComponentPlugin {
    * 
    * @return {@link CloudProvider}
    */
-  protected abstract CloudProvider createProvider();
+  protected abstract CloudProvider createProvider() throws ConfigurationException;
 
   /**
    * Authenticate an user by an access code from its cloud provider (OAuth usecase). As result an

@@ -44,6 +44,8 @@ public interface CloudFileAPI {
 
   Collection<String> findParents(Node fileNode) throws DriveRemovedException, RepositoryException;
 
+  boolean isDrive(Node node) throws RepositoryException;
+  
   boolean isFolder(Node node) throws RepositoryException;
 
   boolean isFile(Node node) throws RepositoryException;

@@ -32,6 +32,7 @@ import org.exoplatform.services.log.Log;
 import org.exoplatform.services.security.ConversationState;
 import org.picocontainer.Startable;
 
+import java.util.Collection;
 import java.util.Collections;
 import java.util.HashMap;
 import java.util.HashSet;
@@ -375,6 +376,17 @@ public class CloudDriveServiceImpl implements CloudDriveService, Startable {
     LOG.info("Cloud Drive service successfuly stopped");
   }
 
+  // *********************** implementation level ***************
+  
+  /**
+   * List of available connectors.
+   * 
+   * @return collection of {@link CloudDriveConnector} instances.
+   */
+  public Collection<CloudDriveConnector> getConnectors() {
+    return Collections.unmodifiableCollection(connectors.values());
+  }
+  
   // *********************** internal stuff *********************
 
   protected void registerDrive(CloudUser user, CloudDrive drive, String repoName) {

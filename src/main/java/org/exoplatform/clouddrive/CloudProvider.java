@@ -38,7 +38,7 @@ public abstract class CloudProvider {
   protected final String     name;
 
   protected final int        hashCode;
-  
+
   protected CloudProvider(String id, String name) {
     // intern strings for fast comparison
     this.id = id.intern();
@@ -68,14 +68,14 @@ public abstract class CloudProvider {
   }
 
   /**
-   * CloudProvider name for human-readable uses.
+   * Provider name for human-readable uses.
    * 
    * @return String with the name
    */
   public String getName() {
     return name;
   }
-
+  
   /**
    * {@inheritDoc}
    */
@@ -103,8 +103,6 @@ public abstract class CloudProvider {
   public String toString() {
     return getId() + " " + getName();
   }
-
-  // ********** internals ***********
 
   /**
    * Tells if some operation against the provider service should be retried on failure. <br>
