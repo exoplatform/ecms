@@ -35,15 +35,19 @@
 
                                         var thumbnailViewTitle = UserLanguage.ViewThumbnailLabel;
                                         var listViewTitle = UserLanguage.ViewListLabel;
+                                        var filterLabel = UserLanguage.Filter;
+                                        var uploadLabel = UserLanguage.UploadFile;
 
-                                        <!-- HTML Content of filter section - Common to both Image and non Image contents -->
-                                        strHTML = "<div class=\"finterTitle pull-left\" userLanguage=\"UserLanguage.Filter\"><label for=\"Filter\"> Filter: </label></div>";
-                                        strHTML += "<div class=\"uiSelectbox pull-left\"><select class=\"selectbox\" id=\"Filter\" onchange=\"eXo.ecm.ECS.changeFilter();\">";
-                                        strHTML += "<option value=\"All\" selected=\"selected\" userLanguage=\"UserLanguage.All\">All</option>";
-                                        strHTML += "<option value=\"Web Contents\" userLanguage=\"UserLanguage.WebContents\">Web Contents</option>";
-                                        strHTML += "<option value=\"DMS Documents\" userLanguage=\"UserLanguage.DMSDocuments\">DMS Documents</option>";
-                                        strHTML += "<option value=\"Medias\" userLanguage=\"UserLanguage.Medias\">Medias</option>";
-                                        strHTML += "</select></div><a class=\"actionIcon pull-left\" id=\"UploadItem\" style=\"display:none;\" href=\"javascript:void(0);\" onclick=\"eXo.ecm.UploadForm.showUploadForm();\" > <i class=\"uiIconUpload\"></i>  Upload </a>"; <!--userLanguage=\"UserLanguage.UploadFile\" -->
+                                        <!-- HTML Content of Filter title -->
+                                        filterTitleHTML = "<div class=\"filterTitle pull-left\"><label for=\"Filter\">" + filterLabel + ":</label></div>";
+                                        <!-- HTML Content of Filter select list -->
+                                        filterListHTML = "<div class=\"uiSelectbox pull-left\"><select class=\"selectbox\" id=\"Filter\" onchange=\"eXo.ecm.ECS.changeFilter();\">";
+                                        filterListHTML += "<option value=\"All\" selected=\"selected\" userLanguage=\"UserLanguage.All\">All</option>";
+                                        filterListHTML += "<option value=\"Web Contents\" userLanguage=\"UserLanguage.WebContents\">Web Contents</option>";
+                                        filterListHTML += "<option value=\"DMS Documents\" userLanguage=\"UserLanguage.DMSDocuments\">DMS Documents</option>";
+                                        filterListHTML += "<option value=\"Medias\" userLanguage=\"UserLanguage.Medias\">Medias</option></select></div>";
+                                        <!-- HTML Content of Upload button -->
+                                        uploadButtonHTML = "<a class=\"actionIcon pull-left\" id=\"UploadItem\" style=\"display:none;\" href=\"javascript:void(0);\" onclick=\"eXo.ecm.UploadForm.showUploadForm();\" > <i class=\"uiIconUpload\"></i>" + uploadLabel + "</a>";
 
                                         if(eXo.ecm.ECS.insertContentType=="Image") {
                                             strView = "<div class=\"btn-group pull-right\">";
@@ -51,16 +55,19 @@
                                             strView += "<button id=\"enableListViewBtn\" onclick=\"eXo.ecm.ECS.changeViewType('list');gj('#enableThumbnailViewBtn').attr('class', 'btn');gj(this).attr('class', 'btn active');\" data-placement=\"bottom\" rel=\"tooltip\" class=\"btn\" type=\"button\" title=\"" + listViewTitle + "\"><i class=\"uiIconEcmsViewList\"></i></button>";
                                             strView += "</div>";
 
-                                            <!-- Hide filter section when thumbnail view is chosen -->
-                                            gj("#filterAreaID").css({
-                                                display: "none",
-                                                visibility: "hidden"
-                                            });
+                                            <!-- Only upload button is shown in left action bar section -->
+                                            gj("#filterAreaID").append(uploadButtonHTML);
+
                                         } else {
                                             strView = "<div id=\"view\" class=\"btn-group pull-right ViewType\">";
                                             strView += "<button id=\"enableListViewBtn\" onclick=\"eXo.ecm.ECS.changeViewType('list');gj('#enableThumbnailViewBtn').attr('class', 'btn');gj(this).attr('class', 'btn active');\" data-placement=\"bottom\" rel=\"tooltip\" class=\"btn active\" type=\"button\" title=\"" + listViewTitle + "\"><i class=\"uiIconEcmsViewList\"></i></button>";
                                             strView += "<button id=\"enableThumbnailViewBtn\" onclick=\"eXo.ecm.ECS.changeViewType('thumbnail');gj(this).attr('class', 'btn active'); gj('#enableListViewBtn').attr('class', 'btn');\" data-placement=\"bottom\" rel=\"tooltip\" class=\"btn\" type=\"button\" title=\"" + thumbnailViewTitle + "\"><i class=\"uiIconEcmsViewIcons\"></i></button>";
                                             strView += "</div>";
+
+                                            <!-- Show filer and upload button when file type is not an "Image" -->
+                                            gj("#filterAreaID").html(filterTitleHTML)
+                                                    .append(filterListHTML)
+                                                    .append(uploadButtonHTML);
                                         }
 
                                         if(eXo.ecm.ECS.viewType=="list") {
@@ -73,7 +80,6 @@
                                             strViewPresent = "<div class=\"uiThumbnailsView\" ><div class=\"actionIconsContainer\" id=\"ActionIconsContainer\"><div class=\"noContent\" userLanguage=\"UserLanguage.NoContent\">There is no content</div></div></div>";
                                         }
 
-                                        gj("#filterAreaID").html(strHTML);
                                         gj("#viewTypeAreaID").html(strView);
                                         gj("#viewPresentAreaID").html(strViewPresent);
 
