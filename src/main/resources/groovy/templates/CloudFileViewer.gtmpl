@@ -30,16 +30,16 @@ def currentNode = uiParent.getNode()
 // should be set in CloudFileFilter
 def drive = rcontext.getAttribute(CloudDrive.class)  
 if (drive) {
-    def providerName = drive.user.provider.name
+    def serviceName = drive.user.serviceName
     def openOn = _ctx.appRes("CloudFileViewer.event.OpenOn")
 %>
-<div id="CloudFileViewer" file-open-on="${openOn} ${providerName}" style="position: relative; padding-top: 0; padding-bottom: 100%; height: 100%; overflow: hidden;">
+<div id="CloudFileViewer" file-open-on="${openOn} ${serviceName}" style="position: relative; padding-top: 0; padding-bottom: 100%; height: 100%; overflow: hidden;">
 	<%
     // TODO simple view
   	// def fileName = ContentReader.getXSSCompatibilityContent(currentNode.property("exo:title"))
 	def templateEngine = new SimpleTemplateEngine ()
    	def values = ['fileUrl' : "<a href='#' target='_blank'></a>",
-					'providerName' : providerName]
+					'serviceName' : serviceName]
 	def viewerMessage = templateEngine.createTemplate(_ctx.appRes('CloudFileViewer.event.OpenFileOn')).make(values)
 	%><p style="display: none;">$viewerMessage</p><%
 	

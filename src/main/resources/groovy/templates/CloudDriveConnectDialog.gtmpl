@@ -40,11 +40,14 @@ def workspace = uiExplorer.getCurrentNode().getSession().getWorkspace().getName(
 
 def rcontext = _ctx.getRequestContext()
 
+def formId = rcontext.windowId + "#" + uiform.id
+
 CloudDriveContext.init(rcontext, workspace, nodePath)
 
 def connectYour = _ctx.appRes("UIPopupWindow.title.ConnectYour")
+//def connectLink = uiform.event("Connect");
 %>
-<div class="UIForm $uicomponent.id">
+<div class="UIForm $uicomponent.id" form-id="$formId">
 	<%
 	  uiform.begin()
 	%>
@@ -71,6 +74,13 @@ def connectYour = _ctx.appRes("UIPopupWindow.title.ConnectYour")
 			%>
 		</div>
 	</div>
+	<div class="uiAction uiActionBorder">
+    <% 
+      String cancelLabel = _ctx.appRes(uiform.getName() + ".action.Cancel");
+      String cancelLink = uiform.event("Cancel");
+    %>
+      <button type="button" onclick="$cancelLink" class="btn">$cancelLabel</button>
+  </div>
 	<%
 	  uiform.end()
 	%>
