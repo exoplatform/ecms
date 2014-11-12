@@ -176,21 +176,37 @@ public class DeleteManageComponent extends UIAbstractManagerComponent {
     }
   }
 
-  private void processRemoveOrMoveToTrash(String nodePath,
+  /**
+   * Remove or MoveToTrash
+   *
+   * @param nodePath
+   * @param node
+   * @param event
+   * @param isMultiSelect
+   * @param checkToMoveToTrash
+   * @return
+   *  0: node removed
+   * -1: move to trash failed
+   * trashId: moved to trash successfully
+   * @throws Exception
+   */
+  private String processRemoveOrMoveToTrash(String nodePath,
                                           Node node,
                                           Event<?> event,
                                           boolean isMultiSelect,
                                           boolean checkToMoveToTrash)
                                               throws Exception {
-    if (!checkToMoveToTrash || Utils.isInTrash(node))
+    String trashId="-1";
+    if (!checkToMoveToTrash || Utils.isInTrash(node)) {
       processRemoveNode(nodePath, node, event, isMultiSelect);
-    else {
+      return "0";
+    }else {
       String nodeName = node.getName();
       String nodeUUID = null;
       if (Utils.isReferenceable(node))
         nodeUUID = node.getUUID();
-      boolean moveOK = moveToTrash(nodePath, node, event, isMultiSelect);
-      if (moveOK) {
+      trashId = moveToTrash(nodePath, node, event, isMultiSelect);
+      if (!trashId.equals("-1")) {
         //Broadcast the event when user move node to Trash
         ListenerService listenerService =  WCMCoreUtils.getService(ListenerService.class);
         ActivityCommonService activityService = WCMCoreUtils.getService(ActivityCommonService.class);
@@ -234,11 +250,24 @@ public class DeleteManageComponent extends UIAbstractManagerComponent {
         }
       }
     }
+    return trashId;
   }
 
-  private boolean moveToTrash(String srcPath, Node node, Event<?> event, boolean isMultiSelect) throws Exception {
+  /**
+   * Move Node to Trash
+   * Return -1: move failed
+   * Return trashId: move successfully with trashId
+   * @param srcPath
+   * @param node
+   * @param event
+   * @param isMultiSelect
+   * @return
+   * @throws Exception
+   */
+  private String moveToTrash(String srcPath, Node node, Event<?> event, boolean isMultiSelect) throws Exception {
     TrashService trashService = WCMCoreUtils.getService(TrashService.class);
     boolean ret = true;
+    String trashId="-1";
     final String virtualNodePath = srcPath;
     UIJCRExplorer uiExplorer = getAncestorOfType(UIJCRExplorer.class);
     UIApplication uiApp = uiExplorer.getAncestorOfType(UIApplication.class);
@@ -246,7 +275,7 @@ public class DeleteManageComponent extends UIAbstractManagerComponent {
       uiExplorer.addLockToken(node);
     } catch (Exception e) {
       JCRExceptionManager.process(uiApp, e);
-      return false;
+      return trashId;
     }
 
     try {
@@ -271,7 +300,7 @@ public class DeleteManageComponent extends UIAbstractManagerComponent {
       Node currentNode = uiExplorer.getCurrentNode();
 
       try {
-        trashService.moveToTrash(node, sessionProvider);
+        trashId = trashService.moveToTrash(node, sessionProvider);
       } catch (PathNotFoundException ex) {
         ret = false;
       }
@@ -329,7 +358,7 @@ public class DeleteManageComponent extends UIAbstractManagerComponent {
       else
         uiExplorer.setSelectNode(uiExplorer.getCurrentPath());
     }
-    return ret;
+    return (ret)?trashId:"-1";
   }
 
   private void processRemoveNode(String nodePath, Node node, Event<?> event, boolean isMultiSelect)
@@ -481,6 +510,7 @@ public class DeleteManageComponent extends UIAbstractManagerComponent {
     ResourceBundle res = context.getApplicationResourceBundle();
     String deleteNotice = "";
     String deleteNoticeParam = "";
+    String trashId="";
     if (nodePath.indexOf(";") > -1) {
       processRemoveMultiple(Utils.removeChildNodes(nodePath), event);
       if(checkToMoveToTrash) deleteNotice = "UIWorkingArea.msg.feedback-delete-multi";
@@ -495,7 +525,7 @@ public class DeleteManageComponent extends UIAbstractManagerComponent {
         else deleteNotice = "UIWorkingArea.msg.feedback-delete-permanently";
         deleteNoticeParam = StringEscapeUtils.unescapeHtml(Utils.getTitle(node));
         if (node != null) {
-          processRemoveOrMoveToTrash(node.getPath(), node, event, false, checkToMoveToTrash);
+          trashId = processRemoveOrMoveToTrash(node.getPath(), node, event, false, checkToMoveToTrash);
         }
       } catch (PathNotFoundException path) {
         uiApp.addMessage(new ApplicationMessage("UIPopupMenu.msg.path-not-found-exception", null,
@@ -512,7 +542,7 @@ public class DeleteManageComponent extends UIAbstractManagerComponent {
     deleteNotice = deleteNotice.replace("\"", "'");
     deleteNotice = StringEscapeUtils.escapeHtml(deleteNotice);
     if(checkToMoveToTrash) {
-      String undoLink = getUndoLink(nodePath);
+      String undoLink = getUndoLink(trashId);
       uiWorkingArea.setDeleteNotice(deleteNotice);
       uiWorkingArea.setNodePathDelete(undoLink);
     } else {
@@ -542,7 +572,7 @@ public class DeleteManageComponent extends UIAbstractManagerComponent {
       String[] nodePaths = nodePath.split(";");
       for(int i=0; i<nodePaths.length; i++) {        
         nodePath = nodePaths[i].substring(nodePaths[i].indexOf(":") + 1, nodePaths[i].length());
-        String queryStatement = "SELECT * from exo:restoreLocation WHERE exo:restorePath = '$0'";
+        String queryStatement = "SELECT * from exo:restoreLocation WHERE exo:trashId = '$0'";
         queryStatement = StringUtils.replace(queryStatement, "$0", nodePath);
         Query query = queryManager.createQuery(queryStatement, Query.SQL);
         queryResult = query.execute();
@@ -555,7 +585,7 @@ public class DeleteManageComponent extends UIAbstractManagerComponent {
       if(undoLink.length() > 0) undoLink = undoLink.substring(0,undoLink.length()-1);
     } else {
       nodePath = nodePath.substring(nodePath.indexOf(":") + 1, nodePath.length());
-      String queryStatement = "SELECT * from exo:restoreLocation WHERE exo:restorePath = '$0'";
+      String queryStatement = "SELECT * from exo:restoreLocation WHERE exo:trashId = '$0'";
       queryStatement = StringUtils.replace(queryStatement, "$0", nodePath);
       Query query = queryManager.createQuery(queryStatement, Query.SQL);
       queryResult = query.execute();
