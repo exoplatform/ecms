@@ -114,6 +114,12 @@ public class DriverConnector extends BaseConnector implements ResourceContainer 
   public static final String[] IMAGE_MIMETYPE = new String[]{"image"};
 
   public static final String TYPE_FOLDER = "folder";
+
+  public static final String TYPE_EDITOR = "editor";
+
+  public static final String TYPE_CONTENT = "multi";
+
+  public static final String ILLUSTRATED_WEBCONTENT = "exo:pictureOnHeadWebcontent";
   /** The log. */
   private static final Log LOG = ExoLogger.getLogger(DriverConnector.class.getName());
 
@@ -659,7 +665,7 @@ public class DriverConnector extends BaseConnector implements ResourceContainer 
 
         checkNode = sourceNode != null ? sourceNode : child;
 
-        if (isFolder(checkNode)) {
+        if (isFolder(checkNode, type)) {
           // Get node name from node path to fix same name problem (ECMS-3586)
           String nodePath = child.getPath();
           Element folder = createFolderElement(document, checkNode, checkNode.getPrimaryNodeType().getName(),
@@ -668,7 +674,7 @@ public class DriverConnector extends BaseConnector implements ResourceContainer 
         }
 
       if (FILE_TYPE_ALL.equals(filterBy)
-          && (checkNode.isNodeType(NodetypeConstant.EXO_WEBCONTENT) || !isFolder(checkNode))) {
+          && (checkNode.isNodeType(NodetypeConstant.EXO_WEBCONTENT) || !isFolder(checkNode, type))) {
         fileType = FILE_TYPE_ALL;
       }
 
@@ -709,9 +715,9 @@ public class DriverConnector extends BaseConnector implements ResourceContainer 
    *
    * @throws RepositoryException the repository exception
    */
-  private boolean isFolder(Node checkNode) throws RepositoryException {
+  private boolean isFolder(Node checkNode, String type) throws RepositoryException {
     try {
-      if (isDocument(checkNode)) return false;
+      if (isDocument(checkNode, type)) return false;
     } catch (Exception e) {
       if (LOG.isWarnEnabled()) {
         LOG.warn(e.getMessage());
@@ -767,10 +773,13 @@ public class DriverConnector extends BaseConnector implements ResourceContainer 
    * @return true: is document, false: not document
    * @throws RepositoryException
    */
-  private boolean isDocument(Node node) throws RepositoryException {
+  private boolean isDocument(Node node, String type) throws RepositoryException {
     TemplateService templateService = WCMCoreUtils.getService(TemplateService.class);
     List<String> documentTypeList = templateService.getDocumentTemplates();
-    documentTypeList.remove(NodetypeConstant.EXO_WEBCONTENT);
+    if (TYPE_EDITOR.equals(type)) {
+      documentTypeList.remove(NodetypeConstant.EXO_WEBCONTENT);
+      documentTypeList.remove(ILLUSTRATED_WEBCONTENT);
+    }
     for (String documentType : documentTypeList) {
       if (node.getPrimaryNodeType().isNodeType(documentType)) {
         return true;
@@ -941,9 +950,9 @@ public class DriverConnector extends BaseConnector implements ResourceContainer 
       folder.setAttribute("url", FCKUtils.createWebdavURL(child));
       folder.setAttribute("folderType", folderType);
 
-      if(TYPE_FOLDER.equals(type)) {
-        boolean hasFolderChild = (getChildOfType(child, NodetypeConstant.NT_UNSTRUCTURED) != null)
-                || (getChildOfType(child, NodetypeConstant.NT_FOLDER) != null);
+      if(TYPE_FOLDER.equals(type) || TYPE_CONTENT.equals(type)) {
+        boolean hasFolderChild = (getChildOfType(child, NodetypeConstant.NT_UNSTRUCTURED, type) != null)
+                || (getChildOfType(child, NodetypeConstant.NT_FOLDER, type) != null);
         folder.setAttribute("hasFolderChild", String.valueOf(hasFolderChild));
       }else{
         folder.setAttribute("hasFolderChild", String.valueOf(this.hasFolderChild(child)));
@@ -963,7 +972,7 @@ public class DriverConnector extends BaseConnector implements ResourceContainer 
    * @return
    * @throws Exception
    */
-  private Node getChildOfType(Node node, String childType) throws Exception {
+  private Node getChildOfType(Node node, String childType, String type) throws Exception {
     TemplateService templateService = WCMCoreUtils.getService(TemplateService.class);
     if (node == null) {
       return null;
@@ -971,7 +980,7 @@ public class DriverConnector extends BaseConnector implements ResourceContainer 
     NodeIterator iter = node.getNodes();
     while (iter.hasNext()) {
       Node child = iter.nextNode();
-      if (!isDocument(child) && child.isNodeType(childType)
+      if (!isDocument(child, type) && child.isNodeType(childType)
               && !templateService.isManagedNodeType(child.getPrimaryNodeType().getName())
               && !"exo:thumbnails".equals(child.getPrimaryNodeType().getName()))
       {
