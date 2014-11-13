@@ -108,8 +108,14 @@ public void writeNodes(level, i, data, uiWorkingArea, linkManager, restContextNa
   def versionNum  = uicomponent.getVersionNumber(data);
   def author = uicomponent.getAuthorName(data);
   def fileSize = uicomponent.getFileSize(data);
-  
-  String actionLink = uiDocumentInfo.event("ChangeNode",Utils.formatNodeName(data.path), new Parameter("workspaceName", preferenceWS)) ;
+
+	def _realPath = Utils.formatNodeName(data.getPath());
+
+	if(data.getRealNode() != null ){
+		_realPath = Utils.formatNodeName(data.getRealNode().getPath());
+	}
+	Parameter[] _params = [new Parameter("workspaceName", preferenceWS), new Parameter("findDrive", "true")];
+	String actionLink = uiDocumentInfo.event("ChangeNode", _realPath, _params) ;
 
   //Begin permlink
   def permLinkComponent =  uiWorkingArea.getPermlink(data);

@@ -1191,7 +1191,7 @@ public class UIDocumentInfo extends UIBaseNodePresentation {
       UITreeExplorer uiTreeExplorer = uiExplorer.findFirstComponentOfType(UITreeExplorer.class);
       String uri = event.getRequestContext().getRequestParameter(OBJECTID);
       String workspaceName = event.getRequestContext().getRequestParameter("workspaceName");
-      boolean findDrive = Boolean.getBoolean(event.getRequestContext().getRequestParameter("findDrive"));
+      boolean findDrive = Boolean.parseBoolean(event.getRequestContext().getRequestParameter("findDrive"));
       UIApplication uiApp = uicomp.getAncestorOfType(UIApplication.class);
       try {
         // Manage ../ and ./
