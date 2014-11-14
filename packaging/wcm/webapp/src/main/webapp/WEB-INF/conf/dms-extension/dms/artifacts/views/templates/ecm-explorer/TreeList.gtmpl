@@ -127,7 +127,7 @@
               %>
             <!--===============DropDownBox===================-->
               <div class="btn-group pull-right">
-                <button data-toggle="dropdown" class="btn dropdown-toggle">
+                <button data-toggle="dropdown" class="btn btn-small dropdown-toggle">
                   <% def sortTypeName = "name";
                      if ("Date".equals(selectedSortType)) sortTypeName = "date";
                      if ("Size".equals(selectedSortType)) sortTypeName = "size";
