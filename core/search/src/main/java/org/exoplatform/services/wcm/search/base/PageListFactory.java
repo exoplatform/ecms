@@ -35,7 +35,9 @@ import org.exoplatform.services.jcr.ext.common.SessionProvider;
 import org.exoplatform.services.jcr.impl.core.query.QueryImpl;
 import org.exoplatform.services.log.ExoLogger;
 import org.exoplatform.services.log.Log;
+import org.exoplatform.services.security.ConversationState;
 import org.exoplatform.services.wcm.search.QueryCriteria;
+import org.exoplatform.services.wcm.search.SiteSearchService;
 import org.exoplatform.services.wcm.utils.WCMCoreUtils;
 
 /**
@@ -70,16 +72,22 @@ public class PageListFactory {
     Session session = sessionProvider.getSession(workspace, WCMCoreUtils.getRepository());
     QueryManager queryManager = session.getWorkspace().getQueryManager();
     Query query = queryManager.createQuery(queryStatement, language);
+    int offset = 0;
     if (criteria != null) {
       if (criteria.getOffset() > 0) { ((QueryImpl)query).setOffset(criteria.getOffset()); }
-    }
+      else if (criteria.getOffset() == 0) {
+        SiteSearchService searchService = WCMCoreUtils.getService(SiteSearchService.class);
+        searchService.clearCache(ConversationState.getCurrent().getIdentity().getUserId(), queryStatement);
+      }
+      offset = (int)criteria.getOffset();
+    } 
     ((QueryImpl)query).setLimit(AbstractPageList.RESULT_SIZE_SEPARATOR + 1);
     QueryResult result = query.execute();
     int totalNodes = (int)result.getNodes().getSize();
+    QueryData queryData = new QueryData(queryStatement, workspace, language, isSystemSession, offset);
     if (totalNodes <= AbstractPageList.RESULT_SIZE_SEPARATOR) {
-      return new ArrayNodePageList<E>(result, pageSize, filter, dataCreator);
+      return new ArrayNodePageList<E>(result, pageSize, filter, dataCreator, queryData);
     } else {
-      QueryData queryData = new QueryData(queryStatement, workspace, language, isSystemSession);
       QueryResultPageList<E> ret = new QueryResultPageList<E>(pageSize, queryData, totalNodes, bufferSize, filter, dataCreator);
       return ret;        
     }

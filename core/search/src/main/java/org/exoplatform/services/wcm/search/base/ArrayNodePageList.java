@@ -20,6 +20,7 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.HashSet;
 import java.util.List;
+import java.util.Map;
 import java.util.Set;
 
 import javax.jcr.Node;
@@ -31,6 +32,9 @@ import javax.jcr.query.RowIterator;
 
 import org.exoplatform.services.log.ExoLogger;
 import org.exoplatform.services.log.Log;
+import org.exoplatform.services.security.ConversationState;
+import org.exoplatform.services.wcm.search.SiteSearchService;
+import org.exoplatform.services.wcm.utils.WCMCoreUtils;
 
 /**
  * Created by The eXo Platform SAS
@@ -91,23 +95,37 @@ public class ArrayNodePageList<E> extends AbstractPageList<E> {
   
   /** Constructor */
   public ArrayNodePageList(QueryResult queryResult, int pageSize, 
-                           NodeSearchFilter filter, SearchDataCreator<E> dataCreator) {
+                           NodeSearchFilter filter, SearchDataCreator<E> dataCreator, QueryData queryData) {
     super(pageSize, filter, dataCreator);
     dataList = new ArrayList<E>();
+    SiteSearchService siteSearchService = WCMCoreUtils.getService(SiteSearchService.class);
+    Map found = siteSearchService.getFoundNodes(ConversationState.getCurrent().getIdentity().getUserId(),
+                                                                queryData.getQueryStatement());
+    int offset = (int)queryData.getOffset();
+    int position = offset;
+    int page = (position)/getPageSize() + 1;    
     try {
       setTotalNodes(queryResult.getNodes().getSize());
       NodeIterator nodeIterator = queryResult.getNodes();
       RowIterator rowIterator = queryResult.getRows();
       while (nodeIterator.hasNext()) {
         Node node = nodeIterator.nextNode();
+//        if (page != prevPage) {
+//          prevPage = page;
+//        }
         if (filter != null) {
           node = filter.filterNodeToDisplay(node);
         }
         Row row = rowIterator.nextRow();
         if (searchDataCreator != null && node != null) { 
           E data = searchDataCreator.createData(node, row);
-          if (data != null) {
+          if (data != null && (found == null || !found.containsKey(data) || ((Integer)found.get(data)) >= page)) {
+            position++;
+            page = (position-1)/getPageSize() + 1;
             dataList.add(data);
+            found.put(data, page);
+            // increase page number for the last item
+            if (position % getPageSize() == 0) { page++; }
           }
         }
       }
@@ -175,5 +193,10 @@ public class ArrayNodePageList<E> extends AbstractPageList<E> {
       }
     }
     return ret;
+  }
+
+  @Override
+  public List<E> getPageWithOffsetCare(int page) throws Exception {
+    return getPage(page);
   }
 }
