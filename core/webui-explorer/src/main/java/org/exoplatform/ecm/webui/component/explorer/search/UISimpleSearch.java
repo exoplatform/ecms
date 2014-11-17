@@ -318,7 +318,7 @@ public class UISimpleSearch extends UIForm {
       UIECMSearch uiECMSearch = uiSimpleSearch.getAncestorOfType(UIECMSearch.class);
       UISearchResult uiSearchResult = uiECMSearch.getChild(UISearchResult.class);
       UIApplication uiApp = uiSimpleSearch.getAncestorOfType(UIApplication.class);
-      if(text == null && uiSimpleSearch.constraints_.size() == 0) {
+      if(text == null || uiSimpleSearch.constraints_.size() == 0) {
         uiApp.addMessage(new ApplicationMessage("UISimpleSearch.msg.value-null", null, ApplicationMessage.WARNING));
         event.getRequestContext().addUIComponentToUpdateByAjax(uiSimpleSearch);
         return;
