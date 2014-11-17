@@ -31,35 +31,44 @@
 									if (CKEDITOR.tools.indexOf(pluginLang, langCode) >= 0)
 									  eXp.userLanguage = langCode;
 
-									if(eXo.ecm.ECS.insertContentType=="Image") {
-										strHTML = "<input type=\"hidden\" name=\"Filter\" id=\"Filter\" value=\"Image\">";
-									} else {
-										strHTML = "<div class=\"finterTitle pull-left\" userLanguage=\"UserLanguage.Filter\"><label for=\"Filter\"> Filter: </label></div>";
-										strHTML += "<div class=\"uiSelectbox pull-left\"><select class=\"selectbox\" id=\"Filter\" onchange=\"eXo.ecm.ECS.changeFilter();\">";
-										strHTML += "<option value=\"All\" selected=\"selected\" userLanguage=\"UserLanguage.All\">All</option>";
-										strHTML += "<option value=\"Web Contents\" userLanguage=\"UserLanguage.WebContents\">Web Contents</option>";
-										strHTML += "<option value=\"DMS Documents\" userLanguage=\"UserLanguage.DMSDocuments\">DMS Documents</option>";
-										strHTML += "<option value=\"Medias\" userLanguage=\"UserLanguage.Medias\">Medias</option>";
-										strHTML += "</select></div><a class=\"actionIcon pull-left\" id=\"UploadItem\" style=\"display:none;\" href=\"javascript:void(0);\" onclick=\"eXo.ecm.UploadForm.showUploadForm();\" > <i class=\"uiIconUpload\"></i>  Upload </a>"; <!--userLanguage=\"UserLanguage.UploadFile\" -->
-										strHTML += "<div class=\"btn-group pull-right\"><button id=\"enableThumbnailViewBtn\" onclick=\"eXo.ecm.ECS.changeViewType('thumbnail');gj(this).attr('class', 'btn active'); gj('#enableListViewBtn').attr('class', 'btn');\" data-placement=\"bottom\" rel=\"tooltip\" class=\"btn\" type=\"button\" title=\"Thumbnail View\"><i class=\"uiIconEcmsViewIcons\"></i></button><button id=\"enableListViewBtn\" onclick=\"eXo.ecm.ECS.changeViewType('list');gj('#enableThumbnailViewBtn').attr('class', 'btn');gj(this).attr('class', 'btn active');\" data-placement=\"bottom\" rel=\"tooltip\" class=\"btn active\" type=\"button\" title=\"List View\"><i class=\"uiIconEcmsViewList\"></i></button></div>";
-									}
-									gj("#filterAreaID").html(strHTML);
+                                    require(["lang/" + eXp.userLanguage + ".js"], function() {
 
-									if(eXo.ecm.ECS.viewType=="list") {
-										strView = "<div id=\"view\" class=\"ViewType\"><input type=\"hidden\" id=\"viewTypeID\" value=\"list\"><div style=\"clear:both\"></div></div>";
-										strViewPresent = "<div class=\"listView\"><table class=\"uiGrid table table-hover table-striped\" id=\"ListRecords\">";
-										strViewPresent += "<thead><tr><th userLanguage=\"UserLanguage.FileName\"> Name </th>";
-										strViewPresent += "<th class=\"span2\" userLanguage=\"UserLanguage.CreateDate\"> Date </th>";
-										strViewPresent += "<th class=\"span1\" userLanguage=\"UserLanguage.FileSize\"> Size </th></tr></thead>";
-										strViewPresent += "<tr><td class=\"center empty\" colspan=\"3\" userLanguage=\"UserLanguage.NoContent\">There is no content</td></tr></table></div>";
-									} else {
-										strView = "<div id=\"view\" class=\"viewType\"><a class=\"thumbnail-view-selected\" title=\"Thumbnail View\"><span></span></a><a onClick=\"eXo.ecm.ECS.changeViewType('list');\" class=\"list-view\" title=\"List View\"><span></span></a><input type=\"hidden\" id=\"viewTypeID\" value=\"thumbnail\"><div style=\"clear:both\"></div></div>";
-										strViewPresent = "<div class=\"uiThumbnailsView\" ><div class=\"actionIconsContainer\" id=\"ActionIconsContainer\"><div class=\"noContent\" userLanguage=\"UserLanguage.NoContent\">There is no content</div></div></div>";
-									}
-									gj("#viewTypeAreaID").html(strView);
-									gj("#viewPresentAreaID").html(strViewPresent);
+                                        var filterLabel = UserLanguage.Filter;
+                                        var uploadLabel = UserLanguage.UploadFile;
 
-									require(["lang/" + eXp.userLanguage + ".js"], function() {
+                                        <!-- HTML Content of Upload button -->
+                                        uploadButtonHTML = "<a class=\"actionIcon pull-left\" id=\"UploadItem\" style=\"display:none;\" href=\"javascript:void(0);\" onclick=\"eXo.ecm.UploadForm.showUploadForm();\" > <i class=\"uiIconUpload\"></i>" + uploadLabel + "</a>";
+
+                                        if(eXo.ecm.ECS.insertContentType=="Image") {
+                                            <!-- Only upload button is shown in left action bar section -->
+                                            gj("#filterAreaID").append(uploadButtonHTML);
+                                        } else {
+                                            strHTML = "<div class=\"filterTitle pull-left\"><label for=\"Filter\">" + filterLabel + ":</label></div>";
+                                            strHTML += "<div class=\"uiSelectbox pull-left\"><select class=\"selectbox\" id=\"Filter\" onchange=\"eXo.ecm.ECS.changeFilter();\">";
+                                            strHTML += "<option value=\"All\" selected=\"selected\" userLanguage=\"UserLanguage.All\">All</option>";
+                                            strHTML += "<option value=\"Web Contents\" userLanguage=\"UserLanguage.WebContents\">Web Contents</option>";
+                                            strHTML += "<option value=\"DMS Documents\" userLanguage=\"UserLanguage.DMSDocuments\">DMS Documents</option>";
+                                            strHTML += "<option value=\"Medias\" userLanguage=\"UserLanguage.Medias\">Medias</option>";
+                                            strHTML += "</select></div><a class=\"actionIcon pull-left\" id=\"UploadItem\" style=\"display:none;\" href=\"javascript:void(0);\" onclick=\"eXo.ecm.UploadForm.showUploadForm();\" > <i class=\"uiIconUpload\"></i>" + uploadLabel + "</a>"; <!--userLanguage=\"UserLanguage.UploadFile\" -->
+                                            strHTML += "<div class=\"btn-group pull-right\"><button id=\"enableThumbnailViewBtn\" onclick=\"eXo.ecm.ECS.changeViewType('thumbnail');gj(this).attr('class', 'btn active'); gj('#enableListViewBtn').attr('class', 'btn');\" data-placement=\"bottom\" rel=\"tooltip\" class=\"btn\" type=\"button\" title=\"Thumbnail View\"><i class=\"uiIconEcmsViewIcons\"></i></button><button id=\"enableListViewBtn\" onclick=\"eXo.ecm.ECS.changeViewType('list');gj('#enableThumbnailViewBtn').attr('class', 'btn');gj(this).attr('class', 'btn active');\" data-placement=\"bottom\" rel=\"tooltip\" class=\"btn active\" type=\"button\" title=\"List View\"><i class=\"uiIconEcmsViewList\"></i></button></div>";
+                                            <!-- Show filter and upload button when file type is not an "Image" -->
+                                            gj("#filterAreaID").html(strHTML);
+                                        }
+
+                                        if(eXo.ecm.ECS.viewType=="list") {
+                                            strView = "<div id=\"view\" class=\"ViewType\"><input type=\"hidden\" id=\"viewTypeID\" value=\"list\"><div style=\"clear:both\"></div></div>";
+                                            strViewPresent = "<div class=\"listView\"><table class=\"uiGrid table table-hover table-striped\" id=\"ListRecords\">";
+                                            strViewPresent += "<thead><tr><th userLanguage=\"UserLanguage.FileName\"> Name </th>";
+                                            strViewPresent += "<th class=\"span2\" userLanguage=\"UserLanguage.CreateDate\"> Date </th>";
+                                            strViewPresent += "<th class=\"span1\" userLanguage=\"UserLanguage.FileSize\"> Size </th></tr></thead>";
+                                            strViewPresent += "<tr><td class=\"center empty\" colspan=\"3\" userLanguage=\"UserLanguage.NoContent\">There is no content</td></tr></table></div>";
+                                        } else {
+                                            strView = "<div id=\"view\" class=\"viewType\"><a class=\"thumbnail-view-selected\" title=\"Thumbnail View\"><span></span></a><a onClick=\"eXo.ecm.ECS.changeViewType('list');\" class=\"list-view\" title=\"List View\"><span></span></a><input type=\"hidden\" id=\"viewTypeID\" value=\"thumbnail\"><div style=\"clear:both\"></div></div>";
+                                            strViewPresent = "<div class=\"uiThumbnailsView\" ><div class=\"actionIconsContainer\" id=\"ActionIconsContainer\"><div class=\"noContent\" userLanguage=\"UserLanguage.NoContent\">There is no content</div></div></div>";
+                                        }
+                                        gj("#viewTypeAreaID").html(strView);
+                                        gj("#viewPresentAreaID").html(strViewPresent);
+
 										eXo.ecm.ECS.initRequestXmlTree('editor');
 										eXo.ecm.ECS.languageInit();
 									});
@@ -101,8 +110,9 @@
 						<div class="pageIterator" id="pageNavPosition"></div>
 					</div>
 				</div>
-		</div>
-	</div>
+		    </div>
+	    </div>
+    </div>
 
 <!-- =================================BEGIN UPLOAD ====================================== -->
 <div id="hideContainer" class="HideContainer" style="display: none;">
