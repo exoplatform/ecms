@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<bundle>
+  <PublicationService>
+    <AuthoringPublicationPlugin>
+      <changeState>
+        <obsoleted>Conţinutul este învechit</obsoleted>
+        <published>Conţinutul este publicat</published>
+<unpublished>Conţinutul este nepublicat</unpublished>
+<archived>Conţinutul este arhivat</archived>
+<staged>Conţinutul este gata de publicare</staged>
+<approved>Conţinutul este aprobat</approved>
+<pending>Conţinutul este în așteptare</pending>
+<draft>Conţinutul este ciornă</draft>
+      </changeState>
+    </AuthoringPublicationPlugin>
+  </PublicationService>
+  <Publication>
+    <log>
+      <description>
+        <enrolled>Conţinutul se înscrie în ciclul publicare</enrolled>
+      </description>
+    </log>
+  </Publication>
+</bundle>

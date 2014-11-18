@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<bundle>
+  <PublicationService>
+    <AuthoringPublicationPlugin>
+      <changeState>
+        <obsoleted>هذا المحتوى قد عفا عليه الزمن (مُهمَل)</obsoleted>
+        <published>لقد تمّت عمليّة نشر المُحتوى</published>
+<unpublished>لم تتمّ بعدُ عمليّة نشر المحتوى</unpublished>
+<archived>تمّت أرشفة المُحتوى</archived>
+<staged>المحتوى جاهز للنشر</staged>
+<approved>لقد تمّت المصادقة على المُحتوى</approved>
+<pending>المحتوى قيد النّظر</pending>
+<draft>المحتوى في شكل مُسوّدة</draft>
+      </changeState>
+    </AuthoringPublicationPlugin>
+  </PublicationService>
+  <Publication>
+    <log>
+      <description>
+        <enrolled>تمّ ادراج المحتوى ضمن دورة النّشر</enrolled>
+      </description>
+    </log>
+  </Publication>
+</bundle>

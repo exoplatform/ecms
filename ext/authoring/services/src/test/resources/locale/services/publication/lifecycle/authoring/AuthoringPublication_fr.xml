@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<bundle>
+  <PublicationService>
+    <AuthoringPublicationPlugin>
+      <changeState>
+        <obsoleted>Le contenu est obsolète</obsoleted>
+        <published>Le contenu est publié</published>
+				<unpublished>Le contenu est non publié</unpublished>
+				<archived>Le contenu est archivé</archived>
+				<staged>Le contenu est prêt à publier</staged>
+				<approved>Le contenu est validé</approved>
+				<pending>Le contenu est en attente de validation</pending>
+				<draft>Le contenu est brouillon</draft>
+      </changeState>
+    </AuthoringPublicationPlugin>
+  </PublicationService>
+  <Publication>
+    <log>
+      <description>
+        <enrolled>Le contenu a été inscrit dans un cycle de publication</enrolled>
+      </description>
+    </log>
+  </Publication>
+</bundle>
