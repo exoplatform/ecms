@@ -11,6 +11,6 @@ import org.exoplatform.ecms.test.BaseECMSTestCase;
 	  @ConfigurationUnit(scope = ContainerScope.PORTAL, path = "conf/standalone/ecms-test-configuration.xml"),
 	  @ConfigurationUnit(scope = ContainerScope.PORTAL, path = "conf/wcm/test-publication-configuration.xml")
 	  })
-public class BasePublicationTestCase extends BaseECMSTestCase {
+public abstract class BasePublicationTestCase extends BaseECMSTestCase {
 
 }

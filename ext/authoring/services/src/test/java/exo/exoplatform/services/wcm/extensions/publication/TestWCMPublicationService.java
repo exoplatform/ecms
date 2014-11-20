@@ -131,22 +131,6 @@ public class TestWCMPublicationService extends BasePublicationTestCase {
   }
 
   /**
-   * tests add publication plugin: 
-   * add 1 publication plugins and check if the total plugins number is 1
-   */
-  public void testAddPublicationPlugin() throws Exception {
-    assertEquals(1, publicationService_.getWebpagePublicationPlugins().size());
-  }
-  
-  /**
-   * tests get publication plugin: 
-   * add 3 publication plugins, get the total plugins and check if the number is 3 
-   */
-  public void testGetWebpagePublicationPlugins() throws Exception {
-    assertEquals(1, publicationService_.getWebpagePublicationPlugins().size());
-  }
-  
-  /**
    * tests enrolling node in life cycle 1
    */
   public void testEnrollNodeInLifecycle1() throws Exception {
