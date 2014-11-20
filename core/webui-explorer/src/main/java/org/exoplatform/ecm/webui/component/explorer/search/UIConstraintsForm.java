@@ -143,6 +143,7 @@ public class UIConstraintsForm extends UIFormInputSetWithAction implements UISel
 
   private String getDateTimeQueryString(String beforeDate, String afterDate, String type) {
     Calendar bfDate = getUIFormDateTimeInput(START_TIME).getCalendar() ;
+    if(bfDate==null) return "";
     if (afterDate != null && afterDate.trim().length() > 0) {
       Calendar afDate = getUIFormDateTimeInput(END_TIME).getCalendar();
       if (type.equals(CREATED_DATE)) {
@@ -170,6 +171,7 @@ public class UIConstraintsForm extends UIFormInputSetWithAction implements UISel
 
   private String getDateTimeSQLQueryString(String beforeDate, String afterDate, String type) {
     Calendar bfDate = getUIFormDateTimeInput(START_TIME).getCalendar();
+    if(bfDate==null) return "";
     if (afterDate != null && afterDate.trim().length() > 0) {
       Calendar afDate = getUIFormDateTimeInput(END_TIME).getCalendar();
       if (type.equals(CREATED_DATE)) {
