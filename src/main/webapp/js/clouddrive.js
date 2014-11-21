@@ -450,6 +450,35 @@
 			return excluded[path] === true;
 		};
 
+		var loadClientModule = function(provider) {
+			var loader = $.Deferred();
+			// try load provider client
+			var moduleId = "SHARED/cloudDrive." + provider.id;
+			if (window.require.s.contexts._.config.paths[moduleId]) {
+				try {
+					// load client module and work with it asynchronously
+					window.require([moduleId], function(client) {
+						// init client module if it requires that (has a method onLoad())
+						if (client && client.onLoad && client.hasOwnProperty("onLoad")) {
+							client.onLoad(provider);
+						}
+						loader.resolve(client); 
+					}, function(err) {
+						utils.log("ERROR: Cannot load client module for Cloud Drive provider " + provider.name + "(" + provider.id + "). " 
+								+ err.message + ": " + JSON.stringify(err));
+						loader.reject(); 
+					});
+				} catch(e) {
+					// cannot load the module - default behaviour
+					utils.log("ERROR: " + e, e);
+					loader.reject(); 
+				}
+			} else {
+				loader.reject(); 
+			}
+			return loader.promise();
+		};
+
 		var stopAutoSynchronize = function() {
 			for (job in autoSyncs) {
 				if (autoSyncs.hasOwnProperty(job)) {
@@ -474,7 +503,7 @@
 					
 					var syncFunc;
 					var syncTimeout;
-					// sync scheduller
+					// sync scheduler
 					function scheduleSync() {
 						autoSyncs[syncName] = setTimeout(function() {
 							var syncProcess = syncFunc();
@@ -514,56 +543,48 @@
 						}, syncPeriod);
 					};
 					
-					// try load provider client
-					var moduleId = "SHARED/cloudDrive." + drive.provider.id;
-					var hasClient = window.require.s.contexts._.config.paths[moduleId]; 
-					if (hasClient) {
-						try {
-							// load client module and work with it asynchronously
-							window.require([moduleId], function(client) {
-								if (client && client.onChange && client.hasOwnProperty("onChange")) {
-									// apply custom client algorithm
-									syncTimeout = 5000; // sync in 5sec
-									syncFunc = function() { 
-										// We chain actual sync to the sync initiator from client.
-										// The initiator should return jQuery Promise: it will be resolved if changes appear and rejected on error. 
-										// We use jQuery.when() to deal if not Promise returned (it's bad case - sync will run each 5sec forever).
-										var process = $.Deferred(); 
-										var initiator = client.onChange(drive);
-										$.when(initiator).done(function() {
-											var sync = doSync(); // it's time to sync
-											sync.done(function() {
-												process.resolve();	
-											});
-											sync.fail(function(e) {
-												process.reject(e);	
-											});
+					// try use loaded provider client (see initProvider())
+					var provider = connectProvider[drive.provider.id];
+					if (provider) {
+						provider.clientModule.done(function(client) {
+							if (client && client.onChange && client.hasOwnProperty("onChange")) {
+								// apply custom client algorithm
+								syncTimeout = 5000; // sync in 5sec
+								syncFunc = function() { 
+									// We chain actual sync to the sync initiator from client.
+									// The initiator should return jQuery Promise: it will be resolved if changes appear and rejected on error. 
+									// We use jQuery.when() to deal if not Promise returned (it's bad case - sync will run each 5sec forever).
+									var process = $.Deferred(); 
+									var initiator = client.onChange(drive);
+									$.when(initiator).done(function() {
+										var sync = doSync(); // it's time to sync
+										sync.done(function() {
+											process.resolve();	
 										});
-										$.when(initiator).fail(function(e) {
-											process.reject(e);
+										sync.fail(function(e) {
+											process.reject(e);	
 										});
-										return process.promise();
-									};
-									scheduleSync();
-									utils.log("Client synchronization enabled for Cloud Drive on " + syncName);
-								} else {
-									// client doesn't provide onChange() method - apply default algorithm (in this async callback)
-									defaultSync();
-								}
-							}, function(err) {
-								utils.log("ERROR: Cannot load client synchronization module for Cloud Drive on " + syncName + ". " + JSON.stringify(err));
-							});
-						} catch(e) {
-							// cannot load the module - default behaviour
-							utils.log("ERROR: " + e, e);
-							hasClient = false;
-						}
-					} 
-					
-					if (!hasClient) {
-						// module not available - run default periodic auto-sync
+									});
+									$.when(initiator).fail(function(e) {
+										process.reject(e);
+									});
+									return process.promise();
+								};
+								scheduleSync();
+								utils.log("Client synchronization enabled for Cloud Drive on " + syncName);
+							} else {
+								// client doesn't provide onChange() method - apply default algorithm (in this async callback)
+								defaultSync();
+							}
+						});
+						provider.clientModule.fail(function() {
+							// module not available - run default periodic auto-sync
+							defaultSync();
+						});
+					} else {
+						utils.log("WARN: provider not initialized " + drive.provider.id + " - run default periodic auto-sync");
 						defaultSync();
-					} 
+					}
 				}
 			}
 		};
@@ -760,6 +781,9 @@
 					utils.log("Error loading provider (" + id + ") style.", e);
 				}
 			}
+			
+			// load client module
+			provider.clientModule = loadClientModule(provider);
 		};
 
 		/**
@@ -1130,10 +1154,10 @@
 				// add sync call to Refresh action
 				// TODO call actualRefreshSession after sync done as a callback
 				$("a.refreshIcon").click(function() {
-					var refreshChanges = $("span.uiCloudDriveChanges");
-					if (refreshChanges.size() > 0) {
+					var $refreshChanges = $("span.uiCloudDriveChanges");
+					if ($refreshChanges.size() > 0) {
 						var currentDate = new Date();
-						var syncDate = $(refreshChanges).data("timestamp");
+						var syncDate = $refreshChanges.data("timestamp");
 						if (syncDate && (currentDate.getMilliseconds() - syncDate.getMilliseconds() <= 60000)) {
 							return true; // don't invoke sync if it was less a min ago
 						}
@@ -1142,54 +1166,51 @@
 				});
 
 				// File Viewer
-				var viewer = $("#CloudFileViewer");
-				if (viewer.size() > 0) {
+				var $viewer = $("#CloudFileViewer");
+				if ($viewer.size() > 0) {
 					var file = cloudDrive.getContextFile();
-					var vswitch = $("#ViewerSwitch");
-					if (vswitch.size() > 0) {
-						var openOnProvider = viewer.attr("file-open-on");
+					var $vswitch = $("#ViewerSwitch");
+					var openOnProvider = $viewer.attr("file-open-on");
 
-						// fix title
-						var title = $("div.fileContent .title");
-						var titleText = title.find("div.topTitle");
-						titleText.text(file.title);
+					// fix title
+					var $title = $("div.fileContent .title");
+					var $titleText = $title.find("div.topTitle");
+					$titleText.text(file.title);
 
-						// fix Download icon, text and link
-						var i = title.find("i.uiIconDownload");
-						i.attr("class", "uiIcon16x16CloudFile-" + drive.provider.id);
-						var a = title.find("a");
-						a.text(" " + openOnProvider);
-						a.prepend(i);
-						a.attr("href", file.link);
-						a.attr("target", "_blank");
-						a.css("font-weight", "normal");
+					// fix Download icon, text and link
+					var $i = $title.find("i.uiIconDownload");
+					$i.attr("class", "uiIcon16x16CloudFile-" + drive.provider.id);
+					var $a = $title.find("a");
+					$a.text(" " + openOnProvider);
+					$a.prepend($i);
+					$a.attr("href", file.link);
+					$a.attr("target", "_blank");
+					$a.css("font-weight", "normal");
 
-						var iframe = viewer.find("iframe");
-						if (file.editLink && file.previewLink && file.editLink != file.previewLink) {
-							// init Edit/View mode
-							iframe.attr("src", file.previewLink);
-							vswitch.find("a").click(function() {
-								var currentLink = iframe.attr("src");
-								if (currentLink == file.previewLink) {
-									// switch to editor
-									iframe.attr("src", file.editLink);
-									var viewerTitle = vswitch.attr("view-title");
-									$(this).text(viewerTitle);
-								} else {
-									// switch to viewer
-									iframe.attr("src", file.previewLink);
-									var editTitle = vswitch.attr("edit-title");
-									$(this).text(editTitle);
-								}
-							});
-							titleText.append(vswitch);
-							viewer.find("div").show();
-						} else {
-							viewer.find("iframe").attr("src", file.previewLink ? file.previewLink : file.link);
-							vswitch.remove();
-							viewer.find("div").show();
-						}
+					var $iframe = $viewer.find("iframe");
+					if ($vswitch.size() > 0 && file.editLink && file.previewLink && file.editLink != file.previewLink) {
+						// init Edit/View mode
+						$iframe.attr("src", file.previewLink);
+						$vswitch.find("a").click(function() {
+							var currentLink = $iframe.attr("src");
+							if (currentLink == file.previewLink) {
+								// switch to editor
+								$iframe.attr("src", file.editLink);
+								var viewerTitle = $vswitch.attr("view-title");
+								$(this).text(viewerTitle);
+							} else {
+								// switch to viewer
+								$iframe.attr("src", file.previewLink);
+								var editTitle = $vswitch.attr("edit-title");
+								$(this).text(editTitle);
+							}
+						});
+						$titleText.append($vswitch);
+					} else {
+						$viewer.find("iframe").attr("src", file.previewLink ? file.previewLink : file.link);
+						$vswitch.remove();
 					}
+					$viewer.find("div").show();
 				}
 				eXo.ecm.ECMUtils.loadContainerWidth();
 			} // else not a cloud drive or its file

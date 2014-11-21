@@ -58,13 +58,15 @@
 			if (document.createStyleSheet) {
 				document.createStyleSheet(cssUrl); // IE way
 			} else {
-				var style = document.createElement("link");
-				style.type = "text/css";
-				style.rel = "stylesheet";
-				style.href = cssUrl;
-				var headElems = document.getElementsByTagName("head");
-				headElems[headElems.length - 1].appendChild(style);
-				// $("head").append($("<link href='" + cssUrl + "' rel='stylesheet' type='text/css' />"));
+				if ($("head").find("link[href='"+cssUrl+"']").size() == 0) {
+					var headElems = document.getElementsByTagName("head");
+					var style = document.createElement("link");
+					style.type = "text/css";
+					style.rel = "stylesheet";
+					style.href = cssUrl;
+					headElems[headElems.length - 1].appendChild(style);
+					// $("head").append($("<link href='" + cssUrl + "' rel='stylesheet' type='text/css' />"));					
+				} // else, already added
 			}
 		};
 
