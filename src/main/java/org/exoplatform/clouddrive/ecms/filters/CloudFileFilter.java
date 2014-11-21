@@ -20,11 +20,16 @@ package org.exoplatform.clouddrive.ecms.filters;
 
 import org.exoplatform.clouddrive.CloudDrive;
 import org.exoplatform.clouddrive.CloudDriveService;
+import org.exoplatform.clouddrive.CloudFile;
 import org.exoplatform.clouddrive.DriveRemovedException;
+import org.exoplatform.clouddrive.NotCloudFileException;
+import org.exoplatform.clouddrive.NotYetCloudFileException;
 import org.exoplatform.services.log.ExoLogger;
 import org.exoplatform.services.log.Log;
 import org.exoplatform.services.wcm.utils.WCMCoreUtils;
 import org.exoplatform.webui.application.WebuiRequestContext;
+
+import java.util.List;
 
 import javax.jcr.Node;
 import javax.jcr.RepositoryException;
@@ -36,22 +41,39 @@ public class CloudFileFilter extends AbstractCloudDriveNodeFilter {
 
   protected static final Log LOG = ExoLogger.getLogger(CloudFileFilter.class);
 
+  public CloudFileFilter() {
+    super();
+  }
+
+  public CloudFileFilter(List<String> providers) {
+    super(providers);
+  }
+
   /**
    * {@inheritDoc}
    */
   @Override
   protected boolean accept(Node node) throws RepositoryException {
-    CloudDriveService driveService = WCMCoreUtils.getService(CloudDriveService.class);
-    CloudDrive drive = driveService.findDrive(node);
-    if (drive != null) {
-      try {
-        if (drive.hasFile(node.getPath())) {
-          // attribute used in CloudFileViewer.gtmpl
-          WebuiRequestContext.getCurrentInstance().setAttribute(CloudDrive.class, drive);
-          return true;
+    if (node != null) {
+      CloudDriveService driveService = WCMCoreUtils.getService(CloudDriveService.class);
+      CloudDrive drive = driveService.findDrive(node);
+      if (drive != null) {
+        try {
+          if (acceptProvider(drive.getUser().getProvider())) {
+            CloudFile file = drive.getFile(node.getPath());
+            // attribute used in CloudFile viewer(s)
+            WebuiRequestContext rcontext = WebuiRequestContext.getCurrentInstance();
+            rcontext.setAttribute(CloudDrive.class, drive);
+            rcontext.setAttribute(CloudFile.class, file);
+            return true;
+          }
+        } catch (DriveRemovedException e) {
+          // doesn't accept
+        } catch (NotYetCloudFileException e) {
+          // doesn't accept
+        } catch (NotCloudFileException e) {
+          // doesn't accept
         }
-      } catch (DriveRemovedException e) {
-        // doesn't accept
       }
     }
     return false;

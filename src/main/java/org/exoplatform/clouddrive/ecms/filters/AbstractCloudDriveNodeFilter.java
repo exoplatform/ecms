@@ -18,11 +18,7 @@
  */
 package org.exoplatform.clouddrive.ecms.filters;
 
-import java.util.Map;
-
-import javax.jcr.Node;
-import javax.jcr.RepositoryException;
-
+import org.exoplatform.clouddrive.CloudProvider;
 import org.exoplatform.ecm.webui.component.explorer.UIJCRExplorer;
 import org.exoplatform.ecm.webui.component.explorer.UIJcrExplorerContainer;
 import org.exoplatform.webui.application.WebuiRequestContext;
@@ -30,10 +26,27 @@ import org.exoplatform.webui.core.UIApplication;
 import org.exoplatform.webui.ext.filter.UIExtensionFilter;
 import org.exoplatform.webui.ext.filter.UIExtensionFilterType;
 
+import java.util.List;
+import java.util.Map;
+
+import javax.jcr.Node;
+import javax.jcr.RepositoryException;
+
 /**
  * Filter for cloud files.
  */
 public abstract class AbstractCloudDriveNodeFilter implements UIExtensionFilter {
+
+  protected List<String> providers;
+
+  public AbstractCloudDriveNodeFilter() {
+    super();
+  }
+
+  public AbstractCloudDriveNodeFilter(List<String> providers) {
+    super();
+    this.providers = providers;
+  }
 
   /**
    * {@inheritDoc}
@@ -82,6 +95,14 @@ public abstract class AbstractCloudDriveNodeFilter implements UIExtensionFilter 
   }
 
   // ****************** internals ******************
+
+  protected boolean acceptProvider(CloudProvider provider) {
+    if (providers != null && providers.size() > 0) {
+      return providers.contains(provider.getId());
+    } else {
+      return true;
+    }
+  }
 
   protected abstract boolean accept(Node node) throws RepositoryException;
 }

@@ -23,6 +23,8 @@ import org.exoplatform.services.log.ExoLogger;
 import org.exoplatform.services.log.Log;
 import org.exoplatform.services.wcm.utils.WCMCoreUtils;
 
+import java.util.List;
+
 import javax.jcr.Node;
 import javax.jcr.RepositoryException;
 
@@ -39,6 +41,14 @@ public class CloudDriveFilter extends AbstractCloudDriveNodeFilter {
 
   protected static final Log LOG = ExoLogger.getLogger(CloudDriveFilter.class);
 
+  public CloudDriveFilter() {
+    super();
+  }
+
+  public CloudDriveFilter(List<String> providers) {
+    super(providers);
+  }
+
   /**
    * {@inheritDoc}
    */
@@ -48,7 +58,8 @@ public class CloudDriveFilter extends AbstractCloudDriveNodeFilter {
     CloudDrive drive = driveService.findDrive(node);
     try {
       // accept only exactly the drive node
-      return drive != null && drive.getPath().equals(node.getPath());
+      return drive != null && acceptProvider(drive.getUser().getProvider())
+          && drive.getPath().equals(node.getPath());
     } catch (DriveRemovedException e) {
       // doesn't accept removed
       return false;
