@@ -3570,31 +3570,13 @@ public abstract class JCRLocalCloudDrive extends CloudDrive {
   }
 
   protected JCRLocalCloudFile readFile(Node fileNode) throws RepositoryException {
-    String link = fileNode.getProperty("ecd:url").getString();
-    String previewLink;
-    try {
-      previewLink = previewLink(fileNode.getProperty("ecd:previewUrl").getString());
-    } catch (PathNotFoundException e) {
-      previewLink = null;
-    }
-    String thumbnailLink;
-    try {
-      thumbnailLink = fileNode.getProperty("ecd:thumbnailUrl").getString();
-    } catch (PathNotFoundException e) {
-      try {
-        // prior 1.1.0-RC2 we have used ecd:downloadUrl for thumbnails
-        thumbnailLink = fileNode.getProperty("ecd:downloadUrl").getString();
-      } catch (PathNotFoundException e1) {
-        thumbnailLink = null;
-      }
-    }
     return new JCRLocalCloudFile(fileNode.getPath(),
-                                 fileNode.getProperty("ecd:id").getString(),
-                                 fileNode.getProperty("exo:title").getString(),
-                                 link,
-                                 editLink(link),
-                                 previewLink,
-                                 thumbnailLink,
+                                 fileAPI.getId(fileNode),
+                                 fileAPI.getTitle(fileNode),
+                                 link(fileNode),
+                                 editLink(fileNode),
+                                 previewLink(fileNode),
+                                 thumbnailLink(fileNode),
                                  fileNode.getProperty("ecd:type").getString(),
                                  fileNode.getProperty("ecd:lastUser").getString(),
                                  fileNode.getProperty("ecd:author").getString(),
@@ -3952,25 +3934,79 @@ public abstract class JCRLocalCloudDrive extends CloudDrive {
   }
 
   /**
-   * Return provider specific link for a file preview. By default this method returns the same as given link.
-   * Actual connector implementation may override its logic.
+   * Return provider specific link for a file preview. By default this method will try read value of
+   * <code>ecd:previewUrl</code> property and if not such property exists <code>null</code> will be returned.
+   * Actual connector implementation may override this logic.
    * 
-   * @param link {@link String} existing link to a cloud file
+   * @param fileNode {@link String} cloud file node
    * @return String with a link should be used for file preview.
+   * @throws RepositoryException
    */
-  protected String previewLink(String link) {
+  protected String previewLink(Node fileNode) throws RepositoryException {
+    try {
+      return fileNode.getProperty("ecd:previewUrl").getString();
+    } catch (PathNotFoundException e) {
+      return null;
+    }
+  }
+
+  /**
+   * Return provider specific link for a file thumbnail. By default this method will try read value of
+   * <code>ecd:thumbnailUrl</code> property and if not such property exists <code>null</code> will be
+   * returned.
+   * Actual connector implementation may override this logic.
+   * 
+   * @param fileNode {@link String} cloud file node
+   * @return String with a link should be used for file thumbnail.
+   * @throws RepositoryException
+   */
+  protected String thumbnailLink(Node fileNode) throws RepositoryException {
+    String link;
+    try {
+      link = fileNode.getProperty("ecd:thumbnailUrl").getString();
+    } catch (PathNotFoundException e) {
+      try {
+        // prior 1.1.0-RC2 we have used ecd:downloadUrl for thumbnails
+        link = fileNode.getProperty("ecd:downloadUrl").getString();
+      } catch (PathNotFoundException e1) {
+        link = null;
+      }
+    }
     return link;
   }
 
   /**
-   * Return provider specific link for file editing. By default this method returns the same as given link.
+   * Return provider specific link for file editing. By default this method will try read value of
+   * <code>ecd:editUrl</code> property and if not such property exists value of <code>ecd:link</code> will be
+   * returned.
    * Actual connector implementation may override its logic.
    * 
-   * @param link {@link String} existing link to a cloud file or <code>null</code> if editing not supported
+   * @param fileNode {@link String} existing link to a cloud file or <code>null</code> if editing not
+   *          supported
    * @return String with a link should be used for file editing.
+   * @throws RepositoryException
    */
-  protected String editLink(String link) {
-    return link;
+  protected String editLink(Node fileNode) throws RepositoryException {
+    try {
+      return fileNode.getProperty("ecd:editUrl").getString();
+    } catch (PathNotFoundException e) {
+      return null;
+    }
+  }
+
+  /**
+   * Return provider specific link for file content download or access. By default this method will try read
+   * value of <code>ecd:url</code> property and if not such property exists {@link PathNotFoundException} will
+   * be thrown.
+   * Actual connector implementation may override its logic.
+   * 
+   * @param fileNode {@link String} existing link to a cloud file or <code>null</code> if editing not
+   *          supported
+   * @return String with a link should be used for file editing.
+   * @throws RepositoryException
+   */
+  protected String link(Node fileNode) throws PathNotFoundException, RepositoryException {
+    return fileNode.getProperty("ecd:url").getString();
   }
 
   // ============== abstract ==============

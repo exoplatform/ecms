@@ -66,8 +66,7 @@ public class CloudDriveServiceImpl implements CloudDriveService, Startable {
     void cleanUserCaches(CloudUser user) {
       Map<CloudUser, CloudDrive> drives = userDrives.get(user);
       if (drives != null) {
-        CloudDrive cleaned = drives.remove(user);
-        repositoryDrives.values().remove(cleaned);
+        drives.remove(user);
       }
     }
 
@@ -289,7 +288,7 @@ public class CloudDriveServiceImpl implements CloudDriveService, Startable {
     if (drives != null) {
       CloudDrive local = drives.get(user);
       if (local != null) {
-        // we have cached drive
+        // we have connected drive
         String localPath;
         try {
           localPath = local.getPath();
