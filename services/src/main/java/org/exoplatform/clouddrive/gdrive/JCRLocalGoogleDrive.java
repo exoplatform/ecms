@@ -39,6 +39,7 @@ import org.exoplatform.clouddrive.jcr.JCRLocalCloudFile;
 import org.exoplatform.clouddrive.jcr.NodeFinder;
 import org.exoplatform.clouddrive.oauth2.UserToken;
 import org.exoplatform.clouddrive.oauth2.UserTokenRefreshListener;
+import org.exoplatform.clouddrive.utils.ExtendedMimeTypeResolver;
 import org.exoplatform.services.jcr.ext.app.SessionProviderService;
 
 import java.io.IOException;
@@ -140,7 +141,7 @@ public class JCRLocalGoogleDrive extends JCRLocalCloudDrive implements UserToken
             // go recursive
             fetchChilds(gf.getId(), localNode);
           } else {
-            localNode = openFile(gf.getId(), gf.getTitle(), gf.getMimeType(), parent);
+            localNode = openFile(gf.getId(), gf.getTitle(), parent);
             initFile(localNode,
                      gf.getId(),
                      gf.getTitle(),
@@ -162,6 +163,7 @@ public class JCRLocalGoogleDrive extends JCRLocalCloudDrive implements UserToken
                                             gf.getEmbedLink(),
                                             gf.getThumbnailLink(),
                                             gf.getMimeType(),
+                                            null, // typeMode not required for GoogleDrive
                                             gf.getLastModifyingUserName(),
                                             gf.getOwnerNames().get(0),
                                             created,
@@ -384,7 +386,7 @@ public class JCRLocalGoogleDrive extends JCRLocalCloudDrive implements UserToken
                 localNode = copyNode(localNodeCopy, fp);
               }
             } else {
-              localNode = openFile(gf.getId(), gf.getTitle(), gf.getMimeType(), fp);
+              localNode = openFile(gf.getId(), gf.getTitle(), fp);
             }
 
             // add created Node to list of existing
@@ -431,6 +433,7 @@ public class JCRLocalGoogleDrive extends JCRLocalCloudDrive implements UserToken
                                             gf.getEmbedLink(),
                                             gf.getThumbnailLink(),
                                             gf.getMimeType(),
+                                            null, // typeMode not required for GoogleDrive
                                             gf.getLastModifyingUserName(),
                                             gf.getOwnerNames().get(0),
                                             created,
@@ -798,8 +801,10 @@ public class JCRLocalGoogleDrive extends JCRLocalCloudDrive implements UserToken
   protected JCRLocalGoogleDrive(GoogleUser user,
                                 Node driveNode,
                                 SessionProviderService sessionProviders,
-                                NodeFinder finder) throws CloudDriveException, RepositoryException {
-    super(user, driveNode, sessionProviders, finder);
+                                NodeFinder finder,
+                                ExtendedMimeTypeResolver mimeTypes) throws CloudDriveException,
+      RepositoryException {
+    super(user, driveNode, sessionProviders, finder, mimeTypes);
     getUser().api().getToken().addListener(this);
   }
 
@@ -818,10 +823,11 @@ public class JCRLocalGoogleDrive extends JCRLocalCloudDrive implements UserToken
                                 GoogleProvider provider,
                                 Node driveNode,
                                 SessionProviderService sessionProviders,
-                                NodeFinder finder) throws RepositoryException,
+                                NodeFinder finder,
+                                ExtendedMimeTypeResolver mimeTypes) throws RepositoryException,
       GoogleDriveException,
       CloudDriveException {
-    super(loadUser(apiBuilder, provider, driveNode), driveNode, sessionProviders, finder);
+    super(loadUser(apiBuilder, provider, driveNode), driveNode, sessionProviders, finder, mimeTypes);
     getUser().api().getToken().addListener(this);
   }
 
