@@ -27,6 +27,7 @@ import org.exoplatform.clouddrive.exodrive.service.FileStore;
 import org.exoplatform.clouddrive.jcr.JCRLocalCloudDrive;
 import org.exoplatform.clouddrive.jcr.JCRLocalCloudFile;
 import org.exoplatform.clouddrive.jcr.NodeFinder;
+import org.exoplatform.clouddrive.utils.ExtendedMimeTypeResolver;
 import org.exoplatform.services.jcr.ext.app.SessionProviderService;
 
 import java.io.InputStream;
@@ -67,7 +68,7 @@ public class JCRLocalExoDrive extends JCRLocalCloudDrive {
         List<FileStore> files = service.listFiles(user.getUsername());
         available = files.size();
         for (FileStore f : files) {
-          Node localNode = openFile(f.getId(), f.getName(), f.getType(), rootNode);
+          Node localNode = openFile(f.getId(), f.getName(), rootNode);
           initFile(localNode,
                    f.getId(),
                    f.getName(),
@@ -84,6 +85,7 @@ public class JCRLocalExoDrive extends JCRLocalCloudDrive {
                                             f.getId(),
                                             f.getName(),
                                             f.getType(),
+                                            null, // typeMode not available for ExoDrive
                                             f.getLink(),
                                             null, // editLink - edit not supported
                                             f.getLink(),
@@ -135,7 +137,7 @@ public class JCRLocalExoDrive extends JCRLocalCloudDrive {
         List<FileStore> files = service.listFiles(user.getUsername());
         available = files.size();
         for (FileStore f : files) {
-          Node localNode = openFile(f.getId(), f.getName(), f.getType(), rootNode);
+          Node localNode = openFile(f.getId(), f.getName(), rootNode);
           initFile(localNode,
                    f.getId(),
                    f.getName(),
@@ -152,6 +154,7 @@ public class JCRLocalExoDrive extends JCRLocalCloudDrive {
                                             f.getId(),
                                             f.getName(),
                                             f.getType(),
+                                            null, // typeMode not available for ExoDrive
                                             f.getLink(),
                                             null, // editLink - edit not supported
                                             f.getLink(),
@@ -368,8 +371,9 @@ public class JCRLocalExoDrive extends JCRLocalCloudDrive {
                           ExoDriveRepository service,
                           SessionProviderService sessionProviders,
                           NodeFinder finder,
+                          ExtendedMimeTypeResolver mimeTypes,
                           Node driveNode) throws CloudDriveException, RepositoryException {
-    super(user, driveNode, sessionProviders, finder);
+    super(user, driveNode, sessionProviders, finder, mimeTypes);
     this.service = service;
   }
 
@@ -396,10 +400,11 @@ public class JCRLocalExoDrive extends JCRLocalCloudDrive {
                           ExoDriveProvider provider,
                           SessionProviderService sessionProviders,
                           NodeFinder finder,
+                          ExtendedMimeTypeResolver mimeTypes,
                           Node driveNode) throws CloudDriveException, RepositoryException {
     super(new ExoDriveUser(driveNode.getProperty("ecd:cloudUserName").getString(),
                            driveNode.getProperty("ecd:userEmail").getString(),
-                           provider), driveNode, sessionProviders, finder);
+                           provider), driveNode, sessionProviders, finder, mimeTypes);
     this.service = service;
   }
 

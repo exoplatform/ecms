@@ -17,6 +17,7 @@
 package org.exoplatform.clouddrive;
 
 import org.exoplatform.clouddrive.jcr.NodeFinder;
+import org.exoplatform.clouddrive.utils.ExtendedMimeTypeResolver;
 import org.exoplatform.container.component.BaseComponentPlugin;
 import org.exoplatform.container.xml.InitParams;
 import org.exoplatform.container.xml.ObjectParameter;
@@ -78,67 +79,71 @@ public abstract class CloudDriveConnector extends BaseComponentPlugin {
     }
   }
 
-  public static final String             CONFIG_PROVIDER_NAME             = "provider-name";
+  public static final String               CONFIG_PROVIDER_NAME             = "provider-name";
 
-  public static final String             CONFIG_PROVIDER_ID               = "provider-id";
+  public static final String               CONFIG_PROVIDER_ID               = "provider-id";
 
-  public static final String             CONFIG_CONNECTOR_HOST            = "connector-host";
+  public static final String               CONFIG_CONNECTOR_HOST            = "connector-host";
 
-  public static final String             CONFIG_CONNECTOR_SCHEMA          = "connector-schema";
+  public static final String               CONFIG_CONNECTOR_SCHEMA          = "connector-schema";
 
   /**
    * OAuth2 client id.
    */
-  public static final String             CONFIG_PROVIDER_CLIENT_ID        = "provider-client-id";
+  public static final String               CONFIG_PROVIDER_CLIENT_ID        = "provider-client-id";
 
   /**
    * OAuth2 client secret.
    */
-  public static final String             CONFIG_PROVIDER_CLIENT_SECRET    = "provider-client-secret";
+  public static final String               CONFIG_PROVIDER_CLIENT_SECRET    = "provider-client-secret";
 
   /**
    * Force SSO for user login. It is optional parameter for those providers that need force SSO explicitly
    * (e.g. Box).
    */
-  public static final String             CONFIG_LOGIN_SSO                 = "login-sso";
+  public static final String               CONFIG_LOGIN_SSO                 = "login-sso";
 
-  public static final String             CONFIG_PREDEFINED_SERVICES       = "predefined-services";
+  public static final String               CONFIG_PREDEFINED_SERVICES       = "predefined-services";
 
   // CLDINT-1051 increased from 3 to 5, later decreased to 3 again (due to closed JCR session in case of
   // retry)
-  public static final int                PROVIDER_REQUEST_ATTEMPTS        = 3;
+  public static final int                  PROVIDER_REQUEST_ATTEMPTS        = 3;
 
   // CLDINT-1051 increased from 5s tp 10s
-  public static final long               PROVIDER_REQUEST_ATTEMPT_TIMEOUT = 10000;
+  public static final long                 PROVIDER_REQUEST_ATTEMPT_TIMEOUT = 10000;
 
-  protected static final Log             LOG                              = ExoLogger.getLogger(CloudDriveConnector.class);
+  protected static final Log               LOG                              = ExoLogger.getLogger(CloudDriveConnector.class);
 
-  protected final Map<String, String>    config;
+  protected final Map<String, String>      config;
 
-  protected final SessionProviderService sessionProviders;
+  protected final SessionProviderService   sessionProviders;
 
-  protected final RepositoryService      jcrService;
+  protected final RepositoryService        jcrService;
 
-  protected final NodeFinder             jcrFinder;
+  protected final NodeFinder               jcrFinder;
 
-  protected final CloudProvider          provider;
+  protected final CloudProvider            provider;
 
-  protected final String                 connectorHost;
+  protected final String                   connectorHost;
 
-  protected final String                 connectorSchema;
+  protected final String                   connectorSchema;
 
-  protected final boolean                loginSSO;
+  protected final boolean                  loginSSO;
 
-  protected final PredefinedServices     predefinedServices;
+  protected final PredefinedServices       predefinedServices;
+
+  protected final ExtendedMimeTypeResolver mimeTypes;
 
   protected CloudDriveConnector(RepositoryService jcrService,
                                 SessionProviderService sessionProviders,
                                 NodeFinder jcrFinder,
+                                ExtendedMimeTypeResolver mimeTypes,
                                 InitParams params) throws ConfigurationException {
 
     this.sessionProviders = sessionProviders;
     this.jcrService = jcrService;
     this.jcrFinder = jcrFinder;
+    this.mimeTypes = mimeTypes;
 
     PropertiesParam param = params.getPropertiesParam("drive-configuration");
 

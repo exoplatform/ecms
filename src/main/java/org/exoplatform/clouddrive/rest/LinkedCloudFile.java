@@ -45,7 +45,7 @@ public class LinkedCloudFile implements CloudFile {
 
   private final String             thumbnailLink;
 
-  private final String             type;
+  private final String             type, typeMode;
 
   private final String             lastUser;
 
@@ -71,6 +71,7 @@ public class LinkedCloudFile implements CloudFile {
     this.editLink = file.getEditLink();
     this.thumbnailLink = file.getThumbnailLink();
     this.type = file.getType();
+    this.typeMode = file.getTypeMode();
     this.lastUser = file.getLastUser();
     this.author = file.getAuthor();
     this.folder = file.isFolder();
@@ -136,6 +137,14 @@ public class LinkedCloudFile implements CloudFile {
    */
   public String getType() {
     return type;
+  }
+
+  /**
+   * {@inheritDoc}
+   */
+  @Override
+  public String getTypeMode() {
+    return typeMode;
   }
 
   /**

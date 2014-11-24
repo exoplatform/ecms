@@ -75,6 +75,13 @@ public interface CloudFile {
    * @return {@link String}
    */
   String getType();
+  
+  /**
+   * Optional representation (UI) mode associated with the file type. Can be <code>null</code>.
+   * 
+   * @return {@link String} a type mode or <code>null</code> if not available.
+   */
+  String getTypeMode();
 
   /**
    * Last user changed the file as in cloud provider API.

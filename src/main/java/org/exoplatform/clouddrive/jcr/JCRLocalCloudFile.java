@@ -41,7 +41,7 @@ public class JCRLocalCloudFile implements CloudFile {
 
   private final String             thumbnailLink;
 
-  private final String             type;
+  private final String             type, typeMode;
 
   private final String             lastUser;
 
@@ -67,6 +67,7 @@ public class JCRLocalCloudFile implements CloudFile {
                            String previewLink,
                            String thumbnailLink,
                            String type,
+                           String typeMode,
                            String lastUser,
                            String author,
                            Calendar createdDate,
@@ -83,6 +84,7 @@ public class JCRLocalCloudFile implements CloudFile {
     this.previewLink = previewLink;
     this.thumbnailLink = thumbnailLink;
     this.type = type;
+    this.typeMode = typeMode;
     this.lastUser = lastUser;
     this.author = author;
     this.createdDate = createdDate;
@@ -101,6 +103,7 @@ public class JCRLocalCloudFile implements CloudFile {
                            String previewLink,
                            String thumbnailLink,
                            String type,
+                           String typeMode,
                            String lastUser,
                            String author,
                            Calendar createdDate,
@@ -116,6 +119,7 @@ public class JCRLocalCloudFile implements CloudFile {
          previewLink,
          thumbnailLink,
          type,
+         typeMode,
          lastUser,
          author,
          createdDate,
@@ -134,6 +138,7 @@ public class JCRLocalCloudFile implements CloudFile {
                            String previewLink,
                            String thumbnailLink,
                            String type,
+                           String typeMode,
                            String lastUser,
                            String author,
                            Calendar createdDate,
@@ -147,6 +152,7 @@ public class JCRLocalCloudFile implements CloudFile {
          previewLink,
          thumbnailLink,
          type,
+         typeMode,
          lastUser,
          author,
          createdDate,
@@ -214,6 +220,13 @@ public class JCRLocalCloudFile implements CloudFile {
   @Override
   public String getType() {
     return type;
+  }
+
+  /**
+   * @return the typeMode
+   */
+  public String getTypeMode() {
+    return typeMode;
   }
 
   /**

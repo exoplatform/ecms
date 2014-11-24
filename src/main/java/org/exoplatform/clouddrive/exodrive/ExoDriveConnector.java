@@ -27,6 +27,7 @@ import org.exoplatform.clouddrive.exodrive.service.ExoDriveRepository;
 import org.exoplatform.clouddrive.exodrive.service.ExoDriveService;
 import org.exoplatform.clouddrive.jcr.JCRLocalCloudDrive;
 import org.exoplatform.clouddrive.jcr.NodeFinder;
+import org.exoplatform.clouddrive.utils.ExtendedMimeTypeResolver;
 import org.exoplatform.container.xml.InitParams;
 import org.exoplatform.services.jcr.RepositoryService;
 import org.exoplatform.services.jcr.ext.app.SessionProviderService;
@@ -120,8 +121,9 @@ public class ExoDriveConnector extends CloudDriveConnector {
                            ExoDriveService service,
                            OrganizationService orgService,
                            NodeFinder finder,
+                           ExtendedMimeTypeResolver mimeTypes,
                            InitParams params) throws ConfigurationException {
-    super(jcrService, sessionProviders, finder, params);
+    super(jcrService, sessionProviders, finder, mimeTypes, params);
 
     this.service = service;
     this.orgService = orgService;
@@ -214,7 +216,12 @@ public class ExoDriveConnector extends CloudDriveConnector {
                                                                      RepositoryException {
     if (user instanceof ExoDriveUser) {
       try {
-        return new JCRLocalExoDrive((ExoDriveUser) user, repository(), sessionProviders, jcrFinder, driveNode);
+        return new JCRLocalExoDrive((ExoDriveUser) user,
+                                    repository(),
+                                    sessionProviders,
+                                    jcrFinder,
+                                    mimeTypes,
+                                    driveNode);
       } catch (ExoDriveConfigurationException e) {
         throw new CloudDriveException("Error getting eXo Drive repository:", e);
       }
@@ -235,6 +242,7 @@ public class ExoDriveConnector extends CloudDriveConnector {
                                   (ExoDriveProvider) provider,
                                   sessionProviders,
                                   jcrFinder,
+                                  mimeTypes,
                                   driveNode);
     } catch (ExoDriveConfigurationException e) {
       throw new CloudDriveException("Error getting eXo Drive repository:", e);

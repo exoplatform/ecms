@@ -44,6 +44,7 @@ import org.exoplatform.clouddrive.ThreadExecutor;
 import org.exoplatform.clouddrive.jcr.JCRLocalCloudDrive.JCRListener.AddTrashListener;
 import org.exoplatform.clouddrive.jcr.JCRLocalCloudDrive.JCRListener.DriveChangesListener;
 import org.exoplatform.clouddrive.utils.ChunkIterator;
+import org.exoplatform.clouddrive.utils.ExtendedMimeTypeResolver;
 import org.exoplatform.clouddrive.utils.IdentityHelper;
 import org.exoplatform.container.ExoContainer;
 import org.exoplatform.container.ExoContainerContext;
@@ -2142,6 +2143,11 @@ public abstract class JCRLocalCloudDrive extends CloudDrive {
   protected final NodeFinder                              finder;
 
   /**
+   * Mime type resolver.
+   */
+  protected final ExtendedMimeTypeResolver                mimeTypes;
+
+  /**
    * Title has special care. It used in error logs and an attempt to read <code>exo:title</code> property can
    * cause another {@link RepositoryException}. Thus need it pre-cached in the variable and try to read the
    * <code>exo:title</code> property each time, but if not successful use this one cached.
@@ -2161,11 +2167,14 @@ public abstract class JCRLocalCloudDrive extends CloudDrive {
   protected JCRLocalCloudDrive(CloudUser user,
                                Node driveNode,
                                SessionProviderService sessionProviders,
-                               NodeFinder finder) throws CloudDriveException, RepositoryException {
+                               NodeFinder finder,
+                               ExtendedMimeTypeResolver mimeTypes) throws CloudDriveException,
+      RepositoryException {
 
     this.user = user;
     this.sessionProviders = sessionProviders;
     this.finder = finder;
+    this.mimeTypes = mimeTypes;
 
     Session session = driveNode.getSession();
     this.repository = (ManageableRepository) session.getRepository();
@@ -3335,8 +3344,8 @@ public abstract class JCRLocalCloudDrive extends CloudDrive {
     return IdentityHelper.ensureOwned(node, systemSession());
   }
 
-  protected Node openFile(String fileId, String fileTitle, String fileType, Node parent) throws RepositoryException,
-                                                                                        CloudDriveException {
+  protected Node openFile(String fileId, String fileTitle, Node parent) throws RepositoryException,
+                                                                       CloudDriveException {
     Node localNode = openNode(fileId, fileTitle, parent, NT_FILE);
 
     // create content for new not complete node
@@ -3570,19 +3579,24 @@ public abstract class JCRLocalCloudDrive extends CloudDrive {
   }
 
   protected JCRLocalCloudFile readFile(Node fileNode) throws RepositoryException {
+    String title = fileAPI.getTitle(fileNode);
+    boolean isFolder = fileNode.isNodeType(ECD_CLOUDFOLDER);
+    String type = fileNode.getProperty("ecd:type").getString();
+    String typeMode = isFolder ? null : mimeTypes.getMimeTypeMode(type, title);
     return new JCRLocalCloudFile(fileNode.getPath(),
                                  fileAPI.getId(fileNode),
-                                 fileAPI.getTitle(fileNode),
+                                 title,
                                  link(fileNode),
                                  editLink(fileNode),
                                  previewLink(fileNode),
                                  thumbnailLink(fileNode),
-                                 fileNode.getProperty("ecd:type").getString(),
+                                 type,
+                                 typeMode,
                                  fileNode.getProperty("ecd:lastUser").getString(),
                                  fileNode.getProperty("ecd:author").getString(),
                                  fileNode.getProperty("ecd:created").getDate(),
                                  fileNode.getProperty("ecd:modified").getDate(),
-                                 fileNode.isNodeType(ECD_CLOUDFOLDER));
+                                 isFolder);
   }
 
   /**
