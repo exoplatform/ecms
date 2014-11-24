@@ -283,12 +283,12 @@
 					  utils.log(provider.serviceName + " user authenticated.");
 					  // 3 and finally connect the drive
 					  // set initial progress	with dummy state object
-						/*process.notify({ 
+						process.notify({
 							progress : 0,
 							drive : {
 								provider : provider
 							}
-						});*/
+						});
 					  // XXX if it is a re-connect (via providerUpdate), context node may point to a file inside the existing drive
 					  // Connect service will care about it and apply correct drive path.
 					  var userNode = contextNode;
@@ -465,7 +465,7 @@
 						loader.resolve(client); 
 					}, function(err) {
 						utils.log("ERROR: Cannot load client module for Cloud Drive provider " + provider.name + "(" + provider.id + "). " 
-								+ err.message + ": " + JSON.stringify(err));
+								+ err.message + ": " + JSON.stringify(err), err);
 						loader.reject(); 
 					});
 				} catch(e) {
@@ -1338,8 +1338,11 @@
 			var update = function() {
 				var options = {
 					//title : "Connecting Your " + driveName,
-					text : progress + "% complete."
+					//text : progress + "% complete."
 				};
+				if (progress > 0) {
+					options.text = progress + "% complete.";
+				}
 				if (progress >= 75) {
 					options.title = "Almost Done...";
 				}
@@ -1363,36 +1366,38 @@
 				if (!task) {
 					// start progress
 					progress = state.progress;
-					driveName = state.drive.provider.serviceName;
-
-					notice.pnotify({
+					if (progress > 0) {
+						driveName = state.drive.provider.serviceName;
+						
+						notice.pnotify({
 					  title : "Connecting Your " + driveName,
 					  text : progress + "% complete."
-					});
-
-					// hide title in 5sec
-					hideTimeout = setTimeout(function() {
-						notice.pnotify({
-						  title : false,
-						  width : "200px"
 						});
-					}, 5000);
-
-					// add as tasks also
-					if (tasks) {
-						var docsUrl = ", \"" + location + "\"";
-						var docsOnclick = personalDocumentsLink();
-						docsOnclick = docsOnclick ? ", \"" + docsOnclick + "\"" : "";
-						// TODO this doesn't work in CW4
-						task = "cloudDriveUI.connectState(\"" + state.serviceUrl + "\"" + docsUrl + docsOnclick + ");";
-						tasks.add(task);
-					} else {
-						utils.log("Tasks not defined");
+	
+						// hide title in 5sec
+						hideTimeout = setTimeout(function() {
+							notice.pnotify({
+							  title : false,
+							  width : "200px"
+							});
+						}, 5000);
+	
+						// add as tasks also
+						if (tasks) {
+							var docsUrl = ", \"" + location + "\"";
+							var docsOnclick = personalDocumentsLink();
+							docsOnclick = docsOnclick ? ", \"" + docsOnclick + "\"" : "";
+							// TODO this doesn't work in CW4
+							task = "cloudDriveUI.connectState(\"" + state.serviceUrl + "\"" + docsUrl + docsOnclick + ");";
+							tasks.add(task);
+						} else {
+							utils.log("Tasks not defined");
+						}
 					}
 				} else {
 					// continue progress
 					driveName = state.drive.provider.serviceName; // need update drive name
-					progress = state.progress < 100 ? state.progress : 99;
+					progress = state.progress;
 				}
 				update();
 			});
