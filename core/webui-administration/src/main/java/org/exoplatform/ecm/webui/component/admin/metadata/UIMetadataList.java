@@ -130,8 +130,6 @@ public class UIMetadataList extends UIPagingGridDecorator {
       UIApplication uiApp = uiMetaList.getAncestorOfType(UIApplication.class);
       try {
         metadataService.removeMetadata(metadataName);
-        org.exoplatform.services.cms.impl.Utils.addEditedConfiguredData(metadataName, "ContentTemplateList",
-          "EditedConfiguredTemplateList", true);
       } catch(PathNotFoundException ex) {
       	uiApp.addMessage(new ApplicationMessage("UIMetadataList.msg.path-not-found-exception", null, ApplicationMessage.WARNING));
         return;

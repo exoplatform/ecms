@@ -22,7 +22,6 @@ import org.exoplatform.commons.utils.ListAccessImpl;
 import org.exoplatform.ecm.webui.component.admin.UIECMAdminPortlet;
 import org.exoplatform.ecm.webui.core.UIPagingGrid;
 import org.exoplatform.services.cms.actions.ActionServiceContainer;
-import org.exoplatform.services.cms.impl.Utils;
 import org.exoplatform.services.cms.scripts.impl.ScriptServiceImpl;
 import org.exoplatform.services.jcr.RepositoryService;
 import org.exoplatform.services.jcr.core.nodetype.ExtendedNodeTypeManager;
@@ -150,7 +149,6 @@ public class UIActionTypeList extends UIPagingGrid {
       ExtendedNodeTypeManager ntManager = repoService.getCurrentRepository().getNodeTypeManager();
       try {
         ntManager.unregisterNodeType(nodeTypeName);
-        Utils.addEditedConfiguredData(nodeTypeName, "ActionTypeList", "EditedConfiguredActionType", true);
       } catch(Exception e) {
         UIApplication uiApp = event.getSource().getAncestorOfType(UIApplication.class) ;
         uiApp.addMessage(new ApplicationMessage("UIActionTypeList.msg.cannot-delete", null, ApplicationMessage.WARNING)) ;

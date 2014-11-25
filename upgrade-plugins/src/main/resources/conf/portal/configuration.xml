@@ -199,7 +199,7 @@
                 </value-param>
             </init-params>
         </component-plugin>
-        <!--component-plugin>
+        <component-plugin>
             <name>
                 WCMTemplateUpgradePlugin
             </name>
@@ -236,7 +236,7 @@
                     </value>
                 </value-param>
             </init-params>
-        </component-plugin-->
+        </component-plugin>
         <component-plugin>
             <name>
                 UserViewUpgradePlugin

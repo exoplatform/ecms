@@ -100,8 +100,6 @@ public class TagStylePlugin extends BaseComponentPlugin{
     Node exoTagStyleHomeNode = (Node)session.getItem(exoTagStylePath) ;
     List<HtmlTagStyle> htmlStyle4Tag = tagConfig.getTagStyleList() ;
     for(HtmlTagStyle style: htmlStyle4Tag) {
-      if(Utils.getAllEditedConfiguredData(
-        "TagStyle", "EditedConfiguredTagStyle", true).contains(style.getName())) continue;
       Node tagStyleNode = Utils.makePath(exoTagStyleHomeNode,"/"+style.getName(),EXO_TAG_STYLE) ;
       tagStyleNode.setProperty(TAG_RATE_PROP,style.getTagRate()) ;
       tagStyleNode.setProperty(HTML_STYLE_PROP,style.getHtmlStyle()) ;

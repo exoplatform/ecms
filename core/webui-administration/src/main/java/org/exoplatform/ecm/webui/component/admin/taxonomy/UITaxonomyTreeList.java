@@ -170,8 +170,6 @@ public class UITaxonomyTreeList extends UIPagingGridDecorator {
         Node taxonomyTreeNode = taxonomyService.getTaxonomyTree(taxoTreeName,true);
         actionService.removeAction(taxonomyTreeNode, repository);
         taxonomyService.removeTaxonomyTree(taxoTreeName);
-        org.exoplatform.services.cms.impl.Utils.addEditedConfiguredData(taxoTreeName, "TaxonomyTree",
-          "EditedConfiguredTaxonomyTree", true);
       } catch(RepositoryException e) {
         uiApp.addMessage(new ApplicationMessage("UITaxonomyTreeList.msg.remove-exception",
             null, ApplicationMessage.WARNING));

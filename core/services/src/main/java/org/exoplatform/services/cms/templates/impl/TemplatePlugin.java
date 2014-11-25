@@ -258,11 +258,9 @@ public class TemplatePlugin extends BaseComponentPlugin {
     Iterator iter = nodetypes.iterator() ;
     while(iter.hasNext()) {
       nodeType = (TemplateConfig.NodeType) iter.next();
-      if(Utils.getAllEditedConfiguredData(
-        "ContentTemplateList", "EditedConfiguredTemplateList", true).contains(nodeType.getNodetypeName())
-        || !listNodeTypeName.contains(nodeType.getNodetypeName())) {
+      if (!listNodeTypeName.contains(nodeType.getNodetypeName())) {
         if (LOG.isErrorEnabled()) {
-          LOG.error("The nodetype: " + nodeType.getNodetypeName() + " or its templates doesn't exist!");
+          LOG.error("The nodetype: " + nodeType.getNodetypeName() + " doesn't exist!");
         }
         continue;
       }

@@ -137,8 +137,6 @@ public class UITagStyleList extends UIPagingGrid {
       Node parentNode = selectedTagStyle.getParent();
       selectedTagStyle.remove();
       parentNode.getSession().save();
-      org.exoplatform.services.cms.impl.Utils.addEditedConfiguredData(selectedName, "TagStyle",
-        "EditedConfiguredTagStyle", true);
       uiTagStyleList.refresh(uiTagStyleList.getUIPageIterator().getCurrentPage());
       event.getRequestContext().addUIComponentToUpdateByAjax(uiManager);
     }

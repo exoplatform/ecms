@@ -161,8 +161,6 @@ public class TaxonomyPlugin extends BaseComponentPlugin {
         setWorkspace(dmsRepoConfig.getSystemWorkspace());
     }
     Session session = manageableRepository.getSystemSession(getWorkspace());
-    if(Utils.getAllEditedConfiguredData(
-      "TaxonomyTree", "EditedConfiguredTaxonomyTree", true).contains(treeName)) return;
     Node taxonomyStorageNode = (Node) session.getItem(path);
     if (taxonomyStorageNode.hasNode(treeName)) {
       session.logout();

@@ -19,7 +19,6 @@ package org.exoplatform.services.cms.views.impl;
 import org.exoplatform.services.cms.BasePath;
 import org.exoplatform.services.cms.impl.DMSConfiguration;
 import org.exoplatform.services.cms.impl.DMSRepositoryConfiguration;
-import org.exoplatform.services.cms.impl.Utils;
 import org.exoplatform.services.cms.templates.TemplateService;
 import org.exoplatform.services.cms.views.ApplicationTemplateManagerService;
 import org.exoplatform.services.cms.views.PortletTemplatePlugin;
@@ -47,7 +46,6 @@ import java.util.*;
 public class ApplicationTemplateManagerServiceImpl implements ApplicationTemplateManagerService, Startable {
 
   private static final Log LOG = ExoLogger.getLogger(ApplicationTemplateManagerServiceImpl.class.getName());
-  public static final String EDITED_CONFIGURED_TEMPLATES = "EditedConfiguredTemplates";
   private RepositoryService repositoryService;
 
   private List<PortletTemplatePlugin> portletTemplatePlugins = new ArrayList<PortletTemplatePlugin>();
@@ -114,9 +112,6 @@ public class ApplicationTemplateManagerServiceImpl implements ApplicationTemplat
       templateSet = new HashSet<String>();
     }
     templateSet.add(category.getName() + "/" + config.getTemplateName());
-    StringBuilder tBuilder = new StringBuilder();
-    tBuilder.append(config.getCategory()).append(config.getTemplateName());
-    Utils.addEditedConfiguredData(tBuilder.toString(), this.getClass().getSimpleName(), EDITED_CONFIGURED_TEMPLATES, true);
     configuredTemplates_.put(portletTemplateHome.getName(), templateSet);
   }
 
@@ -234,9 +229,6 @@ public class ApplicationTemplateManagerServiceImpl implements ApplicationTemplat
                           storedTemplateHomeNode.addNode(portletName,"nt:unstructured");
       storedTemplateHomeNode.save();
       for(PortletTemplateConfig config: map.get(portletName)) {
-        StringBuilder tBuilder = new StringBuilder();
-        tBuilder.append(config.getCategory()).append(config.getTemplateName());
-        if(Utils.getAllEditedConfiguredData(this.getClass().getSimpleName(), EDITED_CONFIGURED_TEMPLATES, true).contains(tBuilder.toString())) continue;
         addTemplate(templateNode,config);
       }
     }

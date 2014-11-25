@@ -22,7 +22,6 @@ import org.exoplatform.services.cms.JcrInputProperty;
 import org.exoplatform.services.cms.actions.ActionPlugin;
 import org.exoplatform.services.cms.actions.ActionServiceContainer;
 import org.exoplatform.services.cms.actions.DMSEvent;
-import org.exoplatform.services.cms.impl.Utils;
 import org.exoplatform.services.jcr.RepositoryService;
 import org.exoplatform.services.jcr.config.RepositoryConfigurationException;
 import org.exoplatform.services.jcr.core.ManageableRepository;
@@ -322,8 +321,7 @@ public class ActionServiceContainerImpl implements ActionServiceContainer, Start
     for(NodeTypeIterator iter = ntmanager.getAllNodeTypes();iter.hasNext();) {
       NodeType nt = (NodeType) iter.next();
       String name = nt.getName();
-      if (nt.isNodeType(ACTION) && !isAbstractType(name) &&
-        !Utils.getAllEditedConfiguredData("ActionTypeList", "EditedConfiguredActionType", true).contains(name)) {
+      if (nt.isNodeType(ACTION) && !isAbstractType(name)) {
         createsActions.add(nt);
       }
     }
