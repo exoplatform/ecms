@@ -236,7 +236,7 @@ public class ApplicationTemplateManagerServiceImpl implements ApplicationTemplat
       for(PortletTemplateConfig config: map.get(portletName)) {
         StringBuilder tBuilder = new StringBuilder();
         tBuilder.append(config.getCategory()).append(config.getTemplateName());
-        if(Utils.getAllEditedConfiguredData(this.getClass().getSimpleName(), EDITED_CONFIGURED_TEMPLATES, true).contains(tBuilder.toString())) continue;
+        if(Utils.getAllEditedConfiguredData(this.getClass().getSimpleName(), EDITED_CONFIGURED_TEMPLATES, true).contains(tBuilder.toString()) && !Utils.isActivatedUpgradeService()) continue;
         addTemplate(templateNode,config);
       }
     }

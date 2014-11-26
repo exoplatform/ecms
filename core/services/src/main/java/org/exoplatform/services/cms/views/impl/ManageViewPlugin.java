@@ -102,8 +102,8 @@ public class ManageViewPlugin extends BaseComponentPlugin {
         viewObject = (ViewConfig)object ;
         String viewNodeName = viewObject.getName();
         configuredViews_.add(viewNodeName);
-        if(viewHomeNode.hasNode(viewNodeName) || Utils.getAllEditedConfiguredData(
-          this.getClass().getSimpleName(), EDITED_CONFIGURED_VIEWS, true).contains(viewNodeName)) continue ;
+        if(viewHomeNode.hasNode(viewNodeName) || (Utils.getAllEditedConfiguredData(
+          this.getClass().getSimpleName(), EDITED_CONFIGURED_VIEWS, true).contains(viewNodeName) && !Utils.isActivatedUpgradeService())) continue ;
         Node viewNode = addView(viewHomeNode,viewNodeName,viewObject.getPermissions(),
                                 viewObject.isHideExplorerPanel(), viewObject.getTemplate()) ;
         Utils.addEditedConfiguredData(viewNodeName, this.getClass().getSimpleName(), EDITED_CONFIGURED_VIEWS, true);
