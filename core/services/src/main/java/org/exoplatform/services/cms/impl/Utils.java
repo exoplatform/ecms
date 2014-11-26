@@ -19,6 +19,7 @@ package org.exoplatform.services.cms.impl;
 import com.ibm.icu.text.Transliterator;
 import org.apache.commons.lang.StringEscapeUtils;
 import org.apache.commons.lang.StringUtils;
+import org.exoplatform.commons.info.ProductInformations;
 import org.exoplatform.container.component.ComponentPlugin;
 import org.exoplatform.services.cms.BasePath;
 import org.exoplatform.services.cms.documents.TrashService;
@@ -907,6 +908,24 @@ public class Utils {
   public static boolean isFolder(Node node) throws RepositoryException  {
     return node.isNodeType(NodetypeConstant.NT_FOLDER)
         || node.isNodeType(NodetypeConstant.NT_UNSTRUCTURED);
- }
+  }
+  
+  /** Check if upgrade service will run
+   * @return upgrade service will run or not
+   * 
+   */
+  public static boolean isActivatedUpgradeService() {
+    ProductInformations productInformations = (ProductInformations)WCMCoreUtils.getService(ProductInformations.class);
+    try {
+      String currentVersion = productInformations.getVersion();
+      String previousVersion = productInformations.getPreviousVersion();
+      if (!previousVersion.equals(currentVersion)) {
+        return true;
+      }
+      return false;
+    } catch (Exception e) {
+      return false;
+    }
+  }
 
 }
