@@ -1230,7 +1230,8 @@ public class UIDocumentInfo extends UIBaseNodePresentation {
                    uiTreeExplorer.getLabel()  + "','" +
                    uiExplorer.getCurrentPath() + "','" +
                    org.exoplatform.services.cms.impl.Utils.getPersonalDrivePath(uiExplorer.getDriveData().getHomePath(),
-                   ConversationState.getCurrent().getIdentity().getUserId())+ "');");
+                   ConversationState.getCurrent().getIdentity().getUserId())+ "');")
+        .addScripts("eXo.ecm.OpenDocumentInOffice.updateLabel('"+workspaceName+":"+uri+"');");
       } catch(ItemNotFoundException nu) {
         uiApp.addMessage(new ApplicationMessage("UIDocumentInfo.msg.null-exception", null, ApplicationMessage.WARNING)) ;
 

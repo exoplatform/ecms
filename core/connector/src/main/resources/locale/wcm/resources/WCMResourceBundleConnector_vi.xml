@@ -14,4 +14,12 @@
       <renaming>Đang đổi tên...</renaming>
     </msg>
   </RenameConnector>
+  <OpenInOfficeConnector>
+    <label>
+      <open-in-word>Mở với soạn thảo vb</open-in-word>
+      <open-in-excel>Mở với bảng tính</open-in-excel>
+      <open-in-powerpoint>Mở với trình diễn ppt</open-in-powerpoint>
+      <open-in-desktop>Mo voi Desktop</open-in-desktop>
+    </label>
+  </OpenInOfficeConnector>
 </bundle>

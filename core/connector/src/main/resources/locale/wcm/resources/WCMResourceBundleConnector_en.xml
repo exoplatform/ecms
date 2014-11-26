@@ -14,4 +14,12 @@
       <renaming>Renaming...</renaming>
     </msg>
   </RenameConnector>
+  <OpenInOfficeConnector>
+    <label>
+      <open-in-word>Open In Word</open-in-word>
+      <open-in-excel>Open In Excel</open-in-excel>
+      <open-in-powerpoint>Open In Powerpoint</open-in-powerpoint>
+      <open-in-desktop>Open In Desktop</open-in-desktop>
+    </label>
+  </OpenInOfficeConnector>
 </bundle>

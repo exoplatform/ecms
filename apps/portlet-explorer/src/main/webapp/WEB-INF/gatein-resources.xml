@@ -76,6 +76,9 @@
 	    <depends>
 	      <module>ecm-utils</module>
 	    </depends>
+      <depends>
+        <module>openDocumentInOffice</module>
+      </depends>
     </module>
   </portlet>
 
@@ -221,4 +224,29 @@
       <module>base</module>
     </depends>
   </module>
+
+  <module>
+    <name>ecm-webdav</name>
+    <as>ecm-webdav</as>
+    <script>
+      <path>/javascript/eXo/ecm/ITHitWebDAVClient.js</path>
+    </script>
+  </module>
+
+  <module>
+    <name>openDocumentInOffice</name>
+    <as>openDocumentInOffice</as>
+    <script>
+      <path>/javascript/eXo/ecm/OpenDocumentInOffice.js</path>
+    </script>
+    <depends>
+      <module>jquery</module>
+      <as>gj</as>
+    </depends>
+    <depends>
+      <module>ecm-webdav</module>
+      <as>ecmWebdav</as>
+    </depends>
+  </module>
+
 </gatein-resources>

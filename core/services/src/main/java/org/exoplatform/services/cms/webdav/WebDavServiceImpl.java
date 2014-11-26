@@ -249,7 +249,20 @@ public class WebDavServiceImpl extends org.exoplatform.services.jcr.webdav.WebDa
       }
       return Response.serverError().build();
     }
-    return super.get(repoName, repoPath, rangeHeader, ifModifiedSince, ifNoneMatch, version, uriInfo);
+    Response response = super.get(repoName, repoPath, rangeHeader, ifModifiedSince, ifNoneMatch, version, uriInfo);
+    if(HTTPStatus.OK == response.getStatus()) {
+      return Response.fromResponse(response)
+              .header("Access-Control-Allow-Origin", uriInfo.getRequestUri().getHost())
+              .header("Access-Control-Allow-Credentials", true)
+              .header("Access-Control-Allow-Methods", "ACL, CANCELUPLOAD, CHECKIN, CHECKOUT, COPY, DELETE, GET, HEAD, LOCK, MKCALENDAR, MKCOL, " +
+                      "MOVE, OPTIONS, POST, PROPFIND, PROPPATCH, PUT, REPORT, SEARCH, UNCHECKOUT, UNLOCK, UPDATE, VERSION-CONTROL")
+              .header("Access-Control-Allow-Headers", "Overwrite, Destination, Content-Type, Depth, User-Agent, Translate, Range, Content-Range," +
+                      " Timeout, X-File-Size, X-Requested-With, If-Modified-Since, X-File-Name, Cache-Control, Location, Lock-Token, If")
+              .header("Access-Control-Expose-Header", "DAV, content-length, Allow")
+              .header("Access-Control-Max-Age", 3600)
+              .build();
+    }
+    return response;
   }
 
   @HEAD
