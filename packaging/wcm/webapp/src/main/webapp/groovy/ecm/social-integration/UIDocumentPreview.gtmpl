@@ -1,0 +1,49 @@
+<%
+    /**
+     * Created by The eXo Platform SARL
+     * Author : Pham Duy Dong
+     *                    phamdong@gmail.com
+     * Nov 26, 2014
+     * version: $Id$
+     */
+
+    boolean showCloseButton =    uicomponent.isShowCloseButton();
+
+    String popupId = uicomponent.getId();
+    String rsId = org.exoplatform.webui.application.WebuiRequestContext.stripUUIDSuffix(popupId);
+
+    String title = "";
+    def component = uicomponent.getUIComponent();
+    if (component != null) title = _ctx.appRes(rsId + ".title." + component.getId());
+    
+    int width = uicomponent.getWindowWidth();
+    int height = uicomponent.getWindowHeight() - 40;
+    def String widthStyle = "";
+    def String heightStyle = "";
+    if(width > 0) widthStyle = "width:" + width + "px;";
+    if(height < 0) height = null;
+
+    String show = "none";
+
+    def rcontext = _ctx.getRequestContext();
+    def module = rcontext.getJavascriptManager().require("SHARED/uiPopupWindow", "uiPopupWindow");
+    if(uicomponent.isShow()) {
+       module.addScripts("uiPopupWindow.show('$popupId', $uicomponent.showMask, null, $height);");
+    } else if (rcontext.useAjax()) {
+       module.addScripts("uiPopupWindow.hide('$popupId', $uicomponent.showMask, null, $height);");
+    }
+%>
+
+<div class="UIDocumentPreview UIPopupWindow uiPopup UIDragObject NormalStyle" exo:minWidth="200" exo:minHeight="200" id="$popupId" style=" display: $show;">
+    <div class="popupHeader clearfix">
+        <%if (showCloseButton) {%>
+            <a class="uiIconClose pull-right" title="<%=_ctx.appRes("UIPopupWindow.Close")%>" onclick="<%=uicomponent.event(uicomponent.getCloseEvent())%>"></a>
+        <% } %>
+        <span class="PopupTitle popupTitle"><%=title%></span>
+    </div>
+    <div class="PopupContent popupContent"><% uicomponent.renderChildren(); %></div>
+    
+    <%if (uicomponent.isResizable()) {%>
+        <span class="uiIconResize pull-right uiIconLightGray"></span>
+    <%}%>
+</div>

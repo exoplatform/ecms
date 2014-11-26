@@ -1,0 +1,48 @@
+<%
+	import java.util.List;
+	import java.util.ArrayList;
+	import javax.jcr.Node;
+	import javax.jcr.NodeIterator;
+	import org.exoplatform.webui.core.UIComponent;
+  import org.exoplatform.services.jcr.util.Text;
+  import org.exoplatform.container.PortalContainer;
+  import org.exoplatform.services.jcr.RepositoryService;
+  import org.exoplatform.wcm.webui.Utils;
+
+
+	UIComponent uiParent = uicomponent.getParent();
+
+  public Node getFileLangNode(Node currentNode) throws Exception {
+    if(currentNode.isNodeType("nt:unstructured")) {
+      if(currentNode.getNodes().getSize() > 0) {
+        NodeIterator nodeIter = currentNode.getNodes() ;
+        while(nodeIter.hasNext()) {
+          Node ntFile = nodeIter.nextNode() ;
+          if(ntFile.getPrimaryNodeType().getName().equals("nt:file")) {
+            return ntFile ;
+          }
+        }
+        return currentNode ;
+      }
+    }
+    return currentNode ;
+  }
+
+  def originalNode = uiParent.getOriginalNode();
+  def currentNode = getFileLangNode(uiParent.getNode()) ;
+  def contentNode = currentNode.getNode("jcr:content") ;
+  def mimeType = contentNode.getProperty("jcr:mimeType").getString() ;
+  RepositoryService rService = uicomponent.getApplicationComponent(RepositoryService.class);
+  String repository = rService.getCurrentRepository().getConfiguration().getName();
+  def binarySrc = Utils.getWebdavURL(currentNode);
+%>
+
+  <video src="$binarySrc" controls="controls" class="videoContent">
+  your browser does not support the video tag
+  </video>
+  
+  <style>
+  .videoContent{  	
+  	width:600px;
+  }
+  </style>
