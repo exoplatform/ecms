@@ -27,6 +27,7 @@ import org.exoplatform.clouddrive.ConfigurationException;
 import org.exoplatform.clouddrive.jcr.JCRLocalCloudDrive;
 import org.exoplatform.clouddrive.jcr.NodeFinder;
 import org.exoplatform.clouddrive.utils.ExtendedMimeTypeResolver;
+import org.exoplatform.container.PortalContainer;
 import org.exoplatform.container.xml.InitParams;
 import org.exoplatform.services.jcr.RepositoryService;
 import org.exoplatform.services.jcr.ext.app.SessionProviderService;
@@ -123,7 +124,11 @@ public class GoogleDriveConnector extends CloudDriveConnector {
     redirectURL.append(getConnectorSchema());
     redirectURL.append("://");
     redirectURL.append(getConnectorHost());
-    redirectURL.append("/portal/rest/clouddrive/connect/");
+    redirectURL.append('/');
+    redirectURL.append(PortalContainer.getCurrentPortalContainerName());
+    redirectURL.append('/');
+    redirectURL.append(PortalContainer.getCurrentRestContextName());
+    redirectURL.append("/clouddrive/connect/");
     redirectURL.append(getProviderId());
 
     StringBuilder authURL = new StringBuilder();
