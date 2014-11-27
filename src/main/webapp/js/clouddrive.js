@@ -1210,7 +1210,7 @@
 						$viewer.find("iframe").attr("src", file.previewLink ? file.previewLink : file.link);
 						$vswitch.remove();
 					}
-					$viewer.find("div").show();
+					$viewer.find(".file-content").show();
 				}
 				eXo.ecm.ECMUtils.loadContainerWidth();
 			} // else not a cloud drive or its file
