@@ -28,8 +28,10 @@ import org.exoplatform.commons.upgrade.UpgradeProductPlugin;
 import org.exoplatform.commons.utils.PrivilegedSystemHelper;
 import org.exoplatform.commons.version.util.VersionComparator;
 import org.exoplatform.container.xml.InitParams;
+import org.exoplatform.services.cms.impl.Utils;
 import org.exoplatform.services.cms.views.ManageViewService;
 import org.exoplatform.services.cms.views.ViewConfig;
+import org.exoplatform.services.cms.views.impl.ManageViewPlugin;
 import org.exoplatform.services.jcr.ext.common.SessionProvider;
 import org.exoplatform.services.log.ExoLogger;
 import org.exoplatform.services.log.Log;
@@ -55,11 +57,21 @@ public class UserViewUpgradePlugin extends UpgradeProductPlugin {
   public UserViewUpgradePlugin(ManageViewService manageViewService, InitParams initParams) {
     super(initParams);
     this.manageViewService_  = manageViewService;
+
   }
   
   public void processUpgrade(String oldVersion, String newVersion) {
     if (log.isInfoEnabled()) {
       log.info("Start " + this.getClass().getName() + ".............");
+    }
+    try {
+      // Remove cached user view
+      Utils.removeAllEditedConfiguredData(ManageViewPlugin.class.getSimpleName(), ManageViewPlugin.EDITED_CONFIGURED_VIEWS, true);
+      Utils.removeAllEditedConfiguredData(ManageViewPlugin.class.getSimpleName(), ManageViewPlugin.EDITED_CONFIGURED_VIEWS_TEMPLATES, true);
+    } catch (Exception e) {
+      if (log.isErrorEnabled()) {
+        log.error("An unexpected error occurs when migrating Site Explorer views:", e);
+      }
     }
     String unchangedViews = PrivilegedSystemHelper.getProperty("unchanged-site-explorer-views");
     SessionProvider sessionProvider = null;
@@ -73,6 +85,7 @@ public class UserViewUpgradePlugin extends UpgradeProductPlugin {
       for (String unchangedView : unchangedViews.split(",")) {
         unchangedViewSet.add(unchangedView.trim());
       }
+
       //get all old query nodes that need to be removed.
       sessionProvider = SessionProvider.createSystemProvider();
       Node parentNode = null;

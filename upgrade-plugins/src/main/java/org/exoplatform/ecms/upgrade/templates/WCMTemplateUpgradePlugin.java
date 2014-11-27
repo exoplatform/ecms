@@ -68,17 +68,27 @@ public class WCMTemplateUpgradePlugin extends UpgradeProductPlugin {
     if (log.isInfoEnabled()) {
       log.info("Start " + this.getClass().getName() + ".............");
     }
+    try {
+      // Remove cache application templates
+      Utils.removeAllEditedConfiguredData(ApplicationTemplateManagerServiceImpl.class.getSimpleName(),
+          ApplicationTemplateManagerServiceImpl.EDITED_CONFIGURED_TEMPLATES, true);
+      // re-initialize new scripts
+      ((ApplicationTemplateManagerServiceImpl) appTemplateService_).start();
+    } catch (Exception e) {
+      if (log.isErrorEnabled()) {
+        log.error("An unexpected error occurs when migrating templates for portlet CLV and WCMSearch: ", e);
+      }
+    }
     String unchangedClvTemplates = PrivilegedSystemHelper.getProperty("unchanged-clv-templates");
     String unchangedSearchTemplates = PrivilegedSystemHelper.getProperty("unchanged-wcm-search-templates");
     upgrade(unchangedClvTemplates, "content-list-viewer");
     upgrade(unchangedSearchTemplates, "search");
-    
     try {
       // re-initialize new scripts
-      ((ApplicationTemplateManagerServiceImpl)appTemplateService_).start();
+      ((ApplicationTemplateManagerServiceImpl) appTemplateService_).start();
     } catch (Exception e) {
       if (log.isErrorEnabled()) {
-        log.error("An unexpected error occurs when migrating templates for portlet CLV and WCMSearch: ", e);        
+        log.error("An unexpected error occurs when migrating templates for portlet CLV and WCMSearch: ", e);
       }
     }
   }

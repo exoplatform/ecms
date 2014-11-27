@@ -44,8 +44,8 @@ import java.util.Set;
 public class ManageViewPlugin extends BaseComponentPlugin {
 
   private static String ECM_EXPLORER_TEMPLATE = "ecmExplorerTemplate" ;
-  private static final String EDITED_CONFIGURED_VIEWS = "EditedConfiguredViews";
-  private static final String EDITED_CONFIGURED_VIEWS_TEMPLATES = "EditedConfiguredViewsTemplate";
+  public static final String EDITED_CONFIGURED_VIEWS = "EditedConfiguredViews";
+  public static final String EDITED_CONFIGURED_VIEWS_TEMPLATES = "EditedConfiguredViewsTemplate";
   private InitParams params_ ;
   private RepositoryService repositoryService_ ;
   private NodeHierarchyCreator nodeHierarchyCreator_ ;
