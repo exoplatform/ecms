@@ -45,7 +45,7 @@ public abstract class CloudProvider {
     this.name = name.intern();
 
     int hc = 1;
-    hc = hc * 17 + id.hashCode();
+    hc = hc * 31 + id.hashCode();
     hc = hc * 31 + name.hashCode();
     this.hashCode = hc;
   }

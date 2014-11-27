@@ -54,8 +54,8 @@ public abstract class CloudUser {
     this.provider = provider;
 
     int hc = 1;
-    hc = hc * 9 + id.hashCode();
-    hc = hc * 17 + username.hashCode();
+    hc = hc * 31 + id.hashCode();
+    hc = hc * 31 + username.hashCode();
     hc = hc * 31 + email.hashCode();
     hc = hc * 31 + provider.hashCode();
     this.hashCode = hc;
