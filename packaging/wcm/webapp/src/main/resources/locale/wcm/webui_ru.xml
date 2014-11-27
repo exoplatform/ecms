@@ -202,8 +202,15 @@
     <msg>
       <time-to-late>Слишком длительное время поиска.</time-to-late>
       <empty-field>Пожалуйста, введите действительное ключевое слово для поиска.</empty-field>
+      <empty-name>Please enter the name to search</empty-name>
+      <empty-content>Please enter a word or phrase to search</empty-content>
+      <empty-property>Please select a property</empty-property>
+      <empty-property-keyword>Please enter a keyword for the property</empty-property-keyword>
+      <empty-doctype>Please select a document type</empty-doctype>
+      <empty-startDate>"From Date" is required</empty-startDate>
       <invalid-format>Недопустимый формат даты в поле '{0}'.</invalid-format>
       <invalid-date>"Дата До" должна быть позже, чем "Дата От"</invalid-date>
+      <invalid-startDate>"From Date" must not be later than today</invalid-startDate>
       <invalid-nodeType>Недопустимый тип узла "{0}". Пожалуйста, проверьте еще раз.</invalid-nodeType>
       <invalid-keyword>Неверное ключевое слово. Некоторые символы не поддерживаются.</invalid-keyword>
     </msg>

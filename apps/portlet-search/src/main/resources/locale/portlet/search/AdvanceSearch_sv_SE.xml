@@ -18,9 +18,9 @@
       <Document>Dokument</Document>
       <DocumentAndPage>Dokument och sida</DocumentAndPage>
       <documentandpage>Dokument och sida</documentandpage>
-      <resutlsCaption>Sökresultat</resutlsCaption>
+      <results>Results {0} to {1} for {2}</results>
+      <oneResult>Only one result for {0}</oneResult>
       <ofAboutCaption>om</ofAboutCaption>
-      <forCaption>för</forCaption>
       <timeUnitCaption>sekunder</timeUnitCaption>
       <similar>Sidor där samma innehåll visas</similar>
       <editor>Redigerare</editor>

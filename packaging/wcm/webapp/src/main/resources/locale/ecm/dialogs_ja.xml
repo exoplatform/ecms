@@ -133,7 +133,7 @@
         <end-time>#{Ecm.dialog.label.end-time}</end-time>
         <repeat-count>#{Ecm.dialog.label.repeat-count}</repeat-count>
         <time-inteval>#{Ecm.dialog.label.time-interval}</time-inteval>
-        <cron-expression>表現のクローン</cron-expression>
+        <cron-expression>Cron Expression</cron-expression>
         <description>#{word.description}</description>
       </label>
     </dialog>
@@ -144,18 +144,18 @@
   <ElementSet>
     <dialog>
       <label>
-        <title>#{word.title}</title>
+        <title>#{word.title}:</title>
         <creator>作成者</creator>
-        <subject>#{word.subject}</subject>
+        <subject>#{word.subject}:</subject>
         <source>ソース</source>
         <contributor>コントリビュータ</contributor>
         <resource-type>リソースタイプ</resource-type>
-        <date>#{word.date}</date>
+        <date>#{word.date}:</date>
         <publisher>公開者</publisher>
-        <description>#{word.description}</description>
+        <description>#{word.description}:</description>
         <rights>権限</rights>
         <relation>関連</relation>
-        <format>#{word.format}</format>
+        <format>#{word.format}:</format>
         <coverage>範囲</coverage>
         <identifier>識別子</identifier>
         <language>言語</language>

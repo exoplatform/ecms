@@ -129,7 +129,7 @@
     <title>资源管理器</title>
     <label>
       <Root>根</Root>
-      <webDavView>Open in MS Office</webDavView>
+      <webDavView>在 MS Office 中打开</webDavView>
     </label>
     <msg>
       <path-not-found>此元素被删除或更改。请单击刷新按钮。</path-not-found>
@@ -254,6 +254,7 @@
       <UISelectRestorePath>选择恢复路径</UISelectRestorePath>
       <UISEOForm>管理 SEO</UISEOForm>
       <UISEOToolbarForm>管理 SEO</UISEOToolbarForm>
+      <UIReadOnlyFileConfirmMessage>Open Document</UIReadOnlyFileConfirmMessage>
     </title>
     <header>
       <workspace>工作区</workspace>
@@ -400,6 +401,7 @@
       <constraintviolation-exception>找不到强制性项目 jcr:uuid。该节点可能已删除或更改。请单击刷新按钮。</constraintviolation-exception>
       <path-not-found-exception>此节点已被删除或更改。请单击刷新按钮。</path-not-found-exception>
       <not-exist-categories>该类别不存在。</not-exist-categories>
+      <lock-node-read-only>This file is locked by user {0}. Open read-only ?</lock-node-read-only>
     </msg>
   </UIPopupMenu>
   <!--
@@ -591,7 +593,9 @@
       <MoveToTrash>移到垃圾桶</MoveToTrash>
       <RestoreFromTrash>从垃圾桶中还原</RestoreFromTrash>
       <EmptyTrash>倾倒垃圾桶</EmptyTrash>
-      <WebDavView>Open in MS Office</WebDavView>
+      <WebDavView>在 MS Office 中打开</WebDavView>
+      <Download>下载</Download>
+      <OpenDocument>Remote Edit</OpenDocument>
     </event>
   </ECMContextMenu>
  
@@ -669,14 +673,14 @@
     </confirm>
     <header>
       <name>名称</name>
-      <multiValue>Multi Value</multiValue>
+      <multiValue>多值</multiValue>
       <value>值</value>
       <action>操作</action>
     </header>
     <label>
-      <binary>Binary Data</binary>
+      <binary>二进制数据</binary>
       <notavailable>N/A</notavailable>
-      <cannotget>Cannot get values</cannotget>
+      <cannotget>无法获取值</cannotget>
     </label>
     <action>
       <Close>#{word.close}</Close>
@@ -693,26 +697,26 @@
   #############################################################################
   -->
   <UIPropertyForm>
-    <title>Add/Edit Property</title>
+    <title>添加/编辑属性</title>
     <label>
       <name>名称：</name>
       <type>类型：</type>
-      <value>Value:</value>
+      <value>值：</value>
       <upload>上传:</upload>
-      <namespace>Namespace:</namespace>
-      <multiple>Multiple:</multiple>
-      <property_select>Add New Property:</property_select>
-      <value0>Value 0</value0>
-      <value1>Value 1</value1>
-      <value2>Value 2</value2>
-      <value3>Value 3</value3>
-      <value4>Value 4</value4>
-      <value5>Value 5</value5>
-      <value6>Value 6</value6>
-      <value7>Value 7</value7>
-      <value8>Value 8</value8>
-      <value9>Value 9</value9>
-      <value10>Value 10</value10>
+      <namespace>命名空间：</namespace>
+      <multiple>多个：</multiple>
+      <property_select>添加新的属性：</property_select>
+      <value0>值 0</value0>
+      <value1>值 1</value1>
+      <value2>值 2</value2>
+      <value3>值 3</value3>
+      <value4>值 4</value4>
+      <value5>值 5</value5>
+      <value6>值 6</value6>
+      <value7>值 7</value7>
+      <value8>值 8</value8>
+      <value9>值 9</value9>
+      <value10>值 10</value10>
     </label>
     <action>
       <Save>#{word.save}</Save>
@@ -720,11 +724,11 @@
       <Reset>重置</Reset>
     </action>
     <msg>
-      <name-invalid>Please enter the property name.</name-invalid>
-      <unable-create>Cannot add properties.</unable-create>
-      <value-invalid>Please enter the value.</value-invalid>
-      <node-checkedin>You must check out this node before adding a property.</node-checkedin>
-      <can-not-add>You cannot add properties to this node. This is only allowed for the node type nt:unstructured.</can-not-add>
+      <name-invalid>请输入属性名称</name-invalid>
+      <unable-create>不能添加属性</unable-create>
+      <value-invalid>请输入值</value-invalid>
+      <node-checkedin>添加一个属性之前，您必须先检验节点。</node-checkedin>
+      <can-not-add>不能将属性添加到此节点。这唯一允许的节点类型 nt:unstructured</can-not-add>
       <propertyName-invalid>The property name must include namespace (e.g. namespace:name).</propertyName-invalid>
       <propertyName-exist>The property '{0}' already exists.</propertyName-exist>
       <propertyValu-null>Some values may be null.</propertyValu-null>
@@ -747,7 +751,7 @@
       </title>
     </action>
     <header>
-      <usersOrGroups>User or Group</usersOrGroups>
+      <usersOrGroups>用户或用户组</usersOrGroups>
       <read>Read</read>
       <addNode>Modify</addNode>
       <remove>删除</remove>
@@ -762,9 +766,9 @@
   </UIPermissionInfo>
   <permission>
     <title>
-      <SelectUser>Select User</SelectUser>
+      <SelectUser>选择用户</SelectUser>
       <SelectMember>选择成员</SelectMember>
-      <AddAny>Select Everyone</AddAny>
+      <AddAny>选择所有人</AddAny>
     </title>
   </permission>
   <!--
@@ -2420,6 +2424,8 @@
       <ReplaceData>替换数据</ReplaceData>
       <Back>返回重命名</Back>
       <Keepfile>保持这两个文件</Keepfile>
+<ReadOnly>Open Read-only</ReadOnly>
+<Cancel>取消</Cancel>
     </label>
   </UIConfirmMessage>
 
@@ -2978,12 +2984,15 @@
       <user>作者</user>
       <description>说明</description>
     </header>
+    <create-version>New version is created</create-version>
   </UIPublicationHistory>
   
   <UIPublicationSchedule>
     <label>
       <introduction>你可以安排您的文档的发布。选择你想看到您发布的文档的日期</introduction>
       <no-schedule-info>您的文档没有发布时间表</no-schedule-info>
+      <UIPublicationPanelStartDateInput>Start Publication date</UIPublicationPanelStartDateInput>
+      <UIPublicationPanelEndDateInput>End Publication date</UIPublicationPanelEndDateInput>
     </label>
     <msg>
       <save-finished>您新的发布时间表已成功保存。</save-finished>

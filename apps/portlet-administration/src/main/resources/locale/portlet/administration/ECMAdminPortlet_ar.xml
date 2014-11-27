@@ -988,6 +988,8 @@
       <publicationPublish>نشر</publicationPublish>
 <contentNavigation>تصفّح المحتوى</contentNavigation>
 <addSymLink>إضافة وصلة رمزيّة</addSymLink>
+      <checkIn>Check In</checkIn>
+      <checkOut>Check Out</checkOut>
     </label>
     <action>
       <Save>#{word.save}</Save>      
@@ -1377,7 +1379,7 @@
       <set_property>مجموعة حق الملكية</set_property>
       <remove>إزالة الامتياز</remove>
     </label>
-    <title>إضافة صلاحيّة الى تلك العقدة</title>
+    <title>Add a permission to this node</title>
     <action>
       <Close>#{word.close}</Close>
       <Save>حفظ</Save>
@@ -1480,7 +1482,7 @@
       <add_node>تغيير</add_node>
       <remove>حذف</remove>
     </label>
-    <title>اضافة صلاحية لهذه العقدة</title>
+    <title>Add permission to this node</title>
     <action>
       <Close>#{word.close}</Close>
       <Save>#{word.save}</Save>

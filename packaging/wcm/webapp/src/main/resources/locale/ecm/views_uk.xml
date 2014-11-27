@@ -42,7 +42,10 @@
     <view>
       <label>
         <not-viewable>Перегляд цього документа недоступний.</not-viewable>
+        <pdf-max-size>The preview is not available for content larger than {0} MB.</pdf-max-size>
+        <pdf-max-page>The preview is not available for content with over {0} pages.</pdf-max-page>
         <using-webDAV>або відкрийте в MS Office</using-webDAV>
+        <open-on-desktop>Open on Desktop</open-on-desktop>
         <file-size-too-big>Вміст цього файлу завеликий. Вам необхідно завантажити та відкрити у клієнті.</file-size-too-big>
         <webDAV>WebDAV подання</webDAV>
         <download>Завантажити</download>

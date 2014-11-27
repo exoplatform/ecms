@@ -18,9 +18,9 @@
       <Document>文档</Document>
       <DocumentAndPage>文档和页面</DocumentAndPage>
       <documentandpage>文档和页面</documentandpage>
-      <resutlsCaption>结果</resutlsCaption>
+      <results>Results {0} to {1} for {2}</results>
+      <oneResult>Only one result for {0}</oneResult>
       <ofAboutCaption>约</ofAboutCaption>
-      <forCaption>为</forCaption>
       <timeUnitCaption>秒</timeUnitCaption>
       <similar>网页相同的内容的显示位置</similar>
       <editor>编辑器</editor>

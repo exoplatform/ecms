@@ -202,8 +202,15 @@
     <msg>
       <time-to-late>Doba hledání je příliš dlouhá.</time-to-late>
       <empty-field>Zadejte platné klíčové slovo pro vyhledávání.</empty-field>
+      <empty-name>Please enter the name to search</empty-name>
+      <empty-content>Please enter a word or phrase to search</empty-content>
+      <empty-property>Please select a property</empty-property>
+      <empty-property-keyword>Please enter a keyword for the property</empty-property-keyword>
+      <empty-doctype>Please select a document type</empty-doctype>
+      <empty-startDate>"From Date" is required</empty-startDate>
       <invalid-format>Neplatný formát data/času v poli '{0}'.</invalid-format>
       <invalid-date>"K datu" musí být pozdější než "Datum od"</invalid-date>
+      <invalid-startDate>"From Date" must not be later than today</invalid-startDate>
       <invalid-nodeType>Typ uzlu "{0}" je neplatný. Zkontrolujte znovu.</invalid-nodeType>
       <invalid-keyword>Klíčové slovo je neplatné. Některé znaky nejsou podporovány.</invalid-keyword>
     </msg>

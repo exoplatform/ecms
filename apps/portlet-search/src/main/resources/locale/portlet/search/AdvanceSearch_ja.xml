@@ -18,9 +18,9 @@
       <Document>ドキュメント</Document>
       <DocumentAndPage>ドキュメントとページ</DocumentAndPage>
       <documentandpage>ドキュメントとページ</documentandpage>
-      <resutlsCaption>結果</resutlsCaption>
+      <results>Results {0} to {1} for {2}</results>
+      <oneResult>Only one result for {0}</oneResult>
       <ofAboutCaption>について</ofAboutCaption>
-      <forCaption>の</forCaption>
       <timeUnitCaption>秒</timeUnitCaption>
       <similar>同じコンテンツが表示されるページ</similar>
       <editor>編集者</editor>

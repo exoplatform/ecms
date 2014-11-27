@@ -18,9 +18,9 @@
       <Document>وثيقة</Document>
       <DocumentAndPage>وثيقة و صفحة</DocumentAndPage>
       <documentandpage>وثيقة و صفحة</documentandpage>
-      <resutlsCaption>النتائج</resutlsCaption>
+      <results>Results {0} to {1} for {2}</results>
+      <oneResult>Only one result for {0}</oneResult>
       <ofAboutCaption>من حوالي</ofAboutCaption>
-      <forCaption>إلى</forCaption>
       <timeUnitCaption>ثوان</timeUnitCaption>
       <similar>الصفحات التي تحتوي على نفس المضمون</similar>
       <editor>المؤلّف</editor>

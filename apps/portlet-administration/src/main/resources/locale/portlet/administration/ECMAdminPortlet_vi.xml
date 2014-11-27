@@ -87,7 +87,7 @@
 -->
   <UITaxonomyTreeMainForm>
     <action>
-      <Reset>Làm lại</Reset>
+      <Reset>Reset</Reset>
     </action>
     <msg>
       <name-not-allowed>Tên không hợp lệ</name-not-allowed>
@@ -712,7 +712,7 @@
     </label>
     <title>
       <AddPermission>Thêm Phân quyền</AddPermission>
-      <RemovePermission>Gỡ bỏ Phân quyền</RemovePermission>
+      <RemovePermission>Remove Permission</RemovePermission>
       <AddIcon>Thêm Biểu tượng</AddIcon>
       <AddPath>Thêm Đường dẫn</AddPath>
     </title>
@@ -988,6 +988,8 @@
       <publicationPublish>Xuất bản</publicationPublish>
 <contentNavigation>Điều hướng theo nội dung</contentNavigation>
 <addSymLink>Thêm liên kết</addSymLink>
+      <checkIn>Check In</checkIn>
+      <checkOut>Check Out</checkOut>
     </label>
     <action>
       <Save>#{word.save}</Save>      
@@ -1377,11 +1379,11 @@
       <set_property>Quyền Thiết lập Thuộc tính</set_property>
       <remove>Quyền Gỡ bỏ</remove>
     </label>
-    <title>Thêm phân quyền cho Nút</title>
+    <title>Thêm phân quyền cho nút</title>
     <action>
       <Close>#{word.close}</Close>
-      <Save>Lưu</Save>
-      <Reset>Làm lại</Reset>
+      <Save>Save</Save>
+      <Reset>Reset</Reset>
     </action>
     <msg>
       <checkbox-require>Vui lòng chọn ít nhất một phân quyền.</checkbox-require>
@@ -1480,7 +1482,7 @@
       <add_node>Sửa đổi</add_node>
       <remove>Quyền xóa</remove>
     </label>
-    <title>Thêm quyền cho nút</title>
+    <title>Thêm phân quyền cho nút</title>
     <action>
       <Close>#{word.close}</Close>
       <Save>#{word.save}</Save>

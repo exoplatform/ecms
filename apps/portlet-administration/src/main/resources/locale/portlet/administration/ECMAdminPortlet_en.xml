@@ -1379,7 +1379,7 @@
       <set_property>Set Property Right</set_property>
       <remove>Remove Right</remove>
     </label>
-    <title>Add a permission to that node</title>
+    <title>Add a permission to this node</title>
     <action>
       <Close>#{word.close}</Close>
       <Save>Save</Save>
@@ -1482,7 +1482,7 @@
       <add_node>Modify</add_node>
       <remove>Remove</remove>
     </label>
-    <title>Add permission to that node</title>
+    <title>Add permission to this node</title>
     <action>
       <Close>#{word.close}</Close>
       <Save>#{word.save}</Save>

@@ -254,6 +254,7 @@
       <UISelectRestorePath>Vybrat místo obnovení</UISelectRestorePath>
       <UISEOForm>Správa SEO</UISEOForm>
       <UISEOToolbarForm>Správa SEO</UISEOToolbarForm>
+      <UIReadOnlyFileConfirmMessage>Open Document</UIReadOnlyFileConfirmMessage>
     </title>
     <header>
       <workspace>Pracovní plocha</workspace>
@@ -400,6 +401,7 @@
       <constraintviolation-exception>Povinná položka Jcr:uuid nebyla nalezena. Uzel byl odstraněn nebo změněn. Prosím klikněte na tlačítko Obnovit.</constraintviolation-exception>
       <path-not-found-exception>Tento uzel byl odstraněn nebo změněn. Prosím klikněte na tlačítko Obnovit.</path-not-found-exception>
       <not-exist-categories>Kategorie neexistuje.</not-exist-categories>
+      <lock-node-read-only>This file is locked by user {0}. Open read-only ?</lock-node-read-only>
     </msg>
   </UIPopupMenu>
   <!--
@@ -592,6 +594,8 @@
       <RestoreFromTrash>Obnovit z koše</RestoreFromTrash>
       <EmptyTrash>Vysypat koš</EmptyTrash>
       <WebDavView>Otevřít v MS Office</WebDavView>
+      <Download>Stáhnout</Download>
+      <OpenDocument>Remote Edit</OpenDocument>
     </event>
   </ECMContextMenu>
  
@@ -747,7 +751,7 @@
       </title>
     </action>
     <header>
-      <usersOrGroups>User or Group</usersOrGroups>
+      <usersOrGroups>Uživatel nebo skupina</usersOrGroups>
       <read>Read</read>
       <addNode>Modify</addNode>
       <remove>Odstranit</remove>
@@ -762,8 +766,8 @@
   </UIPermissionInfo>
   <permission>
     <title>
-      <SelectUser>Select User</SelectUser>
-      <SelectMember>Select Membership</SelectMember>
+      <SelectUser>Vybrat uživatele</SelectUser>
+      <SelectMember>Vybrat členství</SelectMember>
       <AddAny>Select Everyone</AddAny>
     </title>
   </permission>
@@ -790,7 +794,7 @@
   </UIGroupSelector>
   <UIPermissionForm>
     <label>
-      <UIPopupWindow>Select</UIPopupWindow>
+      <UIPopupWindow>Vybrat</UIPopupWindow>
       <permission>UIPermissionForm</permission>
       <userOrGroup>Uživatel nebo skupina</userOrGroup>
       <read>Read Right</read>
@@ -2420,6 +2424,8 @@
       <ReplaceData>Nahradit data</ReplaceData>
       <Back>Zpět na přejmenování</Back>
       <Keepfile>Ponechat oba soubory</Keepfile>
+<ReadOnly>Open Read-only</ReadOnly>
+<Cancel>Zrušit</Cancel>
     </label>
   </UIConfirmMessage>
 
@@ -2978,12 +2984,15 @@
       <user>Autor</user>
       <description>Popis</description>
     </header>
+    <create-version>New version is created</create-version>
   </UIPublicationHistory>
   
   <UIPublicationSchedule>
     <label>
       <introduction>Můžete naplánovat zveřejnění dokumentu. Vyberte data, kdy byste rádi viděli váš dokument zveřejněn</introduction>
       <no-schedule-info>Pro váš dokument neexistuje žádné naplánované zveřejnění</no-schedule-info>
+      <UIPublicationPanelStartDateInput>Start Publication date</UIPublicationPanelStartDateInput>
+      <UIPublicationPanelEndDateInput>End Publication date</UIPublicationPanelEndDateInput>
     </label>
     <msg>
       <save-finished>Nový plán zveřejnění byl úspěšně uložen.</save-finished>
@@ -3059,9 +3068,9 @@
     </DrivesArea>
     <msg>
       <no-view-found>There are no views applied for your access permission in drive '{0}'.</no-view-found>
-      <access-denied>Access denied. You may not have permission in the workspace of drive '{0}'.</access-denied>
+      <access-denied>Přístup byl odepřen. Nemáte oprávnění v prostoru disku {0}.</access-denied>
       <empty-drives>Access denied. Either there is no drive in this repository or you do not have permission to access any drives in this repository.</empty-drives>
-      <workspace-not-exist>Drive '{0}' was stored in one unrecognized workspace. Please reconfigure this drive.</workspace-not-exist>
+      <workspace-not-exist>Disk {0} byl uložen v neznámém prostoru. Překonfigurujte prosím tento disk.</workspace-not-exist>
     </msg>
   </UIDrivesArea>
   <UIJcrExplorerEditForm>

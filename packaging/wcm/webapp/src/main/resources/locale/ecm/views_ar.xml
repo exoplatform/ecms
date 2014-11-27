@@ -42,7 +42,10 @@
     <view>
       <label>
         <not-viewable>The preview of this document is not available.</not-viewable>
+        <pdf-max-size>The preview is not available for content larger than {0} MB.</pdf-max-size>
+        <pdf-max-page>The preview is not available for content with over {0} pages.</pdf-max-page>
         <using-webDAV>or Open in MS Office</using-webDAV>
+        <open-on-desktop>Open on Desktop</open-on-desktop>
         <file-size-too-big>محتوى هذا الملف كبير جدا. لتتمكن من عرضه يُرجى تنزيله</file-size-too-big>
         <webDAV>مشهد WebDAV</webDAV>
         <download>تنزيل هذا الملف</download>
@@ -60,7 +63,7 @@
       <label>
         <from>من:</from>
         <to>إلى:</to>
-        <cc>إضافة نسخة إلى:</cc>
+        <cc>Cc:</cc>
         <date>التاريخ:</date>
         <subject>الموضوع:</subject>
         <attachment>إرفاق ملف:</attachment>

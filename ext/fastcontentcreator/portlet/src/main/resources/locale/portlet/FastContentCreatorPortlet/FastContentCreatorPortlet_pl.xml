@@ -148,7 +148,7 @@
     <title>
       <UIOneNodePathSelector>Wybierz lokalizację</UIOneNodePathSelector>
       <UIPermissionSelector>Przeglądarka uprawnień</UIPermissionSelector>
-      <UICategoriesSelector>Dodaj kategorie</UICategoriesSelector>
+      <UICategoriesSelector>Add Categories</UICategoriesSelector>
     </title>
   </PopupComponent>
 

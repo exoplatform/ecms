@@ -254,6 +254,7 @@
       <UISelectRestorePath>選擇復原路徑</UISelectRestorePath>
       <UISEOForm>管理 SEO</UISEOForm>
       <UISEOToolbarForm>管理 SEO</UISEOToolbarForm>
+      <UIReadOnlyFileConfirmMessage>Open Document</UIReadOnlyFileConfirmMessage>
     </title>
     <header>
       <workspace>工作區</workspace>
@@ -400,6 +401,7 @@
       <constraintviolation-exception>找不到強制性專案 jcr:uuid。該節點可能已刪除或更改。請按一下刷新按鈕。</constraintviolation-exception>
       <path-not-found-exception>此節點已被刪除或更改。請按一下刷新按鈕。</path-not-found-exception>
       <not-exist-categories>該類別不存在。</not-exist-categories>
+      <lock-node-read-only>This file is locked by user {0}. Open read-only ?</lock-node-read-only>
     </msg>
   </UIPopupMenu>
   <!--
@@ -592,6 +594,8 @@
       <RestoreFromTrash>從垃圾桶中還原</RestoreFromTrash>
       <EmptyTrash>清空垃圾桶</EmptyTrash>
       <WebDavView>在 MS Office 中打開</WebDavView>
+      <Download>下載</Download>
+      <OpenDocument>Remote Edit</OpenDocument>
     </event>
   </ECMContextMenu>
  
@@ -2420,6 +2424,8 @@
       <ReplaceData>替換資料</ReplaceData>
       <Back>返回重新命名</Back>
       <Keepfile>保持這兩個檔案</Keepfile>
+<ReadOnly>Open Read-only</ReadOnly>
+<Cancel>取消</Cancel>
     </label>
   </UIConfirmMessage>
 
@@ -2978,12 +2984,15 @@
       <user>作者</user>
       <description>描述</description>
     </header>
+    <create-version>New version is created</create-version>
   </UIPublicationHistory>
   
   <UIPublicationSchedule>
     <label>
       <introduction>你可以安排您的文件發佈。選擇你想看到您發佈的文件日期</introduction>
       <no-schedule-info>沒有為您的文件發佈時程表</no-schedule-info>
+      <UIPublicationPanelStartDateInput>Start Publication date</UIPublicationPanelStartDateInput>
+      <UIPublicationPanelEndDateInput>End Publication date</UIPublicationPanelEndDateInput>
     </label>
     <msg>
       <save-finished>您新的發佈排程已成功保存。</save-finished>

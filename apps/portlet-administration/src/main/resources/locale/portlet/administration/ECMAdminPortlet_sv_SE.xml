@@ -988,6 +988,8 @@
       <publicationPublish>Publicera</publicationPublish>
 <contentNavigation>Navigering i innehåll</contentNavigation>
 <addSymLink>Lägg till Symlink</addSymLink>
+      <checkIn>Check In</checkIn>
+      <checkOut>Check Out</checkOut>
     </label>
     <action>
       <Save>#{word.save}</Save>      
@@ -1377,7 +1379,7 @@
       <set_property>Skapa rättigheter</set_property>
       <remove>Ta bort rättigheter</remove>
     </label>
-    <title>Lägga till en rättighet till noden</title>
+    <title>Add a permission to this node</title>
     <action>
       <Close>#{word.close}</Close>
       <Save>Spara</Save>
@@ -1480,7 +1482,7 @@
       <add_node>Ändra</add_node>
       <remove>Ta bort</remove>
     </label>
-    <title>Lägga till en rättighet till noden</title>
+    <title>Add permission to this node</title>
     <action>
       <Close>#{word.close}</Close>
       <Save>#{word.save}</Save>

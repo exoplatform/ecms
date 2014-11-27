@@ -202,8 +202,15 @@
     <msg>
       <time-to-late>O tempo de busca está demorando muito.</time-to-late>
       <empty-field>Por favor coloque uma palavra chave válida para a busca</empty-field>
+      <empty-name>Please enter the name to search</empty-name>
+      <empty-content>Please enter a word or phrase to search</empty-content>
+      <empty-property>Please select a property</empty-property>
+      <empty-property-keyword>Please enter a keyword for the property</empty-property-keyword>
+      <empty-doctype>Please select a document type</empty-doctype>
+      <empty-startDate>"From Date" is required</empty-startDate>
       <invalid-format>Formato de data/hora inválido no campo '{0}'</invalid-format>
       <invalid-date>"Data final" deve ser maior que a "Data inicial"</invalid-date>
+      <invalid-startDate>"From Date" must not be later than today</invalid-startDate>
       <invalid-nodeType>O tipo de nó "{0}" é inválido! Por favor verifique novamente.</invalid-nodeType>
       <invalid-keyword>A palavra-chave é inválida. Alguns caracteres não são autorizados.</invalid-keyword>
     </msg>

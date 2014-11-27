@@ -168,7 +168,7 @@
       <nodesPerPage>عقد في كل صفحة:</nodesPerPage>
     </label>
     <action>
-      <Back>#{word.back}</Back>
+      <Back>#{word.close}</Back>
       <Save>#{word.save}</Save>
     </action>
   </UIPreferencesForm>
@@ -254,6 +254,7 @@
       <UISelectRestorePath>اختر المسار الخاص بالاستعادة</UISelectRestorePath>
       <UISEOForm>إدارة الـSEO</UISEOForm>
       <UISEOToolbarForm>إدارة الـSEO</UISEOToolbarForm>
+      <UIReadOnlyFileConfirmMessage>Open Document</UIReadOnlyFileConfirmMessage>
     </title>
     <header>
       <workspace>مساحة عمل</workspace>
@@ -400,6 +401,7 @@
       <constraintviolation-exception>لم يتمّ العثور على العنصر 'jcr:uuid'. رُبّما تم تغيير أو حذف العقدة. يرجى الضغط على زرّ التّحديث.</constraintviolation-exception>
       <path-not-found-exception>تمّ حذف أو تغيير هذه العقدة. يرجى الضغط على زرّ التّحديث.</path-not-found-exception>
       <not-exist-categories>هذه الفئة لا وجود لها.</not-exist-categories>
+      <lock-node-read-only>This file is locked by user {0}. Open read-only ?</lock-node-read-only>
     </msg>
   </UIPopupMenu>
   <!--
@@ -592,6 +594,8 @@
       <RestoreFromTrash>الاستعادة من سلّة المهملات</RestoreFromTrash>
       <EmptyTrash>إفراغ سلّة المهملات</EmptyTrash>
       <WebDavView>Open in MS Office</WebDavView>
+      <Download>تنزيل هذا الملف</Download>
+      <OpenDocument>Remote Edit</OpenDocument>
     </event>
   </ECMContextMenu>
  
@@ -2420,6 +2424,8 @@
       <ReplaceData>تعويض البيانات</ReplaceData>
       <Back>مرة أخرى لإعادة تسمية</Back>
       <Keepfile>ابقاء جميع الملفات</Keepfile>
+<ReadOnly>Open Read-only</ReadOnly>
+<Cancel>الغاء</Cancel>
     </label>
   </UIConfirmMessage>
 
@@ -2978,12 +2984,15 @@
       <user>المؤلّف</user>
       <description>الوصف</description>
     </header>
+    <create-version>New version is created</create-version>
   </UIPublicationHistory>
   
   <UIPublicationSchedule>
     <label>
       <introduction>يُمكنك برمجة عمليّة نشر ملفّك. حدد التواريخ التي تود أن يُنشَر خلالها الملفّ.</introduction>
       <no-schedule-info>لا توجد أي برمجة لنشر الملفّ الخاص بك</no-schedule-info>
+      <UIPublicationPanelStartDateInput>Start Publication date</UIPublicationPanelStartDateInput>
+      <UIPublicationPanelEndDateInput>End Publication date</UIPublicationPanelEndDateInput>
     </label>
     <msg>
       <save-finished>تمّ حفظ برمجة عمليّة النّشر الخاصة بك بنجاح.</save-finished>

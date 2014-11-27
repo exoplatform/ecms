@@ -87,7 +87,7 @@
 	-->
 	<UITaxonomyTreeMainForm>
 		<action>
-      <Reset>Réinitialiser</Reset>
+      <Reset>Reset</Reset>
 		</action>
 		<msg>
   		<name-not-allowed>Nom non autorisé</name-not-allowed>
@@ -712,7 +712,7 @@
     </label>
     <title>
       <AddPermission>Ajouter une Permission</AddPermission>
-      <RemovePermission>Supprimer la permission</RemovePermission>
+      <RemovePermission>Remove Permission</RemovePermission>
       <AddIcon>Ajouter une icône</AddIcon>
       <AddPath>Ajouter un emplacement</AddPath>
     </title>
@@ -988,6 +988,8 @@
       <publicationPublish>Publier</publicationPublish>
       <contentNavigation>Navigation par Contenu</contentNavigation>
       <addSymLink>Ajouter un Raccourci</addSymLink>
+      <checkIn>Check In</checkIn>
+      <checkOut>Check Out</checkOut>
     </label>			
     <action>
       <Save>#{word.save}</Save>      
@@ -1380,8 +1382,8 @@
     <title>Ajouter une permission à ce noeud</title>
     <action>
       <Close>#{word.close}</Close>
-      <Save>Enregistrer</Save>
-      <Reset>Réinitialiser</Reset>
+      <Save>Save</Save>
+      <Reset>Reset</Reset>
     </action>
     <msg>
       <checkbox-require>Vous devez choisir au moins une permission.</checkbox-require>

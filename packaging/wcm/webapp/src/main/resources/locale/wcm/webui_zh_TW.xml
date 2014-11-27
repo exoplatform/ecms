@@ -202,8 +202,15 @@
     <msg>
       <time-to-late>搜尋時間過長。</time-to-late>
       <empty-field>請輸入有效的關鍵字進行搜索。</empty-field>
+      <empty-name>Please enter the name to search</empty-name>
+      <empty-content>Please enter a word or phrase to search</empty-content>
+      <empty-property>Please select a property</empty-property>
+      <empty-property-keyword>Please enter a keyword for the property</empty-property-keyword>
+      <empty-doctype>Please select a document type</empty-doctype>
+      <empty-startDate>"From Date" is required</empty-startDate>
       <invalid-format>欄位"{0}"不正確的日期/時間格式。</invalid-format>
       <invalid-date>"結束日期必須晚於開始日期"</invalid-date>
+      <invalid-startDate>"From Date" must not be later than today</invalid-startDate>
       <invalid-nodeType>節點類型"{0}"無效。請再次檢查。</invalid-nodeType>
       <invalid-keyword>關鍵字不正確。無法識別某些字元。</invalid-keyword>
     </msg>

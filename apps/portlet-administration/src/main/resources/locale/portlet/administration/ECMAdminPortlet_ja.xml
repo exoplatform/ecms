@@ -988,6 +988,8 @@
       <publicationPublish>公開</publicationPublish>
 <contentNavigation>コンテンツ ナビゲーション</contentNavigation>
 <addSymLink>Symリンクの追加</addSymLink>
+      <checkIn>Check In</checkIn>
+      <checkOut>Check Out</checkOut>
     </label>
     <action>
       <Save>#{word.save}</Save>      
@@ -1377,7 +1379,7 @@
       <set_property>プロパティ権限のセット</set_property>
       <remove>削除権限</remove>
     </label>
-    <title>ノードへ権限の追加</title>
+    <title>Add a permission to this node</title>
     <action>
       <Close>#{word.close}</Close>
       <Save>保存</Save>
@@ -1480,7 +1482,7 @@
       <add_node>変更</add_node>
       <remove>削除権限</remove>
     </label>
-    <title>ノードへ権限の追加</title>
+    <title>Add permission to this node</title>
     <action>
       <Close>#{word.close}</Close>
       <Save>#{word.save}</Save>

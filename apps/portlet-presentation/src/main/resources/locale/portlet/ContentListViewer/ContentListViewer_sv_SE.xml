@@ -41,38 +41,38 @@
       <UICLVConfigDisplayTemplateFormSelectBox>Mall</UICLVConfigDisplayTemplateFormSelectBox>
       <UICLVConfigPaginatorTemplateFormSelectBox>Sidnumrering</UICLVConfigPaginatorTemplateFormSelectBox>
       <UICLVConfigItemsPerPageFormStringInput>Poster per sida</UICLVConfigItemsPerPageFormStringInput>
-      <UICLVConfigShowIllustrationFormCheckboxInput>Visa bild</UICLVConfigShowIllustrationFormCheckboxInput>
-      <UICLVConfigShowSummaryFormCheckboxInput>Visa sammanfattning</UICLVConfigShowSummaryFormCheckboxInput>
-      <UICLVConfigShowHeaderFormCheckboxInput>Visa sidhuvud</UICLVConfigShowHeaderFormCheckboxInput>
-      <UICLVConfigShowRefreshFormCheckboxInput>Visa återställ</UICLVConfigShowRefreshFormCheckboxInput>
+      <UICLVConfigShowIllustrationFormCheckboxInput>Show Image</UICLVConfigShowIllustrationFormCheckboxInput>
+      <UICLVConfigShowSummaryFormCheckboxInput>Show Summary</UICLVConfigShowSummaryFormCheckboxInput>
+      <UICLVConfigShowHeaderFormCheckboxInput>Show Header</UICLVConfigShowHeaderFormCheckboxInput>
+      <UICLVConfigShowRefreshFormCheckboxInput>Show Refresh</UICLVConfigShowRefreshFormCheckboxInput>
       <UICLVConfigShowTitleFormCheckboxInput>Visa titel</UICLVConfigShowTitleFormCheckboxInput>
       <UICLVConfigShowDateCreatedFormCheckboxInput>Visa datum</UICLVConfigShowDateCreatedFormCheckboxInput>
-      <UICLVConfigShowLinkFormCheckboxInput>Visa länk</UICLVConfigShowLinkFormCheckboxInput>
-      <UICLVConfigShowReadmoreFormCheckboxInput>Visa fler länkar</UICLVConfigShowReadmoreFormCheckboxInput>
-      <UICLVConfigAllowDynamicUrlStringInput>Tillåt dynamisk URL</UICLVConfigAllowDynamicUrlStringInput>
-      <UICLVConfigShowRssLinkFormCheckboxInput>Visa RSS-länk</UICLVConfigShowRssLinkFormCheckboxInput>
-      <UICLVConfigShowAutomaticDetectionCheckboxInput>Automatisk identifiering</UICLVConfigShowAutomaticDetectionCheckboxInput>
+      <UICLVConfigShowLinkFormCheckboxInput>Show Link</UICLVConfigShowLinkFormCheckboxInput>
+      <UICLVConfigShowReadmoreFormCheckboxInput>Show More Links</UICLVConfigShowReadmoreFormCheckboxInput>
+      <UICLVConfigAllowDynamicUrlStringInput>Allow Dynamic URL</UICLVConfigAllowDynamicUrlStringInput>
+      <UICLVConfigShowRssLinkFormCheckboxInput>Show RSS Link</UICLVConfigShowRssLinkFormCheckboxInput>
+      <UICLVConfigShowAutomaticDetectionCheckboxInput>Automatic Detection</UICLVConfigShowAutomaticDetectionCheckboxInput>
       <AdvancedBlock>Avancerad</AdvancedBlock>
       <UICLVConfigDynamicNavigationLabel>Dynamisk navigering</UICLVConfigDynamicNavigationLabel>
-      <UICLVConfigContextualFolderRadioBoxInput>Kontextuell</UICLVConfigContextualFolderRadioBoxInput>
+      <UICLVConfigContextualFolderRadioBoxInput>Contextual Folder</UICLVConfigContextualFolderRadioBoxInput>
       <UICLVConfigShowCLVByStringInput>Av</UICLVConfigShowCLVByStringInput>
       <UICLVConfigshowSCVWithStringInput>med</UICLVConfigshowSCVWithStringInput>
       <UICLVConfigTargetPageFormInputSet>Visa i sidan</UICLVConfigTargetPageFormInputSet>
-      <content-not-found>Innehåll hittades inte.</content-not-found>
+      <content-not-found>Content not found.</content-not-found>
       <ContentPath>Sökväg för innehåll</ContentPath>
-      <Up>Upp</Up>
-      <Down>Ner</Down>
+      <Up>Up</Up>
+      <Down>Down</Down>
       <UICLVConfigCacheManagementLabel>Innehållets synlighet</UICLVConfigCacheManagementLabel>
-      <UICLVContentByQueryLabel>Innehåll efter fråga</UICLVContentByQueryLabel>
+      <UICLVContentByQueryLabel>Content by Query</UICLVContentByQueryLabel>
       <UICLVConfigWorkspaceFormSelectBox>Arbetsyta</UICLVConfigWorkspaceFormSelectBox>
-      <UICLVConfigContentByQueryTextArea>genom fråga</UICLVConfigContentByQueryTextArea>
-      <UICLVConfigCacheEnableRadioBoxInput>Dela innehåll mellan användare</UICLVConfigCacheEnableRadioBoxInput>
+      <UICLVConfigContentByQueryTextArea>by query</UICLVConfigContentByQueryTextArea>
+      <UICLVConfigCacheEnableRadioBoxInput>Share content between users</UICLVConfigCacheEnableRadioBoxInput>
     </label>
     <help>
       <ModeSelectionHelp>Det finns två lägen att visa innehåll. "Från mapp" visar allt innehåll i vald mapp/kategori. I "Från innehåll" väljs manuellt det innehåll som skall visas.</ModeSelectionHelp>
       <FolderPathHelp>Välj det innehåll som du vill visa. Standardvalet kommer att ersättas dynamiskt om du aktiverar alternativet dynamisk navigering (se Avancerat läge nedan).</FolderPathHelp>
       <HeaderOptionHelp>Visa rubrik på toppen av listan innehåll. Om du aktiverar alternativet Automatisk identifiering, försöker den hitta huvudet baserat på den aktuella markeringen.</HeaderOptionHelp>
-      <GeneralOptionHelp>Välj grafiskt element som du vill visa i listan. Observera att, beroende på den valda mallen, vissa delar kanske inte är tillgängliga.</GeneralOptionHelp>
+      <GeneralOptionHelp>Select the graphical elements you want to show in your list. Note that, depending on your selected template, some elements may not be available.</GeneralOptionHelp>
       <ContextualHelp>Aktiverar alternativet dynamisk navigering. Andra kan ändra innehållet dynamiskt baserat på en URL-parameter.</ContextualHelp>
       <ParameterHelp>Denna parameter kommer att användas för åtkomst till innehållet om dynamisk navigering är aktiverad.</ParameterHelp>
       <ShowDetailInPageHelp>Genom att klicka på innehåll omdirigeras användaren till en detaljsida. Du måste ha en "Innehåll via URL" portlet med dynamisk navigering aktiverad på sidan för att innehåll skall visas.</ShowDetailInPageHelp>
@@ -86,8 +86,8 @@
       <delete>Ta bort</delete>
     </action>
     <msg>
-      <not-valid-path>Ogiltig sökväg.</not-valid-path>
-      <saving-success>Inställningar i portleten sparas.</saving-success>
+      <not-valid-path>The Folder Path is invalid.</not-valid-path>
+      <saving-success>The portlet's preferences are saved.</saving-success>
     </msg>
     <tab>
       <label>
@@ -99,8 +99,8 @@
   </UICLVConfig>
   <UICLVConfigDisplayModeFormRadioBoxInput>
     <label>
-      <AutoViewerMode>Från mapp</AutoViewerMode>
-      <ManualViewerMode>Från innehåll</ManualViewerMode>
+      <AutoViewerMode>By Folder</AutoViewerMode>
+      <ManualViewerMode>By Content</ManualViewerMode>
     </label>
   </UICLVConfigDisplayModeFormRadioBoxInput>
   <UICLVConfigItemPathFormInputSet>
@@ -183,7 +183,7 @@
   <UICLVConfigCacheEnableRadioBoxInput>
     <label>
       <ENABLE>Begränsad för autentisering</ENABLE>
-      <DISABLE>Begränsad för användarroll</DISABLE>
+      <DISABLE>Restricted by User Roles</DISABLE>
     </label>
   </UICLVConfigCacheEnableRadioBoxInput>
 </bundle>

@@ -87,7 +87,7 @@
 -->
   <UITaxonomyTreeMainForm>
     <action>
-      <Reset>Restablir</Reset>
+      <Reset>Reset</Reset>
     </action>
     <msg>
       <name-not-allowed>Nom prohibit</name-not-allowed>
@@ -712,7 +712,7 @@
     </label>
     <title>
       <AddPermission>Afegeix permisos</AddPermission>
-      <RemovePermission>Elimina Permisos</RemovePermission>
+      <RemovePermission>Remove Permission</RemovePermission>
       <AddIcon>Afegeix una icona</AddIcon>
       <AddPath>Afegeix una ruta</AddPath>
     </title>
@@ -988,6 +988,8 @@
       <publicationPublish>Publica-ho</publicationPublish>
 <contentNavigation>Navegació de contingut</contentNavigation>
 <addSymLink>Afegeix un enllaç simbòlic</addSymLink>
+      <checkIn>Check In</checkIn>
+      <checkOut>Check Out</checkOut>
     </label>
     <action>
       <Save>#{word.save}</Save>      
@@ -1377,11 +1379,11 @@
       <set_property>Dret per definir propietat</set_property>
       <remove>Elimina Drets</remove>
     </label>
-    <title>Afegeix un permisos al node</title>
+    <title>Add a permission to this node</title>
     <action>
       <Close>#{word.close}</Close>
-      <Save>Desa</Save>
-      <Reset>Restablir</Reset>
+      <Save>Save</Save>
+      <Reset>Reset</Reset>
     </action>
     <msg>
       <checkbox-require>Si us plau seleccioni almenys un permís.</checkbox-require>
@@ -1480,7 +1482,7 @@
       <add_node>Modificar</add_node>
       <remove>Elimina</remove>
     </label>
-    <title>Afegeix un permís a aquell node</title>
+    <title>Add permission to this node</title>
     <action>
       <Close>#{word.close}</Close>
       <Save>#{word.save}</Save>

@@ -71,16 +71,19 @@ public class UserViewUpgradePlugin extends UpgradeProductPlugin {
       Set<String> configuredViews = manageViewService_.getConfiguredViews();
       List<Node> removedNodes = new ArrayList<Node>();
       for (String unchangedView : unchangedViews.split(",")) {
-        unchangedViewSet.add(unchangedView.trim());
+        if(StringUtils.isNotEmpty(unchangedView.trim()))
+          unchangedViewSet.add(unchangedView.trim());
       }
       //get all old query nodes that need to be removed.
       sessionProvider = SessionProvider.createSystemProvider();
       Node parentNode = null;
-      for (ViewConfig viewConfig : manageViewService_.getAllViews()) {
-        String viewName = viewConfig.getName();
-        if (!unchangedViewSet.contains(viewName) && configuredViews.contains(viewName)) {
-          removedNodes.add(manageViewService_.getViewByName(viewName, sessionProvider));
-          parentNode = manageViewService_.getViewByName(viewName, sessionProvider).getParent();
+      if(unchangedViewSet.size()>0) {
+        for (ViewConfig viewConfig : manageViewService_.getAllViews()) {
+          String viewName = viewConfig.getName();
+          if (!unchangedViewSet.contains(viewName) && configuredViews.contains(viewName)) {
+            removedNodes.add(manageViewService_.getViewByName(viewName, sessionProvider));
+            parentNode = manageViewService_.getViewByName(viewName, sessionProvider).getParent();
+          }
         }
       }
       //remove the old query nodes

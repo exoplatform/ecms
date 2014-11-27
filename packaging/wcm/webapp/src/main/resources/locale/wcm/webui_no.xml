@@ -202,8 +202,15 @@
     <msg>
       <time-to-late>Søketiden er for lang.</time-to-late>
       <empty-field>Skriv inn et gyldig søkeord.</empty-field>
+      <empty-name>Please enter the name to search</empty-name>
+      <empty-content>Please enter a word or phrase to search</empty-content>
+      <empty-property>Please select a property</empty-property>
+      <empty-property-keyword>Please enter a keyword for the property</empty-property-keyword>
+      <empty-doctype>Please select a document type</empty-doctype>
+      <empty-startDate>"From Date" is required</empty-startDate>
       <invalid-format>Ugyldig dato/tidsformat i feltet '{0}'.</invalid-format>
       <invalid-date>"Til dato" må være etter "Fra dato"</invalid-date>
+      <invalid-startDate>"From Date" must not be later than today</invalid-startDate>
       <invalid-nodeType>Nodetypen "{0}", er ugyldig. Vennligst sjekk igjen.</invalid-nodeType>
       <invalid-keyword>Søkeordet er ugyldig. Noen tegn er ikke støttet.</invalid-keyword>
     </msg>

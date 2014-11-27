@@ -254,6 +254,7 @@
       <UISelectRestorePath>Velg gjenopprettings sti</UISelectRestorePath>
       <UISEOForm>Administrere SEO</UISEOForm>
       <UISEOToolbarForm>Administrere SEO</UISEOToolbarForm>
+      <UIReadOnlyFileConfirmMessage>Open Document</UIReadOnlyFileConfirmMessage>
     </title>
     <header>
       <workspace>Arbeidsområde</workspace>
@@ -400,6 +401,7 @@
       <constraintviolation-exception>Finner ikke det obligatorisk element jcr:uuid. Noden kan ha blitt slettet eller endret. Klikk Oppdater-knappen.</constraintviolation-exception>
       <path-not-found-exception>Denne noden ble slettet eller endret. Klikk Oppdater-knappen.</path-not-found-exception>
       <not-exist-categories>Kategorien finnes ikke.</not-exist-categories>
+      <lock-node-read-only>This file is locked by user {0}. Open read-only ?</lock-node-read-only>
     </msg>
   </UIPopupMenu>
   <!--
@@ -592,6 +594,8 @@
       <RestoreFromTrash>Gjenopprett fra papirkurven</RestoreFromTrash>
       <EmptyTrash>Tøm papirkurven</EmptyTrash>
       <WebDavView>Open in MS Office</WebDavView>
+      <Download>Last ned</Download>
+      <OpenDocument>Remote Edit</OpenDocument>
     </event>
   </ECMContextMenu>
  
@@ -747,7 +751,7 @@
       </title>
     </action>
     <header>
-      <usersOrGroups>User or Group</usersOrGroups>
+      <usersOrGroups>Bruker eller gruppe</usersOrGroups>
       <read>Read</read>
       <addNode>Modify</addNode>
       <remove>Fjern</remove>
@@ -762,8 +766,8 @@
   </UIPermissionInfo>
   <permission>
     <title>
-      <SelectUser>Select User</SelectUser>
-      <SelectMember>Select Membership</SelectMember>
+      <SelectUser>Velg bruker</SelectUser>
+      <SelectMember>Velg medlemskap</SelectMember>
       <AddAny>Select Everyone</AddAny>
     </title>
   </permission>
@@ -790,7 +794,7 @@
   </UIGroupSelector>
   <UIPermissionForm>
     <label>
-      <UIPopupWindow>Select</UIPopupWindow>
+      <UIPopupWindow>Velg</UIPopupWindow>
       <permission>UIPermissionForm</permission>
       <userOrGroup>Bruker eller gruppe</userOrGroup>
       <read>Read Right</read>
@@ -2420,6 +2424,8 @@
       <ReplaceData>Erstatt data</ReplaceData>
       <Back>Tilbake til Gi nytt navn</Back>
       <Keepfile>Behold begge filene</Keepfile>
+<ReadOnly>Open Read-only</ReadOnly>
+<Cancel>Avbryt</Cancel>
     </label>
   </UIConfirmMessage>
 
@@ -2978,12 +2984,15 @@
       <user>Forfatter</user>
       <description>Beskrivelse</description>
     </header>
+    <create-version>New version is created</create-version>
   </UIPublicationHistory>
   
   <UIPublicationSchedule>
     <label>
       <introduction>Du kan planlegge publiseringen av dokumentet ditt. Velg datoen du ønsker at dokumentet skal bli publisert</introduction>
       <no-schedule-info>Det er ingen planlagt publisering for dokumentet ditt</no-schedule-info>
+      <UIPublicationPanelStartDateInput>Start Publication date</UIPublicationPanelStartDateInput>
+      <UIPublicationPanelEndDateInput>End Publication date</UIPublicationPanelEndDateInput>
     </label>
     <msg>
       <save-finished>Den planlagte publiseringen har blitt lagret.</save-finished>
@@ -3059,9 +3068,9 @@
     </DrivesArea>
     <msg>
       <no-view-found>There are no views applied for your access permission in drive '{0}'.</no-view-found>
-      <access-denied>Access denied. You may not have permission in the workspace of drive '{0}'.</access-denied>
+      <access-denied>Tilgang nektet. Du har ikke rettigheter i arbeidsområdet på disken '{0}'.</access-denied>
       <empty-drives>Access denied. Either there is no drive in this repository or you do not have permission to access any drives in this repository.</empty-drives>
-      <workspace-not-exist>Drive '{0}' was stored in one unrecognized workspace. Please reconfigure this drive.</workspace-not-exist>
+      <workspace-not-exist>Disk '{0}' ble lagret i et ukjent arbeidsområde. Rekonfigurer denne disken.</workspace-not-exist>
     </msg>
   </UIDrivesArea>
   <UIJcrExplorerEditForm>
