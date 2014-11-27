@@ -19,27 +19,19 @@
 package org.exoplatform.clouddrive.ecms;
 
 import org.exoplatform.ecm.webui.component.explorer.UIJCRExplorer;
-import org.exoplatform.services.log.ExoLogger;
-import org.exoplatform.services.log.Log;
-import org.exoplatform.web.application.Parameter;
-import org.exoplatform.webui.application.WebuiRequestContext;
 import org.exoplatform.webui.config.annotation.ComponentConfig;
 import org.exoplatform.webui.config.annotation.EventConfig;
-import org.exoplatform.webui.core.UIPopupComponent;
 import org.exoplatform.webui.core.lifecycle.UIFormLifecycle;
 import org.exoplatform.webui.event.Event;
 import org.exoplatform.webui.event.Event.Phase;
 import org.exoplatform.webui.event.EventListener;
-import org.exoplatform.webui.form.UIForm;
 
 @ComponentConfig(lifecycle = UIFormLifecycle.class,
                  template = "classpath:groovy/templates/CloudDriveConnectDialog.gtmpl", events = {
                      @EventConfig(listeners = ConnectCloudDriveForm.ConnectActionListener.class),
                      @EventConfig(listeners = ConnectCloudDriveForm.CancelActionListener.class,
                                   phase = Phase.DECODE) })
-public class ConnectCloudDriveForm extends UIForm implements UIPopupComponent {
-
-  protected static final Log LOG = ExoLogger.getLogger(ConnectCloudDriveForm.class);
+public class ConnectCloudDriveForm extends BaseCloudDriveForm {
 
   public static class CancelActionListener extends EventListener<ConnectCloudDriveForm> {
     public void execute(Event<ConnectCloudDriveForm> event) throws Exception {
@@ -54,36 +46,4 @@ public class ConnectCloudDriveForm extends UIForm implements UIPopupComponent {
       uiExplorer.updateAjax(event);
     }
   }
-
-  public ConnectCloudDriveForm() {
-  }
-
-  @Override
-  public void activate() {
-    // nothing
-
-  }
-
-  @Override
-  public void deActivate() {
-    // nothing
-  }
-
-  /**
-   * {@inheritDoc}
-   */
-  @Override
-  public String renderEventURL(boolean ajax, String name, String beanId, Parameter[] params) throws Exception {
-    UIJCRExplorer uiExplorer = getAncestorOfType(UIJCRExplorer.class);
-    if (uiExplorer != null) {
-      String nodePath = uiExplorer.getCurrentNode().getPath();
-      String workspace = uiExplorer.getCurrentNode().getSession().getWorkspace().getName();
-      CloudDriveContext.init(WebuiRequestContext.getCurrentInstance(), workspace, nodePath);
-    } else {
-      LOG.error("Cannot find ancestor of type UIJCRExplorer in form " + this);
-    }
-
-    return super.renderEventURL(ajax, name, beanId, params);
-  }
-
 }

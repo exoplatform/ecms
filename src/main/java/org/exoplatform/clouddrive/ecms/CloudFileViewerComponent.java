@@ -31,26 +31,22 @@ import org.exoplatform.webui.ext.filter.UIExtensionFilter;
 import org.exoplatform.webui.ext.filter.UIExtensionFilters;
 
 /**
+ * Default WebUI component for Cloud Drive files. It shows content of remote file by its URL in iframe on file
+ * page in eXo Documents.<br>
+ * 
  * Created by The eXo Platform SAS.
  * 
  * @author <a href="mailto:pnedonosko@exoplatform.com">Peter Nedonosko</a>
  * @version $Id: CloudFileViewerComponent.java 00000 Nov 1, 2012 pnedonosko $
  */
 @ComponentConfig(template = "classpath:groovy/templates/CloudFileViewer.gtmpl")
-public class CloudFileViewerComponent extends UIComponent {
+public class CloudFileViewerComponent extends BaseCloudDriveManagerComponent {
 
   protected static final Log                     LOG        = ExoLogger.getLogger(CloudFileViewerComponent.class);
 
   public static final String                     EVENT_NAME = "ShowCloudFile";
 
   protected static final List<UIExtensionFilter> FILTERS    = Arrays.asList(new UIExtensionFilter[] { new CloudFileFilter() });
-
-  /**
-   * 
-   */
-  public CloudFileViewerComponent() {
-
-  }
 
   @UIExtensionFilters
   public List<UIExtensionFilter> getFilters() {
@@ -63,16 +59,7 @@ public class CloudFileViewerComponent extends UIComponent {
   @Override
   public String renderEventURL(boolean ajax, String name, String beanId, Parameter[] params) throws Exception {
     if (EVENT_NAME.equals(name)) {
-      UIJCRExplorer uiExplorer = getAncestorOfType(UIJCRExplorer.class);
-      if (uiExplorer != null) {
-        String nodePath = uiExplorer.getCurrentNode().getPath();
-        String workspace = uiExplorer.getCurrentNode().getSession().getWorkspace().getName();
-        CloudDriveContext.init(WebuiRequestContext.getCurrentInstance(), workspace, nodePath);
-      } else {
-        LOG.error("Cannot find ancestor of type UIJCRExplorer in viwer component " + this + ", parent: "
-            + this.getParent());
-      }
-
+      initContext();
       return "javascript:void(0);//objectId";
     }
     return super.renderEventURL(ajax, name, beanId, params);
