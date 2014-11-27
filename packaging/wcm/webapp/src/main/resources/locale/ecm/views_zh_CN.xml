@@ -30,6 +30,7 @@
         <comment-by>发表评论</comment-by>
         <email>电子邮件</email>
         <site>站点</site>
+        <lastComment>Last comment posted by {user} at {time}</lastComment>
       </label>
     </view>
   </Comment>

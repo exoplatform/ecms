@@ -24,7 +24,7 @@
     <dialog>
       <label>
         <MainContent>Huvudsakliga innehåll</MainContent>
-        <cssFile>default.css</cssFile>
+        <cssFile>default.CSS</cssFile>
         <jsFile>default.js</jsFile>
         <Advanced>Avancerad</Advanced>
         <Summary>Sammanfattning</Summary>

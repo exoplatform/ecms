@@ -30,6 +30,7 @@
         <comment-by>Comentat de către</comment-by>
         <email>E-mail</email>
         <site>Site-ul</site>
+        <lastComment>Last comment posted by {user} at {time}</lastComment>
       </label>
     </view>
   </Comment>

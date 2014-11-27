@@ -30,6 +30,7 @@
         <comment-by>Commenté par</comment-by>
         <email>Email</email>
         <site>Site</site>
+        <lastComment>Last comment posted by {user} at {time}</lastComment>
       </label>
     </view>
   </Comment>

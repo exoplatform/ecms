@@ -30,6 +30,7 @@
         <comment-by>Yorumlayan</comment-by>
         <email>E-posta</email>
         <site>Site</site>
+        <lastComment>Last comment posted by {user} at {time}</lastComment>
       </label>
     </view>
   </Comment>
@@ -137,7 +138,7 @@
   <ElementSet>
     <view>
       <label>
-        <not-avaliable>Uygulanabilir Değil</not-avaliable>
+        <not-avaliable>N/A</not-avaliable>
         <core-elements>Temel Unsurlar</core-elements>
         <title>Başlık</title>
         <creator>Oluşturan</creator>

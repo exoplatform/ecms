@@ -41,7 +41,7 @@
     </label>
     <button>
       <label>
-        <confirm>Ok</confirm>
+        <confirm>OK</confirm>
       </label>
     </button>
     <msg>
@@ -129,7 +129,7 @@
     <title>Explorer</title>
     <label>
       <Root>Root</Root>
-      <webDavView>Aperto in MS Office</webDavView>
+      <webDavView>Open in MS Office</webDavView>
     </label>
     <msg>
       <path-not-found>Elemento cancellato o modificato. Clicca il bottone Aggiorna.</path-not-found>
@@ -256,7 +256,7 @@
       <UISEOToolbarForm>Gestisci SEO</UISEOToolbarForm>
     </title>
     <header>
-      <workspace>Area di lavoro</workspace>
+      <workspace>Workspace</workspace>
       <path>Percorso</path>
     </header>
   </UIPopupWindow>
@@ -591,7 +591,7 @@
       <MoveToTrash>Sposta nel Cestino</MoveToTrash>
       <RestoreFromTrash>Ripristina dal Cestino</RestoreFromTrash>
       <EmptyTrash>Svuota Cestino</EmptyTrash>
-      <WebDavView>Aperto in MS Office</WebDavView>
+      <WebDavView>Open in MS Office</WebDavView>
     </event>
   </ECMContextMenu>
  
@@ -605,7 +605,7 @@
       <no-references>Referenze non trovate</no-references>
     </msg>
     <header>
-      <workspace>Area di lavoro</workspace>
+      <workspace>Workspace</workspace>
       <path>Percorso</path>
     </header>
     <action>
@@ -2500,7 +2500,7 @@
   <UIActionBar>
     <obtion>
       <Admin>Amministratore</Admin>
-      <Info>info</Info>
+      <Info>Info</Info>
       <Actions>Azioni</Actions>
       <Collaboration>Collaborazione</Collaboration>
       <Search>Ricerca</Search>

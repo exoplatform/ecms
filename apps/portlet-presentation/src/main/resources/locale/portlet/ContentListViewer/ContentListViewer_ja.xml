@@ -86,8 +86,8 @@
       <delete>削除</delete>
     </action>
     <msg>
-      <not-valid-path>The Folder Path is invalid.</not-valid-path>
-      <saving-success>The portlet's preferences are saved.</saving-success>
+      <not-valid-path>アイテムパスが不正です</not-valid-path>
+      <saving-success>ポートレット設定が保存されました</saving-success>
     </msg>
     <tab>
       <label>
@@ -99,8 +99,8 @@
   </UICLVConfig>
   <UICLVConfigDisplayModeFormRadioBoxInput>
     <label>
-      <AutoViewerMode>By Folder</AutoViewerMode>
-      <ManualViewerMode>By Content</ManualViewerMode>
+      <AutoViewerMode>フォルダー毎</AutoViewerMode>
+      <ManualViewerMode>コンテンツ毎</ManualViewerMode>
     </label>
   </UICLVConfigDisplayModeFormRadioBoxInput>
   <UICLVConfigItemPathFormInputSet>
@@ -139,8 +139,8 @@
       <delete-content-successfully>Content deleted successfully.</delete-content-successfully>
     </msg>
     <label>
-      <readmore>Read more</readmore>
-      <rssFeed>RSS Feed</rssFeed>
+      <readmore>もっと読む</readmore>
+      <rssFeed>RSS フィード</rssFeed>
     </label>
     <action>
       <refresh>リフレッシュ</refresh>
@@ -154,12 +154,12 @@
   </UICLVPresentation>
   <CorrectContentSelectorPopupWindow>
     <title>
-      <UIContentSelectorMulti>Multiple Content Selector Pane</UIContentSelectorMulti>
+      <UIContentSelectorMulti>複数コンテントセレクタパネル</UIContentSelectorMulti>
     </title>
   </CorrectContentSelectorPopupWindow>
   <UIContentDialogFormPopupWindow>
     <title>
-      <UIContentDialogForm>Web Content Form</UIContentDialogForm>
+      <UIContentDialogForm>Webコンテンツフォーム</UIContentDialogForm>
     </title>
   </UIContentDialogFormPopupWindow>
   <UICLVConfigContextualFolderRadioBoxInput>
@@ -183,7 +183,7 @@
   <UICLVConfigCacheEnableRadioBoxInput>
     <label>
       <ENABLE>認証で制約</ENABLE>
-      <DISABLE>Restricted by User Roles</DISABLE>
+      <DISABLE>Restricted by User roles</DISABLE>
     </label>
   </UICLVConfigCacheEnableRadioBoxInput>
 </bundle>

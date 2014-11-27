@@ -30,6 +30,7 @@
         <comment-by>Прокоментував</comment-by>
         <email>Електронна пошта</email>
         <site>Сайт</site>
+        <lastComment>Last comment posted by {user} at {time}</lastComment>
       </label>
     </view>
   </Comment>

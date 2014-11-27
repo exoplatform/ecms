@@ -30,6 +30,7 @@
         <comment-by>Comentat per</comment-by>
         <email>Correu electrònic</email>
         <site>Lloc</site>
+        <lastComment>Last comment posted by {user} at {time}</lastComment>
       </label>
     </view>
   </Comment>

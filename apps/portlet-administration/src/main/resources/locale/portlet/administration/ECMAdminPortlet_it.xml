@@ -87,7 +87,7 @@
 -->
   <UITaxonomyTreeMainForm>
     <action>
-      <Reset>Reset</Reset>
+      <Reset>Ripristinare</Reset>
     </action>
     <msg>
       <name-not-allowed>Nome vietato</name-not-allowed>
@@ -712,7 +712,7 @@
     </label>
     <title>
       <AddPermission>Aggiungi Permesso</AddPermission>
-      <RemovePermission>Remove Permission</RemovePermission>
+      <RemovePermission>Rimuovi Permesso</RemovePermission>
       <AddIcon>Aggiungi Icona</AddIcon>
       <AddPath>Aggiungi Percorso</AddPath>
     </title>
@@ -1358,7 +1358,7 @@
   <UITaxonomyTreeForm>
     <label>
       <name>Nome</name>
-      <workspace>Area di lavoro</workspace>
+      <workspace>Workspace</workspace>
       <homePath>Percorso Home</homePath>
       <permissions>Permessi</permissions>
     </label>
@@ -1377,11 +1377,11 @@
       <set_property>Imposta Permessi Nodo</set_property>
       <remove>Rimuovi Permessi</remove>
     </label>
-    <title>Add a permission to this node</title>
+    <title>Aggiungi un permesso al nodo</title>
     <action>
       <Close>#{word.close}</Close>
-      <Save>Save</Save>
-      <Reset>Reset</Reset>
+      <Save>Salva</Save>
+      <Reset>Ripristinare</Reset>
     </action>
     <msg>
       <checkbox-require>Seleziona almeno un permesso.</checkbox-require>
@@ -1480,7 +1480,7 @@
       <add_node>Modifica</add_node>
       <remove>Rimuovi</remove>
     </label>
-    <title>Add permission to this node</title>
+    <title>Aggiungi permesso al nodo</title>
     <action>
       <Close>#{word.close}</Close>
       <Save>#{word.save}</Save>

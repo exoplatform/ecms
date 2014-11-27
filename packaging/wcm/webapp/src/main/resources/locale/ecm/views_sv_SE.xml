@@ -30,6 +30,7 @@
         <comment-by>Kommenterad av</comment-by>
         <email>E-post</email>
         <site>Webbplats</site>
+        <lastComment>Last comment posted by {user} at {time}</lastComment>
       </label>
     </view>
   </Comment>

@@ -54,8 +54,8 @@
         <name>#{word.name}</name>
         <categories>カテゴリ</categories>
         <mimeType>#{Ecm.dialog.label.mimeType}</mimeType>
-        <width>幅</width>
-        <height>高さ</height>
+        <width>Width</width>
+        <height>Height</height>
         <content>#{word.content}</content>
         <re-upload>ファイルが既に存在します。再度アップロードすることで置き換えることができます。</re-upload>
       </label>
@@ -133,7 +133,7 @@
         <end-time>#{Ecm.dialog.label.end-time}</end-time>
         <repeat-count>#{Ecm.dialog.label.repeat-count}</repeat-count>
         <time-inteval>#{Ecm.dialog.label.time-interval}</time-inteval>
-        <cron-expression>Cron Expression</cron-expression>
+        <cron-expression>表現のクローン</cron-expression>
         <description>#{word.description}</description>
       </label>
     </dialog>
@@ -144,18 +144,18 @@
   <ElementSet>
     <dialog>
       <label>
-        <title>#{word.title}:</title>
+        <title>#{word.title}</title>
         <creator>作成者</creator>
-        <subject>#{word.subject}:</subject>
+        <subject>#{word.subject}</subject>
         <source>ソース</source>
         <contributor>コントリビュータ</contributor>
         <resource-type>リソースタイプ</resource-type>
-        <date>#{word.date}:</date>
+        <date>#{word.date}</date>
         <publisher>公開者</publisher>
-        <description>#{word.description}:</description>
+        <description>#{word.description}</description>
         <rights>権限</rights>
         <relation>関連</relation>
-        <format>#{word.format}:</format>
+        <format>#{word.format}</format>
         <coverage>範囲</coverage>
         <identifier>識別子</identifier>
         <language>言語</language>
@@ -334,7 +334,7 @@
   <ScriptAction>
     <dialog>
       <label>
-        <isDeep>Is Deep</isDeep>
+        <isDeep>Is deep</isDeep>
         <nodetypes>ノードタイプ</nodetypes>
         <affectedNodeTypeNames>影響を受けるノードタイプ</affectedNodeTypeNames>
       </label>
@@ -344,7 +344,7 @@
   <AddMetadata>
     <dialog>
       <label>
-        <isDeep>Is Deep</isDeep>
+        <isDeep>Is deep</isDeep>
         <nodetypes>ノードタイプ</nodetypes>
         <affectedNodeTypeNames>影響を受けるノードタイプ</affectedNodeTypeNames>
       </label>
@@ -354,7 +354,7 @@
   <EnableVersioning>
     <dialog>
       <label>
-        <isDeep>Is Deep</isDeep>
+        <isDeep>Is deep</isDeep>
         <nodetypes>ノードタイプ</nodetypes>
         <affectedNodeTypeNames>影響を受けるノードタイプ</affectedNodeTypeNames>
       </label>
@@ -364,7 +364,7 @@
   <AutoVersioning>
     <dialog>
       <label>
-        <isDeep>Is Deep</isDeep>
+        <isDeep>Is deep</isDeep>
         <nodetypes>ノードタイプ</nodetypes>
         <affectedNodeTypeNames>影響を受けるノードタイプ</affectedNodeTypeNames>
       </label>
@@ -382,7 +382,7 @@
 <help>
 <CaptionsHelp>キャプションには テキスト文や重要な音声を記載する必要があります</CaptionsHelp>
 <AudioDescriptionHelp>音声の説明文は、ビデオのナレーション トラックです。</AudioDescriptionHelp>
-<AlternativeTextHelp>Provide an accessible, alternative way of presenting the information</AlternativeTextHelp>
+<AlternativeTextHelp>Provide an accessible alternative way of presenting the information</AlternativeTextHelp>
 </help>
 </AccessibleMedia>
   

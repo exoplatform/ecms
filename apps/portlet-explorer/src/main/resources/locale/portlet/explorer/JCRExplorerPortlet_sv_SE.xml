@@ -79,7 +79,7 @@
       <SavedSearches>Sparade sökningar</SavedSearches>
     </label>
     <title>
-      <Control>Control Sidebar</Control>
+      <Control>Kontroll Sidopanel</Control>
       <Close>Stäng Sidopanelen</Close>
     </title>
   </UISideBar>
@@ -619,7 +619,7 @@
   -->
   <UITabPane>
     <title>
-      <UIPublishingPanel>Publication Pane</UIPublishingPanel>
+      <UIPublishingPanel>Publikations ruta</UIPublishingPanel>
       <UIPublicationPanel>Revision</UIPublicationPanel>
       <UIPublicationSchedule>Schemalagd</UIPublicationSchedule>
       <UIPublicationPagesContainer>Sidor</UIPublicationPagesContainer>
@@ -2574,7 +2574,7 @@
       <nt_unstructured>Innehållsmappen</nt_unstructured>
       <exo_cssFolder>CSS mapp</exo_cssFolder>
       <exo_jsFolder>JavaScript mapp</exo_jsFolder>
-      <exo_linkFolder>Link Folder</exo_linkFolder>
+      <exo_linkFolder>Länk mapp</exo_linkFolder>
       <exo_webFolder>Webbinnehållsmapp</exo_webFolder>
    </label>
   </UIFolderForm>

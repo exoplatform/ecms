@@ -259,7 +259,7 @@
   </UIMetadataList>
   <MetadataPopupAddNew>
     <title>
-      <UIMetadataForm>Add New Metadata's Template</UIMetadataForm>
+      <UIMetadataForm>Neue Metadatenvorlage hinzufügen</UIMetadataForm>
     </title>
   </MetadataPopupAddNew>
   <MetadataPopupEdit>
@@ -706,8 +706,8 @@
   -->
   <DriveInputSet>
     <label>
-      <both>Both</both>
-      <folderOnly>Folder</folderOnly>
+      <both>Beide</both>
+      <folderOnly>Ordner</folderOnly>
       <unstructuredFolder>Unstrukturierter Ordner</unstructuredFolder>
     </label>
     <title>
@@ -1093,7 +1093,7 @@
     </tab>
     <label>
       <name>Name:</name>
-      <label>Bezeichnung:</label>
+      <label>Label:</label>
       <isDocumentTemplate>ist Dokumentvorlage:</isDocumentTemplate>
       <dialog>Dialoginhalt</dialog>
       <view>Inhalt anzeigen</view>
@@ -1377,7 +1377,7 @@
       <set_property>Eigenschaftsrecht festlegen</set_property>
       <remove>Recht Entfernen</remove>
     </label>
-    <title>Add a permission to this node</title>
+    <title>Eine Berechtigung auf diesen Knoten hinzufügen</title>
     <action>
       <Close>#{word.close}</Close>
       <Save>Speichern</Save>
@@ -1480,7 +1480,7 @@
       <add_node>Ändern</add_node>
       <remove>Entfernen</remove>
     </label>
-    <title>Add permission to this node</title>
+    <title>Berechtigung für diesen Knoten hinzufügen</title>
     <action>
       <Close>#{word.close}</Close>
       <Save>#{word.save}</Save>
@@ -1759,7 +1759,7 @@
   </ViewForm>
   <DialogForm>
     <label>
-      <UITemplateContent>DialogForm</UITemplateContent>
+      <UITemplateContent>Dialogform</UITemplateContent>
       <UIPopupWindow>Dialogberechtigung</UIPopupWindow>
       <selectVersion>Versionen</selectVersion>
       <content>Inhalt</content>
@@ -1806,7 +1806,7 @@
   <UITemplateEditForm>
     <label>
       <name>Name:</name>
-      <label>Bezeichnung:</label>
+      <label>Label:</label>
       <isDocumentTemplate>Ist Dokumentvorlage</isDocumentTemplate>
     </label>
     <action>
@@ -1942,7 +1942,7 @@
       <statement>Aussage/Anweisung</statement>
       <cache>Cache-Ergebnisse aktivieren</cache>
       <permissions>Berechtigungen</permissions>
-      <PermissionButton>UIQueriesForm</PermissionButton>
+      <PermissionButton>UIAbfrageForm</PermissionButton>
     </label>
     <action>
       <Save>#{word.save}</Save>
@@ -2242,8 +2242,8 @@
       <firstName>#{word.firstName}</firstName>
     <email>#{word.email}</email>
       <action>#{word.action}</action>
-      <Add>#{word.Add}</Add>
-      <Close>#{word.Close}</Close>
+      <Add>#{word.add}</Add>
+      <Close>#{word.close}</Close>
     </label>
   </PermissionTreeSelectUser>
   
@@ -2283,7 +2283,7 @@
     <label>
       <name>Pfad zum Knoten</name>      
       <permissions>Berechtigungen</permissions>
-      <PermissionButton>UI Unlock Form</PermissionButton>
+      <PermissionButton>UIUnLockForm</PermissionButton>
     </label>
     <action>
       <Save>#{word.save}</Save>

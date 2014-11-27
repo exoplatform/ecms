@@ -1377,7 +1377,7 @@
       <set_property>Özellik Ayarlama Yetkisi</set_property>
       <remove>Çıkarma Yetkisi</remove>
     </label>
-    <title>Add a permission to this node</title>
+    <title>Düğüme bir izin ekleyin</title>
     <action>
       <Close>#{word.close}</Close>
       <Save>Kaydet</Save>
@@ -1480,7 +1480,7 @@
       <add_node>Değiştir</add_node>
       <remove>Kaldır</remove>
     </label>
-    <title>Add permission to this node</title>
+    <title>Düğüme bir izin ekleyin</title>
     <action>
       <Close>#{word.close}</Close>
       <Save>#{word.save}</Save>

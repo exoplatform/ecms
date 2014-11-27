@@ -30,6 +30,7 @@
         <comment-by>تم التعليق عليها من طرف</comment-by>
         <email>عنوان البريد الإلكتروني</email>
         <site>الموقع</site>
+        <lastComment>Last comment posted by {user} at {time}</lastComment>
       </label>
     </view>
   </Comment>

@@ -54,8 +54,8 @@
         <name>#{word.name}</name>
         <categories>Kategorien</categories>
         <mimeType>#{Ecm.dialog.label.mimeType}</mimeType>
-        <width>Breite</width>
-        <height>Höhe</height>
+        <width>Width</width>
+        <height>Height</height>
         <content>#{word.content}</content>
         <re-upload>Die Datei ist bereits vorhanden. Sie können es löschen und eine andere Datei hochladen.</re-upload>
       </label>
@@ -133,7 +133,7 @@
         <end-time>#{Ecm.dialog.label.end-time}</end-time>
         <repeat-count>#{Ecm.dialog.label.repeat-count}</repeat-count>
         <time-inteval>#{Ecm.dialog.label.time-interval}</time-inteval>
-        <cron-expression>Cron Expression</cron-expression>
+        <cron-expression>Cron-Ausdruck</cron-expression>
         <description>#{word.description}</description>
       </label>
     </dialog>

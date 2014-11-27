@@ -30,6 +30,7 @@
         <comment-by>crwdns6793278:0crwdne6793278:0</comment-by>
         <email>crwdns6793279:0crwdne6793279:0</email>
         <site>crwdns6793280:0crwdne6793280:0</site>
+        <lastComment>Last comment posted by {user} at {time}</lastComment>
       </label>
     </view>
   </Comment>

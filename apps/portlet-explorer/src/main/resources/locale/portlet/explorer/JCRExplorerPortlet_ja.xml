@@ -8,7 +8,7 @@
   <UICommentForm>
     <label>
       <name>名前</name>
-      <email>Email</email>
+      <email>E-Mail</email>
       <website>Webサイト</website>
       <comment>コメント</comment>
     </label>
@@ -79,7 +79,7 @@
       <SavedSearches>保存済みの検索</SavedSearches>
     </label>
     <title>
-      <Control>Control Sidebar</Control>
+      <Control>コントロールサイドバー</Control>
       <Close>サイドバーを閉じる</Close>
     </title>
   </UISideBar>
@@ -164,7 +164,7 @@
       <showRefDocuments>参照ドキュメントの表示</showRefDocuments>
       <enableDragAndDrop>ドラッグ &amp; ドロップの許可</enableDragAndDrop>
       <sortBy>ソート順</sortBy>
-      <order>Order by:</order>
+      <order>Order by</order>
       <nodesPerPage>ノード/ページ</nodesPerPage>
     </label>
     <action>
@@ -368,7 +368,7 @@
       <can-not-rename-node>このノードで名前変更するための権限がありません。正しい権限を得る為に管理者にコンタクトしてください。</can-not-rename-node>
       <can-not-cut-node>このノードを切り取る権限がありません。正しい権限を得る為に管理者にコンタクトしてください。</can-not-cut-node>
       <can-not-remove-node>このノードを削除する権限がありません。正しい権限を得る為に管理者にコンタクトしてください。</can-not-remove-node>
-      <can-not-lock-node>You do not have permission to lock node {0}. Please contact the administrator.</can-not-lock-node>
+      <can-not-lock-node>You do not have permission to lock node {0}. Please contact the administrator to get the correct right.</can-not-lock-node>
       <can-not-unlock-node>このノードをロック解除する権限がありません。正しい権限を得る為に管理者にコンタクトしてください。</can-not-unlock-node>
       <no-node>貼り付けるために選択されたノードがありません。</no-node>
       <can-not-paste-node>このノードを貼り付ける権限がありません。正しい権限を得る為に管理者にコンタクトしてください。</can-not-paste-node>
@@ -470,13 +470,13 @@
       <confirm-delete-multi-nodes-generic-and-file-and-folder>選択した {0} フォルダーとすべてのサブフォルダーを削除してもよろしいですか？</confirm-delete-multi-nodes-generic-and-file-and-folder>
       
       <!-- Delte multiple nodes, in Trash -->
-      <confirm-delete-multi-nodes-generic-permanently>Are you sure you want to permanently remove the {0} selected items?</confirm-delete-multi-nodes-generic-permanently>  
-      <confirm-delete-multi-nodes-file-permanently>Are you sure you want to permanently remove the {0} selected files?</confirm-delete-multi-nodes-file-permanently>
-      <confirm-delete-multi-nodes-folder-permanently>Are you sure you want to permanently remove the {0} selected folders and all subfolders?</confirm-delete-multi-nodes-folder-permanently>
-      <confirm-delete-multi-nodes-generic-and-file-permanently>Are you sure you want to permanently remove the {0} selected items and files?</confirm-delete-multi-nodes-generic-and-file-permanently>
-      <confirm-delete-multi-nodes-generic-and-folder-permanently>Are you sure you want to permanently remove the {0} selected items, folders and all subfolders?</confirm-delete-multi-nodes-generic-and-folder-permanently>
-      <confirm-delete-multi-nodes-file-and-folder-permanently>Are you sure you want to permanently remove the {0} selected files, folders and all subfolders?</confirm-delete-multi-nodes-file-and-folder-permanently>
-      <confirm-delete-multi-nodes-generic-and-file-and-folder-permanently>Are you sure you want to permanently remove the {0} selected items, files, folders and all subfolders?</confirm-delete-multi-nodes-generic-and-file-and-folder-permanently>
+      <confirm-delete-multi-nodes-generic-permanently>Are you sure you want to remove permanently the {0} selected items?</confirm-delete-multi-nodes-generic-permanently>  
+      <confirm-delete-multi-nodes-file-permanently>Are you sure you want to remove permanently the {0} selected files?</confirm-delete-multi-nodes-file-permanently>
+      <confirm-delete-multi-nodes-folder-permanently>Are you sure you want to remove permanently the {0} selected folders and all subfolders?</confirm-delete-multi-nodes-folder-permanently>
+      <confirm-delete-multi-nodes-generic-and-file-permanently>Are you sure you want to remove permanently the {0} selected items and files?</confirm-delete-multi-nodes-generic-and-file-permanently>
+      <confirm-delete-multi-nodes-generic-and-folder-permanently>Are you sure you want to remove permanently the {0} selected items, folders and all subfolders?</confirm-delete-multi-nodes-generic-and-folder-permanently>
+      <confirm-delete-multi-nodes-file-and-folder-permanently>Are you sure you want to remove permanently the {0} selected files, folders and all subfolders?</confirm-delete-multi-nodes-file-and-folder-permanently>
+      <confirm-delete-multi-nodes-generic-and-file-and-folder-permanently>Are you sure you want to remove permanently the {0} selected items, files, folders and all subfolders?</confirm-delete-multi-nodes-generic-and-file-and-folder-permanently>
       
       <!-- Delte multiple nodes, have relations -->
       <confirm-delete-multi-nodes-generic-have-relations>選択した {0} 個のアイテムとその参照を削除してもよろしいですか？</confirm-delete-multi-nodes-generic-have-relations>  
@@ -528,7 +528,7 @@
       <Unlock>ロック解除</Unlock>
       <EditDocument>編集</EditDocument>
       <Paste>貼り付け</Paste>
-      <LockedBy>Locked by</LockedBy>
+      <LockedBy>locked by</LockedBy>
     </tooltip>
   </UIDocumentWorkspace>
   <UIDocumentInfo>
@@ -619,7 +619,7 @@
   -->
   <UITabPane>
     <title>
-      <UIPublishingPanel>Publication Pane</UIPublishingPanel>
+      <UIPublishingPanel>公開パネル</UIPublishingPanel>
       <UIPublicationPanel>リビジョン</UIPublicationPanel>
       <UIPublicationSchedule>スケジュール</UIPublicationSchedule>
       <UIPublicationPagesContainer>ページ</UIPublicationPagesContainer>
@@ -653,8 +653,8 @@
       <UIDocumentInfo>ドキュメント観覧</UIDocumentInfo>
       <UICategoriesSelectPanel>カテゴリ選択</UICategoriesSelectPanel>
       <UISelectedCategoriesGrid>カテゴリ参照</UISelectedCategoriesGrid>
-      <UIWorkflowPublicationActionForm>Workflow Publication Action</UIWorkflowPublicationActionForm>
-      <UIWorkflowPublicationViewForm>Workflow Publication View</UIWorkflowPublicationViewForm>
+      <UIWorkflowPublicationActionForm>Workflow 公開 アクション</UIWorkflowPublicationActionForm>
+      <UIWorkflowPublicationViewForm>Workflow 公開 ビュー</UIWorkflowPublicationViewForm>
       <metadatasitemetadata>サイトのメタデータ</metadatasitemetadata>
       <dcelementset>ダブリンコア</dcelementset>
     </title>
@@ -1067,7 +1067,7 @@
       <metadataProperty>プロパティ</metadataProperty>
       <operator>オペレーター</operator>
       <contains>コンテンツの値</contains>
-      <notcontains>Not Contain Value</notcontains>
+      <notcontains>NOT contains value</notcontains>
     </label>
     <action>
       <Add>追加</Add>
@@ -1492,7 +1492,7 @@
       <mimetype-invalid>XMLファイルもしくはZIPファイルのみがインポートすることをサポートされています。</mimetype-invalid>
       <access-denied>アクセス出来ません! インポートする事が許されていません。</access-denied>
       <constraint-violation-exception>Impossible to import data. The type '{0}' is not allowed in this location.</constraint-violation-exception>
-      <item-exists-exception>An incoming referenceable node has the same UUID as an existing node in the workspace.</item-exists-exception>
+      <item-exists-exception>An incoming referenceable node has the same UUID as a node existing in the workspace! UUID: '{0}'</item-exists-exception>
     </msg>
   </UIImportNode>
   <!--
@@ -1668,7 +1668,7 @@
   -->
   <UISelectDocumentForm>
     <label>
-      <selectTemplate>Select your template from the list below</selectTemplate>
+      <selectTemplate>Select your template in the list below</selectTemplate>
       <ThumbnailView>サムネイル表示</ThumbnailView>
       <ListView>一覧表示</ListView>
       <Cancel>#{word.cancel}</Cancel>
@@ -1684,7 +1684,7 @@
     <action>
       <Save>#{word.save}</Save>
       <SaveAndClose>保存 &amp; 閉じる</SaveAndClose>
-      <ChangeType>Change Content Type</ChangeType>
+      <ChangeType>change content type</ChangeType>
       <Fullscreen>フルスクリーン</Fullscreen>
       <Cancel>#{word.cancel}</Cancel>
       <Close>#{word.close}</Close>
@@ -1802,7 +1802,7 @@
     <title>アクションの追加/編集</title>
     <validator>
       <validator>バリデータ</validator>
-      <destPath>With Path</destPath>
+      <destPath>With path</destPath>
     </validator>
   </UIActionForm>
   <UIActionTypeForm>
@@ -2002,7 +2002,7 @@
     </label>
     <action>
       <Save>#{word.save}</Save>
-      <UnsubcriberLifeCycle>Unsubscriber</UnsubcriberLifeCycle>
+      <UnsubcriberLifeCycle>Unsubcriber</UnsubcriberLifeCycle>
       <Cancel>#{word.cancel}</Cancel>
     </action>
   </UIPublicationForm>
@@ -2217,7 +2217,7 @@
   </UIDriveSelector>
   <UIJcrExplorerEditForm>
     <label>
-      <DriveNameInput>UI JCR Explorer Edit Form</DriveNameInput>
+      <DriveNameInput>UIJcrExplorerEditForm</DriveNameInput>
     </label>
     <msg>
       <personal-usecase>パーソナルユースケースを選択するとき、現在のユーザのプライベートドライブが利用されます。</personal-usecase>
@@ -2283,7 +2283,7 @@
       <non-node>信頼できるターゲットノードを選択するか、もしくは、ノードを読める十分な権限がありません。</non-node>
       <cannot-save>コンテンツはアクションの間に破棄されました。</cannot-save>
       <item-exists-exception>同じ名前のノード名が既に存在します。</item-exists-exception>
-      <translation-node-same-language-default>The translation node has the same language as the default language of current node.</translation-node-same-language-default>
+      <translation-node-same-language-default>The translation node has same language with the default language of current node.</translation-node-same-language-default>
       <UnsupportedRepositoryOperationException>ターゲットノードは参照ではありません。</UnsupportedRepositoryOperationException>
     </msg>
   </UISymLinkForm>
@@ -2312,7 +2312,7 @@
       <non-node>信頼できるターゲットノードを選択するか、もしくは、ノードを読める十分な権限がありません。</non-node>
       <cannot-save>symlink リンクの作成中にエラーが発生しました。</cannot-save>
       <item-exists-exception>同じ名前のノード名が既に存在します。</item-exists-exception>
-      <translation-node-same-language-default>The translation node has the same language as the default language of current node.</translation-node-same-language-default>
+      <translation-node-same-language-default>The translation node has same language with the default language of current node.</translation-node-same-language-default>
       <UnsupportedRepositoryOperationException>ターゲットノードは参照ではありません。</UnsupportedRepositoryOperationException>
     </msg>
   </UIAddTranslationForm>
@@ -2442,7 +2442,7 @@
   <UIWorkingArea>
     <msg>
       <can-not-move-to-itself>移動できません：移動先のフォルダはソースフォルダとして同じです。</can-not-move-to-itself>
-      <is-editing>You cannot move a document while it is being edited. Please close it first.</is-editing>
+      <is-editing>You cannot move an editing document. Please close it first.</is-editing>
     </msg>
   </UIWorkingArea>
 
@@ -2574,7 +2574,7 @@
       <nt_unstructured>コンテンツフォルダ</nt_unstructured>
       <exo_cssFolder>CSS フォルダー</exo_cssFolder>
       <exo_jsFolder>Java スクリプトフォルダー</exo_jsFolder>
-      <exo_linkFolder>Link Folder</exo_linkFolder>
+      <exo_linkFolder>リンク フォルダー</exo_linkFolder>
       <exo_webFolder>Web コンテンツ フォルダー</exo_webFolder>
    </label>
   </UIFolderForm>
@@ -2957,8 +2957,8 @@
     </status>
     <scheduled>
       <title>スケジュール</title>
-      <from>開始日</from>
-      <to>終了日</to>
+      <from>from</from>
+      <to>to</to>
     </scheduled>
     <title>
       <preview>プレビュー</preview>
@@ -3001,7 +3001,7 @@
     </label>
     <msg>
       <invalid-format>The date format is invalid. Please check again.</invalid-format>
-      <fromDate-after-toDate>The From date has to be earlier than the To date.</fromDate-after-toDate>
+      <fromDate-after-toDate>The From date has to be smaller than the To date.</fromDate-after-toDate>
     </msg>
   </UIPublicationPanel>
   <UIPopupWindow>
@@ -3110,8 +3110,8 @@
   </lifecyclePhase>
   <UIPopupMenu>
   <msg>
-<can-not-remove-locked-node>Node {0} is locked. You cannot move it to the Trash.</can-not-remove-locked-node>
-<can-not-remove-checked-in-node>Node {0} or its parent is checked in. You cannot move it to the Trash.</can-not-remove-checked-in-node>
+<can-not-remove-locked-node>Node {0} is locked, can not move it to Trash!</can-not-remove-locked-node>
+<can-not-remove-checked-in-node>Node {0} is checked in, can not move it to Trash!</can-not-remove-checked-in-node>
 <access-denied-to-delete>Access denied, can not move node {0} to Trash!</access-denied-to-delete>
   </msg>
   </UIPopupMenu>
@@ -3122,8 +3122,8 @@
   </UIPropertyForm>
   <UIWatchDocumentForm>
     <msg>
-      <node-is-locked>This node is locked. You cannot watch it.</node-is-locked>
-      <unknown-error>Some errors have occurred. You cannot watch this node.</unknown-error>
+      <node-is-locked>The node is locked, you can not watch it!</node-is-locked>
+      <unknown-error>There are some error occurs, you can not watch this node!</unknown-error>
     </msg>
   </UIWatchDocumentForm>   
   <UIActionForm>
@@ -3134,8 +3134,8 @@
   <UIMultiUpload>
   <label>
     <AbortAll>すべて中止</AbortAll>
-    <AbortAllFiles>Abort all Files</AbortAllFiles>
-    <MaxFileSize>Maximum file size is</MaxFileSize>
+    <AbortAllFiles>Abort all files</AbortAllFiles>
+    <MaxFileSize>Maximal file size is</MaxFileSize>
     <InvalidCharacters>無効な文字は、'-'に変換されます</InvalidCharacters>
     <DropFileMessage>あなたのファイルを現在のフォルダーにドロップします。</DropFileMessage>
     <Close>#{word.close}</Close>
@@ -3166,7 +3166,7 @@
       <date>日時</date>
       <size>サイズ</size>
       <sortBy>ソート順</sortBy>
-      <filesAreSelected>Files are selected.</filesAreSelected>
+      <filesAreSelected>files are selected.</filesAreSelected>
       <ClearSelection>選択をクリア</ClearSelection>
       <more>もっと</more>
     </label>

@@ -54,8 +54,8 @@
         <name>#{word.name}</name>
         <categories>Categorias</categories>
         <mimeType>#{Ecm.dialog.label.mimeType}</mimeType>
-        <width>Largura</width>
-        <height>Altura</height>
+        <width>Width</width>
+        <height>Height</height>
         <content>#{word.content}</content>
         <re-upload>O arquivo já existe. Você pode excluí-lo e enviar outro arquivo a partir daqui.</re-upload>
       </label>

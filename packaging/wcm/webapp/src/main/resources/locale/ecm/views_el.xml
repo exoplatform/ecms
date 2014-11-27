@@ -30,6 +30,7 @@
         <comment-by>Σχολιάστηκε από</comment-by>
         <email>Διεύθυνση ηλεκτρονικού ταχυδρομείου</email>
         <site>Τοποθεσία</site>
+        <lastComment>Last comment posted by {user} at {time}</lastComment>
       </label>
     </view>
   </Comment>

@@ -79,7 +79,7 @@
       <SavedSearches>Gespeicherte Suchen</SavedSearches>
     </label>
     <title>
-      <Control>Control Sidebar</Control>
+      <Control>Seitenleiste kontrollieren</Control>
       <Close>Seitenleiste schließen</Close>
     </title>
   </UISideBar>
@@ -129,7 +129,7 @@
     <title>Explorer</title>
     <label>
       <Root>Wurzel</Root>
-      <webDavView>In MS Office bearbeiten</webDavView>
+      <webDavView>Open in MS Office</webDavView>
     </label>
     <msg>
       <path-not-found>Dieses Element wurde gelöscht oder geändert. Bitte klicken Sie auf die Schaltfläche "aktualisieren".</path-not-found>
@@ -591,7 +591,7 @@
       <MoveToTrash>In den Papierkorb verschieben</MoveToTrash>
       <RestoreFromTrash>Aus dem Papierkorb wiederherstellen</RestoreFromTrash>
       <EmptyTrash>Papierkorb leeren</EmptyTrash>
-      <WebDavView>In MS Office bearbeiten</WebDavView>
+      <WebDavView>Open in MS Office</WebDavView>
     </event>
   </ECMContextMenu>
  
@@ -619,7 +619,7 @@
   -->
   <UITabPane>
     <title>
-      <UIPublishingPanel>Publication Pane</UIPublishingPanel>
+      <UIPublishingPanel>Veröffentlichung</UIPublishingPanel>
       <UIPublicationPanel>Überarbeitung</UIPublicationPanel>
       <UIPublicationSchedule>Geplant</UIPublicationSchedule>
       <UIPublicationPagesContainer>Seiten</UIPublicationPagesContainer>
@@ -653,8 +653,8 @@
       <UIDocumentInfo>Dokumentansicht</UIDocumentInfo>
       <UICategoriesSelectPanel>Kategorien auswählen</UICategoriesSelectPanel>
       <UISelectedCategoriesGrid>Referenzierte Kategorien</UISelectedCategoriesGrid>
-      <UIWorkflowPublicationActionForm>Workflow Publication Action</UIWorkflowPublicationActionForm>
-      <UIWorkflowPublicationViewForm>Workflow Publication View</UIWorkflowPublicationViewForm>
+      <UIWorkflowPublicationActionForm>Aktion auf dem Veröffentlichungslebenszyklus</UIWorkflowPublicationActionForm>
+      <UIWorkflowPublicationViewForm>Veröffentlichungslebenszyklus-Ansicht</UIWorkflowPublicationViewForm>
       <metadatasitemetadata>Seiten Metadaten</metadatasitemetadata>
       <dcelementset>Dublin Core</dcelementset>
     </title>
@@ -702,17 +702,17 @@
       <namespace>Namensraum:</namespace>
       <multiple>Mehrwertig:</multiple>
       <property_select>Neue Eigenschaft hinzufügen:</property_select>
-      <value0>Wert 0</value0>
-      <value1>Wert 1</value1>
-      <value2>Wert 2</value2>
-      <value3>Wert 3</value3>
-      <value4>Wert 4</value4>
-      <value5>Wert 5</value5>
-      <value6>Wert 6</value6>
-      <value7>Wert 7</value7>
-      <value8>Wert 8</value8>
-      <value9>Wert 9</value9>
-      <value10>Wert 10</value10>
+      <value0>Value 0</value0>
+      <value1>Value 1</value1>
+      <value2>Value 2</value2>
+      <value3>Value 3</value3>
+      <value4>Value 4</value4>
+      <value5>Value 5</value5>
+      <value6>Value 6</value6>
+      <value7>Value 7</value7>
+      <value8>Value 8</value8>
+      <value9>Value 9</value9>
+      <value10>Value 10</value10>
     </label>
     <action>
       <Save>#{word.save}</Save>
@@ -881,7 +881,7 @@
       <Cancel>#{word.cancel}</Cancel>
     </action>
     <label>
-      <moreConstraints>UISimpleSearch</moreConstraints>
+      <moreConstraints>UIEifacheSuche</moreConstraints>
       <firstOperator>Operator:</firstOperator>
       <input>Ein Wort oder eine Phrase im Inhalt</input>
       <constraints>Mehr Einschr&amp;auml;nkungen</constraints>
@@ -1063,7 +1063,7 @@
   </UIShowAllTrashResult>
   <UIConstraintsForm>
     <label>
-      <constraints>UIConstraintsForm</constraints>
+      <constraints>UICEinschr&amp;auml;nkungsForm</constraints>
       <metadataProperty>Eigenschaften</metadataProperty>
       <operator>Operator</operator>
       <contains>Enth&amp;auml;lt Wert</contains>
@@ -1642,7 +1642,7 @@
   <UIClipboard>
     <header>
       <path>Pfad</path>
-      <command>Cm</command>
+      <command>Km</command>
       <action>Aktion</action>
     </header>
     <label>
@@ -2574,7 +2574,7 @@
       <nt_unstructured>Inhaltsordner</nt_unstructured>
       <exo_cssFolder>CSS-Ordner</exo_cssFolder>
       <exo_jsFolder>JavaScript Ordner</exo_jsFolder>
-      <exo_linkFolder>Link Folder</exo_linkFolder>
+      <exo_linkFolder>Link-Ordner</exo_linkFolder>
       <exo_webFolder>Webinhalts-Ordner</exo_webFolder>
    </label>
   </UIFolderForm>
@@ -2820,7 +2820,7 @@
 
   <UIPopupWindow>
     <title>
-      <UITaggingFormContainer>Tag-Manager</UITaggingFormContainer>
+      <UITaggingFormContainer>Tag Manager</UITaggingFormContainer>
     </title>
   </UIPopupWindow>
 
@@ -3057,9 +3057,9 @@
       <ShowDrives>Laufwerke anzeigen</ShowDrives>
     </DrivesArea>
     <msg>
-      <no-view-found>Auf Ihre Zugangsberechtigung auf Laufwerk '{0}' sind keine Ansichten in Kraft.</no-view-found>
+      <no-view-found>There are no views applied for your access permission in drive '{0}'.</no-view-found>
       <access-denied>Zugriff verweigert. Sie haben keine Berechtigung in dem Arbeitsbereich des Laufwerks "{0}".</access-denied>
-      <empty-drives>Zugriff verweigert. Entweder gibt es kein Laufwerk in dieser Ablage oder Sie haben keine Zugriffsberechtigung auf die Laufwerke in dieser Ablage.</empty-drives>
+      <empty-drives>Access denied. Either there is no drive in this repository or you do not have permission to access any drives in this repository.</empty-drives>
       <workspace-not-exist>Das Laufwerk "{0}" wurde in einem unbekannten Arbeitsbereich gespeichert. Bitte konfigurieren Sie das Laufwerk neu.</workspace-not-exist>
     </msg>
   </UIDrivesArea>

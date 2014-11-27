@@ -30,6 +30,7 @@
         <comment-by>نظر توسط</comment-by>
         <email>ایمیل</email>
         <site>سایت</site>
+        <lastComment>Last comment posted by {user} at {time}</lastComment>
       </label>
     </view>
   </Comment>

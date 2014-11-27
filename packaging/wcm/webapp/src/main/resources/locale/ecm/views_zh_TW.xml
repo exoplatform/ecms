@@ -30,6 +30,7 @@
         <comment-by>發表評論</comment-by>
         <email>電子郵件：</email>
         <site>網站</site>
+        <lastComment>Last comment posted by {user} at {time}</lastComment>
       </label>
     </view>
   </Comment>

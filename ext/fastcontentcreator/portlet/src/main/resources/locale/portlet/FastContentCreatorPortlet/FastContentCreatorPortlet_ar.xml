@@ -148,7 +148,7 @@
     <title>
       <UIOneNodePathSelector>حدد الموقع</UIOneNodePathSelector>
       <UIPermissionSelector>صلاحيّة المستكشف</UIPermissionSelector>
-      <UICategoriesSelector>Add Categories</UICategoriesSelector>
+      <UICategoriesSelector>إضافة فئات</UICategoriesSelector>
     </title>
   </PopupComponent>
 

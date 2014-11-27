@@ -3,7 +3,7 @@
   <UICLVContainer>
     <label>
       <Preferences>Preferencias</Preferences>
-      <AddContent>Agregar contenido</AddContent>
+      <AddContent>Añadir Contenidos</AddContent>
       <ManageContent>Gestionar Contenido</ManageContent>
     </label>
     <msg>

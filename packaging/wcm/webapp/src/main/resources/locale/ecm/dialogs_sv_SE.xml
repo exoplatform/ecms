@@ -54,8 +54,8 @@
         <name>#{word.name}</name>
         <categories>Kategorier</categories>
         <mimeType>#{Ecm.dialog.label.mimeType}</mimeType>
-        <width>Bredd</width>
-        <height>Höjd</height>
+        <width>Width</width>
+        <height>Height</height>
         <content>#{word.content}</content>
         <re-upload>Filen finns redan. Du kan ta bort den och ladda upp en annan fil.</re-upload>
       </label>

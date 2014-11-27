@@ -30,6 +30,7 @@
         <comment-by>Bình luận bởi</comment-by>
         <email>Địa chỉ thư điện tử</email>
         <site>Trang</site>
+        <lastComment>Last comment posted by {user} at {time}</lastComment>
       </label>
     </view>
   </Comment>
