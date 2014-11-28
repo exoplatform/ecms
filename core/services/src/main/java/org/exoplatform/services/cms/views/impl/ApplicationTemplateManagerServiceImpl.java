@@ -102,21 +102,21 @@ public class ApplicationTemplateManagerServiceImpl implements ApplicationTemplat
       category = portletTemplateHome.addNode(config.getCategory(),"nt:unstructured");
       portletTemplateHome.save();
     }
-    if (!category.hasNode(config.getTemplateName())) {
-      templateService.createTemplate(category,
-                                     config.getTitle(),
-                                     config.getTemplateName(),
-                                     new ByteArrayInputStream(config.getTemplateData().getBytes()),
-                                     new String[] { "*" });
+    StringBuilder tBuilder = new StringBuilder();
+    tBuilder.append(config.getCategory()).append(config.getTemplateName());
+    boolean isExistedTemplate = Utils.getAllEditedConfiguredData(this.getClass().getSimpleName(),
+        EDITED_CONFIGURED_TEMPLATES, true).contains(tBuilder.toString());
+    if (!category.hasNode(config.getTemplateName()) && !isExistedTemplate) {
+      templateService.createTemplate(category, config.getTitle(), config.getTemplateName(), new ByteArrayInputStream(
+          config.getTemplateData().getBytes()), new String[] { "*" });
+      Utils.addEditedConfiguredData(tBuilder.toString(), this.getClass().getSimpleName(), EDITED_CONFIGURED_TEMPLATES,
+          true);
     }
     Set<String> templateSet = configuredTemplates_.get(portletTemplateHome.getName());
     if (templateSet == null) {
       templateSet = new HashSet<String>();
     }
     templateSet.add(category.getName() + "/" + config.getTemplateName());
-    StringBuilder tBuilder = new StringBuilder();
-    tBuilder.append(config.getCategory()).append(config.getTemplateName());
-    Utils.addEditedConfiguredData(tBuilder.toString(), this.getClass().getSimpleName(), EDITED_CONFIGURED_TEMPLATES, true);
     configuredTemplates_.put(portletTemplateHome.getName(), templateSet);
   }
 
@@ -234,9 +234,6 @@ public class ApplicationTemplateManagerServiceImpl implements ApplicationTemplat
                           storedTemplateHomeNode.addNode(portletName,"nt:unstructured");
       storedTemplateHomeNode.save();
       for(PortletTemplateConfig config: map.get(portletName)) {
-        StringBuilder tBuilder = new StringBuilder();
-        tBuilder.append(config.getCategory()).append(config.getTemplateName());
-        if(Utils.getAllEditedConfiguredData(this.getClass().getSimpleName(), EDITED_CONFIGURED_TEMPLATES, true).contains(tBuilder.toString())) continue;
         addTemplate(templateNode,config);
       }
     }

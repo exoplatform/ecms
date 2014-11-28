@@ -44,8 +44,8 @@ import java.util.Set;
 public class ManageViewPlugin extends BaseComponentPlugin {
 
   private static String ECM_EXPLORER_TEMPLATE = "ecmExplorerTemplate" ;
-  private static final String EDITED_CONFIGURED_VIEWS = "EditedConfiguredViews";
-  private static final String EDITED_CONFIGURED_VIEWS_TEMPLATES = "EditedConfiguredViewsTemplate";
+  public static final String EDITED_CONFIGURED_VIEWS = "EditedConfiguredViews";
+  public static final String EDITED_CONFIGURED_VIEWS_TEMPLATES = "EditedConfiguredViewsTemplate";
   private InitParams params_ ;
   private RepositoryService repositoryService_ ;
   private NodeHierarchyCreator nodeHierarchyCreator_ ;
@@ -151,12 +151,12 @@ public class ManageViewPlugin extends BaseComponentPlugin {
     String templateHomePath = nodeHierarchyCreator_.getJcrPath(alias) ;
     Node templateHomeNode = (Node)session.getItem(templateHomePath) ;
     String templateName = tempObject.getName() ;
+    configuredTemplate_.add(templateName);
     if(templateHomeNode.hasNode(templateName) || Utils.getAllEditedConfiguredData(
       this.getClass().getSimpleName(), EDITED_CONFIGURED_VIEWS_TEMPLATES, true).contains(templateName)) return;
     String warPath = warViewPath + tempObject.getWarPath() ;
     InputStream in = cservice_.getInputStream(warPath) ;
     templateService.createTemplate(templateHomeNode, templateName, templateName, in, new String[] {"*"});
-    configuredTemplate_.add(templateName);
     Utils.addEditedConfiguredData(templateName, this.getClass().getSimpleName(), EDITED_CONFIGURED_VIEWS_TEMPLATES, true);
   }
   

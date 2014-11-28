@@ -28,8 +28,10 @@ import org.exoplatform.commons.upgrade.UpgradeProductPlugin;
 import org.exoplatform.commons.utils.PrivilegedSystemHelper;
 import org.exoplatform.commons.version.util.VersionComparator;
 import org.exoplatform.container.xml.InitParams;
+import org.exoplatform.services.cms.impl.Utils;
 import org.exoplatform.services.cms.views.ManageViewService;
 import org.exoplatform.services.cms.views.ViewConfig;
+import org.exoplatform.services.cms.views.impl.ManageViewPlugin;
 import org.exoplatform.services.jcr.ext.common.SessionProvider;
 import org.exoplatform.services.log.ExoLogger;
 import org.exoplatform.services.log.Log;
@@ -86,6 +88,9 @@ public class UserViewUpgradePlugin extends UpgradeProductPlugin {
       //remove the old query nodes
       for (Node removedNode : removedNodes) {
         try {
+          String editedViews = removedNode.getName();
+          Utils.removeEditedConfiguredData(editedViews, ManageViewPlugin.class.getSimpleName(),
+                                           ManageViewPlugin.EDITED_CONFIGURED_VIEWS, true);
           removedNode.remove();
           parentNode.save();
         } catch (Exception e) {
@@ -96,6 +101,11 @@ public class UserViewUpgradePlugin extends UpgradeProductPlugin {
       }
       //re-initialize new views
       manageViewService_.init();
+      
+      if (log.isInfoEnabled()) {
+        log.info("Finish " + this.getClass().getName() + " successfully");
+      }      
+      
     } catch (Exception e) {
       if (log.isErrorEnabled()) {
         log.error("An unexpected error occurs when migrating Site Explorer views:", e);        

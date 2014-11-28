@@ -33,7 +33,9 @@ import org.exoplatform.container.xml.InitParams;
 import org.exoplatform.services.cms.BasePath;
 import org.exoplatform.services.cms.impl.DMSConfiguration;
 import org.exoplatform.services.cms.impl.DMSRepositoryConfiguration;
+import org.exoplatform.services.cms.impl.Utils;
 import org.exoplatform.services.cms.views.ManageViewService;
+import org.exoplatform.services.cms.views.impl.ManageViewPlugin;
 import org.exoplatform.services.jcr.RepositoryService;
 import org.exoplatform.services.jcr.ext.common.SessionProvider;
 import org.exoplatform.services.jcr.ext.hierarchy.NodeHierarchyCreator;
@@ -107,6 +109,10 @@ public class SiteExplorerTemplateUpgradePlugin extends UpgradeProductPlugin {
       //remove the old query nodes
       for (Node removedNode : removedNodes) {
         try {
+          String editedViewTemplates = removedNode.getName();
+          Utils.removeEditedConfiguredData(editedViewTemplates,
+                                           ManageViewPlugin.class.getSimpleName(), 
+                                           ManageViewPlugin.EDITED_CONFIGURED_VIEWS_TEMPLATES, true);
           removedNode.remove();
           ecmExplorerViewNode.save();
         } catch (Exception e) {
@@ -117,6 +123,10 @@ public class SiteExplorerTemplateUpgradePlugin extends UpgradeProductPlugin {
       }
       //re-initialize new views
       manageViewService_.init();
+      
+      if (log.isInfoEnabled()) {
+        log.info("Finish " + this.getClass().getName() + " successfully");
+      }
     } catch (Exception e) {
       if (log.isErrorEnabled()) {
         log.error("An unexpected error occurs when migrating Site Explorer views:", e);        
