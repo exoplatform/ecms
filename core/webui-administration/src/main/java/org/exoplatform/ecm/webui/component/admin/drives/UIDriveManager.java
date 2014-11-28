@@ -109,6 +109,8 @@ public class UIDriveManager extends UIAbstractManager {
     List<String> nodeList = new ArrayList<String>();
     if(nodeTypes != null && nodeTypes.indexOf(",") > -1) {
       nodeList = Arrays.asList(nodeTypes.split(","));
+    } else if (nodeTypes != null) {
+      nodeList.add(nodeTypes);
     }
     uiNodeTypeSelector.init(1, nodeList);
     uiPopup.setUIComponent(uiNodeTypeSelector);
