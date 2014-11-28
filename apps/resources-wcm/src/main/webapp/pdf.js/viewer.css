@@ -1,3 +1,4 @@
+/******************************************************************************************/
 /* Copyright 2012 Mozilla Foundation
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
@@ -28,12 +29,6 @@ body {
   background-image: url(images/texture.png);
 }
 
-/*body,
-input,
-button,
-select {
-  font: message-box;
-}*/
 
 .hidden {
   display: none !important;
@@ -125,23 +120,15 @@ select {
   cursor: default;
 }
 
-/* outer/inner center provides horizontal center */
-html[dir='ltr'] .outerCenter {
+
+.outerCenter {
   padding: 4px 0 0;
   margin: auto;
   width: 360px;
 }
-html[dir='rtl'] .outerCenter {
-  padding: 4px 0 0;
-  margin: auto;
-  width: 360px;
-}
-html[dir='ltr'] .innerCenter {
+
+.innerCenter {
   float: right;
-  position: relative;
-}
-html[dir='rtl'] .innerCenter {
-  float: left;
   position: relative;
 }
 
@@ -167,26 +154,19 @@ html[dir='rtl'] .innerCenter {
   transition-timing-function: ease;
 
 }
-html[dir='ltr'] #sidebarContainer {
+
+#sidebarContainer {
   -webkit-transition-property: left;
   transition-property: left;
   left: -190px;
-}
-html[dir='rtl'] #sidebarContainer {
-  -webkit-transition-property: right;
-  transition-property: right;
-  right: -190px;
 }
 
 #outerContainer.sidebarMoving > #sidebarContainer,
 #outerContainer.sidebarOpen > #sidebarContainer {
   visibility: visible;
 }
-html[dir='ltr'] #outerContainer.sidebarOpen > #sidebarContainer {
+#outerContainer.sidebarOpen > #sidebarContainer {
   left: 0px;
-}
-html[dir='rtl'] #outerContainer.sidebarOpen > #sidebarContainer {
-  right: 0px;
 }
 
 #mainContainer {
@@ -205,15 +185,10 @@ html[dir='rtl'] #outerContainer.sidebarOpen > #sidebarContainer {
   margin-top: 4px;
 }
 
-html[dir='ltr'] #outerContainer.sidebarOpen > #mainContainer {
+#outerContainer.sidebarOpen > #mainContainer {
   -webkit-transition-property: left;
   transition-property: left;
   left: 145px;
-}
-html[dir='rtl'] #outerContainer.sidebarOpen > #mainContainer {
-  -webkit-transition-property: right;
-  transition-property: right;
-  right: 145px;
 }
 
 #sidebarContent {
@@ -226,11 +201,8 @@ html[dir='rtl'] #outerContainer.sidebarOpen > #mainContainer {
   border-right: 1px solid #d1d1d1;
   background: #f8f8f8;
 }
-html[dir='ltr'] #sidebarContent {
+#sidebarContent {
   left: 0;
-}
-html[dir='rtl'] #sidebarContent {
-  right: 0;
 }
 
 #viewerContainer {
@@ -341,13 +313,8 @@ html[dir='rtl'] #sidebarContent {
   cursor: default;
 }
 
-html[dir='ltr'] .findbar {
+.findbar {
   left: 36px;
-  padding: 6px 4px 0 4px;
-}
-
-html[dir='rtl'] .findbar {
-  right: 36px;
   padding: 6px 4px 0 4px;
 }
 
@@ -372,11 +339,8 @@ html[dir='rtl'] .findbar {
 	top: -10px !important;
 	left: -142px !important;
 }
-html[dir='ltr'] .secondaryToolbar {
+.secondaryToolbar {
   right: 4px;
-}
-html[dir='rtl'] .secondaryToolbar {
-  left: 4px;
 }
 
 #secondaryToolbarButtonContainer {
@@ -412,26 +376,19 @@ html[dir='rtl'] .secondaryToolbar {
   border-width: 9px;
 }
 
-html[dir='ltr'] .doorHanger:after,
-html[dir='rtl'] .doorHangerRight:after {
-  left: 13px;
-  margin-left: -8px;
-}
+.doorHanger:after,
 
-html[dir='ltr'] .doorHanger:before,
-html[dir='rtl'] .doorHangerRight:before {
+.doorHanger:before {
   left: 13px;
   margin-left: -9px;
 }
 
-html[dir='rtl'] .doorHanger:after,
-html[dir='ltr'] .doorHangerRight:after {
+.doorHangerRight:after {
   right: 13px;
   margin-right: -8px;
 }
 
-html[dir='rtl'] .doorHanger:before,
-html[dir='ltr'] .doorHangerRight:before {
+.doorHangerRight:before {
   right: 13px;
   margin-right: -9px;
 }
@@ -445,36 +402,26 @@ html[dir='ltr'] .doorHangerRight:before {
   background-color: rgb(255, 137, 153);
 }
 
-html[dir='ltr'] #toolbarViewerLeft {
+#toolbarViewerLeft {
   margin-left: -1px;
   min-width: 45%;
 }
-html[dir='rtl'] #toolbarViewerLeft {
-  margin-right: -1px;
-  min-width: 45%;
-}
 
-html[dir='ltr'] #toolbarViewerLeft,
-html[dir='rtl'] #toolbarViewerRight {
+#toolbarViewerLeft {
   position: absolute;
   top: 0;
   left: 0;
   padding: 4px;
 }
-html[dir='ltr'] #toolbarViewerRight{
+#toolbarViewerRight{
   width: 52px;
   padding: 4px;
 }
 
-html[dir='ltr'] #toolbarViewerRight,
-html[dir='rtl'] #toolbarViewerLeft {
+#toolbarViewerRight {
   position: absolute;
   top: 0;
   right: 0;\
-  padding: 4px;
-}
-html[dir='rtl'] #toolbarViewerLeft {
-  width: 52px;
   padding: 4px;
 }
 
@@ -487,21 +434,14 @@ html[dir='rtl'] #toolbarViewerLeft {
 	text-align: right;
 }
 
-html[dir='ltr'] #toolbarViewerLeft > *,
-html[dir='ltr'] #toolbarViewerMiddle > *,
-html[dir='ltr'] #toolbarViewerRight > *,
-html[dir='ltr'] .findbar > * {
+#toolbarViewerLeft > *,
+#toolbarViewerMiddle > *,
+#toolbarViewerRight > *,
+.findbar > * {
   float: left;
 }
-html[dir='rtl'] #toolbarViewerLeft > *,
-html[dir='rtl'] #toolbarViewerMiddle > *,
-html[dir='rtl'] #toolbarViewerRight > *,
-html[dir='rtl'] .findbar > * {
-  position: relative;
-  float: right;
-}
 
-html[dir='ltr'] .splitToolbarButton {
+.splitToolbarButton {
   margin: 3px 2px 4px 0;
   display: inline-block;
   width: 64px;
@@ -511,17 +451,9 @@ html[dir='ltr'] .splitToolbarButton {
   padding: 4px 8px 3px 8px;
 }
 
-html[dir='rtl'] .splitToolbarButton {
-  margin: 3px 0 4px 2px;
-  display: inline-block;
-}
-html[dir='ltr'] .splitToolbarButton > .toolbarButton {
+.splitToolbarButton > .toolbarButton {
   border-radius: 0;
   float: left;
-}
-html[dir='rtl'] .splitToolbarButton > .toolbarButton {
-  border-radius: 0;
-  float: right;
 }
 
 .toolbarButton,
@@ -583,8 +515,7 @@ html[dir='rtl'] .splitToolbarButton > .toolbarButton {
               0 0 1px hsla(0,0%,0%,.05);
   z-index: 199;
 }
-html[dir='ltr'] .splitToolbarButton > .toolbarButton:first-child,
-html[dir='rtl'] .splitToolbarButton > .toolbarButton:last-child {
+.splitToolbarButton > .toolbarButton:first-child {
   position: relative;
   margin: 0;
   margin-right: -1px;
@@ -592,8 +523,7 @@ html[dir='rtl'] .splitToolbarButton > .toolbarButton:last-child {
   border-bottom-left-radius: 2px;
   border-right-color: transparent;
 }
-html[dir='ltr'] .splitToolbarButton > .toolbarButton:last-child,
-html[dir='rtl'] .splitToolbarButton > .toolbarButton:first-child {
+.splitToolbarButton > .toolbarButton:last-child {
   position: relative;
   margin: 0;
   margin-left: -1px;
@@ -610,12 +540,10 @@ html[dir='rtl'] .splitToolbarButton > .toolbarButton:first-child {
   display: inline-block;
   margin: 5px 0;
 }
-html[dir='ltr'] .splitToolbarButtonSeparator {
+.splitToolbarButtonSeparator {
   float: left;
 }
-html[dir='rtl'] .splitToolbarButtonSeparator {
-  float: right;
-}
+
 .splitToolbarButton:hover > .splitToolbarButtonSeparator,
 .splitToolbarButton.toggled > .splitToolbarButtonSeparator {
   padding: 12px 0;
@@ -642,7 +570,7 @@ html[dir='rtl'] .splitToolbarButtonSeparator {
   -webkit-user-select: none;
   -moz-user-select: none;
   -ms-user-select: none;
-  /* Opera does not support user-select, use <... unselectable="on"> instead */
+  
   cursor: default;
   -webkit-transition-property: background-color, border-color, box-shadow;
   -webkit-transition-duration: 150ms;
@@ -652,13 +580,8 @@ html[dir='rtl'] .splitToolbarButtonSeparator {
   transition-timing-function: ease;
 }
 
-html[dir='ltr'] .toolbarButton,
-html[dir='ltr'] .dropdownToolbarButton {
+.toolbarButton {
   margin: 3px 2px 4px 0;
-}
-html[dir='rtl'] .toolbarButton,
-html[dir='rtl'] .dropdownToolbarButton {
-  margin: 3px 0 4px 2px;
 }
 
 .toolbarButton:hover,
@@ -727,16 +650,14 @@ html[dir='rtl'] .dropdownToolbarButton {
   overflow: hidden;
   background: url(images/toolbarButton-menuArrows.png) no-repeat;
 }
-html[dir='ltr'] .dropdownToolbarButton {
+
+.dropdownToolbarButton {
   background-position: 95%;
-}
-html[dir='rtl'] .dropdownToolbarButton {
-  background-position: 5%;
 }
 
 .dropdownToolbarButton > select {
   -webkit-appearance: none;
-  -moz-appearance: none; /* in the future this might matter, see bugzilla bug #649849 */
+  -moz-appearance: none; 
   min-width: 140px;
   font-size: 12px;
   color: hsl(0,0%,95%);
@@ -744,7 +665,7 @@ html[dir='rtl'] .dropdownToolbarButton {
   padding: 0;
   height: 19px;
   border: none;
-  background: rgba(0,0,0,0); /* Opera does not support 'transparent' <select> background */
+  background: rgba(0,0,0,0); 
   box-shadow: none;
 }
 
@@ -760,17 +681,13 @@ html[dir='rtl'] .dropdownToolbarButton {
   border-bottom: 1px rgba(255, 255, 255, .5) solid;
 }
 
-html[dir='ltr'] .splitToolbarButton:first-child,
-html[dir='ltr'] .toolbarButton:first-child,
-html[dir='rtl'] .splitToolbarButton:last-child,
-html[dir='rtl'] .toolbarButton:last-child {
+.splitToolbarButton:first-child,
+.toolbarButton:first-child {
   margin-left: 4px;
   margin-top: 4px;
 }
-html[dir='ltr'] .splitToolbarButton:last-child,
-html[dir='ltr'] .toolbarButton:last-child,
-html[dir='rtl'] .splitToolbarButton:first-child,
-html[dir='rtl'] .toolbarButton:first-child {
+.splitToolbarButton:last-child,
+.toolbarButton:last-child {
   margin-right: 4px;
   margin-top: 4px;
 }
@@ -787,78 +704,49 @@ html[dir='rtl'] .toolbarButton:first-child {
   min-width: 30px;
 }
 
-html[dir='ltr'] #findPrevious {
+#findPrevious {
   margin-left: 3px;
-}
-html[dir='ltr'] #findNext {
-  margin-right: 3px;
 }
 
-html[dir='rtl'] #findPrevious {
+#findNext {
   margin-right: 3px;
-}
-html[dir='rtl'] #findNext {
-  margin-left: 3px;
 }
 
 .toolbarButton::before,
 .secondaryToolbarButton::before {
-  /* All matching images have a size of 16x16
-   * (except for the print button: 18x16)
-   * All relevant containers have a size of 32x25 */
+ 
   position: absolute;
   display: inline-block;
   top: 4px;
   left: 7px;
 }
 
-html[dir="ltr"] .secondaryToolbarButton::before {
+.secondaryToolbarButton::before {
   left: 4px;
 }
-html[dir="rtl"] .secondaryToolbarButton::before {
-  right: 4px;
-}
 
-html[dir='ltr'] .toolbarButton#sidebarToggle::before {
+.toolbarButton#sidebarToggle::before {
   content: url(images/toolbarButton-sidebarToggle.png);
 }
-html[dir='rtl'] .toolbarButton#sidebarToggle::before {
-  content: url(images/toolbarButton-sidebarToggle-rtl.png);
-}
 
-html[dir='ltr'] .toolbarButton#secondaryToolbarToggle::before {
+.toolbarButton#secondaryToolbarToggle::before {
   content: url(images/toolbarButton-secondaryToolbarToggle.png);
 }
-html[dir='rtl'] .toolbarButton#secondaryToolbarToggle::before {
-  content: url(images/toolbarButton-secondaryToolbarToggle-rtl.png);
-}
 
-html[dir='ltr'] .toolbarButton.findPrevious::before {
+.toolbarButton.findPrevious::before {
   content: url(images/findbarButton-previous.png);
 }
-html[dir='rtl'] .toolbarButton.findPrevious::before {
-  content: url(images/findbarButton-previous-rtl.png);
-}
 
-html[dir='ltr'] .toolbarButton.findNext::before {
+.toolbarButton.findNext::before {
   content: url(images/findbarButton-next.png);
 }
-html[dir='rtl'] .toolbarButton.findNext::before {
-  content: url(images/findbarButton-next-rtl.png);
-}
 
-html[dir='ltr'] .toolbarButton.pageUp::before {
+.toolbarButton.pageUp::before {
   content: url(images/toolbarButton-pageUp.png);
 }
-html[dir='rtl'] .toolbarButton.pageUp::before {
-  content: url(images/toolbarButton-pageUp-rtl.png);
-}
 
-html[dir='ltr'] .toolbarButton.pageDown::before {
+.toolbarButton.pageDown::before {
   content: url(images/toolbarButton-pageDown.png);
-}
-html[dir='rtl'] .toolbarButton.pageDown::before {
-  content: url(images/toolbarButton-pageDown-rtl.png);
 }
 
 .toolbarButton.zoomOut::before {
@@ -880,11 +768,8 @@ html[dir='rtl'] .toolbarButton.pageDown::before {
   left: 6px;
 }
 
-html[dir="ltr"] .secondaryToolbarButton.print::before {
+.secondaryToolbarButton.print::before {
   left: 3px;
-}
-html[dir="rtl"] .secondaryToolbarButton.print::before {
-  right: 3px;
 }
 
 .toolbarButton.openFile::before,
@@ -918,11 +803,8 @@ html[dir="rtl"] .secondaryToolbarButton.print::before {
   content: url(images/toolbarButton-viewThumbnail.png);
 }
 
-html[dir="ltr"] #viewOutline.toolbarButton::before {
+#viewOutline.toolbarButton::before {
   content: url(images/toolbarButton-viewOutline.png);
-}
-html[dir="rtl"] #viewOutline.toolbarButton::before {
-  content: url(images/toolbarButton-viewOutline-rtl.png);
 }
 
 #viewFind.toolbarButton::before {
@@ -943,24 +825,18 @@ html[dir="rtl"] #viewOutline.toolbarButton::before {
   min-width: 100%;
   white-space: normal;
 }
-html[dir="ltr"] .secondaryToolbarButton {
+
+.secondaryToolbarButton {
   padding-left: 24px;
   text-align: left;
-}
-html[dir="rtl"] .secondaryToolbarButton {
-  padding-right: 24px;
-  text-align: right;
 }
 
 #secondaryToolbarButtonContainer :last-child {
   margin-bottom: 0;
 }
 
-html[dir="ltr"] .secondaryToolbarButton > span {
+.secondaryToolbarButton > span {
   padding-right: 4px;
-}
-html[dir="rtl"] .secondaryToolbarButton > span {
-  padding-left: 4px;
 }
 
 .secondaryToolbarButton.firstPage::before {
@@ -987,11 +863,9 @@ html[dir="rtl"] .secondaryToolbarButton > span {
   background-color: hsla(0,0%,0%,.5);
   box-shadow: 0 0 0 1px hsla(0,0%,100%,.08);
 }
-html[dir='ltr'] .verticalToolbarSeparator {
+
+.verticalToolbarSeparator {
   margin-left: 2px;
-}
-html[dir='rtl'] .verticalToolbarSeparator {
-  margin-right: 2px;
 }
 
 .horizontalToolbarSeparator {
@@ -1137,12 +1011,8 @@ a:focus > .thumbnail > .thumbnailSelectionRing,
   -moz-user-select: none;
 }
 
-html[dir='ltr'] .outlineItem > .outlineItems {
+.outlineItem > .outlineItems {
   margin-left: 20px;
-}
-
-html[dir='rtl'] .outlineItem > .outlineItems {
-  margin-right: 20px;
 }
 
 .outlineItem > a {
@@ -1159,12 +1029,8 @@ html[dir='rtl'] .outlineItem > .outlineItems {
   white-space: normal;
 }
 
-html[dir='ltr'] .outlineItem > a {
+.outlineItem > a {
   padding: 2px 0 5px 10px;
-}
-
-html[dir='rtl'] .outlineItem > a {
-  padding: 2px 10px 5px 0;
 }
 
 .outlineItem > a:hover {
@@ -1297,9 +1163,7 @@ canvas {
   background-color: rgba(0, 100, 0, 0.2);
 }
 
-/* TODO: file FF bug to support ::-moz-selection:window-inactive
-   so we can override the opaque grey background when the window is inactive;
-   see https://bugzilla.mozilla.org/show_bug.cgi?id=706209 */
+
 ::selection { background:rgba(0,0,255,0.3); }
 ::-moz-selection { background:rgba(0,0,255,0.3); }
 
@@ -1436,12 +1300,12 @@ canvas {
 }
 
 @media print {
-  /* General rules for printing. */
+
   body {
     background: transparent none;
   }
 
-  /* Rules for browsers that don't support mozPrintCallback. */
+
   #sidebarContainer, #secondaryToolbar, .toolbar, #loadingBox, #errorWrapper, .textLayer {
     display: none;
   }
@@ -1466,7 +1330,7 @@ canvas {
     display: block;
   }
 
-  /* Rules for browsers that support mozPrintCallback */
+ 
   body[data-mozPrintCallback] #outerContainer {
     display: none;
   }
@@ -1487,15 +1351,10 @@ canvas {
 }
 
 @media all and (max-width: 960px) {
-  html[dir='ltr'] #outerContainer.sidebarMoving .outerCenter,
-  html[dir='ltr'] #outerContainer.sidebarOpen .outerCenter {
+  #outerContainer.sidebarMoving .outerCenter,
+  #outerContainer.sidebarOpen .outerCenter {
     float: left;
     left: 185px;
-  }
-  html[dir='rtl'] #outerContainer.sidebarMoving .outerCenter,
-  html[dir='rtl'] #outerContainer.sidebarOpen .outerCenter {
-    float: right;
-    right: 185px;
   }
 }
 
@@ -1535,22 +1394,15 @@ canvas {
     background #f8f8f8;
   }
 
-  html[dir='ltr'] #outerContainer.sidebarOpen > #mainContainer {
+  #outerContainer.sidebarOpen > #mainContainer {
     left: 0px;
   }
-  html[dir='rtl'] #outerContainer.sidebarOpen > #mainContainer {
-    right: 0px;
-  }
-
-  html[dir='ltr'] .outerCenter {
+  
+  .outerCenter {
     float: left;
     left: 185px;
   }
-  html[dir='rtl'] .outerCenter {
-    float: right;
-    right: 185px;
-  }
-
+  
   #outerContainer .hiddenLargeView,
   #outerContainer .hiddenMediumView {
     display: inherit;
@@ -1586,16 +1438,12 @@ canvas {
   .visibleSmallView {
     display: inherit;
   }
-  html[dir='ltr'] #outerContainer.sidebarMoving .outerCenter,
-  html[dir='ltr'] #outerContainer.sidebarOpen .outerCenter,
-  html[dir='ltr'] .outerCenter {
+  #outerContainer.sidebarMoving .outerCenter,
+  #outerContainer.sidebarOpen .outerCenter,
+  .outerCenter {
     left: 156px;
   }
-  html[dir='rtl'] #outerContainer.sidebarMoving .outerCenter,
-  html[dir='rtl'] #outerContainer.sidebarOpen .outerCenter,
-  html[dir='rtl'] .outerCenter {
-    right: 156px;
-  }
+  
   .toolbarButtonSpacer {
     width: 0;
   }

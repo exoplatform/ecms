@@ -33,15 +33,138 @@
        module.addScripts("uiPopupWindow.hide('$popupId', $uicomponent.showMask, null, $height);");
     }
 %>
-
-<div class="UIDocumentPreview UIPopupWindow uiPopup UIDragObject NormalStyle" exo:minWidth="200" exo:minHeight="200" id="$popupId" style=" display: $show;">
-    <div class="popupHeader clearfix">
-        <%if (showCloseButton) {%>
-            <a class="uiIconClose pull-right" title="<%=_ctx.appRes("UIPopupWindow.Close")%>" onclick="<%=uicomponent.event(uicomponent.getCloseEvent())%>"></a>
-        <% } %>
-        <span class="PopupTitle popupTitle"><%=title%></span>
+<div class="UIDocumentPreview">
+	<%if (showCloseButton) {%>
+		<a class="uiIconClose pull-right" title="<%=_ctx.appRes("UIPopupWindow.Close")%>" onclick="<%=uicomponent.event(uicomponent.getCloseEvent())%>"></a>
+	<% } %>
+    <div class="clearfix">
+		<div class="commentArea pull-right">
+			<div class="header">
+				<a href="" title=""><i class="uiIcon16x16FilePdf uiIconLightGray"></i>Test.pdf</a>
+			</div>
+			<div class="content">
+				<ul class="commentList">
+					<li class="clearfix">
+						<a class="avatarXSmall pull-left" href="" title="avatar"><img src="/social-resources/skin/images/ShareImages/UserAvtDefault.png" alt="" /></a>
+						<div class="rightBlock">
+							<div class="tit">
+								<a href="" title="name">Root Root</a>
+								<span class="pull-right dateTime">10 days ago</span>
+							</div>
+							<p class="cont">Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam nonummy nibh euismod tincidunt ut laoreet dolore magna aliquam erat volutpat. Ut wisi enim ut laoreet dolore magna.</p>
+						</div>
+					</li>
+					<li class="clearfix">
+						<a class="avatarXSmall pull-left" href="" title="avatar"><img src="/social-resources/skin/images/ShareImages/UserAvtDefault.png" alt="" /></a>
+						<div class="rightBlock">
+							<div class="tit">
+								<a href="" title="name">Root Root</a>
+								<span class="pull-right dateTime">10 days ago</span>
+							</div>
+							<p class="cont">Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam nonummy nibh euismod tincidunt ut laoreet dolore magna aliquam erat volutpat. Ut wisi enim ut laoreet dolore magna.</p>
+						</div>
+					</li>
+					<li class="clearfix">
+						<a class="avatarXSmall pull-left" href="" title="avatar"><img src="/social-resources/skin/images/ShareImages/UserAvtDefault.png" alt="" /></a>
+						<div class="rightBlock">
+							<div class="tit">
+								<a href="" title="name">Root Root</a>
+								<span class="pull-right dateTime">10 days ago</span>
+							</div>
+							<p class="cont">Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam nonummy nibh euismod tincidunt ut laoreet dolore magna aliquam erat volutpat. Ut wisi enim ut laoreet dolore magna.</p>
+						</div>
+					</li>
+					<li class="clearfix">
+						<a class="avatarXSmall pull-left" href="" title="avatar"><img src="/social-resources/skin/images/ShareImages/UserAvtDefault.png" alt="" /></a>
+						<div class="rightBlock">
+							<div class="tit">
+								<a href="" title="name">Root Root</a>
+								<span class="pull-right dateTime">10 days ago</span>
+							</div>
+							<p class="cont">Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam nonummy nibh euismod tincidunt ut laoreet dolore magna aliquam erat volutpat. Ut wisi enim ut laoreet dolore magna.</p>
+						</div>
+					</li>
+				</ul>
+				<div class="commentInputBox">
+					<a class="avatarXSmall pull-left" href="" title="avatar"><img src="/social-resources/skin/images/ShareImages/UserAvtDefault.png" alt="" /></a>
+					<div class="commentBox">
+					</div>
+				</div>
+			</div>
+		</div>
+		<!-- commentArea -->
+		<div class="resizeBar pull-right">
+			<div class="resizeBarContent">
+				<a class="resizeButton"><i class="uiIconArrowRight"></i></a>
+			</div>
+		</div>
+		
+		<% uicomponent.renderChildren(); %>
+    	
+		<style type="text/css">
+			.uiActivityStream, .uiActivitiesLoader {
+				position: static;
+			}
+			.UIDocumentPreview {
+				position: absolute;
+				left: 0;
+				top: 0;
+				z-index: 100;
+				width: 100%;
+				background: rgba(0, 0, 0, 0.8);
+				padding-left: 30px;
+				color: #fff;
+			}
+			
+			.uiIconClose {
+				position: absolute;
+				top: 0;
+				right: 0;
+			}
+			
+			.fileContent {
+				float: left;
+			}
+			.commentArea {
+				width: 300px;
+			}
+			.commentList .li > div {
+				margin-left: 45px;
+			}
+			
+			.tit a {
+				font-weight: bold;
+				color: green;
+			}
+			
+			.tit .dateTime {
+				color: gray;
+				font-size: 11px;
+			}
+			
+			.commentBox {
+				background: none repeat scroll 0 0 white;
+				border: 1px solid #cccccc;
+				border-radius: 4px;
+				box-shadow: 0 2px 1px rgba(0, 0, 0, 0.075) inset;
+				color: #333333;
+				cursor: text;
+				font-size: 13px;
+				height: 28px;
+				margin: 0;
+				overflow-x: hidden;
+				overflow-y: auto;
+				padding: 5px 8px;
+				resize: none;
+				width: auto;
+				word-wrap: break-word;
+			}
+			.rightBlock {
+				margin-left: 50px;
+			}
+		</style>
+			
     </div>
-    <div class="PopupContent popupContent"><% uicomponent.renderChildren(); %></div>
     
     <%if (uicomponent.isResizable()) {%>
         <span class="uiIconResize pull-right uiIconLightGray"></span>
