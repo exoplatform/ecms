@@ -20,9 +20,7 @@
 <div class="maskLayer">
 	<div class="uiDocumentPreview" id="$uicomponent.id">
 		<div class="exitWindow">
-			<%if (showCloseButton) {%>
-				<a class="uiIconClose uiIconWhite" title="<%=_ctx.appRes("UIPopupWindow.Close")%>" onclick="<%=uicomponent.event(uicomponent.getCloseEvent())%>"></a>
-			<% } %>
+			<a class="uiIconClose uiIconWhite" title="<%=_ctx.appRes("UIPopupWindow.Close")%>" onclick="<%=uicomponent.event(uicomponent.getCloseEvent())%>"></a>
 		</div>
 		<div class="clearfix">
 			<div class="uiBox commentArea pull-right">
@@ -86,5 +84,10 @@
 			
 			<% uicomponent.renderChildren(); %>
 		</div>
+		<style>
+			.uiActivityStream, .uiActivitiesLoader {
+				position: static;
+			}
+		</style>
 	</div>
 </div>
