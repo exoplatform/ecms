@@ -14,7 +14,7 @@
     def rcontext = _ctx.getRequestContext();
     rcontext.getJavascriptManager()
         .require("SHARED/document-preview", "docPre")
-        .addScripts("eXo.ecm.DocumentPreview.bindClose();");
+        .addScripts("eXo.ecm.DocumentPreview.initScreen();");
 
 %>
 
