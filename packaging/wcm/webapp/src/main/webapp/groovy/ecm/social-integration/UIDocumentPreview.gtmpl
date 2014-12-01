@@ -17,6 +17,8 @@
         .addScripts("eXo.ecm.DocumentPreview.bindClose();");
 
 %>
+
+
 <div class="maskLayer">
 	<div class="uiDocumentPreview" id="$uicomponent.id">
 		<div class="exitWindow">
