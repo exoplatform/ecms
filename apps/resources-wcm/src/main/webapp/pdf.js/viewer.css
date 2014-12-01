@@ -1,3 +1,4 @@
+/*******************************************************************************/
 /******************************************************************************************/
 /* Copyright 2012 Mozilla Foundation
  *
@@ -1458,3 +1459,4 @@ canvas {
 .secondaryToolbar .dropdown-menu li > a:focus > [class^="uiIcon"]{
   background-image: url("/eXoResources/skin/images/Icons/uiIconsWhite.png");
 }
+

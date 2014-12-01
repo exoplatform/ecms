@@ -1,0 +1,70 @@
+				
+.maskLayer {
+	width: 100%;
+	height: 100%;
+	position: absolute;
+	left: 0;
+	top: 0;
+	z-index: 100;
+	background: rgba(0, 0, 0, 0.8);
+	color: @textColor;
+	.uiDocumentPreview {
+		padding-left: 30px;
+		padding-top: 30px;
+		.exitWindow .uiIconClose {
+			position: absolute;
+			top: 7px;
+			right: 7px;
+		}
+		.commentArea {
+			width: 300px;
+			.uiContentBox {
+				padding: 10px;
+				.commentList .li > .rightBlock {
+					margin-left: 45px;
+					.tit {
+						a {
+							font-weight: bold;
+							color: @linkColor;
+						}
+						.dateTime {
+							color: @textLightColor;
+							font-size: 11px;
+						}	
+					}
+				}	
+				.commentInputBox .commentBox {
+					background: none repeat scroll 0 0 @white;
+					border: 1px solid @borderColor;
+					border-radius: 4px;
+					box-shadow: 0 2px 1px rgba(0, 0, 0, 0.075) inset;
+					color: @textColor;
+					cursor: text;
+					font-size: 13px;
+					height: 28px;
+					margin: 0;
+					overflow-x: hidden;
+					overflow-y: auto;
+					padding: 5px 8px;
+					resize: none;
+					width: auto;
+					word-wrap: break-word;
+				}	
+			}
+		}	
+		.resizeButton {
+			cursor: pointer;
+		    height: 16px;
+		    right: 310px;
+		    position: absolute;
+		    top: 50%;	
+		}
+		
+		.fileContent {
+			margin-right: 335px;
+			.uiVote .voteRatingInfo {
+				color: @white;			
+			}
+		}
+	}
+}	
