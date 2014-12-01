@@ -724,11 +724,14 @@ var SimpleView = function() {
 	    }
 	    
 	    var restoreFromTrashAction = DOM.findFirstDescendantByClass(contextMenu, "div", "RestoreFromTrash16x16Icon");
+	    var removeFromTrashAction = DOM.findFirstDescendantByClass(contextMenu, "div", "RestoreFromTrash16x16Icon");
 	    if (!checkInTrash) {
 	      restoreFromTrashAction.parentNode.style.display = "none";
+	      removeFromTrashAction.parentNode.style.display = "none";
 	    }   
 	    if (checkInTrash) {
 	      restoreFromTrashAction.parentNode.style.display = "block";
+	      resmoveFromTrashAction.parentNode.style.display = "block";
 	    }
 	    if (!checkMediaType) {
 	    	playMediaAction.parentNode.style.display = "none";

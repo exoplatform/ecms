@@ -687,13 +687,16 @@ var TimelineView = function() {
         removeFavouriteAction.parentNode.style.display = "none";
       }
       var restoreFromTrashAction = DOM.findFirstDescendantByClass(contextMenu, "div", "RestoreFromTrash16x16Icon");
+      var removeFromTrashAction = DOM.findFirstDescendantByClass(contextMenu, "div", "RemoveFromTrash16x16Icon");
       var emptyTrashAction = DOM.findFirstDescendantByClass(contextMenu, "div", "EmptyTrash16x16Icon");
       var playMediaAction = DOM.findFirstDescendantByClass(contextMenu, "div", "PlayMedia16x16Icon");
       
       if (!checkInTrash) {
         restoreFromTrashAction.parentNode.style.display = "none";
+	    removeFromTrashAction.parentNode.style.display = "none";
       } else {
         restoreFromTrashAction.parentNode.style.display = "block";
+	    removeFromTrashAction.parentNode.style.display = "block";
       }
       if (!checkMediaType) {
         playMediaAction.parentNode.style.display = "none";

@@ -547,6 +547,7 @@
       <Copy>Copy</Copy>
       <Rename>Rename</Rename>
       <Delete>Delete</Delete>
+      <RemoveFromTrash>Remove From Trash</RemoveFromTrash>
       <Save>#{word.save}</Save>
       <Cut>Cut</Cut>
       <Paste>Paste</Paste>

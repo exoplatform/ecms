@@ -572,6 +572,7 @@
       <AddToFavourite>Ajouter aux favoris</AddToFavourite>
       <RemoveFromFavourite>Supprimer des favoris</RemoveFromFavourite>
       <MoveToTrash>Mettre dans la poubelle</MoveToTrash>
+      <RemoveFromTrash>Supprimer depuis la poubelle</RemoveFromTrash>
       <RestoreFromTrash>Restaurer depuis la poubelle</RestoreFromTrash>
       <EmptyTrash>Vider la poubelle</EmptyTrash>
       <WebDavView>Télécharger pour édition</WebDavView>
