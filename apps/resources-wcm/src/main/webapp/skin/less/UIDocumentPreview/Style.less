@@ -1,4 +1,8 @@
-				
+
+.uiActivityStream, .uiActivitiesLoader {
+	position: static;
+}
+			
 .maskLayer {
 	width: 100%;
 	height: 100%;
@@ -20,7 +24,7 @@
 			width: 300px;
 			.uiContentBox {
 				padding: 10px;
-				.commentList .li > .rightBlock {
+				.commentList .rightBlock {
 					margin-left: 45px;
 					.tit {
 						a {
@@ -62,8 +66,15 @@
 		
 		.fileContent {
 			margin-right: 335px;
+			#outerContainer {
+				border-radius: 3px;
+				overflow: hidden;			
+			}
 			.uiVote .voteRatingInfo {
-				color: @white;			
+				color: @white;
+				span {
+					color: @white;
+				}	
 			}
 		}
 	}
