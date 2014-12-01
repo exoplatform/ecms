@@ -1629,11 +1629,9 @@
                                                 <value>
                                                     <string>video/x-flv</string>
                                                 </value>
-                                                <!--<value>
+                                                <value>
                                                     <string>video/x-f4v</string>
                                                 </value>
-                                                -->
-                                                <!-- <string>video/quicktime</string></value -->
                                             </collection>
                                         </field>
                                     </object>
@@ -1683,9 +1681,6 @@
                                                 </value>
                                                 <value>
                                                     <string>audio/x-m4a</string>
-                                                </value>
-                                                <value>
-                                                    <string>video/x-f4v</string>
                                                 </value>
                                             </collection>
                                         </field>

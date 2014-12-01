@@ -84,7 +84,7 @@
 <script type="text/javascript">
   var finFpl = false;
 </script>
-<script type="text/javascript" src="/eXoWCMResources/javascript/eXo/wcm/flowplayer/flowplayer-3.2.6.min.js"></script>
+<script type="text/javascript" src="/eXoWCMResources/javascript/eXo/wcm/flowplayer/flowplayer-3.2.13.min.js"></script>
   <div class="ContentDetail">
 	  <%
 		  def style = "float:none; margin:auto;";
@@ -97,11 +97,11 @@
      var timemili = 0;
      function insertFlv() {
       // install flowplayer into container
-    	flowplayer("player-$timeCreated", {wmode: 'transparent', src: "/eXoWCMResources/javascript/eXo/wcm/flowplayer/flowplayer-3.2.7.swf"}, {
+    	flowplayer("player-$timeCreated", {wmode: 'transparent', src: "/eXoWCMResources/javascript/eXo/wcm/flowplayer/flowplayer-3.2.18.swf"}, {
       // fullscreen button not needed here
         plugins: {
           captions: {
-            url: '/eXoWCMResources/javascript/eXo/wcm/flowplayer/flowplayer.captions-3.2.3.swf',
+            url: '/eXoWCMResources/javascript/eXo/wcm/flowplayer/flowplayer.captions-3.2.10.swf',
     
             // pointer to a content plugin (see below)
             captionTarget: 'content'
@@ -112,7 +112,7 @@
           looks good for showing subtitles
           */
           content: {
-            url:'/eXoWCMResources/javascript/eXo/wcm/flowplayer/flowplayer.content-3.2.0.swf',
+            url:'/eXoWCMResources/javascript/eXo/wcm/flowplayer/flowplayer.content-3.2.9.swf',
             bottom: 35,
             height:40,
             backgroundColor: 'transparent',
@@ -130,7 +130,7 @@
           },
           
           controls: {
-            url: '/eXoWCMResources/javascript/eXo/wcm/flowplayer/flowplayer.controls-tube-3.2.5.swf',
+            url: '/eXoWCMResources/javascript/eXo/wcm/flowplayer/flowplayer.controls-3.2.16.swf',
             height: 30,
             // setup auto hide
             autoHide: false,
