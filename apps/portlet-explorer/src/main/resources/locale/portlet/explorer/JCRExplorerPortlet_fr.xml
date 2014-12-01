@@ -1642,7 +1642,7 @@
   <UIClipboard>
     <header>
       <path>Dossier</path>
-      <command/>
+      <command>Cm</command>
       <action>Act</action>
     </header>
     <label>

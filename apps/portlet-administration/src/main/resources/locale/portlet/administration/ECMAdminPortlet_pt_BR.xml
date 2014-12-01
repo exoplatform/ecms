@@ -87,7 +87,7 @@
 -->
   <UITaxonomyTreeMainForm>
     <action>
-      <Reset>Limpar</Reset>
+      <Reset>Reset</Reset>
     </action>
     <msg>
       <name-not-allowed>Nome não permitido</name-not-allowed>
@@ -712,7 +712,7 @@
     </label>
     <title>
       <AddPermission>Adicionar permissão</AddPermission>
-      <RemovePermission>Remover permissão</RemovePermission>
+      <RemovePermission>Remove Permission</RemovePermission>
       <AddIcon>Adicionar ícone</AddIcon>
       <AddPath>Adicionar caminho</AddPath>
     </title>
@@ -792,7 +792,7 @@
       <UIActionsTemplateContainer>Ações</UIActionsTemplateContainer>
       <UIOthersTemplateContainer>Outros</UIOthersTemplateContainer>
   <UIActionScriptContainer>Ação</UIActionScriptContainer>
-  <UIWidgetScriptContainer>Widgets</UIWidgetScriptContainer>
+  <UIWidgetScriptContainer>Componentes</UIWidgetScriptContainer>
 <UIInterceptorScriptContainer>Interceptadores</UIInterceptorScriptContainer>
 
 <nodeTypeDefinition>Tipo de nó</nodeTypeDefinition>
@@ -1179,7 +1179,7 @@
   -->
   <uiECMScriptsPopup>
     <title>
-      <ecmScriptForm>ECM Script</ecmScriptForm>
+      <ecmScriptForm>Script de ECM</ecmScriptForm>
     </title>
   </uiECMScriptsPopup>
 
@@ -1377,11 +1377,11 @@
       <set_property>Permissão para alterar propriedades</set_property>
       <remove>Permissão para remoção</remove>
     </label>
-    <title>Adicionar uma permissão a este nó</title>
+    <title>Add a permission to this node</title>
     <action>
       <Close>#{word.close}</Close>
-      <Save>Salvar</Save>
-      <Reset>Limpar</Reset>
+      <Save>Save</Save>
+      <Reset>Reset</Reset>
     </action>
     <msg>
       <checkbox-require>Você deve selecionar ao menos uma permissão.</checkbox-require>
@@ -1480,7 +1480,7 @@
       <add_node>Modificar</add_node>
       <remove>Remover</remove>
     </label>
-    <title>Adicionar permissão ao nó</title>
+    <title>Add permission to this node</title>
     <action>
       <Close>#{word.close}</Close>
       <Save>#{word.save}</Save>

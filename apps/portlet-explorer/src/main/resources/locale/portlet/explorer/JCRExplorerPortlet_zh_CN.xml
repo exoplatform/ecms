@@ -762,7 +762,7 @@
   </UIPermissionInfo>
   <permission>
     <title>
-      <SelectUser>Select User</SelectUser>
+      <SelectUser>选择用户</SelectUser>
       <SelectMember>选择成员</SelectMember>
       <AddAny>Select Everyone</AddAny>
     </title>

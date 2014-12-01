@@ -87,7 +87,7 @@
 	-->
 	<UITaxonomyTreeMainForm>
 		<action>
-			<Reset>Réinitialiser</Reset>
+      <Reset>Reset</Reset>
 		</action>
 		<msg>
   		<name-not-allowed>Nom non autorisé</name-not-allowed>
@@ -1377,11 +1377,11 @@
       <set_property>Droit de MAJ des propriétés</set_property>
       <remove>Suppression</remove>
     </label>
-    <title>Ajouter une permission à ce noeud</title>
+    <title>Add a permission to this node</title>
     <action>
       <Close>#{word.close}</Close>
       <Save>Enregistrer</Save>
-      <Reset>Réinitialiser</Reset>
+      <Reset>Reset</Reset>
     </action>
     <msg>
       <checkbox-require>Vous devez choisir au moins une permission.</checkbox-require>
@@ -1480,7 +1480,7 @@
       <add_node>Modification</add_node>
       <remove>Suppression</remove>
     </label>
-    <title>Ajouter une permission à ce noeud</title>
+    <title>Add permission to this node</title>
     <action>
       <Close>#{word.close}</Close>
       <Save>#{word.save}</Save>
