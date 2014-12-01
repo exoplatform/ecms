@@ -27,7 +27,7 @@
 		<div class="clearfix">
 			<div class="uiBox commentArea pull-right">
 				<div class="title">
-					<i class="uiIcon16x16FilePdf uiIconLightGray"></i>Test.pdf
+					<i class="uiIcon16x16FilePdf uiIconLightGray"></i>&nbsp;&nbsp;Test.pdf
 				</div>
 				<div class="uiContentBox">
 					<ul class="commentList">
@@ -75,6 +75,11 @@
 					<div class="commentInputBox">
 						<a class="avatarXSmall pull-left" href="" title="avatar"><img src="/social-resources/skin/images/ShareImages/UserAvtDefault.png" alt="" /></a>
 						<div class="commentBox">
+							<textarea title="What are you working on?" cols="30" rows="10" id="" name="" class="textarea" style="visibility: hidden; display: none;"></textarea>
+							<div class="mask">
+								<div class="replaceTextArea"></div>
+								<div class="placeholder">What are you working on?</div>
+							</div>
 						</div>
 					</div>
 				</div>

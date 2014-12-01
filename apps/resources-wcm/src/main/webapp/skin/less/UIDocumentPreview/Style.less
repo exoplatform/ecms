@@ -18,39 +18,61 @@
 		}
 		.commentArea {
 			width: 300px;
+			.title {
+				font-weight: bold;
+			}			
 			.uiContentBox {
 				padding: 10px;
 				border-radius: 3px;
-				.commentList .rightBlock {
-					margin-left: 45px;
-					.tit {
-						a {
-							font-weight: bold;
-							color: @linkColor;
+				.commentList {
+					.avatarXSmall {
+						margin-top: 5px;					
+					}
+					.rightBlock {
+						margin-left: 45px;
+						.tit {
+							a {
+								font-weight: bold;
+								color: @linkColor;
+							}
+							.dateTime {
+								color: @textLightColor;
+								font-size: 11px;
+							}	
 						}
-						.dateTime {
-							color: @textLightColor;
-							font-size: 11px;
-						}	
 					}
 				}	
-				.commentInputBox .commentBox {
-					background: none repeat scroll 0 0 @white;
-					border: 1px solid @borderColor;
-					border-radius: 4px;
-					box-shadow: 0 2px 1px rgba(0, 0, 0, 0.075) inset;
-					color: @textColor;
-					cursor: text;
-					font-size: 13px;
-					height: 28px;
-					margin: 0;
-					overflow-x: hidden;
-					overflow-y: auto;
-					padding: 5px 8px;
-					resize: none;
-					width: auto;
-					word-wrap: break-word;
-				}	
+				.commentInputBox {
+					border-top: 1px solid @borderColor;
+				    margin: 0 -10px;
+				    padding: 20px 10px;	
+				    .mask {
+				    	position: relative;
+						.replaceTextArea {
+							background: none repeat scroll 0 0 @white;
+							border: 1px solid @borderColor;
+							border-radius: 4px;
+							box-shadow: 0 2px 1px rgba(0, 0, 0, 0.075) inset;
+							color: @textColor;
+							cursor: text;
+							font-size: 13px;
+							height: 24px;
+							margin: 0 0 0 45px;
+							overflow-x: hidden;
+							overflow-y: auto;
+							padding: 5px 8px;
+							resize: none;
+							width: auto;
+							word-wrap: break-word;
+						}
+						.placeholder {
+							left: 55px;
+							opacity: 0.85;
+							position: absolute;
+							top: 5px;
+						}
+					}					
+				}
 			}
 		}	
 		.resizeButton {
