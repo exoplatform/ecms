@@ -23,10 +23,13 @@
   def uniqueId  = new Date().getTime();
   def rcontext = _ctx.getRequestContext() ;
   def uiFormId = uicomponent.id;
-  
+	def currentNode = uiExplorer.getCurrentNode();
+	def currentNodePath = currentNode.getSession().getWorkspace().getName()+":"+currentNode.getPath();
+
   def jsManager = rcontext.getJavascriptManager();
   jsManager.require("SHARED/ecm-utils", "ecmutil").require("SHARED/multiUpload", "multiUpload")
-  .addScripts('multiUpload.displayCorrectUploadButton();');
+  .addScripts('multiUpload.displayCorrectUploadButton();')
+	.addScripts("eXo.ecm.OpenDocumentInOffice.updateLabel('"+currentNodePath+"');");
   
   def showUploadInput = false;
   

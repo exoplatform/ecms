@@ -74,6 +74,9 @@
     <type>org.exoplatform.wcm.connector.collaboration.NavigationConnector</type>
   </component>
   <component>
+    <type>org.exoplatform.wcm.connector.collaboration.OpenInOfficeConnector</type>
+  </component>
+  <component>
     <type>org.exoplatform.wcm.connector.fckeditor.DriverConnector</type>
     <init-params>
       <value-param>

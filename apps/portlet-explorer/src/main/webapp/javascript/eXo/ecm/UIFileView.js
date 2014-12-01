@@ -831,8 +831,6 @@ UIFileView.prototype.clickRightMouse = function(event, elemt, menuId, objId, whi
     if (!event)
       event = window.event;
 
-    eXo.ecm.OpenDocumentInOffice.updateLabel(objId);
-
     var contextMenu = document.getElementById(menuId);
     contextMenu.objId = objId;
 

@@ -1,12 +1,9 @@
 package org.exoplatform.wcm.connector.collaboration;
 
 import org.apache.commons.lang.ArrayUtils;
-import org.exoplatform.container.ExoContainer;
-import org.exoplatform.container.ExoContainerContext;
-import org.exoplatform.container.definition.PortalContainerConfig;
+import org.exoplatform.services.resources.ResourceBundleService;
 import org.exoplatform.services.rest.resource.ResourceContainer;
 import org.exoplatform.services.wcm.utils.WCMCoreUtils;
-import org.exoplatform.webui.application.portlet.PortletRequestContext;
 import org.json.JSONObject;
 
 import javax.servlet.http.HttpServletRequest;
@@ -19,6 +16,8 @@ import javax.ws.rs.core.Request;
 import javax.ws.rs.core.Context;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
+import java.util.Locale;
+import java.util.ResourceBundle;
 
 
 /**
@@ -28,15 +27,18 @@ import javax.ws.rs.core.Response;
 @Path("/office/")
 public class OpenInOfficeConnector implements ResourceContainer {
 
-  private final String OPEN_EXCEL = "Open_Excel";
-  private final String OPEN_POWERPOINT = "Open_Powerpoint";
-  private final String OPEN_WORD = "Open_Word";
-  private final String OPEN_DESKTOP = "Open_Desktop";
+  private final String OPEN_DOCUMENT_IN_EXCEL_ICO = "uiIcon16x16applicationxls";
+  private final String OPEN_DOCUMENT_IN_WORD_ICO = "uiIcon16x16applicationmsword";
+  private final String OPEN_DOCUMENT_IN_POWERPOINT_ICO = "uiIcon16x16applicationvndopenxmlformats-officedocumentpresentationmlpresentation";
+  private final String OPEN_DOCUMENT_ON_DESKTOP_ICO = "uiIcon16x16FileDefault";
 
-  private final String OPEN_DOCUMENT_IN_EXCEL_ICO = "uiIconEcmsOpenDocumentInExcel";
-  private final String OPEN_DOCUMENT_IN_WORD_ICO = "uiIconEcmsOpenDocumentInWord";
-  private final String OPEN_DOCUMENT_IN_POWERPOINT_ICO = "uiIconEcmsOpenDocumentInPowerpoint";
-  private final String OPEN_DOCUMENT_IN_DESKTOP_ICO = "uiIconEcmsOpenDocumentInDesktop";
+  private final String CONNECTOR_BUNDLE_LOCATION = "locale.wcm.resources.WCMResourceBundleConnector";
+  private final String OPEN_DOCUMENT_IN_WORD_RESOURCE_KEY = "OpenInOfficeConnector.label.open-in-word";
+  private final String OPEN_DOCUMENT_IN_EXCEL_RESOURCE_KEY = "OpenInOfficeConnector.label.open-in-excel";
+  private final String OPEN_DOCUMENT_IN_POWERPOINT_RESOURCE_KEY = "OpenInOfficeConnector.label.open-in-powerpoint";
+  private final String OPEN_DOCUMENT_IN_DESKTOP_RESOURCE_KEY = "OpenInOfficeConnector.label.open-in-desktop";
+
+  private final String OPEN_DOCUMENT_DEFAULT_TITLE="Open";
 
   private final int CACHED_TIME = 60*24*30*12;
 
@@ -48,8 +50,6 @@ public class OpenInOfficeConnector implements ResourceContainer {
     openInPowerpoint = System.getProperty("open-in-powerpoint")!=null?System.getProperty("open-in-powerpoint").split(","):null;
   }
 
-  private JSONObject rs = new JSONObject();
-
   /**
    * Return a JsonObject's check file to open
    * @param httpServletRequest
@@ -60,57 +60,52 @@ public class OpenInOfficeConnector implements ResourceContainer {
    */
   @GET
   @Path("/updateDocumentLabel")
-  public Response openDocument(@Context HttpServletRequest httpServletRequest, @Context Request request,
-          @QueryParam("objId") String objId
+  public Response updateDocumentLabel(@Context HttpServletRequest httpServletRequest, @Context Request request,
+          @QueryParam("objId") String objId, @QueryParam("lang") String language
   ) throws Exception {
-    CacheControl cc = new CacheControl();
-    cc.setMaxAge(CACHED_TIME);
-    String extension = objId.substring(objId.lastIndexOf(".")+1, objId.length());
-
-    EntityTag etag = new EntityTag(Integer.toString(objId.hashCode()));
+    EntityTag etag = new EntityTag(Integer.toString((objId+"_"+language).hashCode()));
     Response.ResponseBuilder builder = request.evaluatePreconditions(etag);
     if(builder!=null) return builder.build();
 
+    CacheControl cc = new CacheControl();
+    cc.setMaxAge(CACHED_TIME);
+    String extension = objId.substring(objId.lastIndexOf(".") + 1, objId.length());
+    ResourceBundleService resourceBundleService = WCMCoreUtils.getService(ResourceBundleService.class);
+    ResourceBundle resourceBundle = resourceBundleService.getResourceBundle(CONNECTOR_BUNDLE_LOCATION, new Locale(language));
+
     String ws = objId.split(":")[0];
     String nodePath = objId.split(":")[1];
-    String portalName = WCMCoreUtils.getPortalName();
     String repo = WCMCoreUtils.getRepository().getConfiguration().getName();
 
     String filePath = httpServletRequest.getScheme()+ "://" + httpServletRequest.getServerName() + ":"
             +httpServletRequest.getServerPort() + "/"
-            + getRestContextName(portalName)+ "/private/jcr/" + repo + "/" + ws + nodePath;
+            + WCMCoreUtils.getRestContextName()+ "/private/jcr/" + repo + "/" + ws + nodePath;
 
-    String result=OPEN_DESKTOP;
+    String title = resourceBundle!=null?resourceBundle.getString(OPEN_DOCUMENT_IN_DESKTOP_RESOURCE_KEY):OPEN_DOCUMENT_DEFAULT_TITLE;
+    String ico = OPEN_DOCUMENT_ON_DESKTOP_ICO;
 
-    if(ArrayUtils.indexOf(openInExcel, extension) != -1) {
-      result = OPEN_EXCEL;
-      rs.put("ico", OPEN_DOCUMENT_IN_EXCEL_ICO);
+    if(ArrayUtils.indexOf(openInExcel, extension) != -1 && resourceBundle!=null) {
+      title = resourceBundle.getString(OPEN_DOCUMENT_IN_EXCEL_RESOURCE_KEY);
+      ico = OPEN_DOCUMENT_IN_EXCEL_ICO;
     }
-    if(ArrayUtils.indexOf(openInPowerpoint, extension) != -1) {
-      result = OPEN_POWERPOINT;
-      rs.put("ico", OPEN_DOCUMENT_IN_POWERPOINT_ICO);
+    if(ArrayUtils.indexOf(openInPowerpoint, extension) != -1 && resourceBundle!=null) {
+      title = resourceBundle.getString(OPEN_DOCUMENT_IN_POWERPOINT_RESOURCE_KEY);
+      ico = OPEN_DOCUMENT_IN_POWERPOINT_ICO;
     }
-    if(ArrayUtils.indexOf(openInWord, extension) != -1) {
-      result = OPEN_WORD;
-      rs.put("ico", OPEN_DOCUMENT_IN_WORD_ICO);
+    if(ArrayUtils.indexOf(openInWord, extension) != -1 && resourceBundle!=null) {
+      title = resourceBundle.getString(OPEN_DOCUMENT_IN_WORD_RESOURCE_KEY);
+      ico = OPEN_DOCUMENT_IN_WORD_ICO;
     }
 
-    if(OPEN_DESKTOP.equals(result)) rs.put("ico", OPEN_DOCUMENT_IN_DESKTOP_ICO);
-
-    rs.put("type", result);
+    JSONObject rs = new JSONObject();
+    rs.put("ico", ico);
     rs.put("filePath", filePath);
+    rs.put("title", title);
 
     builder = Response.ok(rs.toString(), MediaType.APPLICATION_JSON);
     builder.tag(etag);
     builder.cacheControl(cc);
     return builder.build();
-  }
-
-  private String getRestContextName(String portalContainerName) {
-    ExoContainer container = ExoContainerContext.getCurrentContainer();
-    PortalContainerConfig portalContainerConfig = (PortalContainerConfig) container.
-            getComponentInstance(PortalContainerConfig.class);
-    return portalContainerConfig.getRestContextName(portalContainerName);
   }
 
 }

@@ -1,12 +1,12 @@
 package org.exoplatform.ecm.webui.component.explorer.rightclick.manager;
 
 import org.exoplatform.ecm.webui.component.explorer.control.filter.IsDocumentFilter;
-import org.exoplatform.ecm.webui.component.explorer.control.filter.IsEditableFilter;
+import org.exoplatform.ecm.webui.component.explorer.control.filter.IsNotTrashHomeNodeFilter;
 import org.exoplatform.ecm.webui.component.explorer.control.filter.CanSetPropertyFilter;
-import org.exoplatform.ecm.webui.component.explorer.control.filter.IsNotLockedFilter;
-import org.exoplatform.ecm.webui.component.explorer.control.filter.IsCheckedOutFilter;
 import org.exoplatform.ecm.webui.component.explorer.control.filter.IsNotInTrashFilter;
 import org.exoplatform.ecm.webui.component.explorer.control.filter.IsNotEditingDocumentFilter;
+
+import org.exoplatform.ecm.webui.component.explorer.control.filter.IsNotFolderChildFilter;
 import org.exoplatform.ecm.webui.component.explorer.control.listener.UIActionBarActionListener;
 import org.exoplatform.webui.config.annotation.ComponentConfig;
 import org.exoplatform.webui.config.annotation.EventConfig;
@@ -21,25 +21,29 @@ import java.util.List;
 
 /**
  * Created by toannh on 11/26/14.
+ * Filter files can be open by Office or OS
  */
 @ComponentConfig(
         events = {
-                @EventConfig(listeners = OpenDocumentManagerComponent.OpenDocumentActionListener.class)
+                @EventConfig(listeners = OpenDocumentManageComponent.OpenDocumentActionListener.class)
         })
-public class OpenDocumentManagerComponent extends UIAbstractManagerComponent {
+public class OpenDocumentManageComponent extends UIAbstractManagerComponent {
 
   private static final List<UIExtensionFilter> FILTERS = Arrays.asList(new UIExtensionFilter[] {
-          new IsDocumentFilter(),
+          new IsNotTrashHomeNodeFilter(),
           new CanSetPropertyFilter(),
-          new IsNotInTrashFilter()});
+          new IsNotInTrashFilter(),
+          new IsDocumentFilter(),
+          new IsNotEditingDocumentFilter(),
+          new IsNotFolderChildFilter()});
 
   @UIExtensionFilters
   public List<UIExtensionFilter> getFilters() {
     return FILTERS;
   }
 
-  public static class OpenDocumentActionListener extends UIActionBarActionListener<OpenDocumentManagerComponent> {
-    public void processEvent(Event<OpenDocumentManagerComponent> event) throws Exception {
+  public static class OpenDocumentActionListener extends UIActionBarActionListener<OpenDocumentManageComponent> {
+    public void processEvent(Event<OpenDocumentManageComponent> event) throws Exception {
     }
   }
 

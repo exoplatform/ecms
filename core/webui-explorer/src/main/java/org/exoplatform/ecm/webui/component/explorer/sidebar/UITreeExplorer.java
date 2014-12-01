@@ -444,8 +444,7 @@ public class UITreeExplorer extends UIContainer {
           uiTreeExplorer.getLabel()  + "','" +
           uiExplorer.getCurrentPath() + "','" +
           Utils.getPersonalDrivePath(uiExplorer.getDriveData().getHomePath(),
-                                     ConversationState.getCurrent().getIdentity().getUserId()) + "');")
-      .addScripts("eXo.ecm.OpenDocumentInOffice.updateLabel('"+workspaceName+":"+event.getRequestContext().getRequestParameter(OBJECTID)+"');");
+                                     ConversationState.getCurrent().getIdentity().getUserId()) + "');");
     }
 
   }
