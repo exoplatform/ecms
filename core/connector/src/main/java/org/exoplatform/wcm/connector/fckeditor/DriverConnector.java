@@ -117,6 +117,8 @@ public class DriverConnector extends BaseConnector implements ResourceContainer 
 
   public static final String TYPE_EDITOR = "editor";
 
+  public static final String TYPE_CONTENT = "multi";
+
   public static final String ILLUSTRATED_WEBCONTENT = "exo:pictureOnHeadWebcontent";
   /** The log. */
   private static final Log LOG = ExoLogger.getLogger(DriverConnector.class.getName());
@@ -948,7 +950,7 @@ public class DriverConnector extends BaseConnector implements ResourceContainer 
       folder.setAttribute("url", FCKUtils.createWebdavURL(child));
       folder.setAttribute("folderType", folderType);
 
-      if(TYPE_FOLDER.equals(type)) {
+      if(TYPE_FOLDER.equals(type) || TYPE_CONTENT.equals(type)) {
         boolean hasFolderChild = (getChildOfType(child, NodetypeConstant.NT_UNSTRUCTURED, type) != null)
                 || (getChildOfType(child, NodetypeConstant.NT_FOLDER, type) != null);
         folder.setAttribute("hasFolderChild", String.valueOf(hasFolderChild));
