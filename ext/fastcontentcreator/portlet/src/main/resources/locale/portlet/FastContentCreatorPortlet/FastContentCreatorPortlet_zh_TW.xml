@@ -148,7 +148,7 @@
     <title>
       <UIOneNodePathSelector>選擇位置</UIOneNodePathSelector>
       <UIPermissionSelector>瀏覽器的權限</UIPermissionSelector>
-      <UICategoriesSelector>新增類別</UICategoriesSelector>
+      <UICategoriesSelector>Add Categories</UICategoriesSelector>
     </title>
   </PopupComponent>
 

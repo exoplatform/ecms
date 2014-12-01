@@ -87,7 +87,7 @@
 -->
   <UITaxonomyTreeMainForm>
     <action>
-      <Reset>إعادة تعيين</Reset>
+      <Reset>Reset</Reset>
     </action>
     <msg>
       <name-not-allowed>اسم محظور</name-not-allowed>
@@ -712,7 +712,7 @@
     </label>
     <title>
       <AddPermission>إضافة صلاحية</AddPermission>
-      <RemovePermission>حذف الصلاحية</RemovePermission>
+      <RemovePermission>Remove Permission</RemovePermission>
       <AddIcon>إضافة ايقونة</AddIcon>
       <AddPath>إضافة مسار</AddPath>
     </title>
@@ -1377,11 +1377,11 @@
       <set_property>مجموعة حق الملكية</set_property>
       <remove>إزالة الامتياز</remove>
     </label>
-    <title>إضافة صلاحيّة الى تلك العقدة</title>
+    <title>Add a permission to this node</title>
     <action>
       <Close>#{word.close}</Close>
-      <Save>حفظ</Save>
-      <Reset>إعادة تعيين</Reset>
+      <Save>Save</Save>
+      <Reset>Reset</Reset>
     </action>
     <msg>
       <checkbox-require>يُرجى اختيار صلاحيّة واحدة  على أقصى تقدير.</checkbox-require>
@@ -1480,7 +1480,7 @@
       <add_node>تغيير</add_node>
       <remove>حذف</remove>
     </label>
-    <title>اضافة صلاحية لهذه العقدة</title>
+    <title>Add permission to this node</title>
     <action>
       <Close>#{word.close}</Close>
       <Save>#{word.save}</Save>

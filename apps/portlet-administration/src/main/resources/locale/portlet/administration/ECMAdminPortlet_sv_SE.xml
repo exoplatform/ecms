@@ -259,7 +259,7 @@
   </UIMetadataList>
   <MetadataPopupAddNew>
     <title>
-      <UIMetadataForm>Lägg till ny mall för metadata</UIMetadataForm>
+      <UIMetadataForm>Add New Metadata's Template</UIMetadataForm>
     </title>
   </MetadataPopupAddNew>
   <MetadataPopupEdit>
@@ -1179,7 +1179,7 @@
   -->
   <uiECMScriptsPopup>
     <title>
-      <ecmScriptForm>ECM-skript</ecmScriptForm>
+      <ecmScriptForm>ECM Script</ecmScriptForm>
     </title>
   </uiECMScriptsPopup>
 
@@ -1377,7 +1377,7 @@
       <set_property>Skapa rättigheter</set_property>
       <remove>Ta bort rättigheter</remove>
     </label>
-    <title>Lägga till en rättighet till noden</title>
+    <title>Add a permission to this node</title>
     <action>
       <Close>#{word.close}</Close>
       <Save>Spara</Save>
@@ -1480,7 +1480,7 @@
       <add_node>Ändra</add_node>
       <remove>Ta bort</remove>
     </label>
-    <title>Lägga till en rättighet till noden</title>
+    <title>Add permission to this node</title>
     <action>
       <Close>#{word.close}</Close>
       <Save>#{word.save}</Save>

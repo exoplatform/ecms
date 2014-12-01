@@ -1377,7 +1377,7 @@
       <set_property>مجوز تنظیم ویژگی</set_property>
       <remove>حذف مجوز</remove>
     </label>
-    <title>افزودن مجوز به آن گره</title>
+    <title>Add a permission to this node</title>
     <action>
       <Close>#{word.close}</Close>
       <Save>Save</Save>
@@ -1480,7 +1480,7 @@
       <add_node>اصلاح</add_node>
       <remove>حذف</remove>
     </label>
-    <title>افزودن مجوز به آن گره</title>
+    <title>Add permission to this node</title>
     <action>
       <Close>#{word.close}</Close>
       <Save>#{word.save}</Save>

@@ -148,7 +148,7 @@
     <title>
       <UIOneNodePathSelector>Выбрать расположение</UIOneNodePathSelector>
       <UIPermissionSelector>Обозреватель прав доступа</UIPermissionSelector>
-      <UICategoriesSelector>Добавить категории</UICategoriesSelector>
+      <UICategoriesSelector>Add Categories</UICategoriesSelector>
     </title>
   </PopupComponent>
 

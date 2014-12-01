@@ -54,8 +54,8 @@
         <name>#{word.name}</name>
         <categories>Kategoriler</categories>
         <mimeType>#{Ecm.dialog.label.mimeType}</mimeType>
-        <width>Width</width>
-        <height>Height</height>
+        <width>Genişlik</width>
+        <height>Yükseklik</height>
         <content>#{word.content}</content>
         <re-upload>Dosya zaten var. Dosyayı silin ve başka bir dosya yükleyin.</re-upload>
       </label>
@@ -94,7 +94,7 @@
         <id>Kimlik</id>
         <name>#{word.name}</name>
         <lifecycle>#{Ecm.dialog.label.lifecycle}</lifecycle>
-        <metadata>Metadata</metadata>
+        <metadata>Metaveri</metadata>
         <description>#{word.description}</description>
       </label>
     </dialog>

@@ -148,7 +148,7 @@
     <title>
       <UIOneNodePathSelector>Chọn vị trí</UIOneNodePathSelector>
       <UIPermissionSelector>Phân quyền</UIPermissionSelector>
-      <UICategoriesSelector>Thêm Danh mục</UICategoriesSelector>
+      <UICategoriesSelector>Add Categories</UICategoriesSelector>
     </title>
   </PopupComponent>
 

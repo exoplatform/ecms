@@ -87,7 +87,7 @@
 -->
   <UITaxonomyTreeMainForm>
     <action>
-      <Reset>Сброс</Reset>
+      <Reset>Reset</Reset>
     </action>
     <msg>
       <name-not-allowed>Запрещенное имя</name-not-allowed>
@@ -712,7 +712,7 @@
     </label>
     <title>
       <AddPermission>Добавить разрешение</AddPermission>
-      <RemovePermission>Удалить права доступа</RemovePermission>
+      <RemovePermission>Remove Permission</RemovePermission>
       <AddIcon>Добавить иконку</AddIcon>
       <AddPath>Добавить путь</AddPath>
     </title>
@@ -1377,11 +1377,11 @@
       <set_property>Установить право собственности</set_property>
       <remove>Удалить право</remove>
     </label>
-    <title>Добавить разрешение для этого узла</title>
+    <title>Add a permission to this node</title>
     <action>
       <Close>#{word.close}</Close>
-      <Save>Сохранить</Save>
-      <Reset>Сброс</Reset>
+      <Save>Save</Save>
+      <Reset>Reset</Reset>
     </action>
     <msg>
       <checkbox-require>Пожалуйста, выберите хотя бы одно разрешение.</checkbox-require>
@@ -1480,7 +1480,7 @@
       <add_node>Изменить</add_node>
       <remove>Удалить</remove>
     </label>
-    <title>Добавить разрешение для этого узла</title>
+    <title>Add permission to this node</title>
     <action>
       <Close>#{word.close}</Close>
       <Save>#{word.save}</Save>

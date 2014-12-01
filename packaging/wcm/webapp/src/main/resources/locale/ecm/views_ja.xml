@@ -169,7 +169,7 @@
   <ScriptAction>
     <view>
       <label> 
-        <isDeep>Is deep</isDeep>
+        <isDeep>Is Deep</isDeep>
         <nodetypes>ノードタイプ</nodetypes>
         <affectedNodeTypeNames>影響を受けるノードタイプ</affectedNodeTypeNames>
         <nodeTypeName>ノードの型名</nodeTypeName>
@@ -180,10 +180,10 @@
   <AddMetadata>
     <view>
       <label>
-        <isDeep>Is deep</isDeep>
+        <isDeep>Is Deep</isDeep>
         <nodetypes>ノードタイプ</nodetypes>
         <affectedNodeTypeNames>影響を受けるノードタイプ</affectedNodeTypeNames>
-        <nodeTypeName>Node type names</nodeTypeName>
+        <nodeTypeName>Node Type Names</nodeTypeName>
       </label> 
     </view>
   </AddMetadata>
@@ -191,10 +191,10 @@
   <EnableVersioning>
     <view>
       <label>
-        <isDeep>Is deep</isDeep>
+        <isDeep>Is Deep</isDeep>
         <nodetypes>ノードタイプ</nodetypes> 
         <affectedNodeTypeNames>影響を受けるノードタイプ</affectedNodeTypeNames>
-        <nodeTypeName>Node type names</nodeTypeName>
+        <nodeTypeName>Node Type Names</nodeTypeName>
       </label> 
     </view>
   </EnableVersioning>
@@ -202,10 +202,10 @@
   <AutoVersioning>
     <view>
       <label>
-        <isDeep>Is deep</isDeep>
+        <isDeep>Is Deep</isDeep>
         <nodetypes>ノードタイプ</nodetypes>
         <affectedNodeTypeNames>影響を受けるノードタイプ</affectedNodeTypeNames>
-        <nodeTypeName>Node type names</nodeTypeName>
+        <nodeTypeName>Node Type Names</nodeTypeName>
       </label> 
     </view>
   </AutoVersioning>
@@ -219,7 +219,7 @@
       <Switch-back-to-original-video>元のビデオ</Switch-back-to-original-video>
       </label>
       <tooltip>
-      <A-second-media-file-is-available-as-audio-description>A second media file is available as audio description</A-second-media-file-is-available-as-audio-description>
+      <A-second-media-file-is-available-as-audio-description>A second media file is available as an audio description</A-second-media-file-is-available-as-audio-description>
       </tooltip>
     </view>
   </AccessibleMedia>

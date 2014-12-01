@@ -39,7 +39,7 @@
     </title>
   <help> 
   <priority>有効な値の範囲は 0.0 から 1.0 です</priority>
-  <description>Help searchers to let them know what the following page has a link with what they are looking for.</description>
+  <description>Help searchers: let them know that the following page has a link that they are looking for.</description>
   <keywords>コンマで区切られた、このページで最も重要な用語</keywords>  
   </help>  
   </UISEOForm>

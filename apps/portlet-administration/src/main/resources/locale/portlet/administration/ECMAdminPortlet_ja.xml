@@ -245,7 +245,7 @@
       <name>メタデータ観覧</name>
       <type>タイプ</type>
       <internalUse>内部利用</internalUse>
-      <action>Action</action>
+      <action>アクション</action>
     </header>
     <msg>
       <confirm-delete>本当に削除したいですか?</confirm-delete>
@@ -259,7 +259,7 @@
   </UIMetadataList>
   <MetadataPopupAddNew>
     <title>
-      <UIMetadataForm>新しいメタデータテンプレートの追加</UIMetadataForm>
+      <UIMetadataForm>Add New Metadata's Template</UIMetadataForm>
     </title>
   </MetadataPopupAddNew>
   <MetadataPopupEdit>
@@ -706,13 +706,13 @@
   -->
   <DriveInputSet>
     <label>
-      <both>両方</both>
-      <folderOnly>フォルダ</folderOnly>
+      <both>Both</both>
+      <folderOnly>Folder</folderOnly>
       <unstructuredFolder>体系化されていないフォルダ</unstructuredFolder>
     </label>
     <title>
       <AddPermission>権限の追加</AddPermission>
-      <RemovePermission>権限の削除</RemovePermission>
+      <RemovePermission>Remove Permission</RemovePermission>
       <AddIcon>追加アイコン</AddIcon>
       <AddPath>追加パス</AddPath>
     </title>
@@ -755,7 +755,7 @@
     <label>
       <actionType>アクションタイプの拡張</actionType>
       <name>名前 (starts with "exo:")</name>
-      <isMove>is Action Move</isMove>
+      <isMove>is Action Move:</isMove>
       <variables>変数</variables>
       <exo_businessProcessAction>ビジネスプロセス</exo_businessProcessAction>
       <exo_scriptAction>Groovyスクリプト</exo_scriptAction>
@@ -1179,7 +1179,7 @@
   -->
   <uiECMScriptsPopup>
     <title>
-      <ecmScriptForm>ECMスクリプト</ecmScriptForm>
+      <ecmScriptForm>ECM Script</ecmScriptForm>
     </title>
   </uiECMScriptsPopup>
 
@@ -1370,14 +1370,14 @@
   <UIPermissionTreeForm>
     <label>
       <UIPopupWindow>選択</UIPopupWindow>
-      <permission>UI権限ツリーフォーム</permission>
+      <permission>UIPermissionTreeForm</permission>
       <userOrGroup>ユーザorグループ</userOrGroup>
       <read>読み込み権限</read>
       <add_node>ノード権限の追加</add_node>
       <set_property>プロパティ権限のセット</set_property>
       <remove>削除権限</remove>
     </label>
-    <title>ノードへ権限の追加</title>
+    <title>Add a permission to this node</title>
     <action>
       <Close>#{word.close}</Close>
       <Save>保存</Save>
@@ -1432,7 +1432,7 @@
     <header>
       <usersOrGroups>ユーザorグループ</usersOrGroups>
       <read>読み込み</read>
-      <addNode>Modify</addNode>
+      <addNode>Modify Node</addNode>
       <remove>削除</remove>
       <action>アクション</action>
     </header>
@@ -1480,7 +1480,7 @@
       <add_node>変更</add_node>
       <remove>削除権限</remove>
     </label>
-    <title>ノードへ権限の追加</title>
+    <title>Add permission to this node</title>
     <action>
       <Close>#{word.close}</Close>
       <Save>#{word.save}</Save>
@@ -1524,13 +1524,13 @@
       <confirm-delete>本当に削除したいですか?</confirm-delete>
       <access-denied>アクセスできません。この機能を使う権限がありません。</access-denied>
       <editing-template>アクセスできません。テンプレートの削除と編集はできません。</editing-template>
-      <template-not-exist>The template that you attempt to delete doesn't exist.</template-not-exist>
+      <template-not-exist>The template that you are trying to delete doesn't exist.</template-not-exist>
     </msg>
   </UITemplateList>
   
   <UIActionsTemplateList>
     <header>
-      <name>Template Name</name>
+      <name>タイプ</name>
       <action>アクション</action>
       <label>テンプレート</label>
       <icon>アイコン</icon>
@@ -1540,15 +1540,15 @@
     </action>
     <msg>
       <confirm-delete>本当に削除したいですか?</confirm-delete>
-      <access-denied>Access denied! You haven't got permission to use this function.</access-denied>
-      <editing-template>Access denied! You can't delete and edit template simultaneously.</editing-template>
-      <template-not-exist>The template that you attempt to delete doesn't exist.</template-not-exist>
+      <access-denied>アクセスできません！この機能を使うための権限がありません。</access-denied>
+      <editing-template>Access denied. You cannot delete and edit this template simultaneously.</editing-template>
+      <template-not-exist>The template that you are trying to delete doesn't exist.</template-not-exist>
     </msg>
   </UIActionsTemplateList>
   
   <UIOthersTemplateList>
     <header>
-      <name>Template Name</name>
+      <name>タイプ</name>
       <label>テンプレート</label>
       <icon>アイコン</icon>
       <action>アクション</action>
@@ -1558,9 +1558,9 @@
     </action>
     <msg>
       <confirm-delete>本当に削除したいですか?</confirm-delete>
-      <access-denied>Access denied! You haven't got permission to use this function.</access-denied>
-      <editing-template>Access denied! You can't delete and edit template simultaneously.</editing-template>
-      <template-not-exist>The template that you attempt to delete doesn't exist.</template-not-exist>
+      <access-denied>アクセスできません！この機能を使うための権限がありません。</access-denied>
+      <editing-template>Access denied. You cannot delete and edit this template simultaneously.</editing-template>
+      <template-not-exist>The template that you are trying to delete doesn't exist.</template-not-exist>
     </msg>
   </UIOthersTemplateList>
 
@@ -1596,8 +1596,8 @@
     <msg>
       <confirm-delete>本当に削除したいですか?</confirm-delete>
       <access-denied>アクセスできません！この機能を使うための権限がありません。</access-denied>
-      <editing-template>Access denied! You can't delete and edit template simultaneously.</editing-template>
-      <template-not-exist>The template that you attempt to delete doesn't exist.</template-not-exist>
+      <editing-template>Access denied. You cannot delete and edit this template simultaneously.</editing-template>
+      <template-not-exist>The template that you are trying to delete doesn't exist.</template-not-exist>
     </msg>
   </UICLVTemplateList>
 
@@ -1746,7 +1746,7 @@
   </TemplateContainerPopup>
   <ViewForm>
     <label>
-      <UITemplateContent>ビューフォーム</UITemplateContent>
+      <UITemplateContent>ViewForm</UITemplateContent>
       <UIPopupWindow>ビュー権限</UIPopupWindow>
       <selectVersion>バージョン</selectVersion>
       <content>コンテンツ</content>
@@ -1759,7 +1759,7 @@
   </ViewForm>
   <DialogForm>
     <label>
-      <UITemplateContent>ダイアログフォーム</UITemplateContent>
+      <UITemplateContent>DialogForm</UITemplateContent>
       <UIPopupWindow>ダイアログ権限</UIPopupWindow>
       <selectVersion>バージョン</selectVersion>
       <content>コンテンツ</content>
@@ -2011,7 +2011,7 @@
     <msg>
       <range-validator>無効なレンジです。正しいレンジのフォーマットは a..b with a, b is positive integer. You can use * instead of b to indicate that unlimited.</range-validator>
       <error-update>情報は正しくありません。</error-update>
-      <item-not-existing>You cannot save changes to this tag that no longer exist in database</item-not-existing>
+      <item-not-existing>You cannot save changes to this tag since it no longer exists in the database.</item-not-existing>
     </msg>
   </UITagStyleForm>
   <FolksonomyPopup>
@@ -2283,7 +2283,7 @@
     <label>
       <name>パスノード</name>      
       <permissions>権限</permissions>
-      <PermissionButton>UIUnLockForm</PermissionButton>
+      <PermissionButton>UI Unlock Form</PermissionButton>
     </label>
     <action>
       <Save>#{word.save}</Save>
@@ -2376,7 +2376,7 @@
   
   <SkinForm>
     <label>
-      <UITemplateContent>スキンフォーム</UITemplateContent>
+      <UITemplateContent>SkinForm</UITemplateContent>
       <UIPopupWindow>スキン権限</UIPopupWindow>
       <selectVersion>バージョン</selectVersion>
       <content>コンテンツ</content>
@@ -2515,7 +2515,7 @@
   </UIWorkspaceWizard>
   <UIRepositoryForm>
     <msg>
-      <not-complete-repository>レポジトリは作成されています。新しいレポジトリを作成する為に数秒待つ必要があります。</not-complete-repository>
+      <not-complete-repository>The repository is being created. You need to wait a few minutes before creating another one.</not-complete-repository>
     </msg>
   </UIRepositoryForm>
   
@@ -2528,7 +2528,7 @@
 
 <UIDriveForm>
 <label>
-<allowNodeTypesOnTree>Allowance nodetype on left tree</allowNodeTypesOnTree>
+<allowNodeTypesOnTree>Allowance nodetype on left tree:</allowNodeTypesOnTree>
 </label>
 </UIDriveForm>
 <DriveInputSet>
