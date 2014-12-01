@@ -31,10 +31,8 @@ import org.exoplatform.commons.upgrade.UpgradeProductPlugin;
 import org.exoplatform.commons.utils.PrivilegedSystemHelper;
 import org.exoplatform.commons.version.util.VersionComparator;
 import org.exoplatform.container.xml.InitParams;
-import org.exoplatform.services.cms.impl.Utils;
 import org.exoplatform.services.cms.scripts.ScriptService;
 import org.exoplatform.services.cms.scripts.impl.ScriptServiceImpl;
-import org.exoplatform.services.cms.views.impl.ApplicationTemplateManagerServiceImpl;
 import org.exoplatform.services.jcr.ext.common.SessionProvider;
 import org.exoplatform.services.log.ExoLogger;
 import org.exoplatform.services.log.Log;
@@ -57,7 +55,6 @@ public class ScriptUpgradePlugin extends UpgradeProductPlugin {
   
   private static final Log log = ExoLogger.getLogger(ScriptUpgradePlugin.class.getName());
   private ScriptService scriptService_;
-  private static final String EDITED_CONFIGURED_SCRIPTS = "EditedConfiguredScripts";
 
   
   public ScriptUpgradePlugin(ScriptService scriptService, InitParams initParams) {
@@ -99,14 +96,7 @@ public class ScriptUpgradePlugin extends UpgradeProductPlugin {
       //remove all old script nodes
       for (Node removedNode : removedNodes) {
         try {
-          String editedScript = removedNode.getParent().getParent().getName()
-                                .concat("/").concat(removedNode.getParent().getName())
-                                .concat("/").concat(removedNode.getName());
           removedNode.remove();
-          Utils.removeEditedConfiguredData(editedScript,
-                                           ScriptServiceImpl.class.getSimpleName(),
-                                           EDITED_CONFIGURED_SCRIPTS,
-                                           true);
           ecmExplorer.save();
         } catch (Exception e) {
           if (log.isInfoEnabled()) {

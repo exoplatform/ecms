@@ -32,6 +32,7 @@ import org.exoplatform.commons.utils.ListAccessImpl;
 import org.exoplatform.ecm.webui.core.UIPagingGrid;
 import org.exoplatform.ecm.webui.utils.Utils;
 import org.exoplatform.services.cms.views.ApplicationTemplateManagerService;
+import org.exoplatform.services.cms.views.impl.ApplicationTemplateManagerServiceImpl;
 import org.exoplatform.services.wcm.core.NodetypeConstant;
 import org.exoplatform.services.wcm.utils.WCMCoreUtils;
 import org.exoplatform.web.application.ApplicationMessage;
@@ -184,6 +185,11 @@ public class UICLVTemplateList extends UIPagingGrid {
                 clvTemplateList.getCategoryFromFilter(), 
                 template, 
                 WCMCoreUtils.getUserSessionProvider());
+        StringBuilder tBuilder = new StringBuilder();
+        tBuilder.append(clvTemplateList.getCategoryFromFilter()).append("/").append(template);
+        org.exoplatform.services.cms.impl.Utils.addEditedConfiguredData(tBuilder.toString(),
+            ApplicationTemplateManagerServiceImpl.class.getSimpleName(),
+            ApplicationTemplateManagerServiceImpl.EDITED_CONFIGURED_TEMPLATES, true);
       } catch (PathNotFoundException ex) {
         UIApplication uiApp = event.getSource().getAncestorOfType(UIApplication.class) ;
         uiApp.addMessage(new ApplicationMessage("UITCLVemplateList.msg.template-not-exist", null, ApplicationMessage.WARNING)) ;

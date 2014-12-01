@@ -114,9 +114,6 @@ public class ApplicationTemplateManagerServiceImpl implements ApplicationTemplat
       templateSet = new HashSet<String>();
     }
     templateSet.add(category.getName() + "/" + config.getTemplateName());
-    StringBuilder tBuilder = new StringBuilder();
-    tBuilder.append(config.getCategory()).append(config.getTemplateName());
-    Utils.addEditedConfiguredData(tBuilder.toString(), this.getClass().getSimpleName(), EDITED_CONFIGURED_TEMPLATES, true);
     configuredTemplates_.put(portletTemplateHome.getName(), templateSet);
   }
 
@@ -235,7 +232,7 @@ public class ApplicationTemplateManagerServiceImpl implements ApplicationTemplat
       storedTemplateHomeNode.save();
       for(PortletTemplateConfig config: map.get(portletName)) {
         StringBuilder tBuilder = new StringBuilder();
-        tBuilder.append(config.getCategory()).append(config.getTemplateName());
+        tBuilder.append(config.getCategory()).append("/").append(config.getTemplateName());
         if(Utils.getAllEditedConfiguredData(this.getClass().getSimpleName(), EDITED_CONFIGURED_TEMPLATES, true).contains(tBuilder.toString())) continue;
         addTemplate(templateNode,config);
       }
