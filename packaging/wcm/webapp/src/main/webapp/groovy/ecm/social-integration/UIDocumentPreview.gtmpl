@@ -92,7 +92,7 @@
             def isWebContent = uicomponent.isWebContent();
             if (isWebContent) {
                   %>
-                <div>
+                <div class="uiPreviewWebContent">
                   <%
             }
             
