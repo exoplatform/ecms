@@ -434,6 +434,8 @@ public class UIDriveForm extends UIFormTabPane implements UISelectable {
       String nodeTypes = uiDriveForm.getUIStringInput(UIDriveInputSet.FIELD_ALLOW_NODETYPES_ON_TREE).getValue();
       if ((nodeTypes != null) && (uiDriveForm.membershipString.indexOf(nodeTypes) < 0)){
         uiDriveForm.nodeTypes = nodeTypes;
+      } else {
+        uiDriveForm.nodeTypes = "";
       }
       uiDriveForm.getUIStringInput(
           UIDriveInputSet.FIELD_ALLOW_NODETYPES_ON_TREE).setValue(uiDriveForm.nodeTypes);
