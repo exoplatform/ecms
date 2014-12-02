@@ -18,12 +18,14 @@
 		}
 		.commentArea {
 			width: 300px;
+			height: 610px;
 			.title {
 				font-weight: bold;
 			}			
 			.uiContentBox {
-				padding: 10px;
+				padding: 10px 10px 0 10px;
 				border-radius: 3px;
+				background: @componentBackgroundLight;
 				.commentList {
 					.avatarXSmall {
 						margin-top: 5px;					
@@ -44,6 +46,7 @@
 				}	
 				.commentInputBox {
 					border-top: 1px solid @borderColor;
+					border-bottom: 1px solid @borderColor;
 				    margin: 0 -10px;
 				    padding: 20px 10px;	
 				    .mask {
@@ -87,12 +90,18 @@
 			margin-right: 335px;
 			#outerContainer {
 				border-radius: 3px;
-				overflow: hidden;			
+				overflow: hidden;
+				margin-bottom: 0px;
+				height: 580px;		
 			}
-			.uiVote .voteRatingInfo {
-				color: @white;
-				span {
+			.uiVote {
+				height: 20px;
+    			padding: 5px 0;
+				.voteRatingInfo {
 					color: @white;
+					span {
+						color: @white;
+					}
 				}	
 			}
 		}
