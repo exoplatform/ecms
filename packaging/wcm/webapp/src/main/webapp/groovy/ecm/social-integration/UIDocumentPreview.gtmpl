@@ -20,81 +20,94 @@
 
 
 <div class="maskLayer">
-	<div class="uiDocumentPreview" id="$uicomponent.id">
-		<div class="exitWindow">
-			<a class="uiIconClose uiIconWhite" title="<%=_ctx.appRes("UIPopupWindow.Close")%>" onclick="<%=uicomponent.event(uicomponent.getCloseEvent())%>"></a>
-		</div>
-		<div class="clearfix">
-			<div class="uiBox commentArea pull-right">
-				<div class="title">
-					<i class="uiIcon16x16FilePdf uiIconLightGray"></i>&nbsp;&nbsp;Test.pdf
-				</div>
-				<div class="uiContentBox">
-					<ul class="commentList">
-						<li class="clearfix">
-							<a class="avatarXSmall pull-left" href="" title="avatar"><img src="/social-resources/skin/images/ShareImages/UserAvtDefault.png" alt="" /></a>
-							<div class="rightBlock">
-								<div class="tit">
-									<a href="" title="name">Root Root</a>
-									<span class="pull-right dateTime">10 days ago</span>
-								</div>
-								<p class="cont">Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam nonummy nibh euismod tincidunt ut laoreet dolore magna aliquam erat volutpat. Ut wisi enim ut laoreet dolore magna.</p>
-							</div>
-						</li>
-						<li class="clearfix">
-							<a class="avatarXSmall pull-left" href="" title="avatar"><img src="/social-resources/skin/images/ShareImages/UserAvtDefault.png" alt="" /></a>
-							<div class="rightBlock">
-								<div class="tit">
-									<a href="" title="name">Root Root</a>
-									<span class="pull-right dateTime">10 days ago</span>
-								</div>
-								<p class="cont">Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam nonummy nibh euismod tincidunt ut laoreet dolore magna aliquam erat volutpat. Ut wisi enim ut laoreet dolore magna.</p>
-							</div>
-						</li>
-						<li class="clearfix">
-							<a class="avatarXSmall pull-left" href="" title="avatar"><img src="/social-resources/skin/images/ShareImages/UserAvtDefault.png" alt="" /></a>
-							<div class="rightBlock">
-								<div class="tit">
-									<a href="" title="name">Root Root</a>
-									<span class="pull-right dateTime">10 days ago</span>
-								</div>
-								<p class="cont">Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam nonummy nibh euismod tincidunt ut laoreet dolore magna aliquam erat volutpat. Ut wisi enim ut laoreet dolore magna.</p>
-							</div>
-						</li>
-						<li class="clearfix">
-							<a class="avatarXSmall pull-left" href="" title="avatar"><img src="/social-resources/skin/images/ShareImages/UserAvtDefault.png" alt="" /></a>
-							<div class="rightBlock">
-								<div class="tit">
-									<a href="" title="name">Root Root</a>
-									<span class="pull-right dateTime">10 days ago</span>
-								</div>
-								<p class="cont">Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam nonummy nibh euismod tincidunt ut laoreet dolore magna aliquam erat volutpat. Ut wisi enim ut laoreet dolore magna.</p>
-							</div>
-						</li>
-					</ul>
-					<div class="commentInputBox">
-						<a class="avatarXSmall pull-left" href="" title="avatar"><img src="/social-resources/skin/images/ShareImages/UserAvtDefault.png" alt="" /></a>
-						<div class="commentBox">
-							<textarea title="What are you working on?" cols="30" rows="10" id="" name="" class="textarea" style="visibility: hidden; display: none;"></textarea>
-							<div class="mask">
-								<div class="replaceTextArea"></div>
-								<div class="placeholder">What are you working on?</div>
-							</div>
-						</div>
-					</div>
-				</div>
-			</div>
-			<!-- commentArea -->
-			<div class="resizeButton " id="ShowHideAll">
-				<i style="display: block;" class="uiIconMiniArrowRight uiIconWhite"></i>
-			</div>
-			
-			<% uicomponent.renderChildren(); %>
-		</div>
-		<style>
-			.uiActivityStream, .uiActivitiesLoader {
-				position: static;
-			}
-		</style>
-	</div>
+    <div class="uiDocumentPreview" id="$uicomponent.id">
+        <div class="exitWindow">
+            <a class="uiIconClose uiIconWhite" title="<%=_ctx.appRes("UIPopupWindow.Close")%>" onclick="<%=uicomponent.event(uicomponent.getCloseEvent())%>"></a>
+        </div>
+        <div class="clearfix">
+            <div class="uiBox commentArea pull-right">
+                <div class="title">
+                    <i class="uiIcon16x16FilePdf uiIconLightGray"></i>&nbsp;&nbsp;Test.pdf
+                </div>
+                <div class="uiContentBox">
+                    <ul class="commentList">
+                        <li class="clearfix">
+                            <a class="avatarXSmall pull-left" href="" title="avatar"><img src="/social-resources/skin/images/ShareImages/UserAvtDefault.png" alt="" /></a>
+                            <div class="rightBlock">
+                                <div class="tit">
+                                    <a href="" title="name">Root Root</a>
+                                    <span class="pull-right dateTime">10 days ago</span>
+                                </div>
+                                <p class="cont">Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam nonummy nibh euismod tincidunt ut laoreet dolore magna aliquam erat volutpat. Ut wisi enim ut laoreet dolore magna.</p>
+                            </div>
+                        </li>
+                        <li class="clearfix">
+                            <a class="avatarXSmall pull-left" href="" title="avatar"><img src="/social-resources/skin/images/ShareImages/UserAvtDefault.png" alt="" /></a>
+                            <div class="rightBlock">
+                                <div class="tit">
+                                    <a href="" title="name">Root Root</a>
+                                    <span class="pull-right dateTime">10 days ago</span>
+                                </div>
+                                <p class="cont">Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam nonummy nibh euismod tincidunt ut laoreet dolore magna aliquam erat volutpat. Ut wisi enim ut laoreet dolore magna.</p>
+                            </div>
+                        </li>
+                        <li class="clearfix">
+                            <a class="avatarXSmall pull-left" href="" title="avatar"><img src="/social-resources/skin/images/ShareImages/UserAvtDefault.png" alt="" /></a>
+                            <div class="rightBlock">
+                                <div class="tit">
+                                    <a href="" title="name">Root Root</a>
+                                    <span class="pull-right dateTime">10 days ago</span>
+                                </div>
+                                <p class="cont">Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam nonummy nibh euismod tincidunt ut laoreet dolore magna aliquam erat volutpat. Ut wisi enim ut laoreet dolore magna.</p>
+                            </div>
+                        </li>
+                        <li class="clearfix">
+                            <a class="avatarXSmall pull-left" href="" title="avatar"><img src="/social-resources/skin/images/ShareImages/UserAvtDefault.png" alt="" /></a>
+                            <div class="rightBlock">
+                                <div class="tit">
+                                    <a href="" title="name">Root Root</a>
+                                    <span class="pull-right dateTime">10 days ago</span>
+                                </div>
+                                <p class="cont">Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam nonummy nibh euismod tincidunt ut laoreet dolore magna aliquam erat volutpat. Ut wisi enim ut laoreet dolore magna.</p>
+                            </div>
+                        </li>
+                    </ul>
+                    <div class="commentInputBox">
+                        <a class="avatarXSmall pull-left" href="" title="avatar"><img src="/social-resources/skin/images/ShareImages/UserAvtDefault.png" alt="" /></a>
+                        <div class="commentBox">
+                            <textarea title="What are you working on?" cols="30" rows="10" id="" name="" class="textarea" style="visibility: hidden; display: none;"></textarea>
+                            <div class="mask">
+                                <div class="replaceTextArea"></div>
+                                <div class="placeholder">What are you working on?</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- commentArea -->
+            <div class="resizeButton " id="ShowHideAll">
+                <i style="display: block;" class="uiIconMiniArrowRight uiIconWhite"></i>
+            </div>
+                 <% 
+            def isWebContent = uicomponent.isWebContent();
+            if (isWebContent) {
+                  %>
+                <div>
+                  <%
+            }
+            
+                  uicomponent.renderChildren(); 
+            if (isWebContent) {
+                %>
+                </div>
+                <%
+            }
+             %>
+        </div>
+        <style>
+            .uiActivityStream, .uiActivitiesLoader {
+                position: static;
+            }
+        </style>
+    </div>
 </div>

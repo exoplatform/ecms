@@ -21,6 +21,7 @@
             // Calculate margin 
             var pdfDisplayAreaHeight = window.innerHeight - 62;
             gj('#UIDocumentPreview #outerContainer').height(pdfDisplayAreaHeight);
+            gj('#UIDocumentPreview .navigationContainer').height(pdfDisplayAreaHeight);
         }
         resizeEventHandler();
         gj(window).on('resize', resizeEventHandler);
