@@ -1,28 +1,31 @@
-(function (gj, base) {
-  function DocumentPreview() {
-  }
+(function(gj, base) {
+    function DocumentPreview() {}
 
-  DocumentPreview.prototype.initScreen = function () {
+    DocumentPreview.prototype.initScreen = function() {
+        // Temporarily disable body scroll
+        gj('body').css('overflow', 'hidden');
 
-    // Temporarily disable body scroll
-    gj('body').css('overflow', 'hidden');
+        // Bind Esc key
+        var closeEventHandler = function(e) {
+            if (e.keyCode == 27) {
+                gj(".uiIconClose", document.getElementById('UIDocumentPreview')).trigger("click");
+            }
+        }
+        gj(document).on('keyup', closeEventHandler);
 
-    // Bind Esc key
-    gj('#UIDocumentPreview').keyup(function (e) {
-      if (e.keyCode == 27) {
-        gj(".uiIconClose", this).trigger("click");
-      }
-    });
+        // Return body scroll, turn off keyup
+        gj(".uiIconClose", document.getElementById('UIDocumentPreview')).click(function() {
+            setTimeout(function() {
+                gj('body').css('overflow', 'visible');
+                gj(document).off('keyup', closeEventHandler);
+            }, 500);
+        });
+    };
 
-    // Return body scroll
-    gj(".uiIconClose", document.getElementById('UIDocumentPreview')).click(function () {
-      gj('body').css('overflow', 'visible');
-    });
-  };
 
-  eXo.ecm.DocumentPreview = new DocumentPreview();
+    eXo.ecm.DocumentPreview = new DocumentPreview();
 
-  return {
-    DocumentPreview: eXo.ecm.DocumentPreview
-  };
+    return {
+        DocumentPreview: eXo.ecm.DocumentPreview
+    };
 })(gj, base);
