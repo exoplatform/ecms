@@ -19,7 +19,6 @@ package org.exoplatform.ecm.webui.component.admin.script;
 import org.exoplatform.commons.utils.LazyPageList;
 import org.exoplatform.commons.utils.ListAccess;
 import org.exoplatform.commons.utils.ListAccessImpl;
-import org.exoplatform.services.cms.impl.BaseResourceLoaderService;
 import org.exoplatform.services.cms.impl.Utils;
 import org.exoplatform.services.cms.scripts.ScriptService;
 import org.exoplatform.services.wcm.core.NodetypeConstant;
@@ -187,7 +186,7 @@ public class UIScriptList extends UIComponentDecorator {
       String namePrefix = uiScriptList.getScriptCategory();
       try {
         scriptService.removeScript(namePrefix + "/" + scriptName, WCMCoreUtils.getUserSessionProvider());
-        Utils.addEditedConfiguredData(namePrefix + "/" + scriptName, BaseResourceLoaderService.class.getSimpleName(), EDITED_CONFIGURED_SCRIPTS, true);
+        Utils.addEditedConfiguredData(namePrefix + "/" + scriptName, "ScriptServiceImpl", EDITED_CONFIGURED_SCRIPTS, true);
       } catch(AccessDeniedException ace) {
         throw new MessageException(new ApplicationMessage("UIECMAdminControlPanel.msg.access-denied",
                                                           null, ApplicationMessage.WARNING));
