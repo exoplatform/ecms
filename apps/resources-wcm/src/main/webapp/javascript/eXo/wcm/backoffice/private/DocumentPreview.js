@@ -20,8 +20,9 @@
         var resizeEventHandler = function() {
             // Calculate margin 
             var pdfDisplayAreaHeight = window.innerHeight - 62;
-            gj('#UIDocumentPreview #outerContainer').height(pdfDisplayAreaHeight);
-            gj('#UIDocumentPreview .navigationContainer').height(pdfDisplayAreaHeight);
+            gj('#UIDocumentPreview #outerContainer').height(pdfDisplayAreaHeight); // pdf viewer
+            gj('#UIDocumentPreview .navigationContainer').height(pdfDisplayAreaHeight); // media viewer, no preview file
+            gj('#UIDocumentPreview .uiPreviewWebContent').height(pdfDisplayAreaHeight -30) // webcontent
         }
         resizeEventHandler();
         gj(window).on('resize', resizeEventHandler);
