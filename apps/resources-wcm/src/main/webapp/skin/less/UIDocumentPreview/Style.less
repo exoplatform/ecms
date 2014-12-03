@@ -17,16 +17,22 @@
 			right: 7px;
 		}
 		.commentArea {
-			width: 300px;
 			height: 610px;
+		    margin-bottom: 0;
+		    width: 300px;
 			.title {
 				font-weight: bold;
 			}			
 			.uiContentBox {
-				padding: 10px 10px 0 10px;
+				padding: 0;
 				border-radius: 3px;
 				background: @componentBackgroundLight;
 				.commentList {
+					max-height: 485px;
+    				overflow: auto;
+    				li {
+    					padding: 10px;
+    				}
 					.avatarXSmall {
 						margin-top: 5px;					
 					}
@@ -47,7 +53,7 @@
 				.commentInputBox {
 					border-top: 1px solid @borderColor;
 					border-bottom: 1px solid @borderColor;
-				    margin: 0 -10px;
+				    margin: 0;
 				    padding: 20px 10px;	
 				    .mask {
 				    	position: relative;
