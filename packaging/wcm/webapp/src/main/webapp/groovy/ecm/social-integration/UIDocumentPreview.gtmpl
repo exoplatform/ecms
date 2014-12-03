@@ -100,6 +100,19 @@
             if (isWebContent) {
                 %>
                 </div>
+                <div class="uiVote clearfix">
+					<div class="voteRatingInfo">
+							Avg. Rating: <span>0.0</span>
+							Votes: <span>0</span>
+					</div>
+					<div class="avgRatingImages clearfix">
+						<i class="unvoted"></i>
+						<i class="unvoted"></i>
+						<i class="unvoted"></i>
+						<i class="unvoted"></i>
+						<i class="unvoted"></i>
+					</div>
+				</div>
                 <%
             }
              %>
