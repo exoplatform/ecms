@@ -16,6 +16,9 @@
 			top: 7px;
 			right: 7px;
 		}
+		.uiContentBox {
+			padding: 0;		
+		}
 		.commentArea {
 			height: 610px;
 		    margin-bottom: 0;
@@ -96,7 +99,7 @@
 			margin-right: 335px;
 			#outerContainer {
 				border-radius: 3px;
-				overflow: hidden;
+				overflow-y: auto;
 				margin-bottom: 0px;
 				height: 580px;		
 			}
@@ -104,6 +107,7 @@
 				background: @black;
 				border: 1px solid @black;
 				margin-bottom: 0;
+				overflow: auto;
 				.title {
 					display:  none;
 					visibility: hidden;
@@ -111,8 +115,15 @@
 				.content {	
 					text-align: center;
 				}
+				.uiUnEditable {
+					background: @white;
+					padding: 15px;
+					border-radius: 3px;
+				}
+				img {
+					width: 100%;
+				}
 			}
-			
 		}
 		.uiPreviewWebContent {
 			background: @white;
@@ -120,6 +131,8 @@
 			margin-right: 335px;
 			padding: 15px;
 			border-radius: 3px;
+			overflow-y: auto;
+			word-wrap: break-word;
 		}
 		.uiVote {
 			height: 20px;
