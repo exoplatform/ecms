@@ -20,9 +20,20 @@
         var resizeEventHandler = function() {
             // Calculate margin 
             var pdfDisplayAreaHeight = window.innerHeight - 62;
-            gj('#UIDocumentPreview #outerContainer').height(pdfDisplayAreaHeight); // pdf viewer
-            gj('#UIDocumentPreview .navigationContainer').height(pdfDisplayAreaHeight); // media viewer, no preview file
-            gj('#UIDocumentPreview .uiPreviewWebContent').height(pdfDisplayAreaHeight -30) // webcontent
+            gj('#outerContainer', $uiDocumentPreview).height(pdfDisplayAreaHeight); // pdf viewer
+
+            // Media viewer, no preview file
+            var $navigationContainer = gj(".navigationContainer", $uiDocumentPreview);
+            var $uiContentBox = gj('.uiContentBox', $navigationContainer);
+            var $video = gj('.videoContent', $uiContentBox);
+            $navigationContainer.height(pdfDisplayAreaHeight);
+            $uiContentBox.height(pdfDisplayAreaHeight);
+            $video.css('max-width', $uiContentBox.width() - 2);
+            $video.css('max-height', $uiContentBox.height() - 3);
+            $video.css('width', '100%');
+            $video.css('height', 'auto');
+
+            gj('.uiPreviewWebContent', $uiDocumentPreview).height(pdfDisplayAreaHeight - 30) // webcontent
         }
         resizeEventHandler();
         gj(window).on('resize', resizeEventHandler);
