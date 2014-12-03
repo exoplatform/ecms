@@ -104,10 +104,10 @@
 				height: 580px;		
 			}
 			.navigationContainer {
-				background: @black;
-				border: 1px solid @black;
+				border: none;
 				margin-bottom: 0;
 				overflow: auto;
+				position: relative;
 				.title {
 					display:  none;
 					visibility: hidden;
@@ -117,11 +117,16 @@
 				}
 				.uiUnEditable {
 					background: @white;
-					padding: 15px;
 					border-radius: 3px;
 				}
-				img {
+				img, video, .uiUnEditable {
 					width: 100%;
+					left: 50%;
+				    position: absolute;
+					top: 50%;
+				    transform: translate(-50%, -50%);
+				    -ms-transform: translate(-50%, -50%);
+				    -webkit-transform: translate(-50%, -50%);
 				}
 			}
 		}
