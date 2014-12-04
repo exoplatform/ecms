@@ -4,6 +4,7 @@
   OpenDocumentInOffice.prototype.openDocument = function(filePath){
     var documentManager = eXo.ecm.ECMWebDav.WebDAV.Client.DocManager;
     if (documentManager.IsMicrosoftOfficeAvailable() && documentManager.IsMicrosoftOfficeDocument(filePath)) {
+      if (!('ActiveXObject' in window)) filePath += '\0';
       documentManager.MicrosoftOfficeEditDocument(filePath);
     } else {
       documentManager.JavaEditDocument(filePath, null, "/ecmexplorer/applet/ITHitMountOpenDocument.jar");
