@@ -10,7 +10,13 @@
     }
   }
 
-  OpenDocumentInOffice.prototype.updateLabel = function(objId, activityId){
+  /**
+   * Update OpenDocument button's label
+   * objId is workspace_name ':' node_path of file
+   * activityId is id of activity in home page
+   * rightClick update button when right click (context-menu)
+   */
+  OpenDocumentInOffice.prototype.updateLabel = function(objId, activityId, rightClick){
     gj.ajax({
       url: "/portal/rest/office/updateDocumentLabel?objId=" + objId+"&lang="+eXo.env.portal.language,
       dataType: "text",
@@ -21,11 +27,12 @@
         .success(function (data) {
           data = gj.parseJSON(data);
           var elClass = "uiIconEcmsOpenDocument";
-          if(activityId != null && activityId != "undefined" && activityId != "")
-            elClass +="_"+activityId;
+          var isRightClick="";
+          if(activityId != null && activityId != "undefined" && activityId != "") elClass +="_"+activityId;
+          if(rightClick) isRightClick="#ECMContextMenu";
 
-          var openDocument = gj("."+elClass).parent();
-          var html = "<i class=\""+elClass+" "+data.ico+"\"></i>\n"+data.title;
+          var openDocument = gj(isRightClick+" ."+elClass).parent();
+          var html = "<i class=\"uiIcon16x16FileDefault uiIcon16x16nt_file "+data.ico+" "+elClass+"\"></i>\n"+data.title;
           openDocument.html(html);
           openDocument.attr("href", "javascript:void(0);");
           openDocument.attr("onclick", "eXo.ecm.OpenDocumentInOffice.openDocument('"+data.filePath+"')");

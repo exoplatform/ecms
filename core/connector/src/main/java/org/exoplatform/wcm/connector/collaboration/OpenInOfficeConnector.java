@@ -22,7 +22,7 @@ import java.util.ResourceBundle;
 
 /**
  * Created by toannh on 11/27/14.
- * Provider all rest methods of Open Document features.
+ * Provider all rest methods of Open Document feature.
  */
 @Path("/office/")
 public class OpenInOfficeConnector implements ResourceContainer {
