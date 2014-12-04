@@ -26,13 +26,40 @@
             var $navigationContainer = gj(".navigationContainer", $uiDocumentPreview);
             var $uiContentBox = gj('.uiContentBox', $navigationContainer);
             var $video = gj('.videoContent', $uiContentBox);
-            var $img = gj('a > img', $uiContentBox);
+            var $flowplayerContentDetail = gj('.ContentDetail', $uiContentBox);
+            var $flowplayerPlayerContent = gj('.PlayerContent', $flowplayerContentDetail);
+            var $flowplayer = gj('object', $flowplayerPlayerContent);
+            var $flashViewer = gj('.FlashViewer', $uiContentBox);
+            var $embed = gj('embed', $flashViewer);
+            var $windowmediaplayer = gj('#MediaPlayer1', $uiContentBox);
+
             $navigationContainer.height(pdfDisplayAreaHeight);
             $uiContentBox.height(pdfDisplayAreaHeight);
+            $flowplayerContentDetail.height(pdfDisplayAreaHeight);
+            $flowplayerPlayerContent.height(pdfDisplayAreaHeight-5);
+            $flashViewer.height(pdfDisplayAreaHeight-5);
+
+            $flowplayer.css('max-width', $uiContentBox.width() - 2);
+            $flowplayer.css('max-height', $uiContentBox.height() - 3);
+            $flowplayer.css('width', '100%');
+            $flowplayer.css('height', '100%');
+
             $video.css('max-width', $uiContentBox.width() - 2);
             $video.css('max-height', $uiContentBox.height() - 3);
             $video.css('width', '100%');
             $video.css('height', 'auto');
+
+            $windowmediaplayer.css('max-width', $uiContentBox.width() - 2);
+            $windowmediaplayer.css('max-height', $uiContentBox.height() - 7);
+            $windowmediaplayer.css('width', '100%');
+            $windowmediaplayer.css('height', '100%');
+
+            $embed.css('max-width', $uiContentBox.width() - 2);
+            $embed.css('max-height', $uiContentBox.height() - 3);
+            $embed.css('width', '100%');
+            $embed.css('height', '100%');
+
+            var $img = gj('a > img', $uiContentBox);
             $img.css('max-width', $uiContentBox.width() - 2);
             $img.css('max-height', $uiContentBox.height() - 3);
             $img.css('width', 'auto');

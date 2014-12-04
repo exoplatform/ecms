@@ -156,6 +156,7 @@
         clip: {
             autoPlay: false,
             autoBuffering: true,
+            scaling: 'fit',
             // optional: when playback starts close the first audio playback
             onBeforeBegin: function() {
               flowplayer("player-$timeCreated").close();
@@ -208,11 +209,9 @@
 }
 
 .PlayerContent{
-	padding: 10px;
 	display:block;
 	float:left;
-	height:320px;
-	width:475px;
+
 }
 
 div.clips.petrol a.playing {
