@@ -26,12 +26,17 @@
             var $navigationContainer = gj(".navigationContainer", $uiDocumentPreview);
             var $uiContentBox = gj('.uiContentBox', $navigationContainer);
             var $video = gj('.videoContent', $uiContentBox);
+            var $img = gj('a > img', $uiContentBox);
             $navigationContainer.height(pdfDisplayAreaHeight);
             $uiContentBox.height(pdfDisplayAreaHeight);
             $video.css('max-width', $uiContentBox.width() - 2);
             $video.css('max-height', $uiContentBox.height() - 3);
             $video.css('width', '100%');
             $video.css('height', 'auto');
+            $img.css('max-width', $uiContentBox.width() - 2);
+            $img.css('max-height', $uiContentBox.height() - 3);
+            $img.css('width', 'auto');
+            $img.css('height', 'auto');
 
             gj('.uiPreviewWebContent', $uiDocumentPreview).height(pdfDisplayAreaHeight - 30) // webcontent
         }
