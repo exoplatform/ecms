@@ -526,6 +526,13 @@
     padding: 0 40px;
     margin-top: 15px;
 }
-.UISingleContentViewerPortlet .UIPresentationContainer .webContentContainer ul li {
-    list-style-type: disc;
+.UISingleContentViewerPortlet .UIPresentationContainer {
+    .webContentContainer {
+        ul > li {
+            list-style-type: disc;
+        }
+    }
+    ol > li {
+        list-style-type: decimal;
+    }
 }
