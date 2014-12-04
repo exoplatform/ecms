@@ -80,7 +80,7 @@
     <% _ctx.include(uicomponent.getTemplateSkin("nt:file", "Stylesheet")); %>
   </style>
   <div class="fileContent">
-    <div class="navigationContainer uiBox"> 
+    <div class="navigationContainer uiBox noPreview"> 
       <h6 class="title clearfix">
         <%          
           if (!(fileComponent == null || (fileComponent instanceof PDFViewer && ((PDFViewer)fileComponent).getMaximumOfPage() <=0 ))) {
@@ -99,11 +99,13 @@
             <div class="uiUnEditable clearfix">
               <div class="iconContainer">
                 <i class="<%=Utils.getNodeTypeIcon(currentNode, "uiIcon64x64")%>"></i>
+                <span class="nameDoc">UIGuidline.docx</span>
               </div>
               <div class="detailContainer">
                 <h4><%=_ctx.appRes("File.view.label.not-viewable")%></h4>
-                <a class="btn btn-primary" href="$downloadLink"><%=_ctx.appRes("File.view.label.download")%></a>
-                <span><%=_ctx.appRes("File.view.label.using-webDAV")%></span>
+                <button class="btn btn-primary"><i class="uiIconDownload uiIconWhite"></i><%=_ctx.appRes("File.view.label.download")%></button>
+                <button class="btn"><i class="uiIconExport uiIconLightGray"></i><%=_ctx.appRes("File.view.label.using-webDAV")%></button>
+                <!--  <span><%=_ctx.appRes("File.view.label.using-webDAV")%></span> -->
               </div>
             </div>
           <%}%>
@@ -132,11 +134,12 @@
           <div class="uiUnEditable clearfix">
             <div class="iconContainer">
               <i class="<%=Utils.getNodeTypeIcon(currentNode, "uiIcon64x64")%>"></i>
+        <span class="nameDoc">UIGuidline.docx</span>
             </div>
             <div class="detailContainer">
               <h4><%=_ctx.appRes("File.view.label.not-viewable")%></h4>
-              <a class="btn btn-primary" href="$downloadLink"><%=_ctx.appRes("File.view.label.download")%></a>
-              <span><%=_ctx.appRes("File.view.label.using-webDAV")%></span>
+              <button class="btn btn-primary"><i class="uiIconDownload uiIconWhite"></i><%=_ctx.appRes("File.view.label.download")%></button>
+              <button class="btn"><i class="uiIconDownload uiIconLightGray"></i><%=_ctx.appRes("File.view.label.using-webDAV")%></button>
             </div>
           </div>
         <%}%>
