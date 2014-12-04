@@ -104,8 +104,7 @@
               <div class="detailContainer">
                 <h4><%=_ctx.appRes("File.view.label.not-viewable")%></h4>
                 <button class="btn btn-primary"><i class="uiIconDownload uiIconWhite"></i><%=_ctx.appRes("File.view.label.download")%></button>
-                <button class="btn"><i class="uiIconExport uiIconLightGray"></i><%=_ctx.appRes("File.view.label.using-webDAV")%></button>
-                <!--  <span><%=_ctx.appRes("File.view.label.using-webDAV")%></span> -->
+                <button class="btn"><i class="uiIconExport uiIconLightGray"></i><%=_ctx.appRes("File.view.label.open-on-desktop")%></button>
               </div>
             </div>
           <%}%>
@@ -139,7 +138,7 @@
             <div class="detailContainer">
               <h4><%=_ctx.appRes("File.view.label.not-viewable")%></h4>
               <button class="btn btn-primary"><i class="uiIconDownload uiIconWhite"></i><%=_ctx.appRes("File.view.label.download")%></button>
-              <button class="btn"><i class="uiIconDownload uiIconLightGray"></i><%=_ctx.appRes("File.view.label.using-webDAV")%></button>
+              <button class="btn"><i class="uiIconExport uiIconLightGray"></i><%=_ctx.appRes("File.view.label.open-on-desktop")%></button>
             </div>
           </div>
         <%}%>
