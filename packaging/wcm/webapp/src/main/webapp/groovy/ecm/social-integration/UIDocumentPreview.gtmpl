@@ -72,6 +72,9 @@
                             </div>
                         </li>
                     </ul>
+                    <div class="noComment" style="display: none;">
+                    	<div class="info">No comment yet</div>
+                    </div>
                     <div class="commentInputBox">
                         <a class="avatarXSmall pull-left" href="" title="avatar"><img src="/social-resources/skin/images/ShareImages/UserAvtDefault.png" alt="" /></a>
                         <div class="commentBox">
