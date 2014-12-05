@@ -72,7 +72,11 @@
   }
   def downloadLink = sb.toString();
   def fileComponent = uicomponent.getUIComponent(mimeType);
-  if(!(fileComponent instanceof PDFViewer) || (fileComponent instanceof PDFViewer && ((PDFViewer)fileComponent).getMaximumOfPage() <= 0) ) {   
+  def noPreviewStyle = "";
+  if(fileComponent == null || (fileComponent instanceof PDFViewer && ((PDFViewer)fileComponent).getMaximumOfPage() <= 0)) {
+    noPreviewStyle = "noPreview";
+  }
+  if(!(fileComponent instanceof PDFViewer) || (fileComponent instanceof PDFViewer && ((PDFViewer)fileComponent).getMaximumOfPage() <= 0) ) {
 %>
 
 <div $resizeBlock>
@@ -80,7 +84,7 @@
     <% _ctx.include(uicomponent.getTemplateSkin("nt:file", "Stylesheet")); %>
   </style>
   <div class="fileContent">
-    <div class="navigationContainer uiBox noPreview"> 
+    <div class="navigationContainer uiBox $noPreviewStyle">
       <h6 class="title clearfix">
         <%          
           if (!(fileComponent == null || (fileComponent instanceof PDFViewer && ((PDFViewer)fileComponent).getMaximumOfPage() <=0 ))) {
