@@ -99,7 +99,7 @@
             <div class="uiUnEditable clearfix">
               <div class="iconContainer">
                 <i class="<%=Utils.getNodeTypeIcon(currentNode, "uiIcon64x64")%>"></i>
-                <span class="nameDoc">UIGuidline.docx</span>
+                <span class="nameDoc">$title</span>
               </div>
               <div class="detailContainer">
                 <h4><%=_ctx.appRes("File.view.label.not-viewable")%></h4>
@@ -133,7 +133,7 @@
           <div class="uiUnEditable clearfix">
             <div class="iconContainer">
               <i class="<%=Utils.getNodeTypeIcon(currentNode, "uiIcon64x64")%>"></i>
-        <span class="nameDoc">UIGuidline.docx</span>
+        <span class="nameDoc">$title</span>
             </div>
             <div class="detailContainer">
               <h4><%=_ctx.appRes("File.view.label.not-viewable")%></h4>

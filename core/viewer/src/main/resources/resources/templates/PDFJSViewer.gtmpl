@@ -23,6 +23,7 @@
 
   def originalNode = uiParent.getOriginalNode();  
   def currentNode = uicomponent.getFileLangNode(uiParent.getNode());
+  def title = org.exoplatform.ecm.webui.utils.Utils.getTitle(currentNode);
   def mimeType = currentNode.getNode("jcr:content").getProperty("jcr:mimeType").getString();
   def downloadLink = Utils.getDownloadRestServiceLink(originalNode);
   def viewLink = downloadLink;
@@ -509,6 +510,7 @@ if (maximumPage > 0) {
     <div class="uiUnEditable clearfix">
       <div class="iconContainer">
         <i class="<%=Utils.getNodeTypeIcon(currentNode, "uiIcon64x64")%>"></i>
+        <span class="nameDoc">$title</span>
       </div>
       <div class="detailContainer">
         <h4><%=_ctx.appRes("File.view.label.not-viewable")%></h4>
