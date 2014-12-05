@@ -97,7 +97,7 @@ public class PDFThumbnailPlugin implements ComponentPlugin, ThumbnailPlugin {
       }
     } catch (IOException ex) {
       if (LOG.isWarnEnabled()) {
-        LOG.warn("Error handling PDF document " + ex);
+        LOG.warn("Error handling PDF document " + contentNode.getPath());
       }
     }
     // Paint each pages content to an image and write the image to file

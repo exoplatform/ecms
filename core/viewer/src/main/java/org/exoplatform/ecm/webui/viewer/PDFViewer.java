@@ -16,21 +16,6 @@
  */
 package org.exoplatform.ecm.webui.viewer;
 
-import java.io.BufferedInputStream;
-import java.io.File;
-import java.io.FileInputStream;
-import java.lang.reflect.Method;
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Locale;
-import java.util.Map;
-import java.util.ResourceBundle;
-
-import javax.jcr.Node;
-import javax.jcr.NodeIterator;
-import javax.jcr.RepositoryException;
-
 import org.exoplatform.download.DownloadService;
 import org.exoplatform.download.InputStreamDownloadResource;
 import org.exoplatform.portal.webui.util.Util;
@@ -38,8 +23,8 @@ import org.exoplatform.portal.webui.workspace.UIPortalApplication;
 import org.exoplatform.services.cms.mimetype.DMSMimeTypeResolver;
 import org.exoplatform.services.pdfviewer.PDFViewerService;
 import org.exoplatform.services.resources.ResourceBundleService;
-import org.exoplatform.web.application.RequireJS;
 import org.exoplatform.services.wcm.utils.WCMCoreUtils;
+import org.exoplatform.web.application.RequireJS;
 import org.exoplatform.webui.config.annotation.ComponentConfig;
 import org.exoplatform.webui.config.annotation.EventConfig;
 import org.exoplatform.webui.core.UIComponent;
@@ -53,6 +38,20 @@ import org.exoplatform.webui.form.UIFormSelectBox;
 import org.exoplatform.webui.form.UIFormStringInput;
 import org.icepdf.core.pobjects.Document;
 import org.icepdf.core.pobjects.PInfo;
+
+import javax.jcr.Node;
+import javax.jcr.NodeIterator;
+import javax.jcr.RepositoryException;
+import java.io.BufferedInputStream;
+import java.io.File;
+import java.io.FileInputStream;
+import java.lang.reflect.Method;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Locale;
+import java.util.Map;
+import java.util.ResourceBundle;
 
 /**
  * Created by The eXo Platform SARL
@@ -106,7 +105,7 @@ public class PDFViewer extends UIForm {
 
   public void initDatas() throws Exception {
     UIComponent uiParent = getParent();
-    
+
     Method method = getMethod(uiParent, "getOriginalNode");
     Node originalNode = null;
     if(method != null) originalNode = (Node) method.invoke(uiParent, (Object[]) null);
@@ -114,7 +113,7 @@ public class PDFViewer extends UIForm {
     if(originalNode != null) {
       Document document = getDocument(originalNode);
       if (document != null) {
-    	maximumOfPage_ = document.getNumberOfPages();
+        maximumOfPage_ = document.getNumberOfPages();
         metadatas.clear();
         putDocumentInfo(document.getInfo());
         document.dispose();
@@ -125,7 +124,9 @@ public class PDFViewer extends UIForm {
   public Map getMetadataExtraction() { return metadatas; }
 
   public int getMaximumOfPage() throws Exception {
-    if(maximumOfPage_ == 0) initDatas();
+    if(maximumOfPage_ == 0) {
+      initDatas();
+    }
     return maximumOfPage_;
   }
 

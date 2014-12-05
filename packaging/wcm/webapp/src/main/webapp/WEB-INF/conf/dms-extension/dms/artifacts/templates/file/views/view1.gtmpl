@@ -75,6 +75,7 @@
   def noPreviewStyle = "";
   if(fileComponent == null || (fileComponent instanceof PDFViewer && ((PDFViewer)fileComponent).getMaximumOfPage() <= 0)) {
     noPreviewStyle = "noPreview";
+    org.exoplatform.ecm.webui.utils.Utils.logUnavaiblePreview(encodedPath);
   }
   if(!(fileComponent instanceof PDFViewer) || (fileComponent instanceof PDFViewer && ((PDFViewer)fileComponent).getMaximumOfPage() <= 0) ) {
 %>

@@ -1096,4 +1096,8 @@ public class Utils {
     return ret.toArray(new String[]{});
   }
 
+
+  public static void logUnavaiblePreview(String path) {
+    LOG.warn("Can not preview the document having path : " + path);
+  }
 }
