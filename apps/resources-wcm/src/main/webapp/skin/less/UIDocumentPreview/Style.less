@@ -108,6 +108,7 @@
 				margin-bottom: 0;
 				overflow: auto;
 				position: relative;
+				background: @black;
 				.title {
 					display:  none;
 					visibility: hidden;
@@ -116,8 +117,31 @@
 					text-align: center;
 				}
 				.uiUnEditable {
-					background: @white;
-					border-radius: 3px;
+					margin: 0px auto;
+					.iconContainer {
+						text-align: center;
+						.nameDoc {
+							display: block;
+							margin: 15px 0;
+							color: @textLightColor;
+						}
+					}
+					.detailContainer {
+						text-align: center;
+						padding-bottom: 30px;
+						h4 {
+							color: @grayLight;
+							margin-top: 0px;
+							margin-bottom: 20px;
+							text-shadow: none;
+						}
+						button {
+							margin: 0 7px 0 0;
+							[class^="uiIcon"] {
+								margin-right: 7px;			
+							}
+						}
+					}
 				}
 				img, video, object, .uiUnEditable {
 					width: 100%;
