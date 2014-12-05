@@ -514,8 +514,8 @@ if (maximumPage > 0) {
       </div>
       <div class="detailContainer">
         <h4><%=_ctx.appRes("File.view.label.not-viewable")%></h4>
-        <button class="btn btn-primary"><i class="uiIconDownload uiIconWhite"></i><%=_ctx.appRes("File.view.label.download")%></button>
-        <button class="btn"><i class="uiIconExport uiIconLightGray"></i><%=_ctx.appRes("File.view.label.open-on-desktop")%></button>
+        <a class="btn btn-primary"  href="$downloadLink"><i class="uiIconDownload uiIconWhite"></i><%=_ctx.appRes("File.view.label.download")%></a>
+        <a class="btn"><i class="uiIconExport uiIconLightGray"></i><%=_ctx.appRes("File.view.label.open-on-desktop")%></a>
       </div>
     </div>
 <% }%>
