@@ -2,7 +2,6 @@ package org.exoplatform.ecm.webui.component.explorer.rightclick.manager;
 
 import org.exoplatform.ecm.webui.component.explorer.control.filter.IsDocumentFilter;
 import org.exoplatform.ecm.webui.component.explorer.control.filter.IsNotTrashHomeNodeFilter;
-import org.exoplatform.ecm.webui.component.explorer.control.filter.CanSetPropertyFilter;
 import org.exoplatform.ecm.webui.component.explorer.control.filter.IsNotInTrashFilter;
 import org.exoplatform.ecm.webui.component.explorer.control.filter.IsNotEditingDocumentFilter;
 
@@ -31,7 +30,6 @@ public class OpenDocumentManageComponent extends UIAbstractManagerComponent {
 
   private static final List<UIExtensionFilter> FILTERS = Arrays.asList(new UIExtensionFilter[] {
           new IsNotTrashHomeNodeFilter(),
-          new CanSetPropertyFilter(),
           new IsNotInTrashFilter(),
           new IsDocumentFilter(),
           new IsNotEditingDocumentFilter(),
@@ -44,6 +42,8 @@ public class OpenDocumentManageComponent extends UIAbstractManagerComponent {
 
   public static class OpenDocumentActionListener extends UIActionBarActionListener<OpenDocumentManageComponent> {
     public void processEvent(Event<OpenDocumentManageComponent> event) throws Exception {
+      System.out.println("ok");
+      
     }
   }
 
