@@ -10,6 +10,7 @@
   import org.exoplatform.services.jcr.RepositoryService;
   import org.exoplatform.wcm.webui.reader.ContentReader;
   import org.exoplatform.ecm.webui.viewer.PDFViewer;
+  import org.exoplatform.services.pdfviewer.PDFViewerService;
   
   
   public Node getFileLangNode(Node currentNode) throws Exception {
@@ -73,11 +74,11 @@
   def downloadLink = sb.toString();
   def fileComponent = uicomponent.getUIComponent(mimeType);
   def noPreviewStyle = "";
-  if(fileComponent == null || (fileComponent instanceof PDFViewer && ((PDFViewer)fileComponent).getMaximumOfPage() <= 0)) {
+  if(fileComponent == null || (fileComponent instanceof PDFViewer && (((PDFViewer)fileComponent).getMaximumOfPage() <= 0 || ((PDFViewer)fileComponent).getMaximumOfPage() > PDFViewerService.MAX_PAGES))) {
     noPreviewStyle = "noPreview";
     org.exoplatform.ecm.webui.utils.Utils.logUnavaiblePreview(encodedPath);
   }
-  if(!(fileComponent instanceof PDFViewer) || (fileComponent instanceof PDFViewer && ((PDFViewer)fileComponent).getMaximumOfPage() <= 0) ) {
+  if(!(fileComponent instanceof PDFViewer) || (fileComponent instanceof PDFViewer && (((PDFViewer)fileComponent).getMaximumOfPage() <= 0 || ((PDFViewer)fileComponent).getMaximumOfPage() > PDFViewerService.MAX_PAGES))) {
 %>
 
 <div $resizeBlock>
@@ -128,7 +129,6 @@
   <% _ctx.include(uicomponent.getTemplateSkin("nt:file", "Stylesheet")); %>
 </style>
 <div class="fileContent">
-    
     <div class="content uiContentBox">
         <%
           if(fileComponent != null) {

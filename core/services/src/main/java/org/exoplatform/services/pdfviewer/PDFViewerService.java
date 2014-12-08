@@ -51,8 +51,10 @@ public class PDFViewerService {
   private static final Log LOG  = ExoLogger.getLogger(PDFViewerService.class.getName());
   private JodConverterService jodConverter_;
   private ExoCache<Serializable, Object> pdfCache;
-  private static final long MAX_FILE_SIZE = 5 * 1024 * 1024;//5MB
-  
+  public static final long MAX_FILE_SIZE = 5 * 1024 * 1024;//5MB
+  public static final long MAX_PAGES = 99;
+
+
   public PDFViewerService(RepositoryService repositoryService,
                           CacheService caService,
                           JodConverterService jodConverter) throws Exception {
@@ -91,7 +93,10 @@ public class PDFViewerService {
       document.setInputStream(new BufferedInputStream(fis), name);
       return document;
     } catch (Exception ex) {
-      LOG.error("Failed to build Document image", ex);
+      LOG.warn("Failed to build Document image from pdf file " + name);
+      if (LOG.isDebugEnabled()) {
+        LOG.debug(ex);
+      }
       return null;
     }
   }
@@ -140,7 +145,7 @@ public class PDFViewerService {
                     "' of " + fileSize + " B. Size limit for preview: " + (MAX_FILE_SIZE/(1024*1024)) + " MB");
         }
         if (fileSize <= MAX_FILE_SIZE) { // ECMS-6329 only converts small file
-        try {          	
+        try {
           boolean success = jodConverter_.convert(in, content, "pdf");
           // If the converting failed then delete the content of temporary file
           if (!success) {

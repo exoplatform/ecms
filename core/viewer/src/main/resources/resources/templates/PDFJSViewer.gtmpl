@@ -11,29 +11,25 @@
   import org.exoplatform.portal.application.PortalRequestContext;
   import org.exoplatform.webui.application.portlet.PortletRequestContext;
   import javax.portlet.PortletRequest;
-  
+  import org.exoplatform.services.pdfviewer.PDFViewerService;
   
   UIComponent uiParent = uicomponent.getParent();
   RepositoryService rService = uicomponent.getApplicationComponent(RepositoryService.class);
-  String repository = rService.getCurrentRepository().getConfiguration().getName(); 
-  
-  public boolean isVersionable(Node node) throws Exception {
-    return node.isNodeType("mix:versionable");
-  }   
+  String repository = rService.getCurrentRepository().getConfiguration().getName();
 
+if (uiParent != null) {
   def originalNode = uiParent.getOriginalNode();  
   def currentNode = uicomponent.getFileLangNode(uiParent.getNode());
+  def contentNode = currentNode.getNode("jcr:content");
+  def fileSize = contentNode.getProperty("jcr:data").getStream().available();
+  def mimeType = contentNode.getProperty("jcr:mimeType").getString();
   def title = org.exoplatform.ecm.webui.utils.Utils.getTitle(currentNode);
-  def mimeType = currentNode.getNode("jcr:content").getProperty("jcr:mimeType").getString();
   def downloadLink = Utils.getDownloadRestServiceLink(originalNode);
   def viewLink = downloadLink;
   if(!mimeType.toLowerCase().contains("pdf")) {
     viewLink = Utils.getPDFViewerLink(originalNode);
   }
-  public String formatNodeName(String text) {
-    return text.replaceAll("'", "\\\\'") ;
-  }
-  
+
   def rqcontext = _ctx.getRequestContext();
   def currentPage = uicomponent.getPageNumber();
   def maximumPage = uicomponent.getMaximumOfPage();
@@ -45,7 +41,7 @@
   def lang = portalRequestContext.getLocale().getLanguage();
   
 
-if (maximumPage > 0) {
+if (maximumPage > 0 && maximumPage <= PDFViewerService.MAX_PAGES && fileSize <= PDFViewerService.MAX_FILE_SIZE) {
   PortletRequestContext requestContext = PortletRequestContext.getCurrentInstance();
   PortletRequest portletRequest = requestContext.getRequest();
   def userAgent = portletRequest.getProperty("user-agent");
@@ -506,16 +502,26 @@ if (maximumPage > 0) {
     
   <%
   }
- } else {%>  
+ } else {
+    def errorMessage = "";
+    if (fileSize > PDFViewerService.MAX_FILE_SIZE) {
+      errorMessage = java.text.MessageFormat.format(_ctx.appRes("File.view.label.pdf-max-size"), (PDFViewerService.MAX_FILE_SIZE/(1024*1024)));
+    } else if (maximumPage > PDFViewerService.MAX_PAGES) {
+      errorMessage = java.text.MessageFormat.format(_ctx.appRes("File.view.label.pdf-max-page"), PDFViewerService.MAX_PAGES);
+    } else {
+      errorMessage = _ctx.appRes("File.view.label.not-viewable");
+    }
+  %>
     <div class="uiUnEditable clearfix">
       <div class="iconContainer">
         <i class="<%=Utils.getNodeTypeIcon(currentNode, "uiIcon64x64")%>"></i>
         <span class="nameDoc">$title</span>
       </div>
       <div class="detailContainer">
-        <h4><%=_ctx.appRes("File.view.label.not-viewable")%></h4>
+        <h4>$errorMessage</h4>
         <a class="btn btn-primary"  href="$downloadLink"><i class="uiIconDownload uiIconWhite"></i><%=_ctx.appRes("File.view.label.download")%></a>
         <a class="btn"><i class="uiIconExport uiIconLightGray"></i><%=_ctx.appRes("File.view.label.open-on-desktop")%></a>
       </div>
     </div>
-<% }%>
+<%}
+}%>
