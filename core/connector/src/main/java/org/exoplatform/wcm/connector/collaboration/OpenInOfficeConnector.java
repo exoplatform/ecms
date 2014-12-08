@@ -52,7 +52,6 @@ public class OpenInOfficeConnector implements ResourceContainer {
 
   /**
    * Return a JsonObject's check file to open
-   * @param httpServletRequest
    * @param request
    * @param objId
    * @return
@@ -60,26 +59,18 @@ public class OpenInOfficeConnector implements ResourceContainer {
    */
   @GET
   @Path("/updateDocumentLabel")
-  public Response updateDocumentLabel(@Context HttpServletRequest httpServletRequest, @Context Request request,
+  public Response updateDocumentLabel(@Context Request request,
           @QueryParam("objId") String objId, @QueryParam("lang") String language
   ) throws Exception {
-    EntityTag etag = new EntityTag(Integer.toString((objId+"_"+language).hashCode()));
+    String extension = objId.substring(objId.lastIndexOf(".") + 1, objId.length());
+    EntityTag etag = new EntityTag(Integer.toString((extension+"_"+language).hashCode()));
     Response.ResponseBuilder builder = request.evaluatePreconditions(etag);
     if(builder!=null) return builder.build();
 
     CacheControl cc = new CacheControl();
     cc.setMaxAge(CACHED_TIME);
-    String extension = objId.substring(objId.lastIndexOf(".") + 1, objId.length());
     ResourceBundleService resourceBundleService = WCMCoreUtils.getService(ResourceBundleService.class);
     ResourceBundle resourceBundle = resourceBundleService.getResourceBundle(CONNECTOR_BUNDLE_LOCATION, new Locale(language));
-
-    String ws = objId.split(":")[0];
-    String nodePath = objId.split(":")[1];
-    String repo = WCMCoreUtils.getRepository().getConfiguration().getName();
-
-    String filePath = httpServletRequest.getScheme()+ "://" + httpServletRequest.getServerName() + ":"
-            +httpServletRequest.getServerPort() + "/"
-            + WCMCoreUtils.getRestContextName()+ "/private/jcr/" + repo + "/" + ws + nodePath;
 
     String title = resourceBundle!=null?resourceBundle.getString(OPEN_DOCUMENT_IN_DESKTOP_RESOURCE_KEY):OPEN_DOCUMENT_DEFAULT_TITLE;
     String ico = OPEN_DOCUMENT_ON_DESKTOP_ICO;
@@ -99,7 +90,6 @@ public class OpenInOfficeConnector implements ResourceContainer {
 
     JSONObject rs = new JSONObject();
     rs.put("ico", ico);
-    rs.put("filePath", filePath);
     rs.put("title", title);
 
     builder = Response.ok(rs.toString(), MediaType.APPLICATION_JSON);

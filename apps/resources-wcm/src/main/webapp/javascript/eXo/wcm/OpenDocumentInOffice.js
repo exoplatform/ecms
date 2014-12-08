@@ -3,12 +3,17 @@
 
   OpenDocumentInOffice.prototype.openDocument = function(filePath){
     var documentManager = eXo.ecm.ECMWebDav.WebDAV.Client.DocManager;
+    /*
+     documentManager.JavaEditDocument(filePath, null, "/ecmexplorer/applet/ITHitMountOpenDocument.jar");
+     console.log("java edit");
+     */
     if (documentManager.IsMicrosoftOfficeAvailable() && documentManager.IsMicrosoftOfficeDocument(filePath)) {
       if (!('ActiveXObject' in window)) filePath += '\0';
       documentManager.MicrosoftOfficeEditDocument(filePath);
     } else {
       documentManager.JavaEditDocument(filePath, null, "/ecmexplorer/applet/ITHitMountOpenDocument.jar");
     }
+
   }
 
   /**
@@ -18,6 +23,7 @@
    * rightClick update button when right click (context-menu)
    */
   OpenDocumentInOffice.prototype.updateLabel = function(objId, activityId, rightClick){
+
     gj.ajax({
       url: "/portal/rest/office/updateDocumentLabel?objId=" + objId+"&lang="+eXo.env.portal.language,
       dataType: "text",
@@ -31,16 +37,22 @@
           var isRightClick="";
           if(activityId != null && activityId != "undefined" && activityId != "") elClass +="_"+activityId;
           if(rightClick) isRightClick="#ECMContextMenu";
-
           var openDocument = gj(isRightClick+" ."+elClass).parent();
           var html = "<i class=\"uiIcon16x16FileDefault uiIcon16x16nt_file "+data.ico+" "+elClass+"\"></i>\n"+data.title;
           openDocument.html(html);
-          openDocument.attr("href", "javascript:void(0);");
-          openDocument.attr("onclick", "eXo.ecm.OpenDocumentInOffice.openDocument('"+data.filePath+"')");
           gj(".detailContainer").find('.openDocument').html(data.title);
         });
 
     setCookie("_currentDocument", objId, 1);
+  }
+
+
+  /**
+   * Close all popup
+   */
+
+  OpenDocumentInOffice.prototype.closePopup = function(){
+    console.log("close all popup");
   }
 
   gj(window).load(function(){

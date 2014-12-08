@@ -400,6 +400,7 @@
       <constraintviolation-exception>The mandatory item jcr:uuid was not found. The node may have been deleted or changed. Please click the Refresh button.</constraintviolation-exception>
       <path-not-found-exception>This node was deleted or changed. Please click the Refresh button.</path-not-found-exception>
       <not-exist-categories>The category does not exist.</not-exist-categories>
+      <lock-node-read-only>This file is locked by user {0}. Open read-only ?</lock-node-read-only>
     </msg>
   </UIPopupMenu>
   <!--
@@ -2420,6 +2421,8 @@
       <ReplaceData>Replace Data</ReplaceData>
       <Back>Back to Rename</Back>
       <Keepfile>Keep both files</Keepfile>
+			<ReadOnly>Open Read-only</ReadOnly>
+			<Cancel>Cancel</Cancel>
     </label>
   </UIConfirmMessage>
 
