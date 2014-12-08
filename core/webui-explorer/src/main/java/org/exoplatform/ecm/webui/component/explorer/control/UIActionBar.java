@@ -46,6 +46,7 @@ import org.exoplatform.webui.core.model.SelectItemOption;
 import org.exoplatform.webui.event.Event;
 import org.exoplatform.webui.event.Event.Phase;
 import org.exoplatform.webui.event.EventListener;
+import org.exoplatform.webui.ext.UIExtension;
 import org.exoplatform.webui.ext.UIExtensionManager;
 import org.exoplatform.webui.form.UIForm;
 import org.exoplatform.webui.form.UIFormSelectBox;
@@ -155,15 +156,27 @@ public class UIActionBar extends UIForm {
   public String getTemplateName() { return templateName_;  }
 
   private void setListButton(String tabName) throws PathNotFoundException, RepositoryException {
+    
     Node tabNode = NodeLocation.getNodeByLocation(view_).getNode(tabName);
     if(tabNode.hasProperty("exo:buttons")) {
       String buttons = tabNode.getProperty("exo:buttons").getString();
       String[] buttonsInTab = StringUtils.split(buttons, ";");
-      for(int j = 0; j < buttonsInTab.length; j ++ ) {
-        String buttonName = buttonsInTab[j].trim();
-        buttonName = buttonName.substring(0, 1).toUpperCase() + buttonName.substring(1);
-        buttonsInTab[j] = buttonName;
+      Set<String> bt = new HashSet<String>();
+      //get all buttons in tab
+      for (String b : buttonsInTab) {
+        b = b.substring(0, 1).toUpperCase() + b.substring(1);
+        bt.add(b);
       }
+      //sort the buttons by UIExtension sorting order
+      List<String> sortedButtons = new ArrayList<String>();
+      UIExtensionManager manager = getApplicationComponent(UIExtensionManager.class);
+      List<UIExtension> extensions = manager.getUIExtensions(ManageViewService.EXTENSION_TYPE);
+      for(UIExtension e : extensions) {
+        if (bt.contains(e.getName())) {
+          sortedButtons.add(e.getName().trim());
+        }
+      }
+      buttonsInTab = sortedButtons.toArray(new String[]{});
       actionInTabs_.put(tabName, buttonsInTab);
       tabs_.add(buttonsInTab);
     }
