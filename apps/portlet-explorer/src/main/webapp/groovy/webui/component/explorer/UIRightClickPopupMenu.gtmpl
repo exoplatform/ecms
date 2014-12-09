@@ -21,16 +21,22 @@
 							def action = itemContext.getUIExtensionName();
 							def href = "";
 							def onClick = "";
+							def target= "";
 							if (action.equals(UIWorkingArea.RENAME_ACTION)) {
 								href = "";
 								onClick = "javascript:eXo.ecm.Rename.showRenamePopup();";
+							} else if (UIWorkingArea.PERM_LINK_ACTION.equals(action)) {
+                href = "href=\"" + itemContext.getPermlink() + "\"";
+                onClick = "javascript:eXo.ecm.Permlink.addFileName(this);";
+                //action = "ViewDocument";
+                target = "target='_new'";
 							} else {
 								href = "href=\"" + itemContext.event(action) + "\"";
 								onClick = "";
 							}
 					%>
 					<li class="menuItem"> 	
-						<a exo:attr="$action" $href onclick="$onClick">
+						<a exo:attr="$action" $href onclick="$onClick" $target>
 							<i class="uiIconEcms${action}"></i> <%=_ctx.appRes(uicomponent.getId() + ".event." + action) %>
 						</a>
 					</li>

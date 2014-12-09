@@ -18,13 +18,12 @@
 				<object-param>
 					<name>ViewInfo</name>
 					<object type="org.exoplatform.webui.ext.UIExtension">
-						
-						
 						<!-- The type of extension, here it is the type related to the Action Bar in the File Explorer -->
 						<field name="type">
 							<string>
 								org.exoplatform.ecm.dms.UIWorkingArea</string>
 						</field>
+						<field name="rank"><int>103</int></field>
 						<field name="category">
 							<string>ItemContextMenu_SingleSelection</string>
 						</field>

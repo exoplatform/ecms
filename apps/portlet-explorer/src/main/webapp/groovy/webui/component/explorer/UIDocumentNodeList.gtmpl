@@ -125,37 +125,6 @@ public void writeNodes(level, i, data, uiWorkingArea, linkManager, restContextNa
     strActs +=  "</a>";
     strActs += "</li>";
   }      
-  //Begin WebDav Action
-  if (!data.isNodeType(Utils.EXO_RESTORELOCATION) && !Utils.isTrashHomeNode(data)) {
-    if ((!linkManager.isLink(data) || linkManager.isTargetReachable(data)) && data.getPrimaryNodeType().getName().equals("nt:file")) {
-      String mimeType="";
-      try {
-        mimeType=data.getNode("jcr:content").getProperty("jcr:mimeType").getString();
-      } catch (Exception e) {                     
-      }
-      // This escape "'" for js
-      String webDavPath = nodePath.contains("%27") ? nodePath.replaceAll("%27","%2527") : nodePath;
-      String link ="javascript:eXo.ecm.ECMUtils.generateWebDAVLink('','"+ portalName +"','"+ restContextName +"','"+repository+"','"+ preferenceWS+ "','" + webDavPath +"','"+mimeType+"')";
-      strActs +=  "<li class='menuItem'>";
-      strActs +=    "<a exo:attr='Download' style='display: block;' onclick=\"eXo.ecm.WCMUtils.hideContextMenu(this);eXo.ecm.UIFileView.clearCheckboxes();\" href=\"" + link + "\" >" ;          
-      strActs +=    "  <i class=\"uiIconDownload\"></i>&nbsp;" + _ctx.appRes("UITreeExplorer.label.webDavView");
-      strActs +=    "</a>" ;            
-      strActs += "</li>";
-    } else {
-      //data = Utils.getNodeSymLink(data);
-      def dataTarget = data;
-      if(uiDocumentInfo.isSymLink(data)) dataTarget = Utils.getNodeSymLink(data);
-      if (dataTarget != null) {
-        String link = "/" + restContextName + "/private/jcr/" + repository+ "/" + preferenceWS + Utils.formatNodeName(dataTarget.getPath());
-        strActs +=  "<li class='menuItem'>";
-        strActs +=    "<a exo:attr='Download' style='display: block; {behavior: url(#default#AnchorClick);}' onclick=\"eXo.ecm.WCMUtils.hideContextMenu(this);eXo.ecm.UIFileView.clearCheckboxes();window.open('" +link + "');\" target='_new' folder=\"" + link +"\">" ;          
-        strActs +=    "  <i class=\"uiIconDownload\"></i>&nbsp;" + _ctx.appRes("UITreeExplorer.label.webDavView");
-        strActs +=    "</a>" ;
-        strActs += "</li>";
-      }
-    }
-  }
-  //End WebDav Action
   List customActs = uiDocumentInfo.getCustomActions(data);  
   Parameter[] params ;
   if (customActs.size() > 0) {            

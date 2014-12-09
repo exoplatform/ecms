@@ -70,6 +70,12 @@ public class PermlinkActionComponent extends UIAbstractManagerComponent {
     nodeURL.setQueryParameterValue("path", path);
     return nodeURL.toString();
   }
+  
+  public String getPermlink() throws Exception {
+    UIJCRExplorer uiExplorer = getAncestorOfType(UIJCRExplorer.class);
+    return getPermlink(uiExplorer.getCurrentNode());
+  }
+
 
   @Override
   public Class<? extends UIAbstractManager> getUIAbstractManagerClass() {
