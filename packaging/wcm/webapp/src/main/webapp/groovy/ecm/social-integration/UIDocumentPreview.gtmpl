@@ -73,7 +73,7 @@
                         </li>
                     </ul>
                     <div class="noComment" style="display: none;">
-                    	<div class="info">No comment yet</div>
+                        <div class="info">No comment yet</div>
                     </div>
                     <div class="commentInputBox">
                         <a class="avatarXSmall pull-left" href="" title="avatar"><img src="/social-resources/skin/images/ShareImages/UserAvtDefault.png" alt="" /></a>
@@ -103,20 +103,35 @@
             if (isWebContent) {
                 %>
                 </div>
-                <div class="uiVote clearfix">
-					<div class="voteRatingInfo">
-							Avg. Rating: <span>0.0</span>
-							Votes: <span>0</span>
-					</div>
-					<div class="avgRatingImages clearfix">
-						<i class="unvoted"></i>
-						<i class="unvoted"></i>
-						<i class="unvoted"></i>
-						<i class="unvoted"></i>
-						<i class="unvoted"></i>
-					</div>
-				</div>
                 <%
+                def voteNode = uicomponent.getOriginalNode();
+                double voteRating = 0 ;
+                if(voteNode.hasProperty("exo:votingRate")) voteRating = voteNode.getProperty("exo:votingRate").getDouble() ;
+                long voteTotal = 0 ;
+                if(voteNode.hasProperty("exo:voteTotalOfLang")) voteTotal = voteNode.getProperty("exo:voteTotalOfLang").getLong() ;
+                %>
+                <div class="uiVote clearfix">
+                  <%if (voteTotal > 0) {%>
+                    <div class="voteRatingInfo">
+                            <%=_ctx.appRes("Vote.view.label.avg-rating")%>: <span>$voteRating</span>
+                            <%=_ctx.appRes("Vote.view.label.subscription")%>: <span>$voteTotal</span>
+                    </div>
+                    <div class="avgRatingImages clearfix">
+                        <%
+                            int iVote = 0;
+                            while(++iVote <= voteRating) {
+                        %>
+                                    <i class="voted"></i>
+                            <%
+                                }
+                                while(iVote++ <= 5) {
+                            %>
+                                <i class="unvoted"></i>
+                            <%}%>
+                    </div>
+                  <%}%>
+                </div>
+            <%
             }
              %>
         </div>
