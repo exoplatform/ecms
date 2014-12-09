@@ -16,10 +16,7 @@
  */
 package org.exoplatform.services.cms.documents.impl;
 
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.Iterator;
-import java.util.List;
+import java.util.*;
 
 import javax.jcr.Node;
 import javax.jcr.NodeIterator;
@@ -77,6 +74,34 @@ public class DocumentTypeServiceImpl implements DocumentTypeService {
   private TemplateService     templateService_;
 
   private InitParams          params_;
+
+  private static final String DESKTOP_APP_PROVIDER="ecm.open-document.remote-edit.desktop-app-provider";
+  private static final String OPEN_DESKTOP_PROVIDER_PREFIX="exo.remote-edit.";
+  private static final String OPEN_PROVIDER_RESOURCEBUNDLE_SUFFIX = ".label";
+  private static final String OPEN_PROVIDER_STYLE_SUFFIX = ".ico";
+
+  private static String[] desktopAppProviders;
+  private static List<DocumentType> providerExts = new ArrayList<>();
+
+  static {
+    desktopAppProviders = System.getProperty(DESKTOP_APP_PROVIDER)!=null?System.getProperty(DESKTOP_APP_PROVIDER).split(","):null;
+    if(desktopAppProviders!=null){
+      for (String desktopAppProvider : desktopAppProviders){
+        desktopAppProvider=OPEN_DESKTOP_PROVIDER_PREFIX+desktopAppProvider;
+
+        String[] _extensions = System.getProperty(desktopAppProvider)!=null?
+                System.getProperty(desktopAppProvider).split(","):null;
+
+        String _resourceBundleKey = System.getProperty(desktopAppProvider+OPEN_PROVIDER_RESOURCEBUNDLE_SUFFIX)!=null ?
+                System.getProperty(desktopAppProvider+OPEN_PROVIDER_RESOURCEBUNDLE_SUFFIX):null;
+
+        String _cssClasses = System.getProperty(desktopAppProvider+OPEN_PROVIDER_STYLE_SUFFIX)!=null ?
+                System.getProperty(desktopAppProvider+OPEN_PROVIDER_STYLE_SUFFIX):null;
+
+        providerExts.add(new DocumentType(new ArrayList<String>(Arrays.asList(_extensions)), _resourceBundleKey, _cssClasses));
+      }
+    }
+  }
 
   public DocumentTypeServiceImpl(RepositoryService repoService,
                                  InitParams initParams,
@@ -290,4 +315,13 @@ public class DocumentTypeServiceImpl implements DocumentTypeService {
     return CONTENT_QUERY + constraint.toString();
   }
 
+  @Override
+  public DocumentType getDocumentType(String mimeType) {
+    for(DocumentType documentType: providerExts){
+      if(documentType.getMimeTypes().contains(mimeType)){
+        return documentType;
+      }
+    }
+    return null;
+  }
 }

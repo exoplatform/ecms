@@ -16,10 +16,11 @@
   </RenameConnector>
   <OpenInOfficeConnector>
     <label>
-      <open-in-word>Mở với soạn thảo văn bản</open-in-word>
-      <open-in-excel>Mở với bảng tính</open-in-excel>
-      <open-in-powerpoint>Mở với trình diễn</open-in-powerpoint>
-      <open-in-desktop>Mở với Desktop</open-in-desktop>
+      <exo.remote-edit.word>Mở với Word</exo.remote-edit.word>
+      <exo.remote-edit.excel>Mở với Excel</exo.remote-edit.excel>
+      <exo.remote-edit.powerpoint>Mở với Powerpoint</exo.remote-edit.powerpoint>
+      <exo.remote-edit.desktop>Mở với ứng dụng desktop</exo.remote-edit.desktop>
+      <exo.remote-edit.desktop-app>Mở với</exo.remote-edit.desktop-app>
     </label>
   </OpenInOfficeConnector>
 </bundle>

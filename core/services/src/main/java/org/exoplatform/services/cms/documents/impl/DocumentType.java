@@ -31,6 +31,25 @@ public class DocumentType {
   private String contentsType;
   private String displayInFilter;
 
+  private String resourceBundleKey;
+  private String iconClass;
+
+  public DocumentType(){}
+
+  public DocumentType(List<String> mimeTypes, String resourceBundleKey, String iconClass) {
+    this.mimeTypes = mimeTypes;
+    this.resourceBundleKey = resourceBundleKey;
+    this.iconClass = iconClass;
+  }
+
+  public String getResourceBundleKey() {
+    return resourceBundleKey;
+  }
+
+  public String getIconClass() {
+    return iconClass;
+  }
+
   public void setMimeTypes(List<String> mimeTypes) { this.mimeTypes = mimeTypes; }
 
   public List<String> getMimeTypes() { return this.mimeTypes; }

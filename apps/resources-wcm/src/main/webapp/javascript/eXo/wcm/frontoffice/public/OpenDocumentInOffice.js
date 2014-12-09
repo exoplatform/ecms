@@ -13,22 +13,21 @@
 
     //create version when successfully open
     if(openStatus){
-      eXo.ecm.OpenDocumentInOffice.checkin(workspace, filePath);
+      eXo.ecm.OpenDocumentInOffice.checkout(workspace, filePath);
     }
   }
 
   /*
-   * Checkin a version when open successfully with desktop application to edit.
+   * Checkout a versioned document when open successfully with desktop application to edit.
    */
-  OpenDocumentInOffice.prototype.checkin = function(workspace, filePath){
+  OpenDocumentInOffice.prototype.checkout = function(workspace, filePath){
     gj.ajax({
-      url: "/portal/rest/office/checkin?filePath=" + filePath+"&workspace="+workspace,
+      url: "/portal/rest/office/checkout?filePath=" + filePath+"&workspace="+workspace,
       dataType: "text",
       type: "GET",
       async: true
     })
         .success(function (data) {
-          // data = gj.parseJSON(data);
           console.log("checkout status "+!data);
         });
   };
@@ -46,6 +45,7 @@
    */
   OpenDocumentInOffice.prototype.updateLabel = function(objId, activityId, rightClick){
 
+    eXo.ecm.ECMWebDav.WebDAV.Client.DocManager.ShowMicrosoftOfficeWarning();
     gj.ajax({
       url: "/portal/rest/office/updateDocumentLabel?objId=" + objId+"&lang="+eXo.env.portal.language,
       dataType: "text",

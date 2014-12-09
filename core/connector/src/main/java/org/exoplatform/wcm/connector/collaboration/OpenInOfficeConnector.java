@@ -1,8 +1,8 @@
 package org.exoplatform.wcm.connector.collaboration;
 
-import org.apache.commons.lang.ArrayUtils;
-import org.exoplatform.services.jcr.RepositoryService;
-import org.exoplatform.services.jcr.core.ManageableRepository;
+import org.apache.commons.lang.StringUtils;
+import org.exoplatform.services.cms.documents.DocumentTypeService;
+import org.exoplatform.services.cms.documents.impl.DocumentType;
 import org.exoplatform.services.resources.ResourceBundleService;
 import org.exoplatform.services.rest.resource.ResourceContainer;
 import org.exoplatform.services.wcm.utils.WCMCoreUtils;
@@ -10,7 +10,6 @@ import org.json.JSONObject;
 
 import javax.jcr.Node;
 import javax.jcr.Session;
-import javax.servlet.http.HttpServletRequest;
 import javax.ws.rs.GET;
 import javax.ws.rs.Path;
 import javax.ws.rs.QueryParam;
@@ -31,28 +30,14 @@ import java.util.ResourceBundle;
 @Path("/office/")
 public class OpenInOfficeConnector implements ResourceContainer {
 
-  private final String OPEN_DOCUMENT_IN_EXCEL_ICO = "uiIcon16x16applicationxls";
-  private final String OPEN_DOCUMENT_IN_WORD_ICO = "uiIcon16x16applicationmsword";
-  private final String OPEN_DOCUMENT_IN_POWERPOINT_ICO = "uiIcon16x16applicationvndopenxmlformats-officedocumentpresentationmlpresentation";
   private final String OPEN_DOCUMENT_ON_DESKTOP_ICO = "uiIcon16x16FileDefault";
-
   private final String CONNECTOR_BUNDLE_LOCATION = "locale.wcm.resources.WCMResourceBundleConnector";
-  private final String OPEN_DOCUMENT_IN_WORD_RESOURCE_KEY = "OpenInOfficeConnector.label.open-in-word";
-  private final String OPEN_DOCUMENT_IN_EXCEL_RESOURCE_KEY = "OpenInOfficeConnector.label.open-in-excel";
-  private final String OPEN_DOCUMENT_IN_POWERPOINT_RESOURCE_KEY = "OpenInOfficeConnector.label.open-in-powerpoint";
-  private final String OPEN_DOCUMENT_IN_DESKTOP_RESOURCE_KEY = "OpenInOfficeConnector.label.open-in-desktop";
+  private final String OPEN_DOCUMENT_IN_DESKTOP_RESOURCE_KEY = "OpenInOfficeConnector.label.exo.remote-edit.desktop";
+  private final String OPEN_DOCUMENT_IN_DESKTOP_APP_RESOURCE_KEY="OpenInOfficeConnector.label.exo.remote-edit.desktop-app";
 
   private final String OPEN_DOCUMENT_DEFAULT_TITLE="Open";
 
   private final int CACHED_TIME = 60*24*30*12;
-
-  private static String[] openInExcel = null, openInWord = null, openInPowerpoint = null;
-
-  static {
-    openInExcel = System.getProperty("open-in-excel")!=null?System.getProperty("open-in-excel").split(","):null;
-    openInWord = System.getProperty("open-in-word")!=null?System.getProperty("open-in-word").split(","):null;
-    openInPowerpoint = System.getProperty("open-in-powerpoint")!=null?System.getProperty("open-in-powerpoint").split(","):null;
-  }
 
   /**
    * Return a JsonObject's check file to open
@@ -71,25 +56,25 @@ public class OpenInOfficeConnector implements ResourceContainer {
     Response.ResponseBuilder builder = request.evaluatePreconditions(etag);
     if(builder!=null) return builder.build();
 
+    ResourceBundleService resourceBundleService = WCMCoreUtils.getService(ResourceBundleService.class);
+    DocumentTypeService documentTypeService = WCMCoreUtils.getService(DocumentTypeService.class);
+
     CacheControl cc = new CacheControl();
     cc.setMaxAge(CACHED_TIME);
-    ResourceBundleService resourceBundleService = WCMCoreUtils.getService(ResourceBundleService.class);
-    ResourceBundle resourceBundle = resourceBundleService.getResourceBundle(CONNECTOR_BUNDLE_LOCATION, new Locale(language));
 
+    ResourceBundle resourceBundle = resourceBundleService.getResourceBundle(CONNECTOR_BUNDLE_LOCATION, new Locale(language));
     String title = resourceBundle!=null?resourceBundle.getString(OPEN_DOCUMENT_IN_DESKTOP_RESOURCE_KEY):OPEN_DOCUMENT_DEFAULT_TITLE;
     String ico = OPEN_DOCUMENT_ON_DESKTOP_ICO;
 
-    if(ArrayUtils.indexOf(openInExcel, extension) != -1 && resourceBundle!=null) {
-      title = resourceBundle.getString(OPEN_DOCUMENT_IN_EXCEL_RESOURCE_KEY);
-      ico = OPEN_DOCUMENT_IN_EXCEL_ICO;
-    }
-    if(ArrayUtils.indexOf(openInPowerpoint, extension) != -1 && resourceBundle!=null) {
-      title = resourceBundle.getString(OPEN_DOCUMENT_IN_POWERPOINT_RESOURCE_KEY);
-      ico = OPEN_DOCUMENT_IN_POWERPOINT_ICO;
-    }
-    if(ArrayUtils.indexOf(openInWord, extension) != -1 && resourceBundle!=null) {
-      title = resourceBundle.getString(OPEN_DOCUMENT_IN_WORD_RESOURCE_KEY);
-      ico = OPEN_DOCUMENT_IN_WORD_ICO;
+    DocumentType documentType = documentTypeService.getDocumentType(extension);
+
+    if(documentType !=null && resourceBundle !=null ){
+      try {
+        title = resourceBundle.getString(documentType.getResourceBundleKey());
+      }catch(Exception ex){
+        title = resourceBundle.getString(OPEN_DOCUMENT_IN_DESKTOP_APP_RESOURCE_KEY)+" "+ documentType.getResourceBundleKey();
+      }
+      if(!StringUtils.isEmpty(documentType.getIconClass())) ico=documentType.getIconClass();
     }
 
     JSONObject rs = new JSONObject();
@@ -103,21 +88,21 @@ public class OpenInOfficeConnector implements ResourceContainer {
   }
 
   /**
-   * Return a JsonObject's checkin a version when file has been opened successfully by desktop application
+   * Return a JsonObject's check a version when file has been opened successfully by desktop application
    * @param request
    * @param filePath
    * @return
    * @throws Exception
    */
   @GET
-  @Path("/checkin")
-  public Response checkin(@Context Request request,
+  @Path("/checkout")
+  public Response checkout(@Context Request request,
                           @QueryParam("filePath") String filePath,
                           @QueryParam("workspace") String workspace
   ) throws Exception {
     Session session = WCMCoreUtils.getSystemSessionProvider().getSession(workspace, WCMCoreUtils.getRepository());
     Node node = (Node)session.getItem(filePath);
-    node.checkin();
+    if(!node.isCheckedOut()) node.checkout();
     return Response.ok(String.valueOf(node.isCheckedOut()), MediaType.TEXT_PLAIN).build();
   }
 }
