@@ -1600,6 +1600,9 @@
                                                 </value>
                                                 <value><string>application/vnd.ms-powerpoint</string></value>
                                                 <value><string>application/vnd.ms-excel</string></value>
+                                                <value>
+                                                  <string>application/vnd.oasis.opendocument.formula</string>
+                                                </value>
                                             </collection>
                                         </field>
                                     </object>
