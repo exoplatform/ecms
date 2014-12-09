@@ -760,14 +760,14 @@ public class UIPropertyForm extends UIForm {
     }
     return properties;
   }
+
+  // adapt GateIn's UIFormDateTimeInput
   private String formatDate(Locale locale) {
     String datePattern = "";
     DateFormat dateFormat = SimpleDateFormat.getDateInstance(DateFormat.SHORT, locale);
-   
-   // convert to unique pattern
 
+    // convert to unique pattern
     datePattern = ((SimpleDateFormat)dateFormat).toPattern();
-   
 
     if (!datePattern.contains("yy")) {
       datePattern = datePattern.replaceAll("y", "yy");
