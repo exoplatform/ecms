@@ -27,6 +27,8 @@ public class UIOpenDocumentForm extends UIComponent implements UIPopupComponent 
   public UIOpenDocumentForm() throws Exception {}
 
   public String filePath;
+  public String workspace;
+  public String absolutePath;
   public String[] getActions() { return new String[] {"ReadOnly", "Cancel"}; }
 
   /**
@@ -43,7 +45,7 @@ public class UIOpenDocumentForm extends UIComponent implements UIPopupComponent 
       event.getRequestContext().addUIComponentToUpdateByAjax(popupAction);
 
       event.getRequestContext().getJavascriptManager().require("SHARED/openDocumentInOffice")
-              .addScripts("eXo.ecm.OpenDocumentInOffice.openDocument('"+uiConfirm.filePath+"');");
+     .addScripts("eXo.ecm.OpenDocumentInOffice.openDocument('"+uiConfirm.absolutePath+"', '"+uiConfirm.workspace+"', '"+uiConfirm.filePath+"');");
     }
   }
 
@@ -83,5 +85,13 @@ public class UIOpenDocumentForm extends UIComponent implements UIPopupComponent 
 
   public void setFilePath(String filePath) {
     this.filePath = filePath;
+  }
+
+  public void setWorkspace(String workspace) {
+    this.workspace = workspace;
+  }
+
+  public void setAbsolutePath(String absolutePath) {
+    this.absolutePath = absolutePath;
   }
 }

@@ -1,11 +1,15 @@
 package org.exoplatform.wcm.connector.collaboration;
 
 import org.apache.commons.lang.ArrayUtils;
+import org.exoplatform.services.jcr.RepositoryService;
+import org.exoplatform.services.jcr.core.ManageableRepository;
 import org.exoplatform.services.resources.ResourceBundleService;
 import org.exoplatform.services.rest.resource.ResourceContainer;
 import org.exoplatform.services.wcm.utils.WCMCoreUtils;
 import org.json.JSONObject;
 
+import javax.jcr.Node;
+import javax.jcr.Session;
 import javax.servlet.http.HttpServletRequest;
 import javax.ws.rs.GET;
 import javax.ws.rs.Path;
@@ -98,4 +102,22 @@ public class OpenInOfficeConnector implements ResourceContainer {
     return builder.build();
   }
 
+  /**
+   * Return a JsonObject's checkin a version when file has been opened successfully by desktop application
+   * @param request
+   * @param filePath
+   * @return
+   * @throws Exception
+   */
+  @GET
+  @Path("/checkin")
+  public Response checkin(@Context Request request,
+                          @QueryParam("filePath") String filePath,
+                          @QueryParam("workspace") String workspace
+  ) throws Exception {
+    Session session = WCMCoreUtils.getSystemSessionProvider().getSession(workspace, WCMCoreUtils.getRepository());
+    Node node = (Node)session.getItem(filePath);
+    node.checkin();
+    return Response.ok(String.valueOf(node.isCheckedOut()), MediaType.TEXT_PLAIN).build();
+  }
 }

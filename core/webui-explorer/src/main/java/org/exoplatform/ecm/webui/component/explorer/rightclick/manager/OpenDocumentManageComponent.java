@@ -61,20 +61,19 @@ public class OpenDocumentManageComponent extends UIAbstractManagerComponent {
       HttpServletRequest httpServletRequest = Util.getPortalRequestContext().getRequest();
       UIJCRExplorer uiExplorer = event.getSource().getAncestorOfType(UIJCRExplorer.class);
       String objId = event.getRequestContext().getRequestParameter(OBJECTID);
-      String ws="", nodePath="";
+
       String repo = WCMCoreUtils.getRepository().getConfiguration().getName();
       Node currentNode=null;
       if(objId!=null){
-        ws = objId.split(":")[0];
-        nodePath = objId.split(":")[1];
-        Session session = uiExplorer.getSessionByWorkspace(ws);
-        currentNode = uiExplorer.getNodeByPath(nodePath, session);
+        String _ws = objId.split(":")[0];
+        String _nodePath = objId.split(":")[1];
+        Session _session = uiExplorer.getSessionByWorkspace(_ws);
+        currentNode = uiExplorer.getNodeByPath(_nodePath, _session);
       }else{
         currentNode = uiExplorer.getCurrentNode();
-        ws = currentNode.getSession().getWorkspace().getName();
-        nodePath = currentNode.getPath();
       }
-
+      String nodePath=currentNode.getPath();
+      String ws = currentNode.getSession().getWorkspace().getName();
       String filePath = httpServletRequest.getScheme()+ "://" + httpServletRequest.getServerName() + ":"
               +httpServletRequest.getServerPort() + "/"
               + WCMCoreUtils.getRestContextName()+ "/private/jcr/" + repo + "/" + ws + nodePath;
@@ -87,8 +86,9 @@ public class OpenDocumentManageComponent extends UIAbstractManagerComponent {
         uiOpenDocumentForm.setId("UIReadOnlyFileConfirmMessage");
         uiOpenDocumentForm.setMessageKey("UIPopupMenu.msg.lock-node-read-only");
         uiOpenDocumentForm.setArguments(userLock);
-//        uiOpenDocumentForm.setActions(new String[]{"ReadOnly", "Cancel"});
-        uiOpenDocumentForm.setFilePath(filePath);
+        uiOpenDocumentForm.setFilePath(nodePath);
+        uiOpenDocumentForm.setWorkspace(ws);
+        uiOpenDocumentForm.setAbsolutePath(filePath);
         UIPopupWindow popUp = uiExplorer.getChild(UIPopupWindow.class);
         popUp.setUIComponent(uiOpenDocumentForm);
 
@@ -97,7 +97,7 @@ public class OpenDocumentManageComponent extends UIAbstractManagerComponent {
         event.getRequestContext().addUIComponentToUpdateByAjax(popUp);
       }else{
         event.getRequestContext().getJavascriptManager().require("SHARED/openDocumentInOffice")
-              .addScripts("eXo.ecm.OpenDocumentInOffice.openDocument('"+filePath+"');");
+              .addScripts("eXo.ecm.OpenDocumentInOffice.openDocument('"+filePath+"', '"+ws+"', '"+nodePath+"');");
       }
     }
   }

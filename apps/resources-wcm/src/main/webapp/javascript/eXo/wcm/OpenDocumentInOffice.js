@@ -1,20 +1,42 @@
 (function(gj, ecmWebdav) {
   var OpenDocumentInOffice = function() {}
 
-  OpenDocumentInOffice.prototype.openDocument = function(filePath){
+  OpenDocumentInOffice.prototype.openDocument = function(absolutePath, workspace, filePath){
     var documentManager = eXo.ecm.ECMWebDav.WebDAV.Client.DocManager;
-    /*
-     documentManager.JavaEditDocument(filePath, null, "/ecmexplorer/applet/ITHitMountOpenDocument.jar");
-     console.log("java edit");
-     */
-    if (documentManager.IsMicrosoftOfficeAvailable() && documentManager.IsMicrosoftOfficeDocument(filePath)) {
-      if (!('ActiveXObject' in window)) filePath += '\0';
-      documentManager.MicrosoftOfficeEditDocument(filePath);
+    var openStatus = false;
+    if (documentManager.IsMicrosoftOfficeAvailable() && documentManager.IsMicrosoftOfficeDocument(absolutePath)) {
+      if (!('ActiveXObject' in window)) absolutePath += '\0';
+      openStatus = documentManager.MicrosoftOfficeEditDocument(absolutePath);
     } else {
-      documentManager.JavaEditDocument(filePath, null, "/ecmexplorer/applet/ITHitMountOpenDocument.jar");
+      openStatus = documentManager.JavaEditDocument(absolutePath, null, "/ecmexplorer/applet/ITHitMountOpenDocument.jar");
     }
 
+    //create version when successfully open
+    if(openStatus){
+      eXo.ecm.OpenDocumentInOffice.checkin(workspace, filePath);
+    }
   }
+
+  /*
+   * Checkin a version when open successfully with desktop application to edit.
+   */
+  OpenDocumentInOffice.prototype.checkin = function(workspace, filePath){
+    gj.ajax({
+      url: "/portal/rest/office/checkin?filePath=" + filePath+"&workspace="+workspace,
+      dataType: "text",
+      type: "GET",
+      async: true
+    })
+        .success(function (data) {
+          // data = gj.parseJSON(data);
+          console.log("checkout status "+!data);
+        });
+  };
+
+  /*Lock item */
+  OpenDocumentInOffice.prototype.lockItem = function(filePath){
+
+  } //end lock function
 
   /**
    * Update OpenDocument button's label
@@ -46,6 +68,12 @@
     setCookie("_currentDocument", objId, 1);
   }
 
+  gj(window).load(function(){
+    var _currentDocument = getCookie("_currentDocument");
+    if(_currentDocument!=null && _currentDocument!="undefined" && _currentDocument!="")
+      eXo.ecm.OpenDocumentInOffice.updateLabel(_currentDocument);
+
+  });
 
   /**
    * Close all popup
@@ -54,13 +82,6 @@
   OpenDocumentInOffice.prototype.closePopup = function(){
     console.log("close all popup");
   }
-
-  gj(window).load(function(){
-    var _currentDocument = getCookie("_currentDocument");
-    if(_currentDocument!=null && _currentDocument!="undefined" && _currentDocument!="")
-      eXo.ecm.OpenDocumentInOffice.updateLabel(_currentDocument);
-
-  });
 
 
   /**
