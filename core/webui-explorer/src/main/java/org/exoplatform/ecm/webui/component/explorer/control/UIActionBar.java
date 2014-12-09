@@ -164,6 +164,7 @@ public class UIActionBar extends UIForm {
       Set<String> bt = new HashSet<String>();
       //get all buttons in tab
       for (String b : buttonsInTab) {
+        b = b.trim();
         b = b.substring(0, 1).toUpperCase() + b.substring(1);
         bt.add(b);
       }
