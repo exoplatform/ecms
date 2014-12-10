@@ -36,6 +36,7 @@ import org.exoplatform.webui.event.Event;
 import org.exoplatform.webui.event.EventListener;
 import org.exoplatform.webui.form.UIForm;
 import org.exoplatform.webui.form.UIFormDateTimeInput;
+import org.exoplatform.webui.form.validator.DateTimeValidator;
 
 /**
  * Created by The eXo Platform SAS
@@ -55,8 +56,8 @@ public class UIPublicationSchedule extends UIForm {
   private static final Log    LOG               = LogFactory.getLog(UIPublicationSchedule.class.getName());
   
   public UIPublicationSchedule() throws Exception {
-    addUIFormInput(new UIFormDateTimeInput(START_PUBLICATION, START_PUBLICATION, null));
-    addUIFormInput(new UIFormDateTimeInput(END_PUBLICATION, END_PUBLICATION, null));
+    addUIFormInput(new UIFormDateTimeInput(START_PUBLICATION, START_PUBLICATION, null).addValidator(DateTimeValidator.class));
+    addUIFormInput(new UIFormDateTimeInput(END_PUBLICATION, END_PUBLICATION, null).addValidator(DateTimeValidator.class));
     setActions(new String[] { "Save", "Reset" });
   }
   
