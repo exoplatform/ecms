@@ -39,18 +39,15 @@ if (uiParent != null) {
   
   PortalRequestContext portalRequestContext = Util.getPortalRequestContext();
   def lang = portalRequestContext.getLocale().getLanguage();
-  
 
 if (maximumPage > 0 && maximumPage <= PDFViewerService.MAX_PAGES && fileSize <= PDFViewerService.MAX_FILE_SIZE) {
-  PortletRequestContext requestContext = PortletRequestContext.getCurrentInstance();
-  PortletRequest portletRequest = requestContext.getRequest();
-  def userAgent = portletRequest.getProperty("user-agent");
   def jsManager = rqcontext.getJavascriptManager();
   jsManager.require("SHARED/jquery", "gj").addScripts("gj(document).ready(function() { gj(\"*[rel='tooltip']\").tooltip();});");
-  
-  if(userAgent.contains("MSIE 8.0")) {
+
+if(uicomponent.isNotModernBrowser()) {
     rqcontext.getJavascriptManager().require("SHARED/ecm-utils", "ecmutil").
     addScripts('ecmutil.ECMUtils.onKeyPDFViewerPress();') ;
+
   %>
     <head>
       <style>
