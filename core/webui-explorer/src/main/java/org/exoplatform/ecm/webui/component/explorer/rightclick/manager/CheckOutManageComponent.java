@@ -89,6 +89,9 @@ public class CheckOutManageComponent extends UIAbstractManagerComponent {
   public static void checkOutManage(Event<? extends UIComponent> event, UIJCRExplorer uiExplorer,
       UIApplication uiApp) throws Exception {
     String nodePath = event.getRequestContext().getRequestParameter(OBJECTID);
+    if (nodePath == null) {
+      nodePath = uiExplorer.getCurrentWorkspace() + ':' + uiExplorer.getCurrentPath();
+    }
     Matcher matcher = UIWorkingArea.FILE_EXPLORER_URL_SYNTAX.matcher(nodePath);
     String wsName = null;
     if (matcher.find()) {
