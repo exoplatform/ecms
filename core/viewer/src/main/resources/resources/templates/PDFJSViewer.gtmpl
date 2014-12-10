@@ -181,8 +181,8 @@ if(uicomponent.isNotModernBrowser()) {
     <%uiform.begin()%>
       <div class="UIPDFViewerContainer">
           <div class="PDFViewerBar ClearFix">
-              <div class="ControlButton" rel="tooltip" data-placement="bottom" title="<%=uicomponent.getResourceBundle(" PDFViewer.label.previousPage ")%>">
-                  <a href="<%=uicomponent.event(" PreviousPage ")%>">
+              <div class="ControlButton" rel="tooltip" data-placement="bottom" title="<%=uicomponent.getResourceBundle("PDFViewer.label.previousPage")%>">
+                  <a href="<%=uicomponent.event("PreviousPage")%>">
                       <div class="ButtonBack">
                           <span></span>
                       </div>
@@ -190,21 +190,21 @@ if(uicomponent.isNotModernBrowser()) {
               </div>
               <div class="ControlButton">
                   <div class="Lable">
-                      <%=uicomponent.getResourceBundle( "PDFViewer.label.page")%>
+                      <%=uicomponent.getResourceBundle("PDFViewer.label.page")%>
                   </div>
               </div>
               <div class="ControlButton" id="PageControl">
-                  <a href="<%=uicomponent.event(" GotoPage ")%>" id="GotoPage"></a>
+                  <a href="<%=uicomponent.event("GotoPage")%>" id="GotoPage"></a>
                   <div class="PageNumber">
-                      <%uiform.renderField(uicomponent.getChildById( "pageNumber"))%>
+                      <%uiform.renderField(uicomponent.getChildById("pageNumber"))%>
                   </div>
               </div>
               <div class="ControlButton">
                   <div class="Lable">
-                      <%=uicomponent.getResourceBundle( "PDFViewer.label.of")%>$maximumPage</div>
+                      <%=uicomponent.getResourceBundle("PDFViewer.label.of")%>$maximumPage</div>
               </div>
-              <div class="ControlButton" rel="tooltip" data-placement="bottom" title="<%=uicomponent.getResourceBundle(" PDFViewer.label.nextPage ")%>">
-                  <a href="<%=uicomponent.event(" NextPage ")%>">
+              <div class="ControlButton" rel="tooltip" data-placement="bottom" title="<%=uicomponent.getResourceBundle("PDFViewer.label.nextPage")%>">
+                  <a href="<%=uicomponent.event("NextPage")%>">
                       <div class="ButtonNext">
                           <span></span>
                       </div>
@@ -215,15 +215,15 @@ if(uicomponent.isNotModernBrowser()) {
                       <span></span>
                   </div>
               </div>
-              <div class="ControlButton" rel="tooltip" data-placement="bottom" title="<%=uicomponent.getResourceBundle(" PDFViewer.label.zoomOutPage ")%>">
-                  <a href="<%=uicomponent.event(" ZoomOutPage ")%>">
+              <div class="ControlButton" rel="tooltip" data-placement="bottom" title="<%=uicomponent.getResourceBundle("PDFViewer.label.zoomOutPage")%>">
+                  <a href="<%=uicomponent.event("ZoomOutPage")%>">
                       <div class="ZoomOut">
                           <span></span>
                       </div>
                   </a>
               </div>
-              <div class="ControlButton" rel="tooltip" data-placement="bottom" title="<%=uicomponent.getResourceBundle(" PDFViewer.label.zoomInPage ")%>">
-                  <a href="<%=uicomponent.event(" ZoomInPage ")%>">
+              <div class="ControlButton" rel="tooltip" data-placement="bottom" title="<%=uicomponent.getResourceBundle("PDFViewer.label.zoomInPage")%>">
+                  <a href="<%=uicomponent.event("ZoomInPage")%>">
                       <div class="ZoomIn">
                           <span></span>
                       </div>
@@ -231,38 +231,38 @@ if(uicomponent.isNotModernBrowser()) {
               </div>
               <div class="ControlButton">
                   <div class="selectbox">
-                      <%uiform.renderField(uicomponent.getChildById( "scalePage"))%>
+                      <%uiform.renderField(uicomponent.getChildById("scalePage"))%>
                   </div>
               </div>
-              <div class="ControlButton" rel="tooltip" data-placement="bottom" title="<%=uicomponent.getResourceBundle(" PDFViewer.label.rotateLeft ")%>">
-                  <a href="<%=uicomponent.event(" RotateLeftPage ")%>">
+              <div class="ControlButton" rel="tooltip" data-placement="bottom" title="<%=uicomponent.getResourceBundle("PDFViewer.label.rotateLeft")%>">
+                  <a href="<%=uicomponent.event("RotateLeftPage")%>">
                       <div class="RotateLeft">
                           <span></span>
                       </div>
                   </a>
               </div>
-              <div class="ControlButton" rel="tooltip" data-placement="bottom" title="<%=uicomponent.getResourceBundle(" PDFViewer.label.rotateRight ")%>">
-                  <a href="<%=uicomponent.event(" RotateRightPage ")%>">
+              <div class="ControlButton" rel="tooltip" data-placement="bottom" title="<%=uicomponent.getResourceBundle("PDFViewer.label.rotateRight")%>">
+                  <a href="<%=uicomponent.event("RotateRightPage")%>">
                       <div class="RotateRight">
                           <span></span>
                       </div>
                   </a>
               </div>
-              <div class="ControlButton" rel="tooltip" data-placement="bottom" title="<%=uicomponent.getResourceBundle(" PDFViewer.label.viewInfor ")%>">
+              <div class="ControlButton" rel="tooltip" data-placement="bottom" title="<%=uicomponent.getResourceBundle("PDFViewer.label.viewInfor")%>">
                   <div class="InfoIcon" onclick="javascript:eXo.ecm.ECMUtils.showDocumentInformation(this, event);">
                       <span></span>
                   </div>
               </div>
               <div class="DownLoadIcon">
                   <a href="$downloadLink">
-                      <%=uicomponent.getResourceBundle( "PDFViewer.label.downloadFile")%>
+                      <%=uicomponent.getResourceBundle("PDFViewer.label.downloadFile")%>
                   </a>
               </div>
           </div>
           <div class="InfoPopup" id="metadatas" style="display: none;position: absolute;">
               <div class="Metadata">
                   <span class="metaKey">
-                      <%=uicomponent.getResourceBundle( "PDFViewer.metadata.fileName")%>
+                      <%=uicomponent.getResourceBundle("PDFViewer.metadata.fileName")%>
                   </span>:
                   <span class="metaValue">
                       <%=ContentReader.getXSSCompatibilityContent(originalNode.getName())%>
@@ -271,7 +271,7 @@ if(uicomponent.isNotModernBrowser()) {
               <%for(key in metadatas.keySet()) {%>
                   <div class="Metadata">
                       <span class="metaKey">
-                          <%=uicomponent.getResourceBundle( "PDFViewer.metadata." + key)%>:</span>
+                          <%=uicomponent.getResourceBundle("PDFViewer.metadata." + key)%>:</span>
                       <span class="metaValue">
                           <%=metadatas.get(key)%>
                       </span>
@@ -280,8 +280,8 @@ if(uicomponent.isNotModernBrowser()) {
           </div>
           <div class="PDFViewerContent">
               <div class="ImageView" style="overflow-x:auto; overflow-y:hidden" id="pdf_viewer_image" name="pdf_viewer_image">
-                  <% String pdfPageImage="/" + uiParent.getPortalName() + "/" + Utils.getRestContextName(uiParent.getPortalName()) + "/pdfviewer/" + repository + "/" + uiParent.getWorkspaceName() + "/${currentPage}/${currentRotation}/${currentScale}/" + currentNode.getUUID() + "?" + originalNode.getProperty( "jcr:content/jcr:lastModified").getString(); %>
-                      <a href="$pdfPageImage" style="display:inline-block" rel="tooltip" data-placement="bottom" title="<%=uicomponent.getResourceBundle(" PDFViewer.label.viewFullPage ")%>">
+                  <% String pdfPageImage="/" + uiParent.getPortalName() + "/" + Utils.getRestContextName(uiParent.getPortalName()) + "/pdfviewer/" + repository + "/" + uiParent.getWorkspaceName() + "/${currentPage}/${currentRotation}/${currentScale}/" + currentNode.getUUID() + "?" + originalNode.getProperty("jcr:content/jcr:lastModified").getString(); %>
+                      <a href="$pdfPageImage" style="display:inline-block" rel="tooltip" data-placement="bottom" title="<%=uicomponent.getResourceBundle("PDFViewer.label.viewFullPage")%>">
                           <img src="$pdfPageImage" />
                       </a>
               </div>
