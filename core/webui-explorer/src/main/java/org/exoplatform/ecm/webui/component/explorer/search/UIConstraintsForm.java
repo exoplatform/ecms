@@ -35,6 +35,7 @@ import org.exoplatform.webui.form.UIFormDateTimeInput;
 import org.exoplatform.webui.form.UIFormSelectBox;
 import org.exoplatform.webui.form.UIFormStringInput;
 import org.exoplatform.webui.form.input.UICheckBoxInput;
+import org.exoplatform.webui.form.validator.DateTimeValidator;
 
 @ComponentConfig(
     template =  "app:/groovy/webui/component/explorer/search/UIConstraintsForm.gtmpl"
@@ -110,9 +111,11 @@ public class UIConstraintsForm extends UIFormInputSetWithAction implements UISel
     dateOperation.add(new SelectItemOption<String>(_MODIFIED_DATE, MODIFIED_DATE));
     addUIFormInput(new UIFormSelectBox(TIME_OPTION, TIME_OPTION, dateOperation)) ;
     UIFormDateTimeInput uiFromDate = new UIFormDateTimeInput(START_TIME, START_TIME, null) ;
+    uiFromDate.addValidator(DateTimeValidator.class);
     uiFromDate.setDisplayTime(true) ;
     addUIFormInput(uiFromDate) ;
     UIFormDateTimeInput uiToDate = new UIFormDateTimeInput(END_TIME, END_TIME, null) ;
+    uiToDate.addValidator(DateTimeValidator.class);
     uiToDate.setDisplayTime(true) ;
     addUIFormInput(uiToDate) ;
     addUIFormInput(new UICheckBoxInput(NODETYPE_PROPERTY, NODETYPE_PROPERTY, null)) ;

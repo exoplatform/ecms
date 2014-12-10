@@ -450,21 +450,9 @@ public class UISimpleSearch extends UIForm {
           event.getRequestContext().addUIComponentToUpdateByAjax(uiForm);
           return ;
         }
-        if(!fromDate.matches(UIConstraintsForm.DATETIME_REGEX) || !uiForm.isValidDateTime(fromDate)) {
-          uiApp.addMessage(new ApplicationMessage("UIConstraintsForm.msg.fromDate-invalid", null,
-                                                  ApplicationMessage.WARNING)) ;
-          event.getRequestContext().addUIComponentToUpdateByAjax(uiForm);
-          return ;
-        }
         Calendar bfDate = uiForm.getUIFormDateTimeInput(UIConstraintsForm.START_TIME).getCalendar() ;
         if(toDate != null && toDate.trim().length() >0) {
           Calendar afDate = uiForm.getUIFormDateTimeInput(UIConstraintsForm.END_TIME).getCalendar();
-          if(!toDate.matches(UIConstraintsForm.DATETIME_REGEX) || !uiForm.isValidDateTime(toDate)) {
-            uiApp.addMessage(new ApplicationMessage("UIConstraintsForm.msg.toDate-invalid", null,
-                                                    ApplicationMessage.WARNING)) ;
-            event.getRequestContext().addUIComponentToUpdateByAjax(uiForm);
-            return ;
-          }
           if(bfDate.compareTo(afDate) == 1) {
             uiApp.addMessage(new ApplicationMessage("UIConstraintsForm.msg.date-invalid", null,
                                                     ApplicationMessage.WARNING)) ;
