@@ -24,7 +24,10 @@ import java.util.ResourceBundle;
 
 
 /**
- * Created by toannh on 11/27/14.
+ * Created by The eXo Platform SAS
+ * Author : eXoPlatform
+ *          toannh@exoplatform.com
+ * Dec 09, 2014
  * Provider all rest methods of Open Document feature.
  */
 @Path("/office/")
@@ -34,7 +37,6 @@ public class OpenInOfficeConnector implements ResourceContainer {
   private final String CONNECTOR_BUNDLE_LOCATION = "locale.wcm.resources.WCMResourceBundleConnector";
   private final String OPEN_DOCUMENT_IN_DESKTOP_RESOURCE_KEY = "OpenInOfficeConnector.label.exo.remote-edit.desktop";
   private final String OPEN_DOCUMENT_IN_DESKTOP_APP_RESOURCE_KEY="OpenInOfficeConnector.label.exo.remote-edit.desktop-app";
-
   private final String OPEN_DOCUMENT_DEFAULT_TITLE="Open";
 
   private final int CACHED_TIME = 60*24*30*12;
@@ -70,7 +72,8 @@ public class OpenInOfficeConnector implements ResourceContainer {
 
     if(documentType !=null && resourceBundle !=null ){
       try {
-        title = resourceBundle.getString(documentType.getResourceBundleKey());
+        if(!StringUtils.isEmpty(resourceBundle.getString(documentType.getResourceBundleKey())))
+         title = resourceBundle.getString(documentType.getResourceBundleKey());
       }catch(Exception ex){
         title = resourceBundle.getString(OPEN_DOCUMENT_IN_DESKTOP_APP_RESOURCE_KEY)+" "+ documentType.getResourceBundleKey();
       }

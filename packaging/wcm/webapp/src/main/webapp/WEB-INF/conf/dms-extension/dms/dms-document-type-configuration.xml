@@ -89,6 +89,71 @@
       			</field>
     			</object>
    			</object-param>
+
+      <!--Open Document In Office-->
+      <object-param>
+        <name>word</name>
+        <object type="org.exoplatform.services.cms.documents.impl.DocumentType" >
+          <field name="resourceBundleKey" ><string>OpenInOfficeConnector.label.exo.remote-edit.word</string></field>
+          <field name="iconClass" ><string>uiIcon16x16applicationmsword</string></field>
+          <field name="mimeTypes" >
+            <collection type="java.util.ArrayList">
+              <value><string>docx</string></value>
+              <value><string>doc</string></value>
+              <value><string>docm</string></value>
+              <value><string>dot</string></value>
+              <value><string>dotm</string></value>
+              <value><string>dotx</string></value>
+            </collection>
+          </field>
+        </object>
+      </object-param>
+
+      <object-param>
+        <name>excel</name>
+        <object type="org.exoplatform.services.cms.documents.impl.DocumentType" >
+          <field name="resourceBundleKey" ><string>OpenInOfficeConnector.label.exo.remote-edit.excel</string></field>
+          <field name="iconClass" ><string>uiIcon16x16applicationxls</string></field>
+          <field name="mimeTypes" >
+            <collection type="java.util.ArrayList">
+              <value><string>xltx</string></value>
+              <value><string>xltm</string></value>
+              <value><string>xlt</string></value>
+              <value><string>xlsx</string></value>
+              <value><string>xlsm</string></value>
+              <value><string>xlsb</string></value>
+              <value><string>xls</string></value>
+              <value><string>xll</string></value>
+              <value><string>xlam</string></value>
+              <value><string>xla</string></value>
+            </collection>
+          </field>
+        </object>
+      </object-param>
+
+      <object-param>
+        <name>powerpoint</name>
+        <object type="org.exoplatform.services.cms.documents.impl.DocumentType" >
+          <field name="resourceBundleKey" ><string>OpenInOfficeConnector.label.exo.remote-edit.powerpoint</string></field>
+          <field name="iconClass" ><string>uiIcon16x16applicationvndopenxmlformats-officedocumentpresentationmlpresentation</string></field>
+          <field name="mimeTypes" >
+            <collection type="java.util.ArrayList">
+              <value><string>pptx</string></value>
+              <value><string>pptm</string></value>
+              <value><string>ppt</string></value>
+              <value><string>ppsx</string></value>
+              <value><string>ppsm</string></value>
+              <value><string>pps</string></value>
+              <value><string>ppam</string></value>
+              <value><string>ppa</string></value>
+              <value><string>potx</string></value>
+              <value><string>potm</string></value>
+              <value><string>pot</string></value>
+            </collection>
+          </field>
+        </object>
+      </object-param>
+
 		</init-params>
   </component>	
 </configuration>

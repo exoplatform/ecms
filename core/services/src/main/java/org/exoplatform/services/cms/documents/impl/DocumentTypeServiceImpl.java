@@ -29,18 +29,20 @@ import javax.jcr.query.QueryResult;
 
 import org.exoplatform.container.xml.InitParams;
 import org.exoplatform.container.xml.ObjectParameter;
+import org.exoplatform.container.xml.ValueParam;
 import org.exoplatform.services.cms.documents.DocumentTypeService;
 import org.exoplatform.services.cms.templates.TemplateService;
 import org.exoplatform.services.jcr.RepositoryService;
 import org.exoplatform.services.jcr.ext.common.SessionProvider;
 import org.exoplatform.services.log.ExoLogger;
 import org.exoplatform.services.log.Log;
+import org.picocontainer.Startable;
 
 /**
  * Created by The eXo Platform SARL Author : Dang Van Minh
  * minh.dang@exoplatform.com Oct 6, 2009 3:39:28 AM
  */
-public class DocumentTypeServiceImpl implements DocumentTypeService {
+public class DocumentTypeServiceImpl implements DocumentTypeService, Startable {
   private static final Log    LOG               = ExoLogger.getLogger(DocumentTypeServiceImpl.class.getName());
 
   private final static String OWNER             = "exo:owner";
@@ -75,30 +77,28 @@ public class DocumentTypeServiceImpl implements DocumentTypeService {
 
   private InitParams          params_;
 
-  private static final String DESKTOP_APP_PROVIDER="ecm.open-document.remote-edit.desktop-app-provider";
-  private static final String OPEN_DESKTOP_PROVIDER_PREFIX="exo.remote-edit.";
+  private static final String OPEN_DESKTOP_PROVIDER_REGEX="^exo.remote-edit\\.([a-z]+)$";
   private static final String OPEN_PROVIDER_RESOURCEBUNDLE_SUFFIX = ".label";
   private static final String OPEN_PROVIDER_STYLE_SUFFIX = ".ico";
+  private final String OPEN_DOCUMENT_ON_DESKTOP_ICO = "uiIcon16x16FileDefault";
+  private final String OPEN_DOCUMENT_IN_DESKTOP_RESOURCE_KEY = "OpenInOfficeConnector.label.exo.remote-edit.desktop";
 
-  private static String[] desktopAppProviders;
-  private static List<DocumentType> providerExts = new ArrayList<>();
+  private void init() {
+    //load desktop application from system property to init-params
+    Properties properties = System.getProperties();
+    Enumeration keys = properties.keys();
+    ObjectParameter _objectParameter=null;
+    while (keys.hasMoreElements()){
+      String key = (String)keys.nextElement();
+      if(key.matches(OPEN_DESKTOP_PROVIDER_REGEX)) {
+        List _mimetypes = Arrays.asList(properties.getProperty(key)!=null?properties.getProperty(key).split(","):null);
+        String _resourceBundle = properties.getProperty(key + OPEN_PROVIDER_RESOURCEBUNDLE_SUFFIX);
+        String _ico = properties.getProperty(key + OPEN_PROVIDER_STYLE_SUFFIX);
 
-  static {
-    desktopAppProviders = System.getProperty(DESKTOP_APP_PROVIDER)!=null?System.getProperty(DESKTOP_APP_PROVIDER).split(","):null;
-    if(desktopAppProviders!=null){
-      for (String desktopAppProvider : desktopAppProviders){
-        desktopAppProvider=OPEN_DESKTOP_PROVIDER_PREFIX+desktopAppProvider;
-
-        String[] _extensions = System.getProperty(desktopAppProvider)!=null?
-                System.getProperty(desktopAppProvider).split(","):null;
-
-        String _resourceBundleKey = System.getProperty(desktopAppProvider+OPEN_PROVIDER_RESOURCEBUNDLE_SUFFIX)!=null ?
-                System.getProperty(desktopAppProvider+OPEN_PROVIDER_RESOURCEBUNDLE_SUFFIX):null;
-
-        String _cssClasses = System.getProperty(desktopAppProvider+OPEN_PROVIDER_STYLE_SUFFIX)!=null ?
-                System.getProperty(desktopAppProvider+OPEN_PROVIDER_STYLE_SUFFIX):null;
-
-        providerExts.add(new DocumentType(new ArrayList<String>(Arrays.asList(_extensions)), _resourceBundleKey, _cssClasses));
+        _objectParameter = new ObjectParameter();
+        _objectParameter.setName(key);
+        _objectParameter.setObject(new DocumentType(_mimetypes, _resourceBundle, _ico));
+        params_.addParam(_objectParameter);
       }
     }
   }
@@ -317,11 +317,21 @@ public class DocumentTypeServiceImpl implements DocumentTypeService {
 
   @Override
   public DocumentType getDocumentType(String mimeType) {
-    for(DocumentType documentType: providerExts){
+    for(DocumentType documentType: params_.getObjectParamValues(DocumentType.class)){
       if(documentType.getMimeTypes().contains(mimeType)){
         return documentType;
       }
     }
-    return null;
+    return new DocumentType(Arrays.asList(new String[] {mimeType}), OPEN_DOCUMENT_IN_DESKTOP_RESOURCE_KEY, OPEN_DOCUMENT_ON_DESKTOP_ICO);
+  }
+
+  @Override
+  public void start() {
+    init();
+  }
+
+  @Override
+  public void stop() {
+
   }
 }

@@ -25,7 +25,10 @@ import java.util.Arrays;
 import java.util.List;
 
 /**
- * Created by toannh on 11/26/14.
+ * Created by The eXo Platform SAS
+ * Author : eXoPlatform
+ *          toannh@exoplatform.com
+ * Dec 10, 2014
  * Filter files can be open by Office or OS
  */
 @ComponentConfig(
