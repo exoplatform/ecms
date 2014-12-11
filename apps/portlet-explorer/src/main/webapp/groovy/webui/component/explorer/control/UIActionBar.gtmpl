@@ -28,6 +28,7 @@
 
   def jsManager = rcontext.getJavascriptManager();
   jsManager.require("SHARED/ecm-utils", "ecmutil").require("SHARED/multiUpload", "multiUpload")
+	.required("SHARED/openDocumentInOffice", "openDocumentInOffice")
   .addScripts('multiUpload.displayCorrectUploadButton();')
 	.addScripts("eXo.ecm.OpenDocumentInOffice.updateLabel('"+currentNodePath+"');");
   
