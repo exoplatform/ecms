@@ -339,11 +339,11 @@ if(uicomponent.isNotModernBrowser()) {
             <!-- findbar -->
             <div id="secondaryToolbar" class="secondaryToolbar hidden">
                 <ul id="secondaryToolbarButtonContainer" class="dropdown-menu" style="display: block; top: -10px; left: -142px;">
-                    <li>
-                        <a id="secondaryDownload" href="<%=downloadLink%>" tabindex="21">
-                            <i class="uiIconDownload uiIconLightGray"></i> Download
-                        </a>
-                    </li>
+                    <!--<li>-->
+                        <!--<a id="secondaryDownload" href="<%=downloadLink%>" tabindex="21">-->
+                            <!--<i class="uiIconDownload uiIconLightGray"></i> Download-->
+                        <!--</a>-->
+                    <!--</li>-->
                     <li>
                         <a id="secondaryPrint" tabindex="20">
                             <i class="uiIconPrint uiIconLightGray"></i> Print
@@ -399,8 +399,10 @@ if(uicomponent.isNotModernBrowser()) {
                             <span id="numPages" class="toolbarLabel"></span>
                         </div>
                         <div id="toolbarViewerRight">
-
-                            <a id="presentationMode" class="actionIcon" data-placement="bottom" rel="tooltip" data-original-title="Switch to Presentation Mode" tabindex="12" data-l10n-id="presentation_mode">
+                            <a id="secondaryDownload" class="actionIcon" data-placement="bottom" rel="tooltip" data-original-title="Download" href="<%=downloadLink%>" tabindex="12" data-l10n-id="download">
+                                <i class="uiIconDownload uiIconLightGray"></i>
+                            </a>
+                            <a id="presentationMode" class="actionIcon" data-placement="bottom" rel="tooltip" data-original-title="Switch to Presentation Mode" tabindex="13" data-l10n-id="presentation_mode">
                                 <i class="uiIconEcmsExpand uiIconLightGray"></i>
                             </a>
 
