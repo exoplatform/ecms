@@ -1,25 +1,16 @@
 package org.exoplatform.ecm.webui.component.explorer.rightclick.manager;
 
-import org.exoplatform.ecm.webui.component.explorer.UIConfirmMessage;
 import org.exoplatform.ecm.webui.component.explorer.UIJCRExplorer;
 import org.exoplatform.ecm.webui.component.explorer.UIWorkingArea;
-import org.exoplatform.ecm.webui.component.explorer.control.filter.IsDocumentFilter;
-import org.exoplatform.ecm.webui.component.explorer.control.filter.IsNotTrashHomeNodeFilter;
-import org.exoplatform.ecm.webui.component.explorer.control.filter.IsNotInTrashFilter;
-import org.exoplatform.ecm.webui.component.explorer.control.filter.IsNotEditingDocumentFilter;
+import org.exoplatform.ecm.webui.component.explorer.control.filter.*;
 
-import org.exoplatform.ecm.webui.component.explorer.control.filter.IsNotFolderChildFilter;
 import org.exoplatform.ecm.webui.component.explorer.control.listener.UIActionBarActionListener;
 import org.exoplatform.ecm.webui.component.explorer.popup.actions.UIOpenDocumentForm;
 import org.exoplatform.ecm.webui.utils.PermissionUtil;
-import org.exoplatform.portal.application.PortalRequestContext;
 import org.exoplatform.portal.webui.util.Util;
-import org.exoplatform.services.security.ConversationState;
 import org.exoplatform.services.wcm.utils.WCMCoreUtils;
-import org.exoplatform.web.application.ApplicationMessage;
 import org.exoplatform.webui.config.annotation.ComponentConfig;
 import org.exoplatform.webui.config.annotation.EventConfig;
-import org.exoplatform.webui.core.UIApplication;
 import org.exoplatform.webui.core.UIPopupWindow;
 import org.exoplatform.webui.event.Event;
 import org.exoplatform.webui.ext.filter.UIExtensionFilter;
@@ -30,7 +21,6 @@ import org.exoplatform.webui.ext.manager.UIAbstractManagerComponent;
 import javax.jcr.Node;
 import javax.jcr.Session;
 import javax.servlet.http.HttpServletRequest;
-import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
@@ -47,9 +37,8 @@ public class OpenDocumentManageComponent extends UIAbstractManagerComponent {
   private static final List<UIExtensionFilter> FILTERS = Arrays.asList(new UIExtensionFilter[] {
           new IsNotTrashHomeNodeFilter(),
           new IsNotInTrashFilter(),
-          new IsDocumentFilter(),
           new IsNotEditingDocumentFilter(),
-          new IsNotFolderChildFilter()});
+          new IsNtFileFilter()});
 
   @UIExtensionFilters
   public List<UIExtensionFilter> getFilters() {
