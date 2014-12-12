@@ -6,10 +6,14 @@
      * Nov 26, 2014
      * version: $Id$
      */
+  import org.exoplatform.services.cms.impl.Utils;
 
     if(!uicomponent.isShow()) {
         return;
     }
+
+    def contentNode = uicomponent.getOriginalNode();
+    def title = Utils.getTitle(contentNode);
 
     def rcontext = _ctx.getRequestContext();
     rcontext.getJavascriptManager()
@@ -27,7 +31,7 @@
         <div class="clearfix">
             <div class="uiBox commentArea pull-right">
                 <div class="title">
-                    <i class="uiIcon16x16FilePdf uiIconLightGray"></i>&nbsp;&nbsp;Test.pdf
+                    <i class="<%=Utils.getNodeTypeIcon(contentNode, "uiIcon16x16")%> uiIconLightGray"></i>&nbsp;&nbsp;$title
                 </div>
                 <div class="uiContentBox">
                     <ul class="commentList">
@@ -104,11 +108,10 @@
                 %>
                 </div>
                 <%
-                def voteNode = uicomponent.getOriginalNode();
                 double voteRating = 0 ;
-                if(voteNode.hasProperty("exo:votingRate")) voteRating = voteNode.getProperty("exo:votingRate").getDouble() ;
+                if(contentNode.hasProperty("exo:votingRate")) voteRating = contentNode.getProperty("exo:votingRate").getDouble() ;
                 long voteTotal = 0 ;
-                if(voteNode.hasProperty("exo:voteTotalOfLang")) voteTotal = voteNode.getProperty("exo:voteTotalOfLang").getLong() ;
+                if(contentNode.hasProperty("exo:voteTotalOfLang")) voteTotal = contentNode.getProperty("exo:voteTotalOfLang").getLong() ;
                 %>
                 <div class="uiVote clearfix">
                   <%if (voteTotal > 0) {%>

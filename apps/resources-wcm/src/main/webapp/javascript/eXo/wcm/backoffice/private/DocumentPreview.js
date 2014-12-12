@@ -21,6 +21,14 @@
             // Calculate margin 
             var pdfDisplayAreaHeight = window.innerHeight - 62;
             gj('#outerContainer', $uiDocumentPreview).height(pdfDisplayAreaHeight); // pdf viewer
+            var $commentArea = gj('.commentArea', $uiDocumentPreview);
+            var $commentAreaTitle = gj('.title', $commentArea);
+            var $commentInputBox = gj('.commentInputBox',$commentArea);
+            var $commentList = gj('.commentList', $commentArea);
+            var commentAreaHeight = window.innerHeight -30;
+            $commentArea.height(commentAreaHeight);
+            $commentList.css('max-height', commentAreaHeight - $commentAreaTitle.innerHeight() - $commentInputBox.innerHeight());
+
 
             // Media viewer, no preview file
             var $navigationContainer = gj(".navigationContainer", $uiDocumentPreview);
