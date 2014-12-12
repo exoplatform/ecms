@@ -78,7 +78,7 @@
         resizeEventHandler();
         gj(window).on('resize', resizeEventHandler);
 
-        // Return body scroll, turn off keyup
+        // Bind close event. Return body scroll, turn off keyup
         gj(".uiIconClose", $uiDocumentPreview).click(function() {
             setTimeout(function() {
                 gj('body').css('overflow', 'visible');
@@ -86,6 +86,31 @@
                 gj(window).off('resize', resizeEventHandler);
             }, 500);
         });
+
+        // Bind expanded/collapsed event
+        gj('.uiIconMiniArrowLeft, .uiIconMiniArrowRight', $uiDocumentPreview).click(function() {
+            var $uiIconMiniArrow = gj(this);
+            var $commentArea = gj('.commentArea', $uiDocumentPreview);
+            var $uiPreviewWebContent = gj('.uiPreviewWebContent', $uiDocumentPreview);
+            var $fileContent = gj('.fileContent', $uiDocumentPreview);
+            var $resizeButton = gj('.resizeButton', $uiDocumentPreview);
+            if ($uiIconMiniArrow.hasClass('uiIconMiniArrowRight')) {
+                $commentArea.css('display', 'none');
+                $uiPreviewWebContent.css('margin-right','30px');
+                $fileContent.css('margin-right', '30px');
+                $resizeButton.css('right', '5px');
+            } else {
+                $commentArea.css('display', 'block');
+                $uiPreviewWebContent.css('margin-right','335px');
+                $fileContent.css('margin-right', '335px');
+                $resizeButton.css('right', '310px');
+            }
+            $uiIconMiniArrow.toggleClass('uiIconMiniArrowLeft');
+            $uiIconMiniArrow.toggleClass('uiIconMiniArrowRight');
+
+
+        });
+
 
     };
 
