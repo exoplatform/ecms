@@ -91,11 +91,7 @@
                     <div class="commentInputBox">
                         <a class="avatarXSmall pull-left" href="$currentCommenterUri" title="$currentCommenterFullName"><img src="$currentCommenterAvatar" alt="" /></a>
                         <div class="commentBox">
-                            <textarea title="What are you working on?" cols="30" rows="10" id="" name="" class="textarea" style="visibility: hidden; display: none;"></textarea>
-                            <div class="mask">
-                                <div class="replaceTextArea"></div>
-                                <div class="placeholder">Add your comment here</div>
-                            </div>
+                            <textarea placeholder="Add your comment..." cols="30" rows="10" id="commentTextAreaPreview" name="" class="textarea"></textarea>
                         </div>
                     </div>
                 </div>

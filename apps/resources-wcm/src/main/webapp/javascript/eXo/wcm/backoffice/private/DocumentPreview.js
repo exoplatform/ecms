@@ -28,7 +28,7 @@
             var commentAreaHeight = window.innerHeight -30;
             $commentArea.height(commentAreaHeight);
             $commentList.css('max-height', commentAreaHeight - $commentAreaTitle.innerHeight() - $commentInputBox.innerHeight());
-
+            $commentList.scrollTop(20000);
 
             // Media viewer, no preview file
             var $navigationContainer = gj(".navigationContainer", $uiDocumentPreview);
@@ -107,13 +107,8 @@
             }
             $uiIconMiniArrow.toggleClass('uiIconMiniArrowLeft');
             $uiIconMiniArrow.toggleClass('uiIconMiniArrowRight');
-
-
         });
-
-
     };
-
 
     eXo.ecm.DocumentPreview = new DocumentPreview();
 
