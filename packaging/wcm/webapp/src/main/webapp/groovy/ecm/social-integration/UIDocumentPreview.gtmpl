@@ -9,20 +9,12 @@
   import org.exoplatform.services.cms.impl.Utils;
   import org.exoplatform.social.core.service.LinkProvider;
 
-    if(!uicomponent.isShow()) {
-        return;
-    }
-
-    def contentNode = uicomponent.getOriginalNode();
-    def title = Utils.getTitle(contentNode);
-
     def rcontext = _ctx.getRequestContext();
     rcontext.getJavascriptManager()
         .require("SHARED/document-preview", "docPre")
         .addScripts("eXo.ecm.DocumentPreview.initScreen();");
 
-    def commentList = uicomponent.getAllComments();
-    int commentSize = commentList.size();
+    def contentNode = uicomponent.getOriginalNode();
 
 %>
 
@@ -30,73 +22,12 @@
 <div class="maskLayer">
     <div class="uiDocumentPreview" id="$uicomponent.id">
         <div class="exitWindow">
-            <a class="uiIconClose uiIconWhite" title="<%=_ctx.appRes("UIPopupWindow.Close")%>" onclick="<%=uicomponent.event(uicomponent.getCloseEvent())%>"></a>
+            <a class="uiIconClose uiIconWhite" title="<%=_ctx.appRes("UIPopupWindow.Close")%>" onclick="<%=uicomponent.event("Close")%>"></a>
         </div>
         <div class="clearfix">
-            <div class="uiBox commentArea pull-right">
-                <div class="title">
-                    <i class="<%=Utils.getNodeTypeIcon(contentNode, "uiIcon16x16")%> uiIconLightGray"></i>&nbsp;&nbsp;$title
-                </div>
-                <div class="uiContentBox">
-                  <%
-                  if (commentSize > 0) {
-                  %>
-                    <ul class="commentList">
-                    <%
-                        commentList.each({
-                          def commentIdentity = org.exoplatform.social.webui.Utils.getIdentityManager().getIdentity(it.userId);
-                          def commenterFullName = commentIdentity.profile.fullName;
-                          def commenterProfileUri = LinkProvider.getUserProfileUri(commentIdentity.getRemoteId());
-
-                          def commentMessage = it.title;
-
-                          def activityParams = it.getTemplateParams();
-                          def systemComment = uicomponent.getSystemCommentBundle(activityParams);
-                          if (systemComment != null && systemComment.length > 0) {
-                             commentMessage = uicomponent.getCommentMessage(activityParams);
-                          }
-                          def commentPostedTime = uicomponent.getPostedTimeString(_ctx, it.postedTime);
-                          def commenterAvatarImgSrc = commentIdentity.profile.avatarUrl;
-                          if (!commenterAvatarImgSrc) commenterAvatarImgSrc = LinkProvider.PROFILE_DEFAULT_AVATAR_URL;
-
-                        %>
-                            <li class="clearfix">
-                                <a class="avatarXSmall pull-left" href="$commenterProfileUri" title="$commenterFullName"><img src="$commenterAvatarImgSrc" alt="" /></a>
-                                <div class="rightBlock">
-                                    <div class="tit">
-                                        <a href="$commenterProfileUri" >$commenterFullName</a>
-                                        <span class="pull-right dateTime">$commentPostedTime</span>
-                                    </div>
-                                    <p class="cont">$commentMessage</p>
-                                </div>
-                            </li>
-                        <%})%>
-                    </ul>
-                  <%
-                  } else {
-                  %>
-                    <div class="noComment">
-                        <div class="info">No comment yet</div>
-                    </div>
-                  <%
-                  }
-
-                  def currentCommenterIdentity = org.exoplatform.social.webui.Utils.getViewerIdentity();
-                  def currentCommenterUri = LinkProvider.getUserProfileUri(currentCommenterIdentity.getRemoteId());
-                  def currentCommenterAvatar = currentCommenterIdentity.profile.avatarUrl;
-                  def currentCommenterFullName = currentCommenterIdentity.profile.fullName;
-                  if (!currentCommenterAvatar) currentCommenterAvatar= LinkProvider.PROFILE_DEFAULT_AVATAR_URL;
-
-                  %>
-                    <div class="commentInputBox">
-                        <a class="avatarXSmall pull-left" href="$currentCommenterUri" title="$currentCommenterFullName"><img src="$currentCommenterAvatar" alt="" /></a>
-                        <div class="commentBox">
-                            <textarea placeholder="Add your comment..." cols="30" rows="10" id="commentTextAreaPreview" name="" class="textarea"></textarea>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <!-- commentArea -->
+            <%
+            uicomponent.renderChild(org.exoplatform.wcm.ext.component.activity.UIPreviewCommentArea);
+            %>
             <div class="resizeButton " id="ShowHideAll">
                 <i style="display: block;" class="uiIconMiniArrowRight uiIconWhite"></i>
             </div>
@@ -108,7 +39,7 @@
                   <%
             }
             
-                  uicomponent.renderChildren(); 
+                  uicomponent.renderChild(org.exoplatform.social.plugin.doc.UIDocViewer);
             if (isWebContent) {
                 %>
                 </div>

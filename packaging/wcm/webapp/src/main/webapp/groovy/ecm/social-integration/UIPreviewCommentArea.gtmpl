@@ -1,0 +1,98 @@
+<%
+/**
+* Created by The eXo Platform SARL
+* Author : Pham Duy Dong
+*                    phamdong@gmail.com
+* Nov 26, 2014
+* version: $Id$
+*/
+import org.exoplatform.services.cms.impl.Utils;
+import org.exoplatform.social.core.service.LinkProvider;
+
+def refreshCommentsAction = URLEncoder.encode(uicomponent.event(uicomponent.REFRESH_COMMENTS), "utf-8");
+def rcontext = _ctx.getRequestContext();
+rcontext.getJavascriptManager()
+    .require("SHARED/document-preview", "docPre")
+    .require("SHARED/jquery", "gj")
+    .addScripts("eXo.ecm.DocumentPreview.bindPostCommentEvent();")
+    .addScripts("eXo.ecm.DocumentPreview.setRefreshCommentsAction('" + refreshCommentsAction + "') ;")
+    .addScripts("gj('.commentList', '#UIDocumentPreview').scrollTop(20000);;");
+
+
+
+def contentNode = uicomponent.getOriginalNode();
+def title = Utils.getTitle(contentNode);
+
+def activityId = uicomponent.getActivityId();
+
+def commentList = uicomponent.getAllComments();
+int commentSize = commentList.size();
+
+%>
+<div class="uiBox commentArea pull-right" id="$uicomponent.id">
+    <div class="title">
+        <i class="<%=Utils.getNodeTypeIcon(contentNode, "uiIcon16x16")%> uiIconLightGray"></i>&nbsp;&nbsp;$title
+    </div>
+    <div class="uiContentBox">
+      <%
+      if (commentSize > 0) {
+      %>
+        <ul class="commentList">
+        <%
+            commentList.each({
+              def commentIdentity = org.exoplatform.social.webui.Utils.getIdentityManager().getIdentity(it.userId);
+              def commenterFullName = commentIdentity.profile.fullName;
+              def commenterProfileUri = LinkProvider.getUserProfileUri(commentIdentity.getRemoteId());
+
+              def commentMessage = it.title;
+
+              def activityParams = it.getTemplateParams();
+              def systemComment = uicomponent.getSystemCommentBundle(activityParams);
+              if (systemComment != null && systemComment.length > 0) {
+                 commentMessage = uicomponent.getCommentMessage(activityParams);
+              }
+              def commentPostedTime = uicomponent.getPostedTimeString(_ctx, it.postedTime);
+              def commenterAvatarImgSrc = commentIdentity.profile.avatarUrl;
+              if (!commenterAvatarImgSrc) commenterAvatarImgSrc = LinkProvider.PROFILE_DEFAULT_AVATAR_URL;
+
+            %>
+                <li class="clearfix">
+                    <a class="avatarXSmall pull-left" href="$commenterProfileUri" title="$commenterFullName"><img src="$commenterAvatarImgSrc" alt="" /></a>
+                    <div class="rightBlock">
+                        <div class="tit">
+                            <a href="$commenterProfileUri" >$commenterFullName</a>
+                            <span class="pull-right dateTime">$commentPostedTime</span>
+                        </div>
+                        <p class="cont">$commentMessage</p>
+                      <%if (uicomponent.isCommentDeletable(it.userId)) { %>
+                        <a href="<%=uicomponent.event(uicomponent.REMOVE_COMMENT, it.id); %>" class="close"><i class="uiIconLightGray uiIconClose " commentId="$it.id"></i></a>
+                      <% } %>
+                    </div>
+                </li>
+            <%})%>
+        </ul>
+      <%
+      } else {
+      %>
+        <div class="noComment">
+            <div class="info">No comment yet</div>
+        </div>
+      <%
+      }
+
+      def currentCommenterIdentity = org.exoplatform.social.webui.Utils.getViewerIdentity();
+      def currentCommenterUri = LinkProvider.getUserProfileUri(currentCommenterIdentity.getRemoteId());
+      def currentCommenterAvatar = currentCommenterIdentity.profile.avatarUrl;
+      def currentCommenterFullName = currentCommenterIdentity.profile.fullName;
+      if (!currentCommenterAvatar) currentCommenterAvatar= LinkProvider.PROFILE_DEFAULT_AVATAR_URL;
+
+      %>
+        <div class="commentInputBox">
+            <a class="avatarXSmall pull-left" href="$currentCommenterUri" title="$currentCommenterFullName"><img src="$currentCommenterAvatar" alt="" /></a>
+            <div class="commentBox">
+                <textarea placeholder="Add your comment..." cols="30" rows="10" id="commentTextAreaPreview" activityId="$activityId" class="textarea"></textarea>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- commentArea -->
