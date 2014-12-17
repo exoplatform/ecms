@@ -126,7 +126,7 @@
                 var activityId = $commentTextAreaPreview.attr('activityId');
                 var commentText = $commentTextAreaPreview.val();
                 $commentTextAreaPreview.val('');
-                var postActivityLink = "http://localhost:8080/rest/private/portal/social/activities/" + activityId + "/comments/create.json?text=" + commentText + "&opensocial_viewer_id=" + eXo.env.portal.userName;
+                var postActivityLink = "/rest/private/portal/social/activities/" + activityId + "/comments/create.json?text=" + commentText + "&opensocial_viewer_id=" + eXo.env.portal.userName;
 
                 var jqxhr = gj.ajax(postActivityLink)
                     .done(function() {
