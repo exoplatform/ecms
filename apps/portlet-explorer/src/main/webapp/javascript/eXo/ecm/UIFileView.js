@@ -27,6 +27,7 @@
 	UIFileView.prototype.clickedItem = null;
 	UIFileView.prototype.selectBoxType = null;
 	UIFileView.prototype.firstTimeClick = false;
+	UIFileView.prototype.active="active";
 
 UIFileView.prototype.clickFolder =  function (folderDiv, expandLink, collapseLink, docListId,event) {
 	if (!folderDiv) return;
@@ -122,7 +123,7 @@ UIFileView.prototype.mouseOverItem = function(event) {
 	var event = event || window.event;
 	var element = this;
 	if (!element.selected) {
-		element.style.background = Self.colorHover;
+		//element.style.background = Self.colorHover;
 		element.temporary = true;
 		//eXo.core.Browser.setOpacity(element, 100);
 	}
@@ -133,7 +134,7 @@ UIFileView.prototype.mouseOutItem = function(event) {
 	var element = this;
 	element.temporary = false;
 	if (!element.selected) {
-		element.style.background = "none";
+		//element.style.background = "none";
 		//eXo.core.Browser.setOpacity(element, 85);
 	}
 };
@@ -252,7 +253,8 @@ UIFileView.prototype.clickItem = function(event, element, callback) {
 	//for select use shilf key;
 	Self.temporaryItem = element;
 	Self.itemsSelected = new Array(element);
-	element.style.background = Self.colorSelected;
+	//element.style.background = Self.colorSelected;
+	gj(element).addClass(eXo.ecm.UIFileView.active);
 	//uncheck all checkboxes
 	var uiDocInfo = gj("#UIDocumentInfo")[0] || gj("#UIDocumentWithTree")[0];
 	gj("input", uiDocInfo).each(function(index, elem) {
@@ -312,7 +314,8 @@ UIFileView.prototype.mouseUpItem = function(evt) {
 			} else if((pressCtrl(event) || Self.clickCheckBox || Self.clickTotalCheckBox) && element.selected) {
 				element.selected = null;
 				element.setAttribute("isLink",null);
-				element.style.background = "none";
+				//element.style.background = "none";
+				gj(element).removeClass(eXo.ecm.UIFileView.active);
 				removeItem(Self.itemsSelected, element);
 			} else if (event.shiftKey) {
 				//use shift key to select;
@@ -336,7 +339,8 @@ UIFileView.prototype.mouseUpItem = function(evt) {
 			}
 			for(var i in Self.itemsSelected) {
 				if (Array.prototype[i]) continue;
-				Self.itemsSelected[i].style.background = Self.colorSelected;
+				//Self.itemsSelected[i].style.background = Self.colorSelected;
+				gj(Self.itemsSelected[i]).addClass(eXo.ecm.UIFileView.active);
 				//eXo.core.Browser.setOpacity(Self.itemsSelected[i], 100);
 			}
 		}
@@ -433,12 +437,14 @@ UIFileView.prototype.mutipleSelect = function(event) {
 						//Dunghm: Check Shift key
 						itemBox.setAttribute("isLink",null);
 						if(pressCtrl(event) && event.shiftKey) itemBox.setAttribute("isLink",true);
-						itemBox.style.background = Self.colorSelected;
+						//itemBox.style.background = Self.colorSelected;
+						gj(itemBox).addClass(eXo.ecm.UIFileView.active);
 						//eXo.core.Browser.setOpacity(itemBox, 100);
 					} else {
 						itemBox.selected = null;
 						itemBox.setAttribute("isLink",null);
-						itemBox.style.background = "none";
+						//itemBox.style.background = "none";
+						gj(itemBox).removeClass(eXo.ecm.UIFileView.active);
 						//eXo.core.Browser.setOpacity(itemBox, 85);
 					}
 				}
@@ -465,12 +471,14 @@ UIFileView.prototype.mutipleSelect = function(event) {
 						//Dunghm: Check Shift key
 						itemBox.setAttribute("isLink",null);
 						if(pressCtrl(event) && event.shiftKey) itemBox.setAttribute("isLink",true);
-						itemBox.style.background = Self.colorSelected;
+						//itemBox.style.background = Self.colorSelected;
+						gj(itemBox).addClass(eXo.ecm.UIFileView.active);
 						//eXo.core.Browser.setOpacity(itemBox, 100);
 					} else {
 						itemBox.selected = null;
 						itemBox.setAttribute("isLink",null);
-						itemBox.style.background = "none";
+						//itemBox.style.background = "none";
+						gj(itemBox).removeClass(eXo.ecm.UIFileView.active);
 						//eXo.core.Browser.setOpacity(itemBox, 85);
 					}
 				}
@@ -780,10 +788,12 @@ UIFileView.prototype.clearCheckboxes = function(evt) {
 		resetArrayItemsSelected();
 		gj("#UIFileViewCheckBox").attr("checked", false);
 		gj("#UIDocumentInfo").find(".checkbox").attr("checked", false);
-		gj("#UIDocumentInfo").find(".rowView").css("backgroundColor","#FFF");
+		//gj("#UIDocumentInfo").find(".rowView").css("backgroundColor","#FFF");
+		gj("#UIDocumentInfo").find(".rowView").removeClass(eXo.ecm.UIFileView.active);
 		//case with tree
 		gj("#UIDocumentWithTree").find(".checkbox").attr("checked", false);
-		gj("#UIDocumentWithTree").find(".rowView").css("backgroundColor","#FFF");
+		//gj("#UIDocumentWithTree").find(".rowView").css("backgroundColor","#FFF");
+		gj("#UIDocumentWithTree").find(".rowView").removeClass(eXo.ecm.UIFileView.active);
 		
 		Self.checkSelectedItemCount();
 		Self.hideContextMenu();
@@ -931,7 +941,8 @@ function resetArrayItemsSelected() {
 	for(var i in Self.itemsSelected) {
 		if (Array.prototype[i]) continue;
 		Self.itemsSelected[i].selected = null;
-		Self.itemsSelected[i].style.background = "none";
+		//Self.itemsSelected[i].style.background = "none";
+		gj(Self.itemsSelected[i]).removeClass(eXo.ecm.UIFileView.active);
 		//eXo.core.Browser.setOpacity(Self.itemsSelected[i], 85);
 	}
 	Self.itemsSelected = new Array();
