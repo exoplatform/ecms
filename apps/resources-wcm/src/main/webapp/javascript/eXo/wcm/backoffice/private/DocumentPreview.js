@@ -17,7 +17,7 @@
         // Bind Esc key
         var closeEventHandler = function(e) {
             gj('#presentationMode').blur();
-            if (e.keyCode == 27 && "presentationMode" != e.target.id) {
+            if (e.keyCode == 27 && ("presentationMode" != e.target.id || gj.browser.mozilla)) {
                 gj(".exitWindow > .uiIconClose", $uiDocumentPreview).trigger("click");
             }
         }
