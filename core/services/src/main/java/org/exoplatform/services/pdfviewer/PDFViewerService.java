@@ -40,8 +40,6 @@ import org.exoplatform.services.cms.mimetype.DMSMimeTypeResolver;
 import org.exoplatform.services.jcr.RepositoryService;
 import org.exoplatform.services.log.ExoLogger;
 import org.exoplatform.services.log.Log;
-import org.icepdf.core.exceptions.PDFException;
-import org.icepdf.core.exceptions.PDFSecurityException;
 import org.icepdf.core.pobjects.Document;
 /**
  * Created by The eXo Platform SAS
