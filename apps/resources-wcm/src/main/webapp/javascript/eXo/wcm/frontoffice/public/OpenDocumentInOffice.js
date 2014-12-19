@@ -1,7 +1,22 @@
-(function(gj, ecmWebdav) {
+/**
+ * Created by The eXo Platform SEA
+ * Author : eXoPlatform
+ * toannh@exoplatform.com
+ * On 12/16/14
+ * Open document js
+ *
+ * handle openDocument by ITHIT library
+ * handle event click, rightclick on ECMS, AS
+ *
+ */
+
+(function(gj) {
   var OpenDocumentInOffice = function() {}
 
   OpenDocumentInOffice.prototype.openDocument = function(absolutePath, workspace, filePath){
+    console.log("default featurer on IE11, Window, MS Office 2010/2013 inprogres......");
+/*
+ eXo.ecm.ECMWebDav.WebDAV.Client.DocManager.ShowMicrosoftOfficeWarning();
     var documentManager = eXo.ecm.ECMWebDav.WebDAV.Client.DocManager;
     var openStatus = false;
     if (documentManager.IsMicrosoftOfficeAvailable() && documentManager.IsMicrosoftOfficeDocument(absolutePath)) {
@@ -10,11 +25,7 @@
     } else {
       openStatus = documentManager.JavaEditDocument(absolutePath, null, "/ecmexplorer/applet/ITHitMountOpenDocument.jar");
     }
-
-    //create version when successfully open
-    if(openStatus){
-      eXo.ecm.OpenDocumentInOffice.checkout(workspace, filePath);
-    }
+*/
   }
 
   /*
@@ -27,9 +38,7 @@
       type: "GET",
       async: true
     })
-        .success(function (data) {
-          console.log("checkout status "+!data);
-        });
+        .success(function (data) { });
   };
 
   /*Lock item */
@@ -45,9 +54,9 @@
    */
   OpenDocumentInOffice.prototype.updateLabel = function(objId, activityId, rightClick){
 
-    eXo.ecm.ECMWebDav.WebDAV.Client.DocManager.ShowMicrosoftOfficeWarning();
+    var currentDocumentObj = {};
     gj.ajax({
-      url: "/portal/rest/office/updateDocumentLabel?objId=" + objId+"&lang="+eXo.env.portal.language,
+      url: "/portal/rest/office/updateDocumentTitle?objId=" + objId+"&lang="+eXo.env.portal.language,
       dataType: "text",
       type: "GET",
       async: false
@@ -63,26 +72,23 @@
           var html = "<i class=\"uiIcon16x16FileDefault uiIcon16x16nt_file "+data.ico+" "+elClass+"\"></i>\n"+data.title;
           openDocument.html(html);
           gj(".detailContainer").find('.openDocument').html(data.title);
+          currentDocumentObj = '{"title":"'+data.title+'", "ico": "'+data.ico+'"}';
         });
 
-    setCookie("_currentDocument", objId, 1);
+    setCookie("_currentDocument", currentDocumentObj, 1);
   }
-
-  gj(window).load(function(){
-    var _currentDocument = getCookie("_currentDocument");
-    if(_currentDocument!=null && _currentDocument!="undefined" && _currentDocument!="")
-      eXo.ecm.OpenDocumentInOffice.updateLabel(_currentDocument);
-
-  });
 
   /**
    * Close all popup
    */
 
   OpenDocumentInOffice.prototype.closePopup = function(){
-    console.log("close all popup");
+
   }
 
+  OpenDocumentInOffice.prototype.openDocument_doClick = function(){
+    gj("#uiActionsBarContainer .uiIconEcmsOpenDocument").parent().click();
+  }
 
   /**
    * Set value to browser's cookie
@@ -106,10 +112,6 @@
       if (c.indexOf(name) != -1) return c.substring(name.length,c.length);
     }
     return "";
-  }
-
-  OpenDocumentInOffice.prototype.openDocument_doClick = function(){
-    gj("#uiActionsBarContainer .uiIconEcmsOpenDocument").parent().click();
   }
 
   eXo.ecm.OpenDocumentInOffice = new OpenDocumentInOffice();

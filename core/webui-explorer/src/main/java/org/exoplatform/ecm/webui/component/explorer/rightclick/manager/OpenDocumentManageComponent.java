@@ -1,14 +1,16 @@
 package org.exoplatform.ecm.webui.component.explorer.rightclick.manager;
 
+import org.exoplatform.ecm.webui.component.explorer.control.filter.IsNtFileFilter;
+import org.exoplatform.ecm.webui.component.explorer.popup.actions.UIOpenDocumentForm;
+import org.exoplatform.services.wcm.utils.WCMCoreUtils;
 import org.exoplatform.ecm.webui.component.explorer.UIJCRExplorer;
 import org.exoplatform.ecm.webui.component.explorer.UIWorkingArea;
-import org.exoplatform.ecm.webui.component.explorer.control.filter.*;
-
+import org.exoplatform.ecm.webui.component.explorer.control.filter.IsNotEditingDocumentFilter;
+import org.exoplatform.ecm.webui.component.explorer.control.filter.IsNotInTrashFilter;
+import org.exoplatform.ecm.webui.component.explorer.control.filter.IsNotTrashHomeNodeFilter;
 import org.exoplatform.ecm.webui.component.explorer.control.listener.UIActionBarActionListener;
-import org.exoplatform.ecm.webui.component.explorer.popup.actions.UIOpenDocumentForm;
 import org.exoplatform.ecm.webui.utils.PermissionUtil;
 import org.exoplatform.portal.webui.util.Util;
-import org.exoplatform.services.wcm.utils.WCMCoreUtils;
 import org.exoplatform.webui.config.annotation.ComponentConfig;
 import org.exoplatform.webui.config.annotation.EventConfig;
 import org.exoplatform.webui.core.UIPopupWindow;
@@ -24,11 +26,12 @@ import javax.servlet.http.HttpServletRequest;
 import java.util.Arrays;
 import java.util.List;
 
+
 /**
  * Created by The eXo Platform SAS
  * Author : eXoPlatform
  *          toannh@exoplatform.com
- * Dec 10, 2014
+ * On Dec 10, 2014
  * Filter files can be open by Office or OS
  */
 @ComponentConfig(
@@ -37,7 +40,7 @@ import java.util.List;
         })
 public class OpenDocumentManageComponent extends UIAbstractManagerComponent {
 
-  private static final List<UIExtensionFilter> FILTERS = Arrays.asList(new UIExtensionFilter[] {
+  private static final List<UIExtensionFilter> FILTERS = Arrays.asList(new UIExtensionFilter[]{
           new IsNotTrashHomeNodeFilter(),
           new IsNotInTrashFilter(),
           new IsNotEditingDocumentFilter(),
@@ -89,7 +92,7 @@ public class OpenDocumentManageComponent extends UIAbstractManagerComponent {
         event.getRequestContext().addUIComponentToUpdateByAjax(popUp);
       }else{
         event.getRequestContext().getJavascriptManager().require("SHARED/openDocumentInOffice")
-              .addScripts("eXo.ecm.OpenDocumentInOffice.openDocument('"+filePath+"', '"+ws+"', '"+nodePath+"');");
+                .addScripts("eXo.ecm.OpenDocumentInOffice.openDocument('" + filePath + "', '" + ws + "', '" + nodePath + "');");
       }
     }
   }

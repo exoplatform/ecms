@@ -34,30 +34,36 @@ import java.util.ResourceBundle;
 public class OpenInOfficeConnector implements ResourceContainer {
 
   private final String OPEN_DOCUMENT_ON_DESKTOP_ICO = "uiIcon16x16FileDefault";
-  private final String CONNECTOR_BUNDLE_LOCATION = "locale.wcm.resources.WCMResourceBundleConnector";
-  private final String OPEN_DOCUMENT_IN_DESKTOP_RESOURCE_KEY = "OpenInOfficeConnector.label.exo.remote-edit.desktop";
-  private final String OPEN_DOCUMENT_IN_DESKTOP_APP_RESOURCE_KEY="OpenInOfficeConnector.label.exo.remote-edit.desktop-app";
+  private final String CONNECTOR_BUNDLE_LOCATION = "locale.open-document.OpenDocumentInOffice";
+  private final String OPEN_DOCUMENT_IN_DESKTOP_RESOURCE_KEY = "OpenDocumentInOffice.label.exo.remote-edit.desktop";
+  private final String OPEN_DOCUMENT_IN_DESKTOP_APP_RESOURCE_KEY="OpenDocumentInOffice.label.exo.remote-edit.desktop-app";
   private final String OPEN_DOCUMENT_DEFAULT_TITLE="Open";
 
   private final int CACHED_TIME = 60*24*30*12;
 
+  private static final String VERSION_MIXIN ="mix:versionable";
+
   /**
-   * Return a JsonObject's check file to open
+   * Return a JsonObject's current file to update display titles
    * @param request
    * @param objId
    * @return
    * @throws Exception
    */
   @GET
-  @Path("/updateDocumentLabel")
-  public Response updateDocumentLabel(@Context Request request,
-          @QueryParam("objId") String objId, @QueryParam("lang") String language
-  ) throws Exception {
+  @Path("/updateDocumentTitle")
+  public Response updateDocumentTitle(
+          @Context Request request,
+          @QueryParam("objId") String objId,
+          @QueryParam("lang") String language) throws Exception {
+
+    //find from cached
     String extension = objId.substring(objId.lastIndexOf(".") + 1, objId.length());
     EntityTag etag = new EntityTag(Integer.toString((extension+"_"+language).hashCode()));
     Response.ResponseBuilder builder = request.evaluatePreconditions(etag);
     if(builder!=null) return builder.build();
 
+    //query form configuration values params
     ResourceBundleService resourceBundleService = WCMCoreUtils.getService(ResourceBundleService.class);
     DocumentTypeService documentTypeService = WCMCoreUtils.getService(DocumentTypeService.class);
 
@@ -73,7 +79,7 @@ public class OpenInOfficeConnector implements ResourceContainer {
     if(documentType !=null && resourceBundle !=null ){
       try {
         if(!StringUtils.isEmpty(resourceBundle.getString(documentType.getResourceBundleKey())))
-         title = resourceBundle.getString(documentType.getResourceBundleKey());
+          title = resourceBundle.getString(documentType.getResourceBundleKey());
       }catch(Exception ex){
         title = resourceBundle.getString(OPEN_DOCUMENT_IN_DESKTOP_APP_RESOURCE_KEY)+" "+ documentType.getResourceBundleKey();
       }
@@ -100,12 +106,21 @@ public class OpenInOfficeConnector implements ResourceContainer {
   @GET
   @Path("/checkout")
   public Response checkout(@Context Request request,
-                          @QueryParam("filePath") String filePath,
-                          @QueryParam("workspace") String workspace
+                           @QueryParam("filePath") String filePath,
+                           @QueryParam("workspace") String workspace
   ) throws Exception {
     Session session = WCMCoreUtils.getSystemSessionProvider().getSession(workspace, WCMCoreUtils.getRepository());
     Node node = (Node)session.getItem(filePath);
+
+    if(node.canAddMixin(VERSION_MIXIN)){
+      node.addMixin(VERSION_MIXIN);
+      node.save();
+      node.checkin();
+      node.checkout();
+    }
+
     if(!node.isCheckedOut()) node.checkout();
+
     return Response.ok(String.valueOf(node.isCheckedOut()), MediaType.TEXT_PLAIN).build();
   }
 }

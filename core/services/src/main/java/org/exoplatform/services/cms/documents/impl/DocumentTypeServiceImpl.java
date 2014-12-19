@@ -87,7 +87,7 @@ public class DocumentTypeServiceImpl implements DocumentTypeService, Startable {
     //load desktop application from system property to init-params
     Properties properties = System.getProperties();
     Enumeration keys = properties.keys();
-    ObjectParameter _objectParameter=null;
+    ObjectParameter _objectParameter;
     while (keys.hasMoreElements()){
       String key = (String)keys.nextElement();
       if(key.matches(OPEN_DESKTOP_PROVIDER_REGEX)) {

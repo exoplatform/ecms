@@ -1,9 +1,7 @@
 package org.exoplatform.ecm.webui.component.explorer.popup.actions;
 
-import org.exoplatform.ecm.webui.component.explorer.UIJCRExplorer;
-import org.exoplatform.ecm.webui.component.explorer.UIWorkingArea;
-import org.exoplatform.ecm.webui.component.explorer.rightclick.manager.DeleteManageComponent;
 import org.exoplatform.webui.config.annotation.ComponentConfig;
+import org.exoplatform.ecm.webui.component.explorer.UIJCRExplorer;
 import org.exoplatform.webui.config.annotation.EventConfig;
 import org.exoplatform.webui.core.UIComponent;
 import org.exoplatform.webui.core.UIPopupComponent;
@@ -12,11 +10,14 @@ import org.exoplatform.webui.event.Event;
 import org.exoplatform.webui.event.EventListener;
 
 /**
- * Created by toannh on 12/8/14.
+ * Created by The eXo Platform SAS
+ * Author : eXoPlatform
+ *          toannh@exoplatform.com
+ * On Dec 10, 2014
  * Popup window when open read-only a document in SE
  */
 @ComponentConfig(
-        template = "app:/groovy/webui/component/explorer/popup/action/UIOpenDocumentForm.gtmpl",
+        template = "app:/groovy/webui/component/explorer/UIConfirmMessage.gtmpl",
         events = {
                 @EventConfig(listeners = UIOpenDocumentForm.ReadOnlyActionListener.class),
                 @EventConfig(listeners = UIOpenDocumentForm.CancelActionListener.class)
@@ -39,13 +40,13 @@ public class UIOpenDocumentForm extends UIComponent implements UIPopupComponent 
     public void execute(Event<UIOpenDocumentForm> event) throws Exception {
       UIOpenDocumentForm uiConfirm = event.getSource();
       UIJCRExplorer uiExplorer = uiConfirm.getAncestorOfType(UIJCRExplorer.class);
-       // impl readonly action
+      // impl readonly action
       UIPopupWindow popupAction = uiConfirm.getAncestorOfType(UIPopupWindow.class) ;
       popupAction.setShow(false) ;
       event.getRequestContext().addUIComponentToUpdateByAjax(popupAction);
 
       event.getRequestContext().getJavascriptManager().require("SHARED/openDocumentInOffice")
-     .addScripts("eXo.ecm.OpenDocumentInOffice.openDocument('"+uiConfirm.absolutePath+"', '"+uiConfirm.workspace+"', '"+uiConfirm.filePath+"');");
+              .addScripts("eXo.ecm.OpenDocumentInOffice.openDocument('"+uiConfirm.absolutePath+"', '"+uiConfirm.workspace+"', '"+uiConfirm.filePath+"');");
     }
   }
 

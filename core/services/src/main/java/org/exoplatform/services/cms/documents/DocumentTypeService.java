@@ -118,9 +118,9 @@ public interface DocumentTypeService {
   public String[] getMimeTypes(String documentType);
 
   /**
-   * Get Document Type by mime type
+   * Get documentType of extension string
    * @param mimeType
-   * @return
+   * @return DocumentType
    */
   public DocumentType getDocumentType(String mimeType);
 }
