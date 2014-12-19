@@ -102,6 +102,8 @@
                                 <value><string>application/wordperfect</string></value>
                                 <value><string>application/xls</string></value>
                                 <value><string>application/xlt</string></value>
+                                <value><string>application/vnd.ms-powerpoint</string></value>
+                                <value><string>application/vnd.ms-excel</string></value>
 							</collection>
 						</field>
 	        </object>
