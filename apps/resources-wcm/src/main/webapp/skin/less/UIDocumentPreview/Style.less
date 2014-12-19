@@ -11,6 +11,24 @@
 	.uiDocumentPreview {
 		padding-left: 30px;
 		padding-top: 30px;
+		.toolbar .actionIcon.disabled {
+		  opacity: 0.5;
+		  &:hover {
+			background: none;
+			border: 1px solid transparent;
+			box-shadow: none;
+			cursor: unset;
+			i {
+			  background-image: url("/eXoResources/skin/images/Icons/uiIconsLightGray.png");
+			}
+		  }
+		  &:focus {
+			background-color: inherit;
+			outline: none;
+			border-color: transparent;
+			box-shadow: none;
+		  }
+		}
 		.exitWindow .uiIconClose {
 			position: absolute;
 			top: 7px;

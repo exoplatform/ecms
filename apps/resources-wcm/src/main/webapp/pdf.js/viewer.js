@@ -4202,8 +4202,20 @@ window.addEventListener('pagechange', function pagechange(evt) {
     }
 
   }
-  document.getElementById('previous').disabled = (page <= 1);
-  document.getElementById('next').disabled = (page >= PDFView.pages.length);
+  var previousButton = document.getElementById('previous');
+  var nextButton = document.getElementById('next');
+  previousButton.disabled = (page <= 1);
+  if (previousButton.disabled) {
+    previousButton.className += " disabled";
+  } else {
+    previousButton.className = previousButton.className.replace(' disabled', '')
+  }
+  nextButton.disabled = (page >= PDFView.pages.length);
+  if (nextButton.disabled) {
+    nextButton.className += " disabled";
+  } else {
+    nextButton.className = nextButton.className.replace(' disabled', '')
+  }
 }, true);
 
 // Firefox specific event, so that we can prevent browser from zooming
