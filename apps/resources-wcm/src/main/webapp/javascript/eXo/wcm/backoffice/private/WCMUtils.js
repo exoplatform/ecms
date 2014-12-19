@@ -341,19 +341,16 @@
 
 	WCMUtils.prototype.decorateInput = function(input, defaultValue, defaultCondition) {
 		if (gj(input).val() == defaultValue && defaultCondition )
-		  gj(input).css('color', '#9A9A9A');
 		input.form.onsubmit = function() {
 		  return false;
 		};
 		gj(input).focus(function() {
 		  if (gj(this).val() == defaultValue && defaultCondition)
 		    gj(this).val('');
-		  gj(this).css('color', 'black');
 		});
 		gj(input).blur(function() {
 		  if (gj(this).val() == '') {
 		    gj(this).val(defaultValue);
-		    gj(this).css('color', '#9A9A9A');
 		  }
 		});
 	};

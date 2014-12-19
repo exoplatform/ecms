@@ -23,6 +23,7 @@ import org.exoplatform.webui.config.annotation.ComponentConfig;
 import org.exoplatform.webui.form.UIForm;
 import org.exoplatform.webui.form.UIFormInputContainer;
 import org.exoplatform.webui.form.UIFormStringInput;
+import org.exoplatform.webui.form.UIFormInputBase;
 
 /**
  * Created by The eXo Platform SARL
@@ -41,8 +42,10 @@ public class UINodeTypeSearch extends UIFormInputContainer<String> {
     if (getChild(UIFormStringInput.class) != null) {
       removeChild(UIFormStringInput.class);
     }
-    addChild(new UIFormStringInput("NodeTypeText", "NodeTypeText", null));
-    //addValidator(NodeTypeNameValidator.class);
+    UIFormInputBase typeInput = new UIFormStringInput("NodeTypeText", "NodeTypeText", null);
+    String placeholder = getResource("UINodeTypeSearh.msg.title");
+    typeInput.setHTMLAttribute("placeholder", placeholder);
+    addChild(typeInput);
   }
 
   public String event(String name) throws Exception {
