@@ -16,7 +16,12 @@
  */
 package org.exoplatform.clouddrive;
 
+
 /**
+ * Synchronization should be skipped for current Cloud Drive resource. This means that the Cloud Drive allows
+ * the resource (file, folder or its parts in local storage) not synchronized with remote cloud side without
+ * affecting content consistency.<br>
+ * 
  * Created by The eXo Platform SAS
  * 
  * @author <a href="mailto:pnedonosko@exoplatform.com">Peter Nedonosko</a>

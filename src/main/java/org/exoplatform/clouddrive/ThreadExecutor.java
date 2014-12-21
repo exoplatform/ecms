@@ -61,12 +61,12 @@ public class ThreadExecutor {
   /**
    * Default maximum threads per CPU.
    */
-  public static final int         MAX_FACTOR              = 25;
+  public static final int         MAX_FACTOR              = 50;
 
   /**
    * Default queue size per CPU.
    */
-  public static final int         QUEUE_FACTOR            = 4;
+  public static final int         QUEUE_FACTOR            = MAX_FACTOR * 2;
 
   /**
    * Thread name used for singleton executor.
@@ -171,7 +171,7 @@ public class ThreadExecutor {
     int queueSize = cpus * queueFactor;
     queueSize = queueSize < queueFactor ? queueFactor : queueSize;
     LOG.info("Initializing command executor for max " + maxThreads + " threads, queue size " + queueSize);
-    executor = new ThreadPoolExecutor(MIN_THREADS,
+    executor = new ThreadPoolExecutor(maxThreads,
                                       maxThreads,
                                       120,
                                       TimeUnit.SECONDS,
@@ -193,44 +193,6 @@ public class ThreadExecutor {
   }
 
   // internals
-
-  @Deprecated
-  // TODO not used
-  private void init() throws InterruptedException {
-    if (executor != null) {
-      if (executor.isShutdown()) {
-        if (!executor.isTerminated()) {
-          stopSheduller();
-          if (!executor.awaitTermination(STOP_TIMEOUT, TimeUnit.SECONDS)) {
-            LOG.warn("Cloud Drive scheduler (" + drives.size() + ") already shutdown but not yet terminated "
-                + executor);
-          }
-        }
-      } else {
-        // scheduler already initialized and running - do nothing
-        return;
-      }
-    }
-
-    // // Executor will queue all commands and run them in maximum ten threads. Two threads will be maintained
-    // // online even idle, other inactive will be stopped in two minutes.
-    // int cpus = Runtime.getRuntime().availableProcessors();
-    // // use scale factor 25... we know our threads will not create high CPU load, as they are HTTP callers
-    // // mainly and we want good parallelization
-    // int maxThreads = Math.round(cpus * 1f * maxFactor);
-    // maxThreads = maxThreads > 0 ? maxThreads : 1;
-    // maxThreads = maxThreads < MIN_THREADS ? MIN_THREADS : maxThreads;
-    // int queueSize = cpus * queueFactor;
-    // queueSize = queueSize < queueFactor ? queueFactor : queueSize;
-    // LOG.info("Initializing command executor for max " + maxThreads + " threads, queue size " + queueSize);
-    // executor = new ThreadPoolExecutor(MIN_THREADS,
-    // maxThreads,
-    // 120,
-    // TimeUnit.SECONDS,
-    // new LinkedBlockingQueue<Runnable>(queueSize),
-    // new CommandThreadFactory(threadNamePrefix),
-    // new ThreadPoolExecutor.CallerRunsPolicy());
-  }
 
   private void stopSheduller() {
     if (executor != null) {

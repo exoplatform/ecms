@@ -19,6 +19,7 @@ package org.exoplatform.clouddrive.rest;
 import org.exoplatform.clouddrive.CloudDrive;
 import org.exoplatform.clouddrive.CloudDrive.Command;
 import org.exoplatform.clouddrive.CloudDriveException;
+import org.exoplatform.clouddrive.CloudDriveMessage;
 import org.exoplatform.clouddrive.CloudDriveService;
 import org.exoplatform.clouddrive.CloudFile;
 import org.exoplatform.clouddrive.CloudProvider;
@@ -36,7 +37,7 @@ import org.exoplatform.services.rest.resource.ResourceContainer;
 
 import java.util.ArrayList;
 import java.util.Collection;
-import java.util.HashSet;
+import java.util.Collections;
 import java.util.List;
 import java.util.concurrent.ExecutionException;
 
@@ -162,12 +163,14 @@ public class DriveService implements ResourceContainer {
       if (local != null) {
         Collection<CloudFile> files;
         Collection<String> removed;
+        Collection<CloudDriveMessage> messages;
         if (synchronize) {
           try {
             Command sync = local.synchronize();
             sync.await(); // wait for sync process
             files = sync.getFiles();
             removed = sync.getRemoved();
+            messages = sync.getMessages();
           } catch (InterruptedException e) {
             LOG.warn("Caller of synchronization command interrupted.", e);
             Thread.currentThread().interrupt();
@@ -214,7 +217,8 @@ public class DriveService implements ResourceContainer {
           }
         } else {
           files = new ArrayList<CloudFile>();
-          removed = new HashSet<String>();
+          removed = Collections.emptyList();
+          messages = Collections.emptyList();
           try {
             if (!local.getPath().equals(path)) {
               // if path not the drive itself
@@ -224,15 +228,23 @@ public class DriveService implements ResourceContainer {
                 files.add(new LinkedCloudFile(file, path)); // it's symlink, add it also
               }
             }
-          } catch (NotCloudFileException e) {
-            LOG.warn("Item " + workspace + ":" + path + " not yet a cloud file : " + e.getMessage());
+          } catch (NotYetCloudFileException e) {
+            if (LOG.isDebugEnabled()) {
+              LOG.debug("Item " + workspace + ":" + path + " not yet a cloud file : " + e.getMessage());
+            }
             files.add(new AcceptedCloudFile(path));
+          } catch (NotCloudFileException e) {
+            if (LOG.isDebugEnabled()) {
+              LOG.debug("Item " + workspace + ":" + path + " not a cloud file : " + e.getMessage());
+            }
           }
         }
 
-        return Response.ok().entity(DriveInfo.create(workspace, local, files, removed)).build();
+        return Response.ok().entity(DriveInfo.create(workspace, local, files, removed, messages)).build();
       } else {
-        LOG.warn("Item " + workspace + ":" + path + " not a cloud file or drive not connected.");
+        if (LOG.isDebugEnabled()) {
+          LOG.debug("Item " + workspace + ":" + path + " not a cloud file or drive not connected.");
+        }
         return Response.status(Status.NO_CONTENT).build();
       }
     } catch (LoginException e) {
@@ -282,9 +294,13 @@ public class DriveService implements ResourceContainer {
                 file = new LinkedCloudFile(file, path); // it's symlink
               }
               return Response.ok().entity(file).build();
-            } catch (NotCloudFileException e) {
-              // LOG.warn("Item " + workspace + ":" + path + " not yet a cloud file: " + e.getMessage());
+            } catch (NotYetCloudFileException e) {
               return Response.status(Status.ACCEPTED).entity(new AcceptedCloudFile(path)).build();
+            } catch (NotCloudFileException e) {
+              return Response.status(Status.NOT_FOUND)
+                             .entity("{\"error\":\"" + e.getMessage() + "\",\"workspace\":\"" + workspace
+                                 + "\",\"path\":\"" + path + "\"}")
+                             .build();
             }
           }
           return Response.status(Status.NO_CONTENT).build();
@@ -342,7 +358,7 @@ public class DriveService implements ResourceContainer {
                 parentPath = local.getFile(path).getPath();
               } catch (NotYetCloudFileException e) {
                 // use path as is
-                parentPath = path; 
+                parentPath = path;
               }
             }
 

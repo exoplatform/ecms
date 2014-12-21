@@ -17,9 +17,11 @@
 package org.exoplatform.clouddrive.exodrive;
 
 import org.exoplatform.clouddrive.CloudDriveException;
+import org.exoplatform.clouddrive.CloudFile;
 import org.exoplatform.clouddrive.CloudFileAPI;
 import org.exoplatform.clouddrive.CloudUser;
 import org.exoplatform.clouddrive.DriveRemovedException;
+import org.exoplatform.clouddrive.NotFoundException;
 import org.exoplatform.clouddrive.SyncNotSupportedException;
 import org.exoplatform.clouddrive.exodrive.service.ExoDriveException;
 import org.exoplatform.clouddrive.exodrive.service.ExoDriveRepository;
@@ -81,11 +83,11 @@ public class JCRLocalExoDrive extends JCRLocalCloudDrive {
                    f.getCreateDate(),
                    f.getModifiedDate());
 
-          changed.add(new JCRLocalCloudFile(localNode.getPath(),
-                                            f.getId(),
-                                            f.getName(),
-                                            f.getType(),
-                                            null, // typeMode not available for ExoDrive
+          changed.add(new JCRLocalCloudFile(localNode.getPath(), f.getId(), f.getName(), f.getType(), null, // typeMode
+                                                                                                            // not
+                                                                                                            // available
+                                                                                                            // for
+                                                                                                            // ExoDrive
                                             f.getLink(),
                                             null, // editLink - edit not supported
                                             f.getLink(),
@@ -150,11 +152,11 @@ public class JCRLocalExoDrive extends JCRLocalCloudDrive {
                    f.getCreateDate(),
                    f.getModifiedDate());
 
-          changed.add(new JCRLocalCloudFile(localNode.getPath(),
-                                            f.getId(),
-                                            f.getName(),
-                                            f.getType(),
-                                            null, // typeMode not available for ExoDrive
+          changed.add(new JCRLocalCloudFile(localNode.getPath(), f.getId(), f.getName(), f.getType(), null, // typeMode
+                                                                                                            // not
+                                                                                                            // available
+                                                                                                            // for
+                                                                                                            // ExoDrive
                                             f.getLink(),
                                             null, // editLink - edit not supported
                                             f.getLink(),
@@ -352,6 +354,15 @@ public class JCRLocalExoDrive extends JCRLocalCloudDrive {
       return false;
     }
 
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public CloudFile restore(String id, String path) throws NotFoundException,
+                                                    CloudDriveException,
+                                                    RepositoryException {
+      throw new SyncNotSupportedException("Restore not supported");
+    }
   }
 
   /**
@@ -414,15 +425,6 @@ public class JCRLocalExoDrive extends JCRLocalCloudDrive {
   @Override
   public ExoDriveUser getUser() {
     return (ExoDriveUser) user;
-  }
-
-  /**
-   * {@inheritDoc}
-   */
-  @Override
-  public Object getState() throws DriveRemovedException, RepositoryException {
-    // not required, changes will be populated to storage automatically by the drive implementation
-    return null;
   }
 
   /**

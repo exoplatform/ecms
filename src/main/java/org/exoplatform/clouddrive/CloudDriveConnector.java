@@ -16,6 +16,7 @@
  */
 package org.exoplatform.clouddrive;
 
+import org.exoplatform.clouddrive.jcr.JCRLocalCloudDrive;
 import org.exoplatform.clouddrive.jcr.NodeFinder;
 import org.exoplatform.clouddrive.utils.ExtendedMimeTypeResolver;
 import org.exoplatform.container.component.BaseComponentPlugin;
@@ -40,6 +41,7 @@ import java.util.LinkedHashSet;
 import java.util.Map;
 import java.util.Set;
 
+import javax.jcr.InvalidItemStateException;
 import javax.jcr.Node;
 import javax.jcr.RepositoryException;
 
@@ -245,14 +247,34 @@ public abstract class CloudDriveConnector extends BaseComponentPlugin {
    * @return {@link Set} of locally connected {@link CloudDrive}
    * @throws {@link CloudDriveException}
    */
-  Set<CloudDrive> loadStored(Set<Node> driveNodes) throws RepositoryException, CloudDriveException {
+  final Set<CloudDrive> loadStored(Set<Node> driveNodes) throws RepositoryException, CloudDriveException {
     Set<CloudDrive> connected = new HashSet<CloudDrive>();
     for (Node driveNode : driveNodes) {
       try {
         connected.add(loadDrive(driveNode));
+      } catch (CloudProviderException e) {
+        // skip drives with provider errors
+        LOG.warn("Cannot load Cloud Drive associated with node " + driveNode.getPath()
+            + " due to provider error. " + e.getMessage()
+            + (e.getCause() != null ? ". " + e.getCause().getMessage() : "."), e);
+      } catch (DriveTrashedException e) {
+        // skip trashed drive and remove its node
+        LOG.warn("Node trashed " + driveNode.getPath()
+            + ", it cannot be loaded as Cloud Drive and will be removed. " + e.getMessage());
+        try {
+          // remove this node nasty if it is in the Trash
+          Node parent = driveNode.getParent();
+          driveNode.remove();
+          parent.save();
+        } catch (InvalidItemStateException iise) {
+          // already removed
+        } catch (Throwable re) {
+          LOG.error("Error removing Cloud Drive node already marked as removed. " + e.getMessage(), e);
+        }
       } catch (DriveRemovedException e) {
         // skip removed drive
-        LOG.warn("Node removed and cannot be loaded as Cloud Drive: " + e.getMessage());
+        LOG.warn("Node removed " + driveNode.getPath() + " and cannot be loaded as Cloud Drive. "
+            + e.getMessage());
       }
     }
     return connected;

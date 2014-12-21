@@ -35,6 +35,8 @@ import javax.jcr.PathNotFoundException;
 import javax.jcr.RepositoryException;
 
 /**
+ * Synchronizer handling nt:file and nt:folder nodetypes.<br>
+ * 
  * Created by The eXo Platform SAS
  * 
  * @author <a href="mailto:pnedonosko@exoplatform.com">Peter Nedonosko</a>
@@ -114,13 +116,10 @@ public class NtFileSynchronizer implements CloudFileSynchronizer {
       }
     } else if (file.isNodeType(JCRLocalCloudDrive.NT_FOLDER)) {
       api.createFolder(file, created);
-      // traverse and create childs
+      // traverse and create child files
       boolean result = true;
       for (NodeIterator childs = file.getNodes(); childs.hasNext();) {
-        Node child = childs.nextNode();
-        // TODO do we really need name cleanup? The child already is in JCR.
-        // child = JCRLocalCloudDrive.cleanNode(child, api.getTitle(child));
-        result &= create(child, api);
+        result &= create(childs.nextNode(), api);
       }
       return result;
     } else {

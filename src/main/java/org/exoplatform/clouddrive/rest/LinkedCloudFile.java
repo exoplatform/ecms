@@ -57,8 +57,6 @@ public class LinkedCloudFile implements CloudFile {
 
   private final boolean            folder;
 
-  private final boolean            syncing;
-
   private final String             path;
 
   private final boolean            isSymlink;
@@ -79,7 +77,6 @@ public class LinkedCloudFile implements CloudFile {
     this.modifiedDate = file.getModifiedDate();
     this.path = path;
     this.isSymlink = true;
-    this.syncing = file.isSyncing();
   }
 
   /**
@@ -187,13 +184,5 @@ public class LinkedCloudFile implements CloudFile {
    */
   public String getPath() {
     return path;
-  }
-
-  /**
-   * {@inheritDoc}
-   */
-  @Override
-  public boolean isSyncing() {
-    return syncing;
   }
 }

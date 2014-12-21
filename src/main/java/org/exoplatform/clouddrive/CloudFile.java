@@ -75,7 +75,7 @@ public interface CloudFile {
    * @return {@link String}
    */
   String getType();
-  
+
   /**
    * Optional representation (UI) mode associated with the file type. Can be <code>null</code>.
    * 
@@ -123,10 +123,4 @@ public interface CloudFile {
    */
   String getPath();
 
-  /**
-   * Tell if this file currently synchronizing (e.g. uploading to a cloud).
-   * 
-   * @return <code>true</code> if file is synchronizing currently, <code>false</code> otherwise.
-   */
-  boolean isSyncing();
 }

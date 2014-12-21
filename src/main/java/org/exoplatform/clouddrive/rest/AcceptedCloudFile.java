@@ -142,10 +142,9 @@ public class AcceptedCloudFile implements CloudFile {
   }
 
   /**
-   * {@inheritDoc}
+   * Return <code>true</code> always.
    */
-  @Override
-  public boolean isSyncing() {
+  public boolean isCreating() {
     return true;
   }
 }

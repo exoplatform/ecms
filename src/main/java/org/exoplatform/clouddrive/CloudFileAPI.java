@@ -26,7 +26,7 @@ import javax.jcr.Node;
 import javax.jcr.RepositoryException;
 
 /**
- * An API to synchronize cloud files with its state on provider side.
+ * An API to synchronize cloud files with its state on provider side. This API is a part of Connector API.<br>
  * 
  * Created by The eXo Platform SAS.
  * 
@@ -45,7 +45,7 @@ public interface CloudFileAPI {
   Collection<String> findParents(Node fileNode) throws DriveRemovedException, RepositoryException;
 
   boolean isDrive(Node node) throws RepositoryException;
-  
+
   boolean isFolder(Node node) throws RepositoryException;
 
   boolean isFile(Node node) throws RepositoryException;
@@ -55,12 +55,22 @@ public interface CloudFileAPI {
   boolean isIgnored(Node node) throws RepositoryException;
 
   /**
-   * Mark given file as ignored by adding ecd:ignored mixin to it.
+   * Mark given file as ignored.
    * 
    * @param node {@link Node}
+   * @return boolean <code>true</code> if file was ignored, <code>false</code> if it is already ignored
    * @throws RepositoryException
    */
-  void ignoreFile(Node node) throws RepositoryException;
+  boolean ignore(Node node) throws RepositoryException;
+  
+  /**
+   * Remove ignorance mark on given file.
+   * 
+   * @param node {@link Node}
+   * @return boolean <code>true</code> if file unignored, <code>false</code> if file not ignored
+   * @throws RepositoryException
+   */
+  boolean unignore(Node node) throws RepositoryException;
 
   String createFile(Node fileNode, Calendar created, Calendar modified, String mimeType, InputStream content) throws CloudDriveException,
                                                                                                              RepositoryException;
@@ -92,4 +102,7 @@ public interface CloudFileAPI {
 
   boolean untrashFolder(Node fileNode) throws CloudDriveException, RepositoryException;
 
+  CloudFile restore(String id, String path) throws NotFoundException,
+                                           CloudDriveException,
+                                           RepositoryException;
 }

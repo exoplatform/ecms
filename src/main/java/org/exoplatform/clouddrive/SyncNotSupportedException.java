@@ -17,6 +17,10 @@
 package org.exoplatform.clouddrive;
 
 /**
+ * Synchronization not supported for current Cloud Drive resource. This means that the resource cannot be
+ * synchronized with remote cloud side what may introduce inconsistency and the caller code should attempt to
+ * solve it by special logic or raise an error to the user.<br>
+ * 
  * Created by The eXo Platform SAS
  * 
  * @author <a href="mailto:pnedonosko@exoplatform.com">Peter Nedonosko</a>

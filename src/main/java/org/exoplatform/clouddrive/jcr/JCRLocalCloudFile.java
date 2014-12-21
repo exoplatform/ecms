@@ -281,12 +281,4 @@ public class JCRLocalCloudFile implements CloudFile {
   public boolean isChanged() {
     return changed;
   }
-
-  /**
-   * {@inheritDoc}
-   */
-  @Override
-  public boolean isSyncing() {
-    return syncing;
-  }
 }
