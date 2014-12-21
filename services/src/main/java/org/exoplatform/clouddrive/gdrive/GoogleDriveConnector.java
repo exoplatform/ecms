@@ -221,7 +221,7 @@ public class GoogleDriveConnector extends CloudDriveConnector {
    */
   @Override
   protected CloudDrive loadDrive(Node driveNode) throws CloudDriveException, RepositoryException {
-    JCRLocalCloudDrive.checkTrashed(driveNode);
+    JCRLocalCloudDrive.checkNotTrashed(driveNode);
     JCRLocalCloudDrive.migrateName(driveNode);
     return new JCRLocalGoogleDrive(new API(),
                                    getProvider(),

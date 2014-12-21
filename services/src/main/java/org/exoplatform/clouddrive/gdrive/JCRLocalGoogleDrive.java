@@ -26,9 +26,11 @@ import com.google.api.services.drive.model.ParentReference;
 
 import org.exoplatform.clouddrive.CloudDriveAccessException;
 import org.exoplatform.clouddrive.CloudDriveException;
+import org.exoplatform.clouddrive.CloudFile;
 import org.exoplatform.clouddrive.CloudFileAPI;
 import org.exoplatform.clouddrive.CloudUser;
 import org.exoplatform.clouddrive.DriveRemovedException;
+import org.exoplatform.clouddrive.NotFoundException;
 import org.exoplatform.clouddrive.RefreshAccessException;
 import org.exoplatform.clouddrive.SyncNotSupportedException;
 import org.exoplatform.clouddrive.gdrive.GoogleDriveAPI.ChangesIterator;
@@ -787,6 +789,16 @@ public class JCRLocalGoogleDrive extends JCRLocalCloudDrive implements UserToken
     public boolean isTrashSupported() {
       return true;
     }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public CloudFile restore(String id, String path) throws NotFoundException,
+                                                    CloudDriveException,
+                                                    RepositoryException {
+      throw new SyncNotSupportedException("Restore not supported");
+    }
   }
 
   /**
@@ -868,15 +880,6 @@ public class JCRLocalGoogleDrive extends JCRLocalCloudDrive implements UserToken
   @Override
   public GoogleUser getUser() {
     return (GoogleUser) user;
-  }
-
-  /**
-   * {@inheritDoc}
-   */
-  @Override
-  public String getState() {
-    // no special state provided
-    return null;
   }
 
   /**
