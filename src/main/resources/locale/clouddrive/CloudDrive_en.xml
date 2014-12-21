@@ -22,6 +22,12 @@
       <OpenCloudFile>Open on</OpenCloudFile>
     </event>
     <event>
+      <SyncingFile>Synchronizing file...</SyncingFile>
+    </event>
+    <event>
+      <PushCloudFile>Push to</PushCloudFile>
+    </event>
+    <event>
       <RefreshCloudDrive>Sync with </RefreshCloudDrive>
     </event>
   </ECMContextMenu>

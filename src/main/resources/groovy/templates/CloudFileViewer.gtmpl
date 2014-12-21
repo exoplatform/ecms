@@ -24,8 +24,8 @@ import org.exoplatform.wcm.webui.reader.ContentReader
 //import groovy.text.*
 
 def rcontext = _ctx.getRequestContext()
-def uiParent = uicomponent.getParent()
-def currentNode = uiParent.getNode()
+def uiParent = uicomponent.parent
+def currentNode = uiParent.node
 
 // should be set in CloudFileFilter
 def drive = rcontext.getAttribute(CloudDrive.class)  
