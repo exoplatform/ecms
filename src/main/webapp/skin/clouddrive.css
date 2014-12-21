@@ -48,10 +48,33 @@
 }
 
 /**** menu ****/
+
 .cloudFileDisabled {
-	opacity : 0.7; 
+	opacity : 0.6; 
 	pointer-events : none;
 	cursor : not-allowed !important;
+}
+
+.notCloudFile {
+	opacity : 0.6; 
+	pointer-events : none;
+}
+
+.syncingIconView {
+	pointer-events : none;
+	position:relative;
+	left:32px;
+	top:-30px;
+	background: url('icons/oxygen/32/animations/throbber.gif') no-repeat left center !important; /* orientation=lt */
+	background: url('icons/oxygen/32/animations/throbber.gif') no-repeat right center !important; /* orientation=rt */
+}
+
+.syncingListView {
+	pointer-events : none;
+	position:relative;
+	left:24px;
+	background: url('icons/oxygen/16/animations/throbber.gif') no-repeat left center !important; /* orientation=lt */
+	background: url('icons/oxygen/16/animations/throbber.gif') no-repeat right center !important; /* orientation=rt */
 }
 
 /******** Pnotify icons ********/
