@@ -77,21 +77,25 @@ public class SyncingCloudFileFilter extends AbstractCloudDriveNodeFilter {
               return true;
             }
 
-            FilesState driveState = drive.getState();
-            return driveState != null ? driveState.isUpdating(path) : false;
+            // FilesState driveState = drive.getState();
+            // return driveState != null ? driveState.isUpdating(path) : false;
+            // XXX accept only "not yet cloud files", thus synchronizing first time only
+            return false;
           } catch (DriveRemovedException e) {
             // doesn't accept
           } catch (NotCloudFileException e) {
             // doesn't accept
           } catch (NotCloudDriveException e) {
             // doesn't accept
-          } catch (RefreshAccessException e) {
-            // doesn't accept
-            LOG.warn("Error filtering syncing cloud file: " + e.getMessage());
-          } catch (CloudProviderException e) {
-            // doesn't accept
-            LOG.warn("Error filtering syncing cloud file: " + e.getMessage(), e);
           }
+          // TODO cleanup
+          // catch (RefreshAccessException e) {
+          // // doesn't accept
+          // LOG.warn("Error filtering syncing cloud file: " + e.getMessage());
+          // } catch (CloudProviderException e) {
+          // // doesn't accept
+          // LOG.warn("Error filtering syncing cloud file: " + e.getMessage(), e);
+          // }
         }
       }
     }
