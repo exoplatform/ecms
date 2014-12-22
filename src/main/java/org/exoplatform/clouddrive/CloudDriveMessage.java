@@ -34,6 +34,8 @@ public class CloudDriveMessage {
   protected final String type;
 
   protected final String text;
+  
+  protected final int hashCode;
 
   /**
    * 
@@ -41,6 +43,11 @@ public class CloudDriveMessage {
   public CloudDriveMessage(Type type, String text) {
     this.type = type.name();
     this.text = text;
+    
+    int hc = 1;
+    hc = hc * 31 + type.hashCode();
+    hc = hc * 31 + text.hashCode();
+    this.hashCode = hc;
   }
 
   /**
@@ -57,4 +64,31 @@ public class CloudDriveMessage {
     return text;
   }
 
+  /**
+   * {@inheritDoc}
+   */
+  @Override
+  public int hashCode() {
+    return hashCode;
+  }
+
+  /**
+   * {@inheritDoc}
+   */
+  @Override
+  public boolean equals(Object obj) {
+    if (obj instanceof CloudDriveMessage) {
+      CloudDriveMessage other = (CloudDriveMessage) obj;
+      return type.equals(other.type) && text.equals(other.text);
+    }
+    return false;
+  }
+
+  /**
+   * {@inheritDoc}
+   */
+  @Override
+  public String toString() {
+    return type + ": " + text;
+  }
 }

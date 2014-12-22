@@ -157,6 +157,15 @@ public abstract class CloudDrive {
      * @return <code>true</code> if file is in process of update (synchronization)
      */
     boolean isUpdating(String fileIdOrPath);
+
+    /**
+     * Return <code>true</code> if file pointed by given ID or local drive path is newly added to the drive
+     * but not yet started updating (synchronization) with remote cloud.
+     * 
+     * @param fileIdOrPath {@link String} file ID or local path
+     * @return <code>true</code> if file is a new in the drive and will be updated soon (via synchronization)
+     */
+    boolean isNew(String fileIdOrPath);
   }
 
   /**
@@ -207,8 +216,7 @@ public abstract class CloudDrive {
         } catch (Throwable th) {
           // nothing should prevent at this point
           LOG.warn("Error firing onSynchronized listener on Cloud Drive '" + title() + "': "
-                       + th.getMessage(),
-                   th);
+              + th.getMessage(), th);
         }
       }
     }
@@ -235,8 +243,7 @@ public abstract class CloudDrive {
         } catch (Throwable th) {
           // nothing should prevent at this point
           LOG.warn("Error calling onNew action of listener on Cloud Drive '" + title() + "': "
-                       + th.getMessage(),
-                   th);
+              + th.getMessage(), th);
         }
       }
     }
@@ -251,8 +258,7 @@ public abstract class CloudDrive {
         } catch (Throwable th) {
           // nothing should prevent at this point
           LOG.warn("Error calling onDelete action of listener on Cloud Drive '" + title() + "': "
-                       + th.getMessage(),
-                   th);
+              + th.getMessage(), th);
         }
       }
     }
@@ -267,8 +273,7 @@ public abstract class CloudDrive {
         } catch (Throwable th) {
           // nothing should prevent at this point
           LOG.warn("Error calling onUpdate action of listener on Cloud Drive '" + title() + "': "
-                       + th.getMessage(),
-                   th);
+              + th.getMessage(), th);
         }
       }
     }
@@ -283,8 +288,7 @@ public abstract class CloudDrive {
         } catch (Throwable th) {
           // nothing should prevent at this point
           LOG.warn("Error calling onContent action of listener on Cloud Drive '" + title() + "': "
-                       + th.getMessage(),
-                   th);
+              + th.getMessage(), th);
         }
       }
     }
