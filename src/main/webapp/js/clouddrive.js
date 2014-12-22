@@ -682,7 +682,7 @@
 						if (status == 403 && response.id) {
 							updateProvider = response;
 						}
-						process.reject(response.message ? response.message : response, status);
+						process.reject(response, status);
 					});
 					sync.always(function() {
 						// cleanup
@@ -1676,20 +1676,22 @@
 					} else if (response.error === DRIVE_REMOVED) {
 						// do nothing
 					}
-				} else {
+				} else if (status != 0) {
 					var message;
-					if (response.message) {
-						message = response.message + " ";
+					if (response) { 
+						if (response.message) {
+							message = response.message + " ";
+						} else {
+							message = response + " ";
+						}
+					} else {
+						message = "";
 					}
 					if (status) {
 						message += "(" + status + ")";
 					}
-					if (message) {
-						cloudDriveUI.showError("Error Synchronizing Drive", message);
-					} else {
-						utils.log("Error Synchronizing Drive: server doesn't respond.");
-					}
-				}
+					cloudDriveUI.showError("Error Synchronizing Drive", message);
+				} // if status == 0 we go silently - it's server or network down
 			});
 		};
 
@@ -2055,3 +2057,4 @@
 	return cloudDrive;
 
 })($, cloudDriveUtils, cloudDriveTasks, uiRightClickPopupMenu, uiListView, uiSimpleView, uiFileView);
+

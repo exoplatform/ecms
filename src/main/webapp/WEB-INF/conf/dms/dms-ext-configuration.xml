@@ -224,7 +224,7 @@ xmlns="http://www.exoplatform.org/xml/ns/kernel_1_2.xsd">
               <string>org.exoplatform.clouddrive.ecms.SyncingFileManagerComponent</string>
             </field>
             <field name="category">
-              <string>ItemContextMenu</string>
+              <string>ItemContextMenu_SingleSelection</string>
             </field>
             <field name="rank">
               <int>1</int><!-- should be first in list of exts in UIExtensionManagerImpl -->
