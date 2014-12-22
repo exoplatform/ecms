@@ -443,8 +443,10 @@ public class UITreeExplorer extends UIContainer {
           uiExplorer.getDriveData().getName()  + "','" +
           uiTreeExplorer.getLabel()  + "','" +
           uiExplorer.getCurrentPath() + "','" +
-          Utils.getPersonalDrivePath(uiExplorer.getDriveData().getHomePath(),
-                                     ConversationState.getCurrent().getIdentity().getUserId()) + "');");
+        Utils.getPersonalDrivePath(uiExplorer.getDriveData().getHomePath(),
+                               ConversationState.getCurrent().getIdentity().getUserId()) + "');")
+      .require("SHARED/openDocumentInOffice", "openDocumentInOffice")
+      .addScripts("eXo.ecm.OpenDocumentInOffice.updateLabel('"+item.getPath()+"');");
     }
 
   }

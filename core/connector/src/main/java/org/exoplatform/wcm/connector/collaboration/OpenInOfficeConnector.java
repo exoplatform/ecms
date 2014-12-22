@@ -8,6 +8,7 @@ import org.exoplatform.services.rest.resource.ResourceContainer;
 import org.exoplatform.services.wcm.utils.WCMCoreUtils;
 import org.json.JSONObject;
 
+import javax.annotation.security.RolesAllowed;
 import javax.jcr.Node;
 import javax.jcr.Session;
 import javax.ws.rs.GET;
@@ -30,13 +31,15 @@ import java.util.ResourceBundle;
  * Dec 09, 2014
  * Provider all rest methods of Open Document feature.
  */
+
 @Path("/office/")
+@RolesAllowed("users")
 public class OpenInOfficeConnector implements ResourceContainer {
 
   private final String OPEN_DOCUMENT_ON_DESKTOP_ICO = "uiIcon16x16FileDefault";
-  private final String CONNECTOR_BUNDLE_LOCATION = "locale.open-document.OpenDocumentInOffice";
-  private final String OPEN_DOCUMENT_IN_DESKTOP_RESOURCE_KEY = "OpenDocumentInOffice.label.exo.remote-edit.desktop";
-  private final String OPEN_DOCUMENT_IN_DESKTOP_APP_RESOURCE_KEY="OpenDocumentInOffice.label.exo.remote-edit.desktop-app";
+  private final String CONNECTOR_BUNDLE_LOCATION = "locale.wcm.resources.WCMResourceBundleConnector";
+  private final String OPEN_DOCUMENT_IN_DESKTOP_RESOURCE_KEY = "OpenInOfficeConnector.label.exo.remote-edit.desktop";
+  private final String OPEN_DOCUMENT_IN_DESKTOP_APP_RESOURCE_KEY="OpenInOfficeConnector.label.exo.remote-edit.desktop-app";
   private final String OPEN_DOCUMENT_DEFAULT_TITLE="Open";
 
   private final int CACHED_TIME = 60*24*30*12;
@@ -58,7 +61,10 @@ public class OpenInOfficeConnector implements ResourceContainer {
           @QueryParam("lang") String language) throws Exception {
 
     //find from cached
-    String extension = objId.substring(objId.lastIndexOf(".") + 1, objId.length());
+    String[] nodeInfo = objId.split(":");
+    String workspace = nodeInfo[0];
+    String filePath = nodeInfo[1];
+    String extension = filePath.substring(filePath.lastIndexOf(".") + 1, filePath.length());
     EntityTag etag = new EntityTag(Integer.toString((extension+"_"+language).hashCode()));
     Response.ResponseBuilder builder = request.evaluatePreconditions(etag);
     if(builder!=null) return builder.build();
@@ -89,6 +95,9 @@ public class OpenInOfficeConnector implements ResourceContainer {
     JSONObject rs = new JSONObject();
     rs.put("ico", ico);
     rs.put("title", title);
+    rs.put("repository", WCMCoreUtils.getRepository().getConfiguration().getName());
+    rs.put("workspace", workspace);
+    rs.put("filePath", filePath);
 
     builder = Response.ok(rs.toString(), MediaType.APPLICATION_JSON);
     builder.tag(etag);

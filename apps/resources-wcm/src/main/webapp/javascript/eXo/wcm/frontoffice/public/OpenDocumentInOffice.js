@@ -14,18 +14,17 @@
   var OpenDocumentInOffice = function() {}
 
   OpenDocumentInOffice.prototype.openDocument = function(absolutePath, workspace, filePath){
-    console.log("default featurer on IE11, Window, MS Office 2010/2013 inprogres......");
-/*
- eXo.ecm.ECMWebDav.WebDAV.Client.DocManager.ShowMicrosoftOfficeWarning();
-    var documentManager = eXo.ecm.ECMWebDav.WebDAV.Client.DocManager;
-    var openStatus = false;
-    if (documentManager.IsMicrosoftOfficeAvailable() && documentManager.IsMicrosoftOfficeDocument(absolutePath)) {
-      if (!('ActiveXObject' in window)) absolutePath += '\0';
-      openStatus = documentManager.MicrosoftOfficeEditDocument(absolutePath);
-    } else {
-      openStatus = documentManager.JavaEditDocument(absolutePath, null, "/ecmexplorer/applet/ITHitMountOpenDocument.jar");
+    if(eXo.ecm.ECMWebDav !== undefined) {
+      eXo.ecm.ECMWebDav.WebDAV.Client.DocManager.ShowMicrosoftOfficeWarning();
+      var documentManager = eXo.ecm.ECMWebDav.WebDAV.Client.DocManager;
+      var openStatus = false;
+      if (documentManager.IsMicrosoftOfficeAvailable() && documentManager.IsMicrosoftOfficeDocument(absolutePath)) {
+        if (!('ActiveXObject' in window)) absolutePath += '\0';
+        openStatus = documentManager.MicrosoftOfficeEditDocument(absolutePath);
+      } else {
+        openStatus = documentManager.JavaEditDocument(absolutePath, null, "/open-document/applet/ITHitMountOpenDocument.jar");
+      }
     }
-*/
   }
 
   /*
@@ -53,7 +52,7 @@
    * rightClick update button when right click (context-menu)
    */
   OpenDocumentInOffice.prototype.updateLabel = function(objId, activityId, rightClick){
-
+    console.log("update from core");
     var currentDocumentObj = {};
     gj.ajax({
       url: "/portal/rest/office/updateDocumentTitle?objId=" + objId+"&lang="+eXo.env.portal.language,
@@ -71,6 +70,21 @@
           var openDocument = gj(isRightClick+" ."+elClass).parent();
           var html = "<i class=\"uiIcon16x16FileDefault uiIcon16x16nt_file "+data.ico+" "+elClass+"\"></i>\n"+data.title;
           openDocument.html(html);
+
+          if(eXo.ecm.ECMWebDav !== undefined) {
+            console.log("ITHIT detected!");
+            if(activityId != null && activityId != "undefined" && activityId != ""){ // update 4 activities
+              var _filePath = openDocument.attr("href");
+              openDocument.attr("href", "javascript:eXo.ecm.OpenDocumentInOffice.openDocument('"+_filePath+"')");
+            }
+
+          }else{
+            console.log("ITHIT not detected!");
+
+            openDocument.parent().removeAttr("onclick");
+            openDocument.attr("href", "/rest/lnkproducer/openit.lnk?path=/"+data.repository+"/"+data.workspace+data.filePath);
+          }
+
           gj(".detailContainer").find('.openDocument').html(data.title);
           currentDocumentObj = '{"title":"'+data.title+'", "ico": "'+data.ico+'"}';
         });
@@ -114,9 +128,54 @@
     return "";
   }
 
+
+  var bindASActionBar = function(){
+    gj("#UIActivitiesLoader .uiContentActivity").each(function(){
+
+      var activityId        = gj(this).attr("id").replace("activityContainer", "");
+      var activityActionBar = gj(this).find(".actionBar .pull-left");
+      var linkTitle         = gj(this).find(".linkTitle").html().trim();
+
+      //add OpenDocument button
+      var openDocumentButton = gj(activityActionBar).find(".uiIconEcmsOpenDocument");
+      if(openDocumentButton.length === 0){
+        var html  = "<i class=\"uiIconEcmsOpenDocument_"+activityId+"\" </i>\n Open...";
+        var documentLink = "#";
+        var workspace="";
+        var filePath="";
+        gj.ajax({
+          url: "/portal/rest/office/getActivity?activityId=" + activityId+"&lang="+eXo.env.portal.language,
+          dataType: "text",
+          type: "GET",
+          async: false
+        })
+            .success(function (data) {
+              data = gj.parseJSON(data);
+              documentLink = data.absolutePath;
+              workspace = data.workspace;
+              filePath = data.filePath;
+              // draw OpenXXX button
+              gj(activityActionBar).prepend("<li><a href=\"javascript:void(0);\" onclick=\"eXo.ecm.OpenDocumentInOffice.openDocument	('"+documentLink+"', '"+workspace+"', '"+filePath+"')\">"+html+"</a></li>");
+            });
+
+        eXo.ecm.OpenDocumentInOffice.updateLabel(linkTitle, activityId);
+      }
+
+      //remove last btn
+      // gj(activityActionBar).find(".uiIconEdit").parents().eq(1).remove();
+
+
+    });
+
+  }
+
+  gj(document).ready(function() {
+    bindASActionBar();
+  });
+
   eXo.ecm.OpenDocumentInOffice = new OpenDocumentInOffice();
   return {
     OpenDocumentInOffice : eXo.ecm.OpenDocumentInOffice
   };
 
-})(gj, ecmWebdav);
+})(gj);
