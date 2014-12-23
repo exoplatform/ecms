@@ -14,21 +14,21 @@
  * You should have received a copy of the GNU Affero General Public License
  * along with this program. If not, see <http://www.gnu.org/licenses/>.
  */
-package org.exoplatform.clouddrive.ecms;
+package org.exoplatform.clouddrive.ecms.viewer;
+
+import org.exoplatform.clouddrive.ecms.filters.CloudFileFilter;
+import org.exoplatform.services.log.ExoLogger;
+import org.exoplatform.services.log.Log;
+import org.exoplatform.wcm.webui.reader.ContentReader;
+import org.exoplatform.web.application.Parameter;
+import org.exoplatform.webui.config.annotation.ComponentConfig;
+import org.exoplatform.webui.ext.filter.UIExtensionFilter;
+import org.exoplatform.webui.ext.filter.UIExtensionFilters;
 
 import java.util.Arrays;
 import java.util.List;
 
-import org.exoplatform.clouddrive.ecms.filters.CloudFileFilter;
-import org.exoplatform.ecm.webui.component.explorer.UIJCRExplorer;
-import org.exoplatform.services.log.ExoLogger;
-import org.exoplatform.services.log.Log;
-import org.exoplatform.web.application.Parameter;
-import org.exoplatform.webui.application.WebuiRequestContext;
-import org.exoplatform.webui.config.annotation.ComponentConfig;
-import org.exoplatform.webui.core.UIComponent;
-import org.exoplatform.webui.ext.filter.UIExtensionFilter;
-import org.exoplatform.webui.ext.filter.UIExtensionFilters;
+import javax.ws.rs.core.MediaType;
 
 /**
  * Default WebUI component for Cloud Drive files. It shows content of remote file by its URL in iframe on file
@@ -39,12 +39,14 @@ import org.exoplatform.webui.ext.filter.UIExtensionFilters;
  * @author <a href="mailto:pnedonosko@exoplatform.com">Peter Nedonosko</a>
  * @version $Id: CloudFileViewerComponent.java 00000 Nov 1, 2012 pnedonosko $
  */
-@ComponentConfig(template = "classpath:groovy/templates/CloudFileViewer.gtmpl")
-public class CloudFileViewerComponent extends BaseCloudDriveManagerComponent {
+@ComponentConfig(template = "classpath:groovy/templates/DefaultCloudFileViewer.gtmpl")
+public class DefaultCloudFileViewer extends AbstractFileViewer {
 
-  protected static final Log                     LOG        = ExoLogger.getLogger(CloudFileViewerComponent.class);
+  protected static final Log                     LOG        = ExoLogger.getLogger(DefaultCloudFileViewer.class);
 
   public static final String                     EVENT_NAME = "ShowCloudFile";
+  
+  public static final long MAX_FILE_SIZE = 2 * 1024 * 1024; // 2M
 
   protected static final List<UIExtensionFilter> FILTERS    = Arrays.asList(new UIExtensionFilter[] { new CloudFileFilter() });
 
@@ -63,5 +65,18 @@ public class CloudFileViewerComponent extends BaseCloudDriveManagerComponent {
       return "javascript:void(0);//objectId";
     }
     return super.renderEventURL(ajax, name, beanId, params);
+  }
+  
+  /**
+   * {@inheritDoc}
+   */
+  @Override
+  public boolean isViewable() {
+    boolean res = super.isViewable();
+    if (res) {
+      // accept only text/*
+      return !file.getType().startsWith("text/");
+    }
+    return res;
   }
 }

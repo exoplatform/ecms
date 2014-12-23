@@ -21,28 +21,18 @@
 <%
 import org.exoplatform.clouddrive.CloudDrive
 import org.exoplatform.wcm.webui.reader.ContentReader
-//import groovy.text.*
 
 def rcontext = _ctx.getRequestContext()
-def uiParent = uicomponent.parent
-def currentNode = uiParent.node
 
 // should be set in CloudFileFilter
 def drive = rcontext.getAttribute(CloudDrive.class)  
 if (drive) {
-    def serviceName = drive.user.serviceName
-    def openOn = _ctx.appRes("CloudFileViewer.event.OpenOn")
+	def serviceName = drive.user.serviceName
+	def openOn = _ctx.appRes("CloudFileViewer.event.OpenOn")
 %>
 <div id="CloudFileViewer" file-open-on="${openOn} ${serviceName}" style="position: relative; padding-top: 0; padding-bottom: 100%; height: 100%; overflow: hidden;">
 	<%
-    // TODO deprecated Simple View
-  	// def fileName = ContentReader.getXSSCompatibilityContent(currentNode.property("exo:title"))
-		// def templateEngine = new SimpleTemplateEngine ()
-   	//def values = ['fileUrl' : "<a href='#' target='_blank'></a>",
-		//			'serviceName' : serviceName]
-		// def viewerMessage = templateEngine.createTemplate(_ctx.appRes('CloudFileViewer.event.OpenFileOn')).make(values)
-	  // % ><p style="display: none;">$viewerMessage</p>< %
-	
+	if(uicomponent.isViewable()) {
 	  // preview/edit view
   	def viewFile = _ctx.appRes("CloudFileViewer.event.ViewFile")
   	def editFile = _ctx.appRes("CloudFileViewer.event.EditFile")
@@ -54,7 +44,17 @@ if (drive) {
 			src="">
 		</iframe>
 	</div>
-</div>
+<%
+	} else {
+%><div class="center">
+<%=_ctx.appRes("File.view.label.not-viewable")%>
+	</div>
+<%
+  }
+} else {
+%>
+<p>Cannot load cloud file viewer. Refresh the page.</p>
 <%
 }
 %>
+</div>
