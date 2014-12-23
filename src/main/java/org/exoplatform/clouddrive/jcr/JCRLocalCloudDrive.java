@@ -1973,8 +1973,7 @@ public abstract class JCRLocalCloudDrive extends CloudDrive implements CloudDriv
                       } catch (PathNotFoundException e) {
                         LOG.warn("Copy source node not found: " + srcPath, e);
                       }
-                    }
-                    if (srcFile == null) {
+                    } else if (srcFile == null) {
                       // find any file with the same id, but different instance
                       for (NodeIterator niter = findNodes(Arrays.asList(fileId)); niter.hasNext();) {
                         Node f = niter.nextNode();
