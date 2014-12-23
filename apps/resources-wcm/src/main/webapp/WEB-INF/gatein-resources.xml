@@ -220,6 +220,9 @@
       <path>/javascript/eXo/wcm/backoffice/private/DocumentPreview.js</path>
     </script>
     <depends>
+      <module>bts_modal</module>
+    </depends>
+    <depends>
       <module>jquery</module>
       <as>gj</as>
     </depends>

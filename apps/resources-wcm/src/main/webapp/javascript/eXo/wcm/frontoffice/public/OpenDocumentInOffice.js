@@ -27,6 +27,10 @@
     }
   }
 
+  OpenDocumentInOffice.prototype.openLockedDocument = function(absolutePath, activityId){
+    gj("#model-"+activityId).modal();
+  }
+
   /*
    * Checkout a versioned document when open successfully with desktop application to edit.
    */
@@ -52,7 +56,6 @@
    * rightClick update button when right click (context-menu)
    */
   OpenDocumentInOffice.prototype.updateLabel = function(objId, activityId, rightClick){
-    console.log("update from core");
     var currentDocumentObj = {};
     gj.ajax({
       url: "/portal/rest/office/updateDocumentTitle?objId=" + objId+"&lang="+eXo.env.portal.language,
@@ -75,12 +78,21 @@
             console.log("ITHIT detected!");
             if(activityId != null && activityId != "undefined" && activityId != ""){ // update 4 activities
               var _filePath = openDocument.attr("href");
-              openDocument.attr("href", "javascript:eXo.ecm.OpenDocumentInOffice.openDocument('"+_filePath+"')");
-            }
+              var _lockStatus = openDocument.attr("status");
+              if(_lockStatus === "locked"){
 
+                openDocument.removeAttr("href");
+              }else{
+                openDocument.attr("href", "javascript:eXo.ecm.OpenDocumentInOffice.openDocument('"+_filePath+"')");
+              }
+            }
           }else{
             console.log("ITHIT not detected!");
-
+            defaultEnviromentFilter(openDocument);
+            if(activityId != null && activityId != "undefined" && activityId != ""){ // update 4 activities
+              var _filePath = openDocument.attr("href");
+              openDocument.attr("href", "javascript:eXo.ecm.OpenDocumentInOffice.openDocument('"+_filePath+"')");
+            }
             openDocument.parent().removeAttr("onclick");
             openDocument.attr("href", "/rest/lnkproducer/openit.lnk?path=/"+data.repository+"/"+data.workspace+data.filePath);
           }
@@ -91,6 +103,9 @@
 
     setCookie("_currentDocument", currentDocumentObj, 1);
   }
+
+
+
 
   /**
    * Close all popup
@@ -128,6 +143,43 @@
     return "";
   }
 
+  /**
+   *To filter OpenXXX button only working with IE, Window, MS Office
+   */
+  function defaultEnviromentFilter(element){
+    var ua = window.navigator.userAgent;
+
+    var OSName="Unknown OS";
+    if (navigator.appVersion.indexOf("Win")!=-1) OSName="Windows";
+    if (navigator.appVersion.indexOf("Mac")!=-1) OSName="MacOS";
+    if (navigator.appVersion.indexOf("X11")!=-1) OSName="UNIX";
+    if (navigator.appVersion.indexOf("Linux")!=-1) OSName="Linux";
+
+    var msie = ua.indexOf('MSIE ');
+    var trident = ua.indexOf('Trident/');
+
+    if (msie > 0) {
+      // IE 10 or older => return version number
+      console.log(parseInt(ua.substring(msie + 5, ua.indexOf('.', msie)), 10));
+    }
+
+    // IE 11 (or newer) => return version number
+    //check IE 11, Window, Office 2010
+    if (trident > 0 && OSName === "Windows") {
+      var word = new ActiveXObject("Word.Application");
+      var wordVersion = oApplication.Version >= "14.0";
+      console.log(wordVersion);
+      var rv = ua.indexOf('rv:');
+      console.log(parseInt(ua.substring(rv + 3, ua.indexOf('.', rv)), 10));
+    }else{
+      //other browser
+      console.log(gj(element).parent().html());
+      gj(element).parent().attr("style", "display:none;");
+    }
+
+    // other browser
+    return false;
+  }
 
   var bindASActionBar = function(){
     gj("#UIActivitiesLoader .uiContentActivity").each(function(){
@@ -170,7 +222,7 @@
   }
 
   gj(document).ready(function() {
-    bindASActionBar();
+    // bindASActionBar();
   });
 
   eXo.ecm.OpenDocumentInOffice = new OpenDocumentInOffice();

@@ -446,7 +446,7 @@ public class UITreeExplorer extends UIContainer {
         Utils.getPersonalDrivePath(uiExplorer.getDriveData().getHomePath(),
                                ConversationState.getCurrent().getIdentity().getUserId()) + "');")
       .require("SHARED/openDocumentInOffice", "openDocumentInOffice")
-      .addScripts("eXo.ecm.OpenDocumentInOffice.updateLabel('"+item.getPath()+"');");
+      .addScripts("eXo.ecm.OpenDocumentInOffice.updateLabel('"+workspaceName+":"+item.getPath()+"');");
     }
 
   }
