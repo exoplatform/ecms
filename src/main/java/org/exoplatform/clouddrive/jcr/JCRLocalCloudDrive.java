@@ -174,7 +174,7 @@ public abstract class JCRLocalCloudDrive extends CloudDrive implements CloudDriv
 
   public static final int        HISTORY_MAX_LENGTH    = 1000;                   // 1000 file modification
 
-  public static final String     DUMMY_DATA            = "";
+  public static final String     DUMMY_DATA            = "".intern();
 
   public static final String     USER_WORKSPACE        = "user.workspace";
 
