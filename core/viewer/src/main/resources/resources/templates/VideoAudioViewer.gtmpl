@@ -95,7 +95,7 @@
   	<div id="player-$timeCreated" class="PlayerContent" style="$style ; z-index:0;"></div>
   	<script type="text/javascript">
      var timemili = 0;
-     function insertFlv() {
+     function insertFlv$timeCreated() {
       // install flowplayer into container
     	flowplayer("player-$timeCreated", {wmode: 'transparent', src: "/eXoWCMResources/javascript/eXo/wcm/flowplayer/flowplayer-3.2.18.swf"}, {
       // fullscreen button not needed here
@@ -165,16 +165,16 @@
       });
      }
      
-    function timedCount() {
+    function timedCount$timeCreated() {
        timemili++;
        if (finFpl == false && timemili < 10) {
-         setTimeout("timedCount()", 100);
+         setTimeout("timedCount$timeCreated()", 100);
        } else {
-         insertFlv();
+         insertFlv$timeCreated();
        }
      }
-     
-     timedCount();
+
+     timedCount$timeCreated();
   </script>
  </div>
 <style>
@@ -211,7 +211,8 @@
 .PlayerContent{
 	display:block;
 	float:left;
-
+    height: 320px;
+    width: 475px;
 }
 
 div.clips.petrol a.playing {
