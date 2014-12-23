@@ -19,6 +19,7 @@
 */
 %>
 <%
+import org.exoplatform.ecm.webui.utils.Utils; 
 import org.exoplatform.clouddrive.CloudDrive
 import org.exoplatform.wcm.webui.reader.ContentReader
 
@@ -29,10 +30,12 @@ def drive = rcontext.getAttribute(CloudDrive.class)
 if (drive) {
 	def serviceName = drive.user.serviceName
 	def openOn = _ctx.appRes("CloudFileViewer.event.OpenOn")
+	def viewable = uicomponent.isViewable()
 %>
-<div id="CloudFileViewer" file-open-on="${openOn} ${serviceName}" style="position: relative; padding-top: 0; padding-bottom: 100%; height: 100%; overflow: hidden;">
+<div id="CloudFileViewer" file-open-on="${openOn} ${serviceName}" 
+		style="position: relative; padding-top: 0; padding-bottom: 0; height: <%=viewable ? "100%" : "200px"%>; overflow: hidden;">
 	<%
-	if(uicomponent.isViewable()) {
+	if(viewable) {
 	  // preview/edit view
   	def viewFile = _ctx.appRes("CloudFileViewer.event.ViewFile")
   	def editFile = _ctx.appRes("CloudFileViewer.event.EditFile")
@@ -47,7 +50,15 @@ if (drive) {
 <%
 	} else {
 %><div class="center">
-<%=_ctx.appRes("File.view.label.not-viewable")%>
+		<div class="uiUnEditable clearfix">
+			<div class="iconContainer">
+			  <i class="<%=Utils.getNodeTypeIcon(uicomponent.getParent().node, "uiIcon64x64")%>"></i>
+			</div>
+			<div class="detailContainer">
+			  <h4><%=_ctx.appRes("File.view.label.not-viewable")%></h4>
+			  <a class="btn btn-primary" href="$uicomponent.file.link"><%=_ctx.appRes("File.view.label.download")%></a>
+		  </div>
+		</div>
 	</div>
 <%
   }
