@@ -36,6 +36,7 @@ import java.util.Collection;
 import java.util.Collections;
 import java.util.HashMap;
 import java.util.HashSet;
+import java.util.LinkedHashMap;
 import java.util.LinkedHashSet;
 import java.util.Map;
 import java.util.Set;
@@ -104,7 +105,7 @@ public class CloudDriveServiceImpl implements CloudDriveService, Startable {
   /**
    * Registered CloudDrive connectors.
    */
-  protected final Map<CloudProvider, CloudDriveConnector>    connectors        = new HashMap<CloudProvider, CloudDriveConnector>();
+  protected final Map<CloudProvider, CloudDriveConnector>    connectors        = new LinkedHashMap<CloudProvider, CloudDriveConnector>();
 
   /**
    * In-memory multiton for drives created per repository and per user. Only connected drives here.
