@@ -1599,7 +1599,11 @@
 					update();
 					refresh();
 					driveMessage(state.drive);
-				}, 4000);
+					setTimeout(function() {
+						// start sync automatically but a bit later
+						cloudDrive.synchronize();
+					}, 10000);		
+				}, 3000);
 			});
 
 			process.always(function() {
