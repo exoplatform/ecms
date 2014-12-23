@@ -75,10 +75,13 @@
             $embed.css('height', '100%');
 
             var $img = gj('a > img', $uiContentBox);
-            $img.css('max-width', $uiContentBox.width() - 2);
-            $img.css('max-height', $uiContentBox.height() - 3);
-            $img.css('width', 'auto');
-            $img.css('height', 'auto');
+            if ($img.length > 0) {
+                $img.css('max-width', $uiContentBox.width() - 2);
+                $img.css('max-height', $uiContentBox.height() - 3);
+                $img.css('width', 'auto');
+                $img.css('height', 'auto');
+                $navigationContainer.css('overflow','hidden');
+            }
 
             gj('.uiPreviewWebContent', $uiDocumentPreview).height(pdfDisplayAreaHeight - 30) // webcontent
         }
@@ -114,6 +117,8 @@
             }
             $uiIconMiniArrow.toggleClass('uiIconMiniArrowLeft');
             $uiIconMiniArrow.toggleClass('uiIconMiniArrowRight');
+            resizeEventHandler();
+
         });
     };
 
