@@ -28,7 +28,13 @@
   }
 
   OpenDocumentInOffice.prototype.openLockedDocument = function(absolutePath, activityId){
+    gj("#activityContainer"+activityId).append("<div class=\"modal-backdrop fade in\"></div>");
     gj("#model-"+activityId).modal();
+    gj("body > .fade.in").remove();
+    gj("#model-"+activityId).on("hide", function(){
+      gj("#activityContainer"+activityId+" .modal-backdrop").remove();
+    });
+
   }
 
   /*
@@ -80,8 +86,8 @@
               var _filePath = openDocument.attr("href");
               var _lockStatus = openDocument.attr("status");
               if(_lockStatus === "locked"){
-
-                openDocument.removeAttr("href");
+                $('#modal-'+activityId).modal({show: false});
+                openDocument.attr("href", "javascript:void(0);");
               }else{
                 openDocument.attr("href", "javascript:eXo.ecm.OpenDocumentInOffice.openDocument('"+_filePath+"')");
               }
@@ -91,10 +97,16 @@
             defaultEnviromentFilter(openDocument);
             if(activityId != null && activityId != "undefined" && activityId != ""){ // update 4 activities
               var _filePath = openDocument.attr("href");
-              openDocument.attr("href", "javascript:eXo.ecm.OpenDocumentInOffice.openDocument('"+_filePath+"')");
+              var _lockStatus = openDocument.attr("status");
+              if(_lockStatus === "locked"){
+
+              }else{
+                openDocument.attr("href", "javascript:eXo.ecm.OpenDocumentInOffice.openDocument('"+_filePath+"')");
+              }
+            }else{
+              openDocument.parent().removeAttr("onclick");
+              openDocument.attr("href", "/rest/lnkproducer/openit.lnk?path=/"+data.repository+"/"+data.workspace+data.filePath);
             }
-            openDocument.parent().removeAttr("onclick");
-            openDocument.attr("href", "/rest/lnkproducer/openit.lnk?path=/"+data.repository+"/"+data.workspace+data.filePath);
           }
 
           gj(".detailContainer").find('.openDocument').html(data.title);
@@ -167,7 +179,7 @@
     //check IE 11, Window, Office 2010
     if (trident > 0 && OSName === "Windows") {
       var word = new ActiveXObject("Word.Application");
-      var wordVersion = oApplication.Version >= "14.0";
+      var wordVersion = word.Version >= "14.0";
       console.log(wordVersion);
       var rv = ua.indexOf('rv:');
       console.log(parseInt(ua.substring(rv + 3, ua.indexOf('.', rv)), 10));
