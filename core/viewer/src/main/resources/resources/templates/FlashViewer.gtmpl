@@ -54,6 +54,10 @@
   
   if(StringUtils.isEmpty(width)) width = "640";
   if(StringUtils.isEmpty(height)) height = "400";
+  if (uicomponent.getAncestorOfType(org.exoplatform.social.webui.activity.BaseUIActivity.class) != null) {
+    width = "330";
+    height = "200";
+  }
 
 %>
 
