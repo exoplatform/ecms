@@ -317,12 +317,16 @@ public class DocumentTypeServiceImpl implements DocumentTypeService, Startable {
 
   @Override
   public DocumentType getDocumentType(String mimeType) {
+    DocumentType documentTypeResult=null;
     for(DocumentType documentType: params_.getObjectParamValues(DocumentType.class)){
       if(documentType.getMimeTypes().contains(mimeType)){
-        return documentType;
+        documentTypeResult = documentType;
       }
     }
-    return new DocumentType(Arrays.asList(new String[] {mimeType}), OPEN_DOCUMENT_IN_DESKTOP_RESOURCE_KEY, OPEN_DOCUMENT_ON_DESKTOP_ICO);
+    if(documentTypeResult==null)
+      documentTypeResult= new DocumentType(Arrays.asList(new String[] {mimeType}),
+              OPEN_DOCUMENT_IN_DESKTOP_RESOURCE_KEY, OPEN_DOCUMENT_ON_DESKTOP_ICO);
+    return documentTypeResult;
   }
 
   @Override
