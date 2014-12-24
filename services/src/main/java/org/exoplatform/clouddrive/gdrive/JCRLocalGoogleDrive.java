@@ -26,9 +26,11 @@ import com.google.api.services.drive.model.ParentReference;
 
 import org.exoplatform.clouddrive.CloudDriveAccessException;
 import org.exoplatform.clouddrive.CloudDriveException;
+import org.exoplatform.clouddrive.CloudFile;
 import org.exoplatform.clouddrive.CloudFileAPI;
 import org.exoplatform.clouddrive.CloudUser;
 import org.exoplatform.clouddrive.DriveRemovedException;
+import org.exoplatform.clouddrive.NotFoundException;
 import org.exoplatform.clouddrive.RefreshAccessException;
 import org.exoplatform.clouddrive.SyncNotSupportedException;
 import org.exoplatform.clouddrive.gdrive.GoogleDriveAPI.ChangesIterator;
@@ -39,6 +41,7 @@ import org.exoplatform.clouddrive.jcr.JCRLocalCloudFile;
 import org.exoplatform.clouddrive.jcr.NodeFinder;
 import org.exoplatform.clouddrive.oauth2.UserToken;
 import org.exoplatform.clouddrive.oauth2.UserTokenRefreshListener;
+import org.exoplatform.clouddrive.utils.ExtendedMimeTypeResolver;
 import org.exoplatform.services.jcr.ext.app.SessionProviderService;
 
 import java.io.IOException;
@@ -140,7 +143,7 @@ public class JCRLocalGoogleDrive extends JCRLocalCloudDrive implements UserToken
             // go recursive
             fetchChilds(gf.getId(), localNode);
           } else {
-            localNode = openFile(gf.getId(), gf.getTitle(), gf.getMimeType(), parent);
+            localNode = openFile(gf.getId(), gf.getTitle(), parent);
             initFile(localNode,
                      gf.getId(),
                      gf.getTitle(),
@@ -158,10 +161,11 @@ public class JCRLocalGoogleDrive extends JCRLocalCloudDrive implements UserToken
                                             gf.getId(),
                                             gf.getTitle(),
                                             gf.getAlternateLink(),
-                                            editLink(gf.getAlternateLink()),
+                                            gf.getAlternateLink(), // editLink
                                             gf.getEmbedLink(),
                                             gf.getThumbnailLink(),
                                             gf.getMimeType(),
+                                            null, // typeMode not required for GoogleDrive
                                             gf.getLastModifyingUserName(),
                                             gf.getOwnerNames().get(0),
                                             created,
@@ -384,7 +388,7 @@ public class JCRLocalGoogleDrive extends JCRLocalCloudDrive implements UserToken
                 localNode = copyNode(localNodeCopy, fp);
               }
             } else {
-              localNode = openFile(gf.getId(), gf.getTitle(), gf.getMimeType(), fp);
+              localNode = openFile(gf.getId(), gf.getTitle(), fp);
             }
 
             // add created Node to list of existing
@@ -427,10 +431,11 @@ public class JCRLocalGoogleDrive extends JCRLocalCloudDrive implements UserToken
                                             gf.getId(),
                                             gf.getTitle(),
                                             gf.getAlternateLink(),
-                                            editLink(gf.getAlternateLink()),
+                                            gf.getAlternateLink(), // editLink
                                             gf.getEmbedLink(),
                                             gf.getThumbnailLink(),
                                             gf.getMimeType(),
+                                            null, // typeMode not required for GoogleDrive
                                             gf.getLastModifyingUserName(),
                                             gf.getOwnerNames().get(0),
                                             created,
@@ -784,6 +789,16 @@ public class JCRLocalGoogleDrive extends JCRLocalCloudDrive implements UserToken
     public boolean isTrashSupported() {
       return true;
     }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public CloudFile restore(String id, String path) throws NotFoundException,
+                                                    CloudDriveException,
+                                                    RepositoryException {
+      throw new SyncNotSupportedException("Restore not supported");
+    }
   }
 
   /**
@@ -798,8 +813,10 @@ public class JCRLocalGoogleDrive extends JCRLocalCloudDrive implements UserToken
   protected JCRLocalGoogleDrive(GoogleUser user,
                                 Node driveNode,
                                 SessionProviderService sessionProviders,
-                                NodeFinder finder) throws CloudDriveException, RepositoryException {
-    super(user, driveNode, sessionProviders, finder);
+                                NodeFinder finder,
+                                ExtendedMimeTypeResolver mimeTypes) throws CloudDriveException,
+      RepositoryException {
+    super(user, driveNode, sessionProviders, finder, mimeTypes);
     getUser().api().getToken().addListener(this);
   }
 
@@ -818,10 +835,11 @@ public class JCRLocalGoogleDrive extends JCRLocalCloudDrive implements UserToken
                                 GoogleProvider provider,
                                 Node driveNode,
                                 SessionProviderService sessionProviders,
-                                NodeFinder finder) throws RepositoryException,
+                                NodeFinder finder,
+                                ExtendedMimeTypeResolver mimeTypes) throws RepositoryException,
       GoogleDriveException,
       CloudDriveException {
-    super(loadUser(apiBuilder, provider, driveNode), driveNode, sessionProviders, finder);
+    super(loadUser(apiBuilder, provider, driveNode), driveNode, sessionProviders, finder, mimeTypes);
     getUser().api().getToken().addListener(this);
   }
 
@@ -862,15 +880,6 @@ public class JCRLocalGoogleDrive extends JCRLocalCloudDrive implements UserToken
   @Override
   public GoogleUser getUser() {
     return (GoogleUser) user;
-  }
-
-  /**
-   * {@inheritDoc}
-   */
-  @Override
-  public String getState() {
-    // no special state provided
-    return null;
   }
 
   /**
