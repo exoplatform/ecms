@@ -18,8 +18,8 @@
 package org.exoplatform.clouddrive;
 
 /**
- * Indicates that some file (usually designated by path) does not belong to a Cloud Drive or cannot be treated
- * as such.
+ * Indicates that some file (usually designated by path) lies in folder of but does not belong to a Cloud
+ * Drive or cannot be treated as such.
  * 
  * <br>
  * Created by The eXo Platform SAS.

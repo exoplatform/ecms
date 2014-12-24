@@ -44,18 +44,21 @@ public interface CloudDriveService {
                                                                  CloudDriveException;
 
   /**
-   * Create or open a local binding to Cloud Drive.
+   * Create or open a local binding to Cloud Drive. 
    * 
    * @see CloudDrive#connect()
    * @param user {@link CloudUser}
    * @param driveNode {@link Node}, existing node
    * @return instance of {@link CloudDrive}
    * @throws UserAlreadyConnectedException if user already connected to another node
+   * @throws CannotConnectDriveException if node cannot be connected due to incompatible existing content in
+   *           it
    * @throws ProviderNotAvailableException
    * @throws CloudDriveException
    * @throws RepositoryException
    */
   CloudDrive createDrive(CloudUser user, Node driveNode) throws UserAlreadyConnectedException,
+                                                        CannotConnectDriveException,
                                                         ProviderNotAvailableException,
                                                         CloudDriveException,
                                                         RepositoryException;
@@ -71,7 +74,18 @@ public interface CloudDriveService {
    * @throws RepositoryException if storage exception happened
    */
   CloudDrive findDrive(Node node) throws RepositoryException;
-  
+
+  /**
+   * Find {@link CloudDrive} instance connected to {@link Node} pointed by given workspace and path. If drive
+   * not found, if it exists but not connected to this node, or connected under another user - the
+   * {@code null} will be returned. The {@code null} also will be returned if no {@link ConversationState} set
+   * in caller thread.
+   * 
+   * @param workspace {@link String} node workspace
+   * @param path {@link String} node path
+   * @return {@link CloudDrive} or {@code null} if node at given path not found or isn't connected to cloud user.
+   * @throws RepositoryException if storage exception happened
+   */
   CloudDrive findDrive(String workspace, String path) throws RepositoryException;
 
   /**

@@ -17,6 +17,7 @@
 package org.exoplatform.clouddrive.rest;
 
 import org.exoplatform.clouddrive.BaseCloudDriveListener;
+import org.exoplatform.clouddrive.CannotConnectDriveException;
 import org.exoplatform.clouddrive.CloudDrive;
 import org.exoplatform.clouddrive.CloudDrive.Command;
 import org.exoplatform.clouddrive.CloudDriveEvent;
@@ -42,6 +43,9 @@ import java.util.Map;
 import java.util.Random;
 import java.util.UUID;
 import java.util.concurrent.ConcurrentHashMap;
+import java.util.concurrent.Executors;
+import java.util.concurrent.ScheduledExecutorService;
+import java.util.concurrent.TimeUnit;
 import java.util.concurrent.locks.Lock;
 import java.util.concurrent.locks.ReentrantLock;
 
@@ -102,17 +106,12 @@ public class ConnectService implements ResourceContainer {
   /**
    * Connect cookie expire time in seconds.
    */
-  public static final int       CONNECT_COOKIE_EXPIRE  = 60;                                       // 1min
+  public static final int       CONNECT_COOKIE_EXPIRE  = 90;                                       // 1.5min
 
   /**
    * Error cookie expire time in seconds.
    */
   public static final int       ERROR_COOKIE_EXPIRE    = 5;                                        // 5sec
-
-  /**
-   * Connect request expire time in milliseconds.
-   */
-  public static final int       CONNECT_REQUEST_EXPIRE = CONNECT_COOKIE_EXPIRE * 1000;
 
   /**
    * Connect process expire time in milliseconds.
@@ -300,6 +299,38 @@ public class ConnectService implements ResourceContainer {
     }
   }
 
+  protected class Cleaner implements Runnable {
+    @Override
+    public void run() {
+      final long now = System.currentTimeMillis();
+
+      for (Iterator<Map.Entry<UUID, Long>> titer = timeline.entrySet().iterator(); titer.hasNext()
+          && !Thread.currentThread().isInterrupted();) {
+        Map.Entry<UUID, Long> t = titer.next();
+        if (now >= t.getValue()) {
+          authenticated.remove(t.getKey());
+          initiated.remove(t.getKey());
+          titer.remove();
+        }
+      }
+
+      for (Iterator<Map.Entry<String, ConnectProcess>> cpiter = active.entrySet().iterator(); cpiter.hasNext()
+          && !Thread.currentThread().isInterrupted();) {
+        ConnectProcess cp = cpiter.next().getValue();
+        if (cp != null) {
+          long expireTime = cp.process.getStartTime() + CONNECT_PROCESS_EXPIRE;
+          if (now >= expireTime) {
+            cpiter.remove();
+          }
+        }
+      }
+
+      if (Thread.currentThread().isInterrupted()) {
+        LOG.warn("Connections cleaner was interrupted");
+      }
+    }
+  }
+
   protected final CloudDriveService           cloudDrives;
 
   protected final DriveServiceLocator         locator;
@@ -321,7 +352,7 @@ public class ConnectService implements ResourceContainer {
    */
   protected final Map<String, ConnectProcess> active        = new ConcurrentHashMap<String, ConnectProcess>();
 
-  protected final Thread                      connectsCleaner;
+  protected final ScheduledExecutorService    connectsCleaner;
 
   /**
    * REST cloudDrives uses {@link CloudDriveService} for actual job.
@@ -339,41 +370,8 @@ public class ConnectService implements ResourceContainer {
     this.sessionProviders = sessionProviders;
     this.finder = finder;
 
-    this.connectsCleaner = new Thread("Cloud Drive connections cleaner") {
-      @Override
-      public void run() {
-        while (!Thread.currentThread().isInterrupted()) {
-          final long now = System.currentTimeMillis();
-
-          for (Iterator<Map.Entry<UUID, Long>> titer = timeline.entrySet().iterator(); titer.hasNext();) {
-            Map.Entry<UUID, Long> t = titer.next();
-            if (now >= t.getValue()) {
-              authenticated.remove(t.getKey());
-              initiated.remove(t.getKey());
-              titer.remove();
-            }
-          }
-
-          for (Iterator<Map.Entry<String, ConnectProcess>> cpiter = active.entrySet().iterator(); cpiter.hasNext();) {
-            ConnectProcess cp = cpiter.next().getValue();
-            if (cp != null) {
-              long expireTime = cp.process.getStartTime() + CONNECT_PROCESS_EXPIRE;
-              if (now >= expireTime) {
-                cpiter.remove();
-              }
-            }
-          }
-
-          try {
-            Thread.sleep(CONNECT_REQUEST_EXPIRE);
-          } catch (InterruptedException e) {
-            LOG.warn(getName() + " interrupted.", e);
-            Thread.currentThread().interrupt();
-          }
-        }
-      }
-    };
-    connectsCleaner.start();
+    this.connectsCleaner = Executors.newScheduledThreadPool(1);
+    this.connectsCleaner.schedule(new Cleaner(), CONNECT_COOKIE_EXPIRE, TimeUnit.SECONDS);
   }
 
   /**
@@ -491,9 +489,15 @@ public class ConnectService implements ResourceContainer {
                       active.put(processId, connect);
                       resp.status(connect.process.isDone() ? Status.CREATED : Status.ACCEPTED);
                       resp.progress(connect.process.getProgress());
-                      DriveInfo drive = DriveInfo.create(workspace, local, connect.process.getFiles());
+                      DriveInfo drive = DriveInfo.create(workspace,
+                                                         local,
+                                                         connect.process.getFiles(),
+                                                         connect.process.getMessages());
                       resp.drive(drive);
                     }
+                  } catch (CannotConnectDriveException e) {
+                    LOG.warn(e.getMessage(), e);
+                    resp.connectError(e.getMessage(), cid.toString(), host).status(Status.CONFLICT);
                   } catch (UserAlreadyConnectedException e) {
                     LOG.warn(e.getMessage(), e);
                     resp.connectError(e.getMessage(), cid.toString(), host).status(Status.CONFLICT);
@@ -609,7 +613,10 @@ public class ConnectService implements ResourceContainer {
             // OK:connected or accepted (in progress)
             // don't send files each time but on done only
             if (connect.process.isDone()) {
-              DriveInfo drive = DriveInfo.create(workspace, connect.drive, connect.process.getFiles());
+              DriveInfo drive = DriveInfo.create(workspace,
+                                                 connect.drive,
+                                                 connect.process.getFiles(),
+                                                 connect.process.getMessages());
               resp.drive(drive);
               resp.status(Status.CREATED);
             } else {

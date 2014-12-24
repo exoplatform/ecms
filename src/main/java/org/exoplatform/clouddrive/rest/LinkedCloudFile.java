@@ -45,7 +45,7 @@ public class LinkedCloudFile implements CloudFile {
 
   private final String             thumbnailLink;
 
-  private final String             type;
+  private final String             type, typeMode;
 
   private final String             lastUser;
 
@@ -56,8 +56,6 @@ public class LinkedCloudFile implements CloudFile {
   private final transient Calendar modifiedDate;
 
   private final boolean            folder;
-
-  private final boolean            syncing;
 
   private final String             path;
 
@@ -71,6 +69,7 @@ public class LinkedCloudFile implements CloudFile {
     this.editLink = file.getEditLink();
     this.thumbnailLink = file.getThumbnailLink();
     this.type = file.getType();
+    this.typeMode = file.getTypeMode();
     this.lastUser = file.getLastUser();
     this.author = file.getAuthor();
     this.folder = file.isFolder();
@@ -78,7 +77,6 @@ public class LinkedCloudFile implements CloudFile {
     this.modifiedDate = file.getModifiedDate();
     this.path = path;
     this.isSymlink = true;
-    this.syncing = file.isSyncing();
   }
 
   /**
@@ -139,6 +137,14 @@ public class LinkedCloudFile implements CloudFile {
   }
 
   /**
+   * {@inheritDoc}
+   */
+  @Override
+  public String getTypeMode() {
+    return typeMode;
+  }
+
+  /**
    * @return the lastUser
    */
   public String getLastUser() {
@@ -178,13 +184,5 @@ public class LinkedCloudFile implements CloudFile {
    */
   public String getPath() {
     return path;
-  }
-
-  /**
-   * {@inheritDoc}
-   */
-  @Override
-  public boolean isSyncing() {
-    return syncing;
   }
 }

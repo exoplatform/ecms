@@ -19,6 +19,7 @@ package org.exoplatform.clouddrive.rest;
 
 import org.exoplatform.clouddrive.CloudDrive;
 import org.exoplatform.clouddrive.CloudDriveException;
+import org.exoplatform.clouddrive.CloudDriveMessage;
 import org.exoplatform.clouddrive.CloudFile;
 
 import java.util.ArrayList;
@@ -38,21 +39,23 @@ import javax.jcr.RepositoryException;
  */
 public class DriveInfo {
 
-  final ProviderInfo           provider;
+  final ProviderInfo                  provider;
 
-  final Map<String, CloudFile> files;
+  final Map<String, CloudFile>        files;
 
-  final Collection<String>     removed;
+  final Collection<String>            removed;
 
-  final String                 workspace;
+  final Collection<CloudDriveMessage> messages;
 
-  final String                 path;
+  final String                        workspace;
 
-  final String                 title;
+  final String                        path;
 
-  final Object                 state;
+  final String                        title;
 
-  final boolean                connected;
+  final Object                        state;
+
+  final boolean                       connected;
 
   DriveInfo(String title,
             String workspace,
@@ -61,7 +64,8 @@ public class DriveInfo {
             boolean connected,
             ProviderInfo provider,
             Map<String, CloudFile> files,
-            Collection<String> removed) {
+            Collection<String> removed,
+            Collection<CloudDriveMessage> messages) {
     this.title = title;
     this.workspace = workspace;
     this.path = path;
@@ -69,13 +73,16 @@ public class DriveInfo {
     this.connected = connected;
     this.provider = provider;
     this.files = files;
+    this.messages = messages;
     this.removed = removed;
   }
 
   static DriveInfo create(String workspaces,
                           CloudDrive drive,
                           Collection<CloudFile> files,
-                          Collection<String> removed) throws RepositoryException, CloudDriveException {
+                          Collection<String> removed,
+                          Collection<CloudDriveMessage> messages) throws RepositoryException,
+                                                                 CloudDriveException {
     Map<String, CloudFile> driveFiles = new HashMap<String, CloudFile>();
     for (CloudFile cf : files) {
       driveFiles.put(cf.getPath(), cf);
@@ -87,17 +94,25 @@ public class DriveInfo {
                          drive.isConnected(),
                          new ProviderInfo(drive.getUser()),
                          driveFiles,
-                         removed);
+                         removed,
+                         messages);
   }
 
-  static DriveInfo create(String workspaces, CloudDrive drive, Collection<CloudFile> files) throws RepositoryException,
-                                                                                           CloudDriveException {
-    return create(workspaces, drive, files, new HashSet<String>());
+  static DriveInfo create(String workspaces,
+                          CloudDrive drive,
+                          Collection<CloudFile> files,
+                          Collection<CloudDriveMessage> messages) throws RepositoryException,
+                                                                 CloudDriveException {
+    return create(workspaces, drive, files, new HashSet<String>(), messages);
   }
 
   static DriveInfo create(String workspaces, CloudDrive drive) throws RepositoryException,
                                                               CloudDriveException {
-    return create(workspaces, drive, new ArrayList<CloudFile>(), new HashSet<String>());
+    return create(workspaces,
+                  drive,
+                  new ArrayList<CloudFile>(),
+                  new HashSet<String>(),
+                  new ArrayList<CloudDriveMessage>());
   }
 
   public ProviderInfo getProvider() {
@@ -110,6 +125,10 @@ public class DriveInfo {
 
   public Collection<String> getRemoved() {
     return removed;
+  }
+
+  public Collection<CloudDriveMessage> getMessages() {
+    return messages;
   }
 
   public String getPath() {

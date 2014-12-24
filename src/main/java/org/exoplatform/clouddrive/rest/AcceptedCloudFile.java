@@ -69,7 +69,7 @@ public class AcceptedCloudFile implements CloudFile {
   public String getPreviewLink() {
     return null;
   }
-  
+
   /**
    * @return the editLink
    */
@@ -88,6 +88,14 @@ public class AcceptedCloudFile implements CloudFile {
    * @return the type
    */
   public String getType() {
+    return null;
+  }
+
+  /**
+   * {@inheritDoc}
+   */
+  @Override
+  public String getTypeMode() {
     return null;
   }
 
@@ -134,10 +142,9 @@ public class AcceptedCloudFile implements CloudFile {
   }
 
   /**
-   * {@inheritDoc}
+   * Return <code>true</code> always.
    */
-  @Override
-  public boolean isSyncing() {
+  public boolean isCreating() {
     return true;
   }
 }

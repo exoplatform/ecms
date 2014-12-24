@@ -36,6 +36,7 @@ import java.util.Collection;
 import java.util.Collections;
 import java.util.HashMap;
 import java.util.HashSet;
+import java.util.LinkedHashMap;
 import java.util.LinkedHashSet;
 import java.util.Map;
 import java.util.Set;
@@ -66,8 +67,7 @@ public class CloudDriveServiceImpl implements CloudDriveService, Startable {
     void cleanUserCaches(CloudUser user) {
       Map<CloudUser, CloudDrive> drives = userDrives.get(user);
       if (drives != null) {
-        CloudDrive cleaned = drives.remove(user);
-        repositoryDrives.values().remove(cleaned);
+        drives.remove(user);
       }
     }
 
@@ -105,7 +105,7 @@ public class CloudDriveServiceImpl implements CloudDriveService, Startable {
   /**
    * Registered CloudDrive connectors.
    */
-  protected final Map<CloudProvider, CloudDriveConnector>    connectors        = new HashMap<CloudProvider, CloudDriveConnector>();
+  protected final Map<CloudProvider, CloudDriveConnector>    connectors        = new LinkedHashMap<CloudProvider, CloudDriveConnector>();
 
   /**
    * In-memory multiton for drives created per repository and per user. Only connected drives here.
@@ -220,7 +220,7 @@ public class CloudDriveServiceImpl implements CloudDriveService, Startable {
       if (drives != null) {
         for (CloudDrive local : drives.values()) {
           try {
-            if (local.isDrive(node, true)) {
+            if (local.isInDrive(node)) {
               return local; // we found it
             }
           } catch (AccessDeniedException e) {
@@ -289,7 +289,7 @@ public class CloudDriveServiceImpl implements CloudDriveService, Startable {
     if (drives != null) {
       CloudDrive local = drives.get(user);
       if (local != null) {
-        // we have cached drive
+        // we have connected drive
         String localPath;
         try {
           localPath = local.getPath();
@@ -377,7 +377,7 @@ public class CloudDriveServiceImpl implements CloudDriveService, Startable {
   }
 
   // *********************** implementation level ***************
-  
+
   /**
    * List of available connectors.
    * 
@@ -386,7 +386,7 @@ public class CloudDriveServiceImpl implements CloudDriveService, Startable {
   public Collection<CloudDriveConnector> getConnectors() {
     return Collections.unmodifiableCollection(connectors.values());
   }
-  
+
   // *********************** internal stuff *********************
 
   protected void registerDrive(CloudUser user, CloudDrive drive, String repoName) {
@@ -441,7 +441,8 @@ public class CloudDriveServiceImpl implements CloudDriveService, Startable {
                   }
                   driveNodes.add(drive);
                 } catch (CloudDriveException e) {
-                  LOG.error("Error loading stored drive " + drive.getPath() + ": " + e.getMessage(), e);
+                  LOG.error("Error loading provider (" + providerId + ") of stored drive " + drive.getPath()
+                      + ": " + e.getMessage(), e);
                 }
               }
             }
@@ -460,7 +461,7 @@ public class CloudDriveServiceImpl implements CloudDriveService, Startable {
                   }
                 }
               } catch (CloudDriveException e) {
-                LOG.error("Error loading stored drive for " + pd.getKey().getName() + ": " + e.getMessage(),
+                LOG.error("Error loading stored drives for provider " + pd.getKey().getName() + ": " + e.getMessage(),
                           e);
               }
             }

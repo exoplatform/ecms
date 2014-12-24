@@ -18,8 +18,8 @@
 package org.exoplatform.clouddrive;
 
 /**
- * Indicates that some file (usually designated by path) does belong to a Cloud Drive path but not yet created
- * in the cloud. Such file can be in progress of creation (upload) or be postponed due to failed creation.
+ * Indicates that some file (usually designated by path) lies in Cloud Drive folder but does not belong to it
+ * yet and in progress of creation (upload) to the cloud site.
  * 
  * <br>
  * Created by The eXo Platform SAS.

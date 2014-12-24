@@ -19,6 +19,7 @@ package org.exoplatform.clouddrive.rest;
 import org.exoplatform.clouddrive.CloudDrive;
 import org.exoplatform.clouddrive.CloudDrive.Command;
 import org.exoplatform.clouddrive.CloudDriveException;
+import org.exoplatform.clouddrive.CloudDriveMessage;
 import org.exoplatform.clouddrive.CloudDriveService;
 import org.exoplatform.clouddrive.CloudFile;
 import org.exoplatform.clouddrive.CloudProvider;
@@ -36,7 +37,7 @@ import org.exoplatform.services.rest.resource.ResourceContainer;
 
 import java.util.ArrayList;
 import java.util.Collection;
-import java.util.HashSet;
+import java.util.Collections;
 import java.util.List;
 import java.util.concurrent.ExecutionException;
 
@@ -113,10 +114,10 @@ public class DriveService implements ResourceContainer {
       if (path != null) {
         return readDrive(workspace, path, false);
       } else {
-        return Response.status(Status.BAD_REQUEST).entity("Null path.").build();
+        return Response.status(Status.BAD_REQUEST).entity(ErrorEntiry.message("Null path")).build();
       }
     } else {
-      return Response.status(Status.BAD_REQUEST).entity("Null workspace.").build();
+      return Response.status(Status.BAD_REQUEST).entity(ErrorEntiry.message("Null workspace")).build();
     }
   }
 
@@ -162,17 +163,19 @@ public class DriveService implements ResourceContainer {
       if (local != null) {
         Collection<CloudFile> files;
         Collection<String> removed;
+        Collection<CloudDriveMessage> messages;
         if (synchronize) {
           try {
             Command sync = local.synchronize();
             sync.await(); // wait for sync process
             files = sync.getFiles();
             removed = sync.getRemoved();
+            messages = sync.getMessages();
           } catch (InterruptedException e) {
             LOG.warn("Caller of synchronization command interrupted.", e);
             Thread.currentThread().interrupt();
             return Response.status(Status.SERVICE_UNAVAILABLE)
-                           .entity("Synchrinization interrupted. Try again later.")
+                           .entity(ErrorEntiry.message("Synchrinization interrupted. Try again later."))
                            .build();
           } catch (ExecutionException e) {
             Throwable err = e.getCause();
@@ -185,36 +188,39 @@ public class DriveService implements ResourceContainer {
               return Response.status(Status.FORBIDDEN).entity(local.getUser().getProvider()).build();
             } else if (err instanceof NotConnectedException) {
               LOG.warn("Cannot synchronize not connected drive. " + err.getMessage(), err);
-              return Response.status(Status.BAD_REQUEST).entity("Drive not connected.").build();
+              return Response.status(Status.BAD_REQUEST)
+                             .entity(ErrorEntiry.notCloudDrive("Drive not connected", workspace, path))
+                             .build();
             } else if (err instanceof CloudDriveException) {
               LOG.error("Error synchrinizing the drive. " + err.getMessage(), err);
               return Response.status(Status.INTERNAL_SERVER_ERROR)
-                             .entity("Error synchrinizing the drive. Try again later.")
+                             .entity(ErrorEntiry.message("Error synchrinizing the drive. Try again later."))
                              .build();
             } else if (err instanceof RepositoryException) {
               LOG.error("Storage error. " + err.getMessage(), err);
               return Response.status(Status.INTERNAL_SERVER_ERROR)
-                             .entity("Storage error. Synchronization canceled.")
+                             .entity(ErrorEntiry.message("Storage error. Synchronization canceled."))
                              .build();
             } else if (err instanceof RuntimeException) {
               LOG.error("Runtime error. " + err.getMessage(), err);
               return Response.status(Status.INTERNAL_SERVER_ERROR)
-                             .entity("Internal server error. Synchronization canceled. Try again later.")
+                             .entity(ErrorEntiry.message("Internal server error. Synchronization canceled. Try again later."))
                              .build();
             }
             LOG.error("Unexpected error. " + err.getMessage(), err);
             return Response.status(Status.INTERNAL_SERVER_ERROR)
-                           .entity("Unexpected server error. Synchronization canceled. Try again later.")
+                           .entity(ErrorEntiry.message("Unexpected server error. Synchronization canceled. Try again later."))
                            .build();
           } catch (CloudDriveException e) {
             LOG.error("Error synchronizing drive " + workspace + ":" + path, e);
             return Response.status(Status.INTERNAL_SERVER_ERROR)
-                           .entity("Error synchronizing drive. " + e.getMessage())
+                           .entity(ErrorEntiry.message("Error synchronizing drive. " + e.getMessage()))
                            .build();
           }
         } else {
           files = new ArrayList<CloudFile>();
-          removed = new HashSet<String>();
+          removed = Collections.emptyList();
+          messages = Collections.emptyList();
           try {
             if (!local.getPath().equals(path)) {
               // if path not the drive itself
@@ -224,35 +230,49 @@ public class DriveService implements ResourceContainer {
                 files.add(new LinkedCloudFile(file, path)); // it's symlink, add it also
               }
             }
-          } catch (NotCloudFileException e) {
-            LOG.warn("Item " + workspace + ":" + path + " not yet a cloud file : " + e.getMessage());
+          } catch (NotYetCloudFileException e) {
+            if (LOG.isDebugEnabled()) {
+              LOG.debug("Item " + workspace + ":" + path + " not yet a cloud file : " + e.getMessage());
+            }
             files.add(new AcceptedCloudFile(path));
+          } catch (NotCloudFileException e) {
+            if (LOG.isDebugEnabled()) {
+              LOG.debug("Item " + workspace + ":" + path + " not a cloud file : " + e.getMessage());
+            }
           }
         }
 
-        return Response.ok().entity(DriveInfo.create(workspace, local, files, removed)).build();
+        return Response.ok().entity(DriveInfo.create(workspace, local, files, removed, messages)).build();
       } else {
-        LOG.warn("Item " + workspace + ":" + path + " not a cloud file or drive not connected.");
-        return Response.status(Status.NO_CONTENT).build();
+        if (LOG.isDebugEnabled()) {
+          LOG.debug("Item " + workspace + ":" + path + " not a cloud file or drive not connected.");
+        }
+        return Response.status(Status.NOT_FOUND)
+                       .entity(ErrorEntiry.notCloudDrive("Not connected", workspace, path))
+                       .build();
       }
     } catch (LoginException e) {
       LOG.warn("Error login to read drive " + workspace + ":" + path + ". " + e.getMessage());
-      return Response.status(Status.UNAUTHORIZED).entity("Authentication error.").build();
+      return Response.status(Status.UNAUTHORIZED).entity(ErrorEntiry.message("Authentication error")).build();
     } catch (DriveRemovedException e) {
       LOG.error("Drive removed " + workspace + ":" + path, e);
-      return Response.status(Status.NOT_FOUND).entity("Drive removed.").build();
+      return Response.status(Status.NOT_FOUND)
+                     .entity(ErrorEntiry.driveRemoved("Drive removed", workspace, path))
+                     .build();
     } catch (PathNotFoundException e) {
       LOG.warn("Error reading file " + workspace + ":" + path + ". " + e.getMessage());
-      return Response.status(Status.NOT_FOUND).entity("Current file was removed or renamed.").build();
+      return Response.status(Status.NOT_FOUND)
+                     .entity(ErrorEntiry.nodeNotFound("File was removed or renamed", workspace, path))
+                     .build();
     } catch (RepositoryException e) {
       LOG.error("Error reading drive " + workspace + ":" + path, e);
       return Response.status(Status.INTERNAL_SERVER_ERROR)
-                     .entity("Error reading drive: storage error.")
+                     .entity(ErrorEntiry.message("Error reading drive: storage error"))
                      .build();
     } catch (Throwable e) {
       LOG.error("Error reading drive " + workspace + ":" + path, e);
       return Response.status(Status.INTERNAL_SERVER_ERROR)
-                     .entity("Error reading drive: runtime error.")
+                     .entity(ErrorEntiry.message("Error reading drive: runtime error"))
                      .build();
     }
   }
@@ -282,34 +302,48 @@ public class DriveService implements ResourceContainer {
                 file = new LinkedCloudFile(file, path); // it's symlink
               }
               return Response.ok().entity(file).build();
-            } catch (NotCloudFileException e) {
-              // LOG.warn("Item " + workspace + ":" + path + " not yet a cloud file: " + e.getMessage());
+            } catch (NotYetCloudFileException e) {
               return Response.status(Status.ACCEPTED).entity(new AcceptedCloudFile(path)).build();
+            } catch (NotCloudFileException e) {
+              return Response.status(Status.NOT_FOUND)
+                             .entity(ErrorEntiry.notCloudFile(e.getMessage(), workspace, path))
+                             .build();
             }
           }
-          return Response.status(Status.NO_CONTENT).build();
+          if (LOG.isDebugEnabled()) {
+            LOG.debug("Item " + workspace + ":" + path + " not a cloud file or drive not connected.");
+          }
+          return Response.status(Status.NOT_FOUND)
+                         .entity(ErrorEntiry.notCloudDrive("Not a cloud file or drive not connected",
+                                                           workspace,
+                                                           path))
+                         .build();
         } catch (LoginException e) {
           LOG.warn("Error login to read drive file " + workspace + ":" + path + ": " + e.getMessage());
-          return Response.status(Status.UNAUTHORIZED).entity("Authentication error.").build();
+          return Response.status(Status.UNAUTHORIZED)
+                         .entity(ErrorEntiry.message("Authentication error"))
+                         .build();
         } catch (CloudDriveException e) {
           LOG.warn("Error reading file " + workspace + ":" + path, e);
-          return Response.status(Status.BAD_REQUEST).entity("Error reading file. " + e.getMessage()).build();
+          return Response.status(Status.BAD_REQUEST)
+                         .entity(ErrorEntiry.message("Error reading file. " + e.getMessage()))
+                         .build();
         } catch (RepositoryException e) {
           LOG.error("Error reading file " + workspace + ":" + path, e);
           return Response.status(Status.INTERNAL_SERVER_ERROR)
-                         .entity("Error reading file: storage error.")
+                         .entity(ErrorEntiry.message("Error reading file: storage error."))
                          .build();
         } catch (Throwable e) {
           LOG.error("Error reading file " + workspace + ":" + path, e);
           return Response.status(Status.INTERNAL_SERVER_ERROR)
-                         .entity("Error reading file: runtime error.")
+                         .entity(ErrorEntiry.message("Error reading file: runtime error."))
                          .build();
         }
       } else {
-        return Response.status(Status.BAD_REQUEST).entity("Null path.").build();
+        return Response.status(Status.BAD_REQUEST).entity(ErrorEntiry.message("Null path")).build();
       }
     } else {
-      return Response.status(Status.BAD_REQUEST).entity("Null workspace.").build();
+      return Response.status(Status.BAD_REQUEST).entity(ErrorEntiry.message("Null workspace")).build();
     }
   }
 
@@ -342,7 +376,7 @@ public class DriveService implements ResourceContainer {
                 parentPath = local.getFile(path).getPath();
               } catch (NotYetCloudFileException e) {
                 // use path as is
-                parentPath = path; 
+                parentPath = path;
               }
             }
 
@@ -377,7 +411,12 @@ public class DriveService implements ResourceContainer {
             }
             return resp.entity(files).build();
           }
-          return Response.status(Status.NO_CONTENT).build();
+          if (LOG.isDebugEnabled()) {
+            LOG.debug("Item " + workspace + ":" + path + " not a cloud file or drive not connected.");
+          }
+          return Response.status(Status.NOT_FOUND)
+                         .entity(ErrorEntiry.notCloudDrive("Not connected", workspace, path))
+                         .build();
         } catch (LoginException e) {
           LOG.warn("Error login to read drive files in " + workspace + ":" + path + ": " + e.getMessage());
           return Response.status(Status.UNAUTHORIZED).entity("Authentication error.").build();
@@ -396,10 +435,10 @@ public class DriveService implements ResourceContainer {
                          .build();
         }
       } else {
-        return Response.status(Status.BAD_REQUEST).entity("Null path.").build();
+        return Response.status(Status.BAD_REQUEST).entity(ErrorEntiry.message("Null path")).build();
       }
     } else {
-      return Response.status(Status.BAD_REQUEST).entity("Null workspace.").build();
+      return Response.status(Status.BAD_REQUEST).entity(ErrorEntiry.message("Null workspace")).build();
     }
   }
 
@@ -439,8 +478,12 @@ public class DriveService implements ResourceContainer {
                              .build();
             }
           } else {
-            LOG.warn("Item " + workspace + ":" + path + " not a cloud file or drive not connected.");
-            return Response.status(Status.NO_CONTENT).build();
+            if (LOG.isDebugEnabled()) {
+              LOG.debug("Item " + workspace + ":" + path + " not a cloud file or drive not connected.");
+            }
+            return Response.status(Status.NOT_FOUND)
+                           .entity(ErrorEntiry.notCloudDrive("Not connected", workspace, path))
+                           .build();
           }
         } catch (LoginException e) {
           LOG.warn("Error login to read drive " + workspace + ":" + path + ". " + e.getMessage());
@@ -457,10 +500,10 @@ public class DriveService implements ResourceContainer {
                          .build();
         }
       } else {
-        return Response.status(Status.BAD_REQUEST).entity("Null path.").build();
+        return Response.status(Status.BAD_REQUEST).entity(ErrorEntiry.message("Null path")).build();
       }
     } else {
-      return Response.status(Status.BAD_REQUEST).entity("Null workspace.").build();
+      return Response.status(Status.BAD_REQUEST).entity(ErrorEntiry.message("Null workspace")).build();
     }
   }
 
