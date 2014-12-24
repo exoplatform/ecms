@@ -1402,8 +1402,14 @@
 				// refresh view w/ popup
 				$("a.refreshIcon i.uiIconRefresh").click();
 			} else {
-				// refresh view w/o popup
-				$("#ECMContextMenu a[exo\\:attr='RefreshView'] i").click();
+				// don't refresh if user actions active in the window
+				// div#UIRenameWindowPopup
+				// form#UIFolderForm
+				// span.loading div.uploadProgress
+				if ($("div#UIRenameWindowPopup, form#UIFolderForm, span.loading").size() == 0) {
+					// refresh view w/o popup
+					$("#ECMContextMenu a[exo\\:attr='RefreshView'] i").click();
+				}
 			}
 		};
 		
