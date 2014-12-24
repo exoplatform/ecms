@@ -20,9 +20,10 @@ package org.exoplatform.clouddrive.ecms.filters;
 
 import org.exoplatform.clouddrive.CloudDrive;
 import org.exoplatform.clouddrive.CloudDriveService;
+import org.exoplatform.clouddrive.CloudDriveStorage;
 import org.exoplatform.clouddrive.DriveRemovedException;
+import org.exoplatform.clouddrive.NotCloudDriveException;
 import org.exoplatform.clouddrive.NotCloudFileException;
-import org.exoplatform.clouddrive.NotYetCloudFileException;
 import org.exoplatform.services.log.ExoLogger;
 import org.exoplatform.services.log.Log;
 import org.exoplatform.services.wcm.utils.WCMCoreUtils;
@@ -32,11 +33,11 @@ import javax.jcr.Node;
 import javax.jcr.RepositoryException;
 
 /**
- * Filter for cloud files.
+ * Filter for nodes are not cloud files but existing in cloud drive folder.
  */
-public class BelongToCloudDriveFilter extends AbstractCloudDriveNodeFilter {
+public class LocalNodeFilter extends AbstractCloudDriveNodeFilter {
 
-  protected static final Log LOG = ExoLogger.getLogger(BelongToCloudDriveFilter.class);
+  protected static final Log LOG = ExoLogger.getLogger(LocalNodeFilter.class);
 
   /**
    * {@inheritDoc}
@@ -46,18 +47,19 @@ public class BelongToCloudDriveFilter extends AbstractCloudDriveNodeFilter {
     CloudDriveService driveService = WCMCoreUtils.getService(CloudDriveService.class);
     CloudDrive drive = driveService.findDrive(node);
     if (drive != null) {
-      try {
+      if (acceptProvider(drive.getUser().getProvider())) {
         try {
-          drive.getFile(node.getPath());
-        } catch (NotYetCloudFileException e) {
-          // file creation in progress... we accept it
+          if (((CloudDriveStorage) drive).isLocal(node)) {
+            WebuiRequestContext.getCurrentInstance().setAttribute(CloudDrive.class, drive);
+            return true;
+          }
+        } catch (DriveRemovedException e) {
+          // doesn't accept removed drive
+        } catch (NotCloudDriveException e) {
+          // doesn't accept removed drive
+        } catch (NotCloudFileException e) {
+          // doesn't accept removed drive
         }
-        WebuiRequestContext.getCurrentInstance().setAttribute(CloudDrive.class, drive);
-        return true;
-      } catch (DriveRemovedException e) {
-        // doesn't accept removed drive
-      } catch (NotCloudFileException e) {
-        // doesn't accept not cloud file
       }
     }
     return false;

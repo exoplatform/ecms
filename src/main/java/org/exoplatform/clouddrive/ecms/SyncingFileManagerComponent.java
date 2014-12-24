@@ -16,8 +16,7 @@
  */
 package org.exoplatform.clouddrive.ecms;
 
-import org.exoplatform.clouddrive.ecms.filters.CloudDriveFilter;
-import org.exoplatform.clouddrive.ecms.filters.CloudFileFilter;
+import org.exoplatform.clouddrive.ecms.filters.SyncingCloudFileFilter;
 import org.exoplatform.ecm.webui.component.explorer.UIJCRExplorer;
 import org.exoplatform.ecm.webui.component.explorer.UIWorkingArea;
 import org.exoplatform.ecm.webui.component.explorer.control.UIActionBar;
@@ -38,30 +37,29 @@ import java.util.Arrays;
 import java.util.List;
 
 /**
- * RefreshView hidden action in working area used by Cloud Drive Javascript to refresh the user view
- * automatically.
+ * SyncingFile hidden action in working area used by Cloud Drive Javascript to mark synchronzing files in UI.
  * 
  * Created by The eXo Platform SAS.
  * 
  * @author <a href="mailto:pnedonosko@exoplatform.com">Peter Nedonosko</a>
- * @version $Id: RefreshCloudDriveManagerComponent.java 00000 Nov 05, 2012 pnedonosko $
+ * @version $Id: RefreshCloudDriveManagerComponent.java 00000 Dec 15, 2014 pnedonosko $
  */
 @ComponentConfig(
                  lifecycle = UIContainerLifecycle.class,
                  events = { @EventConfig(
-                                         listeners = RefreshViewManagerComponent.RefreshViewActionListener.class) })
-public class RefreshViewManagerComponent extends BaseCloudDriveManagerComponent {
+                                         listeners = SyncingFileManagerComponent.SyncingFileActionListener.class) })
+public class SyncingFileManagerComponent extends BaseCloudDriveManagerComponent {
 
-  protected static final Log                     LOG        = ExoLogger.getLogger(RefreshViewManagerComponent.class);
+  protected static final Log                     LOG        = ExoLogger.getLogger(SyncingFileManagerComponent.class);
 
-  public static final String                     EVENT_NAME = "RefreshView";
+  public static final String                     EVENT_NAME = "SyncingFile";
 
-  protected static final List<UIExtensionFilter> FILTERS    = Arrays.asList(new UIExtensionFilter[] {
-      new CloudDriveFilter(), new CloudFileFilter()        });
+  protected static final List<UIExtensionFilter> FILTERS    = Arrays.asList(new UIExtensionFilter[] { new SyncingCloudFileFilter() });
 
-  public static class RefreshViewActionListener extends EventListener<RefreshViewManagerComponent> {
-    public void execute(Event<RefreshViewManagerComponent> event) throws Exception {
-      // code adopted from UIAddressBar.RefreshSessionActionListener.execute()
+  public static class SyncingFileActionListener extends EventListener<SyncingFileManagerComponent> {
+    public void execute(Event<SyncingFileManagerComponent> event) throws Exception {
+      // code adopted from UIAddressBar.RefreshSessionActionListener.execute() -- effect of refresh here, 
+      // it should be never invoked (menu action invisible)
       UIJCRExplorer explorer = event.getSource().getAncestorOfType(UIJCRExplorer.class);
       explorer.getSession().refresh(false);
       explorer.refreshExplorer();

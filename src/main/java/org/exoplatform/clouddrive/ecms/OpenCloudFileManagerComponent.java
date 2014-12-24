@@ -16,7 +16,7 @@
  */
 package org.exoplatform.clouddrive.ecms;
 
-import org.exoplatform.clouddrive.ecms.filters.BelongToCloudDriveFilter;
+import org.exoplatform.clouddrive.ecms.filters.CloudFileFilter;
 import org.exoplatform.services.log.ExoLogger;
 import org.exoplatform.services.log.Log;
 import org.exoplatform.web.application.Parameter;
@@ -41,7 +41,7 @@ public class OpenCloudFileManagerComponent extends BaseCloudDriveManagerComponen
 
   public static final String                     EVENT_NAME = "OpenCloudFile";
 
-  protected static final List<UIExtensionFilter> FILTERS    = Arrays.asList(new UIExtensionFilter[] { new BelongToCloudDriveFilter() });
+  protected static final List<UIExtensionFilter> FILTERS    = Arrays.asList(new UIExtensionFilter[] { new CloudFileFilter() });
 
   @UIExtensionFilters
   public List<UIExtensionFilter> getFilters() {

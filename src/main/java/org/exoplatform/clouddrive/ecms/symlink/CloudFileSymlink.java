@@ -194,8 +194,8 @@ public class CloudFileSymlink {
    * Create links in destination folder for all added source files. Note that this method doesn't save the
    * session of destination node - this should be done by the caller code to persist the changes.
    * 
-   * @return <code>true</code> if at least one, but all added, link(s) created successfully,
-   *         <code>false</code> otherwise. If nothing added return <code>false</code> also.
+   * @return <code>true</code> if all added links created successfully, <code>false</code> otherwise. If
+   *         nothing added return <code>false</code> also.
    * @throws CloudFileSymlinkException if link cannot be created logical, this exception will contain detailed
    *           message and a internationalized text for WebUI application.
    * @throws Exception
@@ -256,11 +256,16 @@ public class CloudFileSymlink {
               // if cloud file... (it is not a cloud drive node as we already checked above)
               // then move not supported for the moment!
               if (move) {
-                throw new CloudFileSymlinkException("Move of cloud file to outside the cloud drive not supported: "
-                                                        + srcPath + " -> " + destPath,
-                                                    new ApplicationMessage("CloudFile.msg.MoveToOutsideDriveNotSupported",
-                                                                           null,
-                                                                           ApplicationMessage.WARNING));
+                if (srcLocal.hasFile(srcPath)) {
+                  throw new CloudFileSymlinkException("Move of cloud file to outside the cloud drive not supported: "
+                                                          + srcPath + " -> " + destPath,
+                                                      new ApplicationMessage("CloudFile.msg.MoveToOutsideDriveNotSupported",
+                                                                             null,
+                                                                             ApplicationMessage.WARNING));
+                } else {
+                  // it's local (ignored) node in the drive folder - use default behaviour for it
+                  return false;
+                }
               } else {
                 // it's copy... check if it is the same workspace
                 String srcWorkspace = srcNode.getSession().getWorkspace().getName();

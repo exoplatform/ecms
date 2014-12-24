@@ -65,9 +65,8 @@ public class CloudDriveContext {
   public static void init(RequestContext requestContext, String workspace, String nodePath) throws CloudDriveException {
 
     Object obj = requestContext.getAttribute(JAVASCRIPT);
-    CloudDriveContext context;
     if (obj == null) {
-      context = new CloudDriveContext(requestContext);
+      CloudDriveContext context = new CloudDriveContext(requestContext);
 
       boolean initContext = true;
       CloudDriveFeatures features = WCMCoreUtils.getService(CloudDriveFeatures.class);
@@ -97,7 +96,6 @@ public class CloudDriveContext {
       if (LOG.isDebugEnabled()) {
         LOG.debug("Request context already initialized");
       }
-      context = (CloudDriveContext) obj;
     }
   }
 

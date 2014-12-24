@@ -33,8 +33,10 @@ public abstract class BaseCloudDriveManagerComponent extends UIAbstractManagerCo
 
   protected static final Log LOG = ExoLogger.getLogger(BaseCloudDriveManagerComponent.class);
 
-  public BaseCloudDriveManagerComponent() {
-  }
+  /**
+   * Workspace and node path associated with current context.
+   */
+  protected String           workspace, path;
 
   /**
    * {@inheritDoc}
@@ -48,10 +50,11 @@ public abstract class BaseCloudDriveManagerComponent extends UIAbstractManagerCo
     UIJCRExplorer uiExplorer = getAncestorOfType(UIJCRExplorer.class);
     if (uiExplorer != null) {
       // we store current node in the context
-      String nodePath = uiExplorer.getCurrentNode().getPath();
-      String workspace = uiExplorer.getCurrentNode().getSession().getWorkspace().getName();
-      CloudDriveContext.init(WebuiRequestContext.getCurrentInstance(), workspace, nodePath);
+      path = uiExplorer.getCurrentNode().getPath();
+      workspace = uiExplorer.getCurrentNode().getSession().getWorkspace().getName();
+      CloudDriveContext.init(WebuiRequestContext.getCurrentInstance(), workspace, path);
     } else {
+      workspace = path = null;
       LOG.error("Cannot find ancestor of type UIJCRExplorer in component " + this + ", parent: "
           + this.getParent());
     }

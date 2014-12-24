@@ -19,12 +19,15 @@
 package org.exoplatform.clouddrive.ecms.filters;
 
 import org.exoplatform.clouddrive.CloudDrive;
+import org.exoplatform.clouddrive.CloudDrive.FilesState;
 import org.exoplatform.clouddrive.CloudDriveService;
 import org.exoplatform.clouddrive.CloudFile;
+import org.exoplatform.clouddrive.CloudProviderException;
 import org.exoplatform.clouddrive.DriveRemovedException;
 import org.exoplatform.clouddrive.NotCloudDriveException;
 import org.exoplatform.clouddrive.NotCloudFileException;
 import org.exoplatform.clouddrive.NotYetCloudFileException;
+import org.exoplatform.clouddrive.RefreshAccessException;
 import org.exoplatform.services.log.ExoLogger;
 import org.exoplatform.services.log.Log;
 import org.exoplatform.services.wcm.utils.WCMCoreUtils;
@@ -36,17 +39,17 @@ import javax.jcr.Node;
 import javax.jcr.RepositoryException;
 
 /**
- * Filter for cloud files.
+ * Filter for cloud files currently synchronizing.
  */
-public class CloudFileFilter extends AbstractCloudDriveNodeFilter {
+public class SyncingCloudFileFilter extends AbstractCloudDriveNodeFilter {
 
-  protected static final Log LOG = ExoLogger.getLogger(CloudFileFilter.class);
+  protected static final Log LOG = ExoLogger.getLogger(SyncingCloudFileFilter.class);
 
-  public CloudFileFilter() {
+  public SyncingCloudFileFilter() {
     super();
   }
 
-  public CloudFileFilter(List<String> providers) {
+  public SyncingCloudFileFilter(List<String> providers) {
     super(providers);
   }
 
@@ -59,23 +62,40 @@ public class CloudFileFilter extends AbstractCloudDriveNodeFilter {
       CloudDriveService driveService = WCMCoreUtils.getService(CloudDriveService.class);
       CloudDrive drive = driveService.findDrive(node);
       if (drive != null) {
-        try {
-          if (acceptProvider(drive.getUser().getProvider())) {
-            CloudFile file = drive.getFile(node.getPath());
-            // attribute used in CloudFile viewer(s)
+        if (acceptProvider(drive.getUser().getProvider())) {
+          String path = node.getPath();
+          try {
             WebuiRequestContext rcontext = WebuiRequestContext.getCurrentInstance();
             rcontext.setAttribute(CloudDrive.class, drive);
-            rcontext.setAttribute(CloudFile.class, file);
-            return true;
+
+            try {
+              CloudFile file = drive.getFile(path);
+              // attribute may be used in UI
+              rcontext.setAttribute(CloudFile.class, file);
+            } catch (NotYetCloudFileException e) {
+              // newly creating file we accept: UI should render it properly according file existence
+              return true;
+            }
+
+            // FilesState driveState = drive.getState();
+            // return driveState != null ? driveState.isUpdating(path) : false;
+            // XXX accept only "not yet cloud files", thus synchronizing first time only
+            return false;
+          } catch (DriveRemovedException e) {
+            // doesn't accept
+          } catch (NotCloudFileException e) {
+            // doesn't accept
+          } catch (NotCloudDriveException e) {
+            // doesn't accept
           }
-        } catch (DriveRemovedException e) {
-          // doesn't accept
-        } catch (NotYetCloudFileException e) {
-          // doesn't accept
-        } catch (NotCloudFileException e) {
-          // doesn't accept
-        } catch (NotCloudDriveException e) {
-          // doesn't accept
+          // TODO cleanup
+          // catch (RefreshAccessException e) {
+          // // doesn't accept
+          // LOG.warn("Error filtering syncing cloud file: " + e.getMessage());
+          // } catch (CloudProviderException e) {
+          // // doesn't accept
+          // LOG.warn("Error filtering syncing cloud file: " + e.getMessage(), e);
+          // }
         }
       }
     }

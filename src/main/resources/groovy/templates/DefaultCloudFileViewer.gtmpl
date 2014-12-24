@@ -19,42 +19,53 @@
 */
 %>
 <%
+import org.exoplatform.ecm.webui.utils.Utils; 
 import org.exoplatform.clouddrive.CloudDrive
 import org.exoplatform.wcm.webui.reader.ContentReader
-import groovy.text.*
 
 def rcontext = _ctx.getRequestContext()
-def uiParent = uicomponent.getParent()
-def currentNode = uiParent.getNode()
 
 // should be set in CloudFileFilter
 def drive = rcontext.getAttribute(CloudDrive.class)  
 if (drive) {
-    def serviceName = drive.user.serviceName
-    def openOn = _ctx.appRes("CloudFileViewer.event.OpenOn")
+	def serviceName = drive.user.serviceName
+	def openOn = _ctx.appRes("CloudFileViewer.event.OpenOn")
+	def viewable = uicomponent.isViewable()
 %>
-<div id="CloudFileViewer" file-open-on="${openOn} ${serviceName}" style="position: relative; padding-top: 0; padding-bottom: 100%; height: 100%; overflow: hidden;">
+<div id="CloudFileViewer" file-open-on="${openOn} ${serviceName}" 
+		style="position: relative; padding-top: 0; padding-bottom: 0; height: <%=viewable ? "100%" : "200px"%>; overflow: hidden;">
 	<%
-    // TODO simple view
-  	// def fileName = ContentReader.getXSSCompatibilityContent(currentNode.property("exo:title"))
-	def templateEngine = new SimpleTemplateEngine ()
-   	def values = ['fileUrl' : "<a href='#' target='_blank'></a>",
-					'serviceName' : serviceName]
-	def viewerMessage = templateEngine.createTemplate(_ctx.appRes('CloudFileViewer.event.OpenFileOn')).make(values)
-	%><p style="display: none;">$viewerMessage</p><%
-	
-	// preview/edit view
+	if(viewable) {
+	  // preview/edit view
   	def viewFile = _ctx.appRes("CloudFileViewer.event.ViewFile")
   	def editFile = _ctx.appRes("CloudFileViewer.event.EditFile")
 	%>
-	<div style="display: none;"><span id="ViewerSwitch" view-title="${viewFile}" edit-title="${editFile}"
+	<div style="display: none;" class="file-content"><span id="ViewerSwitch" view-title="${viewFile}" edit-title="${editFile}"
 		style="position: relative; padding-left: 5px; font-weight: normal; font-size: 11px;">(<a href="javascript:void(0);">${editFile}</a>)</span>
 		<iframe frameborder="0"
-			style="position: absolute; width: 100%; height: 100%; marginwidth: 0; marginheight: 0;"
+			style="position: absolute; width: 100%; height: 100%;"
 			src="">
 		</iframe>
 	</div>
-</div>
+<%
+	} else {
+%><div class="center">
+		<div class="uiUnEditable clearfix">
+			<div class="iconContainer">
+			  <i class="<%=Utils.getNodeTypeIcon(uicomponent.getParent().node, "uiIcon64x64")%>"></i>
+			</div>
+			<div class="detailContainer">
+			  <h4><%=_ctx.appRes("File.view.label.not-viewable")%></h4>
+			  <a class="btn btn-primary" href="$uicomponent.file.link"><%=_ctx.appRes("File.view.label.download")%></a>
+		  </div>
+		</div>
+	</div>
+<%
+  }
+} else {
+%>
+<p>Cannot load cloud file viewer. Refresh the page.</p>
 <%
 }
 %>
+</div>
