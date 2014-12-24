@@ -211,6 +211,47 @@ xmlns="http://www.exoplatform.org/xml/ns/kernel_1_2.xsd">
           </object>
         </object-param>
         <object-param>
+          <name>SyncingFile</name>
+          <object type="org.exoplatform.webui.ext.UIExtension">
+            <field name="type">
+              <string>org.exoplatform.ecm.dms.UIWorkingArea</string>
+            </field>
+            <field name="name">
+              <string>SyncingFile</string>
+            </field>
+            <field name="component">
+              <!-- Invisible action used by Cloud Drive JS to mark synchronizing files -->
+              <string>org.exoplatform.clouddrive.ecms.SyncingFileManagerComponent</string>
+            </field>
+            <field name="category">
+              <string>ItemContextMenu_SingleSelection</string>
+            </field>
+            <field name="rank">
+              <int>1</int><!-- should be first in list of exts in UIExtensionManagerImpl -->
+            </field>
+          </object>
+        </object-param>
+        <object-param>
+          <name>PushCloudFile</name>
+          <object type="org.exoplatform.webui.ext.UIExtension">
+            <field name="type">
+              <string>org.exoplatform.ecm.dms.UIWorkingArea</string>
+            </field>
+            <field name="name">
+              <string>PushCloudFile</string>
+            </field>
+            <field name="component">
+              <string>org.exoplatform.clouddrive.ecms.PushCloudFileManagerComponent</string>
+            </field>
+            <field name="category">
+              <string>ItemContextMenu_SingleSelection</string>
+            </field>
+            <field name="rank">
+              <int>10</int>
+            </field>
+          </object>
+        </object-param>
+        <object-param>
           <name>ShowCloudFile</name>
           <object type="org.exoplatform.webui.ext.UIExtension">
             <field name="type">
@@ -220,7 +261,7 @@ xmlns="http://www.exoplatform.org/xml/ns/kernel_1_2.xsd">
               <string>ShowCloudFile</string>
             </field>
             <field name="component">
-              <string>org.exoplatform.clouddrive.ecms.CloudFileViewerComponent</string>
+              <string>org.exoplatform.clouddrive.ecms.viewer.DefaultCloudFileViewer</string>
             </field>
             <field name="category">
               <string>FileViewer</string>

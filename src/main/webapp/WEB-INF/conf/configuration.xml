@@ -37,6 +37,9 @@
     <type>org.exoplatform.clouddrive.ecms.jcr.CMSNodeFinder</type>
   </component>
   <component>
+    <type>org.exoplatform.clouddrive.utils.ExtendedMimeTypeResolver</type>
+  </component>
+  <component>
     <type>org.exoplatform.clouddrive.rest.ConnectService</type>
   </component>
   <component>
@@ -123,6 +126,23 @@
       <name>add.portalenv</name>
       <set-method>addPlugin</set-method>
       <type>org.exoplatform.clouddrive.webui.PortalEnvironment</type>
+    </component-plugin>
+  </external-component-plugins>
+
+  <external-component-plugins>
+    <target-component>org.exoplatform.clouddrive.utils.ExtendedMimeTypeResolver</target-component>
+    <component-plugin>
+      <name>add.namespaces</name>
+      <set-method>addPlugin</set-method>
+      <type>org.exoplatform.clouddrive.utils.ExtendedMimeTypeResolver$MimeTypeMap</type>
+      <init-params>
+        <values-param>
+          <name>mimetypes-properties</name>
+          <description>Mimetype property files, path can be any format supported by eXo configuration</description>
+          <value>jar:/conf/clouddrive/mimetypes.properties</value>
+          <!-- value>war:/conf/portal/custom/mimetypes.properties</value -->
+        </values-param>
+      </init-params>
     </component-plugin>
   </external-component-plugins>
 

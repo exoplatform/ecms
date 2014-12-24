@@ -1,24 +1,20 @@
 /* Deprecated (not used) style for red badge on Refresh icon in ECMS explorer when drive has been changed */
 .uiCloudDriveChanges {
-	position:relative;
-	left:8px;
-	top:9px;
+	position: relative;
+	left: 8px;
+	top: 9px;
 	display: block;
-	
 	-webkit-border-radius: 6px;
-    -moz-border-radius: 6px;
-    border-radius: 6px;
-
-    width: 12px;
-    height: 10px;
-    padding: 1px;
-    
-    background: red;
-    border: 0px solid #f0f0f0;
-    color: #fff;
-    text-align: center;
-    
-    font: 9px Arial, sans-serif
+	-moz-border-radius: 6px;
+	border-radius: 6px;
+	width: 12px;
+	height: 10px;
+	padding: 1px;
+	background: red;
+	border: 0px solid #f0f0f0;
+	color: #fff;
+	text-align: center;
+	font: 9px Arial, sans-serif
 }
 
 /*************************** NodeType Icon ***********************/
@@ -48,10 +44,36 @@
 }
 
 /**** menu ****/
+
 .cloudFileDisabled {
-	opacity : 0.7; 
-	pointer-events : none;
-	cursor : not-allowed !important;
+	opacity: 0.65;
+	pointer-events: none;
+	cursor: not-allowed !important;
+}
+
+.notCloudFile {
+	opacity: 0.65;
+}
+
+.syncingIconView {
+	display: block;
+	position: absolute;
+	margin: 110px 0px 0px 0px;
+	padding: 10px 30px 0px 25px;
+	width: 35px;
+	height: 35px;
+	pointer-events: none;
+	background: url('icons/oxygen/32/animations/throbber.gif') no-repeat left center !important; /* orientation=lt */
+	background: url('icons/oxygen/32/animations/throbber.gif') no-repeat right center !important; /* orientation=rt */
+}
+
+.syncingListView {
+	position: relative;
+	display: inline;
+	padding-left: 15px;
+	pointer-events: none;
+	background: url('icons/oxygen/16/animations/throbber.gif') no-repeat left center !important; /* orientation=lt */
+	background: url('icons/oxygen/16/animations/throbber.gif') no-repeat right center !important; /* orientation=rt */
 }
 
 /******** Pnotify icons ********/
