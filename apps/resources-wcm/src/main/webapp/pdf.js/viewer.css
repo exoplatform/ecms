@@ -351,6 +351,22 @@ body {
   overflow-y: auto;
 }
 
+#secondaryToolbarButtonContainer a#firstPage.disable, 
+#secondaryToolbarButtonContainer a#lastPage.disable {
+	opacity: 0.5;	
+}
+
+#secondaryToolbarButtonContainer a#firstPage.disable:hover, 
+#secondaryToolbarButtonContainer a#lastPage.disable:hover {
+	background: none #fff;
+    color: #333;
+}
+
+#secondaryToolbarButtonContainer a#firstPage.disable:hover [class^="uiIcon"], 
+#secondaryToolbarButtonContainer a#lastPage.disable:hover [class^="uiIcon"] {
+	background-image: url("/eXoResources/skin/images/Icons/uiIconsLightGray.png");
+}
+
 .doorHanger,
 .doorHangerRight {
   border: 1px solid #d1d1d1;
