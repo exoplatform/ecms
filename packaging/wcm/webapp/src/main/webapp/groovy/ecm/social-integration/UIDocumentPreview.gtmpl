@@ -70,9 +70,13 @@
                     </div>
                   <%}%>
                 </div>
+                
             <%
             }
              %>
+             <div class="downloadBtn">
+            	<a href="#"><i class="uiIconDownload uiIconWhite"></i>&nbsp;Download</a>                
+            </div>
         </div>
         <style>
             .uiActivityStream, .uiActivitiesLoader {
