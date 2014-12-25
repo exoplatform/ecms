@@ -235,7 +235,6 @@ body {
 
 #toolbarContainer, .findbar, .secondaryToolbar {
   position: relative;
-  height: 35px;
   background: #f0f0f0; 
   border: none;
   border-bottom: 1px solid #d1d1d1;
@@ -303,8 +302,6 @@ body {
   top: 32px;
   position: absolute;
   z-index: 10000;
-  height: 35px;
-
   min-width: 16px;
   padding: 0px 6px 0px 6px;
   margin: 4px 2px 4px 2px;
@@ -328,6 +325,10 @@ body {
   background-image: url(images/loading-small.png);
   background-repeat: no-repeat;
   background-position: right;
+}
+
+#findInput {
+	margin-bottom: 0;
 }
 
 .secondaryToolbar {
@@ -368,12 +369,12 @@ body {
 }
 .doorHanger:after,
 .doorHangerRight:after {
-  border-bottom-color: hsla(0,0%,32%,.99);
+  border-bottom-color: #f0f0f0;
   border-width: 8px;
 }
 .doorHanger:before,
 .doorHangerRight:before {
-  border-bottom-color: hsla(0,0%,0%,.5);
+  border-bottom-color: #d1d1d1;
   border-width: 9px;
 }
 
@@ -395,8 +396,18 @@ body {
 }
 
 #findMsg {
-  font-style: italic;
-  color: #A6B7D0;
+	color: #a6b7d0;
+    display: block;
+    float: none;
+    font-style: italic;
+    margin-left: 35px;
+    margin-top: 35px;
+    text-align: left;
+}
+
+#findMsg.toolbarLabel {
+	padding: 0;
+	border: none;
 }
 
 .notFound {
