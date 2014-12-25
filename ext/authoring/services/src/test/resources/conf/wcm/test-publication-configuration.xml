@@ -15,7 +15,7 @@
         <property name="expirationCache" value="30" />
       </properties-param>
     </init-params>
-  </component>
+  </component> 
   <component>
     <type>org.exoplatform.services.cms.jcrext.activity.ActivityCommonService</type>
     <init-params>
@@ -37,7 +37,7 @@
     <key>org.exoplatform.services.cms.link.LinkManager</key>
     <type>org.exoplatform.services.cms.link.impl.LinkManagerImpl</type>
   </component>
-  
+ 
     <component>
       <key>org.exoplatform.services.resources.ResourceBundleService</key>
       <type>org.exoplatform.services.resources.impl.SimpleResourceBundleService</type>
@@ -307,7 +307,8 @@
  		    <values-param>
  		      <name>autoCreatedInNewRepository</name>
            <value>jar:/conf/wcm/gatein-nodetypes.xml</value>
-           <!--value>jar:/conf/wcm/test-publication-nodetypes.xml</value-->
+           <value>jar:/conf/standalone/jcr/ecms-test-nodetypes-config.xml</value>
+           <value>jar:/conf/standalone/jcr/ecms-test-publication-nodetypes-config.xml</value>
            <value>jar:/conf/wcm/content-nodetypes.xml</value>
            <value>jar:/conf/wcm/test-mop-nodetypes.xml</value>
  		    </values-param>
@@ -446,30 +447,4 @@
       </init-params>
     </component-plugin>
   </external-component-plugins>
-
-	<external-component-plugins>
-    <!-- The full qualified name of the ResourceBundleService -->
-		<target-component>org.exoplatform.services.resources.ResourceBundleService</target-component>
-    <component-plugin>
-      <!-- The name of the plugin -->
-      <name>ResourceBundle Plugin</name>
-      <!-- The name of the method to call on the ResourceBundleService in order to register the ResourceBundles -->
-      <set-method>addResourceBundle</set-method>
-      <!-- The full qualified name of the BaseResourceBundlePlugin -->
-      <type>org.exoplatform.services.resources.impl.BaseResourceBundlePlugin</type>
-      <init-params>
-        <values-param>
-					<name>init.resources</name>
-					<description>Store the following resources into the db for the first launch </description>
-					<value>locale.services.publication.lifecycle.simple.SimplePublication</value>
-				</values-param>
-        <values-param>
-					<name>portal.resource.names</name>
-					<description>Store the following resources into the db for the first launch </description>
-					<value>locale.services.publication.lifecycle.simple.SimplePublication</value>
-				</values-param>
-      </init-params>
-    </component-plugin>
-  </external-component-plugins>
-  
 </configuration>
