@@ -4206,15 +4206,27 @@ window.addEventListener('pagechange', function pagechange(evt) {
   var nextButton = document.getElementById('next');
   previousButton.disabled = (page <= 1);
   if (previousButton.disabled) {
-    previousButton.className += " disabled";
+    if(previousButton.className.indexOf("disabled") < 0){
+      previousButton.className += " disabled";
+      firstPageMenu.className += " disabled";
+    }
   } else {
-    previousButton.className = previousButton.className.replace(' disabled', '')
+    if((firstPageMenu.className == " disabled")||(firstPageMenu.className == " ")||(firstPageMenu.className == "")) firstPageMenu.className = "";
+    else firstPageMenu.className = previousButton.className.replace(' disabled', '');
+    previousButton.className = previousButton.className.replace(' disabled', '');
   }
   nextButton.disabled = (page >= PDFView.pages.length);
   if (nextButton.disabled) {
-    nextButton.className += " disabled";
+    if(nextButton.className.indexOf("disabled") < 0){
+      nextButton.className += " disabled";
+      lastPageMenu.className += " disabled";
+    }
   } else {
-    nextButton.className = nextButton.className.replace(' disabled', '')
+    if((lastPageMenu.className == " disabled")||(lastPageMenu.className == " ")||(lastPageMenu.className == "")){      
+      lastPageMenu.className = "";
+    } else lastPageMenu.className = nextButton.className.replace(' disabled', '');
+    nextButton.className = nextButton.className.replace(' disabled', '');
+    
   }
 }, true);
 

@@ -351,20 +351,31 @@ body {
   overflow-y: auto;
 }
 
-#secondaryToolbarButtonContainer a#firstPage.disable, 
-#secondaryToolbarButtonContainer a#lastPage.disable {
-	opacity: 0.5;	
+#secondaryToolbarButtonContainer a#firstPage.disabled,
+#secondaryToolbarButtonContainer a#lastPage.disabled {
+    opacity: 0.5;
 }
 
-#secondaryToolbarButtonContainer a#firstPage.disable:hover, 
-#secondaryToolbarButtonContainer a#lastPage.disable:hover {
-	background: none #fff;
+#secondaryToolbarButtonContainer a#firstPage.disabled:hover,
+#secondaryToolbarButtonContainer a#lastPage.disabled:hover {
+    background: none #fff;
     color: #333;
 }
+#secondaryToolbarButtonContainer a#firstPage.disabled:focus,
+#secondaryToolbarButtonContainer a#lastPage.disabled:focus {
+    background: none #fff;
+    color: #333;
+    outline: none;
+}
 
-#secondaryToolbarButtonContainer a#firstPage.disable:hover [class^="uiIcon"], 
-#secondaryToolbarButtonContainer a#lastPage.disable:hover [class^="uiIcon"] {
-	background-image: url("/eXoResources/skin/images/Icons/uiIconsLightGray.png");
+#secondaryToolbarButtonContainer a#firstPage.disabled:hover [class^="uiIcon"],
+#secondaryToolbarButtonContainer a#lastPage.disabled:hover [class^="uiIcon"] {
+    background-image: url("/eXoResources/skin/images/Icons/uiIconsLightGray.png");
+}
+#secondaryToolbarButtonContainer a#firstPage.disabled:focus [class^="uiIcon"],
+#secondaryToolbarButtonContainer a#lastPage.disabled:focus [class^="uiIcon"] {
+    background-image: url("/eXoResources/skin/images/Icons/uiIconsLightGray.png");
+    outline: none;
 }
 
 .doorHanger,
