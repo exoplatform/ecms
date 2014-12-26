@@ -74,7 +74,7 @@
             <%
             }
             if (uicomponent.isMediaFile(contentNode)) {
-              def downloadLink = org.exoplatform.wcm.webui.Utils.getDownloadLink(contenNode);
+              def downloadLink = org.exoplatform.ecm.webui.utils.Utils.getDownloadRestServiceLink(contentNode);
              %>
              <div class="downloadBtn">
                 <a href="$downloadLink"><i class="uiIconDownload uiIconWhite"></i>&nbsp;Download</a>
