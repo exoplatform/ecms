@@ -16,7 +16,8 @@ rcontext.getJavascriptManager()
     .require("SHARED/jquery", "gj")
     .addScripts("eXo.ecm.DocumentPreview.bindPostCommentEvent();")
     .addScripts("eXo.ecm.DocumentPreview.setRefreshCommentsAction('" + refreshCommentsAction + "') ;")
-    .addScripts("gj('.commentList', '#UIDocumentPreview').scrollTop(20000);;");
+    .addScripts("gj('.commentList', '#UIDocumentPreview').scrollTop(20000);")
+    .addScripts("gj(window).resize();gj('#commentTextAreaPreview').focus();");
 
 
 

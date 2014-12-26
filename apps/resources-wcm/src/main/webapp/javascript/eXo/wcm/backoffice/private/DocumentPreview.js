@@ -132,6 +132,7 @@
             var $commentTextAreaPreview = gj(this);
             var code = e.keyCode || e.which;
             if (code == 13) { // Enter keycode
+                commentTextAreaPreview.blur();
                 var activityId = $commentTextAreaPreview.attr('activityId');
                 var commentText = $commentTextAreaPreview.val();
                 $commentTextAreaPreview.val('');
