@@ -73,10 +73,13 @@
                 
             <%
             }
+            if (uicomponent.isMediaFile(contentNode)) {
+              def downloadLink = org.exoplatform.wcm.webui.Utils.getDownloadLink(contenNode);
              %>
              <div class="downloadBtn">
-            	<a href="#"><i class="uiIconDownload uiIconWhite"></i>&nbsp;Download</a>                
+                <a href="$downloadLink"><i class="uiIconDownload uiIconWhite"></i>&nbsp;Download</a>
             </div>
+            <%}%>
         </div>
         <style>
             .uiActivityStream, .uiActivitiesLoader {
