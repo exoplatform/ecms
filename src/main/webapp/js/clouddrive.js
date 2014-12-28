@@ -272,7 +272,6 @@
 
 			if (authURL) {
 				// use user interaction for authentication
-				utils.log("authURL: " + authURL);
 				authWindow = cloudDriveUI.connectDriveWindow(authURL);
 			} else {
 				// function to call for auth using authURL from provider
@@ -344,9 +343,11 @@
 						  process.reject("Connect to " + provider.serviceName + " canceled.");
 					  }
 				  });
-				  auth.fail(function(error) {
-					  utils.log("ERROR: " + provider.serviceName + " authentication error: " + error);
-					  process.reject(error);
+				  auth.fail(function(message) {
+				  	if (message) {
+					  	utils.log("ERROR: " + provider.serviceName + " authentication error: " + message);
+					  }
+					  process.reject(message);
 				  });
 			  },
 			  fail : function(error) {
@@ -366,18 +367,25 @@
 			var intervalId = setInterval(function() {
 				var connectId = utils.getCookie("cloud-drive-connect-id");
 				if (connectId) {
+					// user authenticated and connect allowed 
 					intervalId = clearInterval(intervalId);
 					process.resolve();
 				} else {
 					var error = utils.getCookie("cloud-drive-error");
 					if (error) {
 						intervalId = clearInterval(intervalId);
-						process.reject(error);
+						// XXX workaround for Google Drive's  access cancellation
+						if (error === "Access denied to Google Drive") {
+							process.reject(null);
+						} else {
+							process.reject(error);
+						}
 					} else if (authWindow && authWindow.closed) {
 						intervalId = clearInterval(intervalId);
-						process.reject("Authentication canceled.");
-					} else if (i > 120) {
-						// if open more 2min - close it and treat as not authenticated/allowed
+						utils.log("Authentication canceled.");
+						process.reject(null); // reject w/o UI message
+					} else if (i > 310) { // +10sec to ConnectService.INIT_COOKIE_EXPIRE
+						// if open more 5min - close it and treat as not authenticated/allowed
 						intervalId = clearInterval(intervalId);
 						process.reject("Authentication timeout.");
 					}
@@ -833,8 +841,8 @@
 		 * Initialize context node and optionally a drive.
 		 */
 		this.initContext = function(nodeWorkspace, nodePath) {
-			utils.log("Init context node: " + nodeWorkspace + ":" + nodePath
-			    + (contextDrive ? " (current drive: " + contextDrive.path + ")" : "") + " excluded: " + isExcluded(nodePath));
+			//utils.log("Init context node: " + nodeWorkspace + ":" + nodePath
+			//    + (contextDrive ? " (current drive: " + contextDrive.path + ")" : "") + " excluded: " + isExcluded(nodePath));
 
 			contextNode = {
 			  workspace : nodeWorkspace,
@@ -1528,8 +1536,6 @@
 
 			var update = function() {
 				var options = {
-					//title : "Connecting Your " + driveName,
-					//text : progress + "% complete."
 				};
 				if (progress > 0) {
 					options.text = progress + "% complete.";
@@ -1618,27 +1624,45 @@
 				}
 			});
 
-			process.fail(function(error) {
+			process.fail(function(message, title) {
 				if (hideTimeout) {
 					clearTimeout(hideTimeout);
 				}
 
-				var options = {
-				  text : error,
-				  title : "Error connecting " + (driveName ? driveName : "drive") + "!",
-				  type : "error",
-				  hide : false,
-				  delay : 0,
-				  closer : true,
-				  sticker : false,
-				  icon : "picon picon-process-stop",
-				  opacity : 1,
-				  shadow : true,
-				  width : NOTICE_WIDTH,
-				  // remove non-block
-				  nonblock : false
-				};
-				notice.pnotify(options);
+				// when message undefined/null then process failure silently
+				if (message) {
+					var options = {
+					  text : message,
+					  title : title ? title : "Error connecting " + (driveName ? driveName : "drive") + "!",
+					  type : "error",
+					  hide : false,
+					  delay : 0,
+					  closer : true,
+					  sticker : false,
+					  icon : "picon picon-process-stop",
+					  opacity : 1,
+					  shadow : true,
+					  width : NOTICE_WIDTH,
+					  // remove non-block
+					  nonblock : false
+					};
+					notice.pnotify(options);
+				} else {
+					var options = {
+					  title : "Canceled",
+					  type : "information",
+						hide : true,
+					  delay : 1500,
+					  closer : true,
+					  sticker : false,
+			  		icon : "picon-dialog-information",
+					  opacity : 1,
+					  shadow : true,
+					  width : NOTICE_WIDTH,
+					  nonblock : true
+					};
+					notice.pnotify(options);
+				}
 			});
 		};
 
@@ -1777,13 +1801,11 @@
 								});
 								process.fail(function(e) {
 									//eXo.webui.UIForm.submitForm(formId, 'Cancel', true);
-									utils.log("ConnectCloudDriveForm canceled");
 								});
 							} else {
 								utils.log("ERROR: Attribute form-id not found on ConnectCloudDriveForm");
 							}
 						});
-						// $("div.UIPopupWindow").hide();
 					} else {
 						// in Action bar
 						var t = $(this).parent().parent().attr("onclick");
