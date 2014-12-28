@@ -101,7 +101,7 @@ public class ConnectService implements ResourceContainer {
   /**
    * Init cookie expire time in seconds.
    */
-  public static final int       INIT_COOKIE_EXPIRE     = 60;                                       // 1min
+  public static final int       INIT_COOKIE_EXPIRE     = 300;                                      // 5min
 
   /**
    * Connect cookie expire time in seconds.
@@ -279,8 +279,7 @@ public class ConnectService implements ResourceContainer {
         rollback();
       } catch (Throwable e) {
         LOG.warn("Error removing the drive Node connected with error (" + error.getMessage() + "). "
-                     + e.getMessage(),
-                 e);
+            + e.getMessage(), e);
       } finally {
         lock.unlock();
         // log error here as the connect was executed asynchronously
@@ -383,7 +382,6 @@ public class ConnectService implements ResourceContainer {
    * @param jsessionsId
    * @param jsessionsIdSSO
    * @param connectId
-   * @param initId
    * @return {@link Response}
    */
   @POST
@@ -393,8 +391,7 @@ public class ConnectService implements ResourceContainer {
                                @FormParam("path") String path,
                                @CookieParam("JSESSIONID") Cookie jsessionsId,
                                @CookieParam("JSESSIONIDSSO") Cookie jsessionsIdSSO,
-                               @CookieParam(CONNECT_COOKIE) Cookie connectId,
-                               @CookieParam(INIT_COOKIE) Cookie initId) {
+                               @CookieParam(CONNECT_COOKIE) Cookie connectId) {
 
     ConnectResponse resp = new ConnectResponse();
     String host = locator.getServiceHost(uriInfo.getRequestUri().getHost());
@@ -461,9 +458,7 @@ public class ConnectService implements ResourceContainer {
                             + ". Cannot create node under " + path, e);
                         return resp.connectError("Error creating node for the drive: storage error.",
                                                  cid.toString(),
-                                                 host)
-                                   .status(Status.INTERNAL_SERVER_ERROR)
-                                   .build();
+                                                 host).status(Status.INTERNAL_SERVER_ERROR).build();
                       }
                     }
                   }
@@ -761,7 +756,7 @@ public class ConnectService implements ResourceContainer {
                                         provider.getName(),
                                         iid.toString(),
                                         baseHost)
-                             // TODO UNAUTHORIZED ?
+                  // TODO UNAUTHORIZED ?
                              .status(Status.BAD_REQUEST)
                              .build();
                 }
@@ -771,9 +766,7 @@ public class ConnectService implements ResourceContainer {
                                       connect.host,
                                       provider.getName(),
                                       iid.toString(),
-                                      baseHost)
-                           .status(Status.BAD_REQUEST)
-                           .build();
+                                      baseHost).status(Status.BAD_REQUEST).build();
               }
             } else {
               // we have an error from provider
@@ -781,7 +774,7 @@ public class ConnectService implements ResourceContainer {
 
               // TODO hack for access_denied from Google, move this logic to Google connector
               if (error.indexOf("access_denied") >= 0) {
-                resp.authError("Acccess denied.", connect.host, provider.getName(), iid.toString(), baseHost)
+                resp.authError("Access denied to Google Drive", connect.host, provider.getName(), iid.toString(), baseHost)
                     .status(Status.FORBIDDEN);
               } else {
                 resp.authError(error, connect.host, provider.getName(), iid.toString(), baseHost)
@@ -797,19 +790,15 @@ public class ConnectService implements ResourceContainer {
                                   connect.host,
                                   provider.getName(),
                                   iid.toString(),
-                                  baseHost)
-                       .status(Status.INTERNAL_SERVER_ERROR)
-                       .build();
+                                  baseHost).status(Status.INTERNAL_SERVER_ERROR).build();
           }
         } else {
-          LOG.warn("Authentication was not initiated for " + providerId + " and id " + initId);
+          LOG.warn("Authentication not initiated for " + providerId + " and id " + initId);
           return resp.authError("Authentication request expired. Try again later.",
                                 baseHost,
                                 null,
                                 iid.toString(),
-                                baseHost)
-                     .status(Status.BAD_REQUEST)
-                     .build();
+                                baseHost).status(Status.BAD_REQUEST).build();
         }
       } catch (Throwable e) {
         LOG.error("Error initializing drive provider by id " + providerId, e);
