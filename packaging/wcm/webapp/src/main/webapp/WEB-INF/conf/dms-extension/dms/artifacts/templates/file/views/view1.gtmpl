@@ -74,11 +74,20 @@
   def downloadLink = sb.toString();
   def fileComponent = uicomponent.getUIComponent(mimeType);
   def noPreviewStyle = "";
-  if(fileComponent == null || (fileComponent instanceof PDFViewer && (((PDFViewer)fileComponent).getMaximumOfPage() <= 0 || ((PDFViewer)fileComponent).getMaximumOfPage() > PDFViewerService.MAX_PAGES))) {
+  def fileSize = 0;
+  def canViewPDF = true;
+  if (fileComponent instanceof PDFViewer) {
+    fileSize = contentNode.getProperty("jcr:data").getStream().available();
+    def maximumOfPage = ((PDFViewer)fileComponent).getMaximumOfPage();
+    if (maximumOfPage <= 0 || maximumOfPage > PDFViewerService.MAX_PAGES || fileSize > PDFViewerService.MAX_FILE_SIZE) {
+      canViewPDF = false;
+    }
+  }
+  if(fileComponent == null || canViewPDF == false) {
     noPreviewStyle = "noPreview";
     org.exoplatform.ecm.webui.utils.Utils.logUnavaiblePreview(encodedPath);
   }
-  if(!(fileComponent instanceof PDFViewer) || (fileComponent instanceof PDFViewer && (((PDFViewer)fileComponent).getMaximumOfPage() <= 0 || ((PDFViewer)fileComponent).getMaximumOfPage() > PDFViewerService.MAX_PAGES))) {
+  if(!(fileComponent instanceof PDFViewer) || canViewPDF == false) {
 %>
 
 <div $resizeBlock>
@@ -89,7 +98,7 @@
     <div class="navigationContainer uiBox $noPreviewStyle">
       <h6 class="title clearfix">
         <%          
-          if (!(fileComponent == null || (fileComponent instanceof PDFViewer && ((PDFViewer)fileComponent).getMaximumOfPage() <=0 ))) {
+          if (!(fileComponent == null || canViewPDF == false)) {
           %>
             <a class="pull-right" href="$downloadLink"><i class="uiIconDownload"></i> <%=_ctx.appRes("File.view.label.download")%></a>
         <%}%>
