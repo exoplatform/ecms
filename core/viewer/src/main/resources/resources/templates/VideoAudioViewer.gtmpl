@@ -134,12 +134,12 @@
             height: 30,
             // setup auto hide
             autoHide: false,
-            playlist: true,
+            playlist: false,
             tooltips:  {
               // a shortcut for enabling tooltips for buttons (English)
               buttons: true
             },
-            stop: true, 
+            stop: false,
             play: true,
             scrubber: true,
             time: true, 
