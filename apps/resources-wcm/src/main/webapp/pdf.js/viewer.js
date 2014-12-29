@@ -4204,6 +4204,8 @@ window.addEventListener('pagechange', function pagechange(evt) {
   }
   var previousButton = document.getElementById('previous');
   var nextButton = document.getElementById('next');
+  var firstPageMenu = document.getElementById('firstPage');
+  var lastPageMenu = document.getElementById('lastPage');
   previousButton.disabled = (page <= 1);
   if (previousButton.disabled) {
     if(previousButton.className.indexOf("disabled") < 0){
