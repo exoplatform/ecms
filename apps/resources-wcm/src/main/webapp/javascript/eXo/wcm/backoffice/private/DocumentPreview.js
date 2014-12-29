@@ -136,8 +136,14 @@
                 var activityId = $commentTextAreaPreview.attr('activityId');
                 var commentText = $commentTextAreaPreview.val();
                 $commentTextAreaPreview.val('');
-                var postActivityLink = "/rest/private/portal/social/activities/" + activityId + "/comments/create.json?text=" + commentText + "&opensocial_viewer_id=" + eXo.env.portal.userName;
 
+                if (gj.trim(commentText).length === 0) {
+                    commentTextAreaPreview.focus();
+                    e.preventDefault();
+                    return;
+                }
+
+                var postActivityLink = "/rest/private/portal/social/activities/" + activityId + "/comments/create.json?text=" + commentText + "&opensocial_viewer_id=" + eXo.env.portal.userName;
                 var jqxhr = gj.ajax(postActivityLink)
                     .done(function() {
                         eXo.ecm.DocumentPreview.refreshComments();
