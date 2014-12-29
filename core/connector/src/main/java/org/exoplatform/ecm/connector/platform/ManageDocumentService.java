@@ -470,7 +470,9 @@ public class ManageDocumentService implements ResourceContainer {
       if (child.isNodeType(FCKUtils.EXO_HIDDENABLE) && !showHidden)
         continue;
       if (child.isNodeType("exo:symlink") && child.hasProperty("exo:uuid") && child.hasProperty("exo:workspace")) {
-        sourceNode = linkManager.getTarget(child);
+        if (child.getProperty("exo:primaryType").getString().equals(NodetypeConstant.NT_FILE)) {
+          sourceNode = linkManager.getTarget(child);
+        }
       }
       referNode = sourceNode != null ? sourceNode : child;
 
@@ -501,6 +503,12 @@ public class ManageDocumentService implements ResourceContainer {
   }
 
   private boolean isFolder(Node checkNode) throws RepositoryException {
+    if (checkNode.isNodeType(("exo:symlink"))) {
+      String primaryNodeType = checkNode.getProperty("exo:primaryType").getString();
+      if (!primaryNodeType.equals(NodetypeConstant.NT_FILE)) {
+        return true;
+      }
+    }
     return checkNode.isNodeType(NodetypeConstant.NT_FOLDER)
         || checkNode.isNodeType(NodetypeConstant.NT_UNSTRUCTURED);
   }
