@@ -84,6 +84,8 @@
             }
 
             gj('.uiPreviewWebContent', $uiDocumentPreview).height(pdfDisplayAreaHeight - 30) // webcontent
+            gj('.EmbedHtml', $uiDocumentPreview).height(pdfDisplayAreaHeight) // External embedded
+
         }
         resizeEventHandler();
         gj(window).on('resize', resizeEventHandler);

@@ -31,55 +31,61 @@
             <div class="resizeButton " id="ShowHideAll">
                 <i style="display: block;" class="uiIconMiniArrowRight uiIconWhite"></i>
             </div>
-                 <% 
-            def isWebContent = uicomponent.isWebContent();
-            if (isWebContent) {
-                  %>
-                <div class="uiPreviewWebContent">
-                  <%
-            }
-            
-                  uicomponent.renderChild(org.exoplatform.social.plugin.doc.UIDocViewer);
-            if (isWebContent) {
-                %>
-                </div>
-                <%
-                double voteRating = 0 ;
-                if(contentNode.hasProperty("exo:votingRate")) voteRating = contentNode.getProperty("exo:votingRate").getDouble() ;
-                long voteTotal = 0 ;
-                if(contentNode.hasProperty("exo:voteTotalOfLang")) voteTotal = contentNode.getProperty("exo:voteTotalOfLang").getLong() ;
-                %>
-                <div class="uiVote clearfix">
-                  <%if (voteTotal > 0) {%>
-                    <div class="voteRatingInfo">
-                            <%=_ctx.appRes("Vote.view.label.avg-rating")%>: <span>$voteRating</span>
-                            <%=_ctx.appRes("Vote.view.label.subscription")%>: <span>$voteTotal</span>
-                    </div>
-                    <div class="avgRatingImages clearfix">
-                        <%
-                            int iVote = 0;
-                            while(++iVote <= voteRating) {
-                        %>
-                                    <i class="voted"></i>
-                            <%
-                                }
-                                while(iVote++ <= 5) {
-                            %>
-                                <i class="unvoted"></i>
-                            <%}%>
-                    </div>
-                  <%}%>
-                </div>
-                
             <%
-            }
-            if (uicomponent.isMediaFile(contentNode)) {
-              def downloadLink = org.exoplatform.ecm.webui.utils.Utils.getDownloadRestServiceLink(contentNode);
-             %>
-             <div class="downloadBtn">
-                <a href="$downloadLink"><i class="uiIconDownload uiIconWhite"></i>&nbsp;Download</a>
-            </div>
-            <%}%>
+            def isWebContent = uicomponent.isWebContent();
+            def embedHtml = uicomponent.getEmbedHtml();
+            if (embedHtml != null) {
+            %>
+                <div class="EmbedHtml">$embedHtml</div>
+            <%
+            } else {
+                if (isWebContent) {%>
+                    <div class="uiPreviewWebContent">
+                <%
+                }
+                      uicomponent.renderChild(org.exoplatform.social.plugin.doc.UIDocViewer);
+                if (isWebContent) {
+                    %>
+                    </div>
+                    <%
+                    double voteRating = 0 ;
+                    if(contentNode.hasProperty("exo:votingRate")) voteRating = contentNode.getProperty("exo:votingRate").getDouble() ;
+                    long voteTotal = 0 ;
+                    if(contentNode.hasProperty("exo:voteTotalOfLang")) voteTotal = contentNode.getProperty("exo:voteTotalOfLang").getLong() ;
+                    %>
+                    <div class="uiVote clearfix">
+                      <%if (voteTotal > 0) {%>
+                        <div class="voteRatingInfo">
+                                <%=_ctx.appRes("Vote.view.label.avg-rating")%>: <span>$voteRating</span>
+                                <%=_ctx.appRes("Vote.view.label.subscription")%>: <span>$voteTotal</span>
+                        </div>
+                        <div class="avgRatingImages clearfix">
+                            <%
+                                int iVote = 0;
+                                while(++iVote <= voteRating) {
+                            %>
+                                        <i class="voted"></i>
+                                <%
+                                    }
+                                    while(iVote++ <= 5) {
+                                %>
+                                    <i class="unvoted"></i>
+                                <%}%>
+                        </div>
+                      <%}%>
+                    </div>
+
+                <%
+                }
+                if (uicomponent.isMediaFile(contentNode)) {
+                  def downloadLink = org.exoplatform.ecm.webui.utils.Utils.getDownloadRestServiceLink(contentNode);
+                 %>
+                     <div class="downloadBtn">
+                        <a href="$downloadLink"><i class="uiIconDownload uiIconWhite"></i>&nbsp;Download</a>
+                    </div>
+                <%}
+              }
+            %>
         </div>
         <style>
             .uiActivityStream, .uiActivitiesLoader {
