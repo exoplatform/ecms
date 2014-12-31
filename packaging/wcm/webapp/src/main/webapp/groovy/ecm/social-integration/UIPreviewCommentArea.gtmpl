@@ -21,8 +21,7 @@ rcontext.getJavascriptManager()
 
 
 
-def contentNode = uicomponent.getOriginalNode();
-def title = Utils.getTitle(contentNode);
+
 
 def activityId = uicomponent.getActivityId();
 
@@ -32,7 +31,13 @@ int commentSize = commentList.size();
 %>
 <div class="uiBox commentArea pull-right" id="$uicomponent.id">
     <div class="title">
-        <i class="<%=Utils.getNodeTypeIcon(contentNode, "uiIcon16x16")%> uiIconLightGray"></i>&nbsp;&nbsp;$title
+        <%
+        def contentNode = uicomponent.getOriginalNode();
+        if (contentNode != null) {
+          def title = Utils.getTitle(contentNode);
+        %>
+          <i class="<%=Utils.getNodeTypeIcon(contentNode, "uiIcon16x16")%> uiIconLightGray"></i>&nbsp;&nbsp;$title
+        <%}%>
     </div>
     <div class="uiContentBox">
       <%
