@@ -334,8 +334,6 @@
 		var uiComponent = document.getElementById(componentId);
 		var input = gj(uiComponent).find("input")[0];
 		gj(input).attr('autocomplete', 'off');
-		gj(input).attr('title', searchLabel);
-		gj(input).val(searchLabel);
 		eXo.ecm.WCMUtils.decorateInput(input, searchLabel, true);
 	};
 
@@ -344,15 +342,6 @@
 		input.form.onsubmit = function() {
 		  return false;
 		};
-		gj(input).focus(function() {
-		  if (gj(this).val() == defaultValue && defaultCondition)
-		    gj(this).val('');
-		});
-		gj(input).blur(function() {
-		  if (gj(this).val() == '') {
-		    gj(this).val(defaultValue);
-		  }
-		});
 	};
 	
 		
