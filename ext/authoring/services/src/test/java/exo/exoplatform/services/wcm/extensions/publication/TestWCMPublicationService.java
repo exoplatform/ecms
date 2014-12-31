@@ -1,6 +1,5 @@
 package exo.exoplatform.services.wcm.extensions.publication;
 
-
 import java.util.Date;
 import java.util.LinkedList;
 
@@ -29,14 +28,8 @@ import org.exoplatform.services.wcm.publication.WebpagePublicationPlugin;
 import org.exoplatform.services.wcm.extensions.publication.lifecycle.authoring.AuthoringPublicationPlugin;
 import org.exoplatform.services.wcm.utils.WCMCoreUtils;
 
-/**
- * Created by The eXo Platform SAS
- * Author : eXoPlatform
- *          exo@exoplatform.com
- * Jul 26, 2012  
- */
 public class TestWCMPublicationService extends BasePublicationTestCase {
-  
+
   private static final String CURRENT_STATE = "publication:currentState";
   private static final String TEST = "test";
   private static final String ENROLLED = "enrolled";
@@ -47,7 +40,7 @@ public class TestWCMPublicationService extends BasePublicationTestCase {
   private Node node_;
   private Node testSite;
   private Node documentTest;
-  //-----------------
+  // -----------------
   /** . */
   private final String testPage = "portal::classic::testPage";
 
@@ -72,7 +65,6 @@ public class TestWCMPublicationService extends BasePublicationTestCase {
   /** . */
   private OrganizationService org;
 
-  
   public void setUp() throws Exception {
     super.setUp();
     publicationService_ = WCMCoreUtils.getService(WCMPublicationService.class);
@@ -86,41 +78,38 @@ public class TestWCMPublicationService extends BasePublicationTestCase {
     session.save();
     ConversationState c = new ConversationState(new Identity(session.getUserID()));
     ConversationState.setCurrent(c);
-    plugin_ = new AuthoringPublicationPlugin(); 
+    plugin_ = new AuthoringPublicationPlugin();
     plugin_.setName("Authoring publication");
     plugin_.setDescription("Authoring publication");
     publicationService_.addPublicationPlugin(plugin_);
-    
-    //--------------------------------
-    Listener listener = new Listener()
-    {
-       @Override
-       public void onEvent(Event event) throws Exception
-       {
-          events.add(event);
-       }
+
+    // --------------------------------
+    Listener listener = new Listener() {
+      @Override
+      public void onEvent(Event event) throws Exception {
+        events.add(event);
+      }
     };
 
     PortalContainer container = PortalContainer.getInstance();
-    storage_ = (DataStorage)container.getComponentInstanceOfType(DataStorage.class);
-    mgr = (POMSessionManager)container.getComponentInstanceOfType(POMSessionManager.class);
-    navService = (NavigationService)container.getComponentInstanceOfType(NavigationService.class);
+    storage_ = (DataStorage) container.getComponentInstanceOfType(DataStorage.class);
+    mgr = (POMSessionManager) container.getComponentInstanceOfType(POMSessionManager.class);
+    navService = (NavigationService) container.getComponentInstanceOfType(NavigationService.class);
     events = new LinkedList<Event>();
-    listenerService = (ListenerService)container.getComponentInstanceOfType(ListenerService.class);
+    listenerService = (ListenerService) container.getComponentInstanceOfType(ListenerService.class);
     org = WCMCoreUtils.getService(OrganizationService.class);
 
     listenerService.addListener(DataStorage.PAGE_CREATED, listener);
     listenerService.addListener(DataStorage.PAGE_REMOVED, listener);
     listenerService.addListener(DataStorage.PAGE_UPDATED, listener);
-    listenerService.addListener(EventType
-                                .NAVIGATION_CREATED, listener);
+    listenerService.addListener(EventType.NAVIGATION_CREATED, listener);
     listenerService.addListener(EventType.NAVIGATION_DESTROYED, listener);
     listenerService.addListener(EventType.NAVIGATION_UPDATED, listener);
     listenerService.addListener(DataStorage.PORTAL_CONFIG_CREATED, listener);
     listenerService.addListener(DataStorage.PORTAL_CONFIG_UPDATED, listener);
     listenerService.addListener(DataStorage.PORTAL_CONFIG_REMOVED, listener);
   }
-  
+
   public void tearDown() throws Exception {
     publicationService_.getWebpagePublicationPlugins().clear();
     node_.remove();
@@ -131,23 +120,29 @@ public class TestWCMPublicationService extends BasePublicationTestCase {
   }
 
   /**
-   * tests enrolling node in life cycle 1
+   * Test if a node is enrolled into a lifecycle
+   * 
+   * @result current state of enrolled node is "enrolled"
    */
   public void testEnrollNodeInLifecycle1() throws Exception {
     publicationService_.enrollNodeInLifecycle(node_, plugin_.getLifecycleName());
     assertEquals(ENROLLED, node_.getProperty(CURRENT_STATE).getString());
   }
-  
+
   /**
-   * tests enrolling node in life cycle 2
+   * Test if a node in site is enrolled into a lifecycle
+   * 
+   * @result current state of enrolled is node "draft"
    */
-  public void testEnrollNodeInLifecycle2() throws Exception {    
+  public void testEnrollNodeInLifecycle2() throws Exception {
     publicationService_.enrollNodeInLifecycle(node_, "test", node_.getSession().getUserID());
     assertEquals(PublicationDefaultStates.DRAFT, node_.getProperty(CURRENT_STATE).getString());
   }
-  
+
   /**
-   * tests if node is enrolled in lifecycle
+   * Test if a node is enrolled into WCM Lifecyle
+   * 
+   * @result node is enrolled into WCM Lifecycle
    */
   public void testIsEnrolledWCMInLifecycle() throws Exception {
     assertFalse(publicationService_.isEnrolledInWCMLifecycle(node_));
@@ -156,56 +151,66 @@ public class TestWCMPublicationService extends BasePublicationTestCase {
   }
 
   /**
-   * tests getting content state 
+   * Test the getContentState function
+   * 
+   * @result getContentState returns the "enrolled" status when a node is
+   *         enrolled into a lifecycle.
    */
   public void testGetContentState() throws Exception {
     publicationService_.enrollNodeInLifecycle(node_, plugin_.getLifecycleName());
     assertEquals(ENROLLED, publicationService_.getContentState(node_));
   }
-  
+
   /**
-   * tests unsubscribing node
+   * Test the unsubcribeLifecycle function
+   * 
+   * @result Node is no longer enrolled into any lifecycle
    */
   public void testUnsubscribeLifecycle() throws Exception {
     publicationService_.enrollNodeInLifecycle(node_, plugin_.getLifecycleName());
     publicationService_.unsubcribeLifecycle(node_);
     assertFalse(publicationService_.isEnrolledInWCMLifecycle(node_));
   }
-  
-  
+
   /**
-   * tests update life cycle on change content 1
+   * Test if the state of a node can be changed in a lifecycle
+   * 
+   * @result state of node can be changed
    */
   public void testUpdateLifecyleOnChangeContent1() throws Exception {
-    publicationService_.updateLifecyleOnChangeContent(
-              node_, "test", node_.getSession().getUserID(), PublicationDefaultStates.PUBLISHED);
-    
+    publicationService_.updateLifecyleOnChangeContent(node_, "test", node_.getSession().getUserID(),
+        PublicationDefaultStates.PUBLISHED);
+
     assertEquals(PublicationDefaultStates.PUBLISHED, publicationService_.getContentState(node_));
-    
-    publicationService_.updateLifecyleOnChangeContent(
-              node_, "test", node_.getSession().getUserID(), PublicationDefaultStates.DRAFT);
+
+    publicationService_.updateLifecyleOnChangeContent(node_, "test", node_.getSession().getUserID(),
+        PublicationDefaultStates.DRAFT);
     assertEquals(PublicationDefaultStates.DRAFT, publicationService_.getContentState(node_));
   }
+
   /**
-   * tests update life cycle on change content 2
+   * Test if the state of a node can be changed into default state
+   * 
+   * @result state of node is in "draft"
    */
-  
+
   public void testUpdateLifecyleOnChangeContent2() throws Exception {
 
-	  publicationService_.updateLifecyleOnChangeContent(
-              node_, "test", node_.getSession().getUserID());
+    publicationService_.updateLifecyleOnChangeContent(node_, "test", node_.getSession().getUserID());
     assertEquals(PublicationDefaultStates.DRAFT, publicationService_.getContentState(node_));
   }
-  
+
   /**
-   * tests update life cycle on change content 3
+   * Test if child node of webcontent cannot be enrolled into a lifecycle
+   * 
+   * @result child node of webcontent cannot be enrolled into a lifecyle
    */
-  
+
   public void testUpdateLifecyleOnChangeContent3() throws Exception {
-	String htmlData = "This is the default.html file.";
-    Node webContent = createWebcontentNode(documentTest,"webcontent","html","css","js");
+    String htmlData = "This is the default.html file.";
+    Node webContent = createWebcontentNode(documentTest, "webcontent", "html", "css", "js");
     Node documentFolder = webContent.getNode("documents");
-    
+
     Node htmlNode;
     try {
       htmlNode = documentFolder.getNode("default.html");
@@ -222,36 +227,37 @@ public class TestWCMPublicationService extends BasePublicationTestCase {
     }
     htmlContent.setProperty("jcr:encoding", "UTF-8");
     htmlContent.setProperty("jcr:mimeType", "text/html");
-    htmlContent.setProperty("jcr:lastModified", new Date().getTime()); 
+    htmlContent.setProperty("jcr:lastModified", new Date().getTime());
     htmlContent.setProperty("jcr:data", htmlData);
     documentFolder.save();
-	publicationService_.updateLifecyleOnChangeContent(
-			webContent, "test", webContent.getSession().getUserID());
+    publicationService_.updateLifecyleOnChangeContent(webContent, "test", webContent.getSession().getUserID());
     assertEquals(PublicationDefaultStates.DRAFT, publicationService_.getContentState(webContent));
-    publicationService_.updateLifecyleOnChangeContent(
-			htmlNode, "test", webContent.getSession().getUserID());
-    //ECMS-6460: Do not allow publishing children of webcontent 
+    publicationService_.updateLifecyleOnChangeContent(htmlNode, "test", webContent.getSession().getUserID());
+    // ECMS-6460: Do not allow publishing children of webcontent
     assertEquals(null, publicationService_.getContentState(htmlNode));
   }
-  
+
   /**
    * Creates the webcontent node.
-   *
-   * @param parentNode the parent node
-   * @param nodeName the node name
-   * @param htmlData the html data
-   * @param cssData the css data
-   * @param jsData the js data
-   *
+   * 
+   * @param parentNode
+   *          the parent node
+   * @param nodeName
+   *          the node name
+   * @param htmlData
+   *          the html data
+   * @param cssData
+   *          the css data
+   * @param jsData
+   *          the js data
+   * 
    * @return the node
-   *
-   * @throws Exception the exception
+   * 
+   * @throws Exception
+   *           the exception
    */
-  protected Node createWebcontentNode(Node parentNode,
-                                      String nodeName,
-                                      String htmlData,
-                                      String cssData,
-                                      String jsData) throws Exception {
+  protected Node createWebcontentNode(Node parentNode, String nodeName, String htmlData, String cssData, String jsData)
+      throws Exception {
     Node webcontent = parentNode.addNode(nodeName, "exo:webContent");
     webcontent.setProperty("exo:title", nodeName);
     Node htmlNode;
@@ -281,14 +287,14 @@ public class TestWCMPublicationService extends BasePublicationTestCase {
     } catch (Exception ex) {
       jsFolder = webcontent.addNode("js", "exo:jsFolder");
     }
-    
+
     Node documentsFolder;
     try {
       documentsFolder = webcontent.getNode("documents");
     } catch (Exception ex) {
       documentsFolder = webcontent.addNode("documents", "nt:folder");
     }
-    
+
     Node jsNode;
     try {
       jsNode = jsFolder.getNode("default.js");
@@ -360,5 +366,5 @@ public class TestWCMPublicationService extends BasePublicationTestCase {
     session.save();
     return webcontent;
   }
-  
+
 }
