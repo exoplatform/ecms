@@ -107,15 +107,18 @@
             var $fileContent = gj('.fileContent', $uiDocumentPreview);
             var $resizeButton = gj('.resizeButton', $uiDocumentPreview);
             var $downloadButton = gj('.downloadBtn', $uiDocumentPreview);
+            var $EmbedHtml = gj('.EmbedHtml', $uiDocumentPreview);
             if ($uiIconMiniArrow.hasClass('uiIconMiniArrowRight')) {
                 $commentArea.css('display', 'none');
                 $uiPreviewWebContent.css('margin-right', '30px');
+                $EmbedHtml.css('margin-right', '30px');
                 $fileContent.css('margin-right', '30px');
                 $resizeButton.css('right', '5px');
                 $downloadButton.css('right', '30px');
             } else {
                 $commentArea.css('display', 'block');
                 $uiPreviewWebContent.css('margin-right', '335px');
+                $EmbedHtml.css('margin-right', '335px');
                 $fileContent.css('margin-right', '335px');
                 $resizeButton.css('right', '310px');
                 $downloadButton.css('right', '335px');
@@ -153,7 +156,6 @@
                     .fail(function() {
                         alert("error");
                     });
-
             }
         });
     };

@@ -133,12 +133,13 @@
 		}
 
 	    .EmbedHtml {
+		  	margin-right: 335px;
 			border: none;
 			margin-bottom: 0;
-			overflow: auto;
+			overflow: hidden;
 			position: relative;
 			background: @black;
-				iframe {
+				iframe, embed {
 				width: 100%;
 				left: 50%;
 				position: absolute;
@@ -146,6 +147,7 @@
 				transform: translate(-50%, -50%);
 				-ms-transform: translate(-50%, -50%);
 				-webkit-transform: translate(-50%, -50%);
+				 border: none !important;
 			}
 		}
 		.fileContent {
