@@ -360,7 +360,7 @@
 	//------------------------------------------------------------//
 	//--------------------UI Related methods----------------------//
 	MultiUpload.prototype.enableDragItemArea = function(event, box) {
-		box.style.background="darkgray";
+		//box.style.background="darkgray";
 		event.preventDefault();
 	};
 
@@ -1003,9 +1003,9 @@
 		  cancelButton.className = "fileSize cancelStatus pull-right";
 		  cancelButton.innerHTML = message;
 		  gj(cancelButton.parentNode).removeClass("actionIcon");
-		cancelButton.style.color="darkgray";
+		//cancelButton.style.color="darkgray";
 		var filename = eXo.ecm.MultiUpload.document.getElementById("file" + progressID);
-		filename.style.color="darkgray";
+		//filename.style.color="darkgray";
 		delete eXo.ecm.MultiUpload.uploadingFileIds[progressID];
 		//change uploading files value
 		eXo.ecm.MultiUpload.changeStatusValue(eXo.ecm.MultiUpload.UPLOADING, -1);
