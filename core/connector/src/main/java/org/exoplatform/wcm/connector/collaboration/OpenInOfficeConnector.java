@@ -2,6 +2,7 @@ package org.exoplatform.wcm.connector.collaboration;
 
 import org.apache.commons.lang.StringUtils;
 import org.apache.tika.io.IOUtils;
+import org.exoplatform.ecm.utils.permission.PermissionUtil;
 import org.exoplatform.services.cms.documents.DocumentTypeService;
 import org.exoplatform.services.cms.documents.impl.DocumentType;
 import org.exoplatform.services.resources.ResourceBundleService;
@@ -96,10 +97,11 @@ public class OpenInOfficeConnector implements ResourceContainer {
     rs.put("repository", WCMCoreUtils.getRepository().getConfiguration().getName());
     rs.put("workspace", workspace);
     rs.put("filePath", filePath);
+    rs.put("canEdit", canEdit(workspace, filePath));
 
     builder = Response.ok(rs.toString(), MediaType.APPLICATION_JSON);
     builder.tag(etag);
-    builder.cacheControl(cc);
+//    builder.cacheControl(cc);
     return builder.build();
   }
 
@@ -116,7 +118,8 @@ public class OpenInOfficeConnector implements ResourceContainer {
                            @QueryParam("filePath") String filePath,
                            @QueryParam("workspace") String workspace
   ) throws Exception {
-    Session session = WCMCoreUtils.getSystemSessionProvider().getSession(workspace, WCMCoreUtils.getRepository());
+    Session session = WCMCoreUtils.getSystemSessionProvider().
+        getSession(workspace, WCMCoreUtils.getRepository());
     Node node = (Node)session.getItem(filePath);
 
     if(node.canAddMixin(VERSION_MIXIN)){
@@ -161,6 +164,11 @@ public class OpenInOfficeConnector implements ResourceContainer {
             .header("Content-type", "application/internet-shortcut")
             .build();
   }
-
-
+  
+  private boolean canEdit(String workspace, String filePath) throws Exception {
+    Session session = WCMCoreUtils.getUserSessionProvider().
+        getSession(workspace, WCMCoreUtils.getRepository());
+    Node node = (Node)session.getItem(filePath);
+    return PermissionUtil.canSetProperty(node) && !node.isLocked() && node.isCheckedOut();
+  }
 }

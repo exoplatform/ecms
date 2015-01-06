@@ -24,6 +24,8 @@
       } else {
         openStatus = documentManager.JavaEditDocument(absolutePath, null, "/open-document/applet/ITHitMountOpenDocument.jar");
       }
+    } else {
+    	location.href = "/rest/office/openDocument?workspace"+workspace+"&filePath="+filePath;
     }
   }
 
@@ -81,23 +83,42 @@
           openDocument.html(html);
 
           if(eXo.ecm.ECMWebDav !== undefined) {
-            if(activityId != null && activityId != "undefined" && activityId != ""){ // update 4 activities
-              var _filePath = openDocument.attr("href");
-              var _lockStatus = openDocument.attr("status");
-              if(_lockStatus === "locked"){
-                $('#modal-'+activityId).modal({show: false});
-                openDocument.attr("href", "javascript:void(0);");
-              }else{
-                openDocument.attr("href", "javascript:eXo.ecm.OpenDocumentInOffice.openDocument('"+_filePath+"')");
-              }
-            }
-          }else{
-            //ITHIT not detected
-            defaultEnviromentFilter(openDocument);
+            //showButton
+            console.log("ITHIT detected!");
+            if (data.canEdit != "true") return;//can not edit, just show popup(do not change href)            
+//            if(activityId != null && activityId != "undefined" && activityId != ""){ // update 4 activities
+//              var _filePath = openDocument.attr("href");
+//              var _lockStatus = openDocument.attr("status");
+//              if(_lockStatus === "locked"){
+//                $('#modal-'+activityId).modal({show: false});
+//                openDocument.attr("href", "javascript:void(0);");
+//              }else{
+//                openDocument.attr("href", "javascript:eXo.ecm.OpenDocumentInOffice.openDocument('"+_filePath+"')");
+//              }
+//            }
+            var _filePath = openDocument.attr("href");
             openDocument.parent().removeAttr("onclick");
-            openDocument.attr("target", "_blank");
-
+            openDocument.attr("href", "javascript:eXo.ecm.OpenDocumentInOffice.openDocument('"+_filePath+"')");
+          }else{
+            console.log("ITHIT not detected!");
+            var display = defaultEnviromentFilter(openDocument);
+            if (display ==="hide") return;
+            //showButton
+            if (data.canEdit != true) return;//can not edit, just show popup(do not change href)
+            openDocument.parent().removeAttr("onclick");
             openDocument.attr("href", "/rest/office/openDocument?workspace="+data.workspace+"&filePath="+data.filePath);
+//            if(activityId != null && activityId != "undefined" && activityId != ""){ // update 4 activities
+//              var _filePath = openDocument.attr("href");
+//              var _lockStatus = openDocument.attr("status");
+//              if(_lockStatus === "locked"){
+//
+//              }else{
+//                openDocument.attr("href", "javascript:eXo.ecm.OpenDocumentInOffice.openDocument('"+_filePath+"')");
+//              }
+//            }else{
+//              openDocument.parent().removeAttr("onclick");
+//              openDocument.attr("href", "/rest/lnkproducer/openit.lnk?path=/"+data.repository+"/"+data.workspace+data.filePath);
+//            }
           }
 
           gj(".detailContainer").find('.openDocument').html(data.title);
@@ -178,6 +199,7 @@
       //other browser
 
       gj(element).parent().attr("style", "display:none;");
+      return "hide";
     }
 
     // other browser
