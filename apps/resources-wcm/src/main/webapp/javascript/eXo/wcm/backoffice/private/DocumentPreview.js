@@ -80,7 +80,7 @@
                 $img.css('max-height', $uiContentBox.height() - 3);
                 $img.css('width', 'auto');
                 $img.css('height', 'auto');
-                $navigationContainer.css('overflow','hidden');
+                $navigationContainer.css('overflow', 'hidden');
             }
 
             gj('.uiPreviewWebContent', $uiDocumentPreview).height(pdfDisplayAreaHeight - 30) // webcontent
@@ -158,11 +158,25 @@
                     });
             }
         });
+
+        // Set placeholder for IE
+        if (this.isIE()) {
+            gj('#commentTextAreaPreview').val('');
+        }
+    };
+
+    DocumentPreview.prototype.isIE = function() {
+        var ua = window.navigator.userAgent;
+        var msie = ua.indexOf("MSIE ");
+        if (msie > 0 || !!navigator.userAgent.match(/Trident.*rv\:11\./)) {
+            return true;
+        }
+        return false;
     };
 
     DocumentPreview.prototype.refreshComments = function() {
-      var url = decodeURIComponent(this.refreshCommentsAction);
-      eval(url);
+        var url = decodeURIComponent(this.refreshCommentsAction);
+        eval(url);
     };
 
     eXo.ecm.DocumentPreview = new DocumentPreview();
