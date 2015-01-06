@@ -81,7 +81,6 @@
           openDocument.html(html);
 
           if(eXo.ecm.ECMWebDav !== undefined) {
-            console.log("ITHIT detected!");
             if(activityId != null && activityId != "undefined" && activityId != ""){ // update 4 activities
               var _filePath = openDocument.attr("href");
               var _lockStatus = openDocument.attr("status");
@@ -93,20 +92,12 @@
               }
             }
           }else{
-            console.log("ITHIT not detected!");
+            //ITHIT not detected
             defaultEnviromentFilter(openDocument);
-            if(activityId != null && activityId != "undefined" && activityId != ""){ // update 4 activities
-              var _filePath = openDocument.attr("href");
-              var _lockStatus = openDocument.attr("status");
-              if(_lockStatus === "locked"){
+            openDocument.parent().removeAttr("onclick");
+            openDocument.attr("target", "_blank");
 
-              }else{
-                openDocument.attr("href", "javascript:eXo.ecm.OpenDocumentInOffice.openDocument('"+_filePath+"')");
-              }
-            }else{
-              openDocument.parent().removeAttr("onclick");
-              openDocument.attr("href", "/rest/lnkproducer/openit.lnk?path=/"+data.repository+"/"+data.workspace+data.filePath);
-            }
+            openDocument.attr("href", "/rest/office/openDocument?workspace="+data.workspace+"&filePath="+data.filePath);
           }
 
           gj(".detailContainer").find('.openDocument').html(data.title);
@@ -172,7 +163,7 @@
 
     if (msie > 0) {
       // IE 10 or older => return version number
-      console.log(parseInt(ua.substring(msie + 5, ua.indexOf('.', msie)), 10));
+
     }
 
     // IE 11 (or newer) => return version number
@@ -180,12 +171,12 @@
     if (trident > 0 && OSName === "Windows") {
       var word = new ActiveXObject("Word.Application");
       var wordVersion = word.Version >= "14.0";
-      console.log(wordVersion);
+
       var rv = ua.indexOf('rv:');
-      console.log(parseInt(ua.substring(rv + 3, ua.indexOf('.', rv)), 10));
+
     }else{
       //other browser
-      console.log(gj(element).parent().html());
+
       gj(element).parent().attr("style", "display:none;");
     }
 

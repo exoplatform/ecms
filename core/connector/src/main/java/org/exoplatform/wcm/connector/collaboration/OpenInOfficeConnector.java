@@ -1,6 +1,7 @@
 package org.exoplatform.wcm.connector.collaboration;
 
 import org.apache.commons.lang.StringUtils;
+import org.apache.tika.io.IOUtils;
 import org.exoplatform.services.cms.documents.DocumentTypeService;
 import org.exoplatform.services.cms.documents.impl.DocumentType;
 import org.exoplatform.services.resources.ResourceBundleService;
@@ -11,15 +12,12 @@ import org.json.JSONObject;
 import javax.annotation.security.RolesAllowed;
 import javax.jcr.Node;
 import javax.jcr.Session;
-import javax.ws.rs.GET;
-import javax.ws.rs.Path;
-import javax.ws.rs.QueryParam;
-import javax.ws.rs.core.EntityTag;
-import javax.ws.rs.core.CacheControl;
-import javax.ws.rs.core.Request;
-import javax.ws.rs.core.Context;
-import javax.ws.rs.core.MediaType;
-import javax.ws.rs.core.Response;
+import javax.servlet.ServletOutputStream;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+import javax.ws.rs.*;
+import javax.ws.rs.core.*;
+import java.io.*;
 import java.util.Locale;
 import java.util.ResourceBundle;
 
@@ -132,4 +130,37 @@ public class OpenInOfficeConnector implements ResourceContainer {
 
     return Response.ok(String.valueOf(node.isCheckedOut()), MediaType.TEXT_PLAIN).build();
   }
+
+  /**
+   * Return a a input stream internet shortcut to open file with desktop application
+   * @param httpServletRequest
+   * @param filePath
+   * @return
+   * @throws Exception
+   */
+  @GET
+  @Path("/{linkFilePath}/")
+  @Produces("application/internet-shortcut")
+  public Response createShortcut(@Context HttpServletRequest httpServletRequest,
+                           @PathParam("linkFilePath") String linkFilePath,
+                           @QueryParam("filePath") String filePath,
+                           @QueryParam("workspace") String workspace
+  ) throws Exception {
+    Session session = WCMCoreUtils.getSystemSessionProvider().getSession(workspace, WCMCoreUtils.getRepository());
+    Node node = (Node)session.getItem(filePath);
+    String repo = WCMCoreUtils.getRepository().getConfiguration().getName();
+
+    String obsPath = httpServletRequest.getScheme()+ "://" + httpServletRequest.getServerName() + ":"
+            +httpServletRequest.getServerPort() + "/"
+            + WCMCoreUtils.getRestContextName()+ "/private/jcr/" + repo + "/" + workspace + node.getPath();
+
+    String shortCutContent = "[InternetShortcut]\n";
+    shortCutContent+="URL="+obsPath+"\n";
+    return Response.ok(IOUtils.toInputStream(shortCutContent), MediaType.APPLICATION_OCTET_STREAM)
+            .header("Content-Disposition","attachment; filename="+node.getName()+".url")
+            .header("Content-type", "application/internet-shortcut")
+            .build();
+  }
+
+
 }
