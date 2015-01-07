@@ -136,6 +136,9 @@
   <% _ctx.include(uicomponent.getTemplateSkin("nt:file", "Stylesheet")); %>
 </style>
 <div class="fileContent">
+    <div class="title clearfix">
+      <div><% _ctx.include(uicomponent.getViewTemplate("mix:votable", "view1")); %></div>
+    </div>
     <div class="content uiContentBox">
         <%
           if(fileComponent != null) {
