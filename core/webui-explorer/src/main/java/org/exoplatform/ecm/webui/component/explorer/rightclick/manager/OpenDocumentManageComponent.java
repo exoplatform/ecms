@@ -76,8 +76,7 @@ public class OpenDocumentManageComponent extends UIAbstractManagerComponent {
       if(!PermissionUtil.canSetProperty(currentNode) || currentNode.isLocked()){
         String[] userLock = {currentNode.getLock().getLockOwner()};
 
-        UIWorkingArea uiWorkingArea = event.getSource().getParent();
-        UIOpenDocumentForm uiOpenDocumentForm = uiWorkingArea.createUIComponent(UIOpenDocumentForm.class, null, null);
+        UIOpenDocumentForm uiOpenDocumentForm = event.getSource().createUIComponent(UIOpenDocumentForm.class, null, null);
         uiOpenDocumentForm.setId("UIReadOnlyFileConfirmMessage");
         uiOpenDocumentForm.setMessageKey("UIPopupMenu.msg.lock-node-read-only");
         uiOpenDocumentForm.setArguments(userLock);

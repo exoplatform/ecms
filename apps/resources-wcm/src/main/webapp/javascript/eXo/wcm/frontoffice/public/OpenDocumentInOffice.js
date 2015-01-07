@@ -25,7 +25,7 @@
         openStatus = documentManager.JavaEditDocument(absolutePath, null, "/open-document/applet/ITHitMountOpenDocument.jar");
       }
     } else {
-    	location.href = "/rest/office/openDocument?workspace"+workspace+"&filePath="+filePath;
+    	location.href = "/rest/office/openDocument?workspace="+workspace+"&filePath="+filePath;
     }
   }
 
@@ -74,6 +74,7 @@
     })
         .success(function (data) {
           data = gj.parseJSON(data);
+          if (!data.isFile) return;
           var elClass = "uiIconEcmsOpenDocument";
           var isRightClick="";
           if(activityId != null && activityId != "undefined" && activityId != "") elClass +="_"+activityId;

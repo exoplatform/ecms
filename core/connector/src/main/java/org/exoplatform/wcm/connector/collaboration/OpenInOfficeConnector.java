@@ -5,8 +5,10 @@ import org.apache.tika.io.IOUtils;
 import org.exoplatform.ecm.utils.permission.PermissionUtil;
 import org.exoplatform.services.cms.documents.DocumentTypeService;
 import org.exoplatform.services.cms.documents.impl.DocumentType;
+import org.exoplatform.services.cms.templates.TemplateService;
 import org.exoplatform.services.resources.ResourceBundleService;
 import org.exoplatform.services.rest.resource.ResourceContainer;
+import org.exoplatform.services.wcm.core.NodetypeConstant;
 import org.exoplatform.services.wcm.utils.WCMCoreUtils;
 import org.json.JSONObject;
 
@@ -63,6 +65,7 @@ public class OpenInOfficeConnector implements ResourceContainer {
     String[] nodeInfo = objId.split(":");
     String workspace = nodeInfo[0];
     String filePath = nodeInfo[1];
+
     String extension = filePath.substring(filePath.lastIndexOf(".") + 1, filePath.length());
     EntityTag etag = new EntityTag(Integer.toString((extension+"_"+language).hashCode()));
     Response.ResponseBuilder builder = request.evaluatePreconditions(etag);
@@ -90,6 +93,8 @@ public class OpenInOfficeConnector implements ResourceContainer {
       }
       if(!StringUtils.isEmpty(documentType.getIconClass())) ico=documentType.getIconClass();
     }
+    
+    Node node = getNode(workspace, filePath);
 
     JSONObject rs = new JSONObject();
     rs.put("ico", ico);
@@ -98,6 +103,7 @@ public class OpenInOfficeConnector implements ResourceContainer {
     rs.put("workspace", workspace);
     rs.put("filePath", filePath);
     rs.put("canEdit", canEdit(workspace, filePath));
+    rs.put("isFile", node.isNodeType(NodetypeConstant.NT_FILE));
 
     builder = Response.ok(rs.toString(), MediaType.APPLICATION_JSON);
     builder.tag(etag);
@@ -165,10 +171,14 @@ public class OpenInOfficeConnector implements ResourceContainer {
             .build();
   }
   
-  private boolean canEdit(String workspace, String filePath) throws Exception {
+  private Node getNode(String workspace, String filePath) throws Exception {
     Session session = WCMCoreUtils.getUserSessionProvider().
         getSession(workspace, WCMCoreUtils.getRepository());
-    Node node = (Node)session.getItem(filePath);
+    return (Node)session.getItem(filePath);
+  }
+  
+  private boolean canEdit(String workspace, String filePath) throws Exception {
+    Node node = getNode(workspace, filePath);
     return PermissionUtil.canSetProperty(node) && !node.isLocked() && node.isCheckedOut();
   }
 }
