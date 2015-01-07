@@ -136,6 +136,9 @@ public class ScriptActionPlugin extends BaseActionPlugin implements ComponentPlu
   }
 
   public void executeAction(String userId, String executable, Map variables) throws Exception {
+    if (!variables.containsKey("userId")) {
+      variables.put("userId", userId);
+    }
     ScriptService scriptService =  WCMCoreUtils.getService(ScriptService.class);
     CmsScript cmsScript = scriptService.getScript(executable);
     cmsScript.execute(variables);

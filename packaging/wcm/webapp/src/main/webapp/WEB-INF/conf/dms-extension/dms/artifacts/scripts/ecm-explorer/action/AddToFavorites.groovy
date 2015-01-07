@@ -54,12 +54,16 @@ public class AddToFavoriteScript implements CmsScript {
     Map variables = (Map) context;
     String nodePath = (String) variables.get("nodePath");
     String workspace = (String) variables.get("srcWorkspace");
+    String activateUser = null;
+    if (variables.containsKey("userId")) {
+      activateUser = (String) variables.get("userId");
+    }
     try {
       if (ConversationState.getCurrent() == null) { 
         return;
       }
       String userID = ConversationState.getCurrent().getIdentity().getUserId();
-      if(userID.equals(IdentityConstants.ANONIM) || userID.equals(IdentityConstants.SYSTEM)) return;
+      if(userID.equals(IdentityConstants.ANONIM) || userID.equals(IdentityConstants.SYSTEM) || (activateUser != null && activateUser.equals(IdentityConstants.SYSTEM))) return;
       ExtendedNode userNode = (ExtendedNode)nodeHierarchyCreator_.getUserNode(WCMCoreUtils.getSystemSessionProvider(), userID);
       String favoritePath = nodeHierarchyCreator_.getJcrPath(FAVORITE_ALIAS);
       ExtendedNode favoriteNode = (ExtendedNode)userNode.getNode(favoritePath);
