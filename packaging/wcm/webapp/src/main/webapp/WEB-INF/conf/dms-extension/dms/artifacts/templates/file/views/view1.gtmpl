@@ -95,16 +95,15 @@
     <% _ctx.include(uicomponent.getTemplateSkin("nt:file", "Stylesheet")); %>
   </style>
   <div class="fileContent">
-    <div class="navigationContainer uiBox $noPreviewStyle">
-      <h6 class="title clearfix">
+    <div class="navigationContainer $noPreviewStyle">
+      <div class="title clearfix">
         <%          
           if (!(fileComponent == null || canViewPDF == false)) {
           %>
-            <a class="pull-right" href="$downloadLink"><i class="uiIconDownload"></i> <%=_ctx.appRes("File.view.label.download")%></a>
+            <a class="pull-right" href="$downloadLink"><i class="uiIconDownload uiIconLightGray"></i> <%=_ctx.appRes("File.view.label.download")%></a>
         <%}%>
-        
-        <div class="topTitle"><%=title %></div>
-      </h6>
+        <div><% _ctx.include(uicomponent.getViewTemplate("mix:votable", "view1")); %></div>
+      </div>
       <div class="content uiContentBox">
           <%
             if(fileComponent != null) {
@@ -125,7 +124,6 @@
           <%}%>
       </div>
     </div>
-    <div><% _ctx.include(uicomponent.getViewTemplate("mix:votable", "view1")); %></div>
     <div><% _ctx.include(uicomponent.getViewTemplate("exo:comments", "view1")); %></div>
   </div>
 </div>
@@ -157,7 +155,6 @@
           </div>
         <%}%>
     </div>
-  <div><% _ctx.include(uicomponent.getViewTemplate("mix:votable", "view1")); %></div>
   <div><% _ctx.include(uicomponent.getViewTemplate("exo:comments", "view1")); %></div>
 </div>
 </div>
