@@ -470,7 +470,8 @@ public class ManageDocumentService implements ResourceContainer {
       if (child.isNodeType(FCKUtils.EXO_HIDDENABLE) && !showHidden)
         continue;
       if (child.isNodeType("exo:symlink") && child.hasProperty("exo:uuid") && child.hasProperty("exo:workspace")) {
-        if (child.getProperty("exo:primaryType").getString().equals(NodetypeConstant.NT_FILE)) {
+        String primaryNodeType = child.getProperty("exo:primaryType").getString();
+        if (primaryNodeType.equals(NodetypeConstant.NT_FILE) || primaryNodeType.equals("exo:accessibleMedia")) {
           sourceNode = linkManager.getTarget(child);
         }
       }
