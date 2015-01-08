@@ -25,7 +25,10 @@
         openStatus = documentManager.JavaEditDocument(absolutePath, null, "/open-document/applet/ITHitMountOpenDocument.jar");
       }
     } else {
-    	location.href = "/rest/office/openDocument?workspace="+workspace+"&filePath="+filePath;
+     //ITHIT not detected
+     //Use ActiveX to edit document.
+      openDocument.attr("href", "javascript:eXo.ecm.OpenDocumentInOffice.EditDocument('"+absolutePath+"')");
+    	//location.href = "/rest/office/openDocument?workspace="+workspace+"&filePath="+filePath;
     }
   }
 
@@ -130,14 +133,18 @@
   }
 
 
-
-
   /**
-   * Close all popup
+   * Open Document with ActiveX. This required enviroments:
+   * - MSOffice 2010, 2013 or least version Already installed
+   * - Enable ActiveX on IE browser or least version (only from IE11)
+   * - Return open status
+   * - Have to enable "Inittialize and script ActiveX controls not marked as save for scripting"
+   *  path: Document's dav url.
    */
-
-  OpenDocumentInOffice.prototype.closePopup = function(){
-
+  OpenDocumentInOffice.prototype.EditDocument = function(path){
+    var obj = new ActiveXObject('SharePoint.OpenDocuments.3');
+    var openStatus = obj.EditDocument(path, "15");
+    console.log("Open Document status: "+openStatus);
   }
 
   OpenDocumentInOffice.prototype.openDocument_doClick = function(){
@@ -192,13 +199,17 @@
     //check IE 11, Window, Office 2010
     if (trident > 0 && OSName === "Windows") {
       var word = new ActiveXObject("Word.Application");
-      var wordVersion = word.Version >= "14.0";
+      var allowVersion = word.Version >= "14.0"; // check MSOffice already install from 2010 to least version
+      var isAtLeastIE11 = !!(ua.match(/Trident/) && !ua.match(/MSIE/));
+      if(allowVersion && isAtLeastIE11){
 
-      var rv = ua.indexOf('rv:');
+      }else{ // Hide if not enought enviroments support
+        gj(element).parent().attr("style", "display:none;");
+      }
 
     }else{
       //other browser
-
+      //Hide this functional
       gj(element).parent().attr("style", "display:none;");
       return "hide";
     }
@@ -207,48 +218,9 @@
     return false;
   }
 
-  var bindASActionBar = function(){
-    gj("#UIActivitiesLoader .uiContentActivity").each(function(){
-
-      var activityId        = gj(this).attr("id").replace("activityContainer", "");
-      var activityActionBar = gj(this).find(".actionBar .pull-left");
-      var linkTitle         = gj(this).find(".linkTitle").html().trim();
-
-      //add OpenDocument button
-      var openDocumentButton = gj(activityActionBar).find(".uiIconEcmsOpenDocument");
-      if(openDocumentButton.length === 0){
-        var html  = "<i class=\"uiIconEcmsOpenDocument_"+activityId+"\" </i>\n Open...";
-        var documentLink = "#";
-        var workspace="";
-        var filePath="";
-        gj.ajax({
-          url: "/portal/rest/office/getActivity?activityId=" + activityId+"&lang="+eXo.env.portal.language,
-          dataType: "text",
-          type: "GET",
-          async: false
-        })
-            .success(function (data) {
-              data = gj.parseJSON(data);
-              documentLink = data.absolutePath;
-              workspace = data.workspace;
-              filePath = data.filePath;
-              // draw OpenXXX button
-              gj(activityActionBar).prepend("<li><a href=\"javascript:void(0);\" onclick=\"eXo.ecm.OpenDocumentInOffice.openDocument	('"+documentLink+"', '"+workspace+"', '"+filePath+"')\">"+html+"</a></li>");
-            });
-
-        eXo.ecm.OpenDocumentInOffice.updateLabel(linkTitle, activityId);
-      }
-
-      //remove last btn
-      // gj(activityActionBar).find(".uiIconEdit").parents().eq(1).remove();
-
-
-    });
-
-  }
-
   gj(document).ready(function() {
-    // bindASActionBar();
+    // enable FFWinPlugin in case Chrome/Firefox browser
+    //gj("body").append('<object id="winFirefoxPlugin" type="application/x-sharepoint" width="0" height="0" style="visibility:hidden;"></object>');
   });
 
   eXo.ecm.OpenDocumentInOffice = new OpenDocumentInOffice();
