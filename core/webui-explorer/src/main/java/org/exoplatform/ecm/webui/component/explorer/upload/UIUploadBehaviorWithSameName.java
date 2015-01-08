@@ -31,7 +31,7 @@ import org.exoplatform.webui.event.EventListener;
  * 3:46:19 AM
  */
 @ComponentConfig(
-    template = "app:/groovy/webui/component/explorer/UIConfirmMessage.gtmpl",
+    template = "classpath:groovy/ecm/webui/UIConfirmMessage.gtmpl",
     events = {
         @EventConfig(listeners = UIUploadBehaviorWithSameName.ReplaceDataActionListener.class),
         @EventConfig(listeners = UIUploadBehaviorWithSameName.BackActionListener.class),

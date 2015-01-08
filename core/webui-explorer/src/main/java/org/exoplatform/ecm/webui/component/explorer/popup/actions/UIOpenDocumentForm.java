@@ -17,7 +17,7 @@ import org.exoplatform.webui.event.EventListener;
  * Popup window when open read-only a document in SE
  */
 @ComponentConfig(
-        template = "app:/groovy/webui/component/explorer/UIConfirmMessage.gtmpl",
+        template = "classpath:groovy/ecm/webui/UIConfirmMessage.gtmpl",
         events = {
                 @EventConfig(listeners = UIOpenDocumentForm.ReadOnlyActionListener.class),
                 @EventConfig(listeners = UIOpenDocumentForm.CancelActionListener.class)
