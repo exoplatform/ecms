@@ -156,6 +156,8 @@
                     .fail(function() {
                         alert("error");
                     });
+
+                e.preventDefault();
             }
         });
 
