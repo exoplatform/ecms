@@ -55,27 +55,27 @@
                 long voteTotal = 0 ;
                 if(contentNode.hasProperty("exo:voteTotalOfLang")) voteTotal = contentNode.getProperty("exo:voteTotalOfLang").getLong() ;
                 %>
-                <div class="uiVote clearfix">
-                  <%if (voteTotal > 0) {%>
-                    <div class="voteRatingInfo">
-                            <%=_ctx.appRes("Vote.view.label.avg-rating")%>: <span>$voteRating</span>
-                            <%=_ctx.appRes("Vote.view.label.subscription")%>: <span>$voteTotal</span>
-                    </div>
-                    <div class="avgRatingImages clearfix">
-                        <%
-                            int iVote = 0;
-                            while(++iVote <= voteRating) {
-                        %>
-                                    <i class="voted"></i>
+                <%if (voteTotal > 0) {%>
+                    <div class="uiVote clearfix">
+                        <div class="voteRatingInfo">
+                                <%=_ctx.appRes("Vote.view.label.avg-rating")%>: <span>$voteRating</span>
+                                <%=_ctx.appRes("Vote.view.label.subscription")%>: <span>$voteTotal</span>
+                        </div>
+                        <div class="avgRatingImages clearfix">
                             <%
-                                }
-                                while(iVote++ <= 5) {
+                                int iVote = 0;
+                                while(++iVote <= voteRating) {
                             %>
-                                <i class="unvoted"></i>
-                            <%}%>
+                                        <i class="voted"></i>
+                                <%
+                                    }
+                                    while(iVote++ <= 5) {
+                                %>
+                                    <i class="unvoted"></i>
+                                <%}%>
+                        </div>
                     </div>
-                  <%}%>
-                </div>
+                <%}%>
                 <%
                 if (uicomponent.isMediaFile(contentNode)) {
                   def downloadLink = org.exoplatform.ecm.webui.utils.Utils.getDownloadRestServiceLink(contentNode);

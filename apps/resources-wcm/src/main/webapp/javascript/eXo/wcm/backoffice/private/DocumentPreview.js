@@ -128,6 +128,17 @@
             resizeEventHandler();
 
         });
+
+        // Click shadow mask to close preview
+        gj($uiDocumentPreview).mouseup(function(e) {
+            var $target = gj(e.target);
+            if ($target.attr('id') === "UIDocumentPreview"
+             || $target.hasClass('uiVote')
+             || "clearfix" === e.target.className
+             || $target.hasClass('UIResizableBlock')) {
+                gj(".exitWindow > .uiIconClose", $uiDocumentPreview).trigger("click");
+            }
+        });
     };
 
     DocumentPreview.prototype.bindPostCommentEvent = function() {
