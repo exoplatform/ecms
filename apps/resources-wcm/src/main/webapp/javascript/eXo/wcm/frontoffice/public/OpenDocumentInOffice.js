@@ -66,7 +66,7 @@
   OpenDocumentInOffice.prototype.updateLabel = function(objId, activityId, rightClick){
     var currentDocumentObj = {};
     gj.ajax({
-      url: "/portal/rest/office/updateDocumentTitle?objId=" + objId+"&lang="+eXo.env.portal.language,
+      url: "/portal/rest/office/updateDocumentTitle?objId=" + objId+"&lang="+eXo.env.portal.language+"&"+Math.random(),
       dataType: "text",
       type: "GET",
       async: false
@@ -86,7 +86,7 @@
           if(eXo.ecm.ECMWebDav !== undefined) {
             //showButton
             console.log("ITHIT detected!");
-            if (data.canEdit != "true") return;//can not edit, just show popup(do not change href)            
+            if (data.isLocked) return;//can not edit, just show popup(do not change href)            
 //            if(activityId != null && activityId != "undefined" && activityId != ""){ // update 4 activities
 //              var _filePath = openDocument.attr("href");
 //              var _lockStatus = openDocument.attr("status");
@@ -105,7 +105,7 @@
             var display = defaultEnviromentFilter(openDocument);
             if (display ==="hide") return;
             //showButton
-            if (data.canEdit != true) return;//can not edit, just show popup(do not change href)
+            if (data.isLocked) return;//can not edit, just show popup(do not change href)
             openDocument.parent().removeAttr("onclick");
             openDocument.attr("href", "/rest/office/openDocument?workspace="+data.workspace+"&filePath="+data.filePath);
 //            if(activityId != null && activityId != "undefined" && activityId != ""){ // update 4 activities

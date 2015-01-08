@@ -102,7 +102,7 @@ public class OpenInOfficeConnector implements ResourceContainer {
     rs.put("repository", WCMCoreUtils.getRepository().getConfiguration().getName());
     rs.put("workspace", workspace);
     rs.put("filePath", filePath);
-    rs.put("canEdit", canEdit(workspace, filePath));
+    rs.put("isLocked", node.isLocked());
     rs.put("isFile", node.isNodeType(NodetypeConstant.NT_FILE));
 
     builder = Response.ok(rs.toString(), MediaType.APPLICATION_JSON);
@@ -177,8 +177,4 @@ public class OpenInOfficeConnector implements ResourceContainer {
     return (Node)session.getItem(filePath);
   }
   
-  private boolean canEdit(String workspace, String filePath) throws Exception {
-    Node node = getNode(workspace, filePath);
-    return PermissionUtil.canSetProperty(node) && !node.isLocked() && node.isCheckedOut();
-  }
 }

@@ -73,7 +73,7 @@ public class OpenDocumentManageComponent extends UIAbstractManagerComponent {
               +httpServletRequest.getServerPort() + "/"
               + WCMCoreUtils.getRestContextName()+ "/private/jcr/" + repo + "/" + ws + nodePath;
 
-      if(!PermissionUtil.canSetProperty(currentNode) || currentNode.isLocked()){
+      if(currentNode.isLocked()){
         String[] userLock = {currentNode.getLock().getLockOwner()};
 
         UIOpenDocumentForm uiOpenDocumentForm = event.getSource().createUIComponent(UIOpenDocumentForm.class, null, null);
