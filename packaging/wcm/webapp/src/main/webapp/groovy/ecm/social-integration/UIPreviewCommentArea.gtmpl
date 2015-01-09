@@ -40,9 +40,34 @@ int commentSize = commentList.size();
         <%}%>
     </div>
     <div class="uiContentBox">
+    	<div class="highlightBox">
+			<div class="profile clearfix">
+				<a title="Root Root" href="#" class="avatarMedium pull-left"><img alt="" src="/social-resources/skin/images/ShareImages/UserAvtDefault.png"></a>
+				<div class="rightBlock">
+					<a href="#">Root Root</a>
+					<p class="dateTime">about 11 minutes ago</p>
+				</div>
+			</div>
+			<p class="descript">Lorem ipsum dolor sit amet, cons adipiscing elit, sed diam nonummy nibh euismod tincidunt ut laoreet dolore magna aliqua ... erat volutpat. Ut wisi enim ut laoreet dolore magna.</p>
+		</div>
+		<div class="actionBar clearfix ">
+			<ul class="pull-right">
+				<li>
+					<a href="#">
+						<i class="uiIconComment uiIconLightGray"></i>&nbsp;0
+					</a> 
+				</li>
+				<li>
+					<a href="#">
+						<i class="uiIconThumbUp uiIconLightGray"></i>&nbsp;0
+					</a>
+				</li>
+			</ul>	
+		</div>
       <%
       if (commentSize > 0) {
       %>
+      
         <ul class="commentList">
         <%
             commentList.each({

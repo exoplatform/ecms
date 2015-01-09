@@ -33,9 +33,44 @@
 				padding: 0;
 				border-radius: 3px;
 				background: @componentBackgroundLight;
+				.highlightBox {
+					padding: 10px 10px 20px;
+					background: @bodyBackground;
+					.profile .rightBlock {
+						margin-left: 60px;
+						a {
+							font-weight: bold;						
+						}
+						p.dateTime {
+							font-size: 11px;
+							color: @textLightColor;
+						}
+					}
+					.descript {
+						margin-bottom: 0;
+					    max-height: 55px;
+					    overflow: hidden;
+					    padding: 10px 0;
+					}
+				}
+				.actionBar {
+					padding: 5px 0;
+					border-top: 1px solid @borderColor;
+					ul > li {
+						display: inline-block;
+						margin: 0 5px;
+						a {
+							color: @textColor;	
+							&:hover {
+								color: @linkColorHover;
+							}					
+						}
+					}						
+				}
 				.commentList {
 					max-height: 485px;
     				overflow: auto;
+    				background: @bodyBackground;
     				li {
     					padding: 10px;
 					  	.close {
