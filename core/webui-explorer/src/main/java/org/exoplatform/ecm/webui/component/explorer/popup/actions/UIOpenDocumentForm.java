@@ -60,8 +60,6 @@ public class UIOpenDocumentForm extends UIComponent implements UIPopupComponent 
       UIPopupWindow popupAction = uiConfirm.getAncestorOfType(UIPopupWindow.class) ;
       popupAction.setShow(false) ;
       event.getRequestContext().addUIComponentToUpdateByAjax(popupAction);
-      event.getRequestContext().getJavascriptManager().require("SHARED/openDocumentInOffice", "od").
-              addScripts("od.OpenDocumentInOffice.closePopup();");
     }
   }
 

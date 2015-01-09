@@ -13,8 +13,14 @@
 (function(gj) {
   var OpenDocumentInOffice = function() {}
 
+  /**
+   * Open document by Office application or desktop apps
+   * absolutePath is webdav path of document. webdav server have to support level 2
+   * workspace
+   * filePath node path
+   */
   OpenDocumentInOffice.prototype.openDocument = function(absolutePath, workspace, filePath){
-    if(eXo.ecm.ECMWebDav !== undefined) {
+    if(eXo.ecm.ECMWebDav !== undefined) { // use ITHIT to an open document
       eXo.ecm.ECMWebDav.WebDAV.Client.DocManager.ShowMicrosoftOfficeWarning();
       var documentManager = eXo.ecm.ECMWebDav.WebDAV.Client.DocManager;
       var openStatus = false;
@@ -24,41 +30,16 @@
       } else {
         openStatus = documentManager.JavaEditDocument(absolutePath, null, "/open-document/applet/ITHitMountOpenDocument.jar");
       }
+      console.log("Open status "+ openStatus);
     } else {
-     //ITHIT not detected
-     //Use ActiveX to edit document.
-      openDocument.attr("href", "javascript:eXo.ecm.OpenDocumentInOffice.EditDocument('"+absolutePath+"')");
-    	//location.href = "/rest/office/openDocument?workspace="+workspace+"&filePath="+filePath;
+      //ITHIT not detected, Use ActiveX to edit document.
+      if(checkMSOffiveVersion){
+        eXo.ecm.OpenDocumentInOffice.EditDocument(absolutePath);
+      }else{
+        console.log("Cannot open. MSOffice version is not support!");
+      }
     }
   }
-
-  OpenDocumentInOffice.prototype.openLockedDocument = function(absolutePath, activityId){
-    gj("#activityContainer"+activityId).append("<div class=\"modal-backdrop fade in\"></div>");
-    gj("#model-"+activityId).modal();
-    gj("body > .fade.in").remove();
-    gj("#model-"+activityId).on("hide", function(){
-      gj("#activityContainer"+activityId+" .modal-backdrop").remove();
-    });
-
-  }
-
-  /*
-   * Checkout a versioned document when open successfully with desktop application to edit.
-   */
-  OpenDocumentInOffice.prototype.checkout = function(workspace, filePath){
-    gj.ajax({
-      url: "/portal/rest/office/checkout?filePath=" + filePath+"&workspace="+workspace,
-      dataType: "text",
-      type: "GET",
-      async: true
-    })
-        .success(function (data) { });
-  };
-
-  /*Lock item */
-  OpenDocumentInOffice.prototype.lockItem = function(filePath){
-
-  } //end lock function
 
   /**
    * Update OpenDocument button's label
@@ -89,47 +70,14 @@
           if(eXo.ecm.ECMWebDav !== undefined) {
             //showButton
             console.log("ITHIT detected!");
-            if (data.isLocked) return;//can not edit, just show popup(do not change href)            
-//            if(activityId != null && activityId != "undefined" && activityId != ""){ // update 4 activities
-//              var _filePath = openDocument.attr("href");
-//              var _lockStatus = openDocument.attr("status");
-//              if(_lockStatus === "locked"){
-//                $('#modal-'+activityId).modal({show: false});
-//                openDocument.attr("href", "javascript:void(0);");
-//              }else{
-//                openDocument.attr("href", "javascript:eXo.ecm.OpenDocumentInOffice.openDocument('"+_filePath+"')");
-//              }
-//            }
-            var _filePath = openDocument.attr("href");
-            openDocument.parent().removeAttr("onclick");
-            openDocument.attr("href", "javascript:eXo.ecm.OpenDocumentInOffice.openDocument('"+_filePath+"')");
+            if (data.isLocked) return;//can not edit, just show popup(do not change href)
           }else{
             console.log("ITHIT not detected!");
-            var display = defaultEnviromentFilter(openDocument);
-            if (display ==="hide") return;
-            //showButton
-            if (data.isLocked) return;//can not edit, just show popup(do not change href)
-            openDocument.parent().removeAttr("onclick");
-            openDocument.attr("href", "/rest/office/openDocument?workspace="+data.workspace+"&filePath="+data.filePath);
-//            if(activityId != null && activityId != "undefined" && activityId != ""){ // update 4 activities
-//              var _filePath = openDocument.attr("href");
-//              var _lockStatus = openDocument.attr("status");
-//              if(_lockStatus === "locked"){
-//
-//              }else{
-//                openDocument.attr("href", "javascript:eXo.ecm.OpenDocumentInOffice.openDocument('"+_filePath+"')");
-//              }
-//            }else{
-//              openDocument.parent().removeAttr("onclick");
-//              openDocument.attr("href", "/rest/lnkproducer/openit.lnk?path=/"+data.repository+"/"+data.workspace+data.filePath);
-//            }
+            defaultEnviromentFilter(openDocument);//only show with support enviroment.
           }
 
           gj(".detailContainer").find('.openDocument').html(data.title);
-          currentDocumentObj = '{"title":"'+data.title+'", "ico": "'+data.ico+'"}';
         });
-
-    setCookie("_currentDocument", currentDocumentObj, 1);
   }
 
 
@@ -143,8 +91,15 @@
    */
   OpenDocumentInOffice.prototype.EditDocument = function(path){
     var obj = new ActiveXObject('SharePoint.OpenDocuments.3');
-    var openStatus = obj.EditDocument(path, "15");
-    console.log("Open Document status: "+openStatus);
+    var word = new ActiveXObject("Word.Application");
+    var allowVersion = word.Version >= "14.0";
+    if(allowVersion){
+      var openStatus = obj.EditDocument(path, word.Version);
+      console.log("Open Document status: "+openStatus);
+    }else{
+      console.log("Open document not support!");
+      return false;
+    }
   }
 
   OpenDocumentInOffice.prototype.openDocument_doClick = function(){
@@ -152,31 +107,11 @@
   }
 
   /**
-   * Set value to browser's cookie
-   */
-  function setCookie(cname, cvalue, exdays) {
-    var d = new Date();
-    d.setTime(d.getTime() + (exdays*24*60*60*1000));
-    var expires = "expires="+d.toUTCString();
-    document.cookie = cname + "=" + cvalue + "; " + expires;
-  }
-
-  /**
-   *get cookie by key
-   */
-  function getCookie(cname) {
-    var name = cname + "=";
-    var ca = document.cookie.split(';');
-    for(var i=0; i<ca.length; i++) {
-      var c = ca[i];
-      while (c.charAt(0)==' ') c = c.substring(1);
-      if (c.indexOf(name) != -1) return c.substring(name.length,c.length);
-    }
-    return "";
-  }
-
-  /**
-   *To filter OpenXXX button only working with IE, Window, MS Office
+   *To filter OpenXXX button only working with support enviroments
+   * -IE 11 or least version,
+   * -Window 7, 8
+   * -MSOffice 2010, 2013
+   * return true if support
    */
   function defaultEnviromentFilter(element){
     var ua = window.navigator.userAgent;
@@ -187,41 +122,39 @@
     if (navigator.appVersion.indexOf("X11")!=-1) OSName="UNIX";
     if (navigator.appVersion.indexOf("Linux")!=-1) OSName="Linux";
 
-    var msie = ua.indexOf('MSIE ');
-    var trident = ua.indexOf('Trident/');
-
-    if (msie > 0) {
-      // IE 10 or older => return version number
-
-    }
-
-    // IE 11 (or newer) => return version number
     //check IE 11, Window, Office 2010
-    if (trident > 0 && OSName === "Windows") {
-      var word = new ActiveXObject("Word.Application");
-      var allowVersion = word.Version >= "14.0"; // check MSOffice already install from 2010 to least version
+    if (OSName === "Windows") {
+      //check IE11, Office
       var isAtLeastIE11 = !!(ua.match(/Trident/) && !ua.match(/MSIE/));
-      if(allowVersion && isAtLeastIE11){
+      if(checkMSOffiveVersion() && isAtLeastIE11) return true;
 
-      }else{ // Hide if not enought enviroments support
-        gj(element).parent().attr("style", "display:none;");
-      }
-
-    }else{
-      //other browser
-      //Hide this functional
+      // Hide if not enought enviroments support
       gj(element).parent().attr("style", "display:none;");
-      return "hide";
+      return false;
+    }else{
+      //other browser, hide this functional
+      gj(element).parent().attr("style", "display:none;");
+      return false;
     }
 
     // other browser
     return false;
   }
 
-  gj(document).ready(function() {
-    // enable FFWinPlugin in case Chrome/Firefox browser
-    //gj("body").append('<object id="winFirefoxPlugin" type="application/x-sharepoint" width="0" height="0" style="visibility:hidden;"></object>');
-  });
+  /**
+   * Check ActiveX to get MS Office version
+   * Return MS Office version is support
+   */
+  function checkMSOffiveVersion(){
+    try{
+      var word = new ActiveXObject("Word.Application");
+      return word.Version >= "14.0";
+    }catch(err){
+      console.log("ActiveX is not support \n"+err);
+      return false;
+    }
+    return false;
+  }
 
   eXo.ecm.OpenDocumentInOffice = new OpenDocumentInOffice();
   return {
