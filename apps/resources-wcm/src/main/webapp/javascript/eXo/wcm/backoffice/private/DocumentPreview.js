@@ -45,8 +45,9 @@
             var $flowplayerPlayerContent = gj('.PlayerContent', $flowplayerContentDetail);
             var $flowplayer = gj('object', $flowplayerPlayerContent);
             var $flashViewer = gj('.FlashViewer', $uiContentBox);
-            var $embed = gj('embed', $flashViewer);
+            var $embedFlashViewer = gj('embed', $flashViewer);
             var $windowmediaplayer = gj('#MediaPlayer1', $uiContentBox);
+            var $embedWMP = gj('embed', $windowmediaplayer);
 
             $navigationContainer.height(pdfDisplayAreaHeight);
             $uiContentBox.height(pdfDisplayAreaHeight);
@@ -68,11 +69,13 @@
             $windowmediaplayer.css('max-height', $uiContentBox.height() - 7);
             $windowmediaplayer.css('width', '100%');
             $windowmediaplayer.css('height', '100%');
+            $embedWMP.css('width', '100%');
+            $embedWMP.css('height', '100%')
 
-            $embed.css('max-width', $uiContentBox.width() - 2);
-            $embed.css('max-height', $uiContentBox.height() - 3);
-            $embed.css('width', '100%');
-            $embed.css('height', '100%');
+            $embedFlashViewer.css('max-width', $uiContentBox.width() - 2);
+            $embedFlashViewer.css('max-height', $uiContentBox.height() - 3);
+            $embedFlashViewer.css('width', '100%');
+            $embedFlashViewer.css('height', '100%');
 
             var $img = gj('a > img', $uiContentBox);
             if ($img.length > 0) {
