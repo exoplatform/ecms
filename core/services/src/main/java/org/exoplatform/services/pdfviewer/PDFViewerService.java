@@ -20,9 +20,7 @@ import java.io.BufferedInputStream;
 import java.io.BufferedOutputStream;
 import java.io.File;
 import java.io.FileInputStream;
-import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
-import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
 import java.io.Serializable;
@@ -138,8 +136,11 @@ public class PDFViewerService {
         File in = File.createTempFile(name + "_tmp", "." + extension);
         read(input, new BufferedOutputStream(new FileOutputStream(in)));
         long fileSize = in.length(); // size in byte
-        LOG.info("File size: " + fileSize + " B. Size limit for preview: " + (MAX_FILE_SIZE/(1024*1024)) + " MB");
-        if (fileSize < MAX_FILE_SIZE) { // ECMS-6329 only converts small file
+        if (LOG.isDebugEnabled()) {
+          LOG.debug("File '" + currentNode.getPath() +
+                    "' of " + fileSize + " B. Size limit for preview: " + (MAX_FILE_SIZE/(1024*1024)) + " MB");
+        }
+        if (fileSize <= MAX_FILE_SIZE) { // ECMS-6329 only converts small file
         try {          	
           boolean success = jodConverter_.convert(in, content, "pdf");
           // If the converting failed then delete the content of temporary file
@@ -158,7 +159,7 @@ public class PDFViewerService {
           in.delete();
         }
         } else {
-          LOG.info("File is too big for preview.");	
+          LOG.info("File '" + currentNode.getPath() + "' is too big for preview.");
           content.delete();
           content = null;
           in.delete();
