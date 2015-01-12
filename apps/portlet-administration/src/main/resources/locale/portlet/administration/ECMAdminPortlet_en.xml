@@ -771,6 +771,7 @@
       <action-type-create-error>An error occurred while creating the action type.</action-type-create-error>
       <action-name-invalid>'{0}' is invalid. The name must begin with 'exo:'.</action-name-invalid>
       <action-exist>This action already exists in the ECM system.</action-exist>
+      <action-name-contain-only-special-or-empty>Action name contain only special charactors or empty.</action-name-contain-only-special-or-empty>
       <fileName-invalid>The action name contains some invalid characters.</fileName-invalid>
     </msg>
   </UIActionTypeForm>

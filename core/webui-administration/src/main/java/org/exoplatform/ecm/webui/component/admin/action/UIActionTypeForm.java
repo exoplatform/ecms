@@ -160,6 +160,11 @@ public class UIActionTypeForm extends UIForm {
       UIApplication uiApp = uiForm.getAncestorOfType(UIApplication.class) ;
       String actionLabel = uiForm.getUIStringInput(FIELD_NAME).getValue();
       String actionName = "exo:" + org.exoplatform.services.cms.impl.Utils.cleanString(actionLabel);
+      if(actionName.equals("exo:")){
+        uiApp.addMessage(new ApplicationMessage("UIActionTypeForm.msg.action-name-contain-only-special-or-empty", new Object[] {actionLabel},
+                                                ApplicationMessage.WARNING)) ;
+        return ;
+      }
       if(uiForm.isUpdate) actionName = uiForm.actionName_;
 
       List<String> variables = new ArrayList<String>();
