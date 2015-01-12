@@ -16,6 +16,8 @@
  */
 package org.exoplatform.services.cms.webdav;
 
+import java.io.ByteArrayInputStream;
+import java.io.IOException;
 import java.io.InputStream;
 import java.net.URI;
 import java.net.URISyntaxException;
@@ -43,6 +45,7 @@ import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 import javax.ws.rs.core.UriInfo;
 
+import org.apache.commons.io.IOUtils;
 import org.exoplatform.common.http.HTTPStatus;
 import org.exoplatform.common.util.HierarchicalProperty;
 import org.exoplatform.commons.utils.MimeTypeResolver;
@@ -105,6 +108,8 @@ public class WebDavServiceImpl extends org.exoplatform.services.jcr.webdav.WebDa
   private ListenerService listenerService;
 
   private final MimeTypeResolver mimeTypeResolver;
+  
+  private long fileSizeLimit;
 
   public WebDavServiceImpl(InitParams params,
                            RepositoryService repositoryService,
@@ -116,6 +121,7 @@ public class WebDavServiceImpl extends org.exoplatform.services.jcr.webdav.WebDa
     this.listenerService = WCMCoreUtils.getService(ListenerService.class);
     this.mimeTypeResolver = new MimeTypeResolver();
     this.mimeTypeResolver.setDefaultMimeType(InitParamsDefaults.FILE_MIME_TYPE);
+    this.fileSizeLimit = super.getFileSizeLimit();
   }
 
   private String getRealDestinationHeader(String baseURI, String repoName, String destinationHeader) {
@@ -413,7 +419,28 @@ public class WebDavServiceImpl extends org.exoplatform.services.jcr.webdav.WebDa
                       @HeaderParam(ExtHttpHeaders.USER_AGENT) String userAgent,
                       InputStream inputStream,
                       @Context UriInfo uriInfo) {
+    if (LOG.isDebugEnabled()) {
+      LOG.debug("- PUT " + repoName + ":" + repoPath);
+    }      
 
+    long fileSize = -1;
+    try {
+      inputStream = new ByteArrayInputStream(IOUtils.toByteArray(inputStream));
+      fileSize = inputStream.available();     
+    } catch (IOException e) {
+      LOG.warn("Failed to convert InputStream to byte array.", e);	
+    }    
+    
+    if (LOG.isDebugEnabled()) {
+      LOG.debug("Size limit: " + fileSizeLimit + " B");	
+      LOG.debug("File size: " + fileSize + " B");
+    }
+    
+    if (fileSize > fileSizeLimit) {
+      LOG.warn("File of " + fileSize + " B exceeds the limit (" + fileSizeLimit + " B). Upload is suspended.");	 
+      return Response.status(HTTPStatus.ENTITY_TOO_LARGE).build();
+    }
+ 
     Session session = null;
     Item item = null;
     try {
