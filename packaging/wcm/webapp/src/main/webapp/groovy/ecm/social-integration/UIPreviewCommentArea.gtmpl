@@ -10,6 +10,9 @@ import org.exoplatform.services.cms.impl.Utils;
 import org.exoplatform.social.core.service.LinkProvider;
 
 def refreshCommentsAction = URLEncoder.encode(uicomponent.event(uicomponent.REFRESH_COMMENTS), "utf-8");
+def likeActivityAction = uicomponent.event("LikeActivity", "true");
+def unlikeActivityAction = uicomponent.event("LikeActivity", "false");
+
 def rcontext = _ctx.getRequestContext();
 rcontext.getJavascriptManager()
     .require("SHARED/document-preview", "docPre")
@@ -19,14 +22,22 @@ rcontext.getJavascriptManager()
     .addScripts("gj('.commentList', '#UIDocumentPreview').scrollTop(20000);")
     .addScripts("gj(window).resize();gj('#commentTextAreaPreview').focus();");
 
-
-
-
-
-def activityId = uicomponent.getActivityId();
-
 def commentList = uicomponent.getAllComments();
 int commentSize = commentList.size();
+
+def activity = uicomponent.getActivity();
+def authorIdentity = org.exoplatform.social.webui.Utils.getIdentityManager().getIdentity(activity.userId);
+def authorFullName = authorIdentity.profile.fullName;
+def authorProfileUri = LinkProvider.getUserProfileUri(authorIdentity.getRemoteId());
+def authorAvatarImgSrc = authorIdentity.profile.avatarUrl;
+if (!authorAvatarImgSrc) authorAvatarImgSrc = LinkProvider.PROFILE_DEFAULT_AVATAR_URL;
+def activityStatus = uicomponent.getActivityStatus();
+def activityPostedTime = uicomponent.getPostedTimeString(_ctx, activity.postedTime);
+def displayedIdentityLikes = uicomponent.getDisplayedIdentityLikes();
+def identityLikesNum = 0;
+if (displayedIdentityLikes != null) identityLikesNum = displayedIdentityLikes.length;
+def isLiked = uicomponent.isLiked();
+
 
 %>
 <div class="uiBox commentArea pull-right" id="$uicomponent.id">
@@ -40,34 +51,44 @@ int commentSize = commentList.size();
         <%}%>
     </div>
     <div class="uiContentBox">
-    	<div class="highlightBox">
-			<div class="profile clearfix">
-				<a title="Root Root" href="#" class="avatarMedium pull-left"><img alt="" src="/social-resources/skin/images/ShareImages/UserAvtDefault.png"></a>
-				<div class="rightBlock">
-					<a href="#">Root Root</a>
-					<p class="dateTime">about 11 minutes ago</p>
-				</div>
-			</div>
-			<p class="descript">Lorem ipsum dolor sit amet, cons adipiscing elit, sed diam nonummy nibh euismod tincidunt ut laoreet dolore magna aliqua ... erat volutpat. Ut wisi enim ut laoreet dolore magna.</p>
-		</div>
-		<div class="actionBar clearfix ">
-			<ul class="pull-right">
-				<li>
-					<a href="#">
-						<i class="uiIconComment uiIconLightGray"></i>&nbsp;0
-					</a> 
-				</li>
-				<li>
-					<a href="#">
-						<i class="uiIconThumbUp uiIconLightGray"></i>&nbsp;0
-					</a>
-				</li>
-			</ul>	
-		</div>
+        <div class="highlightBox">
+            <div class="profile clearfix">
+                <a title="$authorFullName" href="$authorProfileUri" class="avatarMedium pull-left"><img alt="$authorFullName" src="$authorAvatarImgSrc"></a>
+                <div class="rightBlock">
+                    <a href="$authorProfileUri">$authorFullName</a>
+                    <p class="dateTime">$activityPostedTime</p>
+                </div>
+            </div>
+            <% if (activityStatus != null) { %>
+              <p class="descript">$activityStatus</p>
+            <% } %>
+        </div>
+        <div class="actionBar clearfix ">
+            <ul class="pull-right">
+                <li>
+                    <a href="#">
+                        <i class="uiIconComment uiIconLightGray"></i>&nbsp;$commentSize
+                    </a>
+                </li>
+              <% if (uicomponent.isLiked()) { %>
+                <li>
+                    <a href="javascript:void(0);" onclick="$unlikeActivityAction">
+                        <i class="uiIconThumbUp uiIconBlue"></i>&nbsp;$identityLikesNum
+                    </a>
+                </li>
+              <% } else  { %>
+                <li>
+                    <a href="javascript:void(0);" onclick="$likeActivityAction" >
+                        <i class="uiIconThumbUp uiIconLightGray"></i>&nbsp;$identityLikesNum
+                    </a>
+                </li>
+              <% } %>
+            </ul>
+        </div>
       <%
       if (commentSize > 0) {
       %>
-      
+
         <ul class="commentList">
         <%
             commentList.each({
@@ -111,15 +132,15 @@ int commentSize = commentList.size();
       <%
       }
 
-      def currentCommenterIdentity = org.exoplatform.social.webui.Utils.getViewerIdentity();
-      def currentCommenterUri = LinkProvider.getUserProfileUri(currentCommenterIdentity.getRemoteId());
-      def currentCommenterAvatar = currentCommenterIdentity.profile.avatarUrl;
-      def currentCommenterFullName = currentCommenterIdentity.profile.fullName;
-      if (!currentCommenterAvatar) currentCommenterAvatar= LinkProvider.PROFILE_DEFAULT_AVATAR_URL;
-
+        def activityId = uicomponent.getActivityId();
+        def currentCommenterIdentity = org.exoplatform.social.webui.Utils.getViewerIdentity();
+        def currentCommenterUri = LinkProvider.getUserProfileUri(currentCommenterIdentity.getRemoteId());
+        def currentCommenterAvatar = currentCommenterIdentity.profile.avatarUrl;
+        def currentCommenterFullName = currentCommenterIdentity.profile.fullName;
+        if (!currentCommenterAvatar) currentCommenterAvatar= LinkProvider.PROFILE_DEFAULT_AVATAR_URL;
       %>
         <div class="commentInputBox">
-            <a class="avatarXSmall pull-left" href="$currentCommenterUri" title="$currentCommenterFullName"><img src="$currentCommenterAvatar" alt="" /></a>
+            <a class="avatarXSmall pull-left" href="$currentCommenterUri" title="$currentCommenterFullName"><img src="$currentCommenterAvatar" alt="$currentCommenterFullName" /></a>
             <div class="commentBox">
                 <textarea placeholder="Add your comment..." cols="30" rows="10" id="commentTextAreaPreview" activityId="$activityId" class="textarea"></textarea>
             </div>

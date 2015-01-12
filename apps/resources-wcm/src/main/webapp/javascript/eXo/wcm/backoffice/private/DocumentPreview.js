@@ -32,9 +32,11 @@
             var $commentAreaTitle = gj('.title', $commentArea);
             var $commentInputBox = gj('.commentInputBox', $commentArea);
             var $commentList = gj('.commentList', $commentArea);
+            var $highlightBox = gj('.highlightBox', $commentArea);
+            var $actionBarCommentArea = gj('.actionBar', $commentArea);
             var commentAreaHeight = window.innerHeight - 30;
             $commentArea.height(commentAreaHeight);
-            $commentList.css('max-height', commentAreaHeight - $commentAreaTitle.innerHeight() - $commentInputBox.innerHeight());
+            $commentList.css('max-height', commentAreaHeight - $commentAreaTitle.innerHeight() - $commentInputBox.innerHeight() - $highlightBox.innerHeight() - $actionBarCommentArea.innerHeight());
             $commentList.scrollTop(20000);
 
             // Media viewer, no preview file
