@@ -11,6 +11,12 @@
  */
 
 (function(gj) {
+
+  var portal = eXo.env.portal.context;
+  var rest   = eXo.env.portal.rest;
+
+  var restPrefix = portal+"/"+rest;
+
   var OpenDocumentInOffice = function() {}
 
   /**
@@ -50,10 +56,9 @@
   OpenDocumentInOffice.prototype.updateLabel = function(objId, activityId, rightClick){
     var currentDocumentObj = {};
     gj.ajax({
-      url: "/portal/rest/office/updateDocumentTitle?objId=" + objId+"&lang="+eXo.env.portal.language+"&"+Math.random(),
+      url: restPrefix+"/office/updateDocumentTitle?objId=" + objId+"&lang="+eXo.env.portal.language,
       dataType: "text",
-      type: "GET",
-      async: false
+      type: "GET"
       //	timeout:1000 * 10
     })
         .success(function (data) {
@@ -76,7 +81,7 @@
             defaultEnviromentFilter(openDocument);//only show with support enviroment.
           }
 
-          gj(".detailContainer").find('.openDocument').html(data.title);
+//          gj(".detailContainer").find('.openDocument').html(data.title);
         });
   }
 
