@@ -60,7 +60,7 @@ def isLiked = uicomponent.isLiked();
                 </div>
             </div>
             <% if (activityStatus != null) { %>
-              <p class="descript">$activityStatus</p>
+              <p class="descript" title="$activityStatus">$activityStatus</p>
             <% } %>
         </div>
         <div class="actionBar clearfix ">

@@ -190,6 +190,19 @@
         if (this.isIE()) {
             $commentTextAreaPreview.val('');
         }
+
+        // Style for activity/title message
+        var $descript = gj('.descript', $commentArea);
+        var $heightlightBox = gj('.highlightBox', $commentArea);
+        var heightlightBoxHeight = $heightlightBox.height();
+
+        while ($descript.innerHeight() > 80) {
+            $descript.text(function(index, text) {
+                return text.replace(/\W*\s(\S)*$/, '...');
+            });
+        }
+
+        $descript.css('max-height', '50px');
     };
 
     DocumentPreview.prototype.isIE = function() {
