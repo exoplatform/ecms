@@ -104,6 +104,7 @@ public class UICLVManualMode extends UICLVContainer {
       filters.put(WCMComposer.FILTER_QUERY_FULL, strQuery);
       Result rNodes = WCMCoreUtils.getService(WCMComposer.class)
           .getPaginatedContents(nodeLocation, filters, WCMCoreUtils.getUserSessionProvider());
+      if(rNodes.getNumTotal() == 0) messageKey = "UICLVContainer.msg.non-contents";
       PaginatedResultIterator paginatedResultIterator = new PaginatedResultIterator(rNodes, itemsPerPage);
       getChildren().clear();
       ResourceResolver resourceResolver = getTemplateResourceResolver();
