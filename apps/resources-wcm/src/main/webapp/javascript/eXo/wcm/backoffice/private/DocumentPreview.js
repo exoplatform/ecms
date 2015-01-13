@@ -147,9 +147,13 @@
     };
 
     DocumentPreview.prototype.bindPostCommentEvent = function() {
+        var $uiDocumentPreview = gj("#UIDocumentPreview");
+        var $commentArea = gj('.commentArea', $uiDocumentPreview);
+        var $commentTextAreaPreview = gj('#commentTextAreaPreview', $commentArea);
+
         // Bind comment text area
-        gj('#commentTextAreaPreview').unbind('keypress');
-        gj('#commentTextAreaPreview').keypress(function(e) {
+        $commentTextAreaPreview.unbind('keypress');
+        $commentTextAreaPreview.keypress(function(e) {
             var $commentTextAreaPreview = gj(this);
             var code = e.keyCode || e.which;
             if (code == 13) { // Enter keycode
@@ -177,9 +181,14 @@
             }
         });
 
+        // Clicking the comment icon will put the focus in the comment area. 
+        gj('#previewCommentLink', $commentArea).click(function(){
+            $commentTextAreaPreview.focus();
+        });
+
         // Set placeholder for IE
         if (this.isIE()) {
-            gj('#commentTextAreaPreview').val('');
+            $commentTextAreaPreview.val('');
         }
     };
 
