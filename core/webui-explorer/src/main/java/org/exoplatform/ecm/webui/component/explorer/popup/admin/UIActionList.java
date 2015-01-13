@@ -174,8 +174,7 @@ public void updateGrid(Node node, int currentPage) throws Exception {
       } catch(PathNotFoundException path) {
         currentNode.refresh(false) ;
         UIDocumentContainer uiDocumentContainer = uiExplorer.findFirstComponentOfType(UIDocumentContainer.class) ;
-        UIDocumentInfo uiDocumentInfo = uiDocumentContainer.getChild(UIDocumentInfo.class) ;
-        uiDocumentInfo.updatePageListData();
+        UIDocumentInfo uiDocumentInfo = uiDocumentContainer.getChild(UIDocumentInfo.class) ;        
         if(uiExplorer.isShowViewFile()) uiDocumentInfo.setRendered(false) ;
         else uiDocumentInfo.setRendered(true) ;
         if(uiExplorer.getPreference().isShowSideBar()) {
