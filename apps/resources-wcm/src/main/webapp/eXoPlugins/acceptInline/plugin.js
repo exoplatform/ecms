@@ -11,7 +11,7 @@ CKEDITOR.plugins.add('acceptInline',
 			editor.ui.addButton(
 				'acceptInline.btn',
 				{
-					label : editor.lang.AcceptUpdateInline,
+					label : editor.lang.acceptInline.AcceptUpdateInline,
 					command : 'acceptInline.cmd',
 					icon : mypath + '/images/accept.png'
 				}

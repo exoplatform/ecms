@@ -99,6 +99,8 @@ public class DocumentProviderUtils {
       Node node = (Node)nodeFinder.getItem(ws, path);
       if (linkManager.isLink(node)) {
         path = linkManager.getTarget(node).getPath();
+      }else{
+        path = node.getPath();
       }
       statement = getStatement(ws, path, pref, allItemFilter, allItemByTypeFilter);
     } catch (Exception e) {

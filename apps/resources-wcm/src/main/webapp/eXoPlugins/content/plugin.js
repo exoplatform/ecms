@@ -7,7 +7,7 @@ CKEDITOR.plugins.add('content',
 			editor.ui.addButton(
 				'content.btn',
 				{
-					label : editor.lang.WCMInsertContentPlugins,
+					label : editor.lang.content.WCMInsertContentPlugins,
 					command : 'content.cmd',
 					icon : mypath + '/images/content.png'
 				}
