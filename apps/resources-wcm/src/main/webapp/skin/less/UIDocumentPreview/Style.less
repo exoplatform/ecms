@@ -237,7 +237,7 @@
 						}
 					}
 				}
-				img, video, object, .uiUnEditable {
+				img, object, .uiUnEditable {
 					width: 100%;
 					left: 50%;
 				    position: absolute;
@@ -246,6 +246,16 @@
 				    -ms-transform: translate(-50%, -50%);
 				    -webkit-transform: translate(-50%, -50%);
 				}
+				video {
+				  width: 100%;
+				  left: 50%;
+				  top: 50%;
+				  position: static;
+				  transform: none;
+				  -ms-transform: none;
+				  -webkit-transform: none;
+				}
+
 				.object-mkv-mpeg {
 				  position: static;
 				  transform: none;
