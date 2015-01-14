@@ -81,8 +81,8 @@
 
             var $img = gj('a > img', $uiContentBox);
             if ($img.length > 0) {
-                $img.css('max-width', $uiContentBox.width() - 2);
-                $img.css('max-height', $uiContentBox.height() - 3);
+                $img.css('max-width', $uiContentBox.width() + 1);
+                $img.css('max-height', $uiContentBox.height() + 1);
                 $img.css('width', 'auto');
                 $img.css('height', 'auto');
                 $navigationContainer.css('overflow', 'hidden');
