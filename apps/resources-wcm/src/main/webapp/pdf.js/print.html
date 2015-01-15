@@ -1,5 +1,13 @@
-<html>
+<html dir="ltr" mozdisallowselectionprint moznomarginboxes>
 <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <meta name="google" content="notranslate">
+	<script type="text/javascript" src="/eXoWCMResources/pdf.js/l10n.js"></script>
+	<script type="text/javascript" src="/eXoWCMResources/pdf.js/pdf.js"></script>
+	<script type="text/javascript"
+		src="/eXoResources/javascript/jquery-1.7.1.js"></script>
+
 </head>
 <body>
 	<link rel="stylesheet" href="/eXoWCMResources/pdf.js/viewer.css" />
@@ -195,16 +203,149 @@
 			</div>
 		</div>
 		<!-- mainContainer -->
-
+        <div id="overlayContainer" class="hidden">
+            <div id="promptContainer" class="hidden">
+                <div id="passwordContainer" class="prompt doorHanger">
+                    <div class="row">
+                        <p id="passwordText" data-l10n-id="password_label">Enter the password to open this PDF file:</p>
+                    </div>
+                    <div class="row">
+                        <input type="password" id="password" class="toolbarField" />
+                    </div>
+                    <div class="buttonRow">
+                        <button id="passwordCancel" class="overlayButton"><span data-l10n-id="password_cancel">Cancel</span></button>
+                        <button id="passwordSubmit" class="overlayButton"><span data-l10n-id="password_ok">OK</span></button>
+                    </div>
+                </div>
+            </div>
+            <div id="documentPropertiesContainer" class="hidden">
+                <div class="doorHanger">
+                    <div class="row">
+                        <span data-l10n-id="document_properties_file_name">File name:</span> <p id="fileNameField">-</p>
+                    </div>
+                    <div class="row">
+                        <span data-l10n-id="document_properties_file_size">File size:</span> <p id="fileSizeField">-</p>
+                    </div>
+                    <div class="separator"></div>
+                    <div class="row">
+                        <span data-l10n-id="document_properties_title">Title:</span> <p id="titleField">-</p>
+                    </div>
+                    <div class="row">
+                        <span data-l10n-id="document_properties_author">Author:</span> <p id="authorField">-</p>
+                    </div>
+                    <div class="row">
+                        <span data-l10n-id="document_properties_subject">Subject:</span> <p id="subjectField">-</p>
+                    </div>
+                    <div class="row">
+                        <span data-l10n-id="document_properties_keywords">Keywords:</span> <p id="keywordsField">-</p>
+                    </div>
+                    <div class="row">
+                        <span data-l10n-id="document_properties_creation_date">Creation Date:</span> <p id="creationDateField">-</p>
+                    </div>
+                    <div class="row">
+                        <span data-l10n-id="document_properties_modification_date">Modification Date:</span> <p id="modificationDateField">-</p>
+                    </div>
+                    <div class="row">
+                        <span data-l10n-id="document_properties_creator">Creator:</span> <p id="creatorField">-</p>
+                    </div>
+                    <div class="separator"></div>
+                    <div class="row">
+                        <span data-l10n-id="document_properties_producer">PDF Producer:</span> <p id="producerField">-</p>
+                    </div>
+                    <div class="row">
+                        <span data-l10n-id="document_properties_version">PDF Version:</span> <p id="versionField">-</p>
+                    </div>
+                    <div class="row">
+                        <span data-l10n-id="document_properties_page_count">Page Count:</span> <p id="pageCountField">-</p>
+                    </div>
+                    <div class="buttonRow">
+                        <button id="documentPropertiesClose" class="overlayButton"><span data-l10n-id="document_properties_close">Close</span></button>
+                    </div>
+                </div>
+            </div>
+        </div>  <!-- overlayContainer -->
 	</div>
 	<!-- outerContainer -->
 <div id="printContainer"></div>
 
+   <div id="mozPrintCallback-shim" hidden>
+      <style scoped>
+    #mozPrintCallback-shim {
+      position: fixed;
+      top: 0;
+      left: 0;
+      height: 100%;
+      width: 100%;
+      z-index: 9999999;
 
-	<script type="text/javascript" src="/eXoWCMResources/pdf.js/l10n.js"></script>
-	<script type="text/javascript" src="/eXoWCMResources/pdf.js/pdf.js"></script>
-	<script type="text/javascript"
-		src="/eXoResources/javascript/jquery-1.7.1.js"></script>
+      display: block;
+      text-align: center;
+      background-color: rgba(0, 0, 0, 0.5);
+    }
+    #mozPrintCallback-shim[hidden] {
+      display: none;
+    }
+    @media print {
+      #mozPrintCallback-shim {
+        display: none;
+      }
+    }
+
+    #mozPrintCallback-shim .mozPrintCallback-dialog-box {
+      display: inline-block;
+      margin: -50px auto 0;
+      position: relative;
+      top: 45%;
+      left: 0;
+      min-width: 220px;
+      max-width: 400px;
+
+      padding: 9px;
+
+      border: 1px solid hsla(0, 0%, 0%, .5);
+      border-radius: 2px;
+      box-shadow: 0 1px 4px rgba(0, 0, 0, 0.3);
+
+      background-color: #474747;
+
+      color: hsl(0, 0%, 85%);
+      font-size: 16px;
+      line-height: 20px;
+    }
+    #mozPrintCallback-shim .progress-row {
+      clear: both;
+      padding: 1em 0;
+    }
+    #mozPrintCallback-shim progress {
+      width: 100%;
+    }
+    #mozPrintCallback-shim .relative-progress {
+      clear: both;
+      float: right;
+    }
+    #mozPrintCallback-shim .progress-actions {
+      clear: both;
+    }
+      </style>
+      			<script type="text/javascript" src="/eXoWCMResources/pdf.js/viewer.js"></script>
+
+      <div class="mozPrintCallback-dialog-box">
+        <!-- TODO: Localise the following strings -->
+        Preparing document for printing...
+        <div class="progress-row">
+          <progress value="0" max="100"></progress>
+          <span class="relative-progress">0%</span>
+        </div>
+        <div class="progress-actions">
+          <input type="button" value="Cancel" class="mozPrintCallback-cancel">
+        </div>
+      </div>
+    </div>
+
+
+	<script type="text/javascript">
+		var locale = 'en-US';
+	</script>
 	<script type="text/javascript">
 		function getParameterByName(name) {
 			name = name.replace(/[\[]/, "\\[").replace(/[\]]/, "\\]");
@@ -238,15 +379,15 @@
 						        }
 							w.terminate();
 							w = undefined;
-							setTimeout('window.print()', 1);
-							setTimeout('window.close()', 1);
+							setTimeout('window.print()', 1000);
+
 						}
 						if ((PDFView.pages.length == index)) {
 							if (PDFView.pages[index - 1].renderingState == 3) {
 								w.terminate();
 								w = undefined;
-								setTimeout('window.print()', 1);
-								setTimeout('window.close()', 1);
+								setTimeout('window.print()', 1000);
+
 							}
 
 						}
@@ -266,10 +407,7 @@
 			}
 		}
 	</script>
-	<script type="text/javascript">
-		var locale = 'en-US';
-	</script>
-	<script type="text/javascript" src="/eXoWCMResources/pdf.js/viewer.js"></script>
+
 
 </body>
 </html>
