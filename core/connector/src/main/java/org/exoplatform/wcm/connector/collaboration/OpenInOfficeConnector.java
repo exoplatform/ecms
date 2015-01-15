@@ -37,15 +37,24 @@ import java.util.ResourceBundle;
 @RolesAllowed("users")
 public class OpenInOfficeConnector implements ResourceContainer {
 
-  private final String OPEN_DOCUMENT_ON_DESKTOP_ICO = "uiIcon16x16FileDefault";
-  private final String CONNECTOR_BUNDLE_LOCATION = "locale.wcm.resources.WCMResourceBundleConnector";
-  private final String OPEN_DOCUMENT_IN_DESKTOP_RESOURCE_KEY = "OpenInOfficeConnector.label.exo.remote-edit.desktop";
-  private final String OPEN_DOCUMENT_IN_DESKTOP_APP_RESOURCE_KEY="OpenInOfficeConnector.label.exo.remote-edit.desktop-app";
-  private final String OPEN_DOCUMENT_DEFAULT_TITLE="Open on Desktop";
-
+  private final String OPEN_DOCUMENT_ON_DESKTOP_ICO              = "uiIcon16x16FileDefault";
+  private final String CONNECTOR_BUNDLE_LOCATION                 = "locale.wcm.resources.WCMResourceBundleConnector";
+  private final String OPEN_DOCUMENT_IN_DESKTOP_RESOURCE_KEY     = "OpenInOfficeConnector.label.exo.remote-edit.desktop";
+  private final String OPEN_DOCUMENT_IN_DESKTOP_APP_RESOURCE_KEY = "OpenInOfficeConnector.label.exo.remote-edit.desktop-app";
+  private final String OPEN_DOCUMENT_DEFAULT_TITLE               = "Open on Desktop";
+  private static final String MSOFFICE_MIMETYPE                  = "ms-office-mimetype";
   private final int CACHED_TIME = 60*24*30*12;
 
   private static final String VERSION_MIXIN ="mix:versionable";
+
+  private static String msofficeMimeType = ",doc,docx,xls,xltx,ppt,pptx,";
+
+  static {
+    String _msofficeMimeType = System.getProperty(MSOFFICE_MIMETYPE);
+    if(StringUtils.isNotEmpty(_msofficeMimeType)){
+      msofficeMimeType = _msofficeMimeType;
+    }
+  }
 
   /**
    * Return a JsonObject's current file to update display titles
@@ -104,6 +113,7 @@ public class OpenInOfficeConnector implements ResourceContainer {
     rs.put("filePath", filePath);
     //rs.put("isLocked", node.isLocked());
     rs.put("isFile", node.isNodeType(NodetypeConstant.NT_FILE));
+    rs.put("isMsoffice", msofficeMimeType.contains(","+extension+","));
 
     builder = Response.ok(rs.toString(), MediaType.APPLICATION_JSON);
     builder.tag(etag);

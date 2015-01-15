@@ -59,6 +59,7 @@
       url: restPrefix+"/office/updateDocumentTitle?objId=" + objId+"&lang="+eXo.env.portal.language,
       dataType: "text",
       type: "GET"
+//      useCache:false,
       //	timeout:1000 * 10
     })
         .success(function (data) {
@@ -77,6 +78,9 @@
             console.log("ITHIT detected!");
             if (data.isLocked) return;//can not edit, just show popup(do not change href)
           }else{
+            if(!data.isMsoffice){
+              gj(openDocument).attr("style", "display:none;");
+            }
             console.log("ITHIT not detected!");
             defaultEnviromentFilter(openDocument);//only show with support enviroment.
           }
