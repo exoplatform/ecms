@@ -575,8 +575,17 @@
 		  <set-method>addListener</set-method>
 		  <type>org.exoplatform.ecm.utils.LockManagerListener</type>
 	  </component-plugin>
+
+    <!-- ecm-webdav put command listener -->
+    <component-plugin>
+      <name>WebDavService.event.putCommand</name>
+      <set-method>addListener</set-method>
+      <type>org.exoplatform.services.cms.listeners.WebDavPutCommandListener</type>
+    </component-plugin>
+
 	</external-component-plugins>
-        <external-component-plugins>
+
+  <external-component-plugins>
 		<target-component>org.exoplatform.upload.UploadService</target-component>
 		<component-plugin>
 			<name>MIME type Plugins for UploadService</name>
