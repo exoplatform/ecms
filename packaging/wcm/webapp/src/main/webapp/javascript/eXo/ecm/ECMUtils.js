@@ -423,7 +423,8 @@
 			}
 			if (fEncode) path = path.substr(0, path.length - 1);
 			if (eXo.core.Browser.isIE()) {
-			  if (mimetype == "application/xls" || mimetype == "application/msword" || mimetype == "application/ppt") {
+			  if (mimetype == "application/xls" || mimetype == "application/msword" || mimetype == "application/ppt" || 
+			      mimetype == "application/vnd.ms-excel" || mimetype == "application/msword" || mimetype == "application/vnd.ms-powerpoint") {
 			    window.open(serverInfo + "/" + restContextName + "/private/lnkproducer/openit.lnk?path=/" + repository + "/" + workspace + path, '_new');
 			  } else {
 			    eXo.ecm.ECMUtils.generateWebDAVUrl(serverInfo, restContextName, repository, workspace, path, mimetype);

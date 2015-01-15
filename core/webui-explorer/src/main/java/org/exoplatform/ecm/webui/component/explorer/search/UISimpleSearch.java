@@ -51,7 +51,7 @@ import org.exoplatform.webui.form.UIForm;
 import org.exoplatform.webui.form.UIFormInputInfo;
 import org.exoplatform.webui.form.UIFormSelectBox;
 import org.exoplatform.webui.form.UIFormStringInput;
-
+import org.exoplatform.services.cms.impl.Utils;
 /**
  * Created by The eXo Platform SARL
  * Author : Dang Van Minh
@@ -167,7 +167,7 @@ public class UISimpleSearch extends UIForm {
     Node currentNode = getAncestorOfType(UIJCRExplorer.class).getCurrentNode();
     StringBuilder statement = new StringBuilder(1024);
     String text = getUIStringInput(INPUT_SEARCH).getValue();
-    String escapedText = org.exoplatform.services.cms.impl.Utils.escapeIllegalCharacterInQuery(text);
+    String escapedText = text == null ? null : Utils.escapeIllegalCharacterInQuery(text);
     if(text != null && constraints_.size() == 0) {
       if ("/".equals(currentNode.getPath())) {
         statement.append(ROOT_XPATH_QUERY);
@@ -208,7 +208,7 @@ public class UISimpleSearch extends UIForm {
     Node currentNode = getAncestorOfType(UIJCRExplorer.class).getCurrentNode();
     StringBuilder statement = new StringBuilder(1024);
     String text = getUIStringInput(INPUT_SEARCH).getValue();
-    String escapedText = org.exoplatform.services.cms.impl.Utils.escapeIllegalCharacterInQuery(text);
+    String escapedText = text == null ? null : Utils.escapeIllegalCharacterInQuery(text);
     if(text != null && constraints_.size() == 0) {//no constraint
       if ("/".equals(currentNode.getPath())) {
         statement.append(ROOT_SQL_QUERY);

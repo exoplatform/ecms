@@ -108,7 +108,7 @@
       <artifactId>exo.portal.webui.portal</artifactId>
     </dependency>
     <dependency>
-      <groupId>org.icepdf</groupId>
+      <groupId>org.icepdf.os</groupId>
       <artifactId>icepdf-core</artifactId>
     </dependency>
     <dependency>
