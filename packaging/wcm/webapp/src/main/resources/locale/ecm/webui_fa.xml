@@ -13,6 +13,11 @@
     <info>
       <child-not-found>فرزند یافت نشد!</child-not-found>
     </info>
+    <action>
+      <title>
+        <select>انتخاب</select>
+      </title>
+    </action>
   </UITreeList>
   <!--
   ######################################################################
@@ -45,6 +50,7 @@
     <title>
       <UIPermissionUser>انتخاب کاربر</UIPermissionUser>
       <UIPermissionMembership>انتخاب عضویت</UIPermissionMembership>
+      <TaxoSelectUserOrGroup>انتخاب عضویت</TaxoSelectUserOrGroup>
     </title>
   </SelectUserOrGroup>
   <UIPermissionUser>
@@ -59,4 +65,40 @@
       <selectGroup>مرور و انتخاب یک گروه</selectGroup>
     </label>
   </UIPermissionMembership>
+  <TaxoSelectUserOrGroup>
+    <label>
+      <selectGroup>انتخاب گروه</selectGroup>
+      <selectMembership>انتخاب عضویت</selectMembership>
+    </label>
+  </TaxoSelectUserOrGroup>
+  <!--
+  ######################################################################
+  # org.exoplatform.wcm.webui.clv.UICLVConfig        #
+  ######################################################################
+  -->
+  <UICLVConfigTargetPageSelectorPopupWindow>
+    <title>
+      <UIPageSelector>انتخابگر صفحه</UIPageSelector>
+    </title>
+  </UICLVConfigTargetPageSelectorPopupWindow>
+  <!--
+  ###################################################################################
+  # Repository                                        #
+  ###################################################################################
+  -->
+  <rootNodeInfo>
+    <title>
+      <AddRootNode>افزودن گره ریشه</AddRootNode>
+    </title>
+  </rootNodeInfo>
+  <!--
+  ################################################################################
+  #             org.exoplatform.ecm.webui.component.admin.UIMetadataList         #
+  ################################################################################
+  -->
+  <UIMetadataAnyPermission>
+    <label>
+      <anyPermission>هر گونه مجوز</anyPermission>
+    </label>
+  </UIMetadataAnyPermission>
 </bundle>

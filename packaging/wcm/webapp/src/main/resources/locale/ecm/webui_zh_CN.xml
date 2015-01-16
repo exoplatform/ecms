@@ -13,6 +13,11 @@
     <info>
       <child-not-found>找不到的子项 ！</child-not-found>
     </info>
+    <action>
+      <title>
+        <select>请选择</select>
+      </title>
+    </action>
   </UITreeList>
   <!--
   ######################################################################
@@ -45,6 +50,7 @@
     <title>
       <UIPermissionUser>选择用户</UIPermissionUser>
       <UIPermissionMembership>选择成员</UIPermissionMembership>
+      <TaxoSelectUserOrGroup>选择成员</TaxoSelectUserOrGroup>
     </title>
   </SelectUserOrGroup>
   <UIPermissionUser>
@@ -59,4 +65,40 @@
       <selectGroup>浏览并选择一个组</selectGroup>
     </label>
   </UIPermissionMembership>
+  <TaxoSelectUserOrGroup>
+    <label>
+      <selectGroup>选择群组</selectGroup>
+      <selectMembership>选择成员</selectMembership>
+    </label>
+  </TaxoSelectUserOrGroup>
+  <!--
+  ######################################################################
+  # org.exoplatform.wcm.webui.clv.UICLVConfig        #
+  ######################################################################
+  -->
+  <UICLVConfigTargetPageSelectorPopupWindow>
+    <title>
+      <UIPageSelector>页面选择器</UIPageSelector>
+    </title>
+  </UICLVConfigTargetPageSelectorPopupWindow>
+  <!--
+  ###################################################################################
+  # Repository                                        #
+  ###################################################################################
+  -->
+  <rootNodeInfo>
+    <title>
+      <AddRootNode>添加根节点</AddRootNode>
+    </title>
+  </rootNodeInfo>
+  <!--
+  ################################################################################
+  #             org.exoplatform.ecm.webui.component.admin.UIMetadataList         #
+  ################################################################################
+  -->
+  <UIMetadataAnyPermission>
+    <label>
+      <anyPermission>任何权限</anyPermission>
+    </label>
+  </UIMetadataAnyPermission>
 </bundle>

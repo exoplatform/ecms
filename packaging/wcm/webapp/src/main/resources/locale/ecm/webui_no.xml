@@ -13,6 +13,11 @@
     <info>
       <child-not-found>Underkategori ikke funnet!</child-not-found>
     </info>
+    <action>
+      <title>
+        <select>Velg</select>
+      </title>
+    </action>
   </UITreeList>
   <!--
   ######################################################################
@@ -45,6 +50,7 @@
     <title>
       <UIPermissionUser>Velg bruker</UIPermissionUser>
       <UIPermissionMembership>Velg medlemsskap</UIPermissionMembership>
+      <TaxoSelectUserOrGroup>Velg medlemskap</TaxoSelectUserOrGroup>
     </title>
   </SelectUserOrGroup>
   <UIPermissionUser>
@@ -59,4 +65,40 @@
       <selectGroup>Bla gjennom og velge en gruppe</selectGroup>
     </label>
   </UIPermissionMembership>
+  <TaxoSelectUserOrGroup>
+    <label>
+      <selectGroup>Velg gruppe</selectGroup>
+      <selectMembership>Velg medlemskap</selectMembership>
+    </label>
+  </TaxoSelectUserOrGroup>
+  <!--
+  ######################################################################
+  # org.exoplatform.wcm.webui.clv.UICLVConfig        #
+  ######################################################################
+  -->
+  <UICLVConfigTargetPageSelectorPopupWindow>
+    <title>
+      <UIPageSelector>Sidevelger</UIPageSelector>
+    </title>
+  </UICLVConfigTargetPageSelectorPopupWindow>
+  <!--
+  ###################################################################################
+  # Repository                                        #
+  ###################################################################################
+  -->
+  <rootNodeInfo>
+    <title>
+      <AddRootNode>Legg til rotnode</AddRootNode>
+    </title>
+  </rootNodeInfo>
+  <!--
+  ################################################################################
+  #             org.exoplatform.ecm.webui.component.admin.UIMetadataList         #
+  ################################################################################
+  -->
+  <UIMetadataAnyPermission>
+    <label>
+      <anyPermission>Noen tillatelser</anyPermission>
+    </label>
+  </UIMetadataAnyPermission>
 </bundle>

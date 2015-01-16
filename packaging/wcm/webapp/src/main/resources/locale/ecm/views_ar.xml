@@ -30,6 +30,7 @@
         <comment-by>تم التعليق عليها من طرف</comment-by>
         <email>عنوان البريد الإلكتروني</email>
         <site>الموقع</site>
+        <lastComment>Last comment posted by {user} at {time}</lastComment>
       </label>
     </view>
   </Comment>
@@ -41,6 +42,8 @@
     <view>
       <label>
         <not-viewable>The preview of this document is not available.</not-viewable>
+        <pdf-max-size>The preview is not available for file larger than {0} MB.</pdf-max-size>
+        <pdf-max-page>The preview is not available for document of over {0} pages.</pdf-max-page>
         <using-webDAV>or Open in MS Office</using-webDAV>
         <file-size-too-big>محتوى هذا الملف كبير جدا. لتتمكن من عرضه يُرجى تنزيله</file-size-too-big>
         <webDAV>مشهد WebDAV</webDAV>

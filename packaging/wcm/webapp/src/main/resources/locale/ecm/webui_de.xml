@@ -13,6 +13,11 @@
     <info>
       <child-not-found>Unterknoten nicht gefunden!</child-not-found>
     </info>
+    <action>
+      <title>
+        <select>Auswählen</select>
+      </title>
+    </action>
   </UITreeList>
   <!--
   ######################################################################
@@ -45,6 +50,7 @@
     <title>
       <UIPermissionUser>Benutzer auswählen</UIPermissionUser>
       <UIPermissionMembership>Rolle auswählen</UIPermissionMembership>
+      <TaxoSelectUserOrGroup>Mitgliedschaft auswählen</TaxoSelectUserOrGroup>
     </title>
   </SelectUserOrGroup>
   <UIPermissionUser>
@@ -59,4 +65,40 @@
       <selectGroup>Durchsuchen und wählen Sie eine Gruppe</selectGroup>
     </label>
   </UIPermissionMembership>
+  <TaxoSelectUserOrGroup>
+    <label>
+      <selectGroup>Gruppe auswählen</selectGroup>
+      <selectMembership>Mitgliedschaft auswählen</selectMembership>
+    </label>
+  </TaxoSelectUserOrGroup>
+  <!--
+  ######################################################################
+  # org.exoplatform.wcm.webui.clv.UICLVConfig        #
+  ######################################################################
+  -->
+  <UICLVConfigTargetPageSelectorPopupWindow>
+    <title>
+      <UIPageSelector>Seitenauswahl</UIPageSelector>
+    </title>
+  </UICLVConfigTargetPageSelectorPopupWindow>
+  <!--
+  ###################################################################################
+  # Repository                                        #
+  ###################################################################################
+  -->
+  <rootNodeInfo>
+    <title>
+      <AddRootNode>QuellKnoten hinzufügen</AddRootNode>
+    </title>
+  </rootNodeInfo>
+  <!--
+  ################################################################################
+  #             org.exoplatform.ecm.webui.component.admin.UIMetadataList         #
+  ################################################################################
+  -->
+  <UIMetadataAnyPermission>
+    <label>
+      <anyPermission>Jede Berechtigung</anyPermission>
+    </label>
+  </UIMetadataAnyPermission>
 </bundle>

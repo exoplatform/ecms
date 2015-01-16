@@ -30,6 +30,7 @@
         <comment-by>Bình luận bởi</comment-by>
         <email>Địa chỉ thư điện tử</email>
         <site>Trang</site>
+        <lastComment>Bình luận cuối cùng được đăng bởi {user} lúc {time}</lastComment>
       </label>
     </view>
   </Comment>
@@ -41,6 +42,8 @@
     <view>
       <label>
         <not-viewable>Tài liệu này không thể xem được. Bạn cần tải về và xem bằng phần mềm phù hợp.</not-viewable>
+        <pdf-max-size>Không có tính năng xem với tệp lớn hơn {0} MB.</pdf-max-size>
+        <pdf-max-page>Không có tính năng xem với tài liệu nhiều hơn {0} trang.</pdf-max-page>
         <using-webDAV>hoặc mở bằng MS Office</using-webDAV>
         <file-size-too-big>Nội dung của tệp tin này quá lớn. Bạn nên tải xuống và mở tại máy khách.</file-size-too-big>
         <webDAV>Hiển thị kiểu WebDAV</webDAV>

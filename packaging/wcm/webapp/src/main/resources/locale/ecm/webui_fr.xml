@@ -13,6 +13,11 @@
     <info>
       <child-not-found>Pas de sous-noeud.</child-not-found>
     </info>
+    <action>
+      <title>
+        <select>Sélectionner</select>
+      </title>
+    </action>
   </UITreeList>
   <!--
   ######################################################################
@@ -45,6 +50,7 @@
     <title>
       <UIPermissionUser>Sélectionner un Utilisateur</UIPermissionUser>
       <UIPermissionMembership>Rôle</UIPermissionMembership>
+      <TaxoSelectUserOrGroup>Sélectionnez un rôle</TaxoSelectUserOrGroup>
     </title>
   </SelectUserOrGroup>
   <UIPermissionUser>
@@ -59,4 +65,40 @@
       <selectGroup>Groupe</selectGroup>
     </label>
   </UIPermissionMembership>
+  <TaxoSelectUserOrGroup>
+    <label>
+      <selectGroup>Sélectionner un Groupe</selectGroup>
+      <selectMembership>Sélectionnez un rôle</selectMembership>
+    </label>
+  </TaxoSelectUserOrGroup>
+  <!--
+  ######################################################################
+  # org.exoplatform.wcm.webui.clv.UICLVConfig        #
+  ######################################################################
+  -->
+  <UICLVConfigTargetPageSelectorPopupWindow>
+    <title>
+      <UIPageSelector>Sélecteur de Page</UIPageSelector>
+    </title>
+  </UICLVConfigTargetPageSelectorPopupWindow>
+  <!--
+  ###################################################################################
+  # Repository                                        #
+  ###################################################################################
+  -->
+  <rootNodeInfo>
+    <title>
+      <AddRootNode>Ajouter le Noeud Racine</AddRootNode>
+    </title>
+  </rootNodeInfo>
+  <!--
+  ################################################################################
+  #             org.exoplatform.ecm.webui.component.admin.UIMetadataList         #
+  ################################################################################
+  -->
+  <UIMetadataAnyPermission>
+    <label>
+      <anyPermission>Toute Personne</anyPermission>
+    </label>
+  </UIMetadataAnyPermission>
 </bundle>

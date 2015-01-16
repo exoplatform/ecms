@@ -30,6 +30,7 @@
         <comment-by>Прокоментував</comment-by>
         <email>Електронна пошта</email>
         <site>Сайт</site>
+        <lastComment>Last comment posted by {user} at {time}</lastComment>
       </label>
     </view>
   </Comment>
@@ -41,6 +42,8 @@
     <view>
       <label>
         <not-viewable>Перегляд цього документа недоступний.</not-viewable>
+        <pdf-max-size>The preview is not available for file larger than {0} MB.</pdf-max-size>
+        <pdf-max-page>The preview is not available for document of over {0} pages.</pdf-max-page>
         <using-webDAV>або відкрийте в MS Office</using-webDAV>
         <file-size-too-big>Вміст цього файлу завеликий. Вам необхідно завантажити та відкрити у клієнті.</file-size-too-big>
         <webDAV>WebDAV подання</webDAV>

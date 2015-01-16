@@ -13,6 +13,11 @@
     <info>
       <child-not-found>Δεν βρέθηκαν θυγατρικοί κόμβοι!</child-not-found>
     </info>
+    <action>
+      <title>
+        <select>Επιλογή</select>
+      </title>
+    </action>
   </UITreeList>
   <!--
   ######################################################################
@@ -45,6 +50,7 @@
     <title>
       <UIPermissionUser>Επιλογή χρήστη</UIPermissionUser>
       <UIPermissionMembership>Επιλέξτε την ιδιότητα του μέλους</UIPermissionMembership>
+      <TaxoSelectUserOrGroup>Επιλογή ρόλου</TaxoSelectUserOrGroup>
     </title>
   </SelectUserOrGroup>
   <UIPermissionUser>
@@ -59,4 +65,40 @@
       <selectGroup>Περιηγηθείτε και επιλέξτε μια ομάδα</selectGroup>
     </label>
   </UIPermissionMembership>
+  <TaxoSelectUserOrGroup>
+    <label>
+      <selectGroup>Επιλογή ομάδας</selectGroup>
+      <selectMembership>Επιλογή ρόλου</selectMembership>
+    </label>
+  </TaxoSelectUserOrGroup>
+  <!--
+  ######################################################################
+  # org.exoplatform.wcm.webui.clv.UICLVConfig        #
+  ######################################################################
+  -->
+  <UICLVConfigTargetPageSelectorPopupWindow>
+    <title>
+      <UIPageSelector>Επιλογέας σελίδας</UIPageSelector>
+    </title>
+  </UICLVConfigTargetPageSelectorPopupWindow>
+  <!--
+  ###################################################################################
+  # Repository                                        #
+  ###################################################################################
+  -->
+  <rootNodeInfo>
+    <title>
+      <AddRootNode>Προσθήκη κόμβου-ρίζα</AddRootNode>
+    </title>
+  </rootNodeInfo>
+  <!--
+  ################################################################################
+  #             org.exoplatform.ecm.webui.component.admin.UIMetadataList         #
+  ################################################################################
+  -->
+  <UIMetadataAnyPermission>
+    <label>
+      <anyPermission>Όλοι</anyPermission>
+    </label>
+  </UIMetadataAnyPermission>
 </bundle>

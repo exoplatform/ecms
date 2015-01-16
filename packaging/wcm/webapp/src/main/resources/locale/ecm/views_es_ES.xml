@@ -30,6 +30,7 @@
         <comment-by>Comentado por</comment-by>
         <email>Correo electrónico</email>
         <site>Sitio</site>
+        <lastComment>Last comment posted by {user} at {time}</lastComment>
       </label>
     </view>
   </Comment>
@@ -41,6 +42,8 @@
     <view>
       <label>
         <not-viewable>La vista previa de este documento no está disponible.</not-viewable>
+        <pdf-max-size>The preview is not available for file larger than {0} MB.</pdf-max-size>
+        <pdf-max-page>The preview is not available for document of over {0} pages.</pdf-max-page>
         <using-webDAV>o abrir en MS Office</using-webDAV>
         <file-size-too-big>El contenido de este archivo es demasiado grande. Debe descargar y abrir en el cliente.</file-size-too-big>
         <webDAV>Vista WebDAV</webDAV>

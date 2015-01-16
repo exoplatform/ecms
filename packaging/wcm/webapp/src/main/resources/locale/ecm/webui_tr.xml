@@ -13,6 +13,11 @@
     <info>
       <child-not-found>Alt öğe bulunamadı!</child-not-found>
     </info>
+    <action>
+      <title>
+        <select>Seçin</select>
+      </title>
+    </action>
   </UITreeList>
   <!--
   ######################################################################
@@ -45,6 +50,7 @@
     <title>
       <UIPermissionUser>Kullanıcı Seçin</UIPermissionUser>
       <UIPermissionMembership>Üye Seçin</UIPermissionMembership>
+      <TaxoSelectUserOrGroup>Üyelik seçin</TaxoSelectUserOrGroup>
     </title>
   </SelectUserOrGroup>
   <UIPermissionUser>
@@ -59,4 +65,40 @@
       <selectGroup>Göz Atın ve Bir Grup Seçin</selectGroup>
     </label>
   </UIPermissionMembership>
+  <TaxoSelectUserOrGroup>
+    <label>
+      <selectGroup>Grup Seçin</selectGroup>
+      <selectMembership>Üyelik seçin</selectMembership>
+    </label>
+  </TaxoSelectUserOrGroup>
+  <!--
+  ######################################################################
+  # org.exoplatform.wcm.webui.clv.UICLVConfig        #
+  ######################################################################
+  -->
+  <UICLVConfigTargetPageSelectorPopupWindow>
+    <title>
+      <UIPageSelector>Sayfa seçicisi</UIPageSelector>
+    </title>
+  </UICLVConfigTargetPageSelectorPopupWindow>
+  <!--
+  ###################################################################################
+  # Repository                                        #
+  ###################################################################################
+  -->
+  <rootNodeInfo>
+    <title>
+      <AddRootNode>Kök Düğümü Ekle</AddRootNode>
+    </title>
+  </rootNodeInfo>
+  <!--
+  ################################################################################
+  #             org.exoplatform.ecm.webui.component.admin.UIMetadataList         #
+  ################################################################################
+  -->
+  <UIMetadataAnyPermission>
+    <label>
+      <anyPermission>Herhangi bir İzin</anyPermission>
+    </label>
+  </UIMetadataAnyPermission>
 </bundle>

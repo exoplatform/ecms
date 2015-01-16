@@ -30,6 +30,7 @@
         <comment-by>Σχολιάστηκε από</comment-by>
         <email>Διεύθυνση ηλεκτρονικού ταχυδρομείου</email>
         <site>Τοποθεσία</site>
+        <lastComment>Τελευταίο σχόλιο από {user} στις {time}</lastComment>
       </label>
     </view>
   </Comment>
@@ -41,6 +42,8 @@
     <view>
       <label>
         <not-viewable>Η προεπισκόπηση αυτού του εγγράφου δεν είναι διαθέσιμη.</not-viewable>
+        <pdf-max-size>Η προεπισκόπηση δεν είναι διαθέσιμη για αρχεία μεγαλύτερα από {0} MB.</pdf-max-size>
+        <pdf-max-page>Η προεπισκόπηση δεν είναι διαθέσιμη για έγγραφα με περισσότερες από {0} σελίδες.</pdf-max-page>
         <using-webDAV>ή άνοιγμα στο Office</using-webDAV>
         <file-size-too-big>Το περιεχόμενο αυτού του αρχείου είναι πολύ μεγάλο. Θα πρέπει να το κατεβάσετε και να το ανοίξετε στη συσκευή σας.</file-size-too-big>
         <webDAV>Προβολή WebDAV</webDAV>
