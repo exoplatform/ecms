@@ -31,15 +31,18 @@
       var documentManager = eXo.ecm.ECMWebDav.WebDAV.Client.DocManager;
       var openStatus = false;
       if (documentManager.IsMicrosoftOfficeAvailable() && documentManager.IsMicrosoftOfficeDocument(absolutePath)) {
-        if (!('ActiveXObject' in window)) absolutePath += '\0';
+        if (!('ActiveXObject' in window) && !ITHit.DetectOS.MacOS) absolutePath += '\0';
         openStatus = documentManager.MicrosoftOfficeEditDocument(absolutePath);
+        if(!openStatus){
+          openStatus = documentManager.JavaEditDocument(absolutePath, null, "/open-document/applet/ITHitMountOpenDocument.jar");
+        }
       } else {
         openStatus = documentManager.JavaEditDocument(absolutePath, null, "/open-document/applet/ITHitMountOpenDocument.jar");
       }
-      console.log("Open status "+ openStatus);
+      console.log("Open "+ absolutePath+" is "+openStatus);
     } else {
       //ITHIT not detected, Use ActiveX to edit document.
-      if(checkMSOffiveVersion){
+      if(checkMSOfficeVersion()){
         eXo.ecm.OpenDocumentInOffice.EditDocument(absolutePath);
       }else{
         console.log("Cannot open. MSOffice version is not support!");
@@ -58,9 +61,10 @@
     gj.ajax({
       url: restPrefix+"/office/updateDocumentTitle?objId=" + objId+"&lang="+eXo.env.portal.language,
       dataType: "text",
-      type: "GET"
+      type: "GET",
+			async:false
 //      useCache:false,
-      //	timeout:1000 * 10
+      //timeout:1000 * 10
     })
         .success(function (data) {
           data = gj.parseJSON(data);
@@ -135,7 +139,7 @@
     if (OSName === "Windows") {
       //check IE11, Office
       var isAtLeastIE11 = !!(ua.match(/Trident/) && !ua.match(/MSIE/));
-      if(checkMSOffiveVersion() && isAtLeastIE11) return true;
+      if(checkMSOfficeVersion() && isAtLeastIE11) return true;
 
       // Hide if not enought enviroments support
       gj(element).parent().attr("style", "display:none;");
@@ -154,7 +158,7 @@
    * Check ActiveX to get MS Office version
    * Return MS Office version is support
    */
-  function checkMSOffiveVersion(){
+  function checkMSOfficeVersion(){
     try{
       var word = new ActiveXObject("Word.Application");
       return word.Version >= "14.0";
