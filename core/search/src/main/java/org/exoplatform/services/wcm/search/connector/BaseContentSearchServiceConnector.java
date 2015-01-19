@@ -118,7 +118,7 @@ public abstract class BaseContentSearchServiceConnector extends BaseSearchServic
    * {@inheritDoc}
    */
   protected String getImageUrl(Node node) {
-    return "/eXoSkin/skin/images/system/default/Icons/TypeIcons/uiIconsType64x64.png";
+    return "/eXoSkin/skin/images/themes/default/Icons/TypeIcons/uiIconsType64x64.png";
   }
   
   /**
