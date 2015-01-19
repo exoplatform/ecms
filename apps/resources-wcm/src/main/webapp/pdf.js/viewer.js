@@ -1567,8 +1567,7 @@ var SecondaryToolbar = {
   
   printClick: function secondaryToolbarPrintClick(evt) {
     var w = window.open("/eXoWCMResources/pdf.js/print.html?file="+PDFJS.pdfFile+"&origin="+PDFJS.downloadLink);
-    w.onafterprint = function (){window.close();}
-
+    
   },
 
   firstPageClick: function secondaryToolbarFirstPageClick(evt) {    
@@ -2745,7 +2744,7 @@ var PDFView = {
     if (!this.supportsPrinting) {
       var printMessage = mozL10n.get('printing_not_supported', null,
           'Warning: Printing is not fully supported by this browser.');
-      this.error(printMessage);
+      // this.error(printMessage);
       return;
     }
 
@@ -2763,7 +2762,7 @@ var PDFView = {
     if (alertNotReady) {
       var notReadyMessage = mozL10n.get('printing_not_ready', null,
           'Warning: The PDF is not fully loaded for printing.');
-      window.alert(notReadyMessage);
+      // window.alert(notReadyMessage);
       return;
     }
 

@@ -1342,18 +1342,18 @@ canvas {
 
   body {
     background: transparent none;
+    overflow:visible !important;
   }
-
 
   #sidebarContainer, #secondaryToolbar, .toolbar, #loadingBox, #errorWrapper, .textLayer {
     display: none;
   }
   #viewerContainer {
-    overflow: visible;
+    overflow: visible !important;
   }
 
   #mainContainer, #viewerContainer, .page, .page canvas {
-    position: static;
+    position: static !important;
     padding: 0;
     margin: 0;
   }  
