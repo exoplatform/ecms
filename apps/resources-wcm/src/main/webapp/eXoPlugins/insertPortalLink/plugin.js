@@ -17,8 +17,7 @@ CKEDITOR.plugins.add( 'insertPortalLink',
 			editorFocus : 'false',
 			exec : function(editor) {
 				editor.openDialog('insertPortalLink.dlg');
-				var title = getTheSelectedText(editor);
-				editor.titleLink = title;
+				editor.titleLink = editor.getSelection().getSelectedText();
 			}
 		}
 		
@@ -30,19 +29,3 @@ CKEDITOR.plugins.add( 'insertPortalLink',
 	}
 });
 
-function getTheSelectedText(editor) {
-	var titleLink = "";
-	var txtSelection = editor.getSelection();
-	var selectedText = '';
-	if (CKEDITOR.env.ie) {
-		  txtSelection.unlock(true);
-		  selectedText = txtSelection.getNative().createRange().text;
-	} else {
-		  selectedText = txtSelection.getNative().toString();
-	}
-
-	if(selectedText && selectedText.length > 0) {
-		titleLink = selectedText ;
-	}
-	return titleLink;
-}
