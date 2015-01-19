@@ -79,7 +79,7 @@
 		                actionLink = uiParent.event(action, beanId);
 		              }
 			        %>	           
-			            <img onclick="$actionLink" rel="tooltip" data-placement="bottom" title="$title" alt="$title" src="/eXoResources/skin/sharedImages/Blank.gif" class="${action}Icon" />
+			            <img onclick="$actionLink" rel="tooltip" data-placement="bottom" title="$title" alt="$title" src="/eXoSkin/skin/images/system/background/Blank.gif" class="${action}Icon" />
 		          <%}%>    
 		      </td>
 	  <%

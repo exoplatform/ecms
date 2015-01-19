@@ -6,7 +6,7 @@
 		directory_title="My documents"
 		title_url="http://www.exoplatform.org"
 		description="My documents"
-		thumbnail="/eXoResources/skin/sharedImages/Icon80x80/DefaultPortlet.png"
+		thumbnail="/eXoSkin/skin/images/themes/default/Icons/Icon80x80/DefaultPortlet.png"
 		height="227">
 	</ModulePrefs>
 	<Content type="html">

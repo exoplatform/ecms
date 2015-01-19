@@ -88,7 +88,7 @@
                             </a>
                          </div>
                          <a href="javascript:eXo.webui.UIForm.submitEvent('<%=formName%>', '<%=actionInfo[1]%>', '&objectId=<%=arrInfor[i]%>');" onclick="return confirm('<%=confirm%>');">
-                           <img class="DeleteIconInfo" src="/eXoResources/skin/DefaultSkin/background/Blank.gif" rel="tooltip" data-placement="bottom" title="<%=actionInfo[1]%>" alt="<%=actionInfo[1]%>"/>
+                           <img class="DeleteIconInfo" src="/eXoSkin/skin/images/system/background/Blank.gif" rel="tooltip" data-placement="bottom" title="<%=actionInfo[1]%>" alt="<%=actionInfo[1]%>"/>
                          </a>
                                               </div>
                      <%

@@ -91,7 +91,7 @@
                              $fileName
                           </a>
                           <a href="$actionLink">
-							 <img src="/eXoResources/skin/DefaultSkin/background/Blank.gif" alt="<%=_ctx.appRes("Ecm.dialog.label.remove")%>" class="ActionIcon Remove16x16Icon"/>
+							 <img src="/eXoSkin/skin/images/system/background/Blank.gif" alt="<%=_ctx.appRes("Ecm.dialog.label.remove")%>" class="ActionIcon Remove16x16Icon"/>
 						  </a>
 						  </div>
                        <%

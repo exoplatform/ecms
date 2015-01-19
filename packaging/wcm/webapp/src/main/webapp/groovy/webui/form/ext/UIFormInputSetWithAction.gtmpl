@@ -42,7 +42,7 @@
 												if(uicomponent.isDeleteOnly()) { %>
 													<div class="InforField">
 														<span class="ActionField"><%=listInfor[j]%></span>	
-														<img onclick="if(confirm('<%=confirm%>')) eXo.webui.UIForm.submitEvent('<%=formName%>', '<%=actionInfo[1]%>', '&objectId=<%=arrInfor[i]%>');" alt="<%=actionInfo[1]%>" class="DeleteIconInfo" src="/eXoResources/skin/DefaultSkin/background/Blank.gif"/>
+														<img onclick="if(confirm('<%=confirm%>')) eXo.webui.UIForm.submitEvent('<%=formName%>', '<%=actionInfo[1]%>', '&objectId=<%=arrInfor[i]%>');" alt="<%=actionInfo[1]%>" class="DeleteIconInfo" src="/eXoSkin/skin/images/system/background/Blank.gif"/>
 													</div>	
 										<%
 												}
@@ -61,14 +61,14 @@
 																<div class="ActionField">
 																	<%=arrInfor[i]%>
 																</div>									
-																<img onclick="if(confirm('<%=confirm%>')) eXo.webui.UIForm.submitEvent('<%=formName%>', '<%=actionInfo[0]%>', '&objectId=<%=arrInfor[i]%>');" alt="<%=actionInfo[0]%>" class="DeleteIconInfo" src="/eXoResources/skin/DefaultSkin/background/Blank.gif"/>										 
+																<img onclick="if(confirm('<%=confirm%>')) eXo.webui.UIForm.submitEvent('<%=formName%>', '<%=actionInfo[0]%>', '&objectId=<%=arrInfor[i]%>');" alt="<%=actionInfo[0]%>" class="DeleteIconInfo" src="/eXoSkin/skin/images/system/background/Blank.gif"/>
 														<%} else { %>
 																<div class="ActionField" style="float:left;">
 																	[ <a href="javascript:eXo.webui.UIForm.submitEvent('<%=formName%>', '<%=actionInfo[0]%>', '&objectId=<%=arrInfor[i]%>');">
 																			<%=arrInfor[i]%>
 																	</a> ]
 																</div>
-																	<img onclick="if(confirm('<%=confirm%>')) eXo.webui.UIForm.submitEvent('<%=formName%>', '<%=actionInfo[1]%>', '&objectId=<%=arrInfor[i]%>');" alt="<%=actionInfo[1]%>" class="DeleteIconInfo" src="/eXoResources/skin/DefaultSkin/background/Blank.gif"/>								
+																	<img onclick="if(confirm('<%=confirm%>')) eXo.webui.UIForm.submitEvent('<%=formName%>', '<%=actionInfo[1]%>', '&objectId=<%=arrInfor[i]%>');" alt="<%=actionInfo[1]%>" class="DeleteIconInfo" src="/eXoSkin/skin/images/system/background/Blank.gif"/>
 																
 														<%
 															}

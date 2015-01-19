@@ -69,7 +69,7 @@
                     <div class="InforField">
                      <span class="uiMention"><%=listInfor[j]%></span>  
                      <a href="javascript:eXo.webui.UIForm.submitEvent('<%=formName%>', '<%=actionInfo[0]%>', '&objectId=<%=j%>');" onclick="return confirm('<%=confirm%>');">
-                        <img class="DeleteIconInfo" src="/eXoResources/skin/DefaultSkin/background/Blank.gif" alt="<%=actionInfo[0]%>" />
+                        <img class="DeleteIconInfo" src="/eXoSkin/skin/images/system/background/Blank.gif" alt="<%=actionInfo[0]%>" />
                      </a>
                     </div> 
 									<%
@@ -131,14 +131,14 @@
 									 if(actionField != null && actionField.length > 0) {
 										 for(i in 0..actionField.length -1) {
 								 %>      
-													<img onclick="javascript:eXo.webui.UIForm.submitForm('<%=formName%>', '<%=actionField[i]%>', true)" rel="tooltip" data-placement="bottom" title="<%=_ctx.appRes(uicomponent.getId() + ".title." + actionField[i])%>" class="AddIcon16x16 <%=actionField[i]%>Icon" src="/eXoResources/skin/DefaultSkin/background/Blank.gif" alt="<%=_ctx.appRes(uicomponent.getId() + ".title." + actionField[i])%>" />
+													<img onclick="javascript:eXo.webui.UIForm.submitForm('<%=formName%>', '<%=actionField[i]%>', true)" rel="tooltip" data-placement="bottom" title="<%=_ctx.appRes(uicomponent.getId() + ".title." + actionField[i])%>" class="AddIcon16x16 <%=actionField[i]%>Icon" src="/eXoSkin/skin/images/system/background/Blank.gif" alt="<%=_ctx.appRes(uicomponent.getId() + ".title." + actionField[i])%>" />
 								 <%
 											}
 									 }
 									} else if(isShowAction) {                
 									 for(String action : uicomponent.getFieldActions(inputEntry.getName())) {
 								 %>      
-													<img onclick="javascript:eXo.webui.UIForm.submitForm('<%=formName%>', '<%=action%>', true)" rel="tooltip" data-placement="bottom" title="<%=_ctx.appRes(uicomponent.getId() + ".title." + action)%>" class="AddIcon16x16 <%=action%>Icon" class="AddIcon16x16 <%=action%>Icon" src="/eXoResources/skin/DefaultSkin/background/Blank.gif" alt="<%=_ctx.appRes(uicomponent.getId() + ".title." + action)%>" />
+													<img onclick="javascript:eXo.webui.UIForm.submitForm('<%=formName%>', '<%=action%>', true)" rel="tooltip" data-placement="bottom" title="<%=_ctx.appRes(uicomponent.getId() + ".title." + action)%>" class="AddIcon16x16 <%=action%>Icon" class="AddIcon16x16 <%=action%>Icon" src="/eXoSkin/skin/images/system/background/Blank.gif" alt="<%=_ctx.appRes(uicomponent.getId() + ".title." + action)%>" />
 								 <%
 										}
 									}
