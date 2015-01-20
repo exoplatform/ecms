@@ -28,6 +28,7 @@ import java.util.zip.ZipInputStream;
 
 import javax.jcr.AccessDeniedException;
 import javax.jcr.ImportUUIDBehavior;
+import javax.jcr.InvalidSerializedDataException;
 import javax.jcr.Node;
 import javax.jcr.Session;
 import javax.jcr.nodetype.ConstraintViolationException;
@@ -235,6 +236,25 @@ public class UIImportNode extends UIForm implements UIPopupComponent {
         uiApp.addMessage(new ApplicationMessage("UIImportNode.msg.item-exists-exception",
                                                 new Object[] { iee.getIdentifier() },
                                                 ApplicationMessage.WARNING));
+
+        return;
+      } catch (InvalidSerializedDataException isde) {
+        if (LOG.isErrorEnabled()) {
+          LOG.error("Unexpected error",isde);
+        }
+        session.refresh(false);
+        String msg = isde.getMessage();
+        String position = "";
+        if (msg != null && msg.indexOf("[") > 0 && msg.indexOf("]") > 0) {
+          position = msg.substring(msg.indexOf("["), msg.lastIndexOf("]")+1);
+        }
+        String fileName = input.getUploadResource(inputUploadId).getFileName();
+        if (fileName != null && fileName.indexOf(".")>0){
+          fileName = fileName.substring(0, fileName.indexOf("."));
+        }
+        Object [] args = new Object[] {position, fileName};
+        uiApp.addMessage(new ApplicationMessage("UIImportNode.msg.xml-invalid", args,
+            ApplicationMessage.WARNING));
 
         return;
       } catch (Exception ise) {
