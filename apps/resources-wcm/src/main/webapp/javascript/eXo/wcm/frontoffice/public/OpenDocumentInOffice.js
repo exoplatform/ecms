@@ -31,7 +31,7 @@
       var documentManager = eXo.ecm.ECMWebDav.WebDAV.Client.DocManager;
       var openStatus = false;
       if (documentManager.IsMicrosoftOfficeAvailable() && documentManager.IsMicrosoftOfficeDocument(absolutePath)) {
-        if (!('ActiveXObject' in window) && !ITHit.DetectOS.MacOS) absolutePath += '\0';
+        //if (!('ActiveXObject' in window) && !ITHit.DetectOS.MacOS) absolutePath += '\0'; only use for ITHit Ajax Lib 1.7.0 
         openStatus = documentManager.MicrosoftOfficeEditDocument(absolutePath);
         if(!openStatus){
           openStatus = documentManager.JavaEditDocument(absolutePath, null, "/open-document/applet/ITHitMountOpenDocument.jar");
@@ -62,9 +62,7 @@
       url: restPrefix+"/office/updateDocumentTitle?objId=" + objId+"&lang="+eXo.env.portal.language,
       dataType: "text",
       type: "GET",
-			async:false
-//      useCache:false,
-      //timeout:1000 * 10
+      async:false
     })
         .success(function (data) {
           data = gj.parseJSON(data);
@@ -88,8 +86,6 @@
             console.log("ITHIT not detected!");
             defaultEnviromentFilter(openDocument);//only show with support enviroment.
           }
-
-//          gj(".detailContainer").find('.openDocument').html(data.title);
         });
   }
 
