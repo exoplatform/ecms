@@ -21,12 +21,12 @@
 
     //init event
     SimpleView.prototype.initAllEvent = function(actionAreaId, enableDragAndDrop) {
-      eXo.ecm.UISimpleView.enableDragAndDrop = enableDragAndDrop;    
+      eXo.ecm.UISimpleView.enableDragAndDrop = enableDragAndDrop;
       Self.contextMenuId = "JCRContextMenu";
       Self.actionAreaId = actionAreaId;
 
       var actionArea = document.getElementById(actionAreaId);
-      if (!actionArea) return; 
+      if (!actionArea) return;
       var mousedown = null;
       var keydown = null;
       Self.allItems = gj(actionArea).find("div.actionIconBox");
@@ -45,8 +45,8 @@
             item.setAttribute("keydown", keydown);
             item.onmousedown = null;
             item.removeAttribute("onkeydown");
-          }      
-  //      if (enableDragAndDrop == "true") {      
+          }
+  //      if (enableDragAndDrop == "true") {
           item.onmouseover = Self.mouseOverItem;
           item.onfocus = Self.mouseOverItem;
           item.onmousedown = Self.mouseDownItem;
@@ -64,11 +64,11 @@
       actionArea.onmouseover = Self.mouseOverGround;
       actionArea.onmouseout = Self.mouseOutGround;
           actionArea.onfocus = Self.mouseOverGround;
-          actionArea.onblur = Self.mouseOutGround;  
+          actionArea.onblur = Self.mouseOutGround;
       gj("div.FillOutElement").remove();
       var fillOutElement = document.createElement('div');
       fillOutElement.className = "FillOutElement";
-      actionArea.appendChild(fillOutElement);  
+      actionArea.appendChild(fillOutElement);
       //remove context menu
       var contextMenu = document.getElementById(Self.contextMenuId);
       if (contextMenu) contextMenu.parentNode.removeChild(contextMenu);
@@ -89,14 +89,14 @@
   //            if (element.getAttribute("onkeydown") && !element.getAttribute("keydown")) {
   //              keydown = element.getAttributeNode("onkeydown").value;
   //              element.setAttribute("keydown", keydown);
-  //            }            
+  //            }
   //            element.onmousedown = Self.mouseDownTree;
   //            element.onkeydown = Self.mouseDownTree;
   //            element.onmouseup = Self.mouseUpTree;
   //            element.onmouseover = Self.mouseOverTree;
   //            element.onmouseout = Self.mouseOutTree;
   //            element.onfocus = Self.mouseOverTree;
-  //            element.onblur = Self.mouseOutTree;            
+  //            element.onblur = Self.mouseOutTree;
   //          }
   //      );
   //    }
@@ -109,14 +109,14 @@
               if (element.getAttribute("onkeydown") && !element.getAttribute("keydown")) {
                 keydown = element.getAttributeNode("onkeydown").value;
                 element.setAttribute("keydown", keydown);
-              }            
+              }
         element.onmousedown = Self.mouseDownTree;
         element.onkeydown = Self.mouseDownTree;
         element.onmouseup = Self.mouseUpTree;
         element.onmouseover = Self.mouseOverTree;
         element.onmouseout = Self.mouseOutTree;
               element.onfocus = Self.mouseOverTree;
-              element.onblur = Self.mouseOutTree;            
+              element.onblur = Self.mouseOutTree;
       });
     };
 
@@ -144,12 +144,12 @@
           var element = eXo.ecm.UISimpleView.object ;
         var pos = evt.pageY - gj(element).offset().top;
         if(element.offsetHeight - pos < 10){
-          element.scrollTop = element.scrollTop + 5;  
+          element.scrollTop = element.scrollTop + 5;
         } else if(element.scrollTop > 0 && pos < 10) {
-          element.scrollTop = element.scrollTop - 5;  
+          element.scrollTop = element.scrollTop - 5;
         }
       }
-    };  
+    };
 
     SimpleView.prototype.mouseOutTree = function(event) {
       var element = this;
@@ -202,10 +202,10 @@
         mobileElement.appendChild(coverElement);
         document.body.appendChild(mobileElement);
       }
-      
+
       // Init feature Copy URL to Clipboard
       eXo.ecm.ECMUtils.initClipboard();
-      
+
       event.preventDefault();
     };
 
@@ -278,7 +278,7 @@
       var element = this;
       removeMobileElement();
       Self.hideContextMenu();
-      var d = new Date();    
+      var d = new Date();
       Self.t1 = d.getTime();
       Self.enableDragDrop = true;
       Self.srcPath = element.getAttribute("objectId");
@@ -326,9 +326,9 @@
         document.onselectstart = function(){return false;}
         if (eXo.ecm.UISimpleView.enableDragAndDrop != "true")
           return;
-        var d = new Date();      
-        Self.t2 = d.getTime();      
-        if((Self.t2-Self.t1)<200) 
+        var d = new Date();
+        Self.t2 = d.getTime();
+        if((Self.t2-Self.t1)<200)
           return;
         var mobileElement = document.getElementById(Self.mobileId);
         if (Self.enableDragDrop && mobileElement && (!event.ctrlKey || (event.shiftKey && event.ctrlKey))) {
@@ -446,7 +446,7 @@
           eval(element.getAttribute("mousedown"));
         }
       }
-      
+
       // Init feature Copy URL to Clipboard
       eXo.ecm.ECMUtils.initClipboard();
     };
@@ -546,14 +546,14 @@
           if (mask.offsetHeight > bottom) {
             mask.style.height = bottom + "px";
           }
-          mask.style.top = mask.storeY + "px";  
+          mask.style.top = mask.storeY + "px";
           if (mask.offsetWidth > left) {
             mask.style.width = left + "px";
             mask.style.left = 0 + "px";
           } else {
             mask.style.left = mask.X + "px";
           }
-          //detect element 
+          //detect element
           //for (var i in Self.allItems) {
           Self.allItems.each(function(i, elem){
            if (!Array.prototype[i]) {
@@ -588,7 +588,7 @@
           } else {
             mask.style.left = mask.X + "px";
           }
-          //detect element 
+          //detect element
           //for (var i in Self.allItems) {
           Self.allItems.each(function(i, elem){
            if (!Array.prototype[i]) {
@@ -618,12 +618,12 @@
             mask.style.top = 0 + "px";
           } else {
             mask.style.top = mask.Y + "px";
-          }  
+          }
           if (mask.offsetWidth > right) {
             mask.style.width = right + "px";
-          } 
+          }
           mask.style.left = mask.storeX + "px";
-          //detect element 
+          //detect element
           //for (var i in Self.allItems) {
           Self.allItems.each(function(i, elem){
            if (!Array.prototype[i]) {
@@ -647,7 +647,7 @@
           if (mask.offsetHeight > bottom) {
             mask.style.height = bottom + "px";
           }
-          mask.style.top = mask.storeY + "px";  
+          mask.style.top = mask.storeY + "px";
           if (mask.offsetWidth > right) {
             mask.style.width = right + "px";
           }
@@ -738,10 +738,10 @@
   	  	if (	Self.itemsSelected[i].getAttribute('isExoAction') == "true") {
   		  checkExoActionNode = true;
   		  break;
-  	  	}  
+  	  	}
   	  	//check symlink and target are in trash to show Delete button only on action bar.
   	  	else if (Self.itemsSelected[i].getAttribute('isLinkWithTarget') == "true") {
-  	  	  checkLinkAndTargetInTrash = true; 
+  	  	  checkLinkAndTargetInTrash = true;
   	  	  continue;
   	  	}
         if (Self.itemsSelected[i].getAttribute('locked') == "true") checkUnlock = true;
@@ -751,7 +751,7 @@
         if (Self.itemsSelected[i].getAttribute('mediaType') == "true") checkMediaType = true;
         if (Self.itemsSelected[i].getAttribute('isCheckedIn') == "true") checkInStatus = true;
       }
-      
+
       var lockAction = gj(contextMenu).find("i.uiIconEcmsLock:first")[0];
       var unlockAction = gj(contextMenu).find("i.uiIconEcmsUnlock:first")[0];
       var addFavouriteAction = gj(contextMenu).find("i.uiIconEcmsAddToFavourite:first")[0];
@@ -791,7 +791,7 @@
   		  unlockAction.parentNode.parentNode.style.display = "none";
   		  lockAction.parentNode.parentNode.style.display = "block";
   		}
-  		  
+
     	if (checkRemoveFavourite) {
   		  removeFavouriteAction.parentNode.parentNode.style.display = "block";
   		  addFavouriteAction.parentNode.parentNode.style.display = "none";
@@ -799,7 +799,7 @@
   		  addFavouriteAction.parentNode.parentNode.style.display = "block";
   		  removeFavouriteAction.parentNode.parentNode.style.display = "none";
   		}
-  		  
+
   		if (!checkInTrash) {
   		  restoreFromTrashAction.parentNode.parentNode.style.display = "none";
   		}else{
@@ -822,12 +822,12 @@
   			  emptyTrashAction.parentNode.style.display = "block";
   		  }
   		}
-  		  
+
   		if (Self.itemsSelected.length > 1) {
   		  pasteAction.parentNode.parentNode.style.display = "none";
   		}
   	  }
-  	  
+
       //check position popup
       var X = event.pageX || event.clientX;
       var Y = event.pageY || event.clientY;
@@ -888,7 +888,7 @@
     SimpleView.prototype.hideContextMenu = function() {
       var contextMenu = document.getElementById(Self.contextMenuId);
       if (contextMenu) contextMenu.style.display = "none";
-      
+
       // Hide menu from action bar
       var listHideContainer = document.getElementById('ListHideContainer');
       if (listHideContainer) {
@@ -994,13 +994,13 @@
       var root = document.getElementById("UIDocumentInfo");
       var view = gj(root).find("div.uiThumbnailsView:first")[0];
       var workingArea = document.getElementById('UIWorkingArea');
-      var documentWorkspace = gj(workingArea).find("div.UIDocumentWorkspace:first")[0];  
-      var actionBar = document.getElementById('UIActionBar');  
+      var documentWorkspace = gj(workingArea).find("div.UIDocumentWorkspace:first")[0];
+      var actionBar = document.getElementById('UIActionBar');
       var actionBaroffsetHeight = 0;
       if(actionBar)
         actionBaroffsetHeight = actionBar.offsetHeight;
-      var workingContainer = document.getElementById('UIDocumentContainer');    
-      var page = gj(root).find("div.PageAvailable:first")[0];    
+      var workingContainer = document.getElementById('UIDocumentContainer');
+      var page = gj(root).find("div.PageAvailable:first")[0];
       var sizeBarContainer = gj(workingArea).find("div.UISideBarContainer:first")[0];
       var resizeSideBar = gj(workingArea).find("div.ResizeSideBar:first")[0];
 
@@ -1011,8 +1011,8 @@
 
       if (resizeSideBar)
         resizeSideBar.style.height = workingAreaHeight + 'px';
-      if (documentWorkspace)    {    
-         documentWorkspace.style.height = (workingAreaHeight - actionBaroffsetHeight) + 'px';  
+      if (documentWorkspace)    {
+         documentWorkspace.style.height = (workingAreaHeight - actionBaroffsetHeight) + 'px';
       }
 
       if (page) {
@@ -1025,7 +1025,7 @@
           if (view) view.style.height = workingAreaHeight - actionBaroffsetHeight + 'px';
       }
     };
-    
+
     SimpleView.prototype.loadImageOnSuccess = function() {
        gj("#UIDocumentWorkspace .bgThumbnailImage img").one('load', function() {
            if (this.parentNode.parentNode) {
@@ -1038,10 +1038,11 @@
            gj(this.parentNode).height(gj(this).height());
         }).each(function() {
           if(this.complete) gj(this).load();
+           gj(this).parents(".loadingProgressIcon").addClass("hidden-loading");
         });
     };
   };
-  
+
 
 
   eXo.ecm.UISimpleView = new SimpleView();
