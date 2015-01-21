@@ -42,7 +42,7 @@ public class UINodeTypeSearch extends UIFormInputContainer<String> {
       removeChild(UIFormStringInput.class);
     }
     addChild(new UIFormStringInput("NodeTypeText", "NodeTypeText", null));
-    addValidator(NodeTypeNameValidator.class);
+    //addValidator(NodeTypeNameValidator.class);
   }
 
   public String event(String name) throws Exception {
