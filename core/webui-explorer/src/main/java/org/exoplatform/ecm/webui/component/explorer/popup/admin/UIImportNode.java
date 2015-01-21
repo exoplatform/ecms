@@ -240,22 +240,20 @@ public class UIImportNode extends UIForm implements UIPopupComponent {
         return;
       } catch (InvalidSerializedDataException isde) {
         if (LOG.isErrorEnabled()) {
-          LOG.error("Unexpected error",isde);
+          LOG.error("Unexpected error", isde);
         }
         session.refresh(false);
         String msg = isde.getMessage();
         String position = "";
         if (msg != null && msg.indexOf("[") > 0 && msg.indexOf("]") > 0) {
-          position = msg.substring(msg.indexOf("["), msg.lastIndexOf("]")+1);
+          position = msg.substring(msg.lastIndexOf("["), msg.lastIndexOf("]")+1);
         }
         String fileName = input.getUploadResource(inputUploadId).getFileName();
-        if (fileName != null && fileName.indexOf(".")>0){
-          fileName = fileName.substring(0, fileName.indexOf("."));
-        }
         Object [] args = new Object[] {position, fileName};
-        uiApp.addMessage(new ApplicationMessage("UIImportNode.msg.xml-invalid", args,
-            ApplicationMessage.WARNING));
-
+        ApplicationMessage appMsg = new ApplicationMessage("UIImportNode.msg.xml-invalid", args, 
+          ApplicationMessage.WARNING);
+        appMsg.setArgsLocalized(false);
+        uiApp.addMessage(appMsg);
         return;
       } catch (Exception ise) {
         if (LOG.isErrorEnabled()) {
