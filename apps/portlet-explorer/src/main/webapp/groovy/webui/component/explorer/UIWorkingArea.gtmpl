@@ -51,9 +51,11 @@
   def nodePathDelete = uicomponent.getNodePathDelete();
   def deleteNotice = uicomponent.getDeleteNotice();
   def wcmNotice = uicomponent.getWCMNotice();
+  def undo = _ctx.appRes('UIWorkingArea.msg.undo-delete');
   uicomponent.setNodePathDelete("");
   uicomponent.setDeleteNotice("");
   uicomponent.setWCMNotice("");
+  jsManager.getRequireJS().addScripts("ecmutil.ECMUtils.undo = \"" + undo + "\";");
   if(StringUtils.isNotEmpty(nodePathDelete)) {
  	  List<UIAbstractManagerComponent> managers = uicomponent.getManagers();
  	  for (UIAbstractManagerComponent manager : managers) {
@@ -62,6 +64,7 @@
 		}
  	  jsManager.getRequireJS().addScripts("ecmutil.ECMUtils.activateWCMRestoreNotice(\"$wcmNotice\");");
  	  jsManager.getRequireJS().addScripts("ecmutil.ECMUtils.activateWCMDeleteNotice(\"$nodePathDelete\", \""+deleteNotice+"\");");
+ 	  
    } else {	 
 	   jsManager.getRequireJS().addScripts("ecmutil.ECMUtils.activateWCMDeleteNotice(\"$nodePathDelete\", \""+deleteNotice+"\");");
 	   jsManager.getRequireJS().addScripts("ecmutil.ECMUtils.activateWCMRestoreNotice(\"$wcmNotice\");");
