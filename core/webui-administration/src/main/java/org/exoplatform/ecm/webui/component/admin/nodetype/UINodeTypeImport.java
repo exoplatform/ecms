@@ -64,7 +64,7 @@ import org.exoplatform.webui.form.input.UICheckBoxInput;
 public class UINodeTypeImport extends UIForm {
 
   private List<NodeTypeValue> nodeTypeList_ = new ArrayList<NodeTypeValue>() ;
-  final static String TABLE_NAME =  "UINodeTypeImport";
+  final static String TABLE_NAME =  "uiTableInputSetName";
   final static String [] TABLE_COLUMNS = {"label", "input"};
   private static final Log LOG  = ExoLogger.getLogger(UINodeTypeImport.class.getName());
 
@@ -96,7 +96,7 @@ public class UINodeTypeImport extends UIForm {
   public void update(ArrayList<NodeTypeValue> nodeTypeList) throws Exception {
     UIFormTableInputSet uiTableInputSet = getChild(UIFormTableInputSet.class) ;
     if(uiTableInputSet == null ) {
-      uiTableInputSet = createUIComponent(UIFormTableInputSet.class, null, null) ;
+      uiTableInputSet = createUIComponent(UIFormTableInputSet.class, null, "uiTableInputSetID") ;
       addUIComponentInput(uiTableInputSet) ;
     } else {
       uiTableInputSet.getChildren().clear() ;
@@ -154,7 +154,7 @@ public class UINodeTypeImport extends UIForm {
     }
   }
 
-  public String getLabel(String id) { return id ; }
+  public String getLabel(String id) { return "label" + id ; }
 
   public void setRegisteredNodeType(List<String> registeredNodeType) {
     this.registeredNodeType = registeredNodeType;
