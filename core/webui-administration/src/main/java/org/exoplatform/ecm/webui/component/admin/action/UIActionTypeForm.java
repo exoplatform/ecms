@@ -82,8 +82,7 @@ public class UIActionTypeForm extends UIForm {
   public UIActionTypeForm() throws Exception {
     
     addUIFormInput(new UIFormStringInput(FIELD_NAME, FIELD_NAME, null).
-        addValidator(MandatoryValidator.class)) ;
-    this.getUIStringInput(FIELD_NAME).addValidator(NameValidator.class);
+        addValidator(MandatoryValidator.class).addValidator(NameValidator.class));
     UIFormSelectBox actionExecutables = new UIFormSelectBox(FIELD_SCRIPT,FIELD_SCRIPT,
         new ArrayList<SelectItemOption<String>>());
     addUIFormInput(actionExecutables) ;
@@ -199,9 +198,7 @@ public class UIActionTypeForm extends UIForm {
     private String cleanString(String input){
       Transliterator accentsconverter = Transliterator.getInstance("Latin; NFD; [:Nonspacing Mark:] Remove; NFC;");
       input = accentsconverter.transliterate(input);
-      //the character ? seems to not be changed to d by the transliterate function
-      StringBuffer cleanedStr = new StringBuffer(input.trim());
-      return cleanedStr.toString();
+      return input.trim();
     }
   }
 
