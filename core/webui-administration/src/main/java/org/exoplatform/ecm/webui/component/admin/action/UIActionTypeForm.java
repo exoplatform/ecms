@@ -45,6 +45,9 @@ import org.exoplatform.webui.form.UIFormMultiValueInputSet;
 import org.exoplatform.webui.form.UIFormSelectBox;
 import org.exoplatform.webui.form.UIFormStringInput;
 import org.exoplatform.webui.form.validator.MandatoryValidator;
+import org.exoplatform.webui.form.validator.NameValidator;
+
+import com.ibm.icu.text.Transliterator;
 
 /**
  * Created by The eXo Platform SARL
@@ -80,6 +83,7 @@ public class UIActionTypeForm extends UIForm {
     
     addUIFormInput(new UIFormStringInput(FIELD_NAME, FIELD_NAME, null).
         addValidator(MandatoryValidator.class)) ;
+    this.getUIStringInput(FIELD_NAME).addValidator(NameValidator.class);
     UIFormSelectBox actionExecutables = new UIFormSelectBox(FIELD_SCRIPT,FIELD_SCRIPT,
         new ArrayList<SelectItemOption<String>>());
     addUIFormInput(actionExecutables) ;
@@ -147,7 +151,7 @@ public class UIActionTypeForm extends UIForm {
       event.getRequestContext().addUIComponentToUpdateByAjax(uiForm.getParent()) ;
     }
   }
-
+  
   @SuppressWarnings("unused")
   static public class SaveActionListener extends EventListener<UIActionTypeForm> {
     public void execute(Event<UIActionTypeForm> event) throws Exception {
@@ -159,7 +163,8 @@ public class UIActionTypeForm extends UIForm {
         uiForm.getApplicationComponent(ActionServiceContainer.class) ;
       UIApplication uiApp = uiForm.getAncestorOfType(UIApplication.class) ;
       String actionLabel = uiForm.getUIStringInput(FIELD_NAME).getValue();
-      String actionName = "exo:" + org.exoplatform.services.cms.impl.Utils.cleanString(actionLabel);
+      String actionName = "exo:" + cleanString(actionLabel);
+
       if(uiForm.isUpdate) actionName = uiForm.actionName_;
 
       List<String> variables = new ArrayList<String>();
@@ -190,6 +195,13 @@ public class UIActionTypeForm extends UIForm {
         return ;
       }
       event.getRequestContext().addUIComponentToUpdateByAjax(uiActionManager) ;
+    }
+    private String cleanString(String input){
+      Transliterator accentsconverter = Transliterator.getInstance("Latin; NFD; [:Nonspacing Mark:] Remove; NFC;");
+      input = accentsconverter.transliterate(input);
+      //the character ? seems to not be changed to d by the transliterate function
+      StringBuffer cleanedStr = new StringBuffer(input.trim());
+      return cleanedStr.toString();
     }
   }
 
