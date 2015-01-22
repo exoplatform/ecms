@@ -81,7 +81,9 @@
             if (data.isLocked) return;//can not edit, just show popup(do not change href)
           }else{
             if(!data.isMsoffice){
-              gj(openDocument).attr("style", "display:none;");
+              openDocument.parent().addClass("hidden");
+            }else{
+              openDocument.parent().removeClass("hidden");
             }
             console.log("ITHIT not detected!");
             defaultEnviromentFilter(openDocument);//only show with support enviroment.
