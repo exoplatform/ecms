@@ -39,7 +39,7 @@
   
   UIPopupWindow uiPopupWindow = uicomponent.getAncestorOfType(UIPopupWindow.class);
   def resizeBlock = "class=\"UIResizableBlock\"";
-  if(uiPopupWindow != null) resizeBlock = ""; 
+  if(uiPopupWindow != null) resizeBlock = "class=\"UIUnResizableBlock\"";
   
   def originNode = uicomponent.getNode();
   def currentNode = getFileLangNode(originNode) ;

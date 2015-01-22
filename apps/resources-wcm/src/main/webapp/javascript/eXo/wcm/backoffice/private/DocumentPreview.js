@@ -36,7 +36,7 @@
             var $actionBarCommentArea = gj('.actionBar', $commentArea);
             var commentAreaHeight = window.innerHeight - 30;
             $commentArea.height(commentAreaHeight);
-            $commentList.css('max-height', commentAreaHeight - $commentAreaTitle.innerHeight() - $commentInputBox.innerHeight() - $highlightBox.innerHeight() - $actionBarCommentArea.innerHeight());
+            $commentList.css('max-height', commentAreaHeight - $commentAreaTitle.innerHeight() - $commentInputBox.innerHeight() - $highlightBox.innerHeight() - $actionBarCommentArea.innerHeight() - 16); //16 is padding of commentList
             $commentList.scrollTop(20000);
 
             // Media viewer, no preview file
@@ -139,8 +139,8 @@
             var $target = gj(e.target);
             if ($target.attr('id') === "UIDocumentPreview"
              || $target.hasClass('uiVote')
-             || "clearfix" === e.target.className
-             || $target.hasClass('UIResizableBlock')) {
+             || $target.hasClass('uiDocumentPreviewMainWindow')
+             || $target.hasClass('UIUnResizableBlock')) {
                 gj(".exitWindow > .uiIconClose", $uiDocumentPreview).trigger("click");
             }
         });
@@ -182,6 +182,7 @@
         });
 
         // Clicking the comment icon will put the focus in the comment area. 
+        gj('#previewCommentLink', $commentArea).unbind('click');
         gj('#previewCommentLink', $commentArea).click(function(){
             $commentTextAreaPreview.focus();
         });

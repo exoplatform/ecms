@@ -150,9 +150,7 @@
         },
 
         playlist: [ ${url} ],
-        canvas: {
-          backgroundImage: 'url(/eXoWCMResources/skin/images/file/MP3Player.jpg)'
-        },
+
         clip: {
             autoPlay: false,
             autoBuffering: true,

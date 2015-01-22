@@ -24,7 +24,7 @@
         <div class="exitWindow">
             <a class="uiIconClose uiIconWhite" title="<%=_ctx.appRes("UIPopupWindow.Close")%>" onclick="<%=uicomponent.event("Close")%>"></a>
         </div>
-        <div class="clearfix">
+        <div class="uiDocumentPreviewMainWindow clearfix">
             <%
             uicomponent.renderChild(org.exoplatform.wcm.ext.component.activity.UIPreviewCommentArea);
             %>
