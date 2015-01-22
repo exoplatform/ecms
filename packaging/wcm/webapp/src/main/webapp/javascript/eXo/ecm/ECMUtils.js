@@ -13,6 +13,7 @@
 		Self.waitInterval              = 25;
 		Self.UIBrokenCheckingInterval  = 150;
 		Self.driveActionSize 			= 0;
+		Self.undo = "Undo";
 		window.UIBrokenCheckingHandler   = null;
 		var RightClick = eXo.webui.UIRightClickPopupMenu;
 		if (!RightClick) {
@@ -1220,11 +1221,14 @@
 		            noticeElem.style.top = (pos.top + 5) + "px";
 		          }   
 		          noticeElem.style.display = "block";
-		          nodePathDelete = " <a href=\"javascript:void(0);\" onclick=\""+nodePathDelete+"\">Undo</a>";
+		          nodePathDelete = " <a href=\"javascript:void(0);\" onclick=\""+nodePathDelete+"\">"+Self.undo+"</a>";
 		          deleteNotice = deleteNotice + nodePathDelete;
 		          noticeElem.innerHTML = '<i class="uiIconSuccess"></i>' + deleteNotice;
 			  noticeElem.style.marginLeft = "-" + noticeElem.offsetWidth/2 + "px";
 		        }
+		}
+		ECMUtils.prototype.setUndo = function(undo) {
+			    Self.undo = undo;
 		}
 
 		ECMUtils.prototype.activateWCMRestoreNotice = function(restoreNotice) {

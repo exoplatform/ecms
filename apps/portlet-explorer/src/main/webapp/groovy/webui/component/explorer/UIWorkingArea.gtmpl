@@ -19,6 +19,7 @@
   import org.exoplatform.ecm.webui.utils.Utils;
   import org.exoplatform.ecm.webui.component.admin.manager.UIAbstractManagerComponent;
   import org.apache.commons.lang.StringUtils;
+  import org.apache.commons.lang.StringEscapeUtils;
 
   def rcontext = _ctx.getRequestContext() ;
   def uiTreeExplorer = uicomponent.getTreeExplorer();
@@ -51,9 +52,11 @@
   def nodePathDelete = uicomponent.getNodePathDelete();
   def deleteNotice = uicomponent.getDeleteNotice();
   def wcmNotice = uicomponent.getWCMNotice();
+  def undo = StringEscapeUtils.escapeJavaScript(_ctx.appRes('UIWorkingArea.msg.undo-delete'));
   uicomponent.setNodePathDelete("");
   uicomponent.setDeleteNotice("");
   uicomponent.setWCMNotice("");
+  jsManager.getRequireJS().addScripts("ecmutil.ECMUtils.setUndo(\"" + undo + "\");");
   if(StringUtils.isNotEmpty(nodePathDelete)) {
  	  List<UIAbstractManagerComponent> managers = uicomponent.getManagers();
  	  for (UIAbstractManagerComponent manager : managers) {
