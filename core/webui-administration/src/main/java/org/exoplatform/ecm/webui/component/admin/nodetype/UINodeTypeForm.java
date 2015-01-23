@@ -157,8 +157,7 @@ public class UINodeTypeForm extends UIFormTabPane {
                                         HAS_ORDERABLE_CHILDNODES,
                                         null))
                                         .addUIFormInput(new UIFormStringInput(PRIMARY_ITEMNAME, PRIMARY_ITEMNAME, null))
-                                        .addUIFormInput(new UIFormStringInput(SUPER_TYPE, SUPER_TYPE, null)
-                                        .addValidator(MandatoryValidator.class))
+                                        .addUIFormInput(new UIFormStringInput(SUPER_TYPE, SUPER_TYPE, null))
                                         .addUIFormInput(new UIFormInputInfo(PROPERTY_DEFINITIONS, PROPERTY_DEFINITIONS, null))
                                         .addUIFormInput(new UIFormInputInfo(CHILDNODE_DEFINITIONS,
                                                                             CHILDNODE_DEFINITIONS,
