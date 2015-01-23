@@ -8,6 +8,7 @@
 */
 import org.exoplatform.services.cms.impl.Utils;
 import org.exoplatform.social.core.service.LinkProvider;
+import org.apache.commons.lang.StringEscapeUtils;
 
 def refreshCommentsAction = URLEncoder.encode(uicomponent.event(uicomponent.REFRESH_COMMENTS), "utf-8");
 def likeActivityAction = uicomponent.event("LikeActivity", "true");
@@ -60,7 +61,7 @@ def isLiked = uicomponent.isLiked();
                 </div>
             </div>
             <% if (activityStatus != null) { %>
-              <p class="descript" title="$activityStatus">$activityStatus</p>
+              <p class="descript" title="<%=StringEscapeUtils.escapeHtml(activityStatus)%>">$activityStatus</p>
             <% } %>
         </div>
         <div class="actionBar clearfix ">
