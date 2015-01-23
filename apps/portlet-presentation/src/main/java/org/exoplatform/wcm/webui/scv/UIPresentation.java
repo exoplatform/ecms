@@ -54,6 +54,8 @@ import org.exoplatform.webui.application.portlet.PortletRequestContext;
 import org.exoplatform.webui.config.annotation.ComponentConfig;
 import org.exoplatform.webui.config.annotation.EventConfig;
 import org.exoplatform.webui.core.UIComponent;
+import org.exoplatform.webui.core.UIPopupContainer;
+import org.exoplatform.webui.core.UIPortletApplication;
 import org.exoplatform.webui.core.lifecycle.Lifecycle;
 import org.exoplatform.webui.event.Event;
 import org.exoplatform.webui.event.EventListener;
@@ -69,7 +71,8 @@ import org.exoplatform.webui.event.EventListener;
     events = {
       @EventConfig(listeners = UIPresentation.DownloadActionListener.class),
       @EventConfig(listeners = UIPresentation.SwitchToAudioDescriptionActionListener.class),
-      @EventConfig(listeners = UIPresentation.SwitchToOriginalActionListener.class)
+      @EventConfig(listeners = UIPresentation.SwitchToOriginalActionListener.class),
+      @EventConfig(listeners = UIBaseNodePresentation.OpenDocInDesktopActionListener.class)    
   }
 )
 
@@ -356,6 +359,11 @@ public class UIPresentation extends UIBaseNodePresentation {
                   (parent.isNodeType(NodetypeConstant.NT_FROZEN_NODE) && 
                    NodetypeConstant.EXO_ACCESSIBLE_MEDIA.equals(parent.getProperty("jcr:frozenPrimaryType").getString())));
     } catch (Exception e) { return false; }
+  }
+  
+  @Override  
+  public UIPopupContainer getPopupContainer() throws Exception {
+    return this.getAncestorOfType(UIPortletApplication.class).getChild(UIPopupContainer.class);
   }
   
   static public class DownloadActionListener extends EventListener<UIPresentation> {

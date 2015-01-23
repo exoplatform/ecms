@@ -1,7 +1,6 @@
-package org.exoplatform.ecm.webui.component.explorer.popup.actions;
+package org.exoplatform.ecm.webui.form;
 
 import org.exoplatform.webui.config.annotation.ComponentConfig;
-import org.exoplatform.ecm.webui.component.explorer.UIJCRExplorer;
 import org.exoplatform.webui.config.annotation.EventConfig;
 import org.exoplatform.webui.core.UIComponent;
 import org.exoplatform.webui.core.UIPopupComponent;
@@ -39,7 +38,6 @@ public class UIOpenDocumentForm extends UIComponent implements UIPopupComponent 
     @Override
     public void execute(Event<UIOpenDocumentForm> event) throws Exception {
       UIOpenDocumentForm uiConfirm = event.getSource();
-      UIJCRExplorer uiExplorer = uiConfirm.getAncestorOfType(UIJCRExplorer.class);
       // impl readonly action
       UIPopupWindow popupAction = uiConfirm.getAncestorOfType(UIPopupWindow.class) ;
       popupAction.setShow(false) ;

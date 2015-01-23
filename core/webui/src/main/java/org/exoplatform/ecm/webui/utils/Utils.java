@@ -55,6 +55,7 @@ import org.exoplatform.container.definition.PortalContainerConfig;
 import org.exoplatform.container.xml.PortalContainerInfo;
 import org.exoplatform.download.DownloadService;
 import org.exoplatform.download.InputStreamDownloadResource;
+import org.exoplatform.ecm.webui.form.UIOpenDocumentForm;
 import org.exoplatform.portal.webui.util.Util;
 import org.exoplatform.portal.webui.workspace.UIPortalApplication;
 import org.exoplatform.services.cms.documents.TrashService;
@@ -81,6 +82,8 @@ import org.exoplatform.webui.application.WebuiRequestContext;
 import org.exoplatform.webui.application.portlet.PortletRequestContext;
 import org.exoplatform.webui.core.UIComponent;
 import org.exoplatform.webui.core.UIContainer;
+import org.exoplatform.webui.core.UIPopupContainer;
+import org.exoplatform.webui.event.Event;
 import org.exoplatform.webui.ext.UIExtension;
 import org.exoplatform.webui.ext.UIExtensionManager;
 import java.util.Iterator;
@@ -1094,6 +1097,35 @@ public class Utils {
       }
     }
     return ret.toArray(new String[]{});
+  }
+  
+  public static void openDocumentInDesktop(Node currentNode, UIPopupContainer popupContainer, Event<? extends UIComponent> event) 
+  throws Exception {
+    HttpServletRequest httpServletRequest = Util.getPortalRequestContext().getRequest();
+    
+    String nodePath=currentNode.getPath();
+    String ws = currentNode.getSession().getWorkspace().getName();
+    String repo = WCMCoreUtils.getRepository().getConfiguration().getName();
+    String filePath = httpServletRequest.getScheme()+ "://" + httpServletRequest.getServerName() + ":"
+            +httpServletRequest.getServerPort() + "/"
+            + WCMCoreUtils.getRestContextName()+ "/private/jcr/" + repo + "/" + ws + nodePath;
+
+    if(currentNode.isLocked()){
+      String[] userLock = {currentNode.getLock().getLockOwner()};
+
+      UIOpenDocumentForm uiOpenDocumentForm = popupContainer.activate(UIOpenDocumentForm.class, 600);
+      uiOpenDocumentForm.setId("UIReadOnlyFileConfirmMessage");
+      uiOpenDocumentForm.setMessageKey("UIPopupMenu.msg.lock-node-read-only");
+      uiOpenDocumentForm.setArguments(userLock);
+      uiOpenDocumentForm.setFilePath(nodePath);
+      uiOpenDocumentForm.setWorkspace(ws);
+      uiOpenDocumentForm.setAbsolutePath(filePath);
+      
+      event.getRequestContext().addUIComponentToUpdateByAjax(popupContainer.getParent());
+    }else{
+      event.getRequestContext().getJavascriptManager().require("SHARED/openDocumentInOffice")
+              .addScripts("eXo.ecm.OpenDocumentInOffice.openDocument('" + filePath + "', '" + ws + "', '" + nodePath + "');");
+    }
   }
 
 

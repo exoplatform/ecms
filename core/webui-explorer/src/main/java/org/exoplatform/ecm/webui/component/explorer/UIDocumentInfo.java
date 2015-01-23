@@ -122,6 +122,7 @@ import org.exoplatform.webui.config.annotation.EventConfig;
 import org.exoplatform.webui.core.UIApplication;
 import org.exoplatform.webui.core.UIComponent;
 import org.exoplatform.webui.core.UIPageIterator;
+import org.exoplatform.webui.core.UIPopupContainer;
 import org.exoplatform.webui.core.UIRightClickPopupMenu;
 import org.exoplatform.webui.event.Event;
 import org.exoplatform.webui.event.EventListener;
@@ -153,7 +154,8 @@ import org.exoplatform.webui.ext.UIExtensionManager;
         @EventConfig(listeners = UIDocumentInfo.ExpandTimelineCatergoryActionListener.class),
         @EventConfig(listeners = UIDocumentInfo.CollapseTimelineCatergoryActionListener.class),
         @EventConfig(listeners = UIDocumentInfo.SwitchToAudioDescriptionActionListener.class),
-        @EventConfig(listeners = UIDocumentInfo.SwitchToOriginalActionListener.class)
+        @EventConfig(listeners = UIDocumentInfo.SwitchToOriginalActionListener.class),
+        @EventConfig(listeners = UIBaseNodePresentation.OpenDocInDesktopActionListener.class)
     }
 )
 public class UIDocumentInfo extends UIBaseNodePresentation {
@@ -1875,6 +1877,10 @@ public class UIDocumentInfo extends UIBaseNodePresentation {
     builder.append(" isCheckedIn='" + !node.isCheckedOut() + "' ");
 
     return builder.toString();
+  }
+  
+  public UIPopupContainer getPopupContainer() throws Exception {
+    return this.getAncestorOfType(UIJCRExplorer.class).getChild(UIPopupContainer.class);
   }
 
 }
