@@ -19,7 +19,7 @@ package org.exoplatform.ecm.webui.component.explorer.search;
 import org.apache.commons.lang.StringUtils;
 import org.exoplatform.ecm.webui.component.explorer.UIJCRExplorer;
 import org.exoplatform.ecm.webui.form.validator.ECMNameValidator;
-import org.exoplatform.wcm.webui.validator.MandatoryValidator;
+import org.exoplatform.webui.form.validator.MandatoryValidator;
 import org.exoplatform.portal.webui.util.Util;
 import org.exoplatform.services.cms.queries.QueryService;
 import org.exoplatform.services.jcr.RepositoryService;
@@ -62,7 +62,7 @@ import java.util.List;
     template =  "system:/groovy/webui/form/UIForm.gtmpl",
     events = {
       @EventConfig(listeners = UIJCRAdvancedSearch.SaveActionListener.class),
-      @EventConfig(listeners = UIJCRAdvancedSearch.SearchActionListener.class),
+      @EventConfig(listeners = UIJCRAdvancedSearch.SearchActionListener.class, phase = Phase.DECODE),
       @EventConfig(listeners = UIJCRAdvancedSearch.CancelActionListener.class, phase = Phase.DECODE),
       @EventConfig(phase=Phase.DECODE, listeners = UIJCRAdvancedSearch.ChangeOptionActionListener.class)
     }
