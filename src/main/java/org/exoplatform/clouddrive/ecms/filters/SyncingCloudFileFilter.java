@@ -19,15 +19,12 @@
 package org.exoplatform.clouddrive.ecms.filters;
 
 import org.exoplatform.clouddrive.CloudDrive;
-import org.exoplatform.clouddrive.CloudDrive.FilesState;
 import org.exoplatform.clouddrive.CloudDriveService;
 import org.exoplatform.clouddrive.CloudFile;
-import org.exoplatform.clouddrive.CloudProviderException;
 import org.exoplatform.clouddrive.DriveRemovedException;
 import org.exoplatform.clouddrive.NotCloudDriveException;
 import org.exoplatform.clouddrive.NotCloudFileException;
 import org.exoplatform.clouddrive.NotYetCloudFileException;
-import org.exoplatform.clouddrive.RefreshAccessException;
 import org.exoplatform.services.log.ExoLogger;
 import org.exoplatform.services.log.Log;
 import org.exoplatform.services.wcm.utils.WCMCoreUtils;
@@ -40,6 +37,7 @@ import javax.jcr.RepositoryException;
 
 /**
  * Filter for cloud files currently synchronizing.
+ * 
  */
 public class SyncingCloudFileFilter extends AbstractCloudDriveNodeFilter {
 
