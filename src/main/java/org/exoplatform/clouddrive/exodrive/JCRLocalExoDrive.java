@@ -207,15 +207,30 @@ public class JCRLocalExoDrive extends JCRLocalCloudDrive {
      * {@inheritDoc}
      */
     @Override
-    public String createFile(Node fileNode,
-                             Calendar created,
-                             Calendar modified,
-                             String mimeType,
-                             InputStream content) throws CloudDriveException, RepositoryException {
+    public CloudFile createFile(Node fileNode,
+                                Calendar created,
+                                Calendar modified,
+                                String mimeType,
+                                InputStream content) throws CloudDriveException, RepositoryException {
       try {
         FileStore fs = service.create(user.getUsername(), filePath(fileNode), mimeType, created);
         fs.write(content);
-        return fs.getId();
+        return new JCRLocalCloudFile(fileNode.getPath(),
+                                     fs.getId(),
+                                     fs.getName(),
+                                     fs.getLink(),
+                                     editLink(fileNode),
+                                     previewLink(fileNode),
+                                     fs.getLink(),
+                                     fs.getType(),
+                                     mimeTypes.getMimeTypeMode(fs.getType(), fs.getName()),
+                                     fs.getLastUser(),
+                                     fs.getAuthor(),
+                                     fs.getCreateDate(),
+                                     fs.getModifiedDate(),
+                                     false,
+                                     fileNode,
+                                     true);
       } catch (ExoDriveException e) {
         throw new CloudDriveException("Error creating cloud file " + getTitle(fileNode), e);
       }
@@ -225,14 +240,29 @@ public class JCRLocalExoDrive extends JCRLocalCloudDrive {
      * {@inheritDoc}
      */
     @Override
-    public String createFolder(Node folderNode, Calendar created) throws CloudDriveException,
-                                                                 RepositoryException {
+    public CloudFile createFolder(Node folderNode, Calendar created) throws CloudDriveException,
+                                                                    RepositoryException {
       try {
         FileStore fs = service.create(user.getUsername(),
                                       filePath(folderNode),
                                       FileStore.TYPE_FOLDER,
                                       created);
-        return fs.getId();
+        return new JCRLocalCloudFile(folderNode.getPath(),
+                                     fs.getId(),
+                                     fs.getName(),
+                                     fs.getLink(),
+                                     editLink(folderNode),
+                                     previewLink(folderNode),
+                                     fs.getLink(),
+                                     fs.getType(),
+                                     null,
+                                     fs.getLastUser(),
+                                     fs.getAuthor(),
+                                     fs.getCreateDate(),
+                                     fs.getModifiedDate(),
+                                     true,
+                                     folderNode,
+                                     true);
       } catch (ExoDriveException e) {
         throw new CloudDriveException("Error creating cloud folder " + getTitle(folderNode), e);
       }
@@ -242,42 +272,14 @@ public class JCRLocalExoDrive extends JCRLocalCloudDrive {
      * {@inheritDoc}
      */
     @Override
-    public void updateFile(Node fileNode, Calendar modified) throws CloudDriveException, RepositoryException {
+    public CloudFile updateFile(Node fileNode, Calendar modified) throws CloudDriveException,
+                                                                 RepositoryException {
       // TODO
       // try {
       // FileStore fs = service.create(user.getUsername(), filePath(fileNode), mimeType, created);
       // } catch (ExoDriveException e) {
       // throw new CloudDriveException("Error creating cloud file " + getTitle(fileNode), e);
       // }
-    }
-
-    /**
-     * {@inheritDoc}
-     */
-    @Override
-    public void updateFolder(Node folderNode, Calendar modified) throws CloudDriveException,
-                                                                RepositoryException {
-      // TODO Auto-generated method stub
-
-    }
-
-    /**
-     * {@inheritDoc}
-     */
-    @Override
-    public void updateFileContent(Node fileNode, Calendar modified, String mimeType, InputStream content) throws CloudDriveException,
-                                                                                                         RepositoryException {
-      // TODO Auto-generated method stub
-
-    }
-
-    /**
-     * {@inheritDoc}
-     */
-    @Override
-    public String copyFile(Node srcFileNode, Node destFileNode) throws CloudDriveException,
-                                                               RepositoryException {
-      // TODO Auto-generated method stub
       return null;
     }
 
@@ -285,7 +287,7 @@ public class JCRLocalExoDrive extends JCRLocalCloudDrive {
      * {@inheritDoc}
      */
     @Override
-    public String copyFolder(Node srcFolderNode, Node destFolderNode) throws CloudDriveException,
+    public CloudFile updateFolder(Node folderNode, Calendar modified) throws CloudDriveException,
                                                                      RepositoryException {
       // TODO Auto-generated method stub
       return null;
@@ -295,18 +297,48 @@ public class JCRLocalExoDrive extends JCRLocalCloudDrive {
      * {@inheritDoc}
      */
     @Override
-    public void removeFile(String id) throws CloudDriveException, RepositoryException {
+    public CloudFile updateFileContent(Node fileNode, Calendar modified, String mimeType, InputStream content) throws CloudDriveException,
+                                                                                                              RepositoryException {
       // TODO Auto-generated method stub
-
+      return null;
     }
 
     /**
      * {@inheritDoc}
      */
     @Override
-    public void removeFolder(String id) throws CloudDriveException, RepositoryException {
+    public CloudFile copyFile(Node srcFileNode, Node destFileNode) throws CloudDriveException,
+                                                                  RepositoryException {
       // TODO Auto-generated method stub
+      return null;
+    }
 
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public CloudFile copyFolder(Node srcFolderNode, Node destFolderNode) throws CloudDriveException,
+                                                                        RepositoryException {
+      // TODO Auto-generated method stub
+      return null;
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public boolean removeFile(String id) throws CloudDriveException, RepositoryException {
+      // TODO Auto-generated method stub
+      return false;
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public boolean removeFolder(String id) throws CloudDriveException, RepositoryException {
+      // TODO Auto-generated method stub
+      return false;
     }
 
     /**
@@ -331,18 +363,18 @@ public class JCRLocalExoDrive extends JCRLocalCloudDrive {
      * {@inheritDoc}
      */
     @Override
-    public boolean untrashFile(Node fileNode) throws CloudDriveException, RepositoryException {
+    public CloudFile untrashFile(Node fileNode) throws CloudDriveException, RepositoryException {
       // TODO Auto-generated method stub
-      return false;
+      return null;
     }
 
     /**
      * {@inheritDoc}
      */
     @Override
-    public boolean untrashFolder(Node fileNode) throws CloudDriveException, RepositoryException {
+    public CloudFile untrashFolder(Node fileNode) throws CloudDriveException, RepositoryException {
       // TODO Auto-generated method stub
-      return false;
+      return null;
     }
 
     /**

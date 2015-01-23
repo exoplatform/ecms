@@ -16,6 +16,7 @@
  */
 package org.exoplatform.clouddrive.rest;
 
+import org.exoplatform.clouddrive.CloudDrive;
 import org.exoplatform.clouddrive.CloudFile;
 
 import java.util.Calendar;
@@ -142,9 +143,11 @@ public class AcceptedCloudFile implements CloudFile {
   }
 
   /**
-   * Return <code>true</code> always.
+   * Return <code>true</code> always. It is a flag of files accepted but not yet created in cloud. Deprecated
+   * in favor of use {@link CloudDrive.FilesState#isUpdating(String)}.
    */
-  public boolean isCreating() {
+  @Deprecated
+  public boolean isUpdating() {
     return true;
   }
 }

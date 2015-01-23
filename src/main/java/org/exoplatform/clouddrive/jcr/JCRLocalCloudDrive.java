@@ -514,7 +514,7 @@ public abstract class JCRLocalCloudDrive extends CloudDrive implements CloudDriv
 
               if (event.getType() == Event.NODE_REMOVED) {
                 if (LOG.isDebugEnabled()) {
-                  LOG.debug("Cloud file removed " + eventPath);
+                  LOG.debug("Node removed. User: " + event.getUserID() + ". Path: " + eventPath);
                 }
                 // Removal should be initiated by initRemove() before this event happening and in the same
                 // thread.
@@ -536,13 +536,12 @@ public abstract class JCRLocalCloudDrive extends CloudDrive implements CloudDriv
               } else {
                 if (event.getType() == Event.NODE_ADDED) {
                   if (LOG.isDebugEnabled()) {
-                    LOG.debug("Cloud file added. User: " + event.getUserID() + ". Path: " + eventPath);
+                    LOG.debug("Node added. User: " + event.getUserID() + ". Path: " + eventPath);
                   }
                   changes.add(new FileChange(eventPath, FileChange.CREATE));
                 } else if (event.getType() == Event.PROPERTY_CHANGED) {
                   if (LOG.isDebugEnabled()) {
-                    LOG.debug("Cloud file property changed. User: " + event.getUserID() + ". Path: "
-                        + eventPath);
+                    LOG.debug("Node property changed. User: " + event.getUserID() + ". Path: " + eventPath);
                   }
                   changes.add(new FileChange(eventPath, FileChange.UPDATE));
                 } // otherwise, we skip the event
@@ -904,7 +903,7 @@ public abstract class JCRLocalCloudDrive extends CloudDrive implements CloudDriv
                 rollback(rootNode);
                 LOG.warn("Error running " + getName() + " command. " + e.getMessage()
                     + ". Rolled back and will run next attempt in "
-                    + CloudDriveConnector.PROVIDER_REQUEST_ATTEMPT_TIMEOUT + "ms.");
+                    + CloudDriveConnector.PROVIDER_REQUEST_ATTEMPT_TIMEOUT + "ms.", e);
                 Thread.sleep(CloudDriveConnector.PROVIDER_REQUEST_ATTEMPT_TIMEOUT);
               }
             } else {
@@ -1100,32 +1099,35 @@ public abstract class JCRLocalCloudDrive extends CloudDrive implements CloudDriv
      */
     @Override
     protected void process() throws CloudDriveException, RepositoryException, InterruptedException {
-      // reset all possible previous attempts metadata
-      String empty = "".intern();
-      rootNode.setProperty("ecd:localChanges", empty);
-      rootNode.setProperty("ecd:localHistory", empty);
-      rootNode.setProperty("ecd:connected", false);
-      rootNode.save();
+      try {
+        // reset all possible previous attempts metadata
+        rootNode.setProperty("ecd:localChanges", DUMMY_DATA);
+        rootNode.setProperty("ecd:localHistory", DUMMY_DATA);
+        rootNode.setProperty("ecd:connected", false);
+        rootNode.save();
 
-      // fetch all files to local storage
-      fetchFiles();
+        // fetch all files to local storage
+        fetchFiles();
 
-      // check before saving the result
-      if (Thread.currentThread().isInterrupted()) {
-        throw new InterruptedException("Drive connection interrupted for " + title());
+        // check before saving the result
+        if (Thread.currentThread().isInterrupted()) {
+          throw new InterruptedException("Drive connection interrupted for " + title());
+        }
+
+        // connected drive properties
+        rootNode.setProperty("ecd:cloudUserId", getUser().getId());
+        rootNode.setProperty("ecd:cloudUserName", getUser().getUsername());
+        rootNode.setProperty("ecd:userEmail", getUser().getEmail());
+        rootNode.setProperty("ecd:connectDate", Calendar.getInstance());
+
+        // mark as connected
+        rootNode.setProperty("ecd:connected", true);
+
+        // and save the node
+        rootNode.save();
+      } finally {
+        currentConnect.set(noConnect); // clean current, see connect()
       }
-
-      // connected drive properties
-      rootNode.setProperty("ecd:cloudUserId", getUser().getId());
-      rootNode.setProperty("ecd:cloudUserName", getUser().getUsername());
-      rootNode.setProperty("ecd:userEmail", getUser().getEmail());
-      rootNode.setProperty("ecd:connectDate", Calendar.getInstance());
-
-      // mark as connected
-      rootNode.setProperty("ecd:connected", true);
-
-      // and save the node
-      rootNode.save();
 
       // fire listeners
       listeners.fireOnConnect(new CloudDriveEvent(getUser(), rootWorkspace, rootNode.getPath()));
@@ -1192,15 +1194,21 @@ public abstract class JCRLocalCloudDrive extends CloudDrive implements CloudDriv
         }
 
         // unlock and cleanup
-        currentSync.set(noSyncCommand); // clean current, see synchronize()
+        currentSync.set(noSync); // clean current, see synchronize()
         syncLock.writeLock().unlock();
         if (nodes != null) {
           nodes.clear();
         }
       }
 
-      // fire listeners afterwards
-      listeners.fireOnSynchronized(new CloudDriveEvent(getUser(), rootWorkspace, rootNode.getPath()));
+      // fire listeners afterwards and only if actual changes have a place
+      if (changed.size() > 0 || removed.size() > 0) {
+        listeners.fireOnSynchronized(new CloudDriveEvent(getUser(),
+                                                         rootWorkspace,
+                                                         rootNode.getPath(),
+                                                         changed,
+                                                         removed));
+      }
     }
 
     /**
@@ -1299,12 +1307,12 @@ public abstract class JCRLocalCloudDrive extends CloudDrive implements CloudDriv
      */
     void updating(FileChange ch) {
       String path = ch.filePath;
-      addUpdating(path);
       updating.add(path);
+      addUpdating(path);
       String id = ch.fileId;
       if (id != null) {
-        addUpdating(id);
         updating.add(id);
+        addUpdating(id);
       }
     }
 
@@ -1336,8 +1344,14 @@ public abstract class JCRLocalCloudDrive extends CloudDrive implements CloudDriv
           syncLock.readLock().unlock();
         }
 
-        // TODO fire listeners afterwards with detailed event?
-        // listeners.fireOnSynchronized(new CloudDriveEvent(getUser(), rootWorkspace, rootNode.getPath()));
+        // fire listeners afterwards and only if actual changes have a place
+        if (changed.size() > 0 || removed.size() > 0) {
+          listeners.fireOnSynchronized(new CloudDriveEvent(getUser(),
+                                                           rootWorkspace,
+                                                           rootNode.getPath(),
+                                                           changed,
+                                                           removed));
+        }
       } else {
         LOG.warn("Cannot synchronize file in cloud drive '" + title() + "': drive not connected");
       }
@@ -1366,14 +1380,8 @@ public abstract class JCRLocalCloudDrive extends CloudDrive implements CloudDriv
           try {
             if (change.accept()) {
               // updating with actual file path/id, but only if it is not already tracked
-              String id = change.fileId;
-              if (id != null) {
-                updating.add(id);
-                addUpdating(id);
-              }
+              updating(change);
               String path = change.filePath; // actual file path here!
-              updating.add(path);
-              addUpdating(path);
 
               FileChange previous = accepted.get(path);
               if (previous != null) {
@@ -1478,6 +1486,14 @@ public abstract class JCRLocalCloudDrive extends CloudDrive implements CloudDriv
 
           try {
             change.apply();
+            if (FileChange.REMOVE.equals(change.changeType)) {
+              removed.add(change.getPath());
+            } else {
+              CloudFile cfile = change.getFile();
+              if (cfile != null) {
+                changed.add(cfile);
+              }
+            }
           } catch (SyncNotSupportedException e) {
             // remember to skip sub-files, this exception handled by this
             ignoredPaths.add(changePath);
@@ -1721,7 +1737,12 @@ public abstract class JCRLocalCloudDrive extends CloudDrive implements CloudDriv
     /**
      * Target file node. Should be initialized in {@link #init(Set)} in worker thread.
      */
-    Node                        file;
+    Node                        node;
+
+    /**
+     * Cloud file produced by the change. Can be <code>null</code> for removal.
+     */
+    CloudFile                   file;
 
     /**
      * Constructor for newly observed change when file {@link Node} available in the context. Used for file
@@ -1795,6 +1816,10 @@ public abstract class JCRLocalCloudDrive extends CloudDrive implements CloudDriv
       return filePath;
     }
 
+    CloudFile getFile() {
+      return file;
+    }
+
     /**
      * Prepare and check if it should be accepted as a change in cloud drive: find the file node if
      * creation/update, ensure synchronizer available for removal.
@@ -1819,58 +1844,58 @@ public abstract class JCRLocalCloudDrive extends CloudDrive implements CloudDriv
       } else {
         Session session = session();
         Item item = session.getItem(path); // reading in user session by initial path
-        Node file = null;
+        Node node = null;
         if (item.isNode()) {
           // node added or changed
-          file = (Node) item;
-          if (fileAPI.isFile(file)) {
+          node = (Node) item;
+          if (fileAPI.isFile(node)) {
             // for creation/update of already cloud files, need check does it belong to this drive
-            if (rootUUID.equals(file.getProperty("ecd:driveUUID").getString())) {
-              fileId = fileAPI.getId(file);
+            if (rootUUID.equals(node.getProperty("ecd:driveUUID").getString())) {
+              fileId = fileAPI.getId(node);
             } else {
               // this file should be ignored
-              if (!fileAPI.isIgnored(file)) {
+              if (!fileAPI.isIgnored(node)) {
                 LOG.warn("Cannot add or update file from other cloud drive " + path + ". Ignoring the file.");
                 try {
-                  fileAPI.ignore(file);
+                  fileAPI.ignore(node);
                 } catch (Throwable t) {
                   LOG.error("Error ignoring file from other drive " + path, t);
                 }
                 return false;
               }
             }
-          } else if (fileAPI.isFileResource(file)) {
+          } else if (fileAPI.isFileResource(node)) {
             // skip file resources which will be handled within the file
             // it is an usecase for content update of existing cloud file from local drive
             return false;
           }
         } else {
           // property changed: we support only updates, new properties will be ignored
-          Node parent = item.getParent();
+          Node parentNode = item.getParent();
           if (UPDATE.equals(changeType)) {
-            if (fileAPI.isFile(parent)) {
+            if (fileAPI.isFile(parentNode)) {
               // file metadata update (date, creator etc)
-              file = parent;
-              fileId = fileAPI.getId(file);
-            } else if (fileAPI.isFileResource(parent)) {
+              node = parentNode;
+              fileId = fileAPI.getId(node);
+            } else if (fileAPI.isFileResource(parentNode)) {
               // file content update
               // logic based on nt:file structure: theNtFie/jcr:content/jcr:data
               // TODO detect content update more precisely (by exact property name in synchronizer)
-              parent = parent.getParent();
-              if (fileAPI.isFile(parent)) {
+              parentNode = parentNode.getParent();
+              if (fileAPI.isFile(parentNode)) {
                 changeType = UPDATE_CONTENT;
-                file = parent;
-                fileId = fileAPI.getId(file);
+                node = parentNode;
+                fileId = fileAPI.getId(node);
               }
             }
           }
         }
 
         // work only with not ignored nodes
-        if (file != null) {
-          if (!fileAPI.isIgnored(file)) {
-            this.file = file; // file node
-            this.filePath = file.getPath(); // actual file path
+        if (node != null) {
+          if (!fileAPI.isIgnored(node)) {
+            this.node = node; // file node
+            this.filePath = node.getPath(); // actual file path
             return true;
           } else {
             if (LOG.isDebugEnabled()) {
@@ -1907,13 +1932,13 @@ public abstract class JCRLocalCloudDrive extends CloudDrive implements CloudDriv
             } else {
               remove();
             }
-          } else if (file != null) {
-            file = ensureOwned(file);
+          } else if (node != null) {
+            node = ensureOwned(node);
             try {
               if (CREATE.equals(changeType)) {
                 if (fileId != null) {
                   // if fileId exists - it is already a cloud file
-                  if (file.hasProperty("ecd:trashed")) {
+                  if (node.hasProperty("ecd:trashed")) {
                     untrash();
                   } else {
                     // it is a move or copy inside the drive...
@@ -1926,7 +1951,7 @@ public abstract class JCRLocalCloudDrive extends CloudDrive implements CloudDriv
                     if (srcPath != null) {
                       // we have exact "copy" request
                       try {
-                        Item srcItem = file.getSession().getItem(srcPath); // reading in user session
+                        Item srcItem = node.getSession().getItem(srcPath); // reading in user session
                         if (srcItem.isNode()) {
                           srcFile = (Node) srcItem;
                         } else {
@@ -1938,9 +1963,9 @@ public abstract class JCRLocalCloudDrive extends CloudDrive implements CloudDriv
                     } else if (srcFile == null) {
                       // find any file with the same id, but different instance
                       for (NodeIterator niter = findNodes(Arrays.asList(fileId)); niter.hasNext();) {
-                        Node f = niter.nextNode();
-                        if (!file.isSame(f)) {
-                          srcFile = f;
+                        Node n = niter.nextNode();
+                        if (!node.isSame(n)) {
+                          srcFile = n;
                         }
                       }
                     }
@@ -1963,7 +1988,7 @@ public abstract class JCRLocalCloudDrive extends CloudDrive implements CloudDriv
               LOG.warn("Cannot synchronize cloud file (" + changeType + "): " + e.getMessage()
                   + ". Ignoring the file.");
               try {
-                fileAPI.ignore(file);
+                fileAPI.ignore(node);
               } catch (Throwable t) {
                 LOG.error("Error ignoring not a cloud item " + filePath, t);
               }
@@ -2047,7 +2072,7 @@ public abstract class JCRLocalCloudDrive extends CloudDrive implements CloudDriv
                          RepositoryException,
                          InterruptedException {
       if (LOG.isDebugEnabled()) {
-        LOG.debug("Remove file " + filePath + " " + fileId);
+        LOG.debug("Remove file " + fileId + " " + filePath);
       }
 
       begin();
@@ -2088,7 +2113,7 @@ public abstract class JCRLocalCloudDrive extends CloudDrive implements CloudDriv
                         RepositoryException,
                         InterruptedException {
       if (LOG.isDebugEnabled()) {
-        LOG.debug("Trash file " + filePath + " " + fileId);
+        LOG.debug("Trash file " + fileId + " " + filePath);
       }
 
       begin();
@@ -2135,7 +2160,7 @@ public abstract class JCRLocalCloudDrive extends CloudDrive implements CloudDriv
                           RepositoryException,
                           InterruptedException {
       if (LOG.isDebugEnabled()) {
-        LOG.debug("Untrash file " + filePath + " " + fileId);
+        LOG.debug("Untrash file " + fileId + " " + filePath);
       }
 
       begin();
@@ -2143,14 +2168,14 @@ public abstract class JCRLocalCloudDrive extends CloudDrive implements CloudDriv
       // we do in a loop to handle name conflicts (by renaming the file)
       do {
         try {
-          synchronizer(file).untrash(file, fileAPI);
-          file.setProperty("ecd:trashed", (String) null); // clean the marker set in AddTrashListener
+          file = synchronizer(node).untrash(node, fileAPI);
+          filePath = file.getPath();
+          node.setProperty("ecd:trashed", (String) null); // clean the marker set in AddTrashListener
           break;
         } catch (ConflictException e) {
           // if untrash conflicted, it's the same name already in use and we guess a new name for the
           // untrashed
-          fixNameConflict(file);
-          filePath = file.getPath();
+          fixNameConflict(node);
         } catch (ConstraintException e) {
           // we have constraint violation in cloud service, local file cannot be untrashed
           // remotely and we should keep local state as before the update - finally we don't want break
@@ -2176,7 +2201,7 @@ public abstract class JCRLocalCloudDrive extends CloudDrive implements CloudDriv
                          RepositoryException,
                          InterruptedException {
       if (LOG.isDebugEnabled()) {
-        LOG.debug("Update file " + filePath + " " + fileId);
+        LOG.debug("Update file " + fileId + " " + filePath);
       }
 
       begin();
@@ -2184,12 +2209,12 @@ public abstract class JCRLocalCloudDrive extends CloudDrive implements CloudDriv
       // we do in a loop to handle name conflicts (by renaming the file)
       do {
         try {
-          synchronizer(file).update(file, fileAPI);
+          file = synchronizer(node).update(node, fileAPI);
+          filePath = file.getPath();
           break;
         } catch (ConflictException e) {
           // if update conflicted, it's the same name already in use and we guess a new name for the updated
-          fixNameConflict(file);
-          filePath = file.getPath();
+          fixNameConflict(node);
         } catch (ConstraintException e) {
           // local file cannot be updated remotely and we should keep local state as before the update -
           // finally we don't want break other changes and should omit this file (or folder and its
@@ -2201,9 +2226,9 @@ public abstract class JCRLocalCloudDrive extends CloudDrive implements CloudDriv
           // Restore the file from cloud side.
           CloudFile restored = fileAPI.restore(fileId, filePath);
           // check with actual file path here!
-          if (restored == null || !restored.getPath().equals(file.getPath())) {
+          if (restored == null || !restored.getPath().equals(node.getPath())) {
             // it is restored file rename/move - destination file should be removed locally
-            file.remove();
+            node.remove();
           }
 
           // throw to the caller to add the file to ignored list in this SyncFilesCommand
@@ -2218,13 +2243,13 @@ public abstract class JCRLocalCloudDrive extends CloudDrive implements CloudDriv
                                 RepositoryException,
                                 InterruptedException {
       if (LOG.isDebugEnabled()) {
-        LOG.debug("Update content of file " + filePath + " " + fileId);
+        LOG.debug("Update content of file " + fileId + " " + filePath);
       }
 
       begin();
 
       try {
-        synchronizer(file).updateContent(file, fileAPI);
+        file = synchronizer(node).updateContent(node, fileAPI);
       } catch (ConstraintException e) {
         // local file cannot be updated remotely and we should keep local state as before the update - finally
         // we don't want break other changes application and should omit this file (or folder and its
@@ -2248,7 +2273,7 @@ public abstract class JCRLocalCloudDrive extends CloudDrive implements CloudDriv
                                    InterruptedException {
 
       if (LOG.isDebugEnabled()) {
-        LOG.debug("Copy file " + srcFile.getPath() + " -> " + filePath + " " + fileId);
+        LOG.debug("Copy file " + fileId + " " + srcFile.getPath() + " -> " + filePath);
       }
 
       begin();
@@ -2256,12 +2281,12 @@ public abstract class JCRLocalCloudDrive extends CloudDrive implements CloudDriv
       // we do in a loop to handle name conflicts (by renaming the destFile)
       do {
         try {
-          synchronizer(file).copy(srcFile, file, fileAPI);
+          file = synchronizer(node).copy(srcFile, node, fileAPI);
+          filePath = file.getPath();
           break;
         } catch (ConflictException e) {
           // if copy conflicted, it's the same name already in use and we guess a new name for the updated
-          fixNameConflict(file);
-          filePath = file.getPath();
+          fixNameConflict(node);
         } catch (ConstraintException e) {
           // local file cannot be copied remotely and we should remove destination file locally - finally we
           // don't want break other changes and should omit this file (or folder and its sub-tree).
@@ -2270,7 +2295,7 @@ public abstract class JCRLocalCloudDrive extends CloudDrive implements CloudDriv
               + ". Removing the copied file locally " + filePath);
 
           // we restore local state by removing just copied file
-          file.remove();
+          node.remove();
 
           // throw to the caller to add the file to ignored list in this SyncFilesCommand
           throw new SkipChangeException(e.getMessage() + ". Locally copied file removed.", e);
@@ -2278,7 +2303,7 @@ public abstract class JCRLocalCloudDrive extends CloudDrive implements CloudDriv
       } while (true);
 
       // update file id to actual after a copy on cloud side
-      fileId = fileAPI.getId(file);
+      fileId = file.getId();
     }
 
     private void create() throws SkipSyncException,
@@ -2297,24 +2322,24 @@ public abstract class JCRLocalCloudDrive extends CloudDrive implements CloudDriv
       // it may improve long-running sets of files when JCR session become outdated
       // fix this together with splitting on per-file save in next versions
       try {
-        file.refresh(true);
+        node.refresh(true);
       } catch (InvalidItemStateException e) {
         LOG.warn("Cannot create already removed file. " + e.getMessage());
         throw new SkipSyncException("Skip creation of already removed file. " + e.getMessage());
       }
 
       try {
-        synchronizer(file).create(file, fileAPI);
+        file = synchronizer(node).create(node, fileAPI);
+        filePath = file.getPath();
       } catch (NotFoundException e) {
         // parent not found in the cloud... it can be already removed there and not yet synced
         LOG.warn("Parent not found in cloud for file creation " + filePath + ". " + e.getMessage());
         // remove node locally, as for parent it should be removed by the drive sync
-        file.remove();
+        node.remove();
         return;
       } catch (ConflictException e) {
         // if creation conflicted, it's the same name already in use and we guess a new name for the file
-        fixNameConflict(file);
-        filePath = file.getPath();
+        fixNameConflict(node);
       } catch (ConstraintException e) {
         // local node cannot be added remotely and can be removed/moved locally by an user - finally we don't
         // want break other changes and should omit this file (or folder and its sub-tree).
@@ -2328,10 +2353,10 @@ public abstract class JCRLocalCloudDrive extends CloudDrive implements CloudDriv
       }
 
       // we can know the id after the sync
-      fileId = fileAPI.getId(file);
+      fileId = file.getId();
 
       if (LOG.isDebugEnabled()) {
-        LOG.debug("Created file " + filePath + " " + fileId);
+        LOG.debug("Created file " + fileId + " " + filePath);
       }
     }
   }
@@ -2388,12 +2413,12 @@ public abstract class JCRLocalCloudDrive extends CloudDrive implements CloudDriv
    */
   protected final AtomicReference<ConnectCommand>         currentConnect      = new AtomicReference<ConnectCommand>(noConnect);
 
-  protected final SyncCommand                             noSyncCommand       = new NoSyncCommand();
+  protected final SyncCommand                             noSync              = new NoSyncCommand();
 
   /**
    * Currently active synchronization command. Used to control concurrency in Cloud Drive.
    */
-  protected final AtomicReference<SyncCommand>            currentSync         = new AtomicReference<SyncCommand>(noSyncCommand);
+  protected final AtomicReference<SyncCommand>            currentSync         = new AtomicReference<SyncCommand>(noSync);
 
   /**
    * Synchronization lock used by the whole drive sync and local files changes synchronization.
@@ -2477,6 +2502,12 @@ public abstract class JCRLocalCloudDrive extends CloudDrive implements CloudDriv
    * user (next sync).
    */
   protected final Queue<CloudDriveMessage>                syncFilesMessages   = new ConcurrentLinkedQueue<CloudDriveMessage>();
+
+  /**
+   * Files updated by last executed {@link SyncFilesCommand} for next command that will be returned to an
+   * user (next sync).
+   */
+  protected final Queue<CloudFile>                        syncFilesChanged    = new ConcurrentLinkedQueue<CloudFile>();
 
   /**
    * Default drive state. See {@link #getState()}.
@@ -2857,6 +2888,18 @@ public abstract class JCRLocalCloudDrive extends CloudDrive implements CloudDriv
     }
   }
 
+  /**
+   * {@inheritDoc}
+   */
+  @Override
+  public Command getCurentCommand() {
+    Command cmd = currentConnect.get();
+    if (cmd == noConnect) {
+      cmd = currentSync.get();
+    }
+    return cmd;
+  }
+
   // ********* internals ***********
 
   /**
@@ -2956,7 +2999,7 @@ public abstract class JCRLocalCloudDrive extends CloudDrive implements CloudDriv
   /**
    * Factory method to create a instance of {@link CloudFileAPI} supporting exact cloud provider.
    * 
-   * @param file {@link Node} to move
+   * @param node {@link Node} to move
    * @throws DriveRemovedException
    * @throws SyncNotSupportedException
    * @throws RepositoryException
@@ -3032,10 +3075,10 @@ public abstract class JCRLocalCloudDrive extends CloudDrive implements CloudDriv
       refreshAccess();
 
       SyncCommand sync;
-      if (!currentSync.compareAndSet(noSyncCommand, sync = getSyncCommand())) {
+      if (!currentSync.compareAndSet(noSync, sync = getSyncCommand())) {
         synchronized (currentSync) {
           SyncCommand existingSync = currentSync.get();
-          if (existingSync != noSyncCommand) {
+          if (existingSync != noSync) {
             return existingSync; // return existing
           } else {
             currentSync.set(sync); // force created sync as current
@@ -3085,32 +3128,38 @@ public abstract class JCRLocalCloudDrive extends CloudDrive implements CloudDriv
   // ============== JCR impl specific methods ==============
 
   /**
-   * Init cloud file removal as planned, this command will complete on parent node save. This method created
-   * for use from JCR pre-remove action.
+   * Init cloud file removal as planned. Initialized file will be later used by the drive listener when
+   * removal will be saved in JCR. This method created for use from JCR pre-remove action. If node isn't a
+   * cloud file or already ignored, this method will ignore it (has no effect).
    * 
-   * @param file {@link Node} a node representing a file in the drive.
-   * @return {@link FileChange}
+   * @param node {@link Node} a node representing a file in the drive.
    * @throws SyncNotSupportedException
    * @throws CloudDriveException
    * @throws RepositoryException
    */
-  protected void initRemove(Node file) throws SyncNotSupportedException,
+  protected void initRemove(Node node) throws SyncNotSupportedException,
                                       CloudDriveException,
                                       RepositoryException {
     // Note: this method also can be invoked via RemoveCloudFileAction on file trashing in Trash service of
     // the ECMS
 
     // don't act on ignored files
-    if (!fileAPI.isIgnored(file)) {
-      final String filePath = file.getPath();
-      FileChange remove = new FileChange(filePath,
-                                         fileAPI.getId(file),
-                                         fileAPI.isFolder(file),
+    if (!fileAPI.isIgnored(node) && fileAPI.isFile(node)) {
+      final String path = node.getPath();
+      final String id = fileAPI.getId(node);
+
+      if (LOG.isDebugEnabled()) {
+        LOG.debug("Init file removal " + id + " " + path);
+      }
+
+      FileChange remove = new FileChange(path,
+                                         id,
+                                         fileAPI.isFolder(node),
                                          FileChange.REMOVE,
-                                         synchronizer(file));
+                                         synchronizer(node));
       // remember UUID for links removal
-      if (file.isNodeType("mix:referenceable")) {
-        remove.setFileUUID(file.getUUID());
+      if (node.isNodeType(MIX_REFERENCEABLE)) {
+        remove.setFileUUID(node.getUUID());
       }
 
       Map<String, FileChange> planned = fileRemovals.get();
@@ -3118,7 +3167,7 @@ public abstract class JCRLocalCloudDrive extends CloudDrive implements CloudDriv
         planned = new ConcurrentHashMap<String, FileChange>();
       }
       // we may replace something previous in the map, just ignore it and rely on latest initialized
-      planned.put(filePath, remove);
+      planned.put(path, remove);
       fileRemovals.set(planned);
     }
   }
@@ -4344,7 +4393,9 @@ public abstract class JCRLocalCloudDrive extends CloudDrive implements CloudDriv
     } else if (fileAPI.isIgnored(node)) {
       return null;
     } else {
-      LOG.warn("Not a cloud file detected " + node.getPath());
+      if (LOG.isDebugEnabled()) {
+        LOG.debug("Not a cloud file detected " + node.getPath());
+      }
       // we don't try convert node to cloud file -
       // this should be done by a drive sync command
       if (!cleanup(node)) {
@@ -4491,8 +4542,7 @@ public abstract class JCRLocalCloudDrive extends CloudDrive implements CloudDriv
   protected boolean isNewOrUpdating(String key) {
     AtomicLong counter = updating.get(key);
     if (counter != null) {
-      long val = counter.longValue();
-      return val == 0 || val == 1;
+      return counter.longValue() >= 0;
     }
     return false;
   }
@@ -4506,7 +4556,7 @@ public abstract class JCRLocalCloudDrive extends CloudDrive implements CloudDriv
       res = true;
     }
     if (LOG.isDebugEnabled()) {
-      LOG.debug(">>> initUpdating " + key + " " + res);
+      LOG.debug("> initUpdating " + key + " " + res);
     }
     return res;
   }
@@ -4521,7 +4571,7 @@ public abstract class JCRLocalCloudDrive extends CloudDrive implements CloudDriv
       counter = newCounter.longValue();
     }
     if (LOG.isDebugEnabled()) {
-      LOG.debug(">>> addUpdating " + key + " " + counter);
+      LOG.debug("> addUpdating " + key + " " + counter);
     }
     return counter;
   }
@@ -4536,7 +4586,7 @@ public abstract class JCRLocalCloudDrive extends CloudDrive implements CloudDriv
       }
     }
     if (LOG.isDebugEnabled()) {
-      LOG.debug("<<< removeUpdating " + key + " " + (counter != null ? counter.longValue() : ""));
+      LOG.debug("< removeUpdating " + key + " " + (counter != null ? counter.longValue() : ""));
     }
     return res;
   }

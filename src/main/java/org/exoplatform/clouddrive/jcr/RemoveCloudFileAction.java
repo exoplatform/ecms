@@ -58,7 +58,7 @@ public class RemoveCloudFileAction extends AbstractJCRAction {
               try {
                 new CloudDriveManager(localDrive).initRemove(fileNode);
               } catch (SyncNotSupportedException e) {
-                LOG.error("Cannor remove file " + fileNode.getPath() + ": " + e.getMessage());
+                LOG.error("Cannor remove cloud drive file " + fileNode.getPath() + ": " + e.getMessage());
               }
             } finally {
               done();
@@ -75,7 +75,7 @@ public class RemoveCloudFileAction extends AbstractJCRAction {
           } catch (ItemNotFoundException e) {
             // file in the root of workspace
           }
-          LOG.warn("Cloud Drive not connected " + localDrive.getPath());
+          LOG.warn("Cloud drive not connected " + localDrive.getPath());
         }
       } // drive not found, may be this file in Trash folder and user is cleaning it, do nothing
     } else {

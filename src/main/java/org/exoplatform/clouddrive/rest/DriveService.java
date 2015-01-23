@@ -383,7 +383,7 @@ public class DriveService implements ResourceContainer {
             SessionProvider sp = sessionProviders.getSessionProvider(null);
             Session userSession = sp.getSession(workspace, jcrService.getCurrentRepository());
             Node parentNode = (Node) userSession.getItem(parentPath);
-
+            
             List<CloudFile> files = new ArrayList<CloudFile>();
             boolean hasAccepted = false;
             for (NodeIterator childs = parentNode.getNodes(); childs.hasNext();) {

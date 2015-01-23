@@ -57,8 +57,6 @@ public class JCRLocalCloudFile implements CloudFile {
 
   private final boolean            folder;
 
-  private final boolean            syncing;
-
   public JCRLocalCloudFile(String path,
                            String id,
                            String title,
@@ -73,7 +71,6 @@ public class JCRLocalCloudFile implements CloudFile {
                            Calendar createdDate,
                            Calendar modifiedDate,
                            boolean folder,
-                           boolean syncing,
                            Node node,
                            boolean changed) {
     this.path = path;
@@ -90,44 +87,8 @@ public class JCRLocalCloudFile implements CloudFile {
     this.createdDate = createdDate;
     this.modifiedDate = modifiedDate;
     this.folder = folder;
-    this.syncing = syncing;
     this.node = node;
     this.changed = changed;
-  }
-
-  public JCRLocalCloudFile(String path,
-                           String id,
-                           String title,
-                           String link,
-                           String editLink,
-                           String previewLink,
-                           String thumbnailLink,
-                           String type,
-                           String typeMode,
-                           String lastUser,
-                           String author,
-                           Calendar createdDate,
-                           Calendar modifiedDate,
-                           boolean folder,
-                           Node node,
-                           boolean changed) {
-    this(path,
-         id,
-         title,
-         link,
-         editLink,
-         previewLink,
-         thumbnailLink,
-         type,
-         typeMode,
-         lastUser,
-         author,
-         createdDate,
-         modifiedDate,
-         folder,
-         false,
-         node,
-         changed);
   }
 
   public JCRLocalCloudFile(String path,
@@ -158,7 +119,6 @@ public class JCRLocalCloudFile implements CloudFile {
          createdDate,
          modifiedDate,
          folder,
-         false,
          null,
          false);
   }

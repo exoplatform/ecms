@@ -43,7 +43,7 @@ public interface CloudDriveListener {
     void onRemove(CloudFile file);
 
     /**
-     * Action for deleting file.
+     * Action for updating file.
      * 
      * @param prevFile {@link CloudFile}
      * @param newFile {@link CloudFile}

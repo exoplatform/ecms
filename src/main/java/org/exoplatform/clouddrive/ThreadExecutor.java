@@ -59,6 +59,11 @@ public class ThreadExecutor {
   public static final int         MIN_THREADS             = 2;
 
   /**
+   * Minimum threads per CPU.
+   */
+  public static final int         MIN_FACTOR              = 4;
+  
+  /**
    * Default maximum threads per CPU.
    */
   public static final int         MAX_FACTOR              = 50;
@@ -163,6 +168,7 @@ public class ThreadExecutor {
     // Executor will queue all commands and run them in maximum ten threads. Two threads will be maintained
     // online even idle, other inactive will be stopped in two minutes.
     int cpus = Runtime.getRuntime().availableProcessors();
+    int poolThreads = cpus; // Math.round(cpus * 1f * MIN_FACTOR);
     // use scale factor 25... we know our threads will not create high CPU load, as they are HTTP callers
     // mainly and we want good parallelization
     int maxThreads = Math.round(cpus * 1f * maxFactor);
@@ -171,7 +177,7 @@ public class ThreadExecutor {
     int queueSize = cpus * queueFactor;
     queueSize = queueSize < queueFactor ? queueFactor : queueSize;
     LOG.info("Initializing command executor for max " + maxThreads + " threads, queue size " + queueSize);
-    executor = new ThreadPoolExecutor(maxThreads,
+    executor = new ThreadPoolExecutor(poolThreads,
                                       maxThreads,
                                       120,
                                       TimeUnit.SECONDS,

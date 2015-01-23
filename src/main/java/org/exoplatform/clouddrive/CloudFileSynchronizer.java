@@ -67,13 +67,13 @@ public interface CloudFileSynchronizer {
 
   boolean trash(String path, String id, boolean isFolder, CloudFileAPI api) throws CloudDriveException, RepositoryException;
 
-  boolean untrash(Node file, CloudFileAPI api) throws CloudDriveException, RepositoryException;
+  CloudFile untrash(Node file, CloudFileAPI api) throws CloudDriveException, RepositoryException;
 
-  boolean create(Node file, CloudFileAPI api) throws CloudDriveException, RepositoryException;
+  CloudFile create(Node file, CloudFileAPI api) throws CloudDriveException, RepositoryException;
   
-  boolean copy(Node srcFile, Node destFile, CloudFileAPI api) throws CloudDriveException, RepositoryException;
+  CloudFile copy(Node srcFile, Node destFile, CloudFileAPI api) throws CloudDriveException, RepositoryException;
 
-  boolean update(Node file, CloudFileAPI api) throws CloudDriveException, RepositoryException;
+  CloudFile update(Node file, CloudFileAPI api) throws CloudDriveException, RepositoryException;
 
-  boolean updateContent(Node file, CloudFileAPI api) throws CloudDriveException, RepositoryException;
+  CloudFile updateContent(Node file, CloudFileAPI api) throws CloudDriveException, RepositoryException;
 }

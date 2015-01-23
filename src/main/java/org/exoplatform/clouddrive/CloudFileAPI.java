@@ -62,7 +62,7 @@ public interface CloudFileAPI {
    * @throws RepositoryException
    */
   boolean ignore(Node node) throws RepositoryException;
-  
+
   /**
    * Remove ignorance mark on given file.
    * 
@@ -72,25 +72,9 @@ public interface CloudFileAPI {
    */
   boolean unignore(Node node) throws RepositoryException;
 
-  String createFile(Node fileNode, Calendar created, Calendar modified, String mimeType, InputStream content) throws CloudDriveException,
-                                                                                                             RepositoryException;
+  boolean removeFile(String id) throws CloudDriveException, RepositoryException;
 
-  String createFolder(Node folderNode, Calendar created) throws CloudDriveException, RepositoryException;
-
-  void updateFolder(Node folderNode, Calendar modified) throws CloudDriveException, RepositoryException;
-
-  void updateFile(Node fileNode, Calendar modified) throws CloudDriveException, RepositoryException;
-
-  void updateFileContent(Node fileNode, Calendar modified, String mimeType, InputStream content) throws CloudDriveException,
-                                                                                                RepositoryException;
-
-  String copyFile(Node srcFileNode, Node destFileNode) throws CloudDriveException, RepositoryException;
-
-  String copyFolder(Node srcFolderNode, Node destFolderNode) throws CloudDriveException, RepositoryException;
-
-  void removeFile(String id) throws CloudDriveException, RepositoryException;
-
-  void removeFolder(String id) throws CloudDriveException, RepositoryException;
+  boolean removeFolder(String id) throws CloudDriveException, RepositoryException;
 
   boolean isTrashSupported();
 
@@ -98,11 +82,32 @@ public interface CloudFileAPI {
 
   boolean trashFolder(String id) throws CloudDriveException, RepositoryException;
 
-  boolean untrashFile(Node fileNode) throws CloudDriveException, RepositoryException;
+  CloudFile untrashFile(Node fileNode) throws CloudDriveException, RepositoryException;
 
-  boolean untrashFolder(Node fileNode) throws CloudDriveException, RepositoryException;
+  CloudFile untrashFolder(Node fileNode) throws CloudDriveException, RepositoryException;
+
+  CloudFile createFile(Node fileNode,
+                       Calendar created,
+                       Calendar modified,
+                       String mimeType,
+                       InputStream content) throws CloudDriveException, RepositoryException;
+
+  CloudFile createFolder(Node folderNode, Calendar created) throws CloudDriveException, RepositoryException;
+
+  CloudFile updateFolder(Node folderNode, Calendar modified) throws CloudDriveException, RepositoryException;
+
+  CloudFile updateFile(Node fileNode, Calendar modified) throws CloudDriveException, RepositoryException;
+
+  CloudFile updateFileContent(Node fileNode, Calendar modified, String mimeType, InputStream content) throws CloudDriveException,
+                                                                                                     RepositoryException;
+
+  CloudFile copyFile(Node srcFileNode, Node destFileNode) throws CloudDriveException, RepositoryException;
+
+  CloudFile copyFolder(Node srcFolderNode, Node destFolderNode) throws CloudDriveException,
+                                                               RepositoryException;
 
   CloudFile restore(String id, String path) throws NotFoundException,
                                            CloudDriveException,
                                            RepositoryException;
+
 }
