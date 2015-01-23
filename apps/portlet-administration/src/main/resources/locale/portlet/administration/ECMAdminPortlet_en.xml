@@ -561,7 +561,7 @@
     </action>
     <msg>
       <register-successfully>The '{0}' node type was registered successfully.</register-successfully>
-      <supertype-is-madatory>The super type is mandatory when you register a new node type. Please select at least one super type.</supertype-is-madatory>
+      <supertype-is-madatory>The super type is mandatory when you register a new non-mixin node type. Please select at least one super type.</supertype-is-madatory>
       <register-failed>The node type registration was unsuccessful. It either already exists or the super type is invalid.</register-failed>
       <nodeType-name>The node type name is required.</nodeType-name>
       <fileName-invalid>The file name has some invalid characters.</fileName-invalid>
