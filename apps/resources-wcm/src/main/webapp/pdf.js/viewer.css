@@ -123,9 +123,13 @@ body {
 
 
 .outerCenter {
-  padding: 4px 0 0;
-  margin: auto;
-  width: 360px;
+	left: 50%;
+    margin: auto;
+    padding: 0;
+    position: absolute;
+    top: 50%;
+    transform: translate(-50%, -50%);
+    width: 360px;
 }
 
 .innerCenter {
