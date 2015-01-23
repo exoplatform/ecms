@@ -14,6 +14,9 @@
         // Temporarily disable body scroll
         gj('body').css('overflow', 'hidden');
 
+        // Set z-index of UIPopupWindow to lower priority than Document Preview
+        $uiDocumentPreview.closest('.UIPopupWindow').css({'z-index':''});
+
         // Bind Esc key
         var closeEventHandler = function(e) {
             gj('#presentationMode').blur();
