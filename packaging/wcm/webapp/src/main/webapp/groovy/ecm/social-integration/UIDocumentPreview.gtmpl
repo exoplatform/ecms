@@ -81,7 +81,7 @@
                   def downloadLink = org.exoplatform.ecm.webui.utils.Utils.getDownloadRestServiceLink(contentNode);
                  %>
                      <div class="downloadBtn">
-                        <a href="$downloadLink"><i class="uiIconDownload uiIconWhite"></i>&nbsp;Download</a>
+                        <a href="$downloadLink"><i class="uiIconDownload uiIconWhite"></i>&nbsp;<%=_ctx.appRes("File.view.label.download")%></a>
                     </div>
                 <%}
               }

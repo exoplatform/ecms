@@ -128,7 +128,7 @@ def isLiked = uicomponent.isLiked();
       } else {
       %>
         <div class="noComment">
-            <div class="info">No comment yet</div>
+            <div class="info"><%=_ctx.appRes("UIPreviewCommentArea.label.no-comment-yet")%></div>
         </div>
       <%
       }
@@ -143,7 +143,7 @@ def isLiked = uicomponent.isLiked();
         <div class="commentInputBox">
             <a class="avatarXSmall pull-left" href="$currentCommenterUri" title="$currentCommenterFullName"><img src="$currentCommenterAvatar" alt="$currentCommenterFullName" /></a>
             <div class="commentBox">
-                <textarea placeholder="Add your comment..." cols="30" rows="10" id="commentTextAreaPreview" activityId="$activityId" class="textarea"></textarea>
+                <textarea placeholder="<%=_ctx.appRes("UIPreviewCommentArea.label.commentTextAreaPreview")%>" cols="30" rows="10" id="commentTextAreaPreview" activityId="$activityId" class="textarea"></textarea>
             </div>
         </div>
     </div>
