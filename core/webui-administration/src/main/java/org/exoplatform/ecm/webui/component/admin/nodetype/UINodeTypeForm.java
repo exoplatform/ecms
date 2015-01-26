@@ -73,6 +73,7 @@ import org.exoplatform.webui.form.validator.MandatoryValidator;
                      @EventConfig(listeners = UINodeTypeForm.SaveDraftActionListener.class),
                      @EventConfig(listeners = UINodeTypeForm.SaveActionListener.class),
                      @EventConfig(listeners = UINodeTypeForm.SelectTabActionListener.class, phase = Phase.DECODE),
+                     @EventConfig(listeners = UINodeTypeForm.IsMixinActionListener.class, phase = Phase.DECODE),
                      @EventConfig(listeners = UIPropertyDefinitionForm.AddPropertyActionListener.class, phase = Phase.DECODE),
                      @EventConfig(listeners = UIChildNodeDefinitionForm.AddChildActionListener.class, phase = Phase.DECODE),
                      @EventConfig(listeners = UINodeTypeForm.ViewChildNodeActionListener.class, phase = Phase.DECODE),
@@ -148,11 +149,13 @@ public class UINodeTypeForm extends UIFormTabPane {
 
   public UINodeTypeForm() throws Exception {
     super("UINodeTypeForm");
+    UIFormSelectBox mixinSelectBox = new UIFormSelectBox(MIXIN_TYPE, MIXIN_TYPE, null);
+    mixinSelectBox.setOnChange("IsMixin");
     UIFormInputSetWithAction nodeTypeTab = new UIFormInputSetWithAction(NODETYPE_DEFINITION);
     nodeTypeTab.addUIFormInput(new UIFormSelectBox(NAMESPACE, NAMESPACE, null))
     .addUIFormInput(new UIFormStringInput(NODETYPE_NAME, NODETYPE_NAME, null).addValidator(MandatoryValidator.class)
                     .addValidator(ECMNameValidator.class))
-    .addUIFormInput(new UIFormSelectBox(MIXIN_TYPE, MIXIN_TYPE, null))
+    .addUIFormInput(mixinSelectBox)
     .addUIFormInput(new UIFormSelectBox(HAS_ORDERABLE_CHILDNODES,
                                         HAS_ORDERABLE_CHILDNODES,
                                         null))
@@ -788,7 +791,19 @@ public class UINodeTypeForm extends UIFormTabPane {
         context.setResponseComplete(true);
       }
     }		
-  } 
+  }
+  static public class IsMixinActionListener extends EventListener<UINodeTypeForm>
+  {
+    public void execute(Event<UINodeTypeForm> event) throws Exception {
+      UINodeTypeForm uiForm = event.getSource();
+      if (uiForm.getUIFormSelectBox(MIXIN_TYPE).getValue().equals("true") && uiForm.getUIStringInput(SUPER_TYPE).getValidators().size() > 0) {
+        uiForm.getUIStringInput(SUPER_TYPE).getValidators().clear();
+      } 
+      if (uiForm.getUIFormSelectBox(MIXIN_TYPE).getValue().equals("false") && uiForm.getUIStringInput(SUPER_TYPE).getValidators().size() == 0) {
+        uiForm.getUIStringInput(SUPER_TYPE).addValidator(MandatoryValidator.class);
+      }
+    }
+  }
 
 
 }
