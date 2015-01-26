@@ -64,7 +64,6 @@
 		}
  	  jsManager.getRequireJS().addScripts("ecmutil.ECMUtils.activateWCMRestoreNotice(\"$wcmNotice\");");
  	  jsManager.getRequireJS().addScripts("ecmutil.ECMUtils.activateWCMDeleteNotice(\"$nodePathDelete\", \""+deleteNotice+"\");");
- 	  
    } else {	 
 	   jsManager.getRequireJS().addScripts("ecmutil.ECMUtils.activateWCMDeleteNotice(\"$nodePathDelete\", \""+deleteNotice+"\");");
 	   jsManager.getRequireJS().addScripts("ecmutil.ECMUtils.activateWCMRestoreNotice(\"$wcmNotice\");");
