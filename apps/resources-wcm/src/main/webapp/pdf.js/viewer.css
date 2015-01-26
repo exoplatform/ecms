@@ -123,18 +123,25 @@ body {
 
 
 .outerCenter {
-	left: 50%;
-    margin: auto;
-    padding: 0;
-    position: absolute;
-    top: 50%;
-    transform: translate(-50%, -50%);
-    width: 360px;
+    margin: 0 90px 0 260px;
+    padding: 34px 0 0;
+    position: relative;
+}
+
+.outerCenter .actionIcon {
+	width: 16px;    
 }
 
 .innerCenter {
-  float: right;
-  position: relative;
+	left: 50%;
+    position: absolute;
+    top: 50%;
+    transform: translate(-50%, -50%);
+    min-width: 190px;
+}
+
+.outerCenter #scaleSelectContainer select {
+	width: 130px;
 }
 
 #outerContainer {
@@ -242,6 +249,7 @@ body {
   background: #f0f0f0; 
   border: none;
   border-bottom: 1px solid #d1d1d1;
+  z-index: 0;
   
 }
 
@@ -446,25 +454,11 @@ body {
 }
 
 #toolbarViewerLeft {
-  margin-left: -1px;
-  min-width: 45%;
-}
-
-#toolbarViewerLeft {
-  position: absolute;
-  top: 0;
-  left: 0;
+  width: 250px;
   padding: 4px;
 }
 #toolbarViewerRight{
   width: 80px;
-  padding: 4px;
-}
-
-#toolbarViewerRight {
-  position: absolute;
-  top: 0;
-  right: 0;
   padding: 4px;
 }
 
@@ -475,6 +469,7 @@ body {
 #toolbarViewerLeft input{
 	width: 36px;
 	text-align: right;
+	margin-bottom: 0;
 }
 
 #toolbarViewerLeft > *,
@@ -1393,18 +1388,6 @@ canvas {
   display: none;
 }
 
-@media all and (max-width: 960px) {
-  #outerContainer.sidebarMoving .outerCenter,
-  #outerContainer.sidebarOpen .outerCenter {
-    float: left;
-    left: 185px;
-  }
-}
-
-.outerCenter .innerCenter select{
-	width: 150px;
-	margin-left: 4px;
-}
 
 @media all and (max-width: 900px) {
   .sidebarOpen .hiddenLargeView {
@@ -1439,11 +1422,6 @@ canvas {
 
   #outerContainer.sidebarOpen > #mainContainer {
     left: 0px;
-  }
-  
-  .outerCenter {
-    float: left;
-    left: 185px;
   }
   
   #outerContainer .hiddenLargeView,

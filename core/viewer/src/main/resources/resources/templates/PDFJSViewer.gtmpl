@@ -375,8 +375,8 @@ if(uicomponent.isNotModernBrowser()) {
 
             <div class="toolbar">
                 <div id="toolbarContainer">
-                    <div id="toolbarViewer">
-                        <div id="toolbarViewerLeft">
+                    <div id="toolbarViewer" class="clearfix">
+                        <div id="toolbarViewerLeft" class="pull-left">
                             <div class="btn-group">
                                 <button id="sidebarToggle" class="btn" data-placement="right" rel="tooltip" data-original-title="Toggle Sidebar" tabindex="4" data-l10n-id="toggle_sidebar">
                                     <i class="uiIconShowSlidebar uiIconLightGray"></i>
@@ -397,7 +397,7 @@ if(uicomponent.isNotModernBrowser()) {
                             </input>
                             <span id="numPages" class="toolbarLabel"></span>
                         </div>
-                        <div id="toolbarViewerRight">
+                        <div id="toolbarViewerRight" class="pull-right">
                             <a id="secondaryDownload" class="actionIcon" data-placement="bottom" rel="tooltip" data-original-title="Download" href="<%=downloadLink%>" tabindex="12" data-l10n-id="download">
                                 <i class="uiIconDownload uiIconLightGray"></i>
                             </a>
@@ -411,7 +411,7 @@ if(uicomponent.isNotModernBrowser()) {
                             </a>
                         </div>
                         <div class="outerCenter">
-                            <div class="innerCenter" id="toolbarViewerMiddle">
+                            <div class="innerCenter clearfix" id="toolbarViewerMiddle">
 
                                 <a id="zoomOut" class="actionIcon" data-placement="bottom" rel="tooltip" data-original-title="Zoom Out" tabindex="9" data-l10n-id="zoom_out">
                                     <i class="uiIconMinimize  uiIconLightGray"></i>
