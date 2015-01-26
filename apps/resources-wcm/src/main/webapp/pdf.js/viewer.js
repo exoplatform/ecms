@@ -4121,7 +4121,11 @@ var DocumentOutlineView = function documentOutlineView(outline) {
   if(!locale) var locale = navigator.language;
   if ('locale' in hashParams)
     locale = hashParams['locale'];
-  mozL10n.setLanguage(eXo.env.portal.language);
+  if (typeof eXo ==='undefined') {
+    mozL10n.setLanguage(locale);
+  } else {
+    mozL10n.setLanguage(eXo.env.portal.language);
+  }
 
   if ('textLayer' in hashParams) {
     switch (hashParams['textLayer']) {
