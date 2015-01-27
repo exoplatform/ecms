@@ -105,6 +105,8 @@ class GoogleDriveAPI implements DataStoreFactory {
   public static final String       NO_STATE        = "__no_state_set__";
 
   protected static final String    USER_ID         = "user_id";
+  
+  protected static final String    USER_EMAIL_ADDRESS         = "emailAddress";
 
   protected static final Log       LOG             = ExoLogger.getLogger(GoogleDriveAPI.class);
 
@@ -574,9 +576,6 @@ class GoogleDriveAPI implements DataStoreFactory {
   Userinfoplus userInfo() throws GoogleDriveException, CloudDriveException {
     Userinfoplus userInfo;
     try {
-      // XXX FYI this caused Unauthorized: >>> .setHttpRequestInitializer(new RequestInitializer()
-      // Oauth2 oauth2 = new Oauth2.Builder(new NetHttpTransport(), new JacksonFactory(),
-      // credential).build();
       userInfo = oauth2.userinfo().get().execute();
     } catch (GoogleJsonResponseException e) {
       GoogleJsonError error = e.getDetails();

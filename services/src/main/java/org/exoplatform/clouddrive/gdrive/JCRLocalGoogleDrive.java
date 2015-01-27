@@ -23,6 +23,7 @@ import com.google.api.services.drive.model.Change;
 import com.google.api.services.drive.model.ChildReference;
 import com.google.api.services.drive.model.File;
 import com.google.api.services.drive.model.ParentReference;
+import com.google.api.services.drive.model.User;
 
 import org.exoplatform.clouddrive.CloudDriveAccessException;
 import org.exoplatform.clouddrive.CloudDriveException;
@@ -250,7 +251,7 @@ public class JCRLocalGoogleDrive extends JCRLocalCloudDrive implements UserToken
         Change ch = changes.next();
         File gf = ch.getFile(); // gf will be null for deleted
 
-        String[] parents; // gf.getUnknownKeys()
+        String[] parents;
 
         // if parents empty - file deleted or shared file was removed from user drive (My Drive)
         // if file in Trash - proceed to delete also, inside it should be checked for the same ETag
@@ -348,7 +349,7 @@ public class JCRLocalGoogleDrive extends JCRLocalCloudDrive implements UserToken
 
       boolean isFolder = api.isFolder(gf);
 
-      for (String parentFileId : parentIds) {
+      nextParent: for (String parentFileId : parentIds) {
         List<Node> fileParent = nodes.get(parentFileId);
         if (fileParent == null) {
           // no yet existing locally parent... wait for it
@@ -356,6 +357,31 @@ public class JCRLocalGoogleDrive extends JCRLocalCloudDrive implements UserToken
 
           fileParent = nodes.get(parentFileId);
           if (fileParent == null) {
+            // check if it is not shared file and thus its parent may be outside My Drive (not found locally)
+            if (gf.getShared()) {
+              // for shared file check its parent owner and if not me, then skip the parent
+              File gparent = api.file(parentFileId);
+              GoogleUser me = getUser();
+              boolean notMine = false;
+              List<User> parentOwners = gparent.getOwners();
+              if (parentOwners != null) {
+                for (User owner : parentOwners) {
+                  Object uo = owner.getUnknownKeys().get(GoogleDriveAPI.USER_EMAIL_ADDRESS);
+                  if (uo != null && !me.getEmail().equals(uo)) {
+                    notMine = true;
+                  } else {
+                    String userId = owner.getPermissionId();
+                    if (!me.getId().equals(userId)) {
+                      notMine = true;
+                    }
+                  }
+                }
+                if (notMine) {
+                  continue nextParent;
+                }
+              }
+            }
+
             // TODO run full sync and restore the drive from the cloud side
             throw new CloudDriveException("Inconsistent changes: cannot find parent Node for '"
                 + gf.getTitle() + "'");
