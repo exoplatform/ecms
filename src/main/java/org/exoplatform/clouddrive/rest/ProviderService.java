@@ -41,14 +41,11 @@ import org.exoplatform.services.rest.resource.ResourceContainer;
  * REST service providing information about providers. Created by The eXo
  * Platform SAS.
  * 
- * TODO not used since CLDINT-879
- * 
  * @author <a href="mailto:pnedonosko@exoplatform.com">Peter Nedonosko</a>
  * @version $Id: ProviderService.java 00000 Oct 13, 2012 pnedonosko $
  */
 @Path("/clouddrive/provider")
 @Produces(MediaType.APPLICATION_JSON)
-@Deprecated
 public class ProviderService implements ResourceContainer {
 
   protected static final Log        LOG = ExoLogger.getLogger(ProviderService.class);
