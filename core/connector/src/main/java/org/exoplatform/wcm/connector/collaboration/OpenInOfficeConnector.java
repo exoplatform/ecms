@@ -78,6 +78,7 @@ public class OpenInOfficeConnector implements ResourceContainer {
     String filePath = nodeInfo[1];
 
     String extension = filePath.substring(filePath.lastIndexOf(".") + 1, filePath.length());
+    if(extension.contains("[")) extension=extension.substring(0, extension.indexOf("["));
     EntityTag etag = new EntityTag(Integer.toString((extension+"_"+language).hashCode()));
     Response.ResponseBuilder builder = request.evaluatePreconditions(etag);
     if(builder!=null) return builder.build();
