@@ -26,6 +26,7 @@ import javax.jcr.nodetype.PropertyDefinition;
 import javax.jcr.version.OnParentVersionAction;
 
 import org.apache.commons.lang.StringUtils;
+import org.exoplatform.ecm.webui.form.validator.NodeTypeNameValidator;
 import org.exoplatform.services.cms.actions.ActionServiceContainer;
 import org.exoplatform.services.cms.scripts.impl.ScriptServiceImpl;
 import org.exoplatform.services.wcm.utils.WCMCoreUtils;
@@ -45,7 +46,6 @@ import org.exoplatform.webui.form.UIFormMultiValueInputSet;
 import org.exoplatform.webui.form.UIFormSelectBox;
 import org.exoplatform.webui.form.UIFormStringInput;
 import org.exoplatform.webui.form.validator.MandatoryValidator;
-import org.exoplatform.webui.form.validator.NameValidator;
 
 import com.ibm.icu.text.Transliterator;
 
@@ -82,7 +82,7 @@ public class UIActionTypeForm extends UIForm {
   public UIActionTypeForm() throws Exception {
     
     addUIFormInput(new UIFormStringInput(FIELD_NAME, FIELD_NAME, null).
-        addValidator(MandatoryValidator.class).addValidator(NameValidator.class));
+        addValidator(MandatoryValidator.class).addValidator(NodeTypeNameValidator.class));
     UIFormSelectBox actionExecutables = new UIFormSelectBox(FIELD_SCRIPT,FIELD_SCRIPT,
         new ArrayList<SelectItemOption<String>>());
     addUIFormInput(actionExecutables) ;
