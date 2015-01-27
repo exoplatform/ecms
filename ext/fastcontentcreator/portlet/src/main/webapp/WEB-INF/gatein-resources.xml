@@ -25,41 +25,6 @@
     xmlns="http://www.gatein.org/xml/ns/gatein_resources_1_3">
 
 
-  <!-- FastContentCreatorPortlet skins -->
-
-  <portlet-skin>
-    <application-name>fastcontentcreator</application-name>
-    <portlet-name>FastContentCreatorPortlet</portlet-name>
-    <skin-name>Default</skin-name>
-    <css-path>/skin/css/fast-content-creator.css</css-path>
-  </portlet-skin>
-    
-  <!-- FastContentCreatorBasicPortlet skins -->
-
-  <portlet-skin>
-    <application-name>fastcontentcreator</application-name>
-    <portlet-name>FastContentCreatorBasicPortlet</portlet-name>
-    <skin-name>Default</skin-name>
-    <css-path>/skin/css/fast-content-creator.css</css-path>
-  </portlet-skin>
-
-  <!-- FastContentCreatorPortletStandard skins -->
-
-  <portlet-skin>
-    <application-name>fastcontentcreator</application-name>
-    <portlet-name>FastContentCreatorBasicPortletStandard</portlet-name>
-    <skin-name>Default</skin-name>
-    <css-path>/skin/css/fast-content-creator.css</css-path>
-  </portlet-skin>
-    
-  <!-- FastContentCreatorBasicPortletStandard skins -->
-
-  <portlet-skin>
-    <application-name>fastcontentcreator</application-name>
-    <portlet-name>FastContentCreatorBasicPortletStandard</portlet-name>
-    <skin-name>Default</skin-name>
-    <css-path>/skin/css/fast-content-creator.css</css-path>
-  </portlet-skin>
   
   <portlet>
     <name>FastContentCreatorPortlet</name>

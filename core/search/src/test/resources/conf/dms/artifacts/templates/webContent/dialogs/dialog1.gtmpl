@@ -80,9 +80,7 @@
 						%>		
 									<div>
 										<image src="$imgSrc" width="100px" height="80px"/>
-										<a href="$actionLink">
-											<img src="/eXoResources/skin/DefaultSkin/background/Blank.gif" alt="" class="ActionIcon Remove16x16Icon"/>
-										</a>
+										 <a class="actionIcon "  rel="tooltip" data-placement="bottom" title="remove" href="$actionLink" ><i class="uiIconRemove uiIconLightGray"></i></a>
 									</div>
 						<%
 								} else {

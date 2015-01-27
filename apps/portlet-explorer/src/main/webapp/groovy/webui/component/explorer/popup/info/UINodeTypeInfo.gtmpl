@@ -51,7 +51,7 @@
 						}
 						%>
 						<li class="dropdown pull-right listHiddenTabsContainer" style="display: block;">
-							 <a data-toggle="dropdown" class="dropdown-toggle" href="#">More <b class="caret"></b></a>
+							 <a data-toggle="dropdown" class="dropdown-toggle" href="#">More <i class="uiIconMiniArrowDown uiIconLightGray"></i></a>
 							 <ul class="dropdown-menu">
 							 </ul>
 						</li>

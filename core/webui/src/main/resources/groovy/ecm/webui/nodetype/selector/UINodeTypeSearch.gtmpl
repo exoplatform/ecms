@@ -6,9 +6,9 @@
   requireJs.addScripts("wcmutil.WCMUtils.searchNodeTypeOnKeyPress();");
   requireJs.addScripts("wcmutil.WCMUtils.initSearch('" + uicomponent.id +"','NodeTypeText','"+searchLabel+"');");
 %>
-<div id="$uicomponent.id" class="uiSearchInput">       
+<div id="$uicomponent.id" class="uiSearchInput searchWithIcon">
 
-		            <a class="AdvancedSearch"  rel="tooltip" data-placement="bottom" title="<%=searchLabel%>" href="<%=uicomponent.event("SearchNodeType");%>"></a>
+		            <a class="advancedSearch"  rel="tooltip" data-placement="bottom" title="<%=searchLabel%>" href="<%=uicomponent.event("SearchNodeType");%>"><i class="uiIconSearch uiIconLightGray"></i></a>
 		            <%
 		              uicomponent.renderChildren();		                  
 		            %>

@@ -54,7 +54,7 @@
 				<div class="commentContainer clearfix">
 					<div class="avatarBox pull-left">
 						<a commentor="$commentor" class="avatarMedium" data-placement="bottom" rel="tooltip" href="<%=org.exoplatform.wcm.webui.Utils.getProfileLink(commentor)%>" data-original-title="<%=comment.getProperty("exo:commentorFullName").getString()%>">
-							<img src="/social-resources/skin/images/ShareImages/UserAvtDefault.png">
+							<img src="/eXoSkin/skin/images/themes/default/social/skin/ShareImages/UserAvtDefault.png">
 						</a>
 					</div>
 					<div class="commentBox uiBox">

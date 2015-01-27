@@ -24,32 +24,7 @@
     xsi:schemaLocation="http://www.gatein.org/xml/ns/gatein_resources_1_3 http://www.gatein.org/xml/ns/gatein_resources_1_3" 
     xmlns="http://www.gatein.org/xml/ns/gatein_resources_1_3">
 
-  <!-- SingleContentViewer skins -->
-
-  <portlet-skin>
-    <application-name>presentation</application-name>
-    <portlet-name>SingleContentViewer</portlet-name>
-    <skin-name>Default</skin-name>
-    <css-path>/skin/css/ecms-presentation-singlecontentviewer.css</css-path>
-  </portlet-skin>
-  
-  <!-- ContentListViewerPortlet skins -->
-
-  <portlet-skin>
-    <application-name>presentation</application-name>
-    <portlet-name>ContentListViewerPortlet</portlet-name>
-    <skin-name>Default</skin-name>
-    <css-path>/skin/css/ecms-presentation-contentlistviewerportlet.css</css-path>
-  </portlet-skin>
-  
-  <portlet-skin>
-    <application-name>presentation</application-name>
-    <portlet-name>ContentListViewerByQueryPortlet</portlet-name>
-    <skin-name>Default</skin-name>
-    <css-path>/skin/css/ecms-presentation-contentlistviewerportlet.css</css-path>
-  </portlet-skin>
-  
-  <portlet>
+   <portlet>
     <name>EditingPortlet</name>
     <module>
       <depends>

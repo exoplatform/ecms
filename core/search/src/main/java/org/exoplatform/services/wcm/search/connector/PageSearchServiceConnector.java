@@ -141,7 +141,7 @@ public class PageSearchServiceConnector extends BaseSearchServiceConnector {
    */
   @Override
   protected String getImageUrl(Node node) {
-    return "/eXoWCMResources/skin/images/search/page.png";
+    return "/eXoSkin/skin/images/system/unified-search/page.png";
   }
   
   /**

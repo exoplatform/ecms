@@ -218,7 +218,7 @@
 											<%if(uicomponent.isSymLink(data)) {%>
 												<div class="Link"></div>
 											<%}%>
-											<div class="bgThumbnailImage" style="background-image: url($thumbnailImage); background-repeat:no-repeat; background-position:center;">
+											<div class="bgThumbnailImage" >
 												<div>
 													<img src="$thumbnailImage" retryCount="0"  onerror='loadImageOnError(this);' />
 												</div>

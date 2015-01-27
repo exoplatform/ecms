@@ -57,8 +57,8 @@
                   if(uicomponent.isDeleteOnly()) { %>
                    <div class="inforField">
                      <span class="actionField"><%=ContentReader.getXSSCompatibilityContent(listInfor[j])%></span>  
-                     <a href="javascript:eXo.webui.UIForm.submitEvent('<%=formName%>', '<%=actionInfo[0]%>', '&objectId=<%=j%>');" onclick="return confirm('<%=confirm%>');">
-                        <i class="uiIconTrash"></i>
+                     <a href="javascript:eXo.webui.UIForm.submitEvent('<%=formName%>', '<%=actionInfo[0]%>', '&objectId=<%=j%>');" onclick="return confirm('<%=confirm%>');" class="actionIcon" >
+                         <i class="uiIconDelete uiIconLightGray"></i>
                      </a>
                    </div>
               <%
@@ -87,9 +87,9 @@
                                 <%=arrInfor[i].trim()%>
                             </a>
                          </div>
-                         <a href="javascript:eXo.webui.UIForm.submitEvent('<%=formName%>', '<%=actionInfo[1]%>', '&objectId=<%=arrInfor[i]%>');" onclick="return confirm('<%=confirm%>');">
-                           <img class="DeleteIconInfo" src="/eXoResources/skin/DefaultSkin/background/Blank.gif" rel="tooltip" data-placement="bottom" title="<%=actionInfo[1]%>" alt="<%=actionInfo[1]%>"/>
-                         </a>
+                        <a class="actionIcon" rel="tooltip" data-placement="bottom" title="<%=actionInfo[1]%>" href="javascript:eXo.webui.UIForm.submitEvent('<%=formName%>', '<%=actionInfo[1]%>', '&objectId=<%=arrInfor[i]%>');" onclick="return confirm('<%=confirm%>');">
+                          <i class="uiIconDelete uiIconLightGray"></i>
+                      </a>
                                               </div>
                      <%
                        }
