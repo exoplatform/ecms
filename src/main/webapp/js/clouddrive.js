@@ -142,10 +142,10 @@
 			return process.promise(processTarget);
 		};
 
-		// TODO not used currently
+		// not used currently
 		var getProvider = function(providerId, callbacks) {
 			var request = $.ajax({
-			  async : false,// for avoid the popup blocker
+			  async : true,
 			  type : "GET",
 			  url : prefixUrl + "/portal/rest/clouddrive/provider/" + providerId,
 			  dataType : "json"
