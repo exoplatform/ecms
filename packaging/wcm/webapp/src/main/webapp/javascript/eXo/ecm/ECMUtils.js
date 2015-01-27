@@ -1227,6 +1227,9 @@
 			  noticeElem.style.marginLeft = "-" + noticeElem.offsetWidth/2 + "px";
 		        }
 		}
+		ECMUtils.prototype.setUndo = function(undo) {
+			    Self.undo = undo;
+		}
 
 		ECMUtils.prototype.activateWCMRestoreNotice = function(restoreNotice) {
 			      var noticeElem = document.getElementById("wcm-notice");
