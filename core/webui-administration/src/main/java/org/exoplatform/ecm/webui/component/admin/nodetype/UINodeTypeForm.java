@@ -316,6 +316,9 @@ public class UINodeTypeForm extends UIFormTabPane {
       types.append(superType[i].getName()) ;
     }
     getUIStringInput(SUPER_TYPE).setValue(types.toString()) ;
+    if (nodeType.isMixin() && getUIStringInput(SUPER_TYPE).getValidators().size() > 0) {
+      getUIStringInput(SUPER_TYPE).getValidators().clear();
+    }
     if(isView) {
       getUIFormSelectBox(NAMESPACE).setDisabled(true) ;
       getUIStringInput(NODETYPE_NAME).setReadOnly(true);
