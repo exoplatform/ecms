@@ -1424,6 +1424,7 @@
 					$a.css("font-weight", "normal");
 
 					var $iframe = $viewer.find("iframe");
+					// file link as edit link
 					if ($vswitch.size() > 0 && file.editLink && file.previewLink && file.editLink != file.previewLink) {
 						// init Edit/View mode
 						$iframe.attr("src", file.previewLink);
