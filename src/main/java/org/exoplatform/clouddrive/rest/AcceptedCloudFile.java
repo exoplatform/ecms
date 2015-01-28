@@ -16,7 +16,6 @@
  */
 package org.exoplatform.clouddrive.rest;
 
-import org.exoplatform.clouddrive.CloudDrive;
 import org.exoplatform.clouddrive.CloudFile;
 
 import java.util.Calendar;
@@ -37,56 +36,56 @@ public class AcceptedCloudFile implements CloudFile {
   }
 
   /**
-   * @return the isSymlink
+   * {@inheritDoc}
    */
   public boolean isSymlink() {
     return false;
   }
 
   /**
-   * @return the id
+   * {@inheritDoc}
    */
   public String getId() {
     return null;
   }
 
   /**
-   * @return the title
+   * {@inheritDoc}
    */
   public String getTitle() {
     return null;
   }
 
   /**
-   * @return the link
+   * {@inheritDoc}
    */
   public String getLink() {
     return null;
   }
 
   /**
-   * @return the previewLink
-   */
-  public String getPreviewLink() {
-    return null;
-  }
-
-  /**
-   * @return the editLink
+   * {@inheritDoc}
    */
   public String getEditLink() {
     return null;
   }
 
   /**
-   * @return the thumbnailLink
+   * {@inheritDoc}
+   */
+  public String getPreviewLink() {
+    return null;
+  }
+
+  /**
+   * {@inheritDoc}
    */
   public String getThumbnailLink() {
     return null;
   }
 
   /**
-   * @return the type
+   * {@inheritDoc}
    */
   public String getType() {
     return null;
@@ -95,7 +94,6 @@ public class AcceptedCloudFile implements CloudFile {
   /**
    * {@inheritDoc}
    */
-  @Override
   public String getTypeMode() {
     return null;
   }
@@ -108,14 +106,14 @@ public class AcceptedCloudFile implements CloudFile {
   }
 
   /**
-   * @return the author
+   * {@inheritDoc}
    */
   public String getAuthor() {
     return null;
   }
 
   /**
-   * @return the createdDate
+   * {@inheritDoc}
    */
   public Calendar getCreatedDate() {
     return null;
@@ -129,25 +127,16 @@ public class AcceptedCloudFile implements CloudFile {
   }
 
   /**
-   * @return the isFolder
+   * {@inheritDoc}
    */
   public boolean isFolder() {
     return false;
   }
 
   /**
-   * @return the path
+   * {@inheritDoc}
    */
   public String getPath() {
     return path;
-  }
-
-  /**
-   * Return <code>true</code> always. It is a flag of files accepted but not yet created in cloud. Deprecated
-   * in favor of use {@link CloudDrive.FilesState#isUpdating(String)}.
-   */
-  @Deprecated
-  public boolean isUpdating() {
-    return true;
   }
 }

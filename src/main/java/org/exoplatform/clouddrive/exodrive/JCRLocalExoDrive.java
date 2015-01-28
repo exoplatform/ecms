@@ -83,19 +83,19 @@ public class JCRLocalExoDrive extends JCRLocalCloudDrive {
                    f.getCreateDate(),
                    f.getModifiedDate());
 
-          changed.add(new JCRLocalCloudFile(localNode.getPath(), f.getId(), f.getName(), f.getType(), null, // typeMode
-                                                                                                            // not
-                                                                                                            // available
-                                                                                                            // for
-                                                                                                            // ExoDrive
+          changed.add(new JCRLocalCloudFile(localNode.getPath(),
+                                            f.getId(),
+                                            f.getName(),
+                                            f.getType(),
+                                            null,
                                             f.getLink(),
-                                            null, // editLink - edit not supported
                                             f.getLink(),
                                             f.getLink(),
                                             f.getAuthor(),
                                             f.getAuthor(),
                                             f.getCreateDate(),
                                             f.getModifiedDate(),
+                                            localNode,
                                             false));
           complete++;
         }
@@ -152,20 +152,20 @@ public class JCRLocalExoDrive extends JCRLocalCloudDrive {
                    f.getCreateDate(),
                    f.getModifiedDate());
 
-          changed.add(new JCRLocalCloudFile(localNode.getPath(), f.getId(), f.getName(), f.getType(), null, // typeMode
-                                                                                                            // not
-                                                                                                            // available
-                                                                                                            // for
-                                                                                                            // ExoDrive
+          changed.add(new JCRLocalCloudFile(localNode.getPath(),
+                                            f.getId(),
+                                            f.getName(),
+                                            f.getType(),
+                                            null,
                                             f.getLink(),
-                                            null, // editLink - edit not supported
                                             f.getLink(),
                                             f.getLink(),
                                             f.getAuthor(),
                                             f.getAuthor(),
                                             f.getCreateDate(),
                                             f.getModifiedDate(),
-                                            false));
+                                            localNode,
+                                            true));
           complete++;
         }
       } catch (ExoDriveException e) {
@@ -219,7 +219,6 @@ public class JCRLocalExoDrive extends JCRLocalCloudDrive {
                                      fs.getId(),
                                      fs.getName(),
                                      fs.getLink(),
-                                     editLink(fileNode),
                                      previewLink(fileNode),
                                      fs.getLink(),
                                      fs.getType(),
@@ -228,7 +227,6 @@ public class JCRLocalExoDrive extends JCRLocalCloudDrive {
                                      fs.getAuthor(),
                                      fs.getCreateDate(),
                                      fs.getModifiedDate(),
-                                     false,
                                      fileNode,
                                      true);
       } catch (ExoDriveException e) {
@@ -251,16 +249,11 @@ public class JCRLocalExoDrive extends JCRLocalCloudDrive {
                                      fs.getId(),
                                      fs.getName(),
                                      fs.getLink(),
-                                     editLink(folderNode),
-                                     previewLink(folderNode),
-                                     fs.getLink(),
                                      fs.getType(),
-                                     null,
                                      fs.getLastUser(),
                                      fs.getAuthor(),
                                      fs.getCreateDate(),
                                      fs.getModifiedDate(),
-                                     true,
                                      folderNode,
                                      true);
       } catch (ExoDriveException e) {

@@ -4145,7 +4145,7 @@ public abstract class JCRLocalCloudDrive extends CloudDrive implements CloudDriv
     String type = fileNode.getProperty("ecd:type").getString();
     String typeMode = isFolder ? null : mimeTypes.getMimeTypeMode(type, title);
     String link = link(fileNode);
-    String editLink = editLink(fileNode);
+    String editLink = editLink(link, fileNode);
 
     return new JCRLocalCloudFile(fileNode.getPath(),
                                  fileAPI.getId(fileNode),
@@ -4160,13 +4160,15 @@ public abstract class JCRLocalCloudDrive extends CloudDrive implements CloudDriv
                                  fileNode.getProperty("ecd:author").getString(),
                                  fileNode.getProperty("ecd:created").getDate(),
                                  fileNode.getProperty("ecd:modified").getDate(),
-                                 isFolder);
+                                 isFolder,
+                                 fileNode,
+                                 false);
   }
 
   /**
    * Init or update Cloud File structure on local JCR node.
    * 
-   * @param localNode {@link Node}
+   * @param fileNode {@link Node}
    * @param title
    * @param id
    * @param type
@@ -4179,7 +4181,7 @@ public abstract class JCRLocalCloudDrive extends CloudDrive implements CloudDriv
    * @param modified
    * @throws RepositoryException
    */
-  protected void initFile(Node localNode,
+  protected void initFile(Node fileNode,
                           String title,
                           String id,
                           String type,
@@ -4191,14 +4193,14 @@ public abstract class JCRLocalCloudDrive extends CloudDrive implements CloudDriv
                           Calendar created,
                           Calendar modified) throws RepositoryException {
     // ecd:cloudFile
-    if (!localNode.isNodeType(ECD_CLOUDFILE)) {
-      localNode.addMixin(ECD_CLOUDFILE);
+    if (!fileNode.isNodeType(ECD_CLOUDFILE)) {
+      fileNode.addMixin(ECD_CLOUDFILE);
     }
 
-    initCommon(localNode, title, id, type, link, author, lastUser, created, modified);
+    initCommon(fileNode, title, id, type, link, author, lastUser, created, modified);
 
     // ecd:cloudFileResource
-    Node content = localNode.getNode("jcr:content");
+    Node content = fileNode.getNode("jcr:content");
     if (!content.isNodeType(ECD_CLOUDFILERESOURCE)) {
       content.addMixin(ECD_CLOUDFILERESOURCE);
     }
@@ -4208,11 +4210,11 @@ public abstract class JCRLocalCloudDrive extends CloudDrive implements CloudDriv
     content.setProperty("jcr:lastModified", modified);
 
     // optional properties, if null, ones will be removed by JCR core
-    localNode.setProperty("ecd:previewUrl", previewLink);
+    fileNode.setProperty("ecd:previewUrl", previewLink);
 
     // since 1.1.0-RC2 we use dedicated ecd:thumbnailUrl
-    localNode.setProperty("ecd:downloadUrl", (String) null);
-    localNode.setProperty("ecd:thumbnailUrl", thumbnailLink);
+    fileNode.setProperty("ecd:downloadUrl", (String) null);
+    fileNode.setProperty("ecd:thumbnailUrl", thumbnailLink);
   }
 
   /**
@@ -4490,25 +4492,6 @@ public abstract class JCRLocalCloudDrive extends CloudDrive implements CloudDriv
   }
 
   /**
-   * Return provider specific link for file editing. By default this method will try read value of
-   * <code>ecd:editUrl</code> property and if not such property exists <code>null</code> will be
-   * returned.
-   * Actual connector implementation may override its logic.
-   * 
-   * @param fileNode {@link String} existing link to a cloud file or <code>null</code> if editing not
-   *          supported
-   * @return String with a link should be used for file editing.
-   * @throws RepositoryException
-   */
-  protected String editLink(Node fileNode) throws RepositoryException {
-    try {
-      return fileNode.getProperty("ecd:editUrl").getString();
-    } catch (PathNotFoundException e) {
-      return null;
-    }
-  }
-
-  /**
    * Return provider specific link for file content download or access. By default this method will try read
    * value of <code>ecd:url</code> property and if not such property exists {@link PathNotFoundException} will
    * be thrown.
@@ -4521,6 +4504,19 @@ public abstract class JCRLocalCloudDrive extends CloudDrive implements CloudDriv
    */
   protected String link(Node fileNode) throws PathNotFoundException, RepositoryException {
     return fileNode.getProperty("ecd:url").getString();
+  }
+
+  /**
+   * Read edit link for a cloud file denoted by given node. By default edit link is <code>null</code> -
+   * editing not supported.
+   * 
+   * @param fileLink {@link String} file link, can be used to build edit link by the connector implementation
+   * @param fileNode {@link Node}
+   * @return {@link String} an URL to edit cloud file or <code>null</code> if editing not supported
+   * @throws RepositoryException
+   */
+  protected String editLink(String fileLink, Node fileNode) throws RepositoryException {
+    return null;
   }
 
   protected boolean isUpdating(String key) {
@@ -4833,4 +4829,5 @@ public abstract class JCRLocalCloudDrive extends CloudDrive implements CloudDriv
       LOG.warn("Not a Cloud Drive root node: " + node.getPath());
     }
   }
+
 }
