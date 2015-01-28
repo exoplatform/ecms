@@ -47,63 +47,9 @@
         <name>storage-configuration</name>
         <property name="root-dir" value="${exo.shared.dir}/filedrive"/>
         <property name="base-url" value="file:///${exo.shared.dir}/filedrive"/>
-        <!-- property name="base-url" value="${filedrive.rest.url}" / -->
       </properties-param>
     </init-params>
   </component>
-
-  <external-component-plugins>
-    <target-component>org.exoplatform.services.jcr.impl.ext.action.SessionActionCatalog</target-component>
-    <component-plugin>
-      <name>addActions</name>
-      <set-method>addPlugin</set-method>
-      <type>org.exoplatform.services.jcr.impl.ext.action.AddActionsPlugin</type>
-      <description>add actions plugin</description>
-      <init-params>
-        <object-param>
-          <name>actions</name>
-          <object type="org.exoplatform.services.jcr.impl.ext.action.AddActionsPlugin$ActionsConfig">
-            <field name="actions">
-              <collection type="java.util.ArrayList">
-                <value>
-                  <object type="org.exoplatform.services.jcr.impl.ext.action.ActionConfiguration">
-                    <field name="eventTypes">
-                      <string>removeNode</string>
-                    </field>
-                    <field name="nodeTypes">
-                      <string>ecd:cloudFile</string>
-                    </field>
-                    <field name="isDeep">
-                      <boolean>true</boolean>
-                    </field>
-                    <field name="actionClassName">
-                      <string>org.exoplatform.clouddrive.jcr.RemoveCloudFileAction</string>
-                    </field>
-                  </object>
-                </value>
-                <!-- value>
-                  <object type="org.exoplatform.services.jcr.impl.ext.action.ActionConfiguration">
-                    <field name="eventTypes">
-                      <string>addProperty,changeProperty,removeProperty</string>
-                    </field>
-                    <field name="nodeTypes">
-                      <string>ecd:cloudDrive</string>
-                    </field>
-                    <field name="isDeep">
-                      <boolean>true</boolean>
-                    </field>
-                    <field name="actionClassName">
-                      <string>org.exoplatform.clouddrive.jcr.CloudFileAction</string>
-                    </field>
-                  </object>
-                </value -->
-              </collection>
-            </field>
-          </object>
-        </object-param>
-      </init-params>
-    </component-plugin>
-  </external-component-plugins>
 
   <!-- Use this plugin in external configuration, e.g. an extension -->
   <external-component-plugins> <!-- profiles="default,cloud" -->
