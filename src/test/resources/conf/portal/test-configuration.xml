@@ -81,22 +81,6 @@
                     </field>
                   </object>
                 </value>
-                <!-- value>
-                  <object type="org.exoplatform.services.jcr.impl.ext.action.ActionConfiguration">
-                    <field name="eventTypes">
-                      <string>addProperty,changeProperty,removeProperty</string>
-                    </field>
-                    <field name="nodeTypes">
-                      <string>ecd:cloudDrive</string>
-                    </field>
-                    <field name="isDeep">
-                      <boolean>true</boolean>
-                    </field>
-                    <field name="actionClassName">
-                      <string>org.exoplatform.clouddrive.jcr.CloudFileAction</string>
-                    </field>
-                  </object>
-                </value -->
               </collection>
             </field>
           </object>
