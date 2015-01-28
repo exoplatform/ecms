@@ -83,10 +83,10 @@ public class UINodeTypeSelector extends
 
     private void updateCheckBox(List<String> selectedNodetypes, UICheckBoxInput uiCheckBox) {
       if (uiCheckBox.isChecked()) {
-        if (!selectedNodetypes.contains(uiCheckBox.getValue().toString()))
-          selectedNodetypes.add(uiCheckBox.getValue().toString());
+        if (!selectedNodetypes.contains(uiCheckBox.getName().toString()))
+          selectedNodetypes.add(uiCheckBox.getName().toString());
       } else {
-        selectedNodetypes.remove(uiCheckBox.getValue().toString());
+        selectedNodetypes.remove(uiCheckBox.getName().toString());
       }
     }
 
