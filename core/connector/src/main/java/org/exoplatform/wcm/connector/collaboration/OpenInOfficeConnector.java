@@ -11,6 +11,7 @@ import org.exoplatform.services.rest.resource.ResourceContainer;
 import org.exoplatform.services.wcm.core.NodetypeConstant;
 import org.exoplatform.services.wcm.utils.WCMCoreUtils;
 import org.json.JSONObject;
+import org.picocontainer.Startable;
 
 import javax.annotation.security.RolesAllowed;
 import javax.jcr.Node;
@@ -32,7 +33,7 @@ import java.util.ResourceBundle;
 
 @Path("/office/")
 @RolesAllowed("users")
-public class OpenInOfficeConnector implements ResourceContainer {
+public class OpenInOfficeConnector implements ResourceContainer, Startable {
 
   private final String OPEN_DOCUMENT_ON_DESKTOP_ICO              = "uiIcon16x16FileDefault";
   private final String CONNECTOR_BUNDLE_LOCATION                 = "locale.wcm.resources.WCMResourceBundleConnector";
@@ -44,19 +45,21 @@ public class OpenInOfficeConnector implements ResourceContainer {
 
   private static final String VERSION_MIXIN ="mix:versionable";
 
-  private static String msofficeMimeType = ",doc,docx,xls,xltx,ppt,pptx,";
+  private static String msofficeMimeType = ",doc,dot,docx,dotx,docm,dotm,xls,xlt,xla,xlsx,xltx,xlsm,xltm,xlam,xlsb,ppt" +
+                                           ",pot,pps,ppa,pptx,potx,ppsx,ppam,pptm,potm,ppsm,";
   private NodeFinder nodeFinder;
   private LinkManager linkManager;
-  static {
+
+  private void init(){
     String _msofficeMimeType = System.getProperty(MSOFFICE_MIMETYPE);
     if(StringUtils.isNotEmpty(_msofficeMimeType)){
       msofficeMimeType = _msofficeMimeType;
     }
   }
 
-  OpenInOfficeConnector(){
-    nodeFinder = WCMCoreUtils.getService(NodeFinder.class);
-    linkManager = WCMCoreUtils.getService(LinkManager.class);
+  public OpenInOfficeConnector(NodeFinder nodeFinder, LinkManager linkManager){
+    this.nodeFinder = nodeFinder;
+    this.linkManager = linkManager;
   }
   /**
    * Return a JsonObject's current file to update display titles
@@ -182,11 +185,12 @@ public class OpenInOfficeConnector implements ResourceContainer {
             .header("Content-type", "application/internet-shortcut")
             .build();
   }
-  
-  private Node getNode(String workspace, String filePath) throws Exception {
-    Session session = WCMCoreUtils.getUserSessionProvider().
-        getSession(workspace, WCMCoreUtils.getRepository());
-    return (Node)session.getItem(filePath);
+
+  @Override
+  public void start() {
+    init();
   }
-  
+
+  @Override
+  public void stop() { }
 }
