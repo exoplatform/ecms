@@ -2,10 +2,10 @@ package org.exoplatform.wcm.connector.collaboration;
 
 import org.apache.commons.lang.StringUtils;
 import org.apache.tika.io.IOUtils;
-import org.exoplatform.ecm.utils.permission.PermissionUtil;
 import org.exoplatform.services.cms.documents.DocumentTypeService;
 import org.exoplatform.services.cms.documents.impl.DocumentType;
-import org.exoplatform.services.cms.templates.TemplateService;
+import org.exoplatform.services.cms.link.LinkManager;
+import org.exoplatform.services.cms.link.NodeFinder;
 import org.exoplatform.services.resources.ResourceBundleService;
 import org.exoplatform.services.rest.resource.ResourceContainer;
 import org.exoplatform.services.wcm.core.NodetypeConstant;
@@ -15,12 +15,9 @@ import org.json.JSONObject;
 import javax.annotation.security.RolesAllowed;
 import javax.jcr.Node;
 import javax.jcr.Session;
-import javax.servlet.ServletOutputStream;
 import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
 import javax.ws.rs.*;
 import javax.ws.rs.core.*;
-import java.io.*;
 import java.util.Locale;
 import java.util.ResourceBundle;
 
@@ -48,7 +45,8 @@ public class OpenInOfficeConnector implements ResourceContainer {
   private static final String VERSION_MIXIN ="mix:versionable";
 
   private static String msofficeMimeType = ",doc,docx,xls,xltx,ppt,pptx,";
-
+  private NodeFinder nodeFinder;
+  private LinkManager linkManager;
   static {
     String _msofficeMimeType = System.getProperty(MSOFFICE_MIMETYPE);
     if(StringUtils.isNotEmpty(_msofficeMimeType)){
@@ -56,6 +54,10 @@ public class OpenInOfficeConnector implements ResourceContainer {
     }
   }
 
+  OpenInOfficeConnector(){
+    nodeFinder = WCMCoreUtils.getService(NodeFinder.class);
+    linkManager = WCMCoreUtils.getService(LinkManager.class);
+  }
   /**
    * Return a JsonObject's current file to update display titles
    * @param request
@@ -102,16 +104,15 @@ public class OpenInOfficeConnector implements ResourceContainer {
       }
       if(!StringUtils.isEmpty(documentType.getIconClass())) ico=documentType.getIconClass();
     }
-    
-    Node node = getNode(workspace, filePath);
+    Node node = (Node)nodeFinder.getItem(workspace, filePath);
+    if (linkManager.isLink(node)) node = linkManager.getTarget(node);
 
     JSONObject rs = new JSONObject();
     rs.put("ico", ico);
     rs.put("title", title);
     rs.put("repository", WCMCoreUtils.getRepository().getConfiguration().getName());
     rs.put("workspace", workspace);
-    rs.put("filePath", filePath);
-    //rs.put("isLocked", node.isLocked());
+    rs.put("filePath", node.getPath());
     rs.put("isFile", node.isNodeType(NodetypeConstant.NT_FILE));
     rs.put("isMsoffice", msofficeMimeType.contains(","+extension+","));
 
