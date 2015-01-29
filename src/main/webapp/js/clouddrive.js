@@ -994,7 +994,6 @@
 		this.openFile = function(elem, objectId) {
 			var file = cloudDrive.getContextFile();
 			if (file) {
-				// TODO what if file is updating currently, its location and/or ID can be changed remotely
 				window.open(file.link);
 			} else {
 				utils.log("No context path to open as Cloud File");
@@ -1388,7 +1387,6 @@
 				    "<li style='display: block;'><a class='actionIcon' style='height: 18px;'><i></i> </a></li>");
 				
 				// add sync call to Refresh action
-				// TODO call actualRefreshSession after sync done as a callback
 				$("a.refreshIcon").click(function() {
 					var $refreshChanges = $("span.uiCloudDriveChanges");
 					if ($refreshChanges.size() > 0) {
@@ -1798,35 +1796,6 @@
 		};
 
 		/**
-		 * Open or refresh drive node in WCM explorer. TODO deprecated
-		 */
-		this.openDrive = function(title) {
-			var selected = $("a.nodeName:contains('" + title + "')");
-			if (selected.size() > 0) {
-				// in List view
-				selected.mousedown();
-			} else {
-				// in Icon view
-				selected = $("div.actionIconBox .nodeName:contains('" + title + "')");
-				if (selected.size() > 0) {
-					selected.parent().parent().parent().dblclick(); // TODO
-					// .parent()
-				} else {
-					// in Icon view - tree in side bar
-					// XXX all titles in WCM tree ends with single space
-					selected = $("a[data-original-title='" + title + " ']");
-					if (selected.size() > 0) {
-						selected.click();
-					}
-				}
-			}
-
-			if (selected.size() == 0) {
-				utils.log("WARN: drive node '" + title + "' not found");
-			}
-		};
-
-		/**
 		 * Open pop-up for Cloud Drive authentication.
 		 */
 		this.connectDriveWindow = function(authURL) {
@@ -1889,7 +1858,6 @@
 			
 			// init menus below
 			
-			// TODO PLF4 init on each document reload (incl. ajax calls)
 			// XXX using deprecated DOMNodeInserted and the explorer panes selector
 			// choose better selector to get less events here for DOM, now it's tens of events
 			// reloading during the navigation
@@ -2074,8 +2042,6 @@
 			  sticker : false,
 			  opacity : .75,
 			  shadow : true,
-			  // TODO width : options && options.width ? options.width :
-			  // $.pnotify.defaults.width,
 			  width : options && options.width ? options.width : NOTICE_WIDTH,
 			  nonblock : options && typeof options.nonblock != "undefined" ? options.nonblock : false,
 			  nonblock_opacity : .25,
