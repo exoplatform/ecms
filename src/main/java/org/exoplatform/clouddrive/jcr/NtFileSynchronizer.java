@@ -134,11 +134,10 @@ public class NtFileSynchronizer implements CloudFileSynchronizer {
   public boolean remove(String filePath, String fileId, boolean isFolder, CloudFileAPI api) throws CloudDriveException,
                                                                                            RepositoryException {
     if (isFolder) {
-      api.removeFolder(fileId);
+      return api.removeFolder(fileId);
     } else {
-      api.removeFile(fileId);
+      return api.removeFile(fileId);
     }
-    return true;
   }
 
   /**

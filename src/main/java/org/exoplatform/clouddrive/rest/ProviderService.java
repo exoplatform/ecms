@@ -16,6 +16,13 @@
  */
 package org.exoplatform.clouddrive.rest;
 
+import org.exoplatform.clouddrive.CloudDriveException;
+import org.exoplatform.clouddrive.CloudDriveService;
+import org.exoplatform.clouddrive.CloudProvider;
+import org.exoplatform.services.log.ExoLogger;
+import org.exoplatform.services.log.Log;
+import org.exoplatform.services.rest.resource.ResourceContainer;
+
 import java.util.Set;
 
 import javax.annotation.security.RolesAllowed;
@@ -23,18 +30,9 @@ import javax.ws.rs.GET;
 import javax.ws.rs.Path;
 import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
-import javax.ws.rs.core.Context;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 import javax.ws.rs.core.Response.Status;
-import javax.ws.rs.core.UriInfo;
-
-import org.exoplatform.clouddrive.CloudDriveException;
-import org.exoplatform.clouddrive.CloudDriveService;
-import org.exoplatform.clouddrive.CloudProvider;
-import org.exoplatform.services.log.ExoLogger;
-import org.exoplatform.services.log.Log;
-import org.exoplatform.services.rest.resource.ResourceContainer;
 
 
 /**
@@ -64,28 +62,25 @@ public class ProviderService implements ResourceContainer {
   /**
    * Return available providers.
    * 
-   * @param uriInfo - request info TODO need it?
    * @return set of {@link CloudProvider} currently available for connect
    */
   @GET
   @RolesAllowed("users")
   @Path("/all")
-  public Set<CloudProvider> getAll(@Context UriInfo uriInfo) {
-
+  public Set<CloudProvider> getAll() {
     return cloudDrives.getProviders();
   }
 
   /**
    * Return provider by its id.
    * 
-   * @param uriInfo - request info TODO need it?
    * @param providerId - provider name see more in {@link CloudProvider}
    * @return response with asked {@link CloudProvider} json
    */
   @GET
   @RolesAllowed("users")
   @Path("/{providerid}")
-  public Response getById(@Context UriInfo uriInfo, @PathParam("providerid") String providerId) {
+  public Response getById(@PathParam("providerid") String providerId) {
 
     try {
       return Response.ok().entity(cloudDrives.getProvider(providerId)).build();

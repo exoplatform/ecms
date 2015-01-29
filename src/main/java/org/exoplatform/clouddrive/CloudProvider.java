@@ -72,6 +72,25 @@ public abstract class CloudProvider {
   }
 
   /**
+   * Provider specific message for given JVM exception (Throwable). By default this method uses
+   * {@link Throwable#getMessage()}.
+   * 
+   * @return String with the error message
+   */
+  public String getErrorMessage(Throwable error) {
+    return error.getMessage();
+  }
+
+  /**
+   * Provider specific message for given error string. By default this method returns given error string.
+   * 
+   * @return String with the error message
+   */
+  public String getErrorMessage(String error) {
+    return error;
+  }
+
+  /**
    * {@inheritDoc}
    */
   @Override

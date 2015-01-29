@@ -237,7 +237,7 @@ public class ConnectService implements ResourceContainer {
 
     final Lock       lock = new ReentrantLock();
 
-    Throwable        error;
+    String           error;
 
     ConnectProcess(String workspaceName, CloudDrive drive, ConversationState conversation) throws CloudDriveException,
         RepositoryException {
@@ -274,7 +274,9 @@ public class ConnectService implements ResourceContainer {
       lock.lock();
       // unregister listener
       drive.removeListener(this);
-      this.error = error;
+
+      this.error = drive.getUser().getProvider().getErrorMessage(error);
+
       try {
         rollback();
       } catch (Throwable e) {
@@ -594,16 +596,7 @@ public class ConnectService implements ResourceContainer {
         try {
           if (connect.error != null) {
             // KO:error during the connect
-            // TODO hack for 503 from Google, move this logic to Google connector, as well as access_denied
-            String error = connect.error.getMessage();
-            if (error == null) {
-              // NPE case
-              error = "null.";
-            }
-            if (error.indexOf("backendError") >= 0) {
-              error = "Google backend error. Try again later.";
-            }
-            resp.error(error).status(Status.INTERNAL_SERVER_ERROR);
+            resp.error(connect.error).status(Status.INTERNAL_SERVER_ERROR);
           } else {
             // OK:connected or accepted (in progress)
             // don't send files each time but on done only
@@ -772,16 +765,11 @@ public class ConnectService implements ResourceContainer {
               // we have an error from provider
               LOG.warn(provider.getName() + " error: " + error);
 
-              // TODO hack for access_denied from Google, move this logic to Google connector
-              if (error.indexOf("access_denied") >= 0) {
-                resp.authError("Access denied to Google Drive", connect.host, provider.getName(), iid.toString(), baseHost)
-                    .status(Status.FORBIDDEN);
-              } else {
-                resp.authError(error, connect.host, provider.getName(), iid.toString(), baseHost)
-                    .status(Status.BAD_REQUEST);
-              }
-
-              return resp.build();
+              return resp.authError(provider.getErrorMessage(error),
+                                    connect.host,
+                                    provider.getName(),
+                                    iid.toString(),
+                                    baseHost).status(Status.BAD_REQUEST).build();
             }
           } else {
             LOG.error("Authentication was not initiated for " + providerId + " but request to "
