@@ -37,7 +37,7 @@ public class OpenInOfficeConnector implements ResourceContainer, Startable {
 
   private final String OPEN_DOCUMENT_ON_DESKTOP_ICO              = "uiIcon16x16FileDefault";
   private final String CONNECTOR_BUNDLE_LOCATION                 = "locale.wcm.resources.WCMResourceBundleConnector";
-  private final String OPEN_DOCUMENT_IN_DESKTOP_RESOURCE_KEY     = "OpenInOfficeConnector.label.exo.remote-edit.desktop";
+  private final String OPEN_DOCUMENT_ON_DESKTOP_RESOURCE_KEY = "OpenInOfficeConnector.label.exo.remote-edit.desktop";
   private final String OPEN_DOCUMENT_IN_DESKTOP_APP_RESOURCE_KEY = "OpenInOfficeConnector.label.exo.remote-edit.desktop-app";
   private final String OPEN_DOCUMENT_DEFAULT_TITLE               = "Open on Desktop";
   private static final String MSOFFICE_MIMETYPE                  = "ms-office-mimetype";
@@ -49,6 +49,8 @@ public class OpenInOfficeConnector implements ResourceContainer, Startable {
                                            ",pot,pps,ppa,pptx,potx,ppsx,ppam,pptm,potm,ppsm,";
   private NodeFinder nodeFinder;
   private LinkManager linkManager;
+  private ResourceBundleService resourceBundleService;
+  private DocumentTypeService documentTypeService;
 
   private void init(){
     String _msofficeMimeType = System.getProperty(MSOFFICE_MIMETYPE);
@@ -57,9 +59,14 @@ public class OpenInOfficeConnector implements ResourceContainer, Startable {
     }
   }
 
-  public OpenInOfficeConnector(NodeFinder nodeFinder, LinkManager linkManager){
+  public OpenInOfficeConnector(NodeFinder nodeFinder,
+                               LinkManager linkManager,
+                               ResourceBundleService resourceBundleService,
+                               DocumentTypeService documentTypeService){
     this.nodeFinder = nodeFinder;
     this.linkManager = linkManager;
+    this.resourceBundleService = resourceBundleService;
+    this.documentTypeService = documentTypeService;
   }
   /**
    * Return a JsonObject's current file to update display titles
@@ -87,14 +94,12 @@ public class OpenInOfficeConnector implements ResourceContainer, Startable {
     if(builder!=null) return builder.build();
 
     //query form configuration values params
-    ResourceBundleService resourceBundleService = WCMCoreUtils.getService(ResourceBundleService.class);
-    DocumentTypeService documentTypeService = WCMCoreUtils.getService(DocumentTypeService.class);
 
     CacheControl cc = new CacheControl();
     cc.setMaxAge(CACHED_TIME);
 
     ResourceBundle resourceBundle = resourceBundleService.getResourceBundle(CONNECTOR_BUNDLE_LOCATION, new Locale(language));
-    String title = resourceBundle!=null?resourceBundle.getString(OPEN_DOCUMENT_IN_DESKTOP_RESOURCE_KEY):OPEN_DOCUMENT_DEFAULT_TITLE;
+    String title = resourceBundle!=null?resourceBundle.getString(OPEN_DOCUMENT_ON_DESKTOP_RESOURCE_KEY):OPEN_DOCUMENT_DEFAULT_TITLE;
     String ico = OPEN_DOCUMENT_ON_DESKTOP_ICO;
 
     DocumentType documentType = documentTypeService.getDocumentType(extension);
@@ -124,6 +129,29 @@ public class OpenInOfficeConnector implements ResourceContainer, Startable {
     builder.tag(etag);
     builder.cacheControl(cc);
     return builder.build();
+  }
+
+  /**
+   * Get Title, css class of document by document's name
+   * @param fileName
+   * @return
+   */
+  public String[] getDocumentInfos(String fileName){
+    String title = OPEN_DOCUMENT_ON_DESKTOP_RESOURCE_KEY;
+    String icon = OPEN_DOCUMENT_ON_DESKTOP_ICO;
+
+    String _extension = "";
+    if(fileName.lastIndexOf(".") > 0 ) {
+      _extension = StringUtils.substring(fileName, fileName.lastIndexOf(".") + 1, fileName.length());
+    }
+    if(StringUtils.isBlank(_extension)) return new String[]{title, icon};
+
+    DocumentType documentType = documentTypeService.getDocumentType(_extension);
+    if(documentType !=null){
+      if(!StringUtils.isEmpty(documentType.getResourceBundleKey())) title=documentType.getResourceBundleKey();
+      if(!StringUtils.isEmpty(documentType.getIconClass())) icon=documentType.getIconClass();
+    }
+    return new String[]{title, icon};
   }
 
   /**

@@ -301,6 +301,9 @@
         listViewElement.appendChild(coverElement);
         mobileElement.appendChild(listViewElement);
         document.body.appendChild(mobileElement);
+      }else{
+        var _objId = element.getAttribute("workspacename")+":"+Self.srcPath;
+        eXo.ecm.OpenDocumentInOffice.updateLabel(_objId);
       }
     };
 

@@ -16,7 +16,10 @@
   import org.exoplatform.ecm.webui.component.explorer.UIDrivesArea;
   import org.apache.commons.lang.StringUtils;
   import org.exoplatform.ecm.webui.component.explorer.control.action.UploadActionComponent;
-  
+  import org.exoplatform.ecm.webui.component.explorer.rightclick.manager.OpenDocumentManageComponent;
+  import org.exoplatform.services.wcm.utils.WCMCoreUtils;
+  import org.exoplatform.wcm.connector.collaboration.OpenInOfficeConnector;
+
   def uiPortlet = uicomponent.getAncestorOfType(UIJCRExplorerPortlet.class);
   def uiExplorer = uicomponent.getAncestorOfType(UIJCRExplorer.class);
   def uiDriveArea = uiExplorer.getChild(UIWorkingArea.class).getChild(UIDrivesArea.class);
@@ -25,13 +28,17 @@
   def uiFormId = uicomponent.id;
 	def currentNode = uiExplorer.getCurrentNode();
 	def currentNodePath = currentNode.getSession().getWorkspace().getName()+":"+currentNode.getPath();
+  def openInOfficeConnector = WCMCoreUtils.getService(OpenInOfficeConnector.class);
+  def _documentInfos = openInOfficeConnector.getDocumentInfos(currentNode.getName());
+  def remoteEditClass=_documentInfos[1];
+  def remoteEditTitle=_ctx.appRes(_documentInfos[0]);
 
   def jsManager = rcontext.getJavascriptManager();
   jsManager.require("SHARED/ecm-utils", "ecmutil").require("SHARED/multiUpload", "multiUpload")
 	.require("SHARED/openDocumentInOffice", "openDocumentInOffice")
   .addScripts('multiUpload.displayCorrectUploadButton();')
 	.addScripts("eXo.ecm.OpenDocumentInOffice.updateLabel('"+currentNodePath+"');");
-  
+
   def showUploadInput = false;
   
   def tabs = uicomponent.getTabList() ;
@@ -108,9 +115,14 @@
 								 def actionOnClick = (action instanceof UploadActionComponent) ? "document.getElementById('MultiUploadInputFiles').click();" : action.event(button);
 								 def title = _ctx.appRes(uicomponent.getId() + ".tooltip." + button);
 								 String idUpload = (action instanceof UploadActionComponent) ? "id='UploadButtonDiv'" : "";
+                 def _remoteEditClass="";
+                 if(action instanceof OpenDocumentManageComponent){
+                   _remoteEditClass = "uiIcon16x16FileDefault uiIcon16x16nt_file "+remoteEditClass;
+                   title = remoteEditTitle;
+                 }
 							 %>
 								 <li <%=idUpload%> onclick="<%= actionOnClick %>">
-									 <a class="actionIcon"><i class="uiIconEcms${button} uiIconEcmsLightGray"></i> $title</a>
+									 <a class="actionIcon"><i class="uiIconEcms${button} $_remoteEditClass uiIconEcmsLightGray"></i> $title</a>
 								 </li>
 								 <% if (action instanceof UploadActionComponent) {
 	  						   showUploadInput = true;

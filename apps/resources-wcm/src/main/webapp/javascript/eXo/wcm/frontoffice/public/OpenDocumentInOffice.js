@@ -69,6 +69,7 @@
           if (!data.isFile) return;
           var elClass = "uiIconEcmsOpenDocument";
           var isRightClick="";
+
           if(activityId != null && activityId != "undefined" && activityId != "") elClass +="_"+activityId;
           if(rightClick) isRightClick="#ECMContextMenu";
           var openDocument = gj(isRightClick+" ."+elClass).parent();
@@ -117,10 +118,6 @@
     }
   }
 
-  OpenDocumentInOffice.prototype.openDocument_doClick = function(){
-    gj("#uiActionsBarContainer .uiIconEcmsOpenDocument").parent().click();
-  }
-
   /**
    *To filter OpenXXX button only working with support enviroments
    * -IE 11 or least version,
@@ -144,12 +141,14 @@
       if(checkMSOfficeVersion() && isAtLeastIE11) return true;
 
       // Hide if not enought enviroments support
-      gj(element).parent().attr("style", "display:none;");
+      if(gj(element).parent().hasClass("detailContainer"))
+        gj(element).hide();
+      else
+        gj(element).parent().hide();
       return false;
     }else{
       //other browser, hide this functional
-      gj(element).parent().attr("style", "display:none;");
-      return false;
+        gj(element).parent().hide();
     }
 
     // other browser
