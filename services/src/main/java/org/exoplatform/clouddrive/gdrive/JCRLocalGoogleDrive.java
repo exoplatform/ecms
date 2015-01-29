@@ -403,7 +403,7 @@ public class JCRLocalGoogleDrive extends JCRLocalCloudDrive implements UserToken
               }
             }
 
-            // TODO run full sync and restore the drive from the cloud side
+            // TODO should we run full sync and restore the drive from the cloud side?
             throw new CloudDriveException("Inconsistent changes: cannot find parent Node for '"
                 + gf.getTitle() + "'");
           }

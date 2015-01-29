@@ -22,7 +22,7 @@ import javax.jcr.RepositoryException;
 import org.exoplatform.clouddrive.CloudDriveException;
 import org.exoplatform.clouddrive.CloudProvider;
 import org.exoplatform.services.jcr.RepositoryService;
-
+import org.jboss.util.Null;
 
 /**
  * Created by The eXo Platform SAS.
@@ -31,7 +31,7 @@ import org.exoplatform.services.jcr.RepositoryService;
  * @version $Id: GoogleProvider.java 00000 Oct 13, 2012 pnedonosko $
  */
 public class GoogleProvider extends CloudProvider {
-  
+
   protected final String            authURL;
 
   protected final String            redirectURL;
@@ -81,6 +81,34 @@ public class GoogleProvider extends CloudProvider {
   }
 
   /**
+   * {@inheritDoc}
+   */
+  @Override
+  public String getErrorMessage(Throwable error) {
+    String message = error.getMessage();
+    if (message != null) {
+      if (message.indexOf("backendError") >= 0) {
+        return "Google backend error. Try again later.";
+      } else {
+        return message;
+      }
+    } else {
+      return "null";
+    }
+  }
+
+  /**
+   * {@inheritDoc}
+   */
+  @Override
+  public String getErrorMessage(String error) {
+    if (error.indexOf("access_denied") >= 0) {
+      return "Access denied to Google Drive";
+    }
+    return super.getErrorMessage(error);
+  }
+
+  /**
    * @return the redirectURL
    */
   public String getRedirectURL() {
@@ -91,7 +119,6 @@ public class GoogleProvider extends CloudProvider {
 
   @Override
   public boolean retryOnProviderError() {
-    // TODO native retry support via Google Drive API should be studied deeper as it causes 401 Unauthorized
     return true;
   }
 
