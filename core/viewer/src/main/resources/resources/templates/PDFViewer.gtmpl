@@ -7,6 +7,7 @@
   import org.exoplatform.ecm.webui.utils.Utils;
   import org.exoplatform.services.jcr.RepositoryService;   
   import org.exoplatform.wcm.webui.reader.ContentReader;
+  import org.exoplatform.services.pdfviewer.PDFViewerService;
   
 	
   UIComponent uiParent = uicomponent.getParent();
@@ -151,6 +152,7 @@ if (uiParent != null) {
   def currentNode = uicomponent.getFileLangNode(uiParent.getNode());
   def contentNode = currentNode.getNode("jcr:content") ;
   def mimeType = contentNode.getProperty("jcr:mimeType").getString() ;
+  def fileSize = contentNode.getProperty("jcr:data").getStream().available();
   def currentPage = uicomponent.getPageNumber();
   def maximumPage = uicomponent.getMaximumOfPage();
   def currentRotation = uicomponent.getCurrentRotation();
@@ -160,7 +162,7 @@ if (uiParent != null) {
   rqcontext.getJavascriptManager().require("SHARED/ecm-utils", "ecmutil").
   addScripts('ecmutil.ECMUtils.onKeyPDFViewerPress();') ;	
 	
-  if (maximumPage > 0 && maximumPage < 100) {	
+  if (maximumPage > 0 && maximumPage <= PDFViewerService.MAX_PAGES) {
 %>    
 	<div class="UIPDFViewerContainer">   
  	 <div class="PDFViewerBar clearfix">
@@ -231,13 +233,24 @@ if (uiParent != null) {
 		</div>
 	</div>
   </div>
-<% }else {%>	
+<% }else {
+    def errorMessage = _ctx.appRes("File.view.label.not-viewable");
+    def pageMsg = _ctx.appRes("File.view.label.pdf-max-page");
+    pageMsg = pageMsg.replace("{0}", (String) PDFViewerService.MAX_PAGES);
+    def sizeMsg = _ctx.appRes("File.view.label.pdf-max-size");
+    sizeMsg = sizeMsg.replace("{0}", (String) PDFViewerService.MAX_FILE_SIZE/(1024*1024));
+    if (maximumPage > PDFViewerService.MAX_PAGES) {
+      errorMessage = pageMsg;
+    } else if (fileSize > PDFViewerService.MAX_FILE_SIZE) {
+      errorMessage = sizeMsg;
+    }
+%>
       <div class="uiUnEditable clearfix">
         <div class="iconContainer">
           <i class="<%=Utils.getNodeTypeIcon(org.exoplatform.wcm.webui.Utils.getRealNode(currentNode), "uiIcon64x64")%>"></i>
         </div>
         <div class="detailContainer">
-          <h4><%=_ctx.appRes("File.view.label.not-viewable")%></h4>
+          <h4>$errorMessage</h4>
           <a class="btn btn-primary" href="$downloadLink"><%=_ctx.appRes("File.view.label.download")%></a>
           <span><%=_ctx.appRes("File.view.label.using-webDAV")%></span>
         </div>
