@@ -53,9 +53,14 @@ public class PermlinkActionComponent extends UIAbstractManagerComponent {
   public List<UIExtensionFilter> getFilters() {
     return FILTERS;
   }
-
-  public String getPermlink(Node node) throws Exception {
-    UIJCRExplorer uiExplorer = getAncestorOfType(UIJCRExplorer.class);
+  
+  public String getPermlink(UIJCRExplorer uiExplorer, Node node) throws Exception {
+    if (uiExplorer == null) {
+      uiExplorer = getAncestorOfType(UIJCRExplorer.class);
+    }
+    if (node == null) {
+      node = uiExplorer.getCurrentNode();
+    }
     PortalRequestContext pcontext = Util.getPortalRequestContext();
     String portletId = pcontext.getNodePath();
     String drivename = uiExplorer.getDriveData().getName();
@@ -70,10 +75,17 @@ public class PermlinkActionComponent extends UIAbstractManagerComponent {
     nodeURL.setQueryParameterValue("path", path);
     return nodeURL.toString();
   }
+
+  public String getPermlink(UIJCRExplorer uiExplorer) throws Exception {
+    return getPermlink(uiExplorer, null);
+  }
   
+  public String getPermlink(Node node) throws Exception {
+    return getPermlink(null, node);
+  }
+
   public String getPermlink() throws Exception {
-    UIJCRExplorer uiExplorer = getAncestorOfType(UIJCRExplorer.class);
-    return getPermlink(uiExplorer.getCurrentNode());
+    return getPermlink(null, null);
   }
 
 

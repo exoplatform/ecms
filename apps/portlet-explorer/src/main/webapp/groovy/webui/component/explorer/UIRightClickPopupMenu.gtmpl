@@ -3,9 +3,11 @@
 
   import org.exoplatform.webui.core.UIComponent ;
   import org.exoplatform.ecm.webui.component.explorer.UIWorkingArea;
- 
+  import org.exoplatform.ecm.webui.component.explorer.UIJCRExplorer;
+  
   def rcontext = _ctx.getRequestContext() ;
   def managers = uicomponent.getAncestorOfType(UIWorkingArea.class).getManagers();
+  def uiExplorer = uicomponent.getAncestorOfType(UIJCRExplorer.class);
 
   def refreshAction = URLEncoder.encode(uicomponent.getAncestorOfType(UIWorkingArea.class).event(UIWorkingArea.REFRESH_ACTION), "utf-8");
   
@@ -26,7 +28,7 @@
 								href = "";
 								onClick = "javascript:eXo.ecm.Rename.showRenamePopup();";
 							} else if (UIWorkingArea.PERM_LINK_ACTION.equals(action)) {
-                href = "href=\"" + itemContext.getPermlink() + "\"";
+                href = "href=\"" + itemContext.getPermlink(uiExplorer) + "\"";
                 onClick = "javascript:eXo.ecm.Permlink.addFileName(this);";
                 //action = "ViewDocument";
                 target = "target='_new'";
