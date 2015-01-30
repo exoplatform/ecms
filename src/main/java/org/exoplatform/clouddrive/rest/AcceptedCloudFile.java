@@ -139,4 +139,13 @@ public class AcceptedCloudFile implements CloudFile {
   public String getPath() {
     return path;
   }
+
+  /**
+   * {@inheritDoc}
+   */
+  @Override
+  public long getSize() {
+    return 0; // zero for accepted
+  }
+
 }

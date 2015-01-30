@@ -51,6 +51,8 @@ public class LinkedCloudFile implements CloudFile {
 
   private final String             author;
 
+  private final long               size;
+
   private final transient Calendar createdDate;
 
   private final transient Calendar modifiedDate;
@@ -76,6 +78,7 @@ public class LinkedCloudFile implements CloudFile {
     this.createdDate = file.getCreatedDate();
     this.modifiedDate = file.getModifiedDate();
     this.path = path;
+    this.size = file.getSize();
     this.isSymlink = true;
   }
 
@@ -183,4 +186,13 @@ public class LinkedCloudFile implements CloudFile {
   public String getPath() {
     return path;
   }
+
+  /**
+   * {@inheritDoc}
+   */
+  @Override
+  public long getSize() {
+    return size;
+  }
+
 }

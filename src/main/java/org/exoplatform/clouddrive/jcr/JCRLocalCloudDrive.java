@@ -4146,6 +4146,7 @@ public abstract class JCRLocalCloudDrive extends CloudDrive implements CloudDriv
     String typeMode = isFolder ? null : mimeTypes.getMimeTypeMode(type, title);
     String link = link(fileNode);
     String editLink = editLink(link, fileNode);
+    long size = size(fileNode);
 
     return new JCRLocalCloudFile(fileNode.getPath(),
                                  fileAPI.getId(fileNode),
@@ -4161,6 +4162,7 @@ public abstract class JCRLocalCloudDrive extends CloudDrive implements CloudDriv
                                  fileNode.getProperty("ecd:created").getDate(),
                                  fileNode.getProperty("ecd:modified").getDate(),
                                  isFolder,
+                                 size,
                                  fileNode,
                                  false);
   }
@@ -4191,13 +4193,17 @@ public abstract class JCRLocalCloudDrive extends CloudDrive implements CloudDriv
                           String author,
                           String lastUser,
                           Calendar created,
-                          Calendar modified) throws RepositoryException {
+                          Calendar modified,
+                          long size) throws RepositoryException {
     // ecd:cloudFile
     if (!fileNode.isNodeType(ECD_CLOUDFILE)) {
       fileNode.addMixin(ECD_CLOUDFILE);
     }
 
     initCommon(fileNode, title, id, type, link, author, lastUser, created, modified);
+
+    // File size
+    fileNode.setProperty("ecd:size", size);
 
     // ecd:cloudFileResource
     Node content = fileNode.getNode("jcr:content");
@@ -4246,10 +4252,10 @@ public abstract class JCRLocalCloudDrive extends CloudDrive implements CloudDriv
    * on the local node.
    * 
    * @param cfile {@link CloudFile}
-   * @param localNode {@link Node}
+   * @param node {@link Node}
    * @throws RepositoryException
    */
-  protected void initCommon(Node localNode,
+  protected void initCommon(Node node,
                             String id,
                             String title,
                             String type,
@@ -4258,25 +4264,28 @@ public abstract class JCRLocalCloudDrive extends CloudDrive implements CloudDriv
                             String lastUser,
                             Calendar created,
                             Calendar modified) throws RepositoryException {
-    localNode.setProperty("exo:title", title);
-    localNode.setProperty("ecd:id", id);
-    localNode.setProperty("ecd:driveUUID", rootUUID);
-    localNode.setProperty("ecd:type", type);
-    localNode.setProperty("ecd:url", link);
-    localNode.setProperty("ecd:author", author);
-    localNode.setProperty("ecd:lastUser", lastUser);
-    localNode.setProperty("ecd:created", created);
-    localNode.setProperty("ecd:modified", modified);
-    localNode.setProperty("ecd:synchronized", Calendar.getInstance());
+    node.setProperty("exo:title", title);
+    if (node.hasProperty("exo:name")) {
+      node.setProperty("exo:name", title);
+    }
+    node.setProperty("ecd:id", id);
+    node.setProperty("ecd:driveUUID", rootUUID);
+    node.setProperty("ecd:type", type);
+    node.setProperty("ecd:url", link);
+    node.setProperty("ecd:author", author);
+    node.setProperty("ecd:lastUser", lastUser);
+    node.setProperty("ecd:created", created);
+    node.setProperty("ecd:modified", modified);
+    node.setProperty("ecd:synchronized", Calendar.getInstance());
 
-    if (localNode.isNodeType(EXO_DATETIME)) {
-      localNode.setProperty("exo:dateCreated", created);
-      localNode.setProperty("exo:dateModified", modified);
+    if (node.isNodeType(EXO_DATETIME)) {
+      node.setProperty("exo:dateCreated", created);
+      node.setProperty("exo:dateModified", modified);
     }
 
-    if (localNode.isNodeType(EXO_MODIFY)) {
-      localNode.setProperty("exo:lastModifiedDate", modified);
-      localNode.setProperty("exo:lastModifier", lastUser);
+    if (node.isNodeType(EXO_MODIFY)) {
+      node.setProperty("exo:lastModifiedDate", modified);
+      node.setProperty("exo:lastModifier", lastUser);
     }
   }
 
@@ -4444,6 +4453,9 @@ public abstract class JCRLocalCloudDrive extends CloudDrive implements CloudDriv
       if (!parent.hasNode(newName)) {
         session.move(file.getPath(), parent.getPath() + "/" + newName);
         file.setProperty("exo:title", newTitle);
+        if (file.hasProperty("exo:name")) {
+          file.setProperty("exo:name", newTitle);
+        }
         break;
       }
     } while (true);
@@ -4517,6 +4529,21 @@ public abstract class JCRLocalCloudDrive extends CloudDrive implements CloudDriv
    */
   protected String editLink(String fileLink, Node fileNode) throws RepositoryException {
     return null;
+  }
+
+  /**
+   * Read cloud file size from given node. If size not available then -1 will be returned.
+   * 
+   * @param fileNode {@link Node}
+   * @return {@link Long} file size in bytes or -1 if size not available
+   * @throws RepositoryException
+   */
+  protected long size(Node fileNode) throws RepositoryException {
+    try {
+      return fileNode.getProperty("ecd:size").getLong();
+    } catch (PathNotFoundException e) {
+      return -1;
+    }
   }
 
   protected boolean isUpdating(String key) {

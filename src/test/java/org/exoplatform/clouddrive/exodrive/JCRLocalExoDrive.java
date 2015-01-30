@@ -81,7 +81,8 @@ public class JCRLocalExoDrive extends JCRLocalCloudDrive {
                    f.getAuthor(),
                    f.getAuthor(),
                    f.getCreateDate(),
-                   f.getModifiedDate());
+                   f.getModifiedDate(),
+                   0);
 
           changed.add(new JCRLocalCloudFile(localNode.getPath(),
                                             f.getId(),
@@ -95,6 +96,7 @@ public class JCRLocalExoDrive extends JCRLocalCloudDrive {
                                             f.getAuthor(),
                                             f.getCreateDate(),
                                             f.getModifiedDate(),
+                                            0,
                                             localNode,
                                             false));
           complete++;
@@ -150,7 +152,8 @@ public class JCRLocalExoDrive extends JCRLocalCloudDrive {
                    f.getAuthor(),
                    f.getAuthor(),
                    f.getCreateDate(),
-                   f.getModifiedDate());
+                   f.getModifiedDate(),
+                   0);
 
           changed.add(new JCRLocalCloudFile(localNode.getPath(),
                                             f.getId(),
@@ -164,6 +167,7 @@ public class JCRLocalExoDrive extends JCRLocalCloudDrive {
                                             f.getAuthor(),
                                             f.getCreateDate(),
                                             f.getModifiedDate(),
+                                            0,
                                             localNode,
                                             true));
           complete++;
@@ -227,6 +231,7 @@ public class JCRLocalExoDrive extends JCRLocalCloudDrive {
                                      fs.getAuthor(),
                                      fs.getCreateDate(),
                                      fs.getModifiedDate(),
+                                     0,
                                      fileNode,
                                      true);
       } catch (ExoDriveException e) {

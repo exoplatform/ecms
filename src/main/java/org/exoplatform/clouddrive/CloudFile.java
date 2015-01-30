@@ -45,9 +45,10 @@ public interface CloudFile {
    * @return {@link String}
    */
   String getLink();
-  
+
   /**
-   * Link for editing a file on cloud provider. This link can be used for opening a file in new window or embedding.
+   * Link for editing a file on cloud provider. This link can be used for opening a file in new window or
+   * embedding.
    * 
    * @return {@link String} remote editor link or <code>null</code> if edit not supported
    */
@@ -119,10 +120,18 @@ public interface CloudFile {
   String getPath();
 
   /**
+   * File size in bytes. It is an actual file size from cloud side. If size not available or it is a folder
+   * then size is -1.
+   * 
+   * @return {@link Long} file size in bytes (-1 for folder or when cannot be determined)
+   */
+  long getSize();
+
+  /**
    * Return <code>true</code> if this cloud file represent a folder object.
    * 
    * @return <code>true</code> if it is a folder, <code>false</code> otherwise
    */
   boolean isFolder();
-  
+
 }
