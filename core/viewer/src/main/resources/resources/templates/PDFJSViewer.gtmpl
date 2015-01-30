@@ -501,13 +501,15 @@ if(uicomponent.isNotModernBrowser()) {
   <%
   }
  } else {
-    def errorMessage = "";
-    if (fileSize > PDFViewerService.MAX_FILE_SIZE) {
-      errorMessage = java.text.MessageFormat.format(_ctx.appRes("File.view.label.pdf-max-size"), (PDFViewerService.MAX_FILE_SIZE/(1024*1024)));
-    } else if (maximumPage > PDFViewerService.MAX_PAGES) {
-      errorMessage = java.text.MessageFormat.format(_ctx.appRes("File.view.label.pdf-max-page"), PDFViewerService.MAX_PAGES);
-    } else {
-      errorMessage = _ctx.appRes("File.view.label.not-viewable");
+    def errorMessage = _ctx.appRes("File.view.label.not-viewable");
+    def pageMsg = _ctx.appRes("File.view.label.pdf-max-page");
+    pageMsg = pageMsg.replace("{0}", (String) PDFViewerService.MAX_PAGES);
+    def sizeMsg = _ctx.appRes("File.view.label.pdf-max-size");
+    sizeMsg = sizeMsg.replace("{0}", (String) PDFViewerService.MAX_FILE_SIZE/(1024*1024));
+    if (maximumPage > PDFViewerService.MAX_PAGES) {
+      errorMessage = pageMsg;
+    } else if (fileSize > PDFViewerService.MAX_FILE_SIZE) {
+      errorMessage = sizeMsg;
     }
   %>
     <div class="uiUnEditable clearfix">
