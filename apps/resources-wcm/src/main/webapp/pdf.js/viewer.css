@@ -463,7 +463,7 @@ body {
 }
 
 #toolbarViewerRight .uiIconEcmsExpand {
-    background-image: url("/eXoWCMResources/skin/images/Icons/uiIconsEcmsLightGray.png");
+    background-image: url("images/uiIconsEcmsLightGray.png");
 }
 
 #toolbarViewerLeft input{
