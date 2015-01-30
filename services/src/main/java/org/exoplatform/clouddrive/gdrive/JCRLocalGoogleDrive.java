@@ -59,10 +59,6 @@ import java.util.Set;
 import javax.jcr.Node;
 import javax.jcr.PathNotFoundException;
 import javax.jcr.RepositoryException;
-import javax.jcr.ValueFormatException;
-import javax.jcr.lock.LockException;
-import javax.jcr.nodetype.ConstraintViolationException;
-import javax.jcr.version.VersionException;
 
 /**
  * JCR local storage for Google Drive. Created by The eXo Platform SAS.
@@ -130,6 +126,8 @@ public class JCRLocalGoogleDrive extends JCRLocalCloudDrive implements UserToken
           }
           Calendar modified = api.parseDate(modifiedDate.toStringRfc3339());
 
+          long size = fileSize(gf);
+
           // link and editLink
           String link = gf.getAlternateLink();
 
@@ -152,16 +150,16 @@ public class JCRLocalGoogleDrive extends JCRLocalCloudDrive implements UserToken
             // go recursive
             fetchChilds(gf.getId(), fileNode);
             file = new JCRLocalCloudFile(fileNode.getPath(),
-                                              gf.getId(),
-                                              gf.getTitle(),
-                                              gf.getAlternateLink(),
-                                              gf.getMimeType(),
-                                              gf.getLastModifyingUserName(),
-                                              gf.getOwnerNames().get(0),
-                                              created,
-                                              modified,
-                                              fileNode,
-                                              false);
+                                         gf.getId(),
+                                         gf.getTitle(),
+                                         gf.getAlternateLink(),
+                                         gf.getMimeType(),
+                                         gf.getLastModifyingUserName(),
+                                         gf.getOwnerNames().get(0),
+                                         created,
+                                         modified,
+                                         fileNode,
+                                         false);
           } else {
             fileNode = openFile(gf.getId(), gf.getTitle(), parent);
             initFile(fileNode,
@@ -174,22 +172,24 @@ public class JCRLocalGoogleDrive extends JCRLocalCloudDrive implements UserToken
                      gf.getOwnerNames().get(0),
                      gf.getLastModifyingUserName(),
                      created,
-                     modified);
+                     modified,
+                     size);
             file = new JCRLocalCloudFile(fileNode.getPath(),
-                                              gf.getId(),
-                                              gf.getTitle(),
-                                              gf.getAlternateLink(),
-                                              gf.getAlternateLink(),
-                                              gf.getEmbedLink(),
-                                              gf.getThumbnailLink(),
-                                              gf.getMimeType(),
-                                              null, // typeMode not required for GoogleDrive
-                                              gf.getLastModifyingUserName(),
-                                              gf.getOwnerNames().get(0),
-                                              created,
-                                              modified,
-                                              fileNode,
-                                              false);
+                                         gf.getId(),
+                                         gf.getTitle(),
+                                         gf.getAlternateLink(),
+                                         gf.getAlternateLink(),
+                                         gf.getEmbedLink(),
+                                         gf.getThumbnailLink(),
+                                         gf.getMimeType(),
+                                         null, // typeMode not required for GoogleDrive
+                                         gf.getLastModifyingUserName(),
+                                         gf.getOwnerNames().get(0),
+                                         created,
+                                         modified,
+                                         size,
+                                         fileNode,
+                                         false);
           }
 
           changed.add(file);
@@ -448,6 +448,8 @@ public class JCRLocalGoogleDrive extends JCRLocalCloudDrive implements UserToken
           Calendar created = api.parseDate(gf.getCreatedDate().toStringRfc3339());
           Calendar modified = api.parseDate(gf.getModifiedDate().toStringRfc3339());
 
+          long size = fileSize(gf);
+
           // TODO apply multiple owners in cloud file and show them in WCM
 
           CloudFile file;
@@ -483,7 +485,8 @@ public class JCRLocalGoogleDrive extends JCRLocalCloudDrive implements UserToken
                      gf.getOwnerNames().get(0),
                      gf.getLastModifyingUserName(),
                      created,
-                     modified);
+                     modified,
+                     size);
             file = new JCRLocalCloudFile(fileNode.getPath(),
                                          gf.getId(),
                                          gf.getTitle(),
@@ -497,6 +500,7 @@ public class JCRLocalGoogleDrive extends JCRLocalCloudDrive implements UserToken
                                          gf.getOwnerNames().get(0),
                                          created,
                                          modified,
+                                         size,
                                          fileNode,
                                          true);
           }
@@ -574,6 +578,8 @@ public class JCRLocalGoogleDrive extends JCRLocalCloudDrive implements UserToken
 
       modified = api.parseDate(gf.getModifiedDate().toStringRfc3339()); // use actual from Google
 
+      long size = fileSize(gf);
+
       // link and editLink
       String link = gf.getAlternateLink();
 
@@ -587,7 +593,8 @@ public class JCRLocalGoogleDrive extends JCRLocalCloudDrive implements UserToken
                gf.getOwnerNames().get(0),
                gf.getLastModifyingUserName(),
                created,
-               modified);
+               modified,
+               size);
 
       return new JCRLocalCloudFile(fileNode.getPath(),
                                    gf.getId(),
@@ -602,6 +609,7 @@ public class JCRLocalGoogleDrive extends JCRLocalCloudDrive implements UserToken
                                    gf.getOwnerNames().get(0),
                                    created,
                                    modified,
+                                   size,
                                    fileNode,
                                    true);
     }
@@ -670,19 +678,41 @@ public class JCRLocalGoogleDrive extends JCRLocalCloudDrive implements UserToken
       try {
         api.update(gf);
 
+        Calendar created = api.parseDate(gf.getCreatedDate().toStringRfc3339());
+        modified = api.parseDate(gf.getModifiedDate().toStringRfc3339());
+
+        long size = fileSize(gf);
+
+        // link and editLink
+        String link = gf.getAlternateLink();
+
+        initFile(fileNode,
+                 gf.getId(),
+                 gf.getTitle(),
+                 gf.getMimeType(),
+                 link,
+                 gf.getEmbedLink(),
+                 gf.getThumbnailLink(),
+                 gf.getOwnerNames().get(0),
+                 gf.getLastModifyingUserName(),
+                 created,
+                 modified,
+                 size);
+
         return new JCRLocalCloudFile(fileNode.getPath(),
                                      gf.getId(),
                                      gf.getTitle(),
-                                     gf.getAlternateLink(),
-                                     gf.getAlternateLink(),
+                                     link,
+                                     link,
                                      gf.getEmbedLink(),
                                      gf.getThumbnailLink(),
                                      gf.getMimeType(),
                                      null,
                                      gf.getLastModifyingUserName(),
                                      gf.getOwnerNames().get(0),
-                                     api.parseDate(gf.getCreatedDate().toStringRfc3339()),
+                                     created,
                                      modified,
+                                     size,
                                      fileNode,
                                      true);
       } catch (CloudDriveAccessException e) {
@@ -708,6 +738,21 @@ public class JCRLocalGoogleDrive extends JCRLocalCloudDrive implements UserToken
       try {
         api.update(gf);
 
+        Calendar created = api.parseDate(gf.getCreatedDate().toStringRfc3339());
+        modified = api.parseDate(gf.getModifiedDate().toStringRfc3339());
+
+        String link = gf.getAlternateLink();
+
+        initFolder(folderNode,
+                   gf.getId(),
+                   gf.getTitle(),
+                   gf.getMimeType(),
+                   link,
+                   gf.getOwnerNames().get(0),
+                   gf.getLastModifyingUserName(),
+                   created,
+                   modified);
+
         return new JCRLocalCloudFile(folderNode.getPath(),
                                      gf.getId(),
                                      gf.getTitle(),
@@ -715,8 +760,8 @@ public class JCRLocalGoogleDrive extends JCRLocalCloudDrive implements UserToken
                                      gf.getMimeType(),
                                      gf.getLastModifyingUserName(),
                                      gf.getOwnerNames().get(0),
-                                     api.parseDate(gf.getCreatedDate().toStringRfc3339()),
-                                     api.parseDate(gf.getModifiedDate().toStringRfc3339()),
+                                     created,
+                                     modified,
                                      folderNode,
                                      true);
       } catch (CloudDriveAccessException e) {
@@ -741,19 +786,41 @@ public class JCRLocalGoogleDrive extends JCRLocalCloudDrive implements UserToken
       try {
         api.update(gf, fileContent);
 
+        Calendar created = api.parseDate(gf.getCreatedDate().toStringRfc3339());
+        modified = api.parseDate(gf.getModifiedDate().toStringRfc3339());
+
+        long size = fileSize(gf);
+
+        // link and editLink
+        String link = gf.getAlternateLink();
+
+        initFile(fileNode,
+                 gf.getId(),
+                 gf.getTitle(),
+                 gf.getMimeType(),
+                 link,
+                 gf.getEmbedLink(),
+                 gf.getThumbnailLink(),
+                 gf.getOwnerNames().get(0),
+                 gf.getLastModifyingUserName(),
+                 created,
+                 modified,
+                 size);
+
         return new JCRLocalCloudFile(fileNode.getPath(),
                                      gf.getId(),
                                      gf.getTitle(),
-                                     gf.getAlternateLink(),
-                                     gf.getAlternateLink(),
+                                     link,
+                                     link,
                                      gf.getEmbedLink(),
                                      gf.getThumbnailLink(),
                                      gf.getMimeType(),
                                      null,
                                      gf.getLastModifyingUserName(),
                                      gf.getOwnerNames().get(0),
-                                     api.parseDate(gf.getCreatedDate().toStringRfc3339()),
+                                     created,
                                      modified,
+                                     size,
                                      fileNode,
                                      true);
       } catch (CloudDriveAccessException e) {
@@ -784,6 +851,8 @@ public class JCRLocalGoogleDrive extends JCRLocalCloudDrive implements UserToken
       Calendar created = api.parseDate(gf.getCreatedDate().toStringRfc3339());
       Calendar modified = api.parseDate(gf.getModifiedDate().toStringRfc3339());
 
+      long size = fileSize(gf);
+
       // link and editLink
       String link = gf.getAlternateLink();
 
@@ -797,7 +866,8 @@ public class JCRLocalGoogleDrive extends JCRLocalCloudDrive implements UserToken
                gf.getOwnerNames().get(0),
                gf.getLastModifyingUserName(),
                created,
-               modified);
+               modified,
+               size);
 
       return new JCRLocalCloudFile(destFileNode.getPath(),
                                    gf.getId(),
@@ -812,6 +882,7 @@ public class JCRLocalGoogleDrive extends JCRLocalCloudDrive implements UserToken
                                    gf.getOwnerNames().get(0),
                                    created,
                                    modified,
+                                   size,
                                    destFileNode,
                                    true);
     }
@@ -925,6 +996,11 @@ public class JCRLocalGoogleDrive extends JCRLocalCloudDrive implements UserToken
       try {
         File gf = api.untrash(getId(fileNode));
         if (!gf.getLabels().getTrashed()) {
+          Calendar created = api.parseDate(gf.getCreatedDate().toStringRfc3339());
+          Calendar modified = api.parseDate(gf.getModifiedDate().toStringRfc3339());
+
+          long size = fileSize(gf);
+
           // link and editLink
           String link = gf.getAlternateLink();
 
@@ -937,8 +1013,9 @@ public class JCRLocalGoogleDrive extends JCRLocalCloudDrive implements UserToken
                    gf.getThumbnailLink(),
                    gf.getOwnerNames().get(0),
                    gf.getLastModifyingUserName(),
-                   api.parseDate(gf.getCreatedDate().toStringRfc3339()),
-                   api.parseDate(gf.getModifiedDate().toStringRfc3339()));
+                   created,
+                   modified,
+                   size);
 
           return new JCRLocalCloudFile(fileNode.getPath(),
                                        gf.getId(),
@@ -951,8 +1028,9 @@ public class JCRLocalGoogleDrive extends JCRLocalCloudDrive implements UserToken
                                        null,
                                        gf.getLastModifyingUserName(),
                                        gf.getOwnerNames().get(0),
-                                       api.parseDate(gf.getCreatedDate().toStringRfc3339()),
-                                       api.parseDate(gf.getModifiedDate().toStringRfc3339()),
+                                       created,
+                                       modified,
+                                       size,
                                        fileNode,
                                        true);
         } // otherwise file wasn't untrashed
@@ -971,6 +1049,9 @@ public class JCRLocalGoogleDrive extends JCRLocalCloudDrive implements UserToken
       try {
         File gf = api.untrash(getId(folderNode));
         if (!gf.getLabels().getTrashed()) {
+          Calendar created = api.parseDate(gf.getCreatedDate().toStringRfc3339());
+          Calendar modified = api.parseDate(gf.getModifiedDate().toStringRfc3339());
+
           String link = gf.getAlternateLink();
 
           initFolder(folderNode,
@@ -980,8 +1061,8 @@ public class JCRLocalGoogleDrive extends JCRLocalCloudDrive implements UserToken
                      link,
                      gf.getOwnerNames().get(0),
                      gf.getLastModifyingUserName(),
-                     api.parseDate(gf.getCreatedDate().toStringRfc3339()),
-                     api.parseDate(gf.getModifiedDate().toStringRfc3339()));
+                     created,
+                     modified);
 
           return new JCRLocalCloudFile(folderNode.getPath(),
                                        gf.getId(),
@@ -990,8 +1071,8 @@ public class JCRLocalGoogleDrive extends JCRLocalCloudDrive implements UserToken
                                        gf.getMimeType(),
                                        gf.getLastModifyingUserName(),
                                        gf.getOwnerNames().get(0),
-                                       api.parseDate(gf.getCreatedDate().toStringRfc3339()),
-                                       api.parseDate(gf.getModifiedDate().toStringRfc3339()),
+                                       created,
+                                       modified,
                                        folderNode,
                                        true);
         } // otherwise folder wasn't untrashed
@@ -1302,5 +1383,23 @@ public class JCRLocalGoogleDrive extends JCRLocalCloudDrive implements UserToken
   protected String editLink(String fileLink, Node fileNode) throws RepositoryException {
     // file link and edit link are the same for Google Drive as for 28.01.2015
     return fileLink;
+  }
+
+  /**
+   * Google Drive manages consumed size differently for uploaded (stored in content) and native documents.
+   * File stored in content has a size, but native document has usage of quota only.
+   * 
+   * @param gf {@link File}
+   * @return file size or consumed quota if the size not available
+   */
+  protected long fileSize(File gf) {
+    Long size = gf.getFileSize();
+    if (size == null) {
+      size = gf.getQuotaBytesUsed();
+      if (size == null) {
+        size = -1l;
+      }
+    }
+    return size;
   }
 }
