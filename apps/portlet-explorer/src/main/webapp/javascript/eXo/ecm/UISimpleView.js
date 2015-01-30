@@ -318,6 +318,9 @@
         }
         mobileElement.appendChild(coverElement);
         document.body.appendChild(mobileElement);
+      }else{
+        var _objId = element.attributes[6].value+":"+Self.srcPath;
+        eXo.ecm.OpenDocumentInOffice.updateLabel(_objId);
       }
     };
 
