@@ -508,10 +508,12 @@
 			return false;
 		};
 		
-		var readContextFile = function() {
+		var readFile = function(path) {
 			if (contextNode) {
 				var workspace = contextNode.workspace;
-				var path = contextNode.path;
+				if (!path) {
+					path = contextNode.path;
+				}
 				var process = getFile(workspace, path);
 				process.done(function(file, status) {
 			  	// 200 - file exists,
@@ -536,6 +538,10 @@
 				  }
 			  });
 			}
+		};
+		
+		var readContextFile = function() {
+			readFile(null); // path will be read from context node 
 		};
 		
 		var readContextDrive = function() {
@@ -963,6 +969,19 @@
 			return null;
 		};
 		
+		this.getFile = function(path) {
+			if (contextDrive) {
+				var file = contextDrive.files[path];
+				if (!file || isUpdating(path) || contextNode.local) {
+					// file not yet cached, file is syncing or local - read file from the server
+					readFile(path);
+					file = contextDrive.files[path];
+				}
+				return file;
+			}
+			return null;
+		};
+		
 		this.getCurrentNode = function() {
 			return currentNode;
 		};
@@ -1254,6 +1273,39 @@
 		};
 
 		/**
+		 * Method adapted from org.exoplatform.services.cms.impl.Utils.refine().
+		 */
+		var refineSize = function(size) {
+	    if (!size || size == 0) {
+	      return "";
+	    }
+	    var strSize = size.toFixed(2);
+	    return "," + Math.round(parseInt(strSize) / 100.0);
+		};
+		
+		/**
+		 * Method adapted from org.exoplatform.services.cms.impl.Utils.fileSize().
+		 */
+		var sizeString = function(size) {
+			var byteSize = size % 1024;
+			var kbSize = (size % 1048576) / 1024;
+			var mbSize = (size % 1073741824) / 1048576;
+			var gbSize = size / 1073741824;
+			
+			if (gbSize >= 1) {
+			  return gbSize.toFixed(2) + " GB";
+			} else if (mbSize >= 1) {
+			  return mbSize.toFixed(2) + " MB";
+			} else if (kbSize > 1) {
+			  return kbSize.toFixed(2) + " KB";
+			} if (byteSize > 0) {
+				return byteSize + " B";
+			} else {
+			  return ""; // return empty not 1 KB as ECMS does
+			}
+		};
+
+		/**
 		 * Init file list according the actions set for each file item.
 		 */
 		var initFileList = function() {
@@ -1278,6 +1330,21 @@
 					}
 				});
 			}
+			// List/Admin view - fix file size
+			if ($listView.size() > 0) {
+				$listView.each(function() {
+					var objectId = decodeString($(this).attr("objectid"));
+					// find all info lines with 1K size and replace the size with real value
+					$(this).find("p.fileInfoBottom:contains('- 1 KB')").each(function() {
+						var file = cloudDrive.getFile(objectId);
+						if (file) {
+							var orig = $(this).text();
+							var str = sizeString(file.size);
+							$(this).text(orig.replace("- 1 KB", str.length > 0 ? "- " + str : str));
+						}
+					});
+				});
+			}
 			
 			// Icon view
 			var $iconView = $("div.actionIconBox");
@@ -1295,6 +1362,23 @@
 						syncingPaths.push(objectId);
 						$(this).addClass("notCloudFile cloudFileDisabled");
 						$(this).find(".nodeLabel").before("<div class='syncingIconView'></div>");
+					}
+				});
+			}
+			
+			// Icon view - fix file size (nasty way)
+			if ($iconView.size() > 0) {
+				$("#UIPopupContainer").on("DOMSubtreeModified propertychange", function() {
+					var $info = $("#UIViewInfoManager");
+					if ($info.size() > 0 && !$info.data("cd_data_sizefixed")) { // avoid loops caused by text modification below
+						$info.find("td").filter("td:contains(' Byte(s)'), td:contains(' KB'), td:contains(' MB'), td:contains(' GB')").each(function() {
+							var file = cloudDrive.getContextFile();
+							if (file) {
+								var str = sizeString(file.size);
+								$info.data("cd_data_sizefixed", true);
+								$(this).text(str);
+							}
+						});
 					}
 				});
 			}
