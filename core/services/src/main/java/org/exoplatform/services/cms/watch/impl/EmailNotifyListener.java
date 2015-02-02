@@ -130,6 +130,12 @@ public class EmailNotifyListener implements EventListener {
     binding.put("doc_name", node.getName());
     binding.put("doc_url", getViewableLink());
     message.setBody(engine.createTemplate(messageConfig.getContent()).make(binding).toString());
+    String messageBody = message.getBody();
+    String firstPattern = "<!\\[CDATA\\[";
+    String secondPattern = "\\]]>";
+    String newMessageBody = messageBody.replaceAll(firstPattern, "");
+    newMessageBody = newMessageBody.replaceAll(secondPattern, "");
+    message.setBody(newMessageBody);
     message.setMimeType(messageConfig.getMimeType());
     return message;
   }
