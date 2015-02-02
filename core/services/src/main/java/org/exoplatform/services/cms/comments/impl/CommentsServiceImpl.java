@@ -129,7 +129,7 @@ public class CommentsServiceImpl implements CommentsService {
 
       OrganizationService organizationService = WCMCoreUtils.getService(OrganizationService.class);
       User user;
-      if (commentor.equalsIgnoreCase(ConversationState.getCurrent().getIdentity().getUserId())) {
+      if (commentor.equals(ConversationState.getCurrent().getIdentity().getUserId())) {
         user = (User)ConversationState.getCurrent().getAttribute("UserProfile");
       } else {
         user = organizationService.getUserHandler().findUserByName(commentor);

@@ -581,13 +581,13 @@ public class QueryServiceImpl implements QueryService, Startable{
       MembershipHandler membershipHandler = organizationService_.getMembershipHandler();
       if ("*".equals(membershipType)) {
     	// Determine if there exists at least one membership
-        if (userId.equalsIgnoreCase(ConversationState.getCurrent().getIdentity().getUserId())) {
+        if (userId.equals(ConversationState.getCurrent().getIdentity().getUserId())) {
           return identity.isMemberOf(groupName);
         } else {
           return !membershipHandler.findMembershipsByUserAndGroup( userId,groupName).isEmpty();
         }
       }
-      if (userId.equalsIgnoreCase(ConversationState.getCurrent().getIdentity().getUserId())) {
+      if (userId.equals(ConversationState.getCurrent().getIdentity().getUserId())) {
     	  return identity.isMemberOf(groupName, membershipType);
       } else {
         // Determine if there exists the membership of specified type

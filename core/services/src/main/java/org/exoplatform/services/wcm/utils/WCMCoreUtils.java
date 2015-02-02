@@ -190,7 +190,7 @@ public class WCMCoreUtils {
       startRequest(organizationService);
       Identity identity = ConversationState.getCurrent().getIdentity();
       Collection<?> memberships = null;
-      if (userId.equalsIgnoreCase(identity.getUserId())){
+      if (userId.equals(identity.getUserId())){
         Collection<MembershipEntry> membershipsEntries = identity.getMemberships();
         HashSet<MembershipImpl> membershipsHash = new HashSet<MembershipImpl>();
         for (MembershipEntry membershipEntry : membershipsEntries) {

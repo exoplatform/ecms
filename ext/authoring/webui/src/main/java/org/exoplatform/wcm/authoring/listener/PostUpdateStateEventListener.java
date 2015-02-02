@@ -139,7 +139,7 @@ public class PostUpdateStateEventListener extends Listener<CmsService, Node> {
       User currentUser = null;
       ConversationState conversationState = ConversationState.getCurrent();
       try {
-        if (userId.equalsIgnoreCase(conversationState.getIdentity().getUserId())) {
+        if (userId.equals(conversationState.getIdentity().getUserId())) {
           currentUser = (User)conversationState.getAttribute("UserProfile");
         } else {
           currentUser = userh.findUserByName(userId);
