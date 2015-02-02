@@ -19,9 +19,12 @@ package org.exoplatform.ecm.webui.component.admin.views;
 import java.util.List;
 
 import org.apache.commons.lang.StringUtils;
+import org.exoplatform.ecm.webui.core.UIECMExtension;
 import org.exoplatform.ecm.webui.form.validator.ECMNameValidator;
 import org.exoplatform.services.cms.views.ManageViewService;
 import org.exoplatform.services.cms.views.ViewConfig.Tab;
+import org.exoplatform.webui.ext.UIExtension;
+import org.exoplatform.webui.ext.UIExtensionManager;
 import org.exoplatform.webui.form.validator.MandatoryValidator;
 import org.exoplatform.web.application.ApplicationMessage;
 import org.exoplatform.webui.application.WebuiRequestContext;
@@ -56,12 +59,14 @@ public class UITabForm extends UIForm {
 
   final static public String FIELD_NAME = "tabName" ;
   private List<?> buttons_ ;
-  
+  private UIExtensionManager uiExtensionManager = null;
+
   public UITabForm() throws Exception {
     setComponentConfig(getClass(), null) ;
     addUIFormInput(new UIFormStringInput(FIELD_NAME, FIELD_NAME, null).addValidator(MandatoryValidator.class)
                    .addValidator(ECMNameValidator.class)) ;
     ManageViewService vservice_ = getApplicationComponent(ManageViewService.class) ;
+    uiExtensionManager = getApplicationComponent(UIExtensionManager.class);
     buttons_ = vservice_.getButtons();
     for(Object bt : buttons_) {
       addUIFormInput(new UICheckBoxInput(getButtonName(bt), "", null)) ;
@@ -93,6 +98,14 @@ public class UITabForm extends UIForm {
     for(String bt : buttonArray){
       UICheckBoxInput cbInput = getUICheckBoxInput(bt.trim()) ;
       if(cbInput != null) cbInput.setChecked(true) ;
+      cbInput.setRendered(true);
+      UIExtension uiExtension = uiExtensionManager.getUIExtension(ManageViewService.EXTENSION_TYPE, StringUtils.capitalize(bt));
+      if(uiExtension instanceof UIECMExtension){
+        String allowView = ((UIECMExtension) uiExtension).getView();
+        if(!allowView.contains(tab.getTabName())){
+          cbInput.setRendered(false);
+        }
+      }
     }
   }
   

@@ -22,6 +22,7 @@ import org.exoplatform.ecm.webui.component.explorer.*;
 import org.exoplatform.ecm.webui.component.explorer.popup.actions.UIDocumentForm;
 import org.exoplatform.ecm.webui.component.explorer.popup.actions.UIDocumentFormController;
 import org.exoplatform.ecm.webui.component.explorer.search.*;
+import org.exoplatform.ecm.webui.core.UIECMExtension;
 import org.exoplatform.portal.webui.util.Util;
 import org.exoplatform.services.cms.BasePath;
 import org.exoplatform.services.cms.drives.DriveData;
@@ -59,8 +60,6 @@ import javax.jcr.RepositoryException;
 import javax.jcr.query.Query;
 import javax.portlet.PortletPreferences;
 
-import java.io.UnsupportedEncodingException;
-import java.net.URLDecoder;
 import java.util.*;
 
 /**
@@ -222,6 +221,10 @@ public class UIActionBar extends UIForm {
       Node currentNode = uiExplorer.getCurrentNode();
       context.put(UIJCRExplorer.class.getName(), uiExplorer);
       context.put(Node.class.getName(), currentNode);
+      UIExtension extension = manager.getUIExtension(ManageViewService.EXTENSION_TYPE, action);
+      if(extension!=null && extension instanceof UIECMExtension){
+        context.put("views", ((UIECMExtension) extension).getView());
+      }
       return manager.addUIExtension(ManageViewService.EXTENSION_TYPE, action, context, this);
     } catch (Exception e) {
       if (LOG.isErrorEnabled()) {
