@@ -29,6 +29,8 @@ import org.exoplatform.services.cms.documents.FavoriteService;
 import org.exoplatform.services.jcr.core.ManageableRepository;
 import org.exoplatform.services.rest.impl.ContainerResponse;
 import org.exoplatform.services.rest.wadl.research.HTTPMethods;
+import org.exoplatform.services.security.ConversationState;
+import org.exoplatform.services.security.Identity;
 import org.exoplatform.services.wcm.utils.WCMCoreUtils;
 import org.exoplatform.wcm.connector.collaboration.FavoriteRESTService.ListResultNode;
 
@@ -61,6 +63,8 @@ public class TestFavoriteRESTService extends BaseConnectorTestCase {
     /* Prepare the favourite nodes */
     manageableRepository = repositoryService.getCurrentRepository();
     Session session = WCMCoreUtils.getSystemSessionProvider().getSession(COLLABORATION_WS, manageableRepository);
+    ConversationState c = new ConversationState(new Identity(session.getUserID()));
+    ConversationState.setCurrent(c);
     Node rootNode = session.getRootNode();
     Node testAddFavouriteNode1 = rootNode.addNode("testAddFavorite1");
     Node testAddFavouriteNode2 = rootNode.addNode("testAddFavorite2");

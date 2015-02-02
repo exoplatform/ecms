@@ -35,14 +35,18 @@ import org.exoplatform.services.log.ExoLogger;
 import org.exoplatform.services.log.Log;
 import org.exoplatform.services.organization.MembershipHandler;
 import org.exoplatform.services.organization.OrganizationService;
+import org.exoplatform.services.security.ConversationState;
 import org.exoplatform.services.security.IdentityConstants;
+import org.exoplatform.services.security.Identity;
 import org.exoplatform.services.wcm.utils.WCMCoreUtils;
+import org.exoplatform.web.application.RequestContext;
 import org.picocontainer.Startable;
 
 import javax.jcr.*;
 import javax.jcr.query.Query;
 import javax.jcr.query.QueryManager;
 import javax.jcr.query.QueryResult;
+
 import java.util.*;
 
 public class QueryServiceImpl implements QueryService, Startable{
@@ -567,18 +571,31 @@ public class QueryServiceImpl implements QueryService, Startable{
    * @return
    */
   private boolean hasMembership(String userId, String roleExpression) {
+    if (userId == null || userId.length() == 0) {
+      return false;
+    }
     if(roleExpression.equals("*") || roleExpression.equals(IdentityConstants.ANY))
       return true;
+    ConversationState conversationState = ConversationState.getCurrent();
+    Identity identity = conversationState.getIdentity();
     String membershipType = roleExpression.substring(0, roleExpression.indexOf(":"));
     String groupName = roleExpression.substring(roleExpression.indexOf(":") + 1);
     try {
       MembershipHandler membershipHandler = organizationService_.getMembershipHandler();
       if ("*".equals(membershipType)) {
-        // Determine if there exists at least one membership
-        return !membershipHandler.findMembershipsByUserAndGroup( userId,groupName).isEmpty();
+    	// Determine if there exists at least one membership
+        if (userId.equals(ConversationState.getCurrent().getIdentity().getUserId())) {
+          return identity.isMemberOf(groupName);
+        } else {
+          return !membershipHandler.findMembershipsByUserAndGroup( userId,groupName).isEmpty();
+        }
       }
-      // Determine if there exists the membership of specified type
-      return membershipHandler.findMembershipByUserGroupAndType(userId,groupName,membershipType) != null;
+      if (userId.equals(ConversationState.getCurrent().getIdentity().getUserId())) {
+    	  return identity.isMemberOf(groupName, membershipType);
+      } else {
+        // Determine if there exists the membership of specified type
+        return membershipHandler.findMembershipByUserGroupAndType(userId,groupName,membershipType) != null;
+      }
     }
     catch(Exception e) {
       return false;

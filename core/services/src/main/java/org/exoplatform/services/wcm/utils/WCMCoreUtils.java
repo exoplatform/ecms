@@ -24,8 +24,10 @@ import java.util.Collection;
 import java.util.Collections;
 import java.util.Comparator;
 import java.util.Date;
+import java.util.HashSet;
 import java.util.Hashtable;
 import java.util.Iterator;
+import java.util.LinkedList;
 import java.util.List;
 import java.util.Properties;
 
@@ -75,7 +77,11 @@ import org.exoplatform.services.log.ExoLogger;
 import org.exoplatform.services.log.Log;
 import org.exoplatform.services.organization.Membership;
 import org.exoplatform.services.organization.OrganizationService;
+import org.exoplatform.services.organization.User;
+import org.exoplatform.services.organization.idm.MembershipImpl;
 import org.exoplatform.services.security.ConversationState;
+import org.exoplatform.services.security.Identity;
+import org.exoplatform.services.security.MembershipEntry;
 import org.exoplatform.services.wcm.core.NodeLocation;
 import org.exoplatform.services.wcm.core.NodetypeConstant;
 import org.exoplatform.services.wcm.portal.LivePortalManagerService;
@@ -180,10 +186,28 @@ public class WCMCoreUtils {
    * @return true is user has permissions, otherwise return false
    */
   public static boolean hasPermission(String userId, List<String> permissions, boolean isNeedFullAccess) {
+    if (userId == null || userId.length() == 0) {
+      return false;
+    }
     try {
       OrganizationService organizationService = WCMCoreUtils.getService(OrganizationService.class);
       startRequest(organizationService);
-      Collection<?> memberships = organizationService.getMembershipHandler().findMembershipsByUser(userId);
+      Identity identity = ConversationState.getCurrent().getIdentity();
+      Collection<?> memberships = null;
+      if (userId.equals(identity.getUserId())){
+        Collection<MembershipEntry> membershipsEntries = identity.getMemberships();
+        HashSet<MembershipImpl> membershipsHash = new HashSet<MembershipImpl>();
+        for (MembershipEntry membershipEntry : membershipsEntries) {
+          MembershipImpl m = new MembershipImpl();
+          m.setGroupId(membershipEntry.getGroup());
+          m.setMembershipType(membershipEntry.getMembershipType());
+          m.setUserName(userId);
+          membershipsHash.add(m);
+        }
+        memberships =  new LinkedList(membershipsHash);
+      } else {
+        memberships = organizationService.getMembershipHandler().findMembershipsByUser(userId);
+      }
       String userMembershipTmp;
       Membership userMembership;
       int count = 0;
@@ -692,5 +716,30 @@ public class WCMCoreUtils {
       settingService.set(Context.GLOBAL, Scope.GLOBAL, BAR_NAVIGATION_STYLE_KEY, SettingValue.create(barNavigationStyle));
     }
     return barNavigationStyle;
+  }
+
+  /* Return object of user
+   * @param username User to get
+   * @return User object
+   */
+  public static User getUserObject(String username) {
+    User userObject = null;
+    ConversationState state = ConversationState.getCurrent();
+    OrganizationService organizationService = WCMCoreUtils.getService(OrganizationService.class);
+    if (state != null && username != null && username.equalsIgnoreCase(state.getIdentity().getUserId())) {
+      userObject = (User)state.getAttribute("UserProfile");
+    } else if(organizationService != null) {
+      try {
+        userObject = organizationService.getUserHandler().findUserByName(username);
+      } catch(Exception e) {
+        if (LOG.isDebugEnabled()) {
+          LOG.debug("Get user object from Organization Service for " + username, e);
+        } else if (LOG.isWarnEnabled()) {
+          LOG.warn("Get user object from Organization Service for " + username);
+        }
+        return null;
+      }
+    }
+    return userObject;
   }
 }

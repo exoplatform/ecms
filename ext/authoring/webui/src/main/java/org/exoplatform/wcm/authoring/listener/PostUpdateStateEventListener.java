@@ -136,13 +136,7 @@ public class PostUpdateStateEventListener extends Listener<CmsService, Node> {
 
       ListAccess<User> userList = userh.findUsersByGroupId(group);
       User currentUser = null;
-      try {
-        currentUser = userh.findUserByName(userId);
-      } catch (Exception e) {
-        if (LOG.isWarnEnabled()) {
-          LOG.warn(e.getMessage());
-        }
-      }
+      currentUser = WCMCoreUtils.getUserObject(userId);
       String username = userId;
       if (currentUser != null)
         username = currentUser.getFirstName() + " " + currentUser.getLastName();

@@ -28,12 +28,14 @@ import javax.jcr.PathNotFoundException;
 import javax.jcr.RepositoryException;
 
 import org.exoplatform.services.cms.documents.FavoriteService;
+import org.exoplatform.services.cms.impl.Utils;
 import org.exoplatform.services.cms.link.LinkManager;
 import org.exoplatform.services.jcr.access.PermissionType;
 import org.exoplatform.services.jcr.core.ExtendedNode;
 import org.exoplatform.services.jcr.ext.app.SessionProviderService;
 import org.exoplatform.services.jcr.ext.hierarchy.NodeHierarchyCreator;
 import org.exoplatform.services.organization.OrganizationService;
+import org.exoplatform.services.organization.User;
 import org.exoplatform.services.wcm.core.NodetypeConstant;
 import org.exoplatform.services.wcm.utils.WCMCoreUtils;
 
@@ -55,14 +57,11 @@ public class FavoriteServiceImpl implements FavoriteService {
   private LinkManager linkManager;
   private SessionProviderService sessionProviderService;
 
-  private OrganizationService    organizationService;
-
   public FavoriteServiceImpl(NodeHierarchyCreator nodeHierarchyCreator, LinkManager linkManager,
       SessionProviderService sessionProviderService, OrganizationService organizationService) {
     this.nodeHierarchyCreator = nodeHierarchyCreator;
     this.linkManager = linkManager;
     this.sessionProviderService = sessionProviderService;
-    this.organizationService = organizationService;
   }
 
   /**
@@ -177,7 +176,12 @@ public class FavoriteServiceImpl implements FavoriteService {
   }
 
   private Node getUserFavoriteFolder(String userName) throws Exception {
-    if (organizationService.getUserHandler().findUserByName(userName) == null) {
+    if (userName == null) {
+      return null;
+    }
+    User user = null;
+    user = WCMCoreUtils.getUserObject(userName);
+    if (user == null) {
       return null;
     }
     Node userNode =
