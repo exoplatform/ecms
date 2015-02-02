@@ -142,6 +142,7 @@ body {
 
 .outerCenter #scaleSelectContainer select {
 	width: 130px;
+  margin: 0px;
 }
 
 #outerContainer {
