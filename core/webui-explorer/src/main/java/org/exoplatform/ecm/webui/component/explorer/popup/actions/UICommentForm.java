@@ -31,6 +31,7 @@ import org.exoplatform.services.organization.User;
 import org.exoplatform.services.organization.UserHandler;
 import org.exoplatform.services.organization.UserProfile;
 import org.exoplatform.services.organization.UserProfileHandler;
+import org.exoplatform.services.security.ConversationState;
 import org.exoplatform.services.wcm.core.NodeLocation;
 import org.exoplatform.services.wcm.utils.WCMCoreUtils;
 import org.exoplatform.webui.form.UIFormRichtextInput;
@@ -193,10 +194,9 @@ public class UICommentForm extends UIForm implements UIPopupComponent {
           OrganizationService organizationService = WCMCoreUtils.getService(OrganizationService.class);
             UserProfileHandler profileHandler = organizationService.getUserProfileHandler();
             UserHandler userHandler = organizationService.getUserHandler();
-            User user = userHandler.findUserByName(userName);
             UserProfile userProfile = profileHandler.findUserProfileByName(userName);
             website = userProfile.getUserInfoMap().get("user.business-info.online.uri");
-            email = user.getEmail();
+            email = ((User)ConversationState.getCurrent().getAttribute("UserProfile")).getEmail();
         }
 
         try {

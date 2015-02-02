@@ -40,6 +40,7 @@ import org.exoplatform.services.log.ExoLogger;
 import org.exoplatform.services.log.Log;
 import org.exoplatform.services.organization.OrganizationService;
 import org.exoplatform.services.organization.User;
+import org.exoplatform.services.security.ConversationState;
 import org.exoplatform.services.wcm.core.NodetypeConstant;
 import org.exoplatform.services.wcm.utils.WCMCoreUtils;
 
@@ -127,8 +128,12 @@ public class CommentsServiceImpl implements CommentsService {
       newComment.setProperty(COMMENTOR,commentor) ;
 
       OrganizationService organizationService = WCMCoreUtils.getService(OrganizationService.class);
-      User user = organizationService.getUserHandler().findUserByName(commentor);
-     
+      User user;
+      if (commentor.equalsIgnoreCase(ConversationState.getCurrent().getIdentity().getUserId())) {
+        user = (User)ConversationState.getCurrent().getAttribute("UserProfile");
+      } else {
+        user = organizationService.getUserHandler().findUserByName(commentor);
+      }
       if(user == null)
         newComment.setProperty(COMMENTOR_FULLNAME,"ANONYMOUS") ;
       else {

@@ -34,6 +34,8 @@ import org.exoplatform.services.jcr.core.ExtendedNode;
 import org.exoplatform.services.jcr.ext.app.SessionProviderService;
 import org.exoplatform.services.jcr.ext.hierarchy.NodeHierarchyCreator;
 import org.exoplatform.services.organization.OrganizationService;
+import org.exoplatform.services.organization.User;
+import org.exoplatform.services.security.ConversationState;
 import org.exoplatform.services.wcm.core.NodetypeConstant;
 import org.exoplatform.services.wcm.utils.WCMCoreUtils;
 
@@ -177,7 +179,17 @@ public class FavoriteServiceImpl implements FavoriteService {
   }
 
   private Node getUserFavoriteFolder(String userName) throws Exception {
-    if (organizationService.getUserHandler().findUserByName(userName) == null) {
+    if (userName == null) {
+      return null;
+    }
+    ConversationState state = ConversationState.getCurrent();
+    User user = null;
+    if (state != null && userName.equals(state.getIdentity().getUserId())) {
+      user = (User)state.getAttribute("UserProfile");
+    } else {
+      user = organizationService.getUserHandler().findUserByName(userName);
+    }
+    if (user == null) {
       return null;
     }
     Node userNode =
