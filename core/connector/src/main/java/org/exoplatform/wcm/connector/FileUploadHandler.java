@@ -453,7 +453,9 @@ public class FileUploadHandler {
           .header(LAST_MODIFIED_PROPERTY, dateFormat.format(new Date()))
           .build();
     } catch (Exception exc) {
-      LOG.error(exc.getMessage(), exc);
+      if (LOG.isWarnEnabled()) {
+        LOG.warn(exc.getMessage());
+      }
       return Response.serverError().entity(exc.getMessage()).build();
     }
   }

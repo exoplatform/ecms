@@ -838,7 +838,6 @@
 		  });
 	};
 	MultiUpload.prototype.handleReaderLoad = function(progressID, evt) {
-
 		  // use lengthComputable, loaded, and total on ProgressEvent
 		  return function(evt) {
 		    //send save request
@@ -963,7 +962,10 @@
 					 var e = eXo.ecm.MultiUpload.handleReaderAbort(progressID, eXo.ecm.MultiUpload.ERROR);
 					 e(window.event);
 				 } else {
-					  	setTimeout(function(){eXo.ecm.MultiUpload.handleReaderLoad(progressID);}, 1000);	        		 
+					var e = eXo.ecm.MultiUpload.handleReaderLoad(progressID);
+					setTimeout(function(){e(window.event);}, 1000);
+		 		  	return;
+
 				 }
 		    	 }
 		    });
