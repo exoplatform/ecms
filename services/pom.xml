@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!--
 
-  Copyright (C) 2014 eXo Platform SAS.
+  Copyright (C) 2015 eXo Platform SAS.
   
   This is free software; you can redistribute it and/or modify it
   under the terms of the GNU Lesser General Public License as
@@ -29,7 +29,7 @@
   </parent>
   <artifactId>exo-clouddrive-gdrive-services</artifactId>
   <packaging>jar</packaging>
-  <name>eXo Cloud Drive Extension :: Connectors :: Google Drive :: Services</name>
+  <name>eXo Cloud Drive :: Connectors :: Google Drive :: Services</name>
   <description>eXo Cloud Drive Google Drive connector extension configuration and services</description>
   
   <dependencies>
