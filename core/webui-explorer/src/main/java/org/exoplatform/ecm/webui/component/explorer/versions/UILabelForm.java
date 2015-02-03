@@ -21,6 +21,7 @@ import javax.jcr.version.VersionException;
 
 import org.exoplatform.ecm.jcr.model.VersionNode;
 import org.exoplatform.ecm.webui.component.explorer.UIJCRExplorer;
+import org.exoplatform.ecm.webui.form.validator.ECMNameValidator;
 import org.exoplatform.ecm.webui.utils.Utils;
 import org.exoplatform.web.application.ApplicationMessage;
 import org.exoplatform.webui.config.annotation.ComponentConfig;
@@ -58,7 +59,7 @@ public class UILabelForm extends UIForm {
   private static  String FIELD_LABEL = "label" ;
 
   public UILabelForm() throws Exception {
-    addUIFormInput(new UIFormStringInput(FIELD_LABEL , FIELD_LABEL , null).addValidator(MandatoryValidator.class));
+    addUIFormInput(new UIFormStringInput(FIELD_LABEL , FIELD_LABEL , null).addValidator(MandatoryValidator.class).addValidator(ECMNameValidator.class));
   }
 
   static  public class SaveActionListener extends EventListener<UILabelForm> {
