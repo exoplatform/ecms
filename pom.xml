@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!--
 
-    Copyright (C) 2013 eXo Platform SAS.
+    Copyright (C) 2015 eXo Platform SAS.
     
     This is free software; you can redistribute it and/or modify it
     under the terms of the GNU Lesser General Public License as
@@ -30,7 +30,7 @@
 
   <artifactId>exo-clouddrive-services-core</artifactId>
   <packaging>jar</packaging>
-  <name>eXo Cloud Drive Extension :: Services :: Core</name>
+  <name>eXo Cloud Drive :: Services :: Core</name>
   <description>eXo Cloud Drive extension core services</description>
 
   <dependencies>
