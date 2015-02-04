@@ -72,7 +72,11 @@
           if(activityId != null && activityId != "undefined" && activityId != "") elClass +="_"+activityId;
           if(rightClick) isRightClick="#ECMContextMenu";
           var openDocument = gj(isRightClick+" ."+elClass).parent();
-          var html = "<i class=\"uiIcon16x16FileDefault uiIcon16x16nt_file "+data.ico+" "+elClass+"\"></i>\n"+data.title;
+          var html = "<i class=\"uiIcon16x16FileDefault uiIcon16x16nt_file ";
+		  if("uiIcon16x16FileDefault" === data.ico){
+			html+="uiIconOpenOnDesktop ";
+		  }
+		  html+= data.ico+" "+elClass+"\"></i>\n"+data.title;
           openDocument.html(html);
 
           if(eXo.ecm.ECMWebDav !== undefined) {
