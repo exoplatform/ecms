@@ -196,30 +196,30 @@ public class TestCloudDriveService extends TestCase {
     }
   }
 
-  protected void assertFilesExist(List<FileStore> files, String... expected) {
-    List<String> names = new ArrayList<String>(Arrays.asList(expected));
+//  protected void assertFilesExist(List<FileStore> files, String... expected) {
+//    List<String> names = new ArrayList<String>(Arrays.asList(expected));
+//    for (FileStore f : files) {
+//      if (names.contains(f.getName())) {
+//        names.remove(f.getName());
+//      }
+//    }
+//
+//    if (names.size() > 0) {
+//      fail("Expected files not exist: " + names);
+//    }
+//  }
+
+  protected void assertFilesExist(List<FileStore> files, String... expectedNames) {
+    List<String> names = Arrays.asList(expectedNames);
+    List<String> expected = new ArrayList<String>();
     for (FileStore f : files) {
       if (names.contains(f.getName())) {
-        names.remove(f.getName());
+        expected.add(f.getName());
       }
     }
 
-    if (names.size() > 0) {
-      fail("Expected files not exist: " + names);
-    }
-  }
-
-  protected void assertFilesNotExist(List<FileStore> files, String... notExpected) {
-    List<String> names = Arrays.asList(notExpected);
-    List<String> unexpected = new ArrayList<String>();
-    for (FileStore f : files) {
-      if (names.contains(f.getName())) {
-        unexpected.add(f.getName());
-      }
-    }
-
-    if (unexpected.size() > 0) {
-      fail("Unexpected files exist: " + unexpected);
+    if (expected.size() != expectedNames.length) {
+      fail("Expected files not exist: " + expectedNames);
     }
   }
 
@@ -344,8 +344,8 @@ public class TestCloudDriveService extends TestCase {
       // synchronize the whole drive, only cloud files should be on the drive
       drive.synchronize().await();
 
-      // check if both nodes are on the drive storage
-      assertFilesNotExist(exoDrives.listFiles(cloudUser.getUsername()), "test_to_sync1", "test_to_sync2");
+      // check if both files are in the drive storage
+      assertFilesExist(exoDrives.listFiles(cloudUser.getUsername()), "test_to_sync1", "test_to_sync2");
 
       // check if nodes still exist in JCR
       assertNodesExist(driveNode.getNodes(), "test_to_sync1", "test_to_sync2");
