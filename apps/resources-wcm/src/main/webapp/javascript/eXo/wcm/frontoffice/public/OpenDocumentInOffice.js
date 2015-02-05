@@ -18,6 +18,16 @@
   var restPrefix = portal+"/"+rest;
 
   var OpenDocumentInOffice = function() {}
+  var uiWorkingAreaWidth=0;
+  var uiRightContainerWidth=0;
+  var uiRightContainerStyle="";
+
+  var uisideBarWidth=0;
+
+  var resizeBarHeight=0;
+  var resizeBarContentWidth="";
+
+  var uiActionBarContainer="";
 
   /**
    * Open document by Office application or desktop apps
@@ -26,6 +36,7 @@
    * filePath node path
    */
   OpenDocumentInOffice.prototype.openDocument = function(absolutePath, workspace, filePath){
+    fitLayout();
     if(eXo.ecm.ECMWebDav !== undefined) { // use ITHIT to an open document
       eXo.ecm.ECMWebDav.WebDAV.Client.DocManager.ShowMicrosoftOfficeWarning();
       var documentManager = eXo.ecm.ECMWebDav.WebDAV.Client.DocManager;
@@ -47,6 +58,9 @@
       }else{
         console.log("Cannot open. MSOffice version is not support!");
       }
+    }
+    if(uisideBarWidth === 0){ //hide side bar
+      gj("#UISideBar").show();
     }
   }
 
@@ -94,6 +108,14 @@
             defaultEnviromentFilter(openDocument);//only show with support enviroment.
           }
         });
+        uiWorkingAreaWidth    = gj("#UIWorkingArea").width();
+        uiRightContainerWidth = gj(".rightContainer").width();
+        uiRightContainerStyle = gj(".rightContainer").attr("style");
+
+        uisideBarWidth        = gj("#UISideBar").width();
+        resizeBarHeight       = gj(".resizeBar").attr("style");
+        resizeBarContentWidth = gj(".resizeBar").width();
+        uiActionBarContainer  = gj("#uiActionsBarContainer").html();
   }
 
 
@@ -118,6 +140,24 @@
     }
   }
 
+  function fitLayout(){
+    if (navigator.appVersion.indexOf("Mac") === -1) return;
+    
+    uiRightContainerStyle = gj(".rightContainer").attr("style");
+
+    if(uisideBarWidth === 0){ //hide side bar
+      gj("#UISideBar").hide();
+      gj(".rightContainer").width(uiWorkingAreaWidth);
+      gj("#uiActionsBarContainer").html(uiActionBarContainer);
+    }else{
+      gj(".rightContainer").width(uiRightContainerWidth);
+      gj(".resizeBar").width(resizeBarContentWidth);
+      gj(".resizeBar").attr("style", resizeBarHeight);
+      gj(".resizeBarContent").attr("style", resizeBarHeight);
+      gj("#uiActionsBarContainer").html(uiActionBarContainer);
+    }
+  }
+	
   /**
    *To filter OpenXXX button only working with support enviroments
    * -IE 11 or least version,
