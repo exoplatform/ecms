@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!--
 
-    Copyright (C) 2014 eXo Platform SAS.
+    Copyright (C) 2015 eXo Platform SAS.
     
     This is free software; you can redistribute it and/or modify it
     under the terms of the GNU Lesser General Public License as
@@ -27,10 +27,9 @@
     <artifactId>exo-clouddrive-parent</artifactId>
     <version>1.2.0-SNAPSHOT</version>
   </parent>
-
   <artifactId>exo-clouddrive-webapp</artifactId>
   <packaging>war</packaging>
-  <name>eXo Cloud Drive Extension :: Webapp</name>
+  <name>eXo Cloud Drive :: Extension Webapp</name>
   <description>eXo Cloud Drive web application of portal extension</description>
 
   <dependencies>

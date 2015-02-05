@@ -261,7 +261,7 @@ xmlns="http://www.exoplatform.org/xml/ns/kernel_1_2.xsd">
               <string>ShowCloudFile</string>
             </field>
             <field name="component">
-              <string>org.exoplatform.clouddrive.ecms.viewer.DefaultCloudFileViewer</string>
+              <string>org.exoplatform.clouddrive.ecms.viewer.DefaultFileViewer</string>
             </field>
             <field name="category">
               <string>FileViewer</string>
