@@ -24,6 +24,7 @@ import javax.jcr.nodetype.ConstraintViolationException;
 import javax.jcr.nodetype.NodeDefinition;
 
 import org.exoplatform.ecm.webui.component.explorer.UIJCRExplorer;
+import org.exoplatform.ecm.webui.form.validator.ECMNameValidator;
 import org.exoplatform.ecm.webui.utils.JCRExceptionManager;
 import org.exoplatform.services.jcr.util.Text;
 import org.exoplatform.services.log.ExoLogger;
@@ -62,7 +63,7 @@ public class UICategoryForm extends UIForm implements UIPopupComponent {
 
   public void activate() {
     try {
-      addUIFormInput(new UIFormStringInput(FIELD_NAME, FIELD_NAME, null).addValidator(MandatoryValidator.class));
+      addUIFormInput(new UIFormStringInput(FIELD_NAME, FIELD_NAME, null).addValidator(MandatoryValidator.class).addValidator(ECMNameValidator.class));
       setActions(new String[] { "Save", "Cancel" });
       getUIStringInput(FIELD_NAME).setValue(null);
     } catch (Exception e) {
