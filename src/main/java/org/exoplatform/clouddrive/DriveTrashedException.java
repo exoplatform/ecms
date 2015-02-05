@@ -1,4 +1,3 @@
-
 /*
  * Copyright (C) 2003-2014 eXo Platform SAS.
  *
@@ -25,11 +24,10 @@ package org.exoplatform.clouddrive;
  * Created by The eXo Platform SAS
  * 
  * @author <a href="mailto:pnedonosko@exoplatform.com">Peter Nedonosko</a>
- * @version $Id: CloudDriveTrashedException.java 00000 Dec 1, 2014 pnedonosko $
+ * @version $Id: DriveTrashedException.java 00000 Dec 1, 2014 pnedonosko $
  * 
  */
 public class DriveTrashedException extends DriveRemovedException {
-
 
   /**
    * 

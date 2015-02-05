@@ -24,16 +24,22 @@
   xsi:schemaLocation="http://www.exoplatform.org/xml/ns/kernel_1_2.xsd http://www.exoplatform.org/xml/ns/kernel_1_2.xsd"
   xmlns="http://www.exoplatform.org/xml/ns/kernel_1_2.xsd">
 
+  <!-- Cloud Drive components -->
+
   <component>
     <key>org.exoplatform.clouddrive.CloudDriveService</key>
     <type>org.exoplatform.clouddrive.CloudDriveServiceImpl</type>
   </component>
-  
+
   <component>
     <key>org.exoplatform.clouddrive.jcr.NodeFinder</key>
     <type>org.exoplatform.clouddrive.jcr.JCRNodeFinder</type>
   </component>
-  
+
+  <component>
+    <type>org.exoplatform.clouddrive.utils.ExtendedMimeTypeResolver</type>
+  </component>
+
   <component>
     <key>org.exoplatform.clouddrive.CloudDriveFeatures</key>
     <type>org.exoplatform.clouddrive.features.PermissiveFeatures</type>
@@ -45,8 +51,8 @@
     <init-params>
       <properties-param>
         <name>storage-configuration</name>
-        <property name="root-dir" value="${exo.shared.dir}/filedrive"/>
-        <property name="base-url" value="file:///${exo.shared.dir}/filedrive"/>
+        <property name="root-dir" value="${exo.shared.dir}/filedrive" />
+        <property name="base-url" value="file:///${exo.shared.dir}/filedrive" />
         <!-- property name="base-url" value="${filedrive.rest.url}" / -->
       </properties-param>
     </init-params>
@@ -81,22 +87,6 @@
                     </field>
                   </object>
                 </value>
-                <!-- value>
-                  <object type="org.exoplatform.services.jcr.impl.ext.action.ActionConfiguration">
-                    <field name="eventTypes">
-                      <string>addProperty,changeProperty,removeProperty</string>
-                    </field>
-                    <field name="nodeTypes">
-                      <string>ecd:cloudDrive</string>
-                    </field>
-                    <field name="isDeep">
-                      <boolean>true</boolean>
-                    </field>
-                    <field name="actionClassName">
-                      <string>org.exoplatform.clouddrive.jcr.CloudFileAction</string>
-                    </field>
-                  </object>
-                </value -->
               </collection>
             </field>
           </object>
@@ -108,7 +98,7 @@
   <!-- Use this plugin in external configuration, e.g. an extension -->
   <external-component-plugins> <!-- profiles="default,cloud" -->
     <target-component>org.exoplatform.clouddrive.CloudDriveService</target-component>
-    <component-plugin>
+    <!-- component-plugin>
       <name>add.clouddriveprovider</name>
       <set-method>addPlugin</set-method>
       <type>org.exoplatform.clouddrive.gdrive.GoogleDriveConnector</type>
@@ -119,7 +109,7 @@
           <property name="provider-name" value="Google Drive"/>
         </properties-param>
       </init-params>
-    </component-plugin>
+    </component-plugin -->
     <component-plugin>
       <name>add.clouddriveprovider</name>
       <set-method>addPlugin</set-method>
@@ -127,12 +117,12 @@
       <init-params>
         <properties-param>
           <name>drive-configuration</name>
-          <property name="provider-id" value="exo"/>
-          <property name="provider-name" value="eXo Test Drive"/>
+          <property name="provider-id" value="exo" />
+          <property name="provider-name" value="eXo Test Drive" />
         </properties-param>
       </init-params>
     </component-plugin>
-    <component-plugin>
+    <!-- component-plugin>
       <name>add.clouddriveprovider</name>
       <set-method>addPlugin</set-method>
       <type>org.exoplatform.clouddrive.box.BoxConnector</type>
@@ -146,7 +136,7 @@
           <property name="connector-host" value="${clouddrive.service.host}"/>
         </properties-param>
       </init-params>
-    </component-plugin>
+    </component-plugin -->
   </external-component-plugins>
 
   <import>classpath:/conf/portal/test-jcr-configuration.xml</import>

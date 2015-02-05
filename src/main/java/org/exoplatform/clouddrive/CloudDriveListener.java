@@ -27,47 +27,6 @@ package org.exoplatform.clouddrive;
  */
 public interface CloudDriveListener {
 
-  interface FileChangeAction {
-    /**
-     * Action for newly creating file.
-     * 
-     * @param file {@link CloudFile}
-     */
-    void onNew(CloudFile file);
-
-    /**
-     * Action for removal of a file.
-     * 
-     * @param file {@link CloudFile}
-     */
-    void onRemove(CloudFile file);
-
-    /**
-     * Action for deleting file.
-     * 
-     * @param prevFile {@link CloudFile}
-     * @param newFile {@link CloudFile}
-     */
-    void onUpdate(CloudFile prevFile, CloudFile newFile);
-
-    /**
-     * Action for file content update. <br>
-     * NOT SUPPORTED
-     * 
-     * @param file {@link CloudFile}
-     */
-    void onContent(CloudFile file);
-  }
-
-  /**
-   * Provide action for file changes on cloud drive. If not <code>null</code> then this action will
-   * be invoked on the dive synchronization.
-   * 
-   * @return {@link FileChangeAction} instance or <code>null</code> if this listener doesn't have an
-   *         interest to file changes on the dive synchronization.
-   */
-  FileChangeAction getFileChangeAction();
-
   /**
    * Will be fired after successful connection of a drive to remote provider.
    * 

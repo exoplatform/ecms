@@ -19,6 +19,7 @@
 package org.exoplatform.clouddrive.jcr;
 
 import org.exoplatform.clouddrive.CloudDriveException;
+import org.exoplatform.clouddrive.CloudFile;
 import org.exoplatform.clouddrive.CloudFileAPI;
 import org.exoplatform.clouddrive.CloudFileSynchronizer;
 import org.exoplatform.clouddrive.SkipSyncException;
@@ -96,22 +97,14 @@ public final class LostRemovalSynchronizer implements CloudFileSynchronizer {
   /**
    * {@inheritDoc}
    */
-  public boolean create(Node file, CloudFileAPI api) throws RepositoryException, CloudDriveException {
+  public CloudFile create(Node file, CloudFileAPI api) throws RepositoryException, CloudDriveException {
     throw new SyncNotSupportedException("Not supported");
   }
 
   /**
    * {@inheritDoc}
    */
-  public boolean untrash(Node file, CloudFileAPI api) throws RepositoryException, CloudDriveException {
-    throw new SyncNotSupportedException("Not supported");
-  }
-
-  /**
-   * {@inheritDoc}
-   */
-  @Override
-  public boolean update(Node file, CloudFileAPI api) throws CloudDriveException, RepositoryException {
+  public CloudFile untrash(Node file, CloudFileAPI api) throws RepositoryException, CloudDriveException {
     throw new SyncNotSupportedException("Not supported");
   }
 
@@ -119,7 +112,7 @@ public final class LostRemovalSynchronizer implements CloudFileSynchronizer {
    * {@inheritDoc}
    */
   @Override
-  public boolean updateContent(Node file, CloudFileAPI api) throws CloudDriveException, RepositoryException {
+  public CloudFile update(Node file, CloudFileAPI api) throws CloudDriveException, RepositoryException {
     throw new SyncNotSupportedException("Not supported");
   }
 
@@ -127,8 +120,16 @@ public final class LostRemovalSynchronizer implements CloudFileSynchronizer {
    * {@inheritDoc}
    */
   @Override
-  public boolean copy(Node srcFile, Node destFile, CloudFileAPI api) throws CloudDriveException,
-                                                                    RepositoryException {
+  public CloudFile updateContent(Node file, CloudFileAPI api) throws CloudDriveException, RepositoryException {
+    throw new SyncNotSupportedException("Not supported");
+  }
+
+  /**
+   * {@inheritDoc}
+   */
+  @Override
+  public CloudFile copy(Node srcFile, Node destFile, CloudFileAPI api) throws CloudDriveException,
+                                                                      RepositoryException {
     throw new SyncNotSupportedException("Not supported");
   }
 

@@ -292,9 +292,8 @@ public class ExoDriveRepository {
 
         OutputStream out = new FileOutputStream(meta);
         try {
-          metap.store(out,
-                      "Metadata for " + file.getAbsolutePath() + ". Generated at "
-                          + METAFILE_DATEFORMAT.format(Calendar.getInstance().getTime()));
+          metap.store(out, "Metadata for " + file.getAbsolutePath() + ". Generated at "
+              + METAFILE_DATEFORMAT.format(Calendar.getInstance().getTime()));
         } finally {
           out.close();
         }
@@ -328,7 +327,9 @@ public class ExoDriveRepository {
     File[] userFiles = userDir.listFiles();
     if (userFiles != null) {
       for (File f : userFiles) {
-        res.add(openStore(ownerName, f));
+        if (!f.isDirectory()) {
+          res.add(openStore(ownerName, f));
+        }
       }
     } else {
       LOG.warn("User not found: " + ownerName + ". Requested storage not exists " + userDir.getAbsolutePath());
@@ -347,7 +348,9 @@ public class ExoDriveRepository {
         File[] userFiles = parentDir.getFile().listFiles();
         if (userFiles != null) {
           for (File f : userFiles) {
-            res.add(openStore(ownerName, f));
+            if (!f.isDirectory()) {
+              res.add(openStore(ownerName, f));
+            }
           }
         } else {
           throw new NotFoundException("Cannot read parent folder " + parentDir.getFile().getAbsolutePath());

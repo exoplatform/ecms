@@ -26,11 +26,6 @@ package org.exoplatform.clouddrive;
  */
 public abstract class CloudProvider {
 
-  /**
-   * GOOGLEDRIVE("gdrive", "Google Drive"), SKYDRIVE("skydrive", "Microsoft SkyDrive"), DROPBOX("dbox",
-   * "Dropbox"), BOX( "box", "Box"), TEST("exo", "Test Cloud Drive");
-   */
-
   public static final String CONNECT_URL_BASE = "/portal/rest/clouddrive/connect/";
 
   protected final String     id;
@@ -75,7 +70,26 @@ public abstract class CloudProvider {
   public String getName() {
     return name;
   }
-  
+
+  /**
+   * Provider specific message for given JVM exception (Throwable). By default this method uses
+   * {@link Throwable#getMessage()}.
+   * 
+   * @return String with the error message
+   */
+  public String getErrorMessage(Throwable error) {
+    return error.getMessage();
+  }
+
+  /**
+   * Provider specific message for given error string. By default this method returns given error string.
+   * 
+   * @return String with the error message
+   */
+  public String getErrorMessage(String error) {
+    return error;
+  }
+
   /**
    * {@inheritDoc}
    */

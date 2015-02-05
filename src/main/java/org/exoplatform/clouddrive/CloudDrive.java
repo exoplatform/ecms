@@ -232,66 +232,6 @@ public abstract class CloudDrive {
         }
       }
     }
-
-    public void invokeOnNew(CloudFile file) {
-      for (CloudDriveListener listener : registry) {
-        try {
-          CloudDriveListener.FileChangeAction action = listener.getFileChangeAction();
-          if (action != null) {
-            action.onNew(file);
-          }
-        } catch (Throwable th) {
-          // nothing should prevent at this point
-          LOG.warn("Error calling onNew action of listener on Cloud Drive '" + title() + "': "
-              + th.getMessage(), th);
-        }
-      }
-    }
-
-    public void invokeOnDelete(CloudFile file) {
-      for (CloudDriveListener listener : registry) {
-        try {
-          CloudDriveListener.FileChangeAction action = listener.getFileChangeAction();
-          if (action != null) {
-            action.onRemove(file);
-          }
-        } catch (Throwable th) {
-          // nothing should prevent at this point
-          LOG.warn("Error calling onDelete action of listener on Cloud Drive '" + title() + "': "
-              + th.getMessage(), th);
-        }
-      }
-    }
-
-    public void invokeOnUpdate(CloudFile prevFile, CloudFile newFile) {
-      for (CloudDriveListener listener : registry) {
-        try {
-          CloudDriveListener.FileChangeAction action = listener.getFileChangeAction();
-          if (action != null) {
-            action.onUpdate(prevFile, newFile);
-          }
-        } catch (Throwable th) {
-          // nothing should prevent at this point
-          LOG.warn("Error calling onUpdate action of listener on Cloud Drive '" + title() + "': "
-              + th.getMessage(), th);
-        }
-      }
-    }
-
-    public void invokeOnContent(CloudFile file) {
-      for (CloudDriveListener listener : registry) {
-        try {
-          CloudDriveListener.FileChangeAction action = listener.getFileChangeAction();
-          if (action != null) {
-            action.onContent(file);
-          }
-        } catch (Throwable th) {
-          // nothing should prevent at this point
-          LOG.warn("Error calling onContent action of listener on Cloud Drive '" + title() + "': "
-              + th.getMessage(), th);
-        }
-      }
-    }
   }
 
   // *********** class body ************

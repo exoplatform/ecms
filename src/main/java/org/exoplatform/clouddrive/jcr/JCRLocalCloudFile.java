@@ -27,6 +27,11 @@ import javax.jcr.Node;
  */
 public class JCRLocalCloudFile implements CloudFile {
 
+  /**
+   * Folder size by default is -1.
+   */
+  public static final long FOLDER_SIZE = -1;
+  
   private final String             path;
 
   private final String             id;
@@ -35,9 +40,9 @@ public class JCRLocalCloudFile implements CloudFile {
 
   private final String             link;
 
-  private final String             previewLink;
-
   private final String             editLink;
+
+  private final String             previewLink;
 
   private final String             thumbnailLink;
 
@@ -47,6 +52,12 @@ public class JCRLocalCloudFile implements CloudFile {
 
   private final String             author;
 
+  private final boolean            folder;
+
+  private final long               size;
+
+  // FYI transient fields will not appear in serialized forms like JSON object on client side
+
   private final transient Calendar createdDate;
 
   private final transient Calendar modifiedDate;
@@ -55,27 +66,43 @@ public class JCRLocalCloudFile implements CloudFile {
 
   private final transient boolean  changed;
 
-  private final boolean            folder;
-
-  private final boolean            syncing;
-
-  public JCRLocalCloudFile(String path,
-                           String id,
-                           String title,
-                           String link,
-                           String editLink,
-                           String previewLink,
-                           String thumbnailLink,
-                           String type,
-                           String typeMode,
-                           String lastUser,
-                           String author,
-                           Calendar createdDate,
-                           Calendar modifiedDate,
-                           boolean folder,
-                           boolean syncing,
-                           Node node,
-                           boolean changed) {
+  /**
+   * Local cloud file or folder (full internal constructor).
+   * 
+   * @param path {@link String}
+   * @param id {@link String}
+   * @param title {@link String}
+   * @param link {@link String}
+   * @param editLink {@link String}
+   * @param previewLink {@link String}
+   * @param thumbnailLink {@link String}
+   * @param type {@link String}
+   * @param typeMode {@link String}
+   * @param lastUser {@link String}
+   * @param author {@link String}
+   * @param createdDate {@link Calendar}
+   * @param modifiedDate {@link Calendar}
+   * @param folder {@link Boolean}
+   * @param node {@link Node}
+   * @param changed {@link Boolean}
+   */
+  protected JCRLocalCloudFile(String path,
+                              String id,
+                              String title,
+                              String link,
+                              String editLink,
+                              String previewLink,
+                              String thumbnailLink,
+                              String type,
+                              String typeMode,
+                              String lastUser,
+                              String author,
+                              Calendar createdDate,
+                              Calendar modifiedDate,
+                              boolean folder,
+                              long size,
+                              Node node,
+                              boolean changed) {
     this.path = path;
     this.id = id;
     this.title = title;
@@ -90,11 +117,30 @@ public class JCRLocalCloudFile implements CloudFile {
     this.createdDate = createdDate;
     this.modifiedDate = modifiedDate;
     this.folder = folder;
-    this.syncing = syncing;
+    this.size = size;
     this.node = node;
     this.changed = changed;
   }
 
+  /**
+   * Local cloud file with edit link.
+   * 
+   * @param path {@link String}
+   * @param id {@link String}
+   * @param title {@link String}
+   * @param link {@link String}
+   * @param editLink {@link String}
+   * @param previewLink {@link String}
+   * @param thumbnailLink {@link String}
+   * @param type {@link String}
+   * @param typeMode {@link String}
+   * @param lastUser {@link String}
+   * @param author {@link String}
+   * @param createdDate {@link Calendar}
+   * @param modifiedDate {@link Calendar}
+   * @param node {@link Node}
+   * @param changed {@link Boolean}
+   */
   public JCRLocalCloudFile(String path,
                            String id,
                            String title,
@@ -108,7 +154,7 @@ public class JCRLocalCloudFile implements CloudFile {
                            String author,
                            Calendar createdDate,
                            Calendar modifiedDate,
-                           boolean folder,
+                           long size,
                            Node node,
                            boolean changed) {
     this(path,
@@ -124,17 +170,34 @@ public class JCRLocalCloudFile implements CloudFile {
          author,
          createdDate,
          modifiedDate,
-         folder,
          false,
+         size,
          node,
          changed);
   }
 
+  /**
+   * Local cloud file without edit link.
+   * 
+   * @param path {@link String}
+   * @param id {@link String}
+   * @param title {@link String}
+   * @param link {@link String}
+   * @param previewLink {@link String}
+   * @param thumbnailLink {@link String}
+   * @param type {@link String}
+   * @param typeMode {@link String}
+   * @param lastUser {@link String}
+   * @param author {@link String}
+   * @param createdDate {@link Calendar}
+   * @param modifiedDate {@link Calendar}
+   * @param node {@link Node}
+   * @param changed {@link Boolean}
+   */
   public JCRLocalCloudFile(String path,
                            String id,
                            String title,
                            String link,
-                           String editLink,
                            String previewLink,
                            String thumbnailLink,
                            String type,
@@ -143,12 +206,10 @@ public class JCRLocalCloudFile implements CloudFile {
                            String author,
                            Calendar createdDate,
                            Calendar modifiedDate,
-                           boolean folder) {
-    this(path,
-         id,
-         title,
-         link,
-         editLink,
+                           long size,
+                           Node node,
+                           boolean changed) {
+    this(path, id, title, link, null, // editLink
          previewLink,
          thumbnailLink,
          type,
@@ -157,10 +218,51 @@ public class JCRLocalCloudFile implements CloudFile {
          author,
          createdDate,
          modifiedDate,
-         folder,
          false,
-         null,
-         false);
+         size,
+         node,
+         changed);
+  }
+
+  /**
+   * Local cloud folder (without edit, preview, thumbnail links, type mode and size).
+   * 
+   * @param path {@link String}
+   * @param id {@link String}
+   * @param title {@link String}
+   * @param link {@link String}
+   * @param type {@link String}
+   * @param lastUser {@link String}
+   * @param author {@link String}
+   * @param createdDate {@link Calendar}
+   * @param modifiedDate {@link Calendar}
+   * @param node {@link Node}
+   * @param changed {@link Boolean}
+   */
+  public JCRLocalCloudFile(String path,
+                           String id,
+                           String title,
+                           String link,
+                           String type,
+                           String lastUser,
+                           String author,
+                           Calendar createdDate,
+                           Calendar modifiedDate,
+                           Node node,
+                           boolean changed) {
+    this(path, id, title, link, null, // editLink
+         null, // previewLink,
+         null, // thumbnailLink,
+         type,
+         null, // typeMode,
+         lastUser,
+         author,
+         createdDate,
+         modifiedDate,
+         true,
+         FOLDER_SIZE,
+         node,
+         changed);
   }
 
   public String getPath() {
@@ -253,14 +355,28 @@ public class JCRLocalCloudFile implements CloudFile {
     return createdDate;
   }
 
+  /**
+   * {@inheritDoc}
+   */
   @Override
   public Calendar getModifiedDate() {
     return modifiedDate;
   }
 
+  /**
+   * {@inheritDoc}
+   */
   @Override
   public boolean isFolder() {
     return folder;
+  }
+
+  /**
+   * {@inheritDoc}
+   */
+  @Override
+  public long getSize() {
+    return isFolder() ? FOLDER_SIZE : size;
   }
 
   /**
@@ -274,9 +390,9 @@ public class JCRLocalCloudFile implements CloudFile {
 
   /**
    * Indicate does this Cloud File was changed (<code>true</code>) or read (<code>false</code>) from the
-   * storage.
+   * storage. Used internally only!
    * 
-   * @return the changed
+   * @return the changed flag
    */
   public boolean isChanged() {
     return changed;
