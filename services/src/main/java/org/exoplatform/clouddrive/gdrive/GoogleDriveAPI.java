@@ -29,12 +29,8 @@ import com.google.api.client.googleapis.json.GoogleJsonError;
 import com.google.api.client.googleapis.json.GoogleJsonError.ErrorInfo;
 import com.google.api.client.googleapis.json.GoogleJsonResponseException;
 import com.google.api.client.http.AbstractInputStreamContent;
-import com.google.api.client.http.HttpRequest;
-import com.google.api.client.http.HttpRequestInitializer;
-import com.google.api.client.http.HttpResponse;
 import com.google.api.client.http.HttpResponseException;
 import com.google.api.client.http.HttpTransport;
-import com.google.api.client.http.HttpUnsuccessfulResponseHandler;
 import com.google.api.client.http.javanet.NetHttpTransport;
 import com.google.api.client.json.jackson2.JacksonFactory;
 import com.google.api.client.util.store.DataStore;
@@ -55,7 +51,6 @@ import com.google.api.services.oauth2.Oauth2Scopes;
 import com.google.api.services.oauth2.model.Userinfoplus;
 
 import org.exoplatform.clouddrive.CloudDriveAccessException;
-import org.exoplatform.clouddrive.CloudDriveConnector;
 import org.exoplatform.clouddrive.CloudDriveException;
 import org.exoplatform.clouddrive.NotFoundException;
 import org.exoplatform.clouddrive.oauth2.UserToken;
@@ -84,29 +79,31 @@ import java.util.Set;
  */
 class GoogleDriveAPI implements DataStoreFactory {
 
-  public static final String       APP_NAME        = "eXo Cloud Drive";
+  public static final String       APP_NAME           = "eXo Cloud Drive";
 
-  public static final String       FOLDER_MIMETYPE = "application/vnd.google-apps.folder";
+  public static final String       FOLDER_MIMETYPE    = "application/vnd.google-apps.folder";
 
-  public static final List<String> SCOPES          = Arrays.asList(DriveScopes.DRIVE,
-                                                                   DriveScopes.DRIVE_FILE,
-                                                                   DriveScopes.DRIVE_APPDATA,
-                                                                   DriveScopes.DRIVE_SCRIPTS,
-                                                                   DriveScopes.DRIVE_APPS_READONLY,
-                                                                   Oauth2Scopes.USERINFO_EMAIL,
-                                                                   Oauth2Scopes.USERINFO_PROFILE);
+  public static final List<String> SCOPES             = Arrays.asList(DriveScopes.DRIVE,
+                                                                      DriveScopes.DRIVE_FILE,
+                                                                      DriveScopes.DRIVE_APPDATA,
+                                                                      DriveScopes.DRIVE_SCRIPTS,
+                                                                      DriveScopes.DRIVE_APPS_READONLY,
+                                                                      Oauth2Scopes.USERINFO_EMAIL,
+                                                                      Oauth2Scopes.USERINFO_PROFILE);
 
-  public static final String       SCOPES_STRING   = scopes();
+  public static final String       SCOPES_STRING      = scopes();
 
-  public static final String       ACCESS_TYPE     = "offline";
+  public static final String       ACCESS_TYPE        = "offline";
 
-  public static final String       APPOVAl_PROMT   = "force";
+  public static final String       APPOVAl_PROMT      = "force";
 
-  public static final String       NO_STATE        = "__no_state_set__";
+  public static final String       NO_STATE           = "__no_state_set__";
 
-  protected static final String    USER_ID         = "user_id";
+  protected static final String    USER_ID            = "user_id";
 
-  protected static final Log       LOG             = ExoLogger.getLogger(GoogleDriveAPI.class);
+  protected static final String    USER_EMAIL_ADDRESS = "emailAddress";
+
+  protected static final Log       LOG                = ExoLogger.getLogger(GoogleDriveAPI.class);
 
   class AuthToken extends UserToken implements CredentialRefreshListener, CredentialCreatedListener {
 
@@ -381,38 +378,6 @@ class GoogleDriveAPI implements DataStoreFactory {
   }
 
   /**
-   * XXX Not used!<br>
-   * Use of this class in builder.setHttpRequestInitializer(new RequestInitializer() causes OAuth2 401
-   * Unauthorized on Google service
-   */
-  @Deprecated
-  class RequestInitializer implements HttpRequestInitializer {
-    @Override
-    public void initialize(HttpRequest request) throws IOException {
-      // enable re-try on IOException
-      request.setRetryOnExecuteIOException(true);
-      request.setNumberOfRetries(CloudDriveConnector.PROVIDER_REQUEST_ATTEMPTS);
-      request.setUnsuccessfulResponseHandler(new HttpUnsuccessfulResponseHandler() {
-        @Override
-        public boolean handleResponse(HttpRequest request, HttpResponse response, boolean supportsRetry) throws IOException {
-          // TODO check here for Backend error or others what we could only re-try
-
-          if (supportsRetry) {
-            // wait a bit before next attempt
-            try {
-              Thread.sleep(CloudDriveConnector.PROVIDER_REQUEST_ATTEMPT_TIMEOUT);
-            } catch (InterruptedException e) {
-              LOG.warn("Interrupted while waiting for a next attempt of drive operation: " + e.getMessage());
-              Thread.currentThread().interrupt();
-            }
-          }
-          return supportsRetry; // re-try all what currently supported
-        }
-      });
-    }
-  }
-
-  /**
    * Credentials for request authentication.
    */
   final Credential credential;
@@ -574,9 +539,6 @@ class GoogleDriveAPI implements DataStoreFactory {
   Userinfoplus userInfo() throws GoogleDriveException, CloudDriveException {
     Userinfoplus userInfo;
     try {
-      // XXX FYI this caused Unauthorized: >>> .setHttpRequestInitializer(new RequestInitializer()
-      // Oauth2 oauth2 = new Oauth2.Builder(new NetHttpTransport(), new JacksonFactory(),
-      // credential).build();
       userInfo = oauth2.userinfo().get().execute();
     } catch (GoogleJsonResponseException e) {
       GoogleJsonError error = e.getDetails();
@@ -660,9 +622,6 @@ class GoogleDriveAPI implements DataStoreFactory {
   File insert(File file, AbstractInputStreamContent content) throws GoogleDriveException,
                                                             CloudDriveAccessException {
     try {
-      // TODO ensure the parent exists before content uploading, otherwise it fill be slow with large sets of
-      // files. See BoxAPI.createFile().
-
       return drive.files().insert(file, content).execute();
     } catch (GoogleJsonResponseException e) {
       if (isInsufficientPermissions(e)) {
@@ -885,20 +844,6 @@ class GoogleDriveAPI implements DataStoreFactory {
       } catch (IOException e) {
         throw new GoogleDriveException("Error refreshing access token: " + e.getMessage(), e);
       }
-    }
-  }
-
-  /**
-   * Update current credentials with new refresh token from given API instance.
-   */
-  @Deprecated
-  // TODO not used
-  void updateToken(GoogleDriveAPI refreshApi) throws GoogleDriveException {
-    credential.setRefreshToken(refreshApi.credential.getRefreshToken());
-    try {
-      credential.refreshToken();
-    } catch (IOException e) {
-      throw new GoogleDriveException("Error updating access token: " + e.getMessage(), e);
     }
   }
 
