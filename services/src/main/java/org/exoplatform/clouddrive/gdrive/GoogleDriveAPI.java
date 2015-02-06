@@ -69,6 +69,8 @@ import java.util.HashSet;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Set;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 /**
  * Covers calls to Google Drive services and handles related exceptions. <br>
@@ -393,6 +395,12 @@ class GoogleDriveAPI implements DataStoreFactory {
    * User info API.
    */
   final Oauth2     oauth2;
+
+  /**
+   * Timezone regexp pattern for adapting Google's date format to SimpleDateFormatter supported.
+   */
+  // full date pattern: \\d{4}-[01]\\d-[0-3]\\dT[0-2]\\d:[0-5]\\d:[0-5]\\d\\.\\d+([+-][0-2]\\d:[0-5]\\d|Z)
+  final Pattern    tzPattern = Pattern.compile("([+-][0-2]\\d:[0-5]\\d|Z)$");
 
   /**
    * Create Google Drive API from OAuth2 authentication code.
@@ -899,13 +907,14 @@ class GoogleDriveAPI implements DataStoreFactory {
       calendar.setTime(d);
       return calendar;
     }
-    // step one, split off the timezone.
-    String firstpart = datestring.substring(0, datestring.lastIndexOf('-'));
-    String secondpart = datestring.substring(datestring.lastIndexOf('-'));
-    // step two, remove the colon from the timezone offset
-    secondpart = secondpart.substring(0, secondpart.indexOf(':'))
-        + secondpart.substring(secondpart.indexOf(':') + 1);
-    datestring = firstpart + secondpart;
+    
+    // Google keep dates in form "2014-12-24T13:45:13.620+02:00" - we need convert timezone to RFC 822 form
+    Matcher dm = tzPattern.matcher(datestring);
+    if (dm.find() && dm.groupCount() >= 1) {
+      String tz = dm.group(1);
+      datestring = dm.replaceFirst(tz.replace(":", ""));
+    }
+
     SimpleDateFormat s = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ssZ");
     try {
       d = s.parse(datestring);
