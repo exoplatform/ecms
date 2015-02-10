@@ -140,6 +140,8 @@
       resetArrayItemsSelected();
       var rightClick = (event.which && event.which > 1) || (event.button && event.button == 2);
       if (rightClick) {
+        var _objId = element.getAttribute("workspacename")+":"+Self.srcPath;
+        eXo.ecm.OpenDocumentInOffice.updateLabel(_objId,null,true);
         eval(element.getAttribute("mousedown"));
       } else {
         // init drag drop;

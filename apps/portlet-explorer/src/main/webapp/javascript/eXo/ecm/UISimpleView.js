@@ -166,6 +166,8 @@
       var rightClick = (event.which && event.which > 1) || (event.button && event.button == 2);
       if (rightClick) {
         eval(element.getAttribute("mousedown"));
+        var _objId = element.getAttribute("workspacename")+":"+Self.srcPath;
+        eXo.ecm.OpenDocumentInOffice.updateLabel(_objId,null,true);
       } else {
         // init drag drop;
         document.onmousemove = Self.dragItemsSelected;
