@@ -18,8 +18,6 @@
  */
 package org.exoplatform.clouddrive.utils;
 
-import com.sun.star.lang.NullPointerException;
-
 import org.exoplatform.commons.utils.MimeTypeResolver;
 import org.exoplatform.commons.utils.SecurityHelper;
 import org.exoplatform.container.component.BaseComponentPlugin;

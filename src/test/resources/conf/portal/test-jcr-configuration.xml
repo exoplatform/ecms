@@ -133,7 +133,7 @@
         </init-params>
       </component-plugin>
       <component-plugin>
-        <name>add.gadget.services.nodeType</name>
+        <name>add.test.nodeType</name>
         <set-method>addPlugin</set-method>
         <type>org.exoplatform.services.jcr.impl.AddNodeTypePlugin</type>
         <init-params>
@@ -146,11 +146,6 @@
       </component-plugin>
     </component-plugins>
   </component>
-  
-  <!-- component>
-    <key>org.exoplatform.services.jcr.ext.repository.creation.RepositoryCreationService</key>
-    <type>org.exoplatform.services.jcr.ext.repository.creation.RepositoryCreationServiceImpl</type>
-  </component -->
 
   <component>
     <key>org.exoplatform.services.jcr.ext.distribution.DataDistributionManager</key>
@@ -160,6 +155,10 @@
   <component>
     <key>org.exoplatform.services.jcr.ext.hierarchy.NodeHierarchyCreator</key>
     <type>org.exoplatform.services.jcr.ext.hierarchy.impl.NodeHierarchyCreatorImpl</type>
+  </component>
+
+  <component>
+    <type>org.exoplatform.services.jcr.ext.app.ThreadLocalSessionProviderService</type>
   </component>
 
   <component>
@@ -210,5 +209,4 @@
       </init-params>
     </component-plugin>
   </external-component-plugins>
-
 </configuration>

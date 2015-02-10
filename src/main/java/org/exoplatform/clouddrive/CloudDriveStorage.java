@@ -20,6 +20,8 @@ package org.exoplatform.clouddrive;
 
 import org.exoplatform.clouddrive.CloudDrive.Command;
 
+import java.util.concurrent.ExecutionException;
+
 import javax.jcr.Node;
 import javax.jcr.RepositoryException;
 
@@ -134,4 +136,14 @@ public interface CloudDriveStorage {
    * @return {@link Command}
    */
   Command getCurentCommand();
+
+  /**
+   * Wait for currently processing drive operations. This method doesn't provide accurate state when finished
+   * as a new command can be started asynchronously at that moment. Use it for information purpose and in
+   * tests (when all commands controllable).
+   * 
+   * @throws InterruptedException if waiting thread was interrupted
+   * @throws ExecutionException if some command failed
+   */
+  void await() throws InterruptedException, ExecutionException;
 }

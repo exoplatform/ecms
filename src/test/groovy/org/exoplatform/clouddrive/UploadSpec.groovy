@@ -20,16 +20,12 @@
 package org.exoplatform.clouddrive
 
 import org.exoplatform.clouddrive.exodrive.ExoDriveUser
-import org.exoplatform.clouddrive.exodrive.service.ExoDriveRepository;
-import org.exoplatform.clouddrive.exodrive.service.ExoDriveService;
-import org.exoplatform.clouddrive.exodrive.service.FileStore;
-import org.exoplatform.clouddrive.features.CloudDriveFeatures;
+import org.exoplatform.clouddrive.exodrive.service.ExoDriveRepository
+import org.exoplatform.clouddrive.exodrive.service.ExoDriveService
 import org.exoplatform.container.PortalContainer
-
-import java.util.List;
+import org.exoplatform.container.component.ComponentPlugin
 
 import javax.jcr.Node
-import javax.jcr.Session
 
 
 /**
@@ -41,6 +37,10 @@ import javax.jcr.Session
  */
 class UploadSpec extends ExoSpecification {
 
+  public interface UploadPlugin extends CloudFileSynchronizer, ComponentPlugin {
+    // we need two interfaces merged here for mocking in tests
+  }
+  
   private static final USER_NAME = "root"
 
   private PortalContainer container;
@@ -64,20 +64,29 @@ class UploadSpec extends ExoSpecification {
 
   def "New nt:file created in a drive folder"() {
     given: "Connected cloud drive"
-    def upload = Mock() // upload support mocked
+    def upload = Mock(UploadPlugin) // upload support mocked
     CloudDriveService cloudDrives = cloudDrives(upload)
     Node root = testRoot.addNode("driveRoot", "nt:folder")
     testRoot.save()
     CloudProvider provider = cloudDrives.getProvider("exo")
     CloudUser user1 = new ExoDriveUser(USER_NAME, "root@acme1", provider)
-    CloudDrive drive1 = cloudDrives.createDrive(user1, root)
+    //CloudDrive drive1 = cloudDrives.createDrive(user1, root)
+    CloudDrive drive1 = connectDrive(root, cloudDrives)
 
     when: "user create a new nt:file"
-    root.addNode("myFile1", "nt:file")
+    Node myFile1 = root.addNode("myFile1", "nt:file")
+    Node myContent = myFile1.addNode("jcr:content", "nt:resource")
+    myContent.setProperty("jcr:data", "dummy data")
+    myContent.setProperty("jcr:mimeType", "text/plain")
+    myContent.setProperty("jcr:lastModified", Calendar.getInstance())
     root.save()
+    // wait for asynchronous uploader
+    // FIXME this doesn't work at all: Spock (v0.7) doesn't support testing of concurrent threads
+    // and CD applies file creation in thread executor
+    drive1.await()
 
     then: "the new files will be created in remote cloud drive"
-    1 * upload.update(*_) // called once
+    1 * upload.create(*_) // called once
   }
 
   def "Content of existing nt:file updated"() {

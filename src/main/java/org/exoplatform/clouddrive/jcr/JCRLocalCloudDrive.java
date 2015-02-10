@@ -878,6 +878,8 @@ public abstract class JCRLocalCloudDrive extends CloudDrive implements CloudDriv
      */
     protected final void exec() throws CloudDriveAccessException, CloudDriveException, RepositoryException {
       startTime.set(System.currentTimeMillis());
+      
+      driveCommands.add(this);
 
       try {
         commandEnv.prepare(this); // prepare environment
@@ -941,6 +943,7 @@ public abstract class JCRLocalCloudDrive extends CloudDrive implements CloudDriv
         jcrListener.enable();
         commandEnv.cleanup(this); // cleanup environment
         finishTime.set(System.currentTimeMillis());
+        driveCommands.remove(this);
       }
     }
 
@@ -2510,6 +2513,12 @@ public abstract class JCRLocalCloudDrive extends CloudDrive implements CloudDriv
   protected final Queue<CloudFile>                        syncFilesChanged    = new ConcurrentLinkedQueue<CloudFile>();
 
   /**
+   * Drive commands active currently {@link Command}. Used for awaiting the drive readiness (not accurate, for
+   * tests or information purpose only).
+   */
+  protected final Queue<Command>                          driveCommands       = new ConcurrentLinkedQueue<Command>();
+
+  /**
    * Default drive state. See {@link #getState()}.
    */
   protected DriveState                                    state               = new DriveState();
@@ -2898,6 +2907,16 @@ public abstract class JCRLocalCloudDrive extends CloudDrive implements CloudDriv
       cmd = currentSync.get();
     }
     return cmd;
+  }
+
+  /**
+   * {@inheritDoc}
+   */
+  @Override
+  public void await() throws ExecutionException, InterruptedException {
+    for (Command c : driveCommands) {
+      c.await();
+    }
   }
 
   // ********* internals ***********

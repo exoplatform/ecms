@@ -166,7 +166,7 @@ class FeaturesSpec extends ExoSpecification {
     }
 
     CloudDriveService cloudDrives = cloudDrives(features)
-    
+
     // and connect drives under our users, in their sessions
     String parentPath = testRoot.path
     login("mark")
@@ -192,7 +192,7 @@ class FeaturesSpec extends ExoSpecification {
 
   def "Autosync allowed for featured user only (REST)"() {
     given: "Have two users with connected drives. But autosync availabel for only one of them."
-    
+
     // Mocked feature: users can connect drives but only John has autosync feature. We also check behaviour how it is used by the service.
     CloudDriveFeatures features = Mock(CloudDriveFeatures) {
       2 * canCreateDrive(*_) >> true // will be called twice
@@ -201,7 +201,7 @@ class FeaturesSpec extends ExoSpecification {
     CloudDriveService cloudDrives = cloudDrives(features)
     FeaturesService restService = featuresService(cloudDrives, features)
 
-    // and connect drives under our users, in their sessions 
+    // and connect drives under our users, in their sessions
     String parentPath = testRoot.path
     login("mark")
     CloudDrive markDrive = connectDrive(parentPath, cloudDrives)
@@ -224,33 +224,12 @@ class FeaturesSpec extends ExoSpecification {
   }
 
   // =============== helpers ===============
-  
-  CloudDriveService cloudDrives(CloudDriveFeatures features) {
-    CloudDriveServiceImpl cloudDrives = new CloudDriveServiceImpl(repositoryService, sessionProviders, features)
-    cloudDrives.addPlugin(createExoDriveConnector())
-    cloudDrives
-  }
 
   FeaturesService featuresService(CloudDriveService cloudDrives, CloudDriveFeatures features) {
     NodeFinder nodeFinder = (NodeFinder) PortalContainer.getInstance().getComponentInstanceOfType(NodeFinder.class)
     new FeaturesService(cloudDrives,
         features,
         repositoryService,
-        sessionProviders,
-        nodeFinder)
-  }
-  
-  CloudDrive connectDrive(String parentPath, CloudDriveService cloudDrives) {
-    Session session = session()
-    
-    Node userNode = session.getItem(parentPath).addNode("drive-${session.userID}", "nt:folder")
-    session.save()
-    
-    CloudProvider provider = cloudDrives.getProvider("exo")
-    CloudUser user = cloudDrives.authenticate(provider, session.userID)
-    
-    CloudDrive drive = cloudDrives.createDrive(user, userNode)
-    drive.connect()
-    drive
+        sessionProviders)
   }
 }

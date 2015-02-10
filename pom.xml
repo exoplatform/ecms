@@ -262,11 +262,15 @@
                 <exo.test.type>integration</exo.test.type><!-- to separate HSQL and Indexer files in JCR -->
                 <maven.exoplatform.dir>${project.build.directory}</maven.exoplatform.dir>
                 <exo.conf.dir.name>test-classes/conf</exo.conf.dir.name>
+                <!-- exo.shared.dir>${project.build.directory}</exo.shared.dir  -->
                 <java.security.auth.login.config>${project.build.directory}/test-classes/conf/jaas.conf</java.security.auth.login.config>
               </systemPropertyVariables>
               <includes>
                 <include>**/**/*Spec.java</include>
               </includes>
+              <excludes>
+                <exclude>**/**/UploadSpec.java</exclude>
+              </excludes>
               <forkCount>0</forkCount>
             </configuration>
           </execution>

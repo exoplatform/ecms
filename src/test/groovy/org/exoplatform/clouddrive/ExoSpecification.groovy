@@ -23,7 +23,11 @@ import spock.lang.Specification
 
 import org.exoplatform.clouddrive.exodrive.ExoDriveConnector
 import org.exoplatform.clouddrive.exodrive.service.ExoDriveService
+import org.exoplatform.clouddrive.features.CloudDriveFeatures;
+import org.exoplatform.clouddrive.jcr.NodeFinder;
 import org.exoplatform.clouddrive.jcr.TestJCRRemoveObservation
+import org.exoplatform.clouddrive.rest.FeaturesService;
+import org.exoplatform.clouddrive.utils.ExtendedMimeTypeResolver;
 import org.exoplatform.container.PortalContainer
 import org.exoplatform.container.xml.InitParams
 import org.exoplatform.container.xml.PropertiesParam
@@ -65,7 +69,7 @@ class ExoSpecification extends Specification {
   protected Node                testRoot
 
   def setup() {
-    println ">>>>>>>>>> setup"
+    //println ">>>>>>>>>> setup"
 
     PortalContainer container = PortalContainer.getInstance()
 
@@ -94,6 +98,9 @@ class ExoSpecification extends Specification {
     ExoDriveService exoDrives = (ExoDriveService) container.getComponentInstanceOfType(ExoDriveService.class)
     OrganizationService orgService = (OrganizationService) container.getComponentInstanceOfType(OrganizationService.class)
 
+    NodeFinder finder =  (NodeFinder) container.getComponentInstanceOfType(NodeFinder.class)
+    ExtendedMimeTypeResolver mimeTypes = (ExtendedMimeTypeResolver) container.getComponentInstanceOfType(ExtendedMimeTypeResolver.class)
+
     InitParams params = Stub(InitParams) {
       getPropertiesParam("drive-configuration") >> {
         Stub(PropertiesParam.class) {
@@ -101,7 +108,7 @@ class ExoSpecification extends Specification {
         }
       }
     }
-    new ExoDriveConnector(repositoryService, sessionProviders, exoDrives, orgService, params)
+    new ExoDriveConnector(repositoryService, sessionProviders, exoDrives, orgService, finder, mimeTypes, params)
   }
 
 
@@ -136,7 +143,7 @@ class ExoSpecification extends Specification {
       session()
     }
   }
-  
+
   /**
    * JCR session based on current ConversationState.
    * 
@@ -144,6 +151,37 @@ class ExoSpecification extends Specification {
    */
   Session session() {
     sessionProviders.getSessionProvider(null).getSession("collaboration", repositoryService.getCurrentRepository())
+  }
+  
+  CloudDriveService cloudDrives(CloudDriveFeatures features) {
+    CloudDriveServiceImpl cloudDrives = new CloudDriveServiceImpl(repositoryService, sessionProviders, features)
+    cloudDrives.addPlugin(createExoDriveConnector())
+    cloudDrives
+  }
+  
+  CloudDrive connectDrive(String parentPath, CloudDriveService cloudDrives) {
+    Session session = session()
+    
+    Node userNode = session.getItem(parentPath).addNode("drive-${session.userID}", "nt:folder")
+    session.save()
+    
+    CloudProvider provider = cloudDrives.getProvider("exo")
+    CloudUser user = cloudDrives.authenticate(provider, session.userID)
+    
+    CloudDrive drive = cloudDrives.createDrive(user, userNode)
+    drive.connect()
+    drive
+  }
+  
+  CloudDrive connectDrive(Node userNode, CloudDriveService cloudDrives) {
+    Session session = session()
+    
+    CloudProvider provider = cloudDrives.getProvider("exo")
+    CloudUser user = cloudDrives.authenticate(provider, session.userID)
+    
+    CloudDrive drive = cloudDrives.createDrive(user, userNode)
+    drive.connect()
+    drive
   }
 
 }
