@@ -37,15 +37,13 @@ public class NodeTypeNameValidator implements Validator {
     if (inputValue == null || inputValue.trim().length() == 0) {
       throwException("NodeTypeNameValidator.msg.empty-input", uiInput);
     }
-    if(inputValue.equals(".")){
-      throwException("NodeTypeNameValidator.msg.Invalid-char", uiInput);
-    }
     switch (inputValue.length()) {
     case 1:
       checkOneChar(inputValue, uiInput);
       break;
     case 2:
       checkTwoChars(inputValue, uiInput);
+      break;
     default:
       checkMoreChars(inputValue, uiInput);
       break;

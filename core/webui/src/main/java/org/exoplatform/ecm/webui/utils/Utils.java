@@ -141,7 +141,7 @@ public class Utils {
 
   final public static String SPECIALCHARACTER[] = { SEMI_COLON, SLASH,
     BACKSLASH, "|", ">", "<", "\"", "?", "!", "#", "$",
-    "&", "*", "(", ")", "{", "}" };
+    "&", "*", "(", ")", "{", "}", "[", "]", ":", ".", "'" };
   final public static String REPOSITORY = "repository";
   final public static String VIEWS = "views";
   final public static String DRIVE = "drive";
