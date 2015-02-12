@@ -45,7 +45,7 @@ public class OpenInOfficeConnector implements ResourceContainer, Startable {
 
   private static final String VERSION_MIXIN ="mix:versionable";
 
-  private static String msofficeMimeType = ",doc,dot,docx,dotx,docm,dotm,xls,xlt,xla,xlsx,xltx,xlsm,xltm,xlam,xlsb,ppt" +
+  private static String msofficeMimeType = ",doc,dot,docx,dotx,docm,dotm,xll,xls,xlt,xla,xlsx,xltx,xlsm,xltm,xlam,xlsb,ppt" +
                                            ",pot,pps,ppa,pptx,potx,ppsx,ppam,pptm,potm,ppsm,";
   private NodeFinder nodeFinder;
   private LinkManager linkManager;
