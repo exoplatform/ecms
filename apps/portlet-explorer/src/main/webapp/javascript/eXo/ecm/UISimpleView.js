@@ -1033,7 +1033,7 @@
              this.parentNode.parentNode.parentNode.style.width = 'auto';
              this.parentNode.parentNode.parentNode.style.height = 'auto';
            }
-           this.style.display = 'none';
+           this.style.display = 'block';
            gj(this.parentNode).width(gj(this).width());
            gj(this.parentNode).height(gj(this).height());
         }).each(function() {
