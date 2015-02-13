@@ -17,12 +17,14 @@
 package org.exoplatform.ecm.webui.component.explorer.popup.admin;
 
 import java.io.InputStream;
+import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collection;
 import java.util.GregorianCalendar;
 import java.util.List;
+import java.util.Locale;
 
 import javax.jcr.Node;
 import javax.jcr.PathNotFoundException;
@@ -36,6 +38,7 @@ import javax.jcr.nodetype.NodeType;
 import javax.jcr.nodetype.PropertyDefinition;
 
 import org.apache.commons.lang.StringUtils;
+import org.exoplatform.ecm.webui.form.validator.DateValidator;
 import org.exoplatform.ecm.webui.form.validator.ECMNameValidator;
 import org.exoplatform.ecm.webui.utils.JCRExceptionManager;
 import org.exoplatform.ecm.utils.lock.LockUtil;
@@ -44,6 +47,7 @@ import org.exoplatform.services.jcr.RepositoryService;
 import org.exoplatform.services.log.ExoLogger;
 import org.exoplatform.services.log.Log;
 import org.exoplatform.web.application.ApplicationMessage;
+import org.exoplatform.webui.application.WebuiRequestContext;
 import org.exoplatform.webui.config.annotation.ComponentConfig;
 import org.exoplatform.webui.config.annotation.EventConfig;
 import org.exoplatform.webui.core.UIApplication;
@@ -163,6 +167,7 @@ public class UIPropertyForm extends UIForm {
     removeChildById(FIELD_VALUE);
     Node currentNode = getCurrentNode();
     if (currentNode != null){
+
       if (currentNode.isNodeType(Utils.NT_UNSTRUCTURED) ){
         getUIStringInput(FIELD_PROPERTY).setReadOnly(!isAddNew_);
         getUIFormSelectBox(FIELD_NAMESPACE).setDisabled(!isAddNew_);
@@ -254,6 +259,7 @@ public class UIPropertyForm extends UIForm {
   }
 
   public void loadForm(String propertyName) throws Exception {
+    WebuiRequestContext requestContext = WebuiRequestContext.getCurrentInstance();
     Node currentNode = getCurrentNode();
     propertyName_ = propertyName;
     isAddNew_ = false;
@@ -285,7 +291,7 @@ public class UIPropertyForm extends UIForm {
             break;
           }
           case 5:  {
-            SimpleDateFormat dateFormat = new SimpleDateFormat("MM/dd/yyyy");
+            DateFormat dateFormat = new SimpleDateFormat(formatDate(requestContext.getLocale()));
             listValue.add(dateFormat.format(value.getDate().getTime()));
             break;
           }
@@ -318,7 +324,7 @@ public class UIPropertyForm extends UIForm {
         }
         case 5:  {
           UIFormDateTimeInput uiFormDateTimeInput = getUIFormDateTimeInput(FIELD_VALUE);
-          SimpleDateFormat dateFormat = new SimpleDateFormat("MM/dd/yyyy HH:mm:ss");
+          DateFormat dateFormat = new SimpleDateFormat(formatDate(requestContext.getLocale()));
           uiFormDateTimeInput.setValue(dateFormat.format(value.getDate().getTime()));
           break;
         }
@@ -372,7 +378,7 @@ public class UIPropertyForm extends UIForm {
             break;
           }
           case 5:  {
-            SimpleDateFormat dateFormat = new SimpleDateFormat("MM/dd/yyyy");
+            DateFormat dateFormat = new SimpleDateFormat(formatDate(requestContext.getLocale()));
             listValue.add(dateFormat.format(value.getDate().getTime()));
             break;
           }
@@ -405,7 +411,7 @@ public class UIPropertyForm extends UIForm {
         }
         case 5:  {
           UIFormDateTimeInput uiFormDateTimeInput = getUIFormDateTimeInput(FIELD_VALUE);
-          SimpleDateFormat dateFormat = new SimpleDateFormat("MM/dd/yyyy HH:mm:ss");
+          DateFormat dateFormat = new SimpleDateFormat(formatDate(requestContext.getLocale()));
           uiFormDateTimeInput.setValue(dateFormat.format(value.getDate().getTime()));
           break;
         }
@@ -478,19 +484,20 @@ public class UIPropertyForm extends UIForm {
     return valueList;
   }
 
-  private void changeMultipleType(UIFormMultiValueInputSet uiFormMultiValue, int type) {
+  private void changeMultipleType(UIFormMultiValueInputSet uiFormMultiValue, int type) throws Exception {
     if(PropertyType.BINARY == type) {
       uiFormMultiValue.setType(UIUploadInput.class);
     } else if(PropertyType.BOOLEAN == type) {
       uiFormMultiValue.setType(UICheckBoxInput.class);
     } else if(PropertyType.DATE == type) {
       uiFormMultiValue.setType(UIFormDateTimeInput.class);
+      uiFormMultiValue.addValidator(DateValidator.class);
     } else {
       uiFormMultiValue.setType(UIFormStringInput.class);
     }
   }
 
-  private void changeSingleType(int type) {
+  private void changeSingleType(int type) throws Exception {
     removeChildById(FIELD_VALUE);
     if(PropertyType.BINARY == type) {
       UIUploadInput uiUploadInput = new UIUploadInput(FIELD_VALUE, FIELD_VALUE);
@@ -498,7 +505,9 @@ public class UIPropertyForm extends UIForm {
     } else if(PropertyType.BOOLEAN == type) {
       addUIFormInput(new UICheckBoxInput(FIELD_VALUE, FIELD_VALUE, null));
     } else if(PropertyType.DATE == type) {
-      addUIFormInput(new UIFormDateTimeInput(FIELD_VALUE, FIELD_VALUE, null));
+      UIFormDateTimeInput uiFormDateTimeInput = new UIFormDateTimeInput(FIELD_VALUE, FIELD_VALUE, null);
+      uiFormDateTimeInput.addValidator(DateValidator.class);
+      addUIFormInput(uiFormDateTimeInput);
     } else {
       addUIFormInput(new UIFormStringInput(FIELD_VALUE, FIELD_VALUE, null));
     }
@@ -750,5 +759,28 @@ public class UIPropertyForm extends UIForm {
       }
     }
     return properties;
+  }
+
+  // adapt GateIn's UIFormDateTimeInput
+  private String formatDate(Locale locale) {
+    String datePattern = "";
+    DateFormat dateFormat = SimpleDateFormat.getDateInstance(DateFormat.SHORT, locale);
+
+    // convert to unique pattern
+    datePattern = ((SimpleDateFormat)dateFormat).toPattern();
+
+    if (!datePattern.contains("yy")) {
+      datePattern = datePattern.replaceAll("y", "yy");
+    }
+    if (!datePattern.contains("yyyy")) {
+      datePattern = datePattern.replaceAll("yy", "yyyy");
+    }
+    if (!datePattern.contains("dd")) {
+      datePattern = datePattern.replaceAll("d", "dd");
+    }
+    if (!datePattern.contains("MM")) {
+      datePattern= datePattern.replaceAll("M", "MM");
+    }
+    return datePattern;
   }
 }
