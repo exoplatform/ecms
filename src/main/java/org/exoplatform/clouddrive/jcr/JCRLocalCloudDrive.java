@@ -878,7 +878,7 @@ public abstract class JCRLocalCloudDrive extends CloudDrive implements CloudDriv
      */
     protected final void exec() throws CloudDriveAccessException, CloudDriveException, RepositoryException {
       startTime.set(System.currentTimeMillis());
-      
+
       driveCommands.add(this);
 
       try {
@@ -1282,7 +1282,7 @@ public abstract class JCRLocalCloudDrive extends CloudDrive implements CloudDriv
     /**
      * This command updating files. Will be removed at the processing end.
      */
-    final Set<String>      updating = new LinkedHashSet<String>();
+    final List<String>     updating = new ArrayList<String>(); // use List to track number of updates
 
     final List<FileChange> changes;
 
@@ -2727,7 +2727,9 @@ public abstract class JCRLocalCloudDrive extends CloudDrive implements CloudDriv
         }
       }
     } catch (PathNotFoundException e) {
-      LOG.warn("Path not found in drive " + title() + ": " + e.getMessage());
+      if (LOG.isDebugEnabled()) {
+        LOG.debug("Path not found in drive " + title() + ": " + e.getMessage());
+      }
     }
     return false;
   }
@@ -3707,7 +3709,9 @@ public abstract class JCRLocalCloudDrive extends CloudDrive implements CloudDriv
         }
       } catch (ItemNotFoundException e) {
         // file not found at the given path - it is not a drive
-        LOG.warn("Path not found in drive " + title() + ": " + e.getMessage());
+        if (LOG.isDebugEnabled()) {
+          LOG.debug("Path not found in drive " + title() + ": " + e.getMessage());
+        }
       }
     }
     return false;
@@ -4679,7 +4683,9 @@ public abstract class JCRLocalCloudDrive extends CloudDrive implements CloudDriv
           }
         } catch (PathNotFoundException e) {
           // file not found at the given path - it is not a drive
-          LOG.warn("Path not found in drive " + title() + ": " + e.getMessage());
+          if (LOG.isDebugEnabled()) {
+            LOG.debug("Path not found in drive " + title() + ": " + e.getMessage());
+          }
         }
       }
     }
