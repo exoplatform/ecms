@@ -1773,7 +1773,7 @@
 				if (hideTimeout) {
 					clearTimeout(hideTimeout);
 				}
-
+				
 				// when message undefined/null then process failure silently
 				if (message) {
 					var options = {
@@ -1792,6 +1792,7 @@
 					  nonblock : false
 					};
 					notice.pnotify(options);
+					refresh();
 				} else {
 					var options = {
 					  title : "Canceled",
