@@ -11,6 +11,8 @@ import javax.jcr.NodeIterator;
 import javax.jcr.Session;
 import javax.jcr.query.Query;
 import javax.jcr.query.QueryResult;
+import javax.jcr.version.Version;
+import javax.jcr.version.VersionIterator;
 
 import org.apache.commons.lang.StringUtils;
 import org.exoplatform.commons.upgrade.UpgradeProductPlugin;
@@ -154,11 +156,29 @@ public class InternalLinksUpgradePlugin extends UpgradeProductPlugin {
   /* Republish node */
   private void republishNode(Node checkedNode) throws Exception {
     PublicationService publicationService = (PublicationService)WCMCoreUtils.getService(PublicationService.class);
-    if (publicationService.isNodeEnrolledInLifecycle(checkedNode) && PublicationDefaultStates.PUBLISHED.equalsIgnoreCase(publicationService.getCurrentState(checkedNode))){
+    if (publicationService.isNodeEnrolledInLifecycle(checkedNode)){
+      VersionIterator versionIterator = checkedNode.getVersionHistory().getAllVersions();
+      boolean hasFrozenNode = false;
+      while (versionIterator.hasNext()) {
+        if (versionIterator.nextVersion().hasNode("jcr:frozenNode")) {
+          hasFrozenNode = true;
+          break;
+        }
+      }
+      if (!hasFrozenNode) {
+        return;
+      }
+      String currentState = publicationService.getCurrentState(checkedNode);
       HashMap<String, String> context = new HashMap<String, String>();
-      LOG.info("=====Republish '"+ checkedNode.getPath()+ "' =====");
-      publicationService.changeState(checkedNode,PublicationDefaultStates.DRAFT,context);
-      publicationService.changeState(checkedNode,PublicationDefaultStates.PUBLISHED,context);
+      LOG.info(" ===== Republish '"+ checkedNode.getPath()+ "' =====");
+      if (PublicationDefaultStates.PUBLISHED.equalsIgnoreCase(currentState)) {
+        publicationService.changeState(checkedNode, PublicationDefaultStates.DRAFT, context);
+      }
+      publicationService.changeState(checkedNode, PublicationDefaultStates.PUBLISHED, context);
+      if (!PublicationDefaultStates.PUBLISHED.equalsIgnoreCase(currentState)) {
+        LOG.info(" ===== Restore '"+ checkedNode.getPath()+ "' to " + currentState + " =====");
+        publicationService.changeState(checkedNode, currentState, context);
+      }
     }
   }
 
