@@ -534,7 +534,7 @@
 			  	} else {
 			  		utils.log("ERROR: Cloud Drive file " + workspace + ":" + path + " cannot be read: " 
 			  				+ err.message + " (" + status + ")");
-					  cloudDriveUI.showError("Error reading drive file", err.message ? err.message : "Internal error. Try again later.");
+					  //cloudDriveUI.showError("Error reading drive file", err.message ? err.message : "Internal error. Try again later.");
 				  }
 			  });
 			}
@@ -1262,8 +1262,20 @@
 		var decodeString = function(str) {
 			if (str) {
 				try {
-					str = decodeURIComponent(str);
 					str = str.replace(/\+/g, " ");
+					str = decodeURIComponent(str);
+					return str;
+				} catch(e) {
+					utils.log("WARN: error decoding string " + str + ". " + e, e);
+				}
+			}
+			return null;
+		};
+		
+		var encodeString = function(str) {
+			if (str) {
+				try {
+					str = encodeURIComponent(str);
 					return str;
 				} catch(e) {
 					utils.log("WARN: error decoding string " + str + ". " + e, e);
