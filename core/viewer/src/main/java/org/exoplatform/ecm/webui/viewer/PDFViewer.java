@@ -393,4 +393,16 @@ public class PDFViewer extends UIForm {
     }
     return currentNode ;
   }
+  
+  public String getActionOpenDocInDesktop() {
+    UIComponent uiParent = getParent();
+    String ret = "";
+    try {
+      Method method = getMethod(uiParent, "getActionOpenDocInDesktop");
+      if(method != null) ret = (String) method.invoke(uiParent, (Object[]) null);
+    } catch (NoSuchMethodException| IllegalArgumentException| IllegalAccessException| InvocationTargetException e) {
+      ret = "";
+    }
+    return ret;
+  }
 }

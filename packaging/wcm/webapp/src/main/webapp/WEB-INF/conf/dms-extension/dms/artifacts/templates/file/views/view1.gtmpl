@@ -11,7 +11,9 @@
   import org.exoplatform.wcm.webui.reader.ContentReader;
   import org.exoplatform.ecm.webui.viewer.PDFViewer;
   import org.exoplatform.services.pdfviewer.PDFViewerService;
-  
+  import org.exoplatform.services.wcm.utils.WCMCoreUtils;
+  import org.exoplatform.wcm.connector.collaboration.OpenInOfficeConnector;
+
   
   public Node getFileLangNode(Node currentNode) throws Exception {
     if(currentNode.isNodeType("nt:unstructured")) {
@@ -57,6 +59,11 @@
     return text.replaceAll("'", "\\\\'") ;
   }
   
+ def openInOfficeConnector = WCMCoreUtils.getService(OpenInOfficeConnector.class);
+ def _documentInfos = openInOfficeConnector.getDocumentInfos(currentNode.getName());  
+ def remoteEditClass=_documentInfos[1];  
+ def remoteEditTitle=_ctx.appRes(_documentInfos[0]);
+
   StringBuilder sb = new StringBuilder();
   String ndPath = currentNode.getPath();
   if (ndPath.startsWith("/")) {
