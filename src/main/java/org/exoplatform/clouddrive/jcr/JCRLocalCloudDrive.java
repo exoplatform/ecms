@@ -1679,8 +1679,8 @@ public abstract class JCRLocalCloudDrive extends CloudDrive implements CloudDriv
 
     protected Collection<String> findParents(String fileId) throws DriveRemovedException, RepositoryException {
       Set<String> parentIds = new LinkedHashSet<String>();
-      for (NodeIterator niter = findNodes(Arrays.asList(fileId)); niter.hasNext();) {
-        Node p = niter.nextNode().getParent(); // parent it is a cloud file or a cloud drive
+      for (Node fn : findNodes(Arrays.asList(fileId))) {
+        Node p = fn.getParent(); // parent it is a cloud file or a cloud drive
         parentIds.add(fileAPI.getId(p));
       }
       return Collections.unmodifiableCollection(parentIds);
@@ -1689,8 +1689,8 @@ public abstract class JCRLocalCloudDrive extends CloudDrive implements CloudDriv
     protected Collection<Node> findParentNodes(String fileId) throws DriveRemovedException,
                                                              RepositoryException {
       Set<Node> parents = new LinkedHashSet<Node>();
-      for (NodeIterator niter = findNodes(Arrays.asList(fileId)); niter.hasNext();) {
-        Node p = niter.nextNode().getParent(); // parent it is a cloud file or a cloud drive
+      for (Node fn : findNodes(Arrays.asList(fileId))) {
+        Node p = fn.getParent(); // parent it is a cloud file or a cloud drive
         parents.add(p);
       }
       return Collections.unmodifiableCollection(parents);
@@ -1965,8 +1965,7 @@ public abstract class JCRLocalCloudDrive extends CloudDrive implements CloudDriv
                       }
                     } else if (srcFile == null) {
                       // find any file with the same id, but different instance
-                      for (NodeIterator niter = findNodes(Arrays.asList(fileId)); niter.hasNext();) {
-                        Node n = niter.nextNode();
+                      for (Node n : findNodes(Arrays.asList(fileId))) {
                         if (!node.isSame(n)) {
                           srcFile = n;
                         }
@@ -4118,15 +4117,18 @@ public abstract class JCRLocalCloudDrive extends CloudDrive implements CloudDriv
   protected Node findNode(String id) throws RepositoryException, DriveRemovedException {
 
     Node rootNode = rootNode();
-    QueryManager qm = rootNode.getSession().getWorkspace().getQueryManager();
-    Query q = qm.createQuery("SELECT * FROM " + ECD_CLOUDFILE + " WHERE ecd:id='" + id
-        + "' AND jcr:path LIKE '" + rootNode.getPath() + "/%'", Query.SQL);
-    QueryResult qr = q.execute();
-    NodeIterator nodes = qr.getNodes();
-    if (nodes.hasNext()) {
-      return ensureOwned(nodes.nextNode());
+    if (fileAPI.getId(rootNode).equals(id)) {
+      return rootNode;
+    } else {
+      QueryManager qm = rootNode.getSession().getWorkspace().getQueryManager();
+      Query q = qm.createQuery("SELECT * FROM " + ECD_CLOUDFILE + " WHERE ecd:id='" + id
+          + "' AND jcr:path LIKE '" + rootNode.getPath() + "/%'", Query.SQL);
+      QueryResult qr = q.execute();
+      NodeIterator nodes = qr.getNodes();
+      if (nodes.hasNext()) {
+        return ensureOwned(nodes.nextNode());
+      }
     }
-
     return null;
   }
 
@@ -4136,13 +4138,20 @@ public abstract class JCRLocalCloudDrive extends CloudDrive implements CloudDriv
    * files cannot be found in JCR.
    * 
    * @param ids {@link Collection} of {@link String}
-   * @return {@link NodeIterator}
+   * @return {@link Collection} of nodes
    * @throws RepositoryException
    * @throws DriveRemovedException
    */
-  protected NodeIterator findNodes(Collection<String> ids) throws RepositoryException, DriveRemovedException {
+  protected Collection<Node> findNodes(Collection<String> ids) throws RepositoryException,
+                                                              DriveRemovedException {
+
+    Set<Node> res = new LinkedHashSet<Node>();
 
     Node rootNode = rootNode();
+    if (ids.contains(fileAPI.getId(rootNode))) {
+      res.add(rootNode);
+    }
+
     QueryManager qm = rootNode.getSession().getWorkspace().getQueryManager();
 
     StringBuilder idstmt = new StringBuilder();
@@ -4159,7 +4168,12 @@ public abstract class JCRLocalCloudDrive extends CloudDrive implements CloudDriv
     Query q = qm.createQuery("SELECT * FROM " + ECD_CLOUDFILE + " WHERE " + idstmt + " AND jcr:path LIKE '"
         + rootNode.getPath() + "/%'", Query.SQL);
     QueryResult qr = q.execute();
-    return qr.getNodes();
+
+    for (NodeIterator niter = qr.getNodes(); niter.hasNext();) {
+      res.add(niter.nextNode());
+    }
+
+    return res;
   }
 
   protected JCRLocalCloudFile readFile(Node fileNode) throws RepositoryException {
