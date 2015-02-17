@@ -80,7 +80,7 @@ public class DocumentTypeServiceImpl implements DocumentTypeService, Startable {
   private static final String OPEN_DESKTOP_PROVIDER_REGEX="^exo.remote-edit\\.([a-z]+)$";
   private static final String OPEN_PROVIDER_RESOURCEBUNDLE_SUFFIX = ".label";
   private static final String OPEN_PROVIDER_STYLE_SUFFIX = ".ico";
-  private final String OPEN_DOCUMENT_ON_DESKTOP_ICO = "uiIcon16x16FileDefault";
+  private final String OPEN_DOCUMENT_ON_DESKTOP_ICO = "uiIconOpenOnDesktop";
   private final String OPEN_DOCUMENT_IN_DESKTOP_RESOURCE_KEY = "OpenInOfficeConnector.label.exo.remote-edit.desktop";
 
   private void init() {

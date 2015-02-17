@@ -35,7 +35,7 @@ import java.util.ResourceBundle;
 @RolesAllowed("users")
 public class OpenInOfficeConnector implements ResourceContainer, Startable {
 
-  private final String OPEN_DOCUMENT_ON_DESKTOP_ICO              = "uiIcon16x16FileDefault";
+  private final String OPEN_DOCUMENT_ON_DESKTOP_ICO              = "uiIconOpenOnDesktop";
   private final String CONNECTOR_BUNDLE_LOCATION                 = "locale.wcm.resources.WCMResourceBundleConnector";
   private final String OPEN_DOCUMENT_ON_DESKTOP_RESOURCE_KEY = "OpenInOfficeConnector.label.exo.remote-edit.desktop";
   private final String OPEN_DOCUMENT_IN_DESKTOP_APP_RESOURCE_KEY = "OpenInOfficeConnector.label.exo.remote-edit.desktop-app";
