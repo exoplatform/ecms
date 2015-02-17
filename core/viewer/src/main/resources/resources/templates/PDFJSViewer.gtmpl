@@ -12,6 +12,9 @@
   import org.exoplatform.webui.application.portlet.PortletRequestContext;
   import javax.portlet.PortletRequest;
   import org.exoplatform.services.pdfviewer.PDFViewerService;
+  import org.exoplatform.services.wcm.utils.WCMCoreUtils;
+  import org.exoplatform.wcm.connector.collaboration.OpenInOfficeConnector;
+
   
   UIComponent uiParent = uicomponent.getParent();
   RepositoryService rService = uicomponent.getApplicationComponent(RepositoryService.class);
@@ -501,6 +504,11 @@ if(uicomponent.isNotModernBrowser()) {
   <%
   }
  } else {
+    def openInOfficeConnector = WCMCoreUtils.getService(OpenInOfficeConnector.class);
+    def _documentInfos = openInOfficeConnector.getDocumentInfos(originalNode.getName());
+    def remoteEditClass=_documentInfos[1];
+    def remoteEditTitle=_ctx.appRes(_documentInfos[0]);
+
     def errorMessage = _ctx.appRes("File.view.label.not-viewable");
     def pageMsg = _ctx.appRes("File.view.label.pdf-max-page");
     pageMsg = pageMsg.replace("{0}", (String) PDFViewerService.MAX_PAGES);
@@ -520,7 +528,10 @@ if(uicomponent.isNotModernBrowser()) {
       <div class="detailContainer">
         <h4>$errorMessage</h4>
         <a class="btn btn-primary"  href="$downloadLink"><i class="uiIconDownload uiIconWhite"></i><%=_ctx.appRes("File.view.label.download")%></a>
-        <a class="btn"><i class="uiIconExport uiIconLightGray"></i><%=_ctx.appRes("File.view.label.open-on-desktop")%></a>
+        <a class="btn" href="#" onclick="<%=uicomponent.getActionOpenDocInDesktop()%>">
+            <i class="uiIcon16x16FileDefault uiIcon16x16nt_file $remoteEditClass uiIconEcmsOpenDocument">
+            </i>$remoteEditTitle
+        </a>
       </div>
     </div>
 <%}
