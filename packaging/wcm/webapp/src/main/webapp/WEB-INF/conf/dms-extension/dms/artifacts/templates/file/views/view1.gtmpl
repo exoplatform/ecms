@@ -59,10 +59,10 @@
     return text.replaceAll("'", "\\\\'") ;
   }
   
- def openInOfficeConnector = WCMCoreUtils.getService(OpenInOfficeConnector.class);
- def _documentInfos = openInOfficeConnector.getDocumentInfos(currentNode.getName());  
- def remoteEditClass=_documentInfos[1];  
- def remoteEditTitle=_ctx.appRes(_documentInfos[0]);
+  def openInOfficeConnector = WCMCoreUtils.getService(OpenInOfficeConnector.class);
+  def _documentInfos = openInOfficeConnector.getDocumentInfos(currentNode.getName());
+  def remoteEditClass=_documentInfos[1];
+  def remoteEditTitle=_ctx.appRes(_documentInfos[0]);
 
   StringBuilder sb = new StringBuilder();
   String ndPath = currentNode.getPath();
@@ -124,8 +124,12 @@
               </div>
               <div class="detailContainer">
                 <h4><%=_ctx.appRes("File.view.label.not-viewable")%></h4>
-                <a class="btn btn-primary" href="$downloadLink"><i class="uiIconDownload uiIconWhite"></i><%=_ctx.appRes("File.view.label.download")%></a>
-                <a class="btn"><i class="uiIconExport uiIconLightGray"></i><%=_ctx.appRes("File.view.label.open-on-desktop")%></a>
+                  <a class="btn btn-primary" href="$downloadLink"><i class="uiIconDownload uiIconWhite"></i><%=_ctx.appRes("File.view.label.download")%>
+                  </a>&nbsp;&nbsp;
+                  <a class="btn" href="#" onclick="<%=uicomponent.getActionOpenDocInDesktop()%>">
+                      <i class="uiIcon16x16FileDefault uiIcon16x16nt_file $remoteEditClass uiIconEcmsOpenDocument"></i>
+                      $remoteEditTitle
+                  </a>
               </div>
             </div>
           <%}%>
@@ -159,8 +163,11 @@
             </div>
             <div class="detailContainer">
               <h4><%=_ctx.appRes("File.view.label.not-viewable")%></h4>
-              <a class="btn btn-primary" href="$downloadLink"><i class="uiIconDownload uiIconWhite"></i><%=_ctx.appRes("File.view.label.download")%></a>
-              <a class="btn"><i class="uiIconExport uiIconLightGray"></i><%=_ctx.appRes("File.view.label.open-on-desktop")%></a>
+                <a class="btn btn-primary" href="$downloadLink"><i class="uiIconDownload uiIconWhite"></i><%=_ctx.appRes("File.view.label.download")%></a>&nbsp;&nbsp;
+                <a class="btn" href="#" onclick="<%=uicomponent.getActionOpenDocInDesktop()%>">
+                    <i class="uiIcon16x16FileDefault uiIcon16x16nt_file $remoteEditClass uiIconEcmsOpenDocument"></i>
+                    $remoteEditTitle
+                </a>
             </div>
           </div>
         <%}%>
