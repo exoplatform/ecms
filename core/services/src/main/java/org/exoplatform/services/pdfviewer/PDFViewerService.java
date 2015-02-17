@@ -127,7 +127,12 @@ public class PDFViewerService {
       // cut the file name if name is too long, because OS allows only file with name < 250 characters
       name = reduceFileNameSize(name);
       content = File.createTempFile(name + "_tmp", ".pdf");
-
+      final File finalContent = content;
+      Runtime.getRuntime().addShutdownHook(new Thread() {
+        public void run() {
+		  finalContent.delete();
+		}
+	  });
       // Convert to pdf if need
       String extension = DMSMimeTypeResolver.getInstance().getExtension(mimeType);
       if ("pdf".equals(extension)) {

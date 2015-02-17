@@ -248,6 +248,12 @@ public class PDFViewerRESTService implements ResourceContainer {
      File file = null;
      try {
        file= File.createTempFile("imageCapture1_" + pageNum,".png");
+       final File finalCont = file;
+       Runtime.getRuntime().addShutdownHook(new Thread() {
+         public void run() {
+           finalCont.delete();
+         }
+       });
        /*
        file.deleteOnExit();
          PM Comment : I removed this line because each deleteOnExit creates a reference in the JVM for future removal
@@ -306,6 +312,12 @@ public class PDFViewerRESTService implements ResourceContainer {
       // cut the file name if name is too long, because OS allows only file with name < 250 characters
       name = reduceFileNameSize(name);
       content = File.createTempFile(name + "_tmp", ".pdf");
+      final File finalContent = content;
+      Runtime.getRuntime().addShutdownHook(new Thread() {
+        public void run() {
+          finalContent.delete();
+        }
+      });
       /*
       file.deleteOnExit();
         PM Comment : I removed this line because each deleteOnExit creates a reference in the JVM for future removal
