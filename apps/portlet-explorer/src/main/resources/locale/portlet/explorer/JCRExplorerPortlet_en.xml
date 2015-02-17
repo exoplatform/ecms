@@ -254,6 +254,7 @@
       <UISelectRestorePath>Select Restore Path</UISelectRestorePath>
       <UISEOForm>Manage SEO</UISEOForm>
       <UISEOToolbarForm>Manage SEO</UISEOToolbarForm>
+      <UIReadOnlyFileConfirmMessage>Open as read-only</UIReadOnlyFileConfirmMessage>
     </title>
     <header>
       <workspace>Workspace</workspace>
