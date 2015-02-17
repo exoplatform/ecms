@@ -1440,6 +1440,13 @@ public abstract class JCRLocalCloudDrive extends CloudDrive implements CloudDriv
               // else - ignore the change
               skipped.add(change);
             }
+          } catch (AccessDeniedException e) {
+            // special logic for a case when drive/file was moved to eXo Trash during the sync preparation
+            if (change != null && change.node != null && isInTrash(change.node)) {
+              skipped.add(change);
+            } else {
+              throw e;
+            }
           } catch (PathNotFoundException e) {
             if (change.changeType.equals(FileChange.REMOVE)) {
               // it is already removed - ignore it
@@ -1533,6 +1540,13 @@ public abstract class JCRLocalCloudDrive extends CloudDrive implements CloudDriv
               // XXX hardcode ignorance of exo:thumbnails here also,
               // it's possible that thumbnails' child nodes will disappear, thus we ignore them
               ignoredPaths.add(changePath);
+              skipped.add(change);
+            } else {
+              throw e;
+            }
+          } catch (AccessDeniedException e) {
+            // special logic for a case when drive/file was moved to eXo Trash during the sync processing
+            if (change != null && change.node != null && isInTrash(change.node)) {
               skipped.add(change);
             } else {
               throw e;
@@ -4701,6 +4715,25 @@ public abstract class JCRLocalCloudDrive extends CloudDrive implements CloudDriv
             LOG.debug("Path not found in drive " + title() + ": " + e.getMessage());
           }
         }
+      }
+    }
+    return false;
+  }
+
+  protected boolean isInTrash(Node node) {
+    try {
+      String nodePath = node.getPath();
+      Node nodeParent = systemSession().getItem(nodePath).getParent();
+      if (nodeParent.isNodeType(EXO_TRASHFOLDER)) {
+        // file already in eXo Trash - skip it
+        if (LOG.isDebugEnabled()) {
+          LOG.debug("File in Trash " + nodePath);
+        }
+        return true;
+      }
+    } catch (Throwable t) {
+      if (LOG.isDebugEnabled()) {
+        LOG.debug("Error reading node caused check for Trash " + node);
       }
     }
     return false;
