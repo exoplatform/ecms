@@ -85,8 +85,12 @@
           var isRightClick="";
 
           if(activityId != null && activityId != "undefined" && activityId != "") elClass +="_"+activityId;
-          if(rightClick) isRightClick="#ECMContextMenu";
-          var openDocument = gj(isRightClick+" ."+elClass).parent();
+          if(rightClick) {
+            isRightClick="#ECMContextMenu";
+            openDocument = gj(isRightClick+" ."+elClass).parent();
+          }else{
+            openDocument = gj("."+elClass).closest("a");
+          }
           var html = "<i class=\"uiIcon16x16FileDefault uiIcon16x16nt_file ";
 		  if("uiIcon16x16FileDefault" === data.ico){
 			html+="uiIconOpenOnDesktop ";
@@ -100,9 +104,9 @@
             if (data.isLocked) return;//can not edit, just show popup(do not change href)
           }else{
             if(!data.isMsoffice){
-              openDocument.parent().addClass("hidden");
+              openDocument.addClass("hidden");
             }else{
-              openDocument.parent().removeClass("hidden");
+              openDocument.removeClass("hidden");
             }
             console.log("ITHIT not detected!");
             defaultEnviromentFilter(openDocument);//only show with support enviroment.
@@ -188,7 +192,8 @@
       return false;
     }else{
       //other browser, hide this functional
-        gj(element).parent().hide();
+      gj(element).closest("li").hide();
+      gj(element).hide();
     }
 
     // other browser

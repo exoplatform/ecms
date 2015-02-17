@@ -37,7 +37,7 @@ import java.util.Arrays;
  */
 public class TestOpenInOfficeConnector extends BaseConnectorTestCase{
   private final String OPEN_DOCUMENT_ON_DESKTOP_RESOURCE_KEY     = "OpenInOfficeConnector.label.exo.remote-edit.desktop";
-  private final String OPEN_DOCUMENT_ON_DESKTOP_CSS_CLASS        = "uiIcon16x16FileDefault";
+  private final String OPEN_DOCUMENT_ON_DESKTOP_CSS_CLASS        = "uiIconOpenOnDesktop";
   private final String OPEN_DOCUMENT_IN_WORD_CSS_CLASS           = "uiIcon16x16applicationmsword";
   private final String OPEN_DOCUMENT_IN_WORD_RESOURCE_KEY        = "OpenInOfficeConnector.label.exo.remote-edit.word";
   private final String OPEN_DOCUMENT_IN_EXCEL_CSS_CLASS          = "uiIcon16x16applicationxls";
