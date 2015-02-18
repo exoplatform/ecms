@@ -3873,6 +3873,7 @@ public abstract class JCRLocalCloudDrive extends CloudDrive implements CloudDriv
     String cleanName = cleanName(fileTitle);
     String name = cleanName;
     String internalName = null;
+    boolean titleTried = false;
 
     int siblingNumber = 1;
     do {
@@ -3919,6 +3920,19 @@ public abstract class JCRLocalCloudDrive extends CloudDrive implements CloudDriv
             continue;
           }
         }
+        if (!titleTried) {
+          // Feb 17 2015: try by original title (usecase with '+' in name of uploaded file and Box in PLF 4.1)
+          titleTried = true;
+          try {
+            if (parent.hasNode(fileTitle)) {
+              name = fileTitle;
+              continue;
+            }
+          } catch (RepositoryException te) {
+            // assume any JCR error as not acceptable name
+          }
+        }
+
         // no such node exists, add it using internalName created by CD's cleanName()
         node = parent.addNode(internalName, nodeType);
         break;
