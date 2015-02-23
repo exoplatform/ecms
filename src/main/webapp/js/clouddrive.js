@@ -1565,15 +1565,17 @@
 		/**
 		 * Refresh WCM view.
 		 */
-		var refresh = function(allowRefresh) {
-			if (allowRefresh) {
+		var refresh = function(forceRefresh) {
+			if (forceRefresh) {
 				// refresh view w/ popup
 				$("a.refreshIcon i.uiIconRefresh").click();
 			} else {
-				// don't refresh if user actions active in the window
-				if ($("div#UIRenameWindowPopup, form#UIFolderForm, span.loading").size() == 0) {
-					// refresh view w/o popup
-					$("#ECMContextMenu a[exo\\:attr='RefreshView'] i").click();
+				// don't refresh if user actions active or if file view active
+				if ($("div#UIDocumentInfo:visible").size() > 0) {
+					if ($("div#UIPopupWindow:visible, div#UIRenameWindowPopup, span.loading").size() == 0) {
+						// refresh view w/o popup
+						$("#ECMContextMenu a[exo\\:attr='RefreshView'] i").click();
+					}
 				}
 			}
 		};
