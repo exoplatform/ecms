@@ -317,7 +317,7 @@ public class PDFViewerRESTService implements ResourceContainer {
         read(input, new BufferedOutputStream(new FileOutputStream(content)));
       } else {
         // create temp file to store original data of nt:file node
-        File in = File.createTempFile(name + "_tmp", null);
+        File in = File.createTempFile(name + "_tmp", "." + extension);
         read(input, new BufferedOutputStream(new FileOutputStream(in)));
         try {
           boolean success = jodConverter_.convert(in, content, "pdf");
