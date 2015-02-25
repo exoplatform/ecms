@@ -54,6 +54,7 @@ import org.exoplatform.webui.form.UIFormSelectBox;
 import org.exoplatform.webui.form.UIFormStringInput;
 import org.exoplatform.webui.form.UIFormTabPane;
 import org.exoplatform.webui.form.validator.MandatoryValidator;
+import org.exoplatform.webui.form.validator.Validator;
 
 /**
  * Created by The eXo Platform SARL
@@ -317,7 +318,17 @@ public class UINodeTypeForm extends UIFormTabPane {
     }
     getUIStringInput(SUPER_TYPE).setValue(types.toString()) ;
     if (nodeType.isMixin() && getUIStringInput(SUPER_TYPE).getValidators().size() > 0) {
-      getUIStringInput(SUPER_TYPE).getValidators().clear();
+      List<Validator> validators = getUIStringInput(SUPER_TYPE).getValidators();
+      int index = -1;
+      for (int i = 0; i < validators.size(); i++) {
+        if ((validators.get(i) instanceof MandatoryValidator)) {
+          index = i;
+          break;
+        }
+      }
+      if (index > -1) {
+        validators.remove(index);
+      }
     }
     if(isView) {
       getUIFormSelectBox(NAMESPACE).setDisabled(true) ;
@@ -800,10 +811,33 @@ public class UINodeTypeForm extends UIFormTabPane {
     public void execute(Event<UINodeTypeForm> event) throws Exception {
       UINodeTypeForm uiForm = event.getSource();
       if (uiForm.getUIFormSelectBox(MIXIN_TYPE).getValue().equals("true") && uiForm.getUIStringInput(SUPER_TYPE).getValidators().size() > 0) {
-        uiForm.getUIStringInput(SUPER_TYPE).getValidators().clear();
+        List<Validator> validators = uiForm.getUIStringInput(SUPER_TYPE).getValidators();
+        int index = -1;
+        for (int i = 0; i < validators.size(); i++) {
+          if ((validators.get(i) instanceof MandatoryValidator)) {
+            index = i;
+            break;
+          }
+        }
+        if (index > -1) {
+          validators.remove(index);
+        }
       } 
-      if (uiForm.getUIFormSelectBox(MIXIN_TYPE).getValue().equals("false") && uiForm.getUIStringInput(SUPER_TYPE).getValidators().size() == 0) {
-        uiForm.getUIStringInput(SUPER_TYPE).addValidator(MandatoryValidator.class);
+      if (uiForm.getUIFormSelectBox(MIXIN_TYPE).getValue().equals("false")) {
+        if (uiForm.getUIStringInput(SUPER_TYPE).getValidators().size() == 0) {
+          uiForm.getUIStringInput(SUPER_TYPE).addValidator(MandatoryValidator.class);
+        } else {
+            boolean isMandatoryValidator = false;
+            List<Validator> validators = uiForm.getUIStringInput(SUPER_TYPE).getValidators();
+            for (Object obj: validators) {
+              if (obj instanceof MandatoryValidator) {
+                isMandatoryValidator = true;
+              }
+            }
+            if (!isMandatoryValidator) {
+              uiForm.getUIStringInput(SUPER_TYPE).addValidator(MandatoryValidator.class);
+            }
+        }
       }
     }
   }
