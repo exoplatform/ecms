@@ -19,11 +19,9 @@ package org.exoplatform.ecm.webui.component.explorer.rightclick.manager;
 
 import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.HashMap;
-import java.util.Iterator;
+import java.util.Collections;
 import java.util.LinkedList;
 import java.util.List;
-import java.util.Map;
 import java.util.Queue;
 import java.util.ResourceBundle;
 import java.util.regex.Matcher;
@@ -136,17 +134,16 @@ public class DeleteManageComponent extends UIAbstractManagerComponent {
     return FILTERS;
   }
 
-  private void processRemoveMultiple(String[] nodePaths, Event<?> event) throws Exception {
-    Map<String, Node> mapNode = new HashMap<String, Node>();
+  private String processRemoveMultiple(String[] nodePaths, Event<?> event) throws Exception {
+     StringBuilder trashId = new StringBuilder();
     UIJCRExplorer uiExplorer = getAncestorOfType(UIJCRExplorer.class);
     UIApplication uiApp = uiExplorer.getAncestorOfType(UIApplication.class);
-    for (int i = 0; i < nodePaths.length; i++) {
+    Arrays.sort(nodePaths,Collections.reverseOrder());
+    for (int i = 0; i < nodePaths.length ; i++) {
       try {
         Node node = this.getNodeByPath(nodePaths[i]);
-
-        // Prepare to remove
         Validate.isTrue(node != null, "The ObjectId is invalid '" + nodePaths[i] + "'");
-        mapNode.put(node.getPath(), node);
+        trashId.append(processRemoveOrMoveToTrash(nodePaths[i], node, event, true, true)).append(";");
       } catch (PathNotFoundException path) {
         uiApp.addMessage(new ApplicationMessage("UIPopupMenu.msg.path-not-found-exception", null, ApplicationMessage.WARNING));
         event.getRequestContext().addUIComponentToUpdateByAjax(uiApp.getUIPopupMessages());
@@ -155,12 +152,7 @@ public class DeleteManageComponent extends UIAbstractManagerComponent {
       }
     }
 
-    String path = null;
-    Iterator<String> iterator = mapNode.keySet().iterator();
-    while (iterator.hasNext()) {
-      path = iterator.next();
-      processRemoveOrMoveToTrash(path, mapNode.get(path), event, true, true);
-    }
+    return trashId.substring(0,trashId.length() - 1);
   }
 
   private void removeAuditForNode(Node node) throws Exception {
@@ -176,21 +168,37 @@ public class DeleteManageComponent extends UIAbstractManagerComponent {
     }
   }
 
-  private void processRemoveOrMoveToTrash(String nodePath,
+  /**
+   * Remove or MoveToTrash
+   *
+   * @param nodePath
+   * @param node
+   * @param event
+   * @param isMultiSelect
+   * @param checkToMoveToTrash
+   * @return
+   *  0: node removed
+   * -1: move to trash failed
+   * trashId: moved to trash successfully
+   * @throws Exception
+   */
+  private String processRemoveOrMoveToTrash(String nodePath,
                                           Node node,
                                           Event<?> event,
                                           boolean isMultiSelect,
                                           boolean checkToMoveToTrash)
                                               throws Exception {
-    if (!checkToMoveToTrash || Utils.isInTrash(node))
+    String trashId="-1";
+    if (!checkToMoveToTrash || Utils.isInTrash(node)) {
       processRemoveNode(nodePath, node, event, isMultiSelect);
-    else {
+      return "0";
+    }else {
       String nodeName = node.getName();
       String nodeUUID = null;
       if (Utils.isReferenceable(node))
         nodeUUID = node.getUUID();
-      boolean moveOK = moveToTrash(nodePath, node, event, isMultiSelect);
-      if (moveOK) {
+      trashId = moveToTrash(nodePath, node, event, isMultiSelect);
+      if (!trashId.equals("-1")) {
         //Broadcast the event when user move node to Trash
         ListenerService listenerService =  WCMCoreUtils.getService(ListenerService.class);
         ActivityCommonService activityService = WCMCoreUtils.getService(ActivityCommonService.class);
@@ -234,11 +242,24 @@ public class DeleteManageComponent extends UIAbstractManagerComponent {
         }
       }
     }
+    return trashId;
   }
 
-  private boolean moveToTrash(String srcPath, Node node, Event<?> event, boolean isMultiSelect) throws Exception {
+  /**
+   * Move Node to Trash
+   * Return -1: move failed
+   * Return trashId: move successfully with trashId
+   * @param srcPath
+   * @param node
+   * @param event
+   * @param isMultiSelect
+   * @return
+   * @throws Exception
+   */
+  private String moveToTrash(String srcPath, Node node, Event<?> event, boolean isMultiSelect) throws Exception {
     TrashService trashService = WCMCoreUtils.getService(TrashService.class);
     boolean ret = true;
+    String trashId="-1";
     final String virtualNodePath = srcPath;
     UIJCRExplorer uiExplorer = getAncestorOfType(UIJCRExplorer.class);
     UIApplication uiApp = uiExplorer.getAncestorOfType(UIApplication.class);
@@ -246,7 +267,7 @@ public class DeleteManageComponent extends UIAbstractManagerComponent {
       uiExplorer.addLockToken(node);
     } catch (Exception e) {
       JCRExceptionManager.process(uiApp, e);
-      return false;
+      return trashId;
     }
 
     try {
@@ -271,7 +292,7 @@ public class DeleteManageComponent extends UIAbstractManagerComponent {
       Node currentNode = uiExplorer.getCurrentNode();
 
       try {
-        trashService.moveToTrash(node, sessionProvider);
+        trashId = trashService.moveToTrash(node, sessionProvider);
       } catch (PathNotFoundException ex) {
         ret = false;
       }
@@ -329,7 +350,7 @@ public class DeleteManageComponent extends UIAbstractManagerComponent {
       else
         uiExplorer.setSelectNode(uiExplorer.getCurrentPath());
     }
-    return ret;
+    return (ret)?trashId:"-1";
   }
 
   private void processRemoveNode(String nodePath, Node node, Event<?> event, boolean isMultiSelect)
@@ -481,8 +502,9 @@ public class DeleteManageComponent extends UIAbstractManagerComponent {
     ResourceBundle res = context.getApplicationResourceBundle();
     String deleteNotice = "";
     String deleteNoticeParam = "";
+    String trashId = "";
     if (nodePath.indexOf(";") > -1) {
-      processRemoveMultiple(Utils.removeChildNodes(nodePath), event);
+      trashId = processRemoveMultiple(Utils.removeChildNodes(nodePath), event);
       if(checkToMoveToTrash) deleteNotice = "UIWorkingArea.msg.feedback-delete-multi";
       else deleteNotice = "UIWorkingArea.msg.feedback-delete-permanently-multi";
       deleteNoticeParam = String.valueOf(nodePath.split(";").length);
@@ -495,7 +517,7 @@ public class DeleteManageComponent extends UIAbstractManagerComponent {
         else deleteNotice = "UIWorkingArea.msg.feedback-delete-permanently";
         deleteNoticeParam = StringEscapeUtils.unescapeHtml(Utils.getTitle(node));
         if (node != null) {
-          processRemoveOrMoveToTrash(node.getPath(), node, event, false, checkToMoveToTrash);
+          trashId = processRemoveOrMoveToTrash(node.getPath(), node, event, false, checkToMoveToTrash);
         }
       } catch (PathNotFoundException path) {
         uiApp.addMessage(new ApplicationMessage("UIPopupMenu.msg.path-not-found-exception", null,
@@ -512,7 +534,7 @@ public class DeleteManageComponent extends UIAbstractManagerComponent {
     deleteNotice = deleteNotice.replace("\"", "'");
     deleteNotice = StringEscapeUtils.escapeHtml(deleteNotice);
     if(checkToMoveToTrash) {
-      String undoLink = getUndoLink(nodePath);
+      String undoLink = getUndoLink(trashId);
       uiWorkingArea.setDeleteNotice(deleteNotice);
       uiWorkingArea.setNodePathDelete(undoLink);
     } else {
@@ -524,10 +546,10 @@ public class DeleteManageComponent extends UIAbstractManagerComponent {
   /**
    * Get undo link to restore nodes that deleted
    *
-   * @param nodePath node path of nodes want to restore
+   * @param trashId node path of nodes want to restore
    * @throws Exception
    */
-  private String getUndoLink(String nodePath) throws Exception {
+  private String getUndoLink(String trashId) throws Exception {
     String undoLink = "";
     UIJCRExplorer uiExplorer = getAncestorOfType(UIJCRExplorer.class);
     PortletPreferences portletPrefs = uiExplorer.getPortletPreferences();
@@ -538,12 +560,12 @@ public class DeleteManageComponent extends UIAbstractManagerComponent {
     QueryResult queryResult = null;
     NodeIterator iter = null;
     StringBuffer sb = new StringBuffer();
-    if (nodePath.indexOf(";") > -1) {
-      String[] nodePaths = nodePath.split(";");
+    if (trashId.indexOf(";") > -1) {
+      String[] nodePaths = trashId.split(";");
       for(int i=0; i<nodePaths.length; i++) {        
-        nodePath = nodePaths[i].substring(nodePaths[i].indexOf(":") + 1, nodePaths[i].length());
-        String queryStatement = "SELECT * from exo:restoreLocation WHERE exo:restorePath = '$0'";
-        queryStatement = StringUtils.replace(queryStatement, "$0", nodePath);
+        trashId = nodePaths[i].substring(nodePaths[i].indexOf(":") + 1, nodePaths[i].length());
+        String queryStatement = "SELECT * from exo:restoreLocation WHERE exo:trashId = '$0'";
+        queryStatement = StringUtils.replace(queryStatement, "$0", trashId);
         Query query = queryManager.createQuery(queryStatement, Query.SQL);
         queryResult = query.execute();
         iter = queryResult.getNodes();
@@ -554,9 +576,9 @@ public class DeleteManageComponent extends UIAbstractManagerComponent {
       undoLink = sb.toString();
       if(undoLink.length() > 0) undoLink = undoLink.substring(0,undoLink.length()-1);
     } else {
-      nodePath = nodePath.substring(nodePath.indexOf(":") + 1, nodePath.length());
-      String queryStatement = "SELECT * from exo:restoreLocation WHERE exo:restorePath = '$0'";
-      queryStatement = StringUtils.replace(queryStatement, "$0", nodePath);
+      trashId = trashId.substring(trashId.indexOf(":") + 1, trashId.length());
+      String queryStatement = "SELECT * from exo:restoreLocation WHERE exo:trashId = '$0'";
+      queryStatement = StringUtils.replace(queryStatement, "$0", trashId);
       Query query = queryManager.createQuery(queryStatement, Query.SQL);
       queryResult = query.execute();
       iter = queryResult.getNodes();

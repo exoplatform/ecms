@@ -634,6 +634,9 @@
       <propertyDefinition name="exo:restorePath" requiredType="String" autoCreated="false" mandatory="false" onParentVersion="COPY" protected="false" multiple="false">
         <valueConstraints/>
       </propertyDefinition>
+      <propertyDefinition name="exo:trashId" requiredType="String" autoCreated="false" mandatory="false" onParentVersion="COPY" protected="false" multiple="false" >
+        <valueConstraints/>
+      </propertyDefinition>
     </propertyDefinitions>
   </nodeType>
 

@@ -16,18 +16,6 @@
  */
 package org.exoplatform.services.cms.documents.impl;
 
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Set;
-
-import javax.jcr.Node;
-import javax.jcr.NodeIterator;
-import javax.jcr.RepositoryException;
-import javax.jcr.Session;
-import javax.jcr.query.Query;
-import javax.jcr.query.QueryManager;
-import javax.jcr.query.QueryResult;
-
 import org.exoplatform.container.ExoContainer;
 import org.exoplatform.container.ExoContainerContext;
 import org.exoplatform.container.xml.InitParams;
@@ -51,6 +39,17 @@ import org.exoplatform.services.wcm.utils.WCMCoreUtils;
 import org.gatein.pc.api.PortletInvoker;
 import org.gatein.pc.api.info.PortletInfo;
 import org.gatein.pc.api.info.PreferencesInfo;
+
+import javax.jcr.Node;
+import javax.jcr.NodeIterator;
+import javax.jcr.RepositoryException;
+import javax.jcr.Session;
+import javax.jcr.query.Query;
+import javax.jcr.query.QueryManager;
+import javax.jcr.query.QueryResult;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Set;
 
 /**
  * Created by The eXo Platform SARL Author : Dang Van Minh
@@ -116,8 +115,8 @@ public class TrashServiceImpl implements TrashService {
   /**
    * {@inheritDoc}
    */
-  public void moveToTrash(Node node, SessionProvider sessionProvider) throws Exception {
-    moveToTrash(node, sessionProvider, 0);
+  public String moveToTrash(Node node, SessionProvider sessionProvider) throws Exception {
+    return moveToTrash(node, sessionProvider, 0);
   }
 
 
@@ -125,10 +124,11 @@ public class TrashServiceImpl implements TrashService {
    *{@inheritDoc}
    */
   @Override
-  public void moveToTrash(Node node,
+  public String moveToTrash(Node node,
                           SessionProvider sessionProvider,
                           int deep) throws Exception {
     ((SessionImpl)node.getSession()).getActionHandler().preRemoveItem((ItemImpl)node);
+    String trashId="-1";
     String nodeName = node.getName();
     Session nodeSession = node.getSession();
     nodeSession.checkPermission(node.getPath(), PermissionType.REMOVE);  
@@ -153,7 +153,7 @@ public class TrashServiceImpl implements TrashService {
       cache.remove(seoService.getHash(nodeUUID));
     }
     if (!node.isNodeType(EXO_RESTORE_LOCATION)) {
-      addRestorePathInfo(node);
+      trashId = addRestorePathInfo(node);
       ManageableRepository manageableRepository = repositoryService.getCurrentRepository();
       Session trashSession = WCMCoreUtils.getSystemSessionProvider().getSession(this.trashWorkspace_, manageableRepository);
       String actualTrashPath = this.trashHome_ + (this.trashHome_.endsWith("/") ? "" : "/")
@@ -215,10 +215,11 @@ public class TrashServiceImpl implements TrashService {
       
       trashSession.save();
     }
+    return trashId;
   }
  
   /* Store original path of deleted node.
-  * 
+  * Return restore_id of deleted node. Use when find node in trash to undo
   * @param node
   * @throws RepositoryException 
   * @throws LockException 
@@ -226,14 +227,17 @@ public class TrashServiceImpl implements TrashService {
   * @throws VersionException 
   * @throws NoSuchNodeTypeException 
   */
-  private void addRestorePathInfo(Node node) throws Exception {
+  private String addRestorePathInfo(Node node) throws Exception {
     String originWorkspace = node.getSession().getWorkspace().getName();
     Session sysSession = WCMCoreUtils.getSystemSessionProvider().getSession(originWorkspace, WCMCoreUtils.getRepository());
+    String restoreId = java.util.UUID.randomUUID().toString();
     Node sysSessionNode = (Node)sysSession.getItem(node.getPath());
     sysSessionNode.addMixin(EXO_RESTORE_LOCATION);
     sysSessionNode.setProperty(RESTORE_PATH, fixRestorePath(node.getPath()));
     sysSessionNode.setProperty(RESTORE_WORKSPACE, originWorkspace);
+    sysSessionNode.setProperty(TRASH_ID, restoreId);
     sysSession.save();
+    return restoreId;
   }
   
   /**

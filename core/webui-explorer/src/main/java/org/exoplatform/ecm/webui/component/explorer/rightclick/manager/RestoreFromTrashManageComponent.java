@@ -57,6 +57,7 @@ import javax.portlet.PortletPreferences;
 
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Collections;
 import java.util.List;
 import java.util.ResourceBundle;
 import java.util.regex.Matcher;
@@ -281,11 +282,12 @@ public class RestoreFromTrashManageComponent extends UIAbstractManagerComponent 
       String  wsName;
       Node    node;
       String  origialPath;
-      
+      Arrays.sort(paths,Collections.reverseOrder());
       List<String> newPaths = new ArrayList<String>(); 
 
       // In case multi checked items, check if a Symlink node is with its Target in Trash or not.
-      for (String srcPath : paths) {
+      for (int i =  0; i < paths.length ; i++) {
+        String srcPath = paths[i];
         origialPath = srcPath;
         matcher = UIWorkingArea.FILE_EXPLORER_URL_SYNTAX.matcher(srcPath);
         if (matcher.find()) {
