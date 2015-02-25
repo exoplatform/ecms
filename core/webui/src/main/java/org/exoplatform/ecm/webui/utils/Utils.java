@@ -1120,12 +1120,14 @@ public class Utils {
       uiOpenDocumentForm.setFilePath(nodePath);
       uiOpenDocumentForm.setWorkspace(ws);
       uiOpenDocumentForm.setAbsolutePath(filePath);
-      
-      event.getRequestContext().addUIComponentToUpdateByAjax(popupContainer.getParent());
+      event.getRequestContext().getJavascriptManager().require("SHARED/openDocumentInOffice")
+              .addScripts("eXo.ecm.OpenDocumentInOffice.showConfirmBox();");
     }else{
       event.getRequestContext().getJavascriptManager().require("SHARED/openDocumentInOffice")
               .addScripts("eXo.ecm.OpenDocumentInOffice.openDocument('" + filePath + "', '" + ws + "', '" + nodePath + "');");
     }
+    event.getRequestContext().addUIComponentToUpdateByAjax(popupContainer.getParent());
+
   }
 
 

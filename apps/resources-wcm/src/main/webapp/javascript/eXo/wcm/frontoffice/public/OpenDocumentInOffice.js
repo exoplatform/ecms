@@ -122,7 +122,12 @@
         uiActionBarContainer  = gj("#uiActionsBarContainer").html();
   }
 
-
+  OpenDocumentInOffice.prototype.showConfirmBox = function() {
+    gj("body").ajaxComplete(function () {
+      gj("#UIDocViewerPopup .UIPopupWindow").css("z-index", "120");
+      gj("#UIDocViewerPopup .UIPopupWindow").addClass("opendocMask");
+    });
+  }
   /**
    * Open Document with ActiveX. This required enviroments:
    * - MSOffice 2010, 2013 or least version Already installed

@@ -519,6 +519,12 @@ if(uicomponent.isNotModernBrowser()) {
     } else if (fileSize > PDFViewerService.MAX_FILE_SIZE) {
       errorMessage = sizeMsg;
     }
+
+    def currentNodePath = currentNode.getSession().getWorkspace().getName()+":"+currentNode.getPath();
+    def jsManager = _ctx.getRequestContext().getJavascriptManager();
+    jsManager.require("SHARED/openDocumentInOffice", "openDocumentInOffice")
+    .addScripts("eXo.ecm.OpenDocumentInOffice.updateLabel('"+currentNodePath+"');");
+
   %>
     <div class="uiUnEditable clearfix">
       <div class="iconContainer">
