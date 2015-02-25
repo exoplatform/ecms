@@ -27,7 +27,6 @@ import javax.jcr.Session;
 import org.exoplatform.ecm.webui.component.explorer.UIJCRExplorer;
 import org.exoplatform.ecm.webui.component.explorer.UIWorkingArea;
 import org.exoplatform.ecm.webui.component.explorer.control.UIActionBar;
-import org.exoplatform.ecm.webui.core.UIECMExtension;
 import org.exoplatform.services.cms.views.ManageViewService;
 import org.exoplatform.services.log.ExoLogger;
 import org.exoplatform.services.log.Log;
@@ -37,9 +36,7 @@ import org.exoplatform.webui.core.UIApplication;
 import org.exoplatform.webui.core.UIComponent;
 import org.exoplatform.webui.event.Event;
 import org.exoplatform.webui.exception.MessageException;
-import org.exoplatform.webui.ext.UIExtension;
 import org.exoplatform.webui.ext.UIExtensionEventListener;
-import org.exoplatform.webui.ext.UIExtensionManager;
 
 /**
  * Created by The eXo Platform SAS
@@ -84,11 +81,6 @@ public abstract class UIActionBarActionListener<T extends UIComponent> extends U
       context.put(UIApplication.class.getName(), uiApp);
       context.put(Node.class.getName(), currentNode);
       context.put(WebuiRequestContext.class.getName(), requestContext);
-      UIExtensionManager manager = uiExplorer.getApplicationComponent(UIExtensionManager.class);
-      UIExtension uiExtension = manager.getUIExtension(ManageViewService.EXTENSION_TYPE, event.getName());
-      if(uiExtension!=null && uiExtension instanceof UIECMExtension) {
-        context.put("views", ((UIECMExtension) uiExtension).getView());
-      }
     } catch(PathNotFoundException pne) {
       throw new MessageException(new ApplicationMessage("UIPopupMenu.msg.path-not-found", null,
           ApplicationMessage.WARNING)) ;

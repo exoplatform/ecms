@@ -20,7 +20,7 @@
 		  
 		  <% 
 				for(field in uiform.getChildren()) { 
-					if(field instanceof UICheckBoxInput && field.isRendered()) {
+					if(field instanceof UICheckBoxInput) {
 			%>
 			      <div class="control-group tabActions">
 							<%fieldName = uicomponent.getLabel(field.getName());%>																		

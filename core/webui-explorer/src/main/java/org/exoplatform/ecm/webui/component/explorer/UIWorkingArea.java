@@ -36,7 +36,6 @@ import org.exoplatform.ecm.webui.component.explorer.popup.actions.UIDocumentForm
 import org.exoplatform.ecm.webui.component.explorer.popup.actions.UISelectDocumentForm;
 import org.exoplatform.ecm.webui.component.explorer.sidebar.UISideBar;
 import org.exoplatform.ecm.webui.component.explorer.sidebar.UITreeExplorer;
-import org.exoplatform.ecm.webui.core.UIECMExtension;
 import org.exoplatform.ecm.webui.utils.Utils;
 import org.exoplatform.services.cms.actions.ActionServiceContainer;
 import org.exoplatform.services.cms.link.NodeFinder;
@@ -178,9 +177,6 @@ public class UIWorkingArea extends UIContainer {
 
   private UIComponent addUIExtension(UIExtension extension, Map<String, Object> context) throws Exception {
     UIExtensionManager manager = getApplicationComponent(UIExtensionManager.class);
-    if(context!=null && extension!=null && extension instanceof UIECMExtension){
-      context.put("views", ((UIECMExtension) extension).getView());
-    }
     UIComponent component = manager.addUIExtension(extension, context, this);
     if(component == null) return null;
     synchronized(component) {

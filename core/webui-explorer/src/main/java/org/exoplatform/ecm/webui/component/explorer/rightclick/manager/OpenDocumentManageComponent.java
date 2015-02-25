@@ -7,18 +7,25 @@ import javax.jcr.Node;
 import javax.jcr.Session;
 import javax.servlet.http.HttpServletRequest;
 
+import org.exoplatform.ecm.webui.component.explorer.UIDocumentContainer;
+import org.exoplatform.ecm.webui.component.explorer.UIDocumentInfo;
+import org.exoplatform.ecm.webui.component.explorer.UIDocumentWithTree;
+import org.exoplatform.ecm.webui.component.explorer.UIDocumentWorkspace;
 import org.exoplatform.ecm.webui.component.explorer.UIJCRExplorer;
-import org.exoplatform.ecm.webui.component.explorer.control.filter.IsNotTrashHomeNodeFilter;
-import org.exoplatform.ecm.webui.component.explorer.control.filter.IsNotInTrashFilter;
+import org.exoplatform.ecm.webui.component.explorer.UIWorkingArea;
 import org.exoplatform.ecm.webui.component.explorer.control.filter.IsNotEditingDocumentFilter;
+import org.exoplatform.ecm.webui.component.explorer.control.filter.IsNotInTrashFilter;
+import org.exoplatform.ecm.webui.component.explorer.control.filter.IsNotTrashHomeNodeFilter;
 import org.exoplatform.ecm.webui.component.explorer.control.filter.IsNtFileFilter;
-import org.exoplatform.ecm.webui.component.explorer.control.filter.CanDisplayInViewFilter;
 import org.exoplatform.ecm.webui.component.explorer.control.listener.UIActionBarActionListener;
+import org.exoplatform.ecm.webui.form.UIOpenDocumentForm;
 import org.exoplatform.ecm.webui.utils.Utils;
 import org.exoplatform.portal.webui.util.Util;
+import org.exoplatform.services.wcm.utils.WCMCoreUtils;
 import org.exoplatform.webui.config.annotation.ComponentConfig;
 import org.exoplatform.webui.config.annotation.EventConfig;
 import org.exoplatform.webui.core.UIPopupContainer;
+import org.exoplatform.webui.core.UIPopupWindow;
 import org.exoplatform.webui.event.Event;
 import org.exoplatform.webui.ext.filter.UIExtensionFilter;
 import org.exoplatform.webui.ext.filter.UIExtensionFilters;
@@ -43,8 +50,7 @@ public class OpenDocumentManageComponent extends UIAbstractManagerComponent {
           new IsNotTrashHomeNodeFilter(),
           new IsNotInTrashFilter(),
           new IsNotEditingDocumentFilter(),
-          new IsNtFileFilter(),
-          new CanDisplayInViewFilter()});
+          new IsNtFileFilter()});
 
   @UIExtensionFilters
   public List<UIExtensionFilter> getFilters() {
