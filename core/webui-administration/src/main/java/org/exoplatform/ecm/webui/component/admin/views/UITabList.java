@@ -160,7 +160,6 @@ public class UITabList extends UIPagingGrid {
       UIViewForm uiViewForm = uiTabPane.getChild(UIViewForm.class);
       Tab tab = uiViewForm.getTabMap().get(tabName);
       UITabForm uiTabForm = uiContainer.createUIComponent(UITabForm.class, null, null);
-      uiTabForm.setViewName(uiTabList.getViewName());
       uiTabForm.update(tab, false);
       uiContainer.initPopup(UITabList.TAPFORM_POPUP, uiTabForm, 760, 0);
       uiTabPane.setSelectedTab(uiTabList.getId());
