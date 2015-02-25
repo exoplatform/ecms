@@ -58,17 +58,7 @@ public class PostEditContentEventListener extends Listener<CmsService,Node> {
    */
   public void onEvent(Event<CmsService, Node> event) throws Exception {
     Node currentNode = event.getData();
-    if( (currentNode.isNodeType("exo:cssFile") && currentNode.getParent().isNodeType("exo:cssFolder")) ||
-        currentNode.isNodeType("exo:template") ||
-        (currentNode.isNodeType("exo:jsFile") && currentNode.getParent().isNodeType("exo:jsFolder")) ||
-        currentNode.isNodeType("exo:action")){
-      if (currentNode.isNodeType("exo:cssFile") || currentNode.isNodeType("exo:jsFile")) {
-        ListenerService listenerService = WCMCoreUtils.getService(ListenerService.class);
-        CmsService cmsService = WCMCoreUtils.getService(CmsService.class);
-        listenerService.broadcast(POST_EDIT_CONTENT_EVENT, cmsService, currentNode);
-      }
-      return;
-    }
+    Node nodeToChangePublicationState = WCMCoreUtils.getNodeToChangePublicationState(currentNode);
     String siteName = "";
     String remoteUser = "";
     try {
@@ -80,25 +70,42 @@ public class PostEditContentEventListener extends Listener<CmsService,Node> {
       if (conversationState.getAttribute("siteName") != null) {
         siteName = conversationState.getAttribute("siteName").toString();
       }
-      remoteUser = currentNode.getSession().getUserID();
+      remoteUser = nodeToChangePublicationState.getSession().getUserID();
     }
-    if (LOG.isInfoEnabled()) LOG.info(currentNode.getPath() + "::" + siteName + "::"+remoteUser);
+    
+    if( (currentNode.isNodeType("exo:cssFile") && currentNode.getParent().isNodeType("exo:cssFolder")) ||
+        currentNode.isNodeType("exo:template") ||
+        (currentNode.isNodeType("exo:jsFile") && currentNode.getParent().isNodeType("exo:jsFolder")) ||
+        currentNode.isNodeType("exo:action")){
+      if (currentNode.isNodeType("exo:cssFile") || currentNode.isNodeType("exo:jsFile")) {
+        if (LOG.isInfoEnabled()) LOG.info(nodeToChangePublicationState.getPath() + "::" + siteName + "::"+remoteUser);
+        publicationService.updateLifecyleOnChangeContent(nodeToChangePublicationState, siteName, remoteUser);
+        ListenerService listenerService = WCMCoreUtils.getService(ListenerService.class);
+        CmsService cmsService = WCMCoreUtils.getService(CmsService.class);
+        listenerService.broadcast(POST_EDIT_CONTENT_EVENT, cmsService, currentNode);
+      }
+      return;
+    }
+
+    if (LOG.isInfoEnabled()) LOG.info(nodeToChangePublicationState.getPath() + "::" + siteName + "::"+remoteUser);
 
     String currentState = "";
     String newState = "";
-    if (currentNode.hasProperty("publication:currentState")) {
-      currentState = currentNode.getProperty("publication:currentState").getString();
+    if (nodeToChangePublicationState.hasProperty("publication:currentState")) {
+      currentState = nodeToChangePublicationState.getProperty("publication:currentState").getString();
     }
 
-    publicationService.updateLifecyleOnChangeContent(currentNode, siteName, remoteUser);
-    if (currentNode.hasProperty("publication:currentState")) {
-      newState = currentNode.getProperty("publication:currentState").getString();
+    publicationService.updateLifecyleOnChangeContent(nodeToChangePublicationState, siteName, remoteUser);
+    if (nodeToChangePublicationState.hasProperty("publication:currentState")) {
+      newState = nodeToChangePublicationState.getProperty("publication:currentState").getString();
     }
 
     if (currentState.equalsIgnoreCase(newState)) {
       ListenerService listenerService = WCMCoreUtils.getService(ListenerService.class);
       CmsService cmsService = WCMCoreUtils.getService(CmsService.class);
-      listenerService.broadcast(POST_EDIT_CONTENT_EVENT, cmsService, currentNode);
+      listenerService.broadcast(POST_EDIT_CONTENT_EVENT, cmsService, nodeToChangePublicationState);
     }
   }
+  
+
 }

@@ -58,36 +58,42 @@ public class PostWebDavUploadEventListener extends Listener<WebDavService, Node>
         currentNode = linkMng.getTarget(currentNode);
       }
 
-      if (currentNode == null || currentNode.isNodeType("exo:cssFile")
-          || currentNode.isNodeType("exo:template") || currentNode.isNodeType("exo:jsFile")
+      if (currentNode == null || (currentNode.isNodeType("exo:cssFile") && currentNode.getParent().isNodeType("exo:cssFolder"))
+          || currentNode.isNodeType("exo:template") || (currentNode.isNodeType("exo:jsFile") && currentNode.getParent().isNodeType("exo:jsFolder"))
           || currentNode.isNodeType("exo:action")) {
+        if (currentNode.isNodeType("exo:cssFile") || currentNode.isNodeType("exo:jsFile")) {
+          publicationService.updateLifecyleOnChangeContent(WCMCoreUtils.getNodeToChangePublicationState(currentNode),"", currentNode.getSession()
+              .getUserID());
+        }
         return;
       }
       
+      Node publishNode = WCMCoreUtils.getNodeToChangePublicationState(currentNode);
+      
       // Add Mixin mix:i18n
-      if(currentNode.canAddMixin("mix:i18n")) {
-        currentNode.addMixin("mix:i18n");
+      if(publishNode.canAddMixin("mix:i18n")) {
+        publishNode.addMixin("mix:i18n");
       }
       
       // Add Mixin mix:votable
-      if(currentNode.canAddMixin("mix:votable")) {
-        currentNode.addMixin("mix:votable");
+      if(publishNode.canAddMixin("mix:votable")) {
+        publishNode.addMixin("mix:votable");
       }
       
       // Add Mixin mix:commentable
-      if(currentNode.canAddMixin("mix:commentable")) {
-        currentNode.addMixin("mix:commentable");
+      if(publishNode.canAddMixin("mix:commentable")) {
+        publishNode.addMixin("mix:commentable");
       }
 
       // Add Mixin exo:rss-enable
-      if(currentNode.canAddMixin("exo:rss-enable")) {
-        currentNode.addMixin("exo:rss-enable");
-        if(!currentNode.hasProperty("exo:title")) {
-          currentNode.setProperty("exo:title",Text.unescapeIllegalJcrChars(currentNode.getName())); 
+      if(publishNode.canAddMixin("exo:rss-enable")) {
+        publishNode.addMixin("exo:rss-enable");
+        if(!publishNode.hasProperty("exo:title")) {
+          publishNode.setProperty("exo:title",Text.unescapeIllegalJcrChars(publishNode.getName())); 
         }
       }
     
-      publicationService.updateLifecyleOnChangeContent(currentNode, "", currentNode.getSession()
+      publicationService.updateLifecyleOnChangeContent(publishNode, "", currentNode.getSession()
                                                                                    .getUserID());
     } catch (Exception ex) {
       if (LOG.isErrorEnabled()) {

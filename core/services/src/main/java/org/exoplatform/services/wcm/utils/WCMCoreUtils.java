@@ -29,6 +29,7 @@ import java.util.Iterator;
 import java.util.List;
 import java.util.Properties;
 
+import javax.jcr.AccessDeniedException;
 import javax.jcr.Item;
 import javax.jcr.ItemNotFoundException;
 import javax.jcr.Node;
@@ -692,5 +693,40 @@ public class WCMCoreUtils {
       settingService.set(Context.GLOBAL, Scope.GLOBAL, BAR_NAVIGATION_STYLE_KEY, SettingValue.create(barNavigationStyle));
     }
     return barNavigationStyle;
+  }
+  
+  /**
+   * Get Node to change publication status. If node is a sub-node of a web content, the web content will be republished
+   * 
+   * @param currentNode
+   * @return
+   * @throws ItemNotFoundException
+   * @throws AccessDeniedException
+   * @throws RepositoryException
+   */
+  
+  public static Node getNodeToChangePublicationState(Node currentNode) throws ItemNotFoundException, AccessDeniedException, RepositoryException {
+    Node parent = currentNode.getParent();
+    if (parent.isNodeType("exo:webContent")) {
+      return parent;
+    }
+    //for subnodes in some folders like css, js, documents, medias
+    if (parent.getPath().equals("/")) {
+      return currentNode;
+    }
+
+    Node grandParent = parent.getParent();
+    if (grandParent.isNodeType("exo:webContent")) {
+      return grandParent;
+    }
+    //for subnodes in some folders like images, videos, audio
+    if (grandParent.getPath().equals("/")) {
+      return currentNode;
+    }
+    Node ancestor = grandParent.getParent();
+    if (ancestor.isNodeType("exo:webContent")) {
+      return ancestor;
+    }
+    return currentNode;
   }
 }
