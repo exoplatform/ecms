@@ -104,6 +104,7 @@
                                 <value><string>application/xlt</string></value>
                                 <value><string>application/vnd.ms-powerpoint</string></value>
                                 <value><string>application/vnd.ms-excel</string></value>
+                                <value><string>text/csv</string></value>
 							</collection>
 						</field>
 	        </object>

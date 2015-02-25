@@ -132,7 +132,7 @@ public class PDFViewerService {
         read(input, new BufferedOutputStream(new FileOutputStream(content)));
       } else {
         // create temp file to store original data of nt:file node
-        File in = File.createTempFile(name + "_tmp", null);
+        File in = File.createTempFile(name + "_tmp", "." + extension);
         read(input, new BufferedOutputStream(new FileOutputStream(in)));
         long fileSize = in.length(); // size in byte
         if (LOG.isDebugEnabled()) {
