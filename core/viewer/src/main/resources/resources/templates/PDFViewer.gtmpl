@@ -250,7 +250,7 @@ if (uiParent != null) {
           <i class="<%=Utils.getNodeTypeIcon(org.exoplatform.wcm.webui.Utils.getRealNode(currentNode), "uiIcon64x64")%>"></i>
         </div>
         <div class="detailContainer">
-          <h4><%=_ctx.appRes("File.view.label.not-viewable")%></h4>
+          <h4>$errorMessage</h4>
           <a class="btn btn-primary" href="$downloadLink"><%=_ctx.appRes("File.view.label.download")%></a>
           <span><%=_ctx.appRes("File.view.label.using-webDAV")%></span>
         </div>
