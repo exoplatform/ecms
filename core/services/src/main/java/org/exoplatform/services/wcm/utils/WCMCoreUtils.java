@@ -90,6 +90,8 @@ import org.quartz.impl.JobDetailImpl;
  * Sep 8, 2009
  */
 public class WCMCoreUtils {
+  
+  public static final String PUBLICATION_NODETYPE = "publication:publication";
 
   private static final Log LOG = ExoLogger.getLogger(WCMCoreUtils.class.getName());
 
@@ -696,7 +698,7 @@ public class WCMCoreUtils {
   }
   
   /**
-   * Get Node to change publication status. If node is a sub-node of a web content, the web content will be republished
+   * Get Nodes to change publication status. 
    * 
    * @param currentNode
    * @return
@@ -705,28 +707,19 @@ public class WCMCoreUtils {
    * @throws RepositoryException
    */
   
-  public static Node getNodeToChangePublicationState(Node currentNode) throws ItemNotFoundException, AccessDeniedException, RepositoryException {
-    Node parent = currentNode.getParent();
-    if (parent.isNodeType("exo:webContent")) {
-      return parent;
+  public static List<Node> getNodesToChangePublicationState(Node currentNode) throws Exception {
+    List<Node> enrolledNodes = new ArrayList<Node>();
+    getEnrolledParentNodes(currentNode, enrolledNodes);
+    return enrolledNodes;
+  }
+  
+  private static void getEnrolledParentNodes(Node node, List<Node> enrolledNodes) throws Exception {
+    if (node == null || node.getPath().equals("/")) {
+      return;
     }
-    //for subnodes in some folders like css, js, documents, medias
-    if (parent.getPath().equals("/")) {
-      return currentNode;
+    if (node.isNodeType(PUBLICATION_NODETYPE)) {
+      enrolledNodes.add(node);
     }
-
-    Node grandParent = parent.getParent();
-    if (grandParent.isNodeType("exo:webContent")) {
-      return grandParent;
-    }
-    //for subnodes in some folders like images, videos, audio
-    if (grandParent.getPath().equals("/")) {
-      return currentNode;
-    }
-    Node ancestor = grandParent.getParent();
-    if (ancestor.isNodeType("exo:webContent")) {
-      return ancestor;
-    }
-    return currentNode;
+    getEnrolledParentNodes(node.getParent(), enrolledNodes);
   }
 }

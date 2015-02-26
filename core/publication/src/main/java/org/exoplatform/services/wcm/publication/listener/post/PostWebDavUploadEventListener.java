@@ -16,6 +16,8 @@
  */
 package org.exoplatform.services.wcm.publication.listener.post;
 
+import java.util.List;
+
 import javax.jcr.Node;
 
 import org.exoplatform.services.cms.link.LinkManager;
@@ -57,44 +59,47 @@ public class PostWebDavUploadEventListener extends Listener<WebDavService, Node>
       if (linkMng.isLink(currentNode)) {
         currentNode = linkMng.getTarget(currentNode);
       }
-
+      String userId = currentNode.getSession().getUserID();
+      List<Node> enrolledNodes =  WCMCoreUtils.getNodesToChangePublicationState(currentNode);
       if (currentNode == null || (currentNode.isNodeType("exo:cssFile") && currentNode.getParent().isNodeType("exo:cssFolder"))
           || currentNode.isNodeType("exo:template") || (currentNode.isNodeType("exo:jsFile") && currentNode.getParent().isNodeType("exo:jsFolder"))
           || currentNode.isNodeType("exo:action")) {
         if (currentNode.isNodeType("exo:cssFile") || currentNode.isNodeType("exo:jsFile")) {
-          publicationService.updateLifecyleOnChangeContent(WCMCoreUtils.getNodeToChangePublicationState(currentNode),"", currentNode.getSession()
-              .getUserID());
+          
+          for (Node node: enrolledNodes) {
+            publicationService.updateLifecyleOnChangeContent(node,"",userId); 
+          }
         }
         return;
       }
       
-      Node publishNode = WCMCoreUtils.getNodeToChangePublicationState(currentNode);
-      
-      // Add Mixin mix:i18n
-      if(publishNode.canAddMixin("mix:i18n")) {
-        publishNode.addMixin("mix:i18n");
-      }
-      
-      // Add Mixin mix:votable
-      if(publishNode.canAddMixin("mix:votable")) {
-        publishNode.addMixin("mix:votable");
-      }
-      
-      // Add Mixin mix:commentable
-      if(publishNode.canAddMixin("mix:commentable")) {
-        publishNode.addMixin("mix:commentable");
-      }
+      for (Node publishNode : enrolledNodes) {
 
-      // Add Mixin exo:rss-enable
-      if(publishNode.canAddMixin("exo:rss-enable")) {
-        publishNode.addMixin("exo:rss-enable");
-        if(!publishNode.hasProperty("exo:title")) {
-          publishNode.setProperty("exo:title",Text.unescapeIllegalJcrChars(publishNode.getName())); 
+        // Add Mixin mix:i18n
+        if(publishNode.canAddMixin("mix:i18n")) {
+          publishNode.addMixin("mix:i18n");
         }
+
+        // Add Mixin mix:votable
+        if(publishNode.canAddMixin("mix:votable")) {
+          publishNode.addMixin("mix:votable");
+        }
+
+        // Add Mixin mix:commentable
+        if(publishNode.canAddMixin("mix:commentable")) {
+          publishNode.addMixin("mix:commentable");
+        }
+
+        // Add Mixin exo:rss-enable
+        if(publishNode.canAddMixin("exo:rss-enable")) {
+          publishNode.addMixin("exo:rss-enable");
+          if(!publishNode.hasProperty("exo:title")) {
+            publishNode.setProperty("exo:title",Text.unescapeIllegalJcrChars(publishNode.getName())); 
+          }
+        }
+
+        publicationService.updateLifecyleOnChangeContent(publishNode, "", userId);
       }
-    
-      publicationService.updateLifecyleOnChangeContent(publishNode, "", currentNode.getSession()
-                                                                                   .getUserID());
     } catch (Exception ex) {
       if (LOG.isErrorEnabled()) {
         LOG.error("An expected exception has occured: ", ex);

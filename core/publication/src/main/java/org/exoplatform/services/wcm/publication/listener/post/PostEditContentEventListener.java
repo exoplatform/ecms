@@ -16,6 +16,8 @@
  */
 package org.exoplatform.services.wcm.publication.listener.post;
 
+import java.util.List;
+
 import javax.jcr.Node;
 
 import org.exoplatform.portal.webui.util.Util;
@@ -58,7 +60,7 @@ public class PostEditContentEventListener extends Listener<CmsService,Node> {
    */
   public void onEvent(Event<CmsService, Node> event) throws Exception {
     Node currentNode = event.getData();
-    Node nodeToChangePublicationState = WCMCoreUtils.getNodeToChangePublicationState(currentNode);
+    List<Node> enrolledNodes =  WCMCoreUtils.getNodesToChangePublicationState(currentNode);
     String siteName = "";
     String remoteUser = "";
     try {
@@ -70,7 +72,7 @@ public class PostEditContentEventListener extends Listener<CmsService,Node> {
       if (conversationState.getAttribute("siteName") != null) {
         siteName = conversationState.getAttribute("siteName").toString();
       }
-      remoteUser = nodeToChangePublicationState.getSession().getUserID();
+      remoteUser = currentNode.getSession().getUserID();
     }
     
     if( (currentNode.isNodeType("exo:cssFile") && currentNode.getParent().isNodeType("exo:cssFolder")) ||
@@ -78,8 +80,11 @@ public class PostEditContentEventListener extends Listener<CmsService,Node> {
         (currentNode.isNodeType("exo:jsFile") && currentNode.getParent().isNodeType("exo:jsFolder")) ||
         currentNode.isNodeType("exo:action")){
       if (currentNode.isNodeType("exo:cssFile") || currentNode.isNodeType("exo:jsFile")) {
-        if (LOG.isInfoEnabled()) LOG.info(nodeToChangePublicationState.getPath() + "::" + siteName + "::"+remoteUser);
-        publicationService.updateLifecyleOnChangeContent(nodeToChangePublicationState, siteName, remoteUser);
+        
+        for (Node node : enrolledNodes) {
+          if (LOG.isInfoEnabled()) LOG.info(node.getPath() + "::" + siteName + "::"+remoteUser);
+          publicationService.updateLifecyleOnChangeContent(node, siteName, remoteUser);
+        }
         ListenerService listenerService = WCMCoreUtils.getService(ListenerService.class);
         CmsService cmsService = WCMCoreUtils.getService(CmsService.class);
         listenerService.broadcast(POST_EDIT_CONTENT_EVENT, cmsService, currentNode);
@@ -87,23 +92,25 @@ public class PostEditContentEventListener extends Listener<CmsService,Node> {
       return;
     }
 
-    if (LOG.isInfoEnabled()) LOG.info(nodeToChangePublicationState.getPath() + "::" + siteName + "::"+remoteUser);
+    for (Node node : enrolledNodes) {
+      if (LOG.isInfoEnabled()) LOG.info(node.getPath() + "::" + siteName + "::"+remoteUser);
 
-    String currentState = "";
-    String newState = "";
-    if (nodeToChangePublicationState.hasProperty("publication:currentState")) {
-      currentState = nodeToChangePublicationState.getProperty("publication:currentState").getString();
-    }
+      String currentState = "";
+      String newState = "";
+      if (node.hasProperty("publication:currentState")) {
+        currentState = node.getProperty("publication:currentState").getString();
+      }
 
-    publicationService.updateLifecyleOnChangeContent(nodeToChangePublicationState, siteName, remoteUser);
-    if (nodeToChangePublicationState.hasProperty("publication:currentState")) {
-      newState = nodeToChangePublicationState.getProperty("publication:currentState").getString();
-    }
+      publicationService.updateLifecyleOnChangeContent(node, siteName, remoteUser);
+      if (node.hasProperty("publication:currentState")) {
+        newState = node.getProperty("publication:currentState").getString();
+      }
 
-    if (currentState.equalsIgnoreCase(newState)) {
-      ListenerService listenerService = WCMCoreUtils.getService(ListenerService.class);
-      CmsService cmsService = WCMCoreUtils.getService(CmsService.class);
-      listenerService.broadcast(POST_EDIT_CONTENT_EVENT, cmsService, nodeToChangePublicationState);
+      if (currentState.equalsIgnoreCase(newState)) {
+        ListenerService listenerService = WCMCoreUtils.getService(ListenerService.class);
+        CmsService cmsService = WCMCoreUtils.getService(CmsService.class);
+        listenerService.broadcast(POST_EDIT_CONTENT_EVENT, cmsService, node);
+      }
     }
   }
   
