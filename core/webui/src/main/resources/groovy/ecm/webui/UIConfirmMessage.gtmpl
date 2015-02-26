@@ -42,7 +42,7 @@
 			int tabIndex = 1;
 			for(action in uicomponent.getActions()) {
 		%>
-			<button type="button" onclick="<%=uicomponent.event(action)%>" tabindex=<%=tabIndex++%> class="btn" href="javascript:void(0);"><%=_ctx.appRes("UIConfirmMessage.label." + action)%></button>
+			<button type="button" onclick="<%=uicomponent.event(action)%>" tabindex=<%=tabIndex++%> class="btn $action" href="javascript:void(0);"><%=_ctx.appRes("UIConfirmMessage.label." + action)%></button>
 		<%}%>
 	</div>
 	<%// end render action%>

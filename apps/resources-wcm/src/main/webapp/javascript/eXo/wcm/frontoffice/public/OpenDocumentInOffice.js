@@ -122,12 +122,18 @@
         uiActionBarContainer  = gj("#uiActionsBarContainer").html();
   }
 
-  OpenDocumentInOffice.prototype.showConfirmBox = function() {
-    gj("body").ajaxComplete(function () {
-      gj("#UIDocViewerPopup .UIPopupWindow").css("z-index", "120");
-      gj("#UIDocViewerPopup .UIPopupWindow").addClass("opendocMask");
+  OpenDocumentInOffice.prototype.showConfirmBox = function(){
+    gj("body").ajaxComplete(function() {
+      var asPopup = gj("#UIDocViewerPopup .UIPopupWindow");
+      asPopup.css("z-index", "120");
+      asPopup.addClass("opendocMask");
+      var cancelBtn = asPopup.find(".Cancel");
+      asPopup.find(".uiIconClose").removeAttr("onclick");
+      asPopup.find(".uiIconClose").one("click", function(){
+        cancelBtn.click();
+      });
     });
-  }
+
   /**
    * Open Document with ActiveX. This required enviroments:
    * - MSOffice 2010, 2013 or least version Already installed
