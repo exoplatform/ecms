@@ -185,6 +185,9 @@ public class WCMCoreUtils {
    * @return true is user has permissions, otherwise return false
    */
   public static boolean hasPermission(String userId, List<String> permissions, boolean isNeedFullAccess) {
+    if (userId == null || userId.length() == 0) {
+      return false;
+    }
     try {
       OrganizationService organizationService = WCMCoreUtils.getService(OrganizationService.class);
       startRequest(organizationService);

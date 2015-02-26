@@ -571,6 +571,9 @@ public class QueryServiceImpl implements QueryService, Startable{
    * @return
    */
   private boolean hasMembership(String userId, String roleExpression) {
+    if (userId == null || userId.length() == 0) {
+      return false;
+    }
     if(roleExpression.equals("*") || roleExpression.equals(IdentityConstants.ANY))
       return true;
     ConversationState conversationState = ConversationState.getCurrent();
