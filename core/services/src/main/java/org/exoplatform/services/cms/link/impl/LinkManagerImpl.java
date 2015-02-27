@@ -162,10 +162,7 @@ public class LinkManagerImpl implements LinkManager {
   }
 
   private Session getSession(Node link, boolean system) throws RepositoryException {
-    String workspaceLink = link.getSession().getWorkspace().getName();
     String workspaceTarget = link.getProperty(WORKSPACE).getString();
-    if (workspaceLink.equals(workspaceTarget))
-      return link.getSession();
     return getSession((ManageableRepository) link.getSession().getRepository(), workspaceTarget,
                       system);
   }

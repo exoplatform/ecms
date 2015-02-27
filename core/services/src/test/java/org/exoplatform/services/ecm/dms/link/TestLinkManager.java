@@ -69,7 +69,7 @@ public class TestLinkManager extends BaseWCMTestCase {
   public void setUp() throws Exception {
     super.setUp();
     linkManager = (LinkManager) container.getComponentInstanceOfType(LinkManager.class);
-    applySystemSession();
+    applyUserSession("john", "gtn", COLLABORATION_WS);
     createTree();
   }
 

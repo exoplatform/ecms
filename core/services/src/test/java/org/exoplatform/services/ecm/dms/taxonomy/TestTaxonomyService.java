@@ -62,6 +62,7 @@ public class TestTaxonomyService extends BaseWCMTestCase {
     definitionPath =  nodeHierarchyCreator.getJcrPath(BasePath.TAXONOMIES_TREE_DEFINITION_PATH);
     storagePath =  nodeHierarchyCreator.getJcrPath(BasePath.TAXONOMIES_TREE_STORAGE_PATH);
     applySystemSession();
+    applyUserSession("john", "gtn", COLLABORATION_WS);
     dmsSesssion = sessionProviderService_.getSystemSessionProvider(null).getSession(DMSSYSTEM_WS, repository);
   }  
 
@@ -91,7 +92,7 @@ public class TestTaxonomyService extends BaseWCMTestCase {
    * @throws Exception
    */
   public void testGetTaxonomyTree1() throws Exception {
-    Node systemTree = taxonomyService.getTaxonomyTree("System");
+    Node systemTree = taxonomyService.getTaxonomyTree("System",true);
     assertNotNull(systemTree);
   }
 
@@ -159,7 +160,7 @@ public class TestTaxonomyService extends BaseWCMTestCase {
    * @throws Exception
    */
   public void testGetAllTaxonomyTrees2() throws Exception {
-    assertEquals(1, taxonomyService.getAllTaxonomyTrees().size());
+    assertEquals(1, taxonomyService.getAllTaxonomyTrees(true).size());
   }
 
   /**
@@ -201,7 +202,7 @@ public class TestTaxonomyService extends BaseWCMTestCase {
     int totalTree1 = taxonomyService.getAllTaxonomyTrees().size();
     taxonomyService.addTaxonomyTree(championLeague);
     taxonomyService.addTaxonomyTree(europa);
-    int totalTree2 = taxonomyService.getAllTaxonomyTrees(true).size();
+    int totalTree2 = taxonomyService.getAllTaxonomyTrees().size();
     assertEquals(2, totalTree2 - totalTree1);
   }
 

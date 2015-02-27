@@ -75,7 +75,7 @@ public class TestMultiLanguageService extends BaseWCMTestCase {
   public void setUp() throws Exception {
     super.setUp();
     multiLanguageService = (MultiLanguageService) container.getComponentInstanceOfType(MultiLanguageService.class);
-    applySystemSession();
+    applyUserSession("john", "gtn", COLLABORATION_WS);
   }
 
   /**

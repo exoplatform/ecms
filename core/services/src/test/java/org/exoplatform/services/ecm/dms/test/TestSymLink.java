@@ -69,7 +69,7 @@ public class TestSymLink extends BaseWCMTestCase {
     super.setUp();
     nodeFinder = (MockNodeFinderImpl) container.getComponentInstanceOfType(MockNodeFinderImpl.class);
     System.out.println("========== Create root node  ========");
-    applySystemSession();    
+    applyUserSession("john", "gtn", COLLABORATION_WS);
     createTreeInCollaboration();
     createTreeInSystem();
   }
