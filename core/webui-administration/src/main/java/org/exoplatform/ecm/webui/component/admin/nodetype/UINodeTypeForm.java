@@ -318,8 +318,7 @@ public class UINodeTypeForm extends UIFormTabPane {
     }
     getUIStringInput(SUPER_TYPE).setValue(types.toString()) ;
     if (nodeType.isMixin() && getUIStringInput(SUPER_TYPE).getValidators().size() > 0) {
-      List<Validator> validators = getUIStringInput(SUPER_TYPE).getValidators();
-      removeMandatoryValidator(validators);
+      removeMandatoryValidator();
     }
     if(isView) {
       getUIFormSelectBox(NAMESPACE).setDisabled(true) ;
@@ -802,8 +801,7 @@ public class UINodeTypeForm extends UIFormTabPane {
     public void execute(Event<UINodeTypeForm> event) throws Exception {
       UINodeTypeForm uiForm = event.getSource();
       if (uiForm.getUIFormSelectBox(MIXIN_TYPE).getValue().equals("true") && uiForm.getUIStringInput(SUPER_TYPE).getValidators().size() > 0) {
-        List<Validator> validators = uiForm.getUIStringInput(SUPER_TYPE).getValidators();
-        uiForm.removeMandatoryValidator(validators);
+        uiForm.removeMandatoryValidator();
       } 
       if (uiForm.getUIFormSelectBox(MIXIN_TYPE).getValue().equals("false")) {
         if (uiForm.getUIStringInput(SUPER_TYPE).getValidators().size() == 0) {
@@ -823,7 +821,8 @@ public class UINodeTypeForm extends UIFormTabPane {
       }
     }
   }
-  private void removeMandatoryValidator(List<Validator> validators) {
+  private void removeMandatoryValidator() {
+    List<Validator> validators = getUIStringInput(SUPER_TYPE).getValidators();
     int index = -1;
     for (int i = 0; i < validators.size(); i++) {
       if ((validators.get(i) instanceof MandatoryValidator)) {
