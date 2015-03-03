@@ -854,7 +854,6 @@ public class UICLVPresentation extends UIContainer {
      * .event.Event)
      */
     public void execute(Event<UICLVPresentation> event) throws Exception {
-      UICLVPresentation contentListPresentation = event.getSource();
       String itemPath = event.getRequestContext().getRequestParameter(OBJECTID);
       Node node = NodeLocation.getNodeByExpression(itemPath);
       Node parent = node.getParent();
@@ -864,10 +863,6 @@ public class UICLVPresentation extends UIContainer {
       
       parent.getSession().save();
       event.getRequestContext().getJavascriptManager().getRequireJS().addScripts("location.reload(true);");
-      Utils.createPopupMessage(contentListPresentation,
-                               "UICLVPresentation.msg.delete-content-successfully",
-                               null,
-                               ApplicationMessage.INFO);
     }
   }
 
