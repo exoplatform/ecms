@@ -19,6 +19,7 @@ package org.exoplatform.services.cms.jcrext.activity;
 import javax.jcr.Node;
 
 import org.apache.commons.chain.Context;
+import org.exoplatform.services.cms.CmsService;
 import org.exoplatform.services.command.action.Action;
 import org.exoplatform.services.listener.ListenerService;
 import org.exoplatform.services.wcm.utils.WCMCoreUtils;
@@ -41,14 +42,15 @@ public class RemoveNodeActivityAction implements Action{
     Object item = context.get("currentItem");
     if (item instanceof Node) {
       Node node = (Node)item;
+      Node parent = node.getParent();
       if (node.getPrimaryNodeType().isNodeType(ActivityCommonService.NT_FILE)) {
-        Node parent = node.getParent();
         if (activityService.isAcceptedNode(parent)) {
           listenerService.broadcast(ActivityCommonService.ATTACH_REMOVED_ACTIVITY, parent, node);
         }
       } else if (activityService.isAcceptedNode(node) && !activityService.isCreating(node)) {
         listenerService.broadcast(ActivityCommonService.NODE_REMOVED_ACTIVITY, node, null);
       }
+      listenerService.broadcast(CmsService.POST_EDIT_CONTENT_EVENT, WCMCoreUtils.getService(CmsService.class), parent);
     }
     return false;
   }

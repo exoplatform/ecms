@@ -16,6 +16,8 @@
  */
 package org.exoplatform.services.wcm.publication.listener.post;
 
+import java.util.List;
+
 import javax.jcr.Node;
 import javax.jcr.Session;
 
@@ -178,6 +180,14 @@ public class PostCreateContentEventListener extends Listener<CmsService, Node>{
     if (remoteUser == null) {
       remoteUser = IdentityConstants.ANONIM;
     }
-    publicationService.updateLifecyleOnChangeContent(currentNode, siteName, remoteUser);     
+    publicationService.updateLifecyleOnChangeContent(currentNode, siteName, remoteUser);
+    List<Node> enrolledNodes =  WCMCoreUtils.getNodesToChangePublicationState(currentNode);
+    for (Node node : enrolledNodes) {
+      if (node.equals(currentNode)) {
+        continue;
+      }
+      publicationService.updateLifecyleOnChangeContent(node, siteName, remoteUser);
+    }
+         
   }
 }

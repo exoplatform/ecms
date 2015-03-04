@@ -140,6 +140,7 @@ public class LinkManagerImpl implements LinkManager {
           if (Utils.isDocument(target) && targetEdited) {
             listenerService.broadcast(CmsService.POST_EDIT_CONTENT_EVENT, null, target);
           }
+          listenerService.broadcast(CmsService.POST_EDIT_CONTENT_EVENT, WCMCoreUtils.getService(CmsService.class), parent);
         }
       } catch (Exception e) {
         if (LOG.isErrorEnabled()) {

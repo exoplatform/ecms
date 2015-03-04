@@ -39,12 +39,14 @@ import javax.xml.parsers.DocumentBuilderFactory;
 import javax.xml.transform.dom.DOMSource;
 
 import com.ibm.icu.text.Transliterator;
+
 import org.apache.commons.lang.StringUtils;
 import org.exoplatform.common.http.HTTPStatus;
 import org.exoplatform.ecm.connector.fckeditor.FCKMessage;
 import org.exoplatform.ecm.connector.fckeditor.FCKUtils;
 import org.exoplatform.ecm.utils.lock.LockUtil;
 import org.exoplatform.ecm.utils.text.Text;
+import org.exoplatform.services.cms.CmsService;
 import org.exoplatform.services.cms.impl.Utils;
 import org.exoplatform.services.cms.jcrext.activity.ActivityCommonService;
 import org.exoplatform.services.cms.mimetype.DMSMimeTypeResolver;
@@ -443,7 +445,8 @@ public class FileUploadHandler {
       uploadIdTimeMap.remove(uploadId);
       WCMPublicationService wcmPublicationService = WCMCoreUtils.getService(WCMPublicationService.class);    
       wcmPublicationService.updateLifecyleOnChangeContent(file, siteName, userId);
-     
+      CmsService cmsService = WCMCoreUtils.getService(CmsService.class);
+      listenerService.broadcast(POST_CREATE_CONTENT_EVENT,cmsService, file);
       if (activityService.isBroadcastNTFileEvents(file)) {
         listenerService.broadcast(ActivityCommonService.FILE_CREATED_ACTIVITY, null, file);
       }
