@@ -436,9 +436,7 @@ public class WebDavServiceImpl extends org.exoplatform.services.jcr.webdav.WebDa
         session = item.getSession();
       }
       activityService = WCMCoreUtils.getService(ActivityCommonService.class);
-      try {
-        currentNode = (Node) session.getItem(path(repoPath));
-      } catch (Exception e) {
+      if (!session.itemExists(path(repoPath))) {
         isCreating = true;
       }
     } catch (PathNotFoundException exc) {
@@ -464,8 +462,8 @@ public class WebDavServiceImpl extends org.exoplatform.services.jcr.webdav.WebDa
                              inputStream,
                              uriInfo);
     try {
+      currentNode = (Node) session.getItem(path(repoPath));
       if (isCreating) {
-        currentNode = (Node) session.getItem(path(repoPath));
         // Since ECMS-6474:
         // Windows webdav calls *put* function twice during uploading a file.
         // As the result, this node must be in creating list of nodes during those calls.
