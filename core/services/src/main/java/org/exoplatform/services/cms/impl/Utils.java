@@ -678,7 +678,7 @@ public class Utils {
    */
 
   public static String cleanName(String oldName) {
-    if (oldName == null || oldName == "") return oldName;
+    if (StringUtils.isEmpty(oldName)) return oldName;
     String specialChar = "[]/'\":;";
     StringBuilder ret = new StringBuilder();
     for (int i = 0; i < oldName.length(); i++) {
