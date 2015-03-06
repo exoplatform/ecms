@@ -483,5 +483,37 @@ public class TestTrashService extends BaseWCMTestCase {
     testNode.remove();
     session.save();
   } 
+  
+  /**
+   * test method GetNodeByTrashId
+   * input:     /TrashNode/node0
+
+   * tested action: move node to Trash and get by returned trashId, get random trashId
+   * expectedValue : 1 node
+   *            0 node with random trashId
+   *
+   * @throws Exception
+   */
+  public void testGetNodeByTrashId() throws Exception {
+    Node rootNode = session.getRootNode();
+
+    Node trashRootNode = session.getRootNode();
+    Node trashNode = trashRootNode.addNode("Trash");
+    Node testNode = rootNode.addNode("TestNode");
+
+    Node node0 = testNode.addNode("node0");
+
+
+    session.save();
+
+    String trashId = trashService.moveToTrash(node0, sessionProvider, 0);
+
+    session.save();
+    assertNotNull(trashService.getNodeByTrashId(trashId));
+    assertNull(trashService.getNodeByTrashId(trashId + "qqqqqqqqqqqqqqq"));
+    trashNode.remove();
+    testNode.remove();
+    session.save();
+  }
 
 }

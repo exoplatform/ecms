@@ -32,6 +32,7 @@ import org.exoplatform.services.jcr.core.ManageableRepository;
 import org.exoplatform.services.jcr.ext.common.SessionProvider;
 import org.exoplatform.services.jcr.impl.core.ItemImpl;
 import org.exoplatform.services.jcr.impl.core.SessionImpl;
+import org.exoplatform.services.jcr.impl.core.query.QueryImpl;
 import org.exoplatform.services.log.ExoLogger;
 import org.exoplatform.services.log.Log;
 import org.exoplatform.services.seo.SEOService;
@@ -47,6 +48,7 @@ import javax.jcr.Session;
 import javax.jcr.query.Query;
 import javax.jcr.query.QueryManager;
 import javax.jcr.query.QueryResult;
+
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Set;
@@ -450,6 +452,23 @@ public class TrashServiceImpl implements TrashService {
       return null;
     }
 
+  }
+  
+  public Node getNodeByTrashId(String trashId) throws RepositoryException{
+    QueryResult queryResult;
+    NodeIterator iter;
+    Session session = WCMCoreUtils.getSystemSessionProvider()
+        .getSession(trashWorkspace_,
+                    repositoryService.getCurrentRepository());
+    QueryManager queryManager = session.getWorkspace().getQueryManager();
+    StringBuilder sb = new StringBuilder();
+    sb.append("SELECT * from exo:restoreLocation WHERE exo:trashId = '").append(trashId).append("'");
+    QueryImpl query = (QueryImpl) queryManager.createQuery(sb.toString(), Query.SQL);
+    query.setLimit(1);
+    queryResult = query.execute();
+    iter = queryResult.getNodes();
+    if(iter.hasNext()) return iter.nextNode();
+    else return null;
   }
 
 

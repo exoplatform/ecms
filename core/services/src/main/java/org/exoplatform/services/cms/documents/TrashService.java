@@ -20,6 +20,8 @@ import org.exoplatform.services.jcr.ext.common.SessionProvider;
 
 import javax.jcr.Node;
 import javax.jcr.RepositoryException;
+import javax.jcr.query.InvalidQueryException;
+
 import java.util.List;
 
 /**
@@ -116,4 +118,12 @@ public interface TrashService {
    * @return <code>Node</code> the node of trash home
    */
   public Node getTrashHomeNode();
+  /**
+   * Get <code>Node</code> in trash folder by trashId
+   * @param trashId ID of node will return
+   * @return <code>Node</code> in trash folder with thrashId, <code>null</code> if thrashId doesn't exist in trash folder
+   * @throws InvalidQueryException 
+   * @throws RepositoryException
+   * */
+  public Node getNodeByTrashId(String trashId) throws InvalidQueryException, RepositoryException;
 }
