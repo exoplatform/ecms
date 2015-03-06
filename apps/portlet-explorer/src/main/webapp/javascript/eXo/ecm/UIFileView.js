@@ -264,6 +264,7 @@ UIFileView.prototype.clickItem = function(event, element, callback) {
 	gj("input:checkbox", element).each(function(index, elem) {
 		gj(elem).attr("checked", true);
 	});
+	Self.checkAllCheckbox();
 	//eXo.core.Browser.setOpacity(element, 100);
 };
 
@@ -672,6 +673,7 @@ UIFileView.prototype.showItemContextMenu = function (event, element) {
     	moreButton.hide();
     }
     eXo.ecm.ECMUtils.loadContainerWidth();
+    Self.checkAllCheckbox();
 };
 
 // hide context menu
@@ -910,6 +912,16 @@ UIFileView.prototype.clickRightMouse = function(event, elemt, menuId, objId, whi
     // Init feature Copy URL to Clipboard in case the action button appears right after select item in file view
     if(gj("#ECMContextMenu .uiIconEcmsCopyUrlToClipboard").is(":visible"))
       eXo.ecm.ECMUtils.initClipboard();
+
+    Self.checkAllCheckbox();
+};
+
+UIFileView.prototype.checkAllCheckbox = function() {
+	if (Self.itemsSelected.length == Self.allItems.length) {
+		gj("#UIFileViewCheckBox").attr("checked", true);
+	} else {
+		gj("#UIFileViewCheckBox").attr("checked", false);
+	}
 };
 
 function pressCtrl(event) {
