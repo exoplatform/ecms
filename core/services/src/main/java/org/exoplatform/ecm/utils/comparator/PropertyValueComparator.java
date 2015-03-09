@@ -88,9 +88,9 @@ public class PropertyValueComparator implements Comparator<Node> {
   
   private int compareLong(Node node0, Node node1) {
     try {
-      Long propertyValue0 = node0.getProperty(propertyName) == null ? -1 : node0.getProperty(propertyName)
+      long propertyValue0 = node0.getProperty(propertyName) == null ? -1 : node0.getProperty(propertyName)
               .getLong();
-      Long propertyValue1 = node1.getProperty(propertyName) == null ? -1 : node1.getProperty(propertyName)
+      long propertyValue1 = node1.getProperty(propertyName) == null ? -1 : node1.getProperty(propertyName)
               .getLong();
       if (ASCENDING_ORDER.equals(orderType)) {
         if (propertyValue0 < propertyValue1) {

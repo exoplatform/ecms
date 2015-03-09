@@ -39,6 +39,7 @@ import javax.jcr.lock.LockException;
 import javax.jcr.nodetype.ConstraintViolationException;
 import javax.portlet.PortletPreferences;
 
+import org.apache.commons.lang.StringUtils;
 import org.exoplatform.ecm.utils.text.Text;
 import org.exoplatform.ecm.webui.component.explorer.UIJCRExplorer;
 import org.exoplatform.ecm.webui.form.validator.IllegalDMSCharValidator;
@@ -803,9 +804,7 @@ public class UIUploadForm extends UIForm implements UIPopupComponent, UISelectab
   private boolean contains(String[] arr, String item) {
     if (arr != null) {
       for (String arrItem : arr) {
-        if (arrItem != null && arrItem.equals(item))
-          return true;
-        if (arrItem == item)
+        if (StringUtils.equals(arrItem, item))
           return true;
       }
     }
