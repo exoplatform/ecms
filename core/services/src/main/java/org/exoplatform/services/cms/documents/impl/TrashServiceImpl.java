@@ -155,7 +155,7 @@ public class TrashServiceImpl implements TrashService {
       cache.remove(seoService.getHash(nodeUUID));
     }
     if (!node.isNodeType(EXO_RESTORE_LOCATION)) {
-      trashId = addRestorePathInfo(node);
+      String restorePath = fixRestorePath(node.getPath());
       ManageableRepository manageableRepository = repositoryService.getCurrentRepository();
       Session trashSession = WCMCoreUtils.getSystemSessionProvider().getSession(this.trashWorkspace_, manageableRepository);
       String actualTrashPath = this.trashHome_ + (this.trashHome_.endsWith("/") ? "" : "/")
@@ -187,7 +187,9 @@ public class TrashServiceImpl implements TrashService {
         }
         node.remove();
       }
-
+      
+      trashId = addRestorePathInfo(nodeName, restorePath, nodeWorkspaceName);
+      
       trashSession.save();
       
       //check and delete target node when there is no its symlink
@@ -220,25 +222,38 @@ public class TrashServiceImpl implements TrashService {
     return trashId;
   }
  
-  /* Store original path of deleted node.
+/** Store original path of deleted node.
   * Return restore_id of deleted node. Use when find node in trash to undo
-  * @param node
+  * @param nodeName name of removed node
+  * @param restorePath path of node before removing
+  * @param nodeWs node workspace before removing
   * @throws RepositoryException 
   * @throws LockException 
   * @throws ConstraintViolationException 
   * @throws VersionException 
   * @throws NoSuchNodeTypeException 
   */
-  private String addRestorePathInfo(Node node) throws Exception {
-    String originWorkspace = node.getSession().getWorkspace().getName();
-    Session sysSession = WCMCoreUtils.getSystemSessionProvider().getSession(originWorkspace, WCMCoreUtils.getRepository());
+  private String addRestorePathInfo(String nodeName, String restorePath, String nodeWs) throws Exception {
     String restoreId = java.util.UUID.randomUUID().toString();
-    Node sysSessionNode = (Node)sysSession.getItem(node.getPath());
-    sysSessionNode.addMixin(EXO_RESTORE_LOCATION);
-    sysSessionNode.setProperty(RESTORE_PATH, fixRestorePath(node.getPath()));
-    sysSessionNode.setProperty(RESTORE_WORKSPACE, originWorkspace);
-    sysSessionNode.setProperty(TRASH_ID, restoreId);
-    sysSession.save();
+    NodeIterator nodes = this.getTrashHomeNode().getNodes(nodeName);
+    Node node = null;
+    while (nodes.hasNext()) {
+      Node currentNode = nodes.nextNode();
+      if (node == null) {
+        node = currentNode;
+      } else {
+        if (node.getIndex() < currentNode.getIndex()) {
+          node = currentNode;
+        }
+      }
+    }
+    if (node != null) {
+      node.addMixin(EXO_RESTORE_LOCATION);
+      node.setProperty(RESTORE_PATH, restorePath);
+      node.setProperty(RESTORE_WORKSPACE, nodeWs);
+      node.setProperty(TRASH_ID, restoreId);
+      node.save();
+    }
     return restoreId;
   }
   

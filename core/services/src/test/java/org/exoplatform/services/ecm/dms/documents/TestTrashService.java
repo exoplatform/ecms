@@ -515,5 +515,36 @@ public class TestTrashService extends BaseWCMTestCase {
     testNode.remove();
     session.save();
   }
+  
+  public void testMoveSameNameToTrashSameWorkspace() throws Exception {
+    Node rootNode = session.getRootNode();
+    Node trashNode = rootNode.addNode("Trash");
+    Node testNode = rootNode.addNode("TestNode");
+
+    Node node0 = testNode.addNode("node");
+    Node node1 = testNode.addNode("node");
+    Node node2 = testNode.addNode("node");
+    Node node3 = testNode.addNode("node");
+    //Add mix:referenceable into node to coverage code for the case relate to the SEO Service
+    node0.addMixin(MIX_REFERENCEABLE);
+    node1.addMixin(MIX_REFERENCEABLE);
+    node2.addMixin(MIX_REFERENCEABLE);
+    node3.addMixin(MIX_REFERENCEABLE);
+    session.save();
+    trashService.moveToTrash(node0, sessionProvider);
+    trashService.moveToTrash(node1, sessionProvider);
+    trashService.moveToTrash(node2, sessionProvider);
+    session.save();
+
+    long testNodeChild = testNode.getNodes().getSize();
+    long trashNodeChild = trashService.getTrashHomeNode().getNodes().getSize();
+    assertEquals("testMoveToTrashSameWorkspace failed!", 1, testNodeChild);
+    assertEquals("testMoveToTrashSameWorkspace failed 2 !", 3, trashNodeChild);
+
+    trashNode.remove();
+    testNode.remove();
+    session.save();
+  }
+  
 
 }
