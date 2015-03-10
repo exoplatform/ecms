@@ -38,7 +38,7 @@ function getTheSelectedText(editor) {
 		  txtSelection.unlock(true);
 		  selectedText = txtSelection.getNative().createRange().text;
 	} else {
-		  selectedText = txtSelection.getNative().toString();
+		  selectedText = txtSelection.getSelectedText();
 	}
 
 	if(selectedText && selectedText.length > 0) {
