@@ -30,7 +30,6 @@ import org.exoplatform.services.jcr.ext.app.SessionProviderService;
 import org.exoplatform.services.idgenerator.IDGeneratorService;
 import org.exoplatform.services.log.Log;
 import org.exoplatform.services.log.ExoLogger;
-import org.exoplatform.services.wcm.utils.WCMCoreUtils;
 
 /**
  * Created by The eXo Platform SAS
@@ -83,11 +82,7 @@ public class AddTaxonomyActionScript implements CmsScript {
     Node targetNode = null;
     Node storeNode = null;
     try{
-      if(WCMCoreUtils.getRemoteUser().equals(WCMCoreUtils.getSuperUser()))
-        sessionHomeNode = seProviderService_.getSystemSessionProvider(null).getSession(storeWorkspace, manageableRepository);
-      else
-        sessionHomeNode = seProviderService_.getSessionProvider(null).getSession(storeWorkspace, manageableRepository);
-        
+      sessionHomeNode = seProviderService_.getSessionProvider(null).getSession(storeWorkspace, manageableRepository);
       storeNode = (Node)sessionHomeNode.getItem(storeHomePath);
     } catch(Exception e) {
       if (LOG.isErrorEnabled()) {
@@ -96,10 +91,7 @@ public class AddTaxonomyActionScript implements CmsScript {
       throw e;
     }
     try{
-      if(WCMCoreUtils.getRemoteUser().equals(WCMCoreUtils.getSuperUser()))
-        sessionTargetNode = seProviderService_.getSystemSessionProvider(null).getSession(targetWorkspace, manageableRepository);
-      else
-        sessionTargetNode = seProviderService_.getSessionProvider(null).getSession(targetWorkspace, manageableRepository);
+      sessionTargetNode = seProviderService_.getSessionProvider(null).getSession(targetWorkspace, manageableRepository);
       targetNode = (Node)sessionTargetNode.getItem(targetPath);
     } catch(Exception e) {
       if (LOG.isErrorEnabled()) {
