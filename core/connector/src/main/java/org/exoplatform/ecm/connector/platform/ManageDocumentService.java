@@ -476,13 +476,13 @@ public class ManageDocumentService implements ResourceContainer {
 
       if (isFolder(referNode)) {
         // Get current folder from folder path to fix same name problem (ECMS-3586)
-        String folderPath = referNode.getPath();
+        String folderPath = child.getPath();
         folderPath = folderPath.substring(folderPath.lastIndexOf("/") + 1, folderPath.length());
         String childFolder = StringUtils.isEmpty(currentFolder) ? folderPath : currentFolder.concat("/")
                                                                                     .concat(folderPath);
         Element folder = createFolderElement(document,
-                                             referNode,
-                                             referNode.getSession().getWorkspace().getName(),
+                                             child,
+                                             child.getSession().getWorkspace().getName(),
                                              driveName,
                                              childFolder);
         folders.appendChild(folder);
@@ -602,9 +602,12 @@ public class ManageDocumentService implements ResourceContainer {
       return node;
     }
     for (String folder : currentFolder.split("/")) {
-      node = node.getNode(folder);
-      if (node.isNodeType("exo:symlink")) {
-        node = linkManager.getTarget(node);
+      if (node.hasNode(folder)){
+        node = node.getNode(folder);
+      } else if (node.isNodeType(NodetypeConstant.EXO_SYMLINK)) {
+        node = linkManager.getTarget(node).getNode(folder);
+      } else {
+        return node;
       }
     }
     return node;
