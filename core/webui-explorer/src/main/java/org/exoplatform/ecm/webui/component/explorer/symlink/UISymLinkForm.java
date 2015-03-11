@@ -166,7 +166,7 @@ public class UISymLinkForm extends UIForm implements UIPopupComponent, UISelecta
         return ;
       }
       symLinkTitle = symLinkName;
-      symLinkName = org.exoplatform.services.cms.impl.Utils.cleanName(symLinkName);
+      symLinkName = org.exoplatform.services.cms.impl.Utils.cleanString(symLinkName);
       if (StringUtils.isEmpty(symLinkName)) {
         symLinkName = DEFAULT_NAME;
       }

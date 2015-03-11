@@ -557,7 +557,7 @@ public class ManageDocumentService implements ResourceContainer {
                                     String workspaceName) throws Exception {
     Element file = document.createElement("File");
     boolean canRemove = true;
-    file.setAttribute("name", displayNode.getName());
+    file.setAttribute("name", Utils.getTitle(displayNode));
     file.setAttribute("title", Utils.getTitle(displayNode));
     file.setAttribute("workspaceName", workspaceName);
     SimpleDateFormat formatter = (SimpleDateFormat) SimpleDateFormat.getDateTimeInstance(SimpleDateFormat.SHORT,
