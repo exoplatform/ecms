@@ -602,9 +602,14 @@ public class ManageDocumentService implements ResourceContainer {
       return node;
     }
     for (String folder : currentFolder.split("/")) {
-      node = node.getNode(folder);
-      if (node.isNodeType("exo:symlink")) {
-        node = linkManager.getTarget(node);
+      try {
+        node = node.getNode(folder);
+      } catch (PathNotFoundException e) {
+        if(node.isNodeType(NodetypeConstant.EXO_SYMLINK)) {
+          node = linkManager.getTarget(node).getNode(folder);
+        } else {
+          LOG.debug("Item is not found: ", e);
+        }
       }
     }
     return node;
@@ -764,7 +769,7 @@ public class ManageDocumentService implements ResourceContainer {
         node = parentNode.getNode(folders[i]);
       }
       tempFolder = tempFolder.append("/");
-      sb.append(folders[i]);
+      sb.append(Utils.getTitle(node));
       if (i != folders.length - 1) {
         sb.append("/");
       }
