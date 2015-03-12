@@ -94,7 +94,6 @@ public class ActivityCommonService {
   public Map<String, Object> getPreProperties() { return properties; }
   
   public void setPreProperties(Map<String, Object> preProperties) { properties = preProperties; }
-  public LinkManager linkManager = null;
   
   public ActivityCommonService(InitParams initParams) {
     this.acceptedNodeTypes = initParams.getValueParam("acceptedNodeTypes").getValue();
@@ -103,7 +102,6 @@ public class ActivityCommonService {
     if (acceptedNodeTypes==null) acceptedNodeTypes = "";
     if (acceptedProperties==null) acceptedProperties =""; 
     if (acceptedFileProperties==null) acceptedFileProperties ="";
-    linkManager = WCMCoreUtils.getService(LinkManager.class);
   }
   
   /**
@@ -149,21 +147,24 @@ public class ActivityCommonService {
    *   true if the node is creating
    */
   public boolean isCreating(Node node){
+    LinkManager linkManager = WCMCoreUtils.getService(LinkManager.class);
     Node realNode = node;
     try {
-      if (linkManager.isLink(node)) {
+      if (linkManager != null && linkManager.isLink(node)) {
         realNode = linkManager.getTarget(node);
       }
       NodeLocation nodeLocation = NodeLocation.getNodeLocationByNode(realNode);
       if (creatingNodes.contains(nodeLocation.hashCode())) {
         return true;
-      } 
-      List<Node> allLinks = linkManager.getAllLinks(realNode, "exo:symlink");
-      for (Node link : allLinks) {
-        nodeLocation = NodeLocation.getNodeLocationByNode(link);
-        nodeLocation.setUUID(realNode.getUUID());
-        if (creatingNodes.contains(nodeLocation.hashCode())){
-          return true;
+      }
+      if (linkManager != null) {
+        List<Node> allLinks = linkManager.getAllLinks(realNode, "exo:symlink");
+        for (Node link : allLinks) {
+          nodeLocation = NodeLocation.getNodeLocationByNode(link);
+          nodeLocation.setUUID(realNode.getUUID());
+          if (creatingNodes.contains(nodeLocation.hashCode())){
+            return true;
+          }
         }
       }
       return false;
