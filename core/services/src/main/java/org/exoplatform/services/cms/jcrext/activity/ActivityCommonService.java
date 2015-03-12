@@ -150,21 +150,19 @@ public class ActivityCommonService {
     LinkManager linkManager = WCMCoreUtils.getService(LinkManager.class);
     Node realNode = node;
     try {
-      if (linkManager != null && linkManager.isLink(node)) {
+      if (linkManager.isLink(node)) {
         realNode = linkManager.getTarget(node);
       }
       NodeLocation nodeLocation = NodeLocation.getNodeLocationByNode(realNode);
       if (creatingNodes.contains(nodeLocation.hashCode())) {
         return true;
       }
-      if (linkManager != null) {
-        List<Node> allLinks = linkManager.getAllLinks(realNode, "exo:symlink");
-        for (Node link : allLinks) {
-          nodeLocation = NodeLocation.getNodeLocationByNode(link);
-          nodeLocation.setUUID(realNode.getUUID());
-          if (creatingNodes.contains(nodeLocation.hashCode())){
-            return true;
-          }
+      List<Node> allLinks = linkManager.getAllLinks(realNode, "exo:symlink");
+      for (Node link : allLinks) {
+        nodeLocation = NodeLocation.getNodeLocationByNode(link);
+        nodeLocation.setUUID(realNode.getUUID());
+        if (creatingNodes.contains(nodeLocation.hashCode())){
+          return true;
         }
       }
       return false;
