@@ -602,14 +602,12 @@ public class ManageDocumentService implements ResourceContainer {
       return node;
     }
     for (String folder : currentFolder.split("/")) {
-      try {
+      if (node.hasNode(folder)){
         node = node.getNode(folder);
-      } catch (PathNotFoundException e) {
-        if(node.isNodeType(NodetypeConstant.EXO_SYMLINK)) {
-          node = linkManager.getTarget(node).getNode(folder);
-        } else {
-          LOG.debug("Item is not found: ", e);
-        }
+      } else if (node.isNodeType(NodetypeConstant.EXO_SYMLINK)) {
+        node = linkManager.getTarget(node).getNode(folder);
+      } else {
+        return node;
       }
     }
     return node;
