@@ -122,7 +122,11 @@
                  }
 							 %>
 								 <li <%=idUpload%> onclick="<%= actionOnClick %>">
-									 <a class="actionIcon"><i class="uiIconEcms${button} $_remoteEditClass uiIconEcmsLightGray"></i> $title</a>
+									<%if(StringUtils.isNotEmpty(_remoteEditClass)){%>
+										<a class="actionIcon"><i class="$_remoteEditClass uiIconEcms${button} uiIconEcmsLightGray"></i> $title</a>
+									<%}else{%>
+										<a class="actionIcon"><i class="uiIconEcms${button} uiIconEcmsLightGray"></i> $title</a>
+									<%}%>
 								 </li>
 								 <% if (action instanceof UploadActionComponent) {
 	  						   showUploadInput = true;
