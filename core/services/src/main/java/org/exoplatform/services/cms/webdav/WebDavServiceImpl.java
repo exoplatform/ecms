@@ -97,7 +97,6 @@ public class WebDavServiceImpl extends org.exoplatform.services.jcr.webdav.WebDa
   private static final Log LOG = ExoLogger.getLogger(WebDavServiceImpl.class.getName());
 
   private final String POST_UPLOAD_CONTENT_EVENT = "WebDavService.event.postUpload";
-  private final String WEBDAV_PUT_COMMAND_EVENT = "WebDavService.event.putCommand";
 
   private final NodeFinder nodeFinder;
 
@@ -492,7 +491,6 @@ public class WebDavServiceImpl extends org.exoplatform.services.jcr.webdav.WebDa
       if(currentNode != null && isCreating) {
         ListenerService listenerService = WCMCoreUtils.getService(ListenerService.class);
         try {
-          listenerService.broadcast(this.WEBDAV_PUT_COMMAND_EVENT, this, currentNode);
           listenerService.broadcast(ActivityCommonService.FILE_CREATED_ACTIVITY, null, currentNode);
           currentNode.getSession().save();
         } catch (Exception e) {
