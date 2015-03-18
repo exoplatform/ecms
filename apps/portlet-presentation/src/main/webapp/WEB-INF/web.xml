@@ -9,6 +9,7 @@
 
   <!--If define the Portlet Application name MUST end with .par-->
   <display-name>presentation</display-name>
+  <absolute-ordering />
 
   <description>
     This application is a portlet. It can not be used outside a portal.
