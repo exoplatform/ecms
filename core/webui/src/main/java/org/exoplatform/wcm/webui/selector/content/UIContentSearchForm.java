@@ -242,6 +242,7 @@ public class UIContentSearchForm extends UIForm {
       
       int pageSize = 5;
       String radioValue = event.getRequestContext().getRequestParameter(RADIO_NAME);
+      uiWCSearch.setCheckedRadioId(event.getRequestContext().getRequestParameter(CHECKED_RADIO_ID));
       String siteName = uiWCSearch.getUIStringInput(UIContentSearchForm.LOCATION).getValue();
       UIContentSelector uiWCTabSelector = uiWCSearch.getParent();
       UIApplication uiApp = uiWCSearch.getAncestorOfType(UIApplication.class);
@@ -275,7 +276,12 @@ public class UIContentSearchForm extends UIForm {
           UIFormDateTimeInput endDateInput = uiWCSearch.getUIFormDateTimeInput(UIContentSearchForm.END_TIME);
 
           //startDateInput cannot be empty
-          if (uiWCSearch.haveEmptyField(uiApp, event, startDateInput.getValue())) {
+          String strStartDate = startDateInput.getValue();
+          if (strStartDate == null || "".equals(strStartDate) || strStartDate.trim().length() <= 0) {
+            uiApp.addMessage(new ApplicationMessage("UIContentSearchForm.msg.empty-startDate",
+                                                    null,
+                                                    ApplicationMessage.WARNING));
+            requestContext.addUIComponentToUpdateByAjax(uiWCSearch);
             return;
           }
           
@@ -324,6 +330,14 @@ public class UIContentSearchForm extends UIForm {
           //startDate cannot be after endDate
           if (startDate.getTimeInMillis() > endDate.getTimeInMillis()) {
             uiApp.addMessage(new ApplicationMessage("UIContentSearchForm.msg.invalid-date",
+                                                    null,
+                                                    ApplicationMessage.WARNING));
+            requestContext.addUIComponentToUpdateByAjax(uiWCSearch);
+            return;
+          }
+          // startDate cannot be later than today
+          if (startDate.getTimeInMillis() > Calendar.getInstance().getTimeInMillis()) {
+            uiApp.addMessage(new ApplicationMessage("UIContentSearchForm.msg.invalid-startDate",
                                                     null,
                                                     ApplicationMessage.WARNING));
             requestContext.addUIComponentToUpdateByAjax(uiWCSearch);

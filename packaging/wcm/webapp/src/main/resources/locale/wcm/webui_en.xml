@@ -202,8 +202,10 @@
     <msg>
       <time-to-late>The searching time is too long.</time-to-late>
       <empty-field>Please input a valid keyword for search.</empty-field>
+      <empty-startDate>"From Date" is required</empty-startDate>
       <invalid-format>Invalid date/time format in field '{0}'.</invalid-format>
       <invalid-date>"To Date" must be later than "From Date"</invalid-date>
+      <invalid-startDate>"From Date" must not be later than today</invalid-startDate>
       <invalid-nodeType>The node type "{0}" is invalid. Please check again.</invalid-nodeType>
       <invalid-keyword>The keyword is invalid. Some characters are not supported.</invalid-keyword>
     </msg>
