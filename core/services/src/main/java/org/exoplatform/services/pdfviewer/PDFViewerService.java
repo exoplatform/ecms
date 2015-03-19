@@ -136,8 +136,8 @@ public class PDFViewerService {
         read(input, new BufferedOutputStream(new FileOutputStream(in)));
         long fileSize = in.length(); // size in byte
         if (LOG.isDebugEnabled()) {
-          LOG.debug("File: " + name + "." + extension + 
-        		   ". Size: " + fileSize + " B. Size limit for preview: " + (MAX_FILE_SIZE/(1024*1024)) + " MB");
+          LOG.debug("File '" + currentNode.getPath() +
+                    "' of " + fileSize + " B. Size limit for preview: " + (MAX_FILE_SIZE/(1024*1024)) + " MB");
         }
         if (fileSize <= MAX_FILE_SIZE) { // ECMS-6329 only converts small file
         try {          	
@@ -158,7 +158,7 @@ public class PDFViewerService {
           in.delete();
         }
         } else {
-          LOG.info("File '" + name + "." + extension + "' is too big for preview.");	
+          LOG.info("File '" + currentNode.getPath() + "' is too big for preview.");
           content.delete();
           content = null;
           in.delete();
