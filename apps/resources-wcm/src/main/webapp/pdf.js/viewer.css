@@ -463,10 +463,6 @@ body {
   padding: 4px;
 }
 
-#toolbarViewerRight .uiIconEcmsExpand {
-    background-image: url("images/uiIconsEcmsLightGray.png");
-}
-
 #toolbarViewerLeft input{
 	width: 36px;
 	text-align: right;
