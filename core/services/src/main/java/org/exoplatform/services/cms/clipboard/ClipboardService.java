@@ -45,8 +45,7 @@ public interface ClipboardService {
   public ClipboardCommand getLastClipboard(String userId);
 
   /**
-   * Gets the list of clipboard command added by given user
-   * check in clipboard. if a node was deleted, remove all clipboardCommands relate to that node in clipboard 
+   * Gets the list of clipboard command added by given user 
    * @param userId the user who added the commands
    * @param isVirtual if the commands are virtual
    * @return the list of ClipboardCommand
