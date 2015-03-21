@@ -54,6 +54,7 @@ import org.exoplatform.webui.form.UIFormSelectBox;
 import org.exoplatform.webui.form.UIFormStringInput;
 import org.exoplatform.webui.form.UIFormTabPane;
 import org.exoplatform.webui.form.validator.MandatoryValidator;
+import org.exoplatform.webui.form.validator.Validator;
 
 /**
  * Created by The eXo Platform SARL
@@ -73,6 +74,7 @@ import org.exoplatform.webui.form.validator.MandatoryValidator;
                      @EventConfig(listeners = UINodeTypeForm.SaveDraftActionListener.class),
                      @EventConfig(listeners = UINodeTypeForm.SaveActionListener.class),
                      @EventConfig(listeners = UINodeTypeForm.SelectTabActionListener.class, phase = Phase.DECODE),
+                     @EventConfig(listeners = UINodeTypeForm.IsMixinActionListener.class, phase = Phase.DECODE),
                      @EventConfig(listeners = UIPropertyDefinitionForm.AddPropertyActionListener.class, phase = Phase.DECODE),
                      @EventConfig(listeners = UIChildNodeDefinitionForm.AddChildActionListener.class, phase = Phase.DECODE),
                      @EventConfig(listeners = UINodeTypeForm.ViewChildNodeActionListener.class, phase = Phase.DECODE),
@@ -148,11 +150,13 @@ public class UINodeTypeForm extends UIFormTabPane {
 
   public UINodeTypeForm() throws Exception {
     super("UINodeTypeForm");
+    UIFormSelectBox mixinSelectBox = new UIFormSelectBox(MIXIN_TYPE, MIXIN_TYPE, null);
+    mixinSelectBox.setOnChange("IsMixin");
     UIFormInputSetWithAction nodeTypeTab = new UIFormInputSetWithAction(NODETYPE_DEFINITION);
     nodeTypeTab.addUIFormInput(new UIFormSelectBox(NAMESPACE, NAMESPACE, null))
     .addUIFormInput(new UIFormStringInput(NODETYPE_NAME, NODETYPE_NAME, null).addValidator(MandatoryValidator.class)
                     .addValidator(ECMNameValidator.class))
-    .addUIFormInput(new UIFormSelectBox(MIXIN_TYPE, MIXIN_TYPE, null))
+    .addUIFormInput(mixinSelectBox)
     .addUIFormInput(new UIFormSelectBox(HAS_ORDERABLE_CHILDNODES,
                                         HAS_ORDERABLE_CHILDNODES,
                                         null))
@@ -313,6 +317,9 @@ public class UINodeTypeForm extends UIFormTabPane {
       types.append(superType[i].getName()) ;
     }
     getUIStringInput(SUPER_TYPE).setValue(types.toString()) ;
+    if (nodeType.isMixin() && getUIStringInput(SUPER_TYPE).getValidators().size() > 0) {
+      removeMandatoryValidator();
+    }
     if(isView) {
       getUIFormSelectBox(NAMESPACE).setDisabled(true) ;
       getUIStringInput(NODETYPE_NAME).setReadOnly(true);
@@ -788,7 +795,45 @@ public class UINodeTypeForm extends UIFormTabPane {
         context.setResponseComplete(true);
       }
     }		
-  } 
+  }
+  static public class IsMixinActionListener extends EventListener<UINodeTypeForm>
+  {
+    public void execute(Event<UINodeTypeForm> event) throws Exception {
+      UINodeTypeForm uiForm = event.getSource();
+      if (uiForm.getUIFormSelectBox(MIXIN_TYPE).getValue().equals("true") && uiForm.getUIStringInput(SUPER_TYPE).getValidators().size() > 0) {
+        uiForm.removeMandatoryValidator();
+      } 
+      if (uiForm.getUIFormSelectBox(MIXIN_TYPE).getValue().equals("false")) {
+        if (uiForm.getUIStringInput(SUPER_TYPE).getValidators().size() == 0) {
+          uiForm.getUIStringInput(SUPER_TYPE).addValidator(MandatoryValidator.class);
+        } else {
+            boolean isMandatoryValidator = false;
+            List<Validator> validators = uiForm.getUIStringInput(SUPER_TYPE).getValidators();
+            for (Object obj: validators) {
+              if (obj instanceof MandatoryValidator) {
+                isMandatoryValidator = true;
+              }
+            }
+            if (!isMandatoryValidator) {
+              uiForm.getUIStringInput(SUPER_TYPE).addValidator(MandatoryValidator.class);
+            }
+        }
+      }
+    }
+  }
+  private void removeMandatoryValidator() {
+    List<Validator> validators = getUIStringInput(SUPER_TYPE).getValidators();
+    int index = -1;
+    for (int i = 0; i < validators.size(); i++) {
+      if ((validators.get(i) instanceof MandatoryValidator)) {
+        index = i;
+        break;
+      }
+    }
+    if (index > -1) {
+      validators.remove(index);
+    }
+  }
 
 
 }
