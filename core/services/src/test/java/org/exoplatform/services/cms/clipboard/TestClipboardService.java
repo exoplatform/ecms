@@ -120,5 +120,16 @@ public class TestClipboardService extends BaseWCMTestCase {
     clipboardService_.clearClipboardList("mary", true);
     assertEquals(0, clipboardService_.getClipboardList("mary", true).size());
   }
-
+  
+  public void testRemoveClipboardCommand() {
+    clipboardService_.removeClipboardCommand("john", new ClipboardCommand(ClipboardCommand.CUT, "/documents", "collaboration"));
+    Set<ClipboardCommand> commands = clipboardService_.getClipboardList("john", false);
+    assertEquals(1, commands.size());
+    clipboardService_.removeClipboardCommand("john", new ClipboardCommand(ClipboardCommand.COPY, "/documents", "dms-system"));
+    commands = clipboardService_.getClipboardList("john", false);
+    assertEquals(1, commands.size());
+    ClipboardCommand command = clipboardService_.getLastClipboard("john");
+    assertEquals("collaboration", command.getWorkspace());
+    assertEquals(ClipboardCommand.CUT, command.getType());
+  }
 }
