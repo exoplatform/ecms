@@ -68,7 +68,7 @@
             $video.css('max-width', $uiContentBox.width() - 2);
             $video.css('max-height', $uiContentBox.height() - 3);
             $video.css('width', '100%');
-            $video.css('height', 'auto');
+            $video.css('height', '100%');
 
             $windowmediaplayer.css('max-width', $uiContentBox.width() - 2);
             $windowmediaplayer.css('max-height', $uiContentBox.height() - 7);
