@@ -306,6 +306,13 @@
       }else{
         var _objId = element.getAttribute("workspacename")+":"+Self.srcPath;
         eXo.ecm.OpenDocumentInOffice.updateLabel(_objId);
+        event.cancelBubble = true;
+        if (inArray(Self.itemsSelected, element) && Self.itemsSelected.length > 1){
+          Self.showItemContextMenu(event, element);
+        } else {
+          Self.clickItem(event, element);
+          eval(element.getAttribute("mousedown"));
+        }        
       }
     };
 
@@ -432,12 +439,6 @@
         }
       } else {
         event.cancelBubble = true;
-        if (inArray(Self.itemsSelected, element) && Self.itemsSelected.length > 1){
-          Self.showItemContextMenu(event, element);
-        } else {
-          Self.clickItem(event, element);
-          eval(element.getAttribute("mousedown"));
-        }
       }
       
       // Init feature Copy URL to Clipboard
