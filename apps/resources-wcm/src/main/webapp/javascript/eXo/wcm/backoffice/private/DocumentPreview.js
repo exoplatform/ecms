@@ -15,7 +15,9 @@
         gj('body').css('overflow', 'hidden');
 
         // Set z-index of UIPopupWindow to lower priority than Document Preview
-        $uiDocumentPreview.closest('.UIPopupWindow').css({'z-index':''});
+        $uiDocumentPreview.closest('.UIPopupWindow').css({
+            'z-index': ''
+        });
 
         // Bind Esc key
         var closeEventHandler = function(e) {
@@ -140,16 +142,13 @@
         // Click shadow mask to close preview
         gj($uiDocumentPreview).mouseup(function(e) {
             var $target = gj(e.target);
-            if ($target.attr('id') === "UIDocumentPreview"
-             || $target.hasClass('uiVote')
-             || $target.hasClass('uiDocumentPreviewMainWindow')
-             || $target.hasClass('UIUnResizableBlock')) {
+            if ($target.attr('id') === "UIDocumentPreview" || $target.hasClass('uiVote') || $target.hasClass('uiDocumentPreviewMainWindow') || $target.hasClass('UIUnResizableBlock')) {
                 gj(".exitWindow > .uiIconClose", $uiDocumentPreview).trigger("click");
             }
         });
     };
 
-    DocumentPreview.prototype.bindPostCommentEvent = function() {
+    DocumentPreview.prototype.bindCommentEvent = function() {
         var $uiDocumentPreview = gj("#UIDocumentPreview");
         var $commentArea = gj('.commentArea', $uiDocumentPreview);
         var $commentTextAreaPreview = gj('#commentTextAreaPreview', $commentArea);
@@ -184,9 +183,27 @@
             }
         });
 
+        // Bind delete comment event
+        var actionDeletes = gj('a.previewControllDelete');
+        if (actionDeletes.length > 0) {
+            actionDeletes.off('click').on('click',
+                function(e) {
+                    gj('.currentDeleteActivity:first').removeClass('currentDeleteActivity');
+                    var jElm = gj(this);
+                    jElm.addClass('currentDeleteActivity');
+                    var id = jElm.attr('id');
+                    var confirmText = jElm.attr('data-confirm');
+                    eXo.social.PopupConfirmation.confirm(id, [{
+                        action: eXo.ecm.DocumentPreview.removeComment,
+                        label: 'OK'
+                    }], 'Confirmation', confirmText, 'Close');
+                }
+            );
+        }
+
         // Clicking the comment icon will put the focus in the comment area. 
         gj('#previewCommentLink', $commentArea).unbind('click');
-        gj('#previewCommentLink', $commentArea).click(function(){
+        gj('#previewCommentLink', $commentArea).click(function() {
             $commentTextAreaPreview.focus();
         });
 
@@ -221,6 +238,15 @@
     DocumentPreview.prototype.refreshComments = function() {
         var url = decodeURIComponent(this.refreshCommentsAction);
         eval(url);
+    };
+
+    DocumentPreview.prototype.removeComment = function() {
+        var jElm = gj('.currentDeleteActivity:first');
+        var idElm = jElm.attr('id');
+        jElm.removeClass('currentDeleteActivity');
+        if (idElm.indexOf('Comment') > 0) { // remove comment
+            window.eval(jElm.attr('data-delete').replace('javascript:', ''));
+        }
     };
 
     eXo.ecm.DocumentPreview = new DocumentPreview();
