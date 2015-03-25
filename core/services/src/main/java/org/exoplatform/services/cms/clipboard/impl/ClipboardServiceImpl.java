@@ -200,9 +200,9 @@ public class ClipboardServiceImpl implements ClipboardService {
     // if removed command is last command, update last command
     Set<ClipboardCommand> commands = getClipboardList(userId, false);
     if (lastCommand_.containsValue(command)) {
-      ClipboardCommand newLastComand = null;
-      for (ClipboardCommand cmd : commands) newLastComand = cmd;
-      lastCommand_.put(userId, newLastComand);
+      ClipboardCommand newLastCommand = null;
+      for (ClipboardCommand cmd : commands) newLastCommand = cmd;
+      lastCommand_.put(userId, newLastCommand);
     }
   }
 }
