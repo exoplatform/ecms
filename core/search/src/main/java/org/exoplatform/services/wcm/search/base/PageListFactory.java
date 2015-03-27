@@ -75,7 +75,12 @@ public class PageListFactory {
     int offset = 0;
     if (criteria != null) {
       if (criteria.getOffset() > 0) { ((QueryImpl)query).setOffset(criteria.getOffset()); }
-      else if (criteria.getOffset() == 0) {
+      else {
+        if (criteria.getOffset() < 0) {
+          // WCMAdvancedSearch takes the default value (-1) of QueryCriteria's offset
+          // reset it to 0 to align with the default value of Unified Search
+          criteria.setOffset(0);
+        }
         SiteSearchService searchService = WCMCoreUtils.getService(SiteSearchService.class);
         searchService.clearCache(ConversationState.getCurrent().getIdentity().getUserId(), queryStatement);
       }
