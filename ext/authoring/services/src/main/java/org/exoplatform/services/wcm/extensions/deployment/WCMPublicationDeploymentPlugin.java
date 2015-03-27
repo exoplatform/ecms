@@ -140,9 +140,7 @@ public class WCMPublicationDeploymentPlugin extends DeploymentPlugin{
           
           Node parent = (Node)session.getItem(deploymentDescriptor.getTarget().getNodePath() + "/" + nodeName);
           cleanPublication(parent, cleanupPublicationType, true);
-        }
-
-        if (versionHistoryPath != null && versionHistoryPath.length() > 0) {
+        } else if (versionHistoryPath != null && versionHistoryPath.length() > 0) {
           // process import version history
           Node currentNode = (Node) session.getItem(deploymentDescriptor.getTarget().getNodePath());
 
