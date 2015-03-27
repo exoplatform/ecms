@@ -156,7 +156,11 @@ public class UITreeExplorer extends UIContainer {
                                                                                   repoService.getCurrentRepository()).getItem(path);
         return groupNode.getProperty(NodetypeConstant.EXO_LABEL).getString();
       } catch(Exception e) {
-        return id.replace(".", " / ");
+        try {
+          return getAncestorOfType(UIJCRExplorer.class).getChild(UIWorkingArea.class).getChild(UIDrivesArea.class).getGroupLabel(driveData);
+        } catch (Exception e1) {
+          return id.replace(".", " / ");
+        }
       }
     }
   }
