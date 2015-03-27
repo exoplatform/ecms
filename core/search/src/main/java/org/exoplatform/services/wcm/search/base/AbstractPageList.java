@@ -173,7 +173,7 @@ public abstract class AbstractPageList<E> extends PageList<E> {
         }
       } catch (Exception e) {
         if (LOG.isWarnEnabled()) {
-          LOG.warn(e.getMessage());
+          LOG.warn("Error in getPage.", e);
         }
       }
     }
@@ -181,7 +181,7 @@ public abstract class AbstractPageList<E> extends PageList<E> {
       getPageWithOffsetCare(1);
     } catch (Exception e) {
       if (LOG.isWarnEnabled()) {
-        LOG.warn(e.getMessage());
+        LOG.warn("Error in getPageWithOffsetCare.", e);
       }
     }
   }
