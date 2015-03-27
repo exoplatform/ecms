@@ -43,8 +43,8 @@
 	
 	if (isShowCategories || isShowTags) {
 		%>
-			<div class="webContentContainer">
-				<div class="webContentInformation">
+			<div class="webContentContainer ">
+				<div class="webContentInformation content-display">
 					<% 
 						if(isShowCategories) {
 							TaxonomyService taxonomyService = uicomponent.getApplicationComponent(TaxonomyService.class);
