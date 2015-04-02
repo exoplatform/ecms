@@ -19,6 +19,7 @@ import javax.jcr.ValueFactory;
 import javax.jcr.version.Version;
 import javax.portlet.PortletMode;
 
+import org.apache.commons.lang.StringUtils;
 import org.exoplatform.commons.utils.PageList;
 import org.exoplatform.container.PortalContainer;
 import org.exoplatform.ecm.webui.utils.Utils;
@@ -538,9 +539,10 @@ public class AuthoringPublicationPlugin extends  WebpagePublicationPlugin {
    */
   private Node getLiveRevision(Node node) {
     try {
-      String nodeVersionUUID = node.getProperty(AuthoringPublicationConstant.LIVE_REVISION_PROP)
-                                   .getString();
-      if ("".equals(nodeVersionUUID)
+      String nodeVersionUUID = (node.hasProperty(AuthoringPublicationConstant.LIVE_REVISION_PROP)) ?
+        node.getProperty(AuthoringPublicationConstant.LIVE_REVISION_PROP).getString() : null;
+
+      if (StringUtils.isEmpty(nodeVersionUUID)
           && PublicationDefaultStates.PUBLISHED.equals(node.getProperty(AuthoringPublicationConstant.CURRENT_STATE)
                                                            .getString()))
         return node;
