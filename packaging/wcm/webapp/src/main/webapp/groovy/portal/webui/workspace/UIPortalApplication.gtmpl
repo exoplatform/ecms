@@ -55,8 +55,7 @@
   
   UserNode currentNode = Util.getUIPortal().getSelectedUserNode();
 
-  String pageReference = currentNode.getPageRef().format();
-  
+  String pageReference = currentNode.getPageRef()!=null?currentNode.getPageRef().format():"";
   def contentParam = "";
   def contentPath = "";
   ArrayList paramArray = null;
