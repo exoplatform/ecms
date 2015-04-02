@@ -33,6 +33,8 @@ import javax.jcr.query.QueryResult;
 
 import org.exoplatform.container.component.ComponentPlugin;
 import org.exoplatform.container.xml.InitParams;
+import org.exoplatform.services.cache.CacheService;
+import org.exoplatform.services.cache.ExoCache;
 import org.exoplatform.services.cms.lock.LockService;
 import org.exoplatform.services.jcr.RepositoryService;
 import org.exoplatform.services.jcr.core.ManageableRepository;
@@ -56,7 +58,9 @@ import org.picocontainer.Startable;
 
 public class LockServiceImpl implements LockService, Startable {
 
-  private List<String> settingLockList = new ArrayList<String>();
+  private static final String LOCK_LIST = "lockList";
+
+  private ExoCache<String, List<String>> settingLockList;
   private List<String> preSettingLockList = new ArrayList<String>();
   private List<LockGroupsOrUsersPlugin> lockGroupsOrUsersPlugin_ = new ArrayList<LockGroupsOrUsersPlugin>();
   private static final Log LOG = ExoLogger.getLogger(LockServiceImpl.class.getName());
@@ -67,8 +71,9 @@ public class LockServiceImpl implements LockService, Startable {
    * @param params
    * @throws Exception
    */
-  public LockServiceImpl(InitParams params) throws Exception {
+  public LockServiceImpl(InitParams params, CacheService cacheService) throws Exception {
     //group_ = params.getValueParam("group").getValue();
+    settingLockList = cacheService.getCacheInstance(LockServiceImpl.class.getName());
   }
 
   /**
@@ -92,21 +97,28 @@ public class LockServiceImpl implements LockService, Startable {
    * {@inheritDoc}
    */
   public List<String> getAllGroupsOrUsersForLock() throws Exception {
-    return settingLockList;
+    return settingLockList.get(LOCK_LIST);
   }
 
   /**
    * {@inheritDoc}
    */
   public void addGroupsOrUsersForLock(String groupsOrUsers) throws Exception {
-    if (!settingLockList.contains(groupsOrUsers)) settingLockList.add(groupsOrUsers);
+    List<String> _settingLockList = settingLockList.get(LOCK_LIST);
+    if (_settingLockList!=null && !_settingLockList.contains(groupsOrUsers)){
+      _settingLockList.add(groupsOrUsers);
+      settingLockList.put(LOCK_LIST, _settingLockList);
+    }
   }
 
   /**
    * {@inheritDoc}
    */
   public void removeGroupsOrUsersForLock(String groupsOrUsers) throws Exception {
-    if (settingLockList.contains(groupsOrUsers)) settingLockList.remove(groupsOrUsers);
+    List<String> _settingLockList = settingLockList.get(LOCK_LIST);
+    if (_settingLockList!=null && _settingLockList.contains(groupsOrUsers)){
+      (settingLockList.get(LOCK_LIST)).remove(groupsOrUsers);
+    }
   }
 
   /**
@@ -114,13 +126,16 @@ public class LockServiceImpl implements LockService, Startable {
    */
   public void start() {
     lockHolding.clear();
-    settingLockList.clear();
+    settingLockList.clearCache();
     preSettingLockList.clear();
     removeLocks();
+    List<String> _plugins = new ArrayList<String>();
     for(LockGroupsOrUsersPlugin plugin : lockGroupsOrUsersPlugin_) {
-      settingLockList.addAll(plugin.initGroupsOrUsers());
+      _plugins.addAll(plugin.initGroupsOrUsers());
       preSettingLockList.addAll(plugin.initGroupsOrUsers());
     }
+    settingLockList.put(LOCK_LIST, _plugins);
+    _plugins=null;
   }
 
   /**
@@ -128,7 +143,7 @@ public class LockServiceImpl implements LockService, Startable {
    */
   public void stop() {
     lockHolding.clear();
-    settingLockList.clear();
+    settingLockList.clearCache();
     preSettingLockList.clear();
   }
 
