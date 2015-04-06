@@ -1489,6 +1489,7 @@
       <import-successful>تمّت عمليّة الاستيراد بنجاح.</import-successful>
       <filename-invalid>اختر ملف من نوع 'xml' قصد استيراده.</filename-invalid>
       <filetype-error>لا يمكن الاستيراد. ربّما طرأ خطأ أثناء تحميل الملفّ.</filetype-error>
+      <xml-invalid>There is an invalid character at position [row, column]:{0} in {1} file</xml-invalid>
       <mimetype-invalid>يمكن استيراد ملفات من نوع 'xml' أو 'zip' فحسب.</mimetype-invalid>
       <access-denied>غير مسموح. لا يمكنك الاستيراد هناك.</access-denied>
       <constraint-violation-exception>لا يمكنك استيراد البيانات. نوع العقدة '{0}' غير متاح في هذا المكان.</constraint-violation-exception>

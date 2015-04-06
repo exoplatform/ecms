@@ -1489,6 +1489,7 @@
       <import-successful>Importert.</import-successful>
       <filename-invalid>Velg en .xml fil via "filopplasting"-feltet for å importere.</filename-invalid>
       <filetype-error>Kan ikke importere den opplastede filen. XML-filen kan være ugyldig.</filetype-error>
+      <xml-invalid>There is an invalid character at position [row, column]:{0} in {1} file</xml-invalid>
       <mimetype-invalid>Kun XML eller .zip-filer kan importeres.</mimetype-invalid>
       <access-denied>Ingen tilgang. Du kan ikke importere her.</access-denied>
       <constraint-violation-exception>Umulig å importere data. Typen '{0}' er ikke tillatt på dette stedet.</constraint-violation-exception>

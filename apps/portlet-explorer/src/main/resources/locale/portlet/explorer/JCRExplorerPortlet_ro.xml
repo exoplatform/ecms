@@ -1489,6 +1489,7 @@
       <import-successful>Importat cu succes.</import-successful>
       <filename-invalid>Alege un fişier .xml de importat pentru câmpul 'Încărcare fișier'.</filename-invalid>
       <filetype-error>Imposibil de importat fişierul încărcat. Fișierul .xml invalid.</filetype-error>
+      <xml-invalid>There is an invalid character at position [row, column]:{0} in {1} file</xml-invalid>
       <mimetype-invalid>Se pot importa doar fişiere .xml sau .zip.</mimetype-invalid>
       <access-denied>Acces refuzat. Nu poți importa acolo.</access-denied>
       <constraint-violation-exception>Imposibil importul de date. Tipul "{0}" nu este permis în această locație.</constraint-violation-exception>

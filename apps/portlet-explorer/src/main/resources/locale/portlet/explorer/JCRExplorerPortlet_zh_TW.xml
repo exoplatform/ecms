@@ -1489,6 +1489,7 @@
       <import-successful>已成功匯入。</import-successful>
       <filename-invalid>瀏覽要匯入的上載檔案欄位的.xml 檔。</filename-invalid>
       <filetype-error>不能匯入已上載檔案。.Xml 檔可能無效。</filetype-error>
+      <xml-invalid>There is an invalid character at position [row, column]:{0} in {1} file</xml-invalid>
       <mimetype-invalid>您只可以匯入.xml 或.ZIP 檔案。</mimetype-invalid>
       <access-denied>訪問被拒絕。你不允許在那裡匯入。</access-denied>
       <constraint-violation-exception>無法匯入資料。此位置不允許類型 '{0}'。</constraint-violation-exception>

@@ -1489,6 +1489,7 @@
       <import-successful>Importat correctament.</import-successful>
       <filename-invalid>Selecciona un fitxer xml per importar-lo.</filename-invalid>
       <filetype-error>No es pot importar el fitxer pujat. El fitxer .xml pot ser invàlid.</filetype-error>
+      <xml-invalid>There is an invalid character at position [row, column]:{0} in {1} file</xml-invalid>
       <mimetype-invalid>Només pot importar fitxers .XML o.zip.</mimetype-invalid>
       <access-denied>Accés denegat. No té permís per importar-hi.</access-denied>
       <constraint-violation-exception>Impossible d'importar les dades. El tipus '{0}' no està permès en aquesta ubicació.</constraint-violation-exception>

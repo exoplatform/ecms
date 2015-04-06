@@ -1489,6 +1489,7 @@
       <import-successful>Успешно импортировано.</import-successful>
       <filename-invalid>Просмотрите файл .xlm для импорта в поле "Загрузить файл".</filename-invalid>
       <filetype-error>Не удается импортировать загруженный файл. Возможно, файл .xml недопустимый.</filetype-error>
+      <xml-invalid>There is an invalid character at position [row, column]:{0} in {1} file</xml-invalid>
       <mimetype-invalid>Можно импортировать только файлы .xml или .zip.</mimetype-invalid>
       <access-denied>Доступ запрещен. Вы не можете импортировать здесь.</access-denied>
       <constraint-violation-exception>Невозможно импортировать данные. Тип '{0}' не допускается в этом месте.</constraint-violation-exception>

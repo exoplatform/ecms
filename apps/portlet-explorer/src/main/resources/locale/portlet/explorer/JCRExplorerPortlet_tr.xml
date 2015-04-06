@@ -1489,6 +1489,7 @@
       <import-successful>Başarıyla aktarıldı.</import-successful>
       <filename-invalid>İçe Aktarmak için "Dosya Yükle" alanına bir .xml dosyası gözatın.</filename-invalid>
       <filetype-error>Yüklenen dosya alınamıyor. .Xml dosyasının geçersiz olabilir.</filetype-error>
+      <xml-invalid>There is an invalid character at position [row, column]:{0} in {1} file</xml-invalid>
       <mimetype-invalid>Sadece .zip veya .xml dosyaları içe aktarılabilir.</mimetype-invalid>
       <access-denied>Erişim engellendi. Oraya almak için izin verilmez.</access-denied>
       <constraint-violation-exception>Verileri içeri aktarmak imkansız. '{0}' Türü, bu konumda kabul edilmiyor.</constraint-violation-exception>

@@ -1489,6 +1489,7 @@
       <import-successful>Η εισαγωγή ολοκληρώθηκε με επιτυχία.</import-successful>
       <filename-invalid>Περιηγηθείτε για ένα αρχείο .xml για το πεδίο "Ανέβασμα αρχείου" για την εισαγωγή.</filename-invalid>
       <filetype-error>Δεν μπορεί να εισαχθεί το απεσταλμένο αρχείο. Το αρχείο .xml δεν είναι έγκυρο.</filetype-error>
+      <xml-invalid>There is an invalid character at position [row, column]:{0} in {1} file</xml-invalid>
       <mimetype-invalid>Μπορούν να εισαχθούν μόνο αρχεία .xml ή .zip.</mimetype-invalid>
       <access-denied>Δεν επιτρέπεται η πρόσβαση. Δεν επιτρέπεται να κάνετε εισαγωγή εκεί.</access-denied>
       <constraint-violation-exception>Αδύνατη εισαγωγή δεδομένων. Ο τύπος '{0}' δεν επιτρέπεται σε αυτήν τη θέση.</constraint-violation-exception>
