@@ -4,7 +4,7 @@
   <parent>
     <artifactId>ecms-testsuite</artifactId>
     <groupId>org.exoplatform.ecms</groupId>
-    <version>4.2.x-SNAPSHOT</version>
+    <version>4.2.x-ecms-user-profile-redesign-SNAPSHOT</version>
   </parent>
   <artifactId>ecms-testsuite-test</artifactId>
   <name>eXo ECMS Testing</name>
