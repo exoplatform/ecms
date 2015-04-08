@@ -63,6 +63,7 @@ public class ArrayNodePageList<E> extends AbstractPageList<E> {
     setAvailablePage(dataList.size());
     removeRedundantPages(dataList.size() / pageSize);
     currentListPage_ = null;
+    loadedAllData_ = true;
   }
   
   /** Constructor */

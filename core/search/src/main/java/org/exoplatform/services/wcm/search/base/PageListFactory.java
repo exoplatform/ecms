@@ -80,7 +80,10 @@ public class PageListFactory {
         searchService.clearCache(ConversationState.getCurrent().getIdentity().getUserId(), queryStatement);
       }
       offset = (int)criteria.getOffset();
-    } 
+    }  else {
+      SiteSearchService searchService = WCMCoreUtils.getService(SiteSearchService.class);
+      searchService.clearCache(ConversationState.getCurrent().getIdentity().getUserId(), queryStatement);
+    }
     ((QueryImpl)query).setLimit(AbstractPageList.RESULT_SIZE_SEPARATOR + 1);
     QueryResult result = query.execute();
     int totalNodes = (int)result.getNodes().getSize();

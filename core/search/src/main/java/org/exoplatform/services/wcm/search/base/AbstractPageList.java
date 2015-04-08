@@ -60,6 +60,8 @@ public abstract class AbstractPageList<E> extends PageList<E> {
   /** The offset */
   protected int offset_;
   
+  protected boolean loadedAllData_ = true;
+  
   public Comparator<E> getComparator() {
     return comparator;
   }
@@ -184,6 +186,10 @@ public abstract class AbstractPageList<E> extends PageList<E> {
         LOG.warn(e.getMessage());
       }
     }
+  }
+  
+  public boolean loadedAllData() {
+    return loadedAllData_;
   }
   
 //  @SuppressWarnings("unchecked")

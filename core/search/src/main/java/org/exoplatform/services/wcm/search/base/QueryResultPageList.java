@@ -62,7 +62,7 @@ public class QueryResultPageList<E> extends AbstractPageList<E> {
   protected List<E> buffer;
   
   private Map<E, Integer> dataSet;
-  
+    
   public QueryResultPageList(int pageSize, QueryData queryData, int total, int bufferSize,
                              NodeSearchFilter filter, SearchDataCreator creator) {
     super(pageSize);
@@ -75,6 +75,7 @@ public class QueryResultPageList<E> extends AbstractPageList<E> {
     this.setAvailablePage(total);
     removeRedundantPages(Math.min(bufferSize_ / pageSize, 5));
     dataSet = new HashMap<E, Integer>();
+    loadedAllData_ = false;
   }
   
   public int getBufferSize() { return bufferSize_; }
@@ -129,6 +130,9 @@ public class QueryResultPageList<E> extends AbstractPageList<E> {
         E data = buffer.get(i - offset_);
         currentListPage_.add(data);
       }
+    }
+    if (currentListPage_.size() < getPageSize()) {
+      loadedAllData_ = true;
     }
   }
   
@@ -187,13 +191,22 @@ public class QueryResultPageList<E> extends AbstractPageList<E> {
             }
             // increase page number for the last item
             if (position % getPageSize() == 0) { page++; }
-          } else { drop.put(page, drop.get(page) + 1); }
-        } else if (newNode == null) { drop.put(page, drop.get(page) + 1); }
+          } else { if (drop.containsKey(page)) drop.put(page, drop.get(page) + 1); }
+        } else if (newNode == null) { if (drop.containsKey(page)) drop.put(page, drop.get(page) + 1); }
+      }
+      if (count + offset_ > totalNodes) {
+        totalNodes = count + offset_;
+        int currentP = currentPage_;
+        setAvailablePage((int)totalNodes);
+        currentPage_ = currentP;
+      }
+      /* already query all data */
+      if (size == prevSize) {
+        loadedAllData_ = true;
+        break;
       }
       /* enough data to process*/
       if (count == bufferSize_) break;
-      /* already query all data */
-      if (size == prevSize) break;
       bufSize = 2 * bufSize;
       prevSize = size;
     }
@@ -263,6 +276,10 @@ public class QueryResultPageList<E> extends AbstractPageList<E> {
      if (to > available_ + offset_)
         to = available_ + offset_;
      return to;
+  }
+  
+  public boolean loadedAllData() {
+    return loadedAllData_;
   }
   
 }
