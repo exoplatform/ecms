@@ -56,7 +56,8 @@ import org.exoplatform.services.log.Log;
 import org.exoplatform.services.wcm.core.NodetypeConstant;
 import org.exoplatform.services.wcm.utils.WCMCoreUtils;
 import org.picocontainer.Startable;
-
+import org.exoplatform.services.cache.CacheService;
+import org.exoplatform.services.cache.ExoCache;
 /**
  * Created by The eXo Platform SARL
  * Author : Dang Van Minh
@@ -78,6 +79,8 @@ public class NewFolksonomyServiceImpl implements NewFolksonomyService, Startable
 
   private static final String       EXO_HIDDENABLE         = "exo:hiddenable";
 
+  private static final String       TAG_PERMISSION_LIST    = "tagPermissionList";
+
   private static final Log          LOG                    = ExoLogger.getLogger(NewFolksonomyServiceImpl.class.getName());
 
   private NodeHierarchyCreator      nodeHierarchyCreator;
@@ -90,7 +93,7 @@ public class NewFolksonomyServiceImpl implements NewFolksonomyService, Startable
 
   private List<TagPermissionPlugin> tagPermissionPlugin_   = new ArrayList<TagPermissionPlugin>();
 
-  private Set<String>               tagPermissionList      = new HashSet<String>();
+  private ExoCache<String, List<String>> tagPermissionList;
 
   private Map<String, String>       sitesTagPath           = new HashMap<String, String>();
 
@@ -105,12 +108,14 @@ public class NewFolksonomyServiceImpl implements NewFolksonomyService, Startable
                                   NodeHierarchyCreator nodeHierarchyCreator,
                                   LinkManager linkManager,
                                   DataDistributionManager dataDistributionManager,
-                                  SessionProviderService sessionProviderService) throws Exception {
+                                  SessionProviderService sessionProviderService,
+                                  CacheService cacheService) throws Exception {
     this.nodeHierarchyCreator = nodeHierarchyCreator;
     this.linkManager = linkManager;
     this.initParams_ = initParams;
     listenerService = WCMCoreUtils.getService(ListenerService.class);
     this.activityService = WCMCoreUtils.getService(ActivityCommonService.class);
+    this.tagPermissionList = cacheService.getCacheInstance(NewFolksonomyServiceImpl.class.getName());
     //get the DataDistributionType object;
     if (initParams != null && initParams.getValueParam("tagDistributionMode") != null) {
       String strTagDistributionMode = initParams.getValueParam("tagDistributionMode").getValue();
@@ -452,17 +457,17 @@ public class NewFolksonomyServiceImpl implements NewFolksonomyService, Startable
         }
       }
     }
-
+    List<String> _tagPermissionList = new ArrayList<String>();
     for (TagPermissionPlugin plugin : tagPermissionPlugin_) {
       try {
-        tagPermissionList.addAll(plugin.initPermission());
+        _tagPermissionList.addAll(plugin.initPermission());
       } catch (Exception e) {
         if (LOG.isErrorEnabled()) {
           LOG.error("can not init tag permission: ", e);
         }
       }
     }
-
+    tagPermissionList.put(TAG_PERMISSION_LIST, _tagPermissionList);
   }
 
   /**
@@ -802,22 +807,29 @@ public class NewFolksonomyServiceImpl implements NewFolksonomyService, Startable
    * {@inheritDoc}
    */
   public void addTagPermission(String usersOrGroups) {
-    if (!tagPermissionList.contains(usersOrGroups))
-      tagPermissionList.add(usersOrGroups);
+    List<String> _tagPermissionList = tagPermissionList.get(TAG_PERMISSION_LIST);
+    if (_tagPermissionList!=null && !_tagPermissionList.contains(usersOrGroups)) {
+      _tagPermissionList.add(usersOrGroups);
+      tagPermissionList.put(TAG_PERMISSION_LIST, _tagPermissionList);
+    }
   }
 
   /**
    * {@inheritDoc}
    */
   public void removeTagPermission(String usersOrGroups) {
-    tagPermissionList.remove(usersOrGroups);
+    List<String> _tagPermissionList = tagPermissionList.get(TAG_PERMISSION_LIST);
+    if(_tagPermissionList!=null && _tagPermissionList.contains(usersOrGroups)) {
+      _tagPermissionList.remove(usersOrGroups);
+      tagPermissionList.put(TAG_PERMISSION_LIST, _tagPermissionList);
+    }
   }
 
   /**
    * {@inheritDoc}
    */
   public List<String> getTagPermissionList() {
-    return new ArrayList<String>(tagPermissionList);
+    return tagPermissionList.get(TAG_PERMISSION_LIST);
   }
 
   /**
@@ -825,11 +837,12 @@ public class NewFolksonomyServiceImpl implements NewFolksonomyService, Startable
    */
   public boolean canEditTag(int scope, List<String> memberships) {
     if (scope == PUBLIC) {
+      List<String> _tagPermissionList = tagPermissionList.get(TAG_PERMISSION_LIST);
       for (String membership : memberships) {
-        if (tagPermissionList.contains(membership))
+        if (_tagPermissionList!=null && _tagPermissionList.contains(membership))
           return true;
-        if (membership.contains(":")) {
-          if (tagPermissionList.contains("*" + membership.substring(membership.indexOf(":"))))
+        if (_tagPermissionList!=null && membership.contains(":")) {
+          if (_tagPermissionList.contains("*" + membership.substring(membership.indexOf(":"))))
             return true;
         }
       }
