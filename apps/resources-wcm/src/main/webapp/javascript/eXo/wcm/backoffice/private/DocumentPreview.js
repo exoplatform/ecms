@@ -170,7 +170,7 @@
                     return;
                 }
 
-                var postActivityLink = "/rest/private/portal/social/activities/" + activityId + "/comments/create.json?text=" + commentText + "&opensocial_viewer_id=" + eXo.env.portal.userName;
+                var postActivityLink = "/rest/private/portal/social/activities/" + activityId + "/comments/create.json?opensocial_viewer_id=" + eXo.env.portal.userName +"&text=" + encodeURIComponent(commentText);
                 var jqxhr = gj.ajax(postActivityLink)
                     .done(function() {
                         eXo.ecm.DocumentPreview.refreshComments();
