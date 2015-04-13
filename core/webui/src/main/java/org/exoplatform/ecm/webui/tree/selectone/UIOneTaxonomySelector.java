@@ -43,7 +43,7 @@ import org.exoplatform.webui.core.UIBreadcumbs;
 import org.exoplatform.webui.core.UIBreadcumbs.LocalPath;
 import org.exoplatform.webui.event.Event;
 import org.exoplatform.webui.event.EventListener;
-
+import org.exoplatform.webui.form.UIFormSelectBox;
 /**
  * Created by The eXo Platform SARL
  * Author : Dang Van Minh
@@ -137,6 +137,14 @@ public class UIOneTaxonomySelector extends UIBaseNodeTreeSelector {
     selectPathPanel.setExceptedNodeTypes(exceptedNodeTypesInPathPanel);
     selectPathPanel.setDefaultExceptedNodeTypes(defaultExceptedNodeTypes);
     selectPathPanel.updateGrid();
+    String taxoTreeName = ((UIFormSelectBox)this.findComponentById(UITreeTaxonomyList.TAXONOMY_TREE)).getValue();
+    Node taxoTreeNode = this.getTaxoTreeNode(taxoTreeName);
+    this.setWorkspaceName(taxoTreeNode.getSession().getWorkspace().getName());
+    this.setRootTaxonomyName(taxoTreeNode.getName());
+    this.setRootTreePath(taxoTreeNode.getPath());
+    UITreeTaxonomyBuilder uiTreeJCRExplorer = this.findFirstComponentOfType(UITreeTaxonomyBuilder.class);
+    uiTreeJCRExplorer.setRootTreeNode(taxoTreeNode);
+    uiTreeJCRExplorer.buildTree();
   }
 
   public boolean isAllowPublish() {
