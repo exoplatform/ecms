@@ -27,7 +27,6 @@ package org.exoplatform.services.wcm.publication.lifecycle.stageversion;
  * This class is not supported anymore. So, this class will be removed soon.
  *
  */
-@Deprecated
 public interface StageAndVersionPublicationConstant {
 
   /** The Constant PUBLICATION_LIFECYCLE_TYPE. */

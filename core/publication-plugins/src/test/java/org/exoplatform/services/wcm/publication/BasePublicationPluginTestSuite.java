@@ -31,9 +31,6 @@ import org.junit.runners.Suite.SuiteClasses;
  */
 @RunWith(Suite.class)
 @SuiteClasses({ 
-  TestStageAndVersionPublicationPlugin.class,
-  TestStaticAndDirectPublicationPlugin.class,
-  TestSimplePublicationPlugin.class
 })
 @ConfigTestCase(BasePublicationPluginTestCase.class)
 public class BasePublicationPluginTestSuite extends BaseExoContainerTestSuite {
