@@ -44,6 +44,7 @@
 		%>
 			<div style="padding: 10px;" class="clearfix viewDetail" >
 				<div class="pull-left introImage" style="margin: 0 10px 10px 0; width:$imageWidth; height:$imageHeight"><img alt="$imageURI"  src="$imageURI" /></div>
+			</div>
 		<%
 	}
 	if((css != null) && (css.length() > 0)) {
