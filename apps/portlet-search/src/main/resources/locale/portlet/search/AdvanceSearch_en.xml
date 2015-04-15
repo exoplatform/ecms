@@ -18,9 +18,9 @@
       <Document>Document</Document>
       <DocumentAndPage>Document and Page</DocumentAndPage>
       <documentandpage>Document and Page</documentandpage>
-      <resutlsCaption>Results</resutlsCaption>
+      <results>Results {0} to {1} for {2}</results>
+      <oneResult>Only one result for {0}</oneResult>
       <ofAboutCaption>of about</ofAboutCaption>
-      <forCaption>for</forCaption>
       <timeUnitCaption>seconds</timeUnitCaption>
       <similar>Pages where the same content appears</similar>
       <editor>Editor</editor>

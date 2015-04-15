@@ -27,6 +27,7 @@
   def currentPageData = uicomponent.getCurrentPageData();
   def currentPage = uicomponent.getCurrentPage();
   def itemsPerPage = uicomponent.getItemsPerPage();
+  def totalItems = uicomponent.getTotalItem();
   def endItemIndex = (currentPage - 1) * itemsPerPage + currentPageData.size();
   def realCurrentPageData = uicomponent.getRealCurrentPageData();
   def keyword = uicomponent.getKeyword();
@@ -63,8 +64,20 @@
         showPaginator = (itemsPerPage==currentPageData.size() && SiteSearchService.PAGE_MODE_MORE.equals(pageMode)) ||
                                       (SiteSearchService.PAGE_MODE_PAGINATION.equals(pageMode));
    	 %>
+   	   <%
+   	   def strResult = "";
+   	   if (totalItems == 1) {
+   	     strResult = _ctx.appRes("UIDefaultSearchResult.label.oneResult");
+   	     strResult = strResult.replace("{0}","<strong>" + keyword + "</strong>");
+   	   } else {
+   	     strResult = _ctx.appRes("UIDefaultSearchResult.label.results");
+   	     strResult = strResult.replace("{0}",startItemIndex.toString());
+   	     strResult = strResult.replace("{1}",endItemIndex.toString());
+   	     strResult = strResult.replace("{2}","<strong>" + keyword + "</strong>");
+   	   }
+   	   %>
    		 <div class="pull-left resultHeader" id="resultHeader">
-	       <%= _ctx.appRes("UIDefaultSearchResult.label.resutlsCaption") %> <%= startItemIndex %> to <%= endItemIndex %> <%= _ctx.appRes("UIDefaultSearchResult.label.forCaption") %> <strong><%= keyword %></strong>
+	       <p>$strResult</p>
 	     </div>
 	     <div class="pull-right resultSort" id="resultSort" style="display: block;">
 	        <div class="btn-group uiDropdownWithIcon pull-right">
