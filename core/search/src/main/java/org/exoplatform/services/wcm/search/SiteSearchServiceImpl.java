@@ -52,6 +52,7 @@ import org.exoplatform.services.cms.templates.TemplateService;
 import org.exoplatform.services.jcr.RepositoryService;
 import org.exoplatform.services.jcr.core.ManageableRepository;
 import org.exoplatform.services.jcr.ext.common.SessionProvider;
+import org.exoplatform.services.jcr.impl.core.query.QueryImpl;
 import org.exoplatform.services.log.ExoLogger;
 import org.exoplatform.services.log.Log;
 import org.exoplatform.services.security.IdentityConstants;
@@ -367,6 +368,7 @@ public class SiteSearchServiceImpl implements SiteSearchService {
       Query query = queryManager.createQuery("SELECT rep:spellcheck() FROM nt:base WHERE jcr:path like '/' AND SPELLCHECK('"
                                                  + checkingWord + "')",
                                              Query.SQL);
+      ((QueryImpl)query).setLimit(1);
       RowIterator rows = query.execute().getRows();
       Value value = rows.nextRow().getValue("rep:spellcheck()");
       if (value != null) {
