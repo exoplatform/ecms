@@ -1567,17 +1567,19 @@ var SecondaryToolbar = {
   
   printClick: function secondaryToolbarPrintClick(evt) {
     var w = window.open("/eXoWCMResources/pdf.js/print.html?file="+PDFJS.pdfFile+"&origin="+PDFJS.downloadLink);
-    
+    this.close();
   },
 
   firstPageClick: function secondaryToolbarFirstPageClick(evt) {    
     if(document.getElementById("firstPage").className.indexOf("disabled") < 0)
       PDFView.page = 1;
+    this.close();
   },
 
   lastPageClick: function secondaryToolbarLastPageClick(evt) {
     if(document.getElementById("lastPage").className.indexOf("disabled") < 0)
       PDFView.page = PDFView.pdfDocument.numPages;
+    this.close();
   },
 
   pageRotateCwClick: function secondaryToolbarPageRotateCwClick(evt) {
@@ -2076,7 +2078,7 @@ var PDFView = {
     function noData() {
       downloadManager.downloadUrl(url, filename);
     }    
-    	  
+        
 
     var url = PDFJS.downloadLink;
     var filename = getPDFFileNameFromURL(url);
