@@ -531,21 +531,21 @@ public class NewFolksonomyServiceImpl implements NewFolksonomyService, Startable
    */
   public void removeTag(String tagPath, String workspace) throws Exception {
     Node tagNode = getNode(workspace, tagPath);
-    Node parentNode = tagNode.getParent();
-    tagNode.remove();
-    parentNode.getSession().save();
-    if (listenerService!=null && activityService!=null) {
+    NodeIterator nodeIterator = tagNode.getNodes();
+    Exception e = null;
+    while (nodeIterator.hasNext()) {
       try {
-        if (activityService.isAcceptedNode(tagNode) || (tagNode.getPrimaryNodeType().getName().equals(NodetypeConstant.NT_FILE) 
-            && activityService.isBroadcastNTFileEvents(tagNode))) {
-          listenerService.broadcast(ActivityCommonService.TAG_REMOVED_ACTIVITY, tagNode, tagNode.getName());
-        }
-      } catch (Exception e) {
-        if (LOG.isErrorEnabled()) {
-          LOG.error("Can not notify RemoveTag Activity because of: " + e.getMessage());
+        Node document = linkManager.getTarget(nodeIterator.nextNode());
+        removeTagOfDocument(tagPath, document, workspace);
+      }catch(Exception exception){
+        if(e!=null) {
+          e.addSuppressed(exception);
+        }else{
+          e = exception;
         }
       }
     }
+    if(e!=null) throw e;
   }
 
   /**
