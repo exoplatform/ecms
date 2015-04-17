@@ -732,6 +732,11 @@ public class WCMCoreUtils {
       try {
         userObject = organizationService.getUserHandler().findUserByName(username);
       } catch(Exception e) {
+        if (LOG.isDebugEnabled()) {
+          LOG.debug("Get user object from Organization Service for " + username, e);
+        } else if (LOG.isWarnEnabled()) {
+          LOG.warn("Get user object from Organization Service for " + username);
+        }
         return null;
       }
     }
