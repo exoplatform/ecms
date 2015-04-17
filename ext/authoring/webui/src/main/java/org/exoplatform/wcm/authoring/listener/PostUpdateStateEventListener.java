@@ -36,7 +36,6 @@ import org.exoplatform.services.organization.MembershipHandler;
 import org.exoplatform.services.organization.OrganizationService;
 import org.exoplatform.services.organization.User;
 import org.exoplatform.services.organization.UserHandler;
-import org.exoplatform.services.security.ConversationState;
 import org.exoplatform.services.wcm.extensions.publication.PublicationManager;
 import org.exoplatform.services.wcm.extensions.publication.lifecycle.impl.LifecyclesConfig.Lifecycle;
 import org.exoplatform.services.wcm.extensions.publication.lifecycle.impl.LifecyclesConfig.State;
@@ -137,18 +136,7 @@ public class PostUpdateStateEventListener extends Listener<CmsService, Node> {
 
       ListAccess<User> userList = userh.findUsersByGroupId(group);
       User currentUser = null;
-      ConversationState conversationState = ConversationState.getCurrent();
-      try {
-        if (userId != null && userId.equalsIgnoreCase(conversationState.getIdentity().getUserId())) {
-          currentUser = (User)conversationState.getAttribute("UserProfile");
-        } else {
-          currentUser = userh.findUserByName(userId);
-        }
-      } catch (Exception e) {
-        if (LOG.isWarnEnabled()) {
-          LOG.warn(e.getMessage());
-        }
-      }
+      currentUser = WCMCoreUtils.getUserObject(userId);
       String username = userId;
       if (currentUser != null)
         username = currentUser.getFirstName() + " " + currentUser.getLastName();
