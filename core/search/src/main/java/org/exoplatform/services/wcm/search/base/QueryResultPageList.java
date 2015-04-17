@@ -25,6 +25,7 @@ import java.util.Set;
 
 import javax.jcr.Node;
 import javax.jcr.NodeIterator;
+import javax.jcr.RepositoryException;
 import javax.jcr.Session;
 import javax.jcr.query.Query;
 import javax.jcr.query.QueryManager;
@@ -62,8 +63,8 @@ public class QueryResultPageList<E> extends AbstractPageList<E> {
   protected List<E> buffer;
   
   private Map<E, Integer> dataSet;
-  
-  public QueryResultPageList(int pageSize, QueryData queryData, int total, int bufferSize,
+
+  public QueryResultPageList(QueryResult firstResults, int pageSize, QueryData queryData, int total, int bufferSize,
                              NodeSearchFilter filter, SearchDataCreator creator) {
     super(pageSize);
     setTotalNodes(total);
@@ -73,8 +74,17 @@ public class QueryResultPageList<E> extends AbstractPageList<E> {
     this.filter = filter;
     this.searchDataCreator = creator;
     this.setAvailablePage(total);
+    buffer = new ArrayList<E>();
+    if (firstResults != null) {
+      generateFirstResultsToBuffer(firstResults, queryData, filter);
+    }
     removeRedundantPages(Math.min(bufferSize_ / pageSize, 5));
     dataSet = new HashMap<E, Integer>();
+  }
+
+  public QueryResultPageList(int pageSize, QueryData queryData, int total, int bufferSize,
+      NodeSearchFilter filter, SearchDataCreator creator) {
+    this(null, pageSize, queryData, total, bufferSize, filter, creator);
   }
   
   public int getBufferSize() { return bufferSize_; }
@@ -110,12 +120,11 @@ public class QueryResultPageList<E> extends AbstractPageList<E> {
     int firstBufferPage = offset_ / getPageSize() + 1;
     int lastBufferPage = (offset_ + buffer.size() - 1) / getPageSize() + 1;
     int bufferPage = bufferSize_ / getPageSize();
-        
     int offsetPage = firstBufferPage;
-    if (page < firstBufferPage || page > lastBufferPage || buffer.size() == 0) {
+    if (page < firstBufferPage || page >= lastBufferPage || buffer.size() == 0) {
       if (page < firstBufferPage) {
         offsetPage = Math.max(1, page - (bufferPage / 3 * 2));
-      } else if (page > lastBufferPage) {
+      } else if (page >= lastBufferPage) {
         offsetPage = page;
       }
       
@@ -133,7 +142,7 @@ public class QueryResultPageList<E> extends AbstractPageList<E> {
   }
   
   private void queryDataForBuffer(int queryPage) throws Exception {
-    buffer = new ArrayList<E>();
+    buffer.clear();
     dataSet = new HashMap<E, Integer>();
     SessionProvider sessionProvider = queryData_.isSystemSession() ? WCMCoreUtils.getSystemSessionProvider() :
                                                                      WCMCoreUtils.getUserSessionProvider();
@@ -194,7 +203,11 @@ public class QueryResultPageList<E> extends AbstractPageList<E> {
       if (count == bufferSize_) break;
       /* already query all data */
       if (size == prevSize) break;
-      bufSize = 2 * bufSize;
+      if (bufSize < AbstractPageList.DEAFAULT_BUFFER_SIZE/2) {
+        bufSize = 2 * bufSize;
+      } else {
+        bufSize = bufSize + getPageSize();
+      }
       prevSize = size;
     }
     for (Map.Entry<E, Integer> e : dataSet.entrySet())
@@ -265,4 +278,51 @@ public class QueryResultPageList<E> extends AbstractPageList<E> {
      return to;
   }
   
+  private void generateFirstResultsToBuffer(QueryResult firstResults,
+      QueryData queryData, NodeSearchFilter filter) {
+    SiteSearchService siteSearchService = WCMCoreUtils.getService(SiteSearchService.class);
+    Map found = siteSearchService.getFoundNodes(ConversationState.getCurrent().getIdentity().getUserId(),
+        queryData.getQueryStatement());
+    Map<Integer, Integer> drop = siteSearchService.getDropNodes(ConversationState.getCurrent().getIdentity().getUserId(),
+        queryData.getQueryStatement());
+    int position = offset_;
+    int prevPage = -1;
+    int page = (position)/getPageSize() + 1;
+    drop.put(page, 0);
+    try {
+      setTotalNodes(firstResults.getNodes().getSize());
+      NodeIterator nodeIterator = firstResults.getNodes();
+      RowIterator rowIterator = firstResults.getRows();
+      while (nodeIterator.hasNext()) {
+        Node node = nodeIterator.nextNode();
+        if (filter != null) {
+          node = filter.filterNodeToDisplay(node);
+        }
+        Row row = rowIterator.nextRow();
+        if (searchDataCreator != null && node != null) { 
+          E data = searchDataCreator.createData(node, row);
+          if (data != null && (found == null || !found.containsKey(data) || ((Integer)found.get(data)) >= page)) {
+            buffer.add(data);
+            found.put(data, page);
+            position++;
+            page = (position-1)/getPageSize() + 1;
+            if (page != prevPage) {
+              prevPage = page;
+              drop.put(page, 0);
+            }
+            // increase page number for the last item
+            if (position % getPageSize() == 0) { page++; }
+          } else {
+            drop.put(page, drop.get(page) + 1);
+          }
+        } else if (node == null) {
+          drop.put(page, drop.get(page) + 1);
+        }
+      }
+    } catch (RepositoryException e) {
+      if (LOG.isWarnEnabled()) {
+        LOG.warn(e.getMessage());
+      }
+    }
+  }
 }

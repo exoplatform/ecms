@@ -93,7 +93,7 @@ public class PageListFactory {
     if (totalNodes <= AbstractPageList.RESULT_SIZE_SEPARATOR) {
       return new ArrayNodePageList<E>(result, pageSize, filter, dataCreator, queryData);
     } else {
-      QueryResultPageList<E> ret = new QueryResultPageList<E>(pageSize, queryData, totalNodes, bufferSize, filter, dataCreator);
+      QueryResultPageList<E> ret = new QueryResultPageList<E>(result, pageSize, queryData, totalNodes, bufferSize, filter, dataCreator);
       return ret;        
     }
   }
