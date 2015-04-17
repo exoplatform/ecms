@@ -107,7 +107,7 @@ public class UIClipboard extends UIComponent {
       ClipboardCommand command = uiClipboard.clipboard_.remove(Integer.parseInt(itemIndex)-1);
       String userId = ConversationState.getCurrent().getIdentity().getUserId();
       ClipboardService  clipboardService = WCMCoreUtils.getService(ClipboardService.class);
-      clipboardService.getClipboardList(userId, false).remove(command);
+      clipboardService.removeClipboardCommand(userId, command);
     }
   }
 

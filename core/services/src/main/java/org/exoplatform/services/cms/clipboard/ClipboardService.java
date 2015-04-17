@@ -60,4 +60,11 @@ public interface ClipboardService {
    */
   public void clearClipboardList(String userId, boolean isVirtual);
   
+  /**
+   * Remove one command form clipboard
+   * @param userId the user who added the commands
+   * @param isVirtual if the commands are virtual
+   * command need to remove
+   */
+  public void removeClipboardCommand(String userId, ClipboardCommand command);
 }

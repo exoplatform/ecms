@@ -94,15 +94,27 @@ public class ClipboardServiceImpl implements ClipboardService {
     
     ExoCache<String, Set<ClipboardCommand>> cache = isVirtual ? virtualCache_ : cache_;
     Set<ClipboardCommand> ret = cache.get(userId);
+    boolean isUpdate = false;
+    Map<String, ClipboardCommand> lastCommandMap = getLastCommandMap();
+    ClipboardCommand cmd = lastCommandMap.get(userId);
     if (ret != null){
       Set<ClipboardCommand> removedCommands = new HashSet<ClipboardCommand>();
       for (Iterator<ClipboardCommand> commands = ret.iterator();commands.hasNext();){
         ClipboardCommand command = commands.next();
         if (!isExistingNode(command)) {
           removedCommands.add(command);
+          if (command.equals(cmd)) {
+            isUpdate = true;
+          }
         }
       }
       ret.removeAll(removedCommands);
+      //update last command if the node in last command was removed
+      if (isUpdate) {
+      ClipboardCommand newLastCommand = null;
+      for (ClipboardCommand command: ret) newLastCommand = command;
+      lastCommandMap.put(userId, newLastCommand);
+      }
       return new LinkedHashSet<ClipboardCommand>(ret);
     } else {
       return new LinkedHashSet<ClipboardCommand>();
@@ -168,5 +180,29 @@ public class ClipboardServiceImpl implements ClipboardService {
       sessionProvider.close();
     }
     return true;
+  }
+
+  @Override
+  public void removeClipboardCommand(String userId, ClipboardCommand command) {
+    ExoCache<String, Set<ClipboardCommand>> virtualCache_ = getVirtualCache();
+    ExoCache<String, Set<ClipboardCommand>> cache_ = getCache();
+//    ExoCache<String, Set<ClipboardCommand>> cache = isVirtual ? virtualCache_ : cache_;
+    Set<ClipboardCommand> allCommands = cache_.get(userId);
+    Set<ClipboardCommand> virtualCommands = virtualCache_.get(userId);
+    Map<String, ClipboardCommand> lastCommand_ = getLastCommandMap();
+    if (allCommands != null) {
+      allCommands.remove(command);
+    }
+    // remove virtual command if is multiple copy
+    if (virtualCommands != null) {
+      virtualCommands.remove(command);
+    }
+    // if removed command is last command, update last command
+    Set<ClipboardCommand> commands = getClipboardList(userId, false);
+    if (lastCommand_.containsValue(command)) {
+      ClipboardCommand newLastCommand = null;
+      for (ClipboardCommand cmd : commands) newLastCommand = cmd;
+      lastCommand_.put(userId, newLastCommand);
+    }
   }
 }
