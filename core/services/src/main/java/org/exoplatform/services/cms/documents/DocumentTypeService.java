@@ -20,6 +20,7 @@ import java.util.List;
 
 import javax.jcr.Node;
 
+import org.exoplatform.services.cms.documents.impl.DocumentType;
 import org.exoplatform.services.jcr.ext.common.SessionProvider;
 
 /**
@@ -115,4 +116,11 @@ public interface DocumentTypeService {
    * @return
    */
   public String[] getMimeTypes(String documentType);
+
+  /**
+   * Get documentType of extension string
+   * @param mimeType
+   * @return DocumentType
+   */
+  public DocumentType getDocumentType(String mimeType);
 }

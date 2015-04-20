@@ -16,10 +16,7 @@
  */
 package org.exoplatform.services.cms.documents.impl;
 
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.Iterator;
-import java.util.List;
+import java.util.*;
 
 import javax.jcr.Node;
 import javax.jcr.NodeIterator;
@@ -32,18 +29,20 @@ import javax.jcr.query.QueryResult;
 
 import org.exoplatform.container.xml.InitParams;
 import org.exoplatform.container.xml.ObjectParameter;
+import org.exoplatform.container.xml.ValueParam;
 import org.exoplatform.services.cms.documents.DocumentTypeService;
 import org.exoplatform.services.cms.templates.TemplateService;
 import org.exoplatform.services.jcr.RepositoryService;
 import org.exoplatform.services.jcr.ext.common.SessionProvider;
 import org.exoplatform.services.log.ExoLogger;
 import org.exoplatform.services.log.Log;
+import org.picocontainer.Startable;
 
 /**
  * Created by The eXo Platform SARL Author : Dang Van Minh
  * minh.dang@exoplatform.com Oct 6, 2009 3:39:28 AM
  */
-public class DocumentTypeServiceImpl implements DocumentTypeService {
+public class DocumentTypeServiceImpl implements DocumentTypeService, Startable {
   private static final Log    LOG               = ExoLogger.getLogger(DocumentTypeServiceImpl.class.getName());
 
   private final static String OWNER             = "exo:owner";
@@ -77,6 +76,32 @@ public class DocumentTypeServiceImpl implements DocumentTypeService {
   private TemplateService     templateService_;
 
   private InitParams          params_;
+
+  private static final String OPEN_DESKTOP_PROVIDER_REGEX="^exo.remote-edit\\.([a-z]+)$";
+  private static final String OPEN_PROVIDER_RESOURCEBUNDLE_SUFFIX = ".label";
+  private static final String OPEN_PROVIDER_STYLE_SUFFIX = ".ico";
+  private final String OPEN_DOCUMENT_ON_DESKTOP_ICO = "uiIconOpenOnDesktop";
+  private final String OPEN_DOCUMENT_IN_DESKTOP_RESOURCE_KEY = "OpenInOfficeConnector.label.exo.remote-edit.desktop";
+
+  private void init() {
+    //load desktop application from system property to init-params
+    Properties properties = System.getProperties();
+    for (String key : properties.stringPropertyNames()){
+      if(key.matches(OPEN_DESKTOP_PROVIDER_REGEX)) {
+        List<String> _mimetypes = Arrays.asList(properties.getProperty(key)!=null?properties.getProperty(key).split(","):null);
+        String _resourceBundle = properties.getProperty(key + OPEN_PROVIDER_RESOURCEBUNDLE_SUFFIX);
+        String _ico = properties.getProperty(key + OPEN_PROVIDER_STYLE_SUFFIX);
+
+        if(params_.get(key) !=null ){
+          params_.remove(key);
+        }
+        ObjectParameter _objectParameter = new ObjectParameter();
+        _objectParameter.setName(key);
+        _objectParameter.setObject(new DocumentType(_mimetypes, _resourceBundle, _ico));
+        params_.addParam(_objectParameter);
+      }
+    }
+  }
 
   public DocumentTypeServiceImpl(RepositoryService repoService,
                                  InitParams initParams,
@@ -290,4 +315,28 @@ public class DocumentTypeServiceImpl implements DocumentTypeService {
     return CONTENT_QUERY + constraint.toString();
   }
 
+  @Override
+  public DocumentType getDocumentType(String mimeType) {
+    DocumentType documentTypeResult=null;
+    for(DocumentType documentType: params_.getObjectParamValues(DocumentType.class)){
+      if(documentType.getMimeTypes().contains(mimeType)){
+        documentTypeResult = documentType;
+      }
+    }
+
+    if(documentTypeResult==null)
+      documentTypeResult= new DocumentType(Arrays.asList(new String[] {mimeType}),
+              OPEN_DOCUMENT_IN_DESKTOP_RESOURCE_KEY, OPEN_DOCUMENT_ON_DESKTOP_ICO);
+    return documentTypeResult;
+  }
+
+  @Override
+  public void start() {
+    init();
+  }
+
+  @Override
+  public void stop() {
+
+  }
 }

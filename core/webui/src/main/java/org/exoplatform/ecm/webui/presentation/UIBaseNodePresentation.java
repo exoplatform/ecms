@@ -45,6 +45,9 @@ import org.exoplatform.services.wcm.utils.WCMCoreUtils;
 import org.exoplatform.web.application.Parameter;
 import org.exoplatform.webui.application.WebuiRequestContext;
 import org.exoplatform.webui.application.portlet.PortletRequestContext;
+import org.exoplatform.webui.core.UIPopupContainer;
+import org.exoplatform.webui.event.Event;
+import org.exoplatform.webui.event.EventListener;
 
 /*
  * Created by The eXo Platform SAS
@@ -458,6 +461,24 @@ public abstract class UIBaseNodePresentation extends UIContainer implements Node
   @Override
   public boolean switchBackAudioDescription() {
     return false;
+  }
+  
+  @Override
+  public String getActionOpenDocInDesktop() throws Exception {
+    return this.event("OpenDocInDesktop");
+  }
+  
+  @Override
+  public UIPopupContainer getPopupContainer() throws Exception {
+    return null;
+  }
+  
+  static public class OpenDocInDesktopActionListener extends EventListener<UIBaseNodePresentation> {
+    public void execute(Event<UIBaseNodePresentation> event) throws Exception {
+      UIBaseNodePresentation uicomp = event.getSource() ;
+      Node node = uicomp.getNode();
+      Utils.openDocumentInDesktop(node, uicomp.getPopupContainer(), event);
+    }
   }
 
 }

@@ -23,6 +23,7 @@ import javax.jcr.Node;
 import org.exoplatform.web.application.Parameter;
 
 import org.exoplatform.webui.core.UIComponent;
+import org.exoplatform.webui.core.UIPopupContainer;
 
 /**
  * Created by The eXo Platform SARL Author : Dang Van Minh
@@ -346,5 +347,9 @@ public interface NodePresentation {
    * @return true if can switch back from original node from audio description
    */
   public boolean switchBackAudioDescription();
+  
+  public String getActionOpenDocInDesktop() throws Exception;
+  
+  public UIPopupContainer getPopupContainer() throws Exception;
   
 }

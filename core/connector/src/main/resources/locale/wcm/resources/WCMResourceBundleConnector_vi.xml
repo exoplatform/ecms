@@ -14,4 +14,13 @@
       <renaming>Đang đổi tên...</renaming>
     </msg>
   </RenameConnector>
+  <OpenInOfficeConnector>
+    <label>
+      <exo.remote-edit.word>Mở với Word</exo.remote-edit.word>
+      <exo.remote-edit.excel>Mở với Excel</exo.remote-edit.excel>
+      <exo.remote-edit.powerpoint>Mở với Powerpoint</exo.remote-edit.powerpoint>
+      <exo.remote-edit.desktop>Mở với ứng dụng desktop</exo.remote-edit.desktop>
+      <exo.remote-edit.desktop-app>Mở với</exo.remote-edit.desktop-app>
+    </label>
+  </OpenInOfficeConnector>
 </bundle>

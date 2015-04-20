@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<bundle>
+  <Remote-edit>
+    <OpenDocConnector>
+      <open-in-word>Open in Word</open-in-word>
+      <open-in-excel>Open in Excel</open-in-excel>
+      <open-in-powerpoint>Open in Powerpoint</open-in-powerpoint>
+      <open-on-desktop>Open in Desktop</open-on-desktop>
+    </OpenDocConnector>
+  </Remote-edit>
+</bundle>

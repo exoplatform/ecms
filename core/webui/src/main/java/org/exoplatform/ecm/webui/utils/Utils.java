@@ -55,6 +55,7 @@ import org.exoplatform.container.definition.PortalContainerConfig;
 import org.exoplatform.container.xml.PortalContainerInfo;
 import org.exoplatform.download.DownloadService;
 import org.exoplatform.download.InputStreamDownloadResource;
+import org.exoplatform.ecm.webui.form.UIOpenDocumentForm;
 import org.exoplatform.portal.webui.util.Util;
 import org.exoplatform.portal.webui.workspace.UIPortalApplication;
 import org.exoplatform.services.cms.documents.TrashService;
@@ -81,6 +82,8 @@ import org.exoplatform.webui.application.WebuiRequestContext;
 import org.exoplatform.webui.application.portlet.PortletRequestContext;
 import org.exoplatform.webui.core.UIComponent;
 import org.exoplatform.webui.core.UIContainer;
+import org.exoplatform.webui.core.UIPopupContainer;
+import org.exoplatform.webui.event.Event;
 import org.exoplatform.webui.ext.UIExtension;
 import org.exoplatform.webui.ext.UIExtensionManager;
 import java.util.Iterator;
@@ -1022,6 +1025,23 @@ public class Utils {
    }
     return sb.toString();
   }
+  
+  public static String getPDFViewerLink(Node node) throws Exception{
+    ExoContainer container = ExoContainerContext.getCurrentContainer() ;
+    PortalContainerInfo containerInfo = (PortalContainerInfo)container.
+        getComponentInstanceOfType(PortalContainerInfo.class) ;
+    String portalName = containerInfo.getContainerName() ;
+    PortalContainerConfig portalContainerConfig = (PortalContainerConfig) container.
+        getComponentInstance(PortalContainerConfig.class);
+    String restContextName = portalContainerConfig.getRestContextName(portalName);
+    StringBuilder sb = new StringBuilder();
+    Node currentNode = org.exoplatform.wcm.webui.Utils.getRealNode(node);    
+    String repository = ((ManageableRepository)currentNode.getSession().getRepository()).getConfiguration().getName();   
+    sb.append("/").append(restContextName).append("/pdfviewer/");
+    sb.append(repository).append("/");
+    sb.append(currentNode.getSession().getWorkspace().getName()).append("/").append(currentNode.getUUID());   
+    return sb.toString();
+  }
 
   /**
    * Get allowed folder types in current path.
@@ -1078,5 +1098,40 @@ public class Utils {
     }
     return ret.toArray(new String[]{});
   }
+  
+  public static void openDocumentInDesktop(Node currentNode, UIPopupContainer popupContainer, Event<? extends UIComponent> event) 
+  throws Exception {
+    HttpServletRequest httpServletRequest = Util.getPortalRequestContext().getRequest();
+    
+    String nodePath=currentNode.getPath();
+    String ws = currentNode.getSession().getWorkspace().getName();
+    String repo = WCMCoreUtils.getRepository().getConfiguration().getName();
+    String filePath = httpServletRequest.getScheme()+ "://" + httpServletRequest.getServerName() + ":"
+            +httpServletRequest.getServerPort() + "/"
+            + WCMCoreUtils.getRestContextName()+ "/private/jcr/" + repo + "/" + ws + nodePath;
 
+    if(currentNode.isLocked()){
+      String[] userLock = {currentNode.getLock().getLockOwner()};
+
+      UIOpenDocumentForm uiOpenDocumentForm = popupContainer.activate(UIOpenDocumentForm.class, 600);
+      uiOpenDocumentForm.setId("UIReadOnlyFileConfirmMessage");
+      uiOpenDocumentForm.setMessageKey("UIPopupMenu.msg.lock-node-read-only");
+      uiOpenDocumentForm.setArguments(userLock);
+      uiOpenDocumentForm.setFilePath(nodePath);
+      uiOpenDocumentForm.setWorkspace(ws);
+      uiOpenDocumentForm.setAbsolutePath(filePath);
+      event.getRequestContext().getJavascriptManager().require("SHARED/openDocumentInOffice")
+              .addScripts("eXo.ecm.OpenDocumentInOffice.showConfirmBox();");
+    }else{
+      event.getRequestContext().getJavascriptManager().require("SHARED/openDocumentInOffice")
+              .addScripts("eXo.ecm.OpenDocumentInOffice.openDocument('" + filePath + "', '" + ws + "', '" + nodePath + "');");
+    }
+    event.getRequestContext().addUIComponentToUpdateByAjax(popupContainer.getParent());
+
+  }
+
+
+  public static void logUnavaiblePreview(String path) {
+    LOG.warn("Can not preview the document having path : " + path);
+  }
 }

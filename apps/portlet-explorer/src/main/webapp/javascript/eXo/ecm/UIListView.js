@@ -140,6 +140,8 @@
       resetArrayItemsSelected();
       var rightClick = (event.which && event.which > 1) || (event.button && event.button == 2);
       if (rightClick) {
+        var _objId = element.getAttribute("workspacename")+":"+Self.srcPath;
+        eXo.ecm.OpenDocumentInOffice.updateLabel(_objId,null,true);
         eval(element.getAttribute("mousedown"));
       } else {
         // init drag drop;
@@ -301,6 +303,16 @@
         listViewElement.appendChild(coverElement);
         mobileElement.appendChild(listViewElement);
         document.body.appendChild(mobileElement);
+      }else{
+        var _objId = element.getAttribute("workspacename")+":"+Self.srcPath;
+        eXo.ecm.OpenDocumentInOffice.updateLabel(_objId);
+        event.cancelBubble = true;
+        if (inArray(Self.itemsSelected, element) && Self.itemsSelected.length > 1){
+          Self.showItemContextMenu(event, element);
+        } else {
+          Self.clickItem(event, element);
+          eval(element.getAttribute("mousedown"));
+        }        
       }
     };
 
@@ -427,12 +439,6 @@
         }
       } else {
         event.cancelBubble = true;
-        if (inArray(Self.itemsSelected, element) && Self.itemsSelected.length > 1){
-          Self.showItemContextMenu(event, element);
-        } else {
-          Self.clickItem(event, element);
-          eval(element.getAttribute("mousedown"));
-        }
       }
       
       // Init feature Copy URL to Clipboard

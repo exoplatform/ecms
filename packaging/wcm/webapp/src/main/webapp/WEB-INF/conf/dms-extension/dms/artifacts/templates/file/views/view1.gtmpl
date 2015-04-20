@@ -10,7 +10,10 @@
   import org.exoplatform.services.jcr.RepositoryService;
   import org.exoplatform.wcm.webui.reader.ContentReader;
   import org.exoplatform.ecm.webui.viewer.PDFViewer;
-  
+  import org.exoplatform.services.pdfviewer.PDFViewerService;
+  import org.exoplatform.services.wcm.utils.WCMCoreUtils;
+  import org.exoplatform.wcm.connector.collaboration.OpenInOfficeConnector;
+
   
   public Node getFileLangNode(Node currentNode) throws Exception {
     if(currentNode.isNodeType("nt:unstructured")) {
@@ -38,7 +41,7 @@
   
   UIPopupWindow uiPopupWindow = uicomponent.getAncestorOfType(UIPopupWindow.class);
   def resizeBlock = "class=\"UIResizableBlock\"";
-  if(uiPopupWindow != null) resizeBlock = ""; 
+  if(uiPopupWindow != null) resizeBlock = "class=\"UIUnResizableBlock\"";
   
   def originNode = uicomponent.getNode();
   def currentNode = getFileLangNode(originNode) ;
@@ -55,38 +58,59 @@
   public String formatNodeName(String text) {
     return text.replaceAll("'", "\\\\'") ;
   }
+  
+  def openInOfficeConnector = WCMCoreUtils.getService(OpenInOfficeConnector.class);
+  def _documentInfos = openInOfficeConnector.getDocumentInfos(currentNode.getName());
+  def remoteEditClass=_documentInfos[1];
+  def remoteEditTitle=_ctx.appRes(_documentInfos[0]);
+
+  StringBuilder sb = new StringBuilder();
+  String ndPath = currentNode.getPath();
+  if (ndPath.startsWith("/")) {
+    ndPath = ndPath.substring(1);
+  }
+  
+  def encodedPath = URLEncoder.encode(ndPath, "utf-8");
+  encodedPath = encodedPath.replaceAll ("%2F", "/"); //we won't encode the slash characters in the path
+  
+  sb.append("/").append(restContextName).append("/contents/download/");
+  sb.append(currentNode.getSession().getWorkspace().getName()).append("/").append(encodedPath);
+  if (originNode.isNodeType("nt:frozenNode")) {
+    sb.append("?version=" + originNode.getParent().getName());
+  }
+  def downloadLink = sb.toString();
+  def fileComponent = uicomponent.getUIComponent(mimeType);
+  def noPreviewStyle = "";
+  def fileSize = 0;
+  def canViewPDF = true;
+  if (fileComponent instanceof PDFViewer) {
+    fileSize = contentNode.getProperty("jcr:data").getStream().available();
+    def maximumOfPage = ((PDFViewer)fileComponent).getMaximumOfPage();
+    if (maximumOfPage <= 0 || maximumOfPage > PDFViewerService.MAX_PAGES || fileSize > PDFViewerService.MAX_FILE_SIZE) {
+      canViewPDF = false;
+    }
+  }
+  if(fileComponent == null || canViewPDF == false) {
+    noPreviewStyle = "noPreview";
+    org.exoplatform.ecm.webui.utils.Utils.logUnavaiblePreview(encodedPath);
+  }
+  if(!(fileComponent instanceof PDFViewer) || canViewPDF == false) {
 %>
+
 <div $resizeBlock>
   <style>
     <% _ctx.include(uicomponent.getTemplateSkin("nt:file", "Stylesheet")); %>
   </style>
   <div class="fileContent">
-    <div class="navigationContainer uiBox"> 
-      <h6 class="title clearfix">
-        <%
-          StringBuilder sb = new StringBuilder();
-          String ndPath = currentNode.getPath();
-          if (ndPath.startsWith("/")) {
-            ndPath = ndPath.substring(1);
-          }
-          
-          def encodedPath = URLEncoder.encode(ndPath, "utf-8");
-          encodedPath = encodedPath.replaceAll ("%2F", "/"); //we won't encode the slash characters in the path
-          
-          sb.append("/").append(restContextName).append("/contents/download/");
-          sb.append(currentNode.getSession().getWorkspace().getName()).append("/").append(encodedPath);
-          if (originNode.isNodeType("nt:frozenNode")) {
-            sb.append("?version=" + originNode.getParent().getName());
-          }
-          def downloadLink = sb.toString();
-          def fileComponent = uicomponent.getUIComponent(mimeType);
-          if (!(fileComponent == null || (fileComponent instanceof PDFViewer && ((PDFViewer)fileComponent).getMaximumOfPage() <=0 ))) {
+    <div class="navigationContainer $noPreviewStyle">
+      <div class="title clearfix">
+        <%          
+          if (!(fileComponent == null || canViewPDF == false)) {
           %>
-            <a class="pull-right" href="$downloadLink"><i class="uiIconDownload"></i> <%=_ctx.appRes("File.view.label.download")%></a>
+            <a class="pull-right" href="$downloadLink"><i class="uiIconDownload uiIconLightGray"></i> <%=_ctx.appRes("File.view.label.download")%></a>
         <%}%>
-        
-        <div class="topTitle"><%=title %></div>
-      </h6>
+        <div><% _ctx.include(uicomponent.getViewTemplate("mix:votable", "view1")); %></div>
+      </div>
       <div class="content uiContentBox">
           <%
             if(fileComponent != null) {
@@ -96,17 +120,60 @@
             <div class="uiUnEditable clearfix">
               <div class="iconContainer">
                 <i class="<%=Utils.getNodeTypeIcon(currentNode, "uiIcon64x64")%>"></i>
+                <span class="nameDoc">$title</span>
               </div>
               <div class="detailContainer">
                 <h4><%=_ctx.appRes("File.view.label.not-viewable")%></h4>
-                <a class="btn btn-primary" href="$downloadLink"><%=_ctx.appRes("File.view.label.download")%></a>
-                <span><%=_ctx.appRes("File.view.label.using-webDAV")%></span>
+                  <a class="btn btn-primary" href="$downloadLink"><i class="uiIconDownload uiIconWhite"></i><%=_ctx.appRes("File.view.label.download")%>
+                  </a>&nbsp;&nbsp;
+                  <a class="btn" href="#" onclick="<%=uicomponent.getActionOpenDocInDesktop()%>">
+                      <i class="uiIcon16x16FileDefault uiIcon16x16nt_file $remoteEditClass uiIconEcmsOpenDocument"></i>
+                      $remoteEditTitle
+                  </a>
               </div>
             </div>
           <%}%>
       </div>
     </div>
-    <div><% _ctx.include(uicomponent.getViewTemplate("mix:votable", "view1")); %></div>
     <div><% _ctx.include(uicomponent.getViewTemplate("exo:comments", "view1")); %></div>
   </div>
 </div>
+
+
+<%} else {%>
+
+<div $resizeBlock>
+<style>
+  <% _ctx.include(uicomponent.getTemplateSkin("nt:file", "Stylesheet")); %>
+</style>
+<div class="fileContent">
+    <div class="title clearfix">
+      <div><% _ctx.include(uicomponent.getViewTemplate("mix:votable", "view1")); %></div>
+    </div>
+    <div class="content uiContentBox">
+        <%
+          if(fileComponent != null) {
+          uicomponent.renderUIComponent(fileComponent);
+          } else {
+        %>
+          <div class="uiUnEditable clearfix">
+            <div class="iconContainer">
+              <i class="<%=Utils.getNodeTypeIcon(currentNode, "uiIcon64x64")%>"></i>
+        <span class="nameDoc">$title</span>
+            </div>
+            <div class="detailContainer">
+              <h4><%=_ctx.appRes("File.view.label.not-viewable")%></h4>
+                <a class="btn btn-primary" href="$downloadLink"><i class="uiIconDownload uiIconWhite"></i><%=_ctx.appRes("File.view.label.download")%></a>&nbsp;&nbsp;
+                <a class="btn" href="#" onclick="<%=uicomponent.getActionOpenDocInDesktop()%>">
+                    <i class="uiIcon16x16FileDefault uiIcon16x16nt_file $remoteEditClass uiIconEcmsOpenDocument"></i>
+                    $remoteEditTitle
+                </a>
+            </div>
+          </div>
+        <%}%>
+    </div>
+  <div><% _ctx.include(uicomponent.getViewTemplate("exo:comments", "view1")); %></div>
+</div>
+</div>
+
+<%}%>

@@ -32,7 +32,7 @@ import org.exoplatform.webui.event.EventListener;
  * Sep 18, 2008 9:52:55 AM
  */
 @ComponentConfig(
-    template = "app:/groovy/webui/component/explorer/UIConfirmMessage.gtmpl",
+    template = "classpath:groovy/ecm/webui/UIConfirmMessage.gtmpl",
     events = {
         @EventConfig(listeners = UIConfirmMessage.OKActionListener.class),
         @EventConfig(listeners = UIConfirmMessage.CloseActionListener.class)

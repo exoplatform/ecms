@@ -7,7 +7,8 @@
   import org.exoplatform.ecm.webui.utils.Utils;
   import org.exoplatform.services.jcr.RepositoryService;   
   import org.exoplatform.wcm.webui.reader.ContentReader;
-  
+  import org.exoplatform.services.wcm.utils.WCMCoreUtils;
+  import org.exoplatform.wcm.connector.collaboration.OpenInOfficeConnector;
 	
   UIComponent uiParent = uicomponent.getParent();
   RepositoryService rService = uicomponent.getApplicationComponent(RepositoryService.class);
@@ -159,8 +160,11 @@ if (uiParent != null) {
   def rqcontext = _ctx.getRequestContext();
   rqcontext.getJavascriptManager().require("SHARED/ecm-utils", "ecmutil").
   addScripts('ecmutil.ECMUtils.onKeyPDFViewerPress();') ;	
-	
-  if (maximumPage > 0 && maximumPage < 100) {	
+  def openInOfficeConnector = WCMCoreUtils.getService(OpenInOfficeConnector.class);
+  def _documentInfos = openInOfficeConnector.getDocumentInfos(originalNode.getName());
+  def remoteEditClass=_documentInfos[1];
+  def remoteEditTitle=_ctx.appRes(_documentInfos[0]);
+  if (maximumPage > 0 && maximumPage < 100) {
 %>    
 	<div class="UIPDFViewerContainer">   
  	 <div class="PDFViewerBar clearfix">
@@ -238,8 +242,11 @@ if (uiParent != null) {
         </div>
         <div class="detailContainer">
           <h4><%=_ctx.appRes("File.view.label.not-viewable")%></h4>
-          <a class="btn btn-primary" href="$downloadLink"><%=_ctx.appRes("File.view.label.download")%></a>
-          <span><%=_ctx.appRes("File.view.label.using-webDAV")%></span>
+          <a class="btn btn-primary" href="$downloadLink"><%=_ctx.appRes("File.view.label.download")%></a>&nbsp;&nbsp;
+          <a class="btn" href="#" onclick="<%=uicomponent.getActionOpenDocInDesktop()%>">
+            <i class="uiIcon16x16FileDefault uiIcon16x16nt_file $remoteEditClass uiIconEcmsOpenDocument"></i>
+						$remoteEditTitle
+          </a>
         </div>
       </div>
 <% } }%>

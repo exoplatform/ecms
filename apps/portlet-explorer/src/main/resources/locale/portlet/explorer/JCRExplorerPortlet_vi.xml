@@ -400,6 +400,7 @@
       <constraintviolation-exception>Không tìm thấy thuộc tính bắt buộc jcr:uuid. Có thể nút đã bị xóa hoặc thay đổi. Vui lòng nhấp nút Làm mới.</constraintviolation-exception>
       <path-not-found-exception>Nút này đã bị xóa hoặc thay đổi. Vui lòng nhấp nút Làm mới.</path-not-found-exception>
       <not-exist-categories>Danh mục không tồn tại.</not-exist-categories>
+      <lock-node-read-only>Tệp tin này bị khóa bởi người dùng {0}. Mở chỉ đọc?</lock-node-read-only>
     </msg>
   </UIPopupMenu>
   <!--
@@ -2420,6 +2421,8 @@
       <ReplaceData>Ghi đè dữ liệu</ReplaceData>
       <Back>Quay lại đổi tên</Back>
       <Keepfile>Giữ cả hai tệp</Keepfile>
+			<ReadOnly>Mở chỉ đọc</ReadOnly>
+			<Cancel>Hủy bỏ</Cancel>
     </label>
   </UIConfirmMessage>
 

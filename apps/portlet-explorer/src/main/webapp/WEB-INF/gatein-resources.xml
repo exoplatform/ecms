@@ -70,12 +70,18 @@
       <depends>
         <module>rename</module>
       </depends>
+      <depends>
+        <module>permlink</module>
+      </depends>
 	    <depends>
 	     <module>wcm-utils</module>
 	    </depends>
 	    <depends>
 	      <module>ecm-utils</module>
 	    </depends>
+      <depends>
+        <module>openDocumentInOffice</module>
+      </depends>
     </module>
   </portlet>
 
@@ -189,6 +195,19 @@
     </depends>
   </module>
   
+  <module>
+    <name>permlink</name>
+    <script>
+      <path>/javascript/eXo/ecm/Permlink.js</path>
+    </script>
+    <depends>
+      <module>jquery</module>
+      <as>gj</as>
+    </depends>
+    <depends>
+      <module>wcm-utils</module>
+    </depends>
+  </module>
    
   <module>
     <name>multiUpload</name>
@@ -221,4 +240,5 @@
       <module>base</module>
     </depends>
   </module>
+
 </gatein-resources>

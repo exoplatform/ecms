@@ -22,6 +22,7 @@ import org.exoplatform.commons.testing.ConfigTestCase;
 //import org.exoplatform.wcm.connector.authoring.TestLifecycleConnector;
 import org.exoplatform.wcm.connector.collaboration.TestDownloadConnector;
 import org.exoplatform.wcm.connector.collaboration.TestFavoriteRESTService;
+import org.exoplatform.wcm.connector.collaboration.TestOpenInOfficeConnector;
 import org.exoplatform.wcm.connector.collaboration.TestThumbnailRESTService;
 import org.exoplatform.wcm.connector.fckeditor.TestPortalLinkConnector;
 import org.exoplatform.wcm.connector.viewer.TestPDFViewerRESTService;
@@ -43,6 +44,7 @@ import org.junit.runners.Suite.SuiteClasses;
 //  TestCopyContentFile.class,
 //  TestLifecycleConnector.class,
   TestDownloadConnector.class,
+  TestOpenInOfficeConnector.class,
   TestThumbnailRESTService.class,
   TestFavoriteRESTService.class
 })

@@ -70,7 +70,7 @@ import org.icepdf.core.util.GraphicsRenderingHints;
  *
  * @anchor PDFViewerRESTService
  */
-@Path("/pdfviewer/{repoName}/{workspaceName}/{pageNumber}/{rotation}/{scale}/{uuid}/")
+@Path("/pdfviewer/{repoName}/")
 public class PDFViewerRESTService implements ResourceContainer {
 
   private static final int MAX_NAME_LENGTH= 150;
@@ -108,6 +108,7 @@ public class PDFViewerRESTService implements ResourceContainer {
    * @anchor PDFViewerRESTService.getCoverImage
    */
   @GET
+  @Path("/{workspaceName}/{pageNumber}/{rotation}/{scale}/{uuid}/")
   public Response getCoverImage(@PathParam("repoName") String repoName,
       @PathParam("workspaceName") String wsName,
       @PathParam("uuid") String uuid,
@@ -115,6 +116,40 @@ public class PDFViewerRESTService implements ResourceContainer {
       @PathParam("rotation") String rotation,
       @PathParam("scale") String scale) throws Exception {
     return getImageByPageNumber(repoName, wsName, uuid, pageNumber, rotation, scale);
+  }
+  
+  /**
+   * Returns a pdf file for a PDF document.
+   *
+   * @param repoName The repository name.
+   * @param wsName The workspace name.
+   * @param uuid The identifier of the document. 
+   * @return Response inputstream.
+   * @throws Exception The exception
+   *
+   * @anchor PDFViewerRESTService.getPDFFile
+   */
+  @GET
+  @Path("/{workspaceName}/{uuid}/")
+  public Response getPDFFile(@PathParam("repoName") String repoName,
+      @PathParam("workspaceName") String wsName,
+      @PathParam("uuid") String uuid) throws Exception {
+    Session session = null;
+    InputStream is = null;
+    String fileName = null;
+    try {
+      ManageableRepository repository = repositoryService_.getCurrentRepository();
+      session = getSystemProvider().getSession(wsName, repository);
+      Node currentNode = session.getNodeByUUID(uuid);  
+      fileName = Utils.getTitle(currentNode);
+      File pdfFile = getPDFDocumentFile(currentNode, repoName);
+      is = new FileInputStream(pdfFile);      
+    } catch (Exception e) {
+      if (LOG.isErrorEnabled()) {
+        LOG.error(e);
+      }
+    }
+    return Response.ok(is).header("Content-Disposition","attachment; filename=\"" + fileName+"\"").build();
   }
 
   private Response getImageByPageNumber(String repoName, String wsName, String uuid,

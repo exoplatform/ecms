@@ -88,6 +88,7 @@
 							<collection type="java.util.ArrayList">
                                 <value><string>application/msword</string></value>
                                 <value><string>application/ppt</string></value>
+                                <value><string>application/vnd.ms-powerpoint</string></value>
                                 <value><string>application/rtf</string></value>
                                 <value><string>application/vnd.oasis.opendocument.graphics</string></value>
                                 <value><string>application/vnd.oasis.opendocument.presentation</string></value>
@@ -101,10 +102,12 @@
                                 <value><string>application/vnd.sun.xml.writer</string></value>
                                 <value><string>application/wordperfect</string></value>
                                 <value><string>application/xls</string></value>
+                                <value><string>application/vnd.ms-excel</string></value>
                                 <value><string>application/xlt</string></value>
                                 <value><string>application/vnd.ms-powerpoint</string></value>
                                 <value><string>application/vnd.ms-excel</string></value>
                                 <value><string>text/csv</string></value>
+                                <value><string>application/vnd.oasis.opendocument.formula</string></value>
 							</collection>
 						</field>
 	        </object>
