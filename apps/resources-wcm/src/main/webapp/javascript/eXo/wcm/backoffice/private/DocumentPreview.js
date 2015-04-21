@@ -85,6 +85,7 @@
             $embedFlashViewer.css('height', '100%');
 
             var $img = gj('a > img', $uiContentBox);
+
             if ($img.length > 0) {
                 $img.css('max-width', $uiContentBox.width() + 1);
                 $img.css('max-height', $uiContentBox.height() + 1);
@@ -94,8 +95,13 @@
             }
 
             gj('.uiPreviewWebContent', $uiDocumentPreview).height(pdfDisplayAreaHeight - 30) // webcontent
-            gj('.EmbedHtml', $uiDocumentPreview).height(pdfDisplayAreaHeight) // External embedded
+            var $EmbedHtml =  gj('.EmbedHtml', $uiDocumentPreview);
+            $EmbedHtml.height(pdfDisplayAreaHeight) // External embedded
 
+            // Resize image flick
+            $img = gj('.uiDocumentPreviewMainWindow > .EmbedHtml > a > img');
+            $img.css('max-width', $EmbedHtml.width());
+            $img.css('max-height', $EmbedHtml.height());
         }
         resizeEventHandler();
         gj(window).on('resize', resizeEventHandler);
