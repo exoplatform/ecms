@@ -42,19 +42,7 @@
     </init-params>
   </component>
 
-  <!-- 
-	WE USE THIS HANDLER TO ENROLL DOCUMENTS (UNTIL DMS 2.5.1)
-	-->
-  <external-component-plugins>
-    <target-component>org.exoplatform.services.wcm.core.WebSchemaConfigService</target-component>
-    <component-plugin>
-      <name>StageAndVersionPublicationHandler</name>
-      <set-method>addWebSchemaHandler</set-method>
-      <type>org.exoplatform.services.wcm.publication.lifecycle.stageversion.StageAndVersionPublicationHandler</type>
-    </component-plugin>
-  </external-component-plugins>
-
-  <!-- 
+  <!--
 	WE USE CMS CONTENT EVENT LISTENER TO ENROLL CONTENTS (DMS like nt:file OR WCM like exo:webContent) 
 	THIS EVENT ISN'T BROADCASTED FOR UPLOADED DOCUMENTS
 	-->
