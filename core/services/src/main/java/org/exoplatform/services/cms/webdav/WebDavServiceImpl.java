@@ -478,19 +478,26 @@ public class WebDavServiceImpl extends org.exoplatform.services.jcr.webdav.WebDa
 
       boolean pushAs = markTempFilesToHidden(repoPath);
       Node currentNode = (Node) session.getItem(path(repoPath));
-      if (currentNode.isCheckedOut())
-        if(pushAs) listenerService.broadcast(this.POST_UPLOAD_CONTENT_EVENT, this, currentNode);
-      if(currentNode != null) {
-        ListenerService listenerService = WCMCoreUtils.getService(ListenerService.class);
-        try {
-          if(pushAs) listenerService.broadcast(ActivityCommonService.FILE_CREATED_ACTIVITY, null, currentNode);
-          currentNode.getSession().save();
+      if (isCreating) {
+        if (userAgent.contains("Microsoft")) {
+          activityService.setCreating(currentNode, true);
+        }
+      }else {
+        activityService.setCreating(currentNode, false);
+      }
+
+      try {
+        if (currentNode.isCheckedOut() && !activityService.isCreating(currentNode) && pushAs)
+          listenerService.broadcast(this.POST_UPLOAD_CONTENT_EVENT, this, currentNode);
+
+        if(isCreating && pushAs)
+          listenerService.broadcast(ActivityCommonService.FILE_CREATED_ACTIVITY, null, currentNode);
+        
         } catch (Exception e) {
           if (LOG.isWarnEnabled()) {
             LOG.warn("Cannot broadcast file create activity for the item at " + currentNode.getPath(), e);
           }
         }
-      }
 
     } catch (PathNotFoundException npfe) {
       return Response.status(HTTPStatus.NOT_FOUND).entity(npfe.getMessage()).build();
