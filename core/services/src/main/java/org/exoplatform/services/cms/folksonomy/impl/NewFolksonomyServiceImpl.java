@@ -707,7 +707,9 @@ public class NewFolksonomyServiceImpl implements NewFolksonomyService, Startable
       Node pointTo = null;
       try {
         if (linkManager.isLink(link))
-          pointTo = linkManager.getTarget(link);
+          pointTo = linkManager.getTarget(link, true);
+      } catch (ItemNotFoundException e) {
+        continue;// target of symlink does not exist -> no exist symlink
       } catch (Exception e) {
         if (LOG.isWarnEnabled()) {
           LOG.warn(e.getMessage());
