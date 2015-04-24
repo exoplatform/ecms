@@ -391,14 +391,14 @@
 
     WCMUtils.prototype.pingUserStatus = function() {
       var userStatus = gj("#user-status");
-      var frequency = 15;
-      var delay = 60;
+      var frequency = 15000;
+      var delay = 60000;
       if(userStatus.html() != undefined) {
         frequency = gj(userStatus).attr("user-status-ping-frequency");
         delay = gj(userStatus).attr("user-status-offline-delay");
       }
       var pingEvent = window.clearInterval(pingEvent);
-      pingEvent = setInterval(gj.proxy(eXo.ecm.WCMUtils.sendPing, eXo.ecm.WCMUtils), frequency*1000);
+      pingEvent = setInterval(gj.proxy(eXo.ecm.WCMUtils.sendPing, eXo.ecm.WCMUtils), frequency);
       eXo.ecm.WCMUtils.sendPing();
     }
 
