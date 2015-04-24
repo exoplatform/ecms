@@ -49,7 +49,7 @@ public class CreateLinkAction implements Action{
     PortalContainerInfo containerInfo = WCMCoreUtils.getService(PortalContainerInfo.class);
     String containerName = containerInfo.getContainerName();
     LinkManager linkManager = WCMCoreUtils.getService(LinkManager.class, containerName);
-    Node targetNode = linkManager.getTarget(linkNode);
+    Node targetNode = linkManager.getTarget(linkNode, true);
 
     ListenerService listenerService = WCMCoreUtils.getService(ListenerService.class, containerName);
     CmsService cmsService = WCMCoreUtils.getService(CmsService.class, containerName);

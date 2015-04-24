@@ -1,0 +1,49 @@
+<%
+	/**
+	 * Created by The eXo Platform SARL
+	 * Author : Dang Van Minh
+	 *          minh.dang@exoplatform.com
+	 * Sep 18, 2008
+	 * version: 2.2
+	 */
+
+	 import org.exoplatform.wcm.webui.reader.ContentReader;
+   import java.util.regex.Matcher;
+
+%>
+<style>
+  .opendocMask:before {
+    content: "";
+    position: fixed;
+    left: 0;
+    right: 0;
+    top: 0;
+    bottom: 0;
+    background: rgba(0, 0, 0, .6);
+    z-index: -1;
+  }
+</style>
+<div class="UIForm $uicomponent.id">
+  <%
+    String msgValue = _ctx.appRes(uicomponent.getMessageKey());
+    String[] msgArguments = uicomponent.getArguments();
+    if(msgArguments.length > 0) {
+	    for(i in 0..msgArguments.length-1){
+	      msgValue = msgValue.replaceAll("\\{" + i + "\\}", Matcher.quoteReplacement(msgArguments[i]));
+		  }
+    }
+    msgValue = ContentReader.getXSSCompatibilityContent(msgValue);    
+  %>
+	<ul class="singleMessage popupMessage resizable">
+		<li><span class="confirmationIcon"> <%=msgValue%></span></li>
+	</ul>
+	<div class="uiAction uiActionBorder">
+		<%
+			int tabIndex = 1;
+			for(action in uicomponent.getActions()) {
+		%>
+			<button type="button" onclick="<%=uicomponent.event(action)%>" tabindex=<%=tabIndex++%> class="btn $action" href="javascript:void(0);"><%=_ctx.appRes("UIConfirmMessage.label." + action)%></button>
+		<%}%>
+	</div>
+	<%// end render action%>
+</div>

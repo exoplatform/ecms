@@ -1489,6 +1489,7 @@
       <import-successful>Importa avvenuta con successo.</import-successful>
       <filename-invalid>Scegli un file .xml da importare per il campo 'Carica File'.</filename-invalid>
       <filetype-error>Impossibile caricare il file importato. Forse, il file .xml non Ãš valido.</filetype-error>
+      <xml-invalid>There is an invalid character at position [row, column]:{0} in {1} file</xml-invalid>
       <mimetype-invalid>Solo file .xml o .zip sono supportati per l'importazione.</mimetype-invalid>
       <access-denied>Accesso negato! Non sei autorizzato a importare.</access-denied>
       <constraint-violation-exception>Impossibile importare i dati. Il tipo '{0}' non è consentito in questa localizzazione.</constraint-violation-exception>

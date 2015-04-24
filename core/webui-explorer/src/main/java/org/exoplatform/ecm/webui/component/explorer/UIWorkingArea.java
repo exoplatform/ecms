@@ -105,6 +105,7 @@ public class UIWorkingArea extends UIContainer {
   public static final String               CUSTOM_ACTIONS           = "CustomActions";
 
   public static final String               PERMLINK                 = "PermlinkContextMenu";
+  public static final String               PERM_LINK_ACTION         = "Permlink";
 
   private String nodePathDelete = "";
   private String deleteNotice = "";

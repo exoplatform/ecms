@@ -1489,6 +1489,7 @@
       <import-successful>Úspěšně importováno.</import-successful>
       <filename-invalid>Pro import vyberte soubor XML do pole 'Nahrát soubor'.</filename-invalid>
       <filetype-error>Nelze importovat nahraný soubor. Soubor XML může být neplatný.</filetype-error>
+      <xml-invalid>There is an invalid character at position [row, column]:{0} in {1} file</xml-invalid>
       <mimetype-invalid>Importovat lze pouze soubory XML nebo zip.</mimetype-invalid>
       <access-denied>Přístup byl odepřen. Tam nelze importovat.</access-denied>
       <constraint-violation-exception>Nelze importovat data. V tomto umístění není povolen typ {0}.</constraint-violation-exception>

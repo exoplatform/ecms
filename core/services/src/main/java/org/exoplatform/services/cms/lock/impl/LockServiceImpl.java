@@ -33,6 +33,8 @@ import javax.jcr.query.QueryResult;
 
 import org.exoplatform.container.component.ComponentPlugin;
 import org.exoplatform.container.xml.InitParams;
+import org.exoplatform.services.cache.CacheService;
+import org.exoplatform.services.cache.ExoCache;
 import org.exoplatform.services.cms.lock.LockService;
 import org.exoplatform.services.jcr.RepositoryService;
 import org.exoplatform.services.jcr.core.ManageableRepository;
@@ -56,8 +58,10 @@ import org.picocontainer.Startable;
 
 public class LockServiceImpl implements LockService, Startable {
 
-  private List<String> settingLockList = new ArrayList<String>();
-  private List<String> preSettingLockList = new ArrayList<String>();
+  private final String SETTING_LOCK="SETTING_LOCK";
+  private final String PRE_SETTING_LOCK="PRE_SETTING_LOCK";
+
+  private ExoCache<String, List<String>> settingLockList;
   private List<LockGroupsOrUsersPlugin> lockGroupsOrUsersPlugin_ = new ArrayList<LockGroupsOrUsersPlugin>();
   private static final Log LOG = ExoLogger.getLogger(LockServiceImpl.class.getName());
   private HashMap<String, Map<String, String>> lockHolding = new HashMap<String, Map<String, String>>();
@@ -67,8 +71,9 @@ public class LockServiceImpl implements LockService, Startable {
    * @param params
    * @throws Exception
    */
-  public LockServiceImpl(InitParams params) throws Exception {
+  public LockServiceImpl(InitParams params, CacheService cacheService) throws Exception {
     //group_ = params.getValueParam("group").getValue();
+    settingLockList = cacheService.getCacheInstance(LockServiceImpl.class.getName());
   }
 
   /**
@@ -85,28 +90,36 @@ public class LockServiceImpl implements LockService, Startable {
    */
   @Override
   public List<String> getPreSettingLockList(){
-    return preSettingLockList;
+    return settingLockList.get(PRE_SETTING_LOCK);
   }
 
   /**
    * {@inheritDoc}
    */
   public List<String> getAllGroupsOrUsersForLock() throws Exception {
-    return settingLockList;
+    return settingLockList.get(SETTING_LOCK);
   }
 
   /**
    * {@inheritDoc}
    */
   public void addGroupsOrUsersForLock(String groupsOrUsers) throws Exception {
-    if (!settingLockList.contains(groupsOrUsers)) settingLockList.add(groupsOrUsers);
+    List<String> _settingLockList = settingLockList.get(SETTING_LOCK);
+    if (_settingLockList!=null && !_settingLockList.contains(groupsOrUsers)) {
+      _settingLockList.add(groupsOrUsers);
+      settingLockList.put(SETTING_LOCK, _settingLockList);
+    }
   }
 
   /**
    * {@inheritDoc}
    */
   public void removeGroupsOrUsersForLock(String groupsOrUsers) throws Exception {
-    if (settingLockList.contains(groupsOrUsers)) settingLockList.remove(groupsOrUsers);
+    List<String> _settingLockList = settingLockList.get(SETTING_LOCK);
+    if (_settingLockList!=null && _settingLockList.contains(groupsOrUsers)) {
+      _settingLockList.remove(groupsOrUsers);
+      settingLockList.put(SETTING_LOCK, _settingLockList);
+    }
   }
 
   /**
@@ -114,13 +127,17 @@ public class LockServiceImpl implements LockService, Startable {
    */
   public void start() {
     lockHolding.clear();
-    settingLockList.clear();
-    preSettingLockList.clear();
+    settingLockList.clearCache();
+
     removeLocks();
+    List<String> _settingLockList = new ArrayList<String>();
+    List<String> _preSettingLockList = new ArrayList<String>();
     for(LockGroupsOrUsersPlugin plugin : lockGroupsOrUsersPlugin_) {
-      settingLockList.addAll(plugin.initGroupsOrUsers());
-      preSettingLockList.addAll(plugin.initGroupsOrUsers());
+      _settingLockList.addAll(plugin.initGroupsOrUsers());
+      _preSettingLockList.addAll(plugin.initGroupsOrUsers());
     }
+    settingLockList.put(SETTING_LOCK, _settingLockList);
+    settingLockList.put(PRE_SETTING_LOCK, _preSettingLockList);
   }
 
   /**
@@ -128,8 +145,7 @@ public class LockServiceImpl implements LockService, Startable {
    */
   public void stop() {
     lockHolding.clear();
-    settingLockList.clear();
-    preSettingLockList.clear();
+    settingLockList.clearCache();
   }
 
   /**

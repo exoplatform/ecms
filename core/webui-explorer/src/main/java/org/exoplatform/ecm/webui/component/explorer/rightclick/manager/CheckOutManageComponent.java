@@ -17,13 +17,21 @@
  **************************************************************************/
 package org.exoplatform.ecm.webui.component.explorer.rightclick.manager;
 
+import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Collection;
+import java.util.GregorianCalendar;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.regex.Matcher;
 
 import javax.jcr.Node;
 import javax.jcr.PathNotFoundException;
 import javax.jcr.Session;
+import javax.jcr.Value;
+import javax.jcr.ValueFactory;
+import javax.jcr.version.Version;
 
 import org.exoplatform.ecm.webui.component.explorer.UIJCRExplorer;
 import org.exoplatform.ecm.webui.component.explorer.UIWorkingArea;
@@ -35,6 +43,10 @@ import org.exoplatform.ecm.webui.component.explorer.control.filter.IsNotTrashHom
 import org.exoplatform.ecm.webui.component.explorer.control.filter.IsVersionableFilter;
 import org.exoplatform.ecm.webui.component.explorer.control.listener.UIWorkingAreaActionListener;
 import org.exoplatform.ecm.webui.utils.JCRExceptionManager;
+import org.exoplatform.portal.webui.util.Util;
+import org.exoplatform.services.wcm.extensions.publication.lifecycle.authoring.AuthoringPublicationConstant;
+import org.exoplatform.services.wcm.publication.lifecycle.stageversion.config.VersionData;
+import org.exoplatform.services.wcm.publication.lifecycle.stageversion.config.VersionLog;
 import org.exoplatform.web.application.ApplicationMessage;
 import org.exoplatform.webui.config.annotation.ComponentConfig;
 import org.exoplatform.webui.config.annotation.EventConfig;
@@ -77,6 +89,9 @@ public class CheckOutManageComponent extends UIAbstractManagerComponent {
   public static void checkOutManage(Event<? extends UIComponent> event, UIJCRExplorer uiExplorer,
       UIApplication uiApp) throws Exception {
     String nodePath = event.getRequestContext().getRequestParameter(OBJECTID);
+    if (nodePath == null) {
+      nodePath = uiExplorer.getCurrentWorkspace() + ':' + uiExplorer.getCurrentPath();
+    }
     Matcher matcher = UIWorkingArea.FILE_EXPLORER_URL_SYNTAX.matcher(nodePath);
     String wsName = null;
     if (matcher.find()) {
@@ -96,7 +111,22 @@ public class CheckOutManageComponent extends UIAbstractManagerComponent {
     wsName = session.getWorkspace().getName();
 
     try {
+      String userId = "";
+      try {
+        userId = Util.getPortalRequestContext().getRemoteUser();
+      } catch (Exception e) {
+        userId = node.getSession().getUserID();
+      }
+      Version liveVersion = node.getBaseVersion();
       node.checkout();
+      String currentState = node.getProperty("publication:currentState").getString();
+      VersionLog versionLog = new VersionLog(liveVersion.getName(),currentState, userId,new GregorianCalendar(),"UIPublicationHistory.create-version");
+      Map<String, VersionData> revisionsMap = getRevisionData(node);
+      VersionData liveRevisionData = new VersionData(liveVersion.getUUID(),currentState,userId);
+      revisionsMap.put(liveVersion.getUUID(), liveRevisionData);
+      addRevisionData(node, revisionsMap.values());
+      addLog(node,versionLog);
+      node.save();      
     } catch(PathNotFoundException path) {
       uiApp.addMessage(new ApplicationMessage("UIPopupMenu.msg.path-not-found-exception",
           null,ApplicationMessage.WARNING));
@@ -120,6 +150,58 @@ public class CheckOutManageComponent extends UIAbstractManagerComponent {
   @Override
   public Class<? extends UIAbstractManager> getUIAbstractManagerClass() {
     return null;
+  }
+  
+  /**
+   * Adds the log.
+   *
+   * @param node the node
+   * @param versionLog the version log
+   * @throws Exception the exception
+   */
+  private static void addLog(Node node, VersionLog versionLog) throws Exception {
+    Value[] values = node.getProperty(AuthoringPublicationConstant.HISTORY).getValues();
+    ValueFactory valueFactory = node.getSession().getValueFactory();
+    List<Value> list = new ArrayList<Value>(Arrays.asList(values));
+    list.add(valueFactory.createValue(versionLog.toString()));
+    node.setProperty(AuthoringPublicationConstant.HISTORY, list.toArray(new Value[] {}));
+  }
+  
+  /**
+   * Gets the revision data.
+   *
+   * @param node the node
+   * @return the revision data
+   * @throws Exception the exception
+   */
+  private static Map<String, VersionData> getRevisionData(Node node) throws Exception {
+    Map<String, VersionData> map = new HashMap<String, VersionData>();
+    try {
+      for (Value v : node.getProperty(AuthoringPublicationConstant.REVISION_DATA_PROP).getValues()) {
+        VersionData versionData = VersionData.toVersionData(v.getString());
+        map.put(versionData.getUUID(), versionData);
+      }
+    } catch (Exception e) {
+      return map;
+    }
+    return map;
+  }
+  
+  /**
+   * Adds the revision data.
+   *
+   * @param node the node
+   * @param list the list
+   * @throws Exception the exception
+   */
+  private static void addRevisionData(Node node, Collection<VersionData> list) throws Exception {
+    List<Value> valueList = new ArrayList<Value>();
+    ValueFactory factory = node.getSession().getValueFactory();
+    for (VersionData versionData : list) {
+      valueList.add(factory.createValue(versionData.toStringValue()));
+    }
+    node.setProperty(AuthoringPublicationConstant.REVISION_DATA_PROP,
+                     valueList.toArray(new Value[] {}));
   }
 
 }

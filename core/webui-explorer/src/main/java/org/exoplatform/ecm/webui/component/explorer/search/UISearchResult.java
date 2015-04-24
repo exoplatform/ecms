@@ -66,6 +66,7 @@ import org.exoplatform.services.wcm.search.base.PageListFactory;
 import org.exoplatform.services.wcm.search.base.QueryData;
 import org.exoplatform.services.wcm.search.base.SearchDataCreator;
 import org.exoplatform.services.wcm.utils.WCMCoreUtils;
+import org.exoplatform.wcm.webui.paginator.UILazyPageIterator;
 import org.exoplatform.web.application.ApplicationMessage;
 import org.exoplatform.webui.config.annotation.ComponentConfig;
 import org.exoplatform.webui.config.annotation.EventConfig;
@@ -126,7 +127,7 @@ public class UISearchResult extends UIContainer {
   }
 
   public UISearchResult() throws Exception {
-    uiPageIterator_ = addChild(UIPageIterator.class, null, "UISearchResultPageIterator");
+    uiPageIterator_ = addChild(UILazyPageIterator.class, null, "UISearchResultPageIterator");
   }
 
   public void setQuery(String queryStatement, String workspaceName, String language, boolean isSystemSession, String keyword) {
@@ -404,6 +405,7 @@ public class UISearchResult extends UIContainer {
     }
     public Node filterNodeToDisplay(Node node) {
       try {
+        if (node == null || node.getPath().contains("/jcr:system/")) return null;
         if (node != null) {
           if ((categoryPathList != null) && (categoryPathList.size() > 0)){
             for (String categoryPath : categoryPathList) {
@@ -437,7 +439,11 @@ public class UISearchResult extends UIContainer {
           } else {
             if (node.isNodeType(Utils.EXO_SYMLINK)) {
               if (checkTargetMatch(node, keyword)) return node;
-            }else {
+            } else if (node.isNodeType(Utils.NT_RESOURCE)) {
+              return node.getParent();
+            } else if (node.isNodeType(Utils.EXO_COMMENTS)) {
+              return node.getParent().getParent();
+            } else {
               return node;
             }
           }
@@ -503,7 +509,7 @@ public class UISearchResult extends UIContainer {
   public static class RowDataCreator implements SearchDataCreator<RowData> {
 
     public RowData createData(Node node, Row row) {
-      return new RowData(row);
+      return new RowData(row, node);
     }
 
   }
@@ -515,8 +521,12 @@ public class UISearchResult extends UIContainer {
     private String jcrPrimaryType = "";
 
     public RowData(Row row) {
+      this(row, null);
+    }
+    
+    public RowData(Row row, Node node) {
       try {
-        jcrPath = row.getValue("jcr:path").getString();
+        jcrPath = node != null ? node.getPath() : row.getValue("jcr:path").getString();
       } catch (Exception e) {
         if (LOG.isWarnEnabled()) {
           LOG.warn(e.getMessage());
@@ -578,20 +588,14 @@ public class UISearchResult extends UIContainer {
     }
 
     public int hashCode() {
-      return (jcrPath == null ? 0 : jcrPath.hashCode()) +
-             (repExcerpt == null ? 0 : repExcerpt.hashCode()) +
-             (int)jcrScore +
-             (jcrPrimaryType == null ? 0 : jcrPrimaryType.hashCode());
+      return (jcrPath == null ? 0 : jcrPath.hashCode());
     }
 
     public boolean equals(Object o) {
       if (o == null) return false;
       if (! (o instanceof RowData)) return false;
       RowData data = (RowData) o;
-      return (jcrPath == null && data.jcrPath == null || jcrPath.equals(data.jcrPath)) &&
-             (repExcerpt == null && data.repExcerpt == null || repExcerpt.equals(data.repExcerpt)) &&
-             (jcrScore == data.jcrScore) &&
-             (jcrPrimaryType == null && data.jcrPrimaryType == null || jcrPrimaryType.equals(data.jcrPrimaryType));
+      return (jcrPath == null && data.jcrPath == null || jcrPath.equals(data.jcrPath));
     }
   }
 }

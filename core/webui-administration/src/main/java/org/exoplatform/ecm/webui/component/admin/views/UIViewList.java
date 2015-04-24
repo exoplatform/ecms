@@ -36,6 +36,7 @@ import org.exoplatform.services.cms.drives.DriveData;
 import org.exoplatform.services.cms.drives.ManageDriveService;
 import org.exoplatform.services.cms.views.ManageViewService;
 import org.exoplatform.services.cms.views.ViewConfig;
+import org.exoplatform.services.cms.views.impl.ManageViewPlugin;
 import org.exoplatform.services.wcm.utils.WCMCoreUtils;
 import org.exoplatform.web.application.ApplicationMessage;
 import org.exoplatform.web.application.RequestContext;
@@ -197,6 +198,7 @@ public class UIViewList extends UIPagingGrid {
       }
 
       manageViewService.removeView(viewName);
+      org.exoplatform.services.cms.impl.Utils.addEditedConfiguredData(viewName, ManageViewPlugin.class.getSimpleName(), ManageViewPlugin.EDITED_CONFIGURED_VIEWS, true);
       viewList.refresh(viewList.getUIPageIterator().getCurrentPage());
       event.getRequestContext().addUIComponentToUpdateByAjax(viewList.getParent());
     }

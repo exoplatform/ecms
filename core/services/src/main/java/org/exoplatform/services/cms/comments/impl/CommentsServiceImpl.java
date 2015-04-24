@@ -33,12 +33,12 @@ import org.exoplatform.services.cache.CacheService;
 import org.exoplatform.services.cache.ExoCache;
 import org.exoplatform.services.cms.comments.CommentsService;
 import org.exoplatform.services.cms.i18n.MultiLanguageService;
+import org.exoplatform.services.cms.impl.Utils;
 import org.exoplatform.services.cms.jcrext.activity.ActivityCommonService;
 import org.exoplatform.services.jcr.core.ManageableRepository;
 import org.exoplatform.services.listener.ListenerService;
 import org.exoplatform.services.log.ExoLogger;
 import org.exoplatform.services.log.Log;
-import org.exoplatform.services.organization.OrganizationService;
 import org.exoplatform.services.organization.User;
 import org.exoplatform.services.wcm.core.NodetypeConstant;
 import org.exoplatform.services.wcm.utils.WCMCoreUtils;
@@ -125,10 +125,7 @@ public class CommentsServiceImpl implements CommentsService {
       String name = Long.toString(commentDate.getTimeInMillis()) ;
       Node newComment = commentNode.addNode(name,EXO_COMMENTS) ;
       newComment.setProperty(COMMENTOR,commentor) ;
-
-      OrganizationService organizationService = WCMCoreUtils.getService(OrganizationService.class);
-      User user = organizationService.getUserHandler().findUserByName(commentor);
-     
+      User user = WCMCoreUtils.getUserObject(commentor);
       if(user == null)
         newComment.setProperty(COMMENTOR_FULLNAME,"ANONYMOUS") ;
       else {

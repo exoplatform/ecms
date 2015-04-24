@@ -19,6 +19,7 @@ package org.exoplatform.ecm.webui.component.admin.script;
 import org.exoplatform.commons.utils.LazyPageList;
 import org.exoplatform.commons.utils.ListAccess;
 import org.exoplatform.commons.utils.ListAccessImpl;
+import org.exoplatform.services.cms.impl.Utils;
 import org.exoplatform.services.cms.scripts.ScriptService;
 import org.exoplatform.services.wcm.core.NodetypeConstant;
 import org.exoplatform.services.wcm.utils.WCMCoreUtils;
@@ -61,6 +62,8 @@ public class UIScriptList extends UIComponentDecorator {
   public static final String ACTION_SCRIPT_TYPE = "action";
   public static final String INTERCEPTOR_SCRIPT_TYPE = "interceptor";
   public static final String WIDGET_SCRIPT_TYPE = "widget";
+  
+  private static final String EDITED_CONFIGURED_SCRIPTS = "EditedConfiguredScripts";
 
   private String filter = ACTION_SCRIPT_TYPE;
 
@@ -183,6 +186,7 @@ public class UIScriptList extends UIComponentDecorator {
       String namePrefix = uiScriptList.getScriptCategory();
       try {
         scriptService.removeScript(namePrefix + "/" + scriptName, WCMCoreUtils.getUserSessionProvider());
+        Utils.addEditedConfiguredData(namePrefix + "/" + scriptName, "ScriptServiceImpl", EDITED_CONFIGURED_SCRIPTS, true);
       } catch(AccessDeniedException ace) {
         throw new MessageException(new ApplicationMessage("UIECMAdminControlPanel.msg.access-denied",
                                                           null, ApplicationMessage.WARNING));

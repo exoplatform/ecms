@@ -1489,6 +1489,7 @@
       <import-successful>Sėkmingai importuotas.</import-successful>
       <filename-invalid>Pasirinkite .xml failą 'Įkelti failą' laukelyje, kad įkelti.</filename-invalid>
       <filetype-error>Negalima importuoti įkelto failo. Failas .xml gali būti klaidingas.</filetype-error>
+      <xml-invalid>There is an invalid character at position [row, column]:{0} in {1} file</xml-invalid>
       <mimetype-invalid>Galima įkelti tik .xml arba .zip failus.</mimetype-invalid>
       <access-denied>Prieiga uždrausta. Jums neleidžiama įkelti čia.</access-denied>
       <constraint-violation-exception>Neįmanoma importuoti duomenų. Tipas '{0}' yra neleidžiamas šioje vietoje.</constraint-violation-exception>

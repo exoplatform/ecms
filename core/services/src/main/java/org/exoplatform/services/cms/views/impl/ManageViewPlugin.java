@@ -44,8 +44,8 @@ import java.util.Set;
 public class ManageViewPlugin extends BaseComponentPlugin {
 
   private static String ECM_EXPLORER_TEMPLATE = "ecmExplorerTemplate" ;
-  private static final String EDITED_CONFIGURED_VIEWS = "EditedConfiguredViews";
-  private static final String EDITED_CONFIGURED_VIEWS_TEMPLATES = "EditedConfiguredViewsTemplate";
+  public static final String EDITED_CONFIGURED_VIEWS = "EditedConfiguredViews";
+  public static final String EDITED_CONFIGURED_VIEWS_TEMPLATES = "EditedConfiguredViewsTemplate";
   private InitParams params_ ;
   private RepositoryService repositoryService_ ;
   private NodeHierarchyCreator nodeHierarchyCreator_ ;
@@ -106,13 +106,13 @@ public class ManageViewPlugin extends BaseComponentPlugin {
           this.getClass().getSimpleName(), EDITED_CONFIGURED_VIEWS, true).contains(viewNodeName)) continue ;
         Node viewNode = addView(viewHomeNode,viewNodeName,viewObject.getPermissions(),
                                 viewObject.isHideExplorerPanel(), viewObject.getTemplate()) ;
-        Utils.addEditedConfiguredData(viewNodeName, this.getClass().getSimpleName(), EDITED_CONFIGURED_VIEWS, true);
         for(Tab tab:viewObject.getTabList()) {
           addTab(viewNode,tab.getTabName(),tab.getButtons()) ;
         }
       }else if(object instanceof TemplateConfig) {
         templateObject = (TemplateConfig) object;
-        addTemplate(templateObject,session,warViewPath) ;
+        addTemplate(templateObject,session,warViewPath);
+        configuredTemplate_.add(templateObject.getName());
       }
     }
     session.save();
@@ -156,8 +156,6 @@ public class ManageViewPlugin extends BaseComponentPlugin {
     String warPath = warViewPath + tempObject.getWarPath() ;
     InputStream in = cservice_.getInputStream(warPath) ;
     templateService.createTemplate(templateHomeNode, templateName, templateName, in, new String[] {"*"});
-    configuredTemplate_.add(templateName);
-    Utils.addEditedConfiguredData(templateName, this.getClass().getSimpleName(), EDITED_CONFIGURED_VIEWS_TEMPLATES, true);
   }
   
   public Set<String> getConfiguredTemplates() {

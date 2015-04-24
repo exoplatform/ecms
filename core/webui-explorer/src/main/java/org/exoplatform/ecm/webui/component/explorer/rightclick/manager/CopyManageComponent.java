@@ -142,7 +142,7 @@ public class CopyManageComponent extends UIAbstractManagerComponent {
     
     ClipboardService clipboardService = WCMCoreUtils.getService(ClipboardService.class);
     String userId = ConversationState.getCurrent().getIdentity().getUserId();
-    clipboardService.getClipboardList(userId, true).clear();
+    clipboardService.clearClipboardList(userId, true);
     
     if(srcPath.indexOf(";") > -1) {      
       multipleCopy(Utils.removeChildNodes(srcPath), event);

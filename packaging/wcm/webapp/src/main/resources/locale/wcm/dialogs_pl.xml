@@ -23,27 +23,27 @@
   <WebContent>
     <dialog>
       <label>
-        <MainContent>Main Content</MainContent>
+        <MainContent>Główna zawartość</MainContent>
         <cssFile>default.css</cssFile>
         <jsFile>default.js</jsFile>
-        <Advanced>Advanced</Advanced>
-        <Summary>Summary</Summary>
+        <Advanced>Zaawansowane</Advanced>
+        <Summary>Streszczenie</Summary>
         <name>#{word.name}</name>
-        <title>Title</title>
-        <ContentCSS>CSS Data</ContentCSS>
-        <hintCSS>You can specify the main style sheet for your web content. This style will override the style sheets defined at the site level and at the shared level.</hintCSS>
-        <ContentJS>JS Data</ContentJS>
-        <hintJS>You can specify some JavaScript codes that can be executed before your web content is rendered.</hintJS>
-        <WebContentHtml>Main Content</WebContentHtml>
-        <Illustration>Illustration</Illustration>
-        <hintIllustration>You can specify an image that will be shown when your web content is displayed in the list. You can also specify some summary texts to go with this image.</hintIllustration>
-        <confirm-delete>Are you sure you want to delete this illustration?</confirm-delete>
-        <illustrationImage>Illustration Image</illustrationImage>
-        <imageMimeType>Image Type</imageMimeType>
-        <image>Upload Image</image>
-        <imageWidth>Image Width</imageWidth>
-        <imageHeight>Image Height</imageHeight>
-        <Synchronize>Synchronize with CSS and HTML</Synchronize>
+        <title>Tytuł</title>
+        <ContentCSS>Dane CSS</ContentCSS>
+        <hintCSS>Możesz określić główny arkusz stylów dla stron internetowych. Ten styl zastąpi arkusze stylów zdefiniowane na poziomie witryny i na wspólnym poziomie.</hintCSS>
+        <ContentJS>Dane JS</ContentJS>
+        <hintJS>Można podać kilka kodów JavaScript, które mogą być wykonywane przed renderowaniem treści www.</hintJS>
+        <WebContentHtml>Główna zawartość</WebContentHtml>
+        <Illustration>Ilustracja</Illustration>
+        <hintIllustration>Możesz określić obraz, który będzie wyświetlany po zawartości sieci Web na liście. Można również określić niektóre teksty podsumowania, które będą wyświetlane wraz z tym obrazem.</hintIllustration>
+        <confirm-delete>Czy na pewno chcesz usunąć ten rysunek?</confirm-delete>
+        <illustrationImage>Ilustracja</illustrationImage>
+        <imageMimeType>Typ obrazu</imageMimeType>
+        <image>Prześlij zdjęcie</image>
+        <imageWidth>Szerokość obrazu</imageWidth>
+        <imageHeight>Wysokość obrazu</imageHeight>
+        <Synchronize>Synchronizacja z CSS i HTML</Synchronize>
       </label>
     </dialog>
   </WebContent>
@@ -52,9 +52,9 @@
     <dialog>
       <label>
         <name>#{word.name}</name>
-        <active>Active</active>
-        <priority>Priority</priority>
-        <content>CSS Data</content>
+        <active>Aktywny</active>
+        <priority>Priorytet</priority>
+        <content>Dane CSS</content>
       </label>
     </dialog>
   </CSSFile>
@@ -63,9 +63,9 @@
     <dialog>
       <label>
         <name>#{word.name}</name>
-        <active>Active</active>
-        <priority>Priority</priority>
-        <content>JS Data</content>
+        <active>Aktywny</active>
+        <priority>Priorytet</priority>
+        <content>Dane JS</content>
       </label>
     </dialog>
   </JSFile>
@@ -75,7 +75,7 @@
       <label>
         <name>#{word.name}</name>
         <url>URL</url>
-        <description>Description</description>
+        <description>Opis</description>
       </label>
     </dialog>
   </WebLink>
@@ -83,10 +83,10 @@
   <SiteMetadata>
     <dialog>
       <label>
-        <title>Site Title</title>
-        <description>Site Description</description>
-        <keywords>Site Keywords</keywords>
-        <robots>Search Engine Behavior</robots>
+        <title>Tytuł strony</title>
+        <description>Opis strony</description>
+        <keywords>Słowa kluczowe strony</keywords>
+        <robots>Zachowanie wyszukiwarki</robots>
       </label>
     </dialog>
   </SiteMetadata>

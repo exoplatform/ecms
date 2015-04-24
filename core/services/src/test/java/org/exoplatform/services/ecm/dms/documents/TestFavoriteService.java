@@ -25,6 +25,8 @@ import org.exoplatform.services.cms.documents.FavoriteService;
 import org.exoplatform.services.jcr.core.ManageableRepository;
 import org.exoplatform.services.jcr.ext.app.SessionProviderService;
 import org.exoplatform.services.jcr.ext.common.SessionProvider;
+import org.exoplatform.services.security.ConversationState;
+import org.exoplatform.services.security.Identity;
 import org.exoplatform.services.wcm.BaseWCMTestCase;
 import org.junit.FixMethodOrder;
 import org.junit.runners.MethodSorters;
@@ -50,6 +52,8 @@ public class TestFavoriteService extends BaseWCMTestCase {
     SessionProvider sessionProvider = sessionProviderService.getSystemSessionProvider(null);
     ManageableRepository manageableRepository = repositoryService.getRepository("repository");
     Session session = sessionProvider.getSession(COLLABORATION_WS, manageableRepository);
+    ConversationState c = new ConversationState(new Identity(session.getUserID()));
+    ConversationState.setCurrent(c);
     rootNode = session.getRootNode();
     String[] names = new String[] {"root", "demo", "james", "john", "marry"};
     for (String name : names)

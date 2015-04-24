@@ -28,7 +28,7 @@
   }
   
   if(mimeType.equals("text/html") || mimeType.equals("application/rss+xml")) {
-  def title = ContentReader.getXSSCompatibilityContent(org.exoplatform.services.cms.impl.Utils.getTitle(originalNode));
+  def title = org.exoplatform.services.cms.impl.Utils.getTitle(originalNode);
 %>
 
 	<div class="uiTabNormal">

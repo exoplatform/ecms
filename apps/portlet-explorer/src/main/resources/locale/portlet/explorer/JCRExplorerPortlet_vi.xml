@@ -400,6 +400,7 @@
       <constraintviolation-exception>Không tìm thấy thuộc tính bắt buộc jcr:uuid. Có thể nút đã bị xóa hoặc thay đổi. Vui lòng nhấp nút Làm mới.</constraintviolation-exception>
       <path-not-found-exception>Nút này đã bị xóa hoặc thay đổi. Vui lòng nhấp nút Làm mới.</path-not-found-exception>
       <not-exist-categories>Danh mục không tồn tại.</not-exist-categories>
+      <lock-node-read-only>Tệp tin này bị khóa bởi người dùng {0}. Mở chỉ đọc?</lock-node-read-only>
     </msg>
   </UIPopupMenu>
   <!--
@@ -1489,6 +1490,7 @@
       <import-successful>Đã nhập thành công.</import-successful>
       <filename-invalid>Duyệt tệp tin .xml cho trường 'Tải tệp tin' để nhập vào.</filename-invalid>
       <filetype-error>Không thể nhập tệp tin đã tải lên. Tệp tin .xml này có thể không hợp lệ.</filetype-error>
+      <xml-invalid>There is an invalid character at position [row, column]:{0} in {1} file</xml-invalid>
       <mimetype-invalid>Bạn chỉ có thể nhập các tệp tin dạng .xml hoặc .zip.</mimetype-invalid>
       <access-denied>Truy nhập bị từ chối. Bạn không được phép nhập ở đây.</access-denied>
       <constraint-violation-exception>Không thể nhập dữ liệu. Loại '{0}' không được cho phép trong vị trí này.</constraint-violation-exception>
@@ -2419,6 +2421,8 @@
       <ReplaceData>Ghi đè dữ liệu</ReplaceData>
       <Back>Quay lại đổi tên</Back>
       <Keepfile>Giữ cả hai tệp</Keepfile>
+			<ReadOnly>Mở chỉ đọc</ReadOnly>
+			<Cancel>Hủy bỏ</Cancel>
     </label>
   </UIConfirmMessage>
 

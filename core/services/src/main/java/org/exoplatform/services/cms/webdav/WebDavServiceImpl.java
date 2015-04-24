@@ -43,6 +43,7 @@ import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 import javax.ws.rs.core.UriInfo;
 
+import org.apache.commons.lang.StringUtils;
 import org.exoplatform.common.http.HTTPStatus;
 import org.exoplatform.common.util.HierarchicalProperty;
 import org.exoplatform.commons.utils.MimeTypeResolver;
@@ -249,7 +250,20 @@ public class WebDavServiceImpl extends org.exoplatform.services.jcr.webdav.WebDa
       }
       return Response.serverError().build();
     }
-    return super.get(repoName, repoPath, rangeHeader, ifModifiedSince, ifNoneMatch, version, uriInfo);
+    Response response = super.get(repoName, repoPath, rangeHeader, ifModifiedSince, ifNoneMatch, version, uriInfo);
+    if(HTTPStatus.OK == response.getStatus()) {
+      return Response.fromResponse(response)
+              .header("Access-Control-Allow-Origin", uriInfo.getRequestUri().getHost())
+              .header("Access-Control-Allow-Credentials", true)
+              .header("Access-Control-Allow-Methods", "ACL, CANCELUPLOAD, CHECKIN, CHECKOUT, COPY, DELETE, GET, HEAD, LOCK, MKCALENDAR, MKCOL, " +
+                      "MOVE, OPTIONS, POST, PROPFIND, PROPPATCH, PUT, REPORT, SEARCH, UNCHECKOUT, UNLOCK, UPDATE, VERSION-CONTROL")
+              .header("Access-Control-Allow-Headers", "Overwrite, Destination, Content-Type, Depth, User-Agent, Translate, Range, Content-Range," +
+                      " Timeout, X-File-Size, X-Requested-With, If-Modified-Since, X-File-Name, Cache-Control, Location, Lock-Token, If")
+              .header("Access-Control-Expose-Header", "DAV, content-length, Allow")
+              .header("Access-Control-Max-Age", 3600)
+              .build();
+    }
+    return response;
   }
 
   @HEAD
@@ -413,9 +427,10 @@ public class WebDavServiceImpl extends org.exoplatform.services.jcr.webdav.WebDa
                       @HeaderParam(ExtHttpHeaders.USER_AGENT) String userAgent,
                       InputStream inputStream,
                       @Context UriInfo uriInfo) {
-
     Session session = null;
     Item item = null;
+    boolean isCreating = false;
+    ActivityCommonService activityService = null;
     try {
       repoName = repositoryService.getCurrentRepository().getConfiguration().getName();
       try {
@@ -432,6 +447,10 @@ public class WebDavServiceImpl extends org.exoplatform.services.jcr.webdav.WebDa
         repoPath = item.getSession().getWorkspace().getName()
             + LinkUtils.createPath(item.getPath(), Text.escapeIllegalJcrChars(LinkUtils.getItemName(path(repoPath))));
         session = item.getSession();
+      }
+      activityService = WCMCoreUtils.getService(ActivityCommonService.class);
+      if (!session.itemExists(path(repoPath))) {
+        isCreating = true;
       }
     } catch (PathNotFoundException exc) {
       return Response.status(HTTPStatus.NOT_FOUND).entity(exc.getMessage()).build();
@@ -456,20 +475,30 @@ public class WebDavServiceImpl extends org.exoplatform.services.jcr.webdav.WebDa
                              inputStream,
                              uriInfo);
     try {
+
+      boolean pushAs = markTempFilesToHidden(repoPath);
       Node currentNode = (Node) session.getItem(path(repoPath));
-      if (currentNode.isCheckedOut())
-        listenerService.broadcast(this.POST_UPLOAD_CONTENT_EVENT, this, currentNode);
-      if(currentNode != null) {
-        ListenerService listenerService = WCMCoreUtils.getService(ListenerService.class);
-        try {
+      if (isCreating) {
+        if (userAgent.contains("Microsoft")) {
+          activityService.setCreating(currentNode, true);
+        }
+      }else {
+        activityService.setCreating(currentNode, false);
+      }
+
+      try {
+        if (currentNode.isCheckedOut() && !activityService.isCreating(currentNode) && pushAs)
+          listenerService.broadcast(this.POST_UPLOAD_CONTENT_EVENT, this, currentNode);
+
+        if(isCreating && pushAs)
           listenerService.broadcast(ActivityCommonService.FILE_CREATED_ACTIVITY, null, currentNode);
-          currentNode.getSession().save();
+        
         } catch (Exception e) {
           if (LOG.isWarnEnabled()) {
             LOG.warn("Cannot broadcast file create activity for the item at " + currentNode.getPath(), e);
           }
         }
-      }
+
     } catch (PathNotFoundException npfe) {
       return Response.status(HTTPStatus.NOT_FOUND).entity(npfe.getMessage()).build();
     } catch (RepositoryException re) {
@@ -633,6 +662,7 @@ public class WebDavServiceImpl extends org.exoplatform.services.jcr.webdav.WebDa
     if (response.getStatus() == HTTPStatus.CREATED) {
       updateProperties(destinationHeader, repoName);
     }
+    markTempFilesToHidden(repoPath);
     return response;
   }
 
@@ -809,4 +839,46 @@ public class WebDavServiceImpl extends org.exoplatform.services.jcr.webdav.WebDa
       return item.getSession().getWorkspace().getName() + item.getPath();
     }
   }
+
+  /**
+   * hidden temporary files/folders
+   * @param repoPath
+   */
+  private boolean markTempFilesToHidden(String repoPath){
+    if(StringUtils.isBlank(repoPath)) return false;
+    String tempNodeFolder      = ".TemporaryItems";
+    String tempNodeFileChild = "._folders.501";
+    String tempNodeFile        = "._.TemporaryItems";
+    String txtTempRegex        = "/._";
+    try {
+      String txtTemp = repoPath.substring(repoPath.lastIndexOf("/"), repoPath.length());
+      boolean isTxtTemp = txtTemp.startsWith(txtTempRegex)?true:false;
+      if(repoPath.contains(tempNodeFile) || isTxtTemp){
+        Node _tempNodeFile = (Node)nodeFinder.getItem(workspaceName(repoPath), path(repoPath), true);
+        _tempNodeFile.remove();
+        _tempNodeFile.getSession().save();
+        return false;
+      }else if(repoPath.contains(tempNodeFolder)) {
+        String currentNodePath = repoPath.substring(0, repoPath.indexOf(tempNodeFolder));
+        Node currentNode = (Node)nodeFinder.getItem(workspaceName(repoPath), path(currentNodePath), true);
+        //make tmp folder to hidden
+        if(currentNode.hasNode(tempNodeFolder)){
+          Node _tmpFolderNode = currentNode.getNode(tempNodeFolder);
+          if(_tmpFolderNode.canAddMixin(NodetypeConstant.EXO_HIDDENABLE)) _tmpFolderNode.addMixin(NodetypeConstant.EXO_HIDDENABLE);
+          if (_tmpFolderNode.hasNode(tempNodeFileChild)){
+            Node _tempNodeFileChild = _tmpFolderNode.getNode(tempNodeFileChild);
+            _tempNodeFileChild.remove();
+          }
+          _tmpFolderNode.save();
+        }
+        return false;
+      }
+    }catch(RepositoryException ex){
+      if (LOG.isWarnEnabled()) {
+        LOG.warn("The hidden temp files has been ignored " + ex.getMessage());
+      }
+    }
+    return true;
+  }
+
 }

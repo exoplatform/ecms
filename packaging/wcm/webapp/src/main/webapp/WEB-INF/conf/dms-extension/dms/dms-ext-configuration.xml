@@ -1,962 +1,1681 @@
 <?xml version="1.0" encoding="ISO-8859-1"?>
 <configuration
-   xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-   xsi:schemaLocation="http://www.exoplatform.org/xml/ns/kernel_1_2.xsd http://www.exoplatform.org/xml/ns/kernel_1_2.xsd"
-   xmlns="http://www.exoplatform.org/xml/ns/kernel_1_2.xsd">
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:schemaLocation="http://www.exoplatform.org/xml/ns/kernel_1_2.xsd http://www.exoplatform.org/xml/ns/kernel_1_2.xsd"
+        xmlns="http://www.exoplatform.org/xml/ns/kernel_1_2.xsd">
 
-  <external-component-plugins>
-  	<target-component>org.exoplatform.webui.ext.UIExtensionManager</target-component>
-		<component-plugin>
-			<name>SideBar Actions</name>
-			<set-method>registerUIExtensionPlugin</set-method>
-			<type>org.exoplatform.webui.ext.UIExtensionPlugin</type>
-			<init-params>
-				<object-param>
-					<name>Explorer</name>
-					<object type="org.exoplatform.webui.ext.UIExtension">
-						<field name="type"><string>org.exoplatform.ecm.dms.UISideBar</string></field>
-						<field name="name"><string>Explorer</string></field>
-						<field name="rank"><int>110</int></field>
-						<field name="component"><string>org.exoplatform.ecm.webui.component.explorer.sidebar.action.ExplorerActionComponent</string></field>
-					</object>
-				</object-param>
-					<object-param>
-					<name>TagExplorer</name>
-					<object type="org.exoplatform.webui.ext.UIExtension">
-						<field name="type"><string>org.exoplatform.ecm.dms.UISideBar</string></field>
-						<field name="name"><string>TagExplorer</string></field>
-						<field name="rank"><int>120</int></field>
-						<field name="component"><string>org.exoplatform.ecm.webui.component.explorer.sidebar.action.TagExplorerActionComponent</string></field>
-					</object>
-				</object-param>	
-					<object-param>
-					<name>SavedSearches</name>
-					<object type="org.exoplatform.webui.ext.UIExtension">
-						<field name="type"><string>org.exoplatform.ecm.dms.UISideBar</string></field>
-						<field name="name"><string>SavedSearches</string></field>
-						<field name="rank"><int>130</int></field>
-						<field name="component"><string>org.exoplatform.ecm.webui.component.explorer.sidebar.action.SavedSearchesActionComponent</string></field>
-					</object>
-				</object-param>					
-				<object-param>
-					<name>Relation</name>
-					<object type="org.exoplatform.webui.ext.UIExtension">
-						<field name="type"><string>org.exoplatform.ecm.dms.UISideBar</string></field>
-						<field name="name"><string>Relation</string></field>
-						<field name="rank"><int>140</int></field>
-						<field name="component"><string>org.exoplatform.ecm.webui.component.explorer.sidebar.action.RelationActionComponent</string></field>
-					</object>
-				</object-param>
-				<object-param>
-					<name>Clipboard</name>
-					<object type="org.exoplatform.webui.ext.UIExtension">
-						<field name="type"><string>org.exoplatform.ecm.dms.UISideBar</string></field>
-						<field name="name"><string>Clipboard</string></field>
-						<field name="rank"><int>150</int></field>
-						<field name="component"><string>org.exoplatform.ecm.webui.component.explorer.sidebar.action.ClipboardActionComponent</string></field>
-					</object>
-				</object-param>
-			</init-params>
-		</component-plugin>				
-		<component-plugin>
-			<name>Add Actions</name>
-			<set-method>registerUIExtensionPlugin</set-method>
-			<type>org.exoplatform.webui.ext.UIExtensionPlugin</type>
-			<init-params>
-				<object-param>
-					<name>ViewNodeType</name>
-					<object type="org.exoplatform.webui.ext.UIExtension">
-						<field name="type"><string>org.exoplatform.ecm.dms.UIActionBar</string></field>
-						<field name="name"><string>ViewNodeType</string></field>
-						<field name="component"><string>org.exoplatform.ecm.webui.component.explorer.control.action.ViewNodeTypeActionComponent</string></field>
-					</object>
-				</object-param>
-				<object-param>
-					<name>ManageAuditing</name>
-					<object type="org.exoplatform.webui.ext.UIExtension">
-						<field name="type"><string>org.exoplatform.ecm.dms.UIActionBar</string></field>
-						<field name="name"><string>ManageAuditing</string></field>
-						<field name="component"><string>org.exoplatform.ecm.webui.component.explorer.control.action.ManageAuditingActionComponent</string></field>
-					</object>
-				</object-param>					
-				<object-param>
-					<name>ManagePublications</name>
-					<object type="org.exoplatform.webui.ext.UIExtension">
-						<field name="type"><string>org.exoplatform.ecm.dms.UIActionBar</string></field>
-						<field name="name"><string>ManagePublications</string></field>
-						<field name="component"><string>org.exoplatform.ecm.webui.component.explorer.control.action.ManagePublicationsActionComponent</string></field>
-					</object>
-				</object-param>					
-				<object-param>
-					<name>WatchDocument</name>
-					<object type="org.exoplatform.webui.ext.UIExtension">
-						<field name="type"><string>org.exoplatform.ecm.dms.UIActionBar</string></field>
-						<field name="name"><string>WatchDocument</string></field>
-						<field name="component"><string>org.exoplatform.ecm.webui.component.explorer.control.action.WatchDocumentActionComponent</string></field>
-					</object>
-				</object-param>					
-				<object-param>
-					<name>ManageVersions</name>
-					<object type="org.exoplatform.webui.ext.UIExtension">
-						<field name="type"><string>org.exoplatform.ecm.dms.UIActionBar</string></field>
-						<field name="name"><string>ManageVersions</string></field>
+    <external-component-plugins>
+        <target-component>org.exoplatform.webui.ext.UIExtensionManager</target-component>
+        <component-plugin>
+            <name>SideBar Actions</name>
+            <set-method>registerUIExtensionPlugin</set-method>
+            <type>org.exoplatform.webui.ext.UIExtensionPlugin</type>
+            <init-params>
+                <object-param>
+                    <name>Explorer</name>
+                    <object type="org.exoplatform.webui.ext.UIExtension">
+                        <field name="type">
+                            <string>org.exoplatform.ecm.dms.UISideBar</string>
+                        </field>
+                        <field name="name">
+                            <string>Explorer</string>
+                        </field>
+                        <field name="rank">
+                            <int>110</int>
+                        </field>
+                        <field name="component">
+                            <string>
+                                org.exoplatform.ecm.webui.component.explorer.sidebar.action.ExplorerActionComponent
+                            </string>
+                        </field>
+                    </object>
+                </object-param>
+                <object-param>
+                    <name>TagExplorer</name>
+                    <object type="org.exoplatform.webui.ext.UIExtension">
+                        <field name="type">
+                            <string>org.exoplatform.ecm.dms.UISideBar</string>
+                        </field>
+                        <field name="name">
+                            <string>TagExplorer</string>
+                        </field>
+                        <field name="rank">
+                            <int>120</int>
+                        </field>
+                        <field name="component">
+                            <string>
+                                org.exoplatform.ecm.webui.component.explorer.sidebar.action.TagExplorerActionComponent
+                            </string>
+                        </field>
+                    </object>
+                </object-param>
+                <object-param>
+                    <name>SavedSearches</name>
+                    <object type="org.exoplatform.webui.ext.UIExtension">
+                        <field name="type">
+                            <string>org.exoplatform.ecm.dms.UISideBar</string>
+                        </field>
+                        <field name="name">
+                            <string>SavedSearches</string>
+                        </field>
+                        <field name="rank">
+                            <int>130</int>
+                        </field>
+                        <field name="component">
+                            <string>
+                                org.exoplatform.ecm.webui.component.explorer.sidebar.action.SavedSearchesActionComponent
+                            </string>
+                        </field>
+                    </object>
+                </object-param>
+                <object-param>
+                    <name>Relation</name>
+                    <object type="org.exoplatform.webui.ext.UIExtension">
+                        <field name="type">
+                            <string>org.exoplatform.ecm.dms.UISideBar</string>
+                        </field>
+                        <field name="name">
+                            <string>Relation</string>
+                        </field>
+                        <field name="rank">
+                            <int>140</int>
+                        </field>
+                        <field name="component">
+                            <string>
+                                org.exoplatform.ecm.webui.component.explorer.sidebar.action.RelationActionComponent
+                            </string>
+                        </field>
+                    </object>
+                </object-param>
+                <object-param>
+                    <name>Clipboard</name>
+                    <object type="org.exoplatform.webui.ext.UIExtension">
+                        <field name="type">
+                            <string>org.exoplatform.ecm.dms.UISideBar</string>
+                        </field>
+                        <field name="name">
+                            <string>Clipboard</string>
+                        </field>
+                        <field name="rank">
+                            <int>150</int>
+                        </field>
+                        <field name="component">
+                            <string>
+                                org.exoplatform.ecm.webui.component.explorer.sidebar.action.ClipboardActionComponent
+                            </string>
+                        </field>
+                    </object>
+                </object-param>
+            </init-params>
+        </component-plugin>
+        <component-plugin>
+            <name>Add Actions</name>
+            <set-method>registerUIExtensionPlugin</set-method>
+            <type>org.exoplatform.webui.ext.UIExtensionPlugin</type>
+            <init-params>
+                <object-param>
+                    <name>ViewNodeType</name>
+                    <object type="org.exoplatform.webui.ext.UIExtension">
+                        <field name="type">
+                            <string>org.exoplatform.ecm.dms.UIActionBar</string>
+                        </field>
+                        <field name="name">
+                            <string>ViewNodeType</string>
+                        </field>
+                        <field name="component">
+                            <string>
+                                org.exoplatform.ecm.webui.component.explorer.control.action.ViewNodeTypeActionComponent
+                            </string>
+                        </field>
+                    </object>
+                </object-param>
+                <object-param>
+                    <name>ManageAuditing</name>
+                    <object type="org.exoplatform.webui.ext.UIExtension">
+                        <field name="type">
+                            <string>org.exoplatform.ecm.dms.UIActionBar</string>
+                        </field>
+                        <field name="name">
+                            <string>ManageAuditing</string>
+                        </field>
+                        <field name="component">
+                            <string>
+                                org.exoplatform.ecm.webui.component.explorer.control.action.ManageAuditingActionComponent
+                            </string>
+                        </field>
+                    </object>
+                </object-param>
+                <object-param>
+                    <name>ManagePublications</name>
+                    <object type="org.exoplatform.webui.ext.UIExtension">
+                        <field name="type">
+                            <string>org.exoplatform.ecm.dms.UIActionBar</string>
+                        </field>
+                        <field name="name">
+                            <string>ManagePublications</string>
+                        </field>
+                        <field name="component">
+                            <string>
+                                org.exoplatform.ecm.webui.component.explorer.control.action.ManagePublicationsActionComponent
+                            </string>
+                        </field>
+                    </object>
+                </object-param>
+                <object-param>
+                    <name>WatchDocument</name>
+                    <object type="org.exoplatform.webui.ext.UIExtension">
+                        <field name="type">
+                            <string>org.exoplatform.ecm.dms.UIActionBar</string>
+                        </field>
+                        <field name="name">
+                            <string>WatchDocument</string>
+                        </field>
+			            <field name="rank"><int>50</int></field>
+                        <field name="component">
+                            <string>
+                                org.exoplatform.ecm.webui.component.explorer.control.action.WatchDocumentActionComponent
+                            </string>
+                        </field>
+                    </object>
+                </object-param>
+                <object-param>
+                    <name>ManageVersions</name>
+                    <object type="org.exoplatform.webui.ext.UIExtension">
+                        <field name="type">
+                            <string>org.exoplatform.ecm.dms.UIActionBar</string>
+                        </field>
+                        <field name="name">
+                            <string>ManageVersions</string>
+                        </field>
+			            <field name="rank"><int>70</int></field>
 						<field name="component"><string>org.exoplatform.ecm.webui.component.explorer.control.action.ManageVersionsActionComponent</string></field>
 					</object>
 				</object-param>
 				<object-param>
-					<name>AddFolder</name>
-					<object type="org.exoplatform.webui.ext.UIExtension">
-						<field name="type"><string>org.exoplatform.ecm.dms.UIActionBar</string></field>
-						<field name="name"><string>AddFolder</string></field>
-						<field name="component"><string>org.exoplatform.ecm.webui.component.explorer.control.action.AddFolderActionComponent</string></field>
-					</object>
+				  <name>CheckIn</name>
+				  <object type="org.exoplatform.webui.ext.UIExtension">
+				    <field name="type"><string>org.exoplatform.ecm.dms.UIActionBar</string></field>
+				    <field name="rank"><int>80</int></field>
+				    <field name="name"><string>CheckIn</string></field>
+				    <field name="component"><string>org.exoplatform.ecm.webui.component.explorer.rightclick.manager.CheckInManageComponent</string></field>
+				  </object>
 				</object-param>
 				<object-param>
-					<name>AddCategory</name>
-					<object type="org.exoplatform.webui.ext.UIExtension">
-						<field name="type"><string>org.exoplatform.ecm.dms.UIActionBar</string></field>
-						<field name="name"><string>AddCategory</string></field>
-						<field name="component"><string>org.exoplatform.ecm.webui.component.explorer.control.action.AddCategoryActionComponent</string></field>
-					</object>
-				</object-param>
-				<object-param>
-					<name>AddDocument</name>
-					<object type="org.exoplatform.webui.ext.UIExtension">
-						<field name="type"><string>org.exoplatform.ecm.dms.UIActionBar</string></field>
-						<field name="name"><string>AddDocument</string></field>
-						<field name="component"><string>org.exoplatform.ecm.webui.component.explorer.control.action.AddDocumentActionComponent</string></field>
-					</object>
-				</object-param>
-				<object-param>
-					<name>EditDocument</name>
-					<object type="org.exoplatform.webui.ext.UIExtension">
+				  <name>CheckOut</name>
+				  <object type="org.exoplatform.webui.ext.UIExtension">
+				    <field name="type"><string>org.exoplatform.ecm.dms.UIActionBar</string></field>
+				    <field name="rank"><int>80</int></field>
+				    <field name="name"><string>CheckOut</string></field>
+				    <field name="component"><string>org.exoplatform.ecm.webui.component.explorer.rightclick.manager.CheckOutManageComponent</string></field>
+                </object>
+                </object-param>
+                <object-param>
+                    <name>AddFolder</name>
+                    <object type="org.exoplatform.webui.ext.UIExtension">
+                        <field name="type">
+                            <string>org.exoplatform.ecm.dms.UIActionBar</string>
+                        </field>
+                        <field name="name">
+                            <string>AddFolder</string>
+                        </field>
+                        <field name="component">
+                            <string>
+                                org.exoplatform.ecm.webui.component.explorer.control.action.AddFolderActionComponent
+                            </string>
+                        </field>
+                    </object>
+                </object-param>
+                <object-param>
+                    <name>AddCategory</name>
+                    <object type="org.exoplatform.webui.ext.UIExtension">
+                        <field name="type">
+                            <string>org.exoplatform.ecm.dms.UIActionBar</string>
+                        </field>
+                        <field name="name">
+                            <string>AddCategory</string>
+                        </field>
+                        <field name="component">
+                            <string>
+                                org.exoplatform.ecm.webui.component.explorer.control.action.AddCategoryActionComponent
+                            </string>
+                        </field>
+                    </object>
+                </object-param>
+                <object-param>
+                    <name>AddDocument</name>
+                    <object type="org.exoplatform.webui.ext.UIExtension">
+                        <field name="type">
+                            <string>org.exoplatform.ecm.dms.UIActionBar</string>
+                        </field>
+                        <field name="name">
+                            <string>AddDocument</string>
+                        </field>
+                        <field name="component">
+                            <string>
+                                org.exoplatform.ecm.webui.component.explorer.control.action.AddDocumentActionComponent
+                            </string>
+                        </field>
+                    </object>
+                </object-param>
+                <object-param>
+                    <name>EditDocument</name>
+                    <object type="org.exoplatform.webui.ext.UIExtension">
 						<field name="type"><string>org.exoplatform.ecm.dms.UIActionBar</string></field>
 						<field name="name"><string>EditDocument</string></field>
+            <field name="rank"><int>100</int></field>
 						<field name="component"><string>org.exoplatform.ecm.webui.component.explorer.control.action.EditDocumentActionComponent</string></field>
-					</object>
-				</object-param>					
-				<object-param>
-					<name>Upload</name>
-					<object type="org.exoplatform.webui.ext.UIExtension">
-						<field name="type"><string>org.exoplatform.ecm.dms.UIActionBar</string></field>
-						<field name="name"><string>Upload</string></field>
-						<field name="component"><string>org.exoplatform.ecm.webui.component.explorer.control.action.UploadActionComponent</string></field>
-					</object>
-				</object-param>
-				<object-param>
-					<name>AddSymLink</name>
-					<object type="org.exoplatform.webui.ext.UIExtension">
-						<field name="type"><string>org.exoplatform.ecm.dms.UIActionBar</string></field>
-						<field name="name"><string>AddSymLink</string></field>
-						<field name="component"><string>org.exoplatform.ecm.webui.component.explorer.control.action.AddSymLinkActionComponent</string></field>
-					</object>
-				</object-param>
-				<object-param>
-					<name>AddLocalizationLink</name>
-					<object type="org.exoplatform.webui.ext.UIExtension">
-						<field name="type"><string>org.exoplatform.ecm.dms.UIActionBar</string></field>
-						<field name="name"><string>AddLocalizationLink</string></field>
-						<field name="component"><string>org.exoplatform.ecm.webui.component.explorer.control.action.AddLocalizationLinkActionComponent</string></field>
-					</object>
-				</object-param>
-				<object-param>
-					<name>ViewMetadatas</name>
-					<object type="org.exoplatform.webui.ext.UIExtension">
+                    </object>
+                </object-param>
+                <object-param>
+                    <name>Upload</name>
+                    <object type="org.exoplatform.webui.ext.UIExtension">
+                        <field name="type">
+                            <string>org.exoplatform.ecm.dms.UIActionBar</string>
+                        </field>
+                        <field name="name">
+                            <string>Upload</string>
+                        </field>
+                        <field name="component">
+                            <string>org.exoplatform.ecm.webui.component.explorer.control.action.UploadActionComponent
+                            </string>
+                        </field>
+                    </object>
+                </object-param>
+                <object-param>
+                    <name>AddSymLink</name>
+                    <object type="org.exoplatform.webui.ext.UIExtension">
+                        <field name="type">
+                            <string>org.exoplatform.ecm.dms.UIActionBar</string>
+                        </field>
+                        <field name="name">
+                            <string>AddSymLink</string>
+                        </field>
+                        <field name="component">
+                            <string>
+                                org.exoplatform.ecm.webui.component.explorer.control.action.AddSymLinkActionComponent
+                            </string>
+                        </field>
+                    </object>
+                </object-param>
+                <object-param>
+                    <name>AddLocalizationLink</name>
+                    <object type="org.exoplatform.webui.ext.UIExtension">
+                        <field name="type">
+                            <string>org.exoplatform.ecm.dms.UIActionBar</string>
+                        </field>
+                        <field name="name">
+                            <string>AddLocalizationLink</string>
+                        </field>
+                        <field name="component">
+                            <string>
+                                org.exoplatform.ecm.webui.component.explorer.control.action.AddLocalizationLinkActionComponent
+                            </string>
+                        </field>
+                    </object>
+                </object-param>
+                <object-param>
+                    <name>ViewMetadatas</name>
+                    <object type="org.exoplatform.webui.ext.UIExtension">
 						<field name="type"><string>org.exoplatform.ecm.dms.UIActionBar</string></field>
 						<field name="name"><string>ViewMetadatas</string></field>
+            <field name="rank"><int>90</int></field>
 						<field name="component"><string>org.exoplatform.ecm.webui.component.explorer.control.action.ViewMetadatasActionComponent</string></field>
-					</object>
-				</object-param>
-				<object-param>
-					<name>OverloadThumbnail</name>
-					<object type="org.exoplatform.webui.ext.UIExtension">
-						<field name="type"><string>org.exoplatform.ecm.dms.UIActionBar</string></field>
-						<field name="name"><string>OverloadThumbnail</string></field>
-						<field name="component"><string>org.exoplatform.ecm.webui.component.explorer.control.action.OverloadThumbnailActionComponent</string></field>
-					</object>
-				</object-param>
-				<object-param>
-					<name>ManageHidden</name>
-					<object type="org.exoplatform.webui.ext.UIExtension">
-						<field name="type"><string>org.exoplatform.ecm.dms.UIActionBar</string></field>
-						<field name="name"><string>ManageHidden</string></field>
-						<field name="component"><string>org.exoplatform.ecm.webui.component.explorer.control.action.ManageHiddenActionComponent</string></field>
-					</object>
-				</object-param>
-				<object-param>
-					<name>ViewPermissions</name>
-					<object type="org.exoplatform.webui.ext.UIExtension">
+                    </object>
+                </object-param>
+                <object-param>
+                    <name>OverloadThumbnail</name>
+                    <object type="org.exoplatform.webui.ext.UIExtension">
+                        <field name="type">
+                            <string>org.exoplatform.ecm.dms.UIActionBar</string>
+                        </field>
+                        <field name="name">
+                            <string>OverloadThumbnail</string>
+                        </field>
+                        <field name="component">
+                            <string>
+                                org.exoplatform.ecm.webui.component.explorer.control.action.OverloadThumbnailActionComponent
+                            </string>
+                        </field>
+                    </object>
+                </object-param>
+                <object-param>
+                    <name>ManageHidden</name>
+                    <object type="org.exoplatform.webui.ext.UIExtension">
+                        <field name="type">
+                            <string>org.exoplatform.ecm.dms.UIActionBar</string>
+                        </field>
+                        <field name="name">
+                            <string>ManageHidden</string>
+                        </field>
+                        <field name="component">
+                            <string>
+                                org.exoplatform.ecm.webui.component.explorer.control.action.ManageHiddenActionComponent
+                            </string>
+                        </field>
+                    </object>
+                </object-param>
+                <object-param>
+                    <name>ViewPermissions</name>
+                    <object type="org.exoplatform.webui.ext.UIExtension">
 						<field name="type"><string>org.exoplatform.ecm.dms.UIActionBar</string></field>
 						<field name="name"><string>ViewPermissions</string></field>
+         			   <field name="rank"><int>60</int></field>
 						<field name="component"><string>org.exoplatform.ecm.webui.component.explorer.control.action.ViewPermissionsActionComponent</string></field>
-					</object>
-				</object-param>
-				<object-param>
-					<name>ViewProperties</name>
-					<object type="org.exoplatform.webui.ext.UIExtension">
-						<field name="type"><string>org.exoplatform.ecm.dms.UIActionBar</string></field>
-						<field name="name"><string>ViewProperties</string></field>
-						<field name="component"><string>org.exoplatform.ecm.webui.component.explorer.control.action.ViewPropertiesActionComponent</string></field>
-					</object>
-				</object-param>
-				<object-param>
-					<name>ManageActions</name>
-					<object type="org.exoplatform.webui.ext.UIExtension">
-						<field name="type"><string>org.exoplatform.ecm.dms.UIActionBar</string></field>
-						<field name="name"><string>ManageActions</string></field>
-						<field name="component"><string>org.exoplatform.ecm.webui.component.explorer.control.action.ManageActionsActionComponent</string></field>
-					</object>
-				</object-param>					
-				<object-param>
-					<name>ExportNode</name>
-					<object type="org.exoplatform.webui.ext.UIExtension">
-						<field name="type"><string>org.exoplatform.ecm.dms.UIActionBar</string></field>
-						<field name="name"><string>ExportNode</string></field>
-						<field name="component"><string>org.exoplatform.ecm.webui.component.explorer.control.action.ExportNodeActionComponent</string></field>
-						<!-- field name="extendedFilters">
-							<collection type="java.util.ArrayList">
-								<value>
-									<object type="org.exoplatform.webui.ext.filter.impl.UserACLFilter">
-										<field name="permissions">
-											<collection type="java.util.ArrayList">
-												<value>
-													<string>manager:/platform/administrators</string>
-												</value>
-											</collection>
-										</field>
-									</object>
-								</value>
-							</collection>
-						</field-->
-					</object>
-				</object-param>					
-				<object-param>
-					<name>ImportNode</name>
-					<object type="org.exoplatform.webui.ext.UIExtension">
-						<field name="type"><string>org.exoplatform.ecm.dms.UIActionBar</string></field>
-						<field name="name"><string>ImportNode</string></field>
-						<field name="component"><string>org.exoplatform.ecm.webui.component.explorer.control.action.ImportNodeActionComponent</string></field>
-						<!-- field name="extendedFilters">
-							<collection type="java.util.ArrayList">
-								<value>
-									<object type="org.exoplatform.webui.ext.filter.impl.UserACLFilter">
-										<field name="permissions">
-											<collection type="java.util.ArrayList">
-												<value>
-													<string>manager:/platform/administrators</string>
-												</value>
-											</collection>
-										</field>
-									</object>
-								</value>
-							</collection>
-						</field-->
-					</object>
-				</object-param>					
-				<object-param>
-					<name>ShowJCRStructure</name>
-					<object type="org.exoplatform.webui.ext.UIExtension">
-						<field name="type"><string>org.exoplatform.ecm.dms.UIActionBar</string></field>
-						<field name="name"><string>ShowJCRStructure</string></field>
-						<field name="component"><string>org.exoplatform.ecm.webui.component.explorer.control.action.ShowJCRStructureActionComponent</string></field>
-					</object>
-				</object-param>					
-				<object-param>
-					<name>Comment</name>
-					<object type="org.exoplatform.webui.ext.UIExtension">
+                    </object>
+                </object-param>
+                <object-param>
+                    <name>ViewProperties</name>
+                    <object type="org.exoplatform.webui.ext.UIExtension">
+                        <field name="type">
+                            <string>org.exoplatform.ecm.dms.UIActionBar</string>
+                        </field>
+                        <field name="name">
+                            <string>ViewProperties</string>
+                        </field>
+                        <field name="component">
+                            <string>
+                                org.exoplatform.ecm.webui.component.explorer.control.action.ViewPropertiesActionComponent
+                            </string>
+                        </field>
+                    </object>
+                </object-param>
+                <object-param>
+                    <name>ManageActions</name>
+                    <object type="org.exoplatform.webui.ext.UIExtension">
+                        <field name="type">
+                            <string>org.exoplatform.ecm.dms.UIActionBar</string>
+                        </field>
+                        <field name="name">
+                            <string>ManageActions</string>
+                        </field>
+                        <field name="component">
+                            <string>
+                                org.exoplatform.ecm.webui.component.explorer.control.action.ManageActionsActionComponent
+                            </string>
+                        </field>
+                    </object>
+                </object-param>
+                <object-param>
+                    <name>ExportNode</name>
+                    <object type="org.exoplatform.webui.ext.UIExtension">
+                        <field name="type">
+                            <string>org.exoplatform.ecm.dms.UIActionBar</string>
+                        </field>
+                        <field name="name">
+                            <string>ExportNode</string>
+                        </field>
+                        <field name="component">
+                            <string>
+                                org.exoplatform.ecm.webui.component.explorer.control.action.ExportNodeActionComponent
+                            </string>
+                        </field>
+                        <!-- field name="extendedFilters">
+                            <collection type="java.util.ArrayList">
+                                <value>
+                                    <object type="org.exoplatform.webui.ext.filter.impl.UserACLFilter">
+                                        <field name="permissions">
+                                            <collection type="java.util.ArrayList">
+                                                <value>
+                                                    <string>manager:/platform/administrators</string>
+                                                </value>
+                                            </collection>
+                                        </field>
+                                    </object>
+                                </value>
+                            </collection>
+                        </field-->
+                    </object>
+                </object-param>
+                <object-param>
+                    <name>ImportNode</name>
+                    <object type="org.exoplatform.webui.ext.UIExtension">
+                        <field name="type">
+                            <string>org.exoplatform.ecm.dms.UIActionBar</string>
+                        </field>
+                        <field name="name">
+                            <string>ImportNode</string>
+                        </field>
+                        <field name="component">
+                            <string>
+                                org.exoplatform.ecm.webui.component.explorer.control.action.ImportNodeActionComponent
+                            </string>
+                        </field>
+                        <!-- field name="extendedFilters">
+                            <collection type="java.util.ArrayList">
+                                <value>
+                                    <object type="org.exoplatform.webui.ext.filter.impl.UserACLFilter">
+                                        <field name="permissions">
+                                            <collection type="java.util.ArrayList">
+                                                <value>
+                                                    <string>manager:/platform/administrators</string>
+                                                </value>
+                                            </collection>
+                                        </field>
+                                    </object>
+                                </value>
+                            </collection>
+                        </field-->
+                    </object>
+                </object-param>
+                <object-param>
+                    <name>ShowJCRStructure</name>
+                    <object type="org.exoplatform.webui.ext.UIExtension">
+                        <field name="type">
+                            <string>org.exoplatform.ecm.dms.UIActionBar</string>
+                        </field>
+                        <field name="name">
+                            <string>ShowJCRStructure</string>
+                        </field>
+                        <field name="component">
+                            <string>
+                                org.exoplatform.ecm.webui.component.explorer.control.action.ShowJCRStructureActionComponent
+                            </string>
+                        </field>
+                    </object>
+                </object-param>
+                <object-param>
+                    <name>Comment</name>
+                    <object type="org.exoplatform.webui.ext.UIExtension">
 						<field name="type"><string>org.exoplatform.ecm.dms.UIActionBar</string></field>
 						<field name="name"><string>Comment</string></field>
-						<field name="component"><string>org.exoplatform.ecm.webui.component.explorer.control.action.CommentActionComponent</string></field>
-					</object>
-				</object-param>					
-				<object-param>
-					<name>Vote</name>
-					<object type="org.exoplatform.webui.ext.UIExtension">
+           			 <field name="rank"><int>20</int></field>
+           			 <field name="component"><string>org.exoplatform.ecm.webui.component.explorer.control.action.CommentActionComponent</string></field>
+                    </object>
+                </object-param>
+                <object-param>
+                    <name>Vote</name>
+                    <object type="org.exoplatform.webui.ext.UIExtension">
 						<field name="type"><string>org.exoplatform.ecm.dms.UIActionBar</string></field>
 						<field name="name"><string>Vote</string></field>
-						<field name="component"><string>org.exoplatform.ecm.webui.component.explorer.control.action.VoteActionComponent</string></field>
-					</object>
-				</object-param>
-				<object-param>
-					<name>ManageCategories</name>
-					<object type="org.exoplatform.webui.ext.UIExtension">
-						<field name="type"><string>org.exoplatform.ecm.dms.UIActionBar</string></field>
-						<field name="name"><string>ManageCategories</string></field>
-						<field name="component"><string>org.exoplatform.ecm.webui.component.explorer.control.action.ManageCategoriesActionComponent</string></field>
-					</object>
-				</object-param>					
-				<object-param>
-					<name>ManageRelations</name>
-					<object type="org.exoplatform.webui.ext.UIExtension">
-						<field name="type"><string>org.exoplatform.ecm.dms.UIActionBar</string></field>
-						<field name="name"><string>ManageRelations</string></field>
-						<field name="component"><string>org.exoplatform.ecm.webui.component.explorer.control.action.ManageRelationsActionComponent</string></field>
-					</object>
-				</object-param>
-				<object-param>
-					<name>TaggingDocument</name>
-					<object type="org.exoplatform.webui.ext.UIExtension">
+           				<field name="rank"><int>30</int></field>
+            			<field name="component"><string>org.exoplatform.ecm.webui.component.explorer.control.action.VoteActionComponent</string></field>
+                    </object>
+                </object-param>
+                <object-param>
+                    <name>ManageCategories</name>
+                    <object type="org.exoplatform.webui.ext.UIExtension">
+                        <field name="type">
+                            <string>org.exoplatform.ecm.dms.UIActionBar</string>
+                        </field>
+                        <field name="name">
+                            <string>ManageCategories</string>
+                        </field>
+                        <field name="component">
+                            <string>
+                                org.exoplatform.ecm.webui.component.explorer.control.action.ManageCategoriesActionComponent
+                            </string>
+                        </field>
+                    </object>
+                </object-param>
+                <object-param>
+                    <name>ManageRelations</name>
+                    <object type="org.exoplatform.webui.ext.UIExtension">
+                        <field name="type">
+                            <string>org.exoplatform.ecm.dms.UIActionBar</string>
+                        </field>
+                        <field name="name">
+                            <string>ManageRelations</string>
+                        </field>
+                        <field name="component">
+                            <string>
+                                org.exoplatform.ecm.webui.component.explorer.control.action.ManageRelationsActionComponent
+                            </string>
+                        </field>
+                    </object>
+                </object-param>
+                <object-param>
+                    <name>TaggingDocument</name>
+                    <object type="org.exoplatform.webui.ext.UIExtension">
 						<field name="type"><string>org.exoplatform.ecm.dms.UIActionBar</string></field>
 						<field name="name"><string>TaggingDocument</string></field>
+          			    <field name="rank"><int>40</int></field>
 						<field name="component"><string>org.exoplatform.ecm.webui.component.explorer.control.action.TaggingDocumentActionComponent</string></field>
-					</object>
-				</object-param>					
-			</init-params>
-		</component-plugin>
-		<component-plugin>
-			<name>Add Managers</name>
-			<set-method>registerUIExtensionPlugin</set-method>
-			<type>org.exoplatform.webui.ext.UIExtensionPlugin</type>
-			<init-params>							
+                    </object>
+                </object-param>
 				<object-param>
-					<name>UITemplatesManager</name>
-					<object type="org.exoplatform.webui.ext.UIExtension">
-						<field name="type"><string>org.exoplatform.ecm.dms.UIECMAdminControlPanel</string></field>
-						<field name="rank"><int>110</int></field>
-						<field name="name"><string>UITemplatesManager</string></field>
-						<field name="category"><string>Templates</string></field>
-						<field name="component"><string>org.exoplatform.ecm.webui.component.admin.manager.UITemplatesManagerComponent</string></field>
-					</object>
+				  <name>OpenDocument</name>
+				  <object type="org.exoplatform.webui.ext.UIExtension">
+				    <field name="type"><string>org.exoplatform.ecm.dms.UIActionBar</string></field>
+				    <field name="name"><string>OpenDocument</string></field>
+				    <field name="rank"><int>10</int></field>
+				    <field name="component"><string>org.exoplatform.ecm.webui.component.explorer.rightclick.manager.OpenDocumentManageComponent</string></field>
+				  </object>
 				</object-param>
-				<object-param>
-					<name>UICLVTemplatesManager</name>
-					<object type="org.exoplatform.webui.ext.UIExtension">
-						<field name="type"><string>org.exoplatform.ecm.dms.UIECMAdminControlPanel</string></field>
-						<field name="rank"><int>120</int></field>
-						<field name="name"><string>UICLVTemplatesManager</string></field>
-						<field name="category"><string>Templates</string></field>
-						<field name="component"><string>org.exoplatform.ecm.webui.component.admin.manager.UICLVTemplatesManagerComponent</string></field>
-					</object>
-				</object-param>				
-				<object-param>
-					<name>UIMetadataManager</name>
-					<object type="org.exoplatform.webui.ext.UIExtension">
-						<field name="type"><string>org.exoplatform.ecm.dms.UIECMAdminControlPanel</string></field>
-						<field name="rank"><int>130</int></field>
-						<field name="name"><string>UIMetadataManager</string></field>
-						<field name="category"><string>Templates</string></field>
-						<field name="component"><string>org.exoplatform.ecm.webui.component.admin.manager.UIMetadataManagerComponent</string></field>
-					</object>
-				</object-param>
-				
-				
-				
-				<object-param>
-					<name>UIDriveManager</name>
-					<object type="org.exoplatform.webui.ext.UIExtension">
-						<field name="type"><string>org.exoplatform.ecm.dms.UIECMAdminControlPanel</string></field>
-						<field name="rank"><int>150</int></field>
-						<field name="name"><string>UIDriveManager</string></field>
-						<field name="category"><string>Explorer</string></field>
-						<field name="component"><string>org.exoplatform.ecm.webui.component.admin.manager.UIDriveManagerComponent</string></field>
-					</object>
-				</object-param>				
-				<object-param>
-					<name>UIViewManager</name>
-					<object type="org.exoplatform.webui.ext.UIExtension">
-						<field name="type"><string>org.exoplatform.ecm.dms.UIECMAdminControlPanel</string></field>
-						<field name="rank"><int>140</int></field>
-						<field name="name"><string>UIViewManager</string></field>
-						<field name="category"><string>Explorer</string></field>
-						<field name="component"><string>org.exoplatform.ecm.webui.component.admin.manager.UIViewManagerComponent</string></field>
-					</object>
-				</object-param>
-				<object-param>
-					<name>UIFolksonomyManager</name>
-					<object type="org.exoplatform.webui.ext.UIExtension">
-						<field name="type"><string>org.exoplatform.ecm.dms.UIECMAdminControlPanel</string></field>
-						<field name="rank"><int>160</int></field>
-						<field name="name"><string>UIFolksonomyManager</string></field>
-						<field name="category"><string>Explorer</string></field>
-						<field name="component"><string>org.exoplatform.ecm.webui.component.admin.manager.UIFolksonomyManagerComponent</string></field>
-					</object>
-				</object-param>
-				
-				
-					
-				<object-param>
-					<name>UINamespaceManager</name>
-					<object type="org.exoplatform.webui.ext.UIExtension">
-						<field name="type"><string>org.exoplatform.ecm.dms.UIECMAdminControlPanel</string></field>
-						<field name="rank"><int>170</int></field>
-						<field name="name"><string>UINamespaceManager</string></field>
-						<field name="category"><string>Repository</string></field>
-						<field name="component"><string>org.exoplatform.ecm.webui.component.admin.manager.UINamespaceManagerComponent</string></field>
-					</object>
-				</object-param>
-				<object-param>
-					<name>UINodeTypeManager</name>
-					<object type="org.exoplatform.webui.ext.UIExtension">
-						<field name="type"><string>org.exoplatform.ecm.dms.UIECMAdminControlPanel</string></field>
-						<field name="rank"><int>180</int></field>
-						<field name="name"><string>UINodeTypeManager</string></field>
-						<field name="category"><string>Repository</string></field>
-						<field name="component"><string>org.exoplatform.ecm.webui.component.admin.manager.UINodeTypeManagerComponent</string></field>
-					</object>
-				</object-param>
-				<object-param>
-					<name>UIUnLockManager</name>
-					<object type="org.exoplatform.webui.ext.UIExtension">
-						<field name="type"><string>org.exoplatform.ecm.dms.UIECMAdminControlPanel</string></field>
-						<field name="rank"><int>190</int></field>
-						<field name="name"><string>UIUnLockManager</string></field>
-						<field name="category"><string>Repository</string></field>
-						<field name="component"><string>org.exoplatform.ecm.webui.component.admin.manager.UIUnLockManagerComponent</string></field>
-						<!-- field name="extendedFilters">
-							<collection type="java.util.ArrayList">
-								<value>
-									<object type="org.exoplatform.webui.ext.filter.impl.UserACLFilter">
-										<field name="permissions">
-											<collection type="java.util.ArrayList">
-												<value>
-													<string>manager:/platform/administrators</string>
-												</value>
-											</collection>
-										</field>
-									</object>
-								</value>
-							</collection>
-						</field-->
-					</object>
-				</object-param>
-				
-				<object-param>
-					<name>UITaxonomyManagerTrees</name>
-					<object type="org.exoplatform.webui.ext.UIExtension">
-						<field name="type"><string>org.exoplatform.ecm.dms.UIECMAdminControlPanel</string></field>
-						<field name="rank"><int>200</int></field>
-						<field name="name"><string>UITaxonomyManagerTrees</string></field>
-						<field name="category"><string>Advanced</string></field>
-						<field name="component"><string>org.exoplatform.ecm.webui.component.admin.manager.UITaxonomyManagerTreesComponent</string></field>
-					</object>
-				</object-param>	
-				<object-param>
-					<name>UIQueriesManager</name>
-					<object type="org.exoplatform.webui.ext.UIExtension">
-						<field name="type"><string>org.exoplatform.ecm.dms.UIECMAdminControlPanel</string></field>
-						<field name="rank"><int>210</int></field>
-						<field name="name"><string>UIQueriesManager</string></field>
-						<field name="category"><string>Advanced</string></field>
-						<field name="component"><string>org.exoplatform.ecm.webui.component.admin.manager.UIQueriesManagerComponent</string></field>
-						<!-- field name="extendedFilters">
-							<collection type="java.util.ArrayList">
-								<value>
-									<object type="org.exoplatform.webui.ext.filter.impl.UserACLFilter">
-										<field name="permissions">
-											<collection type="java.util.ArrayList">
-												<value>
-													<string>manager:/platform/administrators</string>
-												</value>
-											</collection>
-										</field>
-									</object>
-								</value>
-							</collection>
-						</field-->
-					</object>
-				</object-param>
-				<object-param>
-					<name>UIScriptManager</name>
-					<object type="org.exoplatform.webui.ext.UIExtension">
-						<field name="type"><string>org.exoplatform.ecm.dms.UIECMAdminControlPanel</string></field>
-						<field name="rank"><int>220</int></field>
-						<field name="name"><string>UIScriptManager</string></field>
-						<field name="category"><string>Advanced</string></field>
-						<field name="component"><string>org.exoplatform.ecm.webui.component.admin.manager.UIScriptManagerComponent</string></field>
-						<!-- field name="extendedFilters">
-							<collection type="java.util.ArrayList">
-								<value>
-									<object type="org.exoplatform.webui.ext.filter.impl.UserACLFilter">
-										<field name="permissions">
-											<collection type="java.util.ArrayList">
-												<value>
-													<string>manager:/platform/administrators</string>
-												</value>
-											</collection>
-										</field>
-									</object>
-								</value>
-							</collection>
-						</field-->
-					</object>
-				</object-param>
-				<object-param>
-					<name>UIActionManager</name>
-					<object type="org.exoplatform.webui.ext.UIExtension">
-						<field name="type"><string>org.exoplatform.ecm.dms.UIECMAdminControlPanel</string></field>
-						<field name="rank"><int>230</int></field>
-						<field name="name"><string>UIActionManager</string></field>
-						<field name="category"><string>Advanced</string></field>
-						<field name="component"><string>org.exoplatform.ecm.webui.component.admin.manager.UIActionManagerComponent</string></field>
-						<!-- field name="extendedFilters">
-							<collection type="java.util.ArrayList">
-								<value>
-									<object type="org.exoplatform.webui.ext.filter.impl.UserACLFilter">
-										<field name="permissions">
-											<collection type="java.util.ArrayList">
-												<value>
-													<string>manager:/platform/administrators</string>
-												</value>
-											</collection>
-										</field>
-									</object>
-								</value>
-							</collection>
-						</field-->
-					</object>
-				</object-param>				
-			</init-params>
-		</component-plugin>
-		<component-plugin>
-			<name>Add RightClick Action</name>
-			<set-method>registerUIExtensionPlugin</set-method>
-			<type>org.exoplatform.webui.ext.UIExtensionPlugin</type>
-			<init-params>
 
-        <object-param>
-          <name>EmptyTrash</name>
-          <object type="org.exoplatform.webui.ext.UIExtension">
-            <field name="type"><string>org.exoplatform.ecm.dms.UIWorkingArea</string></field>
-            <field name="rank"><int>104</int></field>
-            <field name="name"><string>EmptyTrash</string></field>
-            <field name="category"><string>ItemContextMenu_SingleSelection</string></field>
-            <field name="component"><string>org.exoplatform.ecm.webui.component.explorer.rightclick.manager.EmptyTrashManageComponent</string></field>
-          </object>
-        </object-param>
+            </init-params>
+        </component-plugin>
+        <component-plugin>
+            <name>Add Managers</name>
+            <set-method>registerUIExtensionPlugin</set-method>
+            <type>org.exoplatform.webui.ext.UIExtensionPlugin</type>
+            <init-params>
+                <object-param>
+                    <name>UITemplatesManager</name>
+                    <object type="org.exoplatform.webui.ext.UIExtension">
+                        <field name="type">
+                            <string>org.exoplatform.ecm.dms.UIECMAdminControlPanel</string>
+                        </field>
+                        <field name="rank">
+                            <int>110</int>
+                        </field>
+                        <field name="name">
+                            <string>UITemplatesManager</string>
+                        </field>
+                        <field name="category">
+                            <string>Templates</string>
+                        </field>
+                        <field name="component">
+                            <string>org.exoplatform.ecm.webui.component.admin.manager.UITemplatesManagerComponent
+                            </string>
+                        </field>
+                    </object>
+                </object-param>
+                <object-param>
+                    <name>UICLVTemplatesManager</name>
+                    <object type="org.exoplatform.webui.ext.UIExtension">
+                        <field name="type">
+                            <string>org.exoplatform.ecm.dms.UIECMAdminControlPanel</string>
+                        </field>
+                        <field name="rank">
+                            <int>120</int>
+                        </field>
+                        <field name="name">
+                            <string>UICLVTemplatesManager</string>
+                        </field>
+                        <field name="category">
+                            <string>Templates</string>
+                        </field>
+                        <field name="component">
+                            <string>org.exoplatform.ecm.webui.component.admin.manager.UICLVTemplatesManagerComponent
+                            </string>
+                        </field>
+                    </object>
+                </object-param>
+                <object-param>
+                    <name>UIMetadataManager</name>
+                    <object type="org.exoplatform.webui.ext.UIExtension">
+                        <field name="type">
+                            <string>org.exoplatform.ecm.dms.UIECMAdminControlPanel</string>
+                        </field>
+                        <field name="rank">
+                            <int>130</int>
+                        </field>
+                        <field name="name">
+                            <string>UIMetadataManager</string>
+                        </field>
+                        <field name="category">
+                            <string>Templates</string>
+                        </field>
+                        <field name="component">
+                            <string>org.exoplatform.ecm.webui.component.admin.manager.UIMetadataManagerComponent
+                            </string>
+                        </field>
+                    </object>
+                </object-param>
+                <object-param>
+                    <name>UIDriveManager</name>
+                    <object type="org.exoplatform.webui.ext.UIExtension">
+                        <field name="type">
+                            <string>org.exoplatform.ecm.dms.UIECMAdminControlPanel</string>
+                        </field>
+                        <field name="rank">
+                            <int>150</int>
+                        </field>
+                        <field name="name">
+                            <string>UIDriveManager</string>
+                        </field>
+                        <field name="category">
+                            <string>Explorer</string>
+                        </field>
+                        <field name="component">
+                            <string>org.exoplatform.ecm.webui.component.admin.manager.UIDriveManagerComponent</string>
+                        </field>
+                    </object>
+                </object-param>
+                <object-param>
+                    <name>UIViewManager</name>
+                    <object type="org.exoplatform.webui.ext.UIExtension">
+                        <field name="type">
+                            <string>org.exoplatform.ecm.dms.UIECMAdminControlPanel</string>
+                        </field>
+                        <field name="rank">
+                            <int>140</int>
+                        </field>
+                        <field name="name">
+                            <string>UIViewManager</string>
+                        </field>
+                        <field name="category">
+                            <string>Explorer</string>
+                        </field>
+                        <field name="component">
+                            <string>org.exoplatform.ecm.webui.component.admin.manager.UIViewManagerComponent</string>
+                        </field>
+                    </object>
+                </object-param>
+                <object-param>
+                    <name>UIFolksonomyManager</name>
+                    <object type="org.exoplatform.webui.ext.UIExtension">
+                        <field name="type">
+                            <string>org.exoplatform.ecm.dms.UIECMAdminControlPanel</string>
+                        </field>
+                        <field name="rank">
+                            <int>160</int>
+                        </field>
+                        <field name="name">
+                            <string>UIFolksonomyManager</string>
+                        </field>
+                        <field name="category">
+                            <string>Explorer</string>
+                        </field>
+                        <field name="component">
+                            <string>org.exoplatform.ecm.webui.component.admin.manager.UIFolksonomyManagerComponent
+                            </string>
+                        </field>
+                    </object>
+                </object-param>
 
-        <object-param>
-          <name>RemoveFromFavourite</name>
-          <object type="org.exoplatform.webui.ext.UIExtension">
-            <field name="type"><string>org.exoplatform.ecm.dms.UIWorkingArea</string></field>
-            <field name="rank"><int>105</int></field>
-            <field name="name"><string>RemoveFromFavourite</string></field>
-            <field name="category"><string>ItemContextMenu</string></field>
-            <field name="component"><string>org.exoplatform.ecm.webui.component.explorer.rightclick.manager.RemoveFavouriteManageComponent</string></field>
-          </object>
-        </object-param>
-			
-				<object-param>
-					<name>AddToFavourite</name>
-					<object type="org.exoplatform.webui.ext.UIExtension">
+                <object-param>
+                    <name>UINamespaceManager</name>
+                    <object type="org.exoplatform.webui.ext.UIExtension">
+                        <field name="type">
+                            <string>org.exoplatform.ecm.dms.UIECMAdminControlPanel</string>
+                        </field>
+                        <field name="rank">
+                            <int>170</int>
+                        </field>
+                        <field name="name">
+                            <string>UINamespaceManager</string>
+                        </field>
+                        <field name="category">
+                            <string>Repository</string>
+                        </field>
+                        <field name="component">
+                            <string>org.exoplatform.ecm.webui.component.admin.manager.UINamespaceManagerComponent
+                            </string>
+                        </field>
+                    </object>
+                </object-param>
+                <object-param>
+                    <name>UINodeTypeManager</name>
+                    <object type="org.exoplatform.webui.ext.UIExtension">
+                        <field name="type">
+                            <string>org.exoplatform.ecm.dms.UIECMAdminControlPanel</string>
+                        </field>
+                        <field name="rank">
+                            <int>180</int>
+                        </field>
+                        <field name="name">
+                            <string>UINodeTypeManager</string>
+                        </field>
+                        <field name="category">
+                            <string>Repository</string>
+                        </field>
+                        <field name="component">
+                            <string>org.exoplatform.ecm.webui.component.admin.manager.UINodeTypeManagerComponent
+                            </string>
+                        </field>
+                    </object>
+                </object-param>
+                <object-param>
+                    <name>UIUnLockManager</name>
+                    <object type="org.exoplatform.webui.ext.UIExtension">
+                        <field name="type">
+                            <string>org.exoplatform.ecm.dms.UIECMAdminControlPanel</string>
+                        </field>
+                        <field name="rank">
+                            <int>190</int>
+                        </field>
+                        <field name="name">
+                            <string>UIUnLockManager</string>
+                        </field>
+                        <field name="category">
+                            <string>Repository</string>
+                        </field>
+                        <field name="component">
+                            <string>org.exoplatform.ecm.webui.component.admin.manager.UIUnLockManagerComponent</string>
+                        </field>
+                        <!-- field name="extendedFilters">
+                            <collection type="java.util.ArrayList">
+                                <value>
+                                    <object type="org.exoplatform.webui.ext.filter.impl.UserACLFilter">
+                                        <field name="permissions">
+                                            <collection type="java.util.ArrayList">
+                                                <value>
+                                                    <string>manager:/platform/administrators</string>
+                                                </value>
+                                            </collection>
+                                        </field>
+                                    </object>
+                                </value>
+                            </collection>
+                        </field-->
+                    </object>
+                </object-param>
+
+                <object-param>
+                    <name>UITaxonomyManagerTrees</name>
+                    <object type="org.exoplatform.webui.ext.UIExtension">
+                        <field name="type">
+                            <string>org.exoplatform.ecm.dms.UIECMAdminControlPanel</string>
+                        </field>
+                        <field name="rank">
+                            <int>200</int>
+                        </field>
+                        <field name="name">
+                            <string>UITaxonomyManagerTrees</string>
+                        </field>
+                        <field name="category">
+                            <string>Advanced</string>
+                        </field>
+                        <field name="component">
+                            <string>org.exoplatform.ecm.webui.component.admin.manager.UITaxonomyManagerTreesComponent
+                            </string>
+                        </field>
+                    </object>
+                </object-param>
+                <object-param>
+                    <name>UIQueriesManager</name>
+                    <object type="org.exoplatform.webui.ext.UIExtension">
+                        <field name="type">
+                            <string>org.exoplatform.ecm.dms.UIECMAdminControlPanel</string>
+                        </field>
+                        <field name="rank">
+                            <int>210</int>
+                        </field>
+                        <field name="name">
+                            <string>UIQueriesManager</string>
+                        </field>
+                        <field name="category">
+                            <string>Advanced</string>
+                        </field>
+                        <field name="component">
+                            <string>org.exoplatform.ecm.webui.component.admin.manager.UIQueriesManagerComponent</string>
+                        </field>
+                        <!-- field name="extendedFilters">
+                            <collection type="java.util.ArrayList">
+                                <value>
+                                    <object type="org.exoplatform.webui.ext.filter.impl.UserACLFilter">
+                                        <field name="permissions">
+                                            <collection type="java.util.ArrayList">
+                                                <value>
+                                                    <string>manager:/platform/administrators</string>
+                                                </value>
+                                            </collection>
+                                        </field>
+                                    </object>
+                                </value>
+                            </collection>
+                        </field-->
+                    </object>
+                </object-param>
+                <object-param>
+                    <name>UIScriptManager</name>
+                    <object type="org.exoplatform.webui.ext.UIExtension">
+                        <field name="type">
+                            <string>org.exoplatform.ecm.dms.UIECMAdminControlPanel</string>
+                        </field>
+                        <field name="rank">
+                            <int>220</int>
+                        </field>
+                        <field name="name">
+                            <string>UIScriptManager</string>
+                        </field>
+                        <field name="category">
+                            <string>Advanced</string>
+                        </field>
+                        <field name="component">
+                            <string>org.exoplatform.ecm.webui.component.admin.manager.UIScriptManagerComponent</string>
+                        </field>
+                        <!-- field name="extendedFilters">
+                            <collection type="java.util.ArrayList">
+                                <value>
+                                    <object type="org.exoplatform.webui.ext.filter.impl.UserACLFilter">
+                                        <field name="permissions">
+                                            <collection type="java.util.ArrayList">
+                                                <value>
+                                                    <string>manager:/platform/administrators</string>
+                                                </value>
+                                            </collection>
+                                        </field>
+                                    </object>
+                                </value>
+                            </collection>
+                        </field-->
+                    </object>
+                </object-param>
+                <object-param>
+                    <name>UIActionManager</name>
+                    <object type="org.exoplatform.webui.ext.UIExtension">
+                        <field name="type">
+                            <string>org.exoplatform.ecm.dms.UIECMAdminControlPanel</string>
+                        </field>
+                        <field name="rank">
+                            <int>230</int>
+                        </field>
+                        <field name="name">
+                            <string>UIActionManager</string>
+                        </field>
+                        <field name="category">
+                            <string>Advanced</string>
+                        </field>
+                        <field name="component">
+                            <string>org.exoplatform.ecm.webui.component.admin.manager.UIActionManagerComponent</string>
+                        </field>
+                        <!-- field name="extendedFilters">
+                            <collection type="java.util.ArrayList">
+                                <value>
+                                    <object type="org.exoplatform.webui.ext.filter.impl.UserACLFilter">
+                                        <field name="permissions">
+                                            <collection type="java.util.ArrayList">
+                                                <value>
+                                                    <string>manager:/platform/administrators</string>
+                                                </value>
+                                            </collection>
+                                        </field>
+                                    </object>
+                                </value>
+                            </collection>
+                        </field-->
+                    </object>
+                </object-param>
+            </init-params>
+        </component-plugin>
+        <component-plugin>
+            <name>Add RightClick Action</name>
+            <set-method>registerUIExtensionPlugin</set-method>
+            <type>org.exoplatform.webui.ext.UIExtensionPlugin</type>
+            <init-params>
+
+                <object-param>
+                    <name>EmptyTrash</name>
+                    <object type="org.exoplatform.webui.ext.UIExtension">
+                        <field name="type">
+                            <string>org.exoplatform.ecm.dms.UIWorkingArea</string>
+                        </field>
+                        <field name="rank">
+                            <int>104</int>
+                        </field>
+                        <field name="name">
+                            <string>EmptyTrash</string>
+                        </field>
+                        <field name="category">
+                            <string>ItemContextMenu_SingleSelection</string>
+                        </field>
+                        <field name="component">
+                            <string>
+                                org.exoplatform.ecm.webui.component.explorer.rightclick.manager.EmptyTrashManageComponent
+                            </string>
+                        </field>
+                    </object>
+                </object-param>
+
+                <object-param>
+                    <name>RemoveFromFavourite</name>
+			        <object type="org.exoplatform.webui.ext.UIExtension">
 						<field name="type"><string>org.exoplatform.ecm.dms.UIWorkingArea</string></field>
-						<field name="rank"><int>106</int></field>
+						<field name="rank"><int>98</int></field>
+						<field name="name"><string>RemoveFromFavourite</string></field>
+						<field name="category"><string>ItemContextMenu</string></field>
+						<field name="component"><string>org.exoplatform.ecm.webui.component.explorer.rightclick.manager.RemoveFavouriteManageComponent</string></field>
+                    </object>
+                </object-param>
+
+                <object-param>
+                    <name>AddToFavourite</name>
+                    <object type="org.exoplatform.webui.ext.UIExtension">
+						<field name="type"><string>org.exoplatform.ecm.dms.UIWorkingArea</string></field>
+						<field name="rank"><int>97</int></field>
 						<field name="name"><string>AddToFavourite</string></field>
 						<field name="category"><string>ItemContextMenu</string></field>
 						<field name="component"><string>org.exoplatform.ecm.webui.component.explorer.rightclick.manager.FavouriteManageComponent</string></field>
-					</object>
-				</object-param>
-        <object-param>
-          <name>RestoreFromTrash</name>
-          <object type="org.exoplatform.webui.ext.UIExtension">
-            <field name="type"><string>org.exoplatform.ecm.dms.UIWorkingArea</string></field>
-            <field name="rank"><int>109</int></field>
-            <field name="name"><string>RestoreFromTrash</string></field>
-            <field name="category"><string>ItemContextMenu</string></field>
-            <field name="component"><string>org.exoplatform.ecm.webui.component.explorer.rightclick.manager.RestoreFromTrashManageComponent</string></field>
-          </object>
-        </object-param>
-        <object-param>
-          <name>PlayMedia</name>
-          <object type="org.exoplatform.webui.ext.UIExtension">
-            <field name="type"><string>org.exoplatform.ecm.dms.UIWorkingArea</string></field>
-            <field name="rank"><int>109</int></field>
-            <field name="name"><string>PlayMedia</string></field>
-            <field name="category"><string>MultiItemContextMenu</string></field>
-            <field name="component"><string>org.exoplatform.ecm.webui.component.explorer.rightclick.manager.PlayMediaComponent</string></field>
-          </object>
-        </object-param>
-				
-        <object-param>
-          <name>Copy</name>
-          <object type="org.exoplatform.webui.ext.UIExtension">
-            <field name="type"><string>org.exoplatform.ecm.dms.UIWorkingArea</string></field>
-            <field name="rank"><int>110</int></field>
-            <field name="name"><string>Copy</string></field>
-            <field name="category"><string>ItemContextMenu</string></field>
-            <field name="component"><string>org.exoplatform.ecm.webui.component.explorer.rightclick.manager.CopyManageComponent</string></field>
-          </object>
-        </object-param>
-				<object-param>
-					<name>EditDocument</name>
-					<object type="org.exoplatform.webui.ext.UIExtension">
+                    </object>
+                </object-param>
+                <object-param>
+                    <name>RestoreFromTrash</name>
+                    <object type="org.exoplatform.webui.ext.UIExtension">
+                        <field name="type">
+                            <string>org.exoplatform.ecm.dms.UIWorkingArea</string>
+                        </field>
+                        <field name="rank">
+                            <int>109</int>
+                        </field>
+                        <field name="name">
+                            <string>RestoreFromTrash</string>
+                        </field>
+                        <field name="category">
+                            <string>ItemContextMenu</string>
+                        </field>
+                        <field name="component">
+                            <string>
+                                org.exoplatform.ecm.webui.component.explorer.rightclick.manager.RestoreFromTrashManageComponent
+                            </string>
+                        </field>
+                    </object>
+                </object-param>
+                <object-param>
+                    <name>PlayMedia</name>
+                    <object type="org.exoplatform.webui.ext.UIExtension">
+                        <field name="type">
+                            <string>org.exoplatform.ecm.dms.UIWorkingArea</string>
+                        </field>
+                        <field name="rank">
+                            <int>109</int>
+                        </field>
+                        <field name="name">
+                            <string>PlayMedia</string>
+                        </field>
+                        <field name="category">
+                            <string>MultiItemContextMenu</string>
+                        </field>
+                        <field name="component">
+                            <string>org.exoplatform.ecm.webui.component.explorer.rightclick.manager.PlayMediaComponent
+                            </string>
+                        </field>
+                    </object>
+                </object-param>
+
+                <object-param>
+                    <name>Copy</name>
+                    <object type="org.exoplatform.webui.ext.UIExtension">
 						<field name="type"><string>org.exoplatform.ecm.dms.UIWorkingArea</string></field>
-						<field name="rank"><int>120</int></field>
+						<field name="rank"><int>93</int></field>
+						<field name="name"><string>Copy</string></field>
+						<field name="category"><string>ItemContextMenu</string></field>
+						<field name="component"><string>org.exoplatform.ecm.webui.component.explorer.rightclick.manager.CopyManageComponent</string></field>
+                    </object>
+                </object-param>
+                <object-param>
+                    <name>EditDocument</name>
+                    <object type="org.exoplatform.webui.ext.UIExtension">
+						<field name="type"><string>org.exoplatform.ecm.dms.UIWorkingArea</string></field>
+						<field name="rank"><int>92</int></field>
 						<field name="name"><string>EditDocument</string></field>
 						<field name="category"><string>ItemContextMenu_SingleSelection</string></field>
 						<field name="component"><string>org.exoplatform.ecm.webui.component.explorer.control.action.EditDocumentActionComponent</string></field>
-					</object>
-				</object-param>
-				<object-param>
-					<name>Cut</name>
-					<object type="org.exoplatform.webui.ext.UIExtension">
+                    </object>
+                </object-param>
+                <object-param>
+                    <name>Cut</name>
+                    <object type="org.exoplatform.webui.ext.UIExtension">
 						<field name="type"><string>org.exoplatform.ecm.dms.UIWorkingArea</string></field>
-						<field name="rank"><int>130</int></field>
+						<field name="rank"><int>94</int></field>
 						<field name="name"><string>Cut</string></field>
 						<field name="category"><string>ItemContextMenu</string></field>
 						<field name="component"><string>org.exoplatform.ecm.webui.component.explorer.rightclick.manager.CutManageComponent</string></field>
-					</object>
-				</object-param>
-				<object-param>
-					<name>Delete</name>
-					<object type="org.exoplatform.webui.ext.UIExtension">
+                    </object>
+                </object-param>
+                <object-param>
+                    <name>Delete</name>
+                    <object type="org.exoplatform.webui.ext.UIExtension">
+                        <field name="type">
+                            <string>org.exoplatform.ecm.dms.UIWorkingArea</string>
+                        </field>
+                        <field name="rank">
+                            <int>95</int>
+                        </field>
+                        <field name="name">
+                            <string>Delete</string>
+                        </field>
+                        <field name="category">
+                            <string>ItemContextMenu</string>
+                        </field>
+                        <field name="component">
+                            <string>
+                                org.exoplatform.ecm.webui.component.explorer.rightclick.manager.DeleteManageComponent
+                            </string>
+                        </field>
+                    </object>
+                </object-param>
+              <object-param>
+                <name>Download</name>
+                <object type="org.exoplatform.webui.ext.UIExtension">
+                  <field name="type">
+                    <string>org.exoplatform.ecm.dms.UIWorkingArea</string>
+                  </field>
+                  <field name="rank">
+                    <int>96</int>
+                  </field>
+                  <field name="name">
+                    <string>Download</string>
+                  </field>
+                  <field name="category">
+                    <string>ItemContextMenu</string>
+                  </field>
+                  <field name="component">
+                    <string>
+                      org.exoplatform.ecm.webui.component.explorer.rightclick.manager.DownloadManageComponent
+                    </string>
+                  </field>
+                </object>
+              </object-param>
+                <object-param>
+                    <name>Lock</name>
+                    <object type="org.exoplatform.webui.ext.UIExtension">
 						<field name="type"><string>org.exoplatform.ecm.dms.UIWorkingArea</string></field>
-						<field name="rank"><int>140</int></field>
-						<field name="name"><string>Delete</string></field>
-						<field name="category"><string>ItemContextMenu</string></field>
-						<field name="component"><string>org.exoplatform.ecm.webui.component.explorer.rightclick.manager.DeleteManageComponent</string></field>
-					</object>
-				</object-param>
-				<object-param>
-					<name>Lock</name>
-					<object type="org.exoplatform.webui.ext.UIExtension">
-						<field name="type"><string>org.exoplatform.ecm.dms.UIWorkingArea</string></field>
-						<field name="rank"><int>150</int></field>
+						<field name="rank"><int>100</int></field>
 						<field name="name"><string>Lock</string></field>
 						<field name="category"><string>ItemContextMenu</string></field>
 						<field name="component"><string>org.exoplatform.ecm.webui.component.explorer.rightclick.manager.LockManageComponent</string></field>
-					</object>
-				</object-param>
-				<object-param>
-					<name>Unlock</name>
-					<object type="org.exoplatform.webui.ext.UIExtension">
+                    </object>
+                </object-param>
+                <object-param>
+                    <name>Unlock</name>
+                    <object type="org.exoplatform.webui.ext.UIExtension">
 						<field name="type"><string>org.exoplatform.ecm.dms.UIWorkingArea</string></field>
-						<field name="rank"><int>160</int></field>
+						<field name="rank"><int>101</int></field>
 						<field name="name"><string>Unlock</string></field>
 						<field name="category"><string>ItemContextMenu</string></field>
 						<field name="component"><string>org.exoplatform.ecm.webui.component.explorer.rightclick.manager.UnlockManageComponent</string></field>
-					</object>
-				</object-param>
-				<object-param>
-					<name>CheckIn</name>
-					<object type="org.exoplatform.webui.ext.UIExtension">
+                    </object>
+                </object-param>
+                <object-param>
+                    <name>CheckIn</name>
+                    <object type="org.exoplatform.webui.ext.UIExtension">
 						<field name="type"><string>org.exoplatform.ecm.dms.UIWorkingArea</string></field>
-						<field name="rank"><int>170</int></field>
+						<field name="rank"><int>103</int></field>
 						<field name="name"><string>CheckIn</string></field>
 						<field name="category"><string>ItemContextMenu_SingleSelection</string></field>
 						<field name="component"><string>org.exoplatform.ecm.webui.component.explorer.rightclick.manager.CheckInManageComponent</string></field>
-					</object>
-				</object-param>
-				<object-param>
-					<name>CheckOut</name>
-					<object type="org.exoplatform.webui.ext.UIExtension">
+                    </object>
+                </object-param>
+                <object-param>
+                    <name>CheckOut</name>
+                    <object type="org.exoplatform.webui.ext.UIExtension">
 						<field name="type"><string>org.exoplatform.ecm.dms.UIWorkingArea</string></field>
-						<field name="rank"><int>180</int></field>
+						<field name="rank"><int>102</int></field>
 						<field name="name"><string>CheckOut</string></field>
 						<field name="category"><string>ItemContextMenu_SingleSelection</string></field>
 						<field name="component"><string>org.exoplatform.ecm.webui.component.explorer.rightclick.manager.CheckOutManageComponent</string></field>
-					</object>
-				</object-param>
-				<object-param>
-					<name>Rename</name>
-					<object type="org.exoplatform.webui.ext.UIExtension">
+                    </object>
+                </object-param>
+                <object-param>
+                    <name>Rename</name>
+                    <object type="org.exoplatform.webui.ext.UIExtension">
 						<field name="type"><string>org.exoplatform.ecm.dms.UIWorkingArea</string></field>
-						<field name="rank"><int>190</int></field>
+						<field name="rank"><int>99</int></field>
 						<field name="name"><string>Rename</string></field>
 						<field name="category"><string>ItemContextMenu_SingleSelection</string></field>
 						<field name="component"><string>org.exoplatform.ecm.webui.component.explorer.rightclick.manager.RenameManageComponent</string></field>
-					</object>
-				</object-param>
-				<object-param>
-					<name>Custom</name>
-					<object type="org.exoplatform.webui.ext.UIExtension">
+                    </object>
+                </object-param>
+                <object-param>
+                    <name>Custom</name>
+                    <object type="org.exoplatform.webui.ext.UIExtension">
+                        <field name="type">
+                            <string>org.exoplatform.ecm.dms.UIWorkingArea</string>
+                        </field>
+                        <field name="rank">
+                            <int>200</int>
+                        </field>
+                        <field name="name">
+                            <string>Custom</string>
+                        </field>
+                        <field name="category">
+                            <string>CustomActions</string>
+                        </field>
+                        <field name="component">
+                            <string>
+                                org.exoplatform.ecm.webui.component.explorer.rightclick.manager.CustomManageComponent
+                            </string>
+                        </field>
+                    </object>
+                </object-param>
+                <object-param>
+                    <name>Permlink</name>
+                    <object type="org.exoplatform.webui.ext.UIExtension">
 						<field name="type"><string>org.exoplatform.ecm.dms.UIWorkingArea</string></field>
-						<field name="rank"><int>200</int></field>
-						<field name="name"><string>Custom</string></field>
-						<field name="category"><string>CustomActions</string></field>
-						<field name="component"><string>org.exoplatform.ecm.webui.component.explorer.rightclick.manager.CustomManageComponent</string></field>
-					</object>
-				</object-param>
-				<object-param>
-					<name>Permlink</name>
-					<object type="org.exoplatform.webui.ext.UIExtension">
-						<field name="type"><string>org.exoplatform.ecm.dms.UIWorkingArea</string></field>
-						<field name="rank"><int>210</int></field>
+						<field name="rank"><int>91</int></field>
 						<field name="name"><string>Permlink</string></field>
-						<field name="category"><string>PermlinkContextMenu</string></field>
+						<field name="category"><string>ItemContextMenu_SingleSelection</string></field>
 						<field name="component"><string>org.exoplatform.ecm.webui.component.explorer.rightclick.manager.PermlinkActionComponent</string></field>
-					</object>
-				</object-param>
-				<object-param>
-					<name>MoveNode</name>
-					<object type="org.exoplatform.webui.ext.UIExtension">
+                    </object>
+                </object-param>
+                <object-param>
+                    <name>MoveNode</name>
+                    <object type="org.exoplatform.webui.ext.UIExtension">
+                        <field name="type">
+                            <string>org.exoplatform.ecm.dms.UIWorkingArea</string>
+                        </field>
+                        <field name="rank">
+                            <int>220</int>
+                        </field>
+                        <field name="name">
+                            <string>MoveNode</string>
+                        </field>
+                        <field name="category">
+                            <string>JCRMoveAction</string>
+                        </field>
+                        <field name="component">
+                            <string>
+                                org.exoplatform.ecm.webui.component.explorer.rightclick.manager.MoveNodeManageComponent
+                            </string>
+                        </field>
+                    </object>
+                </object-param>
+                <object-param>
+                    <name>CreateLink</name>
+                    <object type="org.exoplatform.webui.ext.UIExtension">
+                        <field name="type">
+                            <string>org.exoplatform.ecm.dms.UIWorkingArea</string>
+                        </field>
+                        <field name="rank">
+                            <int>220</int>
+                        </field>
+                        <field name="name">
+                            <string>CreateLink</string>
+                        </field>
+                        <field name="category">
+                            <string>JCRMoveAction</string>
+                        </field>
+                        <field name="component">
+                            <string>
+                                org.exoplatform.ecm.webui.component.explorer.rightclick.manager.CreateLinkManageComponent
+                            </string>
+                        </field>
+                    </object>
+                </object-param>
+                <object-param>
+                    <name>AddFolder</name>
+                    <object type="org.exoplatform.webui.ext.UIExtension">
+                        <field name="type">
+                            <string>org.exoplatform.ecm.dms.UIWorkingArea</string>
+                        </field>
+                        <field name="rank">
+                            <int>310</int>
+                        </field>
+                        <field name="name">
+                            <string>AddFolder</string>
+                        </field>
+                        <field name="category">
+                            <string>GroundContextMenu</string>
+                        </field>
+                        <field name="component">
+                            <string>
+                                org.exoplatform.ecm.webui.component.explorer.control.action.AddFolderActionComponent
+                            </string>
+                        </field>
+                    </object>
+                </object-param>
+                <object-param>
+                    <name>AddDocument</name>
+                    <object type="org.exoplatform.webui.ext.UIExtension">
+                        <field name="type">
+                            <string>org.exoplatform.ecm.dms.UIWorkingArea</string>
+                        </field>
+                        <field name="rank">
+                            <int>320</int>
+                        </field>
+                        <field name="name">
+                            <string>AddDocument</string>
+                        </field>
+                        <field name="category">
+                            <string>GroundContextMenu</string>
+                        </field>
+                        <field name="component">
+                            <string>
+                                org.exoplatform.ecm.webui.component.explorer.control.action.AddDocumentActionComponent
+                            </string>
+                        </field>
+                    </object>
+                </object-param>
+                <object-param>
+                    <name>Upload</name>
+                    <object type="org.exoplatform.webui.ext.UIExtension">
+                        <field name="type">
+                            <string>org.exoplatform.ecm.dms.UIWorkingArea</string>
+                        </field>
+                        <field name="rank">
+                            <int>330</int>
+                        </field>
+                        <field name="name">
+                            <string>Upload</string>
+                        </field>
+                        <field name="category">
+                            <string>GroundContextMenu</string>
+                        </field>
+                        <field name="component">
+                            <string>org.exoplatform.ecm.webui.component.explorer.control.action.UploadActionComponent
+                            </string>
+                        </field>
+                    </object>
+                </object-param>
+                <object-param>
+                    <name>AddSymLink</name>
+                    <object type="org.exoplatform.webui.ext.UIExtension">
 						<field name="type"><string>org.exoplatform.ecm.dms.UIWorkingArea</string></field>
-						<field name="rank"><int>220</int></field>
-						<field name="name"><string>MoveNode</string></field>
-						<field name="category"><string>JCRMoveAction</string></field>
-						<field name="component"><string>org.exoplatform.ecm.webui.component.explorer.rightclick.manager.MoveNodeManageComponent</string></field>
-					</object>
-				</object-param>
-				<object-param>
-					<name>CreateLink</name>
-					<object type="org.exoplatform.webui.ext.UIExtension">
-						<field name="type"><string>org.exoplatform.ecm.dms.UIWorkingArea</string></field>
-						<field name="rank"><int>220</int></field>
-						<field name="name"><string>CreateLink</string></field>
-						<field name="category"><string>JCRMoveAction</string></field>
-						<field name="component"><string>org.exoplatform.ecm.webui.component.explorer.rightclick.manager.CreateLinkManageComponent</string></field>
-					</object>
-				</object-param>
-				<object-param>
-					<name>AddFolder</name>
-					<object type="org.exoplatform.webui.ext.UIExtension">
-						<field name="type"><string>org.exoplatform.ecm.dms.UIWorkingArea</string></field>
-						<field name="rank"><int>310</int></field>
-						<field name="name"><string>AddFolder</string></field>
-						<field name="category"><string>GroundContextMenu</string></field>
-						<field name="component"><string>org.exoplatform.ecm.webui.component.explorer.control.action.AddFolderActionComponent</string></field>
-					</object>
-				</object-param>	
-				<object-param>
-					<name>AddDocument</name>
-					<object type="org.exoplatform.webui.ext.UIExtension">
-						<field name="type"><string>org.exoplatform.ecm.dms.UIWorkingArea</string></field>
-						<field name="rank"><int>320</int></field>
-						<field name="name"><string>AddDocument</string></field>
-						<field name="category"><string>GroundContextMenu</string></field>
-						<field name="component"><string>org.exoplatform.ecm.webui.component.explorer.control.action.AddDocumentActionComponent</string></field>
-					</object>
-				</object-param>
-				<object-param>
-					<name>Upload</name>
-					<object type="org.exoplatform.webui.ext.UIExtension">
-						<field name="type"><string>org.exoplatform.ecm.dms.UIWorkingArea</string></field>
-						<field name="rank"><int>330</int></field>
-						<field name="name"><string>Upload</string></field>
-						<field name="category"><string>GroundContextMenu</string></field>
-						<field name="component"><string>org.exoplatform.ecm.webui.component.explorer.control.action.UploadActionComponent</string></field>
-					</object>
-				</object-param>
-				<object-param>
-					<name>AddSymLink</name>
-					<object type="org.exoplatform.webui.ext.UIExtension">
-						<field name="type"><string>org.exoplatform.ecm.dms.UIWorkingArea</string></field>
-						<field name="rank"><int>340</int></field>
+						<field name="rank"><int>105</int></field>
 						<field name="name"><string>AddSymLink</string></field>
 						<field name="category"><string>ItemGroundContextMenu</string></field>
 						<field name="component"><string>org.exoplatform.ecm.webui.component.explorer.control.action.AddSymLinkActionComponent</string></field>
-					</object>
-				</object-param>
+                    </object>
+                </object-param>
+                <object-param>
+                    <name>Paste</name>
+                    <object type="org.exoplatform.webui.ext.UIExtension">
+                        <field name="type">
+                            <string>org.exoplatform.ecm.dms.UIWorkingArea</string>
+                        </field>
+                        <field name="rank">
+                            <int>350</int>
+                        </field>
+                        <field name="name">
+                            <string>Paste</string>
+                        </field>
+                        <field name="category">
+                            <string>ItemGroundContextMenu</string>
+                        </field>
+                        <field name="component">
+                            <string>
+                                org.exoplatform.ecm.webui.component.explorer.rightclick.manager.PasteManageComponent
+                            </string>
+                        </field>
+                    </object>
+                </object-param>
+
 				<object-param>
-					<name>Paste</name>
-					<object type="org.exoplatform.webui.ext.UIExtension">
-						<field name="type"><string>org.exoplatform.ecm.dms.UIWorkingArea</string></field>
-						<field name="rank"><int>350</int></field>
-						<field name="name"><string>Paste</string></field>
-						<field name="category"><string>ItemGroundContextMenu</string></field>
-						<field name="component"><string>org.exoplatform.ecm.webui.component.explorer.rightclick.manager.PasteManageComponent</string></field>
-					</object>
+				  <name>OpenDocument</name>
+				  <object type="org.exoplatform.webui.ext.UIExtension">
+				    <field name="type"><string>org.exoplatform.ecm.dms.UIWorkingArea</string></field>
+				    <field name="rank"><int>90</int></field>
+				    <field name="name"><string>OpenDocument</string></field>
+				    <field name="category"><string>ItemContextMenu_SingleSelection</string></field>
+				    <field name="component"><string>org.exoplatform.ecm.webui.component.explorer.rightclick.manager.OpenDocumentManageComponent</string></field>
+				  </object>
 				</object-param>
-			</init-params>
-		</component-plugin>
-		<component-plugin>
-			<name>File dynamic viewer</name>
-			<set-method>registerUIExtensionPlugin</set-method>
-			<type>org.exoplatform.webui.ext.UIExtensionPlugin</type>
-			<init-params>
-			  <object-param>
-					<name>Images</name>
-					<object type="org.exoplatform.webui.ext.UIExtension">
-						<field name="type"><string>org.exoplatform.ecm.dms.FileViewer</string></field>
-						<field name="rank"><int>100</int></field>
-						<field name="name"><string>Images</string></field>
-						<field name="category"><string>FileViewer</string></field>
-						<field name="component"><string>org.exoplatform.ecm.webui.viewer.ImageViewer</string></field>
-						<field name="extendedFilters">
-							<collection type="java.util.ArrayList">
-								<value>
-									<object type="org.exoplatform.webui.ext.filter.impl.FileFilter">
-										<field name="mimeTypes">
-											<collection type="java.util.ArrayList">
-												<value><string>image/jpeg</string></value>
-												<value><string>image/png</string></value>
-												<value><string>image/gif</string></value>
-												<value><string>image/bmp</string></value>
-												<value><string>image/tiff</string></value>
-											</collection>
-										</field>
-									</object>
-								</value>
-							</collection>
-						</field>
-					</object>
-				</object-param>
-				<object-param>
-					<name>Text</name>
-					<object type="org.exoplatform.webui.ext.UIExtension">
-						<field name="type"><string>org.exoplatform.ecm.dms.FileViewer</string></field>
-						<field name="rank"><int>110</int></field>
-						<field name="name"><string>Text</string></field>
-						<field name="category"><string>FileViewer</string></field>
-						<field name="component"><string>org.exoplatform.ecm.webui.viewer.TextViewer</string></field>
-						<field name="extendedFilters">
-							<collection type="java.util.ArrayList">
-								<value>
-									<object type="org.exoplatform.webui.ext.filter.impl.FileFilter">
-										<field name="mimeTypes">
-											<collection type="java.util.ArrayList">
-												<value><string>text/html</string></value>
-												<value><string>text/plain</string></value>
-												<value><string>text/xml</string></value>
-												<value><string>application/rss+xml</string></value>
-                        <value><string>application/x-groovy</string></value>
-                        <value><string>application/x-groovy+html</string></value>
-											</collection>
-										</field>
-									</object>
-								</value>
-							</collection>
-						</field>
-					</object>
-				</object-param>
-				<object-param>
-					<name>PDF</name>
-					<object type="org.exoplatform.webui.ext.UIExtension">
-						<field name="type"><string>org.exoplatform.ecm.dms.FileViewer</string></field>
-						<field name="rank"><int>120</int></field>
-						<field name="name"><string>PDF</string></field>
-						<field name="category"><string>FileViewer</string></field>
-						<field name="component"><string>org.exoplatform.ecm.webui.viewer.PDFViewer</string></field>
-						<field name="extendedFilters">
-							<collection type="java.util.ArrayList">
-								<value>
-									<object type="org.exoplatform.webui.ext.filter.impl.FileFilter">
-										<field name="mimeTypes">
-											<collection type="java.util.ArrayList">
-												<value><string>application/msword</string></value>
-												<value><string>application/pdf</string></value>
-												<value><string>application/ppt</string></value>
-												<value><string>application/rtf</string></value>
-												<value><string>application/vnd.oasis.opendocument.graphics</string></value>
-												<value><string>application/vnd.oasis.opendocument.presentation</string></value>
-												<value><string>application/vnd.oasis.opendocument.spreadsheet</string></value>
-												<value><string>application/vnd.oasis.opendocument.spreadsheet-template</string></value>
-												<value><string>application/vnd.oasis.opendocument.text</string></value>
-												<value><string>application/vnd.openxmlformats-officedocument.presentationml.presentation</string></value>
-												<value><string>application/vnd.openxmlformats-officedocument.spreadsheetml.sheet</string></value>
-												<value><string>application/vnd.openxmlformats-officedocument.wordprocessingml.document</string></value>
-												<value><string>application/vnd.sun.xml.impress</string></value>
-												<value><string>application/vnd.sun.xml.writer</string></value>
-												<value><string>application/wordperfect</string></value>
-												<value><string>application/xls</string></value>
-												<value><string>application/xlt</string></value>
-												<value><string>application/vnd.ms-powerpoint</string></value>
-												<value><string>application/vnd.ms-excel</string></value>
-											</collection>
-										</field>
-									</object>
-								</value>
-							</collection>
-						</field>
-					</object>
-				</object-param>
-				<object-param>
-					<name>VideoAudio</name>
-					<object type="org.exoplatform.webui.ext.UIExtension">
-						<field name="type"><string>org.exoplatform.ecm.dms.FileViewer</string></field>
-						<field name="rank"><int>100</int></field>
-						<field name="name"><string>VideoAudio</string></field>
-						<field name="category"><string>FileViewer</string></field>
-						<field name="component"><string>org.exoplatform.ecm.webui.viewer.VideoAudioViewer</string></field>
-						<field name="extendedFilters">
-							<collection type="java.util.ArrayList">
-								<value>
-									<object type="org.exoplatform.webui.ext.filter.impl.FileFilter">
-										<field name="mimeTypes">
-											<collection type="java.util.ArrayList">
-												<value><string>video/x-flv</string></value>
-												<value><string>audio/mp3</string></value>
-												<!-- <string>video/quicktime</string></value -->
-											</collection>
-										</field>
-									</object>
-								</value>
-							</collection>
-						</field>
-					</object>
-				</object-param>
-				<object-param>
-					<name>H264Video</name>
-					<object type="org.exoplatform.webui.ext.UIExtension">
-						<field name="type"><string>org.exoplatform.ecm.dms.FileViewer</string></field>
-						<field name="rank"><int>100</int></field>
-						<field name="name"><string>H264Video</string></field>
-						<field name="category"><string>FileViewer</string></field>
-						<field name="component"><string>org.exoplatform.ecm.webui.viewer.H264VideoViewer</string></field>
-						<field name="extendedFilters">
-							<collection type="java.util.ArrayList">
-								<value>
-									<object type="org.exoplatform.webui.ext.filter.impl.FileFilter">
-										<field name="mimeTypes">
-											<collection type="java.util.ArrayList">
-                        <value><string>video/mp4</string></value>
-                        <value><string>video/quicktime</string></value>
-                        <value><string>video/ogg</string></value>
-											</collection>
-										</field>
-									</object>
-								</value>
-							</collection>
-						</field>
-					</object>
-				</object-param>
-				<object-param>
-					<name>MpegVideo</name>
-					<object type="org.exoplatform.webui.ext.UIExtension">
-						<field name="type"><string>org.exoplatform.ecm.dms.FileViewer</string></field>
-						<field name="rank"><int>100</int></field>
-						<field name="name"><string>MpegVideo</string></field>
-						<field name="category"><string>FileViewer</string></field>
-						<field name="component"><string>org.exoplatform.ecm.webui.viewer.MpegVideoViewer</string></field>
-						<field name="extendedFilters">
-							<collection type="java.util.ArrayList">
-								<value>
-									<object type="org.exoplatform.webui.ext.filter.impl.FileFilter">
-										<field name="mimeTypes">
-											<collection type="java.util.ArrayList">
-                        <value><string>video/mpg</string></value>
-                        <value><string>video/mpeg</string></value>
-											</collection>
-										</field>
-									</object>
-								</value>
-							</collection>
-						</field>
-					</object>
-				</object-param>
-				<object-param>
-					<name>Flash</name>
-					<object type="org.exoplatform.webui.ext.UIExtension">
-						<field name="type"><string>org.exoplatform.ecm.dms.FileViewer</string></field>
-						<field name="rank"><int>100</int></field>
-						<field name="name"><string>Flash</string></field>
-						<field name="category"><string>FileViewer</string></field>
-						<field name="component"><string>org.exoplatform.ecm.webui.viewer.FlashViewer</string></field>
-						<field name="extendedFilters">
-							<collection type="java.util.ArrayList">
-								<value>
-									<object type="org.exoplatform.webui.ext.filter.impl.FileFilter">
-										<field name="mimeTypes">
-											<collection type="java.util.ArrayList">
-                        <value><string>application/x-shockwave-flash</string></value>
-											</collection>
-										</field>
-									</object>
-								</value>
-							</collection>
-						</field>
-					</object>
-				</object-param>
-				
-				<object-param>
-						<name>UIOptionBlockPanel</name>
-						<object type="org.exoplatform.webui.ext.UIExtension">
-							<field name="type"><string>org.exoplatform.ecm.dms.UIOptionBlockPanel</string></field>							
-							<field name="name"><string>UIOptionBlock</string></field>							
-							<field name="component"><string>org.exoplatform.ecm.webui.component.explorer.optionblocks.UIOptionBlockPanel</string></field>
-						</object>
-				</object-param>			
-					
-			</init-params>
-		</component-plugin>
-	</external-component-plugins>
+
+            </init-params>
+        </component-plugin>
+        <component-plugin>
+            <name>File dynamic viewer</name>
+            <set-method>registerUIExtensionPlugin</set-method>
+            <type>org.exoplatform.webui.ext.UIExtensionPlugin</type>
+            <init-params>
+                <object-param>
+                    <name>Images</name>
+                    <object type="org.exoplatform.webui.ext.UIExtension">
+                        <field name="type">
+                            <string>org.exoplatform.ecm.dms.FileViewer</string>
+                        </field>
+                        <field name="rank">
+                            <int>100</int>
+                        </field>
+                        <field name="name">
+                            <string>Images</string>
+                        </field>
+                        <field name="category">
+                            <string>FileViewer</string>
+                        </field>
+                        <field name="component">
+                            <string>org.exoplatform.ecm.webui.viewer.ImageViewer</string>
+                        </field>
+                        <field name="extendedFilters">
+                            <collection type="java.util.ArrayList">
+                                <value>
+                                    <object type="org.exoplatform.webui.ext.filter.impl.FileFilter">
+                                        <field name="mimeTypes">
+                                            <collection type="java.util.ArrayList">
+                                                <value>
+                                                    <string>image/jpeg</string>
+                                                </value>
+                                                <value>
+                                                    <string>image/png</string>
+                                                </value>
+                                                <value>
+                                                    <string>image/gif</string>
+                                                </value>
+                                                <value>
+                                                    <string>image/bmp</string>
+                                                </value>
+                                                <value>
+                                                    <string>image/tiff</string>
+                                                </value>
+                                            </collection>
+                                        </field>
+                                    </object>
+                                </value>
+                            </collection>
+                        </field>
+                    </object>
+                </object-param>
+                <object-param>
+                    <name>Text</name>
+                    <object type="org.exoplatform.webui.ext.UIExtension">
+                        <field name="type">
+                            <string>org.exoplatform.ecm.dms.FileViewer</string>
+                        </field>
+                        <field name="rank">
+                            <int>110</int>
+                        </field>
+                        <field name="name">
+                            <string>Text</string>
+                        </field>
+                        <field name="category">
+                            <string>FileViewer</string>
+                        </field>
+                        <field name="component">
+                            <string>org.exoplatform.ecm.webui.viewer.TextViewer</string>
+                        </field>
+                        <field name="extendedFilters">
+                            <collection type="java.util.ArrayList">
+                                <value>
+                                    <object type="org.exoplatform.webui.ext.filter.impl.FileFilter">
+                                        <field name="mimeTypes">
+                                            <collection type="java.util.ArrayList">
+                                                <value>
+                                                    <string>text/html</string>
+                                                </value>
+                                                <value>
+                                                    <string>text/plain</string>
+                                                </value>
+                                                <value>
+                                                    <string>text/xml</string>
+                                                </value>
+                                                <value>
+                                                    <string>application/rss+xml</string>
+                                                </value>
+                                                <value>
+                                                    <string>application/x-groovy</string>
+                                                </value>
+                                                <value>
+                                                    <string>application/x-groovy+html</string>
+                                                </value>
+                                            </collection>
+                                        </field>
+                                    </object>
+                                </value>
+                            </collection>
+                        </field>
+                    </object>
+                </object-param>
+                <object-param>
+                    <name>PDF</name>
+                    <object type="org.exoplatform.webui.ext.UIExtension">
+                        <field name="type">
+                            <string>org.exoplatform.ecm.dms.FileViewer</string>
+                        </field>
+                        <field name="rank">
+                            <int>120</int>
+                        </field>
+                        <field name="name">
+                            <string>PDF</string>
+                        </field>
+                        <field name="category">
+                            <string>FileViewer</string>
+                        </field>
+                        <field name="component">
+                            <string>org.exoplatform.ecm.webui.viewer.PDFViewer</string>
+                        </field>
+                        <field name="extendedFilters">
+                            <collection type="java.util.ArrayList">
+                                <value>
+                                    <object type="org.exoplatform.webui.ext.filter.impl.FileFilter">
+                                        <field name="mimeTypes">
+                                            <collection type="java.util.ArrayList">
+                                                <value>
+                                                    <string>application/msword</string>
+                                                </value>
+                                                <value>
+                                                    <string>application/pdf</string>
+                                                </value>
+                                                <value>
+                                                    <string>application/ppt</string>
+                                                </value>
+                                                <value>
+                                                    <string>application/vnd.ms-powerpoint</string>
+                                                </value>
+                                                <value>
+                                                    <string>application/rtf</string>
+                                                </value>
+                                                <value>
+                                                    <string>application/vnd.oasis.opendocument.graphics</string>
+                                                </value>
+                                                <value>
+                                                    <string>application/vnd.oasis.opendocument.presentation</string>
+                                                </value>
+                                                <value>
+                                                    <string>application/vnd.oasis.opendocument.spreadsheet</string>
+                                                </value>
+                                                <value>
+                                                    <string>application/vnd.oasis.opendocument.spreadsheet-template
+                                                    </string>
+                                                </value>
+                                                <value>
+                                                    <string>application/vnd.oasis.opendocument.text</string>
+                                                </value>
+                                                <value>
+                                                    <string>
+                                                        application/vnd.openxmlformats-officedocument.presentationml.presentation
+                                                    </string>
+                                                </value>
+                                                <value>
+                                                    <string>
+                                                        application/vnd.openxmlformats-officedocument.spreadsheetml.sheet
+                                                    </string>
+                                                </value>
+                                                <value>
+                                                    <string>
+                                                        application/vnd.openxmlformats-officedocument.wordprocessingml.document
+                                                    </string>
+                                                </value>
+                                                <value>
+                                                    <string>application/vnd.sun.xml.impress</string>
+                                                </value>
+                                                <value>
+                                                    <string>application/vnd.sun.xml.writer</string>
+                                                </value>
+                                                <value>
+                                                    <string>application/wordperfect</string>
+                                                </value>
+                                                <value>
+                                                    <string>application/xls</string>
+                                                </value>
+                                                <value>
+                                                    <string>application/vnd.ms-excel</string>
+                                                </value>
+                                                <value>
+                                                    <string>application/xlt</string>
+                                                </value>
+                                                <value><string>application/vnd.ms-powerpoint</string></value>
+                                                <value><string>application/vnd.ms-excel</string></value>
+                                                <value>
+                                                  <string>application/vnd.oasis.opendocument.formula</string>
+                                                </value>
+                                            </collection>
+                                        </field>
+                                    </object>
+                                </value>
+                            </collection>
+                        </field>
+                    </object>
+                </object-param>
+                <object-param>
+                    <name>VideoAudio</name>
+                    <object type="org.exoplatform.webui.ext.UIExtension">
+                        <field name="type">
+                            <string>org.exoplatform.ecm.dms.FileViewer</string>
+                        </field>
+                        <field name="rank">
+                            <int>100</int>
+                        </field>
+                        <field name="name">
+                            <string>VideoAudio</string>
+                        </field>
+                        <field name="category">
+                            <string>FileViewer</string>
+                        </field>
+                        <field name="component">
+                            <string>org.exoplatform.ecm.webui.viewer.VideoAudioViewer</string>
+                        </field>
+                        <field name="extendedFilters">
+                            <collection type="java.util.ArrayList">
+                                <value>
+                                    <object type="org.exoplatform.webui.ext.filter.impl.FileFilter">
+                                        <field name="mimeTypes">
+                                            <collection type="java.util.ArrayList">
+                                                <value>
+                                                    <string>video/x-flv</string>
+                                                </value>
+                                                <value>
+                                                    <string>video/x-f4v</string>
+                                                </value>
+                                            </collection>
+                                        </field>
+                                    </object>
+                                </value>
+                            </collection>
+                        </field>
+                    </object>
+                </object-param>
+                <object-param>
+                    <name>H264Video</name>
+                    <object type="org.exoplatform.webui.ext.UIExtension">
+                        <field name="type">
+                            <string>org.exoplatform.ecm.dms.FileViewer</string>
+                        </field>
+                        <field name="rank">
+                            <int>100</int>
+                        </field>
+                        <field name="name">
+                            <string>H264Video</string>
+                        </field>
+                        <field name="category">
+                            <string>FileViewer</string>
+                        </field>
+                        <field name="component">
+                            <string>org.exoplatform.ecm.webui.viewer.HTML5VideoViewer</string>
+                        </field>
+                        <field name="extendedFilters">
+                            <collection type="java.util.ArrayList">
+                                <value>
+                                    <object type="org.exoplatform.webui.ext.filter.impl.FileFilter">
+                                        <field name="mimeTypes">
+                                            <collection type="java.util.ArrayList">
+                                                <value>
+                                                    <string>video/mp4</string>
+                                                </value>
+                                                <value>
+                                                    <string>video/quicktime</string> <!--mov=video/quicktime-->
+                                                </value>
+                                                <value>
+                                                    <string>audio/ogg</string>
+                                                </value>
+                                                <value>
+                                                    <string>video/webm</string>
+                                                </value>
+                                                <value>
+                                                    <string>audio/mp3</string>
+                                                </value>
+                                                <value>
+                                                    <string>audio/x-m4a</string>
+                                                </value>
+                                            </collection>
+                                        </field>
+                                    </object>
+                                </value>
+                            </collection>
+                        </field>
+                    </object>
+                </object-param>
+                <object-param>
+                    <name>MpegVideo</name>
+                    <object type="org.exoplatform.webui.ext.UIExtension">
+                        <field name="type">
+                            <string>org.exoplatform.ecm.dms.FileViewer</string>
+                        </field>
+                        <field name="rank">
+                            <int>100</int>
+                        </field>
+                        <field name="name">
+                            <string>MpegVideo</string>
+                        </field>
+                        <field name="category">
+                            <string>FileViewer</string>
+                        </field>
+                        <field name="component">
+                            <string>org.exoplatform.ecm.webui.viewer.MpegVideoViewer</string>
+                        </field>
+                        <field name="extendedFilters">
+                            <collection type="java.util.ArrayList">
+                                <value>
+                                    <object type="org.exoplatform.webui.ext.filter.impl.FileFilter">
+                                        <field name="mimeTypes">
+                                            <collection type="java.util.ArrayList">
+                                                <value>
+                                                    <string>video/mpg</string>
+                                                </value>
+                                                <value>
+                                                    <string>video/mpeg</string>
+                                                </value>
+                                                <value>
+                                                    <string>audio/x-ms-wma</string>
+                                                </value>
+                                                <value>
+                                                    <string>video/x-ms-wmv</string>
+                                                </value>
+                                                <value>
+                                                    <string>video/x-matroska</string>
+                                                </value>
+                                            </collection>
+                                        </field>
+                                    </object>
+                                </value>
+                            </collection>
+                        </field>
+                    </object>
+                </object-param>
+                <object-param>
+                    <name>Flash</name>
+                    <object type="org.exoplatform.webui.ext.UIExtension">
+                        <field name="type">
+                            <string>org.exoplatform.ecm.dms.FileViewer</string>
+                        </field>
+                        <field name="rank">
+                            <int>100</int>
+                        </field>
+                        <field name="name">
+                            <string>Flash</string>
+                        </field>
+                        <field name="category">
+                            <string>FileViewer</string>
+                        </field>
+                        <field name="component">
+                            <string>org.exoplatform.ecm.webui.viewer.FlashViewer</string>
+                        </field>
+                        <field name="extendedFilters">
+                            <collection type="java.util.ArrayList">
+                                <value>
+                                    <object type="org.exoplatform.webui.ext.filter.impl.FileFilter">
+                                        <field name="mimeTypes">
+                                            <collection type="java.util.ArrayList">
+                                                <value>
+                                                    <string>application/x-shockwave-flash</string>
+                                                </value>
+                                            </collection>
+                                        </field>
+                                    </object>
+                                </value>
+                            </collection>
+                        </field>
+                    </object>
+                </object-param>
+
+                <object-param>
+                    <name>UIOptionBlockPanel</name>
+                    <object type="org.exoplatform.webui.ext.UIExtension">
+                        <field name="type">
+                            <string>org.exoplatform.ecm.dms.UIOptionBlockPanel</string>
+                        </field>
+                        <field name="name">
+                            <string>UIOptionBlock</string>
+                        </field>
+                        <field name="component">
+                            <string>org.exoplatform.ecm.webui.component.explorer.optionblocks.UIOptionBlockPanel
+                            </string>
+                        </field>
+                    </object>
+                </object-param>
+
+            </init-params>
+        </component-plugin>
+    </external-component-plugins>
 </configuration>

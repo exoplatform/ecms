@@ -1,4 +1,6 @@
 <%
+  import  org.exoplatform.social.plugin.doc.UIDocViewer;
+
   def voteNode = uicomponent.getNode() ;
   if(uicomponent.getOriginalNode().getPrimaryNodeType().getName().equals("nt:file")) {
     if(voteNode.getNodes().getSize() > 0) {
@@ -15,11 +17,13 @@
   if(voteNode.hasProperty("exo:votingRate")) voteRating = voteNode.getProperty("exo:votingRate").getDouble() ;
   long voteTotal = 0 ;
   if(voteNode.hasProperty("exo:voteTotalOfLang")) voteTotal = voteNode.getProperty("exo:voteTotalOfLang").getLong() ;
+
 %>
 <style>
 	<% _ctx.include(uicomponent.getTemplateSkin("mix:votable", "Stylesheet")); %>
 </style>
 <div class="uiVote clearfix">
+<%if (!(uicomponent instanceof UIDocViewer) || (voteTotal > 0)) {%>
 	<div class="voteRatingInfo">
 			<%=_ctx.appRes("Vote.view.label.avg-rating")%>: <span>$voteRating</span>
 			<%=_ctx.appRes("Vote.view.label.subscription")%>: <span>$voteTotal</span>
@@ -37,4 +41,5 @@
 				<i class="unvoted"></i>
 			<%}%>
 	</div>
+<%}%>
 </div>

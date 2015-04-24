@@ -1,0 +1,28 @@
+<%
+	 import org.exoplatform.wcm.webui.reader.ContentReader;
+   import java.util.regex.Matcher;
+%>
+<div class="UIForm $uicomponent.id">
+  <%
+    String msgValue = _ctx.appRes(uicomponent.getMessageKey());
+    String[] msgArguments = uicomponent.getArguments();
+    if(msgArguments.length > 0) {
+	    for(i in 0..msgArguments.length-1){
+	      msgValue = msgValue.replaceAll("\\{" + i + "\\}", Matcher.quoteReplacement(msgArguments[i]));
+		  }
+    }
+    msgValue = ContentReader.getXSSCompatibilityContent(msgValue);    
+  %>
+	<ul class="singleMessage popupMessage resizable">
+		<li><span class="confirmationIcon"> <%=msgValue%></span></li>
+	</ul>
+	<div class="uiAction uiActionBorder">
+		<%
+			int tabIndex = 1;
+			for(action in uicomponent.getActions()) {
+		%>
+			<button type="button" onclick="<%=uicomponent.event(action)%>" tabindex=<%=tabIndex++%> class="btn" href="javascript:void(0);"><%=_ctx.appRes("UIConfirmMessage.label." + action)%></button>
+		<%}%>
+	</div>
+	<%// end render action%>
+</div>

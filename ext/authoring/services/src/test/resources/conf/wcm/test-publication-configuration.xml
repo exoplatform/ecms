@@ -1,0 +1,450 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+
+<configuration
+   xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+   xsi:schemaLocation="http://www.exoplatform.org/xml/ns/kernel_1_2.xsd http://www.exoplatform.org/xml/ns/kernel_1_2.xsd"
+   xmlns="http://www.exoplatform.org/xml/ns/kernel_1_2.xsd">
+
+  <component>
+    <key>org.exoplatform.services.wcm.core.WCMService</key>
+    <type>org.exoplatform.services.wcm.core.impl.WCMServiceImpl</type>
+    <init-params>
+      <properties-param>
+        <name>server.config</name>
+        <description>server.config</description>
+        <property name="expirationCache" value="30" />
+      </properties-param>
+    </init-params>
+  </component> 
+  <component>
+    <type>org.exoplatform.services.cms.jcrext.activity.ActivityCommonService</type>
+    <init-params>
+      <value-param>
+        <name>acceptedNodeTypes</name>
+        <value>{exo:accessibleMedia}{exo:article}{exo:contact_us}{exo:event}{exo:htmlFile}{rma:filePlan}{exo:webContent}{kfx:document}{exo:pictureOnHeadWebcontent}{exo:podcast}{exo:sample}{exo:link}</value>
+      </value-param>
+      <value-param>
+        <name>acceptedProperties</name>
+        <value>{dc:title}{dc:description}{dc:creator}{dc:source}{exo:summary}{exo:title}{exo:language}{exo:text}</value>
+      </value-param>
+      <value-param>
+        <name>acceptedFileProperties</name>
+        <value>{dc:title}{dc:description}{dc:creator}{dc:source}{exo:summary}{exo:title}{exo:language}{jcr:data}</value>
+      </value-param>
+    </init-params>
+  </component>
+  <component>
+    <key>org.exoplatform.services.cms.link.LinkManager</key>
+    <type>org.exoplatform.services.cms.link.impl.LinkManagerImpl</type>
+  </component>
+ 
+    <component>
+      <key>org.exoplatform.services.resources.ResourceBundleService</key>
+      <type>org.exoplatform.services.resources.impl.SimpleResourceBundleService</type>
+        <init-params>
+          <values-param>
+            <name>classpath.resources</name>
+            <description>The resources  that start with the following package name should be load from file system</description>
+            <value>locale.portlet.publication</value>
+          </values-param>
+
+          <values-param>
+            <name>init.resources</name>
+            <description>Store the following resources into the db for  the first launch </description>
+            <value>locale.services.publication.lifecycle.simple.SimplePublication</value>
+          </values-param>
+
+          <values-param>
+            <name>portal.resource.names</name>
+            <description>The properties files of  the portal ,  those file will be merged
+              into one ResourceBundle properties </description>
+            <value>locale.services.publication.lifecycle.simple.SimplePublication</value>
+          </values-param>
+        </init-params>
+    </component>
+  
+   
+   <component>
+    <type>org.exoplatform.services.cms.impl.DMSConfiguration</type>
+  </component>  
+  
+  <component>
+    <key>org.exoplatform.services.ecm.publication.PublicationService</key>
+    <type>org.exoplatform.services.ecm.publication.impl.PublicationServiceImpl</type>
+  </component>
+
+  <component>
+    <key>org.exoplatform.services.ecm.publication.PublicationPresentationService</key>
+    <type>org.exoplatform.services.ecm.publication.impl.PublicationPresentationServiceImpl</type>
+  </component> 
+  
+  <component>
+   <key>org.exoplatform.services.wcm.extensions.publication.PublicationManager</key>
+   <type>org.exoplatform.services.wcm.extensions.publication.impl.PublicationManagerImpl</type>
+   <component-plugins>
+      <component-plugin>
+      <name>AddLifecycle</name>
+      <set-method>addLifecycle</set-method>
+      <type>org.exoplatform.services.wcm.extensions.publication.lifecycle.StatesLifecyclePlugin</type>
+      <description>Configures</description>
+      <priority>1</priority>
+      <init-params>
+        <object-param>
+          <name>lifecycles</name>
+          <object type="org.exoplatform.services.wcm.extensions.publication.lifecycle.impl.LifecyclesConfig">
+            <field  name="lifecycles">
+              <collection type="java.util.ArrayList">
+                <value>
+                  <object type="org.exoplatform.services.wcm.extensions.publication.lifecycle.impl.LifecyclesConfig$Lifecycle">
+                    <field name="name"><string>lifecycle1</string></field>
+                    <field name="publicationPlugin"><string>Authoring publication</string></field>
+                    <field  name="states">
+                      <collection type="java.util.ArrayList">
+                        <value>
+                          <object type="org.exoplatform.services.wcm.extensions.publication.lifecycle.impl.LifecyclesConfig$State">
+                            <field name="state"><string>draft</string></field>
+                            <field name="membership"><string>author:/platform/web-contributors</string></field>
+                          </object>
+                        </value>
+                        <value>
+                          <object type="org.exoplatform.services.wcm.extensions.publication.lifecycle.impl.LifecyclesConfig$State">
+                            <field name="state"><string>pending</string></field>
+                            <field name="membership"><string>author:/platform/web-contributors</string></field>
+                          </object>
+                        </value>
+                        <value>
+                          <object type="org.exoplatform.services.wcm.extensions.publication.lifecycle.impl.LifecyclesConfig$State">
+                            <field name="state"><string>approved</string></field>
+                            <field name="membership"><string>manager:/platform/web-contributors</string></field>
+                          </object>
+                        </value>
+                        <value>
+                        <object type="org.exoplatform.services.wcm.extensions.publication.lifecycle.impl.LifecyclesConfig$State">
+                          <field name="state"><string>staged</string></field>
+                          <field name="membership"><string>publisher:/platform/web-contributors</string></field>
+                        </object>
+                      </value>
+                      <value>
+                        <object type="org.exoplatform.services.wcm.extensions.publication.lifecycle.impl.LifecyclesConfig$State">
+                          <field name="state"><string>published</string></field>
+                          <field name="membership"><string>publisher:/platform/web-contributors</string></field>
+                        </object>
+                      </value>
+                    </collection>
+                    </field>
+                  </object>
+                </value>
+              </collection>
+            </field>
+          </object>
+        </object-param>
+      </init-params>
+    </component-plugin>
+    <component-plugin>
+      <name>AddContext</name>
+      <set-method>addContext</set-method>
+      <type>org.exoplatform.services.wcm.extensions.publication.context.ContextPlugin</type>
+      <init-params>
+        <object-param>
+          <name>contexts</name>
+          <object type="org.exoplatform.services.wcm.extensions.publication.context.impl.ContextConfig">
+            <field  name="contexts">
+              <collection type="java.util.ArrayList">
+                <value>
+                  <object type="org.exoplatform.services.wcm.extensions.publication.context.impl.ContextConfig$Context">
+                    <field name="name"><string>contextdefault</string></field>
+                    <field name="priority"><string>200</string></field>
+                    <field name="lifecycle"><string>lifecycle1</string></field>
+                  </object>
+                </value>
+              </collection>
+            </field>
+          </object>
+        </object-param>
+      </init-params>
+    </component-plugin>
+    </component-plugins>
+  </component>
+  <component>
+    <key>org.exoplatform.services.wcm.publication.WCMPublicationService</key>
+    <type>org.exoplatform.services.wcm.extensions.publication.WCMPublicationServiceImpl</type>
+    <component-plugins>
+      <component-plugin>
+        <name>Authoring publication</name>
+        <set-method>addPublicationPlugin</set-method>
+        <type>org.exoplatform.services.wcm.extensions.publication.lifecycle.authoring.AuthoringPublicationPlugin</type>
+        <description>This publication lifecycle publish a web content or DMS document to a portal page with more states and version.</description>
+      </component-plugin>
+    </component-plugins>
+    <init-params>
+      <value-param>
+        <name>publicationLocation</name>
+        <value>collaboration:/sites content</value>
+      </value-param>
+      <value-param>
+        <name>notAllowChildNodeEnrollInPubliction</name>
+        <value>exo:webContent</value>
+      </value-param>
+    </init-params>
+  </component>
+
+  <component>
+    <key>org.exoplatform.services.wcm.publication.WCMComposer</key>
+    <type>org.exoplatform.services.wcm.publication.WCMComposerImpl</type>
+  </component>
+
+  <component>
+    <key>org.exoplatform.commons.scope.ScopeManager</key>
+    <type>org.exoplatform.commons.scope.ScopeManager</type>
+  </component>
+
+  <component>
+  	<key>org.exoplatform.services.cache.CacheService</key>
+    <jmx-name>cache:type=CacheService</jmx-name>
+  	<type>org.exoplatform.services.cache.impl.CacheServiceImpl</type>
+  	<init-params>
+      <object-param>
+        <name>cache.config.default</name>
+        <object type="org.exoplatform.services.cache.ExoCacheConfig">
+          <field name="name"><string>default</string></field>
+          <field name="maxSize"><int>30000</int></field>
+          <field name="liveTime"><long>60000</long></field>
+          <field name="distributed"><boolean>false</boolean></field>
+          <field name="implementation"><string>org.exoplatform.services.cache.concurrent.ConcurrentFIFOExoCache</string></field>
+        </object>
+      </object-param>
+    </init-params>
+  </component>
+  
+
+  <component>
+     <key>org.exoplatform.services.security.Authenticator</key>
+     <type>org.exoplatform.services.organization.auth.OrganizationAuthenticatorImpl</type>
+  </component>
+
+  <component>
+     <key>org.exoplatform.services.listener.ListenerService</key>
+     <type>org.exoplatform.services.listener.ListenerService</type>
+  </component>
+
+  <component>
+    <key>org.exoplatform.commons.chromattic.ChromatticManager</key>
+    <type>org.exoplatform.commons.chromattic.ChromatticManager</type>
+  </component>
+
+  <component>
+    <key>org.exoplatform.portal.pom.config.POMSessionManager</key>
+    <type>org.exoplatform.portal.pom.config.POMSessionManager</type>
+  </component>
+
+  <component>
+     <key>org.jboss.cache.transaction.TransactionManagerLookup</key>
+     <type>org.jboss.cache.transaction.JBossStandaloneJTAManagerLookup</type>
+  </component>
+  
+  <component>
+    <key>org.exoplatform.services.transaction.TransactionService</key>
+    <type>org.exoplatform.services.transaction.jbosscache.JBossTransactionsService</type>
+    <init-params>
+      <value-param>
+        <name>timeout</name>
+        <value>300</value>
+      </value-param>
+    </init-params>
+  </component>
+
+  <component>
+    <key>org.exoplatform.portal.pom.data.ModelDataStorage</key>
+    <type>org.exoplatform.portal.pom.config.POMDataStorage</type>
+  </component>
+
+  <component>
+    <key>org.exoplatform.portal.config.DataStorage</key>
+    <type>org.exoplatform.portal.config.DataStorageImpl</type>
+  </component>
+
+  <component>
+     <key>org.exoplatform.services.jcr.ext.distribution.DataDistributionManager</key>
+     <type>org.exoplatform.services.jcr.ext.distribution.impl.DataDistributionManagerImpl</type>
+  </component>
+
+  <component>
+     <key>org.exoplatform.services.jcr.ext.hierarchy.NodeHierarchyCreator</key>
+     <type>org.exoplatform.services.jcr.ext.hierarchy.impl.NodeHierarchyCreatorImpl</type>
+  </component>
+
+
+  <component>
+    <key>org.exoplatform.portal.mop.navigation.NavigationService</key>
+    <type>org.exoplatform.portal.mop.navigation.NavigationServiceWrapper</type>
+  </component>
+
+  <component>
+    <key>org.exoplatform.portal.mop.description.DescriptionService</key>
+    <type>org.exoplatform.portal.mop.description.DescriptionServiceImpl</type>
+  </component>
+  
+
+  <external-component-plugins>
+ 		<target-component>org.exoplatform.services.jcr.RepositoryService</target-component>
+ 		<component-plugin>
+ 		  <name>add.namespaces</name>
+ 		  <set-method>addPlugin</set-method>
+ 		  <type>org.exoplatform.services.jcr.impl.AddNamespacesPlugin</type>
+ 		  <init-params>
+ 		    <properties-param>
+ 		      <name>namespaces</name>
+          <property name="gtn" value="http://www.gatein.org/jcr/gatein/1.0/"/>
+          <property name="mop" value="http://www.gatein.org/jcr/mop/1.0/"/>
+ 		      </properties-param>
+ 		  </init-params>
+ 		</component-plugin>
+ 		<component-plugin>
+ 		  <name>add.nodeType</name>
+ 		  <set-method>addPlugin</set-method>
+ 		  <type>org.exoplatform.services.jcr.impl.AddNodeTypePlugin</type>
+ 		  <init-params>
+ 		    <values-param>
+ 		      <name>autoCreatedInNewRepository</name>
+           <value>jar:/conf/wcm/gatein-nodetypes.xml</value>
+           <value>jar:/conf/standalone/jcr/ecms-test-nodetypes-config.xml</value>
+           <value>jar:/conf/standalone/jcr/ecms-test-publication-nodetypes-config.xml</value>
+           <value>jar:/conf/wcm/content-nodetypes.xml</value>
+           <value>jar:/conf/wcm/test-mop-nodetypes.xml</value>
+ 		    </values-param>
+ 		  </init-params>
+ 		</component-plugin>
+  </external-component-plugins>
+
+  <external-component-plugins>
+    <target-component>org.exoplatform.commons.chromattic.ChromatticManager</target-component>
+    <component-plugin>
+      <name>chromattic</name>
+      <set-method>addLifeCycle</set-method>
+      <type>org.exoplatform.portal.pom.config.MOPChromatticLifeCycle</type>
+      <init-params>
+        <value-param>
+          <name>domain-name</name>
+          <value>mop</value>
+        </value-param>
+        <value-param>
+          <name>workspace-name</name>
+          <value>collaboration</value>
+        </value-param>
+        <values-param>
+          <name>entities</name>
+
+          <!-- The MOP node types -->
+          <value>org.gatein.mop.core.api.workspace.WorkspaceImpl</value>
+          <value>org.gatein.mop.core.api.workspace.UIContainerImpl</value>
+          <value>org.gatein.mop.core.api.workspace.UIWindowImpl</value>
+          <value>org.gatein.mop.core.api.workspace.UIBodyImpl</value>
+          <value>org.gatein.mop.core.api.workspace.PageImpl</value>
+          <value>org.gatein.mop.core.api.workspace.PageContainer</value>
+          <value>org.gatein.mop.core.api.workspace.NavigationImpl</value>
+          <value>org.gatein.mop.core.api.workspace.NavigationContainer</value>
+          <value>org.gatein.mop.core.api.workspace.PageLinkImpl</value>
+          <value>org.gatein.mop.core.api.workspace.URLLinkImpl</value>
+          <value>org.gatein.mop.core.api.workspace.PortalSiteContainer</value>
+          <value>org.gatein.mop.core.api.workspace.PortalSite</value>
+          <value>org.gatein.mop.core.api.workspace.GroupSiteContainer</value>
+          <value>org.gatein.mop.core.api.workspace.GroupSite</value>
+          <value>org.gatein.mop.core.api.workspace.UserSiteContainer</value>
+          <value>org.gatein.mop.core.api.workspace.UserSite</value>
+          <value>org.gatein.mop.core.api.workspace.TemplatizedImpl</value>
+          <value>org.gatein.mop.core.api.AttributesImpl</value>
+          <value>org.gatein.mop.core.api.Attribute</value>
+          <value>org.gatein.mop.core.api.PathAttribute</value>
+          <value>org.gatein.mop.core.api.StringAttribute</value>
+          <value>org.gatein.mop.core.api.BooleanAttribute</value>
+          <value>org.gatein.mop.core.api.IntegerAttribute</value>
+          <value>org.gatein.mop.core.api.DateAttribute</value>
+          <value>org.gatein.mop.core.api.workspace.content.CustomizationContainer</value>
+          <value>org.gatein.mop.core.api.workspace.content.ContextTypeContainer</value>
+          <value>org.gatein.mop.core.api.workspace.content.ContextType</value>
+          <value>org.gatein.mop.core.api.workspace.content.ContextSpecialization</value>
+          <value>org.gatein.mop.core.api.workspace.content.WorkspaceClone</value>
+          <value>org.gatein.mop.core.api.workspace.content.WorkspaceSpecialization</value>
+          <value>org.exoplatform.portal.mop.redirects.Redirectable</value>
+          <value>org.exoplatform.portal.mop.redirects.Redirect</value>
+          <value>org.exoplatform.portal.mop.redirects.Mappings</value>
+          <!-- GateIn node types -->
+          <value>org.exoplatform.portal.pom.spi.portlet.PortletState</value>
+          <value>org.exoplatform.portal.pom.spi.portlet.PreferenceState</value>
+          <value>org.exoplatform.portal.pom.spi.gadget.GadgetState</value>
+          <value>org.exoplatform.portal.pom.spi.wsrp.WSRPState</value>
+          <value>org.exoplatform.portal.mop.ProtectedResource</value>
+          <value>org.exoplatform.portal.mop.Described</value>
+          <value>org.exoplatform.portal.mop.Visible</value>
+          <value>org.exoplatform.portal.mop.i18n.I18Nized</value>
+          <value>org.exoplatform.portal.mop.i18n.LanguageSpace</value>
+          <value>org.exoplatform.portal.mop.i18n.Language</value>
+          <value>org.exoplatform.portal.mop.importer.Imported</value>
+
+          <!-- For the unit test purpose -->
+          <value>org.exoplatform.portal.config.SampleMixin</value>
+        </values-param>
+      </init-params>
+    </component-plugin>
+  </external-component-plugins>
+
+  <external-component-plugins>
+    <target-component>org.exoplatform.services.organization.OrganizationService</target-component>
+    <component-plugin>
+      <name>new.user.event.listener</name>
+      <set-method>addListenerPlugin</set-method>
+      <type>org.exoplatform.services.organization.impl.NewUserEventListener</type>
+      <init-params>
+        <object-param>
+          <name>configuration</name>
+          <object type="org.exoplatform.services.organization.impl.NewUserConfig">
+            <field  name="group">
+              <collection type="java.util.ArrayList">
+                <value>
+                  <object type="org.exoplatform.services.organization.impl.NewUserConfig$JoinGroup">
+                    <field  name="groupId"><string>/platform/users</string></field>
+                    <field  name="membership"><string>member</string></field>
+                  </object>
+                </value>
+              </collection>
+            </field>
+            <field  name="ignoredUser">
+              <collection type="java.util.HashSet">
+                <value><string>root</string></value>
+                <value><string>john</string></value>
+                <value><string>mary</string></value>
+                <value><string>demo</string></value>
+              </collection>
+            </field>
+          </object>
+        </object-param>
+      </init-params>
+    </component-plugin>
+    <component-plugin>
+      <name>user.portal.config.listener</name>
+      <set-method>addListenerPlugin</set-method>
+      <type>org.exoplatform.portal.config.UserPortalConfigListener</type>
+    </component-plugin>
+    <component-plugin>
+      <name>group.portal.config.listener</name>
+      <set-method>addListenerPlugin</set-method>
+      <type>org.exoplatform.portal.config.GroupPortalConfigListener</type>
+    </component-plugin>
+  </external-component-plugins>
+
+  <external-component-plugins>
+    <target-component>org.exoplatform.services.cms.impl.DMSConfiguration</target-component>
+    <component-plugin>
+      <name>dmsconfiguration.plugin</name>
+      <set-method>addPlugin</set-method>
+      <type>org.exoplatform.services.cms.impl.DMSRepositoryConfiguration</type>
+      <description>DMS Repository configuration</description>
+      <init-params>
+        <value-param>
+          <name>systemWorkspace</name>
+          <value>dms-system</value>
+        </value-param>
+      </init-params>
+    </component-plugin>
+  </external-component-plugins>
+</configuration>

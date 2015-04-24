@@ -9,7 +9,7 @@
 
   <!--If define the Portlet Application name MUST end with .par-->
   <display-name>ecmadmin</display-name>
-
+  <absolute-ordering />
   <description>
     This application is a portlet. It can not be used outside a portal.
     This web.xml file is mandatory in each .par archive file.

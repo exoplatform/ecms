@@ -30,7 +30,9 @@ import org.exoplatform.commons.utils.ListAccessImpl;
 import org.exoplatform.ecm.webui.core.UIPagingGrid;
 import org.exoplatform.services.cms.BasePath;
 import org.exoplatform.services.cms.drives.ManageDriveService;
+import org.exoplatform.services.cms.impl.Utils;
 import org.exoplatform.services.cms.views.ManageViewService;
+import org.exoplatform.services.cms.views.impl.ManageViewPlugin;
 import org.exoplatform.services.jcr.ext.common.SessionProvider;
 import org.exoplatform.services.wcm.utils.WCMCoreUtils;
 import org.exoplatform.web.application.ApplicationMessage;
@@ -135,6 +137,7 @@ public class UIECMTemplateList extends UIPagingGrid {
       }
       try {
         vservice.removeTemplate(templatePath, WCMCoreUtils.getUserSessionProvider());
+        Utils.addEditedConfiguredData(templateName, ManageViewPlugin.class.getSimpleName(), ManageViewPlugin.EDITED_CONFIGURED_VIEWS_TEMPLATES, true);
       } catch (AccessDeniedException ex) {
         UIApplication app = uiECMTemp.getAncestorOfType(UIApplication.class);
         Object[] args = { "UIViewFormTabPane.label.option." + templateName };

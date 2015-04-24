@@ -101,10 +101,10 @@ public class UIAddressBar extends UIForm {
   private final static String MESSAGE_NOT_SUPPORT_KEYWORD = "UIAddressBar.msg.keyword-not-support";
   final static private String FIELD_SIMPLE_SEARCH      = "simpleSearch";
 
-  final static private  String ROOT_SQL_QUERY  = "select * from nt:base where " +
-                               "(jcr:primaryType like 'exo:symlink' or jcr:primaryType like 'exo:taxonomyLink')" +
-                               " OR ( contains(*, '$1') or lower(exo:name) like '%$2%' or lower(exo:commentContent) like '%$3%') order by exo:title ASC";
-  final static private String SQL_QUERY = "select * from nt:base where jcr:path like '$0/%' AND " +
+  final static private  String ROOT_SQL_QUERY  = "select * from nt:base where (not jcr:primaryType like 'nt:resource') AND" +
+                               "((jcr:primaryType like 'exo:symlink' or jcr:primaryType like 'exo:taxonomyLink')" +
+                               " OR ( contains(*, '$1') or lower(exo:name) like '%$2%' or lower(exo:commentContent) like '%$3%')) order by exo:title ASC";
+  final static private String SQL_QUERY = "select * from nt:base where (not jcr:primaryType like 'nt:resource') AND jcr:path like '$0/%' AND " +
                                "( (jcr:primaryType like 'exo:symlink' or jcr:primaryType like 'exo:taxonomyLink')" +
                                " OR ( contains(*, '$1') or lower(exo:name) like '%$2%' or lower(exo:commentContent) like '%$3%') ) order by exo:title ASC";
 

@@ -1489,6 +1489,7 @@
       <import-successful>crwdns6791092:0crwdne6791092:0</import-successful>
       <filename-invalid>crwdns6791093:0crwdne6791093:0</filename-invalid>
       <filetype-error>crwdns6791094:0crwdne6791094:0</filetype-error>
+      <xml-invalid>There is an invalid character at position [row, column]:{0} in {1} file</xml-invalid>
       <mimetype-invalid>crwdns6791095:0crwdne6791095:0</mimetype-invalid>
       <access-denied>crwdns6791096:0crwdne6791096:0</access-denied>
       <constraint-violation-exception>crwdns6791097:0{0}crwdne6791097:0</constraint-violation-exception>

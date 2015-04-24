@@ -38,7 +38,8 @@ var UserLanguage = {
 	
 	LabelFolder							: 	"Folder",
 	LabelAlert							: 	"Please choose a file before upload",
-	LabelName							: 	"Name"
+	LabelName							: 	"Name",
+	SelectFile							:	"Select File",
 };
 
 CKEDITOR.plugins.setLang( 'content', 'en',

@@ -31,7 +31,6 @@ import org.exoplatform.commons.upgrade.UpgradeProductPlugin;
 import org.exoplatform.commons.utils.PrivilegedSystemHelper;
 import org.exoplatform.commons.version.util.VersionComparator;
 import org.exoplatform.container.xml.InitParams;
-import org.exoplatform.services.cms.impl.Utils;
 import org.exoplatform.services.cms.views.ApplicationTemplateManagerService;
 import org.exoplatform.services.cms.views.impl.ApplicationTemplateManagerServiceImpl;
 import org.exoplatform.services.jcr.ext.common.SessionProvider;
@@ -112,13 +111,8 @@ public class WCMTemplateUpgradePlugin extends UpgradeProductPlugin {
       //remove all old script nodes
       for (Node removedNode : removedNodes) {
         try {
-          String editedTemplate = removedNode.getParent().getName().concat(removedNode.getName());
           removedNode.remove();
           templateHomeNode.save();
-          Utils.removeEditedConfiguredData(editedTemplate,
-                                           ApplicationTemplateManagerServiceImpl.class.getSimpleName(),
-                                           ApplicationTemplateManagerServiceImpl.EDITED_CONFIGURED_TEMPLATES,
-                                           true);
         } catch (Exception e) {
           if (log.isInfoEnabled()) {
             log.error("Error in " + this.getName() + ": Can not remove old template: " + removedNode.getPath());

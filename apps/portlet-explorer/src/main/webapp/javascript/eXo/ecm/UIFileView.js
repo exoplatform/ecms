@@ -264,6 +264,7 @@ UIFileView.prototype.clickItem = function(event, element, callback) {
 	gj("input:checkbox", element).each(function(index, elem) {
 		gj(elem).attr("checked", true);
 	});
+	Self.checkAllCheckbox();
 	//eXo.core.Browser.setOpacity(element, 100);
 };
 
@@ -522,8 +523,7 @@ UIFileView.prototype.showItemContextMenu = function (event, element) {
 	gj("#ActionMenuPlaceHolder").prepend(contextMenu);
     gj(".uiRightClickPopupMenu", contextMenu).addClass("uiFileViewActionBar");
     gj(".uiRightPopupMenuContainer", contextMenu).addClass("clearfix");
-    //check lock, unlock action
-	var checkUnlock = false;
+
 	var checkRemoveFavourite = false;
 	var checkInTrash = false;
 	var checkMediaType = false;
@@ -532,7 +532,7 @@ UIFileView.prototype.showItemContextMenu = function (event, element) {
 	var checkExoActionNode = false;
 	var checkInStatus = false;
 	var isAbleToRestore = true;
-	
+
 	for (var i in Self.itemsSelected) {
 	  if (Array.prototype[i]) continue;
 	  // check if a node is exo:action or not to show nothing on action bar.
@@ -550,7 +550,6 @@ UIFileView.prototype.showItemContextMenu = function (event, element) {
 		isAbleToRestore = false; 
 		continue;
 	  }
-	  if (Self.itemsSelected[i].getAttribute('locked') == "true") checkUnlock = true;
 	  if (Self.itemsSelected[i].getAttribute('removeFavourite') == "true") checkRemoveFavourite = true;
 	  if (Self.itemsSelected[i].getAttribute('inTrash') == "true") checkInTrash = true;
 	  if (Self.itemsSelected[i].getAttribute('mediaType') == "true") checkMediaType = true;
@@ -571,7 +570,28 @@ UIFileView.prototype.showItemContextMenu = function (event, element) {
 	var addSymLinkAction= gj(contextMenu).find("i.uiIconEcmsAddSymLink:first")[0];
 	var deleteAction = gj(contextMenu).find("i.uiIconEcmsDelete:first")[0];
 	var viewInfoAction = gj(contextMenu).find("i.uiIconEcmsViewInfo:first")[0];
-	
+	//Check Lock, Unlock actions
+	var listLockedNode = 0;
+	var listUnlockedNode = 0;
+
+	for (var i in Self.itemsSelected) {
+	    if (Self.itemsSelected[i].getAttribute('locked') == "true") {
+	        listLockedNode = listLockedNode + 1;
+	    } else {
+	        listUnlockedNode = listUnlockedNode + 1;
+	    }
+	}
+	if (listLockedNode > 0 && listUnlockedNode == 0) {
+	    unlockAction.parentNode.style.display = "block";
+	    lockAction.parentNode.style.display = "none";
+	} else if (listLockedNode == 0 && listUnlockedNode > 0) {
+	    unlockAction.parentNode.style.display = "none";
+	    lockAction.parentNode.style.display = "block";
+	} else  {
+	    unlockAction.parentNode.style.display = "none";
+	    lockAction.parentNode.style.display = "none";
+	}
+
 	if (checkExoActionNode) {
 		// disable all buttons
 		deleteAction.parentNode.style.display = "none";
@@ -609,14 +629,6 @@ UIFileView.prototype.showItemContextMenu = function (event, element) {
 		addSymLinkAction.parentNode.style.display = "none";
 		
 	} else {
-		if (checkUnlock) {
-		  unlockAction.parentNode.style.display = "block";
-		  lockAction.parentNode.style.display = "none";
-		} else {
-		  unlockAction.parentNode.style.display = "none";
-		  lockAction.parentNode.style.display = "block";
-		}
-		  
 		if (checkRemoveFavourite) {
 		  removeFavouriteAction.parentNode.style.display = "block";
 		  addFavouriteAction.parentNode.style.display = "none";
@@ -672,6 +684,7 @@ UIFileView.prototype.showItemContextMenu = function (event, element) {
     	moreButton.hide();
     }
     eXo.ecm.ECMUtils.loadContainerWidth();
+    Self.checkAllCheckbox();
 };
 
 // hide context menu
@@ -817,7 +830,7 @@ UIFileView.prototype.clickRightMouse = function(event, elemt, menuId, objId, whi
 	gj("#UIActionBarTabsContainer").addClass("NoShow");
     if (!event)
       event = window.event;
-
+    eXo.ecm.OpenDocumentInOffice.updateLabel(objId);
     var contextMenu = document.getElementById(menuId);
     contextMenu.objId = objId;
 
@@ -910,6 +923,16 @@ UIFileView.prototype.clickRightMouse = function(event, elemt, menuId, objId, whi
     // Init feature Copy URL to Clipboard in case the action button appears right after select item in file view
     if(gj("#ECMContextMenu .uiIconEcmsCopyUrlToClipboard").is(":visible"))
       eXo.ecm.ECMUtils.initClipboard();
+
+    Self.checkAllCheckbox();
+};
+
+UIFileView.prototype.checkAllCheckbox = function() {
+	if (Self.itemsSelected.length == Self.allItems.length) {
+		gj("#UIFileViewCheckBox").attr("checked", true);
+	} else {
+		gj("#UIFileViewCheckBox").attr("checked", false);
+	}
 };
 
 function pressCtrl(event) {

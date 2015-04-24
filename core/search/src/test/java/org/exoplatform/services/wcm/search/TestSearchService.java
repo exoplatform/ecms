@@ -815,7 +815,7 @@ public class TestSearchService extends BaseSearchTest {
   * Search page update are based on offset an limit of the QueryCriteria updates. Then
   * results are paginated using a pageSize local variable
 
-  * Parameters are set tp:<br>
+  * Parameters are set to:<br>
   * searchSelectedPortal = acme<br>
   * keyword = "duplication searchKey"<br>
   * searchPageChecked = false<br>
@@ -885,7 +885,7 @@ public class TestSearchService extends BaseSearchTest {
 
    * Search page update are based on the PageList#getPage which internally will populate
    * the new page nodes and increment the current page index: ECMS-6444
-   * Parameters are set tp:<br>
+   * Parameters are set to:<br>
    * searchSelectedPortal = acme<br>
    * keyword = "duplication searchKey"<br>
    * searchPageChecked = false<br>
@@ -944,6 +944,81 @@ public class TestSearchService extends BaseSearchTest {
     }
     assertFalse(assertionMsg, isItemDuplicated);
   }
+
+  /**
+   * Test case 28: Test search document repetitively without offset setting
+   * Each round is the same with testSearchDocumentLiveMode() (Test case 5)
+   * Repeat 3 rounds to check cache eviction
+   * Query results are stored in ArrayNodePageList
+   * Search all documents in all sites which are in live mode (having publication property).
+   * With this case, the parameter values are:<br/>
+   * searchDocumentChecked = true<br>
+   * searchSelectedPortal = null<br>
+   * searchIsLiveMode = true<br>
+   * no setting of offset<br>
+   * 
+   */
+  public void testRepeatSearchDocument_ArrayNodePageList() throws Exception {
+    queryCriteria = new QueryCriteria();
+    queryCriteria.setSiteName(null);
+    queryCriteria.setKeyword(searchKeyword);
+    queryCriteria.setSearchDocument(true);
+    queryCriteria.setSearchWebContent(true);
+    queryCriteria.setLiveMode(true);
+    queryCriteria.setSearchWebpage(false);
+    queryCriteria.setFuzzySearch(true);
+    queryCriteria.setContentTypes(getWebContentSearchedDocTypes());
+
+    int searchItemsPerPage = 2;
+    AbstractPageList<ResultNode> pageList;
+    int searchRounds = 3;
+
+    for (int i = 1; i <= searchRounds; i++) {
+      System.out.println("- Search round " + i + "/" + searchRounds);
+      pageList = getSearchResult(true, searchItemsPerPage);
+      assertEquals("Wrong result number at round " + i + ": ", 2, pageList.getPage(1).size());
+      assertEquals("Wrong total number at round " + i + ": ", 4, pageList.getTotalNodes());
+    }  
+  }
+
+  /**
+   * Test case 29: Test search document repetitively without offset setting
+   * Each round is the same with testSearchDocumentLiveMode() (Test case 5)
+   * Repeat 3 rounds to check cache eviction
+   * Query results are stored in QueryResultPageList
+   * Search all documents in all sites which are in live mode
+   * and contain "duplicationSearchKeyword"
+   * With this case, the parameter values are:<br/>
+   * searchDocumentChecked = true<br>
+   * searchSelectedPortal = acme<br>
+   * searchIsLiveMode = true<br>
+   * no setting of offset<br>
+   * 
+   */
+  public void testRepeatSearchDocument_QueryResultPageList() throws Exception {
+    queryCriteria = new QueryCriteria();
+    queryCriteria.setSiteName(null);
+    queryCriteria.setKeyword(duplicationSearchKeyword);
+    queryCriteria.setSearchDocument(true);
+    queryCriteria.setSearchWebContent(true);
+    queryCriteria.setLiveMode(true);
+    queryCriteria.setSearchWebpage(false);
+    queryCriteria.setFuzzySearch(true);
+    queryCriteria.setContentTypes(getWebContentSearchedDocTypes());
+
+    int searchItemsPerPage = 100;
+    AbstractPageList<ResultNode> pageList;
+    int searchRounds = 3;
+
+    for (int i = 1; i <= searchRounds; i++) {
+      System.out.println("- Search round " + i + "/" + searchRounds);
+      pageList = getSearchResult(true, searchItemsPerPage);
+      // 20 web contents + 101 documents
+      assertEquals("Wrong result number of page 1 at round " + i + ": ", searchItemsPerPage, pageList.getPage(1).size());
+      assertEquals("Wrong result number of page 2 at round " + i + ": ", 21, pageList.getPage(2).size());
+    }  
+  }
+  
 
   public void tearDown() throws Exception {
     super.tearDown();

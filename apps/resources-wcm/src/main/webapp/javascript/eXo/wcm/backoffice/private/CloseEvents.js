@@ -103,9 +103,26 @@
 	  form.elements['formOp'].value = action ;
 	  
 
-	 if (navigator.appName == 'Microsoft Internet Explorer')
-	 {
+	 if (document.all && !document.addEventListener)
+	 {//IE and IE8 or lower
 	   if ((action.toLowerCase() == "save" || action.toLowerCase() == "saveandclose" || action.toLowerCase() == "close") && window.popup_opened == true) {
+	     //with IE8, we have to do a submit instead of a ajaxPost
+	     //to keep memory of backTo parameter, we get it from query
+	     //and recopy it as parameter of the form action
+	     //then, on the next page, after the submit, the backto parameter will still exists
+	     var backto = "";
+	     var query = window.location.search.substring(1);
+	     var vars = query.split("&");
+	     for (var i=0;i<vars.length;i++) {
+	         var pair = vars[i].split("=");
+	         if(pair[0] == "backto") {
+	             backto=pair[1];
+	             break;
+		}
+	     }
+	     if (!backto=="") {
+		form.action=form.action+("&backto="+backto);
+	     }
 	     window.onbeforeunload = null;
 	     useAjax=false;
 	     window.popup_opened = false;
@@ -167,9 +184,26 @@
 	  b_changed = false;
 	  this.ajaxPost(form) ;
 	  
-	  if (navigator.appName == 'Microsoft Internet Explorer')
-	  {
+	  if (document.all && !document.addEventListener)
+	  {//IE and IE8 or lower
 	    if (action.toLowerCase() == "changetab" && window.popup_opened == true) {
+	      //with IE8, we have to do a submit instead of a ajaxPost
+	      //to keep memory of backTo parameter, we get it from query
+	      //and recopy it as parameter of the form action
+	      //then, on the next page, after the submit, the backto parameter will still exists
+	      var backto = "";
+	      var query = window.location.search.substring(1);
+	      var vars = query.split("&");
+	      for (var i=0;i<vars.length;i++) {
+	         var pair = vars[i].split("=");
+	         if(pair[0] == "backto") {
+	             backto=pair[1];
+	             break;
+		}
+	      }
+	      if (!backto=="") {
+	         form.action=form.action+("&backto="+backto);
+	      }
 	      window.popup_opened = false;
 	      form.submit();
 	    }

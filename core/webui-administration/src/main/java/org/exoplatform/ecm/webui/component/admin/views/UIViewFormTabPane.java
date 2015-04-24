@@ -65,7 +65,7 @@ public class UIViewFormTabPane extends UITabPane {
 
   private String selectedTabId = "UITemplateContainer";
   
-  private String[] actions_ = new String[] {"Save", "Cancel"};
+  private String[] actions_ = new String[] {"Save", "Cancel", "Restore"};
   private String primaryBtn_ = "Save";
   
   private boolean isUpdate_ = false;
@@ -180,12 +180,10 @@ public class UIViewFormTabPane extends UITabPane {
     public void execute(Event<UIViewForm> event) throws Exception {
       UIViewFormTabPane uiViewTabPane = event.getSource().getParent();
       UIViewForm uiViewForm = uiViewTabPane.getChild(UIViewForm.class) ;
-      UITabForm uiTabForm = uiViewTabPane.getChild(UITabForm.class) ;
       uiViewForm.changeVersion() ;
       UIViewContainer uiContainer = uiViewTabPane.getAncestorOfType(UIViewContainer.class) ;
       UIViewList uiViewList = uiContainer.findFirstComponentOfType(UIViewList.class) ;
       uiViewList.refresh(uiViewList.getUIPageIterator().getCurrentPage());
-      uiTabForm.refresh(true) ;
       uiViewForm.refresh(true) ;
       uiViewTabPane.removeChildById(POPUP_PERMISSION) ;
       UIViewContainer uiViewContainer = uiViewTabPane.getAncestorOfType(UIViewContainer.class) ;

@@ -39,7 +39,8 @@ var UserLanguage = {
 	
 	LabelFolder						: 	"Thư mục",
 	LabelName						: 	"Tên",
-	LabelAlert						: 	"Hãy chọn file trước khi upload"
+	LabelAlert						: 	"Hãy chọn file trước khi upload",
+	SelectFile						:	"Chọn file",
 }
 
 CKEDITOR.plugins.setLang( 'content', 'vi',

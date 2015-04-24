@@ -1489,6 +1489,7 @@
       <import-successful>インポートに成功！</import-successful>
       <filename-invalid>インポートするための'アップロードファイル' フィールドの為のXMLファイルをブラウズ</filename-invalid>
       <filetype-error>アップロードされたファイルからノードをインポートできません。無効なファイルの可能性があります。</filetype-error>
+      <xml-invalid>There is an invalid character at position [row, column]:{0} in {1} file</xml-invalid>
       <mimetype-invalid>XMLファイルもしくはZIPファイルのみがインポートすることをサポートされています。</mimetype-invalid>
       <access-denied>アクセス出来ません! インポートする事が許されていません。</access-denied>
       <constraint-violation-exception>Impossible to import data. The type '{0}' is not allowed in this location.</constraint-violation-exception>

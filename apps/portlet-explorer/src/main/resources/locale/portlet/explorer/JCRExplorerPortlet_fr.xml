@@ -1489,6 +1489,7 @@
       <import-successful>Import effectué avec succès.</import-successful>
       <filename-invalid>Veuillez sélectionner un fichier xml pour l'importer.</filename-invalid>
       <filetype-error>Import impossible. Le fichier envoyé est probablement corrompu.</filetype-error>
+      <xml-invalid>There is an invalid character at position [row, column]:{0} in {1} file</xml-invalid>
       <mimetype-invalid>Seuls les fichier xml ou zip sont supportés pour l'import.</mimetype-invalid>
       <access-denied>Accès refusé. Vous n'avez pas les droits suffisants pour importer à cet endroit.</access-denied>
       <constraint-violation-exception>Impossible d'importer. Le type de noeud '{0}' n'est pas autorisé.</constraint-violation-exception>

@@ -18,6 +18,7 @@
             <name>search.exclude.datatypes</name>
             <description>exclude some data type when search</description>
             <property name="mimetypes" value="${wcm.search.excluded-mimetypes:text/css,text/javascript,application/x-javascript,text/ecmascript}" />
+            <property name="nodetypes" value="${wcm.search.excluded-nodetypes:exo:restoreLocation}" />
           </properties-param>
         </init-params>
       </component-plugin>

@@ -16,21 +16,6 @@
  */
 package org.exoplatform.ecm.webui.viewer;
 
-import java.io.BufferedInputStream;
-import java.io.File;
-import java.io.FileInputStream;
-import java.lang.reflect.Method;
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Locale;
-import java.util.Map;
-import java.util.ResourceBundle;
-
-import javax.jcr.Node;
-import javax.jcr.NodeIterator;
-import javax.jcr.RepositoryException;
-
 import org.exoplatform.download.DownloadService;
 import org.exoplatform.download.InputStreamDownloadResource;
 import org.exoplatform.portal.webui.util.Util;
@@ -38,8 +23,9 @@ import org.exoplatform.portal.webui.workspace.UIPortalApplication;
 import org.exoplatform.services.cms.mimetype.DMSMimeTypeResolver;
 import org.exoplatform.services.pdfviewer.PDFViewerService;
 import org.exoplatform.services.resources.ResourceBundleService;
-import org.exoplatform.web.application.RequireJS;
 import org.exoplatform.services.wcm.utils.WCMCoreUtils;
+import org.exoplatform.web.application.RequireJS;
+import org.exoplatform.webui.application.portlet.PortletRequestContext;
 import org.exoplatform.webui.config.annotation.ComponentConfig;
 import org.exoplatform.webui.config.annotation.EventConfig;
 import org.exoplatform.webui.core.UIComponent;
@@ -54,6 +40,23 @@ import org.exoplatform.webui.form.UIFormStringInput;
 import org.icepdf.core.pobjects.Document;
 import org.icepdf.core.pobjects.PInfo;
 
+import javax.jcr.Node;
+import javax.jcr.NodeIterator;
+import javax.jcr.RepositoryException;
+import javax.portlet.PortletRequest;
+import java.io.BufferedInputStream;
+import java.io.File;
+import java.io.FileInputStream;
+import java.lang.reflect.InvocationTargetException;
+import java.lang.reflect.Method;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Locale;
+import java.util.Map;
+import java.util.MissingResourceException;
+import java.util.ResourceBundle;
+
 /**
  * Created by The eXo Platform SARL
  * Author : Dang Van Minh
@@ -63,7 +66,7 @@ import org.icepdf.core.pobjects.PInfo;
  */
 @ComponentConfig(
     lifecycle = UIFormLifecycle.class,
-    template = "classpath:resources/templates/PDFViewer.gtmpl",
+    template = "classpath:resources/templates/PDFJSViewer.gtmpl",
     events = {
         @EventConfig(listeners = PDFViewer.NextPageActionListener.class, phase = Phase.DECODE),
         @EventConfig(listeners = PDFViewer.PreviousPageActionListener.class, phase = Phase.DECODE),
@@ -83,8 +86,10 @@ public class PDFViewer extends UIForm {
 
   final static private String PAGE_NUMBER = "pageNumber";
   final static private String SCALE_PAGE = "scalePage";
-
   final private String localeFile = "locale.portlet.viewer.PDFViewer";
+  private static final int MIN_IE_SUPPORTED_BROWSER_VERSION = 9;
+  private static final int MIN_FF_SUPPORTED_BROWSER_VERSION = 20;
+  private static final int MIN_CHROME_SUPPORTED_BROWSER_VERSION = 20;
 
   private int currentPageNumber_ = 1;
   private int maximumOfPage_ = 0;
@@ -106,7 +111,7 @@ public class PDFViewer extends UIForm {
 
   public void initDatas() throws Exception {
     UIComponent uiParent = getParent();
-    
+
     Method method = getMethod(uiParent, "getOriginalNode");
     Node originalNode = null;
     if(method != null) originalNode = (Node) method.invoke(uiParent, (Object[]) null);
@@ -114,7 +119,7 @@ public class PDFViewer extends UIForm {
     if(originalNode != null) {
       Document document = getDocument(originalNode);
       if (document != null) {
-    	maximumOfPage_ = document.getNumberOfPages();
+        maximumOfPage_ = document.getNumberOfPages();
         metadatas.clear();
         putDocumentInfo(document.getInfo());
         document.dispose();
@@ -125,7 +130,9 @@ public class PDFViewer extends UIForm {
   public Map getMetadataExtraction() { return metadatas; }
 
   public int getMaximumOfPage() throws Exception {
-    if(maximumOfPage_ == 0) initDatas();
+    if(maximumOfPage_ == 0) {
+      initDatas();
+    }
     return maximumOfPage_;
   }
 
@@ -142,10 +149,15 @@ public class PDFViewer extends UIForm {
   public void setPageNumber(int pageNum) { currentPageNumber_ = pageNum; };
 
   public String getResourceBundle(String key) {
-    Locale locale = Util.getUIPortal().getAncestorOfType(UIPortalApplication.class).getLocale() ;
-    ResourceBundleService resourceBundleService = WCMCoreUtils.getService(ResourceBundleService.class);
-    ResourceBundle resourceBundle=resourceBundleService.getResourceBundle(localeFile, locale, this.getClass().getClassLoader());
-    return resourceBundle.getString(key);
+    try {
+      Locale locale = Util.getUIPortal().getAncestorOfType(UIPortalApplication.class).getLocale();
+      ResourceBundleService resourceBundleService = WCMCoreUtils.getService(ResourceBundleService.class);
+      ResourceBundle resourceBundle = resourceBundleService.getResourceBundle(localeFile, locale, this.getClass().getClassLoader());
+
+      return resourceBundle.getString(key);
+    } catch (MissingResourceException e) {
+      return key;
+    }
   }
 
   private Document getDocument(Node node) throws RepositoryException, Exception {
@@ -196,6 +208,35 @@ public class PDFViewer extends UIForm {
     scaleOptions.add(new SelectItemOption<String>("200%",  "2.0f"));
     scaleOptions.add(new SelectItemOption<String>("300%",  "3.0f"));
     return scaleOptions;
+  }
+
+
+  /**
+   * Check if client has modern browser (IE9+, FF20+, Chrome 20+).
+   */
+  private boolean isNotModernBrowser() {
+    PortletRequestContext requestContext = PortletRequestContext.getCurrentInstance();
+    PortletRequest portletRequest = requestContext.getRequest();
+    String userAgent = portletRequest.getProperty("user-agent");
+    boolean isChrome = (userAgent.indexOf("Chrome/") != -1);
+    boolean isMSIE = (userAgent.indexOf("MSIE") != -1);
+    boolean isFirefox = (userAgent.indexOf("Firefox/") != -1);
+    String version = "1";
+    if (isFirefox) {
+      // Mozilla/5.0 (Macintosh; Intel Mac OS X 10.7; rv:13.0) Gecko/20100101 Firefox/13.0
+      version = userAgent.replaceAll("^.*?Firefox/", "").replaceAll("\\.\\d+", "");
+    } else if (isChrome) {
+      // Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/536.5 (KHTML, like Gecko) Chrome/19.0.1084.52 Safari/536.5
+      version = userAgent.replaceAll("^.*?Chrome/(\\d+)\\..*$", "$1");
+    } else if (isMSIE) {
+      // Mozilla/4.0 (compatible; MSIE 7.0; Windows NT 6.1; WOW64; Trident/5.0; SLCC2; .NET CLR 2.0.50727; .NET CLR 3.5.30729; .NET CLR 3.0.30729; .NET4.0C; .NET4.0E)
+      version = userAgent.replaceAll("^.*?MSIE\\s+(\\d+).*$", "$1");
+    }
+
+    boolean unsupportedBrowser = (isFirefox && Integer.parseInt(version) < MIN_FF_SUPPORTED_BROWSER_VERSION)
+            || (isChrome && Integer.parseInt(version) < MIN_CHROME_SUPPORTED_BROWSER_VERSION)
+            || (isMSIE && Integer.parseInt(version) < MIN_IE_SUPPORTED_BROWSER_VERSION);
+    return unsupportedBrowser;
   }
 
   static public class PreviousPageActionListener extends EventListener<PDFViewer> {
@@ -352,5 +393,17 @@ public class PDFViewer extends UIForm {
       }
     }
     return currentNode ;
+  }
+  
+  public String getActionOpenDocInDesktop() {
+    UIComponent uiParent = getParent();
+    String ret = "";
+    try {
+      Method method = getMethod(uiParent, "getActionOpenDocInDesktop");
+      if(method != null) ret = (String) method.invoke(uiParent, (Object[]) null);
+    } catch (NoSuchMethodException| IllegalArgumentException| IllegalAccessException| InvocationTargetException e) {
+      ret = "";
+    }
+    return ret;
   }
 }

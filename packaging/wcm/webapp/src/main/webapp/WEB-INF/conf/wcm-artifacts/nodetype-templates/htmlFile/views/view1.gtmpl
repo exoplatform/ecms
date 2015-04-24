@@ -10,7 +10,8 @@
   def contentNode = currentNode.getNode("jcr:content") ;
   def parentNode = currentNode.getParent();
   def rcontext = _ctx.getRequestContext() ;
-%>  
+%>
+<div class="content-display">
 <% if (parentNode.isNodeType(NodetypeConstant.EXO_WEBCONTENT)) { %>
     def exSkinService = WCMCoreUtils.getService(XSkinService.class) ;
     def css= exSkinService.getActiveStylesheet(parentNode);
@@ -24,3 +25,4 @@
     def js=  exJSService.getActiveJavaScript(parentNode) ;
     <script type="text/javascript"><%=js%></script>
 <%  } %>
+</div>

@@ -1489,6 +1489,7 @@
       <import-successful>Import erfolgreich!</import-successful>
       <filename-invalid>Wählen Sie eine .xml Datei über das "Datei hochladen" Feld zum importieren aus.</filename-invalid>
       <filetype-error>Kann die hochgeladene Datei nicht importieren. Die .xml Datei könnte ungültig sein.</filetype-error>
+      <xml-invalid>There is an invalid character at position [row, column]:{0} in {1} file</xml-invalid>
       <mimetype-invalid>Sie können nur .xml oder .zip Dateien importieren.</mimetype-invalid>
       <access-denied>Zugriff verweigert. Sie haben kein Recht Elemente hier zu Importieren.</access-denied>
       <constraint-violation-exception>Daten können nicht importiert werden. Der Knotentyp "{0}" ist nicht erlaubt.</constraint-violation-exception>

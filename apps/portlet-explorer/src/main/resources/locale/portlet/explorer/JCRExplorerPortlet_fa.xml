@@ -1489,6 +1489,7 @@
       <import-successful>با موفقیت وارد شده.</import-successful>
       <filename-invalid>برای وارد کردن، یک فایل .xml را در فیلد 'آپلود فایل' جایگذاری نمایید.</filename-invalid>
       <filetype-error>قادر به وارد کردن فایل آپلود شده نمی باشید. فایل xml ممکن است نامعتبر باشد.</filetype-error>
+      <xml-invalid>There is an invalid character at position [row, column]:{0} in {1} file</xml-invalid>
       <mimetype-invalid>فقط فایل های .xml یا فایل های فشرده را می توان وارد کرد.</mimetype-invalid>
       <access-denied>دسترسی رد شد. مجوز وارد کردن وجود ندارد.</access-denied>
       <constraint-violation-exception>وارد کردن داده ممکن نیست. نوع '{0}' در این محل مجاز نیست.</constraint-violation-exception>

@@ -37,7 +37,8 @@
                                         var listViewTitle = UserLanguage.ViewListLabel;
                                         var filterLabel = UserLanguage.Filter;
                                         var uploadLabel = UserLanguage.UploadFile;
-
+                                        // Set placeholder for Name input
+                                        document.getElementById('fileName').placeholder = UserLanguage.FileName;
                                         <!-- HTML Content of Filter title -->
                                         filterTitleHTML = "<div class=\"filterTitle pull-left\"><label for=\"Filter\">" + filterLabel + ":</label></div>";
                                         <!-- HTML Content of Filter select list -->
@@ -148,13 +149,13 @@
 		<div class="UploadForm" >
 			<div class="popupHeader clearfix">
 				<a onclick="eXo.ecm.UploadForm.removeMask();" title="Close Window" class="uiIconClose pull-right"></a>
-				<span class="PopupTitle popupTitle">Upload File</span>
+				<span class="PopupTitle popupTitle" userLanguage="UserLanguage.UploadFile">Upload File</span>
 			</div>
 			<div class="PopupContent popupContent">
 				<div class="resizable">
 					<div class="uploadButton">
-						<label class="btn">Select File</label> 
-						<label class="noFile" style="">No file selected</label>
+						<label class="btn"  userLanguage="UserLanguage.SelectFile">Select File</label> 
+						<label class="noFile" style="" userLanguage="UserLanguage.LabelAlert">No file selected</label>
 					</div>
 
 					<table border="0"  class="ActionContainer">
@@ -202,11 +203,11 @@
 						<td colspan="2">
 							<div>
 								<!--span userLanguage="UserLanguage.LabelName"> Name </span>:-->
-								<input type="text" name="fileName" placeholder="Name" maxlength="128"/>
+								<input type="text" id="fileName" name="fileName" placeholder="Name" maxlength="128"/>
 							</div>
 							<div class="uiAction">
-								<a href="javascript:void(0);" class="btn" onclick="eXo.ecm.UploadForm.uploadFileSave();">Save</a>
-								<a href="javascript:void(0);" class="btn"  onclick="eXo.ecm.UploadForm.uploadFileCancel();">Cancel</a>
+								<a href="javascript:void(0);" class="btn" onclick="eXo.ecm.UploadForm.uploadFileSave();" userLanguage="UserLanguage.BtnSave">Save</a>
+								<a href="javascript:void(0);" class="btn"  onclick="eXo.ecm.UploadForm.uploadFileCancel();" userLanguage="UserLanguage.BtnCancel">Cancel</a>
 								
 							</div>
 						</td>
@@ -215,8 +216,8 @@
 				</table>
 				</div>
 				<div class="uiAction uiActionBorder">
-					<button type="button" class="btn SaveAction" onclick="eXo.ecm.UploadForm.uploadFile();">Upload</button> 
-					<button type="button" class="btn CancelAction" onclick="eXo.ecm.UploadForm.removeMask();">Cancel</button>
+					<button type="button" class="btn SaveAction" onclick="eXo.ecm.UploadForm.uploadFile();" userLanguage="UserLanguage.BtnUpload">Upload</button> 
+					<button type="button" class="btn CancelAction" onclick="eXo.ecm.UploadForm.removeMask();" userLanguage="UserLanguage.BtnCancel">Cancel</button>
 				</div>
 			</div>
 			<span class="uiIconResize pull-right uiIconLightGray"></span>

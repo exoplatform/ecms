@@ -47,6 +47,7 @@ import org.exoplatform.portal.config.UserACL;
 import org.exoplatform.portal.webui.util.Util;
 import org.exoplatform.services.cache.CacheService;
 import org.exoplatform.services.cache.ExoCache;
+import org.exoplatform.services.cms.documents.TrashService;
 import org.exoplatform.services.cms.templates.TemplateService;
 import org.exoplatform.services.jcr.RepositoryService;
 import org.exoplatform.services.jcr.core.ManageableRepository;
@@ -77,7 +78,6 @@ import org.exoplatform.services.wcm.utils.AbstractQueryBuilder.PATH_TYPE;
 import org.exoplatform.services.wcm.utils.AbstractQueryBuilder.QueryTermHelper;
 import org.exoplatform.webui.application.WebuiRequestContext;
 import org.exoplatform.webui.application.portlet.PortletRequestContext;
-
 /**
  * The SiteSearchService component is used in the Search portlet that allows users
  * to find all information matching with your given keyword.
@@ -146,8 +146,8 @@ public class SiteSearchServiceImpl implements SiteSearchService {
     this.templateService = templateService;
     this.repositoryService = repositoryService;
     this.configurationService = configurationService;
-    this.foundNodeCache = caService.getCacheInstance(SiteSearchService.class.getSimpleName());
-    this.dropNodeCache = caService.getCacheInstance(SiteSearchService.class.getSimpleName());
+    this.foundNodeCache = caService.getCacheInstance(SiteSearchService.class.getSimpleName() + ".found");
+    this.dropNodeCache = caService.getCacheInstance(SiteSearchService.class.getSimpleName() + ".drop");
     if (initParams != null) {
       ValueParam isEnabledFuzzySearchValue = initParams.getValueParam(IS_ENABLED_FUZZY_SEARCH);
       if (isEnabledFuzzySearchValue != null)
@@ -403,8 +403,8 @@ public class SiteSearchServiceImpl implements SiteSearchService {
       searchByNodeName(queryCriteria, queryBuilder);
     }
     mapCategoriesCondition(queryCriteria,queryBuilder);
-    mapDatetimeRangeSelected(queryCriteria,queryBuilder);
-    mapMetadataProperties(queryCriteria,queryBuilder, LOGICAL.AND);
+    mapDatetimeRangeSelected(queryCriteria, queryBuilder);
+    mapMetadataProperties(queryCriteria, queryBuilder, LOGICAL.AND);
     orderBy(queryCriteria, queryBuilder);
     String queryStatement = queryBuilder.createQueryStatement();
     Query query = queryManager.createQuery(queryStatement, Query.SQL);
@@ -683,8 +683,6 @@ public class SiteSearchServiceImpl implements SiteSearchService {
       }
     }
     queryBuilder.closeGroup();
-    
-    
     //unwanted document types: exo:cssFile, exo:jsFile
     if(excludeMimeTypes.size()<1) return;
     queryBuilder.openGroup(LOGICAL.AND_NOT);
@@ -699,6 +697,18 @@ public class SiteSearchServiceImpl implements SiteSearchService {
     queryBuilder.like("jcr:mixinTypes", "exo:cssFile", LOGICAL.NULL);
     queryBuilder.like("jcr:mixinTypes","exo:jsFile",LOGICAL.OR);
     queryBuilder.closeGroup();
+
+    queryBuilder.openGroup(LOGICAL.AND_NOT);
+    String[] _excludeNodeTypes = excludeNodeTypes.toArray(new String[]{});
+    for(int i=0; i < _excludeNodeTypes.length; i++) {
+      if(i==0) {
+        queryBuilder.equal("jcr:mixinTypes", _excludeNodeTypes[i], LOGICAL.NULL);
+      } else {
+        queryBuilder.equal("jcr:mixinTypes", _excludeNodeTypes[i], LOGICAL.OR);
+      }
+    }
+    queryBuilder.closeGroup();
+
   }
 
   /**
@@ -726,7 +736,8 @@ public class SiteSearchServiceImpl implements SiteSearchService {
 
     private boolean isSearchContent;
     private QueryCriteria queryCriteria;
-    
+    private TrashService trashService = WCMCoreUtils.getService(TrashService.class);
+
     public NodeFilter(boolean isSearchContent, QueryCriteria queryCriteria) {
       this.isSearchContent = isSearchContent;
       this.queryCriteria = queryCriteria;
@@ -735,6 +746,8 @@ public class SiteSearchServiceImpl implements SiteSearchService {
     @Override
     public Node filterNodeToDisplay(Node node) {
       try {
+        if (node == null || node.getPath().contains("/jcr:system/")) return null;
+        if(trashService.isInTrash(node)) return null;
         Node displayNode = getNodeToCheckState(node);
         if(displayNode == null) return null;
         if (isSearchContent) return displayNode;
