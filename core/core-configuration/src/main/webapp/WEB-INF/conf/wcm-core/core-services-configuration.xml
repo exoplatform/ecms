@@ -690,11 +690,12 @@
         <object-param>
           <name>org.exoplatform.services.cms.lock.impl.LockServiceImpl</name>
           <description>The JBoss Cache configuration for Lock service</description>
-          <object type="org.exoplatform.services.cache.impl.jboss.ea.EAExoCacheConfig">
-            <field name="name"><string>org.exoplatform.services.cms.lock.impl.LockServiceImpl</string></field>
-            <field name="expirationTimeout"><long>${wcm.cache.lockservice.expirationtimeout:-1}</long></field>
-            <field name="maxNodes"><int>${wcm.cache.lockservice.maxnodes:300}</int></field>
-            <field name="distributed"><boolean>true</boolean></field>
+          <object type="org.exoplatform.services.cache.impl.infinispan.generic.GenericExoCacheConfig">
+	    <field name="name"><string>org.exoplatform.services.cms.lock.impl.LockServiceImpl</string></field>
+            <field name="strategy"><string>LIRS</string></field>
+            <field name="maxEntries"><int>${wcm.cache.lockservice.maxnodes:300}</int></field>
+            <field name="lifespan"><long>${wcm.cache.lockservice.expirationtimeout:-1}</long></field>
+            <field name="replicated"><boolean>true</boolean></field>
           </object>
         </object-param>
       </init-params>
@@ -735,11 +736,12 @@
         <object-param>
           <name>org.exoplatform.services.cms.folksonomy.impl.NewFolksonomyServiceImpl</name>
           <description>The JBoss Cache configuration for Folk service</description>
-          <object type="org.exoplatform.services.cache.impl.jboss.ea.EAExoCacheConfig">
-            <field name="name"><string>org.exoplatform.services.cms.folksonomy.impl.NewFolksonomyServiceImpl</string></field>
-            <field name="expirationTimeout"><long>${wcm.cache.folkservice.expirationtimeout:-1}</long></field>
-            <field name="maxNodes"><int>${wcm.cache.folkservice.maxnodes:300}</int></field>
-            <field name="distributed"><boolean>true</boolean></field>
+          <object type="org.exoplatform.services.cache.impl.infinispan.generic.GenericExoCacheConfig">
+	    <field name="name"><string>org.exoplatform.services.cms.folksonomy.impl.NewFolksonomyServiceImpl</string></field>
+            <field name="strategy"><string>LIRS</string></field>
+            <field name="maxEntries"><int>${wcm.cache.folkservice.maxnodes:300}</int></field>
+            <field name="lifespan"><long>${wcm.cache.folkservice.expirationtimeout:-1}</long></field>
+            <field name="replicated"><boolean>true</boolean></field>
           </object>
         </object-param>
       </init-params>
