@@ -1,7 +1,7 @@
 <% 
 	import javax.jcr.Node;
 	import org.exoplatform.web.application.Parameter;
-	import org.exoplatform.wcm.webui.reader.ContentReader;
+	import org.apache.commons.lang.StringEscapeUtils;
 	
 	def rcontext = _ctx.getRequestContext() ;
 	def String htmlWYSIWYGFormId = "htmlData" + uicomponent.hashCode();
@@ -117,7 +117,7 @@
 									if(webContentNode != null && webContentNode.hasNode("default.html")) {
 										Node htmlNode = webContentNode.getNode("default.html");
 										htmlContent = htmlNode.getNode("jcr:content").getProperty("jcr:data").getValue().getString();
-										htmlContent = ContentReader.getEscapeHtmlContent(htmlContent);
+										htmlContent = StringEscapeUtils.unescapeHtml(htmlContent);
 									}
 									String[] htmlArguments = ["jcrPath=/node/default.html/jcr:content/jcr:data", "options=toolbar:CompleteWCM,height:'410px',noSanitization", htmlContent];
 									uicomponent.addRichtextField(htmlWYSIWYGFormId, htmlArguments) ;
@@ -167,6 +167,7 @@
 									String summaryContent = "";
 									if (webContentNode != null && webContentNode.hasProperty("exo:summary")) { 
 										summaryContent = webContentNode.getProperty("exo:summary").getValue().getString();
+                		summaryContent = StringEscapeUtils.unescapeHtml(summaryContent);
 									}
 									String[] fieldSummary = ["jcrPath=/node/exo:summary", "editable=if-null", summaryContent] ;
 									uicomponent.addRichtextField("exo:summary", fieldSummary) ;
