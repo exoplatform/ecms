@@ -604,6 +604,7 @@ public class ManageDocumentService implements ResourceContainer {
     for (String folder : currentFolder.split("/")) {
       if (node.hasNode(folder)){
         node = node.getNode(folder);
+        if (node.isNodeType(NodetypeConstant.EXO_SYMLINK)) node = linkManager.getTarget(node);
       } else if (node.isNodeType(NodetypeConstant.EXO_SYMLINK)) {
         node = linkManager.getTarget(node).getNode(folder);
       } else {
