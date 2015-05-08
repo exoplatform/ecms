@@ -20,7 +20,7 @@
 		  
 		  String baseVersion = "" ;
 			if(uicomponent.isBaseVersion(node)) {			
-			  baseVersion = " (Base Version)" ;
+			  baseVersion = " (" + _ctx.appRes("UIVersionInfo.label.baseVersion") + ")" ;
 			}
 		  
 		  String[] labels = uicomponent.getVersionLabels(node);
@@ -38,7 +38,7 @@
 		  }
 		  label.append("</label>") ;
 		  
-		  String show = "Version: " + node.getName() + " " + label.toString() + baseVersion;
+		  String show = _ctx.appRes("UIVersionInfo.label.version") + ": " + node.getName() + " " + label.toString() + baseVersion;
 			String dateCreated = node.getCreatedTime().getTime().toString();
 			String titleLable = displayLabel.toString();
 			println """
