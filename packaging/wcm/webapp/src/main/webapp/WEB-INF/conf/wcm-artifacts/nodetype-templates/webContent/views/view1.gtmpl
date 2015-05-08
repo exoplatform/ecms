@@ -76,13 +76,13 @@
 							}	
 						}
 					%>
-				</div>
 				<%
 				  if(uicomponent.isFastPublishLink()) {
 				    print uicomponent.getInlineEditingField(currentNode, "default.html/jcr:content/jcr:data", html, "WYSIWYG", "Text", "Content", true, cssOption, "toolbar=CompleteWCM", "fast_publish=" + uicomponent.getFastPublishLink());
 				  } else print uicomponent.getInlineEditingField(currentNode, "default.html/jcr:content/jcr:data", html, "WYSIWYG", "Text", "Content", true, cssOption, "toolbar=CompleteWCM");
-        %>          
-		    <% if (uicomponent.isEnableVote()) 
+        %>
+				</div>
+		    <% if (uicomponent.isEnableVote())
 	           _ctx.include(uicomponent.getViewTemplate("mix:votable", "view1"));
 	         if (uicomponent.isEnableComment())
 	           _ctx.include(uicomponent.getViewTemplate("exo:comments", "view1")); 
