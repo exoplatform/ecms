@@ -102,11 +102,11 @@
 	 } catch(e) {}
 	  form.elements['formOp'].value = action ;
 	  
-
-	 if (document.all && !document.addEventListener)
-	 {//IE and IE8 or lower
+	 var userAgent = window.navigator.userAgent;
+	 if (userAgent.indexOf('MSIE ') > 0 || userAgent.indexOf('Trident/') > 0)
+	 {// If IE11 or lower
 	   if ((action.toLowerCase() == "save" || action.toLowerCase() == "saveandclose" || action.toLowerCase() == "close") && window.popup_opened == true) {
-	     //with IE8, we have to do a submit instead of a ajaxPost
+	     //with IE 11 and lower, we have to do a submit instead of a ajaxPost
 	     //to keep memory of backTo parameter, we get it from query
 	     //and recopy it as parameter of the form action
 	     //then, on the next page, after the submit, the backto parameter will still exists
@@ -184,10 +184,11 @@
 	  b_changed = false;
 	  this.ajaxPost(form) ;
 	  
-	  if (document.all && !document.addEventListener)
-	  {//IE and IE8 or lower
+	  var userAgent = window.navigator.userAgent;
+	  if (userAgent.indexOf('MSIE ') > 0 || userAgent.indexOf('Trident/') > 0)
+	  {//If IE 11 or lower
 	    if (action.toLowerCase() == "changetab" && window.popup_opened == true) {
-	      //with IE8, we have to do a submit instead of a ajaxPost
+	      //with IE 11 and lower, we have to do a submit instead of a ajaxPost
 	      //to keep memory of backTo parameter, we get it from query
 	      //and recopy it as parameter of the form action
 	      //then, on the next page, after the submit, the backto parameter will still exists
