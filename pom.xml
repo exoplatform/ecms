@@ -49,10 +49,10 @@
     <!-- GateIn Project Dependencies -->
     <org.gatein.wci.version>2.3.0.Final</org.gatein.wci.version>
     <org.gatein.pc.version>2.4.0.Final</org.gatein.pc.version>
-    <org.gatein.portal.version>4.2.0-RC1-PLF</org.gatein.portal.version>
+    <org.gatein.portal.version>4.2.x-PLF-SNAPSHOT</org.gatein.portal.version>
     <!-- Platform Project Dependencies -->
-    <org.exoplatform.commons.version>4.2.0-RC1</org.exoplatform.commons.version>
-    <org.exoplatform.platform-ui.version>4.2.0-RC1</org.exoplatform.platform-ui.version>
+    <org.exoplatform.commons.version>4.2.x-SNAPSHOT</org.exoplatform.commons.version>
+    <org.exoplatform.platform-ui.version>4.2.x-SNAPSHOT</org.exoplatform.platform-ui.version>
     <!-- Platform Project 3rd party Dependencies -->
     <org.exoplatform.doc.doc-style.version>4.2.0-RC1</org.exoplatform.doc.doc-style.version>
   </properties>
