@@ -51,6 +51,7 @@ public class UITreeNodePageIterator extends UIPageIterator {
     public void execute(Event<UITreeNodePageIterator> event) throws Exception {
       UITreeNodePageIterator uiPageIterator = event.getSource() ;
       int page = Integer.parseInt(event.getRequestContext().getRequestParameter(OBJECTID)) ;
+      if(uiPageIterator.getAvailablePage() < page) page = uiPageIterator.getAvailablePage();	    
       uiPageIterator.setCurrentPage(page) ;
       if(uiPageIterator.getParent() == null) return ;
       UIJCRExplorer uiExplorer = uiPageIterator.getAncestorOfType(UIJCRExplorer.class);
@@ -76,7 +77,7 @@ public class UITreeNodePageIterator extends UIPageIterator {
       if(!currentPath.equalsIgnoreCase(uiPageIterator.getSelectedPath())) return ;
 
       UIPageIterator iterator = uiDocumentInfo.getContentPageIterator();
-      iterator.setCurrentPage(page);
+      if(iterator.getAvailablePage() >= page) iterator.setCurrentPage(page);
 
       if (uiDocumentWorkspace.isRendered() && uiDocumentContainer.isRendered() && uiDocumentInfo.isRendered()) {
         event.getRequestContext().addUIComponentToUpdateByAjax(uiDocumentInfo);

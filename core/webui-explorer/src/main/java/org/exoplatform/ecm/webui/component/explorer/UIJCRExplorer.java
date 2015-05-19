@@ -730,6 +730,7 @@ public class UIJCRExplorer extends UIContainer {
         } else {
           UIDocumentInfo uiDocumentInfo = uiDocumentContainer.getChildById("UIDocumentInfo") ;
           uiDocumentInfo.updatePageListData();
+          if(contentPageIterator.getAvailablePage() < currentPage) currentPage = contentPageIterator.getAvailablePage();
           contentPageIterator.setCurrentPage(currentPage);
           uiDocumentContainer.setRenderedChild("UIDocumentInfo") ;
         }
