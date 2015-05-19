@@ -1133,9 +1133,13 @@ public class UIDocumentInfo extends UIBaseNodePresentation {
     try {
       for (String documentType : allItemsByTypeFilterSet) {
         for (String mimeType : documentTypeService.getMimeTypes(documentType)) {
-          if (node.getNode(Utils.JCR_CONTENT).getProperty(Utils.JCR_MIMETYPE).getString().indexOf(mimeType) >= 0) {
-            found = true;
-            break;
+          if(node.hasNode(Utils.JCR_CONTENT)){
+            Node content = node.getNode(Utils.JCR_CONTENT);
+            if (content.hasProperty(Utils.JCR_MIMETYPE)
+                    && content.getProperty(Utils.JCR_MIMETYPE).getString().indexOf(mimeType) >= 0) {
+              found = true;
+              break;
+            }
           }
         }
       }
