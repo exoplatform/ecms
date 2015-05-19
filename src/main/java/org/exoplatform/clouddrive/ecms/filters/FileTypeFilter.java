@@ -23,14 +23,8 @@ import org.exoplatform.services.log.Log;
 import org.exoplatform.webui.ext.filter.UIExtensionFilter;
 import org.exoplatform.webui.ext.filter.UIExtensionFilterType;
 
-import java.util.ArrayList;
-import java.util.Collection;
-import java.util.List;
 import java.util.Map;
 import java.util.Set;
-
-import javax.activation.MimeType;
-import javax.activation.MimeTypeParseException;
 
 /**
  * Filter files by MIME type including wildcard types. <br>
@@ -47,28 +41,6 @@ public class FileTypeFilter implements UIExtensionFilter {
 
   protected Set<String>      mimeTypes;
 
-  protected List<MimeType>   accepted;
-
-  @Deprecated
-  Collection<MimeType> mimeTypes() {
-    if (accepted == null) {
-      synchronized (this) {
-        if (accepted == null) {
-          accepted = new ArrayList<MimeType>();
-          for (String m : mimeTypes) {
-            try {
-              accepted.add(new MimeType(m));
-            } catch (MimeTypeParseException e) {
-              // skip this accepted
-              LOG.warn("Error parsing configured MIME type " + m + ": " + e);
-            }
-          }
-        }
-      }
-    }
-    return accepted;
-  }
-
   public boolean accept(Map<String, Object> context) throws Exception {
     if (mimeTypes == null || mimeTypes.isEmpty()) {
       return true;
@@ -79,18 +51,6 @@ public class FileTypeFilter implements UIExtensionFilter {
     if (mimeTypes.contains(type)) {
       return true;
     }
-
-    // try wildcard (rely on MimeType.match() impl)
-    // try {
-    // MimeType mimeType = new MimeType(type);
-    // for (MimeType accepted : mimeTypes()) {
-    // if (accepted.match(mimeType)) {
-    // return true;
-    // }
-    // }
-    // } catch (MimeTypeParseException e) {
-    // // unfortunately - no
-    // }
 
     // try wildcard (type starts with accepted)
     for (String accepted : mimeTypes) {
