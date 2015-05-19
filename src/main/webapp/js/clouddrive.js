@@ -1855,8 +1855,10 @@
 				if (status == 403 && response.name) {
 					// assuming provider object in response
 					cloudDriveUI.showWarn("Renew access to your " + response.name,
-					    "Start <a class='cdSynchronizeProcessAction' href='javascript:void(0);' style='curson: pointer; border-bottom: 1px dashed #999; display: inline;'>"
-					    + " synchronization</a> to update access permissions.</div>", function(pnotify) {
+					    "Start <a class='cdSynchronizeProcessAction' href='javascript:void(0);'" 
+					    + " style='cursor: pointer; border-bottom: 1px dashed #999; display: inline;'>"
+					    + " synchronization</a> to update access permissions.</div>", 
+					    function(pnotify) {
 						$(pnotify.text_container).find("a.cdSynchronizeProcessAction").click(function() {
 							cloudDrive.synchronize(this);
 						});
