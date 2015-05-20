@@ -2418,6 +2418,7 @@
 	<UIPermissionTreeForm>
 		<action>
 			<Save>Save</Save>
+			<Cancel>#{word.cancel}</Cancel>
 			<Reset>Reset</Reset>
 			<NextAddAction>Next</NextAddAction>
 			<Previous>Previous</Previous>
