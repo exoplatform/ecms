@@ -9,7 +9,7 @@
   </parent>
   <groupId>org.exoplatform.ecms</groupId>
   <artifactId>ecms</artifactId>
-  <version>4.2.x-SNAPSHOT</version>
+  <version>4.3.x-SNAPSHOT</version>
   <packaging>pom</packaging>
   <name>eXo ECM Suite</name>
   <description>eXo Entreprise Content Management Suite</description>
@@ -51,8 +51,8 @@
     <org.gatein.pc.version>2.4.0.Final</org.gatein.pc.version>
     <org.gatein.portal.version>4.2.x-PLF-SNAPSHOT</org.gatein.portal.version>
     <!-- Platform Project Dependencies -->
-    <org.exoplatform.commons.version>4.2.x-SNAPSHOT</org.exoplatform.commons.version>
-    <org.exoplatform.platform-ui.version>4.2.x-SNAPSHOT</org.exoplatform.platform-ui.version>
+    <org.exoplatform.commons.version>4.3.x-SNAPSHOT</org.exoplatform.commons.version>
+    <org.exoplatform.platform-ui.version>4.3.x-SNAPSHOT</org.exoplatform.platform-ui.version>
     <!-- Platform Project 3rd party Dependencies -->
     <org.exoplatform.doc.doc-style.version>4.2.x-SNAPSHOT</org.exoplatform.doc.doc-style.version>
   </properties>

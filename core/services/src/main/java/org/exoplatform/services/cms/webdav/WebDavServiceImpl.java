@@ -487,12 +487,12 @@ public class WebDavServiceImpl extends org.exoplatform.services.jcr.webdav.WebDa
       }
 
       try {
-        if (currentNode.isCheckedOut() && !activityService.isCreating(currentNode) && pushAs)
-          listenerService.broadcast(this.POST_UPLOAD_CONTENT_EVENT, this, currentNode);
-
         if(isCreating && pushAs)
           listenerService.broadcast(ActivityCommonService.FILE_CREATED_ACTIVITY, null, currentNode);
         
+        if (currentNode.isCheckedOut() && !activityService.isCreating(currentNode) && pushAs)
+          listenerService.broadcast(this.POST_UPLOAD_CONTENT_EVENT, this, currentNode);
+
         } catch (Exception e) {
           if (LOG.isWarnEnabled()) {
             LOG.warn("Cannot broadcast file create activity for the item at " + currentNode.getPath(), e);

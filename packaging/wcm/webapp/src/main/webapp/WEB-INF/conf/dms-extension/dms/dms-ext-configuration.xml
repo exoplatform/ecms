@@ -1480,6 +1480,7 @@
                                                 <value>
                                                   <string>application/vnd.oasis.opendocument.formula</string>
                                                 </value>
+                                                <value><string>text/csv</string></value>
                                             </collection>
                                         </field>
                                     </object>

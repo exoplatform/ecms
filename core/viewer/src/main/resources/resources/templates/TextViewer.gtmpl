@@ -43,7 +43,8 @@
 					if(contentNode.hasProperty("jcr:data")){
 						String iframeId = uiParent.getId() + "ifame" ;
 						def rqcontext = _ctx.getRequestContext() ;
-						def strContent = StringEscapeUtils.escapeHtml(contentNode.getProperty("jcr:data").getString());	
+						def strContent = StringEscapeUtils.unescapeHtml(contentNode.getProperty("jcr:data").getString());	
+						strContent = ContentReader.getEscapeHtmlContent(Utils.sanitize(strContent));	        	  
 				%>
 				<div class="textContent">
 					<textarea id="<%=iframeId%>"><%=strContent%></textarea> 
@@ -60,7 +61,8 @@
 				<div class="textContent">
 					<%
 						if(contentNode.hasProperty("jcr:data")) {
-							def strContent = StringEscapeUtils.escapeHtml(contentNode.getProperty("jcr:data").getString());	
+							def strContent = StringEscapeUtils.unescapeHtml(contentNode.getProperty("jcr:data").getString());	
+							strContent = ContentReader.getEscapeHtmlContent(Utils.sanitize(strContent));
 							println "<pre>" + strContent + "</pre>"; 
 						}
 					%>
