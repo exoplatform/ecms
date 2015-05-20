@@ -1807,7 +1807,7 @@ public class UIDocumentInfo extends UIBaseNodePresentation {
 
   @Override
   public void processRender(WebuiRequestContext context) throws Exception {
-    updatePageListData();
+    if(!context.useAjax()) updatePageListData();
     //check if current user can add node to current node
     //for MuiltUpload drag&drop feature
     if (canAddNode()) {
