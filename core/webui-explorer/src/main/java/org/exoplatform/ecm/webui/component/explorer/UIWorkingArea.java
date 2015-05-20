@@ -421,7 +421,10 @@ public class UIWorkingArea extends UIContainer {
     UISelectDocumentTemplateTitle uiTemplateTitle = findFirstComponentOfType(UISelectDocumentTemplateTitle.class);
     boolean isUITemplateTitleRendered = isUISelectDocumentTemplateTitleRendered();
     uiTemplateTitle.setRendered(isUITemplateTitleRendered);
-
+    if(!context.useAjax()) {
+      UITreeExplorer uiTreeExplorer = this.findFirstComponentOfType(UITreeExplorer.class);
+      if (uiTreeExplorer != null) uiTreeExplorer.buildTree();
+    }
     super.processRender(context);
   }
 
