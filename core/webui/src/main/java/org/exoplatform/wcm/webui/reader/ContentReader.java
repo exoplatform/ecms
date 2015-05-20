@@ -1,6 +1,7 @@
 package org.exoplatform.wcm.webui.reader;
 
 import org.apache.commons.lang.StringEscapeUtils;
+import org.exoplatform.services.deployment.Utils;
 import org.exoplatform.services.jcr.util.Text;
 
 public class ContentReader {
@@ -17,7 +18,7 @@ public class ContentReader {
    */
   public static String getXSSCompatibilityContent(String content) {
     if (content != null)
-      content = StringEscapeUtils.escapeHtml(Text.unescapeIllegalJcrChars(content));
+      content = Utils.sanitize(Text.unescapeIllegalJcrChars(content));
     return content;
   }
   /**
