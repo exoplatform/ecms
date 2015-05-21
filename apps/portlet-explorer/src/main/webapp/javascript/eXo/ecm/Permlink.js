@@ -20,7 +20,7 @@
 	Init rename form popup.
 	**/
 	Permlink.prototype.addFileName = function(item) {
-		//event.stopPropagation();
+
 		eXo.ecm.WCMUtils.hideContextMenu(item);
 	    var contextMenu = gj(item).closest(".UIRightClickPopupMenu, .uiRightClickPopupMenu")[0];
 	    contextMenu.style.display = "none";
@@ -35,13 +35,29 @@
 	    if (!contextMenu.objId) {
 	      return;
 	    }
+	    
 	    var objId = contextMenu.objId.replace(/'/g, "\\'");
 	    var index = objId.lastIndexOf("/");
 	    if (index != -1)
-	    	objId = objId.substring(index);
-	    //var test = "&objectId=" + objId
+	      objId = objId.substring(index);
+      
 	    if (href.indexOf("javascript") == -1) {
-	      item.setAttribute('href', href + objId);
+	      var objIdPermLink = contextMenu.objId.replace(/'/g, "\\'");
+	      var indexWorkspace = objIdPermLink.indexOf(":/");
+	      if (indexWorkspace != -1)
+	        objIdPermLink = objIdPermLink.substring(indexWorkspace + 2);
+	      
+	      var pathParamIndex = href.indexOf("?path=");
+	      if (pathParamIndex != -1) {
+	        var path = href.substring(pathParamIndex + 6);
+	        var indexDriverName = path.indexOf("/");
+	        if (indexDriverName != -1)
+	          path = path.substr(0, indexDriverName + 1);
+	        href = href.substr(0, pathParamIndex + 6);
+	        href = href + path + objIdPermLink;
+	      }
+        
+	      item.setAttribute('href', href);
 	      return;
 	    } else if (href.indexOf("window.location") != -1) {
 	      href = href.substr(0, href.length - 1) + objId + "'";
@@ -52,10 +68,7 @@
 	    }
 	
 	    eval(href);
-//	    if (event && event.preventDefault)
-//	      event.preventDefault();
-//	    else
-//	      window.event.returnValue = false;
+
 	    return false;
 
 	};
