@@ -54,7 +54,7 @@
     <org.exoplatform.commons.version>4.3.x-SNAPSHOT</org.exoplatform.commons.version>
     <org.exoplatform.platform-ui.version>4.3.x-SNAPSHOT</org.exoplatform.platform-ui.version>
     <!-- Platform Project 3rd party Dependencies -->
-    <org.exoplatform.doc.doc-style.version>4.2.x-SNAPSHOT</org.exoplatform.doc.doc-style.version>
+    <org.exoplatform.doc.doc-style.version>4.3.x-SNAPSHOT</org.exoplatform.doc.doc-style.version>
   </properties>
   <dependencyManagement>
     <!-- ### NEVER CHANGE THIS ORDER OF DEPMGT ### -->
