@@ -476,6 +476,9 @@ public class TaxonomyServiceImpl implements TaxonomyService, Startable {
           categoryNode = (Node) rootNodeTaxonomy.getSession().getItem(category);
         }
         String categoryName = categoryNode.getName();
+        if (categoryNode.hasProperty("exo:title")) {
+          categoryName = categoryNode.getProperty("exo:title").getString();
+        }
         //add mix referenceable for node
         if (node.canAddMixin("mix:referenceable")) {
           node.addMixin("mix:referenceable");
