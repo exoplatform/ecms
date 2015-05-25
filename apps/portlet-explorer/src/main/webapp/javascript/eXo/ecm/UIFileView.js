@@ -570,6 +570,7 @@ UIFileView.prototype.showItemContextMenu = function (event, element) {
 	var addSymLinkAction= gj(contextMenu).find("i.uiIconEcmsAddSymLink:first")[0];
 	var deleteAction = gj(contextMenu).find("i.uiIconEcmsDelete:first")[0];
 	var viewInfoAction = gj(contextMenu).find("i.uiIconEcmsViewInfo:first")[0];
+	var downloadAction = gj(contextMenu).find("i.uiIconEcmsDownload:first")[0];
 	//Check Lock, Unlock actions
 	var listLockedNode = 0;
 	var listUnlockedNode = 0;
@@ -662,6 +663,7 @@ UIFileView.prototype.showItemContextMenu = function (event, element) {
 		
 		if (Self.itemsSelected.length > 1) {
 		  pasteAction.parentNode.style.display = "none";
+		  downloadAction.parentNode.style.display = "none";
 		}
 	}
     

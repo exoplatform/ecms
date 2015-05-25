@@ -688,7 +688,7 @@
   	  var copyAction = gj(contextMenu).find("i.uiIconEcmsCopy:first")[0];
 	  var cutAction= gj(contextMenu).find("i.uiIconEcmsCut:first")[0];
 	  var addSymLinkAction= gj(contextMenu).find("i.uiIconEcmsAddSymLink:first")[0];
-
+  	  var downloadAction = gj(contextMenu).find("i.uiIconEcmsDownload:first")[0];
 	  if (checkExoActionNode) {
 		// disable all buttons
         contextMenu.style.display = "none";
@@ -748,6 +748,7 @@
 
 		      if (Self.itemsSelected.length > 1) {
 		        pasteAction.parentNode.parentNode.style.display = "none";
+		        downloadAction.parentNode.parentNode.style.display = "none";
 		      }	    
 	  }
       
