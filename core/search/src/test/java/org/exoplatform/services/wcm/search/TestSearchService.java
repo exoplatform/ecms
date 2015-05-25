@@ -69,7 +69,7 @@ public class TestSearchService extends BaseSearchTest {
     PageContext page = pageService.loadPage(new PageKey(new SiteKey("portal", "classic"), "testpage"));
     if(page == null){
       PageState pageState = new PageState("testpage", "test page", true,
-                                          "testpage", null, null);
+                                          "testpage", null, null, null, null);
       page = new  PageContext(new PageKey(new SiteKey("portal", "classic"), "testpage"), pageState);
       pageService.savePage(page);
     }

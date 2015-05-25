@@ -19,6 +19,7 @@ package org.exoplatform.ecms.xcmis.sp.query;
 
 import org.exoplatform.ecms.xcmis.sp.DocumentVersion;
 import org.exoplatform.ecms.xcmis.sp.StorageImpl;
+import org.junit.Ignore;
 import org.xcmis.spi.BaseContentStream;
 import org.xcmis.spi.CmisConstants;
 import org.xcmis.spi.ContentStream;
@@ -55,6 +56,7 @@ import java.util.Set;
  * @author <a href="karpenko.sergiy@gmail.com">Karpenko Sergiy</a>
  * @version $Id$
  */
+@Ignore
 public class QueryUsecasesTest extends BaseQueryTest
 {
 

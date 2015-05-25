@@ -1,6 +1,7 @@
 package org.exoplatform.ecms.xcmis.sp.query;
 
 import org.exoplatform.ecms.xcmis.sp.StorageImpl;
+import org.junit.Ignore;
 import org.xcmis.spi.DocumentData;
 import org.xcmis.spi.FolderData;
 import org.xcmis.spi.ItemsIterator;
@@ -9,6 +10,7 @@ import org.xcmis.spi.query.Result;
 
 import java.util.List;
 
+@Ignore
 public class QueryDriveTest extends BaseQueryTest
 {
 

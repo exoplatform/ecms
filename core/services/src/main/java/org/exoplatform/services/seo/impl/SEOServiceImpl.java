@@ -811,8 +811,7 @@ public class SEOServiceImpl implements SEOService {
                                               tmpPath.indexOf(ws) + ws.length(), tmpPath.length());
           if (nodePath != null && nodePath.length() > 0) {
             ManageableRepository manageRepo = WCMCoreUtils.getRepository();
-            ArrayList<WorkspaceEntry> wsList = manageRepo.getConfiguration()
-                .getWorkspaceEntries();
+            List<WorkspaceEntry> wsList = manageRepo.getConfiguration().getWorkspaceEntries();
             for (int i = 0; i < wsList.size(); i++) {
               WorkspaceEntry wsEntry = (WorkspaceEntry) wsList.get(i);
               if (wsEntry.getName().equals(ws)) {
