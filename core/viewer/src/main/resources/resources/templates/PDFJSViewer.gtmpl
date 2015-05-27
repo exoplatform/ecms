@@ -330,11 +330,11 @@ if(uicomponent.isNotModernBrowser()) {
                 </a>
                 <span class="uiCheckbox">
                     <input id="findHighlightAll" type="checkbox" class="toolbarField">
-                    <span>Highlight all</span>
+                    <span data-l10n-id="find_highlight">Highlight all</span>
                 </span>
                 <span class="uiCheckbox">
                     <input id="findMatchCase" type="checkbox" class="toolbarField">
-                    <span>Match case</span>
+                    <span data-l10n-id="find_match_case_label">Match case</span>
                 </span>
                 <span id="findMsg" class="toolbarLabel"></span>
             </div>
