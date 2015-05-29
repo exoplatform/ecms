@@ -27,6 +27,7 @@ import javax.portlet.RenderResponse;
 import javax.portlet.ResourceRequest;
 import javax.portlet.ResourceURL;
 
+import org.exoplatform.portal.mop.navigation.Scope;
 import org.exoplatform.portal.mop.Visibility;
 import org.exoplatform.portal.mop.user.UserNavigation;
 import org.exoplatform.portal.mop.user.UserNode;
@@ -34,6 +35,8 @@ import org.exoplatform.portal.mop.user.UserNodeFilterConfig;
 import org.exoplatform.portal.mop.user.UserPortal;
 import org.exoplatform.portal.webui.util.Util;
 import org.exoplatform.services.cms.templates.TemplateService;
+import org.exoplatform.services.security.ConversationRegistry;
+import org.exoplatform.services.security.ConversationState;
 import org.exoplatform.services.wcm.core.WCMService;
 import org.exoplatform.services.wcm.navigation.NavigationUtils;
 import org.exoplatform.services.wcm.publication.WCMComposer;
@@ -108,6 +111,13 @@ public class UISingleContentViewerPortlet extends UIPortletApplication {
 
   /** The Cache */
   public static final String ENABLE_CACHE = "sharedCache";
+  
+  public static final String NAVIGATION_SCOPE = "NavigationScope";
+  
+  public static final String NAVIGATION_SCOPE_SINGLE = "single";
+  public static final String NAVIGATION_SCOPE_CHILDREN = "children";
+  public static final String NAVIGATION_SCOPE_GRAND_CHILDREN = "grandChildren";
+  public static final String NAVIGATION_SCOPE_ALL = "all";
 
   private PortletMode mode = null;//PortletMode.VIEW ;
 
@@ -284,5 +294,29 @@ public class UISingleContentViewerPortlet extends UIPortletApplication {
     }
     json.put("childs", jsonChildren);
     return json;
+  }
+  
+  public String getNavigationScope() throws Exception {
+    PortletPreferences preferences = ((PortletRequestContext)WebuiRequestContext.getCurrentInstance()).
+        getRequest().getPreferences();
+    String navigationScope = preferences.getValue(NAVIGATION_SCOPE, NAVIGATION_SCOPE_CHILDREN);
+    return navigationScope;
+  }
+  
+  public String getNavigation() throws Exception {
+    String userName = ConversationState.getCurrent().getIdentity().getUserId();  
+    String portalName = Util.getPortalRequestContext().getPortalOwner();
+    
+    PortletPreferences preferences = ((PortletRequestContext)WebuiRequestContext.getCurrentInstance()).
+                                     getRequest().getPreferences();
+    String navigationScope = preferences.getValue(NAVIGATION_SCOPE, NAVIGATION_SCOPE_CHILDREN);
+    Scope scope = Scope.CHILDREN;
+    switch (navigationScope) {
+      case NAVIGATION_SCOPE_SINGLE: scope = Scope.SINGLE; break;
+      case NAVIGATION_SCOPE_CHILDREN: scope = Scope.CHILDREN; break;
+      case NAVIGATION_SCOPE_GRAND_CHILDREN: scope = Scope.GRANDCHILDREN; break;
+      case NAVIGATION_SCOPE_ALL: scope = Scope.ALL; break;
+    }
+    return NavigationUtils.getNavigationAsJSON(portalName, userName, scope, navigationScope);
   }
 }

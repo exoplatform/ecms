@@ -9,14 +9,28 @@
   def rcontext = _ctx.getRequestContext();
   def userName = rcontext.getRemoteUser();  
   def portalName = Util.getPortalRequestContext().getPortalOwner();
+  def scope = uicomponent.getNavigationScope();
+  
+  if (!NavigationUtils.gotNavigation(portalName, userName, scope)) {
+    def JSONnavigation = uicomponent.getNavigation();
+    %>
+    <script type="text/javascript">
+      if (!eXo.env.portal.navigations) { eXo.env.portal.navigations = {} }
+      eXo.env.portal.navigations$scope = <%= JSONnavigation %> ;
+    </script>
+    <% 
+  }
+  
+  //legacy code, kept to be compatible with old data
   if (!NavigationUtils.gotNavigation(portalName, userName)) {
-    def JSONnavigation = NavigationUtils.getNavigationAsJSON(portalName, userName);
+    def JSONnavigation = uicomponent.getNavigation();
     %>
     <script type="text/javascript">
       eXo.env.portal.navigations = <%= JSONnavigation %> ;
     </script>
     <% 
-  } %>
+  } %> 
+  
 <div id="$uicomponent.id" class="UISingleContentViewerPortlet">
 	<% uicomponent.renderChildren(); %>	  
 </div>

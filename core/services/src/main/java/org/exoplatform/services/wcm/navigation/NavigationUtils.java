@@ -78,11 +78,15 @@ public class NavigationUtils {
   } //of static reflection
 
   public static boolean gotNavigation(String portal, String user) {
+    return gotNavigation(portal, user, "");
+  }
+  
+  public static boolean gotNavigation(String portal, String user, String scope) {
     Map<String, String> navigations = gotNavigationKeeper.get();
     if (navigations == null) return false;
-    String navigation = navigations.get(portal + " " + user);
+    String navigation = navigations.get(portal + " " + user + " " + scope);
     return (navigation != null);
-  }
+  }  
 
   public static UserNavigation getUserNavigationOfPortal(UserPortal userPortal, String portalName) throws Exception {
     UserACL userACL = WCMCoreUtils.getService(UserACL.class);
@@ -122,9 +126,14 @@ public class NavigationUtils {
     }
   }
   
-  public static void removeNavigationAsJson (String portalName, String username) throws Exception
+  public static void removeNavigationAsJson (String portalName, String username) throws Exception {
+    for (String scope : new String[]{"single", "children", "grandchildren", "all"})
+      removeNavigationAsJson(portalName, username, scope);
+  }
+  
+  public static void removeNavigationAsJson (String portalName, String username, String scope) throws Exception
   {
-    String key = portalName + " " + username;
+    String key = portalName + " " + username + " " + scope;
     Map<String, String> navigations = gotNavigationKeeper.get();
     if (navigations != null) {
       navigations.remove(key);
@@ -133,8 +142,12 @@ public class NavigationUtils {
   }
 
   public static String getNavigationAsJSON(String portalName, String username) throws Exception {
+    return getNavigationAsJSON(portalName, username, null, "");
+  }
+  
+  public static String getNavigationAsJSON(String portalName, String username, Scope scope, String navigationScope) throws Exception {
 
-    String key = portalName + " " + username;
+    String key = portalName + " " + username + " " + navigationScope;
     Map<String, String> navigations = gotNavigationKeeper.get();
     if (navigations == null) {
       navigations = new Hashtable<String, String>();
@@ -158,7 +171,7 @@ public class NavigationUtils {
 
     //get nodes
     UserNavigation navigation = getUserNavigationOfPortal(userPortal, portalName);
-    UserNode root = userPortal.getNode(navigation, ECMS_NAVIGATION_SCOPE, filterConfig, null);
+    UserNode root = userPortal.getNode(navigation, scope == null ? ECMS_NAVIGATION_SCOPE : scope, filterConfig, null);
 
     String ret = createJsonTree(navigation, root);
     navigations.put(key, ret);
