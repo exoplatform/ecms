@@ -112,16 +112,23 @@ public abstract class UIPermissionInfoBase extends UIContainer {
 
     while (keysIter.hasNext()) {
       String userOrGroup = keysIter.next();
-      List<String> permissions = permsMap.get(userOrGroup);
       PermissionBean permBean = new PermissionBean();
       permBean.setUsersOrGroups(userOrGroup);
-      for (String perm : permissions) {
-        if (PermissionType.READ.equals(perm))
-          permBean.setRead(true);
-        else if (PermissionType.ADD_NODE.equals(perm))
-          permBean.setAddNode(true);
-        else if (PermissionType.REMOVE.equals(perm))
-          permBean.setRemove(true);
+      // owner always has full right even if it has been modified in GUI
+      if (owner.equals(userOrGroup)) {
+        permBean.setRead(true);
+        permBean.setAddNode(true);
+        permBean.setRemove(true);
+      } else {
+        List<String> permissions = permsMap.get(userOrGroup);
+        for (String perm : permissions) {
+          if (PermissionType.READ.equals(perm))
+            permBean.setRead(true);
+          else if (PermissionType.ADD_NODE.equals(perm))
+            permBean.setAddNode(true);
+          else if (PermissionType.REMOVE.equals(perm))
+            permBean.setRemove(true);
+        }
       }
       permBeans.add(permBean);
       sizeOfListPermission = permBeans.size() + iSystemOwner;
