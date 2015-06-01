@@ -189,7 +189,7 @@ public class InitialWebContentPlugin extends CreatePortalPlugin {
     for(;iterator.hasNext();) {
       Node ntResource = iterator.nextNode();
       String mimeType = ntResource.getProperty("jcr:mimeType").getString();
-      if(!mimeType.startsWith("text")) continue;
+      if(!mimeType.startsWith("text") && !mimeType.startsWith("application/x-javascript")) continue;
       String jcrData = ntResource.getProperty("jcr:data").getString();
       
       jcrData = replace(jcrData, "{portalName}", WCMCoreUtils.getPortalName());

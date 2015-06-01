@@ -619,10 +619,15 @@ public class WCMCoreUtils {
     @Override
     public int compare(Node o1, Node o2) {
       try {
-        if (!o1.hasProperty(NodetypeConstant.EXO_PRIORITY)) {
+        if (!o1.hasProperty(NodetypeConstant.EXO_PRIORITY) && !o2.hasProperty(NodetypeConstant.EXO_PRIORITY)) {
+          return o1.getName().compareTo(o2.getName());
+        } else if (!o1.hasProperty(NodetypeConstant.EXO_PRIORITY)) {
           return 1;
         } else if (!o2.hasProperty(NodetypeConstant.EXO_PRIORITY)) {
           return -1;
+        } else if (o1.getProperty(NodetypeConstant.EXO_PRIORITY).getLong() == 
+                  o2.getProperty(NodetypeConstant.EXO_PRIORITY).getLong()){
+          return o1.getName().compareTo(o2.getName()); 
         } else {
           return (int)(o2.getProperty(NodetypeConstant.EXO_PRIORITY).getLong() -
               o1.getProperty(NodetypeConstant.EXO_PRIORITY).getLong());
