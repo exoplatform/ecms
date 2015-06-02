@@ -51,7 +51,7 @@ import org.gatein.portal.controller.resource.ResourceScope;
 /**
  * The Class UICLVPortlet.
  */
-@ComponentConfig(lifecycle = UIApplicationLifecycle.class, template = "app:/groovy/ContentListViewer/UICLVPortlet.gtmpl")
+@ComponentConfig(lifecycle = UIApplicationLifecycle.class, template = "system:/groovy/ContentListViewer/UICLVPortlet.gtmpl")
 public class UICLVPortlet extends UIPortletApplication {
 
   /** The Constant PREFERENCE_DISPLAY_MODE. */

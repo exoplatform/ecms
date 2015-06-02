@@ -19,6 +19,7 @@
     <module>webui</module>
     <module>search</module>
     <module>webui-explorer</module>
+    <module>webui-presentation</module>
     <module>webui-administration</module>
     <module>core-configuration</module>
     <module>webui-seo</module>

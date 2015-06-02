@@ -51,7 +51,7 @@ import org.exoplatform.webui.core.lifecycle.Lifecycle;
  */
 @ComponentConfig(
                  lifecycle = Lifecycle.class,
-                 template = "app:/groovy/ContentListViewer/UICLVContainer.gtmpl",
+                 template = "system:/groovy/ContentListViewer/UICLVContainer.gtmpl",
                  events = {
                    @EventConfig(listeners = UICLVFolderMode.PreferencesActionListener.class)
                  }
@@ -133,6 +133,7 @@ public class UICLVFolderMode extends UICLVContainer {
       if (folderPath == null) {
         return new Result(new ArrayList<Node>(), 0, 0, null, null);
       }
+      folderPath = folderPath.replace("{siteName}", Util.getPortalRequestContext().getSiteName());
       NodeLocation nodeLocation = new NodeLocation();
       nodeLocation.setWorkspace(workspace);
       nodeLocation.setPath("/");
@@ -150,6 +151,9 @@ public class UICLVFolderMode extends UICLVContainer {
     String folderPath = this.getAncestorOfType(UICLVPortlet.class).getFolderPath();
     if (folderPath == null) {
       folderPath = preferences.getValue(UICLVPortlet.PREFERENCE_ITEM_PATH, null);
+    }
+    if (folderPath != null) { 
+      folderPath = folderPath.replace("{siteName}", Util.getPortalRequestContext().getSiteName()); 
     }
     if (folderPath == null) {
       return new Result(new ArrayList<Node>(), 0, 0, null, null);

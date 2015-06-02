@@ -41,6 +41,7 @@ import org.exoplatform.services.jcr.ext.common.SessionProvider;
 import org.exoplatform.services.log.ExoLogger;
 import org.exoplatform.services.log.Log;
 import org.exoplatform.services.rest.resource.ResourceContainer;
+import org.exoplatform.services.wcm.core.NodetypeConstant;
 import org.exoplatform.services.wcm.core.WCMService;
 import org.exoplatform.services.wcm.utils.WCMCoreUtils;
 
@@ -112,7 +113,7 @@ public class RESTImagesRendererService implements ResourceContainer{
 
       if ("file".equals(param)) {
         Node dataNode = null;
-        if(node.isNodeType("nt:file")) {
+        if(WCMCoreUtils.isNodeTypeOrFrozenType(node, NodetypeConstant.NT_FILE)) {
           dataNode = node;
         }else if(node.isNodeType("nt:versionedChild")) {
           VersionHistory versionHistory = (VersionHistory)node.getProperty("jcr:childVersionHistory").getNode();

@@ -40,6 +40,7 @@ import javax.jcr.RepositoryException;
 import javax.jcr.Session;
 import javax.jcr.ValueFormatException;
 import javax.jcr.nodetype.NodeType;
+import javax.jcr.nodetype.NodeTypeManager;
 import javax.jcr.query.Query;
 import javax.jcr.query.QueryManager;
 import javax.jcr.query.QueryResult;
@@ -72,6 +73,7 @@ import org.exoplatform.services.jcr.RepositoryService;
 import org.exoplatform.services.jcr.core.ManageableRepository;
 import org.exoplatform.services.jcr.ext.app.SessionProviderService;
 import org.exoplatform.services.jcr.ext.common.SessionProvider;
+import org.exoplatform.services.jcr.impl.core.nodetype.registration.NodeTypeConverter;
 import org.exoplatform.services.listener.ListenerService;
 import org.exoplatform.services.log.ExoLogger;
 import org.exoplatform.services.log.Log;
@@ -683,18 +685,19 @@ public class WCMCoreUtils {
     String restContextName = PortalContainer.getCurrentRestContextName();
 
     if (propertyName == null) {
-      if(!file.isNodeType("nt:file")) return null;
-      InputStream stream = file.getNode("jcr:content").getProperty("jcr:data").getStream();
-      if (stream.available() == 0) return null;
-      stream.close();
-      builder.append("/").append(portalName).append("/")
-      .append(restContextName).append("/")
-      .append("images/")
-      .append(repository).append("/")
-      .append(workspaceName).append("/")
-      .append(nodeIdentifiler)
-      .append("?param=file");
-      return builder.toString();
+      if (isNodeTypeOrFrozenType(file, NodetypeConstant.NT_FILE)) {
+        InputStream stream = file.getNode("jcr:content").getProperty("jcr:data").getStream();
+        if (stream.available() == 0) return null;
+        stream.close();
+        builder.append("/").append(portalName).append("/")
+        .append(restContextName).append("/")
+        .append("images/")
+        .append(repository).append("/")
+        .append(workspaceName).append("/")
+        .append(nodeIdentifiler)
+        .append("?param=file");
+        return builder.toString();
+      } else return null;
     }
     builder.append("/").append(portalName).append("/")
     .append(restContextName).append("/")
@@ -705,7 +708,14 @@ public class WCMCoreUtils {
     .append("?param=").append(propertyName);
     return builder.toString();
   }
-
+  
+  public static boolean isNodeTypeOrFrozenType(Node node, String type) throws RepositoryException {
+    if (node.isNodeType(type)) return true;
+    if (!node.isNodeType(NodetypeConstant.NT_FROZEN_NODE)) return false;
+    String realType = node.getProperty("jcr:frozenPrimaryType").getString();
+    return getRepository().getNodeTypeManager().getNodeType(realType).isNodeType(type);
+  }
+  
   public static String getPortalName() {
     PortalContainerInfo containerInfo = WCMCoreUtils.getService(PortalContainerInfo.class) ;
     return containerInfo.getContainerName() ;

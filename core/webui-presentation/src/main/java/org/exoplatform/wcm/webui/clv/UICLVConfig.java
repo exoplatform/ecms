@@ -76,7 +76,7 @@ import org.exoplatform.webui.form.validator.PositiveNumberFormatValidator;
  */
 @ComponentConfig(
                  lifecycle = UIFormLifecycle.class,
-                 template = "app:/groovy/ContentListViewer/UICLVConfig.gtmpl",  
+                 template = "system:/groovy/ContentListViewer/UICLVConfig.gtmpl",  
                  events = {
                    @EventConfig(listeners = UICLVConfig.SaveActionListener.class),
                    @EventConfig(listeners = UICLVConfig.CancelActionListener.class, phase = Phase.DECODE),

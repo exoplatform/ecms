@@ -58,7 +58,7 @@ import org.exoplatform.webui.core.lifecycle.Lifecycle;
  */
 @ComponentConfig(
                  lifecycle = Lifecycle.class,
-                 template = "app:/groovy/ContentListViewer/UICLVContainer.gtmpl",
+                 template = "system:/groovy/ContentListViewer/UICLVContainer.gtmpl",
                  events = {
                    @EventConfig(listeners = UICLVManualMode.PreferencesActionListener.class)
                  }
@@ -124,6 +124,7 @@ public class UICLVManualMode extends UICLVContainer {
       List<Node> originalList = new ArrayList<Node>();
       if (listContent != null && listContent.length != 0) {
         for (String itemPath : listContent) {
+          itemPath = itemPath.replace("{siteName}", Util.getPortalRequestContext().getSiteName());
           Node currentNode = NodeLocation.getNodeByExpression(itemPath);
           if(currentNode != null){
             try {
