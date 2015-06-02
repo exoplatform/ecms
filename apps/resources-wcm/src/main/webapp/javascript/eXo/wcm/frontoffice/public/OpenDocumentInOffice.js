@@ -101,6 +101,7 @@
           if(eXo.ecm.ECMWebDav !== undefined) {
             //showButton
             //console.log("ITHIT detected!");
+            gj(openDocument).closest("li").show();
             if (data.isLocked) return;//can not edit, just show popup(do not change href)
           }else{
             if(!data.isMsoffice){
@@ -144,10 +145,8 @@
    */
   OpenDocumentInOffice.prototype.EditDocument = function(path){
     var obj = new ActiveXObject('SharePoint.OpenDocuments.3');
-    var word = new ActiveXObject("Word.Application");
-    var allowVersion = word.Version >= "14.0";
-    if(allowVersion){
-      var openStatus = obj.EditDocument(path, word.Version);
+    if(checkMSOfficeVersion()){
+      obj.EditDocument(path);
       //console.log("Open Document status: "+openStatus);
     }else{
       //console.log("Open document not support!");
@@ -193,7 +192,10 @@
     if (OSName === "Windows") {
       //check IE11, Office
       var isAtLeastIE11 = !!(ua.match(/Trident/) && !ua.match(/MSIE/));
-      if(checkMSOfficeVersion() && isAtLeastIE11) return true;
+      if(checkMSOfficeVersion() && isAtLeastIE11){
+        gj(element).parent().show();
+        return true;
+      }
 
       // Hide if not enought enviroments support
       if(gj(element).parent().hasClass("detailContainer"))
@@ -218,7 +220,9 @@
   function checkMSOfficeVersion(){
     try{
       var word = new ActiveXObject("Word.Application");
-      return word.Version >= "14.0";
+      var version = word.Version;
+      word.Quit();
+      return version >= "14.0";
     }catch(err){
       //console.log("ActiveX is not support \n"+err);
       return false;
