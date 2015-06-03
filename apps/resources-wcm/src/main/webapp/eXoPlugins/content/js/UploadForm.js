@@ -151,8 +151,8 @@ UploadForm.prototype.uploadFile = function() {
 		uploadField.style.display = "none";
 		var UploadInfo = gj(popupContainer).find("tr.UploadInfo:first")[0];
 		UploadInfo.style.display = "";
-		var CancelAction = gj(popupContainer).find("button.CancelAction:first")[0];
-		CancelAction.style.display = "none";
+		var uiUploadAction = gj(popupContainer).find("div.uiActionBorder:first")[0];
+		uiUploadAction.style.display = "none";
 		if(!eXo.ecm.UploadForm.stopUpload) {
 				this.uploadProgressTimer = setInterval(function() {
 					var repositoryName = eXo.ecm.ECS.repositoryName;
