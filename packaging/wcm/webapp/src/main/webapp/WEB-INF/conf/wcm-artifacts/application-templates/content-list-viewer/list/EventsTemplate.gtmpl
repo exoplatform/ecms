@@ -11,7 +11,7 @@
 	import org.exoplatform.wcm.webui.Utils;
   import org.exoplatform.services.jcr.core.ManageableRepository;
   import org.exoplatform.webui.application.WebuiRequestContext;
-	import org.apache.commons.lang.StringEscapeUtils;
+
 	
 	
 	def propertyName = "exo:title";
@@ -85,7 +85,7 @@
 							  imgSrc = "/eXoWCMResources/skin/DefaultSkin/background/IIlustrationImages.jpg";
 							if (itemTitle != null && itemTitle.trim().length() != 0)
 								itemName = itemTitle;
-        			def _trustedItemName = org.exoplatform.services.deployment.Utils.sanitize(StringEscapeUtils.unescapeHtml(itemName));
+							
 							repo = ((ManageableRepository)viewNode.getSession().getRepository()).getConfiguration().getName();
               workspace = viewNode.getSession().getWorkspace().getName();
               uuid = viewNode.getUUID();
@@ -103,7 +103,7 @@
   											if (uicomponent.isViewMode()){
                           if (isShowTitle) {
                             if (isShowLink) {
-                              %><div class="Title"><a href="$itemLink" rel="tooltip" data-placement="bottom" title="$_trustedItemName">$itemName</a></div><%
+                              %><div class="Title"><a href="$itemLink" rel="tooltip" data-placement="bottom" title="$itemName">$itemName</a></div><%
                             } else {                          
                             %>
                               <div class="Title">                              
@@ -116,7 +116,7 @@
                         else {
                           if (isShowTitle) {
                             if (isShowLink) {
-                              %><div class="Title WCMInlineEditable" contenteditable="true" propertyName="<%=propertyName%>" repo="<%=repo%>" workspace="<%=workspace%>" uuid="<%=uuid%>" siteName="<%=siteName%>" publishedmsg="<%=publishedMsg%>" draftmsg="<%=draftMsg%>" fastpublishlink="<%=uicomponent.getFastPublicLink(viewNode)%>" language="<%=language%>"><a href="$itemLink" rel="tooltip" data-placement="bottom" title="$_trustedItemName">$itemName</a></div><%
+                              %><div class="Title WCMInlineEditable" contenteditable="true" propertyName="<%=propertyName%>" repo="<%=repo%>" workspace="<%=workspace%>" uuid="<%=uuid%>" siteName="<%=siteName%>" publishedmsg="<%=publishedMsg%>" draftmsg="<%=draftMsg%>" fastpublishlink="<%=uicomponent.getFastPublicLink(viewNode)%>" language="<%=language%>"><a href="$itemLink" rel="tooltip" data-placement="bottom" title="$itemName">$itemName</a></div><%
                             } else {
                             %>
                               <div class="Title WCMInlineEditable" contenteditable="true" propertyName="<%=propertyName%>" repo="<%=repo%>" workspace="<%=workspace%>" uuid="<%=uuid%>" siteName="<%=siteName%>" language="<%=language%>" publishedmsg="<%=publishedMsg%>" draftmsg="<%=draftMsg%>" fastpublishlink="<%=uicomponent.getFastPublicLink(viewNode)%>"> 

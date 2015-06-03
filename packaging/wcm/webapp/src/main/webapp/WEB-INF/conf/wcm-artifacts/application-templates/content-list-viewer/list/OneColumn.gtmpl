@@ -13,7 +13,7 @@
 		import org.exoplatform.services.wcm.core.NodeLocation;	
     import org.exoplatform.services.jcr.core.ManageableRepository;
     import org.exoplatform.webui.application.WebuiRequestContext;
-		import org.apache.commons.lang.StringEscapeUtils;
+
 
 		
 		def propertyName = "exo:title";
@@ -81,7 +81,7 @@
 								def itemTitle = uicomponent.getTitle(viewNode);
 								if (itemTitle != null && itemTitle.trim().length() != 0)
 									itemName = itemTitle;
-            		def _trustedItemName = org.exoplatform.services.deployment.Utils.sanitize(StringEscapeUtils.unescapeHtml(itemName));
+
 								def itemSummary = uicomponent.getSummary(viewNode);
 								def itemSummaryField = uicomponent.getSummaryField(viewNode);
 								def isShowSummary = uicomponent.isShowField(UICLVPortlet.PREFERENCE_SHOW_SUMMARY) && itemSummary != null;
@@ -96,7 +96,7 @@
 								<div class="media-inner">
 										 
 											<%if (isShowImage) {
-                        %><a class="image pull-left" rel="tooltip" data-placement="bottom" title="$_trustedItemName"><img class="media-object" alt="$_trustedItemName" rel="tooltip" data-placement="bottom" title="$_trustedItemName" src="$imgSrc" /></a><%
+                        %><a class="image pull-left" rel="tooltip" data-placement="bottom" title="$itemName"><img class="media-object" alt="$itemName" rel="tooltip" data-placement="bottom" title="$itemName" src="$imgSrc" /></a><%
 											}
 											%>
 												<div class="media-body">
@@ -104,7 +104,7 @@
 													if (uicomponent.isViewMode()){
   													if (isShowTitle) {
   														if (isShowLink) {
-  															%><div class="heading"><a href="$itemLink" rel="tooltip" data-placement="bottom" title="$_trustedItemName">$itemName</a></div><%
+  															%><div class="heading"><a href="$itemLink" rel="tooltip" data-placement="bottom" title="$itemName">$itemName</a></div><%
   														} else {												  
   														%>
   				                      <div class="heading">  				                     
@@ -117,7 +117,7 @@
 												  else {
 													  if (isShowTitle) {
                               if (isShowLink) {
-                                %><div class="heading WCMInlineEditable" contenteditable="true" propertyName="<%=propertyName%>" publishedmsg="<%=publishedMsg%>" draftmsg="<%=draftMsg%>" repo="<%=repo%>" workspace="<%=workspace%>" uuid="<%=uuid%>" siteName="<%=siteName%>" language="<%=language%>" fastpublishlink="<%=uicomponent.getFastPublicLink(viewNode)%>"><a href="$itemLink" rel="tooltip" data-placement="bottom" title="$_trustedItemName">$itemName</a></div><%
+                                %><div class="heading WCMInlineEditable" contenteditable="true" propertyName="<%=propertyName%>" publishedmsg="<%=publishedMsg%>" draftmsg="<%=draftMsg%>" repo="<%=repo%>" workspace="<%=workspace%>" uuid="<%=uuid%>" siteName="<%=siteName%>" language="<%=language%>" fastpublishlink="<%=uicomponent.getFastPublicLink(viewNode)%>"><a href="$itemLink" rel="tooltip" data-placement="bottom" title="$itemName">$itemName</a></div><%
                               } else {
                               %>
                                 <div class="heading WCMInlineEditable" contenteditable="true" propertyName="<%=propertyName%>" publishedmsg="<%=publishedMsg%>" draftmsg="<%=draftMsg%>" repo="<%=repo%>" workspace="<%=workspace%>" uuid="<%=uuid%>" siteName="<%=siteName%>" language="<%=language%>" fastpublishlink="<%=uicomponent.getFastPublicLink(viewNode)%>"> 
