@@ -18,6 +18,7 @@
 package org.exoplatform.ecms.xcmis.sp.query;
 
 import org.exoplatform.ecms.xcmis.sp.StorageImpl;
+import org.junit.Ignore;
 import org.xcmis.spi.DocumentData;
 import org.xcmis.spi.FolderData;
 import org.xcmis.spi.ObjectData;
@@ -30,6 +31,7 @@ import org.xcmis.spi.utils.MimeType;
  * @version $Id$
  * 
  */
+@Ignore
 public class MultifilingUnfilingTest extends BaseQueryTest
 {
    private FolderData testRoot;

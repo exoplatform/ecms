@@ -477,7 +477,11 @@ public class TemplateServiceImpl implements TemplateService, Startable {
    * {@inheritDoc}
    */
   public void removeCacheTemplate(String name) throws Exception {
-    templateService.reloadTemplate(name);
+    try {
+      templateService.reloadTemplate(name);
+    } catch (IllegalArgumentException e) {
+      return;
+    }
   }
 
   /**

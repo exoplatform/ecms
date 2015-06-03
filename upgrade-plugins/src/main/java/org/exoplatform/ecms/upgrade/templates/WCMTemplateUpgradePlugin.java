@@ -92,8 +92,7 @@ public class WCMTemplateUpgradePlugin extends UpgradeProductPlugin {
       Set<String> configuredTemplates = appTemplateService_.getConfiguredAppTemplateMap(portletName);
       List<Node> removedNodes = new ArrayList<Node>();
       for (String unchangedTemplate : unchangedTemplates.split(",")) {
-        if(StringUtils.isNotEmpty(unchangedTemplate.trim()))
-          unchangedTemplateSet.add(unchangedTemplate.trim());
+        unchangedTemplateSet.add(unchangedTemplate.trim());
       }
       //get all old query nodes that need to be removed.
       sessionProvider = SessionProvider.createSystemProvider();
@@ -102,13 +101,11 @@ public class WCMTemplateUpgradePlugin extends UpgradeProductPlugin {
       NodeIterator iter = queryManager.
           createQuery("SELECT * FROM nt:file WHERE jcr:path LIKE '" + templateHomeNode.getPath() + "/%'", Query.SQL).
           execute().getNodes();
-      if(unchangedTemplateSet.size()>0) {
-        while (iter.hasNext()) {
-          Node templateNode = iter.nextNode();
-          if (!unchangedTemplateSet.contains(templateNode.getPath().substring(templateHomeNode.getPath().length() + 1)) &&
-                  configuredTemplates.contains(templateNode.getPath().substring(templateHomeNode.getPath().length() + 1))) {
-            removedNodes.add(templateNode);
-          }
+      while (iter.hasNext()) {
+        Node templateNode = iter.nextNode();
+        if (!unchangedTemplateSet.contains(templateNode.getPath().substring(templateHomeNode.getPath().length() + 1)) && 
+            configuredTemplates.contains(templateNode.getPath().substring(templateHomeNode.getPath().length() + 1))) {
+          removedNodes.add(templateNode);
         }
       }
       //remove all old script nodes

@@ -1,14 +1,14 @@
 <?xml version="1.0"?>
-<!-- ~ Copyright (C) 2009 eXo Platform SAS. ~ ~ This is free software; you 
-  can redistribute it and/or modify it ~ under the terms of the GNU Lesser 
-  General Public License as ~ published by the Free Software Foundation; either 
-  version 2.1 of ~ the License, or (at your option) any later version. ~ ~ 
-  This software is distributed in the hope that it will be useful, ~ but WITHOUT 
-  ANY WARRANTY; without even the implied warranty of ~ MERCHANTABILITY or FITNESS 
-  FOR A PARTICULAR PURPOSE. See the GNU ~ Lesser General Public License for 
-  more details. ~ ~ You should have received a copy of the GNU Lesser General 
-  Public ~ License along with this software; if not, write to the Free ~ Software 
-  Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA ~ 02110-1301 USA, 
+<!-- ~ Copyright (C) 2009 eXo Platform SAS. ~ ~ This is free software; you
+  can redistribute it and/or modify it ~ under the terms of the GNU Lesser
+  General Public License as ~ published by the Free Software Foundation; either
+  version 2.1 of ~ the License, or (at your option) any later version. ~ ~
+  This software is distributed in the hope that it will be useful, ~ but WITHOUT
+  ANY WARRANTY; without even the implied warranty of ~ MERCHANTABILITY or FITNESS
+  FOR A PARTICULAR PURPOSE. See the GNU ~ Lesser General Public License for
+  more details. ~ ~ You should have received a copy of the GNU Lesser General
+  Public ~ License along with this software; if not, write to the Free ~ Software
+  Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA ~ 02110-1301 USA,
   or see the FSF site: http://www.fsf.org. -->
 <repository-service default-repository="repository">
   <repositories>
@@ -20,408 +20,320 @@
         org.exoplatform.services.jcr.impl.core.access.JAASAuthenticator
       </authentication-policy>
       
-      <!-- System -->
-      <workspaces>
-        <workspace name="system">
-          <container
-            class="org.exoplatform.services.jcr.impl.storage.jdbc.optimisation.CQJDBCWorkspaceDataContainer">
-            <properties>
-              <property name="source-name" value="jdbcexo" />
-              <property name="dialect" value="auto" />
-              <property name="db-structure-type" value="isolated" />
-              <property name="update-storage" value="true" />
-              <property name="max-buffer-size" value="204800" />
-              <property name="swap-directory" value="${gatein.test.tmp.dir}/jcr/swap/system" />
-            </properties>
-            <value-storages>
-              <value-storage id="system"
-                class="org.exoplatform.services.jcr.impl.storage.value.fs.TreeFileValueStorage">
-                <properties>
-                  <property name="path" value="${gatein.test.tmp.dir}/jcr/values/system" />
-                   <property name="enabled" value="${gatein.jcr.storage.enabled:true}" />
-                </properties>
-                <filters>
-                  <filter property-type="Binary" />
-                </filters>
-              </value-storage>
-            </value-storages>
-          </container>
-          <initializer
-            class="org.exoplatform.services.jcr.impl.core.ScratchWorkspaceInitializer">
-            <properties>
-              <property name="root-nodetype" value="nt:unstructured" />
-              <property name="root-permissions"
-                value="*:/platform/administrators read;*:/platform/administrators add_node;*:/platform/administrators set_property;*:/platform/administrators remove" />
-            </properties>
-          </initializer>
-          <cache enabled="true"
-            class="org.exoplatform.services.jcr.impl.dataflow.persistent.jbosscache.JBossCacheWorkspaceStorageCache">
-            <properties>
-              <property name="jbosscache-configuration"
-                value="conf/exo.portal.component.test.jcr-jbosscache-config.xml" />
-            </properties>
-          </cache>
-          <query-handler
-            class="org.exoplatform.services.jcr.impl.core.query.lucene.SearchIndex">
-            <properties>
-              <property name="index-dir"
-                value="${gatein.test.tmp.dir}/jcr/jcrlucenedb/system" />
-            </properties>
-          </query-handler>
-          <lock-manager
-            class="org.exoplatform.services.jcr.impl.core.lock.jbosscache.CacheableLockManagerImpl">
-            <properties>
-              <property name="time-out" value="15m" />
-              <property name="jbosscache-configuration"
-                value="conf/exo.portal.component.test.jcr-jbosscache-lock-config.xml" />
-            </properties>
-          </lock-manager>
-        </workspace>
-        
-          <!-- portal-system -->
-        <workspace name="portal-system">
-          <container
-            class="org.exoplatform.services.jcr.impl.storage.jdbc.optimisation.CQJDBCWorkspaceDataContainer">
-            <properties>
-              <property name="source-name" value="jdbcexo" />
-              <property name="dialect" value="auto" />
-              <property name="db-structure-type" value="isolated" />
-              <property name="update-storage" value="true" />
-              <property name="max-buffer-size" value="204800" />
-              <property name="swap-directory"
-                value="${gatein.test.tmp.dir}/jcr/swap/portal-system" />
-            </properties>
-            <value-storages>
-              <value-storage id="portal-system"
-                class="org.exoplatform.services.jcr.impl.storage.value.fs.TreeFileValueStorage">
-                <properties>
-                  <property name="path" value="${gatein.test.tmp.dir}/jcr/values/portal-system" />
-                   <property name="enabled" value="${gatein.jcr.storage.enabled:true}" />
-                </properties>
-                <filters>
-                  <filter property-type="Binary" />
-                </filters>
-              </value-storage>
-            </value-storages>
-          </container>
-          <initializer
-            class="org.exoplatform.services.jcr.impl.core.ScratchWorkspaceInitializer">
-            <properties>
-              <property name="root-nodetype" value="nt:unstructured" />
-              <property name="root-permissions"
-                value="*:/platform/administrators read;*:/platform/administrators add_node;*:/platform/administrators set_property;*:/platform/administrators remove" />
-            </properties>
-          </initializer>
-          <cache enabled="true"
-            class="org.exoplatform.services.jcr.impl.dataflow.persistent.jbosscache.JBossCacheWorkspaceStorageCache">
-            <properties>
-              <property name="jbosscache-configuration"
-                value="conf/exo.portal.component.test.jcr-jbosscache-config.xml" />
-            </properties>
-          </cache>
-          <query-handler
-            class="org.exoplatform.services.jcr.impl.core.query.lucene.SearchIndex">
-            <properties>
-              <property name="index-dir"
-                value="${gatein.test.tmp.dir}/jcr/jcrlucenedb/portal-system" />
-            </properties>
-          </query-handler>
-          <lock-manager
-            class="org.exoplatform.services.jcr.impl.core.lock.jbosscache.CacheableLockManagerImpl">
-            <properties>
-              <property name="time-out" value="15m" />
-              <property name="jbosscache-configuration"
-                value="conf/exo.portal.component.test.jcr-jbosscache-lock-config.xml" />
-            </properties>
-          </lock-manager>
-        </workspace>
-        
-        <!-- portal-work -->
-        <!-- 
-        <workspace name="portal-work">
-          <container
-            class="org.exoplatform.services.jcr.impl.storage.jdbc.optimisation.CQJDBCWorkspaceDataContainer">
-            <properties>
-              <property name="source-name" value="jdbcexo" />
-              <property name="dialect" value="auto" />
-              <property name="db-structure-type" value="isolated" />
-              <property name="update-storage" value="true" />
-              <property name="max-buffer-size" value="204800" />
-              <property name="swap-directory"
-                value="${gatein.test.tmp.dir}/jcr/swap/portal-work" />
-            </properties>
-            <value-storages>
-              <value-storage id="portal-work"
-                class="org.exoplatform.services.jcr.impl.storage.value.fs.TreeFileValueStorage">
-                <properties>
-                  <property name="path"
-                    value="${gatein.test.tmp.dir}/jcr/values/portal-work" />
-                </properties>
-                <filters>
-                  <filter property-type="Binary" />
-                </filters>
-              </value-storage>
-            </value-storages>
-          </container>
-          <initializer
-            class="org.exoplatform.services.jcr.impl.core.ScratchWorkspaceInitializer">
-            <properties>
-              <property name="root-nodetype" value="nt:unstructured" />
-              <property name="root-permissions"
-                value="*:/platform/administrators read;*:/platform/administrators add_node;*:/platform/administrators set_property;*:/platform/administrators remove" />
-            </properties>
-          </initializer>
-          <cache enabled="true"
-            class="org.exoplatform.services.jcr.impl.dataflow.persistent.jbosscache.JBossCacheWorkspaceStorageCache">
-            <properties>
-              <property name="jbosscache-configuration"
-                value="conf/exo.portal.component.test.jcr-jbosscache-config.xml" />
-            </properties>
-          </cache>
-          <query-handler
-            class="org.exoplatform.services.jcr.impl.core.query.lucene.SearchIndex">
-            <properties>
-              <property name="index-dir"
-                value="${gatein.test.tmp.dir}/jcr/jcrlucenedb/portal-work" />
-            </properties>
-          </query-handler>
-          <lock-manager
-            class="org.exoplatform.services.jcr.impl.core.lock.jbosscache.CacheableLockManagerImpl">
-            <properties>
-              <property name="time-out" value="15m" />
-              <property name="jbosscache-configuration"
-                value="conf/exo.portal.component.test.jcr-jbosscache-lock-config.xml" />
-            </properties>
-          </lock-manager>
-        </workspace>
-        -->
-        <!-- wsrp-system -->
-        <!-- 
-        <workspace name="wsrp-system">
-          <container
-            class="org.exoplatform.services.jcr.impl.storage.jdbc.optimisation.CQJDBCWorkspaceDataContainer">
-            <properties>
-              <property name="source-name" value="jdbcexo" />
-              <property name="dialect" value="auto" />
-              <property name="db-structure-type" value="isolated" />
-              <property name="update-storage" value="true" />
-              <property name="max-buffer-size" value="204800" />
-              <property name="swap-directory"
-                value="${gatein.test.tmp.dir}/jcr/swap/wsrp-system" />
-            </properties>
-            <value-storages>
-              <value-storage id="wsrp-system"
-                class="org.exoplatform.services.jcr.impl.storage.value.fs.TreeFileValueStorage">
-                <properties>
-                  <property name="path"
-                    value="${gatein.test.tmp.dir}/jcr/values/wsrp-system" />
-                </properties>
-                <filters>
-                  <filter property-type="Binary" />
-                </filters>
-              </value-storage>
-            </value-storages>
-          </container>
-          <initializer
-            class="org.exoplatform.services.jcr.impl.core.ScratchWorkspaceInitializer">
-            <properties>
-              <property name="root-nodetype" value="nt:unstructured" />
-              <property name="root-permissions"
-                value="*:/platform/administrators read;*:/platform/administrators add_node;*:/platform/administrators set_property;*:/platform/administrators remove" />
-            </properties>
-          </initializer>
-          <cache enabled="true"
-            class="org.exoplatform.services.jcr.impl.dataflow.persistent.jbosscache.JBossCacheWorkspaceStorageCache">
-            <properties>
-              <property name="jbosscache-configuration"
-                value="conf/exo.portal.component.test.jcr-jbosscache-config.xml" />
-            </properties>
-          </cache>
-          <query-handler
-            class="org.exoplatform.services.jcr.impl.core.query.lucene.SearchIndex">
-            <properties>
-              <property name="index-dir"
-                value="${gatein.test.tmp.dir}/jcr/jcrlucenedb/wsrp-system" />
-            </properties>
-          </query-handler>
-          <lock-manager
-            class="org.exoplatform.services.jcr.impl.core.lock.jbosscache.CacheableLockManagerImpl">
-            <properties>
-              <property name="time-out" value="15m" />
-              <property name="jbosscache-configuration"
-                value="conf/exo.portal.component.test.jcr-jbosscache-lock-config.xml" />
-            </properties>
-          </lock-manager>
-        </workspace>
-         -->
-        <!-- collaboration -->
-        <workspace name="collaboration">
-          <container
-            class="org.exoplatform.services.jcr.impl.storage.jdbc.optimisation.CQJDBCWorkspaceDataContainer">
-            <properties>
-              <property name="source-name" value="jdbcexo" />
-              <property name="dialect" value="auto" />
-              <property name="db-structure-type" value="isolated" />
-              <property name="update-storage" value="true" />
-              <property name="max-buffer-size" value="204800" />
-              <property name="swap-directory"
-                value="${gatein.test.tmp.dir}/jcr/swap/collaboration" />
-            </properties>
-            <value-storages>
-              <value-storage id="collaboration"
-                class="org.exoplatform.services.jcr.impl.storage.value.fs.TreeFileValueStorage">
-                <properties>
-                  <property name="path" value="${gatein.test.tmp.dir}/jcr/values/collaboration" />
-                   <property name="enabled" value="${gatein.jcr.storage.enabled:true}" />
-                </properties>
-                <filters>
-                  <filter property-type="Binary" />
-                </filters>
-              </value-storage>
-            </value-storages>
-          </container>
-          <initializer
-            class="org.exoplatform.services.jcr.impl.core.ScratchWorkspaceInitializer">
-            <properties>
-              <property name="root-nodetype" value="nt:unstructured" />
-              <property name="root-permissions"
-                value="*:/platform/administrators read;*:/platform/administrators add_node;*:/platform/administrators set_property;*:/platform/administrators remove" />
-            </properties>
-          </initializer>
-          <cache enabled="true"
-            class="org.exoplatform.services.jcr.impl.dataflow.persistent.jbosscache.JBossCacheWorkspaceStorageCache">
-            <properties>
-              <property name="jbosscache-configuration"
-                value="conf/exo.portal.component.test.jcr-jbosscache-config.xml" />
-            </properties>
-          </cache>
-          <query-handler class="org.exoplatform.services.jcr.impl.core.query.lucene.SearchIndex">
-            <properties>
-              <property name="index-dir" value="${gatein.test.tmp.dir}/jcr/jcrlucenedb/collaboration" />
-              <property name="indexing-configuration-path" value="jar:/conf/standalone/jcr/indexing-configuration.xml" />
-            </properties>
-          </query-handler>
-          <lock-manager
-            class="org.exoplatform.services.jcr.impl.core.lock.jbosscache.CacheableLockManagerImpl">
-            <properties>
-              <property name="time-out" value="15m" />
-              <property name="jbosscache-configuration"
-                value="conf/exo.portal.component.test.jcr-jbosscache-lock-config.xml" />
-            </properties>
-          </lock-manager>
-          
-        </workspace>
+            <!-- System -->
+            <workspaces>
+                <workspace name="system">
+                    <container
+                            class="org.exoplatform.services.jcr.impl.storage.jdbc.optimisation.CQJDBCWorkspaceDataContainer">
+                        <properties>
+                            <property name="source-name" value="jdbcexo" />
+                            <property name="dialect" value="auto" />
+                            <property name="db-structure-type" value="isolated" />
+                            <property name="update-storage" value="true" />
+                            <property name="max-buffer-size" value="204800" />
+                            <property name="swap-directory" value="${gatein.test.tmp.dir}/jcr/swap/system" />
+                        </properties>
+                        <value-storages>
+                            <value-storage id="system"
+                                           class="org.exoplatform.services.jcr.impl.storage.value.fs.TreeFileValueStorage">
+                                <properties>
+                                    <property name="path" value="${gatein.test.tmp.dir}/jcr/values/system" />
+                                    <property name="enabled" value="${gatein.jcr.storage.enabled:true}" />
+                                </properties>
+                                <filters>
+                                    <filter property-type="Binary" />
+                                </filters>
+                            </value-storage>
+                        </value-storages>
+                    </container>
+                    <initializer
+                            class="org.exoplatform.services.jcr.impl.core.ScratchWorkspaceInitializer">
+                        <properties>
+                            <property name="root-nodetype" value="nt:unstructured" />
+                            <property name="root-permissions"
+                                      value="*:/platform/administrators read;*:/platform/administrators add_node;*:/platform/administrators set_property;*:/platform/administrators remove" />
+                        </properties>
+                    </initializer>
+                    <cache enabled="true"
+                           class="org.exoplatform.services.jcr.impl.dataflow.persistent.infinispan.ISPNCacheWorkspaceStorageCache">
+                        <properties>
+                            <property name="infinispan-configuration"
+                                      value="conf/exo.portal.component.test.jcr-infinispan-config.xml" />
+                        </properties>
+                    </cache>
+                    <query-handler
+                            class="org.exoplatform.services.jcr.impl.core.query.lucene.SearchIndex">
+                        <properties>
+                            <property name="index-dir"
+                                      value="${gatein.test.tmp.dir}/jcr/jcrlucenedb/system" />
+                        </properties>
+                    </query-handler>
+                    <lock-manager
+                            class="org.exoplatform.services.jcr.impl.core.lock.infinispan.ISPNCacheableLockManagerImpl">
+                        <properties>
+                            <property name="time-out" value="15m" />
+                            <property name="infinispan-cl-cache.jdbc.datasource" value="jdbcexo" />
+                            <property name="infinispan-cl-cache.jdbc.table.create" value="true" />
+                            <property name="infinispan-cl-cache.jdbc.table.drop" value="false" />
+                            <property name="infinispan-cl-cache.jdbc.id.column" value="id" />
+                            <property name="infinispan-cl-cache.jdbc.data.column" value="data" />
+                            <property name="infinispan-cl-cache.jdbc.timestamp.column" value="timestamp" />
+                            <property name="infinispan-configuration"
+                                      value="conf/exo.portal.component.test.jcr-infinispan-lock.xml" />
+                        </properties>
+                    </lock-manager>
+                </workspace>
 
-         <!-- Portal system data -->
-        <workspace name="portal-test">
-          <container class="org.exoplatform.services.jcr.impl.storage.jdbc.optimisation.CQJDBCWorkspaceDataContainer">
-            <properties>
-              <property name="source-name" value="jdbcexo"/>
-              <property name="dialect" value="auto"/>
-              <property name="db-structure-type" value="isolated"/>
-              <property name="update-storage" value="true"/>
-              <property name="max-buffer-size" value="204800"/>
-              <property name="swap-directory" value="${gatein.test.tmp.dir}/jcr/swap/portal-test"/>
-            </properties>
-            <value-storages>
-              <value-storage id="portal-test"
-                             class="org.exoplatform.services.jcr.impl.storage.value.fs.TreeFileValueStorage">
-                <properties>
-                  <property name="path" value="${gatein.test.tmp.dir}/jcr/values/portal-test"/>
-                   <property name="enabled" value="${gatein.jcr.storage.enabled:true}" />
-                </properties>
-                <filters>
-                  <filter property-type="Binary"/>
-                </filters>
-              </value-storage>
-            </value-storages>
-          </container>
-          <initializer class="org.exoplatform.services.jcr.impl.core.ScratchWorkspaceInitializer">
-            <properties>
-              <property name="root-nodetype" value="nt:unstructured"/>
-              <property name="root-permissions"
-                        value="*:/platform/administrators read;*:/platform/administrators add_node;*:/platform/administrators set_property;*:/platform/administrators remove"/>
-            </properties>
-          </initializer>
-          <cache enabled="true"
-                 class="org.exoplatform.services.jcr.impl.dataflow.persistent.jbosscache.JBossCacheWorkspaceStorageCache">
-            <properties>
-              <property name="jbosscache-configuration"
-                        value="conf/exo.portal.component.test.jcr-jbosscache-config.xml"/>
-            </properties>
-          </cache>
-          <query-handler class="org.exoplatform.services.jcr.impl.core.query.lucene.SearchIndex">
-            <properties>
-              <property name="index-dir" value="${gatein.test.tmp.dir}/jcr/jcrlucenedb/portal-test"/>
-            </properties>
-          </query-handler>
-          <lock-manager class="org.exoplatform.services.jcr.impl.core.lock.jbosscache.CacheableLockManagerImpl">
-            <properties>
-              <property name="time-out" value="15m"/>
-              <property name="jbosscache-configuration"
-                        value="conf/exo.portal.component.test.jcr-jbosscache-lock-config.xml"/>
-            </properties>
-          </lock-manager>
-        </workspace>
-     
-        <!-- dms-system -->
-        <workspace name="dms-system">
-          <container
-            class="org.exoplatform.services.jcr.impl.storage.jdbc.optimisation.CQJDBCWorkspaceDataContainer">
-            <properties>
-              <property name="source-name" value="jdbcexo" />
-              <property name="dialect" value="auto" />
-              <property name="db-structure-type" value="isolated" />
-              <property name="update-storage" value="true" />
-              <property name="max-buffer-size" value="204800" />
-              <property name="swap-directory"
-                value="${gatein.test.tmp.dir}/jcr/swap/dms-system" />
-            </properties>
-            <value-storages>
-              <value-storage id="dms-system"
-                class="org.exoplatform.services.jcr.impl.storage.value.fs.TreeFileValueStorage">
-                <properties>
-                  <property name="path" value="${gatein.test.tmp.dir}/jcr/values/dms-system" />
-                   <property name="enabled" value="${gatein.jcr.storage.enabled:true}" />
-                </properties>
-                <filters>
-                  <filter property-type="Binary" />
-                </filters>
-              </value-storage>
-            </value-storages>
-          </container>
-          <initializer
-            class="org.exoplatform.services.jcr.impl.core.ScratchWorkspaceInitializer">
-            <properties>
-              <property name="root-nodetype" value="nt:unstructured" />
-              <property name="root-permissions"
-                value="*:/platform/administrators read;*:/platform/administrators add_node;*:/platform/administrators set_property;*:/platform/administrators remove" />
-            </properties>
-          </initializer>
-          <cache enabled="true"
-            class="org.exoplatform.services.jcr.impl.dataflow.persistent.jbosscache.JBossCacheWorkspaceStorageCache">
-            <properties>
-              <property name="jbosscache-configuration"
-                value="conf/exo.portal.component.test.jcr-jbosscache-config.xml" />
-            </properties>
-          </cache>
-          <query-handler
-            class="org.exoplatform.services.jcr.impl.core.query.lucene.SearchIndex">
-            <properties>
-              <property name="index-dir"
-                value="${gatein.test.tmp.dir}/jcr/jcrlucenedb/dms-system" />
-            </properties>
-          </query-handler>
-          <lock-manager
-            class="org.exoplatform.services.jcr.impl.core.lock.jbosscache.CacheableLockManagerImpl">
-            <properties>
-              <property name="time-out" value="15m" />
-              <property name="jbosscache-configuration"
-                value="conf/exo.portal.component.test.jcr-jbosscache-lock-config.xml" />
-            </properties>
-          </lock-manager>
-        </workspace>
-      </workspaces>
-    </repository>
-  </repositories>
+                <!-- portal-system -->
+                <workspace name="portal-system">
+                    <container
+                            class="org.exoplatform.services.jcr.impl.storage.jdbc.optimisation.CQJDBCWorkspaceDataContainer">
+                        <properties>
+                            <property name="source-name" value="jdbcexo" />
+                            <property name="dialect" value="auto" />
+                            <property name="db-structure-type" value="isolated" />
+                            <property name="update-storage" value="true" />
+                            <property name="max-buffer-size" value="204800" />
+                            <property name="swap-directory"
+                                      value="${gatein.test.tmp.dir}/jcr/swap/portal-system" />
+                        </properties>
+                        <value-storages>
+                            <value-storage id="portal-system"
+                                           class="org.exoplatform.services.jcr.impl.storage.value.fs.TreeFileValueStorage">
+                                <properties>
+                                    <property name="path" value="${gatein.test.tmp.dir}/jcr/values/portal-system" />
+                                    <property name="enabled" value="${gatein.jcr.storage.enabled:true}" />
+                                </properties>
+                                <filters>
+                                    <filter property-type="Binary" />
+                                </filters>
+                            </value-storage>
+                        </value-storages>
+                    </container>
+                    <initializer
+                            class="org.exoplatform.services.jcr.impl.core.ScratchWorkspaceInitializer">
+                        <properties>
+                            <property name="root-nodetype" value="nt:unstructured" />
+                            <property name="root-permissions"
+                                      value="*:/platform/administrators read;*:/platform/administrators add_node;*:/platform/administrators set_property;*:/platform/administrators remove" />
+                        </properties>
+                    </initializer>
+                    <cache enabled="true"
+                           class="org.exoplatform.services.jcr.impl.dataflow.persistent.infinispan.ISPNCacheWorkspaceStorageCache">
+                        <properties>
+                            <property name="infinispan-configuration"
+                                      value="conf/exo.portal.component.test.jcr-infinispan-config.xml" />
+                        </properties>
+                    </cache>
+                    <query-handler
+                            class="org.exoplatform.services.jcr.impl.core.query.lucene.SearchIndex">
+                        <properties>
+                            <property name="index-dir"
+                                      value="${gatein.test.tmp.dir}/jcr/jcrlucenedb/portal-system" />
+                        </properties>
+                    </query-handler>
+                    <lock-manager
+                            class="org.exoplatform.services.jcr.impl.core.lock.infinispan.ISPNCacheableLockManagerImpl">
+                        <properties>
+                            <property name="time-out" value="15m" />
+                            <property name="infinispan-cl-cache.jdbc.datasource" value="jdbcexo" />
+                            <property name="infinispan-cl-cache.jdbc.table.create" value="true" />
+                            <property name="infinispan-cl-cache.jdbc.table.drop" value="false" />
+                            <property name="infinispan-cl-cache.jdbc.id.column" value="id" />
+                            <property name="infinispan-cl-cache.jdbc.data.column" value="data" />
+                            <property name="infinispan-cl-cache.jdbc.timestamp.column" value="timestamp" />
+                            <property name="infinispan-configuration"
+                                      value="conf/exo.portal.component.test.jcr-infinispan-lock.xml" />
+                        </properties>
+                    </lock-manager>
+                </workspace>
+                <!-- collaboration -->
+                <workspace name="collaboration">
+                    <container
+                            class="org.exoplatform.services.jcr.impl.storage.jdbc.optimisation.CQJDBCWorkspaceDataContainer">
+                        <properties>
+                            <property name="source-name" value="jdbcexo" />
+                            <property name="dialect" value="auto" />
+                            <property name="db-structure-type" value="isolated" />
+                            <property name="update-storage" value="true" />
+                            <property name="max-buffer-size" value="204800" />
+                            <property name="swap-directory"
+                                      value="${gatein.test.tmp.dir}/jcr/swap/collaboration" />
+                        </properties>
+                        <value-storages>
+                            <value-storage id="collaboration"
+                                           class="org.exoplatform.services.jcr.impl.storage.value.fs.TreeFileValueStorage">
+                                <properties>
+                                    <property name="path" value="${gatein.test.tmp.dir}/jcr/values/collaboration" />
+                                    <property name="enabled" value="${gatein.jcr.storage.enabled:true}" />
+                                </properties>
+                                <filters>
+                                    <filter property-type="Binary" />
+                                </filters>
+                            </value-storage>
+                        </value-storages>
+                    </container>
+                    <initializer
+                            class="org.exoplatform.services.jcr.impl.core.ScratchWorkspaceInitializer">
+                        <properties>
+                            <property name="root-nodetype" value="nt:unstructured" />
+                            <property name="root-permissions"
+                                      value="*:/platform/administrators read;*:/platform/administrators add_node;*:/platform/administrators set_property;*:/platform/administrators remove" />
+                        </properties>
+                    </initializer>
+                    <cache enabled="true"
+                           class="org.exoplatform.services.jcr.impl.dataflow.persistent.infinispan.ISPNCacheWorkspaceStorageCache">
+                        <properties>
+                            <property name="infinispan-configuration"
+                                      value="conf/exo.portal.component.test.jcr-infinispan-config.xml" />
+                        </properties>
+                    </cache>
+                    <query-handler
+                            class="org.exoplatform.services.jcr.impl.core.query.lucene.SearchIndex">
+                        <properties>
+                            <property name="index-dir"
+                                      value="${gatein.test.tmp.dir}/jcr/jcrlucenedb/collaboration" />
+                        <property name="indexing-configuration-path" value="jar:/conf/standalone/jcr/indexing-configuration.xml" />
+                        </properties>
+                    </query-handler>
+                    <lock-manager
+                            class="org.exoplatform.services.jcr.impl.core.lock.infinispan.ISPNCacheableLockManagerImpl">
+                        <properties>
+                            <property name="time-out" value="15m" />
+                            <property name="infinispan-cl-cache.jdbc.datasource" value="jdbcexo" />
+                            <property name="infinispan-cl-cache.jdbc.table.create" value="true" />
+                            <property name="infinispan-cl-cache.jdbc.table.drop" value="false" />
+                            <property name="infinispan-cl-cache.jdbc.id.column" value="id" />
+                            <property name="infinispan-cl-cache.jdbc.data.column" value="data" />
+                            <property name="infinispan-cl-cache.jdbc.timestamp.column" value="timestamp" />
+                            <property name="infinispan-configuration"
+                                      value="conf/exo.portal.component.test.jcr-infinispan-lock.xml" />
+                        </properties>
+                    </lock-manager>
+                </workspace>
+
+                <!-- Portal system data -->
+                <workspace name="portal-test">
+                    <container class="org.exoplatform.services.jcr.impl.storage.jdbc.optimisation.CQJDBCWorkspaceDataContainer">
+                        <properties>
+                            <property name="source-name" value="jdbcexo"/>
+                            <property name="dialect" value="auto"/>
+                            <property name="db-structure-type" value="isolated"/>
+                            <property name="update-storage" value="true"/>
+                            <property name="max-buffer-size" value="204800"/>
+                            <property name="swap-directory" value="${gatein.test.tmp.dir}/jcr/swap/portal-test"/>
+                        </properties>
+                        <value-storages>
+                            <value-storage id="portal-test"
+                                           class="org.exoplatform.services.jcr.impl.storage.value.fs.TreeFileValueStorage">
+                                <properties>
+                                    <property name="path" value="${gatein.test.tmp.dir}/jcr/values/portal-test"/>
+                                    <property name="enabled" value="${gatein.jcr.storage.enabled:true}" />
+                                </properties>
+                                <filters>
+                                    <filter property-type="Binary"/>
+                                </filters>
+                            </value-storage>
+                        </value-storages>
+                    </container>
+                    <initializer class="org.exoplatform.services.jcr.impl.core.ScratchWorkspaceInitializer">
+                        <properties>
+                            <property name="root-nodetype" value="nt:unstructured"/>
+                            <property name="root-permissions"
+                                      value="*:/platform/administrators read;*:/platform/administrators add_node;*:/platform/administrators set_property;*:/platform/administrators remove"/>
+                        </properties>
+                    </initializer>
+                    <cache enabled="true"
+                           class="org.exoplatform.services.jcr.impl.dataflow.persistent.infinispan.ISPNCacheWorkspaceStorageCache">
+                        <properties>
+                            <property name="infinispan-configuration"
+                                      value="conf/exo.portal.component.test.jcr-infinispan-config.xml"/>
+                        </properties>
+                    </cache>
+                    <query-handler class="org.exoplatform.services.jcr.impl.core.query.lucene.SearchIndex">
+                        <properties>
+                            <property name="index-dir" value="${gatein.test.tmp.dir}/jcr/jcrlucenedb/portal-test"/>
+                        </properties>
+                    </query-handler>
+                    <lock-manager class="org.exoplatform.services.jcr.impl.core.lock.infinispan.ISPNCacheableLockManagerImpl">
+                        <properties>
+                            <property name="time-out" value="15m"/>
+                            <property name="infinispan-cl-cache.jdbc.datasource" value="jdbcexo" />
+                            <property name="infinispan-cl-cache.jdbc.table.create" value="true" />
+                            <property name="infinispan-cl-cache.jdbc.table.drop" value="false" />
+                            <property name="infinispan-cl-cache.jdbc.id.column" value="id" />
+                            <property name="infinispan-cl-cache.jdbc.data.column" value="data" />
+                            <property name="infinispan-cl-cache.jdbc.timestamp.column" value="timestamp" />
+                            <property name="infinispan-configuration"
+                                      value="conf/exo.portal.component.test.jcr-infinispan-lock.xml"/>
+                        </properties>
+                    </lock-manager>
+                </workspace>
+
+                <!-- dms-system -->
+                <workspace name="dms-system">
+                    <container
+                            class="org.exoplatform.services.jcr.impl.storage.jdbc.optimisation.CQJDBCWorkspaceDataContainer">
+                        <properties>
+                            <property name="source-name" value="jdbcexo" />
+                            <property name="dialect" value="auto" />
+                            <property name="db-structure-type" value="isolated" />
+                            <property name="update-storage" value="true" />
+                            <property name="max-buffer-size" value="204800" />
+                            <property name="swap-directory"
+                                      value="${gatein.test.tmp.dir}/jcr/swap/dms-system" />
+                        </properties>
+                        <value-storages>
+                            <value-storage id="dms-system"
+                                           class="org.exoplatform.services.jcr.impl.storage.value.fs.TreeFileValueStorage">
+                                <properties>
+                                    <property name="path" value="${gatein.test.tmp.dir}/jcr/values/dms-system" />
+                                    <property name="enabled" value="${gatein.jcr.storage.enabled:true}" />
+                                </properties>
+                                <filters>
+                                    <filter property-type="Binary" />
+                                </filters>
+                            </value-storage>
+                        </value-storages>
+                    </container>
+                    <initializer
+                            class="org.exoplatform.services.jcr.impl.core.ScratchWorkspaceInitializer">
+                        <properties>
+                            <property name="root-nodetype" value="nt:unstructured" />
+                            <property name="root-permissions"
+                                      value="*:/platform/administrators read;*:/platform/administrators add_node;*:/platform/administrators set_property;*:/platform/administrators remove" />
+                        </properties>
+                    </initializer>
+                    <cache enabled="true"
+                           class="org.exoplatform.services.jcr.impl.dataflow.persistent.infinispan.ISPNCacheWorkspaceStorageCache">
+                        <properties>
+                            <property name="infinispan-configuration"
+                                      value="conf/exo.portal.component.test.jcr-infinispan-config.xml" />
+                        </properties>
+                    </cache>
+                    <query-handler
+                            class="org.exoplatform.services.jcr.impl.core.query.lucene.SearchIndex">
+                        <properties>
+                            <property name="index-dir"
+                                      value="${gatein.test.tmp.dir}/jcr/jcrlucenedb/dms-system" />
+                        </properties>
+                    </query-handler>
+                    <lock-manager
+                            class="org.exoplatform.services.jcr.impl.core.lock.infinispan.ISPNCacheableLockManagerImpl">
+                        <properties>
+                            <property name="time-out" value="15m" />
+                            <property name="infinispan-cl-cache.jdbc.datasource" value="jdbcexo" />
+                            <property name="infinispan-cl-cache.jdbc.table.create" value="true" />
+                            <property name="infinispan-cl-cache.jdbc.table.drop" value="false" />
+                            <property name="infinispan-cl-cache.jdbc.id.column" value="id" />
+                            <property name="infinispan-cl-cache.jdbc.data.column" value="data" />
+                            <property name="infinispan-cl-cache.jdbc.timestamp.column" value="timestamp" />
+                            <property name="infinispan-configuration"
+                                      value="conf/exo.portal.component.test.jcr-infinispan-lock.xml" />
+                        </properties>
+                    </lock-manager>
+                </workspace>
+            </workspaces>
+        </repository>
+    </repositories>
 </repository-service>

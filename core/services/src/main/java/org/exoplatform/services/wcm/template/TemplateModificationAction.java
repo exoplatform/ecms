@@ -22,6 +22,8 @@ import javax.jcr.Property;
 import org.apache.commons.chain.Context;
 import org.exoplatform.groovyscript.text.TemplateService;
 import org.exoplatform.services.command.action.Action;
+import org.exoplatform.services.log.ExoLogger;
+import org.exoplatform.services.log.Log;
 import org.exoplatform.services.wcm.utils.WCMCoreUtils;
 
 /**
@@ -31,12 +33,20 @@ import org.exoplatform.services.wcm.utils.WCMCoreUtils;
  * Oct 27, 2009
  */
 public class TemplateModificationAction implements Action {
+    private static final Log LOG  = ExoLogger.getLogger(TemplateModificationAction.class.getName());
 
   public boolean execute(Context context) throws Exception {
     Property property = (Property)context.get("currentItem");
     Node node = property.getParent();
     TemplateService templateService = WCMCoreUtils.getService(TemplateService.class);
-    templateService.reloadTemplate(node.getParent().getPath());
+      try {
+          templateService.reloadTemplate(node.getParent().getPath());
+      } catch (IllegalArgumentException IAE) {
+          if (LOG.isWarnEnabled()) {
+              LOG.warn("Template [" + node.getParent().getPath() + "] not found on TemplateService Cache Store");
+          }
+      }
+        
     return true;
   }
 
