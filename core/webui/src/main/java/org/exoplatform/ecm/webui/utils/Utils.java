@@ -748,9 +748,8 @@ public class Utils {
         } else {
           propertyValue = orgNode.getProperty(propertyName).getString();	
         }
-        propertyValue = org.exoplatform.services.deployment.Utils.sanitize(propertyValue);
         if (org.exoplatform.wcm.webui.Utils.getCurrentMode().equals(WCMComposer.MODE_LIVE))      
-          return StringUtils.replace(propertyValue, "{portalName}", siteName);
+          return StringEscapeUtils.unescapeHtml(StringUtils.replace(propertyValue,"{portalName}",siteName));
         else
           return "<div class=\"WCMInlineEditable\" contenteditable=\"true\" propertyName=\""+propertyName+"\" repo=\""+repo+"\" workspace=\""+workspace+"\"" +
         			" uuid=\""+uuid+"\" siteName=\""+siteName+"\" publishedMsg=\""+published+"\" draftMsg=\""+draft+"\" fastpublishlink=\""+publishLink+"\" language=\""+language+"\" >" + 
