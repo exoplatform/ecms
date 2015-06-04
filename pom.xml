@@ -227,6 +227,11 @@
       </dependency>
       <dependency>
         <groupId>org.exoplatform.ecms</groupId>
+        <artifactId>ecms-core-webui-presentation</artifactId>
+        <version>${project.version}</version>
+      </dependency>      
+      <dependency>
+        <groupId>org.exoplatform.ecms</groupId>
         <artifactId>ecms-core-webui-seo</artifactId>
         <version>${project.version}</version>
       </dependency>
