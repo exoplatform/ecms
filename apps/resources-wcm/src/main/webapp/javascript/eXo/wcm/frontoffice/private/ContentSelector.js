@@ -976,6 +976,7 @@
 					window.opener.document.getElementById(eXp.getParameterValueByName("browserType")).value=strHTML;
 				} else {
 					if(nodeType.indexOf("image") >=0) {
+						name = escape(name);
 						strHTML += "<img src=\""+url+"\" name=\""+name+"\" alt=\""+name+"\"/>";
 					} else {
 						strHTML += "<a href=\"" + url+"\">"+name+"</a>";		
