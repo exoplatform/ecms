@@ -40,24 +40,14 @@ public class OpenInOfficeConnector implements ResourceContainer, Startable {
   private final String OPEN_DOCUMENT_ON_DESKTOP_RESOURCE_KEY = "OpenInOfficeConnector.label.exo.remote-edit.desktop";
   private final String OPEN_DOCUMENT_IN_DESKTOP_APP_RESOURCE_KEY = "OpenInOfficeConnector.label.exo.remote-edit.desktop-app";
   private final String OPEN_DOCUMENT_DEFAULT_TITLE               = "Open on Desktop";
-  private static final String MSOFFICE_MIMETYPE                  = "ms-office-mimetype";
   private final int CACHED_TIME = 60*24*30*12;
 
   private static final String VERSION_MIXIN ="mix:versionable";
 
-  private static String msofficeMimeType = ",doc,dot,docx,dotx,docm,dotm,xll,xls,xlt,xla,xlsx,xltx,xlsm,xltm,xlam,xlsb,ppt" +
-                                           ",pot,pps,ppa,pptx,potx,ppsx,ppam,pptm,potm,ppsm,";
   private NodeFinder nodeFinder;
   private LinkManager linkManager;
   private ResourceBundleService resourceBundleService;
   private DocumentTypeService documentTypeService;
-
-  private void init(){
-    String _msofficeMimeType = System.getProperty(MSOFFICE_MIMETYPE);
-    if(StringUtils.isNotEmpty(_msofficeMimeType)){
-      msofficeMimeType = _msofficeMimeType;
-    }
-  }
 
   public OpenInOfficeConnector(NodeFinder nodeFinder,
                                LinkManager linkManager,
@@ -121,6 +111,10 @@ public class OpenInOfficeConnector implements ResourceContainer, Startable {
     Node node = (Node)nodeFinder.getItem(workspace, filePath);
     if (linkManager.isLink(node)) node = linkManager.getTarget(node);
 
+    boolean isMsoffice = false;
+    if (documentType.getResourceBundleKey() != OPEN_DOCUMENT_ON_DESKTOP_RESOURCE_KEY) {
+      isMsoffice = true;
+    }
     JSONObject rs = new JSONObject();
     rs.put("ico", ico);
     rs.put("title", title);
@@ -128,7 +122,7 @@ public class OpenInOfficeConnector implements ResourceContainer, Startable {
     rs.put("workspace", workspace);
     rs.put("filePath", node.getPath());
     rs.put("isFile", node.isNodeType(NodetypeConstant.NT_FILE));
-    rs.put("isMsoffice", msofficeMimeType.contains(","+extension+","));
+    rs.put("isMsoffice", isMsoffice);
 
     builder = Response.ok(rs.toString(), MediaType.APPLICATION_JSON);
     builder.tag(etag);
@@ -221,7 +215,6 @@ public class OpenInOfficeConnector implements ResourceContainer, Startable {
 
   @Override
   public void start() {
-    init();
   }
 
   @Override
