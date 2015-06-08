@@ -60,6 +60,7 @@ public class UIFormRichtextField extends DialogFormField {
     richtext.setHeight(height);
     richtext.setEnterMode(enterMode);
     richtext.setShiftEnterMode(shiftEnterMode);
+    richtext.setIgnoreParserHTML(true);
 
     StringBuffer contentsCss = new StringBuffer();
     contentsCss.append("[");
