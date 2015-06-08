@@ -144,7 +144,7 @@
         <% } else {%>
              <a class="actionIcon" title="<%= _ctx.appRes("UISCVPreferences.label.Back") %>" onclick="history.go(-1)" ><i class="uiIconEcmsReturn uiIconLightGray"></i></a>
         <% } %>
-            <a class="pull-right" href="javascript: void(0);" onclick="window.open('<%= uicomponent.getPrintUrl(node) %>')" title="<%= _ctx.appRes("UIPresentationContainer.label.print");%>"><i class="uiIconPrint uiIconLightGray"></i>  <%= _ctx.appRes("UIPresentationContainer.label.print") %></a>
+            <a class="pull-right" href="javascript: void(0);" onclick="window.SecondaryToolbar.printClick();" title="<%= _ctx.appRes("UIPresentationContainer.label.print");%>"><i class="uiIconPrint uiIconLightGray"></i>  <%= _ctx.appRes("UIPresentationContainer.label.print") %></a>
         </div>
 				<% 
 			} 
