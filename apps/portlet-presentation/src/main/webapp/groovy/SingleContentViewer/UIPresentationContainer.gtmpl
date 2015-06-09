@@ -9,7 +9,7 @@
   	import org.exoplatform.portal.application.PortalRequestContext;
   	import org.exoplatform.portal.webui.util.Util;
   	import org.exoplatform.webui.application.WebuiRequestContext;
-
+		import org.exoplatform.services.wcm.publication.PublicationDefaultStates;
 		def rcontext = _ctx.getRequestContext();
     def jsManager = rcontext.getJavascriptManager();
     jsManager.loadScriptResource("quick-edit");
@@ -23,6 +23,7 @@
 		def hoverClass = Utils.isShowQuickEdit() ? " containerHoverClass" : "";
 		def node = uicomponent.getNodeView();
 		def currentState = uicomponent.getCurrentState();
+    def currentStateClass = currentState+"Text";
 		def repo = "";
 	  def workspace = "";
 	  def uuid = "";
@@ -65,13 +66,7 @@
 				 <div class="edittingToolBarContainer" style="$edittingStyle">
 					 <div class="edittingToolBar clearfix">
 						<div class="edittingCurrentState pull-left">
-							 <% if (UIEditingForm.PUBLISHED.equals(currentState)) {%>
-									<span class="publishText"><i class="uiIconTick"></i> ${currentState}</span>
-							 <% } else if (UIEditingForm.DRAFT.equals(currentState)) {%>
-									<span class="draftText">${currentState}</span>
-							 <% } else { %>
-									<span>${currentState}</span>
-							 <% } %>
+              <span class="$currentStateClass"><%if(PublicationDefaultStates.PUBLISHED.equals(currentState)){%><i class="uiIconTick"></i><%}%> <%=_ctx.appRes("PublicationStates."+currentState)%></span>
 						</div>
 						<div class="btn-group pull-right">
 								<a class="btn" onclick = "eXo.ecm.CLV.addURL(this)" href="<%= uicomponent.getQuickEditLink(node) %>" rel="tooltip" data-placement="bottom" title="<%= _ctx.appRes("UIPresentationContainer.title.QuickEdit")%>">
