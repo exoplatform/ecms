@@ -52,6 +52,7 @@ import org.exoplatform.services.log.Log;
 import org.exoplatform.services.wcm.core.NodeLocation;
 import org.exoplatform.services.wcm.core.WebSchemaConfigService;
 import org.exoplatform.services.wcm.friendly.FriendlyService;
+import org.exoplatform.services.wcm.publication.PublicationDefaultStates;
 import org.exoplatform.services.wcm.publication.WCMComposer;
 import org.exoplatform.services.wcm.utils.WCMCoreUtils;
 import org.exoplatform.services.wcm.webcontent.WebContentSchemaHandler;
@@ -761,9 +762,11 @@ public class UICLVPresentation extends UIContainer {
       sb.append("    </div>");
       
       if (viewNode.hasProperty("publication:currentState")) {
-        String state = viewNode.getProperty("publication:currentState").getValue().getString();
+        PublicationService publicationService = WCMCoreUtils.getService(PublicationService.class);
+        String state = publicationService.getCurrentState(viewNode);
+        String stateLabel="";
         try {
-          state = portletRequestContext.getApplicationResourceBundle()
+          stateLabel = portletRequestContext.getApplicationResourceBundle()
                                        .getString("PublicationStates." + state);
         } catch (MissingResourceException e) {
           if (LOG.isWarnEnabled()) {
@@ -771,13 +774,9 @@ public class UICLVPresentation extends UIContainer {
           }
         }
         sb.append("<div class=\"edittingCurrentState pull-left\">");
-        if (UIEditingForm.PUBLISHED.equals(state)) {
-          sb.append("<span class=\"publishText\"><i class=\"uiIconTick\"></i>" + state + "</span>");
-        } else if (UIEditingForm.DRAFT.equals(state)) {
-          sb.append("<span class=\"draftText\">" + state + "</span>");
-        } else {
-          sb.append("<span>" + state + "</span>");
-        }
+        sb.append("<span class=\""+state+"Text\">");
+        if(PublicationDefaultStates.PUBLISHED.equals(state)) sb.append("<i class=\"uiIconTick\"></i>");
+        sb.append(stateLabel + "</span>");
         sb.append(" </div>");
       }
 
