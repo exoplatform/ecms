@@ -29,6 +29,7 @@ import javax.jcr.query.QueryManager;
 import javax.jcr.query.QueryResult;
 
 import org.apache.commons.lang.StringUtils;
+import org.exoplatform.commons.utils.XPathUtils;
 import org.exoplatform.ecm.jcr.model.Preference;
 import org.exoplatform.ecm.webui.component.explorer.UIJCRExplorer;
 import org.exoplatform.ecm.webui.form.UIFormInputSetWithAction;
@@ -530,6 +531,7 @@ public class UISimpleSearch extends UIForm {
       if (!currentPath.equals("/")) {
         statement.append("jcr:path like '").append(currentPath).append("/%' AND ");
       }
+      property = XPathUtils.escapeIllegalXPathName(property);
       statement.append(property).append(" is not null");
       QueryManager queryManager = uiExplorer.getTargetSession().getWorkspace().getQueryManager() ;
       Query query = queryManager.createQuery(statement.toString(), Query.SQL) ;
