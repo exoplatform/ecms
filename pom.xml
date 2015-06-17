@@ -39,7 +39,7 @@
     <!-- **************************************** -->
     <!-- Project Dependencies                     -->
     <!-- **************************************** -->
-    <org.exoplatform.depmgt.version>10-RC1</org.exoplatform.depmgt.version>
+    <org.exoplatform.depmgt.version>10-SNAPSHOT</org.exoplatform.depmgt.version>
     <!-- JCR Project Dependencies -->
     <org.exoplatform.kernel.version>2.4.13-GA</org.exoplatform.kernel.version>
     <org.exoplatform.core.version>2.5.13-GA</org.exoplatform.core.version>
@@ -54,7 +54,7 @@
     <org.exoplatform.commons.version>4.2.x-SNAPSHOT</org.exoplatform.commons.version>
     <org.exoplatform.platform-ui.version>4.2.x-SNAPSHOT</org.exoplatform.platform-ui.version>
     <!-- Platform Project 3rd party Dependencies -->
-    <org.exoplatform.doc.doc-style.version>4.2.0-RC1</org.exoplatform.doc.doc-style.version>
+    <org.exoplatform.doc.doc-style.version>4.2.x-SNAPSHOT</org.exoplatform.doc.doc-style.version>
   </properties>
   <dependencyManagement>
     <!-- ### NEVER CHANGE THIS ORDER OF DEPMGT ### -->
