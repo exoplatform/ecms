@@ -988,7 +988,7 @@
       <publicationPublish>Publica-ho</publicationPublish>
 <contentNavigation>Navegació de contingut</contentNavigation>
 <addSymLink>Afegeix un enllaç simbòlic</addSymLink>
-      <checkIn>Check In</checkIn>
+      <checkIn>Protegir</checkIn>
       <checkOut>Check Out</checkOut>
     </label>
     <action>
@@ -1379,7 +1379,7 @@
       <set_property>Dret per definir propietat</set_property>
       <remove>Elimina Drets</remove>
     </label>
-    <title>Add a permission to this node</title>
+    <title>Afegeix un permís al node</title>
     <action>
       <Close>#{word.close}</Close>
       <Save>Save</Save>
@@ -1482,7 +1482,7 @@
       <add_node>Modificar</add_node>
       <remove>Elimina</remove>
     </label>
-    <title>Add permission to this node</title>
+    <title>Afegeix permisos al node</title>
     <action>
       <Close>#{word.close}</Close>
       <Save>#{word.save}</Save>

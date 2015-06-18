@@ -202,15 +202,15 @@
     <msg>
       <time-to-late>وقت البحث طويل جداً.</time-to-late>
       <empty-field>يرجى التـّــأكد من صحّة كلمة البحث الرئيسية.</empty-field>
-      <empty-name>Please enter the name to search</empty-name>
-      <empty-content>Please enter a word or phrase to search</empty-content>
-      <empty-property>Please select a property</empty-property>
-      <empty-property-keyword>Please enter a keyword for the property</empty-property-keyword>
-      <empty-doctype>Please select a document type</empty-doctype>
-      <empty-startDate>"From Date" is required</empty-startDate>
+      <empty-name>الرجاء إدخال اسم للبحث</empty-name>
+      <empty-content>الرجاء إدخال كلمة أو عبارة للبحث عنها</empty-content>
+      <empty-property>الرجاء تحديد خاصية</empty-property>
+      <empty-property-keyword>الرجاء إدخال كلمة رئيسية بشأن الخاصّية</empty-property-keyword>
+      <empty-doctype>الرّجاء تحديد نوع الملفّ</empty-doctype>
+      <empty-startDate>يرجى تحديد قيمة تاريخ "من"</empty-startDate>
       <invalid-format>صيغة التاريخ/التوقيت التي تمّ ادخالها في المجال '{0}' غير صحيحة.</invalid-format>
       <invalid-date>"قيمة "إلى تاريخ" يجب أن تأتي بعد قيمة "من تاريخ""</invalid-date>
-      <invalid-startDate>"From Date" must not be later than today</invalid-startDate>
+      <invalid-startDate>تاريخ "من" لا يجب أن يتجاوزتاريخ اليوم</invalid-startDate>
       <invalid-nodeType>نوع العقدة "{0}" غير صحيح. يُرجى اعادة التثبّت.</invalid-nodeType>
       <invalid-keyword>الكلمة المفتاح غير صحيحة. لم يتم التعرّف على بعض الأحرف.</invalid-keyword>
     </msg>

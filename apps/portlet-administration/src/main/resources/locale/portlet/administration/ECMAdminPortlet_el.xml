@@ -1379,7 +1379,7 @@
       <set_property>Δικαίωμα ορισμού ιδιότητας</set_property>
       <remove>Δικαίωμα διαγραφής</remove>
     </label>
-    <title>Add a permission to this node</title>
+    <title>Προσθήκη δικαιωμάτων σε αυτόν τον κόμβο</title>
     <action>
       <Close>#{word.close}</Close>
       <Save>Save</Save>
@@ -1482,7 +1482,7 @@
       <add_node>Επεξεργασία</add_node>
       <remove>Κατάργηση</remove>
     </label>
-    <title>Add permission to this node</title>
+    <title>Προσθήκη δικαιωμάτων σε αυτόν τον κόμβο</title>
     <action>
       <Close>#{word.close}</Close>
       <Save>#{word.save}</Save>
