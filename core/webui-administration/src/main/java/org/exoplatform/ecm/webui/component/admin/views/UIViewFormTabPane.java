@@ -99,11 +99,11 @@ public class UIViewFormTabPane extends UITabPane {
   }
   
   public String[] getActions() {
-    ManageViewService viewService = WCMCoreUtils.getService(ManageViewService.class);
     UITabList uiTabList = this.findFirstComponentOfType(UITabList.class);
     String viewName = uiTabList.getViewName();
-    if(StringUtils.isNotEmpty(viewName)) {
+    if(StringUtils.isNotEmpty(viewName) && isUpdate() ) {
       try{
+        ManageViewService viewService = WCMCoreUtils.getService(ManageViewService.class);
         Node viewNode = viewService.getViewByName(viewName, WCMCoreUtils.getUserSessionProvider());
         if (viewNode.isNodeType(NodetypeConstant.MIX_VERSIONABLE))
           actions_ = new String[]{SAVE_BUTTON, CANCEL_BUTTON, RESTORE_BUTTON};
