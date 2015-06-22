@@ -2155,7 +2155,7 @@
 
   <anyPermission>
     <title>
-      <AddAnyPermission>Thiết lập cho phép bất kỳ</AddAnyPermission>
+      <AddAnyPermission>Tất cả người dùng</AddAnyPermission>
     </title>
   </anyPermission>
   <!--
