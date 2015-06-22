@@ -721,7 +721,7 @@
     <action>
       <Save>#{word.save}</Save>
       <Cancel>#{word.cancel}</Cancel>
-      <Reset>Nouvelle Propriété</Reset>
+      <Reset>Réinitialiser</Reset>
     </action>
     <msg>
       <name-invalid>Vous devez entrer un nom.</name-invalid>

@@ -87,7 +87,7 @@
 -->
   <UITaxonomyTreeMainForm>
     <action>
-      <Reset>Reset</Reset>
+      <Reset>Làm lại</Reset>
     </action>
     <msg>
       <name-not-allowed>Tên không hợp lệ</name-not-allowed>
@@ -1313,7 +1313,7 @@
   
   <TaxoTreeAnyPermission>
     <label>
-      <any>Bất kỳ Phân quyền nào</any>
+      <any>Cho phép tất cả</any>
       <anyPermission>TaxoTreeAnyPermission</anyPermission>
     </label>
   </TaxoTreeAnyPermission>
@@ -1382,8 +1382,8 @@
     <title>Thêm phân quyền cho nút</title>
     <action>
       <Close>#{word.close}</Close>
-      <Save>Save</Save>
-      <Reset>Reset</Reset>
+      <Save>Lưu</Save>
+      <Reset>Làm lại</Reset>
     </action>
     <msg>
       <checkbox-require>Vui lòng chọn ít nhất một phân quyền.</checkbox-require>
@@ -2158,7 +2158,7 @@
   
   <UIAnyPermission>
     <label>
-      <anyPermission>Bất kỳ Phân quyền nào</anyPermission>
+      <anyPermission>Cho phép tất cả</anyPermission>
     </label>
   </UIAnyPermission>
   
