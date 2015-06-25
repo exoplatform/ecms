@@ -9,7 +9,7 @@
     var dropdown = gj(".uiShareDocuments.resizable .spaceSwitcherContainer #DisplayModesDropDown");
     gj(dropdown).bind( "click", function() {
       var popup = spaceChooserPopup = gj(".uiShareDocuments.resizable .spaceChooserPopup");
-      popup.offset({left:gj(this).offset().left, top:popup.offset().top});
+      popup.offset({left:gj(this).offset().left, top:gj(this).offset().top+gj(this).height()-1});
     });
 
   }
