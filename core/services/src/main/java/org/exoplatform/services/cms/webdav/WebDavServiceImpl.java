@@ -479,7 +479,7 @@ public class WebDavServiceImpl extends org.exoplatform.services.jcr.webdav.WebDa
       boolean pushAs = markTempFilesToHidden(repoPath);
       Node currentNode = (Node) session.getItem(path(repoPath));
       if (isCreating) {
-        if (userAgent.contains("Microsoft")) {
+        if (userAgent!= null && userAgent.contains("Microsoft")) {
           activityService.setCreating(currentNode, true);
         }
       }else {
