@@ -2417,6 +2417,7 @@
 <UIPermissionTreeForm>
 <action>
 <Save>Save</Save>
+<Cancel>crwdns6824563:0{word.cancel}crwdne6824563:0</Cancel>
 <Reset>Reset</Reset>
 <NextAddAction>crwdns6815986:0crwdne6815986:0</NextAddAction>
 <Previous>crwdns6815987:0crwdne6815987:0</Previous>

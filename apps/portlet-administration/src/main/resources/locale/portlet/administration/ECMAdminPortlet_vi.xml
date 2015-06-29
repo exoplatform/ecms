@@ -712,7 +712,7 @@
     </label>
     <title>
       <AddPermission>Thêm Phân quyền</AddPermission>
-      <RemovePermission>Remove Permission</RemovePermission>
+      <RemovePermission>Gỡ bỏ Phân quyền</RemovePermission>
       <AddIcon>Thêm Biểu tượng</AddIcon>
       <AddPath>Thêm Đường dẫn</AddPath>
     </title>
@@ -2417,6 +2417,7 @@
 <UIPermissionTreeForm>
 <action>
 <Save>Save</Save>
+<Cancel>#{word.cancel}</Cancel>
 <Reset>Reset</Reset>
 <NextAddAction>Kế tiếp</NextAddAction>
 <Previous>Trước đó</Previous>

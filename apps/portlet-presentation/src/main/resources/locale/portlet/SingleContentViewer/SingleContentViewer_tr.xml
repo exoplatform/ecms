@@ -98,6 +98,11 @@
       <SelectTargetPage>Sayfada Göster</SelectTargetPage>
     </title>
   </UISCVConfigPrintPageFormInputSet>
+  <UISCVConfigPrintPageSelectorPopupWindow>
+    <title>
+      <UIPageSelector>Sayfa seçicisi</UIPageSelector>
+    </title>
+  </UISCVConfigPrintPageSelectorPopupWindow>
   <PublicationStates>
     <archived>Arşivlenmiş</archived>
     <obsolete>Eskimiş</obsolete>

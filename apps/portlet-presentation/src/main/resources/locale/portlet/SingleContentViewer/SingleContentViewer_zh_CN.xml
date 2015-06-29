@@ -98,6 +98,11 @@
       <SelectTargetPage>在页中显示</SelectTargetPage>
     </title>
   </UISCVConfigPrintPageFormInputSet>
+  <UISCVConfigPrintPageSelectorPopupWindow>
+    <title>
+      <UIPageSelector>页面选择器</UIPageSelector>
+    </title>
+  </UISCVConfigPrintPageSelectorPopupWindow>
   <PublicationStates>
     <archived>存档</archived>
     <obsolete>已过时的</obsolete>

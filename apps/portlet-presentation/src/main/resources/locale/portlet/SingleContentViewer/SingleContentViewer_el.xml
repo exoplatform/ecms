@@ -98,6 +98,11 @@
       <SelectTargetPage>Εμφάνιση στη σελίδα</SelectTargetPage>
     </title>
   </UISCVConfigPrintPageFormInputSet>
+  <UISCVConfigPrintPageSelectorPopupWindow>
+    <title>
+      <UIPageSelector>Επιλογέας σελίδας</UIPageSelector>
+    </title>
+  </UISCVConfigPrintPageSelectorPopupWindow>
   <PublicationStates>
     <archived>Αρχειοθετημένο</archived>
     <obsolete>Ξεπερασμένο</obsolete>

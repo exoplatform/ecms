@@ -98,6 +98,11 @@
       <SelectTargetPage>Hiển thị trên Trang</SelectTargetPage>
     </title>
   </UISCVConfigPrintPageFormInputSet>
+  <UISCVConfigPrintPageSelectorPopupWindow>
+    <title>
+      <UIPageSelector>Chọn Trang</UIPageSelector>
+    </title>
+  </UISCVConfigPrintPageSelectorPopupWindow>
   <PublicationStates>
     <archived>Lưu trữ</archived>
     <obsolete>Cũ</obsolete>

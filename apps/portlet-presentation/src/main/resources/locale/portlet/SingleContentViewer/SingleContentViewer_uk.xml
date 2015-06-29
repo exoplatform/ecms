@@ -98,6 +98,11 @@
       <SelectTargetPage>Показати на сторінці</SelectTargetPage>
     </title>
   </UISCVConfigPrintPageFormInputSet>
+  <UISCVConfigPrintPageSelectorPopupWindow>
+    <title>
+      <UIPageSelector>Селектор сторінок</UIPageSelector>
+    </title>
+  </UISCVConfigPrintPageSelectorPopupWindow>
   <PublicationStates>
     <archived>Архівні</archived>
     <obsolete>Застарілий</obsolete>

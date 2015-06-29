@@ -98,6 +98,11 @@
       <SelectTargetPage>Rodyti puslapyje</SelectTargetPage>
     </title>
   </UISCVConfigPrintPageFormInputSet>
+  <UISCVConfigPrintPageSelectorPopupWindow>
+    <title>
+      <UIPageSelector>Puslapio parinkimas</UIPageSelector>
+    </title>
+  </UISCVConfigPrintPageSelectorPopupWindow>
   <PublicationStates>
     <archived>Suarchyvuotas</archived>
     <obsolete>Pasenęs</obsolete>
