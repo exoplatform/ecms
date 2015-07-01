@@ -23,7 +23,7 @@
     <view>
       <label>
         <postedBy>Paskutinį komentarą parašė</postedBy>
-        <at>at</at>
+        <at>į</at>
         <comments>Komentaras(ai)</comments>
         <show-comments>Rodyti komentarus</show-comments>
         <hide-comments>Slėpti komentarus</hide-comments>
@@ -42,7 +42,10 @@
     <view>
       <label>
         <not-viewable>Šio dokumento peržiūra negalima.</not-viewable>
+        <pdf-max-size>The preview is not available for content larger than {0} MB.</pdf-max-size>
+        <pdf-max-page>The preview is not available for content with over {0} pages.</pdf-max-page>
         <using-webDAV>arba atidaryti su MS Office</using-webDAV>
+        <open-on-desktop>Open on Desktop</open-on-desktop>
         <file-size-too-big>Šio failo turinys yra per didelis. Jums reikia atsisiųsti ir atidaryti kliento programoje.</file-size-too-big>
         <webDAV>WebDAV rodinys</webDAV>
         <download>Atsisiųsti</download>

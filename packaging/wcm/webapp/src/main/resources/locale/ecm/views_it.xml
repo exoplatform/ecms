@@ -41,8 +41,11 @@
   <File>
     <view>
       <label>
-        <not-viewable>The preview of this document is not available.</not-viewable>
-        <using-webDAV>or Open in MS Office</using-webDAV>
+        <not-viewable>L'anteprima di questo documento non è disponibile.</not-viewable>
+        <pdf-max-size>The preview is not available for content larger than {0} MB.</pdf-max-size>
+        <pdf-max-page>The preview is not available for content with over {0} pages.</pdf-max-page>
+        <using-webDAV>o Apri in MS Office</using-webDAV>
+        <open-on-desktop>Open on Desktop</open-on-desktop>
         <file-size-too-big>Il contenuto di questo file è troppo grande. Dovrebbe scaricarlo ed usare un client esterno.</file-size-too-big>
         <webDAV>Vista WebDAV</webDAV>
         <download>Scarica questo File</download>

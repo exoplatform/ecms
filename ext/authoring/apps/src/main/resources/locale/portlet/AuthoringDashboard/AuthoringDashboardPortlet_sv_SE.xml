@@ -2,7 +2,7 @@
 <bundle>
   <UIDashboardForm>
     <label>
-      <title>Kontrollpanel Författare</title>
+      <title>Author Dashboard</title>
       <nocontent>Inget innehåll</nocontent>
       <mydraft>Mitt förslag till innehåll</mydraft>
       <waitingapproval>Väntar på mitt godkännande</waitingapproval>

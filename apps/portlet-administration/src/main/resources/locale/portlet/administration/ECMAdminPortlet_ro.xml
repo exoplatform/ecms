@@ -87,7 +87,7 @@
 -->
   <UITaxonomyTreeMainForm>
     <action>
-      <Reset>Resetare</Reset>
+      <Reset>Reset</Reset>
     </action>
     <msg>
       <name-not-allowed>Nume interzis</name-not-allowed>
@@ -712,7 +712,7 @@
     </label>
     <title>
       <AddPermission>Adaugă drepturi</AddPermission>
-      <RemovePermission>Drept de ștergere</RemovePermission>
+      <RemovePermission>Remove Permission</RemovePermission>
       <AddIcon>Adaugă Icon</AddIcon>
       <AddPath>Adaugă cale</AddPath>
     </title>
@@ -988,6 +988,8 @@
       <publicationPublish>Publică</publicationPublish>
 <contentNavigation>Navigare în conținut</contentNavigation>
 <addSymLink>Adaugă Symlink</addSymLink>
+      <checkIn>Check In</checkIn>
+      <checkOut>Check Out</checkOut>
     </label>
     <action>
       <Save>#{word.save}</Save>      
@@ -1377,10 +1379,10 @@
       <set_property>Drept de setare a proprităților</set_property>
       <remove>Drept de ștergere</remove>
     </label>
-    <title>Adaugă un drept pentru acest nod</title>
+    <title>Add a permission to this node</title>
     <action>
       <Close>#{word.close}</Close>
-      <Save>Salvaţi</Save>
+      <Save>Save</Save>
       <Reset>Reset</Reset>
     </action>
     <msg>
@@ -1480,7 +1482,7 @@
       <add_node>Modifică</add_node>
       <remove>Elimină</remove>
     </label>
-    <title>Adaugă un drept la acest modul</title>
+    <title>Add permission to this node</title>
     <action>
       <Close>#{word.close}</Close>
       <Save>#{word.save}</Save>

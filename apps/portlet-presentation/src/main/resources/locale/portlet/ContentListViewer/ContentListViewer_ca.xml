@@ -41,7 +41,7 @@
       <UICLVConfigDisplayTemplateFormSelectBox>Plantilla</UICLVConfigDisplayTemplateFormSelectBox>
       <UICLVConfigPaginatorTemplateFormSelectBox>Paginació</UICLVConfigPaginatorTemplateFormSelectBox>
       <UICLVConfigItemsPerPageFormStringInput>Elements per Pàgina</UICLVConfigItemsPerPageFormStringInput>
-      <UICLVConfigShowIllustrationFormCheckboxInput>Mostra la imatge</UICLVConfigShowIllustrationFormCheckboxInput>
+      <UICLVConfigShowIllustrationFormCheckboxInput>Show Image</UICLVConfigShowIllustrationFormCheckboxInput>
       <UICLVConfigShowSummaryFormCheckboxInput>Show Summary</UICLVConfigShowSummaryFormCheckboxInput>
       <UICLVConfigShowHeaderFormCheckboxInput>Show Header</UICLVConfigShowHeaderFormCheckboxInput>
       <UICLVConfigShowRefreshFormCheckboxInput>Show Refresh</UICLVConfigShowRefreshFormCheckboxInput>
@@ -60,8 +60,8 @@
       <UICLVConfigTargetPageFormInputSet>Mostra a la pàgina</UICLVConfigTargetPageFormInputSet>
       <content-not-found>Content not found.</content-not-found>
       <ContentPath>Ruta  del contingut</ContentPath>
-      <Up>Amunt</Up>
-      <Down>Avall</Down>
+      <Up>Up</Up>
+      <Down>Down</Down>
       <UICLVConfigCacheManagementLabel>Visibilitat del Contingut</UICLVConfigCacheManagementLabel>
       <UICLVContentByQueryLabel>Content by Query</UICLVContentByQueryLabel>
       <UICLVConfigWorkspaceFormSelectBox>Àrea de treball</UICLVConfigWorkspaceFormSelectBox>
@@ -140,7 +140,7 @@
     </msg>
     <label>
       <readmore>Llegeix més</readmore>
-      <rssFeed>Canal RSS</rssFeed>
+      <rssFeed>RSS Feed</rssFeed>
     </label>
     <action>
       <refresh>RecarregaRecarrega</refresh>

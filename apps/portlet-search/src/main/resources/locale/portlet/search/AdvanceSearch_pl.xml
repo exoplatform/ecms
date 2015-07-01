@@ -18,9 +18,9 @@
       <Document>Dokument</Document>
       <DocumentAndPage>Dokument i strona</DocumentAndPage>
       <documentandpage>Dokument i strona</documentandpage>
-      <resutlsCaption>Wyniki</resutlsCaption>
+      <results>Wyniki {0} do {1} dla {2}</results>
+      <oneResult>Tylko jeden wynik dla {0}</oneResult>
       <ofAboutCaption>o</ofAboutCaption>
-      <forCaption>dla</forCaption>
       <timeUnitCaption>sekund</timeUnitCaption>
       <similar>Strony, gdzie pojawia się ta sama treść</similar>
       <editor>Edytor</editor>

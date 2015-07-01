@@ -18,9 +18,9 @@
       <Document>Document</Document>
       <DocumentAndPage>Document i Pàgina</DocumentAndPage>
       <documentandpage>Document i Pàgina</documentandpage>
-      <resutlsCaption>Resultats</resutlsCaption>
+      <results>Resultats {0} a {1} de {2}</results>
+      <oneResult>Only one result for {0}</oneResult>
       <ofAboutCaption>d'uns</ofAboutCaption>
-      <forCaption>per</forCaption>
       <timeUnitCaption>segons</timeUnitCaption>
       <similar>Pàgines on apareix el mateix contingut</similar>
       <editor>Editor</editor>

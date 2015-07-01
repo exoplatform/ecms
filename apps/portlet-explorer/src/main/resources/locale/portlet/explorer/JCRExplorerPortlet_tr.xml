@@ -254,6 +254,7 @@
       <UISelectRestorePath>Geri yükleme yolunu seçin</UISelectRestorePath>
       <UISEOForm>SEO' yu yönet</UISEOForm>
       <UISEOToolbarForm>SEO' yu yönet</UISEOToolbarForm>
+      <UIReadOnlyFileConfirmMessage>Open Document</UIReadOnlyFileConfirmMessage>
     </title>
     <header>
       <workspace>Çalışma Alanı</workspace>
@@ -400,6 +401,7 @@
       <constraintviolation-exception>Zorunlu öğe jcr:uuid bulunamadı. Düğüm silinmiş veya değiştirmiş. Lütfen Yenile düğmesini tıklatın.</constraintviolation-exception>
       <path-not-found-exception>Bu öğe silinmiş veya değişmiş. Lütfen Yenile düğmesini tıklatın.</path-not-found-exception>
       <not-exist-categories>Kategori yok.</not-exist-categories>
+      <lock-node-read-only>This file is locked by user {0}. Open read-only ?</lock-node-read-only>
     </msg>
   </UIPopupMenu>
   <!--
@@ -592,6 +594,8 @@
       <RestoreFromTrash>Çöp kutusundan geri yükleyin</RestoreFromTrash>
       <EmptyTrash>Çöpü Boşalt</EmptyTrash>
       <WebDavView>MS Office de Aç</WebDavView>
+      <Download>İndir</Download>
+      <OpenDocument>Remote Edit</OpenDocument>
     </event>
   </ECMContextMenu>
  
@@ -2420,6 +2424,8 @@
       <ReplaceData>Verileri Değiştir</ReplaceData>
       <Back>Yeniden Adlandırma için Geri</Back>
       <Keepfile>İki dosyayı da tut</Keepfile>
+<ReadOnly>Open Read-only</ReadOnly>
+<Cancel>İptal</Cancel>
     </label>
   </UIConfirmMessage>
 
@@ -2978,12 +2984,15 @@
       <user>Yazar</user>
       <description>Açıklama</description>
     </header>
+    <create-version>New version is created</create-version>
   </UIPublicationHistory>
   
   <UIPublicationSchedule>
     <label>
       <introduction>Belge yayınını zamanlayabilirsiniz. Yayınlanan belgenizi görmek istiyorsanız tarihleri seçin</introduction>
       <no-schedule-info>Belgeniz için hiçbir yayın zamanlaması yok</no-schedule-info>
+      <UIPublicationPanelStartDateInput>Start Publication date</UIPublicationPanelStartDateInput>
+      <UIPublicationPanelEndDateInput>End Publication date</UIPublicationPanelEndDateInput>
     </label>
     <msg>
       <save-finished>Senin yeni yayın zamanlaması başarıyla kaydedildi.</save-finished>

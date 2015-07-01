@@ -42,7 +42,10 @@
     <view>
       <label>
         <not-viewable>La vista prèvia d'aquest document no està disponible.</not-viewable>
+        <pdf-max-size>The preview is not available for content larger than {0} MB.</pdf-max-size>
+        <pdf-max-page>The preview is not available for content with over {0} pages.</pdf-max-page>
         <using-webDAV>o obre en MS Office</using-webDAV>
+        <open-on-desktop>Open on Desktop</open-on-desktop>
         <file-size-too-big>El contingut d'aquest fitxer és massa gran. Hauria de descarregar-lo i obrir-lo per veure'l.</file-size-too-big>
         <webDAV>Vista WebDAV</webDAV>
         <download>Descarrega</download>

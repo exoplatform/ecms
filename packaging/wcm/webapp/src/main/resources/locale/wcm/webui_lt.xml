@@ -202,8 +202,15 @@
     <msg>
       <time-to-late>Paieškos laikas per ilgas.</time-to-late>
       <empty-field>Prašome įvesti galiojantį raktažodį paieškoje.</empty-field>
+      <empty-name>Please enter the name to search</empty-name>
+      <empty-content>Please enter a word or phrase to search</empty-content>
+      <empty-property>Please select a property</empty-property>
+      <empty-property-keyword>Please enter a keyword for the property</empty-property-keyword>
+      <empty-doctype>Please select a document type</empty-doctype>
+      <empty-startDate>"From Date" is required</empty-startDate>
       <invalid-format>Neleistinas datos/laiko formatas lauke '{0}'.</invalid-format>
       <invalid-date>"Data iki" turi būti vėlesnė už "Data nuo"</invalid-date>
+      <invalid-startDate>"From Date" must not be later than today</invalid-startDate>
       <invalid-nodeType>Mazgo tipas "{0}" yra netinkamas. Prašome patikrinti dar kartą.</invalid-nodeType>
       <invalid-keyword>Raktinis žodis yra neteisingas. Kai kurie ženklai yra nepalaikomi.</invalid-keyword>
     </msg>

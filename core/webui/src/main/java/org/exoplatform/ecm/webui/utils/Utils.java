@@ -745,11 +745,12 @@ public class Utils {
         if (orgNode.getProperty(propertyName).getDefinition().isMultiple()) {
           //The requested property is multiple-valued, inline editing enable users to edit the first value of property        
           propertyValue = orgNode.getProperty(propertyName).getValues()[0].getString();
+          propertyValue = ContentReader.simpleEscapeHtml(propertyValue);
         } else {
           propertyValue = orgNode.getProperty(propertyName).getString();	
         }
-        if (org.exoplatform.wcm.webui.Utils.getCurrentMode().equals(WCMComposer.MODE_LIVE))      
-          return StringEscapeUtils.unescapeHtml(StringUtils.replace(propertyValue,"{portalName}",siteName));
+        if (org.exoplatform.wcm.webui.Utils.getCurrentMode().equals(WCMComposer.MODE_LIVE))
+          return StringUtils.replace(propertyValue,"{portalName}",siteName);
         else
           return "<div class=\"WCMInlineEditable\" contenteditable=\"true\" propertyName=\""+propertyName+"\" repo=\""+repo+"\" workspace=\""+workspace+"\"" +
         			" uuid=\""+uuid+"\" siteName=\""+siteName+"\" publishedMsg=\""+published+"\" draftMsg=\""+draft+"\" fastpublishlink=\""+publishLink+"\" language=\""+language+"\" >" + 

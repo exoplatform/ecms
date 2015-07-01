@@ -87,7 +87,7 @@
 -->
   <UITaxonomyTreeMainForm>
     <action>
-      <Reset>Reset</Reset>
+      <Reset>تنظیم مجدد</Reset>
     </action>
     <msg>
       <name-not-allowed>نام ممنوع</name-not-allowed>
@@ -988,6 +988,8 @@
       <publicationPublish>انتشار</publicationPublish>
 <contentNavigation>هدایت محتوا</contentNavigation>
 <addSymLink>افزودن Symlink</addSymLink>
+      <checkIn>Check In</checkIn>
+      <checkOut>Check Out</checkOut>
     </label>
     <action>
       <Save>#{word.save}</Save>      
@@ -1068,7 +1070,7 @@
   -->
   <UITemplateForm>
     <title>
-      <AddPermission>Add Permission</AddPermission>
+      <AddPermission>اضافه کردن مجوز</AddPermission>
     </title>
     <action>
       <Save>#{word.save}</Save>
@@ -1377,11 +1379,11 @@
       <set_property>مجوز تنظیم ویژگی</set_property>
       <remove>حذف مجوز</remove>
     </label>
-    <title>افزودن مجوز به آن گره</title>
+    <title>Add a permission to this node</title>
     <action>
       <Close>#{word.close}</Close>
-      <Save>Save</Save>
-      <Reset>Reset</Reset>
+      <Save>ذخيره</Save>
+      <Reset>تنظیم مجدد</Reset>
     </action>
     <msg>
       <checkbox-require>لطفا حداقل یک مجوز را انتخاب کنید.</checkbox-require>
@@ -1480,7 +1482,7 @@
       <add_node>اصلاح</add_node>
       <remove>حذف</remove>
     </label>
-    <title>افزودن مجوز به آن گره</title>
+    <title>Add permission to this node</title>
     <action>
       <Close>#{word.close}</Close>
       <Save>#{word.save}</Save>

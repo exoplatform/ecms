@@ -18,9 +18,9 @@
       <Document>文件</Document>
       <DocumentAndPage>文件和頁面</DocumentAndPage>
       <documentandpage>文件和頁面</documentandpage>
-      <resutlsCaption>結果</resutlsCaption>
+      <results>Results {0} to {1} for {2}</results>
+      <oneResult>Only one result for {0}</oneResult>
       <ofAboutCaption>約</ofAboutCaption>
-      <forCaption>為</forCaption>
       <timeUnitCaption>秒</timeUnitCaption>
       <similar>網頁中出現相同的內容</similar>
       <editor>編輯器</editor>

@@ -254,6 +254,7 @@
       <UISelectRestorePath>Pasirinkite atkūrimo kelią</UISelectRestorePath>
       <UISEOForm>Valdyti SEO</UISEOForm>
       <UISEOToolbarForm>Valdyti SEO</UISEOToolbarForm>
+      <UIReadOnlyFileConfirmMessage>Open Document</UIReadOnlyFileConfirmMessage>
     </title>
     <header>
       <workspace>Darbo sritis</workspace>
@@ -400,6 +401,7 @@
       <constraintviolation-exception>Privalomas elementas jcr:uuid nerastas. Mazgas gali būti ištrintas arba pakeistas. Spustelėkite mygtuką atnaujinti.</constraintviolation-exception>
       <path-not-found-exception>Šis mazgas buvo ištrintas arba pakeistas. Spustelėkite mygtuką atnaujinti.</path-not-found-exception>
       <not-exist-categories>Kategorija neegzistuoja.</not-exist-categories>
+      <lock-node-read-only>This file is locked by user {0}. Open read-only ?</lock-node-read-only>
     </msg>
   </UIPopupMenu>
   <!--
@@ -592,6 +594,8 @@
       <RestoreFromTrash>Atkurti iš šiukšliadėžės</RestoreFromTrash>
       <EmptyTrash>Išvalyti šiukšliadėžę</EmptyTrash>
       <WebDavView>Atidaryti su MS Office</WebDavView>
+      <Download>Atsisiųsti</Download>
+      <OpenDocument>Remote Edit</OpenDocument>
     </event>
   </ECMContextMenu>
  
@@ -747,7 +751,7 @@
       </title>
     </action>
     <header>
-      <usersOrGroups>User or Group</usersOrGroups>
+      <usersOrGroups>Vartotojas arba grupė</usersOrGroups>
       <read>Read</read>
       <addNode>Modify</addNode>
       <remove>Pašalinti</remove>
@@ -762,8 +766,8 @@
   </UIPermissionInfo>
   <permission>
     <title>
-      <SelectUser>Select User</SelectUser>
-      <SelectMember>Select Membership</SelectMember>
+      <SelectUser>Pasirinkti vartotoją</SelectUser>
+      <SelectMember>Pasirinkti narystę</SelectMember>
       <AddAny>Select Everyone</AddAny>
     </title>
   </permission>
@@ -790,7 +794,7 @@
   </UIGroupSelector>
   <UIPermissionForm>
     <label>
-      <UIPopupWindow>Select</UIPopupWindow>
+      <UIPopupWindow>Pasirinkti</UIPopupWindow>
       <permission>UIPermissionForm</permission>
       <userOrGroup>Vartotojas arba grupė</userOrGroup>
       <read>Read Right</read>
@@ -2420,6 +2424,8 @@
       <ReplaceData>Pakeisti duomenis</ReplaceData>
       <Back>Atgal į pervadinimą</Back>
       <Keepfile>Palikti abu failus</Keepfile>
+<ReadOnly>Open Read-only</ReadOnly>
+<Cancel>Atšaukti</Cancel>
     </label>
   </UIConfirmMessage>
 
@@ -2978,12 +2984,15 @@
       <user>Autorius</user>
       <description>Aprašymas</description>
     </header>
+    <create-version>New version is created</create-version>
   </UIPublicationHistory>
   
   <UIPublicationSchedule>
     <label>
       <introduction>Galite suplanuoti savo dokumento paskelbimą. Pasirinkite datas kada norite matyti savo dokumentą paskelbtą</introduction>
       <no-schedule-info>Nėra jokio paskelbimo grafiko jūsų dokumentui</no-schedule-info>
+      <UIPublicationPanelStartDateInput>Start Publication date</UIPublicationPanelStartDateInput>
+      <UIPublicationPanelEndDateInput>End Publication date</UIPublicationPanelEndDateInput>
     </label>
     <msg>
       <save-finished>Jūsų naujas paskelbimo grafikas buvo sėkmingai išsaugotas.</save-finished>
@@ -3059,9 +3068,9 @@
     </DrivesArea>
     <msg>
       <no-view-found>There are no views applied for your access permission in drive '{0}'.</no-view-found>
-      <access-denied>Access denied. You may not have permission in the workspace of drive '{0}'.</access-denied>
+      <access-denied>Prieiga uždrausta. Jūs galite neturėti teisių darbo srities diske '{0}'.</access-denied>
       <empty-drives>Access denied. Either there is no drive in this repository or you do not have permission to access any drives in this repository.</empty-drives>
-      <workspace-not-exist>Drive '{0}' was stored in one unrecognized workspace. Please reconfigure this drive.</workspace-not-exist>
+      <workspace-not-exist>Programa"{0}" buvo išsaugota vienoje neatpažintoje darbo srityje. Prašome sukonfigūruoti šį diską.</workspace-not-exist>
     </msg>
   </UIDrivesArea>
   <UIJcrExplorerEditForm>

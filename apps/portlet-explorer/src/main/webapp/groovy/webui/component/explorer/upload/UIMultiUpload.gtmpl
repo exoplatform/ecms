@@ -2,8 +2,12 @@
   import java.net.URLEncoder;
   import org.apache.commons.lang.StringEscapeUtils;
   
-  public String getMsg(String msg) {
+  public String getMsgEscapeJS(String msg) {
     return StringEscapeUtils.escapeJavaScript(_ctx.appRes(uicomponent.getId() + ".label." + msg));
+  }
+
+  public String getMsg(String msg) {
+    return _ctx.appRes(uicomponent.getId() + ".label." + msg);
   }
 
   def rcontext = _ctx.getRequestContext() ;
@@ -12,18 +16,18 @@
   addScripts("multiUpload.initDropBox('" + uicomponent.getId() + "');").
   addScripts("multiUpload.setMaxFileSize(" + uicomponent.getLimitFileSize() + ");").
   addScripts("multiUpload.setMaxUploadCount(" + uicomponent.getMaxUploadCount() + ");").
-  addScripts("multiUpload.loadMsg('" + getMsg("in") + "','" + 
-                                       getMsg("MaxFileSizeAlert") + "','" + 
-                                       getMsg("Waiting") + "','" +
-                                       getMsg("Error") + "','" +
-                                       getMsg("or") + "','" +
-                                       getMsg("AlreadyInUse") + "','" +
-                                       getMsg("Keep") + "','" +
-                                       getMsg("Replace") + "','" +
-                                       getMsg("Canceled") + "','" +
-                                       getMsg("Cancel") + "','" +
-                                       getMsg("AbortAllConfirmation") + "');").
-  addScripts("multiUpload.setDropFileMessage('" + getMsg("DropFileMessage") + "');");
+  addScripts("multiUpload.loadMsg('" + getMsgEscapeJS("in") + "','" +
+                                       getMsgEscapeJS("MaxFileSizeAlert") + "','" +
+                                       getMsgEscapeJS("Waiting") + "','" +
+                                       getMsgEscapeJS("Error") + "','" +
+                                       getMsgEscapeJS("or") + "','" +
+                                       getMsgEscapeJS("AlreadyInUse") + "','" +
+                                       getMsgEscapeJS("Keep") + "','" +
+                                       getMsgEscapeJS("Replace") + "','" +
+                                       getMsgEscapeJS("Canceled") + "','" +
+                                       getMsgEscapeJS("Cancel") + "','" +
+                                       getMsgEscapeJS("AbortAllConfirmation") + "');").
+  addScripts("multiUpload.setDropFileMessage('" + getMsgEscapeJS("DropFileMessage") + "');");
 %>
 
 <div id="$uicomponent.id" class="uiMultiUpload clearfix noShow" >

@@ -18,9 +18,9 @@
       <Document>وثيقة</Document>
       <DocumentAndPage>وثيقة و صفحة</DocumentAndPage>
       <documentandpage>وثيقة و صفحة</documentandpage>
-      <resutlsCaption>النتائج</resutlsCaption>
+      <results>النتائج {0} لصالح {1} على {2}</results>
+      <oneResult>النتيجة واحد فقط لصالح {0}</oneResult>
       <ofAboutCaption>من حوالي</ofAboutCaption>
-      <forCaption>إلى</forCaption>
       <timeUnitCaption>ثوان</timeUnitCaption>
       <similar>الصفحات التي تحتوي على نفس المضمون</similar>
       <editor>المؤلّف</editor>
@@ -33,7 +33,7 @@
       <edit>تغيير</edit>
     </action>
     <msg>
-      <search-not-match-type>Your search {0} does not match any {1}.</search-not-match-type>
+      <search-not-match-type>عمليّة البحث الخاصّة بك {0} لا تتطابق مع أي {1}.</search-not-match-type>
     </msg>
   </UIDefaultSearchResult>
   <UISearchPageLayoutManager>

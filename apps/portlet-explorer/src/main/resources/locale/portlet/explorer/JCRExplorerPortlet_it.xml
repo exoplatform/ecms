@@ -41,7 +41,7 @@
     </label>
     <button>
       <label>
-        <confirm>OK</confirm>
+        <confirm>Ok</confirm>
       </label>
     </button>
     <msg>
@@ -129,7 +129,7 @@
     <title>Explorer</title>
     <label>
       <Root>Root</Root>
-      <webDavView>Open in MS Office</webDavView>
+      <webDavView>Aperto in MS Office</webDavView>
     </label>
     <msg>
       <path-not-found>Elemento cancellato o modificato. Clicca il bottone Aggiorna.</path-not-found>
@@ -254,9 +254,10 @@
       <UISelectRestorePath>Seleziona Percorso Ripristino</UISelectRestorePath>
       <UISEOForm>Gestisci SEO</UISEOForm>
       <UISEOToolbarForm>Gestisci SEO</UISEOToolbarForm>
+      <UIReadOnlyFileConfirmMessage>Open Document</UIReadOnlyFileConfirmMessage>
     </title>
     <header>
-      <workspace>Workspace</workspace>
+      <workspace>Area di lavoro</workspace>
       <path>Percorso</path>
     </header>
   </UIPopupWindow>
@@ -400,6 +401,7 @@
       <constraintviolation-exception>Elemento obbligatiorio jcr:uuid non trovato. Forse il nodo Ãš stato eliminato o modificato. Clicca il bottone Aggiorna.</constraintviolation-exception>
       <path-not-found-exception>Nodo cancellato o modificato. Clicca il bottone Aggiorna.</path-not-found-exception>
       <not-exist-categories>La categoria non esiste.</not-exist-categories>
+      <lock-node-read-only>This file is locked by user {0}. Open read-only ?</lock-node-read-only>
     </msg>
   </UIPopupMenu>
   <!--
@@ -591,7 +593,9 @@
       <MoveToTrash>Sposta nel Cestino</MoveToTrash>
       <RestoreFromTrash>Ripristina dal Cestino</RestoreFromTrash>
       <EmptyTrash>Svuota Cestino</EmptyTrash>
-      <WebDavView>Open in MS Office</WebDavView>
+      <WebDavView>Aperto in MS Office</WebDavView>
+      <Download>Scarica</Download>
+      <OpenDocument>Remote Edit</OpenDocument>
     </event>
   </ECMContextMenu>
  
@@ -605,7 +609,7 @@
       <no-references>Referenze non trovate</no-references>
     </msg>
     <header>
-      <workspace>Workspace</workspace>
+      <workspace>Area di lavoro</workspace>
       <path>Percorso</path>
     </header>
     <action>
@@ -2420,6 +2424,8 @@
       <ReplaceData>Sostituisci dati</ReplaceData>
       <Back>Torna a rinominare</Back>
       <Keepfile>Mantieni entrambi i file</Keepfile>
+<ReadOnly>Open Read-only</ReadOnly>
+<Cancel>Annulla</Cancel>
     </label>
   </UIConfirmMessage>
 
@@ -2501,7 +2507,7 @@
   <UIActionBar>
     <obtion>
       <Admin>Amministratore</Admin>
-      <Info>Info</Info>
+      <Info>info</Info>
       <Actions>Azioni</Actions>
       <Collaboration>Collaborazione</Collaboration>
       <Search>Ricerca</Search>
@@ -2978,12 +2984,15 @@
       <user>Autore</user>
       <description>Descrizione</description>
     </header>
+    <create-version>New version is created</create-version>
   </UIPublicationHistory>
   
   <UIPublicationSchedule>
     <label>
       <introduction>È possibile pianificare la pubblicazione del documento. Seleziona il giorno che vi piacerebbe che il documento sia pubblicato</introduction>
       <no-schedule-info>Non c'è nessun planificazione di pubblicazione per il suo documento</no-schedule-info>
+      <UIPublicationPanelStartDateInput>Start Publication date</UIPublicationPanelStartDateInput>
+      <UIPublicationPanelEndDateInput>End Publication date</UIPublicationPanelEndDateInput>
     </label>
     <msg>
       <save-finished>Il vostro nuovo programma di pubblicazione è stato salvato con successo.</save-finished>

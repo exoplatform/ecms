@@ -109,7 +109,12 @@ public class OpenInOfficeConnector implements ResourceContainer, Startable {
         if(!StringUtils.isEmpty(resourceBundle.getString(documentType.getResourceBundleKey())))
           title = resourceBundle.getString(documentType.getResourceBundleKey());
       }catch(Exception ex){
-        title = resourceBundle.getString(OPEN_DOCUMENT_IN_DESKTOP_APP_RESOURCE_KEY)+" "+ documentType.getResourceBundleKey();
+        String _openonDesktop = resourceBundle.getString(OPEN_DOCUMENT_IN_DESKTOP_APP_RESOURCE_KEY);
+        if(_openonDesktop!=null && _openonDesktop.contains("{0}")) {
+          title = _openonDesktop.replace("{0}", documentType.getResourceBundleKey());
+        }else{
+          title = OPEN_DOCUMENT_DEFAULT_TITLE;
+        }
       }
       if(!StringUtils.isEmpty(documentType.getIconClass())) ico=documentType.getIconClass();
     }

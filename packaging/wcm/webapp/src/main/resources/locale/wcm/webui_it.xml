@@ -202,8 +202,15 @@
     <msg>
       <time-to-late>Il tempo di ricerca è troppo lungo.</time-to-late>
       <empty-field>Prego inserire una chiave di ricerca valida.</empty-field>
+      <empty-name>Please enter the name to search</empty-name>
+      <empty-content>Please enter a word or phrase to search</empty-content>
+      <empty-property>Please select a property</empty-property>
+      <empty-property-keyword>Please enter a keyword for the property</empty-property-keyword>
+      <empty-doctype>Please select a document type</empty-doctype>
+      <empty-startDate>"From Date" is required</empty-startDate>
       <invalid-format>Formato data/tempo non valido nel campo '{0}'.</invalid-format>
       <invalid-date>"A Data" dev'essere maggiore della "Da Date"</invalid-date>
+      <invalid-startDate>"From Date" must not be later than today</invalid-startDate>
       <invalid-nodeType>Tipo nodo "{0}" non è valido. Prego controlla di nuovo.</invalid-nodeType>
       <invalid-keyword>Parola chiave non è valida. Alcuni caratteri non sono supportati.</invalid-keyword>
     </msg>

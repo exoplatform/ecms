@@ -87,7 +87,7 @@
 -->
   <UITaxonomyTreeMainForm>
     <action>
-      <Reset>Resetowanie</Reset>
+      <Reset>Reset</Reset>
     </action>
     <msg>
       <name-not-allowed>Zabroniona nazwa</name-not-allowed>
@@ -712,7 +712,7 @@
     </label>
     <title>
       <AddPermission>Dodaj uprawnienie</AddPermission>
-      <RemovePermission>Usuń uprawnienia</RemovePermission>
+      <RemovePermission>Remove Permission</RemovePermission>
       <AddIcon>Dodaj ikonę</AddIcon>
       <AddPath>Dodaj ścieżkę</AddPath>
     </title>
@@ -988,6 +988,8 @@
       <publicationPublish>Opublikuj</publicationPublish>
 <contentNavigation>Zawartość nawigacji</contentNavigation>
 <addSymLink>Dodaj dowiązanie symboliczne</addSymLink>
+      <checkIn>Zamelduj się</checkIn>
+      <checkOut>Wymelduj się</checkOut>
     </label>
     <action>
       <Save>#{word.save}</Save>      
@@ -1377,11 +1379,11 @@
       <set_property>Ustaw prawa własności</set_property>
       <remove>Usuń prawo</remove>
     </label>
-    <title>Dodaj uprawnienia do tego węzła</title>
+    <title>Add a permission to this node</title>
     <action>
       <Close>#{word.close}</Close>
-      <Save>Zapisz</Save>
-      <Reset>Resetowanie</Reset>
+      <Save>Save</Save>
+      <Reset>Reset</Reset>
     </action>
     <msg>
       <checkbox-require>Wybierz co najmniej jedno uprawnienie.</checkbox-require>
@@ -1480,7 +1482,7 @@
       <add_node>Modyfikuj</add_node>
       <remove>Usuń</remove>
     </label>
-    <title>Dodaj uprawnienia do tego węzła</title>
+    <title>Add permission to this node</title>
     <action>
       <Close>#{word.close}</Close>
       <Save>#{word.save}</Save>

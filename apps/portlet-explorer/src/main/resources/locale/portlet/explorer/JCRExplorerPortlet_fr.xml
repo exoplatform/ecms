@@ -254,6 +254,7 @@
       <UISelectRestorePath>Choisir le Chemin de Restauration</UISelectRestorePath>
       <UISEOForm>Gérer SEO</UISEOForm>
       <UISEOToolbarForm>Gérer SEO</UISEOToolbarForm>
+      <UIReadOnlyFileConfirmMessage>Ouvrir le Document</UIReadOnlyFileConfirmMessage>
     </title>
     <header>
       <workspace>Espace de Stockage</workspace>
@@ -400,6 +401,7 @@
       <constraintviolation-exception>Le jcr:uuid n'a pas été trouvé. Le noeud a peut être été modifié ou supprimé. Veuillez cliquer sur le bouton "Actualiser".</constraintviolation-exception>
       <path-not-found-exception>Le noeud a été modifié ou supprimé. Veuillez cliquer sur le bouton "Actualiser".</path-not-found-exception>
       <not-exist-categories>La catégorie n'existe pas</not-exist-categories>
+      <lock-node-read-only>Ce fichier est verrouillé par l'utilisateur {0}. Ouvrir en lecture seule ?</lock-node-read-only>
     </msg>
   </UIPopupMenu>
   <!--
@@ -592,6 +594,8 @@
       <RestoreFromTrash>Restaurer</RestoreFromTrash>
       <EmptyTrash>Supprimer</EmptyTrash>
       <WebDavView>Ouvrir dans MS Office</WebDavView>
+      <Download>Télécharger</Download>
+      <OpenDocument>Remote Edit</OpenDocument>
     </event>
   </ECMContextMenu>
  
@@ -717,7 +721,7 @@
     <action>
       <Save>#{word.save}</Save>
       <Cancel>#{word.cancel}</Cancel>
-      <Reset>Nouvelle Propriété</Reset>
+      <Reset>Réinitialiser</Reset>
     </action>
     <msg>
       <name-invalid>Vous devez entrer un nom.</name-invalid>
@@ -1489,7 +1493,7 @@
       <import-successful>Import effectué avec succès.</import-successful>
       <filename-invalid>Veuillez sélectionner un fichier xml pour l'importer.</filename-invalid>
       <filetype-error>Import impossible. Le fichier envoyé est probablement corrompu.</filetype-error>
-      <xml-invalid>There is an invalid character at position [row, column]:{0} in {1} file</xml-invalid>
+      <xml-invalid>Il y a un caractère non valide à la position [ligne, colonne]:{0} dans le fichier {1}</xml-invalid>
       <mimetype-invalid>Seuls les fichier xml ou zip sont supportés pour l'import.</mimetype-invalid>
       <access-denied>Accès refusé. Vous n'avez pas les droits suffisants pour importer à cet endroit.</access-denied>
       <constraint-violation-exception>Impossible d'importer. Le type de noeud '{0}' n'est pas autorisé.</constraint-violation-exception>
@@ -1643,7 +1647,7 @@
   <UIClipboard>
     <header>
       <path>Dossier</path>
-      <command/>
+      <command>Cm</command>
       <action>Act</action>
     </header>
     <label>
@@ -1993,7 +1997,7 @@
     <label>
       <published>Publié</published>
       <non-published>Non publié</non-published>
-      <public>Oui</public>
+      <public>Public</public>
       <private>Privé</private>
       <state>Etat</state>
       <visibility>Visibilité</visibility>
@@ -2420,6 +2424,8 @@
 	    <ReplaceData>Remplacer les données</ReplaceData>
       <Back>Retour à Renommer</Back>
 	    <Keepfile>Gardez les deux fichiers</Keepfile>
+<ReadOnly>Ouvrir en lecture seule</ReadOnly>
+<Cancel>Annuler</Cancel>
     </label>
 	</UIConfirmMessage>
 
@@ -2746,7 +2752,7 @@
 
    <UITaggingForm>
     <label>
-      <Public>Oui</Public>
+      <Public>Public</Public>
       <Private>Privé</Private>
       <tagScopes>Portée des Tags</tagScopes>
     </label>
@@ -2978,12 +2984,15 @@
       <user>Auteur</user>
       <description>Libellé</description>
     </header>
+    <create-version>Nouvelle version créée</create-version>
   </UIPublicationHistory>
   
   <UIPublicationSchedule>
     <label>
       <introduction>Vous pouvez programmer la publication de votre document. Choisissez la date que vous souhaitez voir votre document publié</introduction>
       <no-schedule-info>Il n'y a pas de calendrier de publication pour votre document</no-schedule-info>
+      <UIPublicationPanelStartDateInput>Date de début</UIPublicationPanelStartDateInput>
+      <UIPublicationPanelEndDateInput>Date de fin</UIPublicationPanelEndDateInput>
     </label>
     <msg>
       <save-finished>Votre nouveau calendrier de publication a été enregistré avec succès.</save-finished>

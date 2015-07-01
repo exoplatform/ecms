@@ -95,7 +95,7 @@
   </UISCVConfigItemPathFormInputSet>
   <UISCVConfigPrintPageFormInputSet>
     <title>
-      <SelectTargetPage>Hiện tại Trang</SelectTargetPage>
+      <SelectTargetPage>Hiển thị trên Trang</SelectTargetPage>
     </title>
   </UISCVConfigPrintPageFormInputSet>
   <PublicationStates>

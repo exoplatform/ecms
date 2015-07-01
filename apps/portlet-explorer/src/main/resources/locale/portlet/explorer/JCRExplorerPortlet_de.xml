@@ -129,7 +129,7 @@
     <title>Explorer</title>
     <label>
       <Root>Wurzel</Root>
-      <webDavView>Open in MS Office</webDavView>
+      <webDavView>In MS Office bearbeiten</webDavView>
     </label>
     <msg>
       <path-not-found>Dieses Element wurde gelöscht oder geändert. Bitte klicken Sie auf die Schaltfläche "aktualisieren".</path-not-found>
@@ -254,6 +254,7 @@
       <UISelectRestorePath>Wiederherstellungspfad auswählen</UISelectRestorePath>
       <UISEOForm>SEO verwalten</UISEOForm>
       <UISEOToolbarForm>SEO verwalten</UISEOToolbarForm>
+      <UIReadOnlyFileConfirmMessage>Open Document</UIReadOnlyFileConfirmMessage>
     </title>
     <header>
       <workspace>Arbeitsbereich</workspace>
@@ -400,6 +401,7 @@
       <constraintviolation-exception>Das Pflichtelement jcr:uuid wurde nicht gefunden. Vielleicht wurde der Knoten gelöscht oder geändert. Bitte klicken Sie auf Aktualisieren.</constraintviolation-exception>
       <path-not-found-exception>Dieser Knoten wurde gelöscht oder geändert. Bitte klicken Sie auf die Schaltfläche "aktualisieren".</path-not-found-exception>
       <not-exist-categories>Diese Kategorie ist nicht vorhanden.</not-exist-categories>
+      <lock-node-read-only>This file is locked by user {0}. Open read-only ?</lock-node-read-only>
     </msg>
   </UIPopupMenu>
   <!--
@@ -591,7 +593,9 @@
       <MoveToTrash>In den Papierkorb verschieben</MoveToTrash>
       <RestoreFromTrash>Aus dem Papierkorb wiederherstellen</RestoreFromTrash>
       <EmptyTrash>Papierkorb leeren</EmptyTrash>
-      <WebDavView>Open in MS Office</WebDavView>
+      <WebDavView>In MS Office bearbeiten</WebDavView>
+      <Download>Herunterladen</Download>
+      <OpenDocument>Remote Edit</OpenDocument>
     </event>
   </ECMContextMenu>
  
@@ -702,17 +706,17 @@
       <namespace>Namensraum:</namespace>
       <multiple>Mehrwertig:</multiple>
       <property_select>Neue Eigenschaft hinzufügen:</property_select>
-      <value0>Value 0</value0>
-      <value1>Value 1</value1>
-      <value2>Value 2</value2>
-      <value3>Value 3</value3>
-      <value4>Value 4</value4>
-      <value5>Value 5</value5>
-      <value6>Value 6</value6>
-      <value7>Value 7</value7>
-      <value8>Value 8</value8>
-      <value9>Value 9</value9>
-      <value10>Value 10</value10>
+      <value0>Wert 0</value0>
+      <value1>Wert 1</value1>
+      <value2>Wert 2</value2>
+      <value3>Wert 3</value3>
+      <value4>Wert 4</value4>
+      <value5>Wert 5</value5>
+      <value6>Wert 6</value6>
+      <value7>Wert 7</value7>
+      <value8>Wert 8</value8>
+      <value9>Wert 9</value9>
+      <value10>Wert 10</value10>
     </label>
     <action>
       <Save>#{word.save}</Save>
@@ -1887,7 +1891,7 @@
     <msg>
       <name-exist>Der Tagname "{0}" ist bereits vorhanden.</name-exist>
       <tagName-invalid>Der Tagname enthält ungültige Zeichen.</tagName-invalid>
-      <tagName-empty-or-invalid>The tag name is empty or contains some invalid characters.</tagName-empty-or-invalid>
+      <tagName-empty-or-invalid>Der Name des Tags fehlt oder enthält ungültige Zeichen.</tagName-empty-or-invalid>
       <tag-name-empty>Der Tagname ist leer</tag-name-empty>
       <tag-name-duplicate>Die eingegebenen Tagnamen müssen eindeutig sein.</tag-name-duplicate>
       <tagName-too-long>Einer der eingegebenen Tags war zu lang. Tagnamen müssen kürzer als 30 Buchstaben sein.</tagName-too-long>
@@ -2420,6 +2424,8 @@
       <ReplaceData>Daten ersetzen</ReplaceData>
       <Back>Zurück zu Umbenennen</Back>
       <Keepfile>Beide Dateien behalten</Keepfile>
+<ReadOnly>Open Read-only</ReadOnly>
+<Cancel>Abbrechen</Cancel>
     </label>
   </UIConfirmMessage>
 
@@ -2821,7 +2827,7 @@
 
   <UIPopupWindow>
     <title>
-      <UITaggingFormContainer>Tag Manager</UITaggingFormContainer>
+      <UITaggingFormContainer>Tag-Manager</UITaggingFormContainer>
     </title>
   </UIPopupWindow>
 
@@ -2978,12 +2984,15 @@
       <user>Autor</user>
       <description>Beschreibung</description>
     </header>
+    <create-version>New version is created</create-version>
   </UIPublicationHistory>
   
   <UIPublicationSchedule>
     <label>
       <introduction>Sie können die Veröffentlichung Ihres Dokuments planen. Wählen Sie die Zeitpunkte an denen Sie Ihr Dokument veröffentlicht sehen möchten</introduction>
       <no-schedule-info>Es gibt keinen Veröffentlichungszeitplan für Ihr Dokument</no-schedule-info>
+      <UIPublicationPanelStartDateInput>Start Publication date</UIPublicationPanelStartDateInput>
+      <UIPublicationPanelEndDateInput>End Publication date</UIPublicationPanelEndDateInput>
     </label>
     <msg>
       <save-finished>Ihr neuer Veröffentlichungszeitplan wurde erfolgreich gespeichert.</save-finished>
@@ -3058,9 +3067,9 @@
       <ShowDrives>Laufwerke anzeigen</ShowDrives>
     </DrivesArea>
     <msg>
-      <no-view-found>There are no views applied for your access permission in drive '{0}'.</no-view-found>
+      <no-view-found>Auf Ihre Zugangsberechtigung auf Laufwerk '{0}' sind keine Ansichten in Kraft.</no-view-found>
       <access-denied>Zugriff verweigert. Sie haben keine Berechtigung in dem Arbeitsbereich des Laufwerks "{0}".</access-denied>
-      <empty-drives>Access denied. Either there is no drive in this repository or you do not have permission to access any drives in this repository.</empty-drives>
+      <empty-drives>Zugriff verweigert. Entweder gibt es kein Laufwerk in dieser Ablage oder Sie haben keine Zugriffsberechtigung auf die Laufwerke in dieser Ablage.</empty-drives>
       <workspace-not-exist>Das Laufwerk "{0}" wurde in einem unbekannten Arbeitsbereich gespeichert. Bitte konfigurieren Sie das Laufwerk neu.</workspace-not-exist>
     </msg>
   </UIDrivesArea>

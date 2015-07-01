@@ -87,7 +87,7 @@
 -->
   <UITaxonomyTreeMainForm>
     <action>
-      <Reset>Resetear</Reset>
+      <Reset>Reset</Reset>
     </action>
     <msg>
       <name-not-allowed>Nombre prohibido</name-not-allowed>
@@ -557,7 +557,7 @@
       <CancelChild>#{word.cancel}</CancelChild>
       <UpdateProperty>#{word.update}</UpdateProperty>
       <CancelProperty>#{word.cancel}</CancelProperty>
-      <Close>#{word.cancel}</Close>
+      <Close>#{word.close}</Close>
     </action>
     <msg>
       <register-successfully>El tipo de nodo '{0}' se registró correctamente.</register-successfully>
@@ -712,7 +712,7 @@
     </label>
     <title>
       <AddPermission>Añadir Permisos</AddPermission>
-      <RemovePermission>Quitar el permiso</RemovePermission>
+      <RemovePermission>Remove Permission</RemovePermission>
       <AddIcon>Añadir icono</AddIcon>
       <AddPath>Agregar Ruta</AddPath>
     </title>
@@ -988,6 +988,8 @@
       <publicationPublish>Publicar</publicationPublish>
 <contentNavigation>Navegación de contenido</contentNavigation>
 <addSymLink>Agregar Symlink</addSymLink>
+      <checkIn>Check In</checkIn>
+      <checkOut>Check Out</checkOut>
     </label>
     <action>
       <Save>#{word.save}</Save>      
@@ -1377,11 +1379,11 @@
       <set_property>Establecer el derecho de la propiedad</set_property>
       <remove>Quitar el derecho</remove>
     </label>
-    <title>Añadir un permiso a ese nodo</title>
+    <title>Add a permission to this node</title>
     <action>
       <Close>#{word.close}</Close>
-      <Save>Guardar</Save>
-      <Reset>Resetear</Reset>
+      <Save>Save</Save>
+      <Reset>Reset</Reset>
     </action>
     <msg>
       <checkbox-require>Por favor, seleccione al menos un permiso.</checkbox-require>
@@ -1480,7 +1482,7 @@
       <add_node>Modificar</add_node>
       <remove>Quitar</remove>
     </label>
-    <title>Añadir permiso a ese nodo</title>
+    <title>Add permission to this node</title>
     <action>
       <Close>#{word.close}</Close>
       <Save>#{word.save}</Save>

@@ -60,8 +60,8 @@
       <UICLVConfigTargetPageFormInputSet>نمایش در صفحه</UICLVConfigTargetPageFormInputSet>
       <content-not-found>Content not found.</content-not-found>
       <ContentPath>مسیر محتوا</ContentPath>
-      <Up>بالا</Up>
-      <Down>پایین</Down>
+      <Up>Up</Up>
+      <Down>Down</Down>
       <UICLVConfigCacheManagementLabel>قابل مشاهده بودن محتوا</UICLVConfigCacheManagementLabel>
       <UICLVContentByQueryLabel>Content by Query</UICLVContentByQueryLabel>
       <UICLVConfigWorkspaceFormSelectBox>فضای کار</UICLVConfigWorkspaceFormSelectBox>

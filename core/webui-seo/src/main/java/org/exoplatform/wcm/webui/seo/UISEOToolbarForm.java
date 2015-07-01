@@ -17,14 +17,6 @@
 package org.exoplatform.wcm.webui.seo;
 
 
-import java.util.ArrayList;
-import java.util.Enumeration;
-import java.util.List;
-import java.util.Locale;
-
-import javax.jcr.Node;
-import javax.jcr.PathNotFoundException;
-
 import org.apache.commons.lang.StringUtils;
 import org.exoplatform.portal.application.PortalRequestContext;
 import org.exoplatform.portal.mop.SiteKey;
@@ -44,6 +36,13 @@ import org.exoplatform.webui.core.lifecycle.UIFormLifecycle;
 import org.exoplatform.webui.event.Event;
 import org.exoplatform.webui.event.EventListener;
 import org.exoplatform.webui.form.UIForm;
+
+import javax.jcr.Node;
+import javax.jcr.PathNotFoundException;
+import java.util.ArrayList;
+import java.util.Enumeration;
+import java.util.List;
+import java.util.Locale;
 /**
  * Created by The eXo Platform SAS
  * Author : eXoPlatform
@@ -153,7 +152,9 @@ public class UISEOToolbarForm extends UIForm {
             contentValue = pcontext.getRequestParameter(contentParam);
           }
           contentValue = ContentReader.getXSSCompatibilityContent(contentValue);
-          paramsArray.add(contentValue);
+          if(paramsArray !=null) {
+            paramsArray.add(contentValue);
+          }
         }
       }
     }

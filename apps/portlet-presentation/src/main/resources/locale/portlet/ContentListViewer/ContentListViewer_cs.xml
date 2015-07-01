@@ -60,8 +60,8 @@
       <UICLVConfigTargetPageFormInputSet>Zobrazit na stránce</UICLVConfigTargetPageFormInputSet>
       <content-not-found>Content not found.</content-not-found>
       <ContentPath>Cesta obsahu</ContentPath>
-      <Up>Nahoru</Up>
-      <Down>Dolů</Down>
+      <Up>Up</Up>
+      <Down>Down</Down>
       <UICLVConfigCacheManagementLabel>Viditelnost obsahu</UICLVConfigCacheManagementLabel>
       <UICLVContentByQueryLabel>Content by Query</UICLVContentByQueryLabel>
       <UICLVConfigWorkspaceFormSelectBox>Pracovní plocha</UICLVConfigWorkspaceFormSelectBox>

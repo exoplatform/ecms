@@ -254,6 +254,7 @@
       <UISelectRestorePath>リストアパスの選択</UISelectRestorePath>
       <UISEOForm>SEO を管理</UISEOForm>
       <UISEOToolbarForm>SEO を管理</UISEOToolbarForm>
+      <UIReadOnlyFileConfirmMessage>Open Document</UIReadOnlyFileConfirmMessage>
     </title>
     <header>
       <workspace>ワークスペース</workspace>
@@ -400,6 +401,7 @@
       <constraintviolation-exception>必須アイテム jcr:uuid は見つかりません。削除されたか変更されたノードかもしれません。リフレッシュボタンをクリックしてください。</constraintviolation-exception>
       <path-not-found-exception>このノードは削除もしくは変更されました。リフレッシュボタンをクリックしてください。</path-not-found-exception>
       <not-exist-categories>カテゴリは存在しません。</not-exist-categories>
+      <lock-node-read-only>This file is locked by user {0}. Open read-only ?</lock-node-read-only>
     </msg>
   </UIPopupMenu>
   <!--
@@ -592,6 +594,8 @@
       <RestoreFromTrash>ゴミ箱からリストア</RestoreFromTrash>
       <EmptyTrash>ゴミ箱を空にする</EmptyTrash>
       <WebDavView>Open in MS Office</WebDavView>
+      <Download>ファイルをダウンロード</Download>
+      <OpenDocument>Remote Edit</OpenDocument>
     </event>
   </ECMContextMenu>
  
@@ -2420,6 +2424,8 @@
       <ReplaceData>置き換えデータ</ReplaceData>
       <Back>リネームに戻る</Back>
       <Keepfile>両方のファイルをキープする</Keepfile>
+<ReadOnly>Open Read-only</ReadOnly>
+<Cancel>キャンセル</Cancel>
     </label>
   </UIConfirmMessage>
 
@@ -2978,12 +2984,15 @@
       <user>作者</user>
       <description>説明</description>
     </header>
+    <create-version>New version is created</create-version>
   </UIPublicationHistory>
   
   <UIPublicationSchedule>
     <label>
       <introduction>ドキュメントの発行スケジュールを設定することができます。公開日付を選択してください。</introduction>
       <no-schedule-info>ドキュメントの公開スケジュールはありません。</no-schedule-info>
+      <UIPublicationPanelStartDateInput>Start Publication date</UIPublicationPanelStartDateInput>
+      <UIPublicationPanelEndDateInput>End Publication date</UIPublicationPanelEndDateInput>
     </label>
     <msg>
       <save-finished>新しいパブリケーション スケジュールは正常に保存されました。</save-finished>

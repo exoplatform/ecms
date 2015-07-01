@@ -129,7 +129,7 @@
 											
 											
 												if (isShowSumary) {
-													%><div class="Summary">
+													%><div class="Summary content-display">
 													<%
                             if (itemSummaryField!=null) {
                               print uicomponent.getInlineEditingField(viewNode, itemSummaryField, itemSummary, "TEXTAREA", "Text_"+String.valueOf(i), "CLV1ColumnPresent", true,"fast_publish=" + uicomponent.getFastPublicLink(viewNode));

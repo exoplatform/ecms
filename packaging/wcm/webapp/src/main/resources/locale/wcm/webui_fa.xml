@@ -202,8 +202,15 @@
     <msg>
       <time-to-late>زمان جستجو بسیار طولانی است.</time-to-late>
       <empty-field>لطفا کلمه کلیدی معتبر برای جستجو وارد کنید.</empty-field>
+      <empty-name>Please enter the name to search</empty-name>
+      <empty-content>Please enter a word or phrase to search</empty-content>
+      <empty-property>Please select a property</empty-property>
+      <empty-property-keyword>Please enter a keyword for the property</empty-property-keyword>
+      <empty-doctype>Please select a document type</empty-doctype>
+      <empty-startDate>"From Date" is required</empty-startDate>
       <invalid-format>فرمت غیرمعتبر تاریخ/زمان در فیلد '{0}'.</invalid-format>
       <invalid-date>""تا تاریخ" باید بعد از "از تاریخ" باشد"</invalid-date>
+      <invalid-startDate>"From Date" must not be later than today</invalid-startDate>
       <invalid-nodeType>نوع گره "{0}" معتبر نیست. لطفا دوباره چک کنید.</invalid-nodeType>
       <invalid-keyword>کلمه کلیدی نامعتبر است. برخی از کاراکترها پشتیباتی نمی شوند.</invalid-keyword>
     </msg>
@@ -247,7 +254,7 @@
       <action>اقدام</action>
     </header>
     <title>
-      <Select>Select</Select>
+      <Select>انتخاب</Select>
       <View>مشاهده</View>
     </title>
     <msg>
@@ -305,7 +312,7 @@
 
   <UIPermissionInputSetWithAction>
     <title>
-      <SelectUser>Select User</SelectUser>
+      <SelectUser>انتخاب کاربر</SelectUser>
       <SelectMember>Select Member</SelectMember>
       <AddAny>Add Any Permission</AddAny>
     </title>
@@ -313,7 +320,7 @@
 
   <UIUserSelectorPopupWindow>
     <title>
-      <UIUserContainer>User Selector</UIUserContainer>
+      <UIUserContainer>انتخابگر کاربر</UIUserContainer>
     </title>
   </UIUserSelectorPopupWindow>
 
@@ -427,13 +434,13 @@
   
   <CategoryNavigationTemplate>
   <label>
-  <home>Home</home>
+  <home>صفحه اصلی</home>
   </label>
   </CategoryNavigationTemplate>
   
   <Breadcrumb>
   <label>
-  <home>Home</home>
+  <home>صفحه اصلی</home>
   </label>  
   </Breadcrumb>
 </bundle>

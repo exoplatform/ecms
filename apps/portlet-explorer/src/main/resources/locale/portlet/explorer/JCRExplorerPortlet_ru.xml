@@ -254,6 +254,7 @@
       <UISelectRestorePath>Выберите путь восстановления</UISelectRestorePath>
       <UISEOForm>Управление SEO</UISEOForm>
       <UISEOToolbarForm>Управление SEO</UISEOToolbarForm>
+      <UIReadOnlyFileConfirmMessage>Open Document</UIReadOnlyFileConfirmMessage>
     </title>
     <header>
       <workspace>Рабочая область</workspace>
@@ -400,6 +401,7 @@
       <constraintviolation-exception>Не был найден обязательный элемент jcr:uuid. Возможно узел был удален или изменен. Нажмите кнопку Обновить.</constraintviolation-exception>
       <path-not-found-exception>Этот узел был удален или изменен. Пожалуйста, нажмите кнопку Обновить.</path-not-found-exception>
       <not-exist-categories>Указанная категория не существует.</not-exist-categories>
+      <lock-node-read-only>This file is locked by user {0}. Open read-only ?</lock-node-read-only>
     </msg>
   </UIPopupMenu>
   <!--
@@ -592,6 +594,8 @@
       <RestoreFromTrash>Восстановить из корзины</RestoreFromTrash>
       <EmptyTrash>Очистить Корзину</EmptyTrash>
       <WebDavView>Открыть в MS Office</WebDavView>
+      <Download>Загрузить</Download>
+      <OpenDocument>Remote Edit</OpenDocument>
     </event>
   </ECMContextMenu>
  
@@ -2420,6 +2424,8 @@
       <ReplaceData>Заменить данные</ReplaceData>
       <Back>Вернуться к переименованию</Back>
       <Keepfile>Сохранить оба файла</Keepfile>
+<ReadOnly>Open Read-only</ReadOnly>
+<Cancel>Отмена</Cancel>
     </label>
   </UIConfirmMessage>
 
@@ -2978,12 +2984,15 @@
       <user>Автор</user>
       <description>Описание</description>
     </header>
+    <create-version>New version is created</create-version>
   </UIPublicationHistory>
   
   <UIPublicationSchedule>
     <label>
       <introduction>Вы можете запланировать публикацию вашего документа. Выберите даты, в которые вы хотели бы опубликовать ваш документ</introduction>
       <no-schedule-info>Нет графика публикации для вашего документа</no-schedule-info>
+      <UIPublicationPanelStartDateInput>Start Publication date</UIPublicationPanelStartDateInput>
+      <UIPublicationPanelEndDateInput>End Publication date</UIPublicationPanelEndDateInput>
     </label>
     <msg>
       <save-finished>Ваш новый график публикации успешно сохранен.</save-finished>

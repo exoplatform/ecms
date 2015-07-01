@@ -50,13 +50,13 @@
       } else {
         openStatus = documentManager.JavaEditDocument(absolutePath, null, "/open-document/applet/ITHitMountOpenDocument.jar");
       }
-      console.log("Open "+ absolutePath+" is "+openStatus);
+      //console.log("Open "+ absolutePath+" is "+openStatus);
     } else {
       //ITHIT not detected, Use ActiveX to edit document.
       if(checkMSOfficeVersion()){
         eXo.ecm.OpenDocumentInOffice.EditDocument(absolutePath);
       }else{
-        console.log("Cannot open. MSOffice version is not support!");
+        //console.log("Cannot open. MSOffice version is not support!");
       }
     }
     if(uisideBarWidth === 0){ //hide side bar
@@ -100,7 +100,8 @@
 
           if(eXo.ecm.ECMWebDav !== undefined) {
             //showButton
-            console.log("ITHIT detected!");
+            //console.log("ITHIT detected!");
+            gj(openDocument).closest("li").show();
             if (data.isLocked) return;//can not edit, just show popup(do not change href)
           }else{
             if(!data.isMsoffice){
@@ -108,7 +109,7 @@
             }else{
               openDocument.removeClass("hidden");
             }
-            console.log("ITHIT not detected!");
+            //console.log("ITHIT not detected!");
             defaultEnviromentFilter(openDocument);//only show with support enviroment.
           }
         });
@@ -144,13 +145,11 @@
    */
   OpenDocumentInOffice.prototype.EditDocument = function(path){
     var obj = new ActiveXObject('SharePoint.OpenDocuments.3');
-    var word = new ActiveXObject("Word.Application");
-    var allowVersion = word.Version >= "14.0";
-    if(allowVersion){
-      var openStatus = obj.EditDocument(path, word.Version);
-      console.log("Open Document status: "+openStatus);
+    if(checkMSOfficeVersion()){
+      obj.EditDocument(path);
+      //console.log("Open Document status: "+openStatus);
     }else{
-      console.log("Open document not support!");
+      //console.log("Open document not support!");
       return false;
     }
   }
@@ -193,7 +192,10 @@
     if (OSName === "Windows") {
       //check IE11, Office
       var isAtLeastIE11 = !!(ua.match(/Trident/) && !ua.match(/MSIE/));
-      if(checkMSOfficeVersion() && isAtLeastIE11) return true;
+      if(checkMSOfficeVersion() && isAtLeastIE11){
+        gj(element).parent().show();
+        return true;
+      }
 
       // Hide if not enought enviroments support
       if(gj(element).parent().hasClass("detailContainer"))
@@ -218,9 +220,11 @@
   function checkMSOfficeVersion(){
     try{
       var word = new ActiveXObject("Word.Application");
-      return word.Version >= "14.0";
+      var version = word.Version;
+      word.Quit();
+      return version >= "14.0";
     }catch(err){
-      console.log("ActiveX is not support \n"+err);
+      //console.log("ActiveX is not support \n"+err);
       return false;
     }
     return false;

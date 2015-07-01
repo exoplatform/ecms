@@ -42,7 +42,10 @@
     <view>
       <label>
         <not-viewable>Η προεπισκόπηση αυτού του εγγράφου δεν είναι διαθέσιμη.</not-viewable>
+        <pdf-max-size>The preview is not available for content larger than {0} MB.</pdf-max-size>
+        <pdf-max-page>The preview is not available for content with over {0} pages.</pdf-max-page>
         <using-webDAV>ή άνοιγμα στο Office</using-webDAV>
+        <open-on-desktop>Open on Desktop</open-on-desktop>
         <file-size-too-big>Το περιεχόμενο αυτού του αρχείου είναι πολύ μεγάλο. Θα πρέπει να το κατεβάσετε και να το ανοίξετε στη συσκευή σας.</file-size-too-big>
         <webDAV>Προβολή WebDAV</webDAV>
         <download>Μεταφόρτωση</download>

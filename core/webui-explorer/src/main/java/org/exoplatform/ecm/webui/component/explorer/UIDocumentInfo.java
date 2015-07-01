@@ -1135,9 +1135,13 @@ public class UIDocumentInfo extends UIBaseNodePresentation {
     try {
       for (String documentType : allItemsByTypeFilterSet) {
         for (String mimeType : documentTypeService.getMimeTypes(documentType)) {
-          if (node.getNode(Utils.JCR_CONTENT).getProperty(Utils.JCR_MIMETYPE).getString().indexOf(mimeType) >= 0) {
-            found = true;
-            break;
+          if(node.hasNode(Utils.JCR_CONTENT)){
+            Node content = node.getNode(Utils.JCR_CONTENT);
+            if (content.hasProperty(Utils.JCR_MIMETYPE)
+                    && content.getProperty(Utils.JCR_MIMETYPE).getString().indexOf(mimeType) >= 0) {
+              found = true;
+              break;
+            }
           }
         }
       }
@@ -1803,7 +1807,7 @@ public class UIDocumentInfo extends UIBaseNodePresentation {
 
   @Override
   public void processRender(WebuiRequestContext context) throws Exception {
-    updatePageListData();
+    if(!context.useAjax()) updatePageListData();
     //check if current user can add node to current node
     //for MuiltUpload drag&drop feature
     if (canAddNode()) {

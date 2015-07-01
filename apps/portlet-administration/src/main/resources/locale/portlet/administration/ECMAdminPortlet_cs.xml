@@ -87,7 +87,7 @@
 -->
   <UITaxonomyTreeMainForm>
     <action>
-      <Reset>Reset</Reset>
+      <Reset>Resetovat</Reset>
     </action>
     <msg>
       <name-not-allowed>Zakázaný název</name-not-allowed>
@@ -988,6 +988,8 @@
       <publicationPublish>Zveřejnit</publicationPublish>
 <contentNavigation>Navigace obsahu</contentNavigation>
 <addSymLink>Přidat symlink</addSymLink>
+      <checkIn>Check In</checkIn>
+      <checkOut>Check Out</checkOut>
     </label>
     <action>
       <Save>#{word.save}</Save>      
@@ -1068,7 +1070,7 @@
   -->
   <UITemplateForm>
     <title>
-      <AddPermission>Add Permission</AddPermission>
+      <AddPermission>Přidat oprávnění</AddPermission>
     </title>
     <action>
       <Save>#{word.save}</Save>
@@ -1377,11 +1379,11 @@
       <set_property>Právo nastavit vlastnost</set_property>
       <remove>Právo mazat</remove>
     </label>
-    <title>Přidání oprávnění do tohoto uzlu</title>
+    <title>Add a permission to this node</title>
     <action>
       <Close>#{word.close}</Close>
-      <Save>Save</Save>
-      <Reset>Reset</Reset>
+      <Save>Uložit</Save>
+      <Reset>Resetovat</Reset>
     </action>
     <msg>
       <checkbox-require>Vyberte alespoň jedno oprávnění.</checkbox-require>
@@ -1480,7 +1482,7 @@
       <add_node>Změnit</add_node>
       <remove>Odstranit</remove>
     </label>
-    <title>Přidat oprávnění k tomuto uzlu</title>
+    <title>Add permission to this node</title>
     <action>
       <Close>#{word.close}</Close>
       <Save>#{word.save}</Save>

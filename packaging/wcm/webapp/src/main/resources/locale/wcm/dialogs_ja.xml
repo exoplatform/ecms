@@ -24,8 +24,8 @@
     <dialog>
       <label>
         <MainContent>メインコンテンツ</MainContent>
-        <cssFile>デフォルトCSS</cssFile>
-        <jsFile>デフォルトjS</jsFile>
+        <cssFile>default.css</cssFile>
+        <jsFile>default.js</jsFile>
         <Advanced>詳細</Advanced>
         <Summary>サマリー</Summary>
         <name>#{word.name}</name>

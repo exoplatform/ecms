@@ -24,7 +24,7 @@
     <dialog>
       <label>
         <MainContent>Hauptinhalt</MainContent>
-        <cssFile>default.CSS</cssFile>
+        <cssFile>default.css</cssFile>
         <jsFile>default.js</jsFile>
         <Advanced>Erweitert</Advanced>
         <Summary>Zusammenfassung</Summary>

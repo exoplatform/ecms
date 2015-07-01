@@ -18,9 +18,9 @@
       <Document>Dokument</Document>
       <DocumentAndPage>Dokument og side</DocumentAndPage>
       <documentandpage>Dokument og side</documentandpage>
-      <resutlsCaption>Resultater</resutlsCaption>
+      <results>Results {0} to {1} for {2}</results>
+      <oneResult>Only one result for {0}</oneResult>
       <ofAboutCaption>av ca</ofAboutCaption>
-      <forCaption>for</forCaption>
       <timeUnitCaption>sekunder</timeUnitCaption>
       <similar>Sidene der det samme innholdet vises</similar>
       <editor>Redaktør</editor>

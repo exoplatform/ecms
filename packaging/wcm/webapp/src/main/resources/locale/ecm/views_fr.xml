@@ -30,7 +30,7 @@
         <comment-by>Commenté par</comment-by>
         <email>Email</email>
         <site>Site</site>
-        <lastComment>Last comment posted by {user} at {time}</lastComment>
+        <lastComment>Dernier commentaire posté par {user} à {time}</lastComment>
       </label>
     </view>
   </Comment>
@@ -42,7 +42,10 @@
     <view>
       <label>
         <not-viewable>L'aperçu de ce document n'est pas disponible.</not-viewable>
+        <pdf-max-size>L'aperçu n'est pas disponible pour les contenus de plus de {0} Mo.</pdf-max-size>
+        <pdf-max-page>L'aperçu n'est pas disponible pour les contenus avec plus de {0} pages.</pdf-max-page>
         <using-webDAV>ou Ouvrir dans MS Office</using-webDAV>
+        <open-on-desktop>Ouvrir à distance</open-on-desktop>
         <file-size-too-big>Le contenu de ce fichier est trop important. Veuillez le télécharger pour le consulter.</file-size-too-big>
         <webDAV>Vue WebDAV</webDAV>
         <download>Télécharger</download>

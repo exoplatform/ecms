@@ -254,6 +254,7 @@
       <UISelectRestorePath>Selecciona la Ruta de Restauració</UISelectRestorePath>
       <UISEOForm>Gestiona el SEO</UISEOForm>
       <UISEOToolbarForm>Gestiona el SEO</UISEOToolbarForm>
+      <UIReadOnlyFileConfirmMessage>Open Document</UIReadOnlyFileConfirmMessage>
     </title>
     <header>
       <workspace>Àrea de treball</workspace>
@@ -400,6 +401,7 @@
       <constraintviolation-exception>No s'ha trobat l'element obligatori jcr:uuid . El node pot haver estat suprimit o canviat. Si us plau, fes clic al botó Recarrega.</constraintviolation-exception>
       <path-not-found-exception>El node pot haver estat suprimit o canviat. Si us plau, fes clic al botó Recarrega.</path-not-found-exception>
       <not-exist-categories>La categoria no existeix.</not-exist-categories>
+      <lock-node-read-only>This file is locked by user {0}. Open read-only ?</lock-node-read-only>
     </msg>
   </UIPopupMenu>
   <!--
@@ -592,6 +594,8 @@
       <RestoreFromTrash>Recupera de la Paperera</RestoreFromTrash>
       <EmptyTrash>Buida la Paperera</EmptyTrash>
       <WebDavView>Obre-ho a MS Office</WebDavView>
+      <Download>Descarrega</Download>
+      <OpenDocument>Remote Edit</OpenDocument>
     </event>
   </ECMContextMenu>
  
@@ -2420,6 +2424,8 @@
       <ReplaceData>Substitueix les dades</ReplaceData>
       <Back>Torna a canviar el nom</Back>
       <Keepfile>Manté tots dos fitxers</Keepfile>
+<ReadOnly>Open Read-only</ReadOnly>
+<Cancel>Cancel·la</Cancel>
     </label>
   </UIConfirmMessage>
 
@@ -2978,12 +2984,15 @@
       <user>Autor</user>
       <description>Descripció</description>
     </header>
+    <create-version>New version is created</create-version>
   </UIPublicationHistory>
   
   <UIPublicationSchedule>
     <label>
       <introduction>Pot planificar la publicació del document. Selecciona la data que desitja veure el document publicat</introduction>
       <no-schedule-info>No hi ha cap calendari de publicació pel document</no-schedule-info>
+      <UIPublicationPanelStartDateInput>Start Publication date</UIPublicationPanelStartDateInput>
+      <UIPublicationPanelEndDateInput>End Publication date</UIPublicationPanelEndDateInput>
     </label>
     <msg>
       <save-finished>El seu nou calendari de publicació s'ha desat correctament.</save-finished>

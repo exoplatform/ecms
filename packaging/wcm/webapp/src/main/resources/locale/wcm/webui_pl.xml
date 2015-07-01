@@ -202,8 +202,15 @@
     <msg>
       <time-to-late>Czas wyszukiwania jest zbyt długi.</time-to-late>
       <empty-field>Proszę wpisać poprawne słowo kluczowe dla wyszukiwania.</empty-field>
+      <empty-name>Proszę wpisać nazwę do wyszukania</empty-name>
+      <empty-content>Wprowadź słowo lub frazę do wyszukiwania</empty-content>
+      <empty-property>Wybierz właściwość</empty-property>
+      <empty-property-keyword>Wprowadź słowo kluczowe dla właściwości</empty-property-keyword>
+      <empty-doctype>Wybierz typ dokumentu</empty-doctype>
+      <empty-startDate>"Od Daty" jest wymagane</empty-startDate>
       <invalid-format>Nieprawidłowy format daty/godziny w polu „{0}”.</invalid-format>
       <invalid-date>"Data w polu „Do" musi być późniejsza niż data w polu "Od""</invalid-date>
+      <invalid-startDate>"Od Daty" nie może być późniejsza niż dzisiejsza data</invalid-startDate>
       <invalid-nodeType>Typ węzła „{0}” jest nieprawidłowy. Proszę sprawdzić ponownie.</invalid-nodeType>
       <invalid-keyword>Słowo kluczowe jest nieprawidłowe. Niektóre znaki nie są obsługiwane.</invalid-keyword>
     </msg>

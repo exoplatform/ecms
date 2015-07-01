@@ -988,6 +988,8 @@
       <publicationPublish>Публікувати</publicationPublish>
 <contentNavigation>Навігація по вмісту</contentNavigation>
 <addSymLink>Додати символьне посилання</addSymLink>
+      <checkIn>Check In</checkIn>
+      <checkOut>Check Out</checkOut>
     </label>
     <action>
       <Save>#{word.save}</Save>      
@@ -1377,7 +1379,7 @@
       <set_property>Встановити права власності</set_property>
       <remove>Видалити права</remove>
     </label>
-    <title>Додати дозвіл до цього вузла</title>
+    <title>Add a permission to this node</title>
     <action>
       <Close>#{word.close}</Close>
       <Save>Save</Save>
@@ -1480,7 +1482,7 @@
       <add_node>Змінити</add_node>
       <remove>Видалити</remove>
     </label>
-    <title>Додати дозвіл до цього вузла</title>
+    <title>Add permission to this node</title>
     <action>
       <Close>#{word.close}</Close>
       <Save>#{word.save}</Save>

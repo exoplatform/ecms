@@ -87,7 +87,7 @@
 -->
   <UITaxonomyTreeMainForm>
     <action>
-      <Reset>Reset</Reset>
+      <Reset>Atstatyti</Reset>
     </action>
     <msg>
       <name-not-allowed>Draudžiamas pavadinimas</name-not-allowed>
@@ -988,6 +988,8 @@
       <publicationPublish>Paskelbti</publicationPublish>
 <contentNavigation>Turinio navigacija</contentNavigation>
 <addSymLink>Pridėti nuorodą</addSymLink>
+      <checkIn>Check In</checkIn>
+      <checkOut>Check Out</checkOut>
     </label>
     <action>
       <Save>#{word.save}</Save>      
@@ -1068,7 +1070,7 @@
   -->
   <UITemplateForm>
     <title>
-      <AddPermission>Add Permission</AddPermission>
+      <AddPermission>Pridėti teisę</AddPermission>
     </title>
     <action>
       <Save>#{word.save}</Save>
@@ -1377,11 +1379,11 @@
       <set_property>Nustatyti ypatybės teisę</set_property>
       <remove>Pašalinti teisę</remove>
     </label>
-    <title>Pridėti leidimą mazgui</title>
+    <title>Add a permission to this node</title>
     <action>
       <Close>#{word.close}</Close>
-      <Save>Save</Save>
-      <Reset>Reset</Reset>
+      <Save>Išsaugoti</Save>
+      <Reset>Atstatyti</Reset>
     </action>
     <msg>
       <checkbox-require>Prašome pasirinkti bent vieną leidimą.</checkbox-require>
@@ -1480,7 +1482,7 @@
       <add_node>Keisti</add_node>
       <remove>Pašalinti</remove>
     </label>
-    <title>Pridėti leidimą mazgui</title>
+    <title>Add permission to this node</title>
     <action>
       <Close>#{word.close}</Close>
       <Save>#{word.save}</Save>
@@ -2358,7 +2360,7 @@
   <UISkinTab>
     <header>
       <name>Pavadinimas</name>
-      <roles>Roles</roles>
+      <roles>Rolės</roles>
       <baseVersion>Versija</baseVersion>
       <action>Veiksmai</action>
     </header>

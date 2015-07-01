@@ -1,6 +1,7 @@
 package org.exoplatform.wcm.webui.reader;
 
 import org.apache.commons.lang.StringEscapeUtils;
+import org.apache.commons.lang.StringUtils;
 import org.exoplatform.services.jcr.util.Text;
 
 public class ContentReader {
@@ -61,5 +62,31 @@ public class ContentReader {
     if (content != null)
       content = Text.unescapeIllegalJcrChars(content);
     return content;
+  }
+
+  /**
+   * Escape html avoid XSS
+   * @param value
+   * @return
+   */
+  public static String simpleEscapeHtml(String value) {
+    if (StringUtils.isEmpty(value)) return StringUtils.EMPTY;
+    int length = value.length();
+    StringBuilder result = new StringBuilder((int) (length * 1.5));
+    for (int i = 0; i < length; i++) {
+      char ch = value.charAt(i);
+      switch (ch) {
+        case '<':
+          result.append("&lt;");
+          break;
+        case '>':
+          result.append("&gt;");
+          break;
+        default:
+          result.append(ch);
+          break;
+      }
+    }
+    return result.toString();
   }
 }

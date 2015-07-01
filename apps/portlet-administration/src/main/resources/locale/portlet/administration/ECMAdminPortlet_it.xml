@@ -988,6 +988,8 @@
       <publicationPublish>Pubblica</publicationPublish>
 <contentNavigation>Navigazione Contenuti</contentNavigation>
 <addSymLink>Aggiungi Collegamento Simbolico</addSymLink>
+      <checkIn>Check In</checkIn>
+      <checkOut>Check Out</checkOut>
     </label>
     <action>
       <Save>#{word.save}</Save>      
@@ -1358,7 +1360,7 @@
   <UITaxonomyTreeForm>
     <label>
       <name>Nome</name>
-      <workspace>Workspace</workspace>
+      <workspace>Area di lavoro</workspace>
       <homePath>Percorso Home</homePath>
       <permissions>Permessi</permissions>
     </label>
@@ -1377,7 +1379,7 @@
       <set_property>Imposta Permessi Nodo</set_property>
       <remove>Rimuovi Permessi</remove>
     </label>
-    <title>Aggiungi un permesso al nodo</title>
+    <title>Add a permission to this node</title>
     <action>
       <Close>#{word.close}</Close>
       <Save>Salva</Save>
@@ -1480,7 +1482,7 @@
       <add_node>Modifica</add_node>
       <remove>Rimuovi</remove>
     </label>
-    <title>Aggiungi permesso al nodo</title>
+    <title>Add permission to this node</title>
     <action>
       <Close>#{word.close}</Close>
       <Save>#{word.save}</Save>

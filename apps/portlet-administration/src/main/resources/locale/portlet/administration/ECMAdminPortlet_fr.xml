@@ -922,7 +922,7 @@
   <UIViewForm>
     <title>
       <AddPermission>Ajouter une Permission</AddPermission>
-      <RemovePermission>Supprimer la Permission</RemovePermission>
+      <RemovePermission>Supprimer la permission</RemovePermission>
     </title>
     <msg>
       <view-name-invalid>Le nom de la vue est obligatoire.</view-name-invalid>
@@ -988,6 +988,8 @@
       <publicationPublish>Publier</publicationPublish>
       <contentNavigation>Navigation par Contenu</contentNavigation>
       <addSymLink>Ajouter un Raccourci</addSymLink>
+      <checkIn>Check In</checkIn>
+      <checkOut>Check Out</checkOut>
     </label>			
     <action>
       <Save>#{word.save}</Save>      

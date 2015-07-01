@@ -92,42 +92,13 @@
           strActs +=  "<li class='menuItem'>";
           strActs +=  "<a exo:attr='ViewDocument' style='display: block;' href=\"" + permLinkComponent.getPermlink(node) + "\" target='_new' onclick=\"return eXo.ecm.WCMUtils.hideContextMenu(this);\">";
           strActs +=  " <i class='uiIconEcmsViewDocument uiIconEcmsLightGray'>" ;
-          strActs +=  " </i> ";    
+          strActs +=  " </i> ";
           strActs +=    _ctx.appRes("ECMContextMenu.event." + permLinkComponent.getUIExtensionName());
           strActs +=  "</a>";
           strActs +=  "</li>";
-        }  
-        //Begin for WebDav action
-        if (!node.isNodeType(Utils.EXO_RESTORELOCATION) && !Utils.isTrashHomeNode(node)) {        
-	  	    if (node.getPrimaryNodeType().getName().equals("nt:file")) {
-	  	      String mimeType = "";
-	  	      if (node.hasNode("jcr:content")) {
-	  	        mimeType = node.getNode("jcr:content").getProperty("jcr:mimeType").getString();
-	  	      }
-	  	      // This escape "'" for js
-	    		  String webDavPath = node.getPath().contains("%27") ? node.getPath().replaceAll("%27","%2527") : node.getPath();
-	    		  String link ="javascript:eXo.ecm.ECMUtils.generateWebDAVLink('','"+ portalName +"','"+ restContextName +"','"+repository+"','"+ preferenceWS+ "','" + webDavPath +"','"+mimeType+"')";
-            strActs +=  "<li class='menuItem'>";
-            strActs +=    "<a class='itemDownload' exo:attr='Download' style='display: block;' onclick=\"return eXo.ecm.WCMUtils.hideContextMenu(this);\" href=\"" + link + "\" >" ;          
-            strActs +=    "  <i class=\"uiIconDownload uiIconLightGray\"></i> " + _ctx.appRes("UITreeExplorer.label.webDavView");
-            strActs +=    "</a>" ;            
-            strActs += "</li>";
-	  		  } else {
-	  		  	def nodeTarget = node;
-					  if(uicomponent.isSymLink(node)) nodeTarget = Utils.getNodeSymLink(node);
-						if (nodeTarget!= null) {	 
-						  String link = "/" + restContextName + "/private/jcr/" + repository+ "/" + preferenceWS + Utils.formatNodeName(nodeTarget.getPath());
-              strActs +=  "<li class='menuItem'>";
-              strActs +=    "<a  class='itemDownload' exo:attr='Download' style='display: block; {behavior: url(#default#AnchorClick);}' onclick=\"eXo.ecm.WCMUtils.hideContextMenu(this);window.open('" +link + "');\" target='_new' folder=\"" + link +"\">" ;          
-              strActs +=    "  <i class=\"uiIconDownload uiIconLightGray\"></i> " + _ctx.appRes("UITreeExplorer.label.webDavView");
-              strActs +=    "</a>" ;
-              strActs += "</li>";
-						}
-	  		  }
         }
-  		  	  
-  		  //End WebDAV Action					        
-  		  List customActs = uicomponent.getCustomActions(node) ;				  
+        
+  		  List customActs = uicomponent.getCustomActions(node) ;
   	    Parameter[] params ;
   	    if(customActs.size() > 0) {				    
   			  for(act in customActs) {

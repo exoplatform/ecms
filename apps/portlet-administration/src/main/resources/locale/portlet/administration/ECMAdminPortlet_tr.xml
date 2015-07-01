@@ -988,6 +988,8 @@
       <publicationPublish>Yayımla</publicationPublish>
 <contentNavigation>İçerik Gezinti</contentNavigation>
 <addSymLink>Sembolik link ekle</addSymLink>
+      <checkIn>Check In</checkIn>
+      <checkOut>Check Out</checkOut>
     </label>
     <action>
       <Save>#{word.save}</Save>      
@@ -1377,7 +1379,7 @@
       <set_property>Özellik Ayarlama Yetkisi</set_property>
       <remove>Çıkarma Yetkisi</remove>
     </label>
-    <title>Düğüme bir izin ekleyin</title>
+    <title>Add a permission to this node</title>
     <action>
       <Close>#{word.close}</Close>
       <Save>Kaydet</Save>
@@ -1480,7 +1482,7 @@
       <add_node>Değiştir</add_node>
       <remove>Kaldır</remove>
     </label>
-    <title>Düğüme bir izin ekleyin</title>
+    <title>Add permission to this node</title>
     <action>
       <Close>#{word.close}</Close>
       <Save>#{word.save}</Save>

@@ -148,7 +148,7 @@
     <title>
       <UIOneNodePathSelector>Pasirinkti vietą</UIOneNodePathSelector>
       <UIPermissionSelector>Teisių naršyklė</UIPermissionSelector>
-      <UICategoriesSelector>Add Categories</UICategoriesSelector>
+      <UICategoriesSelector>Pridėti kategorijas</UICategoriesSelector>
     </title>
   </PopupComponent>
 

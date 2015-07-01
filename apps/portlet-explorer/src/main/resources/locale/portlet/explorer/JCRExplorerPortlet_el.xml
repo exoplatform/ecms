@@ -254,6 +254,7 @@
       <UISelectRestorePath>Επιλέξτε διαδρομή για την επαναφορά</UISelectRestorePath>
       <UISEOForm>Διαχείριση βελτιστοποιήσεων μηχανών αναζήτησης (SEO)</UISEOForm>
       <UISEOToolbarForm>Διαχείριση βελτιστοποιήσεων μηχανών αναζήτησης (SEO)</UISEOToolbarForm>
+      <UIReadOnlyFileConfirmMessage>Open Document</UIReadOnlyFileConfirmMessage>
     </title>
     <header>
       <workspace>Χώρος Εργασίας</workspace>
@@ -400,6 +401,7 @@
       <constraintviolation-exception>Το υποχρεωτικό στοιχείο jcr:uuid δεν βρέθηκε. Ο κόμβος μπορεί να έχει διαγραφεί ή αλλαχθεί. Παρακαλώ κάντε κλικ στο κουμπί Ανανέωση.</constraintviolation-exception>
       <path-not-found-exception>Αυτός ο κόμβος έχει διαγραφεί ή αλλάξει. Παρακαλώ κάντε κλικ στο κουμπί Ανανέωση.</path-not-found-exception>
       <not-exist-categories>Η κατηγορία δεν υπάρχει.</not-exist-categories>
+      <lock-node-read-only>This file is locked by user {0}. Open read-only ?</lock-node-read-only>
     </msg>
   </UIPopupMenu>
   <!--
@@ -592,6 +594,8 @@
       <RestoreFromTrash>Επαναφορά από κάδο</RestoreFromTrash>
       <EmptyTrash>Άδειασμα κάδου διαγραμμένων</EmptyTrash>
       <WebDavView>Άνοιγμα στο Office</WebDavView>
+      <Download>Μεταφόρτωση</Download>
+      <OpenDocument>Remote Edit</OpenDocument>
     </event>
   </ECMContextMenu>
  
@@ -2420,6 +2424,8 @@
       <ReplaceData>Αντικατάσταση των στοιχείων</ReplaceData>
       <Back>Επιστροφή στη Μετονομασία</Back>
       <Keepfile>Κρατήστε τα δύο αρχεία</Keepfile>
+<ReadOnly>Open Read-only</ReadOnly>
+<Cancel>Ακύρωση</Cancel>
     </label>
   </UIConfirmMessage>
 
@@ -2978,12 +2984,15 @@
       <user>Δημιουργός</user>
       <description>Περιγραφή</description>
     </header>
+    <create-version>New version is created</create-version>
   </UIPublicationHistory>
   
   <UIPublicationSchedule>
     <label>
       <introduction>Μπορείτε να προγραμματίσετε τη δημοσίευση του εγγράφου σας. Επιλέξτε τις ημερομηνίες που θα θέλατε να δημοσιεύσετε το έγγραφο</introduction>
       <no-schedule-info>Δεν υπάρχει κανένα χρονοδιάγραμμα δημοσίευσης για το έγγραφό σας</no-schedule-info>
+      <UIPublicationPanelStartDateInput>Start Publication date</UIPublicationPanelStartDateInput>
+      <UIPublicationPanelEndDateInput>End Publication date</UIPublicationPanelEndDateInput>
     </label>
     <msg>
       <save-finished>Το χρονοδιάγραμμα δημοσίευσης αποθηκεύτηκε επιτυχώς.</save-finished>

@@ -18,9 +18,9 @@
       <Document>Dokument</Document>
       <DocumentAndPage>Dokument und Seite</DocumentAndPage>
       <documentandpage>Dokument und Seite</documentandpage>
-      <resutlsCaption>Ergebnisse</resutlsCaption>
+      <results>Results {0} to {1} for {2}</results>
+      <oneResult>Only one result for {0}</oneResult>
       <ofAboutCaption>von ungefähr</ofAboutCaption>
-      <forCaption>für</forCaption>
       <timeUnitCaption>Sekunden</timeUnitCaption>
       <similar>Seiten, auf denen der gleiche Inhalt angezeigt wird</similar>
       <editor>Editor</editor>
@@ -33,7 +33,7 @@
       <edit>Bearbeiten</edit>
     </action>
     <msg>
-      <search-not-match-type>Your search {0} does not match any {1}.</search-not-match-type>
+      <search-not-match-type>Ihre Suche {0} findet keine übereinstimmenden {1}.</search-not-match-type>
     </msg>
   </UIDefaultSearchResult>
   <UISearchPageLayoutManager>

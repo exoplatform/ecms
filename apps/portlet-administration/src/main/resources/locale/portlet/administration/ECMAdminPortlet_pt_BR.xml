@@ -755,7 +755,7 @@
     <label>
       <actionType>Extender tipo de ação</actionType>
       <name>Nome (começa com "exo:")</name>
-      <isMove>is Action Move:</isMove>
+      <isMove>é Ação Mover:</isMove>
       <variables>Variáveis:</variables>
       <exo_businessProcessAction>Processo de negócio:</exo_businessProcessAction>
       <exo_scriptAction>Scripts Groovy</exo_scriptAction>
@@ -792,7 +792,7 @@
       <UIActionsTemplateContainer>Ações</UIActionsTemplateContainer>
       <UIOthersTemplateContainer>Outros</UIOthersTemplateContainer>
   <UIActionScriptContainer>Ação</UIActionScriptContainer>
-  <UIWidgetScriptContainer>Widgets</UIWidgetScriptContainer>
+  <UIWidgetScriptContainer>Componentes</UIWidgetScriptContainer>
 <UIInterceptorScriptContainer>Interceptadores</UIInterceptorScriptContainer>
 
 <nodeTypeDefinition>Tipo de nó</nodeTypeDefinition>
@@ -988,6 +988,8 @@
       <publicationPublish>Publicar</publicationPublish>
 <contentNavigation>Navegação do conteúdo</contentNavigation>
 <addSymLink>Adicionar link simbólico</addSymLink>
+      <checkIn>Check In</checkIn>
+      <checkOut>Check Out</checkOut>
     </label>
     <action>
       <Save>#{word.save}</Save>      
@@ -1179,7 +1181,7 @@
   -->
   <uiECMScriptsPopup>
     <title>
-      <ecmScriptForm>ECM Script</ecmScriptForm>
+      <ecmScriptForm>Script de ECM</ecmScriptForm>
     </title>
   </uiECMScriptsPopup>
 
@@ -1377,7 +1379,7 @@
       <set_property>Permissão para alterar propriedades</set_property>
       <remove>Permissão para remoção</remove>
     </label>
-    <title>Adicionar uma permissão a este nó</title>
+    <title>Add a permission to this node</title>
     <action>
       <Close>#{word.close}</Close>
       <Save>Salvar</Save>
@@ -1480,7 +1482,7 @@
       <add_node>Modificar</add_node>
       <remove>Remover</remove>
     </label>
-    <title>Adicionar permissão ao nó</title>
+    <title>Add permission to this node</title>
     <action>
       <Close>#{word.close}</Close>
       <Save>#{word.save}</Save>

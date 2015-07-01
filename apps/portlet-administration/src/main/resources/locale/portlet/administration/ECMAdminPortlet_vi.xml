@@ -712,7 +712,7 @@
     </label>
     <title>
       <AddPermission>Thêm Phân quyền</AddPermission>
-      <RemovePermission>Gỡ bỏ Phân quyền</RemovePermission>
+      <RemovePermission>Remove Permission</RemovePermission>
       <AddIcon>Thêm Biểu tượng</AddIcon>
       <AddPath>Thêm Đường dẫn</AddPath>
     </title>
@@ -988,6 +988,8 @@
       <publicationPublish>Xuất bản</publicationPublish>
 <contentNavigation>Điều hướng theo nội dung</contentNavigation>
 <addSymLink>Thêm liên kết</addSymLink>
+      <checkIn>Check In</checkIn>
+      <checkOut>Check Out</checkOut>
     </label>
     <action>
       <Save>#{word.save}</Save>      
@@ -1311,7 +1313,7 @@
   
   <TaxoTreeAnyPermission>
     <label>
-      <any>Bất kỳ Phân quyền nào</any>
+      <any>Cho phép tất cả</any>
       <anyPermission>TaxoTreeAnyPermission</anyPermission>
     </label>
   </TaxoTreeAnyPermission>
@@ -1377,7 +1379,7 @@
       <set_property>Quyền Thiết lập Thuộc tính</set_property>
       <remove>Quyền Gỡ bỏ</remove>
     </label>
-    <title>Thêm phân quyền cho Nút</title>
+    <title>Thêm phân quyền cho nút</title>
     <action>
       <Close>#{word.close}</Close>
       <Save>Lưu</Save>
@@ -1480,7 +1482,7 @@
       <add_node>Sửa đổi</add_node>
       <remove>Quyền xóa</remove>
     </label>
-    <title>Thêm quyền cho nút</title>
+    <title>Thêm phân quyền cho nút</title>
     <action>
       <Close>#{word.close}</Close>
       <Save>#{word.save}</Save>
@@ -2156,7 +2158,7 @@
   
   <UIAnyPermission>
     <label>
-      <anyPermission>Bất kỳ Phân quyền nào</anyPermission>
+      <anyPermission>Cho phép tất cả</anyPermission>
     </label>
   </UIAnyPermission>
   
