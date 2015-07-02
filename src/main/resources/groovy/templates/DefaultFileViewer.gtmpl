@@ -32,7 +32,7 @@ if (drive) {
 	def openOn = _ctx.appRes("CloudFileViewer.event.OpenOn")
 	def viewable = uicomponent.isViewable()
 %>
-<div id="CloudFileViewer" file-open-on="${openOn} ${serviceName}" 
+<div id="CloudFileViewer" file-open-on="${openOn} ${serviceName}"
 		style="position: relative; padding-top: 0; padding-bottom: 0; height: <%=viewable ? "100%" : "200px"%>; overflow: hidden;">
 	<%
 	if(viewable) {
@@ -40,8 +40,12 @@ if (drive) {
   	def viewFile = _ctx.appRes("CloudFileViewer.event.ViewFile")
   	def editFile = _ctx.appRes("CloudFileViewer.event.EditFile")
 	%>
-	<div style="display: none;" class="file-content"><span id="ViewerSwitch" view-title="${viewFile}" edit-title="${editFile}"
-		style="position: relative; padding-left: 5px; font-weight: normal; font-size: 11px;">(<a href="javascript:void(0);">${editFile}</a>)</span>
+	<div style="display: none;" class="file-content">
+    <a id="ViewerSwitch" view-title="${viewFile}" edit-title="${editFile}"
+      style="position: relative; padding-left: 5px; font-weight: normal;"
+      class="pull-right">
+      ${editFile}
+    </a>
 		<iframe frameborder="0"
 			style="position: absolute; width: 100%; height: 100%;"
 			src="">

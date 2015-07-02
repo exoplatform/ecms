@@ -46,6 +46,10 @@ public class PersonalDocumentsFilter implements UIExtensionFilter {
    * {@inheritDoc}
    */
   public boolean accept(Map<String, Object> context) throws Exception {
+    if (context == null) {
+      return true;
+    }
+    
     // only show in Personal Doc's root!
     String userId = Util.getPortalRequestContext().getRemoteUser();
     UIJCRExplorer uiExplorer = (UIJCRExplorer) context.get(UIJCRExplorer.class.getName());
