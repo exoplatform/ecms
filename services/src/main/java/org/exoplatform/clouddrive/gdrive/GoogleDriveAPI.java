@@ -513,21 +513,20 @@ class GoogleDriveAPI implements DataStoreFactory {
   GoogleAuthorizationCodeFlow createFlow(String clientId, String clientSecret, AuthToken storedToken) throws IOException {
     HttpTransport httpTransport = new NetHttpTransport();
     JacksonFactory jsonFactory = new JacksonFactory();
-
+    
+    GoogleAuthorizationCodeFlow.Builder flow = new GoogleAuthorizationCodeFlow.Builder(httpTransport,
+                                                                                       jsonFactory,
+                                                                                       clientId,
+                                                                                       clientSecret,
+                                                                                       SCOPES);
     // (access_type=offline) if application needs to refresh access tokens
     // when the user is not present at the browser.
     // If the value "approval_prompt" is force, then the user sees a
     // consent page even if they have previously given consent to your
     // application for a given set of scopes.
     // was setApprovalPrompt("force")
-
-    GoogleAuthorizationCodeFlow.Builder flow = new GoogleAuthorizationCodeFlow.Builder(httpTransport,
-                                                                                       jsonFactory,
-                                                                                       clientId,
-                                                                                       clientSecret,
-                                                                                       SCOPES);
-
     flow.setAccessType(ACCESS_TYPE).setApprovalPrompt(APPOVAl_PROMT);
+    
     if (storedToken != null) {
       flow.setCredentialDataStore(storedToken.store);
       flow.setCredentialCreatedListener(storedToken);
