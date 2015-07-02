@@ -17,6 +17,10 @@
 	font: 9px Arial, sans-serif
 }
 
+.fileContent .content, .mediaContent .content #CloudFileViewer {
+	text-align: left;
+}
+
 /*************************** NodeType Icon ***********************/
 
 .application_xml16x16Icon {
