@@ -19,7 +19,6 @@ package org.exoplatform.clouddrive.gdrive;
 import com.google.api.client.http.InputStreamContent;
 import com.google.api.client.util.DateTime;
 import com.google.api.services.drive.model.About;
-import com.google.api.services.drive.model.Change;
 import com.google.api.services.drive.model.ChildReference;
 import com.google.api.services.drive.model.File;
 import com.google.api.services.drive.model.ParentReference;
@@ -269,7 +268,7 @@ public class JCRLocalGoogleDrive extends JCRLocalCloudDrive implements UserToken
 
     protected void syncNext() throws RepositoryException, CloudDriveException {
       while (changes.hasNext() && !Thread.currentThread().isInterrupted()) {
-        Change ch = changes.next();
+        com.google.api.services.drive.model.Change ch = changes.next();
         File gf = ch.getFile(); // gf will be null for deleted
 
         String[] parents;
@@ -619,7 +618,7 @@ public class JCRLocalGoogleDrive extends JCRLocalCloudDrive implements UserToken
      */
     @Override
     public CloudFile createFolder(Node folderNode, Calendar created) throws CloudDriveException,
-                                                                    RepositoryException {
+                                                                     RepositoryException {
       // Folder metadata.
       File gf = new File();
       gf.setTitle(getTitle(folderNode));
@@ -666,7 +665,7 @@ public class JCRLocalGoogleDrive extends JCRLocalCloudDrive implements UserToken
      */
     @Override
     public CloudFile updateFile(Node fileNode, Calendar modified) throws CloudDriveException,
-                                                                 RepositoryException {
+                                                                  RepositoryException {
       // Update existing file metadata and parent (location).
       File gf = api.file(getId(fileNode));
       gf.setTitle(getTitle(fileNode));
@@ -726,7 +725,7 @@ public class JCRLocalGoogleDrive extends JCRLocalCloudDrive implements UserToken
      */
     @Override
     public CloudFile updateFolder(Node folderNode, Calendar modified) throws CloudDriveException,
-                                                                     RepositoryException {
+                                                                      RepositoryException {
       // Update existing folder metadata and parent (location).
       File gf = api.file(getId(folderNode));
       gf.setTitle(getTitle(folderNode));
@@ -774,8 +773,10 @@ public class JCRLocalGoogleDrive extends JCRLocalCloudDrive implements UserToken
      * {@inheritDoc}
      */
     @Override
-    public CloudFile updateFileContent(Node fileNode, Calendar modified, String mimeType, InputStream content) throws CloudDriveException,
-                                                                                                              RepositoryException {
+    public CloudFile updateFileContent(Node fileNode,
+                                       Calendar modified,
+                                       String mimeType,
+                                       InputStream content) throws CloudDriveException, RepositoryException {
       // Update existing file content and related metadata.
       File gf = api.file(getId(fileNode));
       gf.setMimeType(mimeType);
@@ -834,7 +835,7 @@ public class JCRLocalGoogleDrive extends JCRLocalCloudDrive implements UserToken
      */
     @Override
     public CloudFile copyFile(Node srcFileNode, Node destFileNode) throws CloudDriveException,
-                                                                  RepositoryException {
+                                                                   RepositoryException {
       File gf = new File(); // new file
       gf.setId(getId(srcFileNode));
       gf.setTitle(getTitle(destFileNode));
@@ -892,7 +893,7 @@ public class JCRLocalGoogleDrive extends JCRLocalCloudDrive implements UserToken
      */
     @Override
     public CloudFile copyFolder(Node srcFolderNode, Node destFolderNode) throws CloudDriveException,
-                                                                        RepositoryException {
+                                                                         RepositoryException {
       File gf = new File(); // new file
       gf.setId(getId(srcFolderNode));
       gf.setTitle(getTitle(destFolderNode));
@@ -1096,8 +1097,8 @@ public class JCRLocalGoogleDrive extends JCRLocalCloudDrive implements UserToken
      */
     @Override
     public CloudFile restore(String id, String path) throws NotFoundException,
-                                                    CloudDriveException,
-                                                    RepositoryException {
+                                                     CloudDriveException,
+                                                     RepositoryException {
       throw new SyncNotSupportedException("Restore not supported");
     }
   }
@@ -1115,8 +1116,8 @@ public class JCRLocalGoogleDrive extends JCRLocalCloudDrive implements UserToken
                                 Node driveNode,
                                 SessionProviderService sessionProviders,
                                 NodeFinder finder,
-                                ExtendedMimeTypeResolver mimeTypes) throws CloudDriveException,
-      RepositoryException {
+                                ExtendedMimeTypeResolver mimeTypes)
+                                    throws CloudDriveException, RepositoryException {
     super(user, driveNode, sessionProviders, finder, mimeTypes);
     getUser().api().getToken().addListener(this);
   }
@@ -1137,9 +1138,8 @@ public class JCRLocalGoogleDrive extends JCRLocalCloudDrive implements UserToken
                                 Node driveNode,
                                 SessionProviderService sessionProviders,
                                 NodeFinder finder,
-                                ExtendedMimeTypeResolver mimeTypes) throws RepositoryException,
-      GoogleDriveException,
-      CloudDriveException {
+                                ExtendedMimeTypeResolver mimeTypes)
+                                    throws RepositoryException, GoogleDriveException, CloudDriveException {
     super(loadUser(apiBuilder, provider, driveNode), driveNode, sessionProviders, finder, mimeTypes);
     getUser().api().getToken().addListener(this);
   }
@@ -1155,9 +1155,11 @@ public class JCRLocalGoogleDrive extends JCRLocalCloudDrive implements UserToken
    * @throws GoogleDriveException
    * @throws CloudDriveException
    */
-  protected static GoogleUser loadUser(API apiBuilder, GoogleProvider provider, Node driveNode) throws RepositoryException,
-                                                                                               GoogleDriveException,
-                                                                                               CloudDriveException {
+  protected static GoogleUser loadUser(API apiBuilder,
+                                       GoogleProvider provider,
+                                       Node driveNode) throws RepositoryException,
+                                                       GoogleDriveException,
+                                                       CloudDriveException {
     String username = driveNode.getProperty("ecd:cloudUserName").getString();
     String email = driveNode.getProperty("ecd:userEmail").getString();
     String userId = driveNode.getProperty("ecd:cloudUserId").getString();
@@ -1283,8 +1285,8 @@ public class JCRLocalGoogleDrive extends JCRLocalCloudDrive implements UserToken
    * @throws DriveRemovedException
    */
   protected boolean checkAccessScope(CloudDriveAccessException cause) throws RepositoryException,
-                                                                     RefreshAccessException,
-                                                                     DriveRemovedException {
+                                                                      RefreshAccessException,
+                                                                      DriveRemovedException {
     if (cause != null && !isAccessScopeMatch()) {
       throw new RefreshAccessException("Renew access key to Google Drive", cause);
     }
@@ -1339,8 +1341,8 @@ public class JCRLocalGoogleDrive extends JCRLocalCloudDrive implements UserToken
    */
   @Override
   protected SyncCommand getSyncCommand() throws DriveRemovedException,
-                                        SyncNotSupportedException,
-                                        RepositoryException {
+                                         SyncNotSupportedException,
+                                         RepositoryException {
     return new Sync();
   }
 
@@ -1349,8 +1351,8 @@ public class JCRLocalGoogleDrive extends JCRLocalCloudDrive implements UserToken
    */
   @Override
   protected CloudFileAPI createFileAPI() throws DriveRemovedException,
-                                        SyncNotSupportedException,
-                                        RepositoryException {
+                                         SyncNotSupportedException,
+                                         RepositoryException {
     return new FileAPI();
   }
 
