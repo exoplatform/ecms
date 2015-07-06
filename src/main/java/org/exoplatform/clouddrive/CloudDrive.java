@@ -181,7 +181,8 @@ public abstract class CloudDrive {
           listener.onConnect(event);
         } catch (Throwable th) {
           // nothing should prevent the connect at this point
-          LOG.warn("Error firing onConnect listener on Cloud Drive '" + title() + "': " + th.getMessage(), th);
+          LOG.warn("Error firing onConnect listener on Cloud Drive '" + title() + "': " + th.getMessage(),
+                   th);
         }
       }
     }
@@ -286,9 +287,9 @@ public abstract class CloudDrive {
    *         <code>null</code> if such service not supported.
    */
   public abstract FilesState getState() throws DriveRemovedException,
-                                       RefreshAccessException,
-                                       CloudProviderException,
-                                       RepositoryException;
+                                        RefreshAccessException,
+                                        CloudProviderException,
+                                        RepositoryException;
 
   /**
    * Local user related to this Cloud Drive.
@@ -316,8 +317,8 @@ public abstract class CloudDrive {
    * @throws NotConnectedException
    */
   public abstract Calendar getConnectDate() throws DriveRemovedException,
-                                           NotConnectedException,
-                                           RepositoryException;
+                                            NotConnectedException,
+                                            RepositoryException;
 
   /**
    * Cloud Drive path in storage. It introduces storage depended identifier of the drive. <br/>
@@ -349,10 +350,10 @@ public abstract class CloudDrive {
    * @throws RepositoryException
    */
   public abstract CloudFile getFile(String path) throws DriveRemovedException,
-                                                NotCloudDriveException,
-                                                NotCloudFileException,
-                                                NotYetCloudFileException,
-                                                RepositoryException;
+                                                 NotCloudDriveException,
+                                                 NotCloudFileException,
+                                                 NotYetCloudFileException,
+                                                 RepositoryException;
 
   /**
    * Tells if cloud file with given path exists in this cloud drive. Note that local node existing in a cloud
@@ -367,8 +368,8 @@ public abstract class CloudDrive {
    * @throws RepositoryException if storage error
    */
   public abstract boolean hasFile(String path) throws DriveRemovedException,
-                                              NotCloudDriveException,
-                                              RepositoryException;
+                                               NotCloudDriveException,
+                                               RepositoryException;
 
   /**
    * List of files on local cloud drive.
@@ -379,8 +380,8 @@ public abstract class CloudDrive {
    * @throws RepositoryException
    */
   public abstract Collection<CloudFile> listFiles() throws DriveRemovedException,
-                                                   CloudDriveException,
-                                                   RepositoryException;
+                                                    CloudDriveException,
+                                                    RepositoryException;
 
   /**
    * List of local cloud files on given as parent folder.
@@ -394,9 +395,9 @@ public abstract class CloudDrive {
    */
   @Deprecated
   public abstract Collection<CloudFile> listFiles(CloudFile parent) throws DriveRemovedException,
-                                                                   NotCloudDriveException,
-                                                                   CloudDriveException,
-                                                                   RepositoryException;
+                                                                    NotCloudDriveException,
+                                                                    CloudDriveException,
+                                                                    RepositoryException;
 
   /**
    * Connects cloud drive to local JCR storage. This method fetches metadata of remote files from the cloud
@@ -434,9 +435,9 @@ public abstract class CloudDrive {
    * @throws RepositoryException
    */
   public abstract Command synchronize() throws SyncNotSupportedException,
-                                       DriveRemovedException,
-                                       CloudDriveException,
-                                       RepositoryException;
+                                        DriveRemovedException,
+                                        CloudDriveException,
+                                        RepositoryException;
 
   /**
    * Answers if drive is connected.
@@ -490,8 +491,9 @@ public abstract class CloudDrive {
    * @throws DriveRemovedException if drive removed
    * @throws RepositoryException
    */
-  protected abstract boolean isDrive(String workspace, String path, boolean includeFiles) throws DriveRemovedException,
-                                                                                         RepositoryException;
+  protected abstract boolean isDrive(String workspace, String path, boolean includeFiles)
+                                                                                          throws DriveRemovedException,
+                                                                                          RepositoryException;
 
   /**
    * Disconnects cloud drive from local storage. Clean (remove) metadata of remote files from the local.
@@ -532,7 +534,8 @@ public abstract class CloudDrive {
    * @param synchronizers collection of {@link CloudFileSynchronizer}, it will be used for file
    *          synchronization.
    */
-  protected abstract void configure(CloudDriveEnvironment env, Collection<CloudFileSynchronizer> synchronizers);
+  protected abstract void configure(CloudDriveEnvironment env,
+                                    Collection<CloudFileSynchronizer> synchronizers);
 
   /**
    * Initialize future cloud file removal. This operation will complete on parent node save. This method
@@ -544,8 +547,8 @@ public abstract class CloudDrive {
    * @throws RepositoryException
    */
   protected abstract void initRemove(Node file) throws SyncNotSupportedException,
-                                               CloudDriveException,
-                                               RepositoryException;
+                                                CloudDriveException,
+                                                RepositoryException;
 
   /**
    * Initialize future cloud file copying.
@@ -557,6 +560,6 @@ public abstract class CloudDrive {
    * @throws RepositoryException
    */
   protected abstract void initCopy(Node srcNode, Node destNode) throws SyncNotSupportedException,
-                                                               CloudDriveException,
-                                                               RepositoryException;
+                                                                CloudDriveException,
+                                                                RepositoryException;
 }

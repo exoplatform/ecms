@@ -37,20 +37,32 @@ import javax.jcr.RepositoryException;
 public interface CloudDriveStorage {
 
   /**
-   * Tell if given node is a local node in this cloud drive, thus it is not a cloud file, it is not ignored
-   * local node and it is not currently updating by the drive (not uploading to remote site).
+   * Change to Cloud Drive storage.
+   */
+  interface Change<R> {
+    /**
+     * Apply this change in the Cloud Drive storage.
+     * 
+     * @return resulting object or <code>null</code>
+     * @throws RepositoryException
+     * @throws NotCloudDriveException
+     * @throws DriveRemovedException
+     * @throws CloudDriveException
+     */
+    R apply() throws RepositoryException, NotCloudDriveException, DriveRemovedException, CloudDriveException;
+  }
+
+  /**
+   * Tell if given node is a local node in this cloud drive, thus it is not a cloud drive, not a cloud file,
+   * it is not already ignored local node and it is not currently updating node by the drive (not uploading to
+   * remote site).
    * 
    * @param node {@link Node}
    * @return boolean <code>true</code> if node is local only in this drive, <code>false</code> otherwise
    * @throws RepositoryException
-   * @throws NotCloudDriveException if node doesn't belong to cloud drive
-   * @throws DriveRemovedException if drive removed
    * @throws NotCloudFileException if node is a root folder of the drive
    */
-  public boolean isLocal(Node node) throws RepositoryException,
-                                   NotCloudDriveException,
-                                   NotCloudFileException,
-                                   DriveRemovedException;
+  public boolean isLocal(Node node) throws RepositoryException, DriveRemovedException;
 
   /**
    * Tell if given node is ignored in this cloud drive.
@@ -63,9 +75,9 @@ public interface CloudDriveStorage {
    * @throws NotCloudFileException if given node is a root folder of the drive
    */
   boolean isIgnored(Node node) throws RepositoryException,
-                              NotCloudDriveException,
-                              NotCloudFileException,
-                              DriveRemovedException;
+                               NotCloudDriveException,
+                               NotCloudFileException,
+                               DriveRemovedException;
 
   /**
    * Mark given file node as ignored. This operation doesn't remove local or remote file. This operation
@@ -80,9 +92,9 @@ public interface CloudDriveStorage {
    *           added or ignored node) or node is a root folder of the drive
    */
   boolean ignore(Node node) throws RepositoryException,
-                           NotCloudDriveException,
-                           NotCloudFileException,
-                           DriveRemovedException;
+                            NotCloudDriveException,
+                            NotCloudFileException,
+                            DriveRemovedException;
 
   /**
    * Remove ignorance mark if given node marked as ignored. This operation doesn't remove local or
@@ -98,9 +110,9 @@ public interface CloudDriveStorage {
    * @throws DriveRemovedException if drive removed
    */
   boolean unignore(Node node) throws RepositoryException,
-                             NotCloudDriveException,
-                             DriveRemovedException,
-                             NotCloudFileException;
+                              NotCloudDriveException,
+                              DriveRemovedException,
+                              NotCloudFileException;
 
   /**
    * Initiate cloud file creation from this node. If node already represents a cloud file nothing will happen.
@@ -121,10 +133,10 @@ public interface CloudDriveStorage {
    * @see #isIgnored(Node)
    */
   boolean create(Node node) throws RepositoryException,
-                           NotCloudDriveException,
-                           DriveRemovedException,
-                           NotCloudFileException,
-                           CloudDriveException;
+                            NotCloudDriveException,
+                            DriveRemovedException,
+                            NotCloudFileException,
+                            CloudDriveException;
 
   /**
    * Currently processing {@link Command} in the drive. It can be connect or synchronization operation or
@@ -146,4 +158,22 @@ public interface CloudDriveStorage {
    * @throws ExecutionException if some command failed
    */
   void await() throws InterruptedException, ExecutionException;
+
+  /**
+   * Apply local change in this drive storage. Local change it is content changes that <strong>will not
+   * be</strong> synchronized to the remote drive. Use this method with care as creation of only local JCR
+   * nodes for
+   * example, may lead to conflicts during the synchronization.
+   * 
+   * @param change {@link Change} instance
+   * @return resulting object or <code>null</code>
+   * @throws NotCloudDriveException
+   * @throws DriveRemovedException
+   * @throws RepositoryException
+   * @throws CloudDriveException
+   */
+  <R> R localChange(Change<R> change) throws NotCloudDriveException,
+                                      DriveRemovedException,
+                                      RepositoryException,
+                                      CloudDriveException;
 }

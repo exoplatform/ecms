@@ -42,6 +42,7 @@ import java.util.List;
 import java.util.concurrent.ExecutionException;
 
 import javax.annotation.security.RolesAllowed;
+import javax.jcr.AccessDeniedException;
 import javax.jcr.LoginException;
 import javax.jcr.Node;
 import javax.jcr.NodeIterator;
@@ -195,6 +196,13 @@ public class DriveService implements ResourceContainer {
               LOG.error("Error synchrinizing the drive. " + err.getMessage(), err);
               return Response.status(Status.INTERNAL_SERVER_ERROR)
                              .entity(ErrorEntiry.message("Error synchrinizing the drive. Try again later."))
+                             .build();
+            } else if (err instanceof AccessDeniedException) {
+              if (LOG.isDebugEnabled()) {
+                LOG.debug("Not sufficient permissions. " + err.getMessage());
+              }
+              return Response.status(Status.FORBIDDEN)
+                             .entity(ErrorEntiry.acessDenied("Access denied. Synchronization canceled."))
                              .build();
             } else if (err instanceof RepositoryException) {
               LOG.error("Storage error. " + err.getMessage(), err);
@@ -383,7 +391,7 @@ public class DriveService implements ResourceContainer {
             SessionProvider sp = sessionProviders.getSessionProvider(null);
             Session userSession = sp.getSession(workspace, jcrService.getCurrentRepository());
             Node parentNode = (Node) userSession.getItem(parentPath);
-            
+
             List<CloudFile> files = new ArrayList<CloudFile>();
             boolean hasAccepted = false;
             for (NodeIterator childs = parentNode.getNodes(); childs.hasNext();) {

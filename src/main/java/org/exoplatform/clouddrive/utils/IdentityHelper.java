@@ -18,6 +18,7 @@
  */
 package org.exoplatform.clouddrive.utils;
 
+import org.exoplatform.services.jcr.access.AccessControlList;
 import org.exoplatform.services.security.IdentityConstants;
 
 import javax.jcr.Node;
@@ -86,6 +87,19 @@ public class IdentityHelper {
       }
     }
     return node;
+  }
+  
+  public static boolean hasPermission(AccessControlList acl, String identity, String type) {
+    if (acl.hasPermissions()) {
+      for (String idp : acl.getPermissions(identity)) {
+        if (idp.equals(type)) {
+          return true;
+        }
+      }
+    } else {
+      return true;
+    }
+    return false;
   }
 
 }

@@ -65,12 +65,10 @@ public interface CloudDriveService {
 
   /**
    * Find {@link CloudDrive} instance connected to given {@link Node}. If drive not found, if it exists but
-   * not connected to this node, or connected under another user - the {@code null} will be returned. The
-   * {@code null} also will be returned if no {@link ConversationState} set in caller thread or its identity
-   * differs from the user id of given node's session.
+   * not connected to this node, or connected under another user - the {@code null} will be returned.
    * 
    * @param node {@link Node}, user node
-   * @return {@link CloudDrive} or {@code null} if given Node isn't connected to cloud user or .
+   * @return {@link CloudDrive} or {@code null} if given Node isn't connected to cloud user.
    * @throws RepositoryException if storage exception happened
    */
   CloudDrive findDrive(Node node) throws RepositoryException;
@@ -78,8 +76,7 @@ public interface CloudDriveService {
   /**
    * Find {@link CloudDrive} instance connected to {@link Node} pointed by given workspace and path. If drive
    * not found, if it exists but not connected to this node, or connected under another user - the
-   * {@code null} will be returned. The {@code null} also will be returned if no {@link ConversationState} set
-   * in caller thread.
+   * {@code null} will be returned.
    * 
    * @param workspace {@link String} node workspace
    * @param path {@link String} node path

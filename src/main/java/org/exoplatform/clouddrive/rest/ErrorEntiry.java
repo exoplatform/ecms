@@ -41,7 +41,16 @@ public class ErrorEntiry {
   public static final String NOT_CLOUD_FILE     = "not-cloud-file";
 
   public static final String NOT_YET_CLOUD_FILE = "not-yet_cloud-file";
+  
+  public static final String ACCESS_DENIED = "access-denied";
 
+  public static ErrorEntiry acessDenied(String message) {
+    ErrorEntiry err = new ErrorEntiry();
+    err.error = ACCESS_DENIED;
+    err.message = message;
+    return err;
+  }
+  
   public static ErrorEntiry error(String errorCode) {
     ErrorEntiry err = new ErrorEntiry();
     err.error = errorCode;
