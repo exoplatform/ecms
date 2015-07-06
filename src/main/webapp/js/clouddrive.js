@@ -4,6 +4,7 @@
 (function($, utils, tasks, uiRightClickPopupMenu, uiListView, uiSimpleView, uiFileView) {
 
 	// Error constants
+	var ACCESS_DENIED = "access-denied";
 	var NOT_CLOUD_DRIVE = "not-cloud-drive";
 	var DRIVE_REMOVED = "drive-removed";
 	var NODE_NOT_FOUND = "node-not-found";
@@ -609,7 +610,7 @@
 							});
 							syncProcess.fail(function(e) {
 								delete autoSyncs[syncName]; // cancel and cleanup
-								utils.log("ERROR: " + e + ". Auto-sync canceled for " + syncName + ".");
+								utils.log("ERROR: " + (e.message ? e.message : e)  + ". Auto-sync canceled for " + syncName + ".");
 							});
 						}, syncTimeout);
 					}
@@ -773,8 +774,10 @@
 					});
 					sync.fail(function(response, status, err) {
 						utils.log("ERROR: synchronization error: " + err + ", " + status + ", " + JSON.stringify(response));
-						if (status == 403 && response.id) {
-							updateProvider = response;
+						if (status == 403) {
+							if (response.id) {
+								updateProvider = response;
+							}
 						}
 						process.reject(response, status);
 					});
@@ -1873,6 +1876,8 @@
 							cloudDrive.synchronize(this);
 						});
 					});
+				} else if (status == 403 && response.error === ACCESS_DENIED) {
+					// ignore silently
 				} else if (status == 404) {
 					if (response.error === NODE_NOT_FOUND) {
 						// context file not found, warn user

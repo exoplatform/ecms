@@ -21,8 +21,8 @@ Software Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA
 -->
 
 <configuration xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-xsi:schemaLocation="http://www.exoplatform.org/xml/ns/kernel_1_2.xsd http://www.exoplatform.org/xml/ns/kernel_1_2.xsd"
-xmlns="http://www.exoplatform.org/xml/ns/kernel_1_2.xsd">
+  xsi:schemaLocation="http://www.exoplatform.org/xml/ns/kernel_1_2.xsd http://www.exoplatform.org/xml/ns/kernel_1_2.xsd"
+  xmlns="http://www.exoplatform.org/xml/ns/kernel_1_2.xsd">
 
   <component>
     <key>org.exoplatform.clouddrive.ecms.CloudDriveUIService</key>
@@ -149,6 +149,41 @@ xmlns="http://www.exoplatform.org/xml/ns/kernel_1_2.xsd">
             </field>
           </object>
         </object-param -->
+        <!-- Override ECMS actions that require special handling for Cloud Drive files: ManagePublications, ManageVersions -->
+        <object-param>
+          <name>ManagePublications</name>
+          <object type="org.exoplatform.webui.ext.UIExtension">
+            <field name="type">
+              <string>org.exoplatform.ecm.dms.UIActionBar</string>
+            </field>
+            <field name="name">
+              <string>ManagePublications</string>
+            </field>
+            <field name="rank">
+              <int>65</int>
+            </field>
+            <field name="component">
+              <string>org.exoplatform.clouddrive.ecms.clipboard.ManagePublicationsActionComponent</string>
+            </field>
+          </object>
+        </object-param>
+        <object-param>
+          <name>ManageVersions</name>
+          <object type="org.exoplatform.webui.ext.UIExtension">
+            <field name="type">
+              <string>org.exoplatform.ecm.dms.UIActionBar</string>
+            </field>
+            <field name="name">
+              <string>ManageVersions</string>
+            </field>
+            <field name="rank">
+              <int>65</int>
+            </field>
+            <field name="component">
+              <string>org.exoplatform.clouddrive.ecms.clipboard.ManageVersionsActionComponent</string>
+            </field>
+          </object>
+        </object-param>
         <object-param>
           <name>OpenCloudFile</name>
           <object type="org.exoplatform.webui.ext.UIExtension">
@@ -287,7 +322,7 @@ xmlns="http://www.exoplatform.org/xml/ns/kernel_1_2.xsd">
               <string>JCRMoveAction</string>
             </field>
             <field name="component">
-              <string>org.exoplatform.clouddrive.ecms.symlink.CloudDriveMoveNodeManageComponent</string>
+              <string>org.exoplatform.clouddrive.ecms.clipboard.CloudDriveMoveNodeManageComponent</string>
             </field>
           </object>
         </object-param>
@@ -324,7 +359,7 @@ xmlns="http://www.exoplatform.org/xml/ns/kernel_1_2.xsd">
               <int>150</int>
             </field>
             <field name="component">
-              <!-- this component sets a new config of UIClipboard in UISideBar to CloudDriveClipboard to -->
+              <!-- this component sets a new config of UIClipboard in UISideBar to UICloudDriveClipboard to -->
               <string>org.exoplatform.clouddrive.ecms.clipboard.CloudDriveClipboardActionComponent</string>
             </field>
           </object>
