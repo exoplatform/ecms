@@ -21,6 +21,7 @@ package org.exoplatform.clouddrive.ecms.filters;
 import org.exoplatform.clouddrive.ecms.CloudDriveContext;
 import org.exoplatform.ecm.webui.component.explorer.UIJCRExplorer;
 import org.exoplatform.portal.webui.util.Util;
+import org.exoplatform.services.cms.impl.Utils;
 import org.exoplatform.services.jcr.ext.common.SessionProvider;
 import org.exoplatform.services.jcr.ext.hierarchy.NodeHierarchyCreator;
 import org.exoplatform.services.log.ExoLogger;
@@ -49,35 +50,41 @@ public class PersonalDocumentsFilter implements UIExtensionFilter {
     if (context == null) {
       return true;
     }
-    
+
+    Node contextNode = (Node) context.get(Node.class.getName());
+    if (contextNode == null) {
+      return false;
+    }
+    String contextPath = contextNode.getPath();
+
     // only show in Personal Doc's root!
     String userId = Util.getPortalRequestContext().getRemoteUser();
     UIJCRExplorer uiExplorer = (UIJCRExplorer) context.get(UIJCRExplorer.class.getName());
-
     SessionProvider sessionProvider = WCMCoreUtils.getUserSessionProvider();
     NodeHierarchyCreator nodeHierarchyCreator = WCMCoreUtils.getService(NodeHierarchyCreator.class);
+
     Node userNode = nodeHierarchyCreator.getUserNode(sessionProvider, userId);
 
-    String driveRootPath = org.exoplatform.services.cms.impl.Utils.getPersonalDrivePath(uiExplorer.getDriveData()
-                                                                                                  .getHomePath(),
-                                                                                        userId);
-    Node currentNode = (Node) context.get(Node.class.getName());
-    
-    boolean isRoot = currentNode.getPath().equals(driveRootPath);
-    // additionally we initialize all already connected drives in the context, they can be used for drive
-    // folder icons rendering or other similar purpose
-    if (isRoot) {
-      CloudDriveContext.initConnected(WebuiRequestContext.getCurrentInstance(), currentNode);
-    } else if (currentNode.getPath().startsWith(driveRootPath)) {
-      Item personalDocs = userNode.getSession().getItem(driveRootPath);
-      if (personalDocs.isNode()) {
-        CloudDriveContext.initConnected(WebuiRequestContext.getCurrentInstance(), (Node) personalDocs);
-      } else {
-        // this should not happen
-        LOG.warn("Personal Documents not a Node: " + personalDocs.getPath());
+    if (contextPath.startsWith(userNode.getPath())) {
+      String driveRootPath = Utils.getPersonalDrivePath(uiExplorer.getDriveData().getHomePath(), userId);
+      boolean isRoot = contextNode.getPath().equals(driveRootPath);
+      // additionally we initialize all already connected drives in the context, they can be used for drive
+      // folder icons rendering or other similar purpose
+      if (isRoot) {
+        CloudDriveContext.initConnected(WebuiRequestContext.getCurrentInstance(), contextNode);
+      } else if (contextNode.getPath().startsWith(driveRootPath)) {
+        Item personalDocs = userNode.getSession().getItem(driveRootPath);
+        if (personalDocs.isNode()) {
+          CloudDriveContext.initConnected(WebuiRequestContext.getCurrentInstance(), (Node) personalDocs);
+        } else {
+          // this should not happen
+          LOG.warn("Personal Documents not a Node: " + personalDocs.getPath());
+        }
       }
+      return isRoot;
+    } else {
+      return false;
     }
-    return isRoot && driveRootPath.startsWith(userNode.getPath());
   }
 
   /**

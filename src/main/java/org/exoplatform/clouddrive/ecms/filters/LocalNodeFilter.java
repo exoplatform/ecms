@@ -22,8 +22,6 @@ import org.exoplatform.clouddrive.CloudDrive;
 import org.exoplatform.clouddrive.CloudDriveService;
 import org.exoplatform.clouddrive.CloudDriveStorage;
 import org.exoplatform.clouddrive.DriveRemovedException;
-import org.exoplatform.clouddrive.NotCloudDriveException;
-import org.exoplatform.clouddrive.NotCloudFileException;
 import org.exoplatform.services.log.ExoLogger;
 import org.exoplatform.services.log.Log;
 import org.exoplatform.services.wcm.utils.WCMCoreUtils;
@@ -34,6 +32,9 @@ import javax.jcr.RepositoryException;
 
 /**
  * Filter for nodes are not cloud files but existing in cloud drive folder.
+ * 
+ * @author <a href="mailto:pnedonosko@exoplatform.com">Peter Nedonosko</a>
+ * @version $Id: LocalNodeFilter.java 00000 May 25, 2014 pnedonosko $
  */
 public class LocalNodeFilter extends AbstractCloudDriveNodeFilter {
 
@@ -55,10 +56,10 @@ public class LocalNodeFilter extends AbstractCloudDriveNodeFilter {
           }
         } catch (DriveRemovedException e) {
           // doesn't accept removed drive
-        } catch (NotCloudDriveException e) {
-          // doesn't accept removed drive
-        } catch (NotCloudFileException e) {
-          // doesn't accept removed drive
+          if (LOG.isDebugEnabled()) {
+            LOG.debug(">> LocalNodeFilter.accept(" + node.getPath() + ") drive removed " + drive + ": "
+                + e.getMessage());
+          }
         }
       }
     }

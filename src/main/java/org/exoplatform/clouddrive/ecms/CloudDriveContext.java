@@ -206,7 +206,7 @@ public class CloudDriveContext {
           }
         }
       }
-      ;
+      
       if (count >= 1) {
         map.deleteCharAt(map.length() - 1); // remove last semicolon
         map.append('}');

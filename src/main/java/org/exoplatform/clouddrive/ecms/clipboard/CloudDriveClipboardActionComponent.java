@@ -49,7 +49,7 @@ public class CloudDriveClipboardActionComponent extends ClipboardActionComponent
       UISideBar uiSideBar = event.getSource().getAncestorOfType(UISideBar.class);
       UIClipboard clipboard = uiSideBar.getChild(UIClipboard.class);
       // patch clipboard with Cloud Drive config
-      clipboard.setComponentConfig(CloudDriveClipboard.class, null);
+      clipboard.setComponentConfig(UICloudDriveClipboard.class, null);
 
       // let original code to continue
       super.processEvent(event);

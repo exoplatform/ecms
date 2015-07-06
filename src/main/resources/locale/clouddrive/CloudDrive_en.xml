@@ -20,49 +20,28 @@
   <ECMContextMenu>
     <event>
       <OpenCloudFile>Open on</OpenCloudFile>
-    </event>
-    <event>
       <SyncingFile>Synchronizing file...</SyncingFile>
-    </event>
-    <event>
       <PushCloudFile>Push to</PushCloudFile>
-    </event>
-    <event>
       <RefreshCloudDrive>Sync with </RefreshCloudDrive>
     </event>
   </ECMContextMenu>
   <CloudFileViewer>
     <event>
       <OpenFileOn>Open $fileUrl on $serviceName</OpenFileOn>
-    </event>
-    <event>
       <OpenOn>Open on</OpenOn>
-    </event>
-    <event>
       <EditFile>Edit</EditFile>
-    </event>
-    <event>
       <ViewFile>View</ViewFile>
     </event>
   </CloudFileViewer>
   <CloudFile>
     <msg>
       <MoveToAnotherDriveNotSupported>Cannot move file to another cloud drive</MoveToAnotherDriveNotSupported>
-    </msg>
-    <msg>
       <MoveToOutsideDriveNotSupported>Cannot move file to outside its cloud drive</MoveToOutsideDriveNotSupported>
-    </msg>
-    <msg>
       <MoveBetweenWorkspacesNotSupported>Cannot move cloud file to different workspace</MoveBetweenWorkspacesNotSupported>
-    </msg>
-    <msg>
       <CloudDriveCopyMoveNotSupported>Cannot copy or move cloud drive folder</CloudDriveCopyMoveNotSupported>
-    </msg>
-    <msg>
       <LinkCreated>Link{0} created</LinkCreated>
-    </msg>
-    <msg>
       <FileLinksCreated>File{0} linked in {1}</FileLinksCreated>
+      <FileLinksCreatedInSpace>File{0} linked in {1} of {2} space</FileLinksCreatedInSpace>
     </msg>
   </CloudFile>
   <ConnectCloudDriveForm>

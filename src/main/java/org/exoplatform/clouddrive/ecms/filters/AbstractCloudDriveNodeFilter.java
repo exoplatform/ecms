@@ -34,6 +34,9 @@ import javax.jcr.RepositoryException;
 
 /**
  * Filter for cloud files.
+ * 
+ * @author <a href="mailto:pnedonosko@exoplatform.com">Peter Nedonosko</a>
+ * @version $Id: CloudDriveFiler.java 00000 Nov 5, 2012 pnedonosko $
  */
 public abstract class AbstractCloudDriveNodeFilter implements UIExtensionFilter {
 

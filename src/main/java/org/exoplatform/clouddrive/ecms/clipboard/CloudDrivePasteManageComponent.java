@@ -18,17 +18,18 @@
  */
 package org.exoplatform.clouddrive.ecms.clipboard;
 
-import org.exoplatform.clouddrive.ecms.symlink.CloudFileSymlink;
-import org.exoplatform.clouddrive.ecms.symlink.CloudFileSymlinkException;
 import org.exoplatform.ecm.webui.component.explorer.UIJCRExplorer;
-import org.exoplatform.ecm.webui.component.explorer.UIWorkingArea;
 import org.exoplatform.ecm.webui.component.explorer.rightclick.manager.PasteManageComponent;
 import org.exoplatform.services.cms.clipboard.ClipboardService;
 import org.exoplatform.services.cms.clipboard.jcr.model.ClipboardCommand;
+import org.exoplatform.services.cms.drives.DriveData;
+import org.exoplatform.services.jcr.ext.hierarchy.NodeHierarchyCreator;
 import org.exoplatform.services.log.ExoLogger;
 import org.exoplatform.services.log.Log;
 import org.exoplatform.services.security.ConversationState;
 import org.exoplatform.services.wcm.utils.WCMCoreUtils;
+import org.exoplatform.social.core.space.model.Space;
+import org.exoplatform.social.core.space.spi.SpaceService;
 import org.exoplatform.webui.config.annotation.ComponentConfig;
 import org.exoplatform.webui.config.annotation.EventConfig;
 import org.exoplatform.webui.core.UIApplication;
@@ -38,7 +39,6 @@ import java.util.Deque;
 import java.util.Iterator;
 import java.util.LinkedHashSet;
 import java.util.LinkedList;
-import java.util.List;
 import java.util.Set;
 
 /**
@@ -53,23 +53,40 @@ import java.util.Set;
  * @version $Id: CloudDrivePasteManageComponent.java 00000 May 12, 2014 pnedonosko $
  * 
  */
-@ComponentConfig(
-                 events = { @EventConfig(listeners = CloudDrivePasteManageComponent.PasteActionListener.class) })
+@ComponentConfig(events = {
+    @EventConfig(listeners = CloudDrivePasteManageComponent.PasteActionListener.class) })
 public class CloudDrivePasteManageComponent extends PasteManageComponent {
 
-  protected static final Log LOG = ExoLogger.getLogger(CloudDrivePasteManageComponent.class);
+  protected static final Log    LOG         = ExoLogger.getLogger(CloudDrivePasteManageComponent.class);
+
+  protected static final String GROUPS_PATH = "groupsPath";
 
   public static class PasteActionListener extends PasteManageComponent.PasteActionListener {
     public void processEvent(Event<PasteManageComponent> event) throws Exception {
       UIJCRExplorer uiExplorer = event.getSource().getAncestorOfType(UIJCRExplorer.class);
 
-      CloudFileSymlink symlinks = new CloudFileSymlink(uiExplorer);
+      CloudDriveClipboard symlinks = new CloudDriveClipboard(uiExplorer);
       try {
         String destParam = event.getRequestContext().getRequestParameter(OBJECTID);
         if (destParam == null) {
           symlinks.setDestination(uiExplorer.getCurrentNode());
         } else {
           symlinks.setDestination(destParam);
+        }
+
+        DriveData drive = uiExplorer.getDriveData();
+        if (drive != null) {
+          NodeHierarchyCreator hierarchyCreator = WCMCoreUtils.getService(NodeHierarchyCreator.class);
+          String groupsPath = hierarchyCreator.getJcrPath(GROUPS_PATH);
+          if (drive.getHomePath().startsWith(groupsPath)) {
+            // it's space documents
+            String[] drivePermissions = drive.getAllPermissions();
+            symlinks.setPermissions(drivePermissions);
+
+            SpaceService spaces = WCMCoreUtils.getService(SpaceService.class);
+            String groupId = drive.getName().replace('.', '/');
+            symlinks.setDestinationSpace(spaces.getSpaceByGroupId(groupId));
+          }
         }
 
         String userId = ConversationState.getCurrent().getIdentity().getUserId();
@@ -87,7 +104,7 @@ public class CloudDrivePasteManageComponent extends PasteManageComponent {
               symlinks.move();
             }
             if (symlinks.create()) {
-              symlinks.getDestinationNode().getSession().save();
+              symlinks.save();
               // file was successfully linked
               if (isCut) {
                 // TODO should not happen until we will support cut-paste between drives
@@ -126,7 +143,7 @@ public class CloudDrivePasteManageComponent extends PasteManageComponent {
                 symlinks.move();
               }
               if (symlinks.create()) {
-                symlinks.getDestinationNode().getSession().save();
+                symlinks.save();
                 // files was successfully linked
                 if (isCut) {
                   // TODO should not happen until we will support cut-paste between drives
@@ -141,7 +158,7 @@ public class CloudDrivePasteManageComponent extends PasteManageComponent {
               }
             } else {
               // something goes wrong and we will let default code to work
-              symlinks.getDestinationNode().getSession().refresh(false);
+              symlinks.rollback();
               LOG.warn("Links cannot be created for all cloud files. Destination "
                   + symlinks.getDestonationPath() + "."
                   + (current != null ? " Last file " + current.getSrcPath() + "." : "")
@@ -154,7 +171,7 @@ public class CloudDrivePasteManageComponent extends PasteManageComponent {
         LOG.warn(e.getMessage());
         UIApplication uiApp = uiExplorer.getAncestorOfType(UIApplication.class);
         uiApp.addMessage(e.getUIMessage());
-        symlinks.getDestinationNode().getSession().refresh(false);
+        symlinks.rollback();
         // complete the event here
         uiExplorer.updateAjax(event);
         return;

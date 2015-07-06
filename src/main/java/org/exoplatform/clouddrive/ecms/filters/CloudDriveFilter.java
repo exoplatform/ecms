@@ -62,7 +62,11 @@ public class CloudDriveFilter extends AbstractCloudDriveNodeFilter {
           && drive.getPath().equals(node.getPath());
     } catch (DriveRemovedException e) {
       // doesn't accept removed
-      return false;
+      if (LOG.isDebugEnabled()) {
+        LOG.debug(">> CloudDriveFilter.accept(" + node.getPath() + ") drive removed " + drive + ": "
+            + e.getMessage());
+      }
     }
+    return false;
   }
 }

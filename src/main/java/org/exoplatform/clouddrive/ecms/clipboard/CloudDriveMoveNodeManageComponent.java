@@ -16,7 +16,7 @@
  * Software Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA
  * 02110-1301 USA, or see the FSF site: http://www.fsf.org.
  */
-package org.exoplatform.clouddrive.ecms.symlink;
+package org.exoplatform.clouddrive.ecms.clipboard;
 
 import org.exoplatform.ecm.webui.component.explorer.UIJCRExplorer;
 import org.exoplatform.ecm.webui.component.explorer.rightclick.manager.MoveNodeManageComponent;
@@ -51,7 +51,7 @@ public class CloudDriveMoveNodeManageComponent extends MoveNodeManageComponent {
       String destInfo = event.getRequestContext().getRequestParameter("destInfo");
 
       UIJCRExplorer uiExplorer = event.getSource().getAncestorOfType(UIJCRExplorer.class);
-      CloudFileSymlink symlinks = new CloudFileSymlink(uiExplorer);
+      CloudDriveClipboard symlinks = new CloudDriveClipboard(uiExplorer);
       try {
         symlinks.setDestination(destInfo);
         if (srcPath.indexOf(";") > -1) {
@@ -65,7 +65,7 @@ public class CloudDriveMoveNodeManageComponent extends MoveNodeManageComponent {
           symlinks.addSource(srcPath);
         }
         if (symlinks.move().create()) {
-          symlinks.getDestinationNode().getSession().save();
+          symlinks.save();
           uiExplorer.updateAjax(event);
           return;
         } // else default logic
@@ -74,7 +74,7 @@ public class CloudDriveMoveNodeManageComponent extends MoveNodeManageComponent {
         LOG.warn(e.getMessage());
         UIApplication uiApp = uiExplorer.getAncestorOfType(UIApplication.class);
         uiApp.addMessage(e.getUIMessage());
-        symlinks.getDestinationNode().getSession().refresh(false);
+        symlinks.rollback();
         uiExplorer.updateAjax(event);
         return;
       } catch (Exception e) {

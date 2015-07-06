@@ -86,14 +86,6 @@ public class SyncingCloudFileFilter extends AbstractCloudDriveNodeFilter {
           } catch (NotCloudDriveException e) {
             // doesn't accept
           }
-          // TODO cleanup
-          // catch (RefreshAccessException e) {
-          // // doesn't accept
-          // LOG.warn("Error filtering syncing cloud file: " + e.getMessage());
-          // } catch (CloudProviderException e) {
-          // // doesn't accept
-          // LOG.warn("Error filtering syncing cloud file: " + e.getMessage(), e);
-          // }
         }
       }
     }

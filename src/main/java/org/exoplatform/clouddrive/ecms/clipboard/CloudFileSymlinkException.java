@@ -16,7 +16,39 @@
  * Software Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA
  * 02110-1301 USA, or see the FSF site: http://www.fsf.org.
  */
+package org.exoplatform.clouddrive.ecms.clipboard;
+
+import org.exoplatform.web.application.ApplicationMessage;
+
 /**
- * Context menu operations support for Cloud Drive.
+ * Created by The eXo Platform SAS
+ * 
+ * @author <a href="mailto:pnedonosko@exoplatform.com">Peter Nedonosko</a>
+ * @version $Id: CloudFileSymlinkException.java 00000 May 19, 2014 pnedonosko $
+ * 
  */
-package org.exoplatform.clouddrive.ecms.symlink;
+public class CloudFileSymlinkException extends Exception {
+
+  /**
+   * 
+   */
+  private static final long serialVersionUID = 24966321739068360L;
+  
+  protected final ApplicationMessage uiMessage;
+
+  /**
+   * 
+   */
+  public CloudFileSymlinkException(String message, ApplicationMessage uiMessage) {
+    super(message);
+    this.uiMessage = uiMessage;
+  }
+
+  /**
+   * @return the uiMessage
+   */
+  public ApplicationMessage getUIMessage() {
+    return uiMessage;
+  }
+
+}

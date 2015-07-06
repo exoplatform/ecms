@@ -67,6 +67,14 @@
       <scope>provided</scope>
       <type>jar</type>
     </dependency>
+    
+    <!-- Social for sharing in spaces -->
+    <dependency>
+      <groupId>org.exoplatform.social</groupId>
+      <artifactId>social-component-core</artifactId>
+      <scope>provided</scope>
+      <type>jar</type>
+    </dependency>
   </dependencies>
 
   <build>
