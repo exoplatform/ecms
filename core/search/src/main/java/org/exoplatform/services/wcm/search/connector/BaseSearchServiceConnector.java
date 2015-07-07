@@ -22,6 +22,7 @@ import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Collection;
 import java.util.List;
+import java.util.Locale;
 
 import javax.jcr.Node;
 import javax.jcr.RepositoryException;
@@ -58,6 +59,7 @@ public abstract class BaseSearchServiceConnector extends SearchServiceConnector 
   
   protected SiteSearchService siteSearch_;
   protected ManageDriveService driveService_;
+  protected String language;
   
   private static final Log LOG = ExoLogger.getLogger(BaseSearchServiceConnector.class.getName());
   
@@ -82,6 +84,7 @@ public abstract class BaseSearchServiceConnector extends SearchServiceConnector 
    * @param limit Maximum size of the result set
    * @param sort The field to sort the result set
    * @param order Sort order (ASC, DESC)
+   * @param language The current language of the portal.
    * @return A collection of SearchResult
    */
   @Override
@@ -91,8 +94,10 @@ public abstract class BaseSearchServiceConnector extends SearchServiceConnector 
                                          int offset,
                                          int limit,
                                          String sort,
-                                         String order) {
+                                         String order,
+                                         String language) {
     Collection<SearchResult> ret = new ArrayList<SearchResult>();
+    setLanguage(language);
     //prepare input parameters for search
     if (query != null) {
       query = query.trim();
@@ -265,7 +270,7 @@ public abstract class BaseSearchServiceConnector extends SearchServiceConnector 
    * @return the String representation
    */
   protected String formatDate(Calendar date) {
-    DateFormat format = SimpleDateFormat.getDateTimeInstance(SimpleDateFormat.FULL, SimpleDateFormat.SHORT);
+    DateFormat format = SimpleDateFormat.getDateTimeInstance(SimpleDateFormat.FULL, SimpleDateFormat.SHORT,Locale.forLanguageTag(getLanguage()));
     return " - " + format.format(date.getTime());
   }
   
@@ -346,5 +351,12 @@ public abstract class BaseSearchServiceConnector extends SearchServiceConnector 
    * @throws Exception
    */
   protected abstract String getDetails(ResultNode node, SearchContext context) throws Exception;
-  
+
+  protected String getLanguage() {
+    return language;
+  }
+
+  protected void setLanguage(String language) {
+    this.language = language;
+  }
 }

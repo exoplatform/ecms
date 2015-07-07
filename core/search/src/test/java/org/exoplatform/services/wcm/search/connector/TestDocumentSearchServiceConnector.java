@@ -95,7 +95,7 @@ public class TestDocumentSearchServiceConnector extends BaseSearchTest {
     Collection<SearchResult> ret 
           = documentSearch_.search(new SearchContext(new Router(new ControllerDescriptor()), "intranet"), "anthony~", 
                                    sites, 
-                                   0, 20, "title", "asc");
+                                   0, 20, "title", "asc","en");
     assertEquals(4, ret.size());//2
   }
   
@@ -105,7 +105,7 @@ public class TestDocumentSearchServiceConnector extends BaseSearchTest {
     Collection<SearchResult> ret 
           = documentSearch_.search(new SearchContext(new Router(new ControllerDescriptor()), "intranet"), "anthony~", 
                                    sites, 
-                                   1, 20, "title", "asc");
+                                   1, 20, "title", "asc","en");
     assertEquals(3, ret.size());//1
   }
   
@@ -115,7 +115,7 @@ public class TestDocumentSearchServiceConnector extends BaseSearchTest {
     Collection<SearchResult> ret 
           = documentSearch_.search(new SearchContext(new Router(new ControllerDescriptor()), "intranet"), "anthony~", 
                                    sites, 
-                                   0, 1, "title", "asc");
+                                   0, 1, "title", "asc","en");
     assertEquals(1, ret.size());
   }
 
@@ -125,7 +125,7 @@ public class TestDocumentSearchServiceConnector extends BaseSearchTest {
     Collection<SearchResult> ret 
           = documentSearch_.search(new SearchContext(new Router(new ControllerDescriptor()), "intranet"), "anthony Felix~", 
                                    sites, 
-                                   0, 20, "title", "asc");
+                                   0, 20, "title", "asc","en");
     assertEquals(2, ret.size());//3
   }
   
@@ -135,7 +135,7 @@ public class TestDocumentSearchServiceConnector extends BaseSearchTest {
     Collection<SearchResult> ret 
           = documentSearch_.search(new SearchContext(new Router(new ControllerDescriptor()), "intranet"), "anthony Felix~", 
                                    sites, 
-                                   1, 20, "title", "asc");
+                                   1, 20, "title", "asc","en");
     assertEquals(1, ret.size());//2
   }
   
@@ -145,7 +145,7 @@ public class TestDocumentSearchServiceConnector extends BaseSearchTest {
     Collection<SearchResult> ret 
           = documentSearch_.search(new SearchContext(new Router(new ControllerDescriptor()), "intranet"), "anthony Felix~", 
                                    sites, 
-                                   0, 1, "title", "asc");
+                                   0, 1, "title", "asc","en");
     assertEquals(1, ret.size());
   }  
   
@@ -156,7 +156,7 @@ public class TestDocumentSearchServiceConnector extends BaseSearchTest {
     Collection<SearchResult> ret 
           = documentSearch_.search(new SearchContext(new Router(new ControllerDescriptor()), "intranet"), "\"anthony cena~\"", 
                                    sites, 
-                                   0, 20, "title", "asc");
+                                   0, 20, "title", "asc","en");
     assertEquals(2, ret.size());//1
   }
   
@@ -166,7 +166,7 @@ public class TestDocumentSearchServiceConnector extends BaseSearchTest {
     Collection<SearchResult> ret 
           = documentSearch_.search(new SearchContext(new Router(new ControllerDescriptor()), "intranet"), "\"anthony cena\"", 
                                    sites, 
-                                   1, 20, "title", "asc");
+                                   1, 20, "title", "asc","en");
     assertEquals(1, ret.size());//0
   }
   

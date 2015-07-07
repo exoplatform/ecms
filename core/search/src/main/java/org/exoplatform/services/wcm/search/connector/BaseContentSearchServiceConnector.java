@@ -127,7 +127,13 @@ public abstract class BaseContentSearchServiceConnector extends BaseSearchServic
   protected String getDetails(ResultNode retNode, SearchContext context) throws Exception {
     DriveData driveData = getDriveData(retNode);
     Calendar date = getDate(retNode);
-    return getDriveTitle(driveData) + fileSize(retNode) + formatDate(date);
+    if (getLanguage().equals("ar")){
+      return getDriveTitle(driveData) + fileSize(retNode) + formatDate(date).replaceFirst("(\\d?\\d)","\u202E$1\u202B"); //fix bidirectional date value in Arabic
+    }
+    else{
+      return getDriveTitle(driveData) + fileSize(retNode) + formatDate(date);
+    }
+
   } 
   
 }

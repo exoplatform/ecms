@@ -112,7 +112,7 @@ public class TestFileSearchServiceConnector extends BaseSearchTest {
     Collection<SearchResult> ret 
           = fileSearch_.search(null, "anthony~", 
                                    sites, 
-                                   0, 20, "title", "asc");
+                                   0, 20, "title", "asc","en");
     assertEquals(4, ret.size());//2
   }
   
@@ -122,7 +122,7 @@ public class TestFileSearchServiceConnector extends BaseSearchTest {
     Collection<SearchResult> ret 
           = fileSearch_.search(null, "anthony~", 
                                    sites, 
-                                   1, 20, "title", "asc");
+                                   1, 20, "title", "asc","en");
     assertEquals(3, ret.size());//1
   }
   
@@ -132,7 +132,7 @@ public class TestFileSearchServiceConnector extends BaseSearchTest {
     Collection<SearchResult> ret 
           = fileSearch_.search(null, "anthony~", 
                                    sites, 
-                                   0, 1, "title", "asc");
+                                   0, 1, "title", "asc","en");
     assertEquals(1, ret.size());
   }
   
@@ -142,7 +142,7 @@ public class TestFileSearchServiceConnector extends BaseSearchTest {
     Collection<SearchResult> ret 
           = fileSearch_.search(null, "anthony cjohn~", 
                                    sites, 
-                                   0, 20, "title", "asc");
+                                   0, 20, "title", "asc","en");
     assertEquals(2, ret.size());//3
   }
   
@@ -152,7 +152,7 @@ public class TestFileSearchServiceConnector extends BaseSearchTest {
     Collection<SearchResult> ret 
           = fileSearch_.search(null, "anthony cjohn~", 
                                    sites, 
-                                   1, 20, "title", "asc");
+                                   1, 20, "title", "asc","en");
     assertEquals(1, ret.size());//2
   }
   
@@ -162,7 +162,7 @@ public class TestFileSearchServiceConnector extends BaseSearchTest {
     Collection<SearchResult> ret 
           = fileSearch_.search(null, "anthony cjohn~", 
                                    sites, 
-                                   0, 1, "title", "asc");
+                                   0, 1, "title", "asc","en");
     assertEquals(1, ret.size());
   }  
 
@@ -172,7 +172,7 @@ public class TestFileSearchServiceConnector extends BaseSearchTest {
     Collection<SearchResult> ret 
           = fileSearch_.search(null, "\"anthony cena\"", 
                                    sites, 
-                                   0, 20, "title", "asc");
+                                   0, 20, "title", "asc","en");
     assertEquals(2, ret.size());//1
   }
 
@@ -182,7 +182,7 @@ public class TestFileSearchServiceConnector extends BaseSearchTest {
     Collection<SearchResult> ret 
           = fileSearch_.search(null, "\"anthony cena\"", 
                                    sites, 
-                                   1, 20, "title", "asc");
+                                   1, 20, "title", "asc","en");
     assertEquals(1, ret.size());//0
   }
 }
