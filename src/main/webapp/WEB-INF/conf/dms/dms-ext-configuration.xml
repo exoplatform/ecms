@@ -29,6 +29,10 @@ Software Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA
     <type>org.exoplatform.clouddrive.ecms.CloudDriveUIService</type>
   </component>
   <component>
+    <key>org.exoplatform.clouddrive.ecms.action.CloudFileActionService</key>
+    <type>org.exoplatform.clouddrive.ecms.action.CloudFileActionService</type>
+  </component>
+  <component>
     <key>org.exoplatform.services.cms.watch.WatchDocumentService</key>
     <type>org.exoplatform.clouddrive.ecms.watch.WatchCloudDocumentServiceImpl</type>
   </component>
@@ -163,7 +167,7 @@ Software Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA
               <int>65</int>
             </field>
             <field name="component">
-              <string>org.exoplatform.clouddrive.ecms.clipboard.ManagePublicationsActionComponent</string>
+              <string>org.exoplatform.clouddrive.ecms.action.ManagePublicationsActionComponent</string>
             </field>
           </object>
         </object-param>
@@ -180,7 +184,24 @@ Software Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA
               <int>65</int>
             </field>
             <field name="component">
-              <string>org.exoplatform.clouddrive.ecms.clipboard.ManageVersionsActionComponent</string>
+              <string>org.exoplatform.clouddrive.ecms.action.ManageVersionsActionComponent</string>
+            </field>
+          </object>
+        </object-param>
+        <object-param>
+          <name>CheckIn</name>
+          <object type="org.exoplatform.webui.ext.UIExtension">
+            <field name="type">
+              <string>org.exoplatform.ecm.dms.UIActionBar</string>
+            </field>
+            <field name="rank">
+              <int>75</int>
+            </field>
+            <field name="name">
+              <string>CheckIn</string>
+            </field>
+            <field name="component">
+              <string>org.exoplatform.clouddrive.ecms.action.CheckInManageComponent</string>
             </field>
           </object>
         </object-param>
@@ -322,7 +343,7 @@ Software Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA
               <string>JCRMoveAction</string>
             </field>
             <field name="component">
-              <string>org.exoplatform.clouddrive.ecms.clipboard.CloudDriveMoveNodeManageComponent</string>
+              <string>org.exoplatform.clouddrive.ecms.action.CloudDriveMoveNodeManageComponent</string>
             </field>
           </object>
         </object-param>
@@ -336,7 +357,7 @@ Software Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA
               <string>Paste</string>
             </field>
             <field name="component">
-              <string>org.exoplatform.clouddrive.ecms.clipboard.CloudDrivePasteManageComponent</string>
+              <string>org.exoplatform.clouddrive.ecms.action.CloudDrivePasteManageComponent</string>
             </field>
             <field name="category">
               <string>ItemGroundContextMenu</string>
@@ -360,7 +381,7 @@ Software Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA
             </field>
             <field name="component">
               <!-- this component sets a new config of UIClipboard in UISideBar to UICloudDriveClipboard to -->
-              <string>org.exoplatform.clouddrive.ecms.clipboard.CloudDriveClipboardActionComponent</string>
+              <string>org.exoplatform.clouddrive.ecms.action.CloudDriveClipboardActionComponent</string>
             </field>
           </object>
         </object-param>

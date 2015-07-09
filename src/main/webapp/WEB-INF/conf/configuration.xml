@@ -61,7 +61,7 @@
       <name>addActions</name>
       <set-method>addPlugin</set-method>
       <type>org.exoplatform.services.jcr.impl.ext.action.AddActionsPlugin</type>
-      <description>add actions plugin</description>
+      <description>add Cloud File removal action</description>
       <init-params>
         <object-param>
           <name>actions</name>
@@ -81,6 +81,39 @@
                     </field>
                     <field name="actionClassName">
                       <string>org.exoplatform.clouddrive.jcr.RemoveCloudFileAction</string>
+                    </field>
+                  </object>
+                </value>
+              </collection>
+            </field>
+          </object>
+        </object-param>
+      </init-params>
+    </component-plugin>
+    <component-plugin>
+      <name>addActions</name>
+      <set-method>addPlugin</set-method>
+      <type>org.exoplatform.services.jcr.impl.ext.action.AddActionsPlugin</type>
+      <description>add Cloud File symlink removal action</description>
+      <init-params>
+        <object-param>
+          <name>actions</name>
+          <object type="org.exoplatform.services.jcr.impl.ext.action.AddActionsPlugin$ActionsConfig">
+            <field name="actions">
+              <collection type="java.util.ArrayList">
+                <value>
+                  <object type="org.exoplatform.services.jcr.impl.ext.action.ActionConfiguration">
+                    <field name="eventTypes">
+                      <string>removeNode</string>
+                    </field>
+                    <field name="nodeTypes">
+                      <string>ecd:cloudFileLink</string>
+                    </field>
+                    <field name="isDeep">
+                      <boolean>false</boolean>
+                    </field>
+                    <field name="actionClassName">
+                      <string>org.exoplatform.clouddrive.ecms.action.RemoveCloudFileLinkAction</string>
                     </field>
                   </object>
                 </value>
