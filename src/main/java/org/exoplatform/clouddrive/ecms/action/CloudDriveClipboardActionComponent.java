@@ -16,7 +16,7 @@
  * Software Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA
  * 02110-1301 USA, or see the FSF site: http://www.fsf.org.
  */
-package org.exoplatform.clouddrive.ecms.clipboard;
+package org.exoplatform.clouddrive.ecms.action;
 
 import org.exoplatform.ecm.webui.component.explorer.sidebar.UIClipboard;
 import org.exoplatform.ecm.webui.component.explorer.sidebar.UISideBar;

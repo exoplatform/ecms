@@ -19,4 +19,4 @@
 /**
  * Clipboard operations support for Cloud Drive.
  */
-package org.exoplatform.clouddrive.ecms.clipboard;
+package org.exoplatform.clouddrive.ecms.action;

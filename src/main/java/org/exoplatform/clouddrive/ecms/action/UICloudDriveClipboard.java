@@ -16,7 +16,7 @@
  * Software Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA
  * 02110-1301 USA, or see the FSF site: http://www.fsf.org.
  */
-package org.exoplatform.clouddrive.ecms.clipboard;
+package org.exoplatform.clouddrive.ecms.action;
 
 import org.exoplatform.ecm.webui.component.explorer.UIJCRExplorer;
 import org.exoplatform.ecm.webui.component.explorer.sidebar.UIClipboard;
@@ -40,10 +40,10 @@ import javax.jcr.Node;
  * @version $Id: UICloudDriveClipboard.java 00000 May 13, 2014 pnedonosko $
  * 
  */
-@ComponentConfig(template = "app:/groovy/webui/component/explorer/sidebar/UIClipboard.gtmpl", events = {
-    @EventConfig(listeners = UICloudDriveClipboard.PasteActionListener.class),
-    @EventConfig(listeners = UIClipboard.DeleteActionListener.class),
-    @EventConfig(listeners = UIClipboard.ClearAllActionListener.class) })
+@ComponentConfig(template = "app:/groovy/webui/component/explorer/sidebar/UIClipboard.gtmpl",
+                 events = { @EventConfig(listeners = UICloudDriveClipboard.PasteActionListener.class),
+                     @EventConfig(listeners = UIClipboard.DeleteActionListener.class),
+                     @EventConfig(listeners = UIClipboard.ClearAllActionListener.class) })
 public class UICloudDriveClipboard extends UIClipboard {
 
   protected static final Log LOG = ExoLogger.getLogger(UICloudDriveClipboard.class);
@@ -57,7 +57,7 @@ public class UICloudDriveClipboard extends UIClipboard {
       ClipboardCommand selectedClipboard = uiClipboard.getClipboardData().get(index - 1);
       Node destNode = uiExplorer.getCurrentNode();
 
-      CloudDriveClipboard symlinks = new CloudDriveClipboard(uiExplorer);
+      CloudFileAction symlinks = new CloudFileAction(uiExplorer);
       try {
         symlinks.setDestination(destNode);
         symlinks.addSource(selectedClipboard.getWorkspace(), selectedClipboard.getSrcPath());
@@ -65,15 +65,14 @@ public class UICloudDriveClipboard extends UIClipboard {
         if (isCut) {
           symlinks.move();
         }
-        if (symlinks.create()) {
-          symlinks.save();
+        if (symlinks.apply()) {
           if (isCut) {
             uiClipboard.getClipboardData().remove(selectedClipboard);
           }
           uiExplorer.updateAjax(event);
           return;
         }
-      } catch (CloudFileSymlinkException e) {
+      } catch (CloudFileActionException e) {
         // this exception is a part of logic and it interrupts the move operation
         LOG.warn(e.getMessage());
         UIApplication uiApp = uiExplorer.getAncestorOfType(UIApplication.class);

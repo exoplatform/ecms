@@ -16,7 +16,7 @@
  * Software Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA
  * 02110-1301 USA, or see the FSF site: http://www.fsf.org.
  */
-package org.exoplatform.clouddrive.ecms.clipboard;
+package org.exoplatform.clouddrive.ecms.action;
 
 import org.exoplatform.ecm.webui.component.explorer.UIJCRExplorer;
 import org.exoplatform.ecm.webui.component.explorer.rightclick.manager.MoveNodeManageComponent;
@@ -51,30 +51,29 @@ public class CloudDriveMoveNodeManageComponent extends MoveNodeManageComponent {
       String destInfo = event.getRequestContext().getRequestParameter("destInfo");
 
       UIJCRExplorer uiExplorer = event.getSource().getAncestorOfType(UIJCRExplorer.class);
-      CloudDriveClipboard symlinks = new CloudDriveClipboard(uiExplorer);
+      CloudFileAction action = new CloudFileAction(uiExplorer);
       try {
-        symlinks.setDestination(destInfo);
+        action.setDestination(destInfo);
         if (srcPath.indexOf(";") > -1) {
           // multiple nodes move
           String[] srcPaths = srcPath.split(";");
           for (String srcp : srcPaths) {
-            symlinks.addSource(srcp);
+            action.addSource(srcp);
           }
         } else {
           // single node move
-          symlinks.addSource(srcPath);
+          action.addSource(srcPath);
         }
-        if (symlinks.move().create()) {
-          symlinks.save();
+        if (action.move().apply()) {
           uiExplorer.updateAjax(event);
           return;
         } // else default logic
-      } catch (CloudFileSymlinkException e) {
+      } catch (CloudFileActionException e) {
         // this exception is a part of logic and it interrupts the move operation
         LOG.warn(e.getMessage());
         UIApplication uiApp = uiExplorer.getAncestorOfType(UIApplication.class);
         uiApp.addMessage(e.getUIMessage());
-        symlinks.rollback();
+        action.rollback();
         uiExplorer.updateAjax(event);
         return;
       } catch (Exception e) {

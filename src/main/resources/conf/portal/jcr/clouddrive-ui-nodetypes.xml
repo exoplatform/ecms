@@ -5,11 +5,21 @@
   <!-- A mixin to be added to exo:tab to save current exo:buttons related to Cloud Drive -->
   <nodeType name="ecd:userButtons" isMixin="true" hasOrderableChildNodes="false" primaryItemName="ecd:buttons">
     <propertyDefinitions>
-      <propertyDefinition name="ecd:buttons" requiredType="String" autoCreated="false" mandatory="true"
-        onParentVersion="COPY" protected="false" multiple="false">
+      <propertyDefinition name="ecd:buttons" requiredType="String" autoCreated="false"
+        mandatory="true" onParentVersion="COPY" protected="false" multiple="false">
         <valueConstraints />
       </propertyDefinition>
     </propertyDefinitions>
   </nodeType>
-  
+
+  <!-- Mixin type for symlinks created to cloud file -->
+  <nodeType name="ecd:cloudFileLink" isMixin="true" hasOrderableChildNodes="false" primaryItemName="">
+    <propertyDefinitions>
+      <propertyDefinition name="ecd:documentsDrive" requiredType="String" autoCreated="false"
+        mandatory="false" onParentVersion="COPY" protected="false" multiple="false">
+        <valueConstraints />
+      </propertyDefinition>
+    </propertyDefinitions>
+  </nodeType>
+
 </nodeTypes>

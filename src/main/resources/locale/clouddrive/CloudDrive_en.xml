@@ -39,9 +39,13 @@
       <MoveToOutsideDriveNotSupported>Cannot move file to outside its cloud drive</MoveToOutsideDriveNotSupported>
       <MoveBetweenWorkspacesNotSupported>Cannot move cloud file to different workspace</MoveBetweenWorkspacesNotSupported>
       <CloudDriveCopyMoveNotSupported>Cannot copy or move cloud drive folder</CloudDriveCopyMoveNotSupported>
+      <DestinationNotWrittable>Cannot write in destination folder</DestinationNotWrittable>
+      <DestinationNotDefined>Destination folder not defined</DestinationNotDefined>
+      <SourceNotDefined>Source file not defined</SourceNotDefined>
       <LinkCreated>Link{0} created</LinkCreated>
       <FileLinksCreated>File{0} linked in {1}</FileLinksCreated>
       <FileLinksCreatedInSpace>File{0} linked in {1} of {2} space</FileLinksCreatedInSpace>
+      <FileLinksCreatedInGroup>File{0} linked in {1} of {2} group</FileLinksCreatedInGroup>
     </msg>
   </CloudFile>
   <ConnectCloudDriveForm>

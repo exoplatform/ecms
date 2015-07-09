@@ -16,7 +16,7 @@
  * Software Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA
  * 02110-1301 USA, or see the FSF site: http://www.fsf.org.
  */
-package org.exoplatform.clouddrive.ecms.clipboard;
+package org.exoplatform.clouddrive.ecms.action;
 
 import org.exoplatform.ecm.webui.component.explorer.UIJCRExplorer;
 import org.exoplatform.ecm.webui.component.explorer.rightclick.manager.PasteManageComponent;
@@ -57,36 +57,19 @@ import java.util.Set;
     @EventConfig(listeners = CloudDrivePasteManageComponent.PasteActionListener.class) })
 public class CloudDrivePasteManageComponent extends PasteManageComponent {
 
-  protected static final Log    LOG         = ExoLogger.getLogger(CloudDrivePasteManageComponent.class);
-
-  protected static final String GROUPS_PATH = "groupsPath";
+  protected static final Log LOG = ExoLogger.getLogger(CloudDrivePasteManageComponent.class);
 
   public static class PasteActionListener extends PasteManageComponent.PasteActionListener {
     public void processEvent(Event<PasteManageComponent> event) throws Exception {
       UIJCRExplorer uiExplorer = event.getSource().getAncestorOfType(UIJCRExplorer.class);
 
-      CloudDriveClipboard symlinks = new CloudDriveClipboard(uiExplorer);
+      CloudFileAction action = new CloudFileAction(uiExplorer);
       try {
         String destParam = event.getRequestContext().getRequestParameter(OBJECTID);
         if (destParam == null) {
-          symlinks.setDestination(uiExplorer.getCurrentNode());
+          action.setDestination(uiExplorer.getCurrentNode());
         } else {
-          symlinks.setDestination(destParam);
-        }
-
-        DriveData drive = uiExplorer.getDriveData();
-        if (drive != null) {
-          NodeHierarchyCreator hierarchyCreator = WCMCoreUtils.getService(NodeHierarchyCreator.class);
-          String groupsPath = hierarchyCreator.getJcrPath(GROUPS_PATH);
-          if (drive.getHomePath().startsWith(groupsPath)) {
-            // it's space documents
-            String[] drivePermissions = drive.getAllPermissions();
-            symlinks.setPermissions(drivePermissions);
-
-            SpaceService spaces = WCMCoreUtils.getService(SpaceService.class);
-            String groupId = drive.getName().replace('.', '/');
-            symlinks.setDestinationSpace(spaces.getSpaceByGroupId(groupId));
-          }
+          action.setDestination(destParam);
         }
 
         String userId = ConversationState.getCurrent().getIdentity().getUserId();
@@ -99,13 +82,12 @@ public class CloudDrivePasteManageComponent extends PasteManageComponent {
           if (virtClipboards.isEmpty()) { // single file
             current = allClipboards.getLast();
             boolean isCut = ClipboardCommand.CUT.equals(current.getType());
-            symlinks.addSource(current.getWorkspace(), current.getSrcPath());
+            action.addSource(current.getWorkspace(), current.getSrcPath());
             if (isCut) {
-              symlinks.move();
+              action.move();
             }
-            if (symlinks.create()) {
-              symlinks.save();
-              // file was successfully linked
+            if (action.apply()) {
+              // file was linked
               if (isCut) {
                 // TODO should not happen until we will support cut-paste between drives
                 virtClipboards.clear();
@@ -126,7 +108,7 @@ public class CloudDrivePasteManageComponent extends PasteManageComponent {
                 isCut = isThisCut;
               }
               if (isCut.equals(isThisCut)) {
-                symlinks.addSource(current.getWorkspace(), current.getSrcPath());
+                action.addSource(current.getWorkspace(), current.getSrcPath());
                 linked.add(current);
               } else {
                 // we have unexpected state when items in group clipboard have different types of operation
@@ -140,10 +122,9 @@ public class CloudDrivePasteManageComponent extends PasteManageComponent {
 
             if (virtSize == linked.size()) {
               if (isCut != null && isCut) {
-                symlinks.move();
+                action.move();
               }
-              if (symlinks.create()) {
-                symlinks.save();
+              if (action.apply()) {
                 // files was successfully linked
                 if (isCut) {
                   // TODO should not happen until we will support cut-paste between drives
@@ -158,20 +139,20 @@ public class CloudDrivePasteManageComponent extends PasteManageComponent {
               }
             } else {
               // something goes wrong and we will let default code to work
-              symlinks.rollback();
+              action.rollback();
               LOG.warn("Links cannot be created for all cloud files. Destination "
-                  + symlinks.getDestonationPath() + "."
+                  + action.getDestonationPath() + "."
                   + (current != null ? " Last file " + current.getSrcPath() + "." : "")
                   + " Default behaviour will be applied (files Paste).");
             }
           }
         }
-      } catch (CloudFileSymlinkException e) {
+      } catch (CloudFileActionException e) {
         // this exception is a part of logic and it interrupts the operation
         LOG.warn(e.getMessage());
         UIApplication uiApp = uiExplorer.getAncestorOfType(UIApplication.class);
         uiApp.addMessage(e.getUIMessage());
-        symlinks.rollback();
+        action.rollback();
         // complete the event here
         uiExplorer.updateAjax(event);
         return;
