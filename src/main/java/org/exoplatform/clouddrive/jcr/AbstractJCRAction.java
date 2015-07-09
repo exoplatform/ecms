@@ -18,11 +18,9 @@ package org.exoplatform.clouddrive.jcr;
 
 import org.apache.commons.chain.Context;
 import org.exoplatform.clouddrive.CloudDrive;
-import org.exoplatform.clouddrive.CloudDriveService;
 import org.exoplatform.container.ExoContainer;
 import org.exoplatform.services.command.action.Action;
 import org.exoplatform.services.ext.action.InvocationContext;
-
 
 /**
  * Created by The eXo Platform SAS
@@ -34,14 +32,15 @@ import org.exoplatform.services.ext.action.InvocationContext;
 public abstract class AbstractJCRAction implements Action {
 
   /**
-   * Helper to get a {@link CloudDriveService} instance from the context.
+   * Get a component instance from the context's container.
    * 
-   * @param context {@link CloudDriveService} or null
+   * @param context
+   * @param type
    * @return
    */
-  protected CloudDriveService drives(Context context) {
+  protected <C> C getComponent(Context context, Class<C> type) {
     ExoContainer container = (ExoContainer) context.get(InvocationContext.EXO_CONTAINER);
-    return (CloudDriveService) container.getComponentInstanceOfType(CloudDriveService.class);
+    return type.cast(container.getComponentInstanceOfType(type));
   }
 
   protected void start(CloudDrive drive) {

@@ -138,7 +138,7 @@
       </propertyDefinition>
     </propertyDefinitions>
   </nodeType>
-
+  
   <!-- content nodetype for cloud files' jcr;content node (nt:resource) -->
   <nodeType name="ecd:cloudFileResource" isMixin="true" hasOrderableChildNodes="false"
     primaryItemName="">

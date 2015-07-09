@@ -48,8 +48,8 @@ public class RemoveCloudFileAction extends AbstractJCRAction {
     Node fileNode = (Node) context.get(InvocationContext.CURRENT_ITEM);
     // we work only with node removal (no matter what set in the action config)
     if (ExtendedEvent.NODE_REMOVED == (Integer) context.get(InvocationContext.EVENT)) {
-      CloudDriveService drives = drives(context);
-      CloudDrive localDrive = drives.findDrive(fileNode); 
+      CloudDriveService drives = getComponent(context, CloudDriveService.class);
+      CloudDrive localDrive = drives.findDrive(fileNode);
       if (localDrive != null) {
         if (localDrive.isConnected()) {
           if (accept(localDrive)) {

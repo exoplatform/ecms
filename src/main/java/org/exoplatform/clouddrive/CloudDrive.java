@@ -86,6 +86,13 @@ public abstract class CloudDrive {
      * @return String
      */
     String getName();
+    
+    /**
+     * Return <code>true</code> when command produced changes in the drive (has added/updated/removed files).
+     * 
+     * @return boolean will be <code>true</code> when command produced changes, <code>false</code> otherwise
+     */
+    boolean hasChanges();
 
     /**
      * Collection of files affect by the command. Call to this method will return unmodifiable view on actual

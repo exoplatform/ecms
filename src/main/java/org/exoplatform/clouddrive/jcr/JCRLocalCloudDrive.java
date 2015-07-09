@@ -211,6 +211,14 @@ public abstract class JCRLocalCloudDrive extends CloudDrive implements CloudDriv
     }
 
     /**
+     * {@inheritDoc}
+     */
+    @Override
+    public boolean hasChanges() {
+      return false;
+    }
+
+    /**
      * @inherritDoc
      */
     @Override
@@ -869,6 +877,13 @@ public abstract class JCRLocalCloudDrive extends CloudDrive implements CloudDriv
                                       InterruptedException;
 
     /**
+     * Finalization logic that should be done always on the command end. Note that this method will be called
+     * once even if command will be retried due to know errors.
+     * 
+     */
+    protected abstract void always();
+
+    /**
      * Start command execution. If command will fail due to provider error, the execution will be retried
      * {@link CloudDriveConnector#PROVIDER_REQUEST_ATTEMPTS} times before the throwing an exception.
      * 
@@ -939,6 +954,7 @@ public abstract class JCRLocalCloudDrive extends CloudDrive implements CloudDriv
         LOG.error("Runtime error. Drive " + getName() + " canceled", e);
         throw e;
       } finally {
+        always();
         doneAction();
         jcrListener.enable();
         commandEnv.cleanup(this); // cleanup environment
@@ -1033,6 +1049,14 @@ public abstract class JCRLocalCloudDrive extends CloudDrive implements CloudDriv
      * {@inheritDoc}
      */
     @Override
+    public boolean hasChanges() {
+      return changed.size() > 0 || removed.size() > 0;
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
     public Collection<CloudFile> getFiles() {
       return Collections.unmodifiableCollection(changed);
     }
@@ -1102,39 +1126,44 @@ public abstract class JCRLocalCloudDrive extends CloudDrive implements CloudDriv
      */
     @Override
     protected void process() throws CloudDriveException, RepositoryException, InterruptedException {
-      try {
-        // reset all possible previous attempts metadata
-        rootNode.setProperty("ecd:localChanges", DUMMY_DATA);
-        rootNode.setProperty("ecd:localHistory", DUMMY_DATA);
-        rootNode.setProperty("ecd:connected", false);
-        rootNode.save();
+      // reset all possible previous attempts metadata
+      rootNode.setProperty("ecd:localChanges", DUMMY_DATA);
+      rootNode.setProperty("ecd:localHistory", DUMMY_DATA);
+      rootNode.setProperty("ecd:connected", false);
+      rootNode.save();
 
-        // fetch all files to local storage
-        fetchFiles();
+      // fetch all files to local storage
+      fetchFiles();
 
-        // check before saving the result
-        if (Thread.currentThread().isInterrupted()) {
-          throw new InterruptedException("Drive connection interrupted for " + title());
-        }
-
-        // connected drive properties
-        rootNode.setProperty("ecd:cloudUserId", getUser().getId());
-        rootNode.setProperty("ecd:cloudUserName", getUser().getUsername());
-        rootNode.setProperty("ecd:userEmail", getUser().getEmail());
-        rootNode.setProperty("ecd:connectDate", Calendar.getInstance());
-
-        // mark as connected
-        rootNode.setProperty("ecd:connected", true);
-
-        // and save the node
-        rootNode.save();
-      } finally {
-        currentConnect.set(noConnect); // clean current, see connect()
+      // check before saving the result
+      if (Thread.currentThread().isInterrupted()) {
+        throw new InterruptedException("Drive connection interrupted for " + title());
       }
+
+      // connected drive properties
+      rootNode.setProperty("ecd:cloudUserId", getUser().getId());
+      rootNode.setProperty("ecd:cloudUserName", getUser().getUsername());
+      rootNode.setProperty("ecd:userEmail", getUser().getEmail());
+      rootNode.setProperty("ecd:connectDate", Calendar.getInstance());
+
+      // mark as connected
+      rootNode.setProperty("ecd:connected", true);
+
+      // and save the node
+      rootNode.save();
 
       // fire listeners
       listeners.fireOnConnect(new CloudDriveEvent(getUser(), rootWorkspace, rootNode.getPath()));
     }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    protected void always() {
+      currentConnect.set(noConnect); // clean current, see connect()
+    }
+
   }
 
   protected final class NoConnectCommand extends ConnectCommand {
@@ -1174,6 +1203,7 @@ public abstract class JCRLocalCloudDrive extends CloudDrive implements CloudDriv
                              CloudDriveException,
                              RepositoryException,
                              InterruptedException {
+      boolean hasChanges;
       syncLock.writeLock().lock(); // write-lock acquired exclusively by single threads (drive sync)
       try {
         // don't do drive sync with not applied previous local file changes
@@ -1187,8 +1217,11 @@ public abstract class JCRLocalCloudDrive extends CloudDrive implements CloudDriv
           throw new InterruptedException("Drive synchronization interrupted for " + title());
         }
 
-        // and save the drive node
-        rootNode.save();
+        hasChanges = hasChanges();
+        if (hasChanges) {
+          // and save the drive node
+          rootNode.save();
+        }
       } finally {
         // transfer all available messages to an user, then unlock
         for (Iterator<CloudDriveMessage> miter = syncFilesMessages.iterator(); miter.hasNext();) {
@@ -1196,22 +1229,31 @@ public abstract class JCRLocalCloudDrive extends CloudDrive implements CloudDriv
           miter.remove();
         }
 
-        // unlock and cleanup
-        currentSync.set(noSync); // clean current, see synchronize()
+        // unlock
         syncLock.writeLock().unlock();
+
+        // help GC
         if (nodes != null) {
           nodes.clear();
         }
       }
 
       // fire listeners afterwards and only if actual changes have a place
-      if (changed.size() > 0 || removed.size() > 0) {
+      if (hasChanges) {
         listeners.fireOnSynchronized(new CloudDriveEvent(getUser(),
                                                          rootWorkspace,
                                                          rootNode.getPath(),
                                                          changed,
                                                          removed));
       }
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    protected void always() {
+      currentSync.set(noSync); // clean current, see synchronize()
     }
 
     /**
@@ -1348,7 +1390,7 @@ public abstract class JCRLocalCloudDrive extends CloudDrive implements CloudDriv
         }
 
         // fire listeners afterwards and only if actual changes have a place
-        if (changed.size() > 0 || removed.size() > 0) {
+        if (hasChanges()) {
           listeners.fireOnSynchronized(new CloudDriveEvent(getUser(),
                                                            rootWorkspace,
                                                            rootNode.getPath(),
@@ -1358,6 +1400,14 @@ public abstract class JCRLocalCloudDrive extends CloudDrive implements CloudDriv
       } else {
         LOG.warn("Cannot synchronize file in cloud drive '" + title() + "': drive not connected");
       }
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    protected void always() {
+      // nothing
     }
 
     void sync(Node driveNode) throws RepositoryException, CloudDriveException, InterruptedException {
