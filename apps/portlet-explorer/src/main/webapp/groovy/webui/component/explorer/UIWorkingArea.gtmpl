@@ -20,6 +20,7 @@
   import org.exoplatform.ecm.webui.component.admin.manager.UIAbstractManagerComponent;
   import org.apache.commons.lang.StringUtils;
   import org.apache.commons.lang.StringEscapeUtils;
+  import org.exoplatform.ecm.webui.component.explorer.rightclick.manager.RestoreFromTrashManageComponent;
 
   def rcontext = _ctx.getRequestContext() ;
   def uiTreeExplorer = uicomponent.getTreeExplorer();
@@ -58,11 +59,9 @@
   uicomponent.setWCMNotice("");
   jsManager.getRequireJS().addScripts("ecmutil.ECMUtils.setUndo(\"" + undo + "\");");
   if(StringUtils.isNotEmpty(nodePathDelete)) {
- 	  List<UIAbstractManagerComponent> managers = uicomponent.getManagers();
- 	  for (UIAbstractManagerComponent manager : managers) {
-		  if(manager.getName().equals("RestoreFromTrashManageComponent"))
-				nodePathDelete = manager.event("RestoreFromTrash", nodePathDelete);			
-		}
+    RestoreFromTrashManageComponent manager = uicomponent.getThrashManageComponent();
+ 	 nodePathDelete = manager.event("RestoreFromTrash", nodePathDelete);
+
  	  jsManager.getRequireJS().addScripts("ecmutil.ECMUtils.activateWCMRestoreNotice(\"$wcmNotice\");");
  	  jsManager.getRequireJS().addScripts("ecmutil.ECMUtils.activateWCMDeleteNotice(\"$nodePathDelete\", \""+deleteNotice+"\");");
    } else {	 
