@@ -233,7 +233,10 @@ public class UIPermissionTreeForm extends UIPermissionFormBase implements UISele
         }
         permBean.setRead(true);
       }
-
+      if (uiForm.getUICheckBoxInput(PermissionType.ADD_NODE).isChecked())
+        permsList.add(PermissionType.SET_PROPERTY);
+      else
+        permsRemoveList.add(PermissionType.SET_PROPERTY);
       if (Utils.isNameEmpty(userOrGroup)) {
         uiApp.addMessage(new ApplicationMessage("UIPermissionTreeForm.msg.userOrGroup-required", null,
                                                 ApplicationMessage.WARNING));
