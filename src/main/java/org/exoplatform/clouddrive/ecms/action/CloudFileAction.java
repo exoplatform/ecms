@@ -151,31 +151,6 @@ public class CloudFileAction {
     return setDestination(getNodeByInfo(destInfo));
   }
 
-  // TODO
-  // /**
-  // * Set destination space.
-  // *
-  // * @param destSpace
-  // * @return
-  // * @throws Exception
-  // */
-  // public CloudFileAction setDestinationSpace(Space destSpace) throws Exception {
-  // this.destSpace = destSpace;
-  // return this;
-  // }
-  //
-  // /**
-  // * Set permissions that source and destination file or link should have.
-  // *
-  // * @param permissions
-  // * @return
-  // * @throws Exception
-  // */
-  // public CloudFileAction setPermissions(String[] permissions) throws Exception {
-  // this.permissions = permissions;
-  // return this;
-  // }
-
   /**
    * Link behaviour as instead of "move" operation. Behaviour of "copy" by default.
    * 
@@ -223,28 +198,6 @@ public class CloudFileAction {
     return destNode;
   }
 
-  // TODO
-  // /**
-  // * Permissions that source and destination file or link should have.
-  // *
-  // * @return the permissions
-  // */
-  // public String[] getPermissions() {
-  // return permissions;
-  // }
-
-  // /**
-  // * Save the symlink at its destination in JCR.
-  // *
-  // * @throws RepositoryException
-  // */
-  // public void save() throws RepositoryException {
-  // // XXX we use destination node session assuming it will save all our changes,
-  // // but source nodes changes this save may not persist in general case.
-  // // See create(Node) where source nodes permissions saved explicitly
-  // destNode.getSession().save();
-  // }
-
   /**
    * Rollback the symlink at its destination in JCR.
    * 
@@ -266,15 +219,14 @@ public class CloudFileAction {
    */
   public boolean apply() throws CloudFileActionException, Exception {
     if (destWorkspace != null) {
-      if (PermissionUtil.canAddNode(destNode) && !uiExplorer.nodeIsLocked(destNode)
-          && destNode.isCheckedOut()) {
+      if (PermissionUtil.canAddNode(destNode) && !uiExplorer.nodeIsLocked(destNode) && destNode.isCheckedOut()) {
         if (srcNodes.size() > 0) {
           Space destSpace = null;
           String groupId = null;
-          CloudFileActionService cloudFileService = WCMCoreUtils.getService(CloudFileActionService.class);
+          CloudFileActionService actions = WCMCoreUtils.getService(CloudFileActionService.class);
           DriveData documentsDrive = uiExplorer.getDriveData();
           if (documentsDrive != null) {
-            if (cloudFileService.isGroupDrive(documentsDrive)) {
+            if (actions.isGroupDrive(documentsDrive)) {
               groupId = documentsDrive.getName().replace('.', '/');
               // destination in group documents
               SpaceService spaces = WCMCoreUtils.getService(SpaceService.class);
@@ -320,13 +272,13 @@ public class CloudFileAction {
                     // need create symlink into destNode
                     if (groupId != null) {
                       // it's link in group documents (e.g. space documents): need share with the group
-                      // first share source to the group, then link will be created with the group
-                      // permissions (see LinkManager impl)
-                      cloudFileService.shareInDrive(srcNode, srcLocal, documentsDrive);
+                      String[] driveIdentity = documentsDrive.getAllPermissions();
+                      actions.shareCloudFile(srcNode, srcLocal, driveIdentity);
+                      this.link = actions.linkFile(srcNode, destNode, groupId);
+                      actions.setAllPermissions(link, driveIdentity);
+                    } else {
+                      this.link = actions.linkFile(srcNode, destNode, null);
                     }
-                    this.link = cloudFileService.linkFile(srcNode,
-                                                          destNode,
-                                                          groupId != null ? documentsDrive : null);
                     linksCreated++;
                   } else {
                     // else, we don't support cross-workspaces paste for cloud drive
@@ -370,28 +322,20 @@ public class CloudFileAction {
             RequestContext rcontext = WebuiRequestContext.getCurrentInstance();
             if (rcontext != null) {
               String multiple = linksCreated > 1 ? "s" : "";
-              String destName;
-              try {
-                destName = destNode.getProperty("exo:title").getString();
-              } catch (PathNotFoundException e) {
-                destName = destNode.getName();
-              }
+              String destName = actions.documentName(destNode);
 
-              ApplicationMessage title = new ApplicationMessage("CloudFile.msg.LinkCreated",
-                                                                new String[] { multiple });
+              ApplicationMessage title = new ApplicationMessage("CloudFile.msg.LinkCreated", new String[] { multiple });
               ApplicationMessage text;
               if (destSpace != null) {
-                text = new ApplicationMessage("CloudFile.msg.FileLinksCreatedInSpace",
-                                              new String[] { multiple, destName,
-                                                  destSpace.getDisplayName() });
+                text = new ApplicationMessage("CloudFile.msg.FileLinksSharedInSpace",
+                                              new String[] { multiple, destName, destSpace.getDisplayName() });
               } else if (groupId != null) {
                 OrganizationService orgService = WCMCoreUtils.getService(OrganizationService.class);
                 Group group = orgService.getGroupHandler().findGroupById(groupId);
-                text = new ApplicationMessage("CloudFile.msg.FileLinksCreatedInGroup",
+                text = new ApplicationMessage("CloudFile.msg.FileLinksSharedInGroup",
                                               new String[] { multiple, destName, group.getGroupName() });
               } else {
-                text = new ApplicationMessage("CloudFile.msg.FileLinksCreated",
-                                              new String[] { multiple, destName });
+                text = new ApplicationMessage("CloudFile.msg.FileLinksCreated", new String[] { multiple, destName });
               }
 
               ResourceBundle res = rcontext.getApplicationResourceBundle();
@@ -408,18 +352,15 @@ public class CloudFileAction {
           }
         } else {
           throw new CloudFileActionException("Source should be defined.",
-                                             new ApplicationMessage("CloudFile.msg.SourceNotDefined",
-                                                                    emptyParams));
+                                             new ApplicationMessage("CloudFile.msg.SourceNotDefined", emptyParams));
         }
       } else {
         throw new CloudFileActionException("Destination not writtable.",
-                                           new ApplicationMessage("CloudFile.msg.DestinationNotWrittable",
-                                                                  emptyParams));
+                                           new ApplicationMessage("CloudFile.msg.DestinationNotWrittable", emptyParams));
       }
     } else {
       throw new CloudFileActionException("Destination should be defined.",
-                                         new ApplicationMessage("CloudFile.msg.DestinationNotDefined",
-                                                                emptyParams));
+                                         new ApplicationMessage("CloudFile.msg.DestinationNotDefined", emptyParams));
     }
   }
 

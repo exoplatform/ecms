@@ -55,12 +55,4 @@ public class ShowConnectCloudDriveActionComponent extends BaseCloudDriveManagerC
   public Class<? extends UIAbstractManager> getUIAbstractManagerClass() {
     return null;
   }
-
-  /**
-   * @inherritDoc
-   */
-  @Override
-  public String getName() {
-    return "Cloud Documents";
-  }
 }

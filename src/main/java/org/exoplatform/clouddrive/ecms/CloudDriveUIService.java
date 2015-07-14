@@ -37,6 +37,7 @@ import org.picocontainer.Startable;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.HashSet;
+import java.util.LinkedHashSet;
 import java.util.List;
 import java.util.Set;
 
@@ -108,6 +109,8 @@ public class CloudDriveUIService implements Startable {
 
   protected static final String      ECD_BUTTONS                = "ecd:buttons";
 
+  protected static final String      ECD_DEFAULT_BUTTONS        = "ecd:defaultButtons";
+
   public static final String         CONNECT_CLOUD_DRIVE_ACTION = "add.connect.clouddrive.action";
 
   protected final RepositoryService  jcrService;
@@ -153,9 +156,9 @@ public class CloudDriveUIService implements Startable {
    * @return List of Strings with action names
    * @throws Exception
    */
-  protected List<String> getDefaultActions() throws Exception {
+  protected Set<String> getDefaultActions() throws Exception {
     // find all Cloud Drive actions configured by default for action bar
-    List<String> cdActions = new ArrayList<String>();
+    Set<String> cdActions = new LinkedHashSet<String>();
     for (UIExtension ext : uiExtensions.getUIExtensions(ManageViewService.EXTENSION_TYPE)) {
       // Class<? extends UIComponent> extComp = ext.getComponent();
       String menuAction = ext.getName();
@@ -192,7 +195,9 @@ public class CloudDriveUIService implements Startable {
    * @param actionsStr {@link StringBuilder}
    * @throws RepositoryException
    */
-  protected void readViewActions(Node node, String buttons, StringBuilder actionsStr) throws RepositoryException {
+  protected void readViewActions(Node node,
+                                 String buttons,
+                                 StringBuilder actionsStr) throws RepositoryException {
     if (node.hasProperty(buttons)) {
       String[] actions = node.getProperty(buttons).getString().split(";");
       for (int i = 0; i < actions.length; i++) {
@@ -250,8 +255,6 @@ public class CloudDriveUIService implements Startable {
     }
   }
 
-  //
-
   /**
    * Add Cloud Drive actions to ECMS actions menu if they are not already there. This method adds Cloud Drive
    * actions saved in previous container execution (saved on container stop, see {@link #restoreViews()} ). If
@@ -262,23 +265,30 @@ public class CloudDriveUIService implements Startable {
   protected void prepareViews() throws Exception {
     SessionProvider jcrSessions = SessionProvider.createSystemProvider();
     try {
+      Set<String> defaultConfiguredActions = getDefaultActions();
       Session session = jcrSessions.getSession(DMS_SYSTEM_WORKSPACE, jcrService.getCurrentRepository());
       for (String view : VIEWS) {
         Node viewNode = manageView.getViewByName(view, jcrSessions);
+        // read all already existing ECMS actions
         StringBuilder newActions = new StringBuilder();
-
-        // read all already existing actions
         readViewActions(viewNode, EXO_BUTTONS, newActions);
         int menuLength = newActions.length();
-        // read all user actions saved for CD
-        readViewActions(viewNode, ECD_BUTTONS, newActions);
+        // read all actions saved for CD
+        StringBuilder cdActions = new StringBuilder();
+        readViewActions(viewNode, ECD_BUTTONS, cdActions);
+
+        // merge others with CD for real action bar set
+        if (cdActions.length() > 0) {
+          newActions.append(';');
+          newActions.append(' ');
+          newActions.append(cdActions);
+        }
 
         if (newActions.length() == menuLength) {
           // no CD actions saved previously - add defaults
-          StringBuilder cdActions = new StringBuilder();
           cdActions.append(' ');
 
-          for (String cda : getDefaultActions()) {
+          for (String cda : defaultConfiguredActions) {
             // doing some trick to fix the string: make first char lowercase
             String acs = uncapitalize(cda);
             if (newActions.indexOf(acs) < 0) {
@@ -293,10 +303,48 @@ public class CloudDriveUIService implements Startable {
           }
 
           // save CD actions as initial user actions
-          if (!viewNode.isNodeType(ECD_USER_BUTTONS)) {
+          String cdButtons = cdActions.toString().trim();
+          if (viewNode.canAddMixin(ECD_USER_BUTTONS)) {
             viewNode.addMixin(ECD_USER_BUTTONS);
           }
-          viewNode.setProperty(ECD_BUTTONS, cdActions.toString().trim());
+          viewNode.setProperty(ECD_BUTTONS, cdButtons);
+          if (viewNode.canAddMixin(ECD_DEFAULT_BUTTONS)) {
+            viewNode.addMixin(ECD_DEFAULT_BUTTONS);
+          }
+          viewNode.setProperty(ECD_DEFAULT_BUTTONS, cdButtons);
+        } else {
+          // check if we don't have new defaults in configuration (actual for upgrades since 1.3.0)
+          StringBuilder defaultSavedActions = new StringBuilder();
+          readViewActions(viewNode, ECD_DEFAULT_BUTTONS, defaultSavedActions);
+
+          Set<String> addDefaultActions = new LinkedHashSet<String>();
+          for (String cda : defaultConfiguredActions) {
+            String acs = uncapitalize(cda); // make first char lowercase here
+            if (defaultSavedActions.indexOf(acs) < 0) {
+              addDefaultActions.add(acs);
+              defaultSavedActions.append(acs);
+              defaultSavedActions.append(';');
+            }
+          }
+
+          if (addDefaultActions.size() > 0) {
+            for (String acs : addDefaultActions) {
+              if (newActions.indexOf(acs) < 0) {
+                newActions.append(';');
+                newActions.append(' ');
+                newActions.append(acs);
+              }
+              if (cdActions.indexOf(acs) < 0) {
+                cdActions.append(acs);
+                cdActions.append(';');
+              }
+            }
+            viewNode.setProperty(ECD_BUTTONS, cdActions.toString().trim());
+            if (viewNode.canAddMixin(ECD_DEFAULT_BUTTONS)) {
+              viewNode.addMixin(ECD_DEFAULT_BUTTONS);
+            }
+            viewNode.setProperty(ECD_DEFAULT_BUTTONS, defaultSavedActions.toString().trim());
+          }
         }
 
         if (LOG.isDebugEnabled()) {
@@ -359,7 +407,7 @@ public class CloudDriveUIService implements Startable {
     try {
       prepareViews();
 
-      // also register menu restorer... 
+      // also register menu restorer...
       // XXX yeah, we do nasty things for this as Startable.stop() works later, when JCR already stopped.
       List<?> repoContainers = ExoContainerContext.getCurrentContainer()
                                                   .getComponentInstancesOfType(RepositoryContainer.class);

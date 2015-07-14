@@ -10,11 +10,13 @@
     <title>
       <ConnectCloudDriveForm>Connect Cloud Documents</ConnectCloudDriveForm>
       <ConnectYour>Connect your</ConnectYour>
+      <UISharingManager>Cloud file sharing</UISharingManager>
     </title>
   </UIPopupWindow>
   <UIActionBar>
     <tooltip>
       <ShowConnectCloudDrive>Connect Cloud Documents</ShowConnectCloudDrive>
+      <ViewSharing>Cloud File Sharing</ViewSharing>
     </tooltip>
   </UIActionBar>
   <ECMContextMenu>
@@ -23,6 +25,8 @@
       <SyncingFile>Synchronizing file...</SyncingFile>
       <PushCloudFile>Push to</PushCloudFile>
       <RefreshCloudDrive>Sync with </RefreshCloudDrive>
+      <ViewSharing>Sharing</ViewSharing>
+      <RefreshView>Refresh view</RefreshView>
     </event>
   </ECMContextMenu>
   <CloudFileViewer>
@@ -44,8 +48,11 @@
       <SourceNotDefined>Source file not defined</SourceNotDefined>
       <LinkCreated>Link{0} created</LinkCreated>
       <FileLinksCreated>File{0} linked in {1}</FileLinksCreated>
-      <FileLinksCreatedInSpace>File{0} linked in {1} of {2} space</FileLinksCreatedInSpace>
-      <FileLinksCreatedInGroup>File{0} linked in {1} of {2} group</FileLinksCreatedInGroup>
+      <FileLinksSharedInSpace>File link{0} shared in {1} of {2} space</FileLinksSharedInSpace>
+      <FileLinksSharedInGroup>File link{0} shared in {1} of {2} group</FileLinksSharedInGroup>
+      <FileLinksSharedWithUser>File link{0} shared with user {2} in his {1} folder</FileLinksSharedWithUser>
+      <ErrorReadingDrives>Error reading document drives</ErrorReadingDrives>
+      <CannotFindUser>Cannot find user {0}</CannotFindUser>
     </msg>
   </CloudFile>
   <ConnectCloudDriveForm>

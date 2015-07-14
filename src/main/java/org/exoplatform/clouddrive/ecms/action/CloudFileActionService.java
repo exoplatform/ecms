@@ -28,6 +28,7 @@ import org.exoplatform.clouddrive.DriveRemovedException;
 import org.exoplatform.clouddrive.NotCloudDriveException;
 import org.exoplatform.clouddrive.ThreadExecutor;
 import org.exoplatform.clouddrive.jcr.NodeFinder;
+import org.exoplatform.services.cms.BasePath;
 import org.exoplatform.services.cms.documents.TrashService;
 import org.exoplatform.services.cms.drives.DriveData;
 import org.exoplatform.services.cms.drives.ManageDriveService;
@@ -41,9 +42,14 @@ import org.exoplatform.services.jcr.ext.common.SessionProvider;
 import org.exoplatform.services.jcr.ext.hierarchy.NodeHierarchyCreator;
 import org.exoplatform.services.log.ExoLogger;
 import org.exoplatform.services.log.Log;
+import org.exoplatform.services.wcm.core.NodetypeConstant;
+import org.exoplatform.web.application.ApplicationMessage;
 import org.picocontainer.Startable;
 
 import java.security.AccessControlException;
+import java.util.Arrays;
+import java.util.Iterator;
+import java.util.List;
 import java.util.Map;
 import java.util.concurrent.ConcurrentHashMap;
 
@@ -73,27 +79,29 @@ import javax.jcr.query.QueryResult;
  */
 public class CloudFileActionService implements Startable {
 
-  protected static final Log      LOG                = ExoLogger.getLogger(CloudFileActionService.class);
+  protected static final Log      LOG               = ExoLogger.getLogger(CloudFileActionService.class);
 
-  protected static final String   GROUPS_PATH        = "groupsPath";
+  protected static final String   SPACES_GROUP      = "spaces";
 
-  protected static final String   EXO_PRIVILEGEABLE  = "exo:privilegeable";
+  protected static final String   EXO_OWNEABLE      = "exo:owneable";
 
-  protected static final String   ECD_CLOUDFILELINK  = "ecd:cloudFileLink";
+  protected static final String   EXO_PRIVILEGEABLE = "exo:privilegeable";
 
-  protected static final String   ECD_DOCUMENTSDRIVE = "ecd:documentsDrive";
+  protected static final String   ECD_CLOUDFILELINK = "ecd:cloudFileLink";
 
-  protected static final String   MIX_VERSIONABLE    = "mix:versionable";
+  protected static final String   ECD_SHAREIDENTITY = "ecd:shareIdentity";
 
-  protected static final String   EXO_TRASHFOLDER    = "exo:trashFolder";
+  protected static final String   MIX_VERSIONABLE   = "mix:versionable";
 
-  protected static final String[] READ_PERMISSION    = new String[] { PermissionType.READ };
+  protected static final String   EXO_TRASHFOLDER   = "exo:trashFolder";
+
+  protected static final String[] READ_PERMISSION   = new String[] { PermissionType.READ };
 
   /**
    * Act on ecd:cloudFileLinkGroup property removal on a cloud file symlink and then unshare the file from the
    * group where it was shared by the link.
    */
-  protected class LinkGroupListener implements EventListener {
+  protected class LinkRemoveListener implements EventListener {
 
     /**
      * {@inheritDoc}
@@ -104,47 +112,52 @@ public class CloudFileActionService implements Startable {
         Event event = events.nextEvent();
         try {
           final String eventPath = event.getPath();
-          if (eventPath.endsWith(ECD_DOCUMENTSDRIVE)) {
+          if (eventPath.endsWith(ECD_SHAREIDENTITY)) {
             if (LOG.isDebugEnabled()) {
               LOG.debug("Cloud File link removed. User: " + event.getUserID() + ". Path: " + eventPath);
             }
 
-            String linkPath = eventPath.substring(0, eventPath.indexOf(ECD_DOCUMENTSDRIVE) - 1);
+            String linkPath = eventPath.substring(0, eventPath.indexOf(ECD_SHAREIDENTITY) - 1);
             String cloudFileUUID = removedLinks.remove(linkPath);
             if (cloudFileUUID != null) {
-              String driveName = removedShared.get(cloudFileUUID);
-              if (driveName != null) {
+              String identity = removedShared.get(cloudFileUUID);
+              if (identity != null) {
                 // was marked by RemoveCloudFileLinkAction
                 Session session = systemSession();
                 try {
                   Node fileNode = session.getNodeByUUID(cloudFileUUID);
                   CloudDrive localDrive = cloudDrive.findDrive(fileNode);
                   if (localDrive != null) {
-                    DriveData documentDrive = documentDrives.getDriveByName(driveName);
-                    if (documentDrive != null) {
-                      unshareInDrive(fileNode, localDrive, documentDrive);
-                    } else {
-                      if (LOG.isDebugEnabled()) {
-                        LOG.debug("Cannot find group drive for " + fileNode.getPath()
-                            + ". Unsharing not complete for this node.");
+                    if (getCloudFileLinks(fileNode, identity, true).getSize() == 0) {
+                      // unshare only if no more links found for given identity (user or group)
+                      DriveData documentDrive = null;
+                      if (identity.startsWith("/")) {
+                        // it's group drive
+                        documentDrive = documentDrives.getDriveByName(identity.replace('/', '.'));
+                        if (documentDrive != null) {
+                          unshareCloudFile(fileNode, localDrive, documentDrive.getAllPermissions());
+                        }
+                      } else {
+                        // try as user drive
+                        documentDrive = getUserDrive(identity);
+                        if (documentDrive != null) {
+                          unshareCloudFile(fileNode, localDrive, identity);
+                        }
                       }
-                    }
-                    // we also want remove all copied/linked symlinks from the original shared in space
-                    for (NodeIterator niter = getCloudFileLinks(fileNode, driveName); niter.hasNext();) {
-                      Node linkNode = niter.nextNode();
-                      Node parent = linkNode.getParent();
-                      linkNode.remove();
-                      parent.save();
+                      if (documentDrive == null) {
+                        if (LOG.isDebugEnabled()) {
+                          LOG.debug("Cannot find documents drive for " + fileNode.getPath()
+                              + ". Unsharing not complete for this node.");
+                        }
+                      }
                     }
                   } // drive not found, may be this file in Trash folder and user is cleaning it, do nothing
                 } catch (DriveRemovedException e) {
-                  LOG.warn("Cloud File unsharing canceled due to removed drive: " + e.getMessage()
-                      + ". Path: " + eventPath);
+                  LOG.warn("Cloud File unsharing canceled due to removed drive: " + e.getMessage() + ". Path: " + eventPath);
                 } catch (NotCloudDriveException e) {
-                  LOG.warn("Cloud File unsharing not possible for not cloud drives: " + e.getMessage()
-                      + ". Path: " + eventPath);
+                  LOG.warn("Cloud File unsharing not possible for not cloud drives: " + e.getMessage() + ". Path: "
+                      + eventPath);
                 } catch (Throwable e) {
-                  e.printStackTrace();
                   LOG.error("Cloud File unsharing error: " + e.getMessage() + ". Path: " + eventPath, e);
                 } finally {
                   session.logout();
@@ -202,20 +215,17 @@ public class CloudFileActionService implements Startable {
                           linkNode.remove();
                           parent.save();
                           if (LOG.isDebugEnabled()) {
-                            LOG.debug("Cloud File link '" + linkItem.getName()
-                                + "' successfully removed from the Trash.");
+                            LOG.debug("Cloud File link '" + linkItem.getName() + "' successfully removed from the Trash.");
                           }
                         }
                       } catch (PathNotFoundException e) {
                         // node already deleted
-                        LOG.warn("Cloud File " + eventPath + " node already removed directly from JCR: "
-                            + e.getMessage());
+                        LOG.warn("Cloud File " + eventPath + " node already removed directly from JCR: " + e.getMessage());
                       } catch (InterruptedException e) {
                         LOG.warn("Cloud File symlink remover interrupted " + e.getMessage());
                         Thread.currentThread().interrupt();
                       } catch (Throwable e) {
-                        LOG.error("Error removing node of Cloud File " + eventPath + ". " + e.getMessage(),
-                                  e);
+                        LOG.error("Error removing node of Cloud File " + eventPath + ". " + e.getMessage(), e);
                       }
                     }
                   });
@@ -278,6 +288,10 @@ public class CloudFileActionService implements Startable {
    */
   protected final ThreadExecutor         workerExecutor = ThreadExecutor.getInstance();
 
+  protected final String                 groupsPath;
+
+  protected final String                 usersPath;
+
   /**
    * 
    */
@@ -297,48 +311,155 @@ public class CloudFileActionService implements Startable {
     this.linkManager = linkManager;
     this.documentDrives = documentDrives;
     this.trash = trash;
+
+    this.groupsPath = hierarchyCreator.getJcrPath(BasePath.CMS_GROUPS_PATH);
+    this.usersPath = hierarchyCreator.getJcrPath(BasePath.CMS_USERS_PATH);
   }
 
   public boolean isGroupDrive(DriveData drive) {
-    String groupsPath = hierarchyCreator.getJcrPath(GROUPS_PATH);
     return drive.getHomePath().startsWith(groupsPath);
   }
 
+  public boolean isUserDrive(DriveData drive) {
+    return drive.getHomePath().startsWith(usersPath);
+  }
+
+  public Node linkShareToUser(Node fileNode, CloudDrive fileDrive, String userName) throws Exception {
+    Node userDocs = getUserPublicNode(userName);
+    // DriveData userDrive = getUserDrive(userName);
+    // if (userDrive != null) {
+    // Node userPersonalDocs = (Node) systemSession().getItem(userDrive.getHomePath());
+    // we'll link to /Documents folder of user Personal Documents
+    // XXX we have no clear way to get /Documents by name or other reference as it is configured in
+    // NewUserListeners of org service
+    // Node userDocs = linkManager.getTarget(userPersonalDocs.getNode("Public"));
+    // for (NodeIterator niter = userPersonalDocs.getNodes(); niter.hasNext();) {
+    // Node node = niter.nextNode();
+    // if (node.isNodeType(NodetypeConstant.EXO_DOCUMENTFOLDER)) {
+    // userDocs = node;
+    // break;
+    // }
+    // }
+    // if (userDocs == null) {
+    // try {
+    // userDocs = userPersonalDocs.getNode("documents");
+    // LOG.warn("Cannot find user Documents folder in " + userPersonalDocs.getPath() + ". Will use /documents
+    // node.");
+    // } catch (PathNotFoundException e) {
+    // userDocs = userPersonalDocs;
+    // LOG.warn("Cannot find user Documents folder in " + userPersonalDocs.getPath()
+    // + ". Will use root of the user folder.");
+    // }
+    // }
+
+    shareCloudFile(fileNode, fileDrive, userName);
+    Node link;
+    NodeIterator links = getCloudFileLinks(fileNode, userName, true);
+    if (links.getSize() == 0) {
+      link = linkFile((Node) systemSession().getItem(fileNode.getPath()), userDocs, userName);
+      // set all permissions on the link to the target user
+      setAllPermissions(link, userName);
+      userDocs.save();
+    } else {
+      link = links.nextNode();
+    }
+    return link;
+    // } else {
+    // if (LOG.isDebugEnabled()) {
+    // LOG.debug("Cannot find user documents drive for " + userName + ". Cloud File cannot be shared "
+    // + fileNode.getPath());
+    // }
+    // }
+    // return null;
+  }
+
+  public DriveData getUserDrive(String userName) throws Exception {
+    DriveData userDrive = null;
+    String homePath = null;
+    for (Iterator<DriveData> diter = documentDrives.getPersonalDrives(userName).iterator(); diter.hasNext();) {
+      DriveData drive = diter.next();
+      String path = drive.getHomePath();
+      if (path.startsWith(usersPath) && path.endsWith("/Private")) {
+        homePath = path;
+        userDrive = drive;
+        // we prefer drives with already defined real user path as home
+        if (homePath.indexOf("${userId}") < 0) {
+          break;
+        } else if (!diter.hasNext()) {
+          // if no real home path found and no more drives, do this job here
+          homePath = org.exoplatform.services.cms.impl.Utils.getPersonalDrivePath(homePath, userName);
+          userDrive.setHomePath(homePath);
+          break;
+        }
+      }
+    }
+    return userDrive;
+  }
+
+  public Node getUserPublicNode(String userName) throws Exception {
+    SessionProvider ssp = sessionProviders.getSystemSessionProvider(null);
+    if (ssp != null) {
+      String userPublic = hierarchyCreator.getJcrPath("userPublic");
+      return hierarchyCreator.getUserNode(ssp, userName).getNode(userPublic != null ? userPublic : "Public");
+    }
+    throw new RepositoryException("Cannot get session provider.");
+  }
+
+  public void removeLinks(Node fileNode, String shareIdentity) throws RepositoryException {
+    // remove all copied/linked symlinks from the original shared to given identity (or all if it is null)
+    for (NodeIterator niter = getCloudFileLinks(fileNode, shareIdentity, true); niter.hasNext();) {
+      Node linkNode = niter.nextNode();
+      Node parent = linkNode.getParent();
+      linkNode.remove();
+      parent.save();
+    }
+  }
+
   public DriveData getNodeDrive(Node node) throws Exception {
-    String groupId = getGroupNameFromPath(node.getPath());
+    String groupId = getDriveNameFromPath(node.getPath());
+    // TODO in case of user drive its home path may be not filled with actual value (contains $userId instead)
     return groupId != null ? documentDrives.getDriveByName(groupId) : null;
   }
 
-  public String getGroupNameFromPath(String nodePath) {
-    String groupsPath = hierarchyCreator.getJcrPath(GROUPS_PATH);
-    int i = nodePath.indexOf(groupsPath);
-    if (i == 0) {
-      String[] gpp = nodePath.substring(i, groupsPath.length()).split("/");
-      if (gpp.length >= 2) {
-        StringBuilder groupName = new StringBuilder();
-        groupName.append('.');
-        groupName.append(gpp[0]);
-        groupName.append('.');
-        groupName.append(gpp[1]);
-        return groupName.toString();
+  @Deprecated // TODO not complete logic
+  public String getDriveNameFromPath(String nodePath) throws CloudFileActionException {
+    List<DriveData> allDrives;
+    try {
+      allDrives = documentDrives.getAllDrives();
+    } catch (Exception e) {
+      throw new CloudFileActionException("Error reading document drives: "
+          + e.getMessage(), new ApplicationMessage("CloudFile.msg.ErrorReadingDrives", null, ApplicationMessage.ERROR));
+    }
+    for (DriveData drive : allDrives) {
+      String drivePath = drive.getHomePath();
+      if (nodePath.startsWith(drivePath)) {
+        // StringBuilder groupName = new StringBuilder();
+        if (drivePath.startsWith(groupsPath)) {
+          // XXX Names hardcoded as they already did in other places in eXo
+          // group drives have path /Groups${groupId}/Documents
+          // String[] gpp = drivePath.substring(drivePath.indexOf(groupsPath),
+          // groupsPath.length()).split("/");
+        } else if (drivePath.startsWith(usersPath)) {
+          // personal drives have path /Users/${userId}/Private
+          // String[] upp = drivePath.substring(drivePath.indexOf(usersPath), usersPath.length()).split("/");
+        }
+        return drive.getName();
       }
     }
     return null;
   }
 
-  public Node linkFile(final Node srcNode,
-                       final Node destNode,
-                       DriveData documentsDrive) throws NotCloudDriveException,
-                                                 DriveRemovedException,
-                                                 RepositoryException,
-                                                 CloudDriveException {
+  public Node linkFile(Node srcNode, Node destNode, String destIdentity) throws NotCloudDriveException,
+                                                                         DriveRemovedException,
+                                                                         RepositoryException,
+                                                                         CloudDriveException {
     String linkName = srcNode.getName();
     String linkTitle = documentName(srcNode);
     Node linkNode = linkManager.createLink(destNode, null, srcNode, linkName, linkTitle);
     if (linkNode.canAddMixin(ECD_CLOUDFILELINK)) {
       linkNode.addMixin(ECD_CLOUDFILELINK);
-      if (documentsDrive != null) {
-        linkNode.setProperty(ECD_DOCUMENTSDRIVE, documentsDrive.getName());
+      if (destIdentity != null) {
+        linkNode.setProperty(ECD_SHAREIDENTITY, destIdentity);
       }
     } else {
       LOG.warn("Cannot add mixin " + ECD_CLOUDFILELINK + " to symlink " + linkNode.getPath());
@@ -358,7 +479,7 @@ public class CloudFileActionService implements Startable {
         removedLinks.put(linkNode.getPath(), cloudFileUUID);
 
         try {
-          removedShared.put(cloudFileUUID, linkNode.getProperty(ECD_DOCUMENTSDRIVE).getString());
+          removedShared.put(cloudFileUUID, linkNode.getProperty(ECD_SHAREIDENTITY).getString());
         } catch (PathNotFoundException e) {
           // wasn't shared in documents drive
         }
@@ -373,15 +494,15 @@ public class CloudFileActionService implements Startable {
     return null;
   }
 
-  public void shareInDrive(final Node fileNode,
-                           final CloudDrive cloudDrive,
-                           final DriveData documentDrive) throws NotCloudDriveException,
-                                                          DriveRemovedException,
-                                                          RepositoryException,
-                                                          CloudDriveException {
+  public void shareCloudFile(final Node fileNode,
+                             final CloudDrive cloudDrive,
+                             final String... identities) throws NotCloudDriveException,
+                                                         DriveRemovedException,
+                                                         RepositoryException,
+                                                         CloudDriveException {
     if (LOG.isDebugEnabled()) {
-      LOG.debug("Sharing Cloud File " + fileNode.getPath() + " from " + cloudDrive + " to "
-          + documentDrive.getName());
+      LOG.debug("Sharing Cloud File " + fileNode.getPath() + " of " + cloudDrive + " to " + " "
+          + Arrays.toString(identities));
     }
 
     // avoid firing Cloud Drive synchronization
@@ -390,25 +511,24 @@ public class CloudFileActionService implements Startable {
       @Override
       public Void apply() throws RepositoryException {
         Node parent = fileNode.getParent();
-        String[] permissions = documentDrive.getAllPermissions();
         // we keep access to all sub-files of the src parent restricted
-        setParentPermissions(parent, permissions);
-        setPermissions(fileNode, permissions);
+        setParentPermissions(parent, identities);
+        setPermissions(fileNode, identities);
         parent.save(); // save everything here!
         return null;
       }
     });
   }
 
-  public void unshareInDrive(final Node fileNode,
-                             final CloudDrive cloudDrive,
-                             final DriveData documentDrive) throws NotCloudDriveException,
-                                                            DriveRemovedException,
-                                                            RepositoryException,
-                                                            CloudDriveException {
+  public void unshareCloudFile(final Node fileNode,
+                               final CloudDrive cloudDrive,
+                               final String... identities) throws NotCloudDriveException,
+                                                           DriveRemovedException,
+                                                           RepositoryException,
+                                                           CloudDriveException {
     if (LOG.isDebugEnabled()) {
-      LOG.debug("Unsharing Cloud File " + fileNode.getPath() + " from " + cloudDrive + " in "
-          + documentDrive.getName());
+      LOG.debug("Unsharing Cloud File " + fileNode.getPath() + " of " + cloudDrive + " from " + " "
+          + Arrays.toString(identities));
     }
     // avoid firing Cloud Drive synchronization
     CloudDriveStorage srcStorage = (CloudDriveStorage) cloudDrive;
@@ -416,10 +536,9 @@ public class CloudFileActionService implements Startable {
       @Override
       public Void apply() throws RepositoryException {
         Node parent = fileNode.getParent();
-        String[] permissions = documentDrive.getAllPermissions();
         // we remove access for this drive to all sub-files of the src parent
-        removePermissions(fileNode, permissions);
-        removePermissions(parent, permissions);
+        removePermissions(fileNode, identities);
+        removePermissions(parent, identities);
         parent.save(); // save everything here!
         return null;
       }
@@ -459,7 +578,7 @@ public class CloudFileActionService implements Startable {
                                    null,
                                    new String[] { EXO_TRASHFOLDER },
                                    false);
-      observation.addEventListener(new LinkGroupListener(),
+      observation.addEventListener(new LinkRemoveListener(),
                                    Event.PROPERTY_REMOVED,
                                    null,
                                    false,
@@ -479,8 +598,7 @@ public class CloudFileActionService implements Startable {
    * @throws AccessControlException
    * @throws RepositoryException
    */
-  protected void setPermissions(Node node, String[] identities) throws AccessControlException,
-                                                                RepositoryException {
+  protected void setPermissions(Node node, String... identities) throws AccessControlException, RepositoryException {
     ExtendedNode target = (ExtendedNode) node;
     if (target.canAddMixin(EXO_PRIVILEGEABLE)) {
       target.addMixin(EXO_PRIVILEGEABLE);
@@ -503,8 +621,7 @@ public class CloudFileActionService implements Startable {
    * @throws AccessControlException
    * @throws RepositoryException
    */
-  protected void removePermissions(Node node, String[] identities) throws AccessControlException,
-                                                                   RepositoryException {
+  protected void removePermissions(Node node, String... identities) throws AccessControlException, RepositoryException {
     ExtendedNode target = (ExtendedNode) node;
     if (target.isNodeType(EXO_PRIVILEGEABLE)) {
       for (String identity : identities) {
@@ -528,8 +645,7 @@ public class CloudFileActionService implements Startable {
    * @throws AccessControlException
    * @throws RepositoryException
    */
-  protected void setParentPermissions(Node parent, String[] identities) throws AccessControlException,
-                                                                        RepositoryException {
+  protected void setParentPermissions(Node parent, String... identities) throws AccessControlException, RepositoryException {
     // first we go through all sub-files/folders and enabled exo:privilegeable, this will copy current
     // parent
     // permissions to the child nodes for those that aren't privilegeable already.
@@ -542,6 +658,24 @@ public class CloudFileActionService implements Startable {
 
     // then we set read permissions to the parent
     setPermissions(parent, identities);
+  }
+
+  /**
+   * Set all available permissions to given node for given identities.
+   * 
+   * @param node
+   * @param identities
+   * @throws AccessControlException
+   * @throws RepositoryException
+   */
+  protected void setAllPermissions(Node node, String... identities) throws AccessControlException, RepositoryException {
+    ExtendedNode target = (ExtendedNode) node;
+    if (target.canAddMixin(EXO_PRIVILEGEABLE)) {
+      target.addMixin(EXO_PRIVILEGEABLE);
+    }
+    for (String identity : identities) {
+      target.setPermission(identity, PermissionType.ALL);
+    }
   }
 
   /**
@@ -579,17 +713,25 @@ public class CloudFileActionService implements Startable {
     throw new RepositoryException("Cannot get session provider.");
   }
 
-  protected NodeIterator getCloudFileLinks(Node targetNode, String driveName) throws RepositoryException {
+  protected NodeIterator getCloudFileLinks(Node targetNode,
+                                           String shareIdentity,
+                                           boolean useSystemSession) throws RepositoryException {
     StringBuilder queryCode = new StringBuilder().append("SELECT * FROM ")
-                                                    .append(ECD_CLOUDFILELINK)
-                                                    .append(" WHERE exo:uuid='")
-                                                    .append(targetNode.getUUID())
-                                                    .append("'");
-    if (driveName != null && driveName.length() > 0) {
-      queryCode.append(" AND ecd:documentsDrive='").append(driveName).append("'");
+                                                 .append(ECD_CLOUDFILELINK)
+                                                 .append(" WHERE exo:uuid='")
+                                                 .append(targetNode.getUUID())
+                                                 .append("'");
+    if (shareIdentity != null && shareIdentity.length() > 0) {
+      queryCode.append(" AND " + ECD_SHAREIDENTITY + "='").append(shareIdentity).append("'");
     }
 
-    QueryManager queryManager = targetNode.getSession().getWorkspace().getQueryManager();
+    QueryManager queryManager;
+    if (useSystemSession) {
+      queryManager = systemSession().getWorkspace().getQueryManager();
+    } else {
+      queryManager = targetNode.getSession().getWorkspace().getQueryManager();
+    }
+
     Query query = queryManager.createQuery(queryCode.toString(), Query.SQL);
     QueryResult queryResult = query.execute();
     return queryResult.getNodes();
