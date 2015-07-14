@@ -748,5 +748,21 @@
     </component-plugin>
   </external-component-plugins>
 
+  <external-component-plugins>
+    <target-component>org.exoplatform.services.listener.ListenerService</target-component>
+    <component-plugin>
+      <name>drive.document.autoversioning.event.listener</name>
+      <set-method>addListener</set-method>
+      <type>org.exoplatform.services.cms.listeners.DocumentAutoVersionEventListener</type>
+      <description>Document Auto Versioning Event Listener</description>
+      <init-params>
+        <value-param>
+          <name>ecms.documents.versioning.drives</name>
+          <description>List Drive applied Document Auto Versioning feature</description>
+          <value>${ecms.documents.versioning.drives:Managed Sites,Groups,Personal Documents}</value>
+        </value-param>
+      </init-params>
+    </component-plugin>
+  </external-component-plugins>
 </configuration>
 

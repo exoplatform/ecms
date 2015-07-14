@@ -426,6 +426,43 @@
         gj(element).popover('hide');
     };
 
+	/**
+	 * Create a notice
+	 * @param notice:  msg
+	 * @param closeable: can close
+	 */
+	WCMUtils.prototype.showNotice = function(noticeMsg, closeable){
+
+		if(gj("#wcm-notice") === undefined){
+			var noticeHtml = "<div id=\"wcm-notice\" style=\"display: none;\" class=\"alert alert-success wcmAlertSuccess\"></div>";
+			gj("body").append(noticeHtml);
+		}
+		var _noticeElem = document.getElementById("wcm-notice");
+		if(noticeMsg === null || noticeMsg === '') {
+			_noticeElem.style.display = "none";
+			_noticeElem.innerHTML = "";
+		} else {
+			var addressBar = gj("#UIAddressBar");
+			if(addressBar) {
+				var pos = gj("#UIAddressBar").position();
+				_noticeElem.style.display = "block";
+				_noticeElem.style.top = (pos.top + 5) + "px";
+			}else{
+
+			}
+
+			_noticeElem.style.display = "block";
+			_noticeElem.innerHTML  = '<i class="uiIconSuccess"></i>' + noticeMsg;
+			if(closeable) _noticeElem.innerHTML += '<a class="uiIconClose pull-right" title="Close Window" onclick="eXo.ecm.WCMUtils.closeNotice();"></a>';
+			_noticeElem.style.marginLeft = "-" + _noticeElem.offsetWidth/2 + "px";
+		}
+
+	}
+
+	WCMUtils.prototype.closeNotice = function(){
+		gj("#wcm-notice").hide();
+	}
+
     eXo.ecm.WCMUtils = new WCMUtils();
 	
 	// SELocalization
@@ -956,7 +993,9 @@
 			xmlHttpRequest.send();
 			return xmlHttpRequest.responseXML;
 		}
-	}	
+	}
+
+
 	
 	return {
 		WCMUtils : eXo.ecm.WCMUtils,
