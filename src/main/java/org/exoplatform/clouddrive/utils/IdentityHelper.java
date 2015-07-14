@@ -39,6 +39,10 @@ public class IdentityHelper {
 
   public static final String SYSTEM_USER_ID = IdentityConstants.SYSTEM;
 
+  public static final String EXO_OWNEABLE   = "exo:owneable";
+
+  public static final String EXO_USER       = "exo:owner";
+
   /**
    * 
    */
@@ -54,12 +58,13 @@ public class IdentityHelper {
    * @return boolean
    */
   public static boolean isUserMatch(String user1, String user2) {
-    return user1.equals(user2)
-        || (ROOT_USER_ID.equals(user1) || SYSTEM_USER_ID.equals(user1) || ROOT_USER_ID.equals(user2) || SYSTEM_USER_ID.equals(user2));
+    return user1.equals(user2) || (ROOT_USER_ID.equals(user1) || SYSTEM_USER_ID.equals(user1) || ROOT_USER_ID.equals(user2)
+        || SYSTEM_USER_ID.equals(user2));
   }
 
   /**
-   * Make the node owned by the current user (user of the node session).
+   * Make the node owned by the current user (user of the node session) if current owner is a system account.
+   * Does nothing otherwise.
    * 
    * @param node {@link Node} target node, its session will be used to set a new (current) owner
    * @param systemSession {@link Session} system session, it will be used to reset the current owner
@@ -68,27 +73,26 @@ public class IdentityHelper {
    * @throws PathNotFoundException if exo:owner property cannot be found on exo:owneable node, or if the node
    *           cannot be found by path via system session.
    */
-  public static Node ensureOwned(Node node, Session systemSession) throws PathNotFoundException,
-                                                                  RepositoryException {
+  public static Node ensureOwned(Node node, Session systemSession) throws PathNotFoundException, RepositoryException {
     String currentUser = node.getSession().getUserID();
     // don't allow system account be an owner
     if (!currentUser.equals(IdentityHelper.SYSTEM_USER_ID)) {
-      if (node.isNodeType("exo:owneable") && !node.getProperty("exo:owner").getString().equals(currentUser)) {
+      if (node.isNodeType(EXO_OWNEABLE) && node.getProperty(EXO_USER).getString().equals(IdentityHelper.SYSTEM_USER_ID)) {
         // owned not by the drive user
         // we need this as it may happen with ECMS that the node will be owned by system account
         // remove in system session
         Node snode = (Node) systemSession.getItem(node.getPath());
-        snode.removeMixin("exo:owneable");
+        snode.removeMixin(EXO_OWNEABLE);
         snode.save();
         node.refresh(true);
         // add in current user session
-        node.addMixin("exo:owneable");
+        node.addMixin(EXO_OWNEABLE);
         node.save();
       }
     }
     return node;
   }
-  
+
   public static boolean hasPermission(AccessControlList acl, String identity, String type) {
     if (acl.hasPermissions()) {
       for (String idp : acl.getPermissions(identity)) {
