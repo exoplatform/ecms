@@ -15,9 +15,6 @@ require(["SHARED/jquery"], function($) {
 		}
 	})
 
-	$('.RightBodyTDContainer').on('click',function(){
-		taApp.hideLeftPanel();	
-	})
 
 	// Toggle right  bar
 	$('.toggle-right-bar').on('click',function(){
@@ -35,6 +32,12 @@ require(["SHARED/jquery"], function($) {
   	taApp.showLeftPanel = function() {
     	var leftNavi= $('.LeftNavigationTDContainer');
     	$('body').addClass('open-left-bar');    
+    	$('.mask-layer-right').remove();
+    	$('#RightBody').before('<div class="mask-layer-right"></div>');
+    	$('.mask-layer-right').on('click',function(){
+			taApp.hideLeftPanel();	
+		})
+
     	$(leftNavi).addClass('expanded');			
     };
 
@@ -42,6 +45,7 @@ require(["SHARED/jquery"], function($) {
  	taApp.hideLeftPanel = function() {
     	var leftNavi= $('.LeftNavigationTDContainer');
     	$('body').removeClass('open-left-bar');	
+    	$('.mask-layer-right').remove();
     	$(leftNavi).removeClass('expanded');		
     };
     // Show right  navigation	
@@ -80,19 +84,6 @@ require(["SHARED/jquery"], function($) {
 		 	parent.append(sub);
 		 }
 	})
-    
-   /*taApp.equalHeight= function (group) {
-	   tallest = 0;
-	   group.each(function() {
-	      thisHeight = $(this).height();
-	      if(thisHeight > tallest) {
-	         tallest = thisHeight;
-	      }
-	   });
-   	group.height(tallest);
-
-	}
-	taApp.equalHeight($(".UITableColumn td"));*/
 
 
 	// function accordion for left navigation
@@ -102,7 +93,7 @@ require(["SHARED/jquery"], function($) {
 		$('.title.accordionBar').prepend('<i class="uiIconArrowRight pull-right"></i>');	
 		$('.uiCompanyNavigationPortlet .accordionCont').addClass('active').show();
 		$('#LeftNavigation .accordionBar').click(function(){	
-				
+
 			var subContent = $(this).next();
 			if (subContent.is(':visible')) {
 				return false;
@@ -118,5 +109,39 @@ require(["SHARED/jquery"], function($) {
 	}
 	// call accordion function
 	taApp.left_nav_accordion();
+
+
+	// function showProfileMenu
+		
+	taApp.showProfileMenu = function(){
+		var _w = Math.max($(window).width());
+		var dropdow_menu = $('#UIUserPlatformToolBarPortlet .dropdown-menu');
+		var avatar = $('.uiUserToolBarPortlet  .dropdown-toggle').clone();
+		var help_button = $('.uiHelpPLFToolbarPortlet   .dropdown-toggle').clone().attr('class','help-link');
+		 if ( _w < 481 ) {
+		 	dropdow_menu.prepend(avatar);
+		 	/**/
+		 	dropdow_menu.prepend('<li class="divider">&nbsp;</li>');
+		 	dropdow_menu.prepend('<li class="clearfix avatar-help-action"></li> ');		 	
+		 	$('.avatar-help-action').append(help_button);
+		 	$('.avatar-help-action').append(avatar);
+		 	dropdow_menu.prepend('<li class="clearfix action_top"><span class="uiNotifChatIcon chat-button pull-right"><span id="chat-notification"></span></span><span class="admin-setup pull-right"><i class="uiIconPLF24x24Setup"></i></span></li>');
+		 
+			 // show dropdown menu of administration menu
+			 $('.admin-setup').on('click',function(){
+			 	$('.uiSetupPlatformToolBarPortlet .dropdown-toggle').click();
+			 	return false;
+			 });
+			  // show dropdown menu of chat menu
+			  $('.chat-button').on('click',function(){
+			 	$('.chatStatusPortlet  .dropdown-toggle').click();
+			 	return false;
+			 });
+		}
+		
+	};
+
+	taApp.showProfileMenu();
+
 })
 
