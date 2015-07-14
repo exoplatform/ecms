@@ -903,6 +903,13 @@
 		};
 
 		/**
+		 * Initialize sharing manager UI.
+		 */
+		this.initSharing = function() {
+			cloudDriveUI.initSharing();
+		};
+		
+		/**
 		 * Initialize context and UI.
 		 */
 		this.init = function(nodeWorkspace, nodePath) {
@@ -1080,7 +1087,7 @@
 		var ALLOWED_DRIVE_MENU_ACTIONS = [ MENU_OPEN_FILE, MENU_PUSH_FILE, MENU_REFRESH_DRIVE, "Delete", "Paste",  
 				"AddToFavourite", "RemoveFromFavourite", "ViewInfo" ];
 		var ALLOWED_FILE_MENU_ACTIONS = [ MENU_OPEN_FILE, MENU_PUSH_FILE, MENU_REFRESH_DRIVE, "Delete", "Rename",  
-				"Copy", "Cut", "Paste", "AddToFavourite", "RemoveFromFavourite", "ViewInfo" ];
+				"Copy", "Cut", "Paste", "AddToFavourite", "RemoveFromFavourite", "ViewInfo", "ViewSharing" ];
 		var ALLOWED_SYMLINK_MENU_ACTIONS = [ "Delete" ];
 		var ALLOWED_LOCAL_FILE_MENU_ACTIONS = [ MENU_PUSH_FILE, "Delete", "Cut", "RemoveFromFavourite", "ViewInfo" ];
 
@@ -1091,7 +1098,8 @@
 				"uiIconEcmsManageAuditing" ];
 		var ALLOWED_DMS_MENU_FILE_ACTION_CLASSES = [ "uiIconEcmsOpenCloudFile", "uiIconEcmsPushCloudFile", 
 				"uiIconEcmsTaggingDocument", "uiIconEcmsWatchDocument", "uiIconEcmsViewMetadatas", "uiIconEcmsVote", 
-				"uiIconEcmsComment", "uiIconEcmsCopy", "uiIconEcmsPaste", "uiIconEcmsCut", "uiIconEcmsDelete", "uiIconEcmsRename" ];
+				"uiIconEcmsComment", "uiIconEcmsCopy", "uiIconEcmsPaste", "uiIconEcmsCut", "uiIconEcmsDelete", "uiIconEcmsRename",
+				"uiIconEcmsViewSharing" ];
 		var ALLOWED_DMS_MENU_DRIVE_ACTION_CLASSES = [ "uiIconEcmsRefreshCloudDrive", "DeleteNodeIcon" ];
 		var ALLOWED_DMS_MENU_LOCAL_FILE_ACTION_CLASSES = [ "uiIconEcmsPushCloudFile", "uiIconEcmsViewMetadatas", 
 				"uiIconEcmsCut", "uiIconEcmsDelete", "uiIconEcmsRemoveFromFavourite", "uiIconEcmsViewProperties" ];
@@ -2140,6 +2148,16 @@
 							});
 						});
 					}
+				}
+			}
+		};
+		
+		this.initSharing = function() {
+			var $permission = $("#UISharingManager .permission");
+			if ($permission.size() > 0) {
+				$permission.find("label.checkbox").hide();
+				if ($permission.find("input[name='userOrGroup']").val().length > 0) {
+					$permission.find("input[name='read']").prop("checked", true);
 				}
 			}
 		};

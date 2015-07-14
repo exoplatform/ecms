@@ -79,6 +79,7 @@ Software Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA
           <name>default-actions</name>
           <description>Names of ECMS menu actions enabled by default (WebUI extensions)</description>
           <value>ShowConnectCloudDrive</value>
+          <value>ViewSharing</value>
         </values-param>
       </init-params>
     </component-plugin>
@@ -195,13 +196,34 @@ Software Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA
               <string>org.exoplatform.ecm.dms.UIActionBar</string>
             </field>
             <field name="rank">
-              <int>75</int>
+              <int>80</int>
             </field>
             <field name="name">
               <string>CheckIn</string>
             </field>
             <field name="component">
               <string>org.exoplatform.clouddrive.ecms.action.CheckInManageComponent</string>
+            </field>
+          </object>
+        </object-param>
+        <object-param>
+          <name>ViewSharing</name>
+          <object type="org.exoplatform.webui.ext.UIExtension">
+            <field name="type">
+              <!-- string>org.exoplatform.ecm.dms.UIWorkingArea</string -->
+              <string>org.exoplatform.ecm.dms.UIActionBar</string>
+            </field>
+            <field name="name">
+              <string>ViewSharing</string>
+            </field>
+            <field name="component">
+              <string>org.exoplatform.clouddrive.ecms.action.ViewSharingActionComponent</string>
+            </field>
+            <!-- field name="category">
+              <string>ItemContextMenu_SingleSelection</string>
+            </field -->
+            <field name="rank">
+              <int>10</int>
             </field>
           </object>
         </object-param>

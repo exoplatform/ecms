@@ -21,6 +21,11 @@
 	text-align: left;
 }
 
+.uiIconEcmsViewSharing {
+	background: url("icons/clouddrive-logo-lightgray-16x16.png") no-repeat left center transparent !important;
+}
+
+
 /*************************** NodeType Icon ***********************/
 
 .application_xml16x16Icon {
