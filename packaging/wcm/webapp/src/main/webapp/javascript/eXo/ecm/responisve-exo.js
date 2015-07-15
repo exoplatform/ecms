@@ -1,6 +1,6 @@
 require(["SHARED/jquery"], function($) {
 	// add toggle right button
-	$(".OfficeMiddleTDContainer").append("<a href='javascript:void(0)' class='mobile-visible  toggle-right-bar'><i class='uiIconArrowLeft'></i><i class='uiIconArrowRight' ></i></a>");
+	$(".OfficeMiddleTDContainer").append("<a href='javascript:void(0)' class='visible-tablet  toggle-right-bar'><i class='uiIconArrowLeft'></i><i class='uiIconArrowRight' ></i></a>");
 	
 	var taApp = {}; 
 
@@ -118,14 +118,15 @@ require(["SHARED/jquery"], function($) {
 		var dropdow_menu = $('#UIUserPlatformToolBarPortlet .dropdown-menu');
 		var avatar = $('.uiUserToolBarPortlet  .dropdown-toggle').clone();
 		var help_button = $('.uiHelpPLFToolbarPortlet   .dropdown-toggle').clone().attr('class','help-link');
-		 if ( _w < 481 ) {
+		
+		 if ( _w < 481 &&  $('.action_top').length == 0 ) {
 		 	dropdow_menu.prepend(avatar);
-		 	/**/
-		 	dropdow_menu.prepend('<li class="divider">&nbsp;</li>');
-		 	dropdow_menu.prepend('<li class="clearfix avatar-help-action"></li> ');		 	
-		 	$('.avatar-help-action').append(help_button);
+		 	dropdow_menu.prepend('<li class="divider top mobile-visible">&nbsp;</li>');
+		 	dropdow_menu.prepend('<li class="clearfix avatar-help-action mobile-visible"></li> ');		 	
+		 	$('.avatar-help-action').append('<div class="help-link-box"></div>');
+		 	$('.help-link-box').append(help_button);
 		 	$('.avatar-help-action').append(avatar);
-		 	dropdow_menu.prepend('<li class="clearfix action_top"><span class="uiNotifChatIcon chat-button pull-right"><span id="chat-notification"></span></span><span class="admin-setup pull-right"><i class="uiIconPLF24x24Setup"></i></span></li>');
+		 	dropdow_menu.prepend('<li class="clearfix action_top mobile-visible"><span class="action-addon"><span class="uiNotifChatIcon chat-button pull-right"><span id="chat-notification"></span></span></span><span class="action-addon"> <span class="admin-setup pull-right"><i class="uiIconPLF24x24Setup"></i></span></span></li>');
 		 
 			 // show dropdown menu of administration menu
 			 $('.admin-setup').on('click',function(){
@@ -141,7 +142,17 @@ require(["SHARED/jquery"], function($) {
 		
 	};
 
-	taApp.showProfileMenu();
+	$('#UIUserPlatformToolBarPortlet').on('click',  function(event) {
+		event.preventDefault();
+		taApp.showProfileMenu();
+	});
+	
+
+/*	$(window).resize(function(event) {
+		taApp.showProfileMenu();
+	});*/
+
+	
 
 })
 
