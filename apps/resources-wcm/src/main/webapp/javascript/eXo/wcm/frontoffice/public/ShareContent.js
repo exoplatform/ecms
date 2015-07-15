@@ -14,6 +14,19 @@
 
   }
 
+  /**
+   * Check space is selected,
+   * if selected then enable share button otherwise not enable
+   * @param space
+   */
+  ShareContent.prototype.checkSelectedSpace = function(space){
+    if("[]" === space) {
+      gj(".PopupContent .uiActionBorder .btn-primary").attr("disabled","disabled");
+    }else{
+      gj(".PopupContent .uiActionBorder .btn-primarydis").removeAttr("disabled")
+    }
+  }
+
   eXo.ecm.ShareContent = new ShareContent();
   return {
     ShareContent : eXo.ecm.ShareContent
