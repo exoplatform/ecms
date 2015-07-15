@@ -126,7 +126,7 @@ require(["SHARED/jquery"], function($) {
 		 	$('.avatar-help-action').append('<div class="help-link-box"></div>');
 		 	$('.help-link-box').append(help_button);
 		 	$('.avatar-help-action').append(avatar);
-		 	dropdow_menu.prepend('<li class="clearfix action_top mobile-visible"><span class="action-addon"><span class="uiNotifChatIcon chat-button pull-right"><span id="chat-notification"></span></span></span><span class="action-addon"> <span class="admin-setup pull-right"><i class="uiIconPLF24x24Setup"></i></span></span></li>');
+		 	dropdow_menu.prepend('<li class="clearfix action_top mobile-visible"><span class="action-addon"><span class="uiNotifChatIcon chat-button"><span id="chat-notification"></span></span></span><span class="action-addon"> <span class="admin-setup"><i class="uiIconPLF24x24Setup"></i></span></span></li>');
 		 
 			 // show dropdown menu of administration menu
 			 $('.admin-setup').on('click',function(){
