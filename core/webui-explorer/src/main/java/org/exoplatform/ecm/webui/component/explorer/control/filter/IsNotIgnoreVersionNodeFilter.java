@@ -55,7 +55,11 @@ public class IsNotIgnoreVersionNodeFilter implements UIExtensionFilter {
        if (parrentNode.isNodeType(nodetype)) {
          return false;
        }
-       parrentNode = parrentNode.getParent();
+       try {
+         parrentNode = parrentNode.getParent();
+       }catch(Exception ex){
+         return false;
+       }
      }
    }
 

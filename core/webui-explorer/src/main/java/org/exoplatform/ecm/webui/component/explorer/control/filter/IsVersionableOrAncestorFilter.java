@@ -55,7 +55,11 @@ public class IsVersionableOrAncestorFilter extends UIExtensionAbstractFilter {
     while (true) {
       if (parent.isNodeType(Utils.MIX_VERSIONABLE)) return true;
       if (--depth == 0) return false;
-      parent = (Node) node.getAncestor(depth);
+      try {
+        parent = (Node) node.getAncestor(depth);
+      } catch(RepositoryException re){
+       return false;
+      }
       if (parent == null) return false;
     }
   }
