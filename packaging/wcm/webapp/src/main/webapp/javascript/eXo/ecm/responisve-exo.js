@@ -83,7 +83,7 @@ require(["SHARED/jquery"], function($) {
 		 	var sub = $(this).parent().find('.dropdown-menu:first > li').addClass('current-child');
 		 	parent.append(sub);
 		 }
-	})
+	});
 
 
 	// function accordion for left navigation
@@ -106,7 +106,7 @@ require(["SHARED/jquery"], function($) {
 			}
 			return false;
 		});
-	}
+	};
 	// call accordion function
 	taApp.left_nav_accordion();
 
@@ -147,12 +147,21 @@ require(["SHARED/jquery"], function($) {
 		taApp.showProfileMenu();
 	});
 	
+	// Search action on top navigation
+	taApp.search_on_top_nav = function(){
+		var _w = $(window).width();
+		if (_w < 481) {
+			$("#ToolBarSearch").append("<span><i class='uiIconClose uiIconWhite'></i></span>");
+			$('.UIToolbarContainer .ToolbarContainer').addClass('active');
 
-/*	$(window).resize(function(event) {
-		taApp.showProfileMenu();
-	});*/
-
-	
-
+			$("#ToolBarSearch input[name='adminkeyword']").focusout(function(){
+				$('.UIToolbarContainer .ToolbarContainer').removeClass('active');
+				$('#ToolBarSearch .uiIconClose').remove();
+			});
+		}
+	};
+	$('#ToolBarSearch > a').click(function(){
+			taApp.search_on_top_nav();
+	 });	
 })
 
