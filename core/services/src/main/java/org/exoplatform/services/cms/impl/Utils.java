@@ -22,6 +22,7 @@ import org.apache.commons.lang.StringUtils;
 import org.exoplatform.container.component.ComponentPlugin;
 import org.exoplatform.services.cms.BasePath;
 import org.exoplatform.services.cms.documents.TrashService;
+import org.exoplatform.services.cms.jcrext.activity.ActivityCommonService;
 import org.exoplatform.services.cms.link.LinkManager;
 import org.exoplatform.services.cms.templates.TemplateService;
 import org.exoplatform.services.cms.thumbnail.ThumbnailPlugin;
@@ -34,6 +35,7 @@ import org.exoplatform.services.jcr.ext.hierarchy.NodeHierarchyCreator;
 import org.exoplatform.services.jcr.impl.core.NodeImpl;
 import org.exoplatform.services.jcr.util.Text;
 import org.exoplatform.services.jcr.util.VersionHistoryImporter;
+import org.exoplatform.services.listener.ListenerService;
 import org.exoplatform.services.log.ExoLogger;
 import org.exoplatform.services.log.Log;
 import org.exoplatform.services.security.ConversationState;
@@ -454,6 +456,8 @@ public class Utils {
                 }else {
                   symlink.remove();
                 }
+                ListenerService listenerService =  WCMCoreUtils.getService(ListenerService.class);
+                listenerService.broadcast(ActivityCommonService.FILE_REMOVE_ACTIVITY, null, symlink);
               }
             }
           } catch (Exception e) {

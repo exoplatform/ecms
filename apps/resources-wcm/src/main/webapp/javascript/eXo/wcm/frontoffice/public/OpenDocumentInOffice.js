@@ -80,7 +80,6 @@
     })
         .success(function (data) {
           data = gj.parseJSON(data);
-          if (!data.isFile) return;
           var elClass = "uiIconEcmsOpenDocument";
           var isRightClick="";
 
@@ -98,6 +97,10 @@
 		  html+= data.ico+" "+elClass+"\"></i>\n"+data.title;
           openDocument.html(html);
 
+          if (!data.isFile) {
+            openDocument.addClass("hidden");
+            return;
+          }
           if(eXo.ecm.ECMWebDav !== undefined) {
             //showButton
             //console.log("ITHIT detected!");
