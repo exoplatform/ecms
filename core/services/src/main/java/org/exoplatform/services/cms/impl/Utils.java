@@ -399,8 +399,10 @@ public class Utils {
   private static void removeDeadSymlinksFromTrash(Node node) throws Exception {
     LinkManager linkManager = WCMCoreUtils.getService(LinkManager.class);
     List<Node> symlinks = linkManager.getAllLinks(node, EXO_SYMLINK);
+    ListenerService listenerService =  WCMCoreUtils.getService(ListenerService.class);
     for (Node symlink : symlinks) {
       symlink.remove();
+      listenerService.broadcast(ActivityCommonService.FILE_REMOVE_ACTIVITY, null, symlink);
     }
   }
   
