@@ -23,7 +23,7 @@
     if("[]" === space) {
       gj(".PopupContent .uiActionBorder .btn-primary").attr("disabled","disabled");
     }else{
-      gj(".PopupContent .uiActionBorder .btn-primarydis").removeAttr("disabled")
+      gj(".PopupContent .uiActionBorder .btn-primary").removeAttr("disabled")
     }
   }
 
