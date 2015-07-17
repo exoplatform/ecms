@@ -11,6 +11,7 @@
       var popup = spaceChooserPopup = gj(".uiShareDocuments.resizable .spaceChooserPopup");
       popup.offset({left:gj(this).offset().left, top:gj(this).offset().top+gj(this).height()-1});
     });
+    gj(".uiShareDocuments.resizable #textAreaInput").val("");
 
   }
 
