@@ -11,8 +11,37 @@
       var popup = spaceChooserPopup = gj(".uiShareDocuments.resizable .spaceChooserPopup");
       popup.offset({left:gj(this).offset().left, top:gj(this).offset().top+gj(this).height()-1});
     });
-    gj(".uiShareDocuments.resizable #textAreaInput").val("");
+    var placeholderMsg = gj(".uiShareDocuments.resizable #textAreaInput").attr("placeholder");
+    if(placeholderMsg === gj(".uiShareDocuments.resizable #textAreaInput").val()) gj(".uiShareDocuments.resizable #textAreaInput").val("");
 
+    gj(".uiShareDocuments.resizable #textAreaInput").exoMentions({
+      onDataRequest : function(mode, query, callback) {
+        var url = window.location.protocol + '//' + window.location.host + '/' + eXo.env.portal.rest + '/social/people/getprofile/data.json?search=' + query;
+        gj.getJSON(url, function(responseData) {
+          responseData = _.filter(responseData, function(item) {
+            return item.name.toLowerCase().indexOf(query.toLowerCase()) > -1;
+          });
+          callback.call(this, responseData);
+        });
+      },
+      idAction : 'ShareButton',
+      actionLink : 'AttachButton',
+      actionMention : 'mentionButton',
+      elasticStyle : {
+        maxHeight : '80px',
+        minHeight : '80px',
+        marginButton: '4px',
+        enableMargin: false
+      },
+      messages : window.eXo.social.I18n.mentions
+    });
+    var placeHolderDiv = "<div class=\"placeholder\" style=\"top: 5px;\">"+placeholderMsg+"</div>"
+    gj(".uiShareDocuments.resizable .exo-mentions").append(placeHolderDiv);
+    gj('#DisplaytextAreaInput').bind('DOMNodeInserted DOMSubtreeModified DOMNodeRemoved', function(event) {
+      gj(".uiShareDocuments.resizable #textAreaInput").exoMentions('val', function(value) {
+        gj(".uiShareDocuments.resizable #textAreaInput").val(value);
+      });
+    });
   }
 
   /**
