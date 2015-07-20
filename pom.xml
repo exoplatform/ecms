@@ -39,7 +39,7 @@
     <!-- **************************************** -->
     <!-- Project Dependencies                     -->
     <!-- **************************************** -->
-    <org.exoplatform.depmgt.version>10-SNAPSHOT</org.exoplatform.depmgt.version>
+    <org.exoplatform.depmgt.version>10.x-SNAPSHOT</org.exoplatform.depmgt.version>
     <!-- JCR Project Dependencies -->
     <org.exoplatform.kernel.version>2.4.13-GA</org.exoplatform.kernel.version>
     <org.exoplatform.core.version>2.5.13-GA</org.exoplatform.core.version>
@@ -290,7 +290,7 @@
         <groupId>org.exoplatform.ecms</groupId>
         <artifactId>ecms-ext-xcmis-config</artifactId>
         <version>${project.version}</version>
-      </dependency>      
+      </dependency>
       <dependency>
         <groupId>org.exoplatform.ecms</groupId>
         <artifactId>ecms-packaging-wcm-webapp</artifactId>
