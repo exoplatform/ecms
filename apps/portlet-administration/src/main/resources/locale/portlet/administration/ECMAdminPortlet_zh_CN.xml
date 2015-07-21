@@ -211,7 +211,7 @@
   <UINamespaceList>
     <header>
       <prefix>前缀</prefix>
-      <uri>Namespace URI</uri>
+      <uri>命名空间 URI</uri>
       <action>操作</action>
     </header>
     <action>
@@ -230,10 +230,10 @@
   -->
   <UIMetadataList>
     <label>
-      <false>false</false>
-      <true>true</true>
-      <True>true</True>
-      <False>false</False>
+      <false>假</false>
+      <true>真</true>
+      <True>真</True>
+      <False>假</False>
     </label>
     <title>
       <view>视图</view>
@@ -708,7 +708,7 @@
     <label>
       <both>Both</both>
       <folderOnly>Folder</folderOnly>
-      <unstructuredFolder>Unstructured Folder</unstructuredFolder>
+      <unstructuredFolder>非结构化的文件夹</unstructuredFolder>
     </label>
     <title>
       <AddPermission>添加权限</AddPermission>
@@ -755,7 +755,7 @@
     <label>
       <actionType>扩展操作类型：</actionType>
       <name>名称：</name>
-      <isMove>is Action Move:</isMove>
+      <isMove>是行动移动：</isMove>
       <variables>变量</variables>
       <exo_businessProcessAction>业务流程：</exo_businessProcessAction>
       <exo_scriptAction>Groovy 脚本：</exo_scriptAction>
@@ -988,6 +988,8 @@
       <publicationPublish>发布</publicationPublish>
 <contentNavigation>内容导航</contentNavigation>
 <addSymLink>添加符号链接</addSymLink>
+      <checkIn>Check In</checkIn>
+      <checkOut>Check Out</checkOut>
     </label>
     <action>
       <Save>#{word.save}</Save>      
@@ -1179,7 +1181,7 @@
   -->
   <uiECMScriptsPopup>
     <title>
-      <ecmScriptForm>ECM Script</ecmScriptForm>
+      <ecmScriptForm>ECM 脚本</ecmScriptForm>
     </title>
   </uiECMScriptsPopup>
 
@@ -1377,7 +1379,7 @@
       <set_property>设置属性权限</set_property>
       <remove>删除权利</remove>
     </label>
-    <title>将那节点添加权限</title>
+    <title>Add a permission to this node</title>
     <action>
       <Close>#{word.close}</Close>
       <Save>保存</Save>
@@ -1480,7 +1482,7 @@
       <add_node>修改</add_node>
       <remove>删除</remove>
     </label>
-    <title>将那节点添加权限</title>
+    <title>Add permission to this node</title>
     <action>
       <Close>#{word.close}</Close>
       <Save>#{word.save}</Save>
@@ -2515,7 +2517,7 @@
   </UIWorkspaceWizard>
   <UIRepositoryForm>
     <msg>
-      <not-complete-repository>The repository is being created. You need to wait a few minutes before creating another one.</not-complete-repository>
+      <not-complete-repository>正在创建存储库。你需要等待几分钟，然后创建另一个。</not-complete-repository>
     </msg>
   </UIRepositoryForm>
   

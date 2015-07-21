@@ -162,18 +162,8 @@ public class UIPresentationContainer extends UIContainer{
     UIPresentation presentation = getChild(UIPresentation.class);
     Node node = presentation.getOriginalNode();
     if (node!=null) {
-      if (node.hasProperty("publication:currentState")) {
-        PortletRequestContext portletRequestContext = WebuiRequestContext.getCurrentInstance();
-        String state = node.getProperty("publication:currentState").getValue().getString();
-        try {
-          state = portletRequestContext.getApplicationResourceBundle().getString("PublicationStates."+state);
-        } catch (MissingResourceException e) {
-          if (LOG.isWarnEnabled()) {
-            LOG.warn(e.getMessage());
-          }
-        }
-        return state;
-      }
+      PublicationService publicationService = WCMCoreUtils.getService(PublicationService.class);
+      return publicationService.getCurrentState(node);
     }
     return "";
   }

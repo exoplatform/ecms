@@ -202,8 +202,15 @@
     <msg>
       <time-to-late>Le temps de recherche est trop long.</time-to-late>
       <empty-field>La valeur de ce champ est nulle ou vide!</empty-field>
+      <empty-name>Please enter the name to search</empty-name>
+      <empty-content>Please enter a word or phrase to search</empty-content>
+      <empty-property>Veuillez sélectionner une propriété</empty-property>
+      <empty-property-keyword>Please enter a keyword for the property</empty-property-keyword>
+      <empty-doctype>Veuillez sélectionner un type de document</empty-doctype>
+      <empty-startDate>Le champ "Date de début" est obligatoire</empty-startDate>
       <invalid-format>Blancs datetime format dans le champ '{0}'</invalid-format>
       <invalid-date>"To Date" have to greater than "From Date"</invalid-date>
+      <invalid-startDate>Le champ "Date de début" doit être après aujourd'hui</invalid-startDate>
       <invalid-nodeType>Type de noeud "(0)" n'est pas valide! S'il vous plaît vérifiez à nouveau.</invalid-nodeType>
       <invalid-keyword>Le mot clé est invalide. Certains caractères ne sont pas autorisés.</invalid-keyword>
     </msg>
@@ -390,7 +397,7 @@
       <GeneralDrives>Lecteurs Principaux</GeneralDrives>
       <GroupDrives>Lecteurs de Groupe</GroupDrives>
       <Private>Privé</Private>
-      <Public>Oui</Public>
+      <Public>Public</Public>
       <BackupCenter>Centre de Sauvegarde</BackupCenter>
       <CategorizedDocumentsCenter>Centre Document des Catégories</CategorizedDocumentsCenter>
       <CollaborationCenter>Centre de Collaboration</CollaborationCenter>

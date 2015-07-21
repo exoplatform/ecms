@@ -202,8 +202,15 @@
     <msg>
       <time-to-late>Sökningen tog för lång tid</time-to-late>
       <empty-field>Vänligen ange ett giltigt nyckelord för sökning.</empty-field>
+      <empty-name>Please enter the name to search</empty-name>
+      <empty-content>Please enter a word or phrase to search</empty-content>
+      <empty-property>Please select a property</empty-property>
+      <empty-property-keyword>Please enter a keyword for the property</empty-property-keyword>
+      <empty-doctype>Please select a document type</empty-doctype>
+      <empty-startDate>"From Date" is required</empty-startDate>
       <invalid-format>Ogiltigt datum/tid-format i fältet {0}.</invalid-format>
       <invalid-date>"Till datum" måste vara senare än "Från datum"</invalid-date>
+      <invalid-startDate>"From Date" must not be later than today</invalid-startDate>
       <invalid-nodeType>Nodtypen {0} är ogiltig. Kontrollera igen.</invalid-nodeType>
       <invalid-keyword>Nyckelordet är ogiltig. Vissa tecken stöds inte.</invalid-keyword>
     </msg>

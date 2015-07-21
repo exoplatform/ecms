@@ -3,8 +3,7 @@
 	import org.exoplatform.download.DownloadService;
 	import org.exoplatform.download.InputStreamDownloadResource;
 	import java.io.InputStream;
-	import org.exoplatform.wcm.webui.reader.ContentReader;
-	
+
 	def rcontext = _ctx.getRequestContext() ;
     def jsManager = rcontext.getJavascriptManager();
 	def String htmlWYSIWYGFormId = "htmlData" + uicomponent.hashCode();
@@ -160,7 +159,6 @@
 										if(webContentNode != null && webContentNode.hasNode("default.html")) {
 											Node htmlNode = webContentNode.getNode("default.html");
 											htmlContent = htmlNode.getNode("jcr:content").getProperty("jcr:data").getValue().getString();
-											htmlContent = ContentReader.getEscapeHtmlContent(htmlContent);
 										}
 									}
 									if(htmlContent == null || htmlContent.equals("")) {

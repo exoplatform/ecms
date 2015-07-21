@@ -254,6 +254,7 @@
       <UISelectRestorePath>Selectaţi calea pentru restabilire</UISelectRestorePath>
       <UISEOForm>Gestionați SEO</UISEOForm>
       <UISEOToolbarForm>Gestionați SEO</UISEOToolbarForm>
+      <UIReadOnlyFileConfirmMessage>Open Document</UIReadOnlyFileConfirmMessage>
     </title>
     <header>
       <workspace>Spațiu de lucru</workspace>
@@ -400,6 +401,7 @@
       <constraintviolation-exception>JCR: nu găsește uuid. Modulul a fost șters sau modificat. Vă rugăm apăsați Refresh.</constraintviolation-exception>
       <path-not-found-exception>Acest element a fost șters sau modificat. Vă rugăm să faceți clic pe butonul de reîmprospătare.</path-not-found-exception>
       <not-exist-categories>Categoria nu există.</not-exist-categories>
+      <lock-node-read-only>This file is locked by user {0}. Open read-only ?</lock-node-read-only>
     </msg>
   </UIPopupMenu>
   <!--
@@ -592,6 +594,8 @@
       <RestoreFromTrash>Restaurează de la gunoi</RestoreFromTrash>
       <EmptyTrash>Golește gunoiul</EmptyTrash>
       <WebDavView>Descărcaţi şi permiteți adăugarea</WebDavView>
+      <Download>Descarcă</Download>
+      <OpenDocument>Remote Edit</OpenDocument>
     </event>
   </ECMContextMenu>
  
@@ -2420,6 +2424,8 @@
       <ReplaceData>Înlocuiţi datele</ReplaceData>
       <Back>Înapoi la Redenumire</Back>
       <Keepfile>Păstrează ambele fişiere</Keepfile>
+<ReadOnly>Open Read-only</ReadOnly>
+<Cancel>Renunță</Cancel>
     </label>
   </UIConfirmMessage>
 
@@ -2978,12 +2984,15 @@
       <user>Autor</user>
       <description>Descriere</description>
     </header>
+    <create-version>New version is created</create-version>
   </UIPublicationHistory>
   
   <UIPublicationSchedule>
     <label>
       <introduction>Aveţi posibilitatea să programaţi publicarea documentului. Selectaţi data pe care doriţi să vedeţi documentul publicat</introduction>
       <no-schedule-info>Nu există nici un program de publicare pentru document</no-schedule-info>
+      <UIPublicationPanelStartDateInput>Start Publication date</UIPublicationPanelStartDateInput>
+      <UIPublicationPanelEndDateInput>End Publication date</UIPublicationPanelEndDateInput>
     </label>
     <msg>
       <save-finished>Noul program de publicare a fost salvat cu succes.</save-finished>

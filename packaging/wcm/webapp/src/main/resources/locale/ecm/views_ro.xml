@@ -42,7 +42,10 @@
     <view>
       <label>
         <not-viewable>Acest document nu poate fi previzualizat.</not-viewable>
+        <pdf-max-size>The preview is not available for content larger than {0} MB.</pdf-max-size>
+        <pdf-max-page>The preview is not available for content with over {0} pages.</pdf-max-page>
         <using-webDAV>sau deschide în Office</using-webDAV>
+        <open-on-desktop>Open on Desktop</open-on-desktop>
         <file-size-too-big>Conținutul acestui fișier este prea mare. Ar trebui să-l salvați și să-l deschideți pe calculator.</file-size-too-big>
         <webDAV>Vizualizare WebDAV</webDAV>
         <download>Descarcă</download>

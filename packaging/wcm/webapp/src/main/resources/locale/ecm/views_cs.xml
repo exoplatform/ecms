@@ -42,7 +42,10 @@
     <view>
       <label>
         <not-viewable>Náhled na tento dokument není k dispozici.</not-viewable>
+        <pdf-max-size>The preview is not available for content larger than {0} MB.</pdf-max-size>
+        <pdf-max-page>The preview is not available for content with over {0} pages.</pdf-max-page>
         <using-webDAV>nebo otevřete v MS Office</using-webDAV>
+        <open-on-desktop>Open on Desktop</open-on-desktop>
         <file-size-too-big>Obsah tohoto souboru je příliš velký. Měli byste jej stáhnout a otevřít v klientovi.</file-size-too-big>
         <webDAV>WebDAV zobrazení</webDAV>
         <download>Stáhnout</download>

@@ -129,7 +129,7 @@
     <title>المستكشف</title>
     <label>
       <Root>الجذر</Root>
-      <webDavView>Open in MS Office</webDavView>
+      <webDavView>فتح الملفّ بواسطة مايكروسوفت أوفيس</webDavView>
     </label>
     <msg>
       <path-not-found>ربما تم حذف هذه العقدة أو تغييرها. الرجاء الضغط على زر التحديث.</path-not-found>
@@ -168,7 +168,7 @@
       <nodesPerPage>عقد في كل صفحة:</nodesPerPage>
     </label>
     <action>
-      <Back>#{word.back}</Back>
+      <Back>#{word.close}</Back>
       <Save>#{word.save}</Save>
     </action>
   </UIPreferencesForm>
@@ -254,6 +254,7 @@
       <UISelectRestorePath>اختر المسار الخاص بالاستعادة</UISelectRestorePath>
       <UISEOForm>إدارة الـSEO</UISEOForm>
       <UISEOToolbarForm>إدارة الـSEO</UISEOToolbarForm>
+      <UIReadOnlyFileConfirmMessage>فتح الوثيقة</UIReadOnlyFileConfirmMessage>
     </title>
     <header>
       <workspace>مساحة عمل</workspace>
@@ -400,6 +401,7 @@
       <constraintviolation-exception>لم يتمّ العثور على العنصر 'jcr:uuid'. رُبّما تم تغيير أو حذف العقدة. يرجى الضغط على زرّ التّحديث.</constraintviolation-exception>
       <path-not-found-exception>تمّ حذف أو تغيير هذه العقدة. يرجى الضغط على زرّ التّحديث.</path-not-found-exception>
       <not-exist-categories>هذه الفئة لا وجود لها.</not-exist-categories>
+      <lock-node-read-only>هذا الملف مؤمن بواسطة المستخدم {0}. أترغب بفتحه بصيغة  القراءة فقط؟</lock-node-read-only>
     </msg>
   </UIPopupMenu>
   <!--
@@ -591,7 +593,9 @@
       <MoveToTrash>تحويله الى سلة المهملات</MoveToTrash>
       <RestoreFromTrash>الاستعادة من سلّة المهملات</RestoreFromTrash>
       <EmptyTrash>إفراغ سلّة المهملات</EmptyTrash>
-      <WebDavView>Open in MS Office</WebDavView>
+      <WebDavView>فتح الملفّ بواسطة مايكروسوفت أوفيس</WebDavView>
+      <Download>تنزيل هذا الملف</Download>
+      <OpenDocument>تغيير عن بعد</OpenDocument>
     </event>
   </ECMContextMenu>
  
@@ -702,17 +706,17 @@
       <namespace>اسم الفضاء:</namespace>
       <multiple>متعدد:</multiple>
       <property_select>اضافة خاصيّة جديدة:</property_select>
-      <value0>Value 0</value0>
-      <value1>Value 1</value1>
-      <value2>Value 2</value2>
-      <value3>Value 3</value3>
-      <value4>Value 4</value4>
-      <value5>Value 5</value5>
-      <value6>Value 6</value6>
-      <value7>Value 7</value7>
-      <value8>Value 8</value8>
-      <value9>Value 9</value9>
-      <value10>Value 10</value10>
+      <value0>القيمة 0</value0>
+      <value1>القيمة 1</value1>
+      <value2>القيمة  2</value2>
+      <value3>القيمة 3</value3>
+      <value4>القيمة 4</value4>
+      <value5>القيمة 5</value5>
+      <value6>القيمة 6</value6>
+      <value7>القيمة 7</value7>
+      <value8>القيمة 8</value8>
+      <value9>القيمة 9</value9>
+      <value10>القيمة 10</value10>
     </label>
     <action>
       <Save>#{word.save}</Save>
@@ -1489,7 +1493,7 @@
       <import-successful>تمّت عمليّة الاستيراد بنجاح.</import-successful>
       <filename-invalid>اختر ملف من نوع 'xml' قصد استيراده.</filename-invalid>
       <filetype-error>لا يمكن الاستيراد. ربّما طرأ خطأ أثناء تحميل الملفّ.</filetype-error>
-      <xml-invalid>There is an invalid character at position [row, column]:{0} in {1} file</xml-invalid>
+      <xml-invalid>يوجد حرف صيغته غير صالحة وهو متواجد في المكان الآتي [صف ، عمود]:{0} في الملف {1}</xml-invalid>
       <mimetype-invalid>يمكن استيراد ملفات من نوع 'xml' أو 'zip' فحسب.</mimetype-invalid>
       <access-denied>غير مسموح. لا يمكنك الاستيراد هناك.</access-denied>
       <constraint-violation-exception>لا يمكنك استيراد البيانات. نوع العقدة '{0}' غير متاح في هذا المكان.</constraint-violation-exception>
@@ -1887,7 +1891,7 @@
     <msg>
       <name-exist>العلامة '{0}' موجودة مُسبقا.</name-exist>
       <tagName-invalid>اسم العلامة يحتوي على بعض الحروف الغير متاحة.</tagName-invalid>
-      <tagName-empty-or-invalid>The tag name is empty or contains some invalid characters.</tagName-empty-or-invalid>
+      <tagName-empty-or-invalid>العلامة لا تحتوي على اسم أو ربّما تحتوي على بعض الأحرف غير مناسبة.</tagName-empty-or-invalid>
       <tag-name-empty>اسم العلامة فارغ.</tag-name-empty>
       <tag-name-duplicate>أسماء العلامة في حالة تكرار.</tag-name-duplicate>
       <tagName-too-long>احدى العلامات تحتوي على اسم طويل جدا. أسماء العلامات يجب أن تكون أقل من 30 حرفا.</tagName-too-long>
@@ -2420,6 +2424,8 @@
       <ReplaceData>تعويض البيانات</ReplaceData>
       <Back>مرة أخرى لإعادة تسمية</Back>
       <Keepfile>ابقاء جميع الملفات</Keepfile>
+<ReadOnly>فتح للقراءة فقط</ReadOnly>
+<Cancel>الغاء</Cancel>
     </label>
   </UIConfirmMessage>
 
@@ -2978,12 +2984,15 @@
       <user>المؤلّف</user>
       <description>الوصف</description>
     </header>
+    <create-version>تمّ إنشاء إصدار جديد</create-version>
   </UIPublicationHistory>
   
   <UIPublicationSchedule>
     <label>
       <introduction>يُمكنك برمجة عمليّة نشر ملفّك. حدد التواريخ التي تود أن يُنشَر خلالها الملفّ.</introduction>
       <no-schedule-info>لا توجد أي برمجة لنشر الملفّ الخاص بك</no-schedule-info>
+      <UIPublicationPanelStartDateInput>تاريخ بداية النشر</UIPublicationPanelStartDateInput>
+      <UIPublicationPanelEndDateInput>تاريخ نهاية النّشر</UIPublicationPanelEndDateInput>
     </label>
     <msg>
       <save-finished>تمّ حفظ برمجة عمليّة النّشر الخاصة بك بنجاح.</save-finished>
@@ -3058,9 +3067,9 @@
       <ShowDrives>إظهار الأقراص</ShowDrives>
     </DrivesArea>
     <msg>
-      <no-view-found>There are no views applied for your access permission in drive '{0}'.</no-view-found>
+      <no-view-found>ليس هناك مشهد متاح لك و ذلك بالرّجوع الى خصائص صلاحيّاتك على القرص '{0}'.</no-view-found>
       <access-denied>غير مسموح بالدخول! ربما ، ليست لديك الصلاحيّات الكافية على مساحة العمل الخاصّة بالقرص '{0}'.</access-denied>
-      <empty-drives>Access denied. Either there is no drive in this repository or you do not have permission to access any drives in this repository.</empty-drives>
+      <empty-drives>استحالة الدخول. ليست هناك أقراص في هذا المستودع ، أو ربّما ليست لديك الصلاحيّات الكافية للدخول إلى محتوى أي قرص في مستودع البيانات الحالي.</empty-drives>
       <workspace-not-exist>تم تخزين القرص '{0}' في مساحة عمل أخرى غير معروفة. يرجى إعادة تهيئته.</workspace-not-exist>
     </msg>
   </UIDrivesArea>

@@ -202,8 +202,15 @@
     <msg>
       <time-to-late>Thời gian tìm kiếm quá dài.</time-to-late>
       <empty-field>Hãy nhập từ khóa để tìm kiếm.</empty-field>
+      <empty-name>Please enter the name to search</empty-name>
+      <empty-content>Please enter a word or phrase to search</empty-content>
+      <empty-property>Please select a property</empty-property>
+      <empty-property-keyword>Please enter a keyword for the property</empty-property-keyword>
+      <empty-doctype>Please select a document type</empty-doctype>
+      <empty-startDate>"From Date" is required</empty-startDate>
       <invalid-format>Trường {0} có định dạng ngày/giờ không đúng.</invalid-format>
       <invalid-date>"Ngày Kết thúc phải lớn hơn Ngày Bắt đầu"</invalid-date>
+      <invalid-startDate>"From Date" must not be later than today</invalid-startDate>
       <invalid-nodeType>Kiểu node "{0}" không đúng. Hãy kiểm tra lại.</invalid-nodeType>
       <invalid-keyword>Từ khóa tìm kiếm không hợp lệ hoặc không được hỗ trợ.</invalid-keyword>
     </msg>

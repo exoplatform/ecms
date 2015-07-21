@@ -2,7 +2,7 @@
 <bundle>
   <UIDashboardForm>
     <label>
-      <title>作成者ダッシュボード</title>
+      <title>Author Dashboard</title>
       <nocontent>コンテンツなし</nocontent>
       <mydraft>ドラフトコンテンツ</mydraft>
       <waitingapproval>承認待ち</waitingapproval>

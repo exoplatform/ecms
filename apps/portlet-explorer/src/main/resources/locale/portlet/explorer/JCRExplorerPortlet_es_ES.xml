@@ -254,6 +254,7 @@
       <UISelectRestorePath>Seleccionar Ruta de Restauración</UISelectRestorePath>
       <UISEOForm>Administrar SEO</UISEOForm>
       <UISEOToolbarForm>Administrar SEO</UISEOToolbarForm>
+      <UIReadOnlyFileConfirmMessage>Open Document</UIReadOnlyFileConfirmMessage>
     </title>
     <header>
       <workspace>Espacio de Trabajo</workspace>
@@ -400,6 +401,7 @@
       <constraintviolation-exception>El elemento obligatorio jcr : uuid no fué encontrado.  Quizás el nodo fué eliminado o cambiado.  Por favor pulse en el botón de actualizar.</constraintviolation-exception>
       <path-not-found-exception>Este nodo fue eliminado o cambiado. Por favor haga clic en el botón de Actualizar.</path-not-found-exception>
       <not-exist-categories>La categoría no existe.</not-exist-categories>
+      <lock-node-read-only>This file is locked by user {0}. Open read-only ?</lock-node-read-only>
     </msg>
   </UIPopupMenu>
   <!--
@@ -592,6 +594,8 @@
       <RestoreFromTrash>Recuperar del zafacón</RestoreFromTrash>
       <EmptyTrash>Vaciar zafacón</EmptyTrash>
       <WebDavView>Abrir en MS Office</WebDavView>
+      <Download>Descargar</Download>
+      <OpenDocument>Remote Edit</OpenDocument>
     </event>
   </ECMContextMenu>
  
@@ -2420,6 +2424,8 @@
       <ReplaceData>Reemplazar la data</ReplaceData>
       <Back>Regresar al cambio de nombre</Back>
       <Keepfile>Guardar ambos archivos</Keepfile>
+<ReadOnly>Open Read-only</ReadOnly>
+<Cancel>Cancelar</Cancel>
     </label>
   </UIConfirmMessage>
 
@@ -2978,12 +2984,15 @@
       <user>Autor</user>
       <description>Descripción</description>
     </header>
+    <create-version>New version is created</create-version>
   </UIPublicationHistory>
   
   <UIPublicationSchedule>
     <label>
       <introduction>Puede programar la publicación del documento. Seleccione la fecha que le gustaría ver el documento publicado</introduction>
       <no-schedule-info>No hay fecha de publicación para el documento</no-schedule-info>
+      <UIPublicationPanelStartDateInput>Start Publication date</UIPublicationPanelStartDateInput>
+      <UIPublicationPanelEndDateInput>End Publication date</UIPublicationPanelEndDateInput>
     </label>
     <msg>
       <save-finished>Su nueva fecha de publicación se ha guardado correctamente.</save-finished>

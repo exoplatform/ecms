@@ -30,7 +30,7 @@
         <comment-by>Skomentowane przez</comment-by>
         <email>Adres e-mail</email>
         <site>Witryna</site>
-        <lastComment>Last comment posted by {user} at {time}</lastComment>
+        <lastComment>Ostatni komentarz dodany przez {user} o godzinie {time}</lastComment>
       </label>
     </view>
   </Comment>
@@ -42,7 +42,10 @@
     <view>
       <label>
         <not-viewable>Podgląd tego dokumentu nie jest dostępny.</not-viewable>
+        <pdf-max-size>Podgląd jest niedostępny dla treści większej niż {0} MB.</pdf-max-size>
+        <pdf-max-page>Podgląd jest niedostępny dla treści o zawartości ponad {0} stron.</pdf-max-page>
         <using-webDAV>lub Otwórz w MS Office</using-webDAV>
+        <open-on-desktop>Otwórz na Pulpicie</open-on-desktop>
         <file-size-too-big>Zawartość tego pliku jest zbyt duża. Należy pobrać i otworzyć inny plik.</file-size-too-big>
         <webDAV>Widok WebDAV</webDAV>
         <download>Pobierz</download>

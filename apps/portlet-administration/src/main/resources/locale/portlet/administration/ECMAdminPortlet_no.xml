@@ -87,7 +87,7 @@
 -->
   <UITaxonomyTreeMainForm>
     <action>
-      <Reset>Reset</Reset>
+      <Reset>Tilbakestill</Reset>
     </action>
     <msg>
       <name-not-allowed>Forbudt navn</name-not-allowed>
@@ -988,6 +988,8 @@
       <publicationPublish>Publiser</publicationPublish>
 <contentNavigation>Innholds navigasjon</contentNavigation>
 <addSymLink>Legg til Symlink</addSymLink>
+      <checkIn>Check In</checkIn>
+      <checkOut>Check Out</checkOut>
     </label>
     <action>
       <Save>#{word.save}</Save>      
@@ -1068,7 +1070,7 @@
   -->
   <UITemplateForm>
     <title>
-      <AddPermission>Add Permission</AddPermission>
+      <AddPermission>Legg til rettighet</AddPermission>
     </title>
     <action>
       <Save>#{word.save}</Save>
@@ -1377,11 +1379,11 @@
       <set_property>Sett egenskapsrettighet</set_property>
       <remove>Fjerne rettighet</remove>
     </label>
-    <title>Legge til en rettighet til denne noden</title>
+    <title>Add a permission to this node</title>
     <action>
       <Close>#{word.close}</Close>
-      <Save>Save</Save>
-      <Reset>Reset</Reset>
+      <Save>Lagre</Save>
+      <Reset>Tilbakestill</Reset>
     </action>
     <msg>
       <checkbox-require>Velg minst én rettighet.</checkbox-require>
@@ -1480,7 +1482,7 @@
       <add_node>Endre</add_node>
       <remove>Fjern</remove>
     </label>
-    <title>Legge til en rettighet til denne noden</title>
+    <title>Add permission to this node</title>
     <action>
       <Close>#{word.close}</Close>
       <Save>#{word.save}</Save>

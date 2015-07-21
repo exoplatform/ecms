@@ -1634,6 +1634,7 @@ var SecondaryToolbar = {
   }
 };
 
+window.SecondaryToolbar = SecondaryToolbar;
 
 var PDFView = {
   pages: [],

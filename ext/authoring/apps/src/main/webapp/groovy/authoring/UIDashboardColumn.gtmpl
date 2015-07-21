@@ -1,5 +1,7 @@
 <%
   import org.exoplatform.wcm.webui.reader.ContentReader;
+  import javax.jcr.Node;
+
   def escapeChar = '%' as char
 %>
 

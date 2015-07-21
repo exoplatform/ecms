@@ -60,8 +60,8 @@
       <UICLVConfigTargetPageFormInputSet>Rodyti puslapyje</UICLVConfigTargetPageFormInputSet>
       <content-not-found>Content not found.</content-not-found>
       <ContentPath>Turinio kelias</ContentPath>
-      <Up>Į viršų</Up>
-      <Down>Žemyn</Down>
+      <Up>Up</Up>
+      <Down>Down</Down>
       <UICLVConfigCacheManagementLabel>Turinio matomumas</UICLVConfigCacheManagementLabel>
       <UICLVContentByQueryLabel>Content by Query</UICLVContentByQueryLabel>
       <UICLVConfigWorkspaceFormSelectBox>Darbo sritis</UICLVConfigWorkspaceFormSelectBox>

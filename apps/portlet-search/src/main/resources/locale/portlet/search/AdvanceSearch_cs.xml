@@ -3,7 +3,7 @@
   <UIDefaultSearchForm>
     <label>
       <keyword>Klíčové slovo</keyword>
-      <portal>Portal</portal>
+      <portal>Portál</portal>
       <Page>Stránka</Page>
       <Document>Dokument</Document>
     </label>
@@ -18,9 +18,9 @@
       <Document>Dokument</Document>
       <DocumentAndPage>Dokument a stránka</DocumentAndPage>
       <documentandpage>Dokument a stránka</documentandpage>
-      <resutlsCaption>Výsledky</resutlsCaption>
+      <results>Results {0} to {1} for {2}</results>
+      <oneResult>Only one result for {0}</oneResult>
       <ofAboutCaption>asi</ofAboutCaption>
-      <forCaption>pro</forCaption>
       <timeUnitCaption>sekund</timeUnitCaption>
       <similar>Stránky, kde je uveden stejný obsah</similar>
       <editor>Editor</editor>

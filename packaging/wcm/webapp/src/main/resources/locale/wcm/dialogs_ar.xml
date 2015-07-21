@@ -24,8 +24,8 @@
     <dialog>
       <label>
         <MainContent>المحتوى الأصلي</MainContent>
-        <cssFile>css الافتراضي</cssFile>
-        <jsFile>js  الافتراضي</jsFile>
+        <cssFile>default.css</cssFile>
+        <jsFile>default.js</jsFile>
         <Advanced>متطور/ة</Advanced>
         <Summary>الملخص</Summary>
         <name>#{word.name}</name>

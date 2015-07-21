@@ -2,7 +2,7 @@
 <bundle>
   <UIDashboardForm>
     <label>
-      <title>Yazar Paneli</title>
+      <title>Author Dashboard</title>
       <nocontent>İçerik Yok</nocontent>
       <mydraft>Taslak İçeriğim</mydraft>
       <waitingapproval>Onay bekleyenlerim</waitingapproval>

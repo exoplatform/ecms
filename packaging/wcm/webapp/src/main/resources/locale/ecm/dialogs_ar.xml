@@ -54,8 +54,8 @@
         <name>#{word.name}</name>
         <categories>الفئات</categories>
         <mimeType>#{Ecm.dialog.label.mimeType}</mimeType>
-        <width>Width</width>
-        <height>Height</height>
+        <width>عرض</width>
+        <height>ارتفاع</height>
         <content>#{word.content}</content>
         <re-upload>ملف موجود مسبقا. يمكنك استبدال من قبل حذفه وتحميل ملف آخر من هنا.</re-upload>
       </label>
@@ -133,7 +133,7 @@
         <end-time>#{Ecm.dialog.label.end-time}</end-time>
         <repeat-count>#{Ecm.dialog.label.repeat-count}</repeat-count>
         <time-inteval>#{Ecm.dialog.label.time-interval}</time-inteval>
-        <cron-expression>عبارة كرون</cron-expression>
+        <cron-expression>Cron Expression</cron-expression>
         <description>#{word.description}</description>
       </label>
     </dialog>
@@ -144,18 +144,18 @@
   <ElementSet>
     <dialog>
       <label>
-        <title>#{word.title}</title>
+        <title>#{word.title}:</title>
         <creator>الصانع</creator>
-        <subject>#{word.subject}</subject>
+        <subject>#{word.subject}:</subject>
         <source>المصدر</source>
         <contributor>المساهم</contributor>
         <resource-type>نوع المورد</resource-type>
-        <date>#{word.date}</date>
+        <date>#{word.date}:</date>
         <publisher>الناشر</publisher>
-        <description>#{word.description}</description>
+        <description>#{word.description}:</description>
         <rights>الحقوق</rights>
         <relation>العلاقة</relation>
-        <format>#{word.format}</format>
+        <format>#{word.format}:</format>
         <coverage>التغطية</coverage>
         <identifier>المعرف الوحيد:</identifier>
         <language>اللغة:</language>

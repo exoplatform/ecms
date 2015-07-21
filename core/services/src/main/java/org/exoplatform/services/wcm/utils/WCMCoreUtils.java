@@ -77,7 +77,6 @@ import org.exoplatform.services.log.ExoLogger;
 import org.exoplatform.services.log.Log;
 import org.exoplatform.services.organization.Membership;
 import org.exoplatform.services.organization.OrganizationService;
-import org.exoplatform.services.organization.User;
 import org.exoplatform.services.organization.idm.MembershipImpl;
 import org.exoplatform.services.security.ConversationState;
 import org.exoplatform.services.security.Identity;
@@ -716,30 +715,5 @@ public class WCMCoreUtils {
       settingService.set(Context.GLOBAL, Scope.GLOBAL, BAR_NAVIGATION_STYLE_KEY, SettingValue.create(barNavigationStyle));
     }
     return barNavigationStyle;
-  }
-
-  /* Return object of user
-   * @param username User to get
-   * @return User object
-   */
-  public static User getUserObject(String username) {
-    User userObject = null;
-    ConversationState state = ConversationState.getCurrent();
-    OrganizationService organizationService = WCMCoreUtils.getService(OrganizationService.class);
-    if (state != null && username != null && username.equalsIgnoreCase(state.getIdentity().getUserId())) {
-      userObject = (User)state.getAttribute("UserProfile");
-    } else if(organizationService != null) {
-      try {
-        userObject = organizationService.getUserHandler().findUserByName(username);
-      } catch(Exception e) {
-        if (LOG.isDebugEnabled()) {
-          LOG.debug("Get user object from Organization Service for " + username, e);
-        } else if (LOG.isWarnEnabled()) {
-          LOG.warn("Get user object from Organization Service for " + username);
-        }
-        return null;
-      }
-    }
-    return userObject;
   }
 }

@@ -20,18 +20,10 @@
   NavigationUtils.removeNavigationAsJson(portalName, userName);
   
   session.setAttribute("previousURI", selectedNodeUri);
-  if (userName==null && session.getMaxInactiveInterval()>60) {
-    session.setAttribute("DefaultMaxInactiveInterval", new Integer(session.getMaxInactiveInterval()));
-    session.setMaxInactiveInterval(60);  
-  } else if (userName!=null && session.getMaxInactiveInterval()==60) {
-    Integer interval = (Integer) session.getAttribute("DefaultMaxInactiveInterval");
-    if (interval != null) {
-      session.setMaxInactiveInterval(interval.intValue());
-    }
-  }
-    String language = rcontext.getLocale().getLanguage();
-    String country = rcontext.getLocale().getCountry();
-    if (country != null && country.length() > 0) {
+
+  String language = rcontext.getLocale().getLanguage();
+  String country = rcontext.getLocale().getCountry();
+  if (country != null && country.length() > 0) {
     language += "_" + country;
   }   
     

@@ -11,13 +11,13 @@
     <a class="actionIcon" onclick="<%=uiform.event("CompareExactly")%>" rel="tooltip" data-placement="bottom" title="<%=_ctx.appRes("UIConstraintForm.tooltip.FindExactly")%>"><i class="uiIconPlus uiIconLightGray"></i></a>
   </div>
   <div class="constraintOption form-inline">
-  <%uicomponent.renderChild(uicomponent.getChildById("containPro"))%>
+    <%uicomponent.renderChild(uicomponent.getChildById("containPro"))%>
     <label class="label-inline"><%=_ctx.appRes("UIConstraintForm.label.exactlyPro-properties")%>:</label> <%uicomponent.renderChild(uicomponent.getChildById("property2"))%>
     <a class="actionIcon" onclick="<%=uiform.event("AddMetadataType", "1")%>" rel="tooltip" data-placement="bottom" title="<%=_ctx.appRes("UIConstraintForm.tooltip.AddMetadataType")%>"><i class="uiIconPlus uiIconLightGray"></i></a>
     <label class="label-inline"><%=_ctx.appRes("UIConstraintForm.label.containPro-Contain")%>:</label> <%uicomponent.renderChild(uicomponent.getChildById("contain"))%>
   </div>
   <div class="constraintOption form-inline">
-  <%uicomponent.renderChild(uicomponent.getChildById("notContainPro"))%>
+    <%uicomponent.renderChild(uicomponent.getChildById("notContainPro"))%>
     <label class="label-inline"><%=_ctx.appRes("UIConstraintForm.label.exactlyPro-properties")%>:</label> <%uicomponent.renderChild(uicomponent.getChildById("property3"))%>
     <a class="actionIcon" onclick="<%=uiform.event("AddMetadataType", "2")%>" rel="tooltip" data-placement="bottom" title="<%=_ctx.appRes("UIConstraintForm.tooltip.AddMetadataType")%>"><i class="uiIconPlus uiIconLightGray"></i></a>
     <label class="label-inline"><%=_ctx.appRes("UIConstraintForm.label.notContainPro-notContain")%>:</label> <%uicomponent.renderChild(uicomponent.getChildById("notContain"))%>

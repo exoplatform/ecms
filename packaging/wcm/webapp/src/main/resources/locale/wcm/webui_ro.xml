@@ -202,8 +202,15 @@
     <msg>
       <time-to-late>Timpul de căutare este prea lung.</time-to-late>
       <empty-field>Vă rugăm să introduceți o expresie validă pentru căutare.</empty-field>
+      <empty-name>Please enter the name to search</empty-name>
+      <empty-content>Please enter a word or phrase to search</empty-content>
+      <empty-property>Please select a property</empty-property>
+      <empty-property-keyword>Please enter a keyword for the property</empty-property-keyword>
+      <empty-doctype>Please select a document type</empty-doctype>
+      <empty-startDate>"From Date" is required</empty-startDate>
       <invalid-format>Format dată/oră invalid în câmpul '{0}'.</invalid-format>
       <invalid-date>"La data de" trebuie să fie mai târziu decât "De la data"</invalid-date>
+      <invalid-startDate>"From Date" must not be later than today</invalid-startDate>
       <invalid-nodeType>Tipul "{0}" al modulului este invalid. Vă rugăm să verificaţi din nou.</invalid-nodeType>
       <invalid-keyword>Cuvântul cheie este invalid. Unele caractere nu sunt recunoscute.</invalid-keyword>
     </msg>

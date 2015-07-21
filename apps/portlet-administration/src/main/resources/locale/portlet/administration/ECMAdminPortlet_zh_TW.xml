@@ -988,6 +988,8 @@
       <publicationPublish>發佈</publicationPublish>
 <contentNavigation>內容導航</contentNavigation>
 <addSymLink>增加符號連結</addSymLink>
+      <checkIn>Check In</checkIn>
+      <checkOut>Check Out</checkOut>
     </label>
     <action>
       <Save>#{word.save}</Save>      
@@ -1377,7 +1379,7 @@
       <set_property>屬性設定權利</set_property>
       <remove>刪除權利</remove>
     </label>
-    <title>增加權限到該節點</title>
+    <title>Add a permission to this node</title>
     <action>
       <Close>#{word.close}</Close>
       <Save>儲存</Save>
@@ -1480,7 +1482,7 @@
       <add_node>修改</add_node>
       <remove>刪除</remove>
     </label>
-    <title>增加權限到該節點</title>
+    <title>Add permission to this node</title>
     <action>
       <Close>#{word.close}</Close>
       <Save>#{word.save}</Save>
@@ -2243,7 +2245,7 @@
     <email>#{word.email}</email>
       <action>#{word.action}</action>
       <Add>#{word.Add}</Add>
-      <Close># {word.close}</Close>
+      <Close>#{word.Close}</Close>
     </label>
   </PermissionTreeSelectUser>
   

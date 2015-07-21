@@ -41,38 +41,38 @@
       <UICLVConfigDisplayTemplateFormSelectBox>Vorlage</UICLVConfigDisplayTemplateFormSelectBox>
       <UICLVConfigPaginatorTemplateFormSelectBox>Paginierung</UICLVConfigPaginatorTemplateFormSelectBox>
       <UICLVConfigItemsPerPageFormStringInput>Elemente pro Seite</UICLVConfigItemsPerPageFormStringInput>
-      <UICLVConfigShowIllustrationFormCheckboxInput>Bild anzeigen</UICLVConfigShowIllustrationFormCheckboxInput>
-      <UICLVConfigShowSummaryFormCheckboxInput>Zusammenfassung anzeigen</UICLVConfigShowSummaryFormCheckboxInput>
-      <UICLVConfigShowHeaderFormCheckboxInput>Kopfzeile anzeigen</UICLVConfigShowHeaderFormCheckboxInput>
-      <UICLVConfigShowRefreshFormCheckboxInput>den Knopf "Aktualisieren" anzeigen</UICLVConfigShowRefreshFormCheckboxInput>
+      <UICLVConfigShowIllustrationFormCheckboxInput>Show Image</UICLVConfigShowIllustrationFormCheckboxInput>
+      <UICLVConfigShowSummaryFormCheckboxInput>Show Summary</UICLVConfigShowSummaryFormCheckboxInput>
+      <UICLVConfigShowHeaderFormCheckboxInput>Show Header</UICLVConfigShowHeaderFormCheckboxInput>
+      <UICLVConfigShowRefreshFormCheckboxInput>Show Refresh</UICLVConfigShowRefreshFormCheckboxInput>
       <UICLVConfigShowTitleFormCheckboxInput>Titel anzeigen</UICLVConfigShowTitleFormCheckboxInput>
       <UICLVConfigShowDateCreatedFormCheckboxInput>Datum anzeigen</UICLVConfigShowDateCreatedFormCheckboxInput>
-      <UICLVConfigShowLinkFormCheckboxInput>Link anzeigen</UICLVConfigShowLinkFormCheckboxInput>
-      <UICLVConfigShowReadmoreFormCheckboxInput>Weitere Links anzeigen</UICLVConfigShowReadmoreFormCheckboxInput>
-      <UICLVConfigAllowDynamicUrlStringInput>Dynamische URL zulassen</UICLVConfigAllowDynamicUrlStringInput>
-      <UICLVConfigShowRssLinkFormCheckboxInput>RSS-Feeds anzeigen</UICLVConfigShowRssLinkFormCheckboxInput>
-      <UICLVConfigShowAutomaticDetectionCheckboxInput>Automatische Erkennung</UICLVConfigShowAutomaticDetectionCheckboxInput>
+      <UICLVConfigShowLinkFormCheckboxInput>Show Link</UICLVConfigShowLinkFormCheckboxInput>
+      <UICLVConfigShowReadmoreFormCheckboxInput>Show More Links</UICLVConfigShowReadmoreFormCheckboxInput>
+      <UICLVConfigAllowDynamicUrlStringInput>Allow Dynamic URL</UICLVConfigAllowDynamicUrlStringInput>
+      <UICLVConfigShowRssLinkFormCheckboxInput>Show RSS Link</UICLVConfigShowRssLinkFormCheckboxInput>
+      <UICLVConfigShowAutomaticDetectionCheckboxInput>Automatic Detection</UICLVConfigShowAutomaticDetectionCheckboxInput>
       <AdvancedBlock>Erweitert</AdvancedBlock>
       <UICLVConfigDynamicNavigationLabel>Dynamische Navigation</UICLVConfigDynamicNavigationLabel>
-      <UICLVConfigContextualFolderRadioBoxInput>Kontextueller Ordner</UICLVConfigContextualFolderRadioBoxInput>
+      <UICLVConfigContextualFolderRadioBoxInput>Contextual Folder</UICLVConfigContextualFolderRadioBoxInput>
       <UICLVConfigShowCLVByStringInput>von</UICLVConfigShowCLVByStringInput>
       <UICLVConfigshowSCVWithStringInput>mit</UICLVConfigshowSCVWithStringInput>
       <UICLVConfigTargetPageFormInputSet>In Seite anzeigen</UICLVConfigTargetPageFormInputSet>
-      <content-not-found>Inhalt nicht gefunden.</content-not-found>
+      <content-not-found>Content not found.</content-not-found>
       <ContentPath>Inhaltspfad</ContentPath>
-      <Up>Aufwärts</Up>
-      <Down>Abwärts</Down>
+      <Up>Up</Up>
+      <Down>Down</Down>
       <UICLVConfigCacheManagementLabel>Inhaltssichtbarkeit</UICLVConfigCacheManagementLabel>
-      <UICLVContentByQueryLabel>Inhalt nach Abfrage</UICLVContentByQueryLabel>
+      <UICLVContentByQueryLabel>Content by Query</UICLVContentByQueryLabel>
       <UICLVConfigWorkspaceFormSelectBox>Arbeitsbereich</UICLVConfigWorkspaceFormSelectBox>
-      <UICLVConfigContentByQueryTextArea>nach Abfrage</UICLVConfigContentByQueryTextArea>
-      <UICLVConfigCacheEnableRadioBoxInput>Inhalt zwischen Benutzern teilen</UICLVConfigCacheEnableRadioBoxInput>
+      <UICLVConfigContentByQueryTextArea>by query</UICLVConfigContentByQueryTextArea>
+      <UICLVConfigCacheEnableRadioBoxInput>Share content between users</UICLVConfigCacheEnableRadioBoxInput>
     </label>
     <help>
       <ModeSelectionHelp>Es stehen zwei Modi zur Verfügung, um Inhalt anzuzeigen. "Nach Ordner" wird den gesamten Inhalt in Ihrem ausgewählten Ordner/Ihrer ausgewählten Kategorie anzeigen. Bei Wahl von "Nach Inhalt" können Sie den Inhalt manuell wählen, den Sie anzeigen möchten.</ModeSelectionHelp>
       <FolderPathHelp>Wählen Sie den Inhalt, den Sie anzeigen möchten. Die Standardauswahl wird dynamisch ersetzt werden, wenn Sie die dynamische Navigation aktivieren (sehen Sie weiter unten für die Wahl des erweiterten Modus).</FolderPathHelp>
       <HeaderOptionHelp>Eine Kopfzeile am Anfang der Inhaltsliste anzeigen. Wenn Sie die Option "automatische Erkennung" aktivieren, wird versucht die Kopfzeile anhand der aktuellen Auswahl zu finden.</HeaderOptionHelp>
-      <GeneralOptionHelp>Wählen Sie die grafischen Elemente, die Sie in Ihrer Liste anzeigen möchten. Beachten Sie, das abhängig von der ausgewählten Vorlage einige Elemente möglicherweise nicht verfügbar sind.</GeneralOptionHelp>
+      <GeneralOptionHelp>Select the graphical elements you want to show in your list. Note that, depending on your selected template, some elements may not be available.</GeneralOptionHelp>
       <ContextualHelp>Aktiviert die Option dynamische Navigation. Andere können den Inhalt basierend auf einem URL-Parameter dynamisch ändern.</ContextualHelp>
       <ParameterHelp>Dieser Parameter wird verwendet werden, um den Inhalt zu erhalten, wenn dynamische Navigation aktiviert ist.</ParameterHelp>
       <ShowDetailInPageHelp>Beim Klicken auf "Inhalt" wird der Benutzer zu einer Detailseite weitergeleitet. Sie müssen ein "Inhalte nach URL" Portlet mit eingeschalteter dynamischer Navigation auf der Zielseite haben, um den Inhalt anzuzeigen.</ShowDetailInPageHelp>
@@ -86,8 +86,8 @@
       <delete>Löschen</delete>
     </action>
     <msg>
-      <not-valid-path>Der Ordnerpfad ist ungültig.</not-valid-path>
-      <saving-success>Die Portlet-Einstellungen werden gespeichert.</saving-success>
+      <not-valid-path>The Folder Path is invalid.</not-valid-path>
+      <saving-success>The portlet's preferences are saved.</saving-success>
     </msg>
     <tab>
       <label>
@@ -99,8 +99,8 @@
   </UICLVConfig>
   <UICLVConfigDisplayModeFormRadioBoxInput>
     <label>
-      <AutoViewerMode>Nach Ordner</AutoViewerMode>
-      <ManualViewerMode>Nach Inhalt</ManualViewerMode>
+      <AutoViewerMode>By Folder</AutoViewerMode>
+      <ManualViewerMode>By Content</ManualViewerMode>
     </label>
   </UICLVConfigDisplayModeFormRadioBoxInput>
   <UICLVConfigItemPathFormInputSet>
@@ -183,7 +183,7 @@
   <UICLVConfigCacheEnableRadioBoxInput>
     <label>
       <ENABLE>Durch Authentifizierung eingeschränkt</ENABLE>
-      <DISABLE>Beschränkt durch Benutzerrollen</DISABLE>
+      <DISABLE>Restricted by User Roles</DISABLE>
     </label>
   </UICLVConfigCacheEnableRadioBoxInput>
 </bundle>

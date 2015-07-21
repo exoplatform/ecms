@@ -191,7 +191,7 @@
     <title>تسجيل إسم الفضاء جديد</title>
     <label>
       <namespace>بادئة إسم الفضاء</namespace>
-      <uri>URI</uri>
+      <uri>عنوان الـ URI</uri>
     </label>
     <action>
       <Save>#{word.save}</Save>
@@ -988,6 +988,8 @@
       <publicationPublish>نشر</publicationPublish>
 <contentNavigation>تصفّح المحتوى</contentNavigation>
 <addSymLink>إضافة وصلة رمزيّة</addSymLink>
+      <checkIn>مراجعة</checkIn>
+      <checkOut>إنهاء المراجعة</checkOut>
     </label>
     <action>
       <Save>#{word.save}</Save>      
@@ -1377,7 +1379,7 @@
       <set_property>مجموعة حق الملكية</set_property>
       <remove>إزالة الامتياز</remove>
     </label>
-    <title>إضافة صلاحيّة الى تلك العقدة</title>
+    <title>إضافة صلاحية إلى هذه العقدة</title>
     <action>
       <Close>#{word.close}</Close>
       <Save>حفظ</Save>

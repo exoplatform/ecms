@@ -42,7 +42,10 @@
     <view>
       <label>
         <not-viewable>پیش نمایش این نوشتار موجود نمی باشد.</not-viewable>
+        <pdf-max-size>The preview is not available for content larger than {0} MB.</pdf-max-size>
+        <pdf-max-page>The preview is not available for content with over {0} pages.</pdf-max-page>
         <using-webDAV>و یا باز کردن در مایکروسافت آفیس</using-webDAV>
+        <open-on-desktop>Open on Desktop</open-on-desktop>
         <file-size-too-big>اندازه این فایل بیش از حد بزرگ است. شما باید آنرا دانلود و در سیستم خود باز کنید.</file-size-too-big>
         <webDAV>نمای WebDAV</webDAV>
         <download>دانلود</download>

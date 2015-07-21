@@ -29,7 +29,7 @@ import javax.jcr.query.QueryManager;
 import javax.jcr.query.QueryResult;
 
 import org.apache.commons.lang.StringUtils;
-import org.exoplatform.ecm.jcr.SearchValidator;
+import org.exoplatform.commons.utils.XPathUtils;
 import org.exoplatform.ecm.jcr.model.Preference;
 import org.exoplatform.ecm.webui.component.explorer.UIJCRExplorer;
 import org.exoplatform.ecm.webui.form.UIFormInputSetWithAction;
@@ -73,13 +73,10 @@ import org.exoplatform.services.cms.impl.Utils;
       @EventConfig(listeners = UISimpleSearch.CompareExactlyActionListener.class),
       @EventConfig(listeners = UISimpleSearch.AddMetadataTypeActionListener.class),
       @EventConfig(listeners = UISimpleSearch.AddNodeTypeActionListener.class),
-      @EventConfig(listeners = UISimpleSearch.CheckboxClickActionListener.class, phase=Phase.DECODE),
       @EventConfig(listeners = UISimpleSearch.AddCategoryActionListener.class)
     }
 )
 public class UISimpleSearch extends UIForm {
-
-
 
   public static final String CONSTRAINTS_FORM = "ConstraintsForm";
   public static final String INPUT_SEARCH = "input";
@@ -534,6 +531,7 @@ public class UISimpleSearch extends UIForm {
       if (!currentPath.equals("/")) {
         statement.append("jcr:path like '").append(currentPath).append("/%' AND ");
       }
+      property = XPathUtils.escapeIllegalXPathName(property);
       statement.append(property).append(" is not null");
       QueryManager queryManager = uiExplorer.getTargetSession().getWorkspace().getQueryManager() ;
       Query query = queryManager.createQuery(statement.toString(), Query.SQL) ;
@@ -562,62 +560,4 @@ public class UISimpleSearch extends UIForm {
       event.getRequestContext().addUIComponentToUpdateByAjax(uiSearchContainer) ;
     }
   }
-  public static class CheckboxClickActionListener extends EventListener<UISimpleSearch>{
-
-    @Override
-    public void execute(Event<UISimpleSearch> event) throws Exception {
-      UIConstraintsForm constraintsForm = ((UIConstraintsForm)event.getSource().getChildById(CONSTRAINTS_FORM));
-      
-      if(constraintsForm.getUICheckBoxInput(UIConstraintsForm.CONTAIN_PROPERTY).getValue()){
-        addSearchValidator(constraintsForm.getUIStringInput(UIConstraintsForm.CONTAIN));
-      }
-      else{
-        removeSearchValidator(constraintsForm.getUIStringInput(UIConstraintsForm.CONTAIN));
-      }
-      if(constraintsForm.getUICheckBoxInput(UIConstraintsForm.EXACTLY_PROPERTY).getValue()){
-        addSearchValidator(constraintsForm.getUIStringInput(UIConstraintsForm.CONTAIN_EXACTLY));
-      }
-      else{
-        removeSearchValidator(constraintsForm.getUIStringInput(UIConstraintsForm.CONTAIN_EXACTLY));
-        }
-      if(constraintsForm.getUICheckBoxInput(UIConstraintsForm.NOT_CONTAIN_PROPERTY).getValue()){
-        addSearchValidator(constraintsForm.getUIStringInput(UIConstraintsForm.NOT_CONTAIN));
-      }
-      else{
-        removeSearchValidator(constraintsForm.getUIStringInput(UIConstraintsForm.NOT_CONTAIN));
-      }
-      
-      event.getRequestContext().addUIComponentToUpdateByAjax(constraintsForm);
-    }
-    
-    /*
-     * remove SearchValidator from <code>UIFormStringInput</code>
-     * @param uiStringInput
-     * */
-    private void removeSearchValidator(UIFormStringInput uiStringInput) {
-      if(uiStringInput.getValidators() == null) return;
-      int i = 0;
-      for( ;i < uiStringInput.getValidators().size();i++)
-        if(uiStringInput.getValidators().get(i) instanceof SearchValidator) break;
-      if(i < uiStringInput.getValidators().size())
-        uiStringInput.getValidators().remove(i);
-      
-    }
-    
-    /*
-     * Adding SearchValidator for UIFormStringInput, if UIFormStringInput already have this
-     * validator, this function do nothing
-     * @param uiStringInput
-     * @throw Exception
-     * */
-    private void addSearchValidator(UIFormStringInput uiStringInput) throws Exception {
-        if(uiStringInput.getValidators() != null)
-        {
-          for(int i = 0 ;i < uiStringInput.getValidators().size();i++)
-            if(uiStringInput.getValidators().get(i) instanceof SearchValidator) return;
-        }
-        uiStringInput.addValidator(SearchValidator.class);
-    }
-  }
-
 }

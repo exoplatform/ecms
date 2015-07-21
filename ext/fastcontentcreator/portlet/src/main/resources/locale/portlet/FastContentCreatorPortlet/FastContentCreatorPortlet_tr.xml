@@ -129,7 +129,7 @@
       <access-denied>Erişim engellendi. Bu şablonun erişim iznine sahip değilsiniz.</access-denied>
     </msg>
     <validator>
-      <validator>Validator</validator>
+      <validator>Onaylayan</validator>
       <destPath>Yolu ile</destPath>
     </validator>
   </UIFCCActionForm>

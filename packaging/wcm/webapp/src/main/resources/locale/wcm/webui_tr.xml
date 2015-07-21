@@ -42,7 +42,7 @@
   <Views>
     <label>
       <wcm-view>Web</wcm-view>
-      <admin-view>Admin</admin-view>
+      <admin-view>Yönetici</admin-view>
       <icon-view>Simgeler</icon-view>
       <thumbails-view>Küçükresimler</thumbails-view>
       <list-view>Liste</list-view>
@@ -202,8 +202,15 @@
     <msg>
       <time-to-late>Arama süresi çok uzun.</time-to-late>
       <empty-field>Lütfen arama için  geçerli bir anahtar kelime girin.</empty-field>
+      <empty-name>Please enter the name to search</empty-name>
+      <empty-content>Please enter a word or phrase to search</empty-content>
+      <empty-property>Please select a property</empty-property>
+      <empty-property-keyword>Please enter a keyword for the property</empty-property-keyword>
+      <empty-doctype>Please select a document type</empty-doctype>
+      <empty-startDate>"From Date" is required</empty-startDate>
       <invalid-format>'{0}' Alanda geçersiz tarih/saat biçimindedir.</invalid-format>
       <invalid-date>""Bitiş Tarihi" "Başlangıç Tarihinden" sonra olmalıdır"</invalid-date>
+      <invalid-startDate>"From Date" must not be later than today</invalid-startDate>
       <invalid-nodeType>Düğüm türü "{0}" geçersiz. Lütfen tekrar kontrol edin.</invalid-nodeType>
       <invalid-keyword>Anahtar geçersiz. Bazı karakterler desteklenmez.</invalid-keyword>
     </msg>

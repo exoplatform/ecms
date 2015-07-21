@@ -988,6 +988,8 @@
       <publicationPublish>Δημοσίευση</publicationPublish>
 <contentNavigation>Πλοήγηση Περιεχομένου</contentNavigation>
 <addSymLink>Προσθήκη συντόμευσης</addSymLink>
+      <checkIn>Check In</checkIn>
+      <checkOut>Check Out</checkOut>
     </label>
     <action>
       <Save>#{word.save}</Save>      

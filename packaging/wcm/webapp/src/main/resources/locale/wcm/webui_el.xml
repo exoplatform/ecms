@@ -202,8 +202,15 @@
     <msg>
       <time-to-late>Ο χρόνος έρευνας είναι πολύ μεγάλος.</time-to-late>
       <empty-field>Εισάγετε μια έγκυρη λέξη-κλειδί για την αναζήτηση.</empty-field>
+      <empty-name>Please enter the name to search</empty-name>
+      <empty-content>Please enter a word or phrase to search</empty-content>
+      <empty-property>Please select a property</empty-property>
+      <empty-property-keyword>Please enter a keyword for the property</empty-property-keyword>
+      <empty-doctype>Please select a document type</empty-doctype>
+      <empty-startDate>"From Date" is required</empty-startDate>
       <invalid-format>Μη έγκυρη μορφή ημερομηνίας/ώρας στο πεδίο '{0}'.</invalid-format>
       <invalid-date>"Η τελική ημερομηνία πρέπει να είναι μεταγενέστερη της αρχικής"</invalid-date>
+      <invalid-startDate>"From Date" must not be later than today</invalid-startDate>
       <invalid-nodeType>Ο τύπος κόμβου "{0}" δεν είναι έγκυρος. Ελέγξτε και πάλι.</invalid-nodeType>
       <invalid-keyword>Η λέξη-κλειδί δεν είναι έγκυρη. Ορισμένοι χαρακτήρες δεν υποστηρίζονται.</invalid-keyword>
     </msg>

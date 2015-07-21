@@ -2,7 +2,7 @@
 <bundle>
   <UIDashboardForm>
     <label>
-      <title>作者仪表板</title>
+      <title>Author Dashboard</title>
       <nocontent>没有内容</nocontent>
       <mydraft>我的草稿内容</mydraft>
       <waitingapproval>等待我的批准</waitingapproval>

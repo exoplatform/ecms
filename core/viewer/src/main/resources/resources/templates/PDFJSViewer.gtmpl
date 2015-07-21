@@ -330,11 +330,11 @@ if(uicomponent.isNotModernBrowser()) {
                 </a>
                 <span class="uiCheckbox">
                     <input id="findHighlightAll" type="checkbox" class="toolbarField">
-                    <span>Highlight all</span>
+                    <span data-l10n-id="find_highlight">Highlight all</span>
                 </span>
                 <span class="uiCheckbox">
                     <input id="findMatchCase" type="checkbox" class="toolbarField">
-                    <span>Match case</span>
+                    <span data-l10n-id="find_match_case_label">Match case</span>
                 </span>
                 <span id="findMsg" class="toolbarLabel"></span>
             </div>
@@ -489,6 +489,7 @@ if(uicomponent.isNotModernBrowser()) {
     <div id="printContainer"></div>
 
     <link rel="resource" type="application/l10n" href="/eXoWCMResources/pdf.js/locale/locale.properties" />
+    <script type="text/javascript" src="/eXoWCMResources/pdf.js/compatibility.js"></script>
     <script type="text/javascript" src="/eXoWCMResources/pdf.js/l10n.js"></script>
     <script type="text/javascript" src="/eXoWCMResources/pdf.js/pdf.js"></script>
     <script type="text/javascript">

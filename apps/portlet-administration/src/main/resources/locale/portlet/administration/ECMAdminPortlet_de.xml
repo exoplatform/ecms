@@ -10,7 +10,7 @@
       <label>
         <Templates>Vorlagen</Templates>
         <Explorer>Explorer</Explorer>
-        <Repository>Repository</Repository>
+        <Repository>Projektarchiv</Repository>
         <Advanced>Erweitert</Advanced>
       </label>
     </tab>    
@@ -27,7 +27,7 @@
       <UIActionManager>Aktionen</UIActionManager>
       <UIScriptManager>Skripte</UIScriptManager>
       <UIUnLockManager>Sperren</UIUnLockManager>
-      <UIFolksonomyManager>Tags</UIFolksonomyManager>      
+      <UIFolksonomyManager>Schlagwörter</UIFolksonomyManager>      
     </label>
     <msg>
       <access-denied>Zugriff verweigert. Sie haben keine Berechtigung, diesen Vorgang durchzuführen.</access-denied>
@@ -295,7 +295,7 @@
       <metadataName>Metadatenname:</metadataName>
       <viewPermission>Berechtigung:</viewPermission>
       <permission>UIMetadataForm</permission>
-      <metadataLabel>Label:</metadataLabel>
+      <metadataLabel>Bezeichnung:</metadataLabel>
     </label>
     <tab>
       <label>
@@ -399,7 +399,7 @@
       <permissions>Berechtigungen:</permissions>
       <showHiddenNode>Ausgeblendete Knoten anzeigen:</showHiddenNode>
       <allowCreateFolders>Ordnererstellung erlauben:</allowCreateFolders>
-      <Admin>Admin:</Admin>
+      <Admin>Administrator:</Admin>
       <Categories>Kategorien:</Categories>
       <Icons>Piktogramme:</Icons>
       <List>Liste:</List>
@@ -988,6 +988,8 @@
       <publicationPublish>Veröffentlichen</publicationPublish>
 <contentNavigation>Inhaltsnavigation</contentNavigation>
 <addSymLink>Symbolische Verknüpfung hinzufügen</addSymLink>
+      <checkIn>Check In</checkIn>
+      <checkOut>Check Out</checkOut>
     </label>
     <action>
       <Save>#{word.save}</Save>      
@@ -1093,7 +1095,7 @@
     </tab>
     <label>
       <name>Name:</name>
-      <label>Label:</label>
+      <label>Bezeichnung:</label>
       <isDocumentTemplate>ist Dokumentvorlage:</isDocumentTemplate>
       <dialog>Dialoginhalt</dialog>
       <view>Inhalt anzeigen</view>
@@ -1377,7 +1379,7 @@
       <set_property>Eigenschaftsrecht festlegen</set_property>
       <remove>Recht Entfernen</remove>
     </label>
-    <title>Eine Berechtigung auf diesen Knoten hinzufügen</title>
+    <title>Add a permission to this node</title>
     <action>
       <Close>#{word.close}</Close>
       <Save>Speichern</Save>
@@ -1480,7 +1482,7 @@
       <add_node>Ändern</add_node>
       <remove>Entfernen</remove>
     </label>
-    <title>Berechtigung für diesen Knoten hinzufügen</title>
+    <title>Add permission to this node</title>
     <action>
       <Close>#{word.close}</Close>
       <Save>#{word.save}</Save>
@@ -1806,7 +1808,7 @@
   <UITemplateEditForm>
     <label>
       <name>Name:</name>
-      <label>Label:</label>
+      <label>Bezeichnung:</label>
       <isDocumentTemplate>Ist Dokumentvorlage</isDocumentTemplate>
     </label>
     <action>
@@ -2242,8 +2244,8 @@
       <firstName>#{word.firstName}</firstName>
     <email>#{word.email}</email>
       <action>#{word.action}</action>
-      <Add>#{word.add}</Add>
-      <Close>#{word.close}</Close>
+      <Add>#{word.Add}</Add>
+      <Close>#{word.Close}</Close>
     </label>
   </PermissionTreeSelectUser>
   
@@ -2440,7 +2442,7 @@
 
   <UITabPane>
     <title>
-      <UITagManager>Tag Manager</UITagManager>
+      <UITagManager>Tag-Manager</UITagManager>
       <UITagPermissionManager>Berechtigungen</UITagPermissionManager>
     </title>
   </UITabPane>

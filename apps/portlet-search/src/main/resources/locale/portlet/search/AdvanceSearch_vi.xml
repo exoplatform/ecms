@@ -18,9 +18,9 @@
       <Document>Tài liệu</Document>
       <DocumentAndPage>Tài liệu và Trang</DocumentAndPage>
       <documentandpage>Tài liệu và Trang</documentandpage>
-      <resutlsCaption>Kết quả tìm kiếm</resutlsCaption>
+      <results>Results {0} to {1} for {2}</results>
+      <oneResult>Only one result for {0}</oneResult>
       <ofAboutCaption>của</ofAboutCaption>
-      <forCaption>dành cho</forCaption>
       <timeUnitCaption>giây</timeUnitCaption>
       <similar>Các trang có cùng nội dung</similar>
       <editor>Biên tập viên</editor>

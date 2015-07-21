@@ -42,7 +42,10 @@
     <view>
       <label>
         <not-viewable>Bu belgenin önizlemesi mevcut değildir.</not-viewable>
+        <pdf-max-size>The preview is not available for content larger than {0} MB.</pdf-max-size>
+        <pdf-max-page>The preview is not available for content with over {0} pages.</pdf-max-page>
         <using-webDAV>veya MS Office ile Açın</using-webDAV>
+        <open-on-desktop>Open on Desktop</open-on-desktop>
         <file-size-too-big>Bu içerik çok büyük. İçeriği indirip görüntüleyebilirsiniz.</file-size-too-big>
         <webDAV>WebDAV Görünümü</webDAV>
         <download>İndir</download>
@@ -138,7 +141,7 @@
   <ElementSet>
     <view>
       <label>
-        <not-avaliable>N/A</not-avaliable>
+        <not-avaliable>Uygulanabilir Değil</not-avaliable>
         <core-elements>Temel Unsurlar</core-elements>
         <title>Başlık</title>
         <creator>Oluşturan</creator>

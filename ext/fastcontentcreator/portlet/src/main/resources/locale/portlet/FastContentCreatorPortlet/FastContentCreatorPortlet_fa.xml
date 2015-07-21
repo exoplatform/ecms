@@ -148,7 +148,7 @@
     <title>
       <UIOneNodePathSelector>انتخاب مکان</UIOneNodePathSelector>
       <UIPermissionSelector>مرورگر مجوزها</UIPermissionSelector>
-      <UICategoriesSelector>Add Categories</UICategoriesSelector>
+      <UICategoriesSelector>افزودن دسته</UICategoriesSelector>
     </title>
   </PopupComponent>
 

@@ -42,7 +42,10 @@
     <view>
       <label>
         <not-viewable>Tài liệu này không thể xem được. Bạn cần tải về và xem bằng phần mềm phù hợp.</not-viewable>
+        <pdf-max-size>The preview is not available for content larger than {0} MB.</pdf-max-size>
+        <pdf-max-page>The preview is not available for content with over {0} pages.</pdf-max-page>
         <using-webDAV>hoặc mở bằng MS Office</using-webDAV>
+        <open-on-desktop>Open on Desktop</open-on-desktop>
         <file-size-too-big>Nội dung của tệp tin này quá lớn. Bạn nên tải xuống và mở tại máy khách.</file-size-too-big>
         <webDAV>Hiển thị kiểu WebDAV</webDAV>
         <download>Tải xuống</download>

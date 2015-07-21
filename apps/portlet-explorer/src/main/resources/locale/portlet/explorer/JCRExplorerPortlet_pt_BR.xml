@@ -254,6 +254,7 @@
       <UISelectRestorePath>Selecionar caminho de restauração</UISelectRestorePath>
       <UISEOForm>Gerenciar SEO</UISEOForm>
       <UISEOToolbarForm>Gerenciar SEO</UISEOToolbarForm>
+      <UIReadOnlyFileConfirmMessage>Abrir documento</UIReadOnlyFileConfirmMessage>
     </title>
     <header>
       <workspace>Espaço de trabalho</workspace>
@@ -400,6 +401,7 @@
       <constraintviolation-exception>O item obrigatório jcr:uiud não foi encontrado. Talvez o nó foi excluído ou modificado. Por favor, clique no botão Atualizar.</constraintviolation-exception>
       <path-not-found-exception>Este nó foi excluído ou alterado. Por favor, clique no botão Atualizar.</path-not-found-exception>
       <not-exist-categories>A categoria não existe</not-exist-categories>
+      <lock-node-read-only>This file is locked by user {0}. Open read-only ?</lock-node-read-only>
     </msg>
   </UIPopupMenu>
   <!--
@@ -592,6 +594,8 @@
       <RestoreFromTrash>Restaurar da Lixeira</RestoreFromTrash>
       <EmptyTrash>Esvaziar a lixeira</EmptyTrash>
       <WebDavView>Abrir no MS Office</WebDavView>
+      <Download>Baixar</Download>
+      <OpenDocument>Remote Edit</OpenDocument>
     </event>
   </ECMContextMenu>
  
@@ -702,17 +706,17 @@
       <namespace>Namespace</namespace>
       <multiple>Multiplo</multiple>
       <property_select>Adicione nova propriedade:</property_select>
-      <value0>Value 0</value0>
-      <value1>Value 1</value1>
-      <value2>Value 2</value2>
-      <value3>Value 3</value3>
-      <value4>Value 4</value4>
-      <value5>Value 5</value5>
-      <value6>Value 6</value6>
-      <value7>Value 7</value7>
-      <value8>Value 8</value8>
-      <value9>Value 9</value9>
-      <value10>Value 10</value10>
+      <value0>Valor 0</value0>
+      <value1>Valor 1</value1>
+      <value2>Valor 2</value2>
+      <value3>Valor 3</value3>
+      <value4>Valor 4</value4>
+      <value5>Valor 5</value5>
+      <value6>Valor 6</value6>
+      <value7>Valor 7</value7>
+      <value8>Valor 8</value8>
+      <value9>Valor 9</value9>
+      <value10>Valor 10</value10>
     </label>
     <action>
       <Save>#{word.save}</Save>
@@ -1887,7 +1891,7 @@
     <msg>
       <name-exist>Nome da tag '{0}' existe.</name-exist>
       <tagName-invalid>Há alguns caracteres inválidos no nome da tag.</tagName-invalid>
-      <tagName-empty-or-invalid>The tag name is empty or contains some invalid characters.</tagName-empty-or-invalid>
+      <tagName-empty-or-invalid>O nome da tag está vazio, ou contém alguns caracteres inválidos.</tagName-empty-or-invalid>
       <tag-name-empty>Seu nome de tag está vazio</tag-name-empty>
       <tag-name-duplicate>Você informou tags duplicadas.</tag-name-duplicate>
       <tagName-too-long>Uma das tags inseridas é muito longa. As tags devem ter menos de 30 caracteres.</tagName-too-long>
@@ -2420,13 +2424,15 @@
       <ReplaceData>Substituir dado</ReplaceData>
       <Back>Voltar para renomear</Back>
       <Keepfile>Manter ambos arquivos</Keepfile>
+<ReadOnly>Abrir como somente leitura</ReadOnly>
+<Cancel>Cancelar</Cancel>
     </label>
   </UIConfirmMessage>
 
   <UIRestoreConfirmMessage>
     <label>
       <Close>#{word.close}</Close>
-      <OK>OK</OK>
+      <OK>Ok</OK>
       <ReplaceData>Substituir dado</ReplaceData>
       <Back>Voltar para renomear</Back>
       <Keepfile>Manter ambos arquivos</Keepfile>
@@ -2978,12 +2984,15 @@
       <user>Autor</user>
       <description>Descrição</description>
     </header>
+    <create-version>New version is created</create-version>
   </UIPublicationHistory>
   
   <UIPublicationSchedule>
     <label>
       <introduction>Você pode agendar a publicação do seu documento. Selecione as datas que você gostaria de ver seu documento publicado</introduction>
       <no-schedule-info>Não há nenhuma agenda de publicação para o seu documento</no-schedule-info>
+      <UIPublicationPanelStartDateInput>Start Publication date</UIPublicationPanelStartDateInput>
+      <UIPublicationPanelEndDateInput>End Publication date</UIPublicationPanelEndDateInput>
     </label>
     <msg>
       <save-finished>Seu novo horário de publicação foi salvo com sucesso.</save-finished>
@@ -3058,9 +3067,9 @@
       <ShowDrives>Mostrar unidades</ShowDrives>
     </DrivesArea>
     <msg>
-      <no-view-found>There are no views applied for your access permission in drive '{0}'.</no-view-found>
-      <access-denied>Access denied. You may not have permission in the workspace of drive '{0}'.</access-denied>
-      <empty-drives>Access denied. Either there is no drive in this repository or you do not have permission to access any drives in this repository.</empty-drives>
+      <no-view-found>Não existe visualização aplicada para sua permissão de acesso na unidade '{0}'.</no-view-found>
+      <access-denied>Acesso negado. Talvez você não tenha permissão no espaço de trabalho da unidade '{0}'.</access-denied>
+      <empty-drives>Acesso negado. Não há nenhuma unidade neste repositório ou você não tem permissão para acessar quaisquer unidades neste repositório.</empty-drives>
       <workspace-not-exist>Unidade '{0}' foi armazenada em um espaço de trabalho não reconhecido. Por favor reconfigure esta unidade.</workspace-not-exist>
     </msg>
   </UIDrivesArea>

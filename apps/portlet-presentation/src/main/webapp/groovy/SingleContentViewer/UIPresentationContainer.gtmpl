@@ -9,7 +9,7 @@
   	import org.exoplatform.portal.application.PortalRequestContext;
   	import org.exoplatform.portal.webui.util.Util;
   	import org.exoplatform.webui.application.WebuiRequestContext;
-
+		import org.exoplatform.services.wcm.publication.PublicationDefaultStates;
 		def rcontext = _ctx.getRequestContext();
     def jsManager = rcontext.getJavascriptManager();
     jsManager.loadScriptResource("quick-edit");
@@ -23,6 +23,7 @@
 		def hoverClass = Utils.isShowQuickEdit() ? " containerHoverClass" : "";
 		def node = uicomponent.getNodeView();
 		def currentState = uicomponent.getCurrentState();
+    def currentStateClass = currentState+"Text";
 		def repo = "";
 	  def workspace = "";
 	  def uuid = "";
@@ -65,13 +66,7 @@
 				 <div class="edittingToolBarContainer" style="$edittingStyle">
 					 <div class="edittingToolBar clearfix">
 						<div class="edittingCurrentState pull-left">
-							 <% if (UIEditingForm.PUBLISHED.equals(currentState)) {%>
-									<span class="publishText"><i class="uiIconTick"></i> ${currentState}</span>
-							 <% } else if (UIEditingForm.DRAFT.equals(currentState)) {%>
-									<span class="draftText">${currentState}</span>
-							 <% } else { %>
-									<span>${currentState}</span>
-							 <% } %>
+              <span class="$currentStateClass"><%if(PublicationDefaultStates.PUBLISHED.equals(currentState)){%><i class="uiIconTick"></i><%}%> <%=_ctx.appRes("PublicationStates."+currentState)%></span>
 						</div>
 						<div class="btn-group pull-right">
 								<a class="btn" onclick = "eXo.ecm.CLV.addURL(this)" href="<%= uicomponent.getQuickEditLink(node) %>" rel="tooltip" data-placement="bottom" title="<%= _ctx.appRes("UIPresentationContainer.title.QuickEdit")%>">
@@ -144,7 +139,9 @@
         <% } else {%>
              <a class="actionIcon" title="<%= _ctx.appRes("UISCVPreferences.label.Back") %>" onclick="history.go(-1)" ><i class="uiIconEcmsReturn uiIconLightGray"></i></a>
         <% } %>
-            <a class="pull-right" href="javascript: void(0);" onclick="window.open('<%= uicomponent.getPrintUrl(node) %>')" title="<%= _ctx.appRes("UIPresentationContainer.label.print");%>"><i class="uiIconPrint uiIconLightGray"></i>  <%= _ctx.appRes("UIPresentationContainer.label.print") %></a>
+            <a class="pull-right" href="javascript: void(0);"
+							 onclick="if(window.SecondaryToolbar != undefined && window.SecondaryToolbar != null){window.SecondaryToolbar.printClick();}else{window.open('<%= uicomponent.getPrintUrl(node) %>');}"
+							 title="<%= _ctx.appRes("UIPresentationContainer.label.print");%>"><i class="uiIconPrint uiIconLightGray"></i>  <%= _ctx.appRes("UIPresentationContainer.label.print") %></a>
         </div>
 				<% 
 			} 

@@ -34,6 +34,7 @@ import org.apache.commons.lang.StringUtils;
 import org.exoplatform.ecm.webui.component.explorer.control.UIActionBar;
 import org.exoplatform.ecm.webui.component.explorer.popup.actions.UIDocumentFormController;
 import org.exoplatform.ecm.webui.component.explorer.popup.actions.UISelectDocumentForm;
+import org.exoplatform.ecm.webui.component.explorer.rightclick.manager.RestoreFromTrashManageComponent;
 import org.exoplatform.ecm.webui.component.explorer.sidebar.UISideBar;
 import org.exoplatform.ecm.webui.component.explorer.sidebar.UITreeExplorer;
 import org.exoplatform.ecm.webui.utils.Utils;
@@ -198,6 +199,14 @@ public class UIWorkingArea extends UIContainer {
     return null;
   }
 
+  public RestoreFromTrashManageComponent getThrashManageComponent(){
+    for(UIAbstractManagerComponent c : getManagers()){
+      if(c instanceof RestoreFromTrashManageComponent){
+        return (RestoreFromTrashManageComponent)c;
+      }
+    }
+    return null;
+  }
   public List<UIAbstractManagerComponent> getManagers() {
     List<UIAbstractManagerComponent> managers = new ArrayList<UIAbstractManagerComponent>();
     managers.addAll(this.managers);
@@ -422,7 +431,10 @@ public class UIWorkingArea extends UIContainer {
     UISelectDocumentTemplateTitle uiTemplateTitle = findFirstComponentOfType(UISelectDocumentTemplateTitle.class);
     boolean isUITemplateTitleRendered = isUISelectDocumentTemplateTitleRendered();
     uiTemplateTitle.setRendered(isUITemplateTitleRendered);
-
+    if(!context.useAjax()) {
+      UITreeExplorer uiTreeExplorer = this.findFirstComponentOfType(UITreeExplorer.class);
+      if (uiTreeExplorer != null) uiTreeExplorer.buildTree();
+    }
     super.processRender(context);
   }
 

@@ -254,6 +254,7 @@
       <UISelectRestorePath>انتخاب مسیر بازیابی</UISelectRestorePath>
       <UISEOForm>مدیریت جستجوگرها</UISEOForm>
       <UISEOToolbarForm>مدیریت جستجوگرها</UISEOToolbarForm>
+      <UIReadOnlyFileConfirmMessage>Open Document</UIReadOnlyFileConfirmMessage>
     </title>
     <header>
       <workspace>فضای کار</workspace>
@@ -400,6 +401,7 @@
       <constraintviolation-exception>آیتم اجباری Jcr:uuid پیدا شد. گره تغییر داده یا حذف شده است. لطفاً روی دکمه تازه سازی کلیک کنید.</constraintviolation-exception>
       <path-not-found-exception>این اِلمان حذف و یا تغییر کرده است. لطفاً روی دکمه تازه سازی کلیک کنید.</path-not-found-exception>
       <not-exist-categories>دسته وجود ندارد.</not-exist-categories>
+      <lock-node-read-only>This file is locked by user {0}. Open read-only ?</lock-node-read-only>
     </msg>
   </UIPopupMenu>
   <!--
@@ -592,6 +594,8 @@
       <RestoreFromTrash>بازیابی از سطل زباله</RestoreFromTrash>
       <EmptyTrash>خالی کردن سطل زباله</EmptyTrash>
       <WebDavView>Download and allow edition</WebDavView>
+      <Download>دانلود</Download>
+      <OpenDocument>Remote Edit</OpenDocument>
     </event>
   </ECMContextMenu>
  
@@ -747,7 +751,7 @@
       </title>
     </action>
     <header>
-      <usersOrGroups>User or Group</usersOrGroups>
+      <usersOrGroups>کاربر یا  گروه</usersOrGroups>
       <read>Read</read>
       <addNode>Modify</addNode>
       <remove>حذف</remove>
@@ -762,8 +766,8 @@
   </UIPermissionInfo>
   <permission>
     <title>
-      <SelectUser>Select User</SelectUser>
-      <SelectMember>Select Membership</SelectMember>
+      <SelectUser>انتخاب کاربر</SelectUser>
+      <SelectMember>انتخاب عضویت</SelectMember>
       <AddAny>Select Everyone</AddAny>
     </title>
   </permission>
@@ -790,7 +794,7 @@
   </UIGroupSelector>
   <UIPermissionForm>
     <label>
-      <UIPopupWindow>Select</UIPopupWindow>
+      <UIPopupWindow>انتخاب</UIPopupWindow>
       <permission>UIPermissionForm</permission>
       <userOrGroup>کاربر یا گروه</userOrGroup>
       <read>Read Right</read>
@@ -2420,6 +2424,8 @@
       <ReplaceData>جایگزین کردن داده ها</ReplaceData>
       <Back>بازگشت به تغییر نام</Back>
       <Keepfile>هر دو پرونده حفظ شود</Keepfile>
+<ReadOnly>Open Read-only</ReadOnly>
+<Cancel>انصراف</Cancel>
     </label>
   </UIConfirmMessage>
 
@@ -2978,12 +2984,15 @@
       <user>مولف</user>
       <description>شرح</description>
     </header>
+    <create-version>New version is created</create-version>
   </UIPublicationHistory>
   
   <UIPublicationSchedule>
     <label>
       <introduction>شما می توانید برای انتشار سند خود زمانبندی کنید. تاریخ های مورد نظر خود را برای زمان انتشار سند انتخاب نمایید</introduction>
       <no-schedule-info>هیچ زمانبندی برای انتشار سند شما وجود ندارد</no-schedule-info>
+      <UIPublicationPanelStartDateInput>Start Publication date</UIPublicationPanelStartDateInput>
+      <UIPublicationPanelEndDateInput>End Publication date</UIPublicationPanelEndDateInput>
     </label>
     <msg>
       <save-finished>زمانبندی انتشار شما با موفقیت ذخیره شد.</save-finished>
@@ -3059,9 +3068,9 @@
     </DrivesArea>
     <msg>
       <no-view-found>There are no views applied for your access permission in drive '{0}'.</no-view-found>
-      <access-denied>Access denied. You may not have permission in the workspace of drive '{0}'.</access-denied>
+      <access-denied>دسترسی رد شد. شما ممکن است در فضای درایو '{0}' مجوز لازم را نداشته باشید.</access-denied>
       <empty-drives>Access denied. Either there is no drive in this repository or you do not have permission to access any drives in this repository.</empty-drives>
-      <workspace-not-exist>Drive '{0}' was stored in one unrecognized workspace. Please reconfigure this drive.</workspace-not-exist>
+      <workspace-not-exist>درایو '{0}' در یک فضای کاری نامشخص ذخیره شده است. لطفا این درایو را دوباره تنظیم کنید.</workspace-not-exist>
     </msg>
   </UIDrivesArea>
   <UIJcrExplorerEditForm>

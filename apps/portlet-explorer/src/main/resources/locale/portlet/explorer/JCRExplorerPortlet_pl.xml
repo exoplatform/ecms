@@ -254,6 +254,7 @@
       <UISelectRestorePath>Wybierz ścieżkę przywracania</UISelectRestorePath>
       <UISEOForm>Zarządzaj SEO</UISEOForm>
       <UISEOToolbarForm>Zarządzaj SEO</UISEOToolbarForm>
+      <UIReadOnlyFileConfirmMessage>Otwórz dokument</UIReadOnlyFileConfirmMessage>
     </title>
     <header>
       <workspace>Przestrzeń robocza</workspace>
@@ -400,6 +401,7 @@
       <constraintviolation-exception>Obowiązkowa pozycja jcr: UUID nie została znaleziona. Węzeł mógł zostać usunięty lub zmieniony. Kliknij przycisk Odśwież.</constraintviolation-exception>
       <path-not-found-exception>Ten węzeł został usunięty lub zmieniony. Kliknij przycisk Odśwież.</path-not-found-exception>
       <not-exist-categories>Kategoria nie istnieje.</not-exist-categories>
+      <lock-node-read-only>Ten plik jest zablokowany przez użytkownika {0}. Otworzyć tylko do odczytu ?</lock-node-read-only>
     </msg>
   </UIPopupMenu>
   <!--
@@ -592,6 +594,8 @@
       <RestoreFromTrash>Przywróć z kosza</RestoreFromTrash>
       <EmptyTrash>Opróżnij kosz</EmptyTrash>
       <WebDavView>Download and allow edition</WebDavView>
+      <Download>Pobierz</Download>
+      <OpenDocument>Edycja zdalna</OpenDocument>
     </event>
   </ECMContextMenu>
  
@@ -1489,7 +1493,7 @@
       <import-successful>Zaimportowany.</import-successful>
       <filename-invalid>Przeglądaj plik .xml w polu „Dodaj plik”, aby importować.</filename-invalid>
       <filetype-error>Nie można importować przesłanego pliku. Plik .xml może być nieprawidłowy.</filetype-error>
-      <xml-invalid>There is an invalid character at position [row, column]:{0} in {1} file</xml-invalid>
+      <xml-invalid>Nieprawidłowy znak w pozycji [wiersz, kolumna]:{0} w pliku {1}</xml-invalid>
       <mimetype-invalid>Możesz importować tylko pliki z rozszerzeniami .zip lub .xml.</mimetype-invalid>
       <access-denied>Odmowa dostępu. Nie masz uprawnień aby zaimportować.</access-denied>
       <constraint-violation-exception>Importowanie danych jest niemożliwe. Typ '{0}' nie jest dozwolony w tym miejscu.</constraint-violation-exception>
@@ -2420,6 +2424,8 @@
       <ReplaceData>Zamiana danych</ReplaceData>
       <Back>Powrót do zmiany nazwy</Back>
       <Keepfile>Zatrzymaj oba pliki</Keepfile>
+<ReadOnly>Otwórz tylko do odczytu</ReadOnly>
+<Cancel>Anuluj</Cancel>
     </label>
   </UIConfirmMessage>
 
@@ -2978,12 +2984,15 @@
       <user>Autor</user>
       <description>Opis</description>
     </header>
+    <create-version>Została stworzona nowa wersja</create-version>
   </UIPublicationHistory>
   
   <UIPublicationSchedule>
     <label>
       <introduction>Można zaplanować publikację dokumentu. Wybierz datę, z jaką chcesz opublikować dokument</introduction>
       <no-schedule-info>Nie ma harmonogramu publikacji dla tego dokumentu</no-schedule-info>
+      <UIPublicationPanelStartDateInput>Data rozpoczęcia publikacji</UIPublicationPanelStartDateInput>
+      <UIPublicationPanelEndDateInput>Data zakończenia publikacji</UIPublicationPanelEndDateInput>
     </label>
     <msg>
       <save-finished>Nowy harmonogram publikacji został zapisany pomyślnie.</save-finished>
@@ -3147,7 +3156,7 @@
     <or>lub</or>
     <AlreadyInUse>Obecnie w użyciu</AlreadyInUse>
     <Keep>Zachowaj oba</Keep>
-    <Replace>Zastąp</Replace>
+    <Replace>Zamień</Replace>
     <Canceled>Anulowane</Canceled>
     <Cancel>#{word.cancel}</Cancel>
     <AbortAllConfirmation>Czy chcesz, aby przerwać wszystkie pliki w toku?</AbortAllConfirmation>
