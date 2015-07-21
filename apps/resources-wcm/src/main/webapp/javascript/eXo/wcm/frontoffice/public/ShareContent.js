@@ -4,13 +4,19 @@
 (function(gj, _) {
   var ShareContent = function() {}
 
-  ShareContent.prototype.init = function(){
-    gj(".uiShareDocuments.resizable .selectbox").addClass("input-medium");
+  function correctSpacePos(){
     var dropdown = gj(".uiShareDocuments.resizable .spaceSwitcherContainer #DisplayModesDropDown");
     gj(dropdown).bind( "click", function() {
-      var popup = spaceChooserPopup = gj(".uiShareDocuments.resizable .spaceChooserPopup");
+      var popup = gj(".uiShareDocuments.resizable .spaceChooserPopup");
+      gj(popup).addClass("hide");
       popup.offset({left:gj(this).offset().left, top:gj(this).offset().top+gj(this).height()-1});
+      gj(popup).removeClass("hide");
     });
+  }
+
+  ShareContent.prototype.init = function(){
+    gj(".uiShareDocuments.resizable .selectbox").addClass("input-medium");
+    correctSpacePos();
     var placeholderMsg = gj(".uiShareDocuments.resizable #textAreaInput").attr("placeholder");
     if(placeholderMsg === gj(".uiShareDocuments.resizable #textAreaInput").val()) gj(".uiShareDocuments.resizable #textAreaInput").val("");
 
@@ -51,6 +57,7 @@
    * @param space
    */
   ShareContent.prototype.checkSelectedSpace = function(space){
+    correctSpacePos();
     if("[]" === space) {
       gj(".PopupContent .uiActionBorder .btn-primary").attr("disabled","disabled");
     }else{
