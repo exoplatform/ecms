@@ -1,7 +1,7 @@
 /**
  * Created by toannh on 6/19/15.
  */
-(function(gj) {
+(function(gj, _) {
   var ShareContent = function() {}
 
   ShareContent.prototype.init = function(){
@@ -42,6 +42,7 @@
         gj(".uiShareDocuments.resizable #textAreaInput").val(value);
       });
     });
+    gj('#DisplaytextAreaInput').trigger('focus');
   }
 
   /**
@@ -62,4 +63,4 @@
     ShareContent : eXo.ecm.ShareContent
   };
 
-})(gj);
+})(gj, mentions._);
