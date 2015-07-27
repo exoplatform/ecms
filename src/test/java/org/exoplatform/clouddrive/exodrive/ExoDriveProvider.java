@@ -25,7 +25,6 @@ public class ExoDriveProvider extends CloudProvider {
    */
   @Override
   public boolean retryOnProviderError() {
-    // TODO
     return false;
   }
 }

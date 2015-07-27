@@ -220,14 +220,12 @@ public class CloudDriveServiceImpl implements CloudDriveService, Startable {
         } catch (AccessDeniedException e) {
           // skip other users nodes, can be thrown on isConnected() - try next
           if (LOG.isDebugEnabled()) {
-            LOG.debug(">> findDrive(" + node.getPath() + ") access denied to " + local + ": "
-                + e.getMessage(), e);
+            LOG.debug(">> findDrive(" + node.getPath() + ") access denied to " + local + ": " + e.getMessage(), e);
           }
         } catch (DriveRemovedException e) {
           // ignore removed (should not happen here)
           if (LOG.isDebugEnabled()) {
-            LOG.debug(">> findDrive(" + node.getPath() + ") drive removed " + local + ": " + e.getMessage(),
-                      e);
+            LOG.debug(">> findDrive(" + node.getPath() + ") drive removed " + local + ": " + e.getMessage(), e);
           }
         }
       }
@@ -251,14 +249,12 @@ public class CloudDriveServiceImpl implements CloudDriveService, Startable {
         } catch (AccessDeniedException e) {
           // skip other users nodes, can be thrown on isConnected() - try next
           if (LOG.isDebugEnabled()) {
-            LOG.debug(">> findDrive(" + workspace + ":" + path + ") access denied to " + local + ": "
-                + e.getMessage(), e);
+            LOG.debug(">> findDrive(" + workspace + ":" + path + ") access denied to " + local + ": " + e.getMessage(), e);
           }
         } catch (DriveRemovedException e) {
           // ignore removed (should not happen here)
           if (LOG.isDebugEnabled()) {
-            LOG.debug(">> findDrive(" + workspace + ":" + path + ") drive removed " + local + ": "
-                + e.getMessage(), e);
+            LOG.debug(">> findDrive(" + workspace + ":" + path + ") drive removed " + local + ": " + e.getMessage(), e);
           }
         }
       }
@@ -270,11 +266,25 @@ public class CloudDriveServiceImpl implements CloudDriveService, Startable {
    * {@inheritDoc}
    */
   @Override
-  public CloudUser authenticate(CloudProvider cloudProvider, String key) throws ProviderNotAvailableException,
-                                                                         CloudDriveException {
+  public CloudUser authenticate(CloudProvider cloudProvider, String code) throws ProviderNotAvailableException,
+                                                                          CloudDriveException {
     CloudDriveConnector conn = connectors.get(cloudProvider);
     if (conn != null) {
-      return conn.authenticate(key);
+      return conn.authenticate(Collections.singletonMap(CloudDriveConnector.OAUTH2_CODE, code));
+    } else {
+      throw new ProviderNotAvailableException("Provider not available " + cloudProvider.getName());
+    }
+  }
+
+  /**
+   * {@inheritDoc}
+   */
+  @Override
+  public CloudUser authenticate(CloudProvider cloudProvider,
+                                Map<String, String> params) throws ProviderNotAvailableException, CloudDriveException {
+    CloudDriveConnector conn = connectors.get(cloudProvider);
+    if (conn != null) {
+      return conn.authenticate(params);
     } else {
       throw new ProviderNotAvailableException("Provider not available " + cloudProvider.getName());
     }
@@ -288,8 +298,7 @@ public class CloudDriveServiceImpl implements CloudDriveService, Startable {
                                                                 ProviderNotAvailableException,
                                                                 CloudDriveException,
                                                                 RepositoryException {
-    String repoName = ((ManageableRepository) driveNode.getSession().getRepository()).getConfiguration()
-                                                                                     .getName();
+    String repoName = ((ManageableRepository) driveNode.getSession().getRepository()).getConfiguration().getName();
 
     Map<CloudUser, CloudDrive> drives = repositoryDrives.get(repoName);
     if (drives != null) {
@@ -314,8 +323,8 @@ public class CloudDriveServiceImpl implements CloudDriveService, Startable {
             // proceed
             LOG.warn("User " + user.getEmail() + " already connected to another node " + localPath
                 + ", cannot connect it to " + driveNode.getPath());
-            throw new UserAlreadyConnectedException("User " + user.getEmail()
-                + " already connected to another node " + localPath);
+            throw new UserAlreadyConnectedException("User " + user.getEmail() + " already connected to another node "
+                + localPath);
           }
         } catch (DriveRemovedException e) {
           // removed, so can create new one
@@ -326,8 +335,7 @@ public class CloudDriveServiceImpl implements CloudDriveService, Startable {
         } catch (AccessDeniedException e) {
           // this email already connected in current repository
           LOG.warn("User " + user.getEmail() + " already connected to another node", e);
-          throw new UserAlreadyConnectedException("User " + user.getEmail()
-              + " already connected to another node.");
+          throw new UserAlreadyConnectedException("User " + user.getEmail() + " already connected to another node.");
         }
       } // else, no drive cached
     } // else, no drives in this repository
@@ -430,10 +438,9 @@ public class CloudDriveServiceImpl implements CloudDriveService, Startable {
           Session session = sp.getSession(w.getName(), jcrRepository);
           try {
             // gather all drive nodes from the jcr repo
-            Query q = session.getWorkspace().getQueryManager().createQuery(
-                                                                           "select * from "
-                                                                               + JCRLocalCloudDrive.ECD_CLOUDDRIVE,
-                                                                           Query.SQL);
+            Query q = session.getWorkspace()
+                             .getQueryManager()
+                             .createQuery("select * from " + JCRLocalCloudDrive.ECD_CLOUDDRIVE, Query.SQL);
             NodeIterator r = q.execute().getNodes();
             while (r.hasNext()) {
               Node drive = r.nextNode();
@@ -451,8 +458,8 @@ public class CloudDriveServiceImpl implements CloudDriveService, Startable {
                   }
                   driveNodes.add(drive);
                 } catch (CloudDriveException e) {
-                  LOG.error("Error loading provider (" + providerId + ") of stored drive " + drive.getPath()
-                      + ": " + e.getMessage(), e);
+                  LOG.error("Error loading provider (" + providerId + ") of stored drive " + drive.getPath() + ": "
+                      + e.getMessage(), e);
                 }
               }
             }
@@ -471,8 +478,7 @@ public class CloudDriveServiceImpl implements CloudDriveService, Startable {
                   }
                 }
               } catch (CloudDriveException e) {
-                LOG.error("Error loading stored drives for provider " + pd.getKey().getName() + ": "
-                    + e.getMessage(), e);
+                LOG.error("Error loading stored drives for provider " + pd.getKey().getName() + ": " + e.getMessage(), e);
               }
             }
           } catch (RepositoryException e) {
@@ -481,8 +487,7 @@ public class CloudDriveServiceImpl implements CloudDriveService, Startable {
             session.logout();
           }
         } catch (RepositoryException e) {
-          LOG.error("System session error on " + w.getName() + "@"
-              + jcrRepository.getConfiguration().getName(), e);
+          LOG.error("System session error on " + w.getName() + "@" + jcrRepository.getConfiguration().getName(), e);
         }
       }
     } finally {

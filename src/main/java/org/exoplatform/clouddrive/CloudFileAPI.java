@@ -42,6 +42,12 @@ public interface CloudFileAPI {
 
   String getParentId(Node fileNode) throws RepositoryException;
 
+  Calendar getCreated(Node fileNode) throws RepositoryException;
+
+  Calendar getModified(Node fileNode) throws RepositoryException;
+  
+  String getType(Node fileNode) throws RepositoryException;
+
   Collection<String> findParents(Node fileNode) throws DriveRemovedException, RepositoryException;
 
   boolean isDrive(Node node) throws RepositoryException;
@@ -98,16 +104,14 @@ public interface CloudFileAPI {
 
   CloudFile updateFile(Node fileNode, Calendar modified) throws CloudDriveException, RepositoryException;
 
-  CloudFile updateFileContent(Node fileNode, Calendar modified, String mimeType, InputStream content) throws CloudDriveException,
-                                                                                                     RepositoryException;
+  CloudFile updateFileContent(Node fileNode, Calendar modified, String mimeType, InputStream content)
+                                                                                                      throws CloudDriveException,
+                                                                                                      RepositoryException;
 
   CloudFile copyFile(Node srcFileNode, Node destFileNode) throws CloudDriveException, RepositoryException;
 
-  CloudFile copyFolder(Node srcFolderNode, Node destFolderNode) throws CloudDriveException,
-                                                               RepositoryException;
+  CloudFile copyFolder(Node srcFolderNode, Node destFolderNode) throws CloudDriveException, RepositoryException;
 
-  CloudFile restore(String id, String path) throws NotFoundException,
-                                           CloudDriveException,
-                                           RepositoryException;
+  CloudFile restore(String id, String path) throws NotFoundException, CloudDriveException, RepositoryException;
 
 }

@@ -16,8 +16,7 @@
  */
 package org.exoplatform.clouddrive;
 
-import org.exoplatform.services.security.ConversationState;
-
+import java.util.Map;
 import java.util.Set;
 
 import javax.jcr.Node;
@@ -32,19 +31,32 @@ import javax.jcr.RepositoryException;
 public interface CloudDriveService {
 
   /**
-   * Authenticate an user to given cloud provider using OAuth2 key.
+   * Authenticate an user to given cloud provider using OAuth2 authorization code.
    * 
    * @param cloudProvider {@link CloudProvider} target provider
-   * @param key {@link String} OAuth2 key
+   * @param code {@link String} OAuth2 authorization code
    * @return {@link CloudUser} user instance
    * @throws ProviderNotAvailableException
    * @throws CloudDriveException
    */
-  CloudUser authenticate(CloudProvider cloudProvider, String key) throws ProviderNotAvailableException,
-                                                                 CloudDriveException;
+  CloudUser authenticate(CloudProvider cloudProvider, String code) throws ProviderNotAvailableException, CloudDriveException;
 
   /**
-   * Create or open a local binding to Cloud Drive. 
+   * Authenticate an user to given cloud provider using OAuth2 parameters (including code, state, error,
+   * error_description etc).
+   * 
+   * @param cloudProvider {@link CloudProvider} target provider
+   * @param params {@link Map} of data returned by OAuth2 authorization request (e.g. grabbed from the
+   *          redirect request)
+   * @return {@link CloudUser} user instance
+   * @throws ProviderNotAvailableException
+   * @throws CloudDriveException
+   */
+  CloudUser authenticate(CloudProvider cloudProvider, Map<String, String> params) throws ProviderNotAvailableException,
+                                                                                  CloudDriveException;
+
+  /**
+   * Create or open a local binding to Cloud Drive.
    * 
    * @see CloudDrive#connect()
    * @param user {@link CloudUser}
@@ -58,10 +70,10 @@ public interface CloudDriveService {
    * @throws RepositoryException
    */
   CloudDrive createDrive(CloudUser user, Node driveNode) throws UserAlreadyConnectedException,
-                                                        CannotConnectDriveException,
-                                                        ProviderNotAvailableException,
-                                                        CloudDriveException,
-                                                        RepositoryException;
+                                                         CannotConnectDriveException,
+                                                         ProviderNotAvailableException,
+                                                         CloudDriveException,
+                                                         RepositoryException;
 
   /**
    * Find {@link CloudDrive} instance connected to given {@link Node}. If drive not found, if it exists but
@@ -80,7 +92,8 @@ public interface CloudDriveService {
    * 
    * @param workspace {@link String} node workspace
    * @param path {@link String} node path
-   * @return {@link CloudDrive} or {@code null} if node at given path not found or isn't connected to cloud user.
+   * @return {@link CloudDrive} or {@code null} if node at given path not found or isn't connected to cloud
+   *         user.
    * @throws RepositoryException if storage exception happened
    */
   CloudDrive findDrive(String workspace, String path) throws RepositoryException;

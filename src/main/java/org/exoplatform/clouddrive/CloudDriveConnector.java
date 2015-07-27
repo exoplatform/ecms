@@ -18,6 +18,7 @@ package org.exoplatform.clouddrive;
 
 import org.exoplatform.clouddrive.jcr.NodeFinder;
 import org.exoplatform.clouddrive.utils.ExtendedMimeTypeResolver;
+import org.exoplatform.container.PortalContainer;
 import org.exoplatform.container.component.BaseComponentPlugin;
 import org.exoplatform.container.xml.InitParams;
 import org.exoplatform.container.xml.ObjectParameter;
@@ -28,6 +29,7 @@ import org.exoplatform.services.jcr.ext.app.SessionProviderService;
 import org.exoplatform.services.jcr.ext.common.SessionProvider;
 import org.exoplatform.services.log.ExoLogger;
 import org.exoplatform.services.log.Log;
+import org.exoplatform.services.security.ConversationState;
 
 import java.net.InetAddress;
 import java.net.NetworkInterface;
@@ -106,6 +108,14 @@ public abstract class CloudDriveConnector extends BaseComponentPlugin {
 
   public static final String               CONFIG_PREDEFINED_SERVICES       = "predefined-services";
 
+  public static final String               OAUTH2_CODE                      = "code";
+
+  public static final String               OAUTH2_STATE                     = "state";
+
+  public static final String               OAUTH2_ERROR                     = "error";
+
+  public static final String               OAUTH2_ERROR_DESCRIPTION         = "error_description";
+
   // CLDINT-1051 increased from 3 to 5, later decreased to 3 again (due to closed JCR session in case of
   // retry)
   public static final int                  PROVIDER_REQUEST_ATTEMPTS        = 3;
@@ -114,7 +124,7 @@ public abstract class CloudDriveConnector extends BaseComponentPlugin {
   public static final long                 PROVIDER_REQUEST_ATTEMPT_TIMEOUT = 10000;
 
   protected static final Log               LOG                              = ExoLogger.getLogger(CloudDriveConnector.class);
-  
+
   protected final Map<String, String>      config;
 
   protected final SessionProviderService   sessionProviders;
@@ -253,13 +263,12 @@ public abstract class CloudDriveConnector extends BaseComponentPlugin {
         connected.add(loadDrive(driveNode));
       } catch (CloudProviderException e) {
         // skip drives with provider errors
-        LOG.warn("Cannot load Cloud Drive associated with node " + driveNode.getPath()
-            + " due to provider error. " + e.getMessage()
-            + (e.getCause() != null ? ". " + e.getCause().getMessage() : "."), e);
+        LOG.warn("Cannot load Cloud Drive associated with node " + driveNode.getPath() + " due to provider error. "
+            + e.getMessage() + (e.getCause() != null ? ". " + e.getCause().getMessage() : "."), e);
       } catch (DriveTrashedException e) {
         // skip trashed drive and remove its node
-        LOG.warn("Node trashed " + driveNode.getPath()
-            + ", it cannot be loaded as Cloud Drive and will be removed. " + e.getMessage());
+        LOG.warn("Node trashed " + driveNode.getPath() + ", it cannot be loaded as Cloud Drive and will be removed. "
+            + e.getMessage());
         try {
           // remove this node nasty if it is in the Trash
           Node parent = driveNode.getParent();
@@ -272,8 +281,7 @@ public abstract class CloudDriveConnector extends BaseComponentPlugin {
         }
       } catch (DriveRemovedException e) {
         // skip removed drive
-        LOG.warn("Node removed " + driveNode.getPath() + " and cannot be loaded as Cloud Drive. "
-            + e.getMessage());
+        LOG.warn("Node removed " + driveNode.getPath() + " and cannot be loaded as Cloud Drive. " + e.getMessage());
       }
     }
     return connected;
@@ -289,28 +297,60 @@ public abstract class CloudDriveConnector extends BaseComponentPlugin {
   }
 
   /**
+   * Construct redirect link from configuration and runtime settings.
+   * 
+   * @return {@link String}
+   */
+  protected String redirectLink() {
+    StringBuilder redirectURL = new StringBuilder();
+    redirectURL.append(getConnectorSchema());
+    redirectURL.append("://");
+    redirectURL.append(getConnectorHost());
+    redirectURL.append('/');
+    redirectURL.append(PortalContainer.getCurrentPortalContainerName());
+    redirectURL.append('/');
+    redirectURL.append(PortalContainer.getCurrentRestContextName());
+    redirectURL.append("/clouddrive/connect/");
+    redirectURL.append(getProviderId());
+    return redirectURL.toString();
+  }
+
+  protected String currentUser() {
+    ConversationState convo = ConversationState.getCurrent();
+    if (convo != null) {
+      return convo.getIdentity().getUserId();
+    } else {
+      return null; // shouldn't happen
+    }
+  }
+
+  /**
    * Create {@link CloudProvider}. Used internally by constructor.
    * 
    * @return {@link CloudProvider}
+   * @throws ConfigurationException when cannot get initial parameters from runtime or configuration
+   *           (including error of getting current repository name)
    */
   protected abstract CloudProvider createProvider() throws ConfigurationException;
 
   /**
-   * Authenticate an user by an access code from its cloud provider (OAuth usecase). As result an
-   * instance of {@link CloudUser} will be returned, in case of fail an exception will be thrown
+   * Authenticate an user using parameters from OAuth2 redirect (including code, state, error,
+   * error_description etc).
+   * As result an instance of {@link CloudUser} will be returned, in case of fail an exception will be thrown
    * {@link CloudDriveException}.
    * 
-   * @param code {@link String}
+   * @param params {@link Map}
    * @throws CloudDriveException
    * @return {@link CloudUser}
    */
-  protected abstract CloudUser authenticate(String code) throws CloudDriveException;
+  protected abstract CloudUser authenticate(Map<String, String> params) throws CloudDriveException;
 
   /**
    * Create Cloud Drive instance for given user. This instance will be connected to local storage
    * under existing {@link Node} <code>driveRoot</code> by {@link CloudDrive#connect()} method.
    * This node can be of any type, the creation procedure will add special nodetypes to it to allow
-   * required properties and child nodes. Node will be actually saved by {@link CloudDrive#connect()} method. <br>
+   * required properties and child nodes. Node will be actually saved by {@link CloudDrive#connect()} method.
+   * <br>
    * To connect the drive use {@link CloudDriveService#connect(CloudUser, Node)}.
    * 
    * @param user {@link CloudUser} connecting user
@@ -319,8 +359,7 @@ public abstract class CloudDriveConnector extends BaseComponentPlugin {
    * @throws RepositoryException if storage error happens
    * @return {@link CloudDrive} local Cloud Drive instance initialized to local JCR node.
    */
-  protected abstract CloudDrive createDrive(CloudUser user, Node driveNode) throws CloudDriveException,
-                                                                           RepositoryException;
+  protected abstract CloudDrive createDrive(CloudUser user, Node driveNode) throws CloudDriveException, RepositoryException;
 
   /**
    * Load Cloud Drive from local storage under existing {@link Node} <code>driveRoot</code>.

@@ -28,6 +28,8 @@ public abstract class CloudProvider {
 
   public static final String CONNECT_URL_BASE = "/portal/rest/clouddrive/connect/";
 
+  public static final String AUTH_NOSTATE     = "__no_state_set__";
+
   protected final String     id;
 
   protected final String     name;
@@ -82,12 +84,19 @@ public abstract class CloudProvider {
   }
 
   /**
-   * Provider specific message for given error string. By default this method returns given error string.
+   * Provider specific message for given error string and description. By default this method returns
+   * concatenated error and description string.
    * 
    * @return String with the error message
    */
-  public String getErrorMessage(String error) {
-    return error;
+  public String getErrorMessage(String error, String errorDescription) {
+    StringBuilder msg = new StringBuilder();
+    msg.append(error);
+    if (errorDescription != null && errorDescription.length() > 0) {
+      msg.append(". ");
+      msg.append(errorDescription);
+    }
+    return msg.toString();
   }
 
   /**

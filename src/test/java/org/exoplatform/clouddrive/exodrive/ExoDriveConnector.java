@@ -37,6 +37,8 @@ import org.exoplatform.services.organization.OrganizationService;
 import org.exoplatform.services.organization.User;
 import org.exoplatform.services.security.ConversationState;
 
+import java.util.Map;
+
 import javax.jcr.Node;
 import javax.jcr.RepositoryException;
 
@@ -69,9 +71,7 @@ public class ExoDriveConnector extends CloudDriveConnector {
         authUrl.append(jcrService.getCurrentRepository().getConfiguration().getName());
         error = null;
       } catch (RepositoryException e) {
-        LOG.warn("Error getting Current Repository for repository based auth url of eXo Drive: "
-                     + e.getMessage(),
-                 e);
+        LOG.warn("Error getting Current Repository for repository based auth url of eXo Drive: " + e.getMessage(), e);
         error = "Current Repository not set.";
       }
       authUrl.append('/');
@@ -150,7 +150,8 @@ public class ExoDriveConnector extends CloudDriveConnector {
    * {@inheritDoc}
    */
   @Override
-  public ExoDriveUser authenticate(String code) throws CloudDriveException {
+  public ExoDriveUser authenticate(Map<String, String> params) throws CloudDriveException {
+    String code = params.get(OAUTH2_CODE);
     if (code != null) {
       // ensure the convo state is the same as the code
       ConversationState convo = ConversationState.getCurrent();
@@ -212,16 +213,10 @@ public class ExoDriveConnector extends CloudDriveConnector {
    * {@inheritDoc}
    */
   @Override
-  public JCRLocalExoDrive createDrive(CloudUser user, Node driveNode) throws CloudDriveException,
-                                                                     RepositoryException {
+  public JCRLocalExoDrive createDrive(CloudUser user, Node driveNode) throws CloudDriveException, RepositoryException {
     if (user instanceof ExoDriveUser) {
       try {
-        return new JCRLocalExoDrive((ExoDriveUser) user,
-                                    repository(),
-                                    sessionProviders,
-                                    jcrFinder,
-                                    mimeTypes,
-                                    driveNode);
+        return new JCRLocalExoDrive((ExoDriveUser) user, repository(), sessionProviders, jcrFinder, mimeTypes, driveNode);
       } catch (ExoDriveConfigurationException e) {
         throw new CloudDriveException("Error getting eXo Drive repository:", e);
       }

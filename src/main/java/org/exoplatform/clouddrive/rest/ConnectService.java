@@ -20,6 +20,7 @@ import org.exoplatform.clouddrive.BaseCloudDriveListener;
 import org.exoplatform.clouddrive.CannotConnectDriveException;
 import org.exoplatform.clouddrive.CloudDrive;
 import org.exoplatform.clouddrive.CloudDrive.Command;
+import org.exoplatform.clouddrive.CloudDriveConnector;
 import org.exoplatform.clouddrive.CloudDriveEvent;
 import org.exoplatform.clouddrive.CloudDriveException;
 import org.exoplatform.clouddrive.CloudDriveService;
@@ -38,6 +39,7 @@ import org.exoplatform.services.log.Log;
 import org.exoplatform.services.rest.resource.ResourceContainer;
 import org.exoplatform.services.security.ConversationState;
 
+import java.util.HashMap;
 import java.util.Iterator;
 import java.util.Map;
 import java.util.Random;
@@ -178,8 +180,7 @@ public class ConnectService implements ResourceContainer {
       }
       cookie(ERROR_COOKIE, message, "/", host, "Cloud Drive connection error", ERROR_COOKIE_EXPIRE, false);
       super.entity("<!doctype html><html><head><script type='text/javascript'> setTimeout(function() {window.close();}, 4000);</script></head><body><div id='messageString'>"
-          + (providerName != null ? providerName + " return error: " + message : message)
-          + "</div></body></html>");
+          + (providerName != null ? providerName + " return error: " + message : message) + "</div></body></html>");
 
       return this;
     }
@@ -199,8 +200,8 @@ public class ConnectService implements ResourceContainer {
         super.entity(new CommandState(error, progress, serviceUrl));
       } else if (location != null) {
         super.addHeader("Location", location);
-        super.entity("<!doctype html><html><head></head><body><div id='redirectLink'>" + "<a href='"
-            + location + "'>Use new location to the service.</a>" + "</div></body></html>");
+        super.entity("<!doctype html><html><head></head><body><div id='redirectLink'>" + "<a href='" + location
+            + "'>Use new location to the service.</a>" + "</div></body></html>");
       } // else - what was set in entity()
       return super.build();
     }
@@ -239,8 +240,8 @@ public class ConnectService implements ResourceContainer {
 
     String           error;
 
-    ConnectProcess(String workspaceName, CloudDrive drive, ConversationState conversation) throws CloudDriveException,
-        RepositoryException {
+    ConnectProcess(String workspaceName, CloudDrive drive, ConversationState conversation)
+        throws CloudDriveException, RepositoryException {
       this.drive = drive;
       this.title = drive.getTitle();
       this.workspaceName = workspaceName;
@@ -280,8 +281,7 @@ public class ConnectService implements ResourceContainer {
       try {
         rollback();
       } catch (Throwable e) {
-        LOG.warn("Error removing the drive Node connected with error (" + error.getMessage() + "). "
-            + e.getMessage(), e);
+        LOG.warn("Error removing the drive Node connected with error (" + error.getMessage() + "). " + e.getMessage(), e);
       } finally {
         lock.unlock();
         // log error here as the connect was executed asynchronously
@@ -458,9 +458,9 @@ public class ConnectService implements ResourceContainer {
                         rollback(userNode, null);
                         LOG.error("Error creating node for the drive of user " + user.getEmail()
                             + ". Cannot create node under " + path, e);
-                        return resp.connectError("Error creating node for the drive: storage error.",
-                                                 cid.toString(),
-                                                 host).status(Status.INTERNAL_SERVER_ERROR).build();
+                        return resp.connectError("Error creating node for the drive: storage error.", cid.toString(), host)
+                                   .status(Status.INTERNAL_SERVER_ERROR)
+                                   .build();
                       }
                     }
                   }
@@ -507,8 +507,7 @@ public class ConnectService implements ResourceContainer {
                 } else {
                   // else, such connect already in progress (probably was started by another request)
                   // client can warn the user or try use check url to get that work status
-                  String message = "Connect to " + connect.title
-                      + " already posted and currently in progress.";
+                  String message = "Connect to " + connect.title + " already posted and currently in progress.";
                   LOG.warn(message);
                   try {
                     // do response with that process lock as done in state()
@@ -666,7 +665,7 @@ public class ConnectService implements ResourceContainer {
    * 
    * @param uriInfo - request info
    * @param providerId - provider id, see more in {@link CloudProvider}
-   * @param key - authentication key (OAuth2 code for example)
+   * @param code - authentication key (OAuth2 code for example)
    * @param error - error from the provider
    * @param jsessionsId
    * @param jsessionsIdSSO
@@ -678,9 +677,10 @@ public class ConnectService implements ResourceContainer {
   @Produces(MediaType.TEXT_HTML)
   public Response userAuth(@Context UriInfo uriInfo,
                            @PathParam("providerid") String providerId,
-                           @QueryParam("code") String key,
-                           @QueryParam("state") String repoName,
+                           @QueryParam("code") String code,
+                           @QueryParam("state") String state,
                            @QueryParam("error") String error,
+                           @QueryParam("error_description") String errorDescription,
                            @CookieParam("JSESSIONID") Cookie jsessionsId,
                            @CookieParam("JSESSIONIDSSO") Cookie jsessionsIdSSO,
                            @CookieParam(INIT_COOKIE) Cookie initId) {
@@ -691,11 +691,14 @@ public class ConnectService implements ResourceContainer {
 
     ConnectResponse resp = new ConnectResponse();
 
+    // TODO implement CSRF handing in state parameter
+    
     String requestHost = uriInfo.getRequestUri().getHost();
-    if (repoName != null) {
+    if (state != null) {
+      // state contains repoName set by the provider
       if (locator.isRedirect(requestHost)) {
         // need redirect to actual service URL
-        resp.location(locator.getServiceLink(repoName, uriInfo.getRequestUri().toString()));
+        resp.location(locator.getServiceLink(state, uriInfo.getRequestUri().toString()));
         return resp.status(Status.MOVED_PERMANENTLY).build(); // redirect
       }
     }
@@ -709,13 +712,17 @@ public class ConnectService implements ResourceContainer {
         if (connect != null) {
           CloudProvider provider = connect.provider;
           if (provider.getId().equals(providerId)) {
+            // TODO handle auth errors by provider code
             if (error == null) {
               // it's the same as initiated request
-              if (key != null) {
+              if (code != null) {
                 try {
-                  CloudUser user = cloudDrives.authenticate(provider, key);
+                  Map<String, String> params = new HashMap<String, String>();
+                  params.put(CloudDriveConnector.OAUTH2_CODE, code);
+                  params.put(CloudDriveConnector.OAUTH2_STATE, state);
+                  CloudUser user = cloudDrives.authenticate(provider, params);
 
-                  UUID connectId = generateId(user.getEmail() + key);
+                  UUID connectId = generateId(user.getEmail() + code);
                   authenticated.put(connectId, user);
                   timeline.put(connectId, System.currentTimeMillis() + (CONNECT_COOKIE_EXPIRE * 1000) + 5000);
 
@@ -730,13 +737,7 @@ public class ConnectService implements ResourceContainer {
                               false);
 
                   // reset it by expire time = 0
-                  resp.cookie(INIT_COOKIE,
-                              iid.toString(),
-                              INIT_COOKIE_PATH,
-                              baseHost,
-                              "Cloud Drive init ID",
-                              0,
-                              false);
+                  resp.cookie(INIT_COOKIE, iid.toString(), INIT_COOKIE_PATH, baseHost, "Cloud Drive init ID", 0, false);
 
                   resp.entity("<!doctype html><html><head><script type='text/javascript'> window.close();</script></head><body><div id='messageString'>Connecting to "
                       + user.getServiceName() + "</div></body></html>");
@@ -749,53 +750,50 @@ public class ConnectService implements ResourceContainer {
                                         provider.getName(),
                                         iid.toString(),
                                         baseHost)
-                  // TODO UNAUTHORIZED ?
+                             // TODO UNAUTHORIZED ?
                              .status(Status.BAD_REQUEST)
                              .build();
                 }
               } else {
-                LOG.warn("Key required for " + provider.getName());
-                return resp.authError("Key required for " + provider.getName(),
+                LOG.warn("Code required for " + provider.getName());
+                return resp.authError("Code required for " + provider.getName(),
                                       connect.host,
                                       provider.getName(),
                                       iid.toString(),
-                                      baseHost).status(Status.BAD_REQUEST).build();
+                                      baseHost)
+                           .status(Status.BAD_REQUEST).build();
               }
             } else {
               // we have an error from provider
-              LOG.warn(provider.getName() + " error: " + error);
-
-              return resp.authError(provider.getErrorMessage(error),
-                                    connect.host,
-                                    provider.getName(),
-                                    iid.toString(),
-                                    baseHost).status(Status.BAD_REQUEST).build();
+              LOG.warn(provider.getName() + " error: " + error + ". error_description: " + errorDescription);
+              StringBuilder errorMsg = new StringBuilder();
+              errorMsg.append(provider.getErrorMessage(error, errorDescription));
+              return resp.authError(errorMsg.toString(), connect.host, provider.getName(), iid.toString(), baseHost)
+                         .status(Status.BAD_REQUEST)
+                         .build();
             }
           } else {
-            LOG.error("Authentication was not initiated for " + providerId + " but request to "
-                + provider.getId() + " recorded with id " + initId);
+            LOG.error("Authentication was not initiated for " + providerId + " but request to " + provider.getId()
+                + " recorded with id " + initId);
             return resp.authError("Authentication not initiated to " + provider.getName(),
                                   connect.host,
                                   provider.getName(),
                                   iid.toString(),
-                                  baseHost).status(Status.INTERNAL_SERVER_ERROR).build();
+                                  baseHost)
+                       .status(Status.INTERNAL_SERVER_ERROR).build();
           }
         } else {
           LOG.warn("Authentication not initiated for " + providerId + " and id " + initId);
-          return resp.authError("Authentication request expired. Try again later.",
-                                baseHost,
-                                null,
-                                iid.toString(),
-                                baseHost).status(Status.BAD_REQUEST).build();
+          return resp.authError("Authentication request expired. Try again later.", baseHost, null, iid.toString(), baseHost)
+                     .status(Status.BAD_REQUEST)
+                     .build();
         }
       } catch (Throwable e) {
         LOG.error("Error initializing drive provider by id " + providerId, e);
-        return resp.authError("Error initializing drive provider", baseHost)
-                   .status(Status.INTERNAL_SERVER_ERROR)
-                   .build();
+        return resp.authError("Error initializing drive provider", baseHost).status(Status.INTERNAL_SERVER_ERROR).build();
       }
     } else {
-      LOG.warn("Authentication id not set for provider id " + providerId + " and key " + key);
+      LOG.warn("Authentication id not set for provider id " + providerId + " and key " + code);
       return resp.authError("Authentication not initiated or expired. Try again later.", baseHost)
                  .status(Status.BAD_REQUEST)
                  .build();
@@ -843,9 +841,7 @@ public class ConnectService implements ResourceContainer {
         return resp.entity(new ProviderInfo(provider)).ok().build();
       } else {
         LOG.warn("ConversationState not set to initialize connect to " + provider.getName());
-        return resp.error("User not authenticated to connect " + provider.getName())
-                   .status(Status.UNAUTHORIZED)
-                   .build();
+        return resp.error("User not authenticated to connect " + provider.getName()).status(Status.UNAUTHORIZED).build();
       }
     } catch (ProviderNotAvailableException e) {
       LOG.warn("Provider not found for id '" + providerId + "'", e);
