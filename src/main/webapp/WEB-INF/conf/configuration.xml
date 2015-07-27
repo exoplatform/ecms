@@ -40,6 +40,9 @@
     <type>org.exoplatform.clouddrive.utils.ExtendedMimeTypeResolver</type>
   </component>
   <component>
+    <type>org.exoplatform.clouddrive.viewer.ViewerStorage</type>
+  </component>
+  <component>
     <type>org.exoplatform.clouddrive.rest.ConnectService</type>
   </component>
   <component>
@@ -53,6 +56,9 @@
   </component>
   <component>
     <type>org.exoplatform.clouddrive.rest.DriveServiceLocator</type>
+  </component>
+  <component>
+    <type>org.exoplatform.clouddrive.rest.ContentService</type>
   </component>
 
   <external-component-plugins>
