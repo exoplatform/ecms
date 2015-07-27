@@ -27,13 +27,13 @@ import org.exoplatform.clouddrive.ConfigurationException;
 import org.exoplatform.clouddrive.jcr.JCRLocalCloudDrive;
 import org.exoplatform.clouddrive.jcr.NodeFinder;
 import org.exoplatform.clouddrive.utils.ExtendedMimeTypeResolver;
-import org.exoplatform.container.PortalContainer;
 import org.exoplatform.container.xml.InitParams;
 import org.exoplatform.services.jcr.RepositoryService;
 import org.exoplatform.services.jcr.ext.app.SessionProviderService;
 
 import java.io.UnsupportedEncodingException;
 import java.net.URLEncoder;
+import java.util.Map;
 
 import javax.jcr.Node;
 import javax.jcr.RepositoryException;
@@ -120,16 +120,7 @@ public class GoogleDriveConnector extends CloudDriveConnector {
    */
   @Override
   protected CloudProvider createProvider() {
-    StringBuilder redirectURL = new StringBuilder();
-    redirectURL.append(getConnectorSchema());
-    redirectURL.append("://");
-    redirectURL.append(getConnectorHost());
-    redirectURL.append('/');
-    redirectURL.append(PortalContainer.getCurrentPortalContainerName());
-    redirectURL.append('/');
-    redirectURL.append(PortalContainer.getCurrentRestContextName());
-    redirectURL.append("/clouddrive/connect/");
-    redirectURL.append(getProviderId());
+    String redirectURL = redirectLink();
 
     StringBuilder authURL = new StringBuilder();
     authURL.append("https://accounts.google.com/o/oauth2/auth?");
@@ -156,10 +147,10 @@ public class GoogleDriveConnector extends CloudDriveConnector {
     authURL.append(GoogleDriveAPI.ACCESS_TYPE);
     authURL.append("&state=");
     try {
-      authURL.append(URLEncoder.encode(GoogleDriveAPI.NO_STATE, "UTF-8"));
+      authURL.append(URLEncoder.encode(CloudProvider.AUTH_NOSTATE, "UTF-8"));
     } catch (UnsupportedEncodingException e) {
-      LOG.warn("Cannot encode state " + GoogleDriveAPI.NO_STATE + ":" + e);
-      authURL.append(GoogleDriveAPI.NO_STATE);
+      LOG.warn("Cannot encode state " + CloudProvider.AUTH_NOSTATE + ":" + e);
+      authURL.append(CloudProvider.AUTH_NOSTATE);
     }
     authURL.append("&redirect_uri=");
     try {
@@ -169,11 +160,7 @@ public class GoogleDriveConnector extends CloudDriveConnector {
       authURL.append(redirectURL);
     }
 
-    return new GoogleProvider(getProviderId(),
-                              getProviderName(),
-                              authURL.toString(),
-                              redirectURL.toString(),
-                              jcrService);
+    return new GoogleProvider(getProviderId(), getProviderName(), authURL.toString(), redirectURL.toString(), jcrService);
   }
 
   /**
@@ -188,18 +175,15 @@ public class GoogleDriveConnector extends CloudDriveConnector {
    * {@inheritDoc}
    */
   @Override
-  public GoogleUser authenticate(String code) throws CloudDriveException {
+  public GoogleUser authenticate(Map<String, String> params) throws CloudDriveException {
+    String code = params.get(OAUTH2_CODE);
     if (code != null && code.length() > 0) {
       GoogleDriveAPI driveAPI = new API().auth(code).build();
       Userinfoplus userInfo = driveAPI.userInfo();
-      GoogleUser user = new GoogleUser(userInfo.getId(),
-                                       userInfo.getName(),
-                                       userInfo.getEmail(),
-                                       provider,
-                                       driveAPI);
+      GoogleUser user = new GoogleUser(userInfo.getId(), userInfo.getName(), userInfo.getEmail(), provider, driveAPI);
       return user;
     } else {
-      throw new CloudDriveException("Access key should not be null or empty");
+      throw new CloudDriveException("Access code should not be null or empty");
     }
   }
 
@@ -207,8 +191,7 @@ public class GoogleDriveConnector extends CloudDriveConnector {
    * {@inheritDoc}
    */
   @Override
-  protected JCRLocalGoogleDrive createDrive(CloudUser user, Node driveNode) throws CloudDriveException,
-                                                                           RepositoryException {
+  protected JCRLocalGoogleDrive createDrive(CloudUser user, Node driveNode) throws CloudDriveException, RepositoryException {
     if (user instanceof GoogleUser) {
       return new JCRLocalGoogleDrive((GoogleUser) user, driveNode, sessionProviders, jcrFinder, mimeTypes);
     } else {
@@ -223,12 +206,7 @@ public class GoogleDriveConnector extends CloudDriveConnector {
   protected CloudDrive loadDrive(Node driveNode) throws CloudDriveException, RepositoryException {
     JCRLocalCloudDrive.checkNotTrashed(driveNode);
     JCRLocalCloudDrive.migrateName(driveNode);
-    return new JCRLocalGoogleDrive(new API(),
-                                   getProvider(),
-                                   driveNode,
-                                   sessionProviders,
-                                   jcrFinder,
-                                   mimeTypes);
+    return new JCRLocalGoogleDrive(new API(), getProvider(), driveNode, sessionProviders, jcrFinder, mimeTypes);
   }
 
 }

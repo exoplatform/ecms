@@ -17,12 +17,11 @@
 
 package org.exoplatform.clouddrive.gdrive;
 
-import javax.jcr.RepositoryException;
-
 import org.exoplatform.clouddrive.CloudDriveException;
 import org.exoplatform.clouddrive.CloudProvider;
 import org.exoplatform.services.jcr.RepositoryService;
-import org.jboss.util.Null;
+
+import javax.jcr.RepositoryException;
 
 /**
  * Created by The eXo Platform SAS.
@@ -42,11 +41,7 @@ public class GoogleProvider extends CloudProvider {
    * @param id
    * @param name
    */
-  public GoogleProvider(String id,
-                        String name,
-                        String authURL,
-                        String redirectURL,
-                        RepositoryService jcrService) {
+  public GoogleProvider(String id, String name, String authURL, String redirectURL, RepositoryService jcrService) {
     super(id, name);
     this.authURL = authURL;
     this.redirectURL = redirectURL;
@@ -71,7 +66,7 @@ public class GoogleProvider extends CloudProvider {
     if (jcrService != null) {
       try {
         String currentRepo = jcrService.getCurrentRepository().getConfiguration().getName();
-        return authURL.replace(GoogleDriveAPI.NO_STATE, currentRepo);
+        return authURL.replace(CloudProvider.AUTH_NOSTATE, currentRepo);
       } catch (RepositoryException e) {
         throw new CloudDriveException(e);
       }
@@ -84,28 +79,11 @@ public class GoogleProvider extends CloudProvider {
    * {@inheritDoc}
    */
   @Override
-  public String getErrorMessage(Throwable error) {
-    String message = error.getMessage();
-    if (message != null) {
-      if (message.indexOf("backendError") >= 0) {
-        return "Google backend error. Try again later.";
-      } else {
-        return message;
-      }
-    } else {
-      return "null";
-    }
-  }
-
-  /**
-   * {@inheritDoc}
-   */
-  @Override
-  public String getErrorMessage(String error) {
+  public String getErrorMessage(String error, String errorDescription) {
     if (error.indexOf("access_denied") >= 0) {
       return "Access denied to Google Drive";
     }
-    return super.getErrorMessage(error);
+    return super.getErrorMessage(error, errorDescription);
   }
 
   /**

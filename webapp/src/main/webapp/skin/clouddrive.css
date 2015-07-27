@@ -18,10 +18,10 @@
 	left: 2px;
 	top: 4px;
 	-webkit-transform: scale(0.36);
-    -moz-transform: scale(0.36);
-    -o-transform: scale(0.36);
-    -ms-transform: scale(0.36);
-    transform: scale(0.36);
+  -moz-transform: scale(0.36);
+  -o-transform: scale(0.36);
+  -ms-transform: scale(0.36);
+  transform: scale(0.36);
 	background: url("icons/googledrive-lightgray-16x16.png") no-repeat center center transparent !important;
 }
 
@@ -29,10 +29,10 @@
 	left: -1px;
 	top: -3px;
 	-webkit-transform: scale(0.7);
-    -moz-transform: scale(0.7);
-    -o-transform: scale(0.7);
-    -ms-transform: scale(0.7);
-    transform: scale(0.7);
+  -moz-transform: scale(0.7);
+  -o-transform: scale(0.7);
+  -ms-transform: scale(0.7);
+  transform: scale(0.7);
 	background: url("icons/googledrive-lightgray-16x16.png") no-repeat center center transparent !important;
 }
 
@@ -40,10 +40,10 @@
 	left: 1px;
 	top: -20px;
 	-webkit-transform: scale(0.7);
-    -moz-transform: scale(0.7);
-    -o-transform: scale(0.7);
-    -ms-transform: scale(0.7);
-    transform: scale(0.7);
+  -moz-transform: scale(0.7);
+  -o-transform: scale(0.7);
+  -ms-transform: scale(0.7);
+  transform: scale(0.7);
 	background: url("icons/googledrive-lightgray-32x32.png") no-repeat center center transparent !important;
 }
 
