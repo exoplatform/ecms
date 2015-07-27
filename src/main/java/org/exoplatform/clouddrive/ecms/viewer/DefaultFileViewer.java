@@ -43,7 +43,16 @@ public class DefaultFileViewer extends AbstractFileViewer {
 
   public static final String                     EVENT_NAME = "ShowCloudFile";
 
-  protected static final List<UIExtensionFilter> FILTERS    = Arrays.asList(new UIExtensionFilter[] { new CloudFileFilter() });
+  protected static final List<UIExtensionFilter> FILTERS    = Arrays.asList(new UIExtensionFilter[] {
+      new CloudFileFilter() });
+
+  public DefaultFileViewer() {
+    super();
+  }
+
+  protected DefaultFileViewer(long viewableMaxSize) {
+    super(viewableMaxSize);
+  }
 
   @UIExtensionFilters
   public List<UIExtensionFilter> getFilters() {

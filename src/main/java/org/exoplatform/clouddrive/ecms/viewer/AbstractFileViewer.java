@@ -32,13 +32,23 @@ public abstract class AbstractFileViewer extends BaseCloudDriveManagerComponent 
 
   protected CloudFile  file;
 
+  protected final long viewableMaxSize;
+
+  protected AbstractFileViewer(long viewableMaxSize) {
+    this.viewableMaxSize = viewableMaxSize;
+  }
+
+  protected AbstractFileViewer() {
+    this(Long.MAX_VALUE);
+  }
+
   /**
    * {@inheritDoc}
    */
   @Override
   public void processRender(WebuiRequestContext context) throws Exception {
     initContext();
-    
+
     Object obj = context.getAttribute(CloudDrive.class);
     if (obj != null) {
       CloudDrive drive = (CloudDrive) obj;
@@ -47,7 +57,7 @@ public abstract class AbstractFileViewer extends BaseCloudDriveManagerComponent 
         initFile(drive, (CloudFile) obj);
       }
     }
-    
+
     super.processRender(context);
   }
 
@@ -76,7 +86,7 @@ public abstract class AbstractFileViewer extends BaseCloudDriveManagerComponent 
 
   public boolean isViewable() {
     String mimeType = file.getType();
-    return !mimeType.startsWith(MediaType.APPLICATION_OCTET_STREAM);
+    return file.getSize() <= viewableMaxSize && !mimeType.startsWith(MediaType.APPLICATION_OCTET_STREAM);
   }
 
 }

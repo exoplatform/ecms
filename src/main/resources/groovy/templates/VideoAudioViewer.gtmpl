@@ -1,0 +1,195 @@
+<%
+import org.exoplatform.clouddrive.CloudDrive
+import org.exoplatform.clouddrive.CloudFile
+import org.exoplatform.wcm.webui.reader.ContentReader
+
+// should be set in CloudFileFilter
+def drive = uicomponent.drive
+def file = uicomponent.file
+if (drive && file) {
+  def title = ContentReader.getXSSCompatibilityContent(file.title)
+  def serviceName = drive.user.serviceName
+  def openOn = _ctx.appRes("CloudFileViewer.event.OpenOn")
+  
+  Calendar lCDateCalendar = Calendar.getInstance()
+  def timeCreated = lCDateCalendar.getTimeInMillis()
+%>
+
+<div id="CloudFileViewer" file-open-on="${openOn} ${serviceName}" style="position: relative; height: 100%; overflow: hidden;">
+	<script type="text/javascript" src="/eXoWCMResources/javascript/eXo/wcm/flowplayer/flowplayer-3.2.6.min.js"></script>
+  <div style="text-align:center;" class="file-content">
+		<div class="ContentDetail">
+	  	<div id="player-$timeCreated" class="PlayerContent" style="float:none; margin:auto; z-index:0;"></div>
+	  	<script type="text/javascript">
+	  		window.require(['SHARED/jquery'], function(jq) {
+					jq(function() {
+						// install flowplayer into container
+						flowplayer("player-$timeCreated", {wmode: 'transparent', src: "/eXoWCMResources/javascript/eXo/wcm/flowplayer/flowplayer-3.2.7.swf"}, {
+						 	// fullscreen button not needed here
+							plugins: {
+							  captions: {
+							    url: '/eXoWCMResources/javascript/eXo/wcm/flowplayer/flowplayer.captions-3.2.3.swf',
+							    // pointer to a content plugin (see below)
+							    captionTarget: 'content'
+							  },    	  
+							  /*
+							  configure a content plugin so that it 
+							  looks good for showing subtitles
+							  */
+							  content: {
+							    url:'/eXoWCMResources/javascript/eXo/wcm/flowplayer/flowplayer.content-3.2.0.swf',
+							    bottom: 35,
+							    height:40,
+							    backgroundColor: 'transparent',
+							    backgroundGradient: 'none',
+							    border: 0,
+							          textDecoration: 'outline',
+							    style: { 
+							      body: { 
+							        fontSize: 14, 
+							        fontFamily: 'Arial',
+							        textAlign: 'center',
+							        color: '#ffffff'
+							      } 
+							    } 
+							  },
+							  controls: {
+							    url: '/eXoWCMResources/javascript/eXo/wcm/flowplayer/flowplayer.controls-tube-3.2.5.swf',
+							    height: 30,
+							    // setup auto hide
+							    autoHide: false,
+							    playlist: true,
+							    tooltips:  {
+							      // a shortcut for enabling tooltips for buttons (English)
+							      buttons: true
+							    },
+							    stop: true, 
+							    play: true,
+							    scrubber: true,
+							    time: true, 
+							    mute: true,
+							    volume: true,
+							    fullscreen: true,
+							  }
+							},
+							playlist: [ "$file.previewLink" ],
+							canvas: {
+							  backgroundImage: 'url(/eXoWCMResources/skin/images/file/MP3Player.jpg)'
+							},
+							clip: {
+							  autoPlay: false,
+							  autoBuffering: true,
+							  // optional: when playback starts close the first audio playback
+							  onBeforeBegin: function() {
+							    flowplayer("player-$timeCreated").close();
+							  }
+							}
+						});
+					});
+				}); 
+	  	</script>
+		</div>
+		<style>
+		.NavigationContainer {
+		  padding-bottom: 5px;
+		  color: #0e396c;
+		  background: url('/eXoWCMResources/skin/images/file/TitleBG1x21.gif') repeat-x top;
+		  border: 1px solid #cbcbcb;
+		  margin: auto;
+		}
+		
+		 .TopTitle {
+		  padding-left: 10px;
+		  height: 22px; line-height: 22px;
+		  color: #058ee6; font-weight: bold;
+		}
+		
+		 .TextContent pre {
+		   white-space: normal;
+		 }
+		
+		 .ContentDetail {
+		   text-align: center;
+		   overflow: visible;
+		 }
+		
+		.ListPlayer{
+			float: right;
+			overflow-y: auto;
+			overflow-x: hidden;
+			height: 420px;
+		}
+		
+		.PlayerContent{
+			padding: 10px;
+			display:block;
+			float:left;
+			height:320px;
+			width:475px;
+		}
+		
+		div.clips.petrol a.playing {
+			width: 242px;
+			background: url('/eXoWCMResources/skin/images/file/Selected.gif') no-repeat right center;
+			color: black;
+			display: block;
+			font-family: verdana;
+			font-size: 11px;
+			font-weight: bold;
+			height: 29px;
+			line-height: 28px;
+			margin: 0 0 0 4px;
+			overflow: hidden;
+			padding: 0 0 0 8px;
+			text-align: left;
+		}
+		
+		div.clips.petrol .first {
+			background: #F0F0F0;
+			width: 238px;
+			border: none;
+			border-top: 1px solid white;
+			color: black;
+			display: block;
+			font-family: verdana;
+			font-size: 11px;
+			font-weight: bold;
+			height: 29px;
+			line-height: 28px;
+			margin: 0 0 0 8px;
+			overflow: hidden;
+			padding: 0 0 0 8px;
+			text-align: left;
+		  outline-style: none;
+		}
+		
+		.BackPage{
+			background: url('/eXoWCMResources/skin/images/file/BackPage.gif') no-repeat center;
+			width: 19px;
+			height: 7px;
+			cursor: pointer;
+			margin: 16px auto;
+		}
+		
+		.NextPage{
+			background: url('/eXoWCMResources/skin/images/file/NextPage.gif') no-repeat center;
+			width: 19px;
+			height: 7px;
+			cursor: pointer;
+			margin: 16px auto;
+		}
+		
+		div.clips.petrol a:hover {
+			background: url('/eXoWCMResources/skin/images/file/Selected.gif') no-repeat right center;
+			width: 242px;
+			margin: 0 0 0 4px;
+		}
+		</style>
+  </div>
+<%
+} else {%>
+	<p>Cannot load cloud file viewer. Refresh the page.</p>
+<%
+}
+%>
+</div>

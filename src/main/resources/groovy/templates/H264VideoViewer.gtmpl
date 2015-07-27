@@ -1,0 +1,31 @@
+<%
+import org.exoplatform.clouddrive.CloudDrive
+import org.exoplatform.clouddrive.CloudFile
+import org.exoplatform.wcm.webui.reader.ContentReader
+
+// should be set in CloudFileFilter
+def drive = uicomponent.drive
+def file = uicomponent.file
+if (drive && file) {
+  def title = ContentReader.getXSSCompatibilityContent(file.title)
+  def serviceName = drive.user.serviceName
+  def openOn = _ctx.appRes("CloudFileViewer.event.OpenOn")
+%>
+<div id="CloudFileViewer" file-open-on="${openOn} ${serviceName}" style="position: relative; height: 100%; overflow: hidden;">
+  <div style="text-align:center; display: none;" class="file-content" title="$title">
+  	<video src="$file.previewLink" controls="controls" class="videoContent">
+	  	your browser does not support the video tag
+	  </video>
+	  <style>
+	  .videoContent {  	
+	  	width:600px;
+	  }
+	  </style>
+  </div>
+<%
+} else {%>
+	<p>Cannot load cloud file viewer. Refresh the page.</p>
+<%
+}
+%>
+</div>

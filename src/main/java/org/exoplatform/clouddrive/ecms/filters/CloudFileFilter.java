@@ -54,6 +54,14 @@ public class CloudFileFilter extends AbstractCloudDriveNodeFilter {
     super(providers);
   }
 
+  public CloudFileFilter(List<String> providers, long minSize, long maxSize) {
+    super(providers, minSize, maxSize);
+  }
+
+  public CloudFileFilter(long minSize, long maxSize) {
+    super(minSize, maxSize);
+  }
+
   /**
    * {@inheritDoc}
    */
@@ -66,11 +74,14 @@ public class CloudFileFilter extends AbstractCloudDriveNodeFilter {
         try {
           if (acceptProvider(drive.getUser().getProvider())) {
             CloudFile file = drive.getFile(node.getPath());
-            // attribute used in CloudFile viewer(s)
-            WebuiRequestContext rcontext = WebuiRequestContext.getCurrentInstance();
-            rcontext.setAttribute(CloudDrive.class, drive);
-            rcontext.setAttribute(CloudFile.class, file);
-            return true;
+            long size = file.getSize();
+            if (size >= minSize && size <= maxSize) {
+              // attribute used in CloudFile viewer(s)
+              WebuiRequestContext rcontext = WebuiRequestContext.getCurrentInstance();
+              rcontext.setAttribute(CloudDrive.class, drive);
+              rcontext.setAttribute(CloudFile.class, file);
+              return true;
+            }
           }
         } catch (DriveRemovedException e) {
           // doesn't accept

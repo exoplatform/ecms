@@ -54,7 +54,7 @@ if (drive) {
 <%
 	} else {
 %><div class="center">
-		<div class="uiUnEditable clearfix">
+		<div class="uiUnEditable NotViewable clearfix">
 			<div class="iconContainer">
 			  <i class="<%=Utils.getNodeTypeIcon(uicomponent.getParent().node, "uiIcon64x64")%>"></i>
 			</div>

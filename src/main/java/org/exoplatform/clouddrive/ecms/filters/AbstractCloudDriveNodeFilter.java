@@ -26,6 +26,7 @@ import org.exoplatform.webui.core.UIApplication;
 import org.exoplatform.webui.ext.filter.UIExtensionFilter;
 import org.exoplatform.webui.ext.filter.UIExtensionFilterType;
 
+import java.util.Collections;
 import java.util.List;
 import java.util.Map;
 
@@ -40,15 +41,28 @@ import javax.jcr.RepositoryException;
  */
 public abstract class AbstractCloudDriveNodeFilter implements UIExtensionFilter {
 
+  protected long         minSize;
+
+  protected long         maxSize;
+
   protected List<String> providers;
 
   public AbstractCloudDriveNodeFilter() {
-    super();
+    this(Collections.<String> emptyList());
   }
 
   public AbstractCloudDriveNodeFilter(List<String> providers) {
-    super();
+    this(providers, 0, Long.MAX_VALUE);
+  }
+  
+  public AbstractCloudDriveNodeFilter(long minSize, long maxSize) {
+    this(Collections.<String> emptyList(), minSize, maxSize);
+  }
+  
+  public AbstractCloudDriveNodeFilter(List<String> providers, long minSize, long maxSize) {
     this.providers = providers;
+    this.minSize = minSize >= 0 ? minSize : 0;
+    this.maxSize = maxSize;
   }
 
   /**
@@ -100,7 +114,7 @@ public abstract class AbstractCloudDriveNodeFilter implements UIExtensionFilter 
   // ****************** internals ******************
 
   protected boolean acceptProvider(CloudProvider provider) {
-    if (providers != null && providers.size() > 0) {
+    if (providers.size() > 0) {
       boolean accepted = providers.contains(provider.getId());
       if (accepted) {
         return true;

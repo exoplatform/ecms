@@ -1,0 +1,76 @@
+<%
+  import org.exoplatform.clouddrive.CloudDrive
+  import org.exoplatform.clouddrive.CloudFile
+  import org.exoplatform.wcm.webui.reader.ContentReader
+
+	// should be set in CloudFileFilter
+  def drive = uicomponent.drive
+  def file = uicomponent.file
+  if (drive && file) {
+    def serviceName = drive.user.serviceName
+    def openOn = _ctx.appRes("CloudFileViewer.event.OpenOn")
+    def viewable = uicomponent.isViewable()
+%>
+<div id="CloudFileViewer" file-open-on="${openOn} ${serviceName}" 
+				style="position: relative; height: <%=viewable ? "100%" : "200px"%>; overflow: hidden;">
+<%	
+    if(uicomponent.isWebDocument()) {
+%>
+	<div id="WebContent" class="uiTabNormal">
+		<ul class="nav nav-tabs">
+			<li class="active"><a data-toggle="tab" href="#TabHTML"><%=_ctx.appRes("File.view.label.htmlview")%></a></li>
+			<li><a id="FileCodeSwitch" data-toggle="tab" href="#TabCode"><%=_ctx.appRes("File.view.label.plaintextview")%></a></li> 
+		</ul>
+		<div class="tab-content file-content" style="display: none;">
+			<div id="TabHTML" class="tab-pane fade in active">      
+				<iframe frameborder="0" style="position: absolute; width: 98%; height: 95%;" src=""></iframe>
+			</div>
+			<div id="TabCode" class="tab-pane fade"></div>
+		</div>  
+	</div>  
+<%  } else if (uicomponent.isXmlDocument()) {
+  %>
+	<div id="WebContent" class="uiTabNormal">
+		<ul class="nav nav-tabs">
+			<li class="active"><a id="FileCodeSwitch" data-toggle="tab" href="#TabCode"><%=_ctx.appRes("File.view.label.sourceview")%></a></li> 
+			<li><a data-toggle="tab" href="#TabHTML"><%=_ctx.appRes("File.view.label.webview")%></a></li>
+		</ul>
+		<div class="tab-content file-content" style="display: none;">
+			<div id="TabCode" class="tab-pane fade in active"></div>
+			<div id="TabHTML" class="tab-pane fade">      
+				<iframe frameborder="0" style="position: absolute; width: 98%; height: 95%;" src=""></iframe>
+			</div>
+		</div>  
+	</div>
+<%  } else if (uicomponent.isFormattedText()) {
+  %>
+	<div id="WebContent" class="uiTabNormal">
+		<div class="file-content">
+			<div id="TabCode"></div>
+		</div>  
+	</div>  
+<%  
+		} else if(viewable) {
+%>
+	<div class="file-content" style="display: none;">
+		<iframe frameborder="0" style="position: absolute; width: 98%; height: 95%;" src=""></iframe>
+	</div>
+<% 
+	  } else {
+%><div class="center">
+		<div class="uiUnEditable clearfix">
+			<div class="iconContainer">
+			  <i class="<%=Utils.getNodeTypeIcon(uicomponent.getParent().node, "uiIcon64x64")%>"></i>
+			</div>
+			<div class="detailContainer">
+			  <h4><%=_ctx.appRes("File.view.label.file-size-too-big")%></h4>
+			  <a class="btn btn-primary" href="$file.link"><%=_ctx.appRes("File.view.label.download")%></a>
+		  </div>
+		</div>
+	</div>
+<%
+	  }
+	} else {%>
+		<p>Cannot load cloud file viewer. Refresh the page.</p>
+<%}%>
+</div>  
