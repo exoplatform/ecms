@@ -3938,8 +3938,8 @@ public abstract class JCRLocalCloudDrive extends CloudDrive implements CloudDriv
   private Node openNode(String fileId, String fileTitle, Node parent, String nodeType) throws RepositoryException,
                                                                                        CloudDriveException {
     Node node;
-    String cleanName = cleanName(fileTitle);
-    String name = cleanName;
+    String baseName = nodeName(fileTitle);
+    String name = baseName;
     String internalName = null;
     boolean titleTried = false;
 
@@ -3956,7 +3956,7 @@ public abstract class JCRLocalCloudDrive extends CloudDrive implements CloudDriv
           } else {
             // find new name for the local file
             StringBuilder newName = new StringBuilder();
-            newName.append(cleanName);
+            newName.append(baseName);
             newName.append('-');
             newName.append(siblingNumber);
             name = newName.toString();
@@ -3968,7 +3968,7 @@ public abstract class JCRLocalCloudDrive extends CloudDrive implements CloudDriv
             // node not cleaned, this node stays only local (creation in progress or ignored),
             // and we need a new name for the file node
             StringBuilder newName = new StringBuilder();
-            newName.append(cleanName);
+            newName.append(baseName);
             newName.append('-');
             newName.append(siblingNumber);
             name = newName.toString();
@@ -4156,8 +4156,8 @@ public abstract class JCRLocalCloudDrive extends CloudDrive implements CloudDriv
    */
   protected Node readNode(Node parent, String fileTitle, String fileId) throws RepositoryException, CloudDriveException {
     Node node;
-    String cleanName = cleanName(fileTitle);
-    String name = cleanName;
+    String baseName = nodeName(fileTitle);
+    String name = baseName;
     String internalName = null;
 
     int siblingNumber = 1;
@@ -4171,7 +4171,7 @@ public abstract class JCRLocalCloudDrive extends CloudDrive implements CloudDriv
           } else {
             // find new name for the local file
             StringBuilder newName = new StringBuilder();
-            newName.append(cleanName);
+            newName.append(baseName);
             newName.append('-');
             newName.append(siblingNumber);
             name = newName.toString();
@@ -4595,7 +4595,7 @@ public abstract class JCRLocalCloudDrive extends CloudDrive implements CloudDriv
       if (baseExt != null) {
         newTitle += "." + baseExt;
       }
-      String newName = cleanName(newTitle);
+      String newName = nodeName(newTitle);
       if (!parent.hasNode(newName)) {
         session.move(file.getPath(), parent.getPath() + "/" + newName);
         file.setProperty("exo:title", newTitle);
@@ -4831,6 +4831,17 @@ public abstract class JCRLocalCloudDrive extends CloudDrive implements CloudDriv
     return false;
   }
 
+  /**
+   * Construct a cloud file node name from a file title. This method should be used everywhere for cloud nodes
+   * creation or modification and reading.<br>
+   * Connector implementation may override this logic when required (e.g. for path based file IDs).
+   * 
+   * @return String with cloud file node name
+   */
+  protected String nodeName(String title) {
+    return cleanName(title);
+  }
+
   // ============== abstract ==============
 
   /**
@@ -4886,48 +4897,6 @@ public abstract class JCRLocalCloudDrive extends CloudDrive implements CloudDriv
       }
     }
     return cleanedStr.toString().trim(); // finally trim also
-  }
-
-  /**
-   * Clean given node by renaming it to JCR compatible name. Prefixed names (with ':') will not be cleaned to
-   * avoid damaging system nodes.
-   * 
-   * @param node {@link Node}
-   * @param title {@link String}
-   * @return {@link Node} cleaned node, can be the same if its name already clean or prefixed.
-   * @throws RepositoryException
-   * @throws CloudDriveException
-   */
-  @Deprecated
-  public static Node cleanNode(Node node, String title) throws RepositoryException, CloudDriveException {
-    String name = node.getName();
-    if (name.indexOf(":") < 0) { // handle only not-prefixed JCR names (to avoid renaming system nodes)
-      String cleanName = cleanName(title);
-      if (!cleanName.equals(node.getName())) {
-        // need rename file to a clean name
-        Node parent = node.getParent();
-        int siblingNumber = 1;
-        name = cleanName;
-        do {
-          try {
-            parent.getNode(name);
-            // find new name for the node
-            StringBuilder newName = new StringBuilder();
-            newName.append(cleanName);
-            newName.append('-');
-            newName.append(siblingNumber);
-            name = newName.toString();
-            siblingNumber++;
-          } catch (PathNotFoundException e) {
-            // no such node exists, rename to this name
-            Session session = parent.getSession();
-            session.move(node.getPath(), parent.getPath() + "/" + name);
-            break;
-          }
-        } while (true);
-      }
-    }
-    return node; // node will reflect new destination in case of move
   }
 
   /**
