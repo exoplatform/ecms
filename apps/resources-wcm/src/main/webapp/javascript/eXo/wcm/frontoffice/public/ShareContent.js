@@ -17,8 +17,6 @@
   ShareContent.prototype.init = function(){
     gj(".uiShareDocuments.resizable .selectbox").addClass("input-medium");
     correctSpacePos();
-    var placeholderMsg = gj(".uiShareDocuments.resizable #textAreaInput").attr("placeholder");
-    if(placeholderMsg === gj(".uiShareDocuments.resizable #textAreaInput").val()) gj(".uiShareDocuments.resizable #textAreaInput").val("");
 
     gj(".uiShareDocuments.resizable #textAreaInput").exoMentions({
       onDataRequest : function(mode, query, callback) {
@@ -30,7 +28,7 @@
           callback.call(this, responseData);
         });
       },
-      idAction : 'ShareButton',
+      //idAction : 'ShareButton',
       actionLink : 'AttachButton',
       actionMention : 'mentionButton',
       elasticStyle : {
@@ -41,14 +39,15 @@
       },
       messages : window.eXo.social.I18n.mentions
     });
-    var placeHolderDiv = "<div class=\"placeholder\" style=\"top: 5px;\">"+placeholderMsg+"</div>"
-    gj(".uiShareDocuments.resizable .exo-mentions").append(placeHolderDiv);
-    gj('#DisplaytextAreaInput').bind('DOMNodeInserted DOMSubtreeModified DOMNodeRemoved', function(event) {
-      gj(".uiShareDocuments.resizable #textAreaInput").exoMentions('val', function(value) {
-        gj(".uiShareDocuments.resizable #textAreaInput").val(value);
-      });
-    });
+
     gj('#DisplaytextAreaInput').trigger('focus');
+  }
+
+  ShareContent.prototype.doShare = function(){
+    gj(".uiShareDocuments.resizable #textAreaInput").exoMentions('val', function(value) {
+      gj(".uiShareDocuments.resizable #textAreaInput").val(value);
+      gj("#shareActionBtn").trigger("click");
+    });
   }
 
   /**
