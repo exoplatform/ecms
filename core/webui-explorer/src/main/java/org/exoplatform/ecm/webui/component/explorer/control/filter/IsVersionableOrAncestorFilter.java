@@ -19,6 +19,7 @@ package org.exoplatform.ecm.webui.component.explorer.control.filter;
 
 import java.util.Map;
 
+import javax.jcr.AccessDeniedException;
 import javax.jcr.Node;
 import javax.jcr.RepositoryException;
 
@@ -51,6 +52,8 @@ public class IsVersionableOrAncestorFilter extends UIExtensionAbstractFilter {
       parent = (Node) node.getAncestor(depth);
     } catch (ClassCastException ex) {
       parent = (Node) node.getAncestor(--depth);
+    } catch (AccessDeniedException ade){
+      return false;
     }
     while (true) {
       if (parent.isNodeType(Utils.MIX_VERSIONABLE)) return true;
