@@ -11,11 +11,18 @@
       gj(popup).addClass("hide");
       popup.offset({left:gj(this).offset().left, top:gj(this).offset().top+gj(this).height()-1});
       gj(popup).removeClass("hide");
+      gj(".spaceChooserPopup").css("width", gj("#SpaceSwitcher").width()-2);
     });
   }
 
   ShareContent.prototype.init = function(){
     gj(".uiShareDocuments.resizable .selectbox").addClass("input-medium");
+    var sharePopupWindow = gj(".uiShareDocuments.resizable").closest(".UIPopupWindow");
+    sharePopupWindow.css("min-width", sharePopupWindow.width());
+    gj(".uiShareDocuments.resizable").css("min-height", "251px");
+    sharePopupWindow.find(".uiIconResize").bind("mousedown", function(){
+      gj(".uiShareDocuments.resizable .spaceChooserPopup .uiIconClose").trigger("click");
+    })
     correctSpacePos();
 
     gj(".uiShareDocuments.resizable #textAreaInput").exoMentions({
