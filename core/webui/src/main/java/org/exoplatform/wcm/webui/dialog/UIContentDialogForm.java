@@ -404,7 +404,7 @@ public class UIContentDialogForm extends UIDialogForm  implements UIPopupCompone
                                                                                   contentDialogForm.getInputProperties(),
                                                                                   contentDialogForm.getInputOptions());
         CmsService cmsService = contentDialogForm.getApplicationComponent(CmsService.class);
-        if (canAccessParentNode(webContentNode)) {
+        if (WCMCoreUtils.canAccessParentNode(webContentNode)) {
           cmsService.storeNode(contentDialogForm.contentType,
                                webContentNode.getParent(),
                                inputProperties,
@@ -454,14 +454,6 @@ public class UIContentDialogForm extends UIDialogForm  implements UIPopupCompone
       }
     }
 
-    private boolean canAccessParentNode(Node node) {
-      try {
-        node.getParent();
-      } catch (Exception e) {
-        return false;
-      }
-      return true;
-    }
   }
 
   /**

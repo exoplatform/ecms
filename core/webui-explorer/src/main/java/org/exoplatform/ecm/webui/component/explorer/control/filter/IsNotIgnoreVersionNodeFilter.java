@@ -39,7 +39,12 @@ public class IsNotIgnoreVersionNodeFilter implements UIExtensionFilter {
    if (context == null) return true;
    boolean ignore_version = true;
    Node currentNode = (Node) context.get(Node.class.getName());
-   Node parrentNode = currentNode.getParent();
+   Node parrentNode = null;
+   try{
+     parrentNode = currentNode.getParent();
+   }catch(Exception ex){
+     return false;
+   }
    ExtendedNodeTypeManager ntmanager = WCMCoreUtils.getRepository().getNodeTypeManager();
    String nodetypes = System.getProperty("wcm.nodetypes.ignoreversion");
    if(nodetypes == null || nodetypes.length() == 0)

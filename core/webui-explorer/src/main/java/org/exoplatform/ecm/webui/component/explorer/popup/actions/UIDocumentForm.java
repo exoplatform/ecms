@@ -420,7 +420,6 @@ public class UIDocumentForm extends UIDialogForm implements UIPopupComponent, UI
       for (String removedNode : documentForm.getRemovedNodes()) {
         documentNode.getNode(removedNode).remove();
       }
-      homeNode = documentNode.getParent();
       nodeType = documentNode.getPrimaryNodeType().getName();
       if(documentNode.isLocked()) {
         String lockToken = LockUtil.getLockToken(documentNode);
@@ -432,9 +431,14 @@ public class UIDocumentForm extends UIDialogForm implements UIPopupComponent, UI
     try {
       CmsService cmsService = documentForm.getApplicationComponent(CmsService.class);
       cmsService.getPreProperties().clear();
-      String addedPath = cmsService.storeNode(nodeType, homeNode, inputProperties, documentForm.isAddNew());
+      String addedPath = "";
+      if(WCMCoreUtils.canAccessParentNode(documentForm.getCurrentNode())) {
+        addedPath = cmsService.storeNode(nodeType, documentForm.getCurrentNode().getParent(), inputProperties, documentForm.isAddNew());
+      }else{
+        addedPath = cmsService.storeEditedNode(nodeType, documentForm.getCurrentNode(), inputProperties, documentForm.isAddNew());
+      }
       try {
-        newNode = (Node)homeNode.getSession().getItem(addedPath);
+        newNode = (Node)currentNode.getSession().getItem(addedPath);
         //Broadcast the add file activity
         if(documentForm.isAddNew()) {
           ListenerService listenerService = WCMCoreUtils.getService(ListenerService.class);
@@ -465,13 +469,15 @@ public class UIDocumentForm extends UIDialogForm implements UIPopupComponent, UI
             }
           }
         }
-        if (hasCategories && !homeNode.isNodeType("exo:taxonomy")) {
-          for(String removedCate : documentForm.getRemovedListCategory(listTaxonomy, listExistingTaxonomy)) {
-            index = removedCate.indexOf("/");
-            if (index != -1) {
-              taxonomyService.removeCategory(newNode, removedCate.substring(0, index), removedCate.substring(index + 1));
-            } else {
-              taxonomyService.removeCategory(newNode, removedCate, "");
+        if(WCMCoreUtils.canAccessParentNode(documentForm.getCurrentNode())) {
+          if (hasCategories && !documentForm.getCurrentNode().getParent().isNodeType("exo:taxonomy")) {
+            for (String removedCate : documentForm.getRemovedListCategory(listTaxonomy, listExistingTaxonomy)) {
+              index = removedCate.indexOf("/");
+              if (index != -1) {
+                taxonomyService.removeCategory(newNode, removedCate.substring(0, index), removedCate.substring(index + 1));
+              } else {
+                taxonomyService.removeCategory(newNode, removedCate, "");
+              }
             }
           }
         }
