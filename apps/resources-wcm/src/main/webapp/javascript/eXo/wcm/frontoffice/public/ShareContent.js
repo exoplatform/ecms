@@ -6,12 +6,12 @@
 
   function correctSpacePos(){
     var dropdown = gj(".uiShareDocuments.resizable .spaceSwitcherContainer #DisplayModesDropDown");
+    var popup = gj(".uiShareDocuments.resizable .spaceChooserPopup");
+    gj(popup).addClass("hide");
     gj(dropdown).bind( "click", function() {
-      var popup = gj(".uiShareDocuments.resizable .spaceChooserPopup");
-      gj(popup).addClass("hide");
       popup.offset({left:gj(this).offset().left, top:gj(this).offset().top+gj(this).height()-1});
-      gj(popup).removeClass("hide");
       gj(".spaceChooserPopup").css("width", gj("#SpaceSwitcher").width()-2);
+      gj(popup).removeClass("hide");
     });
   }
 
