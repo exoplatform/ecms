@@ -980,7 +980,7 @@
 		  		  eXo.ecm.MultiUpload.abortAllCancel();
 		  	  }
 					 eXo.ecm.WCMUtils.showNotice(eXo.ecm.MultiUpload.noticeMsg, true);
-					 eXo.ecm.MultiUpload.docAutoClose(id);
+					 eXo.ecm.MultiUpload.docAutoClose(progressID);
 		  	  //process next upload request
 		  	  eXo.ecm.MultiUpload.processNextUploadRequestInQueue();
 		    	 },
@@ -1160,13 +1160,12 @@
 	}
 
 	MultiUpload.prototype.docAutoClose = function(id){
-		popupWindow.hide("documentAutoVersioning"+id);
+		uiPopupWindow.hide("documentAutoVersioning"+id);
 		gj("#documentAutoVersioning"+id).remove();
 	}
 
 	MultiUpload.prototype.createVersion = function(id){
 		gj("#createVersionDiv"+id).click();
-//	gj("#documentAutoVersioning"+id).remove();
 	}
 	MultiUpload.prototype.showCreateVersion = function(name, id){
 
@@ -1177,13 +1176,11 @@
 		modalPopup += "</div><div class=\"PopupContent popupContent\">";
 		modalPopup += "<div class=\"center\" >Are you sure you want create a new version of the document <span class=\"documentName\" style=\"font-weight:bold;\" >"+eXo.ecm.MultiUpload.uploadingFileIds[id].name+"</span> ?</div>";
 		modalPopup += "<div class=\"uiActionBorder\">";
-		modalPopup += "<button type=\"button\" class=\"btn btn-primary\" onclick=\"eXo.ecm.MultiUpload.createVersion('"+id+"')\">Upload</button>";
+		modalPopup += "<button type=\"button\" class=\"btn btn-primary\" onclick=\"eXo.ecm.MultiUpload.createVersion('"+id+"')\">Upload</button> ";
 		modalPopup += "<button type=\"button\" class=\"btn\" onclick=\"eXo.ecm.MultiUpload.docAutoCancel('"+id+"');\">Cancel</button></div></div>";
 		modalPopup += "<span class=\"uiIconResize pull-right uiIconLightGray\"></span></div>";
 		gj(".UIPopupContainer").append(modalPopup);
-
-		popupWindow.show("documentAutoVersioning"+id+"", false);
-		//gj("#documentAutoVersioningMaskLayer").attr("style", "top:0px, left:0px, opacity:0.3,	z-index:3, width:100%, height:100%");
+		uiPopupWindow.show("documentAutoVersioning"+id, false);
 	}
 	
 	eXo.ecm.MultiUpload = new MultiUpload();
