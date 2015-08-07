@@ -13,7 +13,8 @@
 		this.restContext = eXo.ecm.WCMUtils.getRestContext();
 		this.uploadingFileCount = 0;
 		this.invalidFiles = 0;
-	//--------------Constraints--------------------------//  
+		this.createVersion = false;
+	//--------------Constraints--------------------------//
 		this.maxFileSize = 10;//MB
 		this.maxUploadCount = 2;
 		this.document = document;
@@ -600,7 +601,11 @@
 						eXo.ecm.MultiUpload.showCreateVersion("documentAutoVersioning", id);
 				  } else {
 				  	//next step
-				  	eXo.ecm.MultiUpload.existingBehavior[id] = "keep";
+						var _existenceAction = "keep";
+						if(eXo.ecm.MultiUpload.createVersion){
+							_existenceAction = "createVersion";
+						}
+				  	eXo.ecm.MultiUpload.existingBehavior[id] = _existenceAction;
 				  	eXo.ecm.MultiUpload.processUploadRequest1(id);
 				  }
 		      },
@@ -842,7 +847,11 @@
 					}
 				} else {
 					if (!eXo.ecm.MultiUpload.SUPPORT_FILE_API) {
-						var e = eXo.ecm.MultiUpload.handleReaderLoad(id, "keep");
+						var _existenceAction = "keep";
+						if(eXo.ecm.MultiUpload.createVersion){
+							_existenceAction = "createVersion";
+						}
+						var e = eXo.ecm.MultiUpload.handleReaderLoad(id, _existenceAction);
 						e(window.event);
 					}
 					if(nPercent === "100" && eXo.ecm.MultiUpload.notice === "createVersion"){
@@ -1141,7 +1150,16 @@
 			eXo.ecm.MultiUpload.uploadFileForIE(eXo.ecm.MultiUpload.document);
 		}
 	};
-	
+
+	MultiUpload.prototype.uploadNewVersion = function() {
+		this.createVersion = true;
+		if (eXo.ecm.MultiUpload.SUPPORT_FILE_API) {
+			eXo.ecm.MultiUpload.document.getElementById('MultiUploadInputFiles').click();
+		} else {
+			eXo.ecm.MultiUpload.uploadFileForIE(eXo.ecm.MultiUpload.document);
+		}
+	};
+
 	MultiUpload.prototype.uploadFileForIE = function(doc) {
 		var xmp = doc.getElementsByTagName("xmp")[0];
 		var ifr = doc.getElementById("iFrameUpload");

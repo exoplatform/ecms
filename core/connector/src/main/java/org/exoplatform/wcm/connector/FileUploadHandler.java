@@ -438,6 +438,9 @@ public class FileUploadHandler {
       }else if(parent.hasNode(nodeName)){
         file = parent.getNode(nodeName);
         jcrContent = file.hasNode("jcr:content")?file.getNode("jcr:content"):file.addNode("jcr:content","nt:resource");
+      }else if(parent.isNodeType(NodetypeConstant.NT_FILE)){
+        file = parent;
+        jcrContent = file.hasNode("jcr:content")?file.getNode("jcr:content"):file.addNode("jcr:content","nt:resource");
       }
       listenerService.broadcast(DocumentAutoVersionEventListener.DOCUMENT_AUTO_VERSIONING_LISTENER, this, file);
       DMSMimeTypeResolver mimeTypeResolver = DMSMimeTypeResolver.getInstance();

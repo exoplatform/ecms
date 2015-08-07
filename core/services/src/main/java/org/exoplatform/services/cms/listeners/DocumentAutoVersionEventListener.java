@@ -79,7 +79,7 @@ public class DocumentAutoVersionEventListener extends Listener<Object, Node> {
   private boolean createVersion(Node currentNode)throws Exception{
     if(currentNode.canAddMixin(NodetypeConstant.MIX_VERSIONABLE)){
       currentNode.addMixin(NodetypeConstant.MIX_VERSIONABLE);
-      currentNode.getSession().save();
+      currentNode.getParent().save();
     }
     long allCurrentVersions = currentNode.getVersionHistory().getAllVersions().getSize();
     if(maxVersionNumber==DOCUMENT_AUTO_DEFAULT_VERSION_MAX || maxVersionNumber >= allCurrentVersions){
@@ -91,7 +91,7 @@ public class DocumentAutoVersionEventListener extends Listener<Object, Node> {
       if(expiredTimeVersion > DOCUMENT_AUTO_DEFAULT_VERSION_EXPIRED){
         // add job to remove version
         Version baseVersion = currentNode.getBaseVersion();
-        DocumentAutoVersionJob.addJob(baseVersion.getUUID(), expiredTimeVersion);
+        DocumentAutoVersionJob.addJob(currentNode.getSession().getWorkspace().getName(), baseVersion.getUUID(), expiredTimeVersion);
       }
 
       return true;

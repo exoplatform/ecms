@@ -284,6 +284,17 @@
 						<field name="component"><string>org.exoplatform.ecm.webui.component.explorer.control.action.EditDocumentActionComponent</string></field>
                     </object>
                 </object-param>
+
+                <object-param>
+                    <name>EditProperty</name>
+                    <object type="org.exoplatform.webui.ext.UIExtension">
+                        <field name="type"><string>org.exoplatform.ecm.dms.UIActionBar</string></field>
+                        <field name="name"><string>EditProperty</string></field>
+                        <field name="rank"><int>100</int></field>
+                        <field name="component"><string>org.exoplatform.ecm.webui.component.explorer.control.action.EditPropertyActionComponent</string></field>
+                    </object>
+                </object-param>
+
                 <object-param>
                     <name>Upload</name>
                     <object type="org.exoplatform.webui.ext.UIExtension">
@@ -560,18 +571,27 @@
 				  </object>
 				</object-param>
 
-        <object-param>
-          <name>ShareDocuments</name>
-            <object type="org.exoplatform.webui.ext.UIExtension">
-                <field name="type"><string>org.exoplatform.ecm.dms.UIActionBar</string></field>
-                <field name="name"><string>ShareDocuments</string></field>
-                <field name="rank"><int>1</int></field>
-                <field name="component"><string>org.exoplatform.ecm.webui.component.explorer.rightclick.manager.ShareDocumentsComponent</string></field>
-            </object>
-        </object-param>
+                <object-param>
+                  <name>ShareDocuments</name>
+                  <object type="org.exoplatform.webui.ext.UIExtension">
+                    <field name="type"><string>org.exoplatform.ecm.dms.UIActionBar</string></field>
+                    <field name="name"><string>ShareDocuments</string></field>
+                    <field name="rank"><int>1</int></field>
+                    <field name="component"><string>org.exoplatform.ecm.webui.component.explorer.rightclick.manager.ShareDocumentsComponent</string></field>
+                  </object>
+                </object-param>
 
+                <object-param>
+                  <name>UploadNewVersion</name>
+                    <object type="org.exoplatform.webui.ext.UIExtension">
+                      <field name="type"><string>org.exoplatform.ecm.dms.UIActionBar</string></field>
+                      <field name="name"><string>UploadNewVersion</string></field>
+                      <field name="rank"><int>11</int></field>
+                      <field name="component"><string>org.exoplatform.ecm.webui.component.explorer.rightclick.manager.UploadNewVersionManageComponent</string></field>
+                    </object>
+                </object-param>
 
-            </init-params>
+           </init-params>
         </component-plugin>
         <component-plugin>
             <name>Add Managers</name>
@@ -1291,16 +1311,16 @@
 				  </object>
 				</object-param>
 
-        <object-param>
-          <name>ShareDocuments</name>
-          <object type="org.exoplatform.webui.ext.UIExtension">
-            <field name="type"><string>org.exoplatform.ecm.dms.UIWorkingArea</string></field>
-            <field name="rank"> <int>1</int> </field>
-            <field name="name"> <string>ShareDocuments</string> </field>
-            <field name="category"> <string>ItemContextMenu_SingleSelection</string> </field>
-            <field name="component"> <string>org.exoplatform.ecm.webui.component.explorer.rightclick.manager.ShareDocumentsComponent</string></field>
-          </object>
-        </object-param>
+                <object-param>
+                  <name>ShareDocuments</name>
+                  <object type="org.exoplatform.webui.ext.UIExtension">
+                    <field name="type"><string>org.exoplatform.ecm.dms.UIWorkingArea</string></field>
+                    <field name="rank"> <int>1</int> </field>
+                    <field name="name"> <string>ShareDocuments</string> </field>
+                    <field name="category"> <string>ItemContextMenu_SingleSelection</string> </field>
+                    <field name="component"> <string>org.exoplatform.ecm.webui.component.explorer.rightclick.manager.ShareDocumentsComponent</string></field>
+                  </object>
+                </object-param>
 
             </init-params>
         </component-plugin>

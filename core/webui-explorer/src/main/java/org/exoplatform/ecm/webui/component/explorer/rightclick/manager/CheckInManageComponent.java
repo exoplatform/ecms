@@ -32,7 +32,9 @@ import org.exoplatform.ecm.webui.component.explorer.control.filter.CanSetPropert
 import org.exoplatform.ecm.webui.component.explorer.control.filter.IsCheckedOutFilter;
 import org.exoplatform.ecm.webui.component.explorer.control.filter.IsNotInTrashFilter;
 import org.exoplatform.ecm.webui.component.explorer.control.filter.IsNotLockedFilter;
+import org.exoplatform.ecm.webui.component.explorer.control.filter.IsNotNtFileFilter;
 import org.exoplatform.ecm.webui.component.explorer.control.filter.IsNotTrashHomeNodeFilter;
+import org.exoplatform.ecm.webui.component.explorer.control.filter.IsNtFileFilter;
 import org.exoplatform.ecm.webui.component.explorer.control.filter.IsVersionableFilter;
 import org.exoplatform.ecm.webui.component.explorer.control.filter.IsVersionableOrAncestorFilter;
 import org.exoplatform.ecm.webui.component.explorer.control.listener.UIWorkingAreaActionListener;
@@ -70,7 +72,8 @@ public class CheckInManageComponent extends UIAbstractManagerComponent {
                                                 new IsVersionableOrAncestorFilter(),
                                                 new IsCheckedOutFilter(),
                                                 new IsVersionableFilter(),
-                                                new IsNotTrashHomeNodeFilter()});
+                                                new IsNotTrashHomeNodeFilter(),
+                                                new IsNotNtFileFilter()});
 
   @UIExtensionFilters
   public List<UIExtensionFilter> getFilters() {

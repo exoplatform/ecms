@@ -63,48 +63,50 @@
             %>
           </div>
         </div>
-        <div class="control-group">
-          <label class="control-label" for="content"><%=_ctx.appRes("File.dialog.label.content")%>:</label>
-          <div class="controls">
               <%
                 if(uicomponent.isEditing()) { 
                   def curNode = uicomponent.getNode() ;
                   if(curNode.hasNode("jcr:content")) {
                     def content = curNode.getNode("jcr:content") ;
                     String mimeType = content.getProperty("jcr:mimeType").getString() ;
-                    if(mimeType.startsWith("text") || mimeType.indexOf("groovy") >= 0){
+                    if(mimeType.startsWith("text") || mimeType.indexOf("groovy") >= 0){ // PLF mime type
+                      %>
+                      <div class="control-group">
+                        <label class="control-label" for="content"><%=_ctx.appRes("File.dialog.label.content")%>:</label>
+                        <div class="controls">
+                      <%
                       if(mimeType.equals("text/html")) {
                         String[] fieldSummary = ["jcrPath=/node/jcr:content/jcr:data", "", "validate=empty", "options=noSanitization"] ;
-                              uicomponent.addRichtextField("contentHtml", fieldSummary) ;      
+                              uicomponent.addRichtextField("contentHtml", fieldSummary) ;
                         //uicomponent.removeComponent("content");
                       } else {
                         String[] fieldSummary = ["jcrPath=/node/jcr:content/jcr:data", "validate=empty", "options=noSanitization"] ;
                               uicomponent.addTextAreaField("content", fieldSummary) ;
                       }
-                    } else {
-                    if (content.getProperty("jcr:data").getStream().available() > 0 && !uicomponent.isDataRemoved("/jcr:content")) {
-                        def actionLink = uicomponent.event("RemoveData", "/jcr:content");
-                        def fileName = Utils.getTitle(curNode);
-                        %> 
-                    
-                      <a class="nameInfo" rel="tooltip" data-placement="bottom" title="$fileName">
-                         $fileName
-                      </a>
-                      <a class="actionIcon" href="$actionLink">
-                        <i class="uiIconDelete uiIconLightGray" rel="tooltip" data-placement="bottom" title="<%=_ctx.appRes("Ecm.dialog.label.remove")%>" alt="<%=_ctx.appRes("Ecm.dialog.label.remove")%>"></i>
-                      </a>
-                    
-                       <%
-                    }else{
-              String[] fieldData = ["jcrPath=/node/jcr:content/jcr:data"] ;
-              uicomponent.addUploadField("data", fieldData) ;
-              }
-              }           
+                      %>
+                        </div>
+                      </div>
+                      <%
+                    } //end if
                   } else {
+                    %>
+                    <div class="control-group">
+                      <label class="control-label" for="content"><%=_ctx.appRes("File.dialog.label.content")%>:</label>
+                      <div class="controls">
+                    <%
                     String[] fieldSummary = ["jcrPath=/node/jcr:content/jcr:data", "", "validate=empty", "options=noSanitization"] ;
-                                uicomponent.addRichtextField("contentHtml", fieldSummary) ;            
+                                uicomponent.addRichtextField("contentHtml", fieldSummary) ;
+                    %>
+                      </div>
+                    </div>
+                    <%
                   }
-                } else {  
+                } else { // not in editing
+              %>
+            <div class="control-group">
+              <label class="control-label" for="content"><%=_ctx.appRes("File.dialog.label.content")%>:</label>
+              <div class="controls">
+                <%
                   String selectValue = uicomponent.getSelectBoxFieldValue("mimetype") ;   
                   if(selectValue != null && selectValue.equals("text/html")) {  
                     String[] fieldSummary = ["jcrPath=/node/jcr:content/jcr:data", "", "validate=empty", "options=noSanitization"] ;
@@ -119,12 +121,10 @@
                                 uicomponent.addRichtextField("contentHtml", fieldSummary) ;  
                     uicomponent.removeComponent("contentPlain");                
                   }
-                }
-              %>
-          </div>
-        </div>     
-        
-        <%
+                %>
+              </div>
+            </div>
+            <%} //end if
         def curNode = uicomponent.getNode() ;
         if(curNode != null && curNode.hasNode("jcr:content")) {
           def content = curNode.getNode("jcr:content") ;
