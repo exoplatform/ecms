@@ -1791,7 +1791,7 @@ public class UIDocumentInfo extends UIBaseNodePresentation {
 
   public String getDragAndDropEvents(Node node) throws Exception{
     //define events for drag&drop files into subfolders
-    if (this.canAddNode(node)) {
+//    if (this.canAddNode(node)) {
     StringBuilder dragEvents = new StringBuilder().append("ondragover='eXo.ecm.MultiUpload.enableDragItemArea(event, this)' ").
                                                     append("ondragleave='eXo.ecm.MultiUpload.disableDragItemArea(this)' ").
                                                     append("ondragend='eXo.ecm.MultiUpload.disableDragItemArea(this)' ").
@@ -1800,9 +1800,9 @@ public class UIDocumentInfo extends UIBaseNodePresentation {
       dragEvents.append("ondrop='eXo.ecm.MultiUpload.doDropItemArea(event, this,\"").
                  append(node.getPath()).append("\")' ");
       return dragEvents.toString();
-    } else {
-      return "";
-    }
+//    } else {
+//      return "";
+//    }
   }
 
   @Override

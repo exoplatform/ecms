@@ -438,7 +438,7 @@
 			gj("body").append(noticeHtml);
 		}
 		var _noticeElem = document.getElementById("wcm-notice");
-		if(noticeMsg === null || noticeMsg === '') {
+		if(noticeMsg === null || noticeMsg === '' || noticeMsg !== undefined) {
 			_noticeElem.style.display = "none";
 			_noticeElem.innerHTML = "";
 		} else {
@@ -446,7 +446,7 @@
 			if(addressBar) {
 				var pos = gj("#UIAddressBar").position();
 				_noticeElem.style.display = "block";
-				_noticeElem.style.top = (pos.top + 5) + "px";
+				_noticeElem.style.top = "40px";
 			}else{
 
 			}

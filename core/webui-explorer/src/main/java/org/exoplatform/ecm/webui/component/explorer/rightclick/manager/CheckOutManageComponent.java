@@ -37,9 +37,9 @@ import org.exoplatform.ecm.webui.component.explorer.UIJCRExplorer;
 import org.exoplatform.ecm.webui.component.explorer.UIWorkingArea;
 import org.exoplatform.ecm.webui.component.explorer.control.filter.CanSetPropertyFilter;
 import org.exoplatform.ecm.webui.component.explorer.control.filter.IsNotCheckedOutFilter;
+import org.exoplatform.ecm.webui.component.explorer.control.filter.IsNotContainBinaryFilter;
 import org.exoplatform.ecm.webui.component.explorer.control.filter.IsNotInTrashFilter;
 import org.exoplatform.ecm.webui.component.explorer.control.filter.IsNotLockedFilter;
-import org.exoplatform.ecm.webui.component.explorer.control.filter.IsNotNtFileFilter;
 import org.exoplatform.ecm.webui.component.explorer.control.filter.IsNotTrashHomeNodeFilter;
 import org.exoplatform.ecm.webui.component.explorer.control.filter.IsVersionableFilter;
 import org.exoplatform.ecm.webui.component.explorer.control.listener.UIWorkingAreaActionListener;
@@ -81,7 +81,7 @@ public class CheckOutManageComponent extends UIAbstractManagerComponent {
                                               new IsNotCheckedOutFilter(),
                                               new IsVersionableFilter(),
                                               new IsNotTrashHomeNodeFilter(),
-                                              new IsNotNtFileFilter()});
+                                              new IsNotContainBinaryFilter()});
 
   @UIExtensionFilters
   public List<UIExtensionFilter> getFilters() {

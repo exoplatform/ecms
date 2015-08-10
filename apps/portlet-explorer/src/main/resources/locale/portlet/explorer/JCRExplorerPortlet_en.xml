@@ -308,6 +308,8 @@
       <ViewMetadatas>Metadata</ViewMetadatas>
       <ViewRelations>Show/Hide Relations</ViewRelations>
       <ShowJCRStructure>Show/Hide Content Structure</ShowJCRStructure>
+      <EditProperty>Edit Document Properties</EditProperty>
+      <UploadNewVersion>Upload a new version</UploadNewVersion>
     </tooltip>
     <msg>
       <cannot-action-in-rootnode>You cannot perform this action in the root node.</cannot-action-in-rootnode>
@@ -596,6 +598,8 @@
       <WebDavView>Open in MS Office</WebDavView>
       <Download>Download</Download>
       <OpenDocument>Remote Edit</OpenDocument>
+      <EditProperty>Edit Document Properties</EditProperty>
+      <UploadNewVersion>Upload a new version</UploadNewVersion>
     </event>
   </ECMContextMenu>
  

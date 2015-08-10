@@ -264,6 +264,7 @@ public class FileUploadHandler {
    * @throws Exception the exception
    */
   public Response checkExistence(Node parent, String fileName) throws Exception {
+    DMSMimeTypeResolver resolver = DMSMimeTypeResolver.getInstance();
     CacheControl cacheControl = new CacheControl();
     cacheControl.setNoCache(true);
     DateFormat dateFormat = new SimpleDateFormat(IF_MODIFIED_SINCE_DATE_FORMAT);
@@ -275,6 +276,9 @@ public class FileUploadHandler {
     fileName = cleanNameUtil(fileName);
     Element rootElement = fileExistence.createElement(
                               parent.hasNode(fileName) ? "Existed" : "NotExisted");
+    if(resolver.getMimeType(parent.getName()).equals(resolver.getMimeType(fileName))){
+      rootElement.appendChild(fileExistence.createElement("CanVersioning"));
+    }
     fileExistence.appendChild(rootElement);
     //return ret;
     return Response.ok(new DOMSource(fileExistence), MediaType.TEXT_XML)
@@ -445,9 +449,9 @@ public class FileUploadHandler {
       listenerService.broadcast(DocumentAutoVersionEventListener.DOCUMENT_AUTO_VERSIONING_LISTENER, this, file);
       DMSMimeTypeResolver mimeTypeResolver = DMSMimeTypeResolver.getInstance();
       String mimetype = mimeTypeResolver.getMimeType(resource.getFileName());
-      jcrContent.setProperty("jcr:data",new BufferedInputStream(new FileInputStream(new File(location))));
-      jcrContent.setProperty("jcr:lastModified",new GregorianCalendar());
-      jcrContent.setProperty("jcr:mimeType",mimetype);
+      jcrContent.setProperty("jcr:data", new BufferedInputStream(new FileInputStream(new File(location))));
+      jcrContent.setProperty("jcr:lastModified", new GregorianCalendar());
+      jcrContent.setProperty("jcr:mimeType", mimetype);
 
       parent.getSession().refresh(true); // Make refreshing data
       uploadService.removeUploadResource(uploadId);

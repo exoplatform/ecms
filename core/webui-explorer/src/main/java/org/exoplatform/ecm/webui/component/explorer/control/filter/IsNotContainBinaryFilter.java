@@ -37,11 +37,12 @@ public class IsNotContainBinaryFilter extends UIExtensionAbstractFilter {
         if (mimeType != null && (mimeType.startsWith("text") || mimeType.indexOf("groovy") >= 0)) {
           return true;
         }
+        return false;
       } catch (RepositoryException re) {
         return false;
       }
     }
-    return false;
+    return true;
   }
 
   public void onDeny(Map<String, Object> context) throws Exception {}

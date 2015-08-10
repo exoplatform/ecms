@@ -13,7 +13,7 @@
 		this.restContext = eXo.ecm.WCMUtils.getRestContext();
 		this.uploadingFileCount = 0;
 		this.invalidFiles = 0;
-		this.createVersion = false;
+		this.isCreateVersion = false;
 	//--------------Constraints--------------------------//
 		this.maxFileSize = 10;//MB
 		this.maxUploadCount = 2;
@@ -600,9 +600,16 @@
 				  	eXo.ecm.MultiUpload.processUploadRequest4(id);
 						eXo.ecm.MultiUpload.showCreateVersion("documentAutoVersioning", id);
 				  } else {
+						var canVersioning = result.getElementsByTagName("CanVersioning");
+						if (canVersioning && canVersioning.length > 0) {
+							eXo.ecm.MultiUpload.isCreateVersion = true;
+							eXo.ecm.MultiUpload.updateNotice(eXo.ecm.MultiUpload.pathMap[id].split("/").pop());
+						}else{
+							eXo.ecm.MultiUpload.isCreateVersion = false;
+						}
 				  	//next step
 						var _existenceAction = "keep";
-						if(eXo.ecm.MultiUpload.createVersion){
+						if(eXo.ecm.MultiUpload.isCreateVersion){
 							_existenceAction = "createVersion";
 						}
 				  	eXo.ecm.MultiUpload.existingBehavior[id] = _existenceAction;
@@ -705,8 +712,7 @@
 				//upload file, replace old file by new file
 				eXo.ecm.MultiUpload.existingBehavior[myfile] = "createVersion";
 				eXo.ecm.MultiUpload.processUploadRequest1(myfile);
-				eXo.ecm.MultiUpload.notice="createVersion";
-				eXo.ecm.MultiUpload.noticeMsg="A new version of the document <span style=\"font-weight:bold;\"> "+eXo.ecm.MultiUpload.uploadingFileIds[myfile].name+"</span> has been created successfully.";
+				eXo.ecm.MultiUpload.updateNotice(eXo.ecm.MultiUpload.uploadingFileIds[myfile].name);
 			}
 		}(loadContentDiv, id);
 		//cancel
@@ -848,7 +854,7 @@
 				} else {
 					if (!eXo.ecm.MultiUpload.SUPPORT_FILE_API) {
 						var _existenceAction = "keep";
-						if(eXo.ecm.MultiUpload.createVersion){
+						if(eXo.ecm.MultiUpload.isCreateVersion){
 							_existenceAction = "createVersion";
 						}
 						var e = eXo.ecm.MultiUpload.handleReaderLoad(id, _existenceAction);
@@ -1152,7 +1158,7 @@
 	};
 
 	MultiUpload.prototype.uploadNewVersion = function() {
-		this.createVersion = true;
+		this.isCreateVersion = true;
 		if (eXo.ecm.MultiUpload.SUPPORT_FILE_API) {
 			eXo.ecm.MultiUpload.document.getElementById('MultiUploadInputFiles').click();
 		} else {
@@ -1200,7 +1206,11 @@
 		gj(".UIPopupContainer").append(modalPopup);
 		uiPopupWindow.show("documentAutoVersioning"+id, false);
 	}
-	
+
+	MultiUpload.prototype.updateNotice = function(fileName){
+		eXo.ecm.MultiUpload.notice="createVersion";
+		eXo.ecm.MultiUpload.noticeMsg="A new version of the document <span style=\"font-weight:bold;\"> "+fileName+"</span> has been created successfully.";
+	}
 	eXo.ecm.MultiUpload = new MultiUpload();
 	
 	return eXo.ecm.MultiUpload;

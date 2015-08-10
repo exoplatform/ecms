@@ -17,6 +17,7 @@
   import org.apache.commons.lang.StringUtils;
   import org.exoplatform.ecm.webui.component.explorer.control.action.UploadActionComponent;
 	import org.exoplatform.ecm.webui.component.explorer.rightclick.manager.UploadNewVersionManageComponent;
+	import org.exoplatform.ecm.webui.component.explorer.control.action.EditPropertyActionComponent;
   import org.exoplatform.ecm.webui.component.explorer.rightclick.manager.OpenDocumentManageComponent;
   import org.exoplatform.services.wcm.utils.WCMCoreUtils;
   import org.exoplatform.wcm.connector.collaboration.OpenInOfficeConnector;
@@ -115,9 +116,9 @@
 							 if (action != null) {
 								 def actionOnClick = action.event(button);
 					 			 if(action instanceof UploadActionComponent){
-					 				 action = "document.getElementById('MultiUploadInputFiles').click();";
+           				actionOnClick = "document.getElementById('MultiUploadInputFiles').click();";
 					       }else if(action instanceof UploadNewVersionManageComponent){
-					 				 action = "eXo.ecm.MultiUpload.uploadNewVersion();"
+           				actionOnClick = "eXo.ecm.MultiUpload.uploadNewVersion();"
 					       }
 
 								 def title = _ctx.appRes(uicomponent.getId() + ".tooltip." + button);

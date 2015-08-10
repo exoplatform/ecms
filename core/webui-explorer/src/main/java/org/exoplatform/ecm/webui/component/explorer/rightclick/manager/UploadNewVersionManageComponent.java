@@ -1,6 +1,7 @@
 package org.exoplatform.ecm.webui.component.explorer.rightclick.manager;
 
 import org.exoplatform.ecm.webui.component.explorer.UIJCRExplorer;
+import org.exoplatform.ecm.webui.component.explorer.control.filter.IsContainBinaryFilter;
 import org.exoplatform.ecm.webui.component.explorer.control.filter.IsNotEditingDocumentFilter;
 import org.exoplatform.ecm.webui.component.explorer.control.filter.IsNotInTrashFilter;
 import org.exoplatform.ecm.webui.component.explorer.control.filter.IsNtFileFilter;
@@ -41,7 +42,7 @@ public class UploadNewVersionManageComponent extends UIAbstractManagerComponent 
           new IsVersionableFilter(),
           new IsNotInTrashFilter(),
           new IsNotEditingDocumentFilter(),
-          new IsNtFileFilter()});
+          new IsContainBinaryFilter()});
 
   @UIExtensionFilters
   public List<UIExtensionFilter> getFilters() {
