@@ -432,13 +432,13 @@
 	 * @param closeable: can close
 	 */
 	WCMUtils.prototype.showNotice = function(noticeMsg, closeable){
-
-		if(gj("#wcm-notice") === undefined){
+		gj("#wcm-notice").remove();
+		//if(gj("#wcm-notice") === undefined){
 			var noticeHtml = "<div id=\"wcm-notice\" style=\"display: none;\" class=\"alert alert-success wcmAlertSuccess\"></div>";
 			gj("body").append(noticeHtml);
-		}
+		//}
 		var _noticeElem = document.getElementById("wcm-notice");
-		if(noticeMsg === null || noticeMsg === '' || noticeMsg !== undefined) {
+		if(noticeMsg === null || noticeMsg === '' || noticeMsg === undefined) {
 			_noticeElem.style.display = "none";
 			_noticeElem.innerHTML = "";
 		} else {
@@ -447,20 +447,22 @@
 				var pos = gj("#UIAddressBar").position();
 				_noticeElem.style.display = "block";
 				_noticeElem.style.top = "40px";
+				_noticeElem.style.position = "fixed";
 			}else{
 
 			}
 
 			_noticeElem.style.display = "block";
 			_noticeElem.innerHTML  = '<i class="uiIconSuccess"></i>' + noticeMsg;
-			if(closeable) _noticeElem.innerHTML += '<a class="uiIconClose pull-right" title="Close Window" onclick="eXo.ecm.WCMUtils.closeNotice();"></a>';
+			if(closeable) _noticeElem.innerHTML += '<a class="uiIconClose pull-right" style="cursor:pointer;" title="Close Window" onclick="eXo.ecm.WCMUtils.closeNotice();"></a>';
 			_noticeElem.style.marginLeft = "-" + _noticeElem.offsetWidth/2 + "px";
 		}
 
 	}
 
 	WCMUtils.prototype.closeNotice = function(){
-		gj("#wcm-notice").hide();
+		var wcmNotice = document.getElementById("wcm-notice");
+		wcmNotice.style.display = "none";
 	}
 
     eXo.ecm.WCMUtils = new WCMUtils();

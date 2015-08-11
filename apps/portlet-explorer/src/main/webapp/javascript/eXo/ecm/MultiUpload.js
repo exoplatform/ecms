@@ -361,12 +361,13 @@
 	//------------------------------------------------------------//
 	//--------------------UI Related methods----------------------//
 	MultiUpload.prototype.enableDragItemArea = function(event, box) {
-		//box.style.background="darkgray";
+		gj(box).addClass("active");
 		event.preventDefault();
 	};
 
 	MultiUpload.prototype.disableDragItemArea = function(box) {
 		box.style.background="";
+		gj(box).removeClass("active");
 	};
 
 	MultiUpload.prototype.doDropItemArea = function(event, box, path) {

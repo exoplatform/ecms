@@ -413,6 +413,9 @@ public class FileUploadHandler {
       String nodeName = fileName;
       int count = 0;
       if(!CREATE_VERSION.equals(existenceAction) && !parent.hasNode(nodeName)) {
+        if(parent.isNodeType(NodetypeConstant.NT_FILE)){
+          parent = parent.getParent();
+        }
         do {
           try {
             file = parent.addNode(nodeName, FCKUtils.NT_FILE);
