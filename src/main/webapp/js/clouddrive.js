@@ -1269,11 +1269,16 @@
 						allowed += (allowed ? ", ." : ".") + action;
 					});
 					// filter Context Menu common items: JCRContextMenu located in action bar
-					$("#JCRContextMenu li.menuItem a i").not(allowed).each(function() {
+					var $items = $("#JCRContextMenu li.menuItem a i");
+					var itemsCount = $items.size();
+					$items.not(allowed).each(function() {
 						$(this).parent().css("display", "none");
+						itemsCount--;
 					});
+					return itemsCount;
 				}
 			}
+			return -1;
 		};
 
 		var decodeString = function(str) {
@@ -2038,7 +2043,10 @@
 			if (typeof uiRightClickPopupMenu.__cw_overridden == "undefined") {
 				uiRightClickPopupMenu.clickRightMouse_orig = uiRightClickPopupMenu.clickRightMouse;
 				uiRightClickPopupMenu.clickRightMouse = function(event, elemt, menuId, objId, params, opt) {
-					uiRightClickPopupMenu.clickRightMouse_orig(event, elemt, menuId, objId, filterActions(objId, elemt, params), opt);
+					var filteredParams = filterActions(objId, elemt, params);
+					if (filteredParams.length > 0) {
+						uiRightClickPopupMenu.clickRightMouse_orig(event, elemt, menuId, objId, filteredParams, opt);
+					}
 				};
 
 				uiRightClickPopupMenu.__cw_overridden = true;
@@ -2091,9 +2099,13 @@
 					// run original
 					simpleView.showItemContextMenu_orig(event, element);
 					// and hide all not allowed
-					initMultiContextMenu();
-					// and fix menu position
-					fixContextMenuPosition();
+					if (initMultiContextMenu() > 0) {
+						// and fix menu position
+						fixContextMenuPosition();
+					} else {
+						// if nothing shown, hide the menu
+						simpleView.hideContextMenu();
+					}
 				};
 				
 				// hide ground-context menu for drive folder
@@ -2102,9 +2114,13 @@
 					simpleView.showGroundContextMenu_orig(event, element);
 					if (cloudDrive.isContextDrive() || cloudDrive.isContextFile()) {
 						// hide all not allowed for cloud drive
-						initMultiContextMenu();
-						// and fix menu position
-						fixContextMenuPosition();
+						if (initMultiContextMenu() > 0) {
+							// and fix menu position
+							fixContextMenuPosition();
+						} else {
+							// if nothing shown, hide the menu
+							simpleView.hideContextMenu();
+						}
 					}
 				};
 
@@ -2212,7 +2228,7 @@
 						// FYI PLF's RequireJS baseUrl is /portal/intranet, thus we need relative moduleId to reach the WAR location
 						// after all this CodeMirror will be available globally as 'require' inside the module wrapper doesn't have amd
 						// function.
-						window.require(["../../cloud-drive-cmis/js/codemirror-bundle.min"], function() {
+						window.require(["../../cloud-drive/js/codemirror-bundle.min"], function() {
 							CodeMirror($code.get(0), {
 								value : code,
 								lineNumbers : true,
