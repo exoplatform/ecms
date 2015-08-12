@@ -21,6 +21,7 @@ package org.exoplatform.clouddrive.ecms.action;
 
 import org.exoplatform.clouddrive.CloudDrive;
 import org.exoplatform.clouddrive.CloudDriveException;
+import org.exoplatform.clouddrive.CloudDriveSecurity;
 import org.exoplatform.clouddrive.CloudDriveService;
 import org.exoplatform.clouddrive.CloudDriveStorage;
 import org.exoplatform.clouddrive.CloudDriveStorage.Change;
@@ -42,7 +43,6 @@ import org.exoplatform.services.jcr.ext.common.SessionProvider;
 import org.exoplatform.services.jcr.ext.hierarchy.NodeHierarchyCreator;
 import org.exoplatform.services.log.ExoLogger;
 import org.exoplatform.services.log.Log;
-import org.exoplatform.services.wcm.core.NodetypeConstant;
 import org.exoplatform.web.application.ApplicationMessage;
 import org.picocontainer.Startable;
 
@@ -326,31 +326,6 @@ public class CloudFileActionService implements Startable {
 
   public Node linkShareToUser(Node fileNode, CloudDrive fileDrive, String userName) throws Exception {
     Node userDocs = getUserPublicNode(userName);
-    // DriveData userDrive = getUserDrive(userName);
-    // if (userDrive != null) {
-    // Node userPersonalDocs = (Node) systemSession().getItem(userDrive.getHomePath());
-    // we'll link to /Documents folder of user Personal Documents
-    // XXX we have no clear way to get /Documents by name or other reference as it is configured in
-    // NewUserListeners of org service
-    // Node userDocs = linkManager.getTarget(userPersonalDocs.getNode("Public"));
-    // for (NodeIterator niter = userPersonalDocs.getNodes(); niter.hasNext();) {
-    // Node node = niter.nextNode();
-    // if (node.isNodeType(NodetypeConstant.EXO_DOCUMENTFOLDER)) {
-    // userDocs = node;
-    // break;
-    // }
-    // }
-    // if (userDocs == null) {
-    // try {
-    // userDocs = userPersonalDocs.getNode("documents");
-    // LOG.warn("Cannot find user Documents folder in " + userPersonalDocs.getPath() + ". Will use /documents
-    // node.");
-    // } catch (PathNotFoundException e) {
-    // userDocs = userPersonalDocs;
-    // LOG.warn("Cannot find user Documents folder in " + userPersonalDocs.getPath()
-    // + ". Will use root of the user folder.");
-    // }
-    // }
 
     shareCloudFile(fileNode, fileDrive, userName);
     Node link;
@@ -364,13 +339,6 @@ public class CloudFileActionService implements Startable {
       link = links.nextNode();
     }
     return link;
-    // } else {
-    // if (LOG.isDebugEnabled()) {
-    // LOG.debug("Cannot find user documents drive for " + userName + ". Cloud File cannot be shared "
-    // + fileNode.getPath());
-    // }
-    // }
-    // return null;
   }
 
   public DriveData getUserDrive(String userName) throws Exception {
@@ -505,6 +473,7 @@ public class CloudFileActionService implements Startable {
           + Arrays.toString(identities));
     }
 
+    // set local file node permissions in JCR
     // avoid firing Cloud Drive synchronization
     CloudDriveStorage srcStorage = (CloudDriveStorage) cloudDrive;
     srcStorage.localChange(new Change<Void>() {
@@ -518,6 +487,11 @@ public class CloudFileActionService implements Startable {
         return null;
       }
     });
+    // share file in cloud provider (if applicable)
+    CloudDriveSecurity srcSecurity = (CloudDriveSecurity) cloudDrive;
+    if (srcSecurity.isSharingSupported()) {
+      srcSecurity.shareFile(fileNode, identities);
+    }
   }
 
   public void unshareCloudFile(final Node fileNode,

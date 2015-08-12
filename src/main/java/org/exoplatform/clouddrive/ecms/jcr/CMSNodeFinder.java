@@ -22,6 +22,9 @@ import org.exoplatform.ecm.utils.text.Text;
 import org.exoplatform.services.cms.link.LinkManager;
 import org.exoplatform.services.cms.link.impl.NodeFinderImpl;
 import org.exoplatform.services.jcr.RepositoryService;
+import org.exoplatform.services.jcr.ext.app.SessionProviderService;
+import org.exoplatform.services.jcr.ext.common.SessionProvider;
+import org.exoplatform.services.jcr.ext.hierarchy.NodeHierarchyCreator;
 
 import java.util.Collection;
 import java.util.LinkedHashSet;
@@ -49,8 +52,17 @@ import javax.jcr.query.QueryResult;
  */
 public class CMSNodeFinder extends NodeFinderImpl implements NodeFinder {
 
-  public CMSNodeFinder(RepositoryService repositoryService, LinkManager linkManager) {
+  protected final SessionProviderService sessionProviderService;
+
+  protected final NodeHierarchyCreator   hierarchyCreator;
+
+  public CMSNodeFinder(RepositoryService repositoryService,
+                       LinkManager linkManager,
+                       SessionProviderService sessionProviderService,
+                       NodeHierarchyCreator hierarchyCreator) {
     super(repositoryService, linkManager);
+    this.sessionProviderService = sessionProviderService;
+    this.hierarchyCreator = hierarchyCreator;
   }
 
   /**
@@ -84,14 +96,12 @@ public class CMSNodeFinder extends NodeFinderImpl implements NodeFinder {
    * {@inheritDoc}
    */
   @Override
-  public Collection<Node> findLinked(Session session, String uuid) throws PathNotFoundException,
-                                                                  RepositoryException {
+  public Collection<Node> findLinked(Session session, String uuid) throws PathNotFoundException, RepositoryException {
     Set<Node> res = new LinkedHashSet<Node>();
     try {
       Node target = session.getNodeByUUID(uuid);
       QueryManager qm = session.getWorkspace().getQueryManager();
-      Query q = qm.createQuery("SELECT * FROM exo:symlink WHERE exo:uuid='" + target.getUUID() + "'",
-                               Query.SQL);
+      Query q = qm.createQuery("SELECT * FROM exo:symlink WHERE exo:uuid='" + target.getUUID() + "'", Query.SQL);
       QueryResult qr = q.execute();
       for (NodeIterator niter = qr.getNodes(); niter.hasNext();) {
         res.add(niter.nextNode());
@@ -100,6 +110,16 @@ public class CMSNodeFinder extends NodeFinderImpl implements NodeFinder {
       // nothing
     }
     return res;
+  }
+
+  /**
+   * {@inheritDoc}
+   */
+  @Override
+  public Node getUserNode(String userName) throws Exception {
+    SessionProvider sessionProvider = sessionProviderService.getSessionProvider(null);
+    Node userNode = hierarchyCreator.getUserNode(sessionProvider, userName);
+    return userNode;
   }
 
 }
