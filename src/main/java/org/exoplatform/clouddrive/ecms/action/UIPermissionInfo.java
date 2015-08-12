@@ -78,7 +78,7 @@ public class UIPermissionInfo extends org.exoplatform.ecm.webui.component.explor
       CloudDrive localDrive = cloudDrives.findDrive(currentNode);
       if (localDrive != null) {
         try {
-          // TODO bad idea to use the original action logic: it does lot of bad work
+          // FYI bad idea to use the original action logic: it does lot of bad work
           // DeleteActionListener.super.execute(event);
 
           CloudFileActionService actions = uiComp.getApplicationComponent(CloudFileActionService.class);

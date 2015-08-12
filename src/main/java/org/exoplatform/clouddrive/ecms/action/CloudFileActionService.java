@@ -511,8 +511,8 @@ public class CloudFileActionService implements Startable {
       public Void apply() throws RepositoryException {
         Node parent = fileNode.getParent();
         // we remove access for this drive to all sub-files of the src parent
-        removePermissions(fileNode, identities);
-        removePermissions(parent, identities);
+        removePermissions(fileNode, true, identities);
+        removePermissions(parent, false, identities);
         parent.save(); // save everything here!
         return null;
       }
@@ -565,7 +565,9 @@ public class CloudFileActionService implements Startable {
   }
 
   /**
-   * Set read permissions on the link target node to all given identities (e.g. space group members).
+   * Set read permissions on the target node to all given identities (e.g. space group members). If node not
+   * yet <code>exo:privilegeable</code> it will add such mixin to allow set the permissions first. Requested
+   * permissions will be set to all children nodes if the child already <code>exo:privilegeable</code>.<br>
    * 
    * @param node {@link Node} link target node
    * @param identities array of {@link String} with user identifiers (names or memberships)
@@ -573,33 +575,80 @@ public class CloudFileActionService implements Startable {
    * @throws RepositoryException
    */
   protected void setPermissions(Node node, String... identities) throws AccessControlException, RepositoryException {
-    ExtendedNode target = (ExtendedNode) node;
-    if (target.canAddMixin(EXO_PRIVILEGEABLE)) {
-      target.addMixin(EXO_PRIVILEGEABLE);
-    }
-    for (String identity : identities) {
-      // It is for special debug cases
-      // if (LOG.isDebugEnabled()) {
-      // LOG.debug(">>> hasPermission " + identity + " identity: "
-      // + IdentityHelper.hasPermission(target.getACL(), identity, PermissionType.READ));
-      // }
-      target.setPermission(identity, READ_PERMISSION);
-    }
+    setPermissions(node, true, true, identities);
   }
 
   /**
-   * Remove read permissions on the link target node for all given identities (e.g. space group members).
+   * Set read permissions on the target node to all given identities (e.g. space group members). Permissions
+   * will not be set if target not <code>exo:privilegeable</code> and <code>forcePrivilegeable</code> is
+   * <code>false</code>. If <code>deep</code> is <code>true</code> the target children nodes will be checked
+   * also for a need to set the requested permissions. <br>
    * 
    * @param node {@link Node} link target node
+   * @param deep {@link Boolean} if <code>true</code> then also children nodes will be set to the requested
+   *          permissions
+   * @param forcePrivilegeable {@link Boolean} if <code>true</code> and node not yet
+   *          <code>exo:privilegeable</code> it will add such mixin to allow set the permissions.
    * @param identities array of {@link String} with user identifiers (names or memberships)
    * @throws AccessControlException
    * @throws RepositoryException
    */
-  protected void removePermissions(Node node, String... identities) throws AccessControlException, RepositoryException {
+  protected void setPermissions(Node node,
+                                boolean deep,
+                                boolean forcePrivilegeable,
+                                String... identities) throws AccessControlException, RepositoryException {
+    ExtendedNode target = (ExtendedNode) node;
+    boolean setPermissions = true;
+    if (target.canAddMixin(EXO_PRIVILEGEABLE)) {
+      if (forcePrivilegeable) {
+        target.addMixin(EXO_PRIVILEGEABLE);
+      } else {
+        // will not set permissions on this node, but will check the child nodes
+        setPermissions = false;
+      }
+    } // else, already exo:privilegeable
+    if (setPermissions) {
+      for (String identity : identities) {
+        // It is for special debug cases
+        // if (LOG.isDebugEnabled()) {
+        // LOG.debug(">>> hasPermission " + identity + " identity: "
+        // + IdentityHelper.hasPermission(target.getACL(), identity, PermissionType.READ));
+        // }
+        target.setPermission(identity, READ_PERMISSION);
+      }
+    }
+    if (deep) {
+      // check the all children also, but don't force adding exo:privilegeable
+      for (NodeIterator niter = target.getNodes(); niter.hasNext();) {
+        Node child = niter.nextNode();
+        setPermissions(child, true, false, identities);
+      }
+    }
+  }
+
+  /**
+   * Remove read permissions on the target node for all given identities (e.g. space group members). If
+   * <code>deep</code> is <code>true</code> then permissions will be removed on all ancestor nodes (sub-tree
+   * for folders).
+   * 
+   * @param node {@link Node} link target node
+   * @param deep {@link Boolean} if <code>true</code> then also remove the permissions from children nodes
+   * @param identities array of {@link String} with user identifiers (names or memberships)
+   * @throws AccessControlException
+   * @throws RepositoryException
+   */
+  protected void removePermissions(Node node, boolean deep, String... identities) throws AccessControlException,
+                                                                                  RepositoryException {
     ExtendedNode target = (ExtendedNode) node;
     if (target.isNodeType(EXO_PRIVILEGEABLE)) {
       for (String identity : identities) {
         target.removePermission(identity, PermissionType.READ);
+      }
+    }
+    if (deep) {
+      for (NodeIterator niter = target.getNodes(); niter.hasNext();) {
+        Node child = niter.nextNode();
+        removePermissions(child, true, identities);
       }
     }
   }
@@ -621,8 +670,7 @@ public class CloudFileActionService implements Startable {
    */
   protected void setParentPermissions(Node parent, String... identities) throws AccessControlException, RepositoryException {
     // first we go through all sub-files/folders and enabled exo:privilegeable, this will copy current
-    // parent
-    // permissions to the child nodes for those that aren't privilegeable already.
+    // parent permissions to the child nodes for those that aren't privilegeable already.
     for (NodeIterator citer = parent.getNodes(); citer.hasNext();) {
       ExtendedNode child = (ExtendedNode) citer.nextNode();
       if (child.canAddMixin(EXO_PRIVILEGEABLE)) {
@@ -630,8 +678,8 @@ public class CloudFileActionService implements Startable {
       } // else, this child already has permissions, we assume they are OK and do nothing
     }
 
-    // then we set read permissions to the parent
-    setPermissions(parent, identities);
+    // then we set read permissions to the parent only
+    setPermissions(parent, false, true, identities);
   }
 
   /**
