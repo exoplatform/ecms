@@ -18,18 +18,27 @@ import org.exoplatform.webui.event.EventListener;
  * Build popup document auto versioning
  */
 @ComponentConfig(
-        template =  "app:/groovy/webui/component/explorer/versions/UIDocumentAutoVersionComponent.gtmpl",
+        template = "classpath:groovy/ecm/webui/UIConfirmMessage.gtmpl",
         events = {
-                @EventConfig(listeners = UIDocumentAutoVersionComponent.UploadActionListener.class),
-                @EventConfig(listeners = UIDocumentAutoVersionComponent.ShowActionListener.class),
+                @EventConfig(listeners = UIDocumentAutoVersionComponent.KeepBothActionListener.class),
+                @EventConfig(listeners = UIDocumentAutoVersionComponent.CreateNewVersionActionListener.class),
+                @EventConfig(listeners = UIDocumentAutoVersionComponent.ReplaceActionListener.class),
+                @EventConfig(listeners = UIDocumentAutoVersionComponent.CreateVersionOrReplaceActionListener.class),
                 @EventConfig(listeners = UIDocumentAutoVersionComponent.CancelActionListener.class)
         }
 )
 public class UIDocumentAutoVersionComponent extends UIContainer implements UIPopupComponent {
 
+  private String sourcePath;
+  private String destPath;
+  private String sourceWorkspace;
+  private String destWorkspace;
+  private String messageKey_;
+  private String[] args_ = {};
+
   @Override
   public void activate() {
-
+    System.out.println("active autoweire");
   }
 
   @Override
@@ -37,9 +46,9 @@ public class UIDocumentAutoVersionComponent extends UIContainer implements UIPop
 
   }
 
-  public String[] getActions() { return new String[] {"Upload", "Cancel"}; }
+  public String[] getActions() { return new String[] {"KeepBoth", "CreateNewVersion", "Replace", "CreateVersionOrReplace" ,"Cancel"}; }
 
-  public static class UploadActionListener extends EventListener<UIDocumentAutoVersionComponent> {
+  public static class KeepBothActionListener extends EventListener<UIDocumentAutoVersionComponent> {
     @Override
     public void execute(Event<UIDocumentAutoVersionComponent> event) throws Exception {
       UIDocumentAutoVersionComponent uiConfirm = event.getSource();
@@ -49,7 +58,27 @@ public class UIDocumentAutoVersionComponent extends UIContainer implements UIPop
     }
   }
 
-  public static class ShowActionListener extends EventListener<UIDocumentAutoVersionComponent> {
+  public static class CreateNewVersionActionListener extends EventListener<UIDocumentAutoVersionComponent> {
+    @Override
+    public void execute(Event<UIDocumentAutoVersionComponent> event) throws Exception {
+      UIDocumentAutoVersionComponent uiConfirm = event.getSource();
+      UIPopupWindow popupAction = uiConfirm.getAncestorOfType(UIPopupWindow.class) ;
+      popupAction.setShow(false) ;
+      event.getRequestContext().addUIComponentToUpdateByAjax(popupAction);
+    }
+  }
+
+  public static class ReplaceActionListener extends EventListener<UIDocumentAutoVersionComponent> {
+    @Override
+    public void execute(Event<UIDocumentAutoVersionComponent> event) throws Exception {
+      UIDocumentAutoVersionComponent uiConfirm = event.getSource();
+      UIPopupWindow popupAction = uiConfirm.getAncestorOfType(UIPopupWindow.class) ;
+      popupAction.setShow(false) ;
+      event.getRequestContext().addUIComponentToUpdateByAjax(popupAction);
+    }
+  }
+
+  public static class CreateVersionOrReplaceActionListener extends EventListener<UIDocumentAutoVersionComponent> {
     @Override
     public void execute(Event<UIDocumentAutoVersionComponent> event) throws Exception {
       UIDocumentAutoVersionComponent uiConfirm = event.getSource();
@@ -71,4 +100,44 @@ public class UIDocumentAutoVersionComponent extends UIContainer implements UIPop
       event.getRequestContext().addUIComponentToUpdateByAjax(popupAction);
     }
   }
+
+  public String getSourcePath() {
+    return sourcePath;
+  }
+
+  public void setSourcePath(String sourcePath) {
+    this.sourcePath = sourcePath;
+  }
+
+  public String getDestPath() {
+    return destPath;
+  }
+
+  public void setDestPath(String destPath) {
+    this.destPath = destPath;
+  }
+
+  public String getSourceWorkspace() {
+    return sourceWorkspace;
+  }
+
+  public void setSourceWorkspace(String sourceWorkspace) {
+    this.sourceWorkspace = sourceWorkspace;
+  }
+
+  public String getDestWorkspace() {
+    return destWorkspace;
+  }
+
+  public void setDestWorkspace(String destWorkspace) {
+    this.destWorkspace = destWorkspace;
+  }
+
+  public void setMessageKey(String messageKey) { messageKey_ = messageKey; }
+
+  public String getMessageKey() { return messageKey_; }
+
+  public void setArguments(String[] args) { args_ = args; }
+
+  public String[] getArguments() { return args_; }
 }

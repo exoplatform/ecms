@@ -41,6 +41,7 @@ import javax.jcr.nodetype.ConstraintViolationException;
 import javax.jcr.nodetype.NodeType;
 import javax.jcr.version.VersionException;
 
+import org.exoplatform.ecm.webui.component.explorer.UIDocumentAutoVersionComponent;
 import org.exoplatform.ecm.webui.component.explorer.UIDocumentInfo;
 import org.exoplatform.ecm.webui.component.explorer.UIJCRExplorer;
 import org.exoplatform.ecm.webui.component.explorer.UIWorkingArea;
@@ -60,6 +61,7 @@ import org.exoplatform.services.cms.clipboard.ClipboardService;
 import org.exoplatform.services.cms.clipboard.jcr.model.ClipboardCommand;
 import org.exoplatform.services.cms.jcrext.activity.ActivityCommonService;
 import org.exoplatform.services.cms.link.LinkUtils;
+import org.exoplatform.services.cms.mimetype.DMSMimeTypeResolver;
 import org.exoplatform.services.cms.relations.RelationsService;
 import org.exoplatform.services.cms.thumbnail.ThumbnailService;
 import org.exoplatform.services.listener.ListenerService;
@@ -74,6 +76,7 @@ import org.exoplatform.webui.config.annotation.EventConfig;
 import org.exoplatform.webui.core.UIApplication;
 import org.exoplatform.webui.core.UIComponent;
 import org.exoplatform.webui.core.UIPageIterator;
+import org.exoplatform.webui.core.UIPopupContainer;
 import org.exoplatform.webui.event.Event;
 import org.exoplatform.webui.exception.MessageException;
 import org.exoplatform.webui.ext.filter.UIExtensionFilter;
@@ -175,45 +178,61 @@ public class PasteManageComponent extends UIAbstractManagerComponent {
 
       return;
     }
-
-    try {
-      if (clipboardService.getClipboardList(userId, true).isEmpty()) {
-        processPaste(clipboardService.getLastClipboard(userId), destPath, event);
-      } else {
-        processPasteMultiple(destPath, event, uiExplorer);
-      }
-    } catch (PathNotFoundException pe) {
-      uiApp.addMessage(new ApplicationMessage("UIPopupMenu.msg.cannot-readsource", null));
-
-      return;
-    }
-    session.save();
-
-
-    // Get paginator of UITreeExplorer && UIDocumentInfo
     String currentPath = uiExplorer.getCurrentNode().getPath();
-    UITreeNodePageIterator extendedPageIterator = null;
-    UITreeExplorer uiTreeExplorer = uiExplorer.findFirstComponentOfType(UITreeExplorer.class);
-    if (uiTreeExplorer != null) {
-      extendedPageIterator = uiTreeExplorer.getUIPageIterator(currentPath);
-    }
-    UIPageIterator contentPageIterator = uiExplorer.findComponentById(UIDocumentInfo.CONTENT_PAGE_ITERATOR_ID);
+    ClipboardCommand clipboardCommand = clipboardService.getLastClipboard(userId);
+    Node sourceNode = (Node)uiExplorer.getSessionByWorkspace(clipboardCommand.getWorkspace()).getItem(clipboardCommand.getSrcPath());
+    if(destNode.hasNode(sourceNode.getName()) && destNode.hasNode(sourceNode.getName())){
 
-    // Get current page index
-    int currentPage = 1;
-    if (contentPageIterator != null) {
-      currentPage = contentPageIterator.getCurrentPage();
-    }
+      UIPopupContainer objUIPopupContainer = uiExplorer.getChild(UIPopupContainer.class);
+      UIDocumentAutoVersionComponent uiDocumentAutoVersionComponent = uiExplorer.createUIComponent(UIDocumentAutoVersionComponent.class, null, null);
+      uiDocumentAutoVersionComponent.setTitle("Document Upload");
+      uiDocumentAutoVersionComponent.setDestPath(destPath);
+      uiDocumentAutoVersionComponent.setDestWorkspace(destNode.getSession().getWorkspace().getName());
+      uiDocumentAutoVersionComponent.setSourcePath(sourceNode.getPath());
+      uiDocumentAutoVersionComponent.setSourceWorkspace(sourceNode.getSession().getWorkspace().getName());
+      uiDocumentAutoVersionComponent.setMessageKey("xinc hao");
+      uiDocumentAutoVersionComponent.setArguments(new String[]{"a", "b", "c"});
+      objUIPopupContainer.activate(uiDocumentAutoVersionComponent, 450, 0);
+      event.getRequestContext().addUIComponentToUpdateByAjax(objUIPopupContainer);
+    }else {
+      try {
+        if (clipboardService.getClipboardList(userId, true).isEmpty()) {
+          processPaste(clipboardCommand, destPath, event);
+        } else {
+          processPasteMultiple(destPath, event, uiExplorer);
+        }
+      } catch (PathNotFoundException pe) {
+        uiApp.addMessage(new ApplicationMessage("UIPopupMenu.msg.cannot-readsource", null));
 
-    // Rebuild screen after pasting new content
-    uiExplorer.updateAjax(event);
+        return;
+      }
+      session.save();
 
-    // Because after updateAjax, paginator automatically set to first page then we need set again current pageindex
-    if (contentPageIterator != null) {
-      contentPageIterator.setCurrentPage(currentPage);
-    }
-    if (extendedPageIterator != null) {
-      extendedPageIterator.setCurrentPage(currentPage);
+
+      // Get paginator of UITreeExplorer && UIDocumentInfo
+      UITreeNodePageIterator extendedPageIterator = null;
+      UITreeExplorer uiTreeExplorer = uiExplorer.findFirstComponentOfType(UITreeExplorer.class);
+      if (uiTreeExplorer != null) {
+        extendedPageIterator = uiTreeExplorer.getUIPageIterator(currentPath);
+      }
+      UIPageIterator contentPageIterator = uiExplorer.findComponentById(UIDocumentInfo.CONTENT_PAGE_ITERATOR_ID);
+
+      // Get current page index
+      int currentPage = 1;
+      if (contentPageIterator != null) {
+        currentPage = contentPageIterator.getCurrentPage();
+      }
+
+      // Rebuild screen after pasting new content
+      uiExplorer.updateAjax(event);
+
+      // Because after updateAjax, paginator automatically set to first page then we need set again current pageindex
+      if (contentPageIterator != null) {
+        contentPageIterator.setCurrentPage(currentPage);
+      }
+      if (extendedPageIterator != null) {
+        extendedPageIterator.setCurrentPage(currentPage);
+      }
     }
   }
 
@@ -341,6 +360,7 @@ public class PasteManageComponent extends UIAbstractManagerComponent {
         .getApplicationComponent(ActionServiceContainer.class);
     try {
       if (ClipboardCommand.COPY.equals(type)) {
+
         pasteByCopy(destSession, srcWorkspace, srcPath, destPath);
         destNode = (Node) destSession.getItem(destPath);
         actionContainer.initiateObservation(destNode);

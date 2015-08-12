@@ -276,6 +276,12 @@ public class FileUploadHandler {
     fileName = cleanNameUtil(fileName);
     Element rootElement = fileExistence.createElement(
                               parent.hasNode(fileName) ? "Existed" : "NotExisted");
+    if(parent.hasNode(fileName)){
+      Node existNode = parent.getNode(fileName);
+      if(existNode.isNodeType(NodetypeConstant.MIX_VERSIONABLE)){
+        rootElement.appendChild(fileExistence.createElement("Versioned"));
+      }
+    }
     if(resolver.getMimeType(parent.getName()).equals(resolver.getMimeType(fileName))){
       rootElement.appendChild(fileExistence.createElement("CanVersioning"));
     }
@@ -412,7 +418,7 @@ public class FileUploadHandler {
       
       String nodeName = fileName;
       int count = 0;
-      if(!CREATE_VERSION.equals(existenceAction) && !parent.hasNode(nodeName)) {
+      if(!CREATE_VERSION.equals(existenceAction)) {
         if(parent.isNodeType(NodetypeConstant.NT_FILE)){
           parent = parent.getParent();
         }

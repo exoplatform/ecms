@@ -1,16 +1,12 @@
-<div id="documentAutoVersioning" class="UIPopupWindow uiPopup UIDragObject NormalStyle"
-     exo:minwidth="200" exo:minheight="200"
-     style="width: 397px; display: block; visibility: visible; z-index: 7; top: 374px; left: 444px;">
-  <div class="popupHeader clearfix">
-    <a class="uiIconClose pull-right" title="Close Window" onclick=""></a>
-    <span class="PopupTitle popupTitle">Document Upload</span>
+<div class="PopupContent popupContent">
+  <div>Are you sure you want to</div>
+  <div class="uiActionBorder">
+    <%
+    int tabIndex = 1;
+    for(action in uicomponent.getActions()) {
+    %>
+    <button type="button" onclick="<%=uicomponent.event(action)%>" tabindex=<%=tabIndex++%> class="btn $action" href="javascript:void(0);">
+      <%=_ctx.appRes("UIConfirmMessage.label." + action)%></button>
+    <%}%>
   </div>
-  <div class="PopupContent popupContent">
-    <div>Are you sure you want to</div>
-    <div class="uiActionBorder">
-      <button type="button" class="btn btn-primary" onclick="alert('ok con de')">Upload</button>
-      <button type="button" class="btn" onclick="eXo.ecm.MultiUpload.docAutoCancel('629203197080642');">Cancel</button>
-    </div>
-  </div>
-  <span class="uiIconResize pull-right uiIconLightGray"></span>
 </div>
