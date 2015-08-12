@@ -18,6 +18,9 @@
 package org.exoplatform.clouddrive.jcr;
 
 import org.exoplatform.services.jcr.RepositoryService;
+import org.exoplatform.services.jcr.ext.app.SessionProviderService;
+import org.exoplatform.services.jcr.ext.common.SessionProvider;
+import org.exoplatform.services.jcr.ext.hierarchy.NodeHierarchyCreator;
 
 import java.util.Collection;
 import java.util.LinkedHashSet;
@@ -40,10 +43,18 @@ import javax.jcr.Session;
  */
 public class JCRNodeFinder implements NodeFinder {
 
-  protected final RepositoryService jcrService;
+  protected final RepositoryService      jcrService;
 
-  public JCRNodeFinder(RepositoryService jcrService) {
+  protected final SessionProviderService sessionProviderService;
+
+  protected final NodeHierarchyCreator   hierarchyCreator;
+
+  public JCRNodeFinder(RepositoryService jcrService,
+                       SessionProviderService sessionProviderService,
+                       NodeHierarchyCreator hierarchyCreator) {
     this.jcrService = jcrService;
+    this.sessionProviderService = sessionProviderService;
+    this.hierarchyCreator = hierarchyCreator;
   }
 
   /**
@@ -51,7 +62,7 @@ public class JCRNodeFinder implements NodeFinder {
    */
   @Override
   public Item getItem(Session userSession, String path, boolean symlinkTarget) throws PathNotFoundException,
-                                                                              RepositoryException {
+                                                                               RepositoryException {
     return userSession.getItem(path);
   }
 
@@ -67,8 +78,7 @@ public class JCRNodeFinder implements NodeFinder {
    * {@inheritDoc}
    */
   @Override
-  public Collection<Node> findLinked(Session session, String uuid) throws PathNotFoundException,
-                                                                  RepositoryException {
+  public Collection<Node> findLinked(Session session, String uuid) throws PathNotFoundException, RepositoryException {
     Set<Node> res = new LinkedHashSet<Node>();
     try {
       Node target = session.getNodeByUUID(uuid);
@@ -87,5 +97,15 @@ public class JCRNodeFinder implements NodeFinder {
   @Override
   public String cleanName(String name) {
     return name; // no conversion required
+  }
+
+  /**
+   * {@inheritDoc}
+   */
+  @Override
+  public Node getUserNode(String userName) throws Exception {
+    SessionProvider sessionProvider = sessionProviderService.getSessionProvider(null);
+    Node userNode = hierarchyCreator.getUserNode(sessionProvider, userName);
+    return userNode;
   }
 }

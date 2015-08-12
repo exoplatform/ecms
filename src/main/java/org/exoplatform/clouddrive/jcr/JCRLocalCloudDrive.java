@@ -27,6 +27,7 @@ import org.exoplatform.clouddrive.CloudDriveEvent;
 import org.exoplatform.clouddrive.CloudDriveException;
 import org.exoplatform.clouddrive.CloudDriveManager;
 import org.exoplatform.clouddrive.CloudDriveMessage;
+import org.exoplatform.clouddrive.CloudDriveSecurity;
 import org.exoplatform.clouddrive.CloudDriveStorage;
 import org.exoplatform.clouddrive.CloudFile;
 import org.exoplatform.clouddrive.CloudFileAPI;
@@ -56,6 +57,7 @@ import org.exoplatform.clouddrive.utils.IdentityHelper;
 import org.exoplatform.clouddrive.viewer.ContentReader;
 import org.exoplatform.container.ExoContainer;
 import org.exoplatform.container.ExoContainerContext;
+import org.exoplatform.services.jcr.core.ExtendedNode;
 import org.exoplatform.services.jcr.core.ManageableRepository;
 import org.exoplatform.services.jcr.ext.app.SessionProviderService;
 import org.exoplatform.services.jcr.ext.common.SessionProvider;
@@ -119,7 +121,7 @@ import javax.jcr.query.QueryResult;
  * @author <a href="mailto:pnedonosko@exoplatform.com">Peter Nedonosko</a>
  * @version $Id: JCRLocalCloudDrive.java 00000 Sep 13, 2012 pnedonosko $
  */
-public abstract class JCRLocalCloudDrive extends CloudDrive implements CloudDriveStorage {
+public abstract class JCRLocalCloudDrive extends CloudDrive implements CloudDriveStorage, CloudDriveSecurity {
 
   /**
    * Drive nodetype {@code ecd:cloudDrive}.
@@ -744,7 +746,7 @@ public abstract class JCRLocalCloudDrive extends CloudDrive implements CloudDriv
       ConversationState conversation = ConversationState.getCurrent();
       if (conversation == null) {
         throw new CloudDriveException("Error to " + getName() + " drive for user " + getUser().getEmail()
-            + ". User identity not set.");
+            + ". Conversation state not set.");
       }
 
       config.put(command, new ExoJCRSettings(conversation, ExoContainerContext.getCurrentContainer()));
@@ -3029,7 +3031,25 @@ public abstract class JCRLocalCloudDrive extends CloudDrive implements CloudDriv
     return null;
   }
 
-  // ************* abstract ****************
+  // ****** CloudDriveSecurity ******
+
+  /**
+   * {@inheritDoc}
+   */
+  @Override
+  public void shareFile(Node fileNode, String... users) throws RepositoryException, CloudDriveException {
+    throw new CloudDriveException("Sharing not supported");
+  }
+
+  /**
+   * {@inheritDoc}
+   */
+  @Override
+  public boolean isSharingSupported() {
+    return false;
+  }
+
+  // ****** abstract ******
 
   /**
    * Factory method to create an actual implementation of {@link ConnectCommand} command.
@@ -3075,8 +3095,6 @@ public abstract class JCRLocalCloudDrive extends CloudDrive implements CloudDriv
    * @throws RepositoryException
    */
   protected void initDrive(Node rootNode) throws CloudDriveException, RepositoryException {
-    Session session = rootNode.getSession();
-
     rootNode.addMixin(ECD_CLOUDDRIVE);
     if (!rootNode.hasProperty("exo:title")) {
       // default title
@@ -3087,7 +3105,7 @@ public abstract class JCRLocalCloudDrive extends CloudDrive implements CloudDriv
 
     rootNode.setProperty("ecd:connected", false);
     // know who actually initialized the drive
-    rootNode.setProperty("ecd:localUserName", session.getUserID());
+    rootNode.setProperty("ecd:localUserName", currentUserName());
     rootNode.setProperty("ecd:initDate", Calendar.getInstance());
     // FIXME how to store provider properly? need store its API version?
     rootNode.setProperty("ecd:provider", getUser().getProvider().getId());
@@ -3854,9 +3872,9 @@ public abstract class JCRLocalCloudDrive extends CloudDrive implements CloudDriv
     Node rootNode;
     if (rootNodeRef != null) {
       rootNode = rootNodeRef.get();
-      ConversationState cs = ConversationState.getCurrent();
-      if (rootNode != null && rootNode.getSession().isLive() && cs != null
-          && IdentityHelper.isUserMatch(rootNode.getSession().getUserID(), cs.getIdentity().getUserId())) {
+      String currentUser = currentUserName();
+      if (rootNode != null && rootNode.getSession().isLive() && currentUser != null
+          && IdentityHelper.isUserMatch(rootNode.getSession().getUserID(), currentUser)) {
         try {
           // FYI as more light alternative rootNode.getIndex() can be used to
           // force state check, but refresh is good for long living nodes (and
@@ -4986,6 +5004,16 @@ public abstract class JCRLocalCloudDrive extends CloudDrive implements CloudDriv
     } else {
       LOG.warn("Not a Cloud Drive root node: " + node.getPath());
     }
+  }
+
+  /**
+   * Current user name obtained from current {@link ConversationState}.
+   * 
+   * @return String with user name or <code>null</code> if no current conversation state set
+   */
+  protected String currentUserName() {
+    ConversationState cs = ConversationState.getCurrent();
+    return cs != null ? cs.getIdentity().getUserId() : null;
   }
 
 }

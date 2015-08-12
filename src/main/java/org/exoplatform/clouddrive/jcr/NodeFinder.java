@@ -77,5 +77,14 @@ public interface NodeFinder {
    * @return {@link String} cleaned name
    */
   String cleanName(String name);
+  
+  /**
+   * Return user home node of given user.
+   * 
+   * @param userName String with user name in organization 
+   * @return {@link Node} user home node
+   * @throws Exception
+   */
+  Node getUserNode(String userName) throws Exception;
 
 }
