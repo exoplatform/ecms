@@ -3197,24 +3197,34 @@ public abstract class JCRLocalCloudDrive extends CloudDrive implements CloudDriv
     // if file sync in progress, wait for it and then start a new sync
 
     if (isConnected()) {
-      refreshAccess();
+      // XXX real synchronization can be only issued by the drive owner, others see the current state
+      // It is not the best UX for shared folders as they can change the structure but until the owner will not
+      // open it - it will reflect the last synced state. Indeed more efficient logic need to be implemented
+      // respecting the cloud provider sharing capabilities (possible in dedicated connectors).
+      String currentUser = currentUserName();
+      String driveOwner = rootNode().getProperty("ecd:localUserName").getString();
+      if (driveOwner.equals(currentUser)) {
+        refreshAccess();
 
-      SyncCommand sync;
-      if (!currentSync.compareAndSet(noSync, sync = getSyncCommand())) {
-        synchronized (currentSync) {
-          SyncCommand existingSync = currentSync.get();
-          if (existingSync != noSync) {
-            return existingSync; // return existing
-          } else {
-            currentSync.set(sync); // force created sync as current
+        SyncCommand sync;
+        if (!currentSync.compareAndSet(noSync, sync = getSyncCommand())) {
+          synchronized (currentSync) {
+            SyncCommand existingSync = currentSync.get();
+            if (existingSync != noSync) {
+              return existingSync; // return existing
+            } else {
+              currentSync.set(sync); // force created sync as current
+            }
           }
         }
+
+        // start the sync finally
+        sync.start();
+
+        return sync;
+      } else {
+        return currentSync.get();
       }
-
-      // start the sync finally
-      sync.start();
-
-      return sync;
     } else {
       throw new NotConnectedException("Cloud drive '" + title() + "' not connected.");
     }
