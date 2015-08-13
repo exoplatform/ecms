@@ -275,7 +275,7 @@
             </configuration>
           </execution>
         </executions>
-        <!--
+        <!-- 
         [ Force use of JUnit: How to execute JUnit(=Spock) and TestNG test cases at same time ? ]
         see: http://solidsoft.wordpress.com/2013/03/12/mixing-testng-and-junit-tests-in-one-maven-module-2013-edition/
         -->
