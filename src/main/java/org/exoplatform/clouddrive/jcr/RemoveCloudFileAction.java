@@ -76,8 +76,11 @@ public class RemoveCloudFileAction extends AbstractJCRAction {
             }
             LOG.warn("Cloud drive not connected " + localDrive.getPath());
           }
-        } // drive not found, may be this file in Trash folder and user is cleaning it, do nothing
-      } // else, it's internal work on this file/drive
+        } else {
+          // it's internal work on this file/drive
+          return true;
+        }
+      } // drive not found, may be this file in Trash folder and user is cleaning it, do nothing
     } else {
       LOG.warn(RemoveCloudFileAction.class.getName() + " supports only node removal. Check configuration. Item skipped: "
           + fileNode.getPath());
