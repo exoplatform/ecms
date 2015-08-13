@@ -181,8 +181,9 @@ public class PasteManageComponent extends UIAbstractManagerComponent {
     String currentPath = uiExplorer.getCurrentNode().getPath();
     ClipboardCommand clipboardCommand = clipboardService.getLastClipboard(userId);
     Node sourceNode = (Node)uiExplorer.getSessionByWorkspace(clipboardCommand.getWorkspace()).getItem(clipboardCommand.getSrcPath());
-    if(destNode.hasNode(sourceNode.getName()) && destNode.hasNode(sourceNode.getName())){
-
+    if(destNode.hasNode(sourceNode.getName()) && destNode.hasNode(sourceNode.getName()) &&
+            ClipboardCommand.COPY.equals(clipboardCommand.getType())){
+      Node destExitedNode = destNode.getNode(sourceNode.getName());
       UIPopupContainer objUIPopupContainer = uiExplorer.getChild(UIPopupContainer.class);
       UIDocumentAutoVersionComponent uiDocumentAutoVersionComponent = uiExplorer.createUIComponent(UIDocumentAutoVersionComponent.class, null, null);
       uiDocumentAutoVersionComponent.setTitle("Document Upload");
@@ -192,6 +193,7 @@ public class PasteManageComponent extends UIAbstractManagerComponent {
       uiDocumentAutoVersionComponent.setSourceWorkspace(sourceNode.getSession().getWorkspace().getName());
       uiDocumentAutoVersionComponent.setMessageKey("xinc hao");
       uiDocumentAutoVersionComponent.setArguments(new String[]{"a", "b", "c"});
+      uiDocumentAutoVersionComponent.init(destExitedNode);
       objUIPopupContainer.activate(uiDocumentAutoVersionComponent, 450, 0);
       event.getRequestContext().addUIComponentToUpdateByAjax(objUIPopupContainer);
     }else {

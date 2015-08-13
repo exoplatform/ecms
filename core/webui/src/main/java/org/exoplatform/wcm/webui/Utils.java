@@ -28,6 +28,9 @@ import javax.jcr.Node;
 import javax.jcr.NodeIterator;
 import javax.jcr.RepositoryException;
 import javax.jcr.Session;
+import javax.jcr.Value;
+import javax.jcr.Workspace;
+import javax.jcr.nodetype.NodeType;
 import javax.jcr.query.Query;
 import javax.jcr.query.QueryManager;
 import javax.portlet.PortletMode;
@@ -1125,4 +1128,24 @@ public class Utils {
         new NavigationResource(SiteType.PORTAL, Util.getPortalRequestContext().getPortalOwner(), "profile");
     return nodeURL.setResource(resource).toString() + "/" + userId;
   }
+
+  /**
+   * Remove refences of node
+   * @param destNode
+   * @throws Exception
+   */
+  public static void removeReferences(Node destNode) throws Exception {
+    NodeType[] mixinTypes = destNode.getMixinNodeTypes();
+    Session session = destNode.getSession();
+    for (int i = 0; i < mixinTypes.length; i++) {
+      if (mixinTypes[i].getName().equals(org.exoplatform.ecm.webui.utils.Utils.EXO_CATEGORIZED)
+              && destNode.hasProperty(org.exoplatform.ecm.webui.utils.Utils.EXO_CATEGORIZED)) {
+        Node valueNode = null;
+        Value valueAdd = session.getValueFactory().createValue(valueNode);
+        destNode.setProperty(org.exoplatform.ecm.webui.utils.Utils.EXO_CATEGORIZED, new Value[] { valueAdd });
+      }
+    }
+    destNode.save();
+  }
+
 }

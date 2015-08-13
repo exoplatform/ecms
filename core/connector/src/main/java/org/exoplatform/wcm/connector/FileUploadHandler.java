@@ -45,8 +45,8 @@ import org.exoplatform.ecm.connector.fckeditor.FCKMessage;
 import org.exoplatform.ecm.connector.fckeditor.FCKUtils;
 import org.exoplatform.ecm.utils.lock.LockUtil;
 import org.exoplatform.ecm.utils.text.Text;
+import org.exoplatform.services.cms.documents.AutoVersionService;
 import org.exoplatform.services.cms.jcrext.activity.ActivityCommonService;
-import org.exoplatform.services.cms.listeners.DocumentAutoVersionEventListener;
 import org.exoplatform.services.cms.mimetype.DMSMimeTypeResolver;
 import org.exoplatform.services.cms.templates.TemplateService;
 import org.exoplatform.services.listener.ListenerService;
@@ -407,6 +407,7 @@ public class FileUploadHandler {
           parent.save();        
         }
       }
+      AutoVersionService autoVersionService = WCMCoreUtils.getService(AutoVersionService.class);
       String location = resource.getStoreLocation();
       //save node with name=fileName
       Node file = null;
@@ -450,18 +451,19 @@ public class FileUploadHandler {
         jcrContent = file.addNode("jcr:content","nt:resource");
       }else if(parent.hasNode(nodeName)){
         file = parent.getNode(nodeName);
+        autoVersionService.autoVersion(file);
         jcrContent = file.hasNode("jcr:content")?file.getNode("jcr:content"):file.addNode("jcr:content","nt:resource");
       }else if(parent.isNodeType(NodetypeConstant.NT_FILE)){
         file = parent;
+        autoVersionService.autoVersion(file);
         jcrContent = file.hasNode("jcr:content")?file.getNode("jcr:content"):file.addNode("jcr:content","nt:resource");
       }
-      listenerService.broadcast(DocumentAutoVersionEventListener.DOCUMENT_AUTO_VERSIONING_LISTENER, this, file);
       DMSMimeTypeResolver mimeTypeResolver = DMSMimeTypeResolver.getInstance();
       String mimetype = mimeTypeResolver.getMimeType(resource.getFileName());
-      jcrContent.setProperty("jcr:data", new BufferedInputStream(new FileInputStream(new File(location))));
       jcrContent.setProperty("jcr:lastModified", new GregorianCalendar());
+      jcrContent.setProperty("jcr:data", new BufferedInputStream(new FileInputStream(new File(location))));
       jcrContent.setProperty("jcr:mimeType", mimetype);
-
+      if(fileCreated) autoVersionService.autoVersion(file);
       parent.getSession().refresh(true); // Make refreshing data
       uploadService.removeUploadResource(uploadId);
       uploadIdTimeMap.remove(uploadId);
@@ -491,7 +493,7 @@ public class FileUploadHandler {
    * increase the file name (not extension).
    * @param origin the original name
    * @param count the number add to file name
-   * @return the new increased file name 
+   * @return the new increased file name
    */
   private String increaseName(String origin, int count) {
     int index = origin.indexOf('.');
