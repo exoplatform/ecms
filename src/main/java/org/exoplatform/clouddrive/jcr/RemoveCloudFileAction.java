@@ -51,8 +51,8 @@ public class RemoveCloudFileAction extends AbstractJCRAction {
       CloudDriveService drives = getComponent(context, CloudDriveService.class);
       CloudDrive localDrive = drives.findDrive(fileNode);
       if (localDrive != null) {
-        if (localDrive.isConnected()) {
-          if (accept(localDrive)) {
+        if (accept(localDrive)) {
+          if (localDrive.isConnected()) {
             try {
               start(localDrive);
               try {
@@ -63,24 +63,24 @@ public class RemoveCloudFileAction extends AbstractJCRAction {
             } finally {
               done();
             }
-          }
-          return true;
-        } else {
-          try {
-            Node driveParent = fileNode.getSession().getItem(localDrive.getPath()).getParent();
-            if (driveParent.isNodeType(JCRLocalCloudDrive.EXO_TRASHFOLDER)) {
-              // we ignore files of trashed drives
-              return true;
+            return true;
+          } else {
+            try {
+              Node driveParent = fileNode.getSession().getItem(localDrive.getPath()).getParent();
+              if (driveParent.isNodeType(JCRLocalCloudDrive.EXO_TRASHFOLDER)) {
+                // we ignore files of trashed drives
+                return true;
+              }
+            } catch (ItemNotFoundException e) {
+              // file in the root of workspace
             }
-          } catch (ItemNotFoundException e) {
-            // file in the root of workspace
+            LOG.warn("Cloud drive not connected " + localDrive.getPath());
           }
-          LOG.warn("Cloud drive not connected " + localDrive.getPath());
-        }
-      } // drive not found, may be this file in Trash folder and user is cleaning it, do nothing
+        } // drive not found, may be this file in Trash folder and user is cleaning it, do nothing
+      } // else, it's internal work on this file/drive
     } else {
-      LOG.warn(RemoveCloudFileAction.class.getName()
-          + " supports only node removal. Check configuration. Item skipped: " + fileNode.getPath());
+      LOG.warn(RemoveCloudFileAction.class.getName() + " supports only node removal. Check configuration. Item skipped: "
+          + fileNode.getPath());
     }
     return false;
   }

@@ -3848,7 +3848,7 @@ public abstract class JCRLocalCloudDrive extends CloudDrive implements CloudDriv
     if (ssp != null) {
       return ssp.getSession(rootWorkspace, repository);
     }
-    throw new RepositoryException("Cannot get session provider.");
+    throw new RepositoryException("Cannot get system session provider.");
   }
 
   protected Session session() throws LoginException, NoSuchWorkspaceException, RepositoryException {
