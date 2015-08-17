@@ -98,6 +98,10 @@ public class UIDocumentAutoVersionForm extends UIForm implements UIPopupComponen
       chkRemVersion.setRendered(false);
       chkRemNonVersioned.setRendered(true);
     }
+    if(currentClipboard == null) {
+      chkRemVersion.setRendered(false);
+      chkRemNonVersioned.setRendered(false);
+    }
   }
 
   public String[] getActions() { return actions; }
@@ -115,8 +119,6 @@ public class UIDocumentAutoVersionForm extends UIForm implements UIPopupComponen
         Matcher matcher = UIWorkingArea.FILE_EXPLORER_URL_SYNTAX.matcher(destPath);
         if (matcher.find()) {
           destPath = matcher.group(2);
-        } else {
-          throw new IllegalArgumentException("The ObjectId is invalid '" + destPath + "'");
         }
       }
       if (!"/".equals(destPath)) destPath = destPath.concat("/");
@@ -156,8 +158,8 @@ public class UIDocumentAutoVersionForm extends UIForm implements UIPopupComponen
         PasteManageComponent.setNonVersionedRemember(chkRemNonVersioned.isChecked() && chkRemNonVersioned.isRendered());
       }
       Set<ClipboardCommand> _clipboardCommands = autoVersionComponent.getClipboardCommands();
-      _clipboardCommands.remove(autoVersionComponent.getCurrentClipboard());
-      if(_clipboardCommands.size()>0){
+      if(_clipboardCommands!=null && _clipboardCommands.size()>0){
+        _clipboardCommands.remove(autoVersionComponent.getCurrentClipboard());
         PasteManageComponent.processPasteMultiple(destNode.getParent(), event, uijcrExplorer, _clipboardCommands);
       }else {
         closePopup(autoVersionComponent, uijcrExplorer, event);
@@ -335,6 +337,7 @@ public class UIDocumentAutoVersionForm extends UIForm implements UIPopupComponen
     chkRememberNonVersioned.setChecked(false);
     PasteManageComponent.setVersionedRemember(chkRememberVersioned.isChecked() && chkRememberVersioned.isRendered());
     PasteManageComponent.setNonVersionedRemember(chkRememberNonVersioned.isChecked() && chkRememberNonVersioned.isRendered());
+    currentClipboard = null;
   }
 
   static public class OnChangeActionListener extends EventListener<UIDocumentAutoVersionForm> {
