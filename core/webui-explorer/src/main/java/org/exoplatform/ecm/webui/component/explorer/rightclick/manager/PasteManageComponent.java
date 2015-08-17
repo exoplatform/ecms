@@ -22,6 +22,7 @@ import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.ResourceBundle;
 import java.util.Set;
 import java.util.regex.Matcher;
 
@@ -41,7 +42,7 @@ import javax.jcr.nodetype.ConstraintViolationException;
 import javax.jcr.nodetype.NodeType;
 import javax.jcr.version.VersionException;
 
-import org.exoplatform.ecm.webui.component.explorer.UIDocumentAutoVersionComponent;
+import org.exoplatform.ecm.webui.component.explorer.UIDocumentAutoVersionForm;
 import org.exoplatform.ecm.webui.component.explorer.UIDocumentInfo;
 import org.exoplatform.ecm.webui.component.explorer.UIJCRExplorer;
 import org.exoplatform.ecm.webui.component.explorer.UIWorkingArea;
@@ -59,9 +60,9 @@ import org.exoplatform.ecm.webui.utils.Utils;
 import org.exoplatform.services.cms.actions.ActionServiceContainer;
 import org.exoplatform.services.cms.clipboard.ClipboardService;
 import org.exoplatform.services.cms.clipboard.jcr.model.ClipboardCommand;
+import org.exoplatform.services.cms.documents.AutoVersionService;
 import org.exoplatform.services.cms.jcrext.activity.ActivityCommonService;
 import org.exoplatform.services.cms.link.LinkUtils;
-import org.exoplatform.services.cms.mimetype.DMSMimeTypeResolver;
 import org.exoplatform.services.cms.relations.RelationsService;
 import org.exoplatform.services.cms.thumbnail.ThumbnailService;
 import org.exoplatform.services.listener.ListenerService;
@@ -106,6 +107,8 @@ public class PasteManageComponent extends UIAbstractManagerComponent {
   private static final String RELATION_PROP = "exo:relation";
 
   private static final Log    LOG           = ExoLogger.getLogger(PasteManageComponent.class.getName());
+  private static boolean isRefresh = true;
+  private static boolean versionedRemember, nonVersionedRemember = false;
 
   @UIExtensionFilters
   public List<UIExtensionFilter> getFilters() {
@@ -180,61 +183,71 @@ public class PasteManageComponent extends UIAbstractManagerComponent {
     }
     String currentPath = uiExplorer.getCurrentNode().getPath();
     ClipboardCommand clipboardCommand = clipboardService.getLastClipboard(userId);
-    Node sourceNode = (Node)uiExplorer.getSessionByWorkspace(clipboardCommand.getWorkspace()).getItem(clipboardCommand.getSrcPath());
-    if(destNode.hasNode(sourceNode.getName()) && destNode.hasNode(sourceNode.getName()) &&
-            ClipboardCommand.COPY.equals(clipboardCommand.getType())){
+    try {
+      if (clipboardService.getClipboardList(userId, true).isEmpty()) {
+        processPaste(clipboardCommand, destNode, event, uiExplorer);
+      } else {
+        processPasteMultiple(destNode, event, uiExplorer);
+      }
+    } catch (PathNotFoundException pe) {
+      uiApp.addMessage(new ApplicationMessage("UIPopupMenu.msg.cannot-readsource", null));
+
+      return;
+    }
+    session.save();
+
+
+    // Get paginator of UITreeExplorer && UIDocumentInfo
+    UITreeNodePageIterator extendedPageIterator = null;
+    UITreeExplorer uiTreeExplorer = uiExplorer.findFirstComponentOfType(UITreeExplorer.class);
+    if (uiTreeExplorer != null) {
+      extendedPageIterator = uiTreeExplorer.getUIPageIterator(currentPath);
+    }
+    UIPageIterator contentPageIterator = uiExplorer.findComponentById(UIDocumentInfo.CONTENT_PAGE_ITERATOR_ID);
+
+    // Get current page index
+    int currentPage = 1;
+    if (contentPageIterator != null) {
+      currentPage = contentPageIterator.getCurrentPage();
+    }
+
+    if(isRefresh) {
+      // Rebuild screen after pasting new content
+      setVersionedRemember(false);
+      setNonVersionedRemember(false);
+      uiExplorer.updateAjax(event);
+    }
+
+    // Because after updateAjax, paginator automatically set to first page then we need set again current pageindex
+    if (contentPageIterator != null) {
+      contentPageIterator.setCurrentPage(currentPage);
+    }
+    if (extendedPageIterator != null) {
+      extendedPageIterator.setCurrentPage(currentPage);
+    }
+  }
+
+  private static void processPaste(ClipboardCommand clipboardCommand, Node destNode, Event<?> event, UIJCRExplorer uiExplorer)
+    throws Exception{
+    Node sourceNode = (Node)uiExplorer.getSessionByWorkspace(clipboardCommand.getWorkspace()).
+            getItem(clipboardCommand.getSrcPath());
+    ResourceBundle resourceBundle = event.getRequestContext().getApplicationResourceBundle();
+    if(destNode.hasNode(sourceNode.getName())){
       Node destExitedNode = destNode.getNode(sourceNode.getName());
       UIPopupContainer objUIPopupContainer = uiExplorer.getChild(UIPopupContainer.class);
-      UIDocumentAutoVersionComponent uiDocumentAutoVersionComponent = uiExplorer.createUIComponent(UIDocumentAutoVersionComponent.class, null, null);
-      uiDocumentAutoVersionComponent.setTitle("Document Upload");
-      uiDocumentAutoVersionComponent.setDestPath(destPath);
-      uiDocumentAutoVersionComponent.setDestWorkspace(destNode.getSession().getWorkspace().getName());
-      uiDocumentAutoVersionComponent.setSourcePath(sourceNode.getPath());
-      uiDocumentAutoVersionComponent.setSourceWorkspace(sourceNode.getSession().getWorkspace().getName());
-      uiDocumentAutoVersionComponent.setMessageKey("xinc hao");
-      uiDocumentAutoVersionComponent.setArguments(new String[]{"a", "b", "c"});
-      uiDocumentAutoVersionComponent.init(destExitedNode);
-      objUIPopupContainer.activate(uiDocumentAutoVersionComponent, 450, 0);
+      UIDocumentAutoVersionForm uiDocumentAutoVersionForm = uiExplorer.createUIComponent(UIDocumentAutoVersionForm.class, null, null);
+      uiDocumentAutoVersionForm.setDestPath(destNode.getPath());
+      uiDocumentAutoVersionForm.setDestWorkspace(destNode.getSession().getWorkspace().getName());
+      uiDocumentAutoVersionForm.setSourcePath(sourceNode.getPath());
+      uiDocumentAutoVersionForm.setSourceWorkspace(sourceNode.getSession().getWorkspace().getName());
+      uiDocumentAutoVersionForm.setMessage("UIDocumentAutoVersionForm.msg");
+      uiDocumentAutoVersionForm.setArguments(new String[]{destExitedNode.getName()});
+      uiDocumentAutoVersionForm.init(destExitedNode);
+      objUIPopupContainer.activate(uiDocumentAutoVersionForm, 450, 0);
       event.getRequestContext().addUIComponentToUpdateByAjax(objUIPopupContainer);
+      isRefresh = false;
     }else {
-      try {
-        if (clipboardService.getClipboardList(userId, true).isEmpty()) {
-          processPaste(clipboardCommand, destPath, event);
-        } else {
-          processPasteMultiple(destPath, event, uiExplorer);
-        }
-      } catch (PathNotFoundException pe) {
-        uiApp.addMessage(new ApplicationMessage("UIPopupMenu.msg.cannot-readsource", null));
-
-        return;
-      }
-      session.save();
-
-
-      // Get paginator of UITreeExplorer && UIDocumentInfo
-      UITreeNodePageIterator extendedPageIterator = null;
-      UITreeExplorer uiTreeExplorer = uiExplorer.findFirstComponentOfType(UITreeExplorer.class);
-      if (uiTreeExplorer != null) {
-        extendedPageIterator = uiTreeExplorer.getUIPageIterator(currentPath);
-      }
-      UIPageIterator contentPageIterator = uiExplorer.findComponentById(UIDocumentInfo.CONTENT_PAGE_ITERATOR_ID);
-
-      // Get current page index
-      int currentPage = 1;
-      if (contentPageIterator != null) {
-        currentPage = contentPageIterator.getCurrentPage();
-      }
-
-      // Rebuild screen after pasting new content
-      uiExplorer.updateAjax(event);
-
-      // Because after updateAjax, paginator automatically set to first page then we need set again current pageindex
-      if (contentPageIterator != null) {
-        contentPageIterator.setCurrentPage(currentPage);
-      }
-      if (extendedPageIterator != null) {
-        extendedPageIterator.setCurrentPage(currentPage);
-      }
+      processPaste(clipboardCommand, destNode.getPath(), event, false, true);
     }
   }
 
@@ -243,19 +256,56 @@ public class PasteManageComponent extends UIAbstractManagerComponent {
     processPaste(currentClipboard, destPath, event, false, true);
   }
 
-  private static void processPasteMultiple(String destPath, Event<?> event, UIJCRExplorer uiExplorer)
+  private static void processPasteMultiple(Node destNode, Event<?> event, UIJCRExplorer uiExplorer)
       throws Exception {
     ClipboardService clipboardService = WCMCoreUtils.getService(ClipboardService.class);
     String userId = ConversationState.getCurrent().getIdentity().getUserId();
-    int pasteNum = 0;
     Set<ClipboardCommand> virtualClipboards = clipboardService.getClipboardList(userId, true);
+
+    processPasteMultiple(destNode, event, uiExplorer, virtualClipboards);
+  }
+
+  public static void processPasteMultiple(Node destNode, Event<?> event, UIJCRExplorer uiExplorer,
+                                          Set<ClipboardCommand> virtualClipboards) throws Exception{
+    int pasteNum = 0;
     for (ClipboardCommand clipboard : virtualClipboards) {
       pasteNum++;
-      if (pasteNum == virtualClipboards.size()) {
-        processPaste(clipboard, destPath, event, true, true);
+      Node srcNode = (Node)uiExplorer.getSessionByWorkspace(clipboard.getWorkspace()).getItem(clipboard.getSrcPath());
+      String destPath = destNode.getPath();
+      if(srcNode.getName().equals(destNode.getName()) || destNode.hasNode(srcNode.getName()) ){
+        if(versionedRemember || nonVersionedRemember){
+          AutoVersionService autoVersionService = WCMCoreUtils.getService(AutoVersionService.class);
+          if(destNode.hasNode(srcNode.getName())) {
+            autoVersionService.autoVersion(destNode.getNode(srcNode.getName()), srcNode);
+            isRefresh=true;
+            continue;
+          }
+        }
+        Node destExitedNode = destNode.getNode(srcNode.getName());
+        UIPopupContainer objUIPopupContainer = uiExplorer.getChild(UIPopupContainer.class);
+        UIDocumentAutoVersionForm uiDocumentAutoVersionForm = uiExplorer.createUIComponent(UIDocumentAutoVersionForm.class, null, null);
+        uiDocumentAutoVersionForm.setDestPath(destNode.getPath());
+        uiDocumentAutoVersionForm.setDestWorkspace(destNode.getSession().getWorkspace().getName());
+        uiDocumentAutoVersionForm.setSourcePath(srcNode.getPath());
+        uiDocumentAutoVersionForm.setSourceWorkspace(srcNode.getSession().getWorkspace().getName());
+        uiDocumentAutoVersionForm.setCurrentClipboard(clipboard);
+        uiDocumentAutoVersionForm.setMessage("UIDocumentAutoVersionForm.msg");
+        uiDocumentAutoVersionForm.setArguments(new String[]{srcNode.getName()});
+        uiDocumentAutoVersionForm.init(destExitedNode);
+        uiDocumentAutoVersionForm.setClipboardCommands(virtualClipboards);
+        objUIPopupContainer.activate(uiDocumentAutoVersionForm, 450, 0);
+        event.getRequestContext().addUIComponentToUpdateByAjax(objUIPopupContainer);
+        isRefresh = false;
         break;
+      }else{
+        if (pasteNum == virtualClipboards.size()) {
+          processPaste(clipboard, destPath, event, true, true);
+          virtualClipboards.remove(clipboard);
+          break;
+        }
+        processPaste(clipboard, destPath, event, true, false);
+        virtualClipboards.remove(clipboard);
       }
-      processPaste(clipboard, destPath, event, true, false);
     }
   }
 
@@ -335,8 +385,6 @@ public class PasteManageComponent extends UIAbstractManagerComponent {
     if (matcher.find()) {
       destWorkspace = matcher.group(1);
       destPath = matcher.group(2);
-    } else {
-      throw new IllegalArgumentException("The ObjectId is invalid '" + destPath + "'");
     }
     Session destSession = uiExplorer.getSessionByWorkspace(destWorkspace);
 
@@ -586,4 +634,11 @@ public class PasteManageComponent extends UIAbstractManagerComponent {
     return null;
   }
 
+  public static void setVersionedRemember(boolean versionedRemember) {
+    PasteManageComponent.versionedRemember = versionedRemember;
+  }
+
+  public static void setNonVersionedRemember(boolean nonVersionedRemember) {
+    PasteManageComponent.nonVersionedRemember = nonVersionedRemember;
+  }
 }

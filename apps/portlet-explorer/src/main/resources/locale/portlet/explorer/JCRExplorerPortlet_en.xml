@@ -255,6 +255,7 @@
       <UISEOForm>Manage SEO</UISEOForm>
       <UISEOToolbarForm>Manage SEO</UISEOToolbarForm>
       <UIReadOnlyFileConfirmMessage>Open Document</UIReadOnlyFileConfirmMessage>
+      <UIDocumentAutoVersionForm>Copy Document</UIDocumentAutoVersionForm>
     </title>
     <header>
       <workspace>Workspace</workspace>
@@ -2435,6 +2436,8 @@
       <Keepfile>Keep both files</Keepfile>
 			<ReadOnly>Open Read-only</ReadOnly>
 			<Cancel>Cancel</Cancel>
+      <KeepBoth>Keep Both</KeepBoth>
+      <CreateNewVersion>Create a new version</CreateNewVersion>
     </label>
   </UIConfirmMessage>
 
@@ -3195,6 +3198,15 @@
 	  	<property-name-incorrect>The property name is incorrect, please enter another value for it!</property-name-incorrect>
     </msg>
   </UIPropertyForm>
+  <UIDocumentAutoVersionForm>
+    <msg>A document {0} already exits. What do you want to do? </msg>
+    <UIChkRememberNonVersioned>
+      <label>Remember my choice for all others non-versioned documents</label>
+    </UIChkRememberNonVersioned>
+    <UIChkRememberVersioned>
+      <label>Remember my choice for all others versioned documents</label>
+    </UIChkRememberVersioned>
+  </UIDocumentAutoVersionForm>
   <!--
   ###################################################################################
   # JCR Exceptions manager                                                              #

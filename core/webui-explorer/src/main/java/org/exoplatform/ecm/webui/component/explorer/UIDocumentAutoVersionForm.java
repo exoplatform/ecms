@@ -1,24 +1,28 @@
 package org.exoplatform.ecm.webui.component.explorer;
 
-import org.exoplatform.portal.webui.container.UIContainer;
+import org.exoplatform.ecm.webui.component.explorer.rightclick.manager.PasteManageComponent;
+import org.exoplatform.services.cms.clipboard.jcr.model.ClipboardCommand;
 import org.exoplatform.services.cms.documents.AutoVersionService;
-import org.exoplatform.services.cms.documents.impl.AutoVersionServiceImpl;
-import org.exoplatform.services.listener.ListenerService;
 import org.exoplatform.services.log.ExoLogger;
 import org.exoplatform.services.log.Log;
 import org.exoplatform.services.wcm.core.NodetypeConstant;
 import org.exoplatform.services.wcm.utils.WCMCoreUtils;
 import org.exoplatform.wcm.webui.Utils;
+import org.exoplatform.webui.application.WebuiRequestContext;
 import org.exoplatform.webui.config.annotation.ComponentConfig;
 import org.exoplatform.webui.config.annotation.EventConfig;
 import org.exoplatform.webui.core.UIPopupComponent;
 import org.exoplatform.webui.core.UIPopupWindow;
+import org.exoplatform.webui.core.lifecycle.UIFormLifecycle;
 import org.exoplatform.webui.event.Event;
 import org.exoplatform.webui.event.EventListener;
+import org.exoplatform.webui.form.UIForm;
+import org.exoplatform.webui.form.input.UICheckBoxInput;
 
 import javax.jcr.Node;
 import javax.jcr.Session;
 import javax.jcr.Workspace;
+import java.util.Set;
 import java.util.regex.Matcher;
 
 /**
@@ -29,32 +33,38 @@ import java.util.regex.Matcher;
  * Build popup document auto versioning
  */
 @ComponentConfig(
-        template = "classpath:groovy/ecm/webui/UIConfirmMessage.gtmpl",
+        template = "app:/groovy/webui/component/explorer/versions/UIDocumentAutoVersionForm.gtmpl",
+        lifecycle = UIFormLifecycle.class,
         events = {
-                @EventConfig(listeners = UIDocumentAutoVersionComponent.KeepBothActionListener.class),
-                @EventConfig(listeners = UIDocumentAutoVersionComponent.CreateNewVersionActionListener.class),
-                @EventConfig(listeners = UIDocumentAutoVersionComponent.ReplaceActionListener.class),
-                @EventConfig(listeners = UIDocumentAutoVersionComponent.CreateVersionOrReplaceActionListener.class),
-                @EventConfig(listeners = UIDocumentAutoVersionComponent.CancelActionListener.class)
+                @EventConfig(listeners = UIDocumentAutoVersionForm.KeepBothActionListener.class),
+                @EventConfig(listeners = UIDocumentAutoVersionForm.CreateNewVersionActionListener.class),
+                @EventConfig(listeners = UIDocumentAutoVersionForm.ReplaceActionListener.class),
+                @EventConfig(listeners = UIDocumentAutoVersionForm.CreateVersionOrReplaceActionListener.class),
+                @EventConfig(listeners = UIDocumentAutoVersionForm.OnChangeActionListener.class),
+                @EventConfig(listeners = UIDocumentAutoVersionForm.CancelActionListener.class, phase = Event.Phase.DECODE)
         }
 )
-public class UIDocumentAutoVersionComponent extends UIContainer implements UIPopupComponent {
+public class UIDocumentAutoVersionForm extends UIForm implements UIPopupComponent {
 
-  private static final Log    LOG           = ExoLogger.getLogger(UIDocumentAutoVersionComponent.class.getName());
+  private static final Log    LOG           = ExoLogger.getLogger(UIDocumentAutoVersionForm.class.getName());
   public static final String KEEP_BOTH = "KeepBoth";
   public static final String CREATE_VERSION = "CreateNewVersion";
   public static final String REPLACE = "Replace";
   public static final String CREATE_OR_REPLACE = "CreateVersionOrReplace";
   public static final String CANCEL = "Cancel";
+  public static final String REMEMBER_VERSIONED_COMPONENT = "UIDocumentAutoVersionForm.UIChkRememberVersioned";
+  public static final String REMEMBER_NONVERSIONED_COMPONENT = "UIDocumentAutoVersionForm.UIChkRememberNonVersioned";
 
   private boolean isVersioned = false;
   private String sourcePath;
   private String destPath;
   private String sourceWorkspace;
   private String destWorkspace;
-  private String messageKey_;
+  private String message_;
   private String[] args_ = {};
   private static String[] actions = new String[] {KEEP_BOTH, CREATE_VERSION, REPLACE, CREATE_OR_REPLACE ,CANCEL};
+  private static Set<ClipboardCommand> clipboardCommands = null;
+  private static ClipboardCommand currentClipboard = null;
 
   @Override
   public void activate() { }
@@ -64,20 +74,38 @@ public class UIDocumentAutoVersionComponent extends UIContainer implements UIPop
 
   }
 
+  public UIDocumentAutoVersionForm(){
+    UICheckBoxInput chkRememberVersioned = new UICheckBoxInput(REMEMBER_VERSIONED_COMPONENT, "", false);
+    UICheckBoxInput chkRememberNonVersioned = new UICheckBoxInput(REMEMBER_NONVERSIONED_COMPONENT, "", false);
+    chkRememberVersioned.setOnChange("OnChange");
+    chkRememberVersioned.setChecked(true);
+    chkRememberNonVersioned.setChecked(true);
+    chkRememberVersioned.setRendered(false);
+    chkRememberNonVersioned.setRendered(false);
+    this.addChild(chkRememberVersioned);
+    this.addChild(chkRememberNonVersioned);
+  }
+
   public void init(Node currentNode) throws Exception{
+    UICheckBoxInput chkRemVersion = this.findComponentById(REMEMBER_VERSIONED_COMPONENT);
+    UICheckBoxInput chkRemNonVersioned = this.findComponentById(REMEMBER_NONVERSIONED_COMPONENT);
     if(currentNode.isNodeType(NodetypeConstant.MIX_VERSIONABLE)){
       setActions(new String[]{KEEP_BOTH, CREATE_VERSION, CANCEL});
+      chkRemVersion.setRendered(true);
+      chkRemNonVersioned.setRendered(false);
     }else{
       setActions(new String[]{KEEP_BOTH, REPLACE, CANCEL});
+      chkRemVersion.setRendered(false);
+      chkRemNonVersioned.setRendered(true);
     }
   }
 
   public String[] getActions() { return actions; }
 
-  public static class KeepBothActionListener extends EventListener<UIDocumentAutoVersionComponent> {
+  public static class KeepBothActionListener extends EventListener<UIDocumentAutoVersionForm> {
     @Override
-    public void execute(Event<UIDocumentAutoVersionComponent> event) throws Exception {
-      UIDocumentAutoVersionComponent autoVersionComponent = event.getSource();
+    public void execute(Event<UIDocumentAutoVersionForm> event) throws Exception {
+      UIDocumentAutoVersionForm autoVersionComponent = event.getSource();
       UIJCRExplorer uijcrExplorer = autoVersionComponent.getAncestorOfType(UIJCRExplorer.class);
       Session destSession = uijcrExplorer.getSessionByWorkspace(autoVersionComponent.getDestWorkspace());
       Session srcSession = uijcrExplorer.getSessionByWorkspace(autoVersionComponent.getSourceWorkspace());
@@ -95,29 +123,25 @@ public class UIDocumentAutoVersionComponent extends UIContainer implements UIPop
       copyNode(destSession, autoVersionComponent.getSourceWorkspace(),
               autoVersionComponent.getSourcePath(), destPath.concat(sourceNode.getName()));
 
-      UIPopupWindow popupAction = event.getSource().getAncestorOfType(UIPopupWindow.class) ;
-      popupAction.setShow(false) ;
-      uijcrExplorer.updateAjax(event);
+      closePopup(autoVersionComponent, uijcrExplorer, event);
     }
   }
 
-  public static class CreateNewVersionActionListener extends EventListener<UIDocumentAutoVersionComponent> {
+  public static class CreateNewVersionActionListener extends EventListener<UIDocumentAutoVersionForm> {
     @Override
-    public void execute(Event<UIDocumentAutoVersionComponent> event) throws Exception {
-      UIDocumentAutoVersionComponent autoVersionComponent = event.getSource();
+    public void execute(Event<UIDocumentAutoVersionForm> event) throws Exception {
+      UIDocumentAutoVersionForm autoVersionComponent = event.getSource();
       UIJCRExplorer uijcrExplorer = autoVersionComponent.getAncestorOfType(UIJCRExplorer.class);
 
+      UICheckBoxInput chkRemVersion = autoVersionComponent.findComponentById(REMEMBER_VERSIONED_COMPONENT);
+      UICheckBoxInput chkRemNonVersioned = autoVersionComponent.findComponentById(REMEMBER_NONVERSIONED_COMPONENT);
       Session destSession = uijcrExplorer.getSessionByWorkspace(autoVersionComponent.getDestWorkspace());
       Session srcSession = uijcrExplorer.getSessionByWorkspace(autoVersionComponent.getSourceWorkspace());
       Node sourceNode = uijcrExplorer.getNodeByPath(autoVersionComponent.getSourcePath(), srcSession);
       String destPath = autoVersionComponent.getDestPath();
       if (destPath != null) {
         Matcher matcher = UIWorkingArea.FILE_EXPLORER_URL_SYNTAX.matcher(destPath);
-        if (matcher.find()) {
-          destPath = matcher.group(2);
-        } else {
-          throw new IllegalArgumentException("The ObjectId is invalid '" + destPath + "'");
-        }
+        if(matcher.find()) destPath = matcher.group(2);
       }
       if (!"/".equals(destPath)) destPath = destPath.concat("/");
       destPath = destPath.concat(sourceNode.getName());
@@ -126,17 +150,28 @@ public class UIDocumentAutoVersionComponent extends UIContainer implements UIPop
       AutoVersionService autoVersionService = WCMCoreUtils.getService(AutoVersionService.class);
       autoVersionService.autoVersion(destNode, sourceNode);
 
-      UIPopupWindow popupAction = autoVersionComponent.getAncestorOfType(UIPopupWindow.class) ;
-      popupAction.setShow(false) ;
-      uijcrExplorer.updateAjax(event);
+      if(destNode.isNodeType(NodetypeConstant.MIX_VERSIONABLE) && chkRemVersion.getValue()){
+        PasteManageComponent.setVersionedRemember(chkRemVersion.isChecked() && chkRemVersion.isRendered());
+      }else{
+        PasteManageComponent.setNonVersionedRemember(chkRemNonVersioned.isChecked() && chkRemNonVersioned.isRendered());
+      }
+      Set<ClipboardCommand> _clipboardCommands = autoVersionComponent.getClipboardCommands();
+      _clipboardCommands.remove(autoVersionComponent.getCurrentClipboard());
+      if(_clipboardCommands.size()>0){
+        PasteManageComponent.processPasteMultiple(destNode.getParent(), event, uijcrExplorer, _clipboardCommands);
+      }else {
+        closePopup(autoVersionComponent, uijcrExplorer, event);
+      }
+
+      if(chkRemVersion.getValue() && chkRemNonVersioned.getValue()) closePopup(autoVersionComponent, uijcrExplorer, event);
     }
   }
 
 
-  public static class ReplaceActionListener extends EventListener<UIDocumentAutoVersionComponent> {
+  public static class ReplaceActionListener extends EventListener<UIDocumentAutoVersionForm> {
     @Override
-    public void execute(Event<UIDocumentAutoVersionComponent> event) throws Exception {
-      UIDocumentAutoVersionComponent autoVersionComponent = event.getSource();
+    public void execute(Event<UIDocumentAutoVersionForm> event) throws Exception {
+      UIDocumentAutoVersionForm autoVersionComponent = event.getSource();
       UIJCRExplorer uijcrExplorer = autoVersionComponent.getAncestorOfType(UIJCRExplorer.class);
 
       Session destSession = uijcrExplorer.getSessionByWorkspace(autoVersionComponent.getDestWorkspace());
@@ -161,25 +196,23 @@ public class UIDocumentAutoVersionComponent extends UIContainer implements UIPop
       copyNode(destSession, autoVersionComponent.getSourceWorkspace(),
               autoVersionComponent.getSourcePath(), destPath);
 
-      UIPopupWindow popupAction = autoVersionComponent.getAncestorOfType(UIPopupWindow.class) ;
-      popupAction.setShow(false) ;
-      uijcrExplorer.updateAjax(event);
+      closePopup(autoVersionComponent, uijcrExplorer, event);
     }
   }
 
-  public static class CreateVersionOrReplaceActionListener extends EventListener<UIDocumentAutoVersionComponent> {
+  public static class CreateVersionOrReplaceActionListener extends EventListener<UIDocumentAutoVersionForm> {
     @Override
-    public void execute(Event<UIDocumentAutoVersionComponent> event) throws Exception {
-      UIDocumentAutoVersionComponent uiConfirm = event.getSource();
+    public void execute(Event<UIDocumentAutoVersionForm> event) throws Exception {
+      UIDocumentAutoVersionForm uiConfirm = event.getSource();
       UIPopupWindow popupAction = uiConfirm.getAncestorOfType(UIPopupWindow.class) ;
       popupAction.setShow(true) ;
       event.getRequestContext().addUIComponentToUpdateByAjax(popupAction);
     }
   }
 
-  public static class CancelActionListener extends EventListener<UIDocumentAutoVersionComponent> {
+  public static class CancelActionListener extends EventListener<UIDocumentAutoVersionForm> {
     @Override
-    public void execute(Event<UIDocumentAutoVersionComponent> event) throws Exception {
+    public void execute(Event<UIDocumentAutoVersionForm> event) throws Exception {
       UIPopupWindow popupAction = event.getSource().getAncestorOfType(UIPopupWindow.class) ;
       popupAction.setShow(false) ;
       event.getRequestContext().addUIComponentToUpdateByAjax(popupAction);
@@ -218,9 +251,9 @@ public class UIDocumentAutoVersionComponent extends UIContainer implements UIPop
     this.destWorkspace = destWorkspace;
   }
 
-  public void setMessageKey(String messageKey) { messageKey_ = messageKey; }
+  public void setMessage(String message) { message_ = message; }
 
-  public String getMessageKey() { return messageKey_; }
+  public String getMessage() { return message_; }
 
   public void setArguments(String[] args) { args_ = args; }
 
@@ -234,7 +267,7 @@ public class UIDocumentAutoVersionComponent extends UIContainer implements UIPop
     this.isVersioned = isVersioned;
   }
 
-  private void setActions(String[] actions) {
+  public void setActions(String[] actions) {
     this.actions = actions;
   }
 
@@ -273,6 +306,49 @@ public class UIDocumentAutoVersionComponent extends UIContainer implements UIPop
         }
       }
     }
+  }
+
+  public Set<ClipboardCommand> getClipboardCommands() {
+    return clipboardCommands;
+  }
+
+  public void setClipboardCommands(Set<ClipboardCommand> clipboardCommands) {
+    this.clipboardCommands = clipboardCommands;
+  }
+
+  public ClipboardCommand getCurrentClipboard() {
+    return currentClipboard;
+  }
+
+  public void setCurrentClipboard(ClipboardCommand currentClipboard) {
+    UIDocumentAutoVersionForm.currentClipboard = currentClipboard;
+  }
+
+  private static void closePopup(UIDocumentAutoVersionForm autoVersionComponent,
+                                 UIJCRExplorer uijcrExplorer, Event<?> event) throws Exception{
+    UIPopupWindow popupAction = uijcrExplorer.findFirstComponentOfType(UIPopupWindow.class) ;
+    popupAction.setShow(false) ;
+    uijcrExplorer.updateAjax(event);
+    UICheckBoxInput chkRememberVersioned = autoVersionComponent.findComponentById(REMEMBER_VERSIONED_COMPONENT);
+    UICheckBoxInput chkRememberNonVersioned = autoVersionComponent.findComponentById(REMEMBER_NONVERSIONED_COMPONENT);
+    chkRememberVersioned.setChecked(false);
+    chkRememberNonVersioned.setChecked(false);
+    PasteManageComponent.setVersionedRemember(chkRememberVersioned.isChecked() && chkRememberVersioned.isRendered());
+    PasteManageComponent.setNonVersionedRemember(chkRememberNonVersioned.isChecked() && chkRememberNonVersioned.isRendered());
+  }
+
+  static public class OnChangeActionListener extends EventListener<UIDocumentAutoVersionForm> {
+    public void execute(Event<UIDocumentAutoVersionForm> event) throws Exception {
+      UICheckBoxInput chkRememberVersioned = event.getSource().findComponentById(REMEMBER_VERSIONED_COMPONENT);
+      UICheckBoxInput chkRememberNonVersioned = event.getSource().findComponentById(REMEMBER_NONVERSIONED_COMPONENT);
+      PasteManageComponent.setVersionedRemember(chkRememberVersioned.isChecked() && chkRememberVersioned.isRendered());
+      PasteManageComponent.setNonVersionedRemember(chkRememberNonVersioned.isChecked() && chkRememberNonVersioned.isRendered());
+    }
+  }
+
+  @Override
+  public void processRender(WebuiRequestContext context) throws Exception {
+    super.processRender(context);
   }
 
 }
