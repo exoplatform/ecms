@@ -231,8 +231,7 @@ public class PasteManageComponent extends UIAbstractManagerComponent {
     throws Exception{
     Node sourceNode = (Node)uiExplorer.getSessionByWorkspace(clipboardCommand.getWorkspace()).
             getItem(clipboardCommand.getSrcPath());
-    ResourceBundle resourceBundle = event.getRequestContext().getApplicationResourceBundle();
-    if(destNode.hasNode(sourceNode.getName())){
+    if(destNode.hasNode(sourceNode.getName()) && sourceNode.isNodeType(NodetypeConstant.NT_FILE)){
       Node destExitedNode = destNode.getNode(sourceNode.getName());
       UIPopupContainer objUIPopupContainer = uiExplorer.getChild(UIPopupContainer.class);
       UIDocumentAutoVersionForm uiDocumentAutoVersionForm = uiExplorer.createUIComponent(UIDocumentAutoVersionForm.class, null, null);
@@ -242,6 +241,7 @@ public class PasteManageComponent extends UIAbstractManagerComponent {
       uiDocumentAutoVersionForm.setSourceWorkspace(sourceNode.getSession().getWorkspace().getName());
       uiDocumentAutoVersionForm.setMessage("UIDocumentAutoVersionForm.msg");
       uiDocumentAutoVersionForm.setArguments(new String[]{destExitedNode.getName()});
+      uiDocumentAutoVersionForm.setCurrentClipboard(clipboardCommand);
       uiDocumentAutoVersionForm.init(destExitedNode);
       objUIPopupContainer.activate(uiDocumentAutoVersionForm, 450, 0);
       event.getRequestContext().addUIComponentToUpdateByAjax(objUIPopupContainer);
@@ -262,11 +262,11 @@ public class PasteManageComponent extends UIAbstractManagerComponent {
     String userId = ConversationState.getCurrent().getIdentity().getUserId();
     Set<ClipboardCommand> virtualClipboards = clipboardService.getClipboardList(userId, true);
 
-    processPasteMultiple(destNode, event, uiExplorer, virtualClipboards);
+    processPasteMultiple(destNode, event, uiExplorer, virtualClipboards, null);
   }
 
   public static void processPasteMultiple(Node destNode, Event<?> event, UIJCRExplorer uiExplorer,
-                                          Set<ClipboardCommand> virtualClipboards) throws Exception{
+                                          Set<ClipboardCommand> virtualClipboards, String action) throws Exception{
     int pasteNum = 0;
     for (ClipboardCommand clipboard : virtualClipboards) {
       pasteNum++;
@@ -275,11 +275,20 @@ public class PasteManageComponent extends UIAbstractManagerComponent {
       if(srcNode.getName().equals(destNode.getName()) || destNode.hasNode(srcNode.getName()) ){
         if(versionedRemember || nonVersionedRemember){
           AutoVersionService autoVersionService = WCMCoreUtils.getService(AutoVersionService.class);
-          if(destNode.hasNode(srcNode.getName())) {
+          if(destNode.hasNode(srcNode.getName()) && ClipboardCommand.COPY.equals(clipboard.getType())
+                  && UIDocumentAutoVersionForm.CREATE_VERSION.equals(action)) {
             autoVersionService.autoVersion(destNode.getNode(srcNode.getName()), srcNode);
-            isRefresh=true;
-            continue;
+          }else if(destNode.hasNode(srcNode.getName()) && ClipboardCommand.COPY.equals(clipboard.getType())
+                  && UIDocumentAutoVersionForm.KEEP_BOTH.equals(action)){
+            UIDocumentAutoVersionForm.copyNode(destNode.getSession(), destNode.getSession().getWorkspace().getName(),
+                    srcNode.getPath(), destNode.getNode(srcNode.getName()).getPath());
+          }else{
+            ActionServiceContainer actionContainer = uiExplorer.getApplicationComponent(ActionServiceContainer.class);
+            pasteByCut(clipboard, uiExplorer, destNode.getSession(), clipboard.getWorkspace(), clipboard.getSrcPath(),
+                    destNode.getPath(),actionContainer, false, false, true);
           }
+          isRefresh=true;
+          continue;
         }
         Node destExitedNode = destNode.getNode(srcNode.getName());
         UIPopupContainer objUIPopupContainer = uiExplorer.getChild(UIPopupContainer.class);
@@ -300,13 +309,14 @@ public class PasteManageComponent extends UIAbstractManagerComponent {
       }else{
         if (pasteNum == virtualClipboards.size()) {
           processPaste(clipboard, destPath, event, true, true);
-          virtualClipboards.remove(clipboard);
           break;
         }
         processPaste(clipboard, destPath, event, true, false);
-        virtualClipboards.remove(clipboard);
       }
     }
+    ClipboardService clipboardService = WCMCoreUtils.getService(ClipboardService.class);
+    String userId = WCMCoreUtils.getRemoteUser();
+    clipboardService.clearClipboardList(userId, true);
   }
 
   /**
@@ -321,8 +331,10 @@ public class PasteManageComponent extends UIAbstractManagerComponent {
     for (ClipboardCommand clipboard : clipboardCommands) {
       if (ClipboardCommand.CUT.equals(clipboard.getType())) {
         srcNode = mapClipboard.get(clipboard);
-        srcNode.refresh(true);
-        clipboard.setSrcPath(srcNode.getPath());
+        if(srcNode !=null) {
+          srcNode.refresh(true);
+          clipboard.setSrcPath(srcNode.getPath());
+        }
       }
     }
   }
@@ -416,7 +428,7 @@ public class PasteManageComponent extends UIAbstractManagerComponent {
         actionContainer.initiateObservation(destNode);
       } else {
         pasteByCut(currentClipboard, uiExplorer, destSession, srcWorkspace, srcPath, destPath,
-            actionContainer, isMultiSelect, isLastPaste);
+            actionContainer, isMultiSelect, isLastPaste, false);
         destNode = (Node) destSession.getItem(destPath);
       }
 
@@ -518,10 +530,10 @@ public class PasteManageComponent extends UIAbstractManagerComponent {
     }
   }
 
-  private static void pasteByCut(ClipboardCommand currentClipboard, UIJCRExplorer uiExplorer,
+  public static void pasteByCut(ClipboardCommand currentClipboard, UIJCRExplorer uiExplorer,
       Session session, String srcWorkspace, String srcPath, String destPath,
       ActionServiceContainer actionContainer, boolean isMultiSelect,
-      boolean isLastPaste) throws Exception {
+      boolean isLastPaste, boolean isCreateVersion) throws Exception {
     ClipboardService clipboardService = WCMCoreUtils.getService(ClipboardService.class);
     String userId = ConversationState.getCurrent().getIdentity().getUserId();
     
@@ -566,7 +578,17 @@ public class PasteManageComponent extends UIAbstractManagerComponent {
     uiExplorer.addLockToken(srcNode);
     if (workspace.getName().equals(srcWorkspace)) {
       try {
-        workspace.move(srcPath, destPath);
+        if(isCreateVersion){
+          Node _destNode = ((Node)session.getItem(destPath)).getNode(srcNode.getName());
+          AutoVersionService autoVersionService = WCMCoreUtils.getService(AutoVersionService.class);
+          autoVersionService.autoVersion(_destNode, srcNode);
+          if(!srcNode.getPath().equals(_destNode.getPath())) {
+            srcNode.remove();
+//            srcNode.getSession().save();
+          }
+        }else {
+          workspace.move(srcPath, destPath);
+        }
         LockUtil.changeLockToken(srcPath, (Node)session.getItem(destPath));
         session.save();
       } catch (ArrayIndexOutOfBoundsException e) {
