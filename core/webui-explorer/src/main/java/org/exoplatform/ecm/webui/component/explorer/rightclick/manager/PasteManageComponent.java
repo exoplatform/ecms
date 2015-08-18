@@ -20,6 +20,7 @@ package org.exoplatform.ecm.webui.component.explorer.rightclick.manager;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.HashMap;
+import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
 import java.util.ResourceBundle;
@@ -234,21 +235,25 @@ public class PasteManageComponent extends UIAbstractManagerComponent {
     Node sourceNode = (Node)uiExplorer.getSessionByWorkspace(clipboardCommand.getWorkspace()).
             getItem(clipboardCommand.getSrcPath());
     if(destNode.hasNode(sourceNode.getName()) && sourceNode.isNodeType(NodetypeConstant.NT_FILE)){
-      Node destExitedNode = destNode.getNode(sourceNode.getName());
-      UIPopupContainer objUIPopupContainer = uiExplorer.getChild(UIPopupContainer.class);
-      UIDocumentAutoVersionForm uiDocumentAutoVersionForm = uiExplorer.createUIComponent(UIDocumentAutoVersionForm.class, null, null);
-      uiDocumentAutoVersionForm.setDestPath(destNode.getPath());
-      uiDocumentAutoVersionForm.setDestWorkspace(destNode.getSession().getWorkspace().getName());
-      uiDocumentAutoVersionForm.setSourcePath(sourceNode.getPath());
-      uiDocumentAutoVersionForm.setSourceWorkspace(sourceNode.getSession().getWorkspace().getName());
-      uiDocumentAutoVersionForm.setMessage("UIDocumentAutoVersionForm.msg");
-      uiDocumentAutoVersionForm.setArguments(new String[]{destExitedNode.getName()});
-      uiDocumentAutoVersionForm.setCurrentClipboard(clipboardCommand);
-      uiDocumentAutoVersionForm.setSingleProcess(true);
-      uiDocumentAutoVersionForm.init(destExitedNode);
-      objUIPopupContainer.activate(uiDocumentAutoVersionForm, 450, 0);
-      event.getRequestContext().addUIComponentToUpdateByAjax(objUIPopupContainer);
-      isRefresh = false;
+      Set<ClipboardCommand> clipboardCommands = new HashSet<>();
+      clipboardCommands.add(clipboardCommand);
+      showConfirmDialog(destNode, sourceNode,uiExplorer,clipboardCommand, clipboardCommands, event);
+//      Node destExitedNode = destNode.getNode(sourceNode.getName());
+//      UIPopupContainer objUIPopupContainer = uiExplorer.getChild(UIPopupContainer.class);
+//      UIDocumentAutoVersionForm uiDocumentAutoVersionForm = uiExplorer.createUIComponent(UIDocumentAutoVersionForm.class, null, null);
+//      uiDocumentAutoVersionForm.setDestPath(destNode.getPath());
+//      uiDocumentAutoVersionForm.setDestWorkspace(destNode.getSession().getWorkspace().getName());
+//      uiDocumentAutoVersionForm.setSourcePath(sourceNode.getPath());
+//      uiDocumentAutoVersionForm.setSourceWorkspace(sourceNode.getSession().getWorkspace().getName());
+//      uiDocumentAutoVersionForm.setMessage("UIDocumentAutoVersionForm.msg");
+//      uiDocumentAutoVersionForm.setArguments(new String[]{destExitedNode.getName()});
+//      uiDocumentAutoVersionForm.setCurrentClipboard(clipboardCommand);
+//      uiDocumentAutoVersionForm.setClipboardCommands(clipboardCommands);
+//      uiDocumentAutoVersionForm.setSingleProcess(true);
+//      uiDocumentAutoVersionForm.init(destExitedNode);
+//      objUIPopupContainer.activate(uiDocumentAutoVersionForm, 450, 0);
+//      event.getRequestContext().addUIComponentToUpdateByAjax(objUIPopupContainer);
+//      isRefresh = false;
     }else {
       processPaste(clipboardCommand, destNode.getPath(), event, false, true);
     }
@@ -271,6 +276,7 @@ public class PasteManageComponent extends UIAbstractManagerComponent {
   public static void processPasteMultiple(Node destNode, Event<?> event, UIJCRExplorer uiExplorer,
                                           Set<ClipboardCommand> virtualClipboards, String action) throws Exception{
     int pasteNum = 0;
+    Set<ClipboardCommand> _virtualClipboards = new HashSet<>(virtualClipboards);
     for (ClipboardCommand clipboard : virtualClipboards) {
       pasteNum++;
       Node srcNode = null;
@@ -281,8 +287,10 @@ public class PasteManageComponent extends UIAbstractManagerComponent {
       }
       if(srcNode==null) continue;
       String destPath = destNode.getPath();
-      if(srcNode.getName().equals(destNode.getName()) || destNode.hasNode(srcNode.getName()) ){
-        if(versionedRemember || nonVersionedRemember){
+      if(destNode.hasNode(srcNode.getName()) ){
+        Node _destNode = destNode.getNode(srcNode.getName());
+        if((versionedRemember && _destNode.isNodeType(NodetypeConstant.MIX_VERSIONABLE)
+                || (nonVersionedRemember && !_destNode.isNodeType(NodetypeConstant.MIX_VERSIONABLE)))){
           AutoVersionService autoVersionService = WCMCoreUtils.getService(AutoVersionService.class);
           if(destNode.hasNode(srcNode.getName()) && ClipboardCommand.COPY.equals(clipboard.getType())
                   && UIDocumentAutoVersionForm.CREATE_VERSION.equals(action)) {
@@ -294,7 +302,6 @@ public class PasteManageComponent extends UIAbstractManagerComponent {
           }else if(destNode.hasNode(srcNode.getName()) && ClipboardCommand.COPY.equals(clipboard.getType())
                   && UIDocumentAutoVersionForm.REPLACE.equals(action)) {
             TrashService trashService = WCMCoreUtils.getService(TrashService.class);
-            Node _destNode = destNode.getNode(srcNode.getName());
             destPath = _destNode.getPath();
             String trashID = trashService.moveToTrash(_destNode, WCMCoreUtils.getUserSessionProvider());
             UIDocumentAutoVersionForm.copyNode(destNode.getSession(), destNode.getSession().getWorkspace().getName(),
@@ -306,7 +313,6 @@ public class PasteManageComponent extends UIAbstractManagerComponent {
             ActionServiceContainer actionContainer = uiExplorer.getApplicationComponent(ActionServiceContainer.class);
             if(UIDocumentAutoVersionForm.KEEP_BOTH.equals(action)){
               if(destNode.hasNode(srcNode.getName())) {
-                Node _destNode = destNode.getNode(srcNode.getName());
                 pasteByCut(clipboard, uiExplorer, _destNode.getSession(), clipboard.getWorkspace(), clipboard.getSrcPath(),
                         _destNode.getPath(),actionContainer, false, false, false);
               }
@@ -318,23 +324,10 @@ public class PasteManageComponent extends UIAbstractManagerComponent {
           isRefresh=true;
           continue;
         }
-        Node destExitedNode = destNode.getNode(srcNode.getName());
-        UIPopupContainer objUIPopupContainer = uiExplorer.getChild(UIPopupContainer.class);
-        UIDocumentAutoVersionForm uiDocumentAutoVersionForm = uiExplorer.createUIComponent(UIDocumentAutoVersionForm.class, null, null);
-        uiDocumentAutoVersionForm.setDestPath(destNode.getPath());
-        uiDocumentAutoVersionForm.setDestWorkspace(destNode.getSession().getWorkspace().getName());
-        uiDocumentAutoVersionForm.setSourcePath(srcNode.getPath());
-        uiDocumentAutoVersionForm.setSourceWorkspace(srcNode.getSession().getWorkspace().getName());
-        uiDocumentAutoVersionForm.setCurrentClipboard(clipboard);
-        uiDocumentAutoVersionForm.setMessage("UIDocumentAutoVersionForm.msg");
-        uiDocumentAutoVersionForm.setArguments(new String[]{srcNode.getName()});
-        uiDocumentAutoVersionForm.init(destExitedNode);
-        uiDocumentAutoVersionForm.setClipboardCommands(virtualClipboards);
-        objUIPopupContainer.activate(uiDocumentAutoVersionForm, 450, 0);
-        event.getRequestContext().addUIComponentToUpdateByAjax(objUIPopupContainer);
-        isRefresh = false;
+        showConfirmDialog(destNode, srcNode, uiExplorer, clipboard, _virtualClipboards, event);
         break;
       }else{
+        _virtualClipboards.remove(clipboard);
         if (pasteNum == virtualClipboards.size()) {
           processPaste(clipboard, destPath, event, true, true);
           break;
@@ -342,11 +335,26 @@ public class PasteManageComponent extends UIAbstractManagerComponent {
         processPaste(clipboard, destPath, event, true, false);
       }
     }
-//    ClipboardService clipboardService = WCMCoreUtils.getService(ClipboardService.class);
-//    String userId = WCMCoreUtils.getRemoteUser();
-//    clipboardService.clearClipboardList(userId, true);
   }
 
+  private static void showConfirmDialog(Node destNode, Node srcNode, UIJCRExplorer uiExplorer, ClipboardCommand clipboard,
+                                 Set<ClipboardCommand> virtualClipboards, Event<?> event) throws Exception{
+    Node destExitedNode = destNode.getNode(srcNode.getName());
+    UIPopupContainer objUIPopupContainer = uiExplorer.getChild(UIPopupContainer.class);
+    UIDocumentAutoVersionForm uiDocumentAutoVersionForm = uiExplorer.createUIComponent(UIDocumentAutoVersionForm.class, null, null);
+    uiDocumentAutoVersionForm.setDestPath(destNode.getPath());
+    uiDocumentAutoVersionForm.setDestWorkspace(destNode.getSession().getWorkspace().getName());
+    uiDocumentAutoVersionForm.setSourcePath(srcNode.getPath());
+    uiDocumentAutoVersionForm.setSourceWorkspace(srcNode.getSession().getWorkspace().getName());
+    uiDocumentAutoVersionForm.setCurrentClipboard(clipboard);
+    uiDocumentAutoVersionForm.setMessage("UIDocumentAutoVersionForm.msg");
+    uiDocumentAutoVersionForm.setArguments(new String[]{srcNode.getName()});
+    uiDocumentAutoVersionForm.init(destExitedNode);
+    uiDocumentAutoVersionForm.setClipboardCommands(virtualClipboards);
+    objUIPopupContainer.activate(uiDocumentAutoVersionForm, 450, 0);
+    event.getRequestContext().addUIComponentToUpdateByAjax(objUIPopupContainer);
+    isRefresh = false;
+  }
   /**
    * Update clipboard after CUT node. Detain PathNotFoundException with same name sibling node
    * @param clipboardCommands

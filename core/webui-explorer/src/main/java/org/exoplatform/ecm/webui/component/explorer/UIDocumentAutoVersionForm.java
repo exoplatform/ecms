@@ -1,7 +1,9 @@
 package org.exoplatform.ecm.webui.component.explorer;
 
 import org.exoplatform.ecm.webui.component.explorer.rightclick.manager.PasteManageComponent;
+import org.exoplatform.services.cms.actions.ActionServiceContainer;
 import org.exoplatform.services.cms.documents.TrashService;
+import org.exoplatform.services.command.action.ActionService;
 import org.exoplatform.webui.core.UIApplication;
 import org.exoplatform.services.cms.clipboard.jcr.model.ClipboardCommand;
 import org.exoplatform.services.cms.documents.AutoVersionService;
@@ -43,7 +45,6 @@ import java.util.regex.Matcher;
                 @EventConfig(listeners = UIDocumentAutoVersionForm.KeepBothActionListener.class),
                 @EventConfig(listeners = UIDocumentAutoVersionForm.CreateNewVersionActionListener.class),
                 @EventConfig(listeners = UIDocumentAutoVersionForm.ReplaceActionListener.class),
-                @EventConfig(listeners = UIDocumentAutoVersionForm.CreateVersionOrReplaceActionListener.class),
                 @EventConfig(listeners = UIDocumentAutoVersionForm.OnChangeActionListener.class),
                 @EventConfig(listeners = UIDocumentAutoVersionForm.CancelActionListener.class, phase = Event.Phase.DECODE)
         }
@@ -70,6 +71,7 @@ public class UIDocumentAutoVersionForm extends UIForm implements UIPopupComponen
   private static Set<ClipboardCommand> clipboardCommands = null;
   private static ClipboardCommand currentClipboard = null;
 
+  private static AutoVersionService autoVersionService = WCMCoreUtils.getService(AutoVersionService.class);
   @Override
   public void activate() { }
 
@@ -134,10 +136,16 @@ public class UIDocumentAutoVersionForm extends UIForm implements UIPopupComponen
       if (!"/".equals(destPath)) destPath = destPath.concat("/");
       destPath = destPath.concat(sourceNode.getName());
 
-      if(!chkRem || !chkRemNon) {
+      if(autoVersionComponent.isSingleProcess) {
         try {
-          copyNode(destSession, autoVersionComponent.getSourceWorkspace(),
-                  autoVersionComponent.getSourcePath(), destPath);
+          if(ClipboardCommand.CUT.equals(currentClipboard.getType())){
+            //cut process
+            PasteManageComponent.pasteByCut(currentClipboard, uiExplorer, destSession, currentClipboard.getWorkspace(),
+                    sourceNode.getPath(), destPath, WCMCoreUtils.getService(ActionServiceContainer.class), false,false, false);
+          }else {
+            copyNode(destSession, autoVersionComponent.getSourceWorkspace(),
+                    autoVersionComponent.getSourcePath(), destPath);
+          }
         } catch (ItemExistsException iee) {
           uiApp.addMessage(new ApplicationMessage("UIPopupMenu.msg.paste-node-same-name", null,
                   ApplicationMessage.WARNING));
@@ -155,13 +163,25 @@ public class UIDocumentAutoVersionForm extends UIForm implements UIPopupComponen
 
       Set<ClipboardCommand> _clipboardCommands = autoVersionComponent.getClipboardCommands();
       if(_clipboardCommands!=null && _clipboardCommands.size()>0){
+        if(ClipboardCommand.CUT.equals(currentClipboard.getType())){
+          //cut process
+          PasteManageComponent.pasteByCut(currentClipboard, uiExplorer, destSession, currentClipboard.getWorkspace(),
+                  sourceNode.getPath(), destPath, WCMCoreUtils.getService(ActionServiceContainer.class), false,false, false);
+        }else {
+          copyNode(destSession, autoVersionComponent.getSourceWorkspace(),
+                  autoVersionComponent.getSourcePath(), destPath);
+        }
         _clipboardCommands.remove(currentClipboard);
+        if(_clipboardCommands.isEmpty()){
+          closePopup(autoVersionComponent, uiExplorer, event);
+          return;
+        }
         PasteManageComponent.processPasteMultiple(destNode.getParent(), event, uiExplorer, _clipboardCommands, KEEP_BOTH);
       }else {
         closePopup(autoVersionComponent, uiExplorer, event);
       }
 
-      closePopup(autoVersionComponent, uiExplorer, event);
+      if(chkRemVersion.getValue() && chkRemNonVersioned.getValue()) closePopup(autoVersionComponent, uiExplorer, event);
     }
   }
 
@@ -186,8 +206,12 @@ public class UIDocumentAutoVersionForm extends UIForm implements UIPopupComponen
 
       Node destNode = (Node)destSession.getItem(destPath);
       if(autoVersionComponent.isSingleProcess){
-        AutoVersionService autoVersionService = WCMCoreUtils.getService(AutoVersionService.class);
-        autoVersionService.autoVersion(destNode, sourceNode);
+        if(ClipboardCommand.CUT.equals(currentClipboard.getType())){
+          PasteManageComponent.pasteByCut(currentClipboard, uijcrExplorer, destSession, currentClipboard.getWorkspace(),
+                  sourceNode.getPath(), destNode.getParent().getPath(), WCMCoreUtils.getService(ActionServiceContainer.class), false,false, true);
+        }else {
+          autoVersionService.autoVersion(destNode, sourceNode);
+        }
         closePopup(autoVersionComponent, uijcrExplorer, event);
         return;
       }
@@ -202,6 +226,14 @@ public class UIDocumentAutoVersionForm extends UIForm implements UIPopupComponen
           _clipboardCommands.remove(autoVersionComponent.getCurrentClipboard());
           AutoVersionService autoVersionService = WCMCoreUtils.getService(AutoVersionService.class);
           autoVersionService.autoVersion(destNode, sourceNode);
+        }else if (ClipboardCommand.CUT.equals(autoVersionComponent.getCurrentClipboard().getType())) {
+          PasteManageComponent.pasteByCut(currentClipboard, uijcrExplorer, destSession, currentClipboard.getWorkspace(),
+                  sourceNode.getPath(), destNode.getParent().getPath(), WCMCoreUtils.getService(ActionServiceContainer.class), false,false, true);
+          _clipboardCommands.remove(autoVersionComponent.getCurrentClipboard());
+        }
+        if(_clipboardCommands.isEmpty()){
+          closePopup(autoVersionComponent, uijcrExplorer, event);
+          return;
         }
         PasteManageComponent.processPasteMultiple(destNode.getParent(), event, uijcrExplorer, _clipboardCommands, CREATE_VERSION);
       }else {
@@ -268,16 +300,6 @@ public class UIDocumentAutoVersionForm extends UIForm implements UIPopupComponen
       }
 
       if(chkRemVersion.getValue() && chkRemNonVersioned.getValue()) closePopup(autoVersionComponent, uijcrExplorer, event);
-    }
-  }
-
-  public static class CreateVersionOrReplaceActionListener extends EventListener<UIDocumentAutoVersionForm> {
-    @Override
-    public void execute(Event<UIDocumentAutoVersionForm> event) throws Exception {
-      UIDocumentAutoVersionForm uiConfirm = event.getSource();
-      UIPopupWindow popupAction = uiConfirm.getAncestorOfType(UIPopupWindow.class) ;
-      popupAction.setShow(true) ;
-      event.getRequestContext().addUIComponentToUpdateByAjax(popupAction);
     }
   }
 
