@@ -27,8 +27,6 @@ import org.exoplatform.webui.ext.filter.UIExtensionFilters;
 import java.util.Arrays;
 import java.util.List;
 
-import javax.ws.rs.core.MediaType;
-
 /**
  * Default WebUI component for Cloud Drive files. It shows content of remote file by its URL in iframe on file
  * page in eXo Documents.<br>
@@ -59,18 +57,6 @@ public class DefaultFileViewer extends AbstractFileViewer {
   @UIExtensionFilters
   public List<UIExtensionFilter> getFilters() {
     return FILTERS;
-  }
-
-  /**
-   * {@inheritDoc}
-   */
-  @Override
-  public boolean isViewable() {
-    if (super.isViewable()) {
-      String mimeType = file.getType();
-      return mimeType.startsWith("text/") || mimeType.startsWith("image/") || mimeType.startsWith("application/xhtml+");
-    }
-    return false;
   }
 
   /**

@@ -51,7 +51,9 @@ import java.util.Arrays;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
+import java.util.Queue;
 import java.util.concurrent.ConcurrentHashMap;
+import java.util.concurrent.ConcurrentLinkedQueue;
 
 import javax.jcr.Item;
 import javax.jcr.ItemNotFoundException;
@@ -177,6 +179,8 @@ public class CloudFileActionService implements Startable {
    */
   protected class LinkTrashListener implements EventListener {
 
+    private final Queue<String> processingLinks = new ConcurrentLinkedQueue<String>();
+
     /**
      * {@inheritDoc}
      */
@@ -198,37 +202,42 @@ public class CloudFileActionService implements Startable {
                     LOG.debug("Cloud File link trashed. User: " + event.getUserID() + ". Path: " + eventPath);
                   }
                   // update removals with trashed path
-                  String cloudFileUUID = fileNode.getUUID();
-                  removedLinks.values().remove(cloudFileUUID);
-                  removedLinks.put(eventPath, cloudFileUUID);
-                  // remove symlink with a delay in another thread
-                  workerExecutor.submit(new Runnable() {
-                    @Override
-                    public void run() {
-                      try {
-                        Thread.sleep(1000 * 2); // wait a bit for ECMS actions
+                  final String cloudFileUUID = fileNode.getUUID();
+                  if (!processingLinks.contains(cloudFileUUID)) {
+                    processingLinks.add(cloudFileUUID);
+                    removedLinks.values().remove(cloudFileUUID);
+                    removedLinks.put(eventPath, cloudFileUUID);
+                    // remove symlink with a delay in another thread
+                    workerExecutor.submit(new Runnable() {
+                      @Override
+                      public void run() {
+                        try {
+                          Thread.sleep(1000 * 2); // wait a bit for ECMS actions
 
-                        Item linkItem = systemSession().getItem(eventPath);
-                        if (linkItem.isNode()) {
-                          Node linkNode = (Node) linkItem;
-                          Node parent = linkNode.getParent();
-                          linkNode.remove();
-                          parent.save();
-                          if (LOG.isDebugEnabled()) {
-                            LOG.debug("Cloud File link '" + linkItem.getName() + "' successfully removed from the Trash.");
+                          Item linkItem = systemSession().getItem(eventPath);
+                          if (linkItem.isNode()) {
+                            Node linkNode = (Node) linkItem;
+                            Node parent = linkNode.getParent();
+                            linkNode.remove();
+                            parent.save();
+                            if (LOG.isDebugEnabled()) {
+                              LOG.debug("Cloud File link '" + linkItem.getName() + "' successfully removed from the Trash.");
+                            }
                           }
+                        } catch (PathNotFoundException e) {
+                          // node already deleted
+                          LOG.warn("Cloud File " + eventPath + " node already removed directly from JCR: " + e.getMessage());
+                        } catch (InterruptedException e) {
+                          LOG.warn("Cloud File symlink remover interrupted " + e.getMessage());
+                          Thread.currentThread().interrupt();
+                        } catch (Throwable e) {
+                          LOG.error("Error removing node of Cloud File " + eventPath + ". " + e.getMessage(), e);
+                        } finally {
+                          processingLinks.remove(cloudFileUUID);
                         }
-                      } catch (PathNotFoundException e) {
-                        // node already deleted
-                        LOG.warn("Cloud File " + eventPath + " node already removed directly from JCR: " + e.getMessage());
-                      } catch (InterruptedException e) {
-                        LOG.warn("Cloud File symlink remover interrupted " + e.getMessage());
-                        Thread.currentThread().interrupt();
-                      } catch (Throwable e) {
-                        LOG.error("Error removing node of Cloud File " + eventPath + ". " + e.getMessage(), e);
                       }
-                    }
-                  });
+                    });
+                  } // else, link already processing
                 } else {
                   LOG.warn("Cloud Drive not connected for " + fileNode.getPath() + ". Drive: " + localDrive);
                 }
@@ -385,7 +394,8 @@ public class CloudFileActionService implements Startable {
 
   public DriveData getNodeDrive(Node node) throws Exception {
     String groupId = getDriveNameFromPath(node.getPath());
-    // TODO in case of user drive its home path may be not filled with actual value (contains $userId instead)
+    // TODO in case of user drive its home path may be not filled with actual value (contains $userId
+    // instead)
     return groupId != null ? documentDrives.getDriveByName(groupId) : null;
   }
 
@@ -409,7 +419,8 @@ public class CloudFileActionService implements Startable {
           // groupsPath.length()).split("/");
         } else if (drivePath.startsWith(usersPath)) {
           // personal drives have path /Users/${userId}/Private
-          // String[] upp = drivePath.substring(drivePath.indexOf(usersPath), usersPath.length()).split("/");
+          // String[] upp = drivePath.substring(drivePath.indexOf(usersPath),
+          // usersPath.length()).split("/");
         }
         return drive.getName();
       }
