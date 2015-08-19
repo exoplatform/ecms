@@ -3198,7 +3198,8 @@ public abstract class JCRLocalCloudDrive extends CloudDrive implements CloudDriv
 
     if (isConnected()) {
       // XXX real synchronization can be only issued by the drive owner, others see the current state
-      // It is not the best UX for shared folders as they can change the structure but until the owner will not
+      // It is not the best UX for shared folders as they can change the structure but until the owner will
+      // not
       // open it - it will reflect the last synced state. Indeed more efficient logic need to be implemented
       // respecting the cloud provider sharing capabilities (possible in dedicated connectors).
       String currentUser = currentUserName();
@@ -4024,8 +4025,9 @@ public abstract class JCRLocalCloudDrive extends CloudDrive implements CloudDriv
               name = fileTitle;
               continue;
             }
-          } catch (RepositoryException te) {
-            // assume any JCR error as not acceptable name
+          } catch (Throwable te) {
+            // assume any error as not acceptable name: it may be RepositoryException or
+            // NumberFormatException (e.g. when name in form TEXT[TEXT]) as well as other exceptions.
           }
         }
 

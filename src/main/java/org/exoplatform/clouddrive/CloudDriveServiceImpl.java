@@ -36,6 +36,7 @@ import java.util.Collection;
 import java.util.Collections;
 import java.util.HashMap;
 import java.util.HashSet;
+import java.util.Iterator;
 import java.util.LinkedHashMap;
 import java.util.LinkedHashSet;
 import java.util.Map;
@@ -212,7 +213,8 @@ public class CloudDriveServiceImpl implements CloudDriveService, Startable {
     String repoName = ((ManageableRepository) node.getSession().getRepository()).getConfiguration().getName();
     Map<CloudUser, CloudDrive> drives = repositoryDrives.get(repoName);
     if (drives != null) {
-      for (CloudDrive local : drives.values()) {
+      for (Iterator<CloudDrive> cditer = drives.values().iterator(); cditer.hasNext();) {
+        CloudDrive local = cditer.next();
         try {
           if (local.isInDrive(node)) {
             return local; // we found it
@@ -227,6 +229,8 @@ public class CloudDriveServiceImpl implements CloudDriveService, Startable {
           if (LOG.isDebugEnabled()) {
             LOG.debug(">> findDrive(" + node.getPath() + ") drive removed " + local + ": " + e.getMessage(), e);
           }
+          // XXX Aug 18 2015, indeed sometime it happens - thus clean it here
+          cditer.remove();
         }
       }
     }
@@ -241,7 +245,8 @@ public class CloudDriveServiceImpl implements CloudDriveService, Startable {
     String repoName = jcrService.getCurrentRepository().getConfiguration().getName();
     Map<CloudUser, CloudDrive> drives = repositoryDrives.get(repoName);
     if (drives != null) {
-      for (CloudDrive local : drives.values()) {
+      for (Iterator<CloudDrive> cditer = drives.values().iterator(); cditer.hasNext();) {
+        CloudDrive local = cditer.next();
         try {
           if (local.isDrive(workspace, path, true)) {
             return local; // we found it
@@ -256,6 +261,8 @@ public class CloudDriveServiceImpl implements CloudDriveService, Startable {
           if (LOG.isDebugEnabled()) {
             LOG.debug(">> findDrive(" + workspace + ":" + path + ") drive removed " + local + ": " + e.getMessage(), e);
           }
+          // XXX Aug 18 2015, indeed sometime it happens - thus clean it here
+          cditer.remove();
         }
       }
     }
