@@ -3,9 +3,27 @@
         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
         xsi:schemaLocation="http://www.exoplatform.org/xml/ns/kernel_1_2.xsd http://www.exoplatform.org/xml/ns/kernel_1_2.xsd"
         xmlns="http://www.exoplatform.org/xml/ns/kernel_1_2.xsd">
+  <external-component-plugins>
+    <target-component>org.exoplatform.services.resources.ResourceBundleService</target-component>
+    <component-plugin>
+      <name>UI Extension</name>
+      <set-method>addResourceBundle</set-method>
+      <type>org.exoplatform.services.resources.impl.BaseResourceBundlePlugin</type>
+      <init-params>
+        <values-param>
+          <name>init.resources</name>
+          <value>locale.ShareDocuments</value>
+        </values-param>
+        <values-param>
+          <name>portal.resource.names</name>
+          <value>locale.ShareDocuments</value>
+        </values-param>
+      </init-params>
+    </component-plugin>
+  </external-component-plugins>
 
-    <external-component-plugins>
-        <target-component>org.exoplatform.webui.ext.UIExtensionManager</target-component>
+  <external-component-plugins>
+  	<target-component>org.exoplatform.webui.ext.UIExtensionManager</target-component>
         <component-plugin>
             <name>SideBar Actions</name>
             <set-method>registerUIExtensionPlugin</set-method>
@@ -541,6 +559,17 @@
 				    <field name="component"><string>org.exoplatform.ecm.webui.component.explorer.rightclick.manager.OpenDocumentManageComponent</string></field>
 				  </object>
 				</object-param>
+
+        <object-param>
+          <name>ShareDocuments</name>
+            <object type="org.exoplatform.webui.ext.UIExtension">
+                <field name="type"><string>org.exoplatform.ecm.dms.UIActionBar</string></field>
+                <field name="name"><string>ShareDocuments</string></field>
+                <field name="rank"><int>1</int></field>
+                <field name="component"><string>org.exoplatform.ecm.webui.component.explorer.rightclick.manager.ShareDocumentsComponent</string></field>
+            </object>
+        </object-param>
+
 
             </init-params>
         </component-plugin>
@@ -1261,6 +1290,17 @@
 				    <field name="component"><string>org.exoplatform.ecm.webui.component.explorer.rightclick.manager.OpenDocumentManageComponent</string></field>
 				  </object>
 				</object-param>
+
+        <object-param>
+          <name>ShareDocuments</name>
+          <object type="org.exoplatform.webui.ext.UIExtension">
+            <field name="type"><string>org.exoplatform.ecm.dms.UIWorkingArea</string></field>
+            <field name="rank"> <int>1</int> </field>
+            <field name="name"> <string>ShareDocuments</string> </field>
+            <field name="category"> <string>ItemContextMenu_SingleSelection</string> </field>
+            <field name="component"> <string>org.exoplatform.ecm.webui.component.explorer.rightclick.manager.ShareDocumentsComponent</string></field>
+          </object>
+        </object-param>
 
             </init-params>
         </component-plugin>

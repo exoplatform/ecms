@@ -6,6 +6,8 @@ import org.exoplatform.services.cms.documents.DocumentTypeService;
 import org.exoplatform.services.cms.documents.impl.DocumentType;
 import org.exoplatform.services.cms.link.LinkManager;
 import org.exoplatform.services.cms.link.NodeFinder;
+import org.exoplatform.services.log.ExoLogger;
+import org.exoplatform.services.log.Log;
 import org.exoplatform.services.resources.ResourceBundleService;
 import org.exoplatform.services.rest.resource.ResourceContainer;
 import org.exoplatform.services.wcm.core.NodetypeConstant;
@@ -35,6 +37,7 @@ import java.util.ResourceBundle;
 @RolesAllowed("users")
 public class OpenInOfficeConnector implements ResourceContainer, Startable {
 
+  private Log log = ExoLogger.getExoLogger(OpenInOfficeConnector.class);
   private final String OPEN_DOCUMENT_ON_DESKTOP_ICO              = "uiIconOpenOnDesktop";
   private final String CONNECTOR_BUNDLE_LOCATION                 = "locale.wcm.resources.WCMResourceBundleConnector";
   private final String OPEN_DOCUMENT_ON_DESKTOP_RESOURCE_KEY = "OpenInOfficeConnector.label.exo.remote-edit.desktop";
@@ -118,16 +121,25 @@ public class OpenInOfficeConnector implements ResourceContainer, Startable {
       }
       if(!StringUtils.isEmpty(documentType.getIconClass())) ico=documentType.getIconClass();
     }
-    Node node = (Node)nodeFinder.getItem(workspace, filePath);
-    if (linkManager.isLink(node)) node = linkManager.getTarget(node);
+    Node node;
+    String nodePath = filePath;
+    boolean isFile=false;
+    try{
+      node = (Node)nodeFinder.getItem(workspace, filePath);
+      if (linkManager.isLink(node)) node = linkManager.getTarget(node);
+      nodePath = node.getPath();
+      isFile = node.isNodeType(NodetypeConstant.NT_FILE);
+    }catch(Exception ex){
+      if(log.isErrorEnabled()){log.error("Exception when get node with path: "+filePath);}
+    }
 
     JSONObject rs = new JSONObject();
     rs.put("ico", ico);
     rs.put("title", title);
     rs.put("repository", WCMCoreUtils.getRepository().getConfiguration().getName());
     rs.put("workspace", workspace);
-    rs.put("filePath", node.getPath());
-    rs.put("isFile", node.isNodeType(NodetypeConstant.NT_FILE));
+    rs.put("filePath", nodePath);
+    rs.put("isFile", isFile);
     rs.put("isMsoffice", msofficeMimeType.contains(","+extension+","));
 
     builder = Response.ok(rs.toString(), MediaType.APPLICATION_JSON);
