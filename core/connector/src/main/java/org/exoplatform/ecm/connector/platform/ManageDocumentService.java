@@ -420,7 +420,8 @@ public class ManageDocumentService implements ResourceContainer {
       @QueryParam("action") String action,
       @QueryParam("language") String language,
       @QueryParam("fileName") String fileName,
-      @QueryParam("uploadId") String uploadId) throws Exception {
+      @QueryParam("uploadId") String uploadId,
+      @QueryParam("existenceAction") String existenceAction) throws Exception {
     try {
       if ((workspaceName != null) && (driveName != null) && (currentFolder != null)) {
         Node currentFolderNode = getNode(Text.escapeIllegalJcrChars(driveName),
@@ -434,7 +435,7 @@ public class ManageDocumentService implements ResourceContainer {
                                            action,
                                            language,
                                            Text.escapeIllegalJcrChars(fileName),
-                                           uploadId);
+                                           uploadId, existenceAction);
       }
     } catch (Exception e) {
       if (LOG.isErrorEnabled()) {
@@ -574,6 +575,7 @@ public class ManageDocumentService implements ResourceContainer {
     }
     file.setAttribute("creator", sourceNode.getProperty("exo:owner").getString());
     file.setAttribute("path", displayNode.getPath());
+    file.setAttribute("isVersioned", String.valueOf(sourceNode.isNodeType(NodetypeConstant.MIX_VERSIONABLE)));
     if (sourceNode.isNodeType("nt:file")) {
       Node content = sourceNode.getNode("jcr:content");
       file.setAttribute("nodeType", content.getProperty("jcr:mimeType").getString());
@@ -741,12 +743,13 @@ public class ManageDocumentService implements ResourceContainer {
                                                  String action,
                                                  String language,
                                                  String fileName,
-                                                 String uploadId) throws Exception {
+                                                 String uploadId,
+                                                 String existenceAction) throws Exception {
     if (FileUploadHandler.SAVE_ACTION.equals(action)) {
       CacheControl cacheControl = new CacheControl();
       cacheControl.setNoCache(true);
       DocumentContext.getCurrent().getAttributes().put(DocumentContext.IS_SKIP_RAISE_ACT, true);
-      return fileUploadHandler.saveAsNTFile(currentFolderNode, uploadId, org.exoplatform.services.cms.impl.Utils.cleanName(fileName), language, siteName, userId);
+      return fileUploadHandler.saveAsNTFile(currentFolderNode, uploadId, org.exoplatform.services.cms.impl.Utils.cleanName(fileName), language, siteName, userId, existenceAction);
     }
     return fileUploadHandler.control(uploadId, action);
   }
