@@ -25,6 +25,7 @@ import javax.jcr.Session;
 import org.exoplatform.container.component.ComponentPlugin;
 import org.exoplatform.services.jcr.core.ManageableRepository;
 import org.exoplatform.services.jcr.ext.common.SessionProvider;
+import org.exoplatform.services.jcr.ext.hierarchy.NodeHierarchyCreator;
 import org.exoplatform.services.log.ExoLogger;
 import org.exoplatform.services.log.Log;
 import org.exoplatform.services.wcm.core.NodeLocation;
@@ -58,7 +59,7 @@ public class WebSchemaConfigServiceImpl implements WebSchemaConfigService, Start
    * @param configurationService the configuration service
    * @param hierarchyCreator the hierarchy creator
    */
-  public WebSchemaConfigServiceImpl(WCMConfigurationService configurationService) {
+  public WebSchemaConfigServiceImpl(WCMConfigurationService configurationService, NodeHierarchyCreator nodeHierarchyCreator) {
     this.wcmConfigService = WCMCoreUtils.getService(WCMConfigurationService.class);
   }
 
