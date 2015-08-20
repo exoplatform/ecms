@@ -1,5 +1,6 @@
 function UploadForm() {
 	this.uploadProgressTimer;
+	this.existingBehavior = "keepBoth";
 }
 
 UploadForm.prototype.showUploadForm = function() {
@@ -196,8 +197,11 @@ UploadForm.prototype.uploadFile = function() {
 						graphProgress.style.width = 100 + "%";
 						numberProgress.innerHTML = 100 + "%";
 						eXo.ecm.UploadForm.stopUpload = true;
+						var fileName = gj(iXML.getElementsByTagName("UploadProgress")).attr("fileName");
+						console.log(fileName);
 						uploadInfo.className = "UploadInfo Delete";
 						var uploadAction = gj(popupContainer).find("tr.UploadAction:first")[0];
+						gj(uploadAction).find("#fileName").val(fileName);
 						uploadAction.style.display = "";
 						clearInterval(eXo.ecm.UploadForm.uploadProgressTimer);
 					}
@@ -248,6 +252,65 @@ UploadForm.prototype.uploadFileDelete = function() {
 	eXo.ecm.UploadForm.showUploadForm();
 };
 
+var checkVersExistedFile = function(listFiles, fileName){
+	for (var i = 0; i < listFiles.length; i++) {
+		if(listFiles[i].name === fileName && listFiles[i].isVersioned === "true"){
+			return true;
+		}
+	}
+	return false;
+}
+
+UploadForm.prototype.preUploadFileSave = function() {
+	var uploadInfo = gj("#PopupContainer").find("tr.UploadAction:first")[0];
+	var fileName = gj(uploadInfo).find("#fileName").val();
+	var canVersioned = checkVersExistedFile(eXo.ecm.ECS.lstFiles, fileName);
+	if(eXo.ecm.ECS.lstFileName.indexOf(fileName) != -1){
+		gj("#auto-versioning-actions").remove();
+		var documentAuto = "<div id=\"auto-versioning-actions\" class=\"clearfix\" style=\"display:none;\" >";
+		documentAuto += "<div class=\"pull-left\" style=\"width: 50px;\">Existing file <span class=\"fileName\" >file.png</span></div>";
+		documentAuto += "<a href=\"javascript:void(0)\" class=\"pull-right action cancel\">Cancel </a>";
+		documentAuto += "<span class=\"pull-right\">&nbsp;or&nbsp; </span>";
+		if(checkVersExistedFile(eXo.ecm.ECS.lstFiles, fileName)) {
+			documentAuto += "<a href=\"javascript:void(0)\" class=\"pull-right action create-version\">Create a new version</a>";
+		}else {
+			documentAuto += "<a href=\"javascript:void(0)\" class=\"pull-right action replace\"> Replace</a>";
+		}
+		documentAuto += "<span class=\"pull-right\">,&nbsp;</span>";
+		documentAuto += "<a href=\"javascript:void(0)\" class=\"pull-right action keep-both\">Keep both</a>";
+		documentAuto += "</div>";
+
+		gj(uploadInfo).children('td').prepend(documentAuto);
+
+		gj("#auto-versioning-actions .cancel").bind("click", function(){
+			gj("#auto-versioning-actions").hide();
+		})
+
+		gj("#auto-versioning-actions .keep-both").unbind();
+		gj("#auto-versioning-actions .keep-both").bind("click", function(){
+			gj("#auto-versioning-actions").hide();
+			eXo.ecm.UploadForm.existingBehavior = "keep";
+			eXo.ecm.UploadForm.uploadFileSave();
+		})
+
+		gj("#auto-versioning-actions .create-version").unbind();
+		gj("#auto-versioning-actions .create-version").bind("click", function(){
+			gj("#auto-versioning-actions").hide();
+			eXo.ecm.UploadForm.existingBehavior = "createVersion";
+			eXo.ecm.UploadForm.uploadFileSave();
+		})
+
+		gj("#auto-versioning-actions .replace").unbind();
+		gj("#auto-versioning-actions .replace").bind("click", function(){
+			gj("#auto-versioning-actions").hide();
+			eXo.ecm.UploadForm.existingBehavior = "replace";
+			eXo.ecm.UploadForm.uploadFileSave();
+		})
+		gj("#auto-versioning-actions").show();
+	}else{
+		eXo.ecm.UploadForm.uploadFileSave();
+	}
+}
 UploadForm.prototype.uploadFileSave = function() {
 		var popupContainer = document.getElementById("PopupContainer");
 		var nodeName = '';
@@ -281,6 +344,7 @@ UploadForm.prototype.uploadFileSave = function() {
 		strParam += "&userId="+eXo.ecm.ECS.userId;
 		var uploadId = eXo.ecm.UploadForm.uploadId;
 		strParam +="&action=save&uploadId="+uploadId+"&fileName="+nodeName;
+		strParam +="&existenceAction="+eXo.ecm.UploadForm.existingBehavior;
 		var strConnector = eXo.ecm.ECS.connector.replace("/getDrivers?repositoryName=repository", "/");
 //		var strConnector = eXo.ecm.ECS.connector.replace("/getDrivers?repositoryName=repository", "/");
 		var connector = strConnector + eXo.ecm.ECS.cmdEcmDriver + eXo.ecm.ECS.controlUpload + "?"+ strParam + "&language="+eXo.ecm.ECS.userLanguage;

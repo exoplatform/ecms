@@ -85,6 +85,11 @@ public class FCKFileHandler {
     }else {
       file.setAttribute("size", "");
     }
+    if(sourceNode.isNodeType(NodetypeConstant.MIX_VERSIONABLE)){
+      file.setAttribute("isVersioned", String.valueOf(true));
+    }else{
+      file.setAttribute("isVersioned", String.valueOf(false));
+    }
     return file;
   }
 
