@@ -432,36 +432,29 @@
 	 * @param closeable: can close
 	 */
 	WCMUtils.prototype.showNotice = function(noticeMsg, closeable){
-		gj("#wcm-notice").remove();
+		gj("#_wcm-notice").remove();
 		//if(gj("#wcm-notice") === undefined){
-			var noticeHtml = "<div id=\"wcm-notice\" style=\"display: none;\" class=\"alert alert-success wcmAlertSuccess\"></div>";
-			gj("body").append(noticeHtml);
+		if(noticeMsg===undefined) return;
+		var noticeHtml = "<div id=\"_wcm-notice\" style=\"display: none;\" class=\"alert alert-success wcmAlertSuccess\"></div>";
+		var styleStr = "";
+
 		//}
-		var _noticeElem = document.getElementById("wcm-notice");
+		var _noticeElem = gj(noticeHtml);
 		if(noticeMsg === null || noticeMsg === '' || noticeMsg === undefined) {
-			_noticeElem.style.display = "none";
-			_noticeElem.innerHTML = "";
+			styleStr = "display:none";
 		} else {
-			var addressBar = gj("#UIAddressBar");
-			if(addressBar) {
-				var pos = gj("#UIAddressBar").position();
-				_noticeElem.style.display = "block";
-				_noticeElem.style.top = "40px";
-				_noticeElem.style.position = "fixed";
-			}else{
-
-			}
-
-			_noticeElem.style.display = "block";
-			_noticeElem.innerHTML  = '<i class="uiIconSuccess"></i>' + noticeMsg;
-			if(closeable) _noticeElem.innerHTML += '<a class="uiIconClose pull-right" style="cursor:pointer;" title="Close Window" onclick="eXo.ecm.WCMUtils.closeNotice();"></a>';
-			_noticeElem.style.marginLeft = "-" + _noticeElem.offsetWidth/2 + "px";
+			styleStr = "display:block; top:40px; position:fixed;";
+			var html  = '<i class="uiIconSuccess"></i>' + noticeMsg;
+			if(closeable) html += '<a class="uiIconClose pull-right" style="cursor:pointer;" title="Close Window" onclick="eXo.ecm.WCMUtils.closeNotice();"></a>';
 		}
-
+		_noticeElem.html(html);
+		gj("body").append(_noticeElem);
+		styleStr += "margin-left: -"+Math.ceil(_noticeElem.outerWidth()/2)+"px";
+		_noticeElem.attr("style", styleStr);
 	}
 
 	WCMUtils.prototype.closeNotice = function(){
-		var wcmNotice = document.getElementById("wcm-notice");
+		var wcmNotice = document.getElementById("_wcm-notice");
 		wcmNotice.style.display = "none";
 	}
 
