@@ -59,7 +59,7 @@ UploadForm.prototype.showUploadForm = function() {
 		fileNameUpload = fileNameUpload.replace(/^.*[\\\/]/, '');
 		var labelUpload = gj(uploadBtn).find(".noFile");
 		gj(labelUpload).text(fileNameUpload);
-		console.log(labelUpload);			
+		//console.log(labelUpload);
 		
 	  });
 	  gj(fileUpload).click();
@@ -198,7 +198,7 @@ UploadForm.prototype.uploadFile = function() {
 						numberProgress.innerHTML = 100 + "%";
 						eXo.ecm.UploadForm.stopUpload = true;
 						var fileName = gj(iXML.getElementsByTagName("UploadProgress")).attr("fileName");
-						console.log(fileName);
+						//console.log(fileName);
 						uploadInfo.className = "UploadInfo Delete";
 						var uploadAction = gj(popupContainer).find("tr.UploadAction:first")[0];
 						gj(uploadAction).find("#fileName").val(fileName);
