@@ -30,7 +30,7 @@ public class IsNotContainBinaryFilter extends UIExtensionAbstractFilter {
   public boolean accept(Map<String, Object> context) throws Exception {
     if (context == null) return true;
     Node currentNode = (Node) context.get(Node.class.getName());
-    if(currentNode.isNodeType(NodetypeConstant.NT_FILE)) {
+    if(NodetypeConstant.NT_FILE.equals(currentNode.getPrimaryNodeType().getName())) {
       try {
         String mimeType = currentNode.getNode(NodetypeConstant.JCR_CONTENT)
                 .getProperty(NodetypeConstant.JCR_MIME_TYPE).getString();
