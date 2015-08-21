@@ -113,11 +113,15 @@ public class DocumentSearchServiceConnector extends BaseContentSearchServiceConn
                                                                    BaseSearchServiceConnector.DEFAULT_SITENAME);
           pageName = getPageName(siteKey);
         }
-        url = "/" + handler + context.handler(handler).
-                      lang("").
-                      siteName(siteKey.getName()).
-                      siteType(SiteType.PORTAL.getName()).
-                      path(pageName+"?path=" +driveData.getName() + "/" + node.getPath()).renderLink();
+        try {
+          url = "/" + handler + context.handler(handler).
+                  lang("").
+                  siteName(siteKey.getName()).
+                  siteType(SiteType.PORTAL.getName()).
+                  path(pageName+"?path=" +driveData.getName() + "/" + node.getPath()).renderLink();
+        } catch (Exception e) {
+          LOG.debug("The current user does not have the needed permission to get the requested document");
+        }
       }
     }
     return URLDecoder.decode(url, "UTF-8");
