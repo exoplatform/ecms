@@ -213,6 +213,10 @@ public class UIDocumentAutoVersionForm extends UIForm implements UIPopupComponen
           autoVersionService.autoVersion(destNode, sourceNode);
         }
         closePopup(autoVersionComponent, uijcrExplorer, event);
+        String msg = event.getRequestContext().getApplicationResourceBundle().getString("DocumentAuto.message");
+        msg = msg.replace("{0}", "<span style=\"font-weight:bold;\">"+destNode.getName()+"</span>");
+        event.getRequestContext().getJavascriptManager().require("SHARED/wcm-utils", "wcm_utils")
+                .addScripts("eXo.ecm.WCMUtils.showNotice(\" "+msg+"\", 'true'); ");
         return;
       }
       if(destNode.isNodeType(NodetypeConstant.MIX_VERSIONABLE) && chkRemVersion.getValue()){
