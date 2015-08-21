@@ -14,9 +14,9 @@ UploadForm.prototype.showUploadForm = function() {
 	var popupContainer = document.getElementById("PopupContainer");
 	popupContainer.style.display = 'block';
 	popupContainer.style.width = "500px";
-	popupContainer.style.height = "222px";
+	popupContainer.style.height = "auto";
 	popupContainer.style.position = "absolute";
-	popupContainer.style.top = "194px";
+	popupContainer.style.top = "50%";
 	popupContainer.innerHTML = uploadContainer.innerHTML;
 	var iFrame = gj(popupContainer).find("iframe.iFrameUpload:first")[0];
 	var iContent = document.getElementById("iContentUpLoad").innerHTML;
@@ -76,11 +76,15 @@ UploadForm.prototype.alertFilename = function() {
 UploadForm.prototype.showAlert = function() {
 	eXo.ecm.UploadForm.removeMask();
 	var popupContainer = document.getElementById("PopupContainer");
-	popupContainer.style.display = 'block';
-	popupContainer.style.width = "100%";
-	popupContainer.style.height = "100%";
-	popupContainer.style.position = "absolute";
-	popupContainer.style.top = "0px";
+	//popupContainer.style.display = 'block';
+	//popupContainer.style.width = "100%";
+	//popupContainer.style.height = "100%";
+	//popupContainer.style.position = "absolute";
+	//popupContainer.style.top = "0px";
+	gj(popupContainer).attr("style", "display: block; height: 100px;left: 50%; position: absolute; top: 50%;" +
+	"visibility:   visible; width: 400px;z-index: 7;; transform: -moz-translate(-50%, -50%); " +
+	"-webkit-transform: translate(-50%, -50%); -ms-transform: translate(-50%, -50%); " +
+	"-o-transform: translate(-50%, -50%); transform: translate(-50%, -50%);");
 	var hideContainer = document.getElementById("hideContainer");
 	var alertContainer = gj(hideContainer).find("div.AlertContainer:first")[0];
 	popupContainer.innerHTML = alertContainer.innerHTML;
@@ -88,11 +92,14 @@ UploadForm.prototype.showAlert = function() {
 	var alertForm = gj(popupContainer).find("div.AlertForm:first")[0];
 	var maskLayer = gj(popupContainer).find("div.MaskLayer:first")[0];
 	if (maskLayer!=null) maskLayer.style.zIndex = alertForm.style.zIndex++;
-	alertForm.style.position = 'absolute';
-	var widthAlertForm = (gj(window).width() - alertForm.offsetWidth)/2;
-	var heightAlertForm = (gj(window).height() - alertForm.offsetHeight)/2;
-	alertForm.style.left = widthAlertForm + "px";
-	alertForm.style.top = heightAlertForm + "px";
+	//alertForm.style.position = 'absolute';
+	//var widthAlertForm = (gj(window).width() - alertForm.offsetWidth)/2;
+	//var heightAlertForm = (gj(window).height() - alertForm.offsetHeight)/2;
+	//alertForm.style.left = widthAlertForm + "px";
+	//alertForm.style.top = heightAlertForm + "px";
+	gj(alertForm).attr("style", "top:50%; left:50%; position: absolute; transform: -moz-translate(-50%, -50%); " +
+	"-webkit-transform: translate(-50%, -50%); -ms-transform: translate(-50%, -50%); " +
+	"-o-transform: translate(-50%, -50%); transform: translate(-50%, -50%);")
 }
 
 UploadForm.prototype.showMask = function(popup, isShowPopup) {
@@ -281,6 +288,7 @@ UploadForm.prototype.preUploadFileSave = function() {
 		documentAuto += "</div>";
 
 		gj(uploadInfo).children('td').prepend(documentAuto);
+		gj("#auto-versioning-actions").closest("#PopupContainer").addClass("versioning-popup");
 
 		gj("#auto-versioning-actions .cancel").bind("click", function(){
 			gj("#auto-versioning-actions").hide();
