@@ -188,8 +188,33 @@ public class CloudDriveServiceImpl implements CloudDriveService, Startable {
       fileSynchronizers.add((CloudFileSynchronizer) plugin);
     } else {
       LOG.warn("Cannot recognize component plugin for " + plugin.getName() + ": type " + plugin.getClass()
-          + " not supported");
+          + " not supported for addition");
     }
+  }
+
+  public void removePlugin(ComponentPlugin plugin) {
+    if (plugin instanceof CloudDriveConnector) {
+      // connectors
+      CloudDriveConnector impl = (CloudDriveConnector) plugin;
+      CloudDriveConnector removed = connectors.remove(impl.getProvider());
+      if (removed != null) {
+        LOG.info("Cloud Drive connector removed: " + removed.getName());
+      }
+    } else if (plugin instanceof CloudDriveListener) {
+      // TODO global listeners removal may not work from configuration (as equals/hashCode may differ)
+      if (drivesListeners.remove((CloudDriveListener) plugin)) {
+        LOG.info("Cloud Drive listener removed: " + plugin.getClass().getName());
+      }
+    } else if (plugin instanceof CloudFileSynchronizer) {
+      // TODO sync plugin removal may not work from configuration (as equals/hashCode may differ)
+      if (fileSynchronizers.remove((CloudFileSynchronizer) plugin)) {
+        LOG.info("Cloud Drive synchronizer removed: " + plugin.getClass().getName());
+      }
+    } else {
+      LOG.warn("Cannot recognize component plugin for " + plugin.getName() + ": type " + plugin.getClass()
+          + " not supported for removal");
+    }
+    // TODO implement CloudDriveEnvironment removal also
   }
 
   /**
