@@ -82,7 +82,8 @@ public class CreateNewVersionManageComponent extends UIAbstractManagerComponent 
         node.checkout();
       }
       node.getSession().save();
-      String msg = "A new version of the document "+node.getName()+" has been created successfully.";
+      String msg = event.getRequestContext().getApplicationResourceBundle().getString("DocumentAuto.message");
+      msg = msg.replace("{0}", "<span style=\"font-weight:bold;\">"+node.getName()+"</span>");
       event.getRequestContext().getJavascriptManager().require("SHARED/wcm-utils", "wcm_utils")
               .addScripts("eXo.ecm.WCMUtils.showNotice(\" "+msg+"\", 'true'); ");
     }
