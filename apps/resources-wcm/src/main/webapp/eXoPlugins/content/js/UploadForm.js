@@ -267,8 +267,8 @@ UploadForm.prototype.preUploadFileSave = function() {
 	var canVersioned = checkVersExistedFile(eXo.ecm.ECS.lstFiles, fileName);
 	if(eXo.ecm.ECS.lstFileName.indexOf(fileName) != -1){
 		gj("#auto-versioning-actions").remove();
-		var documentAuto = "<div id=\"auto-versioning-actions\" class=\"clearfix\" style=\"display:none;\" >";
-		documentAuto += "<div class=\"pull-left\" style=\"width: 50px;\">Existing file <span class=\"fileName\" >file.png</span></div>";
+		var documentAuto = "<div id=\"auto-versioning-actions\" class=\"alert alert-warning clearfix hidden\">";
+		documentAuto += "<div class=\"fileNameBox\"> <i class=\"uiIconWarning\"></i>Existing file <span class=\"fileName\" >file.png</span></div>";
 		documentAuto += "<a href=\"javascript:void(0)\" class=\"pull-right action cancel\">Cancel </a>";
 		documentAuto += "<span class=\"pull-right\">&nbsp;or&nbsp; </span>";
 		if(checkVersExistedFile(eXo.ecm.ECS.lstFiles, fileName)) {
