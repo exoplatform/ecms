@@ -117,7 +117,7 @@ public abstract class BaseSearchServiceConnector extends SearchServiceConnector 
    * @return the string
    */
   private String getSitesStr(Collection<String> sites) {
-    if (sites == null) return null;
+    if (sites == null || sites.size() == 0) return null;
     StringBuffer s = new StringBuffer();
     for (String site : sites) {
       s.append(site).append(',');
