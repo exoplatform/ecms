@@ -793,14 +793,18 @@ public class TestNewFolksonomyService extends BaseWCMTestCase {
     List<String> memberships = new ArrayList<String>();
     memberships.add("/platform/users");
     memberships.add("/platform/guests");
+    newFolksonomyService_.initTagPermissionListCache();
     assertFalse(newFolksonomyService_.canEditTag(0, memberships));
 
     memberships.clear();
+
     memberships.add("*:/platform/administrators");
+    newFolksonomyService_.initTagPermissionListCache();
     assertTrue(newFolksonomyService_.canEditTag(0, memberships));
 
     memberships.clear();
     memberships.add("manager:/platform/administrators");
+    newFolksonomyService_.initTagPermissionListCache();
     assertTrue(newFolksonomyService_.canEditTag(0, memberships));
 
     memberships.clear();
@@ -823,10 +827,20 @@ public class TestNewFolksonomyService extends BaseWCMTestCase {
 
     List<String> memberships = new ArrayList<String>();
     memberships.add("/platform/administrators");
-    newFolksonomyService_.removeTagPermission("*:/platform/administrators");
+
+    String tagPermission = "*:/platform/administrators";
+
+    newFolksonomyService_.initTagPermissionListCache();
+    // 1 item from getTagPermissionList
+    assertTrue("Wrong initial number of item in tag permission list", newFolksonomyService_.getTagPermissionList().size() == 1);
+
+    newFolksonomyService_.removeTagPermission(tagPermission);
+    assertTrue("Wrong number of item in tag permission list after removing " + tagPermission, newFolksonomyService_.getTagPermissionList() == null || newFolksonomyService_.getTagPermissionList().size() == 0);
 
     assertFalse(newFolksonomyService_.canEditTag(0, memberships));
-    newFolksonomyService_.addTagPermission("*:/platform/administrators");
+
+    newFolksonomyService_.addTagPermission(tagPermission);
+    assertTrue("Wrong tag permission list after restoring the configuration", tagPermission.equals(newFolksonomyService_.getTagPermissionList().get(0)));
   }
 
   

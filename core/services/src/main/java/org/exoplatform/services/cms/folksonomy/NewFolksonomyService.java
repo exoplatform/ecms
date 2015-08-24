@@ -234,6 +234,12 @@ public interface NewFolksonomyService {
   public void init() throws Exception;
 
   /**
+   * Initializes the predefined tag permission list
+   * @throws Exception
+   */
+  public void initTagPermissionListCache() throws Exception;
+
+  /**
    * Removes tag from a given document.
    *
    * @param tagPath Path of the tag.
