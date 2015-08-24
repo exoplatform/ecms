@@ -277,6 +277,10 @@ public class ConnectService implements ResourceContainer {
       drive.removeListener(this);
 
       this.error = drive.getUser().getProvider().getErrorMessage(error);
+      // XXX Aug 24: special logic for NPE
+      if (this.error == null && error instanceof NullPointerException) {
+        this.error = "null";
+      }
 
       try {
         rollback();
@@ -692,7 +696,7 @@ public class ConnectService implements ResourceContainer {
     ConnectResponse resp = new ConnectResponse();
 
     // TODO implement CSRF handing in state parameter
-    
+
     String requestHost = uriInfo.getRequestUri().getHost();
     if (state != null) {
       // state contains repoName set by the provider
