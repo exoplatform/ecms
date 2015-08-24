@@ -28,6 +28,7 @@ import javax.jcr.ItemExistsException;
 import javax.jcr.Node;
 import javax.jcr.Session;
 import javax.jcr.Workspace;
+import java.util.ResourceBundle;
 import java.util.Set;
 import java.util.regex.Matcher;
 
@@ -244,7 +245,9 @@ public class UIDocumentAutoVersionForm extends UIForm implements UIPopupComponen
         closePopup(autoVersionComponent, uijcrExplorer, event);
       }
 
-      if(chkRemVersion.getValue() && chkRemNonVersioned.getValue()) closePopup(autoVersionComponent, uijcrExplorer, event);
+      if((chkRemVersion.getValue() && chkRemVersion.isRendered()) &&
+              (chkRemNonVersioned.getValue() && chkRemNonVersioned.isRendered()))
+        closePopup(autoVersionComponent, uijcrExplorer, event);
     }
   }
 
@@ -303,7 +306,9 @@ public class UIDocumentAutoVersionForm extends UIForm implements UIPopupComponen
         closePopup(autoVersionComponent, uijcrExplorer, event);
       }
 
-      if(chkRemVersion.getValue() && chkRemNonVersioned.getValue()) closePopup(autoVersionComponent, uijcrExplorer, event);
+      if((chkRemVersion.getValue() && chkRemVersion.isRendered()) &&
+              (chkRemNonVersioned.getValue() && chkRemNonVersioned.isRendered()))
+        closePopup(autoVersionComponent, uijcrExplorer, event);
     }
   }
 
@@ -425,7 +430,7 @@ public class UIDocumentAutoVersionForm extends UIForm implements UIPopupComponen
     UIDocumentAutoVersionForm.currentClipboard = currentClipboard;
   }
 
-  private static void closePopup(UIDocumentAutoVersionForm autoVersionComponent,
+  public static void closePopup(UIDocumentAutoVersionForm autoVersionComponent,
                                  UIJCRExplorer uijcrExplorer, Event<?> event) throws Exception{
     UIPopupWindow popupAction = uijcrExplorer.findFirstComponentOfType(UIPopupWindow.class) ;
     popupAction.setShow(false) ;
