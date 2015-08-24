@@ -88,12 +88,13 @@ public class AutoVersionServiceImpl implements AutoVersionService{
    * {@inheritDoc}
    */
   @Override
-  public boolean isVersionSupport(Node currentNode) throws Exception {
+  public boolean isVersionSupport(String nodePath) throws Exception {
+    if(StringUtils.isEmpty(nodePath)) return false;
     for (String driveAutoVersion: lstDriveAutoVersion){
       String driveHomePath = manageDriveService.getDriveByName(StringUtils.trim(driveAutoVersion)).getHomePath();
       if(driveHomePath.startsWith(PERSIONAL_DRIVE_PREFIX)
-              && currentNode.getPath().startsWith(PERSIONAL_DRIVE_PREFIX)) return true;
-      if(currentNode.getPath().startsWith(driveHomePath)) return true;
+              && nodePath.startsWith(PERSIONAL_DRIVE_PREFIX)) return true;
+      if(nodePath.startsWith(driveHomePath)) return true;
     }
     return false;
   }

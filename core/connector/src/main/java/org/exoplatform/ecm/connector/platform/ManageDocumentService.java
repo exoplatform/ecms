@@ -578,7 +578,7 @@ public class ManageDocumentService implements ResourceContainer {
     file.setAttribute("creator", sourceNode.getProperty("exo:owner").getString());
     file.setAttribute("path", displayNode.getPath());
     file.setAttribute("isVersioned", String.valueOf(sourceNode.isNodeType(NodetypeConstant.MIX_VERSIONABLE)));
-    file.setAttribute("isVersionSupport", String.valueOf(autoVersionService.isVersionSupport(sourceNode)));
+    file.setAttribute("isVersionSupport", String.valueOf(autoVersionService.isVersionSupport(sourceNode.getPath())));
     if (sourceNode.isNodeType("nt:file")) {
       Node content = sourceNode.getNode("jcr:content");
       file.setAttribute("nodeType", content.getProperty("jcr:mimeType").getString());

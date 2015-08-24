@@ -47,6 +47,7 @@ import org.exoplatform.ecm.webui.component.explorer.UIWorkingArea;
 import org.exoplatform.ecm.webui.component.explorer.control.UIAddressBar;
 import org.exoplatform.ecm.webui.utils.JCRExceptionManager;
 import org.exoplatform.services.cms.clipboard.ClipboardService;
+import org.exoplatform.services.cms.documents.AutoVersionService;
 import org.exoplatform.services.cms.drives.DriveData;
 import org.exoplatform.services.cms.impl.Utils;
 import org.exoplatform.services.cms.link.LinkManager;
@@ -425,6 +426,7 @@ public class UITreeExplorer extends UIContainer {
 
       UIWorkingArea uiWorkingArea = uiExplorer.getChild(UIWorkingArea.class);
       UIDocumentWorkspace uiDocumentWorkspace = uiWorkingArea.getChild(UIDocumentWorkspace.class);
+      AutoVersionService autoVersionService = WCMCoreUtils.getService(AutoVersionService.class);
       if(!uiDocumentWorkspace.isRendered()) {
         uiWorkingArea.getChild(UIDrivesArea.class).setRendered(false);
         uiDocumentWorkspace.setRendered(true);
@@ -444,7 +446,8 @@ public class UITreeExplorer extends UIContainer {
           uiTreeExplorer.getLabel()  + "','" +
           uiExplorer.getCurrentPath() + "','" +
         Utils.getPersonalDrivePath(uiExplorer.getDriveData().getHomePath(),
-                               ConversationState.getCurrent().getIdentity().getUserId()) + "');");
+                               ConversationState.getCurrent().getIdentity().getUserId()) + "', '"+
+              autoVersionService.isVersionSupport(uiExplorer.getCurrentPath())+"');");
     }
 
   }

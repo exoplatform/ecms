@@ -15,6 +15,7 @@
 		this.invalidFiles = 0;
 		this.isCreateVersion = false;
 		this.isVersioned = false;
+		this.isSupportedVersioning=false;
 		//--------------Constraints--------------------------//
 		this.maxFileSize = 10;//MB
 		this.maxUploadCount = 2;
@@ -202,7 +203,7 @@
 	};
 
 
-	MultiUpload.prototype.setLocation = function(workspace, driveName, driveTitle, nodePath, drivePath) {
+	MultiUpload.prototype.setLocation = function(workspace, driveName, driveTitle, nodePath, drivePath, isSupportVersioning) {
 		if (nodePath.indexOf(drivePath) == 0) {
 			nodePath = nodePath.substring(drivePath.length);
 		}
@@ -212,6 +213,7 @@
 		eXo.ecm.MultiUpload.dropNodePath = nodePath;
 		eXo.ecm.MultiUpload.drivePath = drivePath;
 		eXo.ecm.MultiUpload.driveTitle = driveTitle;
+		eXo.ecm.Multiupload.isSupportedVersioning = isSupportVersioning;
 	};
 
 	//init all event handlers for the drop box
@@ -677,7 +679,7 @@
 		msgDiv.id = "msg" + id;
 	
 		loadContentDiv.appendChild(cancel);
-		if(eXo.ecm.MultiUpload.isVersioned){
+		if(eXo.ecm.MultiUpload.isVersioned && eXo.ecm.Multiupload.isSupportedVersioning){
 			loadContentDiv.appendChild(span2);
 			loadContentDiv.appendChild(createVersionDiv);
 		}else{

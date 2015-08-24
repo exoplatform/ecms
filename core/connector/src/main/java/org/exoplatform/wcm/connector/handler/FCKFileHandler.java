@@ -92,7 +92,7 @@ public class FCKFileHandler {
     }else{
       file.setAttribute("isVersioned", String.valueOf(false));
     }
-    file.setAttribute("isVersionSupport", String.valueOf(autoVersionService.isVersionSupport(sourceNode)));
+    file.setAttribute("isVersionSupport", String.valueOf(autoVersionService.isVersionSupport(sourceNode.getPath())));
     return file;
   }
 

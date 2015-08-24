@@ -84,6 +84,7 @@ import org.exoplatform.portal.webui.workspace.UIPortalApplication;
 import org.exoplatform.resolver.ResourceResolver;
 import org.exoplatform.services.cms.clipboard.ClipboardService;
 import org.exoplatform.services.cms.comments.CommentsService;
+import org.exoplatform.services.cms.documents.AutoVersionService;
 import org.exoplatform.services.cms.documents.DocumentTypeService;
 import org.exoplatform.services.cms.documents.FavoriteService;
 import org.exoplatform.services.cms.drives.DriveData;
@@ -1199,6 +1200,7 @@ public class UIDocumentInfo extends UIBaseNodePresentation {
       String workspaceName = event.getRequestContext().getRequestParameter("workspaceName");
       boolean findDrive = Boolean.getBoolean(event.getRequestContext().getRequestParameter("findDrive"));
       UIApplication uiApp = uicomp.getAncestorOfType(UIApplication.class);
+      AutoVersionService autoVersionService = WCMCoreUtils.getService(AutoVersionService.class);
       try {
         // Manage ../ and ./
         uri = LinkUtils.evaluatePath(uri);
@@ -1236,7 +1238,8 @@ public class UIDocumentInfo extends UIBaseNodePresentation {
                    uiTreeExplorer.getLabel()  + "','" +
                    uiExplorer.getCurrentPath() + "','" +
                    org.exoplatform.services.cms.impl.Utils.getPersonalDrivePath(uiExplorer.getDriveData().getHomePath(),
-                   ConversationState.getCurrent().getIdentity().getUserId())+ "');");
+                   ConversationState.getCurrent().getIdentity().getUserId())+ "', '"+
+                   autoVersionService.isVersionSupport(uiExplorer.getCurrentPath())+"');");
       } catch(ItemNotFoundException nu) {
         uiApp.addMessage(new ApplicationMessage("UIDocumentInfo.msg.null-exception", null, ApplicationMessage.WARNING)) ;
 

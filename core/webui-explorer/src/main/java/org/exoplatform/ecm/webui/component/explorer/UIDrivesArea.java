@@ -31,6 +31,7 @@ import org.exoplatform.ecm.webui.utils.JCRExceptionManager;
 import org.exoplatform.ecm.webui.utils.Utils;
 import org.exoplatform.portal.webui.util.Util;
 import org.exoplatform.services.cms.BasePath;
+import org.exoplatform.services.cms.documents.AutoVersionService;
 import org.exoplatform.services.cms.drives.DriveData;
 import org.exoplatform.services.cms.drives.ManageDriveService;
 import org.exoplatform.services.cms.views.ManageViewService;
@@ -290,6 +291,7 @@ public class UIDrivesArea extends UIContainer {
       }
       UIDocumentWorkspace uiDocumentWorkspace = uiWorkingArea.getChild(UIDocumentWorkspace.class);
       UIDocumentFormController controller = uiDocumentWorkspace.removeChild(UIDocumentFormController.class);
+      AutoVersionService autoVersionService = WCMCoreUtils.getService(AutoVersionService.class);
       if (controller != null) {
         controller.getChild(UIDocumentForm.class).releaseLock();
       }
@@ -302,7 +304,8 @@ public class UIDrivesArea extends UIContainer {
                  uiTreeExplorer.getLabel()  + "','" +
                  uiJCRExplorer.getCurrentPath() + "','" +
                  org.exoplatform.services.cms.impl.Utils.getPersonalDrivePath(uiJCRExplorer.getDriveData().getHomePath(),
-                 ConversationState.getCurrent().getIdentity().getUserId())+ "');");
+                 ConversationState.getCurrent().getIdentity().getUserId())+ "', '"+
+              autoVersionService.isVersionSupport(uiJCRExplorer.getCurrentPath())+"');");
       uiJCRExplorer.findFirstComponentOfType(UIDocumentInfo.class).getExpandedFolders().clear();
       uiJCRExplorer.updateAjax(event);
     }

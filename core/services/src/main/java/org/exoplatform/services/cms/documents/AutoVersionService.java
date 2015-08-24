@@ -11,7 +11,26 @@ import java.io.InputStream;
  * #comments here
  */
 public interface AutoVersionService {
+  /**
+   * Versioning for document
+   * @param currentNode
+   * @throws Exception
+   */
   public void autoVersion(Node currentNode) throws Exception;
+
+  /**
+   *  Versioning for document
+   * @param currentNode
+   * @param sourceNode
+   * @throws Exception
+   */
   public void autoVersion(Node currentNode, Node sourceNode) throws Exception;
-  public boolean isVersionSupport(Node currentNode) throws Exception;
+
+  /**
+   * Check support versioning of document
+   * @param nodePath
+   * @return
+   * @throws Exception
+   */
+  public boolean isVersionSupport(String nodePath) throws Exception;
 }

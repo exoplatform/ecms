@@ -28,6 +28,7 @@ import org.exoplatform.ecm.webui.utils.JCRExceptionManager;
 import org.exoplatform.ecm.webui.utils.Utils;
 import org.exoplatform.portal.application.PortalRequestContext;
 import org.exoplatform.portal.webui.util.Util;
+import org.exoplatform.services.cms.documents.AutoVersionService;
 import org.exoplatform.services.cms.drives.DriveData;
 import org.exoplatform.services.cms.drives.ManageDriveService;
 import org.exoplatform.services.cms.views.ManageViewService;
@@ -189,7 +190,8 @@ public class UIJCRExplorerPortlet extends UIPortletApplication {
 //    elementS.setAttribute("src", "/eXoWCMResources/javascript/eXo/wcm/backoffice/public/Components.js");
 //    response.addProperty(MimeResponse.MARKUP_HEAD_ELEMENT,elementS);
     UIJCRExplorer uiExplorer = explorerContainer.getChild(UIJCRExplorer.class);
-    UITreeExplorer uiTreeExplorer = uiExplorer.findFirstComponentOfType(UITreeExplorer.class);      
+    UITreeExplorer uiTreeExplorer = uiExplorer.findFirstComponentOfType(UITreeExplorer.class);
+    AutoVersionService autoVersionService = WCMCoreUtils.getService(AutoVersionService.class);
     context.getJavascriptManager().
     require("SHARED/multiUpload", "multiUpload").require("SHARED/jquery", "gj")
       .addScripts("multiUpload.setLocation('" + 
@@ -198,7 +200,8 @@ public class UIJCRExplorerPortlet extends UIPortletApplication {
                uiTreeExplorer.getLabel()  + "','" +
                uiExplorer.getCurrentPath() + "','" +
                org.exoplatform.services.cms.impl.Utils.getPersonalDrivePath(uiExplorer.getDriveData().getHomePath(),
-               ConversationState.getCurrent().getIdentity().getUserId())+ "');")
+               ConversationState.getCurrent().getIdentity().getUserId())+ "', '"+
+              autoVersionService.isVersionSupport(uiExplorer.getCurrentPath())+"');")
       .addScripts("gj(document).ready(function() { gj(\"*[rel='tooltip']\").tooltip();});");
     super.processRender(app, context);
   }
