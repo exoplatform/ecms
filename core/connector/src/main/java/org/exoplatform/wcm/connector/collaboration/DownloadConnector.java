@@ -66,7 +66,7 @@ public class DownloadConnector implements ResourceContainer{
         fileName = node.getProperty("exo:title").getString();
       }
       fileName = Text.unescapeIllegalJcrChars(fileName);
-      fileName = URLEncoder.encode(fileName,"utf-8");
+      fileName = URLEncoder.encode(fileName, "utf-8").replace("+", "%20");
       // In case version is specified, get file from version history
       if (version != null) {
         node = node.getVersionHistory().getVersion(version).getNode("jcr:frozenNode");
