@@ -13,5 +13,5 @@ import java.io.InputStream;
 public interface AutoVersionService {
   public void autoVersion(Node currentNode) throws Exception;
   public void autoVersion(Node currentNode, Node sourceNode) throws Exception;
-  public void autoVersion(Node currentNode, InputStream inputStream, String mimeType) throws Exception;
+  public boolean isVersionSupport(Node currentNode) throws Exception;
 }

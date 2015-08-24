@@ -43,7 +43,7 @@
 	MultiUpload.prototype.INUSE = "AlreadyInUse";
 	MultiUpload.prototype.KEEP = "Keep";
 	MultiUpload.prototype.REPLACE = "Replace";
-	MultiUpload.prototype.CREATE_VERSION = "Upload new version";
+	MultiUpload.prototype.CREATE_VERSION = "Upload new version"
 	MultiUpload.prototype.CANCEL_TXT = "Canceled";
 	MultiUpload.prototype.CANCEL = "Cancel";
 	MultiUpload.prototype.ABORT_ALL = "AbortAllConfirmation";
@@ -59,7 +59,7 @@
 		return eXo.ecm.WCMUtils.getBundle("UIMultiUpload.label." + msg, eXo.env.portal.language);
 	};
 
-	MultiUpload.prototype.loadMsg = function(inMsg, maxSizeMsg, waitingMsg, errorMsg, orMsg, inUseMsg, keepMsg, replaceMsg, canceled, cancel, abort) {
+	MultiUpload.prototype.loadMsg = function(inMsg, maxSizeMsg, waitingMsg, errorMsg, orMsg, inUseMsg, keepMsg, replaceMsg, canceled, cancel, abort, uploadNewVersion) {
 		eXo.ecm.MultiUpload.IN = inMsg;
 		eXo.ecm.MultiUpload.MAX_SIZE_ALERT = maxSizeMsg;
 		eXo.ecm.MultiUpload.WAITING_TXT = waitingMsg;
@@ -71,6 +71,7 @@
 		eXo.ecm.MultiUpload.CANCEL_TXT = canceled;
 		eXo.ecm.MultiUpload.CANCEL = cancel;
 		eXo.ecm.MultiUpload.ABORT_ALL = abort;
+		eXo.ecm.MultiUpload.CREATE_VERSION = uploadNewVersion;
 	};
 	//---------------All setter methods---------------------//
 	MultiUpload.prototype.setMaxFileSize = function(value) {

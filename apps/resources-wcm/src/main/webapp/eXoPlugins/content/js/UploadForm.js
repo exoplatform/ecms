@@ -1,6 +1,12 @@
 function UploadForm() {
 	this.uploadProgressTimer;
 	this.existingBehavior = "keepBoth";
+	this.document_auto_label_existing = eXo.ecm.WCMUtils.getBundle("DocumentAuto.label.existing",  eXo.env.portal.language);
+	this.document_auto_label_cancel   = eXo.ecm.WCMUtils.getBundle("DocumentAuto.label.cancel",  eXo.env.portal.language);
+	this.document_auto_label_or				= eXo.ecm.WCMUtils.getBundle("DocumentAuto.label.or",  eXo.env.portal.language)
+	this.document_auto_label_createVersion = eXo.ecm.WCMUtils.getBundle("DocumentAuto.label.createVersion",  eXo.env.portal.language);
+	this.document_auto_label_replace  = eXo.ecm.WCMUtils.getBundle("DocumentAuto.label.createVersion",  eXo.env.portal.language);
+	this.document_auto_label_keepBoth	= eXo.ecm.WCMUtils.getBundle("DocumentAuto.label.keepBoth",  eXo.env.portal.language);
 }
 
 UploadForm.prototype.showUploadForm = function() {
@@ -259,6 +265,15 @@ UploadForm.prototype.uploadFileDelete = function() {
 	eXo.ecm.UploadForm.showUploadForm();
 };
 
+var checkSupportVersion = function(listFiles, fileName){
+	for (var i = 0; i < listFiles.length; i++) {
+		if(listFiles[i].name === fileName && listFiles[i].isVersionSupport === "true"){
+			return true;
+		}
+	}
+	return false;
+}
+
 var checkVersExistedFile = function(listFiles, fileName){
 	for (var i = 0; i < listFiles.length; i++) {
 		if(listFiles[i].name === fileName && listFiles[i].isVersioned === "true"){
@@ -271,20 +286,21 @@ var checkVersExistedFile = function(listFiles, fileName){
 UploadForm.prototype.preUploadFileSave = function() {
 	var uploadInfo = gj("#PopupContainer").find("tr.UploadAction:first")[0];
 	var fileName = gj(uploadInfo).find("#fileName").val();
-	var canVersioned = checkVersExistedFile(eXo.ecm.ECS.lstFiles, fileName);
-	if(eXo.ecm.ECS.lstFileName.indexOf(fileName) != -1){
+
+	if(eXo.ecm.ECS.lstFileName.indexOf(fileName) != -1
+			&& checkSupportVersion(eXo.ecm.ECS.lstFiles, fileName)){
 		gj("#auto-versioning-actions").remove();
 		var documentAuto = "<div id=\"auto-versioning-actions\" class=\"alert alert-warning clearfix hidden\">";
-		documentAuto += "<div class=\"fileNameBox\"> <i class=\"uiIconWarning\"></i>Existing file <span class=\"fileName\" >file.png</span></div>";
-		documentAuto += "<a href=\"javascript:void(0)\" class=\"pull-right action cancel\">Cancel </a>";
-		documentAuto += "<span class=\"pull-right\">&nbsp;or&nbsp; </span>";
+		documentAuto += "<div class=\"fileNameBox\"> <i class=\"uiIconWarning\"></i>"+eXo.ecm.UploadForm.document_auto_label_existing+"<span class=\"fileName\" ></span></div>";
+		documentAuto += "<a href=\"javascript:void(0)\" class=\"pull-right action cancel\">"+eXo.ecm.UploadForm.document_auto_label_cancel+" </a>";
+		documentAuto += "<span class=\"pull-right\">&nbsp;"+eXo.ecm.UploadForm.document_auto_label_or+"&nbsp; </span>";
 		if(checkVersExistedFile(eXo.ecm.ECS.lstFiles, fileName)) {
-			documentAuto += "<a href=\"javascript:void(0)\" class=\"pull-right action create-version\">Create a new version</a>";
+			documentAuto += "<a href=\"javascript:void(0)\" class=\"pull-right action create-version\">"+eXo.ecm.UploadForm.document_auto_label_createVersion+"</a>";
 		}else {
-			documentAuto += "<a href=\"javascript:void(0)\" class=\"pull-right action replace\"> Replace</a>";
+			documentAuto += "<a href=\"javascript:void(0)\" class=\"pull-right action replace\"> "+eXo.ecm.UploadForm.document_auto_label_replace+"</a>";
 		}
 		documentAuto += "<span class=\"pull-right\">,&nbsp;</span>";
-		documentAuto += "<a href=\"javascript:void(0)\" class=\"pull-right action keep-both\">Keep both</a>";
+		documentAuto += "<a href=\"javascript:void(0)\" class=\"pull-right action keep-both\">"+eXo.ecm.UploadForm.document_auto_label_keepBoth+"</a>";
 		documentAuto += "</div>";
 
 		gj(uploadInfo).children('td').prepend(documentAuto);

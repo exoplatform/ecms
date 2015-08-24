@@ -3171,6 +3171,7 @@
 	    <Keep>Keep both</Keep>
 	    <Replace>Replace</Replace>
 	    <Canceled>Canceled</Canceled>
+      <UploadNewVersion>Upload new version</UploadNewVersion>
     <Cancel>#{word.cancel}</Cancel>
 	    <AbortAllConfirmation>Do you want to abort all files in progress?</AbortAllConfirmation>
   	</label>

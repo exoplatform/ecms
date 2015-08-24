@@ -6,6 +6,7 @@ import javax.jcr.Node;
 
 import org.exoplatform.container.PortalContainer;
 import org.exoplatform.ecm.connector.fckeditor.FCKUtils;
+import org.exoplatform.services.cms.documents.AutoVersionService;
 import org.exoplatform.services.cms.impl.Utils;
 import org.exoplatform.services.cms.link.LinkManager;
 import org.exoplatform.services.jcr.access.AccessControlEntry;
@@ -37,6 +38,7 @@ public class FCKFileHandler {
                                           String currentPortal,
                                           LinkManager linkManager) throws Exception {
     Element file = document.createElement("File");
+    AutoVersionService autoVersionService=WCMCoreUtils.getService(AutoVersionService.class);
     file.setAttribute("name", Utils.getTitle(displayNode));
     SimpleDateFormat formatter = (SimpleDateFormat) SimpleDateFormat.getDateTimeInstance(SimpleDateFormat.SHORT,
                                                                                          SimpleDateFormat.SHORT);
@@ -90,6 +92,7 @@ public class FCKFileHandler {
     }else{
       file.setAttribute("isVersioned", String.valueOf(false));
     }
+    file.setAttribute("isVersionSupport", String.valueOf(autoVersionService.isVersionSupport(sourceNode)));
     return file;
   }
 

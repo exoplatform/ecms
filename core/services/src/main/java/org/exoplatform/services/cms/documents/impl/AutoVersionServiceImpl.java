@@ -32,7 +32,6 @@ public class AutoVersionServiceImpl implements AutoVersionService{
 
   private static Log log = ExoLogger.getLogger(AutoVersionServiceImpl.class);
 
-  public static final String DOCUMENT_AUTO_VERSIONING_LISTENER = "drive.document.autoversioning.event.listener";
   private final String DRIVES_AUTO_VERSION = "ecms.documents.versioning.drives";
   private final String DRIVES_AUTO_VERSION_MAX = "ecms.documents.versions.max";
   private final String DRIVES_AUTO_VERSION_EXPIRED = "ecms.documents.versions.expiration";
@@ -67,17 +66,21 @@ public class AutoVersionServiceImpl implements AutoVersionService{
       createVersion(currentNode);
       return;
     }
-    List<DriveData> userDriveDatas = manageDriveService.getDriveByUserRoles(WCMCoreUtils.getRemoteUser(), Utils.getMemberships());
-
     for (String driveAutoVersion: lstDriveAutoVersion){
       if(driveAutoVersion.startsWith(PERSIONAL_DRIVE_PREFIX)) continue;
 
+      String driveHomePath = manageDriveService.getDriveByName(StringUtils.trim(driveAutoVersion)).getHomePath();
+      if(currentNode.getPath().startsWith(driveHomePath)){
+        createVersion(currentNode);
+        return;
+      }
+      /*
       for (DriveData driveData:userDriveDatas){
         if(currentNode.getPath().contains(driveData.getHomePath())){
           createVersion(currentNode);
           return;
         }
-      }
+      }*/
     }
   }
 
@@ -85,28 +88,14 @@ public class AutoVersionServiceImpl implements AutoVersionService{
    * {@inheritDoc}
    */
   @Override
-  public void autoVersion(Node currentNode, InputStream inputStream, String mimeType) throws Exception {
-    manageDriveService = WCMCoreUtils.getService(ManageDriveService.class);
-    if(currentNode.canAddMixin(NodetypeConstant.MIX_REFERENCEABLE)){
-      currentNode.addMixin(NodetypeConstant.MIX_REFERENCEABLE);
-      currentNode.save();
-    }
-    if(currentNode.getPath().startsWith(PERSIONAL_DRIVE_PREFIX)){
-      createVersion(currentNode);
-      return;
-    }
-    List<DriveData> userDriveDatas = manageDriveService.getDriveByUserRoles(WCMCoreUtils.getRemoteUser(), Utils.getMemberships());
-
+  public boolean isVersionSupport(Node currentNode) throws Exception {
     for (String driveAutoVersion: lstDriveAutoVersion){
-      if(driveAutoVersion.startsWith(PERSIONAL_DRIVE_PREFIX)) continue;
-
-      for (DriveData driveData:userDriveDatas){
-        if(currentNode.getPath().contains(driveData.getHomePath())){
-          createVersion(currentNode);
-          return;
-        }
-      }
+      String driveHomePath = manageDriveService.getDriveByName(StringUtils.trim(driveAutoVersion)).getHomePath();
+      if(driveHomePath.startsWith(PERSIONAL_DRIVE_PREFIX)
+              && currentNode.getPath().startsWith(PERSIONAL_DRIVE_PREFIX)) return true;
+      if(currentNode.getPath().startsWith(driveHomePath)) return true;
     }
+    return false;
   }
 
   @Override
