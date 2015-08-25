@@ -213,7 +213,7 @@
 		eXo.ecm.MultiUpload.dropNodePath = nodePath;
 		eXo.ecm.MultiUpload.drivePath = drivePath;
 		eXo.ecm.MultiUpload.driveTitle = driveTitle;
-		eXo.ecm.Multiupload.isSupportedVersioning = isSupportVersioning;
+		eXo.ecm.MultiUpload.isSupportedVersioning = isSupportVersioning;
 	};
 
 	//init all event handlers for the drop box
@@ -679,7 +679,7 @@
 		msgDiv.id = "msg" + id;
 	
 		loadContentDiv.appendChild(cancel);
-		if(eXo.ecm.MultiUpload.isVersioned && eXo.ecm.Multiupload.isSupportedVersioning){
+		if(eXo.ecm.MultiUpload.isVersioned && eXo.ecm.MultiUpload.isSupportedVersioning){
 			loadContentDiv.appendChild(span2);
 			loadContentDiv.appendChild(createVersionDiv);
 		}else{
@@ -875,7 +875,8 @@
 						var e = eXo.ecm.MultiUpload.handleReaderLoad(id, _existenceAction);
 						e(window.event);
 					}
-					if(nPercent === "100" && eXo.ecm.MultiUpload.notice === "createVersion"){
+					if(nPercent === "100" && eXo.ecm.MultiUpload.notice === "createVersion"
+							&& eXo.ecm.MultiUpload.existingBehavior[id] === "createVersion"){
 						eXo.ecm.WCMUtils.showNotice(eXo.ecm.MultiUpload.noticeMsg, true);
 						eXo.ecm.MultiUpload.docAutoClose(id);
 					}
@@ -1009,7 +1010,7 @@
 		  		  eval(decodeURIComponent(uiExplorer.innerHTML));
 		  		  eXo.ecm.MultiUpload.abortAllCancel();
 		  	  }
-					 eXo.ecm.WCMUtils.showNotice(eXo.ecm.MultiUpload.noticeMsg, true);
+					 if(eXo.ecm.MultiUpload.existingBehavior[progressID] === "createVersion") eXo.ecm.WCMUtils.showNotice(eXo.ecm.MultiUpload.noticeMsg, true);
 					 eXo.ecm.MultiUpload.docAutoClose(progressID);
 		  	  //process next upload request
 		  	  eXo.ecm.MultiUpload.processNextUploadRequestInQueue();

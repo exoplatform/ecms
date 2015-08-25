@@ -451,6 +451,7 @@
 		gj("body").append(_noticeElem);
 		styleStr += "margin-left: -"+Math.ceil(_noticeElem.outerWidth()/2)+"px";
 		_noticeElem.attr("style", styleStr);
+		setTimeout(function(){ eXo.ecm.WCMUtils.closeNotice(); }, 5000);
 	}
 
 	WCMUtils.prototype.closeNotice = function(){

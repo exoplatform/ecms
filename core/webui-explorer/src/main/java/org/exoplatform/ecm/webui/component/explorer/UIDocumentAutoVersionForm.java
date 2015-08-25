@@ -28,6 +28,8 @@ import javax.jcr.ItemExistsException;
 import javax.jcr.Node;
 import javax.jcr.Session;
 import javax.jcr.Workspace;
+import java.util.HashMap;
+import java.util.Map;
 import java.util.ResourceBundle;
 import java.util.Set;
 import java.util.regex.Matcher;
@@ -156,10 +158,13 @@ public class UIDocumentAutoVersionForm extends UIForm implements UIPopupComponen
         }
       }
       Node destNode = (Node)destSession.getItem(destPath);
-      if(destNode.isNodeType(NodetypeConstant.MIX_VERSIONABLE) && chkRemVersion.getValue()){
-        PasteManageComponent.setVersionedRemember(chkRem);
-      }else{
-        PasteManageComponent.setNonVersionedRemember(chkRemNon);
+      Map<String, Boolean> remember = new HashMap<String, Boolean>();
+      if(destNode.isNodeType(NodetypeConstant.MIX_VERSIONABLE) && chkRem){
+        remember.put("keepboth", true);
+        PasteManageComponent.setVersionedRemember(remember);
+      }else if(destNode.isNodeType(NodetypeConstant.MIX_VERSIONABLE) && chkRemNon){
+        remember.put("keepboth", true);
+        PasteManageComponent.setNonVersionedRemember(remember);
       }
 
       Set<ClipboardCommand> _clipboardCommands = autoVersionComponent.getClipboardCommands();
@@ -182,7 +187,7 @@ public class UIDocumentAutoVersionForm extends UIForm implements UIPopupComponen
         closePopup(autoVersionComponent, uiExplorer, event);
       }
 
-      if(chkRemVersion.getValue() && chkRemNonVersioned.getValue()) closePopup(autoVersionComponent, uiExplorer, event);
+      if((chkRem && chkRemNon)) closePopup(autoVersionComponent, uiExplorer, event);
     }
   }
 
@@ -194,6 +199,8 @@ public class UIDocumentAutoVersionForm extends UIForm implements UIPopupComponen
 
       UICheckBoxInput chkRemVersion = autoVersionComponent.findComponentById(REMEMBER_VERSIONED_COMPONENT);
       UICheckBoxInput chkRemNonVersioned = autoVersionComponent.findComponentById(REMEMBER_NONVERSIONED_COMPONENT);
+      boolean chkRem = chkRemVersion.isChecked() && chkRemVersion.isRendered();
+      boolean chkRemNon = chkRemNonVersioned.isChecked() && chkRemNonVersioned.isRendered();
       Session destSession = uijcrExplorer.getSessionByWorkspace(autoVersionComponent.getDestWorkspace());
       Session srcSession = uijcrExplorer.getSessionByWorkspace(autoVersionComponent.getSourceWorkspace());
       Node sourceNode = uijcrExplorer.getNodeByPath(autoVersionComponent.getSourcePath(), srcSession);
@@ -220,11 +227,15 @@ public class UIDocumentAutoVersionForm extends UIForm implements UIPopupComponen
                 .addScripts("eXo.ecm.WCMUtils.showNotice(\" "+msg+"\", 'true'); ");
         return;
       }
-      if(destNode.isNodeType(NodetypeConstant.MIX_VERSIONABLE) && chkRemVersion.getValue()){
-        PasteManageComponent.setVersionedRemember(chkRemVersion.isChecked() && chkRemVersion.isRendered());
-      }else{
-        PasteManageComponent.setNonVersionedRemember(chkRemNonVersioned.isChecked() && chkRemNonVersioned.isRendered());
+      Map<String, Boolean> remember = new HashMap<String, Boolean>();
+      if(destNode.isNodeType(NodetypeConstant.MIX_VERSIONABLE) && chkRem){
+        remember.put("createVersion", true);
+        PasteManageComponent.setVersionedRemember(remember);
+      }else if(destNode.isNodeType(NodetypeConstant.MIX_VERSIONABLE) && chkRemNon){
+        remember.put("createVersion", true);
+        PasteManageComponent.setNonVersionedRemember(remember);
       }
+
       Set<ClipboardCommand> _clipboardCommands = autoVersionComponent.getClipboardCommands();
       if(_clipboardCommands!=null && _clipboardCommands.size()>0){
         if (ClipboardCommand.COPY.equals(autoVersionComponent.getCurrentClipboard().getType())) {
@@ -245,9 +256,7 @@ public class UIDocumentAutoVersionForm extends UIForm implements UIPopupComponen
         closePopup(autoVersionComponent, uijcrExplorer, event);
       }
 
-      if((chkRemVersion.getValue() && chkRemVersion.isRendered()) &&
-              (chkRemNonVersioned.getValue() && chkRemNonVersioned.isRendered()))
-        closePopup(autoVersionComponent, uijcrExplorer, event);
+      if(chkRem && chkRemNon) closePopup(autoVersionComponent, uijcrExplorer, event);
     }
   }
 
@@ -260,6 +269,8 @@ public class UIDocumentAutoVersionForm extends UIForm implements UIPopupComponen
 
       UICheckBoxInput chkRemVersion = autoVersionComponent.findComponentById(REMEMBER_VERSIONED_COMPONENT);
       UICheckBoxInput chkRemNonVersioned = autoVersionComponent.findComponentById(REMEMBER_NONVERSIONED_COMPONENT);
+      boolean chkRem = chkRemVersion.isChecked() && chkRemVersion.isRendered();
+      boolean chkRemNon = chkRemNonVersioned.isChecked() && chkRemNonVersioned.isRendered();
       Session destSession = uijcrExplorer.getSessionByWorkspace(autoVersionComponent.getDestWorkspace());
       Session srcSession = uijcrExplorer.getSessionByWorkspace(autoVersionComponent.getSourceWorkspace());
       Node sourceNode = uijcrExplorer.getNodeByPath(autoVersionComponent.getSourcePath(), srcSession);
@@ -273,6 +284,16 @@ public class UIDocumentAutoVersionForm extends UIForm implements UIPopupComponen
 
       Node destNode = (Node)destSession.getItem(destPath);
       Node destDriectory = destNode.getParent();
+
+      Map<String, Boolean> remember = new HashMap<String, Boolean>();
+      if(destNode.isNodeType(NodetypeConstant.MIX_VERSIONABLE) && chkRem){
+        remember.put("replace", true);
+        PasteManageComponent.setVersionedRemember(remember);
+      }else if(!destNode.isNodeType(NodetypeConstant.MIX_VERSIONABLE) && chkRemNon){
+        remember.put("replace", true);
+        PasteManageComponent.setNonVersionedRemember(remember);
+      }
+
       TrashService trashService = WCMCoreUtils.getService(TrashService.class);
       String trashID = trashService.moveToTrash(destNode, WCMCoreUtils.getUserSessionProvider());
       if(autoVersionComponent.isSingleProcess){
@@ -285,11 +306,6 @@ public class UIDocumentAutoVersionForm extends UIForm implements UIPopupComponen
         return;
       }
 
-      if(destNode.isNodeType(NodetypeConstant.MIX_VERSIONABLE) && chkRemVersion.getValue()){
-        PasteManageComponent.setVersionedRemember(chkRemVersion.isChecked() && chkRemVersion.isRendered());
-      }else{
-        PasteManageComponent.setNonVersionedRemember(chkRemNonVersioned.isChecked() && chkRemNonVersioned.isRendered());
-      }
       Set<ClipboardCommand> _clipboardCommands = autoVersionComponent.getClipboardCommands();
       if(_clipboardCommands!=null && _clipboardCommands.size()>0){
         if (ClipboardCommand.COPY.equals(autoVersionComponent.getCurrentClipboard().getType())) {
@@ -306,9 +322,7 @@ public class UIDocumentAutoVersionForm extends UIForm implements UIPopupComponen
         closePopup(autoVersionComponent, uijcrExplorer, event);
       }
 
-      if((chkRemVersion.getValue() && chkRemVersion.isRendered()) &&
-              (chkRemNonVersioned.getValue() && chkRemNonVersioned.isRendered()))
-        closePopup(autoVersionComponent, uijcrExplorer, event);
+      if(chkRem && chkRemNon) closePopup(autoVersionComponent, uijcrExplorer, event);
     }
   }
 
@@ -439,17 +453,19 @@ public class UIDocumentAutoVersionForm extends UIForm implements UIPopupComponen
     UICheckBoxInput chkRememberNonVersioned = autoVersionComponent.findComponentById(REMEMBER_NONVERSIONED_COMPONENT);
     chkRememberVersioned.setChecked(false);
     chkRememberNonVersioned.setChecked(false);
-    PasteManageComponent.setVersionedRemember(chkRememberVersioned.isChecked() && chkRememberVersioned.isRendered());
-    PasteManageComponent.setNonVersionedRemember(chkRememberNonVersioned.isChecked() && chkRememberNonVersioned.isRendered());
+    PasteManageComponent.setVersionedRemember(null);
+    PasteManageComponent.setNonVersionedRemember(null);
     currentClipboard = null;
+    event.getRequestContext().addUIComponentToUpdateByAjax(uijcrExplorer);
   }
 
   static public class OnChangeActionListener extends EventListener<UIDocumentAutoVersionForm> {
     public void execute(Event<UIDocumentAutoVersionForm> event) throws Exception {
-      UICheckBoxInput chkRememberVersioned = event.getSource().findComponentById(REMEMBER_VERSIONED_COMPONENT);
-      UICheckBoxInput chkRememberNonVersioned = event.getSource().findComponentById(REMEMBER_NONVERSIONED_COMPONENT);
-      PasteManageComponent.setVersionedRemember(chkRememberVersioned.isChecked() && chkRememberVersioned.isRendered());
-      PasteManageComponent.setNonVersionedRemember(chkRememberNonVersioned.isChecked() && chkRememberNonVersioned.isRendered());
+//      UICheckBoxInput chkRememberVersioned = event.getSource().findComponentById(REMEMBER_VERSIONED_COMPONENT);
+//      UICheckBoxInput chkRememberNonVersioned = event.getSource().findComponentById(REMEMBER_NONVERSIONED_COMPONENT);
+//      PasteManageComponent.setVersionedRemember(chkRememberVersioned.isChecked() && chkRememberVersioned.isRendered());
+//      PasteManageComponent.setNonVersionedRemember(chkRememberNonVersioned.isChecked() && chkRememberNonVersioned.isRendered());
+      event.getRequestContext().addUIComponentToUpdateByAjax(event.getSource());
     }
   }
 

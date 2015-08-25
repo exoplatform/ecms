@@ -1,12 +1,21 @@
 function UploadForm() {
 	this.uploadProgressTimer;
 	this.existingBehavior = "keepBoth";
-	this.document_auto_label_existing = eXo.ecm.WCMUtils.getBundle("DocumentAuto.label.existing",  eXo.env.portal.language);
-	this.document_auto_label_cancel   = eXo.ecm.WCMUtils.getBundle("DocumentAuto.label.cancel",  eXo.env.portal.language);
-	this.document_auto_label_or				= eXo.ecm.WCMUtils.getBundle("DocumentAuto.label.or",  eXo.env.portal.language)
-	this.document_auto_label_createVersion = eXo.ecm.WCMUtils.getBundle("DocumentAuto.label.createVersion",  eXo.env.portal.language);
-	this.document_auto_label_replace  = eXo.ecm.WCMUtils.getBundle("DocumentAuto.label.createVersion",  eXo.env.portal.language);
-	this.document_auto_label_keepBoth	= eXo.ecm.WCMUtils.getBundle("DocumentAuto.label.keepBoth",  eXo.env.portal.language);
+	this.document_auto_label_existing = "Existing file";
+	this.document_auto_label_cancel		= "Cancel";
+	this.document_auto_label_createVersion = "Create a new version";
+	this.document_auto_label_keepBoth	= "Keep both";
+	this.document_auto_label_or	= "or";
+	this.document_auto_label_replace	= "Replace";
+}
+
+UploadForm.prototype.initLanguage = function(){
+	this.document_auto_label_existing = UserLanguage.DocumentAuto_label_existing;
+	this.document_auto_label_cancel   = UserLanguage.DocumentAuto_label_cancel;
+	this.document_auto_label_or				= UserLanguage.DocumentAuto_label_or;
+	this.document_auto_label_createVersion = UserLanguage.DocumentAuto_label_createVersion;
+	this.document_auto_label_replace  = UserLanguage.document_auto_label_replace;
+	this.document_auto_label_keepBoth	= UserLanguage.document_auto_label_keepBoth;
 }
 
 UploadForm.prototype.showUploadForm = function() {
@@ -284,6 +293,7 @@ var checkVersExistedFile = function(listFiles, fileName){
 }
 
 UploadForm.prototype.preUploadFileSave = function() {
+	eXo.ecm.UploadForm.initLanguage();
 	var uploadInfo = gj("#PopupContainer").find("tr.UploadAction:first")[0];
 	var fileName = gj(uploadInfo).find("#fileName").val();
 

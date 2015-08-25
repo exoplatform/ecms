@@ -1,20 +1,20 @@
 package org.exoplatform.ecm.webui.component.explorer.rightclick.manager;
 
+import org.apache.commons.lang.StringEscapeUtils;
 import org.exoplatform.ecm.webui.component.explorer.UIJCRExplorer;
 import org.exoplatform.ecm.webui.component.explorer.UIWorkingArea;
 import org.exoplatform.ecm.webui.component.explorer.control.filter.IsContainBinaryFilter;
 import org.exoplatform.ecm.webui.component.explorer.control.filter.IsNotEditingDocumentFilter;
 import org.exoplatform.ecm.webui.component.explorer.control.filter.IsNotInTrashFilter;
 import org.exoplatform.ecm.webui.component.explorer.control.filter.IsVersionableFilter;
-import org.exoplatform.ecm.webui.component.explorer.control.listener.UIActionBarActionListener;
 import org.exoplatform.ecm.webui.component.explorer.control.listener.UIWorkingAreaActionListener;
 import org.exoplatform.services.log.ExoLogger;
 import org.exoplatform.services.log.Log;
 import org.exoplatform.services.wcm.core.NodetypeConstant;
+import org.exoplatform.wcm.webui.reader.ContentReader;
 import org.exoplatform.webui.config.annotation.ComponentConfig;
 import org.exoplatform.webui.config.annotation.EventConfig;
 import org.exoplatform.webui.event.Event;
-import org.exoplatform.webui.event.EventListener;
 import org.exoplatform.webui.ext.filter.UIExtensionFilter;
 import org.exoplatform.webui.ext.filter.UIExtensionFilters;
 import org.exoplatform.webui.ext.manager.UIAbstractManager;
@@ -83,9 +83,9 @@ public class CreateNewVersionManageComponent extends UIAbstractManagerComponent 
       }
       node.getSession().save();
       String msg = event.getRequestContext().getApplicationResourceBundle().getString("DocumentAuto.message");
-      msg = msg.replace("{0}", "<span style=\"font-weight:bold;\">"+node.getName()+"</span>");
+      msg = msg.replace("{0}", ContentReader.simpleEscapeHtml("<span style='font-weight:bold;'>" + node.getName() + "</span>"));
       event.getRequestContext().getJavascriptManager().require("SHARED/wcm-utils", "wcm_utils")
-              .addScripts("eXo.ecm.WCMUtils.showNotice(\" "+msg+"\", 'true'); ");
+              .addScripts("eXo.ecm.WCMUtils.showNotice(\""+msg+"\", 'true'); ");
     }
   }
 }
