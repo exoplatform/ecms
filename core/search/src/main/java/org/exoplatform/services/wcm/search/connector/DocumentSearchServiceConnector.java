@@ -121,6 +121,7 @@ public class DocumentSearchServiceConnector extends BaseContentSearchServiceConn
                   path(pageName+"?path=" +driveData.getName() + "/" + node.getPath()).renderLink();
         } catch (Exception e) {
           LOG.debug("The current user does not have the needed permission to get the requested document");
+          return null;
         }
       }
     }
