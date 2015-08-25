@@ -1050,6 +1050,7 @@
 		  	msg.parentNode.appendChild(cancelButton);
 		  	//remove redundant elements
 		  	gj("#keepBoth" + progressID, eXo.ecm.MultiUpload.document).remove();
+		  	gj("#createVersionDiv" + progressID, eXo.ecm.MultiUpload.document).remove();
 		  	gj("#replaceDiv" + progressID, eXo.ecm.MultiUpload.document).remove();
 		  	gj("#span" + progressID, eXo.ecm.MultiUpload.document).remove();
 		  	gj("#span1" + progressID, eXo.ecm.MultiUpload.document).remove();
