@@ -56,6 +56,7 @@ import java.util.List;
 import java.util.Set;
 
 import javax.jcr.Node;
+import javax.jcr.NodeIterator;
 import javax.jcr.PathNotFoundException;
 import javax.jcr.RepositoryException;
 
@@ -403,8 +404,7 @@ public class JCRLocalGoogleDrive extends JCRLocalCloudDrive implements UserToken
             }
 
             // TODO should we run full sync and restore the drive from the cloud side?
-            throw new CloudDriveException("Inconsistent changes: cannot find parent Node for '"
-                + gf.getTitle() + "'");
+            throw new CloudDriveException("Inconsistent changes: cannot find parent Node for '" + gf.getTitle() + "'");
           }
         }
 
@@ -617,8 +617,7 @@ public class JCRLocalGoogleDrive extends JCRLocalCloudDrive implements UserToken
      * {@inheritDoc}
      */
     @Override
-    public CloudFile createFolder(Node folderNode, Calendar created) throws CloudDriveException,
-                                                                     RepositoryException {
+    public CloudFile createFolder(Node folderNode, Calendar created) throws CloudDriveException, RepositoryException {
       // Folder metadata.
       File gf = new File();
       gf.setTitle(getTitle(folderNode));
@@ -664,15 +663,15 @@ public class JCRLocalGoogleDrive extends JCRLocalCloudDrive implements UserToken
      * {@inheritDoc}
      */
     @Override
-    public CloudFile updateFile(Node fileNode, Calendar modified) throws CloudDriveException,
-                                                                  RepositoryException {
+    public CloudFile updateFile(Node fileNode, Calendar modified) throws CloudDriveException, RepositoryException {
       // Update existing file metadata and parent (location).
-      File gf = api.file(getId(fileNode));
+      String id = getId(fileNode);
+      File gf = api.file(id);
       gf.setTitle(getTitle(fileNode));
       gf.setModifiedDate(new DateTime(modified.getTime()));
 
-      // merge parents (in case of move replace source on destination)
-      gf.setParents(mergeParents(getParentId(fileNode), gf.getParents(), findParents(fileNode)));
+      // merge parents (local changes has precedence)
+      gf.setParents(mergeParents(getParentId(fileNode), gf.getParents(), findParents(id)));
 
       try {
         api.update(gf);
@@ -724,15 +723,15 @@ public class JCRLocalGoogleDrive extends JCRLocalCloudDrive implements UserToken
      * {@inheritDoc}
      */
     @Override
-    public CloudFile updateFolder(Node folderNode, Calendar modified) throws CloudDriveException,
-                                                                      RepositoryException {
+    public CloudFile updateFolder(Node folderNode, Calendar modified) throws CloudDriveException, RepositoryException {
       // Update existing folder metadata and parent (location).
-      File gf = api.file(getId(folderNode));
+      String id = getId(folderNode);
+      File gf = api.file(id);
       gf.setTitle(getTitle(folderNode));
       gf.setModifiedDate(new DateTime(modified.getTime()));
 
-      // merge parents (in case of move replace source on destination)
-      gf.setParents(mergeParents(getParentId(folderNode), gf.getParents(), findParents(folderNode)));
+      // merge parents (local changes has precedence)
+      gf.setParents(mergeParents(getParentId(folderNode), gf.getParents(), findParents(id)));
 
       try {
         api.update(gf);
@@ -834,15 +833,13 @@ public class JCRLocalGoogleDrive extends JCRLocalCloudDrive implements UserToken
      * {@inheritDoc}
      */
     @Override
-    public CloudFile copyFile(Node srcFileNode, Node destFileNode) throws CloudDriveException,
-                                                                   RepositoryException {
+    public CloudFile copyFile(Node srcFileNode, Node destFileNode) throws CloudDriveException, RepositoryException {
       File gf = new File(); // new file
-      gf.setId(getId(srcFileNode));
       gf.setTitle(getTitle(destFileNode));
       gf.setParents(Arrays.asList(new ParentReference().setId(getParentId(destFileNode))));
 
       try {
-        gf = api.copy(gf);
+        gf = api.copy(getId(srcFileNode), gf);
       } catch (CloudDriveAccessException e) {
         checkAccessScope(e);
         throw e;
@@ -892,34 +889,21 @@ public class JCRLocalGoogleDrive extends JCRLocalCloudDrive implements UserToken
      * {@inheritDoc}
      */
     @Override
-    public CloudFile copyFolder(Node srcFolderNode, Node destFolderNode) throws CloudDriveException,
-                                                                         RepositoryException {
-      File gf = new File(); // new file
-      gf.setId(getId(srcFolderNode));
-      gf.setTitle(getTitle(destFolderNode));
-      gf.setParents(Arrays.asList(new ParentReference().setId(getParentId(destFolderNode))));
+    public CloudFile copyFolder(Node srcFolderNode, Node destFolderNode) throws CloudDriveException, RepositoryException {
+      // FYI Aug 25, 2015: in Google copy of folder has not sense as folder hasn't a content and copying it
+      // we only "link" to one more parent in Google Drive
 
-      try {
-        gf = api.copy(gf);
-      } catch (CloudDriveAccessException e) {
-        checkAccessScope(e);
-        throw e;
-      }
+      // Update copied folder metadata with a new parent (of destFolderNode node).
+      // String id = getId(srcFolderNode);
+      // File gf = api.file(id);
+      // gf.setTitle(getTitle(destFolderNode));
+      // gf.setModifiedDate(new DateTime(getModified(destFolderNode).getTime()));
+      //
+      // // merge parents (local changes has precedence)
+      // gf.setParents(mergeParents(getParentId(destFolderNode), gf.getParents(), findParents(id)));
 
-      // use actual dates from Google
-      Calendar created = api.parseDate(gf.getCreatedDate().toStringRfc3339());
-      Calendar modified = api.parseDate(gf.getModifiedDate().toStringRfc3339());
-
-      initFolder(destFolderNode,
-                 gf.getId(),
-                 gf.getTitle(),
-                 gf.getMimeType(),
-                 gf.getAlternateLink(),
-                 gf.getOwnerNames().get(0),
-                 gf.getLastModifyingUserName(),
-                 created,
-                 modified);
-
+      // TODO do actual copy with deep traversing
+      File gf = copySubtree(destFolderNode);
       return new JCRLocalCloudFile(destFolderNode.getPath(),
                                    gf.getId(),
                                    gf.getTitle(),
@@ -927,10 +911,94 @@ public class JCRLocalGoogleDrive extends JCRLocalCloudDrive implements UserToken
                                    gf.getMimeType(),
                                    gf.getLastModifyingUserName(),
                                    gf.getOwnerNames().get(0),
-                                   created,
-                                   modified,
+                                   getCreated(destFolderNode),
+                                   getModified(destFolderNode),
                                    destFolderNode,
                                    true);
+    }
+
+    protected File copySubtree(Node folderNode) throws RepositoryException,
+                                                GoogleDriveException,
+                                                DriveRemovedException,
+                                                CloudDriveAccessException,
+                                                NotFoundException {
+      // 1. Create the folder remotely
+      File gfolder = new File();
+      gfolder.setTitle(getTitle(folderNode));
+      gfolder.setMimeType(GoogleDriveAPI.FOLDER_MIMETYPE);
+      gfolder.setParents(Arrays.asList(new ParentReference().setId(getParentId(folderNode))));
+      gfolder.setModifiedDate(new DateTime(getModified(folderNode).getTime()));
+      try {
+        gfolder = api.insert(gfolder);
+        if (LOG.isDebugEnabled()) {
+          LOG.debug(">> copySubtree folder " + folderNode.getPath() + " " + gfolder.getId());
+        }
+
+        // update local folder node: use actual data from Google
+        Calendar created = api.parseDate(gfolder.getCreatedDate().toStringRfc3339());
+        Calendar modified = api.parseDate(gfolder.getModifiedDate().toStringRfc3339());
+        initFolder(folderNode,
+                   gfolder.getId(),
+                   gfolder.getTitle(),
+                   gfolder.getMimeType(),
+                   gfolder.getAlternateLink(),
+                   gfolder.getOwnerNames().get(0),
+                   gfolder.getLastModifyingUserName(),
+                   created,
+                   modified);
+      } catch (CloudDriveAccessException e) {
+        checkAccessScope(e);
+        throw e;
+      }
+
+      // 2. copy children files/folders recursively
+      for (NodeIterator niter = folderNode.getNodes(); niter.hasNext();) {
+        Node node = niter.nextNode();
+        if (isFile(node)) { // FYI folder also of file type
+          if (isFolder(node)) {
+            // copy folder recursively
+            copySubtree(node);
+          } else {
+            // do copy this file
+            File gfile = new File(); // new file
+            gfile.setTitle(getTitle(node));
+            gfile.setParents(Arrays.asList(new ParentReference().setId(gfolder.getId())));
+            try {
+              // this node has file id the same as its source locally, thus we can use it here and update with
+              // the actual value after the copy
+              String srcId = getId(node);
+              gfile = api.copy(srcId, gfile);
+              if (LOG.isDebugEnabled()) {
+                LOG.debug(">> copySubtree file " + node.getPath() + " " + srcId + " -> " + gfile.getId());
+              }
+
+              // update local file node: use actual data from Google
+              Calendar created = api.parseDate(gfile.getCreatedDate().toStringRfc3339());
+              Calendar modified = api.parseDate(gfile.getModifiedDate().toStringRfc3339());
+              long size = fileSize(gfile);
+              String link = gfile.getAlternateLink(); // link and editLink
+              initFile(node,
+                       gfile.getId(),
+                       gfile.getTitle(),
+                       gfile.getMimeType(),
+                       link,
+                       gfile.getEmbedLink(),
+                       gfile.getThumbnailLink(),
+                       gfile.getOwnerNames().get(0),
+                       gfile.getLastModifyingUserName(),
+                       created,
+                       modified,
+                       size);
+            } catch (CloudDriveAccessException e) {
+              checkAccessScope(e);
+              throw e;
+            }
+          }
+        }
+      }
+
+      // 3. return the copied folder
+      return gfolder;
     }
 
     /**
@@ -1096,9 +1164,7 @@ public class JCRLocalGoogleDrive extends JCRLocalCloudDrive implements UserToken
      * {@inheritDoc}
      */
     @Override
-    public CloudFile restore(String id, String path) throws NotFoundException,
-                                                     CloudDriveException,
-                                                     RepositoryException {
+    public CloudFile restore(String id, String path) throws NotFoundException, CloudDriveException, RepositoryException {
       throw new SyncNotSupportedException("Restore not supported");
     }
   }
@@ -1116,8 +1182,7 @@ public class JCRLocalGoogleDrive extends JCRLocalCloudDrive implements UserToken
                                 Node driveNode,
                                 SessionProviderService sessionProviders,
                                 NodeFinder finder,
-                                ExtendedMimeTypeResolver mimeTypes)
-                                    throws CloudDriveException, RepositoryException {
+                                ExtendedMimeTypeResolver mimeTypes) throws CloudDriveException, RepositoryException {
     super(user, driveNode, sessionProviders, finder, mimeTypes);
     getUser().api().getToken().addListener(this);
   }
@@ -1155,11 +1220,9 @@ public class JCRLocalGoogleDrive extends JCRLocalCloudDrive implements UserToken
    * @throws GoogleDriveException
    * @throws CloudDriveException
    */
-  protected static GoogleUser loadUser(API apiBuilder,
-                                       GoogleProvider provider,
-                                       Node driveNode) throws RepositoryException,
-                                                       GoogleDriveException,
-                                                       CloudDriveException {
+  protected static GoogleUser loadUser(API apiBuilder, GoogleProvider provider, Node driveNode) throws RepositoryException,
+                                                                                                GoogleDriveException,
+                                                                                                CloudDriveException {
     String username = driveNode.getProperty("ecd:cloudUserName").getString();
     String email = driveNode.getProperty("ecd:userEmail").getString();
     String userId = driveNode.getProperty("ecd:cloudUserId").getString();
@@ -1234,8 +1297,7 @@ public class JCRLocalGoogleDrive extends JCRLocalCloudDrive implements UserToken
 
       boolean updateScopes;
       try {
-        updateScopes = !GoogleDriveAPI.SCOPES_STRING.equals(driveNode.getProperty("gdrive:scopes")
-                                                                     .getString());
+        updateScopes = !GoogleDriveAPI.SCOPES_STRING.equals(driveNode.getProperty("gdrive:scopes").getString());
       } catch (PathNotFoundException e) {
         updateScopes = true;
       }
@@ -1340,9 +1402,7 @@ public class JCRLocalGoogleDrive extends JCRLocalCloudDrive implements UserToken
    * {@inheritDoc}
    */
   @Override
-  protected SyncCommand getSyncCommand() throws DriveRemovedException,
-                                         SyncNotSupportedException,
-                                         RepositoryException {
+  protected SyncCommand getSyncCommand() throws DriveRemovedException, SyncNotSupportedException, RepositoryException {
     return new Sync();
   }
 
@@ -1350,14 +1410,12 @@ public class JCRLocalGoogleDrive extends JCRLocalCloudDrive implements UserToken
    * {@inheritDoc}
    */
   @Override
-  protected CloudFileAPI createFileAPI() throws DriveRemovedException,
-                                         SyncNotSupportedException,
-                                         RepositoryException {
+  protected CloudFileAPI createFileAPI() throws DriveRemovedException, SyncNotSupportedException, RepositoryException {
     return new FileAPI();
   }
 
   /**
-   * Merge file's local and cloud parents (in case of move replace source on destination).
+   * Merge file's local and cloud parents (local changes has precedence).
    * 
    * @param parentId {@link String} current local parent id
    * @param cloudParents {@link List} of {@link ParentReference} on cloud side
@@ -1367,10 +1425,13 @@ public class JCRLocalGoogleDrive extends JCRLocalCloudDrive implements UserToken
   protected List<ParentReference> mergeParents(String parentId,
                                                List<ParentReference> cloudParents,
                                                Collection<String> localParentIds) {
+    // we take remote parents and leave only such that exists locally
+    // parentId also *may be* included to localParentIds collection (if it is saved)
     List<ParentReference> parents = new ArrayList<ParentReference>();
-    if (cloudParents != null && cloudParents.size() > 1) {
+    if (cloudParents != null) { // TODO don't use this: && cloudParents.size() > 1
       for (ParentReference cp : cloudParents) {
-        if (localParentIds.contains(cp.getId())) {
+        String cpid = cp.getId();
+        if (!parentId.equals(cpid) && localParentIds.contains(cpid)) {
           parents.add(cp);
         }
       }
