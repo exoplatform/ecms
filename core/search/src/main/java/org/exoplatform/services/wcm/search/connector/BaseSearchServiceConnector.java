@@ -171,9 +171,11 @@ public abstract class BaseSearchServiceConnector extends SearchServiceConnector 
                 //generate SearchResult object
                 DriveData driveData = getDriveData(retNode);
                 Calendar date = getDate(retNode);
+                String url = getPath(driveData, retNode, context);
+                if (url == null) continue;
                 EcmsSearchResult result = 
                 //  new SearchResult(url, title, excerpt, detail, imageUrl, date, relevancy);
-                    new EcmsSearchResult(getPath(driveData, retNode, context), 
+                    new EcmsSearchResult(url,
                                          getTitleResult(retNode), 
                                          retNode.getExcerpt(), 
                                          getDetails(retNode, context),
