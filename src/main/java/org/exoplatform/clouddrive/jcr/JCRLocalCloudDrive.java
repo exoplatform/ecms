@@ -57,7 +57,6 @@ import org.exoplatform.clouddrive.utils.IdentityHelper;
 import org.exoplatform.clouddrive.viewer.ContentReader;
 import org.exoplatform.container.ExoContainer;
 import org.exoplatform.container.ExoContainerContext;
-import org.exoplatform.services.jcr.core.ExtendedNode;
 import org.exoplatform.services.jcr.core.ManageableRepository;
 import org.exoplatform.services.jcr.ext.app.SessionProviderService;
 import org.exoplatform.services.jcr.ext.common.SessionProvider;
@@ -1488,7 +1487,7 @@ public abstract class JCRLocalCloudDrive extends CloudDrive implements CloudDriv
                 if (copiedParent != null) {
                   // skip sub-tree of already accepted for copy node
                   skipped.add(change);
-                  continue;                  
+                  continue;
                 } else {
                   copied.add(path);
                 }
@@ -1772,11 +1771,7 @@ public abstract class JCRLocalCloudDrive extends CloudDrive implements CloudDriv
     /**
      * {@inheritDoc}
      */
-    public Collection<String> findParents(Node fileNode) throws DriveRemovedException, RepositoryException {
-      return findParents(getId(fileNode));
-    }
-
-    protected Collection<String> findParents(String fileId) throws DriveRemovedException, RepositoryException {
+    public Collection<String> findParents(String fileId) throws DriveRemovedException, RepositoryException {
       Set<String> parentIds = new LinkedHashSet<String>();
       for (Node fn : findNodes(Arrays.asList(fileId))) {
         Node p = fn.getParent(); // parent it is a cloud file or a cloud drive
