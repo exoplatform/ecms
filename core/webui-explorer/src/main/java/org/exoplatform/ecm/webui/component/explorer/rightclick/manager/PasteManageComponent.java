@@ -23,9 +23,7 @@ import java.util.HashMap;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
-import java.util.ResourceBundle;
 import java.util.Set;
-import java.util.Stack;
 import java.util.regex.Matcher;
 
 import javax.jcr.AccessDeniedException;
@@ -36,7 +34,6 @@ import javax.jcr.Node;
 import javax.jcr.PathNotFoundException;
 import javax.jcr.Property;
 import javax.jcr.PropertyIterator;
-import javax.jcr.RepositoryException;
 import javax.jcr.Session;
 import javax.jcr.Value;
 import javax.jcr.Workspace;
@@ -126,7 +123,7 @@ public class PasteManageComponent extends UIAbstractManagerComponent {
       throws Exception {
     ClipboardService clipboardService = WCMCoreUtils.getService(ClipboardService.class);
     String userId = ConversationState.getCurrent().getIdentity().getUserId();
-    
+
     UIWorkingArea uiWorkingArea = event.getSource().getParent();
     String destPath = event.getRequestContext().getRequestParameter(OBJECTID);
     String nodePath = null;
@@ -266,68 +263,108 @@ public class PasteManageComponent extends UIAbstractManagerComponent {
     int pasteNum = 0;
     Set<ClipboardCommand> _virtualClipboards = new HashSet<>(virtualClipboards);
     Set<ClipboardCommand> processList = new HashSet<>(virtualClipboards);
+    UIApplication uiApp = uiExplorer.getAncestorOfType(UIApplication.class);
     ActionServiceContainer actionContainer = uiExplorer.getApplicationComponent(ActionServiceContainer.class);
     for (ClipboardCommand clipboard : virtualClipboards) {
       pasteNum++;
       Node srcNode = null;
       try{
         srcNode = (Node)uiExplorer.getSessionByWorkspace(clipboard.getWorkspace()).getItem(clipboard.getSrcPath());
-      }catch(RepositoryException re){
-        continue;
-      }
-      if(srcNode==null) continue;
-      String destPath = destNode.getPath();
-      if(destNode.hasNode(srcNode.getName()) ){
-        Node _destNode = destNode.getNode(srcNode.getName());
-        if(_destNode.isNodeType(NodetypeConstant.MIX_VERSIONABLE) && versionedRemember!=null){
-          if(BooleanUtils.isTrue(versionedRemember.get("keepboth"))) {
-            if(ClipboardCommand.COPY.equals(clipboard.getType())) {
-              pasteByCopy(destNode.getSession(), clipboard.getWorkspace(),
-                      clipboard.getSrcPath(), _destNode.getPath());
-            }else{
-              pasteByCut(clipboard, uiExplorer, _destNode.getSession(), clipboard.getWorkspace(), clipboard.getSrcPath(),
-                      _destNode.getPath(),actionContainer, false, false, false);
+        String destPath = destNode.getPath();
+        if(destNode.hasNode(srcNode.getName()) ){
+          Node _destNode = destNode.getNode(srcNode.getName());
+          if(_destNode.isNodeType(NodetypeConstant.MIX_VERSIONABLE) && versionedRemember!=null){
+            if(BooleanUtils.isTrue(versionedRemember.get("keepboth"))) {
+              if(ClipboardCommand.COPY.equals(clipboard.getType())) {
+                pasteByCopy(destNode.getSession(), clipboard.getWorkspace(),
+                        clipboard.getSrcPath(), _destNode.getPath());
+              }else{
+                pasteByCut(clipboard, uiExplorer, _destNode.getSession(), clipboard.getWorkspace(), clipboard.getSrcPath(),
+                        _destNode.getPath(),actionContainer, false, false, false);
+              }
             }
+            if(BooleanUtils.isTrue(versionedRemember.get("createVersion")))
+              makeVersion(destNode, _destNode, srcNode, clipboard, action, destPath, uiExplorer, event);
+            processList.remove(clipboard);
+            continue;
           }
-          if(BooleanUtils.isTrue(versionedRemember.get("createVersion")))
-            makeVersion(destNode, _destNode, srcNode, clipboard, action, destPath, uiExplorer);
-          processList.remove(clipboard);
-          continue;
-        }
-        if((!_destNode.isNodeType(NodetypeConstant.MIX_VERSIONABLE)) && nonVersionedRemember!=null){
-          if(BooleanUtils.isTrue(nonVersionedRemember.get("replace"))) {
-            String _destPath = _destNode.getPath();
-            TrashService trashService = WCMCoreUtils.getService(TrashService.class);
-            String trashID = trashService.moveToTrash(_destNode, WCMCoreUtils.getUserSessionProvider());
-            UIDocumentAutoVersionForm.copyNode(destNode.getSession(), clipboard.getWorkspace(),
-                    clipboard.getSrcPath(), _destPath);
-            Node deletedNode = trashService.getNodeByTrashId(trashID);
-            deletedNode.remove();
-            deletedNode.getSession().save();
-          }
-          if(BooleanUtils.isTrue(nonVersionedRemember.get("keepboth"))) {
-            if (ClipboardCommand.COPY.equals(clipboard.getType())) {
-              pasteByCopy(destNode.getSession(), clipboard.getWorkspace(),
-                      clipboard.getSrcPath(), _destNode.getPath());
-            } else {
-              pasteByCut(clipboard, uiExplorer, _destNode.getSession(), clipboard.getWorkspace(), clipboard.getSrcPath(),
-                      _destNode.getPath(), actionContainer, false, false, false);
+          if((!_destNode.isNodeType(NodetypeConstant.MIX_VERSIONABLE)) && nonVersionedRemember!=null){
+            if(BooleanUtils.isTrue(nonVersionedRemember.get("replace"))) {
+              if(ClipboardCommand.CUT.equals(clipboard.getType())) continue;
+              String _destPath = _destNode.getPath();
+              TrashService trashService = WCMCoreUtils.getService(TrashService.class);
+              String trashID = trashService.moveToTrash(_destNode, WCMCoreUtils.getUserSessionProvider());
+              UIDocumentAutoVersionForm.copyNode(destNode.getSession(), clipboard.getWorkspace(),
+                      clipboard.getSrcPath(), _destPath, uiApp, uiExplorer, event, ClipboardCommand.COPY);
+              Node deletedNode = trashService.getNodeByTrashId(trashID);
+              deletedNode.remove();
+              deletedNode.getSession().save();
             }
+            if(BooleanUtils.isTrue(nonVersionedRemember.get("keepboth"))) {
+              if (ClipboardCommand.COPY.equals(clipboard.getType())) {
+                pasteByCopy(destNode.getSession(), clipboard.getWorkspace(),
+                        clipboard.getSrcPath(), _destNode.getPath());
+              } else {
+                pasteByCut(clipboard, uiExplorer, _destNode.getSession(), clipboard.getWorkspace(), clipboard.getSrcPath(),
+                        _destNode.getPath(), actionContainer, false, false, false);
+              }
+            }
+            processList.remove(clipboard);
+            continue;
           }
-          processList.remove(clipboard);
-          continue;
-        }
-        showConfirmDialog(destNode, srcNode, uiExplorer, clipboard, _virtualClipboards, event);
-        break;
-      }else{
-        _virtualClipboards.remove(clipboard);
-        if (pasteNum == virtualClipboards.size()) {
-          processPaste(clipboard, destPath, event, true, true);
-          processList.remove(clipboard);
+          showConfirmDialog(destNode, srcNode, uiExplorer, clipboard, _virtualClipboards, event);
           break;
+        }else{
+          _virtualClipboards.remove(clipboard);
+          if (pasteNum == virtualClipboards.size()) {
+            processPaste(clipboard, destPath, event, true, true);
+            processList.remove(clipboard);
+            break;
+          }
+          processPaste(clipboard, destPath, event, true, false);
+          processList.remove(clipboard);
         }
-        processPaste(clipboard, destPath, event, true, false);
-        processList.remove(clipboard);
+      }catch (ConstraintViolationException ce) {
+        uiApp.addMessage(new ApplicationMessage("UIPopupMenu.msg.current-node-not-allow-paste", null,
+                ApplicationMessage.WARNING));
+
+        uiExplorer.updateAjax(event);
+        return;
+      } catch (VersionException ve) {
+        uiApp.addMessage(new ApplicationMessage("UIPopupMenu.msg.copied-node-in-versioning", null,
+                ApplicationMessage.WARNING));
+
+        uiExplorer.updateAjax(event);
+        return;
+      } catch (ItemExistsException iee) {
+        uiApp.addMessage(new ApplicationMessage("UIPopupMenu.msg.paste-node-same-name", null,
+                ApplicationMessage.WARNING));
+
+        uiExplorer.updateAjax(event);
+        return;
+      } catch (LoginException e) {
+        if (ClipboardCommand.CUT.equals(action)) {
+          uiApp.addMessage(new ApplicationMessage("UIPopupMenu.msg.cannot-login-node", null,
+                  ApplicationMessage.WARNING));
+
+          uiExplorer.updateAjax(event);
+          return;
+        }
+        uiApp.addMessage(new ApplicationMessage("UIPopupMenu.msg.cannot-paste-nodetype", null,
+                ApplicationMessage.WARNING));
+
+        uiExplorer.updateAjax(event);
+        return;
+      } catch (AccessDeniedException ace) {
+        uiApp.addMessage(new ApplicationMessage("UIPopupMenu.msg.access-denied", null,
+                ApplicationMessage.WARNING));
+
+        uiExplorer.updateAjax(event);
+        return;
+      } catch (Exception e) {
+        JCRExceptionManager.process(uiApp, e);
+        uiExplorer.updateAjax(event);
+        return;
       }
     }
     if(processList.isEmpty()){
@@ -340,23 +377,24 @@ public class PasteManageComponent extends UIAbstractManagerComponent {
   }
 
   private static void makeVersion(Node destNode, Node _destNode, Node srcNode, ClipboardCommand clipboard,
-                                  String action, String destPath, UIJCRExplorer uiExplorer) throws Exception{
+                                  String action, String destPath, UIJCRExplorer uiExplorer, Event<?> event) throws Exception{
     AutoVersionService autoVersionService = WCMCoreUtils.getService(AutoVersionService.class);
     ActionServiceContainer actionContainer = uiExplorer.getApplicationComponent(ActionServiceContainer.class);
+    UIApplication uiApp = uiExplorer.getAncestorOfType(UIApplication.class);
     if(destNode.hasNode(srcNode.getName()) && ClipboardCommand.COPY.equals(clipboard.getType())
             && UIDocumentAutoVersionForm.CREATE_VERSION.equals(action)) {
       autoVersionService.autoVersion(destNode.getNode(srcNode.getName()), srcNode);
     }else if(destNode.hasNode(srcNode.getName()) && ClipboardCommand.COPY.equals(clipboard.getType())
             && UIDocumentAutoVersionForm.KEEP_BOTH.equals(action)){
       UIDocumentAutoVersionForm.copyNode(destNode.getSession(), destNode.getSession().getWorkspace().getName(),
-              srcNode.getPath(), destNode.getNode(srcNode.getName()).getPath());
+              srcNode.getPath(), destNode.getNode(srcNode.getName()).getPath(), uiApp, uiExplorer, event, ClipboardCommand.COPY);
     }else if(destNode.hasNode(srcNode.getName()) && ClipboardCommand.COPY.equals(clipboard.getType())
             && UIDocumentAutoVersionForm.REPLACE.equals(action)) {
       TrashService trashService = WCMCoreUtils.getService(TrashService.class);
       destPath = _destNode.getPath();
       String trashID = trashService.moveToTrash(_destNode, WCMCoreUtils.getUserSessionProvider());
       UIDocumentAutoVersionForm.copyNode(destNode.getSession(), destNode.getSession().getWorkspace().getName(),
-              srcNode.getPath(), destPath);
+              srcNode.getPath(), destPath, uiApp, uiExplorer, event, ClipboardCommand.COPY);
       Node deletedNode = trashService.getNodeByTrashId(trashID);
       deletedNode.remove();
       deletedNode.getSession().save();
@@ -609,7 +647,7 @@ public class PasteManageComponent extends UIAbstractManagerComponent {
       boolean isLastPaste, boolean isCreateVersion) throws Exception {
     ClipboardService clipboardService = WCMCoreUtils.getService(ClipboardService.class);
     String userId = ConversationState.getCurrent().getIdentity().getUserId();
-    
+
     UIWorkingArea uiWorkingArea = uiExplorer.getChild(UIWorkingArea.class);
     Workspace workspace = session.getWorkspace();
     if (workspace.getName().equals(srcWorkspace)) {

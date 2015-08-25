@@ -679,7 +679,7 @@
 		msgDiv.id = "msg" + id;
 	
 		loadContentDiv.appendChild(cancel);
-		if(eXo.ecm.MultiUpload.isVersioned && eXo.ecm.MultiUpload.isSupportedVersioning){
+		if(eXo.ecm.MultiUpload.isVersioned && eXo.ecm.MultiUpload.isSupportedVersioning === "true"){
 			loadContentDiv.appendChild(span2);
 			loadContentDiv.appendChild(createVersionDiv);
 		}else{
