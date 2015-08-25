@@ -222,6 +222,10 @@ public class TrashServiceImpl implements TrashService {
       }
       
       trashSession.save();
+    }else{
+      if (LOG.isErrorEnabled()) {
+        LOG.error("The node"+ originalPath +"has the mixin exo:restoreLocation but is not under the Trash folder. It can not be removed");
+      }
     }
     return trashId;
   }
