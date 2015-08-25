@@ -1418,6 +1418,8 @@ public abstract class JCRLocalCloudDrive extends CloudDrive implements CloudDriv
 
         // collection of accepted, natural order important!
         Map<String, FileChange> accepted = new LinkedHashMap<String, FileChange>();
+        // set copied nodes to skip their sub-nodes
+        Set<String> copied = new LinkedHashSet<String>();
         for (Iterator<FileChange> chiter = changes.iterator(); chiter.hasNext()
             && !Thread.currentThread().isInterrupted();) {
           FileChange change = chiter.next();
@@ -1473,7 +1475,25 @@ public abstract class JCRLocalCloudDrive extends CloudDrive implements CloudDriv
                   }
                 }
               }
-              // else:
+              // handle copy of folders here: skip sub-tree
+              if (FileChange.CREATE.equals(change.changeType) && change.fileId != null) {
+                // creation and already cloud file - it's copy inside the drive,
+                String copiedParent = null;
+                for (String copyPath : copied) {
+                  if (path.length() > copyPath.length() && path.startsWith(copyPath)) {
+                    copiedParent = copyPath;
+                    break;
+                  }
+                }
+                if (copiedParent != null) {
+                  // skip sub-tree of already accepted for copy node
+                  skipped.add(change);
+                  continue;                  
+                } else {
+                  copied.add(path);
+                }
+              }
+              // otherwise accept:
               // * if REMOVE then UPDATE, not possible in JCR
               accepted.put(path, change);
             } else {
@@ -1702,6 +1722,10 @@ public abstract class JCRLocalCloudDrive extends CloudDrive implements CloudDriv
     @Override
     public String getId(Node fileNode) throws RepositoryException {
       return fileNode.getProperty("ecd:id").getString();
+    }
+
+    protected void setId(Node fileNode, String id) throws RepositoryException {
+      fileNode.setProperty("ecd:id", id);
     }
 
     /**
