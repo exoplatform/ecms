@@ -14,8 +14,8 @@ UploadForm.prototype.initLanguage = function(){
 	this.document_auto_label_cancel   = UserLanguage.DocumentAuto_label_cancel;
 	this.document_auto_label_or				= UserLanguage.DocumentAuto_label_or;
 	this.document_auto_label_createVersion = UserLanguage.DocumentAuto_label_createVersion;
-	this.document_auto_label_replace  = UserLanguage.document_auto_label_replace;
-	this.document_auto_label_keepBoth	= UserLanguage.document_auto_label_keepBoth;
+	this.document_auto_label_replace  = UserLanguage.DocumentAuto_label_replace;
+	this.document_auto_label_keepBoth	= UserLanguage.DocumentAuto_label_keepBoth;
 }
 
 UploadForm.prototype.showUploadForm = function() {
