@@ -208,12 +208,12 @@ public class JCRLocalGoogleDrive extends JCRLocalCloudDrive implements UserToken
      */
     protected final GoogleDriveAPI api;
 
-    /**
-     * Existing files being synchronized with cloud.
-     */
-    protected final Set<Node>      synced = new HashSet<Node>();
-
     protected ChangesIterator      changes;
+
+    /**
+     * Ids of removed/trashed files. Used to skip updates of sub-files returned for removed folders.
+     */
+    protected Set<String>          removedIds = new HashSet<String>();
 
     /**
      * Create command for Google Drive synchronization.
@@ -271,20 +271,21 @@ public class JCRLocalGoogleDrive extends JCRLocalCloudDrive implements UserToken
       while (changes.hasNext() && !Thread.currentThread().isInterrupted()) {
         com.google.api.services.drive.model.Change ch = changes.next();
         File gf = ch.getFile(); // gf will be null for deleted
-
+        
         String[] parents;
 
         // if parents empty - file deleted or shared file was removed from user drive (My Drive)
         // if file in Trash - proceed to delete also, inside it should be checked for the same ETag
+        // proceed for deletion also in case of returned removal/trash - it will do nothing if no file found
         if (ch.getDeleted() || (parents = getParents(gf)).length == 0) {
           if (hasRemoved(ch.getFileId())) {
             cleanRemoved(ch.getFileId());
             if (LOG.isDebugEnabled()) {
-              LOG.debug(">> Returned file removal " + ch.getFileId());
+              LOG.debug(">> Returned file removal " + ch.getFileId() + " " + ch.getModificationDate().toStringRfc3339());
             }
           } else {
             if (LOG.isDebugEnabled()) {
-              LOG.debug(">> File removal " + ch.getFileId());
+              LOG.debug(">> File removal " + ch.getFileId() + " " + ch.getModificationDate().toStringRfc3339());
             }
           }
           deleteFile(ch.getFileId());
@@ -293,23 +294,23 @@ public class JCRLocalGoogleDrive extends JCRLocalCloudDrive implements UserToken
             if (hasRemoved(gf.getId())) {
               cleanRemoved(gf.getId());
               if (LOG.isDebugEnabled()) {
-                LOG.debug(">> Returned file trashing " + gf.getId() + " " + gf.getTitle());
+                LOG.debug(">> Returned file trashing " + gf.getId() + " " + gf.getTitle() + " " + ch.getModificationDate().toStringRfc3339());
               }
             } else {
               if (LOG.isDebugEnabled()) {
-                LOG.debug(">> File trashing " + gf.getId() + " " + gf.getTitle());
+                LOG.debug(">> File trashing " + gf.getId() + " " + gf.getTitle() + " " + ch.getModificationDate().toStringRfc3339());
               }
-              deleteFile(gf.getId());
             }
+            deleteFile(gf.getId());
           } else {
             if (hasUpdated(gf.getId())) {
               cleanUpdated(gf.getId());
               if (LOG.isDebugEnabled()) {
-                LOG.debug(">> Returned file update " + gf.getId() + " " + gf.getTitle());
+                LOG.debug(">> Returned file update " + gf.getId() + " " + gf.getTitle() + " " + ch.getModificationDate().toStringRfc3339());
               }
             } else {
               if (LOG.isDebugEnabled()) {
-                LOG.debug(">> File update " + gf.getId() + " " + gf.getTitle());
+                LOG.debug(">> File update " + gf.getId() + " " + gf.getTitle() + " " + ch.getModificationDate().toStringRfc3339());
               }
               updateFile(gf, parents);
             }
@@ -319,7 +320,7 @@ public class JCRLocalGoogleDrive extends JCRLocalCloudDrive implements UserToken
     }
 
     /**
-     * Remove file's node.
+     * Remove file node.
      * 
      * @param fileId {@link String}
      * @throws RepositoryException
@@ -350,6 +351,7 @@ public class JCRLocalGoogleDrive extends JCRLocalCloudDrive implements UserToken
         }
         nodes.remove(fileId);
       }
+      removedIds.add(fileId); // add to removed ids in any case
     }
 
     /**
@@ -363,10 +365,10 @@ public class JCRLocalGoogleDrive extends JCRLocalCloudDrive implements UserToken
      * @throws InterruptedException
      */
     protected void updateFile(File gf, String[] parentIds) throws CloudDriveException, RepositoryException {
-      // using changes only related to current parent:
-      // * for deleted checking if node exists and remove it
-      // * for others update on its parents
       List<Node> existing = nodes.get(gf.getId());
+
+      // Existing files being synchronized with cloud.
+      Set<Node> synced = new HashSet<Node>();
 
       boolean isFolder = api.isFolder(gf);
 
@@ -378,10 +380,21 @@ public class JCRLocalGoogleDrive extends JCRLocalCloudDrive implements UserToken
 
           fileParent = nodes.get(parentFileId);
           if (fileParent == null) {
+            File gparent;
+            try {
+              gparent = api.file(parentFileId);
+            } catch (NotFoundException e) {
+              continue nextParent;
+            }
+
+            // check if parent or its ancestor was removed - skip this parent if so
+            if (isRemoved(gparent)) {
+              continue nextParent;
+            }
+
             // check if it is not shared file and thus its parent may be outside My Drive (not found locally)
             if (gf.getShared()) {
               // for shared file check its parent owner and if not me, then skip the parent
-              File gparent = api.file(parentFileId);
               GoogleUser me = getUser();
               boolean notMine = false;
               List<User> parentOwners = gparent.getOwners();
@@ -534,6 +547,41 @@ public class JCRLocalGoogleDrive extends JCRLocalCloudDrive implements UserToken
         }
       }
       return new String[0];
+    }
+
+    /**
+     * Check if file isn't deleted/trashed in Google Drive, explicitly or as a part of its
+     * ancestor deletion/trashing.
+     * 
+     * @param file {@link File}
+     * @return {@link Boolean} <code>true</code> if the file or its ancestor was deleted or trashed,
+     *         <code>false</code> otherwise
+     * @throws GoogleDriveException
+     */
+    protected boolean isRemoved(File gfile) throws GoogleDriveException {
+      try {
+        if (gfile.getLabels().getTrashed()) {
+          return true;
+        } else {
+          List<ParentReference> parents = gfile.getParents();
+          if (parents.size() > 0) {
+            for (ParentReference p : parents) {
+              if (!p.getIsRoot()) {
+                File gparent = api.file(p.getId());
+                if (isRemoved(gparent)) {
+                  return true;
+                }
+              } // else, we reached the root - this file nor its ancestor is not removed
+            }
+          } else {
+            // it is shared parent was removed from user drive (My Drive)
+            return true;
+          }
+        }
+      } catch (NotFoundException e) {
+        return true;
+      }
+      return false;
     }
   }
 
