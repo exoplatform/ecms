@@ -1,6 +1,5 @@
 package org.exoplatform.ecm.webui.component.explorer.rightclick.manager;
 
-import org.apache.commons.lang.StringEscapeUtils;
 import org.exoplatform.ecm.webui.component.explorer.UIJCRExplorer;
 import org.exoplatform.ecm.webui.component.explorer.UIWorkingArea;
 import org.exoplatform.ecm.webui.component.explorer.control.filter.IsContainBinaryFilter;
@@ -8,9 +7,10 @@ import org.exoplatform.ecm.webui.component.explorer.control.filter.IsNotEditingD
 import org.exoplatform.ecm.webui.component.explorer.control.filter.IsNotInTrashFilter;
 import org.exoplatform.ecm.webui.component.explorer.control.filter.IsVersionableFilter;
 import org.exoplatform.ecm.webui.component.explorer.control.listener.UIWorkingAreaActionListener;
+import org.exoplatform.services.cms.documents.AutoVersionService;
 import org.exoplatform.services.log.ExoLogger;
 import org.exoplatform.services.log.Log;
-import org.exoplatform.services.wcm.core.NodetypeConstant;
+import org.exoplatform.services.wcm.utils.WCMCoreUtils;
 import org.exoplatform.wcm.webui.reader.ContentReader;
 import org.exoplatform.webui.config.annotation.ComponentConfig;
 import org.exoplatform.webui.config.annotation.EventConfig;
@@ -77,11 +77,8 @@ public class CreateNewVersionManageComponent extends UIAbstractManagerComponent 
       Session session = uiExplorer.getSessionByWorkspace(wsName);
       // Use the method getNodeByPath because it is link aware
       Node node = uiExplorer.getNodeByPath(nodePath, session);
-      if(node.isNodeType(NodetypeConstant.MIX_VERSIONABLE)) {
-        node.checkin();
-        node.checkout();
-      }
-      node.getSession().save();
+      AutoVersionService autoVersionService = WCMCoreUtils.getService(AutoVersionService.class);
+      autoVersionService.autoVersion(node);
       String msg = event.getRequestContext().getApplicationResourceBundle().getString("DocumentAuto.message");
       msg = msg.replace("{0}", ContentReader.simpleEscapeHtml("<span style='font-weight:bold;'>" + node.getName() + "</span>"));
       event.getRequestContext().getJavascriptManager().require("SHARED/wcm-utils", "wcm_utils")
