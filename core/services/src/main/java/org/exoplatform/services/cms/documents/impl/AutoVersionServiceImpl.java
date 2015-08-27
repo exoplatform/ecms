@@ -1,25 +1,20 @@
 package org.exoplatform.services.cms.documents.impl;
 
 import javax.jcr.Node;
-import javax.jcr.version.Version;
 
 import org.apache.commons.lang.StringUtils;
 import org.exoplatform.container.xml.InitParams;
 import org.exoplatform.services.cms.documents.AutoVersionService;
 import org.exoplatform.services.cms.drives.DriveData;
 import org.exoplatform.services.cms.drives.ManageDriveService;
-import org.exoplatform.services.cms.mimetype.DMSMimeTypeResolver;
-import org.exoplatform.services.cms.scheduler.DocumentAutoVersionJob;
 import org.exoplatform.services.jcr.ext.utils.VersionHistoryUtils;
 import org.exoplatform.services.log.ExoLogger;
 import org.exoplatform.services.log.Log;
 import org.exoplatform.services.wcm.core.NodetypeConstant;
 import org.exoplatform.services.wcm.utils.WCMCoreUtils;
 
-import java.io.InputStream;
 import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.GregorianCalendar;
 import java.util.List;
 import org.exoplatform.services.cms.impl.Utils;
 /**
@@ -33,9 +28,9 @@ public class AutoVersionServiceImpl implements AutoVersionService{
 
   private static Log log = ExoLogger.getLogger(AutoVersionServiceImpl.class);
 
-  private final String DRIVES_AUTO_VERSION = "ecms.documents.versioning.drives";
-  private final String DRIVES_AUTO_VERSION_MAX = "ecms.documents.versions.max";
-  private final String DRIVES_AUTO_VERSION_EXPIRED = "ecms.documents.versions.expiration";
+  private final String DRIVES_AUTO_VERSION = "jcr.documents.versioning.drives";
+  private final String DRIVES_AUTO_VERSION_MAX = "jcr.documents.versions.max";
+  private final String DRIVES_AUTO_VERSION_EXPIRED = "jcr.documents.versions.expiration";
   private final int DOCUMENT_AUTO_DEFAULT_VERSION_MAX=0;
   private final int DOCUMENT_AUTO_DEFAULT_VERSION_EXPIRED=0;
   private final String PERSIONAL_DRIVE_PREFIX = "/Users";

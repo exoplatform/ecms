@@ -463,7 +463,10 @@ public class FileUploadHandler {
       jcrContent.setProperty("jcr:lastModified", new GregorianCalendar());
       jcrContent.setProperty("jcr:data", new BufferedInputStream(new FileInputStream(new File(location))));
       jcrContent.setProperty("jcr:mimeType", mimetype);
-      if(fileCreated) autoVersionService.autoVersion(file);
+      if(fileCreated) {
+        file.getParent().save();
+        autoVersionService.autoVersion(file);
+      }
       //parent.getSession().refresh(true); // Make refreshing data
       //parent.save();
       uploadService.removeUploadResource(uploadId);

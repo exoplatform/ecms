@@ -286,6 +286,12 @@ public class UIDocumentAutoVersionForm extends UIForm implements UIPopupComponen
         if(matcher.find()) destPath = matcher.group(2);
       }
       Node _destNode = (Node)destSession.getItem(destPath);
+
+      if(destPath.equals(sourceNode.getPath())) {
+        closePopup(autoVersionComponent, uijcrExplorer, event);
+        return;
+      }
+
       Node destNode = _destNode.getNode(sourceNode.getName());
       Map<String, Boolean> remember = new HashMap<String, Boolean>();
       if(destNode.isNodeType(NodetypeConstant.MIX_VERSIONABLE) && chkRem){

@@ -123,7 +123,7 @@ public class PasteManageComponent extends UIAbstractManagerComponent {
       throws Exception {
     ClipboardService clipboardService = WCMCoreUtils.getService(ClipboardService.class);
     String userId = ConversationState.getCurrent().getIdentity().getUserId();
-
+    AutoVersionService autoVersionService = WCMCoreUtils.getService(AutoVersionService.class);
     UIWorkingArea uiWorkingArea = event.getSource().getParent();
     String destPath = event.getRequestContext().getRequestParameter(OBJECTID);
     String nodePath = null;
@@ -191,7 +191,11 @@ public class PasteManageComponent extends UIAbstractManagerComponent {
       if (clipboardCommand!=null && clipboardService.getClipboardList(userId, true).isEmpty()) {
         processPaste(clipboardCommand, destNode, event, uiExplorer);
       } else {
-        processPasteMultiple(destNode, event, uiExplorer);
+        if(autoVersionService.isVersionSupport(destNode.getPath())) {
+          processPasteMultiple(destNode, event, uiExplorer);
+        }else{
+          processPasteMultiple(destPath, event, uiExplorer);
+        }
       }
     } catch (PathNotFoundException pe) {
       uiApp.addMessage(new ApplicationMessage("UIPopupMenu.msg.cannot-readsource", null));
@@ -233,9 +237,11 @@ public class PasteManageComponent extends UIAbstractManagerComponent {
 
   private static void processPaste(ClipboardCommand clipboardCommand, Node destNode, Event<?> event, UIJCRExplorer uiExplorer)
     throws Exception{
+    AutoVersionService autoVersionService = WCMCoreUtils.getService(AutoVersionService.class);
     Node sourceNode = (Node)uiExplorer.getSessionByWorkspace(clipboardCommand.getWorkspace()).
             getItem(clipboardCommand.getSrcPath());
-    if(destNode.hasNode(sourceNode.getName()) && sourceNode.isNodeType(NodetypeConstant.NT_FILE)){
+    if(destNode.hasNode(sourceNode.getName()) && sourceNode.isNodeType(NodetypeConstant.NT_FILE)
+            && autoVersionService.isVersionSupport(destNode.getPath())){
       Set<ClipboardCommand> clipboardCommands = new HashSet<>();
       clipboardCommands.add(clipboardCommand);
       showConfirmDialog(destNode, sourceNode,uiExplorer,clipboardCommand, clipboardCommands, event);
@@ -247,6 +253,22 @@ public class PasteManageComponent extends UIAbstractManagerComponent {
   public static void processPaste(ClipboardCommand currentClipboard, String destPath, Event<?> event)
       throws Exception {
     processPaste(currentClipboard, destPath, event, false, true);
+  }
+
+  private static void processPasteMultiple(String destPath, Event<?> event, UIJCRExplorer uiExplorer)
+          throws Exception {
+    ClipboardService clipboardService = WCMCoreUtils.getService(ClipboardService.class);
+    String userId = ConversationState.getCurrent().getIdentity().getUserId();
+    int pasteNum = 0;
+    Set<ClipboardCommand> virtualClipboards = clipboardService.getClipboardList(userId, true);
+    for (ClipboardCommand clipboard : virtualClipboards) {
+      pasteNum++;
+      if (pasteNum == virtualClipboards.size()) {
+        processPaste(clipboard, destPath, event, true, true);
+        break;
+      }
+      processPaste(clipboard, destPath, event, true, false);
+    }
   }
 
   private static void processPasteMultiple(Node destNode, Event<?> event, UIJCRExplorer uiExplorer)
