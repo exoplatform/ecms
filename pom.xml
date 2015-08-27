@@ -44,8 +44,8 @@
     <org.exoplatform.kernel.version>2.5.2-GA</org.exoplatform.kernel.version>
     <org.exoplatform.core.version>2.6.2-GA</org.exoplatform.core.version>
     <org.exoplatform.ws.version>2.4.2-GA</org.exoplatform.ws.version>
-    <org.exoplatform.jcr.version>1.16.2-GA</org.exoplatform.jcr.version>
-    <org.exoplatform.jcr-services.version>1.16.2-GA</org.exoplatform.jcr-services.version>
+    <org.exoplatform.jcr.version>1.16.x-document-auto-versioning-SNAPSHOT</org.exoplatform.jcr.version>
+    <org.exoplatform.jcr-services.version>1.16.x-document-auto-versioning-SNAPSHOT</org.exoplatform.jcr-services.version>
     <!-- GateIn Project Dependencies -->
     <org.gatein.wci.version>2.4.1.Final</org.gatein.wci.version>
     <org.gatein.pc.version>2.5.1.Final</org.gatein.pc.version>
