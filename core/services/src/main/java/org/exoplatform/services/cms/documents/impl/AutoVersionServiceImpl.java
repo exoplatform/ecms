@@ -10,6 +10,7 @@ import org.exoplatform.services.cms.drives.DriveData;
 import org.exoplatform.services.cms.drives.ManageDriveService;
 import org.exoplatform.services.cms.mimetype.DMSMimeTypeResolver;
 import org.exoplatform.services.cms.scheduler.DocumentAutoVersionJob;
+import org.exoplatform.services.jcr.ext.utils.VersionHistoryUtils;
 import org.exoplatform.services.log.ExoLogger;
 import org.exoplatform.services.log.Log;
 import org.exoplatform.services.wcm.core.NodetypeConstant;
@@ -63,7 +64,7 @@ public class AutoVersionServiceImpl implements AutoVersionService{
       currentNode.save();
     }
     if(currentNode.getPath().startsWith(PERSIONAL_DRIVE_PREFIX)){
-      createVersion(currentNode);
+      VersionHistoryUtils.createVersion(currentNode);
       return;
     }
     for (String driveAutoVersion: lstDriveAutoVersion){
@@ -71,16 +72,9 @@ public class AutoVersionServiceImpl implements AutoVersionService{
 
       String driveHomePath = manageDriveService.getDriveByName(StringUtils.trim(driveAutoVersion)).getHomePath();
       if(currentNode.getPath().startsWith(driveHomePath)){
-        createVersion(currentNode);
+        VersionHistoryUtils.createVersion(currentNode);
         return;
       }
-      /*
-      for (DriveData driveData:userDriveDatas){
-        if(currentNode.getPath().contains(driveData.getHomePath())){
-          createVersion(currentNode);
-          return;
-        }
-      }*/
     }
   }
 
@@ -139,50 +133,14 @@ public class AutoVersionServiceImpl implements AutoVersionService{
     }
     long allCurrentVersions = currentNode.getVersionHistory().getAllVersions().getSize();
     if(maxVersionNumber==DOCUMENT_AUTO_DEFAULT_VERSION_MAX || maxVersionNumber >= allCurrentVersions){
-      currentNode.checkin();
-      currentNode.checkout();
-      currentNode.save();
+      VersionHistoryUtils.createVersion(currentNode);
       Node jcrContent = currentNode.hasNode(NodetypeConstant.JCR_CONTENT)?
               currentNode.getNode(NodetypeConstant.JCR_CONTENT):currentNode.addNode(NodetypeConstant.JCR_CONTENT);
       Node srcJcrContent = sourceNode.getNode(NodetypeConstant.JCR_CONTENT);
       if(srcJcrContent.getProperty(NodetypeConstant.JCR_DATA).getStream().available()>0) {
         jcrContent.setProperty(NodetypeConstant.JCR_DATA, srcJcrContent.getProperty(NodetypeConstant.JCR_DATA).getStream());
       }
-      //add schedule to remove version
-      if(expiredTimeVersion > DOCUMENT_AUTO_DEFAULT_VERSION_EXPIRED){
-        // add job to remove version
-        Version baseVersion = currentNode.getBaseVersion();
-        DocumentAutoVersionJob.addJob(currentNode.getSession().getWorkspace().getName(), baseVersion.getUUID(), expiredTimeVersion);
-      }
       currentNode.save();
-      return true;
-    }
-    return false;
-  }
-
-  /**
-   * @param currentNode
-   * @return
-   * @throws Exception
-   */
-  private boolean createVersion(Node currentNode)throws Exception{
-    if(currentNode.canAddMixin(NodetypeConstant.MIX_VERSIONABLE)){
-      currentNode.addMixin(NodetypeConstant.MIX_VERSIONABLE);
-      currentNode.getParent().save();
-      return true;
-    }
-    long allCurrentVersions = currentNode.getVersionHistory().getAllVersions().getSize();
-    if(maxVersionNumber==DOCUMENT_AUTO_DEFAULT_VERSION_MAX || maxVersionNumber >= allCurrentVersions){
-      currentNode.checkin();
-      currentNode.checkout();
-      currentNode.getParent().save();
-      //add schedule to remove version
-      if(expiredTimeVersion > DOCUMENT_AUTO_DEFAULT_VERSION_EXPIRED){
-        // add job to remove version
-        Version baseVersion = currentNode.getBaseVersion();
-        DocumentAutoVersionJob.addJob(currentNode.getSession().getWorkspace().getName(), baseVersion.getUUID(), expiredTimeVersion);
-      }
-
       return true;
     }
     return false;
