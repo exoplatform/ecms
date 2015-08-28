@@ -88,6 +88,7 @@
     <dependency>
       <groupId>org.exoplatform.jcr</groupId>
       <artifactId>exo.jcr.component.ext</artifactId>
+      <version>1.16.x-document-auto-versioning-SNAPSHOT</version>
     </dependency>
     <dependency>
       <groupId>org.exoplatform.jcr</groupId>
