@@ -21,6 +21,7 @@ import java.net.URI;
 import java.net.URISyntaxException;
 import java.util.GregorianCalendar;
 import java.util.LinkedList;
+import java.util.List;
 import java.util.Queue;
 
 import javax.jcr.Item;
@@ -40,6 +41,7 @@ import javax.ws.rs.PathParam;
 import javax.ws.rs.QueryParam;
 import javax.ws.rs.core.Context;
 import javax.ws.rs.core.MediaType;
+import javax.ws.rs.core.MultivaluedMap;
 import javax.ws.rs.core.Response;
 import javax.ws.rs.core.UriInfo;
 
@@ -50,6 +52,9 @@ import org.exoplatform.commons.utils.MimeTypeResolver;
 import org.exoplatform.container.xml.InitParams;
 import org.exoplatform.ecm.utils.text.Text;
 import org.exoplatform.services.cms.CmsService;
+import org.exoplatform.services.cms.documents.AutoVersionService;
+import org.exoplatform.services.cms.drives.DriveData;
+import org.exoplatform.services.cms.drives.ManageDriveService;
 import org.exoplatform.services.cms.impl.Utils;
 import org.exoplatform.services.cms.jcrext.activity.ActivityCommonService;
 import org.exoplatform.services.cms.link.LinkUtils;
@@ -78,6 +83,7 @@ import org.exoplatform.services.rest.ext.webdav.method.SEARCH;
 import org.exoplatform.services.rest.ext.webdav.method.UNCHECKOUT;
 import org.exoplatform.services.rest.ext.webdav.method.UNLOCK;
 import org.exoplatform.services.rest.ext.webdav.method.VERSIONCONTROL;
+import org.exoplatform.services.rest.impl.MultivaluedMapImpl;
 import org.exoplatform.services.wcm.core.NodetypeConstant;
 import org.exoplatform.services.wcm.utils.WCMCoreUtils;
 
@@ -99,7 +105,14 @@ public class WebDavServiceImpl extends org.exoplatform.services.jcr.webdav.WebDa
 
   private final String POST_UPLOAD_CONTENT_EVENT = "WebDavService.event.postUpload";
 
-  private final NodeFinder nodeFinder;
+  private final String PERSONAL_DRIVE_PREFIX = "/Users/${userId}/Private";
+
+  private final String GROUP_DRIVE_PREFIX = "/Groups${groupId}/Documents";
+
+  private final String PERSONAL_GROUP_DRIVE_WORKSPACE = "collaboration";
+
+
+   private final NodeFinder nodeFinder;
 
   private final RepositoryService repositoryService;
 
@@ -107,17 +120,45 @@ public class WebDavServiceImpl extends org.exoplatform.services.jcr.webdav.WebDa
 
   private final MimeTypeResolver mimeTypeResolver;
 
-  public WebDavServiceImpl(InitParams params,
-                           RepositoryService repositoryService,
-                           ThreadLocalSessionProviderService sessionProviderService,
-                           NodeFinder nodeFinder) throws Exception {
-    super(params, repositoryService, sessionProviderService);
-    this.repositoryService = repositoryService;
-    this.nodeFinder = nodeFinder;
-    this.listenerService = WCMCoreUtils.getService(ListenerService.class);
-    this.mimeTypeResolver = new MimeTypeResolver();
-    this.mimeTypeResolver.setDefaultMimeType(InitParamsDefaults.FILE_MIME_TYPE);
-  }
+   public WebDavServiceImpl(InitParams params,
+                            RepositoryService repositoryService,
+                            ThreadLocalSessionProviderService sessionProviderService,
+                            NodeFinder nodeFinder, AutoVersionService autoVersionService, ManageDriveService manageDriveService) throws Exception
+   {
+      super(params, repositoryService, sessionProviderService);
+      this.repositoryService = repositoryService;
+      this.nodeFinder = nodeFinder;
+      this.listenerService = WCMCoreUtils.getService(ListenerService.class);
+      this.mimeTypeResolver = new MimeTypeResolver();
+      this.mimeTypeResolver.setDefaultMimeType(InitParamsDefaults.FILE_MIME_TYPE);
+
+      List<String> lstDriveAutoVersion = autoVersionService.getDriveAutoVersion();
+      MultivaluedMap<String, String> allowedAutoVersionPath = new MultivaluedMapImpl();
+      if (!lstDriveAutoVersion.isEmpty())
+      {
+         for (String driverName : lstDriveAutoVersion)
+         {
+            DriveData driveData = manageDriveService.getDriveByName(StringUtils.trim(driverName));
+            String driveHome = driveData.getHomePath();
+            String workspace = driveData.getWorkspace();
+
+            if (driveHome.startsWith(PERSONAL_DRIVE_PREFIX) && PERSONAL_GROUP_DRIVE_WORKSPACE.equals(workspace))
+            {
+               allowedAutoVersionPath.add(driveData.getWorkspace(), PERSONAL_DRIVE_PREFIX);
+            }
+            else if (driveHome.startsWith(GROUP_DRIVE_PREFIX) && PERSONAL_GROUP_DRIVE_WORKSPACE.equals(workspace))
+            {
+               allowedAutoVersionPath.add(driveData.getWorkspace(), GROUP_DRIVE_PREFIX);
+            }
+            else
+            {
+               allowedAutoVersionPath.add(driveData.getWorkspace(), driveHome);
+            }
+         }
+      }
+      webDavServiceInitParams.setAllowedAutoVersionPath(allowedAutoVersionPath);
+      webDavServiceInitParams.setEnableAutoVersion(true);
+   }
 
   private String getRealDestinationHeader(String baseURI, String repoName, String destinationHeader) {
     String serverURI = baseURI + "/jcr/" + repoName;

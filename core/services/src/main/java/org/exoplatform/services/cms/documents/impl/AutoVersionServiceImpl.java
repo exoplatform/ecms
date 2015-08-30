@@ -28,9 +28,9 @@ public class AutoVersionServiceImpl implements AutoVersionService{
 
   private static Log log = ExoLogger.getLogger(AutoVersionServiceImpl.class);
 
-  private final String DRIVES_AUTO_VERSION = "jcr.documents.versioning.drives";
-  private final String DRIVES_AUTO_VERSION_MAX = "jcr.documents.versions.max";
-  private final String DRIVES_AUTO_VERSION_EXPIRED = "jcr.documents.versions.expiration";
+  private final String DRIVES_AUTO_VERSION = "ecms.documents.versioning.drives";
+  private final String DRIVES_AUTO_VERSION_MAX = "ecms.documents.versions.max";
+  private final String DRIVES_AUTO_VERSION_EXPIRED = "ecms.documents.versions.expiration";
   private final int DOCUMENT_AUTO_DEFAULT_VERSION_MAX=0;
   private final int DOCUMENT_AUTO_DEFAULT_VERSION_EXPIRED=0;
   private final String PERSIONAL_DRIVE_PREFIX = "/Users";
@@ -88,7 +88,13 @@ public class AutoVersionServiceImpl implements AutoVersionService{
     return false;
   }
 
-  @Override
+   @Override
+   public List<String> getDriveAutoVersion()
+   {
+      return lstDriveAutoVersion;
+   }
+
+   @Override
   public void autoVersion(Node currentNode, Node sourceNode) throws Exception {
     manageDriveService = WCMCoreUtils.getService(ManageDriveService.class);
     if(currentNode.canAddMixin(NodetypeConstant.MIX_REFERENCEABLE)){

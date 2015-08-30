@@ -2,6 +2,7 @@ package org.exoplatform.services.cms.documents;
 
 import javax.jcr.Node;
 import java.io.InputStream;
+import java.util.List;
 
 /**
  * Created by The eXo Platform SEA
@@ -33,4 +34,11 @@ public interface AutoVersionService {
    * @throws Exception
    */
   public boolean isVersionSupport(String nodePath) throws Exception;
+
+   /**
+    * Get List of Drive supported versioning
+    * @return List of Drive supported versioning
+    * @throws Exception
+    */
+   List<String> getDriveAutoVersion();
 }
