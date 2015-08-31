@@ -166,20 +166,28 @@ public class UIDocumentAutoVersionForm extends UIForm implements UIPopupComponen
       if(destNode.isNodeType(NodetypeConstant.MIX_VERSIONABLE) && chkRem){
         remember.put("keepboth", true);
         PasteManageComponent.setVersionedRemember(remember);
-      }else if(destNode.isNodeType(NodetypeConstant.MIX_VERSIONABLE) && chkRemNon){
+      }else if(!destNode.isNodeType(NodetypeConstant.MIX_VERSIONABLE) && chkRemNon){
         remember.put("keepboth", true);
         PasteManageComponent.setNonVersionedRemember(remember);
       }
 
       Set<ClipboardCommand> _clipboardCommands = autoVersionComponent.getClipboardCommands();
       if(_clipboardCommands!=null && _clipboardCommands.size()>0){
-        if(ClipboardCommand.CUT.equals(currentClipboard.getType())){
-          //cut process
-          PasteManageComponent.pasteByCut(currentClipboard, uiExplorer, destSession, currentClipboard.getWorkspace(),
-                  sourceNode.getPath(), destPath, WCMCoreUtils.getService(ActionServiceContainer.class), false,false, false);
-        }else {
-          copyNode(destSession, autoVersionComponent.getSourceWorkspace(),
-                  autoVersionComponent.getSourcePath(), destPath, uiApp, uiExplorer, event, ClipboardCommand.COPY);
+        try {
+          if (ClipboardCommand.CUT.equals(currentClipboard.getType())) {
+            //cut process
+            PasteManageComponent.pasteByCut(currentClipboard, uiExplorer, destSession, currentClipboard.getWorkspace(),
+                    sourceNode.getPath(), destPath, WCMCoreUtils.getService(ActionServiceContainer.class), false, false, false);
+          } else {
+            copyNode(destSession, autoVersionComponent.getSourceWorkspace(),
+                    autoVersionComponent.getSourcePath(), destPath, uiApp, uiExplorer, event, ClipboardCommand.COPY);
+          }
+        }catch (ItemExistsException iee) {
+          uiApp.addMessage(new ApplicationMessage("UIPopupMenu.msg.paste-node-same-name", null,
+                  ApplicationMessage.WARNING));
+
+          uiExplorer.updateAjax(event);
+          return;
         }
         _clipboardCommands.remove(currentClipboard);
         if(_clipboardCommands.isEmpty()){

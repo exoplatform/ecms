@@ -17,32 +17,8 @@
  **************************************************************************/
 package org.exoplatform.ecm.webui.component.explorer.rightclick.manager;
 
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.HashMap;
-import java.util.HashSet;
-import java.util.List;
-import java.util.Map;
-import java.util.Set;
-import java.util.regex.Matcher;
-
-import javax.jcr.AccessDeniedException;
-import javax.jcr.ItemExistsException;
-import javax.jcr.ItemNotFoundException;
-import javax.jcr.LoginException;
-import javax.jcr.Node;
-import javax.jcr.PathNotFoundException;
-import javax.jcr.Property;
-import javax.jcr.PropertyIterator;
-import javax.jcr.Session;
-import javax.jcr.Value;
-import javax.jcr.Workspace;
-import javax.jcr.lock.LockException;
-import javax.jcr.nodetype.ConstraintViolationException;
-import javax.jcr.nodetype.NodeType;
-import javax.jcr.version.VersionException;
-
 import org.apache.commons.lang.BooleanUtils;
+import org.exoplatform.ecm.utils.lock.LockUtil;
 import org.exoplatform.ecm.webui.component.explorer.UIDocumentAutoVersionForm;
 import org.exoplatform.ecm.webui.component.explorer.UIDocumentInfo;
 import org.exoplatform.ecm.webui.component.explorer.UIJCRExplorer;
@@ -55,7 +31,6 @@ import org.exoplatform.ecm.webui.component.explorer.control.listener.UIWorkingAr
 import org.exoplatform.ecm.webui.component.explorer.sidebar.UITreeExplorer;
 import org.exoplatform.ecm.webui.component.explorer.sidebar.UITreeNodePageIterator;
 import org.exoplatform.ecm.webui.utils.JCRExceptionManager;
-import org.exoplatform.ecm.utils.lock.LockUtil;
 import org.exoplatform.ecm.webui.utils.PermissionUtil;
 import org.exoplatform.ecm.webui.utils.Utils;
 import org.exoplatform.services.cms.actions.ActionServiceContainer;
@@ -87,6 +62,30 @@ import org.exoplatform.webui.ext.filter.UIExtensionFilter;
 import org.exoplatform.webui.ext.filter.UIExtensionFilters;
 import org.exoplatform.webui.ext.manager.UIAbstractManager;
 import org.exoplatform.webui.ext.manager.UIAbstractManagerComponent;
+
+import javax.jcr.AccessDeniedException;
+import javax.jcr.ItemExistsException;
+import javax.jcr.ItemNotFoundException;
+import javax.jcr.LoginException;
+import javax.jcr.Node;
+import javax.jcr.PathNotFoundException;
+import javax.jcr.Property;
+import javax.jcr.PropertyIterator;
+import javax.jcr.Session;
+import javax.jcr.Value;
+import javax.jcr.Workspace;
+import javax.jcr.lock.LockException;
+import javax.jcr.nodetype.ConstraintViolationException;
+import javax.jcr.nodetype.NodeType;
+import javax.jcr.version.VersionException;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.HashMap;
+import java.util.HashSet;
+import java.util.List;
+import java.util.Map;
+import java.util.Set;
+import java.util.regex.Matcher;
 
 /**
  * Created by The eXo Platform SARL Author : Hoang Van Hung hunghvit@gmail.com
@@ -202,7 +201,7 @@ public class PasteManageComponent extends UIAbstractManagerComponent {
 
       return;
     }
-    session.save();
+    //session.save();
 
 
     // Get paginator of UITreeExplorer && UIDocumentInfo
@@ -246,13 +245,14 @@ public class PasteManageComponent extends UIAbstractManagerComponent {
       clipboardCommands.add(clipboardCommand);
       showConfirmDialog(destNode, sourceNode,uiExplorer,clipboardCommand, clipboardCommands, event);
     }else {
-      processPaste(clipboardCommand, destNode.getPath(), event, false, true);
+      processPaste(clipboardCommand, destNode.getPath(),uiExplorer, event, false, true);
     }
   }
 
   public static void processPaste(ClipboardCommand currentClipboard, String destPath, Event<?> event)
       throws Exception {
-    processPaste(currentClipboard, destPath, event, false, true);
+    UIJCRExplorer uiExplorer = ((UIComponent)event.getSource()).getAncestorOfType(UIJCRExplorer.class);
+    processPaste(currentClipboard, destPath,uiExplorer, event, false, true);
   }
 
   private static void processPasteMultiple(String destPath, Event<?> event, UIJCRExplorer uiExplorer)
@@ -264,10 +264,10 @@ public class PasteManageComponent extends UIAbstractManagerComponent {
     for (ClipboardCommand clipboard : virtualClipboards) {
       pasteNum++;
       if (pasteNum == virtualClipboards.size()) {
-        processPaste(clipboard, destPath, event, true, true);
+        processPaste(clipboard, destPath, uiExplorer, event, true, true);
         break;
       }
-      processPaste(clipboard, destPath, event, true, false);
+      processPaste(clipboard, destPath, uiExplorer, event, true, false);
     }
   }
 
@@ -312,7 +312,7 @@ public class PasteManageComponent extends UIAbstractManagerComponent {
           }
           if((!_destNode.isNodeType(NodetypeConstant.MIX_VERSIONABLE)) && nonVersionedRemember!=null){
             if(BooleanUtils.isTrue(nonVersionedRemember.get("replace"))) {
-              if(ClipboardCommand.CUT.equals(clipboard.getType())) continue;
+              //if(ClipboardCommand.CUT.equals(clipboard.getType())) continue;
               String _destPath = _destNode.getPath();
               TrashService trashService = WCMCoreUtils.getService(TrashService.class);
               String trashID = trashService.moveToTrash(_destNode, WCMCoreUtils.getUserSessionProvider());
@@ -339,11 +339,11 @@ public class PasteManageComponent extends UIAbstractManagerComponent {
         }else{
           _virtualClipboards.remove(clipboard);
           if (pasteNum == virtualClipboards.size()) {
-            processPaste(clipboard, destPath, event, true, true);
+            processPaste(clipboard, destPath, uiExplorer, event, true, true);
             processList.remove(clipboard);
             break;
           }
-          processPaste(clipboard, destPath, event, true, false);
+          processPaste(clipboard, destPath, uiExplorer, event, true, false);
           processList.remove(clipboard);
         }
       }catch (ConstraintViolationException ce) {
@@ -363,7 +363,8 @@ public class PasteManageComponent extends UIAbstractManagerComponent {
                 ApplicationMessage.WARNING));
 
         uiExplorer.updateAjax(event);
-        return;
+        processList.remove(clipboard);
+        continue;
       } catch (LoginException e) {
         if (ClipboardCommand.CUT.equals(action)) {
           uiApp.addMessage(new ApplicationMessage("UIPopupMenu.msg.cannot-login-node", null,
@@ -502,10 +503,10 @@ public class PasteManageComponent extends UIAbstractManagerComponent {
     return mapClipboard;
   }
 
-  private static void processPaste(ClipboardCommand currentClipboard, String destPath,
+  private static void processPaste(ClipboardCommand currentClipboard, String destPath, UIJCRExplorer uiExplorer,
       Event<?> event, boolean isMultiSelect, boolean isLastPaste) throws Exception {
-    UIJCRExplorer uiExplorer = ((UIComponent) event.getSource())
-        .getAncestorOfType(UIJCRExplorer.class);
+//    UIJCRExplorer uiExplorer = ((UIComponent) event.getSource())
+//        .getAncestorOfType(UIJCRExplorer.class);
     UIApplication uiApp = uiExplorer.getAncestorOfType(UIApplication.class);
     String srcPath = currentClipboard.getSrcPath();
     String type = currentClipboard.getType();
@@ -775,6 +776,8 @@ public class PasteManageComponent extends UIAbstractManagerComponent {
     clipboardService.getClipboardList(userId, false).remove(currentClipboard);
     updateClipboard(clipboardService.getClipboardList(userId, true), mapVirtualClipboardNode);
     updateClipboard(clipboardService.getClipboardList(userId, false), mapAllClipboardNode);
+    clipboardService.clearClipboardList(userId, true);
+    clipboardService.clearClipboardList(userId, false);
   }
 
   public static class PasteActionListener extends UIWorkingAreaActionListener<PasteManageComponent> {
