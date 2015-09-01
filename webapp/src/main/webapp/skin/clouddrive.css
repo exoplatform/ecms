@@ -144,10 +144,10 @@
 	width: auto;
 	height: 128px;
 	-webkit-transform: scale(0.5);
-    -moz-transform: scale(0.5);
-    -o-transform: scale(0.5);
-    -ms-transform: scale(0.5);
-    transform: scale(0.5);
+  -moz-transform: scale(0.5);
+  -o-transform: scale(0.5);
+  -ms-transform: scale(0.5);
+  transform: scale(0.5);
 	background: url('https://ssl.gstatic.com/docs/doclist/images/icon_11_video_xl128.png') no-repeat left center !important; /* orientation=lt */
 	background: url('https://ssl.gstatic.com/docs/doclist/images/icon_11_video_xl128.png') no-repeat right center !important; /* orientation=rt */
 }
@@ -161,10 +161,10 @@
 	width: auto;
 	height: 128px;
 	-webkit-transform: scale(0.5);
-    -moz-transform: scale(0.5);
-    -o-transform: scale(0.5);
-    -ms-transform: scale(0.5);
-    transform: scale(0.5);
+  -moz-transform: scale(0.5);
+  -o-transform: scale(0.5);
+  -ms-transform: scale(0.5);
+  transform: scale(0.5);
 	background: url('https://ssl.gstatic.com/docs/doclist/images/icon_10_audio_xl128.png') no-repeat left center !important; /* orientation=lt */
 	background: url('https://ssl.gstatic.com/docs/doclist/images/icon_10_audio_xl128.png') no-repeat right center !important; /* orientation=rt */
 }
@@ -178,28 +178,47 @@
 	width: auto;
 	height: 128px;
 	-webkit-transform: scale(0.5);
-    -moz-transform: scale(0.5);
-    -o-transform: scale(0.5);
-    -ms-transform: scale(0.5);
-    transform: scale(0.5);
+  -moz-transform: scale(0.5);
+  -o-transform: scale(0.5);
+  -ms-transform: scale(0.5);
+  transform: scale(0.5);
 	background: url('https://ssl.gstatic.com/docs/doclist/images/icon_11_drawing_xl128.png') no-repeat left center !important; /* orientation=lt */
 	background: url('https://ssl.gstatic.com/docs/doclist/images/icon_11_drawing_xl128.png') no-repeat right center !important; /* orientation=rt */
 }
-.application_vnd_google-apps_form16x16Icon {
+
+.uiIcon24x24applicationvndgoogle-appsform,.uiIcon16x16applicationvndgoogle-appsform {
+	/* https://ssl.gstatic.com/docs/doclist/images/mediatype/icon_1_form_x32.png */
 	background: url('https://ssl.gstatic.com/docs/doclist/images/icon_11_form_list.png') no-repeat left center !important; /* orientation=lt */
 	background: url('https://ssl.gstatic.com/docs/doclist/images/icon_11_form_list.png') no-repeat right center !important; /* orientation=rt */
 }
 
-.application_vnd_google-apps_form48x48Icon {
+.uiIcon64x64applicationvndgoogle-appsform {
 	width: auto;
 	height: 128px;
 	-webkit-transform: scale(0.5);
-    -moz-transform: scale(0.5);
-    -o-transform: scale(0.5);
-    -ms-transform: scale(0.5);
-    transform: scale(0.5);
-	background: url('https://ssl.gstatic.com/docs/doclist/images/icon_11_form_list.png') no-repeat left center !important; /* orientation=lt */
-	background: url('https://ssl.gstatic.com/docs/doclist/images/icon_11_form_list.png') no-repeat right center !important; /* orientation=rt */
+  -moz-transform: scale(0.5);
+  -o-transform: scale(0.5);
+  -ms-transform: scale(0.5);
+  transform: scale(0.5);
+	background: url('https://ssl.gstatic.com/docs/doclist/images/mediatype/icon_1_form_x128.png') no-repeat left center !important; /* orientation=lt */
+	background: url('https://ssl.gstatic.com/docs/doclist/images/mediatype/icon_1_form_x128.png') no-repeat right center !important; /* orientation=rt */
+}
+
+.uiIcon24x24applicationvndgoogle-appsmap, .uiIcon16x16applicationvndgoogle-appsmap {
+	background: url('https://ssl.gstatic.com/docs/doclist/images/mediatype/icon_1_map_x16.png') no-repeat left center !important; /* orientation=lt */
+	background: url('https://ssl.gstatic.com/docs/doclist/images/mediatype/icon_1_map_x16.png') no-repeat right center !important; /* orientation=rt */
+}
+
+.uiIcon64x64applicationvndgoogle-appsmap {
+	width: auto;
+	height: 128px;
+	-webkit-transform: scale(0.5);
+  -moz-transform: scale(0.5);
+  -o-transform: scale(0.5);
+  -ms-transform: scale(0.5);
+  transform: scale(0.5);
+	background: url('https://ssl.gstatic.com/docs/doclist/images/mediatype/icon_1_map_x128.png') no-repeat left center !important; /* orientation=lt */
+	background: url('https://ssl.gstatic.com/docs/doclist/images/mediatype/icon_1_map_x128.png') no-repeat right center !important; /* orientation=rt */
 }
 
 .application_vnd_google-apps_unknown16x16Icon,.application_vnd_google-apps_file16x16Icon {
@@ -211,10 +230,10 @@
 	width: auto;
 	height: 128px;
 	-webkit-transform: scale(0.5);
-    -moz-transform: scale(0.5);
-    -o-transform: scale(0.5);
-    -ms-transform: scale(0.5);
-    transform: scale(0.5);
+  -moz-transform: scale(0.5);
+  -o-transform: scale(0.5);
+  -ms-transform: scale(0.5);
+  transform: scale(0.5);
 	background: url('https://ssl.gstatic.com/docs/doclist/images/icon_10_generic_list.png') no-repeat left center !important; /* orientation=lt */
 	background: url('https://ssl.gstatic.com/docs/doclist/images/icon_10_generic_list.png') no-repeat right center !important; /* orientation=rt */
 }
