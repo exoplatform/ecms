@@ -52,6 +52,7 @@
 
   ShareContent.prototype.doShare = function(){
     gj(".uiShareDocuments.resizable #textAreaInput").exoMentions('val', function(value) {
+      value = value.replace(/<br\/?>/gi, '\n').replace(/&lt;/gi, '<').replace(/&gt;/gi, '>');
       gj(".uiShareDocuments.resizable #textAreaInput").val(value);
       gj("#shareActionBtn").trigger("click");
     });
