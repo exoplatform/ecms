@@ -4,6 +4,7 @@ import org.exoplatform.ecm.webui.component.explorer.rightclick.manager.PasteMana
 import org.exoplatform.ecm.webui.utils.JCRExceptionManager;
 import org.exoplatform.services.cms.actions.ActionServiceContainer;
 import org.exoplatform.services.cms.documents.TrashService;
+import org.exoplatform.wcm.webui.reader.ContentReader;
 import org.exoplatform.webui.core.UIApplication;
 import org.exoplatform.services.cms.clipboard.jcr.model.ClipboardCommand;
 import org.exoplatform.services.cms.documents.AutoVersionService;
@@ -225,7 +226,7 @@ public class UIDocumentAutoVersionForm extends UIForm implements UIPopupComponen
       destPath = destPath.concat(sourceNode.getName());
 
       Node destNode = (Node)destSession.getItem(destPath);
-      if(autoVersionComponent.isSingleProcess){
+      if(autoVersionComponent.isSingleProcess || autoVersionComponent.clipboardCommands.size()==1){
         if(ClipboardCommand.CUT.equals(currentClipboard.getType())){
           PasteManageComponent.pasteByCut(currentClipboard, uijcrExplorer, destSession, currentClipboard.getWorkspace(),
                   sourceNode.getPath(), destNode.getParent().getPath(), WCMCoreUtils.getService(ActionServiceContainer.class), false,false, true);
@@ -234,7 +235,7 @@ public class UIDocumentAutoVersionForm extends UIForm implements UIPopupComponen
         }
         closePopup(autoVersionComponent, uijcrExplorer, event);
         String msg = event.getRequestContext().getApplicationResourceBundle().getString("DocumentAuto.message");
-        msg = msg.replace("{0}", "<span style=\"font-weight:bold;\">"+destNode.getName()+"</span>");
+        msg = msg.replace("{0}", ContentReader.simpleEscapeHtml("<span style='font-weight:bold;'>" + destNode.getName() + "</span>"));
         event.getRequestContext().getJavascriptManager().require("SHARED/wcm-utils", "wcm_utils")
                 .addScripts("eXo.ecm.WCMUtils.showNotice(\" "+msg+"\", 'true'); ");
         return;
