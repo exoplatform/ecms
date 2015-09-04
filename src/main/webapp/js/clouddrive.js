@@ -1495,15 +1495,17 @@
 				$.each(classes, function(i, action) {
 					allowed += (allowed ? ", ." : ".") + action;
 				});
-
+				
+				var $actionBar = $("#uiActionsBarContainer ul");
 				// filter Action Bar items (depends on file/folder or the drive itself in the context)
-				$("#uiActionsBarContainer li a.actionIcon i").not(allowed).each(function() { // div ul li
+				$actionBar.find("li a.actionIcon i").not(allowed).each(function() {// div ul li
 					$(this).parent().css("display", "none");
 				});
-				// hack to prevent empty menu bar
-				$("#uiActionsBarContainer ul").append(
-				    "<li style='display: block;'><a class='actionIcon' style='height: 18px;'><i></i> </a></li>");
-				
+				if ($actionBar.find("li a:visible").size() == 0) {
+					// hack to prevent empty menu bar
+					$actionBar.append("<li style='display: block;'><a class='actionIcon' style='height: 18px;'><i></i> </a></li>");
+				}
+
 				// add sync call to Refresh action
 				$("a.refreshIcon").click(function() {
 					var $refreshChanges = $("span.uiCloudDriveChanges");
