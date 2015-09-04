@@ -19,6 +19,7 @@ package org.exoplatform.clouddrive.ecms.jcr;
 
 import org.exoplatform.clouddrive.jcr.NodeFinder;
 import org.exoplatform.ecm.utils.text.Text;
+import org.exoplatform.services.cms.impl.Utils;
 import org.exoplatform.services.cms.link.LinkManager;
 import org.exoplatform.services.cms.link.impl.NodeFinderImpl;
 import org.exoplatform.services.jcr.RepositoryService;
@@ -70,18 +71,17 @@ public class CMSNodeFinder extends NodeFinderImpl implements NodeFinder {
    */
   public String cleanName(String name) {
     // Align name to ECMS conventions
+    // we keep using the dot character as separator between name and extension for backward compatibility
     int extIndex = name.lastIndexOf('.');
-    String fileName;
-    if (extIndex >= 0) {
-      fileName = name.substring(0, extIndex);
+    StringBuilder jcrName = new StringBuilder();
+    if (extIndex >= 0 && extIndex < name.length() - 1) {
+      jcrName.append(Text.escapeIllegalJcrChars(Utils.cleanString(name.substring(0, extIndex))));
+      String extName = Text.escapeIllegalJcrChars(Utils.cleanString(name.substring(extIndex + 1)));
+      jcrName.append('.').append(extName).toString();
     } else {
-      fileName = name;
+      jcrName.append(Text.escapeIllegalJcrChars(Utils.cleanString(name)));
     }
-    String jcrName = Text.escapeIllegalJcrChars(org.exoplatform.services.cms.impl.Utils.cleanString(fileName));
-    if (extIndex >= 0) {
-      jcrName += name.substring(extIndex);
-    }
-    return jcrName;
+    return jcrName.toString();
   }
 
   /**
