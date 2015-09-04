@@ -16,9 +16,6 @@
  */
 package org.exoplatform.wcm.webui.fastcontentcreator;
 
-import javax.portlet.PortletMode;
-import javax.portlet.PortletPreferences;
-
 import org.exoplatform.services.jcr.RepositoryService;
 import org.exoplatform.wcm.webui.fastcontentcreator.config.UIFCCConfig;
 import org.exoplatform.webui.application.WebuiApplication;
@@ -28,6 +25,9 @@ import org.exoplatform.webui.config.annotation.ComponentConfig;
 import org.exoplatform.webui.core.UIPopupContainer;
 import org.exoplatform.webui.core.UIPortletApplication;
 import org.exoplatform.webui.core.lifecycle.UIApplicationLifecycle;
+
+import javax.portlet.PortletMode;
+import javax.portlet.PortletPreferences;
 
 /**
  * Created by The eXo Platform SAS

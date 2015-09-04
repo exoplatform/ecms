@@ -16,18 +16,6 @@
  */
 package org.exoplatform.wcm.webui.fastcontentcreator.config;
 
-import java.util.ArrayList;
-import java.util.List;
-
-import javax.jcr.Node;
-import javax.jcr.PathNotFoundException;
-import javax.jcr.RepositoryException;
-import javax.jcr.Session;
-import javax.jcr.nodetype.NodeDefinition;
-import javax.jcr.nodetype.NodeType;
-import javax.jcr.nodetype.NodeTypeManager;
-import javax.portlet.PortletPreferences;
-
 import org.exoplatform.ecm.webui.selector.UISelectable;
 import org.exoplatform.ecm.webui.tree.selectone.UIOneNodePathSelector;
 import org.exoplatform.services.cms.templates.TemplateService;
@@ -39,9 +27,9 @@ import org.exoplatform.services.wcm.core.NodeLocation;
 import org.exoplatform.services.wcm.utils.WCMCoreUtils;
 import org.exoplatform.wcm.webui.Utils;
 import org.exoplatform.wcm.webui.container.UIFormFieldSet;
-import org.exoplatform.wcm.webui.fastcontentcreator.UIFCCConstant;
 import org.exoplatform.wcm.webui.fastcontentcreator.UIFCCUtils;
 import org.exoplatform.wcm.webui.fastcontentcreator.config.action.UIFCCActionList;
+import org.exoplatform.wcm.webui.fastcontentcreator.UIFCCConstant;
 import org.exoplatform.web.application.ApplicationMessage;
 import org.exoplatform.webui.config.annotation.ComponentConfig;
 import org.exoplatform.webui.config.annotation.EventConfig;
@@ -59,6 +47,17 @@ import org.exoplatform.webui.form.UIFormTabPane;
 import org.exoplatform.webui.form.UIFormTextAreaInput;
 import org.exoplatform.webui.form.ext.UIFormInputSetWithAction;
 import org.exoplatform.webui.form.input.UICheckBoxInput;
+
+import javax.jcr.Node;
+import javax.jcr.PathNotFoundException;
+import javax.jcr.RepositoryException;
+import javax.jcr.Session;
+import javax.jcr.nodetype.NodeDefinition;
+import javax.jcr.nodetype.NodeType;
+import javax.jcr.nodetype.NodeTypeManager;
+import javax.portlet.PortletPreferences;
+import java.util.ArrayList;
+import java.util.List;
 
 
 /**
