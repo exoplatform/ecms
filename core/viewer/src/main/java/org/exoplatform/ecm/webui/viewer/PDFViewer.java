@@ -21,6 +21,8 @@ import org.exoplatform.download.InputStreamDownloadResource;
 import org.exoplatform.portal.webui.util.Util;
 import org.exoplatform.portal.webui.workspace.UIPortalApplication;
 import org.exoplatform.services.cms.mimetype.DMSMimeTypeResolver;
+import org.exoplatform.services.log.ExoLogger;
+import org.exoplatform.services.log.Log;
 import org.exoplatform.services.pdfviewer.PDFViewerService;
 import org.exoplatform.services.resources.ResourceBundleService;
 import org.exoplatform.services.wcm.utils.WCMCoreUtils;
@@ -83,6 +85,8 @@ import java.util.ResourceBundle;
  * PDF Viewer component which will be used to display PDF file on web browser
  */
 public class PDFViewer extends UIForm {
+
+  private static final Log LOG = ExoLogger.getExoLogger(PDFViewer.class);
 
   final static private String PAGE_NUMBER = "pageNumber";
   final static private String SCALE_PAGE = "scalePage";
@@ -186,11 +190,19 @@ public class PDFViewer extends UIForm {
       if(documentInfo.getProducer() != null && documentInfo.getProducer().length() > 0) {
         metadatas.put("producer", documentInfo.getProducer());
       }
-      if(documentInfo.getCreationDate() != null) {
-        metadatas.put("creationDate", documentInfo.getCreationDate().toString());
+      try {
+        if(documentInfo.getCreationDate() != null) {
+          metadatas.put("creationDate", documentInfo.getCreationDate().toString());
+        }
+      } catch (Exception e) {
+        LOG.debug("Error when getting creation date.", e);
       }
-      if(documentInfo.getModDate() != null) {
-        metadatas.put("modDate", documentInfo.getModDate().toString());
+      try {
+        if(documentInfo.getModDate() != null) {
+          metadatas.put("modDate", documentInfo.getModDate().toString());
+        }
+      } catch (Exception e) {
+        LOG.debug("Exception when getting modification date.", e);
       }
     }
   }

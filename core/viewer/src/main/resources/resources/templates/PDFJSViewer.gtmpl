@@ -34,11 +34,7 @@ if (uiParent != null) {
   }
 
   def rqcontext = _ctx.getRequestContext();
-  def currentPage = uicomponent.getPageNumber();
   def maximumPage = uicomponent.getMaximumOfPage();
-  def currentRotation = uicomponent.getCurrentRotation();
-  def currentScale = uicomponent.getCurrentScale();
-  def metadatas = uicomponent.getMetadataExtraction();
   
   PortalRequestContext portalRequestContext = Util.getPortalRequestContext();
   def lang = portalRequestContext.getLocale().getLanguage();
@@ -49,7 +45,12 @@ if (maximumPage > 0 && maximumPage <= PDFViewerService.MAX_PAGES && fileSize <= 
 
 if(uicomponent.isNotModernBrowser()) {
     rqcontext.getJavascriptManager().require("SHARED/ecm-utils", "ecmutil").
-    addScripts('ecmutil.ECMUtils.onKeyPDFViewerPress();') ;
+    addScripts('ecmutil.ECMUtils.onKeyPDFViewerPress();');
+
+    def currentPage = uicomponent.getPageNumber();
+    def currentRotation = uicomponent.getCurrentRotation();
+    def currentScale = uicomponent.getCurrentScale();
+    def metadatas = uicomponent.getMetadataExtraction();
 
   %>
     <head>
