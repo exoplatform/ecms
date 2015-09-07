@@ -62,7 +62,7 @@ import org.w3c.dom.Element;
  */
 @ComponentConfig(
   lifecycle = UIApplicationLifecycle.class,
-  template = "app:/groovy/SingleContentViewer/UISingleContentView.gtmpl"
+  template = "system:/groovy/SingleContentViewer/UISingleContentView.gtmpl"
 )
 
 public class UISingleContentViewerPortlet extends UIPortletApplication {
