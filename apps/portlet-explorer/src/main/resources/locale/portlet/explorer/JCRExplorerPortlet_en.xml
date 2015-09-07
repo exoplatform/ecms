@@ -1938,6 +1938,11 @@
   # Validator messages                                                              #
   ###################################################################################
   -->
+   <ECMPhoneFormatValidator>
+     <msg>
+       <Invalid>The field '{0}' contains invalid Phone number. Please enter another value.</Invalid>
+     </msg>
+  </ECMPhoneFormatValidator>
   <ECMNameValidator>
     <msg>
       <Invalid-char>The field '{0}' contains some invalid characters. Please enter another value.</Invalid-char>
