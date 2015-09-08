@@ -23,5 +23,6 @@
     <module>webui-administration</module>
     <module>core-configuration</module>
     <module>webui-seo</module>
+    <module>webui-fcc</module>
   </modules>
 </project>

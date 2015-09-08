@@ -2,21 +2,17 @@
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
   <modelVersion>4.0.0</modelVersion>
   <parent>
-    <artifactId>ecms-ext</artifactId>
+    <artifactId>ecms-core</artifactId>
     <groupId>org.exoplatform.ecms</groupId>
-    <version>4.3.x-SNAPSHOT</version>
+    <version>4.3.x-ecms-wcm-template-pack-addon-SNAPSHOT</version>
   </parent>
-  <artifactId>ecms-ext-fastcontentcreator</artifactId>
-  <packaging>pom</packaging>
-  <name>eXo ECM Suite :: Ext :: Fast Content Creator</name>
-  <description>eXo Entreprise Content Management Suite :: Fast Content Creator</description>
-  <modules>
-    <module>portlet</module>
-  </modules>
+  <artifactId>ecms-core-webui-fcc</artifactId>
+  <name>eXo Fast Content Creator webui component</name>
+  <description>>eXo Fast Content Creator webui component</description>
   <dependencies>
     <dependency>
       <groupId>org.exoplatform.ecms</groupId>
-      <artifactId>ecms-core-webui-fcc</artifactId>
+      <artifactId>ecms-core-webui</artifactId>
     </dependency>
   </dependencies>
 </project>
