@@ -581,15 +581,25 @@ UIFileView.prototype.showItemContextMenu = function (event, element) {
 	        listUnlockedNode = listUnlockedNode + 1;
 	    }
 	}
-	if (listLockedNode > 0 && listUnlockedNode == 0) {
-	    unlockAction.parentNode.style.display = "block";
-	    lockAction.parentNode.style.display = "none";
-	} else if (listLockedNode == 0 && listUnlockedNode > 0) {
-	    unlockAction.parentNode.style.display = "none";
-	    lockAction.parentNode.style.display = "block";
-	} else  {
-	    unlockAction.parentNode.style.display = "none";
-	    lockAction.parentNode.style.display = "none";
+	if (lockAction ) {
+		if (listLockedNode > 0 && listUnlockedNode == 0) {
+		    lockAction.parentNode.style.display = "none";
+		} else if (listLockedNode == 0 && listUnlockedNode > 0) {
+		    lockAction.parentNode.style.display = "block";
+		} else  {
+		    lockAction.parentNode.style.display = "none";
+		}
+
+	}
+	if (unlockAction) {
+		if (listLockedNode > 0 && listUnlockedNode == 0) {
+		    unlockAction.parentNode.style.display = "block";
+		} else if (listLockedNode == 0 && listUnlockedNode > 0) {
+		    unlockAction.parentNode.style.display = "none";
+		} else  {
+		    unlockAction.parentNode.style.display = "none";
+		}
+
 	}
 
 	if (checkExoActionNode) {
@@ -629,29 +639,43 @@ UIFileView.prototype.showItemContextMenu = function (event, element) {
 		addSymLinkAction.parentNode.style.display = "none";
 		
 	} else {
-		if (checkRemoveFavourite) {
-		  removeFavouriteAction.parentNode.style.display = "block";
-		  addFavouriteAction.parentNode.style.display = "none";
-		} else {
-		  addFavouriteAction.parentNode.style.display = "block";
-		  removeFavouriteAction.parentNode.style.display = "none";
-		}
-	   
-		if (!checkInTrash || !isAbleToRestore) {
-		  restoreFromTrashAction.parentNode.style.display = "none";
-		} else {
-		  restoreFromTrashAction.parentNode.style.display = "block";
-		}
-		if (checkInStatus) {
-		  addSymLinkAction.parentNode.style.display = "none";
-		} else {
-		  addSymLinkAction.parentNode.style.display = "block";
-		}
-		if (!checkMediaType) {
-		  playMediaAction.parentNode.style.display = "none";
-		} else {
-		  playMediaAction.parentNode.style.display = "block";
-		}
+  		if (addFavouriteAction) {
+  			if (checkRemoveFavourite) {
+  	  		  addFavouriteAction.parentNode.parentNode.style.display = "none";
+  	  		} else {
+  	  		  addFavouriteAction.parentNode.parentNode.style.display = "block";
+  	  		}
+  		}
+  		if (removeFavouriteAction) {
+  			if (checkRemoveFavourite) {
+  	  		  removeFavouriteAction.parentNode.parentNode.style.display = "block";
+  	  		} else {
+  	  		  removeFavouriteAction.parentNode.parentNode.style.display = "none";
+  	  		}
+  		}
+
+  		if (restoreFromTrashAction){
+	  		if (!checkInTrash) {
+	  		  restoreFromTrashAction.parentNode.parentNode.style.display = "none";
+	  		}else{
+	  		  restoreFromTrashAction.parentNode.parentNode.style.display = "block";
+	  		}
+	  	}
+  		if (addSymLinkAction) {
+  	  		if (checkInStatus) {
+  	  		  addSymLinkAction.parentNode.style.display = "none";
+  	  		} else {
+  	  		  addSymLinkAction.parentNode.style.display = "block";
+  	  		}
+  		}
+
+  		if (playMediaAction) {
+	  		if (!checkMediaType) {
+	  		  playMediaAction.parentNode.style.display = "none";
+	  		} else {
+	  		  playMediaAction.parentNode.style.display = "block";
+	  		}
+  		}
 		if (emptyTrashAction) {
 		  if (!checkEmptyTrash) {
 		    emptyTrashAction.parentNode.style.display = "none";

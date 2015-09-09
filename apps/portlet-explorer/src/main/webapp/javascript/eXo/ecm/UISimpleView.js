@@ -791,37 +791,58 @@
 		cutAction.parentNode.style.display = "none";
 		addSymLinkAction.parentNode.style.display = "none";
   	  } else {
-  		if (checkUnlock) {
-  		  unlockAction.parentNode.parentNode.style.display = "block";
-  		  lockAction.parentNode.parentNode.style.display = "none";
-  		} else {
-  		  unlockAction.parentNode.parentNode.style.display = "none";
-  		  lockAction.parentNode.parentNode.style.display = "block";
+  		if (lockAction) {
+	  		if (checkUnlock) {
+	  		  lockAction.parentNode.parentNode.style.display = "none";
+	  		} else {
+	  		  lockAction.parentNode.parentNode.style.display = "block";
+	  		}
+  		}
+  		if (unlockAction) {
+	  		if (checkUnlock) {
+	  			unlockAction.parentNode.parentNode.style.display = "block";
+		  	} else {
+		  		unlockAction.parentNode.parentNode.style.display = "none";
+		  	}
+  		}
+  		if (addFavouriteAction) {
+  			if (checkRemoveFavourite) {
+  	  		  addFavouriteAction.parentNode.parentNode.style.display = "none";
+  	  		} else {
+  	  		  addFavouriteAction.parentNode.parentNode.style.display = "block";
+  	  		}
+  		}
+  		if (removeFavouriteAction) {
+  			if (checkRemoveFavourite) {
+  	  		  removeFavouriteAction.parentNode.parentNode.style.display = "block";
+  	  		} else {
+  	  		  removeFavouriteAction.parentNode.parentNode.style.display = "none";
+  	  		}
   		}
 
-    	if (checkRemoveFavourite) {
-  		  removeFavouriteAction.parentNode.parentNode.style.display = "block";
-  		  addFavouriteAction.parentNode.parentNode.style.display = "none";
-  		} else {
-  		  addFavouriteAction.parentNode.parentNode.style.display = "block";
-  		  removeFavouriteAction.parentNode.parentNode.style.display = "none";
+  		if (restoreFromTrashAction){
+	  		if (!checkInTrash) {
+	  		  restoreFromTrashAction.parentNode.parentNode.style.display = "none";
+	  		}else{
+	  		  restoreFromTrashAction.parentNode.parentNode.style.display = "block";
+	  		}
+	  	}
+  		if (addSymLinkAction) {
+  	  		if (checkInStatus) {
+  	  		  addSymLinkAction.parentNode.style.display = "none";
+  	  		} else {
+  	  		  addSymLinkAction.parentNode.style.display = "block";
+  	  		}
   		}
 
-  		if (!checkInTrash) {
-  		  restoreFromTrashAction.parentNode.parentNode.style.display = "none";
-  		}else{
-  		  restoreFromTrashAction.parentNode.parentNode.style.display = "block";
+  		if (playMediaAction) {
+	  		if (!checkMediaType) {
+	  		  playMediaAction.parentNode.style.display = "none";
+	  		} else {
+	  		  playMediaAction.parentNode.style.display = "block";
+	  		}
   		}
-  		if (checkInStatus) {
-  		  addSymLinkAction.parentNode.style.display = "none";
-  		} else {
-  		  addSymLinkAction.parentNode.style.display = "block";
-  		}
-  		if (!checkMediaType) {
-  		  playMediaAction.parentNode.style.display = "none";
-  		} else {
-  		  playMediaAction.parentNode.style.display = "block";
-  		}
+  		
   		if (emptyTrashAction) {
   		  if (!checkEmptyTrash) {
   			  emptyTrashAction.parentNode.style.display = "none";
