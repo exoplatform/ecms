@@ -96,4 +96,31 @@
       <scope>provided</scope>
     </dependency>
   </dependencies>
+  <build>
+    <pluginManagement>
+      <plugins>
+        <!-- Validate wellformedness of (almost) all XML files -->
+        <plugin>
+          <groupId>org.codehaus.mojo</groupId>
+          <artifactId>xml-maven-plugin</artifactId>
+          <configuration>
+            <validationSets>
+              <validationSet>
+                <dir>src/main/resources</dir>
+                <includes>
+                  <include>**/*.xml</include>
+                </includes>
+                <excludes>
+                  <!-- We cannot validate these files because they are using an XML namespace without declaring it -->
+                  <exclude>**/ContentListViewer/*.xml</exclude>
+                  <exclude>**/SingleContentViewer/*.xml</exclude>
+                </excludes>
+              </validationSet>
+            </validationSets>
+          </configuration>
+        </plugin>
+      </plugins>
+    </pluginManagement>
+
+  </build>
 </project>
