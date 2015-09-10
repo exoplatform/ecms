@@ -49,10 +49,12 @@ public class AutoVersionServiceImpl implements AutoVersionService{
       currentNode.save();
     }
 
+    String nodePath = currentNode.getPath();
     for (String driveAutoVersion: lstDriveAutoVersion){
       String driveHomePath = manageDriveService.getDriveByName(StringUtils.trim(driveAutoVersion)).getHomePath();
-      if(driveHomePath.startsWith(PERSONAL_DRIVE_PREFIX) || driveHomePath.startsWith(GROUP_DRIVE_PREFIX) ||
-              currentNode.getPath().startsWith(driveHomePath)){
+      if((driveHomePath.startsWith(PERSONAL_DRIVE_PARRTEN) && nodePath.startsWith(PERSONAL_DRIVE_PREFIX)) ||
+              driveHomePath.startsWith(GROUP_DRIVE_PARRTEN) && nodePath.startsWith(GROUP_DRIVE_PREFIX) ||
+              nodePath.startsWith(driveHomePath)){
         VersionHistoryUtils.createVersion(currentNode);
         return;
       }
@@ -67,7 +69,8 @@ public class AutoVersionServiceImpl implements AutoVersionService{
     if(StringUtils.isEmpty(nodePath)) return false;
     for (String driveAutoVersion: lstDriveAutoVersion){
       String driveHomePath = manageDriveService.getDriveByName(StringUtils.trim(driveAutoVersion)).getHomePath();
-      if(driveHomePath.startsWith(PERSONAL_DRIVE_PREFIX) || driveHomePath.startsWith(GROUP_DRIVE_PREFIX) ||
+      if((driveHomePath.startsWith(PERSONAL_DRIVE_PARRTEN) && nodePath.startsWith(PERSONAL_DRIVE_PREFIX)) ||
+              driveHomePath.startsWith(GROUP_DRIVE_PARRTEN) && nodePath.startsWith(GROUP_DRIVE_PREFIX) ||
               nodePath.startsWith(driveHomePath)){
         return true;
       }
@@ -90,8 +93,10 @@ public class AutoVersionServiceImpl implements AutoVersionService{
     }
     for (String driveAutoVersion: lstDriveAutoVersion){
       String driveHomePath = manageDriveService.getDriveByName(StringUtils.trim(driveAutoVersion)).getHomePath();
-      if(driveHomePath.startsWith(PERSONAL_DRIVE_PREFIX) || driveHomePath.startsWith(GROUP_DRIVE_PREFIX) ||
-          currentNode.getPath().startsWith(driveHomePath)){
+      String nodePath = currentNode.getPath();
+      if((driveHomePath.startsWith(PERSONAL_DRIVE_PARRTEN) && nodePath.startsWith(PERSONAL_DRIVE_PREFIX)) ||
+              driveHomePath.startsWith(GROUP_DRIVE_PARRTEN) && nodePath.startsWith(GROUP_DRIVE_PREFIX) ||
+          nodePath.startsWith(driveHomePath)){
         createVersion(currentNode, sourceNode);
         return;
       }

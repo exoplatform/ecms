@@ -69,7 +69,7 @@ public class TestAutoVersionService extends BaseWCMTestCase {
     for (String drive: lstSupport){
         lstHomePath.add(manageDriveService.getDriveByName(drive).getHomePath());
     }
-    assertTrue("List supported not contant Persional drive", lstHomePath.contains(AutoVersionService.PERSONAL_DRIVE_PREFIX));
-    assertTrue("List supported not contant Groups drive", lstHomePath.contains(AutoVersionService.GROUP_DRIVE_PREFIX));
+    assertTrue("List supported not contant Persional drive", lstHomePath.contains(AutoVersionService.PERSONAL_DRIVE_PARRTEN));
+    assertTrue("List supported not contant Groups drive", lstHomePath.contains(AutoVersionService.GROUP_DRIVE_PARRTEN));
   }
 }

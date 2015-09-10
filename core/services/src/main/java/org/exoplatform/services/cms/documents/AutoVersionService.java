@@ -18,8 +18,11 @@ public interface AutoVersionService {
   public final int DOCUMENT_AUTO_DEFAULT_VERSION_MAX=0;
   public final int DOCUMENT_AUTO_DEFAULT_VERSION_EXPIRED=0;
 
-  public final String PERSONAL_DRIVE_PREFIX = "/Users/${userId}/Private";
-  public final String GROUP_DRIVE_PREFIX = "/Groups${groupId}/Documents";
+  public final String PERSONAL_DRIVE_PARRTEN = "/Users/${userId}/Private";
+  public final String GROUP_DRIVE_PARRTEN = "/Groups${groupId}/Documents";
+
+  public final String PERSONAL_DRIVE_PREFIX = "/Users";
+  public final String GROUP_DRIVE_PREFIX = "/Groups";
 
   /**
    * Versioning for document
