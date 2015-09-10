@@ -1,7 +1,6 @@
 package org.exoplatform.services.cms.documents;
 
 import javax.jcr.Node;
-import java.io.InputStream;
 import java.util.List;
 
 /**
@@ -12,6 +11,16 @@ import java.util.List;
  * #comments here
  */
 public interface AutoVersionService {
+
+  public final String DRIVES_AUTO_VERSION = "ecms.documents.versioning.drives";
+  public final String DRIVES_AUTO_VERSION_MAX = "ecms.documents.versions.max";
+  public final String DRIVES_AUTO_VERSION_EXPIRED = "ecms.documents.versions.expiration";
+  public final int DOCUMENT_AUTO_DEFAULT_VERSION_MAX=0;
+  public final int DOCUMENT_AUTO_DEFAULT_VERSION_EXPIRED=0;
+
+  public final String PERSONAL_DRIVE_PREFIX = "/Users/${userId}/Private";
+  public final String GROUP_DRIVE_PREFIX = "/Groups${groupId}/Documents";
+
   /**
    * Versioning for document
    * @param currentNode
@@ -40,5 +49,5 @@ public interface AutoVersionService {
     * @return List of Drive supported versioning
     * @throws Exception
     */
-   List<String> getDriveAutoVersion();
+  public List<String> getDriveAutoVersion();
 }

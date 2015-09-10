@@ -1,11 +1,8 @@
 package org.exoplatform.services.cms.documents.impl;
 
-import javax.jcr.Node;
-
 import org.apache.commons.lang.StringUtils;
 import org.exoplatform.container.xml.InitParams;
 import org.exoplatform.services.cms.documents.AutoVersionService;
-import org.exoplatform.services.cms.drives.DriveData;
 import org.exoplatform.services.cms.drives.ManageDriveService;
 import org.exoplatform.services.jcr.ext.utils.VersionHistoryUtils;
 import org.exoplatform.services.log.ExoLogger;
@@ -13,10 +10,10 @@ import org.exoplatform.services.log.Log;
 import org.exoplatform.services.wcm.core.NodetypeConstant;
 import org.exoplatform.services.wcm.utils.WCMCoreUtils;
 
+import javax.jcr.Node;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
-import org.exoplatform.services.cms.impl.Utils;
 /**
  * Created by The eXo Platform SEA
  * Author : eXoPlatform
@@ -27,13 +24,6 @@ import org.exoplatform.services.cms.impl.Utils;
 public class AutoVersionServiceImpl implements AutoVersionService{
 
   private static Log log = ExoLogger.getLogger(AutoVersionServiceImpl.class);
-
-  private final String DRIVES_AUTO_VERSION = "ecms.documents.versioning.drives";
-  private final String DRIVES_AUTO_VERSION_MAX = "ecms.documents.versions.max";
-  private final String DRIVES_AUTO_VERSION_EXPIRED = "ecms.documents.versions.expiration";
-  private final int DOCUMENT_AUTO_DEFAULT_VERSION_MAX=0;
-  private final int DOCUMENT_AUTO_DEFAULT_VERSION_EXPIRED=0;
-  private final String PERSIONAL_DRIVE_PREFIX = "/Users";
 
   private ManageDriveService manageDriveService;
   private List<String> lstDriveAutoVersion = new ArrayList<String>();
@@ -58,15 +48,11 @@ public class AutoVersionServiceImpl implements AutoVersionService{
       currentNode.addMixin(NodetypeConstant.MIX_REFERENCEABLE);
       currentNode.save();
     }
-    if(currentNode.getPath().startsWith(PERSIONAL_DRIVE_PREFIX)){
-      VersionHistoryUtils.createVersion(currentNode);
-      return;
-    }
-    for (String driveAutoVersion: lstDriveAutoVersion){
-      if(driveAutoVersion.startsWith(PERSIONAL_DRIVE_PREFIX)) continue;
 
+    for (String driveAutoVersion: lstDriveAutoVersion){
       String driveHomePath = manageDriveService.getDriveByName(StringUtils.trim(driveAutoVersion)).getHomePath();
-      if(currentNode.getPath().startsWith(driveHomePath)){
+      if(driveHomePath.startsWith(PERSONAL_DRIVE_PREFIX) || driveHomePath.startsWith(GROUP_DRIVE_PREFIX) ||
+              currentNode.getPath().startsWith(driveHomePath)){
         VersionHistoryUtils.createVersion(currentNode);
         return;
       }
@@ -81,9 +67,10 @@ public class AutoVersionServiceImpl implements AutoVersionService{
     if(StringUtils.isEmpty(nodePath)) return false;
     for (String driveAutoVersion: lstDriveAutoVersion){
       String driveHomePath = manageDriveService.getDriveByName(StringUtils.trim(driveAutoVersion)).getHomePath();
-      if(driveHomePath.startsWith(PERSIONAL_DRIVE_PREFIX)
-              && nodePath.startsWith(PERSIONAL_DRIVE_PREFIX)) return true;
-      if(nodePath.startsWith(driveHomePath)) return true;
+      if(driveHomePath.startsWith(PERSONAL_DRIVE_PREFIX) || driveHomePath.startsWith(GROUP_DRIVE_PREFIX) ||
+              nodePath.startsWith(driveHomePath)){
+        return true;
+      }
     }
     return false;
   }
@@ -101,20 +88,12 @@ public class AutoVersionServiceImpl implements AutoVersionService{
       currentNode.addMixin(NodetypeConstant.MIX_REFERENCEABLE);
       currentNode.save();
     }
-    if(currentNode.getPath().startsWith(PERSIONAL_DRIVE_PREFIX)){
-      createVersion(currentNode, sourceNode);
-      return;
-    }
-    List<DriveData> userDriveDatas = manageDriveService.getDriveByUserRoles(WCMCoreUtils.getRemoteUser(), Utils.getMemberships());
-
     for (String driveAutoVersion: lstDriveAutoVersion){
-      if(driveAutoVersion.startsWith(PERSIONAL_DRIVE_PREFIX)) continue;
-
-      for (DriveData driveData:userDriveDatas){
-        if(currentNode.getPath().contains(driveData.getHomePath())){
-          createVersion(currentNode, sourceNode);
-          return;
-        }
+      String driveHomePath = manageDriveService.getDriveByName(StringUtils.trim(driveAutoVersion)).getHomePath();
+      if(driveHomePath.startsWith(PERSONAL_DRIVE_PREFIX) || driveHomePath.startsWith(GROUP_DRIVE_PREFIX) ||
+          currentNode.getPath().startsWith(driveHomePath)){
+        createVersion(currentNode, sourceNode);
+        return;
       }
     }
   }

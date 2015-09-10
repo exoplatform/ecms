@@ -74,7 +74,61 @@
               <field  name="allowCreateFolders"><string>nt:folder,nt:unstructured</string></field>
               <field name="allowNodeTypesOnTree"><string>*</string></field>          
             </object>
-          </object-param>    
+          </object-param>
+          <object-param>
+            <name>Managed Sites</name>
+            <description>Managed Sites</description>
+            <object type="org.exoplatform.services.cms.drives.DriveData">
+              <field name="name"><string>Managed Sites</string></field>
+              <field name="workspace"><string>collaboration</string></field>
+              <field name="permissions"><string>*:/platform/administrators</string></field>
+              <field name="homePath"><string>/sites</string></field>
+              <field name="icon"><string></string></field>
+              <field name="views"><string>wcm-view, file-view</string></field>
+              <field name="viewPreferences"><boolean>false</boolean></field>
+              <field name="viewNonDocument"><boolean>true</boolean></field>
+              <field name="viewSideBar"><boolean>true</boolean></field>
+              <field name="showHiddenNode"><boolean>false</boolean></field>
+              <field name="allowCreateFolders"><string>nt:folder,nt:unstructured</string></field>
+              <field name="allowNodeTypesOnTree"><string>*</string></field>
+            </object>
+          </object-param>
+          <object-param>
+            <name>Personal Documents</name>
+            <description>Personal Documents</description>
+            <object type="org.exoplatform.services.cms.drives.DriveData">
+              <field name="name"><string>Personal Documents</string></field>
+              <field name="workspace"><string>collaboration</string></field>
+              <field name="permissions"><string>*:/platform/administrators</string></field>
+              <field name="homePath"><string>/Users/${userId}/Private</string></field>
+              <field name="icon"><string></string></field>
+              <field name="views"><string>wcm-view, file-view</string></field>
+              <field name="viewPreferences"><boolean>false</boolean></field>
+              <field name="viewNonDocument"><boolean>true</boolean></field>
+              <field name="viewSideBar"><boolean>true</boolean></field>
+              <field name="showHiddenNode"><boolean>false</boolean></field>
+              <field name="allowCreateFolders"><string>nt:folder,nt:unstructured</string></field>
+              <field name="allowNodeTypesOnTree"><string>*</string></field>
+            </object>
+          </object-param>
+          <object-param>
+            <name>Groups</name>
+            <description>Groups Drive</description>
+            <object type="org.exoplatform.services.cms.drives.DriveData">
+              <field name="name"><string>Groups</string></field>
+              <field name="workspace"><string>collaboration</string></field>
+              <field name="permissions"><string>*:/platform/administrators</string></field>
+              <field name="homePath"><string>/Groups${groupId}/Documents</string></field>
+              <field name="icon"><string></string></field>
+              <field name="views"><string>wcm-view, file-view</string></field>
+              <field name="viewPreferences"><boolean>false</boolean></field>
+              <field name="viewNonDocument"><boolean>true</boolean></field>
+              <field name="viewSideBar"><boolean>true</boolean></field>
+              <field name="showHiddenNode"><boolean>false</boolean></field>
+              <field name="allowCreateFolders"><string>nt:folder,nt:unstructured</string></field>
+              <field name="allowNodeTypesOnTree"><string>*</string></field>
+            </object>
+          </object-param>
         </init-params>  
       </component-plugin> 
 
