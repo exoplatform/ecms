@@ -1,18 +1,16 @@
 package org.exoplatform.ecm.webui.component.explorer.rightclick.manager;
 
-import org.exoplatform.ecm.webui.component.explorer.UIJCRExplorer;
+import org.exoplatform.ecm.webui.component.explorer.control.filter.CanSetPropertyFilter;
 import org.exoplatform.ecm.webui.component.explorer.control.filter.IsContainBinaryFilter;
+import org.exoplatform.ecm.webui.component.explorer.control.filter.IsEditableFilter;
 import org.exoplatform.ecm.webui.component.explorer.control.filter.IsNotEditingDocumentFilter;
 import org.exoplatform.ecm.webui.component.explorer.control.filter.IsNotInTrashFilter;
-import org.exoplatform.ecm.webui.component.explorer.control.filter.IsNtFileFilter;
 import org.exoplatform.ecm.webui.component.explorer.control.filter.IsVersionableFilter;
 import org.exoplatform.ecm.webui.component.explorer.control.listener.UIActionBarActionListener;
-import org.exoplatform.ecm.webui.component.explorer.upload.UIUploadManager;
 import org.exoplatform.services.log.ExoLogger;
 import org.exoplatform.services.log.Log;
 import org.exoplatform.webui.config.annotation.ComponentConfig;
 import org.exoplatform.webui.config.annotation.EventConfig;
-import org.exoplatform.webui.core.UIPopupContainer;
 import org.exoplatform.webui.event.Event;
 import org.exoplatform.webui.ext.filter.UIExtensionFilter;
 import org.exoplatform.webui.ext.filter.UIExtensionFilters;
@@ -42,7 +40,11 @@ public class UploadNewVersionManageComponent extends UIAbstractManagerComponent 
           new IsVersionableFilter(),
           new IsNotInTrashFilter(),
           new IsNotEditingDocumentFilter(),
-          new IsContainBinaryFilter()});
+          new IsContainBinaryFilter(),
+          new IsEditableFilter(),
+          new IsNotInTrashFilter(),
+          new IsNotEditingDocumentFilter(),
+          new CanSetPropertyFilter()});
 
   @UIExtensionFilters
   public List<UIExtensionFilter> getFilters() {
