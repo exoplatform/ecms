@@ -52,7 +52,6 @@ import org.exoplatform.web.application.ApplicationMessage;
 import org.exoplatform.webui.config.annotation.ComponentConfig;
 import org.exoplatform.webui.config.annotation.EventConfig;
 import org.exoplatform.webui.core.UIApplication;
-import org.exoplatform.webui.core.UIComponent;
 import org.exoplatform.webui.core.UIPageIterator;
 import org.exoplatform.webui.core.UIPopupContainer;
 import org.exoplatform.webui.core.UIPopupWindow;
@@ -112,6 +111,9 @@ public class PasteManageComponent extends UIAbstractManagerComponent {
   private static boolean isRefresh = true;
   private static Map<String, Boolean> versionedRemember, nonVersionedRemember;
 
+  public static boolean isIsRefresh() {
+    return isRefresh;
+  }
 
   @UIExtensionFilters
   public List<UIExtensionFilter> getFilters() {
@@ -234,7 +236,7 @@ public class PasteManageComponent extends UIAbstractManagerComponent {
     }
   }
 
-  private static void processPaste(ClipboardCommand clipboardCommand, Node destNode, Event<?> event, UIJCRExplorer uiExplorer)
+  public static void processPaste(ClipboardCommand clipboardCommand, Node destNode, Event<?> event, UIJCRExplorer uiExplorer)
     throws Exception{
     AutoVersionService autoVersionService = WCMCoreUtils.getService(AutoVersionService.class);
     Node sourceNode = (Node)uiExplorer.getSessionByWorkspace(clipboardCommand.getWorkspace()).
@@ -243,17 +245,24 @@ public class PasteManageComponent extends UIAbstractManagerComponent {
             && autoVersionService.isVersionSupport(destNode.getPath())){
       Set<ClipboardCommand> clipboardCommands = new HashSet<>();
       clipboardCommands.add(clipboardCommand);
-      showConfirmDialog(destNode, sourceNode,uiExplorer,clipboardCommand, clipboardCommands, event);
+      showConfirmDialog(destNode, sourceNode, uiExplorer, clipboardCommand, clipboardCommands, event);
     }else {
       processPaste(clipboardCommand, destNode.getPath(),uiExplorer, event, false, true);
     }
   }
-
-  public static void processPaste(ClipboardCommand currentClipboard, String destPath, Event<?> event)
-      throws Exception {
-    UIJCRExplorer uiExplorer = ((UIComponent)event.getSource()).getAncestorOfType(UIJCRExplorer.class);
-    processPaste(currentClipboard, destPath,uiExplorer, event, false, true);
-  }
+//
+//  /**
+//   * Event raise from UIClipboard
+//   * @param currentClipboard
+//   * @param destPath
+//   * @param event
+//   * @throws Exception
+//   */
+//  public static void processPaste(ClipboardCommand currentClipboard, String destPath, Event<?> event)
+//      throws Exception {
+//    UIJCRExplorer uiExplorer = ((UIComponent)event.getSource()).getAncestorOfType(UIJCRExplorer.class);
+//    processPaste(currentClipboard, destPath,uiExplorer, event, false, true);
+//  }
 
   private static void processPasteMultiple(String destPath, Event<?> event, UIJCRExplorer uiExplorer)
           throws Exception {
@@ -447,8 +456,9 @@ public class PasteManageComponent extends UIAbstractManagerComponent {
     uiDocumentAutoVersionForm.setCurrentClipboard(clipboard);
     uiDocumentAutoVersionForm.setMessage("UIDocumentAutoVersionForm.msg");
     uiDocumentAutoVersionForm.setArguments(new String[]{srcNode.getName()});
-    uiDocumentAutoVersionForm.init(destExitedNode);
     uiDocumentAutoVersionForm.setClipboardCommands(virtualClipboards);
+    if(virtualClipboards!=null && virtualClipboards.size()==1) uiDocumentAutoVersionForm.setSingleProcess(true);
+    uiDocumentAutoVersionForm.init(destExitedNode);
     objUIPopupContainer.activate(uiDocumentAutoVersionForm, 450, 0);
     event.getRequestContext().addUIComponentToUpdateByAjax(objUIPopupContainer);
     isRefresh = false;
