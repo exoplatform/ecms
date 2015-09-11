@@ -1015,7 +1015,12 @@
 		  	  //process next upload request
 		  	  eXo.ecm.MultiUpload.processNextUploadRequestInQueue();
 		    	 },
-		       error: function() {
+		       error: function(ret, status, xhr) {
+						 var _data = gj.parseJSON(ret.responseText);
+						 if(_data !== undefined && _data.error_type === "ERROR_MIMETYPE"){
+							 eXo.ecm.WCMUtils.showNotice(_data.error_message, true, "error");
+							 setTimeout(function(){eXo.ecm.MultiUpload.abortAllOK();}, 3000);
+						 }
 				 if (eXo.ecm.MultiUpload.connectionFailed[progressID]++ > eXo.ecm.MultiUpload.MAX_CONNECTION) {
 					 var e = eXo.ecm.MultiUpload.handleReaderAbort(progressID, eXo.ecm.MultiUpload.ERROR);
 					 e(window.event);

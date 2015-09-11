@@ -25,7 +25,9 @@ import java.util.Date;
 import java.util.GregorianCalendar;
 import java.util.HashSet;
 import java.util.Hashtable;
+import java.util.Locale;
 import java.util.Map;
+import java.util.ResourceBundle;
 import java.util.Set;
 
 import javax.jcr.ItemExistsException;
@@ -52,12 +54,14 @@ import org.exoplatform.services.cms.templates.TemplateService;
 import org.exoplatform.services.listener.ListenerService;
 import org.exoplatform.services.log.ExoLogger;
 import org.exoplatform.services.log.Log;
+import org.exoplatform.services.resources.ResourceBundleService;
 import org.exoplatform.services.wcm.core.NodetypeConstant;
 import org.exoplatform.services.wcm.publication.WCMPublicationService;
 import org.exoplatform.services.wcm.utils.WCMCoreUtils;
 import org.exoplatform.upload.UploadResource;
 import org.exoplatform.upload.UploadService;
 import org.exoplatform.upload.UploadService.UploadLimit;
+import org.json.JSONObject;
 import org.w3c.dom.Document;
 import org.w3c.dom.Element;
 
@@ -105,6 +109,9 @@ public class FileUploadHandler {
   private static final String IF_MODIFIED_SINCE_DATE_FORMAT = "EEE, dd MMM yyyy HH:mm:ss z";
   
   public final static String POST_CREATE_CONTENT_EVENT = "CmsService.event.postCreate";
+
+  private final String CONNECTOR_BUNDLE_LOCATION                 = "locale.wcm.resources.WCMResourceBundleConnector";
+  private final String AUTOVERSION_ERROR_MIME_TYPE                  = "DocumentAutoVersion.msg.WrongMimeType";
 
   /** The upload service. */
   private UploadService uploadService;
@@ -416,11 +423,24 @@ public class FileUploadHandler {
       String exoTitle = fileName;
       
       fileName = cleanNameUtil(fileName);
-      
+      DMSMimeTypeResolver mimeTypeResolver = DMSMimeTypeResolver.getInstance();
+      String mimetype = mimeTypeResolver.getMimeType(resource.getFileName());
       String nodeName = fileName;
       int count = 0;
-      if(!CREATE_VERSION.equals(existenceAction)) {
+      if(!CREATE_VERSION.equals(existenceAction) ||
+              (!parent.hasNode(fileName) && !CREATE_VERSION.equals(existenceAction))) {
         if(parent.isNodeType(NodetypeConstant.NT_FILE)){
+          String mimeTypeParent = mimeTypeResolver.getMimeType(parent.getName());
+          if(mimetype != mimeTypeParent){
+            ResourceBundleService resourceBundleService = WCMCoreUtils.getService(ResourceBundleService.class);
+            ResourceBundle resourceBundle = resourceBundleService.getResourceBundle(CONNECTOR_BUNDLE_LOCATION, new Locale(language));
+            String errorMsg = resourceBundle.getString(AUTOVERSION_ERROR_MIME_TYPE);
+            errorMsg = errorMsg.replace("{0}", StringUtils.escape("<span style='font-weight:bold;'>" + parent.getName() + "</span>"));
+            JSONObject jsonObject = new JSONObject();
+            jsonObject.put("error_type", "ERROR_MIMETYPE");
+            jsonObject.put("error_message", errorMsg);
+            return Response.serverError().entity(jsonObject.toString()).build();
+          }
           parent = parent.getParent();
         }
         do {
@@ -458,8 +478,7 @@ public class FileUploadHandler {
         autoVersionService.autoVersion(file);
         jcrContent = file.hasNode("jcr:content")?file.getNode("jcr:content"):file.addNode("jcr:content","nt:resource");
       }
-      DMSMimeTypeResolver mimeTypeResolver = DMSMimeTypeResolver.getInstance();
-      String mimetype = mimeTypeResolver.getMimeType(resource.getFileName());
+
       jcrContent.setProperty("jcr:lastModified", new GregorianCalendar());
       jcrContent.setProperty("jcr:data", new BufferedInputStream(new FileInputStream(new File(location))));
       jcrContent.setProperty("jcr:mimeType", mimetype);

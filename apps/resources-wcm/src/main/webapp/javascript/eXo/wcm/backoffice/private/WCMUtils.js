@@ -431,11 +431,18 @@
 	 * @param notice:  msg
 	 * @param closeable: can close
 	 */
-	WCMUtils.prototype.showNotice = function(noticeMsg, closeable){
+	WCMUtils.prototype.showNotice = function(noticeMsg, closeable, type){
 		gj("#_wcm-notice").remove();
 		//if(gj("#wcm-notice") === undefined){
 		if(noticeMsg===undefined) return;
-		var noticeHtml = "<div id=\"_wcm-notice\" style=\"display: none;\" class=\"alert alert-success wcmAlertSuccess\"></div>";
+
+		var classType = "alert-success";
+		var iconType  = "uiIconSuccess";
+		if("error" === type) {
+			classType = "alert-warning";
+			iconType = "uiIconWarning";
+		}
+		var noticeHtml = "<div id=\"_wcm-notice\" style=\"display: none;\" class=\"alert "+classType+" wcmAlertSuccess\"><i class=\""+iconType+"\"></i></div>";
 		var styleStr = "";
 
 		//}
@@ -444,7 +451,7 @@
 			styleStr = "display:none";
 		} else {
 			styleStr = "display:block; top:40px; position:fixed;";
-			var html  = '<i class="uiIconSuccess"></i>' + noticeMsg;
+			var html  = '<i class="'+iconType+'"></i>' + noticeMsg;
 			if(closeable) html += '<a class="uiIconClose pull-right" style="cursor:pointer;" title="Close Window" onclick="eXo.ecm.WCMUtils.closeNotice();"></a>';
 		}
 		_noticeElem.html(html);
