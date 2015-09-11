@@ -173,7 +173,7 @@ public class UIDocumentAutoVersionForm extends UIForm implements UIPopupComponen
       }
 
       Set<ClipboardCommand> _clipboardCommands = autoVersionComponent.getClipboardCommands();
-      if(_clipboardCommands!=null && _clipboardCommands.size()>0){
+      if(!autoVersionComponent.isSingleProcess && _clipboardCommands!=null && _clipboardCommands.size()>0){
         try {
           if (ClipboardCommand.CUT.equals(currentClipboard.getType())) {
             //cut process
@@ -250,7 +250,7 @@ public class UIDocumentAutoVersionForm extends UIForm implements UIPopupComponen
       }
 
       Set<ClipboardCommand> _clipboardCommands = autoVersionComponent.getClipboardCommands();
-      if(_clipboardCommands!=null && _clipboardCommands.size()>0){
+      if(!autoVersionComponent.isSingleProcess && _clipboardCommands!=null && _clipboardCommands.size()>0){
         if (ClipboardCommand.COPY.equals(autoVersionComponent.getCurrentClipboard().getType())) {
           _clipboardCommands.remove(autoVersionComponent.getCurrentClipboard());
           AutoVersionService autoVersionService = WCMCoreUtils.getService(AutoVersionService.class);
