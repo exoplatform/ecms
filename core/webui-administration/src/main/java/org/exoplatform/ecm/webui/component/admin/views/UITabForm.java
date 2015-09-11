@@ -22,6 +22,7 @@ import org.apache.commons.lang.StringUtils;
 import org.exoplatform.ecm.webui.form.validator.ECMNameValidator;
 import org.exoplatform.services.cms.views.ManageViewService;
 import org.exoplatform.services.cms.views.ViewConfig.Tab;
+import org.exoplatform.services.jcr.util.Text;
 import org.exoplatform.webui.form.validator.MandatoryValidator;
 import org.exoplatform.web.application.ApplicationMessage;
 import org.exoplatform.webui.application.WebuiRequestContext;
@@ -87,7 +88,7 @@ public class UITabForm extends UIForm {
   public void update(Tab tab, boolean isView) throws Exception{
     refresh(!isView) ;
     if(tab == null) return ;
-    getUIStringInput(FIELD_NAME).setDisabled(true).setValue(tab.getTabName()) ;
+    getUIStringInput(FIELD_NAME).setDisabled(true).setValue(Text.unescapeIllegalJcrChars(tab.getTabName()));
     String buttonsProperty = tab.getButtons() ;
     String[] buttonArray = StringUtils.split(buttonsProperty, ";") ;
     for(String bt : buttonArray){

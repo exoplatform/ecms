@@ -39,6 +39,7 @@ import org.exoplatform.services.jcr.RepositoryService;
 import org.exoplatform.services.jcr.core.ManageableRepository;
 import org.exoplatform.services.jcr.ext.common.SessionProvider;
 import org.exoplatform.services.jcr.ext.hierarchy.NodeHierarchyCreator;
+import org.exoplatform.services.jcr.util.Text;
 import org.exoplatform.services.log.ExoLogger;
 import org.exoplatform.services.log.Log;
 import org.exoplatform.services.wcm.utils.WCMCoreUtils;
@@ -254,7 +255,7 @@ public class ManageViewServiceImpl implements ManageViewService, Startable {
         buttons = tab.getProperty(BUTTON_PROP).getString();
       } catch (Exception e) {
         Tab tab = (Tab) tabs.get(i);
-        tabName = tab.getTabName();
+        tabName = Text.escapeIllegalJcrChars(tab.getTabName());
         buttons = tab.getButtons();
       }
       addTab(view, tabName, buttons);
