@@ -126,6 +126,31 @@ public class WCMCoreUtils {
   }
 
   /**
+   * Use only on system process
+   * @param node
+   * @return
+   * @throws RepositoryException
+   */
+  public static Node getNodeBySystemSession(Node node) throws RepositoryException{
+    SessionProvider systemSessionProvider = getSystemSessionProvider();
+    return (Node)systemSessionProvider.getSession(node.getSession().getWorkspace().getName(), getRepository()).getItem(node.getPath());
+  }
+
+  /**
+   * Check permission can access to parent
+   * @param node
+   * @return
+   */
+  public static boolean canAccessParentNode(Node node) {
+    try {
+      node.getParent();
+    } catch (Exception e) {
+      return false;
+    }
+    return true;
+  }
+
+  /**
    * Gets the session provider.
    *
    * @return the session provider

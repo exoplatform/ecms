@@ -233,7 +233,7 @@ public class AuthoringPublicationPlugin extends  WebpagePublicationPlugin {
       }
       if (liveRevision != null && value.getString().equals(liveRevision.getString())) {
         node.setProperty(AuthoringPublicationConstant.LIVE_REVISION_PROP,
-                         valueFactory.createValue(""));
+                         (javax.jcr.Value) null);
       }
       addRevisionData(node, revisionsMap.values());
     } else if (PublicationDefaultStates.OBSOLETE.equals(newState)) {
@@ -261,7 +261,7 @@ public class AuthoringPublicationPlugin extends  WebpagePublicationPlugin {
       }
       if (liveRevision != null && value.getString().equals(liveRevision.getString())) {
         node.setProperty(AuthoringPublicationConstant.LIVE_REVISION_PROP,
-                         valueFactory.createValue(""));
+                         (javax.jcr.Value) null);
       }
       versionLog = new VersionLog(selectedRevision.getName(),
                                   PublicationDefaultStates.ARCHIVED,

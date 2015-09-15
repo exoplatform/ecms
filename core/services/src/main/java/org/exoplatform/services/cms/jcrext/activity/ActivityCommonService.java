@@ -204,12 +204,16 @@ public class ActivityCommonService {
   }
   
   public boolean isBroadcastNTFileEvents(Node node) throws Exception {
-  	boolean result = true;
-  	while(result && !((NodeImpl)node).isRoot()) {
-  		node = node.getParent();
-  		result = !isDocumentNodeType(node);
-  	}
-  	return result;
+    boolean result = true;
+    while(result && !((NodeImpl)node).isRoot()) {
+      try{
+        node = node.getParent();
+        result = !isDocumentNodeType(node);
+      }catch (RepositoryException ex){
+        return !isDocumentNodeType(node);
+      }
+    }
+    return result;
   }
   public boolean isAcceptedProperties(String propertyName) {
     return (acceptedProperties.indexOf("{" + propertyName + "}")>=0);

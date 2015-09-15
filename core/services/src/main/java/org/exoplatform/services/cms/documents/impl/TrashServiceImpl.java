@@ -24,6 +24,7 @@ import org.exoplatform.services.cache.ExoCache;
 import org.exoplatform.services.cms.documents.TrashService;
 import org.exoplatform.services.cms.folksonomy.NewFolksonomyService;
 import org.exoplatform.services.cms.impl.Utils;
+import org.exoplatform.services.cms.jcrext.activity.ActivityCommonService;
 import org.exoplatform.services.cms.link.LinkManager;
 import org.exoplatform.services.cms.taxonomy.TaxonomyService;
 import org.exoplatform.services.jcr.RepositoryService;
@@ -33,6 +34,7 @@ import org.exoplatform.services.jcr.ext.common.SessionProvider;
 import org.exoplatform.services.jcr.impl.core.ItemImpl;
 import org.exoplatform.services.jcr.impl.core.SessionImpl;
 import org.exoplatform.services.jcr.impl.core.query.QueryImpl;
+import org.exoplatform.services.listener.ListenerService;
 import org.exoplatform.services.log.ExoLogger;
 import org.exoplatform.services.log.Log;
 import org.exoplatform.services.seo.SEOService;
@@ -143,6 +145,8 @@ public class TrashServiceImpl implements TrashService {
         }
       }
     }
+    ListenerService listenerService =  WCMCoreUtils.getService(ListenerService.class);
+    listenerService.broadcast(ActivityCommonService.FILE_REMOVE_ACTIVITY, null, node);
     String originalPath = node.getPath();
     String nodeWorkspaceName = nodeSession.getWorkspace().getName();
     //List<Node> categories = taxonomyService_.getAllCategories(node, true);
@@ -189,7 +193,7 @@ public class TrashServiceImpl implements TrashService {
       }
       
       trashId = addRestorePathInfo(nodeName, restorePath, nodeWorkspaceName);
-      
+
       trashSession.save();
       
       //check and delete target node when there is no its symlink

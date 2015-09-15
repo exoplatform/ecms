@@ -195,7 +195,10 @@ public class UICommentForm extends UIForm implements UIPopupComponent {
             UserHandler userHandler = organizationService.getUserHandler();
             User user = userHandler.findUserByName(userName);
             UserProfile userProfile = profileHandler.findUserProfileByName(userName);
-            website = userProfile.getUserInfoMap().get("user.business-info.online.uri");
+            if(userProfile != null)
+              website = userProfile.getUserInfoMap().get("user.business-info.online.uri");
+            else
+              website = "";
             email = user.getEmail();
         }
 
