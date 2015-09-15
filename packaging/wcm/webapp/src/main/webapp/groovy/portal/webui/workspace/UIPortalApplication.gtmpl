@@ -27,7 +27,7 @@
   String docBase =  rcontext.getRequestContextPath() ;  
   String skin = uicomponent.getSkin();
   def scriptsURLs = uicomponent.getScripts();
-  def headerScripts = new LinkedList(); 
+  def headerScripts = new LinkedList();
   def jsConfig = uicomponent.getJSConfig(); 
   def remoteScripts = new JSONArray();
   def portalName = Util.getPortalRequestContext().getUserPortalConfig().getPortalName();
@@ -225,7 +225,7 @@
  </head>
 
  <body style="height: 100%;">
-
+ <div class="visible-tablet"></div><div class="visible-tabletL"></div><div class="visible-phone"></div><div class="visible-phone-small"></div>
  <div class="$uicomponent.skin" id="UIPortalApplication" style="!height: 100%;">
      
    <div class="ajaxLoadingMask clearfix" id="AjaxLoadingMask" style="display: none; margin: auto;">
