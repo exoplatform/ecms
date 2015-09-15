@@ -207,9 +207,13 @@ public class TaxonomyPlugin extends BaseComponentPlugin {
           if (taxonomyNode.canAddMixin("mix:referenceable")) {
             taxonomyNode.addMixin("mix:referenceable");
           }
-
+          if (taxonomyNode.canAddMixin("exo:rss-enable")) {
+            taxonomyNode.addMixin("exo:rss-enable");
+          }
           if(taxonomy.getTitle() != null && !taxonomy.getTitle().isEmpty()) {
             taxonomyNode.setProperty("exo:title", taxonomy.getTitle());
+          } else {
+            taxonomyNode.setProperty("exo:title", taxonomy.getName());
           }
 
           taxonomyNode.getSession().save();
