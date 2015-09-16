@@ -1,6 +1,7 @@
 package org.exoplatform.ecm.webui.component.explorer.control.filter;
 
 import org.exoplatform.ecm.webui.utils.PermissionUtil;
+import org.exoplatform.services.wcm.utils.WCMCoreUtils;
 import org.exoplatform.webui.ext.filter.UIExtensionAbstractFilter;
 import org.exoplatform.webui.ext.filter.UIExtensionFilterType;
 
@@ -26,7 +27,7 @@ public class CanEditDocFilter extends UIExtensionAbstractFilter {
   public boolean accept(Map<String, Object> context) throws Exception {
     if (context == null) return true;
     Node currentNode = (Node) context.get(Node.class.getName());
-
+    if(!WCMCoreUtils.canAccessParentNode(currentNode)) return false;
     return PermissionUtil.canAddNode(currentNode.getParent());
   }
 

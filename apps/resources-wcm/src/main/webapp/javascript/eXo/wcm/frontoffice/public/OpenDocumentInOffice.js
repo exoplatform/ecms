@@ -73,14 +73,13 @@
   OpenDocumentInOffice.prototype.updateLabel = function(objId, activityId, rightClick){
     var currentDocumentObj = {};
     gj.ajax({
-      url: restPrefix+"/office/updateDocumentTitle?objId=" + objId+"&lang="+eXo.env.portal.language,
+      url: restPrefix+"/office/updateDocumentTitle?objId=" + encodeURI(objId)+"&lang="+eXo.env.portal.language,
       dataType: "text",
       type: "GET",
       async:false
     })
         .success(function (data) {
           data = gj.parseJSON(data);
-          if (!data.isFile) return;
           var elClass = "uiIconEcmsOpenDocument";
           var isRightClick="";
 
@@ -98,6 +97,10 @@
 		  html+= data.ico+" "+elClass+"\"></i>\n"+data.title;
           openDocument.html(html);
 
+          if (!data.isFile) {
+            openDocument.addClass("hidden");
+            return;
+          }
           if(eXo.ecm.ECMWebDav !== undefined) {
             //showButton
             //console.log("ITHIT detected!");

@@ -48,6 +48,9 @@ import org.w3c.dom.Element;
  * benjamin.paillereau@exoplatform.com
  * March 25, 2011
  */
+/**
+ * Adds and queries the public tags of a document.
+ */
 @Path("/contents/tag/")
 public class TagConnector extends BaseConnector implements ResourceContainer {
 
@@ -62,7 +65,18 @@ public class TagConnector extends BaseConnector implements ResourceContainer {
 
 
   /**
-   * to complete
+   * Adds a public tag to a given document.
+   * 
+   * @param tag The tag to be added.
+   * 
+   * @param jcrPath The path of the document, e.g. /portal/collaboration/test/document1, 
+   *        in which "portal" is the repository, "collaboration" is the workspace.
+   * 
+   * @request POST: http://localhost:8080/rest/private/contents/tag/add/tag1?jcrPath=/portal/collaboration/test/document1
+   * 
+   * @response HTTP Status code. 200 on success. 500 if any error during the process.
+   * 
+   * @anchor TagConnector.addTag
    */
   @POST
   @Path("/add/{tag}")
@@ -88,7 +102,23 @@ public class TagConnector extends BaseConnector implements ResourceContainer {
   }
 
   /**
-   * to complete
+   * Get list of public tags of a given document.
+   * 
+   * @param jcrPath The path of the document, e.g. /portal/collaboration/test/document1, 
+   *        in which "portal" is the repository, "collaboration" is the workspace.
+   * 
+   * @request GET: http://localhost:8080/rest/private/contents/tag/public?jcrPath=/portal/collaboration/test/document1
+   * 
+   * @format XML
+   * 
+   * @response The tag names in XML format.
+   * <?xml version="1.0" encoding="UTF-8" standalone="no" ?>
+   * <tags>
+   *  <tag name="gold" />
+   *  <tag name="silver" />
+   * </tags>
+   * 
+   * @anchor TagConnector.getPublicTags
    */
   @GET
   @Path("/public")

@@ -199,7 +199,7 @@ public class DeleteManageComponent extends UIAbstractManagerComponent {
         TrashService trashService = WCMCoreUtils.getService(TrashService.class);
         Node parent = trashService.getTrashHomeNode();
         node = trashService.getNodeByTrashId(trashId);
-        if (node.getPrimaryNodeType().getName().equals(NodetypeConstant.NT_FILE)) {
+        if (node.getPrimaryNodeType().getName().equals(NodetypeConstant.NT_FILE) || node.isNodeType(NodetypeConstant.EXO_SYMLINK)) {
           if (activityService.isBroadcastNTFileEvents(node)) {
             listenerService.broadcast(ActivityCommonService.FILE_REMOVE_ACTIVITY, parent, node);
           }

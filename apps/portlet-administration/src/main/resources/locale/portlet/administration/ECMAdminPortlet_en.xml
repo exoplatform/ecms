@@ -989,7 +989,8 @@
 						<contentNavigation>Content Navigation</contentNavigation>
 						<addSymLink>Add Symlink</addSymLink>
       <checkIn>Check In</checkIn>
-      <checkOut>Check Out</checkOut>						
+      <checkOut>Check Out</checkOut>	
+      <shareDocuments>Share</shareDocuments>      
     </label>
     <action>
       <Save>#{word.save}</Save>      
