@@ -716,4 +716,10 @@ public class WCMCoreUtils {
     }
     return barNavigationStyle;
   }
+
+  public static Node getNodeBySystemSession(Node node) throws RepositoryException {
+    SessionProvider systemSessionProvider = getSystemSessionProvider();
+    return (Node) systemSessionProvider.getSession(node.getSession().getWorkspace().getName(), getRepository())
+            .getItem(node.getPath());
+  }
 }
