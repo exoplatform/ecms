@@ -49,7 +49,7 @@ import java.util.List;
  */
 @ComponentConfig(
     lifecycle = UIFormLifecycle.class,
-    template = "app:/groovy/webui/FastContentCreatorPortlet/UIFCCActionTypeForm.gtmpl",
+    template = "system:/groovy/FastContentCreatorPortlet/UIFCCActionTypeForm.gtmpl",
     events = {
       @EventConfig(listeners = UIFCCActionTypeForm.ChangeActionTypeActionListener.class)
     }

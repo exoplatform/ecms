@@ -1,0 +1,93 @@
+<%
+	/**
+	 * Created by The eXo Platform SAS
+	 * Author : eXoPlatform
+	 *          chuong.phan@exoplatform.com, phan.le.thanh.chuong@gmail.com
+	 * Jun 25, 2009  
+	 */
+	 
+	import org.exoplatform.webui.core.UIPageIterator;
+	import org.exoplatform.webui.core.UIGrid;
+	UIPageIterator uiIterator = uicomponent.getChild(UIGrid.class).getUIPageIterator() ;
+%>
+<div class="$uicomponent.id" id="$uicomponent.id">
+	<table class="uiGrid table table-hover table-striped">
+		<thead>
+	    	<tr>
+	      		<th><%=_ctx.appRes("UIFCCActionList.header.name")%></th>
+			    <th><%=_ctx.appRes("UIFCCActionList.header.description")%></th>
+	 		    <th><%=_ctx.appRes("UIFCCActionList.header.instanceOf")%></th>
+	 		    <th class="center"> 
+	 		    	<%=_ctx.appRes("UIFCCActionList.header.action")%>
+	<% if (!"basic".equals(uicomponent.getMode())) { %>
+ 		    		<a class="actionIcon" rel="tooltip" data-placement="bottom" title="<%=_ctx.appRes("UIFCCActionList.action.Add")%>" onclick="<%=uicomponent.event("Add")%>"><i class="uiIconAddPath uiIconLightGray" ></i></a>
+  	<% } %>
+	 		    </th>
+	    	</tr>
+	  	</thead>
+	  	<tbody>
+      		<%
+      			if(uiIterator.getAvailable() < 1) {
+      				%>
+	    				<tr >
+	      					<td colspan="4" class="center empty">
+	        					<%=_ctx.appRes("UIFCCActionList.msg.empty")%>
+	      					</td>
+	    				</tr>  
+	  				<%
+	  			} else { 
+			    	boolean even = true ;
+// if(uicomponent.hasActions()) {
+				    	for(action in uicomponent.getListActions()) {
+			      		even = !even ;
+	  					%>
+		      				<tr >
+	    	    				<td>
+	        	  					<div class="text">
+	          							<%
+	          								if(action.hasProperty("exo:name")){
+	          									%><%=action.getProperty("exo:name").getString()%><%
+	          								}
+	          							%>
+		          					</div>
+		        				</td>
+		        				<td>
+		          					<div class="text">
+		          						<%
+		          							if(action.hasProperty("exo:description")){
+		          								%><%=action.getProperty("exo:description").getString()%><%
+		          							}
+		          						%>
+		          					</div>
+		          				</td>
+		        				<td>
+		          					<div class="text">[<%=action.getPrimaryNodeType().getName()%>]</div>
+		        				</td>
+		        				<td class="center">
+			        					<%
+			          						for(act in uicomponent.getActions()) { 
+			        							%>
+	            									<a class="actionIcon" onclick="<%=uicomponent.event(act, action.getName())%>" rel="tooltip" data-placement="bottom"  title="$act"><i class="uiIcon${act} uiIconLightGray" ></i></a>
+	            								<%
+	            							} 
+	            						%>
+	            				</td>
+	            			</tr>
+	            		<%
+	        		}
+//}
+		      	}
+		    %>
+	    </tbody>
+  	</table>
+	<% 
+		if(uiIterator.getAvailablePage() > 1) {
+			uicomponent.renderChild(UIPageIterator.class);
+		} 
+	%>
+	<% if (!"basic".equals(uicomponent.getMode())) { %>
+  	<div class="uiAction"> 
+		<button type="button" onclick="<%=uicomponent.event("Add")%>" class="btn"><%=_ctx.appRes("UIFCCActionList.action.Add")%></button>
+  	</div>
+  	<% } %>
+</div>

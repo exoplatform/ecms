@@ -197,12 +197,12 @@ public class UISingleContentViewerPortlet extends UIPortletApplication {
       }
     }
 
-    if (uiPresentation!=null && uiPresentation.isContextual() && nodeView!=null) {
-      RenderResponse response = context.getResponse();
-      Element title = response.createElement("title");
-      title.setTextContent(uiPresentation.getTitle(nodeView));
-      response.addProperty(MimeResponse.MARKUP_HEAD_ELEMENT, title);
-    }
+//    if (uiPresentation!=null && uiPresentation.isContextual() && nodeView!=null) {
+//      RenderResponse response = context.getResponse();
+//      Element title = response.createElement("title");
+//      title.setTextContent(uiPresentation.getTitle(nodeView));
+//      response.addProperty(MimeResponse.MARKUP_HEAD_ELEMENT, title);
+//    }
 
     if (context.getRemoteUser() != null && WCMComposer.MODE_EDIT.equals(Utils.getCurrentMode())) {    	
       pContext.getJavascriptManager().loadScriptResource(ResourceScope.SHARED, "content-selector");

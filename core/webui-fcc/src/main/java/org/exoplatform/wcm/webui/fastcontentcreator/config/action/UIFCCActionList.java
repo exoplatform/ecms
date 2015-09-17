@@ -52,7 +52,7 @@ import java.util.List;
  */
 @ComponentConfig(
     lifecycle = Lifecycle.class,
-    template = "app:/groovy/webui/FastContentCreatorPortlet/UIFCCActionList.gtmpl",
+    template = "system:/groovy/FastContentCreatorPortlet/UIFCCActionList.gtmpl",
     events = {
         @EventConfig(listeners = UIFCCActionList.AddActionListener.class),
         @EventConfig(listeners = UIFCCActionList.EditActionListener.class),

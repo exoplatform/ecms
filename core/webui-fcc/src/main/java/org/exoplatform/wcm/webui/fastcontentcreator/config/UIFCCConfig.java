@@ -68,7 +68,7 @@ import java.util.List;
  */
 @ComponentConfig(
     lifecycle = UIFormLifecycle.class,
-    template = "app:/groovy/webui/FastContentCreatorPortlet/UIFormWithFieldSet.gtmpl",
+    template = "system:/groovy/FastContentCreatorPortlet/UIFormWithFieldSet.gtmpl",
     events = {
       @EventConfig(listeners = UIFCCConfig.SaveActionListener.class),
       @EventConfig(listeners = UIFCCConfig.SelectPathActionListener.class, phase=Phase.DECODE),

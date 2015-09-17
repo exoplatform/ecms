@@ -1,0 +1,36 @@
+<%
+  	/**
+	 * Created by The eXo Platform SAS
+	 * Author : eXoPlatform
+	 *          chuong.phan@exoplatform.com, phan.le.thanh.chuong@gmail.com
+	 * Jun 25, 2009  
+	 */
+%>
+<div class="$uicomponent.id">
+	<% uiform.begin() %>
+		<div class="HorizontalLayout">
+			<table class="UIFormGrid">
+				<% 
+					for(field in uiform.getChildren()) { 
+						if(field.isRendered()) {
+							%>
+								<tr>
+									<%
+										if(!uicomponent.getLabel(field.getName()).equals(uicomponent.getId())) {
+											%>
+												<td class="FieldLabel"><label for="<%=field.getId()%>"><%=uicomponent.getLabel(field.getName())%></label></td>
+												<td class="FieldComponent"><% uiform.renderField(field) %></td>
+											<%
+										} else {
+											%><td colspan="2" class="FieldComponent"><% uiform.renderField(field) %></td><%
+										}
+									%>
+								</tr>
+							<%
+						}
+					}
+				%>
+			</table>
+		</div>
+	<%uiform.end()%>
+</div>
