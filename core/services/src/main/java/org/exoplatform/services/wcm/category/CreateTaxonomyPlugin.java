@@ -348,6 +348,16 @@ public class CreateTaxonomyPlugin extends CreatePortalPlugin {
           if (taxonomyNode.canAddMixin("mix:referenceable")) {
             taxonomyNode.addMixin("mix:referenceable");
           }
+
+          if (taxonomyNode.canAddMixin("exo:rss-enable")) {
+            taxonomyNode.addMixin("exo:rss-enable");
+          }
+          if(StringUtils.isNotEmpty(taxonomy.getTitle())) {
+            taxonomyNode.setProperty("exo:title", taxonomy.getTitle());
+          } else {
+            taxonomyNode.setProperty("exo:title", taxonomy.getName());
+          }
+
           taxonomyNode.getSession().save();
         }
       } else if (objectParam.getName().equals("predefined.actions")) {
