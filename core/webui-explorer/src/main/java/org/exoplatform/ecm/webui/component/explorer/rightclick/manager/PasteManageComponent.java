@@ -543,7 +543,7 @@ public class PasteManageComponent extends UIAbstractManagerComponent {
       destPath = matcher.group(2);
     }
     Session destSession = uiExplorer.getSessionByWorkspace(destWorkspace);
-
+    if(destWorkspace==null) destWorkspace = destSession.getWorkspace().getName();
     // Use the method getNodeByPath because it is link aware
     Node destNode = uiExplorer.getNodeByPath(destPath, destSession);
 
