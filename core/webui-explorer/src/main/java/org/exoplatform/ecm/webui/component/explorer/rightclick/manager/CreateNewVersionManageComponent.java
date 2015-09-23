@@ -5,6 +5,7 @@ import org.exoplatform.ecm.webui.component.explorer.UIWorkingArea;
 import org.exoplatform.ecm.webui.component.explorer.control.filter.IsContainBinaryFilter;
 import org.exoplatform.ecm.webui.component.explorer.control.filter.IsNotEditingDocumentFilter;
 import org.exoplatform.ecm.webui.component.explorer.control.filter.IsNotInTrashFilter;
+import org.exoplatform.ecm.webui.component.explorer.control.filter.IsNotLockedFilter;
 import org.exoplatform.ecm.webui.component.explorer.control.filter.IsVersionableFilter;
 import org.exoplatform.ecm.webui.component.explorer.control.listener.UIWorkingAreaActionListener;
 import org.exoplatform.services.cms.documents.AutoVersionService;
@@ -46,6 +47,7 @@ public class CreateNewVersionManageComponent extends UIAbstractManagerComponent 
           new IsVersionableFilter(),
           new IsNotInTrashFilter(),
           new IsNotEditingDocumentFilter(),
+          new IsNotLockedFilter(),
           new IsContainBinaryFilter()});
 
   @UIExtensionFilters

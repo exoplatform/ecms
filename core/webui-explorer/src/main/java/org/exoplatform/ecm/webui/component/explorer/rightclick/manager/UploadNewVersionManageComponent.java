@@ -5,6 +5,7 @@ import org.exoplatform.ecm.webui.component.explorer.control.filter.IsContainBina
 import org.exoplatform.ecm.webui.component.explorer.control.filter.IsEditableFilter;
 import org.exoplatform.ecm.webui.component.explorer.control.filter.IsNotEditingDocumentFilter;
 import org.exoplatform.ecm.webui.component.explorer.control.filter.IsNotInTrashFilter;
+import org.exoplatform.ecm.webui.component.explorer.control.filter.IsNotLockedFilter;
 import org.exoplatform.ecm.webui.component.explorer.control.filter.IsVersionableFilter;
 import org.exoplatform.ecm.webui.component.explorer.control.listener.UIActionBarActionListener;
 import org.exoplatform.services.log.ExoLogger;
@@ -44,6 +45,7 @@ public class UploadNewVersionManageComponent extends UIAbstractManagerComponent 
           new IsEditableFilter(),
           new IsNotInTrashFilter(),
           new IsNotEditingDocumentFilter(),
+          new IsNotLockedFilter(),
           new CanSetPropertyFilter()});
 
   @UIExtensionFilters
