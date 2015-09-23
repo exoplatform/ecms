@@ -9,6 +9,7 @@ import org.exoplatform.services.log.ExoLogger;
 import org.exoplatform.services.log.Log;
 import org.exoplatform.services.wcm.core.NodetypeConstant;
 import org.exoplatform.services.wcm.utils.WCMCoreUtils;
+import org.exoplatform.services.cms.drives.DriveData;
 
 import javax.jcr.Node;
 import java.util.ArrayList;
@@ -51,7 +52,10 @@ public class AutoVersionServiceImpl implements AutoVersionService{
 
     String nodePath = currentNode.getPath();
     for (String driveAutoVersion: lstDriveAutoVersion){
-      String driveHomePath = manageDriveService.getDriveByName(StringUtils.trim(driveAutoVersion)).getHomePath();
+      DriveData driveData = manageDriveService.getDriveByName(StringUtils.trim(driveAutoVersion));
+      if(driveData==null) continue;
+      String driveHomePath = driveData.getHomePath();
+      if(!StringUtils.equals(driveData.getWorkspace(), currentNode.getSession().getWorkspace().getName())) continue;
       if((driveHomePath.startsWith(PERSONAL_DRIVE_PARRTEN) && nodePath.startsWith(PERSONAL_DRIVE_PREFIX)) ||
               driveHomePath.startsWith(GROUP_DRIVE_PARRTEN) && nodePath.startsWith(GROUP_DRIVE_PREFIX) ||
               nodePath.startsWith(driveHomePath)){
@@ -65,10 +69,13 @@ public class AutoVersionServiceImpl implements AutoVersionService{
    * {@inheritDoc}
    */
   @Override
-  public boolean isVersionSupport(String nodePath) throws Exception {
+  public boolean isVersionSupport(String nodePath, String workspace) throws Exception {
     if(StringUtils.isEmpty(nodePath)) return false;
     for (String driveAutoVersion: lstDriveAutoVersion){
-      String driveHomePath = manageDriveService.getDriveByName(StringUtils.trim(driveAutoVersion)).getHomePath();
+      DriveData driveData = manageDriveService.getDriveByName(StringUtils.trim(driveAutoVersion));
+      if(driveData==null) continue;
+      String driveHomePath = driveData.getHomePath();
+      if(!StringUtils.equals(driveData.getWorkspace(), workspace)) continue;
       if((driveHomePath.startsWith(PERSONAL_DRIVE_PARRTEN) && nodePath.startsWith(PERSONAL_DRIVE_PREFIX)) ||
               driveHomePath.startsWith(GROUP_DRIVE_PARRTEN) && nodePath.startsWith(GROUP_DRIVE_PREFIX) ||
               nodePath.startsWith(driveHomePath)){
@@ -92,8 +99,11 @@ public class AutoVersionServiceImpl implements AutoVersionService{
       currentNode.save();
     }
     for (String driveAutoVersion: lstDriveAutoVersion){
-      String driveHomePath = manageDriveService.getDriveByName(StringUtils.trim(driveAutoVersion)).getHomePath();
+      DriveData driveData = manageDriveService.getDriveByName(StringUtils.trim(driveAutoVersion));
+      if(driveData==null) continue;
+      String driveHomePath = driveData.getHomePath();
       String nodePath = currentNode.getPath();
+      if(!StringUtils.equals(driveData.getWorkspace(), currentNode.getSession().getWorkspace().getName())) continue;
       if((driveHomePath.startsWith(PERSONAL_DRIVE_PARRTEN) && nodePath.startsWith(PERSONAL_DRIVE_PREFIX)) ||
               driveHomePath.startsWith(GROUP_DRIVE_PARRTEN) && nodePath.startsWith(GROUP_DRIVE_PREFIX) ||
           nodePath.startsWith(driveHomePath)){

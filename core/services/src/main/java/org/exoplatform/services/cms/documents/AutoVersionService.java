@@ -45,7 +45,7 @@ public interface AutoVersionService {
    * @return
    * @throws Exception
    */
-  public boolean isVersionSupport(String nodePath) throws Exception;
+  public boolean isVersionSupport(String nodePath, String workspace) throws Exception;
 
    /**
     * Get List of Drive supported versioning

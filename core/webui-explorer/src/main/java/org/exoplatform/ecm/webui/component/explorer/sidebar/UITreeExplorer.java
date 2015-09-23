@@ -447,7 +447,7 @@ public class UITreeExplorer extends UIContainer {
           uiExplorer.getCurrentPath() + "','" +
         Utils.getPersonalDrivePath(uiExplorer.getDriveData().getHomePath(),
                                ConversationState.getCurrent().getIdentity().getUserId()) + "', '"+
-              autoVersionService.isVersionSupport(uiExplorer.getCurrentPath())+"');");
+              autoVersionService.isVersionSupport(uiExplorer.getCurrentPath(), uiExplorer.getCurrentWorkspace())+"');");
     }
 
   }

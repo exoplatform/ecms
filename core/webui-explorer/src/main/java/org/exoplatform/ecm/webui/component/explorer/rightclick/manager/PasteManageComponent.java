@@ -192,7 +192,7 @@ public class PasteManageComponent extends UIAbstractManagerComponent {
       if (clipboardCommand!=null && clipboardService.getClipboardList(userId, true).isEmpty()) {
         processPaste(clipboardCommand, destNode, event, uiExplorer);
       } else {
-        if(autoVersionService.isVersionSupport(destNode.getPath())) {
+        if(autoVersionService.isVersionSupport(destNode.getPath(), destNode.getSession().getWorkspace().getName())) {
           processPasteMultiple(destNode, event, uiExplorer);
         }else{
           processPasteMultiple(destPath, event, uiExplorer);
@@ -242,7 +242,7 @@ public class PasteManageComponent extends UIAbstractManagerComponent {
     Node sourceNode = (Node)uiExplorer.getSessionByWorkspace(clipboardCommand.getWorkspace()).
             getItem(clipboardCommand.getSrcPath());
     if(destNode.hasNode(sourceNode.getName()) && sourceNode.isNodeType(NodetypeConstant.NT_FILE)
-            && autoVersionService.isVersionSupport(destNode.getPath())){
+            && autoVersionService.isVersionSupport(destNode.getPath(), destNode.getSession().getWorkspace().getName())){
       Set<ClipboardCommand> clipboardCommands = new HashSet<>();
       clipboardCommands.add(clipboardCommand);
       showConfirmDialog(destNode, sourceNode, uiExplorer, clipboardCommand, clipboardCommands, event);

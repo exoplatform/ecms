@@ -1239,7 +1239,7 @@ public class UIDocumentInfo extends UIBaseNodePresentation {
                    uiExplorer.getCurrentPath() + "','" +
                    org.exoplatform.services.cms.impl.Utils.getPersonalDrivePath(uiExplorer.getDriveData().getHomePath(),
                    ConversationState.getCurrent().getIdentity().getUserId())+ "', '"+
-                   autoVersionService.isVersionSupport(uiExplorer.getCurrentPath())+"');");
+                   autoVersionService.isVersionSupport(uiExplorer.getCurrentPath(), uiExplorer.getCurrentWorkspace())+"');");
       } catch(ItemNotFoundException nu) {
         uiApp.addMessage(new ApplicationMessage("UIDocumentInfo.msg.null-exception", null, ApplicationMessage.WARNING)) ;
 

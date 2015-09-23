@@ -201,7 +201,7 @@ public class UIJCRExplorerPortlet extends UIPortletApplication {
                uiExplorer.getCurrentPath() + "','" +
                org.exoplatform.services.cms.impl.Utils.getPersonalDrivePath(uiExplorer.getDriveData().getHomePath(),
                ConversationState.getCurrent().getIdentity().getUserId())+ "', '"+
-              autoVersionService.isVersionSupport(uiExplorer.getCurrentPath())+"');")
+              autoVersionService.isVersionSupport(uiExplorer.getCurrentPath(), uiExplorer.getCurrentWorkspace())+"');")
       .addScripts("gj(document).ready(function() { gj(\"*[rel='tooltip']\").tooltip();});");
     super.processRender(app, context);
   }

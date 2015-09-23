@@ -1,9 +1,5 @@
 package org.exoplatform.wcm.connector.handler;
 
-import java.text.SimpleDateFormat;
-
-import javax.jcr.Node;
-
 import org.exoplatform.container.PortalContainer;
 import org.exoplatform.ecm.connector.fckeditor.FCKUtils;
 import org.exoplatform.services.cms.documents.AutoVersionService;
@@ -20,6 +16,9 @@ import org.exoplatform.services.wcm.core.WCMConfigurationService;
 import org.exoplatform.services.wcm.utils.WCMCoreUtils;
 import org.w3c.dom.Document;
 import org.w3c.dom.Element;
+
+import javax.jcr.Node;
+import java.text.SimpleDateFormat;
 
 public class FCKFileHandler {
 
@@ -92,7 +91,7 @@ public class FCKFileHandler {
     }else{
       file.setAttribute("isVersioned", String.valueOf(false));
     }
-    file.setAttribute("isVersionSupport", String.valueOf(autoVersionService.isVersionSupport(sourceNode.getPath())));
+    file.setAttribute("isVersionSupport", String.valueOf(autoVersionService.isVersionSupport(sourceNode.getPath(), sourceNode.getSession().getWorkspace().getName())));
     return file;
   }
 
