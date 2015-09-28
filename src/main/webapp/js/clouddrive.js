@@ -1568,7 +1568,20 @@
 						$vswitch.prepend(editIcon);
 						$a.after($vswitch);
 					} else {
-						$viewer.find("iframe").attr("src", file.previewLink ? file.previewLink : file.link);
+						var viewLink;
+						if (file.previewLink) {
+							viewLink = file.previewLink;
+						} else {
+							// XXX bypass Google CORS of file view link from SDK (undocumented stuff) 
+							var sdkView = "view?usp=drivesdk";
+							var sdkViewIndex = file.link.indexOf(sdkView, file.link.length - sdkView.length);
+							if (sdkViewIndex !== -1) {
+								viewLink = file.link.slice(0, sdkViewIndex) + "preview";
+							} else {
+								viewLink = file.link;
+							}
+						}
+						$viewer.find("iframe").attr("src", viewLink);
 						$vswitch.remove();
 					}
 					$viewer.find(".file-content").show();
