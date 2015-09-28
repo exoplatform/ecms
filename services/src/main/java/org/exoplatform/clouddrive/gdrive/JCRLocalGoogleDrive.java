@@ -98,7 +98,7 @@ public class JCRLocalGoogleDrive extends JCRLocalCloudDrive implements UserToken
       // drive id
       String id = about.getRootFolderId();
 
-      fetchChilds(id, rootNode);
+      fetchChilds(id, driveNode);
 
       // connect metadata
       setChangeId(about.getLargestChangeId());
@@ -192,7 +192,8 @@ public class JCRLocalGoogleDrive extends JCRLocalCloudDrive implements UserToken
                                          false);
           }
 
-          changed.add(file);
+          addChanged(file);
+          saveChunk();
         }
       }
     }
@@ -216,6 +217,11 @@ public class JCRLocalGoogleDrive extends JCRLocalCloudDrive implements UserToken
     protected Set<String>          removedIds = new HashSet<String>();
 
     /**
+     * Last change ID fetched and applied to the drive. Used by {@link #preSaveChunk()}.
+     */
+    protected Long                 lastChangeId;
+
+    /**
      * Create command for Google Drive synchronization.
      * 
      * @throws RepositoryException
@@ -232,6 +238,7 @@ public class JCRLocalGoogleDrive extends JCRLocalCloudDrive implements UserToken
     @Override
     protected void syncFiles() throws RepositoryException, CloudDriveException {
       long largestChangeId;
+      lastChangeId = null;
 
       try {
         About about = api.about();
@@ -271,7 +278,7 @@ public class JCRLocalGoogleDrive extends JCRLocalCloudDrive implements UserToken
       while (changes.hasNext() && !Thread.currentThread().isInterrupted()) {
         com.google.api.services.drive.model.Change ch = changes.next();
         File gf = ch.getFile(); // gf will be null for deleted
-        
+
         String[] parents;
 
         // if parents empty - file deleted or shared file was removed from user drive (My Drive)
@@ -294,11 +301,13 @@ public class JCRLocalGoogleDrive extends JCRLocalCloudDrive implements UserToken
             if (hasRemoved(gf.getId())) {
               cleanRemoved(gf.getId());
               if (LOG.isDebugEnabled()) {
-                LOG.debug(">> Returned file trashing " + gf.getId() + " " + gf.getTitle() + " " + ch.getModificationDate().toStringRfc3339());
+                LOG.debug(">> Returned file trashing " + gf.getId() + " " + gf.getTitle() + " "
+                    + ch.getModificationDate().toStringRfc3339());
               }
             } else {
               if (LOG.isDebugEnabled()) {
-                LOG.debug(">> File trashing " + gf.getId() + " " + gf.getTitle() + " " + ch.getModificationDate().toStringRfc3339());
+                LOG.debug(">> File trashing " + gf.getId() + " " + gf.getTitle() + " "
+                    + ch.getModificationDate().toStringRfc3339());
               }
             }
             deleteFile(gf.getId());
@@ -306,16 +315,30 @@ public class JCRLocalGoogleDrive extends JCRLocalCloudDrive implements UserToken
             if (hasUpdated(gf.getId())) {
               cleanUpdated(gf.getId());
               if (LOG.isDebugEnabled()) {
-                LOG.debug(">> Returned file update " + gf.getId() + " " + gf.getTitle() + " " + ch.getModificationDate().toStringRfc3339());
+                LOG.debug(">> Returned file update " + gf.getId() + " " + gf.getTitle() + " "
+                    + ch.getModificationDate().toStringRfc3339());
               }
             } else {
               if (LOG.isDebugEnabled()) {
-                LOG.debug(">> File update " + gf.getId() + " " + gf.getTitle() + " " + ch.getModificationDate().toStringRfc3339());
+                LOG.debug(">> File update " + gf.getId() + " " + gf.getTitle() + " "
+                    + ch.getModificationDate().toStringRfc3339());
               }
               updateFile(gf, parents);
             }
           }
         }
+        lastChangeId = ch.getId();
+        saveChunk();
+      }
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    protected void preSaveChunk() throws CloudDriveException, RepositoryException {
+      if (lastChangeId != null) {
+        // if chunk will be saved then we also save the current change id as last applied in the drive
+        setChangeId(lastChangeId);
       }
     }
 
@@ -346,8 +369,8 @@ public class JCRLocalGoogleDrive extends JCRLocalCloudDrive implements UserToken
               }
             } // else will be removed below
           }
-          removed.add(enpath);
           en.remove();
+          addRemoved(enpath);
         }
         nodes.remove(fileId);
       }
@@ -518,7 +541,7 @@ public class JCRLocalGoogleDrive extends JCRLocalCloudDrive implements UserToken
           }
 
           synced.add(fileNode);
-          changed.add(file);
+          addChanged(file);
         }
       }
 
@@ -527,9 +550,9 @@ public class JCRLocalGoogleDrive extends JCRLocalCloudDrive implements UserToken
         for (Iterator<Node> niter = existing.iterator(); niter.hasNext();) {
           Node n = niter.next();
           if (!synced.contains(n)) {
-            removed.add(n.getPath());
-            niter.remove();
             n.remove();
+            addRemoved(n.getPath());
+            niter.remove();
           }
         }
       }
