@@ -30,8 +30,8 @@ public class JCRLocalCloudFile implements CloudFile {
   /**
    * Folder size by default is -1.
    */
-  public static final long FOLDER_SIZE = -1;
-  
+  public static final long         FOLDER_SIZE = -1;
+
   private final String             path;
 
   private final String             id;
@@ -209,7 +209,11 @@ public class JCRLocalCloudFile implements CloudFile {
                            long size,
                            Node node,
                            boolean changed) {
-    this(path, id, title, link, null, // editLink
+    this(path,
+         id,
+         title,
+         link,
+         null, // editLink
          previewLink,
          thumbnailLink,
          type,
@@ -250,7 +254,11 @@ public class JCRLocalCloudFile implements CloudFile {
                            Calendar modifiedDate,
                            Node node,
                            boolean changed) {
-    this(path, id, title, link, null, // editLink
+    this(path,
+         id,
+         title,
+         link,
+         null, // editLink
          null, // previewLink,
          null, // thumbnailLink,
          type,
@@ -380,7 +388,9 @@ public class JCRLocalCloudFile implements CloudFile {
   }
 
   /**
-   * JCR Node that represent this Cloud File in the storage.
+   * JCR Node that represent this Cloud File in the storage. Returned {@link Node} instance can be treated
+   * as valid only in a short time span - just after the operation on the file internally in
+   * {@link JCRLocalCloudDrive}. Otherwise need check does the node's session valid (not expired for example).
    * 
    * @return the node that represent this Cloud File in the storage.
    */
