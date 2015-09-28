@@ -165,7 +165,7 @@ public class UISingleContentViewerPortlet extends UIPortletApplication {
     PortletPreferences preferences = pContext.getRequest().getPreferences();
     Boolean sharedCache = "true".equals(preferences.getValue(ENABLE_CACHE, "true"));
 
-    if (context.getRemoteUser() == null
+    if ((context.getRemoteUser() == null && !Boolean.parseBoolean(preferences.getValue(UISingleContentViewerPortlet.CONTEXTUAL_MODE, "false")))
         || (Utils.isLiveMode() && sharedCache && !Utils.isPortalEditMode() && Utils.isPortletViewMode(pContext))) {
       WCMService wcmService = getApplicationComponent(WCMService.class);
       pContext.getResponse().setProperty(MimeResponse.EXPIRATION_CACHE, ""+wcmService.getPortletExpirationCache());
