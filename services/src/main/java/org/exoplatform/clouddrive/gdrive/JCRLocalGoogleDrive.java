@@ -159,7 +159,7 @@ public class JCRLocalGoogleDrive extends JCRLocalCloudDrive implements UserToken
                                          created,
                                          modified,
                                          fileNode,
-                                         false);
+                                         true);
           } else {
             fileNode = openFile(gf.getId(), gf.getTitle(), parent);
             initFile(fileNode,
@@ -189,11 +189,9 @@ public class JCRLocalGoogleDrive extends JCRLocalCloudDrive implements UserToken
                                          modified,
                                          size,
                                          fileNode,
-                                         false);
+                                         true);
           }
-
           addChanged(file);
-          saveChunk();
         }
       }
     }
@@ -328,7 +326,6 @@ public class JCRLocalGoogleDrive extends JCRLocalCloudDrive implements UserToken
           }
         }
         lastChangeId = ch.getId();
-        saveChunk();
       }
     }
 
@@ -347,8 +344,9 @@ public class JCRLocalGoogleDrive extends JCRLocalCloudDrive implements UserToken
      * 
      * @param fileId {@link String}
      * @throws RepositoryException
+     * @throws CloudDriveException 
      */
-    protected void deleteFile(String fileId) throws RepositoryException {
+    protected void deleteFile(String fileId) throws RepositoryException, CloudDriveException {
       List<Node> existing = nodes.get(fileId);
       if (existing != null) {
         // remove existing file,
@@ -539,7 +537,6 @@ public class JCRLocalGoogleDrive extends JCRLocalCloudDrive implements UserToken
                                          fileNode,
                                          true);
           }
-
           synced.add(fileNode);
           addChanged(file);
         }
@@ -550,8 +547,9 @@ public class JCRLocalGoogleDrive extends JCRLocalCloudDrive implements UserToken
         for (Iterator<Node> niter = existing.iterator(); niter.hasNext();) {
           Node n = niter.next();
           if (!synced.contains(n)) {
+            String path = n.getPath();
             n.remove();
-            addRemoved(n.getPath());
+            addRemoved(path);
             niter.remove();
           }
         }
