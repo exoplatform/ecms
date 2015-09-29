@@ -20,7 +20,6 @@ import org.exoplatform.clouddrive.features.CloudDriveFeatures;
 import org.exoplatform.clouddrive.features.PermissiveFeatures;
 import org.exoplatform.clouddrive.jcr.JCRLocalCloudDrive;
 import org.exoplatform.clouddrive.jcr.NtFileSynchronizer;
-import org.exoplatform.clouddrive.utils.IdentityHelper;
 import org.exoplatform.container.component.ComponentPlugin;
 import org.exoplatform.services.jcr.RepositoryService;
 import org.exoplatform.services.jcr.config.WorkspaceEntry;
@@ -29,7 +28,6 @@ import org.exoplatform.services.jcr.ext.app.SessionProviderService;
 import org.exoplatform.services.jcr.ext.common.SessionProvider;
 import org.exoplatform.services.log.ExoLogger;
 import org.exoplatform.services.log.Log;
-import org.exoplatform.services.security.ConversationState;
 import org.picocontainer.Startable;
 
 import java.util.Collection;
