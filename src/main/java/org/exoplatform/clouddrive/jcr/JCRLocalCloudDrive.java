@@ -93,7 +93,6 @@ import java.util.concurrent.locks.ReentrantReadWriteLock;
 import javax.jcr.AccessDeniedException;
 import javax.jcr.InvalidItemStateException;
 import javax.jcr.Item;
-import javax.jcr.ItemExistsException;
 import javax.jcr.ItemNotFoundException;
 import javax.jcr.LoginException;
 import javax.jcr.NoSuchWorkspaceException;
@@ -102,12 +101,8 @@ import javax.jcr.NodeIterator;
 import javax.jcr.PathNotFoundException;
 import javax.jcr.Property;
 import javax.jcr.PropertyIterator;
-import javax.jcr.ReferentialIntegrityException;
 import javax.jcr.RepositoryException;
 import javax.jcr.Session;
-import javax.jcr.lock.LockException;
-import javax.jcr.nodetype.ConstraintViolationException;
-import javax.jcr.nodetype.NoSuchNodeTypeException;
 import javax.jcr.nodetype.NodeDefinition;
 import javax.jcr.nodetype.NodeType;
 import javax.jcr.nodetype.PropertyDefinition;
@@ -118,7 +113,6 @@ import javax.jcr.observation.ObservationManager;
 import javax.jcr.query.Query;
 import javax.jcr.query.QueryManager;
 import javax.jcr.query.QueryResult;
-import javax.jcr.version.VersionException;
 
 /**
  * JCR storage for local cloud drive. Created by The eXo Platform SAS
@@ -911,9 +905,9 @@ public abstract class JCRLocalCloudDrive extends CloudDrive implements CloudDriv
      * @return <code>true</code> if save was performed, <code>false</code> otherwise
      * @see COMMAND_CHANGES_CHUNK
      * @throws RepositoryException
-     * @throws CloudDriveException 
+     * @throws CloudDriveException
      */
-    protected boolean saveChunk() throws RepositoryException, CloudDriveException {
+    private boolean saveChunk() throws RepositoryException, CloudDriveException {
       int changedNumber = changed.size() + removed.size();
       if (changedNumber - saved > COMMAND_CHANGES_CHUNK) {
         preSaveChunk();
@@ -924,19 +918,10 @@ public abstract class JCRLocalCloudDrive extends CloudDrive implements CloudDriv
       return false;
     }
 
-    /**
-     * It is a method where data or action specific to a connector can be applied to be saved
-     * when need of save will happened in saveIfRequired().
-     * 
-     * @throws RepositoryException 
-     * @throws CloudDriveException
-     */
-    protected void preSaveChunk() throws CloudDriveException, RepositoryException {
-      // Do nothing by default.
-    }
-
-    protected boolean addChanged(CloudFile file) {
-      return changed.add(file);
+    protected boolean addChanged(CloudFile file) throws RepositoryException, CloudDriveException {
+      boolean r = changed.add(file);
+      saveChunk();
+      return r;
     }
 
     protected boolean removeChanged(CloudFile file) {
@@ -952,8 +937,10 @@ public abstract class JCRLocalCloudDrive extends CloudDrive implements CloudDriv
       changed.addAll(files);
     }
 
-    protected boolean addRemoved(String path) {
-      return removed.add(path);
+    protected boolean addRemoved(String path) throws RepositoryException, CloudDriveException {
+      boolean r = removed.add(path);
+      saveChunk();
+      return r;
     }
 
     protected boolean removeRemoved(String path) {
@@ -984,6 +971,15 @@ public abstract class JCRLocalCloudDrive extends CloudDrive implements CloudDriv
      * 
      */
     protected abstract void always();
+
+    /**
+     * It is a method where data or action specific to a connector can be applied when need of save will
+     * happened in {@link #saveChunk()}.
+     * 
+     * @throws RepositoryException
+     * @throws CloudDriveException
+     */
+    protected abstract void preSaveChunk() throws CloudDriveException, RepositoryException;
 
     /**
      * Start command execution. If command will fail due to provider error, the execution will be retried
@@ -1210,6 +1206,14 @@ public abstract class JCRLocalCloudDrive extends CloudDrive implements CloudDriv
     }
 
     /**
+     * {@inheritDoc}
+     */
+    @Override
+    protected void preSaveChunk() throws CloudDriveException, RepositoryException {
+      // Connect command doesn't have a pre-save logic by default.
+    }
+
+    /**
      * Fetch actual files from cloud provider to local JCR.
      * 
      * @throws CloudDriveException
@@ -1412,6 +1416,14 @@ public abstract class JCRLocalCloudDrive extends CloudDrive implements CloudDriv
     protected void syncFiles() throws CloudDriveException, RepositoryException {
       // nothing
     }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    protected void preSaveChunk() throws CloudDriveException, RepositoryException {
+      // nothing
+    }
   }
 
   protected class SyncFilesCommand extends AbstractCommand {
@@ -1502,6 +1514,14 @@ public abstract class JCRLocalCloudDrive extends CloudDrive implements CloudDriv
     @Override
     protected void always() {
       // nothing
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    protected void preSaveChunk() throws CloudDriveException, RepositoryException {
+      // Files sync doesn't have a pre-save logic by default.
     }
 
     void sync(Node driveNode) throws RepositoryException, CloudDriveException, InterruptedException {

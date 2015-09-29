@@ -132,6 +132,14 @@ public class JCRLocalExoDrive extends JCRLocalCloudDrive {
     }
 
     /**
+     * {@inheritDoc}
+     */
+    @Override
+    protected void preSaveChunk() throws CloudDriveException, RepositoryException {
+      // nothing for this provider
+    }
+
+    /**
      * @inherritDoc
      */
     @Override
