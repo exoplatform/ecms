@@ -23,7 +23,7 @@
 		var currentNode; 
 		// Node workspace and path currently selected in ECMS explorer (currently open or clicked in context menu)
 		var contextNode; 
-		var connectProvider = {}; // for Provider's id and authURL
+		var providers = {}; // for Provider's id and authURL
 		// Cloud Drive associated with current context node
 		var contextDrive;
 		var excluded = {};
@@ -519,6 +519,7 @@
 			  	// 200 - file exists,
 			  	// 202 - file accepted to be a cloud file, but not yet created in cloud- ignore it
 			  	if (contextDrive && status == 200) {
+			  		initFile(file);
 				  	contextDrive.files[path] = file;
 				  }
 				});
@@ -639,7 +640,7 @@
 					};
 					
 					// try use loaded provider client (see initProvider())
-					var provider = connectProvider[drive.provider.id];
+					var provider = providers[drive.provider.id];
 					if (provider) {
 						provider.clientModule.done(function(client) {
 							if (client && client.onChange && client.hasOwnProperty("onChange")) {
@@ -818,6 +819,22 @@
 
 			return process.promise();
 		};
+		
+		/**
+		 * Initialize given file using a client module if it provides initFile() function.
+		 */
+		var initFile = function(file) {
+			if (contextDrive) {
+				var provider = providers[contextDrive.provider.id]; 
+				if (provider) {
+					provider.clientModule.done(function(client) {
+						if (client && client.initFile && client.hasOwnProperty("initFile")) {
+							client.initFile(file);
+						}
+					});
+				}
+			}
+		};
 
 		/**
 		 * Synchronize documents view.
@@ -841,7 +858,7 @@
 			utils.log("Connecting Cloud Drive...");
 
 			if (!authURL) {
-				var provider = connectProvider[providerId];
+				var provider = providers[providerId];
 				if (provider) {
 					authURL = provider.authURL;
 					if (authURL.indexOf(prefixUrl) == 0) {
@@ -876,10 +893,10 @@
 		};
 
 		/**
-		 * Initialize provider for connect operation.
+		 * Initialize provider for later operations.
 		 */
 		this.initProvider = function(id, provider) {
-			connectProvider[id] = provider;
+			providers[id] = provider;
 			
 			if (window == top) {
 				try {
@@ -892,6 +909,17 @@
 			
 			// load client module
 			provider.clientModule = loadClientModule(provider);
+			
+			if (contextDrive && contextDrive.provider.id == provider.id) {
+				// init context drive within the provider client
+				provider.clientModule.done(function(client) {
+					if (client) {
+						if (client.initDrive && client.hasOwnProperty("initDrive")) {
+							client.initDrive(contextDrive);
+						}
+					}
+				});
+			}
 		};
 
 		/**
@@ -964,7 +992,7 @@
 					}
 				} else {
 					readContextDrive();
-		    }
+				}
 			}
 		};
 
@@ -1568,20 +1596,7 @@
 						$vswitch.prepend(editIcon);
 						$a.after($vswitch);
 					} else {
-						var viewLink;
-						if (file.previewLink) {
-							viewLink = file.previewLink;
-						} else {
-							// XXX bypass Google CORS of file view link from SDK (undocumented stuff) 
-							var sdkView = "view?usp=drivesdk";
-							var sdkViewIndex = file.link.indexOf(sdkView, file.link.length - sdkView.length);
-							if (sdkViewIndex !== -1) {
-								viewLink = file.link.slice(0, sdkViewIndex) + "preview";
-							} else {
-								viewLink = file.link;
-							}
-						}
-						$viewer.find("iframe").attr("src", viewLink);
+						$viewer.find("iframe").attr("src", file.previewLink ? file.previewLink : file.link);
 						$vswitch.remove();
 					}
 					$viewer.find(".file-content").show();
