@@ -102,7 +102,7 @@ public class TagConnector extends BaseConnector implements ResourceContainer {
   }
 
   /**
-   * Get list of public tags of a given document.
+   * Gets the list of public tags of a given document.
    * 
    * @param jcrPath The path of the document, e.g. /portal/collaboration/test/document1, 
    *        in which "portal" is the repository, "collaboration" is the workspace.
