@@ -117,7 +117,7 @@ public abstract class BaseSearchServiceConnector extends SearchServiceConnector 
    * @return the string
    */
   private String getSitesStr(Collection<String> sites) {
-    if (sites == null) return null;
+    if (sites == null || sites.size() == 0) return null;
     StringBuffer s = new StringBuffer();
     for (String site : sites) {
       s.append(site).append(',');
@@ -171,9 +171,11 @@ public abstract class BaseSearchServiceConnector extends SearchServiceConnector 
                 //generate SearchResult object
                 DriveData driveData = getDriveData(retNode);
                 Calendar date = getDate(retNode);
+                String url = getPath(driveData, retNode, context);
+                if (url == null) continue;
                 EcmsSearchResult result = 
                 //  new SearchResult(url, title, excerpt, detail, imageUrl, date, relevancy);
-                    new EcmsSearchResult(getPath(driveData, retNode, context), 
+                    new EcmsSearchResult(url,
                                          getTitleResult(retNode), 
                                          retNode.getExcerpt(), 
                                          getDetails(retNode, context),
