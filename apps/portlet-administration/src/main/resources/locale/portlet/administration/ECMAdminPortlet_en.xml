@@ -2024,6 +2024,16 @@
   </FolksonomyPopup>
   <!--
   ###################################################################################
+  # ECMPhoneFormatValidator                                       #
+  ###################################################################################
+  -->
+  <ECMPhoneFormatValidator>
+    <msg>
+      <Invalid>The field '{0}' contains invalid Phone number. Please enter another value.</Invalid>
+    </msg>
+  </ECMPhoneFormatValidator>
+  <!--
+  ###################################################################################
   # org.exoplatform.ecm.jcr.ECMNameValidator																			  #
   ###################################################################################
   -->

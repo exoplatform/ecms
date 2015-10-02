@@ -39,6 +39,7 @@ import org.exoplatform.ecm.webui.form.validator.CategoryValidator;
 import org.exoplatform.ecm.webui.form.validator.CronExpressionValidator;
 import org.exoplatform.ecm.webui.form.validator.DateValidator;
 import org.exoplatform.ecm.webui.form.validator.ECMNameValidator;
+import org.exoplatform.ecm.webui.form.validator.PhoneFormatValidator;
 import org.exoplatform.ecm.webui.form.validator.RepeatCountValidator;
 import org.exoplatform.ecm.webui.form.validator.RepeatIntervalValidator;
 import org.exoplatform.ecm.webui.form.validator.XSSValidator;
@@ -411,6 +412,8 @@ public class DialogFormUtil {
       return CategoryValidator.class;
     } else if (validatorType.equals("XSSValidator")) {
       return XSSValidator.class;
+    } else if (validatorType.equals("phone")) {
+      return PhoneFormatValidator.class;
     } else {
       ClassLoader cl = Thread.currentThread().getContextClassLoader();
       return cl.loadClass(validatorType);

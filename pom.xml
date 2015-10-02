@@ -195,6 +195,11 @@
       </dependency>
       <dependency>
         <groupId>org.exoplatform.ecms</groupId>
+        <artifactId>ecms-core-webui-fcc</artifactId>
+        <version>${project.version}</version>
+      </dependency>
+      <dependency>
+        <groupId>org.exoplatform.ecms</groupId>
         <artifactId>ecms-core-viewer</artifactId>
         <version>${project.version}</version>
       </dependency>
@@ -225,6 +230,11 @@
         <artifactId>ecms-core-webui-explorer</artifactId>
         <version>${project.version}</version>
       </dependency>
+      <dependency>
+        <groupId>org.exoplatform.ecms</groupId>
+        <artifactId>ecms-core-webui-presentation</artifactId>
+        <version>${project.version}</version>
+      </dependency>      
       <dependency>
         <groupId>org.exoplatform.ecms</groupId>
         <artifactId>ecms-core-webui-seo</artifactId>

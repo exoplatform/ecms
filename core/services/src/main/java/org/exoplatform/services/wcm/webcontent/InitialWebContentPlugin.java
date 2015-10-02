@@ -44,6 +44,7 @@ import org.exoplatform.services.log.ExoLogger;
 import org.exoplatform.services.log.Log;
 import org.exoplatform.services.wcm.portal.LivePortalManagerService;
 import org.exoplatform.services.wcm.portal.artifacts.CreatePortalPlugin;
+import org.exoplatform.services.wcm.utils.WCMCoreUtils;
 
 /**
  * Created by The eXo Platform SAS
@@ -179,7 +180,7 @@ public class InitialWebContentPlugin extends CreatePortalPlugin {
    *
    * @throws Exception the exception
    */
-  private void configure(Node targetNode, String portalName) throws Exception{
+  private void configure(Node targetNode, String siteName) throws Exception{
     String statement = "select * from nt:resource where jcr:path like '" + targetNode.getPath()
         + "/%' order by jcr:dateModified ASC";
     QueryManager queryManager = targetNode.getSession().getWorkspace().getQueryManager();
@@ -188,11 +189,20 @@ public class InitialWebContentPlugin extends CreatePortalPlugin {
     for(;iterator.hasNext();) {
       Node ntResource = iterator.nextNode();
       String mimeType = ntResource.getProperty("jcr:mimeType").getString();
-      if(!mimeType.startsWith("text")) continue;
+      if(!mimeType.startsWith("text") && !mimeType.startsWith("application/x-javascript")) continue;
       String jcrData = ntResource.getProperty("jcr:data").getString();
-      if(!jcrData.contains("{portalName}")) continue;
-      String realData = StringUtils.replace(jcrData, "{portalName}",portalName);
-      ntResource.setProperty("jcr:data",realData);
+      
+      jcrData = replace(jcrData, "{portalName}", WCMCoreUtils.getPortalName());
+      jcrData = replace(jcrData, "{restContextName}", WCMCoreUtils.getRestContextName());
+      jcrData = replace(jcrData, "{repositoryName}", WCMCoreUtils.getRepository().getConfiguration().getName());
+      jcrData = replace(jcrData, "{workspaceName}", targetNode.getSession().getWorkspace().getName());
+      jcrData = replace(jcrData, "{siteName}", siteName);
+      
+      ntResource.setProperty("jcr:data", jcrData);
     }
+  }
+  
+  private String replace(String source, String pattern, String replacingValue) {
+    return source.contains(pattern) ? source.replace(pattern, replacingValue) : source;
   }
 }
