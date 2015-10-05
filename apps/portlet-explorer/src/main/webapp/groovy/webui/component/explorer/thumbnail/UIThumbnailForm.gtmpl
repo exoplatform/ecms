@@ -15,6 +15,11 @@
           def thumbnailNode = uicomponent.getThumbnailNode(selectedNode);
           if(thumbnailNode != null && thumbnailNode.hasProperty("exo:mediumSize")) {
             String thumbnailImage = uicomponent.getThumbnailImage(selectedNode);
+            String time = "";
+    	    time = thumbnailNode.getProperty(ThumbnailService.THUMBNAIL_LAST_MODIFIED)
+                                                   .getDate()
+                                                   .getTime();
+    	    thumbnailImage = thumbnailImage + "?" + time;
           %>
             <div class="center">
               <img src="$thumbnailImage" alt="$thumbnailImage" />

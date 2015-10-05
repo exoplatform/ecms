@@ -12,6 +12,8 @@
   import org.exoplatform.services.cms.link.LinkManager;  
   import org.exoplatform.services.jcr.RepositoryService; 
   import org.exoplatform.services.wcm.utils.WCMCoreUtils;
+  import org.exoplatform.services.cms.thumbnail.impl.ThumbnailUtils;
+  import org.exoplatform.services.cms.thumbnail.ThumbnailService;
   
   def linkManager = WCMCoreUtils.getService(LinkManager.class);
   def uiWorkingArea = uicomponent.getAncestorOfType(UIWorkingArea.class);
@@ -116,6 +118,13 @@
     	        } catch(PathNotFoundException pne) {
     	          continue;
     	        }
+    	        org.exoplatform.services.jcr.impl.core.NodeImpl thumbnailNode = uicomponent.getThumbnailNode(data);
+    	        String time = System.currentTimeMillis(); //thumbnailNode dont have THUMBNAIL_LAST_MODIFIED property right after upload image
+    	        if(thumbnailNode != null && thumbnailNode.hasProperty(ThumbnailService.THUMBNAIL_LAST_MODIFIED)){
+    	        	time = thumbnailNode.getProperty(ThumbnailService.THUMBNAIL_LAST_MODIFIED)
+                                                   .getDate()
+                                                   .getTime();
+    	        }
               i++;
 		          def isPreferenceNode = uicomponent.isPreferenceNode(data) ;
 		          def preferenceWS = data.getSession().getWorkspace().getName() ;
@@ -180,6 +189,7 @@
                     encodedPath = encodedPath.replaceAll ("%2F", "/");    //we won't encode the slash characters in the path
                     
 									  String thumbnailImage = "/" + portalName + "/" + restContextName + "/thumbnailImage/medium/" + repository + "/" + preferenceWS + encodedPath;
+									  if(!"".equals(time)) thumbnailImage = thumbnailImage + "?" + time;
 									%>
 									<div class="loadingProgressIcon" style="display: block;">
 											<%if(isLocked) {%>
