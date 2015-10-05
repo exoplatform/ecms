@@ -153,8 +153,7 @@ public class UIContentBrowsePanelMulti extends UIContentBrowsePanel {
     public void execute(Event<UIContentBrowsePanelMulti> event) throws Exception {
       UIContentBrowsePanelMulti contentBrowsePanelMulti = event.getSource();
       String returnFieldName = contentBrowsePanelMulti.getReturnFieldName();
-      String itemPaths = event.getRequestContext().getRequestParameter(OBJECTID);
-      ((UISelectable)(contentBrowsePanelMulti.getSourceComponent())).doSelect(returnFieldName, itemPaths);
+      ((UISelectable)(contentBrowsePanelMulti.getSourceComponent())).doSelect(returnFieldName, contentBrowsePanelMulti.getItemPaths());
     }
   }
   /**
@@ -176,9 +175,13 @@ public class UIContentBrowsePanelMulti extends UIContentBrowsePanel {
     public void execute(Event<UIContentBrowsePanelMulti> event) throws Exception {
       UIContentBrowsePanelMulti contentBrowsePanelMulti = event.getSource();
       Node node=null;
-      String itemPaths = event.getRequestContext().getRequestParameter("itemPaths");
+      String itemPathtemp="";
+      
+      String operationType  = event.getRequestContext().getRequestParameter("oper");
+      String dPath =event.getRequestContext().getRequestParameter("path");
       String iDriver = event.getRequestContext().getRequestParameter("driverName");
       String iPath = event.getRequestContext().getRequestParameter("currentPath");
+      String tempIPath=iPath;
       String[] locations = (iPath == null) ? null : iPath.split(":");
       if (iDriver != null && iDriver.length() > 0) {
         if (locations != null && locations.length > 2)
@@ -186,6 +189,7 @@ public class UIContentBrowsePanelMulti extends UIContentBrowsePanel {
                                                  Text.escapeIllegalJcrChars(locations[1]),
                                                  Text.escapeIllegalJcrChars(locations[2]),
                                                  WCMComposer.BASE_VERSION);
+        
         if (node != null) {
           iPath = fixPath(iDriver, node.getPath(), contentBrowsePanelMulti);
           contentBrowsePanelMulti.setInitPath(iDriver, iPath);
@@ -193,11 +197,23 @@ public class UIContentBrowsePanelMulti extends UIContentBrowsePanel {
           contentBrowsePanelMulti.setInitPath(iDriver, iPath);
         }
       } else
-        contentBrowsePanelMulti.setInitPath("", "");
+        contentBrowsePanelMulti.setInitPath("", ""); 
+      if(operationType.equals("add")&&contentBrowsePanelMulti.getItemPaths()!=null){
+    	  itemPathtemp   = contentBrowsePanelMulti.getItemPaths().concat(tempIPath).concat(";");
 
-      contentBrowsePanelMulti.setItemPaths(itemPaths);
-      UIContentSelector contentSelector = contentBrowsePanelMulti.getAncestorOfType(UIContentSelector.class);
-      contentSelector.setSelectedTab(contentBrowsePanelMulti.getId());
+      contentBrowsePanelMulti.setItemPaths(itemPathtemp);
+      }
+      else if(operationType.equals("delete")&&contentBrowsePanelMulti.getItemPaths()!=null){
+    	  
+    	 
+    	 itemPathtemp   = contentBrowsePanelMulti.getItemPaths();
+    	 itemPathtemp	= StringUtils.remove(itemPathtemp, dPath.concat(";"));
+    	  contentBrowsePanelMulti.setItemPaths(itemPathtemp);
+      }
+      else
+          contentBrowsePanelMulti.setItemPaths(tempIPath.concat(";"));
+          UIContentSelector contentSelector = contentBrowsePanelMulti.getAncestorOfType(UIContentSelector.class);
+          contentSelector.setSelectedTab(contentBrowsePanelMulti.getId());
     }
 
     private String fixPath(String driveName,

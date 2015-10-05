@@ -1029,7 +1029,7 @@
    }
   };
 	
-	EcmContentSelector.prototype.insertMultiContent = function(operation, currentpath) {
+	EcmContentSelector.prototype.insertMultiContent = function(operation, currentpath,operationType) {
 		var rws = document.getElementById("RightWorkspace");
 		var tblContent = document.getElementById("ListFilesContent");
 		var rowsContent = gj(tblContent).find("tr");
@@ -1039,6 +1039,7 @@
 	    return;
 	  }
 		var strContent = "";
+		var oper = operationType;
 		for(var i = 0; i < rowsContent.length; i++) {
 			var nodeContent = gj(rowsContent[i]).find("a.Item:first")[0];
 			if(nodeContent) {
@@ -1051,12 +1052,12 @@
 		if (operation) {
 			var actionSaveTemp = rws.getAttribute("actionSaveTemp");
 			if (actionSaveTemp) {
-			  var additionParam = "&driverName=" + this.driverName + "&currentPath=" + encodeURIComponent(currentpath) + '&itemPaths=' + strContent
+			  var additionParam = "&driverName=" + this.driverName + "&currentPath=" + encodeURIComponent(currentpath)  + '&oper=' + oper + '&path=' + path 
 		  	  action = eXo.ecm.WCMUtils.addParamIntoAjaxEventRequest(actionSaveTemp, additionParam);
 			}else return;      
 		}else if(action){
 			action = action.substring(0, action.length - 2);
-			action += '&objectId=' + strContent + '\')';
+			action += '&objectId=' + "" + '\')';
 		} else return;	
 		eval(action);  
 	};
@@ -1087,7 +1088,7 @@
 		var actionCell = newRow.insertCell(1);
 		gj(actionCell).html('<a class="actionIcon" onclick="eXo.ecm.ECS.removeContent(this);"><i class="uiIconDelete uiIconLightGray""></i></a>');
 		actionCell.className = "center";
-		this.insertMultiContent("SaveTemporary", path);	
+		this.insertMultiContent("SaveTemporary", path,"add");	
 	};
 	
 	EcmContentSelector.prototype.addFileSearchListSearch = function() {
@@ -1127,7 +1128,7 @@
 		var objRow = gj(objNode).parents("tr:first")[0];
 		tblListFilesContent.deleteRow(objRow.rowIndex);	
 		eXo.ecm.ECS.pathContent = false;
-		this.insertMultiContent("SaveTemporary", this.initPathExpanded);
+		this.insertMultiContent("SaveTemporary", this.initPathExpanded,"delete");
 	}
 	
 	EcmContentSelector.prototype.changeFilter = function() {
