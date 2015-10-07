@@ -38,7 +38,6 @@ import org.exoplatform.webui.config.annotation.EventConfig;
 import org.exoplatform.webui.core.lifecycle.Lifecycle;
 import org.exoplatform.webui.event.Event;
 import org.exoplatform.webui.event.EventListener;
-
 /**
  * The Class UIContentBrowsePanelMulti.
  */
@@ -173,50 +172,51 @@ public class UIContentBrowsePanelMulti extends UIContentBrowsePanel {
      * @see org.exoplatform.webui.event.EventListener#execute(org.exoplatform.webui.event.Event)
      */
     public void execute(Event<UIContentBrowsePanelMulti> event) throws Exception {
-      UIContentBrowsePanelMulti contentBrowsePanelMulti = event.getSource();
-      Node node=null;
-      String itemPathtemp="";
-      
-      String operationType  = event.getRequestContext().getRequestParameter("oper");
-      String dPath =event.getRequestContext().getRequestParameter("path");
-      String iDriver = event.getRequestContext().getRequestParameter("driverName");
-      String iPath = event.getRequestContext().getRequestParameter("currentPath");
-      String tempIPath=iPath;
-      String[] locations = (iPath == null) ? null : iPath.split(":");
-      if (iDriver != null && iDriver.length() > 0) {
-        if (locations != null && locations.length > 2)
-          node = Utils.getViewableNodeByComposer(Text.escapeIllegalJcrChars(locations[0]),
-                                                 Text.escapeIllegalJcrChars(locations[1]),
-                                                 Text.escapeIllegalJcrChars(locations[2]),
-                                                 WCMComposer.BASE_VERSION);
-        
-        if (node != null) {
-          iPath = fixPath(iDriver, node.getPath(), contentBrowsePanelMulti);
-          contentBrowsePanelMulti.setInitPath(iDriver, iPath);
-        } else {
-          contentBrowsePanelMulti.setInitPath(iDriver, iPath);
-        }
-      } else
-        contentBrowsePanelMulti.setInitPath("", ""); 
-      if(operationType.equals("add")&&contentBrowsePanelMulti.getItemPaths()!=null){
-    	  itemPathtemp   = contentBrowsePanelMulti.getItemPaths().concat(tempIPath).concat(";");
+        UIContentBrowsePanelMulti contentBrowsePanelMulti = event.getSource();
+        Node node = null;
+        String itemPathtemp = "";
 
-      contentBrowsePanelMulti.setItemPaths(itemPathtemp);
-      }
-      else if(operationType.equals("delete")&&contentBrowsePanelMulti.getItemPaths()!=null){
-    	  
-    	 
-    	 itemPathtemp   = contentBrowsePanelMulti.getItemPaths();
-    	 itemPathtemp	= StringUtils.remove(itemPathtemp, dPath.concat(";"));
-    	  contentBrowsePanelMulti.setItemPaths(itemPathtemp);
-      }
-      else
-          contentBrowsePanelMulti.setItemPaths(tempIPath.concat(";"));
-          UIContentSelector contentSelector = contentBrowsePanelMulti.getAncestorOfType(UIContentSelector.class);
-          contentSelector.setSelectedTab(contentBrowsePanelMulti.getId());
+        String operationType = event.getRequestContext().getRequestParameter("oper");
+        String dPath = event.getRequestContext().getRequestParameter("path");
+        String iDriver = event.getRequestContext().getRequestParameter("driverName");
+        String iPath = event.getRequestContext().getRequestParameter("currentPath");
+        String tempIPath = iPath;
+        String[] locations = (iPath == null) ? null : iPath.split(":");
+        if (operationType.equals("clean") && contentBrowsePanelMulti.getItemPaths() != null) {
+            contentBrowsePanelMulti.setItemPaths("");
+            return;
+        }
+        if (iDriver != null && iDriver.length() > 0) {
+            if (locations != null && locations.length > 2)
+                node = Utils.getViewableNodeByComposer(Text.escapeIllegalJcrChars(locations[0]),
+                        Text.escapeIllegalJcrChars(locations[1]),
+                        Text.escapeIllegalJcrChars(locations[2]),
+                        WCMComposer.BASE_VERSION);
+
+            if (node != null) {
+                iPath = fixPath(iDriver, node.getPath(), contentBrowsePanelMulti);
+                contentBrowsePanelMulti.setInitPath(iDriver, iPath);
+            } else {
+                contentBrowsePanelMulti.setInitPath(iDriver, iPath);
+            }
+        } else
+             contentBrowsePanelMulti.setInitPath("", "");
+               if (operationType.equals("add") && contentBrowsePanelMulti.getItemPaths() != null) {
+                  itemPathtemp = contentBrowsePanelMulti.getItemPaths().concat(tempIPath).concat(";");
+                   contentBrowsePanelMulti.setItemPaths(itemPathtemp);
+               }
+               else if (operationType.equals("delete") && contentBrowsePanelMulti.getItemPaths() != null) {
+                   itemPathtemp = contentBrowsePanelMulti.getItemPaths();
+                   itemPathtemp = StringUtils.remove(itemPathtemp, dPath.concat(";"));
+                    contentBrowsePanelMulti.setItemPaths(itemPathtemp);
+               }
+          else
+              contentBrowsePanelMulti.setItemPaths(tempIPath.concat(";"));
+              UIContentSelector contentSelector = contentBrowsePanelMulti.getAncestorOfType(UIContentSelector.class);
+              contentSelector.setSelectedTab(contentBrowsePanelMulti.getId());
     }
 
-    private String fixPath(String driveName,
+      private String fixPath(String driveName,
                            String path,
                            UIContentBrowsePanelMulti uiBrowser) throws Exception {
       if (path == null || path.length() == 0)
