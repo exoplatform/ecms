@@ -121,9 +121,7 @@
     	        org.exoplatform.services.jcr.impl.core.NodeImpl thumbnailNode = uicomponent.getThumbnailNode(data);
     	        String time = System.currentTimeMillis(); //thumbnailNode dont have THUMBNAIL_LAST_MODIFIED property right after upload image
     	        if(thumbnailNode != null && thumbnailNode.hasProperty(ThumbnailService.THUMBNAIL_LAST_MODIFIED)){
-    	        	time = thumbnailNode.getProperty(ThumbnailService.THUMBNAIL_LAST_MODIFIED)
-                                                   .getDate()
-                                                   .getTime();
+    	        	time = thumbnailNode.getProperty(ThumbnailService.THUMBNAIL_LAST_MODIFIED).getDate().getTime();
     	        }
               i++;
 		          def isPreferenceNode = uicomponent.isPreferenceNode(data) ;
