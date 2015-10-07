@@ -91,6 +91,9 @@ public class FileUploadHandler {
   /** The Constant SAVE_ACTION. */
   public final static String SAVE_ACTION = "save";
   
+  /** The Constant SAVE_NEW_VERSION_ACTION. */
+  public final static String SAVE_NEW_VERSION_ACTION = "saveNewVersion";
+  
   /** The Constant CHECK_EXIST. */
   public final static String CHECK_EXIST= "exist";
   
@@ -344,6 +347,7 @@ public class FileUploadHandler {
                                String userId) throws Exception {
     return saveAsNTFile(parent, uploadId, fileName, language, siteName, userId, KEEP_BOTH); 
   }
+  
   /**
    * Save as nt file.
    *
@@ -363,6 +367,28 @@ public class FileUploadHandler {
                                String siteName,
                                String userId,
                                String existenceAction) throws Exception {
+    return saveAsNTFile(parent, uploadId, fileName, language, siteName, userId, existenceAction,false);
+  }
+  /**
+   * Save as nt file.
+   *
+   * @param parent the parent
+   * @param uploadId the upload id
+   * @param fileName the file name
+   * @param language the language
+   *
+   * @return the response
+   *
+   * @throws Exception the exception
+   */
+  public Response saveAsNTFile(Node parent,
+                               String uploadId,
+                               String fileName,
+                               String language,
+                               String siteName,
+                               String userId,
+                               String existenceAction,
+                               boolean isNewVersion) throws Exception {
     try {
       CacheControl cacheControl = new CacheControl();
       cacheControl.setNoCache(true);
@@ -471,11 +497,11 @@ public class FileUploadHandler {
         jcrContent = file.addNode("jcr:content","nt:resource");
       }else if(parent.hasNode(nodeName)){
         file = parent.getNode(nodeName);
-        autoVersionService.autoVersion(file);
+        autoVersionService.autoVersion(file,isNewVersion);
         jcrContent = file.hasNode("jcr:content")?file.getNode("jcr:content"):file.addNode("jcr:content","nt:resource");
       }else if(parent.isNodeType(NodetypeConstant.NT_FILE)){
         file = parent;
-        autoVersionService.autoVersion(file);
+        autoVersionService.autoVersion(file,isNewVersion);
         jcrContent = file.hasNode("jcr:content")?file.getNode("jcr:content"):file.addNode("jcr:content","nt:resource");
       }
 
@@ -484,7 +510,7 @@ public class FileUploadHandler {
       jcrContent.setProperty("jcr:mimeType", mimetype);
       if(fileCreated) {
         file.getParent().save();
-        autoVersionService.autoVersion(file);
+        autoVersionService.autoVersion(file,isNewVersion);
       }
       //parent.getSession().refresh(true); // Make refreshing data
       //parent.save();

@@ -38,18 +38,27 @@ public class AutoVersionServiceImpl implements AutoVersionService{
     expiredTimeVersion = Integer.parseInt(params.getValueParam(DRIVES_AUTO_VERSION_EXPIRED).getValue());
     if(StringUtils.isNotEmpty(driveAutoVersion)) lstDriveAutoVersion = Arrays.asList(driveAutoVersion.split(","));
   }
-
   /**
    * {@inheritDoc}
    */
   @Override
   public void autoVersion(Node currentNode) throws Exception {
+    autoVersion(currentNode,false);
+  }
+  /**
+   * {@inheritDoc}
+   */
+  @Override
+  public void autoVersion(Node currentNode, boolean isSkipCheckDrive) throws Exception {
     manageDriveService = WCMCoreUtils.getService(ManageDriveService.class);
     if(currentNode.canAddMixin(NodetypeConstant.MIX_REFERENCEABLE)){
       currentNode.addMixin(NodetypeConstant.MIX_REFERENCEABLE);
       currentNode.save();
     }
-
+    if(isSkipCheckDrive){
+      VersionHistoryUtils.createVersion(currentNode);
+      return;
+    }
     String nodePath = currentNode.getPath();
     for (String driveAutoVersion: lstDriveAutoVersion){
       DriveData driveData = manageDriveService.getDriveByName(StringUtils.trim(driveAutoVersion));
@@ -90,13 +99,20 @@ public class AutoVersionServiceImpl implements AutoVersionService{
    {
       return lstDriveAutoVersion;
    }
-
    @Override
-  public void autoVersion(Node currentNode, Node sourceNode) throws Exception {
+   public void autoVersion(Node currentNode, Node sourceNode) throws Exception {
+     autoVersion(currentNode,sourceNode,false);
+   }
+   @Override
+  public void autoVersion(Node currentNode, Node sourceNode, boolean isSkipDriveCheck) throws Exception {
     manageDriveService = WCMCoreUtils.getService(ManageDriveService.class);
     if(currentNode.canAddMixin(NodetypeConstant.MIX_REFERENCEABLE)){
       currentNode.addMixin(NodetypeConstant.MIX_REFERENCEABLE);
       currentNode.save();
+    }
+    if(isSkipDriveCheck){
+      createVersion(currentNode, sourceNode);
+      return;
     }
     for (String driveAutoVersion: lstDriveAutoVersion){
       DriveData driveData = manageDriveService.getDriveByName(StringUtils.trim(driveAutoVersion));

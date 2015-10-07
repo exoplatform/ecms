@@ -410,7 +410,8 @@ public class DriverConnector extends BaseConnector implements ResourceContainer 
       @QueryParam("language") String language,
       @QueryParam("fileName") String fileName,
       @QueryParam("uploadId") String uploadId,
-      @QueryParam("existenceAction") String existenceAction) throws Exception {
+      @QueryParam("existenceAction") String existenceAction,
+      @QueryParam("srcAction") String srcAction) throws Exception {
     try {
       // Check upload status
       Response msgResponse = fileUploadHandler.checkStatus(uploadId, language);
@@ -891,6 +892,10 @@ public class DriverConnector extends BaseConnector implements ResourceContainer 
       CacheControl cacheControl = new CacheControl();
       cacheControl.setNoCache(true);
       return fileUploadHandler.saveAsNTFile(currentFolderNode, uploadId, fileName, language, siteName, userId, existenceAction);
+    }else if(FileUploadHandler.SAVE_NEW_VERSION_ACTION.equals(action)){
+      CacheControl cacheControl = new CacheControl();
+      cacheControl.setNoCache(true);
+      return fileUploadHandler.saveAsNTFile(currentFolderNode, uploadId, fileName, language, siteName, userId, existenceAction,true);
     }
     return fileUploadHandler.control(uploadId, action);
   }

@@ -908,10 +908,11 @@
 		    "&currentFolder=" + eXo.ecm.MultiUpload.pathMap[progressID] +
 		    "&currentPortal="+ eXo.ecm.MultiUpload.portalName +
 		    "&userId=" + eXo.ecm.MultiUpload.userId +
-		    "&action=save&uploadId=" + progressID +
+		    "&uploadId=" + progressID +
 		    "&fileName=" + cleanName(file.name) + 
 		    "&language=" + eXo.ecm.MultiUpload.userLanguage +
-		    "&existenceAction=" + eXo.ecm.MultiUpload.existingBehavior[progressID];
+		    "&existenceAction=" + eXo.ecm.MultiUpload.existingBehavior[progressID] +
+		    "&action=save" + eXo.ecm.MultiUpload.srcAction;
 		    gj.ajax({url: uri, 
 	 	     success: function(ret, status, xhr) {
 		  	  //mark OK

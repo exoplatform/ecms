@@ -1,6 +1,7 @@
 package org.exoplatform.services.cms.documents;
 
 import javax.jcr.Node;
+
 import java.util.List;
 
 /**
@@ -32,6 +33,14 @@ public interface AutoVersionService {
   public void autoVersion(Node currentNode) throws Exception;
 
   /**
+   * Versioning for document
+   * @param currentNode
+   * @param isSkipCheckDrive
+   * @throws Exception
+   */
+  void autoVersion(Node currentNode, boolean isSkipCheckDrive) throws Exception;
+  
+  /**
    *  Versioning for document
    * @param currentNode
    * @param sourceNode
@@ -53,4 +62,13 @@ public interface AutoVersionService {
     * @throws Exception
     */
   public List<String> getDriveAutoVersion();
+
+  /**
+   *  Versioning for document at Drive dont support Autoversioning
+   * @param currentNode
+   * @param sourceNode
+   * @param isSkipCheckDrive
+   * @throws Exception
+   */
+  void autoVersion(Node currentNode, Node sourceNode, boolean isSkipDriveCheck) throws Exception;
 }

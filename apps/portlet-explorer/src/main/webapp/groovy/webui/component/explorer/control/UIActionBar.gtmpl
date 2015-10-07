@@ -116,9 +116,9 @@
 							 if (action != null) {
 								 def actionOnClick = action.event(button);
 					 			 if(action instanceof UploadActionComponent){
-           				actionOnClick = "document.getElementById('MultiUploadInputFiles').click();";
+           				actionOnClick = "eXo.ecm.MultiUpload.srcAction='';document.getElementById('MultiUploadInputFiles').click();";
 					       }else if(action instanceof UploadNewVersionManageComponent){
-           				actionOnClick = "eXo.ecm.MultiUpload.uploadNewVersion();"
+           				actionOnClick = "eXo.ecm.MultiUpload.srcAction='NewVersion';eXo.ecm.MultiUpload.uploadNewVersion();"
 					       }
 
 								 def title = _ctx.appRes(uicomponent.getId() + ".tooltip." + button);
