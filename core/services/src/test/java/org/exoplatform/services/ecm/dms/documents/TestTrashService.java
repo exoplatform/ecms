@@ -513,6 +513,26 @@ public class TestTrashService extends BaseWCMTestCase {
     session.save();
   }
   
+  public void testGetFileByTrashId() throws Exception {
+
+    Node trashRootNode = session.getRootNode();
+    Node trashNode = trashRootNode.addNode("Trash");
+    Node test = session.getRootNode().addNode("test1", "nt:file");
+    if(test.getPrimaryNodeType().getName().equals("nt:file")){
+      test.addNode("jcr:content", "nt:base");
+    }
+
+    session.save();
+
+    String trashId = trashService.moveToTrash(test, sessionProvider, 0);
+
+    session.save();
+    assertNotNull(trashService.getNodeByTrashId(trashId));
+    assertNull(trashService.getNodeByTrashId(trashId + "qqqqqqqqqqqqqqq"));
+    trashNode.remove();
+    session.save();
+  }
+
   public void testMoveSameNameToTrashSameWorkspace() throws Exception {
     Node rootNode = session.getRootNode();
     Node trashNode = rootNode.addNode("Trash");
