@@ -296,7 +296,7 @@ public class UIDocumentAutoVersionForm extends UIForm implements UIPopupComponen
       }
       Node _destNode = (Node)destSession.getItem(destPath);
 
-      if(destPath.equals(sourceNode.getPath())) {
+      if(destPath.equals(sourceNode.getParent().getPath())) {//If replace in same location, do nothing
         closePopup(autoVersionComponent, uijcrExplorer, event);
         return;
       }
