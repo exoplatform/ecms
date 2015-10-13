@@ -3211,6 +3211,7 @@
   </UIDocumentAutoVersionForm>
   <DocumentAuto>
     <message>A new version of the document {0} has been created successfully.</message>
+    <messageMultiFile>New version(s) of versioned document(s) has been created.</messageMultiFile>
   </DocumentAuto>
   <!--
   ###################################################################################

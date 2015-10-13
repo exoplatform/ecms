@@ -1,5 +1,6 @@
 package org.exoplatform.ecm.webui.component.explorer;
 
+import org.apache.commons.lang.BooleanUtils;
 import org.exoplatform.ecm.webui.component.explorer.rightclick.manager.PasteManageComponent;
 import org.exoplatform.ecm.webui.utils.JCRExceptionManager;
 import org.exoplatform.services.cms.actions.ActionServiceContainer;
@@ -34,6 +35,7 @@ import javax.jcr.Workspace;
 import javax.jcr.lock.LockException;
 import javax.jcr.nodetype.ConstraintViolationException;
 import javax.jcr.version.VersionException;
+
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Set;
@@ -263,6 +265,17 @@ public class UIDocumentAutoVersionForm extends UIForm implements UIPopupComponen
         if(_clipboardCommands.isEmpty()){
           closePopup(autoVersionComponent, uijcrExplorer, event);
           return;
+        }
+        Map<String, Boolean> versionedRemember = PasteManageComponent.getVersionedRemember();
+        if(versionedRemember!=null && BooleanUtils.isTrue(versionedRemember.get("createVersion"))){
+          String msg = event.getRequestContext().getApplicationResourceBundle().getString("DocumentAuto.messageMultiFile");
+          event.getRequestContext().getJavascriptManager().require("SHARED/wcm-utils", "wcm_utils")
+                  .addScripts("eXo.ecm.WCMUtils.showNotice(\" "+msg+"\", 'true'); ");
+        }else {
+          String msg = event.getRequestContext().getApplicationResourceBundle().getString("DocumentAuto.message");
+          msg = msg.replace("{0}", ContentReader.simpleEscapeHtml("<span style='font-weight:bold;'>" + destNode.getName() + "</span>"));
+          event.getRequestContext().getJavascriptManager().require("SHARED/wcm-utils", "wcm_utils")
+                  .addScripts("eXo.ecm.WCMUtils.showNotice(\" "+msg+"\", 'true'); ");
         }
         PasteManageComponent.processPasteMultiple(destNode.getParent(), event, uijcrExplorer, _clipboardCommands, CREATE_VERSION);
       }else {

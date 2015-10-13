@@ -77,6 +77,7 @@ import javax.jcr.lock.LockException;
 import javax.jcr.nodetype.ConstraintViolationException;
 import javax.jcr.nodetype.NodeType;
 import javax.jcr.version.VersionException;
+
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.HashMap;
@@ -808,5 +809,9 @@ public class PasteManageComponent extends UIAbstractManagerComponent {
 
   public static void setNonVersionedRemember(Map<String, Boolean> nonVersionedRemember) {
     PasteManageComponent.nonVersionedRemember = nonVersionedRemember;
+  }
+
+  public static Map<String, Boolean> getVersionedRemember() {
+    return versionedRemember;
   }
 }
