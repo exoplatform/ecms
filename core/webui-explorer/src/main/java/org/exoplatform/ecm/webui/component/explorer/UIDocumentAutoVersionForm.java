@@ -1,6 +1,7 @@
 package org.exoplatform.ecm.webui.component.explorer;
 
 import org.apache.commons.lang.BooleanUtils;
+import org.apache.commons.lang.StringUtils;
 import org.exoplatform.ecm.webui.component.explorer.rightclick.manager.PasteManageComponent;
 import org.exoplatform.ecm.webui.utils.JCRExceptionManager;
 import org.exoplatform.services.cms.actions.ActionServiceContainer;
@@ -267,7 +268,8 @@ public class UIDocumentAutoVersionForm extends UIForm implements UIPopupComponen
           return;
         }
         Map<String, Boolean> versionedRemember = PasteManageComponent.getVersionedRemember();
-        if(versionedRemember!=null && BooleanUtils.isTrue(versionedRemember.get("createVersion"))){
+        if(versionedRemember!=null && BooleanUtils.isTrue(versionedRemember.get("createVersion"))
+                && _clipboardCommands.size() != 1 ){
           String msg = event.getRequestContext().getApplicationResourceBundle().getString("DocumentAuto.messageMultiFile");
           event.getRequestContext().getJavascriptManager().require("SHARED/wcm-utils", "wcm_utils")
                   .addScripts("eXo.ecm.WCMUtils.showNotice(\" "+msg+"\", 'true'); ");
@@ -309,7 +311,7 @@ public class UIDocumentAutoVersionForm extends UIForm implements UIPopupComponen
       }
       Node _destNode = (Node)destSession.getItem(destPath);
 
-      if(destPath.equals(sourceNode.getParent().getPath())) {//If replace in same location, do nothing
+      if(destPath.equals(sourceNode.getParent().getPath()) && autoVersionComponent.isSingleProcess) {//If replace in same location, do nothing
         closePopup(autoVersionComponent, uijcrExplorer, event);
         return;
       }
@@ -335,9 +337,11 @@ public class UIDocumentAutoVersionForm extends UIForm implements UIPopupComponen
       }
       destPath = destNode.getPath();
       Node destDriectory = destNode.getParent();
+
       TrashService trashService = WCMCoreUtils.getService(TrashService.class);
-      String trashID = trashService.moveToTrash(destNode, WCMCoreUtils.getUserSessionProvider());
+      String trashID=null;
       if(autoVersionComponent.isSingleProcess){
+        trashID = trashService.moveToTrash(destNode, WCMCoreUtils.getUserSessionProvider());
         copyNode(destSession, autoVersionComponent.getSourceWorkspace(),
                 autoVersionComponent.getSourcePath(), destPath, uiApp, uijcrExplorer, event, ClipboardCommand.COPY);
         Node deletedNode = trashService.getNodeByTrashId(trashID);
@@ -349,12 +353,15 @@ public class UIDocumentAutoVersionForm extends UIForm implements UIPopupComponen
 
       if(_clipboardCommands!=null && _clipboardCommands.size()>0){
         _clipboardCommands.remove(autoVersionComponent.getCurrentClipboard());
-        copyNode(destSession, autoVersionComponent.getSourceWorkspace(),
-                autoVersionComponent.getSourcePath(), destPath, uiApp, uijcrExplorer, event, ClipboardCommand.COPY);
-        Node deletedNode = trashService.getNodeByTrashId(trashID);
-        deletedNode.remove();
-        deletedNode.getSession().save();
-        destSession.save();
+        if(!StringUtils.equals(destPath, autoVersionComponent.getSourcePath())){
+          trashID = trashService.moveToTrash(destNode, WCMCoreUtils.getUserSessionProvider());
+          copyNode(destSession, autoVersionComponent.getSourceWorkspace(),
+                  autoVersionComponent.getSourcePath(), destPath, uiApp, uijcrExplorer, event, ClipboardCommand.COPY);
+          Node deletedNode = trashService.getNodeByTrashId(trashID);
+          deletedNode.remove();
+          deletedNode.getSession().save();
+          destSession.save();
+        }
         PasteManageComponent.processPasteMultiple(destDriectory, event, uijcrExplorer, _clipboardCommands, REPLACE);
       }else {
         closePopup(autoVersionComponent, uijcrExplorer, event);
@@ -534,8 +541,6 @@ public class UIDocumentAutoVersionForm extends UIForm implements UIPopupComponen
   public static void closePopup(UIDocumentAutoVersionForm autoVersionComponent,
                                  UIJCRExplorer uijcrExplorer, Event<?> event) throws Exception{
     UIPopupWindow popupAction = uijcrExplorer.findFirstComponentOfType(UIPopupWindow.class) ;
-    popupAction.setShow(false) ;
-    uijcrExplorer.updateAjax(event);
     UICheckBoxInput chkRememberVersioned = autoVersionComponent.findComponentById(REMEMBER_VERSIONED_COMPONENT);
     UICheckBoxInput chkRememberNonVersioned = autoVersionComponent.findComponentById(REMEMBER_NONVERSIONED_COMPONENT);
     chkRememberVersioned.setChecked(false);
@@ -543,7 +548,9 @@ public class UIDocumentAutoVersionForm extends UIForm implements UIPopupComponen
     PasteManageComponent.setVersionedRemember(null);
     PasteManageComponent.setNonVersionedRemember(null);
     currentClipboard = null;
-    event.getRequestContext().addUIComponentToUpdateByAjax(uijcrExplorer);
+    popupAction.setShow(false) ;
+    popupAction.setRendered(false);
+    uijcrExplorer.updateAjax(event);
   }
 
   static public class OnChangeActionListener extends EventListener<UIDocumentAutoVersionForm> {

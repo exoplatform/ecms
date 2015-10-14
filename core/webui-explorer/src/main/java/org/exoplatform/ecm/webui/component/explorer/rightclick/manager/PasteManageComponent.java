@@ -18,6 +18,7 @@
 package org.exoplatform.ecm.webui.component.explorer.rightclick.manager;
 
 import org.apache.commons.lang.BooleanUtils;
+import org.apache.commons.lang.StringUtils;
 import org.exoplatform.ecm.utils.lock.LockUtil;
 import org.exoplatform.ecm.webui.component.explorer.UIDocumentAutoVersionForm;
 import org.exoplatform.ecm.webui.component.explorer.UIDocumentInfo;
@@ -324,13 +325,16 @@ public class PasteManageComponent extends UIAbstractManagerComponent {
             if(BooleanUtils.isTrue(nonVersionedRemember.get("replace"))) {
               //if(ClipboardCommand.CUT.equals(clipboard.getType())) continue;
               String _destPath = _destNode.getPath();
-              TrashService trashService = WCMCoreUtils.getService(TrashService.class);
-              String trashID = trashService.moveToTrash(_destNode, WCMCoreUtils.getUserSessionProvider());
-              UIDocumentAutoVersionForm.copyNode(destNode.getSession(), clipboard.getWorkspace(),
-                      clipboard.getSrcPath(), _destPath, uiApp, uiExplorer, event, ClipboardCommand.COPY);
-              Node deletedNode = trashService.getNodeByTrashId(trashID);
-              deletedNode.remove();
-              deletedNode.getSession().save();
+              if(StringUtils.equals(destPath, clipboard.getSrcPath()) &&
+                      StringUtils.equals(clipboard.getWorkspace(), _destNode.getSession().getWorkspace().getName())) {
+                TrashService trashService = WCMCoreUtils.getService(TrashService.class);
+                String trashID = trashService.moveToTrash(_destNode, WCMCoreUtils.getUserSessionProvider());
+                UIDocumentAutoVersionForm.copyNode(destNode.getSession(), clipboard.getWorkspace(),
+                        clipboard.getSrcPath(), _destPath, uiApp, uiExplorer, event, ClipboardCommand.COPY);
+                Node deletedNode = trashService.getNodeByTrashId(trashID);
+                deletedNode.remove();
+                deletedNode.getSession().save();
+              }
             }
             if(BooleanUtils.isTrue(nonVersionedRemember.get("keepboth"))) {
               if (ClipboardCommand.COPY.equals(clipboard.getType())) {

@@ -912,7 +912,9 @@
 		    "&fileName=" + cleanName(file.name) + 
 		    "&language=" + eXo.ecm.MultiUpload.userLanguage +
 		    "&existenceAction=" + eXo.ecm.MultiUpload.existingBehavior[progressID] +
-		    "&action=save" + eXo.ecm.MultiUpload.srcAction;
+				"&action=save";
+				if(eXo.ecm.MultiUpload.srcAction != null && eXo.ecm.MultiUpload.srcAction != undefined)
+					uri += eXo.ecm.MultiUpload.srcAction;
 		    gj.ajax({url: uri, 
 	 	     success: function(ret, status, xhr) {
 		  	  //mark OK
