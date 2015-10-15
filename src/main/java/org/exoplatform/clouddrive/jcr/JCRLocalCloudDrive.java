@@ -3717,52 +3717,6 @@ public abstract class JCRLocalCloudDrive extends CloudDrive implements CloudDriv
   }
 
   /**
-   * Rollback (remove) given changes from the drive local changes store. This method will save nothing to
-   * local history of already applied changes.<br>
-   * This method should be used when we exactly know that given changes saved but not committed to the history
-   * are not actual anymore, e.g. in case when we restore a file/sub-tree.
-   * Such changes can be a result of failed {@link SyncFilesCommand} and rollback caused by restoration.
-   * 
-   * @param changes {@link List} of {@link FileChange}
-   * @throws RepositoryException
-   * @throws CloudDriveException
-   * 
-   * @see #saveChanges(List)
-   * @see #commitChanges(List)
-   * @see #rollbackAllChanges()
-   */
-  @Deprecated
-  // not used
-  protected synchronized void rollbackChanges(List<FileChange> changes) throws RepositoryException, CloudDriveException {
-
-    Node driveNode = rootNode();
-    StringBuilder store = new StringBuilder();
-
-    // remove already applied local changes and collect applied as history
-    try {
-      Property localChanges = driveNode.getProperty("ecd:localChanges");
-      String current = localChanges.getString();
-      if (current.length() > 0) { // actually it should be greater of about 15 chars
-        next: for (String ch : current.split("\n")) {
-          if (ch.length() > 0) {
-            for (FileChange fch : changes) {
-              if (ch.startsWith(fch.changeId)) {
-                continue next; // omit this change as it is already applied
-              }
-            }
-            store.append(ch);
-            store.append('\n'); // store always ends with separator
-          }
-        }
-      }
-      localChanges.setValue(store.toString());
-      localChanges.save();
-    } catch (PathNotFoundException e) {
-      // no local changes saved yet
-    }
-  }
-
-  /**
    * Return saved but not yet applied local changes in this drive.
    * 
    * @return {@link List} of {@link FileChange}
