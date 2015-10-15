@@ -161,11 +161,12 @@ public class UIPresentationContainer extends UIContainer{
   public String getCurrentState() throws Exception {
     UIPresentation presentation = getChild(UIPresentation.class);
     Node node = presentation.getOriginalNode();
-    if (node!=null) {
+    if (node != null && node.hasProperty("publication:currentState")) {
       PublicationService publicationService = WCMCoreUtils.getService(PublicationService.class);
       return publicationService.getCurrentState(node);
+    } else {
+      return StringUtils.EMPTY;
     }
-    return "";
   }
 
   /**
