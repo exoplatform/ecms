@@ -16,20 +16,6 @@
  */
 package org.exoplatform.wcm.webui.scv;
 
-import java.io.UnsupportedEncodingException;
-import java.net.URLDecoder;
-import java.text.SimpleDateFormat;
-import java.util.Calendar;
-import java.util.HashMap;
-import java.util.List;
-import java.util.MissingResourceException;
-import java.util.ResourceBundle;
-
-import javax.jcr.Node;
-import javax.jcr.RepositoryException;
-import javax.jcr.ValueFormatException;
-import javax.portlet.PortletPreferences;
-
 import org.apache.commons.lang.StringUtils;
 import org.exoplatform.ecm.utils.lock.LockUtil;
 import org.exoplatform.portal.application.PortalRequestContext;
@@ -56,6 +42,15 @@ import org.exoplatform.webui.core.UIContainer;
 import org.exoplatform.webui.core.lifecycle.Lifecycle;
 import org.exoplatform.webui.event.Event;
 import org.exoplatform.webui.event.EventListener;
+
+import javax.jcr.Node;
+import javax.jcr.RepositoryException;
+import javax.jcr.ValueFormatException;
+import javax.portlet.PortletPreferences;
+import java.io.UnsupportedEncodingException;
+import java.net.URLDecoder;
+import java.text.SimpleDateFormat;
+import java.util.*;
 
 /**
  * Author : Do Ngoc Anh *
@@ -161,11 +156,9 @@ public class UIPresentationContainer extends UIContainer{
   public String getCurrentState() throws Exception {
     UIPresentation presentation = getChild(UIPresentation.class);
     Node node = presentation.getOriginalNode();
-    if (node!=null) {
-      PublicationService publicationService = WCMCoreUtils.getService(PublicationService.class);
-      return publicationService.getCurrentState(node);
-    }
-    return "";
+    PublicationService publicationService = WCMCoreUtils.getService(PublicationService.class);
+    if(node == null || !publicationService.isNodeEnrolledInLifecycle(node)) return StringUtils.EMPTY;
+    return publicationService.getCurrentState(node);
   }
 
   /**
@@ -440,7 +433,7 @@ public class UIPresentationContainer extends UIContainer{
       if (node.isLocked()) {
         node.getSession().addLockToken(LockUtil.getLockToken(node));
       }
-      HashMap<String, String> context = new HashMap<String, String>();      
+      HashMap<String, String> context = new HashMap<String, String>();
       publicationService.changeState(node, "published", context);
       event.getRequestContext().getJavascriptManager().getRequireJS().addScripts("location.reload(true);");
     }

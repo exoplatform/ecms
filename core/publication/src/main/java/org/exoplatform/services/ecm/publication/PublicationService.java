@@ -30,6 +30,11 @@ import javax.jcr.Node;
  */
 public interface PublicationService {
 
+  public static final String PUBLICATION = "publication:publication";
+  public static final String LIFECYCLE_NAME = "publication:lifecycleName";
+  public static final String CURRENT_STATE = "publication:currentState";
+  public static final String HISTORY = "publication:history";
+
   /**
    * Add a Publication Plugin to the service.
    * The method caches all added plugins.

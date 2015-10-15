@@ -52,11 +52,6 @@ import org.exoplatform.services.wcm.utils.WCMCoreUtils;
  */
 public class PublicationServiceImpl implements PublicationService {
 
-  private static final String PUBLICATION = "publication:publication";
-  private static final String LIFECYCLE_NAME = "publication:lifecycleName";
-  private static final String CURRENT_STATE = "publication:currentState";
-  private static final String HISTORY = "publication:history";
-
   private static final Log LOG = ExoLogger.getLogger(PublicationServiceImpl.class.getName());
   private PublicationPresentationService publicationPresentationService;
   private ListenerService listenerService;
