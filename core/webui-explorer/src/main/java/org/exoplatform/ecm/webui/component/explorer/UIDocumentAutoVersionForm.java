@@ -269,7 +269,7 @@ public class UIDocumentAutoVersionForm extends UIForm implements UIPopupComponen
         }
         Map<String, Boolean> versionedRemember = PasteManageComponent.getVersionedRemember();
         if(versionedRemember!=null && BooleanUtils.isTrue(versionedRemember.get("createVersion"))
-                && _clipboardCommands.size() != 1 ){
+                && !_clipboardCommands.isEmpty() ){
           String msg = event.getRequestContext().getApplicationResourceBundle().getString("DocumentAuto.messageMultiFile");
           event.getRequestContext().getJavascriptManager().require("SHARED/wcm-utils", "wcm_utils")
                   .addScripts("eXo.ecm.WCMUtils.showNotice(\" "+msg+"\", 'true'); ");
