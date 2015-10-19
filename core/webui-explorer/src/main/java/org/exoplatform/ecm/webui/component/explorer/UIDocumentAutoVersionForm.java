@@ -304,7 +304,7 @@ public class UIDocumentAutoVersionForm extends UIForm implements UIPopupComponen
       Node sourceNode = uijcrExplorer.getNodeByPath(autoVersionComponent.getSourcePath(), srcSession);
       String destPath = autoVersionComponent.getDestPath();
       Set<ClipboardCommand> _clipboardCommands = autoVersionComponent.getClipboardCommands();
-
+      ClipboardCommand currentCliboard = autoVersionComponent.getCurrentClipboard();
       if (destPath != null) {
         Matcher matcher = UIWorkingArea.FILE_EXPLORER_URL_SYNTAX.matcher(destPath);
         if(matcher.find()) destPath = matcher.group(2);
@@ -325,25 +325,47 @@ public class UIDocumentAutoVersionForm extends UIForm implements UIPopupComponen
         remember.put("replace", true);
         PasteManageComponent.setNonVersionedRemember(remember);
       }
-      if(ClipboardCommand.CUT.equals(autoVersionComponent.currentClipboard.getType())
+      TrashService trashService = WCMCoreUtils.getService(TrashService.class);
+      String trashID=null;
+      destPath = destNode.getPath();
+      if(ClipboardCommand.CUT.equals(currentCliboard.getType())
               && _destNode.hasNode(sourceNode.getName())) {
         if(_clipboardCommands!=null && _clipboardCommands.size()>0){
-          _clipboardCommands.remove(autoVersionComponent.getCurrentClipboard());
+          if(!StringUtils.equals(destNode.getPath(), sourceNode.getPath())){
+            trashID = trashService.moveToTrash(destNode, WCMCoreUtils.getUserSessionProvider());
+            try {
+              PasteManageComponent.pasteByCut(currentClipboard, uijcrExplorer, destSession, currentClipboard.getWorkspace(),
+                      sourceNode.getPath(), destPath, WCMCoreUtils.getService(ActionServiceContainer.class), false, false, false);
+            }catch (Exception ex){
+              if(LOG.isErrorEnabled()){
+                LOG.error("Cannot cut files while replace", ex);
+              }
+              trashService.restoreFromTrash(trashID, WCMCoreUtils.getUserSessionProvider());
+            }
+            Node deletedNode = trashService.getNodeByTrashId(trashID);
+            deletedNode.remove();
+            deletedNode.getSession().save();
+          }
+          _clipboardCommands.remove(currentCliboard);
           PasteManageComponent.processPasteMultiple(_destNode, event, uijcrExplorer, _clipboardCommands, REPLACE);
         }else{
           closePopup(autoVersionComponent, uijcrExplorer, event);
         }
         return;
       }
-      destPath = destNode.getPath();
       Node destDriectory = destNode.getParent();
 
-      TrashService trashService = WCMCoreUtils.getService(TrashService.class);
-      String trashID=null;
       if(autoVersionComponent.isSingleProcess){
         trashID = trashService.moveToTrash(destNode, WCMCoreUtils.getUserSessionProvider());
-        copyNode(destSession, autoVersionComponent.getSourceWorkspace(),
-                autoVersionComponent.getSourcePath(), destPath, uiApp, uijcrExplorer, event, ClipboardCommand.COPY);
+        try {
+          copyNode(destSession, autoVersionComponent.getSourceWorkspace(),
+                  autoVersionComponent.getSourcePath(), destPath, uiApp, uijcrExplorer, event, ClipboardCommand.COPY);
+        }catch (Exception ex){
+          if(LOG.isErrorEnabled()){
+            LOG.error("Cannot copy files while replace", ex);
+          }
+          trashService.restoreFromTrash(trashID, WCMCoreUtils.getUserSessionProvider());
+        }
         Node deletedNode = trashService.getNodeByTrashId(trashID);
         deletedNode.remove();
         deletedNode.getSession().save();
@@ -355,8 +377,15 @@ public class UIDocumentAutoVersionForm extends UIForm implements UIPopupComponen
         _clipboardCommands.remove(autoVersionComponent.getCurrentClipboard());
         if(!StringUtils.equals(destPath, autoVersionComponent.getSourcePath())){
           trashID = trashService.moveToTrash(destNode, WCMCoreUtils.getUserSessionProvider());
-          copyNode(destSession, autoVersionComponent.getSourceWorkspace(),
-                  autoVersionComponent.getSourcePath(), destPath, uiApp, uijcrExplorer, event, ClipboardCommand.COPY);
+          try {
+            copyNode(destSession, autoVersionComponent.getSourceWorkspace(),
+                    autoVersionComponent.getSourcePath(), destPath, uiApp, uijcrExplorer, event, ClipboardCommand.COPY);
+          }catch (Exception ex){
+            if(LOG.isErrorEnabled()){
+              LOG.error("Cannot copy files while replace", ex);
+            }
+            trashService.restoreFromTrash(trashID, WCMCoreUtils.getUserSessionProvider());
+          }
           Node deletedNode = trashService.getNodeByTrashId(trashID);
           deletedNode.remove();
           deletedNode.getSession().save();
@@ -555,10 +584,6 @@ public class UIDocumentAutoVersionForm extends UIForm implements UIPopupComponen
 
   static public class OnChangeActionListener extends EventListener<UIDocumentAutoVersionForm> {
     public void execute(Event<UIDocumentAutoVersionForm> event) throws Exception {
-//      UICheckBoxInput chkRememberVersioned = event.getSource().findComponentById(REMEMBER_VERSIONED_COMPONENT);
-//      UICheckBoxInput chkRememberNonVersioned = event.getSource().findComponentById(REMEMBER_NONVERSIONED_COMPONENT);
-//      PasteManageComponent.setVersionedRemember(chkRememberVersioned.isChecked() && chkRememberVersioned.isRendered());
-//      PasteManageComponent.setNonVersionedRemember(chkRememberNonVersioned.isChecked() && chkRememberNonVersioned.isRendered());
       event.getRequestContext().addUIComponentToUpdateByAjax(event.getSource());
     }
   }

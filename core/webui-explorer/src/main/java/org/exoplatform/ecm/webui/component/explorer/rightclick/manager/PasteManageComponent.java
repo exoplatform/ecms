@@ -252,19 +252,6 @@ public class PasteManageComponent extends UIAbstractManagerComponent {
       processPaste(clipboardCommand, destNode.getPath(),uiExplorer, event, false, true);
     }
   }
-//
-//  /**
-//   * Event raise from UIClipboard
-//   * @param currentClipboard
-//   * @param destPath
-//   * @param event
-//   * @throws Exception
-//   */
-//  public static void processPaste(ClipboardCommand currentClipboard, String destPath, Event<?> event)
-//      throws Exception {
-//    UIJCRExplorer uiExplorer = ((UIComponent)event.getSource()).getAncestorOfType(UIJCRExplorer.class);
-//    processPaste(currentClipboard, destPath,uiExplorer, event, false, true);
-//  }
 
   private static void processPasteMultiple(String destPath, Event<?> event, UIJCRExplorer uiExplorer)
           throws Exception {
@@ -329,8 +316,14 @@ public class PasteManageComponent extends UIAbstractManagerComponent {
                       StringUtils.equals(clipboard.getWorkspace(), _destNode.getSession().getWorkspace().getName())) {
                 TrashService trashService = WCMCoreUtils.getService(TrashService.class);
                 String trashID = trashService.moveToTrash(_destNode, WCMCoreUtils.getUserSessionProvider());
-                UIDocumentAutoVersionForm.copyNode(destNode.getSession(), clipboard.getWorkspace(),
-                        clipboard.getSrcPath(), _destPath, uiApp, uiExplorer, event, ClipboardCommand.COPY);
+
+                if(StringUtils.equals(ClipboardCommand.CUT, clipboard.getType())){
+                  pasteByCut(clipboard, uiExplorer, _destNode.getSession(), clipboard.getWorkspace(), clipboard.getSrcPath(),
+                          _destPath, actionContainer, false, false, false);
+                }else {
+                  UIDocumentAutoVersionForm.copyNode(destNode.getSession(), clipboard.getWorkspace(),
+                          clipboard.getSrcPath(), _destPath, uiApp, uiExplorer, event, ClipboardCommand.COPY);
+                }
                 Node deletedNode = trashService.getNodeByTrashId(trashID);
                 deletedNode.remove();
                 deletedNode.getSession().save();
