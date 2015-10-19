@@ -325,7 +325,7 @@ public class PasteManageComponent extends UIAbstractManagerComponent {
             if(BooleanUtils.isTrue(nonVersionedRemember.get("replace"))) {
               //if(ClipboardCommand.CUT.equals(clipboard.getType())) continue;
               String _destPath = _destNode.getPath();
-              if(StringUtils.equals(destPath, clipboard.getSrcPath()) &&
+              if(!StringUtils.equals(_destPath, clipboard.getSrcPath()) &&
                       StringUtils.equals(clipboard.getWorkspace(), _destNode.getSession().getWorkspace().getName())) {
                 TrashService trashService = WCMCoreUtils.getService(TrashService.class);
                 String trashID = trashService.moveToTrash(_destNode, WCMCoreUtils.getUserSessionProvider());
@@ -427,14 +427,7 @@ public class PasteManageComponent extends UIAbstractManagerComponent {
               srcNode.getPath(), destNode.getNode(srcNode.getName()).getPath(), uiApp, uiExplorer, event, ClipboardCommand.COPY);
     }else if(destNode.hasNode(srcNode.getName()) && ClipboardCommand.COPY.equals(clipboard.getType())
             && UIDocumentAutoVersionForm.REPLACE.equals(action)) {
-      TrashService trashService = WCMCoreUtils.getService(TrashService.class);
-      destPath = _destNode.getPath();
-      String trashID = trashService.moveToTrash(_destNode, WCMCoreUtils.getUserSessionProvider());
-      UIDocumentAutoVersionForm.copyNode(destNode.getSession(), destNode.getSession().getWorkspace().getName(),
-              srcNode.getPath(), destPath, uiApp, uiExplorer, event, ClipboardCommand.COPY);
-      Node deletedNode = trashService.getNodeByTrashId(trashID);
-      deletedNode.remove();
-      deletedNode.getSession().save();
+      autoVersionService.autoVersion(destNode.getNode(srcNode.getName()), srcNode);
     } else{
       if(UIDocumentAutoVersionForm.KEEP_BOTH.equals(action)){
         if(destNode.hasNode(srcNode.getName())) {
