@@ -168,8 +168,10 @@ public class CloudDriveServiceImpl implements CloudDriveService, Startable {
   public void addPlugin(ComponentPlugin plugin) {
     if (plugin instanceof CloudDriveConnector) {
       // connectors
-      CloudDriveConnector impl = (CloudDriveConnector) plugin;
-      connectors.put(impl.getProvider(), impl);
+      CloudDriveConnector connector = (CloudDriveConnector) plugin;
+      if (!connector.isDisabled()) {
+        connectors.put(connector.getProvider(), connector);
+      }
     } else if (plugin instanceof CloudDriveEnvironment) {
       // environment customizations
       CloudDriveEnvironment env = (CloudDriveEnvironment) plugin;
