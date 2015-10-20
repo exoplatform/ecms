@@ -1196,6 +1196,16 @@ public abstract class JCRLocalCloudDrive extends CloudDrive implements CloudDriv
   protected abstract class ConnectCommand extends AbstractCommand {
 
     /**
+     * File IDs with their parent IDs of added to the drive but not yet saved (by chunk saving).
+     */
+    private Map<String, Set<String>> connecting = new HashMap<String, Set<String>>();
+
+    /**
+     * File IDs with their parent IDs already added and saved in the drive (by chunk saving).
+     */
+    private Map<String, Set<String>> connected  = new HashMap<String, Set<String>>();
+
+    /**
      * Connect command constructor.
      * 
      * @throws RepositoryException
@@ -1206,20 +1216,60 @@ public abstract class JCRLocalCloudDrive extends CloudDrive implements CloudDriv
     }
 
     /**
-     * {@inheritDoc}
-     */
-    @Override
-    protected void preSaveChunk() throws CloudDriveException, RepositoryException {
-      // Connect command doesn't have a pre-save logic by default.
-    }
-
-    /**
      * Fetch actual files from cloud provider to local JCR.
      * 
      * @throws CloudDriveException
      * @throws RepositoryException
      */
     protected abstract void fetchFiles() throws CloudDriveException, RepositoryException;
+
+    /**
+     * NOT SUPPORTED! Don't use this method within Connect commands - use {@link #addConnected(String, CloudFile)}
+     * instead.
+     */
+    @Override
+    protected final boolean addChanged(CloudFile file) throws RepositoryException, CloudDriveException {
+      throw new IllegalStateException("Adding changed files not supported by " + getName()
+          + " command! Use addConnected().");
+    }
+
+    /**
+     * Add just connected file and associate it with a given parent ID. This method should be used instead of
+     * {@link #addChanged(CloudFile)}.
+     */
+    protected boolean addConnected(String parentId, CloudFile file) throws RepositoryException, CloudDriveException {
+      boolean r = super.addChanged(file);
+      if (r) {
+        Set<String> connectedParents = connecting.get(file.getId());
+        if (connectedParents == null) {
+          connecting.put(file.getId(), connectedParents = new HashSet<String>());
+        }
+        connectedParents.add(parentId);
+      }
+      return r;
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    protected void preSaveChunk() throws CloudDriveException, RepositoryException {
+      // Rollout a chunk of connecting files to connected set
+      connected.putAll(connecting);
+      connecting.clear();
+    }
+
+    /**
+     * Check if a file with given ID and parent ID is already connected by this command.
+     * 
+     * @param fileId {@link String} file ID
+     * @param parentId {@link String} parent ID, assumed never <code>null</code>
+     * @return <code>true</code> if file already connected, <code>false</code> otherwise
+     */
+    protected boolean isConnected(String parentId, String fileId) {
+      Set<String> connectedParents = connected.get(fileId);
+      return connectedParents != null && connectedParents.contains(parentId);
+    }
 
     @Override
     public String getName() {
