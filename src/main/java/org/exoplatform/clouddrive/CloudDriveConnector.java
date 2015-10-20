@@ -101,6 +101,11 @@ public abstract class CloudDriveConnector extends BaseComponentPlugin {
   public static final String               CONFIG_PROVIDER_CLIENT_SECRET    = "provider-client-secret";
 
   /**
+   * Flag to disable a connector by configuration. 
+   */
+  public static final String               CONFIG_DISABLE                   = "disable";
+
+  /**
    * Force SSO for user login. It is optional parameter for those providers that need force SSO explicitly
    * (e.g. Box).
    */
@@ -247,6 +252,11 @@ public abstract class CloudDriveConnector extends BaseComponentPlugin {
 
   protected String getClientSecret() {
     return config.get(CONFIG_PROVIDER_CLIENT_SECRET);
+  }
+
+  protected boolean isDisabled() {
+    String disableStr = config.get(CONFIG_DISABLE);
+    return disableStr != null || disableStr.equals("true");
   }
 
   /**
