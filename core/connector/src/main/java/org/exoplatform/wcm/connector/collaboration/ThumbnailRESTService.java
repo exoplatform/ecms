@@ -409,7 +409,7 @@ public class ThumbnailRESTService implements ResourceContainer {
 
   private Node getShowingNode(String workspaceName, String nodePath) throws Exception {
     ManageableRepository repository = repositoryService_.getCurrentRepository();
-    Session session = getSystemProvider().getSession(workspaceName, repository);
+    Session session = WCMCoreUtils.getUserSessionProvider().getSession(workspaceName, repository);
     Node showingNode = null;
     if(nodePath.equals("/")) showingNode = session.getRootNode();
     else {
@@ -418,8 +418,4 @@ public class ThumbnailRESTService implements ResourceContainer {
     return showingNode;
   }
 
-  private SessionProvider getSystemProvider() {
-    SessionProviderService service = WCMCoreUtils.getService(SessionProviderService.class);
-    return service.getSystemSessionProvider(null) ;
-  }
 }
