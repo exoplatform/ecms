@@ -143,6 +143,15 @@ public abstract class CloudDrive {
      * @return long
      */
     long getAvailable();
+    
+    /**
+     * Number of attempts already tried to process the command. First attempt is 0 and so on. This value
+     * can be greater if provider supports retry on error.
+     * 
+     * @return number of attempts already tried (starting from 0)
+     * @see {@link CloudProvider#retryOnProviderError()}
+     */
+    int getAttempts();
   }
 
   /**
