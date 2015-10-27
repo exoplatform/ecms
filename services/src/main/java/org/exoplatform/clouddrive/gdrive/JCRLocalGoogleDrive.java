@@ -113,7 +113,7 @@ public class JCRLocalGoogleDrive extends JCRLocalCloudDrive implements UserToken
         if (!gf.getLabels().getTrashed()) { // skip files in Trash
           if (!isConnected(fileId, gf.getId())) { // if not already connected
             boolean isFolder = api.isFolder(gf);
-            
+
             DateTime createDate = gf.getCreatedDate();
             if (createDate == null) {
               throw new GoogleDriveException("File " + gf.getTitle() + " doesn't have Created Date.");
@@ -212,7 +212,8 @@ public class JCRLocalGoogleDrive extends JCRLocalCloudDrive implements UserToken
     /**
      * Ids of removed/trashed files. Used to skip updates of sub-files returned for removed folders.
      */
-    protected Set<String>          removedIds = new HashSet<String>();
+    // TODO cleanup
+    // protected Set<String> removedIds = new HashSet<String>();
 
     /**
      * Last change ID fetched and applied to the drive. Used by {@link #preSaveChunk()}.
@@ -372,7 +373,8 @@ public class JCRLocalGoogleDrive extends JCRLocalCloudDrive implements UserToken
         }
         nodes.remove(fileId);
       }
-      removedIds.add(fileId); // add to removed ids in any case
+      // TODO cleanup
+      // removedIds.add(fileId); // add to removed ids in any case
     }
 
     /**
