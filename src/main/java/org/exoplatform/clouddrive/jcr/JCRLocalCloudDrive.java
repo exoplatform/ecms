@@ -32,7 +32,6 @@ import org.exoplatform.clouddrive.CloudDriveStorage;
 import org.exoplatform.clouddrive.CloudFile;
 import org.exoplatform.clouddrive.CloudFileAPI;
 import org.exoplatform.clouddrive.CloudFileSynchronizer;
-import org.exoplatform.clouddrive.CloudProvider;
 import org.exoplatform.clouddrive.CloudProviderException;
 import org.exoplatform.clouddrive.CloudUser;
 import org.exoplatform.clouddrive.ConflictException;
@@ -895,8 +894,9 @@ public abstract class JCRLocalCloudDrive extends CloudDrive implements CloudDriv
      * Save the drive's JCR node with currently changed files.
      * 
      * @throws RepositoryException
+     * @throws CloudDriveException
      */
-    protected void save() throws RepositoryException {
+    protected void save() throws RepositoryException, CloudDriveException {
       try {
         driveNode.save();
       } catch (InvalidItemStateException e) {
@@ -1507,7 +1507,17 @@ public abstract class JCRLocalCloudDrive extends CloudDrive implements CloudDriv
     /**
      * This command updating files. Will be removed at the processing end.
      */
-    final List<String>     updating = new ArrayList<String>(); // use List to track number of updates
+    final List<String>     updating = new ArrayList<String>();    // use List to track number of updates
+
+    /**
+     * Applied changes for saving in a chunk. See {@link #sync()} and {@link #save()}.
+     */
+    final List<FileChange> applied  = new ArrayList<FileChange>();
+
+    /**
+     * Changes to skip in the history when saving in a chunk.
+     */
+    final List<FileChange> skipped  = new ArrayList<FileChange>();
 
     final List<FileChange> changes;
 
@@ -1605,11 +1615,20 @@ public abstract class JCRLocalCloudDrive extends CloudDrive implements CloudDriv
       // Files sync doesn't have a pre-save logic by default.
     }
 
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    protected void save() throws RepositoryException, CloudDriveException {
+      super.save();
+      // Commit also just saved part of changes to the drive history, omit skipped
+      commitChanges(applied, skipped);
+      applied.clear();
+      skipped.clear();
+    }
+
     void sync() throws RepositoryException, CloudDriveException, InterruptedException {
       try {
-        // Changes to skip in the history
-        List<FileChange> skipped = new ArrayList<FileChange>();
-
         // compress the changes list:
         // * skip not supported items/ignored
         // * reduce number of creation/updates of the same path (make single file update for its properties
@@ -1742,9 +1761,7 @@ public abstract class JCRLocalCloudDrive extends CloudDrive implements CloudDriv
 
         Set<String> ignoredPaths = new HashSet<String>(); // for not supported by sync
 
-        Collection<FileChange> acceptedChanges = accepted.values();
-
-        next: for (Iterator<FileChange> chiter = acceptedChanges.iterator(); chiter.hasNext()
+        next: for (Iterator<FileChange> chiter = accepted.values().iterator(); chiter.hasNext()
             && !Thread.currentThread().isInterrupted();) {
           FileChange change = chiter.next();
           String changePath = change.filePath;
@@ -1757,6 +1774,7 @@ public abstract class JCRLocalCloudDrive extends CloudDrive implements CloudDriv
 
           try {
             change.apply();
+            applied.add(change);
             if (FileChange.REMOVE.equals(change.changeType)) {
               addRemoved(change.getPath());
             } else {
@@ -1821,12 +1839,8 @@ public abstract class JCRLocalCloudDrive extends CloudDrive implements CloudDriv
 
         save(); // save the drive (data returned from the cloud when submitted local changes)
 
-        // commit changes store saved in the drive to the history, omit skipped
-        commitChanges(acceptedChanges, skipped);
-
         // help GC
         accepted.clear();
-        skipped.clear();
         ignoredPaths.clear();
       } finally {
         // complete and clean updating after drive node save
@@ -3677,8 +3691,7 @@ public abstract class JCRLocalCloudDrive extends CloudDrive implements CloudDriv
    * 
    * @param changes {@link Collection} of {@link FileChange} changes to move from changes store to the history
    * @param skipped {@link Collection} of {@link FileChange} changes that should be removed from changes store
-   *          but
-   *          not added to the history
+   *          but not added to the history
    * @throws RepositoryException
    * @throws CloudDriveException
    * @see #saveChanges(List)
@@ -3714,7 +3727,7 @@ public abstract class JCRLocalCloudDrive extends CloudDrive implements CloudDriv
                 continue next; // omit this change as it was skipped
               }
             }
-            store.append(ch);
+            store.append(ch); // still keep this changes in local changes
             store.append('\n'); // store always ends with separator
           }
         }
