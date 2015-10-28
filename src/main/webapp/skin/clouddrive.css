@@ -28,12 +28,10 @@
 /*
  * Workaround Platform rendering of files with dot in name (it assumes it's extension and show it in gray).
  */
-/*
 .fileViewRowView[mousedown*='OpenCloudFile'] .columnText .fileExtension {
 	color: #333;
 	font-weight: bold;
 }
-*/
 
 /*
  * File View style
