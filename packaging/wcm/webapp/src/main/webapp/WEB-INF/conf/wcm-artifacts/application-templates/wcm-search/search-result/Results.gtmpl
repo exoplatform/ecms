@@ -114,7 +114,7 @@
      def itemName = viewNode.getName();
      def itemTitle = uicomponent.getTitle(viewNode);
      if (itemTitle != null && itemTitle.trim().length() != 0) itemName = itemTitle;
-     itemName = ContentReader.getXSSCompatibilityContent(itemName);
+     itemName = ContentReader.simpleEscapeHtml(itemName);
      def itemUrl = resultNode.getUserNavigationURI();
      List<String> listNavigationNodeUris = new ArrayList<String>();
      if (itemUrl == null || itemUrl.trim().length() == 0) {
