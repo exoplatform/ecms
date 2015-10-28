@@ -104,94 +104,94 @@ public class JCRLocalGoogleDrive extends JCRLocalCloudDrive implements UserToken
       setChangeId(about.getLargestChangeId());
     }
 
-    protected void fetchChilds(String fileId, Node parent) throws CloudDriveException, RepositoryException {
+    protected void fetchChilds(String fileId, Node localFile) throws CloudDriveException, RepositoryException {
       ChildIterator children = api.children(fileId);
       iterators.add(children);
-
       while (children.hasNext() && !Thread.currentThread().isInterrupted()) {
         ChildReference child = children.next();
         File gf = api.file(child.getId());
         if (!gf.getLabels().getTrashed()) { // skip files in Trash
-          // create JCR node here
-          boolean isFolder = api.isFolder(gf);
+          if (!isConnected(fileId, gf.getId())) { // if not already connected
+            boolean isFolder = api.isFolder(gf);
 
-          DateTime createDate = gf.getCreatedDate();
-          if (createDate == null) {
-            throw new GoogleDriveException("File " + gf.getTitle() + " doesn't have Created Date.");
-          }
-          Calendar created = api.parseDate(createDate.toStringRfc3339());
-          DateTime modifiedDate = gf.getModifiedDate();
-          if (modifiedDate == null) {
-            throw new GoogleDriveException("File " + gf.getTitle() + " doesn't have Modified Date.");
-          }
-          Calendar modified = api.parseDate(modifiedDate.toStringRfc3339());
+            DateTime createDate = gf.getCreatedDate();
+            if (createDate == null) {
+              throw new GoogleDriveException("File " + gf.getTitle() + " doesn't have Created Date.");
+            }
+            Calendar created = api.parseDate(createDate.toStringRfc3339());
+            DateTime modifiedDate = gf.getModifiedDate();
+            if (modifiedDate == null) {
+              throw new GoogleDriveException("File " + gf.getTitle() + " doesn't have Modified Date.");
+            }
+            Calendar modified = api.parseDate(modifiedDate.toStringRfc3339());
 
-          long size = fileSize(gf);
+            long size = fileSize(gf);
 
-          // link and editLink
-          String link = gf.getAlternateLink();
+            // link and editLink
+            String link = gf.getAlternateLink();
 
-          // TODO apply multiple owners in cloud file and show them in ECM
+            // TODO apply multiple owners in cloud file and show them in ECM
 
-          Node fileNode;
-          CloudFile file;
-          if (isFolder) {
-            fileNode = openFolder(gf.getId(), gf.getTitle(), parent);
-            initFolder(fileNode,
+            Node fileNode;
+            CloudFile file;
+            if (isFolder) {
+              fileNode = openFolder(gf.getId(), gf.getTitle(), localFile);
+              initFolder(fileNode,
+                         gf.getId(),
+                         gf.getTitle(),
+                         gf.getMimeType(),
+                         link,
+                         gf.getOwnerNames().get(0),
+                         gf.getLastModifyingUserName(),
+                         created,
+                         modified);
+
+              // go recursive
+              fetchChilds(gf.getId(), fileNode);
+              file = new JCRLocalCloudFile(fileNode.getPath(),
+                                           gf.getId(),
+                                           gf.getTitle(),
+                                           gf.getAlternateLink(),
+                                           gf.getMimeType(),
+                                           gf.getLastModifyingUserName(),
+                                           gf.getOwnerNames().get(0),
+                                           created,
+                                           modified,
+                                           fileNode,
+                                           true);
+            } else {
+              fileNode = openFile(gf.getId(), gf.getTitle(), localFile);
+              initFile(fileNode,
                        gf.getId(),
                        gf.getTitle(),
                        gf.getMimeType(),
                        link,
+                       gf.getEmbedLink(),
+                       gf.getThumbnailLink(),
                        gf.getOwnerNames().get(0),
                        gf.getLastModifyingUserName(),
                        created,
-                       modified);
-
-            // go recursive
-            fetchChilds(gf.getId(), fileNode);
-            file = new JCRLocalCloudFile(fileNode.getPath(),
-                                         gf.getId(),
-                                         gf.getTitle(),
-                                         gf.getAlternateLink(),
-                                         gf.getMimeType(),
-                                         gf.getLastModifyingUserName(),
-                                         gf.getOwnerNames().get(0),
-                                         created,
-                                         modified,
-                                         fileNode,
-                                         true);
-          } else {
-            fileNode = openFile(gf.getId(), gf.getTitle(), parent);
-            initFile(fileNode,
-                     gf.getId(),
-                     gf.getTitle(),
-                     gf.getMimeType(),
-                     link,
-                     gf.getEmbedLink(),
-                     gf.getThumbnailLink(),
-                     gf.getOwnerNames().get(0),
-                     gf.getLastModifyingUserName(),
-                     created,
-                     modified,
-                     size);
-            file = new JCRLocalCloudFile(fileNode.getPath(),
-                                         gf.getId(),
-                                         gf.getTitle(),
-                                         gf.getAlternateLink(),
-                                         gf.getAlternateLink(),
-                                         gf.getEmbedLink(),
-                                         gf.getThumbnailLink(),
-                                         gf.getMimeType(),
-                                         null, // typeMode not required for GoogleDrive
-                                         gf.getLastModifyingUserName(),
-                                         gf.getOwnerNames().get(0),
-                                         created,
-                                         modified,
-                                         size,
-                                         fileNode,
-                                         true);
+                       modified,
+                       size);
+              file = new JCRLocalCloudFile(fileNode.getPath(),
+                                           gf.getId(),
+                                           gf.getTitle(),
+                                           gf.getAlternateLink(),
+                                           gf.getAlternateLink(),
+                                           gf.getEmbedLink(),
+                                           gf.getThumbnailLink(),
+                                           gf.getMimeType(),
+                                           null, // typeMode not required for GoogleDrive
+                                           gf.getLastModifyingUserName(),
+                                           gf.getOwnerNames().get(0),
+                                           created,
+                                           modified,
+                                           size,
+                                           fileNode,
+                                           true);
+            }
+            addConnected(fileId, file);
           }
-          addChanged(file);
         }
       }
     }
@@ -212,7 +212,8 @@ public class JCRLocalGoogleDrive extends JCRLocalCloudDrive implements UserToken
     /**
      * Ids of removed/trashed files. Used to skip updates of sub-files returned for removed folders.
      */
-    protected Set<String>          removedIds = new HashSet<String>();
+    // TODO cleanup
+    // protected Set<String> removedIds = new HashSet<String>();
 
     /**
      * Last change ID fetched and applied to the drive. Used by {@link #preSaveChunk()}.
@@ -344,7 +345,7 @@ public class JCRLocalGoogleDrive extends JCRLocalCloudDrive implements UserToken
      * 
      * @param fileId {@link String}
      * @throws RepositoryException
-     * @throws CloudDriveException 
+     * @throws CloudDriveException
      */
     protected void deleteFile(String fileId) throws RepositoryException, CloudDriveException {
       List<Node> existing = nodes.get(fileId);
@@ -372,7 +373,8 @@ public class JCRLocalGoogleDrive extends JCRLocalCloudDrive implements UserToken
         }
         nodes.remove(fileId);
       }
-      removedIds.add(fileId); // add to removed ids in any case
+      // TODO cleanup
+      // removedIds.add(fileId); // add to removed ids in any case
     }
 
     /**
