@@ -1078,7 +1078,7 @@ public abstract class JCRLocalCloudDrive extends CloudDrive implements CloudDriv
         finishTime.set(System.currentTimeMillis());
 
         if (LOG.isDebugEnabled()) {
-          LOG.debug("< Ended drive " + getName() + " command for " + title() + " in " + (startTime.get() - finishTime.get())
+          LOG.debug("< Ended drive " + getName() + " command for " + title() + " in " + (finishTime.get() - startTime.get())
               + "ms.");
         }
       }
