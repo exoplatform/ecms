@@ -17,14 +17,37 @@
 	font: 9px Arial, sans-serif
 }
 
-.fileContent .content, .mediaContent .content #CloudFileViewer {
-	text-align: left;
-}
-
 .uiIconEcmsViewSharing {
 	background: url("icons/clouddrive-logo-lightgray-16x16.png") no-repeat left center transparent !important;
 }
 
+.fileContent .content, .mediaContent .content #CloudFileViewer {
+	text-align: left;
+}
+
+/*
+ * Workaround Platform rendering of files with dot in name (it assumes it's extension and show it in gray).
+ */
+/*
+.fileViewRowView[mousedown*='OpenCloudFile'] .columnText .fileExtension {
+	color: #333;
+	font-weight: bold;
+}
+*/
+
+/*
+ * File View style
+ */
+.file-content {
+	position: relative;
+	min-height: 600px;
+	height: auto !important;
+}
+
+.file-content .CodeMirror {
+	min-height: 600px;
+	height: 800px; !important;
+}
 
 /*************************** NodeType Icon ***********************/
 
