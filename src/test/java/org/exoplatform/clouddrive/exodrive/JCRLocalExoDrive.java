@@ -83,8 +83,8 @@ public class JCRLocalExoDrive extends JCRLocalCloudDrive {
                    f.getCreateDate(),
                    f.getModifiedDate(),
                    0);
-
-          addChanged(new JCRLocalCloudFile(localNode.getPath(),
+          // FYI it is a sole parent in this connector
+          addConnected(DUMMY_DATA, new JCRLocalCloudFile(localNode.getPath(),
                                            f.getId(),
                                            f.getName(),
                                            f.getType(),

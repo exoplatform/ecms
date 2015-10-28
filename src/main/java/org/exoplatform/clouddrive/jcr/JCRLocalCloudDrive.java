@@ -856,6 +856,11 @@ public abstract class JCRLocalCloudDrive extends CloudDrive implements CloudDriv
     private int                              saved            = 0;
 
     /**
+     * Number of attempts to process the command (see {@link #exec()}).
+     */
+    private int                              attemptNumb      = 0;
+
+    /**
      * Asynchronous execution support.
      */
     protected Future<Command>                async;
@@ -889,8 +894,9 @@ public abstract class JCRLocalCloudDrive extends CloudDrive implements CloudDriv
      * Save the drive's JCR node with currently changed files.
      * 
      * @throws RepositoryException
+     * @throws CloudDriveException
      */
-    protected void save() throws RepositoryException {
+    protected void save() throws RepositoryException, CloudDriveException {
       try {
         driveNode.save();
       } catch (InvalidItemStateException e) {
@@ -957,6 +963,20 @@ public abstract class JCRLocalCloudDrive extends CloudDrive implements CloudDriv
     }
 
     /**
+     * {@inheritDoc}
+     */
+    public int getAttempts() {
+      return attemptNumb;
+    }
+
+    /**
+     * Reset the command for a next attempt.
+     */
+    private void reset() {
+      iterators.clear(); // clear iterators
+    }
+
+    /**
      * Processing logic.
      * 
      * @throws CloudDriveException
@@ -989,20 +1009,18 @@ public abstract class JCRLocalCloudDrive extends CloudDrive implements CloudDriv
      * @throws RepositoryException
      */
     protected final void exec() throws CloudDriveException, RepositoryException {
+      if (LOG.isDebugEnabled()) {
+        LOG.debug("> Running " + getName() + " command of " + title());
+      }
+
       startTime.set(System.currentTimeMillis());
-
       driveCommands.add(this);
-
       try {
         commandEnv.prepare(this); // prepare environment
-
         jcrListener.disable();
-
         startAction(JCRLocalCloudDrive.this);
-
         driveNode = rootNode(); // init in actual runner thread
 
-        int attemptNumb = 0;
         while (true && !Thread.currentThread().isInterrupted()) {
           try {
             process();
@@ -1015,7 +1033,8 @@ public abstract class JCRLocalCloudDrive extends CloudDrive implements CloudDriv
                 throw e;
               } else {
                 rollback(driveNode);
-                LOG.warn("Error running " + getName() + " command. " + e.getMessage()
+                reset();
+                LOG.warn("Error running " + getName() + " command of " + title() + ". " + e.getMessage()
                     + ". Rolled back and will run next attempt in " + CloudDriveConnector.PROVIDER_REQUEST_ATTEMPT_TIMEOUT
                     + "ms.", e);
                 Thread.sleep(CloudDriveConnector.PROVIDER_REQUEST_ATTEMPT_TIMEOUT);
@@ -1027,9 +1046,9 @@ public abstract class JCRLocalCloudDrive extends CloudDrive implements CloudDriv
         }
 
         if (Thread.currentThread().isInterrupted()) {
-          throw new InterruptedException("Drive " + getName() + " interrupted in " + title());
+          throw new InterruptedException("Drive " + getName() + " command interrupted for " + title());
         } else {
-          LOG.warn("Drive " + getName() + " finished unexpectedly.");
+          LOG.warn("Drive " + getName() + " command of " + title() + " finished unexpectedly.");
         }
       } catch (CloudDriveException e) {
         handleError(driveNode, e, getName());
@@ -1055,8 +1074,13 @@ public abstract class JCRLocalCloudDrive extends CloudDrive implements CloudDriv
         doneAction();
         jcrListener.enable();
         commandEnv.cleanup(this); // cleanup environment
-        finishTime.set(System.currentTimeMillis());
         driveCommands.remove(this);
+        finishTime.set(System.currentTimeMillis());
+
+        if (LOG.isDebugEnabled()) {
+          LOG.debug("< Ended drive " + getName() + " command for " + title() + " in " + (startTime.get() - finishTime.get())
+              + "ms.");
+        }
       }
     }
 
@@ -1108,12 +1132,10 @@ public abstract class JCRLocalCloudDrive extends CloudDrive implements CloudDriv
         int current = Math.round((getComplete() * 100f) / getAvailable());
         int reported = progressReported.get();
         if (current >= reported) {
-          reported = current;
+          progressReported.set(reported = current);
         } // else
           // progress cannot be smaller of already reported one
           // do nothing and wait for next portion of work done
-
-        progressReported.set(reported);
         return reported;
       }
     }
@@ -1196,6 +1218,16 @@ public abstract class JCRLocalCloudDrive extends CloudDrive implements CloudDriv
   protected abstract class ConnectCommand extends AbstractCommand {
 
     /**
+     * File IDs with their parent IDs of added to the drive but not yet saved (by chunk saving).
+     */
+    private Map<String, Set<String>> connecting = new HashMap<String, Set<String>>();
+
+    /**
+     * File IDs with their parent IDs already added and saved in the drive (by chunk saving).
+     */
+    private Map<String, Set<String>> connected  = new HashMap<String, Set<String>>();
+
+    /**
      * Connect command constructor.
      * 
      * @throws RepositoryException
@@ -1206,20 +1238,61 @@ public abstract class JCRLocalCloudDrive extends CloudDrive implements CloudDriv
     }
 
     /**
-     * {@inheritDoc}
-     */
-    @Override
-    protected void preSaveChunk() throws CloudDriveException, RepositoryException {
-      // Connect command doesn't have a pre-save logic by default.
-    }
-
-    /**
      * Fetch actual files from cloud provider to local JCR.
      * 
      * @throws CloudDriveException
      * @throws RepositoryException
      */
     protected abstract void fetchFiles() throws CloudDriveException, RepositoryException;
+
+    /**
+     * NOT SUPPORTED! Don't use this method within Connect commands - use
+     * {@link #addConnected(String, CloudFile)}
+     * instead.
+     */
+    @Override
+    protected final boolean addChanged(CloudFile file) throws RepositoryException, CloudDriveException {
+      throw new IllegalStateException("Adding changed files not supported by " + getName()
+          + " command! Use addConnected().");
+    }
+
+    /**
+     * Add just connected file and associate it with a given parent ID. This method should be used instead of
+     * {@link #addChanged(CloudFile)}.
+     */
+    protected boolean addConnected(String parentId, CloudFile file) throws RepositoryException, CloudDriveException {
+      boolean r = super.addChanged(file);
+      if (r) {
+        Set<String> connectedParents = connecting.get(file.getId());
+        if (connectedParents == null) {
+          connecting.put(file.getId(), connectedParents = new HashSet<String>());
+        }
+        connectedParents.add(parentId);
+      }
+      return r;
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    protected void preSaveChunk() throws CloudDriveException, RepositoryException {
+      // Rollout a chunk of connecting files to connected set
+      connected.putAll(connecting);
+      connecting.clear();
+    }
+
+    /**
+     * Check if a file with given ID and parent ID is already connected by this command.
+     * 
+     * @param fileId {@link String} file ID
+     * @param parentId {@link String} parent ID, assumed never <code>null</code>
+     * @return <code>true</code> if file already connected, <code>false</code> otherwise
+     */
+    protected boolean isConnected(String parentId, String fileId) {
+      Set<String> connectedParents = connected.get(fileId);
+      return connectedParents != null && connectedParents.contains(parentId);
+    }
 
     @Override
     public String getName() {
@@ -1370,7 +1443,8 @@ public abstract class JCRLocalCloudDrive extends CloudDrive implements CloudDriv
       if (changes.size() > 0) {
         // run sync in this thread and w/o locking the syncLock
         SyncFilesCommand localChanges = new SyncFilesCommand(changes);
-        localChanges.sync(driveNode);
+        localChanges.initDriveNode(driveNode);
+        localChanges.sync();
       }
     }
 
@@ -1433,7 +1507,17 @@ public abstract class JCRLocalCloudDrive extends CloudDrive implements CloudDriv
     /**
      * This command updating files. Will be removed at the processing end.
      */
-    final List<String>     updating = new ArrayList<String>(); // use List to track number of updates
+    final List<String>     updating = new ArrayList<String>();    // use List to track number of updates
+
+    /**
+     * Applied changes for saving in a chunk. See {@link #sync()} and {@link #save()}.
+     */
+    final List<FileChange> applied  = new ArrayList<FileChange>();
+
+    /**
+     * Changes to skip in the history when saving in a chunk.
+     */
+    final List<FileChange> skipped  = new ArrayList<FileChange>();
 
     final List<FileChange> changes;
 
@@ -1451,6 +1535,10 @@ public abstract class JCRLocalCloudDrive extends CloudDrive implements CloudDriv
           updating.add(id);
         }
       }
+    }
+
+    void initDriveNode(Node driveNode) {
+      this.driveNode = driveNode;
     }
 
     /**
@@ -1488,9 +1576,11 @@ public abstract class JCRLocalCloudDrive extends CloudDrive implements CloudDriv
         syncLock.readLock().lock(); // read-lock can be acquired by multiple threads (file syncs)
         try {
           // save observed changes to the drive store, they will be reset in case of success in sync()
-          saveChanges(changes);
+          if (getAttempts() == 0) {
+            saveChanges(changes); // save only in first attempt
+          }
           // apply changes
-          sync(driveNode);
+          sync();
         } finally {
           syncLock.readLock().unlock();
         }
@@ -1513,7 +1603,8 @@ public abstract class JCRLocalCloudDrive extends CloudDrive implements CloudDriv
      */
     @Override
     protected void always() {
-      // nothing
+      // clean changes on the command end only, this will let next attempts what to work on
+      changes.clear();
     }
 
     /**
@@ -1524,11 +1615,20 @@ public abstract class JCRLocalCloudDrive extends CloudDrive implements CloudDriv
       // Files sync doesn't have a pre-save logic by default.
     }
 
-    void sync(Node driveNode) throws RepositoryException, CloudDriveException, InterruptedException {
-      try {
-        // Changes to skip in the history
-        List<FileChange> skipped = new ArrayList<FileChange>();
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    protected void save() throws RepositoryException, CloudDriveException {
+      super.save();
+      // Commit also just saved part of changes to the drive history, omit skipped
+      commitChanges(applied, skipped);
+      applied.clear();
+      skipped.clear();
+    }
 
+    void sync() throws RepositoryException, CloudDriveException, InterruptedException {
+      try {
         // compress the changes list:
         // * skip not supported items/ignored
         // * reduce number of creation/updates of the same path (make single file update for its properties
@@ -1661,9 +1761,7 @@ public abstract class JCRLocalCloudDrive extends CloudDrive implements CloudDriv
 
         Set<String> ignoredPaths = new HashSet<String>(); // for not supported by sync
 
-        Collection<FileChange> acceptedChanges = accepted.values();
-
-        next: for (Iterator<FileChange> chiter = acceptedChanges.iterator(); chiter.hasNext()
+        next: for (Iterator<FileChange> chiter = accepted.values().iterator(); chiter.hasNext()
             && !Thread.currentThread().isInterrupted();) {
           FileChange change = chiter.next();
           String changePath = change.filePath;
@@ -1676,6 +1774,7 @@ public abstract class JCRLocalCloudDrive extends CloudDrive implements CloudDriv
 
           try {
             change.apply();
+            applied.add(change);
             if (FileChange.REMOVE.equals(change.changeType)) {
               addRemoved(change.getPath());
             } else {
@@ -1740,16 +1839,11 @@ public abstract class JCRLocalCloudDrive extends CloudDrive implements CloudDriv
 
         save(); // save the drive (data returned from the cloud when submitted local changes)
 
-        // commit changes store saved in the drive to the history, omit skipped
-        commitChanges(acceptedChanges, skipped);
-
         // help GC
         accepted.clear();
-        skipped.clear();
         ignoredPaths.clear();
       } finally {
-        // complete and cleanup after drive node save
-        changes.clear();
+        // complete and clean updating after drive node save
         for (String key : updating) {
           removeUpdating(key);
         }
@@ -2261,15 +2355,15 @@ public abstract class JCRLocalCloudDrive extends CloudDrive implements CloudDriv
             }
             other.await();
             if (LOG.isDebugEnabled()) {
-              LOG.debug("<<< Done " + other.filePath);
+              LOG.debug("<<< Done for " + other.filePath);
             }
           }
         }
         for (FileChange c : fileChanges.values()) {
           if (c != this && c.filePath.startsWith(lockedPath)) {
-            LOG.info(">>>> Waiting for child " + c.filePath);
+            LOG.info(">>> Waiting for child " + c.filePath);
             c.await();
-            LOG.info("<<<< Done " + c.filePath);
+            LOG.info("<<< Done for child " + c.filePath);
           }
         }
       }
@@ -2643,12 +2737,6 @@ public abstract class JCRLocalCloudDrive extends CloudDrive implements CloudDriv
   protected final ConcurrentHashMap<String, FileChange>   fileChanges         = new ConcurrentHashMap<String, FileChange>();
 
   /**
-   * Path or/and Ids of currently synchronizing files with counter of how many times it proceeds to sync. When
-   * counter become zero it should be removed. Used for informational purpose (for UI etc).
-   */
-  protected final ConcurrentHashMap<String, AtomicLong>   updating            = new ConcurrentHashMap<String, AtomicLong>();
-
-  /**
    * Maintain file removal requests (direct removal in JCR).
    */
   protected final ThreadLocal<Map<String, FileChange>>    fileRemovals        = new ThreadLocal<Map<String, FileChange>>();
@@ -2668,6 +2756,12 @@ public abstract class JCRLocalCloudDrive extends CloudDrive implements CloudDriv
    * Format: FILE_ID = [CHANGE_DATA_1, CHANGE_DATA_2,... CHANGE_DATA_N]
    */
   protected final ConcurrentHashMap<String, Set<String>>  fileHistory         = new ConcurrentHashMap<String, Set<String>>();
+
+  /**
+   * Path or/and Ids of currently synchronizing files with counter of how many times it proceeds to sync. When
+   * counter become zero it should be removed. Used for informational purpose (for UI etc).
+   */
+  protected final ConcurrentHashMap<String, AtomicLong>   updating            = new ConcurrentHashMap<String, AtomicLong>();
 
   /**
    * Current drive change id. It is the last actual identifier of a change applied.
@@ -2719,7 +2813,8 @@ public abstract class JCRLocalCloudDrive extends CloudDrive implements CloudDriv
    * Files updated by last executed {@link SyncFilesCommand} for next command that will be returned to an
    * user (next sync).
    */
-  protected final Queue<CloudFile>                        syncFilesChanged    = new ConcurrentLinkedQueue<CloudFile>();
+  // TODO cleanup
+  // protected final Queue<CloudFile> syncFilesChanged = new ConcurrentLinkedQueue<CloudFile>();
 
   /**
    * Drive commands active currently {@link Command}. Used for awaiting the drive readiness (not accurate, for
@@ -3437,10 +3532,10 @@ public abstract class JCRLocalCloudDrive extends CloudDrive implements CloudDriv
       Map<String, FileChange> planned = fileRemovals.get();
       if (planned == null) {
         planned = new ConcurrentHashMap<String, FileChange>();
+        fileRemovals.set(planned);
       }
       // we may replace something previous in the map, just ignore it and rely on latest initialized
       planned.put(path, remove);
-      fileRemovals.set(planned);
     }
   }
 
@@ -3596,8 +3691,7 @@ public abstract class JCRLocalCloudDrive extends CloudDrive implements CloudDriv
    * 
    * @param changes {@link Collection} of {@link FileChange} changes to move from changes store to the history
    * @param skipped {@link Collection} of {@link FileChange} changes that should be removed from changes store
-   *          but
-   *          not added to the history
+   *          but not added to the history
    * @throws RepositoryException
    * @throws CloudDriveException
    * @see #saveChanges(List)
@@ -3633,7 +3727,7 @@ public abstract class JCRLocalCloudDrive extends CloudDrive implements CloudDriv
                 continue next; // omit this change as it was skipped
               }
             }
-            store.append(ch);
+            store.append(ch); // still keep this changes in local changes
             store.append('\n'); // store always ends with separator
           }
         }
@@ -3717,52 +3811,6 @@ public abstract class JCRLocalCloudDrive extends CloudDrive implements CloudDriv
   }
 
   /**
-   * Rollback (remove) given changes from the drive local changes store. This method will save nothing to
-   * local history of already applied changes.<br>
-   * This method should be used when we exactly know that given changes saved but not committed to the history
-   * are not actual anymore, e.g. in case when we restore a file/sub-tree.
-   * Such changes can be a result of failed {@link SyncFilesCommand} and rollback caused by restoration.
-   * 
-   * @param changes {@link List} of {@link FileChange}
-   * @throws RepositoryException
-   * @throws CloudDriveException
-   * 
-   * @see #saveChanges(List)
-   * @see #commitChanges(List)
-   * @see #rollbackAllChanges()
-   */
-  @Deprecated
-  // not used
-  protected synchronized void rollbackChanges(List<FileChange> changes) throws RepositoryException, CloudDriveException {
-
-    Node driveNode = rootNode();
-    StringBuilder store = new StringBuilder();
-
-    // remove already applied local changes and collect applied as history
-    try {
-      Property localChanges = driveNode.getProperty("ecd:localChanges");
-      String current = localChanges.getString();
-      if (current.length() > 0) { // actually it should be greater of about 15 chars
-        next: for (String ch : current.split("\n")) {
-          if (ch.length() > 0) {
-            for (FileChange fch : changes) {
-              if (ch.startsWith(fch.changeId)) {
-                continue next; // omit this change as it is already applied
-              }
-            }
-            store.append(ch);
-            store.append('\n'); // store always ends with separator
-          }
-        }
-      }
-      localChanges.setValue(store.toString());
-      localChanges.save();
-    } catch (PathNotFoundException e) {
-      // no local changes saved yet
-    }
-  }
-
-  /**
    * Return saved but not yet applied local changes in this drive.
    * 
    * @return {@link List} of {@link FileChange}
@@ -3770,6 +3818,8 @@ public abstract class JCRLocalCloudDrive extends CloudDrive implements CloudDriv
    * @throws CloudDriveException
    */
   protected synchronized List<FileChange> savedChanges() throws RepositoryException, CloudDriveException {
+    // TODO read and return only those changes that aren't currently processing by current SyncFilesCommand(s)
+
     List<FileChange> changes = new ArrayList<FileChange>();
     // <T><F><PATH><ID><SYNC_CLASS>|...
     // where ID and SYNC_CLASS can be empty
@@ -4897,7 +4947,7 @@ public abstract class JCRLocalCloudDrive extends CloudDrive implements CloudDriv
       res = true;
     }
     if (LOG.isDebugEnabled()) {
-      LOG.debug("> initUpdating " + key + " " + res);
+      LOG.debug(">> initUpdating " + key + " " + res);
     }
     return res;
   }
@@ -4912,7 +4962,7 @@ public abstract class JCRLocalCloudDrive extends CloudDrive implements CloudDriv
       counter = newCounter.longValue();
     }
     if (LOG.isDebugEnabled()) {
-      LOG.debug("> addUpdating " + key + " " + counter);
+      LOG.debug(">> addUpdating " + key + " " + counter);
     }
     return counter;
   }
@@ -4927,7 +4977,7 @@ public abstract class JCRLocalCloudDrive extends CloudDrive implements CloudDriv
       }
     }
     if (LOG.isDebugEnabled()) {
-      LOG.debug("< removeUpdating " + key + " " + (counter != null ? counter.longValue() : ""));
+      LOG.debug("<< removeUpdating " + key + " " + (counter != null ? counter.longValue() : ""));
     }
     return res;
   }
