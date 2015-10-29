@@ -2314,6 +2314,8 @@ public abstract class JCRLocalCloudDrive extends CloudDrive implements CloudDriv
               // skip this file (it can be a part of top level NT supported by the sync)
             }
           } // else null file - file not recognized - skip it
+          // mark this change as applied
+          applied.countDown();
         } finally {
           complete();
         }
@@ -2370,18 +2372,14 @@ public abstract class JCRLocalCloudDrive extends CloudDrive implements CloudDriv
     }
 
     /**
-     * Remove the lock set in {@link #begin()} method and add this changed file id to fileChanged map.
+     * Remove the lock set in {@link #begin()} method by removing this changed file from fileChanges map.
      * 
      * @throws PathNotFoundException
      * @throws RepositoryException
      * @throws CloudDriveException
      */
     private void complete() throws PathNotFoundException, RepositoryException, CloudDriveException {
-      try {
-        fileChanges.remove(filePath, this);
-      } finally {
-        applied.countDown();
-      }
+      fileChanges.remove(filePath, this);
     }
 
     private void remove() throws PathNotFoundException, CloudDriveException, RepositoryException, InterruptedException {
