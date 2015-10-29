@@ -729,12 +729,12 @@ public class UICLVPresentation extends UIContainer {
               LOG.warn(e.getMessage());
             }
           }
-          sb.append("          <a class=\"btn\" href=\"" + fastPublishLink + "\" rel=\"tooltip\" data-placement=\"bottom\" title=\"" + strFastPublishBundle + "\">");
+          sb.append("          <a class=\"btn\" href=\"" + fastPublishLink + "\" rel=\"tooltip\" data-placement=\"left\" title=\"" + strFastPublishBundle + "\">");
           sb.append("            <i class=\"uiIconEcmsPublish\" ></i>");
           sb.append("          </a>");
         }
         String contentEditLink = getEditLink(viewNode, true, false);
-        sb.append("          <a class=\"btn\" onclick = 'eXo.ecm.CLV.addURL(this)' href=\"" + contentEditLink + "\" rel=\"tooltip\" data-placement=\"bottom\" title=\"" + strEditBundle + "\">");
+        sb.append("          <a class=\"btn\" onclick = 'eXo.ecm.CLV.addURL(this)' href=\"" + contentEditLink + "\" rel=\"tooltip\" data-placement=\"left\" title=\"" + strEditBundle + "\">");
         sb.append("            <i class=\"uiIconEdit\"></i>");
         sb.append("          </a>");
       } else {
@@ -754,7 +754,7 @@ public class UICLVPresentation extends UIContainer {
             LOG.warn(e.getMessage());
           }
         }
-        sb.append("          <a class=\"btn\" href=\"" + contentDeleteLink + "\"  rel=\"tooltip\" data-placement=\"bottom\" title=\"" + strDeleteBundle + "\">");
+        sb.append("          <a class=\"btn\" href=\"" + contentDeleteLink + "\"  rel=\"tooltip\" data-placement=\"left\" title=\"" + strDeleteBundle + "\">");
         sb.append("            <i class=\"uiIconRemove\"></i>");
         sb.append("          </a>");
       }
