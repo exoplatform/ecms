@@ -48,7 +48,7 @@ import javax.jcr.query.Row;
 import javax.jcr.version.Version;
 import javax.jcr.version.VersionException;
 import javax.jcr.version.VersionHistory;
-
+import org.apache.commons.lang.StringEscapeUtils;
 import org.exoplatform.services.wcm.core.NodeLocation;
 
 /**
@@ -148,6 +148,7 @@ public class ResultNode implements Node{
    * @return the excerpt
    */
   public String getExcerpt() {
+	excerpt = StringEscapeUtils.unescapeHtml(excerpt);
     return excerpt;
   }
 
