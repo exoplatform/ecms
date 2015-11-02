@@ -33,12 +33,15 @@ import com.google.api.client.http.HttpResponseException;
 import com.google.api.client.http.HttpTransport;
 import com.google.api.client.http.javanet.NetHttpTransport;
 import com.google.api.client.json.jackson2.JacksonFactory;
+import com.google.api.client.util.Key;
 import com.google.api.client.util.store.DataStore;
 import com.google.api.client.util.store.DataStoreFactory;
 import com.google.api.services.drive.Drive;
 import com.google.api.services.drive.Drive.Changes;
 import com.google.api.services.drive.Drive.Children;
 import com.google.api.services.drive.Drive.Files.Delete;
+import com.google.api.services.drive.Drive.Realtime.Get;
+import com.google.api.services.drive.DriveRequest;
 import com.google.api.services.drive.DriveScopes;
 import com.google.api.services.drive.model.About;
 import com.google.api.services.drive.model.Change;
@@ -68,7 +71,12 @@ import java.util.Date;
 import java.util.HashSet;
 import java.util.Iterator;
 import java.util.List;
+import java.util.Queue;
 import java.util.Set;
+import java.util.concurrent.ConcurrentLinkedQueue;
+import java.util.concurrent.atomic.AtomicReference;
+import java.util.concurrent.locks.Lock;
+import java.util.concurrent.locks.ReentrantLock;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -104,6 +112,10 @@ class GoogleDriveAPI implements DataStoreFactory {
   protected static final String    USER_ID            = "user_id";
 
   protected static final String    USER_EMAIL_ADDRESS = "emailAddress";
+
+  protected static final Long      FILE_ID_EXPIRED    = 86400000l;
+
+  protected static final Long      FILE_ERROR_WAIT    = 2000l;
 
   protected static final Log       LOG                = ExoLogger.getLogger(GoogleDriveAPI.class);
 
@@ -372,28 +384,226 @@ class GoogleDriveAPI implements DataStoreFactory {
     }
   }
 
+  public static class GeneratedIds extends com.google.api.client.json.GenericJson {
+
+    /** This is always drive#generatedIds. */
+    @Key
+    private String        kind;
+
+    /** The type of file that can be created with these IDs. */
+    @Key
+    private String        space;
+
+    /** The IDs generated for the requesting user in the specified space. */
+    @Key
+    private List<String>  ids;
+
+    /**
+     * IDs queue for consumption by
+     */
+    private Queue<String> idsQueue;
+
+    /**
+     * ID expiration time.
+     */
+    private Long          expired;
+
+    public GeneratedIds() {
+      // generated IDs will expire after some period (a day)
+      this.expired = System.currentTimeMillis() + FILE_ID_EXPIRED;
+    }
+
+    private boolean fillQueue() {
+      // FYI this call should be synchronized externally
+      if (idsQueue == null) {
+        if (ids != null) {
+          idsQueue = new ConcurrentLinkedQueue<String>();
+          idsQueue.addAll(ids);
+        } else {
+          return false;
+        }
+      }
+      return !idsQueue.isEmpty();
+    }
+
+    public boolean isExpired() {
+      return expired <= System.currentTimeMillis();
+    }
+
+    public boolean hasId() {
+      if (isExpired()) {
+        return false;
+      }
+      if (fillQueue()) {
+        return true;
+      }
+      return !idsQueue.isEmpty();
+    }
+
+    public String nextId() {
+      if (isExpired()) {
+        return null;
+      }
+      if (!fillQueue()) {
+        return null;
+      }
+      return idsQueue.poll();
+    }
+
+    /**
+     * @return the kind
+     */
+    public String getKind() {
+      return kind;
+    }
+
+    /**
+     * @return the space
+     */
+    public String getSpace() {
+      return space;
+    }
+
+    /**
+     * @return the ids
+     */
+    public List<String> getIds() {
+      return ids;
+    }
+
+    /**
+     * @param kind the kind to set
+     */
+    public GeneratedIds setKind(String kind) {
+      this.kind = kind;
+      return this;
+    }
+
+    /**
+     * @param space the space to set
+     */
+    public GeneratedIds setSpace(String space) {
+      this.space = space;
+      return this;
+    }
+
+    /**
+     * @param ids the ids to set
+     */
+    public GeneratedIds setIds(List<String> ids) {
+      this.ids = ids;
+      return this;
+    }
+  }
+
+  public class FilesGenerateIds extends DriveRequest<GeneratedIds> {
+
+    private static final String REST_PATH = "files/generateIds";
+
+    /**
+     * Requests generation of a set of file IDs which can be provided in insert requests as JSON.
+     *
+     * This request holds the parameters needed by the the drive server. After setting any optional
+     * parameters, call the {@link Get#execute()} method to invoke the remote operation.
+     * <p>
+     * {@link
+     * Get#initialize(com.google.api.client.googleapis.services.AbstractGoogleClientRequest)} must be
+     * called to initialize this instance immediately after invoking the constructor.
+     * </p>
+     */
+    protected FilesGenerateIds() {
+      super(drive, "GET", REST_PATH, null, GeneratedIds.class);
+    }
+
+    @Override
+    public com.google.api.client.http.HttpResponse executeUsingHead() throws java.io.IOException {
+      return super.executeUsingHead();
+    }
+
+    @Override
+    public com.google.api.client.http.HttpRequest buildHttpRequestUsingHead() throws java.io.IOException {
+      return super.buildHttpRequestUsingHead();
+    }
+
+    @Override
+    public FilesGenerateIds setAlt(java.lang.String alt) {
+      return (FilesGenerateIds) super.setAlt(alt);
+    }
+
+    @Override
+    public FilesGenerateIds setFields(java.lang.String fields) {
+      return (FilesGenerateIds) super.setFields(fields);
+    }
+
+    @Override
+    public FilesGenerateIds setKey(java.lang.String key) {
+      return (FilesGenerateIds) super.setKey(key);
+    }
+
+    @Override
+    public FilesGenerateIds setOauthToken(java.lang.String oauthToken) {
+      return (FilesGenerateIds) super.setOauthToken(oauthToken);
+    }
+
+    @Override
+    public FilesGenerateIds setPrettyPrint(java.lang.Boolean prettyPrint) {
+      return (FilesGenerateIds) super.setPrettyPrint(prettyPrint);
+    }
+
+    @Override
+    public FilesGenerateIds setQuotaUser(java.lang.String quotaUser) {
+      return (FilesGenerateIds) super.setQuotaUser(quotaUser);
+    }
+
+    @Override
+    public FilesGenerateIds setUserIp(java.lang.String userIp) {
+      return (FilesGenerateIds) super.setUserIp(userIp);
+    }
+
+    @Override
+    public FilesGenerateIds set(String parameterName, Object value) {
+      return (FilesGenerateIds) super.set(parameterName, value);
+    }
+  }
+
+  static {
+    // hack to force ProGuard to consider GeneratedIds used, since otherwise it would be stripped out
+    // see http://code.google.com/p/google-api-java-client/issues/detail?id=528
+    com.google.api.client.util.Data.nullOf(GeneratedIds.class);
+  }
+
   /**
    * Credentials for request authentication.
    */
-  final Credential credential;
+  final Credential                    credential;
 
   /**
    * Drive services API.
    */
-  final Drive      drive;
+  final Drive                         drive;
 
-  final AuthToken  token;
+  final AuthToken                     token;
 
   /**
    * User info API.
    */
-  final Oauth2     oauth2;
+  final Oauth2                        oauth2;
 
   /**
    * Timezone regexp pattern for adapting Google's date format to SimpleDateFormatter supported.
    */
   // full date pattern: \\d{4}-[01]\\d-[0-3]\\dT[0-2]\\d:[0-5]\\d:[0-5]\\d\\.\\d+([+-][0-2]\\d:[0-5]\\d|Z)
-  final Pattern    tzPattern = Pattern.compile("([+-][0-2]\\d:[0-5]\\d|Z)$");
+  final Pattern                       tzPattern       = Pattern.compile("([+-][0-2]\\d:[0-5]\\d|Z)$");
+
+  /**
+   * File IDs generator lock.
+   */
+  final Lock                          generateIdsLock = new ReentrantLock();
+
+  /**
+   * Queue of generated file IDs.
+   */
+  final AtomicReference<GeneratedIds> generatedIds    = new AtomicReference<GeneratedIds>(new GeneratedIds());
 
   /**
    * Create Google Drive API from OAuth2 authentication code.
@@ -618,6 +828,9 @@ class GoogleDriveAPI implements DataStoreFactory {
    * @throws CloudDriveAccessException
    */
   File insert(File file, AbstractInputStreamContent content) throws GoogleDriveException, CloudDriveAccessException {
+    // generate file ID by Google to check later does the file created in case of Google error
+    String id = generateFileId();
+    file.setId(id);
     try {
       return drive.files().insert(file, content).execute();
     } catch (GoogleJsonResponseException e) {
@@ -629,6 +842,14 @@ class GoogleDriveAPI implements DataStoreFactory {
         // need generate ID by Google (https://developers.google.com/drive/v2/reference/files/generateIds)
         // and use them for file inserting, and then if failed and try again it will return conflict (409)
         // error
+        try {
+          return waitFile(id);
+        } catch (GoogleDriveException wfe) {
+          LOG.warn("Error reading file after attempting to upload it " + id + " (" + file.getTitle() + ")", e);
+          // in case of Google error while reading the file, we throw the exception we've got above
+        } catch (NotFoundException e1) {
+          // file not found - throw the exception we've got above
+        }
         throw new GoogleDriveException("Error inserting file with content to Files service: " + e.getMessage(), e);
       }
     } catch (IOException e) {
@@ -646,6 +867,9 @@ class GoogleDriveAPI implements DataStoreFactory {
    * @throws CloudDriveAccessException
    */
   File insert(File file) throws GoogleDriveException, CloudDriveAccessException {
+    // generate file ID by Google to check later does the file created in case of Google error
+    String id = generateFileId();
+    file.setId(id);
     try {
       return drive.files().insert(file).execute();
     } catch (GoogleJsonResponseException e) {
@@ -657,6 +881,14 @@ class GoogleDriveAPI implements DataStoreFactory {
         // need generate ID by Google (https://developers.google.com/drive/v2/reference/files/generateIds)
         // and use them for file inserting, and then if failed and try again it will return conflict (409)
         // error
+        try {
+          return waitFile(id);
+        } catch (GoogleDriveException wfe) {
+          LOG.warn("Error reading file after attempting to create it " + id + " (" + file.getTitle() + ")", e);
+          // in case of Google error while reading the file, we throw the exception we've got above
+        } catch (NotFoundException e1) {
+          // file not found - throw the exception we've got above
+        }
         throw new GoogleDriveException("Error inserting file to Files service: " + e.getMessage(), e);
       }
     } catch (IOException e) {
@@ -835,6 +1067,51 @@ class GoogleDriveAPI implements DataStoreFactory {
   }
 
   /**
+   * Generate file ID using Files service.
+   * 
+   * @return {@link String} unique file ID generated by Google Drive service
+   * @throws GoogleDriveException
+   * @throws CloudDriveAccessException
+   */
+  String generateFileId() throws GoogleDriveException, CloudDriveAccessException {
+    String id = generatedIds.get().nextId();
+    if (id == null) {
+      generateIdsLock.lock(); // check again exclusively and generate new IDs
+      try {
+        id = generatedIds.get().nextId();
+        if (id == null) {
+          FilesGenerateIds request = new FilesGenerateIds();
+          if (drive.getGoogleClientRequestInitializer() != null) {
+            // initialize before executing as it is done in Google client
+            drive.getGoogleClientRequestInitializer().initialize(request);
+          }
+          GeneratedIds newIds = request.execute();
+          id = newIds.nextId();
+          if (id != null) {
+            // set newly generated IDs, even if there is no more IDs it will be checked next time in the above
+            // code and request generation of a new list of IDs in Google
+            generatedIds.set(newIds);
+          } else {
+            throw new GoogleDriveException("Received empty list of generated file IDs from Files service");
+          }
+        }
+      } catch (GoogleJsonResponseException e) {
+        if (isInsufficientPermissions(e)) {
+          throw new CloudDriveAccessException("Insufficient permissions to generate file IDs by Files service. "
+              + e.getStatusMessage() + " (" + e.getStatusCode() + ")");
+        } else {
+          throw new GoogleDriveException("Error to generate file IDs by Files service: " + e.getMessage(), e);
+        }
+      } catch (IOException e) {
+        throw new GoogleDriveException("Error to generate file IDs by Files service: " + e.getMessage(), e);
+      } finally {
+        generateIdsLock.unlock();
+      }
+    }
+    return id;
+  }
+
+  /**
    * Check credentials isn't expired and refresh them if required.
    * 
    * @throws GoogleDriveException if error during communication with the provider
@@ -941,5 +1218,14 @@ class GoogleDriveAPI implements DataStoreFactory {
       }
     }
     return false;
+  }
+
+  private File waitFile(String id) throws GoogleDriveException, NotFoundException {
+    try {
+      Thread.sleep(FILE_ERROR_WAIT);
+    } catch (InterruptedException e) {
+      LOG.warn("Error waiting before reading the file " + id, e);
+    }
+    return file(id);
   }
 }
