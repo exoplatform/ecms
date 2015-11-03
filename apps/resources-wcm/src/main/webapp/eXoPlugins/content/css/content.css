@@ -8,20 +8,6 @@ html, body {
 	position: relative;
 }
 
-table {
-	font-family: Tahoma;
-	font-size: 11px;
-}
-
-a {
-	color: black;
-	text-decoration: none;
-}
-
-.Explorer {
-	font-family: Tahoma;
-	font-size: 11px;	
-}
 
 .Explorer .Separator {
 	background: url('../images/Separator4x1.gif') repeat-y top right;
