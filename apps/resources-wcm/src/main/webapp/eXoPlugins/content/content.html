@@ -187,12 +187,12 @@
 						</td>
 						<td>
 							<div class="Abort">
-								<a data-placement="bottom" rel="tooltip" class="actionIcon" href="javascript:void(0);" onclick="eXo.ecm.UploadForm.uploadFileAbort();" data-original-title="Cancel">
-									<i class="uiIconRemove"></i>
+								<a data-placement="bottom" rel="tooltip" class="" href="javascript:void(0);" onclick="eXo.ecm.UploadForm.uploadFileAbort();" data-original-title="Cancel">
+									<i class="uiIconStop"></i>
 								</a>								
 							</div>
 							<div class="Delete" >
-								<a data-placement="bottom" rel="tooltip" class="actionIcon" href="javascript:void(0);"  onclick="eXo.ecm.UploadForm.uploadFileDelete();"  data-original-title="Delete">
+								<a data-placement="bottom" rel="tooltip" class="" href="javascript:void(0);"  onclick="eXo.ecm.UploadForm.uploadFileDelete();"  data-original-title="Delete">
 									<i class="uiIconDelete uiIconLightGray"></i>
 								</a>								
 							</div>
@@ -204,7 +204,7 @@
 								<!--span userLanguage="UserLanguage.LabelName"> Name </span>:-->
 								<input type="text" id="fileName" name="fileName" placeholder="Name" maxlength="128"/>
 							</div>
-							<div class="uiAction mgB15">
+							<div class="uiAction mgB15 uiActionBorder">
 								<a href="javascript:void(0);" class="btn" onclick="eXo.ecm.UploadForm.preUploadFileSave();" userLanguage="UserLanguage.BtnSave">Save</a>
 								<a href="javascript:void(0);" class="btn"  onclick="eXo.ecm.UploadForm.uploadFileCancel();" userLanguage="UserLanguage.BtnCancel">Cancel</a>
 								
@@ -224,8 +224,9 @@
 	</div>
 </div>
 <!-- =================================END UPLOAD ======================================== -->
-<div class="Mask" id="Mask"></div>
+<div class="" id="Mask">
 <div class="PopupContainer UIPopupWindow uiPopup UIDragObject NormalStyle uiPopupContentSelector" style="display: none; visibility: visible; z-index: 7; left: 266px;"  id="PopupContainer"></div>
+</div>
 </body>
 
 

@@ -19,7 +19,11 @@ UploadForm.prototype.initLanguage = function(){
 }
 
 UploadForm.prototype.showUploadForm = function() {
-	var uploadContainer = document.getElementById("UploadContainer"); 
+
+	gj("body").addClass("modal-open");
+	gj("#Mask").attr("class", "uiPopupWrapper");
+
+	var uploadContainer = document.getElementById("UploadContainer");
 	if(eXo.ecm.ECS.currentNode && eXo.ecm.ECS.currentNode.getAttribute('name')) {
 		var sPath = eXo.ecm.ECS.currentNode.getAttribute("name");
 	} else {
@@ -80,7 +84,7 @@ UploadForm.prototype.showUploadForm = function() {
 	  gj(fileUpload).click();
 	  
 	})
-	
+
 	
 };
 
@@ -128,6 +132,9 @@ UploadForm.prototype.showMask = function(popup, isShowPopup) {
 };
 
 UploadForm.prototype.removeMask = function() {
+	gj("body").removeClass("modal-open");
+	gj("#Mask").removeAttr("class");
+
 	var popupContainer = document.getElementById("PopupContainer");
 	popupContainer.innerHTML = "";
 	popupContainer.style.display = 'none';
