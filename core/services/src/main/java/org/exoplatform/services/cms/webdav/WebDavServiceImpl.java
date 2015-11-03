@@ -139,20 +139,23 @@ public class WebDavServiceImpl extends org.exoplatform.services.jcr.webdav.WebDa
          for (String driverName : lstDriveAutoVersion)
          {
             DriveData driveData = manageDriveService.getDriveByName(StringUtils.trim(driverName));
-            String driveHome = driveData.getHomePath();
-            String workspace = driveData.getWorkspace();
+            if (driveData != null)
+            {
+               String driveHome = driveData.getHomePath();
+               String workspace = driveData.getWorkspace();
 
-            if (driveHome.startsWith(PERSONAL_DRIVE_PREFIX) && PERSONAL_GROUP_DRIVE_WORKSPACE.equals(workspace))
-            {
-               allowedAutoVersionPath.add(driveData.getWorkspace(), PERSONAL_DRIVE_PREFIX);
-            }
-            else if (driveHome.startsWith(GROUP_DRIVE_PREFIX) && PERSONAL_GROUP_DRIVE_WORKSPACE.equals(workspace))
-            {
-               allowedAutoVersionPath.add(driveData.getWorkspace(), GROUP_DRIVE_PREFIX);
-            }
-            else
-            {
-               allowedAutoVersionPath.add(driveData.getWorkspace(), driveHome);
+               if (driveHome.startsWith(PERSONAL_DRIVE_PREFIX) && PERSONAL_GROUP_DRIVE_WORKSPACE.equals(workspace))
+               {
+                  allowedAutoVersionPath.add(driveData.getWorkspace(), "/Users");
+               }
+               else if (driveHome.startsWith(GROUP_DRIVE_PREFIX) && PERSONAL_GROUP_DRIVE_WORKSPACE.equals(workspace))
+               {
+                  allowedAutoVersionPath.add(driveData.getWorkspace(), "/Groups");
+               }
+               else
+               {
+                  allowedAutoVersionPath.add(driveData.getWorkspace(), driveHome);
+               }
             }
          }
       }
