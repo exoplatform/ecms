@@ -25,7 +25,9 @@ import java.util.Date;
 import java.util.GregorianCalendar;
 import java.util.HashSet;
 import java.util.Hashtable;
+import java.util.Locale;
 import java.util.Map;
+import java.util.ResourceBundle;
 import java.util.Set;
 
 import javax.jcr.ItemExistsException;
@@ -45,19 +47,21 @@ import org.exoplatform.ecm.connector.fckeditor.FCKMessage;
 import org.exoplatform.ecm.connector.fckeditor.FCKUtils;
 import org.exoplatform.ecm.utils.lock.LockUtil;
 import org.exoplatform.ecm.utils.text.Text;
-import org.exoplatform.services.cms.impl.Utils;
+import org.exoplatform.services.cms.documents.AutoVersionService;
 import org.exoplatform.services.cms.jcrext.activity.ActivityCommonService;
 import org.exoplatform.services.cms.mimetype.DMSMimeTypeResolver;
 import org.exoplatform.services.cms.templates.TemplateService;
 import org.exoplatform.services.listener.ListenerService;
 import org.exoplatform.services.log.ExoLogger;
 import org.exoplatform.services.log.Log;
+import org.exoplatform.services.resources.ResourceBundleService;
 import org.exoplatform.services.wcm.core.NodetypeConstant;
 import org.exoplatform.services.wcm.publication.WCMPublicationService;
 import org.exoplatform.services.wcm.utils.WCMCoreUtils;
 import org.exoplatform.upload.UploadResource;
 import org.exoplatform.upload.UploadService;
 import org.exoplatform.upload.UploadService.UploadLimit;
+import org.json.JSONObject;
 import org.w3c.dom.Document;
 import org.w3c.dom.Element;
 
@@ -87,11 +91,16 @@ public class FileUploadHandler {
   /** The Constant SAVE_ACTION. */
   public final static String SAVE_ACTION = "save";
   
+  /** The Constant SAVE_NEW_VERSION_ACTION. */
+  public final static String SAVE_NEW_VERSION_ACTION = "saveNewVersion";
+  
   /** The Constant CHECK_EXIST. */
   public final static String CHECK_EXIST= "exist";
   
   /** The Constant REPLACE. */
   public final static String REPLACE= "replace";
+
+  public final static String CREATE_VERSION = "createVersion";
 
   /** The Constant KEEP_BOTH. */
   public final static String KEEP_BOTH= "keepBoth";
@@ -103,7 +112,10 @@ public class FileUploadHandler {
   private static final String IF_MODIFIED_SINCE_DATE_FORMAT = "EEE, dd MMM yyyy HH:mm:ss z";
   
   public final static String POST_CREATE_CONTENT_EVENT = "CmsService.event.postCreate";
-  
+
+  private final String CONNECTOR_BUNDLE_LOCATION                 = "locale.wcm.resources.WCMResourceBundleConnector";
+  private final String AUTOVERSION_ERROR_MIME_TYPE                  = "DocumentAutoVersion.msg.WrongMimeType";
+
   /** The upload service. */
   private UploadService uploadService;
   
@@ -262,6 +274,7 @@ public class FileUploadHandler {
    * @throws Exception the exception
    */
   public Response checkExistence(Node parent, String fileName) throws Exception {
+    DMSMimeTypeResolver resolver = DMSMimeTypeResolver.getInstance();
     CacheControl cacheControl = new CacheControl();
     cacheControl.setNoCache(true);
     DateFormat dateFormat = new SimpleDateFormat(IF_MODIFIED_SINCE_DATE_FORMAT);
@@ -273,6 +286,15 @@ public class FileUploadHandler {
     fileName = cleanNameUtil(fileName);
     Element rootElement = fileExistence.createElement(
                               parent.hasNode(fileName) ? "Existed" : "NotExisted");
+    if(parent.hasNode(fileName)){
+      Node existNode = parent.getNode(fileName);
+      if(existNode.isNodeType(NodetypeConstant.MIX_VERSIONABLE)){
+        rootElement.appendChild(fileExistence.createElement("Versioned"));
+      }
+    }
+    if(resolver.getMimeType(parent.getName()).equals(resolver.getMimeType(fileName))){
+      rootElement.appendChild(fileExistence.createElement("CanVersioning"));
+    }
     fileExistence.appendChild(rootElement);
     //return ret;
     return Response.ok(new DOMSource(fileExistence), MediaType.TEXT_XML)
@@ -325,6 +347,7 @@ public class FileUploadHandler {
                                String userId) throws Exception {
     return saveAsNTFile(parent, uploadId, fileName, language, siteName, userId, KEEP_BOTH); 
   }
+  
   /**
    * Save as nt file.
    *
@@ -344,6 +367,28 @@ public class FileUploadHandler {
                                String siteName,
                                String userId,
                                String existenceAction) throws Exception {
+    return saveAsNTFile(parent, uploadId, fileName, language, siteName, userId, existenceAction,false);
+  }
+  /**
+   * Save as nt file.
+   *
+   * @param parent the parent
+   * @param uploadId the upload id
+   * @param fileName the file name
+   * @param language the language
+   *
+   * @return the response
+   *
+   * @throws Exception the exception
+   */
+  public Response saveAsNTFile(Node parent,
+                               String uploadId,
+                               String fileName,
+                               String language,
+                               String siteName,
+                               String userId,
+                               String existenceAction,
+                               boolean isNewVersion) throws Exception {
     try {
       CacheControl cacheControl = new CacheControl();
       cacheControl.setNoCache(true);
@@ -395,56 +440,86 @@ public class FileUploadHandler {
           parent.save();        
         }
       }
+      AutoVersionService autoVersionService = WCMCoreUtils.getService(AutoVersionService.class);
       String location = resource.getStoreLocation();
       //save node with name=fileName
       Node file = null;
+      Node jcrContent=null;
       boolean fileCreated = false;
       String exoTitle = fileName;
       
       fileName = cleanNameUtil(fileName);
-      
-      String nodeName = fileName;
-      int count = 0;
-      do {
-        try {
-          file = parent.addNode(nodeName,FCKUtils.NT_FILE);
-          fileCreated = true;
-        } catch (ItemExistsException e) {//sameNameSibling is not allowed
-          nodeName = increaseName(fileName, ++count);
-        }      
-      } while (!fileCreated);
-      //--------------------------------------------------------
-      if(!file.isNodeType(NodetypeConstant.MIX_REFERENCEABLE)) {
-        file.addMixin(NodetypeConstant.MIX_REFERENCEABLE);
-      }
-      
-      if(!file.isNodeType(NodetypeConstant.MIX_COMMENTABLE))
-        file.addMixin(NodetypeConstant.MIX_COMMENTABLE);
-      
-      if(!file.isNodeType(NodetypeConstant.MIX_VOTABLE))
-        file.addMixin(NodetypeConstant.MIX_VOTABLE);
-      
-      if(!file.isNodeType(NodetypeConstant.MIX_I18N))
-        file.addMixin(NodetypeConstant.MIX_I18N);
-      
-      if(!file.hasProperty(NodetypeConstant.EXO_TITLE)) {
-        file.setProperty(NodetypeConstant.EXO_TITLE, exoTitle);
-      }
-      Node jcrContent = file.addNode("jcr:content","nt:resource");
-      //MimeTypeResolver mimeTypeResolver = new MimeTypeResolver();
       DMSMimeTypeResolver mimeTypeResolver = DMSMimeTypeResolver.getInstance();
       String mimetype = mimeTypeResolver.getMimeType(resource.getFileName());
-      jcrContent.setProperty("jcr:data",new BufferedInputStream(new FileInputStream(new File(location))));
-      jcrContent.setProperty("jcr:lastModified",new GregorianCalendar());
-      jcrContent.setProperty("jcr:mimeType",mimetype);
-      
-      parent.getSession().refresh(true); // Make refreshing data
+      String nodeName = fileName;
+      int count = 0;
+      if(!CREATE_VERSION.equals(existenceAction) ||
+              (!parent.hasNode(fileName) && !CREATE_VERSION.equals(existenceAction))) {
+        if(parent.isNodeType(NodetypeConstant.NT_FILE)){
+          String mimeTypeParent = mimeTypeResolver.getMimeType(parent.getName());
+          if(mimetype != mimeTypeParent){
+            ResourceBundleService resourceBundleService = WCMCoreUtils.getService(ResourceBundleService.class);
+            ResourceBundle resourceBundle = resourceBundleService.getResourceBundle(CONNECTOR_BUNDLE_LOCATION, new Locale(language));
+            String errorMsg = resourceBundle.getString(AUTOVERSION_ERROR_MIME_TYPE);
+            errorMsg = errorMsg.replace("{0}", StringUtils.escape("<span style='font-weight:bold;'>" + parent.getName() + "</span>"));
+            JSONObject jsonObject = new JSONObject();
+            jsonObject.put("error_type", "ERROR_MIMETYPE");
+            jsonObject.put("error_message", errorMsg);
+            return Response.serverError().entity(jsonObject.toString()).build();
+          }
+          parent = parent.getParent();
+        }
+        do {
+          try {
+            file = parent.addNode(nodeName, FCKUtils.NT_FILE);
+            fileCreated = true;
+          } catch (ItemExistsException e) {//sameNameSibling is not allowed
+            nodeName = increaseName(fileName, ++count);
+          }
+        } while (!fileCreated);
+        //--------------------------------------------------------
+        if(!file.isNodeType(NodetypeConstant.MIX_REFERENCEABLE)) {
+          file.addMixin(NodetypeConstant.MIX_REFERENCEABLE);
+        }
+
+        if(!file.isNodeType(NodetypeConstant.MIX_COMMENTABLE))
+          file.addMixin(NodetypeConstant.MIX_COMMENTABLE);
+
+        if(!file.isNodeType(NodetypeConstant.MIX_VOTABLE))
+          file.addMixin(NodetypeConstant.MIX_VOTABLE);
+
+        if(!file.isNodeType(NodetypeConstant.MIX_I18N))
+          file.addMixin(NodetypeConstant.MIX_I18N);
+
+        if(!file.hasProperty(NodetypeConstant.EXO_TITLE)) {
+          file.setProperty(NodetypeConstant.EXO_TITLE, exoTitle);
+        }
+        jcrContent = file.addNode("jcr:content","nt:resource");
+      }else if(parent.hasNode(nodeName)){
+        file = parent.getNode(nodeName);
+        autoVersionService.autoVersion(file,isNewVersion);
+        jcrContent = file.hasNode("jcr:content")?file.getNode("jcr:content"):file.addNode("jcr:content","nt:resource");
+      }else if(parent.isNodeType(NodetypeConstant.NT_FILE)){
+        file = parent;
+        autoVersionService.autoVersion(file,isNewVersion);
+        jcrContent = file.hasNode("jcr:content")?file.getNode("jcr:content"):file.addNode("jcr:content","nt:resource");
+      }
+
+      jcrContent.setProperty("jcr:lastModified", new GregorianCalendar());
+      jcrContent.setProperty("jcr:data", new BufferedInputStream(new FileInputStream(new File(location))));
+      jcrContent.setProperty("jcr:mimeType", mimetype);
+      if(fileCreated) {
+        file.getParent().save();
+        autoVersionService.autoVersion(file,isNewVersion);
+      }
+      //parent.getSession().refresh(true); // Make refreshing data
+      //parent.save();
       uploadService.removeUploadResource(uploadId);
       uploadIdTimeMap.remove(uploadId);
-      WCMPublicationService wcmPublicationService = WCMCoreUtils.getService(WCMPublicationService.class);    
+      WCMPublicationService wcmPublicationService = WCMCoreUtils.getService(WCMPublicationService.class);
       wcmPublicationService.updateLifecyleOnChangeContent(file, siteName, userId);
      
-      if (activityService.isBroadcastNTFileEvents(file)) {
+      if (activityService.isBroadcastNTFileEvents(file) && !CREATE_VERSION.equals(existenceAction)) {
         listenerService.broadcast(ActivityCommonService.FILE_CREATED_ACTIVITY, null, file);
       }
       file.getSession().save();
@@ -467,7 +542,7 @@ public class FileUploadHandler {
    * increase the file name (not extension).
    * @param origin the original name
    * @param count the number add to file name
-   * @return the new increased file name 
+   * @return the new increased file name
    */
   private String increaseName(String origin, int count) {
     int index = origin.indexOf('.');

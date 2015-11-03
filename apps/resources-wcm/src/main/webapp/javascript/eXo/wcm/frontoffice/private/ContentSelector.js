@@ -28,7 +28,9 @@
 		this.deleteConfirmationMsg="";
 	  this.switchView = false;
 	  if(this.viewType==undefined)
-			this.viewType="list";
+		this.viewType="list";
+		this.lstFiles=[];
+		this.lstFileName=[];
 	}
 	EcmContentSelector.prototype.setDeleteConfirmationMessage = function(msg) {
 		this.deleteConfirmationMsg=msg;
@@ -305,7 +307,9 @@
 		}
 	};
 	
-	EcmContentSelector.prototype.renderSubTrees = function(currentNode, event, connector) {  
+	EcmContentSelector.prototype.renderSubTrees = function(currentNode, event, connector) {
+		eXo.ecm.ECS.lstFiles=[];
+		eXo.ecm.ECS.lstFileName=[];
 		var event = event || window.event;
 		if (event)
 			event.cancelBubble = true;  
@@ -607,6 +611,10 @@
 					var command = ECS.connector + "/thumbnailImage/medium/" + ECS.repositoryName + "/" + ECS.workspaceName + path + "/?reloadnum=" + randomId;        
 					strViewContent += '<div id="'+randomId+'" class="actionIconBox" onclick="eXo.ecm.ECS.insertContent(this);" url="'+decodeURIComponent(url)+'" path="'+path+'" nodeType="'+nodeType+'" rel="tooltip" data-placement="bottom" title="'+decodeURIComponent(node)+'"><div class="nodeLabel"><div class="thumbnailImage"><div style="display: block;" class="LoadingProgressIcon"><img alt="Loading Process" id="thumbnail'+randomId+'" '+imageAttribute+'="'+command+'" onerror="var img = gj(this.parentNode).next(\'i:first\')[0]; img.style.display = \'block\'; this.parentNode.style.display = \'none\';" onload="this.parentNode.style.backgroundImage=\'none\'" /></div><i style="display: none;" class="uiIcon64x64FileDefault uiIcon64x64nt_file  '+nodeTypeIcon+'"></i></div><div class="actionIconLabel" style="width: auto;"><a class="actionLabel" onclick="eXo.ecm.ECS.insertContent(this);" url="'+url+'" path="'+path+'" nodeType="'+nodeType+'" rel="tooltip" data-placement="bottom" title="'+decodeURIComponent(node)+'">'+decodeURIComponent(node)+'</a></div></div></div>';
 				}
+				var isVersion = list[i].getAttribute("isVersioned");
+				var isVersionSupport = list[i].getAttribute("isVersionSupport");
+				eXo.ecm.ECS.lstFiles.push({"name":node, "isVersioned":isVersion, "isVersionSupport":isVersionSupport})
+				eXo.ecm.ECS.lstFileName.push(node);
 			}
 			if(container) {
 				gj(container).html(strViewContent);
@@ -729,7 +737,7 @@
 			var node = list[i].getAttribute("name");
 			var newRow = tblRWS.tBodies[0].insertRow(i);
 			gj(newRow.insertCell(0)).html('<a class="Item" url="'+url+'" linkTarget ="' + linkTarget + '" path="'+path+'" nodeType="'+nodeType+'" style = "overflow:hidden;" rel="tooltip" data-placement="bottom" title="'+decodeURIComponent(node)+'" onclick="eXo.ecm.ECS.addFile2ListContent(this);">'+'<i class="'+clazzItem+'"></i>&nbsp;'+decodeURIComponent(node)+'</a>');
-					
+
 		}
 		
 		if(i > 9) {

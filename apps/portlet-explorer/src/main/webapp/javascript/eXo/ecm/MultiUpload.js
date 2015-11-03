@@ -13,7 +13,10 @@
 		this.restContext = eXo.ecm.WCMUtils.getRestContext();
 		this.uploadingFileCount = 0;
 		this.invalidFiles = 0;
-	//--------------Constraints--------------------------//  
+		this.isCreateVersion = false;
+		this.isVersioned = false;
+		this.isSupportedVersioning=false;
+		//--------------Constraints--------------------------//
 		this.maxFileSize = 10;//MB
 		this.maxUploadCount = 2;
 		this.document = document;
@@ -41,6 +44,7 @@
 	MultiUpload.prototype.INUSE = "AlreadyInUse";
 	MultiUpload.prototype.KEEP = "Keep";
 	MultiUpload.prototype.REPLACE = "Replace";
+	MultiUpload.prototype.CREATE_VERSION = "Upload new version"
 	MultiUpload.prototype.CANCEL_TXT = "Canceled";
 	MultiUpload.prototype.CANCEL = "Cancel";
 	MultiUpload.prototype.ABORT_ALL = "AbortAllConfirmation";
@@ -56,7 +60,7 @@
 		return eXo.ecm.WCMUtils.getBundle("UIMultiUpload.label." + msg, eXo.env.portal.language);
 	};
 
-	MultiUpload.prototype.loadMsg = function(inMsg, maxSizeMsg, waitingMsg, errorMsg, orMsg, inUseMsg, keepMsg, replaceMsg, canceled, cancel, abort) {
+	MultiUpload.prototype.loadMsg = function(inMsg, maxSizeMsg, waitingMsg, errorMsg, orMsg, inUseMsg, keepMsg, replaceMsg, canceled, cancel, abort, uploadNewVersion) {
 		eXo.ecm.MultiUpload.IN = inMsg;
 		eXo.ecm.MultiUpload.MAX_SIZE_ALERT = maxSizeMsg;
 		eXo.ecm.MultiUpload.WAITING_TXT = waitingMsg;
@@ -68,6 +72,7 @@
 		eXo.ecm.MultiUpload.CANCEL_TXT = canceled;
 		eXo.ecm.MultiUpload.CANCEL = cancel;
 		eXo.ecm.MultiUpload.ABORT_ALL = abort;
+		eXo.ecm.MultiUpload.CREATE_VERSION = uploadNewVersion;
 	};
 	//---------------All setter methods---------------------//
 	MultiUpload.prototype.setMaxFileSize = function(value) {
@@ -198,7 +203,7 @@
 	};
 
 
-	MultiUpload.prototype.setLocation = function(workspace, driveName, driveTitle, nodePath, drivePath) {
+	MultiUpload.prototype.setLocation = function(workspace, driveName, driveTitle, nodePath, drivePath, isSupportVersioning) {
 		if (nodePath.indexOf(drivePath) == 0) {
 			nodePath = nodePath.substring(drivePath.length);
 		}
@@ -208,6 +213,7 @@
 		eXo.ecm.MultiUpload.dropNodePath = nodePath;
 		eXo.ecm.MultiUpload.drivePath = drivePath;
 		eXo.ecm.MultiUpload.driveTitle = driveTitle;
+		eXo.ecm.MultiUpload.isSupportedVersioning = isSupportVersioning;
 	};
 
 	//init all event handlers for the drop box
@@ -360,12 +366,13 @@
 	//------------------------------------------------------------//
 	//--------------------UI Related methods----------------------//
 	MultiUpload.prototype.enableDragItemArea = function(event, box) {
-		//box.style.background="darkgray";
+		gj(box).addClass("active");
 		event.preventDefault();
 	};
 
 	MultiUpload.prototype.disableDragItemArea = function(box) {
 		box.style.background="";
+		gj(box).removeClass("active");
 	};
 
 	MultiUpload.prototype.doDropItemArea = function(event, box, path) {
@@ -593,13 +600,29 @@
 				if (!result) {
 					setTimeout(function(){eXo.ecm.MultiUpload.processUploadRequest3(id);}, 1000);
 				}
+					eXo.ecm.MultiUpload.isVersioned = false;
 				  var existed = result.getElementsByTagName("Existed");
+				  var isVersioned = result.getElementsByTagName("Versioned");
 				  if (existed && existed.length > 0) {
+						if(isVersioned && isVersioned.length > 0){
+							eXo.ecm.MultiUpload.isVersioned = true;
+						}
 				  	//file already existed, inform for user
 				  	eXo.ecm.MultiUpload.processUploadRequest4(id);
 				  } else {
+						var canVersioning = result.getElementsByTagName("CanVersioning");
+						if (canVersioning && canVersioning.length > 0) {
+							eXo.ecm.MultiUpload.isCreateVersion = true;
+							eXo.ecm.MultiUpload.updateNotice(eXo.ecm.MultiUpload.pathMap[id].split("/").pop());
+						}else{
+							eXo.ecm.MultiUpload.isCreateVersion = false;
+						}
 				  	//next step
-				  	eXo.ecm.MultiUpload.existingBehavior[id] = "keep";
+						var _existenceAction = "keep";
+						if(eXo.ecm.MultiUpload.isCreateVersion){
+							_existenceAction = "createVersion";
+						}
+				  	eXo.ecm.MultiUpload.existingBehavior[id] = _existenceAction;
 				  	eXo.ecm.MultiUpload.processUploadRequest1(id);
 				  }
 		      },
@@ -641,6 +664,10 @@
 		var replaceDiv = eXo.ecm.MultiUpload.document.createElement("a");
 		replaceDiv.id="replaceDiv" + id;
 		gj(replaceDiv).attr("href","javascript:void(0)");
+		//var createVersionDiv
+		var createVersionDiv = eXo.ecm.MultiUpload.document.createElement("a");
+		createVersionDiv.id="createVersionDiv" + id;
+		gj(createVersionDiv).attr("href","javascript:void(0)");
 		//cancel
 		var cancel = eXo.ecm.MultiUpload.document.createElement("a");
 		cancel.id = "cancel" + id;
@@ -652,8 +679,13 @@
 		msgDiv.id = "msg" + id;
 	
 		loadContentDiv.appendChild(cancel);
-		loadContentDiv.appendChild(span2);
-		loadContentDiv.appendChild(replaceDiv);
+		if(eXo.ecm.MultiUpload.isVersioned && eXo.ecm.MultiUpload.isSupportedVersioning === "true"){
+			loadContentDiv.appendChild(span2);
+			loadContentDiv.appendChild(createVersionDiv);
+		}else{
+			loadContentDiv.appendChild(span2);
+			loadContentDiv.appendChild(replaceDiv);
+		}
 		loadContentDiv.appendChild(span1);
 		loadContentDiv.appendChild(keepBoth);
 		loadContentDiv.appendChild(msgDiv);
@@ -683,6 +715,20 @@
 			  eXo.ecm.MultiUpload.existingBehavior[myfile] = "replace";
 		    eXo.ecm.MultiUpload.processUploadRequest1(myfile);
 		  }
+		}(loadContentDiv, id);
+		//create version
+		createVersionDiv.className = "pull-right action";
+		createVersionDiv.innerHTML = eXo.ecm.MultiUpload.CREATE_VERSION;
+		createVersionDiv.onclick=function abortUpload(myFileDiv, myfile, evt) {
+			return function(evt) {
+				myFileDiv.parentNode.removeChild(myFileDiv);
+				//remove UI of file in waiting list
+				eXo.ecm.MultiUpload.removeFileName(myfile);
+				//upload file, replace old file by new file
+				eXo.ecm.MultiUpload.existingBehavior[myfile] = "createVersion";
+				eXo.ecm.MultiUpload.processUploadRequest1(myfile);
+				eXo.ecm.MultiUpload.updateNotice(eXo.ecm.MultiUpload.uploadingFileIds[myfile].name);
+			}
 		}(loadContentDiv, id);
 		//cancel
 		cancel.className = "pull-right action";
@@ -822,8 +868,17 @@
 					}
 				} else {
 					if (!eXo.ecm.MultiUpload.SUPPORT_FILE_API) {
-						var e = eXo.ecm.MultiUpload.handleReaderLoad(id, "keep");
+						var _existenceAction = "keep";
+						if(eXo.ecm.MultiUpload.isCreateVersion){
+							_existenceAction = "createVersion";
+						}
+						var e = eXo.ecm.MultiUpload.handleReaderLoad(id, _existenceAction);
 						e(window.event);
+					}
+					if(nPercent === "100" && eXo.ecm.MultiUpload.notice === "createVersion"
+							&& eXo.ecm.MultiUpload.existingBehavior[id] === "createVersion"){
+						eXo.ecm.WCMUtils.showNotice(eXo.ecm.MultiUpload.noticeMsg, true);
+						eXo.ecm.MultiUpload.docAutoClose(id);
 					}
 				}	    
 			},
@@ -853,10 +908,13 @@
 		    "&currentFolder=" + eXo.ecm.MultiUpload.pathMap[progressID] +
 		    "&currentPortal="+ eXo.ecm.MultiUpload.portalName +
 		    "&userId=" + eXo.ecm.MultiUpload.userId +
-		    "&action=save&uploadId=" + progressID +
+		    "&uploadId=" + progressID +
 		    "&fileName=" + cleanName(file.name) + 
 		    "&language=" + eXo.ecm.MultiUpload.userLanguage +
-		    "&existenceAction=" + eXo.ecm.MultiUpload.existingBehavior[progressID];
+		    "&existenceAction=" + eXo.ecm.MultiUpload.existingBehavior[progressID] +
+				"&action=save";
+				if(eXo.ecm.MultiUpload.srcAction != null && eXo.ecm.MultiUpload.srcAction != undefined)
+					uri += eXo.ecm.MultiUpload.srcAction;
 		    gj.ajax({url: uri, 
 	 	     success: function(ret, status, xhr) {
 		  	  //mark OK
@@ -955,10 +1013,17 @@
 		  		  eval(decodeURIComponent(uiExplorer.innerHTML));
 		  		  eXo.ecm.MultiUpload.abortAllCancel();
 		  	  }
+					 if(eXo.ecm.MultiUpload.existingBehavior[progressID] === "createVersion") eXo.ecm.WCMUtils.showNotice(eXo.ecm.MultiUpload.noticeMsg, true);
+					 eXo.ecm.MultiUpload.docAutoClose(progressID);
 		  	  //process next upload request
 		  	  eXo.ecm.MultiUpload.processNextUploadRequestInQueue();
 		    	 },
-		       error: function() {
+		       error: function(ret, status, xhr) {
+						 var _data = gj.parseJSON(ret.responseText);
+						 if(_data !== undefined && _data.error_type === "ERROR_MIMETYPE"){
+							 eXo.ecm.WCMUtils.showNotice(_data.error_message, true, "error");
+							 setTimeout(function(){eXo.ecm.MultiUpload.abortAllOK();}, 3000);
+						 }
 				 if (eXo.ecm.MultiUpload.connectionFailed[progressID]++ > eXo.ecm.MultiUpload.MAX_CONNECTION) {
 					 var e = eXo.ecm.MultiUpload.handleReaderAbort(progressID, eXo.ecm.MultiUpload.ERROR);
 					 e(window.event);
@@ -993,6 +1058,7 @@
 		  	msg.parentNode.appendChild(cancelButton);
 		  	//remove redundant elements
 		  	gj("#keepBoth" + progressID, eXo.ecm.MultiUpload.document).remove();
+		  	gj("#createVersionDiv" + progressID, eXo.ecm.MultiUpload.document).remove();
 		  	gj("#replaceDiv" + progressID, eXo.ecm.MultiUpload.document).remove();
 		  	gj("#span" + progressID, eXo.ecm.MultiUpload.document).remove();
 		  	gj("#span1" + progressID, eXo.ecm.MultiUpload.document).remove();
@@ -1115,7 +1181,16 @@
 			eXo.ecm.MultiUpload.uploadFileForIE(eXo.ecm.MultiUpload.document);
 		}
 	};
-	
+
+	MultiUpload.prototype.uploadNewVersion = function() {
+		this.isCreateVersion = true;
+		if (eXo.ecm.MultiUpload.SUPPORT_FILE_API) {
+			eXo.ecm.MultiUpload.document.getElementById('MultiUploadInputFiles').click();
+		} else {
+			eXo.ecm.MultiUpload.uploadFileForIE(eXo.ecm.MultiUpload.document);
+		}
+	};
+
 	MultiUpload.prototype.uploadFileForIE = function(doc) {
 		var xmp = doc.getElementsByTagName("xmp")[0];
 		var ifr = doc.getElementById("iFrameUpload");
@@ -1127,6 +1202,25 @@
 		}
 	};
 
+
+	MultiUpload.prototype.docAutoCancel = function(id){
+		gj("#cancel"+id).click();
+		eXo.ecm.MultiUpload.docAutoClose(id);
+	}
+
+	MultiUpload.prototype.docAutoClose = function(id){
+		uiPopupWindow.hide("documentAutoVersioning"+id);
+		gj("#documentAutoVersioning"+id).remove();
+	}
+
+	MultiUpload.prototype.createVersion = function(id){
+		gj("#createVersionDiv"+id).click();
+	}
+
+	MultiUpload.prototype.updateNotice = function(fileName){
+		eXo.ecm.MultiUpload.notice="createVersion";
+		eXo.ecm.MultiUpload.noticeMsg="A new version of the document <span style=\"font-weight:bold;\"> "+fileName+"</span> has been created successfully.";
+	}
 	eXo.ecm.MultiUpload = new MultiUpload();
 	
 	return eXo.ecm.MultiUpload;

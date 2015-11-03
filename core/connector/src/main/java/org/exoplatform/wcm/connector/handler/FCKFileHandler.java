@@ -1,11 +1,8 @@
 package org.exoplatform.wcm.connector.handler;
 
-import java.text.SimpleDateFormat;
-
-import javax.jcr.Node;
-
 import org.exoplatform.container.PortalContainer;
 import org.exoplatform.ecm.connector.fckeditor.FCKUtils;
+import org.exoplatform.services.cms.documents.AutoVersionService;
 import org.exoplatform.services.cms.impl.Utils;
 import org.exoplatform.services.cms.link.LinkManager;
 import org.exoplatform.services.jcr.access.AccessControlEntry;
@@ -19,6 +16,9 @@ import org.exoplatform.services.wcm.core.WCMConfigurationService;
 import org.exoplatform.services.wcm.utils.WCMCoreUtils;
 import org.w3c.dom.Document;
 import org.w3c.dom.Element;
+
+import javax.jcr.Node;
+import java.text.SimpleDateFormat;
 
 public class FCKFileHandler {
 
@@ -37,6 +37,7 @@ public class FCKFileHandler {
                                           String currentPortal,
                                           LinkManager linkManager) throws Exception {
     Element file = document.createElement("File");
+    AutoVersionService autoVersionService=WCMCoreUtils.getService(AutoVersionService.class);
     file.setAttribute("name", Utils.getTitle(displayNode));
     SimpleDateFormat formatter = (SimpleDateFormat) SimpleDateFormat.getDateTimeInstance(SimpleDateFormat.SHORT,
                                                                                          SimpleDateFormat.SHORT);
@@ -85,6 +86,12 @@ public class FCKFileHandler {
     }else {
       file.setAttribute("size", "");
     }
+    if(sourceNode.isNodeType(NodetypeConstant.MIX_VERSIONABLE)){
+      file.setAttribute("isVersioned", String.valueOf(true));
+    }else{
+      file.setAttribute("isVersioned", String.valueOf(false));
+    }
+    file.setAttribute("isVersionSupport", String.valueOf(autoVersionService.isVersionSupport(sourceNode.getPath(), sourceNode.getSession().getWorkspace().getName())));
     return file;
   }
 

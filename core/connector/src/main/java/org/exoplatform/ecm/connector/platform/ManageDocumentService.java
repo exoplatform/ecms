@@ -16,12 +16,30 @@
  */
 package org.exoplatform.ecm.connector.platform;
 
-import java.text.DateFormat;
-import java.text.SimpleDateFormat;
-import java.util.ArrayList;
-import java.util.Collection;
-import java.util.Date;
-import java.util.List;
+import org.apache.commons.lang.StringUtils;
+import org.exoplatform.container.xml.InitParams;
+import org.exoplatform.ecm.connector.fckeditor.FCKUtils;
+import org.exoplatform.ecm.utils.text.Text;
+import org.exoplatform.services.cms.documents.AutoVersionService;
+import org.exoplatform.services.cms.drives.DriveData;
+import org.exoplatform.services.cms.drives.ManageDriveService;
+import org.exoplatform.services.cms.impl.Utils;
+import org.exoplatform.services.cms.link.LinkManager;
+import org.exoplatform.services.context.DocumentContext;
+import org.exoplatform.services.jcr.RepositoryService;
+import org.exoplatform.services.jcr.access.PermissionType;
+import org.exoplatform.services.jcr.core.ManageableRepository;
+import org.exoplatform.services.jcr.ext.common.SessionProvider;
+import org.exoplatform.services.log.ExoLogger;
+import org.exoplatform.services.log.Log;
+import org.exoplatform.services.rest.resource.ResourceContainer;
+import org.exoplatform.services.security.ConversationState;
+import org.exoplatform.services.security.MembershipEntry;
+import org.exoplatform.services.wcm.core.NodetypeConstant;
+import org.exoplatform.services.wcm.utils.WCMCoreUtils;
+import org.exoplatform.wcm.connector.FileUploadHandler;
+import org.w3c.dom.Document;
+import org.w3c.dom.Element;
 
 import javax.annotation.security.RolesAllowed;
 import javax.jcr.AccessDeniedException;
@@ -45,30 +63,12 @@ import javax.xml.parsers.DocumentBuilder;
 import javax.xml.parsers.DocumentBuilderFactory;
 import javax.xml.parsers.ParserConfigurationException;
 import javax.xml.transform.dom.DOMSource;
-
-import org.apache.commons.lang.StringUtils;
-import org.exoplatform.container.xml.InitParams;
-import org.exoplatform.ecm.connector.fckeditor.FCKUtils;
-import org.exoplatform.ecm.utils.text.Text;
-import org.exoplatform.services.cms.drives.DriveData;
-import org.exoplatform.services.cms.drives.ManageDriveService;
-import org.exoplatform.services.cms.impl.Utils;
-import org.exoplatform.services.cms.link.LinkManager;
-import org.exoplatform.services.context.DocumentContext;
-import org.exoplatform.services.jcr.RepositoryService;
-import org.exoplatform.services.jcr.access.PermissionType;
-import org.exoplatform.services.jcr.core.ManageableRepository;
-import org.exoplatform.services.jcr.ext.common.SessionProvider;
-import org.exoplatform.services.log.ExoLogger;
-import org.exoplatform.services.log.Log;
-import org.exoplatform.services.rest.resource.ResourceContainer;
-import org.exoplatform.services.security.ConversationState;
-import org.exoplatform.services.security.MembershipEntry;
-import org.exoplatform.services.wcm.core.NodetypeConstant;
-import org.exoplatform.services.wcm.utils.WCMCoreUtils;
-import org.exoplatform.wcm.connector.FileUploadHandler;
-import org.w3c.dom.Document;
-import org.w3c.dom.Element;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
+import java.util.ArrayList;
+import java.util.Collection;
+import java.util.Date;
+import java.util.List;
 
 /**
  * This service is used to perform some actions on a folder or on a file, such as creating,
@@ -420,7 +420,8 @@ public class ManageDocumentService implements ResourceContainer {
       @QueryParam("action") String action,
       @QueryParam("language") String language,
       @QueryParam("fileName") String fileName,
-      @QueryParam("uploadId") String uploadId) throws Exception {
+      @QueryParam("uploadId") String uploadId,
+      @QueryParam("existenceAction") String existenceAction) throws Exception {
     try {
       if ((workspaceName != null) && (driveName != null) && (currentFolder != null)) {
         Node currentFolderNode = getNode(Text.escapeIllegalJcrChars(driveName),
@@ -434,7 +435,7 @@ public class ManageDocumentService implements ResourceContainer {
                                            action,
                                            language,
                                            Text.escapeIllegalJcrChars(fileName),
-                                           uploadId);
+                                           uploadId, existenceAction);
       }
     } catch (Exception e) {
       if (LOG.isErrorEnabled()) {
@@ -556,6 +557,7 @@ public class ManageDocumentService implements ResourceContainer {
                                     Node displayNode,
                                     String workspaceName) throws Exception {
     Element file = document.createElement("File");
+    AutoVersionService autoVersionService=WCMCoreUtils.getService(AutoVersionService.class);
     boolean canRemove = true;
     file.setAttribute("name", Utils.getTitle(displayNode));
     file.setAttribute("title", Utils.getTitle(displayNode));
@@ -574,6 +576,8 @@ public class ManageDocumentService implements ResourceContainer {
     }
     file.setAttribute("creator", sourceNode.getProperty("exo:owner").getString());
     file.setAttribute("path", displayNode.getPath());
+    file.setAttribute("isVersioned", String.valueOf(sourceNode.isNodeType(NodetypeConstant.MIX_VERSIONABLE)));
+    file.setAttribute("isVersionSupport", String.valueOf(autoVersionService.isVersionSupport(sourceNode.getPath(), workspaceName)));
     if (sourceNode.isNodeType("nt:file")) {
       Node content = sourceNode.getNode("jcr:content");
       file.setAttribute("nodeType", content.getProperty("jcr:mimeType").getString());
@@ -741,12 +745,13 @@ public class ManageDocumentService implements ResourceContainer {
                                                  String action,
                                                  String language,
                                                  String fileName,
-                                                 String uploadId) throws Exception {
+                                                 String uploadId,
+                                                 String existenceAction) throws Exception {
     if (FileUploadHandler.SAVE_ACTION.equals(action)) {
       CacheControl cacheControl = new CacheControl();
       cacheControl.setNoCache(true);
       DocumentContext.getCurrent().getAttributes().put(DocumentContext.IS_SKIP_RAISE_ACT, true);
-      return fileUploadHandler.saveAsNTFile(currentFolderNode, uploadId, org.exoplatform.services.cms.impl.Utils.cleanName(fileName), language, siteName, userId);
+      return fileUploadHandler.saveAsNTFile(currentFolderNode, uploadId, org.exoplatform.services.cms.impl.Utils.cleanName(fileName), language, siteName, userId, existenceAction);
     }
     return fileUploadHandler.control(uploadId, action);
   }

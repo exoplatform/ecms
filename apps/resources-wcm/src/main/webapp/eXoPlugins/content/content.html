@@ -8,9 +8,9 @@
 		<meta http-equiv="eXpires" content="0"/>
 		
 		<link type="text/css" rel="stylesheet" href="../../../eXoSkin/skin/css/Core.css"/>
+		<link type="text/css" rel="stylesheet" href="../../../eXoSkin/skin/css/sub-core.css"/>
 		<link type="text/css" rel="stylesheet" href="../../../eXoSkin/skin/css/ecms/skin/ecms-resources-wcmskin.css"/>
 		<link type="text/css" rel="stylesheet" href="../../../eXoSkin/skin/css/ecms/portlets/explorer/ecms-explorer.css"/>
-		<link type="text/css" rel="stylesheet" href="css/content.css"/>
 		<script type="text/javascript" src="../../../eXoResources/javascript/jquery-1.7.1.js"></script>
 		<script type="text/javascript" src="../../../eXoResources/javascript/eXo/core/require.js"></script>
 		<script type="text/javascript" src="../../../eXoResources/skin/bootstrap/js/bootstrap-tooltip.js"></script>
@@ -204,8 +204,8 @@
 								<!--span userLanguage="UserLanguage.LabelName"> Name </span>:-->
 								<input type="text" id="fileName" name="fileName" placeholder="Name" maxlength="128"/>
 							</div>
-							<div class="uiAction">
-								<a href="javascript:void(0);" class="btn" onclick="eXo.ecm.UploadForm.uploadFileSave();" userLanguage="UserLanguage.BtnSave">Save</a>
+							<div class="uiAction mgB15">
+								<a href="javascript:void(0);" class="btn" onclick="eXo.ecm.UploadForm.preUploadFileSave();" userLanguage="UserLanguage.BtnSave">Save</a>
 								<a href="javascript:void(0);" class="btn"  onclick="eXo.ecm.UploadForm.uploadFileCancel();" userLanguage="UserLanguage.BtnCancel">Cancel</a>
 								
 							</div>
@@ -225,7 +225,7 @@
 </div>
 <!-- =================================END UPLOAD ======================================== -->
 <div class="Mask" id="Mask"></div>
-<div class="PopupContainer UIPopupWindow uiPopup UIDragObject NormalStyle" style="display: none; visibility: visible; z-index: 7; left: 266px;"  id="PopupContainer"></div>
+<div class="PopupContainer UIPopupWindow uiPopup UIDragObject NormalStyle uiPopupContentSelector" style="display: none; visibility: visible; z-index: 7; left: 266px;"  id="PopupContainer"></div>
 </body>
 
 

@@ -1,0 +1,35 @@
+<%
+import org.exoplatform.wcm.webui.reader.ContentReader;
+import java.util.regex.Matcher;
+%>
+<div class="UIForm $uiform.id">
+  <%
+  uiform.begin();
+  String msgValue = _ctx.appRes(uiform.getMessage());
+  String[] msgArguments = uiform.getArguments();
+  if(msgArguments.length > 0) {
+    for(i in 0..msgArguments.length-1){
+  msgValue = msgValue.replaceAll("\\{" + i + "\\}", "<span style='font-weight:bold;'>"+Matcher.quoteReplacement(msgArguments[i])+"</span>");
+    }
+  }
+  %>
+  <ul class="singleMessage popupMessage resizable center">
+    <li><span class="confirmationIcon"> <%=msgValue%></span></li>
+    <li>
+      <%
+      uiform.renderChildren();
+      %>
+    </li>
+  </ul>
+  <div class="uiAction uiActionBorder">
+    <%
+    int tabIndex = 1;
+    for(action in uiform.getActions()) {
+    def btnClass="";
+    if(action != "Cancel") btnClass="btn-primary";
+    %>
+    <button class="btn $btnClass $action" type="button" onclick="<%=uiform.event(action)%>" tabindex=<%=tabIndex++%> href="javascript:void(0);"><%=_ctx.appRes("UIConfirmMessage.label." + action)%></button>
+    <%}%>
+  </div>
+  <% uiform.end(); // end render action%>
+</div>

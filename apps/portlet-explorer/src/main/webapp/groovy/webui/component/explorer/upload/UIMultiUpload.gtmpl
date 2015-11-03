@@ -26,7 +26,8 @@
                                        getMsgEscapeJS("Replace") + "','" +
                                        getMsgEscapeJS("Canceled") + "','" +
                                        getMsgEscapeJS("Cancel") + "','" +
-                                       getMsgEscapeJS("AbortAllConfirmation") + "');").
+                                       getMsgEscapeJS("AbortAllConfirmation") + "','" +
+                                       getMsgEscapeJS("UploadNewVersion") + "');").
   addScripts("multiUpload.setDropFileMessage('" + getMsgEscapeJS("DropFileMessage") + "');");
 %>
 

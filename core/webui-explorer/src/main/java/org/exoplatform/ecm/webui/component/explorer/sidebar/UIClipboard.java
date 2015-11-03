@@ -16,11 +16,6 @@
  */
 package org.exoplatform.ecm.webui.component.explorer.sidebar;
 
-import java.util.LinkedList;
-
-import javax.jcr.Node;
-import javax.jcr.PathNotFoundException;
-
 import org.exoplatform.ecm.webui.component.explorer.UIJCRExplorer;
 import org.exoplatform.ecm.webui.component.explorer.rightclick.manager.PasteManageComponent;
 import org.exoplatform.services.cms.clipboard.ClipboardService;
@@ -34,6 +29,10 @@ import org.exoplatform.webui.core.UIApplication;
 import org.exoplatform.webui.core.UIComponent;
 import org.exoplatform.webui.event.Event;
 import org.exoplatform.webui.event.EventListener;
+
+import javax.jcr.Node;
+import javax.jcr.PathNotFoundException;
+import java.util.LinkedList;
 /**
  * Created by The eXo Platform SARL
  * Author : pham tuan
@@ -81,13 +80,17 @@ public class UIClipboard extends UIComponent {
       int index = Integer.parseInt(id) ;
       ClipboardCommand selectedClipboard = uiClipboard.clipboard_.get(index-1);
       Node node = uiExplorer.getCurrentNode() ;
-      String nodePath = node.getPath();
-      String wsName = node.getSession().getWorkspace().getName();
+//      String nodePath = node.getPath();
+//      String wsName = node.getSession().getWorkspace().getName();
       UIApplication app = uiClipboard.getAncestorOfType(UIApplication.class);
       try {
-        PasteManageComponent.processPaste(selectedClipboard, wsName + ":" + nodePath, event);
+        //PasteManageComponent.processPaste(selectedClipboard, wsName + ":" + nodePath, event);
+        PasteManageComponent.processPaste(selectedClipboard, node, event, uiExplorer);
         //uiWorkingArea.processPaste(selectedClipboard, wsName + ":" + nodePath, event);
-        uiExplorer.updateAjax(event);
+        if (PasteManageComponent.isIsRefresh()) {
+          uiExplorer.updateAjax(event);
+        }
+
       } catch(PathNotFoundException path) {
         app.addMessage(new ApplicationMessage("PathNotFoundException.msg", null, ApplicationMessage.WARNING)) ;
         

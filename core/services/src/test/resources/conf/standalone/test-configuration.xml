@@ -42,5 +42,6 @@
   <import>classpath:/conf/standalone/wcm/test-scripts-configuration.xml</import>
   <import>classpath:/conf/standalone/wcm/jcr-component-plugins-configuration.xml</import>
   <import>classpath:/conf/standalone/wcm/dms-document-type-configuration.xml</import>
+  <import>classpath:/conf/standalone/wcm/document-autoversioning.xml</import>
   <import>classpath:/conf/standalone/wcm/test-configuration.xml</import>
 </configuration>

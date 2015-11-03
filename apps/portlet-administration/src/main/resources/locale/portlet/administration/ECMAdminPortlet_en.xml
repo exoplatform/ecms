@@ -986,11 +986,14 @@
       <publicationRequestApproval>Request Approval</publicationRequestApproval>
       <publicationApproveContent>Approve Content</publicationApproveContent>
       <publicationPublish>Publish</publicationPublish>
-						<contentNavigation>Content Navigation</contentNavigation>
-						<addSymLink>Add Symlink</addSymLink>
+      <contentNavigation>Content Navigation</contentNavigation>
+      <addSymLink>Add Symlink</addSymLink>
       <checkIn>Check In</checkIn>
       <checkOut>Check Out</checkOut>	
-      <shareDocuments>Share</shareDocuments>      
+      <shareDocuments>Share</shareDocuments>
+      <openDocument>Remote Edit</openDocument>
+      <editProperty>Edit Document Properties</editProperty>
+      <uploadNewVersion>Upload a new version</uploadNewVersion>
     </label>
     <action>
       <Save>#{word.save}</Save>      
