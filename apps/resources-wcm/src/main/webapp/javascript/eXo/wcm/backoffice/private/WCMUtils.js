@@ -296,18 +296,20 @@
 	
 	  var txtArea = document.getElementById(txtAreaId) ;
 	  var ifrm = document.createElement("IFRAME") ;
+
+
 	  with(ifrm) {
 	    className = 'ECMIframe' ;
 	    src = 'javascript:void(0)' ;
 	    frameBorder = 0 ;
 	    scrolling = "auto" ;
 	  }
-	
 	  var strValue = txtArea.value ;
 	  txtArea.parentNode.replaceChild(ifrm, txtArea) ;
 	  try {
 	    var doc = ifrm.contentWindow.document ;
 	    doc.open() ;
+	 	doc.write("<link rel='stylesheet' href='/eXoSkin/skin/css/Core.css'  />");
 	    doc.write(strValue) ;
 	    doc.close() ;
 	  } catch (ex) {}
@@ -1006,3 +1008,4 @@
 		SELocalization : eXo.ecm.SELocalization
 	};
 })(gj, base);
+
