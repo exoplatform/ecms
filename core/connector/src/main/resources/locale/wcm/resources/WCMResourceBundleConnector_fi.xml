@@ -14,4 +14,18 @@
       <renaming>Renaming...</renaming>
     </msg>
   </RenameConnector>
+  <OpenInOfficeConnector>
+    <label>
+      <exo.remote-edit.word>Open in Word</exo.remote-edit.word>
+      <exo.remote-edit.excel>Open in Excel</exo.remote-edit.excel>
+      <exo.remote-edit.powerpoint>Open in Powerpoint</exo.remote-edit.powerpoint>
+      <exo.remote-edit.desktop>Open on Desktop</exo.remote-edit.desktop>
+      <exo.remote-edit.desktop-app>Open in {0}</exo.remote-edit.desktop-app>
+    </label>
+  </OpenInOfficeConnector>
+  <DocumentAutoVersion>
+    <msg>
+      <WrongMimeType>The mimetype of uploaded file is incorrect! The new version of {0} will not be created.</WrongMimeType>
+    </msg>
+  </DocumentAutoVersion>
 </bundle>

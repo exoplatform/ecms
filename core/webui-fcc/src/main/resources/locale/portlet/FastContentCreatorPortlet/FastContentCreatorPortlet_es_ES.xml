@@ -7,7 +7,7 @@
       <cannot-save>Error al guardar el nodo.</cannot-save>
       <saved-successfully>{0}</saved-successfully>
       <not-support>No se puede cargar la plantilla de '{0}'.</not-support>
-      <not-add-folder>Solo se pueden agregar archivos en esta carpeta.</not-add-folder>
+      <not-add-folder>Sólo se pueden agregar archivos en esta carpeta.</not-add-folder>
       <access-denied>Acceso denegado. No tiene permiso para agregar a {0}.</access-denied>
       <path-not-found>La ruta {0} fue eliminada o no es válida.</path-not-found>
       <node-locked>El nodo '{0}' está bloqueado. Por favor desbloquear este nodo antes de crear documentos.</node-locked>
@@ -148,7 +148,7 @@
     <title>
       <UIOneNodePathSelector>Seleccione ubicación</UIOneNodePathSelector>
       <UIPermissionSelector>Navegador de permiso</UIPermissionSelector>
-      <UICategoriesSelector>Add Categories</UICategoriesSelector>
+      <UICategoriesSelector>Añadir Categorías</UICategoriesSelector>
     </title>
   </PopupComponent>
 

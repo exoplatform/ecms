@@ -87,7 +87,7 @@
 -->
   <UITaxonomyTreeMainForm>
     <action>
-      <Reset>Atstatyti</Reset>
+      <Reset>Reset</Reset>
     </action>
     <msg>
       <name-not-allowed>Draudžiamas pavadinimas</name-not-allowed>
@@ -990,6 +990,10 @@
 <addSymLink>Pridėti nuorodą</addSymLink>
       <checkIn>Check In</checkIn>
       <checkOut>Check Out</checkOut>
+      <shareDocuments>Dalintis</shareDocuments>
+      <openDocument>Remote Edit</openDocument>
+      <editProperty>Edit Document Properties</editProperty>
+      <uploadNewVersion>Upload a new version</uploadNewVersion>
     </label>
     <action>
       <Save>#{word.save}</Save>      
@@ -1019,7 +1023,7 @@
   </UIViewFormTabPane>
   <PopupViewPermission>
     <title>
-      <UIPermissionSelector>Pasirinkti teisę</UIPermissionSelector>
+      <UIPermissionSelector>Teisės pasirinkimas</UIPermissionSelector>
     </title>
   </PopupViewPermission>
 
@@ -1070,7 +1074,7 @@
   -->
   <UITemplateForm>
     <title>
-      <AddPermission>Pridėti teisę</AddPermission>
+      <AddPermission>Add Permission</AddPermission>
     </title>
     <action>
       <Save>#{word.save}</Save>
@@ -1382,8 +1386,8 @@
     <title>Add a permission to this node</title>
     <action>
       <Close>#{word.close}</Close>
-      <Save>Išsaugoti</Save>
-      <Reset>Atstatyti</Reset>
+      <Save>Save</Save>
+      <Reset>Reset</Reset>
     </action>
     <msg>
       <checkbox-require>Prašome pasirinkti bent vieną leidimą.</checkbox-require>
@@ -1401,7 +1405,7 @@
   
   <PopupTaxonomyTreePermission>
     <title>
-      <UIPermissionSelector>Pasirinkti teisę</UIPermissionSelector>
+      <UIPermissionSelector>Teisės pasirinkimas</UIPermissionSelector>
     </title>
    </PopupTaxonomyTreePermission>
    
@@ -1733,7 +1737,7 @@
   -->
   <AddNewTemplatePermission>
     <title>
-      <UIPermissionSelector>Pasirinkti teisę</UIPermissionSelector>
+      <UIPermissionSelector>Teisės pasirinkimas</UIPermissionSelector>
     </title>
   </AddNewTemplatePermission>
   <TemplatePermission>
@@ -1774,12 +1778,12 @@
   </DialogForm>
   <DialogFormTemplatePermission>
     <title>
-      <UIPermissionSelector>Pasirinkti teisę</UIPermissionSelector>
+      <UIPermissionSelector>Teisės pasirinkimas</UIPermissionSelector>
     </title>
   </DialogFormTemplatePermission>
   <ViewFormTemplatePermission>
     <title>
-      <UIPermissionSelector>Pasirinkti teisę</UIPermissionSelector>
+      <UIPermissionSelector>Teisės pasirinkimas</UIPermissionSelector>
     </title>
   </ViewFormTemplatePermission>
   <TemplateContainerPopup>
@@ -1970,7 +1974,7 @@
   </EditQueryForm>
 <PermissionPopup>
   <title>
-    <UIGroupMemberSelector>Pasirinkti teisę</UIGroupMemberSelector>
+    <UIGroupMemberSelector>Teisės pasirinkimas</UIGroupMemberSelector>
   </title>
 </PermissionPopup>
   <!--
@@ -2021,6 +2025,16 @@
       <UITagStyleForm>Redaguoti žymės stiliaus konfigūraciją</UITagStyleForm>
     </title>
   </FolksonomyPopup>
+  <!--
+  ###################################################################################
+  # ECMPhoneFormatValidator                                       #
+  ###################################################################################
+  -->
+  <ECMPhoneFormatValidator>
+    <msg>
+      <Invalid>The field '{0}' contains an invalid Phone number. Please enter another value.</Invalid>
+    </msg>
+  </ECMPhoneFormatValidator>
   <!--
   ###################################################################################
   # org.exoplatform.ecm.jcr.ECMNameValidator  #
@@ -2360,7 +2374,7 @@
   <UISkinTab>
     <header>
       <name>Pavadinimas</name>
-      <roles>Rolės</roles>
+      <roles>Roles</roles>
       <baseVersion>Versija</baseVersion>
       <action>Veiksmai</action>
     </header>
@@ -2417,6 +2431,7 @@
 <UIPermissionTreeForm>
 <action>
 <Save>Save</Save>
+<Cancel>#{word.cancel}</Cancel>
 <Reset>Reset</Reset>
 <NextAddAction>Kitas</NextAddAction>
 <Previous>Ankstesnis</Previous>

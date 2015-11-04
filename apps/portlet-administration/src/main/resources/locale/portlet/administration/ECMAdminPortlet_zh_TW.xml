@@ -990,6 +990,10 @@
 <addSymLink>增加符號連結</addSymLink>
       <checkIn>Check In</checkIn>
       <checkOut>Check Out</checkOut>
+      <shareDocuments>分享</shareDocuments>
+      <openDocument>Remote Edit</openDocument>
+      <editProperty>Edit Document Properties</editProperty>
+      <uploadNewVersion>Upload a new version</uploadNewVersion>
     </label>
     <action>
       <Save>#{word.save}</Save>      
@@ -1019,7 +1023,7 @@
   </UIViewFormTabPane>
   <PopupViewPermission>
     <title>
-      <UIPermissionSelector>設定權限</UIPermissionSelector>
+      <UIPermissionSelector>權限選擇</UIPermissionSelector>
     </title>
   </PopupViewPermission>
 
@@ -1401,7 +1405,7 @@
   
   <PopupTaxonomyTreePermission>
     <title>
-      <UIPermissionSelector>選擇權限</UIPermissionSelector>
+      <UIPermissionSelector>權限選擇</UIPermissionSelector>
     </title>
    </PopupTaxonomyTreePermission>
    
@@ -1733,7 +1737,7 @@
   -->
   <AddNewTemplatePermission>
     <title>
-      <UIPermissionSelector>選擇權限</UIPermissionSelector>
+      <UIPermissionSelector>權限選擇</UIPermissionSelector>
     </title>
   </AddNewTemplatePermission>
   <TemplatePermission>
@@ -1774,12 +1778,12 @@
   </DialogForm>
   <DialogFormTemplatePermission>
     <title>
-      <UIPermissionSelector>選擇權限</UIPermissionSelector>
+      <UIPermissionSelector>權限選擇</UIPermissionSelector>
     </title>
   </DialogFormTemplatePermission>
   <ViewFormTemplatePermission>
     <title>
-      <UIPermissionSelector>選擇權限</UIPermissionSelector>
+      <UIPermissionSelector>權限選擇</UIPermissionSelector>
     </title>
   </ViewFormTemplatePermission>
   <TemplateContainerPopup>
@@ -1970,7 +1974,7 @@
   </EditQueryForm>
 <PermissionPopup>
   <title>
-    <UIGroupMemberSelector>選擇權限</UIGroupMemberSelector>
+    <UIGroupMemberSelector>權限選擇</UIGroupMemberSelector>
   </title>
 </PermissionPopup>
   <!--
@@ -2021,6 +2025,16 @@
       <UITagStyleForm>編輯標記樣式配置</UITagStyleForm>
     </title>
   </FolksonomyPopup>
+  <!--
+  ###################################################################################
+  # ECMPhoneFormatValidator                                       #
+  ###################################################################################
+  -->
+  <ECMPhoneFormatValidator>
+    <msg>
+      <Invalid>The field '{0}' contains an invalid Phone number. Please enter another value.</Invalid>
+    </msg>
+  </ECMPhoneFormatValidator>
   <!--
   ###################################################################################
   # org.exoplatform.ecm.jcr.ECMNameValidator  #
@@ -2245,7 +2259,7 @@
     <email>#{word.email}</email>
       <action>#{word.action}</action>
       <Add>#{word.Add}</Add>
-      <Close>#{word.Close}</Close>
+      <Close># {word.close}</Close>
     </label>
   </PermissionTreeSelectUser>
   
@@ -2417,6 +2431,7 @@
 <UIPermissionTreeForm>
 <action>
 <Save>Save</Save>
+<Cancel>#{word.cancel}</Cancel>
 <Reset>Reset</Reset>
 <NextAddAction>下一步</NextAddAction>
 <Previous>上一步</Previous>

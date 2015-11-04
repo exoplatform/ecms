@@ -98,6 +98,11 @@
       <SelectTargetPage>Page de Détail</SelectTargetPage>
     </title>
   </UISCVConfigPrintPageFormInputSet>
+  <UISCVConfigPrintPageSelectorPopupWindow>
+    <title>
+      <UIPageSelector>Sélecteur de Page</UIPageSelector>
+    </title>
+  </UISCVConfigPrintPageSelectorPopupWindow>
   <PublicationStates>
     <archived>Archivé</archived>
     <obsolete>Obsolète</obsolete>

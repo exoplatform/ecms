@@ -41,38 +41,38 @@
       <UICLVConfigDisplayTemplateFormSelectBox>عرض نموذج</UICLVConfigDisplayTemplateFormSelectBox>
       <UICLVConfigPaginatorTemplateFormSelectBox>ترحيل النموذجي</UICLVConfigPaginatorTemplateFormSelectBox>
       <UICLVConfigItemsPerPageFormStringInput>عناصر بكل صفحة</UICLVConfigItemsPerPageFormStringInput>
-      <UICLVConfigShowIllustrationFormCheckboxInput>Show Image</UICLVConfigShowIllustrationFormCheckboxInput>
-      <UICLVConfigShowSummaryFormCheckboxInput>Show Summary</UICLVConfigShowSummaryFormCheckboxInput>
-      <UICLVConfigShowHeaderFormCheckboxInput>Show Header</UICLVConfigShowHeaderFormCheckboxInput>
-      <UICLVConfigShowRefreshFormCheckboxInput>Show Refresh</UICLVConfigShowRefreshFormCheckboxInput>
+      <UICLVConfigShowIllustrationFormCheckboxInput>عرض الصورة</UICLVConfigShowIllustrationFormCheckboxInput>
+      <UICLVConfigShowSummaryFormCheckboxInput>عرض الموجز</UICLVConfigShowSummaryFormCheckboxInput>
+      <UICLVConfigShowHeaderFormCheckboxInput>عرض العنوان الرأسي</UICLVConfigShowHeaderFormCheckboxInput>
+      <UICLVConfigShowRefreshFormCheckboxInput>عرض زر التحديث</UICLVConfigShowRefreshFormCheckboxInput>
       <UICLVConfigShowTitleFormCheckboxInput>تظهر عنوان</UICLVConfigShowTitleFormCheckboxInput>
       <UICLVConfigShowDateCreatedFormCheckboxInput>عرض التاريخ</UICLVConfigShowDateCreatedFormCheckboxInput>
-      <UICLVConfigShowLinkFormCheckboxInput>Show Link</UICLVConfigShowLinkFormCheckboxInput>
-      <UICLVConfigShowReadmoreFormCheckboxInput>Show More Links</UICLVConfigShowReadmoreFormCheckboxInput>
-      <UICLVConfigAllowDynamicUrlStringInput>Allow Dynamic URL</UICLVConfigAllowDynamicUrlStringInput>
-      <UICLVConfigShowRssLinkFormCheckboxInput>Show RSS Link</UICLVConfigShowRssLinkFormCheckboxInput>
-      <UICLVConfigShowAutomaticDetectionCheckboxInput>Automatic Detection</UICLVConfigShowAutomaticDetectionCheckboxInput>
+      <UICLVConfigShowLinkFormCheckboxInput>عرض الرّابط</UICLVConfigShowLinkFormCheckboxInput>
+      <UICLVConfigShowReadmoreFormCheckboxInput>عرض المزيد من الروابط</UICLVConfigShowReadmoreFormCheckboxInput>
+      <UICLVConfigAllowDynamicUrlStringInput>السماح لعنوان الموارد الموحّد(URL) الديناميكي</UICLVConfigAllowDynamicUrlStringInput>
+      <UICLVConfigShowRssLinkFormCheckboxInput>عرض رابط الـRSS</UICLVConfigShowRssLinkFormCheckboxInput>
+      <UICLVConfigShowAutomaticDetectionCheckboxInput>الكشف التلقائي</UICLVConfigShowAutomaticDetectionCheckboxInput>
       <AdvancedBlock>متطور/ة</AdvancedBlock>
       <UICLVConfigDynamicNavigationLabel>التصفّح الديناميكي</UICLVConfigDynamicNavigationLabel>
-      <UICLVConfigContextualFolderRadioBoxInput>Contextual Folder</UICLVConfigContextualFolderRadioBoxInput>
+      <UICLVConfigContextualFolderRadioBoxInput>مجلدات بحسب السّــياق</UICLVConfigContextualFolderRadioBoxInput>
       <UICLVConfigShowCLVByStringInput>بـواسطة</UICLVConfigShowCLVByStringInput>
       <UICLVConfigshowSCVWithStringInput>مع</UICLVConfigshowSCVWithStringInput>
       <UICLVConfigTargetPageFormInputSet>عرض بالصفحة</UICLVConfigTargetPageFormInputSet>
-      <content-not-found>Content not found.</content-not-found>
+      <content-not-found>لم يتم العثور على  أي محتوى.</content-not-found>
       <ContentPath>مسار المحتوى</ContentPath>
-      <Up>Up</Up>
-      <Down>Down</Down>
+      <Up>فوق</Up>
+      <Down>إلى الأسفل</Down>
       <UICLVConfigCacheManagementLabel>قابليّة الرؤية للمحتوى</UICLVConfigCacheManagementLabel>
-      <UICLVContentByQueryLabel>Content by Query</UICLVContentByQueryLabel>
+      <UICLVContentByQueryLabel>المحتوى بواسطة استعلام</UICLVContentByQueryLabel>
       <UICLVConfigWorkspaceFormSelectBox>مساحة عمل</UICLVConfigWorkspaceFormSelectBox>
-      <UICLVConfigContentByQueryTextArea>by query</UICLVConfigContentByQueryTextArea>
-      <UICLVConfigCacheEnableRadioBoxInput>Share content between users</UICLVConfigCacheEnableRadioBoxInput>
+      <UICLVConfigContentByQueryTextArea>بواسطة استعلام</UICLVConfigContentByQueryTextArea>
+      <UICLVConfigCacheEnableRadioBoxInput>مشاركة المحتوى بين المستخدمين</UICLVConfigCacheEnableRadioBoxInput>
     </label>
     <help>
       <ModeSelectionHelp>هنالك طريقتان تُمكّنك من إظهار المحتوى. "بواسطة مجلد" ستتخذ كافة المحتويات المتوفرة في المجلد/الفئة المحددة الخاصة بك. "بواسطة المحتوى" تُتيح لك  تحديد المحتوى الذي تريد إظهاره بشكل يدوي .</ModeSelectionHelp>
       <FolderPathHelp>قم بتحديد المحتويات التي ترغب في إظهارها. سيتم ديناميكيّـا استبدال هذا الاختيار الافتراضي إذا قمت بتفعيل خدمة التصقّح الديناميكي ( نمط متطوّر، انظرأدناه).</FolderPathHelp>
       <HeaderOptionHelp>إظهار عنوان رأسي على رأس قائمة المحتويات. إذا قمت بتنشيط خيار "الكشف التلقائي"، فإنه سيحاول العثور على العنوان الرأسي استناداً إلى الخيار الحالي.</HeaderOptionHelp>
-      <GeneralOptionHelp>Select the graphical elements you want to show in your list. Note that, depending on your selected template, some elements may not be available.</GeneralOptionHelp>
+      <GeneralOptionHelp>حدد العناصر الرسومية التي ترغب في رؤيتها  ضمن القائمة الخاصة بك. لاحظ أنه، استناداً إلى النموذج الخاص بك، قد لا تتوفر بعض العناصر.</GeneralOptionHelp>
       <ContextualHelp>بصدد القيام بتنشيط خيار "التصفّح الديناميكي". يمكن للبقيّة تغيير المحتوى بشكل ديناميكي استناداً إلى المعيار الخاص بعنوان الموارد المحدد (URL)</ContextualHelp>
       <ParameterHelp>سيتم استخدام هذا المعيار للحصول على المحتويات إذا تم تفعيل التصفــّــح الديناميكي.</ParameterHelp>
       <ShowDetailInPageHelp>بالنقر على المحتوى ىسيتمّ إعادة توجيهك إلى صفحة التفاصيل. يجب أن يكون لديك المدخل "محتوى بواسطة عنوان الموار الموحّد URL" و التأكد من تفعيل خيار التصفّح الديناميكي على مُستوى الصفحة الهدف  قصد عرض المحتوى.</ShowDetailInPageHelp>
@@ -86,8 +86,8 @@
       <delete>حذف</delete>
     </action>
     <msg>
-      <not-valid-path>The Folder Path is invalid.</not-valid-path>
-      <saving-success>The portlet's preferences are saved.</saving-success>
+      <not-valid-path>مسار المجلد غير صحيح.</not-valid-path>
+      <saving-success>يتم حفظ تفضيلات للمدخل.</saving-success>
     </msg>
     <tab>
       <label>
@@ -99,8 +99,8 @@
   </UICLVConfig>
   <UICLVConfigDisplayModeFormRadioBoxInput>
     <label>
-      <AutoViewerMode>By Folder</AutoViewerMode>
-      <ManualViewerMode>By Content</ManualViewerMode>
+      <AutoViewerMode>عن طريق مجلدات</AutoViewerMode>
+      <ManualViewerMode>عن طريق المحتوى</ManualViewerMode>
     </label>
   </UICLVConfigDisplayModeFormRadioBoxInput>
   <UICLVConfigItemPathFormInputSet>
@@ -183,7 +183,7 @@
   <UICLVConfigCacheEnableRadioBoxInput>
     <label>
       <ENABLE>مقيّدة بتسجيل الدّخول</ENABLE>
-      <DISABLE>Restricted by User Roles</DISABLE>
+      <DISABLE>مقيدة بأدوار المستخدم</DISABLE>
     </label>
   </UICLVConfigCacheEnableRadioBoxInput>
 </bundle>

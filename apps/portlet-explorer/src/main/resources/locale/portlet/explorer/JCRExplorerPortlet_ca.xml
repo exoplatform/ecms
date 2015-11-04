@@ -165,7 +165,7 @@
       <enableDragAndDrop>Permetre Arrossegar i Deixar:</enableDragAndDrop>
       <sortBy>Ordenar per:</sortBy>
       <order>Ordena per:</order>
-      <nodesPerPage>Nodes Per pàgina:</nodesPerPage>
+      <nodesPerPage>Elements per Pàgina:</nodesPerPage>
     </label>
     <action>
       <Back>#{word.close}</Back>
@@ -254,7 +254,8 @@
       <UISelectRestorePath>Selecciona la Ruta de Restauració</UISelectRestorePath>
       <UISEOForm>Gestiona el SEO</UISEOForm>
       <UISEOToolbarForm>Gestiona el SEO</UISEOToolbarForm>
-      <UIReadOnlyFileConfirmMessage>Open Document</UIReadOnlyFileConfirmMessage>
+      <UIReadOnlyFileConfirmMessage>Obre el Document</UIReadOnlyFileConfirmMessage>
+      <UIDocumentAutoVersionForm>Copy Document</UIDocumentAutoVersionForm>
     </title>
     <header>
       <workspace>Àrea de treball</workspace>
@@ -308,6 +309,8 @@
       <ViewMetadatas>Metadades</ViewMetadatas>
       <ViewRelations>Mostra/Amaga les relacions</ViewRelations>
       <ShowJCRStructure>Mostra/Amaga l'Estructuració de Continguts</ShowJCRStructure>
+      <EditProperty>Edit Document Properties</EditProperty>
+      <UploadNewVersion>Upload a new version</UploadNewVersion>
     </tooltip>
     <msg>
       <cannot-action-in-rootnode>No pot realitzar aquesta acció al node arrel.</cannot-action-in-rootnode>
@@ -401,7 +404,7 @@
       <constraintviolation-exception>No s'ha trobat l'element obligatori jcr:uuid . El node pot haver estat suprimit o canviat. Si us plau, fes clic al botó Recarrega.</constraintviolation-exception>
       <path-not-found-exception>El node pot haver estat suprimit o canviat. Si us plau, fes clic al botó Recarrega.</path-not-found-exception>
       <not-exist-categories>La categoria no existeix.</not-exist-categories>
-      <lock-node-read-only>This file is locked by user {0}. Open read-only ?</lock-node-read-only>
+      <lock-node-read-only>Aquest fitxer està bloquejat per l'usuari {0}. Obrir en sols lectura ?</lock-node-read-only>
     </msg>
   </UIPopupMenu>
   <!--
@@ -595,7 +598,10 @@
       <EmptyTrash>Buida la Paperera</EmptyTrash>
       <WebDavView>Obre-ho a MS Office</WebDavView>
       <Download>Descarrega</Download>
-      <OpenDocument>Remote Edit</OpenDocument>
+      <OpenDocument>Edició remota</OpenDocument>
+      <EditProperty>Edit Document Properties</EditProperty>
+      <UploadNewVersion>Upload a new version</UploadNewVersion>
+      <CreateNewVersion>Create a new version</CreateNewVersion>
     </event>
   </ECMContextMenu>
  
@@ -1324,7 +1330,7 @@
   -->
   <PopupUserSelector>
     <title>
-      <UIUserContainer>Selecciona Permisos d'Usuari</UIUserContainer>
+      <UIUserContainer>Selector de permisos</UIUserContainer>
     </title>
   </PopupUserSelector>
   <UIPopupTaxonomy>
@@ -1493,7 +1499,7 @@
       <import-successful>Importat correctament.</import-successful>
       <filename-invalid>Selecciona un fitxer xml per importar-lo.</filename-invalid>
       <filetype-error>No es pot importar el fitxer pujat. El fitxer .xml pot ser invàlid.</filetype-error>
-      <xml-invalid>There is an invalid character at position [row, column]:{0} in {1} file</xml-invalid>
+      <xml-invalid>Hi ha un caràcter invàlid a la posició [fila, columna]:{0} del fitxer {1}</xml-invalid>
       <mimetype-invalid>Només pot importar fitxers .XML o.zip.</mimetype-invalid>
       <access-denied>Accés denegat. No té permís per importar-hi.</access-denied>
       <constraint-violation-exception>Impossible d'importar les dades. El tipus '{0}' no està permès en aquesta ubicació.</constraint-violation-exception>
@@ -1938,6 +1944,11 @@
   # Validator messages                                                              #
   ###################################################################################
   -->
+   <ECMPhoneFormatValidator>
+     <msg>
+       <Invalid>El camp '{0}' conté un número de telèfon invàlid. Si us plau, intrueix un altre.</Invalid>
+     </msg>
+  </ECMPhoneFormatValidator>
   <ECMNameValidator>
     <msg>
       <Invalid-char>El camp '{0}' conté alguns caràcters no vàlids. Si us plau, introdueix un altre valor.</Invalid-char>
@@ -2344,7 +2355,7 @@
     <msg>
       <create-link-problem>No pot crear un enllaç pel node '{0}' a "{1}".</create-link-problem>
       <dest-node-is-link>El node de destí '{0}' ja és un enllaç simbòlic, pel que no pot crear un enllaç simbòlic al seu interior.</dest-node-is-link>
-      <selected-is-link>El node seleccionat '{0}' ja és un vincle, pel que no es pot crear un punt d'enllaç a un altre enllaç.</selected-is-link>
+      <selected-is-link>El node seleccionat '{0}' ja és un enllaç. No pot crear un enllaç que apunta a un altre enllaç.</selected-is-link>
       <confirm-create-link>Vol crear un enllaç a aquesta ubicació?</confirm-create-link>
     </msg>
   </UIWorkingArea>
@@ -2424,8 +2435,10 @@
       <ReplaceData>Substitueix les dades</ReplaceData>
       <Back>Torna a canviar el nom</Back>
       <Keepfile>Manté tots dos fitxers</Keepfile>
-<ReadOnly>Open Read-only</ReadOnly>
+<ReadOnly>Obrir sols lectura</ReadOnly>
 <Cancel>Cancel·la</Cancel>
+      <KeepBoth>Keep Both</KeepBoth>
+      <CreateNewVersion>Create a new version</CreateNewVersion>
     </label>
   </UIConfirmMessage>
 
@@ -2984,15 +2997,15 @@
       <user>Autor</user>
       <description>Descripció</description>
     </header>
-    <create-version>New version is created</create-version>
+    <create-version>Una nova versió ha sigut creada</create-version>
   </UIPublicationHistory>
   
   <UIPublicationSchedule>
     <label>
       <introduction>Pot planificar la publicació del document. Selecciona la data que desitja veure el document publicat</introduction>
       <no-schedule-info>No hi ha cap calendari de publicació pel document</no-schedule-info>
-      <UIPublicationPanelStartDateInput>Start Publication date</UIPublicationPanelStartDateInput>
-      <UIPublicationPanelEndDateInput>End Publication date</UIPublicationPanelEndDateInput>
+      <UIPublicationPanelStartDateInput>Data d'Inici de Publicació</UIPublicationPanelStartDateInput>
+      <UIPublicationPanelEndDateInput>Data de Fi de Publicació</UIPublicationPanelEndDateInput>
     </label>
     <msg>
       <save-finished>El seu nou calendari de publicació s'ha desat correctament.</save-finished>
@@ -3158,6 +3171,7 @@
     <Keep>Conserva'ls ambdós</Keep>
     <Replace>Substitueix</Replace>
     <Canceled>Cancel·lat</Canceled>
+      <UploadNewVersion>Upload new version</UploadNewVersion>
     <Cancel>#{word.cancel}</Cancel>
     <AbortAllConfirmation>Vol anul·lar tots els arxius en curs?</AbortAllConfirmation>
   </label>
@@ -3186,6 +3200,19 @@
   <property-name-incorrect>El nom de la propietat és incorrecta, si us plau, introdueix un altre valor per a això!</property-name-incorrect>
     </msg>
   </UIPropertyForm>
+  <UIDocumentAutoVersionForm>
+    <msg>A document {0} already exits. What do you want to do? </msg>
+    <UIChkRememberNonVersioned>
+      <label>Remember my choice for all others non-versioned documents</label>
+    </UIChkRememberNonVersioned>
+    <UIChkRememberVersioned>
+      <label>Remember my choice for all others versioned documents</label>
+    </UIChkRememberVersioned>
+  </UIDocumentAutoVersionForm>
+  <DocumentAuto>
+    <message>A new version of the document {0} has been created successfully.</message>
+    <messageMultiFile>New version(s) of versioned document(s) has been created.</messageMultiFile>
+  </DocumentAuto>
   <!--
   ###################################################################################
   # JCR Exceptions manager                                                              #

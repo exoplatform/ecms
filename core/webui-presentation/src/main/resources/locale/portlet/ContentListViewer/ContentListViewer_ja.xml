@@ -41,38 +41,38 @@
       <UICLVConfigDisplayTemplateFormSelectBox>テンプレート</UICLVConfigDisplayTemplateFormSelectBox>
       <UICLVConfigPaginatorTemplateFormSelectBox>改ページ</UICLVConfigPaginatorTemplateFormSelectBox>
       <UICLVConfigItemsPerPageFormStringInput>ページ毎アイテム数</UICLVConfigItemsPerPageFormStringInput>
-      <UICLVConfigShowIllustrationFormCheckboxInput>Show Image</UICLVConfigShowIllustrationFormCheckboxInput>
-      <UICLVConfigShowSummaryFormCheckboxInput>Show Summary</UICLVConfigShowSummaryFormCheckboxInput>
-      <UICLVConfigShowHeaderFormCheckboxInput>Show Header</UICLVConfigShowHeaderFormCheckboxInput>
-      <UICLVConfigShowRefreshFormCheckboxInput>Show Refresh</UICLVConfigShowRefreshFormCheckboxInput>
+      <UICLVConfigShowIllustrationFormCheckboxInput>画像の表示</UICLVConfigShowIllustrationFormCheckboxInput>
+      <UICLVConfigShowSummaryFormCheckboxInput>サマリーの表示</UICLVConfigShowSummaryFormCheckboxInput>
+      <UICLVConfigShowHeaderFormCheckboxInput>ヘッダの表示</UICLVConfigShowHeaderFormCheckboxInput>
+      <UICLVConfigShowRefreshFormCheckboxInput>リフレッシュの表示</UICLVConfigShowRefreshFormCheckboxInput>
       <UICLVConfigShowTitleFormCheckboxInput>タイトルの表示</UICLVConfigShowTitleFormCheckboxInput>
       <UICLVConfigShowDateCreatedFormCheckboxInput>日時の表示</UICLVConfigShowDateCreatedFormCheckboxInput>
-      <UICLVConfigShowLinkFormCheckboxInput>Show Link</UICLVConfigShowLinkFormCheckboxInput>
-      <UICLVConfigShowReadmoreFormCheckboxInput>Show More Links</UICLVConfigShowReadmoreFormCheckboxInput>
-      <UICLVConfigAllowDynamicUrlStringInput>Allow Dynamic URL</UICLVConfigAllowDynamicUrlStringInput>
-      <UICLVConfigShowRssLinkFormCheckboxInput>Show RSS Link</UICLVConfigShowRssLinkFormCheckboxInput>
-      <UICLVConfigShowAutomaticDetectionCheckboxInput>Automatic Detection</UICLVConfigShowAutomaticDetectionCheckboxInput>
+      <UICLVConfigShowLinkFormCheckboxInput>リンク表示</UICLVConfigShowLinkFormCheckboxInput>
+      <UICLVConfigShowReadmoreFormCheckboxInput>もっと読むの表示</UICLVConfigShowReadmoreFormCheckboxInput>
+      <UICLVConfigAllowDynamicUrlStringInput>ダイナミックURLの許可</UICLVConfigAllowDynamicUrlStringInput>
+      <UICLVConfigShowRssLinkFormCheckboxInput>RSS リンクの表示</UICLVConfigShowRssLinkFormCheckboxInput>
+      <UICLVConfigShowAutomaticDetectionCheckboxInput>自動検知</UICLVConfigShowAutomaticDetectionCheckboxInput>
       <AdvancedBlock>詳細</AdvancedBlock>
       <UICLVConfigDynamicNavigationLabel>ダイナミックナビゲーション</UICLVConfigDynamicNavigationLabel>
-      <UICLVConfigContextualFolderRadioBoxInput>Contextual Folder</UICLVConfigContextualFolderRadioBoxInput>
+      <UICLVConfigContextualFolderRadioBoxInput>コンテクスチュアルフォルダ</UICLVConfigContextualFolderRadioBoxInput>
       <UICLVConfigShowCLVByStringInput>作成者</UICLVConfigShowCLVByStringInput>
       <UICLVConfigshowSCVWithStringInput>を</UICLVConfigshowSCVWithStringInput>
       <UICLVConfigTargetPageFormInputSet>ページに表示</UICLVConfigTargetPageFormInputSet>
-      <content-not-found>Content not found.</content-not-found>
+      <content-not-found>コンテンツがありません！</content-not-found>
       <ContentPath>コンテンツパス</ContentPath>
-      <Up>Up</Up>
-      <Down>Down</Down>
+      <Up>上へ</Up>
+      <Down>下へ</Down>
       <UICLVConfigCacheManagementLabel>コンテンツ参照レベル</UICLVConfigCacheManagementLabel>
-      <UICLVContentByQueryLabel>Content by Query</UICLVContentByQueryLabel>
+      <UICLVContentByQueryLabel>コンテンツ検索</UICLVContentByQueryLabel>
       <UICLVConfigWorkspaceFormSelectBox>ワークスペース</UICLVConfigWorkspaceFormSelectBox>
-      <UICLVConfigContentByQueryTextArea>by query</UICLVConfigContentByQueryTextArea>
-      <UICLVConfigCacheEnableRadioBoxInput>Share content between users</UICLVConfigCacheEnableRadioBoxInput>
+      <UICLVConfigContentByQueryTextArea>検索</UICLVConfigContentByQueryTextArea>
+      <UICLVConfigCacheEnableRadioBoxInput>ユーザー間でコンテンツを共有</UICLVConfigCacheEnableRadioBoxInput>
     </label>
     <help>
       <ModeSelectionHelp>コンテンツの表示には2つのモードがあります。"By folder"は選んだフォルダ/カテゴリ内の全てのコンテンツを取得します。 "By Content"は表示したいコンテンツを手動で選択します。</ModeSelectionHelp>
       <FolderPathHelp>表示したいコンテンツを選択してください。ダイナミックナビゲーション（詳細モード。下記参照）を有効化すると、このデフォルト選択が動的に変化します。</FolderPathHelp>
       <HeaderOptionHelp>コンテンツリストの最上部にヘッダを表示。自動検知を有効化すると、現在の選択に基づき、ヘッダを見つけようとします。</HeaderOptionHelp>
-      <GeneralOptionHelp>Select the graphical elements you want to show in your list. Note that, depending on your selected template, some elements may not be available.</GeneralOptionHelp>
+      <GeneralOptionHelp>リストに表示したい画像要素を選択。選択したテンプレートによっては一部の要素は使用できないということに注意してください。</GeneralOptionHelp>
       <ContextualHelp>ダイナミックナビゲーションの有効化。URLパラメータに基づき、コンテンツが動的に変わります。</ContextualHelp>
       <ParameterHelp>ダイナミックナビゲーションが有効化されている場合、コンテンツの取得にこのパラメータが使用されます。</ParameterHelp>
       <ShowDetailInPageHelp>コンテンツをクリックすると詳細ページへリダイレクトされる。コンテンツを表示するためにはターゲットのページが、ダイナミックナビゲーションが有効な"Content by URL"のポートレットを持つ必要があります。</ShowDetailInPageHelp>
@@ -86,8 +86,8 @@
       <delete>削除</delete>
     </action>
     <msg>
-      <not-valid-path>The Folder Path is invalid.</not-valid-path>
-      <saving-success>The portlet's preferences are saved.</saving-success>
+      <not-valid-path>アイテムパスが不正です</not-valid-path>
+      <saving-success>ポートレット設定が保存されました</saving-success>
     </msg>
     <tab>
       <label>
@@ -99,8 +99,8 @@
   </UICLVConfig>
   <UICLVConfigDisplayModeFormRadioBoxInput>
     <label>
-      <AutoViewerMode>By Folder</AutoViewerMode>
-      <ManualViewerMode>By Content</ManualViewerMode>
+      <AutoViewerMode>フォルダー毎</AutoViewerMode>
+      <ManualViewerMode>コンテンツ毎</ManualViewerMode>
     </label>
   </UICLVConfigDisplayModeFormRadioBoxInput>
   <UICLVConfigItemPathFormInputSet>
@@ -183,7 +183,7 @@
   <UICLVConfigCacheEnableRadioBoxInput>
     <label>
       <ENABLE>認証で制約</ENABLE>
-      <DISABLE>Restricted by User Roles</DISABLE>
+      <DISABLE>Restricted by User roles</DISABLE>
     </label>
   </UICLVConfigCacheEnableRadioBoxInput>
 </bundle>

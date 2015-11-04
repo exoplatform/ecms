@@ -98,6 +98,11 @@
       <SelectTargetPage>Arată în pagină</SelectTargetPage>
     </title>
   </UISCVConfigPrintPageFormInputSet>
+  <UISCVConfigPrintPageSelectorPopupWindow>
+    <title>
+      <UIPageSelector>Selector de Pagini</UIPageSelector>
+    </title>
+  </UISCVConfigPrintPageSelectorPopupWindow>
   <PublicationStates>
     <archived>Arhivată</archived>
     <obsolete>Învechite</obsolete>

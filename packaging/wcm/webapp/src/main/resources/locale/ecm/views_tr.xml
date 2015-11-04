@@ -141,7 +141,7 @@
   <ElementSet>
     <view>
       <label>
-        <not-avaliable>Uygulanabilir Değil</not-avaliable>
+        <not-avaliable>N/A</not-avaliable>
         <core-elements>Temel Unsurlar</core-elements>
         <title>Başlık</title>
         <creator>Oluşturan</creator>

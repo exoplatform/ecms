@@ -41,7 +41,7 @@
     </label>
     <button>
       <label>
-        <confirm>Ok</confirm>
+        <confirm>OK</confirm>
       </label>
     </button>
     <msg>
@@ -165,7 +165,7 @@
       <enableDragAndDrop>Habilitar Arrastar &amp; Soltar</enableDragAndDrop>
       <sortBy>Classificar por:</sortBy>
       <order>Ordenar por:</order>
-      <nodesPerPage>Nós por página:</nodesPerPage>
+      <nodesPerPage>Items per Page:</nodesPerPage>
     </label>
     <action>
       <Back>#{word.close}</Back>
@@ -254,7 +254,8 @@
       <UISelectRestorePath>Selecionar caminho de restauração</UISelectRestorePath>
       <UISEOForm>Gerenciar SEO</UISEOForm>
       <UISEOToolbarForm>Gerenciar SEO</UISEOToolbarForm>
-      <UIReadOnlyFileConfirmMessage>Abrir documento</UIReadOnlyFileConfirmMessage>
+      <UIReadOnlyFileConfirmMessage>Open Document</UIReadOnlyFileConfirmMessage>
+      <UIDocumentAutoVersionForm>Copy Document</UIDocumentAutoVersionForm>
     </title>
     <header>
       <workspace>Espaço de trabalho</workspace>
@@ -308,6 +309,8 @@
       <ViewMetadatas>Metadados</ViewMetadatas>
       <ViewRelations>Mostrar/Esconder relações</ViewRelations>
       <ShowJCRStructure>Mostrar/Esconder estrutura JCR</ShowJCRStructure>
+      <EditProperty>Edit Document Properties</EditProperty>
+      <UploadNewVersion>Upload a new version</UploadNewVersion>
     </tooltip>
     <msg>
       <cannot-action-in-rootnode>Você não pode executar esta ação no nó raiz.</cannot-action-in-rootnode>
@@ -596,6 +599,9 @@
       <WebDavView>Abrir no MS Office</WebDavView>
       <Download>Baixar</Download>
       <OpenDocument>Remote Edit</OpenDocument>
+      <EditProperty>Edit Document Properties</EditProperty>
+      <UploadNewVersion>Upload a new version</UploadNewVersion>
+      <CreateNewVersion>Create a new version</CreateNewVersion>
     </event>
   </ECMContextMenu>
  
@@ -706,17 +712,17 @@
       <namespace>Namespace</namespace>
       <multiple>Multiplo</multiple>
       <property_select>Adicione nova propriedade:</property_select>
-      <value0>Valor 0</value0>
-      <value1>Valor 1</value1>
-      <value2>Valor 2</value2>
-      <value3>Valor 3</value3>
-      <value4>Valor 4</value4>
-      <value5>Valor 5</value5>
-      <value6>Valor 6</value6>
-      <value7>Valor 7</value7>
-      <value8>Valor 8</value8>
-      <value9>Valor 9</value9>
-      <value10>Valor 10</value10>
+      <value0>Value 0</value0>
+      <value1>Value 1</value1>
+      <value2>Value 2</value2>
+      <value3>Value 3</value3>
+      <value4>Value 4</value4>
+      <value5>Value 5</value5>
+      <value6>Value 6</value6>
+      <value7>Value 7</value7>
+      <value8>Value 8</value8>
+      <value9>Value 9</value9>
+      <value10>Value 10</value10>
     </label>
     <action>
       <Save>#{word.save}</Save>
@@ -1324,7 +1330,7 @@
   -->
   <PopupUserSelector>
     <title>
-      <UIUserContainer>Selecionar permissão de usuário</UIUserContainer>
+      <UIUserContainer>Seletor de permissão</UIUserContainer>
     </title>
   </PopupUserSelector>
   <UIPopupTaxonomy>
@@ -1891,7 +1897,7 @@
     <msg>
       <name-exist>Nome da tag '{0}' existe.</name-exist>
       <tagName-invalid>Há alguns caracteres inválidos no nome da tag.</tagName-invalid>
-      <tagName-empty-or-invalid>O nome da tag está vazio, ou contém alguns caracteres inválidos.</tagName-empty-or-invalid>
+      <tagName-empty-or-invalid>The tag name is empty or contains some invalid characters.</tagName-empty-or-invalid>
       <tag-name-empty>Seu nome de tag está vazio</tag-name-empty>
       <tag-name-duplicate>Você informou tags duplicadas.</tag-name-duplicate>
       <tagName-too-long>Uma das tags inseridas é muito longa. As tags devem ter menos de 30 caracteres.</tagName-too-long>
@@ -1938,6 +1944,11 @@
   # Validator messages                                                              #
   ###################################################################################
   -->
+   <ECMPhoneFormatValidator>
+     <msg>
+       <Invalid>The field '{0}' contains invalid an Phone number. Please enter another value.</Invalid>
+     </msg>
+  </ECMPhoneFormatValidator>
   <ECMNameValidator>
     <msg>
       <Invalid-char>Há alguns caracteres inválidos no campo '{0}'. Coloque outro valor, por favor.</Invalid-char>
@@ -2344,7 +2355,7 @@
     <msg>
       <create-link-problem>Você não pode criar um link para o nó '{0}' em '{1}'.</create-link-problem>
       <dest-node-is-link>O nó destino '{0}' já é um link simbólico. Você não pode criar um link simbólico dentro dele</dest-node-is-link>
-      <selected-is-link>O nó selecionado '{0}' já é um link, você não pode criar um link apontando para outro link.</selected-is-link>
+      <selected-is-link>The selected node '{0}' is already a link. You cannot create a link that points to another link.</selected-is-link>
       <confirm-create-link>Você realmente deseja criar um link para este local?</confirm-create-link>
     </msg>
   </UIWorkingArea>
@@ -2424,15 +2435,17 @@
       <ReplaceData>Substituir dado</ReplaceData>
       <Back>Voltar para renomear</Back>
       <Keepfile>Manter ambos arquivos</Keepfile>
-<ReadOnly>Abrir como somente leitura</ReadOnly>
+<ReadOnly>Open Read-only</ReadOnly>
 <Cancel>Cancelar</Cancel>
+      <KeepBoth>Keep Both</KeepBoth>
+      <CreateNewVersion>Create a new version</CreateNewVersion>
     </label>
   </UIConfirmMessage>
 
   <UIRestoreConfirmMessage>
     <label>
       <Close>#{word.close}</Close>
-      <OK>Ok</OK>
+      <OK>OK</OK>
       <ReplaceData>Substituir dado</ReplaceData>
       <Back>Voltar para renomear</Back>
       <Keepfile>Manter ambos arquivos</Keepfile>
@@ -3067,9 +3080,9 @@
       <ShowDrives>Mostrar unidades</ShowDrives>
     </DrivesArea>
     <msg>
-      <no-view-found>Não existe visualização aplicada para sua permissão de acesso na unidade '{0}'.</no-view-found>
-      <access-denied>Acesso negado. Talvez você não tenha permissão no espaço de trabalho da unidade '{0}'.</access-denied>
-      <empty-drives>Acesso negado. Não há nenhuma unidade neste repositório ou você não tem permissão para acessar quaisquer unidades neste repositório.</empty-drives>
+      <no-view-found>There are no views applied for your access permission in drive '{0}'.</no-view-found>
+      <access-denied>Access denied. You may not have permission in the workspace of drive '{0}'.</access-denied>
+      <empty-drives>Access denied. Either there is no drive in this repository or you do not have permission to access any drives in this repository.</empty-drives>
       <workspace-not-exist>Unidade '{0}' foi armazenada em um espaço de trabalho não reconhecido. Por favor reconfigure esta unidade.</workspace-not-exist>
     </msg>
   </UIDrivesArea>
@@ -3158,6 +3171,7 @@
     <Keep>Manter os dois</Keep>
     <Replace>Substituir</Replace>
     <Canceled>Cancelado</Canceled>
+      <UploadNewVersion>Upload new version</UploadNewVersion>
     <Cancel>#{word.cancel}</Cancel>
     <AbortAllConfirmation>Você quer abortar todos os arquivos em andamento?</AbortAllConfirmation>
   </label>
@@ -3186,6 +3200,19 @@
   <property-name-incorrect>A propriedade nome está incorreta, por favor, entre com outro valor!</property-name-incorrect>
     </msg>
   </UIPropertyForm>
+  <UIDocumentAutoVersionForm>
+    <msg>A document {0} already exits. What do you want to do? </msg>
+    <UIChkRememberNonVersioned>
+      <label>Remember my choice for all others non-versioned documents</label>
+    </UIChkRememberNonVersioned>
+    <UIChkRememberVersioned>
+      <label>Remember my choice for all others versioned documents</label>
+    </UIChkRememberVersioned>
+  </UIDocumentAutoVersionForm>
+  <DocumentAuto>
+    <message>A new version of the document {0} has been created successfully.</message>
+    <messageMultiFile>New version(s) of versioned document(s) has been created.</messageMultiFile>
+  </DocumentAuto>
   <!--
   ###################################################################################
   # JCR Exceptions manager                                                              #

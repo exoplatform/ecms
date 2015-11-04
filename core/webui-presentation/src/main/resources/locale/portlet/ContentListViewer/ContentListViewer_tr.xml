@@ -60,8 +60,8 @@
       <UICLVConfigTargetPageFormInputSet>Sayfada Göster</UICLVConfigTargetPageFormInputSet>
       <content-not-found>Content not found.</content-not-found>
       <ContentPath>İçerik Yolu</ContentPath>
-      <Up>Up</Up>
-      <Down>Down</Down>
+      <Up>Yukarı</Up>
+      <Down>Aşağı</Down>
       <UICLVConfigCacheManagementLabel>İçerik Görünürlüğü</UICLVConfigCacheManagementLabel>
       <UICLVContentByQueryLabel>Content by Query</UICLVContentByQueryLabel>
       <UICLVConfigWorkspaceFormSelectBox>Çalışma Alanı</UICLVConfigWorkspaceFormSelectBox>

@@ -34,7 +34,7 @@
 
   <Drives>
     <label>
-      <ManagedSites>Керування сайтами</ManagedSites>
+      <ManagedSites>Site Management</ManagedSites>
       <SharedSite>Сайт спільного користування</SharedSite>
     </label>
   </Drives>

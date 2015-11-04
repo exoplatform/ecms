@@ -23,7 +23,7 @@
   <WebLink>
     <view>
       <label>
-        <url>Nettadresse</url>
+        <url>URL</url>
         <description>Beskrivelse</description>
       </label>
     </view>

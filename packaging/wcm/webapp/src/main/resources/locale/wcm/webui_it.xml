@@ -34,7 +34,7 @@
 
   <Drives>
     <label>
-      <ManagedSites>Gestione Siti</ManagedSites>
+      <ManagedSites>Site Management</ManagedSites>
       <SharedSite>Sito Condiviso</SharedSite>
     </label>
   </Drives>

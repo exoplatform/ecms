@@ -165,7 +165,7 @@
       <enableDragAndDrop>Ενεργοποίηση λειτουργίας "σύρσιμο &amp; απόθεση":</enableDragAndDrop>
       <sortBy>Ταξινόμηση κατά:</sortBy>
       <order>Ταξινόμηση κατά:</order>
-      <nodesPerPage>Κόμβοι ανά σελίδα:</nodesPerPage>
+      <nodesPerPage>Items per Page:</nodesPerPage>
     </label>
     <action>
       <Back>#{word.close}</Back>
@@ -254,7 +254,8 @@
       <UISelectRestorePath>Επιλέξτε διαδρομή για την επαναφορά</UISelectRestorePath>
       <UISEOForm>Διαχείριση βελτιστοποιήσεων μηχανών αναζήτησης (SEO)</UISEOForm>
       <UISEOToolbarForm>Διαχείριση βελτιστοποιήσεων μηχανών αναζήτησης (SEO)</UISEOToolbarForm>
-      <UIReadOnlyFileConfirmMessage>Open Document</UIReadOnlyFileConfirmMessage>
+      <UIReadOnlyFileConfirmMessage>Άνοιγμα εγγράφου</UIReadOnlyFileConfirmMessage>
+      <UIDocumentAutoVersionForm>Copy Document</UIDocumentAutoVersionForm>
     </title>
     <header>
       <workspace>Χώρος Εργασίας</workspace>
@@ -308,6 +309,8 @@
       <ViewMetadatas>Μεταδεδομένα</ViewMetadatas>
       <ViewRelations>Εμφάνιση/απόκρυψη σχέσεων</ViewRelations>
       <ShowJCRStructure>Εμφάνιση/απόκρυψη δομής</ShowJCRStructure>
+      <EditProperty>Edit Document Properties</EditProperty>
+      <UploadNewVersion>Upload a new version</UploadNewVersion>
     </tooltip>
     <msg>
       <cannot-action-in-rootnode>Δεν μπορείτε να πραγματοποιήσετε αυτήν την ενέργεια στον κόμβο ρίζας.</cannot-action-in-rootnode>
@@ -401,7 +404,7 @@
       <constraintviolation-exception>Το υποχρεωτικό στοιχείο jcr:uuid δεν βρέθηκε. Ο κόμβος μπορεί να έχει διαγραφεί ή αλλαχθεί. Παρακαλώ κάντε κλικ στο κουμπί Ανανέωση.</constraintviolation-exception>
       <path-not-found-exception>Αυτός ο κόμβος έχει διαγραφεί ή αλλάξει. Παρακαλώ κάντε κλικ στο κουμπί Ανανέωση.</path-not-found-exception>
       <not-exist-categories>Η κατηγορία δεν υπάρχει.</not-exist-categories>
-      <lock-node-read-only>This file is locked by user {0}. Open read-only ?</lock-node-read-only>
+      <lock-node-read-only>Αυτό το αρχείο είναι κλειδωμένο από το χρήστη {0}. Άνοιγμα μόνο για ανάγνωση;</lock-node-read-only>
     </msg>
   </UIPopupMenu>
   <!--
@@ -595,7 +598,10 @@
       <EmptyTrash>Άδειασμα κάδου διαγραμμένων</EmptyTrash>
       <WebDavView>Άνοιγμα στο Office</WebDavView>
       <Download>Μεταφόρτωση</Download>
-      <OpenDocument>Remote Edit</OpenDocument>
+      <OpenDocument>Απομακρυσμένη επεξεργασία</OpenDocument>
+      <EditProperty>Edit Document Properties</EditProperty>
+      <UploadNewVersion>Upload a new version</UploadNewVersion>
+      <CreateNewVersion>Create a new version</CreateNewVersion>
     </event>
   </ECMContextMenu>
  
@@ -1324,7 +1330,7 @@
   -->
   <PopupUserSelector>
     <title>
-      <UIUserContainer>Επιλέξτε ;άδεια χρήστη</UIUserContainer>
+      <UIUserContainer>Επιλογέας Δικαιωμάτων</UIUserContainer>
     </title>
   </PopupUserSelector>
   <UIPopupTaxonomy>
@@ -1493,7 +1499,7 @@
       <import-successful>Η εισαγωγή ολοκληρώθηκε με επιτυχία.</import-successful>
       <filename-invalid>Περιηγηθείτε για ένα αρχείο .xml για το πεδίο "Ανέβασμα αρχείου" για την εισαγωγή.</filename-invalid>
       <filetype-error>Δεν μπορεί να εισαχθεί το απεσταλμένο αρχείο. Το αρχείο .xml δεν είναι έγκυρο.</filetype-error>
-      <xml-invalid>There is an invalid character at position [row, column]:{0} in {1} file</xml-invalid>
+      <xml-invalid>Υπάρχει ένας μη έγκυρος χαρακτήρας στη θέση [γραμμή, στήλη]: {0} στο αρχείο {1}</xml-invalid>
       <mimetype-invalid>Μπορούν να εισαχθούν μόνο αρχεία .xml ή .zip.</mimetype-invalid>
       <access-denied>Δεν επιτρέπεται η πρόσβαση. Δεν επιτρέπεται να κάνετε εισαγωγή εκεί.</access-denied>
       <constraint-violation-exception>Αδύνατη εισαγωγή δεδομένων. Ο τύπος '{0}' δεν επιτρέπεται σε αυτήν τη θέση.</constraint-violation-exception>
@@ -1938,6 +1944,11 @@
   # Validator messages                                                              #
   ###################################################################################
   -->
+   <ECMPhoneFormatValidator>
+     <msg>
+       <Invalid>The field '{0}' contains invalid an Phone number. Please enter another value.</Invalid>
+     </msg>
+  </ECMPhoneFormatValidator>
   <ECMNameValidator>
     <msg>
       <Invalid-char>Το πεδίο '{0}' περιέχει κάποιους μη έγκυρους χαρακτήρες. Εισάγετε μια άλλη τιμή.</Invalid-char>
@@ -2344,7 +2355,7 @@
     <msg>
       <create-link-problem>Δεν μπορείτε να δημιουργήσετε μια σύνδεση για τον κόμβο '{0}' στο '{1}'.</create-link-problem>
       <dest-node-is-link>Ο κόμβος προορισμού '{0}' είναι ήδη μια συντόμευση, συνεπώς δεν μπορείτε να δημιουργήσετε μια συντόμευση μέσα σ' αυτήν.</dest-node-is-link>
-      <selected-is-link>Ο επιλεγμένος κόμβος '{0}' είναι ήδη μια συντόμευση, συνεπώς δεν μπορείτε να δημιουργήσετε μια συντόμευση σε μια άλλη συντόμευση.</selected-is-link>
+      <selected-is-link>The selected node '{0}' is already a link. You cannot create a link that points to another link.</selected-is-link>
       <confirm-create-link>Θέλετε να δημιουργήσετε μια συντόμευση σε αυτή τη θέση;</confirm-create-link>
     </msg>
   </UIWorkingArea>
@@ -2424,8 +2435,10 @@
       <ReplaceData>Αντικατάσταση των στοιχείων</ReplaceData>
       <Back>Επιστροφή στη Μετονομασία</Back>
       <Keepfile>Κρατήστε τα δύο αρχεία</Keepfile>
-<ReadOnly>Open Read-only</ReadOnly>
+<ReadOnly>Άνοιγμα μόνο για ανάγνωση</ReadOnly>
 <Cancel>Ακύρωση</Cancel>
+      <KeepBoth>Keep Both</KeepBoth>
+      <CreateNewVersion>Create a new version</CreateNewVersion>
     </label>
   </UIConfirmMessage>
 
@@ -2984,15 +2997,15 @@
       <user>Δημιουργός</user>
       <description>Περιγραφή</description>
     </header>
-    <create-version>New version is created</create-version>
+    <create-version>Δημιουργείται νέα έκδοση</create-version>
   </UIPublicationHistory>
   
   <UIPublicationSchedule>
     <label>
       <introduction>Μπορείτε να προγραμματίσετε τη δημοσίευση του εγγράφου σας. Επιλέξτε τις ημερομηνίες που θα θέλατε να δημοσιεύσετε το έγγραφο</introduction>
       <no-schedule-info>Δεν υπάρχει κανένα χρονοδιάγραμμα δημοσίευσης για το έγγραφό σας</no-schedule-info>
-      <UIPublicationPanelStartDateInput>Start Publication date</UIPublicationPanelStartDateInput>
-      <UIPublicationPanelEndDateInput>End Publication date</UIPublicationPanelEndDateInput>
+      <UIPublicationPanelStartDateInput>Ημερομηνία έναρξης δημοσίευσης</UIPublicationPanelStartDateInput>
+      <UIPublicationPanelEndDateInput>Ημερομηνία λήξης δημοσίευσης</UIPublicationPanelEndDateInput>
     </label>
     <msg>
       <save-finished>Το χρονοδιάγραμμα δημοσίευσης αποθηκεύτηκε επιτυχώς.</save-finished>
@@ -3158,6 +3171,7 @@
     <Keep>Διατήρηση και των δύο</Keep>
     <Replace>Αντικατάσταση</Replace>
     <Canceled>Ακυρώθηκε</Canceled>
+      <UploadNewVersion>Upload new version</UploadNewVersion>
     <Cancel>#{word.cancel}</Cancel>
     <AbortAllConfirmation>Θέλετε να ακυρώσετε όλα τα αρχεία σε εξέλιξη;</AbortAllConfirmation>
   </label>
@@ -3186,6 +3200,19 @@
   <property-name-incorrect>Το όνομα της ιδιότητας είναι εσφαλμένο, εισάγετε μια άλλη τιμή για αυτό!</property-name-incorrect>
     </msg>
   </UIPropertyForm>
+  <UIDocumentAutoVersionForm>
+    <msg>A document {0} already exits. What do you want to do? </msg>
+    <UIChkRememberNonVersioned>
+      <label>Remember my choice for all others non-versioned documents</label>
+    </UIChkRememberNonVersioned>
+    <UIChkRememberVersioned>
+      <label>Remember my choice for all others versioned documents</label>
+    </UIChkRememberVersioned>
+  </UIDocumentAutoVersionForm>
+  <DocumentAuto>
+    <message>A new version of the document {0} has been created successfully.</message>
+    <messageMultiFile>New version(s) of versioned document(s) has been created.</messageMultiFile>
+  </DocumentAuto>
   <!--
   ###################################################################################
   # JCR Exceptions manager                                                              #

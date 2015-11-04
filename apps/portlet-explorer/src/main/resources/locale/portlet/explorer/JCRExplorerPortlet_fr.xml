@@ -165,7 +165,7 @@
       <enableDragAndDrop>Glisser-déposer:</enableDragAndDrop>
       <sortBy>Trier par:</sortBy>
       <order>Ordre</order>
-      <nodesPerPage>Noeuds par page:</nodesPerPage>
+      <nodesPerPage>Elements par page:</nodesPerPage>
     </label>
     <action>
       <Back>#{word.close}</Back>
@@ -255,6 +255,7 @@
       <UISEOForm>Gérer SEO</UISEOForm>
       <UISEOToolbarForm>Gérer SEO</UISEOToolbarForm>
       <UIReadOnlyFileConfirmMessage>Ouvrir le Document</UIReadOnlyFileConfirmMessage>
+      <UIDocumentAutoVersionForm>Copy Document</UIDocumentAutoVersionForm>
     </title>
     <header>
       <workspace>Espace de Stockage</workspace>
@@ -308,6 +309,8 @@
       <ViewMetadatas>Métadonnées</ViewMetadatas>
       <ViewRelations>Montrer/Cacher les Relations</ViewRelations>
       <ShowJCRStructure>Monter/Cacher la Structure</ShowJCRStructure>
+      <EditProperty>Edit Document Properties</EditProperty>
+      <UploadNewVersion>Upload a new version</UploadNewVersion>
     </tooltip>
     <msg>
       <cannot-action-in-rootnode>Action interdite sur le noeud racine.</cannot-action-in-rootnode>
@@ -595,7 +598,10 @@
       <EmptyTrash>Supprimer</EmptyTrash>
       <WebDavView>Ouvrir dans MS Office</WebDavView>
       <Download>Télécharger</Download>
-      <OpenDocument>Remote Edit</OpenDocument>
+      <OpenDocument>Editer à Distance</OpenDocument>
+      <EditProperty>Edit Document Properties</EditProperty>
+      <UploadNewVersion>Upload a new version</UploadNewVersion>
+      <CreateNewVersion>Create a new version</CreateNewVersion>
     </event>
   </ECMContextMenu>
  
@@ -721,7 +727,7 @@
     <action>
       <Save>#{word.save}</Save>
       <Cancel>#{word.cancel}</Cancel>
-      <Reset>Réinitialiser</Reset>
+      <Reset>Nouvelle Propriété</Reset>
     </action>
     <msg>
       <name-invalid>Vous devez entrer un nom.</name-invalid>
@@ -1324,7 +1330,7 @@
   -->
   <PopupUserSelector>
     <title>
-      <UIUserContainer>Sélectionner un Utilisateur</UIUserContainer>
+      <UIUserContainer>Sélection de Permissions</UIUserContainer>
     </title>
   </PopupUserSelector>
   <UIPopupTaxonomy>
@@ -1647,7 +1653,7 @@
   <UIClipboard>
     <header>
       <path>Dossier</path>
-      <command>Cm</command>
+      <command/>
       <action>Act</action>
     </header>
     <label>
@@ -1718,7 +1724,7 @@
   <UIViewDocumentController>
     <tab>
       <label>
-        <UIViewDocumentInfo>Information</UIViewDocumentInfo>
+        <UIViewDocumentInfo>Information:</UIViewDocumentInfo>
       </label>
     </tab>
     <action>
@@ -1938,6 +1944,11 @@
   # Validator messages																														  #
   ###################################################################################
   -->
+   <ECMPhoneFormatValidator>
+     <msg>
+       <Invalid>Le champ '{0}' contient un numéro de téléphone non valide. Veuillez entrer une autre valeur.</Invalid>
+     </msg>
+  </ECMPhoneFormatValidator>
   <ECMNameValidator>
     <msg>
       <Invalid-char>Caractères invalides détectés dans le champ '{0}'.</Invalid-char>
@@ -2344,7 +2355,7 @@
     <msg>
       <create-link-problem>;Vous ne pouvez pas créer de lien entre les noeuds '{0}' et '{1}'</create-link-problem>
       <dest-node-is-link>Le noeud cible '{0}' est déjà un raccourci. Il est donc impossible de créer le raccourci.</dest-node-is-link>
-      <selected-is-link>Le noeud sélectionné '{0}' est un raccourci, vous ne pouvez pas créer un lien qui pointe sur un autre lien.</selected-is-link>
+      <selected-is-link>Le noeud sélectionné '{0}' est déjà un lien, vous ne pouvez pas créer un lien qui pointe sur un autre lien.</selected-is-link>
       <confirm-create-link>Souhaitez-vous réellement créer un raccourci à cet endroit?</confirm-create-link>
     </msg>
   </UIWorkingArea>
@@ -2426,6 +2437,8 @@
 	    <Keepfile>Gardez les deux fichiers</Keepfile>
 <ReadOnly>Ouvrir en lecture seule</ReadOnly>
 <Cancel>Annuler</Cancel>
+      <KeepBoth>Keep Both</KeepBoth>
+      <CreateNewVersion>Create a new version</CreateNewVersion>
     </label>
 	</UIConfirmMessage>
 
@@ -3158,6 +3171,7 @@
     <Keep>Garder les deux</Keep>
     <Replace>Remplacer</Replace>
     <Canceled>Annulé</Canceled>
+      <UploadNewVersion>Upload new version</UploadNewVersion>
     <Cancel>#{word.cancel}</Cancel>
     <AbortAllConfirmation>Voulez vous annuler tous les fichiers en cours de transfert?</AbortAllConfirmation>
   	</label>
@@ -3186,6 +3200,19 @@
   <property-name-incorrect>Le nom de propriété est incorrect, veuillez entrer une autre valeur.</property-name-incorrect>
     </msg>
   </UIPropertyForm>
+  <UIDocumentAutoVersionForm>
+    <msg>A document {0} already exits. What do you want to do? </msg>
+    <UIChkRememberNonVersioned>
+      <label>Remember my choice for all others non-versioned documents</label>
+    </UIChkRememberNonVersioned>
+    <UIChkRememberVersioned>
+      <label>Remember my choice for all others versioned documents</label>
+    </UIChkRememberVersioned>
+  </UIDocumentAutoVersionForm>
+  <DocumentAuto>
+    <message>A new version of the document {0} has been created successfully.</message>
+    <messageMultiFile>New version(s) of versioned document(s) has been created.</messageMultiFile>
+  </DocumentAuto>
   <!--
   ###################################################################################
   # JCR Exceptions manager                                                              #

@@ -133,7 +133,7 @@
         <end-time>#{Ecm.dialog.label.end-time}</end-time>
         <repeat-count>#{Ecm.dialog.label.repeat-count}</repeat-count>
         <time-inteval>#{Ecm.dialog.label.time-interval}</time-inteval>
-        <cron-expression>Cron Expression</cron-expression>
+        <cron-expression>Cron-Ausdruck</cron-expression>
         <description>#{word.description}</description>
       </label>
     </dialog>

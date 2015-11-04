@@ -148,7 +148,7 @@
     <title>
       <UIOneNodePathSelector>Selectați locația</UIOneNodePathSelector>
       <UIPermissionSelector>Parcurgere drepturi</UIPermissionSelector>
-      <UICategoriesSelector>Add Categories</UICategoriesSelector>
+      <UICategoriesSelector>Adaugă categorii</UICategoriesSelector>
     </title>
   </PopupComponent>
 

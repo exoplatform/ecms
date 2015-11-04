@@ -87,7 +87,7 @@
 -->
   <UITaxonomyTreeMainForm>
     <action>
-      <Reset>تنظیم مجدد</Reset>
+      <Reset>Reset</Reset>
     </action>
     <msg>
       <name-not-allowed>نام ممنوع</name-not-allowed>
@@ -990,6 +990,10 @@
 <addSymLink>افزودن Symlink</addSymLink>
       <checkIn>Check In</checkIn>
       <checkOut>Check Out</checkOut>
+      <shareDocuments>Share</shareDocuments>
+      <openDocument>Remote Edit</openDocument>
+      <editProperty>Edit Document Properties</editProperty>
+      <uploadNewVersion>Upload a new version</uploadNewVersion>
     </label>
     <action>
       <Save>#{word.save}</Save>      
@@ -1019,7 +1023,7 @@
   </UIViewFormTabPane>
   <PopupViewPermission>
     <title>
-      <UIPermissionSelector>انتخاب مجوز</UIPermissionSelector>
+      <UIPermissionSelector>Permission Selector</UIPermissionSelector>
     </title>
   </PopupViewPermission>
 
@@ -1070,7 +1074,7 @@
   -->
   <UITemplateForm>
     <title>
-      <AddPermission>اضافه کردن مجوز</AddPermission>
+      <AddPermission>Add Permission</AddPermission>
     </title>
     <action>
       <Save>#{word.save}</Save>
@@ -1382,8 +1386,8 @@
     <title>Add a permission to this node</title>
     <action>
       <Close>#{word.close}</Close>
-      <Save>ذخيره</Save>
-      <Reset>تنظیم مجدد</Reset>
+      <Save>Save</Save>
+      <Reset>Reset</Reset>
     </action>
     <msg>
       <checkbox-require>لطفا حداقل یک مجوز را انتخاب کنید.</checkbox-require>
@@ -1401,7 +1405,7 @@
   
   <PopupTaxonomyTreePermission>
     <title>
-      <UIPermissionSelector>مجوز را انتخاب کنید</UIPermissionSelector>
+      <UIPermissionSelector>Permission Selector</UIPermissionSelector>
     </title>
    </PopupTaxonomyTreePermission>
    
@@ -1733,7 +1737,7 @@
   -->
   <AddNewTemplatePermission>
     <title>
-      <UIPermissionSelector>مجوز را انتخاب کنید</UIPermissionSelector>
+      <UIPermissionSelector>Permission Selector</UIPermissionSelector>
     </title>
   </AddNewTemplatePermission>
   <TemplatePermission>
@@ -1774,12 +1778,12 @@
   </DialogForm>
   <DialogFormTemplatePermission>
     <title>
-      <UIPermissionSelector>انتخاب مجوز</UIPermissionSelector>
+      <UIPermissionSelector>Permission Selector</UIPermissionSelector>
     </title>
   </DialogFormTemplatePermission>
   <ViewFormTemplatePermission>
     <title>
-      <UIPermissionSelector>انتخاب مجوز</UIPermissionSelector>
+      <UIPermissionSelector>Permission Selector</UIPermissionSelector>
     </title>
   </ViewFormTemplatePermission>
   <TemplateContainerPopup>
@@ -1970,7 +1974,7 @@
   </EditQueryForm>
 <PermissionPopup>
   <title>
-    <UIGroupMemberSelector>مجوز را انتخاب کنید</UIGroupMemberSelector>
+    <UIGroupMemberSelector>Permission Selector</UIGroupMemberSelector>
   </title>
 </PermissionPopup>
   <!--
@@ -2021,6 +2025,16 @@
       <UITagStyleForm>تنظیمات استیل ویرایش برچسب</UITagStyleForm>
     </title>
   </FolksonomyPopup>
+  <!--
+  ###################################################################################
+  # ECMPhoneFormatValidator                                       #
+  ###################################################################################
+  -->
+  <ECMPhoneFormatValidator>
+    <msg>
+      <Invalid>The field '{0}' contains an invalid Phone number. Please enter another value.</Invalid>
+    </msg>
+  </ECMPhoneFormatValidator>
   <!--
   ###################################################################################
   # org.exoplatform.ecm.jcr.ECMNameValidator  #
@@ -2417,6 +2431,7 @@
 <UIPermissionTreeForm>
 <action>
 <Save>Save</Save>
+<Cancel>#{word.cancel}</Cancel>
 <Reset>Reset</Reset>
 <NextAddAction>بعدی</NextAddAction>
 <Previous>قبلی</Previous>

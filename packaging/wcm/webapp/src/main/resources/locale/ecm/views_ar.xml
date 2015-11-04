@@ -30,7 +30,7 @@
         <comment-by>تم التعليق عليها من طرف</comment-by>
         <email>عنوان البريد الإلكتروني</email>
         <site>الموقع</site>
-        <lastComment>آخر تعليق تمّ ارساله بواسطة {user} على السّاعة {time}</lastComment>
+        <lastComment>Last comment posted by {user} at {time}</lastComment>
       </label>
     </view>
   </Comment>
@@ -41,11 +41,11 @@
   <File>
     <view>
       <label>
-        <not-viewable>العرض المُسبق لهذا الملفّ غير متوفّر.</not-viewable>
-        <pdf-max-size>العرض المُسبق لهذا الملفّ غير متوفّر لكلّ محتوى حجمه يفوق  {0} ميجابت.</pdf-max-size>
-        <pdf-max-page>العرض المُسبق غير متوفّر لكلّ محتوى عدد صفحاته يفوق الـ {0} صفحة .</pdf-max-page>
-        <using-webDAV>أو فتحه بواسطة مايكروسوفت أوفيس</using-webDAV>
-        <open-on-desktop>فتح الملفّ على سطح المكتب</open-on-desktop>
+        <not-viewable>The preview of this document is not available.</not-viewable>
+        <pdf-max-size>The preview is not available for content larger than {0} MB.</pdf-max-size>
+        <pdf-max-page>The preview is not available for content with over {0} pages.</pdf-max-page>
+        <using-webDAV>or Open in MS Office</using-webDAV>
+        <open-on-desktop>Open on Desktop</open-on-desktop>
         <file-size-too-big>محتوى هذا الملف كبير جدا. لتتمكن من عرضه يُرجى تنزيله</file-size-too-big>
         <webDAV>مشهد WebDAV</webDAV>
         <download>تنزيل هذا الملف</download>
@@ -63,7 +63,7 @@
       <label>
         <from>من:</from>
         <to>إلى:</to>
-        <cc>Cc:</cc>
+        <cc>إضافة نسخة إلى:</cc>
         <date>التاريخ:</date>
         <subject>الموضوع:</subject>
         <attachment>إرفاق ملف:</attachment>
@@ -142,7 +142,7 @@
     <view>
       <label>
         <not-avaliable>غير متوفرة</not-avaliable>
-        <core-elements>العناصر الأساسية</core-elements>
+        <core-elements>Core Elements</core-elements>
         <title>العنوان</title>
         <creator>الصانع</creator>
         <subject>الموضوع</subject>

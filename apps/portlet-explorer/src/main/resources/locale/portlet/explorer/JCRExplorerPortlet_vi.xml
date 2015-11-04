@@ -165,7 +165,7 @@
       <enableDragAndDrop>Bật tính năng Kéo Thả:</enableDragAndDrop>
       <sortBy>Phân loại theo:</sortBy>
       <order>Xếp thứ tự theo:</order>
-      <nodesPerPage>Số nút/1 trang:</nodesPerPage>
+      <nodesPerPage>Items per Page:</nodesPerPage>
     </label>
     <action>
       <Back>Đóng lại</Back>
@@ -254,7 +254,8 @@
       <UISelectRestorePath>Chọn Đường dẫn Khôi phục</UISelectRestorePath>
       <UISEOForm>Quản lý SEO</UISEOForm>
       <UISEOToolbarForm>Quản lý SEO</UISEOToolbarForm>
-      <UIReadOnlyFileConfirmMessage>Mở tài liệu</UIReadOnlyFileConfirmMessage>
+      <UIReadOnlyFileConfirmMessage>Open Document</UIReadOnlyFileConfirmMessage>
+      <UIDocumentAutoVersionForm>Copy Document</UIDocumentAutoVersionForm>
     </title>
     <header>
       <workspace>Không gian làm việc</workspace>
@@ -308,6 +309,8 @@
       <ViewMetadatas>Siêu dữ liệu</ViewMetadatas>
       <ViewRelations>Hiện/Ẩn Quan hệ</ViewRelations>
       <ShowJCRStructure>Hiện/Ẩn Cấu trúc Nội dung</ShowJCRStructure>
+      <EditProperty>Edit Document Properties</EditProperty>
+      <UploadNewVersion>Upload a new version</UploadNewVersion>
     </tooltip>
     <msg>
       <cannot-action-in-rootnode>Bạn không thể thực hiện hành động này ở nút gốc.</cannot-action-in-rootnode>
@@ -596,6 +599,9 @@
       <WebDavView>Mở bằng MS Office</WebDavView>
       <Download>Tải về</Download>
       <OpenDocument>Remote Edit</OpenDocument>
+      <EditProperty>Edit Document Properties</EditProperty>
+      <UploadNewVersion>Upload a new version</UploadNewVersion>
+      <CreateNewVersion>Create a new version</CreateNewVersion>
     </event>
   </ECMContextMenu>
  
@@ -1324,7 +1330,7 @@
   -->
   <PopupUserSelector>
     <title>
-      <UIUserContainer>Chọn Phân quyền Người dùng</UIUserContainer>
+      <UIUserContainer>Chọn Quyền</UIUserContainer>
     </title>
   </PopupUserSelector>
   <UIPopupTaxonomy>
@@ -1493,7 +1499,7 @@
       <import-successful>Đã nhập thành công.</import-successful>
       <filename-invalid>Duyệt tệp tin .xml cho trường 'Tải tệp tin' để nhập vào.</filename-invalid>
       <filetype-error>Không thể nhập tệp tin đã tải lên. Tệp tin .xml này có thể không hợp lệ.</filetype-error>
-      <xml-invalid>Có một kí tự không hợp lệ ở vị trí [hàng, cột]:{0} ở tệp {1}.</xml-invalid>
+      <xml-invalid>There is an invalid character at position [row, column]:{0} in {1} file</xml-invalid>
       <mimetype-invalid>Bạn chỉ có thể nhập các tệp tin dạng .xml hoặc .zip.</mimetype-invalid>
       <access-denied>Truy nhập bị từ chối. Bạn không được phép nhập ở đây.</access-denied>
       <constraint-violation-exception>Không thể nhập dữ liệu. Loại '{0}' không được cho phép trong vị trí này.</constraint-violation-exception>
@@ -1938,6 +1944,11 @@
   # Validator messages                                                              #
   ###################################################################################
   -->
+   <ECMPhoneFormatValidator>
+     <msg>
+       <Invalid>The field '{0}' contains invalid an Phone number. Please enter another value.</Invalid>
+     </msg>
+  </ECMPhoneFormatValidator>
   <ECMNameValidator>
     <msg>
       <Invalid-char>Có một số kí tự không hợp lệ trong trường '{0}'. Vui lòng nhập giá trị khác!</Invalid-char>
@@ -2155,7 +2166,7 @@
 
   <anyPermission>
     <title>
-      <AddAnyPermission>Tất cả người dùng</AddAnyPermission>
+      <AddAnyPermission>Thiết lập cho phép bất kỳ</AddAnyPermission>
     </title>
   </anyPermission>
   <!--
@@ -2344,7 +2355,7 @@
     <msg>
       <create-link-problem>Bạn không thể tạo liên kết cho nút '{0}' tại '{1}'.</create-link-problem>
       <dest-node-is-link>Nút điểm đến '{0}' đã là một symlink. Vì vậy, bạn không thể tạo symlink bên trong nó.</dest-node-is-link>
-      <selected-is-link>Nút được chọn '{0}' đã là một symlink. Vì vậy, bạn không thể tạo một liên kết trỏ tới một liên kết khác.</selected-is-link>
+      <selected-is-link>The selected node '{0}' is already a link. You cannot create a link that points to another link.</selected-is-link>
       <confirm-create-link>Bạn có muốn tạo liên kết đến vị trí này không?</confirm-create-link>
     </msg>
   </UIWorkingArea>
@@ -2426,6 +2437,8 @@
       <Keepfile>Giữ cả hai tệp</Keepfile>
 <ReadOnly>Open Read-only</ReadOnly>
 <Cancel>Hủy bỏ</Cancel>
+      <KeepBoth>Keep Both</KeepBoth>
+      <CreateNewVersion>Create a new version</CreateNewVersion>
     </label>
   </UIConfirmMessage>
 
@@ -3158,6 +3171,7 @@
     <Keep>Giữ cả hai</Keep>
     <Replace>Thay thế</Replace>
     <Canceled>Huỷ bỏ</Canceled>
+      <UploadNewVersion>Upload new version</UploadNewVersion>
     <Cancel>#{word.cancel}</Cancel>
     <AbortAllConfirmation>Bạn có muốn hủy bỏ tất cả các tập tin đang được tải lên?</AbortAllConfirmation>
   </label>
@@ -3186,6 +3200,19 @@
   <property-name-incorrect>Tên thuộc tính không hợp lệ, hãy điền vào giá trị khác!</property-name-incorrect>
     </msg>
   </UIPropertyForm>
+  <UIDocumentAutoVersionForm>
+    <msg>A document {0} already exits. What do you want to do? </msg>
+    <UIChkRememberNonVersioned>
+      <label>Remember my choice for all others non-versioned documents</label>
+    </UIChkRememberNonVersioned>
+    <UIChkRememberVersioned>
+      <label>Remember my choice for all others versioned documents</label>
+    </UIChkRememberVersioned>
+  </UIDocumentAutoVersionForm>
+  <DocumentAuto>
+    <message>A new version of the document {0} has been created successfully.</message>
+    <messageMultiFile>New version(s) of versioned document(s) has been created.</messageMultiFile>
+  </DocumentAuto>
   <!--
   ###################################################################################
   # JCR Exceptions manager                                                              #

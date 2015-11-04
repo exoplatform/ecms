@@ -18,8 +18,8 @@
       <Document>Έγγραφο</Document>
       <DocumentAndPage>Έγγραφο και σελίδα</DocumentAndPage>
       <documentandpage>Έγγραφο και σελίδα</documentandpage>
-      <results>Results {0} to {1} for {2}</results>
-      <oneResult>Only one result for {0}</oneResult>
+      <results>Αποτελέσματα: {0} από {1} για {2}</results>
+      <oneResult>Μόνο ένα αποτέλεσμα για {0}</oneResult>
       <ofAboutCaption>από περίπου</ofAboutCaption>
       <timeUnitCaption>δευτερόλεπτα</timeUnitCaption>
       <similar>Σελίδες όπου εμφανίζεται το ίδιο περιεχόμενο</similar>

@@ -19,7 +19,7 @@
       <DocumentAndPage>Document i Pàgina</DocumentAndPage>
       <documentandpage>Document i Pàgina</documentandpage>
       <results>Resultats {0} a {1} de {2}</results>
-      <oneResult>Only one result for {0}</oneResult>
+      <oneResult>Un únic resultat per a {0}</oneResult>
       <ofAboutCaption>d'uns</ofAboutCaption>
       <timeUnitCaption>segons</timeUnitCaption>
       <similar>Pàgines on apareix el mateix contingut</similar>

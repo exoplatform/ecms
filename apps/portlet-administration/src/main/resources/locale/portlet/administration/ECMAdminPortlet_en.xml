@@ -1023,7 +1023,7 @@
   </UIViewFormTabPane>
   <PopupViewPermission>
     <title>
-      <UIPermissionSelector>Select Permission</UIPermissionSelector>
+      <UIPermissionSelector>Permission Selector</UIPermissionSelector>
     </title>
   </PopupViewPermission>
 		
@@ -1405,7 +1405,7 @@
   
   <PopupTaxonomyTreePermission>
     <title>
-      <UIPermissionSelector>Select Permission</UIPermissionSelector>
+      <UIPermissionSelector>Permission Selector</UIPermissionSelector>
     </title>
    </PopupTaxonomyTreePermission>
    
@@ -1737,7 +1737,7 @@
   -->
   <AddNewTemplatePermission>
     <title>
-      <UIPermissionSelector>Select Permission</UIPermissionSelector>
+      <UIPermissionSelector>Permission Selector</UIPermissionSelector>
     </title>
   </AddNewTemplatePermission>
   <TemplatePermission>
@@ -1778,12 +1778,12 @@
   </DialogForm>
   <DialogFormTemplatePermission>
     <title>
-      <UIPermissionSelector>Select Permission</UIPermissionSelector>
+      <UIPermissionSelector>Permission Selector</UIPermissionSelector>
     </title>
   </DialogFormTemplatePermission>
   <ViewFormTemplatePermission>
     <title>
-      <UIPermissionSelector>Select Permission</UIPermissionSelector>
+      <UIPermissionSelector>Permission Selector</UIPermissionSelector>
     </title>
   </ViewFormTemplatePermission>
   <TemplateContainerPopup>
@@ -1974,7 +1974,7 @@
   </EditQueryForm>
 	<PermissionPopup>
 	  <title>
-	    <UIGroupMemberSelector>Select Permission</UIGroupMemberSelector>
+    <UIGroupMemberSelector>Permission Selector</UIGroupMemberSelector>
 	  </title>
 	</PermissionPopup>
   <!--
@@ -2032,7 +2032,7 @@
   -->
   <ECMPhoneFormatValidator>
     <msg>
-      <Invalid>The field '{0}' contains invalid Phone number. Please enter another value.</Invalid>
+      <Invalid>The field '{0}' contains an invalid Phone number. Please enter another value.</Invalid>
     </msg>
   </ECMPhoneFormatValidator>
   <!--

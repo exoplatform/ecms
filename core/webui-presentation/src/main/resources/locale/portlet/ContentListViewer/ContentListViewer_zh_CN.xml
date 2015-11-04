@@ -41,27 +41,27 @@
       <UICLVConfigDisplayTemplateFormSelectBox>模板</UICLVConfigDisplayTemplateFormSelectBox>
       <UICLVConfigPaginatorTemplateFormSelectBox>分页程序</UICLVConfigPaginatorTemplateFormSelectBox>
       <UICLVConfigItemsPerPageFormStringInput>每页显示</UICLVConfigItemsPerPageFormStringInput>
-      <UICLVConfigShowIllustrationFormCheckboxInput>Show Image</UICLVConfigShowIllustrationFormCheckboxInput>
-      <UICLVConfigShowSummaryFormCheckboxInput>Show Summary</UICLVConfigShowSummaryFormCheckboxInput>
-      <UICLVConfigShowHeaderFormCheckboxInput>Show Header</UICLVConfigShowHeaderFormCheckboxInput>
-      <UICLVConfigShowRefreshFormCheckboxInput>Show Refresh</UICLVConfigShowRefreshFormCheckboxInput>
+      <UICLVConfigShowIllustrationFormCheckboxInput>显示图像</UICLVConfigShowIllustrationFormCheckboxInput>
+      <UICLVConfigShowSummaryFormCheckboxInput>显示摘要</UICLVConfigShowSummaryFormCheckboxInput>
+      <UICLVConfigShowHeaderFormCheckboxInput>显示页眉</UICLVConfigShowHeaderFormCheckboxInput>
+      <UICLVConfigShowRefreshFormCheckboxInput>显示刷新</UICLVConfigShowRefreshFormCheckboxInput>
       <UICLVConfigShowTitleFormCheckboxInput>显示标题</UICLVConfigShowTitleFormCheckboxInput>
       <UICLVConfigShowDateCreatedFormCheckboxInput>显示日期</UICLVConfigShowDateCreatedFormCheckboxInput>
-      <UICLVConfigShowLinkFormCheckboxInput>Show Link</UICLVConfigShowLinkFormCheckboxInput>
-      <UICLVConfigShowReadmoreFormCheckboxInput>Show More Links</UICLVConfigShowReadmoreFormCheckboxInput>
-      <UICLVConfigAllowDynamicUrlStringInput>Allow Dynamic URL</UICLVConfigAllowDynamicUrlStringInput>
-      <UICLVConfigShowRssLinkFormCheckboxInput>Show RSS Link</UICLVConfigShowRssLinkFormCheckboxInput>
-      <UICLVConfigShowAutomaticDetectionCheckboxInput>Automatic Detection</UICLVConfigShowAutomaticDetectionCheckboxInput>
+      <UICLVConfigShowLinkFormCheckboxInput>显示链接</UICLVConfigShowLinkFormCheckboxInput>
+      <UICLVConfigShowReadmoreFormCheckboxInput>显示更多链接</UICLVConfigShowReadmoreFormCheckboxInput>
+      <UICLVConfigAllowDynamicUrlStringInput>允许动态 URL</UICLVConfigAllowDynamicUrlStringInput>
+      <UICLVConfigShowRssLinkFormCheckboxInput>显示 RSS 链接</UICLVConfigShowRssLinkFormCheckboxInput>
+      <UICLVConfigShowAutomaticDetectionCheckboxInput>自动检测</UICLVConfigShowAutomaticDetectionCheckboxInput>
       <AdvancedBlock>高级</AdvancedBlock>
       <UICLVConfigDynamicNavigationLabel>动态导航</UICLVConfigDynamicNavigationLabel>
-      <UICLVConfigContextualFolderRadioBoxInput>Contextual Folder</UICLVConfigContextualFolderRadioBoxInput>
+      <UICLVConfigContextualFolderRadioBoxInput>背景文件夹</UICLVConfigContextualFolderRadioBoxInput>
       <UICLVConfigShowCLVByStringInput>每页显示</UICLVConfigShowCLVByStringInput>
       <UICLVConfigshowSCVWithStringInput>与</UICLVConfigshowSCVWithStringInput>
       <UICLVConfigTargetPageFormInputSet>在页中显示</UICLVConfigTargetPageFormInputSet>
-      <content-not-found>Content not found.</content-not-found>
+      <content-not-found>找不到的内容。</content-not-found>
       <ContentPath>内容路径</ContentPath>
-      <Up>Up</Up>
-      <Down>Down</Down>
+      <Up>向上</Up>
+      <Down>向下</Down>
       <UICLVConfigCacheManagementLabel>内容可见性</UICLVConfigCacheManagementLabel>
       <UICLVContentByQueryLabel>Content by Query</UICLVContentByQueryLabel>
       <UICLVConfigWorkspaceFormSelectBox>工作区</UICLVConfigWorkspaceFormSelectBox>

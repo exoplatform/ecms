@@ -165,7 +165,7 @@
       <enableDragAndDrop>Enable Drag &amp; Drop:</enableDragAndDrop>
       <sortBy>Sort by:</sortBy>
       <order>Order by:</order>
-      <nodesPerPage>Nodes Per Page:</nodesPerPage>
+      <nodesPerPage>Items per Page:</nodesPerPage>
     </label>
     <action>
       <Back>#{word.close}</Back>
@@ -254,6 +254,8 @@
       <UISelectRestorePath>Select Restore Path</UISelectRestorePath>
       <UISEOForm>Manage SEO</UISEOForm>
       <UISEOToolbarForm>Manage SEO</UISEOToolbarForm>
+      <UIReadOnlyFileConfirmMessage>Open Document</UIReadOnlyFileConfirmMessage>
+      <UIDocumentAutoVersionForm>Copy Document</UIDocumentAutoVersionForm>
     </title>
     <header>
       <workspace>Workspace</workspace>
@@ -307,6 +309,8 @@
       <ViewMetadatas>Metadata</ViewMetadatas>
       <ViewRelations>Show/Hide Relations</ViewRelations>
       <ShowJCRStructure>Show/Hide Content Structure</ShowJCRStructure>
+      <EditProperty>Edit Document Properties</EditProperty>
+      <UploadNewVersion>Upload a new version</UploadNewVersion>
     </tooltip>
     <msg>
       <cannot-action-in-rootnode>You cannot perform this action in the root node.</cannot-action-in-rootnode>
@@ -400,6 +404,7 @@
       <constraintviolation-exception>The mandatory item jcr:uuid was not found. The node may have been deleted or changed. Please click the Refresh button.</constraintviolation-exception>
       <path-not-found-exception>This node was deleted or changed. Please click the Refresh button.</path-not-found-exception>
       <not-exist-categories>The category does not exist.</not-exist-categories>
+      <lock-node-read-only>This file is locked by user {0}. Open read-only ?</lock-node-read-only>
     </msg>
   </UIPopupMenu>
   <!--
@@ -592,6 +597,11 @@
       <RestoreFromTrash>Restore from Trash</RestoreFromTrash>
       <EmptyTrash>Empty Trash</EmptyTrash>
       <WebDavView>Open in MS Office</WebDavView>
+      <Download>Download</Download>
+      <OpenDocument>Remote Edit</OpenDocument>
+      <EditProperty>Edit Document Properties</EditProperty>
+      <UploadNewVersion>Upload a new version</UploadNewVersion>
+      <CreateNewVersion>Create a new version</CreateNewVersion>
     </event>
   </ECMContextMenu>
  
@@ -702,6 +712,17 @@
       <namespace>Namespace:</namespace>
       <multiple>Multiple:</multiple>
       <property_select>Add New Property:</property_select>
+      <value0>Value 0</value0>
+      <value1>Value 1</value1>
+      <value2>Value 2</value2>
+      <value3>Value 3</value3>
+      <value4>Value 4</value4>
+      <value5>Value 5</value5>
+      <value6>Value 6</value6>
+      <value7>Value 7</value7>
+      <value8>Value 8</value8>
+      <value9>Value 9</value9>
+      <value10>Value 10</value10>
     </label>
     <action>
       <Save>#{word.save}</Save>
@@ -1309,7 +1330,7 @@
   -->
   <PopupUserSelector>
     <title>
-      <UIUserContainer>Select User Permission</UIUserContainer>
+      <UIUserContainer>Permission Selector</UIUserContainer>
     </title>
   </PopupUserSelector>
   <UIPopupTaxonomy>
@@ -1478,6 +1499,7 @@
       <import-successful>Imported successfully.</import-successful>
       <filename-invalid>Browse an .xml file for the 'Upload File' field to import.</filename-invalid>
       <filetype-error>Cannot import the uploaded file. The .xml file may be invalid.</filetype-error>
+      <xml-invalid>There is an invalid character at position [row, column]:{0} in {1} file</xml-invalid>
       <mimetype-invalid>You can only import .xml or .zip files.</mimetype-invalid>
       <access-denied>Access denied. You are not allowed to import there.</access-denied>
       <constraint-violation-exception>Impossible to import data. The type '{0}' is not allowed in this location.</constraint-violation-exception>
@@ -1875,6 +1897,7 @@
     <msg>
       <name-exist>The tag name '{0}' already exists.</name-exist>
       <tagName-invalid>The tag name contains some invalid characters.</tagName-invalid>
+      <tagName-empty-or-invalid>The tag name is empty or contains some invalid characters.</tagName-empty-or-invalid>
       <tag-name-empty>Your tag name is empty</tag-name-empty>
       <tag-name-duplicate>The input tag names are duplicate.</tag-name-duplicate>
       <tagName-too-long>One of the tags entered was too long. The tag name must be less than 30 characters.</tagName-too-long>
@@ -1921,6 +1944,11 @@
   # Validator messages                                                              #
   ###################################################################################
   -->
+   <ECMPhoneFormatValidator>
+     <msg>
+       <Invalid>The field '{0}' contains invalid an Phone number. Please enter another value.</Invalid>
+     </msg>
+  </ECMPhoneFormatValidator>
   <ECMNameValidator>
     <msg>
       <Invalid-char>The field '{0}' contains some invalid characters. Please enter another value.</Invalid-char>
@@ -2327,7 +2355,7 @@
     <msg>
       <create-link-problem>You cannot create a link for node '{0}' at '{1}'.</create-link-problem>
       <dest-node-is-link>The destination node '{0}' is already a symlink, so you cannot create a symlink inside it.</dest-node-is-link>
-      <selected-is-link>The selected node '{0}' is already a link, so you cannot create a link point to another link.</selected-is-link>
+      <selected-is-link>The selected node '{0}' is already a link. You cannot create a link that points to another link.</selected-is-link>
       <confirm-create-link>Do you want to create a link to this location?</confirm-create-link>
     </msg>
   </UIWorkingArea>
@@ -2407,6 +2435,10 @@
       <ReplaceData>Replace Data</ReplaceData>
       <Back>Back to Rename</Back>
       <Keepfile>Keep both files</Keepfile>
+<ReadOnly>Open Read-only</ReadOnly>
+<Cancel>Cancel</Cancel>
+      <KeepBoth>Keep Both</KeepBoth>
+      <CreateNewVersion>Create a new version</CreateNewVersion>
     </label>
   </UIConfirmMessage>
 
@@ -2965,12 +2997,15 @@
       <user>Author</user>
       <description>Description</description>
     </header>
+    <create-version>New version is created</create-version>
   </UIPublicationHistory>
   
   <UIPublicationSchedule>
     <label>
       <introduction>You can schedule the publication of your document. Select the dates you would like to see your document published</introduction>
       <no-schedule-info>There is no publication schedule for your document</no-schedule-info>
+      <UIPublicationPanelStartDateInput>Start Publication date</UIPublicationPanelStartDateInput>
+      <UIPublicationPanelEndDateInput>End Publication date</UIPublicationPanelEndDateInput>
     </label>
     <msg>
       <save-finished>Your new publication schedule was saved successfully.</save-finished>
@@ -3044,6 +3079,12 @@
     <DrivesArea>
       <ShowDrives>Show Drives</ShowDrives>
     </DrivesArea>
+    <msg>
+      <no-view-found>There are no views applied for your access permission in drive '{0}'.</no-view-found>
+      <access-denied>Access denied. You may not have permission in the workspace of drive '{0}'.</access-denied>
+      <empty-drives>Access denied. Either there is no drive in this repository or you do not have permission to access any drives in this repository.</empty-drives>
+      <workspace-not-exist>Drive '{0}' was stored in one unrecognized workspace. Please reconfigure this drive.</workspace-not-exist>
+    </msg>
   </UIDrivesArea>
   <UIJcrExplorerEditForm>
     <msg>
@@ -3130,6 +3171,7 @@
     <Keep>Keep both</Keep>
     <Replace>Replace</Replace>
     <Canceled>Canceled</Canceled>
+      <UploadNewVersion>Upload new version</UploadNewVersion>
     <Cancel>#{word.cancel}</Cancel>
     <AbortAllConfirmation>Do you want to abort all files in progress?</AbortAllConfirmation>
   </label>
@@ -3158,6 +3200,19 @@
   <property-name-incorrect>The property name is incorrect, please enter another value for it!</property-name-incorrect>
     </msg>
   </UIPropertyForm>
+  <UIDocumentAutoVersionForm>
+    <msg>A document {0} already exits. What do you want to do? </msg>
+    <UIChkRememberNonVersioned>
+      <label>Remember my choice for all others non-versioned documents</label>
+    </UIChkRememberNonVersioned>
+    <UIChkRememberVersioned>
+      <label>Remember my choice for all others versioned documents</label>
+    </UIChkRememberVersioned>
+  </UIDocumentAutoVersionForm>
+  <DocumentAuto>
+    <message>A new version of the document {0} has been created successfully.</message>
+    <messageMultiFile>New version(s) of versioned document(s) has been created.</messageMultiFile>
+  </DocumentAuto>
   <!--
   ###################################################################################
   # JCR Exceptions manager                                                              #

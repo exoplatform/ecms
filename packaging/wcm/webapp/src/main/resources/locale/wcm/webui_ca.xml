@@ -34,7 +34,7 @@
 
   <Drives>
     <label>
-      <ManagedSites>Gestió de Llocs</ManagedSites>
+      <ManagedSites>Gestió dels Llocs</ManagedSites>
       <SharedSite>Lloc Compartit</SharedSite>
     </label>
   </Drives>
@@ -202,15 +202,15 @@
     <msg>
       <time-to-late>El temps cercant és massa llarg.</time-to-late>
       <empty-field>Si us plau, introdueix una paraula clau vàlida per a la cerca.</empty-field>
-      <empty-name>Please enter the name to search</empty-name>
-      <empty-content>Please enter a word or phrase to search</empty-content>
-      <empty-property>Please select a property</empty-property>
-      <empty-property-keyword>Please enter a keyword for the property</empty-property-keyword>
-      <empty-doctype>Please select a document type</empty-doctype>
-      <empty-startDate>"From Date" is required</empty-startDate>
+      <empty-name>Introdueix el nom a cercar</empty-name>
+      <empty-content>Si us plau, introdueix una paraula o frase a cercar</empty-content>
+      <empty-property>Si us plau, selecciona una propietat</empty-property>
+      <empty-property-keyword>Si us plau, introdueix una paraula clau per a la propietat</empty-property-keyword>
+      <empty-doctype>Selecciona un tipus de document</empty-doctype>
+      <empty-startDate>«Del dia» és necessari</empty-startDate>
       <invalid-format>Format invàlid de data/hora en el camp "{0}".</invalid-format>
       <invalid-date>"Des del" ha de ser posterior a "Fins al"</invalid-date>
-      <invalid-startDate>"From Date" must not be later than today</invalid-startDate>
+      <invalid-startDate>"Del dia" no ha de ser posterior a avui</invalid-startDate>
       <invalid-nodeType>El tipus de node "{0}" no és vàlid. Si us plau comprovi-ho de nou.</invalid-nodeType>
       <invalid-keyword>La paraula clau és invàlida. Alguns caràcters no són compatibles.</invalid-keyword>
     </msg>

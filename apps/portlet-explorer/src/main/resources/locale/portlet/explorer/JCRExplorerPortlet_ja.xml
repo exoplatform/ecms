@@ -165,7 +165,7 @@
       <enableDragAndDrop>ドラッグ &amp; ドロップの許可</enableDragAndDrop>
       <sortBy>ソート順</sortBy>
       <order>Order by</order>
-      <nodesPerPage>ノード/ページ</nodesPerPage>
+      <nodesPerPage>Items per Page:</nodesPerPage>
     </label>
     <action>
       <Back>#{word.close}</Back>
@@ -255,6 +255,7 @@
       <UISEOForm>SEO を管理</UISEOForm>
       <UISEOToolbarForm>SEO を管理</UISEOToolbarForm>
       <UIReadOnlyFileConfirmMessage>Open Document</UIReadOnlyFileConfirmMessage>
+      <UIDocumentAutoVersionForm>Copy Document</UIDocumentAutoVersionForm>
     </title>
     <header>
       <workspace>ワークスペース</workspace>
@@ -308,6 +309,8 @@
       <ViewMetadatas>メタデータ観覧</ViewMetadatas>
       <ViewRelations>関連の表示/隠す</ViewRelations>
       <ShowJCRStructure>Show/Hide Like JCR Structure</ShowJCRStructure>
+      <EditProperty>Edit Document Properties</EditProperty>
+      <UploadNewVersion>Upload a new version</UploadNewVersion>
     </tooltip>
     <msg>
       <cannot-action-in-rootnode>ルートノードでアクションできません。</cannot-action-in-rootnode>
@@ -594,8 +597,11 @@
       <RestoreFromTrash>ゴミ箱からリストア</RestoreFromTrash>
       <EmptyTrash>ゴミ箱を空にする</EmptyTrash>
       <WebDavView>Open in MS Office</WebDavView>
-      <Download>ファイルをダウンロード</Download>
+      <Download>Download</Download>
       <OpenDocument>Remote Edit</OpenDocument>
+      <EditProperty>Edit Document Properties</EditProperty>
+      <UploadNewVersion>Upload a new version</UploadNewVersion>
+      <CreateNewVersion>Create a new version</CreateNewVersion>
     </event>
   </ECMContextMenu>
  
@@ -1324,7 +1330,7 @@
   -->
   <PopupUserSelector>
     <title>
-      <UIUserContainer>ユーザ権限の選択</UIUserContainer>
+      <UIUserContainer>権限の選択</UIUserContainer>
     </title>
   </PopupUserSelector>
   <UIPopupTaxonomy>
@@ -1938,6 +1944,11 @@
   # Validator messages                                                              #
   ###################################################################################
   -->
+   <ECMPhoneFormatValidator>
+     <msg>
+       <Invalid>The field '{0}' contains invalid an Phone number. Please enter another value.</Invalid>
+     </msg>
+  </ECMPhoneFormatValidator>
   <ECMNameValidator>
     <msg>
       <Invalid-char>フィールド'{0}'に無効な文字があります。他の値を入力してください。</Invalid-char>
@@ -2344,7 +2355,7 @@
     <msg>
       <create-link-problem>'{1}' にノード '{0}' のリンクを作成することができません。</create-link-problem>
       <dest-node-is-link>ノード '{0}' は既にSymリンクです。このためSymリンクを作成できません。</dest-node-is-link>
-      <selected-is-link>選択されたノード '{0}' は既にリンクです。他のリンクにリンクポイントを作成することは出来ません。</selected-is-link>
+      <selected-is-link>The selected node '{0}' is already a link. You cannot create a link that points to another link.</selected-is-link>
       <confirm-create-link>本当にこのロケーションのためのリンクを作成しますか？</confirm-create-link>
     </msg>
   </UIWorkingArea>
@@ -2425,7 +2436,9 @@
       <Back>リネームに戻る</Back>
       <Keepfile>両方のファイルをキープする</Keepfile>
 <ReadOnly>Open Read-only</ReadOnly>
-<Cancel>キャンセル</Cancel>
+<Cancel>Cancel</Cancel>
+      <KeepBoth>Keep Both</KeepBoth>
+      <CreateNewVersion>Create a new version</CreateNewVersion>
     </label>
   </UIConfirmMessage>
 
@@ -3158,6 +3171,7 @@
     <Keep>両方を維持します。</Keep>
     <Replace>置換</Replace>
     <Canceled>キャンセルされました</Canceled>
+      <UploadNewVersion>Upload new version</UploadNewVersion>
     <Cancel>#{word.cancel}</Cancel>
     <AbortAllConfirmation>進行中のすべてのファイルを中止しますか。</AbortAllConfirmation>
   </label>
@@ -3186,6 +3200,19 @@
   <property-name-incorrect>プロパティ名が正しくありません。別の値を入力してください！</property-name-incorrect>
     </msg>
   </UIPropertyForm>
+  <UIDocumentAutoVersionForm>
+    <msg>A document {0} already exits. What do you want to do? </msg>
+    <UIChkRememberNonVersioned>
+      <label>Remember my choice for all others non-versioned documents</label>
+    </UIChkRememberNonVersioned>
+    <UIChkRememberVersioned>
+      <label>Remember my choice for all others versioned documents</label>
+    </UIChkRememberVersioned>
+  </UIDocumentAutoVersionForm>
+  <DocumentAuto>
+    <message>A new version of the document {0} has been created successfully.</message>
+    <messageMultiFile>New version(s) of versioned document(s) has been created.</messageMultiFile>
+  </DocumentAuto>
   <!--
   ###################################################################################
   # JCR Exceptions manager                                                              #

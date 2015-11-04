@@ -3,7 +3,7 @@
   <UIDefaultSearchForm>
     <label>
       <keyword>Klíčové slovo</keyword>
-      <portal>Portál</portal>
+      <portal>Portal</portal>
       <Page>Stránka</Page>
       <Document>Dokument</Document>
     </label>

@@ -41,38 +41,38 @@
       <UICLVConfigDisplayTemplateFormSelectBox>範本</UICLVConfigDisplayTemplateFormSelectBox>
       <UICLVConfigPaginatorTemplateFormSelectBox>分頁程式</UICLVConfigPaginatorTemplateFormSelectBox>
       <UICLVConfigItemsPerPageFormStringInput>每頁項目</UICLVConfigItemsPerPageFormStringInput>
-      <UICLVConfigShowIllustrationFormCheckboxInput>Show Image</UICLVConfigShowIllustrationFormCheckboxInput>
-      <UICLVConfigShowSummaryFormCheckboxInput>Show Summary</UICLVConfigShowSummaryFormCheckboxInput>
-      <UICLVConfigShowHeaderFormCheckboxInput>Show Header</UICLVConfigShowHeaderFormCheckboxInput>
-      <UICLVConfigShowRefreshFormCheckboxInput>Show Refresh</UICLVConfigShowRefreshFormCheckboxInput>
+      <UICLVConfigShowIllustrationFormCheckboxInput>顯示圖像</UICLVConfigShowIllustrationFormCheckboxInput>
+      <UICLVConfigShowSummaryFormCheckboxInput>顯示摘要</UICLVConfigShowSummaryFormCheckboxInput>
+      <UICLVConfigShowHeaderFormCheckboxInput>顯示標題</UICLVConfigShowHeaderFormCheckboxInput>
+      <UICLVConfigShowRefreshFormCheckboxInput>顯示刷新</UICLVConfigShowRefreshFormCheckboxInput>
       <UICLVConfigShowTitleFormCheckboxInput>顯示標題</UICLVConfigShowTitleFormCheckboxInput>
       <UICLVConfigShowDateCreatedFormCheckboxInput>顯示日期</UICLVConfigShowDateCreatedFormCheckboxInput>
-      <UICLVConfigShowLinkFormCheckboxInput>Show Link</UICLVConfigShowLinkFormCheckboxInput>
-      <UICLVConfigShowReadmoreFormCheckboxInput>Show More Links</UICLVConfigShowReadmoreFormCheckboxInput>
-      <UICLVConfigAllowDynamicUrlStringInput>Allow Dynamic URL</UICLVConfigAllowDynamicUrlStringInput>
-      <UICLVConfigShowRssLinkFormCheckboxInput>Show RSS Link</UICLVConfigShowRssLinkFormCheckboxInput>
-      <UICLVConfigShowAutomaticDetectionCheckboxInput>Automatic Detection</UICLVConfigShowAutomaticDetectionCheckboxInput>
+      <UICLVConfigShowLinkFormCheckboxInput>顯示連結</UICLVConfigShowLinkFormCheckboxInput>
+      <UICLVConfigShowReadmoreFormCheckboxInput>顯示更多連結</UICLVConfigShowReadmoreFormCheckboxInput>
+      <UICLVConfigAllowDynamicUrlStringInput>允許動態 URL</UICLVConfigAllowDynamicUrlStringInput>
+      <UICLVConfigShowRssLinkFormCheckboxInput>顯示 RSS 連結</UICLVConfigShowRssLinkFormCheckboxInput>
+      <UICLVConfigShowAutomaticDetectionCheckboxInput>自動檢測</UICLVConfigShowAutomaticDetectionCheckboxInput>
       <AdvancedBlock>進階選項</AdvancedBlock>
       <UICLVConfigDynamicNavigationLabel>動態導航</UICLVConfigDynamicNavigationLabel>
-      <UICLVConfigContextualFolderRadioBoxInput>Contextual Folder</UICLVConfigContextualFolderRadioBoxInput>
+      <UICLVConfigContextualFolderRadioBoxInput>關聯資料夾</UICLVConfigContextualFolderRadioBoxInput>
       <UICLVConfigShowCLVByStringInput>由</UICLVConfigShowCLVByStringInput>
       <UICLVConfigshowSCVWithStringInput>與</UICLVConfigshowSCVWithStringInput>
       <UICLVConfigTargetPageFormInputSet>在頁面中顯示</UICLVConfigTargetPageFormInputSet>
-      <content-not-found>Content not found.</content-not-found>
+      <content-not-found>找不到的內容。</content-not-found>
       <ContentPath>內容路徑</ContentPath>
-      <Up>Up</Up>
-      <Down>Down</Down>
+      <Up>向上</Up>
+      <Down>向下</Down>
       <UICLVConfigCacheManagementLabel>內容可見度</UICLVConfigCacheManagementLabel>
-      <UICLVContentByQueryLabel>Content by Query</UICLVContentByQueryLabel>
+      <UICLVContentByQueryLabel>經由查詢的內容</UICLVContentByQueryLabel>
       <UICLVConfigWorkspaceFormSelectBox>工作區</UICLVConfigWorkspaceFormSelectBox>
-      <UICLVConfigContentByQueryTextArea>by query</UICLVConfigContentByQueryTextArea>
-      <UICLVConfigCacheEnableRadioBoxInput>Share content between users</UICLVConfigCacheEnableRadioBoxInput>
+      <UICLVConfigContentByQueryTextArea>經由查詢</UICLVConfigContentByQueryTextArea>
+      <UICLVConfigCacheEnableRadioBoxInput>使用者之間共享內容</UICLVConfigCacheEnableRadioBoxInput>
     </label>
     <help>
       <ModeSelectionHelp>兩種模式可顯示內容。"按資料夾"將您所選的資料夾類別中可用的所有內容。"按內容"允許您手動選擇你想要顯示的內容。</ModeSelectionHelp>
       <FolderPathHelp>請選擇您想要顯示的內容。如果您啟動動態導航選項，將動態替換此預設內容 （請參閱下面的進階選項）。</FolderPathHelp>
       <HeaderOptionHelp>顯示在內容清單上的標題。如果您啟動自動檢測選項，它將嘗試找尋基於當前選定內容的標題。</HeaderOptionHelp>
-      <GeneralOptionHelp>Select the graphical elements you want to show in your list. Note that, depending on your selected template, some elements may not be available.</GeneralOptionHelp>
+      <GeneralOptionHelp>選擇您想要在您的清單中顯示的圖形元素。請注意根據您所選的範本，某些元素可能不可用。</GeneralOptionHelp>
       <ContextualHelp>啟動動態導航選項。其他人可以動態更改基於 URL 參數內容。</ContextualHelp>
       <ParameterHelp>此參數將用於訪問的內容，如果動態導航處於啟動狀態。</ParameterHelp>
       <ShowDetailInPageHelp>點擊內容可將使用者重新導向到詳細頁面。與動態導航啟用在目標頁面上要顯示的內容，您必須具有"內容的 URL"入口網站應用程式。</ShowDetailInPageHelp>
@@ -86,8 +86,8 @@
       <delete>刪除</delete>
     </action>
     <msg>
-      <not-valid-path>The Folder Path is invalid.</not-valid-path>
-      <saving-success>The portlet's preferences are saved.</saving-success>
+      <not-valid-path>資料夾路徑是不正確。</not-valid-path>
+      <saving-success>門戶網站的選項都保存。</saving-success>
     </msg>
     <tab>
       <label>
@@ -99,8 +99,8 @@
   </UICLVConfig>
   <UICLVConfigDisplayModeFormRadioBoxInput>
     <label>
-      <AutoViewerMode>By Folder</AutoViewerMode>
-      <ManualViewerMode>By Content</ManualViewerMode>
+      <AutoViewerMode>按資料夾</AutoViewerMode>
+      <ManualViewerMode>按內容</ManualViewerMode>
     </label>
   </UICLVConfigDisplayModeFormRadioBoxInput>
   <UICLVConfigItemPathFormInputSet>
@@ -183,7 +183,7 @@
   <UICLVConfigCacheEnableRadioBoxInput>
     <label>
       <ENABLE>通過身份驗證的限制</ENABLE>
-      <DISABLE>Restricted by User Roles</DISABLE>
+      <DISABLE>使用者角色受到限制</DISABLE>
     </label>
   </UICLVConfigCacheEnableRadioBoxInput>
 </bundle>

@@ -34,7 +34,7 @@
 
   <Drives>
     <label>
-      <ManagedSites>網站管理</ManagedSites>
+      <ManagedSites>Site Management</ManagedSites>
       <SharedSite>共用的網站</SharedSite>
     </label>
   </Drives>

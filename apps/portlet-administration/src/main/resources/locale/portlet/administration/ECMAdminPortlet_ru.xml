@@ -990,6 +990,10 @@
 <addSymLink>Добавить символьную ссылку</addSymLink>
       <checkIn>Check In</checkIn>
       <checkOut>Check Out</checkOut>
+      <shareDocuments>Поделиться</shareDocuments>
+      <openDocument>Remote Edit</openDocument>
+      <editProperty>Edit Document Properties</editProperty>
+      <uploadNewVersion>Upload a new version</uploadNewVersion>
     </label>
     <action>
       <Save>#{word.save}</Save>      
@@ -1019,7 +1023,7 @@
   </UIViewFormTabPane>
   <PopupViewPermission>
     <title>
-      <UIPermissionSelector>Выбрать разрешение</UIPermissionSelector>
+      <UIPermissionSelector>Выбор разрешения</UIPermissionSelector>
     </title>
   </PopupViewPermission>
 
@@ -1401,7 +1405,7 @@
   
   <PopupTaxonomyTreePermission>
     <title>
-      <UIPermissionSelector>Выбрать разрешение</UIPermissionSelector>
+      <UIPermissionSelector>Выбор разрешения</UIPermissionSelector>
     </title>
    </PopupTaxonomyTreePermission>
    
@@ -1733,7 +1737,7 @@
   -->
   <AddNewTemplatePermission>
     <title>
-      <UIPermissionSelector>Выбрать разрешение</UIPermissionSelector>
+      <UIPermissionSelector>Выбор разрешения</UIPermissionSelector>
     </title>
   </AddNewTemplatePermission>
   <TemplatePermission>
@@ -1774,12 +1778,12 @@
   </DialogForm>
   <DialogFormTemplatePermission>
     <title>
-      <UIPermissionSelector>Выбрать разрешение</UIPermissionSelector>
+      <UIPermissionSelector>Выбор разрешения</UIPermissionSelector>
     </title>
   </DialogFormTemplatePermission>
   <ViewFormTemplatePermission>
     <title>
-      <UIPermissionSelector>Выбрать разрешение</UIPermissionSelector>
+      <UIPermissionSelector>Выбор разрешения</UIPermissionSelector>
     </title>
   </ViewFormTemplatePermission>
   <TemplateContainerPopup>
@@ -1970,7 +1974,7 @@
   </EditQueryForm>
 <PermissionPopup>
   <title>
-    <UIGroupMemberSelector>Выбрать разрешение</UIGroupMemberSelector>
+    <UIGroupMemberSelector>Выбор разрешения</UIGroupMemberSelector>
   </title>
 </PermissionPopup>
   <!--
@@ -2021,6 +2025,16 @@
       <UITagStyleForm>Изменить конфигурацию стиля тега</UITagStyleForm>
     </title>
   </FolksonomyPopup>
+  <!--
+  ###################################################################################
+  # ECMPhoneFormatValidator                                       #
+  ###################################################################################
+  -->
+  <ECMPhoneFormatValidator>
+    <msg>
+      <Invalid>The field '{0}' contains an invalid Phone number. Please enter another value.</Invalid>
+    </msg>
+  </ECMPhoneFormatValidator>
   <!--
   ###################################################################################
   # org.exoplatform.ecm.jcr.ECMNameValidator  #
@@ -2417,6 +2431,7 @@
 <UIPermissionTreeForm>
 <action>
 <Save>Save</Save>
+<Cancel>#{word.cancel}</Cancel>
 <Reset>Reset</Reset>
 <NextAddAction>Следующее</NextAddAction>
 <Previous>Предыдущее</Previous>

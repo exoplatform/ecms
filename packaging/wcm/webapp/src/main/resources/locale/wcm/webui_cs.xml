@@ -34,7 +34,7 @@
 
   <Drives>
     <label>
-      <ManagedSites>Správa webů</ManagedSites>
+      <ManagedSites>Site Management</ManagedSites>
       <SharedSite>Sdílený web</SharedSite>
     </label>
   </Drives>

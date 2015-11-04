@@ -15,7 +15,7 @@
     </info>
     <action>
       <title>
-        <select>Selecionar</select>
+        <select>Select</select>
       </title>
     </action>
   </UITreeList>
@@ -50,7 +50,7 @@
     <title>
       <UIPermissionUser>Selecionar Usuário</UIPermissionUser>
       <UIPermissionMembership>Selecionar associação</UIPermissionMembership>
-      <TaxoSelectUserOrGroup>Selecione Associação</TaxoSelectUserOrGroup>
+      <TaxoSelectUserOrGroup>Select Membership</TaxoSelectUserOrGroup>
     </title>
   </SelectUserOrGroup>
   <UIPermissionUser>

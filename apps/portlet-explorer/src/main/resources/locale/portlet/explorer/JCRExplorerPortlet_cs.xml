@@ -165,7 +165,7 @@
       <enableDragAndDrop>Povolit Drag &amp; Drop:</enableDragAndDrop>
       <sortBy>Seřadit podle:</sortBy>
       <order>Seřadit podle:</order>
-      <nodesPerPage>Uzlů na stránku:</nodesPerPage>
+      <nodesPerPage>Items per Page:</nodesPerPage>
     </label>
     <action>
       <Back>#{word.close}</Back>
@@ -255,6 +255,7 @@
       <UISEOForm>Správa SEO</UISEOForm>
       <UISEOToolbarForm>Správa SEO</UISEOToolbarForm>
       <UIReadOnlyFileConfirmMessage>Open Document</UIReadOnlyFileConfirmMessage>
+      <UIDocumentAutoVersionForm>Copy Document</UIDocumentAutoVersionForm>
     </title>
     <header>
       <workspace>Pracovní plocha</workspace>
@@ -308,6 +309,8 @@
       <ViewMetadatas>Metadata</ViewMetadatas>
       <ViewRelations>Zobrazit/skrýt vztahy</ViewRelations>
       <ShowJCRStructure>Zobrazit/skrýt strukturu obsahu</ShowJCRStructure>
+      <EditProperty>Edit Document Properties</EditProperty>
+      <UploadNewVersion>Upload a new version</UploadNewVersion>
     </tooltip>
     <msg>
       <cannot-action-in-rootnode>Tuto akci nelze provést v kořenovém uzlu.</cannot-action-in-rootnode>
@@ -596,6 +599,9 @@
       <WebDavView>Otevřít v MS Office</WebDavView>
       <Download>Stáhnout</Download>
       <OpenDocument>Remote Edit</OpenDocument>
+      <EditProperty>Edit Document Properties</EditProperty>
+      <UploadNewVersion>Upload a new version</UploadNewVersion>
+      <CreateNewVersion>Create a new version</CreateNewVersion>
     </event>
   </ECMContextMenu>
  
@@ -751,7 +757,7 @@
       </title>
     </action>
     <header>
-      <usersOrGroups>Uživatel nebo skupina</usersOrGroups>
+      <usersOrGroups>User or Group</usersOrGroups>
       <read>Read</read>
       <addNode>Modify</addNode>
       <remove>Odstranit</remove>
@@ -766,8 +772,8 @@
   </UIPermissionInfo>
   <permission>
     <title>
-      <SelectUser>Vybrat uživatele</SelectUser>
-      <SelectMember>Vybrat členství</SelectMember>
+      <SelectUser>Select User</SelectUser>
+      <SelectMember>Select Membership</SelectMember>
       <AddAny>Select Everyone</AddAny>
     </title>
   </permission>
@@ -794,7 +800,7 @@
   </UIGroupSelector>
   <UIPermissionForm>
     <label>
-      <UIPopupWindow>Vybrat</UIPopupWindow>
+      <UIPopupWindow>Select</UIPopupWindow>
       <permission>UIPermissionForm</permission>
       <userOrGroup>Uživatel nebo skupina</userOrGroup>
       <read>Read Right</read>
@@ -1324,7 +1330,7 @@
   -->
   <PopupUserSelector>
     <title>
-      <UIUserContainer>Vybrat oprávnění uživatele</UIUserContainer>
+      <UIUserContainer>Práva</UIUserContainer>
     </title>
   </PopupUserSelector>
   <UIPopupTaxonomy>
@@ -1938,6 +1944,11 @@
   # Validator messages                                                              #
   ###################################################################################
   -->
+   <ECMPhoneFormatValidator>
+     <msg>
+       <Invalid>The field '{0}' contains invalid an Phone number. Please enter another value.</Invalid>
+     </msg>
+  </ECMPhoneFormatValidator>
   <ECMNameValidator>
     <msg>
       <Invalid-char>Pole {0} obsahuje některé neplatné znaky. Zadejte jinou hodnotu.</Invalid-char>
@@ -2344,7 +2355,7 @@
     <msg>
       <create-link-problem>Nelze vytvořit odkaz z uzlu {0} na {1}.</create-link-problem>
       <dest-node-is-link>Cílový uzel '{0}' je již symbolickým odkazem, takže nelze vytvořit symbolický odkaz uvnitř něj.</dest-node-is-link>
-      <selected-is-link>Vybraný uzel '{0}' je již odkazem, takže nelze vytvořit odkaz na další odkaz.</selected-is-link>
+      <selected-is-link>The selected node '{0}' is already a link. You cannot create a link that points to another link.</selected-is-link>
       <confirm-create-link>Chcete vytvořit odkaz na toto umístění?</confirm-create-link>
     </msg>
   </UIWorkingArea>
@@ -2426,6 +2437,8 @@
       <Keepfile>Ponechat oba soubory</Keepfile>
 <ReadOnly>Open Read-only</ReadOnly>
 <Cancel>Zrušit</Cancel>
+      <KeepBoth>Keep Both</KeepBoth>
+      <CreateNewVersion>Create a new version</CreateNewVersion>
     </label>
   </UIConfirmMessage>
 
@@ -3068,9 +3081,9 @@
     </DrivesArea>
     <msg>
       <no-view-found>There are no views applied for your access permission in drive '{0}'.</no-view-found>
-      <access-denied>Přístup byl odepřen. Nemáte oprávnění v prostoru disku {0}.</access-denied>
+      <access-denied>Access denied. You may not have permission in the workspace of drive '{0}'.</access-denied>
       <empty-drives>Access denied. Either there is no drive in this repository or you do not have permission to access any drives in this repository.</empty-drives>
-      <workspace-not-exist>Disk {0} byl uložen v neznámém prostoru. Překonfigurujte prosím tento disk.</workspace-not-exist>
+      <workspace-not-exist>Drive '{0}' was stored in one unrecognized workspace. Please reconfigure this drive.</workspace-not-exist>
     </msg>
   </UIDrivesArea>
   <UIJcrExplorerEditForm>
@@ -3158,6 +3171,7 @@
     <Keep>Zachovat obě</Keep>
     <Replace>Nahradit</Replace>
     <Canceled>Zrušeno</Canceled>
+      <UploadNewVersion>Upload new version</UploadNewVersion>
     <Cancel>#{word.cancel}</Cancel>
     <AbortAllConfirmation>Přejete si přerušit všechny soubory v průběhu?</AbortAllConfirmation>
   </label>
@@ -3186,6 +3200,19 @@
   <property-name-incorrect>Název vlastnosti je neplatný, prosím zadejte jinou hodnotu!</property-name-incorrect>
     </msg>
   </UIPropertyForm>
+  <UIDocumentAutoVersionForm>
+    <msg>A document {0} already exits. What do you want to do? </msg>
+    <UIChkRememberNonVersioned>
+      <label>Remember my choice for all others non-versioned documents</label>
+    </UIChkRememberNonVersioned>
+    <UIChkRememberVersioned>
+      <label>Remember my choice for all others versioned documents</label>
+    </UIChkRememberVersioned>
+  </UIDocumentAutoVersionForm>
+  <DocumentAuto>
+    <message>A new version of the document {0} has been created successfully.</message>
+    <messageMultiFile>New version(s) of versioned document(s) has been created.</messageMultiFile>
+  </DocumentAuto>
   <!--
   ###################################################################################
   # JCR Exceptions manager                                                              #

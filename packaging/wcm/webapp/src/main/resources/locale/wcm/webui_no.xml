@@ -34,7 +34,7 @@
 
   <Drives>
     <label>
-      <ManagedSites>Nettstedsadministrasjon</ManagedSites>
+      <ManagedSites>Site Management</ManagedSites>
       <SharedSite>Delt nettsted</SharedSite>
     </label>
   </Drives>

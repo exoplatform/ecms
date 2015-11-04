@@ -165,7 +165,7 @@
       <enableDragAndDrop>Sürükle &amp; Bırak' ı etkinleştir:</enableDragAndDrop>
       <sortBy>Sıralama:</sortBy>
       <order>Tarafından sipariş:</order>
-      <nodesPerPage>Sayfa başına düğüm:</nodesPerPage>
+      <nodesPerPage>Items per Page:</nodesPerPage>
     </label>
     <action>
       <Back>#{word.close}</Back>
@@ -255,6 +255,7 @@
       <UISEOForm>SEO' yu yönet</UISEOForm>
       <UISEOToolbarForm>SEO' yu yönet</UISEOToolbarForm>
       <UIReadOnlyFileConfirmMessage>Open Document</UIReadOnlyFileConfirmMessage>
+      <UIDocumentAutoVersionForm>Copy Document</UIDocumentAutoVersionForm>
     </title>
     <header>
       <workspace>Çalışma Alanı</workspace>
@@ -308,6 +309,8 @@
       <ViewMetadatas>Metaveri</ViewMetadatas>
       <ViewRelations>İlişkileri Göster/Gizle</ViewRelations>
       <ShowJCRStructure>İçerik Yapısını Göster/Gizle</ShowJCRStructure>
+      <EditProperty>Edit Document Properties</EditProperty>
+      <UploadNewVersion>Upload a new version</UploadNewVersion>
     </tooltip>
     <msg>
       <cannot-action-in-rootnode>Kök düğümde bu eylemi gerçekleştiremezsiniz.</cannot-action-in-rootnode>
@@ -596,6 +599,9 @@
       <WebDavView>MS Office de Aç</WebDavView>
       <Download>İndir</Download>
       <OpenDocument>Remote Edit</OpenDocument>
+      <EditProperty>Edit Document Properties</EditProperty>
+      <UploadNewVersion>Upload a new version</UploadNewVersion>
+      <CreateNewVersion>Create a new version</CreateNewVersion>
     </event>
   </ECMContextMenu>
  
@@ -1324,7 +1330,7 @@
   -->
   <PopupUserSelector>
     <title>
-      <UIUserContainer>Kullanıcı İzni Seçin</UIUserContainer>
+      <UIUserContainer>Yetki Seçici</UIUserContainer>
     </title>
   </PopupUserSelector>
   <UIPopupTaxonomy>
@@ -1938,6 +1944,11 @@
   # Validator messages                                                              #
   ###################################################################################
   -->
+   <ECMPhoneFormatValidator>
+     <msg>
+       <Invalid>The field '{0}' contains invalid an Phone number. Please enter another value.</Invalid>
+     </msg>
+  </ECMPhoneFormatValidator>
   <ECMNameValidator>
     <msg>
       <Invalid-char>'{0}' Alanı geçersiz bir karakter içeriyor. Lütfen başka bir değer girin.</Invalid-char>
@@ -2344,7 +2355,7 @@
     <msg>
       <create-link-problem>Bağlantı düğümü '{0}' için '{1}' oluşturamazsınız.</create-link-problem>
       <dest-node-is-link>Hedef düğüm '{0}' zaten bir symlink, bu yüzden içinde bir symlink oluşturamazsınız.</dest-node-is-link>
-      <selected-is-link>Seçili düğüm '{0}' zaten bir bağlantı, bu yüzden içinde bir bağlantı oluşturamazsınız.</selected-is-link>
+      <selected-is-link>The selected node '{0}' is already a link. You cannot create a link that points to another link.</selected-is-link>
       <confirm-create-link>Bu konuma bir bağlantı oluşturmak istiyor musunuz?</confirm-create-link>
     </msg>
   </UIWorkingArea>
@@ -2426,6 +2437,8 @@
       <Keepfile>İki dosyayı da tut</Keepfile>
 <ReadOnly>Open Read-only</ReadOnly>
 <Cancel>İptal</Cancel>
+      <KeepBoth>Keep Both</KeepBoth>
+      <CreateNewVersion>Create a new version</CreateNewVersion>
     </label>
   </UIConfirmMessage>
 
@@ -3158,6 +3171,7 @@
     <Keep>Her ikisinide koru</Keep>
     <Replace>Değiştir</Replace>
     <Canceled>İptal edildi</Canceled>
+      <UploadNewVersion>Upload new version</UploadNewVersion>
     <Cancel>#{word.cancel}</Cancel>
     <AbortAllConfirmation>Devam eden tüm dosyaları durdurmak istiyor musunuz?</AbortAllConfirmation>
   </label>
@@ -3186,6 +3200,19 @@
   <property-name-incorrect>Özellik adı yanlıştır, bunun için başka bir değer giriniz!</property-name-incorrect>
     </msg>
   </UIPropertyForm>
+  <UIDocumentAutoVersionForm>
+    <msg>A document {0} already exits. What do you want to do? </msg>
+    <UIChkRememberNonVersioned>
+      <label>Remember my choice for all others non-versioned documents</label>
+    </UIChkRememberNonVersioned>
+    <UIChkRememberVersioned>
+      <label>Remember my choice for all others versioned documents</label>
+    </UIChkRememberVersioned>
+  </UIDocumentAutoVersionForm>
+  <DocumentAuto>
+    <message>A new version of the document {0} has been created successfully.</message>
+    <messageMultiFile>New version(s) of versioned document(s) has been created.</messageMultiFile>
+  </DocumentAuto>
   <!--
   ###################################################################################
   # JCR Exceptions manager                                                              #

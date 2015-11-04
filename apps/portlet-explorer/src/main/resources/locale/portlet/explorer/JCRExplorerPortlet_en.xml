@@ -165,7 +165,7 @@
       <enableDragAndDrop>Enable Drag &amp; Drop:</enableDragAndDrop>
       <sortBy>Sort by:</sortBy>
       <order>Order by:</order>
-      <nodesPerPage>Nodes Per Page:</nodesPerPage>
+      <nodesPerPage>Items per Page:</nodesPerPage>
     </label>
     <action>
       <Back>#{word.close}</Back>
@@ -1330,7 +1330,7 @@
   -->
   <PopupUserSelector>
     <title>
-      <UIUserContainer>Select User Permission</UIUserContainer>
+      <UIUserContainer>Permission Selector</UIUserContainer>
     </title>
   </PopupUserSelector>
   <UIPopupTaxonomy>
@@ -1946,7 +1946,7 @@
   -->
    <ECMPhoneFormatValidator>
      <msg>
-       <Invalid>The field '{0}' contains invalid Phone number. Please enter another value.</Invalid>
+       <Invalid>The field '{0}' contains invalid an Phone number. Please enter another value.</Invalid>
      </msg>
   </ECMPhoneFormatValidator>
   <ECMNameValidator>
@@ -2355,7 +2355,7 @@
     <msg>
       <create-link-problem>You cannot create a link for node '{0}' at '{1}'.</create-link-problem>
       <dest-node-is-link>The destination node '{0}' is already a symlink, so you cannot create a symlink inside it.</dest-node-is-link>
-      <selected-is-link>The selected node '{0}' is already a link, so you cannot create a link point to another link.</selected-is-link>
+      <selected-is-link>The selected node '{0}' is already a link. You cannot create a link that points to another link.</selected-is-link>
       <confirm-create-link>Do you want to create a link to this location?</confirm-create-link>
     </msg>
   </UIWorkingArea>

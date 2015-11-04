@@ -34,7 +34,7 @@
 
   <Drives>
     <label>
-      <ManagedSites>Quản lý Site</ManagedSites>
+      <ManagedSites>Site Management</ManagedSites>
       <SharedSite>Site Chia sẻ</SharedSite>
     </label>
   </Drives>

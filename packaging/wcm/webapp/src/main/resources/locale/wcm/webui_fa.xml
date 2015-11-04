@@ -34,7 +34,7 @@
 
   <Drives>
     <label>
-      <ManagedSites>مدیریت سایت</ManagedSites>
+      <ManagedSites>Site Management</ManagedSites>
       <SharedSite>سایت مشترک</SharedSite>
     </label>
   </Drives>
@@ -254,7 +254,7 @@
       <action>اقدام</action>
     </header>
     <title>
-      <Select>انتخاب</Select>
+      <Select>Select</Select>
       <View>مشاهده</View>
     </title>
     <msg>
@@ -312,7 +312,7 @@
 
   <UIPermissionInputSetWithAction>
     <title>
-      <SelectUser>انتخاب کاربر</SelectUser>
+      <SelectUser>Select User</SelectUser>
       <SelectMember>Select Member</SelectMember>
       <AddAny>Add Any Permission</AddAny>
     </title>
@@ -320,7 +320,7 @@
 
   <UIUserSelectorPopupWindow>
     <title>
-      <UIUserContainer>انتخابگر کاربر</UIUserContainer>
+      <UIUserContainer>User Selector</UIUserContainer>
     </title>
   </UIUserSelectorPopupWindow>
 
@@ -434,13 +434,13 @@
   
   <CategoryNavigationTemplate>
   <label>
-  <home>صفحه اصلی</home>
+  <home>Home</home>
   </label>
   </CategoryNavigationTemplate>
   
   <Breadcrumb>
   <label>
-  <home>صفحه اصلی</home>
+  <home>Home</home>
   </label>  
   </Breadcrumb>
 </bundle>

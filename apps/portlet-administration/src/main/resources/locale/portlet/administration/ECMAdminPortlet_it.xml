@@ -990,6 +990,10 @@
 <addSymLink>Aggiungi Collegamento Simbolico</addSymLink>
       <checkIn>Check In</checkIn>
       <checkOut>Check Out</checkOut>
+      <shareDocuments>Condividi</shareDocuments>
+      <openDocument>Remote Edit</openDocument>
+      <editProperty>Edit Document Properties</editProperty>
+      <uploadNewVersion>Upload a new version</uploadNewVersion>
     </label>
     <action>
       <Save>#{word.save}</Save>      
@@ -1019,7 +1023,7 @@
   </UIViewFormTabPane>
   <PopupViewPermission>
     <title>
-      <UIPermissionSelector>Seleziona permesso</UIPermissionSelector>
+      <UIPermissionSelector>Selettore dei permessi</UIPermissionSelector>
     </title>
   </PopupViewPermission>
 
@@ -1360,7 +1364,7 @@
   <UITaxonomyTreeForm>
     <label>
       <name>Nome</name>
-      <workspace>Area di lavoro</workspace>
+      <workspace>Workspace</workspace>
       <homePath>Percorso Home</homePath>
       <permissions>Permessi</permissions>
     </label>
@@ -1401,7 +1405,7 @@
   
   <PopupTaxonomyTreePermission>
     <title>
-      <UIPermissionSelector>Seleziona Permesso</UIPermissionSelector>
+      <UIPermissionSelector>Selettore dei permessi</UIPermissionSelector>
     </title>
    </PopupTaxonomyTreePermission>
    
@@ -1733,7 +1737,7 @@
   -->
   <AddNewTemplatePermission>
     <title>
-      <UIPermissionSelector>Selezione Permesso</UIPermissionSelector>
+      <UIPermissionSelector>Selettore dei permessi</UIPermissionSelector>
     </title>
   </AddNewTemplatePermission>
   <TemplatePermission>
@@ -1774,12 +1778,12 @@
   </DialogForm>
   <DialogFormTemplatePermission>
     <title>
-      <UIPermissionSelector>Seleziona Permesso</UIPermissionSelector>
+      <UIPermissionSelector>Selettore dei permessi</UIPermissionSelector>
     </title>
   </DialogFormTemplatePermission>
   <ViewFormTemplatePermission>
     <title>
-      <UIPermissionSelector>Seleziona Permesso</UIPermissionSelector>
+      <UIPermissionSelector>Selettore dei permessi</UIPermissionSelector>
     </title>
   </ViewFormTemplatePermission>
   <TemplateContainerPopup>
@@ -1970,7 +1974,7 @@
   </EditQueryForm>
 <PermissionPopup>
   <title>
-    <UIGroupMemberSelector>Seleziona il permesso</UIGroupMemberSelector>
+    <UIGroupMemberSelector>Selettore dei permessi</UIGroupMemberSelector>
   </title>
 </PermissionPopup>
   <!--
@@ -2021,6 +2025,16 @@
       <UITagStyleForm>Modifica Configurazione Stile Tag</UITagStyleForm>
     </title>
   </FolksonomyPopup>
+  <!--
+  ###################################################################################
+  # ECMPhoneFormatValidator                                       #
+  ###################################################################################
+  -->
+  <ECMPhoneFormatValidator>
+    <msg>
+      <Invalid>The field '{0}' contains an invalid Phone number. Please enter another value.</Invalid>
+    </msg>
+  </ECMPhoneFormatValidator>
   <!--
   ###################################################################################
   # org.exoplatform.ecm.jcr.ECMNameValidator  #
@@ -2417,6 +2431,7 @@
 <UIPermissionTreeForm>
 <action>
 <Save>Save</Save>
+<Cancel>#{word.cancel}</Cancel>
 <Reset>Reset</Reset>
 <NextAddAction>Prossimo</NextAddAction>
 <Previous>Precedente</Previous>

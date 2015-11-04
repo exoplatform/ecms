@@ -34,7 +34,7 @@
 
   <Drives>
     <label>
-      <ManagedSites>Management site-uri</ManagedSites>
+      <ManagedSites>Site Management</ManagedSites>
       <SharedSite>Site partajat</SharedSite>
     </label>
   </Drives>

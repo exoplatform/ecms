@@ -41,7 +41,7 @@
     </label>
     <button>
       <label>
-        <confirm>Ok</confirm>
+        <confirm>OK</confirm>
       </label>
     </button>
     <msg>
@@ -129,7 +129,7 @@
     <title>Explorer</title>
     <label>
       <Root>Root</Root>
-      <webDavView>Aperto in MS Office</webDavView>
+      <webDavView>Open in MS Office</webDavView>
     </label>
     <msg>
       <path-not-found>Elemento cancellato o modificato. Clicca il bottone Aggiorna.</path-not-found>
@@ -165,7 +165,7 @@
       <enableDragAndDrop>Abilita Drag &amp; Drop</enableDragAndDrop>
       <sortBy>Ordina per</sortBy>
       <order>Ordina per</order>
-      <nodesPerPage>Nodi Per Pagina</nodesPerPage>
+      <nodesPerPage>Items per Page:</nodesPerPage>
     </label>
     <action>
       <Back>#{word.close}</Back>
@@ -255,9 +255,10 @@
       <UISEOForm>Gestisci SEO</UISEOForm>
       <UISEOToolbarForm>Gestisci SEO</UISEOToolbarForm>
       <UIReadOnlyFileConfirmMessage>Open Document</UIReadOnlyFileConfirmMessage>
+      <UIDocumentAutoVersionForm>Copy Document</UIDocumentAutoVersionForm>
     </title>
     <header>
-      <workspace>Area di lavoro</workspace>
+      <workspace>Workspace</workspace>
       <path>Percorso</path>
     </header>
   </UIPopupWindow>
@@ -308,6 +309,8 @@
       <ViewMetadatas>Vedi Metadati</ViewMetadatas>
       <ViewRelations>Mostra/Nascondi Relazioni</ViewRelations>
       <ShowJCRStructure>Mostra/Nascondi Struttura JCR</ShowJCRStructure>
+      <EditProperty>Edit Document Properties</EditProperty>
+      <UploadNewVersion>Upload a new version</UploadNewVersion>
     </tooltip>
     <msg>
       <cannot-action-in-rootnode>Non puoi fare questa azione nel nodo root.</cannot-action-in-rootnode>
@@ -593,9 +596,12 @@
       <MoveToTrash>Sposta nel Cestino</MoveToTrash>
       <RestoreFromTrash>Ripristina dal Cestino</RestoreFromTrash>
       <EmptyTrash>Svuota Cestino</EmptyTrash>
-      <WebDavView>Aperto in MS Office</WebDavView>
+      <WebDavView>Open in MS Office</WebDavView>
       <Download>Scarica</Download>
       <OpenDocument>Remote Edit</OpenDocument>
+      <EditProperty>Edit Document Properties</EditProperty>
+      <UploadNewVersion>Upload a new version</UploadNewVersion>
+      <CreateNewVersion>Create a new version</CreateNewVersion>
     </event>
   </ECMContextMenu>
  
@@ -609,7 +615,7 @@
       <no-references>Referenze non trovate</no-references>
     </msg>
     <header>
-      <workspace>Area di lavoro</workspace>
+      <workspace>Workspace</workspace>
       <path>Percorso</path>
     </header>
     <action>
@@ -1324,7 +1330,7 @@
   -->
   <PopupUserSelector>
     <title>
-      <UIUserContainer>Seleziona Permesso Utente</UIUserContainer>
+      <UIUserContainer>Selettore dei permessi</UIUserContainer>
     </title>
   </PopupUserSelector>
   <UIPopupTaxonomy>
@@ -1938,6 +1944,11 @@
   # Validator messages                                                              #
   ###################################################################################
   -->
+   <ECMPhoneFormatValidator>
+     <msg>
+       <Invalid>The field '{0}' contains invalid an Phone number. Please enter another value.</Invalid>
+     </msg>
+  </ECMPhoneFormatValidator>
   <ECMNameValidator>
     <msg>
       <Invalid-char>Il campo '{0}' contiene alcuni caratteri non validi. Inserisci un altro valore.</Invalid-char>
@@ -2344,7 +2355,7 @@
     <msg>
       <create-link-problem>Crea un collegamento dal nodo '{0}' a '{1}'.</create-link-problem>
       <dest-node-is-link>Il nodo destinazione '{0}' Ãš giÃ  un collegamento simbolico, quindi non puoi creare un collegamento simbolico a esso.</dest-node-is-link>
-      <selected-is-link>Il nodo selezionato '{0}' Ãš giÃ  un collegamento, non puoi crea un collegamento che punta a un altro collegamento.</selected-is-link>
+      <selected-is-link>The selected node '{0}' is already a link. You cannot create a link that points to another link.</selected-is-link>
       <confirm-create-link>Vuoi crea un collegamtno in questa posizione?</confirm-create-link>
     </msg>
   </UIWorkingArea>
@@ -2426,6 +2437,8 @@
       <Keepfile>Mantieni entrambi i file</Keepfile>
 <ReadOnly>Open Read-only</ReadOnly>
 <Cancel>Annulla</Cancel>
+      <KeepBoth>Keep Both</KeepBoth>
+      <CreateNewVersion>Create a new version</CreateNewVersion>
     </label>
   </UIConfirmMessage>
 
@@ -2507,7 +2520,7 @@
   <UIActionBar>
     <obtion>
       <Admin>Amministratore</Admin>
-      <Info>info</Info>
+      <Info>Info</Info>
       <Actions>Azioni</Actions>
       <Collaboration>Collaborazione</Collaboration>
       <Search>Ricerca</Search>
@@ -3158,6 +3171,7 @@
     <Keep>Tenere entrambi</Keep>
     <Replace>Sostituire</Replace>
     <Canceled>Annullato</Canceled>
+      <UploadNewVersion>Upload new version</UploadNewVersion>
     <Cancel>#{word.cancel}</Cancel>
     <AbortAllConfirmation>Desidera annullare tutti i file in corso?</AbortAllConfirmation>
   </label>
@@ -3186,6 +3200,19 @@
   <property-name-incorrect>Il nome della proprietà non è corretto, inserisce un altro valore per esso per favore!</property-name-incorrect>
     </msg>
   </UIPropertyForm>
+  <UIDocumentAutoVersionForm>
+    <msg>A document {0} already exits. What do you want to do? </msg>
+    <UIChkRememberNonVersioned>
+      <label>Remember my choice for all others non-versioned documents</label>
+    </UIChkRememberNonVersioned>
+    <UIChkRememberVersioned>
+      <label>Remember my choice for all others versioned documents</label>
+    </UIChkRememberVersioned>
+  </UIDocumentAutoVersionForm>
+  <DocumentAuto>
+    <message>A new version of the document {0} has been created successfully.</message>
+    <messageMultiFile>New version(s) of versioned document(s) has been created.</messageMultiFile>
+  </DocumentAuto>
   <!--
   ###################################################################################
   # JCR Exceptions manager                                                              #

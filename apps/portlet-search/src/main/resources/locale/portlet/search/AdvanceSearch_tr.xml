@@ -33,7 +33,7 @@
       <edit>Düzenle</edit>
     </action>
     <msg>
-      <search-not-match-type>{0} aramanız {1} ile eşleşmedi.</search-not-match-type>
+      <search-not-match-type>Your search {0} does not match any {1}.</search-not-match-type>
     </msg>
   </UIDefaultSearchResult>
   <UISearchPageLayoutManager>

@@ -67,7 +67,7 @@
   </UIPermissionMembership>
   <TaxoSelectUserOrGroup>
     <label>
-      <selectGroup>Velg gruppe</selectGroup>
+      <selectGroup>Select Group</selectGroup>
       <selectMembership>Velg medlemskap</selectMembership>
     </label>
   </TaxoSelectUserOrGroup>

@@ -2,7 +2,7 @@
 <bundle>
   <UIDashboardForm>
     <label>
-      <title>Author Dashboard</title>
+      <title>لوحة المعلومات الخاصّة بالمؤلّف</title>
       <nocontent>لا يوجد محتوى</nocontent>
       <mydraft>مسوّدة المحتوى الخاصّة بي</mydraft>
       <waitingapproval>في انتظار مُــوافقتي عليها</waitingapproval>

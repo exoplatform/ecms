@@ -98,6 +98,11 @@
       <SelectTargetPage>Vis i side</SelectTargetPage>
     </title>
   </UISCVConfigPrintPageFormInputSet>
+  <UISCVConfigPrintPageSelectorPopupWindow>
+    <title>
+      <UIPageSelector>Sidevelger</UIPageSelector>
+    </title>
+  </UISCVConfigPrintPageSelectorPopupWindow>
   <PublicationStates>
     <archived>Arkivert</archived>
     <obsolete>Foreldet</obsolete>

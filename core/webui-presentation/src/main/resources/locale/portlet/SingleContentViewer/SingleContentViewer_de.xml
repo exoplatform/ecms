@@ -98,6 +98,11 @@
       <SelectTargetPage>In Seite anzeigen</SelectTargetPage>
     </title>
   </UISCVConfigPrintPageFormInputSet>
+  <UISCVConfigPrintPageSelectorPopupWindow>
+    <title>
+      <UIPageSelector>Seitenauswahl</UIPageSelector>
+    </title>
+  </UISCVConfigPrintPageSelectorPopupWindow>
   <PublicationStates>
     <archived>Archiviert</archived>
     <obsolete>Veraltet</obsolete>

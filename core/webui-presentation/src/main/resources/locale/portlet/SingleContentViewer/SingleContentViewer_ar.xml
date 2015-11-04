@@ -98,6 +98,11 @@
       <SelectTargetPage>عرض في شكل صفحة</SelectTargetPage>
     </title>
   </UISCVConfigPrintPageFormInputSet>
+  <UISCVConfigPrintPageSelectorPopupWindow>
+    <title>
+      <UIPageSelector>مُنتق الصفحات</UIPageSelector>
+    </title>
+  </UISCVConfigPrintPageSelectorPopupWindow>
   <PublicationStates>
     <archived>محفوظة</archived>
     <obsolete>عفا عليها الزمن</obsolete>

@@ -2,7 +2,7 @@
 <bundle>
   <UIDashboardForm>
     <label>
-      <title>Author Dashboard</title>
+      <title>Painel de Autoria</title>
       <nocontent>Sem contéudo</nocontent>
       <mydraft>Meus Conteúdos Rascunhos</mydraft>
       <waitingapproval>Esperando Por Minha Aprovação</waitingapproval>

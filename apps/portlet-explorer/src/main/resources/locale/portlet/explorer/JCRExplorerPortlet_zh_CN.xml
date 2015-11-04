@@ -129,7 +129,7 @@
     <title>资源管理器</title>
     <label>
       <Root>根</Root>
-      <webDavView>在 MS Office 中打开</webDavView>
+      <webDavView>Open in MS Office</webDavView>
     </label>
     <msg>
       <path-not-found>此元素被删除或更改。请单击刷新按钮。</path-not-found>
@@ -165,7 +165,7 @@
       <enableDragAndDrop>启用拖 &amp; 拖放：</enableDragAndDrop>
       <sortBy>排序依据:</sortBy>
       <order>顺序:</order>
-      <nodesPerPage>每页的节点：</nodesPerPage>
+      <nodesPerPage>Items per Page:</nodesPerPage>
     </label>
     <action>
       <Back>#{word.close}</Back>
@@ -255,6 +255,7 @@
       <UISEOForm>管理 SEO</UISEOForm>
       <UISEOToolbarForm>管理 SEO</UISEOToolbarForm>
       <UIReadOnlyFileConfirmMessage>Open Document</UIReadOnlyFileConfirmMessage>
+      <UIDocumentAutoVersionForm>Copy Document</UIDocumentAutoVersionForm>
     </title>
     <header>
       <workspace>工作区</workspace>
@@ -308,6 +309,8 @@
       <ViewMetadatas>元数据</ViewMetadatas>
       <ViewRelations>显示/隐藏关系</ViewRelations>
       <ShowJCRStructure>显示/隐藏内容结构</ShowJCRStructure>
+      <EditProperty>Edit Document Properties</EditProperty>
+      <UploadNewVersion>Upload a new version</UploadNewVersion>
     </tooltip>
     <msg>
       <cannot-action-in-rootnode>您不能在根节点中执行此操作。</cannot-action-in-rootnode>
@@ -593,9 +596,12 @@
       <MoveToTrash>移到垃圾桶</MoveToTrash>
       <RestoreFromTrash>从垃圾桶中还原</RestoreFromTrash>
       <EmptyTrash>倾倒垃圾桶</EmptyTrash>
-      <WebDavView>在 MS Office 中打开</WebDavView>
+      <WebDavView>Open in MS Office</WebDavView>
       <Download>下载</Download>
       <OpenDocument>Remote Edit</OpenDocument>
+      <EditProperty>Edit Document Properties</EditProperty>
+      <UploadNewVersion>Upload a new version</UploadNewVersion>
+      <CreateNewVersion>Create a new version</CreateNewVersion>
     </event>
   </ECMContextMenu>
  
@@ -673,14 +679,14 @@
     </confirm>
     <header>
       <name>名称</name>
-      <multiValue>多值</multiValue>
+      <multiValue>Multi Value</multiValue>
       <value>值</value>
       <action>操作</action>
     </header>
     <label>
-      <binary>二进制数据</binary>
+      <binary>Binary Data</binary>
       <notavailable>N/A</notavailable>
-      <cannotget>无法获取值</cannotget>
+      <cannotget>Cannot get values</cannotget>
     </label>
     <action>
       <Close>#{word.close}</Close>
@@ -697,26 +703,26 @@
   #############################################################################
   -->
   <UIPropertyForm>
-    <title>添加/编辑属性</title>
+    <title>Add/Edit Property</title>
     <label>
       <name>名称：</name>
       <type>类型：</type>
-      <value>值：</value>
+      <value>Value:</value>
       <upload>上传:</upload>
-      <namespace>命名空间：</namespace>
-      <multiple>多个：</multiple>
-      <property_select>添加新的属性：</property_select>
-      <value0>值 0</value0>
-      <value1>值 1</value1>
-      <value2>值 2</value2>
-      <value3>值 3</value3>
-      <value4>值 4</value4>
-      <value5>值 5</value5>
-      <value6>值 6</value6>
-      <value7>值 7</value7>
-      <value8>值 8</value8>
-      <value9>值 9</value9>
-      <value10>值 10</value10>
+      <namespace>Namespace:</namespace>
+      <multiple>Multiple:</multiple>
+      <property_select>Add New Property:</property_select>
+      <value0>Value 0</value0>
+      <value1>Value 1</value1>
+      <value2>Value 2</value2>
+      <value3>Value 3</value3>
+      <value4>Value 4</value4>
+      <value5>Value 5</value5>
+      <value6>Value 6</value6>
+      <value7>Value 7</value7>
+      <value8>Value 8</value8>
+      <value9>Value 9</value9>
+      <value10>Value 10</value10>
     </label>
     <action>
       <Save>#{word.save}</Save>
@@ -724,11 +730,11 @@
       <Reset>重置</Reset>
     </action>
     <msg>
-      <name-invalid>请输入属性名称</name-invalid>
-      <unable-create>不能添加属性</unable-create>
-      <value-invalid>请输入值</value-invalid>
-      <node-checkedin>添加一个属性之前，您必须先检验节点。</node-checkedin>
-      <can-not-add>不能将属性添加到此节点。这唯一允许的节点类型 nt:unstructured</can-not-add>
+      <name-invalid>Please enter the property name.</name-invalid>
+      <unable-create>Cannot add properties.</unable-create>
+      <value-invalid>Please enter the value.</value-invalid>
+      <node-checkedin>You must check out this node before adding a property.</node-checkedin>
+      <can-not-add>You cannot add properties to this node. This is only allowed for the node type nt:unstructured.</can-not-add>
       <propertyName-invalid>The property name must include namespace (e.g. namespace:name).</propertyName-invalid>
       <propertyName-exist>The property '{0}' already exists.</propertyName-exist>
       <propertyValu-null>Some values may be null.</propertyValu-null>
@@ -751,7 +757,7 @@
       </title>
     </action>
     <header>
-      <usersOrGroups>用户或用户组</usersOrGroups>
+      <usersOrGroups>User or Group</usersOrGroups>
       <read>Read</read>
       <addNode>Modify</addNode>
       <remove>删除</remove>
@@ -766,9 +772,9 @@
   </UIPermissionInfo>
   <permission>
     <title>
-      <SelectUser>选择用户</SelectUser>
+      <SelectUser>Select User</SelectUser>
       <SelectMember>选择成员</SelectMember>
-      <AddAny>选择所有人</AddAny>
+      <AddAny>Select Everyone</AddAny>
     </title>
   </permission>
   <!--
@@ -1324,7 +1330,7 @@
   -->
   <PopupUserSelector>
     <title>
-      <UIUserContainer>选择用户权限</UIUserContainer>
+      <UIUserContainer>权限选择器</UIUserContainer>
     </title>
   </PopupUserSelector>
   <UIPopupTaxonomy>
@@ -1938,6 +1944,11 @@
   # Validator messages                                                              #
   ###################################################################################
   -->
+   <ECMPhoneFormatValidator>
+     <msg>
+       <Invalid>The field '{0}' contains invalid an Phone number. Please enter another value.</Invalid>
+     </msg>
+  </ECMPhoneFormatValidator>
   <ECMNameValidator>
     <msg>
       <Invalid-char>字段"{0}"包含一些无效的字符。请输入另一个值。</Invalid-char>
@@ -2344,7 +2355,7 @@
     <msg>
       <create-link-problem>您不能在 '{1}' 创建节点"{0}"的链接。</create-link-problem>
       <dest-node-is-link>目标节点"{0}"已经是一个符号连接，所以您不能创建一个符号连接里面。</dest-node-is-link>
-      <selected-is-link>在选定的节点 '{0}' 已经是一个链接，因此您无法创建到另一个链接的链接点。</selected-is-link>
+      <selected-is-link>The selected node '{0}' is already a link. You cannot create a link that points to another link.</selected-is-link>
       <confirm-create-link>你想要创建一个链接到此位置吗？</confirm-create-link>
     </msg>
   </UIWorkingArea>
@@ -2426,6 +2437,8 @@
       <Keepfile>保持这两个文件</Keepfile>
 <ReadOnly>Open Read-only</ReadOnly>
 <Cancel>取消</Cancel>
+      <KeepBoth>Keep Both</KeepBoth>
+      <CreateNewVersion>Create a new version</CreateNewVersion>
     </label>
   </UIConfirmMessage>
 
@@ -3158,6 +3171,7 @@
     <Keep>留着两个</Keep>
     <Replace>替换</Replace>
     <Canceled>已取消</Canceled>
+      <UploadNewVersion>Upload new version</UploadNewVersion>
     <Cancel>#{word.cancel}</Cancel>
     <AbortAllConfirmation>你想要中止进展中的所有文件吗？</AbortAllConfirmation>
   </label>
@@ -3186,6 +3200,19 @@
   <property-name-incorrect>属性名称不正确，请输入另一个值 ！</property-name-incorrect>
     </msg>
   </UIPropertyForm>
+  <UIDocumentAutoVersionForm>
+    <msg>A document {0} already exits. What do you want to do? </msg>
+    <UIChkRememberNonVersioned>
+      <label>Remember my choice for all others non-versioned documents</label>
+    </UIChkRememberNonVersioned>
+    <UIChkRememberVersioned>
+      <label>Remember my choice for all others versioned documents</label>
+    </UIChkRememberVersioned>
+  </UIDocumentAutoVersionForm>
+  <DocumentAuto>
+    <message>A new version of the document {0} has been created successfully.</message>
+    <messageMultiFile>New version(s) of versioned document(s) has been created.</messageMultiFile>
+  </DocumentAuto>
   <!--
   ###################################################################################
   # JCR Exceptions manager                                                              #

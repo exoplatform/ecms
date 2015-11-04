@@ -2,16 +2,16 @@
 <bundle>
   <ContentSelector>
     <msg>
-      <no-file-selected>crwdns6815027:0crwdne6815027:0</no-file-selected>
+      <no-file-selected>crwdns6791775:0crwdne6791775:0</no-file-selected>
     </msg>
   </ContentSelector>
   <RenameConnector>
     <label>
-      <rename>crwdns6815028:0crwdne6815028:0</rename>
-      <cancel>crwdns6815029:0crwdne6815029:0</cancel>
+      <rename>crwdns6791776:0crwdne6791776:0</rename>
+      <cancel>crwdns6791777:0crwdne6791777:0</cancel>
     </label>
     <msg>
-      <renaming>crwdns6815030:0crwdne6815030:0</renaming>
+      <renaming>crwdns6791778:0crwdne6791778:0</renaming>
     </msg>
   </RenameConnector>
   <OpenInOfficeConnector>
@@ -23,4 +23,9 @@
       <exo.remote-edit.desktop-app>Open in {0}</exo.remote-edit.desktop-app>
     </label>
   </OpenInOfficeConnector>
+  <DocumentAutoVersion>
+    <msg>
+      <WrongMimeType>The mimetype of uploaded file is incorrect! The new version of {0} will not be created.</WrongMimeType>
+    </msg>
+  </DocumentAutoVersion>
 </bundle>

@@ -87,7 +87,7 @@
 -->
   <UITaxonomyTreeMainForm>
     <action>
-      <Reset>Reset</Reset>
+      <Reset>Restablir</Reset>
     </action>
     <msg>
       <name-not-allowed>Nom prohibit</name-not-allowed>
@@ -712,7 +712,7 @@
     </label>
     <title>
       <AddPermission>Afegeix permisos</AddPermission>
-      <RemovePermission>Remove Permission</RemovePermission>
+      <RemovePermission>Elimina Permisos</RemovePermission>
       <AddIcon>Afegeix una icona</AddIcon>
       <AddPath>Afegeix una ruta</AddPath>
     </title>
@@ -989,7 +989,11 @@
 <contentNavigation>Navegació de contingut</contentNavigation>
 <addSymLink>Afegeix un enllaç simbòlic</addSymLink>
       <checkIn>Protegir</checkIn>
-      <checkOut>Check Out</checkOut>
+      <checkOut>Desprotegir</checkOut>
+      <shareDocuments>Compartir</shareDocuments>
+      <openDocument>Remote Edit</openDocument>
+      <editProperty>Edit Document Properties</editProperty>
+      <uploadNewVersion>Upload a new version</uploadNewVersion>
     </label>
     <action>
       <Save>#{word.save}</Save>      
@@ -1019,7 +1023,7 @@
   </UIViewFormTabPane>
   <PopupViewPermission>
     <title>
-      <UIPermissionSelector>Selecciona el Permís</UIPermissionSelector>
+      <UIPermissionSelector>Selector de permisos</UIPermissionSelector>
     </title>
   </PopupViewPermission>
 
@@ -1382,8 +1386,8 @@
     <title>Afegeix un permís al node</title>
     <action>
       <Close>#{word.close}</Close>
-      <Save>Save</Save>
-      <Reset>Reset</Reset>
+      <Save>Desa</Save>
+      <Reset>Restablir</Reset>
     </action>
     <msg>
       <checkbox-require>Si us plau seleccioni almenys un permís.</checkbox-require>
@@ -1401,7 +1405,7 @@
   
   <PopupTaxonomyTreePermission>
     <title>
-      <UIPermissionSelector>Selecciona el Permís</UIPermissionSelector>
+      <UIPermissionSelector>Selector de permisos</UIPermissionSelector>
     </title>
    </PopupTaxonomyTreePermission>
    
@@ -1733,7 +1737,7 @@
   -->
   <AddNewTemplatePermission>
     <title>
-      <UIPermissionSelector>Selecciona el Permís</UIPermissionSelector>
+      <UIPermissionSelector>Selector de permisos</UIPermissionSelector>
     </title>
   </AddNewTemplatePermission>
   <TemplatePermission>
@@ -1774,12 +1778,12 @@
   </DialogForm>
   <DialogFormTemplatePermission>
     <title>
-      <UIPermissionSelector>Selecciona el Permís</UIPermissionSelector>
+      <UIPermissionSelector>Selector de permisos</UIPermissionSelector>
     </title>
   </DialogFormTemplatePermission>
   <ViewFormTemplatePermission>
     <title>
-      <UIPermissionSelector>Selecciona el Permís</UIPermissionSelector>
+      <UIPermissionSelector>Selector de permisos</UIPermissionSelector>
     </title>
   </ViewFormTemplatePermission>
   <TemplateContainerPopup>
@@ -1970,7 +1974,7 @@
   </EditQueryForm>
 <PermissionPopup>
   <title>
-    <UIGroupMemberSelector>Selecciona el Permís</UIGroupMemberSelector>
+    <UIGroupMemberSelector>Selector de permisos</UIGroupMemberSelector>
   </title>
 </PermissionPopup>
   <!--
@@ -2021,6 +2025,16 @@
       <UITagStyleForm>Edita la configuració de l'Estil d'Etiqueta</UITagStyleForm>
     </title>
   </FolksonomyPopup>
+  <!--
+  ###################################################################################
+  # ECMPhoneFormatValidator                                       #
+  ###################################################################################
+  -->
+  <ECMPhoneFormatValidator>
+    <msg>
+      <Invalid>El camp '{0}' conté un número de telèfon invàlid. Si us plau, intrueix un altre.</Invalid>
+    </msg>
+  </ECMPhoneFormatValidator>
   <!--
   ###################################################################################
   # org.exoplatform.ecm.jcr.ECMNameValidator  #
@@ -2417,6 +2431,7 @@
 <UIPermissionTreeForm>
 <action>
 <Save>Save</Save>
+<Cancel>#{word.cancel}</Cancel>
 <Reset>Reset</Reset>
 <NextAddAction>Següent</NextAddAction>
 <Previous>Anterior</Previous>

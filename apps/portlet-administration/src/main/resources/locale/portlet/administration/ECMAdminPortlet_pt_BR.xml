@@ -755,7 +755,7 @@
     <label>
       <actionType>Extender tipo de ação</actionType>
       <name>Nome (começa com "exo:")</name>
-      <isMove>é Ação Mover:</isMove>
+      <isMove>is Action Move:</isMove>
       <variables>Variáveis:</variables>
       <exo_businessProcessAction>Processo de negócio:</exo_businessProcessAction>
       <exo_scriptAction>Scripts Groovy</exo_scriptAction>
@@ -792,7 +792,7 @@
       <UIActionsTemplateContainer>Ações</UIActionsTemplateContainer>
       <UIOthersTemplateContainer>Outros</UIOthersTemplateContainer>
   <UIActionScriptContainer>Ação</UIActionScriptContainer>
-  <UIWidgetScriptContainer>Componentes</UIWidgetScriptContainer>
+  <UIWidgetScriptContainer>Widgets</UIWidgetScriptContainer>
 <UIInterceptorScriptContainer>Interceptadores</UIInterceptorScriptContainer>
 
 <nodeTypeDefinition>Tipo de nó</nodeTypeDefinition>
@@ -990,6 +990,10 @@
 <addSymLink>Adicionar link simbólico</addSymLink>
       <checkIn>Check In</checkIn>
       <checkOut>Check Out</checkOut>
+      <shareDocuments>Compartilhar</shareDocuments>
+      <openDocument>Remote Edit</openDocument>
+      <editProperty>Edit Document Properties</editProperty>
+      <uploadNewVersion>Upload a new version</uploadNewVersion>
     </label>
     <action>
       <Save>#{word.save}</Save>      
@@ -1019,7 +1023,7 @@
   </UIViewFormTabPane>
   <PopupViewPermission>
     <title>
-      <UIPermissionSelector>Selecionar permissão</UIPermissionSelector>
+      <UIPermissionSelector>Seletor de permissão</UIPermissionSelector>
     </title>
   </PopupViewPermission>
 
@@ -1181,7 +1185,7 @@
   -->
   <uiECMScriptsPopup>
     <title>
-      <ecmScriptForm>Script de ECM</ecmScriptForm>
+      <ecmScriptForm>ECM Script</ecmScriptForm>
     </title>
   </uiECMScriptsPopup>
 
@@ -1401,7 +1405,7 @@
   
   <PopupTaxonomyTreePermission>
     <title>
-      <UIPermissionSelector>Selecionar permissão</UIPermissionSelector>
+      <UIPermissionSelector>Seletor de permissão</UIPermissionSelector>
     </title>
    </PopupTaxonomyTreePermission>
    
@@ -1733,7 +1737,7 @@
   -->
   <AddNewTemplatePermission>
     <title>
-      <UIPermissionSelector>Selecionar permissão</UIPermissionSelector>
+      <UIPermissionSelector>Seletor de permissão</UIPermissionSelector>
     </title>
   </AddNewTemplatePermission>
   <TemplatePermission>
@@ -1774,12 +1778,12 @@
   </DialogForm>
   <DialogFormTemplatePermission>
     <title>
-      <UIPermissionSelector>Selecionar permissão</UIPermissionSelector>
+      <UIPermissionSelector>Seletor de permissão</UIPermissionSelector>
     </title>
   </DialogFormTemplatePermission>
   <ViewFormTemplatePermission>
     <title>
-      <UIPermissionSelector>Selecionar permissão</UIPermissionSelector>
+      <UIPermissionSelector>Seletor de permissão</UIPermissionSelector>
     </title>
   </ViewFormTemplatePermission>
   <TemplateContainerPopup>
@@ -1970,7 +1974,7 @@
   </EditQueryForm>
 <PermissionPopup>
   <title>
-    <UIGroupMemberSelector>Selecionar Permissão</UIGroupMemberSelector>
+    <UIGroupMemberSelector>Seletor de permissão</UIGroupMemberSelector>
   </title>
 </PermissionPopup>
   <!--
@@ -2021,6 +2025,16 @@
       <UITagStyleForm>Editar estilo de configuração da tag</UITagStyleForm>
     </title>
   </FolksonomyPopup>
+  <!--
+  ###################################################################################
+  # ECMPhoneFormatValidator                                       #
+  ###################################################################################
+  -->
+  <ECMPhoneFormatValidator>
+    <msg>
+      <Invalid>The field '{0}' contains an invalid Phone number. Please enter another value.</Invalid>
+    </msg>
+  </ECMPhoneFormatValidator>
   <!--
   ###################################################################################
   # org.exoplatform.ecm.jcr.ECMNameValidator  #
@@ -2417,6 +2431,7 @@
 <UIPermissionTreeForm>
 <action>
 <Save>Save</Save>
+<Cancel>#{word.cancel}</Cancel>
 <Reset>Reset</Reset>
 <NextAddAction>Próximo</NextAddAction>
 <Previous>Anterior</Previous>

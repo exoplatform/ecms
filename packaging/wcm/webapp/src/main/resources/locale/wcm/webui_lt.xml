@@ -34,7 +34,7 @@
 
   <Drives>
     <label>
-      <ManagedSites>Svetainių valdymas</ManagedSites>
+      <ManagedSites>Site Management</ManagedSites>
       <SharedSite>Bendrinama svetainė</SharedSite>
     </label>
   </Drives>

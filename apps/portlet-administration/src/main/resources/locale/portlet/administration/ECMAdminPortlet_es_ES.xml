@@ -87,7 +87,7 @@
 -->
   <UITaxonomyTreeMainForm>
     <action>
-      <Reset>Reset</Reset>
+      <Reset>Resetear</Reset>
     </action>
     <msg>
       <name-not-allowed>Nombre prohibido</name-not-allowed>
@@ -557,7 +557,7 @@
       <CancelChild>#{word.cancel}</CancelChild>
       <UpdateProperty>#{word.update}</UpdateProperty>
       <CancelProperty>#{word.cancel}</CancelProperty>
-      <Close>#{word.close}</Close>
+      <Close>#{word.cancel}</Close>
     </action>
     <msg>
       <register-successfully>El tipo de nodo '{0}' se registró correctamente.</register-successfully>
@@ -712,7 +712,7 @@
     </label>
     <title>
       <AddPermission>Añadir Permisos</AddPermission>
-      <RemovePermission>Remove Permission</RemovePermission>
+      <RemovePermission>Quitar el permiso</RemovePermission>
       <AddIcon>Añadir icono</AddIcon>
       <AddPath>Agregar Ruta</AddPath>
     </title>
@@ -818,7 +818,7 @@
     <header>
       <name>Nombre</name>
       <permissions>Permisos</permissions>
-      <tabList>Ficha de acción</tabList>
+      <tabList>Pestaña de acción</tabList>
       <baseVersion>Versión base</baseVersion>
       <action>Acción</action>
     </header>
@@ -854,7 +854,7 @@
                     <Delete>Borrar</Delete>
                   </title>       
  <header>
-  <tabName>Ficha</tabName>
+  <tabName>pestaña</tabName>
   <localizeButtons>Descripción</localizeButtons>
 <action>Acciones</action>
 </header>
@@ -949,9 +949,9 @@
     <label>
       <version>Restablecer la Versión</version>
       <viewName>Nombre</viewName>
-      <tabName>Nombre de la ficha</tabName>
+      <tabName>Nombre de la pestaña</tabName>
       <permission>Permiso</permission>
-      <tabs>Fichas</tabs>
+      <tabs>pestañas</tabs>
       <template>Plantillas</template>
       <enableVersion>Habilitar la versión</enableVersion>
       <addFolder>Agregar carpeta</addFolder>
@@ -987,9 +987,13 @@
       <publicationApproveContent>Aprobar el contenido</publicationApproveContent>
       <publicationPublish>Publicar</publicationPublish>
 <contentNavigation>Navegación de contenido</contentNavigation>
-<addSymLink>Agregar Symlink</addSymLink>
-      <checkIn>Check In</checkIn>
-      <checkOut>Check Out</checkOut>
+      <addSymLink>Agregar acceso directo</addSymLink>
+      <checkIn>Proteger</checkIn>
+      <checkOut>Desproteger</checkOut>
+      <shareDocuments>Compartir</shareDocuments>
+      <openDocument>Remote Edit</openDocument>
+      <editProperty>Edit Document Properties</editProperty>
+      <uploadNewVersion>Upload a new version</uploadNewVersion>
     </label>
     <action>
       <Save>#{word.save}</Save>      
@@ -1019,13 +1023,13 @@
   </UIViewFormTabPane>
   <PopupViewPermission>
     <title>
-      <UIPermissionSelector>Seleccione Permiso</UIPermissionSelector>
+      <UIPermissionSelector>Selector de Permiso</UIPermissionSelector>
     </title>
   </PopupViewPermission>
 
 <TabForm_Popup>
  <title>
-  <UITabForm>Agregar/Editar ficha</UITabForm>
+  <UITabForm>Agregar/Editar pestaña</UITabForm>
  </title>
 </TabForm_Popup>
 
@@ -1307,7 +1311,7 @@
 
   <TaxoTreeSelectUserOrGroupPopup>
   <title>
-      <TaxoTreeSelectUserOrGroup>Seleccione la membresía</TaxoTreeSelectUserOrGroup>
+      <TaxoTreeSelectUserOrGroup>Seleccione la afiliación</TaxoTreeSelectUserOrGroup>
     </title>
   </TaxoTreeSelectUserOrGroupPopup>
   
@@ -1379,11 +1383,11 @@
       <set_property>Establecer el derecho de la propiedad</set_property>
       <remove>Quitar el derecho</remove>
     </label>
-    <title>Add a permission to this node</title>
+    <title>Añadir un permiso a este nodo</title>
     <action>
       <Close>#{word.close}</Close>
-      <Save>Save</Save>
-      <Reset>Reset</Reset>
+      <Save>Guardar</Save>
+      <Reset>Resetear</Reset>
     </action>
     <msg>
       <checkbox-require>Por favor, seleccione al menos un permiso.</checkbox-require>
@@ -1401,7 +1405,7 @@
   
   <PopupTaxonomyTreePermission>
     <title>
-      <UIPermissionSelector>Seleccione Permiso</UIPermissionSelector>
+      <UIPermissionSelector>Selector de Permiso</UIPermissionSelector>
     </title>
    </PopupTaxonomyTreePermission>
    
@@ -1448,7 +1452,7 @@
   <permission>
     <title>
       <SelectUser>Seleccionar Usuario</SelectUser>
-      <SelectMember>Seleccione la membresía</SelectMember>
+      <SelectMember>Seleccione la afiliación</SelectMember>
       <AddAny>Todos</AddAny>
     </title>
   </permission>
@@ -1461,7 +1465,7 @@
     <title>
       <UIGroupSelector>Seleccionar Usuario</UIGroupSelector>
       <UIPermissionSelector>Seleccionar miembro</UIPermissionSelector>
-      <UIGroupMemberSelector>Seleccione la membresía</UIGroupMemberSelector>
+      <UIGroupMemberSelector>Seleccione la afiliación</UIGroupMemberSelector>
     </title>
   </SelectUserOrGroup>
   <UIGroupSelector>
@@ -1482,7 +1486,7 @@
       <add_node>Modificar</add_node>
       <remove>Quitar</remove>
     </label>
-    <title>Add permission to this node</title>
+    <title>Añadir permisos a este nodo</title>
     <action>
       <Close>#{word.close}</Close>
       <Save>#{word.save}</Save>
@@ -1733,7 +1737,7 @@
   -->
   <AddNewTemplatePermission>
     <title>
-      <UIPermissionSelector>Seleccione Permiso</UIPermissionSelector>
+      <UIPermissionSelector>Selector de Permiso</UIPermissionSelector>
     </title>
   </AddNewTemplatePermission>
   <TemplatePermission>
@@ -1774,12 +1778,12 @@
   </DialogForm>
   <DialogFormTemplatePermission>
     <title>
-      <UIPermissionSelector>Seleccione Permiso</UIPermissionSelector>
+      <UIPermissionSelector>Selector de Permiso</UIPermissionSelector>
     </title>
   </DialogFormTemplatePermission>
   <ViewFormTemplatePermission>
     <title>
-      <UIPermissionSelector>Seleccione Permiso</UIPermissionSelector>
+      <UIPermissionSelector>Selector de Permiso</UIPermissionSelector>
     </title>
   </ViewFormTemplatePermission>
   <TemplateContainerPopup>
@@ -1970,7 +1974,7 @@
   </EditQueryForm>
 <PermissionPopup>
   <title>
-    <UIGroupMemberSelector>Seleccione Permiso</UIGroupMemberSelector>
+    <UIGroupMemberSelector>Selector de Permiso</UIGroupMemberSelector>
   </title>
 </PermissionPopup>
   <!--
@@ -2021,6 +2025,16 @@
       <UITagStyleForm>Editar configuración de estilo de etiqueta</UITagStyleForm>
     </title>
   </FolksonomyPopup>
+  <!--
+  ###################################################################################
+  # ECMPhoneFormatValidator                                       #
+  ###################################################################################
+  -->
+  <ECMPhoneFormatValidator>
+    <msg>
+      <Invalid>El campo '{0}' contiene un número de teléfono no válido. Por favor, especifique otro valor.</Invalid>
+    </msg>
+  </ECMPhoneFormatValidator>
   <!--
   ###################################################################################
   # org.exoplatform.ecm.jcr.ECMNameValidator  #
@@ -2144,7 +2158,7 @@
     <label>
       <selectGroup>Seleccionar grupo</selectGroup>
       <selectUser>Seleccionar Usuario</selectUser>
-      <selectMembership>Seleccione la membresía</selectMembership>
+      <selectMembership>Seleccione la afiliación</selectMembership>
     </label>
   </UIDrivePermissionSelector>
   
@@ -2152,7 +2166,7 @@
     <label>
       <selectGroup>Seleccionar Grupo</selectGroup>
       <selectUser>Seleccionar Usuario</selectUser>
-      <selectMembership>Seleccione la membresía</selectMembership>
+      <selectMembership>Seleccione la afiliación</selectMembership>
     </label>
   </UIPermissionSelector>
   
@@ -2181,7 +2195,7 @@
   </MetadataPermission>  
   <MetadataPermission>
     <label>
-      <selectMembership>Seleccione la membresía</selectMembership>
+      <selectMembership>Seleccione la afiliación</selectMembership>
     </label>
   </MetadataPermission>
   <anyPermission>
@@ -2337,7 +2351,7 @@
   
   <UIViewFormTabPane>
     <action>
-      <AddTabForm>Añadir Ficha</AddTabForm>
+      <AddTabForm>Añadir pestaña</AddTabForm>
       <AddTab>#{word.save}</AddTab>
       <BackViewForm>Atrás</BackViewForm>
     </action>
@@ -2366,7 +2380,7 @@
     </header>
     <msg>
       <undeletable>No puede eliminar '{0}' porque es el predeterminado.</undeletable>
-      <confirm-delete>¿Está seguro de querer eliminar esta hoja de estilo?</confirm-delete>
+      <confirm-delete>¿Está seguro de querer eliminar esta apariencia?</confirm-delete>
     </msg>
     <action>
       <title>
@@ -2379,7 +2393,7 @@
   <SkinForm>
     <label>
       <UITemplateContent>SkinForm</UITemplateContent>
-      <UIPopupWindow>Permiso de la hoja de estilo</UIPopupWindow>
+      <UIPopupWindow>Permiso de la apariencia</UIPopupWindow>
       <selectVersion>Versiones</selectVersion>
       <content>Contenido:</content>
       <name>Nombre:</name>
@@ -2387,7 +2401,7 @@
       <viewPermission>Permiso:</viewPermission>
       <enableVersion>Habilitar versiones</enableVersion>
     </label>
-    <title>Agregar o editar la piel</title>
+    <title>Agregar/Editar Apariencia</title>
   </SkinForm>
 
  <UITagManager>
@@ -2417,6 +2431,7 @@
 <UIPermissionTreeForm>
 <action>
 <Save>Save</Save>
+<Cancel>#{word.cancel}</Cancel>
 <Reset>Reset</Reset>
 <NextAddAction>Siguiente</NextAddAction>
 <Previous>Previo</Previous>
@@ -2468,17 +2483,17 @@
       <Add>Añadir</Add>
     </action>
     <label>
-      <userOrGroup>Membresías:</userOrGroup>
+      <userOrGroup>afiliaciones:</userOrGroup>
     </label>
     <msg>
-      <userOrGroup-alreadyExists>La membresía ya existe. Por favor, seleccione otra.</userOrGroup-alreadyExists>
+      <userOrGroup-alreadyExists>La afiliación ya existe. Por favor, seleccione otra.</userOrGroup-alreadyExists>
     </msg>    
   </UITagPermissionForm>
   
   <UIGroupMemberSelector>
     <label>
       <selectGroup>Seleccionar grupo</selectGroup>
-      <selectMembership>Seleccione la membresía</selectMembership>
+      <selectMembership>Seleccione la afiliación</selectMembership>
     </label>
   </UIGroupMemberSelector>
   

@@ -60,8 +60,8 @@
       <UICLVConfigTargetPageFormInputSet>Arată în pagină</UICLVConfigTargetPageFormInputSet>
       <content-not-found>Content not found.</content-not-found>
       <ContentPath>Calea conţinutului</ContentPath>
-      <Up>Up</Up>
-      <Down>Down</Down>
+      <Up>Sus</Up>
+      <Down>Jos</Down>
       <UICLVConfigCacheManagementLabel>Vizibilitatea conținutului</UICLVConfigCacheManagementLabel>
       <UICLVContentByQueryLabel>Content by Query</UICLVContentByQueryLabel>
       <UICLVConfigWorkspaceFormSelectBox>Spațiu de lucru</UICLVConfigWorkspaceFormSelectBox>

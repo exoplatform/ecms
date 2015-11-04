@@ -23,7 +23,7 @@
     <view>
       <label>
         <postedBy>Paskutinį komentarą parašė</postedBy>
-        <at>į</at>
+        <at>at</at>
         <comments>Komentaras(ai)</comments>
         <show-comments>Rodyti komentarus</show-comments>
         <hide-comments>Slėpti komentarus</hide-comments>

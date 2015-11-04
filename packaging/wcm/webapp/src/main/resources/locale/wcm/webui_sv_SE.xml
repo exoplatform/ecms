@@ -34,7 +34,7 @@
 
   <Drives>
     <label>
-      <ManagedSites>Hantering av webbplatser</ManagedSites>
+      <ManagedSites>Site Management</ManagedSites>
       <SharedSite>Delad webbplats</SharedSite>
     </label>
   </Drives>

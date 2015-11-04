@@ -60,8 +60,8 @@
       <UICLVConfigTargetPageFormInputSet>Εμφάνιση στη σελίδα</UICLVConfigTargetPageFormInputSet>
       <content-not-found>Content not found.</content-not-found>
       <ContentPath>Διαδρομή περιεχομένου</ContentPath>
-      <Up>Up</Up>
-      <Down>Down</Down>
+      <Up>Επάνω</Up>
+      <Down>Κάτω</Down>
       <UICLVConfigCacheManagementLabel>Ορατότητα περιεχομένου</UICLVConfigCacheManagementLabel>
       <UICLVContentByQueryLabel>Content by Query</UICLVContentByQueryLabel>
       <UICLVConfigWorkspaceFormSelectBox>Χώρος Εργασίας</UICLVConfigWorkspaceFormSelectBox>

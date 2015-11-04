@@ -74,7 +74,7 @@
     <dialog>
       <label>
         <name>#{word.name}</name>
-        <url>Nettadresse</url>
+        <url>URL</url>
         <description>Beskrivelse</description>
       </label>
     </dialog>

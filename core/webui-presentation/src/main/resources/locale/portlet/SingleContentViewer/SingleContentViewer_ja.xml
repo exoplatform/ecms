@@ -98,6 +98,11 @@
       <SelectTargetPage>ページに表示</SelectTargetPage>
     </title>
   </UISCVConfigPrintPageFormInputSet>
+  <UISCVConfigPrintPageSelectorPopupWindow>
+    <title>
+      <UIPageSelector>ページ選択</UIPageSelector>
+    </title>
+  </UISCVConfigPrintPageSelectorPopupWindow>
   <PublicationStates>
     <archived>達成済</archived>
     <obsolete>廃止済</obsolete>

@@ -98,6 +98,11 @@
       <SelectTargetPage>Zobrazit na stránce</SelectTargetPage>
     </title>
   </UISCVConfigPrintPageFormInputSet>
+  <UISCVConfigPrintPageSelectorPopupWindow>
+    <title>
+      <UIPageSelector>Výběr stránky</UIPageSelector>
+    </title>
+  </UISCVConfigPrintPageSelectorPopupWindow>
   <PublicationStates>
     <archived>Archivováno</archived>
     <obsolete>Zastaralý</obsolete>

@@ -211,7 +211,7 @@
   <UINamespaceList>
     <header>
       <prefix>前缀</prefix>
-      <uri>命名空间 URI</uri>
+      <uri>Namespace URI</uri>
       <action>操作</action>
     </header>
     <action>
@@ -230,10 +230,10 @@
   -->
   <UIMetadataList>
     <label>
-      <false>假</false>
-      <true>真</true>
-      <True>真</True>
-      <False>假</False>
+      <false>false</false>
+      <true>true</true>
+      <True>true</True>
+      <False>false</False>
     </label>
     <title>
       <view>视图</view>
@@ -708,7 +708,7 @@
     <label>
       <both>Both</both>
       <folderOnly>Folder</folderOnly>
-      <unstructuredFolder>非结构化的文件夹</unstructuredFolder>
+      <unstructuredFolder>Unstructured Folder</unstructuredFolder>
     </label>
     <title>
       <AddPermission>添加权限</AddPermission>
@@ -755,7 +755,7 @@
     <label>
       <actionType>扩展操作类型：</actionType>
       <name>名称：</name>
-      <isMove>是行动移动：</isMove>
+      <isMove>is Action Move:</isMove>
       <variables>变量</variables>
       <exo_businessProcessAction>业务流程：</exo_businessProcessAction>
       <exo_scriptAction>Groovy 脚本：</exo_scriptAction>
@@ -990,6 +990,10 @@
 <addSymLink>添加符号链接</addSymLink>
       <checkIn>Check In</checkIn>
       <checkOut>Check Out</checkOut>
+      <shareDocuments>分享</shareDocuments>
+      <openDocument>Remote Edit</openDocument>
+      <editProperty>Edit Document Properties</editProperty>
+      <uploadNewVersion>Upload a new version</uploadNewVersion>
     </label>
     <action>
       <Save>#{word.save}</Save>      
@@ -1019,7 +1023,7 @@
   </UIViewFormTabPane>
   <PopupViewPermission>
     <title>
-      <UIPermissionSelector>选择权限</UIPermissionSelector>
+      <UIPermissionSelector>权限选择器</UIPermissionSelector>
     </title>
   </PopupViewPermission>
 
@@ -1181,7 +1185,7 @@
   -->
   <uiECMScriptsPopup>
     <title>
-      <ecmScriptForm>ECM 脚本</ecmScriptForm>
+      <ecmScriptForm>ECM Script</ecmScriptForm>
     </title>
   </uiECMScriptsPopup>
 
@@ -1401,7 +1405,7 @@
   
   <PopupTaxonomyTreePermission>
     <title>
-      <UIPermissionSelector>选择权限</UIPermissionSelector>
+      <UIPermissionSelector>权限选择器</UIPermissionSelector>
     </title>
    </PopupTaxonomyTreePermission>
    
@@ -1733,7 +1737,7 @@
   -->
   <AddNewTemplatePermission>
     <title>
-      <UIPermissionSelector>选择权限</UIPermissionSelector>
+      <UIPermissionSelector>权限选择器</UIPermissionSelector>
     </title>
   </AddNewTemplatePermission>
   <TemplatePermission>
@@ -1774,12 +1778,12 @@
   </DialogForm>
   <DialogFormTemplatePermission>
     <title>
-      <UIPermissionSelector>选择权限</UIPermissionSelector>
+      <UIPermissionSelector>权限选择器</UIPermissionSelector>
     </title>
   </DialogFormTemplatePermission>
   <ViewFormTemplatePermission>
     <title>
-      <UIPermissionSelector>选择权限</UIPermissionSelector>
+      <UIPermissionSelector>权限选择器</UIPermissionSelector>
     </title>
   </ViewFormTemplatePermission>
   <TemplateContainerPopup>
@@ -1970,7 +1974,7 @@
   </EditQueryForm>
 <PermissionPopup>
   <title>
-    <UIGroupMemberSelector>选择权限</UIGroupMemberSelector>
+    <UIGroupMemberSelector>权限选择器</UIGroupMemberSelector>
   </title>
 </PermissionPopup>
   <!--
@@ -2021,6 +2025,16 @@
       <UITagStyleForm>编辑标记样式配置</UITagStyleForm>
     </title>
   </FolksonomyPopup>
+  <!--
+  ###################################################################################
+  # ECMPhoneFormatValidator                                       #
+  ###################################################################################
+  -->
+  <ECMPhoneFormatValidator>
+    <msg>
+      <Invalid>The field '{0}' contains an invalid Phone number. Please enter another value.</Invalid>
+    </msg>
+  </ECMPhoneFormatValidator>
   <!--
   ###################################################################################
   # org.exoplatform.ecm.jcr.ECMNameValidator  #
@@ -2417,6 +2431,7 @@
 <UIPermissionTreeForm>
 <action>
 <Save>Save</Save>
+<Cancel>#{word.cancel}</Cancel>
 <Reset>Reset</Reset>
 <NextAddAction>下一个</NextAddAction>
 <Previous>上一个</Previous>
@@ -2517,7 +2532,7 @@
   </UIWorkspaceWizard>
   <UIRepositoryForm>
     <msg>
-      <not-complete-repository>正在创建存储库。你需要等待几分钟，然后创建另一个。</not-complete-repository>
+      <not-complete-repository>The repository is being created. You need to wait a few minutes before creating another one.</not-complete-repository>
     </msg>
   </UIRepositoryForm>
   

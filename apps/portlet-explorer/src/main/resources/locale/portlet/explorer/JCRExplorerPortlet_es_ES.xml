@@ -18,7 +18,7 @@
     </action>
     <msg>
       <not-support>No puede comentar en este tipo de documento.</not-support>
-      <not-checkedout>Debe salir del nodo antes de comentar en el mismo.</not-checkedout>
+      <not-checkedout>Debe salir del nodo antes de comentar en él</not-checkedout>
       <content-null>No puedes publicar un comentario vacío.</content-null>
     </msg>
   </UICommentForm>
@@ -32,7 +32,7 @@
       <normal>Normal/Pulse para votar</normal>
       <good>inferior a la media/Pulse para votar</good>
       <verygood>promedio/Pulse para votar</verygood>
-      <excellent>superior a la media/Click para votar</excellent>
+      <excellent>Por encima de la media</excellent>
       <best>Bueno/Pulse para votar</best>
       <no-value>sin embargo ningún valor</no-value>
     </title>
@@ -46,7 +46,7 @@
     </button>
     <msg>
       <not-support>No se puede votar por este tipo de documento.</not-support>
-      <not-checkedout>Debe salir del nodo antes de votar.</not-checkedout>
+      <not-checkedout>Usted debe comprobar el nodo antes de votar.</not-checkedout>
       <vote-restriction>No puede votar más de una vez.</vote-restriction>
     </msg>
   </UIVoteForm>
@@ -165,7 +165,7 @@
       <enableDragAndDrop>Activar el Arrastrar y Soltar</enableDragAndDrop>
       <sortBy>Clasificar por:</sortBy>
       <order>Ordenar por</order>
-      <nodesPerPage>Nodos Por Página</nodesPerPage>
+      <nodesPerPage>Elementos por Página:</nodesPerPage>
     </label>
     <action>
       <Back>#{word.close}</Back>
@@ -254,7 +254,8 @@
       <UISelectRestorePath>Seleccionar Ruta de Restauración</UISelectRestorePath>
       <UISEOForm>Administrar SEO</UISEOForm>
       <UISEOToolbarForm>Administrar SEO</UISEOToolbarForm>
-      <UIReadOnlyFileConfirmMessage>Open Document</UIReadOnlyFileConfirmMessage>
+      <UIReadOnlyFileConfirmMessage>Abrir Documento</UIReadOnlyFileConfirmMessage>
+      <UIDocumentAutoVersionForm>Copy Document</UIDocumentAutoVersionForm>
     </title>
     <header>
       <workspace>Espacio de Trabajo</workspace>
@@ -308,6 +309,8 @@
       <ViewMetadatas>Metadatos</ViewMetadatas>
       <ViewRelations>Mostrar/Esconder Relaciones</ViewRelations>
       <ShowJCRStructure>Mostrar/Ocultar la estructura de contenidos</ShowJCRStructure>
+      <EditProperty>Edit Document Properties</EditProperty>
+      <UploadNewVersion>Upload a new version</UploadNewVersion>
     </tooltip>
     <msg>
       <cannot-action-in-rootnode>No puede hacer esta acción en el nodo de la raíz.</cannot-action-in-rootnode>
@@ -396,12 +399,12 @@
       <has-not-add-permission>No tiene permiso de añadir un nodo nuevo.</has-not-add-permission>
       <node-cutting>El nodo se está cortando. No lo puede pegar aquí.</node-cutting>
       <access-denied>Acceso denegado. Tal vez, no tiene permiso en este nodo.</access-denied>
-      <remove-verion-exception>No se puede quitar este nodo porque el mismo o su ancestro está conectado.</remove-verion-exception>
+      <remove-verion-exception>No se puede quitar este nodo porque el mismo (o su ancestro) está conectado.</remove-verion-exception>
       <remove-referentialIntegrityException>No se puede borrar este nodo ya que actualmente es el objetivo de una propiedad de REFERENCIA.</remove-referentialIntegrityException>
       <constraintviolation-exception>El elemento obligatorio jcr : uuid no fué encontrado.  Quizás el nodo fué eliminado o cambiado.  Por favor pulse en el botón de actualizar.</constraintviolation-exception>
       <path-not-found-exception>Este nodo fue eliminado o cambiado. Por favor haga clic en el botón de Actualizar.</path-not-found-exception>
       <not-exist-categories>La categoría no existe.</not-exist-categories>
-      <lock-node-read-only>This file is locked by user {0}. Open read-only ?</lock-node-read-only>
+      <lock-node-read-only>Este archivo está bloqueado por el usuario {0}. ¿Abrir en sólo lectura ?</lock-node-read-only>
     </msg>
   </UIPopupMenu>
   <!--
@@ -595,7 +598,10 @@
       <EmptyTrash>Vaciar zafacón</EmptyTrash>
       <WebDavView>Abrir en MS Office</WebDavView>
       <Download>Descargar</Download>
-      <OpenDocument>Remote Edit</OpenDocument>
+      <OpenDocument>Edición remota</OpenDocument>
+      <EditProperty>Edit Document Properties</EditProperty>
+      <UploadNewVersion>Upload a new version</UploadNewVersion>
+      <CreateNewVersion>Create a new version</CreateNewVersion>
     </event>
   </ECMContextMenu>
  
@@ -767,7 +773,7 @@
   <permission>
     <title>
       <SelectUser>Seleccionar Usuario</SelectUser>
-      <SelectMember>Seleccione la membresía</SelectMember>
+      <SelectMember>Seleccione la afiliación</SelectMember>
       <AddAny>Seleccionar a todos</AddAny>
     </title>
   </permission>
@@ -1324,7 +1330,7 @@
   -->
   <PopupUserSelector>
     <title>
-      <UIUserContainer>Seleccionar Permiso de Usuario</UIUserContainer>
+      <UIUserContainer>Selector de Permiso</UIUserContainer>
     </title>
   </PopupUserSelector>
   <UIPopupTaxonomy>
@@ -1493,9 +1499,9 @@
       <import-successful>Importe exitoso.</import-successful>
       <filename-invalid>Buscar un archivo .xml para importarlo al campo 'Subir archivo'.</filename-invalid>
       <filetype-error>No se puede importar el archivo cargado. Tal vez, el archivo .xml no es válido.</filetype-error>
-      <xml-invalid>There is an invalid character at position [row, column]:{0} in {1} file</xml-invalid>
+      <xml-invalid>Hay un carácter no válido en la posición [fila, columna]:{0} del archivo {1}</xml-invalid>
       <mimetype-invalid>Sólo los archivos .xml o .zip son compatibles para importar.</mimetype-invalid>
-      <access-denied>¡Acceso denegado! No está autorizado a importar allí.</access-denied>
+      <access-denied>Acceso denegado. No le está permitido importar allí.</access-denied>
       <constraint-violation-exception>Es imposible importar datos. El tipo '{0}' no está permitido en este lugar.</constraint-violation-exception>
       <item-exists-exception>Un nodo entrante referenciable tiene el mismo UUID como un nodo existente en el área de trabajo.</item-exists-exception>
     </msg>
@@ -1895,7 +1901,7 @@
       <tag-name-empty>El nombre de su etiqueta está vacío</tag-name-empty>
       <tag-name-duplicate>Los nombres de las etiquetas de entrada están duplicados.</tag-name-duplicate>
       <tagName-too-long>Una de las etiquetas introducidas es demasiado larga. El nombre de la etiqueta debe ser menos de 30 caracteres.</tagName-too-long>
-      <path-not-found>Esta etiqueta ha sido eliminada o cambiada. Por favor, Haga clic en el botón Actualizar.</path-not-found>
+      <path-not-found>Esta etiqueta ha sido eliminada o cambiada. Por favor, haga clic en el botón Actualizar.</path-not-found>
     </msg>
     <introduction>
       <tagName>(Separar mútiples etiquetas con las comas.)</tagName>
@@ -1938,6 +1944,11 @@
   # Validator messages                                                              #
   ###################################################################################
   -->
+   <ECMPhoneFormatValidator>
+     <msg>
+       <Invalid>El campo '{0}' contiene  un número no válido de teléfono. Especifique otro valor.</Invalid>
+     </msg>
+  </ECMPhoneFormatValidator>
   <ECMNameValidator>
     <msg>
       <Invalid-char>El campo '{0}' contiene algunos caracteres inválidos. Por favor, introduzca otro valor.</Invalid-char>
@@ -2057,7 +2068,7 @@
     <label>
       <selectGroup>Seleccionar grupo</selectGroup>
       <selectUser>Seleccionar Usuario</selectUser>
-      <selectMembership>Seleccione la membresía</selectMembership>
+      <selectMembership>Seleccione la afiliación</selectMembership>
     </label>
   </UIPermissionSelector>
   <!--
@@ -2177,7 +2188,7 @@
     <label>
       <selectGroup>Seleccionar grupo</selectGroup>
       <selectUser>Seleccionar Usuario</selectUser>
-      <selectMembership>Seleccionar la membresía</selectMembership>
+      <selectMembership>Seleccionar la afiliación</selectMembership>
     </label>
   </UIGroupMemberSelector>
   <!--
@@ -2344,7 +2355,7 @@
     <msg>
       <create-link-problem>No puede crear un enlace para el nodo '{0}' en '{1}'.</create-link-problem>
       <dest-node-is-link>El nodo de destino '{0}' ya es un symlink, por lo que no se puede crear un symlink en su interior.</dest-node-is-link>
-      <selected-is-link>El nodo seleccionado '{0}' ya es un enlace, por lo que no se puede crear un punto de enlace a otro enlace.</selected-is-link>
+      <selected-is-link>El nodo seleccionado '{0}' ya es un enlace. No se puede crear un enlace que apunte a otro enlace.</selected-is-link>
       <confirm-create-link>¿Desea crear un vínculo a esta ubicación?</confirm-create-link>
     </msg>
   </UIWorkingArea>
@@ -2424,8 +2435,10 @@
       <ReplaceData>Reemplazar la data</ReplaceData>
       <Back>Regresar al cambio de nombre</Back>
       <Keepfile>Guardar ambos archivos</Keepfile>
-<ReadOnly>Open Read-only</ReadOnly>
+<ReadOnly>Abrir en sólo lectura</ReadOnly>
 <Cancel>Cancelar</Cancel>
+      <KeepBoth>Keep Both</KeepBoth>
+      <CreateNewVersion>Create a new version</CreateNewVersion>
     </label>
   </UIConfirmMessage>
 
@@ -2984,15 +2997,15 @@
       <user>Autor</user>
       <description>Descripción</description>
     </header>
-    <create-version>New version is created</create-version>
+    <create-version>Se creó nueva versión</create-version>
   </UIPublicationHistory>
   
   <UIPublicationSchedule>
     <label>
       <introduction>Puede programar la publicación del documento. Seleccione la fecha que le gustaría ver el documento publicado</introduction>
       <no-schedule-info>No hay fecha de publicación para el documento</no-schedule-info>
-      <UIPublicationPanelStartDateInput>Start Publication date</UIPublicationPanelStartDateInput>
-      <UIPublicationPanelEndDateInput>End Publication date</UIPublicationPanelEndDateInput>
+      <UIPublicationPanelStartDateInput>Fecha de inicio de Publicación</UIPublicationPanelStartDateInput>
+      <UIPublicationPanelEndDateInput>Fecha de fin de Publicación</UIPublicationPanelEndDateInput>
     </label>
     <msg>
       <save-finished>Su nueva fecha de publicación se ha guardado correctamente.</save-finished>
@@ -3158,6 +3171,7 @@
     <Keep>Mantenga ambas</Keep>
     <Replace>Reemplazar</Replace>
     <Canceled>Cancelado</Canceled>
+      <UploadNewVersion>Upload new version</UploadNewVersion>
     <Cancel>#{word.cancel}</Cancel>
     <AbortAllConfirmation>¿Quieres abortar todos los archivos en progreso?</AbortAllConfirmation>
   </label>
@@ -3186,6 +3200,19 @@
   <property-name-incorrect>El nombre de la propiedad es incorrecto, por favor introduzca otro valor para él</property-name-incorrect>
     </msg>
   </UIPropertyForm>
+  <UIDocumentAutoVersionForm>
+    <msg>A document {0} already exits. What do you want to do? </msg>
+    <UIChkRememberNonVersioned>
+      <label>Remember my choice for all others non-versioned documents</label>
+    </UIChkRememberNonVersioned>
+    <UIChkRememberVersioned>
+      <label>Remember my choice for all others versioned documents</label>
+    </UIChkRememberVersioned>
+  </UIDocumentAutoVersionForm>
+  <DocumentAuto>
+    <message>A new version of the document {0} has been created successfully.</message>
+    <messageMultiFile>New version(s) of versioned document(s) has been created.</messageMultiFile>
+  </DocumentAuto>
   <!--
   ###################################################################################
   # JCR Exceptions manager                                                              #

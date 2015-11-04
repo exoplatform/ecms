@@ -18,8 +18,8 @@
       <Document>Documento</Document>
       <DocumentAndPage>Documento y Página</DocumentAndPage>
       <documentandpage>Documento y Página</documentandpage>
-      <results>Results {0} to {1} for {2}</results>
-      <oneResult>Only one result for {0}</oneResult>
+      <results>Resultados {0} a {1} para {2}</results>
+      <oneResult>Sólo un resultado para {0}</oneResult>
       <ofAboutCaption>de unos</ofAboutCaption>
       <timeUnitCaption>segundos</timeUnitCaption>
       <similar>Páginas donde aparece el mismo contenido</similar>

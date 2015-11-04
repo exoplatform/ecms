@@ -712,7 +712,7 @@
     </label>
     <title>
       <AddPermission>Thêm Phân quyền</AddPermission>
-      <RemovePermission>Remove Permission</RemovePermission>
+      <RemovePermission>Gỡ bỏ Phân quyền</RemovePermission>
       <AddIcon>Thêm Biểu tượng</AddIcon>
       <AddPath>Thêm Đường dẫn</AddPath>
     </title>
@@ -990,6 +990,10 @@
 <addSymLink>Thêm liên kết</addSymLink>
       <checkIn>Check In</checkIn>
       <checkOut>Check Out</checkOut>
+      <shareDocuments>Chia sẻ</shareDocuments>
+      <openDocument>Remote Edit</openDocument>
+      <editProperty>Edit Document Properties</editProperty>
+      <uploadNewVersion>Upload a new version</uploadNewVersion>
     </label>
     <action>
       <Save>#{word.save}</Save>      
@@ -1019,7 +1023,7 @@
   </UIViewFormTabPane>
   <PopupViewPermission>
     <title>
-      <UIPermissionSelector>Chọn Phân quyền</UIPermissionSelector>
+      <UIPermissionSelector>Chọn Quyền</UIPermissionSelector>
     </title>
   </PopupViewPermission>
 
@@ -1313,7 +1317,7 @@
   
   <TaxoTreeAnyPermission>
     <label>
-      <any>Cho phép tất cả</any>
+      <any>Bất kỳ Phân quyền nào</any>
       <anyPermission>TaxoTreeAnyPermission</anyPermission>
     </label>
   </TaxoTreeAnyPermission>
@@ -1379,7 +1383,7 @@
       <set_property>Quyền Thiết lập Thuộc tính</set_property>
       <remove>Quyền Gỡ bỏ</remove>
     </label>
-    <title>Thêm phân quyền cho nút</title>
+    <title>Add a permission to this node</title>
     <action>
       <Close>#{word.close}</Close>
       <Save>Lưu</Save>
@@ -1401,7 +1405,7 @@
   
   <PopupTaxonomyTreePermission>
     <title>
-      <UIPermissionSelector>Chọn Phân quyền</UIPermissionSelector>
+      <UIPermissionSelector>Chọn Quyền</UIPermissionSelector>
     </title>
    </PopupTaxonomyTreePermission>
    
@@ -1482,7 +1486,7 @@
       <add_node>Sửa đổi</add_node>
       <remove>Quyền xóa</remove>
     </label>
-    <title>Thêm phân quyền cho nút</title>
+    <title>Add permission to this node</title>
     <action>
       <Close>#{word.close}</Close>
       <Save>#{word.save}</Save>
@@ -1733,7 +1737,7 @@
   -->
   <AddNewTemplatePermission>
     <title>
-      <UIPermissionSelector>Chọn Phân quyền</UIPermissionSelector>
+      <UIPermissionSelector>Chọn Quyền</UIPermissionSelector>
     </title>
   </AddNewTemplatePermission>
   <TemplatePermission>
@@ -1774,12 +1778,12 @@
   </DialogForm>
   <DialogFormTemplatePermission>
     <title>
-      <UIPermissionSelector>Chọn Phân quyền</UIPermissionSelector>
+      <UIPermissionSelector>Chọn Quyền</UIPermissionSelector>
     </title>
   </DialogFormTemplatePermission>
   <ViewFormTemplatePermission>
     <title>
-      <UIPermissionSelector>Chọn Phân quyền</UIPermissionSelector>
+      <UIPermissionSelector>Chọn Quyền</UIPermissionSelector>
     </title>
   </ViewFormTemplatePermission>
   <TemplateContainerPopup>
@@ -2023,6 +2027,16 @@
   </FolksonomyPopup>
   <!--
   ###################################################################################
+  # ECMPhoneFormatValidator                                       #
+  ###################################################################################
+  -->
+  <ECMPhoneFormatValidator>
+    <msg>
+      <Invalid>The field '{0}' contains an invalid Phone number. Please enter another value.</Invalid>
+    </msg>
+  </ECMPhoneFormatValidator>
+  <!--
+  ###################################################################################
   # org.exoplatform.ecm.jcr.ECMNameValidator  #
   ###################################################################################
   -->
@@ -2158,7 +2172,7 @@
   
   <UIAnyPermission>
     <label>
-      <anyPermission>Cho phép tất cả</anyPermission>
+      <anyPermission>Bất kỳ Phân quyền nào</anyPermission>
     </label>
   </UIAnyPermission>
   
@@ -2417,6 +2431,7 @@
 <UIPermissionTreeForm>
 <action>
 <Save>Save</Save>
+<Cancel>#{word.cancel}</Cancel>
 <Reset>Reset</Reset>
 <NextAddAction>Kế tiếp</NextAddAction>
 <Previous>Trước đó</Previous>

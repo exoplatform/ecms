@@ -23,4 +23,9 @@
       <exo.remote-edit.desktop-app>Open in {0}</exo.remote-edit.desktop-app>
     </label>
   </OpenInOfficeConnector>
+  <DocumentAutoVersion>
+    <msg>
+      <WrongMimeType>The mimetype of uploaded file is incorrect! The new version of {0} will not be created.</WrongMimeType>
+    </msg>
+  </DocumentAutoVersion>
 </bundle>

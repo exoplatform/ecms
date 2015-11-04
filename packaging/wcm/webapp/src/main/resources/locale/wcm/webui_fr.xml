@@ -34,7 +34,7 @@
 
   <Drives>
     <label>
-      <ManagedSites>Gestion des Sites</ManagedSites>
+      <ManagedSites>Gestion de Site</ManagedSites>
       <SharedSite>Espace Partagé</SharedSite>
     </label>
   </Drives>
@@ -202,10 +202,10 @@
     <msg>
       <time-to-late>Le temps de recherche est trop long.</time-to-late>
       <empty-field>La valeur de ce champ est nulle ou vide!</empty-field>
-      <empty-name>Please enter the name to search</empty-name>
-      <empty-content>Please enter a word or phrase to search</empty-content>
+      <empty-name>Entrez le nom à rechercher</empty-name>
+      <empty-content>Entrez le mot ou la phrase à rechercher</empty-content>
       <empty-property>Veuillez sélectionner une propriété</empty-property>
-      <empty-property-keyword>Please enter a keyword for the property</empty-property-keyword>
+      <empty-property-keyword>Veuillez entrer un mot clé pour la propriété</empty-property-keyword>
       <empty-doctype>Veuillez sélectionner un type de document</empty-doctype>
       <empty-startDate>Le champ "Date de début" est obligatoire</empty-startDate>
       <invalid-format>Blancs datetime format dans le champ '{0}'</invalid-format>

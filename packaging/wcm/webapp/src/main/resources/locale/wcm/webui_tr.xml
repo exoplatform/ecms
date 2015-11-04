@@ -34,7 +34,7 @@
 
   <Drives>
     <label>
-      <ManagedSites>Site Yönetimi</ManagedSites>
+      <ManagedSites>Site Management</ManagedSites>
       <SharedSite>Paylaşılan Site</SharedSite>
     </label>
   </Drives>
@@ -42,7 +42,7 @@
   <Views>
     <label>
       <wcm-view>Web</wcm-view>
-      <admin-view>Yönetici</admin-view>
+      <admin-view>Admin</admin-view>
       <icon-view>Simgeler</icon-view>
       <thumbails-view>Küçükresimler</thumbails-view>
       <list-view>Liste</list-view>

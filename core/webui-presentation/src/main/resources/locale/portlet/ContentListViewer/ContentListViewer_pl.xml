@@ -60,8 +60,8 @@
       <UICLVConfigTargetPageFormInputSet>Pokaż na stronie</UICLVConfigTargetPageFormInputSet>
       <content-not-found>Content not found.</content-not-found>
       <ContentPath>Ścieżka do zawartości</ContentPath>
-      <Up>Up</Up>
-      <Down>Down</Down>
+      <Up>W górę</Up>
+      <Down>W dół</Down>
       <UICLVConfigCacheManagementLabel>Widoczność zawartości</UICLVConfigCacheManagementLabel>
       <UICLVContentByQueryLabel>Content by Query</UICLVContentByQueryLabel>
       <UICLVConfigWorkspaceFormSelectBox>Obszar roboczy</UICLVConfigWorkspaceFormSelectBox>

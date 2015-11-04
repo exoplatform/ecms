@@ -165,7 +165,7 @@
       <enableDragAndDrop>فعال کردن کشیدن و رها کردن:</enableDragAndDrop>
       <sortBy>مرتب سازی بر اساس:</sortBy>
       <order>مرتب کردن:</order>
-      <nodesPerPage>گره در هر صفحه:</nodesPerPage>
+      <nodesPerPage>Items per Page:</nodesPerPage>
     </label>
     <action>
       <Back>#{word.close}</Back>
@@ -255,6 +255,7 @@
       <UISEOForm>مدیریت جستجوگرها</UISEOForm>
       <UISEOToolbarForm>مدیریت جستجوگرها</UISEOToolbarForm>
       <UIReadOnlyFileConfirmMessage>Open Document</UIReadOnlyFileConfirmMessage>
+      <UIDocumentAutoVersionForm>Copy Document</UIDocumentAutoVersionForm>
     </title>
     <header>
       <workspace>فضای کار</workspace>
@@ -308,6 +309,8 @@
       <ViewMetadatas>فراداده</ViewMetadatas>
       <ViewRelations>نمایش/پنهان کردن ارتباطات</ViewRelations>
       <ShowJCRStructure>نمایش/پنهان کردن ساختار محتوا</ShowJCRStructure>
+      <EditProperty>Edit Document Properties</EditProperty>
+      <UploadNewVersion>Upload a new version</UploadNewVersion>
     </tooltip>
     <msg>
       <cannot-action-in-rootnode>قادر به انجام این اقدام در گره ریشه نیستید.</cannot-action-in-rootnode>
@@ -594,8 +597,11 @@
       <RestoreFromTrash>بازیابی از سطل زباله</RestoreFromTrash>
       <EmptyTrash>خالی کردن سطل زباله</EmptyTrash>
       <WebDavView>Download and allow edition</WebDavView>
-      <Download>دانلود</Download>
+      <Download>Download</Download>
       <OpenDocument>Remote Edit</OpenDocument>
+      <EditProperty>Edit Document Properties</EditProperty>
+      <UploadNewVersion>Upload a new version</UploadNewVersion>
+      <CreateNewVersion>Create a new version</CreateNewVersion>
     </event>
   </ECMContextMenu>
  
@@ -751,7 +757,7 @@
       </title>
     </action>
     <header>
-      <usersOrGroups>کاربر یا  گروه</usersOrGroups>
+      <usersOrGroups>User or Group</usersOrGroups>
       <read>Read</read>
       <addNode>Modify</addNode>
       <remove>حذف</remove>
@@ -766,8 +772,8 @@
   </UIPermissionInfo>
   <permission>
     <title>
-      <SelectUser>انتخاب کاربر</SelectUser>
-      <SelectMember>انتخاب عضویت</SelectMember>
+      <SelectUser>Select User</SelectUser>
+      <SelectMember>Select Membership</SelectMember>
       <AddAny>Select Everyone</AddAny>
     </title>
   </permission>
@@ -794,7 +800,7 @@
   </UIGroupSelector>
   <UIPermissionForm>
     <label>
-      <UIPopupWindow>انتخاب</UIPopupWindow>
+      <UIPopupWindow>Select</UIPopupWindow>
       <permission>UIPermissionForm</permission>
       <userOrGroup>کاربر یا گروه</userOrGroup>
       <read>Read Right</read>
@@ -1324,7 +1330,7 @@
   -->
   <PopupUserSelector>
     <title>
-      <UIUserContainer>مجوز کاربر را انتخاب کنید</UIUserContainer>
+      <UIUserContainer>Permission Selector</UIUserContainer>
     </title>
   </PopupUserSelector>
   <UIPopupTaxonomy>
@@ -1938,6 +1944,11 @@
   # Validator messages                                                              #
   ###################################################################################
   -->
+   <ECMPhoneFormatValidator>
+     <msg>
+       <Invalid>The field '{0}' contains invalid an Phone number. Please enter another value.</Invalid>
+     </msg>
+  </ECMPhoneFormatValidator>
   <ECMNameValidator>
     <msg>
       <Invalid-char>فیلد '{0}' شامل کاراکترهای نامعتبر است. لطفاً مقدار دیگری وارد کنید.</Invalid-char>
@@ -2344,7 +2355,7 @@
     <msg>
       <create-link-problem>قادر به ایجاد لینک برای گره '{0}' در '{1}' نمی باشید.</create-link-problem>
       <dest-node-is-link>گره مقصد '{0}' در حال حاضر symlink است، بنابراین شما قادر به ایجاد symlink داخل آن نیستید.</dest-node-is-link>
-      <selected-is-link>گره انتخاب شده '{0}' در حال حاضر یک لینک است، بنابراین نمی توانید یک لینک اشاره گر به لینک دیگر ایجاد کنید.</selected-is-link>
+      <selected-is-link>The selected node '{0}' is already a link. You cannot create a link that points to another link.</selected-is-link>
       <confirm-create-link>آیا می خواهید یک لینک به این مکان ایجاد کنید؟</confirm-create-link>
     </msg>
   </UIWorkingArea>
@@ -2425,7 +2436,9 @@
       <Back>بازگشت به تغییر نام</Back>
       <Keepfile>هر دو پرونده حفظ شود</Keepfile>
 <ReadOnly>Open Read-only</ReadOnly>
-<Cancel>انصراف</Cancel>
+<Cancel>Cancel</Cancel>
+      <KeepBoth>Keep Both</KeepBoth>
+      <CreateNewVersion>Create a new version</CreateNewVersion>
     </label>
   </UIConfirmMessage>
 
@@ -3068,9 +3081,9 @@
     </DrivesArea>
     <msg>
       <no-view-found>There are no views applied for your access permission in drive '{0}'.</no-view-found>
-      <access-denied>دسترسی رد شد. شما ممکن است در فضای درایو '{0}' مجوز لازم را نداشته باشید.</access-denied>
+      <access-denied>Access denied. You may not have permission in the workspace of drive '{0}'.</access-denied>
       <empty-drives>Access denied. Either there is no drive in this repository or you do not have permission to access any drives in this repository.</empty-drives>
-      <workspace-not-exist>درایو '{0}' در یک فضای کاری نامشخص ذخیره شده است. لطفا این درایو را دوباره تنظیم کنید.</workspace-not-exist>
+      <workspace-not-exist>Drive '{0}' was stored in one unrecognized workspace. Please reconfigure this drive.</workspace-not-exist>
     </msg>
   </UIDrivesArea>
   <UIJcrExplorerEditForm>
@@ -3158,6 +3171,7 @@
     <Keep>نگه داشتن هر دو</Keep>
     <Replace>جایگزین</Replace>
     <Canceled>لغو شد</Canceled>
+      <UploadNewVersion>Upload new version</UploadNewVersion>
     <Cancel>#{word.cancel}</Cancel>
     <AbortAllConfirmation>آیا مایلید که تمام فایل های در حال انجام لغو شوند؟</AbortAllConfirmation>
   </label>
@@ -3186,6 +3200,19 @@
   <property-name-incorrect>نام ويژگي نادرست است، لطفا مقدار دیگری برای آن وارد کنید!</property-name-incorrect>
     </msg>
   </UIPropertyForm>
+  <UIDocumentAutoVersionForm>
+    <msg>A document {0} already exits. What do you want to do? </msg>
+    <UIChkRememberNonVersioned>
+      <label>Remember my choice for all others non-versioned documents</label>
+    </UIChkRememberNonVersioned>
+    <UIChkRememberVersioned>
+      <label>Remember my choice for all others versioned documents</label>
+    </UIChkRememberVersioned>
+  </UIDocumentAutoVersionForm>
+  <DocumentAuto>
+    <message>A new version of the document {0} has been created successfully.</message>
+    <messageMultiFile>New version(s) of versioned document(s) has been created.</messageMultiFile>
+  </DocumentAuto>
   <!--
   ###################################################################################
   # JCR Exceptions manager                                                              #

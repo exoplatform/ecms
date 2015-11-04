@@ -165,7 +165,7 @@
       <enableDragAndDrop>Įgalinti „Vilkti ir Mesti”:</enableDragAndDrop>
       <sortBy>Rūšiuoti pagal:</sortBy>
       <order>Rūšiuoti pagal:</order>
-      <nodesPerPage>Mazgų skaičius puslapyje:</nodesPerPage>
+      <nodesPerPage>Items per Page:</nodesPerPage>
     </label>
     <action>
       <Back>#{word.close}</Back>
@@ -255,6 +255,7 @@
       <UISEOForm>Valdyti SEO</UISEOForm>
       <UISEOToolbarForm>Valdyti SEO</UISEOToolbarForm>
       <UIReadOnlyFileConfirmMessage>Open Document</UIReadOnlyFileConfirmMessage>
+      <UIDocumentAutoVersionForm>Copy Document</UIDocumentAutoVersionForm>
     </title>
     <header>
       <workspace>Darbo sritis</workspace>
@@ -308,6 +309,8 @@
       <ViewMetadatas>Metaduomenys</ViewMetadatas>
       <ViewRelations>Rodyti/slėpti ryšius</ViewRelations>
       <ShowJCRStructure>Rodyti/slėpti turinio struktūrą</ShowJCRStructure>
+      <EditProperty>Edit Document Properties</EditProperty>
+      <UploadNewVersion>Upload a new version</UploadNewVersion>
     </tooltip>
     <msg>
       <cannot-action-in-rootnode>Šio veiksmo negalima atlikti šaknėje skiltyje.</cannot-action-in-rootnode>
@@ -596,6 +599,9 @@
       <WebDavView>Atidaryti su MS Office</WebDavView>
       <Download>Atsisiųsti</Download>
       <OpenDocument>Remote Edit</OpenDocument>
+      <EditProperty>Edit Document Properties</EditProperty>
+      <UploadNewVersion>Upload a new version</UploadNewVersion>
+      <CreateNewVersion>Create a new version</CreateNewVersion>
     </event>
   </ECMContextMenu>
  
@@ -751,7 +757,7 @@
       </title>
     </action>
     <header>
-      <usersOrGroups>Vartotojas arba grupė</usersOrGroups>
+      <usersOrGroups>User or Group</usersOrGroups>
       <read>Read</read>
       <addNode>Modify</addNode>
       <remove>Pašalinti</remove>
@@ -766,8 +772,8 @@
   </UIPermissionInfo>
   <permission>
     <title>
-      <SelectUser>Pasirinkti vartotoją</SelectUser>
-      <SelectMember>Pasirinkti narystę</SelectMember>
+      <SelectUser>Select User</SelectUser>
+      <SelectMember>Select Membership</SelectMember>
       <AddAny>Select Everyone</AddAny>
     </title>
   </permission>
@@ -794,7 +800,7 @@
   </UIGroupSelector>
   <UIPermissionForm>
     <label>
-      <UIPopupWindow>Pasirinkti</UIPopupWindow>
+      <UIPopupWindow>Select</UIPopupWindow>
       <permission>UIPermissionForm</permission>
       <userOrGroup>Vartotojas arba grupė</userOrGroup>
       <read>Read Right</read>
@@ -1324,7 +1330,7 @@
   -->
   <PopupUserSelector>
     <title>
-      <UIUserContainer>Pasirinkti vartotojo teisę</UIUserContainer>
+      <UIUserContainer>Teisės pasirinkimas</UIUserContainer>
     </title>
   </PopupUserSelector>
   <UIPopupTaxonomy>
@@ -1938,6 +1944,11 @@
   # Validator messages                                                              #
   ###################################################################################
   -->
+   <ECMPhoneFormatValidator>
+     <msg>
+       <Invalid>The field '{0}' contains invalid an Phone number. Please enter another value.</Invalid>
+     </msg>
+  </ECMPhoneFormatValidator>
   <ECMNameValidator>
     <msg>
       <Invalid-char>Laukelyje '{0}' yra neleistinų simbolių. Prašome įrašyti kitą reikšmę.</Invalid-char>
@@ -2344,7 +2355,7 @@
     <msg>
       <create-link-problem>Negalima sukurti nuorodos mazgui '{0}' '{1}'.</create-link-problem>
       <dest-node-is-link>Paskirties mazgas '{0}' yra jau simbolinė nuoroda, tad negalite sukurti simbolinės nuorodos jo viduje.</dest-node-is-link>
-      <selected-is-link>Pažymėtas mazgas '{0}' jau yra nuoroda, tad negalite sukurti nuorodos į kitą nuorodą.</selected-is-link>
+      <selected-is-link>The selected node '{0}' is already a link. You cannot create a link that points to another link.</selected-is-link>
       <confirm-create-link>Ar norite kurti nuorodą šioje vietoje?</confirm-create-link>
     </msg>
   </UIWorkingArea>
@@ -2426,6 +2437,8 @@
       <Keepfile>Palikti abu failus</Keepfile>
 <ReadOnly>Open Read-only</ReadOnly>
 <Cancel>Atšaukti</Cancel>
+      <KeepBoth>Keep Both</KeepBoth>
+      <CreateNewVersion>Create a new version</CreateNewVersion>
     </label>
   </UIConfirmMessage>
 
@@ -3068,9 +3081,9 @@
     </DrivesArea>
     <msg>
       <no-view-found>There are no views applied for your access permission in drive '{0}'.</no-view-found>
-      <access-denied>Prieiga uždrausta. Jūs galite neturėti teisių darbo srities diske '{0}'.</access-denied>
+      <access-denied>Access denied. You may not have permission in the workspace of drive '{0}'.</access-denied>
       <empty-drives>Access denied. Either there is no drive in this repository or you do not have permission to access any drives in this repository.</empty-drives>
-      <workspace-not-exist>Programa"{0}" buvo išsaugota vienoje neatpažintoje darbo srityje. Prašome sukonfigūruoti šį diską.</workspace-not-exist>
+      <workspace-not-exist>Drive '{0}' was stored in one unrecognized workspace. Please reconfigure this drive.</workspace-not-exist>
     </msg>
   </UIDrivesArea>
   <UIJcrExplorerEditForm>
@@ -3158,6 +3171,7 @@
     <Keep>Pasilikti abu</Keep>
     <Replace>Pakeisti</Replace>
     <Canceled>Atšauktas</Canceled>
+      <UploadNewVersion>Upload new version</UploadNewVersion>
     <Cancel>#{word.cancel}</Cancel>
     <AbortAllConfirmation>Ar norite nutraukti visus failus pažangoje?</AbortAllConfirmation>
   </label>
@@ -3186,6 +3200,19 @@
   <property-name-incorrect>Ypatybės pavadinimas yra neteisingas, įveskite kitą vertę jam!</property-name-incorrect>
     </msg>
   </UIPropertyForm>
+  <UIDocumentAutoVersionForm>
+    <msg>A document {0} already exits. What do you want to do? </msg>
+    <UIChkRememberNonVersioned>
+      <label>Remember my choice for all others non-versioned documents</label>
+    </UIChkRememberNonVersioned>
+    <UIChkRememberVersioned>
+      <label>Remember my choice for all others versioned documents</label>
+    </UIChkRememberVersioned>
+  </UIDocumentAutoVersionForm>
+  <DocumentAuto>
+    <message>A new version of the document {0} has been created successfully.</message>
+    <messageMultiFile>New version(s) of versioned document(s) has been created.</messageMultiFile>
+  </DocumentAuto>
   <!--
   ###################################################################################
   # JCR Exceptions manager                                                              #

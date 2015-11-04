@@ -87,7 +87,7 @@
 -->
   <UITaxonomyTreeMainForm>
     <action>
-      <Reset>Tilbakestill</Reset>
+      <Reset>Reset</Reset>
     </action>
     <msg>
       <name-not-allowed>Forbudt navn</name-not-allowed>
@@ -990,6 +990,10 @@
 <addSymLink>Legg til Symlink</addSymLink>
       <checkIn>Check In</checkIn>
       <checkOut>Check Out</checkOut>
+      <shareDocuments>Del</shareDocuments>
+      <openDocument>Remote Edit</openDocument>
+      <editProperty>Edit Document Properties</editProperty>
+      <uploadNewVersion>Upload a new version</uploadNewVersion>
     </label>
     <action>
       <Save>#{word.save}</Save>      
@@ -1019,7 +1023,7 @@
   </UIViewFormTabPane>
   <PopupViewPermission>
     <title>
-      <UIPermissionSelector>Velg rettigheter</UIPermissionSelector>
+      <UIPermissionSelector>Rettighets velger</UIPermissionSelector>
     </title>
   </PopupViewPermission>
 
@@ -1070,7 +1074,7 @@
   -->
   <UITemplateForm>
     <title>
-      <AddPermission>Legg til rettighet</AddPermission>
+      <AddPermission>Add Permission</AddPermission>
     </title>
     <action>
       <Save>#{word.save}</Save>
@@ -1382,8 +1386,8 @@
     <title>Add a permission to this node</title>
     <action>
       <Close>#{word.close}</Close>
-      <Save>Lagre</Save>
-      <Reset>Tilbakestill</Reset>
+      <Save>Save</Save>
+      <Reset>Reset</Reset>
     </action>
     <msg>
       <checkbox-require>Velg minst én rettighet.</checkbox-require>
@@ -1401,7 +1405,7 @@
   
   <PopupTaxonomyTreePermission>
     <title>
-      <UIPermissionSelector>Velg rettigheter</UIPermissionSelector>
+      <UIPermissionSelector>Rettighets velger</UIPermissionSelector>
     </title>
    </PopupTaxonomyTreePermission>
    
@@ -1733,7 +1737,7 @@
   -->
   <AddNewTemplatePermission>
     <title>
-      <UIPermissionSelector>Velg rettigheter</UIPermissionSelector>
+      <UIPermissionSelector>Rettighets velger</UIPermissionSelector>
     </title>
   </AddNewTemplatePermission>
   <TemplatePermission>
@@ -1774,12 +1778,12 @@
   </DialogForm>
   <DialogFormTemplatePermission>
     <title>
-      <UIPermissionSelector>Velg rettigheter</UIPermissionSelector>
+      <UIPermissionSelector>Rettighets velger</UIPermissionSelector>
     </title>
   </DialogFormTemplatePermission>
   <ViewFormTemplatePermission>
     <title>
-      <UIPermissionSelector>Velg rettigheter</UIPermissionSelector>
+      <UIPermissionSelector>Rettighets velger</UIPermissionSelector>
     </title>
   </ViewFormTemplatePermission>
   <TemplateContainerPopup>
@@ -1970,7 +1974,7 @@
   </EditQueryForm>
 <PermissionPopup>
   <title>
-    <UIGroupMemberSelector>Velg rettigheter</UIGroupMemberSelector>
+    <UIGroupMemberSelector>Rettighets velger</UIGroupMemberSelector>
   </title>
 </PermissionPopup>
   <!--
@@ -2021,6 +2025,16 @@
       <UITagStyleForm>Redigere kode stil konfigurasjonen</UITagStyleForm>
     </title>
   </FolksonomyPopup>
+  <!--
+  ###################################################################################
+  # ECMPhoneFormatValidator                                       #
+  ###################################################################################
+  -->
+  <ECMPhoneFormatValidator>
+    <msg>
+      <Invalid>The field '{0}' contains an invalid Phone number. Please enter another value.</Invalid>
+    </msg>
+  </ECMPhoneFormatValidator>
   <!--
   ###################################################################################
   # org.exoplatform.ecm.jcr.ECMNameValidator  #
@@ -2417,6 +2431,7 @@
 <UIPermissionTreeForm>
 <action>
 <Save>Save</Save>
+<Cancel>#{word.cancel}</Cancel>
 <Reset>Reset</Reset>
 <NextAddAction>Neste</NextAddAction>
 <Previous>Forrige</Previous>

@@ -10,7 +10,7 @@
       <label>
         <Templates>Vorlagen</Templates>
         <Explorer>Explorer</Explorer>
-        <Repository>Projektarchiv</Repository>
+        <Repository>Repository</Repository>
         <Advanced>Erweitert</Advanced>
       </label>
     </tab>    
@@ -27,7 +27,7 @@
       <UIActionManager>Aktionen</UIActionManager>
       <UIScriptManager>Skripte</UIScriptManager>
       <UIUnLockManager>Sperren</UIUnLockManager>
-      <UIFolksonomyManager>Schlagwörter</UIFolksonomyManager>      
+      <UIFolksonomyManager>Tags</UIFolksonomyManager>      
     </label>
     <msg>
       <access-denied>Zugriff verweigert. Sie haben keine Berechtigung, diesen Vorgang durchzuführen.</access-denied>
@@ -295,7 +295,7 @@
       <metadataName>Metadatenname:</metadataName>
       <viewPermission>Berechtigung:</viewPermission>
       <permission>UIMetadataForm</permission>
-      <metadataLabel>Bezeichnung:</metadataLabel>
+      <metadataLabel>Label:</metadataLabel>
     </label>
     <tab>
       <label>
@@ -399,7 +399,7 @@
       <permissions>Berechtigungen:</permissions>
       <showHiddenNode>Ausgeblendete Knoten anzeigen:</showHiddenNode>
       <allowCreateFolders>Ordnererstellung erlauben:</allowCreateFolders>
-      <Admin>Administrator:</Admin>
+      <Admin>Admin:</Admin>
       <Categories>Kategorien:</Categories>
       <Icons>Piktogramme:</Icons>
       <List>Liste:</List>
@@ -990,6 +990,10 @@
 <addSymLink>Symbolische Verknüpfung hinzufügen</addSymLink>
       <checkIn>Check In</checkIn>
       <checkOut>Check Out</checkOut>
+      <shareDocuments>Teilen</shareDocuments>
+      <openDocument>Remote Edit</openDocument>
+      <editProperty>Edit Document Properties</editProperty>
+      <uploadNewVersion>Upload a new version</uploadNewVersion>
     </label>
     <action>
       <Save>#{word.save}</Save>      
@@ -1019,7 +1023,7 @@
   </UIViewFormTabPane>
   <PopupViewPermission>
     <title>
-      <UIPermissionSelector>Berechtigung auswählen</UIPermissionSelector>
+      <UIPermissionSelector>Berechtigungsauswahl</UIPermissionSelector>
     </title>
   </PopupViewPermission>
 
@@ -1095,7 +1099,7 @@
     </tab>
     <label>
       <name>Name:</name>
-      <label>Bezeichnung:</label>
+      <label>Label:</label>
       <isDocumentTemplate>ist Dokumentvorlage:</isDocumentTemplate>
       <dialog>Dialoginhalt</dialog>
       <view>Inhalt anzeigen</view>
@@ -1401,7 +1405,7 @@
   
   <PopupTaxonomyTreePermission>
     <title>
-      <UIPermissionSelector>Berechtigung auswählen</UIPermissionSelector>
+      <UIPermissionSelector>Berechtigungsauswahl</UIPermissionSelector>
     </title>
    </PopupTaxonomyTreePermission>
    
@@ -1733,7 +1737,7 @@
   -->
   <AddNewTemplatePermission>
     <title>
-      <UIPermissionSelector>Berechtigung auswählen</UIPermissionSelector>
+      <UIPermissionSelector>Berechtigungsauswahl</UIPermissionSelector>
     </title>
   </AddNewTemplatePermission>
   <TemplatePermission>
@@ -1774,12 +1778,12 @@
   </DialogForm>
   <DialogFormTemplatePermission>
     <title>
-      <UIPermissionSelector>Berechtigung auswählen</UIPermissionSelector>
+      <UIPermissionSelector>Berechtigungsauswahl</UIPermissionSelector>
     </title>
   </DialogFormTemplatePermission>
   <ViewFormTemplatePermission>
     <title>
-      <UIPermissionSelector>Berechtigung auswählen</UIPermissionSelector>
+      <UIPermissionSelector>Berechtigungsauswahl</UIPermissionSelector>
     </title>
   </ViewFormTemplatePermission>
   <TemplateContainerPopup>
@@ -1808,7 +1812,7 @@
   <UITemplateEditForm>
     <label>
       <name>Name:</name>
-      <label>Bezeichnung:</label>
+      <label>Label:</label>
       <isDocumentTemplate>Ist Dokumentvorlage</isDocumentTemplate>
     </label>
     <action>
@@ -1970,7 +1974,7 @@
   </EditQueryForm>
 <PermissionPopup>
   <title>
-    <UIGroupMemberSelector>Berechtigung auswählen</UIGroupMemberSelector>
+    <UIGroupMemberSelector>Berechtigungsauswahl</UIGroupMemberSelector>
   </title>
 </PermissionPopup>
   <!--
@@ -2021,6 +2025,16 @@
       <UITagStyleForm>Tag-Stil Konfiguration bearbeiten</UITagStyleForm>
     </title>
   </FolksonomyPopup>
+  <!--
+  ###################################################################################
+  # ECMPhoneFormatValidator                                       #
+  ###################################################################################
+  -->
+  <ECMPhoneFormatValidator>
+    <msg>
+      <Invalid>The field '{0}' contains an invalid Phone number. Please enter another value.</Invalid>
+    </msg>
+  </ECMPhoneFormatValidator>
   <!--
   ###################################################################################
   # org.exoplatform.ecm.jcr.ECMNameValidator  #
@@ -2244,8 +2258,8 @@
       <firstName>#{word.firstName}</firstName>
     <email>#{word.email}</email>
       <action>#{word.action}</action>
-      <Add>#{word.Add}</Add>
-      <Close>#{word.Close}</Close>
+      <Add>#{word.add}</Add>
+      <Close>#{word.close}</Close>
     </label>
   </PermissionTreeSelectUser>
   
@@ -2417,6 +2431,7 @@
 <UIPermissionTreeForm>
 <action>
 <Save>Save</Save>
+<Cancel>#{word.cancel}</Cancel>
 <Reset>Reset</Reset>
 <NextAddAction>Weiter</NextAddAction>
 <Previous>Zurück</Previous>
@@ -2442,7 +2457,7 @@
 
   <UITabPane>
     <title>
-      <UITagManager>Tag-Manager</UITagManager>
+      <UITagManager>Tag Manager</UITagManager>
       <UITagPermissionManager>Berechtigungen</UITagPermissionManager>
     </title>
   </UITabPane>
