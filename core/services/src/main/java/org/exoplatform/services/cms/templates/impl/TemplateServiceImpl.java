@@ -25,6 +25,7 @@ import java.util.HashMap;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
+import java.util.Arrays;
 
 import javax.jcr.AccessDeniedException;
 import javax.jcr.Node;
@@ -834,7 +835,9 @@ public class TemplateServiceImpl implements TemplateService, Startable {
       resourceNode.setProperty(NodetypeConstant.JCR_MIME_TYPE, "application/x-groovy+html");
       resourceNode.setProperty(NodetypeConstant.JCR_LAST_MODIFIED, new GregorianCalendar());
       resourceNode.setProperty(NodetypeConstant.JCR_DATA, data);
-      resourceNode.setProperty(NodetypeConstant.EXO_ROLES, roles);
+      if(!Arrays.equals(roles, getRoleNode(resourceNode))){
+        resourceNode.setProperty(NodetypeConstant.EXO_ROLES, roles);
+      }
       if(!resourceNode.isNodeType(NodetypeConstant.DC_ELEMENT_SET)) {
         resourceNode.addMixin(NodetypeConstant.DC_ELEMENT_SET);
       }
@@ -845,6 +848,27 @@ public class TemplateServiceImpl implements TemplateService, Startable {
       if (LOG.isErrorEnabled()) {
         LOG.error("An error has been occurred when adding template", e);
       }
+    }
+    return null;
+  }
+
+  /**
+   * Get string array exo:roles of node
+   * @param node
+   * @return
+   */
+  private String[] getRoleNode(Node node){
+    try {
+      Value[] values = node.getProperty(NodetypeConstant.EXO_ROLES).getValues();
+      StringBuffer roles = new StringBuffer();
+      for (int i = 0; i < values.length; i++) {
+        if (roles.length() > 0)
+          roles.append(";");
+        roles.append(values[i].getString());
+      }
+      return roles.toString().split(";");
+    }catch (RepositoryException re){
+      LOG.warn("Unable get role of node ", re);
     }
     return null;
   }
