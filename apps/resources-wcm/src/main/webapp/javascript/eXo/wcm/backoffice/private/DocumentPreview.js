@@ -108,6 +108,7 @@
 
         // Bind close event. Return body scroll, turn off keyup
         gj(".exitWindow > .uiIconClose", $uiDocumentPreview).click(function() {
+            gj('body').removeClass('modal-open');
             setTimeout(function() {
                 gj('body').css('overflow', 'visible');
                 gj(document).off('keyup', closeEventHandler);
