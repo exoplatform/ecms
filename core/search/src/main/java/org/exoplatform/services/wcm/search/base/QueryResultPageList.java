@@ -16,6 +16,7 @@
  */
 package org.exoplatform.services.wcm.search.base;
 
+import java.lang.reflect.Field;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.HashSet;
@@ -170,7 +171,9 @@ public class QueryResultPageList<E> extends AbstractPageList<E> {
       int count = 0;
       buffer.clear();
       dataSet.clear();
-      
+      Field field = null;
+      Object valueOfExcerpt = null;
+      String EMPTY_EXCERPT = "<div><span></span></div>";
       while (iter.hasNext() && count < bufferSize_) {
         Node newNode = iter.nextNode();
         Row newRow = rowIter.nextRow();
@@ -179,7 +182,22 @@ public class QueryResultPageList<E> extends AbstractPageList<E> {
         }
         if (newNode != null && searchDataCreator != null) {
           E data = searchDataCreator.createData(newNode, newRow);
-          if (data != null && !dataSet.containsKey(data) && (found == null || !found.containsKey(data) || ((Integer)found.get(data)) >= page)) {
+          try {
+            field = data.getClass().getDeclaredField("excerpt");
+            field.setAccessible(true);
+            valueOfExcerpt = field.get(data);
+          } catch (NoSuchFieldException e) {
+            try {
+              field = data.getClass().getDeclaredField("repExcerpt");
+              field.setAccessible(true);
+              valueOfExcerpt = field.get(data);
+            } catch (NoSuchFieldException e1) {
+              LOG.error("The field to get doesn't exist");
+            } catch (IllegalAccessException e1) {
+              LOG.error("Cannot get value of selected field.");
+            }
+          }
+    if (data != null && !dataSet.containsKey(data) && !valueOfExcerpt.equals(EMPTY_EXCERPT) && (found == null || !found.containsKey(data) || ((Integer)found.get(data)) >= page)) {
             buffer.add(data);
             dataSet.put(data, page);
             count ++;

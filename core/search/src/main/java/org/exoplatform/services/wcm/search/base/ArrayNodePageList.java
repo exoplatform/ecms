@@ -16,6 +16,7 @@
  */
 package org.exoplatform.services.wcm.search.base;
 
+import java.lang.reflect.Field;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.HashSet;
@@ -187,9 +188,33 @@ public class ArrayNodePageList<E> extends AbstractPageList<E> {
     Set<E> set = new HashSet<E>();
     if (srcList != null) {
       for (E elem : srcList) {
-        if (!set.contains(elem)) {
-          set.add(elem);
-          ret.add(elem);
+        Field field = null;
+        Object valueOfExperpt = null;
+        String EMPTY_EXCERPT = "<div><span></span></div>";
+        try {
+          field = elem.getClass().getDeclaredField("excerpt");
+          field.setAccessible(true);
+          valueOfExperpt = field.get(elem);
+          if (!set.contains(elem) && !valueOfExperpt.equals(EMPTY_EXCERPT)) {
+            set.add(elem);
+            ret.add(elem);
+          }
+        } catch (NoSuchFieldException e) {
+          try {
+            field = elem.getClass().getDeclaredField("repExcerpt");
+            field.setAccessible(true);
+            valueOfExperpt = field.get(elem);
+            if (!set.contains(elem)) {
+              set.add(elem);
+              ret.add(elem);
+            }
+          } catch (NoSuchFieldException e1) {
+            LOG.error("The field to get doesn't exist");
+          } catch (IllegalAccessException e1) {
+            LOG.error("Cannot get value of selected field.");
+          }
+        } catch (IllegalAccessException e1) {
+          LOG.error("Cannot get value of selected field.");
         }
       }
     }
