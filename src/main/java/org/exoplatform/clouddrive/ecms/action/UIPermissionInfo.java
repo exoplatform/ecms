@@ -94,7 +94,7 @@ public class UIPermissionInfo extends org.exoplatform.ecm.webui.component.explor
       }
       
       try {
-        currentNode.refresh(true);
+        currentNode.getIndex(); // check if node valid here
         uiComp.updateGrid(uiComp.getChild(UIGrid.class).getUIPageIterator().getCurrentPage());
         uiJCRExplorer.setIsHidePopup(true);
         event.getRequestContext().addUIComponentToUpdateByAjax(uiParent);
