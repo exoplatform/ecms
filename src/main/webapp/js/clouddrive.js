@@ -721,6 +721,18 @@
 						var changed = 0;
 						var updated = 0; // updated in context node
 						
+						// init files by the client if applicable
+						var provider = providers[contextDrive.provider.id]; 
+						if (provider) {
+							provider.clientModule.done(function(client) {
+								if (client && client.initFile && client.hasOwnProperty("initFile")) {
+									for (fpath in drive.files) {
+										client.initFile(drive.files[fpath]);										
+									}
+								}
+							});
+						}
+						
 						// calculate the whole drive changes and updated in current folder
 						for (fpath in drive.files) {
 							if (drive.files.hasOwnProperty(fpath)) {
