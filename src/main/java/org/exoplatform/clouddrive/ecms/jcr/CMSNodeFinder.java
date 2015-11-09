@@ -99,9 +99,8 @@ public class CMSNodeFinder extends NodeFinderImpl implements NodeFinder {
   public Collection<Node> findLinked(Session session, String uuid) throws PathNotFoundException, RepositoryException {
     Set<Node> res = new LinkedHashSet<Node>();
     try {
-      Node target = session.getNodeByUUID(uuid);
       QueryManager qm = session.getWorkspace().getQueryManager();
-      Query q = qm.createQuery("SELECT * FROM exo:symlink WHERE exo:uuid='" + target.getUUID() + "'", Query.SQL);
+      Query q = qm.createQuery("SELECT * FROM exo:symlink WHERE exo:uuid='" + uuid + "'", Query.SQL);
       QueryResult qr = q.execute();
       for (NodeIterator niter = qr.getNodes(); niter.hasNext();) {
         res.add(niter.nextNode());

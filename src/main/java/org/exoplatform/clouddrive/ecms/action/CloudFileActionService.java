@@ -465,7 +465,9 @@ public class CloudFileActionService implements Startable {
 
         return target;
       } catch (ItemNotFoundException e) {
-        LOG.warn("Cloud File link has no target node: " + linkNode.getPath() + ". " + e.getMessage());
+        if (LOG.isDebugEnabled()) {
+          LOG.debug("Cloud File link has no target node: " + linkNode.getPath() + ". " + e.getMessage());
+        }
       }
     } else {
       LOG.warn("Not cloud file link: node " + linkNode.getPath() + " not of type " + ECD_CLOUDFILELINK);
