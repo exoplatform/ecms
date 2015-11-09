@@ -368,13 +368,12 @@ public class JCRLocalGoogleDrive extends JCRLocalCloudDrive implements UserToken
               }
             } // else will be removed below
           }
+          removeLinks(en); // explicitly remove file links outside the drive
           en.remove();
           addRemoved(enpath);
         }
         nodes.remove(fileId);
       }
-      // TODO cleanup
-      // removedIds.add(fileId); // add to removed ids in any case
     }
 
     /**
