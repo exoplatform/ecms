@@ -84,7 +84,8 @@ public class IdentityHelper {
         Node snode = (Node) systemSession.getItem(node.getPath());
         snode.removeMixin(EXO_OWNEABLE);
         snode.save();
-        node.refresh(true);
+        // FIXME this will remove pending changes related to the node and childs (e.g. added mixin)
+        node.refresh(true); 
         // add in current user session
         node.addMixin(EXO_OWNEABLE);
         node.save();
