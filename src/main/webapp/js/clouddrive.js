@@ -551,9 +551,25 @@
 				var path = contextNode.path;
 				var process = getDrive(workspace, path);
 				process.done(function(drive, status) {
+					var provider = providers[drive.provider.id]; 
+					if (provider) {
+						provider.clientModule.done(function(client) {
+							if (client) {
+								// init context drive within the provider client
+								if (client.initDrive && client.hasOwnProperty("initDrive")) {
+									client.initDrive(drive);
+								}
+								// init files by the client if applicable
+								if (client.initFile && client.hasOwnProperty("initFile")) {
+									for (fpath in drive.files) {
+										client.initFile(drive.files[fpath]);										
+									}
+								}
+							}
+						});
+					}
+					// use already cached files with new drive
 					if (contextDrive && contextDrive.path == drive.path) {
-						// XXX same drive, probably nodePath is a symlink path,
-						// use already cached files with new drive
 						for (fpath in contextDrive.files) {
 							if (contextDrive.files.hasOwnProperty(fpath) && !drive.files.hasOwnProperty(fpath)) {
 								drive.files[fpath] = contextDrive.files[fpath];
@@ -922,7 +938,8 @@
 			// load client module
 			provider.clientModule = loadClientModule(provider);
 			
-			if (contextDrive && contextDrive.provider.id == provider.id) {
+			// TODO cleanup, this op will be performed in init()->initContext()->readContextDrive()
+			/*if (contextDrive && contextDrive.provider.id == provider.id) {
 				// init context drive within the provider client
 				provider.clientModule.done(function(client) {
 					if (client) {
@@ -931,7 +948,7 @@
 						}
 					}
 				});
-			}
+			}*/
 		};
 
 		/**
