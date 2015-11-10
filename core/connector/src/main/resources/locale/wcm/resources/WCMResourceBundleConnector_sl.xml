@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<bundle>
+  <ContentSelector>
+    <msg>
+      <no-file-selected>Nobena vsebina ni izbrana. Izberite vsaj eno.</no-file-selected>
+    </msg>
+  </ContentSelector>
+  <RenameConnector>
+    <label>
+      <rename>Preimenuj</rename>
+      <cancel>Prekliči</cancel>
+    </label>
+    <msg>
+      <renaming>Preimenovanje...</renaming>
+    </msg>
+  </RenameConnector>
+  <OpenInOfficeConnector>
+    <label>
+      <exo.remote-edit.word>Open in Word</exo.remote-edit.word>
+      <exo.remote-edit.excel>Open in Excel</exo.remote-edit.excel>
+      <exo.remote-edit.powerpoint>Open in Powerpoint</exo.remote-edit.powerpoint>
+      <exo.remote-edit.desktop>Open on Desktop</exo.remote-edit.desktop>
+      <exo.remote-edit.desktop-app>Open in {0}</exo.remote-edit.desktop-app>
+    </label>
+  </OpenInOfficeConnector>
+  <DocumentAutoVersion>
+    <msg>
+      <WrongMimeType>Vrstamime naložene datoteke je neznana. Nove različica {0} ne bo ustvarjena.</WrongMimeType>
+    </msg>
+  </DocumentAutoVersion>
+</bundle>

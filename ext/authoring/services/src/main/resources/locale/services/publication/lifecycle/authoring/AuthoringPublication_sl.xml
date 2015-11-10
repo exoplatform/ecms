@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<bundle>
+  <PublicationService>
+    <AuthoringPublicationPlugin>
+      <changeState>
+        <obsoleted>Vsebina je zastarela</obsoleted>
+        <published>Vsebina objavljena</published>
+<unpublished>Vsebina ni objavljena</unpublished>
+<archived>Vsebina je arhivirana</archived>
+<staged>Vsebina je v fazah</staged>
+<approved>Vsebina je odobrena</approved>
+<pending>Vsebina je na čakanju</pending>
+<draft>Vsebina je v obliki osnutka</draft>
+      </changeState>
+    </AuthoringPublicationPlugin>
+  </PublicationService>
+  <Publication>
+    <log>
+      <description>
+        <enrolled>Vsebina je vpisana v Življenski cikel publikacije</enrolled>
+      </description>
+    </log>
+  </Publication>
+</bundle>

@@ -1,0 +1,124 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<bundle>
+  <UIPresentationContainer>
+    <title>
+      <QuickEdit>Urejanje v Brskalniku vsebine</QuickEdit>
+      <print>Natisni to stran</print>
+      <FastPublish>Objavi</FastPublish>
+    </title>
+    <label>
+      <draft>Osnutek</draft>
+      <print>Natisni</print>
+    </label>
+    <msg>
+      <no-content>Ni vsebine.</no-content>
+      <internal-server-error>Med pridobivanjem podatkov s strežnika je prišlo do napake.</internal-server-error>
+      <empty-title-error>Določi prosim nov naslov.</empty-title-error>
+    </msg>
+  </UIPresentationContainer>
+  <CorrectContentSelectorPopupWindow>
+    <title>
+      <UIContentSelectorOne>Izberi vsebino</UIContentSelectorOne>
+    </title>
+  </CorrectContentSelectorPopupWindow>
+  <UISingleContentViewerPortlet>
+    <msg>
+      <AccessControlException>Nimaš pravic za dostop do načina za urejanje.</AccessControlException>
+    </msg>
+  </UISingleContentViewerPortlet>
+  <UISCVContextualRadioBox>
+    <label>
+      <Enable>Omogočeno</Enable>
+      <Disable>Onemogočeno</Disable>
+    </label>
+  </UISCVContextualRadioBox>
+  <UIPreferencesPopupWindows>
+    <title>
+      <UISCVPreferences>Nastavitve Podrobnosti vsebine</UISCVPreferences>
+    </title>
+  </UIPreferencesPopupWindows>
+  <UISCVPreferences>
+    <action>
+      <Save>#{word.save}</Save>
+      <Abort>Prekini</Abort>
+      <Cancel>#{word.cancel}</Cancel>
+      <Print>Natisni</Print>
+      <Close>#{word.close}</Close>
+    </action>
+    <title>Nastavitve Podrobnosti vsebine</title>
+    <label>
+      <Back>Nazaj na prejšnjo stran</Back>
+      <Edit>Uredi</Edit>
+      <Preferences>Nastavitve</Preferences>
+      <Title>Nastavitve Podrobnosti vsebine</Title>
+      <UISCVShowTitleConfigurationCheckBox>Pokaži naslov</UISCVShowTitleConfigurationCheckBox>
+      <UISCVShowDateConfigurationCheckBox>Pokaži datum</UISCVShowDateConfigurationCheckBox>
+      <UISCVShowOptionBarConfigurationCheckBox>Pokaži vrstico z možnostmi</UISCVShowOptionBarConfigurationCheckBox>
+      <DisplaySettingBlock>Nastavitve prikaza</DisplaySettingBlock>
+      <ContentPathBlock>Izbira vsebine</ContentPathBlock>
+      <UISCVConfigItemPathFormInputSet>Pot do vsebine</UISCVConfigItemPathFormInputSet>
+    <UISCVContentPathConfigurationInputBox>Pot do vsebine</UISCVContentPathConfigurationInputBox>
+      <Advance>Napredno</Advance>
+      <ContextCaption>Dinamično krmarjenje</ContextCaption>
+      <UISCVContextualRadioBox>Kontekstualna vsebina</UISCVContextualRadioBox>
+      <UISCVParameterInputBox>od</UISCVParameterInputBox>
+      <PrintSettingBlock>Nastavitve tiskanja</PrintSettingBlock>
+      <UISCVPrintPageParameter>s/z</UISCVPrintPageParameter>
+      <UISCVConfigPrintPageFormInputSet>Prikaži na strani</UISCVConfigPrintPageFormInputSet>
+      <LockStatus>Zakleni</LockStatus>
+      <CacheManagement>Vidnost vsebine</CacheManagement>
+      <UISCVCacheRadioBox>Deli vsebino</UISCVCacheRadioBox>
+    </label>
+    <help>
+      <ContentPathBlock>Izberi vsebino, ki jo želiš prikazati. Ta privzeta vsebina se bo dinamično zamenjala, če boste aktivirali možnost Dinamičnega krmarjenja (glej spodaj način Napredno).</ContentPathBlock>
+      <DisplaySettingBlock>Vrstico z možnostmi za prikaz povezave na tiskalnik lahko prikažete ali skrijete. Prikazovanje naslova in datuma je izbirno.</DisplaySettingBlock>
+      <ContextualHelp>Aktivira Dinamično krmarjenje. Vsebina se lahko dinamično menja glede na drugi URL-zasnovan parameter.</ContextualHelp>
+      <ParameterHelp>Ta parameter bo uporabljen za pridobivanje vsebine, če bo aktivirano Dinamično krmarjenje.</ParameterHelp>
+    </help>
+    <msg>
+      <not-valid-path>Pot do elementa je napačna.</not-valid-path>
+    </msg>
+    <tab>
+      <label>
+        <UISCVConfigContentFormInputSet>Izbira vsebine</UISCVConfigContentFormInputSet>
+        <UISCVConfigDisplayFormInputSet>Nastavitve prikaza</UISCVConfigDisplayFormInputSet>
+        <UISCVConfigPrintFormInputSet>Nastavitve tiskanja</UISCVConfigPrintFormInputSet>
+        <UISCVConfigAdvancedFormInputSet>Napredno</UISCVConfigAdvancedFormInputSet>
+      </label>
+    </tab>
+  </UISCVPreferences>
+  <UISCVConfigItemPathFormInputSet>
+    <title>
+      <SelectFolderPath>Izberi pot do mape</SelectFolderPath>
+      <AddPath>Dodaj pot</AddPath>
+    </title>
+  </UISCVConfigItemPathFormInputSet>
+  <UISCVConfigPrintPageFormInputSet>
+    <title>
+      <SelectTargetPage>Prikaži na strani</SelectTargetPage>
+    </title>
+  </UISCVConfigPrintPageFormInputSet>
+  <UISCVConfigPrintPageSelectorPopupWindow>
+    <title>
+      <UIPageSelector>Izbirnik strani</UIPageSelector>
+    </title>
+  </UISCVConfigPrintPageSelectorPopupWindow>
+  <PublicationStates>
+    <archived>Arhivirano</archived>
+    <obsolete>Zastarelo</obsolete>
+    <unpublished>Neobjavljeno</unpublished>
+    <enrolled>Vpisan</enrolled>
+    <draft>Osnutek</draft>
+    <pending>Na čakanju</pending>
+    <approved>Odobreno</approved>
+    <inreview>V pregledu</inreview>
+    <staged>Po stopnjah</staged>
+    <published>Objavljeno</published>
+  </PublicationStates>
+  <UISCVCacheRadioBox>
+    <label>
+      <Enable>Omejeno s preverjanjem pristnosti</Enable>
+      <Disable>Omejeno z uporabniškimi vlogami</Disable>
+    </label>
+  </UISCVCacheRadioBox>
+</bundle>

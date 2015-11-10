@@ -1,0 +1,231 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<bundle>
+ 
+  <View>
+    <label>
+      <languages>
+        <en>Angleščina</en>
+        <fr>Francoščina</fr>
+        <ru>Ruščina</ru>
+        <vi>Vietnamščina</vi>
+        <nl>Nizozemščina</nl>
+        <de>Nemščina</de>
+        <uk>Ukrajinščina</uk>
+        <ar>Arabščina</ar>
+      </languages>
+    </label>
+  </View>
+ 
+  <!--
+  ################resoucebundle FOR EXO:COMMENT VIEW TEMPLATE#############
+  -->
+  <Comment>
+    <view>
+      <label>
+        <postedBy>Zadnji komentar je objavil(a)</postedBy>
+        <at>v/na</at>
+        <comments>Komentar(ji)</comments>
+        <show-comments>Prikaži komentarje</show-comments>
+        <hide-comments>Skrij komentarje</hide-comments>
+        <comment-by>Komentirali</comment-by>
+        <email>Email</email>
+        <site>Stran</site>
+        <lastComment>Zadnji je komentiral {user} ob {time}</lastComment>
+      </label>
+    </view>
+  </Comment>
+ 
+  <!--
+  ################resoucebundle FOR NT:FILE VIEW TEMPLATE##############
+  -->
+  <File>
+    <view>
+      <label>
+        <not-viewable>Predogled tega dokumenta ni na voljo.</not-viewable>
+        <pdf-max-size>Predogled ni na voljo za vsebine, ki so večje od {0} MB.</pdf-max-size>
+        <pdf-max-page>Predogled ni na voljo za vsebine z več kot {0} strani.</pdf-max-page>
+        <using-webDAV>ali Odpri v MS Office</using-webDAV>
+        <open-on-desktop>Odpri na namizju</open-on-desktop>
+        <file-size-too-big>Vsebina datoteke je prevelika. Prenesite jo in odprite v odjemalcu.</file-size-too-big>
+        <webDAV>WebDAV pogled</webDAV>
+        <download>Prenesi</download>
+        <htmlview>Prikaži kot HTML</htmlview>
+        <plaintextview>Prikaži kot navadno besedilo</plaintextview>
+      </label>
+    </view>
+  </File>
+ 
+  <!--
+  ################resoucebundle FOR MAIL:DOCUMENT VIEW TEMPLATE##############
+  -->
+  <Mail>
+    <view>
+      <label>
+        <from>Od:</from>
+        <to>do:</to>
+        <cc>Kp:</cc>
+        <date>Datum:</date>
+        <subject>Zadeva:</subject>
+        <attachment>Priloge:</attachment>
+      </label>
+    </view>
+  </Mail>
+  <!--
+  ################resoucebundle FOR EXO:VOTE VIEW TEMPLATE##############
+  -->
+  <Vote>
+    <view>
+      <label>
+        <avg-rating>Povprečna ocena</avg-rating>
+        <subscription>Glasov</subscription>
+      </label>
+    </view>
+  </Vote>
+  <!--
+  ################resoucebundle FOR LISTVIEW VIEW TEMPLATE##############
+  -->
+  <ListView>
+    <view>
+      <label>
+        <name>Ime</name>
+        <versionable>Omogoča različice</versionable>
+        <exo_owner>Lastnik</exo_owner>
+        <exo_dateCreated>Datum nastanka</exo_dateCreated>
+        <exo_dateModified>Spremenjeno dne</exo_dateModified>
+        <auditing>Nadziranje</auditing>
+      </label>
+    </view>
+  </ListView>
+
+  <!--
+  ###################### resoucebundle for exo:addMetadataAction view template ####
+  -->
+  <AddMetadata>
+    <view>
+      <label>
+        <action-name>Ime dejanja</action-name>
+        <lifecycle>Življenjski cikel</lifecycle>
+        <metadata>Meta podatki</metadata>
+        <description>Opis</description>
+      </label>
+    </view>
+  </AddMetadata>
+
+  <!--
+  ###################### resoucebundle for exo:autoVersioning view template ####
+  -->
+  <AutoVersioning>
+    <view>
+      <label>
+        <action-name>Ime dejanja</action-name>
+        <lifecycle>Življenjski cikel</lifecycle>
+        <description>Opis</description>
+      </label>
+    </view>
+  </AutoVersioning>
+  <!--
+  ###################### resoucebundle for exo:enableVersiong view template ####
+  -->
+  <EnableVersioning>
+    <view>
+      <label>
+        <action-name>Ime</action-name>
+        <lifecycle>Življenjski cikel</lifecycle>
+        <description>Opis</description>
+      </label>
+    </view>
+  </EnableVersioning>
+  <!--
+  ###################### resoucebundle for dc:elementSet view template ####
+  -->
+  <ElementSet>
+    <view>
+      <label>
+        <not-avaliable>Ni na voljo</not-avaliable>
+        <core-elements>Ključni elementi</core-elements>
+        <title>Naslov</title>
+        <creator>Avtor</creator>
+        <subject>Zadeva</subject>
+        <source>Vir</source>
+        <contributor>Sodelavec</contributor>
+        <resource-type>Vrsta vira</resource-type>
+        <date>Datum</date>
+        <publisher>Založnik</publisher>
+        <description>Opis</description>
+        <rights>Pravice</rights>
+        <relation>Razmerje</relation>
+        <format>Oblika</format>
+        <coverage>Pokritost</coverage>
+        <identifier>Identifikator</identifier>
+        <languages>Jeziki</languages>
+      </label>
+      <action>
+        <add-edit>Dodaj/Uredi</add-edit>
+        <cancel>#{word.cancel}</cancel>
+      </action>
+      <tooltip>
+        <cancel>#{word.cancel}</cancel>
+        <add-edit>Dodaj/Uredi lastnosti</add-edit>
+      </tooltip>
+    </view>
+  </ElementSet>
+
+  <ScriptAction>
+    <view>
+      <label> 
+        <isDeep>Je globoko</isDeep>
+        <nodetypes>Vrste vozlišč</nodetypes>
+        <affectedNodeTypeNames>Prizadete vrste vozlišč</affectedNodeTypeNames>
+        <nodeTypeName>Imena vrst vozlišč</nodeTypeName>
+      </label> 
+    </view>
+  </ScriptAction>
+  
+  <AddMetadata>
+    <view>
+      <label>
+        <isDeep>Je globoko</isDeep>
+        <nodetypes>Vrste vozlišč</nodetypes>
+        <affectedNodeTypeNames>Prizadete vrste vozlišč</affectedNodeTypeNames>
+        <nodeTypeName>Imena vrst vozlišč</nodeTypeName>
+      </label> 
+    </view>
+  </AddMetadata>
+
+  <EnableVersioning>
+    <view>
+      <label>
+        <isDeep>Je globoko</isDeep>
+        <nodetypes>Vrste vozlišč</nodetypes> 
+        <affectedNodeTypeNames>Prizadete vrste vozlišč</affectedNodeTypeNames>
+        <nodeTypeName>Imena vrst vozlišč</nodeTypeName>
+      </label> 
+    </view>
+  </EnableVersioning>
+  
+  <AutoVersioning>
+    <view>
+      <label>
+        <isDeep>Je globoko</isDeep>
+        <nodetypes>Vrste vozlišč</nodetypes>
+        <affectedNodeTypeNames>Prizadete vrste vozlišč</affectedNodeTypeNames>
+        <nodeTypeName>Imena vrst vozlišč</nodeTypeName>
+      </label> 
+    </view>
+  </AutoVersioning>
+  
+   <AccessibleMedia>
+    <view>
+      <label>
+      <Play-audio-description-of-this-video>Zvočni opis</Play-audio-description-of-this-video>
+      <Read-more>Preberi več</Read-more>
+      <Read-less>Preberi manj</Read-less>
+      <Switch-back-to-original-video>Prvotni video</Switch-back-to-original-video>
+      </label>
+      <tooltip>
+      <A-second-media-file-is-available-as-audio-description>Na voljo je druga predstavnostna datoteka kot zvočni opis</A-second-media-file-is-available-as-audio-description>
+      </tooltip>
+    </view>
+  </AccessibleMedia>
+ 
+</bundle>

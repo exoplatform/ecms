@@ -1,0 +1,446 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+
+    Copyright (C) 2009 eXo Platform SAS.
+    
+    This is free software; you can redistribute it and/or modify it
+    under the terms of the GNU Lesser General Public License as
+    published by the Free Software Foundation; either version 2.1 of
+    the License, or (at your option) any later version.
+    
+    This software is distributed in the hope that it will be useful,
+    but WITHOUT ANY WARRANTY; without even the implied warranty of
+    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the GNU
+    Lesser General Public License for more details.
+    
+    You should have received a copy of the GNU Lesser General Public
+    License along with this software; if not, write to the Free
+    Software Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA
+    02110-1301 USA, or see the FSF site: http://www.fsf.org.
+
+-->
+<bundle>
+  <UIExoStart>
+    <tooltip>
+      <homepage>Domača stan</homepage>
+    </tooltip>
+  </UIExoStart>
+
+  <UIFormInputSetWithAction>
+    <msg>
+      <confirm-delete>Ali ste prepričani, da želite izbrisati ta element?</confirm-delete>
+    </msg>
+  </UIFormInputSetWithAction>
+
+  <Drives>
+    <label>
+      <ManagedSites>Upravljanje mesta</ManagedSites>
+      <SharedSite>Mesto v skupni rabi</SharedSite>
+    </label>
+  </Drives>
+
+  <Views>
+    <label>
+      <wcm-view>Splet</wcm-view>
+      <admin-view>Skrbnik</admin-view>
+      <icon-view>Ikone</icon-view>
+      <thumbails-view>Sličice</thumbails-view>
+      <list-view>Seznam</list-view>
+      <authoring-view>Avtorstvo</authoring-view>
+      <wcm-category-view>Kategorije</wcm-category-view>
+      <file-view>Pogled urejevalnika dokumentov</file-view>
+    </label>
+  </Views>
+
+  <UIActionBar>
+    <obtion>
+      <Publication>Objava</Publication>
+      <System>Sistem</System>
+    </obtion>
+  </UIActionBar>
+
+  <UIPageSelectorPanel>
+    <header>
+      <path>Pot</path>
+      <action>#{word.action}</action>
+    </header>
+    <msg>
+      <child-not-found>Ni strani.</child-not-found>
+    </msg>
+    <title>
+      <select>Izberi</select>
+    </title>
+  </UIPageSelectorPanel>
+
+  <UIContentDialogFormPopupWindow>
+    <title>
+      <UIContentDialogPreference>Nastavitve spletnih vsebin</UIContentDialogPreference>
+    </title>
+  </UIContentDialogFormPopupWindow>
+
+  <UITabPane>
+    <title>
+      <UIContentBrowsePanelOne>Brskalnik po vsebini</UIContentBrowsePanelOne>
+      <UIContentBrowsePanelMulti>Brskalnik po vsebini</UIContentBrowsePanelMulti>
+      <UIContentBrowsePanelFolder>Brskalnik po mapah</UIContentBrowsePanelFolder>
+      <UIContentSearchForm>Obrazec za iskanje po vsebini</UIContentSearchForm>
+      <UIContentSearchResult>Rezultat iskanja</UIContentSearchResult>
+      <UIContentViewer>Predogled vsebine</UIContentViewer>
+      <WebContentMetadataPopup>Izbirnik lastnosti</WebContentMetadataPopup>
+      <WebContentNodeTypePopup>Izbirnik vrste vozlišča</WebContentNodeTypePopup>
+      <UIPermissionManager>Upravljanje dovoljenj</UIPermissionManager>
+    </title>
+  </UITabPane>
+
+  <UIContentBrowsePanelOne>
+    <selectBoxValues>
+      <FilterBy>Filtriraj po</FilterBy>
+      <WebContent>Spletne vsebine</WebContent>
+      <DMSDocument>Dokument</DMSDocument>
+      <Media>Medij</Media>
+    </selectBoxValues>
+    <msg>
+      <node-checkout>Vozlišče je rezervirano. Preverite vozlišče preden izvedete to funkcijo.</node-checkout>
+    </msg>
+  </UIContentBrowsePanelOne>
+
+  <UIContentBrowsePanelMulti>
+    <selectBoxValues>
+      <FilterBy>Filtriraj po</FilterBy>
+      <WebContent>Spletne vsebine</WebContent>
+      <DMSDocument>Dokument</DMSDocument>
+      <Media>Medij</Media>
+    </selectBoxValues>
+  </UIContentBrowsePanelMulti>
+
+  <UIContentBrowsePanelOne>
+    <label>
+      <LeftColumn>Izberite mapo za prikaz njenih podrejenih kot vsebine.</LeftColumn>
+      <RightColumn>Lahko izberete vsebine, ki so navedene spodaj.</RightColumn>
+    </label>
+  </UIContentBrowsePanelOne>
+
+  <UIContentBrowsePanelMulti>
+    <label>
+      <LeftColumn>Izberite mapo za prikaz njenih podrejenih kot vsebine.</LeftColumn>
+      <RightColumn>Lahko izberete vsebine, ki so navedene spodaj.</RightColumn>
+    </label>
+  </UIContentBrowsePanelMulti>
+
+  <UIContentBrowsePanelFolder>
+    <label>
+      <LeftColumn>Izberite mapo za prikaz njenih podrejenih kot vsebine.</LeftColumn>
+      <RightColumn>Lahko izberete mapo, ki je spodaj.</RightColumn>
+    </label>
+  </UIContentBrowsePanelFolder>
+
+  <UISelectedContentGrid>
+    <label>
+      <name>#{word.name}</name>
+      <add>Dodaj</add>
+      <delete>Izbriši</delete>
+    </label>
+    <msg>
+      <no-content-found>Ni vsebine.</no-content-found>
+      <non-content>Izbrali niste nobene vsebine.</non-content>
+    </msg>
+  </UISelectedContentGrid>
+
+  <UICLVContentSelectedGrid>
+    <action>
+      <SaveCategories>#{word.save}</SaveCategories>
+      <Cancel>#{word.cancel}</Cancel>
+    </action>
+  </UICLVContentSelectedGrid>
+
+  <UIContentBrowsePathSelector>
+    <header>
+      <name>#{word.name}</name>
+      <publicationstate>Stanje publikacije</publicationstate>
+      <action>Dejanje</action>
+    </header>
+    <msg>
+      <child-not-found>Vsebine ni mogoče najti</child-not-found>
+    </msg>
+  </UIContentBrowsePathSelector>
+
+  <UIContentBrowsePathSelectorFolder>
+    <header>
+      <name>#{word.name}</name>
+      <publicationstate>Stanje publikacije</publicationstate>
+      <action>Dejanje</action>
+    </header>
+    <msg>
+      <child-not-found>Mape ni mogoče najti</child-not-found>
+    </msg>
+  </UIContentBrowsePathSelectorFolder>
+
+  <UIContentSearchForm>
+    <title>
+      <Location>Ime strani</Location>
+      <SearchByName>Išči po imenu</SearchByName>
+      <Fulltext>Beseda ali fraza v kontekstu</Fulltext>
+      <Property>Lastnost</Property>
+      <Contain>Vsebujejo</Contain>
+      <FromDate>Od datuma</FromDate>
+      <ToDate>Do datuma</ToDate>
+      <DocumentType>Vrsta dokumenta</DocumentType>
+    </title>
+    <tooltip>
+      <AddMetadataType>Dodaj lastnost</AddMetadataType>
+      <AddNodeType>Dodaj vrsto vozlišča</AddNodeType>
+    </tooltip>    
+    <label>
+      <option>
+        <CREATED>Ustvarjeno</CREATED>
+        <MODIFIED>Spremenjeno</MODIFIED>
+      </option>
+    </label>
+    <action>
+      <SearchWebContent>Išči</SearchWebContent>
+    </action>
+    <msg>
+      <time-to-late>Čas iskanja je predolg.</time-to-late>
+      <empty-field>Vnesite veljavno ključno besedo za iskanje.</empty-field>
+      <empty-name>Vnesite ime, ki ga iščete</empty-name>
+      <empty-content>Vnesite besedo ali frazo, ki jo iščete</empty-content>
+      <empty-property>Izberi lastnost</empty-property>
+      <empty-property-keyword>Vnesite ključno besedo za lastnost</empty-property-keyword>
+      <empty-doctype>Izberi vrsto dokumenta</empty-doctype>
+      <empty-startDate>"Od datuma" je obvezen</empty-startDate>
+      <invalid-format>Neveljavna oblika datum&amp;čas v polju '{0}'.</invalid-format>
+      <invalid-date>"Do datuma" mora biti kasneje kot "od datuma"</invalid-date>
+      <invalid-startDate>"Od datuma" ne sme biti poznejši od današnjega</invalid-startDate>
+      <invalid-nodeType>Vrsta vozlišča "{0}" ni veljavna. Prosimo, preverite.</invalid-nodeType>
+      <invalid-keyword>Ključna beseda ni veljavna. Nekateri znaki niso podprti.</invalid-keyword>
+    </msg>
+  </UIContentSearchForm>
+
+  <WebContentMetadataPopup>
+    <title>
+      <UIContentPropertySelector>Izbirnik lastnosti</UIContentPropertySelector>
+    </title>
+  </WebContentMetadataPopup>
+
+  <UIContentPropertySelector>
+    <action>
+      <Add>Dodaj</Add>
+      <Cancel>#{word.cancel}</Cancel>
+    </action>
+    <label>
+      <metadataType>Vrsta metapodatka</metadataType>
+      <property_select>Lastnost</property_select>
+    </label>
+  </UIContentPropertySelector>
+
+  <WebContentNodeTypePopup>
+    <title>
+      <UIContentNodeTypeSelector>Izbirnik vrste vozlišča</UIContentNodeTypeSelector>
+    </title>
+  </WebContentNodeTypePopup>
+
+  <UIContentNodeTypeSelector>
+    <action>
+      <Save>#{word.save}</Save>
+      <Cancel>#{word.cancel}</Cancel>
+    </action>
+  </UIContentNodeTypeSelector>
+
+  <UIContentSearchResult>
+    <header>
+      <title>Naslov</title>
+      <score>Rezultat</score>
+      <publicationstate>Stanje publikacije</publicationstate>
+      <action>Dejanje</action>
+    </header>
+    <title>
+      <Select>Izberi</Select>
+      <View>Prikaz</View>
+    </title>
+    <msg>
+    <template-not-support>Pregled te vsebine ni mogoč. Predloga ni podprta</template-not-support>
+    </msg>
+  </UIContentSearchResult>
+
+  <UIContentDialogForm>
+    <action>
+      <SaveDraft>Shrani osnutek</SaveDraft>
+      <FastPublish>Hitro objavi</FastPublish>
+      <Preferences>Nastavitve</Preferences>
+      <Close>#{word.close}</Close>
+    </action>
+    <msg>
+      <access-denied>Nimate dovoljenja za dodajanje kategorij k temu dokumentu.</access-denied>
+      <exception>Pri dodajanju kategorij k temu dokumentu je prišlo do napake.</exception>
+      <non-categories>Kategorije so napačne. Izberite ustrezne kategorije.</non-categories>
+    </msg>
+  </UIContentDialogForm>
+
+  <UIPermissionManager>
+    <label>
+      <UIPermissionInputSetWithAction>Dovoljenje</UIPermissionInputSetWithAction>
+      <UIAccessibleCheckboxInput>Pravice dostopa</UIAccessibleCheckboxInput>
+      <UIEditableCheckboxInput>Pravice urejanja</UIEditableCheckboxInput>
+    </label>
+    <action>
+      <Save>#{word.save}</Save>
+      <Clear>Počisti</Clear>
+      <title>
+        <Edit>Uredi</Edit>
+        <Delete>Izbriši</Delete>
+      </title>
+    </action>
+  </UIPermissionManager>
+
+  <UIPermissionManagerGrid>
+    <header>
+      <owner>Dovoljenje</owner>
+      <accessible>Dostopno</accessible>
+      <editable>Možno urejati</editable>
+      <action>Dejanje</action>
+    </header>
+    <msg>
+      <confirm-delete-permission>Ali ste prepričani, da želite izbrisati to dovoljenje?</confirm-delete-permission>
+      <no-permission-remove>Nimate dovoljenja.</no-permission-remove>
+      <access-denied>Dostop zavrnjen.</access-denied>
+      <node-locked>Element poti {0} ali eden izmed njegovih nadrejenih je zaklenjen.</node-locked>
+      <userOrGroup-required>Izbrati morate uporabnika ali skupino.</userOrGroup-required>
+      <checkbox-require>Nastaviti morate pravice.</checkbox-require>
+      <node-checkedin>Vozlišče morate najprej rezervirati.</node-checkedin>
+    </msg>
+  </UIPermissionManagerGrid>
+
+  <UIPermissionInputSetWithAction>
+    <title>
+      <SelectUser>Izberi uporabnika</SelectUser>
+      <SelectMember>Izberi člana</SelectMember>
+      <AddAny>Dodaj katerokoli dovoljenje</AddAny>
+    </title>
+  </UIPermissionInputSetWithAction>
+
+  <UIUserSelectorPopupWindow>
+    <title>
+      <UIUserContainer>Izbirnik uporabnikov</UIUserContainer>
+    </title>
+  </UIUserSelectorPopupWindow>
+
+  <UIGroupSelectorPopupWindow>
+    <title>
+      <UIGroupMemberSelector>Izbirnik skupine</UIGroupMemberSelector>
+    </title>
+  </UIGroupSelectorPopupWindow>
+
+  <UIGroupMemberSelector>
+    <label>
+      <selectGroup>Izberite skupino</selectGroup>
+      <selectMembership>Izberi članstvo</selectMembership>
+    </label>
+  </UIGroupMemberSelector>
+
+  <UIContentDialogPreference>
+    <action>
+      <Back>Nazaj</Back>
+    </action>
+  </UIContentDialogPreference>
+
+  <ZeroValidator>
+    <msg>
+      <Invalid-number>Število nič v polju '{0}' ni sprejemljivo.</Invalid-number>
+    </msg>
+  </ZeroValidator>
+
+  <UIDropDownPageTemp>
+    <item>
+      <WCMPageConfigs>Konfiguracije strani WCM</WCMPageConfigs>
+      <ColumnPageConfigs>Konfiguracije strani s stolpci</ColumnPageConfigs>
+      <RowPageConfigs>Konfiguracije strani z vrsticami</RowPageConfigs>
+      <TabsPageConfigs>Konfiguracije strani z zavihki</TabsPageConfigs>
+      <MixPageConfigs>Konfiguracije Mix strani</MixPageConfigs>
+    </item>
+  </UIDropDownPageTemp>
+
+  <UIWizardPageSelectLayoutForm>
+    <label>
+      <SingleContentViewer>Prikaz posamezne vsebine</SingleContentViewer>
+      <ContentListViewer>Prikaz seznama vsebin</ContentListViewer>
+      <Search>Išči</Search>
+      <Sitemap>Zemljevid strani</Sitemap>
+      <TwoColumnsLayout>Postavitev z dvema stolpcema</TwoColumnsLayout>
+      <ThreeColumnsLayout>Postavitev s tremi stolpci</ThreeColumnsLayout>
+      <TwoRowsLayout>Postavitev z dvema vrsticama</TwoRowsLayout>
+      <ThreeRowsLayout>Postavitev s tremi vrsticami</ThreeRowsLayout>
+      <TwoTabsLayout>Postavitev z dvema zavihkoma</TwoTabsLayout>
+      <ThreeTabsLayout>Postavitev s tremi zavihki</ThreeTabsLayout>
+      <TwoColumnsOneRowLayout>Postavitev z dvema stolpcema in eno vrstico</TwoColumnsOneRowLayout>
+      <OneRowTwoColumnsLayout>Postavitev ena vrstica &amp; dva stolpca</OneRowTwoColumnsLayout>
+      <ThreeRowsTwoColumnsLayout>Postavitev s tremi vrsticami &amp; dvema kolonama</ThreeRowsTwoColumnsLayout>
+    </label>
+  </UIWizardPageSelectLayoutForm>
+
+  <Signin>
+    <welcome>Dobrodošli</welcome>
+    <login>Prijava</login>
+    <logout>Odjava</logout>
+    <language>Spremenite jezik</language>
+    <register>Registracija</register>
+  </Signin>
+  <UIDriveForm>
+<label>
+<wcm-category-view>Prikaz kategorij</wcm-category-view>
+<wcm-view>Prikaz WCM vsebine</wcm-view>
+</label>
+  </UIDriveForm>
+  
+  <ContentSelector>
+    <title>
+      <PersonalDrives>Osebni pogoni</PersonalDrives>
+      <GeneralDrives>Splošni pogoni</GeneralDrives>
+      <GroupDrives>Pogoni skupine</GroupDrives>
+      <Private>Zasebno</Private>
+      <Public>Javno</Public>
+      <BackupCenter>Središče za varnostne kopije</BackupCenter>
+      <CategorizedDocumentsCenter>Središče za kategorizirane dokumente</CategorizedDocumentsCenter>
+      <CollaborationCenter>Središče za sodelovanje</CollaborationCenter>
+      <DigitalAssetsManagementCenter>Središče za upravljanje digitalnih sredstev</DigitalAssetsManagementCenter>
+      <DMSAdministration>Skrbništvo DMS</DMSAdministration>
+      <DocumentsManagementCenter>Središče za upravljanje dokumentov</DocumentsManagementCenter>
+      <LiveDocumentsCenter>Središče objavljenih dokumentov</LiveDocumentsCenter>
+      <PendingDocumentsCenter>Središče čakajočih dokumentov</PendingDocumentsCenter>
+      <RecordsManagementCenter>Center za upravljanje zapisov</RecordsManagementCenter>
+      <SharedUsersSpace>Prostor uporabnikov v skupni rabi</SharedUsersSpace>
+      <Systemfiles>Sistemske datoteke</Systemfiles>
+      <ValidationRequestsDocumentsCenter>Potrjevanje veljavnosti zahteva Dokumentno središče</ValidationRequestsDocumentsCenter>
+      <ManagedSites>Upravljanje mest</ManagedSites>
+      <SharedSite>Mesto v skupni rabi</SharedSite>
+    </title>
+  </ContentSelector>
+  
+  <UICategoryNavigationTargetPathPopupWindow>
+    <title>
+      <UIPageSelector>Izbirnik strani</UIPageSelector>
+    </title>
+  </UICategoryNavigationTargetPathPopupWindow>
+  
+  <UIDocumentInfo>
+    <msg>
+      <access-denied-exception>Dostop zavrnjen. Morda nimate dovoljenja za branje ali pa je bilo vozlišče odstranjeno ali spremenjeno.</access-denied-exception>
+    </msg>
+  </UIDocumentInfo>
+  <UIPortalApplication>
+    <title>
+      <abort>Prekini</abort>
+    </title>
+  </UIPortalApplication>    
+  
+  <CategoryNavigationTemplate>
+  <label>
+  <home>Domov</home>
+  </label>
+  </CategoryNavigationTemplate>
+  
+  <Breadcrumb>
+  <label>
+  <home>Domov</home>
+  </label>  
+  </Breadcrumb>
+</bundle>

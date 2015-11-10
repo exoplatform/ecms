@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<bundle>
+<UIPopupWindow>
+<title>
+<UIViewInfoManager>Ogled informacij</UIViewInfoManager>
+</title>
+</UIPopupWindow>
+    
+<ECMContextMenu>
+<event>
+<ViewInfo>Ogled informacij</ViewInfo>
+</event>
+</ECMContextMenu>
+<UIViewInfoContainer>
+<label>
+      <name>Ime</name>
+      <title>Naslov</title>
+      <type>Vrsta</type>
+      <size>Velikost</size>
+      <owner>Lastnik</owner>
+      <lastModifier>Nazadnje spremenil</lastModifier>
+      <created>Datum nastanka</created>
+      <lastModified>Datum zadnje spremembe</lastModified>
+      <publicationState>Stanje publikacije</publicationState>
+</label>
+<value>
+      <folder>Mapa</folder>
+</value>
+<action>
+<Close>#{word.close}</Close>
+</action>
+</UIViewInfoContainer>
+</bundle>

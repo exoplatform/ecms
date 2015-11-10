@@ -1,0 +1,197 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<bundle>
+  <UIFCCForm>
+    <msg>
+      <name-not-allowed>To ime ni dovoljeno.</name-not-allowed>
+      <in-versioning>Pred dodajanjem novega vozlišča označi trenutno vozlišče.</in-versioning>
+      <cannot-save>Pri shranjevanju vozlišča je prišlo do napke.</cannot-save>
+      <saved-successfully>{0}</saved-successfully>
+      <not-support>Ni mogoče naložiti predlogo '{0}'.</not-support>
+      <not-add-folder>V to mapo je mogoče dodati le datoteke.</not-add-folder>
+      <access-denied>Dostop zavrnjen. Nimaš dovoljenja za dodajanje v '{0}'.</access-denied>
+      <path-not-found>Pot '{0}' je zbrisana ali napačna.</path-not-found>
+      <node-locked>Vozlišče '{0}' je zaklenjeno. Odkleni to vozlišče preden ustvariš dokumente.</node-locked>
+      <node-isExist>To vozlišče že obstaja v '{0}' in ni dovoljeno, da ima enako ime kot vrstnik.</node-isExist>
+      <get-dialog-path>Pri pridobivanju poti dialoga je prišlo do napake.</get-dialog-path>
+      <new-jcr-template>Med ustvarjanjem nove predloge je prišlo do napake.</new-jcr-template>
+    </msg>
+    <action>
+      <Save>#{word.save}</Save>
+      <Cancel>#{word.cancel}</Cancel>
+    </action>
+  </UIFCCForm>
+
+  <UIFCCConfig>
+    <label>
+      <UIFCCSaveLocationField>Shrani lokacijo</UIFCCSaveLocationField>
+      <UIFCCWorkspaceFormSelectBox>Izberi delovni prostor</UIFCCWorkspaceFormSelectBox>
+      <UIFCCTemplateField>Možnosti predloge</UIFCCTemplateField>
+      <UIFCCLocationFormInputAction>Mesto za shranjevanje</UIFCCLocationFormInputAction>
+      <UIFCCTemplateFormSelectBox>Izberite predlogo</UIFCCTemplateFormSelectBox>
+      <UIFCCSaveFormStringInput>Prilagojen gumb Shrani</UIFCCSaveFormStringInput>
+      <UIFCCMessageFormTextareaInput>Prilagojeno sporočilo za Shrani</UIFCCMessageFormTextareaInput>
+      <UIFCCRedirectFormCheckboxInput>Preusmeritev:</UIFCCRedirectFormCheckboxInput>
+      <UIFCCRedirectPathFormStringInput>Preusmeritvena pot:</UIFCCRedirectPathFormStringInput>
+      <UIFCCActionField>Dejanja</UIFCCActionField>
+    </label>
+    <msg>
+      <save-successfully>Uspešno shranjeno v nastavitve portalnega gradnika.</save-successfully>
+      <item-not-found>Pot je neveljavna.</item-not-found>
+      <fileType-empty>Prosim, izberi vrsto datoteke, preden shraniš to konfiguracijo.</fileType-empty>
+      <ws-empty>Izberi en delovni prostor.</ws-empty>
+      <action-empty>Izberi mapo z dejanjem.</action-empty>
+      <message-empty>Polje "Prilagojeno Sporočilo pri shranjevanju" je obvezno v slučaju, da ne izbereš opcije za preusmeritev ali pa, če je pot prazna.</message-empty>
+      <get-template>Pri dostopu do predloge je prišlo do napake.</get-template>
+      <set-template-option>Pri nastavljanju opcij predloge je prišlo do napake.</set-template-option>
+      <do-select>Pri izbiri lokacije je prišlo do napake.</do-select>
+      </msg>
+    <action>
+      <Save>#{word.save}</Save>
+    </action>
+  </UIFCCConfig>
+
+  <UIFCCLocationFormInputAction>
+    <title>
+      <SelectPath>Izberi pot</SelectPath>
+    </title>
+  </UIFCCLocationFormInputAction>
+
+  <UIFCCActionList>
+    <header>
+      <name>Ime</name>
+      <description>Opis</description>
+      <instanceOf>Primerek</instanceOf>
+      <action>Dejanje</action>
+    </header>
+    <action>
+      <Add>Dodaj</Add>
+    </action>
+    <msg>
+      <empty>Brez dejavnosti</empty>
+      <remove-popup-first>Predno zbrišeš to vozlišče moraš zapreti urejevalno okno.</remove-popup-first>
+      <confirm-delete-action>Si prepričan, da želiš zbrisati to dejanje?</confirm-delete-action>
+      <template-empty>Predloga od '{0}'  je nič ali prazna.</template-empty>
+      <template-null>Predloga je nič ali prazna, ali pa nimaš dostopa do te predloge.</template-null>
+      <access-denied>Dostop zavrnjen. Nimateš dovoljenja za to dejanje.</access-denied>
+    </msg>
+  </UIFCCActionList>
+
+  <UIFCCSelectorPopupWindow>
+    <title>
+      <UIOneNodePathSelector>Izberi lokacijo</UIOneNodePathSelector>
+    </title>
+  </UIFCCSelectorPopupWindow>
+
+  <UIWorkspaceList>
+    <label>
+      <workspaceName>Delovni prostor:</workspaceName>
+      <rootNodePath>Korenska pot:</rootNodePath>
+      <rootNodeInfo>Korensko vozlišče</rootNodeInfo>
+    </label>
+  </UIWorkspaceList>
+
+  <rootNodeInfo>
+    <title>
+      <AddRootNode>Dodajte korensko vozlišče</AddRootNode>
+    </title>
+  </rootNodeInfo>
+
+  <UITreeList>
+    <info>
+      <child-not-found>To vozlišče nima nobenega podrejenega.</child-not-found>
+    </info>
+    <header>
+      <name>Ime</name>
+      <action>Dejanje</action>
+    </header>
+  </UITreeList>
+
+  <UIFCCActionPopupWindow>
+    <title>
+      <UIFCCActionContainer>Dodajte dejanje</UIFCCActionContainer>
+    </title>
+  </UIFCCActionPopupWindow>
+
+  <UIFCCActionForm>
+    <title>Dodaj/Uredi dejanje</title>
+    <action>
+      <Save>#{word.save}</Save>
+      <Close>#{word.close}</Close>
+    </action>
+    <msg>
+      <repository-exception>Tega dejanja ni mogoče shraniti. Podano ime ne sme imeti indeks kot končni element.</repository-exception>
+      <numberformat-exception>Tega dejanja ni možno shraniti. Podano ime ne sme imeti '[' ali ']'.</numberformat-exception>
+      <existed-action>Ime dejanja '{0}' že obstaja. Izberite drugo ime.</existed-action>
+      <unable-add-action>Ni mogoče dodati tega dejanja.</unable-add-action>
+      <unable-add>Ni mogoče dodati tega dejanje. To je korensko vozlišče ali nimate dovoljenja.</unable-add>
+      <not-support>Pogovorno okno "{0}" ni podprto.</not-support>
+      <no-permission-add>Dostop zavrnjen. Nimaš dovoljenja za dodajanje dejanja.</no-permission-add>
+      <access-denied>Dostop zavrnjen. Nimaš dovoljenja za dostop do te predloge.</access-denied>
+    </msg>
+    <validator>
+      <validator>Potrjevalnik</validator>
+      <destPath>S potjo</destPath>
+    </validator>
+  </UIFCCActionForm>
+
+  <UIFCCActionTypeForm>
+    <label>
+      <actionType>Ustvari dejanje vrste</actionType>
+    </label>
+    <msg>
+      <not-support>Ni mogoče naložiti predlogo '{0}'.</not-support>
+      <do-not-permission>Nimate dovoljenja za nalaganje predloge "{0}".</do-not-permission>
+    </msg>
+  </UIFCCActionTypeForm>
+
+  <PopupComponent>
+    <title>
+      <UIOneNodePathSelector>Izberi lokacijo</UIOneNodePathSelector>
+      <UIPermissionSelector>Brskalnik po dovoljenjih</UIPermissionSelector>
+      <UICategoriesSelector>Dodajanje kategorij</UICategoriesSelector>
+    </title>
+  </PopupComponent>
+
+  <DateTimeValidator>
+    <msg>
+      <Invalid-input>Polje '{0}' z vrednostjo '{1}' ni veljavno.</Invalid-input>
+    </msg>
+  </DateTimeValidator>
+
+  <UITabPane>
+    <title>
+      <UICategoriesSelectPanel>Izberite kategorije</UICategoriesSelectPanel>
+      <UISelectedCategoriesGrid>Sklicevane kategorije</UISelectedCategoriesGrid>
+    </title>
+  </UITabPane>
+
+  <PopupComponent>
+    <title>
+      <UICategoriesSelector>Add Categories</UICategoriesSelector>
+    </title>
+  </PopupComponent>
+
+  <UICategoriesSelector>
+    <action>
+      <close>#{word.close}</close>
+    </action>
+  </UICategoriesSelector>
+
+  <PopupComponent>
+    <title>
+      <UIOneTaxonomySelector>Dodajanje kategorij</UIOneTaxonomySelector>
+    </title>
+  </PopupComponent>
+
+  <UITreeTaxonomyList>
+    <label>
+      <taxonomyTree>Drevesna struktura kategorije</taxonomyTree>
+    </label>
+  </UITreeTaxonomyList>
+
+  <UIFCCTaxonomyPopupWindow>
+    <title>
+      <UIOneTaxonomySelector>Izbirnik kategorij</UIOneTaxonomySelector>
+    </title>
+  </UIFCCTaxonomyPopupWindow>
+</bundle>

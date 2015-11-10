@@ -1,0 +1,189 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<bundle>
+  <UICLVContainer>
+    <label>
+      <Preferences>Nastavitve</Preferences>
+      <AddContent>Dodajanje vsebine</AddContent>
+      <ManageContent>Upravljanje vsebine</ManageContent>
+    </label>
+    <msg>
+      <non-contents>Žal, na voljo ni nobenega članka.</non-contents>
+      <item-not-found>Elementa ni mogoče najti.</item-not-found>
+      <no-permission>Nimate dovoljenja za dostop do tega vozlišča.</no-permission>
+      <category-back>Pojdi na prejšnje</category-back>
+    </msg>
+  </UICLVContainer>
+  <UIViewerManagementPopupWindow>
+    <title>
+      <UICLVConfig>Nastavitve seznama vsebine</UICLVConfig>
+    </title>
+  </UIViewerManagementPopupWindow>
+  <UICLVConfig>
+    <label>
+      <Title>Nastavitve seznama vsebine</Title>
+      <ContentSelectionBlock>Izbira vsebine</ContentSelectionBlock>
+      <UICLVConfigDisplayModeFormRadioBoxInput>Način</UICLVConfigDisplayModeFormRadioBoxInput>
+      <UICLVConfigItemPathFormInputSet>Pot do mape</UICLVConfigItemPathFormInputSet>
+    <UICLVConfigItemPathFormStringInput>Pot do mape</UICLVConfigItemPathFormStringInput>
+      <UICLVConfigOrderByFormSelectBox>Razvrsti po</UICLVConfigOrderByFormSelectBox>
+      <option>
+        <exo:title>Naziv</exo:title>
+        <exo:dateCreated>Datum nastanka</exo:dateCreated>
+        <exo:lastModifiedDate>Datum spremembe</exo:lastModifiedDate>
+        <publication:liveDate>Datum objave</publication:liveDate>
+        <exo:startEvent>Datum dogodka</exo:startEvent>
+        <exo:index>Indeks</exo:index>
+        <DESC>Padajoče</DESC>
+        <ASC>Naraščajoče</ASC>
+      </option>
+      <DisplaySettingBlock>Nastavitve prikaza</DisplaySettingBlock>
+      <UICLVConfigHeaderFormStringInput>Glava</UICLVConfigHeaderFormStringInput>
+      <UICLVConfigDisplayTemplateFormSelectBox>Predloga</UICLVConfigDisplayTemplateFormSelectBox>
+      <UICLVConfigPaginatorTemplateFormSelectBox>Številčenje strani</UICLVConfigPaginatorTemplateFormSelectBox>
+      <UICLVConfigItemsPerPageFormStringInput>Elementov na strani</UICLVConfigItemsPerPageFormStringInput>
+      <UICLVConfigShowIllustrationFormCheckboxInput>Pokaži sliko</UICLVConfigShowIllustrationFormCheckboxInput>
+      <UICLVConfigShowSummaryFormCheckboxInput>Show Summary</UICLVConfigShowSummaryFormCheckboxInput>
+      <UICLVConfigShowHeaderFormCheckboxInput>Pokaži glavo</UICLVConfigShowHeaderFormCheckboxInput>
+      <UICLVConfigShowRefreshFormCheckboxInput>Show Refresh</UICLVConfigShowRefreshFormCheckboxInput>
+      <UICLVConfigShowTitleFormCheckboxInput>Pokaži naslov</UICLVConfigShowTitleFormCheckboxInput>
+      <UICLVConfigShowDateCreatedFormCheckboxInput>Pokaži datum</UICLVConfigShowDateCreatedFormCheckboxInput>
+      <UICLVConfigShowLinkFormCheckboxInput>Show Link</UICLVConfigShowLinkFormCheckboxInput>
+      <UICLVConfigShowReadmoreFormCheckboxInput>Pokaži več povezav</UICLVConfigShowReadmoreFormCheckboxInput>
+      <UICLVConfigAllowDynamicUrlStringInput>Allow Dynamic URL</UICLVConfigAllowDynamicUrlStringInput>
+      <UICLVConfigShowRssLinkFormCheckboxInput>Pokaži RSS povezavo</UICLVConfigShowRssLinkFormCheckboxInput>
+      <UICLVConfigShowAutomaticDetectionCheckboxInput>Samodejno zaznavanje</UICLVConfigShowAutomaticDetectionCheckboxInput>
+      <AdvancedBlock>Napredno</AdvancedBlock>
+      <UICLVConfigDynamicNavigationLabel>Dinamično krmarjenje</UICLVConfigDynamicNavigationLabel>
+      <UICLVConfigContextualFolderRadioBoxInput>Contextual Folder</UICLVConfigContextualFolderRadioBoxInput>
+      <UICLVConfigShowCLVByStringInput>od</UICLVConfigShowCLVByStringInput>
+      <UICLVConfigshowSCVWithStringInput>s/z</UICLVConfigshowSCVWithStringInput>
+      <UICLVConfigTargetPageFormInputSet>Prikaži na strani</UICLVConfigTargetPageFormInputSet>
+      <content-not-found>Vsebine ni mogoče najti.</content-not-found>
+      <ContentPath>Pot do vsebine</ContentPath>
+      <Up>Navzgor</Up>
+      <Down>Navzdol</Down>
+      <UICLVConfigCacheManagementLabel>Vidnost vsebine</UICLVConfigCacheManagementLabel>
+      <UICLVContentByQueryLabel>Content by Query</UICLVContentByQueryLabel>
+      <UICLVConfigWorkspaceFormSelectBox>Delovni prostor</UICLVConfigWorkspaceFormSelectBox>
+      <UICLVConfigContentByQueryTextArea>s poizvedbo</UICLVConfigContentByQueryTextArea>
+      <UICLVConfigCacheEnableRadioBoxInput>Deli vsebino med uporabniki</UICLVConfigCacheEnableRadioBoxInput>
+    </label>
+    <help>
+      <ModeSelectionHelp>Na voljo sta dva načina prikaza vsebine; "Po Mapi" pri čemer se prikaže vsebina izbrane mape/kategorije. "Po Vsebini" pri čemer ročno izbereš  vsebino, ki jo želiš prikazati.</ModeSelectionHelp>
+      <FolderPathHelp>Izberi vsebino, ki jo želiš prikazati. Ta privzeta vsebina se bo dinamično zamenjala, če boste aktivirali možnost Dinamičnega krmarjenja (glej spodaj način Napredno).</FolderPathHelp>
+      <HeaderOptionHelp>Pokaži glavo na vrhu vsebine seznama. Če aktivirate možnost samodejnega zaznavanja, bo glava zasnovana glede na trenutni izbor.</HeaderOptionHelp>
+      <GeneralOptionHelp>Izberite grafične elemente, ki jih želite prikazati na vašem seznamu. Upoštevajte, da, glede na izbrano predlogo, nekateri elementi morda niso na voljo.</GeneralOptionHelp>
+      <ContextualHelp>Aktivira možnost Dinamičnega krmarjenja. Ostali lahko spreminjajo vsebino dinamično glede na URL parameter.</ContextualHelp>
+      <ParameterHelp>Ta parameter bo uporabljen za dostop do vsebine, če je aktivirano Dinamično krmarjenje.</ParameterHelp>
+      <ShowDetailInPageHelp>Klik na vsebino preusmeri uporabnika na stran s podrobnostmi. Da bi prikazali vsebino, mora biti omogočen portalni gradnik "Vsebina preko URL" z omogočenim Dinamičnim krmarjenjem na ciljni strani.</ShowDetailInPageHelp>
+      <DetailParameterHelp>Ta parameter bo vseboval pot do vsebine v povezavi do Podrobne strani. Ta parameter se mora ujemati s tistim uporabljenim v modulu "Povezava z URL".</DetailParameterHelp>
+      <ContentByQueryHelp>Nastaviš lahko SQL poizvedbo da dinamično prideš do vsebine. Sledeči parametri so dovoljeni: ${user}, ${lang} ali katerikoli get parameter (PARAM) obkrožen z ${PARAM}.</ContentByQueryHelp>
+      <ContentsVisibilityHelp>"Omejeno z geslom" bo filtriralo vsebino glede na uporabniške pravice. Če se ne prijaviš bo videna le javna vsebina. Če se prijaviš pa bo vidna interna vsebina, ki je dostopna vsem. "Omejeno s funkcijo uporabnika" pomeni, da je vidna vsebina glede na pravice uporabnika. V večini primerov naj ta funkcija ne bi bila uporabljena ker zmanjša performanse sistema.</ContentsVisibilityHelp>
+    </help>
+    <action>
+      <Save>#{word.save}</Save>
+      <Cancel>#{word.cancel}</Cancel>
+      <delete>Izbriši</delete>
+    </action>
+    <msg>
+      <not-valid-path>Pot mape je neveljavna.</not-valid-path>
+      <saving-success>Nastavitve portalnegagradnika so shranjene.</saving-success>
+    </msg>
+    <tab>
+      <label>
+        <clvContentTab>Izbira vsebine</clvContentTab>
+        <clvDisplayTab>Nastavitve prikaza</clvDisplayTab>
+        <clvAdvancedTab>Napredno</clvAdvancedTab>
+      </label>
+    </tab>
+  </UICLVConfig>
+  <UICLVConfigDisplayModeFormRadioBoxInput>
+    <label>
+      <AutoViewerMode>By Folder</AutoViewerMode>
+      <ManualViewerMode>By Content</ManualViewerMode>
+    </label>
+  </UICLVConfigDisplayModeFormRadioBoxInput>
+  <UICLVConfigItemPathFormInputSet>
+    <title>
+      <SelectFolderPath>Izberi pot do mape</SelectFolderPath>
+      <AddPath>Dodaj pot</AddPath>
+    </title>
+  </UICLVConfigItemPathFormInputSet>
+  <FolderPathSelectorPopupWindow>
+    <title>
+      <UIContentSelectorFolder>Brskalnik</UIContentSelectorFolder>
+    </title>
+  </FolderPathSelectorPopupWindow>
+  <UICLVConfigOrderTypeFormSelectBox>
+    <label>
+      <option>
+        <OrderDesc>Padajoče</OrderDesc>
+        <OrderAsc>Naraščajoče</OrderAsc>
+      </option>
+    </label>
+  </UICLVConfigOrderTypeFormSelectBox>
+  <UICLVConfigTargetPageFormInputSet>
+    <title>
+      <SelectBasePath>Izberi osnovno pot</SelectBasePath>
+      <SelectTargetPage>Izberite osnovno pot</SelectTargetPage>
+    </title>
+  </UICLVConfigTargetPageFormInputSet>
+  <UICLVBasePathPopupWindow>
+    <title>
+      <UIPageSelector>Izbira strani</UIPageSelector>
+    </title>
+  </UICLVBasePathPopupWindow>
+  <UICLVPresentation>
+    <msg>
+      <confirm-delete>Ali ste prepričani, da želite izbrisati to vsebino?</confirm-delete>
+      <delete-content-successfully>Vsebina uspešno izbrisana.</delete-content-successfully>
+    </msg>
+    <label>
+      <readmore>Preberi več</readmore>
+      <rssFeed>RSS vir</rssFeed>
+    </label>
+    <action>
+      <refresh>Osveži</refresh>
+      <edit>Urejanje v Brskalniku vsebine</edit>
+      <delete>Zbriši</delete>
+      <publish>Objavi</publish>
+    </action>
+    <label>
+      <draft>Osnutek</draft>
+    </label>
+  </UICLVPresentation>
+  <CorrectContentSelectorPopupWindow>
+    <title>
+      <UIContentSelectorMulti>Multiple Content Selector Pane</UIContentSelectorMulti>
+    </title>
+  </CorrectContentSelectorPopupWindow>
+  <UIContentDialogFormPopupWindow>
+    <title>
+      <UIContentDialogForm>Web Content Form</UIContentDialogForm>
+    </title>
+  </UIContentDialogFormPopupWindow>
+  <UICLVConfigContextualFolderRadioBoxInput>
+    <label>
+      <contextualEnable>Omogočeno</contextualEnable>
+      <contextualDisable>Onemogočeno</contextualDisable>
+    </label>
+  </UICLVConfigContextualFolderRadioBoxInput>
+  <PublicationStates>
+    <archived>Arhivirano</archived>
+    <obsolete>Zastarelo</obsolete>
+    <unpublished>Neobjavljeno</unpublished>
+    <enrolled>Vpisan</enrolled>
+    <draft>Osnutek</draft>
+    <pending>Na čakanju</pending>
+    <approved>Odobreno</approved>
+    <inreview>V pregledu</inreview>
+    <staged>V fazah</staged>
+    <published>Objavljeno</published>
+  </PublicationStates>
+  <UICLVConfigCacheEnableRadioBoxInput>
+    <label>
+      <ENABLE>Omejeno z geslom</ENABLE>
+      <DISABLE>Restricted by User Roles</DISABLE>
+    </label>
+  </UICLVConfigCacheEnableRadioBoxInput>
+</bundle>

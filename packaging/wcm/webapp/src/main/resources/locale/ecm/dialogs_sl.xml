@@ -1,0 +1,389 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<bundle>
+  <!--
+  ###################### global word for ECM dialogs resoucebundle ####
+  -->
+  <Ecm>
+    <dialog>
+      <label>
+        <end-time>Končni čas</end-time>
+        <start-time>Začetni čas</start-time>
+        <lifecycle>Življenjski cikel</lifecycle>
+        <mimeType>Vrsta MIME</mimeType>
+        <repeat-count>Števec ponovitev</repeat-count>
+        <time-interval>Časovni Interval</time-interval>
+        <query-items>Poizvedbe elementov</query-items>
+        <schedule-type>Vrsta urnika</schedule-type>
+        <remove>Odstrani element</remove>
+        <add>Dodajte element</add>
+        <expand>Razširi</expand>
+      </label>
+    </dialog>
+  </Ecm>
+  
+  <UIDocumentForm>
+    <label>
+      <title>#{word.title}</title>
+      <link>Povezava</link>
+      <contentHtml>#{word.content}</contentHtml>
+      <content>#{word.content}</content>
+      <contentPlain>#{word.content}</contentPlain>
+      <name>Ime</name>
+    <categories>Kategorije</categories>
+    </label>
+  </UIDocumentForm>
+ 
+  <!--
+  ###################### resoucebundle for HTMLFile dialogs template ####
+  -->
+  <HtmlFile>
+    <dialog>
+      <label>
+        <name>Ime</name>
+        <content>Vsebina</content>
+      </label>
+    </dialog>
+  </HtmlFile>
+
+  <!--
+  ###################### resoucebundle for nt:file dialogs template ####
+  -->
+  <File>
+    <dialog>
+      <label>
+        <name>#{word.name}</name>
+        <categories>Kategorije</categories>
+        <mimeType>#{Ecm.dialog.label.mimeType}</mimeType>
+        <width>Širina</width>
+        <height>Višina</height>
+        <content>#{word.content}</content>
+        <re-upload>Datoteka že obstaja. Lahko jo izbrišeš in preneseš drugo datoteko.</re-upload>
+      </label>
+    </dialog>
+  </File>
+
+  <UIActionForm>
+    <label>
+      <description>#{word.description}</description>
+      <port>Vrata</port>
+      <userName>#{word.userName}</userName>
+      <password>Geslo</password>
+      <link>Povezava</link>
+      <to>Pošlji e-pošto</to>
+      <actionName>#{word.name}</actionName>
+    </label>
+  </UIActionForm>
+  <EditFormAction>
+    <label>
+      <description>#{word.description}</description>
+      <port>Vrata</port>
+      <userName>#{word.userName}</userName>
+      <password>Geslo</password>
+      <link>Povezava</link>
+      <to>Pošlji e-pošto</to>
+      <actionName>#{word.name}</actionName>
+    </label>
+  </EditFormAction>
+
+  <!--
+  ###################### resoucebundle for exo:addMetadataAction dialogs template ####
+  -->
+  <AddMetadata>
+    <dialog>
+      <label>
+        <id>ID</id>
+        <name>#{word.name}</name>
+        <lifecycle>#{Ecm.dialog.label.lifecycle}</lifecycle>
+        <metadata>Metapodatki</metadata>
+        <description>#{word.description}</description>
+      </label>
+    </dialog>
+  </AddMetadata>
+
+  <!--
+  ###################### resoucebundle for exo:autoVersioning dialogs template ####
+  -->
+  <AutoVersioning>
+    <dialog>
+      <label>
+        <id>ID</id>
+        <name>#{word.name}</name>
+        <lifecycle>#{Ecm.dialog.label.lifecycle}</lifecycle>
+        <schedule-type>#{Ecm.dialog.label.schedule-type}</schedule-type>
+        <start-time>#{Ecm.dialog.label.start-time}</start-time>
+        <end-time>#{Ecm.dialog.label.end-time}</end-time>
+        <repeat-count>#{Ecm.dialog.label.repeat-count}</repeat-count>
+        <time-inteval>#{Ecm.dialog.label.time-interval}</time-inteval>
+        <cron-expression>Cron izraz</cron-expression>
+        <description>#{word.description}</description>
+      </label>
+    </dialog>
+  </AutoVersioning>
+  <!--
+  ###################### resoucebundle for exo:enableVersiong dialogs template ####
+  -->
+  <EnableVersioning>
+    <dialog>
+      <label>
+        <id>ID</id>
+        <name>#{word.name}</name>
+        <lifecycle>#{Ecm.dialog.label.lifecycle}</lifecycle>
+        <schedule-type>#{Ecm.dialog.label.schedule-type}</schedule-type>
+        <start-time>#{Ecm.dialog.label.start-time}</start-time>
+        <end-time>#{Ecm.dialog.label.end-time}</end-time>
+        <repeat-count>#{Ecm.dialog.label.repeat-count}</repeat-count>
+        <time-inteval>#{Ecm.dialog.label.time-interval}</time-inteval>
+        <cron-expression>Cron Expression</cron-expression>
+        <description>#{word.description}</description>
+      </label>
+    </dialog>
+  </EnableVersioning>
+  <!--
+  ###################### resoucebundle for dc:elementSet dialogs template ####
+  -->
+  <ElementSet>
+    <dialog>
+      <label>
+        <title>#{word.title}:</title>
+        <creator>Avtor:</creator>
+        <subject>#{word.subject}:</subject>
+        <source>Vir:</source>
+        <contributor>Sodelavec:</contributor>
+        <resource-type>Vrsta vira:</resource-type>
+        <date>#{word.date}:</date>
+        <publisher>Založnik:</publisher>
+        <description>#{word.description}:</description>
+        <rights>Pravice:</rights>
+        <relation>Odnos:</relation>
+        <format>#{word.format}:</format>
+        <coverage>Pokritost:</coverage>
+        <identifier>Identifikator:</identifier>
+        <language>Jezik:</language>
+      </label>
+    </dialog>
+  </ElementSet>
+
+  <!--
+  ###################### resoucebundle for exo:actionable dialogs template ####
+  -->
+  <Actionable>
+    <dialog>
+      <label>
+        <primary-type>Primarna vrsta</primary-type>
+        <mixin-types>Vrsta Mixin</mixin-types>
+      </label>
+    </dialog>
+  </Actionable>
+
+  <!--
+  ###################### resoucebundle for exo:move dialogs template ####
+  -->
+  <Move>
+    <dialog>
+      <label>
+        <destination-workpsace>Ciljni delovni prostor</destination-workpsace>
+        <destination-path>Ciljna pot</destination-path>
+        <primary-type>Primarna vrsta</primary-type>
+        <mixin-types>Vrsta Mixin</mixin-types>
+      </label>
+    </dialog>
+  </Move>
+  <!--
+  ###################### resoucebundle for exo:published dialogs template ####
+  -->
+  <Published>
+    <dialog>
+      <label>
+        <start-publication>Začni z objavo</start-publication>
+        <end-publication>Končaj objavo</end-publication>
+      </label>
+    </dialog>
+  </Published>
+ 
+  <!--
+  ###################### resoucebundle mix:referenceable dialogs template ####
+  -->
+  <Referenceable>
+    <dialog>
+      <label>
+        <uuid>UUID</uuid>
+      </label>
+    </dialog>
+  </Referenceable>
+  <!--
+  ###################### resoucebundle exo:relationable dialogs template ####
+  -->
+  <Relationable>
+    <dialog>
+      <label>
+        <relation>Odnos</relation>
+      </label>
+    </dialog>
+  </Relationable>
+  <!--
+  ###################### resoucebundle exo:rss-enable dialogs template ####
+  -->
+  <RssEnable>
+    <dialog>
+      <label>
+        <title>Naslov</title>
+        <summary>#{word.summary}</summary>
+      </label>
+    </dialog>
+  </RssEnable>
+
+  <!--
+  ###################### resoucebundle mix:versionable dialogs template ####
+  -->
+  <Versionable>
+    <dialog>
+      <label>
+        <version-history>Zgodovina različic</version-history>
+        <base-version>Osnovna različica</base-version>
+        <is-checked-out>Je rezervirano</is-checked-out>
+        <predecessors>Predhodniki</predecessors>
+        <merge-failed>Spajanje ni uspelo</merge-failed>
+        <uuid>UUID</uuid>
+      </label>
+    </dialog>
+  </Versionable>
+
+  <!--
+  ##################### resoucebundle for resouce container dialogs template#####
+  -->
+  <ResouceContainer>
+    <dialog>
+      <label>
+        <name>Ime</name>
+        <autoload>Samodejno nalaganje</autoload>
+        <minetype>Vrsta MIME</minetype>
+        <content>Vsebina</content>
+      </label>
+    </dialog>
+  </ResouceContainer>
+  <!--
+  ###################### resoucebundle for validator ####
+  -->
+  <EmailAddressValidator>
+    <msg>
+      <Invalid-input>E-poštni naslov ni veljaven.</Invalid-input>
+    </msg>
+  </EmailAddressValidator>
+  <EmptyFieldValidator>
+    <msg>
+      <empty-input>Polje '{0}' je obvezno. Vnesi vrednost.</empty-input>
+    </msg>
+  </EmptyFieldValidator>
+  <NumberFormatValidator>
+    <msg>
+      <Invalid-number>Polje {0} ni veljavno.</Invalid-number>
+    </msg>
+  </NumberFormatValidator>
+  <!--
+  #####Since version 2.4#######
+
+  ###################### resoucebundle exo:taxonomyAction dialogs template ####
+  -->
+  <ScriptAction>
+    <dialog>
+      <label>
+        <id>ID</id>
+        <name>Ime</name>
+        <lifecycle>Življenjski cikel</lifecycle>
+        <homePath>Pot domov</homePath>
+        <targetWorkspace>Ciljni delovni prostor</targetWorkspace>
+        <targetPath>Ciljna pot</targetPath>
+      </label>
+    </dialog>
+  </ScriptAction>
+  <UIDialogForm>
+   <form>
+   <DialogFormException>Tega dokumenta ni možno shraniti. Mogoče je težava z pred-shranjevalnim prestreznikom.</DialogFormException>
+   </form>
+  </UIDialogForm>
+
+  <!--
+  #####Since version 2.6#######
+
+  ###################### resoucebundle exo:taxonomyAction dialogs template ####
+  -->
+<no>Ne</no>
+<yes>Da</yes>
+<true>Pravilno</true>
+<false>Napačno</false>
+<Electronic>Elektronska</Electronic>
+<Paper>Papir</Paper>
+<NONE>Noben</NONE>
+<CLASSIFIED>Razvrščeni</CLASSIFIED>
+<UNCLASSIFIED>Nerazvrščeni</UNCLASSIFIED>
+<NOCONTRACT>Ni pogodbe</NOCONTRACT>
+<one-minute>Ena minuta</one-minute>
+<hourly>Vsako uro</hourly>
+<daily>Dnevno</daily>
+<quarterly>Četrtletno</quarterly>
+<yearly>Letno</yearly>
+<ten-years>Deset let</ten-years>
+<read>Dejanje uporabnika</read>
+  <schedule>Razporejevalnik opravil</schedule>
+  <node_added>Dodajanje vsebine</node_added>
+  <node_removed>Odstranjevanje vsebine</node_removed>
+  <property_added>Dodajanje lastnosti</property_added>
+  <property_removed>Odstranjevanje lastnosti</property_removed>
+  <property_changed>Spreminjanje lastnosti</property_changed>
+
+  <ScriptAction>
+    <dialog>
+      <label>
+        <isDeep>je Globoko</isDeep>
+        <nodetypes>Vrste vozlišč</nodetypes>
+        <affectedNodeTypeNames>Prizadete vrste vozlišč</affectedNodeTypeNames>
+      </label>
+    </dialog>
+  </ScriptAction>
+
+  <AddMetadata>
+    <dialog>
+      <label>
+        <isDeep>je Globoko</isDeep>
+        <nodetypes>Vrste vozlišč</nodetypes>
+        <affectedNodeTypeNames>Prizadete vrste vozlišč</affectedNodeTypeNames>
+      </label>
+    </dialog>
+  </AddMetadata>
+
+  <EnableVersioning>
+    <dialog>
+      <label>
+        <isDeep>je Globoko</isDeep>
+        <nodetypes>Vrste vozlišč</nodetypes>
+        <affectedNodeTypeNames>Prizadete vrste vozlišč</affectedNodeTypeNames>
+      </label>
+    </dialog>
+  </EnableVersioning>
+  
+  <AutoVersioning>
+    <dialog>
+      <label>
+        <isDeep>je Globoko</isDeep>
+        <nodetypes>Vrste vozlišč</nodetypes>
+        <affectedNodeTypeNames>Prizadete vrste vozlišč</affectedNodeTypeNames>
+      </label>
+    </dialog>
+  </AutoVersioning>
+
+  <AccessibleMedia>
+  <dialog>
+  <label>
+  <captions>Napisi</captions>
+<audioDescription>Avdio opis</audioDescription>
+<alternativeText>Nadomestno besedilo</alternativeText>
+</label>
+</dialog>
+<help>
+<CaptionsHelp>Napisi bi naj zagotovili besedilo pogovornh oken in pomembnih zvokov</CaptionsHelp>
+<AudioDescriptionHelp>Zvočni opis je govorjena sled videa</AudioDescriptionHelp>
+<AlternativeTextHelp>Zagotoviti dostopen, alternativni način predstavitve informacij</AlternativeTextHelp>
+</help>
+</AccessibleMedia>
+  
+</bundle>

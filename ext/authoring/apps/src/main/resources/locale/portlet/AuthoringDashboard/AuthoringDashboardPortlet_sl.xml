@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<bundle>
+  <UIDashboardForm>
+    <label>
+      <title>Author Dashboard</title>
+      <nocontent>Ni vsebine</nocontent>
+      <mydraft>Moj osnutek vsebine</mydraft>
+      <waitingapproval>Čakanje na mojo odobritev</waitingapproval>
+      <approve>Odobri</approve>
+      <publishedtomorrow>Jutri bo objavljeno</publishedtomorrow>
+      <refresh>#{word.refresh}</refresh>
+    </label>
+  </UIDashboardForm>
+</bundle>

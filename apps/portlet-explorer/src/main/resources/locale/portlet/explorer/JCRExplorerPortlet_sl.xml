@@ -1,0 +1,3224 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<bundle>
+  <!--
+  #############################################################################
+  #             org.exoplatform.ecm.webui.component.UICommentForm             #
+  #############################################################################
+  -->
+  <UICommentForm>
+    <label>
+      <name>Ime</name>
+      <email>E-pošta</email>
+      <website>Spletna stran</website>
+      <comment>Komentar</comment>
+    </label>
+    <action>
+      <Save>#{word.save}</Save>
+      <Cancel>#{word.cancel}</Cancel>
+    </action>
+    <msg>
+      <not-support>Te vrste dokumentov ni mogoče komentirati.</not-support>
+      <not-checkedout>Pred komentiranjem si najprej rezervirajte vozlišče.</not-checkedout>
+      <content-null>Praznega komentarja ne morete objaviti.</content-null>
+    </msg>
+  </UICommentForm>
+  <!--
+  #############################################################
+  # org.exoplatform.ecm.webui.component.UIVoteForm.gtmpl    #
+  #############################################################
+  -->
+  <UIVoteForm>
+    <title>
+      <normal>Slabo</normal>
+      <good>Pod povprečjem</good>
+      <verygood>Povprečno</verygood>
+      <excellent>Nad povprečjem</excellent>
+      <best>Dobro</best>
+      <no-value>še ni ocenjeno</no-value>
+    </title>
+    <label>
+      <my-rating>Moja ocena:</my-rating>
+    </label>
+    <button>
+      <label>
+        <confirm>OK</confirm>
+      </label>
+    </button>
+    <msg>
+      <not-support>Ne more glasovati za to vrsto dokumenta.</not-support>
+      <not-checkedout>Pred glasovanjem si najprej rezervirajte vozlišče.</not-checkedout>
+      <vote-restriction>Ne morete glasovati več kot enkrat.</vote-restriction>
+    </msg>
+  </UIVoteForm>
+ 
+  <!--
+  #############################################################################
+  #             org.exoplatform.ecm.webui.component.explorer.UIJCRExplorer    #
+  #############################################################################
+  -->
+  <UIJCRExplorer>
+    <msg>
+      <refresh-session-success>Seja je bila uspešno osvežena.</refresh-session-success>
+      <no-node-history>Ste v korenskem vozlišču.</no-node-history>
+      <save-session-success>Vse spremembe so bile shranjene.</save-session-success>
+      <target-path-not-found>Nimate dostopa do tega vozlišča, ker ne obstaja več ali pa nimate dovoljenja za dostop.</target-path-not-found>
+    </msg>
+  </UIJCRExplorer>
+  <!--
+  #############################################################################
+  #             org.exoplatform.ecm.webui.component.explorer.UISideBar        #
+  #############################################################################
+  -->
+  <UISideBar>
+    <label>
+      <Relation>Razmerje</Relation>
+      <Explorer>Raziskovalec datotek</Explorer>
+      <Close>Zapri stransko vrstico</Close>
+      <TagExplorer>Oblak oznak</TagExplorer>
+      <Clipboard>Odložišče</Clipboard>
+      <SavedSearches>Shranjena iskanja</SavedSearches>
+    </label>
+    <title>
+      <Control>Control Sidebar</Control>
+      <Close>Zapri stransko vrstico</Close>
+    </title>
+  </UISideBar>
+  <!--
+  ################################################################################
+  #             org.exoplatform.ecm.webui.component.explorer.UIExplorerActionBar #
+  ################################################################################
+  -->
+  <UIViewBar>
+    <label>
+      <driveWorkspace>Pogon delovnega prostora:</driveWorkspace>
+      <backToJCR>Nazaj v JCR glavni disk</backToJCR>
+      <setUpBrowser>Nastavite nastavitve brskanja</setUpBrowser>
+      <refesh>Osveži</refesh>
+      <currentDrive>Trenutni pogon</currentDrive>
+      <selectView>Izberite pogled</selectView>
+      <showSideBar>Prikaži stransko vrstico</showSideBar>
+      <more>Več</more>
+      <backTo>Nazaj</backTo>
+    </label>
+  </UIViewBar>
+
+  <!--
+  #############################################################################
+  #             org.exoplatform.ecm.webui.component.explorer.UIDrivesArea  #
+  #############################################################################
+  -->
+  <UIDrivesBrowser>
+    <title>
+      <PersonalDrives>Osebni pogoni</PersonalDrives>
+      <GroupDrives>Pogoni skupine</GroupDrives>
+      <GeneralDrives>Splošni pogoni</GeneralDrives>
+    </title>
+    <msg>
+      <no-view-found>Glede dovoljenja za dostop do pogona '{0}', ni na voljo noben pogled.</no-view-found>
+      <access-denied>Dostop zavrnjen. Morda nimate dovoljenja v delovnem prostoru pogona '{0}'.</access-denied>
+      <workspace-not-exist>Pogon '{0}' je bil shranjen v neprepoznan delovni prostor. Prosimo popravite ta pogon.</workspace-not-exist>
+    </msg>
+  </UIDrivesBrowser>
+
+  <!--
+  #############################################################################
+  #             org.exoplatform.ecm.webui.component.explorer.UITreeExplorer    #
+  #############################################################################
+  -->
+  <UITreeExplorer>
+    <title>Raziskovalec</title>
+    <label>
+      <Root>Koren</Root>
+      <webDavView>Odpri v MS Office</webDavView>
+    </label>
+    <msg>
+      <path-not-found>Ta element je bil izbrisan ali spremenjen. Kliknite gumb Osveži.</path-not-found>
+    </msg>
+  </UITreeExplorer>
+  <!--
+  ##################################################################################
+  #             org.exoplatform.ecm.webui.component.explorer.UIViewRelationList    #
+  ##################################################################################
+  -->
+  <UIViewRelationList>
+    <label>
+      <languages-list>Prevodi</languages-list>
+      <relation-list>Povezave</relation-list>
+      <references-list>Sklici</references-list>
+      <no-related-document>Ni povezanih dokumentov</no-related-document>
+      <related-document>Sorodni dokumenti</related-document>
+    </label>
+  </UIViewRelationList>
+  <!--
+  #########################################################################################
+  #             org.exoplatform.ecm.webui.component.explorer.control.UIPreferencesForm  #
+  #########################################################################################
+  -->
+  <UIPreferencesForm>
+    <title>Nastavite nastavitve brskanja</title>
+    <label>
+      <enableStructure>Omogoči DMS strukturo:</enableStructure>
+      <showSideBar>Prikaži stransko vrstico:</showSideBar>
+      <showHiddenNode>Prikaži skrita vozlišča:</showHiddenNode>
+      <showNonDocument>Prikaži vozlišča brez dokumentov:</showNonDocument>
+      <showRefDocuments>Prikaži sklicevane dokumente:</showRefDocuments>
+      <enableDragAndDrop>Omogoči "povleci in spusti":</enableDragAndDrop>
+      <sortBy>Razvrsti po:</sortBy>
+      <order>Vrstni red po:</order>
+      <nodesPerPage>Elementov po strani:</nodesPerPage>
+    </label>
+    <action>
+      <Back>#{word.close}</Back>
+      <Save>#{word.save}</Save>
+    </action>
+  </UIPreferencesForm>
+  <!--
+  #########################################################################################
+  #             org.exoplatform.ecm.webui.component.explorer.control.UIPreferencesForm  #
+  #########################################################################################
+  -->
+  <UIAllItemsPreferenceForm>
+    <title>Nastavitve nastavitve filtra</title>
+    <action>
+      <Cancel>#{word.cancel}</Cancel>
+      <Save>#{word.save}</Save>
+    </action>
+  </UIAllItemsPreferenceForm>
+  <!--
+  #########################################################################################
+  #             org.exoplatform.ecm.webui.component.explorer.UIRenameForm  #
+  #########################################################################################
+  -->
+  <UIRenameForm>
+    <title>Preimenuj</title>
+    <label>
+      <nameField>Ime</nameField>
+      <titleField>Naslov</titleField>
+    </label>
+    <action>
+      <Cancel>#{word.cancel}</Cancel>
+      <Save>#{word.save}</Save>
+      <Back>#{word.back}</Back>
+    </action>
+    <msg>
+      <rename-successfull>Vozlišče '{0}' je bilo uspešno preimenovano v '{1}'.</rename-successfull>
+      <rename-denied>Dostop zavrnjen. Vozlišča ni mogoče preimenovati.</rename-denied>
+      <fileName-invalid>Novo ime vsebuje neveljavne znake.</fileName-invalid>
+      <newName-same-oldName>Novo ime že obstaja. Prosimo, preverite.</newName-same-oldName>
+      <version-exception>To vozlišče (ali njegovo nadrejeno vozlišče) je rezervirano.</version-exception>
+      <lock-exception>To vozlišče je zaklenjeno. Preden ga preimenujete ga morate odkleniti.</lock-exception>
+      <constraintViolation-exception>Med poskusom preimenovanja vozlišča '{0}' je prišlo do napake. Prosimo, preverite.</constraintViolation-exception>
+      <unknown-prefix>Predpona '{0}' še ni bila registrirana.</unknown-prefix>
+      <rename-error>Med poskusom preimenovanja vozlišča je prišlo do napake. Prosimo, preverite.</rename-error>
+    </msg>
+  </UIRenameForm>
+  <UIPopupWindow>
+    <title>
+      <UIRenameForm>Preimenuj</UIRenameForm>
+      <UIActionContainer>Uredi dejanje</UIActionContainer>
+      <UIFolderForm>Nova mapa</UIFolderForm>
+      <UIUploadManager>Prenesi datoteko</UIUploadManager>
+      <UIReferencesList>Seznam sklicev</UIReferencesList>
+      <UIExportNode>Izvozi</UIExportNode>
+      <UINodeTypeInfo>Podatki o vrsti vozlišča</UINodeTypeInfo>
+      <UIVersionInfo>Informacije o različici</UIVersionInfo>
+      <UIActivateVersion>Aktiviraj različico</UIActivateVersion>
+      <UIAuditingInfo>Informacije o nadzoru</UIAuditingInfo>
+      <UIActivateAuditing>Vključi nadzor</UIActivateAuditing>
+      <UIPermissionManager>Upravljanje dovoljenj</UIPermissionManager>
+      <UIPropertiesManager>Upravljanje lastnosti</UIPropertiesManager>
+      <UIECMSearch>Napredno iskanje</UIECMSearch>
+      <UISavedQuery>Seznam shranjenih poizvedb</UISavedQuery>
+      <UIWatchDocumentForm>Sledi dokumentu</UIWatchDocumentForm>
+      <UIActionManager>Upravljaj dejanja</UIActionManager>
+      <UIDocumentForm>Uredi dokument</UIDocumentForm>
+      <UIDocumentFormController>Dodajte nov dokument</UIDocumentFormController>
+      <EditFormController>Uredi dokument</EditFormController>
+      <UIRelationManager>Dodaj relacijo</UIRelationManager>
+      <UICategoryManager>Dodaj Kategorijo</UICategoryManager>
+      <UIImportNode>Uvozi</UIImportNode>
+      <UIViewMetadataManager>Ogled Metapodatkov</UIViewMetadataManager>
+      <UIVoteForm>Glasujte za dokument</UIVoteForm>
+      <UICommentForm>Komentar</UICommentForm>
+      <UIPreferencesForm>Nastavitve</UIPreferencesForm>
+      <UIPublicationManager>Upravljanje objave</UIPublicationManager>
+      <UIConfirmMessage>Izbriši ?</UIConfirmMessage>
+      <UIDeleteFileConfirmMessage>Izbriši datoteko ?</UIDeleteFileConfirmMessage>
+      <UIDeleteFolderConfirmMessage>Izbriši mapo ?</UIDeleteFolderConfirmMessage>
+      <UIDeleteItemsConfirmMessage>Izbriši elemente?</UIDeleteItemsConfirmMessage>
+      <UIRestoreConfirmMessage>Potrdi obnovitev</UIRestoreConfirmMessage>
+      <UIActivePublication>Vpiši se na življenjski cikel objave</UIActivePublication>
+      <UITaggingForm>Označi dokument</UITaggingForm>
+      <UIThumbnailForm>Dodaj sličico</UIThumbnailForm>
+      <UIAllItemsPreferenceForm>Nastavitve</UIAllItemsPreferenceForm>
+      <UISelectRestorePath>Izberite pot za obnovitev</UISelectRestorePath>
+      <UISEOForm>Upravljanje SEO</UISEOForm>
+      <UISEOToolbarForm>Upravljanje SEO</UISEOToolbarForm>
+      <UIReadOnlyFileConfirmMessage>Odpri dokument</UIReadOnlyFileConfirmMessage>
+      <UIDocumentAutoVersionForm>Kopiraj dokument</UIDocumentAutoVersionForm>
+    </title>
+    <header>
+      <workspace>Delovni prostor</workspace>
+      <path>Pot</path>
+    </header>
+  </UIPopupWindow>
+  <!--
+  #########################################################################################
+  #             org.exoplatform.ecm.webui.component.explorer.UIResourceForm #
+  #########################################################################################
+  -->
+  <UIResourceForm>
+    <title>Uredi vsebino datoteke</title>
+    <label>
+      <name>Ime</name>
+      <textToModify>Besedilo za spreminjanje</textToModify>
+      <fileToUpload>Prenesi novo vsebino za ta dokument (mora biti iste mime-vrste)</fileToUpload>
+    </label>
+  </UIResourceForm>
+  <!--
+  ###################################################################################
+  #             org.exoplatform.ecm.webui.component.explorer.UIActionBar      #
+  ###################################################################################
+  -->
+  <UIActionBar>
+    <tooltip>
+      <AddFolder>Nova mapa</AddFolder>
+      <AddDocument>Nova vsebina</AddDocument>
+      <EditDocument>Uredi</EditDocument>
+      <Upload>Prenesi</Upload>
+      <Paste>Prilepi</Paste>
+      <Search>Išči</Search>
+      <WatchDocument>Začni/Prenehaj slediti</WatchDocument>
+      <TaggingDocument>Označi</TaggingDocument>
+      <Vote>Glasuj</Vote>
+      <Comment>Komentiraj</Comment>
+      <ManageVersions>Različice</ManageVersions>
+      <ManageAuditing>Nadzor</ManageAuditing>
+      <ManagePublications>Objave</ManagePublications>
+      <ManageCategories>Kategorije</ManageCategories>
+      <ManageRelations>Relacije</ManageRelations>
+      <ManageActions>Dejanja</ManageActions>
+      <ExportNode>Izvozi</ExportNode>
+      <ImportNode>Uvozi</ImportNode>
+      <OverloadThumbnail>Sličica preobremenitve</OverloadThumbnail>
+      <ManageHidden>Pokaži/Skrij vsebino</ManageHidden>
+      <ViewReferences>Sklici</ViewReferences>
+      <ViewNodeType>Vrste</ViewNodeType>
+      <ViewPermissions>Dovoljenja</ViewPermissions>
+      <ViewProperties>Lastnosti</ViewProperties>
+      <ViewMetadatas>Meta podatki</ViewMetadatas>
+      <ViewRelations>Pokaži/Skrij povezave</ViewRelations>
+      <ShowJCRStructure>Pokaži/Skrij strukturo vsebine</ShowJCRStructure>
+      <EditProperty>Urejanje lastnosti dokumenta</EditProperty>
+      <UploadNewVersion>Naloži novo različico</UploadNewVersion>
+    </tooltip>
+    <msg>
+      <cannot-action-in-rootnode>Tega dejanja ni mogoče izvesti v korenskem vozlišču.</cannot-action-in-rootnode>
+      <node-checkedin>Vozlišče morate najprej rezervirati.</node-checkedin>
+      <cannot-enable-version-rootnode>Za korensko vozlišče ni mogoče omogočiti različic.</cannot-enable-version-rootnode>
+      <cannot-enable-publication-rootnode>Za korensko vozlišče ne morete omogočiti objave.</cannot-enable-publication-rootnode>
+      <manage-publication>
+        <not-supported-nodetype>Objavljanje je omogočeno samo za dokumentna vozlišča.</not-supported-nodetype>
+        <no-publication-lifecycle>Življenjski cikel objave ni konfiguriran.</no-publication-lifecycle>
+      </manage-publication>
+      <unsubcriber-lifecycle>Vozlišče je že bilo odjavljeno.</unsubcriber-lifecycle>
+      <not-supported-nodetype>Odjave z življenjskega cikla so mogoče le za dokumentna vozlišča.</not-supported-nodetype>
+      <unsubcriber-lifecycle-finish>Vozlišče je uspešno odjavljeno.</unsubcriber-lifecycle-finish>
+      <access-false>To vozlišče ni članek oziroma ni sproščeno.</access-false>
+      <unsupported-action>To dejanje ni podprto.</unsupported-action>
+      <not-relationable>To vozlišče še ni imelo kakršne koli povezave na drugo vozlišče.</not-relationable>
+      <node-pasted>Vozlišče {0} je bilo prilepljeno na lokacijo {1}. Operacija je že bila shranjena.</node-pasted>
+      <no-node-selected>Nobeno vozlišče ni bilo kopirano.</no-node-selected>
+      <unable-edit>Vozlišča '{0}' tipa '{1}' ne morete urejati.</unable-edit>
+      <not-support>Izbranega vozlišča ni mogoče urejati.</not-support>
+      <template-null>To vozlišče nima na voljo pogovornega okna.</template-null>
+      <keyword-null>Ni ključnih besed za iskanje.</keyword-null>
+      <not-found>Ni rezultatov.</not-found>
+      <keyword-not-allow>Ta ključna beseda ni dovoljena.</keyword-not-allow>
+      <is-not-referenable>Na vozlišče '{0}' ni mogoče postaviti sklica.</is-not-referenable>
+      <access-denied>Dostop zavrnjen. Nimate dovoljenja za urejanje v tem vozlišču.</access-denied>
+      <access-add-denied>Dostop zavrnjen. Nimate dovoljenja za dodajanje v tem vozlišču.</access-add-denied>
+      <item-existed>To vozlišče že obstaja. Ne more imeti enakega imena kot drug element.</item-existed>
+      <removed-hidden-mixin>Uspešno ste odstranili skrit Mixin.</removed-hidden-mixin>
+      <added-hidden-mixin>Uspešno ste dodali skrit Mixin.</added-hidden-mixin>
+      <not-supported>Ta funkcija je dovoljena le za dokumente.</not-supported>
+      <empty-file-type>Temu vozlišču ne morete dodati dokumenta.</empty-file-type>
+      <unsupported-watch>Sledite lahko le vozlišču dokumenta.</unsupported-watch>
+      <watch-checkedin>Pred pričetkom sledenja morate vozlišče sprostiti.</watch-checkedin>
+      <unsupported-tagging>Označite lahko le dokumente.</unsupported-tagging>
+      <tagnode-checkedin>Pred pričetkom označevanja morate vozlišče sprostiti.</tagnode-checkedin>
+    </msg>
+    <title>
+      <select-tab>Izberite zavihek</select-tab>
+      <SimpleSearch>Hitro iskanje</SimpleSearch>
+      <AdvanceSearch>Napredno iskanje</AdvanceSearch>
+      <SavedQueries>Shranjene poizvedbe</SavedQueries>
+      <ShowAllOwnedByUser>Prikaži vse moje predmete</ShowAllOwnedByUser>
+      <ShowAllFavourite>Prikaži vse priljubljene predmete</ShowAllFavourite>
+      <ShowAllHidden>Prikaži vse skrite predmete</ShowAllHidden>
+      <ShowAllFromTrash>Prikaži vse predmete v smeteh</ShowAllFromTrash>
+    </title>
+  </UIActionBar>
+  <UIPopupMenu>
+    <msg>
+      <has-not-permission>Dostop zavrnjen. Nimate dovoljenja za dodajanje v tem vozlišču.</has-not-permission>
+      <has-not-edit-permission>Dostop zavrnjen. Nimate dovoljenja za urejanje v tem vozlišču. Obrnite se na skrbnika.</has-not-edit-permission>
+      <cannot-login-node>Dostop zavrnjen. V tem vozlišču nimate dovoljenja za dodajanje.</cannot-login-node>
+      <cannot-paste-nodetype>Tukaj ne morete prilepiti vozlišča.</cannot-paste-nodetype>
+      <has-not-permission-unlok>Nimate dovoljenja za odklepanje tega vozlišča.</has-not-permission-unlok>
+      <bound-exception>Nimate dovoljenja za preimenovanje tega vozlišča. Obrnite se na skrbnika.</bound-exception>
+      <bound-move-exception>Vozlišča ne morete premakniti v samega sebe ali v podrejeno vozlišče.</bound-move-exception>
+      <does-not-support-auditing>Za to vozlišče ne morete aktivirati nadzora.</does-not-support-auditing>
+      <can-not-rename-node>Nimate dovoljenja za preimenovanje tega vozlišča. Obrnite se na skrbnika, da vam dodeli ustrezno dovoljenje.</can-not-rename-node>
+      <can-not-cut-node>Nimate dovoljenja, da bi izrezali to vozlišče. Obrnite se na skrbnika.</can-not-cut-node>
+      <can-not-remove-node>Nimate dovoljenja, da bi odstranili to vozlišče. Obrnite se na skrbnika.</can-not-remove-node>
+      <can-not-lock-node>Nimate dovoljenja za zaklepanje vozlišča {0}. Se obrnite na skrbnika.</can-not-lock-node>
+      <can-not-unlock-node>Nimate dovoljenja za odklepanje tega vozlišča. Se obrnite na skrbnika.</can-not-unlock-node>
+      <no-node>Prosimo, izberite vsaj eno vozlišče pred lepljenjem.</no-node>
+      <can-not-paste-node>Nimate dovoljenja za premikanje tega vozlišča. Obrnite se na skrbnika.</can-not-paste-node>
+      <can-not-move-node>Nimate dovoljenja za premikanje tega vozlišča. Obrnite se na skrbnika.</can-not-move-node>
+      <does-not-support-versioning>Nimate dovoljenja za premikanje tega vozlišča. Obrnite se na skrbnika.</does-not-support-versioning>
+      <path-not-found>Ta element je bil izbrisan ali spremenjen. Kliknite gumb Osveži.</path-not-found>
+      <paste-lock-exception>Na to vozlišče ne morete prilepiti '{0}' ker je izvorni ali ciljni element zaklenjen ali povezan z zaklenjenim elementom.</paste-lock-exception>
+      <can-not-checkin-node>Izbranega vozlišča ne morete sprostiti. Preverite, da imate ustrezna dovoljenja.</can-not-checkin-node>
+      <can-not-checkout-node>Izbranega vozlišča ne morete sprostiti. Preverite, da imate ustrezna dovoljenja.</can-not-checkout-node>
+      <move-constraint-exception>Pri premikanju vozlišča je prišlo do napke.</move-constraint-exception>
+      <not-lock-owner>Tega vozlišča ne morete odkleniti, ker ga niste vi zaklenili.</not-lock-owner>
+      <is-checked-in>Preden preimenujete vozlišče si ga rezervirajte.</is-checked-in>
+      <is-checked-in-lock>Preden zaklenete vozlišče ga sprostite.</is-checked-in-lock>
+      <cant-lock>Vozlišča ni mogoče zakleniti.</cant-lock>
+      <node-locked>Predmet s potjo {0} ali njegov nadrejeni/višji nivo je zaklenjen.</node-locked>
+      <can-not-delete>Preden lahko vozlišče izbrišete ga morate zapreti.</can-not-delete>
+      <can-not-delete-version>Ne morete izbrisati tega vozlišča, shranjujejo se različice.</can-not-delete-version>
+      <not-support>Izbranega vozlišča ne morete izbrisati. Izberite drugo vozlišče.</not-support>
+      <current-node-not-allow-paste>Kopiranega vozlišča ne morete prilepiti na trenutno vozlišče.</current-node-not-allow-paste>
+      <copied-node-in-versioning>Kopiranega vozlišča ne morete prilepiti, shranjujejo se različice.</copied-node-in-versioning>
+      <parent-node-locked>Nimate dovoljenja za odklepanje vozlišča '{0}'.</parent-node-locked>
+      <this-node-locked-by-parent>Tega vozlišča ne morete odkleniti. Zaklenjen je njegovo nadrejeno vozlišče.</this-node-locked-by-parent>
+      <paste-node-same-name>Vozlišča z istim imenom, kot že obstaja v ciljni mapi, ne morete prilepiti.</paste-node-same-name>
+      <has-not-add-permission>Nimate dovoljenja za dodajanje novega vozlišča.</has-not-add-permission>
+      <node-cutting>Vozlišče ste izrezali. Tukaj ga ne morete prilepiti.</node-cutting>
+      <access-denied>Dostop zavrnjen. Morda nimate dovoljenja v tem vozlišču.</access-denied>
+      <remove-verion-exception>Tega vozlišča ne morete odstraniti, ker je (ali njegov predhodnik) sproščen.</remove-verion-exception>
+      <remove-referentialIntegrityException>Tega vozlišča ne morete izbrisati, ker je trenutno cilj sklica.</remove-referentialIntegrityException>
+      <constraintviolation-exception>Obveznega elementa jcr:uuid ni bilo mogoče najti. Vozlišče je izbrisano ali spremenjeno. Kliknite gumb Osveži.</constraintviolation-exception>
+      <path-not-found-exception>To vozlišče je bilo izbrisano ali spremenjeno. Kliknite gumb Osveži.</path-not-found-exception>
+      <not-exist-categories>Kategorija ne obstaja.</not-exist-categories>
+      <lock-node-read-only>To datoteko je zaklenil uporabnik {0}. Odpri samo za branje?</lock-node-read-only>
+    </msg>
+  </UIPopupMenu>
+  <!--
+  #############################################################################
+  #     org.exoplatform.ecm.webui.component.explorer.actions.UIFolderForm     #
+  #############################################################################
+  -->
+  <UIFolderForm>
+    <action>
+      <Cancel>#{word.cancel}</Cancel>
+      <Save>Ustvari mapo</Save>
+    </action>
+    <label>
+      <titleTextBox>Ime mape:</titleTextBox>
+      <customTypeCheckBox>Uporabite vrsto mape po meri</customTypeCheckBox>
+    </label>
+    <title>Dodaj/Uredi mapo</title>
+    <msg>
+      <addFolder-successful>Mapa "{0}" je bila uspešno dodana.</addFolder-successful>
+      <name-invalid>Prosimo, vnesite ime mape.</name-invalid>
+      <title-invalid>Prosimo vnesite naslov mape.</title-invalid>
+      <name-not-allowed>To ime ni dovoljeno.</name-not-allowed>
+      <fileName-error>Ime datoteke ni veljavno.</fileName-error>
+      <constraint-violation>Trenutno vozlišče ne omogoča dodajanje vozlišča tipa '{0}'.</constraint-violation>
+      <repository-exception>Prišlo je do nepričakovane napake. Obrnite se na skrbnika.</repository-exception>
+      <repository-exception-permission>Nimate dovoljenja za dodajanje nove mape v tem vozlišču.</repository-exception-permission>
+      <numberformat-exception>Te mape ni mogoče shraniti. Ime mora biti v numerični obliki.</numberformat-exception>
+      <!--DMS 2.4.x; ECM-3553-->
+      <not-allow-sameNameSibling>Mape ne morete shraniti. To vozlišče že vsebuje vozlišče z istim imenom.</not-allow-sameNameSibling>
+      <ntFolder-not-avaiable>Izbrati morate vrsto mape po meri</ntFolder-not-avaiable>
+    </msg>
+    <help>
+      <customTypeCheckBoxHelp>Označite, če želite v to mapo shranjevati spletne vsebine ali vrste dokumentov po meri</customTypeCheckBoxHelp>
+    </help>
+  </UIFolderForm>
+  <!--
+  ###################################################################################
+  #             org.exoplatform.ecm.webui.component.explorer.UIDocumentWorkspace    #
+  ###################################################################################
+  -->
+  <UIWorkingArea>
+    <title>
+      <Icon>Ikona</Icon>
+    </title>
+    <msg>
+      <!-- Delte one node is not in trash and have no relation -->
+      <confirm-delete>Ali ste prepričani, da želite izbrisati element '{0}'?</confirm-delete>
+      <confirm-delete-file>Ali ste prepričani, da želite izbrisati datoteko '{0}'?</confirm-delete-file>
+      <confirm-delete-folder>Ali ste prepričani, da želite izbrisati mapo '{0}' in vse njene podmape?</confirm-delete-folder>
+      
+      <!-- Delte one node is in trash and have no relation -->
+      <confirm-delete-permanently>Ali ste prepričani, da želite trajno izbrisati element '{0}'?</confirm-delete-permanently>
+      <confirm-delete-file-permanently>Ali ste prepričani, da želite trajno izbrisati datoteko '{0}'?</confirm-delete-file-permanently>
+      <confirm-delete-folder-permanently>Ali ste prepričani, da želite trajno odstraniti mapo '{0}' in vse podmape?</confirm-delete-folder-permanently>
+      
+      <!-- Delte one node is not in trash and have relations -->
+      <confirm-delete-has-relations>Ali ste prepričani, da želite izbrisati element '{0}' in njegove sklice?</confirm-delete-has-relations>
+      <confirm-delete-file-has-relations>Ali ste prepričani, da želite izbrisati datoteko '{0}' in njene sklice?</confirm-delete-file-has-relations>
+      <confirm-delete-folder-has-relations>Ali ste prepričani, da želite izbrisati mapo '{0}' in njene sklice?</confirm-delete-folder-has-relations>
+      
+      <!-- Delte multiple nodes, not in Trash, have no relations -->
+      <confirm-delete-multi-nodes-generic>Ali ste prepričani, da želite izbrisati {0} izbranih elementov?</confirm-delete-multi-nodes-generic>  
+      <confirm-delete-multi-nodes-file>Ali ste prepričani, da želite izbrisati {0} izbranih datotek?</confirm-delete-multi-nodes-file>
+      <confirm-delete-multi-nodes-folder>Ali ste prepričani, da želite izbrisati {0} izbranih map in vse podmape?</confirm-delete-multi-nodes-folder>
+      <confirm-delete-multi-nodes-generic-and-file>Ali ste prepričani, da želite izbrisati {0} izbranih elementov in datotek?</confirm-delete-multi-nodes-generic-and-file>
+      <confirm-delete-multi-nodes-generic-and-folder>Ali ste prepričani, da želite izbrisati {0} izbranih elementov, map in vse podmape?</confirm-delete-multi-nodes-generic-and-folder>
+      <confirm-delete-multi-nodes-file-and-folder>Ali ste prepričani, da želite izbrisati {0} izbranih datotek, map in vse podmape?</confirm-delete-multi-nodes-file-and-folder>
+      <confirm-delete-multi-nodes-generic-and-file-and-folder>Ali ste prepričani, da želite izbrisati {0} izbranih elementov, datotek, map in vse podmape?</confirm-delete-multi-nodes-generic-and-file-and-folder>
+      
+      <!-- Delte multiple nodes, in Trash -->
+      <confirm-delete-multi-nodes-generic-permanently>Ali ste prepričani, da želite trajno odstraniti {0} izbranih elementov?</confirm-delete-multi-nodes-generic-permanently>  
+      <confirm-delete-multi-nodes-file-permanently>Ali ste prepričani, da želite trajno odstraniti {0} izbranih datotek?</confirm-delete-multi-nodes-file-permanently>
+      <confirm-delete-multi-nodes-folder-permanently>Ali ste prepričani, da želite trajno odstraniiti {0} izbranih map in vse podmape?</confirm-delete-multi-nodes-folder-permanently>
+      <confirm-delete-multi-nodes-generic-and-file-permanently>Ali ste prepričani, da želite trajno odstraniti {0} izbranih elementov in datotek?</confirm-delete-multi-nodes-generic-and-file-permanently>
+      <confirm-delete-multi-nodes-generic-and-folder-permanently>Ali ste prepričani, da želite trajno izbrisati {0} izbranih elementov, map in vse podmape?</confirm-delete-multi-nodes-generic-and-folder-permanently>
+      <confirm-delete-multi-nodes-file-and-folder-permanently>Ali ste prepričani, da želite trajno odstraniti {0} izbranih datotek, map in vse podmape?</confirm-delete-multi-nodes-file-and-folder-permanently>
+      <confirm-delete-multi-nodes-generic-and-file-and-folder-permanently>Ali ste prepričani, da želite trajno odstraniti {0} izbranih elementov, datotek, map in vse podmape?</confirm-delete-multi-nodes-generic-and-file-and-folder-permanently>
+      
+      <!-- Delte multiple nodes, have relations -->
+      <confirm-delete-multi-nodes-generic-have-relations>Ali ste prepričani, da želite izbrisati {0} izbranih elementov in njihove sklice?</confirm-delete-multi-nodes-generic-have-relations>  
+      <confirm-delete-multi-nodes-file-have-relations>Ali ste prepričani, da želite izbrisati {0} izbranih datotek in njihove sklice?</confirm-delete-multi-nodes-file-have-relations>
+      <confirm-delete-multi-nodes-folder-have-relations>Ali ste prepričani, da želite izbrisati {0} izbranih map, vse podmape in njihove sklice?</confirm-delete-multi-nodes-folder-have-relations>
+      <confirm-delete-multi-nodes-generic-and-file-have-relations>Ali ste prepričani, da želite izbrisati {0} izbranih elementov, datotek in njihove sklice?</confirm-delete-multi-nodes-generic-and-file-have-relations>
+      <confirm-delete-multi-nodes-generic-and-folder-have-relations>Ali ste prepričani, da želite izbrisati {0} izbranih elementov, njihove sklice, mape in vse podmape?</confirm-delete-multi-nodes-generic-and-folder-have-relations>
+      <confirm-delete-multi-nodes-file-and-folder-have-relations>Ali ste prepričani, da želite izbrisati {0} izbranih datotek, njihove sklice, mape in vse podmape?</confirm-delete-multi-nodes-file-and-folder-have-relations>
+      <confirm-delete-multi-nodes-generic-and-file-and-folder-have-relations>Ali ste prepričani, da želite izbrisati {0} izbranih elementov, datotek, njihove sklice, mape in vse podmape?</confirm-delete-multi-nodes-generic-and-file-and-folder-have-relations>
+      
+      <feedback-delete>"{0}" je bil uspešno izbrisan.</feedback-delete>
+      <feedback-delete-multi>{0} elementi so bili uspešno izbrisani.</feedback-delete-multi>      
+      <feedback-delete-permanently>"{0}" je bil trajno odstranjen.</feedback-delete-permanently>
+      <feedback-delete-permanently-multi>{0} elementov je bilo trajno odstranjenih.</feedback-delete-permanently-multi>
+      <undo-delete>Razveljavi</undo-delete>
+      <feedback-restore>"{0}" je bila uspešno obnovljena.</feedback-restore>
+      <feedback-restore-multi>{0} elementov je bilo uspešno obnovljenih.</feedback-restore-multi>
+      
+      <confirm-restore>Vozlišče z enakim imenom že obstaja na stari lokaciji vozlišča "{0}". Ali ste prepričani, da želite obnoviti to vozlišče?</confirm-restore>
+      <confirm-move>Ali ste prepričani, da želite premakniti?</confirm-move>
+      <node-cut>Vozlišče '{0}' je bilo izrezano.</node-cut>
+      <execute-successfully>Dejanje po meri "{0}" je bilo izvršeno.</execute-successfully>
+      <save-node-success>Vozlišče '{0}' je bilo shranjeno.</save-node-success>
+      <move-problem>Vozlišča '{0}' ne morete premakniti na '{1}' ker je prišlo do težav z dovoljenjem ali pa ima vozlišče omejitve.</move-problem>
+    </msg>
+  </UIWorkingArea>
+  <UIDocumentWorkspace>
+    <label>
+      <no-children>To vozlišče nima podrejenega vozlišča.</no-children>
+      <no-children-but-has-hidden>To vozlišče nima podrejenih vozlišč, vendar pa obstaja nekaj skritih datotek.</no-children-but-has-hidden>
+    </label>
+    <msg>
+      <unable-save-node>Vozlišče '{0}' je bilo na novo ustvarjeno. Prosimo, shranite sejo pred izvedbo tega dejanja.</unable-save-node>
+      <save-node-success>Vozlišče '{0}' je bilo shranjeno.</save-node-success>
+      <node-copied>Vozlišče '{0}' je bilo kopirano.</node-copied>
+      <node-cut>Vozlišče '{0}' je bilo izrezano.</node-cut>
+      <remove-root>Ne morete odstraniti korenskega vozlišča.</remove-root>
+      <node-remove-success>Vozlišče '{0}' je bilo odstranjeno.</node-remove-success>
+    </msg>
+    <tooltip>
+      <Rename>Preimenuj</Rename>
+      <Cut>Izreži</Cut>
+      <Copy>Kopiraj</Copy>
+      <Save>#{word.save}</Save>
+      <RemoveNode>Izbriši</RemoveNode>
+      <Checkin>Sprosti</Checkin>
+      <Checkout>Rezerviraj</Checkout>
+      <Lock>Zakleni</Lock>
+      <Unlock>Odkleni</Unlock>
+      <EditDocument>Uredi</EditDocument>
+      <Paste>Prilepi</Paste>
+      <LockedBy>Zaklenil</LockedBy>
+    </tooltip>
+  </UIDocumentWorkspace>
+  <UIDocumentInfo>
+    <msg>
+      <access-denied>Dostop zavrnjen. Nimate dostopa do vozlišča '{0}'.</access-denied>
+      <null-exception>Elementa ni mogoče najti. Bil je odstranjen ali spremenjen, ali pa nimate dovoljenja za dostop do tega vozlišča.</null-exception>
+      <confirm-deleteattachment>Ali ste prepričani, da želite odstraniti priloženo datoteko?</confirm-deleteattachment>
+      <confirm-deleteattcomment>Ali ste prepričani, da želite odstraniti ta komentar?</confirm-deleteattcomment>
+      <access-denied-exception>Dostop zavrnjen. Morda nimate dovoljenja za branje, ali pa je bilo vozlišče odstranjeno ali spremenjeno.</access-denied-exception>
+      <path-not-found>Ta element je bil izbrisan ali spremenjen. Kliknite gumb Osveži.</path-not-found>
+    </msg>
+    <tooltip>
+      <remove-attachment>Odstranite to priloženo datoteko</remove-attachment>
+      <remove-comment>Odstrani ta komentar</remove-comment>
+    </tooltip>
+  </UIDocumentInfo>
+  <ListView>
+    <view>
+      <label>
+        <name>Ime</name>
+        <versionable>Omogoča različice</versionable>
+        <exo_owner>Lastnik</exo_owner>
+        <auditing>Nadziranje</auditing>
+        <exo_dateCreated>Datum nastanka</exo_dateCreated>
+        <exo_dateModified>Datum spremembe</exo_dateModified>
+      </label>
+    </view>
+  </ListView>
+  <!--
+  #############################################################################
+  #             org.exoplatform.ecm.webui.component.explorer.ECMContextMenu   #
+  #############################################################################
+  -->
+  <ECMContextMenu>
+    <event>
+      <Lock>Zakleni</Lock>
+      <Unlock>Odkleni</Unlock>
+      <EditDocument>Uredi</EditDocument>
+      <Copy>Kopiraj</Copy>
+      <Rename>Preimenuj</Rename>
+      <Delete>Izbriši</Delete>
+      <Save>#{word.save}</Save>
+      <Cut>Izreži</Cut>
+      <Paste>Prilepi</Paste>
+      <CheckOut>Rezerviraj</CheckOut>
+      <CheckIn>Sprosti</CheckIn>
+      <WebDAV>Pogled WebDAV</WebDAV>
+      <autoversion>Samodejno shranjevanje različic</autoversion>
+      <Custom>Po meri</Custom>
+      <AddFolder>Nova mapa</AddFolder>
+      <AddDocument>Nova vsebina</AddDocument>
+      <Upload>Prenesi datoteke</Upload>
+      <MoveNode>Premakni</MoveNode>
+      <UnLock>Odkleni</UnLock>
+      <ViewProperties>Ogled lastnosti</ViewProperties>
+      <GetURL>Kopiraj URL v odložišče</GetURL>
+      <AddThumbnail>Dodaj/Odstrani sličico</AddThumbnail>
+      <AddToFavourite>Dodaj k priljubljenim</AddToFavourite>
+      <RemoveFromFavourite>Odstrani iz priljubljenih</RemoveFromFavourite>
+      <MoveToTrash>Premakni v koš</MoveToTrash>
+      <RestoreFromTrash>Obnovi iz koša</RestoreFromTrash>
+      <EmptyTrash>Izprazni koš</EmptyTrash>
+      <WebDavView>Odpri v MS Office</WebDavView>
+      <Download>Prenesi</Download>
+      <OpenDocument>Oddaljeno urejanje</OpenDocument>
+      <EditProperty>Urejanje lastnosti dokumenta</EditProperty>
+      <UploadNewVersion>Naloži novo različico</UploadNewVersion>
+      <CreateNewVersion>Ustvarite novo različico</CreateNewVersion>
+    </event>
+  </ECMContextMenu>
+ 
+  <!--
+  #############################################################################
+  #     org.exoplatform.ecm.webui.component.explorer.UIReferencesList         #
+  #############################################################################
+  -->
+  <UIReferencesList>
+    <msg>
+      <no-references>Sklicevanja ni mogoče najti</no-references>
+    </msg>
+    <header>
+      <workspace>Delovni prostor</workspace>
+      <path>Pot</path>
+    </header>
+    <action>
+      <Close>#{word.close}</Close>
+    </action>
+  </UIReferencesList>
+  <!--
+  #############################################################################
+  #         org.exoplatform.ecm.webui.component.explorer.UIPropertiesManager  #
+  #############################################################################
+  -->
+  <UITabPane>
+    <title>
+      <UIPublishingPanel>Podokno za objave</UIPublishingPanel>
+      <UIPublicationPanel>Revizija</UIPublicationPanel>
+      <UIPublicationSchedule>Načrtovano</UIPublicationSchedule>
+      <UIPublicationPagesContainer>Strani</UIPublicationPagesContainer>
+      <UIPublicationHistory>Zgodovina</UIPublicationHistory>
+      <UIVersionViewer>Pregledovalnik različic</UIVersionViewer>
+
+      <UIPropertyTab>Lastnosti</UIPropertyTab>
+      <UIMetadataTab>Meta podatki</UIMetadataTab>
+      <UIPropertyForm>Dodaj novo lastnost</UIPropertyForm>
+      <UIUploadContent>Informacije o prenešeni datoteki</UIUploadContent>
+      <UIJCRAdvancedSearch>Nova poizvedba</UIJCRAdvancedSearch>
+      <UISavedQuery>Shranjena poizvedba</UISavedQuery>
+      <AdvancedSearchResult>Rezultati iskanja</AdvancedSearchResult>
+      <UISimpleSearch>Enostavno iskanje</UISimpleSearch>
+      <UISearchContainer>Napredno iskanje</UISearchContainer>
+      <UICategoryManagerSearch>Dodaj kategorijo iskanja</UICategoryManagerSearch>
+      <UIConstraintsForm>Obrazec omejitev</UIConstraintsForm>
+      <UIViewSearchResult>Ogled vsebin</UIViewSearchResult>
+      <UIContentNameSearch>Išči po imenu</UIContentNameSearch>
+      <UINodeInfo>Informacije o različici</UINodeInfo>
+      <UINodeProperty>Lastnost vozlišča</UINodeProperty>
+      <UIActionListContainer>Dejanja na voljo</UIActionListContainer>
+      <UIActionContainer>Dodaj dejanje</UIActionContainer>
+      <UIActionViewContainer>Informacije o dejanju</UIActionViewContainer>
+      <UIMultiLanguageForm>Ogled jezika</UIMultiLanguageForm>
+      <UIAddLanguageContainer>Dodajte jezik</UIAddLanguageContainer>
+      <UINonPublishedForm>Stanje</UINonPublishedForm>
+      <UIPublishedForm>Stanje</UIPublishedForm>
+      <UIPublicationLogList>Zgodovina</UIPublicationLogList>
+      <UIDocumentWithTree>Ogled datoteke</UIDocumentWithTree>
+      <UIDocumentInfo>Dokumentni pogled</UIDocumentInfo>
+      <UICategoriesSelectPanel>Izberite kategorije</UICategoriesSelectPanel>
+      <UISelectedCategoriesGrid>Sklicevane kategorije</UISelectedCategoriesGrid>
+      <UIWorkflowPublicationActionForm>Workflow Publication Action</UIWorkflowPublicationActionForm>
+      <UIWorkflowPublicationViewForm>Workflow Publication View</UIWorkflowPublicationViewForm>
+      <metadatasitemetadata>Meta podatki strani</metadatasitemetadata>
+      <dcelementset>Dublin Core (podatkovni standard)</dcelementset>
+    </title>
+  </UITabPane>
+  <UIPropertyTab>
+    <title>
+      <edit>Uredi to lastnost</edit>
+      <delete>Odstrani to lastnost</delete>
+    </title>
+    <confirm>
+      <remove-property>Ali ste prepričani, da želite odstaniti to lastnost?</remove-property>
+    </confirm>
+    <header>
+      <name>Ime</name>
+      <multiValue>Več vrednosti</multiValue>
+      <value>Vrednost</value>
+      <action>Dejanje</action>
+    </header>
+    <label>
+      <binary>Dvojiški podatki</binary>
+      <notavailable>Ni na voljo</notavailable>
+      <cannotget>Ne morem prodobiti vrednosti</cannotget>
+    </label>
+    <action>
+      <Close>#{word.close}</Close>
+    </action>
+  </UIPropertyTab>
+  <!--
+  #############################################################################
+  #         org.exoplatform.ecm.webui.component.explorer.UIPropertyTab     #
+  #############################################################################
+  -->
+  <!--
+  #############################################################################
+  #           org.exoplatform.ecm.webui.component.explorer.UIPropertyForm     #
+  #############################################################################
+  -->
+  <UIPropertyForm>
+    <title>Dodaj/Uredi lastnost</title>
+    <label>
+      <name>Ime:</name>
+      <type>Vrsta:</type>
+      <value>Vrednost:</value>
+      <upload>Prenesi:</upload>
+      <namespace>Imenski prostor:</namespace>
+      <multiple>Več hkrati:</multiple>
+      <property_select>Dodaj novo lastnost:</property_select>
+      <value0>Vrednost 0</value0>
+      <value1>Vrednost 1</value1>
+      <value2>Vrednost 2</value2>
+      <value3>Vrednost 3</value3>
+      <value4>Vrednost 4</value4>
+      <value5>Vrednost 5</value5>
+      <value6>Vrednost 6</value6>
+      <value7>Vrednost 7</value7>
+      <value8>Vrednost 8</value8>
+      <value9>Vrednost 9</value9>
+      <value10>Vrednost 10</value10>
+    </label>
+    <action>
+      <Save>#{word.save}</Save>
+      <Cancel>#{word.cancel}</Cancel>
+      <Reset>Ponastavi</Reset>
+    </action>
+    <msg>
+      <name-invalid>Vnesite ime lastnosti.</name-invalid>
+      <unable-create>Lastnosti ni mogoče dodati.</unable-create>
+      <value-invalid>Vnesite vrednost.</value-invalid>
+      <node-checkedin>Pred dodajanjem lastnosti morate naprej rezervirati to vozlišče.</node-checkedin>
+      <can-not-add>Temu vozlišču ne morete dodati lastnosti. To je dovoljeno samo za vozlišča vrste nt: nestrukturiran.</can-not-add>
+      <propertyName-invalid>Ime lastnosti mora vključevati imenski prostor (npr. imenski prostor:ime lastnosti).</propertyName-invalid>
+      <propertyName-exist>Lastnost '{0}' že obstaja.</propertyName-exist>
+      <propertyValu-null>Nekatere vrednosti so lahko nič/prazne.</propertyValu-null>
+      <valueFormatEx>Lastnostim z enojno vrednostjo ni mogoče dodeliti množinske vrednosti.</valueFormatEx>
+      <number-format-exception>Vnešena vrednost nima prave oblike zapisa.</number-format-exception>
+      <property-not-exist>Lastnost {0} ne obstaja.</property-not-exist>
+    </msg>
+  </UIPropertyForm>
+
+  <!--
+  #############################################################################
+  #             org.exoplatform.ecm.webui.component.explorer.UIPermissionInfo #
+  #############################################################################
+  -->
+  <UIPermissionInfo>
+    <action>
+      <title>
+        <Edit>Uredi</Edit>
+        <Delete>Odstrani dovoljenje</Delete>
+      </title>
+    </action>
+    <header>
+      <usersOrGroups>Uporabnik ali skupina</usersOrGroups>
+      <read>Branje</read>
+      <addNode>Spreminjanje</addNode>
+      <remove>Odstranjevanje</remove>
+      <action>Dejanje</action>
+    </header>
+    <msg>
+      <confirm-delete-permission>Ali ste prepričani, da želite odstraniti to dovoljenje?</confirm-delete-permission>
+      <no-permission-tochange>Nimate pravice, da bi odstranili to dovoljenje.</no-permission-tochange>
+      <no-permission-remove>Ne morete odstraniti lastnika.</no-permission-remove>
+      <access-denied>Dostop zavrnjen. Ne morete odstraniti tega dovoljenja.</access-denied>
+    </msg>
+  </UIPermissionInfo>
+  <permission>
+    <title>
+      <SelectUser>Izberi uporabnika</SelectUser>
+      <SelectMember>Izberi članstvo</SelectMember>
+      <AddAny>Izberi vse</AddAny>
+    </title>
+  </permission>
+  <!--
+  #############################################################################
+  #             org.exoplatform.ecm.webui.component.explorer.UIPermissionForm #
+  #############################################################################
+  -->
+  <SelectUserOrGroup>
+    <title>
+      <UIGroupSelector>Izberi uporabnika</UIGroupSelector>
+      <UIPermissionSelector>Izberi člana</UIPermissionSelector>
+      <UIGroupMemberSelector>Izberi članstvo</UIGroupMemberSelector>
+    </title>
+  </SelectUserOrGroup>
+  <UIGroupSelector>
+    <label>
+      <selectGroup>Poišči in izberi skupino</selectGroup>
+      <selectUser>Izberi uporabnika</selectUser>
+    </label>
+    <msg>
+      <not-change-owner>'{0}' je lastnik tega vozlišča in ima dovoljenje za poln nadzor.</not-change-owner>
+    </msg>
+  </UIGroupSelector>
+  <UIPermissionForm>
+    <label>
+      <UIPopupWindow>Izberi</UIPopupWindow>
+      <permission>UIPermissionForm</permission>
+      <userOrGroup>Uporabnik ali skupina</userOrGroup>
+      <read>Dovoljenje branja</read>
+      <add_node>Dovoljenje spreminjanja</add_node>
+      <remove>Dovoljenje odstranjevanja</remove>
+    </label>
+    <title>Dodaj dovoljenje temu vozlišču</title>
+    <action>
+      <Close>#{word.close}</Close>
+      <Save>#{word.save}</Save>
+      <Reset>Ponastavi</Reset>
+    </action>
+    <msg>
+      <checkbox-require>Izberite vsaj eno dovoljenje.</checkbox-require>
+      <userOrGroup-required>Pred shranjevanjem tega dovoljenja izberite uporabnika ali skupino.</userOrGroup-required>
+      <not-change-permission>Nimate pravice, da bi dodali dovoljenje.</not-change-permission>
+      <access-denied>Dostop zavrnjen. Ne morete odstraniti tega dovoljenja.</access-denied>
+    </msg>
+  </UIPermissionForm>
+
+  <!--
+  ###############################################################################
+  #             org.exoplatform.ecm.webui.component.explorer.UINodeTypeInfo     #
+  ###############################################################################
+  -->
+  <UINodeTypeInfo>
+    <label>
+      <node-type>Vrsta vozlišča</node-type>
+      <name>Ime</name>
+      <item>Ime primarnega elementa</item>
+      <super-types>Nadrejene vrste</super-types>
+      <mixin>Vrsta vozlišča Mixin</mixin>
+      <orderable-children>Razvrščajoči podrejen element</orderable-children>
+      <property-def>Definiranje lastnosti vozlišča</property-def>
+      <prop-name>Ime</prop-name>
+      <prop-type>Vrsta</prop-type>
+      <prop-multiple>Mul</prop-multiple>
+      <prop-mandatory>Man</prop-mandatory>
+      <prop-protected>Pr</prop-protected>
+      <prop-auto-create>AC</prop-auto-create>
+      <prop-default-values><![CDATA[<span title="Default Values">DV</span>]]></prop-default-values>
+      <prop-constraints><![CDATA[<span title="Constraints Values">CV</span>]]></prop-constraints>
+      <node-def>Definicija podrejenega vozlišča</node-def>
+      <node-def-name>Ime</node-def-name>
+      <node-def-opv>OPV</node-def-opv>
+      <node-def-ac>AC</node-def-ac>
+      <node-def-man>MAN</node-def-man>
+      <node-def-pr>PR</node-def-pr>
+      <node-def-dnt>DNT</node-def-dnt>
+    </label>
+    <action>
+      <Close>#{word.close}</Close>
+    </action>
+  </UINodeTypeInfo>
+  <!--
+  ###############################################################################
+  #                    org.exoplatform.ecm.webui.component.explorer.search      #
+  ###############################################################################
+  -->
+  <UICategoryManagerSearch>
+    <tab>
+      <label>
+        <UIOneNodePathSelector>Izberite kategorijo</UIOneNodePathSelector>
+      </label>
+    </tab>
+    <action>
+      <Close>#{word.close}</Close>
+    </action>
+  </UICategoryManagerSearch>
+  <UIContentNameSearch>
+    <label>
+      <keyword>Ime vsebine:</keyword>
+      <location>Išči na tej lokaciji:</location>
+    </label>
+    <action>
+      <Search>Išči</Search>
+      <Cancel>#{word.cancel}</Cancel>
+    </action>
+    <msg>
+      <keyword-not-allowed>Ta ključna beseda ni dovoljena.</keyword-not-allowed>
+    </msg>
+  </UIContentNameSearch>
+  <UISimpleSearch>
+    <action>
+      <MoreConstraints>Pokaži/Skrij obrazec omejitev</MoreConstraints>
+      <Search>Išči</Search>
+      <Save>#{word.save}</Save>
+      <Cancel>#{word.cancel}</Cancel>
+    </action>
+    <label>
+      <moreConstraints>UISimpleSearch</moreConstraints>
+      <firstOperator>Operator:</firstOperator>
+      <input>Besedo ali frazo v vsebini:</input>
+      <constraints>Več omejitev:</constraints>
+      <nodePath>Trenutna lokacija:</nodePath>
+    </label>
+    <msg>
+      <keyword-null>Vnesite ključno besedo.</keyword-null>
+      <not-found>Ni rezultatov.</not-found>
+      <keyword-not-allow>Ta ključna beseda ni dovoljena.</keyword-not-allow>
+      <value-null>Vnesite ključno besedo ali omejitve.</value-null>
+      <value-save-null>Pred shranjevanjem te poizvedbe vnesite ključno besedo ali omejitve.</value-save-null>
+      <inputSearch-invalid>V iskalnem pojmu so neveljavni znaki.</inputSearch-invalid>
+      <query-invalid>Poizvedba ni veljavna. Preverite omejitev.</query-invalid>
+    </msg>
+  </UISimpleSearch>
+  <ViewSearch>
+    <title>
+      <UIViewSearchResult>Predloga prikaza</UIViewSearchResult>
+    </title>
+  </ViewSearch>
+  <UISearchResult>
+    <msg>
+      <not-support>Ni predloge prikaza za ta element.</not-support>
+      <empty>Ni rezultatov.</empty>
+      <access-denied>Te mape ne morete odpreti, bodisi ker ne obstaja več ali pa nimate pravic za dostop.</access-denied>
+      <query-invalid>Poizvedba ni veljavna.</query-invalid>
+    </msg>
+    <header>
+      <name>#{word.name}</name>
+      <path>Pot</path>
+      <action>Dejanje</action>
+      <shortcutPath>Pot</shortcutPath>
+      <type>Vrsta</type>
+      <dateCreated>Datum nastanka</dateCreated>
+      <score>Rezultat</score>
+    </header>
+    <title>
+      <typeASC>Razvrsti po vrsti dokumenta naraščajoče</typeASC>
+      <typeDESC>Razvrsti po vrsti dokumenta padajoče</typeDESC>
+      <scoreASC>Razvrsti po rezultatu naraščajoče</scoreASC>
+      <scoreDESC>Razvrsti po rezultatu padajoče</scoreDESC>
+      <nameASC>Razvrsti po imenu naraščajoče</nameASC>
+      <nameDESC>Razvrsti po imenu padajoče</nameDESC>
+      <datecreatedASC>Razvrsti po datumu nastanka naraščajoče</datecreatedASC>
+      <datecreatedDESC>Razvrsti po datumu nastanka padajoče</datecreatedDESC>
+    </title>
+    <tooltip>
+      <View>Poglej to vozlišče</View>
+      <OpenFolder>Pojdi v mapo</OpenFolder>
+    </tooltip>
+  </UISearchResult>
+  <UIShowAllOwnedByUserResult>
+    <msg>
+      <not-support>Ni predloge prikaza za ta element</not-support>
+      <empty>Ni rezultatov.</empty>
+      <access-denied>Tega vozlišča si ne morete ogledati, bodisi predloga ni podprta ali pa nimate dovoljenja za ogled.</access-denied>
+      <query-invalid>Poizvedba je neveljavna</query-invalid>
+    </msg>
+    <header>
+      <name>#{word.name}</name>
+      <path>Pot</path>
+      <action>Dejanje</action>
+      <shortcutPath>Pot</shortcutPath>
+      <type>Vrsta</type>
+      <dateCreated>Datum nastanka</dateCreated>
+      <score>Rezultat</score>
+    </header>
+    <title>
+      <typeASC>Razvrsti po vrsti dokumenta naraščajoče</typeASC>
+      <typeDESC>Razvrsti po vrsti dokumenta padajoče</typeDESC>
+      <scoreASC>Razvrsti po rezultatu naraščajoče</scoreASC>
+      <scoreDESC>Razvrsti po rezultatu padajoče</scoreDESC>
+      <nameASC>Razvrsti po imenu naraščajoče</nameASC>
+      <nameDESC>Razvrsti po imenu padajoče</nameDESC>
+      <datecreatedASC>Razvrsti po datumu nastanka naraščajoče</datecreatedASC>
+      <datecreatedDESC>Razvrsti po datumu nastanka padajoče</datecreatedDESC>
+    </title>
+    <tooltip>
+      <View>Poglej to vozlišče</View>
+      <OpenFolder>Pojdi v mapo</OpenFolder>
+    </tooltip>
+  </UIShowAllOwnedByUserResult>
+  <UIShowAllFavouriteResult>
+    <msg>
+      <not-support>Ni predloge prikaza za ta element</not-support>
+      <empty>Ni rezultatov</empty>
+      <access-denied>Tega vozlišča si ne morete ogledati, bodisi predloga ni podprta ali pa nimate dovoljenja za ogled.</access-denied>
+      <query-invalid>Poizvedba je neveljavna</query-invalid>
+    </msg>
+    <header>
+      <name>#{word.name}</name>
+      <path>Pot</path>
+      <action>Dejanje</action>
+      <shortcutPath>Pot</shortcutPath>
+      <type>Vrsta</type>
+      <dateCreated>Datum nastanka</dateCreated>
+      <score>Rezultat</score>
+    </header>
+    <title>
+      <typeASC>Razvrsti po vrsti dokumenta naraščajoče</typeASC>
+      <typeDESC>Razvrsti po vrsti dokumenta padajoče</typeDESC>
+      <scoreASC>Razvrsti po rezultatu naraščajoče</scoreASC>
+      <scoreDESC>Razvrsti po rezultatu padajoče</scoreDESC>
+      <nameASC>Razvrsti po imenu naraščajoče</nameASC>
+      <nameDESC>Razvrsti po imenu padajoče</nameDESC>
+      <datecreatedASC>Razvrsti po datumu nastanka naraščajoče</datecreatedASC>
+      <datecreatedDESC>Razvrsti po datumu nastanka padajoče</datecreatedDESC>
+    </title>
+    <tooltip>
+      <View>Poglej to vozlišče</View>
+      <OpenFolder>Pojdi v mapo</OpenFolder>
+    </tooltip>
+  </UIShowAllFavouriteResult>
+  <UIShowAllHiddenResult>
+    <msg>
+      <not-support>Ni predloge prikaza za ta element.</not-support>
+      <empty>Ni rezultatov.</empty>
+      <access-denied>Tega vozlišča si ne morete ogledati, bodisi predloga ni podprta ali pa nimate dovoljenja za ogled.</access-denied>
+      <query-invalid>Poizvedba ni veljavna.</query-invalid>
+    </msg>
+    <header>
+      <name>#{word.name}</name>
+      <path>Pot</path>
+      <action>Dejanje</action>
+      <shortcutPath>Pot</shortcutPath>
+      <type>Vrsta</type>
+      <dateCreated>Datum nastanka</dateCreated>
+      <score>Rezultat</score>
+      <AddRemoveFavourite>Dodaj v/Odstrani iz priljubljenih</AddRemoveFavourite>
+    </header>
+    <title>
+      <typeASC>Razvrsti po vrsti dokumenta naraščajoče</typeASC>
+      <typeDESC>Razvrsti po vrsti dokumenta padajoče</typeDESC>
+      <scoreASC>Razvrsti po rezultatu naraščajoče</scoreASC>
+      <scoreDESC>Razvrsti po rezultatu padajoče</scoreDESC>
+      <nameASC>Razvrsti po imenu naraščajoče</nameASC>
+      <nameDESC>Razvrsti po imenu padajoče</nameDESC>
+      <datecreatedASC>Razvrsti po datumu nastanka naraščajoče</datecreatedASC>
+      <datecreatedDESC>Razvrsti po datumu nastanka padajoče</datecreatedDESC>
+    </title>
+    <tooltip>
+      <View>Poglej to vozlišče</View>
+      <OpenFolder>Pojdi v mapo</OpenFolder>
+      <RemoveHiddenAttribute>Odstranite skriti atribut</RemoveHiddenAttribute>
+    </tooltip>
+  </UIShowAllHiddenResult>
+  <UIShowAllTrashResult>
+    <msg>
+      <not-support>Ni predloge prikaza za ta element.</not-support>
+      <empty>Ni rezultatov</empty>
+      <access-denied>Tega vozlišča si ne morete ogledati, bodisi predloga ni podprta ali pa nimate dovoljenja za ogled.</access-denied>
+      <query-invalid>Poizvedba ni veljavna.</query-invalid>
+    </msg>
+    <header>
+      <name>#{word.name}</name>
+      <path>Pot</path>
+      <action>Dejanje</action>
+      <shortcutPath>Pot</shortcutPath>
+      <type>Vrsta</type>
+      <dateCreated>Datum nastanka</dateCreated>
+      <score>Rezultat</score>
+    </header>
+    <title>
+      <typeASC>Razvrsti po vrsti dokumenta naraščajoče</typeASC>
+      <typeDESC>Razvrsti po vrsti dokumenta padajoče</typeDESC>
+      <scoreASC>Razvrsti po rezultatu naraščajoče</scoreASC>
+      <scoreDESC>Razvrsti po rezultatu padajoče</scoreDESC>
+      <nameASC>Razvrsti po imenu naraščajoče</nameASC>
+      <nameDESC>Razvrsti po imenu padajoče</nameDESC>
+      <datecreatedASC>Razvrsti po datumu nastanka naraščajoče</datecreatedASC>
+      <datecreatedDESC>Razvrsti po datumu nastanka padajoče</datecreatedDESC>
+    </title>
+    <tooltip>
+      <View>Poglej to vozlišče</View>
+      <OpenFolder>Pojdi v mapo</OpenFolder>
+      <DeletePermanently>Trajno izbriši</DeletePermanently>
+      <RestoreFromTrash>Obnovi iz koša</RestoreFromTrash>
+    </tooltip>
+  </UIShowAllTrashResult>
+  <UIConstraintsForm>
+    <label>
+      <constraints>UIConstraintsForm</constraints>
+      <metadataProperty>Lastnosti</metadataProperty>
+      <operator>Operator</operator>
+      <contains>Vsebuje vrednost</contains>
+      <notcontains>Ne vsebuje vrednosti</notcontains>
+    </label>
+    <action>
+      <Add>Dodaj</Add>
+      <Cancel>#{word.cancel}</Cancel>
+    </action>
+    <msg>
+      <properties-required>Ime lastnosti je obvezno.</properties-required>
+      <value-required>Vrednost polja je obvezna.</value-required>
+      <date-invalid>Začetni datum mora biti pred končnim datumom.</date-invalid>
+      <fromDate-required>Datum začetka je obvezen.</fromDate-required>
+      <must-choose-one>Izbrati morate vsaj eno vrsto.</must-choose-one>
+      <properties-null>Najprej izberite lastnosti, nato filtrirajte.</properties-null>
+      <exactly-require>Pred shranjevanjem te omejitve morate vnesti natančno vrednost.</exactly-require>
+      <fromDate-invalid>Neveljavna vrsta v polju 'Od'. Izberite znova ali vnesite pravilno.</fromDate-invalid>
+      <toDate-invalid>Neveljavna vrsta v polju 'Do'. Izberite znova ali vnesite pravilno.</toDate-invalid>
+    </msg>
+    <button>
+      <label-Add>Dodaj</label-Add>
+      <label-Cancel>#{word.cancel}</label-Cancel>
+    </button>
+  </UIConstraintsForm>
+  <ConstraintsForm>
+    <action>
+      <Add>Dodaj</Add>
+      <Cancel>#{word.cancel}</Cancel>
+    </action>
+  </ConstraintsForm>
+  <UIConstraintForm>
+    <tooltip>
+      <AddMetadataType>Dodaj lastnost</AddMetadataType>
+      <AddNodeType>Dodaj vrsto vozlišča</AddNodeType>
+      <AddCategory>Dodaj Kategorijo</AddCategory>
+      <FindExactly>Najdi natančno</FindExactly>
+    </tooltip>
+    <label>
+      <colon>:</colon>
+      <operator>Operator</operator>
+      <exactlyPro-properties>Lastnost</exactlyPro-properties>
+      <exactlyPro-ContainExactly>Vsebujejo točno</exactlyPro-ContainExactly>
+      <containPro-properties>Lastnost</containPro-properties>
+      <containPro-Contain>Vsebujejo</containPro-Contain>
+      <notContainPro-properties>Lastnost</notContainPro-properties>
+      <notContainPro-notContain>Ne vsebujejo</notContainPro-notContain>
+      <ConstraintOption-From>Od</ConstraintOption-From>
+      <ConstraintOption-To>Za</ConstraintOption-To>
+      <DocumentType-label>Vrsta dokumenta</DocumentType-label>
+      <Category-label>Kategorija</Category-label>
+      <created>Ustvarjeno</created>
+      <modified>Spremenjeno</modified>
+      <and>In</and>
+      <or>Ali</or>
+    </label>
+  </UIConstraintForm>
+  <NodeTypePopup>
+    <title>
+      <UINodeTypeSelectForm>Izberi vrsto vozlišča</UINodeTypeSelectForm>
+    </title>
+  </NodeTypePopup>
+  <CategoryPopup>
+    <title>
+      <UICategoryManagerSearch>Dodaj kategorijo iskanja</UICategoryManagerSearch>
+      <UIOneNodePathSelector>Izberi kategorijo</UIOneNodePathSelector>
+    </title>
+  </CategoryPopup>
+  <SaveQueryPopup>
+    <title>
+      <UISaveQueryForm>Obrazec za poizvedbo</UISaveQueryForm>
+    </title>
+  </SaveQueryPopup>
+  <UINodeTypeSelectForm>
+    <action>
+      <Cancel>#{word.cancel}</Cancel>
+      <Save>#{word.save}</Save>
+    </action>
+  </UINodeTypeSelectForm>
+  <UICompareExactlyForm>
+    <label>
+      <filter>Filter:</filter>
+      <result>Rezultati:</result>
+    </label>
+    <title>
+      <result>Filter</result>
+    </title>
+    <button>
+      <label-Select>Izberi</label-Select>
+      <label-Cancel>#{word.cancel}</label-Cancel>
+    </button>
+    <msg>
+      <not-result-found>Ni rezultatov.</not-result-found>
+    </msg>
+  </UICompareExactlyForm>
+  <UIJCRAdvancedSearch>
+    <label>
+      <name>Ime:</name>
+      <selectBox>Izberi slog poizvedbe:</selectBox>
+      <query>Poizvedba:</query>
+    </label>
+    <action>
+      <Save>#{word.save}</Save>
+      <Cancel>#{word.cancel}</Cancel>
+      <Search>Išči</Search>
+    </action>
+    <msg>
+      <!--DMS 2.4.x ECM-3566-->
+      <name-invalid>Ime ni veljavno.</name-invalid>
+      <query-added>Poizvedba je bila uspešno dodana.</query-added>
+      <save_unSuccessful>Poizvedbe ni mogoče shraniti. Izjava je morda neveljavna ali pa ime poizvedbe že obstaja.</save_unSuccessful>
+      <invalid-queryStatement>Neveljava izjava poizvedbe.</invalid-queryStatement>
+      <value-save-null>Vnesite izjavo poizvedbe.</value-save-null>
+      <query-name-null>Vnesite ime poizvedbe.</query-name-null>
+    </msg>
+  </UIJCRAdvancedSearch>
+  <EditQueryForm>
+    <label>
+      <name>Ime</name>
+      <selectBox>Izberi slog poizvedbe</selectBox>
+      <query>Poizvedba</query>
+    </label>
+    <action>
+      <Save>#{word.save}</Save>
+      <Cancel>#{word.cancel}</Cancel>
+    </action>
+  </EditQueryForm>
+  <EditSavedQueryForm>
+    <title>
+      <EditQueryForm>Uredi obrazec poizvedbe</EditQueryForm>
+    </title>
+  </EditSavedQueryForm>
+  <UIMetadataSelectForm>
+    <label>
+      <metadataType>Vrsta metapodatka</metadataType>
+    </label>
+    <action>
+      <Cancel>#{word.cancel}</Cancel>
+      <Add>Dodaj</Add>
+    </action>
+  </UIMetadataSelectForm>
+  <property1MetadataPopup>
+    <title>
+      <UISelectPropertyForm>Izberi lastnost</UISelectPropertyForm>
+    </title>
+  </property1MetadataPopup>
+  <property2MetadataPopup>
+    <title>
+      <UISelectPropertyForm>Izberi lastnost</UISelectPropertyForm>
+    </title>
+  </property2MetadataPopup>
+  <property3MetadataPopup>
+    <title>
+      <UISelectPropertyForm>Izberi lastnost</UISelectPropertyForm>
+    </title>
+  </property3MetadataPopup>
+  <UISelectPropertyForm>
+    <label>
+      <metadataType>Vrsta metapodatka</metadataType>
+    </label>
+    <pLabel>Lastnosti:</pLabel>
+    <action>
+      <Add>Dodaj</Add>
+      <Cancel>#{word.cancel}</Cancel>
+    </action>
+  </UISelectPropertyForm>
+  <ExactlyFormPopup>
+    <title>
+      <UICompareExactlyForm>Obrazec filtriranja</UICompareExactlyForm>
+    </title>
+  </ExactlyFormPopup>
+  <UIECMSearch>
+    <header>
+      <name>Ime</name>
+      <language>Jezik</language>
+      <query>Poizvedba</query>
+      <action>Dejanja</action>
+      <path>Pot</path>
+    </header>
+  </UIECMSearch>
+  <UIResult>
+    <msg>
+      <not-found>Ni podatkov.</not-found>
+    </msg>
+    <header>
+      <action>Dejanje</action>
+    </header>
+  </UIResult>
+  <UISaveQueryForm>
+    <msg>
+      <query-name-null>Vnesite ime poizvedbe za shranjevanje.</query-name-null>
+      <access-denied>Dostop zavrnjen. Nimate dovoljenja za dodajanje, ki je potrebno za shranjevanje te poizvedbe.</access-denied>
+      <save-failed>Te poizvedbe ne morete shraniti, bodisi zaradi napačne izjave ali pa ime poizvedbe že obstaja.</save-failed>
+    </msg>
+    <label>
+      <queryName>Ime poizvedbe</queryName>
+    </label>
+    <action>
+      <Save>#{word.save}</Save>
+      <Cancel>#{word.cancel}</Cancel>
+    </action>
+  </UISaveQueryForm>
+  <UISavedQuery>
+    <header>
+      <name>Ime</name>
+      <type>Vrsta</type>
+      <statement>Izjava</statement>
+      <permission>Dovoljenja</permission>
+      <action>Dejanja</action>
+    </header>
+    <tooltip>
+      <Execute>Izvedi</Execute>
+      <Edit>Uredi</Edit>
+      <Delete>Izbriši</Delete>
+    </tooltip>
+    <label>
+      <no-children>Ni shranjenih poizvedb.</no-children>
+    </label>
+    <msg>
+      <confirm-delete-query>Ali ste prepričani, da želite izbrisati to poizvedbo?</confirm-delete-query>
+      <not-result-found>Ni rezultatov.</not-result-found>
+    </msg>
+  </UISavedQuery>
+  <UIQueryResultPageIterator>
+    <label>
+      <results>Rezultati</results>
+      <of-about>od približno</of-about>
+      <of>od</of>
+    </label>
+  </UIQueryResultPageIterator>
+  <!--
+  ###############################################################################
+  #             org.exoplatform.ecm.webui.component.explorer.admin.UIExportNode #
+  ###############################################################################
+  -->
+  <UIExportNode>
+    <label>
+      <format>Oblika</format>
+      <nodePath>Pot za izvoz</nodePath>
+      <zip>Zip</zip>
+      <systemView>Sistemski pogled</systemView>
+      <documentView>Dokumentni pogled</documentView>
+    </label>
+    <action>
+      <Cancel>#{word.cancel}</Cancel>
+      <Export>Izvozi</Export>
+    </action>
+    <title>Izvozi vozlišče</title>
+  </UIExportNode>
+  <!--
+  ###############################################################################
+  #             org.exoplatform.ecm.webui.component.explorer.UIPopupAction     #
+  ###############################################################################
+  -->
+  <PopupUserSelector>
+    <title>
+      <UIUserContainer>Izbirnik dovoljenj</UIUserContainer>
+    </title>
+  </PopupUserSelector>
+  <UIPopupTaxonomy>
+    <title>
+      <UICategoriesSelector>Dodaj kategorije</UICategoriesSelector>
+      <UIOneNodePathSelector>Dodaj kategorije</UIOneNodePathSelector>
+    </title>
+  </UIPopupTaxonomy>
+  <!--
+  ###############################################################################
+  #   org.exoplatform.ecm.webui.component.explorer.versions.UIVersionInfo       #
+  ###############################################################################
+  -->
+  <UIVersionInfo>
+    <tooltip>
+      <addLabel>Dodaj oznako</addLabel>
+      <removeLable>Odstrani oznako</removeLable>
+      <restoreVersion>Obnovi različico</restoreVersion>
+      <viewVersion>Informacije o različici</viewVersion>
+      <deleteVersion>Izbriši različico</deleteVersion>
+      <compareVersion>Primerjaj z osnovno različico</compareVersion>
+    </tooltip>
+    <msg>
+      <have-no-view-template>Predloga pogleda ni podprta.</have-no-view-template>
+      <cannot-remove-version>Osnovne različice ne morete odstraniti.</cannot-remove-version>
+      <confirm-delete>Ali ste prepričani, da želite odstraniti to različico?</confirm-delete>
+      <not-checked-out>Pred obnovitvijo si rezervirajte to vozlišče.</not-checked-out>
+      <invalid-item-state>Te različice ne morete obnoviti, ker je bila premaknjena ali pa izbrisana v drugi seji.</invalid-item-state>
+    </msg>
+    <action>
+      <close>#{word.close}</close>
+      <close-view>Zapri pogled</close-view>
+    </action>
+  </UIVersionInfo>
+  <!--
+  ################################################################################
+  #  org.exoplatform.ecm.webui.component.explorer.auditing.UIAuditingInfo
+  ################################################################################
+  -->
+  <UIAuditingInfo>
+    <msg>
+      <noVersion>Brez različice</noVersion>
+    </msg>
+    <eventName>
+      <e_1>Vozlišče dodano</e_1>
+      <e_2>Vozlišče odstranjeno</e_2>
+      <e_4>Lastnost dodana</e_4>
+      <e_16>Lastnost spremenjena</e_16>
+      <e_8>Lastnost odstranjena</e_8>
+      <e_32>#{word.save}</e_32>
+      <e_64>Premakni</e_64>
+      <e_128>Kopiraj</e_128>
+      <e_256>Dodaj Mixin</e_256>
+      <e_512>Odstrani Mixin</e_512>
+      <e_1024>Kloniraj</e_1024>
+      <e_2048>Posodobi</e_2048>
+      <e_4096>Uvozi</e_4096>
+      <e_8192>Sprosti</e_8192>
+      <e_16384>Rezerviraj</e_16384>
+      <e_32768>Obnovi</e_32768>
+      <e_65536>Spoji</e_65536>
+      <e_131072>Prekliči spajanje</e_131072>
+      <e_262144>Spajanje končano</e_262144>
+      <e_524288>Dodaj oznako različice</e_524288>
+      <e_1048576>Odstrani oznako različice</e_1048576>
+      <e_2097152>Odstrani različico</e_2097152>
+      <e_4194304>Zakleni</e_4194304>
+      <e_8388608>Odkleni</e_8388608>
+      <e_16777216>Branje</e_16777216>
+    </eventName>
+    <label>
+      <operation>Operacija</operation>
+      <userName>Uporabniško ime</userName>
+      <date>Datum</date>
+      <version>Različica</version>
+    </label>
+  </UIAuditingInfo>
+
+  <!--
+  ###############################################################################
+  #   org.exoplatform.ecm.webui.component.explorer.versions.UIActivateVersion   #
+  ###############################################################################
+  -->
+  <UIActivateVersion>
+    <label>
+      <note>Za to vozlišče različice niso bile aktivirane.</note>
+      <question>Ali ste prepričani, da želite aktivirati?</question>
+      <button-active>Aktiviraj</button-active>
+      <button-cancel>#{word.cancel}</button-cancel>
+    </label>
+    <msg>
+      <access-denied>Nimate dovoljenja za aktiviranje različic na tem vozlišču</access-denied>
+    </msg>
+  </UIActivateVersion>
+  <!--
+  ###############################################################################
+  #   org.exoplatform.ecm.webui.component.explorer.versions.UIActivePublication #
+  ###############################################################################
+  -->
+  <UIActivePublication>
+    <header>
+      <LifecycleName>Ime</LifecycleName>
+      <LifecycleDesc>Opis</LifecycleDesc>
+      <action>Dejanje</action>
+    </header>
+    <action>
+      <Cancel>#{word.close}</Cancel>
+    </action>
+    <grid>
+      <msg>
+        <empty>Nobenega vtičnika za objave ni bilo najdenega.</empty>
+      </msg>
+    </grid>
+    <msg>
+      <node-type-invalid>Vpisana je lahko samo dokumentna vrsta vozlišča.</node-type-invalid>
+      <already-enroled>Ta dokument je že bil vpisan.</already-enroled>
+    </msg>
+  </UIActivePublication>
+  <!--
+  ###############################################################################
+  #   org.exoplatform.ecm.webui.component.explorer.versions.UIActivateAuditing  #
+  ###############################################################################
+  -->
+  <UIActivateAuditing>
+    <label>
+      <note>Za to vozlišče nadzor še ni bil aktiviran.</note>
+      <question>Ali ste prepričani, da želite aktivirati?</question>
+    </label>
+    <action>
+      <activate>Aktiviraj</activate>
+      <cancel>#{word.cancel}</cancel>
+    </action>
+  </UIActivateAuditing>
+  <!--
+  ###############################################################################
+  #   org.exoplatform.ecm.webui.component.explorer.versions.UIDiff   #
+  ###############################################################################
+  -->
+  <UIDiff>
+    <label>
+      <diffTitle>Primerjava dveh različic</diffTitle>
+      <noChange>Med različicama ni razlike</noChange>
+      <baseVerion>Osnovna različica</baseVerion>
+      <compareVerion>Različica</compareVerion>
+      <can-not-compare>Primerja dveh različic ni uspela</can-not-compare>
+    </label>
+  </UIDiff>
+  <!--
+  ###############################################################################
+  #       org.exoplatform.ecm.webui.component.explorer.admin.UIImportNode      #
+  ###############################################################################
+  -->
+  <UIImportNode>
+    <label>
+      <format>Oblika</format>
+      <systemView>Sistemski pogled</systemView>
+      <documentView>Dokumentni pogled</documentView>
+      <upload>Prenesi datoteko</upload>
+    </label>
+    <action>
+      <Cancel>#{word.cancel}</Cancel>
+      <Import>Uvozi</Import>
+    </action>
+    <title>Uvozi vozlišče</title>
+    <msg>
+      <import-successful>Uspešno uvoženo.</import-successful>
+      <filename-invalid>V polju 'Naloži datoteko' poiščite .xml datoteko za uvoz.</filename-invalid>
+      <filetype-error>Prenešene datoteke ni mogoče uvoziti. Datoteka .xml je lahko neveljavna.</filetype-error>
+      <xml-invalid>Obstaja neveljaven znak na položaju [vrstica, stolpec]: {0} v datoteki {1}</xml-invalid>
+      <mimetype-invalid>Uvozite lahko samo datoteke .xml ali .zip.</mimetype-invalid>
+      <access-denied>Dostop zavrnjen. Na tem mestu ne morete uvažati datotek.</access-denied>
+      <constraint-violation-exception>Podatkov ni mogoče uvoziti. Vrsta '{0}' ni dovoljena na tej lokaciji.</constraint-violation-exception>
+      <item-exists-exception>Dohodno sklicno vozlišče ima enak UUID kot že obstoječe vozlišče v delovnem prostoru.</item-exists-exception>
+    </msg>
+  </UIImportNode>
+  <!--
+  ###############################################################################
+  #         org.exoplatform.ecm.webui.component.explorer.versions.UILabelForm   #
+  ###############################################################################
+  -->
+  <UILabelForm>
+    <label>
+      <label>Oznaka</label>
+    </label>
+    <action>
+      <Save>#{word.save}</Save>
+      <Cancel>#{word.cancel}</Cancel>
+    </action>
+    <title>Dodaj oznako</title>
+    <msg>
+      <label-invalid>Oznaka vsebuje nekaj neveljavnih znakov.</label-invalid>
+      <label-exist>'{0}' že obstaja.</label-exist>
+    </msg>
+  </UILabelForm>
+  <!--
+  ###############################################################################
+  #   org.exoplatform.ecm.webui.component.explorer.versions.UIRemoveLabelForm   #
+  ###############################################################################
+  -->
+  <UIRemoveLabelForm>
+    <title>Odstrani oznako</title>
+    <label>
+      <label>Izberi oznako</label>
+    </label>
+    <action>
+      <Remove>Odstrani</Remove>
+      <Cancel>#{word.cancel}</Cancel>
+    </action>
+  </UIRemoveLabelForm>
+  <!--
+  ###############################################################################
+  #    org.exoplatform.ecm.webui.component.explorer.versions.UIViewVersion      #
+  ###############################################################################
+  -->
+  <UIVersionTree>
+    <title>Drevo s podrejenimi</title>
+  </UIVersionTree>
+  <UIViewVersion>
+    <label>
+      <nodeType>Vrsta vozlišča</nodeType>
+      <nodeName>Ime vozlišča</nodeName>
+      <VersionNumber>Številka različice</VersionNumber>
+      <VersionLabels>Oznake različice</VersionLabels>
+      <VersionDate>Datum različice</VersionDate>
+      <PropertyName>Ime lastnosti</PropertyName>
+      <PropertyValue>Vrednosti lastnosti</PropertyValue>
+    </label>
+    <msg>
+      <not-supported>Ta funkcija ni podprta za ustvarjanje različic.</not-supported>
+    </msg>
+  </UIViewVersion>
+  <UIVersionList>
+    <title>Imena podrejenih</title>
+  </UIVersionList>
+  <!--
+  ################################################################################
+  #       org.exoplatform.ecm.webui.component.explorer.admin.UICategoryManager #
+  ################################################################################
+  -->
+  <UICategoryManager>
+    <action>
+      <Close>#{word.close}</Close>
+    </action>
+    <tab>
+      <label>
+        <UICategoriesAddedList>Sklicevane kategorije</UICategoriesAddedList>
+        <UIOneNodePathSelector>Izberi kategorijo</UIOneNodePathSelector>
+      </label>
+    </tab>
+  </UICategoryManager>
+  <UICategoriesAddedList>
+    <header>
+      <path>Kategorija</path>
+      <action>Dejanja</action>
+    </header>
+    <msg>
+      <access-denied>Dostop zavrnjen. Nimate dovoljenja za dostop v tem vozlišču.</access-denied>
+      <confirm-delete>Ali ste prepričani, da želite izbrisati ta sklic?</confirm-delete>
+    </msg>
+    <action>
+      <title>
+        <Delete>Izbriši</Delete>
+      </title>
+    </action>
+    <label>
+      <category>Kategorija</category>
+      <actions>Dejanje</actions>
+      <delete>Izbriši</delete>
+    </label>
+  </UICategoriesAddedList>
+  <UITreeList>
+    <header>
+      <name>Ime</name>
+      <action>Dejanje</action>
+    </header>
+    <info>
+      <child-not-found>To vozlišče nima podrejenega vozlišča.</child-not-found>
+    </info>
+  </UITreeList>
+  <!--
+  ################################################################################
+  #       org.exoplatform.ecm.webui.component.explorer.admin.UIRelationManager #
+  ################################################################################
+  -->
+  <UIRelationManager>
+    <action>
+      <Close>#{word.close}</Close>
+    </action>
+    <tab>
+      <label>
+        <UIOneNodePathSelector>Izberite relacijo</UIOneNodePathSelector>
+      </label>
+    </tab>
+    <tab>
+      <label>
+        <UIRelationsAddedList>Seznam relacij</UIRelationsAddedList>
+      </label>
+    </tab>
+  </UIRelationManager>
+  <UIRelationsAddedList>
+    <header>
+      <path>Relacije</path>
+      <action>Dejanja</action>
+    </header>
+    <action>
+      <title>
+        <Delete>Izbriši</Delete>
+      </title>
+    </action>
+    <msg>
+      <confirm-delete>Ali ste prepričani, da želite izbrisati to relacijo?</confirm-delete>
+      <can-not-add-itself>Relacije ni mogoče dodati samemu sebi.</can-not-add-itself>
+    </msg>
+  </UIRelationsAddedList>
+  <!--
+  ###################################################################
+  #       org.exoplatform.ecm.webui.component.explorer.UIClipboard  #
+  ###################################################################
+  -->
+  <UIClipboard>
+    <header>
+      <path>Pot</path>
+      <command>Cm</command>
+      <action>Dejanje</action>
+    </header>
+    <label>
+      <nocommand>Odložišče je prazno.</nocommand>
+    </label>
+    <action>
+      <clearall>Počisti vse</clearall>
+    </action>
+    <msg>
+      <unable-pasted>Ne morete prilepiti tega vozlišča.</unable-pasted>
+      <node-pasted>Vozlišče {0} je bilo prilepljeno na lokacijo {1}. Operacija je že bila shranjena.</node-pasted>
+    </msg>
+  </UIClipboard>
+  <!--
+  ###################################################################
+  #       org.exoplatform.ecm.webui.component.explorer.UIPopupMenu  #
+  ###################################################################
+  -->
+  <!--
+  ###################################################################################
+  #org.exoplatform.ecm.webui.component.explorer.popup.actions.UISelectDocumentForm  #
+  ###################################################################################
+  -->
+  <UISelectDocumentForm>
+    <label>
+      <selectTemplate>Izberite predlogo iz spodnjega seznama</selectTemplate>
+      <ThumbnailView>Pogled s sličicami</ThumbnailView>
+      <ListView>Seznam</ListView>
+      <Cancel>#{word.cancel}</Cancel>
+    </label>
+  </UISelectDocumentForm>
+  <!--
+  #######################################################################
+  #org.exoplatform.ecm.webui.component.explorerpopup.actions.UIDocumentForm  #
+  #######################################################################
+  -->
+  <UIDocumentForm>
+    <title>Dodajte nov dokument</title>
+    <action>
+      <Save>#{word.save}</Save>
+      <SaveAndClose>Shrani in zapri</SaveAndClose>
+      <ChangeType>Spremenite vrsto vsebine</ChangeType>
+      <Fullscreen>Celozaslonski način</Fullscreen>
+      <Cancel>#{word.cancel}</Cancel>
+      <Close>#{word.close}</Close>
+    </action>
+<tooltip>
+<FullScreen>Maximiziraj/Minimiziraj</FullScreen>
+</tooltip>
+    <msg>
+      <cannot-save>Pri shranjevanju dokumenta je prišlo do napake.</cannot-save>
+      <in-versioning>Pred dodajanjem novega vozlišča rezervirajte trenutno vozlišče.</in-versioning>
+      <not-support>Ni mogoče naložiti predloge '{0}'.</not-support>
+      <value-invalid>'{0}' je potrebna vrednost.</value-invalid>
+      <repository-exception>Pri shranjevanju dokumenta je prišlo do napake.</repository-exception>
+      <!--DMS 2.4.x; ECM-3543-->
+      <repository-exception-permission>Nimate dovoljenja za dodajanje novega dokumenta v tem vozlišču.</repository-exception-permission>
+      <not-allowed-same-name-sibling>Tega dokumenta ni mogoče shraniti. Ne sme imeti istega imena kot že obstoječ dokument.</not-allowed-same-name-sibling>
+      <numberformat-exception>Tega dokumenta ni mogoče shraniti. Ime mora biti v številski obliki.</numberformat-exception>
+      <item-not-found>Elementa ni mogoče najti. To vozlišče (ali njegovo nadrejeno) je morda izbrisano. Kliknite gumb Osveži.</item-not-found>
+    </msg>
+  </UIDocumentForm>
+  <!--
+  #################################################################################
+  #org.exoplatform.ecm.webui.component.explorer.actions.UIViewDocumentController  #
+  #################################################################################
+  -->
+  <UIViewDocumentController>
+    <tab>
+      <label>
+        <UIViewDocumentInfo>Informacije</UIViewDocumentInfo>
+      </label>
+    </tab>
+    <action>
+      <Close>#{word.close}</Close>
+    </action>
+  </UIViewDocumentController>
+  <!--
+  #############################################################################
+  #       org.exoplatform.ecm.webui.component.explorer.search.UI  #
+  #############################################################################
+  -->
+  <!--
+  #############################################################################
+  #    org.exoplatform.ecm.webui.component.explorer.search.UIQuerySaveForm    #
+  #############################################################################
+  -->
+  <UIQuerySaveForm>
+    <title>Obrazec za shranjevanje poizvedbe</title>
+    <label>
+      <query>Poizvedba</query>
+      <name>Ime poizvedbe</name>
+    </label>
+    <action>
+      <Save>#{word.save}</Save>
+      <Cancel>#{word.cancel}</Cancel>
+    </action>
+  </UIQuerySaveForm>
+  <!--
+  #############################################################################
+  #       org.exoplatform.ecm.webui.component.explorer.admin.UIActionManager  #
+  #############################################################################
+  -->
+  <editActionPopup>
+    <title>
+      <UIActionForm>Uredi dejanje</UIActionForm>
+      <EditFormAction>Uredi dejanje</EditFormAction>
+    </title>
+  </editActionPopup>
+  <UIActionViewContainer>
+    <action>
+      <Cancel>#{word.cancel}</Cancel>
+    </action>
+  </UIActionViewContainer>
+  <UIActionList>
+    <header>
+      <name>#{word.name}</name>
+      <description>Opis</description>
+  <lifecycle>Življenjski cikel</lifecycle>
+  <triggeredaction>Sproženo dejanje</triggeredaction>
+      <instanceOf>Primerek vrste dejanja</instanceOf>
+      <action>Dejanje</action>
+    </header>
+    <msg>
+      <remove-popup-first>Preden izbrišete to vozlišče morate zapreti urejevalno okno.</remove-popup-first>
+      <confirm-delete-action>Ali ste prepričani, da želite izbrisati to dejanje?</confirm-delete-action>
+      <template-empty>Predloga '{0}' je ničelna ali prazna.</template-empty>
+      <template-null>Predloga je nič ali pa nimate dovoljenja za dostop do te predloge.</template-null>
+      <access-denied>Dostop zavrnjen. Nimate dovoljenja za izvedbo tega dejanja.</access-denied>
+    </msg>
+    <action>
+      <Close>#{word.close}</Close>
+      <View>Pogled</View>
+      <Edit>Uredi</Edit>
+      <Delete>Izbriši</Delete>
+    </action>
+  </UIActionList>
+  <UIActionForm>
+    <action>
+      <Save>#{word.save}</Save>
+      <Back>#{word.back}</Back>
+    </action>
+    <label>
+      <name>Obrazec dejanj</name>
+    </label>
+    <msg>
+      <repository-exception>Tega dejanja ni mogoče shraniti. Ime vsebuje nekaj posebnih znakov.</repository-exception>
+      <numberformat-exception>Tega dejanja ni mogoče shraniti. Ime mora biti v številčni obliki.</numberformat-exception>
+      <existed-action>Ime dejanja '{0}' že obstaja. Izberite drugo.</existed-action>
+      <unable-add-action>Tega dejanja ni mogoče dodati.</unable-add-action>
+      <unable-add>Tega dejanja ni mogoče dodati. To vozlišče je bodisi koren ali pa nimate dovoljenja.</unable-add>
+      <not-support>Pogovorno okno '{0}' ni podprto.</not-support>
+      <no-permission-add>Dostop zavrnjen. Nimate dovoljenja, da bi tu dodali dejanje.</no-permission-add>
+      <access-denied>Dostop zavrnjen. Nimate dovoljenja za dostop do te predloge.</access-denied>
+      <lifecycle-invalid>Tega dejanja ne morete dodati. Faza življenjskega cikla dejanja ni veljavna.</lifecycle-invalid>
+    </msg>
+    <title>Dodaj/Uredi dejanje</title>
+    <validator>
+      <validator>Potrjevalnik</validator>
+      <destPath>S potjo</destPath>
+    </validator>
+  </UIActionForm>
+  <UIActionTypeForm>
+    <label>
+      <actionType>Ustvarite dejanje vrste</actionType>
+    </label>
+  </UIActionTypeForm>
+  <PopupComponent>
+    <title>
+      <UIOneNodePathSelector>Izberi lokacijo</UIOneNodePathSelector>
+      <UIPermissionSelector>Brskalnik po dovoljenjih</UIPermissionSelector>
+      <UICategoriesSelector>Dodajanje kategorij</UICategoriesSelector>
+    </title>
+  </PopupComponent>
+  <EditFormAction>
+    <validator>
+      <validator>Potrjevalnik</validator>
+      <destPath>S potjo</destPath>
+    </validator>
+    <title>Obrazec dejanj</title>
+  </EditFormAction>
+  <!--
+  #############################################################################
+  #       org.exoplatform.ecm.webui.component.explorer.control.UIAddressBar   #
+  #############################################################################
+  -->
+  <UIAddressBar>
+    <msg>
+      <path-not-found>Poti ni mogoče najti.</path-not-found>
+      <access-denied>Dostop zavrnjen. Nimate dovoljenja za branje v tem vozlišču.</access-denied>
+      <keyword-not-support>Ključna beseda ni veljavna. Nekateri znaki niso podprti.</keyword-not-support>
+    </msg>
+    <label>
+      <exeButton>Pojdi</exeButton>
+      <address>Naslov:</address>
+    </label>
+    <title>
+      <exeButton>Pojdi</exeButton>
+      <backButton>Nazaj na prejšnje vozlišče</backButton>
+      <showHistory>Prikaži zgodovino naslovov</showHistory>
+      <changeNode>Spremeni vozlišče</changeNode>
+    </title>
+  </UIAddressBar>
+  <!--
+  ###################################################################################
+  # org.exoplatform.ecm.webui.component.explorer.popup.actions.UIWatchDocumentForm  #
+  ###################################################################################
+  -->
+  <UIWatchDocumentForm>
+    <action>
+      <Watch>Sledi</Watch>
+      <Cancel>#{word.cancel}</Cancel>
+      <Continue>Nadaljuj</Continue>
+      <Unwatch>Prenehaj slediti</Unwatch>
+    </action>
+    <label>
+      <notificationType>Vrsta obvestila:</notificationType>
+    </label>
+    <msg>
+      <not-support>Ta vrsta obvestila ni podprta. Izberite drugo vrsto.</not-support>
+      <watching-successfully>Temu dokumentu sledite.</watching-successfully>
+      <unwatching-successfully>Uspešno ste zapustili seznam sledilcev.</unwatching-successfully>
+      <node-iswatching>Temu dokumentu sledite.</node-iswatching>
+    </msg>
+  </UIWatchDocumentForm>
+  <!--
+  ###################################################################################
+  #   org.exoplatform.ecm.webui.component.explorer.popup.actions.UITaggingForm      #
+  ###################################################################################
+  -->
+  <UITaggingForm>
+    <label>
+      <names>Imena oznak:</names>
+      <linked>Povezane oznake:</linked>
+      <tagSet>UITaggingForm</tagSet>
+    </label>
+    <action>
+      <AddTag>Dodaj</AddTag>
+      <Cancel>#{word.close}</Cancel>
+    </action>
+    <msg>
+      <name-exist>Ime oznake '{0}' že obstaja.</name-exist>
+      <tagName-invalid>Ime oznake vsebuje nekaj neveljavnih znakov.</tagName-invalid>
+      <tagName-empty-or-invalid>Ime oznake je prazno ali pa vsebuje nekaj neveljavnih znakov.</tagName-empty-or-invalid>
+      <tag-name-empty>Ime oznake je prazno</tag-name-empty>
+      <tag-name-duplicate>Vnešena imena oznak so podvojena.</tag-name-duplicate>
+      <tagName-too-long>Eda izmed vnešenih oznak je predolga. Ime oznake mora biti krajše od 30 znakov.</tagName-too-long>
+      <path-not-found>Oznaka je bila izbrisana ali spremenjena. Kliknite na gumb Osveži.</path-not-found>
+    </msg>
+    <introduction>
+      <tagName>Ločite več oznak z vejicami ","</tagName>
+    </introduction>
+  </UITaggingForm>
+
+  <!--
+  ###################################################################################
+  # org.exoplatform.ecm.webui.component.explorer.popup.info.UIMetadataContainer     #
+  ###################################################################################
+  -->
+  <UIViewMetadataContainer>
+    <msg>
+      <path-not-found>Vozlišče ne podpira tega pogleda.</path-not-found>
+    </msg>
+  </UIViewMetadataContainer>
+  <!--
+  ###################################################################################
+  # org.exoplatform.ecm.webui.component.explorer.popup.info.UIViewMetadataForm      #
+  ###################################################################################
+  -->
+  <UIViewMetadataForm>
+    <action>
+      <Save>#{word.save}</Save>
+      <Cancel>#{word.cancel}</Cancel>
+    </action>
+  </UIViewMetadataForm>
+  <metadataForm>
+    <title>
+      <UIViewMetadataForm>Dodaj/Uredi lastnosti</UIViewMetadataForm>
+    </title>
+  </metadataForm>
+  <UIViewMetadataTemplate>
+    <msg>
+      <access-denied>Dostop zavrnjen. Niste lastnik ali pa nimate dovoljenja za urejanje v tem vozlišču.</access-denied>
+    </msg>
+  </UIViewMetadataTemplate>
+  <!--
+  ###################################################################################
+  # Validator messages                                                              #
+  ###################################################################################
+  -->
+   <ECMPhoneFormatValidator>
+     <msg>
+       <Invalid>Polje '{0}' vsebuje neveljavno telefonsko številko. Vnesite drugo vrednost.</Invalid>
+     </msg>
+  </ECMPhoneFormatValidator>
+  <ECMNameValidator>
+    <msg>
+      <Invalid-char>Polje {0} vsebuje nekaj neveljavnih znakov. Vnesite drugo vrednost.</Invalid-char>
+      <empty-input>Vrednost polja "{0}" je nič ali je prazno.</empty-input>
+    </msg>
+  </ECMNameValidator>
+  <DateTimeValidator>
+    <msg>
+      <Invalid-input>Polje "{0}" z vrednostjo "{1}" ni veljavno.</Invalid-input>
+    </msg>
+  </DateTimeValidator>
+  <CronExpressionValidator>
+    <invalid-input>Cron izraz ni veljaven. Preverite sintakso.</invalid-input>
+  </CronExpressionValidator>
+  <EmptyFieldValidator>
+    <msg>
+      <empty-input>Prosimo, izpolnite polje "{0}".</empty-input>
+    </msg>
+  </EmptyFieldValidator>
+  <CategoryValidator>
+    <msg>
+      <non-categories>Kategorije so napačne. Izberite dobre kategorije.</non-categories>
+    </msg>
+  </CategoryValidator>
+  <!--
+  ###################################################################################
+  # JCR Exceptions manager                                                              #
+  ###################################################################################
+  -->
+  <ReferentialIntegrityException>
+    <msg>Dejanje ni uspelo. V delovnem prostoru še obstaja nekaj sklicevanih elementov.</msg>
+  </ReferentialIntegrityException>
+  <ItemExistsException>
+    <msg>Ta element že obstaja.</msg>
+  </ItemExistsException>
+  <AccessControlException>
+    <msg>Dostop zavrnjen. Nimate dovoljenja za to dejanje.</msg>
+  </AccessControlException>
+  <AccessDeniedException>
+    <msg>Dostop zavrnjen.</msg>
+  </AccessDeniedException>
+  <ItemNotFoundException>
+    <msg>Elementa ni mogoče najti. Morda je bil odstranjen ali spremenjen.</msg>
+  </ItemNotFoundException>
+  <PathNotFoundException>
+    <msg>Poti ni mogoče najti. Morda je bila odstranjena ali spremenjena.</msg>
+  </PathNotFoundException>
+  <ConstraintViolationException>
+    <msg>Tega dejanja ne morete izvesti zaradi nekaterih omejitev.</msg>
+  </ConstraintViolationException>
+  <!--
+  ###################################################################################
+  # Publication Manage                                                              #
+  ###################################################################################
+  -->
+  <UIPublicationForm>
+    <label>
+      <published>Objavljeno</published>
+      <non-published>Neobjavljeno</non-published>
+      <public>Javno</public>
+      <private>Zasebno</private>
+      <state>Stanje</state>
+      <visibility>Vidnost</visibility>
+      <nodeName>Ime vozlišča:</nodeName>
+      <lifecycleName>Ime življenjskega cikla</lifecycleName>
+      <stateName>Ime stanja</stateName>
+    </label>
+    <action>
+      <Save>#{word.save}</Save>
+      <UnsubcriberLifeCycle>Odjavil</UnsubcriberLifeCycle>
+      <Cancel>#{word.cancel}</Cancel>
+    </action>
+  </UIPublicationForm>
+  <!--
+  ###################################################################################
+  # JCR Browser                                                             #
+  ###################################################################################
+  -->
+  <UIWorkspaceList>
+    <label>
+      <workspaceName>Delovni prostor:</workspaceName>
+      <rootNodeInfo>Korenska pot:</rootNodeInfo>
+      <rootPath>Korenska pot:</rootPath>
+    </label>
+  </UIWorkspaceList>
+  <pathSelector>
+    <title>
+      <UIOneNodePathSelector>Izbirnik vozlišča</UIOneNodePathSelector>
+    </title>
+  </pathSelector>
+  <!--
+  ###################################################################################
+  # Others                                                                          #
+  ###################################################################################
+  -->
+  <EmailAddressValidator>
+    <msg>
+      <Invalid-input>E-poštni naslov ni veljaven.</Invalid-input>
+    </msg>
+  </EmailAddressValidator>
+  <UIFormInputSetWithAction>
+    <msg>
+      <confirm-delete>Ali ste prepričani, da želite izbrisati?</confirm-delete>
+    </msg>
+  </UIFormInputSetWithAction>
+  <RepeatCountValidator>
+    <msg>
+      <invalid-value>Vrednost v polju »Števec ponovitev« ni veljavna. Dovoljena so samo cela števila ali -1.</invalid-value>
+    </msg>
+  </RepeatCountValidator>
+  <RepeatIntervalValidator>
+    <msg>
+      <invalid-value>Vrednost v polju "Časovni Interval" ni veljavna. Samo dolge vrste so dovoljene.</invalid-value>
+    </msg>
+  </RepeatIntervalValidator>
+  <UIPermissionSelector>
+    <label>
+      <selectGroup>Izberi skupino</selectGroup>
+      <selectUser>Izberi uporabnika</selectUser>
+      <selectMembership>Izberi članstvo</selectMembership>
+    </label>
+  </UIPermissionSelector>
+  <!--
+  ###################################################################################
+  # org.exoplatform.ecm.jcr.ECMStandardPropertyNameValidator                        #
+  ###################################################################################
+  -->
+  <ECMStandardPropertyNameValidator>
+    <msg>
+      <empty-input>Vrednost polja "{0}" je nič ali pa je prazno.</empty-input>
+      <Invalid-char>Polje {0} vsebuje nekaj neveljavnih znakov. Vnesite drugo vrednost.</Invalid-char>
+    </msg>
+  </ECMStandardPropertyNameValidator>
+  <!--
+  ###################################################################################
+  # org.exoplatform.ecm.jcr.SearchValidator                                     #
+  ###################################################################################
+  -->
+  <SearchValidator>
+    <msg>
+      <empty-input>Vrednost tega polja je nič ali pa je prazno.</empty-input>
+      <Invalid-char>To polje vsebuje nekaj neveljavnih znakov. Vnesite drugo vrednost.</Invalid-char>
+      <Invalid-char2>Številki mora slediti znak '~'.</Invalid-char2>
+      <Invalid-char1>Številka, ki sledi znaku '~', mora biti med 0 in 1.</Invalid-char1>
+      <Invalid-char3>Številki mora sledi znak '^'.</Invalid-char3>
+      <Invalid-char4>Presledki ob znaku '~' niso dovoljeni.</Invalid-char4>
+      <Invalid-char5>Presledki ob znaku '^' niso dovoljeni.</Invalid-char5>
+    </msg>
+  </SearchValidator>
+  <!--
+  ###################################################################################
+  # PublicationService                                                              #
+  ###################################################################################
+  -->
+  <UIPublicationLogList>
+    <header>
+      <date>Datum</date>
+      <newState>Novo stanje</newState>
+      <user>Uporabnik</user>
+      <description>Opis</description>
+      <version>Različica</version>
+      <visibility>Vidnost</visibility>
+    </header>
+    <action>
+      <Close>#{word.close}</Close>
+    </action>
+  </UIPublicationLogList>
+  <!--
+  ###################################################################################
+  # UIVersionTreeList                                                             #
+  ###################################################################################
+  -->
+  <UIVersionTreeList>
+    <header>
+      <version>Različica</version>
+      <state>Stanje</state>
+    </header>
+  </UIVersionTreeList>
+  <!--
+  ###################################################################################
+  # UIThumbnailForm                                                             #
+  ###################################################################################
+  -->
+  <UIThumbnailForm>
+    <action>
+      <Save>#{word.save}</Save>
+      <Cancel>#{word.cancel}</Cancel>
+      <RemoveThumbnail>Odstrani sličico</RemoveThumbnail>
+    </action>
+    <label>
+      <mediumSize>Sličica</mediumSize>
+      <SelectFile>Izberi sličico</SelectFile>
+    </label>
+    <msg>
+      <mimetype-incorrect>Nepravilna vrsta datoteke. Sličice lahko ustvarite le iz .JPG .PNG ali .GIF datotek.</mimetype-incorrect>
+      <access-denied>Dostop zavrnjen. Nimate dovoljenja za dodajanje sličic v tem vozlišču.</access-denied>
+      <confirm-delete>Ali ste prepričani, da želite odstraniti to sličico?</confirm-delete>
+      <is-checked-in>To vozlišče je sproščeno. Prosimo, rezervirajte ga, preden izvedete kakšno dejanje.</is-checked-in>
+      <fileName-error>Izberi datoteko za prenos.</fileName-error>
+    </msg>
+    <title>
+      <remove-thumbnail>Odstrani to sličico</remove-thumbnail>
+    </title>
+  </UIThumbnailForm>
+  <!--
+  ###################################################################################
+  # UIAnyPermission                                                                 #
+  ###################################################################################
+  -->
+  <UIAnyPermission>
+    <label>
+      <anyPermission>Vsa dovoljenja</anyPermission>
+    </label>
+  </UIAnyPermission>
+
+  <anyPermission>
+    <title>
+      <AddAnyPermission>Nastavi katerokoli dovoljenje</AddAnyPermission>
+    </title>
+  </anyPermission>
+  <!--
+  ###################################################################################
+  # UICategoriesAddedList                                                           #
+  ###################################################################################
+  -->
+  <UICategoriesSelector>
+    <action>
+      <close>#{word.close}</close>
+    </action>
+  </UICategoriesSelector>
+  <!--
+  ###################################################################################
+  # Since ECM version 2.2                                                             #
+  ###################################################################################
+  -->
+  <UIGroupMemberSelector>
+    <label>
+      <selectGroup>Izberi skupino</selectGroup>
+      <selectUser>Izberi uporabnika</selectUser>
+      <selectMembership>Izberi članstvo</selectMembership>
+    </label>
+  </UIGroupMemberSelector>
+  <!--
+  ###Since ECM version 2.2##############
+  -->
+ 
+  <!--
+  ### Since ECM version 2.3 Alpha##############
+  Access directly a JCR FE drive
+  -->
+  <UIJCRExplorerPortlet>
+    <nopermission>Nimate dovoljenja za dostop do tega diska ali pa disk ne obstaja.</nopermission>
+  </UIJCRExplorerPortlet>
+
+  <UIJcrExplorerEditForm>
+    <title>Uredi Raziskovalca</title>
+    <action>
+      <Edit>Uredi</Edit>
+      <Save>#{word.save}</Save>
+      <Cancel>#{word.cancel}</Cancel>
+    </action>
+    <label>
+      <uploadFileSizeLimitMB>Omejitev velikosti prenešene datoteke (MB)</uploadFileSizeLimitMB>
+      <isDirectlyDrive>Neposredni pogon</isDirectlyDrive>
+      <driveName>Ime pogona</driveName>
+      <usecase>Izberi vrsto</usecase>
+      <SelectNodePath>Izberi pot</SelectNodePath>
+      <showTopBar>Pokaži vrstico na vrhu</showTopBar>
+      <showActionBar>Pokaži vrstico z dejanji</showActionBar>
+      <showSideBar>Pokaži levo vrstico</showSideBar>
+      <showFilterBar>Pokaži vrstico s filtri</showFilterBar>
+      <nodePath>Izberi pot</nodePath>
+    </label>
+  </UIJcrExplorerEditForm>
+
+  <UIDriveSelector>
+    <label>
+      <driveName>Ime pogona</driveName>
+      <action>Dejanje</action>
+      <adddrives>Dodaj pogone</adddrives>
+    </label>
+  </UIDriveSelector>
+  <UIJcrExplorerEditForm>
+    <label>
+      <DriveNameInput>Uporabniški vmesnik - obrazec za urejanje JCR raziskovalca</DriveNameInput>
+    </label>
+    <msg>
+      <personal-usecase>Zasebni pogon trenutnega uporabnika bo uporabljen, ko izberete osebno uporabo.</personal-usecase>
+      <drive-edit-permission>Ne morete urejati Imena pogona. Kliknite gumb Uredi.</drive-edit-permission>
+      <path-edit-permission>Ne morete urejati poti. Kliknite gumb Uredi.</path-edit-permission>
+    </msg>
+  </UIJcrExplorerEditForm>
+
+  <PopUpSelectDrive>
+    <title>
+      <UIDriveSelector>Izberi pogon</UIDriveSelector>
+    </title>
+  </PopUpSelectDrive>
+
+  <PopupSelectPath>
+    <title>
+      <UIOneNodePathSelector>Izberi vozlišče</UIOneNodePathSelector>
+    </title>
+  </PopupSelectPath>
+
+  <DriveNameInput>
+    <title>
+      <SelectDrive>Izberi pogon</SelectDrive>
+    </title>
+  </DriveNameInput>
+
+  <!--
+  ### Since ECM version 2.4.x ##############
+  -->
+  <UIActionBar>
+    <tooltip>
+      <AddSymLink>Dodaj simbolično povezavo</AddSymLink>
+      <AddLocalizationLink>Dodaj prevod</AddLocalizationLink>
+    </tooltip>
+  </UIActionBar>
+
+  <UIPopupWindow>
+    <title>
+      <UISymLinkManager>Upravljanje simbolnih povezav</UISymLinkManager>
+      <UIAddTranslationManager>Dodaj prevod</UIAddTranslationManager>
+    </title>
+  </UIPopupWindow>
+
+  <UISymLinkForm>
+    <label>
+      <symLinkName>Ime simbolične povezave</symLinkName>
+      <pathNode>Vozlišče poti</pathNode>
+    </label>
+    <action>
+      <Save>#{word.save}</Save>
+      <Cancel>#{word.cancel}</Cancel>
+    </action>
+    <msg>
+      <addFolder-successful>Simbolična povezava "{0}" je bila uspešno dodana.</addFolder-successful>
+      <name-invalid>Vnesite ime simbolične povezave.</name-invalid>
+      <name-not-allowed>To ime ni dovoljeno.</name-not-allowed>
+      <fileName-error>Ime datoteke ni veljavno.</fileName-error>
+      <constraint-violation>Trenutnemu vozlišču ne morete dodati vrsto vozlišča "{0}".</constraint-violation>
+      <repository-exception>Dostop zavrnjen. Nimate dovoljenja za dodajanje simbolične povezave v tem vozlišču.</repository-exception>
+      <numberformat-exception>Te mape ni mogoče shraniti. Ime mora biti v številčni obliki.</numberformat-exception>
+      <path-node-invalid>Vnesite vozlišče poti.</path-node-invalid>
+      <path-node-not-allowed>To ime ni dovoljeno.</path-node-not-allowed>
+      <non-node>Izberite zaupanja vredno ciljno vozlišče; morda ne boste imeli dovoljenja za branje tega vozlišča.</non-node>
+      <cannot-save>Za to vrsto vozlišča ni mogoče dodati simbolične povezave.</cannot-save>
+      <item-exists-exception>To ime vozlišča že obstaja.</item-exists-exception>
+      <translation-node-same-language-default>Prevajano vozlišče ima isti jezik kot je privzeti jezik trenutnega vozlišča.</translation-node-same-language-default>
+      <UnsupportedRepositoryOperationException>Ni sklica na ciljno vozlišče.</UnsupportedRepositoryOperationException>
+    </msg>
+  </UISymLinkForm>
+  
+  <UIAddTranslationForm>
+    <label>
+      <symLinkName>Ime simbolične povezave</symLinkName>
+      <pathNode>Pot do dokumenta:</pathNode>
+      <note>Izberite drug dokument, ki bo služil kot prevod</note>
+    </label>
+    <action>
+      <Save>#{word.save}</Save>
+      <Cancel>#{word.cancel}</Cancel>
+      <SelectDocument>Izberi dokument</SelectDocument>
+    </action>
+    <msg>
+      <addFolder-successful>Simbolična povezava"{0}" je uspešno dodana.</addFolder-successful>
+      <name-invalid>Vnesite ime simbolične povezave.</name-invalid>
+      <name-not-allowed>To ime ni dovoljeno.</name-not-allowed>
+      <fileName-error>Ime datoteke ni veljavno.</fileName-error>
+      <constraint-violation>Trenutnemu vozlišču ne morete dodati vrsto vozlišča "{0}".</constraint-violation>
+      <repository-exception>Dostop zavrnjen. Nimate dovoljenja za dodajanje simbolične povezave v tem vozlišču.</repository-exception>
+      <numberformat-exception>Tega dokumenta ni mogoče shraniti. Ime mora biti v številski obliki.</numberformat-exception>
+      <path-node-invalid>Vnesite pot vozlišča.</path-node-invalid>
+      <path-node-not-allowed>To ime ni dovoljeno.</path-node-not-allowed>
+      <non-node>Izberite zaupanja vredno ciljno vozlišče; morda ne boste imeli dovoljenja za branje tega vozlišča.</non-node>
+      <cannot-save>Pri ustvarjanju simbolične povezave je prišlo do napake.</cannot-save>
+      <item-exists-exception>To ime vozlišča že obstaja.</item-exists-exception>
+      <translation-node-same-language-default>Prevajano vozlišče ima isti jezik kot je privzeti jezik trenutnega vozlišča.</translation-node-same-language-default>
+      <UnsupportedRepositoryOperationException>Ni sklica na ciljno vozlišče.</UnsupportedRepositoryOperationException>
+    </msg>
+  </UIAddTranslationForm>
+
+  <UIPopupSymLink>
+    <title>
+      <UIOneNodePathSelector>Izberite ciljno vozlišče</UIOneNodePathSelector>
+    </title>
+  </UIPopupSymLink>
+  <UIPopupSymLink>
+    <title>
+      <UIContentSelectorOne>Izberite dokument</UIContentSelectorOne>
+    </title>
+  </UIPopupSymLink>
+
+  <ECMContextMenu>
+    <event>
+      <AddSymLink>Dodaj simbolično povezavo</AddSymLink>
+      <AddLocalizationLink>Dodaj prevod</AddLocalizationLink>
+    </event>
+  </ECMContextMenu>
+
+  <UIWorkingArea>
+    <msg>
+      <create-link-problem>Ne morete ustvariti povezave za vozlišče "{0}" v "{1}".</create-link-problem>
+      <dest-node-is-link>Ciljno vozlišče "{0}" je že simbolična povezava, zato v njem ne morete ustvariti simbolične povezave.</dest-node-is-link>
+      <selected-is-link>Izbrano vozlišče '{0}' je že povezava. Ne morete ustvariti povezave, ki kaže na drugo povezavo.</selected-is-link>
+      <confirm-create-link>Ali želite ustvariti povezavo na to lokacijo?</confirm-create-link>
+    </msg>
+  </UIWorkingArea>
+
+  <ECMContextMenu>
+    <event>
+      <CreateLink>Ustvari povezavo</CreateLink>
+    </event>
+  </ECMContextMenu>
+
+  <UIWorkspaceList>
+    <msg>
+      <AccessDeniedException>Dostop zavrnjen. Nimaš dovoljenja za branje v tem delovnem prostoru.</AccessDeniedException>
+    </msg>
+    <label>
+      <taxonomyTree>Drevesna struktura kategorije</taxonomyTree>
+    </label>
+  </UIWorkspaceList>
+
+  <UIPopupTaxonomy>
+    <title>
+      <UIOneTaxonomySelector>Dodajanje kategorij</UIOneTaxonomySelector>
+    </title>
+  </UIPopupTaxonomy>
+
+  <UITreeTaxonomyList>
+    <label>
+      <taxonomyTree>Drevesna struktura kategorije:</taxonomyTree>
+      <rootNodePath>Drevo korena:</rootNodePath>
+      <rootNodeInfo>Uporabniški vmesnik - drevesni seznam razvrstitve izrazja</rootNodeInfo>
+    </label>
+  </UITreeTaxonomyList>
+
+  <UIActionBar>
+    <tooltip>
+      <ManageSimpleCategories>Upravljanje preprostih kategorij</ManageSimpleCategories>
+    </tooltip>
+  </UIActionBar>
+
+  <UISimpleCategoryManager>
+    <tab>
+      <label>
+        <UICategoriesAddedList>Sklicevane kategorije</UICategoriesAddedList>
+        <UIOneNodePathSelector>Izberi kategorijo</UIOneNodePathSelector>
+      </label>
+    </tab>
+  </UISimpleCategoryManager>
+
+  <UICategoryManager>
+    <tab>
+      <label>
+        <UIOneTaxonomySelector>Izberi kategorijo</UIOneTaxonomySelector>
+      </label>
+    </tab>
+  </UICategoryManager>
+
+  <UISimpleCategoryManager>
+    <action>
+      <Close>#{word.close}</Close>
+    </action>
+  </UISimpleCategoryManager>
+  <UIPopupWindow>
+    <title>
+      <UISimpleCategoryManager>Dodaj kategorijo</UISimpleCategoryManager>
+    </title>
+  </UIPopupWindow>
+  <UICategoriesAddedList>
+    <msg>
+      <ItemExistsException>To ime kategorije že obstaja.</ItemExistsException>
+    </msg>
+  </UICategoriesAddedList>
+
+  <UIConfirmMessage>
+    <label>
+      <Close>#{word.cancel}</Close>
+      <OK>Izbriši</OK>
+      <ReplaceData>Zamenjaj podatke</ReplaceData>
+      <Back>Nazaj na preimenovanje</Back>
+      <Keepfile>Obdrži obe datoteki</Keepfile>
+<ReadOnly>Odpri samo za branje</ReadOnly>
+<Cancel>Prekliči</Cancel>
+      <KeepBoth>Zadrži oboje</KeepBoth>
+      <CreateNewVersion>Ustvarite novo različico</CreateNewVersion>
+    </label>
+  </UIConfirmMessage>
+
+  <UIRestoreConfirmMessage>
+    <label>
+      <Close>#{word.close}</Close>
+      <OK>V redu</OK>
+      <ReplaceData>Zamenjaj podatke</ReplaceData>
+      <Back>Nazaj na preimenovanje</Back>
+      <Keepfile>Obdrži obe datoteki</Keepfile>
+    </label>
+  </UIRestoreConfirmMessage>
+
+
+  <PopupComponent>
+    <title>
+      <UIOneTaxonomySelector>Dodaj kategorije</UIOneTaxonomySelector>
+    </title>
+  </PopupComponent>
+
+  <UIWorkingArea>
+    <msg>
+      <can-not-move-to-itself>Datoteke ni mogoče premakniti, ker je ciljna mapa ista kot izvorna mapa.</can-not-move-to-itself>
+      <is-editing>Dokumenta ni mogoče premakniti med urejanjem. Najprej ga zaprite.</is-editing>
+    </msg>
+  </UIWorkingArea>
+
+  <UIImportNode>
+    <label>
+      <behavior>UUID vedenje</behavior>
+      <versionHistory>Zgodovina različic</versionHistory>
+    </label>
+    <msg>
+      <history-invalid-type>Neveljavna vrsta datoteke v zgodovini različic. Podprte so le .zip datoteke.</history-invalid-type>
+      <history-invalid-content>Neveljavna vsebina v zgodovini različic. Izberite podprto vrsto datotek za uvoz.</history-invalid-content>
+    </msg>
+  </UIImportNode>
+
+  <Import>
+    <Behavior>
+      <type0>Ustvari novo</type0>
+      <type1>Odstrani obstoječe</type1>
+      <type2>Zamenjaj obstoječe</type2>
+      <type3>Dodaj izjemo</type3>
+    </Behavior>
+  </Import>
+
+  <UIExportNode>
+    <action>
+      <ExportHistory>Izvozi zgodovino različic</ExportHistory>
+    </action>
+  </UIExportNode>
+
+  <UIPopupMenu>
+    <msg>
+      <node-locked-other-person>To vozlišče ali njegovo nadrejeno vozlišče je zaklenil drug uporabnik, zato ga ne morete izbrisati.</node-locked-other-person>
+    </msg>
+  </UIPopupMenu>
+
+  <Import>
+    <label>
+      <docview>Dokumentni pogled</docview>
+      <sysview>Sistemski pogled</sysview>
+    </label>
+  </Import>
+
+  <UIDocumentForm>
+    <msg>
+      <do-not-permission>Nimate dovoljenja za nalaganje predloge "{0}".</do-not-permission>
+    </msg>
+  </UIDocumentForm>
+
+  <!--
+  ###################################################################################
+  #             org.exoplatform.ecm.webui.component.explorer.UIActionBar                #
+  #                           Localize tab                                                                                    #
+  ###################################################################################
+  -->
+  <UIActionBar>
+    <obtion>
+      <Admin>Skrbnik</Admin>
+      <Info>Info</Info>
+      <Actions>Dejanja</Actions>
+      <Collaboration>Sodelovanje</Collaboration>
+      <Search>Išči</Search>
+    </obtion>
+  </UIActionBar>
+
+  <UIPopupMenu>
+    <msg>
+      <can-not-unlock-node-is-checked-in>Ne morete odkleniti, ker je vozlišče "{0}" (ali njegov prednik) sproščeno.</can-not-unlock-node-is-checked-in>
+    </msg>
+  </UIPopupMenu>
+
+  <!--
+   #############  From DMS 2.5 #############
+  -->
+  <UIActionBar>
+    <msg>
+      <cannot-enable-version>Shranjevanja različic vozlišča ni mogoče omogočiti.</cannot-enable-version>
+    </msg>
+  </UIActionBar>
+  <UIPopupMenu>
+    <msg>
+        <cannot-readsource>Ne morete prebrati podatkov iz vira vozlišča.</cannot-readsource>
+    </msg>
+  </UIPopupMenu>
+  <UIUploadForm>
+    <msg>
+      <upload-not-null>Prosimo, pred dodajanjem kategorije prenesite datoteko.</upload-not-null>
+    </msg>
+  </UIUploadForm>
+  <UIActionBar>
+    <msg>
+      <allow-setProperty>Za to skupino morate nastaviti lastnost.</allow-setProperty>
+    </msg>
+  </UIActionBar>
+
+  <UIActionForm>
+    <msg>
+      <name-not-allowed>To ime za dejanje ni dovoljeno.</name-not-allowed>
+    </msg>
+  </UIActionForm>
+
+  <UISaveQueryForm>
+    <msg>
+      <name-not-allowed>To ime poizvedbe ni dovoljeno.</name-not-allowed>
+    </msg>
+  </UISaveQueryForm>
+  <UISimpleSearch>
+    <msg>
+      <name-not-allowed>Beseda ali fraza v tej vsebini ni dovoljena.</name-not-allowed>
+    </msg>
+  </UISimpleSearch>
+
+ 
+    <!--
+   #############  From DMS 2.6 #############
+   -->
+  <ECMContextMenu>
+      <event>
+        <Permlink>Poglej dokument</Permlink>
+      </event>
+  </ECMContextMenu>
+  
+
+  <!--
+    ############  From DMS 2.6 ##############
+   -->
+  <UIFolderForm>
+    <label>
+      <nt_folder>Mapa z dokumenti</nt_folder>
+      <nt_unstructured>Mapa z vsebino</nt_unstructured>
+      <exo_cssFolder>Mapa s CSS</exo_cssFolder>
+      <exo_jsFolder>Mapa za Javascript</exo_jsFolder>
+      <exo_linkFolder>Mapa za povezave</exo_linkFolder>
+      <exo_webFolder>Mapa s spletnimi vsebinami</exo_webFolder>
+   </label>
+  </UIFolderForm>
+
+  <Comments>
+    <tooltip>
+      <remove-comment>Odstrani ta komentar</remove-comment>
+      <edit-comment>Uredi ta komentar</edit-comment>
+    </tooltip>
+  </Comments>
+  <UIDocumentInfo>
+    <msg>
+      <confirm-deletecomment>Ali ste prepričani, da želite izbrisati ta komentar?</confirm-deletecomment>
+    </msg>
+  </UIDocumentInfo>
+
+ <UIExportNode>
+  <msg>
+    <OutOfMemoryError>Za izvoz večje količine podatkov morate izbrati Sistemski pogled.</OutOfMemoryError>
+  </msg>
+ </UIExportNode>
+ <Taxonomy>
+    <msg>
+      <AccessDeniedException>Nimate dovoljenja za dostop do dreves kategorij.</AccessDeniedException>
+    </msg>
+  </Taxonomy>
+
+  <UIJcrExplorerEditForm>
+    <msg>
+      <notNullDriveName>Ime pogona je nično ali prazno. Prosimo, izpolnite polje Ime pogona.</notNullDriveName>
+      <notNullPath>Pot je nična ali prazna. Prosimo, vnesite pot.</notNullPath>
+    </msg>
+  </UIJcrExplorerEditForm>
+
+  <UIViewSearchResult>
+    <tooltip>
+      <remove-attachment>Ali ste prepričani, da želite odstraniti priloženo datoteko?</remove-attachment>
+    </tooltip>
+  </UIViewSearchResult>
+
+  <SameNamePopup>
+    <title>
+      <UIUploadBehaviorWithSameName>Prenesi datoteko</UIUploadBehaviorWithSameName>
+    </title>
+  </SameNamePopup>
+
+  <UIAllItems>
+    <label>
+      <OwnedByMe>V moji lasti</OwnedByMe>
+      <Favourites>Priljubljeno</Favourites>
+      <Hidden>Skrito</Hidden>
+      <Trash>Smeti</Trash>
+      <Configuration>Nastavite nastavitve</Configuration>
+    </label>
+    <title>
+      <allItems>Vse elemente</allItems>
+    </title>
+  </UIAllItems>
+
+  <UIPreferencesForm>
+      <label>
+          <Alphabetic>Abecedni vrstni red</Alphabetic>
+          <Type>Vrsta</Type>
+          <CreatedDate>Datum nastanka</CreatedDate>
+          <ModifiedDate>Datum spremembe</ModifiedDate>
+          <Ascending>Naraščajoče</Ascending>
+          <Descending>Padajoče</Descending>
+      </label>
+  </UIPreferencesForm>
+
+  <UISavedSearches>
+    <title>
+      <savedSearches>Shranjena iskanja</savedSearches>
+    </title>
+  </UISavedSearches>
+  <DocumentType>
+    <label>
+       <Images>Slika</Images>
+       <Video>Video</Video>
+       <Music>Glasba</Music>
+       <Documents>Dokument</Documents>
+       <Content>Vsebina</Content>
+    </label>
+  </DocumentType>
+
+  <UIDocumentFilterForm>
+    <label>
+      <Images>Slika</Images>
+      <Video>Video</Video>
+      <Music>Glasba</Music>
+      <Documents>Dokument</Documents>
+      <Content>Vsebina</Content>
+    </label>
+    <title>Nastavitve nastavitve filtra</title>
+    <action>
+      <Save>#{word.save}</Save>
+      <Cancel>#{word.cancel}</Cancel>
+    </action>
+  </UIDocumentFilterForm>
+
+  <UIAllItemsByType>
+    <label>
+    <ByType>Filtriraj po vrsti</ByType>
+      <DocumentFilterConfiguration>Nastavitve nastavitve filtra</DocumentFilterConfiguration>
+    </label>
+    <title>
+      <ShowVideo>Prikaži vse videe</ShowVideo>
+      <ShowMusic>Prikaži vso glasbo</ShowMusic>
+      <ShowImages>Prikaži vse slike</ShowImages>
+      <ShowDocuments>Prikaži vse dokumente</ShowDocuments>
+      <ShowContent>Prikaži vse vrste dokumentov</ShowContent>
+    </title>
+  </UIAllItemsByType>
+
+  <Views>
+    <label>
+      <slide-show>Diaprojekcija</slide-show>
+    </label>
+  </Views>
+  <ECMContextMenu>
+    <event>
+      <PlayMedia>Predvajaj</PlayMedia>
+    </event>
+  </ECMContextMenu>
+  <UIPopupWindow>
+    <title>
+      <UIDocumentFilterForm>Filtriraj vrsto dokumentov</UIDocumentFilterForm>
+    </title>
+  </UIPopupWindow>
+
+  <UIAllItemsPreferenceForm>
+    <label>
+      <showOwnedByUser>V moji lasti</showOwnedByUser>
+      <showFavourites>Priljubljeno</showFavourites>
+      <showHiddens>Skrito</showHiddens>
+      <showTrash>Smeti</showTrash>
+    </label>
+    <action>
+      <Save>#{word.save}</Save>
+      <Cancel>#{word.cancel}</Cancel>
+    </action>
+  </UIAllItemsPreferenceForm>
+
+  <EmptyTrashManageComponent>
+    <msg>
+      <confirm-delete>Ali ste prepričani, da želite izprazniti vse elemente iz koša?</confirm-delete>
+    </msg>
+  </EmptyTrashManageComponent>
+  <UICategoryForm>
+    <label>
+      <name>Ime kategorije</name>
+    </label>
+    <action>
+      <Save>#{word.save}</Save>
+      <Cancel>#{word.cancel}</Cancel>
+    </action>
+  </UICategoryForm>
+  <UIPopupWindow>
+    <title>
+      <UICategoryForm>Dodaj kategorijo</UICategoryForm>
+    </title>
+  </UIPopupWindow>
+  <UIActionBar>
+    <tooltip>
+      <AddCategory>Dodaj kategorijo</AddCategory>
+    </tooltip>
+   </UIActionBar>
+
+   <UITaggingForm>
+    <label>
+      <Public>Javno</Public>
+      <Private>Zasebno</Private>
+      <tagScopes>Obsegi oznak</tagScopes>
+    </label>
+   </UITaggingForm>
+
+  <UITagExplorer>
+    <title>
+      <PublicTags>Oznake</PublicTags>
+      <EditPublicTags>Urejanje oznak</EditPublicTags>
+      <PrivateTags>Oznake</PrivateTags>
+    </title>
+  </UITagExplorer>
+
+  <UIEditingTagsForm>
+    <header>
+      <name>Ime</name>
+      <relatedDocuments>Sorodni dokumenti</relatedDocuments>
+      <action>Dejanje</action>
+    </header>
+    <action>
+      <title>
+        <EditTag>Uredi oznako</EditTag>
+        <RemoveTag>Odstrani oznako</RemoveTag>
+        <AddTag>Dodaj oznako</AddTag>
+      </title>
+    </action>
+    <msg>
+      <confirm-remove>Ali ste prepričani, da želite izbrisati to oznako?</confirm-remove>
+    </msg>
+  </UIEditingTagsForm>
+
+
+  <UIPopupWindow>
+    <title>
+      <UIEditingTagsForm>Uredi oznako</UIEditingTagsForm>
+    </title>
+  </UIPopupWindow>
+
+  <UITagForm>
+    <action>
+      <UpdateTag>#{word.save}</UpdateTag>
+      <Cancel>#{word.close}</Cancel>
+    </action>
+    <label>
+      <tagName>Ime oznake:</tagName>
+      <relatedDocuments>Sorodni dokumenti</relatedDocuments>
+    </label>
+  </UITagForm>
+
+  <TagPopup>
+    <title>
+      <UITagForm>Oznaka</UITagForm>
+    </title>
+  </TagPopup>
+
+    <UIPopupMenu>
+    <msg>
+      <node-locked-editing>Ne morete urejati tega vozlišča s potjo {0}, saj ga je zaklenil drug uporabnik.</node-locked-editing>
+    </msg>
+  </UIPopupMenu>
+  <UITagStyleForm>
+    <msg>
+      <error-update>Pri posodabljanju sloga oznake je prišlo do napake.</error-update>
+    </msg>
+  </UITagStyleForm>
+
+  <UIPopupMenu>
+    <msg>
+      <editTagAccessDenied>Dostop zavrnjen.</editTagAccessDenied>
+    </msg>
+  </UIPopupMenu>
+
+  <UIPopupWindow>
+    <title>
+      <UITaggingFormContainer>Upravitelj oznak</UITaggingFormContainer>
+    </title>
+  </UIPopupWindow>
+
+    <PopupComponent>
+    <title>
+      <UINodeTypeSelector>Izberi vrsto vozlišča</UINodeTypeSelector>
+    </title>
+  </PopupComponent>
+
+    <UIActionForm>
+    <title>
+      <ShowComponent>Prikaži komponento</ShowComponent>
+      <removeReference>Odstrani</removeReference>
+    </title>
+  </UIActionForm>
+
+  <EditFormAction>
+    <title>
+      <ShowComponent>Prikaži komponento</ShowComponent>
+      <removeReference>Odstrani</removeReference>
+    </title>
+  </EditFormAction>
+
+  <NodeTypeNameValidator>
+    <msg>
+      <Invalid-char>Obstaja nekaj neveljavnih znakov. Vnesite drugo vrednost.</Invalid-char>
+      <empty-input>Vrednost tega polja je nič ali je prazna.</empty-input>
+    </msg>
+  </NodeTypeNameValidator>
+
+  <UIPreferencesForm>
+      <label>
+            <queryType>Vrsta poizvedbe:</queryType>
+            <SQL>SQL</SQL>
+            <XPATH>XPATH</XPATH>
+      </label>
+  </UIPreferencesForm>
+
+  <UIDocumentInfo>
+    <msg>
+      <repository-error>Prišlo je do napake. Informacije o shrambi niso več na voljo.</repository-error>
+    </msg>
+  </UIDocumentInfo>
+
+  <UITreeExplorer>
+    <msg>
+      <repository-error>Prišlo je do napake. Informacije o shrambi niso več na voljo.</repository-error>
+    </msg>
+  </UITreeExplorer>
+  <UIDocumentForm>
+    <msg>
+      <constraintviolation-exception>Dokumenta ni mogoče shraniti. Vhodni podatki manjkajo ali pa so neveljavni.</constraintviolation-exception>
+    </msg>
+  </UIDocumentForm>
+  <UIActionForm>
+    <msg>
+      <constraintviolation-exception>Dokumenta ni mogoče shraniti. Vhodni podatki manjkajo ali pa so neveljavni.</constraintviolation-exception>
+    </msg>
+  </UIActionForm>
+
+  <UISelectRestorePath>
+    <action>
+      <Save>#{word.save}</Save>
+      <Cancel>#{word.cancel}</Cancel>
+    </action>
+    <label>
+      <formInput>Prejšnja pot ni več na voljo. Izberite novo.</formInput>
+    </label>
+  </UISelectRestorePath>
+  <PathNode>
+    <title>
+      <Add>Dodaj</Add>
+    </title>
+  </PathNode>
+  <UIPopupPathFoRestore>
+    <title>
+      <UIOneNodePathSelector>Izberite nadrejeno vozlišče</UIOneNodePathSelector>
+    </title>
+  </UIPopupPathFoRestore>
+  <rootNodeInfo>
+    <title>
+      <AddRootNode>Dodajte korensko vozlišče</AddRootNode>
+    </title>
+  </rootNodeInfo>
+
+  <UIActionForm>
+    <msg>
+      <homePath-emty>Pot domov je prazna.</homePath-emty>
+      <targetPath-emty>Ciljna pot je prazna.</targetPath-emty>
+    </msg>
+    </UIActionForm>
+    <UIActionBar>
+      <msg>
+        <not-exist-categories>Ni kategorij.</not-exist-categories>
+      </msg>
+    </UIActionBar>
+
+  <UIPublicationContainer>
+   <action>
+    <Close>#{word.close}</Close>
+   </action>
+  </UIPublicationContainer>
+
+  <UIPublicationPanel>
+    <button>
+      <Close>#{word.close}</Close>
+    </button>
+    <revisions>
+      <version>Revizije</version>
+      <date>Datum</date>
+      <author>Avtor</author>
+      <status>Stanje</status>
+      <action>Dejanje</action>
+      <label>Revizija</label>
+      <none>Brez revizij</none>
+      <seeall>Poglej vse različice</seeall>
+      <currentVersion>Trenutna revizija</currentVersion>
+      <confirm>Izgubili boste vaš osnutek. Ali ste prepričani, da želite zamenjati trenutno revizijo?</confirm>
+    </revisions>
+    <status>
+      <version>Revizija</version>
+      <title>Stanje</title>
+      <archived>Arhivirano</archived>
+      <obsolete>Zastarelo</obsolete>
+      <unpublished>Neobjavljeno</unpublished>
+      <enrolled>Vpisan</enrolled>
+      <draft>Osnutek</draft>
+      <pending>V čakanju</pending>
+      <approved>Odobreno</approved>
+      <inreview>V pregledu</inreview>
+      <staged>Po stopnjah</staged>
+      <published>Objavljeno</published>
+      <live>Objavljeno</live>
+    </status>
+    <scheduled>
+      <title>Načrtovano</title>
+      <from>Od</from>
+      <to>do</to>
+    </scheduled>
+    <title>
+      <preview>Predogled</preview>
+      <restore>Obnovi</restore>
+    </title>
+    <msg>
+      <have-no-view-template>Predloga pogleda ni podprta.</have-no-view-template>
+      <restore-complete>Obnovitev končana.</restore-complete>
+    </msg>
+  </UIPublicationPanel>
+  <UIPublicationHistory>
+    <header>
+      <date>Datum</date>
+      <versionName>Ime revizije</versionName>
+      <currentState>Trenutno stanje</currentState>
+      <user>Avtor</user>
+      <description>Opis</description>
+    </header>
+    <create-version>Ustvarjena je nova različica</create-version>
+  </UIPublicationHistory>
+  
+  <UIPublicationSchedule>
+    <label>
+      <introduction>Objavo vašega dokumenta lahko načrtujete. Izberite datume, na katere želite, da bo vaš dokument objavljen</introduction>
+      <no-schedule-info>Ni urnika objave za vaš dokument</no-schedule-info>
+      <UIPublicationPanelStartDateInput>Datum začetka objave</UIPublicationPanelStartDateInput>
+      <UIPublicationPanelEndDateInput>Datum konca objave</UIPublicationPanelEndDateInput>
+    </label>
+    <msg>
+      <save-finished>Nov urnik objave je bil uspešno shranjen.</save-finished>
+    </msg>
+    <action>
+      <Save>#{word.save}</Save>
+      <Reset>Ponastavi</Reset>
+    </action>
+  </UIPublicationSchedule>
+
+  <UIPublicationPanel>
+    <label>
+      <header>Datum objave</header>
+      <start>Začni z objavo</start>
+      <end>Končaj objavo</end>
+    </label>
+    <msg>
+      <invalid-format>Oblika zapisa datuma ni veljavna. Prosimo, preverite znova.</invalid-format>
+      <fromDate-after-toDate>Začetni datum mora biti pred končnim datumom.</fromDate-after-toDate>
+    </msg>
+  </UIPublicationPanel>
+  <UIPopupWindow>
+    <title>
+      <UIPublicationContainer>Upravljanje objav</UIPublicationContainer>
+      <UIPublishingPanel>Upravljanje objave</UIPublishingPanel>
+    </title>
+  </UIPopupWindow>
+  <WCMContentView>
+    <header>
+      <status>Stanje</status>
+      <author>Avtor</author>
+      <date>Datum nastanka</date>
+      <title>Naslov dokumenta</title>
+      <lastUser>Nazadnje uporabil</lastUser>
+    </header>
+  </WCMContentView>
+  <UITagForm>
+    <msg>
+      <NameAlreadyExist>Ime oznake že obstaja.</NameAlreadyExist>
+    </msg>
+  </UITagForm>
+
+  <!--
+  ############  From WCM 2.1.0 ##############
+  -->
+  <UICategoryManagerSearch>
+    <tab>
+      <label>
+        <UIOneTaxonomySelector>Izberi kategorijo</UIOneTaxonomySelector>
+      </label>
+    </tab>
+  </UICategoryManagerSearch>
+
+  <UIPreferencesForm>
+   <action>
+     <HideAdvance>Pokaži manj</HideAdvance>
+     <ShowAdvance>Pokaži več</ShowAdvance>
+    </action>
+    <label>
+    <Advance>Več nastavitev</Advance>
+    </label>
+  </UIPreferencesForm>
+
+  <UIJCRExplorerPortlet>
+<msg>
+  <file-access-denied>Dostop do datoteke je zavrnjen.</file-access-denied>
+  <anonymous-access-denied>Anonimni uporabnik nima dovoljenja za uporabo te funkcije.</anonymous-access-denied>
+</msg>
+  </UIJCRExplorerPortlet>
+  <UIDrivesArea>
+    <DrivesArea>
+      <ShowDrives>Pokaži pogone</ShowDrives>
+    </DrivesArea>
+    <msg>
+      <no-view-found>Ni nastavljenih pogledov za vaše za dovoljenje za dostop v pogonu "{0}".</no-view-found>
+      <access-denied>Dostop zavrnjen. Morda nimate dovoljenja v delovnem prostoru pogona "{0}".</access-denied>
+      <empty-drives>Dostop zavrnjen. V skladišču bodisi ni nobenega pogona ali pa nimate dovoljenja za dostop do pogonov v skladišču.</empty-drives>
+      <workspace-not-exist>Pogon "{0}" je bil shranjen v neprepoznan delovni prostor. Prosimo popravite ta pogon.</workspace-not-exist>
+    </msg>
+  </UIDrivesArea>
+  <UIJcrExplorerEditForm>
+    <msg>
+      <fields-saved>Vse vrednosti polj so shranjene.</fields-saved>
+      <fields-cancelled>Vse vrednosti polj so preklicane.</fields-cancelled>
+    </msg>
+  </UIJcrExplorerEditForm>
+  <UIDocumentForm>
+  <msg>
+  <confirm-close>Če zaprete ta obrazec, boste izgubili spremembe.</confirm-close>
+  <confirm-changeType>Če spremenite vrsto vsebine, boste izgubili spremembe.</confirm-changeType>
+  <confirm-navigate>Če ste zapustiti to stran, boste izgubili spremembe.</confirm-navigate>
+  </msg>
+  </UIDocumentForm>
+  <UploadFileMimeTypesValidator>
+    <msg>
+      <wrong-mimetype>MIME vrsta {0} ni dovoljena za polje {1}. Prosimo, naložite drugo datoteko</wrong-mimetype>
+    </msg>
+  </UploadFileMimeTypesValidator>
+  <lifecyclePhase>
+    <label>
+    <no>Ne</no>
+  <yes>Da</yes>
+  <true>Pravilno</true>
+  <false>Napačno</false>
+  <Electronic>Elektronsko</Electronic>
+  <Paper>Papir</Paper>
+  <NONE>Noben</NONE>
+  <CLASSIFIED>Razvrščeno</CLASSIFIED>
+  <UNCLASSIFIED>Nerazvrščeno</UNCLASSIFIED>
+  <NOCONTRACT>Ni pogodbe</NOCONTRACT>
+  <one-minute>Ena minuta</one-minute>
+  <hourly>Vsako uro</hourly>
+  <daily>Dnevno</daily>
+  <quarterly>Četrtletno</quarterly>
+  <yearly>Letno</yearly>
+  <ten-years>Deset let</ten-years>
+  <read>Dejanje uporabnika</read>
+  <schedule>Razporejevalnik opravil</schedule>
+  <node_added>Dodajanje vsebine</node_added>
+  <node_removed>Odstranjevanje vsebine</node_removed>
+  <property_added>Dodajanje lastnosti</property_added>
+  <property_removed>Odstranjevanje lastnosti</property_removed>
+  <property_changed>Spreminjanje lastnosti</property_changed>
+</label>
+  </lifecyclePhase>
+  <UIPopupMenu>
+  <msg>
+<can-not-remove-locked-node>Vozlišče {0} je zaklenjeno, zato ga ne morete premakniti v smeti.</can-not-remove-locked-node>
+<can-not-remove-checked-in-node>Vozlišče {0} ali njegovo nadrejeno vozlišče je sproščeno. Ne morete ga premakniti v smetnjak.</can-not-remove-checked-in-node>
+<access-denied-to-delete>Dostop zavrnjen. Vozlišča {0} ni mogoče premakniti v smenjak.</access-denied-to-delete>
+  </msg>
+  </UIPopupMenu>
+  <UIPropertyForm>
+  <msg>
+  <unknown-error>Pri urejanju te lastnosti je prišlo do napake.</unknown-error>
+    </msg>
+  </UIPropertyForm>
+  <UIWatchDocumentForm>
+    <msg>
+      <node-is-locked>To vozlišče je zaklenjeno. Ne morete ga slediti.</node-is-locked>
+      <unknown-error>Prišlo je do nekaterih napak. Temu vozlišču ne morete slediti.</unknown-error>
+    </msg>
+  </UIWatchDocumentForm>   
+  <UIActionForm>
+    <msg>
+      <xss-vulnerability-character>Polje '{0}' vsebuje znake, ki povzročajo XSS ranljivost</xss-vulnerability-character>
+    </msg>
+  </UIActionForm>
+  <UIMultiUpload>
+  <label>
+    <AbortAll>Prekini vse</AbortAll>
+    <AbortAllFiles>Prekini vse datoteke</AbortAllFiles>
+    <MaxFileSize>Največja velikost datoteke je</MaxFileSize>
+    <InvalidCharacters>Neveljavni znaki bodo zamenjani z "-"</InvalidCharacters>
+    <DropFileMessage>Spustite datoteke tukaj v trenutno mapo</DropFileMessage>
+    <Close>#{word.close}</Close>
+    <in>v</in>
+    <MaxFileSizeAlert>Velikost datoteke presega omejitev velikosti</MaxFileSizeAlert>
+    <Waiting>Čakam</Waiting>
+    <Error>Napaka</Error>
+    <or>ali</or>
+    <AlreadyInUse>Že v uporabi</AlreadyInUse>
+    <Keep>Ohrani obe</Keep>
+    <Replace>Zamenjaj</Replace>
+    <Canceled>Preklicano</Canceled>
+      <UploadNewVersion>Naloži novo različico</UploadNewVersion>
+    <Cancel>#{word.cancel}</Cancel>
+    <AbortAllConfirmation>Ali želite prekiniti vse datoteke v teku?</AbortAllConfirmation>
+  </label>
+  </UIMultiUpload>
+  <UIDocumentNodeList>
+  <label>
+  <CreatedOn>Ustvarjeno dne</CreatedOn>
+  <Updated>Posodobljeno</Updated>
+  <by>od</by>
+  <you>Vi</you>
+  </label>
+  </UIDocumentNodeList>
+  <FileView>
+    <label>
+      <name>Ime</name>
+      <date>Datum</date>
+      <size>Velikost</size>
+      <sortBy>Razvrsti po:</sortBy>
+      <filesAreSelected>Izbrane so datoteke.</filesAreSelected>
+      <ClearSelection>Počisti izbiro</ClearSelection>
+      <more>Več</more>
+    </label>
+  </FileView>
+  <UIPropertyForm>
+  <msg>
+  <property-name-incorrect>Ime lastnosti ni pravilno, vnesite drugo vrednost!</property-name-incorrect>
+    </msg>
+  </UIPropertyForm>
+  <UIDocumentAutoVersionForm>
+    <msg>Dokument {0} že obstaja. Kaj želite narediti?</msg>
+    <UIChkRememberNonVersioned>
+      <label>Zapomni si mojo izbiro za vse ostale dokumente brez različic</label>
+    </UIChkRememberNonVersioned>
+    <UIChkRememberVersioned>
+      <label>Zapomni si mojo izbiro za vse ostale dokumente z različicami</label>
+    </UIChkRememberVersioned>
+  </UIDocumentAutoVersionForm>
+  <DocumentAuto>
+    <message>Nova različica dokumenta {0} je bila uspešno ustvarjena.</message>
+    <messageMultiFile>Ustvarjena je bila nova različica dokumenta.</messageMultiFile>
+  </DocumentAuto>
+  <!--
+  ###################################################################################
+  # JCR Exceptions manager                                                              #
+  ###################################################################################
+  -->
+  <VersionException>
+  <msg>Sproščenih dokumentov ni mogoče spreminjati.</msg>  
+  </VersionException>
+</bundle>

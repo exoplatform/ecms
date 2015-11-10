@@ -1,0 +1,2599 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<bundle>
+  <!--
+  ################################################################################
+  #             org.exoplatform.ecm.webui.component.admin.UIECMAdminControlPanel #
+  ################################################################################
+  -->
+  <UIECMAdminControlPanel>
+    <tab>
+      <label>
+        <Templates>Predloge</Templates>
+        <Explorer>Raziskovalec</Explorer>
+        <Repository>Skladišče</Repository>
+        <Advanced>Napredno</Advanced>
+      </label>
+    </tab>    
+    <label>     
+      <UITaxonomyManagerTrees>Kategorije</UITaxonomyManagerTrees>
+      <UIMetadataManager>Metapodatki</UIMetadataManager>
+      <UINamespaceManager>Imenski prostori</UINamespaceManager>
+      <UINodeTypeManager>Vrste vozlišč</UINodeTypeManager>
+      <UITemplatesManager>Dokumenti</UITemplatesManager>
+   <UICLVTemplatesManager>Seznam</UICLVTemplatesManager>
+      <UIViewManager>Ogledov</UIViewManager>
+      <UIDriveManager>Pogoni</UIDriveManager>
+      <UIQueriesManager>Poizvedbe</UIQueriesManager>
+      <UIActionManager>Dejanja</UIActionManager>
+      <UIScriptManager>Skripte</UIScriptManager>
+      <UIUnLockManager>Zaklenjeno</UIUnLockManager>
+      <UIFolksonomyManager>Oznake</UIFolksonomyManager>      
+    </label>
+    <msg>
+      <access-denied>Dostop zavrnjen. Nimate dovoljenja za to dejanje.</access-denied>
+    </msg>
+  </UIECMAdminControlPanel>
+  <!--
+  ################################################################################
+  #             org.exoplatform.ecm.webui.component.admin.UITaxonomy #
+  ################################################################################
+  -->
+  <UITaxonomyWorkingArea>
+    <msg>
+      <referential-integrity>Ni možno prebrati izvorne datoteke, ali pa je ciljna kategorija podkategorija.</referential-integrity>
+      <no-taxonomy-selected>Kopirati ali izrezati morate vsaj eno kategorijo.</no-taxonomy-selected>
+      <node-is-cutting>Ne moreš prilepiti (paste) tukaj. Vozlišče kategorije "{0}" je morda izrezano (cut).</node-is-cutting>
+      <can-not-paste>V odložišču ni nobenega podatka, ki bi ga lahko prilepil.</can-not-paste>
+      <reference-exception>Te kategorije ni mogoče zbrisati, ker se nanjo sklicuje vsebina.</reference-exception>
+      <path-error>Pri odstranjevanju vozlišča kategorije je prišlo do napake.</path-error>
+    </msg>
+  </UITaxonomyWorkingArea>
+  <UITaxonomyManager>
+    <msg>
+      <confirm-delete>Si prepričan, da želiš zbrisati to kategorijo?</confirm-delete>
+    </msg>
+    <title>
+      <add>Dodaj</add>
+      <paste>Prilepi</paste>
+      <cut>Izreži</cut>
+      <copy>Kopiraj</copy>
+      <remove>Zbriši</remove>
+    </title>
+  </UITaxonomyManager>
+  
+  <!--
+  ################################################################################
+  #    org.exoplatform.ecm.webui.component.admin.taxonomy.UITaxonomyTreeContainer#
+  ################################################################################
+  -->
+  <UITaxonomyTreeContainer>
+    <tab>
+      <info>
+        <UITaxonomyTreeMainForm>Navedi ime kategorije, delovni prostor in pot do domače strani.</UITaxonomyTreeMainForm>
+        <UIPermissionTreeManager>Nastavi dovoljenja za drevesno strukturo kategorije.</UIPermissionTreeManager>
+        <UIActionTaxonomyManager>Dodajte Dejanje drevesni strukturi kategorije, da bi zaključili izdelavo ali posodobitev.</UIActionTaxonomyManager>
+        <UITaxonomyTreeCreateChild>Urejanje derevesa taksonomije z dodajanjem, kopiranjem, izrezovanjem in izbiranjem dovoljenj.</UITaxonomyTreeCreateChild>
+      </info>
+    </tab>
+    <msg>
+      <not-exist-tree>Drevesna struktura kategorije ne obstaja.</not-exist-tree>
+    </msg>
+  </UITaxonomyTreeContainer>
+  
+  <!--
+##########################################################################################
+#     org.exoplatform.ecm.webui.component.admin.taxonomy.UITaxonomyTreeMainForm          #
+##########################################################################################
+-->
+  <UITaxonomyTreeMainForm>
+    <action>
+      <Reset>Ponastavi</Reset>
+    </action>
+    <msg>
+      <name-not-allowed>Prepovedano ime</name-not-allowed>
+      <name-emty>Ime drevesa je obvezno.</name-emty>
+      <homePath-emty>Pot do domače strani je obveza.</homePath-emty>
+      <targetPath-emty>Ciljna pot je obvezna.</targetPath-emty>
+      <taxonomytree-existed>Ime drevesne strukture kategorije že obstaja.</taxonomytree-existed>
+    </msg>
+  </UITaxonomyTreeMainForm>
+
+  <TaxonomyTreeMainForm>
+    <label>
+      <TaxoTreeName>Ime</TaxoTreeName>
+      <TaxoTreeWorkspace>Delovni prostor</TaxoTreeWorkspace>
+      <TaxoTreeHomePath>Pot domov</TaxoTreeHomePath>
+    </label>
+  </TaxonomyTreeMainForm>
+
+  <TaxonomyTreeHomePath>
+    <title>
+      <AddPath>Dodaj pot</AddPath>
+    </title>
+  </TaxonomyTreeHomePath>
+  
+  <!--
+##########################################################################################
+#     org.exoplatform.ecm.webui.component.admin.taxonomy.tree.info.UIPermissionTreeInfo  #
+##########################################################################################
+-->
+<UIPermissionTreeInfo>
+<action>
+<title>
+<Delete>Izbriši</Delete>
+<Edit>Uredi</Edit>
+</title>
+</action>
+<header>
+<usersOrGroups>Uporabnik ali skupina</usersOrGroups>
+<read>Preberi</read>
+<addNode>Dodaj vozlišče</addNode>
+<setProperty>Nastavi lastnost</setProperty>
+<remove>Odstrani</remove>
+<action>Dejanje</action>
+</header>
+</UIPermissionTreeInfo>
+
+<!--
+##########################################################################################
+#     org.exoplatform.ecm.webui.component.admin.taxonomy.tree.info.UIPermissionTreeForm  #
+##########################################################################################
+-->
+  <UIPermissionTreeForm>
+    <msg>
+      <have-not-any-permission>Določite vsaj eno dovoljenje za to vozlišče.</have-not-any-permission>
+    </msg>
+  </UIPermissionTreeForm>
+
+<!--
+################################################################################
+#     org.exoplatform.ecm.webui.component.admin.taxonomy.UIActionForm          #
+################################################################################
+-->
+
+  <UIActionForm>
+    <title>Dodajte dejanje drevesni strukturi kategorije</title>
+    <action>
+      <Save>#{word.save}</Save>
+    </action>
+    <msg>
+      <name-not-allowed>Prazno ime ali posebni znaki niso dovoljeni v imenu dejanja.</name-not-allowed>
+      <path-invalid>Pot je neveljavna.</path-invalid>
+      <taxonomy-existed>Drevesna struktura kategorije že obstaja.</taxonomy-existed>
+      <taxonomy-node-existed>Drevesna struktura kategorije že obstaja.</taxonomy-node-existed>
+      <no-permission-add>Nimate dovoljenja za dodajanje dejanj.</no-permission-add>
+      <not-created-tree>Drevesna struktura kategorije še ni bila ustvarjena.</not-created-tree>
+    </msg>
+  </UIActionForm>
+
+  <!--
+  ################################################################################
+  #             org.exoplatform.ecm.webui.component.admin.UITemplatesManager #
+  ################################################################################
+  -->
+  <UITemplatesList>
+    <header>
+      <name>Ime predloge</name>
+      <action>Dejanja</action>
+    </header>
+  </UITemplatesList>
+  <!--
+  ################################################################################
+  #             org.exoplatform.ecm.webui.component.admin.UINamespaceForm  #
+  ################################################################################
+  -->
+  <NameSpacePopup>
+    <title>
+      <UINamespaceForm>Obrazec Imenskega prostora</UINamespaceForm>
+    </title>
+  </NameSpacePopup>
+  <UINamespaceForm>
+    <title>Registriraj novi Imenski prostor</title>
+    <label>
+      <namespace>Predpona Imenskega prostora</namespace>
+      <uri>URI</uri>
+    </label>
+    <action>
+      <Save>#{word.save}</Save>
+      <Cancel>#{word.cancel}</Cancel>
+    </action>
+    <msg>
+      <register-unsuccessfull>Imenski prostor ali URI že obstaja.</register-unsuccessfull>
+      <prefix-null>Navedite predpono za imenski prostor.</prefix-null>
+      <uri-null>Navedite URI za imenski prostor.</uri-null>
+    </msg>
+  </UINamespaceForm>
+  <!--
+  ################################################################################
+  #      org.exoplatform.ecm.webui.component.admin.namespace.UINamespaceList #
+  ################################################################################
+  -->
+  <UINamespaceList>
+    <header>
+      <prefix>Predpona</prefix>
+      <uri>URI Imenskega prostora</uri>
+      <action>Dejanje</action>
+    </header>
+    <action>
+      <AddNamespace>Registriraj</AddNamespace>
+    </action>
+  </UINamespaceList>
+  <NamespacePopup>
+    <title>
+      <UINamespaceForm>Registriraj nov Imenski prostor</UINamespaceForm>
+    </title>
+  </NamespacePopup>
+  <!--
+  ################################################################################
+  #             org.exoplatform.ecm.webui.component.admin.UIMetadataList #
+  ################################################################################
+  -->
+  <UIMetadataList>
+    <label>
+      <false>nepravilno</false>
+      <true>pravilno</true>
+      <True>pravilno</True>
+      <False>nepravilno</False>
+    </label>
+    <title>
+      <view>Pogled</view>
+      <edit>Uredi</edit>
+      <delete>Izbriši</delete>
+    </title>
+    <header>
+      <icon>Ikona</icon>
+      <name>Metapodatki</name>
+      <type>Vrsta</type>
+      <internalUse>Interna uporaba</internalUse>
+      <action>Dejanja</action>
+    </header>
+    <msg>
+      <confirm-delete>Ali ste prepričani, da želite izbrisati ta metapodatek?</confirm-delete>
+      <delete-successful>Predloge od '{0}' so bile uspešno izbrisane.</delete-successful>
+      <path-not-found-exception>Ta metapodatek je izbrisan ali spremenjen. Kliknite gumb Osveži.</path-not-found-exception>
+    </msg>
+    <action>
+      <Add>Dodajanje metapodatkov</Add>
+      <Cancel>#{word.cancel}</Cancel>
+    </action>
+  </UIMetadataList>
+  <MetadataPopupAddNew>
+    <title>
+      <UIMetadataForm>Dodaj novo predlogo metapodatkov</UIMetadataForm>
+    </title>
+  </MetadataPopupAddNew>
+  <MetadataPopupEdit>
+    <title>
+      <UIMetadataForm>Urejanje predloge metapodatkov</UIMetadataForm>
+    </title>
+  </MetadataPopupEdit>
+  <MetataPermissionPopup>
+    <title>
+      <MetadataPermission>Nastavi dovoljenja</MetadataPermission>
+      <QueriesPermissionBrowse>Dodaj dovoljenje</QueriesPermissionBrowse>
+    </title>
+  </MetataPermissionPopup>
+  <!--
+  ################################################################################
+  #    org.exoplatform.ecm.webui.component.admin.metadata.UIMetadataForm #
+  ################################################################################
+  -->
+  <UIMetadataForm>
+    <title>Mapiranje metapodatkov</title>
+    <action>
+      <Cancel>#{word.cancel}</Cancel>
+      <Save>Uveljavi</Save>
+    </action>
+    <header>
+      <icon>Ikona</icon>
+      <label>Ime vozlišča</label>
+      <input>Dejanje</input>
+    </header>
+    <label>
+      <dialogTemplate>Predloga pogovornega okna:</dialogTemplate>
+      <viewTemplate>Predloga prikaza:</viewTemplate>
+      <metadataName>Ime metapodatka:</metadataName>
+      <viewPermission>Dovoljenje:</viewPermission>
+      <permission>UIMetadataForm</permission>
+      <metadataLabel>Oznaka:</metadataLabel>
+    </label>
+    <tab>
+      <label>
+        <metadataTypeTab>Vrsta metapodatka</metadataTypeTab>
+        <dialogTab>Predloga pogovornega okna</dialogTab>
+        <viewTab>Predloga prikaza</viewTab>
+      </label>
+    </tab>
+  </UIMetadataForm>
+  <!--
+  ################################################################################
+  #    org.exoplatform.ecm.webui.component.admin.metadata.UIMetadataView #
+  ################################################################################
+  -->
+  <UIMetadataView>
+    <header>
+      <name>Ime elementa</name>
+      <type>Vrsta</type>
+      <description>Opis</description>
+      <isMixin>Je vrste Mixin</isMixin>
+      <orderable>Razvrščajoči podrejen element</orderable>
+    </header>
+    <info>
+      <description>Opis</description>
+    </info>
+    <tab>
+      <element>Elementi</element>
+      <metadataView>Informacije Metapodatkov</metadataView>
+    </tab>
+    <action>
+      <Cancel>#{word.close}</Cancel>
+      <Back>#{word.back}</Back>
+    </action>
+  </UIMetadataView>
+  <ViewMetadataPopup>
+    <title>
+      <UIMetadataView>Informacije Metapodatkov</UIMetadataView>
+    </title>
+  </ViewMetadataPopup>
+  <!--
+  ################################################################################
+  #             org.exoplatform.ecm.webui.component.admin.UIDriveManager #
+  ################################################################################
+  -->
+  <UIDriveList>
+    <header>
+      <icon>Ikona</icon>
+      <name>Ime</name>
+      <workspace>Delovni prostor</workspace>
+      <homePath>Pot domov</homePath>
+      <permissions>Dovoljenja</permissions>
+      <views>Pogled</views>
+      <action>Dejanje</action>
+    </header>
+    <tooltip>
+      <Delete>Izbriši</Delete>
+      <EditInfo>Uredi</EditInfo>
+    </tooltip>
+    <msg>
+      <confirm-delete>Ali ste prepričani, da želite izbrisati ta pogon?</confirm-delete>
+    </msg>
+    <action>
+      <AddDrive>Dodaj pogon</AddDrive>
+    </action>
+    <label>
+      <permission>{0} v {1}</permission>
+    </label>
+  </UIDriveList>
+  <UIDriveForm>
+    <action>
+      <Cancel>#{word.cancel}</Cancel>
+      <Save>#{word.save}</Save>
+      <Back>#{word.back}</Back>
+      <Refresh>#{word.refresh}</Refresh>
+    </action>
+    <msg>
+      <drive-exists>Pogon že obstaja.</drive-exists>
+      <workspace-path-invalid>Pot do Delovnega prostora je neveljavna.</workspace-path-invalid>
+      <drive-views-invalid>Izberi pogled.</drive-views-invalid>
+      <icon-not-found>Ikone ni mogoče najti.</icon-not-found>
+      <permission-null>Nastaviti morate dovoljenja za ta pogon.</permission-null>
+      <allowCreateFolders>Izbrati morate vrsto Mape.</allowCreateFolders>
+      <name-null>Vnesite ime pogona.</name-null>
+      <fileName-invalid>Ime pogona vsebuje nedovoljene znake.</fileName-invalid>
+    </msg>
+    <tab>
+      <label>
+        <DriveInputSet>Pogon</DriveInputSet>
+        <ViewsInputSet>Uporabi poglede</ViewsInputSet>
+        <PermissionInputSet>Nastavi dovoljenja</PermissionInputSet>
+      </label>
+    </tab>
+    <label>
+      <name>Ime:</name>
+      <workspace>Delovni prostor:</workspace>
+      <homePath>Pot domov:</homePath>
+      <icon>Ikona delovnega prostora:</icon>
+      <viewPreferences>Prikaži sklicevane dokumente:</viewPreferences>
+      <viewNonDocument>Prikaži vozlišča brez dokumentov:</viewNonDocument>
+      <viewSideBar>Prikaži stransko vrstico:</viewSideBar>
+      <permissions>Dovoljenja:</permissions>
+      <showHiddenNode>Prikaži skrita vozlišča:</showHiddenNode>
+      <allowCreateFolders>Omogoči ustvarjanje mape:</allowCreateFolders>
+      <Admin>Admin:</Admin>
+      <Categories>Kategorije:</Categories>
+      <Icons>Ikone:</Icons>
+      <List>Seznam:</List>
+      <Web>Splet:</Web>
+    </label>
+  </UIDriveForm>
+  <AddDriveManagerPopup>
+    <title>
+      <UIDriveForm>Dodaj pogon</UIDriveForm>
+    </title>
+  </AddDriveManagerPopup>
+  <EditDriveManagerPopup>
+    <title>
+      <UIDriveForm>Uredi pogon</UIDriveForm>
+    </title>
+  </EditDriveManagerPopup>
+  <UITreeList>
+    <info>
+      <child-not-found>Podrejenega vozlišča ni mogoče najti.</child-not-found>
+    </info>
+    <header>
+      <name>Ime</name>
+      <action>Dejanje</action>
+    </header>
+  </UITreeList>
+  
+  <UIRepositoryList>
+    <titlebar>
+      <label>Upravljanje glavnih funkcij ECM</label>
+    </titlebar>
+  </UIRepositoryList>
+  
+  <!--
+  ################################################################################
+  #    org.exoplatform.ecm.webui.component.admin.nodetype.UINodeTypeManager #
+  ################################################################################
+  -->
+  <UINodeTypeManager>
+    <header>
+      <icon>Ikona</icon>
+      <label>Ime vozlišča</label>
+      <input>Dejanje</input>
+    </header>
+    <action>
+      <Save>#{word.save}</Save>
+    </action>
+  </UINodeTypeManager>
+  <!--
+  ################################################################################
+  #    org.exoplatform.ecm.webui.component.admin.nodetype.UINodeTypeList #
+  ################################################################################
+  -->
+  <UINodeTypeList>
+    <label>
+      <true>Pravilno</true>
+      <false>Napačno</false>
+    </label>
+    <header>
+      <icon>Ikona</icon>
+      <nodeType>Vrsta vozlišča</nodeType>
+      <mixinType>Vrsta Mixin</mixinType>
+      <orderable>Razvrščajoča podrejena vozlišča</orderable>
+      <action>Dejanje</action>
+    </header>
+    <action>
+      <Export>Izvozi</Export>
+      <Import>Uvozi</Import>
+      <Add>Dodaj</Add>
+    </action>
+    <tooltip>
+      <View>Pogled</View>
+      <Edit>Uredi</Edit>
+      <Delete>Izbriši</Delete>
+    </tooltip>
+    <msg>
+      <confirm-delete>Ali ste prepričani, da želite izbrisati to vrsta vozlišča?</confirm-delete>
+    </msg>
+  </UINodeTypeList>
+  <!--
+  ################################################################################
+  #    org.exoplatform.ecm.webui.component.admin.nodetype.UINodeTypeOptionList #
+  ################################################################################
+  -->
+  <UINodeTypeOptionList>
+    <action>
+      <Save>#{word.save}</Save>
+      <Add>Dodaj</Add>
+    </action>
+    <header>
+      <icon>Ikona</icon>
+      <label>Ime vozlišča</label>
+      <input>Dejanje</input>
+    </header>
+  </UINodeTypeOptionList>
+  <!--
+  ################################################################################
+  #    org.exoplatform.ecm.webui.component.admin.nodetype.UINodeTypeForm #
+  ################################################################################
+  -->
+  <UINodeTypeForm>
+    <tab>
+      <label>
+        <nodeTypeDefinition>Vrsta vozlišča</nodeTypeDefinition>
+        <propertyDefinition>Lastnost</propertyDefinition>
+        <childNodeDefinition>Podrejeno vozlišče</childNodeDefinition>
+        <superTypeTab>Super vrste</superTypeTab>
+        <DefaultTypeTab>Privzeti primarni</DefaultTypeTab>
+        <RequiredTypeTab>Obvezni primarni</RequiredTypeTab>
+        <Contraints>Omejitve</Contraints>
+      </label>
+    </tab>
+    <label>
+      <propertiesDefinitions>Definicije lastnosti</propertiesDefinitions>
+      <childDefinitions>Definicije podrejenega vozlišča</childDefinitions>
+      <namespace>Imenski prostor</namespace>
+      <propertyNamespace>Imenski prostor</propertyNamespace>
+      <nodeTypeName>Ime vrste vozlišče</nodeTypeName>
+      <mixinType>Je vrste Mixin</mixinType>
+      <hasOrderableChildNodes>Razvrščajoča podrejena vozlišča</hasOrderableChildNodes>
+      <primaryItemName>Ime primarnega elementa</primaryItemName>
+      <superTypes>Super vrste</superTypes>
+      <propertyname>Ime definicije</propertyname>
+      <requiredType>Zahtevana vrsta</requiredType>
+      <multiple>je Večkratno</multiple>
+      <mandatory>je Obvezno</mandatory>
+      <autoCreated>je Samodejno ustvarjeno</autoCreated>
+      <parentversion>Na nadrejeni različici</parentversion>
+      <protected>je Zaščiten</protected>
+      <constraints>Vrednosti</constraints>
+      <UIFormTableInputSet>UIFormTableInputSet</UIFormTableInputSet>
+      <sameNameSiblings>Ime se podvaja</sameNameSiblings>
+      <childNamespace>Imenski prostor</childNamespace>
+      <childMandatory>je Obvezno</childMandatory>
+      <childAutocreated>je Samodejno ustvarjeno</childAutocreated>
+      <childParentversion>Na nadrejeni različici</childParentversion>
+      <childProtected>je Zaščiten</childProtected>
+      <childNodename>Ime definicije</childNodename>
+      <requiredPrimaryType>Obvezna Primarna vrsta</requiredPrimaryType>
+      <defaultPrimaryType>Privzeta Primarna vrsta</defaultPrimaryType>
+      <valueconstraints>Omejitve vrednosti</valueconstraints>
+    </label>
+    <action>
+      <Cancel>#{word.cancel}</Cancel>
+      <Save>#{word.save}</Save>
+      <SaveDraft>Shrani kot osnutek</SaveDraft>
+      <AddProperty>Dodaj lastnost</AddProperty>
+      <AddChild>Dodaj podrejeni element</AddChild>
+      <AddConstraints>Dodaj omejitve</AddConstraints>
+      <Back>#{word.back}</Back>
+      <AddType>Dodaj vrsto</AddType>
+      <AddValue>Dodaj</AddValue>
+      <CancelConstraints>#{word.cancel}</CancelConstraints>
+      <CancelTab>#{word.cancel}</CancelTab>
+      <UpdateChild>#{word.update}</UpdateChild>
+      <CancelChild>#{word.cancel}</CancelChild>
+      <UpdateProperty>#{word.update}</UpdateProperty>
+      <CancelProperty>#{word.cancel}</CancelProperty>
+      <Close>#{word.close}</Close>
+    </action>
+    <msg>
+      <register-successfully>Vrsta vozlišča {0} je bila uspešno registrirana.</register-successfully>
+      <supertype-is-madatory>Pri registraciji nove vrste vozlišča je super vrsta obvezna. Izberite vsaj eno super vrsto.</supertype-is-madatory>
+      <register-failed>Registracija vrste vozlišča je bila neuspešna. Mogoče že obstaja ali pa je super vrsta neveljavna.</register-failed>
+      <nodeType-name>Ime vrste vozlišča je obvezno.</nodeType-name>
+      <fileName-invalid>Ime datoteke vsebuje nedovoljene znake.</fileName-invalid>
+      <node-type-exists>Vrsta vozlišča '{0}' že obstaja.</node-type-exists>
+      <node-type-name>Ime vrste vozlišča je neveljavno.</node-type-name>
+      <values-error>Izberite le eno vrsto vozlišča za privzeto primarno vrsto.</values-error>
+      <confirm-delete-child>Ali ste prepričani, da želite izbrisati to podrejeno vozlišče?</confirm-delete-child>
+      <confirm-delete-property>Ali ste prepričani, da želite izbrisati to lastnost?</confirm-delete-property>
+    </msg>
+  </UINodeTypeForm>
+  <UIPropertyDefinitionForm>
+    <tab>
+      <label>
+        <constraints>Omejitve</constraints>
+        <UIFormMultiValueInputSet>Omejitve</UIFormMultiValueInputSet>
+      </label>
+    </tab>
+    <msg>
+      <property-name>Ime definicije lastnosti je bilo neveljavno.</property-name>
+      <not-supported-value-constraints>Ta obvezen tip ne podpira omejitve vrednosti.</not-supported-value-constraints>
+    </msg>
+  </UIPropertyDefinitionForm>
+  <UIChildNodeDefinitionForm>
+    <msg>
+      <child-name>Ime podrejenega vozlišča je obvezno.</child-name>
+      <child-invalid>Ime podrejenega vozlišča vsebuje nedovoljene znake.</child-invalid>
+      <default-node-type-not-found>Privzeta vrsta vozlišča ni najdena.</default-node-type-not-found>
+      <requiredPrimaryType>Obvezna primarna vrsta je obvezna.</requiredPrimaryType>
+      <defaultPrimaryType>Privzeta primarna vrsta je obvezna.</defaultPrimaryType>
+    </msg>
+  </UIChildNodeDefinitionForm>
+  <defaultPrimaryTypePopup>
+    <title>
+      <FormdefaultPrimaryTypePopup>Izberite privzeto primarno vrsto</FormdefaultPrimaryTypePopup>
+    </title>
+  </defaultPrimaryTypePopup>
+  <requiredPrimaryTypePopup>
+    <title>
+      <FormrequiredPrimaryTypePopup>Izberite obvezno primarno vrsto</FormrequiredPrimaryTypePopup>
+    </title>
+  </requiredPrimaryTypePopup>
+  <superTypesPopup>
+    <title>
+      <FormsuperTypesPopup>Izberi super vrste</FormsuperTypesPopup>
+    </title>
+  </superTypesPopup>
+  <NodeTypePopup>
+    <title>
+      <UINodeTypeForm>Dodaj/Uredi definicijo Vrste vozlišča</UINodeTypeForm>
+    </title>
+  </NodeTypePopup>
+  <ViewNodeTypePopup>
+    <title>
+      <UINodeTypeForm>Ogled informacij o Vrsti vozlišča</UINodeTypeForm>
+    </title>
+  </ViewNodeTypePopup>
+  <!--
+  ################################################################################
+  #    org.exoplatform.ecm.webui.component.admin.nodetype.UINodeTypeExport   #
+  ################################################################################
+  -->
+  <UINodeTypeExport>
+    <header>
+      <icon>Ikona</icon>
+      <label>Ime vozlišča</label>
+      <input>Dejanje</input>
+    </header>
+    <action>
+      <Cancel>#{word.cancel}</Cancel>
+      <Export>Izvozi</Export>
+      <UncheckAll>Odznači vse</UncheckAll>
+      <CheckAll>Označi vse</CheckAll>
+    </action>
+    <title>Izvozi vrste vozlišča</title>
+    <msg>
+      <item-null>Izberite vsaj eno vozlišče, ki ga želite izvoziti.</item-null>
+    </msg>
+  </UINodeTypeExport>
+  <NodeTypeExportPopup>
+    <title>
+      <UINodeTypeExport>Izvozi vrste vozlišča</UINodeTypeExport>
+    </title>
+  </NodeTypeExportPopup>
+  <!--
+  ################################################################################
+  #    org.exoplatform.ecm.webui.component.admin.nodetype.UINodeTypeOptionList   #
+  ################################################################################
+  -->
+  <!--
+  ################################################################################
+  #    org.exoplatform.ecm.webui.component.admin.nodetype.UINodeTypeUpload   #
+  ################################################################################
+  -->
+  <UINodeTypeUpload>
+    <label>
+      <upload>Ime datoteke</upload>
+    </label>
+    <action>
+      <Cancel>#{word.cancel}</Cancel>
+      <Upload>Prenesi</Upload>
+    </action>
+    <title>Uvozi vrsto vozlišča iz XML datoteke</title>
+    <msg>
+      <filename-error>Prebrskajte za datoteko, ki jo želite uvoziti.</filename-error>
+      <data-file-error>Samo .xml ali .zip datoteke je možno uvoziti.</data-file-error>
+      <data-invalid>Podatki so neveljavni. Preverite vrsto datoteke in poskusite znova.</data-invalid>
+      <nodetype-exist>Vrsta vozlišča '{0}' že obstaja.</nodetype-exist>
+      <namespace-invalid>Imenski prostor '{0}' ni veljaven.</namespace-invalid>
+    </msg>
+  </UINodeTypeUpload>
+  <!--
+  ################################################################################
+  #    org.exoplatform.ecm.webui.component.admin.nodetype.UINodeTypeImport   #
+  ################################################################################
+  -->
+  <UINodeTypeImport>
+    <action>
+      <Cancel>#{word.cancel}</Cancel>
+      <Import>Uvozi</Import>
+      <Upload>Ponovno prenesi</Upload>
+    </action>
+    <header>
+      <icon>Ikona</icon>
+      <label>Ime vozlišča</label>
+      <input>Dejanje</input>
+    </header>
+    <title>Izberi Uvoz vrste vozlišča</title>
+    <msg>
+      <no-nodetype-registered>Ni registriranih vrst vozlišč.</no-nodetype-registered>
+      <nodetype-registered>Registracija uspešna.</nodetype-registered>
+    </msg>
+  </UINodeTypeImport>
+  <NodeTypeImportPopup>
+    <title>
+      <UINodeTypeImportPopup>Uvozi vrsto vozlišča iz XML datoteke</UINodeTypeImportPopup>
+    </title>
+  </NodeTypeImportPopup>
+  <!--
+  ################################################################################
+  #             org.exoplatform.ecm.webui.component.admin.UIDriveForm #
+  ################################################################################
+  -->
+  <DriveInputSet>
+    <label>
+      <both>Oboje</both>
+      <folderOnly>Mapa</folderOnly>
+      <unstructuredFolder>Nestrukturirana mapa</unstructuredFolder>
+    </label>
+    <title>
+      <AddPermission>Dodaj dovoljenje</AddPermission>
+      <RemovePermission>Odstrani dovoljenje</RemovePermission>
+      <AddIcon>Dodaj ikono</AddIcon>
+      <AddPath>Dodaj pot</AddPath>
+    </title>
+  </DriveInputSet>
+  <!--
+  ###################################################################################
+  #             org.exoplatform.ecm.webui.component.admin.action.UIActionTypeList#
+  ###################################################################################
+  -->
+  <UIActionTypeList>
+    <header>
+      <name>Skripta</name>
+      <label>Ime</label>
+      <action>Dejanja</action>
+    </header>
+    <title>
+      <Edit>Uredi</Edit>
+      <Delete>Izbriši</Delete>
+    </title>
+    <action>
+      <AddAction>Dodaj vrsto dejanja</AddAction>
+    </action>
+<msg>
+ <confirm-delete>Ali ste prepričani, da želite izbrisati to vrsto dejanja?</confirm-delete>
+<cannot-delete>Vrste dejanja ni mogoče izbrisati, ker jo sistem še vedno uporablja.</cannot-delete>
+</msg>
+  </UIActionTypeList>
+  <!--
+  ######################################################################################
+  #             org.exoplatform.ecm.webui.component.admin.action.UIActionTypeForm #
+  ######################################################################################
+  -->
+  <ActionPopup>
+    <title>
+      <UIActionTypeForm>Dodaj vrsto dejanja</UIActionTypeForm>
+    </title>
+  </ActionPopup>
+  <UIActionTypeForm>
+    <title>Dodaj vrsto dejanja</title>
+    <label>
+      <actionType>Razširi vrsto dejanja:</actionType>
+      <name>Ime:</name>
+      <isMove>je Dejanje Premakni:</isMove>
+      <variables>Spremenljivke:</variables>
+      <exo_businessProcessAction>Poslovni procesi:</exo_businessProcessAction>
+      <exo_scriptAction>Groovy skripte:</exo_scriptAction>
+      <exo_ruleAction>Določena pravila:</exo_ruleAction>
+      <script>Skripta:</script>
+    </label>
+    <action>
+      <Save>#{word.save}</Save>
+      <Cancel>#{word.cancel}</Cancel>
+    </action>
+    <msg>
+      <action-type-added>Vrsta dejanja '{0}' je bila uspešno dodana.</action-type-added>
+      <action-type-create-error>Pri ustvarjanju vrste dejanja je prišlo do napake.</action-type-create-error>
+      <action-name-invalid>'{0}' ni veljavno. Ime se mora začeti z 'exo:'.</action-name-invalid>
+      <action-exist>To dejanje že obstaja v sistemu ECM.</action-exist>
+      <fileName-invalid>Ime dejanja vsebuje nekaj neveljavnih znakov.</fileName-invalid>
+    </msg>
+  </UIActionTypeForm>
+  <!--
+  ######################################################################################
+  #             org.exoplatform.ecm.webui.component.admin.view.UIViewManager     #
+  ######################################################################################
+  -->
+  <UITabPane>
+    <title>
+      <UIViewContainer>Pogledi</UIViewContainer>
+      <ECMTemplate>Raziskovalec predlog</ECMTemplate>
+      <UIScriptForm>Skripte</UIScriptForm>
+      <UIDialogTab>Pogovorno okno</UIDialogTab>
+      <UIViewTab>Pogled</UIViewTab>
+      <UITemplateEditForm>Predloga</UITemplateEditForm>
+      <UITemplateForm>Predloga</UITemplateForm>
+      <UITemplateContainer>Dokumenti</UITemplateContainer>
+      <UIActionsTemplateContainer>Dejanja</UIActionsTemplateContainer>
+      <UIOthersTemplateContainer>Ostalo</UIOthersTemplateContainer>
+  <UIActionScriptContainer>Dejanje</UIActionScriptContainer>
+  <UIWidgetScriptContainer>Pripomočki</UIWidgetScriptContainer>
+<UIInterceptorScriptContainer>Prestrezniki</UIInterceptorScriptContainer>
+
+<nodeTypeDefinition>Vrsta vozlišča</nodeTypeDefinition>
+      <propertyDefinition>Lastnost</propertyDefinition>
+      <childNodeDefinition>Podrejeno vozlišče</childNodeDefinition>
+      <SuperTypeTab>Super vrste</SuperTypeTab>
+      <DefaultTypeTab>Privzeti primarni</DefaultTypeTab>
+      <RequiredTypeTab>Obvezni primarni</RequiredTypeTab>
+      <Contraints>Omejitve</Contraints>
+    </title>
+  </UITabPane>
+  <!--
+  ######################################################################################
+  #             org.exoplatform.ecm.webui.component.admin.view.UIViewList    #
+  ######################################################################################
+  -->
+  <UIViewList>
+   <title>
+     <View>Pogled</View>
+     <EditInfo>Uredi</EditInfo>
+     <Delete>Izbriši</Delete>
+   </title>
+    <header>
+      <name>Ime</name>
+      <permissions>Dovoljenja</permissions>
+      <tabList>Zavihek z dejanji</tabList>
+      <baseVersion>Osnovna različica</baseVersion>
+      <action>Dejanje</action>
+    </header>
+    <action>
+      <AddView>Dodaj pogled</AddView>
+    </action>
+    <msg>
+      <access-denied>Dostop zavrnjen. Nimate dovoljenja za uporabo te funkcije.</access-denied>
+      <template-in-use>{0} ni mogoče zbrisati. Ta je trenutno v uporabi.</template-in-use>
+      <confirm-delete>Ali ste prepričani, da želite izbrisati ta pogled?</confirm-delete>
+    </msg>
+  </UIViewList>
+  <ViewPopup>
+    <title>
+      <UIViewFormTabPane>Pogled</UIViewFormTabPane>
+    </title>
+  </ViewPopup>
+  <AddPopup>
+    <title>
+      <UIViewFormTabPane>Dodajanje pogleda</UIViewFormTabPane>
+      <AddPopup>Dodajanje predloge</AddPopup>
+    </title>
+  </AddPopup>
+  <EditPopup>
+    <title>
+      <UIViewFormTabPane>Urejanje Pogleda</UIViewFormTabPane>
+    </title>
+  </EditPopup>
+
+<UITabList>
+                  <title>
+                    <Edit>Uredi</Edit>
+                    <Delete>Izbriši</Delete>
+                  </title>       
+ <header>
+  <tabName>Zavihek</tabName>
+  <localizeButtons>Opis</localizeButtons>
+<action>Dejanja</action>
+</header>
+<action>
+ <AddTab>Dodaj</AddTab>
+</action>
+<msg>
+ <confirm-delete>Ali ste prepričani, da želite izbrisati ta zavihek?</confirm-delete>
+</msg>
+<grid>
+ <msg>
+  <empty>Na tem pogledu ni zavihka</empty>
+ </msg>
+</grid>
+</UITabList>
+
+<UIViewPermissionList>
+ <title>Izberite lastnika, ki ima dovoljenja za ta pogled:</title>
+<label>
+ <permission>{0} v {1}</permission>
+</label>
+<msg>
+ <confirm-delete>Ali ste prepričani, da želite izbrisati to dovoljenje?</confirm-delete>
+  <permission-cannot-empty>Dovoljenje za pogled je obvezno in ne more biti prazno.</permission-cannot-empty>
+</msg>
+</UIViewPermissionList>
+
+<UIViewPermissionList>
+                         <title>
+                           <Delete>Izbriši</Delete>
+                         </title>
+ <header>
+<friendlyPermission>Dovoljenja</friendlyPermission>
+     <action>Dejanje</action>
+ </header>
+<action>
+ <title>
+  <Delete>Izbriši</Delete>
+ </title>
+</action>
+<grid>
+ <msg>
+  <empty>Ni dovoljenja za ta pogled</empty>
+ </msg>
+</grid>
+</UIViewPermissionList>
+
+<UIViewPermissionForm>
+<action>
+ <Add>Dodaj</Add>
+</action>
+<label>
+ <userOrGroup>Uporabnik ali skupina</userOrGroup>
+</label>
+<msg>
+ <permission-exist>Dovoljenje '{0}'  že obstaja na seznamu.</permission-exist>
+</msg>
+</UIViewPermissionForm>
+
+  <!--
+  ######################################################################################
+  #             org.exoplatform.ecm.webui.component.admin.view.UIViewFormTabPane   #
+  ######################################################################################
+  -->
+  <UIViewForm>
+    <title>
+      <AddPermission>Dodaj dovoljenje</AddPermission>
+      <RemovePermission>Odstrani dovoljenje</RemovePermission>
+    </title>
+    <msg>
+      <view-name-invalid>Ime pogleda je obvezno.</view-name-invalid>
+      <fileName-invalid>Ime pogleda vsebuje nekaj neveljavnih znakov.</fileName-invalid>
+      <permission-not-empty>Izberi dovoljenje za pogled.</permission-not-empty>      
+      <mustbe-add-tab>Dodaj zavihek.</mustbe-add-tab>
+<mustbe-add-permission>Izberi dovoljenje za ta pogled</mustbe-add-permission>
+      <view-exist>Ime pogleda že obstaja.</view-exist>
+    </msg>
+    <label>
+      <viewName>Ime</viewName>
+      <template>Predloga</template>
+<version>Obnovi različico</version>
+      <enableVersion>Omogoči različico</enableVersion>
+      <hideExplorerPanel>Skrij ploščo brskalnika v stranski pasici</hideExplorerPanel>
+    </label>
+  </UIViewForm>
+  <UITabForm>
+    <msg>
+      <button-select-error>Izberite vsaj eno funkcijo iz seznama.</button-select-error>
+      <tab-name-error>Ime zavihka je obvezno.</tab-name-error>
+      <fileName-invalid>Ime zavihka vsebuje nekaj neveljavnih znakov.</fileName-invalid>
+    </msg>
+    <label>
+      <version>Obnovi različico</version>
+      <viewName>Ime</viewName>
+      <tabName>Ime zavihka</tabName>
+      <permission>Dovoljenje</permission>
+      <tabs>Zavihki</tabs>
+      <template>Predloge</template>
+      <enableVersion>Omogoči različice</enableVersion>
+      <addFolder>Dodaj mapo</addFolder>
+      <addDocument>Dodaj dokument</addDocument>
+      <editDocument>Uredi dokument</editDocument>
+      <upload>Prenesi</upload>
+      <paste>Prilepi</paste>
+      <search>Išči</search>
+      <viewReferences>Ogled sklicev</viewReferences>
+      <viewNodeType>Ogled Vrste vozlišč</viewNodeType>
+      <viewPermissions>Ogled dovoljenj</viewPermissions>
+      <viewProperties>Ogled lastnosti</viewProperties>
+      <manageVersions>Upravljanje različic</manageVersions>
+      <manageAuditing>Upravljanje nadzora</manageAuditing>
+      <managePublications>Upravljanje objave</managePublications>
+      <manageCategories>Upravljanje kategorij</manageCategories>
+      <manageRelations>Upravljanje relacij</manageRelations>
+      <manageActions>Upravljanje dejanj</manageActions>
+      <exportNode>Izvozi vozlišče</exportNode>
+      <importNode>Uvozi vozlišče</importNode>
+      <viewRelations>Poglej relacije</viewRelations>
+      <showJCRStructure>Prikaži JCR strukturo</showJCRStructure>
+      <watchDocument>Sledi dokumentu</watchDocument>
+      <taggingDocument>Označi dokument</taggingDocument>
+      <viewMetadatas>Ogled Metapodatkov</viewMetadatas>
+      <overloadThumbnail>Sličica preobremenitve</overloadThumbnail>
+      <manageHidden>Skrij/Pokaži vsebino</manageHidden>
+      <comment>Komentar</comment>
+      <vote>Glasuj</vote>  
+      <addCategory>Dodaj Kategorijo</addCategory>
+      <addLocalizationLink>Dodaj prevod</addLocalizationLink>
+      <publicationRequestApproval>Prošnja za odobritev</publicationRequestApproval>
+      <publicationApproveContent>Odobri vsebino</publicationApproveContent>
+      <publicationPublish>Objavi</publicationPublish>
+      <contentNavigation>Krmarjenje po vsebini</contentNavigation>
+      <addSymLink>Dodaj Symlink</addSymLink>
+      <checkIn>Sprosti</checkIn>
+      <checkOut>Rezerviraj</checkOut>
+      <shareDocuments>Daj v skupno rabo</shareDocuments>
+      <openDocument>Oddaljeno urejanje</openDocument>
+      <editProperty>Urejanje lastnosti dokumenta</editProperty>
+      <uploadNewVersion>Naloži novo različico</uploadNewVersion>
+    </label>
+    <action>
+      <Save>#{word.save}</Save>      
+      <Cancel>#{word.cancel}</Cancel>      
+    </action>
+  </UITabForm>
+  <UIPermissionForm>
+    <label>
+      <permission>UIPermissionForm</permission>
+    </label>
+  </UIPermissionForm>
+  <UIViewFormTabPane>
+    <tab>
+      <label>
+        <UITabContainer>Dejanje</UITabContainer>
+        <UIViewForm>Pogled</UIViewForm>
+        <UIViewPermissionContainer>Dovoljenje</UIViewPermissionContainer>    
+      </label>
+    </tab>
+    <action>
+      <Save>#{word.save}</Save>
+      <Reset>Ponastavi</Reset>
+      <Cancel>#{word.cancel}</Cancel>
+      <Close>#{word.close}</Close>
+      <Restore>Povrni</Restore>
+    </action>
+  </UIViewFormTabPane>
+  <PopupViewPermission>
+    <title>
+      <UIPermissionSelector>Izbirnik dovoljenj</UIPermissionSelector>
+    </title>
+  </PopupViewPermission>
+
+<TabForm_Popup>
+ <title>
+  <UITabForm>Dodaj/Uredi zavihek</UITabForm>
+ </title>
+</TabForm_Popup>
+
+<tab_permission>
+ <title>
+  <SelectUser>Izberi uporabnika</SelectUser>
+<SelectMember>Izberi člana</SelectMember>
+<AddAny>Vse</AddAny>
+ </title>
+</tab_permission>
+  <!--
+  ######################################################################################
+  #             org.exoplatform.ecm.webui.component.admin.view.UIECMTemplateList   #
+  ######################################################################################
+  -->
+  <UIECMTemplateList>
+    <title>
+      <View>Pogled</View>
+      <EditInfo>Uredi</EditInfo>
+      <Delete>Izbriši</Delete>
+    </title>
+    <header>
+      <name>Ime</name>
+      <path>Vrednost</path>
+      <baseVersion>Osnovna različica</baseVersion>
+      <action>Dejanje</action>
+    </header>
+    <action>
+      <Add>Dodaj</Add>
+    </action>
+    <msg>
+      <template-in-use>{0} ni mogoče izbrisati. Trenutno je v uporabi.</template-in-use>
+      <confirm-delete>Ali ste prepričani, da želite izbrisati to predlogo?</confirm-delete>
+      <access-denied>Dostop zavrnjen. Nimate dovoljenja za uporabo te funkcije.</access-denied>
+      <delete-permission-denied>Nimate dovoljenja za brisanje predloge '{0}'.</delete-permission-denied>
+    </msg>
+  </UIECMTemplateList>
+  <!--
+  ################################################################################
+  #             org.exoplatform.ecm.webui.component.admin.view.UITemplateForm #
+  ################################################################################
+  -->
+  <UITemplateForm>
+    <title>
+      <AddPermission>Dodaj dovoljenje</AddPermission>
+    </title>
+    <action>
+      <Save>#{word.save}</Save>
+      <Cancel>#{word.cancel}</Cancel>
+      <Reset>Ponastavi</Reset>
+      <Restore>Povrni</Restore>
+      <Refresh>#{word.refresh}</Refresh>
+    </action>
+    <msg>
+      <version-restored>Različica {0} je bila uspešno obnovljena.</version-restored>
+      <role-require>Izberite dovoljenje.</role-require>
+      <template-name-exist>Ime predloge '{0}' že obstaja.</template-name-exist>
+      <add-permission-denied>Nimate dovoljenja za dodajanje nove predloge.</add-permission-denied>
+      <edit-permission-denied>Nimate dovoljenja za spreminjanje predloge "{0}".</edit-permission-denied>
+    </msg>
+    <tab>
+      <label>
+        <template>Predloga</template>
+        <defaultDialog>Pogovorno okno</defaultDialog>
+        <defaultView>Pogled</defaultView>
+      </label>
+    </tab>
+    <label>
+      <name>Ime:</name>
+      <label>Oznaka:</label>
+      <isDocumentTemplate>je Predloga dokumenta:</isDocumentTemplate>
+      <dialog>Vsebina pogovornega okna</dialog>
+      <view>Ogled vsebin</view>
+      <permission>Dovoljenje:</permission>
+      <selectPemistion>Dovoljenje</selectPemistion>
+    </label>
+  </UITemplateForm>
+  <!--
+  ################################################################################
+  #             org.exoplatform.ecm.webui.component.admin.view.ecmTempForm #
+  ################################################################################
+  -->
+  <ecmTempForm>
+    <label>
+      <version>Izberi različico:</version>
+      <content>Vsebina:</content>
+      <name>Ime:</name>
+      <homeTemplate>Vrsta predloge:</homeTemplate>
+      <enableVersion>Omogočene različice:</enableVersion>
+    </label>
+  </ecmTempForm>
+  <ecmTempFormPopup>
+    <title>
+      <ecmTempForm>Dodaj/Uredi Predlogo pogleda</ecmTempForm>
+    </title>
+  </ecmTempFormPopup>
+  <ecmTempFormAdd>
+    <title>
+      <ecmTempForm>Dodaj Predlogo brskalnika</ecmTempForm>
+      <ecmTempFormAdd>Dodaj Predlogo brskalnika</ecmTempFormAdd>
+    </title>
+  </ecmTempFormAdd>
+  <ecmTempFormEdit>
+    <title>
+      <ecmTempForm>Uredi Predlogo brskalnika</ecmTempForm>
+    </title>
+  </ecmTempFormEdit>
+
+  <!--
+  ######################################################################################
+  #             org.exoplatform.ecm.webui.component.admin.script.UIScriptManager #
+  ######################################################################################
+  -->
+  <!--
+  ######################################################################################
+  #             org.exoplatform.ecm.webui.component.admin.script.UIECMFilterForm #
+  ######################################################################################
+  -->
+  <UIECMFilterForm>
+    <label>
+      <selectScript>Izberite kategorijo</selectScript>
+    </label>
+  </UIECMFilterForm>
+  <!--
+  ######################################################################################
+  #             org.exoplatform.ecm.webui.component.admin.script.UIScriptList #
+  ######################################################################################
+  -->
+  <UIScriptList>
+    <action>
+      <Edit>#{word.edit}</Edit>
+      <Delete>#{word.delete}</Delete>
+      <AddNew>Dodaj skripto</AddNew>
+    </action>
+    <msg>
+      <confirm-delete>Ali ste prepričani, da želite izbrisati to skripto?</confirm-delete>
+    </msg>
+    <header>
+      <scriptName>Ime</scriptName>
+      <path>Skripta</path>
+      <baseVersion>Osnovna različica</baseVersion>
+      <action>Dejanja</action>
+    </header>
+    <tooltip>
+      <Edit>Uredi</Edit>
+      <Delete>Izbriši</Delete>
+    </tooltip>
+  </UIScriptList>
+  <!--
+  ######################################################################################
+  #             org.exoplatform.ecm.webui.component.admin.script.UIScriptForm #
+  ######################################################################################
+  -->
+  <uiECMScriptsPopup>
+    <title>
+      <ecmScriptForm>ECM Script</ecmScriptForm>
+    </title>
+  </uiECMScriptsPopup>
+
+  <UIScriptForm>
+    <action>
+      <Save>#{word.save}</Save>
+      <Restore>#{word.restore}</Restore>
+      <Cancel>#{word.cancel}</Cancel>
+      <Refresh>#{word.refresh}</Refresh>
+      <Change>Spremeni</Change>
+    </action>
+    <msg>
+      <version-restored>Različica {0} je bila uspešno obnovljena.</version-restored>
+      <name-null>Vnesite ime skripte.</name-null>
+      <name-exist>Skripta z imenom '{0}' že obstaja.</name-exist>
+      <fileName-invalid>Ime skripte vsebuje nedovoljene znake.</fileName-invalid>
+    </msg>
+  </UIScriptForm>
+  <!--
+  ######################################################################################
+  #             org.exoplatform.ecm.webui.component.admin.script.CBScriptForm #
+  ######################################################################################
+  -->
+  <ScriptContainerPopup>
+    <title>
+      <UIScriptForm>Dodaj/Uredi skripto</UIScriptForm>
+    </title>
+  </ScriptContainerPopup>
+  <UIScriptForm>
+    <label>
+      <selectVersion>Različice</selectVersion>
+      <scriptContent>Vsebina</scriptContent>
+      <scriptLabel>Ime</scriptLabel>
+      <scriptName>Skripta</scriptName>
+      <enableVersion>Omogoči shranjevanje različic</enableVersion>
+    </label>
+  </UIScriptForm>
+  <!--
+  ######################################################################################
+  #             org.exoplatform.ecm.webui.component.admin.script.ecmScriptForm #
+  ######################################################################################
+  -->
+ 
+  <ecmScriptForm>
+    <label>
+      <selectVersion>Različice</selectVersion>
+      <scriptContent>Vsebina</scriptContent>
+      <scriptLabel>Ime</scriptLabel>
+      <scriptName>Skripta</scriptName>
+      <enableVersion>Omogoči shranjevanje različic</enableVersion>
+    </label>
+  </ecmScriptForm>
+  <!--
+  ######################################################################################
+  #             org.exoplatform.ecm.webui.component.admin.taxonomy.UITaxonomyForm #
+  ######################################################################################
+  -->
+  <UITaxonomyForm>
+    <action>
+      <Save>#{word.save}</Save>
+      <Cancel>#{word.cancel}</Cancel>
+    </action>
+    <title>Dodaj Kategorijo</title>
+    <label>
+      <taxonomyName>Ime kategorije</taxonomyName>
+      <parentPath>Nadrejeno</parentPath>
+    </label>
+    <msg>
+      <exist>Kategorija "{0}" že obstaja.</exist>
+      <name-null>Navedite ime kategorije.</name-null>
+      <name-invalid>Ime kategorije vsebuje nekaj neveljavnih znakov.</name-invalid>
+      <name-too-long>Ime kategorije mora biti krajše od 30 znakov.</name-too-long>
+    </msg>
+  </UITaxonomyForm>
+    
+  <EditTaxonomyTreePopup>
+    <title>
+      <UITaxonomyTreeContainer>Uredi drevesno strukturo kategorije</UITaxonomyTreeContainer>
+    </title>
+  </EditTaxonomyTreePopup>
+
+  <AddTaxonomyTreePopup>
+    <title>
+      <UITaxonomyTreeContainer>Dodaj drevesno strukturo kategorije</UITaxonomyTreeContainer>
+    </title>
+  </AddTaxonomyTreePopup>
+  
+  <TaxonomyPopupCreateChild>
+    <title>
+      <UITaxonomyTreeCreateChildForm>Uredi drevesno strukturo kategorije</UITaxonomyTreeCreateChildForm>
+    </title>
+  </TaxonomyPopupCreateChild>
+
+<UITaxonomyTreeCreateChildForm>
+  <action>
+      <Save>#{word.save}</Save>
+      <Cancel>#{word.cancel}</Cancel>
+    </action>
+    <label>
+      <parentPath>Nadrejeno:</parentPath>
+      <taxonomyName>Ime kategorije:</taxonomyName>
+    </label>
+    <msg>
+      <name-null>Ime kategorije je prazno.</name-null>
+      <name-invalid>Ime kategorije ni veljavno.</name-invalid>
+      <name-too-long>Ime kategorije mora biti kajše od {0} znakov.</name-too-long>
+      <exist>To ime kategorije že obstaja.</exist>
+    </msg>
+</UITaxonomyTreeCreateChildForm>
+
+  <PopupComponent>
+    <title>
+      <UIOneNodePathSelector>Izberi pot</UIOneNodePathSelector>
+    </title>
+  </PopupComponent>
+  
+  <TaxoPopupUserSelector>
+  <title>
+      <TaxoTreeSelectUserOrGroup>Izberi uporabnika</TaxoTreeSelectUserOrGroup>
+      <UIPermissionTreeSelectUser>Izberi uporabnika</UIPermissionTreeSelectUser>
+    </title>
+  </TaxoPopupUserSelector>
+
+  <TaxoTreeSelectUserOrGroupPopup>
+  <title>
+      <TaxoTreeSelectUserOrGroup>Izberi članstvo</TaxoTreeSelectUserOrGroup>
+    </title>
+  </TaxoTreeSelectUserOrGroupPopup>
+  
+  <TaxoTreeAnyPermission>
+    <label>
+      <any>Vsako dovoljenje</any>
+      <anyPermission>TaxoTreeAnyPermission</anyPermission>
+    </label>
+  </TaxoTreeAnyPermission>
+  
+  <TaxoTreeSelectUserOrGroup>
+    <label>
+      <selectGroup>Izberi skupino</selectGroup>
+      <selectMembership>Izberi članstvo</selectMembership>
+    </label>
+  </TaxoTreeSelectUserOrGroup>
+  
+  <!--
+  ######################################################################################
+  #             org.exoplatform.ecm.webui.component.admin.taxonomy.UITaxonomyTreeList #
+  ######################################################################################
+  -->
+  <UITaxonomyTreeList>
+    <header>
+      <name>Drevesna struktura kategorije</name>
+      <workspace>Delovni prostor</workspace>
+      <homePath>Pot</homePath>
+      <action>Dejanje</action>
+    </header>
+    <action>
+      <AddTaxonomyTree>Dodaj drevesno strukturo kategorije</AddTaxonomyTree>
+    </action>
+    <tooltip>
+      <EditTaxonomyTree>Uredi drevesno strukturo kategorije</EditTaxonomyTree>
+      <Delete>Izbriši drevesno strukturo kategorije</Delete>
+    </tooltip>
+    <title>Brskaj po drevesni strukturi kategorije</title>
+    <msg>
+      <no-list>Ustvarjene ni bilo nobene drevesne strukture kategorije.</no-list>
+      <confirm-delete>Ali ste prepričani, da želite izbrisati drevesno strukturo kategorije?</confirm-delete>
+      <is-in-trash>Ta drevesna struktura kategorije je bila premaknjena v koš za smeti.</is-in-trash>
+    </msg>
+  </UITaxonomyTreeList>
+  
+  <!--
+  ######################################################################################
+  #             org.exoplatform.ecm.webui.component.admin.taxonomy.UITaxonomyTreeForm  #
+  ######################################################################################
+  -->
+  <UITaxonomyTreeForm>
+    <label>
+      <name>Ime</name>
+      <workspace>Delovni prostor</workspace>
+      <homePath>Pot</homePath>
+      <permissions>Dovoljenja</permissions>
+    </label>
+    <msg>
+      <homapath-emty>Vnesi pot</homapath-emty>
+    </msg>
+  </UITaxonomyTreeForm>
+  
+  <UIPermissionTreeForm>
+    <label>
+      <UIPopupWindow>Izberi</UIPopupWindow>
+      <permission>UIPermissionTreeForm</permission>
+      <userOrGroup>Uporabnik ali skupina</userOrGroup>
+      <read>Dovoljenje za branje</read>
+      <add_node>Dodaj dovoljenje vozlišča</add_node>
+      <set_property>Nastavi dovoljenje lastnosti</set_property>
+      <remove>Odstrani dovoljenje</remove>
+    </label>
+    <title>Dodajte dovoljenje za to vozlišče</title>
+    <action>
+      <Close>#{word.close}</Close>
+      <Save>Shrani</Save>
+      <Reset>Ponastavi</Reset>
+    </action>
+    <msg>
+      <checkbox-require>Izberite vsaj eno dovoljenje.</checkbox-require>
+      <userOrGroup-required>Izberite uporabnika ali skupino, preden shranite dovoljenje.</userOrGroup-required>
+      <not-change-permission>Nimate pravice, da bi dodali dovoljenje.</not-change-permission>
+      <access-denied>Dostop zavrnjen. Ne morete odstraniti tega dovoljenja.</access-denied>
+    </msg>
+  </UIPermissionTreeForm>
+  
+  <PopupTaxonomyJCRBrowser>
+  <title>
+      <UIOneNodePathSelector>Izberite pot za Domov</UIOneNodePathSelector>
+    </title>
+  </PopupTaxonomyJCRBrowser>
+  
+  <PopupTaxonomyTreePermission>
+    <title>
+      <UIPermissionSelector>Izbirnik dovoljenj</UIPermissionSelector>
+    </title>
+   </PopupTaxonomyTreePermission>
+   
+   <PopupDrivePermission>
+    <title>
+      <AddDrivePermissionSelector>Dodaj dovoljenje</AddDrivePermissionSelector>
+      <UIPermissionSelector>Izberite dovoljenje</UIPermissionSelector>
+    </title>
+  </PopupDrivePermission>
+  
+  <UIPopupWindow>
+    <title>
+      <UIPermissionManager>Upravljanje dovoljenj</UIPermissionManager>
+    </title>
+   </UIPopupWindow>
+
+  <PopupUserSelector>
+    <title>
+      <UIUserContainer>Upravljanje dovoljenj</UIUserContainer>
+    </title>
+   </PopupUserSelector>
+   
+  <UIPermissionInfo>
+    <action>
+      <title>
+        <Edit>Uredi</Edit>
+        <Delete>Odstrani dovoljenje</Delete>
+      </title>
+    </action>
+    <header>
+      <usersOrGroups>Uporabnik ali skupina</usersOrGroups>
+      <read>Branje</read>
+      <addNode>Spreminjanje vozlišča</addNode>
+      <remove>Odstrani</remove>
+      <action>Dejanje</action>
+    </header>
+    <msg>
+      <confirm-delete-permission>Ali ste prepričani, da želite odstraniti to dovoljenje?</confirm-delete-permission>
+      <no-permission-tochange>Nimate pravice, da bi odstranili to dovoljenje.</no-permission-tochange>
+      <no-permission-remove>Lastnika ali sistemskega uporabnika ni mogoče odstraniti.</no-permission-remove>
+      <access-denied>Dostop zavrnjen. Ne morete odstraniti tega dovoljenja.</access-denied>
+    </msg>
+  </UIPermissionInfo>
+  <permission>
+    <title>
+      <SelectUser>Izberi uporabnika</SelectUser>
+      <SelectMember>Izberite članstvo</SelectMember>
+      <AddAny>Kdorkoli</AddAny>
+    </title>
+  </permission>
+  <!--
+  #############################################################################
+  #             org.exoplatform.ecm.webui.component.explorer.UIPermissionForm #
+  #############################################################################
+  -->
+  <SelectUserOrGroup>
+    <title>
+      <UIGroupSelector>Izberi uporabnika</UIGroupSelector>
+      <UIPermissionSelector>Izberi člana</UIPermissionSelector>
+      <UIGroupMemberSelector>Izberi članstvo</UIGroupMemberSelector>
+    </title>
+  </SelectUserOrGroup>
+  <UIGroupSelector>
+    <label>
+      <selectGroup>Izberi skupino</selectGroup>
+      <selectUser>Izberi uporabnika</selectUser>
+    </label>
+    <msg>
+      <not-change-owner>'{0}' je lastnik tega vozlišča in ima dovoljenje za poln nadzor.</not-change-owner>
+    </msg>
+  </UIGroupSelector>
+  <UIPermissionForm>
+    <label>
+      <UIPopupWindow>Izberi</UIPopupWindow>
+      <permission>UIPermissionForm</permission>
+      <userOrGroup>Uporabnik ali skupina</userOrGroup>
+      <read>Preberi</read>
+      <add_node>Spremeni</add_node>
+      <remove>Odstrani</remove>
+    </label>
+    <title>Dodaj dovoljenje za to vozlišče</title>
+    <action>
+      <Close>#{word.close}</Close>
+      <Save>#{word.save}</Save>
+      <Reset>Ponastavi</Reset>
+    </action>
+    <msg>
+      <checkbox-require>Izberite vsaj eno dovoljenje.</checkbox-require>
+      <userOrGroup-required>Izberite uporabnika ali skupino, preden shranite dovoljenje.</userOrGroup-required>
+      <not-change-permission>Nimate pravice, da bi dodali dovoljenje.</not-change-permission>
+      <access-denied>Dostop zavrnjen. Tega dovoljenja ne morete odstraniti.</access-denied>
+    </msg>
+  </UIPermissionForm>
+  
+  <TaxonomyPopup>
+    <title>
+      <UITaxonomyForm>Dodaj Kategorijo</UITaxonomyForm>
+    </title>
+  </TaxonomyPopup>
+  
+  <UITaxonomyManager>
+    <title>
+      <permission>Upravljanje dovoljenj</permission>
+    </title>
+  </UITaxonomyManager>
+  <!--
+  ######################################################################################
+  #             org.exoplatform.ecm.webui.component.admin.templates.UITemplateList #
+  ######################################################################################
+  -->
+  <UITemplateList>
+    <header>
+      <name>Vrsta</name>
+      <action>Dejanje</action>
+      <label>Predloga</label>
+      <icon>Ikona</icon>
+    </header>
+    <action>
+      <AddNew>Dodaj predlogo</AddNew>
+    </action>
+    <msg>
+      <confirm-delete>Ali res želite izbrisati?</confirm-delete>
+      <access-denied>Dostop zavrnjen. Nimate dovoljenja za uporabo te funkcije.</access-denied>
+      <editing-template>Dostop zavrnjen. Ne morete hkrati brisati in urejati te predloge.</editing-template>
+      <template-not-exist>Predloga, ki jo želite izbrisati ne obstaja.</template-not-exist>
+    </msg>
+  </UITemplateList>
+  
+  <UIActionsTemplateList>
+    <header>
+      <name>Vrsta</name>
+      <action>Dejanje</action>
+      <label>Predloga</label>
+      <icon>Ikona</icon>
+    </header>
+    <action>
+      <AddNew>Dodaj predlogo</AddNew>
+    </action>
+    <msg>
+      <confirm-delete>Ali res želite izbrisati?</confirm-delete>
+      <access-denied>Dostop zavrnjen. Nimate dovoljenja za uporabo te funkcije.</access-denied>
+      <editing-template>Dostop zavrnjen. Ne morete hkrati brisati in urejati te predloge.</editing-template>
+      <template-not-exist>Predloga, ki jo poskušate izbrisati, ne obstaja.</template-not-exist>
+    </msg>
+  </UIActionsTemplateList>
+  
+  <UIOthersTemplateList>
+    <header>
+      <name>Vrsta</name>
+      <label>Predloga</label>
+      <icon>Ikona</icon>
+      <action>Dejanje</action>
+    </header>
+    <action>
+      <AddNew>Dodaj predlogo</AddNew>
+    </action>
+    <msg>
+      <confirm-delete>Ali res želite izbrisati?</confirm-delete>
+      <access-denied>Dostop zavrnjen. Nimate dovoljenja za uporabo te funkcije.</access-denied>
+      <editing-template>Dostop zavrnjen. Ne morete hkrati brisati in urejati te predloge.</editing-template>
+      <template-not-exist>Predloga, ki jo poskušate izbrisati, ne obstaja.</template-not-exist>
+    </msg>
+  </UIOthersTemplateList>
+
+ <!--
+  ######################################################################################
+  #             org.exoplatform.ecm.webui.component.admin.templates.clv package #
+  ######################################################################################
+  -->
+
+<UITabPane>
+ <title>
+ <ContentTemplateContainer>Vsebina</ContentTemplateContainer>
+<CateTemplateContainer>Krmarjenje</CateTemplateContainer>
+<PageTemplateContainer>Številčenje strani</PageTemplateContainer>
+ </title>
+</UITabPane>
+
+  <UICLVTemplateList>
+    <title>
+      <Edit>Uredi</Edit>
+      <Delete>Izbriši</Delete>
+    </title>
+    <header>
+      <title>Ime</title>
+      <action>Dejanje</action>
+      <template>Predloga</template>
+    </header>
+    <action>
+      <AddTemplate>Dodaj predlogo</AddTemplate>
+<Edit>Uredi</Edit>
+<Delete>Izbriši</Delete>
+    </action>
+    <msg>
+      <confirm-delete>Ali ste prepričani, da želite izbrisati to predlogo?</confirm-delete>
+      <access-denied>Dostop zavrnjen. Nimate dovoljenja za uporabo te funkcije.</access-denied>
+      <editing-template>Dostop zavrnjen. Ne morete hkrati brisati in urejati te predloge.</editing-template>
+      <template-not-exist>Predloga, ki jo poskušate izbrisati, ne obstaja.</template-not-exist>
+    </msg>
+  </UICLVTemplateList>
+
+<CateTemplateList>
+    <header>
+      <title>Ime</title>
+      <action>Dejanje</action>
+      <template>Predloga</template>
+    </header>
+    <title>
+      <Edit>Uredi</Edit>
+      <Delete>Izbriši</Delete>
+    </title>
+    <action>
+      <AddTemplate>Dodaj predlogo</AddTemplate>
+<Edit>Uredi</Edit>
+<Delete>Izbriši</Delete>
+    </action>
+</CateTemplateList>
+
+<PageTemplateList>
+    <header>
+      <title>Ime</title>
+      <action>Dejanje</action>
+      <template>Predloga</template>
+    </header>
+    <action>
+      <AddTemplate>Dodajanje predloge</AddTemplate>
+<Edit>Uredi</Edit>
+<Delete>Izbriši</Delete>
+    </action>
+</PageTemplateList>
+
+<EditCLVTemplatePopup_ContentTemplateContainer>
+ <title>
+   <UICLVTemplateForm_ContentTemplateContainer>Uredi predlogo seznama</UICLVTemplateForm_ContentTemplateContainer>   
+ </title>
+</EditCLVTemplatePopup_ContentTemplateContainer>
+
+<EditCLVTemplatePopup_CateTemplateContainer>
+ <title>
+   <UICLVTemplateForm_CateTemplateContainer>Uredi predlogo seznama</UICLVTemplateForm_CateTemplateContainer>   
+ </title>
+</EditCLVTemplatePopup_CateTemplateContainer>
+
+<EditCLVTemplatePopup_PageTemplateContainer>
+ <title>
+   <UICLVTemplateForm_PageTemplateContainer>Uredi predlogo seznama</UICLVTemplateForm_PageTemplateContainer>   
+ </title>
+</EditCLVTemplatePopup_PageTemplateContainer>
+
+<CLVTemplatePopup_ContentTemplateContainer>
+ <title>
+   <UICLVTemplateForm_ContentTemplateContainer>Dodaj predlogo seznama</UICLVTemplateForm_ContentTemplateContainer>   
+ </title>
+</CLVTemplatePopup_ContentTemplateContainer>
+
+<CLVTemplatePopup_CateTemplateContainer>
+ <title>
+   <UICLVTemplateForm_CateTemplateContainer>Dodaj predlogo seznama</UICLVTemplateForm_CateTemplateContainer>   
+ </title>
+</CLVTemplatePopup_CateTemplateContainer>
+
+<CLVTemplatePopup_PageTemplateContainer>
+ <title>
+   <UICLVTemplateForm_PageTemplateContainer>Dodaj predlogo seznama</UICLVTemplateForm_PageTemplateContainer>   
+ </title>
+</CLVTemplatePopup_PageTemplateContainer>
+
+<UICLVTemplateForm_ContentTemplateContainer>
+ <action>
+  <Save>#{word.save}</Save>
+<Reset>Ponastavi</Reset>
+<Cancel>#{word.cancel}</Cancel>
+ </action>
+<label>
+ <title>Ime</title>
+<template>Ime predloge</template>
+<content>Vsebina</content>
+<type>Vrsta predloge</type>
+</label>
+</UICLVTemplateForm_ContentTemplateContainer>
+
+<UICLVTemplateForm_PageTemplateContainer>
+ <action>
+  <Save>#{word.save}</Save>
+<Reset>Ponastavi</Reset>
+<Cancel>#{word.cancel}</Cancel>
+ </action>
+<label>
+ <title>Ime</title>
+<template>Ime predloge</template>
+<content>Vsebina</content>
+<type>Vrsta predloge</type>
+</label>
+</UICLVTemplateForm_PageTemplateContainer>
+
+<UICLVTemplateForm_CateTemplateContainer>
+ <action>
+  <Save>#{word.save}</Save>
+<Reset>Ponastavi</Reset>
+<Cancel>#{word.cancel}</Cancel>
+ </action>
+<label>
+ <title>Ime</title>
+<template>Ime predloge</template>
+<content>Vsebina</content>
+<type>Vrsta predloge</type>
+</label>
+</UICLVTemplateForm_CateTemplateContainer>
+<UICLVTemplateForm>
+  <label>
+    <paginators>Številčenje strani</paginators>
+<list>Vsebina</list>
+<navigation>Krmarjenje</navigation>
+  </label>
+                          <action>
+                            <Save>#{word.save}</Save>
+                            <Reset>Ponastavi</Reset> 
+                            <Cancel>#{word.cancel}</Cancel> 
+                          </action> 
+  <msg>
+  <template-existing>To ime za predlogo že obstaja. Prosim izbrerite drugo.</template-existing>
+  </msg>
+</UICLVTemplateForm>
+
+  <!--
+  ######################################################################################
+  #             org.exoplatform.ecm.webui.component.admin.templates.UITemplateForm #
+  ######################################################################################
+  -->
+  <AddNewTemplatePermission>
+    <title>
+      <UIPermissionSelector>Izbirnik dovoljenj</UIPermissionSelector>
+    </title>
+  </AddNewTemplatePermission>
+  <TemplatePermission>
+    <title>
+      <UIPermissionSelector>Izberite dovoljenje</UIPermissionSelector>
+    </title>
+  </TemplatePermission>
+  <TemplateContainerPopup>
+    <title>
+      <UITemplateForm>Predloga obrazca</UITemplateForm>
+    </title>
+  </TemplateContainerPopup>
+  <ViewForm>
+    <label>
+      <UITemplateContent>ViewForm</UITemplateContent>
+      <UIPopupWindow>Ogled dovoljenj</UIPopupWindow>
+      <selectVersion>Različice</selectVersion>
+      <content>Vsebina:</content>
+      <name>Ime:</name>
+      <isDocumentTemplate>je Predloga dokumenta</isDocumentTemplate>
+      <viewPermission>Dovoljenje:</viewPermission>
+      <enableVersion>Shranjevanje različic je aktivirano</enableVersion>
+    </label>
+    <title>Dodaj/Uredi Pogled</title>
+  </ViewForm>
+  <DialogForm>
+    <label>
+      <UITemplateContent>DialogForm</UITemplateContent>
+      <UIPopupWindow>Pogovorno okno za dovoljenja</UIPopupWindow>
+      <selectVersion>Različice</selectVersion>
+      <content>Vsebina:</content>
+      <name>Ime:</name>
+      <isDocumentTemplate>je Predloga dokumenta</isDocumentTemplate>
+      <viewPermission>Dovoljenje:</viewPermission>
+      <enableVersion>Omogoči shranjevanje različic</enableVersion>
+    </label>
+    <title>Dodaj/Uredi Pogovorno okno</title>
+  </DialogForm>
+  <DialogFormTemplatePermission>
+    <title>
+      <UIPermissionSelector>Izbirnik dovoljenj</UIPermissionSelector>
+    </title>
+  </DialogFormTemplatePermission>
+  <ViewFormTemplatePermission>
+    <title>
+      <UIPermissionSelector>Izbirnik dovoljenj</UIPermissionSelector>
+    </title>
+  </ViewFormTemplatePermission>
+  <TemplateContainerPopup>
+    <title>
+      <UIViewTemplate_UITemplateContainer><![CDATA[View & Edit Template]]></UIViewTemplate_UITemplateContainer>
+      <UIViewTemplate_UIActionsTemplateContainer><![CDATA[View & Edit Template]]></UIViewTemplate_UIActionsTemplateContainer>
+      <UIViewTemplate_UIOthersTemplateContainer><![CDATA[View & Edit Template]]></UIViewTemplate_UIOthersTemplateContainer>
+    </title>
+  </TemplateContainerPopup>
+  <UITemplatesManager>
+    <title>
+      <Edit>Uredi</Edit>
+      <Delete>Izbriši</Delete>
+    </title>
+  </UITemplatesManager>
+  <!--
+  ######################################################################################
+  #             org.exoplatform.ecm.webui.component.admin.templates.UIViewTemplate #
+  ######################################################################################
+  -->
+  <!--
+  ######################################################################################
+  #             org.exoplatform.ecm.webui.component.admin.templates.UITemplateEditForm #
+  ######################################################################################
+  -->
+  <UITemplateEditForm>
+    <label>
+      <name>Ime:</name>
+      <label>Oznaka:</label>
+      <isDocumentTemplate>je Predloga dokumenta:</isDocumentTemplate>
+    </label>
+    <action>
+      <Save>#{word.save}</Save>
+      <Cancel>#{word.cancel}</Cancel>
+      <Refresh>#{word.refresh}</Refresh>
+    </action>
+  </UITemplateEditForm>
+  <!--
+  ######################################################################################
+  #             org.exoplatform.ecm.webui.component.admin.templates.UIDialogTab #
+  ######################################################################################
+  -->
+  <UIDialogTab>
+    <header>
+      <name>Ime</name>
+      <roles>Vloge</roles>
+      <baseVersion>Različica</baseVersion>
+      <action>Dejanja</action>
+    </header>
+    <msg>
+      <undeletable>'{0}'  ni mogoče izbrisati, ker je privzeta.</undeletable>
+      <confirm-delete>Ali ste prepričani, da želite izbrisati to pogovorno okno?</confirm-delete>
+    </msg>
+    <action>
+      <title>
+        <Edit>Uredi</Edit>
+        <Delete>Izbriši</Delete>
+      </title>
+    </action>
+  </UIDialogTab>
+  <!--
+  ######################################################################################
+  #             org.exoplatform.ecm.webui.component.admin.templates.UIViewTab #
+  ######################################################################################
+  -->
+  <UIViewTab>
+    <header>
+      <name>Ime</name>
+      <roles>Vloge</roles>
+      <baseVersion>Različica</baseVersion>
+      <action>Dejanja</action>
+    </header>
+    <msg>
+      <undeletable>'{0}'  ni mogoče zbrisati, ker je privzet.</undeletable>
+      <confirm-delete>Ali res želite izbrisati?</confirm-delete>
+    </msg>
+    <action>
+      <title>
+        <Edit>Uredi</Edit>
+        <Delete>Izbriši</Delete>
+      </title>
+    </action>
+  </UIViewTab>
+  <!--
+  ######################################################################################
+  #             org.exoplatform.ecm.webui.component.admin.templates.UITemplateContent #
+  ######################################################################################
+  -->
+  <UITemplateContent>
+    <action>
+      <Save>#{word.save}</Save>
+      <Restore>#{word.restore}</Restore>
+      <Cancel>#{word.cancel}</Cancel>
+      <Refresh>#{word.refresh}</Refresh>
+    </action>
+    <msg>
+      <name-invalid>Ime polja ne sme vsebovati posebnih znakov.</name-invalid>
+      <roles-invalid>Polje z dovoljenjem je obvezno.</roles-invalid>
+      <version-restored>Različica {0} je bila uspešno obnovljena.</version-restored>
+      <name-exist>Ime '{0}' že obstaja.</name-exist>
+    </msg>
+    <title>
+      <AddPermission>Dodaj dovoljenje</AddPermission>
+      <RemovePermission>Odstrani dovoljenje</RemovePermission>
+    </title>
+  </UITemplateContent>
+  <!--
+  ######################################################################################
+  #             org.exoplatform.ecm.webui.component.admin.templates.DialogForm #
+  ######################################################################################
+  -->
+  <!--
+  ######################################################################################
+  #             org.exoplatform.ecm.webui.component.admin.templates.ViewForm #
+  ######################################################################################
+  -->
+  <!--
+  ######################################################################################
+  #             org.exoplatform.ecm.webui.component.UIJCRBrowser #
+  ######################################################################################
+  -->
+  <JCRBrowser>
+    <title>
+      <UIOneNodePathSelector>Izberite pot za Domov</UIOneNodePathSelector>
+    </title>
+  </JCRBrowser>
+  <JCRBrowserAssets>
+    <title>
+      <UIOneNodePathSelector>Izberi ikono</UIOneNodePathSelector>
+    </title>
+  </JCRBrowserAssets>
+  <!--
+  ######################################################################################
+  #             org.exoplatform.ecm.webui.component.admin.queries #
+  ######################################################################################
+  -->
+  <UIQueriesList>
+    <header>
+      <name>Ime</name>
+      <type>Vrsta</type>
+      <statement>Izjava</statement>
+      <permission>Dovoljenja</permission>
+      <action>Dejanja</action>
+    </header>
+    <action>
+      <AddQuery>Dodaj poizvedbo</AddQuery>
+    </action>
+    <tooltip>
+      <Edit>Uredi to poizvedbo</Edit>
+      <Delete>Izbriši to poizvedbo</Delete>
+    </tooltip>
+    <msg>
+      <confirm-delete>Ali ste prepričani, da želite izbrisati to poizvedbo?</confirm-delete>
+      <query-not-existed>Poizvedba ne obstaja več.</query-not-existed>
+      <can-not-remove>Pri brisanju poizvedbe je prišlo do napake. Za informacije se obrnite na skrbnika.</can-not-remove>
+    </msg>
+  </UIQueriesList>
+  <UIQueriesForm>
+    <label>
+      <name>Ime poizvedbe</name>
+      <type>Vrsta poizvedbe</type>
+      <statement>Izjava</statement>
+      <cache>Omogoči predpomnilnik rezultatov</cache>
+      <permissions>Dovoljenja</permissions>
+      <PermissionButton>UIQueriesForm</PermissionButton>
+    </label>
+    <action>
+      <Save>#{word.save}</Save>
+      <Cancel>#{word.cancel}</Cancel>
+    </action>
+    <msg>
+      <permission-require>Izberite dovoljenja.</permission-require>
+      <name-invalid>Polje ime ne sme vsebovati posebnih znakov.</name-invalid>
+      <name-existing>To ime za poizvedbe že obstaja. Izberite drugo.</name-existing>
+      <invalid-query>Poizvedba ni veljavna. Prosimo, preverite izjavo poizvedbe.</invalid-query>
+      <access-denied>Dostop zavrnjen. Nimate dovoljenja za to dejanje.</access-denied>
+    </msg>
+  </UIQueriesForm>
+  <AddQueryForm>
+    <title>
+      <UIQueriesForm>Dodaj poizvedbo</UIQueriesForm>
+    </title>
+  </AddQueryForm>
+  <EditQueryForm>
+    <title>
+      <UIQueriesForm>Uredi poizvedbo</UIQueriesForm>
+    </title>
+  </EditQueryForm>
+<PermissionPopup>
+  <title>
+    <UIGroupMemberSelector>Izbirnik dovoljenj</UIGroupMemberSelector>
+  </title>
+</PermissionPopup>
+  <!--
+  ######################################################################################
+  #             org.exoplatform.ecm.webui.component.admin.folksonomy #
+  ######################################################################################
+  -->
+  <UITagManager>
+    <title>
+      <EditStyle>Uredi slog</EditStyle>
+      <RemoveStyle>Odstrani slog</RemoveStyle>
+    </title>    
+  </UITagManager>
+  <UITagStyleList>
+    <header>
+      <name>Ime sloga</name>
+      <documentRange>Število pojavitev</documentRange>
+      <tagHTML>Slog oznake</tagHTML>
+      <action>Dejanje</action>
+    </header>
+    <title>
+      <Edit>Uredi</Edit>
+      <Delete>Izbriši</Delete>
+      <Remove>Odstrani</Remove>
+    </title>
+    <action>
+      <AddStyle>Dodaj slog</AddStyle>
+    </action>
+  </UITagStyleList>
+  <UITagStyleForm>
+    <label>
+      <styleName>Ime sloga:</styleName>
+      <documentRange>Število pojavitev:</documentRange>
+      <styleHTML>HTML slog:</styleHTML>
+    </label>
+    <action>
+      <UpdateStyle>Posodobi</UpdateStyle>
+      <Cancel>#{word.cancel}</Cancel>
+    </action>
+    <msg>
+      <range-validator>Obseg ni veljaven. Oblika mora biti: a...b, med katerimi so a in b pozitivna cela števila. Namesto b lahko uporabite * in s tem nakažete, da je obseg neomejen.</range-validator>
+      <error-update>Posodobitev je spodletela. Informacije so neveljavne.</error-update>
+      <item-not-existing>Spremembe oznake ne morete shraniti, saj v bazi ne obstaja več.</item-not-existing>
+    </msg>
+  </UITagStyleForm>
+  <FolksonomyPopup>
+    <title>
+      <UITagStyleForm>Uredi Nastavitev stila označbe</UITagStyleForm>
+    </title>
+  </FolksonomyPopup>
+  <!--
+  ###################################################################################
+  # ECMPhoneFormatValidator                                       #
+  ###################################################################################
+  -->
+  <ECMPhoneFormatValidator>
+    <msg>
+      <Invalid>Polje '{0}' vsebuje neveljavno telefonsko številko. Vnesite drugo vrednost.</Invalid>
+    </msg>
+  </ECMPhoneFormatValidator>
+  <!--
+  ###################################################################################
+  # org.exoplatform.ecm.jcr.ECMNameValidator  #
+  ###################################################################################
+  -->
+  <ECMNameValidator>
+    <msg>
+      <Invalid-char>Polje '{0}' ima nekaj neveljavnih znakov. Vnesi drugo vrednost.</Invalid-char>
+      <empty-input>Vrednost polja '{0}' je prazna.</empty-input>
+    </msg>
+  </ECMNameValidator>
+  <EmptyFieldValidator>
+    <msg>
+      <empty-input>Vnesite vrednost v polje '{0}'.</empty-input>
+    </msg>
+  </EmptyFieldValidator>
+  <!--
+  ###################################################################################
+  # org.exoplatform.ecm.jcr.PermissionValidator  #
+  ###################################################################################
+  -->
+  <PermissionValidator>
+  <msg>
+      <permission-path-invalid>Dovoljenje '{0}' je neveljavno.</permission-path-invalid>
+  </msg>
+  </PermissionValidator>
+  <!--
+  ###################################################################################
+  # Repository  #
+  ###################################################################################
+  -->
+  <UIWorkspaceList>
+    <label>
+      <workspaceName>Delovni prostor:</workspaceName>
+      <rootNodeInfo>UIWorkspaceList</rootNodeInfo>
+      <rootNodePath>Korenska pot:</rootNodePath>
+    </label>
+  </UIWorkspaceList>
+  <!--
+  ###################################################################################
+  # Others  #
+  ###################################################################################
+  -->
+  <UIFormInputSetWithAction>
+    <msg>
+      <confirm-delete>Ali ste prepričani, da želite izbrisati?</confirm-delete>
+    </msg>
+  </UIFormInputSetWithAction>
+  <template>
+    <title>
+      <AddPermission>Dodaj dovoljenje</AddPermission>
+    </title>
+  </template>
+  <metadataTypeTab>
+    <title>
+      <AddPermission>Dodaj dovoljenje</AddPermission>
+    </title>
+  </metadataTypeTab>
+  <PermissionButton>
+    <title>
+      <AddPermission>Dodaj dovoljenje</AddPermission>
+    </title>
+  </PermissionButton>
+  <nodeTypeDefinition>
+    <title>
+      <AddSuperType>Dodaj Super vrsto</AddSuperType>
+    </title>
+  </nodeTypeDefinition>
+  <childNodeDefinition>
+    <title>
+      <AddRequiredType>Dodaj Obvezno vrsto</AddRequiredType>
+      <AddDefaultType>Dodaj Privzeto vrsto</AddDefaultType>
+    </title>
+  </childNodeDefinition>
+  <propertyDefinition>
+    <title>
+      <AddConstraints>Dodaj omejitve</AddConstraints>
+    </title>
+  </propertyDefinition>
+  <authInputSet>
+    <title>
+      <Select>Izberi</Select>
+    </title>
+  </authInputSet>
+  <!--
+  #grid with action
+  -->
+  <UIViewContainer>
+    <title>
+      <View>Pogled</View>
+      <EditInfo>Uredi</EditInfo>
+      <Delete>Izbriši</Delete>
+    </title>
+<label>
+  <permission>{0} v {1}</permission>
+</label>
+  </UIViewContainer>
+  <ECMTemplate>
+    <title>
+      <EditInfo>Uredi</EditInfo>
+      <Delete>Izbriši</Delete>
+    </title>
+  </ECMTemplate>
+  <step1>
+    <title>
+      <AddPermission>Dodaj dovoljenje</AddPermission>
+    </title>
+  </step1>
+  <step2>
+    <title>
+      <SelectContainer>Izberi vsebnik/kontejner</SelectContainer>
+      <SelectStore>Izberi trgovino</SelectStore>
+    </title>
+  </step2>
+  <step3>
+    <title>
+      <SelectQueryHandler>Izberi obdelovalnik poizvedb (handler)</SelectQueryHandler>
+    </title>
+  </step3>
+  <UIDrivePermissionSelector>
+    <label>
+      <selectGroup>Izberi skupino</selectGroup>
+      <selectUser>Izberi uporabnika</selectUser>
+      <selectMembership>Izberi članstvo</selectMembership>
+    </label>
+  </UIDrivePermissionSelector>
+  
+  <UIPermissionSelector>
+    <label>
+      <selectGroup>Izberi skupino</selectGroup>
+      <selectUser>Izberi uporabnika</selectUser>
+      <selectMembership>Izberi članstvo</selectMembership>
+    </label>
+  </UIPermissionSelector>
+  
+  <UIAnyPermission>
+    <label>
+      <anyPermission>Vsa dovoljenja</anyPermission>
+    </label>
+  </UIAnyPermission>
+  
+  <UIMDriveAnyPermission>
+    <label>
+      <anyPermission>Vsa dovoljenja</anyPermission>
+    </label>
+  </UIMDriveAnyPermission>
+  
+  <UIQueriesAnyPermission>
+    <label>
+      <anyPermission>Vsa dovoljenja</anyPermission>
+    </label>
+  </UIQueriesAnyPermission>
+  
+  <MetadataPermission>
+    <label>
+      <selectGroup>Izberi skupino</selectGroup>
+    </label>
+  </MetadataPermission>  
+  <MetadataPermission>
+    <label>
+      <selectMembership>Izberi članstvo</selectMembership>
+    </label>
+  </MetadataPermission>
+  <anyPermission>
+    <title>
+      <AddAnyPermission>Nastavi vsa dovoljenja</AddAnyPermission>
+    </title>
+  </anyPermission>
+  <!--
+  #########Since ECM 2.3##################
+  -->
+  <QueriesPermissionBrowse>
+    <label>
+      <selectGroup>Izberi skupino</selectGroup>
+      <selectUser>Izberi uporabnika</selectUser>
+      <selectMembership>Izberi članstvo</selectMembership>
+    </label>
+  </QueriesPermissionBrowse>
+  <!--
+  #########Since ECM 2.4##################
+  -->  
+  <UIViewFormTabPane>
+    <label>
+      <addSymLink>Dodaj bližnjico</addSymLink>
+    </label>
+  </UIViewFormTabPane>
+  <!--
+  #########Since ECM 2.5##################
+  --> 
+  
+  <UIDriveForm>
+<msg>
+  <permission-path-invalid>Dovoljenje '{0}' je neveljavno.</permission-path-invalid>
+  </msg>
+  </UIDriveForm>
+  
+  <UITaxonomyTreeMainForm>
+    <msg>
+      <homepath-emty>Pot do domače strani je obveza.</homepath-emty>
+      <targetpath-emty>Ciljna pot je obvezna.</targetpath-emty>
+    </msg>
+  </UITaxonomyTreeMainForm>
+  <UITaxonomyWorkingArea>
+  <msg>
+  <exist>To drevesno vozlišče že obstaja.</exist>
+  </msg>
+  </UITaxonomyWorkingArea>
+
+  <PermissionTreeSelectUser>
+    <label>
+      <option>
+        <userName>#{word.userName}</userName>
+        <lastName>#{word.lastName}</lastName>
+        <firstName>#{word.firstName}</firstName>
+        <email>#{word.email}</email>
+      </option>
+      <group>Skupina</group>
+      <searchUser>Uporabnik</searchUser>
+      <userName>#{word.userName}</userName>
+      <lastName>#{word.lastName}</lastName>
+      <firstName>#{word.firstName}</firstName>
+    <email>#{word.email}</email>
+      <action>#{word.action}</action>
+      <Add>#{word.Add}</Add>
+      <Close>#{word.Close}</Close>
+    </label>
+  </PermissionTreeSelectUser>
+  
+  <!--
+  #########Since ECM 2.6 ##################
+  -->   
+  <DriveInputSet>
+    <label>
+      <nt_folder>Mapa za dokumente</nt_folder>
+      <nt_unstructured>Mapa za vsebine</nt_unstructured>
+      <exo_cssFolder>Mapa za CSS</exo_cssFolder>
+      <exo_jsFolder>Mapa za Javascript</exo_jsFolder>
+      <exo_linkFolder>Mapa za povezave</exo_linkFolder>
+      <exo_webFolder>Mapa za Spletne vsebine</exo_webFolder>
+   </label>
+  </DriveInputSet>
+  <UIPermissionTreeInfo>
+  <msg>
+      <confirm-delete-permission>Ali ste prepričani, da želite izbrisati to dovoljenje?</confirm-delete-permission>
+      <no-permission-remove>Lastnika ali sistemskega uporabnika ni mogoče odstraniti.</no-permission-remove>  
+  </msg>
+  </UIPermissionTreeInfo>  
+  <UITaxonomyTreeMainForm>
+<msg>
+      <no-right-target-path>Prosimo, izberite drugo pot domov.</no-right-target-path>
+</msg>
+</UITaxonomyTreeMainForm>
+
+<UIECMAdminControlPanel>
+    <tab>
+      <label>        
+        <ManageUnLock>Upravljanje zaklepanja</ManageUnLock>
+      </label>
+    </tab>        
+</UIECMAdminControlPanel>
+<UIUnLockForm>
+    <label>
+      <name>Vozlišče poti</name>      
+      <permissions>Dovoljenja</permissions>
+      <PermissionButton>UI Unlock Form</PermissionButton>
+    </label>
+    <action>
+      <Save>#{word.save}</Save>
+      <Cancel>#{word.cancel}</Cancel>
+    </action>
+    <msg>
+      <permission-require>Izbrati morate dovoljenja.</permission-require>      
+    </msg>
+  </UIUnLockForm>
+  <UILockHolderList>
+  <header>
+  <name>Skupine ali uporabniki</name>
+  <action>Dejanje</action>
+  </header>
+  <tooltip>
+<DeleteLock>Izbriši skupino</DeleteLock>
+  </tooltip>
+  <msg>
+  <can-not-delete-lock-holder>Skupine {0} ni mogoče izbrisati.</can-not-delete-lock-holder>
+  </msg>
+  </UILockHolderList>
+  <UILockNodeList>
+  <header>
+  <name>Naslov</name>
+  <hoderLock>Zaklenil lastnik</hoderLock>
+  <action>Dejanje</action>
+  </header>
+  <tooltip>
+<UnLock>Odkleni</UnLock>
+  </tooltip>
+  <msg>
+  <access-denied-exception>Nimate dovoljenja za dostop do vozlišča, ki se nahaja na naslovu {0}, ali pa je vozlišče bilo izbrisano.</access-denied-exception>
+  </msg>
+  </UILockNodeList>
+  <EditUnLockForm>
+    <title>
+      <UIUnLockForm>Upravljanje zaklepanja</UIUnLockForm>
+    </title>
+  </EditUnLockForm>  
+  <UITabPane>
+    <action>
+      <Close>#{word.close}</Close>
+    </action>
+    <title>
+    <UILockHolderContainer>Upravljanje zaklepanja</UILockHolderContainer>
+    <UILockNodeList>Zaklenjeno vozlišče</UILockNodeList>
+    </title>
+  </UITabPane>
+  
+  <UIViewFormTabPane>
+    <action>
+      <AddTabForm>Dodaj zavihek</AddTabForm>
+      <AddTab>#{word.save}</AddTab>
+      <BackViewForm>Nazaj</BackViewForm>
+    </action>
+  </UIViewFormTabPane>
+  
+ <UITemplateForm>
+<tab>
+<label>
+<defaultSkin>CSS</defaultSkin>
+</label>
+</tab>
+</UITemplateForm>
+ 
+  <UITabPane>
+    <title>
+      <UISkinTab>CSS</UISkinTab>
+    </title>
+  </UITabPane>
+  
+  <UISkinTab>
+    <header>
+      <name>Ime</name>
+      <roles>Vloge</roles>
+      <baseVersion>Različica</baseVersion>
+      <action>Dejanja</action>
+    </header>
+    <msg>
+      <undeletable>'{0}'  ni mogoče izbrisati, ker je privzet.</undeletable>
+      <confirm-delete>Ali ste prepričani, da želite izbrisati to preobleko?</confirm-delete>
+    </msg>
+    <action>
+      <title>
+        <Edit>Uredi</Edit>
+        <Delete>Izbriši</Delete>
+      </title>
+    </action>
+  </UISkinTab>
+  
+  <SkinForm>
+    <label>
+      <UITemplateContent>SkinForm</UITemplateContent>
+      <UIPopupWindow>Dovoljenje preobleke</UIPopupWindow>
+      <selectVersion>Različice</selectVersion>
+      <content>Vsebina:</content>
+      <name>Ime:</name>
+      <isDocumentTemplate>je Predloga dokumenta</isDocumentTemplate>
+      <viewPermission>Dovoljenje:</viewPermission>
+      <enableVersion>Omogoči shranjevanje različic</enableVersion>
+    </label>
+    <title>Dodaj/Uredi preobleko</title>
+  </SkinForm>
+
+ <UITagManager>
+   <action>
+     <title>
+       <RemoveStyle>Odstrani</RemoveStyle>
+         <AddStyle>Dodaj slog</AddStyle>
+     </title>
+   </action>
+   <msg>
+     <confirm-delete>Ali ste prepričani, da želite izbrisati ta slog oznake?</confirm-delete>
+   </msg>
+ </UITagManager>
+
+<UITaxonomyTreeContainer>
+<action>
+<Cancel>#{word.close}</Cancel>
+</action>
+</UITaxonomyTreeContainer>
+<UITaxonomyTreeMainForm>
+<action>
+<NextViewPermission>Naslednji</NextViewPermission>
+<Reset>Reset</Reset>
+</action>
+</UITaxonomyTreeMainForm>
+
+<UIPermissionTreeForm>
+<action>
+<Save>Save</Save>
+<Cancel>#{word.cancel}</Cancel>
+<Reset>Reset</Reset>
+<NextAddAction>Naslednji</NextAddAction>
+<Previous>Prejšnji</Previous>
+</action>
+</UIPermissionTreeForm>
+
+<UIActionForm>
+<action>
+<PreviousViewPermission>Prejšnji</PreviousViewPermission>
+<NextViewTree>Naslednji</NextViewTree>
+</action>
+  <msg>
+    <xss-vulnerability-character>Polje '{0}' vsebuje znake, ki povzročajo XSS ranljivost</xss-vulnerability-character>
+<xss-vulnerability-character-wo-label>Vnos lahko vsebuje znake, ki povzročajo XSS ranljivost</xss-vulnerability-character-wo-label>
+  </msg>
+</UIActionForm>
+
+<UITaxonomyTreeWorkingArea>
+<action>
+<Previous>Prejšnji</Previous>
+</action>
+</UITaxonomyTreeWorkingArea>
+
+  <UITabPane>
+    <title>
+      <UITagManager>Upravitelj oznak</UITagManager>
+      <UITagPermissionManager>Upravljanje z dovoljenji označb</UITagPermissionManager>
+    </title>
+  </UITabPane>
+  
+  <UITagPermissionInfo>
+    <header>
+      <usersOrGroups>Uporabnik ali skupina</usersOrGroups>
+      <action>Dejanje</action>
+    </header>
+    <action>
+      <title>
+        <Delete>Izbriši</Delete>
+      </title>
+    </action>
+    <msg>
+      <confirm-delete-permission>Ali ste prepričani, da želite izbrisati to dovoljenje?</confirm-delete-permission>
+    </msg>   
+  </UITagPermissionInfo>
+  <UITagPermissionForm>
+    <title>Dodaj dovoljenje</title>
+    <action>
+      <Save>#{word.save}</Save>
+      <Add>Dodaj</Add>
+    </action>
+    <label>
+      <userOrGroup>Članstva:</userOrGroup>
+    </label>
+    <msg>
+      <userOrGroup-alreadyExists>To članstvo že obstaja. Izberite drugo.</userOrGroup-alreadyExists>
+    </msg>    
+  </UITagPermissionForm>
+  
+  <UIGroupMemberSelector>
+    <label>
+      <selectGroup>Izberi skupino</selectGroup>
+      <selectMembership>Izberi članstvo</selectMembership>
+    </label>
+  </UIGroupMemberSelector>
+  
+  <UIFolksonomyManager>
+  <msg>
+      <confirm-delete>Ali ste prepričani, da želite izbrisati ta slog?</confirm-delete>
+  </msg>
+    <action>
+      <title>
+        <AddStyle>Dodaj slog</AddStyle>
+      </title>
+    </action>
+  </UIFolksonomyManager>  
+<UIActionForm>
+  <title>
+  <ShowComponent>Odpri okno</ShowComponent>
+  <removeReference>Odstrani</removeReference>
+  </title>
+  </UIActionForm> 
+  <NodeTypeNameValidator>
+    <msg>
+      <Invalid-char>Obstaja nekaj neveljavnih znakov. Vnesite drugo vrednost.</Invalid-char>
+      <empty-input>Vnosno polje je prazno.</empty-input>
+    </msg>
+  </NodeTypeNameValidator>
+  <UIActionForm>
+    <msg>
+      <constraint-violation-exception>Vozlišče '{0}' ne more biti dodano v '{1}' v delovni prostor '{2}'.  Obstaja težava  z dovoljenji ali omejitvami.</constraint-violation-exception>
+    </msg>
+  </UIActionForm>
+  
+  <UIWorkspaceWizard>
+    <msg>
+      <name-not-allowed>Prepovedano ime</name-not-allowed>
+    </msg>
+  </UIWorkspaceWizard>
+  <UIRepositoryForm>
+    <msg>
+      <not-complete-repository>The repository is being created. You need to wait a few minutes before creating another one.</not-complete-repository>
+    </msg>
+  </UIRepositoryForm>
+  
+  <UIViewFormTabPane>
+  <label>
+  <addCategory>Dodaj Kategorijo</addCategory>
+          <addLocalizationLink>Dodaj prevod</addLocalizationLink>
+  </label>
+  </UIViewFormTabPane>
+
+<UIDriveForm>
+<label>
+<allowNodeTypesOnTree>Dovoljene vrste vozlišča na levi drevesni strukturi:</allowNodeTypesOnTree>
+</label>
+</UIDriveForm>
+<DriveInputSet>
+<title>
+<RemovePermission>Remove Permission</RemovePermission>
+<ChooseNodeType>Izberi Vrste vozlišča</ChooseNodeType>
+<RemoveNodeType>Odstrani</RemoveNodeType>
+</title>
+</DriveInputSet>
+<PopupNodeTypeSelector>
+<title>
+<UINodeTypeSelector>Izberi Vrste vozlišča</UINodeTypeSelector>
+<PopupNodeTypeSelector>Izberi Vrste vozlišča</PopupNodeTypeSelector>
+</title>
+</PopupNodeTypeSelector>
+  <UINodeTypeSelector>
+    <label>
+      <selectedAllNodeTypes>Izberi vse vrste vozlišč</selectedAllNodeTypes>
+    </label>
+  </UINodeTypeSelector>
+  <UIScriptForm>
+    <msg>
+      <PathNotFoundException>V mapi '{0}' že obstaja skripta.</PathNotFoundException>      
+    </msg>
+  </UIScriptForm>
+ <UINodeTypeList>
+   <msg>
+   <no-list>Vrsta vozlišča, ki bi ustrezala isaknemu pogoju ne obstaja.</no-list>
+   </msg>
+ </UINodeTypeList>
+  <UIActionForm>
+    <msg>
+      <canotChangeActionId>Ne moreš spremeniti ID dejanja.</canotChangeActionId>
+    </msg>
+  </UIActionForm>
+  <PopupComponent>
+    <title>
+      <UINodeTypeSelector>Izbirnik vrste vozlišča</UINodeTypeSelector>
+    </title>
+  </PopupComponent>
+  <UIPageIterator>
+    <label>
+      <maxPageSize>Največja velikost strani</maxPageSize>
+    </label>
+  </UIPageIterator>
+  <UILockNodeList>
+    <msg>
+      <can-not-unlock-node>Nimaš dovoljenja za odklepanje tega vozlišča. Obrnite se na skrbnika, da vam dodeli ustrezno pravico.</can-not-unlock-node>
+    </msg>
+ </UILockNodeList>
+</bundle>

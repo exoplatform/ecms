@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<bundle>
+  <UISEOForm>
+    <label>  
+      <title>Naslov:</title>
+      <description>Opis:</description>
+      <keywords>Ključne besede:</keywords>
+      <language>Jezik:</language>
+      <robots>Roboti:</robots>
+      <sitemap>Kazalo:</sitemap>
+      <sitemapvisible>Vidno v kazalu</sitemapvisible>
+    <isInherited>Podedovano od nadrejene strani</isInherited>
+      <priority>Prednost:</priority>
+      <frequency>Pogostost:</frequency>
+      <select-language>Izberi jezik</select-language>
+      <option>
+        <Always>Vedno</Always>
+        <Hourly>Vsako uro</Hourly>
+        <Daily>Dnevno</Daily>
+        <Weekly>Tedensko</Weekly>
+        <Monthly>Mesečno</Monthly>
+        <Yearly>Letno</Yearly>
+        <Never>Nikoli</Never>
+      </option> 
+    </label>
+    <tip>
+  <priority>Veljavne vrednosti so med 0.0 in 1.0</priority>
+  </tip>   
+    <action>
+      <Save>#{word.save}</Save>
+      <Cancel>#{word.cancel}</Cancel>
+    </action>
+    <msg>
+      <repository-exception>Med shranjevanjem metapodatkov strani je prišlo do nepričakovane napake.</repository-exception>
+      <confirm-delete>Ali ste prepričani, da želite izbrisati te SEO podatke?</confirm-delete>      
+    </msg>
+    <title>
+    <seo-delete>Izbriši</seo-delete>
+    </title>
+  <help> 
+  <priority>Veljavne vrednosti so med 0.0 in 1.0.</priority>
+  <description>Pomoč iskalcem: naj vedo, da naslednja stran vsebuje povezave, ki jih iščejo.</description>
+  <keywords>Najpomembnejši termini na strani, ločeni z vejico.</keywords>  
+  </help>  
+  </UISEOForm>
+  <UISEOPopupWindow>
+  <title>
+      <UISEOForm>Upravljanje SEO</UISEOForm>
+  </title>
+  </UISEOPopupWindow>    
+  <UISEOToolbarForm>
+  <title>
+      <seo>Upravljanje SEO</seo>
+  </title>
+  <label>
+    <seo>SEO</seo>
+  </label>
+  </UISEOToolbarForm>  
+  <FloatNumberValidator>
+    <msg>
+      <Invalid-number>Vrednost polja Prioritete mora biti številska vrednost. Veljaven raspon je med 0.0 in 1.0.</Invalid-number>
+    </msg>
+  </FloatNumberValidator>  
+  
+</bundle>

@@ -1,0 +1,96 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<bundle>
+  <UIDefaultSearchForm>
+    <label>
+      <keyword>Ključna beseda</keyword>
+      <portal>Portal</portal>
+      <Page>Stran</Page>
+      <Document>Dokument</Document>
+    </label>
+    <action>
+      <Search>Išči</Search>
+    </action>
+  </UIDefaultSearchForm>
+
+  <UIDefaultSearchResult>
+    <label>
+      <Page>Stran</Page>
+      <Document>Dokument</Document>
+      <DocumentAndPage>Dokument in stran</DocumentAndPage>
+      <documentandpage>Dokument in stran</documentandpage>
+      <results>Rezultati od {0} do {1} za {2}</results>
+      <oneResult>Edini rezultat za {0}</oneResult>
+      <ofAboutCaption>od približno</ofAboutCaption>
+      <timeUnitCaption>sekund</timeUnitCaption>
+      <similar>Strani z isto vsebino</similar>
+      <editor>Urejevalnik</editor>
+      <date>Datum</date>
+      <relevancy>Ustreznost</relevancy>
+      <title>Naslov</title>
+      <sortBy>Razvrsti po:</sortBy>
+    </label>
+    <action>
+      <edit>Uredi</edit>
+    </action>
+    <msg>
+      <search-not-match-type>Iskanje {0} se ne ujema z nobenim {1}.</search-not-match-type>
+    </msg>
+  </UIDefaultSearchResult>
+  <UISearchPageLayoutManager>
+    <label>
+      <itemsPerPageSelector>Elementov na strani</itemsPerPageSelector>
+      <searchFormSelector>Predloga iskalnega obrazca</searchFormSelector>
+      <searchResultSelector>Predloga rezultatov iskanja</searchResultSelector>
+      <searchPaginatorSelector>Predloga številčenja strani iskalnika</searchPaginatorSelector>
+      <searchPageLayoutSelector>Predloga postavitve iskalne strani</searchPageLayoutSelector>
+      <searchResultBasePathInputSetAction>Osnovna pot</searchResultBasePathInputSetAction>
+      <pageMode>Način strani</pageMode>
+      <option>
+        <none>Noben</none>
+        <more>Več</more>
+        <pagination>Številčenje strani</pagination>
+      </option>
+    </label>
+    <action>
+      <Save>#{word.save}</Save>
+      <Cancel>#{word.cancel}</Cancel>
+    </action>
+  </UISearchPageLayoutManager>
+  <searchResultBasePathInputSetAction>
+    <title>
+      <SelectBasePath>Izberi osnovno pot</SelectBasePath>
+    </title>
+  </searchResultBasePathInputSetAction>  
+  <UISearchForm>  
+   <message>
+     <keyword-not-support>Ključna beseda ni veljavna. Nekateri znaki so neznani.</keyword-not-support>
+     <not-checked>Izberite vrsto iskanja.</not-checked>
+     <keyword-not-empty>Vnesite ključno besedo.</keyword-not-empty>
+   </message>
+  </UISearchForm>
+  <UIPaginatorDefault>
+    <label>
+      <next>Naslednji</next>
+      <previous>Prejšnji</previous>
+      <more>Več</more>
+    </label>
+  </UIPaginatorDefault>
+  <UISearchPageLayoutDefault>
+    <label>
+      <quickEditTitle>Hitro urejanje</quickEditTitle>
+    </label>
+  </UISearchPageLayoutDefault>
+  <searchOption>
+    <label>
+      <pageCheckBox>na Straneh</pageCheckBox>
+      <documentCheckBox>v Vsebini</documentCheckBox>
+    </label>
+  </searchOption>
+  <ViewMode>
+    <label>
+      <option>
+        <all>Preišči vse strani</all>
+      </option>  
+    </label>  
+  </ViewMode>
+</bundle>

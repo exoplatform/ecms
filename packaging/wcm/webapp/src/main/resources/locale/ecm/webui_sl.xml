@@ -1,0 +1,104 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<bundle>
+  <!--
+  #####################################################################
+  # org.exoplatform.ecm.webui.tree.selectmany.UICategoriesSelectPanel #
+  #####################################################################
+  -->
+  <UITreeList>
+    <header>
+      <name>Ime</name>
+      <action>Dodaj</action>
+    </header>
+    <info>
+      <child-not-found>Podrejenih ni bilo mogoče najti!</child-not-found>
+    </info>
+    <action>
+      <title>
+        <select>Izberi</select>
+      </title>
+    </action>
+  </UITreeList>
+  <!--
+  ######################################################################
+  # org.exoplatform.ecm.webui.tree.selectmany.UISelectedCategoriesGrid #
+  ######################################################################
+  -->
+  <UISelectedCategoriesGrid>
+    <header>
+      <categoryName>Ime kategorije</categoryName>
+      <categoryPath>Pot do kategorije</categoryPath>
+      <action>#{word.action}</action>
+    </header>
+    <action>
+      <SaveCategories>#{word.save}</SaveCategories>
+      <Cancel>#{word.cancel}</Cancel>
+    </action>
+    <msg>
+      <cannot-save>Kategorije niso bile shranjene.</cannot-save>
+      <have-saved>Kategorije so bile uspešno shranjene</have-saved>
+      <non-categories>Kategorije so napačne. Izberite ustrezne kategorije.</non-categories>
+      <confirm-delete>Ali želite izbrisati to kategorijo?</confirm-delete>
+    </msg>
+  </UISelectedCategoriesGrid>
+  <!--
+  ######################################################################
+  # org.exoplatform.ecm.webui.selector.UIPermissionSelector           #
+  ######################################################################
+  -->
+  <SelectUserOrGroup>
+    <title>
+      <UIPermissionUser>Izberi uporabnika</UIPermissionUser>
+      <UIPermissionMembership>Izberi članstvo</UIPermissionMembership>
+      <TaxoSelectUserOrGroup>Izberi članstvo</TaxoSelectUserOrGroup>
+    </title>
+  </SelectUserOrGroup>
+  <UIPermissionUser>
+    <label>
+      <selectUser>Izberi uporabnika</selectUser>
+      <selectGroup>Poišči in izberi skupino</selectGroup>
+    </label>
+  </UIPermissionUser>
+  <UIPermissionMembership>
+    <label>
+      <selectUser>Izberi članstvo</selectUser>
+      <selectGroup>Poiščite in izberite skupino</selectGroup>
+    </label>
+  </UIPermissionMembership>
+  <TaxoSelectUserOrGroup>
+    <label>
+      <selectGroup>Izberi skupino</selectGroup>
+      <selectMembership>Izberi članstvo</selectMembership>
+    </label>
+  </TaxoSelectUserOrGroup>
+  <!--
+  ######################################################################
+  # org.exoplatform.wcm.webui.clv.UICLVConfig        #
+  ######################################################################
+  -->
+  <UICLVConfigTargetPageSelectorPopupWindow>
+    <title>
+      <UIPageSelector>Izbirnik strani</UIPageSelector>
+    </title>
+  </UICLVConfigTargetPageSelectorPopupWindow>
+  <!--
+  ###################################################################################
+  # Repository                                        #
+  ###################################################################################
+  -->
+  <rootNodeInfo>
+    <title>
+      <AddRootNode>Dodajte korensko vozlišče</AddRootNode>
+    </title>
+  </rootNodeInfo>
+  <!--
+  ################################################################################
+  #             org.exoplatform.ecm.webui.component.admin.UIMetadataList         #
+  ################################################################################
+  -->
+  <UIMetadataAnyPermission>
+    <label>
+      <anyPermission>Vsa dovoljenja</anyPermission>
+    </label>
+  </UIMetadataAnyPermission>
+</bundle>

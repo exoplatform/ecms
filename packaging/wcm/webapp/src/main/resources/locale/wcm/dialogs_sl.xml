@@ -1,0 +1,93 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+
+    Copyright (C) 2009 eXo Platform SAS.
+    
+    This is free software; you can redistribute it and/or modify it
+    under the terms of the GNU Lesser General Public License as
+    published by the Free Software Foundation; either version 2.1 of
+    the License, or (at your option) any later version.
+    
+    This software is distributed in the hope that it will be useful,
+    but WITHOUT ANY WARRANTY; without even the implied warranty of
+    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the GNU
+    Lesser General Public License for more details.
+    
+    You should have received a copy of the GNU Lesser General Public
+    License along with this software; if not, write to the Free
+    Software Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA
+    02110-1301 USA, or see the FSF site: http://www.fsf.org.
+
+-->
+<bundle>
+  <WebContent>
+    <dialog>
+      <label>
+        <MainContent>Glavna vsebina</MainContent>
+        <cssFile>default.css</cssFile>
+        <jsFile>default.js</jsFile>
+        <Advanced>Več nastavitev</Advanced>
+        <Summary>Povzetek</Summary>
+        <name>#{word.name}</name>
+        <title>Naslov</title>
+        <ContentCSS>CSS podatki</ContentCSS>
+        <hintCSS>Določite lahko glavno datoteko s slogi za spletne vsebine. Ta slog bo prepisal datoteke s slogi, ki so definirani na ravni spletnega mesta in na ravni skupne rabe.</hintCSS>
+        <ContentJS>JS podatki</ContentJS>
+        <hintJS>Določite lahko nekaj JavaScript kode, ki se lahko izvrši, preden se vaše spletne vsebine upodobijo.</hintJS>
+        <WebContentHtml>Glavna vsebina</WebContentHtml>
+        <Illustration>Ilustracija</Illustration>
+        <hintIllustration>Določite sliko, ki bo prikazana, ko se spletne vsebine prikažejo na seznamu. Določite lahko tudi povzetek besedila, ki bo prikazan ob sliki.</hintIllustration>
+        <confirm-delete>Ali ste prepričani, da želite izbrisati to ilustracijo?</confirm-delete>
+        <illustrationImage>Ilustracija</illustrationImage>
+        <imageMimeType>Vrsta slike</imageMimeType>
+        <image>Prenesi sliko</image>
+        <imageWidth>Širina slike</imageWidth>
+        <imageHeight>Višina slike</imageHeight>
+        <Synchronize>Sinhroniziraj s CSS in HTML</Synchronize>
+      </label>
+    </dialog>
+  </WebContent>
+
+  <CSSFile>
+    <dialog>
+      <label>
+        <name>#{word.name}</name>
+        <active>Aktiven</active>
+        <priority>Prioriteta</priority>
+        <content>CSS podatki</content>
+      </label>
+    </dialog>
+  </CSSFile>
+
+  <JSFile>
+    <dialog>
+      <label>
+        <name>#{word.name}</name>
+        <active>Aktiven</active>
+        <priority>Prioriteta</priority>
+        <content>JS podatki</content>
+      </label>
+    </dialog>
+  </JSFile>
+
+  <WebLink>
+    <dialog>
+      <label>
+        <name>#{word.name}</name>
+        <url>URL</url>
+        <description>Opis</description>
+      </label>
+    </dialog>
+  </WebLink>
+
+  <SiteMetadata>
+    <dialog>
+      <label>
+        <title>Naslov strani</title>
+        <description>Opis mesta</description>
+        <keywords>Ključne besede strani</keywords>
+        <robots>Obnašanje mehanizma za iskanje</robots>
+      </label>
+    </dialog>
+  </SiteMetadata>
+</bundle>
