@@ -220,9 +220,10 @@
 			else filter = dropdownlist.options[dropdownlist.selectedIndex].value;
 		}	else filter = 'All';
 	
-		var command = ECS.cmdEcmDriver+ECS.cmdGetFolderAndFile+"driverName="+driverName+"&currentFolder="+encodeURIComponent(currentFolder)+"&currentPortal="+ECS.portalName+"&repositoryName="+ECS.repositoryName+"&workspaceName="+ECS.workspaceName;
+		var command = ECS.cmdEcmDriver+ECS.cmdGetFolderAndFile+"driverName="+driverName+"&currentFolder="+currentFolder+"&currentPortal="+ECS.portalName+"&repositoryName="+ECS.repositoryName+"&workspaceName="+ECS.workspaceName;
 		var url = ECS.hostName + ECS.connector+command+"&filterBy="+filter+"&type="+eXo.ecm.ECS.typeObj;
-
+		// Encode also drive name
+		url = encodeURI(url);
 		//if(eXo.ecm.ECS.strConnection == url) return;	
 		eXo.ecm.ECS.strConnection = url;
 		eXo.ecm.ECS.renderSubTrees(currentNode, event, url);

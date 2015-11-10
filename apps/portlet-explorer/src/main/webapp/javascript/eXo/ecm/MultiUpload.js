@@ -594,7 +594,8 @@
 		  "&userId=" + eXo.ecm.MultiUpload.userId +
 		  "&fileName=" + cleanName(eXo.ecm.MultiUpload.uploadingFileIds[id].name) + 
 		  "&language=" + eXo.ecm.MultiUpload.userLanguage;
-		  
+		  // Encode uri to check existence
+		  uri = encodeURI(uri);
 		gj.ajax({url: uri, 
 			   success: function(result, status, xhr) {
 				if (!result) {
@@ -823,6 +824,8 @@
 		  "&currentPortal="+ eXo.ecm.MultiUpload.portalName +
 		  "&userId=" + eXo.ecm.MultiUpload.userId +
 		  "&action=progress&uploadId=" + id;
+		  // Encode request to control upload progress
+		  uri = encodeURI(uri);
 		  gj.ajax({url: uri, 
 			   success: function(ret) {
 		  		if (!ret) {
@@ -912,10 +915,12 @@
 		    "&fileName=" + cleanName(file.name) + 
 		    "&language=" + eXo.ecm.MultiUpload.userLanguage +
 		    "&existenceAction=" + eXo.ecm.MultiUpload.existingBehavior[progressID] +
-				"&action=save";
-				if(eXo.ecm.MultiUpload.srcAction != null && eXo.ecm.MultiUpload.srcAction != undefined)
-					uri += eXo.ecm.MultiUpload.srcAction;
-		    gj.ajax({url: uri, 
+			"&action=save";
+			if(eXo.ecm.MultiUpload.srcAction != null && eXo.ecm.MultiUpload.srcAction != undefined) {
+				uri += eXo.ecm.MultiUpload.srcAction;
+			}
+			uri = encodeURI(uri);
+		    gj.ajax({url: uri,
 	 	     success: function(ret, status, xhr) {
 		  	  //mark OK
 		  	  if (eXo.ecm.MultiUpload.connectionFailed[progressID] > eXo.ecm.MultiUpload.MAX_CONNECTION) {
@@ -1005,7 +1010,8 @@
 		  	  }
 		  	  //add link to open file
 		  	  var fileDiv = gj("#file" + progressID, eXo.ecm.MultiUpload.document)[0];
-		  	  fileDiv.innerHTML = "<a href='" + eXo.env.server.portalBaseURL + "?path=" + eXo.ecm.MultiUpload.drive + nodePath + 
+                          // Encode URL to open link in progress bar
+		  	  fileDiv.innerHTML = "<a href='" + encodeURI(eXo.env.server.portalBaseURL + "?path=" +eXo.ecm.MultiUpload.drive + nodePath) + 
 		  	  					  "'>" + fileDiv.innerHTML + "</a>";
 		  	  //refresh UIJCRExplorer
 		  	  if (eXo.ecm.MultiUpload.processFiles() == 0) {
@@ -1085,6 +1091,8 @@
 			 "&currentPortal="+ eXo.ecm.MultiUpload.portalName +
 			 "&userId=" + eXo.ecm.MultiUpload.userId +
 			 "&action=abort&uploadId=" + progressID;
+		// Encode URI to abort upload
+		uri = encodeURI(uri);
 		gj.ajax({url: uri});
 		eXo.ecm.MultiUpload.processNextUploadRequestInQueue();
 		}

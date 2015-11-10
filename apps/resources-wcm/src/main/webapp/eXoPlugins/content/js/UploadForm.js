@@ -171,7 +171,8 @@ UploadForm.prototype.uploadFile = function() {
 		strParam +="&currentFolder="+eXo.ecm.ECS.currentFolder+"&currentPortal="+eXo.ecm.ECS.portalName+"&uploadId="+uploadId;
 		if(formUpload) {
 			var connector = eXo.ecm.ECS.connector.replace("repositoryName=repository", "/");
-			formUpload.action = connector + eXo.ecm.ECS.cmdEcmDriver + eXo.ecm.ECS.uploadFile +"?"+ strParam;
+			// encode param to upload
+			formUpload.action = connector + eXo.ecm.ECS.cmdEcmDriver + eXo.ecm.ECS.uploadFile +"?"+ encodeURI(strParam);
 			formUpload.submit();
 		}
 		eXo.ecm.UploadForm.stopUpload = false;
@@ -195,6 +196,8 @@ UploadForm.prototype.uploadFile = function() {
 					strParam += "&currentFolder="+eXo.ecm.ECS.currentFolder;
 					strParam += "&currentPortal="+eXo.ecm.ECS.portalName;
 					strParam +="&action=progress&uploadId="+uploadId;
+					// Encode URL of upload control
+					strParam = encodeURI(strParam);
 					var strConnector = eXo.ecm.ECS.connector.replace("/getDrivers?repositoryName=repository", "/");
 					var connector = strConnector + eXo.ecm.ECS.cmdEcmDriver + eXo.ecm.ECS.controlUpload + "?"+ strParam + "&language=" + eXo.ecm.ECS.userLanguage;
 					var iXML = eXo.ecm.WCMUtils.request(connector);
@@ -248,7 +251,8 @@ UploadForm.prototype.uploadFileAbort = function() {
 	if (repositoryName !== undefined) strParam += "&repositoryName="+ repositoryName;
 	if (workspaceName !== undefined)  strParam += "&workspaceName=" + workspaceName;
 	var strConnector = eXo.ecm.ECS.connector.replace("/getDrivers?repositoryName=repository", "/");
-	var connector = strConnector + eXo.ecm.ECS.controlUpload + "?"+strParam;
+	// Encode URL to abort upload
+	var connector = strConnector + eXo.ecm.ECS.controlUpload + "?"+encodeURI(strParam);
 	eXo.ecm.WCMUtils.request(connector);
 	eXo.ecm.UploadForm.stopUpload = true;
 	eXo.ecm.UploadForm.removeMask();
@@ -263,7 +267,8 @@ UploadForm.prototype.uploadFileCancel = function() {
 	if (repositoryName !== undefined) strParam += "&repositoryName="+ repositoryName;
 	if (workspaceName !== undefined)  strParam += "&workspaceName=" + workspaceName;
 	var strConnector = eXo.ecm.ECS.connector.replace("/getDrivers?repositoryName=repository", "/");
-	var connector = strConnector + eXo.ecm.ECS.cmdEcmDriver + eXo.ecm.ECS.controlUpload + "?"+strParam;
+        // Encode URL to cancel upload
+	var connector = strConnector + eXo.ecm.ECS.cmdEcmDriver + eXo.ecm.ECS.controlUpload + "?"+encodeURI(strParam);
 	eXo.ecm.WCMUtils.request(connector);
 	eXo.ecm.UploadForm.removeMask();
 };
@@ -275,7 +280,8 @@ UploadForm.prototype.uploadFileDelete = function() {
 	if (repositoryName !== undefined) strParam += "&repositoryName="+ repositoryName;
 	if (workspaceName !== undefined)  strParam += "&workspaceName=" + workspaceName;
 	var strConnector = eXo.ecm.ECS.connector.replace("/getDrivers?repositoryName=repository", "/");
-	var connector = strConnector + eXo.ecm.ECS.cmdEcmDriver + eXo.ecm.ECS.controlUpload + "?"+strParam;
+        // Delete upload file
+	var connector = strConnector + eXo.ecm.ECS.cmdEcmDriver + eXo.ecm.ECS.controlUpload + "?"+encodeURI(strParam);
 	eXo.ecm.WCMUtils.request(connector);
 	eXo.ecm.UploadForm.removeMask();
 	eXo.ecm.UploadForm.showUploadForm();
@@ -387,8 +393,8 @@ UploadForm.prototype.uploadFileSave = function() {
 		strParam +="&action=save&uploadId="+uploadId+"&fileName="+nodeName;
 		strParam +="&existenceAction="+eXo.ecm.UploadForm.existingBehavior;
 		var strConnector = eXo.ecm.ECS.connector.replace("/getDrivers?repositoryName=repository", "/");
-//		var strConnector = eXo.ecm.ECS.connector.replace("/getDrivers?repositoryName=repository", "/");
-		var connector = strConnector + eXo.ecm.ECS.cmdEcmDriver + eXo.ecm.ECS.controlUpload + "?"+ strParam + "&language="+eXo.ecm.ECS.userLanguage;
+		// Encode URI to control upload
+		var connector = strConnector + eXo.ecm.ECS.cmdEcmDriver + eXo.ecm.ECS.controlUpload + "?"+ encodeURI(strParam) + "&language="+eXo.ecm.ECS.userLanguage;
 //		eXp.sendRequest(connector);
 		var mXML = eXo.ecm.WCMUtils.request(connector);
     try {      
@@ -429,7 +435,8 @@ UploadForm.prototype.updateFiles = function(nodeId) {
 		else filter = dropdownlist.options[dropdownlist.selectedIndex].value;
 	}	else filter = 'Web Contents';
 	var connector = eXo.ecm.ECS.hostName + strConnector+"repositoryName="+eXo.ecm.ECS.repositoryName+"&workspaceName="+eXo.ecm.ECS.workspaceName+"&userId=" + eXo.ecm.ECS.userId + "&filterBy="+filter;
-	var xmlTreeNodes = eXo.ecm.WCMUtils.request(connector);
+        // Update Content Selector after uploading file
+	var xmlTreeNodes = eXo.ecm.WCMUtils.request(encodeURI(connector));
 	if(!xmlTreeNodes) return;
 	var fileList = xmlTreeNodes.getElementsByTagName('File');
 	if(fileList && fileList.length > 0) eXo.ecm.ECS.listFiles(fileList);
