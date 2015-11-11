@@ -3,47 +3,72 @@
 	def currentPage = uicomponent.getCurrentPage();
 %>
 
-<div class="UIPaginatorDefault">
+<div class="pagination uiPageIterator">
+<ul>
 
-  <%if(currentPage > 1) { %>
-	  <a href="javascript:void(0);" onclick="<%=uicomponent.event("ShowPage","1")%>" class="First">&nbsp;</a>			
-  <% } else { %>
-	  <a class="FirstDis">&nbsp;</a>			
-  <%}%>
   <% if( currentPage - 1 > 0 ){%>        
-      <a href="javascript:void(0);" onclick="<%=uicomponent.event("ShowPage","${currentPage - 1}")%>" class="Prev">&nbsp;</a>
+      <li>
+        <a data-placement="bottom" rel="tooltip" data-original-title="Previous Page" href="javascript:void(0);" onclick="<%=uicomponent.event("ShowPage","${currentPage - 1}")%>"><i class="uiIconPrevArrow"></i></a>
+     </li>
   <% } else {%>
-	  <a class="PrevDis">&nbsp;</a>
+    <li class="disabled">
+    <a data-placement="bottom" rel="tooltip" data-original-title="Previous Page"><i class="uiIconPrevArrow"></i></a>
+	</li>
   <%}%>
-  
+  <% if( currentPage == 1 ){%>        
+  <li class="active">
+  <a href="javascript:void(0);" onclick="<%=uicomponent.event("ShowPage","1")%>">1</a>
+</li>
+<% } else {%>
+<li>
+<a href="javascript:void(0);" onclick="<%=uicomponent.event("ShowPage","1")%>">1</a>
+</li>
+<%}%>
+<% if( currentPage > 3 ){%>        
+<li>
+<a >...</a>
+</li>
+<% }%>
   <%
-  int min = 1;
-  int max = totalPage;
-  if(totalPage > 5 && currentPage > 2){
-    min = currentPage - 2;
-    max = currentPage + 3;
-    if (max > totalPage) max = totalPage;
-  } else if( totalPage > 5 && currentPage < 3 ){
-    min = 1;
-    max = 6;
-  }
+  int min = currentPage - 1;
+  int max = currentPage + 1;
+  if(min < 2) min = 2;
+  if(max > totalPage - 1) max = totalPage - 1;
+  if(min <= max)
   for( i in min..max) { %>
   <%  if( i == currentPage) { %>
-	    <a href="javascript:void(0);" onclick="<%=uicomponent.event("ShowPage","$i")%>" class="Item Current"><%=i%></a>
+    <li class="active">
+      <a href="javascript:void(0);" onclick="<%=uicomponent.event("ShowPage","$i")%>"><%=i%></a>
+    </li>
   <%  } else { %>
-	    <a href="javascript:void(0);" onclick="<%=uicomponent.event("ShowPage","$i")%>" class="Item"><%=i%></a>
+    <li>
+      <a href="javascript:void(0);" onclick="<%=uicomponent.event("ShowPage","$i")%>"><%=i%></a>
+    </li>
   <%  } %> 
   <%}%>    
-  
+  <% if( currentPage < totalPage - 2 ){%>        
+  <li>
+  <a >...</a>
+  </li>
+  <% }%>
+  <% if( currentPage == totalPage ){%>   
+  <li class="active">
+  <a href="javascript:void(0);" onclick="<%=uicomponent.event("ShowPage","$totalPage")%>">$totalPage</a>
+</li>
+<% } else {%>
+<li>
+<a href="javascript:void(0);" onclick="<%=uicomponent.event("ShowPage","$totalPage")%>">$totalPage</a>
+</li>
+<%}%>
   <% if(currentPage + 1 <= totalPage) { %>
-       <a href="javascript:void(0);" onclick="<%=uicomponent.event("ShowPage","${currentPage + 1}")%>" class="Next">&nbsp;</a>	
+       <li>
+         <a href="javascript:void(0);" data-placement="bottom" rel="tooltip" href="" data-original-title="Next Page" onclick="<%=uicomponent.event("ShowPage","${currentPage + 1}")%>" ><i class="uiIconNextArrow"></i></a>
+       </li>
   <% } else { %>
-	   <a class="NextDis">&nbsp;</a>
+  <li class="disabled">
+    <a data-placement="bottom" rel="tooltip" href="#" data-original-title="Next Page"><i class="uiIconNextArrow"></i></a>
+  </li>
   <%}%>
-  <% if(currentPage < totalPage) {%>        
-       <a href="javascript:void(0);" onclick="<%=uicomponent.event("ShowPage","$totalPage")%>" class="Last">&nbsp;</a>					        	  
-  <% } else {%>
-	   <a class="LastDis">&nbsp;</a>
-  <% }%>    	    
-  
+
+  </ul>
 </div>
