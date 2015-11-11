@@ -194,8 +194,7 @@ public class NewFolksonomyServiceImpl implements NewFolksonomyService, Startable
     if (listenerService!=null && activityService !=null) {
       try {
         if (activityService.isAcceptedNode(documentNode) || 
-            (documentNode.getPrimaryNodeType().getName().equals(NodetypeConstant.NT_FILE) && 
-                activityService.isBroadcastNTFileEvents(documentNode))) {
+            documentNode.getPrimaryNodeType().getName().equals(NodetypeConstant.NT_FILE)) {
           listenerService.broadcast(ActivityCommonService.TAG_ADDED_ACTIVITY, documentNode, tagValue);
         }
       } catch (Exception e) {

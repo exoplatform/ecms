@@ -210,9 +210,10 @@ public class ThumbnailServiceImpl implements ThumbnailService {
    * {@inheritDoc}
    */
   public Node getThumbnailNode(Node node) throws Exception {
-    Node parentNode = node.getParent();
     try {
-      Node thumbnailFolder = parentNode.getNode(EXO_THUMBNAILS_FOLDER);
+      String nodePath = node.getPath();
+      String thumPath = nodePath.replace(nodePath.substring(nodePath.lastIndexOf("/") + 1), EXO_THUMBNAILS_FOLDER);
+      Node thumbnailFolder = (Node)node.getSession().getItem(thumPath);
       return thumbnailFolder.getNode(((NodeImpl) node).getInternalIdentifier());
     } catch(Exception e) {
       return null;
