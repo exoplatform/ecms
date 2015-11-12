@@ -617,6 +617,14 @@
 					var syncTimeout;
 					// sync scheduler
 					function scheduleSync() {
+						// if no sync already scheduled - we run it immediately and then schedule a next one in syncTimeout
+						if (!autoSyncs[syncName]) {
+							var syncProcess = doSync();
+							syncProcess.fail(function(e) {
+								delete autoSyncs[syncName]; // cancel and cleanup
+								utils.log("ERROR: " + (e.message ? e.message : e)  + ". Auto-sync canceled for " + syncName + ". (1)");
+							});
+						}
 						autoSyncs[syncName] = setTimeout(function() {
 							var syncProcess = syncFunc();
 							syncProcess.done(function() {
@@ -626,7 +634,7 @@
 							});
 							syncProcess.fail(function(e) {
 								delete autoSyncs[syncName]; // cancel and cleanup
-								utils.log("ERROR: " + (e.message ? e.message : e)  + ". Auto-sync canceled for " + syncName + ".");
+								utils.log("ERROR: " + (e.message ? e.message : e)  + ". Auto-sync canceled for " + syncName + ". (2)");
 							});
 						}, syncTimeout);
 					}
@@ -661,7 +669,7 @@
 						provider.clientModule.done(function(client) {
 							if (client && client.onChange && client.hasOwnProperty("onChange")) {
 								// apply custom client algorithm
-								syncTimeout = 5000; // sync in 5sec
+								syncTimeout = 7000; // sync in 7sec
 								syncFunc = function() { 
 									// We chain actual sync to the sync initiator from client.
 									// The initiator should return jQuery Promise: it will be resolved if changes appear and rejected on error. 
@@ -669,7 +677,8 @@
 									var process = $.Deferred(); 
 									var initiator = client.onChange(drive);
 									$.when(initiator).done(function() {
-										var sync = doSync(); // it's time to sync
+										// it's time to sync
+										var sync = doSync(); 
 										sync.done(function() {
 											process.resolve();	
 										});
