@@ -3638,7 +3638,9 @@ public abstract class JCRLocalCloudDrive extends CloudDrive implements CloudDriv
     if (changes != null) {
       final long changeId = getChangeId(); // last synchronized change in the drive
       for (String changeType : changeTypes) {
-        return changes.contains(changeType + changeId);
+        if (changes.contains(changeType + changeId)) {
+          return true;
+        }
       }
     }
     return false;
@@ -4878,9 +4880,10 @@ public abstract class JCRLocalCloudDrive extends CloudDrive implements CloudDriv
     int index;
     int openingParenthesesPos = baseTitle.lastIndexOf('(');
     int closingParenthesesPos = baseTitle.lastIndexOf(')');
-    if (openingParenthesesPos > 0 && closingParenthesesPos > 0 && closingParenthesesPos > openingParenthesesPos + 1) {
+    if (openingParenthesesPos > 0 && closingParenthesesPos > 0 && closingParenthesesPos > openingParenthesesPos) {
       try {
-        index = Integer.valueOf(baseTitle.substring(openingParenthesesPos, closingParenthesesPos));
+        index = Integer.valueOf(baseTitle.substring(++openingParenthesesPos, closingParenthesesPos));
+        baseTitle = baseTitle.substring(0, openingParenthesesPos);
       } catch (NumberFormatException e) {
         index = 1;
       }
