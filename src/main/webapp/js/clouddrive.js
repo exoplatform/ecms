@@ -551,9 +551,25 @@
 				var path = contextNode.path;
 				var process = getDrive(workspace, path);
 				process.done(function(drive, status) {
+					var provider = providers[drive.provider.id]; 
+					if (provider) {
+						provider.clientModule.done(function(client) {
+							if (client) {
+								// init context drive within the provider client
+								if (client.initDrive && client.hasOwnProperty("initDrive")) {
+									client.initDrive(drive);
+								}
+								// init files by the client if applicable
+								if (client.initFile && client.hasOwnProperty("initFile")) {
+									for (fpath in drive.files) {
+										client.initFile(drive.files[fpath]);										
+									}
+								}
+							}
+						});
+					}
+					// use already cached files with new drive
 					if (contextDrive && contextDrive.path == drive.path) {
-						// XXX same drive, probably nodePath is a symlink path,
-						// use already cached files with new drive
 						for (fpath in contextDrive.files) {
 							if (contextDrive.files.hasOwnProperty(fpath) && !drive.files.hasOwnProperty(fpath)) {
 								drive.files[fpath] = contextDrive.files[fpath];
@@ -610,7 +626,7 @@
 							});
 							syncProcess.fail(function(e) {
 								delete autoSyncs[syncName]; // cancel and cleanup
-								utils.log("ERROR: " + (e.message ? e.message : e)  + ". Auto-sync canceled for " + syncName + ".");
+								utils.log("ERROR: " + (e.message ? e.message : e)  + ". Auto-sync canceled for " + syncName);
 							});
 						}, syncTimeout);
 					}
@@ -645,15 +661,21 @@
 						provider.clientModule.done(function(client) {
 							if (client && client.onChange && client.hasOwnProperty("onChange")) {
 								// apply custom client algorithm
-								syncTimeout = 5000; // sync in 5sec
-								syncFunc = function() { 
+								syncTimeout = 10000; // sync in 10sec
+								syncFunc = function() {
+									var process = $.Deferred();
+									// Run first sync now and then schedule a next one by change from client
+									var sync = doSync();
+									sync.fail(function(e) {
+										process.reject(e);
+									}); 
 									// We chain actual sync to the sync initiator from client.
 									// The initiator should return jQuery Promise: it will be resolved if changes appear and rejected on error. 
 									// We use jQuery.when() to deal if not Promise returned (it's bad case - sync will run each 5sec forever).
-									var process = $.Deferred(); 
 									var initiator = client.onChange(drive);
 									$.when(initiator).done(function() {
-										var sync = doSync(); // it's time to sync
+										// changes happen remotely - it's time to sync
+										var sync = doSync(); 
 										sync.done(function() {
 											process.resolve();	
 										});
@@ -922,7 +944,8 @@
 			// load client module
 			provider.clientModule = loadClientModule(provider);
 			
-			if (contextDrive && contextDrive.provider.id == provider.id) {
+			// TODO cleanup, this op will be performed in init()->initContext()->readContextDrive()
+			/*if (contextDrive && contextDrive.provider.id == provider.id) {
 				// init context drive within the provider client
 				provider.clientModule.done(function(client) {
 					if (client) {
@@ -931,7 +954,7 @@
 						}
 					}
 				});
-			}
+			}*/
 		};
 
 		/**
