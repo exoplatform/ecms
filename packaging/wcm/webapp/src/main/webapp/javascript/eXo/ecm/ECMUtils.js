@@ -163,6 +163,13 @@
 			Self.popupArray = [];
 		};
 
+		ECMUtils.prototype.closeASPopup = function () {
+			var closeBtn = gj("#UIUserActivityStreamPortlet #UISocialPopupWindow .popupHeader .uiIconClose");
+			if(closeBtn!==undefined) closeBtn.trigger("click");
+			gj("body").removeClass("modal-open");
+		};
+
+
 		ECMUtils.prototype.initVote = function (voteId, rate) {
 		  var vote = document.getElementById(voteId);
 		  voteRate = vote.rate = rate = parseInt(rate);
