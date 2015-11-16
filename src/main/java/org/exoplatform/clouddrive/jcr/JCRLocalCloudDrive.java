@@ -1005,7 +1005,7 @@ public abstract class JCRLocalCloudDrive extends CloudDrive implements CloudDriv
      */
     protected final void exec() throws CloudDriveException, RepositoryException {
       if (LOG.isDebugEnabled()) {
-        LOG.debug("> Running " + getName() + " command of " + title());
+        LOG.debug("> Running drive " + getName() + " command of " + title());
       }
 
       startTime.set(System.currentTimeMillis());
@@ -1396,10 +1396,9 @@ public abstract class JCRLocalCloudDrive extends CloudDrive implements CloudDriv
         }
 
         hasChanges = hasChanges();
-        if (hasChanges) {
-          // and save the drive
-          save();
-        }
+        
+        // save the drive even if no changes found (we may need to save change ID for later tracking etc)
+        save();
       } finally {
         // transfer all available messages to an user, then unlock
         for (Iterator<CloudDriveMessage> miter = syncFilesMessages.iterator(); miter.hasNext();) {
@@ -1825,9 +1824,9 @@ public abstract class JCRLocalCloudDrive extends CloudDrive implements CloudDriv
             change.apply();
             applied.add(change);
             if (FileChange.REMOVE.equals(change.changeType)) {
-              addRemoved(change.getPath());
+              addRemoved(change.filePath);
             } else {
-              CloudFile cfile = change.getFile();
+              CloudFile cfile = change.file;
               if (cfile != null) {
                 addChanged(cfile);
               }
@@ -2064,47 +2063,47 @@ public abstract class JCRLocalCloudDrive extends CloudDrive implements CloudDriv
    */
   protected class FileChange {
 
-    public static final String  REMOVE         = "D";
+    public static final String            REMOVE         = "D";
 
-    public static final String  CREATE         = "A";
+    public static final String            CREATE         = "A";
 
-    public static final String  UPDATE         = "U";
+    public static final String            UPDATE         = "U";
 
     /**
      * Used internally in {@link FileChange} only as result of UPDATE of a file content property.
      */
-    public static final String  UPDATE_CONTENT = "C";
+    public static final String            UPDATE_CONTENT = "C";
 
-    final CountDownLatch        applied        = new CountDownLatch(1);
+    protected final CountDownLatch        applied        = new CountDownLatch(1);
 
-    final boolean               isFolder;
+    protected final boolean               isFolder;
 
-    final String                path;
+    protected final String                path;
 
-    final CloudFileSynchronizer synchronizer;
+    protected final CloudFileSynchronizer synchronizer;
 
-    String                      changeType;
+    protected String                      changeType;
 
-    String                      filePath;
+    protected String                      filePath;
 
-    String                      fileId;
+    protected String                      fileId;
 
-    String                      changeId;
+    protected String                      changeId;
 
     /**
      * Referenceable file UUID for removal (optional for other operations).
      */
-    String                      fileUUID;
+    protected String                      fileUUID;
 
     /**
      * Target file node. Should be initialized in {@link #init(Set)} in worker thread.
      */
-    Node                        node;
+    protected Node                        node;
 
     /**
      * Cloud file produced by the change. Can be <code>null</code> for removal.
      */
-    CloudFile                   file;
+    protected CloudFile                   file;
 
     /**
      * Constructor for newly observed change when file {@link Node} available in the context. Used for file
@@ -2118,7 +2117,7 @@ public abstract class JCRLocalCloudDrive extends CloudDrive implements CloudDriv
      * @throws RepositoryException
      * @throws CloudDriveException
      */
-    FileChange(String path, String fileId, boolean isFolder, String changeType, CloudFileSynchronizer synchronizer)
+    protected FileChange(String path, String fileId, boolean isFolder, String changeType, CloudFileSynchronizer synchronizer)
         throws CloudDriveException, RepositoryException {
       this.changeId = nextChangeId();
       this.path = path;
@@ -2140,12 +2139,12 @@ public abstract class JCRLocalCloudDrive extends CloudDrive implements CloudDriv
      * @throws DriveRemovedException
      * @throws RepositoryException
      */
-    FileChange(String changeId,
-               String path,
-               String fileId,
-               boolean isFolder,
-               String changeType,
-               CloudFileSynchronizer synchronizer) {
+    protected FileChange(String changeId,
+                         String path,
+                         String fileId,
+                         boolean isFolder,
+                         String changeType,
+                         CloudFileSynchronizer synchronizer) {
       this.changeId = changeId;
       this.path = path;
       this.fileId = fileId;
@@ -2163,20 +2162,91 @@ public abstract class JCRLocalCloudDrive extends CloudDrive implements CloudDriv
      * @throws RepositoryException
      * @throws CloudDriveException
      */
-    FileChange(String path, String changeType) throws RepositoryException, CloudDriveException {
+    protected FileChange(String path, String changeType) throws RepositoryException, CloudDriveException {
       this(path, null, false, changeType, null);
+    }
+
+    /**
+     * @return the isFolder
+     */
+    public boolean isFolder() {
+      return isFolder;
+    }
+
+    /**
+     * @return the path
+     */
+    public String getPath() {
+      return path;
+    }
+
+    /**
+     * @return the synchronizer
+     */
+    public CloudFileSynchronizer getSynchronizer() {
+      return synchronizer;
+    }
+
+    /**
+     * @return the changeType
+     */
+    public String getChangeType() {
+      return changeType;
+    }
+
+    /**
+     * @return the filePath
+     */
+    public String getFilePath() {
+      return filePath;
+    }
+
+    /**
+     * @return the fileId
+     */
+    public String getFileId() {
+      return fileId;
+    }
+
+    /**
+     * @return the changeId
+     */
+    public String getChangeId() {
+      return changeId;
+    }
+
+    /**
+     * @return the fileUUID
+     */
+    public String getFileUUID() {
+      return fileUUID;
+    }
+
+    /**
+     * @return the node
+     */
+    public Node getNode() {
+      return node;
+    }
+
+    /**
+     * @return the file
+     */
+    public CloudFile getFile() {
+      return file;
+    }
+
+    /**
+     * Number of the change was applied (should not be more than 1).
+     * 
+     * @return how many times the change applied
+     */
+    public long getApplied() {
+      return applied.getCount();
     }
 
     void setFileUUID(String fileUUID) {
       this.fileUUID = fileUUID;
-    }
-
-    String getPath() {
-      return filePath;
-    }
-
-    CloudFile getFile() {
-      return file;
     }
 
     /**
