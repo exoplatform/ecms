@@ -68,19 +68,21 @@ public class CloudDriveContext {
     if (obj == null) {
       CloudDriveContext context = new CloudDriveContext(requestContext);
 
-      boolean initContext = true;
       CloudDriveFeatures features = WCMCoreUtils.getService(CloudDriveFeatures.class);
       CloudDriveService service = WCMCoreUtils.getService(CloudDriveService.class);
+      boolean initContext = false;
       // add all providers to let related UI works for already connected and linked files
       for (CloudProvider provider : service.getProviders()) {
         // init cloud drive if we can connect to this user
         if (features.canCreateDrive(workspace, nodePath, requestContext.getRemoteUser(), provider)) {
-          if (initContext) {
-            context.init(workspace, nodePath);
-            initContext = false;
-          }
+          initContext = true;
           context.addProvider(provider);
         } // else, drive will be not initialized - thus not able to connect
+      }
+
+      // init cloud drive if at least one provider available
+      if (initContext) {
+        context.init(workspace, nodePath);
       }
 
       Map<String, String> contextMessages = messages.get();
@@ -113,7 +115,7 @@ public class CloudDriveContext {
    * @see {@link #init(RequestContext, String, String, CloudProvider)}
    */
   public static boolean initConnected(RequestContext requestContext, Node parent) throws RepositoryException,
-                                                                                 CloudDriveException {
+                                                                                  CloudDriveException {
     Object obj = requestContext.getAttribute(JAVASCRIPT);
     if (obj != null) {
       CloudDriveContext context = (CloudDriveContext) obj;
@@ -136,7 +138,7 @@ public class CloudDriveContext {
    * @throws CloudDriveException
    */
   public static void showInfo(RequestContext requestContext, String title, String message) throws RepositoryException,
-                                                                                          CloudDriveException {
+                                                                                           CloudDriveException {
     Object obj = requestContext.getAttribute(JAVASCRIPT);
     if (obj != null) {
       CloudDriveContext context = (CloudDriveContext) obj;
@@ -206,7 +208,7 @@ public class CloudDriveContext {
           }
         }
       }
-      
+
       if (count >= 1) {
         map.deleteCharAt(map.length() - 1); // remove last semicolon
         map.append('}');
