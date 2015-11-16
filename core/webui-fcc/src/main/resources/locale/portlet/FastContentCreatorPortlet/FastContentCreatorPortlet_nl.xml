@@ -1,0 +1,197 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<bundle>
+  <UIFCCForm>
+    <msg>
+      <name-not-allowed>Deze naam is niet toegestaan.</name-not-allowed>
+      <in-versioning>Controleer het huidige node voordat u een nieuw node toevoegt.</in-versioning>
+      <cannot-save>Er is een fout opgetreden tijdens het opslaan van het node.</cannot-save>
+      <saved-successfully>{0}</saved-successfully>
+      <not-support>Kan niet laden de sjabloon van de '{0}'.</not-support>
+      <not-add-folder>Alleen bestanden kunnen worden toegevoegd aan deze map.</not-add-folder>
+      <access-denied>De toegang is geweigerd. U Voeg geen toestemming op '{0}'.</access-denied>
+      <path-not-found>Het pad '{0}' werd verwijderd of is ongeldig.</path-not-found>
+      <node-locked>Node '{0}' is vergrendeld. Gelieve te ontgrendelen dit knooppunt voordat u documenten maakt.</node-locked>
+      <node-isExist>Dit Node al bestaat in de '{0}' en is niet toegestaan als dezelfde naam heeft als zijn broer.</node-isExist>
+      <get-dialog-path>Er is een fout opgetreden terwijl ze het dialoogvenster pad.</get-dialog-path>
+      <new-jcr-template>Er is een fout opgetreden tijdens het maken van een nieuwe sjabloon.</new-jcr-template>
+    </msg>
+    <action>
+      <Save>#{word.save}</Save>
+      <Cancel>#{word.cancel}</Cancel>
+    </action>
+  </UIFCCForm>
+
+  <UIFCCConfig>
+    <label>
+      <UIFCCSaveLocationField>Locatie opslaan</UIFCCSaveLocationField>
+      <UIFCCWorkspaceFormSelectBox>Selecteert u werkruimte</UIFCCWorkspaceFormSelectBox>
+      <UIFCCTemplateField>Sjabloon opties</UIFCCTemplateField>
+      <UIFCCLocationFormInputAction>Locatie voor het opslaan</UIFCCLocationFormInputAction>
+      <UIFCCTemplateFormSelectBox>Selecteer sjabloon</UIFCCTemplateFormSelectBox>
+      <UIFCCSaveFormStringInput>Aangepaste knop Opslaan</UIFCCSaveFormStringInput>
+      <UIFCCMessageFormTextareaInput>Aangepaste bericht opslaan</UIFCCMessageFormTextareaInput>
+      <UIFCCRedirectFormCheckboxInput>Omleiden:</UIFCCRedirectFormCheckboxInput>
+      <UIFCCRedirectPathFormStringInput>Redirect Path:</UIFCCRedirectPathFormStringInput>
+      <UIFCCActionField>Acties</UIFCCActionField>
+    </label>
+    <msg>
+      <save-successfully>Portlet voorkeuren opgeslagen.</save-successfully>
+      <item-not-found>Dit pad is ongeldig.</item-not-found>
+      <fileType-empty>Selecteer een bestandstype voordat u deze configuratie opslaat.</fileType-empty>
+      <ws-empty>Selecteer een werkruimte.</ws-empty>
+      <action-empty>Selecteer een map met een actie.</action-empty>
+      <message-empty>Het veld "Aangepaste opslaan bericht" is vereist in het geval u niet de optie redirect kiest, of het pad leeg is.</message-empty>
+      <get-template>Er is een fout opgetreden terwijl het toegang tot van de sjabloon.</get-template>
+      <set-template-option>Er is een fout opgetreden tijdens het instellen van de optie sjabloon.</set-template-option>
+      <do-select>Er is een fout opgetreden terwijl het selecteren van de locatie.</do-select>
+      </msg>
+    <action>
+      <Save>#{word.save}</Save>
+    </action>
+  </UIFCCConfig>
+
+  <UIFCCLocationFormInputAction>
+    <title>
+      <SelectPath>Select path</SelectPath>
+    </title>
+  </UIFCCLocationFormInputAction>
+
+  <UIFCCActionList>
+    <header>
+      <name>Naam</name>
+      <description>Beschrijving</description>
+      <instanceOf>Exemplaar van</instanceOf>
+      <action>Actie</action>
+    </header>
+    <action>
+      <Add>Toevoegen</Add>
+    </action>
+    <msg>
+      <empty>Geen acties</empty>
+      <remove-popup-first>U moet wijzig popup sluiten voor het verwijderen van deze node.</remove-popup-first>
+      <confirm-delete-action>Wilt u deze actie verwijderen?</confirm-delete-action>
+      <template-empty>De sjabloon voor '{0}' is null of leeg.</template-empty>
+      <template-null>De sjabloon is null of leeg, of u bent niet gemachtigd voor toegang tot deze sjabloon.</template-null>
+      <access-denied>toegang geweigerd! U hebt niet genoeg rechten om deze actie uit te voeren</access-denied>
+    </msg>
+  </UIFCCActionList>
+
+  <UIFCCSelectorPopupWindow>
+    <title>
+      <UIOneNodePathSelector>selecteer locatie</UIOneNodePathSelector>
+    </title>
+  </UIFCCSelectorPopupWindow>
+
+  <UIWorkspaceList>
+    <label>
+      <workspaceName>Werkruimte</workspaceName>
+      <rootNodePath>Root pad</rootNodePath>
+      <rootNodeInfo>Root node</rootNodeInfo>
+    </label>
+  </UIWorkspaceList>
+
+  <rootNodeInfo>
+    <title>
+      <AddRootNode>Toevoegen Root Node</AddRootNode>
+    </title>
+  </rootNodeInfo>
+
+  <UITreeList>
+    <info>
+      <child-not-found>Node heeft geen enkele child.</child-not-found>
+    </info>
+    <header>
+      <name>Naam</name>
+      <action>Actie</action>
+    </header>
+  </UITreeList>
+
+  <UIFCCActionPopupWindow>
+    <title>
+      <UIFCCActionContainer>Actie toevoegen</UIFCCActionContainer>
+    </title>
+  </UIFCCActionPopupWindow>
+
+  <UIFCCActionForm>
+    <title>Actie toevoegen/wijzigen</title>
+    <action>
+      <Save>#{word.save}</Save>
+      <Close>#{word.close}</Close>
+    </action>
+    <msg>
+      <repository-exception>Deze actie kan niet opslaan. De opgegeven naam moet niet een index als het laatste element.</repository-exception>
+      <numberformat-exception>Deze actie kan niet opslaan. De opgegeven naam moet niet ' [' of ']'.</numberformat-exception>
+      <existed-action>De actie naam '{0}' bestaat al. Selecteer een andere naam.</existed-action>
+      <unable-add-action>Kan niet toevoegen van deze actie.</unable-add-action>
+      <unable-add>Kan niet toevoegen van deze actie. Dit knooppunt is wortel of u hebt geen goedkeuringen.</unable-add>
+      <not-support>Het dialoogvenster '{0}' wordt niet ondersteund.</not-support>
+      <no-permission-add>toegang geweigerd ! U heeft geen recht op actie toe te voegen</no-permission-add>
+      <access-denied>toegang geweigerd! U hebt geen toegang op deze template</access-denied>
+    </msg>
+    <validator>
+      <validator>Validator</validator>
+      <destPath>met pad</destPath>
+    </validator>
+  </UIFCCActionForm>
+
+  <UIFCCActionTypeForm>
+    <label>
+      <actionType>Aanmaken Actie van Type</actionType>
+    </label>
+    <msg>
+      <not-support>Kan niet laden de sjabloon van de '{0}'.</not-support>
+      <do-not-permission>U bent niet gemachtigd om te laden van de sjabloon van de '{0}'.</do-not-permission>
+    </msg>
+  </UIFCCActionTypeForm>
+
+  <PopupComponent>
+    <title>
+      <UIOneNodePathSelector>selecteer locatie</UIOneNodePathSelector>
+      <UIPermissionSelector>Rechten verkenner</UIPermissionSelector>
+      <UICategoriesSelector>Categorieën toevoegen</UICategoriesSelector>
+    </title>
+  </PopupComponent>
+
+  <DateTimeValidator>
+    <msg>
+      <Invalid-input>Het veld '{0}' met de waarde '{1}' is ongeldig.</Invalid-input>
+    </msg>
+  </DateTimeValidator>
+
+  <UITabPane>
+    <title>
+      <UICategoriesSelectPanel>Selecteer Categorieën</UICategoriesSelectPanel>
+      <UISelectedCategoriesGrid>Gereferencieerd categorieen</UISelectedCategoriesGrid>
+    </title>
+  </UITabPane>
+
+  <PopupComponent>
+    <title>
+      <UICategoriesSelector>Add Categories</UICategoriesSelector>
+    </title>
+  </PopupComponent>
+
+  <UICategoriesSelector>
+    <action>
+      <close>#{word.close}</close>
+    </action>
+  </UICategoriesSelector>
+
+  <PopupComponent>
+    <title>
+      <UIOneTaxonomySelector>Categorieën toevoegen</UIOneTaxonomySelector>
+    </title>
+  </PopupComponent>
+
+  <UITreeTaxonomyList>
+    <label>
+      <taxonomyTree>Taxonomy Tree</taxonomyTree>
+    </label>
+  </UITreeTaxonomyList>
+
+  <UIFCCTaxonomyPopupWindow>
+    <title>
+      <UIOneTaxonomySelector>Categorien kiezer</UIOneTaxonomySelector>
+    </title>
+  </UIFCCTaxonomyPopupWindow>
+</bundle>

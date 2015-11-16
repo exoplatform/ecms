@@ -1,0 +1,446 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+
+    Copyright (C) 2009 eXo Platform SAS.
+    
+    This is free software; you can redistribute it and/or modify it
+    under the terms of the GNU Lesser General Public License as
+    published by the Free Software Foundation; either version 2.1 of
+    the License, or (at your option) any later version.
+    
+    This software is distributed in the hope that it will be useful,
+    but WITHOUT ANY WARRANTY; without even the implied warranty of
+    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the GNU
+    Lesser General Public License for more details.
+    
+    You should have received a copy of the GNU Lesser General Public
+    License along with this software; if not, write to the Free
+    Software Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA
+    02110-1301 USA, or see the FSF site: http://www.fsf.org.
+
+-->
+<bundle>
+  <UIExoStart>
+    <tooltip>
+      <homepage>Homepage</homepage>
+    </tooltip>
+  </UIExoStart>
+
+  <UIFormInputSetWithAction>
+    <msg>
+      <confirm-delete>Weet u zeker dat u wilt verwijderen van dit item?</confirm-delete>
+    </msg>
+  </UIFormInputSetWithAction>
+
+  <Drives>
+    <label>
+      <ManagedSites>Sitebeheer</ManagedSites>
+      <SharedSite>Gedeelde Site</SharedSite>
+    </label>
+  </Drives>
+
+  <Views>
+    <label>
+      <wcm-view>Web</wcm-view>
+      <admin-view>Admin</admin-view>
+      <icon-view>Pictogrammen</icon-view>
+      <thumbails-view>Thumbnails</thumbails-view>
+      <list-view>Lijst</list-view>
+      <authoring-view>Authoring</authoring-view>
+      <wcm-category-view>Categorieën</wcm-category-view>
+      <file-view>Management bestandsweergave</file-view>
+    </label>
+  </Views>
+
+  <UIActionBar>
+    <obtion>
+      <Publication>Publicatie</Publication>
+      <System>Systeem</System>
+    </obtion>
+  </UIActionBar>
+
+  <UIPageSelectorPanel>
+    <header>
+      <path>Pad</path>
+      <action>#{word.action}</action>
+    </header>
+    <msg>
+      <child-not-found>Geen pagina gevonden.</child-not-found>
+    </msg>
+    <title>
+      <select>Selecteren</select>
+    </title>
+  </UIPageSelectorPanel>
+
+  <UIContentDialogFormPopupWindow>
+    <title>
+      <UIContentDialogPreference>Web inhoud voorkeur</UIContentDialogPreference>
+    </title>
+  </UIContentDialogFormPopupWindow>
+
+  <UITabPane>
+    <title>
+      <UIContentBrowsePanelOne>Inhoud Browser</UIContentBrowsePanelOne>
+      <UIContentBrowsePanelMulti>Inhoud Browser</UIContentBrowsePanelMulti>
+      <UIContentBrowsePanelFolder>Mapbrowser</UIContentBrowsePanelFolder>
+      <UIContentSearchForm>Inhoud zoekformulier</UIContentSearchForm>
+      <UIContentSearchResult>Zoekresultaat</UIContentSearchResult>
+      <UIContentViewer>Voorbeeld-inhoud</UIContentViewer>
+      <WebContentMetadataPopup>Eigenschap Selector</WebContentMetadataPopup>
+      <WebContentNodeTypePopup>NodeType Selector</WebContentNodeTypePopup>
+      <UIPermissionManager>Toestemming Manager</UIPermissionManager>
+    </title>
+  </UITabPane>
+
+  <UIContentBrowsePanelOne>
+    <selectBoxValues>
+      <FilterBy>Filteren op</FilterBy>
+      <WebContent>Webinhoud</WebContent>
+      <DMSDocument>Documents</DMSDocument>
+      <Media>Media</Media>
+    </selectBoxValues>
+    <msg>
+      <node-checkout>Het node is uitgecheckt. Controleer het node voordat u deze functie wilt uitvoeren.</node-checkout>
+    </msg>
+  </UIContentBrowsePanelOne>
+
+  <UIContentBrowsePanelMulti>
+    <selectBoxValues>
+      <FilterBy>Filteren op</FilterBy>
+      <WebContent>Webinhoud</WebContent>
+      <DMSDocument>Documents</DMSDocument>
+      <Media>Media</Media>
+    </selectBoxValues>
+  </UIContentBrowsePanelMulti>
+
+  <UIContentBrowsePanelOne>
+    <label>
+      <LeftColumn>Selecteer een map om haar kinderen als inhoud weer te geven.</LeftColumn>
+      <RightColumn>De onderstaande inhoud kan worden geselecteerd.</RightColumn>
+    </label>
+  </UIContentBrowsePanelOne>
+
+  <UIContentBrowsePanelMulti>
+    <label>
+      <LeftColumn>Selecteer een map om haar kinderen als inhoud weer te geven.</LeftColumn>
+      <RightColumn>De onderstaande inhoud kan worden geselecteerd.</RightColumn>
+    </label>
+  </UIContentBrowsePanelMulti>
+
+  <UIContentBrowsePanelFolder>
+    <label>
+      <LeftColumn>Selecteer een map om haar kinderen als inhoud weer te geven.</LeftColumn>
+      <RightColumn>De onderstaande map kan worden geselecteerd.</RightColumn>
+    </label>
+  </UIContentBrowsePanelFolder>
+
+  <UISelectedContentGrid>
+    <label>
+      <name>#{word.name}</name>
+      <add>Toevoegen</add>
+      <delete>Verwijderen</delete>
+    </label>
+    <msg>
+      <no-content-found>Geen inhoud gevonden.</no-content-found>
+      <non-content>U hebt geen inhoud geselecteerd.</non-content>
+    </msg>
+  </UISelectedContentGrid>
+
+  <UICLVContentSelectedGrid>
+    <action>
+      <SaveCategories>#{word.save}</SaveCategories>
+      <Cancel>#{word.cancel}</Cancel>
+    </action>
+  </UICLVContentSelectedGrid>
+
+  <UIContentBrowsePathSelector>
+    <header>
+      <name>#{word.name}</name>
+      <publicationstate>Publicatie staat</publicationstate>
+      <action>Actie</action>
+    </header>
+    <msg>
+      <child-not-found>Geen inhoud gevonden</child-not-found>
+    </msg>
+  </UIContentBrowsePathSelector>
+
+  <UIContentBrowsePathSelectorFolder>
+    <header>
+      <name>#{word.name}</name>
+      <publicationstate>Publicatie staat</publicationstate>
+      <action>Actie</action>
+    </header>
+    <msg>
+      <child-not-found>Geen map gevonden</child-not-found>
+    </msg>
+  </UIContentBrowsePathSelectorFolder>
+
+  <UIContentSearchForm>
+    <title>
+      <Location>Sitenaam</Location>
+      <SearchByName>Zoek op naam</SearchByName>
+      <Fulltext>Woord of zin in inhoud</Fulltext>
+      <Property>Property</Property>
+      <Contain>Bevat</Contain>
+      <FromDate>Van datum</FromDate>
+      <ToDate>Aan datum</ToDate>
+      <DocumentType>Document Type</DocumentType>
+    </title>
+    <tooltip>
+      <AddMetadataType>Properties toevoegen</AddMetadataType>
+      <AddNodeType>node type toevoegen</AddNodeType>
+    </tooltip>    
+    <label>
+      <option>
+        <CREATED>Aangemaakt</CREATED>
+        <MODIFIED>Gewijzigd</MODIFIED>
+      </option>
+    </label>
+    <action>
+      <SearchWebContent>Zoek</SearchWebContent>
+    </action>
+    <msg>
+      <time-to-late>De zoeken tijd is te lang.</time-to-late>
+      <empty-field>Voer een geldige sleutelwoord voor zoeken.</empty-field>
+      <empty-name>Voer de naam om te zoeken</empty-name>
+      <empty-content>Geef een woord of woordgroep om te zoeken</empty-content>
+      <empty-property>Selecteer een property</empty-property>
+      <empty-property-keyword>Geef een trefwoord voor de property</empty-property-keyword>
+      <empty-doctype>Selecteer een documenttype</empty-doctype>
+      <empty-startDate>"Vanaf" is vereist</empty-startDate>
+      <invalid-format>Ongeldige datum/tijdnotatie in veld '{0}'.</invalid-format>
+      <invalid-date>"Tot op heden"moet uiterlijk"van datum"</invalid-date>
+      <invalid-startDate>"Na" mag niet later dan vandaag</invalid-startDate>
+      <invalid-nodeType>Het Nodetype "{0}" is ongeldig. Controleer het opnieuw.</invalid-nodeType>
+      <invalid-keyword>Het sleutelwoord is ongeldig. Sommige tekens worden niet ondersteund.</invalid-keyword>
+    </msg>
+  </UIContentSearchForm>
+
+  <WebContentMetadataPopup>
+    <title>
+      <UIContentPropertySelector>Properties Selector</UIContentPropertySelector>
+    </title>
+  </WebContentMetadataPopup>
+
+  <UIContentPropertySelector>
+    <action>
+      <Add>Toevoegen</Add>
+      <Cancel>#{word.cancel}</Cancel>
+    </action>
+    <label>
+      <metadataType>Metadata type</metadataType>
+      <property_select>Property</property_select>
+    </label>
+  </UIContentPropertySelector>
+
+  <WebContentNodeTypePopup>
+    <title>
+      <UIContentNodeTypeSelector>NodeType Selector</UIContentNodeTypeSelector>
+    </title>
+  </WebContentNodeTypePopup>
+
+  <UIContentNodeTypeSelector>
+    <action>
+      <Save>#{word.save}</Save>
+      <Cancel>#{word.cancel}</Cancel>
+    </action>
+  </UIContentNodeTypeSelector>
+
+  <UIContentSearchResult>
+    <header>
+      <title>Titel</title>
+      <score>Score</score>
+      <publicationstate>Publicatie staat</publicationstate>
+      <action>Actie</action>
+    </header>
+    <title>
+      <Select>Select</Select>
+      <View>Tonen</View>
+    </title>
+    <msg>
+    <template-not-support>Geen voorvertoning weergeven van deze inhoud. De sjabloon wordt niet ondersteund</template-not-support>
+    </msg>
+  </UIContentSearchResult>
+
+  <UIContentDialogForm>
+    <action>
+      <SaveDraft>Klad opslaan</SaveDraft>
+      <FastPublish>Snel publiceren</FastPublish>
+      <Preferences>#{word.settings}</Preferences>
+      <Close>#{word.close}</Close>
+    </action>
+    <msg>
+      <access-denied>U bent niet gemachtigd om te Voeg categoriën toe aan dit document.</access-denied>
+      <exception>Er is een fout opgetreden tijdens het toevoegen van categorieën aan dit document.</exception>
+      <non-categories>Categorieën zijn verkeerd. Selecteer de juiste categorieën.</non-categories>
+    </msg>
+  </UIContentDialogForm>
+
+  <UIPermissionManager>
+    <label>
+      <UIPermissionInputSetWithAction>Permissie</UIPermissionInputSetWithAction>
+      <UIAccessibleCheckboxInput>Toegangsrecht</UIAccessibleCheckboxInput>
+      <UIEditableCheckboxInput>Bewerken rechts</UIEditableCheckboxInput>
+    </label>
+    <action>
+      <Save>#{word.save}</Save>
+      <Clear>Wissen</Clear>
+      <title>
+        <Edit>Bewerken</Edit>
+        <Delete>Verwijderen</Delete>
+      </title>
+    </action>
+  </UIPermissionManager>
+
+  <UIPermissionManagerGrid>
+    <header>
+      <owner>Permissie</owner>
+      <accessible>Toegankelijk</accessible>
+      <editable>Bewerkbare</editable>
+      <action>Actie</action>
+    </header>
+    <msg>
+      <confirm-delete-permission>Weet u zeker dat u wilt verwijderen van deze machtiging?</confirm-delete-permission>
+      <no-permission-remove>U bent niet gemachtigd.</no-permission-remove>
+      <access-denied>toegang geweigerd</access-denied>
+      <node-locked>De pad-element {0} of één van zijn ouders is vergrendeld.</node-locked>
+      <userOrGroup-required>U moet een gebruiker of groep selecteren.</userOrGroup-required>
+      <checkbox-require>U moet rechten instellen.</checkbox-require>
+      <node-checkedin>U moet eerst check out</node-checkedin>
+    </msg>
+  </UIPermissionManagerGrid>
+
+  <UIPermissionInputSetWithAction>
+    <title>
+      <SelectUser>Selecteer gebruiker</SelectUser>
+      <SelectMember>Selecteer lid</SelectMember>
+      <AddAny>Toevoegen van toestemming</AddAny>
+    </title>
+  </UIPermissionInputSetWithAction>
+
+  <UIUserSelectorPopupWindow>
+    <title>
+      <UIUserContainer>Kies een gebruiker</UIUserContainer>
+    </title>
+  </UIUserSelectorPopupWindow>
+
+  <UIGroupSelectorPopupWindow>
+    <title>
+      <UIGroupMemberSelector>Groep selecteur</UIGroupMemberSelector>
+    </title>
+  </UIGroupSelectorPopupWindow>
+
+  <UIGroupMemberSelector>
+    <label>
+      <selectGroup>Selecteer Groep</selectGroup>
+      <selectMembership>Selecteer lidmaatschap</selectMembership>
+    </label>
+  </UIGroupMemberSelector>
+
+  <UIContentDialogPreference>
+    <action>
+      <Back>Terug</Back>
+    </action>
+  </UIContentDialogPreference>
+
+  <ZeroValidator>
+    <msg>
+      <Invalid-number>Nul wordt niet geaccepteerd in het veld '{0}'.</Invalid-number>
+    </msg>
+  </ZeroValidator>
+
+  <UIDropDownPageTemp>
+    <item>
+      <WCMPageConfigs>WCM pagina configuraties</WCMPageConfigs>
+      <ColumnPageConfigs>Kolom pagina configuraties</ColumnPageConfigs>
+      <RowPageConfigs>Rij pagina configuraties</RowPageConfigs>
+      <TabsPageConfigs>Tabbladen pagina configuraties</TabsPageConfigs>
+      <MixPageConfigs>Mix pagina configuraties</MixPageConfigs>
+    </item>
+  </UIDropDownPageTemp>
+
+  <UIWizardPageSelectLayoutForm>
+    <label>
+      <SingleContentViewer>Enkele inhoud kijker</SingleContentViewer>
+      <ContentListViewer>Inhoudslijst Viewer</ContentListViewer>
+      <Search>Zoeken</Search>
+      <Sitemap>Sitemap</Sitemap>
+      <TwoColumnsLayout>Twee-kolom lay-out</TwoColumnsLayout>
+      <ThreeColumnsLayout>Drie kolommen lay-out</ThreeColumnsLayout>
+      <TwoRowsLayout>Twee-rij-indeling</TwoRowsLayout>
+      <ThreeRowsLayout>Drie-rij-indeling</ThreeRowsLayout>
+      <TwoTabsLayout>Twee-tabblad lay-out</TwoTabsLayout>
+      <ThreeTabsLayout>Drie-tabblad lay-out</ThreeTabsLayout>
+      <TwoColumnsOneRowLayout>Twee-kolom &amp; één rij lay-out</TwoColumnsOneRowLayout>
+      <OneRowTwoColumnsLayout>Één rij &amp; twee-kolom lay-out</OneRowTwoColumnsLayout>
+      <ThreeRowsTwoColumnsLayout>Drie-rij &amp; twee-kolom lay-out</ThreeRowsTwoColumnsLayout>
+    </label>
+  </UIWizardPageSelectLayoutForm>
+
+  <Signin>
+    <welcome>Welkom</welcome>
+    <login>Inloggen</login>
+    <logout>Log uit</logout>
+    <language>Verander taal</language>
+    <register>Registreren</register>
+  </Signin>
+  <UIDriveForm>
+<label>
+<wcm-category-view>Categorieweergave</wcm-category-view>
+<wcm-view>WCM inhoud weergeven</wcm-view>
+</label>
+  </UIDriveForm>
+  
+  <ContentSelector>
+    <title>
+      <PersonalDrives>Persoonlijke stations</PersonalDrives>
+      <GeneralDrives>Algemene stations</GeneralDrives>
+      <GroupDrives>Groep schijven</GroupDrives>
+      <Private>Prive</Private>
+      <Public>Openbaar</Public>
+      <BackupCenter>Back-up centrum</BackupCenter>
+      <CategorizedDocumentsCenter>Gecategoriseerde documenten Center</CategorizedDocumentsCenter>
+      <CollaborationCenter>Samenwerking Center</CollaborationCenter>
+      <DigitalAssetsManagementCenter>Digital Assets Management Center</DigitalAssetsManagementCenter>
+      <DMSAdministration>DMS administratie</DMSAdministration>
+      <DocumentsManagementCenter>Documenten Management Center</DocumentsManagementCenter>
+      <LiveDocumentsCenter>Live documenten center</LiveDocumentsCenter>
+      <PendingDocumentsCenter>In behandeling documenten Center</PendingDocumentsCenter>
+      <RecordsManagementCenter>Records Management Center</RecordsManagementCenter>
+      <SharedUsersSpace>Gedeelde gebruikers ruimte</SharedUsersSpace>
+      <Systemfiles>System files</Systemfiles>
+      <ValidationRequestsDocumentsCenter>Validatie verzoeken documenten Center</ValidationRequestsDocumentsCenter>
+      <ManagedSites>Sitebeheer</ManagedSites>
+      <SharedSite>Gedeelde Site</SharedSite>
+    </title>
+  </ContentSelector>
+  
+  <UICategoryNavigationTargetPathPopupWindow>
+    <title>
+      <UIPageSelector>Pagina selecteur</UIPageSelector>
+    </title>
+  </UICategoryNavigationTargetPathPopupWindow>
+  
+  <UIDocumentInfo>
+    <msg>
+      <access-denied-exception>De toegang is geweigerd. U misschien niet de machtiging lezen hebben, of het node kan zijn verwijderd of gewijzigd.</access-denied-exception>
+    </msg>
+  </UIDocumentInfo>
+  <UIPortalApplication>
+    <title>
+      <abort>Afbreken</abort>
+    </title>
+  </UIPortalApplication>    
+  
+  <CategoryNavigationTemplate>
+  <label>
+  <home>Home</home>
+  </label>
+  </CategoryNavigationTemplate>
+  
+  <Breadcrumb>
+  <label>
+  <home>Home</home>
+  </label>  
+  </Breadcrumb>
+</bundle>

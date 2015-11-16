@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<bundle>
+  <PublicationService>
+    <AuthoringPublicationPlugin>
+      <changeState>
+        <obsoleted>De inhoud is verouderd</obsoleted>
+        <published>De inhoud wordt gepubliceerd</published>
+<unpublished>De inhoud is niet-gepubliceerde</unpublished>
+<archived>De inhoud wordt gearchiveerd</archived>
+<staged>De inhoud wordt opgevoerd</staged>
+<approved>De inhoud is goedgekeurd</approved>
+<pending>De inhoud is in behandeling</pending>
+<draft>De inhoud is in conceptvorm</draft>
+      </changeState>
+    </AuthoringPublicationPlugin>
+  </PublicationService>
+  <Publication>
+    <log>
+      <description>
+        <enrolled>De inhoud zich inschrijft in de levenscyclus van de publicatie</enrolled>
+      </description>
+    </log>
+  </Publication>
+</bundle>

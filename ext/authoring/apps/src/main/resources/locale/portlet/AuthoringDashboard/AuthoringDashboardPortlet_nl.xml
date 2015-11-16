@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<bundle>
+  <UIDashboardForm>
+    <label>
+      <title>Auteur Dashboard</title>
+      <nocontent>Geen inhoud</nocontent>
+      <mydraft>De inhoud van mijn ontwerp</mydraft>
+      <waitingapproval>Wacht op mijn goedkeuring</waitingapproval>
+      <approve>Goedkeuren</approve>
+      <publishedtomorrow>Morgen worden gepubliceerd</publishedtomorrow>
+      <refresh>#{word.refresh}</refresh>
+    </label>
+  </UIDashboardForm>
+</bundle>

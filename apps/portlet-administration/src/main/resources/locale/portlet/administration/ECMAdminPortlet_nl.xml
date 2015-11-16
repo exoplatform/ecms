@@ -1,0 +1,2599 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<bundle>
+  <!--
+  ################################################################################
+  #             org.exoplatform.ecm.webui.component.admin.UIECMAdminControlPanel #
+  ################################################################################
+  -->
+  <UIECMAdminControlPanel>
+    <tab>
+      <label>
+        <Templates>Sjablonen</Templates>
+        <Explorer>Explorer</Explorer>
+        <Repository>Repository</Repository>
+        <Advanced>Geavanceerde</Advanced>
+      </label>
+    </tab>    
+    <label>     
+      <UITaxonomyManagerTrees>Categorieën</UITaxonomyManagerTrees>
+      <UIMetadataManager>Toon Metadatas</UIMetadataManager>
+      <UINamespaceManager>Namespace</UINamespaceManager>
+      <UINodeTypeManager>Node type</UINodeTypeManager>
+      <UITemplatesManager>Documenten</UITemplatesManager>
+   <UICLVTemplatesManager>Lijst</UICLVTemplatesManager>
+      <UIViewManager>Weergaven</UIViewManager>
+      <UIDriveManager>Drives</UIDriveManager>
+      <UIQueriesManager>Query 's</UIQueriesManager>
+      <UIActionManager>Acties</UIActionManager>
+      <UIScriptManager>Scripts</UIScriptManager>
+      <UIUnLockManager>Sloten</UIUnLockManager>
+      <UIFolksonomyManager>Tags</UIFolksonomyManager>      
+    </label>
+    <msg>
+      <access-denied>Toegang geweigerd! U hebt geen toegang tot deze functie.</access-denied>
+    </msg>
+  </UIECMAdminControlPanel>
+  <!--
+  ################################################################################
+  #             org.exoplatform.ecm.webui.component.admin.UITaxonomy #
+  ################################################################################
+  -->
+  <UITaxonomyWorkingArea>
+    <msg>
+      <referential-integrity>Kan niet lezen van bronbestand of bestemmingscategorie is subcategorie</referential-integrity>
+      <no-taxonomy-selected>U moet minstens een categorie kopieren of knippen.</no-taxonomy-selected>
+      <node-is-cutting>U kan hier niet plakken, taxonomy node '{0}' is misschien aan het knippen.</node-is-cutting>
+      <can-not-paste>Geen data in klembord om te plakken.</can-not-paste>
+      <reference-exception>Kan deze taxonomy node niet verwijderen omdat het momemteel het doel is van een Referentie eigenschap.</reference-exception>
+      <path-error>Probleem bij het verwijderen van deze taxonomy node.</path-error>
+    </msg>
+  </UITaxonomyWorkingArea>
+  <UITaxonomyManager>
+    <msg>
+      <confirm-delete>Wilt u verwijderen?</confirm-delete>
+    </msg>
+    <title>
+      <add>toevoegen</add>
+      <paste>plakken</paste>
+      <cut>Knippen</cut>
+      <copy>Kopieren</copy>
+      <remove>Verwijderen</remove>
+    </title>
+  </UITaxonomyManager>
+  
+  <!--
+  ################################################################################
+  #    org.exoplatform.ecm.webui.component.admin.taxonomy.UITaxonomyTreeContainer#
+  ################################################################################
+  -->
+  <UITaxonomyTreeContainer>
+    <tab>
+      <info>
+        <UITaxonomyTreeMainForm>Input taxonomie naam, kies werkruimte en taxonomie home pad</UITaxonomyTreeMainForm>
+        <UIPermissionTreeManager>Selecteer toestemming voor taxonomie boom knoop</UIPermissionTreeManager>
+        <UIActionTaxonomyManager>Na het inschrijven voor een boom, de taxonomie boom wordt gemaakt / bewerkt</UIActionTaxonomyManager>
+        <UITaxonomyTreeCreateChild>Bewerken taxonomie boom door toevoegen, kopiëren, knippen en selecteer toestemming</UITaxonomyTreeCreateChild>
+      </info>
+    </tab>
+    <msg>
+      <not-exist-tree>Boom nog niet bestaat</not-exist-tree>
+    </msg>
+  </UITaxonomyTreeContainer>
+  
+  <!--
+##########################################################################################
+#     org.exoplatform.ecm.webui.component.admin.taxonomy.UITaxonomyTreeMainForm          #
+##########################################################################################
+-->
+  <UITaxonomyTreeMainForm>
+    <action>
+      <Reset>#{word.reset}</Reset>
+    </action>
+    <msg>
+      <name-not-allowed>Naam verboden</name-not-allowed>
+      <name-emty>De naam van de boom is leeg</name-emty>
+      <homePath-emty>Het huis weg is leeg</homePath-emty>
+      <targetPath-emty>The target path is empty</targetPath-emty>
+      <taxonomytree-existed>Een taxonomie boom met dezelfde naam bestaat al</taxonomytree-existed>
+    </msg>
+  </UITaxonomyTreeMainForm>
+
+  <TaxonomyTreeMainForm>
+    <label>
+      <TaxoTreeName>Naam</TaxoTreeName>
+      <TaxoTreeWorkspace>Werkruimte</TaxoTreeWorkspace>
+      <TaxoTreeHomePath>Home pad</TaxoTreeHomePath>
+    </label>
+  </TaxonomyTreeMainForm>
+
+  <TaxonomyTreeHomePath>
+    <title>
+      <AddPath>Voeg Pad</AddPath>
+    </title>
+  </TaxonomyTreeHomePath>
+  
+  <!--
+##########################################################################################
+#     org.exoplatform.ecm.webui.component.admin.taxonomy.tree.info.UIPermissionTreeInfo  #
+##########################################################################################
+-->
+<UIPermissionTreeInfo>
+<action>
+<title>
+<Delete>Wissen</Delete>
+<Edit>Bewerken</Edit>
+</title>
+</action>
+<header>
+<usersOrGroups>Gebruiker of groep</usersOrGroups>
+<read>Lezen</read>
+<addNode>Voeg Knoop</addNode>
+<setProperty>Ingesteld Eigendom</setProperty>
+<remove>Verwijderen</remove>
+<action>Actie</action>
+</header>
+</UIPermissionTreeInfo>
+
+<!--
+##########################################################################################
+#     org.exoplatform.ecm.webui.component.admin.taxonomy.tree.info.UIPermissionTreeForm  #
+##########################################################################################
+-->
+  <UIPermissionTreeForm>
+    <msg>
+      <have-not-any-permission>Toevoegen machtiging tot knooppunt</have-not-any-permission>
+    </msg>
+  </UIPermissionTreeForm>
+
+<!--
+################################################################################
+#     org.exoplatform.ecm.webui.component.admin.taxonomy.UIActionForm          #
+################################################################################
+-->
+
+  <UIActionForm>
+    <title>Voeg een actie voor de taxonomie boom</title>
+    <action>
+      <Save>#{word.save}</Save>
+    </action>
+    <msg>
+      <name-not-allowed>Naam verboden</name-not-allowed>
+      <path-invalid>Pad is ongeldig</path-invalid>
+      <taxonomy-existed>Taxonomie boom bestaat al</taxonomy-existed>
+      <taxonomy-node-existed>Taxonomie knooppunt bestaat al</taxonomy-node-existed>
+      <no-permission-add>U hebt niet het recht om toe te voegen een actie.</no-permission-add>
+      <not-created-tree>Taxonomie boom is nog niet gemaakt</not-created-tree>
+    </msg>
+  </UIActionForm>
+
+  <!--
+  ################################################################################
+  #             org.exoplatform.ecm.webui.component.admin.UITemplatesManager #
+  ################################################################################
+  -->
+  <UITemplatesList>
+    <header>
+      <name>Sjabloonnaam</name>
+      <action>acties</action>
+    </header>
+  </UITemplatesList>
+  <!--
+  ################################################################################
+  #             org.exoplatform.ecm.webui.component.admin.UINamespaceForm  #
+  ################################################################################
+  -->
+  <NameSpacePopup>
+    <title>
+      <UINamespaceForm>Namespace formulier</UINamespaceForm>
+    </title>
+  </NameSpacePopup>
+  <UINamespaceForm>
+    <title>Register nieuw Namespace</title>
+    <label>
+      <namespace>Namespace voorvoegsel</namespace>
+      <uri>Uri</uri>
+    </label>
+    <action>
+      <Save>#{word.save}</Save>
+      <Cancel>#{word.cancel}</Cancel>
+    </action>
+    <msg>
+      <register-unsuccessfull>Namespace of uri bestaat reeds!</register-unsuccessfull>
+      <prefix-null>U moet namespace's prefix ingeven</prefix-null>
+      <uri-null>U moet namespace's uri ingeven</uri-null>
+    </msg>
+  </UINamespaceForm>
+  <!--
+  ################################################################################
+  #      org.exoplatform.ecm.webui.component.admin.namespace.UINamespaceList #
+  ################################################################################
+  -->
+  <UINamespaceList>
+    <header>
+      <prefix>Voorvoegsel</prefix>
+      <uri>Namespace Uri</uri>
+      <action>Actie</action>
+    </header>
+    <action>
+      <AddNamespace>registreer</AddNamespace>
+    </action>
+  </UINamespaceList>
+  <NamespacePopup>
+    <title>
+      <UINamespaceForm>registreer nieuw Namespace</UINamespaceForm>
+    </title>
+  </NamespacePopup>
+  <!--
+  ################################################################################
+  #             org.exoplatform.ecm.webui.component.admin.UIMetadataList #
+  ################################################################################
+  -->
+  <UIMetadataList>
+    <label>
+      <false>niet waar</false>
+      <true>waar</true>
+      <True>waar</True>
+      <False>niet waar</False>
+    </label>
+    <title>
+      <view>tonen</view>
+      <edit>wijzigen</edit>
+      <delete>Verwijderen</delete>
+    </title>
+    <header>
+      <icon>icoon</icon>
+      <name>Toon Metadatas</name>
+      <type>Type</type>
+      <internalUse>Intern gebruik</internalUse>
+      <action>Action</action>
+    </header>
+    <msg>
+      <confirm-delete>Wilt u Verwijderen ?</confirm-delete>
+      <delete-successful>Templates van '{0}' zijn verwijderd</delete-successful>
+      <path-not-found-exception>Deze metagegevens werd verwijderd of gewijzigd. Klik op de knop Vernieuwen.</path-not-found-exception>
+    </msg>
+    <action>
+      <Add>metadata toevoegen</Add>
+      <Cancel>#{word.cancel}</Cancel>
+    </action>
+  </UIMetadataList>
+  <MetadataPopupAddNew>
+    <title>
+      <UIMetadataForm>Add New Metadata's Template</UIMetadataForm>
+    </title>
+  </MetadataPopupAddNew>
+  <MetadataPopupEdit>
+    <title>
+      <UIMetadataForm>Metadata's Template wijzigen</UIMetadataForm>
+    </title>
+  </MetadataPopupEdit>
+  <MetataPermissionPopup>
+    <title>
+      <MetadataPermission>selecteer permission</MetadataPermission>
+      <QueriesPermissionBrowse>rechten toevoegen</QueriesPermissionBrowse>
+    </title>
+  </MetataPermissionPopup>
+  <!--
+  ################################################################################
+  #    org.exoplatform.ecm.webui.component.admin.metadata.UIMetadataForm #
+  ################################################################################
+  -->
+  <UIMetadataForm>
+    <title>Metagegevens voor toewijzing</title>
+    <action>
+      <Cancel>#{word.cancel}</Cancel>
+      <Save>toepassen</Save>
+    </action>
+    <header>
+      <icon>icoon</icon>
+      <label>Node naam</label>
+      <input>actie</input>
+    </header>
+    <label>
+      <dialogTemplate>Dialoogvenster sjabloon:</dialogTemplate>
+      <viewTemplate>Weergave sjabloon:</viewTemplate>
+      <metadataName>Metadata naam</metadataName>
+      <viewPermission>rechten</viewPermission>
+      <permission>UIMetadataForm</permission>
+      <metadataLabel>Etiket:</metadataLabel>
+    </label>
+    <tab>
+      <label>
+        <metadataTypeTab>Metadata type</metadataTypeTab>
+        <dialogTab>dialoog template</dialogTab>
+        <viewTab>Toon sjabloon</viewTab>
+      </label>
+    </tab>
+  </UIMetadataForm>
+  <!--
+  ################################################################################
+  #    org.exoplatform.ecm.webui.component.admin.metadata.UIMetadataView #
+  ################################################################################
+  -->
+  <UIMetadataView>
+    <header>
+      <name>Element naam</name>
+      <type>Type</type>
+      <description>Omschrijving</description>
+      <isMixin>Is mixin tijpen</isMixin>
+      <orderable>Ordenbaar kinderen</orderable>
+    </header>
+    <info>
+      <description>omschrijving</description>
+    </info>
+    <tab>
+      <element>Elementen</element>
+      <metadataView>Metadata informatie</metadataView>
+    </tab>
+    <action>
+      <Cancel>#{word.close}</Cancel>
+      <Back>#{word.back}</Back>
+    </action>
+  </UIMetadataView>
+  <ViewMetadataPopup>
+    <title>
+      <UIMetadataView>Metadata informatie</UIMetadataView>
+    </title>
+  </ViewMetadataPopup>
+  <!--
+  ################################################################################
+  #             org.exoplatform.ecm.webui.component.admin.UIDriveManager #
+  ################################################################################
+  -->
+  <UIDriveList>
+    <header>
+      <icon>icoon</icon>
+      <name>naam</name>
+      <workspace>werkruimte</workspace>
+      <homePath>Home pad</homePath>
+      <permissions>rechten</permissions>
+      <views>tonen</views>
+      <action>actie</action>
+    </header>
+    <tooltip>
+      <Delete>Verwijderen</Delete>
+      <EditInfo>wijzigen</EditInfo>
+    </tooltip>
+    <msg>
+      <confirm-delete>Wilt u Verwijderen ?</confirm-delete>
+    </msg>
+    <action>
+      <AddDrive>schijf toevoegen</AddDrive>
+    </action>
+    <label>
+      <permission>{0} in {1}</permission>
+    </label>
+  </UIDriveList>
+  <UIDriveForm>
+    <action>
+      <Cancel>#{word.cancel}</Cancel>
+      <Save>#{word.save}</Save>
+      <Back>#{word.back}</Back>
+      <Refresh>#{word.refresh}</Refresh>
+    </action>
+    <msg>
+      <drive-exists>schijf bestaat reeds !</drive-exists>
+      <workspace-path-invalid>werkruimte pad ongeldig !</workspace-path-invalid>
+      <drive-views-invalid>Moet u een toepassing uitzicht!</drive-views-invalid>
+      <icon-not-found>icoon niet gevonden.</icon-not-found>
+      <permission-null>U moet rechten kiezen voor deze schijf</permission-null>
+      <allowCreateFolders>U moet het maptype selecteren.</allowCreateFolders>
+      <name-null>Enter schijf naam, please!</name-null>
+      <fileName-invalid>schijf naam have some ongeldig karakters.</fileName-invalid>
+    </msg>
+    <tab>
+      <label>
+        <DriveInputSet>Drive</DriveInputSet>
+        <ViewsInputSet>Views toepassen</ViewsInputSet>
+        <PermissionInputSet>selecteer rechten</PermissionInputSet>
+      </label>
+    </tab>
+    <label>
+      <name>Naam</name>
+      <workspace>Werkruimte</workspace>
+      <homePath>Home pad</homePath>
+      <icon>Werkruimte icoon</icon>
+      <viewPreferences>Toon referenced documents</viewPreferences>
+      <viewNonDocument>Toon non document</viewNonDocument>
+      <viewSideBar>Toon zijbalk</viewSideBar>
+      <permissions>Rechtens</permissions>
+      <showHiddenNode>Toon verborgen knoop</showHiddenNode>
+      <allowCreateFolders>Mogelijk maken van de map:</allowCreateFolders>
+      <Admin>Admin:</Admin>
+      <Categories>Categorieën:</Categories>
+      <Icons>Pictogrammen:</Icons>
+      <List>Lijst:</List>
+      <Web>Web:</Web>
+    </label>
+  </UIDriveForm>
+  <AddDriveManagerPopup>
+    <title>
+      <UIDriveForm>Drive toevoegen</UIDriveForm>
+    </title>
+  </AddDriveManagerPopup>
+  <EditDriveManagerPopup>
+    <title>
+      <UIDriveForm>Drive wijzigen</UIDriveForm>
+    </title>
+  </EditDriveManagerPopup>
+  <UITreeList>
+    <info>
+      <child-not-found>Child node niet gevonden</child-not-found>
+    </info>
+    <header>
+      <name>naam</name>
+      <action>actie</action>
+    </header>
+  </UITreeList>
+  
+  <UIRepositoryList>
+    <titlebar>
+      <label>Admin de ECM belangrijkste functies</label>
+    </titlebar>
+  </UIRepositoryList>
+  
+  <!--
+  ################################################################################
+  #    org.exoplatform.ecm.webui.component.admin.nodetype.UINodeTypeManager #
+  ################################################################################
+  -->
+  <UINodeTypeManager>
+    <header>
+      <icon>Icoon</icon>
+      <label>Knooppuntnaam</label>
+      <input>Actie</input>
+    </header>
+    <action>
+      <Save>#{word.save}</Save>
+    </action>
+  </UINodeTypeManager>
+  <!--
+  ################################################################################
+  #    org.exoplatform.ecm.webui.component.admin.nodetype.UINodeTypeList #
+  ################################################################################
+  -->
+  <UINodeTypeList>
+    <label>
+      <true>waar</true>
+      <false>niet waar</false>
+    </label>
+    <header>
+      <icon>Icoon</icon>
+      <nodeType>Knoop type</nodeType>
+      <mixinType>Mixin type</mixinType>
+      <orderable>Ordenbaar kind knooppunten</orderable>
+      <action>Actie</action>
+    </header>
+    <action>
+      <Export>Exporteren</Export>
+      <Import>Importeren</Import>
+      <Add>Toevoegen</Add>
+    </action>
+    <tooltip>
+      <View>Tonen</View>
+      <Edit>Wijzigen</Edit>
+      <Delete>Verwijderen</Delete>
+    </tooltip>
+    <msg>
+      <confirm-delete>Wilt u Verwijderen ?</confirm-delete>
+    </msg>
+  </UINodeTypeList>
+  <!--
+  ################################################################################
+  #    org.exoplatform.ecm.webui.component.admin.nodetype.UINodeTypeOptionList #
+  ################################################################################
+  -->
+  <UINodeTypeOptionList>
+    <action>
+      <Save>#{word.save}</Save>
+      <Add>Toevoegen</Add>
+    </action>
+    <header>
+      <icon>Icoon</icon>
+      <label>Knooppuntnaam</label>
+      <input>Actie</input>
+    </header>
+  </UINodeTypeOptionList>
+  <!--
+  ################################################################################
+  #    org.exoplatform.ecm.webui.component.admin.nodetype.UINodeTypeForm #
+  ################################################################################
+  -->
+  <UINodeTypeForm>
+    <tab>
+      <label>
+        <nodeTypeDefinition>Node type</nodeTypeDefinition>
+        <propertyDefinition>eigenschap</propertyDefinition>
+        <childNodeDefinition>Kind knoop</childNodeDefinition>
+        <superTypeTab>Super soorten</superTypeTab>
+        <DefaultTypeTab>Standaard primaire</DefaultTypeTab>
+        <RequiredTypeTab>Vereist primaire</RequiredTypeTab>
+        <Contraints>Beperkingen</Contraints>
+      </label>
+    </tab>
+    <label>
+      <propertiesDefinitions>Eigenschap definities</propertiesDefinitions>
+      <childDefinitions>Child node definities</childDefinitions>
+      <namespace>Naam ruimte</namespace>
+      <propertyNamespace>Naam ruimte</propertyNamespace>
+      <nodeTypeName>Node type naam</nodeTypeName>
+      <mixinType>Is mixin type</mixinType>
+      <hasOrderableChildNodes>Ordenbaar kind knooppunten</hasOrderableChildNodes>
+      <primaryItemName>Primaire item naam</primaryItemName>
+      <superTypes>Super type</superTypes>
+      <propertyname>Definitie naam</propertyname>
+      <requiredType>Vereist type</requiredType>
+      <multiple>Is multi</multiple>
+      <mandatory>Is vereist</mandatory>
+      <autoCreated>Wordt automatisch gecreëerd</autoCreated>
+      <parentversion>Over ouder versie</parentversion>
+      <protected>Is beveiligd</protected>
+      <constraints>Waarden</constraints>
+      <UIFormTableInputSet>UIFormTableInputSet</UIFormTableInputSet>
+      <sameNameSiblings>Is zelfde naam</sameNameSiblings>
+      <childNamespace>Naam ruimte</childNamespace>
+      <childMandatory>Is vereist</childMandatory>
+      <childAutocreated>Wordt automatisch gecreëerd</childAutocreated>
+      <childParentversion>Over ouder versie</childParentversion>
+      <childProtected>Is beveiligd</childProtected>
+      <childNodename>Definitie naam</childNodename>
+      <requiredPrimaryType>Vereist primaire type</requiredPrimaryType>
+      <defaultPrimaryType>Standaard primaire type</defaultPrimaryType>
+      <valueconstraints>Value beperkingen</valueconstraints>
+    </label>
+    <action>
+      <Cancel>#{word.cancel}</Cancel>
+      <Save>#{word.save}</Save>
+      <SaveDraft>Opslaan als concept</SaveDraft>
+      <AddProperty>Eigenschap toevoegen</AddProperty>
+      <AddChild>Child toevoegen</AddChild>
+      <AddConstraints>beperkingen toevoegen</AddConstraints>
+      <Back>#{word.back}</Back>
+      <AddType>Type toevoegen</AddType>
+      <AddValue>Toevoegen</AddValue>
+      <CancelConstraints>#{word.cancel}</CancelConstraints>
+      <CancelTab>#{word.cancel}</CancelTab>
+      <UpdateChild>#{word.update}</UpdateChild>
+      <CancelChild>#{word.cancel}</CancelChild>
+      <UpdateProperty>#{word.update}</UpdateProperty>
+      <CancelProperty>#{word.cancel}</CancelProperty>
+      <Close>#{word.close}</Close>
+    </action>
+    <msg>
+      <register-successfully>NodeType '{0}' succesvol geregistreerd</register-successfully>
+      <supertype-is-madatory>Supertype is verplicht te registreren nieuwe nodet type. Ten minste 1 supertype moeten worden gekozen.</supertype-is-madatory>
+      <register-failed>NodeType registratie is tevergeefs. Het is de bestaande of Super soorten is ongeldig</register-failed>
+      <nodeType-name>Node type naam is verplicht</nodeType-name>
+      <fileName-invalid>Er zijn een aantal ongeldige tekens in de naam.</fileName-invalid>
+      <node-type-exists>Nodetype '{0}' bestaat reeds!</node-type-exists>
+      <node-type-name>Nodetype's naam were ongeldig!</node-type-name>
+      <values-error>Selecteer alleen een node type Standaard primaire type.</values-error>
+      <confirm-delete-child>Weet u zeker dat u wilt verwijderen van dit kind node?</confirm-delete-child>
+      <confirm-delete-property>Weet u zeker dat u wilt verwijderen deze eigenschap?</confirm-delete-property>
+    </msg>
+  </UINodeTypeForm>
+  <UIPropertyDefinitionForm>
+    <tab>
+      <label>
+        <constraints>Beperkingen</constraints>
+        <UIFormMultiValueInputSet>beperkingen</UIFormMultiValueInputSet>
+      </label>
+    </tab>
+    <msg>
+      <property-name>Eigenschap definitie naam were ongeldig!</property-name>
+      <not-supported-value-constraints>Dit vereiste type does not support waarden beperkingen</not-supported-value-constraints>
+    </msg>
+  </UIPropertyDefinitionForm>
+  <UIChildNodeDefinitionForm>
+    <msg>
+      <child-name>De naam van het onderliggende node is vereist.</child-name>
+      <child-invalid>De naam van het onderliggende node bevat some ongeldig karakters.</child-invalid>
+      <default-node-type-not-found>Standaard Node type niet gevonden</default-node-type-not-found>
+      <requiredPrimaryType>Vereist primaire Type is vereist</requiredPrimaryType>
+      <defaultPrimaryType>Standaard primaire Type is vereist</defaultPrimaryType>
+    </msg>
+  </UIChildNodeDefinitionForm>
+  <defaultPrimaryTypePopup>
+    <title>
+      <FormdefaultPrimaryTypePopup>Selecteer standaard primaire type</FormdefaultPrimaryTypePopup>
+    </title>
+  </defaultPrimaryTypePopup>
+  <requiredPrimaryTypePopup>
+    <title>
+      <FormrequiredPrimaryTypePopup>Selecteer vereist primaire type</FormrequiredPrimaryTypePopup>
+    </title>
+  </requiredPrimaryTypePopup>
+  <superTypesPopup>
+    <title>
+      <FormsuperTypesPopup>Selecteer super types</FormsuperTypesPopup>
+    </title>
+  </superTypesPopup>
+  <NodeTypePopup>
+    <title>
+      <UINodeTypeForm>Toevoegen/wijzigen Node Type definities</UINodeTypeForm>
+    </title>
+  </NodeTypePopup>
+  <ViewNodeTypePopup>
+    <title>
+      <UINodeTypeForm>Toon Node Type informatie</UINodeTypeForm>
+    </title>
+  </ViewNodeTypePopup>
+  <!--
+  ################################################################################
+  #    org.exoplatform.ecm.webui.component.admin.nodetype.UINodeTypeExport   #
+  ################################################################################
+  -->
+  <UINodeTypeExport>
+    <header>
+      <icon>Icoon</icon>
+      <label>Node naam</label>
+      <input>Actie</input>
+    </header>
+    <action>
+      <Cancel>#{word.cancel}</Cancel>
+      <Export>Exporteer</Export>
+      <UncheckAll>Deselecteer alles</UncheckAll>
+      <CheckAll>Controleer alle</CheckAll>
+    </action>
+    <title>Uitvoer Node Type</title>
+    <msg>
+      <item-null>U moet controleren ten minste een node te exporteren.</item-null>
+    </msg>
+  </UINodeTypeExport>
+  <NodeTypeExportPopup>
+    <title>
+      <UINodeTypeExport>Node typen exporteren</UINodeTypeExport>
+    </title>
+  </NodeTypeExportPopup>
+  <!--
+  ################################################################################
+  #    org.exoplatform.ecm.webui.component.admin.nodetype.UINodeTypeOptionList   #
+  ################################################################################
+  -->
+  <!--
+  ################################################################################
+  #    org.exoplatform.ecm.webui.component.admin.nodetype.UINodeTypeUpload   #
+  ################################################################################
+  -->
+  <UINodeTypeUpload>
+    <label>
+      <upload>bestandsnaam</upload>
+    </label>
+    <action>
+      <Cancel>#{word.cancel}</Cancel>
+      <Upload>Uploaden</Upload>
+    </action>
+    <title>NodeType invoer uit XML bestand</title>
+    <msg>
+      <filename-error>Bladeren knooppunt type bestand voor de invoer</filename-error>
+      <data-file-error>Alleen xml-bestand of een zip-bestand worden ondersteund om te importeren.</data-file-error>
+      <data-invalid>Invalid data when import nodetype</data-invalid>
+      <nodetype-exist>Invalid data: NodeType exist : '{0}'</nodetype-exist>
+      <namespace-invalid>Invalid data:  unknown namespace : '{0}'</namespace-invalid>
+    </msg>
+  </UINodeTypeUpload>
+  <!--
+  ################################################################################
+  #    org.exoplatform.ecm.webui.component.admin.nodetype.UINodeTypeImport   #
+  ################################################################################
+  -->
+  <UINodeTypeImport>
+    <action>
+      <Cancel>#{word.cancel}</Cancel>
+      <Import>Importeer Node</Import>
+      <Upload>Re Uploaden</Upload>
+    </action>
+    <header>
+      <icon>Icoon</icon>
+      <label>Knooppuntnaam</label>
+      <input>Actie</input>
+    </header>
+    <title>Selecteer Importeren Node Type</title>
+    <msg>
+      <no-nodetype-registered>Nr. knooppunt type geregistreerd!</no-nodetype-registered>
+      <nodetype-registered>Succesvolle registratie.</nodetype-registered>
+    </msg>
+  </UINodeTypeImport>
+  <NodeTypeImportPopup>
+    <title>
+      <UINodeTypeImportPopup>Import NodeType uit XML bestand</UINodeTypeImportPopup>
+    </title>
+  </NodeTypeImportPopup>
+  <!--
+  ################################################################################
+  #             org.exoplatform.ecm.webui.component.admin.UIDriveForm #
+  ################################################################################
+  -->
+  <DriveInputSet>
+    <label>
+      <both>Both</both>
+      <folderOnly>Folder</folderOnly>
+      <unstructuredFolder>Ongestructureerde map</unstructuredFolder>
+    </label>
+    <title>
+      <AddPermission>Rechten toevoegen</AddPermission>
+      <RemovePermission>Rechten verwijderen</RemovePermission>
+      <AddIcon>Icoon toevoegen</AddIcon>
+      <AddPath>Pad toevoegen</AddPath>
+    </title>
+  </DriveInputSet>
+  <!--
+  ###################################################################################
+  #             org.exoplatform.ecm.webui.component.admin.action.UIActionTypeList#
+  ###################################################################################
+  -->
+  <UIActionTypeList>
+    <header>
+      <name>Script</name>
+      <label>Naam</label>
+      <action>Acties</action>
+    </header>
+    <title>
+      <Edit>Bewerken</Edit>
+      <Delete>Verwijderen</Delete>
+    </title>
+    <action>
+      <AddAction>Toevoegen</AddAction>
+    </action>
+<msg>
+ <confirm-delete>Weet u zeker dat u dit associatietype wilt verwijderen?</confirm-delete>
+<cannot-delete>U kunt dit actietype niet verwijderen omdat het systeem wordt nog steeds gebruikt.</cannot-delete>
+</msg>
+  </UIActionTypeList>
+  <!--
+  ######################################################################################
+  #             org.exoplatform.ecm.webui.component.admin.action.UIActionTypeForm #
+  ######################################################################################
+  -->
+  <ActionPopup>
+    <title>
+      <UIActionTypeForm>Actietype toevoegen</UIActionTypeForm>
+    </title>
+  </ActionPopup>
+  <UIActionTypeForm>
+    <title>Toevoegen/Wijzigen a actie Type</title>
+    <label>
+      <actionType>Breidt actietype</actionType>
+      <name>Naam (begint met "exo:")</name>
+      <isMove>Actie is Verplaatsen</isMove>
+      <variables>Variabelen</variables>
+      <exo_businessProcessAction>Business Processen</exo_businessProcessAction>
+      <exo_scriptAction>Groovy Scripts</exo_scriptAction>
+      <exo_ruleAction>Gedefinieerde regels</exo_ruleAction>
+      <script>Script:</script>
+    </label>
+    <action>
+      <Save>#{word.save}</Save>
+      <Cancel>#{word.cancel}</Cancel>
+    </action>
+    <msg>
+      <action-type-added>'{0}' is toegevoegd.</action-type-added>
+      <action-type-create-error>Kan niet maken Action Type !</action-type-create-error>
+      <action-name-invalid>{0}' ongeldig! de naam moet beginnen met 'exo:</action-name-invalid>
+      <action-exist>Deze actie bestond in het ECM-systeem</action-exist>
+      <fileName-invalid>Hebben sommige ongeldige tekens in actie naam</fileName-invalid>
+    </msg>
+  </UIActionTypeForm>
+  <!--
+  ######################################################################################
+  #             org.exoplatform.ecm.webui.component.admin.view.UIViewManager     #
+  ######################################################################################
+  -->
+  <UITabPane>
+    <title>
+      <UIViewContainer>Standpunten</UIViewContainer>
+      <ECMTemplate>ECM Sjablonen</ECMTemplate>
+      <UIScriptForm>Scripts</UIScriptForm>
+      <UIDialogTab>Dialoog</UIDialogTab>
+      <UIViewTab>Zicht</UIViewTab>
+      <UITemplateEditForm>Sjablonen</UITemplateEditForm>
+      <UITemplateForm>Sjablonen</UITemplateForm>
+      <UITemplateContainer>Documenten</UITemplateContainer>
+      <UIActionsTemplateContainer>Acties</UIActionsTemplateContainer>
+      <UIOthersTemplateContainer>Anderen</UIOthersTemplateContainer>
+  <UIActionScriptContainer>Actie</UIActionScriptContainer>
+  <UIWidgetScriptContainer>Widgets</UIWidgetScriptContainer>
+<UIInterceptorScriptContainer>Interceptors</UIInterceptorScriptContainer>
+
+<nodeTypeDefinition>Knoop type</nodeTypeDefinition>
+      <propertyDefinition>Eigenschappen</propertyDefinition>
+      <childNodeDefinition>Kind node</childNodeDefinition>
+      <SuperTypeTab>Super type</SuperTypeTab>
+      <DefaultTypeTab>Standaard primaire</DefaultTypeTab>
+      <RequiredTypeTab>Vereist primaire</RequiredTypeTab>
+      <Contraints>Beperkingen</Contraints>
+    </title>
+  </UITabPane>
+  <!--
+  ######################################################################################
+  #             org.exoplatform.ecm.webui.component.admin.view.UIViewList    #
+  ######################################################################################
+  -->
+  <UIViewList>
+   <title>
+     <View>Tonen</View>
+     <EditInfo>Bewerken</EditInfo>
+     <Delete>Verwijderen</Delete>
+   </title>
+    <header>
+      <name>Naam</name>
+      <permissions>Rechtens</permissions>
+      <tabList>Actie Tab</tabList>
+      <baseVersion>Base versie</baseVersion>
+      <action>Actie</action>
+    </header>
+    <action>
+      <AddView>Zicht toevoegen</AddView>
+    </action>
+    <msg>
+      <access-denied>Toegang geweigerd! Heb je niet de toestemming voor het gebruik van deze functie.</access-denied>
+      <template-in-use>Kan niet verwijderen (0): Bekijk de momenteel in gebruik</template-in-use>
+      <confirm-delete>Bent u echt wilt verwijderen ?</confirm-delete>
+    </msg>
+  </UIViewList>
+  <ViewPopup>
+    <title>
+      <UIViewFormTabPane>Zicht</UIViewFormTabPane>
+    </title>
+  </ViewPopup>
+  <AddPopup>
+    <title>
+      <UIViewFormTabPane>Zicht toevoegen</UIViewFormTabPane>
+      <AddPopup>Sjablonen toevoegen</AddPopup>
+    </title>
+  </AddPopup>
+  <EditPopup>
+    <title>
+      <UIViewFormTabPane>Zicht wijzigen</UIViewFormTabPane>
+    </title>
+  </EditPopup>
+
+<UITabList>
+                  <title>
+                    <Edit>Bewerken</Edit>
+                    <Delete>Verwijderen</Delete>
+                  </title>       
+ <header>
+  <tabName>Tabblad</tabName>
+  <localizeButtons>Beschrijving</localizeButtons>
+<action>Acties</action>
+</header>
+<action>
+ <AddTab>Toevoegen</AddTab>
+</action>
+<msg>
+ <confirm-delete>Weet u zeker dat u wilt verwijderen van dit tabblad?</confirm-delete>
+</msg>
+<grid>
+ <msg>
+  <empty>Er is geen tabblad op deze weergave</empty>
+ </msg>
+</grid>
+</UITabList>
+
+<UIViewPermissionList>
+ <title>Selecteer eigenaar met machtigingen voor deze weergave:</title>
+<label>
+ <permission>{0} in {1}</permission>
+</label>
+<msg>
+ <confirm-delete>Weet u zeker dat u wilt verwijderen van deze machtiging?</confirm-delete>
+  <permission-cannot-empty>Machtiging weergeven is vereist en mag niet leeg zijn.</permission-cannot-empty>
+</msg>
+</UIViewPermissionList>
+
+<UIViewPermissionList>
+                         <title>
+                           <Delete>Verwijderen</Delete>
+                         </title>
+ <header>
+<friendlyPermission>Toon rechten</friendlyPermission>
+     <action>Actie</action>
+ </header>
+<action>
+ <title>
+  <Delete>Verwijderen</Delete>
+ </title>
+</action>
+<grid>
+ <msg>
+  <empty>Er is geen machtiging voor deze weergave</empty>
+ </msg>
+</grid>
+</UIViewPermissionList>
+
+<UIViewPermissionForm>
+<action>
+ <Add>Toevoegen</Add>
+</action>
+<label>
+ <userOrGroup>Gebruiker of Groep</userOrGroup>
+</label>
+<msg>
+ <permission-exist>De machtiging '{0}' bestaat al in de lijst.</permission-exist>
+</msg>
+</UIViewPermissionForm>
+
+  <!--
+  ######################################################################################
+  #             org.exoplatform.ecm.webui.component.admin.view.UIViewFormTabPane   #
+  ######################################################################################
+  -->
+  <UIViewForm>
+    <title>
+      <AddPermission>Rechten toevoegen</AddPermission>
+      <RemovePermission>Rechten verwijderen</RemovePermission>
+    </title>
+    <msg>
+      <view-name-invalid>U moet de naam</view-name-invalid>
+      <fileName-invalid>Er zijn een aantal ongeldige tekens in de naam!</fileName-invalid>
+      <permission-not-empty>Moet u een vergunning</permission-not-empty>      
+      <mustbe-add-tab>Moet je een tabblad</mustbe-add-tab>
+<mustbe-add-permission>Selecteer toestemming voor deze weergave</mustbe-add-permission>
+      <view-exist>Bekijk de naam al bestaat</view-exist>
+    </msg>
+    <label>
+      <viewName>Naam</viewName>
+      <template>Sjabloon</template>
+<version>Versie herstellen</version>
+      <enableVersion>Inschakelen Versie</enableVersion>
+      <hideExplorerPanel>Explorer deelvenster in de zijbar verbergen</hideExplorerPanel>
+    </label>
+  </UIViewForm>
+  <UITabForm>
+    <msg>
+      <button-select-error>U moet controleren ten minste een</button-select-error>
+      <tab-name-error>U moet Tabnaam</tab-name-error>
+      <fileName-invalid>Er zijn een aantal ongeldige tekens in de naam !</fileName-invalid>
+    </msg>
+    <label>
+      <version>Versie herstellen</version>
+      <viewName>Naam</viewName>
+      <tabName>Tabblad naam</tabName>
+      <permission>Permissie</permission>
+      <tabs>Tabbladen</tabs>
+      <template>Sjablonen</template>
+      <enableVersion>Inschakelen Versie</enableVersion>
+      <addFolder>Map toevoegen</addFolder>
+      <addDocument>Document toevoegen</addDocument>
+      <editDocument>Document wijzigen</editDocument>
+      <upload>Uploaden</upload>
+      <paste>Plakken</paste>
+      <search>Zoeken</search>
+      <viewReferences>Toon References</viewReferences>
+      <viewNodeType>Toon Node Types</viewNodeType>
+      <viewPermissions>Toon permissie</viewPermissions>
+      <viewProperties>Toon Node Eigenschappen</viewProperties>
+      <manageVersions>Versies beheren</manageVersions>
+      <manageAuditing>Beheer Auditing</manageAuditing>
+      <managePublications>Manage publication</managePublications>
+      <manageCategories>Categorieën beheren</manageCategories>
+      <manageRelations>Relaties beheren</manageRelations>
+      <manageActions>Acties beheren</manageActions>
+      <exportNode>Exporteer Node</exportNode>
+      <importNode>Importeer Node</importNode>
+      <viewRelations>Gezien de betrekkingen</viewRelations>
+      <showJCRStructure>Toon JCR Structuur</showJCRStructure>
+      <watchDocument>Watching Document</watchDocument>
+      <taggingDocument>Tagging dit document</taggingDocument>
+      <viewMetadatas>Toon Metadata</viewMetadatas>
+      <overloadThumbnail>Overload thumbnail</overloadThumbnail>
+      <manageHidden>Verberg /Toon inhoud</manageHidden>
+      <comment>Commentaar</comment>
+      <vote>Stem voor document</vote>  
+      <addCategory>Voeg categorie toe</addCategory>
+      <addLocalizationLink>Vertaling toevoegen</addLocalizationLink>
+      <publicationRequestApproval>Goedkeuring aanvragen</publicationRequestApproval>
+      <publicationApproveContent>Goedkeuren van inhoud</publicationApproveContent>
+      <publicationPublish>Publiceren</publicationPublish>
+      <contentNavigation>Inhoud navigatie</contentNavigation>
+      <addSymLink>Add Sym Link</addSymLink>
+      <checkIn>Inchecken</checkIn>
+      <checkOut>Uitchecken</checkOut>
+      <shareDocuments>Delen</shareDocuments>
+      <openDocument>Extern bewerken</openDocument>
+      <editProperty>Edit Document Properties</editProperty>
+      <uploadNewVersion>Upload a new version</uploadNewVersion>
+    </label>
+    <action>
+      <Save>#{word.save}</Save>      
+      <Cancel>#{word.cancel}</Cancel>      
+    </action>
+  </UITabForm>
+  <UIPermissionForm>
+    <label>
+      <permission>UIPermissionForm</permission>
+    </label>
+  </UIPermissionForm>
+  <UIViewFormTabPane>
+    <tab>
+      <label>
+        <UITabContainer>Actie</UITabContainer>
+        <UIViewForm>Tonen</UIViewForm>
+        <UIViewPermissionContainer>Permissie</UIViewPermissionContainer>    
+      </label>
+    </tab>
+    <action>
+      <Save>#{word.save}</Save>
+      <Reset>#{word.reset}</Reset>
+      <Cancel>#{word.cancel}</Cancel>
+      <Close>#{word.close}</Close>
+      <Restore>Herstellen</Restore>
+    </action>
+  </UIViewFormTabPane>
+  <PopupViewPermission>
+    <title>
+      <UIPermissionSelector>Permissie kiezer</UIPermissionSelector>
+    </title>
+  </PopupViewPermission>
+
+<TabForm_Popup>
+ <title>
+  <UITabForm>Tabblad toevoegen/bewerken</UITabForm>
+ </title>
+</TabForm_Popup>
+
+<tab_permission>
+ <title>
+  <SelectUser>Select user</SelectUser>
+<SelectMember>Selecteer lid</SelectMember>
+<AddAny>Elke</AddAny>
+ </title>
+</tab_permission>
+  <!--
+  ######################################################################################
+  #             org.exoplatform.ecm.webui.component.admin.view.UIECMTemplateList   #
+  ######################################################################################
+  -->
+  <UIECMTemplateList>
+    <title>
+      <View>Tonen</View>
+      <EditInfo>Bewerken</EditInfo>
+      <Delete>Verwijderen</Delete>
+    </title>
+    <header>
+      <name>Naam</name>
+      <path>Value</path>
+      <baseVersion>Base versie</baseVersion>
+      <action>Actie</action>
+    </header>
+    <action>
+      <Add>Toevoegen</Add>
+    </action>
+    <msg>
+      <template-in-use>Kan niet verwijderen {0}: sjabloon momenteel in gebruik</template-in-use>
+      <confirm-delete>Bent u echt wilt verwijderen?</confirm-delete>
+      <access-denied>Toegang geweigerd! Heb je niet de toestemming voor het gebruik van deze functie.</access-denied>
+      <delete-permission-denied>U bent niet gemachtigd om te '{0}' template wilt verwijderen.</delete-permission-denied>
+    </msg>
+  </UIECMTemplateList>
+  <!--
+  ################################################################################
+  #             org.exoplatform.ecm.webui.component.admin.view.UITemplateForm #
+  ################################################################################
+  -->
+  <UITemplateForm>
+    <title>
+      <AddPermission>Rechten toevoegen</AddPermission>
+    </title>
+    <action>
+      <Save>#{word.save}</Save>
+      <Cancel>#{word.cancel}</Cancel>
+      <Reset>#{word.reset}</Reset>
+      <Restore>Herstellen</Restore>
+      <Refresh>#{word.refresh}</Refresh>
+    </action>
+    <msg>
+      <version-restored>De versie {0} is hersteld succes.</version-restored>
+      <role-require>Moet u een vergunning</role-require>
+      <template-name-exist>De sjabloonnaam '{0}' is de bestaande</template-name-exist>
+      <add-permission-denied>You do not have permission to add new template.</add-permission-denied>
+      <edit-permission-denied>U bent niet gemachtigd om te '{0}' template wijzigen.</edit-permission-denied>
+    </msg>
+    <tab>
+      <label>
+        <template>Sjabloon</template>
+        <defaultDialog>Dialoog</defaultDialog>
+        <defaultView>Zicht</defaultView>
+      </label>
+    </tab>
+    <label>
+      <name>Naam</name>
+      <label>Label</label>
+      <isDocumentTemplate>is het Document Sjabloon</isDocumentTemplate>
+      <dialog>Dialoogvenster inhoud</dialog>
+      <view>Toon content</view>
+      <permission>Rechten</permission>
+      <selectPemistion>Rechten</selectPemistion>
+    </label>
+  </UITemplateForm>
+  <!--
+  ################################################################################
+  #             org.exoplatform.ecm.webui.component.admin.view.ecmTempForm #
+  ################################################################################
+  -->
+  <ecmTempForm>
+    <label>
+      <version>Selecteer versie</version>
+      <content>Inhoud</content>
+      <name>Naam</name>
+      <homeTemplate>Sjabloon Type</homeTemplate>
+      <enableVersion>Inschakelen Versie</enableVersion>
+    </label>
+  </ecmTempForm>
+  <ecmTempFormPopup>
+    <title>
+      <ecmTempForm>Toevoegen/Wijzigen zicht Sjabloon</ecmTempForm>
+    </title>
+  </ecmTempFormPopup>
+  <ecmTempFormAdd>
+    <title>
+      <ecmTempForm>ECM Sjabloon toevoegen</ecmTempForm>
+      <ecmTempFormAdd>ECM Sjabloon toevoegen</ecmTempFormAdd>
+    </title>
+  </ecmTempFormAdd>
+  <ecmTempFormEdit>
+    <title>
+      <ecmTempForm>ECM Sjabloon wijzigen</ecmTempForm>
+    </title>
+  </ecmTempFormEdit>
+
+  <!--
+  ######################################################################################
+  #             org.exoplatform.ecm.webui.component.admin.script.UIScriptManager #
+  ######################################################################################
+  -->
+  <!--
+  ######################################################################################
+  #             org.exoplatform.ecm.webui.component.admin.script.UIECMFilterForm #
+  ######################################################################################
+  -->
+  <UIECMFilterForm>
+    <label>
+      <selectScript>Selecteer categorie</selectScript>
+    </label>
+  </UIECMFilterForm>
+  <!--
+  ######################################################################################
+  #             org.exoplatform.ecm.webui.component.admin.script.UIScriptList #
+  ######################################################################################
+  -->
+  <UIScriptList>
+    <action>
+      <Edit>#{word.edit}</Edit>
+      <Delete>#{word.delete}</Delete>
+      <AddNew>Toevoegen</AddNew>
+    </action>
+    <msg>
+      <confirm-delete>Bent u echt wilt verwijderen?</confirm-delete>
+    </msg>
+    <header>
+      <scriptName>Naam</scriptName>
+      <path>Pad</path>
+      <baseVersion>Base versie</baseVersion>
+      <action>Acties</action>
+    </header>
+    <tooltip>
+      <Edit>Wijzigen</Edit>
+      <Delete>Verwijderen</Delete>
+    </tooltip>
+  </UIScriptList>
+  <!--
+  ######################################################################################
+  #             org.exoplatform.ecm.webui.component.admin.script.UIScriptForm #
+  ######################################################################################
+  -->
+  <uiECMScriptsPopup>
+    <title>
+      <ecmScriptForm>ECM Script</ecmScriptForm>
+    </title>
+  </uiECMScriptsPopup>
+
+  <UIScriptForm>
+    <action>
+      <Save>#{word.save}</Save>
+      <Restore>#{word.restore}</Restore>
+      <Cancel>#{word.cancel}</Cancel>
+      <Refresh>#{word.refresh}</Refresh>
+      <Change>Veranderen</Change>
+    </action>
+    <msg>
+      <version-restored>De versie {0} is hersteld succes.</version-restored>
+      <name-null>Voer script naam, alstublieft!</name-null>
+      <name-exist>Een script met de naam '{0}' bestaat reeds</name-exist>
+      <fileName-invalid>Script naam hebben sommige ongeldige tekens.</fileName-invalid>
+    </msg>
+  </UIScriptForm>
+  <!--
+  ######################################################################################
+  #             org.exoplatform.ecm.webui.component.admin.script.CBScriptForm #
+  ######################################################################################
+  -->
+  <ScriptContainerPopup>
+    <title>
+      <UIScriptForm>Toevoegen/wijzigen script</UIScriptForm>
+    </title>
+  </ScriptContainerPopup>
+  <UIScriptForm>
+    <label>
+      <selectVersion>Versies beheren</selectVersion>
+      <scriptContent>Inhoud</scriptContent>
+      <scriptLabel>Naam</scriptLabel>
+      <scriptName>Naam</scriptName>
+      <enableVersion>Versiebeheer inschakelen</enableVersion>
+    </label>
+  </UIScriptForm>
+  <!--
+  ######################################################################################
+  #             org.exoplatform.ecm.webui.component.admin.script.ecmScriptForm #
+  ######################################################################################
+  -->
+ 
+  <ecmScriptForm>
+    <label>
+      <selectVersion>versies</selectVersion>
+      <scriptContent>Inhoud</scriptContent>
+      <scriptLabel>Naam</scriptLabel>
+      <scriptName>Script Naam</scriptName>
+      <enableVersion>Versiebeheer inschakelen</enableVersion>
+    </label>
+  </ecmScriptForm>
+  <!--
+  ######################################################################################
+  #             org.exoplatform.ecm.webui.component.admin.taxonomy.UITaxonomyForm #
+  ######################################################################################
+  -->
+  <UITaxonomyForm>
+    <action>
+      <Save>#{word.save}</Save>
+      <Cancel>#{word.cancel}</Cancel>
+    </action>
+    <title>Taxonomy Toevoegen</title>
+    <label>
+      <taxonomyName>Categorienaam</taxonomyName>
+      <parentPath>Bovenliggende</parentPath>
+    </label>
+    <msg>
+      <exist>De "(0)" categorie bestaat al!</exist>
+      <name-null>U moet taxonomie naam.</name-null>
+      <name-invalid>Hier zijn een aantal ongeldige tekens in de naam.</name-invalid>
+      <name-too-long>Taxonomie naam dient minder dan 30 tekens</name-too-long>
+    </msg>
+  </UITaxonomyForm>
+    
+  <EditTaxonomyTreePopup>
+    <title>
+      <UITaxonomyTreeContainer>Bewerken taxonomie boom</UITaxonomyTreeContainer>
+    </title>
+  </EditTaxonomyTreePopup>
+
+  <AddTaxonomyTreePopup>
+    <title>
+      <UITaxonomyTreeContainer>Toevoegen taxonomie boom</UITaxonomyTreeContainer>
+    </title>
+  </AddTaxonomyTreePopup>
+  
+  <TaxonomyPopupCreateChild>
+    <title>
+      <UITaxonomyTreeCreateChildForm>Add taxonomy tree</UITaxonomyTreeCreateChildForm>
+    </title>
+  </TaxonomyPopupCreateChild>
+
+<UITaxonomyTreeCreateChildForm>
+  <action>
+      <Save>#{word.save}</Save>
+      <Cancel>#{word.cancel}</Cancel>
+    </action>
+    <label>
+      <parentPath>Bovenliggende:</parentPath>
+      <taxonomyName>Categorienaam:</taxonomyName>
+    </label>
+    <msg>
+      <name-null>Naam is null</name-null>
+      <name-invalid>Naam is ongeldig</name-invalid>
+      <name-too-long>Taxonomie naam dient minder dan {0} tekens</name-too-long>
+      <exist>Naam bestaat al</exist>
+    </msg>
+</UITaxonomyTreeCreateChildForm>
+
+  <PopupComponent>
+    <title>
+      <UIOneNodePathSelector>Selecteer pad</UIOneNodePathSelector>
+    </title>
+  </PopupComponent>
+  
+  <TaxoPopupUserSelector>
+  <title>
+      <TaxoTreeSelectUserOrGroup>Selecteer Gebruiker</TaxoTreeSelectUserOrGroup>
+      <UIPermissionTreeSelectUser>Selecteer Gebruiker</UIPermissionTreeSelectUser>
+    </title>
+  </TaxoPopupUserSelector>
+
+  <TaxoTreeSelectUserOrGroupPopup>
+  <title>
+      <TaxoTreeSelectUserOrGroup>Selecteer lidmaatschap</TaxoTreeSelectUserOrGroup>
+    </title>
+  </TaxoTreeSelectUserOrGroupPopup>
+  
+  <TaxoTreeAnyPermission>
+    <label>
+      <any>Elke Toestemming</any>
+      <anyPermission>TaxoTreeAnyPermission</anyPermission>
+    </label>
+  </TaxoTreeAnyPermission>
+  
+  <TaxoTreeSelectUserOrGroup>
+    <label>
+      <selectGroup>Selecte groep</selectGroup>
+      <selectMembership>Selecteer lidmaatschap</selectMembership>
+    </label>
+  </TaxoTreeSelectUserOrGroup>
+  
+  <!--
+  ######################################################################################
+  #             org.exoplatform.ecm.webui.component.admin.taxonomy.UITaxonomyTreeList #
+  ######################################################################################
+  -->
+  <UITaxonomyTreeList>
+    <header>
+      <name>Naam</name>
+      <workspace>Werkruimte</workspace>
+      <homePath>Home pad</homePath>
+      <action>Actie</action>
+    </header>
+    <action>
+      <AddTaxonomyTree>Voeg Taxonomie Boom</AddTaxonomyTree>
+    </action>
+    <tooltip>
+      <EditTaxonomyTree>Bewerken Taxonomie Boom</EditTaxonomyTree>
+      <Delete>Verwijderen taxonomie Boom</Delete>
+    </tooltip>
+    <title>Zoekt Taxonomie Boom</title>
+    <msg>
+      <no-list>Nr. taxonomie boom beschikbaar</no-list>
+      <confirm-delete>Bent u er zeker van te verwijderen?</confirm-delete>
+      <is-in-trash>Deze categorie boom is verplaatst naar de prullenmand.</is-in-trash>
+    </msg>
+  </UITaxonomyTreeList>
+  
+  <!--
+  ######################################################################################
+  #             org.exoplatform.ecm.webui.component.admin.taxonomy.UITaxonomyTreeForm  #
+  ######################################################################################
+  -->
+  <UITaxonomyTreeForm>
+    <label>
+      <name>Naam</name>
+      <workspace>Werkruimte</workspace>
+      <homePath>Pad</homePath>
+      <permissions>Machtigingen</permissions>
+    </label>
+    <msg>
+      <homapath-emty>Ingang huis weg</homapath-emty>
+    </msg>
+  </UITaxonomyTreeForm>
+  
+  <UIPermissionTreeForm>
+    <label>
+      <UIPopupWindow>Selecteer</UIPopupWindow>
+      <permission>UIPermissionTreeForm</permission>
+      <userOrGroup>Gebruiker of Groep</userOrGroup>
+      <read>Lees Recht</read>
+      <add_node>Voeg Knoop Recht</add_node>
+      <set_property>Ingesteld Eigendomsrecht</set_property>
+      <remove>Verwijderen Recht</remove>
+    </label>
+    <title>Rechten toevoegen aan node</title>
+    <action>
+      <Close>#{word.close}</Close>
+      <Save>Opslaan</Save>
+      <Reset>#{word.reset}</Reset>
+    </action>
+    <msg>
+      <checkbox-require>YU moet ten minste een toestemming</checkbox-require>
+      <userOrGroup-required>Moet u een gebruiker of een groep voor het opslaan van de toestemming</userOrGroup-required>
+      <not-change-permission>Je hebt geen recht om een machtiging</not-change-permission>
+      <access-denied>Toegang geweigerd! U kunt niet verwijderen van deze toestemming.</access-denied>
+    </msg>
+  </UIPermissionTreeForm>
+  
+  <PopupTaxonomyJCRBrowser>
+  <title>
+      <UIOneNodePathSelector>Selecteer huis weg</UIOneNodePathSelector>
+    </title>
+  </PopupTaxonomyJCRBrowser>
+  
+  <PopupTaxonomyTreePermission>
+    <title>
+      <UIPermissionSelector>Permissie selecteur</UIPermissionSelector>
+    </title>
+   </PopupTaxonomyTreePermission>
+   
+   <PopupDrivePermission>
+    <title>
+      <AddDrivePermissionSelector>Toevoegen Toestemming</AddDrivePermissionSelector>
+      <UIPermissionSelector>Selecteer Toestemming</UIPermissionSelector>
+    </title>
+  </PopupDrivePermission>
+  
+  <UIPopupWindow>
+    <title>
+      <UIPermissionManager>Toestemming Beheer</UIPermissionManager>
+    </title>
+   </UIPopupWindow>
+
+  <PopupUserSelector>
+    <title>
+      <UIUserContainer>Toestemming Beheer</UIUserContainer>
+    </title>
+   </PopupUserSelector>
+   
+  <UIPermissionInfo>
+    <action>
+      <title>
+        <Edit>Bewerken</Edit>
+        <Delete>Verwijder toestemming</Delete>
+      </title>
+    </action>
+    <header>
+      <usersOrGroups>Gebruiker of Groep</usersOrGroups>
+      <read>Lezen</read>
+      <addNode>Modify</addNode>
+      <remove>Verwijderen</remove>
+      <action>Actie</action>
+    </header>
+    <msg>
+      <confirm-delete-permission>Wilt u deze toestemming?</confirm-delete-permission>
+      <no-permission-tochange>Je hebt geen recht om toestemming</no-permission-tochange>
+      <no-permission-remove>You can not remove the owner or system</no-permission-remove>
+      <access-denied>Toegang geweigerd! U kunt niet verwijderen van deze toestemming.</access-denied>
+    </msg>
+  </UIPermissionInfo>
+  <permission>
+    <title>
+      <SelectUser>Selecteer de gebruiker</SelectUser>
+      <SelectMember>Selecteer lidmaatschap</SelectMember>
+      <AddAny>Iedereen</AddAny>
+    </title>
+  </permission>
+  <!--
+  #############################################################################
+  #             org.exoplatform.ecm.webui.component.explorer.UIPermissionForm #
+  #############################################################################
+  -->
+  <SelectUserOrGroup>
+    <title>
+      <UIGroupSelector>Selecteer de gebruiker</UIGroupSelector>
+      <UIPermissionSelector>Selecteer lid</UIPermissionSelector>
+      <UIGroupMemberSelector>Selecteer lidmaatschap</UIGroupMemberSelector>
+    </title>
+  </SelectUserOrGroup>
+  <UIGroupSelector>
+    <label>
+      <selectGroup>Bladeren en kies een groep</selectGroup>
+      <selectUser>Selecteer de gebruiker</selectUser>
+    </label>
+    <msg>
+      <not-change-owner>'{0}' is eigenaar van deze knoop en hebben volledige controle toestemming</not-change-owner>
+    </msg>
+  </UIGroupSelector>
+  <UIPermissionForm>
+    <label>
+      <UIPopupWindow>Selecteer</UIPopupWindow>
+      <permission>UIPermissionForm</permission>
+      <userOrGroup>Gebruiker of Groep</userOrGroup>
+      <read>Lees Recht</read>
+      <add_node>Wijzig</add_node>
+      <remove>Verwijderen Recht</remove>
+    </label>
+    <title>Voeg een toestemming voor dat node</title>
+    <action>
+      <Close>#{word.close}</Close>
+      <Save>#{word.save}</Save>
+      <Reset>#{word.reset}</Reset>
+    </action>
+    <msg>
+      <checkbox-require>U moet ten minste een toestemming</checkbox-require>
+      <userOrGroup-required>Moet u een gebruiker of een groep voor het opslaan van de toestemming</userOrGroup-required>
+      <not-change-permission>Je hebt geen recht om een machtiging</not-change-permission>
+      <access-denied>Toegang geweigerd! U kunt niet verwijderen van deze toestemming.</access-denied>
+    </msg>
+  </UIPermissionForm>
+  
+  <TaxonomyPopup>
+    <title>
+      <UITaxonomyForm>Toevoegen Taxonomie</UITaxonomyForm>
+    </title>
+  </TaxonomyPopup>
+  
+  <UITaxonomyManager>
+    <title>
+      <permission>Toestemming Management</permission>
+    </title>
+  </UITaxonomyManager>
+  <!--
+  ######################################################################################
+  #             org.exoplatform.ecm.webui.component.admin.templates.UITemplateList #
+  ######################################################################################
+  -->
+  <UITemplateList>
+    <header>
+      <name>Type</name>
+      <action>Actie</action>
+      <label>Sjabloon</label>
+      <icon>Pictogram</icon>
+    </header>
+    <action>
+      <AddNew>Toevoegen</AddNew>
+    </action>
+    <msg>
+      <confirm-delete>Bent u echt wilt verwijderen?</confirm-delete>
+      <access-denied>Toegang geweigerd! Heb je niet de toestemming voor het gebruik van deze functie.</access-denied>
+      <editing-template>Access denied! You can't delete and edit template simultaneously.</editing-template>
+      <template-not-exist>The template that you attempt to delete doesn't exist.</template-not-exist>
+    </msg>
+  </UITemplateList>
+  
+  <UIActionsTemplateList>
+    <header>
+      <name>Type</name>
+      <action>Actie</action>
+      <label>Sjabloon</label>
+      <icon>Pictogram</icon>
+    </header>
+    <action>
+      <AddNew>Sjablonen toevoegen</AddNew>
+    </action>
+    <msg>
+      <confirm-delete>Bent u echt wilt verwijderen?</confirm-delete>
+      <access-denied>Access denied! You haven't got permission to use this function.</access-denied>
+      <editing-template>Access denied! You can't delete and edit template simultaneously.</editing-template>
+      <template-not-exist>The template that you attempt to delete doesn't exist.</template-not-exist>
+    </msg>
+  </UIActionsTemplateList>
+  
+  <UIOthersTemplateList>
+    <header>
+      <name>Type</name>
+      <label>Sjabloon</label>
+      <icon>Icoon</icon>
+      <action>Actie</action>
+    </header>
+    <action>
+      <AddNew>Sjablonen toevoegen</AddNew>
+    </action>
+    <msg>
+      <confirm-delete>Bent u echt wilt verwijderen?</confirm-delete>
+      <access-denied>Access denied! You haven't got permission to use this function.</access-denied>
+      <editing-template>Access denied! You can't delete and edit template simultaneously.</editing-template>
+      <template-not-exist>The template that you attempt to delete doesn't exist.</template-not-exist>
+    </msg>
+  </UIOthersTemplateList>
+
+ <!--
+  ######################################################################################
+  #             org.exoplatform.ecm.webui.component.admin.templates.clv package #
+  ######################################################################################
+  -->
+
+<UITabPane>
+ <title>
+ <ContentTemplateContainer>Inhoud</ContentTemplateContainer>
+<CateTemplateContainer>Navigatie</CateTemplateContainer>
+<PageTemplateContainer>Paginator</PageTemplateContainer>
+ </title>
+</UITabPane>
+
+  <UICLVTemplateList>
+    <title>
+      <Edit>Bewerken</Edit>
+      <Delete>Verwijderen</Delete>
+    </title>
+    <header>
+      <title>Naam</title>
+      <action>Actie</action>
+      <template>Sjabloon</template>
+    </header>
+    <action>
+      <AddTemplate>Sjablonen toevoegen</AddTemplate>
+<Edit>Bewerken</Edit>
+<Delete>Verwijderen</Delete>
+    </action>
+    <msg>
+      <confirm-delete>Bent u echt wilt verwijderen?</confirm-delete>
+      <access-denied>Toegang geweigerd! Heb je niet de toestemming voor het gebruik van deze functie.</access-denied>
+      <editing-template>Access denied! You can't delete and edit template simultaneously.</editing-template>
+      <template-not-exist>The template that you attempt to delete doesn't exist.</template-not-exist>
+    </msg>
+  </UICLVTemplateList>
+
+<CateTemplateList>
+    <header>
+      <title>Naam</title>
+      <action>Actie</action>
+      <template>Sjabloon</template>
+    </header>
+    <title>
+      <Edit>Bewerken</Edit>
+      <Delete>Verwijderen</Delete>
+    </title>
+    <action>
+      <AddTemplate>Sjablonen toevoegen</AddTemplate>
+<Edit>Bewerken</Edit>
+<Delete>Verwijderen</Delete>
+    </action>
+</CateTemplateList>
+
+<PageTemplateList>
+    <header>
+      <title>Naam</title>
+      <action>Actie</action>
+      <template>Sjabloon</template>
+    </header>
+    <action>
+      <AddTemplate>Sjablonen toevoegen</AddTemplate>
+<Edit>Edit</Edit>
+<Delete>Verwijderen</Delete>
+    </action>
+</PageTemplateList>
+
+<EditCLVTemplatePopup_ContentTemplateContainer>
+ <title>
+   <UICLVTemplateForm_ContentTemplateContainer>Lijstsjabloon bewerken</UICLVTemplateForm_ContentTemplateContainer>   
+ </title>
+</EditCLVTemplatePopup_ContentTemplateContainer>
+
+<EditCLVTemplatePopup_CateTemplateContainer>
+ <title>
+   <UICLVTemplateForm_CateTemplateContainer>Lijstsjabloon bewerken</UICLVTemplateForm_CateTemplateContainer>   
+ </title>
+</EditCLVTemplatePopup_CateTemplateContainer>
+
+<EditCLVTemplatePopup_PageTemplateContainer>
+ <title>
+   <UICLVTemplateForm_PageTemplateContainer>Lijstsjabloon bewerken</UICLVTemplateForm_PageTemplateContainer>   
+ </title>
+</EditCLVTemplatePopup_PageTemplateContainer>
+
+<CLVTemplatePopup_ContentTemplateContainer>
+ <title>
+   <UICLVTemplateForm_ContentTemplateContainer>Lijstsjabloon toevoegen</UICLVTemplateForm_ContentTemplateContainer>   
+ </title>
+</CLVTemplatePopup_ContentTemplateContainer>
+
+<CLVTemplatePopup_CateTemplateContainer>
+ <title>
+   <UICLVTemplateForm_CateTemplateContainer>Lijstsjabloon toevoegen</UICLVTemplateForm_CateTemplateContainer>   
+ </title>
+</CLVTemplatePopup_CateTemplateContainer>
+
+<CLVTemplatePopup_PageTemplateContainer>
+ <title>
+   <UICLVTemplateForm_PageTemplateContainer>Lijstsjabloon toevoegen</UICLVTemplateForm_PageTemplateContainer>   
+ </title>
+</CLVTemplatePopup_PageTemplateContainer>
+
+<UICLVTemplateForm_ContentTemplateContainer>
+ <action>
+  <Save>#{word.save}</Save>
+<Reset>#{word.reset}</Reset>
+<Cancel>#{word.cancel}</Cancel>
+ </action>
+<label>
+ <title>Naam</title>
+<template>Template naam</template>
+<content>Inhoud</content>
+<type>Sjabloontype</type>
+</label>
+</UICLVTemplateForm_ContentTemplateContainer>
+
+<UICLVTemplateForm_PageTemplateContainer>
+ <action>
+  <Save>#{word.save}</Save>
+<Reset>#{word.reset}</Reset>
+<Cancel>#{word.cancel}</Cancel>
+ </action>
+<label>
+ <title>Naam</title>
+<template>Template naam</template>
+<content>Inhoud</content>
+<type>Sjabloontype</type>
+</label>
+</UICLVTemplateForm_PageTemplateContainer>
+
+<UICLVTemplateForm_CateTemplateContainer>
+ <action>
+  <Save>#{word.save}</Save>
+<Reset>#{word.reset}</Reset>
+<Cancel>#{word.cancel}</Cancel>
+ </action>
+<label>
+ <title>Naam</title>
+<template>Template naam</template>
+<content>Inhoud</content>
+<type>Sjabloon Type</type>
+</label>
+</UICLVTemplateForm_CateTemplateContainer>
+<UICLVTemplateForm>
+  <label>
+    <paginators>Paginator</paginators>
+<list>Inhoud</list>
+<navigation>Navigatie</navigation>
+  </label>
+                          <action>
+                            <Save>#{word.save}</Save>
+                            <Reset>#{word.reset}</Reset> 
+                            <Cancel>#{word.cancel}</Cancel> 
+                          </action> 
+  <msg>
+  <template-existing>Deze sjabloonnaam bestaat al. Selecteer een andere.</template-existing>
+  </msg>
+</UICLVTemplateForm>
+
+  <!--
+  ######################################################################################
+  #             org.exoplatform.ecm.webui.component.admin.templates.UITemplateForm #
+  ######################################################################################
+  -->
+  <AddNewTemplatePermission>
+    <title>
+      <UIPermissionSelector>Permissie selecteur</UIPermissionSelector>
+    </title>
+  </AddNewTemplatePermission>
+  <TemplatePermission>
+    <title>
+      <UIPermissionSelector>Selecteer permissie</UIPermissionSelector>
+    </title>
+  </TemplatePermission>
+  <TemplateContainerPopup>
+    <title>
+      <UITemplateForm>Sjabloon Vorm</UITemplateForm>
+    </title>
+  </TemplateContainerPopup>
+  <ViewForm>
+    <label>
+      <UITemplateContent>ViewForm</UITemplateContent>
+      <UIPopupWindow>Toon Rechten</UIPopupWindow>
+      <selectVersion>Versies</selectVersion>
+      <content>Inhoud</content>
+      <name>Naam</name>
+      <isDocumentTemplate>is Documentsjabloon</isDocumentTemplate>
+      <viewPermission>Rechten</viewPermission>
+      <enableVersion>Versiebeheer geactiveerd</enableVersion>
+    </label>
+    <title>Toevoegen/Wijzigen zicht</title>
+  </ViewForm>
+  <DialogForm>
+    <label>
+      <UITemplateContent>DialogForm</UITemplateContent>
+      <UIPopupWindow>Dialoog Rechten</UIPopupWindow>
+      <selectVersion>Versies</selectVersion>
+      <content>Inhoud</content>
+      <name>Naam</name>
+      <isDocumentTemplate>is Documentsjabloon</isDocumentTemplate>
+      <viewPermission>Rechten</viewPermission>
+      <enableVersion>Versiebeheer inschakelen</enableVersion>
+    </label>
+    <title>Dialoog Toevoegen/Wijzigen</title>
+  </DialogForm>
+  <DialogFormTemplatePermission>
+    <title>
+      <UIPermissionSelector>Permissie selecteur</UIPermissionSelector>
+    </title>
+  </DialogFormTemplatePermission>
+  <ViewFormTemplatePermission>
+    <title>
+      <UIPermissionSelector>Permissie selecteur</UIPermissionSelector>
+    </title>
+  </ViewFormTemplatePermission>
+  <TemplateContainerPopup>
+    <title>
+      <UIViewTemplate_UITemplateContainer><![CDATA[View & Edit Template]]></UIViewTemplate_UITemplateContainer>
+      <UIViewTemplate_UIActionsTemplateContainer><![CDATA[View & Edit Template]]></UIViewTemplate_UIActionsTemplateContainer>
+      <UIViewTemplate_UIOthersTemplateContainer><![CDATA[View & Edit Template]]></UIViewTemplate_UIOthersTemplateContainer>
+    </title>
+  </TemplateContainerPopup>
+  <UITemplatesManager>
+    <title>
+      <Edit>Wijzigen</Edit>
+      <Delete>Verwijderen</Delete>
+    </title>
+  </UITemplatesManager>
+  <!--
+  ######################################################################################
+  #             org.exoplatform.ecm.webui.component.admin.templates.UIViewTemplate #
+  ######################################################################################
+  -->
+  <!--
+  ######################################################################################
+  #             org.exoplatform.ecm.webui.component.admin.templates.UITemplateEditForm #
+  ######################################################################################
+  -->
+  <UITemplateEditForm>
+    <label>
+      <name>Naam</name>
+      <label>Label</label>
+      <isDocumentTemplate>is Documentsjabloon</isDocumentTemplate>
+    </label>
+    <action>
+      <Save>#{word.save}</Save>
+      <Cancel>#{word.cancel}</Cancel>
+      <Refresh>#{word.refresh}</Refresh>
+    </action>
+  </UITemplateEditForm>
+  <!--
+  ######################################################################################
+  #             org.exoplatform.ecm.webui.component.admin.templates.UIDialogTab #
+  ######################################################################################
+  -->
+  <UIDialogTab>
+    <header>
+      <name>Naam</name>
+      <roles>Rollen</roles>
+      <baseVersion>Versie</baseVersion>
+      <action>Acties</action>
+    </header>
+    <msg>
+      <undeletable>'{0}' kan niet worden verwijderd, is de standaard een!</undeletable>
+      <confirm-delete>Bent u echt wilt verwijderen?</confirm-delete>
+    </msg>
+    <action>
+      <title>
+        <Edit>Wijzigen</Edit>
+        <Delete>Verwijderen</Delete>
+      </title>
+    </action>
+  </UIDialogTab>
+  <!--
+  ######################################################################################
+  #             org.exoplatform.ecm.webui.component.admin.templates.UIViewTab #
+  ######################################################################################
+  -->
+  <UIViewTab>
+    <header>
+      <name>Naam</name>
+      <roles>Rollen</roles>
+      <baseVersion>Versie</baseVersion>
+      <action>Acties</action>
+    </header>
+    <msg>
+      <undeletable>'{0}' kan niet worden verwijderd, is de standaard een!</undeletable>
+      <confirm-delete>Bent u echt wilt verwijderen?</confirm-delete>
+    </msg>
+    <action>
+      <title>
+        <Edit>Wijzigen</Edit>
+        <Delete>Verwijderen</Delete>
+      </title>
+    </action>
+  </UIViewTab>
+  <!--
+  ######################################################################################
+  #             org.exoplatform.ecm.webui.component.admin.templates.UITemplateContent #
+  ######################################################################################
+  -->
+  <UITemplateContent>
+    <action>
+      <Save>#{word.save}</Save>
+      <Restore>#{word.restore}</Restore>
+      <Cancel>#{word.cancel}</Cancel>
+      <Refresh>#{word.refresh}</Refresh>
+    </action>
+    <msg>
+      <name-invalid>Veldnaam kan geen speciale tekens</name-invalid>
+      <roles-invalid>De toestemming veld kan niet leeg zijn.</roles-invalid>
+      <version-restored>De versie {0} is hersteld succes.</version-restored>
+      <name-exist>naam '{0}' bestaat reeds. U kan zelfde bestandsnaam uploaden behalve voor 'nt:bestand'</name-exist>
+    </msg>
+    <title>
+      <AddPermission>Rechten toevoegen</AddPermission>
+      <RemovePermission>Rechten verwijderen</RemovePermission>
+    </title>
+  </UITemplateContent>
+  <!--
+  ######################################################################################
+  #             org.exoplatform.ecm.webui.component.admin.templates.DialogForm #
+  ######################################################################################
+  -->
+  <!--
+  ######################################################################################
+  #             org.exoplatform.ecm.webui.component.admin.templates.ViewForm #
+  ######################################################################################
+  -->
+  <!--
+  ######################################################################################
+  #             org.exoplatform.ecm.webui.component.UIJCRBrowser #
+  ######################################################################################
+  -->
+  <JCRBrowser>
+    <title>
+      <UIOneNodePathSelector>Selecteer root pad</UIOneNodePathSelector>
+    </title>
+  </JCRBrowser>
+  <JCRBrowserAssets>
+    <title>
+      <UIOneNodePathSelector>Selecteer icoon</UIOneNodePathSelector>
+    </title>
+  </JCRBrowserAssets>
+  <!--
+  ######################################################################################
+  #             org.exoplatform.ecm.webui.component.admin.queries #
+  ######################################################################################
+  -->
+  <UIQueriesList>
+    <header>
+      <name>Naam</name>
+      <type>Type</type>
+      <statement>Verklaring</statement>
+      <permission>Rechten</permission>
+      <action>Acties</action>
+    </header>
+    <action>
+      <AddQuery>Query toevoegen</AddQuery>
+    </action>
+    <tooltip>
+      <Edit>Query wijzigen</Edit>
+      <Delete>Verwijder deze zoekopdracht</Delete>
+    </tooltip>
+    <msg>
+      <confirm-delete>Bent u echt wilt verwijderen?</confirm-delete>
+      <query-not-existed>De query bestaat niet meer.</query-not-existed>
+      <can-not-remove>Er is een fout opgetreden tijdens het verwijderen van de query. Neem contact op met de beheerder voor informatie.</can-not-remove>
+    </msg>
+  </UIQueriesList>
+  <UIQueriesForm>
+    <label>
+      <name>Query naam</name>
+      <type>Query type</type>
+      <statement>Verklaring</statement>
+      <cache>Resultaten in de Cache inschakelen</cache>
+      <permissions>Rechten</permissions>
+      <PermissionButton>UIQueriesForm</PermissionButton>
+    </label>
+    <action>
+      <Save>#{word.save}</Save>
+      <Cancel>#{word.cancel}</Cancel>
+    </action>
+    <msg>
+      <permission-require>Moet u machtigingen</permission-require>
+      <name-invalid>Veldnaam mag geen speciale tekens</name-invalid>
+      <name-existing>Deze zoekopdracht naam al bestaat. Kies een andere naam, alstublieft!</name-existing>
+      <invalid-query>Ongeldige zoekopdracht. Controleer uw zoekopdracht verklaring, gelieve!</invalid-query>
+      <access-denied>Toegang geweigerd! U hebt geen toegang tot deze functie.</access-denied>
+    </msg>
+  </UIQueriesForm>
+  <AddQueryForm>
+    <title>
+      <UIQueriesForm>Query toevoegen</UIQueriesForm>
+    </title>
+  </AddQueryForm>
+  <EditQueryForm>
+    <title>
+      <UIQueriesForm>Query wijzigen</UIQueriesForm>
+    </title>
+  </EditQueryForm>
+<PermissionPopup>
+  <title>
+    <UIGroupMemberSelector>Toestemming Selector</UIGroupMemberSelector>
+  </title>
+</PermissionPopup>
+  <!--
+  ######################################################################################
+  #             org.exoplatform.ecm.webui.component.admin.folksonomy #
+  ######################################################################################
+  -->
+  <UITagManager>
+    <title>
+      <EditStyle>Bewerk stijl</EditStyle>
+      <RemoveStyle>Stijl verwijderen</RemoveStyle>
+    </title>    
+  </UITagManager>
+  <UITagStyleList>
+    <header>
+      <name>Stijl naam</name>
+      <documentRange>Aantal herhalingen</documentRange>
+      <tagHTML>Tag Stijl</tagHTML>
+      <action>Actie</action>
+    </header>
+    <title>
+      <Edit>Bewerken</Edit>
+      <Delete>Verwijderen</Delete>
+      <Remove>Verwijderen</Remove>
+    </title>
+    <action>
+      <AddStyle>Stijl toevoegen</AddStyle>
+    </action>
+  </UITagStyleList>
+  <UITagStyleForm>
+    <label>
+      <styleName>Stijl naam:</styleName>
+      <documentRange>Aantal herhalingen:</documentRange>
+      <styleHTML>HTML-stijl:</styleHTML>
+    </label>
+    <action>
+      <UpdateStyle>Update</UpdateStyle>
+      <Cancel>#{word.cancel}</Cancel>
+    </action>
+    <msg>
+      <range-validator>Ongeldige bereik. Formaat van geldige bereik is: a.. B met a, b is positief getal. Je kunt * in plaats van B om aan te geven dat onbeperkt.</range-validator>
+      <error-update>Uw gegevens zijn niet geldig of dienst verhoogd fout.</error-update>
+      <item-not-existing>You cannot save changes to this tag that no longer exist in database</item-not-existing>
+    </msg>
+  </UITagStyleForm>
+  <FolksonomyPopup>
+    <title>
+      <UITagStyleForm>Bewerken tag stijl configuratie</UITagStyleForm>
+    </title>
+  </FolksonomyPopup>
+  <!--
+  ###################################################################################
+  # ECMPhoneFormatValidator                                       #
+  ###################################################################################
+  -->
+  <ECMPhoneFormatValidator>
+    <msg>
+      <Invalid>The field '{0}' contains an invalid Phone number. Please enter another value.</Invalid>
+    </msg>
+  </ECMPhoneFormatValidator>
+  <!--
+  ###################################################################################
+  # org.exoplatform.ecm.jcr.ECMNameValidator  #
+  ###################################################################################
+  -->
+  <ECMNameValidator>
+    <msg>
+      <Invalid-char>Er zijn een aantal ongeldige tekens in het veld '{0}'. Typ een andere waarde, alsjeblieft!</Invalid-char>
+      <empty-input>Veld '{0}' is null of leeg.</empty-input>
+    </msg>
+  </ECMNameValidator>
+  <EmptyFieldValidator>
+    <msg>
+      <empty-input>Typ in het veld '{0}' alstublieft.</empty-input>
+    </msg>
+  </EmptyFieldValidator>
+  <!--
+  ###################################################################################
+  # org.exoplatform.ecm.jcr.PermissionValidator  #
+  ###################################################################################
+  -->
+  <PermissionValidator>
+  <msg>
+      <permission-path-invalid>Permission '{0}' is invalid !</permission-path-invalid>
+  </msg>
+  </PermissionValidator>
+  <!--
+  ###################################################################################
+  # Repository  #
+  ###################################################################################
+  -->
+  <UIWorkspaceList>
+    <label>
+      <workspaceName>Werkruimte</workspaceName>
+      <rootNodeInfo>UIWorkspaceList</rootNodeInfo>
+      <rootNodePath>Root pad</rootNodePath>
+    </label>
+  </UIWorkspaceList>
+  <!--
+  ###################################################################################
+  # Others  #
+  ###################################################################################
+  -->
+  <UIFormInputSetWithAction>
+    <msg>
+      <confirm-delete>Bent u echt wilt verwijderen?</confirm-delete>
+    </msg>
+  </UIFormInputSetWithAction>
+  <template>
+    <title>
+      <AddPermission>Rechten toevoegen</AddPermission>
+    </title>
+  </template>
+  <metadataTypeTab>
+    <title>
+      <AddPermission>Rechten toevoegen</AddPermission>
+    </title>
+  </metadataTypeTab>
+  <PermissionButton>
+    <title>
+      <AddPermission>Rechten toevoegen</AddPermission>
+    </title>
+  </PermissionButton>
+  <nodeTypeDefinition>
+    <title>
+      <AddSuperType>Super Type toevoegen</AddSuperType>
+    </title>
+  </nodeTypeDefinition>
+  <childNodeDefinition>
+    <title>
+      <AddRequiredType>Vereist Type toevoegen</AddRequiredType>
+      <AddDefaultType>Standaard Type toevoegen</AddDefaultType>
+    </title>
+  </childNodeDefinition>
+  <propertyDefinition>
+    <title>
+      <AddConstraints>beperkingen toevoegen</AddConstraints>
+    </title>
+  </propertyDefinition>
+  <authInputSet>
+    <title>
+      <Select>Selecteren</Select>
+    </title>
+  </authInputSet>
+  <!--
+  #grid with action
+  -->
+  <UIViewContainer>
+    <title>
+      <View>Zicht</View>
+      <EditInfo>Wijzigen</EditInfo>
+      <Delete>Verwijderen</Delete>
+    </title>
+<label>
+  <permission>{0} in {1}</permission>
+</label>
+  </UIViewContainer>
+  <ECMTemplate>
+    <title>
+      <EditInfo>Bewerken</EditInfo>
+      <Delete>Verwijderen</Delete>
+    </title>
+  </ECMTemplate>
+  <step1>
+    <title>
+      <AddPermission>Rechten toevoegen</AddPermission>
+    </title>
+  </step1>
+  <step2>
+    <title>
+      <SelectContainer>Selecteer Container</SelectContainer>
+      <SelectStore>Selecteer opslag</SelectStore>
+    </title>
+  </step2>
+  <step3>
+    <title>
+      <SelectQueryHandler>Selecteer Query Handler</SelectQueryHandler>
+    </title>
+  </step3>
+  <UIDrivePermissionSelector>
+    <label>
+      <selectGroup>Selecteer groep</selectGroup>
+      <selectUser>Select user</selectUser>
+      <selectMembership>Select membership</selectMembership>
+    </label>
+  </UIDrivePermissionSelector>
+  
+  <UIPermissionSelector>
+    <label>
+      <selectGroup>Selecte groep</selectGroup>
+      <selectUser>Selecteer de gebruiker</selectUser>
+      <selectMembership>Selecteer lidmaatschap</selectMembership>
+    </label>
+  </UIPermissionSelector>
+  
+  <UIAnyPermission>
+    <label>
+      <anyPermission>Elke Toestemming</anyPermission>
+    </label>
+  </UIAnyPermission>
+  
+  <UIMDriveAnyPermission>
+    <label>
+      <anyPermission>Elke Toestemming</anyPermission>
+    </label>
+  </UIMDriveAnyPermission>
+  
+  <UIQueriesAnyPermission>
+    <label>
+      <anyPermission>Elke Toestemming</anyPermission>
+    </label>
+  </UIQueriesAnyPermission>
+  
+  <MetadataPermission>
+    <label>
+      <selectGroup>Select group</selectGroup>
+    </label>
+  </MetadataPermission>  
+  <MetadataPermission>
+    <label>
+      <selectMembership>Select membership</selectMembership>
+    </label>
+  </MetadataPermission>
+  <anyPermission>
+    <title>
+      <AddAnyPermission>Stel elke toestemming</AddAnyPermission>
+    </title>
+  </anyPermission>
+  <!--
+  #########Since ECM 2.3##################
+  -->
+  <QueriesPermissionBrowse>
+    <label>
+      <selectGroup>Selecte groep</selectGroup>
+      <selectUser>Selecteer de gebruiker</selectUser>
+      <selectMembership>Selecteer lidmaatschap</selectMembership>
+    </label>
+  </QueriesPermissionBrowse>
+  <!--
+  #########Since ECM 2.4##################
+  -->  
+  <UIViewFormTabPane>
+    <label>
+      <addSymLink>Voeg Symbolische Link</addSymLink>
+    </label>
+  </UIViewFormTabPane>
+  <!--
+  #########Since ECM 2.5##################
+  --> 
+  
+  <UIDriveForm>
+<msg>
+  <permission-path-invalid>Permission is invalid!</permission-path-invalid>
+  </msg>
+  </UIDriveForm>
+  
+  <UITaxonomyTreeMainForm>
+    <msg>
+      <homepath-emty>The Home path is empty</homepath-emty>
+      <targetpath-emty>The target path is empty</targetpath-emty>
+    </msg>
+  </UITaxonomyTreeMainForm>
+  <UITaxonomyWorkingArea>
+  <msg>
+  <exist>This tree node is existed!</exist>
+  </msg>
+  </UITaxonomyWorkingArea>
+
+  <PermissionTreeSelectUser>
+    <label>
+      <option>
+        <userName>#{word.userName}</userName>
+        <lastName>#{word.lastName}</lastName>
+        <firstName>#{word.firstName}</firstName>
+        <email>#{word.email}</email>
+      </option>
+      <group>Gruppe</group>
+      <searchUser>#{word.user}</searchUser>
+      <userName>#{word.userName}</userName>
+      <lastName>#{word.lastName}</lastName>
+      <firstName>#{word.firstName}</firstName>
+    <email>#{word.email}</email>
+      <action>#{word.action}</action>
+      <Add>#{word.Add}</Add>
+      <Close>#{word.Close}</Close>
+    </label>
+  </PermissionTreeSelectUser>
+  
+  <!--
+  #########Since ECM 2.6 ##################
+  -->   
+  <DriveInputSet>
+    <label>
+      <nt_folder>Map</nt_folder>
+      <nt_unstructured>Ongestructureerde map</nt_unstructured>
+      <exo_cssFolder>CSS map</exo_cssFolder>
+      <exo_jsFolder>JavaScript map</exo_jsFolder>
+      <exo_linkFolder>Koppeling map</exo_linkFolder>
+      <exo_webFolder>Map met webinhoud</exo_webFolder>
+   </label>
+  </DriveInputSet>
+  <UIPermissionTreeInfo>
+  <msg>
+      <confirm-delete-permission>Do you really want to delete this permission?</confirm-delete-permission>
+      <no-permission-remove>You can not remove the owner or system</no-permission-remove>  
+  </msg>
+  </UIPermissionTreeInfo>  
+  <UITaxonomyTreeMainForm>
+<msg>
+      <no-right-target-path>You have to choose other home path</no-right-target-path>
+</msg>
+</UITaxonomyTreeMainForm>
+
+<UIECMAdminControlPanel>
+    <tab>
+      <label>        
+        <ManageUnLock>Vergrendelingen beheren</ManageUnLock>
+      </label>
+    </tab>        
+</UIECMAdminControlPanel>
+<UIUnLockForm>
+    <label>
+      <name>Pad knooppunt</name>      
+      <permissions>Rechtens</permissions>
+      <PermissionButton>UI Unlock Form</PermissionButton>
+    </label>
+    <action>
+      <Save>#{word.save}</Save>
+      <Cancel>#{word.cancel}</Cancel>
+    </action>
+    <msg>
+      <permission-require>You must select permissions</permission-require>      
+    </msg>
+  </UIUnLockForm>
+  <UILockHolderList>
+  <header>
+  <name>Groups Or Users</name>
+  <action>Actie</action>
+  </header>
+  <tooltip>
+<DeleteLock>Groep verwijderen</DeleteLock>
+  </tooltip>
+  <msg>
+  <can-not-delete-lock-holder>Can not delete group {0}</can-not-delete-lock-holder>
+  </msg>
+  </UILockHolderList>
+  <UILockNodeList>
+  <header>
+  <name>Node Path</name>
+  <hoderLock>User Lock</hoderLock>
+  <action>Actie</action>
+  </header>
+  <tooltip>
+<UnLock>vrijmaken</UnLock>
+  </tooltip>
+  <msg>
+  <access-denied-exception>You don't have permission to access node with path {0} or this node is deleted</access-denied-exception>
+  </msg>
+  </UILockNodeList>
+  <EditUnLockForm>
+    <title>
+      <UIUnLockForm>Lock beheren</UIUnLockForm>
+    </title>
+  </EditUnLockForm>  
+  <UITabPane>
+    <action>
+      <Close>#{word.close}</Close>
+    </action>
+    <title>
+    <UILockHolderContainer>Lock beheren</UILockHolderContainer>
+    <UILockNodeList>Vergrendelde Node</UILockNodeList>
+    </title>
+  </UITabPane>
+  
+  <UIViewFormTabPane>
+    <action>
+      <AddTabForm>Tab toevoegen</AddTabForm>
+      <AddTab>#{word.save}</AddTab>
+      <BackViewForm>Terug</BackViewForm>
+    </action>
+  </UIViewFormTabPane>
+  
+ <UITemplateForm>
+<tab>
+<label>
+<defaultSkin>CSS</defaultSkin>
+</label>
+</tab>
+</UITemplateForm>
+ 
+  <UITabPane>
+    <title>
+      <UISkinTab>CSS</UISkinTab>
+    </title>
+  </UITabPane>
+  
+  <UISkinTab>
+    <header>
+      <name>Naam</name>
+      <roles>Rollen</roles>
+      <baseVersion>Versie</baseVersion>
+      <action>Acties</action>
+    </header>
+    <msg>
+      <undeletable>'{0}' can not be deleted, it is the default one!</undeletable>
+      <confirm-delete>Do you really want to delete?</confirm-delete>
+    </msg>
+    <action>
+      <title>
+        <Edit>Bewerken</Edit>
+        <Delete>Verwijderen</Delete>
+      </title>
+    </action>
+  </UISkinTab>
+  
+  <SkinForm>
+    <label>
+      <UITemplateContent>SkinForm</UITemplateContent>
+      <UIPopupWindow>Skin toestemming</UIPopupWindow>
+      <selectVersion>Versies beheren</selectVersion>
+      <content>Content</content>
+      <name>Naam:</name>
+      <isDocumentTemplate>is Documentsjabloon</isDocumentTemplate>
+      <viewPermission>Rechten:</viewPermission>
+      <enableVersion>Versiebeheer inschakelen</enableVersion>
+    </label>
+    <title>Skin toevoegen/bewerken</title>
+  </SkinForm>
+
+ <UITagManager>
+   <action>
+     <title>
+       <RemoveStyle>Verwijderen</RemoveStyle>
+         <AddStyle>Stijl toevoegen</AddStyle>
+     </title>
+   </action>
+   <msg>
+     <confirm-delete>Weet u zeker dat u wilt verwijderen van deze tag stijl?</confirm-delete>
+   </msg>
+ </UITagManager>
+
+<UITaxonomyTreeContainer>
+<action>
+<Cancel>#{word.close}</Cancel>
+</action>
+</UITaxonomyTreeContainer>
+<UITaxonomyTreeMainForm>
+<action>
+<NextViewPermission>Volgende</NextViewPermission>
+<Reset>Reset</Reset>
+</action>
+</UITaxonomyTreeMainForm>
+
+<UIPermissionTreeForm>
+<action>
+<Save>Save</Save>
+<Cancel>#{word.cancel}</Cancel>
+<Reset>Reset</Reset>
+<NextAddAction>Volgende</NextAddAction>
+<Previous>#{word.previous}</Previous>
+</action>
+</UIPermissionTreeForm>
+
+<UIActionForm>
+<action>
+<PreviousViewPermission>#{word.previous}</PreviousViewPermission>
+<NextViewTree>Volgende</NextViewTree>
+</action>
+  <msg>
+    <xss-vulnerability-character>Veld '{0}' bevat XSS kwetsbaarheid tekens</xss-vulnerability-character>
+<xss-vulnerability-character-wo-label>Uw input kan XSS kwetsbaarheid tekens bevatten</xss-vulnerability-character-wo-label>
+  </msg>
+</UIActionForm>
+
+<UITaxonomyTreeWorkingArea>
+<action>
+<Previous>#{word.previous}</Previous>
+</action>
+</UITaxonomyTreeWorkingArea>
+
+  <UITabPane>
+    <title>
+      <UITagManager>Tag Manager</UITagManager>
+      <UITagPermissionManager>Tag toestemming Manager</UITagPermissionManager>
+    </title>
+  </UITabPane>
+  
+  <UITagPermissionInfo>
+    <header>
+      <usersOrGroups>Gebruiker of Groep</usersOrGroups>
+      <action>Actie</action>
+    </header>
+    <action>
+      <title>
+        <Delete>Verwijderen</Delete>
+      </title>
+    </action>
+    <msg>
+      <confirm-delete-permission>Weet u zeker dat u wilt verwijderen van deze machtiging?</confirm-delete-permission>
+    </msg>   
+  </UITagPermissionInfo>
+  <UITagPermissionForm>
+    <title>Toevoegen permissie</title>
+    <action>
+      <Save>#{word.save}</Save>
+      <Add>Toevoegen</Add>
+    </action>
+    <label>
+      <userOrGroup>Memberships:</userOrGroup>
+    </label>
+    <msg>
+      <userOrGroup-alreadyExists>Dit lidmaatschap bestaat al. Selecteer een andere.</userOrGroup-alreadyExists>
+    </msg>    
+  </UITagPermissionForm>
+  
+  <UIGroupMemberSelector>
+    <label>
+      <selectGroup>Selecteer Groep</selectGroup>
+      <selectMembership>Select membership</selectMembership>
+    </label>
+  </UIGroupMemberSelector>
+  
+  <UIFolksonomyManager>
+  <msg>
+      <confirm-delete>Weet u zeker dat u wilt verwijderen van deze stijl?</confirm-delete>
+  </msg>
+    <action>
+      <title>
+        <AddStyle>Stijl toevoegen</AddStyle>
+      </title>
+    </action>
+  </UIFolksonomyManager>  
+<UIActionForm>
+  <title>
+  <ShowComponent>Venster openen</ShowComponent>
+  <removeReference>Verwijderen</removeReference>
+  </title>
+  </UIActionForm> 
+  <NodeTypeNameValidator>
+    <msg>
+      <Invalid-char>There are some invalid characters. Type another value, please!</Invalid-char>
+      <empty-input>The value of field is null or empty!</empty-input>
+    </msg>
+  </NodeTypeNameValidator>
+  <UIActionForm>
+    <msg>
+      <constraint-violation-exception>Het node '{0}' kan niet worden toegevoegd aan '{1}' in de werkruimte '{2}'.  Er is een probleem met de machtigingen of beperkingen voorwaarde.</constraint-violation-exception>
+    </msg>
+  </UIActionForm>
+  
+  <UIWorkspaceWizard>
+    <msg>
+      <name-not-allowed>Naam verboden</name-not-allowed>
+    </msg>
+  </UIWorkspaceWizard>
+  <UIRepositoryForm>
+    <msg>
+      <not-complete-repository>The repository is being created. You need to wait a few minutes before creating another one.</not-complete-repository>
+    </msg>
+  </UIRepositoryForm>
+  
+  <UIViewFormTabPane>
+  <label>
+  <addCategory>Voeg categorie toe</addCategory>
+          <addLocalizationLink>Vertaling toevoegen</addLocalizationLink>
+  </label>
+  </UIViewFormTabPane>
+
+<UIDriveForm>
+<label>
+<allowNodeTypesOnTree>Allowance nodetype on left tree</allowNodeTypesOnTree>
+</label>
+</UIDriveForm>
+<DriveInputSet>
+<title>
+<RemovePermission>Remove Permission</RemovePermission>
+<ChooseNodeType>Selecteer Node Type</ChooseNodeType>
+<RemoveNodeType>Verwijderen</RemoveNodeType>
+</title>
+</DriveInputSet>
+<PopupNodeTypeSelector>
+<title>
+<UINodeTypeSelector>Selecteer Node Type</UINodeTypeSelector>
+<PopupNodeTypeSelector>Selecteer Node Type</PopupNodeTypeSelector>
+</title>
+</PopupNodeTypeSelector>
+  <UINodeTypeSelector>
+    <label>
+      <selectedAllNodeTypes>Selecteer alle node type</selectedAllNodeTypes>
+    </label>
+  </UINodeTypeSelector>
+  <UIScriptForm>
+    <msg>
+      <PathNotFoundException>The script is not already exists in '{0}' folder</PathNotFoundException>      
+    </msg>
+  </UIScriptForm>
+ <UINodeTypeList>
+   <msg>
+   <no-list>Er is geen node type overeenkomen met uw zoekopdracht.</no-list>
+   </msg>
+ </UINodeTypeList>
+  <UIActionForm>
+    <msg>
+      <canotChangeActionId>U kunt niet wijzigen de actie-ID.</canotChangeActionId>
+    </msg>
+  </UIActionForm>
+  <PopupComponent>
+    <title>
+      <UINodeTypeSelector>NodeType Selector</UINodeTypeSelector>
+    </title>
+  </PopupComponent>
+  <UIPageIterator>
+    <label>
+      <maxPageSize>Maximale grootte van de pagina</maxPageSize>
+    </label>
+  </UIPageIterator>
+  <UILockNodeList>
+    <msg>
+      <can-not-unlock-node>U hebt geen recht om deze node vrij te maken. contacteer uw beheerder</can-not-unlock-node>
+    </msg>
+ </UILockNodeList>
+</bundle>

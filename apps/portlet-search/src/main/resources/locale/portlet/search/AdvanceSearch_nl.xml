@@ -1,0 +1,96 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<bundle>
+  <UIDefaultSearchForm>
+    <label>
+      <keyword>Zoekwoord</keyword>
+      <portal>Portaal</portal>
+      <Page>Pagina</Page>
+      <Document>Documents</Document>
+    </label>
+    <action>
+      <Search>Zoek</Search>
+    </action>
+  </UIDefaultSearchForm>
+
+  <UIDefaultSearchResult>
+    <label>
+      <Page>Pagina</Page>
+      <Document>Documents</Document>
+      <DocumentAndPage>Document en pagina</DocumentAndPage>
+      <documentandpage>Document en pagina</documentandpage>
+      <results>Resultaten {0} te {1} voor {2}</results>
+      <oneResult>Slechts één resultaat voor {0}</oneResult>
+      <ofAboutCaption>van ongeveer</ofAboutCaption>
+      <timeUnitCaption>seconden</timeUnitCaption>
+      <similar>Pagina's waar de dezelfde inhoud wordt weergegeven</similar>
+      <editor>Editor</editor>
+      <date>Datum</date>
+      <relevancy>Relevantie</relevancy>
+      <title>Titel</title>
+      <sortBy>Sorteren op:</sortBy>
+    </label>
+    <action>
+      <edit>Bewerken</edit>
+    </action>
+    <msg>
+      <search-not-match-type>Uw zoekopdracht {0} komt niet overeen met een {1}.</search-not-match-type>
+    </msg>
+  </UIDefaultSearchResult>
+  <UISearchPageLayoutManager>
+    <label>
+      <itemsPerPageSelector>Items per pagina</itemsPerPageSelector>
+      <searchFormSelector>Zoek formuliersjabloon</searchFormSelector>
+      <searchResultSelector>Zoek resultaat sjabloon</searchResultSelector>
+      <searchPaginatorSelector>Zoek slideview sjabloon</searchPaginatorSelector>
+      <searchPageLayoutSelector>Zoek pagina-indeling sjabloon</searchPageLayoutSelector>
+      <searchResultBasePathInputSetAction>Basispad</searchResultBasePathInputSetAction>
+      <pageMode>Pagina modus</pageMode>
+      <option>
+        <none>Geen</none>
+        <more>Meer</more>
+        <pagination>Paginering</pagination>
+      </option>
+    </label>
+    <action>
+      <Save>#{word.save}</Save>
+      <Cancel>#{word.cancel}</Cancel>
+    </action>
+  </UISearchPageLayoutManager>
+  <searchResultBasePathInputSetAction>
+    <title>
+      <SelectBasePath>Selecteer basispad</SelectBasePath>
+    </title>
+  </searchResultBasePathInputSetAction>  
+  <UISearchForm>  
+   <message>
+     <keyword-not-support>Het sleutelwoord is ongeldig. Sommige tekens worden niet herkend.</keyword-not-support>
+     <not-checked>Selecteer een zoektype.</not-checked>
+     <keyword-not-empty>Voer een trefwoord.</keyword-not-empty>
+   </message>
+  </UISearchForm>
+  <UIPaginatorDefault>
+    <label>
+      <next>Volgende</next>
+      <previous>#{word.previous}</previous>
+      <more>Meer</more>
+    </label>
+  </UIPaginatorDefault>
+  <UISearchPageLayoutDefault>
+    <label>
+      <quickEditTitle>Snel bewerken</quickEditTitle>
+    </label>
+  </UISearchPageLayoutDefault>
+  <searchOption>
+    <label>
+      <pageCheckBox>in pagina 's</pageCheckBox>
+      <documentCheckBox>in inhoud</documentCheckBox>
+    </label>
+  </searchOption>
+  <ViewMode>
+    <label>
+      <option>
+        <all>zoek alle sites</all>
+      </option>  
+    </label>  
+  </ViewMode>
+</bundle>

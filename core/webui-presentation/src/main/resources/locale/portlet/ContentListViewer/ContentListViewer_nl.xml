@@ -1,0 +1,189 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<bundle>
+  <UICLVContainer>
+    <label>
+      <Preferences>Voorkeuren</Preferences>
+      <AddContent>Inhoud toevoegen</AddContent>
+      <ManageContent>Inhoud beheren</ManageContent>
+    </label>
+    <msg>
+      <non-contents>Sorry, zijn geen artikelen beschikbaar.</non-contents>
+      <item-not-found>Item niet gevonden.</item-not-found>
+      <no-permission>U bent niet gemachtigd voor toegang tot dit node.</no-permission>
+      <category-back>Ga naar vorige</category-back>
+    </msg>
+  </UICLVContainer>
+  <UIViewerManagementPopupWindow>
+    <title>
+      <UICLVConfig>Inhoudslijst voorkeuren</UICLVConfig>
+    </title>
+  </UIViewerManagementPopupWindow>
+  <UICLVConfig>
+    <label>
+      <Title>Inhoudslijst voorkeuren</Title>
+      <ContentSelectionBlock>Inhoud selectie</ContentSelectionBlock>
+      <UICLVConfigDisplayModeFormRadioBoxInput>Modus</UICLVConfigDisplayModeFormRadioBoxInput>
+      <UICLVConfigItemPathFormInputSet>Mappad</UICLVConfigItemPathFormInputSet>
+    <UICLVConfigItemPathFormStringInput>Mappad</UICLVConfigItemPathFormStringInput>
+      <UICLVConfigOrderByFormSelectBox>Sorteer op</UICLVConfigOrderByFormSelectBox>
+      <option>
+        <exo:title>Titel</exo:title>
+        <exo:dateCreated>Gecreëerd datum</exo:dateCreated>
+        <exo:lastModifiedDate>Gewijzigd datum</exo:lastModifiedDate>
+        <publication:liveDate>Publicatiedatum</publication:liveDate>
+        <exo:startEvent>Event datum</exo:startEvent>
+        <exo:index>Index</exo:index>
+        <DESC>Dalende</DESC>
+        <ASC>Ascendant</ASC>
+      </option>
+      <DisplaySettingBlock>Weergave-instellingen</DisplaySettingBlock>
+      <UICLVConfigHeaderFormStringInput>Koptekst</UICLVConfigHeaderFormStringInput>
+      <UICLVConfigDisplayTemplateFormSelectBox>Sjabloon</UICLVConfigDisplayTemplateFormSelectBox>
+      <UICLVConfigPaginatorTemplateFormSelectBox>Paginator</UICLVConfigPaginatorTemplateFormSelectBox>
+      <UICLVConfigItemsPerPageFormStringInput>Items per pagina</UICLVConfigItemsPerPageFormStringInput>
+      <UICLVConfigShowIllustrationFormCheckboxInput>Show Image</UICLVConfigShowIllustrationFormCheckboxInput>
+      <UICLVConfigShowSummaryFormCheckboxInput>Show Summary</UICLVConfigShowSummaryFormCheckboxInput>
+      <UICLVConfigShowHeaderFormCheckboxInput>Show Header</UICLVConfigShowHeaderFormCheckboxInput>
+      <UICLVConfigShowRefreshFormCheckboxInput>Show Refresh</UICLVConfigShowRefreshFormCheckboxInput>
+      <UICLVConfigShowTitleFormCheckboxInput>Titel tonen</UICLVConfigShowTitleFormCheckboxInput>
+      <UICLVConfigShowDateCreatedFormCheckboxInput>Toon datum</UICLVConfigShowDateCreatedFormCheckboxInput>
+      <UICLVConfigShowLinkFormCheckboxInput>Show Link</UICLVConfigShowLinkFormCheckboxInput>
+      <UICLVConfigShowReadmoreFormCheckboxInput>Show More Links</UICLVConfigShowReadmoreFormCheckboxInput>
+      <UICLVConfigAllowDynamicUrlStringInput>Allow Dynamic URL</UICLVConfigAllowDynamicUrlStringInput>
+      <UICLVConfigShowRssLinkFormCheckboxInput>Show RSS Link</UICLVConfigShowRssLinkFormCheckboxInput>
+      <UICLVConfigShowAutomaticDetectionCheckboxInput>Automatic Detection</UICLVConfigShowAutomaticDetectionCheckboxInput>
+      <AdvancedBlock>Geavanceerde</AdvancedBlock>
+      <UICLVConfigDynamicNavigationLabel>Dynamische navigatie</UICLVConfigDynamicNavigationLabel>
+      <UICLVConfigContextualFolderRadioBoxInput>Contextual Folder</UICLVConfigContextualFolderRadioBoxInput>
+      <UICLVConfigShowCLVByStringInput>door</UICLVConfigShowCLVByStringInput>
+      <UICLVConfigshowSCVWithStringInput>met</UICLVConfigshowSCVWithStringInput>
+      <UICLVConfigTargetPageFormInputSet>In pagina weergeven</UICLVConfigTargetPageFormInputSet>
+      <content-not-found>Content not found.</content-not-found>
+      <ContentPath>Pad naar inhoud</ContentPath>
+      <Up>Omhoog verplaatsen</Up>
+      <Down>Omlaag verplaatsen</Down>
+      <UICLVConfigCacheManagementLabel>Inhoud zichtbaarheid</UICLVConfigCacheManagementLabel>
+      <UICLVContentByQueryLabel>Content by Query</UICLVContentByQueryLabel>
+      <UICLVConfigWorkspaceFormSelectBox>Werkruimte</UICLVConfigWorkspaceFormSelectBox>
+      <UICLVConfigContentByQueryTextArea>by query</UICLVConfigContentByQueryTextArea>
+      <UICLVConfigCacheEnableRadioBoxInput>Share content between users</UICLVConfigCacheEnableRadioBoxInput>
+    </label>
+    <help>
+      <ModeSelectionHelp>Er zijn twee modi beschikbaar voor inhoud weergeven. "Per map" vindt alle inhoud die beschikbaar is in uw geselecteerde map/categorie. Hiermee kunt u handmatig de inhoud die u wilt weergeven selecteren "Door inhoud".</ModeSelectionHelp>
+      <FolderPathHelp>Selecteer de inhoud die u wilt weergeven. De standaardselectie zal dynamisch worden vervangen als u de optie dynamische navigatie activeert (Zie de onderstaande geavanceerde modus).</FolderPathHelp>
+      <HeaderOptionHelp>Een koptekst op de top van de lijst inhoud weergeven. Als u de optie Automatische detectie activeert, zal het proberen te vinden van de kop op basis van de huidige selectie.</HeaderOptionHelp>
+      <GeneralOptionHelp>Select the graphical elements you want to show in your list. Note that, depending on your selected template, some elements may not be available.</GeneralOptionHelp>
+      <ContextualHelp>Hiermee activeert u de optie dynamische navigatie. Anderen kunnen de inhoud dynamisch op basis van een URL-parameter wijzigen.</ContextualHelp>
+      <ParameterHelp>Deze parameter zal worden gebruikt voor toegang tot de inhoud als dynamische navigatie is geactiveerd.</ParameterHelp>
+      <ShowDetailInPageHelp>Te klikken op inhoud, wordt de gebruiker omgeleid naar een pagina met details. U moet een portlet "Inhoud door URL" met dynamische navigatie ingeschakeld op de doelpagina te tonen van de inhoud.</ShowDetailInPageHelp>
+      <DetailParameterHelp>Deze parameter bevat het pad naar de inhoud in de link naar de detailpagina. Deze parameter moet overeenkomen met de parameter die wordt gebruikt in de portlet "Inhoud door URL" van de pagina.</DetailParameterHelp>
+      <ContentByQueryHelp>U kunt een SQL-Query te krijgen inhoud dynamisch instellen. De volgende parameters zijn toegestaan: ${user}, ${lang} of een get parameter (PARAM) omgeven door ${PARAM}.</ContentByQueryHelp>
+      <ContentsVisibilityHelp>"Beperkt door verificatie" zal het filteren van de inhoud op basis van de verificatie. Als u niet ondertekent, ziet u openbare inhoud alleen. Als u bent aangemeld, ziet u alle zichtbare inhoud door Intranetgebruikers (maar gedeeld door alle). "Beperkt door gebruikersrollen" betekent dat inhoud ziet u afhankelijk van uw rechten. In de meeste gevallen, moet deze optie niet worden gebruikt, zoals het vermindert de algehele prestaties.</ContentsVisibilityHelp>
+    </help>
+    <action>
+      <Save>#{word.save}</Save>
+      <Cancel>#{word.cancel}</Cancel>
+      <delete>Verwijderen</delete>
+    </action>
+    <msg>
+      <not-valid-path>The Folder Path is invalid.</not-valid-path>
+      <saving-success>The portlet's preferences are saved.</saving-success>
+    </msg>
+    <tab>
+      <label>
+        <clvContentTab>Inhoud selectie</clvContentTab>
+        <clvDisplayTab>Weergave-instellingen</clvDisplayTab>
+        <clvAdvancedTab>Geavanceerde</clvAdvancedTab>
+      </label>
+    </tab>
+  </UICLVConfig>
+  <UICLVConfigDisplayModeFormRadioBoxInput>
+    <label>
+      <AutoViewerMode>By Folder</AutoViewerMode>
+      <ManualViewerMode>By Content</ManualViewerMode>
+    </label>
+  </UICLVConfigDisplayModeFormRadioBoxInput>
+  <UICLVConfigItemPathFormInputSet>
+    <title>
+      <SelectFolderPath>Selecteer de mappad</SelectFolderPath>
+      <AddPath>Voeg Pad</AddPath>
+    </title>
+  </UICLVConfigItemPathFormInputSet>
+  <FolderPathSelectorPopupWindow>
+    <title>
+      <UIContentSelectorFolder>Mapbrowser</UIContentSelectorFolder>
+    </title>
+  </FolderPathSelectorPopupWindow>
+  <UICLVConfigOrderTypeFormSelectBox>
+    <label>
+      <option>
+        <OrderDesc>Dalende</OrderDesc>
+        <OrderAsc>Ascendant</OrderAsc>
+      </option>
+    </label>
+  </UICLVConfigOrderTypeFormSelectBox>
+  <UICLVConfigTargetPageFormInputSet>
+    <title>
+      <SelectBasePath>Selecteer basispad</SelectBasePath>
+      <SelectTargetPage>Selecteer basispad</SelectTargetPage>
+    </title>
+  </UICLVConfigTargetPageFormInputSet>
+  <UICLVBasePathPopupWindow>
+    <title>
+      <UIPageSelector>Pagina selecteur</UIPageSelector>
+    </title>
+  </UICLVBasePathPopupWindow>
+  <UICLVPresentation>
+    <msg>
+      <confirm-delete>Wilt u deze node verwijderen?</confirm-delete>
+      <delete-content-successfully>Inhoud verwijderd.</delete-content-successfully>
+    </msg>
+    <label>
+      <readmore>Read more</readmore>
+      <rssFeed>RSS Feed</rssFeed>
+    </label>
+    <action>
+      <refresh>Verversen</refresh>
+      <edit>Bewerken in inhoud Explorer</edit>
+      <delete>Verwijderen</delete>
+      <publish>Publiceren</publish>
+    </action>
+    <label>
+      <draft>Klad</draft>
+    </label>
+  </UICLVPresentation>
+  <CorrectContentSelectorPopupWindow>
+    <title>
+      <UIContentSelectorMulti>Multiple Content Selector Pane</UIContentSelectorMulti>
+    </title>
+  </CorrectContentSelectorPopupWindow>
+  <UIContentDialogFormPopupWindow>
+    <title>
+      <UIContentDialogForm>Web Content Form</UIContentDialogForm>
+    </title>
+  </UIContentDialogFormPopupWindow>
+  <UICLVConfigContextualFolderRadioBoxInput>
+    <label>
+      <contextualEnable>Ingeschakeld</contextualEnable>
+      <contextualDisable>Uitgeschakeld</contextualDisable>
+    </label>
+  </UICLVConfigContextualFolderRadioBoxInput>
+  <PublicationStates>
+    <archived>Gearchiveerd</archived>
+    <obsolete>Verouderd</obsolete>
+    <unpublished>UnPublished</unpublished>
+    <enrolled>Ingeschreven</enrolled>
+    <draft>Klad</draft>
+    <pending>In behandeling</pending>
+    <approved>Goedgekeurd</approved>
+    <inreview>In Review</inreview>
+    <staged>Geënsceneerd</staged>
+    <published>Gepubliceerd</published>
+  </PublicationStates>
+  <UICLVConfigCacheEnableRadioBoxInput>
+    <label>
+      <ENABLE>Beperkt door verificatie</ENABLE>
+      <DISABLE>Restricted by User Roles</DISABLE>
+    </label>
+  </UICLVConfigCacheEnableRadioBoxInput>
+</bundle>

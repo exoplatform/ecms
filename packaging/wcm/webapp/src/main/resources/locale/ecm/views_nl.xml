@@ -1,0 +1,231 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<bundle>
+ 
+  <View>
+    <label>
+      <languages>
+        <en>Engels</en>
+        <fr>Frans</fr>
+        <ru>Russisch</ru>
+        <vi>Vietnamees</vi>
+        <nl>Nederlands</nl>
+        <de>Duits</de>
+        <uk>Oekraïens</uk>
+        <ar>Arabisch</ar>
+      </languages>
+    </label>
+  </View>
+ 
+  <!--
+  ################resoucebundle FOR EXO:COMMENT VIEW TEMPLATE#############
+  -->
+  <Comment>
+    <view>
+      <label>
+        <postedBy>Laatste opmerking Gepost door</postedBy>
+        <at>op</at>
+        <comments>Reactie (s)</comments>
+        <show-comments>Toon commentaren</show-comments>
+        <hide-comments>Commentaren verbergen</hide-comments>
+        <comment-by>Becommentarieerd door</comment-by>
+        <email>E-mail</email>
+        <site>Site</site>
+        <lastComment>Laatste commentaar geplaatst door {user} op {time}</lastComment>
+      </label>
+    </view>
+  </Comment>
+ 
+  <!--
+  ################resoucebundle FOR NT:FILE VIEW TEMPLATE##############
+  -->
+  <File>
+    <view>
+      <label>
+        <not-viewable>De preview van dit document is niet beschikbaar.</not-viewable>
+        <pdf-max-size>Het afdrukvoorbeeld is niet beschikbaar voor inhoud groter dan {0} MB.</pdf-max-size>
+        <pdf-max-page>Het afdrukvoorbeeld is niet beschikbaar voor inhoud met meer dan {0} pagina's.</pdf-max-page>
+        <using-webDAV>of Open in MS Office</using-webDAV>
+        <open-on-desktop>Open op bureau</open-on-desktop>
+        <file-size-too-big>De inhoud van dit bestand is te groot. U moet downloaden en openen in de client.</file-size-too-big>
+        <webDAV>WebDAV weergave</webDAV>
+        <download>Downloaden</download>
+        <htmlview>Bekijken als HTML</htmlview>
+        <plaintextview>Weergeven als tekst zonder opmaak</plaintextview>
+      </label>
+    </view>
+  </File>
+ 
+  <!--
+  ################resoucebundle FOR MAIL:DOCUMENT VIEW TEMPLATE##############
+  -->
+  <Mail>
+    <view>
+      <label>
+        <from>Van:</from>
+        <to>Aan:</to>
+        <cc>Cc:</cc>
+        <date>Datum:</date>
+        <subject>Onderwerp:</subject>
+        <attachment>Bijlagen:</attachment>
+      </label>
+    </view>
+  </Mail>
+  <!--
+  ################resoucebundle FOR EXO:VOTE VIEW TEMPLATE##############
+  -->
+  <Vote>
+    <view>
+      <label>
+        <avg-rating>Gemiddelde Rating</avg-rating>
+        <subscription>Stemmen</subscription>
+      </label>
+    </view>
+  </Vote>
+  <!--
+  ################resoucebundle FOR LISTVIEW VIEW TEMPLATE##############
+  -->
+  <ListView>
+    <view>
+      <label>
+        <name>Naam</name>
+        <versionable>Versionable</versionable>
+        <exo_owner>Eigenaar</exo_owner>
+        <exo_dateCreated>Datum aangemaakt</exo_dateCreated>
+        <exo_dateModified>Wijzigingsdatum</exo_dateModified>
+        <auditing>Auditing</auditing>
+      </label>
+    </view>
+  </ListView>
+
+  <!--
+  ###################### resoucebundle for exo:addMetadataAction view template ####
+  -->
+  <AddMetadata>
+    <view>
+      <label>
+        <action-name>Actienaam</action-name>
+        <lifecycle>Levenscyclus</lifecycle>
+        <metadata>Toon Metadatas</metadata>
+        <description>Beschrijving</description>
+      </label>
+    </view>
+  </AddMetadata>
+
+  <!--
+  ###################### resoucebundle for exo:autoVersioning view template ####
+  -->
+  <AutoVersioning>
+    <view>
+      <label>
+        <action-name>Actienaam</action-name>
+        <lifecycle>Levenscyclus</lifecycle>
+        <description>Beschrijving</description>
+      </label>
+    </view>
+  </AutoVersioning>
+  <!--
+  ###################### resoucebundle for exo:enableVersiong view template ####
+  -->
+  <EnableVersioning>
+    <view>
+      <label>
+        <action-name>Naam</action-name>
+        <lifecycle>Levenscyclus</lifecycle>
+        <description>Beschrijving</description>
+      </label>
+    </view>
+  </EnableVersioning>
+  <!--
+  ###################### resoucebundle for dc:elementSet view template ####
+  -->
+  <ElementSet>
+    <view>
+      <label>
+        <not-avaliable>N/B</not-avaliable>
+        <core-elements>Kernelementen</core-elements>
+        <title>Titel</title>
+        <creator>Ontwerper</creator>
+        <subject>Onderwerp</subject>
+        <source>Bron</source>
+        <contributor>Inzender</contributor>
+        <resource-type>Resourcetype</resource-type>
+        <date>Datum</date>
+        <publisher>Uitgever</publisher>
+        <description>Beschrijving</description>
+        <rights>Rechten</rights>
+        <relation>Relatie</relation>
+        <format>Formaat</format>
+        <coverage>Dekking</coverage>
+        <identifier>Identifier</identifier>
+        <languages>Talen</languages>
+      </label>
+      <action>
+        <add-edit>Toevoegen/bewerken</add-edit>
+        <cancel>#{word.cancel}</cancel>
+      </action>
+      <tooltip>
+        <cancel>#{word.cancel}</cancel>
+        <add-edit>eigenschappen toevoegen/wijzigen</add-edit>
+      </tooltip>
+    </view>
+  </ElementSet>
+
+  <ScriptAction>
+    <view>
+      <label> 
+        <isDeep>Is diep</isDeep>
+        <nodetypes>Node type</nodetypes>
+        <affectedNodeTypeNames>Waarin dit probleem optreedt node typen</affectedNodeTypeNames>
+        <nodeTypeName>Node Type naam</nodeTypeName>
+      </label> 
+    </view>
+  </ScriptAction>
+  
+  <AddMetadata>
+    <view>
+      <label>
+        <isDeep>Is diep</isDeep>
+        <nodetypes>Node type</nodetypes>
+        <affectedNodeTypeNames>Nodes met probleem</affectedNodeTypeNames>
+        <nodeTypeName>Node Type namen</nodeTypeName>
+      </label> 
+    </view>
+  </AddMetadata>
+
+  <EnableVersioning>
+    <view>
+      <label>
+        <isDeep>Is diep</isDeep>
+        <nodetypes>Node type</nodetypes> 
+        <affectedNodeTypeNames>Node met probleem</affectedNodeTypeNames>
+        <nodeTypeName>Node Type namen</nodeTypeName>
+      </label> 
+    </view>
+  </EnableVersioning>
+  
+  <AutoVersioning>
+    <view>
+      <label>
+        <isDeep>Is diep</isDeep>
+        <nodetypes>Node type</nodetypes>
+        <affectedNodeTypeNames>Nodes met probleem</affectedNodeTypeNames>
+        <nodeTypeName>Node Type namen</nodeTypeName>
+      </label> 
+    </view>
+  </AutoVersioning>
+  
+   <AccessibleMedia>
+    <view>
+      <label>
+      <Play-audio-description-of-this-video>Audiobeschrijving</Play-audio-description-of-this-video>
+      <Read-more>Verder lezen</Read-more>
+      <Read-less>Lees minder</Read-less>
+      <Switch-back-to-original-video>Originele video</Switch-back-to-original-video>
+      </label>
+      <tooltip>
+      <A-second-media-file-is-available-as-audio-description>Een tweede mediabestand is beschikbaar als een audio-beschrijving</A-second-media-file-is-available-as-audio-description>
+      </tooltip>
+    </view>
+  </AccessibleMedia>
+ 
+</bundle>

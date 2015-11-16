@@ -1,0 +1,3224 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<bundle>
+  <!--
+  #############################################################################
+  #             org.exoplatform.ecm.webui.component.UICommentForm             #
+  #############################################################################
+  -->
+  <UICommentForm>
+    <label>
+      <name>naam</name>
+      <email>E-Mail</email>
+      <website>Web Site</website>
+      <comment>Commentaar</comment>
+    </label>
+    <action>
+      <Save>#{word.save}</Save>
+      <Cancel>#{word.cancel}</Cancel>
+    </action>
+    <msg>
+      <not-support>Geen Commentaar toegelaten voor dit type document</not-support>
+      <not-checkedout>U moet eerst een checkout doen van node voor u Commentaar plaatst</not-checkedout>
+      <content-null>Commentaar inhoud is null of leeg. Geef commentaar</content-null>
+    </msg>
+  </UICommentForm>
+  <!--
+  #############################################################
+  # org.exoplatform.ecm.webui.component.UIVoteForm.gtmpl    #
+  #############################################################
+  -->
+  <UIVoteForm>
+    <title>
+      <normal>Normaal/klik om te stemmen</normal>
+      <good>Goed/klik om te stemmen</good>
+      <verygood>Heel goed/klik om te stemmen</verygood>
+      <excellent>Uitstekend/klik om te stemmen</excellent>
+      <best>Best/klik om te stemmen</best>
+      <no-value>geen waarde nog</no-value>
+    </title>
+    <label>
+      <my-rating>Mijn Rating:</my-rating>
+    </label>
+    <button>
+      <label>
+        <confirm>OK</confirm>
+      </label>
+    </button>
+    <msg>
+      <not-support>Stemmen niet toegelaten voor dit type document</not-support>
+      <not-checkedout>U moet eerst check out node vooraleer u kunt stemmen</not-checkedout>
+      <vote-restriction>You can not vote more than one time</vote-restriction>
+    </msg>
+  </UIVoteForm>
+ 
+  <!--
+  #############################################################################
+  #             org.exoplatform.ecm.webui.component.explorer.UIJCRExplorer    #
+  #############################################################################
+  -->
+  <UIJCRExplorer>
+    <msg>
+      <refresh-session-success>Session succesvol herladen</refresh-session-success>
+      <no-node-history>U bent in root node.</no-node-history>
+      <save-session-success>Alle wijzigingen werden opgeslaan</save-session-success>
+      <target-path-not-found>You cannot access this node because it doesn't exist anymore or you have no right to access it.</target-path-not-found>
+    </msg>
+  </UIJCRExplorer>
+  <!--
+  #############################################################################
+  #             org.exoplatform.ecm.webui.component.explorer.UISideBar        #
+  #############################################################################
+  -->
+  <UISideBar>
+    <label>
+      <Relation>Relatie</Relation>
+      <Explorer>Bestand explorer</Explorer>
+      <Close>sidebar sluiten</Close>
+      <TagExplorer>Tag cloud</TagExplorer>
+      <Clipboard>Klembord</Clipboard>
+      <SavedSearches>Opgeslagen zoekopdrachten</SavedSearches>
+    </label>
+    <title>
+      <Control>Control Sidebar</Control>
+      <Close>sidebar sluiten</Close>
+    </title>
+  </UISideBar>
+  <!--
+  ################################################################################
+  #             org.exoplatform.ecm.webui.component.explorer.UIExplorerActionBar #
+  ################################################################################
+  -->
+  <UIViewBar>
+    <label>
+      <driveWorkspace>werkruimte schijven :</driveWorkspace>
+      <backToJCR>Terug naar JCR pirmaire Drive</backToJCR>
+      <setUpBrowser>Configureer uw navigatie voorkeuren</setUpBrowser>
+      <refesh>Herlaad</refesh>
+      <currentDrive>Current drive</currentDrive>
+      <selectView>Select view</selectView>
+      <showSideBar>Show side bar</showSideBar>
+      <more>Meer</more>
+      <backTo>Terug</backTo>
+    </label>
+  </UIViewBar>
+
+  <!--
+  #############################################################################
+  #             org.exoplatform.ecm.webui.component.explorer.UIDrivesArea  #
+  #############################################################################
+  -->
+  <UIDrivesBrowser>
+    <title>
+      <PersonalDrives>Persoonlijke Drive</PersonalDrives>
+      <GroupDrives>Groups Drives</GroupDrives>
+      <GeneralDrives>Generale schijven</GeneralDrives>
+    </title>
+    <msg>
+      <no-view-found>Er is geen enkele view for uw schijven rechten '{0}'.</no-view-found>
+      <access-denied>Toegang geweigerd! U hebt misschien geen recht op werkruimte van drive '{0}'.</access-denied>
+      <workspace-not-exist>Drive '{0}' werd opgeslagen in een niet-herkende werkruimte. Configureer dit drive.</workspace-not-exist>
+    </msg>
+  </UIDrivesBrowser>
+
+  <!--
+  #############################################################################
+  #             org.exoplatform.ecm.webui.component.explorer.UITreeExplorer    #
+  #############################################################################
+  -->
+  <UITreeExplorer>
+    <title>Verkenner</title>
+    <label>
+      <Root>Root</Root>
+      <webDavView>Open in MS Office</webDavView>
+    </label>
+    <msg>
+      <path-not-found>node werd miscchien verwijderd of gewijzigd! klik op herlaad knop</path-not-found>
+    </msg>
+  </UITreeExplorer>
+  <!--
+  ##################################################################################
+  #             org.exoplatform.ecm.webui.component.explorer.UIViewRelationList    #
+  ##################################################################################
+  -->
+  <UIViewRelationList>
+    <label>
+      <languages-list>Vertalingen</languages-list>
+      <relation-list>Relaties</relation-list>
+      <references-list>Referentie</references-list>
+      <no-related-document>Geen verwante documenten</no-related-document>
+      <related-document>Relatie Documenten</related-document>
+    </label>
+  </UIViewRelationList>
+  <!--
+  #########################################################################################
+  #             org.exoplatform.ecm.webui.component.explorer.control.UIPreferencesForm  #
+  #########################################################################################
+  -->
+  <UIPreferencesForm>
+    <title>Configureer uw navigatie voorkeuren</title>
+    <label>
+      <enableStructure>JCR like structuur activeren</enableStructure>
+      <showSideBar>Toon Sidebar</showSideBar>
+      <showHiddenNode>Toon verborgen node</showHiddenNode>
+      <showNonDocument>Toon non document type</showNonDocument>
+      <showRefDocuments>Toon referenced documenten</showRefDocuments>
+      <enableDragAndDrop>Sleep &amp; Drop inschakelen:</enableDragAndDrop>
+      <sortBy>Sorteer op</sortBy>
+      <order>Volgorde</order>
+      <nodesPerPage>Items per Page:</nodesPerPage>
+    </label>
+    <action>
+      <Back>#{word.close}</Back>
+      <Save>#{word.save}</Save>
+    </action>
+  </UIPreferencesForm>
+  <!--
+  #########################################################################################
+  #             org.exoplatform.ecm.webui.component.explorer.control.UIPreferencesForm  #
+  #########################################################################################
+  -->
+  <UIAllItemsPreferenceForm>
+    <title>Filter voorkeuren instellen</title>
+    <action>
+      <Cancel>#{word.cancel}</Cancel>
+      <Save>#{word.save}</Save>
+    </action>
+  </UIAllItemsPreferenceForm>
+  <!--
+  #########################################################################################
+  #             org.exoplatform.ecm.webui.component.explorer.UIRenameForm  #
+  #########################################################################################
+  -->
+  <UIRenameForm>
+    <title>Hernoem</title>
+    <label>
+      <nameField>Naam</nameField>
+      <titleField>Titel</titleField>
+    </label>
+    <action>
+      <Cancel>#{word.cancel}</Cancel>
+      <Save>#{word.save}</Save>
+      <Back>#{word.back}</Back>
+    </action>
+    <msg>
+      <rename-successfull>Node '{0}' werd succesvol hernoemd naar '{1}'</rename-successfull>
+      <rename-denied>Toegang geweigerd! U kan deze node niet hernoemen</rename-denied>
+      <fileName-invalid>Ongeldige karakters in nieuwe naam</fileName-invalid>
+      <newName-same-oldName>Nieuwe naam is dezelfde als oude naam. Controleer</newName-same-oldName>
+      <version-exception>node is niet checked out of ancestor van deze node is niet checked out.</version-exception>
+      <lock-exception>node is op slot. Maak vrij voor u deze node hernoem</lock-exception>
+      <constraintViolation-exception>'{0}' is niet toegelaten als child's node type voor parent node type</constraintViolation-exception>
+      <unknown-prefix>Prefix '{0}' is nog niet geregistreerd.</unknown-prefix>
+      <rename-error>Er is een fout opgetreden bij het hernoemen van dit knooppunt. Controleer nogmaals.</rename-error>
+    </msg>
+  </UIRenameForm>
+  <UIPopupWindow>
+    <title>
+      <UIRenameForm>Hernoem</UIRenameForm>
+      <UIActionContainer>Actie wijzigen</UIActionContainer>
+      <UIFolderForm>Folder toevoegen</UIFolderForm>
+      <UIUploadManager>bestand Uploaden</UIUploadManager>
+      <UIReferencesList>Referenties Lijst</UIReferencesList>
+      <UIExportNode>Exporteer Node</UIExportNode>
+      <UINodeTypeInfo>NodeType Infomatie</UINodeTypeInfo>
+      <UIVersionInfo>Versie Info</UIVersionInfo>
+      <UIActivateVersion>Activateer Versie</UIActivateVersion>
+      <UIAuditingInfo>Auditing Informaties</UIAuditingInfo>
+      <UIActivateAuditing>Controle activeren</UIActivateAuditing>
+      <UIPermissionManager>Rechten beheer</UIPermissionManager>
+      <UIPropertiesManager>Eigenschappen beheer</UIPropertiesManager>
+      <UIECMSearch>geavanceerd Zoeken</UIECMSearch>
+      <UISavedQuery>opgeslagen queries lijst</UISavedQuery>
+      <UIWatchDocumentForm>Watching Document</UIWatchDocumentForm>
+      <UIActionManager>Acties beheren</UIActionManager>
+      <UIDocumentForm>Document wijzigen</UIDocumentForm>
+      <UIDocumentFormController>Nieuw Document toevoegen</UIDocumentFormController>
+      <EditFormController>Document wijzigen</EditFormController>
+      <UIRelationManager>Relatie toevoegen</UIRelationManager>
+      <UICategoryManager>Categorie toevoegen</UICategoryManager>
+      <UIImportNode>Importeer Node</UIImportNode>
+      <UIViewMetadataManager>Toon Metadata</UIViewMetadataManager>
+      <UIVoteForm>Stem Document</UIVoteForm>
+      <UICommentForm>Commentaar toevoegen</UICommentForm>
+      <UIPreferencesForm>Voorkeuren</UIPreferencesForm>
+      <UIPublicationManager>Manage publication</UIPublicationManager>
+      <UIConfirmMessage>Confirm delete</UIConfirmMessage>
+      <UIDeleteFileConfirmMessage>Bestand verwijderen?</UIDeleteFileConfirmMessage>
+      <UIDeleteFolderConfirmMessage>Map verwijderen?</UIDeleteFolderConfirmMessage>
+      <UIDeleteItemsConfirmMessage>Items verwijderen?</UIDeleteItemsConfirmMessage>
+      <UIRestoreConfirmMessage>Restore bevestigen</UIRestoreConfirmMessage>
+      <UIActivePublication>Enrol to publication lifecycle</UIActivePublication>
+      <UITaggingForm>Tagging dit document</UITaggingForm>
+      <UIThumbnailForm>Thumbnail afbeelding toevoegen</UIThumbnailForm>
+      <UIAllItemsPreferenceForm>Voorkeuren</UIAllItemsPreferenceForm>
+      <UISelectRestorePath>Selecteer Restore pad</UISelectRestorePath>
+      <UISEOForm>Beheren van SEO</UISEOForm>
+      <UISEOToolbarForm>Beheren van SEO</UISEOToolbarForm>
+      <UIReadOnlyFileConfirmMessage>Open Document</UIReadOnlyFileConfirmMessage>
+      <UIDocumentAutoVersionForm>Copy Document</UIDocumentAutoVersionForm>
+    </title>
+    <header>
+      <workspace>Werkruimte</workspace>
+      <path>Pad</path>
+    </header>
+  </UIPopupWindow>
+  <!--
+  #########################################################################################
+  #             org.exoplatform.ecm.webui.component.explorer.UIResourceForm #
+  #########################################################################################
+  -->
+  <UIResourceForm>
+    <title>Wijzig tekst van dit bestand</title>
+    <label>
+      <name>naam</name>
+      <textToModify>Tekst te wijzigen</textToModify>
+      <fileToUpload>Upload nieuw inhoud van dit document (moet zelfde mime-type zijn)</fileToUpload>
+    </label>
+  </UIResourceForm>
+  <!--
+  ###################################################################################
+  #             org.exoplatform.ecm.webui.component.explorer.UIActionBar      #
+  ###################################################################################
+  -->
+  <UIActionBar>
+    <tooltip>
+      <AddFolder>Folder toevoegen</AddFolder>
+      <AddDocument>Document toevoegen</AddDocument>
+      <EditDocument>Document wijzigen</EditDocument>
+      <Upload>Uploaden</Upload>
+      <Paste>Plakken</Paste>
+      <Search>Zoeken</Search>
+      <WatchDocument>Watch/Unwatch dit document</WatchDocument>
+      <TaggingDocument>Tagging dis document</TaggingDocument>
+      <Vote>Stem voor document</Vote>
+      <Comment>Geef Commentaar op dit document</Comment>
+      <ManageVersions>Versies beheren</ManageVersions>
+      <ManageAuditing>Controle</ManageAuditing>
+      <ManagePublications>Manage Publications</ManagePublications>
+      <ManageCategories>Categories beheren</ManageCategories>
+      <ManageRelations>Relaties beheren</ManageRelations>
+      <ManageActions>Acties beheren</ManageActions>
+      <ExportNode>Exporteer Node</ExportNode>
+      <ImportNode>Importeer Node</ImportNode>
+      <OverloadThumbnail>Overload thumbnail</OverloadThumbnail>
+      <ManageHidden>Hide/Show content</ManageHidden>
+      <ViewReferences>Toon Referenties</ViewReferences>
+      <ViewNodeType>Toon Node Types</ViewNodeType>
+      <ViewPermissions>Toon rechten</ViewPermissions>
+      <ViewProperties>Toon Node Eigenschappen</ViewProperties>
+      <ViewMetadatas>Toon Metadatas</ViewMetadatas>
+      <ViewRelations>Relaties tonen/verbergen</ViewRelations>
+      <ShowJCRStructure>Als JCR Structure Add/Edit</ShowJCRStructure>
+      <EditProperty>Edit Document Properties</EditProperty>
+      <UploadNewVersion>Upload a new version</UploadNewVersion>
+    </tooltip>
+    <msg>
+      <cannot-action-in-rootnode>U kan geen acties uitvoeren in root node</cannot-action-in-rootnode>
+      <node-checkedin>U moet eerst check out</node-checkedin>
+      <cannot-enable-version-rootnode>Kan versie niet activeren voor root node</cannot-enable-version-rootnode>
+      <cannot-enable-publication-rootnode>Can not enable publication for root node</cannot-enable-publication-rootnode>
+      <manage-publication>
+        <not-supported-nodetype>The publication support document node only.</not-supported-nodetype>
+        <no-publication-lifecycle>Geen publicatie levenscyclus is geconfigureerd.</no-publication-lifecycle>
+      </manage-publication>
+      <unsubcriber-lifecycle>Het node was al uitgeschreven.</unsubcriber-lifecycle>
+      <not-supported-nodetype>De levenscyclus van unsubscriber ondersteunt alleen het node.</not-supported-nodetype>
+      <unsubcriber-lifecycle-finish>Node was uitgeschreven met succes.</unsubcriber-lifecycle-finish>
+      <access-false>node is niet artikel of checked in !</access-false>
+      <unsupported-action>node ondersteund niet relaties</unsupported-action>
+      <not-relationable>Node nog geen relatie</not-relationable>
+      <node-pasted>Node '{0}' werd geplakt in locatie '{1}'. Verwerking werd al opgeslaan en u moet op floppy icoon klikken</node-pasted>
+      <no-node-selected>Geen node gekopieerd</no-node-selected>
+      <unable-edit>Node: '{0}' met nodetype '{1}' niet ondersteund actie wijzigen</unable-edit>
+      <not-support>Geselecteerde node kan niet gewijzigd worden</not-support>
+      <template-null>Node heeft geen dialoog beschikbaar</template-null>
+      <keyword-null>Er zijn sleutelwoorden om te zoeken.</keyword-null>
+      <not-found>Niets gevonden!</not-found>
+      <keyword-not-allow>sleutelwoord niet toegelaten.</keyword-not-allow>
+      <is-not-referenable>Node '{0}' is niet referentieerbaar</is-not-referenable>
+      <access-denied>toegang geweigerd. U hebt geen 'wijzig' rechten in deze node</access-denied>
+      <access-add-denied>toegang geweigerd. U hebt geen 'toevoegen' rechten in deze node</access-add-denied>
+      <item-existed>Dit node bestaat al. Er kan niet dezelfde naam heeft als zijn broer.</item-existed>
+      <removed-hidden-mixin>U hebt de verborgen mixin met succes verwijderd.</removed-hidden-mixin>
+      <added-hidden-mixin>U hebt de verborgen mixin met succes toegevoegd.</added-hidden-mixin>
+      <not-supported>Functie is alleen ondersteund voor document type</not-supported>
+      <empty-file-type>Lkan document niet toevoegen aan deze node.</empty-file-type>
+      <unsupported-watch>Allen document node kan watched zijn</unsupported-watch>
+      <watch-checkedin>u moet eerst node check out voor watch</watch-checkedin>
+      <unsupported-tagging>Alleen document node kan getagged worden.</unsupported-tagging>
+      <tagnode-checkedin>u moet eerst check out node voor het tagging</tagnode-checkedin>
+    </msg>
+    <title>
+      <select-tab>Select tab</select-tab>
+      <SimpleSearch>Snel zoeken</SimpleSearch>
+      <AdvanceSearch>geavanceerd zoeken</AdvanceSearch>
+      <SavedQueries>Opgeslangen queries</SavedQueries>
+      <ShowAllOwnedByUser>Alle mijn Items weergeven</ShowAllOwnedByUser>
+      <ShowAllFavourite>Alle favoriete Items weergeven</ShowAllFavourite>
+      <ShowAllHidden>Alle verborgen Items weergeven</ShowAllHidden>
+      <ShowAllFromTrash>Alle Items uit Prullenbak weergeven</ShowAllFromTrash>
+    </title>
+  </UIActionBar>
+  <UIPopupMenu>
+    <msg>
+      <has-not-permission>toegang geweigerd. U hebt geen 'toevoegen' rechten in deze node</has-not-permission>
+      <has-not-edit-permission>toegang geweigerd. U hebt geen 'wijzig' rechten in deze node. contacteer uw beheerder</has-not-edit-permission>
+      <cannot-login-node>U kunt node hier niet plakken</cannot-login-node>
+      <cannot-paste-nodetype>U kunt node hier niet plakken</cannot-paste-nodetype>
+      <has-not-permission-unlok>u hebt geen recht op deze node vrij te maken</has-not-permission-unlok>
+      <bound-exception>U kan dit niet knippen en plakken in zijn sub node</bound-exception>
+      <bound-move-exception>You can not move to itself or in its sub node</bound-move-exception>
+      <does-not-support-auditing>You cannot activate auditing on this node</does-not-support-auditing>
+      <can-not-rename-node>U hebt geen recht om deze node te hernoemen. contacteer uw beheerder</can-not-rename-node>
+      <can-not-cut-node>U hebt geen recht om deze node te knippen. contacteer uw beheerder</can-not-cut-node>
+      <can-not-remove-node>U hebt geen recht om deze node te verwijderen. contacteer uw beheerder</can-not-remove-node>
+      <can-not-lock-node>U bent niet gemachtigd om te vergrendelen node {0}. Neem contact op met de beheerder.</can-not-lock-node>
+      <can-not-unlock-node>U hebt geen recht om deze node vrij te maken. contacteer uw beheerder</can-not-unlock-node>
+      <no-node>Geen node is geselecteerd om te plakken</no-node>
+      <can-not-paste-node>U hebt geen recht om deze node te plakken. contacteer uw beheerder</can-not-paste-node>
+      <can-not-move-node>U hebt geen recht om deze node te verwijderen. contacteer uw beheerder.</can-not-move-node>
+      <does-not-support-versioning>Versioning is niet ondersteund voor deze node</does-not-support-versioning>
+      <path-not-found>node werd verwijderd of gewijzigd. Klik op herlaad knop.</path-not-found>
+      <paste-lock-exception>U kan '{0}' niet plakken aan deze node omdat de bron node of bestemming node is op slot of heeft relatie met een node op slot</paste-lock-exception>
+      <can-not-checkin-node>You can not check-in this node. Please check your right permission!</can-not-checkin-node>
+      <can-not-checkout-node>You can not check-out this node. Please check your right permission!</can-not-checkout-node>
+      <move-constraint-exception>Have problem with constraint violation when move node. Please check the source node and destination node.</move-constraint-exception>
+      <not-lock-owner>U kan deze niet node niet vrijmaken om dat u niet eigenaar bent van het slot.</not-lock-owner>
+      <is-checked-in>check out deze node voor het hernoemen!</is-checked-in>
+      <is-checked-in-lock>check out deze node voor het op slot zetten!</is-checked-in-lock>
+      <cant-lock>U kan deze node niet op slot zetten</cant-lock>
+      <node-locked>object met pad {0} of hoger level is op slot.</node-locked>
+      <can-not-delete>Sluit deze node voor het verwijderen.</can-not-delete>
+      <can-not-delete-version>Kan node niet verwijderen, versioning</can-not-delete-version>
+      <not-support>geselecteerde node kan niet gewijzigd worden, probeer een ander!</not-support>
+      <current-node-not-allow-paste>gekopieerde node type is niet toegelaten om op huidig node te plakken</current-node-not-allow-paste>
+      <copied-node-in-versioning>gekopieerde node in versioning, kan niet Plakken</copied-node-in-versioning>
+      <parent-node-locked>Er zijn geen rechten op node '{0}' vrij te maken</parent-node-locked>
+      <this-node-locked-by-parent>node is op slot door parent of ancestor node, kan niet vrijmaken!</this-node-locked-by-parent>
+      <paste-node-same-name>Bestemmings folder laate geen zelfde naam naam node</paste-node-same-name>
+      <has-not-add-permission>U hebt geen recht om nieuw node toe te voegen</has-not-add-permission>
+      <node-cutting>Node is aan het knippen. u kan hier niet Plakken!</node-cutting>
+      <access-denied>toegang geweigerd!</access-denied>
+      <remove-verion-exception>Kan node niet verwijderen omdat ancestor van deze node is checked-in</remove-verion-exception>
+      <remove-referentialIntegrityException>kan node niet verwijderen omdat deze momenteel het doel is van een REFERENTIE eigenschap</remove-referentialIntegrityException>
+      <constraintviolation-exception>Vereiste object jcr:uuid niet gevonden. node werd misschien verwijderd of gewijzigd. klik om te herladen</constraintviolation-exception>
+      <path-not-found-exception>node werd verwijderd of gewijzigd. Please klik om te herladen.</path-not-found-exception>
+      <not-exist-categories>Category does not exist</not-exist-categories>
+      <lock-node-read-only>Dit bestand is vergrendeld door gebruiker {0}. Dit is een alleen-lezen openen?</lock-node-read-only>
+    </msg>
+  </UIPopupMenu>
+  <!--
+  #############################################################################
+  #     org.exoplatform.ecm.webui.component.explorer.actions.UIFolderForm     #
+  #############################################################################
+  -->
+  <UIFolderForm>
+    <action>
+      <Cancel>#{word.cancel}</Cancel>
+      <Save>#{word.save}</Save>
+    </action>
+    <label>
+      <titleTextBox>Naam van map:</titleTextBox>
+      <customTypeCheckBox>Een aangepaste type map gebruiken</customTypeCheckBox>
+    </label>
+    <title>Folder toevoegen/wijzigen</title>
+    <msg>
+      <addFolder-successful>Nieuw Folder '{0}' Successvol toegevoegd</addFolder-successful>
+      <name-invalid>Geef foldersnaam !</name-invalid>
+      <title-invalid>Voer de titel van de map.</title-invalid>
+      <name-not-allowed>Deze naam is niet toegestaan.</name-not-allowed>
+      <fileName-error>Ongeldig bestandsnaam</fileName-error>
+      <constraint-violation>Huidig node laat niet toe '{0}' node type toe te voegen</constraint-violation>
+      <repository-exception>Kan niet naar dit folder opslaan. Naam heeft geen index of bestaat al</repository-exception>
+      <repository-exception-permission>U bent niet gemachtigd om een nieuwe map toevoegen aan dit knooppunt.</repository-exception-permission>
+      <numberformat-exception>Kan niet naar dit folder opslaan. Naam mag geen '[' of ']' bevatten</numberformat-exception>
+      <!--DMS 2.4.x; ECM-3553-->
+      <not-allow-sameNameSibling>U kunt de map niet opslaan. Dit knooppunt accepteert geen twee knooppunten met dezelfde naam.</not-allow-sameNameSibling>
+      <ntFolder-not-avaiable>U moet een aangepaste type map selecteren</ntFolder-not-avaiable>
+    </msg>
+    <help>
+      <customTypeCheckBoxHelp>Controleer als u van plan bent om op te slaan webinhoud of aangepaste documenttypen in deze map</customTypeCheckBoxHelp>
+    </help>
+  </UIFolderForm>
+  <!--
+  ###################################################################################
+  #             org.exoplatform.ecm.webui.component.explorer.UIDocumentWorkspace    #
+  ###################################################################################
+  -->
+  <UIWorkingArea>
+    <title>
+      <Icon>Icoon</Icon>
+    </title>
+    <msg>
+      <!-- Delte one node is not in trash and have no relation -->
+      <confirm-delete>Weet u zeker dat u wilt verwijderen van het item '{0}'?</confirm-delete>
+      <confirm-delete-file>Weet u zeker dat u wilt verwijderen van het item '{0}'?</confirm-delete-file>
+      <confirm-delete-folder>Weet u zeker dat u wilt verwijderen van de map '{0}' en alle submappen?</confirm-delete-folder>
+      
+      <!-- Delte one node is in trash and have no relation -->
+      <confirm-delete-permanently>Are you sure you want to remove permanently the item '{0}'?</confirm-delete-permanently>
+      <confirm-delete-file-permanently>Weet u zeker dat u wilt het bestand '{0}' permanent verwijderen?</confirm-delete-file-permanently>
+      <confirm-delete-folder-permanently>Weet u zeker dat u wilt permanent verwijderen van de map '{0}' en alle submappen?</confirm-delete-folder-permanently>
+      
+      <!-- Delte one node is not in trash and have relations -->
+      <confirm-delete-has-relations>Weet u zeker dat u wilt verwijderen van het item '{0}' en zijn verwijzingen?</confirm-delete-has-relations>
+      <confirm-delete-file-has-relations>Weet u zeker dat u wilt verwijderen van het bestand '{0}' en zijn verwijzingen?</confirm-delete-file-has-relations>
+      <confirm-delete-folder-has-relations>Weet u zeker dat u wilt verwijderen van de map '{0}' en zijn verwijzingen?</confirm-delete-folder-has-relations>
+      
+      <!-- Delte multiple nodes, not in Trash, have no relations -->
+      <confirm-delete-multi-nodes-generic>Weet u zeker dat u wilt de {0} geselecteerd items verwijderen?</confirm-delete-multi-nodes-generic>  
+      <confirm-delete-multi-nodes-file>Weet u zeker dat u wilt verwijderen van de bestanden {0} geselecteerd?</confirm-delete-multi-nodes-file>
+      <confirm-delete-multi-nodes-folder>Weet u zeker dat u wilt de {0} geselecteerd mappen en alle submappen verwijderen?</confirm-delete-multi-nodes-folder>
+      <confirm-delete-multi-nodes-generic-and-file>Bent u zeker dat u wilt verwijderen van de geselecteerde {0} items en bestanden?</confirm-delete-multi-nodes-generic-and-file>
+      <confirm-delete-multi-nodes-generic-and-folder>Weet u zeker dat u wilt de {0} geselecteerd items, mappen en alle submappen verwijderen?</confirm-delete-multi-nodes-generic-and-folder>
+      <confirm-delete-multi-nodes-file-and-folder>Weet u zeker dat u wilt de {0} geselecteerd bestanden, mappen en alle submappen verwijderen?</confirm-delete-multi-nodes-file-and-folder>
+      <confirm-delete-multi-nodes-generic-and-file-and-folder>Weet u zeker dat u wilt de {0} geselecteerd items, bestanden, mappen en alle submappen verwijderen?</confirm-delete-multi-nodes-generic-and-file-and-folder>
+      
+      <!-- Delte multiple nodes, in Trash -->
+      <confirm-delete-multi-nodes-generic-permanently>Weet u zeker dat u wilt de {0} geselecteerd items permanent verwijderen?</confirm-delete-multi-nodes-generic-permanently>  
+      <confirm-delete-multi-nodes-file-permanently>Weet u zeker dat u wilt de {0} geselecteerd bestanden permanent te verwijderen?</confirm-delete-multi-nodes-file-permanently>
+      <confirm-delete-multi-nodes-folder-permanently>Weet u zeker dat u wilt de {0} geselecteerd mappen en alle submappen permanent verwijderd?</confirm-delete-multi-nodes-folder-permanently>
+      <confirm-delete-multi-nodes-generic-and-file-permanently>Bent u zeker dat u wilt de {0} geselecteerd permanent verwijderen items en bestanden?</confirm-delete-multi-nodes-generic-and-file-permanently>
+      <confirm-delete-multi-nodes-generic-and-folder-permanently>Weet u zeker dat u wilt de {0} geselecteerd items, mappen en alle submappen permanent te verwijderen?</confirm-delete-multi-nodes-generic-and-folder-permanently>
+      <confirm-delete-multi-nodes-file-and-folder-permanently>Weet u zeker dat u wilt de {0} geselecteerd bestanden, mappen en alle submappen permanent te verwijderen?</confirm-delete-multi-nodes-file-and-folder-permanently>
+      <confirm-delete-multi-nodes-generic-and-file-and-folder-permanently>Weet u zeker dat u wilt de {0} geselecteerd items, bestanden, mappen en alle submappen permanent te verwijderen?</confirm-delete-multi-nodes-generic-and-file-and-folder-permanently>
+      
+      <!-- Delte multiple nodes, have relations -->
+      <confirm-delete-multi-nodes-generic-have-relations>Weet u zeker dat u wilt verwijderen van de {0} geselecteerde items en hun referenties?</confirm-delete-multi-nodes-generic-have-relations>  
+      <confirm-delete-multi-nodes-file-have-relations>Weet u zeker dat u wilt verwijderen van de bestanden {0} geselecteerd en hun referenties?</confirm-delete-multi-nodes-file-have-relations>
+      <confirm-delete-multi-nodes-folder-have-relations>Weet u zeker dat u wilt de {0} geselecteerd mappen, alle submappen en hun referenties verwijderen?</confirm-delete-multi-nodes-folder-have-relations>
+      <confirm-delete-multi-nodes-generic-and-file-have-relations>Weet u zeker dat u wilt verwijderen van de bestanden {0} geselecteerd en hun referenties?</confirm-delete-multi-nodes-generic-and-file-have-relations>
+      <confirm-delete-multi-nodes-generic-and-folder-have-relations>Weet u zeker dat u wilt de {0} geselecteerd items, hun referenties, omslagen en alle submappen te schrappen?</confirm-delete-multi-nodes-generic-and-folder-have-relations>
+      <confirm-delete-multi-nodes-file-and-folder-have-relations>Bent u zeker dat u wilt verwijderen van de geselecteerde {0} bestanden, hun referenties, mappen en alle submappen?</confirm-delete-multi-nodes-file-and-folder-have-relations>
+      <confirm-delete-multi-nodes-generic-and-file-and-folder-have-relations>Weet u zeker dat u wilt de {0} geselecteerd items, bestanden, hun referenties, omslagen en alle submappen te schrappen?</confirm-delete-multi-nodes-generic-and-file-and-folder-have-relations>
+      
+      <feedback-delete>'{0}' is verwijderd met succes.</feedback-delete>
+      <feedback-delete-multi>{0} items zijn verwijderd met succes.</feedback-delete-multi>      
+      <feedback-delete-permanently>'{0}' was permanent verwijderd.</feedback-delete-permanently>
+      <feedback-delete-permanently-multi>{0} items waren permanent verwijderd.</feedback-delete-permanently-multi>
+      <undo-delete>Ongedaan maken</undo-delete>
+      <feedback-restore>'{0}' werd hersteld.</feedback-restore>
+      <feedback-restore-multi>{0} items zijn met succes hersteld.</feedback-restore-multi>
+      
+      <confirm-restore>Een node met dezelfde naam bestaat al in de oude locatie van node '{0}'. Weet u zeker dat u wilt herstellen van dit node?</confirm-restore>
+      <confirm-move>Weet u zeker dat u wilt verplaatsen?</confirm-move>
+      <node-cut>Node '{0}' werd geknipt.</node-cut>
+      <execute-successfully>Aangepaste actie '{0}' werd uitgevoerd.</execute-successfully>
+      <save-node-success>Node '{0}' werd opgeslaan.</save-node-success>
+      <move-problem>U verplaatsen niet knooppunt '{0}' naar '{1}' omdat er een probleem met de machtiging of beperking voorwaarden was.</move-problem>
+    </msg>
+  </UIWorkingArea>
+  <UIDocumentWorkspace>
+    <label>
+      <no-children>Node heeft geen enkele child</no-children>
+      <no-children-but-has-hidden>Node heeft geen enkele child maar heeft verborgen bestanden</no-children-but-has-hidden>
+    </label>
+    <msg>
+      <unable-save-node>node '{0}' is een onlangs gecre�erd. Opslag sessie nodig vooraleer u deze actie kunt uitvoeren</unable-save-node>
+      <save-node-success>Node '{0}' werd opgeslaan.</save-node-success>
+      <node-copied>Node '{0}' werd gekopieerd.</node-copied>
+      <node-cut>Node '{0}' werd geknipt.</node-cut>
+      <remove-root>root node kan niet verwijderd worden</remove-root>
+      <node-remove-success>Node '{0}' werd verwijderd.</node-remove-success>
+    </msg>
+    <tooltip>
+      <Rename>Hernoem</Rename>
+      <Cut>Knippen</Cut>
+      <Copy>Kopieren</Copy>
+      <Save>#{word.save}</Save>
+      <RemoveNode>Verwijderen</RemoveNode>
+      <Checkin>CheckIn</Checkin>
+      <Checkout>CheckOut</Checkout>
+      <Lock>Slot</Lock>
+      <Unlock>Vrijmaken</Unlock>
+      <EditDocument>Wijzigen</EditDocument>
+      <Paste>Plakken</Paste>
+      <LockedBy>Vergrendeld door</LockedBy>
+    </tooltip>
+  </UIDocumentWorkspace>
+  <UIDocumentInfo>
+    <msg>
+      <access-denied>toegang geweigerd! U heeft geen toegang op node '{0}'</access-denied>
+      <null-exception>Object niet gevonden! Het werd verwijderd of gewijzigd of u hebt geen toegang tot deze node!</null-exception>
+      <confirm-deleteattachment>Weet u zeker dat u wilt verwijderen van dit bestand?</confirm-deleteattachment>
+      <confirm-deleteattcomment>Weet u zeker dat u wilt verwijderen van deze opmerking?</confirm-deleteattcomment>
+      <access-denied-exception>toegang geweigerd! U hebt geen recht op lezen, verwijderen of wijzigen</access-denied-exception>
+      <path-not-found>node werd miscchien verwijderd of gewijzigd! klik op herlaad knop</path-not-found>
+    </msg>
+    <tooltip>
+      <remove-attachment>Deze bijlagebestand verwijderen</remove-attachment>
+      <remove-comment>Dit commentaar verwijderen</remove-comment>
+    </tooltip>
+  </UIDocumentInfo>
+  <ListView>
+    <view>
+      <label>
+        <name>naam</name>
+        <versionable>Versionable</versionable>
+        <exo_owner>Eigenaar</exo_owner>
+        <auditing>Auditing</auditing>
+        <exo_dateCreated>Datum aangemaakt</exo_dateCreated>
+        <exo_dateModified>Datum gewijzigd</exo_dateModified>
+      </label>
+    </view>
+  </ListView>
+  <!--
+  #############################################################################
+  #             org.exoplatform.ecm.webui.component.explorer.ECMContextMenu   #
+  #############################################################################
+  -->
+  <ECMContextMenu>
+    <event>
+      <Lock>Op slot</Lock>
+      <Unlock>vrijmaken</Unlock>
+      <EditDocument>wijzigen</EditDocument>
+      <Copy>Kopi�ren</Copy>
+      <Rename>Hernoem</Rename>
+      <Delete>verwijderen</Delete>
+      <Save>#{word.save}</Save>
+      <Cut>Knippen</Cut>
+      <Paste>Plakken</Paste>
+      <CheckOut>Kassa</CheckOut>
+      <CheckIn>Inchecken</CheckIn>
+      <WebDAV>Toon WebDAV</WebDAV>
+      <autoversion>Auto versioning</autoversion>
+      <Custom>Aangepast</Custom>
+      <AddFolder>Folder toevoegen</AddFolder>
+      <AddDocument>Document toevoegen</AddDocument>
+      <Upload>Bestanden uploaden</Upload>
+      <MoveNode>Verplaatsen</MoveNode>
+      <UnLock>Vrijmaken</UnLock>
+      <ViewProperties>Toon Node Eigenschappen</ViewProperties>
+      <GetURL>URL kopiëren naar Klembord</GetURL>
+      <AddThumbnail>Foto toevoegen/verwijderen</AddThumbnail>
+      <AddToFavourite>Toevoegen aan favoriete</AddToFavourite>
+      <RemoveFromFavourite>Verwijder van Favorieten</RemoveFromFavourite>
+      <MoveToTrash>Naar prullenbak verplaatsen</MoveToTrash>
+      <RestoreFromTrash>Terughalen uit prullenbak</RestoreFromTrash>
+      <EmptyTrash>Prullenbak leegmaken</EmptyTrash>
+      <WebDavView>Download and allow edition</WebDavView>
+      <Download>Downloaden</Download>
+      <OpenDocument>Extern bewerken</OpenDocument>
+      <EditProperty>Edit Document Properties</EditProperty>
+      <UploadNewVersion>Upload a new version</UploadNewVersion>
+      <CreateNewVersion>Create a new version</CreateNewVersion>
+    </event>
+  </ECMContextMenu>
+ 
+  <!--
+  #############################################################################
+  #     org.exoplatform.ecm.webui.component.explorer.UIReferencesList         #
+  #############################################################################
+  -->
+  <UIReferencesList>
+    <msg>
+      <no-references>Referenties niet gevonden</no-references>
+    </msg>
+    <header>
+      <workspace>Werkruimte</workspace>
+      <path>Pad</path>
+    </header>
+    <action>
+      <Close>#{word.close}</Close>
+    </action>
+  </UIReferencesList>
+  <!--
+  #############################################################################
+  #         org.exoplatform.ecm.webui.component.explorer.UIPropertiesManager  #
+  #############################################################################
+  -->
+  <UITabPane>
+    <title>
+      <UIPublishingPanel>Publication Pane</UIPublishingPanel>
+      <UIPublicationPanel>Revisie</UIPublicationPanel>
+      <UIPublicationSchedule>Gepland</UIPublicationSchedule>
+      <UIPublicationPagesContainer>Pagina's</UIPublicationPagesContainer>
+      <UIPublicationHistory>Geschiedenis</UIPublicationHistory>
+      <UIVersionViewer>Versie Viewer</UIVersionViewer>
+
+      <UIPropertyTab>Eigenschappen</UIPropertyTab>
+      <UIMetadataTab>Toon Metadatas</UIMetadataTab>
+      <UIPropertyForm>Nieuw eigenschap toevoegen</UIPropertyForm>
+      <UIUploadContent>Informatie van geupload bestand</UIUploadContent>
+      <UIJCRAdvancedSearch>Nieuw Query</UIJCRAdvancedSearch>
+      <UISavedQuery>opgeslagen Query</UISavedQuery>
+      <AdvancedSearchResult>Zoek resultaten</AdvancedSearchResult>
+      <UISimpleSearch>Eenvoudig zoeken</UISimpleSearch>
+      <UISearchContainer>geavanceerd zoeken</UISearchContainer>
+      <UICategoryManagerSearch>Categorie toevoegen aan zoeken</UICategoryManagerSearch>
+      <UIConstraintsForm>Beperkings Formulier</UIConstraintsForm>
+      <UIViewSearchResult>Toon inhoud</UIViewSearchResult>
+      <UIContentNameSearch>Zoek op naam</UIContentNameSearch>
+      <UINodeInfo>Versie Info</UINodeInfo>
+      <UINodeProperty>Node eigenschap</UINodeProperty>
+      <UIActionListContainer>Acties beschikbaar</UIActionListContainer>
+      <UIActionContainer>Actie toevoegen</UIActionContainer>
+      <UIActionViewContainer>Actie info</UIActionViewContainer>
+      <UIMultiLanguageForm>Toon taal</UIMultiLanguageForm>
+      <UIAddLanguageContainer>taal toevoegen</UIAddLanguageContainer>
+      <UINonPublishedForm>Forum Staat</UINonPublishedForm>
+      <UIPublishedForm>Forum Staat</UIPublishedForm>
+      <UIPublicationLogList>Geschiedenis</UIPublicationLogList>
+      <UIDocumentWithTree>bestandszicht</UIDocumentWithTree>
+      <UIDocumentInfo>Document zicht</UIDocumentInfo>
+      <UICategoriesSelectPanel>Select categories</UICategoriesSelectPanel>
+      <UISelectedCategoriesGrid>Referenced categories</UISelectedCategoriesGrid>
+      <UIWorkflowPublicationActionForm>Workflow Publication Action</UIWorkflowPublicationActionForm>
+      <UIWorkflowPublicationViewForm>Workflow Publication View</UIWorkflowPublicationViewForm>
+      <metadatasitemetadata>Site Metadata</metadatasitemetadata>
+      <dcelementset>Dublin Core</dcelementset>
+    </title>
+  </UITabPane>
+  <UIPropertyTab>
+    <title>
+      <edit>Deze eigenschap bewerken</edit>
+      <delete>Deze eigenschap verwijderen</delete>
+    </title>
+    <confirm>
+      <remove-property>Weet u zeker dat u wilt verwijderen deze eigenschap?</remove-property>
+    </confirm>
+    <header>
+      <name>naam</name>
+      <multiValue>Multi waarde</multiValue>
+      <value>Waarde</value>
+      <action>Actie</action>
+    </header>
+    <label>
+      <binary>Binary Data</binary>
+      <notavailable>N/B</notavailable>
+      <cannotget>Kan geen waarde ophalen</cannotget>
+    </label>
+    <action>
+      <Close>#{word.close}</Close>
+    </action>
+  </UIPropertyTab>
+  <!--
+  #############################################################################
+  #         org.exoplatform.ecm.webui.component.explorer.UIPropertyTab     #
+  #############################################################################
+  -->
+  <!--
+  #############################################################################
+  #           org.exoplatform.ecm.webui.component.explorer.UIPropertyForm     #
+  #############################################################################
+  -->
+  <UIPropertyForm>
+    <title>eigenschap toevoegen/wijzigen</title>
+    <label>
+      <name>naam</name>
+      <type>Type</type>
+      <value>Waarde</value>
+      <upload>Upload</upload>
+      <namespace>Namespace</namespace>
+      <multiple>Meerdere:</multiple>
+      <property_select>Nieuwe eigenschap toevoegen:</property_select>
+      <value0>Waarde 0</value0>
+      <value1>Waarde 1</value1>
+      <value2>Waarde 2</value2>
+      <value3>Waarde 3</value3>
+      <value4>Waarde 4</value4>
+      <value5>Waarde 5</value5>
+      <value6>Waarde 6</value6>
+      <value7>Waarde 7</value7>
+      <value8>Waarde 8</value8>
+      <value9>Waarde 9</value9>
+      <value10>Waarde 10</value10>
+    </label>
+    <action>
+      <Save>#{word.save}</Save>
+      <Cancel>#{word.cancel}</Cancel>
+      <Reset>#{word.reset}</Reset>
+    </action>
+    <msg>
+      <name-invalid>Geef naam !</name-invalid>
+      <unable-create>Kan geen eigenschap toevoegen!</unable-create>
+      <value-invalid>Geef waarde!</value-invalid>
+      <node-checkedin>U moet eerst checkout vooraleer u een eigenschap toevoegd</node-checkedin>
+      <can-not-add>U kan geen eigenschap aan deze node toevoegen. Alleen voor node's type is nt:ongestructureerd</can-not-add>
+      <propertyName-invalid>Eigenschapsnaam moet namespace bevatten(ex: namespace:naam)</propertyName-invalid>
+      <propertyName-exist>Eigenschap '{0}' bestaat reeds.</propertyName-exist>
+      <propertyValu-null>Sommige waarden zijn null</propertyValu-null>
+      <valueFormatEx>U kunt een meerwaardige waarde toewijzen aan een enkelwaardige eigenschap.</valueFormatEx>
+      <number-format-exception>Uw invoer waarde heeft een fout formaat</number-format-exception>
+      <property-not-exist>De eigenschap {0} bestaat niet.</property-not-exist>
+    </msg>
+  </UIPropertyForm>
+
+  <!--
+  #############################################################################
+  #             org.exoplatform.ecm.webui.component.explorer.UIPermissionInfo #
+  #############################################################################
+  -->
+  <UIPermissionInfo>
+    <action>
+      <title>
+        <Edit>wijzigen</Edit>
+        <Delete>Rechten verwijderen</Delete>
+      </title>
+    </action>
+    <header>
+      <usersOrGroups>Gebruiker of Groep</usersOrGroups>
+      <read>Lezen</read>
+      <addNode>Wijzig</addNode>
+      <remove>Verwijderen</remove>
+      <action>Actie</action>
+    </header>
+    <msg>
+      <confirm-delete-permission>Wilt u dit recht verwijderen?</confirm-delete-permission>
+      <no-permission-tochange>U hebt geen toegang op dit recht te verwijderen</no-permission-tochange>
+      <no-permission-remove>U kan de eigenaar niet verwijderen</no-permission-remove>
+      <access-denied>toegang geweigerd! U hebt geen toegang op dit recht te verwijderen</access-denied>
+    </msg>
+  </UIPermissionInfo>
+  <permission>
+    <title>
+      <SelectUser>Selecteer gebruiker</SelectUser>
+      <SelectMember>Selecteer lidmaatschap</SelectMember>
+      <AddAny>Selecteer iedereen</AddAny>
+    </title>
+  </permission>
+  <!--
+  #############################################################################
+  #             org.exoplatform.ecm.webui.component.explorer.UIPermissionForm #
+  #############################################################################
+  -->
+  <SelectUserOrGroup>
+    <title>
+      <UIGroupSelector>Selecteer gebruiker</UIGroupSelector>
+      <UIPermissionSelector>Selecteer lid</UIPermissionSelector>
+      <UIGroupMemberSelector>Selecteer lidmaatschap</UIGroupMemberSelector>
+    </title>
+  </SelectUserOrGroup>
+  <UIGroupSelector>
+    <label>
+      <selectGroup>Navigeer en selecteer een groep</selectGroup>
+      <selectUser>Selecteer gebruiker</selectUser>
+    </label>
+    <msg>
+      <not-change-owner>'{0}' is eigenaar van deze node en heeft volmacht</not-change-owner>
+    </msg>
+  </UIGroupSelector>
+  <UIPermissionForm>
+    <label>
+      <UIPopupWindow>Selecteren</UIPopupWindow>
+      <permission>UIPermissionForm</permission>
+      <userOrGroup>Gebruiker of Groep</userOrGroup>
+      <read>Lezen Right</read>
+      <add_node>Wijzigen van recht</add_node>
+      <remove>Right verwijderen</remove>
+    </label>
+    <title>Rechten toevoegen aan node</title>
+    <action>
+      <Close>#{word.close}</Close>
+      <Save>#{word.save}</Save>
+      <Reset>#{word.reset}</Reset>
+    </action>
+    <msg>
+      <checkbox-require>U moet ten minste ��n recht selecteren</checkbox-require>
+      <userOrGroup-required>U moet een gebruiker of groep selecteren vooraleer u dit recht opslaat</userOrGroup-required>
+      <not-change-permission>U hebt geen toegang op dit recht toe te voegen</not-change-permission>
+      <access-denied>toegang geweigerd! U hebt geen toegang op dit right te verwijderen</access-denied>
+    </msg>
+  </UIPermissionForm>
+
+  <!--
+  ###############################################################################
+  #             org.exoplatform.ecm.webui.component.explorer.UINodeTypeInfo     #
+  ###############################################################################
+  -->
+  <UINodeTypeInfo>
+    <label>
+      <node-type>Node type</node-type>
+      <name>naam</name>
+      <item>Primaire objectnaam</item>
+      <super-types>Parent types</super-types>
+      <mixin>Mixin Node Type</mixin>
+      <orderable-children>Ordenbaar kinderen</orderable-children>
+      <property-def>Node Property Definitie</property-def>
+      <prop-name>naam</prop-name>
+      <prop-type>Type</prop-type>
+      <prop-multiple>Mul</prop-multiple>
+      <prop-mandatory>Man</prop-mandatory>
+      <prop-protected>Pr</prop-protected>
+      <prop-auto-create>AC</prop-auto-create>
+      <prop-default-values><![CDATA[<span title="Default Values">DV</span>]]></prop-default-values>
+      <prop-constraints><![CDATA[<span title="Constraints Values">CV</span>]]></prop-constraints>
+      <node-def>Child node definities</node-def>
+      <node-def-name>naam</node-def-name>
+      <node-def-opv>OPV</node-def-opv>
+      <node-def-ac>AC</node-def-ac>
+      <node-def-man>MAN</node-def-man>
+      <node-def-pr>PR</node-def-pr>
+      <node-def-dnt>DNT</node-def-dnt>
+    </label>
+    <action>
+      <Close>#{word.close}</Close>
+    </action>
+  </UINodeTypeInfo>
+  <!--
+  ###############################################################################
+  #                    org.exoplatform.ecm.webui.component.explorer.search      #
+  ###############################################################################
+  -->
+  <UICategoryManagerSearch>
+    <tab>
+      <label>
+        <UIOneNodePathSelector>Categorie selecteren</UIOneNodePathSelector>
+      </label>
+    </tab>
+    <action>
+      <Close>#{word.close}</Close>
+    </action>
+  </UICategoryManagerSearch>
+  <UIContentNameSearch>
+    <label>
+      <keyword>inhoudsnaam</keyword>
+      <location>Zoek in locatie:</location>
+    </label>
+    <action>
+      <Search>Zoeken</Search>
+      <Cancel>#{word.cancel}</Cancel>
+    </action>
+    <msg>
+      <keyword-not-allowed>Sleutelwoord niet toegelaten</keyword-not-allowed>
+    </msg>
+  </UIContentNameSearch>
+  <UISimpleSearch>
+    <action>
+      <MoreConstraints>Beperkings formulier tonen/verbergen</MoreConstraints>
+      <Search>Zoeken</Search>
+      <Save>#{word.save}</Save>
+      <Cancel>#{word.cancel}</Cancel>
+    </action>
+    <label>
+      <moreConstraints>UISimpleSearch</moreConstraints>
+      <firstOperator>Operator</firstOperator>
+      <input>Woord of zin in inhoud</input>
+      <constraints>Meer beperkingen</constraints>
+      <nodePath>Huidig locatie</nodePath>
+    </label>
+    <msg>
+      <keyword-null>Geef sleutelwoord.</keyword-null>
+      <not-found>Geen resultaten gevonden!</not-found>
+      <keyword-not-allow>Sleutelwoord niet toegelaten</keyword-not-allow>
+      <value-null>Geef sleutelwoord of beperking.</value-null>
+      <value-save-null>Geef sleutelwoord of beperking voor het opslaan van deze query.</value-save-null>
+      <inputSearch-invalid>Ongeldige karakters in te zoeken invoer.</inputSearch-invalid>
+      <query-invalid>query is ongeldig. Controleer uw beperkingen</query-invalid>
+    </msg>
+  </UISimpleSearch>
+  <ViewSearch>
+    <title>
+      <UIViewSearchResult>Toon sjabloon</UIViewSearchResult>
+    </title>
+  </ViewSearch>
+  <UISearchResult>
+    <msg>
+      <not-support>Er is geen weergave sjabloon voor deze node.</not-support>
+      <empty>Geen resultaten gevonden!</empty>
+      <access-denied>U kan deze node niet tonen omdat template is niet ondersteund of toegang geweigerd!</access-denied>
+      <query-invalid>The query is ongeldig</query-invalid>
+    </msg>
+    <header>
+      <name>#{word.name}</name>
+      <path>pad</path>
+      <action>Actie</action>
+      <shortcutPath>pad</shortcutPath>
+      <type>Type</type>
+      <dateCreated>Datum gemaakt</dateCreated>
+      <score>Score</score>
+    </header>
+    <title>
+      <typeASC>Documenttype in oplopende volgorde sorteren</typeASC>
+      <typeDESC>Documenttype in aflopende volgorde sorteren</typeDESC>
+      <scoreASC>Score in oplopende volgorde sorteren</scoreASC>
+      <scoreDESC>Score in aflopende volgorde sorteren</scoreDESC>
+      <nameASC>Sorteer op naam oplopend</nameASC>
+      <nameDESC>Sorteer op naam aflopend</nameDESC>
+      <datecreatedASC>Gemaakt datum in oplopende volgorde sorteren</datecreatedASC>
+      <datecreatedDESC>Sort by Created date in descending</datecreatedDESC>
+    </title>
+    <tooltip>
+      <View>Toon node</View>
+      <OpenFolder>ga naar folder</OpenFolder>
+    </tooltip>
+  </UISearchResult>
+  <UIShowAllOwnedByUserResult>
+    <msg>
+      <not-support>Er is geen Toon template voor deze node</not-support>
+      <empty>Niets gevonden!</empty>
+      <access-denied>U kunt dit node, niet bekijken omdat deze sjabloon wordt niet ondersteund of omdat de toegang is geweigerd.</access-denied>
+      <query-invalid>The query is ongeldig</query-invalid>
+    </msg>
+    <header>
+      <name>#{word.name}</name>
+      <path>Pad</path>
+      <action>Actie</action>
+      <shortcutPath>Pad</shortcutPath>
+      <type>Type</type>
+      <dateCreated>Datum aangemaakt</dateCreated>
+      <score>Score</score>
+    </header>
+    <title>
+      <typeASC>Documenttype in oplopende volgorde sorteren</typeASC>
+      <typeDESC>Documenttype in aflopende volgorde sorteren</typeDESC>
+      <scoreASC>Score in oplopende volgorde sorteren</scoreASC>
+      <scoreDESC>Sort by score in descending</scoreDESC>
+      <nameASC>Sort by name in ascending</nameASC>
+      <nameDESC>Sort by name in descending</nameDESC>
+      <datecreatedASC>Gemaakt datum in oplopende volgorde sorteren</datecreatedASC>
+      <datecreatedDESC>Gemaakt datum in aflopende volgorde sorteren</datecreatedDESC>
+    </title>
+    <tooltip>
+      <View>Toon node</View>
+      <OpenFolder>Ga naar map</OpenFolder>
+    </tooltip>
+  </UIShowAllOwnedByUserResult>
+  <UIShowAllFavouriteResult>
+    <msg>
+      <not-support>Er is geen Toon template voor deze node</not-support>
+      <empty>Geen resultaten gevonden</empty>
+      <access-denied>U kunt dit node, niet bekijken omdat deze sjabloon wordt niet ondersteund of omdat de toegang is geweigerd.</access-denied>
+      <query-invalid>The query is ongeldig</query-invalid>
+    </msg>
+    <header>
+      <name>#{word.name}</name>
+      <path>Pad</path>
+      <action>Actie</action>
+      <shortcutPath>Pad</shortcutPath>
+      <type>Type</type>
+      <dateCreated>Datum aangemaakt</dateCreated>
+      <score>Score</score>
+    </header>
+    <title>
+      <typeASC>Sort by document type in ascending order</typeASC>
+      <typeDESC>Sort by document type in descending</typeDESC>
+      <scoreASC>Sort by score in ascending</scoreASC>
+      <scoreDESC>Sort by score in descending</scoreDESC>
+      <nameASC>Sort by name in ascending</nameASC>
+      <nameDESC>Sort by name in descending</nameDESC>
+      <datecreatedASC>Sort by Created date in ascending</datecreatedASC>
+      <datecreatedDESC>Sort by Created date in descending</datecreatedDESC>
+    </title>
+    <tooltip>
+      <View>Toon node</View>
+      <OpenFolder>Ga naar map</OpenFolder>
+    </tooltip>
+  </UIShowAllFavouriteResult>
+  <UIShowAllHiddenResult>
+    <msg>
+      <not-support>Er is geen Toon template voor deze node</not-support>
+      <empty>Niets gevonden!</empty>
+      <access-denied>U kunt dit node, niet bekijken omdat deze sjabloon wordt niet ondersteund of omdat de toegang is geweigerd.</access-denied>
+      <query-invalid>The query is ongeldig</query-invalid>
+    </msg>
+    <header>
+      <name>#{word.name}</name>
+      <path>Pad</path>
+      <action>Actie</action>
+      <shortcutPath>Pad</shortcutPath>
+      <type>Type</type>
+      <dateCreated>Datum aangemaakt</dateCreated>
+      <score>Score</score>
+      <AddRemoveFavourite>Toevoegen/verwijderen uit favoriete</AddRemoveFavourite>
+    </header>
+    <title>
+      <typeASC>Sort by document type in ascending</typeASC>
+      <typeDESC>Documenttype in aflopende volgorde sorteren</typeDESC>
+      <scoreASC>Score in oplopende volgorde sorteren</scoreASC>
+      <scoreDESC>Sort by score in descending</scoreDESC>
+      <nameASC>Sorteer op naam oplopend</nameASC>
+      <nameDESC>Sorteer op naam aflopend</nameDESC>
+      <datecreatedASC>Gemaakt datum in oplopende volgorde sorteren</datecreatedASC>
+      <datecreatedDESC>Gemaakt datum in aflopende volgorde sorteren</datecreatedDESC>
+    </title>
+    <tooltip>
+      <View>Toon node</View>
+      <OpenFolder>Ga naar map</OpenFolder>
+      <RemoveHiddenAttribute>Verwijder verborgen kenmerk</RemoveHiddenAttribute>
+    </tooltip>
+  </UIShowAllHiddenResult>
+  <UIShowAllTrashResult>
+    <msg>
+      <not-support>Er is geen Toon template voor deze node</not-support>
+      <empty>Geen resultaten gevonden</empty>
+      <access-denied>U kunt dit node, niet bekijken omdat deze sjabloon wordt niet ondersteund of omdat de toegang is geweigerd.</access-denied>
+      <query-invalid>The query is ongeldig</query-invalid>
+    </msg>
+    <header>
+      <name>#{word.name}</name>
+      <path>Pad</path>
+      <action>Actie</action>
+      <shortcutPath>Pad</shortcutPath>
+      <type>Type</type>
+      <dateCreated>Datum aangemaakt</dateCreated>
+      <score>Score</score>
+    </header>
+    <title>
+      <typeASC>Documenttype in oplopende volgorde sorteren</typeASC>
+      <typeDESC>Documenttype in aflopende volgorde sorteren</typeDESC>
+      <scoreASC>Score in oplopende volgorde sorteren</scoreASC>
+      <scoreDESC>Score in aflopende volgorde sorteren</scoreDESC>
+      <nameASC>Sorteer op naam oplopend</nameASC>
+      <nameDESC>Sorteer op naam aflopend</nameDESC>
+      <datecreatedASC>Gemaakt datum in oplopende volgorde sorteren</datecreatedASC>
+      <datecreatedDESC>Gemaakt datum in aflopende volgorde sorteren</datecreatedDESC>
+    </title>
+    <tooltip>
+      <View>Toon node</View>
+      <OpenFolder>Ga naar map</OpenFolder>
+      <DeletePermanently>Permanent verwijderen</DeletePermanently>
+      <RestoreFromTrash>Terughalen uit prullenbak</RestoreFromTrash>
+    </tooltip>
+  </UIShowAllTrashResult>
+  <UIConstraintsForm>
+    <label>
+      <constraints>UIConstraintsForm</constraints>
+      <metadataProperty>Eigenschappen</metadataProperty>
+      <operator>Operator</operator>
+      <contains>bevat waarde</contains>
+      <notcontains>bevat niet</notcontains>
+    </label>
+    <action>
+      <Add>toevoegen</Add>
+      <Cancel>#{word.cancel}</Cancel>
+    </action>
+    <msg>
+      <properties-required>eigenschapsnaam is vereist</properties-required>
+      <value-required>waarde veld is vereist</value-required>
+      <date-invalid>Van datum moet kleiner zijn dan aan datum</date-invalid>
+      <fromDate-required>Van datum is vereist</fromDate-required>
+      <must-choose-one>U hebt ten minste één type te selecteren.</must-choose-one>
+      <properties-null>Selecteer eerst eigenschappen, dan filter</properties-null>
+      <exactly-require>U moet waarde ingeven vooraleer u deze beperkingen kunt opslaan</exactly-require>
+      <fromDate-invalid>ongeldig type in 'Van datum' veld. Controleer</fromDate-invalid>
+      <toDate-invalid>ongeldig type in 'Aan datum' veld. Controleer</toDate-invalid>
+    </msg>
+    <button>
+      <label-Add>Toevoegen</label-Add>
+      <label-Cancel>#{word.cancel}</label-Cancel>
+    </button>
+  </UIConstraintsForm>
+  <ConstraintsForm>
+    <action>
+      <Add>Toevoegen</Add>
+      <Cancel>#{word.cancel}</Cancel>
+    </action>
+  </ConstraintsForm>
+  <UIConstraintForm>
+    <tooltip>
+      <AddMetadataType>eigenschap toevoegen</AddMetadataType>
+      <AddNodeType>node type toevoegen</AddNodeType>
+      <AddCategory>Add category</AddCategory>
+      <FindExactly>Zoek precies</FindExactly>
+    </tooltip>
+    <label>
+      <colon>:</colon>
+      <operator>Operator</operator>
+      <exactlyPro-properties>Property</exactlyPro-properties>
+      <exactlyPro-ContainExactly>Bevat precies</exactlyPro-ContainExactly>
+      <containPro-properties>Eigenschappen</containPro-properties>
+      <containPro-Contain>Bevat</containPro-Contain>
+      <notContainPro-properties>Eigenschappen</notContainPro-properties>
+      <notContainPro-notContain>Bevat niet</notContainPro-notContain>
+      <ConstraintOption-From>Van</ConstraintOption-From>
+      <ConstraintOption-To>Aan</ConstraintOption-To>
+      <DocumentType-label>Document Type</DocumentType-label>
+      <Category-label>Categorie</Category-label>
+      <created>Aangemaakt</created>
+      <modified>Gewijzigd</modified>
+      <and>En</and>
+      <or>Of</or>
+    </label>
+  </UIConstraintForm>
+  <NodeTypePopup>
+    <title>
+      <UINodeTypeSelectForm>Selecteer node type</UINodeTypeSelectForm>
+    </title>
+  </NodeTypePopup>
+  <CategoryPopup>
+    <title>
+      <UICategoryManagerSearch>Categorie toevoegen aan zoeken</UICategoryManagerSearch>
+      <UIOneNodePathSelector>Selecteer categorie</UIOneNodePathSelector>
+    </title>
+  </CategoryPopup>
+  <SaveQueryPopup>
+    <title>
+      <UISaveQueryForm>Query formulier</UISaveQueryForm>
+    </title>
+  </SaveQueryPopup>
+  <UINodeTypeSelectForm>
+    <action>
+      <Cancel>#{word.cancel}</Cancel>
+      <Save>#{word.save}</Save>
+    </action>
+  </UINodeTypeSelectForm>
+  <UICompareExactlyForm>
+    <label>
+      <filter>Filter :</filter>
+      <result>Resultaten :</result>
+    </label>
+    <title>
+      <result>Filter</result>
+    </title>
+    <button>
+      <label-Select>Selecteren</label-Select>
+      <label-Cancel>#{word.cancel}</label-Cancel>
+    </button>
+    <msg>
+      <not-result-found>Geen resultaten gevonden!</not-result-found>
+    </msg>
+  </UICompareExactlyForm>
+  <UIJCRAdvancedSearch>
+    <label>
+      <name>naam</name>
+      <selectBox>Selecteer Query Style</selectBox>
+      <query>Query</query>
+    </label>
+    <action>
+      <Save>#{word.save}</Save>
+      <Cancel>#{word.cancel}</Cancel>
+      <Search>Zoeken</Search>
+    </action>
+    <msg>
+      <!--DMS 2.4.x ECM-3566-->
+      <name-invalid>Naam is ongeldig!</name-invalid>
+      <query-added>Query toegevoegd</query-added>
+      <save_unSuccessful>kan niet opslaan : verklaring is ongeldig of query naam bestaat reeds</save_unSuccessful>
+      <invalid-queryStatement>ongeldig query verklaring</invalid-queryStatement>
+      <value-save-null>Geef uw query verklaring</value-save-null>
+      <query-name-null>Geef uw query naam</query-name-null>
+    </msg>
+  </UIJCRAdvancedSearch>
+  <EditQueryForm>
+    <label>
+      <name>naam</name>
+      <selectBox>Selecteer Query Style</selectBox>
+      <query>Query</query>
+    </label>
+    <action>
+      <Save>#{word.save}</Save>
+      <Cancel>#{word.cancel}</Cancel>
+    </action>
+  </EditQueryForm>
+  <EditSavedQueryForm>
+    <title>
+      <EditQueryForm>wijzigen query formulier</EditQueryForm>
+    </title>
+  </EditSavedQueryForm>
+  <UIMetadataSelectForm>
+    <label>
+      <metadataType>Metadata type</metadataType>
+    </label>
+    <action>
+      <Cancel>#{word.cancel}</Cancel>
+      <Add>Toevoegen</Add>
+    </action>
+  </UIMetadataSelectForm>
+  <property1MetadataPopup>
+    <title>
+      <UISelectPropertyForm>selecteer eigenschap</UISelectPropertyForm>
+    </title>
+  </property1MetadataPopup>
+  <property2MetadataPopup>
+    <title>
+      <UISelectPropertyForm>selecteer eigenschap</UISelectPropertyForm>
+    </title>
+  </property2MetadataPopup>
+  <property3MetadataPopup>
+    <title>
+      <UISelectPropertyForm>selecteer eigenschap</UISelectPropertyForm>
+    </title>
+  </property3MetadataPopup>
+  <UISelectPropertyForm>
+    <label>
+      <metadataType>Metadata type</metadataType>
+    </label>
+    <pLabel>Properties:</pLabel>
+    <action>
+      <Add>Toevoegen</Add>
+      <Cancel>#{word.cancel}</Cancel>
+    </action>
+  </UISelectPropertyForm>
+  <ExactlyFormPopup>
+    <title>
+      <UICompareExactlyForm>Filter formulier</UICompareExactlyForm>
+    </title>
+  </ExactlyFormPopup>
+  <UIECMSearch>
+    <header>
+      <name>naam</name>
+      <language>Taam</language>
+      <query>Query</query>
+      <action>Acties</action>
+      <path>pad</path>
+    </header>
+  </UIECMSearch>
+  <UIResult>
+    <msg>
+      <not-found>Data niet gevonden</not-found>
+    </msg>
+    <header>
+      <action>Actie</action>
+    </header>
+  </UIResult>
+  <UISaveQueryForm>
+    <msg>
+      <query-name-null>Geef query naam om op te slaan!</query-name-null>
+      <access-denied>toegang geweigerd! U heeft 'toevoegen' recht nodig om deze query op te slaan</access-denied>
+      <save-failed>Kan niet opslaan : verlkaring is ongeldig of query naam bestaat reeds</save-failed>
+    </msg>
+    <label>
+      <queryName>Query naam</queryName>
+    </label>
+    <action>
+      <Save>#{word.save}</Save>
+      <Cancel>#{word.cancel}</Cancel>
+    </action>
+  </UISaveQueryForm>
+  <UISavedQuery>
+    <header>
+      <name>naam</name>
+      <type>Type</type>
+      <statement>verklaring</statement>
+      <permission>Rechten</permission>
+      <action>Acties</action>
+    </header>
+    <tooltip>
+      <Execute>Uitvoeren</Execute>
+      <Edit>wijzigen</Edit>
+      <Delete>verwijderen</Delete>
+    </tooltip>
+    <label>
+      <no-children>Er is geen query opgeslaan</no-children>
+    </label>
+    <msg>
+      <confirm-delete-query>Wilt u deze query verwijderen?</confirm-delete-query>
+      <not-result-found>Geen resultaten gevonden!</not-result-found>
+    </msg>
+  </UISavedQuery>
+  <UIQueryResultPageIterator>
+    <label>
+      <results>Resultaten</results>
+      <of-about>van ongeveer</of-about>
+      <of>van</of>
+    </label>
+  </UIQueryResultPageIterator>
+  <!--
+  ###############################################################################
+  #             org.exoplatform.ecm.webui.component.explorer.admin.UIExportNode #
+  ###############################################################################
+  -->
+  <UIExportNode>
+    <label>
+      <format>Formaat</format>
+      <nodePath>pad om te exporteren</nodePath>
+      <zip>Zip</zip>
+      <systemView>Systeem zicht</systemView>
+      <documentView>Document zicht</documentView>
+    </label>
+    <action>
+      <Cancel>#{word.cancel}</Cancel>
+      <Export>Exporteren</Export>
+    </action>
+    <title>Exporteer Node</title>
+  </UIExportNode>
+  <!--
+  ###############################################################################
+  #             org.exoplatform.ecm.webui.component.explorer.UIPopupAction     #
+  ###############################################################################
+  -->
+  <PopupUserSelector>
+    <title>
+      <UIUserContainer>Permissie selecteur</UIUserContainer>
+    </title>
+  </PopupUserSelector>
+  <UIPopupTaxonomy>
+    <title>
+      <UICategoriesSelector>Categorieën toevoegen</UICategoriesSelector>
+      <UIOneNodePathSelector>Categorieën toevoegen</UIOneNodePathSelector>
+    </title>
+  </UIPopupTaxonomy>
+  <!--
+  ###############################################################################
+  #   org.exoplatform.ecm.webui.component.explorer.versions.UIVersionInfo       #
+  ###############################################################################
+  -->
+  <UIVersionInfo>
+    <tooltip>
+      <addLabel>Label toevoegen</addLabel>
+      <removeLable>Label verwijdern</removeLable>
+      <restoreVersion>Versie herstellen</restoreVersion>
+      <viewVersion>Toon Versie Info</viewVersion>
+      <deleteVersion>Versie verwijderen</deleteVersion>
+      <compareVersion>Vergelijk met basis versie</compareVersion>
+    </tooltip>
+    <msg>
+      <have-no-view-template>Toon template of dit is niet ondersteund</have-no-view-template>
+      <cannot-remove-version>Kan basis versie niet verwijderen</cannot-remove-version>
+      <confirm-delete>Wilt u deze version verwijderen?</confirm-delete>
+      <not-checked-out>U moet eerst check out deze node vooraleer u kunt herstellen.</not-checked-out>
+      <invalid-item-state>You can not restore this version. Probably one or more items was deleted or moved by another session.</invalid-item-state>
+    </msg>
+    <action>
+      <close>#{word.close}</close>
+      <close-view>Close view</close-view>
+    </action>
+  </UIVersionInfo>
+  <!--
+  ################################################################################
+  #  org.exoplatform.ecm.webui.component.explorer.auditing.UIAuditingInfo
+  ################################################################################
+  -->
+  <UIAuditingInfo>
+    <msg>
+      <noVersion>No version</noVersion>
+    </msg>
+    <eventName>
+      <e_1>Node added</e_1>
+      <e_2>Node removed</e_2>
+      <e_4>Property added</e_4>
+      <e_16>Property changed</e_16>
+      <e_8>Property removed</e_8>
+      <e_32>#{word.save}</e_32>
+      <e_64>Verplaatsen</e_64>
+      <e_128>Kopieren</e_128>
+      <e_256>Add mixin</e_256>
+      <e_512>Remove mixin</e_512>
+      <e_1024>Kloon</e_1024>
+      <e_2048>Choose file</e_2048>
+      <e_4096>Importeer Node</e_4096>
+      <e_8192>Inchecken</e_8192>
+      <e_16384>Uitchecken</e_16384>
+      <e_32768>Herstellen</e_32768>
+      <e_65536>Samenvoegen</e_65536>
+      <e_131072>Samenvoegbewerking annuleren</e_131072>
+      <e_262144>Samenvoegen</e_262144>
+      <e_524288>Versie Label toevoegen</e_524288>
+      <e_1048576>Versie Label verwijderen</e_1048576>
+      <e_2097152>Versie verwijderen</e_2097152>
+      <e_4194304>Op slot</e_4194304>
+      <e_8388608>Vrijmaken</e_8388608>
+      <e_16777216>Lezen</e_16777216>
+    </eventName>
+    <label>
+      <operation>Operatie</operation>
+      <userName>Gebruikersnaam</userName>
+      <date>Datum</date>
+      <version>Versie</version>
+    </label>
+  </UIAuditingInfo>
+
+  <!--
+  ###############################################################################
+  #   org.exoplatform.ecm.webui.component.explorer.versions.UIActivateVersion   #
+  ###############################################################################
+  -->
+  <UIActivateVersion>
+    <label>
+      <note>Node werd nog niet geactiveerd</note>
+      <question>Wilt u activeren?</question>
+      <button-active>Activeren</button-active>
+      <button-cancel>#{word.cancel}</button-cancel>
+    </label>
+    <msg>
+      <access-denied>U hebt geen toestemming om te activeren versiebeheer op dit node</access-denied>
+    </msg>
+  </UIActivateVersion>
+  <!--
+  ###############################################################################
+  #   org.exoplatform.ecm.webui.component.explorer.versions.UIActivePublication #
+  ###############################################################################
+  -->
+  <UIActivePublication>
+    <header>
+      <LifecycleName>Naam</LifecycleName>
+      <LifecycleDesc>Beschrijving</LifecycleDesc>
+      <action>Actie</action>
+    </header>
+    <action>
+      <Cancel>#{word.close}</Cancel>
+    </action>
+    <grid>
+      <msg>
+        <empty>Geen publicatie plugins gevonden.</empty>
+      </msg>
+    </grid>
+    <msg>
+      <node-type-invalid>Alleen het type van document node type kan worden ingeschreven.</node-type-invalid>
+      <already-enroled>Dit document heeft al zijn ingeschreven.</already-enroled>
+    </msg>
+  </UIActivePublication>
+  <!--
+  ###############################################################################
+  #   org.exoplatform.ecm.webui.component.explorer.versions.UIActivateAuditing  #
+  ###############################################################################
+  -->
+  <UIActivateAuditing>
+    <label>
+      <note>Auditing has not been activated for this node</note>
+      <question>Weet u zeker dat u wilt activeren?</question>
+    </label>
+    <action>
+      <activate>Activeren</activate>
+      <cancel>#{word.cancel}</cancel>
+    </action>
+  </UIActivateAuditing>
+  <!--
+  ###############################################################################
+  #   org.exoplatform.ecm.webui.component.explorer.versions.UIDiff   #
+  ###############################################################################
+  -->
+  <UIDiff>
+    <label>
+      <diffTitle>Vergelijk tussen 2 versies</diffTitle>
+      <noChange>Geen verandering tussen 2 versies</noChange>
+      <baseVerion>Basis versie</baseVerion>
+      <compareVerion>Versie</compareVerion>
+      <can-not-compare>Probleem bij het vergelijken van 2 versies</can-not-compare>
+    </label>
+  </UIDiff>
+  <!--
+  ###############################################################################
+  #       org.exoplatform.ecm.webui.component.explorer.admin.UIImportNode      #
+  ###############################################################################
+  -->
+  <UIImportNode>
+    <label>
+      <format>Formaat</format>
+      <systemView>Systeem zicht</systemView>
+      <documentView>Document zicht</documentView>
+      <upload>bestand Uploaden</upload>
+    </label>
+    <action>
+      <Cancel>#{word.cancel}</Cancel>
+      <Import>Importeren</Import>
+    </action>
+    <title>Importeer Node</title>
+    <msg>
+      <import-successful>Importeer successvol!</import-successful>
+      <filename-invalid>Blader een Xml-bestand voor het veld 'Upload bestand' om te importeren.</filename-invalid>
+      <filetype-error>Kan node niet importeren van geupload bestand.</filetype-error>
+      <xml-invalid>Er is een ongeldig teken op positie [rij, kolom]:{0} in {1} bestand</xml-invalid>
+      <mimetype-invalid>Alleen xml bestand of zip bestand zijn ondersteund om te importeren.</mimetype-invalid>
+      <access-denied>toegang geweigerd! U kan hier niet importeren.</access-denied>
+      <constraint-violation-exception>Onmogelijk om gegevens te importeren. Het type '{0}' is niet toegestaan op deze locatie.</constraint-violation-exception>
+      <item-exists-exception>An incoming referenceable node has the same UUID as a node existing in the workspace! UUID: '{0}'</item-exists-exception>
+    </msg>
+  </UIImportNode>
+  <!--
+  ###############################################################################
+  #         org.exoplatform.ecm.webui.component.explorer.versions.UILabelForm   #
+  ###############################################################################
+  -->
+  <UILabelForm>
+    <label>
+      <label>Label</label>
+    </label>
+    <action>
+      <Save>#{word.save}</Save>
+      <Cancel>#{word.cancel}</Cancel>
+    </action>
+    <title>Label toevoegen</title>
+    <msg>
+      <label-invalid>De label bevat some ongeldig karakters.</label-invalid>
+      <label-exist>'{0}' bestaat reeds</label-exist>
+    </msg>
+  </UILabelForm>
+  <!--
+  ###############################################################################
+  #   org.exoplatform.ecm.webui.component.explorer.versions.UIRemoveLabelForm   #
+  ###############################################################################
+  -->
+  <UIRemoveLabelForm>
+    <title>Label verwijderen</title>
+    <label>
+      <label>selecteer Label</label>
+    </label>
+    <action>
+      <Remove>verwijderen</Remove>
+      <Cancel>#{word.cancel}</Cancel>
+    </action>
+  </UIRemoveLabelForm>
+  <!--
+  ###############################################################################
+  #    org.exoplatform.ecm.webui.component.explorer.versions.UIViewVersion      #
+  ###############################################################################
+  -->
+  <UIVersionTree>
+    <title>Children Tree</title>
+  </UIVersionTree>
+  <UIViewVersion>
+    <label>
+      <nodeType>Node type</nodeType>
+      <nodeName>Node naam</nodeName>
+      <VersionNumber>versie Nummer</VersionNumber>
+      <VersionLabels>Versie Labels</VersionLabels>
+      <VersionDate>versie Datum</VersionDate>
+      <PropertyName>Naam van eigenschap</PropertyName>
+      <PropertyValue>eigenschapswaarde</PropertyValue>
+    </label>
+    <msg>
+      <not-supported>Funcitie is niet ondersteund voor versioning</not-supported>
+    </msg>
+  </UIViewVersion>
+  <UIVersionList>
+    <title>Children naam</title>
+  </UIVersionList>
+  <!--
+  ################################################################################
+  #       org.exoplatform.ecm.webui.component.explorer.admin.UICategoryManager #
+  ################################################################################
+  -->
+  <UICategoryManager>
+    <action>
+      <Close>#{word.close}</Close>
+    </action>
+    <tab>
+      <label>
+        <UICategoriesAddedList>Gereferencieerd categorieen</UICategoriesAddedList>
+        <UIOneNodePathSelector>selecteer categorie</UIOneNodePathSelector>
+      </label>
+    </tab>
+  </UICategoryManager>
+  <UICategoriesAddedList>
+    <header>
+      <path>Categorie</path>
+      <action>Acties</action>
+    </header>
+    <msg>
+      <access-denied>toegang geweigerd!U hebt geen recht in deze node</access-denied>
+      <confirm-delete>Wilt u deze referentie verwijderen?</confirm-delete>
+    </msg>
+    <action>
+      <title>
+        <Delete>verwijderen</Delete>
+      </title>
+    </action>
+    <label>
+      <category>Categorie</category>
+      <actions>Actie</actions>
+      <delete>Verwijderen</delete>
+    </label>
+  </UICategoriesAddedList>
+  <UITreeList>
+    <header>
+      <name>naam</name>
+      <action>Actie</action>
+    </header>
+    <info>
+      <child-not-found>Node heeft geen enkele child</child-not-found>
+    </info>
+  </UITreeList>
+  <!--
+  ################################################################################
+  #       org.exoplatform.ecm.webui.component.explorer.admin.UIRelationManager #
+  ################################################################################
+  -->
+  <UIRelationManager>
+    <action>
+      <Close>#{word.close}</Close>
+    </action>
+    <tab>
+      <label>
+        <UIOneNodePathSelector>selecteer relatie document</UIOneNodePathSelector>
+      </label>
+    </tab>
+    <tab>
+      <label>
+        <UIRelationsAddedList>Relatie Lijst</UIRelationsAddedList>
+      </label>
+    </tab>
+  </UIRelationManager>
+  <UIRelationsAddedList>
+    <header>
+      <path>Relaties</path>
+      <action>Acties</action>
+    </header>
+    <action>
+      <title>
+        <Delete>verwijderen</Delete>
+      </title>
+    </action>
+    <msg>
+      <confirm-delete>Wilt u deze relatie verwijderen?</confirm-delete>
+      <can-not-add-itself>Kan relatie niet tot zichzelf toevoegen</can-not-add-itself>
+    </msg>
+  </UIRelationsAddedList>
+  <!--
+  ###################################################################
+  #       org.exoplatform.ecm.webui.component.explorer.UIClipboard  #
+  ###################################################################
+  -->
+  <UIClipboard>
+    <header>
+      <path>pad</path>
+      <command>Cm</command>
+      <action>Actie</action>
+    </header>
+    <label>
+      <nocommand>Geen object in klembord!</nocommand>
+    </label>
+    <action>
+      <clearall>Alles wissen</clearall>
+    </action>
+    <msg>
+      <unable-pasted>kan node niet Plakken</unable-pasted>
+      <node-pasted>node {0} werd op locatie {1} geplakt. Operatie werd al gesaved en u moet op floppy icoon drukken</node-pasted>
+    </msg>
+  </UIClipboard>
+  <!--
+  ###################################################################
+  #       org.exoplatform.ecm.webui.component.explorer.UIPopupMenu  #
+  ###################################################################
+  -->
+  <!--
+  ###################################################################################
+  #org.exoplatform.ecm.webui.component.explorer.popup.actions.UISelectDocumentForm  #
+  ###################################################################################
+  -->
+  <UISelectDocumentForm>
+    <label>
+      <selectTemplate>Select your template in the list below</selectTemplate>
+      <ThumbnailView>Miniatuurweergave</ThumbnailView>
+      <ListView>Lijstweergave</ListView>
+      <Cancel>#{word.cancel}</Cancel>
+    </label>
+  </UISelectDocumentForm>
+  <!--
+  #######################################################################
+  #org.exoplatform.ecm.webui.component.explorerpopup.actions.UIDocumentForm  #
+  #######################################################################
+  -->
+  <UIDocumentForm>
+    <title>Nieuw Document toevoegen</title>
+    <action>
+      <Save>#{word.save}</Save>
+      <SaveAndClose>Opslaan &amp; sluiten</SaveAndClose>
+      <ChangeType>change content type</ChangeType>
+      <Fullscreen>Fullscreen</Fullscreen>
+      <Cancel>#{word.cancel}</Cancel>
+      <Close>#{word.close}</Close>
+    </action>
+<tooltip>
+<FullScreen>Maximaliseren/minimaliseren</FullScreen>
+</tooltip>
+    <msg>
+      <cannot-save>Sommige beperkingen werden overtreden tijdens die actie</cannot-save>
+      <in-versioning>Huidige node moet checkout voor het toevoegen van nieuw node</in-versioning>
+      <not-support>Kan niet laden de sjabloon van de '{0}'.</not-support>
+      <value-invalid>'{0}' is vereist</value-invalid>
+      <repository-exception>Kan document niet opslaan. naam moet index op het einde bevatten</repository-exception>
+      <!--DMS 2.4.x; ECM-3543-->
+      <repository-exception-permission>U bent niet gemachtigd om toe te voegen een nieuw document voor deze node.</repository-exception-permission>
+      <not-allowed-same-name-sibling>Kan document niet opslaan. geen zelfde naam voor node</not-allowed-same-name-sibling>
+      <numberformat-exception>Kan document niet opslaan. naam mag geen '[' or ']' bevatten.</numberformat-exception>
+      <item-not-found>object niet gevonden! klik om te herladen</item-not-found>
+    </msg>
+  </UIDocumentForm>
+  <!--
+  #################################################################################
+  #org.exoplatform.ecm.webui.component.explorer.actions.UIViewDocumentController  #
+  #################################################################################
+  -->
+  <UIViewDocumentController>
+    <tab>
+      <label>
+        <UIViewDocumentInfo>Informatie</UIViewDocumentInfo>
+      </label>
+    </tab>
+    <action>
+      <Close>#{word.close}</Close>
+    </action>
+  </UIViewDocumentController>
+  <!--
+  #############################################################################
+  #       org.exoplatform.ecm.webui.component.explorer.search.UI  #
+  #############################################################################
+  -->
+  <!--
+  #############################################################################
+  #    org.exoplatform.ecm.webui.component.explorer.search.UIQuerySaveForm    #
+  #############################################################################
+  -->
+  <UIQuerySaveForm>
+    <title>Query formulier opslaan</title>
+    <label>
+      <query>Query</query>
+      <name>Query naam</name>
+    </label>
+    <action>
+      <Save>#{word.save}</Save>
+      <Cancel>#{word.cancel}</Cancel>
+    </action>
+  </UIQuerySaveForm>
+  <!--
+  #############################################################################
+  #       org.exoplatform.ecm.webui.component.explorer.admin.UIActionManager  #
+  #############################################################################
+  -->
+  <editActionPopup>
+    <title>
+      <UIActionForm>Actie wijzigen</UIActionForm>
+      <EditFormAction>actie wijzigen</EditFormAction>
+    </title>
+  </editActionPopup>
+  <UIActionViewContainer>
+    <action>
+      <Cancel>#{word.cancel}</Cancel>
+    </action>
+  </UIActionViewContainer>
+  <UIActionList>
+    <header>
+      <name>#{word.name}</name>
+      <description>Omschrijving</description>
+  <lifecycle>Levenscyclus</lifecycle>
+  <triggeredaction>Veroorzaakte actie</triggeredaction>
+      <instanceOf>Instantie van Actie Type</instanceOf>
+      <action>Actie</action>
+    </header>
+    <msg>
+      <remove-popup-first>U moet wijzig popup sluiten voor het verwijderen van deze node.</remove-popup-first>
+      <confirm-delete-action>Wilt u deze actie verwijderen?</confirm-delete-action>
+      <template-empty>Template va, '{0}' is null of leeg.</template-empty>
+      <template-null>Template is null of i hebt geen toegang op deze template</template-null>
+      <access-denied>toegang geweigerd! U hebt niet genoeg rechten om deze actie uit te voeren</access-denied>
+    </msg>
+    <action>
+      <Close>#{word.close}</Close>
+      <View>Tonen</View>
+      <Edit>Bewerken</Edit>
+      <Delete>Verwijderen</Delete>
+    </action>
+  </UIActionList>
+  <UIActionForm>
+    <action>
+      <Save>#{word.save}</Save>
+      <Back>#{word.back}</Back>
+    </action>
+    <label>
+      <name>Actie Formulier</name>
+    </label>
+    <msg>
+      <repository-exception>Can not save this action. The name provided has some special character.</repository-exception>
+      <numberformat-exception>Kan actie niet opslaan. naam mag geen '[' or ']' bevatten.</numberformat-exception>
+      <existed-action>naam bestaat reeds, probeer opnieuw!</existed-action>
+      <unable-add-action>Onmogelijk om actie toe te voegen</unable-add-action>
+      <unable-add>onmogelijk om toe te voegen! controleer vereiste waarden</unable-add>
+      <not-support>Dialoog '{0}' is niet ondersteund</not-support>
+      <no-permission-add>toegang geweigerd ! U heeft geen recht op actie toe te voegen</no-permission-add>
+      <access-denied>toegang geweigerd! U hebt geen toegang op deze template</access-denied>
+      <lifecycle-invalid>Unable add this action. The lifecycle phase of action is invalid.</lifecycle-invalid>
+    </msg>
+    <title>Actie toevoegen/wijzigen</title>
+    <validator>
+      <validator>Validator</validator>
+      <destPath>met pad</destPath>
+    </validator>
+  </UIActionForm>
+  <UIActionTypeForm>
+    <label>
+      <actionType>aanmaken Actie van Type</actionType>
+    </label>
+  </UIActionTypeForm>
+  <PopupComponent>
+    <title>
+      <UIOneNodePathSelector>selecteer locatie</UIOneNodePathSelector>
+      <UIPermissionSelector>Rechten verkenner</UIPermissionSelector>
+      <UICategoriesSelector>Categorieën toevoegen</UICategoriesSelector>
+    </title>
+  </PopupComponent>
+  <EditFormAction>
+    <validator>
+      <validator>Validator</validator>
+      <destPath>Met pad</destPath>
+    </validator>
+    <title>Actie formulier</title>
+  </EditFormAction>
+  <!--
+  #############################################################################
+  #       org.exoplatform.ecm.webui.component.explorer.control.UIAddressBar   #
+  #############################################################################
+  -->
+  <UIAddressBar>
+    <msg>
+      <path-not-found>pad niet gevonden</path-not-found>
+      <access-denied>toegang geweigerd ! U hebt geen right lees node</access-denied>
+      <keyword-not-support>Het sleutelwoord is ongeldig. Sommige tekens worden niet ondersteund.</keyword-not-support>
+    </msg>
+    <label>
+      <exeButton>Ga</exeButton>
+      <address>Adres :</address>
+    </label>
+    <title>
+      <exeButton>Ga</exeButton>
+      <backButton>Terug naar vorige node</backButton>
+      <showHistory>Toon geschiedenis adres</showHistory>
+      <changeNode>Verander Node</changeNode>
+    </title>
+  </UIAddressBar>
+  <!--
+  ###################################################################################
+  # org.exoplatform.ecm.webui.component.explorer.popup.actions.UIWatchDocumentForm  #
+  ###################################################################################
+  -->
+  <UIWatchDocumentForm>
+    <action>
+      <Watch>Bekijken</Watch>
+      <Cancel>#{word.cancel}</Cancel>
+      <Continue>ga verder</Continue>
+      <Unwatch>Niet meer volgen</Unwatch>
+    </action>
+    <label>
+      <notificationType>Notificatie Type</notificationType>
+    </label>
+    <msg>
+      <not-support>Wij ondersteunen dit type van notificatie niet. Gelieve een andere te kiezen</not-support>
+      <watching-successfully>document is watched</watching-successfully>
+      <unwatching-successfully>U hebt succesvol de watcher lijst verlaten.</unwatching-successfully>
+      <node-iswatching>document is watched</node-iswatching>
+    </msg>
+  </UIWatchDocumentForm>
+  <!--
+  ###################################################################################
+  #   org.exoplatform.ecm.webui.component.explorer.popup.actions.UITaggingForm      #
+  ###################################################################################
+  -->
+  <UITaggingForm>
+    <label>
+      <names>Tag namen</names>
+      <linked>gelinkte tags</linked>
+      <tagSet>UITaggingForm</tagSet>
+    </label>
+    <action>
+      <AddTag>Tags toevoegen</AddTag>
+      <Cancel>#{word.close}</Cancel>
+    </action>
+    <msg>
+      <name-exist>Tag naam '{0}' bestaat reeds</name-exist>
+      <tagName-invalid>ongeldige karakters in tag naam.</tagName-invalid>
+      <tagName-empty-or-invalid>De tagnaam is leeg of bevat some ongeldig karakters.</tagName-empty-or-invalid>
+      <tag-name-empty>tag naam is leeg</tag-name-empty>
+      <tag-name-duplicate>Input tag names are duplicate.</tag-name-duplicate>
+      <tagName-too-long>Een van de tags is te lang.(max 30 karakters)</tagName-too-long>
+      <path-not-found>Tag is verwijderd of gewijzigd. Klik op de knop Vernieuwen.</path-not-found>
+    </msg>
+    <introduction>
+      <tagName>(gebruik "," om meerdere tags toe te voegen)</tagName>
+    </introduction>
+  </UITaggingForm>
+
+  <!--
+  ###################################################################################
+  # org.exoplatform.ecm.webui.component.explorer.popup.info.UIMetadataContainer     #
+  ###################################################################################
+  -->
+  <UIViewMetadataContainer>
+    <msg>
+      <path-not-found>Node doesn't support this view</path-not-found>
+    </msg>
+  </UIViewMetadataContainer>
+  <!--
+  ###################################################################################
+  # org.exoplatform.ecm.webui.component.explorer.popup.info.UIViewMetadataForm      #
+  ###################################################################################
+  -->
+  <UIViewMetadataForm>
+    <action>
+      <Save>#{word.save}</Save>
+      <Cancel>#{word.cancel}</Cancel>
+    </action>
+  </UIViewMetadataForm>
+  <metadataForm>
+    <title>
+      <UIViewMetadataForm>eigenschappen toevoegen/wijzigen</UIViewMetadataForm>
+    </title>
+  </metadataForm>
+  <UIViewMetadataTemplate>
+    <msg>
+      <access-denied>toegang geweigerd! U bent niet de eigenaar of hebt geen 'wijzigen' recht op deze node.</access-denied>
+    </msg>
+  </UIViewMetadataTemplate>
+  <!--
+  ###################################################################################
+  # Validator messages                                                              #
+  ###################################################################################
+  -->
+   <ECMPhoneFormatValidator>
+     <msg>
+       <Invalid>The field '{0}' contains invalid an Phone number. Please enter another value.</Invalid>
+     </msg>
+  </ECMPhoneFormatValidator>
+  <ECMNameValidator>
+    <msg>
+      <Invalid-char>Ongeldige karakters in veld '{0}'. Probeer opnieuw!</Invalid-char>
+      <empty-input>waarde van veld '{0}' is null of leeg!</empty-input>
+    </msg>
+  </ECMNameValidator>
+  <DateTimeValidator>
+    <msg>
+      <Invalid-input>Veld '{0}' met waarde '{1}' is ongeldig</Invalid-input>
+    </msg>
+  </DateTimeValidator>
+  <CronExpressionValidator>
+    <invalid-input>uw cron expressie is ongeldig. controleer Quartz cron expression voor syntax.</invalid-input>
+  </CronExpressionValidator>
+  <EmptyFieldValidator>
+    <msg>
+      <empty-input>geef waarde in veld '{0}'</empty-input>
+    </msg>
+  </EmptyFieldValidator>
+  <CategoryValidator>
+    <msg>
+      <non-categories>Categorieën zijn verkeerd. Selecteer goede categorieën.</non-categories>
+    </msg>
+  </CategoryValidator>
+  <!--
+  ###################################################################################
+  # JCR Exceptions manager                                                              #
+  ###################################################################################
+  -->
+  <ReferentialIntegrityException>
+    <msg>Actie niet gelukt! Er zijn sommige referentie eigenschappen in werkruimte die nog steeds naar dit object wijzen!</msg>
+  </ReferentialIntegrityException>
+  <ItemExistsException>
+    <msg>Object bestaat reeds!</msg>
+  </ItemExistsException>
+  <AccessControlException>
+    <msg>toegang geweigerd. U hebt niet genoeg rechten op deze actie uit te voeren</msg>
+  </AccessControlException>
+  <AccessDeniedException>
+    <msg>toegang geweigerd</msg>
+  </AccessDeniedException>
+  <ItemNotFoundException>
+    <msg>Object niet gevonden!</msg>
+  </ItemNotFoundException>
+  <PathNotFoundException>
+    <msg>pad niet gevonden!</msg>
+  </PathNotFoundException>
+  <ConstraintViolationException>
+    <msg>U kunt deze actie door een aantal beperkingen niet uitvoeren.</msg>
+  </ConstraintViolationException>
+  <!--
+  ###################################################################################
+  # Publication Manage                                                              #
+  ###################################################################################
+  -->
+  <UIPublicationForm>
+    <label>
+      <published>Gepubliceerd</published>
+      <non-published>UnPublished</non-published>
+      <public>Openbaar</public>
+      <private>Prive</private>
+      <state>Forum Staat</state>
+      <visibility>Zichtbaarheid</visibility>
+      <nodeName>Node naam:</nodeName>
+      <lifecycleName>Lifecycle naam</lifecycleName>
+      <stateName>Naam van staat</stateName>
+    </label>
+    <action>
+      <Save>#{word.save}</Save>
+      <UnsubcriberLifeCycle>Unsubcriber</UnsubcriberLifeCycle>
+      <Cancel>#{word.cancel}</Cancel>
+    </action>
+  </UIPublicationForm>
+  <!--
+  ###################################################################################
+  # JCR Browser                                                             #
+  ###################################################################################
+  -->
+  <UIWorkspaceList>
+    <label>
+      <workspaceName>Werkruimte</workspaceName>
+      <rootNodeInfo>Root pad</rootNodeInfo>
+      <rootPath>Root pad</rootPath>
+    </label>
+  </UIWorkspaceList>
+  <pathSelector>
+    <title>
+      <UIOneNodePathSelector>selecteer locatie</UIOneNodePathSelector>
+    </title>
+  </pathSelector>
+  <!--
+  ###################################################################################
+  # Others                                                                          #
+  ###################################################################################
+  -->
+  <EmailAddressValidator>
+    <msg>
+      <Invalid-input>Email address is ongeldig!</Invalid-input>
+    </msg>
+  </EmailAddressValidator>
+  <UIFormInputSetWithAction>
+    <msg>
+      <confirm-delete>Wilt u deze verwijderen?</confirm-delete>
+    </msg>
+  </UIFormInputSetWithAction>
+  <RepeatCountValidator>
+    <msg>
+      <invalid-value>Ongeldige waarde in veld 'Herhaal tel'. Laat Integer type of alleen -1 toe</invalid-value>
+    </msg>
+  </RepeatCountValidator>
+  <RepeatIntervalValidator>
+    <msg>
+      <invalid-value>Ongeldige waarde in veld 'Tijds interval'. Laat alleen Long type toe</invalid-value>
+    </msg>
+  </RepeatIntervalValidator>
+  <UIPermissionSelector>
+    <label>
+      <selectGroup>Selecteer groep</selectGroup>
+      <selectUser>Selecteer gebruiker</selectUser>
+      <selectMembership>Selecteer lidmaatschap</selectMembership>
+    </label>
+  </UIPermissionSelector>
+  <!--
+  ###################################################################################
+  # org.exoplatform.ecm.jcr.ECMStandardPropertyNameValidator                        #
+  ###################################################################################
+  -->
+  <ECMStandardPropertyNameValidator>
+    <msg>
+      <empty-input>Waarde van veld '{0}' is null of leeg!</empty-input>
+      <Invalid-char>Ongeldige karakters in veld '{0}'. Probeer opnieuw!</Invalid-char>
+    </msg>
+  </ECMStandardPropertyNameValidator>
+  <!--
+  ###################################################################################
+  # org.exoplatform.ecm.jcr.SearchValidator                                     #
+  ###################################################################################
+  -->
+  <SearchValidator>
+    <msg>
+      <empty-input>The value of this field is null or empty!</empty-input>
+      <Invalid-char>Dit veld bevat some ongeldig karakters. Geef een andere waarde.</Invalid-char>
+      <Invalid-char2>Het nummer moet worden gevolgd door het teken ' ~'.</Invalid-char2>
+      <Invalid-char1>Het cijfer na het teken ' ~' moet tussen 0 en 1.</Invalid-char1>
+      <Invalid-char3>Het nummer moet worden gevolgd door het teken ' ^'.</Invalid-char3>
+      <Invalid-char4>Spaties zijn niet toegestaan in de buurt van het teken ' ~'.</Invalid-char4>
+      <Invalid-char5>Spaties zijn niet toegestaan in de buurt van het teken ' ^'.</Invalid-char5>
+    </msg>
+  </SearchValidator>
+  <!--
+  ###################################################################################
+  # PublicationService                                                              #
+  ###################################################################################
+  -->
+  <UIPublicationLogList>
+    <header>
+      <date>Datum</date>
+      <newState>Nieuwe staat</newState>
+      <user>#{word.user}</user>
+      <description>Beschrijving</description>
+      <version>Versie</version>
+      <visibility>Zichtbaarheid</visibility>
+    </header>
+    <action>
+      <Close>#{word.close}</Close>
+    </action>
+  </UIPublicationLogList>
+  <!--
+  ###################################################################################
+  # UIVersionTreeList                                                             #
+  ###################################################################################
+  -->
+  <UIVersionTreeList>
+    <header>
+      <version>Versie</version>
+      <state>Forum Staat</state>
+    </header>
+  </UIVersionTreeList>
+  <!--
+  ###################################################################################
+  # UIThumbnailForm                                                             #
+  ###################################################################################
+  -->
+  <UIThumbnailForm>
+    <action>
+      <Save>#{word.save}</Save>
+      <Cancel>#{word.cancel}</Cancel>
+      <RemoveThumbnail>Thumbnail verwijderen</RemoveThumbnail>
+    </action>
+    <label>
+      <mediumSize>Thumbnail image</mediumSize>
+      <SelectFile>Kies miniatuur afbeelding</SelectFile>
+    </label>
+    <msg>
+      <mimetype-incorrect>Onjuiste bestandstype. Miniaturen kunnen alleen van worden gemaakt. JPG. PNG of. GIF-bestanden.</mimetype-incorrect>
+      <access-denied>De toegang is geweigerd. U bent niet gemachtigd om toe te voegen een miniatuur voor dit knooppunt.</access-denied>
+      <confirm-delete>Weet u zeker dat u wilt verwijderen van deze miniatuur?</confirm-delete>
+      <is-checked-in>Dit node wordt ingecheckt. Gelieve te controleren voordat u een actie uitvoert.</is-checked-in>
+      <fileName-error>Selecteer een bestand om te uploaden.</fileName-error>
+    </msg>
+    <title>
+      <remove-thumbnail>Verwijderen van deze miniatuur</remove-thumbnail>
+    </title>
+  </UIThumbnailForm>
+  <!--
+  ###################################################################################
+  # UIAnyPermission                                                                 #
+  ###################################################################################
+  -->
+  <UIAnyPermission>
+    <label>
+      <anyPermission>Elke Toestemming</anyPermission>
+    </label>
+  </UIAnyPermission>
+
+  <anyPermission>
+    <title>
+      <AddAnyPermission>Stel elke toestemming</AddAnyPermission>
+    </title>
+  </anyPermission>
+  <!--
+  ###################################################################################
+  # UICategoriesAddedList                                                           #
+  ###################################################################################
+  -->
+  <UICategoriesSelector>
+    <action>
+      <close>#{word.close}</close>
+    </action>
+  </UICategoriesSelector>
+  <!--
+  ###################################################################################
+  # Since ECM version 2.2                                                             #
+  ###################################################################################
+  -->
+  <UIGroupMemberSelector>
+    <label>
+      <selectGroup>Selecteer groep</selectGroup>
+      <selectUser>Selecteer gebruiker</selectUser>
+      <selectMembership>Selecteer lidmaatschap</selectMembership>
+    </label>
+  </UIGroupMemberSelector>
+  <!--
+  ###Since ECM version 2.2##############
+  -->
+ 
+  <!--
+  ### Since ECM version 2.3 Alpha##############
+  Access directly a JCR FE drive
+  -->
+  <UIJCRExplorerPortlet>
+    <nopermission>Er is geen drive of u bent niet gemachtigd om dit drive te benaderen.</nopermission>
+  </UIJCRExplorerPortlet>
+
+  <UIJcrExplorerEditForm>
+    <title>File Explorer Edit Form</title>
+    <action>
+      <Edit>Bewerken</Edit>
+      <Save>#{word.save}</Save>
+      <Cancel>#{word.cancel}</Cancel>
+    </action>
+    <label>
+      <uploadFileSizeLimitMB>De maximale grootte van het ge-uploade bestand (MB)</uploadFileSizeLimitMB>
+      <isDirectlyDrive>Directly Drive</isDirectlyDrive>
+      <driveName>Drive Naam</driveName>
+      <usecase>Selecteer Type</usecase>
+      <SelectNodePath>Select path</SelectNodePath>
+      <showTopBar>Toon Top Bar</showTopBar>
+      <showActionBar>Toon actiebalk</showActionBar>
+      <showSideBar>Toon links Bar</showSideBar>
+      <showFilterBar>Toon filterbar</showFilterBar>
+      <nodePath>Select path</nodePath>
+    </label>
+  </UIJcrExplorerEditForm>
+
+  <UIDriveSelector>
+    <label>
+      <driveName>Drive Naam</driveName>
+      <action>Actie</action>
+      <adddrives>Drive toevoegen</adddrives>
+    </label>
+  </UIDriveSelector>
+  <UIJcrExplorerEditForm>
+    <label>
+      <DriveNameInput>UI JCR Explorer Edit Form</DriveNameInput>
+    </label>
+    <msg>
+      <personal-usecase>The private drive of current user will be used when you choose Personal usecase.</personal-usecase>
+      <drive-edit-permission>U kunt de drive niet bewerken. Klik op de knop bewerken.</drive-edit-permission>
+      <path-edit-permission>U kunt het pad niet bewerken. Klik op de knop bewerken.</path-edit-permission>
+    </msg>
+  </UIJcrExplorerEditForm>
+
+  <PopUpSelectDrive>
+    <title>
+      <UIDriveSelector>Selecteer Drive</UIDriveSelector>
+    </title>
+  </PopUpSelectDrive>
+
+  <PopupSelectPath>
+    <title>
+      <UIOneNodePathSelector>Select node</UIOneNodePathSelector>
+    </title>
+  </PopupSelectPath>
+
+  <DriveNameInput>
+    <title>
+      <SelectDrive>Selecteer drive</SelectDrive>
+    </title>
+  </DriveNameInput>
+
+  <!--
+  ### Since ECM version 2.4.x ##############
+  -->
+  <UIActionBar>
+    <tooltip>
+      <AddSymLink>Add Sym Link</AddSymLink>
+      <AddLocalizationLink>Vertaling toevoegen</AddLocalizationLink>
+    </tooltip>
+  </UIActionBar>
+
+  <UIPopupWindow>
+    <title>
+      <UISymLinkManager>Add Link</UISymLinkManager>
+      <UIAddTranslationManager>Vertaling toevoegen</UIAddTranslationManager>
+    </title>
+  </UIPopupWindow>
+
+  <UISymLinkForm>
+    <label>
+      <symLinkName>Sym Link Name</symLinkName>
+      <pathNode>Pad node</pathNode>
+    </label>
+    <action>
+      <Save>#{word.save}</Save>
+      <Cancel>#{word.cancel}</Cancel>
+    </action>
+    <msg>
+      <addFolder-successful>Add Symbolic Link '{0}' Successful</addFolder-successful>
+      <name-invalid>Please enter Symbolic Link Name!</name-invalid>
+      <name-not-allowed>Deze naam is niet toegestaan.</name-not-allowed>
+      <fileName-error>Invalid file name</fileName-error>
+      <constraint-violation>You cannot add the'{0}' node type to the current node.</constraint-violation>
+      <repository-exception>De toegang is geweigerd. U bent niet gemachtigd om toe te voegen symlink naar dit node.</repository-exception>
+      <numberformat-exception>Can not save this folder. The name provided must be a number format</numberformat-exception>
+      <path-node-invalid>Please enter Path Node!</path-node-invalid>
+      <path-node-not-allowed>Deze naam is niet toegestaan.</path-node-not-allowed>
+      <non-node>Please choose trust target node Or you don't have enough rights to read this node</non-node>
+      <cannot-save>Some constraints were violated during that action.</cannot-save>
+      <item-exists-exception>The node with the same name already exists</item-exists-exception>
+      <translation-node-same-language-default>The translation node has same language with the default language of current node.</translation-node-same-language-default>
+      <UnsupportedRepositoryOperationException>Deze doelnode niet worden genoemd.</UnsupportedRepositoryOperationException>
+    </msg>
+  </UISymLinkForm>
+  
+  <UIAddTranslationForm>
+    <label>
+      <symLinkName>Sym Link Name</symLinkName>
+      <pathNode>Document Path:</pathNode>
+      <note>Selecteer een ander document dat als de vertaling dienen zal</note>
+    </label>
+    <action>
+      <Save>#{word.save}</Save>
+      <Cancel>#{word.cancel}</Cancel>
+      <SelectDocument>Selecteer Document</SelectDocument>
+    </action>
+    <msg>
+      <addFolder-successful>De symlink '{0}' is toegevoegd.</addFolder-successful>
+      <name-invalid>Please enter Symbolic Link Name!</name-invalid>
+      <name-not-allowed>Deze naam is niet toegestaan.</name-not-allowed>
+      <fileName-error>Ongeldig bestandsnaam</fileName-error>
+      <constraint-violation>Current node does not allow to add '{0}' node type</constraint-violation>
+      <repository-exception>Access denied! You do not have the permission to add symlink to this node.</repository-exception>
+      <numberformat-exception>Kan niet naar dit folder opslaan. Naam mag geen '[' of ']' bevatten</numberformat-exception>
+      <path-node-invalid>Please enter Path Node!</path-node-invalid>
+      <path-node-not-allowed>Deze naam is niet toegestaan.</path-node-not-allowed>
+      <non-node>Please choose trust target node Or you don't have enough rights to read this node</non-node>
+      <cannot-save>Er is een fout opgetreden tijdens het maken van de symlink.</cannot-save>
+      <item-exists-exception>De node naam bestaat al.</item-exists-exception>
+      <translation-node-same-language-default>The translation node has same language with the default language of current node.</translation-node-same-language-default>
+      <UnsupportedRepositoryOperationException>This target node is not referenceable</UnsupportedRepositoryOperationException>
+    </msg>
+  </UIAddTranslationForm>
+
+  <UIPopupSymLink>
+    <title>
+      <UIOneNodePathSelector>Choose Target Node</UIOneNodePathSelector>
+    </title>
+  </UIPopupSymLink>
+  <UIPopupSymLink>
+    <title>
+      <UIContentSelectorOne>Selecteer Document</UIContentSelectorOne>
+    </title>
+  </UIPopupSymLink>
+
+  <ECMContextMenu>
+    <event>
+      <AddSymLink>Add Sym Link</AddSymLink>
+      <AddLocalizationLink>Vertaling toevoegen</AddLocalizationLink>
+    </event>
+  </ECMContextMenu>
+
+  <UIWorkingArea>
+    <msg>
+      <create-link-problem>You can not create a link for node '{0}' at '{1}'</create-link-problem>
+      <dest-node-is-link>Het doelnode '{0}' is al een symlink, zodat u niet kunt een symlink erin maken.</dest-node-is-link>
+      <selected-is-link>The selected node '{0}' is already a link. You cannot create a link that points to another link.</selected-is-link>
+      <confirm-create-link>Do you really want to create a link to this location?</confirm-create-link>
+    </msg>
+  </UIWorkingArea>
+
+  <ECMContextMenu>
+    <event>
+      <CreateLink>Create link</CreateLink>
+    </event>
+  </ECMContextMenu>
+
+  <UIWorkspaceList>
+    <msg>
+      <AccessDeniedException>Access deny! You don't have read permission in this workspace</AccessDeniedException>
+    </msg>
+    <label>
+      <taxonomyTree>Taxonomy Tree</taxonomyTree>
+    </label>
+  </UIWorkspaceList>
+
+  <UIPopupTaxonomy>
+    <title>
+      <UIOneTaxonomySelector>Categorieën toevoegen</UIOneTaxonomySelector>
+    </title>
+  </UIPopupTaxonomy>
+
+  <UITreeTaxonomyList>
+    <label>
+      <taxonomyTree>Taxonomy Tree</taxonomyTree>
+      <rootNodePath>Root tree</rootNodePath>
+      <rootNodeInfo>UITreeTaxonomyList</rootNodeInfo>
+    </label>
+  </UITreeTaxonomyList>
+
+  <UIActionBar>
+    <tooltip>
+      <ManageSimpleCategories>Beheer Gewone Categorieën</ManageSimpleCategories>
+    </tooltip>
+  </UIActionBar>
+
+  <UISimpleCategoryManager>
+    <tab>
+      <label>
+        <UICategoriesAddedList>Referenced Categories</UICategoriesAddedList>
+        <UIOneNodePathSelector>Selecteer categorie</UIOneNodePathSelector>
+      </label>
+    </tab>
+  </UISimpleCategoryManager>
+
+  <UICategoryManager>
+    <tab>
+      <label>
+        <UIOneTaxonomySelector>Selecteer categorie</UIOneTaxonomySelector>
+      </label>
+    </tab>
+  </UICategoryManager>
+
+  <UISimpleCategoryManager>
+    <action>
+      <Close>#{word.close}</Close>
+    </action>
+  </UISimpleCategoryManager>
+  <UIPopupWindow>
+    <title>
+      <UISimpleCategoryManager>Voeg categorie toe</UISimpleCategoryManager>
+    </title>
+  </UIPopupWindow>
+  <UICategoriesAddedList>
+    <msg>
+      <ItemExistsException>A category with the same name already exists</ItemExistsException>
+    </msg>
+  </UICategoriesAddedList>
+
+  <UIConfirmMessage>
+    <label>
+      <Close>#{word.cancel}</Close>
+      <OK>OK</OK>
+      <ReplaceData>Replace data</ReplaceData>
+      <Back>Back to rename</Back>
+      <Keepfile>Houden beide bestanden</Keepfile>
+<ReadOnly>Open alleen-lezen</ReadOnly>
+<Cancel>Annuleren</Cancel>
+      <KeepBoth>Keep Both</KeepBoth>
+      <CreateNewVersion>Create a new version</CreateNewVersion>
+    </label>
+  </UIConfirmMessage>
+
+  <UIRestoreConfirmMessage>
+    <label>
+      <Close>#{word.close}</Close>
+      <OK>OK</OK>
+      <ReplaceData>Replace data</ReplaceData>
+      <Back>Back to rename</Back>
+      <Keepfile>Houden beide bestanden</Keepfile>
+    </label>
+  </UIRestoreConfirmMessage>
+
+
+  <PopupComponent>
+    <title>
+      <UIOneTaxonomySelector>Categorieën toevoegen</UIOneTaxonomySelector>
+    </title>
+  </PopupComponent>
+
+  <UIWorkingArea>
+    <msg>
+      <can-not-move-to-itself>Can not move: The destination folder is the same as the source folder</can-not-move-to-itself>
+      <is-editing>You cannot move an editing document. Please close it first.</is-editing>
+    </msg>
+  </UIWorkingArea>
+
+  <UIImportNode>
+    <label>
+      <behavior>UUID Behaviour</behavior>
+      <versionHistory>Version history</versionHistory>
+    </label>
+    <msg>
+      <history-invalid-type>Invalid version history file type. The right file must be a zip file</history-invalid-type>
+      <history-invalid-content>Invalid version history data content. You should choose the right file to import.</history-invalid-content>
+    </msg>
+  </UIImportNode>
+
+  <Import>
+    <Behavior>
+      <type0>Create new</type0>
+      <type1>Remove existing</type1>
+      <type2>Replace existing</type2>
+      <type3>Gooien uitzondering</type3>
+    </Behavior>
+  </Import>
+
+  <UIExportNode>
+    <action>
+      <ExportHistory>Export version history</ExportHistory>
+    </action>
+  </UIExportNode>
+
+  <UIPopupMenu>
+    <msg>
+      <node-locked-other-person>This node or parent node is being locked by other user, you can not delete!</node-locked-other-person>
+    </msg>
+  </UIPopupMenu>
+
+  <Import>
+    <label>
+      <docview>Document view</docview>
+      <sysview>System view</sysview>
+    </label>
+  </Import>
+
+  <UIDocumentForm>
+    <msg>
+      <do-not-permission>You don't have permission to load template of '{0}'.</do-not-permission>
+    </msg>
+  </UIDocumentForm>
+
+  <!--
+  ###################################################################################
+  #             org.exoplatform.ecm.webui.component.explorer.UIActionBar                #
+  #                           Localize tab                                                                                    #
+  ###################################################################################
+  -->
+  <UIActionBar>
+    <obtion>
+      <Admin>Admin</Admin>
+      <Info>Info</Info>
+      <Actions>Acties</Actions>
+      <Collaboration>Samenwerking</Collaboration>
+      <Search>Zoek</Search>
+    </obtion>
+  </UIActionBar>
+
+  <UIPopupMenu>
+    <msg>
+      <can-not-unlock-node-is-checked-in>Can not unlock because node '{0}' or ancestor of '{0}' is checked-in</can-not-unlock-node-is-checked-in>
+    </msg>
+  </UIPopupMenu>
+
+  <!--
+   #############  From DMS 2.5 #############
+  -->
+  <UIActionBar>
+    <msg>
+      <cannot-enable-version>Can not enable version node</cannot-enable-version>
+    </msg>
+  </UIActionBar>
+  <UIPopupMenu>
+    <msg>
+        <cannot-readsource>Can not read data from source node</cannot-readsource>
+    </msg>
+  </UIPopupMenu>
+  <UIUploadForm>
+    <msg>
+      <upload-not-null>You need upload file before add category</upload-not-null>
+    </msg>
+  </UIUploadForm>
+  <UIActionBar>
+    <msg>
+      <allow-setProperty>You must select set property for this group</allow-setProperty>
+    </msg>
+  </UIActionBar>
+
+  <UIActionForm>
+    <msg>
+      <name-not-allowed>De naam van deze actie is niet toegestaan.</name-not-allowed>
+    </msg>
+  </UIActionForm>
+
+  <UISaveQueryForm>
+    <msg>
+      <name-not-allowed>Deze querynaam is niet toegestaan.</name-not-allowed>
+    </msg>
+  </UISaveQueryForm>
+  <UISimpleSearch>
+    <msg>
+      <name-not-allowed>A word or phrase in content is not allowed.</name-not-allowed>
+    </msg>
+  </UISimpleSearch>
+
+ 
+    <!--
+   #############  From DMS 2.6 #############
+   -->
+  <ECMContextMenu>
+      <event>
+        <Permlink>Toon Document</Permlink>
+      </event>
+  </ECMContextMenu>
+  
+
+  <!--
+    ############  From DMS 2.6 ##############
+   -->
+  <UIFolderForm>
+    <label>
+      <nt_folder>Documentenmap</nt_folder>
+      <nt_unstructured>Inhoudmap</nt_unstructured>
+      <exo_cssFolder>CSS map</exo_cssFolder>
+      <exo_jsFolder>JavaScript map</exo_jsFolder>
+      <exo_linkFolder>Link Folder</exo_linkFolder>
+      <exo_webFolder>Web Content map</exo_webFolder>
+   </label>
+  </UIFolderForm>
+
+  <Comments>
+    <tooltip>
+      <remove-comment>Inhoud verwijderen</remove-comment>
+      <edit-comment>Deze opmerking bewerken</edit-comment>
+    </tooltip>
+  </Comments>
+  <UIDocumentInfo>
+    <msg>
+      <confirm-deletecomment>Do you really want to delete this comment?</confirm-deletecomment>
+    </msg>
+  </UIDocumentInfo>
+
+ <UIExportNode>
+  <msg>
+    <OutOfMemoryError>Tijdens het exporteren van grote hoeveelheden gegevens moet u System View gebruik.</OutOfMemoryError>
+  </msg>
+ </UIExportNode>
+ <Taxonomy>
+    <msg>
+      <AccessDeniedException>U bent niet gemachtigd voor toegang tot deze taxonomie.</AccessDeniedException>
+    </msg>
+  </Taxonomy>
+
+  <UIJcrExplorerEditForm>
+    <msg>
+      <notNullDriveName>De naam Drive is null of leeg. Vul het veld naam.</notNullDriveName>
+      <notNullPath>Het pad is null of leeg. Vul het pad.</notNullPath>
+    </msg>
+  </UIJcrExplorerEditForm>
+
+  <UIViewSearchResult>
+    <tooltip>
+      <remove-attachment>Weet u zeker dat u wilt verwijderen van dit bestand?</remove-attachment>
+    </tooltip>
+  </UIViewSearchResult>
+
+  <SameNamePopup>
+    <title>
+      <UIUploadBehaviorWithSameName>Upload bestand</UIUploadBehaviorWithSameName>
+    </title>
+  </SameNamePopup>
+
+  <UIAllItems>
+    <label>
+      <OwnedByMe>Waarvan ik eigenaar ben</OwnedByMe>
+      <Favourites>Favorieten</Favourites>
+      <Hidden>Verborgen</Hidden>
+      <Trash>Vuilbak</Trash>
+      <Configuration>Voorkeuren instellen</Configuration>
+    </label>
+    <title>
+      <allItems>Alle Items</allItems>
+    </title>
+  </UIAllItems>
+
+  <UIPreferencesForm>
+      <label>
+          <Alphabetic>Alphabetic</Alphabetic>
+          <Type>Type</Type>
+          <CreatedDate>Gemaakt datum</CreatedDate>
+          <ModifiedDate>Gewijzigd datum</ModifiedDate>
+          <Ascending>Stijgend</Ascending>
+          <Descending>Dalend</Descending>
+      </label>
+  </UIPreferencesForm>
+
+  <UISavedSearches>
+    <title>
+      <savedSearches>Opgeslagen zoekopdrachten</savedSearches>
+    </title>
+  </UISavedSearches>
+  <DocumentType>
+    <label>
+       <Images>Afbeelding</Images>
+       <Video>Video</Video>
+       <Music>Muziek</Music>
+       <Documents>Document</Documents>
+       <Content>Inhoud</Content>
+    </label>
+  </DocumentType>
+
+  <UIDocumentFilterForm>
+    <label>
+      <Images>Miijn Images</Images>
+      <Video>Mijn Video</Video>
+      <Music>Muziek</Music>
+      <Documents>Documents</Documents>
+      <Content>Inhoud</Content>
+    </label>
+    <title>Filter voorkeuren instellen</title>
+    <action>
+      <Save>#{word.save}</Save>
+      <Cancel>#{word.cancel}</Cancel>
+    </action>
+  </UIDocumentFilterForm>
+
+  <UIAllItemsByType>
+    <label>
+    <ByType>Filteren op Type</ByType>
+      <DocumentFilterConfiguration>Filter voorkeuren instellen</DocumentFilterConfiguration>
+    </label>
+    <title>
+      <ShowVideo>Toon alle video bestanden</ShowVideo>
+      <ShowMusic>Toon alle muziekbestanden</ShowMusic>
+      <ShowImages>Toon alle afbeeldingsbestanden</ShowImages>
+      <ShowDocuments>Toon alle documentbestanden</ShowDocuments>
+      <ShowContent>Alle documenttypen weergeven</ShowContent>
+    </title>
+  </UIAllItemsByType>
+
+  <Views>
+    <label>
+      <slide-show>Slide show</slide-show>
+    </label>
+  </Views>
+  <ECMContextMenu>
+    <event>
+      <PlayMedia>Play media</PlayMedia>
+    </event>
+  </ECMContextMenu>
+  <UIPopupWindow>
+    <title>
+      <UIDocumentFilterForm>Filtertype documenten</UIDocumentFilterForm>
+    </title>
+  </UIPopupWindow>
+
+  <UIAllItemsPreferenceForm>
+    <label>
+      <showOwnedByUser>Waarvan ik eigenaar ben</showOwnedByUser>
+      <showFavourites>Favorieten</showFavourites>
+      <showHiddens>Verborgen</showHiddens>
+      <showTrash>Vuilbak</showTrash>
+    </label>
+    <action>
+      <Save>#{word.save}</Save>
+      <Cancel>#{word.cancel}</Cancel>
+    </action>
+  </UIAllItemsPreferenceForm>
+
+  <EmptyTrashManageComponent>
+    <msg>
+      <confirm-delete>Weet u zeker dat u wilt leegmaken alle items uit Vuilbak?</confirm-delete>
+    </msg>
+  </EmptyTrashManageComponent>
+  <UICategoryForm>
+    <label>
+      <name>Categorienaam</name>
+    </label>
+    <action>
+      <Save>#{word.save}</Save>
+      <Cancel>#{word.cancel}</Cancel>
+    </action>
+  </UICategoryForm>
+  <UIPopupWindow>
+    <title>
+      <UICategoryForm>Categorie toevoegen</UICategoryForm>
+    </title>
+  </UIPopupWindow>
+  <UIActionBar>
+    <tooltip>
+      <AddCategory>Categorie toevoegen</AddCategory>
+    </tooltip>
+   </UIActionBar>
+
+   <UITaggingForm>
+    <label>
+      <Public>Openbaar</Public>
+      <Private>Prive</Private>
+      <tagScopes>Tag Scopes</tagScopes>
+    </label>
+   </UITaggingForm>
+
+  <UITagExplorer>
+    <title>
+      <PublicTags>Tags</PublicTags>
+      <EditPublicTags>Bewerk Tags</EditPublicTags>
+      <PrivateTags>Tags</PrivateTags>
+    </title>
+  </UITagExplorer>
+
+  <UIEditingTagsForm>
+    <header>
+      <name>Naam</name>
+      <relatedDocuments>Relatie Documenten</relatedDocuments>
+      <action>Actie</action>
+    </header>
+    <action>
+      <title>
+        <EditTag>Tag bewerken</EditTag>
+        <RemoveTag>Tag verwijderen</RemoveTag>
+        <AddTag>Tag toevoegen</AddTag>
+      </title>
+    </action>
+    <msg>
+      <confirm-remove>Weet u zeker dat deze tag verwijderen?</confirm-remove>
+    </msg>
+  </UIEditingTagsForm>
+
+
+  <UIPopupWindow>
+    <title>
+      <UIEditingTagsForm>Tag bewerken</UIEditingTagsForm>
+    </title>
+  </UIPopupWindow>
+
+  <UITagForm>
+    <action>
+      <UpdateTag>#{word.save}</UpdateTag>
+      <Cancel>#{word.close}</Cancel>
+    </action>
+    <label>
+      <tagName>Tag naam:</tagName>
+      <relatedDocuments>Relatie Documenten</relatedDocuments>
+    </label>
+  </UITagForm>
+
+  <TagPopup>
+    <title>
+      <UITagForm>Tagging dis document</UITagForm>
+    </title>
+  </TagPopup>
+
+    <UIPopupMenu>
+    <msg>
+      <node-locked-editing>This node with path {0} is being locked by other user for editing!</node-locked-editing>
+    </msg>
+  </UIPopupMenu>
+  <UITagStyleForm>
+    <msg>
+      <error-update>Er is een fout opgetreden tijdens het bijwerken van de tag-stijl.</error-update>
+    </msg>
+  </UITagStyleForm>
+
+  <UIPopupMenu>
+    <msg>
+      <editTagAccessDenied>toegang geweigerd</editTagAccessDenied>
+    </msg>
+  </UIPopupMenu>
+
+  <UIPopupWindow>
+    <title>
+      <UITaggingFormContainer>Tag Manager</UITaggingFormContainer>
+    </title>
+  </UIPopupWindow>
+
+    <PopupComponent>
+    <title>
+      <UINodeTypeSelector>Select node type</UINodeTypeSelector>
+    </title>
+  </PopupComponent>
+
+    <UIActionForm>
+    <title>
+      <ShowComponent>Show component</ShowComponent>
+      <removeReference>Verwijderen</removeReference>
+    </title>
+  </UIActionForm>
+
+  <EditFormAction>
+    <title>
+      <ShowComponent>Show component</ShowComponent>
+      <removeReference>Verwijderen</removeReference>
+    </title>
+  </EditFormAction>
+
+  <NodeTypeNameValidator>
+    <msg>
+      <Invalid-char>There are some invalid characters. Type another value, please!</Invalid-char>
+      <empty-input>The value of field is null or empty!</empty-input>
+    </msg>
+  </NodeTypeNameValidator>
+
+  <UIPreferencesForm>
+      <label>
+            <queryType>Query Type</queryType>
+            <SQL>SQL</SQL>
+            <XPATH>XPATH</XPATH>
+      </label>
+  </UIPreferencesForm>
+
+  <UIDocumentInfo>
+    <msg>
+      <repository-error>Er is een fout opgetreden. De informatie over de repository was verloren.</repository-error>
+    </msg>
+  </UIDocumentInfo>
+
+  <UITreeExplorer>
+    <msg>
+      <repository-error>Er is een fout opgetreden. De informatie over de repository was verloren.</repository-error>
+    </msg>
+  </UITreeExplorer>
+  <UIDocumentForm>
+    <msg>
+      <constraintviolation-exception>Can not save document. Data input is missed or invalid!</constraintviolation-exception>
+    </msg>
+  </UIDocumentForm>
+  <UIActionForm>
+    <msg>
+      <constraintviolation-exception>Can not save document. Data input is missed or invalid!</constraintviolation-exception>
+    </msg>
+  </UIActionForm>
+
+  <UISelectRestorePath>
+    <action>
+      <Save>#{word.save}</Save>
+      <Cancel>#{word.cancel}</Cancel>
+    </action>
+    <label>
+      <formInput>De vorige weg was verloren. Selecteer een nieuwe transactie.</formInput>
+    </label>
+  </UISelectRestorePath>
+  <PathNode>
+    <title>
+      <Add>Toevoegen</Add>
+    </title>
+  </PathNode>
+  <UIPopupPathFoRestore>
+    <title>
+      <UIOneNodePathSelector>Selecteer het bovenliggende node</UIOneNodePathSelector>
+    </title>
+  </UIPopupPathFoRestore>
+  <rootNodeInfo>
+    <title>
+      <AddRootNode>Toevoegen Root Node</AddRootNode>
+    </title>
+  </rootNodeInfo>
+
+  <UIActionForm>
+    <msg>
+      <homePath-emty>The Home path is empty</homePath-emty>
+      <targetPath-emty>The target path is empty</targetPath-emty>
+    </msg>
+    </UIActionForm>
+    <UIActionBar>
+      <msg>
+        <not-exist-categories>There isn't any category</not-exist-categories>
+      </msg>
+    </UIActionBar>
+
+  <UIPublicationContainer>
+   <action>
+    <Close>#{word.close}</Close>
+   </action>
+  </UIPublicationContainer>
+
+  <UIPublicationPanel>
+    <button>
+      <Close>#{word.close}</Close>
+    </button>
+    <revisions>
+      <version>Herzieningen</version>
+      <date>Datum</date>
+      <author>Auteur</author>
+      <status>Forum Status</status>
+      <action>Actie</action>
+      <label>Revisie</label>
+      <none>Geen revisies</none>
+      <seeall>Zie alle versies</seeall>
+      <currentVersion>Huidige revisie</currentVersion>
+      <confirm>U verliest uw ontwerp werk. Weet u zeker dat u wilt vervangen door de huidige herziening?</confirm>
+    </revisions>
+    <status>
+      <version>Revisie</version>
+      <title>Status</title>
+      <archived>Gearchiveerd</archived>
+      <obsolete>Verouderde</obsolete>
+      <unpublished>UnPublished</unpublished>
+      <enrolled>Ingeschreven</enrolled>
+      <draft>Ontwerp</draft>
+      <pending>In behandeling</pending>
+      <approved>Goedgekeurd</approved>
+      <inreview>In Review</inreview>
+      <staged>Geënsceneerd</staged>
+      <published>Gepubliceerd</published>
+      <live>Gepubliceerd</live>
+    </status>
+    <scheduled>
+      <title>Gepland</title>
+      <from>Van</from>
+      <to>Aan</to>
+    </scheduled>
+    <title>
+      <preview>Voorbeeld</preview>
+      <restore>Herstellen</restore>
+    </title>
+    <msg>
+      <have-no-view-template>De sjabloon uitzicht wordt niet ondersteund.</have-no-view-template>
+      <restore-complete>Terugzetten voltooid.</restore-complete>
+    </msg>
+  </UIPublicationPanel>
+  <UIPublicationHistory>
+    <header>
+      <date>Datum</date>
+      <versionName>Revisie naam</versionName>
+      <currentState>Huidige toestand</currentState>
+      <user>Auteur</user>
+      <description>Beschrijving</description>
+    </header>
+    <create-version>Nieuwe versie is gemaakt</create-version>
+  </UIPublicationHistory>
+  
+  <UIPublicationSchedule>
+    <label>
+      <introduction>U kunt plannen dat de publicatie van uw document. Selecteer de data die u zou willen zien uw document gepubliceerd</introduction>
+      <no-schedule-info>Er is geen publicatieschema instellen voor uw document</no-schedule-info>
+      <UIPublicationPanelStartDateInput>Begindatum van publicatie</UIPublicationPanelStartDateInput>
+      <UIPublicationPanelEndDateInput>Einddatum van de publicatie</UIPublicationPanelEndDateInput>
+    </label>
+    <msg>
+      <save-finished>Uw nieuwe publicatieschema instellen is met succes opgeslagen.</save-finished>
+    </msg>
+    <action>
+      <Save>#{word.save}</Save>
+      <Reset>#{word.reset}</Reset>
+    </action>
+  </UIPublicationSchedule>
+
+  <UIPublicationPanel>
+    <label>
+      <header>Publication date time</header>
+      <start>Begin publicatie</start>
+      <end>Einde publicatie</end>
+    </label>
+    <msg>
+      <invalid-format>De datumnotatie is ongeldig. Controleer het opnieuw.</invalid-format>
+      <fromDate-after-toDate>De datum van heeft te zijn eerder dan de datum aan.</fromDate-after-toDate>
+    </msg>
+  </UIPublicationPanel>
+  <UIPopupWindow>
+    <title>
+      <UIPublicationContainer>Publicatie beheren</UIPublicationContainer>
+      <UIPublishingPanel>Publicatie beheren</UIPublishingPanel>
+    </title>
+  </UIPopupWindow>
+  <WCMContentView>
+    <header>
+      <status>Status</status>
+      <author>Auteur</author>
+      <date>Gemaakt datum</date>
+      <title>Documenttitel</title>
+      <lastUser>Laatste gebruiker</lastUser>
+    </header>
+  </WCMContentView>
+  <UITagForm>
+    <msg>
+      <NameAlreadyExist>Tag name is already exists</NameAlreadyExist>
+    </msg>
+  </UITagForm>
+
+  <!--
+  ############  From WCM 2.1.0 ##############
+  -->
+  <UICategoryManagerSearch>
+    <tab>
+      <label>
+        <UIOneTaxonomySelector>Selecteer categorie</UIOneTaxonomySelector>
+      </label>
+    </tab>
+  </UICategoryManagerSearch>
+
+  <UIPreferencesForm>
+   <action>
+     <HideAdvance>Geavanceerd verbergen</HideAdvance>
+     <ShowAdvance>Toon geavanceerde</ShowAdvance>
+    </action>
+    <label>
+    <Advance>Geavanceerde</Advance>
+    </label>
+  </UIPreferencesForm>
+
+  <UIJCRExplorerPortlet>
+<msg>
+  <file-access-denied>Bestandstoegang geweigerd.</file-access-denied>
+  <anonymous-access-denied>Anonieme gebruiker heeft geen toestemming om deze functie te gebruiken.</anonymous-access-denied>
+</msg>
+  </UIJCRExplorerPortlet>
+  <UIDrivesArea>
+    <DrivesArea>
+      <ShowDrives>Weergeven Drives</ShowDrives>
+    </DrivesArea>
+    <msg>
+      <no-view-found>Er zijn geen zichtbaar toegepast voor uw toegangsmachtiging in station '{0}'.</no-view-found>
+      <access-denied>Toegang geweigerd! U hebt misschien geen recht op werkruimte van schijf '{0}'.</access-denied>
+      <empty-drives>Er is geen schijf in deze repository of u hebt geen toegang op schijven van deze repository.</empty-drives>
+      <workspace-not-exist>Drive '{0}' werd opgeslagen in een niet-herkende werkruimte. Configureer dit drive.</workspace-not-exist>
+    </msg>
+  </UIDrivesArea>
+  <UIJcrExplorerEditForm>
+    <msg>
+      <fields-saved>Alle waarden in het veld opgeslagen.</fields-saved>
+      <fields-cancelled>Alle waarden in het veld geannuleerd.</fields-cancelled>
+    </msg>
+  </UIJcrExplorerEditForm>
+  <UIDocumentForm>
+  <msg>
+  <confirm-close>De wijzigingen zullen verloren gaan als u dit formulier sluit.</confirm-close>
+  <confirm-changeType>De wijzigingen zullen verloren gaan als u het type inhoud.</confirm-changeType>
+  <confirm-navigate>De wijzigingen zullen verloren gaan als u deze pagina verlaat en verder navigeert.</confirm-navigate>
+  </msg>
+  </UIDocumentForm>
+  <UploadFileMimeTypesValidator>
+    <msg>
+      <wrong-mimetype>Mime-type {0} is niet toegestaan voor veld {1}. Upload een ander bestand</wrong-mimetype>
+    </msg>
+  </UploadFileMimeTypesValidator>
+  <lifecyclePhase>
+    <label>
+    <no>Nee</no>
+  <yes>Ja</yes>
+  <true>Waar</true>
+  <false>Valse</false>
+  <Electronic>Elektronische</Electronic>
+  <Paper>Papier</Paper>
+  <NONE>Geen</NONE>
+  <CLASSIFIED>Geclassificeerde</CLASSIFIED>
+  <UNCLASSIFIED>Niet-geclassificeerde</UNCLASSIFIED>
+  <NOCONTRACT>Geen Contract</NOCONTRACT>
+  <one-minute>Een minuut</one-minute>
+  <hourly>Ieder uur</hourly>
+  <daily>Dagelijks</daily>
+  <quarterly>Per kwartaal</quarterly>
+  <yearly>Jaarlijks</yearly>
+  <ten-years>Tien jaar</ten-years>
+  <read>Actie van de gebruiker</read>
+  <schedule>Planner</schedule>
+  <node_added>Inhoud toevoeging</node_added>
+  <node_removed>Verwijderen van inhoud</node_removed>
+  <property_added>Eigenschap toevoeging</property_added>
+  <property_removed>Eigenschap verwijderen</property_removed>
+  <property_changed>Eigenschap wijziging</property_changed>
+</label>
+  </lifecyclePhase>
+  <UIPopupMenu>
+  <msg>
+<can-not-remove-locked-node>Node {0} is locked, can not move it to Trash!</can-not-remove-locked-node>
+<can-not-remove-checked-in-node>Node {0} is checked in, can not move it to Trash!</can-not-remove-checked-in-node>
+<access-denied-to-delete>Access denied, can not move node {0} to Trash!</access-denied-to-delete>
+  </msg>
+  </UIPopupMenu>
+  <UIPropertyForm>
+  <msg>
+  <unknown-error>Er is een fout opgetreden tijdens het bewerken van deze eigenschap.</unknown-error>
+    </msg>
+  </UIPropertyForm>
+  <UIWatchDocumentForm>
+    <msg>
+      <node-is-locked>Dit node wordt vergrendeld. U kan niet bekijken.</node-is-locked>
+      <unknown-error>Sommige fouten zijn opgetreden. U kan niet kijken naar dit knooppunt.</unknown-error>
+    </msg>
+  </UIWatchDocumentForm>   
+  <UIActionForm>
+    <msg>
+      <xss-vulnerability-character>Veld '{0}' bevat XSS kwetsbaarheid tekens</xss-vulnerability-character>
+    </msg>
+  </UIActionForm>
+  <UIMultiUpload>
+  <label>
+    <AbortAll>Alles afbreken</AbortAll>
+    <AbortAllFiles>Breken alle bestanden</AbortAllFiles>
+    <MaxFileSize>Maximale bestandsgrootte is</MaxFileSize>
+    <InvalidCharacters>Ongeldige tekens zal worden gewijzigd door '-'</InvalidCharacters>
+    <DropFileMessage>Zet uw bestanden in de huidige map</DropFileMessage>
+    <Close>#{word.close}</Close>
+    <in>in</in>
+    <MaxFileSizeAlert>De bestandsgrootte overschrijdt de limiet van</MaxFileSizeAlert>
+    <Waiting>Wachten</Waiting>
+    <Error>Foutmelding</Error>
+    <or>of</or>
+    <AlreadyInUse>Reeds in gebruik</AlreadyInUse>
+    <Keep>Houd zowel</Keep>
+    <Replace>Vervangen</Replace>
+    <Canceled>Geannuleerd</Canceled>
+      <UploadNewVersion>Upload new version</UploadNewVersion>
+    <Cancel>#{word.cancel}</Cancel>
+    <AbortAllConfirmation>Wilt u alle bestanden die bezig zijn nu afbreken?</AbortAllConfirmation>
+  </label>
+  </UIMultiUpload>
+  <UIDocumentNodeList>
+  <label>
+  <CreatedOn>Gecreëerd Datum</CreatedOn>
+  <Updated>Updated</Updated>
+  <by>door</by>
+  <you>u</you>
+  </label>
+  </UIDocumentNodeList>
+  <FileView>
+    <label>
+      <name>Naam</name>
+      <date>Datum</date>
+      <size>Grootte</size>
+      <sortBy>Sorteer op</sortBy>
+      <filesAreSelected>Bestanden zijn geselecteerd.</filesAreSelected>
+      <ClearSelection>Keuze verwijderen</ClearSelection>
+      <more>Meer</more>
+    </label>
+  </FileView>
+  <UIPropertyForm>
+  <msg>
+  <property-name-incorrect>Naam van de eigenschap onjuist is, geef een andere waarde voor het!</property-name-incorrect>
+    </msg>
+  </UIPropertyForm>
+  <UIDocumentAutoVersionForm>
+    <msg>A document {0} already exists. What do you want to do?</msg>
+    <UIChkRememberNonVersioned>
+      <label>Remember my choice for all others non-versioned documents</label>
+    </UIChkRememberNonVersioned>
+    <UIChkRememberVersioned>
+      <label>Remember my choice for all other versioned documents</label>
+    </UIChkRememberVersioned>
+  </UIDocumentAutoVersionForm>
+  <DocumentAuto>
+    <message>A new version of the document {0} has been created successfully.</message>
+    <messageMultiFile>A new version of the document has been created.</messageMultiFile>
+  </DocumentAuto>
+  <!--
+  ###################################################################################
+  # JCR Exceptions manager                                                              #
+  ###################################################################################
+  -->
+  <VersionException>
+  <msg>Documenten die zijn is ingecheckt wijzigen niet.</msg>  
+  </VersionException>
+</bundle>

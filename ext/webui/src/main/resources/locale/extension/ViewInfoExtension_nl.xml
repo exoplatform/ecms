@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<bundle>
+<UIPopupWindow>
+<title>
+<UIViewInfoManager>Informatie bekijken</UIViewInfoManager>
+</title>
+</UIPopupWindow>
+    
+<ECMContextMenu>
+<event>
+<ViewInfo>Informatie bekijken</ViewInfo>
+</event>
+</ECMContextMenu>
+<UIViewInfoContainer>
+<label>
+      <name>Naam</name>
+      <title>Titel</title>
+      <type>Type</type>
+      <size>Grootte</size>
+      <owner>Eigenaar</owner>
+      <lastModifier>Laatst gewijzigd op</lastModifier>
+      <created>Gecreëerd datum</created>
+      <lastModified>Datum van laatste wijziging</lastModified>
+      <publicationState>Publicatie staat</publicationState>
+</label>
+<value>
+      <folder>Map</folder>
+</value>
+<action>
+<Close>#{word.close}</Close>
+</action>
+</UIViewInfoContainer>
+</bundle>

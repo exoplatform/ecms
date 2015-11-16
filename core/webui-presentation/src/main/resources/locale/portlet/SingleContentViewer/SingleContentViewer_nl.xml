@@ -1,0 +1,124 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<bundle>
+  <UIPresentationContainer>
+    <title>
+      <QuickEdit>Bewerken in inhoud Explorer</QuickEdit>
+      <print>Print deze pagina</print>
+      <FastPublish>Publiceren</FastPublish>
+    </title>
+    <label>
+      <draft>Ontwerp</draft>
+      <print>Afdrukken</print>
+    </label>
+    <msg>
+      <no-content>Geen inhoud gevonden.</no-content>
+      <internal-server-error>Er is een fout opgetreden terwijl de gegevens opvraagt uit de server.</internal-server-error>
+      <empty-title-error>Geef de nieuwe titel.</empty-title-error>
+    </msg>
+  </UIPresentationContainer>
+  <CorrectContentSelectorPopupWindow>
+    <title>
+      <UIContentSelectorOne>Selecteer inhoud</UIContentSelectorOne>
+    </title>
+  </CorrectContentSelectorPopupWindow>
+  <UISingleContentViewerPortlet>
+    <msg>
+      <AccessControlException>U bent niet gemachtigd voor toegang tot de bewerkingsmodus.</AccessControlException>
+    </msg>
+  </UISingleContentViewerPortlet>
+  <UISCVContextualRadioBox>
+    <label>
+      <Enable>Ingeschakeld</Enable>
+      <Disable>Uitgeschakeld</Disable>
+    </label>
+  </UISCVContextualRadioBox>
+  <UIPreferencesPopupWindows>
+    <title>
+      <UISCVPreferences>Inhoud Detail voorkeuren</UISCVPreferences>
+    </title>
+  </UIPreferencesPopupWindows>
+  <UISCVPreferences>
+    <action>
+      <Save>#{word.save}</Save>
+      <Abort>Afbreken</Abort>
+      <Cancel>#{word.cancel}</Cancel>
+      <Print>Afdrukken</Print>
+      <Close>#{word.close}</Close>
+    </action>
+    <title>Inhoud Detail voorkeuren</title>
+    <label>
+      <Back>Terug naar vorige pagina</Back>
+      <Edit>Bewerken</Edit>
+      <Preferences>#{word.settings}</Preferences>
+      <Title>Inhoud Detail voorkeuren</Title>
+      <UISCVShowTitleConfigurationCheckBox>Titel tonen</UISCVShowTitleConfigurationCheckBox>
+      <UISCVShowDateConfigurationCheckBox>Datum weergeven</UISCVShowDateConfigurationCheckBox>
+      <UISCVShowOptionBarConfigurationCheckBox>Toon optie Bar</UISCVShowOptionBarConfigurationCheckBox>
+      <DisplaySettingBlock>Weergave-instellingen</DisplaySettingBlock>
+      <ContentPathBlock>Inhoud selectie</ContentPathBlock>
+      <UISCVConfigItemPathFormInputSet>Pad naar inhoud</UISCVConfigItemPathFormInputSet>
+    <UISCVContentPathConfigurationInputBox>Pad naar inhoud</UISCVContentPathConfigurationInputBox>
+      <Advance>Geavanceerde</Advance>
+      <ContextCaption>Dynamische navigatie</ContextCaption>
+      <UISCVContextualRadioBox>Contextuele inhoud</UISCVContextualRadioBox>
+      <UISCVParameterInputBox>door</UISCVParameterInputBox>
+      <PrintSettingBlock>Afdrukinstellingen</PrintSettingBlock>
+      <UISCVPrintPageParameter>met</UISCVPrintPageParameter>
+      <UISCVConfigPrintPageFormInputSet>In pagina weergeven</UISCVConfigPrintPageFormInputSet>
+      <LockStatus>Op slot</LockStatus>
+      <CacheManagement>Inhoud zichtbaarheid</CacheManagement>
+      <UISCVCacheRadioBox>Inhoud delen</UISCVCacheRadioBox>
+    </label>
+    <help>
+      <ContentPathBlock>Selecteer de inhoud die u wilt weergeven. Deze standaardinhoud zal dynamisch worden vervangen als u de optie dynamische navigatie activeert (Zie de onderstaande geavanceerde modus).</ContentPathBlock>
+      <DisplaySettingBlock>U kunt weergeven of verbergen van de bar van de optie om aan te tonen de print link. Titel en datum displays zijn ook optioneel.</DisplaySettingBlock>
+      <ContextualHelp>Hiermee activeert u dynamische navigatie. De inhoud kan dynamisch worden gewijzigd door een andere URL gebaseerde parameter.</ContextualHelp>
+      <ParameterHelp>Deze parameter zal worden gebruikt om de inhoud als de dynamische navigatie is geactiveerd.</ParameterHelp>
+    </help>
+    <msg>
+      <not-valid-path>Het item pad is ongeldig.</not-valid-path>
+    </msg>
+    <tab>
+      <label>
+        <UISCVConfigContentFormInputSet>Inhoud selectie</UISCVConfigContentFormInputSet>
+        <UISCVConfigDisplayFormInputSet>Weergave-instellingen</UISCVConfigDisplayFormInputSet>
+        <UISCVConfigPrintFormInputSet>Afdrukinstellingen</UISCVConfigPrintFormInputSet>
+        <UISCVConfigAdvancedFormInputSet>Geavanceerde</UISCVConfigAdvancedFormInputSet>
+      </label>
+    </tab>
+  </UISCVPreferences>
+  <UISCVConfigItemPathFormInputSet>
+    <title>
+      <SelectFolderPath>Selecteer de mappad</SelectFolderPath>
+      <AddPath>Voeg Pad</AddPath>
+    </title>
+  </UISCVConfigItemPathFormInputSet>
+  <UISCVConfigPrintPageFormInputSet>
+    <title>
+      <SelectTargetPage>In pagina weergeven</SelectTargetPage>
+    </title>
+  </UISCVConfigPrintPageFormInputSet>
+  <UISCVConfigPrintPageSelectorPopupWindow>
+    <title>
+      <UIPageSelector>Pagina selecteur</UIPageSelector>
+    </title>
+  </UISCVConfigPrintPageSelectorPopupWindow>
+  <PublicationStates>
+    <archived>Gearchiveerd</archived>
+    <obsolete>Verouderde</obsolete>
+    <unpublished>Niet-gepubliceerde</unpublished>
+    <enrolled>Ingeschreven</enrolled>
+    <draft>Ontwerp</draft>
+    <pending>In behandeling</pending>
+    <approved>Goedgekeurd</approved>
+    <inreview>Onderzochte</inreview>
+    <staged>Geënsceneerd</staged>
+    <published>Gepubliceerd</published>
+  </PublicationStates>
+  <UISCVCacheRadioBox>
+    <label>
+      <Enable>Beperkt door verificatie</Enable>
+      <Disable>Beperkt door gebruikersrollen</Disable>
+    </label>
+  </UISCVCacheRadioBox>
+</bundle>
