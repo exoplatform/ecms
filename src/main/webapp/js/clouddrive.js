@@ -617,14 +617,6 @@
 					var syncTimeout;
 					// sync scheduler
 					function scheduleSync() {
-						// if no sync already scheduled - we run it immediately and then schedule a next one in syncTimeout
-						if (!autoSyncs[syncName]) {
-							var syncProcess = doSync();
-							syncProcess.fail(function(e) {
-								delete autoSyncs[syncName]; // cancel and cleanup
-								utils.log("ERROR: " + (e.message ? e.message : e)  + ". Auto-sync canceled for " + syncName + ". (1)");
-							});
-						}
 						autoSyncs[syncName] = setTimeout(function() {
 							var syncProcess = syncFunc();
 							syncProcess.done(function() {
@@ -634,7 +626,7 @@
 							});
 							syncProcess.fail(function(e) {
 								delete autoSyncs[syncName]; // cancel and cleanup
-								utils.log("ERROR: " + (e.message ? e.message : e)  + ". Auto-sync canceled for " + syncName + ". (2)");
+								utils.log("ERROR: " + (e.message ? e.message : e)  + ". Auto-sync canceled for " + syncName);
 							});
 						}, syncTimeout);
 					}
@@ -669,15 +661,20 @@
 						provider.clientModule.done(function(client) {
 							if (client && client.onChange && client.hasOwnProperty("onChange")) {
 								// apply custom client algorithm
-								syncTimeout = 7000; // sync in 7sec
-								syncFunc = function() { 
+								syncTimeout = 10000; // sync in 10sec
+								syncFunc = function() {
+									var process = $.Deferred();
+									// Run first sync now and then schedule a next one by change from client
+									var sync = doSync();
+									sync.fail(function(e) {
+										process.reject(e);
+									}); 
 									// We chain actual sync to the sync initiator from client.
 									// The initiator should return jQuery Promise: it will be resolved if changes appear and rejected on error. 
 									// We use jQuery.when() to deal if not Promise returned (it's bad case - sync will run each 5sec forever).
-									var process = $.Deferred(); 
 									var initiator = client.onChange(drive);
 									$.when(initiator).done(function() {
-										// it's time to sync
+										// changes happen remotely - it's time to sync
 										var sync = doSync(); 
 										sync.done(function() {
 											process.resolve();	
