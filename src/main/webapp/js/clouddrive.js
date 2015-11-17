@@ -609,7 +609,6 @@
 			if (contextDrive) {
 				var drive = contextDrive;
 				var syncName = drive.workspace + ":" + drive.path;
-
 				if (!autoSyncs[syncName]) {
 					// by default we do periodic sync, but the provider connector can offer own auto-sync function
 					
@@ -709,19 +708,22 @@
 		
 		var checkAutoSynchronize = function() {
 			if (contextDrive) {
-				var autosync = featuresIsAutosync(contextDrive.workspace, contextDrive.path);
-				autosync.done(function(check) {
-					if (check && check.result) {
-						autoSynchronize();
-					} else {
-						stopAutoSynchronize();
-					}
-				});
-				autosync.fail(function(response, status, err) {
-					// in case of error: don't enable/disable autosync
-					utils.log("ERROR: features autosync: " + err + ", " + status + ", " + response);
-				});
-				return autosync.promise();
+				var syncName = contextDrive.workspace + ":" + contextDrive.path;
+				if (!autoSyncs[syncName]) {
+					var autosync = featuresIsAutosync(contextDrive.workspace, contextDrive.path);
+					autosync.done(function(check) {
+						if (check && check.result) {
+							autoSynchronize();
+						} else {
+							stopAutoSynchronize();
+						}
+					});
+					autosync.fail(function(response, status, err) {
+						// in case of error: don't enable/disable autosync
+						utils.log("ERROR: features autosync: " + err + ", " + status + ", " + response);
+					});
+					return autosync.promise();
+				}
 			}
 			return null;
 		};
@@ -943,18 +945,6 @@
 			
 			// load client module
 			provider.clientModule = loadClientModule(provider);
-			
-			// TODO cleanup, this op will be performed in init()->initContext()->readContextDrive()
-			/*if (contextDrive && contextDrive.provider.id == provider.id) {
-				// init context drive within the provider client
-				provider.clientModule.done(function(client) {
-					if (client) {
-						if (client.initDrive && client.hasOwnProperty("initDrive")) {
-							client.initDrive(contextDrive);
-						}
-					}
-				});
-			}*/
 		};
 
 		/**
@@ -1025,6 +1015,7 @@
 						// file not cached or was syncing (updating), get the file from the server and cache it locally
 						readContextFile();
 					}
+					checkAutoSynchronize();
 				} else {
 					readContextDrive();
 				}
