@@ -1,12 +1,14 @@
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<!DOCTYPE html 
+    PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+           "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
 <head>
 		<title>WCM Content Selector</title>
 		<meta http-equiv="content-type" content="text/html; charset=utf-8"/>
 		<meta http-equiv="cache-control" content="no-cache"/>
 		<meta http-equiv="pragma" content="no-cache"/>
-		<meta http-equiv="eXpires" content="0"/>
-		
+		<meta http-equiv="eXpires" content="0"/>		
+		<meta name="viewport" content="width=device-width, initial-scale=1.0">
 		<link type="text/css" rel="stylesheet" href="../../../eXoSkin/skin/css/Core.css"/>
 		<link type="text/css" rel="stylesheet" href="../../../eXoSkin/skin/css/ecms/skin/ecms-resources-wcmskin.css"/>
 		<link type="text/css" rel="stylesheet" href="../../../eXoSkin/skin/css/ecms/portlets/explorer/ecms-explorer.css"/>
@@ -46,7 +48,7 @@
                                         filterListHTML += "<option value=\"DMS Documents\" userLanguage=\"UserLanguage.DMSDocuments\">DMS Documents</option>";
                                         filterListHTML += "<option value=\"Medias\" userLanguage=\"UserLanguage.Medias\">Medias</option></select></div>";
                                         <!-- HTML Content of Upload button -->
-                                        uploadButtonHTML = "<a class=\"actionIcon pull-left\" id=\"UploadItem\" style=\"display:none;\" href=\"javascript:void(0);\" onclick=\"eXo.ecm.UploadForm.showUploadForm();\" > <i class=\"uiIconUpload\"></i>" + uploadLabel + "</a>";
+                                        uploadButtonHTML = "<a  style=\"margin-top:2px\" class=\"actionIcon pull-left\" id=\"UploadItem\" style=\"display:none;\" href=\"javascript:void(0);\" onclick=\"eXo.ecm.UploadForm.showUploadForm();\" > <i class=\"uiIconUpload\"></i>" + uploadLabel + "</a>";
 
                                         if(eXo.ecm.ECS.insertContentType=="Image") {
                                             strView = "<div class=\"btn-group pull-right\">";
@@ -98,12 +100,12 @@
 		<script type="text/javascript" src="../../../eXoWCMResources/javascript/eXo/wcm/ECM.js"></script>
 		<script type="text/javascript" src="js/UploadForm.js"></script>
 </head>
-<body style = "overflow-y: scroll">
+<body >
 	<div class="uiHomePagePortlet uiHomeContentSelector">
 		<div class="UIHomePageDT uiBox" >
 
 			<h6 class="title TitleBar">Content Selector</h6>
-			<div class="uiWorkingWorkspace uiWCMSearchContainer">
+			<div class="uiWorkingWorkspace uiWCMSearchContainer" style="max-height: 500px;overflow: auto;">
 				<div class="actionBar uiGrayLightBox clearfix">
 					<div id="filterAreaID"></div>
 					<div id="viewTypeAreaID"></div>
