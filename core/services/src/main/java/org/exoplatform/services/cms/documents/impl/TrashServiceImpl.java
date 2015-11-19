@@ -38,6 +38,7 @@ import org.exoplatform.services.listener.ListenerService;
 import org.exoplatform.services.log.ExoLogger;
 import org.exoplatform.services.log.Log;
 import org.exoplatform.services.seo.SEOService;
+import org.exoplatform.services.wcm.core.NodetypeConstant;
 import org.exoplatform.services.wcm.utils.WCMCoreUtils;
 import org.gatein.pc.api.PortletInvoker;
 import org.gatein.pc.api.info.PortletInfo;
@@ -146,7 +147,15 @@ public class TrashServiceImpl implements TrashService {
       }
     }
     ListenerService listenerService =  WCMCoreUtils.getService(ListenerService.class);
-    listenerService.broadcast(ActivityCommonService.FILE_REMOVE_ACTIVITY, null, node);
+    //listenerService.broadcast(ActivityCommonService.FILE_REMOVE_ACTIVITY, null, node);
+    if (node.getPrimaryNodeType().getName().equals(NodetypeConstant.NT_FILE) || node.isNodeType(NodetypeConstant.EXO_SYMLINK)) {
+      ActivityCommonService activityService = WCMCoreUtils.getService(ActivityCommonService.class);
+      if (activityService.isBroadcastNTFileEvents(node)) {
+        listenerService.broadcast(ActivityCommonService.FILE_REMOVE_ACTIVITY, null, node);
+      }
+    } else{
+      listenerService.broadcast(ActivityCommonService.FILE_REMOVE_ACTIVITY, null, node);
+    }
     String originalPath = node.getPath();
     String nodeWorkspaceName = nodeSession.getWorkspace().getName();
     //List<Node> categories = taxonomyService_.getAllCategories(node, true);

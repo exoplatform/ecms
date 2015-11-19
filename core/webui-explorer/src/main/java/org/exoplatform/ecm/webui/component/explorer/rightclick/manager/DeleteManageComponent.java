@@ -192,18 +192,13 @@ public class DeleteManageComponent extends UIAbstractManagerComponent {
     }else {
       trashId = moveToTrash(nodePath, node, event, isMultiSelect);
       if (!trashId.equals("-1")) {
-        //Broadcast the event when user move node to Trash
+        //Broadcast the event when delete folder, in case deleting file, Thrash service will broadcast event 
         ListenerService listenerService =  WCMCoreUtils.getService(ListenerService.class);
-        ActivityCommonService activityService = WCMCoreUtils.getService(ActivityCommonService.class);
 
         TrashService trashService = WCMCoreUtils.getService(TrashService.class);
-        Node parent = trashService.getTrashHomeNode();
         node = trashService.getNodeByTrashId(trashId);
-        if (node.getPrimaryNodeType().getName().equals(NodetypeConstant.NT_FILE) || node.isNodeType(NodetypeConstant.EXO_SYMLINK)) {
-          if (activityService.isBroadcastNTFileEvents(node)) {
-            listenerService.broadcast(ActivityCommonService.FILE_REMOVE_ACTIVITY, parent, node);
-          }
-        } else if(!isDocumentNodeType(node)){
+        if(!isDocumentNodeType(node) 
+        		&& !node.getPrimaryNodeType().getName().equals(NodetypeConstant.NT_FILE)){
           Queue<Node> queue = new LinkedList<Node>();
           queue.add(node);
 
