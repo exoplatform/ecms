@@ -16,6 +16,7 @@
  */
 package org.exoplatform.wcm.connector.fckeditor;
 
+import java.net.URLDecoder;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -414,6 +415,7 @@ public class DriverConnector extends BaseConnector implements ResourceContainer 
       @QueryParam("srcAction") String srcAction) throws Exception {
     try {
       // Check upload status
+      fileName = URLDecoder.decode(fileName, "UTF-8");
       Response msgResponse = fileUploadHandler.checkStatus(uploadId, language);
       if (msgResponse != null) return msgResponse;
 
