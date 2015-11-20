@@ -9,7 +9,7 @@
   <!-- For menu caption in Action Bar -->
   <UIActionBar>
     <tooltip>
-      <ConnectGoogleDrive>Connect your Google Drive</ConnectGoogleDrive>
+      <ConnectGDrive>Connect your Google Drive</ConnectGDrive>
     </tooltip>
   </UIActionBar>
 </bundle>

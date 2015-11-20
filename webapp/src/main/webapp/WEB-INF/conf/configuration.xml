@@ -74,13 +74,13 @@
       <type>org.exoplatform.webui.ext.UIExtensionPlugin</type>
       <init-params>
         <object-param>
-          <name>ConnectGoogleDrive</name>
+          <name>ConnectGDrive</name>
           <object type="org.exoplatform.webui.ext.UIExtension">
             <field name="type">
               <string>org.exoplatform.ecm.dms.UIActionBar</string>
             </field>
             <field name="name">
-              <string>ConnectGoogleDrive</string>
+              <string>ConnectGDrive</string>
             </field>
             <field name="component">
               <string>org.exoplatform.clouddrive.gdrive.ecms.ConnectGDriveActionComponent</string>
