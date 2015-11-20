@@ -17,6 +17,13 @@
 	font: 9px Arial, sans-serif
 }
 
+.uiIconEcmsShowConnectCloudDrive:before {
+	/*content: url("icons/clouddrive-logo-lightgray-16x16.png");*/
+	content: "\e68a";
+	width: 14px;
+	height: 14px;
+}
+
 .uiIconEcmsViewSharing {
 	background: url("icons/clouddrive-logo-lightgray-16x16.png") no-repeat left center transparent !important;
 }

@@ -92,7 +92,7 @@ Software Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA
       <type>org.exoplatform.webui.ext.UIExtensionPlugin</type>
       <init-params>
         <object-param>
-          <name>ConnectCloudDrive</name>
+          <name>ShowConnectCloudDrive</name>
           <object type="org.exoplatform.webui.ext.UIExtension">
             <field name="type">
               <string>org.exoplatform.ecm.dms.UIActionBar</string>
