@@ -80,6 +80,7 @@ import org.exoplatform.wcm.connector.handler.FCKFileHandler;
 import org.w3c.dom.Document;
 import org.w3c.dom.Element;
 import org.w3c.dom.NodeList;
+import org.apache.commons.lang.StringUtils;
 
 /**
  * Returns a list of drives/folders/documents in a specified location for a given user. Also, it processes the file uploading action.
@@ -350,6 +351,7 @@ public class DriverConnector extends BaseConnector implements ResourceContainer 
                                                    Text.escapeIllegalJcrChars(driverName),
                                                    Text.escapeIllegalJcrChars(currentFolder));
 
+      if(StringUtils.isNotEmpty(fileName)) fileName = URLDecoder.decode(fileName, "UTF-8");
       return fileUploadHandler.checkExistence(currentFolderNode, fileName);
     } catch (Exception e) {
       if (LOG.isErrorEnabled()) {
@@ -415,7 +417,7 @@ public class DriverConnector extends BaseConnector implements ResourceContainer 
       @QueryParam("srcAction") String srcAction) throws Exception {
     try {
       // Check upload status
-      fileName = URLDecoder.decode(fileName, "UTF-8");
+      if(StringUtils.isNotEmpty(fileName)) fileName = URLDecoder.decode(fileName, "UTF-8");
       Response msgResponse = fileUploadHandler.checkStatus(uploadId, language);
       if (msgResponse != null) return msgResponse;
 
