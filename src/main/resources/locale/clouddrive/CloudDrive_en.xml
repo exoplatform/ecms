@@ -4,6 +4,7 @@
     <label>
       <!-- Used in Administration-Content-Explorer in Views settings a popup with actions list -->
       <showConnectCloudDrive>Connect Cloud Documents</showConnectCloudDrive>
+      <viewSharing>Cloud File Sharing</viewSharing>
     </label>
   </UITabForm>
   <UIPopupWindow>
