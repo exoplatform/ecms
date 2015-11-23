@@ -4441,7 +4441,13 @@ window.addEventListener('scalechange', function scalechange(evt) {
 window.addEventListener('pagechange', function pagechange(evt) {
   var page = evt.pageNumber;
   if (PDFView.previousPageNumber !== page) {
-    document.getElementById('pageNumber').value = page;
+    var pageNumber = document.getElementById('pageNumber');
+    if(pageNumber){
+      pageNumber.value = page;
+    }else{
+      window.removeEventListener("pagechange");
+      return;
+    }
     var selected = document.querySelector('.thumbnail.selected');
     if (selected)
       selected.classList.remove('selected');
@@ -4728,7 +4734,7 @@ window.addEventListener('keydown', function keydown(evt) {
   }
 
   if (handled) {
-    evt.preventDefault();
+    //evt.preventDefault();
     PDFView.clearMouseScrollState();
   }
 });
