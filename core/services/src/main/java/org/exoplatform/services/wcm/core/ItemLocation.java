@@ -22,6 +22,7 @@ import javax.jcr.PathNotFoundException;
 import javax.jcr.RepositoryException;
 import javax.jcr.Session;
 
+import org.exoplatform.services.cms.link.NodeFinder;
 import org.exoplatform.services.jcr.core.ManageableRepository;
 import org.exoplatform.services.security.IdentityConstants;
 import org.exoplatform.services.wcm.utils.WCMCoreUtils;
@@ -238,7 +239,7 @@ public class ItemLocation {
       if (itemLocation.getUUID() != null)
         return session.getNodeByUUID(itemLocation.getUUID());
       else {
-        return session.getItem(itemLocation.getPath());
+        return WCMCoreUtils.getService(NodeFinder.class).getItem(session, itemLocation.getPath());
       }
     } catch(PathNotFoundException pne) {
       return null;
