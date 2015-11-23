@@ -182,7 +182,7 @@ UploadForm.prototype.uploadFile = function() {
 		uploadField.style.display = "none";
 		var UploadInfo = gj(popupContainer).find("tr.UploadInfo:first")[0];
 		UploadInfo.style.display = "";
-		var uiUploadAction = gj(popupContainer).find("div.uiActionBorder:first")[0];
+		var uiUploadAction = gj(popupContainer).find("div.uiActionBorder:last")[0];
 		uiUploadAction.style.display = "none";
 		if(!eXo.ecm.UploadForm.stopUpload) {
 				this.uploadProgressTimer = setInterval(function() {
@@ -313,7 +313,7 @@ UploadForm.prototype.preUploadFileSave = function() {
 	if(eXo.ecm.ECS.lstFileName.indexOf(fileName) != -1
 			&& checkSupportVersion(eXo.ecm.ECS.lstFiles, fileName)){
 		gj("#auto-versioning-actions").remove();
-		var documentAuto = "<div id=\"auto-versioning-actions\" class=\"alert alert-warning clearfix hidden\">";
+		var documentAuto = "<div id=\"auto-versioning-actions\" class=\"alert alert-warning clearfix\" style=\"display: none;\" >";
 		documentAuto += "<div class=\"fileNameBox\"> <i class=\"uiIconWarning\"></i>"+eXo.ecm.UploadForm.document_auto_label_existing+"<span class=\"fileName\" ></span></div>";
 		documentAuto += "<a href=\"javascript:void(0)\" class=\"pull-right action cancel\">"+eXo.ecm.UploadForm.document_auto_label_cancel+" </a>";
 		documentAuto += "<span class=\"pull-right\">&nbsp;"+eXo.ecm.UploadForm.document_auto_label_or+"&nbsp; </span>";
