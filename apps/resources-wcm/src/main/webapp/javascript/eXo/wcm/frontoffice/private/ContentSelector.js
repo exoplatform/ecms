@@ -614,8 +614,8 @@
 				}
 				var isVersion = list[i].getAttribute("isVersioned");
 				var isVersionSupport = list[i].getAttribute("isVersionSupport");
-				eXo.ecm.ECS.lstFiles.push({"name":node, "isVersioned":isVersion, "isVersionSupport":isVersionSupport})
-				eXo.ecm.ECS.lstFileName.push(node);
+				eXo.ecm.ECS.lstFiles.push({"name":decodeURIComponent(node), "isVersioned":isVersion, "isVersionSupport":isVersionSupport})
+				eXo.ecm.ECS.lstFileName.push(decodeURIComponent(node));
 			}
 			if(container) {
 				gj(container).html(strViewContent);
