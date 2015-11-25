@@ -471,7 +471,7 @@
 		var loadClientModule = function(provider) {
 			var loader = $.Deferred();
 			// try load provider client
-			var moduleId = "SHARED/cloudDrive." + provider.id;
+			var moduleId = "SHARED/cloudDrive_" + provider.id;
 			if (window.require.s.contexts._.config.paths[moduleId]) {
 				try {
 					// load client module and work with it asynchronously
@@ -2209,6 +2209,7 @@
 						if ($(item).find("span.nodeName:contains('" + name + "')").size() > 0) {
 							$(item).find("div." + styleSize + "nt_folder:not(:has(div." + cname + "))").each(function() {
 								$("<div class='" + cname + "'></div>").appendTo(this);
+								//$(this).addClass(cname);
 							});
 						}
 					});
