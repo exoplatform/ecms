@@ -26,7 +26,7 @@
 
   <!-- Javascript for Cloud Drive support of Google Drive -->
   <module>
-    <name>cloudDrive.gdrive</name>
+    <name>cloudDrive_gdrive</name>
     <script>
       <path>/js/clouddrive-gdrive.js</path>
     </script>
