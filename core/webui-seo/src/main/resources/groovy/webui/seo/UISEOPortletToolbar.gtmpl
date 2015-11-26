@@ -17,6 +17,9 @@
 	def seo_label = (String)_ctx.appRes(uicomponent.getId() + ".label.seo");
 	def style = "Enable";
 	if(fullStatus.equals("Disabled")) style = "Disable";
+	def rcontext = _ctx.getRequestContext();
+	def jsManager = rcontext.getJavascriptManager();
+	jsManager.require("SHARED/bts_tab").require("SHARED/uiForm");
 	
 %>
 <% uiform.begin() %>
