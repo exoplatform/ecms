@@ -4,11 +4,11 @@
   <parent>
     <artifactId>ecms-core</artifactId>
     <groupId>org.exoplatform.ecms</groupId>
-    <version>4.3.x-RC-SNAPSHOT</version>
+    <version>4.3.0-RC1-1</version>
   </parent>
   <artifactId>ecms-core-webui-fcc</artifactId>
   <name>eXo Fast Content Creator webui component</name>
-  <description>>eXo Fast Content Creator webui component</description>
+  <description>&gt;eXo Fast Content Creator webui component</description>
   <dependencies>
     <dependency>
       <groupId>org.exoplatform.ecms</groupId>

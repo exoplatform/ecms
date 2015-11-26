@@ -4,7 +4,7 @@
   <parent>
     <artifactId>ecms-testsuite</artifactId>
     <groupId>org.exoplatform.ecms</groupId>
-    <version>4.3.x-RC-SNAPSHOT</version>
+    <version>4.3.0-RC1-1</version>
   </parent>
   <artifactId>ecms-testsuite-test</artifactId>
   <name>eXo ECMS Testing</name>
