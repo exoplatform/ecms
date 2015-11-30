@@ -1208,10 +1208,29 @@
 			if (drive) {
 				// branded icons in context menu
 				$("i.uiIconEcmsRefreshCloudDrive, i.uiIconEcmsOpenCloudFile, i.uiIconEcmsPushCloudFile").each(function() {
-					var brandClass = "uiIcon16x16CloudFile-" + drive.provider.id;
-					var currentClass = $(this).attr("class");
-					if (currentClass.indexOf(brandClass) < 0) {
-						$(this).attr("class", currentClass + " " + brandClass);
+					var classPrefix = "uiIcon16x16CloudFile-";
+					var classPatt = new RegExp(classPrefix, "g");
+					var brandClass = classPrefix + drive.provider.id;
+					var newClasses = [];
+					var updateClasses = false;
+					var addBrandClass = true;
+					// remove other brand classes and add/leave current drive icon
+					$.each($(this).attr("class").split(" "), function(i, className) {
+						if (className.indexOf(classPrefix) >= 0) {
+							if (className === brandClass) {
+								addBrandClass = false;	
+							}
+							updateClasses = true;
+						} else {
+							newClasses.push(className);
+						}
+					});
+					if (addBrandClass) {
+						newClasses.push(brandClass);
+						updateClasses = true;
+					}
+					if (updateClasses) {
+						$(this).attr("class", newClasses.join(" "));
 					}
 				});
 
@@ -1588,7 +1607,7 @@
 					// fix Download icon, text and link
 					var $i = $title.find("i.uiIconDownload");
 					$i.attr("class", "uiIcon16x16CloudFile-" + drive.provider.id);
-					var $a = $title.find("a");
+					var $a = $title.find("a.dowload-link");
 					$a.text(" " + openOnProvider);
 					$a.prepend($i);
 					$a.attr("href", file.link);
