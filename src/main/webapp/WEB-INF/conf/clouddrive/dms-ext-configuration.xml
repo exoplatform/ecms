@@ -67,18 +67,17 @@ Software Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA
     <type>org.exoplatform.clouddrive.ecms.thumbnail.CloudDriveThumbnailRESTService</type>
   </component>
 
-  <!-- ECMS menu configuration for Cloud Drive actions, see also UIExtensionManager ext -->
+  <!-- Mandatory ECMS menu actions for Cloud Drive, see also UIExtensionManager ext -->
   <external-component-plugins>
     <target-component>org.exoplatform.clouddrive.ecms.CloudDriveUIService</target-component>
     <component-plugin>
-      <name>add.clouddrive.ecms.menu</name>
+      <name>add.clouddrive.ecms.menu.mandatory</name>
       <set-method>addPlugin</set-method>
       <type>org.exoplatform.clouddrive.ecms.CloudDriveUIExtension</type>
       <init-params>
         <values-param>
           <name>default-actions</name>
-          <description>Names of ECMS menu actions enabled by default (WebUI extensions)</description>
-          <value>ShowConnectCloudDrive</value>
+          <description>Names of mandatory ECMS menu actions enabled (WebUI extensions)</description>
           <value>ViewSharing</value>
         </values-param>
       </init-params>
@@ -112,48 +111,6 @@ Software Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA
             </field>
           </object>
         </object-param>
-        <!-- object-param>
-          <name>ConnectGoogleDrive</name>
-          <object type="org.exoplatform.webui.ext.UIExtension">
-            <field name="type">
-              <string>org.exoplatform.ecm.dms.UIActionBar</string>
-            </field>
-            <field name="name">
-              <string>ConnectGoogleDrive</string>
-            </field>
-            <field name="component">
-              <string>org.exoplatform.clouddrive.ecms.ConnectGoogleDriveActionComponent</string>
-            </field>
-            <field name="extendedFilters">
-              <collection type="java.util.ArrayList">
-                <value>
-                  <object type="org.exoplatform.clouddrive.ecms.filters.PersonalDocumentsFilter"></object>
-                </value>
-              </collection>
-            </field>
-          </object>
-        </object-param>
-        <object-param>
-          <name>ConnectBox</name>
-          <object type="org.exoplatform.webui.ext.UIExtension">
-            <field name="type">
-              <string>org.exoplatform.ecm.dms.UIActionBar</string>
-            </field>
-            <field name="name">
-              <string>ConnectBox</string>
-            </field>
-            <field name="component">
-              <string>org.exoplatform.clouddrive.ecms.ConnectBoxActionComponent</string>
-            </field>
-            <field name="extendedFilters">
-              <collection type="java.util.ArrayList">
-                <value>
-                  <object type="org.exoplatform.clouddrive.ecms.filters.PersonalDocumentsFilter"></object>
-                </value>
-              </collection>
-            </field>
-          </object>
-        </object-param -->
         <!-- Override ECMS actions that require special handling for Cloud Drive files: ManagePublications, ManageVersions -->
         <object-param>
           <name>ManagePublications</name>
@@ -462,4 +419,7 @@ Software Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA
       </init-params>
     </component-plugin>
   </external-component-plugins>
+  
+  <!-- Import default menu actions that can be customized in other extensions -->
+  <import>war:/conf/clouddrive/dms-default-actions-configuration.xml</import>
 </configuration>

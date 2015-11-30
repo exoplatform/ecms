@@ -185,6 +185,6 @@
     </component-plugin>
   </external-component-plugins>
 
-  <import>war:/conf/dms/dms-ext-configuration.xml</import>
+  <import>war:/conf/clouddrive/dms-ext-configuration.xml</import>
   <import>war:/conf/clouddrive/portal-configuration.xml</import>
 </configuration>
