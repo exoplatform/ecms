@@ -113,7 +113,10 @@ public class UICommentForm extends UIForm implements UIPopupComponent {
       addUIFormInput(new UIFormStringInput(FIELD_EMAIL, FIELD_EMAIL, null).addValidator(EmailAddressValidator.class)) ;
       addUIFormInput(new UIFormStringInput(FIELD_WEBSITE, FIELD_WEBSITE, null)) ;
     }
-    addUIFormInput(new UIFormRichtextInput(FIELD_COMMENT, FIELD_COMMENT, "").addValidator(FckMandatoryValidator.class)) ;
+    UIFormRichtextInput commentField = new UIFormRichtextInput(FIELD_COMMENT, FIELD_COMMENT, "");
+    commentField.addValidator(FckMandatoryValidator.class);
+    commentField.setToolbar(UIFormRichtextInput.COMMENT_TOOLBAR);
+    addUIFormInput(commentField) ;
     if (isEdit()) {
       Node comment = getAncestorOfType(UIJCRExplorer.class).getNodeByPath(nodeCommentPath,
                                                                           NodeLocation.getNodeByLocation(document_)
