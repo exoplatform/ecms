@@ -298,7 +298,10 @@ public class PDFViewerRESTService implements ResourceContainer {
     Node contentNode = currentNode.getNode("jcr:content");
     String lastModified = getJcrLastModified(currentNode);
 
-    if (path == null || !(content = new File(path)).exists() || !lastModified.equals(lastModifiedTime)) {
+    if (path == null
+            || !(content = new File(path)).exists()
+            || !lastModified.equals(lastModifiedTime)
+            || (content.length() != contentNode.getProperty("jcr:data").getLength())) {
       String mimeType = contentNode.getProperty("jcr:mimeType").getString();
       InputStream input = new BufferedInputStream(contentNode.getProperty("jcr:data").getStream());
       // Create temp file to store converted data of nt:file node
@@ -336,7 +339,9 @@ public class PDFViewerRESTService implements ResourceContainer {
       }
       if (content.exists()) {
         pdfCache.put(new ObjectKey(bd.toString()), content.getPath());
-        pdfCache.put(new ObjectKey(bd1.toString()), lastModified);
+        contentNode.setProperty("jcr:lastModified", content.lastModified());
+        contentNode.save();
+        pdfCache.put(new ObjectKey(bd1.toString()), Utils.getJcrContentLastModified(currentNode));
       }
     }
     return content;
