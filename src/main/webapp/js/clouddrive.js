@@ -1219,8 +1219,9 @@
 						if (className.indexOf(classPrefix) >= 0) {
 							if (className === brandClass) {
 								addBrandClass = false;	
+							} else {
+								updateClasses = true;
 							}
-							updateClasses = true;
 						} else {
 							newClasses.push(className);
 						}
