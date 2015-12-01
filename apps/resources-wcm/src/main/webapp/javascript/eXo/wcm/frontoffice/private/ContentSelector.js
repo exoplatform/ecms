@@ -279,8 +279,6 @@
 			} else {		    
 				eXo.ecm.ECS.listFiles(null);
 			}
-      //Reload language labels after listing root folders
-      this.languageInit();
 			return;
 		}	
 		
@@ -409,8 +407,6 @@
 		} else {		    
 			eXo.ecm.ECS.listFiles(fileList);
 		}
-    //Reload language labels once the Right space list is initialized
-    this.languageInit();
 	};
 	
 	EcmContentSelector.prototype.actionColExp = function(objNode, event) {
@@ -1042,15 +1038,12 @@
 		var rws = document.getElementById("RightWorkspace");
 		var tblContent = document.getElementById("ListFilesContent");
 		var rowsContent = gj(tblContent).find("tr");
-		if (rowsContent.length <= 1) {
-	    var msg = eXo.ecm.WCMUtils.getBundle('ContentSelector.msg.no-file-selected', eXo.ecm.ECS.userLanguage);
-	    alert(msg);
-	    var additionParam = "&oper=clean"
-	    var actionSaveTemp = rws.getAttribute("actionSaveTemp");
-	    var action =eXo.ecm.WCMUtils.addParamIntoAjaxEventRequest(actionSaveTemp, additionParam);
-	    eval(action);
-	    return;
-	  }
+		var hasContent = gj(tblContent).find(".noContent").length;
+		if ((rowsContent.length <= 1 || hasContent === 1) && "save" === operationType) {
+		  var msg = eXo.ecm.WCMUtils.getBundle('ContentSelector.msg.no-file-selected', eXo.ecm.ECS.userLanguage);
+		  alert(msg);
+		  return;
+	    }
 		var strContent = "";
 		var oper = operationType;
 		for(var i = 0; i < rowsContent.length; i++) {
@@ -1200,8 +1193,6 @@
 				gj(rightWS).html(strViewPresent);
 			}
     }
-    // Replace the localized labels after a view type change
-    this.languageInit();
     eXo.ecm.ECS.switchView = false;
 		var filter = document.getElementById('Filter');
 		var action = filter.getAttribute("action");
@@ -1272,25 +1263,7 @@
 		upload.style.display = 'none';
 	};
 	
-	EcmContentSelector.prototype.languageInit = function() {
-		if (eXp.userLanguage) {
-			var aElements = document.getElementsByTagName("*");
-			for (var i = 0 ; i < aElements.length; ++i) {
-				if (aElements[i].getAttribute && aElements[i].getAttribute("userLanguage")) {
-					var userLanguage = eval(aElements[i].getAttribute("userLanguage"));
-					if (userLanguage) {
-						var textNode = document.createTextNode(userLanguage);
-						gj(aElements[i]).html("");
-						aElements[i].appendChild(textNode);
-					}
-				}
-			}
-		} else {
-			eXoPlugin.loadScript(window, "lang/en.js");
-			setTimeout(languageInit, 1000);
-		}
-	};
-	
+
 	EcmContentSelector.prototype.initPath = function(initDrive, initPath, componentId) {
 		setTimeout("eXo.ecm.ECS.waitAndInitPath(\"" + initDrive + "\",\"" + initPath + "\",\"" + componentId +"\")", 1000);
 	}
