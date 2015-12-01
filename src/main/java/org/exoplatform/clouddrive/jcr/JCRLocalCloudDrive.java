@@ -166,6 +166,8 @@ public abstract class JCRLocalCloudDrive extends CloudDrive implements CloudDriv
   public static final String     NT_UNSTRUCTURED       = "nt:unstructured";
 
   public static final String     MIX_REFERENCEABLE     = "mix:referenceable";
+  
+  public static final String     MIX_VERSIONABLE     = "mix:versionable";
 
   public static final String     ECD_LOCALFORMAT       = "ecd:localFormat";
 
@@ -1830,6 +1832,13 @@ public abstract class JCRLocalCloudDrive extends CloudDrive implements CloudDriv
               if (cfile != null) {
                 addChanged(cfile);
               }
+              Node node = change.node;
+              if (node != null && !node.isNew()) {
+                if (node.isNodeType(MIX_VERSIONABLE)) {
+                  // XXX Dec 1, 2015 - we don't support versioned nodes for the moment
+                  node.removeMixin(MIX_VERSIONABLE);
+                }
+              }
             }
           } catch (SyncNotSupportedException e) {
             // remember to skip sub-files, this exception handled by this
@@ -2096,7 +2105,7 @@ public abstract class JCRLocalCloudDrive extends CloudDrive implements CloudDriv
     protected String                      fileUUID;
 
     /**
-     * Target file node. Should be initialized in {@link #init(Set)} in worker thread.
+     * Target file node. Should be initialized in worker thread.
      */
     protected Node                        node;
 
