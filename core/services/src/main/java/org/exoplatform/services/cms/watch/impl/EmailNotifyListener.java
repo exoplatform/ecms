@@ -92,7 +92,8 @@ public class EmailNotifyListener implements EventListener {
     WatchDocumentServiceImpl watchService = (WatchDocumentServiceImpl)WCMCoreUtils.getService(WatchDocumentService.class);
     MessageConfig messageConfig = watchService.getMessageConfig();
     List<String> emailList = getEmailList(NodeLocation.getNodeByLocation(observedNode_));
-    for (String receiver : emailList) {
+    if (arg0.getSize() > 5) {
+     for (String receiver : emailList) {
       try {
         Message message = createMessage(receiver, messageConfig);
         mailService.sendMessage(message);
@@ -102,6 +103,7 @@ public class EmailNotifyListener implements EventListener {
         }
       }
     }
+   }
   }
 
   /**
