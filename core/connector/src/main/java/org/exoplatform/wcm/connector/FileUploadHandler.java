@@ -292,7 +292,8 @@ public class FileUploadHandler {
         rootElement.appendChild(fileExistence.createElement("Versioned"));
       }
     }
-    if(resolver.getMimeType(parent.getName()).equals(resolver.getMimeType(fileName))){
+    if(parent.isNodeType(NodetypeConstant.NT_FILE) && 
+        resolver.getMimeType(parent.getName()).equals(resolver.getMimeType(fileName))){
       rootElement.appendChild(fileExistence.createElement("CanVersioning"));
     }
     fileExistence.appendChild(rootElement);
