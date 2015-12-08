@@ -77,7 +77,7 @@
     <view>
       <label>
         <avg-rating>Note Moyenne</avg-rating>
-        <subscription>Votes</subscription>
+        <subscription>Nb Vote</subscription>
       </label>
     </view>
   </Vote>
@@ -141,7 +141,7 @@
   <ElementSet>
     <view>
       <label>
-        <not-avaliable>ND</not-avaliable>
+        <not-avaliable/>
         <core-elements>Dublin Core</core-elements>
         <title>Titre</title>
         <creator>Créateur</creator>

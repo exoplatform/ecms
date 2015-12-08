@@ -154,7 +154,7 @@
   </UICLVPresentation>
   <CorrectContentSelectorPopupWindow>
     <title>
-      <UIContentSelectorMulti>Multiväljare för innehåll</UIContentSelectorMulti>
+      <UIContentSelectorMulti>Multiple Content Selector Panel</UIContentSelectorMulti>
     </title>
   </CorrectContentSelectorPopupWindow>
   <UIContentDialogFormPopupWindow>

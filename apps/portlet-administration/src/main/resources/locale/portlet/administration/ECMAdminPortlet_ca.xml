@@ -991,9 +991,9 @@
       <checkIn>Protegir</checkIn>
       <checkOut>Desprotegir</checkOut>
       <shareDocuments>Compartir</shareDocuments>
-      <openDocument>Remote Edit</openDocument>
-      <editProperty>Edit Document Properties</editProperty>
-      <uploadNewVersion>Upload a new version</uploadNewVersion>
+      <openDocument>Edició remota</openDocument>
+      <editProperty>Edita les propietats del document</editProperty>
+      <uploadNewVersion>Puja una versió nova</uploadNewVersion>
     </label>
     <action>
       <Save>#{word.save}</Save>      

@@ -7,8 +7,8 @@
   -->
   <UIActionBar>
     <tooltip>
-      <PublicationRequestApproval>Zahteva po odobritvi</PublicationRequestApproval>
-      <PublicationApproveContent>Odobri vsebino</PublicationApproveContent>
+      <PublicationRequestApproval>Zahtevek za odobritev</PublicationRequestApproval>
+      <PublicationApproveContent>Odobravanje vsebine</PublicationApproveContent>
       <PublicationPublish>Objavi</PublicationPublish>
     </tooltip>
   </UIActionBar>

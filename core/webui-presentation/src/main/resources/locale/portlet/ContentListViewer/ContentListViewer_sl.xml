@@ -3,11 +3,11 @@
   <UICLVContainer>
     <label>
       <Preferences>Nastavitve</Preferences>
-      <AddContent>Dodajanje vsebine</AddContent>
+      <AddContent>Dodaj vsebino</AddContent>
       <ManageContent>Upravljanje vsebine</ManageContent>
     </label>
     <msg>
-      <non-contents>Žal, na voljo ni nobenega članka.</non-contents>
+      <non-contents>Oprostite, na voljo ni nobenega prispevka/članka.</non-contents>
       <item-not-found>Elementa ni mogoče najti.</item-not-found>
       <no-permission>Nimate dovoljenja za dostop do tega vozlišča.</no-permission>
       <category-back>Pojdi na prejšnje</category-back>
@@ -76,7 +76,7 @@
       <ContextualHelp>Aktivira možnost Dinamičnega krmarjenja. Ostali lahko spreminjajo vsebino dinamično glede na URL parameter.</ContextualHelp>
       <ParameterHelp>Ta parameter bo uporabljen za dostop do vsebine, če je aktivirano Dinamično krmarjenje.</ParameterHelp>
       <ShowDetailInPageHelp>Klik na vsebino preusmeri uporabnika na stran s podrobnostmi. Da bi prikazali vsebino, mora biti omogočen portalni gradnik "Vsebina preko URL" z omogočenim Dinamičnim krmarjenjem na ciljni strani.</ShowDetailInPageHelp>
-      <DetailParameterHelp>Ta parameter bo vseboval pot do vsebine v povezavi do Podrobne strani. Ta parameter se mora ujemati s tistim uporabljenim v modulu "Povezava z URL".</DetailParameterHelp>
+      <DetailParameterHelp>Ta parameter bo vseboval pot do vsebine v povezavi do strani s podrobnostmi. Ta parameter se mora ujemati s parametrom, uporabljenem v portalnem gradniku strani "Vsebina preko URL".</DetailParameterHelp>
       <ContentByQueryHelp>Nastaviš lahko SQL poizvedbo da dinamično prideš do vsebine. Sledeči parametri so dovoljeni: ${user}, ${lang} ali katerikoli get parameter (PARAM) obkrožen z ${PARAM}.</ContentByQueryHelp>
       <ContentsVisibilityHelp>"Omejeno z geslom" bo filtriralo vsebino glede na uporabniške pravice. Če se ne prijaviš bo videna le javna vsebina. Če se prijaviš pa bo vidna interna vsebina, ki je dostopna vsem. "Omejeno s funkcijo uporabnika" pomeni, da je vidna vsebina glede na pravice uporabnika. V večini primerov naj ta funkcija ne bi bila uporabljena ker zmanjša performanse sistema.</ContentsVisibilityHelp>
     </help>
@@ -154,7 +154,7 @@
   </UICLVPresentation>
   <CorrectContentSelectorPopupWindow>
     <title>
-      <UIContentSelectorMulti>Multiple Content Selector Pane</UIContentSelectorMulti>
+      <UIContentSelectorMulti>Plošča za izbiranje večih vsebin</UIContentSelectorMulti>
     </title>
   </CorrectContentSelectorPopupWindow>
   <UIContentDialogFormPopupWindow>

@@ -313,7 +313,7 @@
 <false>Napačno</false>
 <Electronic>Elektronska</Electronic>
 <Paper>Papir</Paper>
-<NONE>Noben</NONE>
+<NONE>Brez</NONE>
 <CLASSIFIED>Razvrščeni</CLASSIFIED>
 <UNCLASSIFIED>Nerazvrščeni</UNCLASSIFIED>
 <NOCONTRACT>Ni pogodbe</NOCONTRACT>
@@ -325,7 +325,7 @@
 <ten-years>Deset let</ten-years>
 <read>Dejanje uporabnika</read>
   <schedule>Razporejevalnik opravil</schedule>
-  <node_added>Dodajanje vsebine</node_added>
+  <node_added>Dodatek vsebine</node_added>
   <node_removed>Odstranjevanje vsebine</node_removed>
   <property_added>Dodajanje lastnosti</property_added>
   <property_removed>Odstranjevanje lastnosti</property_removed>
@@ -334,9 +334,9 @@
   <ScriptAction>
     <dialog>
       <label>
-        <isDeep>je Globoko</isDeep>
+        <isDeep>Podrobneje</isDeep>
         <nodetypes>Vrste vozlišč</nodetypes>
-        <affectedNodeTypeNames>Prizadete vrste vozlišč</affectedNodeTypeNames>
+        <affectedNodeTypeNames>Vpliva na vrste vozlišč</affectedNodeTypeNames>
       </label>
     </dialog>
   </ScriptAction>
@@ -344,9 +344,9 @@
   <AddMetadata>
     <dialog>
       <label>
-        <isDeep>je Globoko</isDeep>
+        <isDeep>Podrobneje</isDeep>
         <nodetypes>Vrste vozlišč</nodetypes>
-        <affectedNodeTypeNames>Prizadete vrste vozlišč</affectedNodeTypeNames>
+        <affectedNodeTypeNames>Vpliva na vrste vozlišč</affectedNodeTypeNames>
       </label>
     </dialog>
   </AddMetadata>
@@ -354,9 +354,9 @@
   <EnableVersioning>
     <dialog>
       <label>
-        <isDeep>je Globoko</isDeep>
+        <isDeep>Podrobneje</isDeep>
         <nodetypes>Vrste vozlišč</nodetypes>
-        <affectedNodeTypeNames>Prizadete vrste vozlišč</affectedNodeTypeNames>
+        <affectedNodeTypeNames>Vpliva na vrste vozlišč</affectedNodeTypeNames>
       </label>
     </dialog>
   </EnableVersioning>
@@ -364,9 +364,9 @@
   <AutoVersioning>
     <dialog>
       <label>
-        <isDeep>je Globoko</isDeep>
+        <isDeep>Podrobneje</isDeep>
         <nodetypes>Vrste vozlišč</nodetypes>
-        <affectedNodeTypeNames>Prizadete vrste vozlišč</affectedNodeTypeNames>
+        <affectedNodeTypeNames>Vpliva na vrste vozlišč</affectedNodeTypeNames>
       </label>
     </dialog>
   </AutoVersioning>

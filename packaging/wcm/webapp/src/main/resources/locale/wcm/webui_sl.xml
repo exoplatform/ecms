@@ -332,7 +332,7 @@
 
   <UIGroupMemberSelector>
     <label>
-      <selectGroup>Izberite skupino</selectGroup>
+      <selectGroup>Izberi skupino</selectGroup>
       <selectMembership>Izberi članstvo</selectMembership>
     </label>
   </UIGroupMemberSelector>
@@ -409,7 +409,7 @@
       <RecordsManagementCenter>Center za upravljanje zapisov</RecordsManagementCenter>
       <SharedUsersSpace>Prostor uporabnikov v skupni rabi</SharedUsersSpace>
       <Systemfiles>Sistemske datoteke</Systemfiles>
-      <ValidationRequestsDocumentsCenter>Potrjevanje veljavnosti zahteva Dokumentno središče</ValidationRequestsDocumentsCenter>
+      <ValidationRequestsDocumentsCenter>Zahteve potrjevanja veljavnosti dokumentnega središča</ValidationRequestsDocumentsCenter>
       <ManagedSites>Upravljanje mest</ManagedSites>
       <SharedSite>Mesto v skupni rabi</SharedSite>
     </title>

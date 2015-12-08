@@ -92,7 +92,7 @@
     <label>
       <driveWorkspace>Espace de Stockage:</driveWorkspace>
       <backToJCR>Retour aux Lecteurs</backToJCR>
-      <setUpBrowser>Préférences d'Affichage</setUpBrowser>
+      <setUpBrowser>Préférences d'affichage</setUpBrowser>
       <refesh>Actualiser</refesh>
       <currentDrive>Lecteur Courant</currentDrive>
       <selectView>Choisir une vue</selectView>
@@ -158,11 +158,11 @@
     <title>Préférences</title>
     <label>
       <enableStructure>Mode Structure:</enableStructure>
-      <showSideBar>Panneau latéral:</showSideBar>
-      <showHiddenNode>Montrer les noeuds cachés</showHiddenNode>
-      <showNonDocument>Montrer tout type de noeud</showNonDocument>
+      <showSideBar>Afficher le panneau latéral:</showSideBar>
+      <showHiddenNode>Montrer les fichiers cachés</showHiddenNode>
+      <showNonDocument>Montrer les fichiers système</showNonDocument>
       <showRefDocuments>Montrer les documents référencés</showRefDocuments>
-      <enableDragAndDrop>Glisser-déposer:</enableDragAndDrop>
+      <enableDragAndDrop>Activer le glisser-déposer:</enableDragAndDrop>
       <sortBy>Trier par:</sortBy>
       <order>Ordre</order>
       <nodesPerPage>Elements par page:</nodesPerPage>
@@ -221,7 +221,7 @@
       <UIReferencesList>Liste des références</UIReferencesList>
       <UIExportNode>Exporter</UIExportNode>
       <UINodeTypeInfo>Information sur le type de noeud</UINodeTypeInfo>
-      <UIVersionInfo>Info version</UIVersionInfo>
+      <UIVersionInfo>Informations de la Version</UIVersionInfo>
       <UIActivateVersion>Activer les versions</UIActivateVersion>
       <UIAuditingInfo>Audit</UIAuditingInfo>
       <UIActivateAuditing>Activer l'Audit</UIActivateAuditing>
@@ -255,7 +255,7 @@
       <UISEOForm>Gérer SEO</UISEOForm>
       <UISEOToolbarForm>Gérer SEO</UISEOToolbarForm>
       <UIReadOnlyFileConfirmMessage>Ouvrir le Document</UIReadOnlyFileConfirmMessage>
-      <UIDocumentAutoVersionForm>Copy Document</UIDocumentAutoVersionForm>
+      <UIDocumentAutoVersionForm>Copier le Document</UIDocumentAutoVersionForm>
     </title>
     <header>
       <workspace>Espace de Stockage</workspace>
@@ -285,7 +285,7 @@
       <AddFolder>Nouveau Dossier</AddFolder>
       <AddDocument>Nouveau Contenu</AddDocument>
       <EditDocument>Modifier</EditDocument>
-      <Upload>Ajouter des fichiers</Upload>
+      <Upload>Déposer des fichiers</Upload>
       <Paste>Coller</Paste>
       <Search>Chercher</Search>
       <WatchDocument>Suivre</WatchDocument>
@@ -309,8 +309,8 @@
       <ViewMetadatas>Métadonnées</ViewMetadatas>
       <ViewRelations>Montrer/Cacher les Relations</ViewRelations>
       <ShowJCRStructure>Monter/Cacher la Structure</ShowJCRStructure>
-      <EditProperty>Edit Document Properties</EditProperty>
-      <UploadNewVersion>Upload a new version</UploadNewVersion>
+      <EditProperty>Modifier les Propriétés</EditProperty>
+      <UploadNewVersion>Nouvelle version</UploadNewVersion>
     </tooltip>
     <msg>
       <cannot-action-in-rootnode>Action interdite sur le noeud racine.</cannot-action-in-rootnode>
@@ -599,9 +599,9 @@
       <WebDavView>Ouvrir dans MS Office</WebDavView>
       <Download>Télécharger</Download>
       <OpenDocument>Editer à Distance</OpenDocument>
-      <EditProperty>Edit Document Properties</EditProperty>
-      <UploadNewVersion>Upload a new version</UploadNewVersion>
-      <CreateNewVersion>Create a new version</CreateNewVersion>
+      <EditProperty>Modifier les propriétés</EditProperty>
+      <UploadNewVersion>Uploader une nouvelle version</UploadNewVersion>
+      <CreateNewVersion>Créer une nouvelle version</CreateNewVersion>
     </event>
   </ECMContextMenu>
  
@@ -2437,8 +2437,8 @@
 	    <Keepfile>Gardez les deux fichiers</Keepfile>
 <ReadOnly>Ouvrir en lecture seule</ReadOnly>
 <Cancel>Annuler</Cancel>
-      <KeepBoth>Keep Both</KeepBoth>
-      <CreateNewVersion>Create a new version</CreateNewVersion>
+      <KeepBoth>Garder les deux</KeepBoth>
+      <CreateNewVersion>Créer une nouvelle version</CreateNewVersion>
     </label>
 	</UIConfirmMessage>
 
@@ -2873,7 +2873,7 @@
 
   <UIPreferencesForm>
   		<label>
-						<queryType>Type de Requête:</queryType>
+            <queryType>Langage de requêtes:</queryType>
 						<SQL>SQL</SQL>
 						<XPATH>XPATH</XPATH>
   		</label>
@@ -3171,7 +3171,7 @@
     <Keep>Garder les deux</Keep>
     <Replace>Remplacer</Replace>
     <Canceled>Annulé</Canceled>
-      <UploadNewVersion>Upload new version</UploadNewVersion>
+      <UploadNewVersion>Uploader une nouvelle version</UploadNewVersion>
     <Cancel>#{word.cancel}</Cancel>
     <AbortAllConfirmation>Voulez vous annuler tous les fichiers en cours de transfert?</AbortAllConfirmation>
   	</label>
@@ -3201,17 +3201,17 @@
     </msg>
   </UIPropertyForm>
   <UIDocumentAutoVersionForm>
-    <msg>A document {0} already exits. What do you want to do? </msg>
+    <msg>Un document nommé {0} existe déjà. Que voulez-vous faire ?</msg>
     <UIChkRememberNonVersioned>
-      <label>Remember my choice for all others non-versioned documents</label>
+      <label>Se souvenir de mon choix pour tous les autres documents non versionnés</label>
     </UIChkRememberNonVersioned>
     <UIChkRememberVersioned>
-      <label>Remember my choice for all others versioned documents</label>
+      <label>Se souvenir de mon choix pour tous les autres documents non versionnés</label>
     </UIChkRememberVersioned>
   </UIDocumentAutoVersionForm>
   <DocumentAuto>
-    <message>A new version of the document {0} has been created successfully.</message>
-    <messageMultiFile>New version(s) of versioned document(s) has been created.</messageMultiFile>
+    <message>Une nouvelle version du document  {0} a été créée avec succès.</message>
+    <messageMultiFile>Une nouvelle version du document a été créée.</messageMultiFile>
   </DocumentAuto>
   <!--
   ###################################################################################

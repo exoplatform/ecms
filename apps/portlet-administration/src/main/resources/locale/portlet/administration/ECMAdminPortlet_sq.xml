@@ -991,9 +991,9 @@
       <checkIn>crwdns6812355:0crwdne6812355:0</checkIn>
       <checkOut>crwdns6812356:0crwdne6812356:0</checkOut>
       <shareDocuments>crwdns6824273:0crwdne6824273:0</shareDocuments>
-      <openDocument>Remote Edit</openDocument>
-      <editProperty>Edit Document Properties</editProperty>
-      <uploadNewVersion>Upload a new version</uploadNewVersion>
+      <openDocument>crwdns6825018:0crwdne6825018:0</openDocument>
+      <editProperty>crwdns6825019:0crwdne6825019:0</editProperty>
+      <uploadNewVersion>crwdns6825020:0crwdne6825020:0</uploadNewVersion>
     </label>
     <action>
       <Save>crwdns6792224:0{word.save}crwdne6792224:0</Save>      

@@ -250,12 +250,12 @@
       <UIActivePublication>Inscribirse a la publicación del ciclo de vida</UIActivePublication>
       <UITaggingForm>Etiquetar este documento</UITaggingForm>
       <UIThumbnailForm>Añadir imagen de la viñeta</UIThumbnailForm>
-      <UIAllItemsPreferenceForm>Configuración de preferencias</UIAllItemsPreferenceForm>
+      <UIAllItemsPreferenceForm>Preferencias</UIAllItemsPreferenceForm>
       <UISelectRestorePath>Seleccionar Ruta de Restauración</UISelectRestorePath>
       <UISEOForm>Administrar SEO</UISEOForm>
       <UISEOToolbarForm>Administrar SEO</UISEOToolbarForm>
       <UIReadOnlyFileConfirmMessage>Abrir Documento</UIReadOnlyFileConfirmMessage>
-      <UIDocumentAutoVersionForm>Copy Document</UIDocumentAutoVersionForm>
+      <UIDocumentAutoVersionForm>Copiar documento</UIDocumentAutoVersionForm>
     </title>
     <header>
       <workspace>Espacio de Trabajo</workspace>
@@ -309,8 +309,8 @@
       <ViewMetadatas>Metadatos</ViewMetadatas>
       <ViewRelations>Mostrar/Esconder Relaciones</ViewRelations>
       <ShowJCRStructure>Mostrar/Ocultar la estructura de contenidos</ShowJCRStructure>
-      <EditProperty>Edit Document Properties</EditProperty>
-      <UploadNewVersion>Upload a new version</UploadNewVersion>
+      <EditProperty>Editar propiedades del documento</EditProperty>
+      <UploadNewVersion>Subir nueva versión</UploadNewVersion>
     </tooltip>
     <msg>
       <cannot-action-in-rootnode>No puede hacer esta acción en el nodo de la raíz.</cannot-action-in-rootnode>
@@ -599,9 +599,9 @@
       <WebDavView>Abrir en MS Office</WebDavView>
       <Download>Descargar</Download>
       <OpenDocument>Edición remota</OpenDocument>
-      <EditProperty>Edit Document Properties</EditProperty>
-      <UploadNewVersion>Upload a new version</UploadNewVersion>
-      <CreateNewVersion>Create a new version</CreateNewVersion>
+      <EditProperty>Editar propiedades del documento</EditProperty>
+      <UploadNewVersion>Subir nueva versión</UploadNewVersion>
+      <CreateNewVersion>Crear una nueva versión</CreateNewVersion>
     </event>
   </ECMContextMenu>
  
@@ -2437,8 +2437,8 @@
       <Keepfile>Guardar ambos archivos</Keepfile>
 <ReadOnly>Abrir en sólo lectura</ReadOnly>
 <Cancel>Cancelar</Cancel>
-      <KeepBoth>Keep Both</KeepBoth>
-      <CreateNewVersion>Create a new version</CreateNewVersion>
+      <KeepBoth>Mantener ambos</KeepBoth>
+      <CreateNewVersion>Crear una nueva versión</CreateNewVersion>
     </label>
   </UIConfirmMessage>
 
@@ -3171,7 +3171,7 @@
     <Keep>Mantenga ambas</Keep>
     <Replace>Reemplazar</Replace>
     <Canceled>Cancelado</Canceled>
-      <UploadNewVersion>Upload new version</UploadNewVersion>
+      <UploadNewVersion>Subir nueva versión</UploadNewVersion>
     <Cancel>#{word.cancel}</Cancel>
     <AbortAllConfirmation>¿Quieres abortar todos los archivos en progreso?</AbortAllConfirmation>
   </label>
@@ -3201,17 +3201,17 @@
     </msg>
   </UIPropertyForm>
   <UIDocumentAutoVersionForm>
-    <msg>A document {0} already exits. What do you want to do? </msg>
+    <msg>Ya existe un documento {0}. ¿Qué quieres hacer?</msg>
     <UIChkRememberNonVersioned>
-      <label>Remember my choice for all others non-versioned documents</label>
+      <label>Recordar mi elección para todos los demás documentos no versionados</label>
     </UIChkRememberNonVersioned>
     <UIChkRememberVersioned>
-      <label>Remember my choice for all others versioned documents</label>
+      <label>Recordar mi elección para todos los demás documentos versionados</label>
     </UIChkRememberVersioned>
   </UIDocumentAutoVersionForm>
   <DocumentAuto>
-    <message>A new version of the document {0} has been created successfully.</message>
-    <messageMultiFile>New version(s) of versioned document(s) has been created.</messageMultiFile>
+    <message>Una nueva versión del documento {0} ha sido creada con éxito.</message>
+    <messageMultiFile>Se ha creado una nueva versión del documento.</messageMultiFile>
   </DocumentAuto>
   <!--
   ###################################################################################

@@ -46,7 +46,7 @@
       <searchResultBasePathInputSetAction>Osnovna pot</searchResultBasePathInputSetAction>
       <pageMode>Način strani</pageMode>
       <option>
-        <none>Noben</none>
+        <none>Brez</none>
         <more>Več</more>
         <pagination>Številčenje strani</pagination>
       </option>

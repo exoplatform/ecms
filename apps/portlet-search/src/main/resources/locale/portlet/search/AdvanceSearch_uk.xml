@@ -18,8 +18,8 @@
       <Document>Документ</Document>
       <DocumentAndPage>Документ та сторінка</DocumentAndPage>
       <documentandpage>Документ та сторінка</documentandpage>
-      <results>Results {0} to {1} for {2}</results>
-      <oneResult>Only one result for {0}</oneResult>
+      <results>Результати з {0} по {1} для {2}</results>
+      <oneResult>Тільки один результат для {0}</oneResult>
       <ofAboutCaption>близько</ofAboutCaption>
       <timeUnitCaption>секунд</timeUnitCaption>
       <similar>Сторінки, де з'являється той же зміст</similar>

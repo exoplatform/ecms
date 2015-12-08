@@ -991,7 +991,7 @@
       <checkIn>Δέσμευση</checkIn>
       <checkOut>Αποδέσμευση</checkOut>
       <shareDocuments>Μοιραστείτε</shareDocuments>
-      <openDocument>Remote Edit</openDocument>
+      <openDocument>Απομακρυσμένη επεξεργασία</openDocument>
       <editProperty>Edit Document Properties</editProperty>
       <uploadNewVersion>Upload a new version</uploadNewVersion>
     </label>

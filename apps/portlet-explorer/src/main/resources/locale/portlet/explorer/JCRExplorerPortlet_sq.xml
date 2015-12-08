@@ -250,12 +250,12 @@
       <UIActivePublication>crwdns6790381:0crwdne6790381:0</UIActivePublication>
       <UITaggingForm>crwdns6790382:0crwdne6790382:0</UITaggingForm>
       <UIThumbnailForm>crwdns6790383:0crwdne6790383:0</UIThumbnailForm>
-      <UIAllItemsPreferenceForm>crwdns6790384:0crwdne6790384:0</UIAllItemsPreferenceForm>
+      <UIAllItemsPreferenceForm>crwdns6825035:0crwdne6825035:0</UIAllItemsPreferenceForm>
       <UISelectRestorePath>crwdns6790385:0crwdne6790385:0</UISelectRestorePath>
       <UISEOForm>crwdns6790386:0crwdne6790386:0</UISEOForm>
       <UISEOToolbarForm>crwdns6790387:0crwdne6790387:0</UISEOToolbarForm>
       <UIReadOnlyFileConfirmMessage>crwdns6812342:0crwdne6812342:0</UIReadOnlyFileConfirmMessage>
-      <UIDocumentAutoVersionForm>Copy Document</UIDocumentAutoVersionForm>
+      <UIDocumentAutoVersionForm>crwdns6825003:0crwdne6825003:0</UIDocumentAutoVersionForm>
     </title>
     <header>
       <workspace>crwdns6790388:0crwdne6790388:0</workspace>
@@ -309,8 +309,8 @@
       <ViewMetadatas>crwdns6790418:0crwdne6790418:0</ViewMetadatas>
       <ViewRelations>crwdns6790419:0crwdne6790419:0</ViewRelations>
       <ShowJCRStructure>crwdns6790420:0crwdne6790420:0</ShowJCRStructure>
-      <EditProperty>Edit Document Properties</EditProperty>
-      <UploadNewVersion>Upload a new version</UploadNewVersion>
+      <EditProperty>crwdns6825004:0crwdne6825004:0</EditProperty>
+      <UploadNewVersion>crwdns6825005:0crwdne6825005:0</UploadNewVersion>
     </tooltip>
     <msg>
       <cannot-action-in-rootnode>crwdns6790421:0crwdne6790421:0</cannot-action-in-rootnode>
@@ -599,9 +599,9 @@
       <WebDavView>crwdns6790626:0crwdne6790626:0</WebDavView>
       <Download>crwdns6823129:0crwdne6823129:0</Download>
       <OpenDocument>crwdns6823130:0crwdne6823130:0</OpenDocument>
-      <EditProperty>Edit Document Properties</EditProperty>
-      <UploadNewVersion>Upload a new version</UploadNewVersion>
-      <CreateNewVersion>Create a new version</CreateNewVersion>
+      <EditProperty>crwdns6825006:0crwdne6825006:0</EditProperty>
+      <UploadNewVersion>crwdns6825007:0crwdne6825007:0</UploadNewVersion>
+      <CreateNewVersion>crwdns6825008:0crwdne6825008:0</CreateNewVersion>
     </event>
   </ECMContextMenu>
  
@@ -2437,8 +2437,8 @@
       <Keepfile>crwdns6791416:0crwdne6791416:0</Keepfile>
 <ReadOnly>crwdns6812345:0crwdne6812345:0</ReadOnly>
 <Cancel>crwdns6812346:0crwdne6812346:0</Cancel>
-      <KeepBoth>Keep Both</KeepBoth>
-      <CreateNewVersion>Create a new version</CreateNewVersion>
+      <KeepBoth>crwdns6825009:0crwdne6825009:0</KeepBoth>
+      <CreateNewVersion>crwdns6825010:0crwdne6825010:0</CreateNewVersion>
     </label>
   </UIConfirmMessage>
 
@@ -3171,7 +3171,7 @@
     <Keep>crwdns6791673:0crwdne6791673:0</Keep>
     <Replace>crwdns6791674:0crwdne6791674:0</Replace>
     <Canceled>crwdns6791675:0crwdne6791675:0</Canceled>
-      <UploadNewVersion>Upload new version</UploadNewVersion>
+      <UploadNewVersion>crwdns6825011:0crwdne6825011:0</UploadNewVersion>
     <Cancel>crwdns6791676:0{word.cancel}crwdne6791676:0</Cancel>
     <AbortAllConfirmation>crwdns6791677:0crwdne6791677:0</AbortAllConfirmation>
   </label>
@@ -3201,17 +3201,17 @@
     </msg>
   </UIPropertyForm>
   <UIDocumentAutoVersionForm>
-    <msg>A document {0} already exits. What do you want to do? </msg>
+    <msg>crwdns6825028:0{0}crwdne6825028:0</msg>
     <UIChkRememberNonVersioned>
-      <label>Remember my choice for all others non-versioned documents</label>
+      <label>crwdns6825013:0crwdne6825013:0</label>
     </UIChkRememberNonVersioned>
     <UIChkRememberVersioned>
-      <label>Remember my choice for all others versioned documents</label>
+      <label>crwdns6825029:0crwdne6825029:0</label>
     </UIChkRememberVersioned>
   </UIDocumentAutoVersionForm>
   <DocumentAuto>
-    <message>A new version of the document {0} has been created successfully.</message>
-    <messageMultiFile>New version(s) of versioned document(s) has been created.</messageMultiFile>
+    <message>crwdns6825015:0{0}crwdne6825015:0</message>
+    <messageMultiFile>crwdns6825030:0crwdne6825030:0</messageMultiFile>
   </DocumentAuto>
   <!--
   ###################################################################################

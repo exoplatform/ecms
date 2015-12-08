@@ -11,7 +11,7 @@
       <cancel>Prekliči</cancel>
     </label>
     <msg>
-      <renaming>Preimenovanje...</renaming>
+      <renaming>Poteka preimenovanje ...</renaming>
     </msg>
   </RenameConnector>
   <OpenInOfficeConnector>

@@ -28,7 +28,7 @@
         <show-comments>Prikaži komentarje</show-comments>
         <hide-comments>Skrij komentarje</hide-comments>
         <comment-by>Komentirali</comment-by>
-        <email>Email</email>
+        <email>E-pošta</email>
         <site>Stran</site>
         <lastComment>Zadnji je komentiral {user} ob {time}</lastComment>
       </label>
@@ -153,7 +153,7 @@
         <publisher>Založnik</publisher>
         <description>Opis</description>
         <rights>Pravice</rights>
-        <relation>Razmerje</relation>
+        <relation>Povezave</relation>
         <format>Oblika</format>
         <coverage>Pokritost</coverage>
         <identifier>Identifikator</identifier>
@@ -184,9 +184,9 @@
   <AddMetadata>
     <view>
       <label>
-        <isDeep>Je globoko</isDeep>
+        <isDeep>Podrobneje</isDeep>
         <nodetypes>Vrste vozlišč</nodetypes>
-        <affectedNodeTypeNames>Prizadete vrste vozlišč</affectedNodeTypeNames>
+        <affectedNodeTypeNames>Vpliva na vrste vozlišč</affectedNodeTypeNames>
         <nodeTypeName>Imena vrst vozlišč</nodeTypeName>
       </label> 
     </view>
@@ -195,9 +195,9 @@
   <EnableVersioning>
     <view>
       <label>
-        <isDeep>Je globoko</isDeep>
+        <isDeep>Podrobneje</isDeep>
         <nodetypes>Vrste vozlišč</nodetypes> 
-        <affectedNodeTypeNames>Prizadete vrste vozlišč</affectedNodeTypeNames>
+        <affectedNodeTypeNames>Vpliva na vrste vozlišč</affectedNodeTypeNames>
         <nodeTypeName>Imena vrst vozlišč</nodeTypeName>
       </label> 
     </view>
@@ -206,9 +206,9 @@
   <AutoVersioning>
     <view>
       <label>
-        <isDeep>Je globoko</isDeep>
+        <isDeep>Podrobneje</isDeep>
         <nodetypes>Vrste vozlišč</nodetypes>
-        <affectedNodeTypeNames>Prizadete vrste vozlišč</affectedNodeTypeNames>
+        <affectedNodeTypeNames>Vpliva na vrste vozlišč</affectedNodeTypeNames>
         <nodeTypeName>Imena vrst vozlišč</nodeTypeName>
       </label> 
     </view>
