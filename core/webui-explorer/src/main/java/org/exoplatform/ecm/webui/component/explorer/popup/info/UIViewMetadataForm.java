@@ -142,11 +142,15 @@ public class UIViewMetadataForm extends UIDialogForm {
                     !uiForm.isEqualsValueStringArrays(node.getProperty(name).getValues(), valuesReal)))
                   node.setProperty(name, valuesReal);
               } else {
-                List<String> values = (List<String>) ((UIFormMultiValueInputSet)uiInput).getValue();
-                if(!node.hasProperty(name) || (node.hasProperty(name) && 
-                    !uiForm.isEqualsValueStringArrays(node.getProperty(name).getValues(), 
-                                                      values.toArray(new String[values.size()]))))
-                  node.setProperty(name, values.toArray(new String[values.size()]));
+                try {
+                  List<String> values = (List<String>) ((UIFormMultiValueInputSet)uiInput).getValue();
+                  if(!node.hasProperty(name) || (node.hasProperty(name) &&
+                      !uiForm.isEqualsValueStringArrays(node.getProperty(name).getValues(),
+                                                        values.toArray(new String[values.size()]))))
+                    node.setProperty(name, values.toArray(new String[values.size()]));
+                } catch (Exception e) {
+                  LOG.error(e, e.getCause());
+                }
               }
             }
           } else {
@@ -173,6 +177,19 @@ public class UIViewMetadataForm extends UIDialogForm {
               }
               if(!node.hasProperty(name) || (node.hasProperty(name) && !node.getProperty(name).getString().equals(value)))
                 node.setProperty(name, value);
+            } else if (requiredType == 4){ // double
+              UIFormInput uiInput = uiForm.getUIInput(inputName);
+              double value = 0;
+              if(uiForm.getUIInput(inputName) != null) {
+                if ((!node.hasProperty(name) || (node.hasProperty(name) && node.getProperty(name).getDouble() != value))) {
+                  try {
+                    value =  Double.parseDouble((String) uiInput.getValue());
+                    node.setProperty(name, value);
+                  } catch (Exception e) {
+                    node.setProperty(name, (Value) null);
+                  }
+                }
+              }
             }
           }
         }
