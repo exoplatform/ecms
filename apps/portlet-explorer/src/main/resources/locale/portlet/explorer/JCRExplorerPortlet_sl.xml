@@ -71,7 +71,7 @@
   -->
   <UISideBar>
     <label>
-      <Relation>Razmerje</Relation>
+      <Relation>Povezave</Relation>
       <Explorer>Raziskovalec datotek</Explorer>
       <Close>Zapri stransko vrstico</Close>
       <TagExplorer>Oblak oznak</TagExplorer>
@@ -92,7 +92,7 @@
     <label>
       <driveWorkspace>Pogon delovnega prostora:</driveWorkspace>
       <backToJCR>Nazaj v JCR glavni disk</backToJCR>
-      <setUpBrowser>Nastavite nastavitve brskanja</setUpBrowser>
+      <setUpBrowser>Nastavitve brskanja</setUpBrowser>
       <refesh>Osveži</refesh>
       <currentDrive>Trenutni pogon</currentDrive>
       <selectView>Izberite pogled</selectView>
@@ -110,7 +110,7 @@
   <UIDrivesBrowser>
     <title>
       <PersonalDrives>Osebni pogoni</PersonalDrives>
-      <GroupDrives>Pogoni skupine</GroupDrives>
+      <GroupDrives>Skupni pogoni</GroupDrives>
       <GeneralDrives>Splošni pogoni</GeneralDrives>
     </title>
     <msg>
@@ -155,12 +155,12 @@
   #########################################################################################
   -->
   <UIPreferencesForm>
-    <title>Nastavite nastavitve brskanja</title>
+    <title>Nastavitve brskanja</title>
     <label>
       <enableStructure>Omogoči DMS strukturo:</enableStructure>
       <showSideBar>Prikaži stransko vrstico:</showSideBar>
       <showHiddenNode>Prikaži skrita vozlišča:</showHiddenNode>
-      <showNonDocument>Prikaži vozlišča brez dokumentov:</showNonDocument>
+      <showNonDocument>Prikaži ne-dokumentna vozlišča:</showNonDocument>
       <showRefDocuments>Prikaži sklicevane dokumente:</showRefDocuments>
       <enableDragAndDrop>Omogoči "povleci in spusti":</enableDragAndDrop>
       <sortBy>Razvrsti po:</sortBy>
@@ -178,7 +178,7 @@
   #########################################################################################
   -->
   <UIAllItemsPreferenceForm>
-    <title>Nastavitve nastavitve filtra</title>
+    <title>Nastavi nastavitve filtra</title>
     <action>
       <Cancel>#{word.cancel}</Cancel>
       <Save>#{word.save}</Save>
@@ -300,7 +300,7 @@
       <ManageActions>Dejanja</ManageActions>
       <ExportNode>Izvozi</ExportNode>
       <ImportNode>Uvozi</ImportNode>
-      <OverloadThumbnail>Sličica preobremenitve</OverloadThumbnail>
+      <OverloadThumbnail>Nadomestna sličica</OverloadThumbnail>
       <ManageHidden>Pokaži/Skrij vsebino</ManageHidden>
       <ViewReferences>Sklici</ViewReferences>
       <ViewNodeType>Vrste</ViewNodeType>
@@ -353,9 +353,9 @@
       <SimpleSearch>Hitro iskanje</SimpleSearch>
       <AdvanceSearch>Napredno iskanje</AdvanceSearch>
       <SavedQueries>Shranjene poizvedbe</SavedQueries>
-      <ShowAllOwnedByUser>Prikaži vse moje predmete</ShowAllOwnedByUser>
-      <ShowAllFavourite>Prikaži vse priljubljene predmete</ShowAllFavourite>
-      <ShowAllHidden>Prikaži vse skrite predmete</ShowAllHidden>
+      <ShowAllOwnedByUser>Prikaži vse moje elemente</ShowAllOwnedByUser>
+      <ShowAllFavourite>Prikaži vse priljubljene elemente</ShowAllFavourite>
+      <ShowAllHidden>Prikaži vse skrite elemente</ShowAllHidden>
       <ShowAllFromTrash>Prikaži vse predmete v smeteh</ShowAllFromTrash>
     </title>
   </UIActionBar>
@@ -601,7 +601,7 @@
       <OpenDocument>Oddaljeno urejanje</OpenDocument>
       <EditProperty>Urejanje lastnosti dokumenta</EditProperty>
       <UploadNewVersion>Naloži novo različico</UploadNewVersion>
-      <CreateNewVersion>Ustvarite novo različico</CreateNewVersion>
+      <CreateNewVersion>Ustvari novo različico</CreateNewVersion>
     </event>
   </ECMContextMenu>
  
@@ -1701,7 +1701,7 @@
       <Close>#{word.close}</Close>
     </action>
 <tooltip>
-<FullScreen>Maximiziraj/Minimiziraj</FullScreen>
+<FullScreen>Maksimiraj/Minimiraj</FullScreen>
 </tooltip>
     <msg>
       <cannot-save>Pri shranjevanju dokumenta je prišlo do napake.</cannot-save>
@@ -2647,10 +2647,10 @@
       <Favourites>Priljubljeno</Favourites>
       <Hidden>Skrito</Hidden>
       <Trash>Smeti</Trash>
-      <Configuration>Nastavite nastavitve</Configuration>
+      <Configuration>Nastavi nastavitve</Configuration>
     </label>
     <title>
-      <allItems>Vse elemente</allItems>
+      <allItems>Vsi elementi</allItems>
     </title>
   </UIAllItems>
 
@@ -2688,7 +2688,7 @@
       <Documents>Dokument</Documents>
       <Content>Vsebina</Content>
     </label>
-    <title>Nastavitve nastavitve filtra</title>
+    <title>Možnosti nastavitve filtra</title>
     <action>
       <Save>#{word.save}</Save>
       <Cancel>#{word.cancel}</Cancel>
@@ -2697,7 +2697,7 @@
 
   <UIAllItemsByType>
     <label>
-    <ByType>Filtriraj po vrsti</ByType>
+    <ByType>Filtriranje po vrsti</ByType>
       <DocumentFilterConfiguration>Nastavitve nastavitve filtra</DocumentFilterConfiguration>
     </label>
     <title>
@@ -2721,7 +2721,7 @@
   </ECMContextMenu>
   <UIPopupWindow>
     <title>
-      <UIDocumentFilterForm>Filtriraj vrsto dokumentov</UIDocumentFilterForm>
+      <UIDocumentFilterForm>Filtriraj po vrsti dokumentov</UIDocumentFilterForm>
     </title>
   </UIPopupWindow>
 
@@ -3112,7 +3112,7 @@
   <false>Napačno</false>
   <Electronic>Elektronsko</Electronic>
   <Paper>Papir</Paper>
-  <NONE>Noben</NONE>
+  <NONE>Brez</NONE>
   <CLASSIFIED>Razvrščeno</CLASSIFIED>
   <UNCLASSIFIED>Nerazvrščeno</UNCLASSIFIED>
   <NOCONTRACT>Ni pogodbe</NOCONTRACT>
@@ -3124,7 +3124,7 @@
   <ten-years>Deset let</ten-years>
   <read>Dejanje uporabnika</read>
   <schedule>Razporejevalnik opravil</schedule>
-  <node_added>Dodajanje vsebine</node_added>
+  <node_added>Dodatek vsebine</node_added>
   <node_removed>Odstranjevanje vsebine</node_removed>
   <property_added>Dodajanje lastnosti</property_added>
   <property_removed>Odstranjevanje lastnosti</property_removed>
@@ -3181,7 +3181,7 @@
   <CreatedOn>Ustvarjeno dne</CreatedOn>
   <Updated>Posodobljeno</Updated>
   <by>od</by>
-  <you>Vi</you>
+  <you>vas</you>
   </label>
   </UIDocumentNodeList>
   <FileView>

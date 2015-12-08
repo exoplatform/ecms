@@ -250,7 +250,7 @@
       <UIActivePublication>Inscrever-se no ciclo de publicações</UIActivePublication>
       <UITaggingForm>Aplicar tag a este documento</UITaggingForm>
       <UIThumbnailForm>Adicionar miniatura</UIThumbnailForm>
-      <UIAllItemsPreferenceForm>Definições de preferência</UIAllItemsPreferenceForm>
+      <UIAllItemsPreferenceForm>Preferências</UIAllItemsPreferenceForm>
       <UISelectRestorePath>Selecionar caminho de restauração</UISelectRestorePath>
       <UISEOForm>Gerenciar SEO</UISEOForm>
       <UISEOToolbarForm>Gerenciar SEO</UISEOToolbarForm>
@@ -3201,17 +3201,17 @@
     </msg>
   </UIPropertyForm>
   <UIDocumentAutoVersionForm>
-    <msg>A document {0} already exits. What do you want to do? </msg>
+    <msg>A document {0} already exists. What do you want to do?</msg>
     <UIChkRememberNonVersioned>
       <label>Remember my choice for all others non-versioned documents</label>
     </UIChkRememberNonVersioned>
     <UIChkRememberVersioned>
-      <label>Remember my choice for all others versioned documents</label>
+      <label>Remember my choice for all other versioned documents</label>
     </UIChkRememberVersioned>
   </UIDocumentAutoVersionForm>
   <DocumentAuto>
     <message>A new version of the document {0} has been created successfully.</message>
-    <messageMultiFile>New version(s) of versioned document(s) has been created.</messageMultiFile>
+    <messageMultiFile>A new version of the document has been created.</messageMultiFile>
   </DocumentAuto>
   <!--
   ###################################################################################

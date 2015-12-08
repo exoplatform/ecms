@@ -991,9 +991,9 @@
       <checkIn>Check In</checkIn>
       <checkOut>Check Out</checkOut>
       <shareDocuments>Partager</shareDocuments>
-      <openDocument>Remote Edit</openDocument>
-      <editProperty>Edit Document Properties</editProperty>
-      <uploadNewVersion>Upload a new version</uploadNewVersion>
+      <openDocument>Editer à Distance</openDocument>
+      <editProperty>Modifier les Propriétés</editProperty>
+      <uploadNewVersion>Nouvelle version</uploadNewVersion>
     </label>			
     <action>
       <Save>#{word.save}</Save>      

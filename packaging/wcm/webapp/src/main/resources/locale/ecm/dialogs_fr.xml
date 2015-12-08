@@ -151,7 +151,7 @@
         <contributor>Contributeur</contributor>
         <resource-type>Type de Ressource</resource-type>
         <date>#{word.date}</date>
-        <publisher>Publieur</publisher>
+        <publisher>Editeur</publisher>
         <description>#{word.description}</description>
         <rights>Droits</rights>
         <relation>Relation</relation>

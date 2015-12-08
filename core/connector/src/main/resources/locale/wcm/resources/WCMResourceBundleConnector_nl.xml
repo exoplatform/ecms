@@ -25,7 +25,7 @@
   </OpenInOfficeConnector>
   <DocumentAutoVersion>
     <msg>
-      <WrongMimeType>The mimetype of the file uploaded is unknown. No new version of {0} will be created.</WrongMimeType>
+      <WrongMimeType>Het mimetype van het geüpload bestand is onbekend. Er zal geen nieuwe versie van {0} worden gemaakt.</WrongMimeType>
     </msg>
   </DocumentAutoVersion>
 </bundle>

@@ -34,7 +34,7 @@
 
   <Drives>
     <label>
-      <ManagedSites>Site Management</ManagedSites>
+      <ManagedSites>Керування сайтом</ManagedSites>
       <SharedSite>Сайт спільного користування</SharedSite>
     </label>
   </Drives>
@@ -202,15 +202,15 @@
     <msg>
       <time-to-late>Задовгий час пошуку.</time-to-late>
       <empty-field>Будь ласка, введіть припустиме ключове слово для пошуку.</empty-field>
-      <empty-name>Please enter the name to search</empty-name>
-      <empty-content>Please enter a word or phrase to search</empty-content>
-      <empty-property>Please select a property</empty-property>
-      <empty-property-keyword>Please enter a keyword for the property</empty-property-keyword>
-      <empty-doctype>Please select a document type</empty-doctype>
-      <empty-startDate>"From Date" is required</empty-startDate>
+      <empty-name>Будь ласка, введіть ім'я для пошуку</empty-name>
+      <empty-content>Будь ласка, введіть слово або фразу для пошуку</empty-content>
+      <empty-property>Будь ласка, виберіть властивість</empty-property>
+      <empty-property-keyword>Будь ласка, введіть ключове слово для властивості</empty-property-keyword>
+      <empty-doctype>Будь ласка, виберіть тип документа</empty-doctype>
+      <empty-startDate>«Дата від» потрібно заповнити</empty-startDate>
       <invalid-format>Неприпустимий формат дата/час у поля "{0}".</invalid-format>
       <invalid-date>"Дата До" повинна бути пізніше ніж "Дата Від"</invalid-date>
-      <invalid-startDate>"From Date" must not be later than today</invalid-startDate>
+      <invalid-startDate>"Дата від" не має бути пізнішою за сьогодні</invalid-startDate>
       <invalid-nodeType>Вузол типу "{0}" є неприпустимим. Будь ласка, перевірте ще раз.</invalid-nodeType>
       <invalid-keyword>Невірне ключове слово. Деякі символи не розпізнані.</invalid-keyword>
     </msg>

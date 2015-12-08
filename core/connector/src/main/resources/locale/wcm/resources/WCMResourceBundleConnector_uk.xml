@@ -25,7 +25,7 @@
   </OpenInOfficeConnector>
   <DocumentAutoVersion>
     <msg>
-      <WrongMimeType>The mimetype of uploaded file is incorrect! The new version of {0} will not be created.</WrongMimeType>
+      <WrongMimeType>MIME-тип завантаженого файлу невідомий. Нову версію {0} не буде створено.</WrongMimeType>
     </msg>
   </DocumentAutoVersion>
 </bundle>

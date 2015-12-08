@@ -11,7 +11,7 @@
       <action>Dodaj</action>
     </header>
     <info>
-      <child-not-found>Podrejenih ni bilo mogoče najti!</child-not-found>
+      <child-not-found>Podrejenih ne najdem!</child-not-found>
     </info>
     <action>
       <title>

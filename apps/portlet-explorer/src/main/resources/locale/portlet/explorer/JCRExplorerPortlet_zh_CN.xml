@@ -250,7 +250,7 @@
       <UIActivePublication>注册到出版物生命周期</UIActivePublication>
       <UITaggingForm>标记文档</UITaggingForm>
       <UIThumbnailForm>添加缩略图图像</UIThumbnailForm>
-      <UIAllItemsPreferenceForm>首选项设置</UIAllItemsPreferenceForm>
+      <UIAllItemsPreferenceForm>首选项</UIAllItemsPreferenceForm>
       <UISelectRestorePath>选择恢复路径</UISelectRestorePath>
       <UISEOForm>管理 SEO</UISEOForm>
       <UISEOToolbarForm>管理 SEO</UISEOToolbarForm>
@@ -3201,17 +3201,17 @@
     </msg>
   </UIPropertyForm>
   <UIDocumentAutoVersionForm>
-    <msg>A document {0} already exits. What do you want to do? </msg>
+    <msg>A document {0} already exists. What do you want to do?</msg>
     <UIChkRememberNonVersioned>
       <label>Remember my choice for all others non-versioned documents</label>
     </UIChkRememberNonVersioned>
     <UIChkRememberVersioned>
-      <label>Remember my choice for all others versioned documents</label>
+      <label>Remember my choice for all other versioned documents</label>
     </UIChkRememberVersioned>
   </UIDocumentAutoVersionForm>
   <DocumentAuto>
     <message>A new version of the document {0} has been created successfully.</message>
-    <messageMultiFile>New version(s) of versioned document(s) has been created.</messageMultiFile>
+    <messageMultiFile>A new version of the document has been created.</messageMultiFile>
   </DocumentAuto>
   <!--
   ###################################################################################

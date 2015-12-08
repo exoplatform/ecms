@@ -4,7 +4,7 @@
     <AuthoringPublicationPlugin>
       <changeState>
         <obsoleted>Vsebina je zastarela</obsoleted>
-        <published>Vsebina objavljena</published>
+        <published>Vsebina je objavljena</published>
 <unpublished>Vsebina ni objavljena</unpublished>
 <archived>Vsebina je arhivirana</archived>
 <staged>Vsebina je v fazah</staged>

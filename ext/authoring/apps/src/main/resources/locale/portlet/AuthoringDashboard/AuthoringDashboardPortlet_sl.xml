@@ -5,9 +5,9 @@
       <title>Author Dashboard</title>
       <nocontent>Ni vsebine</nocontent>
       <mydraft>Moj osnutek vsebine</mydraft>
-      <waitingapproval>Čakanje na mojo odobritev</waitingapproval>
+      <waitingapproval>Čaka na mojo odobritev</waitingapproval>
       <approve>Odobri</approve>
-      <publishedtomorrow>Jutri bo objavljeno</publishedtomorrow>
+      <publishedtomorrow>Čaka na objavo</publishedtomorrow>
       <refresh>#{word.refresh}</refresh>
     </label>
   </UIDashboardForm>

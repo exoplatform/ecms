@@ -250,7 +250,7 @@
       <UIActivePublication>Đăng ký Chu trình Xuất bản</UIActivePublication>
       <UITaggingForm>Gán nhãn Tài liệu</UITaggingForm>
       <UIThumbnailForm>Thêm Ảnh Nhỏ</UIThumbnailForm>
-      <UIAllItemsPreferenceForm>Thiết lập Tùy chọn</UIAllItemsPreferenceForm>
+      <UIAllItemsPreferenceForm>Tùy chọn Thiết lập</UIAllItemsPreferenceForm>
       <UISelectRestorePath>Chọn Đường dẫn Khôi phục</UISelectRestorePath>
       <UISEOForm>Quản lý SEO</UISEOForm>
       <UISEOToolbarForm>Quản lý SEO</UISEOToolbarForm>
@@ -3201,17 +3201,17 @@
     </msg>
   </UIPropertyForm>
   <UIDocumentAutoVersionForm>
-    <msg>A document {0} already exits. What do you want to do? </msg>
+    <msg>A document {0} already exists. What do you want to do?</msg>
     <UIChkRememberNonVersioned>
       <label>Remember my choice for all others non-versioned documents</label>
     </UIChkRememberNonVersioned>
     <UIChkRememberVersioned>
-      <label>Remember my choice for all others versioned documents</label>
+      <label>Remember my choice for all other versioned documents</label>
     </UIChkRememberVersioned>
   </UIDocumentAutoVersionForm>
   <DocumentAuto>
     <message>A new version of the document {0} has been created successfully.</message>
-    <messageMultiFile>New version(s) of versioned document(s) has been created.</messageMultiFile>
+    <messageMultiFile>A new version of the document has been created.</messageMultiFile>
   </DocumentAuto>
   <!--
   ###################################################################################

@@ -165,7 +165,7 @@
       <enableDragAndDrop>Sleep &amp; Drop inschakelen:</enableDragAndDrop>
       <sortBy>Sorteer op</sortBy>
       <order>Volgorde</order>
-      <nodesPerPage>Items per Page:</nodesPerPage>
+      <nodesPerPage>Items per pagina:</nodesPerPage>
     </label>
     <action>
       <Back>#{word.close}</Back>
@@ -255,7 +255,7 @@
       <UISEOForm>Beheren van SEO</UISEOForm>
       <UISEOToolbarForm>Beheren van SEO</UISEOToolbarForm>
       <UIReadOnlyFileConfirmMessage>Open Document</UIReadOnlyFileConfirmMessage>
-      <UIDocumentAutoVersionForm>Copy Document</UIDocumentAutoVersionForm>
+      <UIDocumentAutoVersionForm>Kopieer document</UIDocumentAutoVersionForm>
     </title>
     <header>
       <workspace>Werkruimte</workspace>
@@ -309,8 +309,8 @@
       <ViewMetadatas>Toon Metadatas</ViewMetadatas>
       <ViewRelations>Relaties tonen/verbergen</ViewRelations>
       <ShowJCRStructure>Als JCR Structure Add/Edit</ShowJCRStructure>
-      <EditProperty>Edit Document Properties</EditProperty>
-      <UploadNewVersion>Upload a new version</UploadNewVersion>
+      <EditProperty>Documenteigenschappen bewerken</EditProperty>
+      <UploadNewVersion>Een nieuwe versie uploaden</UploadNewVersion>
     </tooltip>
     <msg>
       <cannot-action-in-rootnode>U kan geen acties uitvoeren in root node</cannot-action-in-rootnode>
@@ -599,9 +599,9 @@
       <WebDavView>Download and allow edition</WebDavView>
       <Download>Downloaden</Download>
       <OpenDocument>Extern bewerken</OpenDocument>
-      <EditProperty>Edit Document Properties</EditProperty>
-      <UploadNewVersion>Upload a new version</UploadNewVersion>
-      <CreateNewVersion>Create a new version</CreateNewVersion>
+      <EditProperty>Documenteigenschappen bewerken</EditProperty>
+      <UploadNewVersion>Een nieuwe versie uploaden</UploadNewVersion>
+      <CreateNewVersion>Nieuwe versie aanmaken</CreateNewVersion>
     </event>
   </ECMContextMenu>
  
@@ -991,7 +991,7 @@
       <score>Score</score>
     </header>
     <title>
-      <typeASC>Sort by document type in ascending order</typeASC>
+      <typeASC>Sort by document type in ascending</typeASC>
       <typeDESC>Sort by document type in descending</typeDESC>
       <scoreASC>Sort by score in ascending</scoreASC>
       <scoreDESC>Sort by score in descending</scoreDESC>
@@ -1946,7 +1946,7 @@
   -->
    <ECMPhoneFormatValidator>
      <msg>
-       <Invalid>The field '{0}' contains invalid an Phone number. Please enter another value.</Invalid>
+       <Invalid>Het veld '{0}' bevat een ongeldig telefoonnummer. Geef een andere waarde.</Invalid>
      </msg>
   </ECMPhoneFormatValidator>
   <ECMNameValidator>
@@ -2437,8 +2437,8 @@
       <Keepfile>Houden beide bestanden</Keepfile>
 <ReadOnly>Open alleen-lezen</ReadOnly>
 <Cancel>Annuleren</Cancel>
-      <KeepBoth>Keep Both</KeepBoth>
-      <CreateNewVersion>Create a new version</CreateNewVersion>
+      <KeepBoth>Beide bewaren</KeepBoth>
+      <CreateNewVersion>Nieuwe versie aanmaken</CreateNewVersion>
     </label>
   </UIConfirmMessage>
 
@@ -3171,7 +3171,7 @@
     <Keep>Houd zowel</Keep>
     <Replace>Vervangen</Replace>
     <Canceled>Geannuleerd</Canceled>
-      <UploadNewVersion>Upload new version</UploadNewVersion>
+      <UploadNewVersion>Een nieuwe versie uploaden</UploadNewVersion>
     <Cancel>#{word.cancel}</Cancel>
     <AbortAllConfirmation>Wilt u alle bestanden die bezig zijn nu afbreken?</AbortAllConfirmation>
   </label>
@@ -3201,17 +3201,17 @@
     </msg>
   </UIPropertyForm>
   <UIDocumentAutoVersionForm>
-    <msg>A document {0} already exists. What do you want to do?</msg>
+    <msg>Er bestaat al een document {0}. Wat wilt u doen?</msg>
     <UIChkRememberNonVersioned>
-      <label>Remember my choice for all others non-versioned documents</label>
+      <label>Onthoud mijn keuze voor alle anderen documenten zonder versienummer</label>
     </UIChkRememberNonVersioned>
     <UIChkRememberVersioned>
-      <label>Remember my choice for all other versioned documents</label>
+      <label>Onthoud mijn keuze voor alle andere documenten versies</label>
     </UIChkRememberVersioned>
   </UIDocumentAutoVersionForm>
   <DocumentAuto>
-    <message>A new version of the document {0} has been created successfully.</message>
-    <messageMultiFile>A new version of the document has been created.</messageMultiFile>
+    <message>Een nieuwe versie van het document {0} is succesvol aangemaakt.</message>
+    <messageMultiFile>Een nieuwe versie van het document is gemaakt.</messageMultiFile>
   </DocumentAuto>
   <!--
   ###################################################################################
