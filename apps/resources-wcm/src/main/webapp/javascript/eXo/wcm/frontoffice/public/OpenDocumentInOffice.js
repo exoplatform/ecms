@@ -104,6 +104,7 @@
           if(eXo.ecm.ECMWebDav !== undefined) {
             //showButton
             //console.log("ITHIT detected!");
+            gj(openDocument).removeClass("hidden");
             gj(openDocument).closest("li").show();
             if (data.isLocked) return;//can not edit, just show popup(do not change href)
           }else{
