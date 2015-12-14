@@ -50,7 +50,7 @@ import org.exoplatform.webui.exception.MessageException;
 import org.exoplatform.webui.form.UIForm;
 import org.exoplatform.webui.form.UIFormStringInput;
 import org.exoplatform.webui.form.validator.EmailAddressValidator;
-
+import org.exoplatform.commons.utils.StringCommonUtils;
 /**
  * Created by The eXo Platform SARL
  * Author : Tran The Trong
@@ -170,6 +170,7 @@ public class UICommentForm extends UIForm implements UIPopupComponent {
       UICommentForm uiForm = event.getSource() ;
       UIJCRExplorer uiExplorer = uiForm.getAncestorOfType(UIJCRExplorer.class);
       String comment = uiForm.getChild(UIFormRichtextInput.class).getValue() ;
+      comment = StringCommonUtils.encodeScriptMarkup(comment);
       CommentsService commentsService = uiForm.getApplicationComponent(CommentsService.class) ;
       if(comment == null || comment.trim().length() == 0) {
         throw new MessageException(new ApplicationMessage("UICommentForm.msg.content-null", null, ApplicationMessage.WARNING)) ;
