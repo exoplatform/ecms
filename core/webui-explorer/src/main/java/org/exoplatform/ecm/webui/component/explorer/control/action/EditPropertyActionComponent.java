@@ -29,9 +29,11 @@ import org.exoplatform.ecm.webui.component.explorer.control.filter.IsNotLockedFi
 import org.exoplatform.ecm.webui.component.explorer.control.listener.UIActionBarActionListener;
 import org.exoplatform.ecm.webui.utils.JCRExceptionManager;
 import org.exoplatform.web.application.ApplicationMessage;
+import org.exoplatform.webui.application.WebuiRequestContext;
 import org.exoplatform.webui.config.annotation.ComponentConfig;
 import org.exoplatform.webui.config.annotation.EventConfig;
 import org.exoplatform.webui.core.UIApplication;
+import org.exoplatform.webui.core.UIComponent;
 import org.exoplatform.webui.event.Event;
 import org.exoplatform.webui.ext.filter.UIExtensionFilter;
 import org.exoplatform.webui.ext.filter.UIExtensionFilters;
@@ -41,7 +43,9 @@ import org.exoplatform.webui.ext.manager.UIAbstractManagerComponent;
 import javax.jcr.AccessDeniedException;
 import javax.jcr.Node;
 import javax.jcr.PathNotFoundException;
+import javax.jcr.RepositoryException;
 import javax.jcr.Session;
+import javax.jcr.ValueFormatException;
 import java.util.Arrays;
 import java.util.List;
 import java.util.regex.Matcher;
@@ -109,8 +113,18 @@ public class EditPropertyActionComponent extends UIAbstractManagerComponent {
       if (selectedNode == null)  selectedNode = uiExplorer.getCurrentNode();
       uiExplorer.setSelectNode(selectedNode.getPath());
       UIApplication uiApp = uicomp.getAncestorOfType(UIApplication.class);
-      EditDocumentActionComponent.editDocument(event, null, uicomp, uiExplorer, selectedNode, uiApp);
+      editDocument(event, null, uicomp, uiExplorer, selectedNode, uiApp);
     }
+  }
+
+  @SuppressWarnings("unchecked")
+  public static void editDocument(Event <? extends UIComponent> event,
+                                  WebuiRequestContext context,
+                                  UIComponent comp,
+                                  UIJCRExplorer uiExplorer,
+                                  Node selectedNode,
+                                  UIApplication uiApp) throws Exception{
+    EditDocumentActionComponent.editDocument(event, context, comp, uiExplorer, selectedNode, uiApp);
   }
 
   @Override

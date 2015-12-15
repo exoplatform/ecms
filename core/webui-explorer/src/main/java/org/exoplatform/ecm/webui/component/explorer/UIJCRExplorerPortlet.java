@@ -23,6 +23,7 @@ import org.exoplatform.ecm.webui.component.explorer.control.UIAddressBar;
 import org.exoplatform.ecm.webui.component.explorer.control.UIControl;
 import org.exoplatform.ecm.webui.component.explorer.control.action.AddDocumentActionComponent;
 import org.exoplatform.ecm.webui.component.explorer.control.action.EditDocumentActionComponent;
+import org.exoplatform.ecm.webui.component.explorer.control.action.EditPropertyActionComponent;
 import org.exoplatform.ecm.webui.component.explorer.sidebar.UITreeExplorer;
 import org.exoplatform.ecm.webui.utils.JCRExceptionManager;
 import org.exoplatform.ecm.webui.utils.Utils;
@@ -435,9 +436,12 @@ public class UIJCRExplorerPortlet extends UIPortletApplication {
     Boolean isEdit = Boolean.valueOf(Util.getPortalRequestContext().getRequestParameter("edit"));
     Node selectedNode = uiExplorer.getCurrentNode();
     if (isEdit) {
-      if (uiExplorer.getCurrentPath().equals(path) &&
-          canManageNode(selectedNode, uiApp, uiExplorer, uiActionbar, context, EditDocumentActionComponent.getFilters())) {
-        EditDocumentActionComponent.editDocument(null, context, this, uiExplorer, selectedNode, uiApp);
+      if (uiExplorer.getCurrentPath().equals(path)) {
+        if(canManageNode(selectedNode, uiApp, uiExplorer, uiActionbar, context, EditDocumentActionComponent.getFilters())) {
+          EditDocumentActionComponent.editDocument(null, context, this, uiExplorer, selectedNode, uiApp);
+        }else if(canManageNode(selectedNode, uiApp, uiExplorer, uiActionbar, context, EditPropertyActionComponent.getFilters())) {
+          EditPropertyActionComponent.editDocument(null, context, this, uiExplorer, selectedNode, uiApp);
+        }
       } else {
         uiApp.addMessage(new ApplicationMessage("UIJCRExplorerPortlet.msg.file-access-denied", null, ApplicationMessage.WARNING));
         
