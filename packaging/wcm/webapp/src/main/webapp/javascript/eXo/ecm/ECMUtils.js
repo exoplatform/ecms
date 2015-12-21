@@ -456,6 +456,12 @@
       var contextMenu = document.getElementById('ECMContextMenu');
       gj(contextMenu).find("i.uiIconEcmsCopyUrlToClipboard").each(function() {
         var parent = gj(this).closest('a');
+        var isFlash = navigator.plugins["Shockwave Flash"];
+        if(isFlash === undefined) {
+          // ECMS-7362. Hide Copy URL to clipboard button when browser is not installed the adobe flash player
+          gj(parent).closest('.RightClickCustomItem').hide();
+          return;
+        }
         var clip = new ZeroClipboard.Client();
         clip.glue(gj(parent).attr('id'));
         clip.setText(gj(parent).attr('path'));
