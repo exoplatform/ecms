@@ -81,16 +81,16 @@ public class NodeTypeTemplateUpgradePlugin extends UpgradeProductPlugin {
     try {
       modifiedTemplateLog = Utils.getAllEditedConfiguredData(TemplateServiceImpl.class.getSimpleName(),
                                                                          EDITED_CONFIGURED_NODE_TYPES,true);
-    } catch (Exception e2) {
-      if (log.isInfoEnabled()) {
-        log.info("Can not get All Edited Template log");
+    } catch (Exception e1) {
+      if (log.isErrorEnabled()) {
+        log.error("Can not get All Edited Template log",e1);
       }
     }
     try {
       previousPlfVersion = productInformations_.getPreviousVersion();
-    } catch (MissingProductInformationException e1) {
-      if (log.isInfoEnabled()) {
-        log.info("Can not get PLF previous version, set it to '0'");
+    } catch (MissingProductInformationException e2) {
+      if (log.isErrorEnabled()) {
+        log.error("Can not get PLF previous version, set it to '0'",e2);
       }
     }
     
@@ -142,7 +142,7 @@ public class NodeTypeTemplateUpgradePlugin extends UpgradeProductPlugin {
           removeTemplateFromEditLog(removedTemplateName);
           
         } catch (Exception e) {
-          if (log.isInfoEnabled()) {
+          if (log.isErrorEnabled()) {
             log.error("Error in " + this.getName() + ": Can not remove old template: " + removedNode.getPath(),e);
           }
         }
@@ -173,8 +173,8 @@ public class NodeTypeTemplateUpgradePlugin extends UpgradeProductPlugin {
                                        EDITED_CONFIGURED_NODE_TYPES,
                                        true);
     } catch (Exception e) {
-      if (log.isWarnEnabled()) {
-        log.warn("Can not remove edited log of template {}", templateName);
+      if (log.isErrorEnabled()) {
+        log.error("Can not remove edited log of template {}", templateName);
       }
     }
   }
