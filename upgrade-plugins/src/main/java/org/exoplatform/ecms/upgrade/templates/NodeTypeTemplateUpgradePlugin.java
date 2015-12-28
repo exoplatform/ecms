@@ -23,6 +23,7 @@ import java.util.Set;
 
 import javax.jcr.Node;
 import javax.jcr.NodeIterator;
+import javax.jcr.RepositoryException;
 import javax.jcr.Workspace;
 
 import org.apache.commons.lang.StringUtils;
@@ -128,12 +129,12 @@ public class NodeTypeTemplateUpgradePlugin extends UpgradeProductPlugin {
             removedNode.remove();
           }else{
             //else if Template was edited before, rename it
-            StringBuffer newPath = new StringBuffer(removedNode.getPath()).append("_").append(previousPlfVersion);
             if (log.isWarnEnabled()) {
-              log.warn("old template {} will be renamed to {}, and new template will be imported",
-                       new Object[]{removedTemplateName, newPath});
+              log.warn("Views, Dialogs, Skins of old template {} will be renamed, and new ones will be imported",
+                       new Object[]{removedTemplateName});
             }
-            workspace.move(removedNode.getPath(), newPath.toString());
+            
+            renameTemplate(removedNode, previousPlfVersion, workspace);
           }
 
           templateHomeNode.save();
@@ -177,6 +178,60 @@ public class NodeTypeTemplateUpgradePlugin extends UpgradeProductPlugin {
         log.error("Can not remove edited log of template {}", templateName);
       }
     }
+  }
+  
+  private void renameTemplate(Node templateNode, String plfVersion, Workspace workspace){
+    //rename all old dialogs
+    try {
+      if(templateNode.hasNode(TemplateService.DIALOGS)){
+        Node dialogs = templateNode.getNode(TemplateService.DIALOGS);
+        NodeIterator iter = dialogs.getNodes();
+        while (iter.hasNext()) {
+          Node dialogNode = iter.nextNode();
+          StringBuffer path =  new StringBuffer(dialogNode.getPath());
+          workspace.move(path.toString(), path.append("_").append(plfVersion).toString());
+        }
+      }
+    } catch (Exception e) {
+      if (log.isErrorEnabled()) {
+        log.error("Exceptions happen while renaming dialogs", e);
+      }
+    }
+    
+    //rename all old views
+    try {
+      if(templateNode.hasNode(TemplateService.VIEWS)){
+        Node views = templateNode.getNode(TemplateService.VIEWS);
+        NodeIterator iter = views.getNodes();
+        while (iter.hasNext()) {
+          Node viewNode = iter.nextNode();
+          StringBuffer path =  new StringBuffer(viewNode.getPath());
+          workspace.move(path.toString(), path.append("_").append(plfVersion).toString());
+        }
+      }
+    } catch (Exception e) {
+      if (log.isErrorEnabled()) {
+        log.error("Exceptions happen while renaming views", e);
+      }
+    }
+    
+    //rename all old skins
+    try {
+      if(templateNode.hasNode(TemplateService.SKINS)){
+        Node skins = templateNode.getNode(TemplateService.SKINS);
+        NodeIterator iter = skins.getNodes();
+        while (iter.hasNext()) {
+          Node skinNode = iter.nextNode();
+          StringBuffer path =  new StringBuffer(skinNode.getPath());
+          workspace.move(path.toString(), path.append("_").append(plfVersion).toString());
+        }
+      }
+    } catch (Exception e) {
+      if (log.isErrorEnabled()) {
+        log.error("Exceptions happen while renaming skins", e);
+      }
+    }
+    
   }
  
 }
