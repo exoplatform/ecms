@@ -23,7 +23,6 @@ import java.util.Set;
 
 import javax.jcr.Node;
 import javax.jcr.NodeIterator;
-import javax.jcr.RepositoryException;
 import javax.jcr.Workspace;
 
 import org.apache.commons.lang.StringUtils;
@@ -61,6 +60,7 @@ public class NodeTypeTemplateUpgradePlugin extends UpgradeProductPlugin {
   private static final Log log = ExoLogger.getLogger(NodeTypeTemplateUpgradePlugin.class.getName());
   private static final String PRODUCT_VERSION_ZERO = "0";
   private static final String EDITED_CONFIGURED_NODE_TYPES = "EditedConfiguredNodeTypes";
+  private static final String UNCHANG_NODE_TYPES_CONFIG = "exo.ecms.upgrades.unchanged-nodetype-templates";
   
   private TemplateService templateService_;
   private ProductInformations productInformations_;
@@ -76,7 +76,7 @@ public class NodeTypeTemplateUpgradePlugin extends UpgradeProductPlugin {
     if (log.isInfoEnabled()) {
       log.info("Start " + this.getClass().getName() + ".............");
     }
-    String unchangedNodeTypes = PrivilegedSystemHelper.getProperty("unchanged-nodetype-templates");
+    String unchangedNodeTypes = PrivilegedSystemHelper.getProperty(UNCHANG_NODE_TYPES_CONFIG);
     String previousPlfVersion = PRODUCT_VERSION_ZERO;
     Set<String> modifiedTemplateLog = new HashSet<String>();
     try {
@@ -91,7 +91,7 @@ public class NodeTypeTemplateUpgradePlugin extends UpgradeProductPlugin {
       previousPlfVersion = productInformations_.getPreviousVersion();
     } catch (MissingProductInformationException e2) {
       if (log.isErrorEnabled()) {
-        log.error("Can not get PLF previous version, set it to '0'",e2);
+        log.error("Can not get PLF previous version, set it to '0'", e2);
       }
     }
     
@@ -124,14 +124,19 @@ public class NodeTypeTemplateUpgradePlugin extends UpgradeProductPlugin {
           //if Template had not been edited before, remove it
           if(!modifiedTemplateLog.contains(removedTemplateName)){
             if (log.isInfoEnabled()) {
-              log.info("old template {} will be removed, and new template will be imported", removedTemplateName);
+              log.info("Update templates of node type {} with a new version", removedTemplateName);
             }
             removedNode.remove();
           }else{
             //else if Template was edited before, rename it
             if (log.isWarnEnabled()) {
-              log.warn("Views, Dialogs, Skins of old template {} will be renamed, and new ones will be imported",
-                       new Object[]{removedTemplateName});
+              StringBuffer logContent = new StringBuffer();
+              logContent.append("Templates of {} have been customized. ");
+              logContent.append("They will be updated by the new version included in eXo Platform ").append(productInformations_.getVersion());
+              logContent.append(" but your customized templates will be kept and renamed. ");
+              logContent.append("If you want to re-apply your customizations to the new templates versions, ");
+              logContent.append("you can retrieve them in the Content Administration.");
+              log.warn(logContent.toString(),new Object[]{removedTemplateName});
             }
             
             renameTemplate(removedNode, previousPlfVersion, workspace);
@@ -181,57 +186,27 @@ public class NodeTypeTemplateUpgradePlugin extends UpgradeProductPlugin {
   }
   
   private void renameTemplate(Node templateNode, String plfVersion, Workspace workspace){
-    //rename all old dialogs
-    try {
-      if(templateNode.hasNode(TemplateService.DIALOGS)){
-        Node dialogs = templateNode.getNode(TemplateService.DIALOGS);
-        NodeIterator iter = dialogs.getNodes();
-        while (iter.hasNext()) {
-          Node dialogNode = iter.nextNode();
-          StringBuffer path =  new StringBuffer(dialogNode.getPath());
-          workspace.move(path.toString(), path.append("_").append(plfVersion).toString());
+    String[] childNodesName = new String[]{TemplateService.DIALOGS, TemplateService.VIEWS, TemplateService.SKINS};
+    for (String nodeName : childNodesName) {
+      try {
+        if(templateNode.hasNode(nodeName)){
+          Node childNode = templateNode.getNode(nodeName);
+          if (log.isInfoEnabled()) {
+            log.info("Process rename children of {}", nodeName);
+          }
+          NodeIterator iter = childNode.getNodes();
+          while (iter.hasNext()) {
+            Node node = iter.nextNode();
+            StringBuffer path =  new StringBuffer(node.getPath());
+            workspace.move(path.toString(), path.append("_").append(plfVersion).toString());
+          }
+        }
+      } catch (Exception e) {
+        if (log.isErrorEnabled()) {
+          log.error("Exceptions happen while renaming children of {}", nodeName, e);
         }
       }
-    } catch (Exception e) {
-      if (log.isErrorEnabled()) {
-        log.error("Exceptions happen while renaming dialogs", e);
-      }
     }
-    
-    //rename all old views
-    try {
-      if(templateNode.hasNode(TemplateService.VIEWS)){
-        Node views = templateNode.getNode(TemplateService.VIEWS);
-        NodeIterator iter = views.getNodes();
-        while (iter.hasNext()) {
-          Node viewNode = iter.nextNode();
-          StringBuffer path =  new StringBuffer(viewNode.getPath());
-          workspace.move(path.toString(), path.append("_").append(plfVersion).toString());
-        }
-      }
-    } catch (Exception e) {
-      if (log.isErrorEnabled()) {
-        log.error("Exceptions happen while renaming views", e);
-      }
-    }
-    
-    //rename all old skins
-    try {
-      if(templateNode.hasNode(TemplateService.SKINS)){
-        Node skins = templateNode.getNode(TemplateService.SKINS);
-        NodeIterator iter = skins.getNodes();
-        while (iter.hasNext()) {
-          Node skinNode = iter.nextNode();
-          StringBuffer path =  new StringBuffer(skinNode.getPath());
-          workspace.move(path.toString(), path.append("_").append(plfVersion).toString());
-        }
-      }
-    } catch (Exception e) {
-      if (log.isErrorEnabled()) {
-        log.error("Exceptions happen while renaming skins", e);
-      }
-    }
-    
   }
  
 }
