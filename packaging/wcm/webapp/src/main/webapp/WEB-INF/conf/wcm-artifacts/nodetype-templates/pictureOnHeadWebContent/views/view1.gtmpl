@@ -69,7 +69,7 @@
 	
 	if (isShowCategories || isShowTags) {
 		%>
-			<div class="webContentContainer">
+			<div class="webContentContainer content-display">
 				<div class="webContentInformation">
 					<% 
 						if(isShowCategories) {
