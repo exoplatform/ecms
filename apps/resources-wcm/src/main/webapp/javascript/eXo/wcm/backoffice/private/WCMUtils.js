@@ -304,7 +304,7 @@
 	    frameBorder = 0 ;
 	    scrolling = "auto" ;
 	  }
-	  var strValue = txtArea.value ;
+	  var strValue = "<div class='content-display'>" + txtArea.value + "</div>" ;
 	  txtArea.parentNode.replaceChild(ifrm, txtArea) ;
 	  try {
 	    var doc = ifrm.contentWindow.document ;
