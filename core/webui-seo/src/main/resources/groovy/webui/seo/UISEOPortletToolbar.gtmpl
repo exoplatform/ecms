@@ -19,7 +19,7 @@
 	if(fullStatus.equals("Disabled")) style = "Disable";
 	def rcontext = _ctx.getRequestContext();
 	def jsManager = rcontext.getJavascriptManager();
-	jsManager.require("SHARED/bts_tab").require("SHARED/uiForm");
+	jsManager.require("SHARED/uiForm");
 	
 %>
 <% uiform.begin() %>
