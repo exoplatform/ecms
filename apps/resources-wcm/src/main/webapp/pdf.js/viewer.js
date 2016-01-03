@@ -2106,7 +2106,7 @@ var PDFView = {
     this.pdfDocument = null;
     var self = this;
     self.loading = true;
-    document.getElementById("downloadingIcon").classList.remove('hidden');
+    document.getElementById("downloadInProgress").classList.remove('hidden');
 
     var passwordNeeded = function passwordNeeded(updatePassword, reason) {
       var promptString = mozL10n.get('request_password', null,
@@ -2133,7 +2133,8 @@ var PDFView = {
       function getDocumentCallback(pdfDocument) {
         self.load(pdfDocument, scale);
         self.loading = false;
-        document.getElementById("downloadingIcon").classList.add('hidden');
+        document.getElementById("downloadInProgress").classList.add(
+          'hidden');
       },
       function getDocumentError(message, exception) {
         var loadingErrorMessage = mozL10n.get('loading_error', null,
