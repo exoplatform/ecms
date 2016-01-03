@@ -1152,7 +1152,7 @@ canvas {
   top: 0;
   right: 0;
   bottom: 0;
-  background: url('images/loading-icon.gif') center no-repeat;
+  background: url('/eXoWCMResources/pdf.js/images/loading-icon.gif') center no-repeat;
 }
 
 .downloadingIcon {
@@ -1162,7 +1162,7 @@ canvas {
     margin:-12px 0 0 -12px;
   left: 50%;
   top: 50%;
-  background: url('images/loading-icon.gif') center no-repeat;
+  background: url('/eXoWCMResources/pdf.js/images/loading-icon.gif') center no-repeat;
 }
 .downloadingLabel {
   margin-top: 10%;
