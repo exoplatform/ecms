@@ -462,7 +462,10 @@ if(uicomponent.isNotModernBrowser()) {
 
 
             <div id="viewerContainer" tabindex="0">
-            <div id="downloadingIcon" class="downloadingIcon"></div>
+            <div id="downloadInProgress" style="text-align:center !important;">
+            <div class="downloadingIcon"></div><BR/>
+            <h3 class="downloadingLabel"><%=uicomponent.getResourceBundle("PDFViewer.label.downloading")%></h3>
+            </div>
                 <div id="viewer" class="pdfViewer"></div>
             </div>
 
