@@ -1156,7 +1156,7 @@ canvas {
 }
 
 .downloadingIcon {
-  position: absolute;
+  position: relative;
   width:24px;
      height:24px;
     margin:-12px 0 0 -12px;
