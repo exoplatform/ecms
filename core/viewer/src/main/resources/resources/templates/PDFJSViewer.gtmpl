@@ -349,27 +349,27 @@ if(uicomponent.isNotModernBrowser()) {
                     <!--</li>-->
                     <li>
                         <a id="secondaryPrint" tabindex="20" data-l10n-id="print">
-                            <i class="uiIconPrint uiIconLightGray"></i> <%=uicomponent.getResourceBundle("PDFViewer.print_label")%>
+                            <i class="uiIconPrint uiIconLightGray"></i> <%=uicomponent.getResourceBundle("PDFViewer.label.print")%>
                         </a>
                     </li>
                     <li>
                         <a id="firstPage" tabindex="22" data-l10n-id="first_page">
-                            <i class="uiIconUpToFirst uiIconLightGray"></i>  <%=uicomponent.getResourceBundle("PDFViewer.first_page.label")%>
+                            <i class="uiIconUpToFirst uiIconLightGray"></i>  <%=uicomponent.getResourceBundle("PDFViewer.label.firstPage")%>
                         </a>
                     </li>
                     <li>
                         <a id="lastPage" tabindex="23" data-l10n-id="last_page">
-                            <i class="uiIconDownToBottom uiIconLightGray"></i> <%=uicomponent.getResourceBundle("PDFViewer.last_page.label")%>
+                            <i class="uiIconDownToBottom uiIconLightGray"></i> <%=uicomponent.getResourceBundle("PDFViewer.label.lastPage")%>
                         </a>
                     </li>
                     <li>
                         <a id="pageRotateCw" tabindex="24" data-l10n-id="page_rotate_cw">
-                            <i class="uiIconRotateRight uiIconLightGray"></i> <%=uicomponent.getResourceBundle("PDFViewer.page_rotate_cw.label")%>
+                            <i class="uiIconRotateRight uiIconLightGray"></i> <%=uicomponent.getResourceBundle("PDFViewer.label.rotateRight")%>
                         </a>
                     </li>
                     <li>
                         <a id="pageRotateCcw" tabindex="25" data-l10n-id="page_rotate_ccw">
-                            <i class="uiIconRotateLeft uiIconLightGray"></i> <%=uicomponent.getResourceBundle("PDFViewer.page_rotate_ccw.label")%> 
+                            <i class="uiIconRotateLeft uiIconLightGray"></i> <%=uicomponent.getResourceBundle("PDFViewer.label.rotateLeft")%>
                         </a>
                     </li>
                 </ul>
