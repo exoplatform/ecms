@@ -449,14 +449,17 @@ if(uicomponent.isNotModernBrowser()) {
                             </div>
                         </div>
                     </div>
+                    <div id="downloadingIcon" class="downloadingIcon">
+
+                    </div>
                 </div>
             </div>
 
             <menu type="context" id="viewerContextMenu">
-                <menuitem id="contextFirstPage" label="First Page" data-l10n-id="first_page"></menuitem>
-                <menuitem id="contextLastPage" label="Last Page" data-l10n-id="last_page"></menuitem>
-                <menuitem id="contextPageRotateCw" label="Rotate Clockwise" data-l10n-id="page_rotate_cw"></menuitem>
-                <menuitem id="contextPageRotateCcw" label="Rotate Counter-Clockwise" data-l10n-id="page_rotate_ccw"></menuitem>
+                <menuitem id="contextFirstPage" label="<%=uicomponent.getResourceBundle("PDFViewer.label.firstPage")%>" data-l10n-id="first_page"></menuitem>
+                <menuitem id="contextLastPage" label="<%=uicomponent.getResourceBundle("PDFViewer.label.lastPage")%>" data-l10n-id="last_page"></menuitem>
+                <menuitem id="contextPageRotateCw" label="<%=uicomponent.getResourceBundle("PDFViewer.label.rotateRight")%>" data-l10n-id="page_rotate_cw"></menuitem>
+                <menuitem id="contextPageRotateCcw" label="<%=uicomponent.getResourceBundle("PDFViewer.label.rotateLeft")%>" data-l10n-id="page_rotate_ccw"></menuitem>
             </menu>
 
 

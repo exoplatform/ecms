@@ -1155,6 +1155,16 @@ canvas {
   background: url('images/loading-icon.gif') center no-repeat;
 }
 
+.downloadingIcon {
+  position: absolute;
+  width:24px;
+     height:24px;
+    margin:-12px 0 0 -12px;
+  left: 50%;
+  top: 50%;
+  background: url('images/loading-icon.gif') center no-repeat;
+}
+
 .textLayer {
   position: absolute;
   left: 0;

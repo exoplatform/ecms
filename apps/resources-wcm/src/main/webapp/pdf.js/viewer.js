@@ -2106,6 +2106,8 @@ var PDFView = {
     this.pdfDocument = null;
     var self = this;
     self.loading = true;
+    document.getElementById("downloadingIcon").classList.remove('hidden');
+
     var passwordNeeded = function passwordNeeded(updatePassword, reason) {
       var promptString = mozL10n.get('request_password', null,
         'PDF is protected by a password:');
@@ -2125,11 +2127,13 @@ var PDFView = {
       self.progress(progressData.loaded / progressData.total);
     }
 
+
     PDFJS.getDocument(parameters, pdfDataRangeTransport, passwordNeeded,
       getDocumentProgress).then(
       function getDocumentCallback(pdfDocument) {
         self.load(pdfDocument, scale);
         self.loading = false;
+        document.getElementById("downloadingIcon").classList.add('hidden');
       },
       function getDocumentError(message, exception) {
         var loadingErrorMessage = mozL10n.get('loading_error', null,
@@ -3244,63 +3248,148 @@ var PageView = function pageView(container, id, scale,
       link.className = 'internalLink';
     }
 
+    // pdfPage.getAnnotations().then(function(annotationsData) {
+    //   if (self.annotationLayer) {
+    //     // If an annotationLayer already exists, delete it to avoid creating
+    //     // duplicate annotations when rapidly re-zooming the document.
+    //     pageDiv.removeChild(self.annotationLayer);
+    //     self.annotationLayer = null;
+    //   }
+    //   viewport = viewport.clone({
+    //     dontFlip: true
+    //   });
+    //   for (var i = 0; i < annotationsData.length; i++) {
+    //     var data = annotationsData[i];
+    //     var annotation = PDFJS.Annotation.fromData(data);
+    //     if (!annotation || !annotation.hasHtml()) {
+    //       continue;
+    //     }
+    //
+    //     var element = annotation.getHtmlElement(pdfPage.commonObjs);
+    //     mozL10n.translate(element);
+    //
+    //     data = annotation.getData();
+    //     var rect = data.rect;
+    //     var view = pdfPage.view;
+    //     rect = PDFJS.Util.normalizeRect([
+    //       rect[0],
+    //       view[3] - rect[1] + view[1],
+    //       rect[2],
+    //       view[3] - rect[3] + view[1]
+    //     ]);
+    //     element.style.left = rect[0] + 'px';
+    //     element.style.top = rect[1] + 'px';
+    //     element.style.position = 'absolute';
+    //
+    //     var transform = viewport.transform;
+    //     var transformStr = 'matrix(' + transform.join(',') + ')';
+    //     CustomStyle.setProp('transform', element, transformStr);
+    //     var transformOriginStr = -rect[0] + 'px ' + -rect[1] + 'px';
+    //     CustomStyle.setProp('transformOrigin', element,
+    //       transformOriginStr);
+    //
+    //     if (data.subtype === 'Link' && !data.url) {
+    //       if (data.action) {
+    //         bindNamedAction(element, data.action);
+    //       } else {
+    //         bindLink(element, ('dest' in data) ? data.dest : null);
+    //       }
+    //     }
+    //
+    //     if (!self.annotationLayer) {
+    //       var annotationLayerDiv = document.createElement('div');
+    //       annotationLayerDiv.className = 'annotationLayer';
+    //       pageDiv.appendChild(annotationLayerDiv);
+    //       self.annotationLayer = annotationLayerDiv;
+    //     }
+    //     self.annotationLayer.appendChild(element);
+    //   }
+    // });
+
+
     pdfPage.getAnnotations().then(function(annotationsData) {
-      if (self.annotationLayer) {
-        // If an annotationLayer already exists, delete it to avoid creating
-        // duplicate annotations when rapidly re-zooming the document.
-        pageDiv.removeChild(self.annotationLayer);
-        self.annotationLayer = null;
-      }
       viewport = viewport.clone({
         dontFlip: true
       });
-      for (var i = 0; i < annotationsData.length; i++) {
-        var data = annotationsData[i];
-        var annotation = PDFJS.Annotation.fromData(data);
-        if (!annotation || !annotation.hasHtml()) {
-          continue;
-        }
+      var transform = viewport.transform;
+      var transformStr = 'matrix(' + transform.join(',') + ')';
+      var data, element, i, ii;
 
-        var element = annotation.getHtmlElement(pdfPage.commonObjs);
-        mozL10n.translate(element);
-
-        data = annotation.getData();
-        var rect = data.rect;
-        var view = pdfPage.view;
-        rect = PDFJS.Util.normalizeRect([
-          rect[0],
-          view[3] - rect[1] + view[1],
-          rect[2],
-          view[3] - rect[3] + view[1]
-        ]);
-        element.style.left = rect[0] + 'px';
-        element.style.top = rect[1] + 'px';
-        element.style.position = 'absolute';
-
-        var transform = viewport.transform;
-        var transformStr = 'matrix(' + transform.join(',') + ')';
-        CustomStyle.setProp('transform', element, transformStr);
-        var transformOriginStr = -rect[0] + 'px ' + -rect[1] + 'px';
-        CustomStyle.setProp('transformOrigin', element,
-          transformOriginStr);
-
-        if (data.subtype === 'Link' && !data.url) {
-          if (data.action) {
-            bindNamedAction(element, data.action);
-          } else {
-            bindLink(element, ('dest' in data) ? data.dest : null);
+      if (self.div) {
+        // If an annotationLayer already exists, refresh its children's
+        // transformation matrices
+        for (i = 0, ii = annotationsData.length; i < ii; i++) {
+          data = annotationsData[i];
+          element = self.div.querySelector(
+            '[data-annotation-id="' + data.id + '"]');
+          if (element) {
+            CustomStyle.setProp('transform', element,
+              transformStr);
           }
         }
+        // See PDFPageView.reset()
+        self.div.removeAttribute('hidden');
+      } else {
+        for (i = 0, ii = annotationsData.length; i < ii; i++) {
+          data = annotationsData[i];
+          if (!data || !data.hasHtml) {
+            continue;
+          }
 
-        if (!self.annotationLayer) {
-          var annotationLayerDiv = document.createElement('div');
-          annotationLayerDiv.className = 'annotationLayer';
-          pageDiv.appendChild(annotationLayerDiv);
-          self.annotationLayer = annotationLayerDiv;
+          element = PDFJS.AnnotationUtils.getHtmlElement(data,
+            pdfPage.commonObjs);
+          element.setAttribute('data-annotation-id', data.id);
+          if (typeof mozL10n !== 'undefined') {
+            mozL10n.translate(element);
+          }
+
+          var rect = data.rect;
+          var view = pdfPage.view;
+          rect = PDFJS.Util.normalizeRect([
+            rect[0],
+            view[3] - rect[1] + view[1],
+            rect[2],
+            view[3] - rect[3] + view[1]
+          ]);
+          element.style.left = rect[0] + 'px';
+          element.style.top = rect[1] + 'px';
+          element.style.position = 'absolute';
+
+          CustomStyle.setProp('transform', element, transformStr);
+          var transformOriginStr = -rect[0] + 'px ' + -rect[1] +
+            'px';
+          CustomStyle.setProp('transformOrigin', element,
+            transformOriginStr);
+
+          if (data.subtype === 'Link' && !data.url) {
+            var link = element.getElementsByTagName('a')[0];
+            if (link) {
+              if (data.action) {
+                bindNamedAction(link, data.action);
+              } else {
+                bindLink(link, ('dest' in data) ? data.dest :
+                  null);
+              }
+            }
+          }
+
+
+          if (!self.annotationLayer) {
+            var annotationLayerDiv = document.createElement('div');
+            annotationLayerDiv.className = 'annotationLayer';
+            pageDiv.appendChild(annotationLayerDiv);
+            self.annotationLayer = annotationLayerDiv;
+          }
+          self.annotationLayer.appendChild(element);
+
+
+
         }
-        self.annotationLayer.appendChild(element);
       }
     });
+
+
+
   }
 
   this.getPagePoint = function pageViewGetPagePoint(x, y) {
