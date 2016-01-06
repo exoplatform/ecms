@@ -8,7 +8,7 @@
   </parent>
   <artifactId>ecms-core-webui-fcc</artifactId>
   <name>eXo Fast Content Creator webui component</name>
-  <description>>eXo Fast Content Creator webui component</description>
+  <description>&gt;eXo Fast Content Creator webui component</description>
   <dependencies>
     <dependency>
       <groupId>org.exoplatform.ecms</groupId>

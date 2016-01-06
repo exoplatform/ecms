@@ -41,11 +41,11 @@
     <!-- **************************************** -->
     <org.exoplatform.depmgt.version>12-SNAPSHOT</org.exoplatform.depmgt.version>
     <!-- JCR Project Dependencies -->
-    <org.exoplatform.kernel.version>2.5.4-GA</org.exoplatform.kernel.version>
-    <org.exoplatform.core.version>2.6.4-GA</org.exoplatform.core.version>
-    <org.exoplatform.ws.version>2.4.4-GA</org.exoplatform.ws.version>
-    <org.exoplatform.jcr.version>1.16.4-GA</org.exoplatform.jcr.version>
-    <org.exoplatform.jcr-services.version>1.16.4-GA</org.exoplatform.jcr-services.version>
+    <org.exoplatform.kernel.version>2.5.x-SNAPSHOT</org.exoplatform.kernel.version>
+    <org.exoplatform.core.version>2.6.x-SNAPSHOT</org.exoplatform.core.version>
+    <org.exoplatform.ws.version>2.4.x-SNAPSHOT</org.exoplatform.ws.version>
+    <org.exoplatform.jcr.version>1.16.x-SNAPSHOT</org.exoplatform.jcr.version>
+    <org.exoplatform.jcr-services.version>1.16.x-SNAPSHOT</org.exoplatform.jcr-services.version>
     <!-- GateIn Project Dependencies -->
     <org.gatein.wci.version>2.4.1.Final</org.gatein.wci.version>
     <org.gatein.pc.version>2.5.1.Final</org.gatein.pc.version>
@@ -234,7 +234,7 @@
         <groupId>org.exoplatform.ecms</groupId>
         <artifactId>ecms-core-webui-presentation</artifactId>
         <version>${project.version}</version>
-      </dependency>      
+      </dependency>
       <dependency>
         <groupId>org.exoplatform.ecms</groupId>
         <artifactId>ecms-core-webui-seo</artifactId>
@@ -300,7 +300,7 @@
         <groupId>org.exoplatform.ecms</groupId>
         <artifactId>ecms-ext-xcmis-config</artifactId>
         <version>${project.version}</version>
-      </dependency>      
+      </dependency>
       <dependency>
         <groupId>org.exoplatform.ecms</groupId>
         <artifactId>ecms-packaging-wcm-webapp</artifactId>
