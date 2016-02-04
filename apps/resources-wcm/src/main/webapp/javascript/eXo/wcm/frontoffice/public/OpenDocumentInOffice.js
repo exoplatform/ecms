@@ -76,7 +76,8 @@
       url: restPrefix+"/office/updateDocumentTitle?objId=" + encodeURI(objId)+"&lang="+eXo.env.portal.language,
       dataType: "text",
       type: "GET",
-      async:false
+      async:false,
+      cache:false
     })
         .success(function (data) {
           data = gj.parseJSON(data);
