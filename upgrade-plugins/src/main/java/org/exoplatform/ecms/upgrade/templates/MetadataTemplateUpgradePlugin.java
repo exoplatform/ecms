@@ -36,10 +36,10 @@ import org.exoplatform.services.log.Log;
  * 
  * This class will be used to upgrade template to view and edit metadata like dc:elementSet. 
  * Metadata templates for manual upgration 
- * can be specified in file configuration.properties.<br/>
- * Syntax:<br/> 
- * unchanged-metadata-templates=<node name list>
- * For example:<br/>
+ * can be specified in file configuration.properties.<br>
+ * Syntax:<br>
+ * unchanged-metadata-templates={node name list}
+ * For example:<br>
  * unchanged-metadata-templates=metadata:siteMetadata
  *
  */

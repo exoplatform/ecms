@@ -93,10 +93,8 @@ public class UISearchBox extends UIForm {
    * interested in processing a searchAction event implements this interface,
    * and the object created with that class is registered with a component using
    * the component's
-   * <code>addSearchActionListener<code> method. When the searchAction
+   * <code>addSearchActionListener</code> method. When the searchAction
    * event occurs, that object's appropriate method is invoked.
-   *
-   * @see SearchActionEvent
    */
   public static class SearchActionListener extends EventListener<UISearchBox> {
 

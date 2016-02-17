@@ -48,7 +48,8 @@ public class CreatePortalLinkPlugin extends CreatePortalPlugin {
    * @param initParams the init params
    * @param configurationManager the configuration manager
    * @param repositoryService the repository service
-   * @param publicationService the publication service
+   * @param linkManager the linkManager service
+   * @param taxonomyService the taxonomy service
    */
   public CreatePortalLinkPlugin(InitParams initParams,
                               ConfigurationManager configurationManager,

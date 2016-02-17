@@ -110,9 +110,7 @@ public class CmisContentReader extends ContentReaderInterceptor
   }
 
   /**
-   * @see org.xcmis.search.content.interceptors.ContentReaderInterceptor#visitGetUnfilledEntriesCommand(
-   *      org.xcmis.search.content.command.InvocationContext,
-   *      org.xcmis.search.content.command.read.GetUnfilledEntriesCommand)
+   * @see org.xcmis.search.content.interceptors.ContentReaderInterceptor#visitGetUnfiledEntriesCommand(InvocationContext, GetUnfiledEntriesCommand)
    */
   @Override
   public Object visitGetUnfiledEntriesCommand(InvocationContext ctx,

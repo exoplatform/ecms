@@ -37,7 +37,7 @@ public interface WatchDocumentService {
    * <p>If the document is watching, all thing that changes to it's property will be notified
    * to user specified by the userName
    * @param documentNode      Specify the document for watching
-   * @param userName          he username of current user is votting. It can't be <code>null<code>
+   * @param userName          he username of current user is votting. It can't be <code>null</code>
    * @param notifyType        Type of notification. Its can be 0, 1 or 2
    *                          0 : Notification by email
    *                          1 : Notification by rss
@@ -54,7 +54,7 @@ public interface WatchDocumentService {
    * If notification is notified by rss, the value return is 2
    * If notification is notified by rss and email, the value return is 0
    * @param documentNode      Specify the document for watching
-   * @param userName          The username of current user is votting. It can't be <code>null<code>
+   * @param userName          The username of current user is votting. It can't be <code>null</code>
    * @see                     Node
    * @return                  0, 1, 2 or -1
    * @throws Exception
@@ -66,7 +66,7 @@ public interface WatchDocumentService {
    * <p>If the document is unwatching, all thing that changes to it's property will not be notified
    * to user specified by the userName
    * @param documentNode      Specify the document for watching
-   * @param userName          The username of current user is votting. It can't be <code>null<code>
+   * @param userName          The username of current user is votting. It can't be <code>null</code>
    * @param notificationType  Type of notification. Its can be 0, 1 or 2
    *                          0 : Notification by email
    *                          1 : Notification by rss

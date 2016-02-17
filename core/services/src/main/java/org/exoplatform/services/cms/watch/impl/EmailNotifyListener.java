@@ -226,7 +226,6 @@ public class EmailNotifyListener implements EventListener {
   /**
    *
    * @return
-   * @throws Exception
    */
   public List<String> getMemberships() {
     String userId = Util.getPortalRequestContext().getRemoteUser();

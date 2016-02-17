@@ -264,11 +264,9 @@ public class UIFCCActionForm extends UIDialogForm implements UISelectable {
    * The class that is interested in processing a saveAction
    * event implements this interface, and the object created
    * with that class is registered with a component using the
-   * component's <code>addSaveActionListener<code> method. When
+   * component's <code>addSaveActionListener</code> method. When
    * the saveAction event occurs, that object's appropriate
    * method is invoked.
-   *
-   * @see SaveActionEvent
    */
   static public class SaveActionListener extends EventListener<UIFCCActionForm> {
 
@@ -393,11 +391,9 @@ public class UIFCCActionForm extends UIDialogForm implements UISelectable {
    * The class that is interested in processing a closeAction
    * event implements this interface, and the object created
    * with that class is registered with a component using the
-   * component's <code>addCloseActionListener<code> method. When
+   * component's <code>addCloseActionListener</code> method. When
    * the closeAction event occurs, that object's appropriate
    * method is invoked.
-   *
-   * @see CloseActionEvent
    */
   static public class CloseActionListener extends EventListener<UIFCCActionForm> {
 
@@ -415,11 +411,9 @@ public class UIFCCActionForm extends UIDialogForm implements UISelectable {
    * The class that is interested in processing a removeReferenceAction
    * event implements this interface, and the object created
    * with that class is registered with a component using the
-   * component's <code>addRemoveReferenceActionListener<code> method. When
+   * component's <code>addRemoveReferenceActionListener</code> method. When
    * the removeReferenceAction event occurs, that object's appropriate
    * method is invoked.
-   *
-   * @see RemoveReferenceActionEvent
    */
   static public class RemoveReferenceActionListener extends EventListener<UIFCCActionForm> {
 
@@ -441,11 +435,9 @@ public class UIFCCActionForm extends UIDialogForm implements UISelectable {
    * The class that is interested in processing a showComponentAction
    * event implements this interface, and the object created
    * with that class is registered with a component using the
-   * component's <code>addShowComponentActionListener<code> method. When
+   * component's <code>addShowComponentActionListener</code> method. When
    * the showComponentAction event occurs, that object's appropriate
    * method is invoked.
-   *
-   * @see ShowComponentActionEvent
    */
   @SuppressWarnings("unchecked")
   static public class ShowComponentActionListener extends EventListener<UIFCCActionForm> {

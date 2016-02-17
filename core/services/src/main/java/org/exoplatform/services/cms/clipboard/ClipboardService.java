@@ -39,7 +39,6 @@ public interface ClipboardService {
   /**
    * Gets the last clipboard command of user
    * @param userId user to get command
-   * @param isVirtual if the command is virtual
    * @return the ClipboardCommand
    */
   public ClipboardCommand getLastClipboard(String userId);
@@ -63,7 +62,7 @@ public interface ClipboardService {
   /**
    * Remove one command form clipboard
    * @param userId the user who added the commands
-   * @param isVirtual if the commands are virtual
+   * @param command the command
    * command need to remove
    */
   public void removeClipboardCommand(String userId, ClipboardCommand command);

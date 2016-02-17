@@ -747,7 +747,7 @@ public class DriverConnector extends BaseConnector implements ResourceContainer 
   }
 
   /**
-   * Checks if is dMS document.(not including free layout webcontent & media & article)
+   * Checks if is dMS document.(not including free layout webcontent and media and article)
    *
    * @param node the node
    *

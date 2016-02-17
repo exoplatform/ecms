@@ -21,7 +21,7 @@ package org.exoplatform.ecm.webui.comparator;
 /**
  * Created by The eXo Platform SARL Author : Hoang Van Hung hunghvit@gmail.com
  * Mar 8, 2009
- * This class is the same as org.exoplatform.ecm.utils.comparator.PropertyValueComparator<br/>
+ * This class is the same as org.exoplatform.ecm.utils.comparator.PropertyValueComparator<br>
  * but it is kept for the compatible purpose.
  */
 public class PropertyValueComparator extends org.exoplatform.ecm.utils.comparator.PropertyValueComparator {

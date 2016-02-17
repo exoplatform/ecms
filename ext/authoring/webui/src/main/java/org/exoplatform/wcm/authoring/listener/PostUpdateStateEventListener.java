@@ -57,7 +57,7 @@ public class PostUpdateStateEventListener extends Listener<CmsService, Node> {
   /**
    * Instantiates a new post edit content event listener.
    *
-   * @param pservice the pservice
+   * @param publicationManager the publication manager
    */
   public PostUpdateStateEventListener(PublicationManager publicationManager) {
     this.publicationManager = publicationManager;

@@ -90,7 +90,7 @@ public class DialogFormUtil {
    *
    * @param inputs the inputs
    * @param properties the properties
-   * @return the map< string, jcr input property>
+   * @return the map of string and jcr input property
    * @throws Exception the exception
    */
   public static Map<String, JcrInputProperty> prepareMap(List inputs, Map properties) throws Exception {

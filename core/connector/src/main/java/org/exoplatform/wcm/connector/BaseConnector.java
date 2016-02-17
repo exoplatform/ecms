@@ -109,8 +109,6 @@ public abstract class BaseConnector {
 
   /**
    * Instantiates a new base connector.
-   *
-   * @param container the container
    */
   public BaseConnector() {
     livePortalManagerService = WCMCoreUtils.getService(LivePortalManagerService.class);

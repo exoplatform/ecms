@@ -182,8 +182,6 @@ public class UIPresentationContainer extends UIContainer{
    * Gets the node.
    *
    * @return the node
-   *
-   * @throws Exception the exception
    */
   public Node getNodeView() {
     UIPresentation presentation = getChild(UIPresentation.class);
@@ -403,7 +401,7 @@ public class UIPresentationContainer extends UIContainer{
    * The class that is interested in processing a preferencesAction
    * event implements this interface, and the object created
    * with that class is registered with a component using the
-   * component's <code>addPreferencesActionListener<code> method. When
+   * component's <code>addPreferencesActionListener</code> method. When
    * the preferencesAction event occurs, that object's appropriate
    * method is invoked.
    */

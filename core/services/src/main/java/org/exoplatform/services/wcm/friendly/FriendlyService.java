@@ -60,10 +60,10 @@ public interface FriendlyService {
   /**
    * Gets the friendly URI corresponding to an unfriendly URI.
    * <p></p>
-   * For example:<br />
+   * For example:<br>
    *
-   * friendly = acme<br />
-   * unfriendly = /public/acme/detail?path=/repository/collaboration/sites content/live/acme/web contents<br />
+   * friendly = acme<br>
+   * unfriendly = /public/acme/detail?path=/repository/collaboration/sites content/live/acme/web contents<br>
    *
    * @param unfriendlyUri The current unfriendly URI.
    * @return The friendly URI.
@@ -72,11 +72,11 @@ public interface FriendlyService {
 
   /**
    * Gets the unfriendly URI corresponding to a friendly URI.
-   * <br />
-   * For example:<br />
+   * <br>
+   * For example:<br>
    * 
-   * friendly = acme<br />
-   * unfriendly = /public/acme/detail?path=/repository/collaboration/sites content/live/acme/web contents<br />
+   * friendly = acme<br>
+   * unfriendly = /public/acme/detail?path=/repository/collaboration/sites content/live/acme/web contents<br>
    *
    * @param friendlyUri The current friendly URI.
    * @return The unfriendly URI.

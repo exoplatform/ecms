@@ -448,9 +448,7 @@ public class UIWorkingArea extends UIContainer {
   }
 
   /**
-   * Refresh UIWorkingArea after renaming.
-   *
-   * @see RefreshActionEvent
+   * Refresh UIWorkingArea after renaming.UIPresentationContainer
    */
   public static class RefreshActionListener extends EventListener<UIWorkingArea> {
     public void execute(Event<UIWorkingArea> event) throws Exception {

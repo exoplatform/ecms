@@ -168,11 +168,9 @@ public class UIFCCActionList extends UIContainer {
    * The class that is interested in processing a addAction
    * event implements this interface, and the object created
    * with that class is registered with a component using the
-   * component's <code>addAddActionListener<code> method. When
+   * component's <code>addAddActionListener</code> method. When
    * the addAction event occurs, that object's appropriate
    * method is invoked.
-   *
-   * @see AddActionEvent
    */
   public static class AddActionListener extends EventListener<UIFCCActionList> {
 
@@ -198,11 +196,9 @@ public class UIFCCActionList extends UIContainer {
    * The class that is interested in processing a editAction
    * event implements this interface, and the object created
    * with that class is registered with a component using the
-   * component's <code>addEditActionListener<code> method. When
+   * component's <code>addEditActionListener</code> method. When
    * the editAction event occurs, that object's appropriate
    * method is invoked.
-   *
-   * @see EditActionEvent
    */
   public static class EditActionListener extends EventListener<UIFCCActionList> {
 
@@ -235,11 +231,9 @@ public class UIFCCActionList extends UIContainer {
    * The class that is interested in processing a deleteAction
    * event implements this interface, and the object created
    * with that class is registered with a component using the
-   * component's <code>addDeleteActionListener<code> method. When
+   * component's <code>addDeleteActionListener</code> method. When
    * the deleteAction event occurs, that object's appropriate
    * method is invoked.
-   *
-   * @see DeleteActionEvent
    */
   public static class DeleteActionListener extends EventListener<UIFCCActionList> {
 

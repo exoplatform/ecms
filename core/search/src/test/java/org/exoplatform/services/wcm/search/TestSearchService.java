@@ -394,7 +394,7 @@ public class TestSearchService extends BaseSearchTest {
   //---------------------------------------------- Test search document -----------------------------------------------------------
   /**
    * Test case 5: Test search document.
-   * Search all documents in system (all portals) which are live mode. With this case, values of parameters are:<br/>
+   * Search all documents in system (all portals) which are live mode. With this case, values of parameters are:<br>
    * searchPageChecked = false<br>
    * searchDocumentChecked = true<br>
    * searchSelectedPortal = null<br>
@@ -417,7 +417,7 @@ public class TestSearchService extends BaseSearchTest {
 
   /**
    * Test case 6:Test search document.
-   * Search all documents in system (all portals). With this case, values of parameters are:<br/>
+   * Search all documents in system (all portals). With this case, values of parameters are:<br>
    * searchPageChecked = false<br>
    * searchDocumentChecked = true<br>
    * searchSelectedPortal = null<br>
@@ -439,7 +439,7 @@ public class TestSearchService extends BaseSearchTest {
 
   /**
    * Test case 7:Test search document.
-   * Search all documents in shared portal. With this case, values of parameters are:<br/>
+   * Search all documents in shared portal. With this case, values of parameters are:<br>
    * searchPageChecked = false<br>
    * searchDocumentChecked = true<br>
    * searchSelectedPortal = shared<br>
@@ -461,7 +461,7 @@ public class TestSearchService extends BaseSearchTest {
 
   /**
    * Test case 8:Test search document.
-   * Search all documents in shared portal. With this case, values of parameters are:<br/>
+   * Search all documents in shared portal. With this case, values of parameters are:<br>
    * searchPageChecked = false<br>
    * searchDocumentChecked = true<br>
    * searchSelectedPortal = shared<br>
@@ -486,7 +486,7 @@ public class TestSearchService extends BaseSearchTest {
   //------------------------------------------- Test search pages ------------------------------------------------------------------
   /**
    * Test case 9:Test search pages.
-   * Search all pages in all portals. With this case, values of parameters are:<br/>
+   * Search all pages in all portals. With this case, values of parameters are:<br>
    * searchPageChecked = true<br>
    * searchDocumentChecked = false<br>
    * searchSelectedPortal = null<br>
@@ -502,7 +502,7 @@ public class TestSearchService extends BaseSearchTest {
 
   /**
    * Test case 10:Test search pages.
-   * Search all pages in all portals and not live mode. With this case, values of parameters are:<br/>
+   * Search all pages in all portals and not live mode. With this case, values of parameters are:<br>
    * searchPageChecked = true<br>
    * searchDocumentChecked = false<br>
    * searchSelectedPortal = null<br>
@@ -517,7 +517,7 @@ public class TestSearchService extends BaseSearchTest {
 
   /**
    * Test case 11:Test search pages.
-   * Search all pages in share and live mode. With this case, values of parameters are:<br/>
+   * Search all pages in share and live mode. With this case, values of parameters are:<br>
    * searchPageChecked = true<br>
    * searchDocumentChecked = false<br>
    * searchSelectedPortal = shared<br>
@@ -533,7 +533,7 @@ public class TestSearchService extends BaseSearchTest {
 
   /**
    * Test case 12:Test search pages.
-   * Search all pages in share and live mode. With this case, values of parameters are:<br/>
+   * Search all pages in share and live mode. With this case, values of parameters are:<br>
    * searchPageChecked = true<br>
    * searchDocumentChecked = false<br>
    * searchSelectedPortal = shared<br>
@@ -550,7 +550,7 @@ public class TestSearchService extends BaseSearchTest {
 
   /**
    * Test case 13:Test search contents are not document or page in all portal.
-   * Search all pages in share and live mode. With this case, values of parameters are:<br/>
+   * Search all pages in share and live mode. With this case, values of parameters are:<br>
    * searchPageChecked = false<br>
    * searchDocumentChecked = false<br>
    * searchSelectedPortal = null<br>
@@ -568,7 +568,7 @@ public class TestSearchService extends BaseSearchTest {
 
   /**
    * Test case 14:Test search contents are not document or page in all portal.
-   * Search all pages in share and live mode. With this case, values of parameters are:<br/>
+   * Search all pages in share and live mode. With this case, values of parameters are:<br>
    * searchPageChecked = false<br>
    * searchDocumentChecked = false<br>
    * searchSelectedPortal = null<br>
@@ -585,7 +585,7 @@ public class TestSearchService extends BaseSearchTest {
 
   /**
    * Test case 15:Test search contents are not document or page in all portal.
-   * Search all pages in share and live mode. With this case, values of parameters are:<br/>
+   * Search all pages in share and live mode. With this case, values of parameters are:<br>
    * searchPageChecked = false<br>
    * searchDocumentChecked = false<br>
    * searchSelectedPortal = null<br>
@@ -602,7 +602,7 @@ public class TestSearchService extends BaseSearchTest {
 
   /**
    * Test case 16:Test search contents are not document or page in all portal.
-   * Search all pages in share and live mode. With this case, values of parameters are:<br/>
+   * Search all pages in share and live mode. With this case, values of parameters are:<br>
    * searchPageChecked = false<br>
    * searchDocumentChecked = false<br>
    * searchSelectedPortal = null<br>
@@ -619,7 +619,7 @@ public class TestSearchService extends BaseSearchTest {
   /**
    * Test case 17:Test search contents is document or page in all portal. And search
    * with created date and modified Date.
-   * Search all pages in share and live mode. With this case, values of parameters are:<br/>
+   * Search all pages in share and live mode. With this case, values of parameters are:<br>
    * searchPageChecked = false<br>
    * searchDocumentChecked = true<br>
    * searchSelectedPortal = null<br>
@@ -647,7 +647,7 @@ public class TestSearchService extends BaseSearchTest {
   /**
    * Test case 18:Test search contents is document or page in all portal. And search
    * with created date and modified Date.
-   * Search all pages in share and live mode. With this case, values of parameters are:<br/>
+   * Search all pages in share and live mode. With this case, values of parameters are:<br>
    * searchPageChecked = true<br>
    * searchDocumentChecked = true<br>
    * searchSelectedPortal = null<br>
@@ -665,7 +665,7 @@ public class TestSearchService extends BaseSearchTest {
   /**
    * Test case 19:Test search contents is document or page in all portal. And search
    * with created date and modified Date.
-   * Search all pages in share and live mode. With this case, values of parameters are:<br/>
+   * Search all pages in share and live mode. With this case, values of parameters are:<br>
    * searchPageChecked = true<br>
    * searchDocumentChecked = true<br>
    * searchSelectedPortal = null<br>
@@ -685,7 +685,7 @@ public class TestSearchService extends BaseSearchTest {
   /**
    * Test case 20:Test search contents is document or page in all portal. And search
    * with created date and modified Date.
-   * Search all pages in share and live mode. With this case, values of parameters are:<br/>
+   * Search all pages in share and live mode. With this case, values of parameters are:<br>
    * searchPageChecked = true<br>
    * searchDocumentChecked = true<br>
    * searchSelectedPortal = null<br>
@@ -711,7 +711,7 @@ public class TestSearchService extends BaseSearchTest {
   /**
    * Test case 21:Test search contents is document or page in all portal. And search
    * with created date and modified Date.
-   * Search all pages in share and live mode. With this case, values of parameters are:<br/>
+   * Search all pages in share and live mode. With this case, values of parameters are:<br>
    * searchPageChecked = true<br>
    * searchDocumentChecked = true<br>
    * searchSelectedPortal = null<br>
@@ -951,7 +951,7 @@ public class TestSearchService extends BaseSearchTest {
    * Repeat 3 rounds to check cache eviction
    * Query results are stored in ArrayNodePageList
    * Search all documents in all sites which are in live mode (having publication property).
-   * With this case, the parameter values are:<br/>
+   * With this case, the parameter values are:<br>
    * searchDocumentChecked = true<br>
    * searchSelectedPortal = null<br>
    * searchIsLiveMode = true<br>
@@ -988,7 +988,7 @@ public class TestSearchService extends BaseSearchTest {
    * Query results are stored in QueryResultPageList
    * Search all documents in all sites which are in live mode
    * and contain "duplicationSearchKeyword"
-   * With this case, the parameter values are:<br/>
+   * With this case, the parameter values are:<br>
    * searchDocumentChecked = true<br>
    * searchSelectedPortal = acme<br>
    * searchIsLiveMode = true<br>

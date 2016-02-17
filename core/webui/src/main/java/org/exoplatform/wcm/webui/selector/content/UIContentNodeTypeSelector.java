@@ -117,11 +117,9 @@ public class UIContentNodeTypeSelector extends UIForm {
    * The class that is interested in processing a saveAction
    * event implements this interface, and the object created
    * with that class is registered with a component using the
-   * component's <code>addSaveActionListener<code> method. When
+   * component's <code>addSaveActionListener</code> method. When
    * the saveAction event occurs, that object's appropriate
    * method is invoked.
-   *
-   * @see SaveActionEvent
    */
   public static class SaveActionListener extends EventListener<UIContentNodeTypeSelector> {
 
@@ -184,11 +182,9 @@ public class UIContentNodeTypeSelector extends UIForm {
    * The class that is interested in processing a cancelAction
    * event implements this interface, and the object created
    * with that class is registered with a component using the
-   * component's <code>addCancelActionListener<code> method. When
+   * component's <code>addCancelActionListener</code> method. When
    * the cancelAction event occurs, that object's appropriate
    * method is invoked.
-   *
-   * @see CancelActionEvent
    */
   public static class CancelActionListener extends EventListener<UIContentNodeTypeSelector> {
 

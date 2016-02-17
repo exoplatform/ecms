@@ -47,10 +47,10 @@ import org.exoplatform.services.log.Log;
  * Feb 24, 2012  
  *
  * This class will be used to upgrade pre-defined templates of Site Explorer. Templates with desire of manual upgration 
- * can be specified in file configuration.properties.<br/>
- * Syntax :<br/> 
- * unchanged-site-explorer-templates=<templates name list>
- * For examples :<br/>
+ * can be specified in file configuration.properties.<br>
+ * Syntax :<br>
+ * unchanged-site-explorer-templates={templates name list}
+ * For examples :<br>
  * unchanged-site-explorer-templates=ThumbnailsView, ContentView
  * 
  */

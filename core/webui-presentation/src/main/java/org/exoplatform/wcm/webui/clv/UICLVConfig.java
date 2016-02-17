@@ -793,7 +793,7 @@ public class UICLVConfig extends UIFormTabPane  implements UISelectable {
    * The class that is interested in processing a saveAction
    * event implements this interface, and the object created
    * with that class is registered with a component using the
-   * component's <code>addSaveActionListener<code> method. When
+   * component's <code>addSaveActionListener</code> method. When
    * the saveAction event occurs, that object's appropriate
    * method is invoked.
    */
@@ -931,7 +931,7 @@ public class UICLVConfig extends UIFormTabPane  implements UISelectable {
    * The class that is interested in processing a cancelAction
    * event implements this interface, and the object created
    * with that class is registered with a component using the
-   * component's <code>addCancelActionListener<code> method. When
+   * component's <code>addCancelActionListener</code> method. When
    * the cancelAction event occurs, that object's appropriate
    * method is invoked.
    */
@@ -958,7 +958,7 @@ public class UICLVConfig extends UIFormTabPane  implements UISelectable {
 	 * The class that is interested in processing a selectTabAction
 	 * event implements this interface, and the object created
 	 * with that class is registered with a component using the
-	 * component's <code>addSelectTabActionListener<code> method. When
+	 * component's <code>addSelectTabActionListener</code> method. When
 	 * the selectTabAction event occurs, that object's appropriate
 	 * method is invoked.
 	 */
@@ -983,7 +983,7 @@ public class UICLVConfig extends UIFormTabPane  implements UISelectable {
    * The class that is interested in processing a selectFolderPathAction
    * event implements this interface, and the object created
    * with that class is registered with a component using the
-   * component's <code>addSelectFolderPathActionListener<code> method. When
+   * component's <code>addSelectFolderPathActionListener</code> method. When
    * the selectFolderPathAction event occurs, that object's appropriate
    * method is invoked.
    */
@@ -1047,7 +1047,7 @@ public class UICLVConfig extends UIFormTabPane  implements UISelectable {
    * The class that is interested in processing a increaseAction
    * event implements this interface, and the object created
    * with that class is registered with a component using the
-   * component's <code>addIncreaseActionListener<code> method. When
+   * component's <code>addIncreaseActionListener</code> method. When
    * the increaseAction event occurs, that object's appropriate
    * method is invoked.
    */
@@ -1081,7 +1081,7 @@ public class UICLVConfig extends UIFormTabPane  implements UISelectable {
    * The class that is interested in processing a decreaseAction
    * event implements this interface, and the object created
    * with that class is registered with a component using the
-   * component's <code>addDecreaseActionListener<code> method. When
+   * component's <code>addDecreaseActionListener</code> method. When
    * the decreaseAction event occurs, that object's appropriate
    * method is invoked.
    */
@@ -1114,7 +1114,7 @@ public class UICLVConfig extends UIFormTabPane  implements UISelectable {
    * The class that is interested in processing a selectTargetPageAction
    * event implements this interface, and the object created
    * with that class is registered with a component using the
-   * component's <code>addSelectTargetPageActionListener<code> method. When
+   * component's <code>addSelectTargetPageActionListener</code> method. When
    * the selectTargetPageAction event occurs, that object's appropriate
    * method is invoked.
    */

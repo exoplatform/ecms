@@ -133,7 +133,6 @@ public abstract class BaseECMSTestCase extends BaseExoTestCase {
    * @param workspaceName workspace name
    * @throws RepositoryConfigurationException 
    * @throws RepositoryException 
-   * @throws Exception
    */
   public void applyUserSession(String username, String password, String workspaceName) throws RepositoryConfigurationException, RepositoryException  {    
     repositoryService.setCurrentRepositoryName(REPO_NAME);

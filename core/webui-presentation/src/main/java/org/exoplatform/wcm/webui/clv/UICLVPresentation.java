@@ -827,7 +827,7 @@ public class UICLVPresentation extends UIContainer {
    * is interested in processing a refreshAction event implements this
    * interface, and the object created with that class is registered with a
    * component using the component's
-   * <code>addRefreshActionListener<code> method. When
+   * <code>addRefreshActionListener</code> method. When
    * the refreshAction event occurs, that object's appropriate
    * method is invoked.
    */

@@ -88,11 +88,9 @@ public class UIPublicationAction extends UIForm {
    * The class that is interested in processing a addAction
    * event implements this interface, and the object created
    * with that class is registered with a component using the
-   * component's <code>addAddActionListener<code> method. When
+   * component's <code>addAddActionListener</code> method. When
    * the addAction event occurs, that object's appropriate
    * method is invoked.
-   *
-   * @see AddActionEvent
    */
   public static class AddActionListener extends EventListener<UIPublicationAction> {
 
@@ -149,11 +147,9 @@ public class UIPublicationAction extends UIForm {
    * The class that is interested in processing a removeAction
    * event implements this interface, and the object created
    * with that class is registered with a component using the
-   * component's <code>addRemoveActionListener<code> method. When
+   * component's <code>addRemoveActionListener</code> method. When
    * the removeAction event occurs, that object's appropriate
    * method is invoked.
-   *
-   * @see RemoveActionEvent
    */
   public static class RemoveActionListener extends EventListener<UIPublicationAction> {
 

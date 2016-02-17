@@ -138,11 +138,9 @@ public class UIContentBrowsePanelMulti extends UIContentBrowsePanel {
    * The class that is interested in processing a selectAction
    * event implements this interface, and the object created
    * with that class is registered with a component using the
-   * component's <code>addSelectActionListener<code> method. When
+   * component's <code>addSelectActionListener</code> method. When
    * the selectAction event occurs, that object's appropriate
    * method is invoked.
-   *
-   * @see SelectActionEvent
    */
   public static class SelectActionListener extends EventListener<UIContentBrowsePanelMulti> {
 
@@ -160,7 +158,7 @@ public class UIContentBrowsePanelMulti extends UIContentBrowsePanel {
    * The class that is interested in processing a SaveTemporaryAction
    * event implements this interface, and the object created
    * with that class is registered with a component using the
-   * component's <code>SaveTemporaryActionListener<code> method. When
+   * component's <code>SaveTemporaryActionListener</code> method. When
    * the selectAction event occurs, that object's appropriate
    * method is invoked.
    *
@@ -248,11 +246,9 @@ public class UIContentBrowsePanelMulti extends UIContentBrowsePanel {
    * The class that is interested in processing a closeAction
    * event implements this interface, and the object created
    * with that class is registered with a component using the
-   * component's <code>addCloseActionListener<code> method. When
+   * component's <code>addCloseActionListener</code> method. When
    * the closeAction event occurs, that object's appropriate
    * method is invoked.
-   *
-   * @see CloseActionEvent
    */
   public static class CloseActionListener extends EventListener<UIContentBrowsePanelMulti> {
 

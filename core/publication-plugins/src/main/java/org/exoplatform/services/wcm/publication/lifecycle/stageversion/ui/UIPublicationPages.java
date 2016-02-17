@@ -123,11 +123,9 @@ public class UIPublicationPages extends UIForm {
    * The class that is interested in processing a closeAction
    * event implements this interface, and the object created
    * with that class is registered with a component using the
-   * component's <code>addCloseActionListener<code> method. When
+   * component's <code>addCloseActionListener</code> method. When
    * the closeAction event occurs, that object's appropriate
    * method is invoked.
-   *
-   * @see CloseActionEvent
    */
   public static class CloseActionListener extends EventListener<UIPublicationPages> {
 

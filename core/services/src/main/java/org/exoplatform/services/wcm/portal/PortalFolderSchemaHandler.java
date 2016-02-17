@@ -42,8 +42,6 @@ import org.exoplatform.services.wcm.core.NodetypeConstant;
 public class PortalFolderSchemaHandler extends BaseWebSchemaHandler {
   /**
    * Instantiates a new portal folder schema handler.
-   *
-   * @param actionServiceContainer the action service container
    */
   public PortalFolderSchemaHandler()  {
   }

@@ -147,7 +147,7 @@ public class UICustomizeablePaginator extends UIPageIterator {
    * The class that is interested in processing a showPageAction
    * event implements this interface, and the object created
    * with that class is registered with a component using the
-   * component's <code>addShowPageActionListener<code> method. When
+   * component's <code>addShowPageActionListener</code> method. When
    * the showPageAction event occurs, that object's appropriate
    * method is invoked.
    *

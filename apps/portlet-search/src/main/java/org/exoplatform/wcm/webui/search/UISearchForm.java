@@ -184,7 +184,7 @@ public class UISearchForm extends UIForm {
    * The listener interface for receiving searchAction events. The class that is
    * interested in processing a searchAction event implements this interface,
    * and the object created with that class is registered with a component using
-   * the component's <code>addSearchActionListener<code> method. When
+   * the component's <code>addSearchActionListener</code> method. When
    * the searchAction event occurs, that object's appropriate
    * method is invoked.
    *

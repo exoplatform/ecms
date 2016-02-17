@@ -41,7 +41,7 @@ public interface QueryService {
    *
    * @param userName String Can be <code>null</code>
    * @param provider SessionProvider
-   * @return queries List<Query>
+   * @return queries
    * @see Query
    * @see SessionProvider
    * @throws Exception
@@ -130,7 +130,7 @@ public interface QueryService {
    *
    * @param queryName the name of query 
    * @param provider SessionProvider
-   * @return sharedQueries List<Node>
+   * @return sharedQueries
    * @see Node
    * @see SessionProvider
    * @throws Exception
@@ -150,7 +150,7 @@ public interface QueryService {
    * Get shared queries by giving the following params : provider
    *
    * @param provider SessionProvider
-   * @return sharedQueries List<Node>
+   * @return sharedQueries
    * @see Node
    * @see SessionProvider
    * @throws Exception
@@ -163,7 +163,6 @@ public interface QueryService {
    * 
    * @param queryPath String The path of query
    * @param userName String The name of current user
-   * @param repository String The name of repository
    * @param provider SessionProvider
    * @return query Query
    * @see Node
@@ -179,7 +178,7 @@ public interface QueryService {
    *
    * @param userId String The id of current user
    * @param provider SessionProvider
-   * @return sharedQueries List<Node>
+   * @return sharedQueries
    * @see Node
    * @see SessionProvider
    * @throws Exception
@@ -193,7 +192,7 @@ public interface QueryService {
    * @param queryType String The type of query
    * @param userId String The id of current user
    * @param provider SessionProvider
-   * @return sharedQueries List<Node>
+   * @return sharedQueries
    * @see Node
    * @see SessionProvider
    * @throws Exception
@@ -204,7 +203,7 @@ public interface QueryService {
 
   /**
    * Init all query plugin in the current repository
-   * @see QueryPlugin
+   * @see org.exoplatform.services.cms.queries.impl.QueryPlugin
    * @throws Exception
    */
   public void init() throws Exception;

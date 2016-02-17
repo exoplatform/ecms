@@ -130,7 +130,7 @@ public class DriveData implements Comparable<DriveData>, Serializable {
   public String getAllowCreateFolders() { return allowCreateFolders ; }
   /**
    * Register folder type to drive
-   * @param allowCreateFolder folder type
+   * @param allowCreateFolders folder type
    */
   public void setAllowCreateFolders(String allowCreateFolders) { this.allowCreateFolders = allowCreateFolders ; }
 

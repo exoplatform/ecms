@@ -121,8 +121,6 @@ public class StorageProviderImpl implements StorageProvider, Startable
     * This constructor is used by eXo container.
     *
     * @param repositoryService JCR repository service
-    * @param documentReaderService DocumentReaderService required for indexing
-    *        mechanism
     * @param permissionService PermissionService
     * @param registry CmisRegistry will be used for registered current
     *        StorageProvider after its initialization

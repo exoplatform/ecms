@@ -47,7 +47,7 @@ public class PostEditContentEventListener extends Listener<CmsService,Node> {
   /**
    * Instantiates a new post edit content event listener.
    *
-   * @param pservice the pservice
+   * @param publicationService the pservice
    */
   public PostEditContentEventListener(WCMPublicationService publicationService) {
     this.publicationService = publicationService;

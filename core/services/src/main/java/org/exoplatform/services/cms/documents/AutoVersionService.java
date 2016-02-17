@@ -59,7 +59,6 @@ public interface AutoVersionService {
    /**
     * Get List of Drive supported versioning
     * @return List of Drive supported versioning
-    * @throws Exception
     */
   public List<String> getDriveAutoVersion();
 
@@ -67,7 +66,7 @@ public interface AutoVersionService {
    *  Versioning for document at Drive dont support Autoversioning
    * @param currentNode
    * @param sourceNode
-   * @param isSkipCheckDrive
+   * @param isSkipDriveCheck
    * @throws Exception
    */
   void autoVersion(Node currentNode, Node sourceNode, boolean isSkipDriveCheck) throws Exception;

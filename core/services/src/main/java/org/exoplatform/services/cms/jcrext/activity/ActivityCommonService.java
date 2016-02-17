@@ -108,7 +108,6 @@ public class ActivityCommonService {
    * set the node status to Creating
    * @param node
    * @param isCreating
-   * @return
    *  true if successful to setCreating
    */
   public void setCreating(Node node, boolean isCreating){
@@ -128,7 +127,6 @@ public class ActivityCommonService {
    *
    * @param node Node
    * @param isEditing
-   * @return
    *  true if successful to Editing
    */
   public void setEditing(Node node, boolean isEditing) {

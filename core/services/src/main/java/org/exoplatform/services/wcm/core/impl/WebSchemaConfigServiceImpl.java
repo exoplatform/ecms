@@ -57,7 +57,7 @@ public class WebSchemaConfigServiceImpl implements WebSchemaConfigService, Start
    * Instantiates a new web schema config service impl.
    *
    * @param configurationService the configuration service
-   * @param hierarchyCreator the hierarchy creator
+   * @param nodeHierarchyCreator the hierarchy creator
    */
   public WebSchemaConfigServiceImpl(WCMConfigurationService configurationService, NodeHierarchyCreator nodeHierarchyCreator) {
     this.wcmConfigService = WCMCoreUtils.getService(WCMConfigurationService.class);

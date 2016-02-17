@@ -103,7 +103,7 @@ public class JcrCmisRegistry extends CmisRegistry implements Startable, CmisRegi
    }
 
    /**
-    * @see org.xcmis.spi.deploy.ExoContainerCmisRegistry#start()
+    *
     */
    public void start()
    {
@@ -175,7 +175,7 @@ public class JcrCmisRegistry extends CmisRegistry implements Startable, CmisRegi
    }
 
    /**
-    * @see org.xcmis.spi.deploy.ExoContainerCmisRegistry#stop()
+    *
     */
    public void stop()
    {

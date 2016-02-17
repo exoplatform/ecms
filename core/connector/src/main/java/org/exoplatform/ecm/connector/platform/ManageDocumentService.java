@@ -219,7 +219,6 @@ public class ManageDocumentService implements ResourceContainer {
    * @param currentFolder The path to the folder to achieve its folders and files.
    * @param showHidden Shows the hidden items or not. The default value is false.
    * @return {@link Document} which contains the folders and files.
-   * @throws Exception The exception
    *
    * @anchor ManageDocumentService.getFoldersAndFiles
    */
@@ -265,7 +264,6 @@ public class ManageDocumentService implements ResourceContainer {
    * @param workspaceName The workspace name.
    * @param itemPath The path to the folder/file.
    * @return {@link Response} Returns the status of an item which has been deleted.
-   * @throws Exception The exception
    *
    * @anchor ManageDocumentService.deleteFolderOrFile
    */

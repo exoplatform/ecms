@@ -57,8 +57,6 @@ public class WCMPublicationServiceImpl implements WCMPublicationService, Startab
   /**
    * Instantiates a new WCM publication service.
    * This service delegate to PublicationService to manage the publication
-   *
-   * @param publicationService the publication service
    */
   public WCMPublicationServiceImpl() {
     this.publicationService = WCMCoreUtils.getService(PublicationService.class);

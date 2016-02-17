@@ -47,10 +47,10 @@ import org.exoplatform.services.log.Log;
  * Feb 24, 2012  
  * 
  * This class will be used to upgrade pre-defined queries. Queries with desire of manual upgration 
- * can be specified in file configuration.properties.<br/>
- * Syntax :<br/> 
- * unchanged-queries=<query name list>
- * For examples :<br/>
+ * can be specified in file configuration.properties.<br>
+ * Syntax :<br>
+ * unchanged-queries={query name list}
+ * For examples :<br>
  * unchanged-queries=Created Documents
  *
  */

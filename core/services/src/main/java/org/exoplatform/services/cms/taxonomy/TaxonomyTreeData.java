@@ -113,7 +113,7 @@ public class TaxonomyTreeData implements Comparable<TaxonomyTreeData> {
 
   /**
    * Register home path to taxonomy Tree
-   * @param path the home path of drive
+   * @param taxoTreeHomePath the home path of drive
    */
   public void setTaxoTreeHomePath(String taxoTreeHomePath) {
     this.taxoTreeHomePath = taxoTreeHomePath;
@@ -128,7 +128,7 @@ public class TaxonomyTreeData implements Comparable<TaxonomyTreeData> {
 
   /**
    * Register taxonomy tree name
-   * @param name the name of taxonomy tree
+   * @param taxoTreeName the name of taxonomy tree
    */
   public void setTaxoTreeName(String taxoTreeName) {
     this.taxoTreeName = taxoTreeName;
@@ -155,7 +155,7 @@ public class TaxonomyTreeData implements Comparable<TaxonomyTreeData> {
 
   /**
    * Register workspace to tree
-   * @param ws the workspace name
+   * @param taxoTreeWorkspace the workspace name
    */
   public void setTaxoTreeWorkspace(String taxoTreeWorkspace) {
     this.taxoTreeWorkspace = taxoTreeWorkspace;

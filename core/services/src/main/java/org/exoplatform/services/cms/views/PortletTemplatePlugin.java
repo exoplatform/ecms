@@ -174,9 +174,9 @@ public class PortletTemplatePlugin extends BaseComponentPlugin{
     }
 
     /**
-     * Sets the full text template name.
+     * Sets the full text template title.
      *
-     * @param templateName the new template name
+     * @param title the new template title
      */
     public void setTitle(String title) {
       this.title = title;

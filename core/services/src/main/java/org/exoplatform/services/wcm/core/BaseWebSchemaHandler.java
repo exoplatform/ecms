@@ -96,7 +96,6 @@ public abstract class BaseWebSchemaHandler extends BaseComponentPlugin implement
    * @throws ConstraintViolationException 
    * @throws VersionException 
    * @throws NoSuchNodeTypeException 
-   * @throws Exception the exception
    */
   protected void addMixin(Node node, String mixin) throws NoSuchNodeTypeException, VersionException, ConstraintViolationException, LockException, RepositoryException {
     if (!node.isNodeType(mixin)) node.addMixin(mixin);

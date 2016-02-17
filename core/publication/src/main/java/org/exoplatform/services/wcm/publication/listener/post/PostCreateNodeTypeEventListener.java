@@ -52,9 +52,7 @@ public class PostCreateNodeTypeEventListener extends Listener<CmsService, String
   /**
    * Instantiates a new post create content event listener.
    *
-   * @param publicationService the publication service
-   * @param configurationService the configuration service
-   * @param schemaConfigService the schema config service
+   * @param composer the WCMComposer service
    */
   public PostCreateNodeTypeEventListener(WCMComposer composer) {
     this.composer = composer;

@@ -350,7 +350,7 @@ public class UISCVPreferences extends UIFormTabPane implements UISelectable{
 	 * The class that is interested in processing a selectTabAction
 	 * event implements this interface, and the object created
 	 * with that class is registered with a component using the
-	 * component's <code>addSelectTabActionListener<code> method. When
+	 * component's <code>addSelectTabActionListener</code> method. When
 	 * the selectTabAction event occurs, that object's appropriate
 	 * method is invoked.
 	 */
@@ -497,11 +497,9 @@ public class UISCVPreferences extends UIFormTabPane implements UISelectable{
    * The class that is interested in processing a selectTargetPageAction
    * event implements this interface, and the object created
    * with that class is registered with a component using the
-   * component's <code>addSelectTargetPageActionListener<code> method. When
+   * component's <code>addSelectTargetPageActionListener</code> method. When
    * the selectTargetPageAction event occurs, that object's appropriate
    * method is invoked.
-   *
-   * @see SelectTargetPageActionEvent
    */
   public static class SelectTargetPageActionListener extends EventListener<UISCVPreferences> {
 

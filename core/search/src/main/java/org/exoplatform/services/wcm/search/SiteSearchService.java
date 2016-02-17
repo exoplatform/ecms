@@ -25,8 +25,8 @@ import org.exoplatform.services.wcm.search.base.AbstractPageList;
  * Is used in the Search portlet that allows
  * users to find all information matching with your given keyword.
  * <p></p>
- * It is configured in the core/core-configuration/src/main/webapp/WEB-INF/conf/configuration.xml file as follows:<br />
- * <import>war:/conf/wcm-core/core-search-configuration.xml</import><br />
+ * It is configured in the core/core-configuration/src/main/webapp/WEB-INF/conf/configuration.xml file as follows:<br>
+ * {@code <import>war:/conf/wcm-core/core-search-configuration.xml</import>}<br>
  * <p></p>
  * The component configuration maps the SiteSearchService component with its own implementation: SiteSearchServiceImpl.
  * <p></p>
@@ -70,9 +70,9 @@ public interface SiteSearchService {
    * Searches for content nodes of a site.
    *
    * This method finds all nodes of a site with nodetype that is document, nt:resource or nt:file, then checks their content.
-   * If the node content has key word, it will be put into the list result.<br />
+   * If the node content has key word, it will be put into the list result.<br>
    * This function has 3 parameters, but the most important is {@link QueryCriteria}. With this parameter, you only set
-   * 5 properties:<br />
+   * 5 properties:<br>
    * <ul>
    * <li>SiteName: Name of the site which is searched. If the site name is "null", the search will be performed in all sites of system.</li>
    * <li>Keyword: The key word to search.</li>

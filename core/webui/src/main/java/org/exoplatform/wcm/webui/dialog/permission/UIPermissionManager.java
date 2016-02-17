@@ -232,11 +232,9 @@ public class UIPermissionManager extends UIForm implements UISelectable {
    * The class that is interested in processing a deleteAction
    * event implements this interface, and the object created
    * with that class is registered with a component using the
-   * component's <code>addDeleteActionListener<code> method. When
+   * component's <code>addDeleteActionListener</code> method. When
    * the deleteAction event occurs, that object's appropriate
    * method is invoked.
-   *
-   * @see DeleteActionEvent
    */
   public static class DeleteActionListener extends EventListener<UIPermissionManager> {
 
@@ -293,11 +291,9 @@ public class UIPermissionManager extends UIForm implements UISelectable {
    * The class that is interested in processing a editAction
    * event implements this interface, and the object created
    * with that class is registered with a component using the
-   * component's <code>addEditActionListener<code> method. When
+   * component's <code>addEditActionListener</code> method. When
    * the editAction event occurs, that object's appropriate
    * method is invoked.
-   *
-   * @see EditActionEvent
    */
   public static class EditActionListener extends EventListener<UIPermissionManager> {
 
@@ -353,11 +349,9 @@ public class UIPermissionManager extends UIForm implements UISelectable {
   * The class that is interested in processing a saveAction
   * event implements this interface, and the object created
   * with that class is registered with a component using the
-  * component's <code>addSaveActionListener<code> method. When
+  * component's <code>addSaveActionListener</code> method. When
   * the saveAction event occurs, that object's appropriate
   * method is invoked.
-  *
-  * @see SaveActionEvent
   */
   public static class SaveActionListener extends EventListener<UIPermissionManager> {
 
@@ -437,11 +431,9 @@ public class UIPermissionManager extends UIForm implements UISelectable {
   * The class that is interested in processing a resetAction
   * event implements this interface, and the object created
   * with that class is registered with a component using the
-  * component's <code>addResetActionListener<code> method. When
+  * component's <code>addResetActionListener</code> method. When
   * the resetAction event occurs, that object's appropriate
   * method is invoked.
-  *
-  * @see ResetActionEvent
   */
   public static class ClearActionListener extends EventListener<UIPermissionManager> {
 
@@ -465,11 +457,9 @@ public class UIPermissionManager extends UIForm implements UISelectable {
   * The class that is interested in processing a selectUserAction
   * event implements this interface, and the object created
   * with that class is registered with a component using the
-  * component's <code>addSelectUserActionListener<code> method. When
+  * component's <code>addSelectUserActionListener</code> method. When
   * the selectUserAction event occurs, that object's appropriate
   * method is invoked.
-  *
-  * @see SelectUserActionEvent
   */
   public static class SelectUserActionListener extends EventListener<UIPermissionManager> {
 
@@ -491,11 +481,9 @@ public class UIPermissionManager extends UIForm implements UISelectable {
   * The class that is interested in processing a selectMemberAction
   * event implements this interface, and the object created
   * with that class is registered with a component using the
-  * component's <code>addSelectMemberActionListener<code> method. When
+  * component's <code>addSelectMemberActionListener</code> method. When
   * the selectMemberAction event occurs, that object's appropriate
   * method is invoked.
-  *
-  * @see SelectMemberActionEvent
   */
   public static class SelectMemberActionListener extends EventListener<UIPermissionManager> {
 
@@ -517,11 +505,9 @@ public class UIPermissionManager extends UIForm implements UISelectable {
    * The class that is interested in processing a addAnyAction
    * event implements this interface, and the object created
    * with that class is registered with a component using the
-   * component's <code>addAddAnyActionListener<code> method. When
+   * component's <code>addAddAnyActionListener</code> method. When
    * the addAnyAction event occurs, that object's appropriate
    * method is invoked.
-   *
-   * @see AddAnyActionEvent
    */
   public static class AddAnyActionListener extends EventListener<UIPermissionManager> {
 

@@ -67,7 +67,8 @@ public class LivePortalManagerServiceImpl implements LivePortalManagerService, S
   /**
    * Instantiates a new live portal manager service impl.
    *
-   * @param configService the config service
+   * @param webSchemaConfigService the web schema config service
+   * @param wcmConfigurationService the wcm config service
    * @param repositoryService the repository service
    */
   public LivePortalManagerServiceImpl(

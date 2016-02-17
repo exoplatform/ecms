@@ -49,7 +49,7 @@ public interface ThumbnailService {
   /**
    * Return all nt:file node at current node
    * @param node Current node
-   * @return List<Node>
+   * @return all nt:file nodes
    * @throws RepositoryException
    */
   public List<Node> getAllFileInNode(Node node) throws RepositoryException;
@@ -58,14 +58,14 @@ public interface ThumbnailService {
    * Return the list of node in the current node with mimetype specified
    * @param node Current node
    * @param jcrMimeType Mime type of node will be retrieve
-   * @return List<Node>
+   * @return node list
    * @throws Exception
    */
   public List<Node> getFileNodesByType(Node node, String jcrMimeType) throws Exception;
   /**
    * Return a list image in node
    * @param node Current node
-   * @return List<Node>
+   * @return images nodes list
    * @throws Exception
    */
   public List<Node> getFlowImages(Node node) throws Exception;
@@ -134,7 +134,7 @@ public interface ThumbnailService {
   public void processThumbnailList(List<Node> listNodes, String type) throws Exception;
   /**
    * Get mime types which allow to view
-   * @return List<String>
+   * @return mimetypes list
    */
   public List<String> getMimeTypes();
   /**
@@ -145,7 +145,7 @@ public interface ThumbnailService {
   public void processRemoveThumbnail(Node showingNode) throws Exception;
 
   /**
-   * Copy thumbnail node to destination node after moving or copy&paste.
+   * Copy thumbnail node to destination node after moving or copy/paste.
    *
    * @param srcThumbnailNode thumbnailNode of source node
    * @param destNode destination Node
@@ -161,7 +161,7 @@ public interface ThumbnailService {
 
   /**
    * Return a list of Thumbnail plugin
-   * @return List<ComponentPlugin>
+   * @return ComponentPlugin list
    */
   public List<ComponentPlugin> getComponentPlugins();
 }

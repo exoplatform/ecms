@@ -115,11 +115,9 @@ public class UIPublishedPages extends UIContainer {
    * The class that is interested in processing a selectNavigationNodeURIAction
    * event implements this interface, and the object created
    * with that class is registered with a component using the
-   * component's <code>addSelectNavigationNodeURIActionListener<code> method. When
+   * component's <code>addSelectNavigationNodeURIActionListener</code> method. When
    * the selectNavigationNodeURIAction event occurs, that object's appropriate
    * method is invoked.
-   *
-   * @see SelectNavigationNodeURIActionEvent
    */
   public static class SelectNavigationNodeURIActionListener extends EventListener<UIPublishedPages> {
 

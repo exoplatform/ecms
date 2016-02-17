@@ -28,9 +28,8 @@ import org.apache.lucene.util.Version;
  * Apr 9, 2013
  *   
  * A WhitespaceTokenizer is a tokenizer that divides text at whitespace.
- * Adjacent sequences of non-Whitespace characters form tokens. <a
- * name="version"/>
- * <p>
+ * Adjacent sequences of non-Whitespace characters form tokens.
+ * <br>
  * You must specify the required {@link Version} compatibility when creating
  * {@link WhitespaceTokenizer}:
  * <ul>
@@ -49,7 +48,7 @@ public class WhitespaceTokenizer extends CharTokenizer {
   }
     /**
      * Construct a new WhitespaceTokenizer. * @param matchVersion Lucene version
-     * to match See {@link <a href="#version">above</a>}
+     * to match
      * 
      * @param in
      *          the input to split up into tokens
@@ -62,9 +61,9 @@ public class WhitespaceTokenizer extends CharTokenizer {
      * Construct a new WhitespaceTokenizer using a given {@link AttributeSource}.
      * 
      * @param matchVersion
-     *          Lucene version to match See {@link <a href="#version">above</a>}
+     *          Lucene version to match
      * @param source
-     *          the attribute source to use for this {@link Tokenizer}
+     *          the attribute source to use for this {@link org.apache.lucene.analysis.Tokenizer}
      * @param in
      *          the input to split up into tokens
      */
@@ -78,9 +77,9 @@ public class WhitespaceTokenizer extends CharTokenizer {
      *
      * @param
      *          matchVersion Lucene version to match See
-     *          {@link <a href="#version">above</a>}
+     *          {@literal <a href="#version">above</a>}
      * @param factory
-     *          the attribute factory to use for this {@link Tokenizer}
+     *          the attribute factory to use for this {@link org.apache.lucene.analysis.Tokenizer}
      * @param in
      *          the input to split up into tokens
      */

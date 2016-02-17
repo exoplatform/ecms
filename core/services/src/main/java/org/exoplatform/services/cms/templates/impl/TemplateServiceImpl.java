@@ -158,7 +158,6 @@ public class TemplateServiceImpl implements TemplateService, Startable {
 
   /**
    * {@inheritDoc}
-   * @throws RepositoryException
    */
   public void addContentTypeFilterPlugin(ContentTypeFilterPlugin filterPlugin) {
     HashMap<String,List<String>> folderFilterMap = foldersFilterMap;

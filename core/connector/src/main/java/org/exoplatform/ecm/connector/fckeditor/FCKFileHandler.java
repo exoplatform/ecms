@@ -80,9 +80,9 @@ public class FCKFileHandler {
   }
 
   /**
-   * Creates the file element for connector response looks like that <File
+   * Creates the file element for connector response looks like that {@code <File
    * name="" fileType="" dateCreated="" dateModified="" creator="" size=""
-   * url="" />.
+   * url="" />}.
    *
    * @param document the document
    * @param child the child

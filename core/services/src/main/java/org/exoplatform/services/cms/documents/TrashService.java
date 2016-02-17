@@ -79,7 +79,7 @@ public interface TrashService {
    * Get all nodes in trash location
    * 
    * @param sessionProvider
-   * @return List<Node> All nodes in trash
+   * @return All nodes in trash
    * @throws Exception
    */
   public List<Node> getAllNodeInTrash(SessionProvider sessionProvider) throws Exception;
@@ -89,7 +89,7 @@ public interface TrashService {
    * Get all nodes by user in trash location
    * @param sessionProvider
    * @param userName
-   * @return List<Node> all node in trash which moved by user
+   * @return all node in trash which moved by user
    * @throws Exception
    */
   public List<Node> getAllNodeInTrashByUser(SessionProvider sessionProvider,
@@ -100,7 +100,6 @@ public interface TrashService {
    * Removes all 'relationable' property of nodes that have relation to this node
    * @param node
    * @param sessionProvider
-   * @return
    * @throws Exception
    */
   public void removeRelations(Node node, SessionProvider sessionProvider) throws Exception;  

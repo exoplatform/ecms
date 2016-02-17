@@ -138,11 +138,9 @@ public class UIDashboardForm extends UIContainer {
    * The class that is interested in processing a changeRepositoryAction
    * event implements this interface, and the object created
    * with that class is registered with a component using the
-   * component's <code>addShowDocumentActionListener<code> method. When
+   * component's <code>addShowDocumentActionListener</code> method. When
    * the ShowDocumentAction event occurs, that object's appropriate
    * method is invoked.
-   *
-   * @see ShowDocumentActionEvent
    */
   public static class ShowDocumentActionListener extends EventListener<UIDashboardForm> {
 
@@ -168,11 +166,9 @@ public class UIDashboardForm extends UIContainer {
    * The class that is interested in processing a changeRepositoryAction
    * event implements this interface, and the object created
    * with that class is registered with a component using the
-   * component's <code>RefreshActionListener<code> method. When
+   * component's <code>RefreshActionListener</code> method. When
    * the RefreshAction event occurs, that object's appropriate
    * method is invoked.
-   *
-   * @see RefreshActionEvent
    */
   public static class RefreshActionListener extends EventListener<UIDashboardForm> {
 

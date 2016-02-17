@@ -35,11 +35,11 @@ import org.exoplatform.services.wcm.utils.WCMCoreUtils;
  * The class that is interested in processing a updateLivePortalEvent
  * event implements this interface, and the object created
  * with that class is registered with a component using the
- * component's <code>addUpdateLivePortalEventListener<code> method. When
+ * component's <code>addUpdateLivePortalEventListener</code> method. When
  * the updateLivePortalEvent event occurs, that object's appropriate
  * method is invoked.
  *
- * @see UpdateLivePortalEventEvent
+ * @see UpdateLivePortalEventListener
  */
 public class UpdateLivePortalEventListener extends Listener<DataStorageImpl,PortalConfig>{
 

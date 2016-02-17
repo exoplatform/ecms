@@ -47,10 +47,8 @@ public class RemoveTaxonomyPlugin extends RemovePortalPlugin {
    * @param params the params
    * @param configurationManager the configuration manager
    * @param repositoryService the repository service
-   * @param nodeHierarchyCreator the node hierarchy creator
    * @param taxonomyService the taxonomy service
    * @param actionServiceContainer the action service container
-   * @param dmsConfiguration the dms configuration
    *
    * @throws Exception the exception
    */

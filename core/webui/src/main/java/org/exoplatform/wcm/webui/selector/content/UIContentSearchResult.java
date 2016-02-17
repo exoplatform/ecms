@@ -97,7 +97,7 @@ public class UIContentSearchResult extends UIGrid {
   /**
    * Update grid.
    *
-   * @param paginatedResult the paginated result
+   * @param pageList the paginated result
    *
    * @throws Exception the exception
    */
@@ -207,11 +207,9 @@ public class UIContentSearchResult extends UIGrid {
    * The class that is interested in processing a selectAction
    * event implements this interface, and the object created
    * with that class is registered with a component using the
-   * component's <code>addSelectActionListener<code> method. When
+   * component's <code>addSelectActionListener</code> method. When
    * the selectAction event occurs, that object's appropriate
    * method is invoked.
-   *
-   * @see SelectActionEvent
    */
   public static class SelectActionListener extends EventListener<UIContentSearchResult> {
 
@@ -233,11 +231,9 @@ public class UIContentSearchResult extends UIGrid {
    * The class that is interested in processing a viewAction
    * event implements this interface, and the object created
    * with that class is registered with a component using the
-   * component's <code>addViewActionListener<code> method. When
+   * component's <code>addViewActionListener</code> method. When
    * the viewAction event occurs, that object's appropriate
    * method is invoked.
-   *
-   * @see ViewActionEvent
    */
   public static class ViewActionListener extends EventListener<UIContentSearchResult> {
 

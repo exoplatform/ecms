@@ -230,7 +230,7 @@ public class UISearchPageLayoutManager extends UIForm  implements UISelectable {
    * The listener interface for receiving saveAction events. The class that is
    * interested in processing a saveAction event implements this interface, and
    * the object created with that class is registered with a component using the
-   * component's <code>addSaveActionListener<code> method. When
+   * component's <code>addSaveActionListener</code> method. When
    * the saveAction event occurs, that object's appropriate
    * method is invoked.
    *
@@ -298,7 +298,7 @@ public class UISearchPageLayoutManager extends UIForm  implements UISelectable {
    * The listener interface for receiving cancelAction events. The class that is
    * interested in processing a cancelAction event implements this interface,
    * and the object created with that class is registered with a component using
-   * the component's <code>addCancelActionListener<code> method. When
+   * the component's <code>addCancelActionListener</code> method. When
    * the cancelAction event occurs, that object's appropriate
    * method is invoked.
    *
@@ -333,7 +333,7 @@ public class UISearchPageLayoutManager extends UIForm  implements UISelectable {
    * The class that is interested in processing a selectTargetPageAction
    * event implements this interface, and the object created
    * with that class is registered with a component using the
-   * component's <code>addSelectTargetPageActionListener<code> method. When
+   * component's <code>addSelectTargetPageActionListener</code> method. When
    * the selectTargetPageAction event occurs, that object's appropriate
    * method is invoked.
    *

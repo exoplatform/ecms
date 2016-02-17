@@ -28,7 +28,7 @@ public interface ScriptService {
    * This method will get node for ECM Explorer Scripts by giving the following params: provider
    * @param provider      SessionProvider
    * @see                 Node
-   * @see                 NodeHierarchyCreator
+   * @see                 org.exoplatform.services.jcr.ext.hierarchy.NodeHierarchyCreator
    * @see                 SessionProvider
    * @return              Node
    * @throws Exception
@@ -39,7 +39,7 @@ public interface ScriptService {
    * This method will get all node for ECM Action Scripts by giving the following params: provider
    * @param provider
    * @see                 Node
-   * @see                 NodeHierarchyCreator
+   * @see                 org.exoplatform.services.jcr.ext.hierarchy.NodeHierarchyCreator
    * @see                 SessionProvider
    * @return              Node
    * @throws Exception
@@ -50,9 +50,9 @@ public interface ScriptService {
    * This method will get all node for ECM Interceptor Scripts by giving the following params: provider
    * @param provider
    * @see                 Node
-   * @see                 NodeHierarchyCreator
+   * @see                 org.exoplatform.services.jcr.ext.hierarchy.NodeHierarchyCreator
    * @see                 SessionProvider
-   * @return              List<Node>
+   * @return              nodes list
    * @throws Exception
    */
   public List<Node> getECMInterceptorScripts(SessionProvider provider) throws Exception;  
@@ -61,9 +61,9 @@ public interface ScriptService {
    * This method will get all node for ECM Widget Scripts by giving the following params: provider
    * @param provider
    * @see                 Node
-   * @see                 NodeHierarchyCreator
+   * @see                 org.exoplatform.services.jcr.ext.hierarchy.NodeHierarchyCreator
    * @see                 SessionProvider
-   * @return              List<Node>
+   * @return              nodes list
    * @throws Exception
    */
   public List<Node> getECMWidgetScripts(SessionProvider provider) throws Exception;  
@@ -72,8 +72,6 @@ public interface ScriptService {
    * This method will get script by giving the following params: scriptPath
    * @param scriptPath    String
    *                      The path of script
-   * @param repository    String
-   *                      The name of repository
    * @see                 CmsScript
    * @return              CmsScript
    * @throws Exception
@@ -82,7 +80,7 @@ public interface ScriptService {
 
   /**
    * This method will get base path of script
-   * @see                 NodeHierarchyCreator
+   * @see                 org.exoplatform.services.jcr.ext.hierarchy.NodeHierarchyCreator
    * @return              String
    * @throws Exception
    */
@@ -146,9 +144,9 @@ public interface ScriptService {
   
   /**
    * This method will init the current repository
-   * @see                 ManageableRepository
-   * @see                 ObservationManager
-   * @see                 Session
+   * @see                 org.exoplatform.services.jcr.core.ManageableRepository
+   * @see                 javax.jcr.observation.ObservationManager
+   * @see                 javax.jcr.Session
    * @throws Exception
    */
   public void initRepo() throws Exception;

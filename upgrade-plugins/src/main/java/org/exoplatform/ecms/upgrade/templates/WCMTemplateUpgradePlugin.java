@@ -44,11 +44,11 @@ import org.exoplatform.services.log.Log;
  * Feb 24, 2012
  *
  * This class will be used to upgrade pre-defined templates of Content-list-viewer and Search portlets. 
- * Views with desire of manual upgration can be specified in file configuration.properties.<br/>
- * Syntax :<br/> 
- * unchanged-clv-templates=<template name list>
- * unchanged-wcm-search-templates=<template name list>
- * For examples :<br/>
+ * Views with desire of manual upgration can be specified in file configuration.properties.<br>
+ * Syntax :<br>
+ * unchanged-clv-templates={template name list}
+ * unchanged-wcm-search-templates={template name list}
+ * For examples :<br>
  * unchanged-clv-templates=list/BigHotNewsTemplateCLV.gtmpl,navigation/CategoryList.gtmpl
  * unchanged-wcm-search-templates=search-form/UIDefaultSearchForm.gtmpl
  *       

@@ -323,11 +323,9 @@ public class UIPageNodeSelector extends UIContainer {
    * The class that is interested in processing a selectNavigationAction
    * event implements this interface, and the object created
    * with that class is registered with a component using the
-   * component's <code>addSelectNavigationActionListener<code> method. When
+   * component's <code>addSelectNavigationActionListener</code> method. When
    * the selectNavigationAction event occurs, that object's appropriate
    * method is invoked.
-   *
-   * @see SelectNavigationActionEvent
    */
   static public class SelectNavigationActionListener  extends EventListener<UIDropDownControl> {
 
@@ -424,7 +422,7 @@ public class UIPageNodeSelector extends UIContainer {
     /**
      * Sets the root node
      *
-     * @param the root node
+     * @param rootNode the root node
      */
     public void setRootNode(UserNode rootNode) {
       this.rootNode = rootNode;

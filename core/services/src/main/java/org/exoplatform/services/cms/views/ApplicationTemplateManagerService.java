@@ -26,12 +26,12 @@ import org.exoplatform.services.jcr.ext.common.SessionProvider;
 
   /**
    * Manages dynamic Groovy templates for the WCM-based products.
-   * All templates created by this service need to be stored in hierarchical context.<br />
-   * For example:<br />
-   * application 1 <br />
-   *    /category 1 <br />
-   *       /template 1 <br />
-   *       /template 2 <br />
+   * All templates created by this service need to be stored in hierarchical context.<br>
+   * For example:<br>
+   * application 1 <br>
+   *    /category 1 <br>
+   *       /template 1 <br>
+   *       /template 2 <br>
    *    /category 2
    *
    * @LevelAPI Experimental

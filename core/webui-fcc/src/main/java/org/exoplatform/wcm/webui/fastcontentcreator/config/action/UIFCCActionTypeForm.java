@@ -158,11 +158,9 @@ public class UIFCCActionTypeForm extends UIForm {
    * The class that is interested in processing a changeActionTypeAction
    * event implements this interface, and the object created
    * with that class is registered with a component using the
-   * component's <code>addChangeActionTypeActionListener<code> method. When
+   * component's <code>addChangeActionTypeActionListener</code> method. When
    * the changeActionTypeAction event occurs, that object's appropriate
    * method is invoked.
-   *
-   * @see ChangeActionTypeActionEvent
    */
   static public class ChangeActionTypeActionListener extends EventListener<UIFCCActionTypeForm> {
 

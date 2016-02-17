@@ -1831,7 +1831,7 @@ public class UIDocumentInfo extends UIBaseNodePresentation {
     return null;
   }
   
-  /** get node attribute in Icons View & Web View **/
+  /** get node attribute in Icons View and Web View **/
   public String getNodeAttributeInView(Node node) throws Exception {
     String preferenceWS = node.getSession().getWorkspace().getName();
     String attr = getNodeAttributeInCommon(node);

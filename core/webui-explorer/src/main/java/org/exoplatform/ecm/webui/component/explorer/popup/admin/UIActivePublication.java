@@ -247,11 +247,9 @@ import org.exoplatform.webui.form.UIForm;
    * The listener interface for receiving cancelAction events. The class that is
    * interested in processing a cancelAction event implements this interface,
    * and the object created with that class is registered with a component using
-   * the component's <code>addCancelActionListener<code> method. When
+   * the component's <code>addCancelActionListener</code> method. When
    * the cancelAction event occurs, that object's appropriate
    * method is invoked.
-   *
-   * @see CancelActionEvent
    */
   public static class CancelActionListener extends EventListener<UIActivePublication> {
 
@@ -270,11 +268,9 @@ import org.exoplatform.webui.form.UIForm;
    * The listener interface for receiving enrolAction events. The class that is
    * interested in processing a enrolAction event implements this interface, and
    * the object created with that class is registered with a component using the
-   * component's <code>addEnrolActionListener<code> method. When
+   * component's <code>addEnrolActionListener</code> method. When
    * the enrolAction event occurs, that object's appropriate
    * method is invoked.
-   *
-   * @see EnrolActionEvent
    */
   public static class EnrolActionListener extends EventListener<UIActivePublication> {
 

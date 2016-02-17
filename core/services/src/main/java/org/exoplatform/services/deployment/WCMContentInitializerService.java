@@ -56,7 +56,7 @@ public class WCMContentInitializerService implements Startable{
   /**
    * Instantiates a new wCM content initializer service.
    *
-   * @param repositoryService the repository service
+   * @param userPortalConfigService
    */
   public WCMContentInitializerService(UserPortalConfigService userPortalConfigService) {
     this.repositoryService = WCMCoreUtils.getService(RepositoryService.class);

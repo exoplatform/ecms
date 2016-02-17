@@ -33,10 +33,9 @@ public interface WCMService {
   /**
    * This method returns a jcr Node based on the given identifier.
    *
-   * @param repository the repository name
+   * @param sessionProvider the session provider
    * @param workspace the workspace name
    * @param nodeIdentifier the node identifier
-   * @param sessionProvider the session provider
    *
    * @return a jcr Node
    *

@@ -312,8 +312,7 @@ public interface TemplateService {
 
   /**
    * Get All Document NodeTypes of the current repository.
-   * @return  List<String>
-   * @throws Exception
+   * @return  all document nodetypes
    */
   public List<String> getAllDocumentNodeTypes() throws PathNotFoundException, RepositoryException;
 

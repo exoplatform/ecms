@@ -85,11 +85,7 @@ public class XJavascriptService implements Startable {
   /**
    * Instantiates a new x javascript service.
    *
-   * @param repositoryService the repository service
-   * @param jsConfigService the js config service
-   * @param servletContext the servlet context
-   * @param configurationService the configuration service
-   * @param contentInitializerService the content initializer service
+   * @param livePortalService the livePortal service
    *
    * @throws Exception the exception
    */
@@ -139,8 +135,8 @@ public class XJavascriptService implements Startable {
   /**
    * Update and merged all Java Script in all portal when content of js file is modified.
    *
+   * @param portalNode the portal node
    * @param jsFile the js file
-   * @param sessionProvider the session provider
    *
    * @throws Exception the exception
    */
@@ -156,8 +152,8 @@ public class XJavascriptService implements Startable {
   /**
    * Update and merged all Java Script in all portal when content of js file is modified.
    *
+   * @param portalNode the portal node
    * @param jsFile the js file
-   * @param sessionProvider the session provider
    *
    * @throws Exception the exception
    */
@@ -173,7 +169,9 @@ public class XJavascriptService implements Startable {
   /**
    * Adds the javascript.
    *
-   * @param jsData the js data
+   * @param portalNode the portal node
+   * @param jsFile the js data
+   * @param isStartup
    */
   private void addPortalJavascript(Node portalNode, Node jsFile, boolean isStartup) throws Exception {
     String javascriptPath = StringUtils.replaceOnce(PATH, "{portalName}", portalNode.getName());
@@ -192,7 +190,9 @@ public class XJavascriptService implements Startable {
   /**
    * Adds the javascript.
    *
-   * @param jsData the js data
+   * @param portalNode the portal node
+   * @param jsFile the js data
+   * @param isStartup
    */
   private void addSharedPortalJavascript(Node portalNode, Node jsFile, boolean isStartup) throws Exception {
     String javascriptPath = StringUtils.replaceOnce(PATH, "{portalName}", portalNode.getName());

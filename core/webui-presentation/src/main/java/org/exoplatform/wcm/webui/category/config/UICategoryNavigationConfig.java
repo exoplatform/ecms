@@ -216,7 +216,7 @@ public class UICategoryNavigationConfig extends UIForm implements UISelectable {
    * The class that is interested in processing a saveAction
    * event implements this interface, and the object created
    * with that class is registered with a component using the
-   * component's <code>addSaveActionListener<code> method. When
+   * component's <code>addSaveActionListener</code> method. When
    * the saveAction event occurs, that object's appropriate
    * method is invoked.
    */
@@ -278,7 +278,7 @@ public class UICategoryNavigationConfig extends UIForm implements UISelectable {
    * The class that is interested in processing a cancelAction
    * event implements this interface, and the object created
    * with that class is registered with a component using the
-   * component's <code>addCancelActionListener<code> method. When
+   * component's <code>addCancelActionListener</code> method. When
    * the cancelAction event occurs, that object's appropriate
    * method is invoked.
    */
@@ -300,7 +300,7 @@ public class UICategoryNavigationConfig extends UIForm implements UISelectable {
    * The class that is interested in processing a changeRepositoryAction
    * event implements this interface, and the object created
    * with that class is registered with a component using the
-   * component's <code>addChangeRepositoryActionListener<code> method. When
+   * component's <code>addChangeRepositoryActionListener</code> method. When
    * the changeRepositoryAction event occurs, that object's appropriate
    * method is invoked.
    */
@@ -318,7 +318,7 @@ public class UICategoryNavigationConfig extends UIForm implements UISelectable {
    * The class that is interested in processing a selectTargetPathAction
    * event implements this interface, and the object created
    * with that class is registered with a component using the
-   * component's <code>addSelectTargetPathActionListener<code> method. When
+   * component's <code>addSelectTargetPathActionListener</code> method. When
    * the selectTargetPathAction event occurs, that object's appropriate
    * method is invoked.
    */

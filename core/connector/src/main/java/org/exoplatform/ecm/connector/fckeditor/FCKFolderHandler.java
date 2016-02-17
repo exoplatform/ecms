@@ -67,8 +67,8 @@ public class FCKFolderHandler {
   }
 
   /**
-   * Creates the folder element for connector response look like <folder name=""
-   * url="" folderType="" />
+   * Creates the folder element for connector response look like {@code <folder name=""
+   * url="" folderType="" />}
    *
    * @param document the document
    * @param child the child

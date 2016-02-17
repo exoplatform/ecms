@@ -78,14 +78,7 @@ public class XSkinService implements Startable {
   /**
    * Instantiates a new extended skin service to manage skin for web content.
    *
-   * @param skinService the skin service
-   * @param initializerService the content initializer service. this param makes
-   *          sure that the service started after the content initializer
-   *          service is started
-   * @param schemaConfigService the schema config service
-   * @param configurationService the configuration service
-   * @param servletContext the servlet context
-   * @param repositoryService the repository service
+   * @param livePortalService the LivePortalManagerService service
    * @throws Exception the exception
    */
   public XSkinService(LivePortalManagerService livePortalService) throws Exception {
@@ -139,8 +132,6 @@ public class XSkinService implements Startable {
    * Adds the portal skin.
    *
    * @param portalNode the portal
-   * @param cssFile the css file
-   * @param isStartup the flag to decide whether this situation is startup or not
    *
    * @throws Exception the exception
    */

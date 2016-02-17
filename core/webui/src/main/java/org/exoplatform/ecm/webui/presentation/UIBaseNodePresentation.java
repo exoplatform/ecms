@@ -267,8 +267,6 @@ public abstract class UIBaseNodePresentation extends UIContainer implements Node
    * @param uuid the uuid
    *
    * @return the node by uuid
-   *
-   * @throws Exception the exception
    */
   public Node getNodeByUUID(String uuid) {
     ManageableRepository manageRepo = WCMCoreUtils.getRepository();

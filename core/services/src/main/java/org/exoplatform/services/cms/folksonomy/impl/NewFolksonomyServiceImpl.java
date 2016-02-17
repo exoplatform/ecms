@@ -134,7 +134,7 @@ public class NewFolksonomyServiceImpl implements NewFolksonomyService, Startable
   /**
    * Implement method in Startable Call init() method
    *
-   * @see {@link #init()}
+   * @see #init()
    */
   public void start() {
     try {

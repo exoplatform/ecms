@@ -250,7 +250,7 @@ public class NodeLocation extends ItemLocation {
   /**
    * Get node's expression by a node.
    *
-   * @param Node the node to get expression
+   * @param node the node to get expression
    * @return The node's expression
    */
   public static final String getExpressionByNode(final Node node) {
@@ -261,7 +261,7 @@ public class NodeLocation extends ItemLocation {
   /**
    * Get node's expression by a NodeLocation.
    *
-   * @param NodeLocation location
+   * @param location location
    * @return The node's expression
    */
   public static final String getExpressionByNodeLocation(final NodeLocation location) {

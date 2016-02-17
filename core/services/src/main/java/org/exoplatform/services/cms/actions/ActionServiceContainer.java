@@ -185,7 +185,7 @@ public interface ActionServiceContainer {
    * @param node current node
    * @param actionName name of action
    * @throws Exception
-   * @see {@link #executeAction(String, Node, String, Map, String)}
+   * @see #executeAction(String, Node, String, Map)
    */
   public void executeAction(String userId, Node node, String actionName) throws Exception;
 

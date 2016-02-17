@@ -94,7 +94,7 @@ public class PublicationUtil {
    * @param page the page
    * @param applicationName the application name
    *
-   * @return the list< string>
+   * @return the list of app instances
    */
   public static List<String> findAppInstancesByName(Page page, String applicationName) {
     List<String> results = new ArrayList<String>();

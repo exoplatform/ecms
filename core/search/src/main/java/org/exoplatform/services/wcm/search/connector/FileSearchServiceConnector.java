@@ -82,7 +82,6 @@ public class FileSearchServiceConnector extends BaseContentSearchServiceConnecto
   /**
    * gets the image url
    * @return
-   * @throws Exception
    */
   @Override
   protected String getImageUrl(Node node) {

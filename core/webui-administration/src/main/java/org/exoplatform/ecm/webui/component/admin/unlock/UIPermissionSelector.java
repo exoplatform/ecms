@@ -152,11 +152,9 @@ public class UIPermissionSelector extends UIGroupMembershipSelector implements C
    * class that is interested in processing a selectMembershipAction event
    * implements this interface, and the object created with that class is
    * registered with a component using the component's
-   * <code>addSelectMembershipActionListener<code> method. When
+   * <code>addSelectMembershipActionListener</code> method. When
    * the selectMembershipAction event occurs, that object's appropriate
    * method is invoked.
-   *
-   * @see SelectMembershipActionEvent
    */
   static public class SelectMembershipActionListener extends EventListener<UIPermissionSelector> {
 
@@ -190,11 +188,9 @@ public class UIPermissionSelector extends UIGroupMembershipSelector implements C
    * that is interested in processing a changeNodeAction event implements this
    * interface, and the object created with that class is registered with a
    * component using the component's
-   * <code>addChangeNodeActionListener<code> method. When
+   * <code>addChangeNodeActionListener</code> method. When
    * the changeNodeAction event occurs, that object's appropriate
    * method is invoked.
-   *
-   * @see ChangeNodeActionEvent
    */
   static public class ChangeNodeActionListener extends EventListener<UITree> {
 
@@ -214,11 +210,9 @@ public class UIPermissionSelector extends UIGroupMembershipSelector implements C
    * that is interested in processing a selectPathAction event implements this
    * interface, and the object created with that class is registered with a
    * component using the component's
-   * <code>addSelectPathActionListener<code> method. When
+   * <code>addSelectPathActionListener</code> method. When
    * the selectPathAction event occurs, that object's appropriate
    * method is invoked.
-   *
-   * @see SelectPathActionEvent
    */
   static public class SelectPathActionListener extends EventListener<UIBreadcumbs> {
 

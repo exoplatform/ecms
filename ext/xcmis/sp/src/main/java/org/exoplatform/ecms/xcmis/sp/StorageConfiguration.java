@@ -147,8 +147,7 @@ public class StorageConfiguration
    /**
     * Set path of JCR node which must be considered as root folder.
     *
-    * @param rootFolderPath
-    *           root folder path
+    * @param rootNodePath root folder path
     */
    public void setRootNodePath(String rootNodePath)
    {

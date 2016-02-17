@@ -42,9 +42,9 @@ public class LinkDeploymentPlugin extends DeploymentPlugin {
    * Instantiates a new xML deployment plugin.
    *
    * @param initParams the init params
-   * @param configurationManager the configuration manager
    * @param repositoryService the repository service
-   * @param publicationService the publication service
+   * @param linkManager
+   * @param taxonomyService
    */
   public LinkDeploymentPlugin(InitParams initParams,
                               RepositoryService repositoryService,

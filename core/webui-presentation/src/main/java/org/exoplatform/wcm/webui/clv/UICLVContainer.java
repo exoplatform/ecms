@@ -139,7 +139,7 @@ public abstract class UICLVContainer extends UIContainer {
    * The class that is interested in processing a quickEditAction
    * event implements this interface, and the object created
    * with that class is registered with a component using the
-   * component's <code>addQuickEditActionListener<code> method. When
+   * component's <code>addQuickEditActionListener</code> method. When
    * the quickEditAction event occurs, that object's appropriate
    * method is invoked.
    *

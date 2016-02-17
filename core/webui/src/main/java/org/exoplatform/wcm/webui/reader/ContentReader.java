@@ -11,7 +11,7 @@ public class ContentReader {
    * </p>
    * - Unescapes previously escaped jcr chars - Escapes the characters in a the content using HTML entities
    * 
-   * @param node the node
+   * @param content the node
    * 
    * @return the content compatibility with XSS
    * 
@@ -30,7 +30,7 @@ public class ContentReader {
    * For example:
    * </p>
    * <p>
-   * <code>"bread" & "butter"</code>
+   * <code>"bread" and "butter"</code>
    * </p>
    * becomes:
    * <p>
@@ -52,8 +52,7 @@ public class ContentReader {
    * Unescapes previously escaped jcr chars.
    * </p>
    * 
-   * @param the
-   * content to unescape
+   * @param content the content to unescape
    * 
    * @return the unescaped content
    * 

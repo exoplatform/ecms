@@ -34,7 +34,7 @@ public interface MetadataService {
   /**
    * Get name of all NodeType in current repository
    * @return              ArrayList of name
-   * @see {@link #getAllMetadatasNodeType()}
+   * @see #getAllMetadatasNodeType()
    */
   public List<String> getMetadataList() throws Exception;  
 

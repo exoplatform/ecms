@@ -217,11 +217,9 @@ public class UIPortalNavigationExplorer extends UIContainer {
    * that is interested in processing a changeNodeAction event implements this
    * interface, and the object created with that class is registered with a
    * component using the component's
-   * <code>addChangeNodeActionListener<code> method. When
+   * <code>addChangeNodeActionListener</code> method. When
    * the changeNodeAction event occurs, that object's appropriate
    * method is invoked.
-   *
-   * @see ChangeNodeActionEvent
    */
   public static class ChangeNodeActionListener extends EventListener<UIPortalNavigationExplorer> {
 

@@ -573,7 +573,7 @@ public class Utils {
 
   /**
    * Creates the popup window. Each portlet have a <code>UIPopupContainer</code>
-   * . <br/>
+   * . <br>
    * Every <code>UIPopupWindow</code> created by this method is belong to this
    * container.
    *
@@ -594,7 +594,7 @@ public class Utils {
 
   /**
    * Creates the popup window. Each portlet have a <code>UIPopupContainer</code>
-   * . <br/>
+   * . <br>
    * Every <code>UIPopupWindow</code> created by this method is belong to this
    * container.
    *
@@ -618,7 +618,7 @@ public class Utils {
 
   /**
    * Creates the popup window. Each portlet have a <code>UIPopupContainer</code>
-   * . <br/>
+   * . <br>
    * Every <code>UIPopupWindow</code> created by this method is belong to this
    * container.
    *
@@ -751,7 +751,7 @@ public class Utils {
   }
 
   /**
-   * Check if the node is viewable for the current user or not viewable. <br/>
+   * Check if the node is viewable for the current user or not viewable. <br>
    * return True if the node is viewable, otherwise will return False
    *
    * @param node: The node to check
@@ -948,7 +948,6 @@ public class Utils {
   }
 
   /**
-   * @purpose     Check if a query is valid
    * @param workspace
    * @param strQuery
    * @param SQLLanguage

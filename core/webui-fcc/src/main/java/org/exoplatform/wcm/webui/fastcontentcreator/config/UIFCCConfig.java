@@ -371,11 +371,9 @@ public class UIFCCConfig extends UIFormTabPane implements UISelectable {
    * The class that is interested in processing a selectPathAction
    * event implements this interface, and the object created
    * with that class is registered with a component using the
-   * component's <code>addSelectPathActionListener<code> method. When
+   * component's <code>addSelectPathActionListener</code> method. When
    * the selectPathAction event occurs, that object's appropriate
    * method is invoked.
-   *
-   * @see SelectPathActionEvent
    */
   static public class SelectPathActionListener extends EventListener<UIFCCConfig> {
 
@@ -411,11 +409,9 @@ public class UIFCCConfig extends UIFormTabPane implements UISelectable {
    * The class that is interested in processing a changeWorkspaceAction
    * event implements this interface, and the object created
    * with that class is registered with a component using the
-   * component's <code>addChangeWorkspaceActionListener<code> method. When
+   * component's <code>addChangeWorkspaceActionListener</code> method. When
    * the changeWorkspaceAction event occurs, that object's appropriate
    * method is invoked.
-   *
-   * @see ChangeWorkspaceActionEvent
    */
   static public class ChangeWorkspaceActionListener extends EventListener<UIFCCConfig> {
 
@@ -438,11 +434,9 @@ public class UIFCCConfig extends UIFormTabPane implements UISelectable {
    * The class that is interested in processing a saveAction
    * event implements this interface, and the object created
    * with that class is registered with a component using the
-   * component's <code>addSaveActionListener<code> method. When
+   * component's <code>addSaveActionListener</code> method. When
    * the saveAction event occurs, that object's appropriate
    * method is invoked.
-   *
-   * @see SaveActionEvent
    */
   static public class SaveActionListener extends EventListener<UIFCCConfig> {
 

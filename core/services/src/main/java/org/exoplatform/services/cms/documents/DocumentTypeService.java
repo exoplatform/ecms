@@ -30,7 +30,7 @@ public interface DocumentTypeService {
 
   /**
    * Get all supported document type
-   * @return List<String>
+   * @return supported types
    */
   public List<String> getAllSupportedType();
 
@@ -38,9 +38,8 @@ public interface DocumentTypeService {
    * Get all documents by kind of document type
    * @param documentType Kind of document(Images, Video,...)
    * @param workspace The name of workspace will be used to get documents
-   * @param repository The name of repository will be used to get documents
    * @param sessionProvider
-   * @return List<Node> all documents by kind of document type
+   * @return all documents by kind of document type
    * @throws Exception
    */
   public List<Node> getAllDocumentsByDocumentType(String documentType,
@@ -50,10 +49,9 @@ public interface DocumentTypeService {
   /**
    * Get all document by mimetype
    * @param workspace The name of workspace will be used to get documents
-   * @param repository The name of repository will be used to get documents
    * @param sessionProvider
    * @param mimeType The mime type of node(For example: image/jpg)
-   * @return List<Node> all documents by mime type
+   * @return all documents by mime type
    * @throws Exception
    */
   public List<Node> getAllDocumentsByType(String workspace,
@@ -63,10 +61,9 @@ public interface DocumentTypeService {
   /**
    * Get all document by array of mimetype
    * @param workspace The name of workspace will be used to get documents
-   * @param repository The name of repository will be used to get documents
    * @param sessionProvider
    * @param mimeTypes The array of mimetype(For example: ["image/jpg", "image/png"])
-   * @return List<Node> all documents by mime type
+   * @return all documents by mime type
    * @throws Exception
    */
   public List<Node> getAllDocumentsByType(String workspace,
@@ -79,7 +76,7 @@ public interface DocumentTypeService {
    * @param sessionProvider
    * @param mimeTypes The array of mimetype(For example: ["image/jpg", "image/png"])
    * @param userName The name of current user
-   * @return List<Node> all documents by mime type
+   * @return all documents by mime type
    * @throws Exception
    */
   public List<Node> getAllDocumentsByUser(String workspace,
@@ -101,7 +98,7 @@ public interface DocumentTypeService {
    * @param workspace The name of workspace will be used to get documents
    * @param sessionProvider
    * @param userName
-   * @return List<Node> all contents type document
+   * @return all contents type document
    * @throws Exception
    */
   public List<Node> getAllDocumentByContentsType(String documentType,

@@ -457,7 +457,7 @@ public class UISearchResult extends UIContainer {
     }
     /**
      * Check a symlink/taxonomylink if its target matches with keyword for searching ...link
-     * @param linkPath
+     * @param symlinkNode
      * @param keyword
      * @return
      */

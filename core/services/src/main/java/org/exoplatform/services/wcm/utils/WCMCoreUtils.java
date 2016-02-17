@@ -378,7 +378,7 @@ public class WCMCoreUtils {
   }
 
   /**
-   * gets the global css of given site node. For example, if the site is acme<br/>
+   * gets the global css of given site node. For example, if the site is acme<br>
    * we then return all css code only inside acme/css
    * @param siteNode the root node of the site
    * @return global css code inside this site
@@ -426,7 +426,7 @@ public class WCMCoreUtils {
   }
 
   /**
-   * gets the global javascript of given site node. For example, if the site is acme<br/>
+   * gets the global javascript of given site node. For example, if the site is acme<br>
    * we then return all javascript code only inside acme/js
    * @param siteNode the root node of the site
    * @return global javascript code inside this site

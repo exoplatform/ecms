@@ -71,8 +71,6 @@ public class InlineEditingService implements ResourceContainer{
    * @param siteName the site name
    *
    * @return the response
-   *
-   * @throws Exception the exception
    */
   @POST
   @Path("/title/")
@@ -95,8 +93,6 @@ public class InlineEditingService implements ResourceContainer{
    * @param siteName the site name
    *
    * @return the response
-   *
-   * @throws Exception the exception
    */
   @POST
   @Path("/summary/")
@@ -118,8 +114,6 @@ public class InlineEditingService implements ResourceContainer{
    * @param siteName the site name
    *
    * @return the response
-   *
-   * @throws Exception the exception
    */
   @POST
   @Path("/text/")
@@ -167,8 +161,6 @@ public class InlineEditingService implements ResourceContainer{
    * @param siteName the site name
    *
    * @return the response
-   *
-   * @throws Exception the exception
    */
   public Response modifyProperty(String propertyName, String newValue, String repositoryName, String workspaceName,
       String nodeUIID,String siteName, String language){

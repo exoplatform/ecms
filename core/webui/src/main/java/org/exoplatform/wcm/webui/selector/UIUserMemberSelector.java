@@ -63,8 +63,6 @@ public class UIUserMemberSelector extends UIContainer implements ComponentSelect
 
   /**
    * Instantiates a new uIWCM user container.
-   *
-   * @throws Exception the exception
    */
   public UIUserMemberSelector() {}
 
@@ -215,11 +213,9 @@ public class UIUserMemberSelector extends UIContainer implements ComponentSelect
    * The class that is interested in processing a addUserAction
    * event implements this interface, and the object created
    * with that class is registered with a component using the
-   * component's <code>addAddUserActionListener<code> method. When
+   * component's <code>addAddUserActionListener</code> method. When
    * the addUserAction event occurs, that object's appropriate
    * method is invoked.
-   *
-   * @see AddUserActionEvent
    */
   static  public class AddUserActionListener extends EventListener<UIUserMemberSelector> {
 

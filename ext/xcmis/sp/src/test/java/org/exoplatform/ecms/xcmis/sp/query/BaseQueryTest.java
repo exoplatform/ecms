@@ -49,7 +49,7 @@ import java.util.Map;
 import java.util.Set;
 
 /**
- * Created by The eXo Platform SAS. <br/>
+ * Created by The eXo Platform SAS. <br>
  * Date:
  *
  * @author <a href="karpenko.sergiy@gmail.com">Karpenko Sergiy</a>

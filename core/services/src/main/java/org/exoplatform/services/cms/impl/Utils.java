@@ -408,9 +408,9 @@ public class Utils {
   
   /**
    * Remove all the link of a deleted node
-   * @param     : node
-   * @param     : keepInTrash true if the link will be move to trash, otherwise set by false
-   * @throws    : Exception
+   * @param node
+   * @param keepInTrash true if the link will be move to trash, otherwise set by false
+   * @throws Exception
    */
   public static void removeDeadSymlinks(Node node, boolean keepInTrash) throws Exception {
     if (isInTrash(node)) {
@@ -678,7 +678,7 @@ public class Utils {
   /**
    * Clean string. Replace specialChar by "-"
    *
-   * @param str the str
+   * @param oldName the str
    *
    * @return the string
    */

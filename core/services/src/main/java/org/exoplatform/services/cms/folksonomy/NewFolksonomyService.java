@@ -25,7 +25,7 @@ import org.exoplatform.services.jcr.ext.distribution.DataDistributionType;
 
 /**
  * Manages all tags and their styles.
- * Currently, it just supports adding/editing/removing private & public tags.
+ * Currently, it just supports adding/editing/removing private and public tags.
  *
  * @LevelAPI Experimental
  */

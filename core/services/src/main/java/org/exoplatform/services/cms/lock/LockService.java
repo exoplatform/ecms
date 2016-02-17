@@ -38,14 +38,14 @@ public interface LockService {
 
   /**
    * Get all pre-setting lock list
-   * @return List<String>
+   * @return lock list
    * @throws Exception
    */
   public List<String> getPreSettingLockList() throws Exception;
 
 /**
  * Get all the identities which allowed to unlock nodes
- * @return List<String>
+ * @return lock list
  * @throws Exception
  */
   public List<String> getAllGroupsOrUsersForLock() throws Exception;
@@ -66,7 +66,7 @@ public interface LockService {
 
   /**
    * Return a HashMap which keeping all locked nodes informations
-   * @return HashMap<String, Map<String, String>
+   * @return locks holding map
    */
   public HashMap<String, Map<String, String>> getLockHolding();
 

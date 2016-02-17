@@ -314,11 +314,9 @@ public class UIContentDialogForm extends UIDialogForm  implements UIPopupCompone
    * The class that is interested in processing a cancelAction
    * event implements this interface, and the object created
    * with that class is registered with a component using the
-   * component's <code>addCloseActionListener<code> method. When
+   * component's <code>addCloseActionListener</code> method. When
    * the cancelAction event occurs, that object's appropriate
    * method is invoked.
-   *
-   * @see CloseActionEvent
    */
   static public class CloseActionListener extends EventListener<UIContentDialogForm> {
 
@@ -338,11 +336,9 @@ public class UIContentDialogForm extends UIDialogForm  implements UIPopupCompone
    * The class that is interested in processing a preferencesAction
    * event implements this interface, and the object created
    * with that class is registered with a component using the
-   * component's <code>addPreferencesActionListener<code> method. When
+   * component's <code>addPreferencesActionListener</code> method. When
    * the PreferencesAction event occurs, that object's appropriate
    * method is invoked.
-   *
-   * @see PreferencesActionEvent
    */
   static public class PreferencesActionListener extends EventListener<UIContentDialogForm> {
 
@@ -374,11 +370,9 @@ public class UIContentDialogForm extends UIDialogForm  implements UIPopupCompone
    * The class that is interested in processing a saveAction
    * event implements this interface, and the object created
    * with that class is registered with a component using the
-   * component's <code>addSaveDraftActionListener<code> method. When
+   * component's <code>addSaveDraftActionListener</code> method. When
    * the saveAction event occurs, that object's appropriate
    * method is invoked.
-   *
-   * @see SaveDraftActionEvent
    */
   public static class SaveDraftActionListener extends EventListener<UIContentDialogForm> {
 
@@ -511,11 +505,9 @@ public class UIContentDialogForm extends UIDialogForm  implements UIPopupCompone
    * The class that is interested in processing a cancelAction
    * event implements this interface, and the object created
    * with that class is registered with a component using the
-   * component's <code>addFastPublishActionListener<code> method. When
+   * component's <code>addFastPublishActionListener</code> method. When
    * the cancelAction event occurs, that object's appropriate
    * method is invoked.
-   *
-   * @see FastPublishActionEvent
    */
   public static class FastPublishActionListener extends EventListener<UIContentDialogForm> {
 
@@ -608,11 +600,9 @@ public class UIContentDialogForm extends UIDialogForm  implements UIPopupCompone
    * The listener interface for receiving addAction events. The class that is
    * interested in processing a addAction event implements this interface, and
    * the object created with that class is registered with a component using the
-   * component's <code>addAddActionListener<code> method. When
+   * component's <code>addAddActionListener</code> method. When
    * the addAction event occurs, that object's appropriate
    * method is invoked.
-   *
-   * @see AddActionEvent
    */
   static public class AddActionListener extends EventListener<UIContentDialogForm> {
 
@@ -722,11 +712,9 @@ public class UIContentDialogForm extends UIDialogForm  implements UIPopupCompone
    * The class that is interested in processing a removeReferenceAction
    * event implements this interface, and the object created
    * with that class is registered with a component using the
-   * component's <code>addRemoveReferenceActionListener<code> method. When
+   * component's <code>addRemoveReferenceActionListener</code> method. When
    * the removeReferenceAction event occurs, that object's appropriate
    * method is invoked.
-   *
-   * @see RemoveReferenceActionEvent
    */
   static public class RemoveReferenceActionListener extends EventListener<UIContentDialogForm> {
 

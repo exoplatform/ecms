@@ -48,10 +48,10 @@ import org.exoplatform.services.cms.impl.Utils;
  * 
  * This class will be used to upgrade node type templates like view1.gtmpl, dialog1.gtmpl,
  * stylesheet-rt.css, stylesheet-lt.css. Node type templates with desire of manual upgration 
- * can be specified in file configuration.properties.<br/>
- * Syntax :<br/> 
- * unchanged-nodetype-templates=<node name list>
- * For examples :<br/>
+ * can be specified in file configuration.properties.<br>
+ * Syntax :<br>
+ * unchanged-nodetype-templates={node name list}
+ * For examples :<br>
  * unchanged-nodetype-templates=nt:file, exo:article
  *
  */

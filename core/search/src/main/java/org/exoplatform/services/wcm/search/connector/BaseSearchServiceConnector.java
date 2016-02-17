@@ -150,7 +150,7 @@ public abstract class BaseSearchServiceConnector extends SearchServiceConnector 
   protected abstract ResultNode filterNode(ResultNode node) throws RepositoryException;
   
   /**
-   * converts data: from PageList<ResultNode> to List<SearchResult>
+   * converts data: from {@code PageList<ResultNode> to List<SearchResult>}
    * @param pageList
    * @return
    */
@@ -338,7 +338,6 @@ public abstract class BaseSearchServiceConnector extends SearchServiceConnector 
   /**
    * gets the image url
    * @return
-   * @throws Exception
    */
   protected abstract String getImageUrl(Node node);
   

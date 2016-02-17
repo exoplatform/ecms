@@ -35,7 +35,7 @@ public abstract class UIBaseNodeTreeSelector extends UIContainer implements Comp
    * On change.
    *
    * @param currentNode the current node
-   * @param requestContext the request context
+   * @param context the request context
    * @throws Exception the exception
    */
   public abstract void onChange(final Node currentNode, Object context) throws Exception;

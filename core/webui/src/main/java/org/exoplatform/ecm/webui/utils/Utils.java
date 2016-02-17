@@ -999,9 +999,9 @@ public class Utils {
   
   /**
    *
-   * @param     :  node: nt:file node with have the data stream
-   * @return    :  Link to download the jcr:data of the given node
-   * @throws       Exception
+   * @param node nt:file node with have the data stream
+   * @return Link to download the jcr:data of the given node
+   * @throws Exception
    */
   public static String getDownloadRestServiceLink(Node node) throws Exception{
     ExoContainer container = ExoContainerContext.getCurrentContainer() ;
@@ -1049,7 +1049,7 @@ public class Utils {
    *
    * @param currentNode
    * @param currentDrive
-   * @return List<String> of node types
+   * @return list of node types
    * @throws Exception
    */
   public static List<String> getAllowedFolderTypesInCurrentPath(Node currentNode, DriveData currentDrive) throws Exception {

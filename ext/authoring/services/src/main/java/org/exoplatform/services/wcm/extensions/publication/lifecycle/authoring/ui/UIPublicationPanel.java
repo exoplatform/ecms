@@ -94,11 +94,9 @@ public class UIPublicationPanel extends org.exoplatform.services.wcm.publication
    * The listener interface for receiving draftAction events. The class that is
    * interested in processing a draftAction event implements this interface, and
    * the object created with that class is registered with a component using the
-   * component's <code>addDraftActionListener<code> method. When
+   * component's <code>addDraftActionListener</code> method. When
    * the draftAction event occurs, that object's appropriate
    * method is invoked.
-   *
-   * @see DraftActionEvent
    */
   public static class ChangeStateActionListener extends EventListener<UIPublicationPanel> {
 

@@ -326,7 +326,7 @@ public class UICategoryNavigationTree extends UIContainer {
   }
 
   /**
-   * When a node is change in tree. This method will be rerender the children & sibbling nodes of
+   * When a node is change in tree. This method will be rerender the children and sibbling nodes of
    * current node and broadcast change node event to other uicomponent
    *
    * @param path the path
@@ -353,7 +353,7 @@ public class UICategoryNavigationTree extends UIContainer {
    * that is interested in processing a changeNodeAction event implements this
    * interface, and the object created with that class is registered with a
    * component using the component's
-   * <code>addChangeNodeActionListener<code> method. When
+   * <code>addChangeNodeActionListener</code> method. When
    * the changeNodeAction event occurs, that object's appropriate
    * method is invoked.
    */
@@ -375,7 +375,7 @@ public class UICategoryNavigationTree extends UIContainer {
    * that is interested in processing a quickEditAction event implements this
    * interface, and the object created with that class is registered with a
    * component using the component's
-   * <code>addQuickEditActionListener<code> method. When
+   * <code>addQuickEditActionListener</code> method. When
    * the quickEditAction event occurs, that object's appropriate
    * method is invoked.
    */

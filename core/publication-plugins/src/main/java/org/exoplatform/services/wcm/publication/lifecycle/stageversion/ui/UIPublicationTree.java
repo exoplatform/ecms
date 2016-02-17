@@ -99,7 +99,7 @@ public class UIPublicationTree extends UITree {
      * @param portalName the portal name
      * @param navigation the navigation
      * @param res the res
-     * @param isPageNode the is page node
+     * @param isUserNode the is user node
      */
     public TreeNode(String portalName, final UserNavigation navigation, final ResourceBundle res, boolean isUserNode) {
       this.portalName = portalName;
@@ -157,7 +157,7 @@ public class UIPublicationTree extends UITree {
     /**
      * Sets the page node.
      *
-     * @param pageNode the new page node
+     * @param userNode the new user node
      */
     public void setUserNode(UserNode userNode) {
       this.userNode = userNode;
@@ -217,7 +217,7 @@ public class UIPublicationTree extends UITree {
     /**
      * Sets the children by page nodes.
      *
-     * @param pagesNodes the new children by page nodes
+     * @param userNodes the new children by user nodes
      *
      * @throws Exception the exception
      */

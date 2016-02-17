@@ -509,7 +509,7 @@ abstract class BaseJcrStorage implements TypeManager
     * Get all sub-types of type <code>typeId</code>.
     *
     * @param typeId type Id
-    * @param includePropertyDefinition if <code>true</code> property definition
+    * @param includePropertyDefinitions if <code>true</code> property definition
     *        should be included
     * @return set of type definitions which are sub-type of specified type. If
     *         type has not any sub-types that empty collection will be returned.
@@ -574,10 +574,6 @@ abstract class BaseJcrStorage implements TypeManager
    /**
     * Document type definition.
     *
-    * @param mapping type mapping. May be
-    *        <code>null<code> if node type not need any mapping and supported
-    *        by xcmis directly. In this case node type must be one nt:file or
-    *        node type which extends nt:file
     * @param nt node type
     * @param includePropertyDefinition true if need include property definition
     *        false otherwise

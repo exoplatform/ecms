@@ -112,11 +112,13 @@ public class TagConnector extends BaseConnector implements ResourceContainer {
    * @format XML
    * 
    * @response The tag names in XML format.
+   * {@code
    * <?xml version="1.0" encoding="UTF-8" standalone="no" ?>
    * <tags>
    *  <tag name="gold" />
    *  <tag name="silver" />
    * </tags>
+   * }
    * 
    * @anchor TagConnector.getPublicTags
    */

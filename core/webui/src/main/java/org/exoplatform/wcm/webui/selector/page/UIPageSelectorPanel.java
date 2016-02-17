@@ -134,11 +134,9 @@ public class UIPageSelectorPanel extends UIContainer {
    * The class that is interested in processing a selectAction
    * event implements this interface, and the object created
    * with that class is registered with a component using the
-   * component's <code>addSelectActionListener<code> method. When
+   * component's <code>addSelectActionListener</code> method. When
    * the selectAction event occurs, that object's appropriate
    * method is invoked.
-   *
-   * @see SelectActionEvent
    */
   public static class SelectActionListener extends EventListener<UIPageSelectorPanel> {
 

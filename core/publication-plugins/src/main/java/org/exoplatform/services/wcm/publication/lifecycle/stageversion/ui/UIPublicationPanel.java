@@ -351,11 +351,9 @@ public class UIPublicationPanel extends UIForm {
    * The class that is interested in processing a changeVersionAction
    * event implements this interface, and the object created
    * with that class is registered with a component using the
-   * component's <code>addChangeVersionActionListener<code> method. When
+   * component's <code>addChangeVersionActionListener</code> method. When
    * the changeVersionAction event occurs, that object's appropriate
    * method is invoked.
-   *
-   * @see ChangeVersionActionEvent
    */
   public static class ChangeVersionActionListener extends EventListener<UIPublicationPanel> {
 
@@ -377,11 +375,9 @@ public class UIPublicationPanel extends UIForm {
    * The class that is interested in processing a closeAction
    * event implements this interface, and the object created
    * with that class is registered with a component using the
-   * component's <code>addCloseActionListener<code> method. When
+   * component's <code>addCloseActionListener</code> method. When
    * the closeAction event occurs, that object's appropriate
    * method is invoked.
-   *
-   * @see CloseActionEvent
    */
   public static class CloseActionListener extends EventListener<UIPublicationPanel> {
 
@@ -401,11 +397,9 @@ public class UIPublicationPanel extends UIForm {
    * The class that is interested in processing a draftAction
    * event implements this interface, and the object created
    * with that class is registered with a component using the
-   * component's <code>addDraftActionListener<code> method. When
+   * component's <code>addDraftActionListener</code> method. When
    * the draftAction event occurs, that object's appropriate
    * method is invoked.
-   *
-   * @see DraftActionEvent
    */
   public static class DraftActionListener extends EventListener<UIPublicationPanel> {
 
@@ -435,11 +429,9 @@ public class UIPublicationPanel extends UIForm {
    * The class that is interested in processing a liveAction
    * event implements this interface, and the object created
    * with that class is registered with a component using the
-   * component's <code>addLiveActionListener<code> method. When
+   * component's <code>addLiveActionListener</code> method. When
    * the liveAction event occurs, that object's appropriate
    * method is invoked.
-   *
-   * @see LiveActionEvent
    */
   public static class LiveActionListener extends EventListener<UIPublicationPanel> {
 
@@ -469,11 +461,9 @@ public class UIPublicationPanel extends UIForm {
    * The class that is interested in processing a obsoleteAction
    * event implements this interface, and the object created
    * with that class is registered with a component using the
-   * component's <code>addObsoleteActionListener<code> method. When
+   * component's <code>addObsoleteActionListener</code> method. When
    * the obsoleteAction event occurs, that object's appropriate
    * method is invoked.
-   *
-   * @see ObsoleteActionEvent
    */
   public static class ObsoleteActionListener extends EventListener<UIPublicationPanel> {
 
@@ -503,11 +493,9 @@ public class UIPublicationPanel extends UIForm {
    * The class that is interested in processing a previewVersionAction
    * event implements this interface, and the object created
    * with that class is registered with a component using the
-   * component's <code>addPreviewVersionActionListener<code> method. When
+   * component's <code>addPreviewVersionActionListener</code> method. When
    * the previewVersionAction event occurs, that object's appropriate
    * method is invoked.
-   *
-   * @see PreviewVersionActionEvent
    */
   public static class PreviewVersionActionListener extends EventListener<UIPublicationPanel> {
 
@@ -542,11 +530,9 @@ public class UIPublicationPanel extends UIForm {
    * The class that is interested in processing a restoreVersionAction
    * event implements this interface, and the object created
    * with that class is registered with a component using the
-   * component's <code>addRestoreVersionActionListener<code> method. When
+   * component's <code>addRestoreVersionActionListener</code> method. When
    * the restoreVersionAction event occurs, that object's appropriate
    * method is invoked.
-   *
-   * @see RestoreVersionActionEvent
    */
   public static class RestoreVersionActionListener extends EventListener<UIPublicationPanel> {
 
@@ -632,11 +618,9 @@ public class UIPublicationPanel extends UIForm {
    * The class that is interested in processing a seeAllVersionAction
    * event implements this interface, and the object created
    * with that class is registered with a component using the
-   * component's <code>addSeeAllVersionActionListener<code> method. When
+   * component's <code>addSeeAllVersionActionListener</code> method. When
    * the seeAllVersionAction event occurs, that object's appropriate
    * method is invoked.
-   *
-   * @see SeeAllVersionActionEvent
    */
   public static class SeeAllVersionActionListener extends EventListener<UIPublicationPanel> {
 

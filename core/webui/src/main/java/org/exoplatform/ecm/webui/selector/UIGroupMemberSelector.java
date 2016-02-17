@@ -289,11 +289,9 @@ public class UIGroupMemberSelector extends UIContainer implements ComponentSelec
    * that is interested in processing a selectPathAction event implements this
    * interface, and the object created with that class is registered with a
    * component using the component's
-   * <code>addSelectPathActionListener<code> method. When
+   * <code>addSelectPathActionListener</code> method. When
    * the selectPathAction event occurs, that object's appropriate
    * method is invoked.
-   *
-   * @see SelectPathActionEvent
    */
   static  public class SelectPathActionListener extends EventListener<UIBreadcumbs> {
     public void execute(Event<UIBreadcumbs> event) throws Exception {

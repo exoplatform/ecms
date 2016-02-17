@@ -64,10 +64,12 @@ public class FCKUtils {
 
   /**
    * Creates the root element for connector response. The full connector response looks like:
-   *<Connector command="GetFolders" resourceType="">
+   * {@code
+   * <Connector command="GetFolders" resourceType="">
    *  <CurrentFolder folderType="" name="" path="" url=""/>
    *  </CurrentFolder>
-   *</Connector>
+   * </Connector>
+   * }
    *
    * @param command the command
    * @param node the node
