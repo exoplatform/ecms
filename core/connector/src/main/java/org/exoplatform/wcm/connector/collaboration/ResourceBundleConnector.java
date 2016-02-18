@@ -30,7 +30,9 @@ import javax.ws.rs.QueryParam;
 import javax.ws.rs.core.CacheControl;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
+import javax.xml.parsers.DocumentBuilder;
 import javax.xml.parsers.DocumentBuilderFactory;
+import javax.xml.parsers.ParserConfigurationException;
 import javax.xml.transform.dom.DOMSource;
 
 import org.exoplatform.services.resources.ResourceBundleService;
@@ -57,21 +59,31 @@ public class ResourceBundleConnector implements ResourceContainer {
   * 
   * @anchor ResourceBundleConnector.getBundle
   */
+
+  private static DocumentBuilder DB;
+
+  static {
+    try {
+      DB = DocumentBuilderFactory.newInstance().newDocumentBuilder();
+    } catch (final ParserConfigurationException e) {
+      throw new RuntimeException(e);
+    }
+  }
   @GET
   @Path("/getBundle/")
   public Response getBundle (
       @QueryParam("key") String key,
       @QueryParam("locale") String locale) {
     try {
-      ResourceBundleService resourceBundleService = WCMCoreUtils.getService(ResourceBundleService.class);
-      String resourceBundleNames[] = resourceBundleService.getSharedResourceBundleNames();
-      Document document = DocumentBuilderFactory.newInstance().newDocumentBuilder().newDocument();
-      Element bundles = document.createElement("bundles");
+      final ResourceBundleService resourceBundleService = WCMCoreUtils.getService(ResourceBundleService.class);
+      final String resourceBundleNames[] = resourceBundleService.getSharedResourceBundleNames();
+      final Document document = DB.newDocument();
+      final Element bundles = document.createElement("bundles");
       bundles.setAttribute("locale", locale);
-      String keys[] = key.split(",");
-      Set<String> remainingKeys = new LinkedHashSet<String>(keys.length + 1, 1f);
+      final String keys[] = key.split(",");
+      final Set<String> remainingKeys = new LinkedHashSet<String>(keys.length + 1, 1f);
       Collections.addAll(remainingKeys, keys);
-      loop : for (String resourceBundleName : resourceBundleNames) {
+      loop : for (final String resourceBundleName : resourceBundleNames) {
         ResourceBundle resourceBundle = null;
         if(locale.indexOf("_") > 0) {
             resourceBundle = resourceBundleService.getResourceBundle(resourceBundleName, new Locale(
@@ -82,29 +94,29 @@ public class ResourceBundleConnector implements ResourceContainer {
           resourceBundle = resourceBundleService.getResourceBundle(resourceBundleName, new Locale(locale));
         }
         
-        for (Iterator<String> it = remainingKeys.iterator(); it.hasNext();) {
-          String oneKey = it.next();
+        for (final Iterator<String> it = remainingKeys.iterator(); it.hasNext();) {
+          final String oneKey = it.next();
           try {
-            String value = resourceBundle.getString(oneKey);
-            Element element = document.createElement(oneKey);
+            final String value = resourceBundle.getString(oneKey);
+            final Element element = document.createElement(oneKey);
             element.setAttribute("value", value);
             bundles.appendChild(element);
             it.remove();
             if (remainingKeys.isEmpty()) {
               break loop;
             }
-          } catch (MissingResourceException e) {
+          } catch (final MissingResourceException e) {
             continue;
           }
         }
       }
       document.appendChild(bundles);
 
-      CacheControl cacheControl = new CacheControl();
+      final CacheControl cacheControl = new CacheControl();
       cacheControl.setNoCache(true);
       cacheControl.setNoStore(true);
       return Response.ok(new DOMSource(document), MediaType.TEXT_XML).cacheControl(cacheControl).build();
-    } catch (Exception e) {
+    } catch (final Exception e) {
       return Response.serverError().build();
     }
   }
