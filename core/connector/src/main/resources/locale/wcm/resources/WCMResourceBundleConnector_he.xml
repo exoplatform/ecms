@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<bundle>
+  <ContentSelector>
+    <msg>
+      <no-file-selected>There is no content selected. Please select at least one.</no-file-selected>
+    </msg>
+  </ContentSelector>
+  <RenameConnector>
+    <label>
+      <rename>Rename</rename>
+      <cancel>Cancel</cancel>
+    </label>
+    <msg>
+      <renaming>Renaming...</renaming>
+    </msg>
+  </RenameConnector>
+  <OpenInOfficeConnector>
+    <label>
+      <exo.remote-edit.word>Open in Word</exo.remote-edit.word>
+      <exo.remote-edit.excel>Open in Excel</exo.remote-edit.excel>
+      <exo.remote-edit.powerpoint>Open in Powerpoint</exo.remote-edit.powerpoint>
+      <exo.remote-edit.desktop>Open on Desktop</exo.remote-edit.desktop>
+      <exo.remote-edit.desktop-app>Open in {0}</exo.remote-edit.desktop-app>
+    </label>
+  </OpenInOfficeConnector>
+  <DocumentAutoVersion>
+    <msg>
+      <WrongMimeType>The mimetype of the file uploaded is unknown. No new version of {0} will be created.</WrongMimeType>
+    </msg>
+  </DocumentAutoVersion>
+</bundle>
