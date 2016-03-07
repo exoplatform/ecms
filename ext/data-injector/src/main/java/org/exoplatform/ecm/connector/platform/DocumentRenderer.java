@@ -6,13 +6,13 @@ import java.io.InputStream;
 import java.io.OutputStream;
 import java.util.Date;
 import org.apache.pdfbox.PDFToImage;
-import org.apache.poi.hslf.model.Slide;
-import org.apache.poi.hslf.model.TextBox;
-import org.apache.poi.hslf.usermodel.SlideShow;
+import org.apache.poi.hslf.usermodel.HSLFSlideShow;
+import org.apache.poi.hslf.usermodel.HSLFTextBox;
 import org.apache.poi.hssf.usermodel.HSSFRow;
 import org.apache.poi.hssf.usermodel.HSSFSheet;
 import org.apache.poi.hssf.usermodel.HSSFWorkbook;
-
+import org.apache.poi.sl.usermodel.Slide;
+import org.apache.poi.sl.usermodel.SlideShow;
 
 
 public class DocumentRenderer {
@@ -57,9 +57,9 @@ public class DocumentRenderer {
   public boolean createPowerPointDocument(String content, String fileName) {
     try {
       //create a new empty slide show
-      SlideShow ppt = new SlideShow();
+      SlideShow ppt = new HSLFSlideShow();
       Slide s1 = ppt.createSlide();
-      TextBox txt = new TextBox();
+      HSLFTextBox txt = new HSLFTextBox();
       txt.setText(content);
       s1.addShape(txt);
       //save changes in a file
