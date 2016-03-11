@@ -18,6 +18,7 @@
   
   UIComponent uiParent = uicomponent.getParent();
   RepositoryService rService = uicomponent.getApplicationComponent(RepositoryService.class);
+  PDFViewerService pdfViewerService = uicomponent.getApplicationComponent(PDFViewerService.class);
   String repository = rService.getCurrentRepository().getConfiguration().getName();
 
 if (uiParent != null) {
@@ -39,7 +40,7 @@ if (uiParent != null) {
   PortalRequestContext portalRequestContext = Util.getPortalRequestContext();
   def lang = portalRequestContext.getLocale().getLanguage();
 
-if (maximumPage > 0 && maximumPage <= PDFViewerService.MAX_PAGES && fileSize <= PDFViewerService.MAX_FILE_SIZE) {
+if (maximumPage > 0 && maximumPage <= pdfViewerService.getMaxPages() && fileSize <= pdfViewerService.getMaxFileSize()) {
   def jsManager = rqcontext.getJavascriptManager();
   jsManager.require("SHARED/jquery", "gj").addScripts("gj(document).ready(function() { gj(\"*[rel='tooltip']\").tooltip();});");
 
@@ -513,12 +514,12 @@ if(uicomponent.isNotModernBrowser()) {
 
     def errorMessage = _ctx.appRes("File.view.label.not-viewable");
     def pageMsg = _ctx.appRes("File.view.label.pdf-max-page");
-    pageMsg = pageMsg.replace("{0}", (String) PDFViewerService.MAX_PAGES);
+    pageMsg = pageMsg.replace("{0}", (String) pdfViewerService.getMaxPages());
     def sizeMsg = _ctx.appRes("File.view.label.pdf-max-size");
-    sizeMsg = sizeMsg.replace("{0}", (String) PDFViewerService.MAX_FILE_SIZE/(1024*1024));
-    if (maximumPage > PDFViewerService.MAX_PAGES) {
+    sizeMsg = sizeMsg.replace("{0}", (String) pdfViewerService.getMaxFileSize()/(1024*1024));
+    if (maximumPage > pdfViewerService.getMaxPages()) {
       errorMessage = pageMsg;
-    } else if (fileSize > PDFViewerService.MAX_FILE_SIZE) {
+    } else if (fileSize > pdfViewerService.getMaxFileSize()) {
       errorMessage = sizeMsg;
     }
 

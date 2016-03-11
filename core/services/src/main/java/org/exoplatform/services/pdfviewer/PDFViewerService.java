@@ -30,6 +30,8 @@ import java.util.logging.Logger;
 import javax.jcr.Node;
 
 import org.artofsolving.jodconverter.office.OfficeException;
+import org.exoplatform.container.xml.InitParams;
+import org.exoplatform.container.xml.ValueParam;
 import org.exoplatform.services.cache.CacheService;
 import org.exoplatform.services.cache.ExoCache;
 import org.exoplatform.services.cms.impl.Utils;
@@ -39,33 +41,79 @@ import org.exoplatform.services.jcr.RepositoryService;
 import org.exoplatform.services.log.ExoLogger;
 import org.exoplatform.services.log.Log;
 import org.icepdf.core.pobjects.Document;
+
 /**
- * Created by The eXo Platform SAS
- * Author : Nguyen The Vinh From ECM Of eXoPlatform
- *          vinh_nguyen@exoplatform.com
- * 6 Jul 2012  
+ * Created by The eXo Platform SAS Author : Nguyen The Vinh From ECM Of
+ * eXoPlatform vinh_nguyen@exoplatform.com 6 Jul 2012
  */
 
 public class PDFViewerService {
-  private static final int MAX_NAME_LENGTH= 150;
-  private static final Log LOG  = ExoLogger.getLogger(PDFViewerService.class.getName());
-  private JodConverterService jodConverter_;
-  private ExoCache<Serializable, Object> pdfCache;
-  public static final long MAX_FILE_SIZE = 5 * 1024 * 1024;//5MB
-  public static final long MAX_PAGES = 99;
+  private static final Log               LOG                      = ExoLogger.getLogger(PDFViewerService.class.getName());
 
+  private static final int               MAX_NAME_LENGTH          = 150;
+
+  public static final long               DEFAULT_MAX_FILE_SIZE    = 10 * 1024 * 1024;
+
+  public static final long               DEFAULT_MAX_PAGES        = 99;
+
+  public static final String             MAX_FILE_SIZE_PARAM_NAME = "maxFileSize";
+
+  public static final String             MAX_PAGES_PARAM_NAME     = "maxPages";
+
+  private JodConverterService            jodConverter_;
+
+  private ExoCache<Serializable, Object> pdfCache;
+
+  private long                           maxFileSize;
+
+  private long                           maxPages;
 
   public PDFViewerService(RepositoryService repositoryService,
                           CacheService caService,
-                          JodConverterService jodConverter) throws Exception {
+                          JodConverterService jodConverter,
+                          InitParams initParams) throws Exception {
     jodConverter_ = jodConverter;
     pdfCache = caService.getCacheInstance(PDFViewerService.class.getName());
+
+    maxFileSize = DEFAULT_MAX_FILE_SIZE;
+    maxPages = DEFAULT_MAX_PAGES;
+    if (initParams != null) {
+      ValueParam maxFileSizeValueParam = initParams.getValueParam(MAX_FILE_SIZE_PARAM_NAME);
+      if (maxFileSizeValueParam != null) {
+        try {
+          maxFileSize = Long.parseLong(maxFileSizeValueParam.getValue()) * 1024 * 1024;
+        } catch (NumberFormatException e) {
+          LOG.warn("Parameter " + MAX_FILE_SIZE_PARAM_NAME + " for document preview is not a valid number ("
+              + maxFileSizeValueParam.getValue() + "), default value will be used (" + DEFAULT_MAX_FILE_SIZE + ")");
+        }
+      }
+      ValueParam maxPagesValueParam = initParams.getValueParam(MAX_PAGES_PARAM_NAME);
+      if (maxPagesValueParam != null) {
+        try {
+          maxPages = Long.parseLong(maxPagesValueParam.getValue());
+        } catch (NumberFormatException e) {
+          LOG.warn("Parameter " + MAX_PAGES_PARAM_NAME + " for document preview is not a valid number ("
+              + maxPagesValueParam.getValue() + "), default value will be used (" + MAX_PAGES_PARAM_NAME + ")");
+        }
+      }
+    }
   }
+
+  public long getMaxFileSize() {
+    return maxFileSize;
+  }
+
+  public long getMaxPages() {
+    return maxPages;
+  }
+
   public ExoCache<Serializable, Object> getCache() {
     return pdfCache;
   }
+
   /**
    * Init pdf document from InputStream in nt:file node
+   * 
    * @param currentNode
    * @param repoName
    * @return
@@ -78,16 +126,19 @@ public class PDFViewerService {
   public Document buildDocumentImage(File input, String name) {
     Document document = new Document();
 
-    // Turn off Log of org.icepdf.core.pobjects.Document to avoid printing error stack trace in case viewing
+    // Turn off Log of org.icepdf.core.pobjects.Document to avoid printing error
+    // stack trace in case viewing
     // a PDF file which use new Public Key Security Handler.
     // TODO: Remove this statement after IcePDF fix this
     Logger.getLogger(Document.class.toString()).setLevel(Level.OFF);
 
-    if (input == null) return null;
-    
+    if (input == null)
+      return null;
+
     // Capture the page image to file
     try {
-      // cut the file name if name is too long, because OS allows only file with name < 250 characters
+      // cut the file name if name is too long, because OS allows only file with
+      // name < 250 characters
       name = reduceFileNameSize(name);
       FileInputStream fis = new FileInputStream(input);
       document.setInputStream(new BufferedInputStream(fis), name);
@@ -100,9 +151,10 @@ public class PDFViewerService {
       return null;
     }
   }
-  
+
   /**
    * Write PDF data to file
+   * 
    * @param currentNode
    * @param repoName
    * @return
@@ -116,18 +168,20 @@ public class PDFViewerService {
     bd.append(repoName).append("/").append(wsName).append("/").append(uuid);
     bd1.append(bd).append("/jcr:lastModified");
     String path = (String) pdfCache.get(new ObjectKey(bd.toString()));
-    String lastModifiedTime = (String)pdfCache.get(new ObjectKey(bd1.toString()));
+    String lastModifiedTime = (String) pdfCache.get(new ObjectKey(bd1.toString()));
     File content = null;
-    String name = currentNode.getName().replaceAll(":","_");
+    String name = currentNode.getName().replaceAll(":", "_");
     Node contentNode = currentNode.getNode("jcr:content");
-    
+
     String lastModified = Utils.getJcrContentLastModified(currentNode);
     if (path == null || !(content = new File(path)).exists() || !lastModified.equals(lastModifiedTime)) {
       String mimeType = contentNode.getProperty("jcr:mimeType").getString();
       InputStream input = new BufferedInputStream(contentNode.getProperty("jcr:data").getStream());
       // Create temp file to store converted data of nt:file node
-      if (name.indexOf(".") > 0) name = name.substring(0, name.lastIndexOf("."));
-      // cut the file name if name is too long, because OS allows only file with name < 250 characters
+      if (name.indexOf(".") > 0)
+        name = name.substring(0, name.lastIndexOf("."));
+      // cut the file name if name is too long, because OS allows only file with
+      // name < 250 characters
       name = reduceFileNameSize(name);
       content = File.createTempFile(name + "_tmp", ".pdf");
 
@@ -141,27 +195,28 @@ public class PDFViewerService {
         read(input, new BufferedOutputStream(new FileOutputStream(in)));
         long fileSize = in.length(); // size in byte
         if (LOG.isDebugEnabled()) {
-          LOG.debug("File '" + currentNode.getPath() +
-                    "' of " + fileSize + " B. Size limit for preview: " + (MAX_FILE_SIZE/(1024*1024)) + " MB");
+          LOG.debug("File '" + currentNode.getPath() + "' of " + fileSize + " B. Size limit for preview: "
+              + (getMaxFileSize() / (1024 * 1024)) + " MB");
         }
-        if (fileSize <= MAX_FILE_SIZE) { // ECMS-6329 only converts small file
-        try {
-          boolean success = jodConverter_.convert(in, content, "pdf");
-          // If the converting failed then delete the content of temporary file
-          if (!success) {
+        if (fileSize <= getMaxFileSize()) {
+          try {
+            boolean success = jodConverter_.convert(in, content, "pdf");
+            // If the converting failed then delete the content of temporary
+            // file
+            if (!success) {
+              content.delete();
+              content = null;
+            }
+
+          } catch (OfficeException connection) {
             content.delete();
             content = null;
+            if (LOG.isErrorEnabled()) {
+              LOG.error("Exception when using Office Service", connection);
+            }
+          } finally {
+            in.delete();
           }
-          
-        } catch (OfficeException connection) {
-          content.delete();
-          content = null;
-          if (LOG.isErrorEnabled()) {
-            LOG.error("Exception when using Office Service", connection);
-          }
-        } finally {
-          in.delete();
-        }
         } else {
           LOG.info("File '" + currentNode.getPath() + "' is too big for preview.");
           content.delete();
@@ -178,11 +233,13 @@ public class PDFViewerService {
     }
     return content;
   }
-  
+
   /**
-   * reduces the file name size. If the length is > 150, return the first 150 characters, else, return the original value
+   * reduces the file name size. If the length is > 150, return the first 150
+   * characters, else, return the original value
+   * 
    * @param name the name
-   * @return the reduced name 
+   * @return the reduced name
    */
   private String reduceFileNameSize(String name) {
     return (name != null && name.length() > MAX_NAME_LENGTH) ? name.substring(0, MAX_NAME_LENGTH) : name;
