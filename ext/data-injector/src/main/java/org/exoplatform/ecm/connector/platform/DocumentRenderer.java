@@ -5,6 +5,10 @@ import java.io.FileOutputStream;
 import java.io.InputStream;
 import java.io.OutputStream;
 import java.util.Date;
+
+import com.lowagie.text.Document;
+import com.lowagie.text.Paragraph;
+import com.lowagie.text.pdf.PdfWriter;
 import org.apache.pdfbox.PDFToImage;
 import org.apache.poi.hslf.usermodel.HSLFSlideShow;
 import org.apache.poi.hslf.usermodel.HSLFTextBox;
@@ -75,11 +79,11 @@ public class DocumentRenderer {
   public boolean createPDFDocument(String content, String fileName) {
     try {
       OutputStream file = new FileOutputStream(new File(fileName));
-      com.itextpdf.text.Document document = new com.itextpdf.text.Document();
-      com.itextpdf.text.pdf.PdfWriter.getInstance(document, file);
+      Document document = new Document();
+      PdfWriter.getInstance(document, file);
       document.open();
-      document.add(new com.itextpdf.text.Paragraph(content));
-      document.add(new com.itextpdf.text.Paragraph(new Date().toString()));
+      document.add(new Paragraph(content));
+      document.add(new Paragraph(new Date().toString()));
       document.close();
       file.close();
       return true;
@@ -92,11 +96,11 @@ public class DocumentRenderer {
     try {
       String fileExtension = fileName.substring(fileName.indexOf('.') + 1);
       OutputStream file = new FileOutputStream(new File("temp.pdf"));
-      com.itextpdf.text.Document document = new com.itextpdf.text.Document();
-      com.itextpdf.text.pdf.PdfWriter.getInstance(document, file);
+      Document document = new Document();
+      PdfWriter.getInstance(document, file);
       document.open();
-      document.add(new com.itextpdf.text.Paragraph(content));
-      document.add(new com.itextpdf.text.Paragraph(new Date().toString()));
+      document.add(new Paragraph(content));
+      document.add(new Paragraph(new Date().toString()));
       document.close();
       file.close();
 

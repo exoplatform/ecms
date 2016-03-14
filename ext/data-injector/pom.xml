@@ -12,8 +12,8 @@
   <description>eXo DMS data injector service</description>
   <dependencies>
     <dependency>
-      <groupId>com.itextpdf</groupId>
-      <artifactId>itextpdf</artifactId>
+      <groupId>com.lowagie</groupId>
+      <artifactId>itext</artifactId>
     </dependency>
     <dependency>
       <groupId>javax.jcr</groupId>
