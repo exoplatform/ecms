@@ -26,6 +26,16 @@
 
     <component>
         <type>org.exoplatform.services.pdfviewer.PDFViewerService</type>
+        <init-params>
+          <value-param>
+            <name>maxFileSize</name>
+            <value>${exo.ecms.documents.pdfviewer.max-file-size}</value>
+          </value-param>
+          <value-param>
+            <name>maxPages</name>
+            <value>${exo.ecms.documents.pdfviewer.max-pages}</value>
+          </value-param>
+        </init-params>
     </component>
 
     <component>
