@@ -433,7 +433,7 @@ UploadForm.prototype.updateFiles = function(nodeId) {
   if(dropdownlist) {
 		if(dropdownlist.type=="hidden") filter = dropdownlist.value;		
 		else filter = dropdownlist.options[dropdownlist.selectedIndex].value;
-	}	else filter = 'Web Contents';
+	}	else filter = 'All';
 	var connector = eXo.ecm.ECS.hostName + strConnector+"repositoryName="+eXo.ecm.ECS.repositoryName+"&workspaceName="+eXo.ecm.ECS.workspaceName+"&userId=" + eXo.ecm.ECS.userId + "&filterBy="+filter;
         // Update Content Selector after uploading file
 	var xmlTreeNodes = eXo.ecm.WCMUtils.request(encodeURI(connector));
