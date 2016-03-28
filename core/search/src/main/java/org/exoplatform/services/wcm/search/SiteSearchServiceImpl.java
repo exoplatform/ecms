@@ -469,10 +469,10 @@ public class SiteSearchServiceImpl implements SiteSearchService {
     QueryTermHelper queryTermHelper = new QueryTermHelper();
     String queryTerm = null;
     if (isEnabledFuzzySearch) {
-      if (keyword.contains("*") || keyword.contains("?") || keyword.contains("~") || keyword.contains("\"")) {
+      if (keyword.contains("*") || keyword.contains("?") || keyword.contains("\"")) {
         queryTerm = queryTermHelper.contains(keyword).buildTerm();
       } else if(queryCriteria.isFuzzySearch()) {
-        queryTerm = queryTermHelper.contains(keyword).allowFuzzySearch(fuzzySearchIndex).buildTerm();
+        queryTerm = queryTermHelper.contains(keyword).appendAfter(fuzzySearchIndex,"~").buildTerm();
       } else {
         queryTerm = queryTermHelper.contains(keyword).buildTerm();
       }

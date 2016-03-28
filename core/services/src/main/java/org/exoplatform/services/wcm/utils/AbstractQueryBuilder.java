@@ -325,6 +325,26 @@ public abstract class AbstractQueryBuilder {
       return this;
     }
 
+    /**
+     *
+     * @param fuzzySearchIndex
+     * @param separator
+     * @return
+     */
+    public QueryTermHelper appendAfter(final double fuzzySearchIndex, final String separator) {
+
+      if (separator == null) {
+        return this;
+      }
+      final int pos = term.indexOf(separator);
+      if (pos == -1) {
+        return this;
+      }
+      term.substring(pos + separator.length());
+      term =  term.concat("~").concat(String.valueOf(fuzzySearchIndex));
+      return this;
+    }
+
   }
 
   /**
