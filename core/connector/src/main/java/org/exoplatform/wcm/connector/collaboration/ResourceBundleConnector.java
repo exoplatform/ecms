@@ -83,7 +83,7 @@ public class ResourceBundleConnector implements ResourceContainer {
       String keys[] = key.split(",");
       Set<String> remainingKeys = new LinkedHashSet<String>(keys.length + 1, 1f);
       Collections.addAll(remainingKeys, keys);
-      loop : for ( String resourceBundleName : resourceBundleNames) {
+      loop : for (String resourceBundleName : resourceBundleNames) {
         ResourceBundle resourceBundle = null;
         if(locale.indexOf("_") > 0) {
             resourceBundle = resourceBundleService.getResourceBundle(resourceBundleName, new Locale(
@@ -95,7 +95,7 @@ public class ResourceBundleConnector implements ResourceContainer {
         }
         
         for (Iterator<String> it = remainingKeys.iterator(); it.hasNext();) {
-           String oneKey = it.next();
+          String oneKey = it.next();
           try {
             String value = resourceBundle.getString(oneKey);
             Element element = document.createElement(oneKey);
