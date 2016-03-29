@@ -36,7 +36,8 @@
   rcontext.getJavascriptManager().require("SHARED/ecm-browser", "browser").
   addScripts("browser.DMSBrowser.managerResize();");
   RepositoryService rService = uicomponent.getApplicationComponent(RepositoryService.class);
-  String repository = rService.getCurrentRepository().getConfiguration().getName();  
+  PDFViewerService pdfViewerService = uicomponent.getApplicationComponent(PDFViewerService.class);
+  String repository = rService.getCurrentRepository().getConfiguration().getName();
   
   
   UIPopupWindow uiPopupWindow = uicomponent.getAncestorOfType(UIPopupWindow.class);
@@ -86,7 +87,7 @@
   if (fileComponent instanceof PDFViewer) {
     fileSize = contentNode.getProperty("jcr:data").getStream().available();
     def maximumOfPage = ((PDFViewer)fileComponent).getMaximumOfPage();
-    if (maximumOfPage <= 0 || maximumOfPage > PDFViewerService.MAX_PAGES || fileSize > PDFViewerService.MAX_FILE_SIZE) {
+    if (maximumOfPage <= 0 || maximumOfPage > pdfViewerService.getMaxPages() || fileSize > pdfViewerService.getMaxFileSize()) {
       canViewPDF = false;
     }
   }

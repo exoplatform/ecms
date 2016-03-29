@@ -45,6 +45,7 @@ import org.exoplatform.services.ecm.dms.view.TestApplicationTemplateManagerServi
 import org.exoplatform.services.ecm.dms.view.TestManageViewService;
 import org.exoplatform.services.ecm.dms.voting.TestVotingService;
 import org.exoplatform.services.ecm.dms.watchdocument.TestWatchDocumentService;
+import org.exoplatform.services.pdfviewer.TestPDFViewerService;
 import org.exoplatform.services.portletcache.TestFragmentCacheService;
 import org.exoplatform.services.portletcache.TestPortletFutureCache;
 import org.exoplatform.services.seo.TestSEOService;
@@ -56,6 +57,7 @@ import org.exoplatform.services.wcm.friendly.TestFriendlyService;
 import org.exoplatform.services.wcm.javascript.TestXJavaScriptService;
 import org.exoplatform.services.wcm.portal.artifacts.TestCreatePortalArtifactsService;
 import org.exoplatform.services.wcm.skin.TestXSkinService;
+
 import org.junit.AfterClass;
 import org.junit.BeforeClass;
 import org.junit.runner.RunWith;
@@ -108,7 +110,8 @@ import org.junit.runners.Suite.SuiteClasses;
   TestDMSConfigurationService.class,
   TestThumbnailService.class,
   TestSEOService.class,
-  TestClipboardService.class
+  TestClipboardService.class,
+  TestPDFViewerService.class
 })
 @ConfigTestCase(BaseWCMTestCase.class)
 public class BaseWCMTestSuite extends BaseExoContainerTestSuite {
