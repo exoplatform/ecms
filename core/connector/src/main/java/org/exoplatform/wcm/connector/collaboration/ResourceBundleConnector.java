@@ -65,7 +65,7 @@ public class ResourceBundleConnector implements ResourceContainer {
   static {
     try {
       DB = DocumentBuilderFactory.newInstance().newDocumentBuilder();
-    } catch (final ParserConfigurationException e) {
+    } catch (ParserConfigurationException e) {
       throw new RuntimeException(e);
     }
   }
@@ -75,15 +75,15 @@ public class ResourceBundleConnector implements ResourceContainer {
       @QueryParam("key") String key,
       @QueryParam("locale") String locale) {
     try {
-      final ResourceBundleService resourceBundleService = WCMCoreUtils.getService(ResourceBundleService.class);
-      final String resourceBundleNames[] = resourceBundleService.getSharedResourceBundleNames();
-      final Document document = DB.newDocument();
-      final Element bundles = document.createElement("bundles");
+      ResourceBundleService resourceBundleService = WCMCoreUtils.getService(ResourceBundleService.class);
+      String resourceBundleNames[] = resourceBundleService.getSharedResourceBundleNames();
+      Document document = DB.newDocument();
+      Element bundles = document.createElement("bundles");
       bundles.setAttribute("locale", locale);
-      final String keys[] = key.split(",");
-      final Set<String> remainingKeys = new LinkedHashSet<String>(keys.length + 1, 1f);
+      String keys[] = key.split(",");
+      Set<String> remainingKeys = new LinkedHashSet<String>(keys.length + 1, 1f);
       Collections.addAll(remainingKeys, keys);
-      loop : for (final String resourceBundleName : resourceBundleNames) {
+      loop : for ( String resourceBundleName : resourceBundleNames) {
         ResourceBundle resourceBundle = null;
         if(locale.indexOf("_") > 0) {
             resourceBundle = resourceBundleService.getResourceBundle(resourceBundleName, new Locale(
@@ -94,29 +94,29 @@ public class ResourceBundleConnector implements ResourceContainer {
           resourceBundle = resourceBundleService.getResourceBundle(resourceBundleName, new Locale(locale));
         }
         
-        for (final Iterator<String> it = remainingKeys.iterator(); it.hasNext();) {
-          final String oneKey = it.next();
+        for (Iterator<String> it = remainingKeys.iterator(); it.hasNext();) {
+           String oneKey = it.next();
           try {
-            final String value = resourceBundle.getString(oneKey);
-            final Element element = document.createElement(oneKey);
+            String value = resourceBundle.getString(oneKey);
+            Element element = document.createElement(oneKey);
             element.setAttribute("value", value);
             bundles.appendChild(element);
             it.remove();
             if (remainingKeys.isEmpty()) {
               break loop;
             }
-          } catch (final MissingResourceException e) {
+          } catch (MissingResourceException e) {
             continue;
           }
         }
       }
       document.appendChild(bundles);
 
-      final CacheControl cacheControl = new CacheControl();
+      CacheControl cacheControl = new CacheControl();
       cacheControl.setNoCache(true);
       cacheControl.setNoStore(true);
       return Response.ok(new DOMSource(document), MediaType.TEXT_XML).cacheControl(cacheControl).build();
-    } catch (final Exception e) {
+    } catch (Exception e) {
       return Response.serverError().build();
     }
   }
