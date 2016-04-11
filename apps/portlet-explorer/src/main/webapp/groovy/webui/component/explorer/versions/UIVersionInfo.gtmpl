@@ -11,18 +11,11 @@
    import org.exoplatform.ecm.webui.utils.Utils;
 
 %>
-<%
-  VersionNode rootNode = uicomponent.getRootVersionNode() ;  
+<%  
   public void writeNodes(List nodes, String clazz, int level) {
     for(node in nodes) {
 		  if(clazz == "Even") clazz = "";
       else clazz = "Even" ;
-		  
-		  String baseVersion = "" ;
-			if(uicomponent.isBaseVersion(node)) {			
-			  baseVersion = " (Base Version)" ;
-			}
-		  
 		  String[] labels = uicomponent.getVersionLabels(node);
 		  StringBuffer label = new StringBuffer() ;
 		  label.append("<label>") ;
@@ -38,7 +31,7 @@
 		  }
 		  label.append("</label>") ;
 		  
-		  String show = "Version: " + node.getName() + " " + label.toString() + baseVersion;
+            String show = _ctx.appRes("UIVersionInfo.tooltip.version") + " : " + node.getName() + " " + label.toString();
 			String dateCreated = node.getCreatedTime().getTime().toString();
 			String titleLable = displayLabel.toString();
 			println """
@@ -48,7 +41,7 @@
 	    println """
 			    <td class="right">
 			""";
-			if(!uicomponent.isBaseVersion(node)&&uicomponent.getCurrentNode().isNodeType("nt:file")) {						
+			if(uicomponent.getCurrentNode().isNodeType("nt:file")) {						
   			println "<a class=\"actionIcon\" onclick=\"" + 
 	  		         uicomponent.event("CompareVersion",   node.getPath()) + "\" rel=\"tooltip\" data-placement=\"bottom\" title=\"" + _ctx.appRes("UIVersionInfo.tooltip.compareVersion") + "\"><i class=\"uiIconViewChange uiIconLightGray\"></i></a>" ;			
 			}
@@ -58,19 +51,15 @@
 				println "<a class=\"actionIcon\" onclick=\"" + 
 				         uicomponent.event("RemoveLabel",   node.getPath()) + "\" rel=\"tooltip\" data-placement=\"bottom\" title=\"" + _ctx.appRes("UIVersionInfo.tooltip.removeLable") + "\"><i class=\"uiIconMinus uiIconLightGray\"></i></a>" ;      
 			}         
-			if(!uicomponent.isBaseVersion(node)){
 				println "<a class=\"actionIcon\" onclick=\"" + 
-				         uicomponent.event("RestoreVersion",   node.getPath()) + "\" rel=\"tooltip\" data-placement=\"bottom\" title=\"" + _ctx.appRes("UIVersionInfo.tooltip.restoreVersion") + "\"><i class=\"uiIconRestore uiIconLightGray\"></i></a>" ;
-			}         
+				         uicomponent.event("RestoreVersion",   node.getPath()) + "\" rel=\"tooltip\" data-placement=\"bottom\" title=\"" + _ctx.appRes("UIVersionInfo.tooltip.restoreVersion") + "\"><i class=\"uiIconRestore uiIconLightGray\"></i></a>" ;        
 			println "<a class=\"actionIcon\" onclick=\"" +  
 			         uicomponent.event("ViewVersion",   node.getPath()) + "\" rel=\"tooltip\" data-placement=\"bottom\" title=\"" + _ctx.appRes("UIVersionInfo.tooltip.viewVersion") + "\"><i class=\"uiIconPreview uiIconLightGray\"></i></a>" ;
-			if(!uicomponent.isBaseVersion(node)){
 				println "<a class=\"actionIcon\" onclick=\"" + 
-				         uicomponent.event("DeleteVersion",   node.getPath()) + "\" rel=\"tooltip\" data-placement=\"bottom\" title=\"" + _ctx.appRes("UIVersionInfo.tooltip.deleteVersion") + "\"><i class=\"uiIconTrash uiIconLightGray\"></i></a>" ;
-			}         
+				         uicomponent.event("DeleteVersion",   node.getPath()) + "\" rel=\"tooltip\" data-placement=\"bottom\" title=\"" + _ctx.appRes("UIVersionInfo.tooltip.deleteVersion") + "\"><i class=\"uiIconTrash uiIconLightGray\"></i></a>" ;      
 			println "</td></tr>" ;      
 			
-	    if(node.getChildrenSize() > 0 && node.isExpanded()) writeNodes(node.getChildren(), clazz, level + 1) ;
+	    if(node.getChildrenSize() > 0 && node.isExpanded()) writeNodes(node.getChildren(), clazz, level) ;
     }
   }
 %>
@@ -83,7 +72,20 @@
 		<table class="uiGrid table no-border-cell table-hover table-striped">
 			<%
 				String clazz = "" ;
-				writeNodes(rootNode.getChildren(), clazz, 0 );
+				VersionNode rootNode = uicomponent.getRootVersionNode();
+				String baseVersion = "" ;
+                baseVersion = " (" + _ctx.appRes("UIVersionInfo.tooltip.baseVersion") + ")";
+                String show1 = _ctx.appRes("UIVersionInfo.tooltip.version") + " : " + "0" + baseVersion;
+                println """
+                  <tr><td>$show1</td>
+                """;
+                println """
+                  <td class="right">
+                """;
+                println "<a class=\"actionIcon\" onclick=\"" + uicomponent.event("AddLabel",   rootNode.getPath()) + "\" rel=\"tooltip\" data-placement=\"bottom\" title=\"" + _ctx.appRes("UIVersionInfo.tooltip.addLabel") + "\"><i class=\"uiIconPlus uiIconLightGray\"></i></a>" ;
+                println "<a class=\"actionIcon\" onclick=\"" + uicomponent.event("ViewVersion",   rootNode.getPath()) + "\" rel=\"tooltip\" data-placement=\"bottom\" title=\"" + _ctx.appRes("UIVersionInfo.tooltip.viewVersion") + "\"><i class=\"uiIconPreview uiIconLightGray\"></i></a>" ;
+                println "</tr>" ;
+                writeNodes(rootNode.getChildren(), clazz, 1);
 			%>
 		</table>
 	</div>

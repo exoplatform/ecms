@@ -135,8 +135,10 @@ public class UIVersionInfo extends UIContainer implements UIPopupComponent {
       String objectId = event.getRequestContext().getRequestParameter(OBJECTID) ;
       uiVersionInfo.curentVersion_  = uiVersionInfo.rootVersion_.findVersionNode(objectId) ;
       UIViewVersion uiViewVersion = uiVersionInfo.getChild(UIViewVersion.class) ;
-      Node frozenNode = uiVersionInfo.curentVersion_.getNode("jcr:frozenNode") ;
-      uiViewVersion.setNode(frozenNode) ;
+      if ( !(uiVersionInfo.curentVersion_.getName().equals("jcr:rootVersion"))) {
+        Node frozenNode = uiVersionInfo.curentVersion_.getNode("jcr:frozenNode") ;
+        uiViewVersion.setNode(frozenNode) ;
+      }
       if(uiViewVersion.getTemplate() == null || uiViewVersion.getTemplate().trim().length() == 0) {
         UIApplication uiApp = uiVersionInfo.getAncestorOfType(UIApplication.class) ;
         uiApp.addMessage(new ApplicationMessage("UIVersionInfo.msg.have-no-view-template", null)) ;
