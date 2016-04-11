@@ -1346,6 +1346,8 @@
   -->
   <UIVersionInfo>
     <tooltip>
+      <version>Version</version>
+      <baseVersion>Base Version</baseVersion>
       <addLabel>Add Label</addLabel>
       <removeLable>Remove Label</removeLable>
       <restoreVersion>Restore Version</restoreVersion>
