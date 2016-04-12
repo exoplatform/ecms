@@ -93,12 +93,8 @@ public class PageListFactory {
     QueryResult result = query.execute();
     int totalNodes = (int)result.getNodes().getSize();
     QueryData queryData = new QueryData(queryStatement, workspace, language, isSystemSession, offset);
-    if (totalNodes <= AbstractPageList.RESULT_SIZE_SEPARATOR) {
       return new ArrayNodePageList<E>(result, pageSize, filter, dataCreator, queryData);
-    } else {
-      QueryResultPageList<E> ret = new QueryResultPageList<E>(pageSize, queryData, totalNodes, bufferSize, filter, dataCreator);
-      return ret;        
-    }
+
   }
   
   public static <E> AbstractPageList<E> createPageList(String queryStatement,
