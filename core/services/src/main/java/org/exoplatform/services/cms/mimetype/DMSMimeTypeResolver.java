@@ -17,11 +17,14 @@
  **************************************************************************/
 package org.exoplatform.services.cms.mimetype;
 
-import java.io.IOException;
+import org.exoplatform.commons.utils.MimeTypeResolver;
+import org.exoplatform.container.configuration.ConfigurationManager;
+import org.exoplatform.services.wcm.utils.WCMCoreUtils;
+
+import java.net.URL;
+import java.net.URLConnection;
 import java.util.Iterator;
 import java.util.Properties;
-
-import org.exoplatform.commons.utils.MimeTypeResolver;
 
 /**
  * Created by The eXo Platform SARL
@@ -38,11 +41,19 @@ public class DMSMimeTypeResolver {
   private static DMSMimeTypeResolver dmsMimeTypeResolver;
 
 
-  private DMSMimeTypeResolver() throws IOException {
-    dmsmimeTypes.load(getClass().getResourceAsStream("/conf/mimetype/mimetypes.properties"));
+  private DMSMimeTypeResolver() throws Exception {
+    ConfigurationManager configurationService = WCMCoreUtils.getService(ConfigurationManager.class);
+    URL filePath = configurationService.getURL("war:/conf/wcm-core/mimetype/mimetypes.properties");
+    if (filePath != null) {
+      URLConnection connection = filePath.openConnection();
+      dmsmimeTypes.load(connection.getInputStream());
+    } else {
+      //load the default mimetypes.properties
+      dmsmimeTypes.load(getClass().getResourceAsStream("/conf/mimetype/mimetypes.properties"));
+    }
   }
 
-  public static DMSMimeTypeResolver getInstance() throws IOException {
+  public static DMSMimeTypeResolver getInstance() throws Exception {
     if (dmsMimeTypeResolver == null) {
       synchronized (DMSMimeTypeResolver.class) {
         if (dmsMimeTypeResolver == null) {
