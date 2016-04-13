@@ -135,7 +135,7 @@ public class UIImportNode extends UIForm implements UIPopupComponent {
     return false;
   }
 
-  private String getMimeType(String fileName) throws IOException {
+  private String getMimeType(String fileName) throws Exception {
     DMSMimeTypeResolver resolver = DMSMimeTypeResolver.getInstance();
     return resolver.getMimeType(fileName);
   }
