@@ -13,7 +13,7 @@
 }
 
 .uiIcon16x16CloudFile-gdrive {
-	top: 1px;
+	top: 2px;
 }
 .uiIcon16x16CloudFile-gdrive:before {
 	content: url("icons/googledrive-gray-14x14.png");
@@ -115,6 +115,23 @@
   -o-transform: scale(0.5);
   -ms-transform: scale(0.5);
   transform: scale(0.5);
+}
+
+/* XXX workaround link "chain" location and size to look like others in eXo */
+[class*="uiIcon24x24applicationvndgoogle-"]>.LinkSmall, [class*="uiIcon16x16applicationvndgoogle-"]>.LinkSmall {
+  -webkit-transform: scale(1.4);
+  -moz-transform: scale(1.4);
+  -o-transform: scale(1.4);
+  -ms-transform: scale(1.4);
+  transform: scale(1.4);
+}
+[class*="uiIcon64x64applicationvndgoogle-"]>.Link {
+	-webkit-transform: scale(2);
+  -moz-transform: scale(2);
+  -o-transform: scale(2);
+  -ms-transform: scale(2);
+  transform: scale(2);
+  right: -16px !important;
 }	
 
 /*https://ssl.gstatic.com/docs/doclist/images/icon_10_generic_xl128.png*/
@@ -132,7 +149,7 @@
 	content: url("https://ssl.gstatic.com/docs/doclist/images/mediatype/icon_1_document_x32.png");
 }
 
-.uiIcon64x64applicationvndgoogle-appsdocument:before {
+.uiIcon64x64applicationvndgoogle-appsdocument::before {
 	content: url("https://ssl.gstatic.com/docs/doclist/images/mediatype/icon_1_document_x128.png");
 }
 
