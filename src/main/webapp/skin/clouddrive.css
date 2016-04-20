@@ -28,7 +28,7 @@
 }
 
 .fileContent .content, .mediaContent .content #CloudFileViewer {
-	text-align: left;
+	text-align: left !important;
 }
 
 /*
@@ -43,7 +43,20 @@
 .file-content .CodeMirror {
 	min-height: 600px;
 	height: 800px; !important;
+} 
+
+.downloadBtn #ViewerSwitch {
+	margin-right: 5px;
+	cursor: pointer;
 }
+
+.downloadBtn #ViewerSwitch i {
+	color: inherit;
+}
+
+.uiCloudFileActivity:before {
+	background-size: 50% 50%;
+}  
 
 /*************************** NodeType Icon ***********************/
 

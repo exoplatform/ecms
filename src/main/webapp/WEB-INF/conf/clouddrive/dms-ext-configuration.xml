@@ -395,6 +395,24 @@ Software Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA
             </field>
           </object>
         </object-param>
+        <!-- Activity stream handler for shared links to cloud files -->
+        <object-param>
+          <name>Share File Activity</name>
+          <object type="org.exoplatform.social.webui.activity.UIActivityExtension">
+            <field name="type">
+              <string>org.exoplatform.social.webui.activity.BaseUIActivity</string>
+            </field>
+            <field name="name">
+              <string>sharecloudfiles:spaces</string>
+            </field>
+            <field name="component">
+              <string>org.exoplatform.clouddrive.ecms.action.SharedCloudFileUIActivity</string>
+            </field>
+            <field name="activityBuiderClass">
+              <string>org.exoplatform.wcm.ext.component.activity.UISharedFileBuilder</string>
+            </field>
+          </object>
+        </object-param>
       </init-params>
     </component-plugin>
   </external-component-plugins>
