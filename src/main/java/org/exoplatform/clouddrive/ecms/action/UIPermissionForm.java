@@ -214,7 +214,7 @@ public class UIPermissionForm extends org.exoplatform.ecm.webui.component.explor
 
         // save all changes in the workspace
         currentNode.getSession().save();
-        uiForm.refresh();//(uiForm.getApplicationComponent(CloudFileActionService.class)).getUserPublicNode("john").getNodes()
+        uiForm.refresh();
         uiExplorer.setIsHidePopup(true);
       } else {
         LOG.warn("Cloud Drive cannot be found for " + currentNode.getPath());

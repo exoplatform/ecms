@@ -19,12 +19,14 @@ package org.exoplatform.clouddrive.ecms.action;
 import org.exoplatform.clouddrive.CloudDrive;
 import org.exoplatform.clouddrive.CloudDriveException;
 import org.exoplatform.clouddrive.CloudDriveService;
-import org.exoplatform.clouddrive.CloudDriveStorage;
-import org.exoplatform.clouddrive.CloudDriveStorage.Change;
+import org.exoplatform.commons.utils.LazyPageList;
+import org.exoplatform.commons.utils.ListAccess;
+import org.exoplatform.commons.utils.ListAccessImpl;
+import org.exoplatform.commons.utils.PageList;
 import org.exoplatform.ecm.webui.component.explorer.UIJCRExplorer;
 import org.exoplatform.ecm.webui.core.UIPermissionInfoGrid;
 import org.exoplatform.ecm.webui.core.UIPermissionManagerBase;
-import org.exoplatform.ecm.webui.utils.PermissionUtil;
+import org.exoplatform.ecm.webui.core.bean.PermissionBean;
 import org.exoplatform.services.log.ExoLogger;
 import org.exoplatform.services.log.Log;
 import org.exoplatform.webui.config.annotation.ComponentConfig;
@@ -33,9 +35,12 @@ import org.exoplatform.webui.core.UIGrid;
 import org.exoplatform.webui.core.lifecycle.UIContainerLifecycle;
 import org.exoplatform.webui.event.Event;
 
+import java.util.ArrayList;
+import java.util.Iterator;
+import java.util.List;
+
 import javax.jcr.InvalidItemStateException;
 import javax.jcr.Node;
-import javax.jcr.RepositoryException;
 
 @ComponentConfig(lifecycle = UIContainerLifecycle.class,
                  events = {
@@ -44,20 +49,14 @@ import javax.jcr.RepositoryException;
                      @EventConfig(listeners = UIPermissionInfo.EditActionListener.class) })
 public class UIPermissionInfo extends org.exoplatform.ecm.webui.component.explorer.popup.info.UIPermissionInfo {
 
-  protected static String[]  PERMISSION_BEAN_FIELD = { "usersOrGroups" };
+  protected static String[]  PERMISSION_BEAN_FIELD = { "usersOrGroups" };                        // PermissionType.READ,
+                                                                                                 // PermissionType.REMOVE
 
   protected static String[]  PERMISSION_ACTION     = { "Delete" };
 
   protected static final Log LOG                   = ExoLogger.getLogger(UIPermissionInfo.class);
 
-  public UIPermissionInfo() throws Exception {
-    super();
-    // customize permissions grid
-    UIPermissionInfoGrid uiGrid = getChild(UIPermissionInfoGrid.class);
-    uiGrid.configure("usersOrGroups", PERMISSION_BEAN_FIELD, PERMISSION_ACTION);
-  }
-
-  static public class DeleteActionListener extends
+  public static class DeleteActionListener extends
                                            org.exoplatform.ecm.webui.component.explorer.popup.info.UIPermissionInfo.DeleteActionListener {
     public void execute(Event<org.exoplatform.ecm.webui.component.explorer.popup.info.UIPermissionInfo> event) throws Exception {
       UIPermissionInfo uiComp = (UIPermissionInfo) event.getSource();
@@ -83,7 +82,7 @@ public class UIPermissionInfo extends org.exoplatform.ecm.webui.component.explor
 
           CloudFileActionService actions = uiComp.getApplicationComponent(CloudFileActionService.class);
           // 1. remove all links to the cloud file for given user/group identity
-          actions.removeLinks(currentNode, identity);//actions.getUserPublicNode(identity).getNodes()
+          actions.removeLinks(currentNode, identity);// actions.getUserPublicNode(identity).getNodes()
           // 2. unshare the file
           actions.unshareCloudFile(currentNode, localDrive, userOrGroup);
         } catch (Exception e) {
@@ -92,16 +91,79 @@ public class UIPermissionInfo extends org.exoplatform.ecm.webui.component.explor
       } else {
         LOG.warn("Cloud Drive cannot be found for " + currentNode.getPath());
       }
-      
+
       try {
         currentNode.getIndex(); // check if node valid here
         uiComp.updateGrid(uiComp.getChild(UIGrid.class).getUIPageIterator().getCurrentPage());
         uiJCRExplorer.setIsHidePopup(true);
         event.getRequestContext().addUIComponentToUpdateByAjax(uiParent);
-      } catch(InvalidItemStateException e) {
+      } catch (InvalidItemStateException e) {
         uiJCRExplorer.setCurrentPath(uiJCRExplorer.getRootPath());
-        event.getRequestContext().addUIComponentToUpdateByAjax(uiJCRExplorer);        
-      }      
+        event.getRequestContext().addUIComponentToUpdateByAjax(uiJCRExplorer);
+      }
     }
   }
+
+  public UIPermissionInfo() throws Exception {
+    super();
+    // customize permissions grid
+    UIPermissionInfoGrid uiGrid = getChild(UIPermissionInfoGrid.class);
+    uiGrid.configure("usersOrGroups", PERMISSION_BEAN_FIELD, PERMISSION_ACTION);
+  }
+
+  /**
+   * {@inheritDoc}
+   */
+  @Override
+  public void updateGrid(int currentPage) throws Exception {
+    // let original code work
+    super.updateGrid(currentPage);
+    // then filter the permissions to remove managers of groups (if ones)
+    UIGrid uiGrid = findFirstComponentOfType(UIGrid.class);
+    PageList<PermissionBean> dataPageList = (PageList<PermissionBean>) uiGrid.getUIPageIterator().getPageList();
+    List<PermissionBean> permBeans = new ArrayList<PermissionBean>();
+    boolean filtered = false;
+    next: for (Iterator<PermissionBean> iter = dataPageList.getAll().iterator(); iter.hasNext();) {
+      PermissionBean permBean = iter.next();
+      String permission = permBean.getUsersOrGroups();
+      String[] ids = permission.split(":");
+      if (ids.length == 2) {
+        String membership = ids[0];
+        String identity = ids[1];
+        if (membership.equals("manager")) {
+          // loop page list again to find other memberships of this group
+          for (Iterator<PermissionBean> giter = dataPageList.getAll().iterator(); giter.hasNext();) {
+            PermissionBean gpb = giter.next();
+            String gpermission = gpb.getUsersOrGroups();
+            String[] gids = gpermission.split(":");
+            if (gids.length == 2) {
+              String gmembership = gids[0];
+              String gidentity = gids[1];
+              if (identity.equals(gidentity)) {
+                if (!membership.equals(gmembership)) {
+                  // skip manager permission from first loop as we already have this group
+                  // with another membership in gdp - will be added in the loop
+                  filtered = true;
+                  continue next;
+                } // otherwise, it is only manager permission for this group - will be added below
+              }
+            }
+          }
+        }
+      }
+      permBeans.add(permBean);
+    }
+    // apply filtered permissions (same code as in UIPermissionInfoBase.updateGrid())
+    if (filtered) {
+      ListAccess<PermissionBean> permList = new ListAccessImpl<PermissionBean>(PermissionBean.class, permBeans);
+      dataPageList = new LazyPageList<PermissionBean>(permList, 10);
+      uiGrid.getUIPageIterator().setPageList(dataPageList);
+      if (currentPage > uiGrid.getUIPageIterator().getAvailablePage()) {
+        uiGrid.getUIPageIterator().setCurrentPage(uiGrid.getUIPageIterator().getAvailablePage());
+      } else {
+        uiGrid.getUIPageIterator().setCurrentPage(currentPage);
+      }
+    }
+  }
+
 }

@@ -45,6 +45,8 @@ import org.exoplatform.services.jcr.ext.hierarchy.NodeHierarchyCreator;
 import org.exoplatform.services.listener.ListenerService;
 import org.exoplatform.services.log.ExoLogger;
 import org.exoplatform.services.log.Log;
+import org.exoplatform.services.organization.MembershipType;
+import org.exoplatform.services.organization.OrganizationService;
 import org.exoplatform.social.core.activity.model.ExoSocialActivity;
 import org.exoplatform.wcm.ext.component.activity.listener.Utils;
 import org.exoplatform.web.application.ApplicationMessage;
@@ -103,7 +105,9 @@ public class CloudFileActionService implements Startable {
 
   protected static final String   EXO_TRASHFOLDER          = "exo:trashFolder";
 
-  protected static final String[] READ_PERMISSION          = new String[] { PermissionType.READ };
+  protected static final String[] READER_PERMISSION          = new String[] { PermissionType.READ };
+
+  protected static final String[] MANAGER_PERMISSION       = new String[] { PermissionType.READ, PermissionType.REMOVE };
 
   /**
    * Act on ecd:cloudFileLinkGroup property removal on a cloud file symlink and then unshare the file from the
@@ -277,6 +281,8 @@ public class CloudFileActionService implements Startable {
 
   protected final SessionProviderService sessionProviders;
 
+  protected final OrganizationService    orgService;
+
   protected final LinkManager            linkManager;
 
   protected final ManageDriveService     documentDrives;
@@ -317,6 +323,7 @@ public class CloudFileActionService implements Startable {
   public CloudFileActionService(CloudDriveService cloudDrive,
                                 RepositoryService jcrService,
                                 SessionProviderService sessionProviders,
+                                OrganizationService orgService,
                                 NodeFinder finder,
                                 NodeHierarchyCreator hierarchyCreator,
                                 LinkManager linkManager,
@@ -326,6 +333,7 @@ public class CloudFileActionService implements Startable {
                                 CmsService cmsService) {
     this.cloudDrive = cloudDrive;
     this.jcrService = jcrService;
+    this.orgService = orgService;
     this.sessionProviders = sessionProviders;
     this.finder = finder;
     this.hierarchyCreator = hierarchyCreator;
@@ -655,7 +663,26 @@ public class CloudFileActionService implements Startable {
         // LOG.debug(">>> hasPermission " + identity + " identity: "
         // + IdentityHelper.hasPermission(target.getACL(), identity, PermissionType.READ));
         // }
-        target.setPermission(identity, READ_PERMISSION);
+        String[] ids = identity.split(":");
+        if (ids.length == 2) {
+          // it's group and we want allow given identity read only and additionally let managers remove the
+          // link
+          String managerMembership;
+          try {
+            MembershipType managerType = orgService.getMembershipTypeHandler().findMembershipType("manager");
+            managerMembership = managerType.getName();
+          } catch (Exception e) {
+            LOG.error("Error finding manager membership in organization service. "
+                + "Will use any (*) to allow remove shared cloud file link", e);
+            managerMembership = "*";
+          }
+          target.setPermission(new StringBuilder(managerMembership).append(':').append(ids[1]).toString(),
+                               MANAGER_PERMISSION);
+          target.setPermission(identity, READER_PERMISSION);
+        } else {
+          // in other cases, we assume it's user identity and user should be able to remove the link
+          target.setPermission(identity, MANAGER_PERMISSION);
+        }
       }
     }
     if (deep) {
@@ -683,7 +710,28 @@ public class CloudFileActionService implements Startable {
     ExtendedNode target = (ExtendedNode) node;
     if (target.isNodeType(EXO_PRIVILEGEABLE)) {
       for (String identity : identities) {
-        target.removePermission(identity, PermissionType.READ);
+        String[] ids = identity.split(":");
+        if (ids.length == 2) {
+          // it's group and we should remove read link permissions for given identity and additionally remove
+          // link for managers (see setPermissions())
+          String managerMembership;
+          try {
+            MembershipType managerType = orgService.getMembershipTypeHandler().findMembershipType("manager");
+            managerMembership = managerType.getName();
+          } catch (Exception e) {
+            LOG.error("Error finding manager membership in organization service. "
+                + "Will use any (*) to remove permissions of shared cloud file link", e);
+            managerMembership = "*";
+          }
+          String managerId = new StringBuilder(managerMembership).append(':').append(ids[1]).toString();
+          target.removePermission(managerId, PermissionType.READ);
+          target.removePermission(managerId, PermissionType.REMOVE);
+          target.removePermission(identity, PermissionType.READ);
+        } else {
+          // in other cases, we assume it's user identity and remove both read and remove link permissions
+          target.removePermission(identity, PermissionType.READ);
+          target.removePermission(identity, PermissionType.REMOVE);
+        }
       }
     }
     if (deep) {
