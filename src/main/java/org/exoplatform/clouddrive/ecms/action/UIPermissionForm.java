@@ -22,7 +22,6 @@ import org.exoplatform.clouddrive.CloudDriveService;
 import org.exoplatform.clouddrive.ecms.CloudDriveContext;
 import org.exoplatform.ecm.permission.info.UIPermissionInputSet;
 import org.exoplatform.ecm.webui.component.explorer.UIJCRExplorer;
-import org.exoplatform.ecm.webui.component.explorer.UIJCRExplorerPortlet;
 import org.exoplatform.ecm.webui.core.UIPermissionManagerBase;
 import org.exoplatform.ecm.webui.utils.PermissionUtil;
 import org.exoplatform.ecm.webui.utils.Utils;
@@ -133,6 +132,7 @@ public class UIPermissionForm extends org.exoplatform.ecm.webui.component.explor
                       actions.shareCloudFile(node, localDrive, userOrGroup);
                       newLink = actions.linkFile(node, docsDriveRoot, groupId);
                       actions.setAllPermissions(newLink, userOrGroup);
+                      actions.postSharedActivity(node, newLink, "");
                     } else {
                       // user has no access to the group
                       newLink = null;
@@ -175,6 +175,7 @@ public class UIPermissionForm extends org.exoplatform.ecm.webui.component.explor
               if (user != null) {
                 // 5. if user found, use linkShareToUser() to share to the user home dir
                 Node link = actions.linkShareToUser(node, localDrive, userOrGroup);
+                actions.postSharedActivity(node, link, "");
                 // notification info for user
                 ApplicationMessage title = new ApplicationMessage("CloudFile.msg.LinkCreated", new String[] { "" });
                 ApplicationMessage text = new ApplicationMessage("CloudFile.msg.FileLinksSharedWithUser",

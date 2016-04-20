@@ -30,6 +30,7 @@ import org.exoplatform.clouddrive.NotCloudDriveException;
 import org.exoplatform.clouddrive.ThreadExecutor;
 import org.exoplatform.clouddrive.jcr.NodeFinder;
 import org.exoplatform.services.cms.BasePath;
+import org.exoplatform.services.cms.CmsService;
 import org.exoplatform.services.cms.documents.TrashService;
 import org.exoplatform.services.cms.drives.DriveData;
 import org.exoplatform.services.cms.drives.ManageDriveService;
@@ -41,8 +42,11 @@ import org.exoplatform.services.jcr.core.ManageableRepository;
 import org.exoplatform.services.jcr.ext.app.SessionProviderService;
 import org.exoplatform.services.jcr.ext.common.SessionProvider;
 import org.exoplatform.services.jcr.ext.hierarchy.NodeHierarchyCreator;
+import org.exoplatform.services.listener.ListenerService;
 import org.exoplatform.services.log.ExoLogger;
 import org.exoplatform.services.log.Log;
+import org.exoplatform.social.core.activity.model.ExoSocialActivity;
+import org.exoplatform.wcm.ext.component.activity.listener.Utils;
 import org.exoplatform.web.application.ApplicationMessage;
 import org.picocontainer.Startable;
 
@@ -81,23 +85,25 @@ import javax.jcr.query.QueryResult;
  */
 public class CloudFileActionService implements Startable {
 
-  protected static final Log      LOG               = ExoLogger.getLogger(CloudFileActionService.class);
+  protected static final Log      LOG                      = ExoLogger.getLogger(CloudFileActionService.class);
 
-  protected static final String   SPACES_GROUP      = "spaces";
+  protected static final String   SPACES_GROUP             = "spaces";
 
-  protected static final String   EXO_OWNEABLE      = "exo:owneable";
+  protected static final String   SHARE_CLOUD_FILES_SPACES = "sharecloudfiles:spaces";
 
-  protected static final String   EXO_PRIVILEGEABLE = "exo:privilegeable";
+  protected static final String   EXO_OWNEABLE             = "exo:owneable";
 
-  protected static final String   ECD_CLOUDFILELINK = "ecd:cloudFileLink";
+  protected static final String   EXO_PRIVILEGEABLE        = "exo:privilegeable";
 
-  protected static final String   ECD_SHAREIDENTITY = "ecd:shareIdentity";
+  protected static final String   ECD_CLOUDFILELINK        = "ecd:cloudFileLink";
 
-  protected static final String   MIX_VERSIONABLE   = "mix:versionable";
+  protected static final String   ECD_SHAREIDENTITY        = "ecd:shareIdentity";
 
-  protected static final String   EXO_TRASHFOLDER   = "exo:trashFolder";
+  protected static final String   MIX_VERSIONABLE          = "mix:versionable";
 
-  protected static final String[] READ_PERMISSION   = new String[] { PermissionType.READ };
+  protected static final String   EXO_TRASHFOLDER          = "exo:trashFolder";
+
+  protected static final String[] READ_PERMISSION          = new String[] { PermissionType.READ };
 
   /**
    * Act on ecd:cloudFileLinkGroup property removal on a cloud file symlink and then unshare the file from the
@@ -277,6 +283,10 @@ public class CloudFileActionService implements Startable {
 
   protected final TrashService           trash;
 
+  protected final ListenerService        listenerService;
+
+  protected final CmsService             cmsService;
+
   /**
    * Symlink to cloud file UUID mappings.
    */
@@ -311,7 +321,9 @@ public class CloudFileActionService implements Startable {
                                 NodeHierarchyCreator hierarchyCreator,
                                 LinkManager linkManager,
                                 ManageDriveService documentDrives,
-                                TrashService trash) {
+                                TrashService trash,
+                                ListenerService listeners,
+                                CmsService cmsService) {
     this.cloudDrive = cloudDrive;
     this.jcrService = jcrService;
     this.sessionProviders = sessionProviders;
@@ -320,6 +332,8 @@ public class CloudFileActionService implements Startable {
     this.linkManager = linkManager;
     this.documentDrives = documentDrives;
     this.trash = trash;
+    this.listenerService = listeners;
+    this.cmsService = cmsService;
 
     this.groupsPath = hierarchyCreator.getJcrPath(BasePath.CMS_GROUPS_PATH);
     this.usersPath = hierarchyCreator.getJcrPath(BasePath.CMS_USERS_PATH);
@@ -530,6 +544,20 @@ public class CloudFileActionService implements Startable {
         return null;
       }
     });
+  }
+
+  public String postSharedActivity(Node node, Node link, String comment) throws CloudDriveException {
+    try {
+      Utils.setActivityType(SHARE_CLOUD_FILES_SPACES);
+      ExoSocialActivity activity = Utils.postFileActivity(link, "", false, false, comment);
+      if (activity != null) {
+        return activity.getId();
+      } else {
+        return null;
+      }
+    } catch (Exception e) {
+      throw new CloudDriveException("Error posting stared activity: " + e.getMessage(), e);
+    }
   }
 
   /**

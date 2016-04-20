@@ -21,6 +21,9 @@ package org.exoplatform.clouddrive.ecms.filters;
 import org.exoplatform.clouddrive.CloudProvider;
 import org.exoplatform.ecm.webui.component.explorer.UIJCRExplorer;
 import org.exoplatform.ecm.webui.component.explorer.UIJcrExplorerContainer;
+import org.exoplatform.ecm.webui.presentation.UIBaseNodePresentation;
+import org.exoplatform.social.webui.activity.UIActivitiesContainer;
+import org.exoplatform.social.webui.composer.PopupContainer;
 import org.exoplatform.webui.application.WebuiRequestContext;
 import org.exoplatform.webui.core.UIApplication;
 import org.exoplatform.webui.ext.filter.UIExtensionFilter;
@@ -54,11 +57,11 @@ public abstract class AbstractCloudDriveNodeFilter implements UIExtensionFilter 
   public AbstractCloudDriveNodeFilter(List<String> providers) {
     this(providers, 0, Long.MAX_VALUE);
   }
-  
+
   public AbstractCloudDriveNodeFilter(long minSize, long maxSize) {
     this(Collections.<String> emptyList(), minSize, maxSize);
   }
-  
+
   public AbstractCloudDriveNodeFilter(List<String> providers, long minSize, long maxSize) {
     this.providers = providers;
     this.minSize = minSize >= 0 ? minSize : 0;
@@ -87,6 +90,20 @@ public abstract class AbstractCloudDriveNodeFilter implements UIExtensionFilter 
           if (jcrExplorerContainer != null) {
             UIJCRExplorer jcrExplorer = jcrExplorerContainer.getChild(UIJCRExplorer.class);
             contextNode = jcrExplorer.getCurrentNode();
+          }
+
+          // case of file preview in Social activity stream
+          if (contextNode == null) {
+            UIActivitiesContainer uiActivitiesContainer = uiApp.findFirstComponentOfType(UIActivitiesContainer.class);
+            if (uiActivitiesContainer != null) {
+              PopupContainer uiPopupContainer = uiActivitiesContainer.getPopupContainer();
+              if (uiPopupContainer != null) {
+                UIBaseNodePresentation docViewer = uiPopupContainer.findComponentById("UIDocViewer");
+                if (docViewer != null) {
+                  contextNode = docViewer.getNode(); 
+                }
+              }
+            }
           }
         }
       }

@@ -70,5 +70,4 @@ public class ViewSharingActionComponent extends BaseCloudDriveManagerComponent i
       event.getRequestContext().addUIComponentToUpdateByAjax(uiPopupContainer);
     }
   }
-
 }

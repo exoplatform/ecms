@@ -81,7 +81,7 @@ public class CloudDriveMoveNodeManageComponent extends MoveNodeManageComponent {
         LOG.warn("Error creating link of cloud file. Default behaviour will be applied (file move).", e);
       }
 
-      // invoke super in all other cases
+      // invoke original code in all other cases
       super.processEvent(event);
     }
   }

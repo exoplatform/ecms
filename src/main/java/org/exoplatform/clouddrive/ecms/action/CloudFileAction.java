@@ -28,6 +28,7 @@ import org.exoplatform.ecm.webui.component.explorer.rightclick.manager.MoveNodeM
 import org.exoplatform.ecm.webui.component.explorer.rightclick.manager.PasteManageComponent;
 import org.exoplatform.ecm.webui.utils.PermissionUtil;
 import org.exoplatform.services.cms.drives.DriveData;
+import org.exoplatform.services.cms.link.LinkManager;
 import org.exoplatform.services.log.ExoLogger;
 import org.exoplatform.services.log.Log;
 import org.exoplatform.services.organization.Group;
@@ -110,7 +111,8 @@ public class CloudFileAction {
    * @throws Exception if cannot find node by given path
    */
   public CloudFileAction addSource(String srcInfo) throws Exception {
-    return addSource(getNodeByInfo(srcInfo));
+    // FYI don't take a target, use current context node
+    return addSource(getNodeByInfo(srcInfo, false));
   }
 
   /**
@@ -122,7 +124,8 @@ public class CloudFileAction {
    * @throws Exception
    */
   public CloudFileAction addSource(String srcWorkspace, String srcPath) throws Exception {
-    return addSource(getNodeByPath(srcWorkspace, srcPath));
+    // FYI don't take a target, use current context node
+    return addSource(getNodeByPath(srcWorkspace, srcPath, false));
   }
 
   /**
@@ -134,7 +137,8 @@ public class CloudFileAction {
    */
   public CloudFileAction setDestination(Node destNode) throws Exception {
     this.destWorkspace = destNode.getSession().getWorkspace().getName();
-    this.destNode = getNodeByPath(this.destWorkspace, destNode.getPath());
+    // FYI take real target node, not the link
+    this.destNode = getNodeByPath(this.destWorkspace, destNode.getPath(), true);
     this.destPath = this.destNode.getPath();
     return this;
   }
@@ -148,7 +152,8 @@ public class CloudFileAction {
    * @throws Exception if cannot find node by given path or cannot read its metadata
    */
   public CloudFileAction setDestination(String destInfo) throws Exception {
-    return setDestination(getNodeByInfo(destInfo));
+    // FYI take real target node, not the link
+    return setDestination(getNodeByInfo(destInfo, true));
   }
 
   /**
@@ -235,6 +240,7 @@ public class CloudFileAction {
           }
 
           CloudDriveService driveService = WCMCoreUtils.getService(CloudDriveService.class);
+          LinkManager linkManager = WCMCoreUtils.getService(LinkManager.class);
           CloudDrive destLocal = driveService.findDrive(destNode);
 
           int linksCreated = 0;
@@ -254,8 +260,9 @@ public class CloudFileAction {
 
             if (destLocal == null) {
               // paste outside a cloud drive
-              if (srcLocal != null) {
-                // if cloud file... (it is not a cloud drive node as was checked above)
+              if (srcLocal != null && !linkManager.isLink(srcNode)) {
+                // if cloud file, not a link to it...
+                // it is also not a cloud drive root node as was checked above...
                 // then move not supported for the moment!
                 if (move) {
                   if (srcLocal.hasFile(srcPath)) {
@@ -279,6 +286,8 @@ public class CloudFileAction {
                     } else {
                       this.link = actions.linkFile(srcNode, destNode, null);
                     }
+                    // TODO can we provider a comment from real user?
+                    actions.postSharedActivity(srcNode, link, "");
                     linksCreated++;
                   } else {
                     // else, we don't support cross-workspaces paste for cloud drive
@@ -295,7 +304,7 @@ public class CloudFileAction {
               if (srcLocal != null) {
                 if (srcLocal.equals(destLocal)) {
                   if (!move) {
-                    // track "paste" fact for copy-bahaviour and then let original code work
+                    // track "paste" fact for copy-behaviour and then let original code work
                     new CloudDriveManager(destLocal).initCopy(srcNode, destNode);
                   }
                 } else {
@@ -314,7 +323,8 @@ public class CloudFileAction {
                                                                             null,
                                                                             ApplicationMessage.WARNING));
                 }
-              }
+              } // otherwise, let original code to copy the file to cloud drive sub-tree
+              // TODO do links need special handling for copy-to-drive?)
             }
           }
 
@@ -364,7 +374,7 @@ public class CloudFileAction {
     }
   }
 
-  protected Node getNodeByInfo(String pathInfo) throws Exception {
+  protected Node getNodeByInfo(String pathInfo, boolean giveTarget) throws Exception {
     Matcher matcher = UIWorkingArea.FILE_EXPLORER_URL_SYNTAX.matcher(pathInfo);
     String workspace, path;
     if (matcher.find()) {
@@ -373,12 +383,12 @@ public class CloudFileAction {
     } else {
       throw new IllegalArgumentException("The ObjectId is invalid '" + pathInfo + "'");
     }
-    return getNodeByPath(workspace, path);
+    return getNodeByPath(workspace, path, giveTarget);
   }
 
-  protected Node getNodeByPath(String workspace, String path) throws Exception {
+  protected Node getNodeByPath(String workspace, String path, boolean giveTarget) throws Exception {
     Session srcSession = uiExplorer.getSessionByWorkspace(workspace);
-    return uiExplorer.getNodeByPath(path, srcSession, true);
+    return uiExplorer.getNodeByPath(path, srcSession, giveTarget);
   }
 
 }

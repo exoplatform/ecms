@@ -42,7 +42,7 @@ if (drive) {
 	%>
 	<div style="display: none;" class="file-content">
     <a id="ViewerSwitch" view-title="${viewFile}" edit-title="${editFile}"
-      style="position: relative; padding-left: 5px; font-weight: normal;"
+      style="position: relative; padding-left: 5px; padding-right: 5px; font-weight: normal;"
       class="pull-right">
       ${editFile}
     </a>

@@ -75,6 +75,14 @@
       <scope>provided</scope>
       <type>jar</type>
     </dependency>
+    
+    <!-- Platform Integrations -->
+    <dependency>
+      <groupId>org.exoplatform.integration</groupId>
+      <artifactId>integ-ecms-social</artifactId>
+      <scope>provided</scope>
+      <type>jar</type>
+    </dependency>
   </dependencies>
 
   <build>

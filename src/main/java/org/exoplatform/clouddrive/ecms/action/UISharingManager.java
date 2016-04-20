@@ -21,7 +21,6 @@ package org.exoplatform.clouddrive.ecms.action;
 
 import org.exoplatform.ecm.webui.component.explorer.UIJCRExplorer;
 import org.exoplatform.ecm.webui.core.UIPermissionManagerBase;
-import org.exoplatform.webui.application.WebuiRequestContext;
 import org.exoplatform.webui.config.annotation.ComponentConfig;
 import org.exoplatform.webui.config.annotation.EventConfig;
 import org.exoplatform.webui.event.Event;
@@ -49,16 +48,4 @@ public class UISharingManager extends UIPermissionManagerBase {
     addChild(UIPermissionInfo.class, null, null);
     addChild(UIPermissionForm.class, null, null);
   }
-
-  /**
-   * {@inheritDoc}
-   */
-  @Override
-  public void processRender(WebuiRequestContext context) throws Exception {
-    // XXX add JS to hide permissions checkboxes
-    //RequireJS require = context.getJavascriptManager().require("SHARED/cloudDrive", "cloudDrive");
-    //require.addScripts("\ncloudDrive.initSharing();\n");
-    super.processRender(context);
-  }
-
 }
