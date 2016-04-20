@@ -96,7 +96,12 @@
 }
 
 /*************************** NodeType Icons for Google Drive documents ***********************/
-[class*="uiIcon24x24applicationvndgoogle-"], [class*="uiIcon16x16applicationvndgoogle-"] {
+
+[class*="uiIcon16x16applicationvndgoogle-"] {
+  top: 1px;
+}
+
+[class*="uiIcon24x24applicationvndgoogle-"] {
 	width: 32px;
   height: 32px;
   left: -4px;
@@ -134,18 +139,22 @@
   right: -16px !important;
 }	
 
-/*https://ssl.gstatic.com/docs/doclist/images/icon_10_generic_xl128.png*/
-
-.uiIcon24x24applicationvndgoogle-appspresentation:before, .uiIcon16x16applicationvndgoogle-appspresentation:before {
+.uiIcon16x16applicationvndgoogle-appspresentation:before {
+	content: url("https://ssl.gstatic.com/docs/doclist/images/mediatype/icon_1_presentation_x16.png");
+}
+.uiIcon24x24applicationvndgoogle-appspresentation:before {
 	/*https://ssl.gstatic.com/docs/doclist/images/icon_11_presentation_list.png*/
   content: url("https://ssl.gstatic.com/docs/doclist/images/mediatype/icon_1_presentation_x32.png");
 }
 
 .uiIcon64x64applicationvndgoogle-appspresentation:before {
-	content: url("https://ssl.gstatic.com/docs/doclist/images/icon_11_presentation_xl128.png");
+	content: url("https://ssl.gstatic.com/docs/doclist/images/mediatype/icon_1_presentation_x128.png");
 }
 
-.uiIcon24x24applicationvndgoogle-appsdocument:before,.uiIcon16x16applicationvndgoogle-appsdocument:before {
+.uiIcon16x16applicationvndgoogle-appsdocument:before {
+	content: url("https://ssl.gstatic.com/docs/doclist/images/mediatype/icon_1_document_x16.png");
+}
+.uiIcon24x24applicationvndgoogle-appsdocument:before {
 	content: url("https://ssl.gstatic.com/docs/doclist/images/mediatype/icon_1_document_x32.png");
 }
 
@@ -153,15 +162,23 @@
 	content: url("https://ssl.gstatic.com/docs/doclist/images/mediatype/icon_1_document_x128.png");
 }
 
-.uiIcon24x24applicationvndgoogle-appsphoto:before, .uiIcon16x16applicationvndgoogle-appsphoto:before {
-	content: url("https://ssl.gstatic.com/docs/doclist/images/icon_11_image_list.png");
+.uiIcon16x16applicationvndgoogle-appsphoto:before {
+	content: url("https://ssl.gstatic.com/docs/doclist/images/mediatype/icon_1_image_x16.png");
+}
+
+.uiIcon24x24applicationvndgoogle-appsphoto:before {
+	content: url("https://ssl.gstatic.com/docs/doclist/images/mediatype/icon_1_image_x32.png");
 }
 
 .uiIcon64x64applicationvndgoogle-appsphoto:before {
-	content: url("https://ssl.gstatic.com/docs/doclist/images/icon_11_image_xl128.png");
+	content: url("https://ssl.gstatic.com/docs/doclist/images/mediatype/icon_1_image_x128.png");
 }
 
-.uiIcon24x24applicationvndgoogle-appsscript:before,.uiIcon16x16applicationvndgoogle-appsscript:before {
+.uiIcon16x16applicationvndgoogle-appsscript:before {
+	content: url("https://ssl.gstatic.com/docs/doclist/images/mediatype/icon_1_script_x16.png");
+}
+
+.uiIcon24x24applicationvndgoogle-appsscript:before {
 	content: url("https://ssl.gstatic.com/docs/doclist/images/mediatype/icon_1_script_x32.png");
 }
 
@@ -169,7 +186,11 @@
 	content: url("https://ssl.gstatic.com/docs/doclist/images/mediatype/icon_1_script_x128.png");
 }
 
-.uiIcon24x24applicationvndgoogle-appsspreadsheet:before,.uiIcon16x16applicationvndgoogle-appsspreadsheet:before {
+.uiIcon16x16applicationvndgoogle-appsspreadsheet:before {
+	content: url("https://ssl.gstatic.com/docs/doclist/images/mediatype/icon_1_spreadsheet_x16.png");
+}
+
+.uiIcon24x24applicationvndgoogle-appsspreadsheet:before {
 	/*https://ssl.gstatic.com/docs/doclist/images/icon_11_spreadsheet_list.png*/
 	content: url("https://ssl.gstatic.com/docs/doclist/images/mediatype/icon_1_spreadsheet_x32.png");
 }
@@ -178,23 +199,35 @@
 	content: url("https://ssl.gstatic.com/docs/doclist/images/mediatype/icon_1_spreadsheet_x128.png");
 }
 
-.uiIcon24x24applicationvndgoogle-appsvideo:before, .uiIcon16x16applicationvndgoogle-appsvideo:before {
-	content: url("https://ssl.gstatic.com/docs/doclist/images/icon_11_video_list.png");
+.uiIcon16x16applicationvndgoogle-appsvideo:before {
+	content: url("https://ssl.gstatic.com/docs/doclist/images/mediatype/icon_1_video_x16.png");
+}
+
+.uiIcon24x24applicationvndgoogle-appsvideo:before {
+	content: url("https://ssl.gstatic.com/docs/doclist/images/mediatype/icon_1_video_x32.png");
 }
 
 .uiIcon64x64applicationvndgoogle-appsvideo:before {
-	content: url("https://ssl.gstatic.com/docs/doclist/images/icon_11_video_xl128.png");
+	content: url("https://ssl.gstatic.com/docs/doclist/images/mediatype/icon_1_video_x128.png");
 }
 
-.uiIcon24x24applicationvndgoogle-appsaudio:before,.uiIcon16x16applicationvndgoogle-appsaudio:before {
-	content: url("https://ssl.gstatic.com/docs/doclist/images/icon_10_audio_list.png");
+.uiIcon16x16applicationvndgoogle-appsaudio:before {
+	content: url("https://ssl.gstatic.com/docs/doclist/images/mediatype/icon_1_audio_x16.png");
+}
+
+.uiIcon24x24applicationvndgoogle-appsaudio:before {
+	content: url("https://ssl.gstatic.com/docs/doclist/images/mediatype/icon_1_audio_x32.png");
 }
 
 .uiIcon64x64applicationvndgoogle-appsaudio:before {
-	content: url("https://ssl.gstatic.com/docs/doclist/images/icon_10_audio_xl128.png");
+	content: url("https://ssl.gstatic.com/docs/doclist/images/mediatype/icon_1_audio_x128.png");
 }
 
-.uiIcon24x24applicationvndgoogle-appsdrawing:before,.uiIcon16x16applicationvndgoogle-appsdrawing:before {
+.uiIcon16x16applicationvndgoogle-appsdrawing:before {
+	content: url("https://ssl.gstatic.com/docs/doclist/images/mediatype/icon_1_drawing_x16.png");
+}
+
+.uiIcon24x24applicationvndgoogle-appsdrawing:before {
 	content: url("https://ssl.gstatic.com/docs/doclist/images/mediatype/icon_1_drawing_x32.png");
 }
 
@@ -202,7 +235,11 @@
 	content: url("https://ssl.gstatic.com/docs/doclist/images/mediatype/icon_1_drawing_x128.png");
 }
 
-.uiIcon24x24applicationvndgoogle-appsform:before,.uiIcon16x16applicationvndgoogle-appsform:before {
+.uiIcon16x16applicationvndgoogle-appsform:before {
+	content: url("https://ssl.gstatic.com/docs/doclist/images/mediatype/icon_2_form_x16.png");
+}
+
+.uiIcon24x24applicationvndgoogle-appsform:before {
 	/* https://ssl.gstatic.com/docs/doclist/images/mediatype/icon_1_form_x32.png */
 	/* https://ssl.gstatic.com/docs/doclist/images/mediatype/icon_2_form_x32.png */
 	/* https://ssl.gstatic.com/docs/doclist/images/icon_11_form_list.png */
@@ -213,7 +250,11 @@
 	content: url("https://ssl.gstatic.com/docs/doclist/images/mediatype/icon_2_form_x128.png");
 }
 	
-.uiIcon24x24applicationvndgoogle-appsmap:before, .uiIcon16x16applicationvndgoogle-appsmap:before {
+.uiIcon16x16applicationvndgoogle-appsmap:before {
+	content: url("https://ssl.gstatic.com/docs/doclist/images/mediatype/icon_1_map_x16.png");
+}
+	
+.uiIcon24x24applicationvndgoogle-appsmap:before {
 	content: url("https://ssl.gstatic.com/docs/doclist/images/mediatype/icon_1_map_x32.png");
 }
 
@@ -221,7 +262,11 @@
 	content: url("https://ssl.gstatic.com/docs/doclist/images/mediatype/icon_1_map_x128.png");
 }
 
-.uiIcon24x24applicationvndgoogle-appsunknown:before, .uiIcon16x16applicationvndgoogle-appsfile:before {
+.uiIcon16x16applicationvndgoogle-appsunknown:before, .uiIcon16x16applicationvndgoogle-appsfile:before {
+	content: url("https://ssl.gstatic.com/docs/doclist/images/mediatype/icon_2_generic_x16.png");
+}
+
+.uiIcon24x24applicationvndgoogle-appsunknown:before, .uiIcon24x24applicationvndgoogle-appsfile:before {
 	content: url("https://ssl.gstatic.com/docs/doclist/images/mediatype/icon_2_generic_x32.png");
 }
 
