@@ -129,11 +129,6 @@ public class WCMContentInitializerService implements Startable{
       contentInitializerServiceLogContent.setProperty("jcr:data", logData.toString());
       contentInitializerServiceLogContent.setProperty("jcr:lastModified", date.getTime());
       session.save();
-
-      XJavascriptService jsService = WCMCoreUtils.getService(XJavascriptService.class);
-      XSkinService xSkinService = WCMCoreUtils.getService(XSkinService.class);
-      xSkinService.start();
-      jsService.start();
     } catch (Exception e) {
       if (LOG.isErrorEnabled()) {
         LOG.error("Error when start WCMContentInitializerService: ", e);
