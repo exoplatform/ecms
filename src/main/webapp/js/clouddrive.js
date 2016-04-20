@@ -33,6 +33,8 @@
 		var activeSyncs = [];
 		// active auto-synchronization jobs
 		var autoSyncs = {};
+		// i18n resources (lazy loaded), see getResource()
+		var resource;
 
 		/**
 		 * Deprecated initialization of ajax request. Use initRequest() instead.
@@ -265,6 +267,17 @@
 					workspace : workspace,
 					path : path
 				}
+			});
+
+			return initRequest(request);
+		};
+		
+		var getResourceBundle = function() {
+			var request = $.ajax({
+				async : false,
+				type : "GET",
+				url : prefixUrl + "/portal/rest/clouddrive/resource/bundle",
+				dataType : "json"
 			});
 
 			return initRequest(request);
@@ -976,7 +989,7 @@
 		 */
 		this.init = function(nodeWorkspace, nodePath) {
 			try {
-				// currently open node in ECMS explorer
+				// currently open node (or last open node, e.g. in activity stream)
 				currentNode = {
 					workspace : nodeWorkspace,
 					path : nodePath
@@ -1150,6 +1163,27 @@
 				});
 			}
 			return stateProcess;
+		};
+		
+		/**
+		 * Return internationalization resource by a key from lazy-loaded bundle. 
+		 * If key not found or null, or if bundle cannot be loaded, then the key will be returned as a value. 
+		 */
+		this.getResource = function(key) {
+			if (!resource) {
+				var get = getResourceBundle();
+				get.done(function(bundle) {
+					resource = bundle;
+				});
+				get.fail(function(response, status, err) {
+					utils.log("ERROR: resource error: " + err + ", " + status + ", " + JSON.stringify(response));
+				});
+				if (!resource) {
+					return key;
+				}
+			}
+			var val = resource.data[key];
+			return typeof val != "undefined" && val !== null ? val : key;
 		};
 	}
 
@@ -1785,6 +1819,24 @@
 			$code.css("display", "");
 		};
 
+		var initActivity = function() {
+			// Remove Download link all cloud file activities
+			try {
+				$("i.uiCloudFileActivity").each(function() {
+					var $elem = $(this);
+					// five parents higher in DOM we  have ActivityContextBox div
+					var $i = $elem.parent().parent().parent().parent().parent().find(".actionBar>.statusAction i.uiIconDownload");
+					$i.parent().parent().hide();
+					// TODO show Open On PROVIDER link? 
+					//$a.text(" " + openOnProvider);
+					//$i.attr("class", "uiIcon16x16CloudFile-" + drive.provider.id);
+					//$a.prepend($i);
+				});
+			} catch(e) {
+				utils.log("Error initializing activity stream " + e, e);
+			}
+		};
+		
 		/**
 		 * Find link to open Personal Documents view in WCM. Can return nothing if current page doesn't
 		 * contain such element.
@@ -2194,6 +2246,9 @@
 
 			// init file view fir text
 			initTextViewer();
+			
+			// init activity stream
+			initActivity();
 
 			// init menus below
 

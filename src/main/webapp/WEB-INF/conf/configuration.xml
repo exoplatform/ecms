@@ -60,6 +60,9 @@
   <component>
     <type>org.exoplatform.clouddrive.rest.ContentService</type>
   </component>
+  <component>
+    <type>org.exoplatform.clouddrive.ecms.rest.ResourceService</type>
+  </component>
 
   <external-component-plugins>
     <target-component>org.exoplatform.services.jcr.impl.ext.action.SessionActionCatalog</target-component>
