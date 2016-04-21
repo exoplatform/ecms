@@ -1683,7 +1683,10 @@
 						$a.text(" " + openOnProvider);
 						// add icon back to the button
 						var $i = openOnIcon[index];
-						$i.attr("class", "uiIcon16x16CloudFile-" + drive.provider.id);
+						var providerClass = "uiIcon16x16CloudFile-" + drive.provider.id;
+						if (!$i.hasClass(providerClass)) {
+							$i.addClass(providerClass);				
+						}
 						$a.prepend($i);
 						$a.attr("href", file.link);
 						$a.attr("target", "_blank");

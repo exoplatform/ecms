@@ -42,8 +42,10 @@
 
 .file-content .CodeMirror {
 	min-height: 600px;
-	height: 800px; !important;
-} 
+	height: 800px;
+	!
+	important;
+}
 
 .downloadBtn #ViewerSwitch {
 	margin-right: 5px;
@@ -54,38 +56,52 @@
 	color: inherit;
 }
 
-.uiCloudFileActivity:before {
-	background-size: 50% 50%;
-}  
+/*
+ * Social Activity stream and preview
+ */
+.maskLayer .uiDocumentPreview .fileContent .navigationContainer #CloudFileViewer .UIPDFViewerContainer .ImageView img {
+	position: static;
+	-webkit-transform: none;
+	-moz-transform: none;
+	-ms-transform: none;
+	-o-transform: none;
+	transform: none;
+}
 
 /*************************** NodeType Icon ***********************/
-
 .application_xml16x16Icon {
-	background: url('icons/xml.gif') no-repeat left center !important; /* orientation=lt */
-	background: url('icons/xml.gif') no-repeat right center !important; /* orientation=rt */
+	background: url('icons/xml.gif') no-repeat left center !important;
+	/* orientation=lt */
+	background: url('icons/xml.gif') no-repeat right center !important;
+	/* orientation=rt */
 }
 
 .application_xml48x48Icon {
 	width: 48px;
 	height: 48px;
-	background: url('icons/xml.gif') no-repeat left center !important; /* orientation=lt */
-	background: url('icons/xml.gif') no-repeat right center !important; /* orientation=rt */
+	background: url('icons/xml.gif') no-repeat left center !important;
+	/* orientation=lt */
+	background: url('icons/xml.gif') no-repeat right center !important;
+	/* orientation=rt */
 }
 
 .application_x-msdos-program16x16Icon {
-	background: url('icons/exe.gif') no-repeat left center !important; /* orientation=lt */
-	background: url('icons/exe.gif') no-repeat right center !important; /* orientation=rt */
+	background: url('icons/exe.gif') no-repeat left center !important;
+	/* orientation=lt */
+	background: url('icons/exe.gif') no-repeat right center !important;
+	/* orientation=rt */
 }
 
 .application_x-msdos-program48x48Icon {
 	width: 48px;
 	height: 48px;
-	background: url('icons/exe.gif') no-repeat left center !important; /* orientation=lt */
-	background: url('icons/exe.gif') no-repeat right center !important; /* orientation=rt */
+	background: url('icons/exe.gif') no-repeat left center !important;
+	/* orientation=lt */
+	background: url('icons/exe.gif') no-repeat right center !important;
+	/* orientation=rt */
 }
 
 /**** menu ****/
-
 .cloudFileDisabled {
 	opacity: 0.65;
 	pointer-events: none;
@@ -104,8 +120,10 @@
 	width: 35px;
 	height: 35px;
 	pointer-events: none;
-	background: url('icons/oxygen/32/animations/throbber.gif') no-repeat left center !important; /* orientation=lt */
-	background: url('icons/oxygen/32/animations/throbber.gif') no-repeat right center !important; /* orientation=rt */
+	background: url('icons/oxygen/32/animations/throbber.gif') no-repeat
+		left center !important; /* orientation=lt */
+	background: url('icons/oxygen/32/animations/throbber.gif') no-repeat
+		right center !important; /* orientation=rt */
 }
 
 .syncingListView {
@@ -113,8 +131,10 @@
 	display: inline;
 	padding-left: 15px;
 	pointer-events: none;
-	background: url('icons/oxygen/16/animations/throbber.gif') no-repeat left center !important; /* orientation=lt */
-	background: url('icons/oxygen/16/animations/throbber.gif') no-repeat right center !important; /* orientation=rt */
+	background: url('icons/oxygen/16/animations/throbber.gif') no-repeat
+		left center !important; /* orientation=lt */
+	background: url('icons/oxygen/16/animations/throbber.gif') no-repeat
+		right center !important; /* orientation=rt */
 }
 
 /******** Pnotify icons ********/
