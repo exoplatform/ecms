@@ -427,12 +427,14 @@ Software Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA
           <name>init.resources</name>
           <description>Store the following resources into the db for the first launch</description>
           <value>locale.clouddrive.CloudDrive</value>
+          <value>locale.ecm.views</value><!-- From ECMS -->
         </values-param>
         <values-param>
           <name>portal.resource.names</name>
           <description>The properties files of the portal , those file will be merged into one ResoruceBundle
             properties</description>
           <value>locale.clouddrive.CloudDrive</value>
+          <value>locale.ecm.views</value><!-- From ECMS -->
         </values-param>
       </init-params>
     </component-plugin>
