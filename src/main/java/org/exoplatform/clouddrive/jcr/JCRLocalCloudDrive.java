@@ -3084,6 +3084,13 @@ public abstract class JCRLocalCloudDrive extends CloudDrive implements CloudDriv
   public String getPath() throws DriveRemovedException, RepositoryException {
     return rootNode().getPath();
   }
+  
+  /**
+   * {@inheritDoc}
+   */
+  public String getWorkspace() throws DriveRemovedException, RepositoryException {
+    return rootNode().getSession().getWorkspace().getName();
+  }
 
   /**
    * @inherritDoc

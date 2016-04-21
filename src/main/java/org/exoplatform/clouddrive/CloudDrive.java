@@ -86,7 +86,7 @@ public abstract class CloudDrive {
      * @return String
      */
     String getName();
-    
+
     /**
      * Return <code>true</code> when command produced changes in the drive (has added/updated/removed files).
      * 
@@ -143,7 +143,7 @@ public abstract class CloudDrive {
      * @return long
      */
     long getAvailable();
-    
+
     /**
      * Number of attempts already tried to process the command. First attempt is 0 and so on. This value
      * can be greater if provider supports retry on error.
@@ -197,8 +197,7 @@ public abstract class CloudDrive {
           listener.onConnect(event);
         } catch (Throwable th) {
           // nothing should prevent the connect at this point
-          LOG.warn("Error firing onConnect listener on Cloud Drive '" + title() + "': " + th.getMessage(),
-                   th);
+          LOG.warn("Error firing onConnect listener on Cloud Drive '" + title() + "': " + th.getMessage(), th);
         }
       }
     }
@@ -209,8 +208,7 @@ public abstract class CloudDrive {
           listener.onDisconnect(event);
         } catch (Throwable th) {
           // nothing should prevent at this point
-          LOG.warn("Error firing onDisconnect listener on Cloud Drive '" + title() + "': " + th.getMessage(),
-                   th);
+          LOG.warn("Error firing onDisconnect listener on Cloud Drive '" + title() + "': " + th.getMessage(), th);
         }
       }
     }
@@ -232,8 +230,7 @@ public abstract class CloudDrive {
           listener.onSynchronized(event);
         } catch (Throwable th) {
           // nothing should prevent at this point
-          LOG.warn("Error firing onSynchronized listener on Cloud Drive '" + title() + "': "
-              + th.getMessage(), th);
+          LOG.warn("Error firing onSynchronized listener on Cloud Drive '" + title() + "': " + th.getMessage(), th);
         }
       }
     }
@@ -332,9 +329,7 @@ public abstract class CloudDrive {
    * @throws DriveRemovedException
    * @throws NotConnectedException
    */
-  public abstract Calendar getConnectDate() throws DriveRemovedException,
-                                            NotConnectedException,
-                                            RepositoryException;
+  public abstract Calendar getConnectDate() throws DriveRemovedException, NotConnectedException, RepositoryException;
 
   /**
    * Cloud Drive path in storage. It introduces storage depended identifier of the drive. <br/>
@@ -345,6 +340,16 @@ public abstract class CloudDrive {
    * @throws DriveRemovedException
    */
   public abstract String getPath() throws DriveRemovedException, RepositoryException;
+
+  /**
+   * Cloud Drive workspace in storage. It introduces storage depended identifier of the drive. <br/>
+   * For JCR storage it's a drive Node's session workspace.
+   * 
+   * @return String with path in the store.
+   * @throws RepositoryException
+   * @throws DriveRemovedException
+   */
+  public abstract String getWorkspace() throws DriveRemovedException, RepositoryException;
 
   /**
    * Unique identifier of the drive. The Id never changes.
@@ -383,9 +388,7 @@ public abstract class CloudDrive {
    * @throws NotCloudDriveException if given paths doesn't belong to drive node
    * @throws RepositoryException if storage error
    */
-  public abstract boolean hasFile(String path) throws DriveRemovedException,
-                                               NotCloudDriveException,
-                                               RepositoryException;
+  public abstract boolean hasFile(String path) throws DriveRemovedException, NotCloudDriveException, RepositoryException;
 
   /**
    * List of files on local cloud drive.
@@ -395,9 +398,7 @@ public abstract class CloudDrive {
    * @throws CloudDriveException
    * @throws RepositoryException
    */
-  public abstract Collection<CloudFile> listFiles() throws DriveRemovedException,
-                                                    CloudDriveException,
-                                                    RepositoryException;
+  public abstract Collection<CloudFile> listFiles() throws DriveRemovedException, CloudDriveException, RepositoryException;
 
   /**
    * List of local cloud files on given as parent folder.
@@ -507,8 +508,7 @@ public abstract class CloudDrive {
    * @throws DriveRemovedException if drive removed
    * @throws RepositoryException
    */
-  protected abstract boolean isDrive(String workspace, String path, boolean includeFiles)
-                                                                                          throws DriveRemovedException,
+  protected abstract boolean isDrive(String workspace, String path, boolean includeFiles) throws DriveRemovedException,
                                                                                           RepositoryException;
 
   /**
@@ -550,8 +550,7 @@ public abstract class CloudDrive {
    * @param synchronizers collection of {@link CloudFileSynchronizer}, it will be used for file
    *          synchronization.
    */
-  protected abstract void configure(CloudDriveEnvironment env,
-                                    Collection<CloudFileSynchronizer> synchronizers);
+  protected abstract void configure(CloudDriveEnvironment env, Collection<CloudFileSynchronizer> synchronizers);
 
   /**
    * Initialize future cloud file removal. This operation will complete on parent node save. This method
@@ -562,9 +561,7 @@ public abstract class CloudDrive {
    * @throws CloudDriveException
    * @throws RepositoryException
    */
-  protected abstract void initRemove(Node file) throws SyncNotSupportedException,
-                                                CloudDriveException,
-                                                RepositoryException;
+  protected abstract void initRemove(Node file) throws SyncNotSupportedException, CloudDriveException, RepositoryException;
 
   /**
    * Initialize future cloud file copying.
